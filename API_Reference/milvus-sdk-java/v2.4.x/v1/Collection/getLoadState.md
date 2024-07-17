@@ -6,7 +6,7 @@ A MilvusClient interface. This method gets the state of loading collection progr
 R<GetLoadStateResponse> getLoadState(GetLoadStateParam requestParam);
 ```
 
-## GetLoadStateParam
+#### GetLoadStateParam
 
 Use the `GetLoadStateParam.Builder` to construct a GetLoadStateParam object.
 
@@ -19,29 +19,34 @@ Methods of `GetLoadStateParam.Builder`:
 
 <table>
     <tr>
-        <th>Method</th>
-        <th>Description</th>
-        <th>Parameters</th>
+        <th><p>Method</p></th>
+        <th><p>Description</p></th>
+        <th><p>Parameters</p></th>
     </tr>
     <tr>
-        <td>withCollectionName(String collectionName)</td>
-        <td>Sets the collection name. Collection name cannot be empty or null.</td>
-        <td>collectionName: The name of the collection to get state.</td>
+        <td><p>withCollectionName(String collectionName)</p></td>
+        <td><p>Sets the collection name. Collection name cannot be empty or null.</p></td>
+        <td><p>collectionName: The name of the collection to get state.</p></td>
     </tr>
     <tr>
-        <td>withPartitionNames(List\<String> partitionNames)</td>
-        <td>Sets partition names list to specify query scope (Optional).</td>
-        <td>partitionNames: <br/>A name list of partition to get state.</td>
+        <td><p>withDatabaseName(String databaseName)</p></td>
+        <td><p>Sets the database name. database name can be null for default database.</p></td>
+        <td><p>databaseName: The database name.</p></td>
     </tr>
     <tr>
-        <td>addPartitionName(String partitionName)</td>
-        <td>Adds a partition by name. Partition name cannot be empty or null.</td>
-        <td>partitionName: A partition name.</td>
+        <td><p>withPartitionNames(List\<String> partitionNames)</p></td>
+        <td><p>Sets partition names list to specify query scope (Optional).</p></td>
+        <td><p>partitionNames: <br/>A name list of partition to get state.</p></td>
     </tr>
     <tr>
-        <td>build()</td>
-        <td>Constructs a GetLoadStateParam object.</td>
-        <td>N/A</td>
+        <td><p>addPartitionName(String partitionName)</p></td>
+        <td><p>Adds a partition by name. Partition name cannot be empty or null.</p></td>
+        <td><p>partitionName: A partition name.</p></td>
+    </tr>
+    <tr>
+        <td><p>build()</p></td>
+        <td><p>Constructs a GetLoadStateParam object.</p></td>
+        <td><p>N/A</p></td>
     </tr>
 </table>
 
@@ -49,7 +54,7 @@ The `GetLoadStateParam.Builder.build()` can throw the following exceptions:
 
 - ParamException: error if the parameter is invalid.
 
-## Returns
+#### Returns
 
 This method catches all the exceptions and returns an `R<GetLoadStateResponse>` object.
 
@@ -59,7 +64,7 @@ This method catches all the exceptions and returns an `R<GetLoadStateResponse>` 
 
 - If the API succeeds, it returns `R.Status.Success`.
 
-## Example
+#### Example
 
 ```java
 import io.milvus.param.*;

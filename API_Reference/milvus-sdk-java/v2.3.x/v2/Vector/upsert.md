@@ -10,7 +10,7 @@ public UpsertResp upsert(UpsertReq request)
 
 ```java
 upsert(UpsertReq.builder()
-    .data(List<JSONObject> data)
+    .data(List<JsonObject> data)
     .collectionName(String collectionName)
     .partitionName(String partitionName)
     .build()
@@ -19,18 +19,26 @@ upsert(UpsertReq.builder()
 
 **BUILDER METHODS:**
 
-- `data(List<JSONObject> data)`
+- `data(List<JsonObject> data)`
 
     The data to insert or update into the current collection.
 
-    The data to insert or update should be a dictionary that matches the schema of the current collection or a list of such dictionaries. 
+    The data to insert or update should be a `gson.JsonObject` that matches the schema of the current collection or a list of such dictionaries. 
 
     The following code assumes that the schema of the current collection has two fields named **id** and **vector**. The former is the primary field and the latter is a field to hold 5-dimensional vector embeddings.
 
+    <div class="admonition note">
+
+    <p><b>notes</b></p>
+
+    <p>In Java SDK versions v2.3.7 or earlier versions, the input is a <code>fastjson.JSONObject</code>. But <code>fastjson</code> is not recommended to use now because of its unsafe deserialization vulnerability. Therefore, replace <code>fastjson</code> with <code>gson</code> if you use the Java SDK of v2.3.8 or later releases.</p>
+
+    </div>
+
     ```java
-    List<JSONObject> data = new ArrayList<>();
+    List<JsonObject> data = new ArrayList<>();
     
-    JSONObject dict1 = new JSONObject();
+    JsonObject dict1 = new JsonObject();
     List<Float> vectorArray1 = new ArrayList<>();
     vectorArray1.add(0.37417449965222693);
     vectorArray1.add(-0.9401784221711342);
@@ -38,10 +46,10 @@ upsert(UpsertReq.builder()
     vectorArray1.add(0.49519396415367245);
     vectorArray1.add(-0.558567588166478);
     
-    dict1.put("id", 1);
-    dict1.put("vector", vectorArray1);
+    dict1.addProperty("id", 1L);
+    dict1.add("vector", gson.toJsonTree(vectorArray1));
     
-    JSONObject dict2 = new JSONObject();
+    JsonObject dict2 = new JsonObject();
     JSONArray vectorArray2 = new ArrayList<>();
     vectorArray2.add(0.46949086179692356);
     vectorArray2.add(-0.533609076732849);
@@ -49,8 +57,8 @@ upsert(UpsertReq.builder()
     vectorArray2.add(0.9797361846081416);
     vectorArray2.add(0.6294256393761057);
     
-    dict2.put("id", 2);
-    dict2.put("vector", vectorArray2);
+    dict2.addProperty("id", 2L);
+    dict2.add("vector", gson.toJsonTree(vectorArray2));
     
     data.add(dict1);
     data.add(dict2);
@@ -82,12 +90,12 @@ An **UpsertResp** object that contains information about the number of inserted 
 
 ```java
 // upsert operation
-JSONObject jsonObject = new JSONObject();
+JsonObject jsonObject = new JsonObject();
 List<Float> vectorList = new ArrayList<>();
 vectorList.add(2.0f);
 vectorList.add(3.0f);
-jsonObject.put("vector", vectorList);
-jsonObject.put("id", 0L);
+jsonObject.add("vector", gson.toJsonTree(vectorList));
+jsonObject.addProperty("id", 0L);
 UpsertReq upsertReq = UpsertReq.builder()
         .collectionName("test")
         .data(Collections.singletonList(jsonObject))

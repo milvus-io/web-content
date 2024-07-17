@@ -6,7 +6,7 @@ MilvusClient interface. This method transfers a query node from the source resou
 R<RpcStatus> transferReplica(TransferReplicaParam requestParam);
 ```
 
-## TransferNodeParam
+#### TransferReplicaParam
 
 Use the `TransferReplicaParam.Builder` to construct a `TransferReplicaParam` object.
 
@@ -19,34 +19,34 @@ Methods of `TransferReplicaParam.Builder`:
 
 <table>
     <tr>
-        <th>Method</th>
-        <th>Description</th>
-        <th>Parameters</th>
+        <th><p>Method</p></th>
+        <th><p>Description</p></th>
+        <th><p>Parameters</p></th>
     </tr>
     <tr>
-        <td>withSourceGroupName(String groupName)</td>
-        <td>Sets the source group name. groupName cannot be empty or null.</td>
-        <td>groupName: The name of the source group.</td>
+        <td><p>withSourceGroupName(String groupName)</p></td>
+        <td><p>Sets the source group name. groupName cannot be empty or null.</p></td>
+        <td><p>groupName: The name of the source group.</p></td>
     </tr>
     <tr>
-        <td>withTargetGroupName(String groupName)</td>
-        <td>Sets the target group name. groupName cannot be empty or null.</td>
-        <td>groupName: The name of the target group.</td>
+        <td><p>withTargetGroupName(String groupName)</p></td>
+        <td><p>Sets the target group name. groupName cannot be empty or null.</p></td>
+        <td><p>groupName: The name of the target group.</p></td>
     </tr>
     <tr>
-        <td>withCollectionName(String collectionName)</td>
-        <td>Sets the collection name. Collection name cannot be empty or null.</td>
-        <td>collectionName: The name of a collection.</td>
+        <td><p>withCollectionName(String collectionName)</p></td>
+        <td><p>Sets the collection name. Collection name cannot be empty or null.</p></td>
+        <td><p>collectionName: The name of a collection.</p></td>
     </tr>
     <tr>
-        <td>withReplicaNumber(Long replicaNumber)</td>
-        <td>Specify number of replicas to transfer.</td>
-        <td>replicaNumber: The number of replicas to transfer.</td>
+        <td><p>withReplicaNumber(Long replicaNumber)</p></td>
+        <td><p>Specify number of replicas to transfer.</p></td>
+        <td><p>replicaNumber: The number of replicas to transfer.</p></td>
     </tr>
     <tr>
-        <td>build()</td>
-        <td>Construct a TransferReplicaParam object.</td>
-        <td>N/A</td>
+        <td><p>build()</p></td>
+        <td><p>Construct a TransferReplicaParam object.</p></td>
+        <td><p>N/A</p></td>
     </tr>
 </table>
 
@@ -54,7 +54,7 @@ The `TransferReplicaParam.Builder.build()` can throw the following exceptions:
 
 - ParamException: error if the parameter is invalid.
 
-## Returns
+#### Returns
 
 This method catches all the exceptions and returns an `R<RpcStatus>` object.
 
@@ -64,13 +64,13 @@ This method catches all the exceptions and returns an `R<RpcStatus>` object.
 
 - If the API succeeds, it returns `R.Status.Success`.
 
-## Example
+#### Example
 
 ```java
 import io.milvus.param.TransferReplicaParam;
 
 R<RpcStatus> response = client.transferReplica(TransferReplicaParam.newBuilder()
-            .withTargetGroupName(sourceName)
+            .withSourceGroupName(sourceName)
             .withTargetGroupName(targetName)
             .withCollectionName(COLLECTION_NAME)
             .withNodeNumber(1)

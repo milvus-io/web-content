@@ -40,10 +40,6 @@ This is an enumeration that provides the following constants.
 
     Sets the index type to **SCANN**.
 
-- GPU_BRUTE_FORCE
-
-  Sets the index type to **GPU_BRUTE_FORCE**. This applies to GPU indexes only.
-
 - GPU_IVF_FLAT(50)
 
     Sets the index type to **GPU_IVF_FLAT**. This applies to GPU indexes only.
@@ -52,9 +48,13 @@ This is an enumeration that provides the following constants.
 
     Sets the index type to **GPU_IVF_PQ**. This applies to GPU indexes only.
 
-- GPU_CAGRA
+- GPU_BRUTE_FORCE(52)
 
-  Sets the index type to **GPU_CAGRA**. This applies to GPU indexes only.
+    Sets the index type to **GPU_BRUTE_FORCE**. This applies to GPU indexes only.
+
+- GPU_CAGRA(53)
+
+    Sets the index type to **GPU_CAGRA**. This applies to GPU indexes only.
 
 - BIN_FLAT(80)
 
@@ -66,11 +66,11 @@ This is an enumeration that provides the following constants.
 
 - SPARSE_INVERTED_INDEX
 
-  Sets the index type to **SPARSE_INVERTED_INDEX**. This applies to sparse vectors only.
+    Sets the index type to **SPARSE_INVERTED_INDEX**. This applies to sparse vectors only.
 
 - SPARSE_WAND
 
-  Sets the index type to **SPARSE_WAND**. This applies to sparse vectors only.
+    Sets the index type to **SPARSE_WAND**. This applies to sparse vectors only.
 
 - TRIE("Trie", 100)
 
@@ -79,3 +79,8 @@ This is an enumeration that provides the following constants.
 - STL_SORT(200)
 
     Sets the index type to **STL_SORT**. This applies to scalar fields only.
+
+- INVERTED(201)
+
+     Sets the index type to **INVERTED**. This applies to all scalar fields except JSON type fields.
+

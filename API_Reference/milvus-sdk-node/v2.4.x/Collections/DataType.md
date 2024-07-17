@@ -43,5 +43,17 @@ Sets the data type to **Binary Vector**.
 - FloatVector = 101
 Sets the data type to **Float Vector**.
 
+- Float16Vector = 102
+
+    Sets the data type to **Float16 Vector**.
+
+- BFloat16Vector = 103
+
+    Sets the data type to **BFloat16 Vector**.
+
+- SparseFloatVector = 104
+
+    Sets the data type to **Sparse Vector**.
+
 ## Example
 

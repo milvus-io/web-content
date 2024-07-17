@@ -9,23 +9,23 @@ public enum LogLevel
 
 <table>
    <tr>
-     <th><strong>Type</strong></th>
-     <th><strong>Description</strong></th>
+     <th><p><strong>Type</strong></p></th>
+     <th><p><strong>Description</strong></p></th>
    </tr>
    <tr>
-     <td>Debug</td>
-     <td>Debug level, All the logs are visible.</td>
+     <td><p>Debug</p></td>
+     <td><p>Debug level, All the logs are visible.</p></td>
    </tr>
    <tr>
-     <td>Info</td>
-     <td>Debug level, information, warning, error logs are visible.</td>
+     <td><p>Info</p></td>
+     <td><p>Debug level, information, warning, error logs are visible.</p></td>
    </tr>
    <tr>
-     <td>Warning</td>
-     <td>Debug level, warning and error logs are visible.</td>
+     <td><p>Warning</p></td>
+     <td><p>Debug level, warning and error logs are visible.</p></td>
    </tr>
    <tr>
-     <td>Error</td>
-     <td>Error level, only error logs are visible.</td>
+     <td><p>Error</p></td>
+     <td><p>Error level, only error logs are visible.</p></td>
    </tr>
 </table>

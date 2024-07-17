@@ -6,7 +6,7 @@ MilvusClient interface. This method removes a user from a role. The user will re
 R<RpcStatus> removeUserFromRole(RemoveUserFromRoleParam requestParam);
 ```
 
-## RemoveUserFromRoleParam
+#### RemoveUserFromRoleParam
 
 Use the `RemoveUserFromRoleParam.Builder` to construct a `RemoveUserFromRoleParam` object.
 
@@ -19,24 +19,24 @@ Methods of `AddUserToRoleParam.Builder`:
 
 <table>
     <tr>
-        <th>Method</th>
-        <th>Description</th>
-        <th>Parameters</th>
+        <th><p>Method</p></th>
+        <th><p>Description</p></th>
+        <th><p>Parameters</p></th>
     </tr>
     <tr>
-        <td>withRoleName(String roleName)</td>
-        <td>Sets the roleName. RoleName cannot be empty or null.</td>
-        <td>roleName: The role name used to create the privilege.</td>
+        <td><p>withRoleName(String roleName)</p></td>
+        <td><p>Sets the roleName. RoleName cannot be empty or null.</p></td>
+        <td><p>roleName: The role name used to create the privilege.</p></td>
     </tr>
     <tr>
-        <td>withUsername(String username)</td>
-        <td>Sets the username. Username cannot be empty or null.</td>
-        <td>username: The user name.</td>
+        <td><p>withUsername(String username)</p></td>
+        <td><p>Sets the username. Username cannot be empty or null.</p></td>
+        <td><p>username: The user name.</p></td>
     </tr>
     <tr>
-        <td>build()</td>
-        <td>Construct a RemoveUserFromRoleParam object.</td>
-        <td>N/A</td>
+        <td><p>build()</p></td>
+        <td><p>Construct a RemoveUserFromRoleParam object.</p></td>
+        <td><p>N/A</p></td>
     </tr>
 </table>
 
@@ -44,7 +44,7 @@ The `RemoveUserFromRoleParam.Builder.build()` can throw the following exceptions
 
 - ParamException: error if the parameter is invalid.
 
-## Returns
+#### Returns
 
 This method catches all the exceptions and returns an `R<RpcStatus>` object.
 
@@ -54,7 +54,7 @@ This method catches all the exceptions and returns an `R<RpcStatus>` object.
 
 - If the API succeeds, it returns `R.Status.Success`.
 
-## Example
+#### Example
 
 ```java
 import io.milvus.param.AddUserToRoleParam;

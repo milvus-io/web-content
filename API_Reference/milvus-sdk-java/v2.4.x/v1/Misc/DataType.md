@@ -9,93 +9,93 @@ public enum DataType
 
 <table>
    <tr>
-     <th><strong>Type</strong></th>
-     <th><strong>Code</strong></th>
-     <th><strong>Description</strong></th>
+     <th><p><strong>Type</strong></p></th>
+     <th><p><strong>Code</strong></p></th>
+     <th><p><strong>Description</strong></p></th>
    </tr>
    <tr>
-     <td>None</td>
-     <td>0</td>
-     <td>For internal usage.</td>
+     <td><p>None</p></td>
+     <td><p>0</p></td>
+     <td><p>For internal usage.</p></td>
    </tr>
    <tr>
-     <td>Bool</td>
-     <td>1</td>
+     <td><p>Bool</p></td>
+     <td><p>1</p></td>
      <td></td>
    </tr>
    <tr>
-     <td>Int8</td>
-     <td>2</td>
+     <td><p>Int8</p></td>
+     <td><p>2</p></td>
      <td></td>
    </tr>
    <tr>
-     <td>Int16</td>
-     <td>3</td>
+     <td><p>Int16</p></td>
+     <td><p>3</p></td>
      <td></td>
    </tr>
    <tr>
-     <td>Int32</td>
-     <td>4</td>
+     <td><p>Int32</p></td>
+     <td><p>4</p></td>
      <td></td>
    </tr>
    <tr>
-     <td>Int64</td>
-     <td>5</td>
+     <td><p>Int64</p></td>
+     <td><p>5</p></td>
      <td></td>
    </tr>
    <tr>
-     <td>Float</td>
-     <td>10</td>
+     <td><p>Float</p></td>
+     <td><p>10</p></td>
      <td></td>
    </tr>
    <tr>
-     <td>Double</td>
-     <td>11</td>
+     <td><p>Double</p></td>
+     <td><p>11</p></td>
      <td></td>
    </tr>
    <tr>
-     <td>String</td>
-     <td>20</td>
-     <td>Reserved. Do not use this.</td>
+     <td><p>String</p></td>
+     <td><p>20</p></td>
+     <td><p>Reserved. Do not use this.</p></td>
    </tr>
    <tr>
-     <td>VarChar</td>
-     <td>21</td>
-     <td>Variable-length string with a limit on the maximum length.</td>
+     <td><p>VarChar</p></td>
+     <td><p>21</p></td>
+     <td><p>Variable-length string with a limit on the maximum length.</p></td>
    </tr>
    <tr>
-     <td>Array</td>
-     <td>22</td>
-     <td>Array data type. The element type can be one of the data types: Int8, Int16, Int32, Int64, Varchar, Bool, Float, or Double.</td>
+     <td><p>Array</p></td>
+     <td><p>22</p></td>
+     <td><p>Array data type. The element type can be one of the data types: Int8, Int16, Int32, Int64, Varchar, Bool, Float, or Double.</p></td>
    </tr>
    <tr>
-     <td>JSON</td>
-     <td>23</td>
+     <td><p>JSON</p></td>
+     <td><p>23</p></td>
      <td></td>
    </tr>
    <tr>
-     <td>BinaryVector</td>
-     <td>100</td>
-     <td>Binary vector. Each dimension is represented by 1 bit.</td>
+     <td><p>BinaryVector</p></td>
+     <td><p>100</p></td>
+     <td><p>Binary vector. Each dimension is represented by 1 bit.</p></td>
    </tr>
    <tr>
-     <td>FloatVector</td>
-     <td>101</td>
-     <td>Float vector. Each dimension is represented by 1 float(4 bits) value.</td>
+     <td><p>FloatVector</p></td>
+     <td><p>101</p></td>
+     <td><p>Float vector. Each dimension is represented by 1 float(4 bits) value.</p></td>
    </tr>
    <tr>
-     <td>Float16Vector</td>
-     <td>102</td>
-     <td>Float16 vector. Each dimension is a 16-bit half-precision floating-point number.</td>
+     <td><p>Float16Vector</p></td>
+     <td><p>102</p></td>
+     <td><p>Float16 vector. Each dimension is a 16-bit half-precision floating-point number.</p></td>
    </tr>
    <tr>
-     <td>BFloat16Vector</td>
-     <td>103</td>
-     <td>BFloat16 vector. Each dimension is a 16-bit floating-point number with reduced precision but the same exponent range as Float32.</td>
+     <td><p>BFloat16Vector</p></td>
+     <td><p>103</p></td>
+     <td><p>BFloat16 vector. Each dimension is a 16-bit floating-point number with reduced precision but the same exponent range as Float32.</p></td>
    </tr>
    <tr>
-     <td>SparseFloatVector</td>
-     <td>104</td>
-     <td>Sparse vectors represent words or phrases using vector embeddings where most elements are zeros. A sparse vector is a list of key-value pairs, the key type is an unsigned integer and the value type is Float32.</td>
+     <td><p>SparseFloatVector</p></td>
+     <td><p>104</p></td>
+     <td><p>Sparse vectors represent words or phrases using vector embeddings where most elements are zeros. A sparse vector is a list of key-value pairs, the key type is an unsigned integer and the value type is Float32.</p></td>
    </tr>
 </table>

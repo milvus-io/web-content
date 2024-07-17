@@ -6,7 +6,7 @@ The MilvusClient interface. This method lists all databases in the cluster.
 R<ListDatabasesResponse> listDatabases();
 ```
 
-## Returns
+#### Returns
 
 This method catches all the exceptions and returns an `R<ListDatabasesResponse>` object.
 
@@ -16,11 +16,9 @@ This method catches all the exceptions and returns an `R<ListDatabasesResponse>`
 
 - If the API succeeds, it returns a valid `ListDatabasesResponse` held by the R template.
 
-## Example
+#### Example
 
 ```java
-import io.milvus.param.*;
-
 R<ListDatabasesResponse> response = client.listDatabases()
 if (response.getStatus() != R.Status.Success.getCode()) {
     System.out.println(response.getMessage());

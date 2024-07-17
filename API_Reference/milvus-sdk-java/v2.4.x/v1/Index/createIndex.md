@@ -6,7 +6,7 @@ The MilvusClient interface. This method creates an index on a field in the speci
 R<RpcStatus> createIndex(CreateIndexParam requestParam);
 ```
 
-## CreateIndexParam
+#### CreateIndexParam
 
 Use the `CreateIndexParam.Builder` to construct a `CreateIndexParam` object.
 
@@ -19,59 +19,64 @@ Methods of `CreateIndexParam.Builder`:
 
 <table>
     <tr>
-        <th>Method</th>
-        <th>Description</th>
-        <th>Parameters</th>
+        <th><p>Method</p></th>
+        <th><p>Description</p></th>
+        <th><p>Parameters</p></th>
     </tr>
     <tr>
-        <td>withCollectionName(<br/>String collectionName)</td>
-        <td>Set the target collection name. Collection name cannot be empty or null.</td>
-        <td>collectionName: The name of the target collection to create an index for.</td>
+        <td><p>withCollectionName(<br/>String collectionName)</p></td>
+        <td><p>Set the target collection name. Collection name cannot be empty or null.</p></td>
+        <td><p>collectionName: The name of the target collection to create an index for.</p></td>
     </tr>
     <tr>
-        <td>withFieldName(String fieldName)</td>
-        <td>Set the target field name. Field name cannot be empty or null.</td>
-        <td>fieldName: The target field name</td>
+        <td><p>withDatabaseName(String databaseName)</p></td>
+        <td><p>Sets the database name. database name can be null for default database.</p></td>
+        <td><p>databaseName: The database name.</p></td>
     </tr>
     <tr>
-        <td>withIndexType(IndexType indexType)</td>
-        <td>Set the index type. Please refer to IndexType in Misc.</td>
-        <td>indexType: The index type</td>
+        <td><p>withFieldName(String fieldName)</p></td>
+        <td><p>Set the target field name. Field name cannot be empty or null.</p></td>
+        <td><p>fieldName: The target field name</p></td>
     </tr>
     <tr>
-        <td>withIndexName(String indexName)</td>
-        <td>Set the name of index which will be created. Then you can use the index name to check the state of index. If no index name is specified, the default index name is empty string which means let the server determine it. The max length of index name is 255 characters.</td>
-        <td>indexName: The name of the index</td>
+        <td><p>withIndexType(IndexType indexType)</p></td>
+        <td><p>Set the index type. Please refer to IndexType in Misc.</p></td>
+        <td><p>indexType: The index type</p></td>
     </tr>
     <tr>
-        <td>withMetricType(MetricType metricType)</td>
-        <td>Sets the metric type. Please refer to MetricType in Misc.</td>
-        <td>metricType: The metric type</td>
+        <td><p>withIndexName(String indexName)</p></td>
+        <td><p>Set the name of index which will be created. Then you can use the index name to check the state of index. If no index name is specified, the default index name is empty string which means let the server determine it. The max length of index name is 255 characters.</p></td>
+        <td><p>indexName: The name of the index</p></td>
     </tr>
     <tr>
-        <td><br/>withExtraParam(String extraParam)</td>
-        <td><br/>Sets the specific index parameters according to index type. For example, IVF index, the extra parameters can be "\{\"nlist\":1024}".</td>
-        <td>extraParam: <br/>Extra parameters in JSON format</td>
+        <td><p>withMetricType(MetricType metricType)</p></td>
+        <td><p>Sets the metric type. Please refer to MetricType in Misc.</p></td>
+        <td><p>metricType: The metric type</p></td>
     </tr>
     <tr>
-        <td>withSyncMode(Boolean syncMode)</td>
-        <td>Enable sync mode. For sync mode, the client keeps waiting until all segments of the collection are successfully indexed. If sync mode is disabled, the createIndex() returns instantly. By default sync mode is enabled.</td>
-        <td>syncMode: true is sync mode</td>
+        <td><p><br/>withExtraParam(String extraParam)</p></td>
+        <td><p><br/>Sets the specific index parameters according to index type. For example, IVF index, the extra parameters can be "\{\"nlist\":1024}".</p></td>
+        <td><p>extraParam: <br/>Extra parameters in JSON format</p></td>
     </tr>
     <tr>
-        <td>withSyncWaitingInterval(Long milliseconds)</td>
-        <td>Set the waiting interval in sync mode. With sync mode enabled, the client constantly checks index state by interval. Interval value must be greater than zero, and cannot be greater than Constant.MAX<em>WAITING</em>INDEX_INTERVAL. By default, interval value is 500 milliseconds.</td>
-        <td><br/>milliseconds: Sync mode interval value(unit: millisecond)</td>
+        <td><p>withSyncMode(Boolean syncMode)</p></td>
+        <td><p>Enable sync mode. For sync mode, the client keeps waiting until all segments of the collection are successfully indexed. If sync mode is disabled, the createIndex() returns instantly. By default sync mode is enabled.</p></td>
+        <td><p>syncMode: true is sync mode</p></td>
     </tr>
     <tr>
-        <td><br/>withSyncWaitingTimeout( Long seconds)</td>
-        <td>Set the timeout value for sync mode. Timeout value must be greater than zero and no upper limit. Default value is 600 seconds.</td>
-        <td>seconds: Sync mode timeout value(unit: second)</td>
+        <td><p>withSyncWaitingInterval(Long milliseconds)</p></td>
+        <td><p>Set the waiting interval in sync mode. With sync mode enabled, the client constantly checks index state by interval. Interval value must be greater than zero, and cannot be greater than Constant.MAX<em>WAITING</em>INDEX_INTERVAL. By default, interval value is 500 milliseconds.</p></td>
+        <td><p><br/>milliseconds: Sync mode interval value(unit: millisecond)</p></td>
     </tr>
     <tr>
-        <td>build()</td>
-        <td>Construct a CreateAliasParam object.</td>
-        <td>N/A</td>
+        <td><p><br/>withSyncWaitingTimeout( Long seconds)</p></td>
+        <td><p>Set the timeout value for sync mode. Timeout value must be greater than zero and no upper limit. Default value is 600 seconds.</p></td>
+        <td><p>seconds: Sync mode timeout value(unit: second)</p></td>
+    </tr>
+    <tr>
+        <td><p>build()</p></td>
+        <td><p>Construct a CreateAliasParam object.</p></td>
+        <td><p>N/A</p></td>
     </tr>
 </table>
 
@@ -79,7 +84,7 @@ The `CreateIndexParam.Builder.build()` can throw the following exceptions:
 
 - ParamException: error if the parameter is invalid.
 
-## Returns
+#### Returns
 
 This method catches all the exceptions and returns an `R<RpcStatus>` object.
 
@@ -89,7 +94,7 @@ This method catches all the exceptions and returns an `R<RpcStatus>` object.
 
 - If the API succeeds, it returns `R.Status.Success`.
 
-## Example
+#### Example
 
 ```java
 import io.milvus.param.*;

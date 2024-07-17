@@ -56,6 +56,14 @@ This is an enumeration that provides the following constants.
 
     Sets the index type to **BIN_IVF_FLAT**. This applies to binary vectors only.
 
+- SPARSE_INVERTED_INDEX
+
+    Sets the index type to **SPARSE_INVERTED_INDEX**. This applies to sparse vectors only.
+
+- SPARSE_WAND
+
+    Sets the index type to **SPARSE_WAND**. This applies to sparse vectors only.
+
 - TRIE("Trie", 100)
 
     Sets the index type to **TRIE**. This applies to VarChar scalar fields only.

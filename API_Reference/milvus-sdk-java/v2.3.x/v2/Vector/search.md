@@ -16,7 +16,7 @@ search(SearchReq.builder()
     .topK(int topK)
     .filter(String filter)
     .outputFields(List<String> outputFields)
-    .data(List<Object> data)
+    .data(List<BaseVector> data)
     .offset(long offset)
     .limit(long limit)
     .roundDecimal(int roundDecimal)
@@ -63,11 +63,39 @@ search(SearchReq.builder()
 
     The value defaults to **None**. If left unspecified, all fields are selected as the output fields.
 
-- `data(List<Object> data)`
+- `data(List<BaseVector> data)`
 
     A list of vector embeddings.
 
     Milvus searches for the most similar vector embeddings to the specified ones.
+
+    BaseVector is a base class for abstract vector classes. The following classes are derived from BaseVector. Choose the correct class as input according to DataType of the vector field.
+
+    <div class="admonition note">
+
+    <p><b>notes</b></p>
+
+    <p>In Java SDK v2.3.7 or earlier versions, this method is named <code>distance</code>. Since Java SDK v2.3.8, this method is renamed as <code>score</code>.</p>
+
+    </div>
+
+    <table>
+       <tr>
+         <th><p><strong>Class Name</strong></p></th>
+         <th><p><strong>Constructors</strong></p></th>
+         <th><p><strong>Description</strong></p></th>
+       </tr>
+       <tr>
+         <td><p>FloatVec</p></td>
+         <td><p>FloatVec(List\<Float> data)FloatVec(float[] data)</p></td>
+         <td><p>For DataType.FloatVector type field.</p></td>
+       </tr>
+       <tr>
+         <td><p>BinaryVec</p></td>
+         <td><p>BinaryVec(ByteBuffer data)BinaryVec(byte[] data)</p></td>
+         <td><p>For DataType.BinaryVector type field.</p></td>
+       </tr>
+    </table>
 
 - `offset(long offset)`
 
@@ -161,33 +189,19 @@ search(SearchReq.builder()
 
 **RETURN TYPE:**
 
-*List\<SearchResult\>*
+*SearchResp*
 
 **RETURNS:**
 
-A list of **SearchResult objects representing specific search results with the specified output fields and relevance score.
+A **SearchResp object representing specific search results with the specified output fields and relevance score.
 
 **PARAMETERS:**
 
-- **entity** (*Map\<String, Object\>*)
+- searchResults(List\<List\<SearchResult\>>)
 
-    A map that stores the specific fields associated with the search result.
+      A list of SearchResp.SearchResult, the size of searchResults equals the number of query vectors of the search. Each List\<SearchResult\> is a topK result of a query vector. Each SearchResult represents an entity hit by the search.
 
-- **distance** (*Float*)
-
-    The relevant distance of the search result. The distance indicates how closely the vector associated with the search result matches the query vector.
-
-- **id** (Object)
-
-The id of the search result, dataType is either string or int64 
-
-<div class="admonition note">
-
-<p><b>notes</b></p>
-
-<p>If the number of returned entities is less than expected, duplicate entities may exist in your collection.</p>
-
-</div>
+      Member of SearchResult:
 
 **EXCEPTIONS:**
 
@@ -198,17 +212,19 @@ The id of the search result, dataType is either string or int64
 ## Example
 
 ```java
-// search for top 2 in collection "test"
-List<Float> vectorList = new ArrayList<>();
-vectorList.add(1.0f);
-vectorList.add(2.0f);
-
-SearchReq searchReq = SearchReq.builder()
-        .collectionName("test")
-        .data(Collections.singletonList(vectorList))
-        .topK(2)
-        .build();
-SearchResp searchResp = client.search(searchReq);
-//SearchResp(searchResults=[[SearchResp.SearchResult(entity={vector=[0.598938, 0.8336413]}, distance=1.0000001, id=0), SearchResp.SearchResult(entity={vector=[0.33950245, 0.685143]}, distance=0.986753, id=2)]])
+SearchResp searchR = client.search(SearchReq.builder()
+        .collectionName(collectionName)
+        .data(Collections.singletonList(new FloatVec(new float[]{1.0f, 2.0f})))
+        .filter("id < 100")
+        .topK(10)
+        .outputFields(Collections.singletonList("*"))
+        .build());
+List<List<SearchResp.SearchResult>> searchResults = searchR.getSearchResults();
+System.out.println("\nSearch results:");
+for (List<SearchResp.SearchResult> results : searchResults) {
+    for (SearchResp.SearchResult result : results) {
+        System.out.printf("ID: %d, Score: %f, %s\n", (long)result.getId(), result.getScore(), result.getEntity().toString());
+    }
+}
 ```
 

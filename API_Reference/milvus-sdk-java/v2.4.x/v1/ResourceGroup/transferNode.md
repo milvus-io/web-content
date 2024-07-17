@@ -6,7 +6,7 @@ MilvusClient interface. This method transfers a query node from the source resou
 R<RpcStatus> transferNode(TransferNodeParam requestParam);
 ```
 
-## TransferNodeParam
+#### TransferNodeParam
 
 Use the `TransferNodeParam.Builder` to construct a `TransferNodeParam` object.
 
@@ -19,29 +19,29 @@ Methods of `TransferNodeParam.Builder`:
 
 <table>
     <tr>
-        <th>Method</th>
-        <th>Description</th>
-        <th>Parameters</th>
+        <th><p>Method</p></th>
+        <th><p>Description</p></th>
+        <th><p>Parameters</p></th>
     </tr>
     <tr>
-        <td>withSourceGroupName(String groupName)</td>
-        <td>Sets the source group name. groupName cannot be empty or null.</td>
-        <td>groupName: The name of the source group.</td>
+        <td><p>withSourceGroupName(String groupName)</p></td>
+        <td><p>Sets the source group name. groupName cannot be empty or null.</p></td>
+        <td><p>groupName: The name of the source group.</p></td>
     </tr>
     <tr>
-        <td>withTargetGroupName(String groupName)</td>
-        <td>Sets the target group name. groupName cannot be empty or null.</td>
-        <td>groupName: The name of the target group.</td>
+        <td><p>withTargetGroupName(String groupName)</p></td>
+        <td><p>Sets the target group name. groupName cannot be empty or null.</p></td>
+        <td><p>groupName: The name of the target group.</p></td>
     </tr>
     <tr>
-        <td>withNodeNumber(Integer nodeNumber)</td>
-        <td>Specify how many query nodes to transfer to another resource group.</td>
-        <td>nodeNumber: The number of nodes to transfer.</td>
+        <td><p>withNodeNumber(Integer nodeNumber)</p></td>
+        <td><p>Specify how many query nodes to transfer to another resource group.</p></td>
+        <td><p>nodeNumber: The number of nodes to transfer.</p></td>
     </tr>
     <tr>
-        <td>build()</td>
-        <td>Construct a TransferNodeParam object.</td>
-        <td>N/A</td>
+        <td><p>build()</p></td>
+        <td><p>Construct a TransferNodeParam object.</p></td>
+        <td><p>N/A</p></td>
     </tr>
 </table>
 
@@ -49,7 +49,7 @@ The `TransferNodeParam.Builder.build()` can throw the following exceptions:
 
 - ParamException: error if the parameter is invalid.
 
-## Returns
+#### Returns
 
 This method catches all the exceptions and returns an `R<RpcStatus>` object.
 
@@ -59,13 +59,13 @@ This method catches all the exceptions and returns an `R<RpcStatus>` object.
 
 - If the API succeeds, it returns `R.Status.Success`.
 
-## Example
+#### Example
 
 ```java
 import io.milvus.param.TransferNodeParam;
 
 R<RpcStatus> response = client.transferNode(TransferNodeParam.newBuilder()
-            .withTargetGroupName(sourceName)
+            .withSourceGroupName(sourceName)
             .withTargetGroupName(targetName)
             .withNodeNumber(1)
             .build());

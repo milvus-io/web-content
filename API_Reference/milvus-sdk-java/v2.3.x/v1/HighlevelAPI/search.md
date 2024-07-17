@@ -6,7 +6,7 @@ The MilvusClient interface. This method conducts an approximate nearest neighbor
 R<SearchResponse> search(SearchSimpleParam requestParam);
 ```
 
-## SearchSimpleParam
+#### SearchSimpleParam
 
 Use the `SearchSimpleParam.Builder` to construct a `SearchSimpleParam` object.
 
@@ -19,49 +19,49 @@ Methods of `SearchSimpleParam.Builder`:
 
 <table>
     <tr>
-        <th>Method</th>
-        <th>Description</th>
-        <th>Parameters</th>
+        <th><p>Method</p></th>
+        <th><p>Description</p></th>
+        <th><p>Parameters</p></th>
     </tr>
     <tr>
-        <td>withCollectionName(collectionName)</td>
-        <td>Set the collection name. Collection name cannot be empty or null.</td>
-        <td>collectionName: target collection name</td>
+        <td><p>withCollectionName(collectionName)</p></td>
+        <td><p>Set the collection name. Collection name cannot be empty or null.</p></td>
+        <td><p>collectionName: target collection name</p></td>
     </tr>
     <tr>
-        <td>withOutFields(List\<String> outFields)</td>
-        <td>Specifies output scalar fields (Optional).</td>
-        <td><br/>outFields: The name list of fields to be outputed</td>
+        <td><p>withOutFields(List\<String> outFields)</p></td>
+        <td><p>Specifies output scalar fields (Optional).</p></td>
+        <td><p><br/>outFields: The name list of fields to be outputed</p></td>
     </tr>
     <tr>
-        <td>withFilter(String filter)</td>
-        <td></td>
-        <td>filter: The expression to filter scalar fields</td>
+        <td><p>withFilter(String filter)</p></td>
+        <td><p>Set the expression to filter scalar fields before searching(Optional).For more information please refer to <a href="https://milvus.io/docs/v2.1.x/boolean.md">this doc</a>.</p></td>
+        <td><p>filter: The expression to filter scalar fields</p></td>
     </tr>
     <tr>
-        <td>withVectors(List\<?> vectors)</td>
-        <td>Set the target vector. Up to 16384 vectors allowed.</td>
-        <td>vectors: <br/>- If target field type is float vector, List\< List\<Float>gt; is required;<br/>- If target field type is binary vector, List\<ByteBuffer> is required;</td>
+        <td><p>withVectors(List\<?> vectors)</p></td>
+        <td><p>Set the target vector. Up to 16384 vectors allowed.</p></td>
+        <td><p>vectors: <br/>- If target field type is float vector, List\< List\<Float>gt; is required;<br/>- If target field type is binary vector, List\<ByteBuffer> is required;</p></td>
     </tr>
     <tr>
-        <td>withOffset(Long offset)</td>
-        <td>Specify a position, the returned entities before this position will be ignored. Only take effect when the 'limit' value is specified.Default value is 0, start from begin.</td>
-        <td>offset: A value to define the position</td>
+        <td><p>withOffset(Long offset)</p></td>
+        <td><p>Specify a position, the returned entities before this position will be ignored. Only take effect when the 'limit' value is specified.Default value is 0, start from begin.</p></td>
+        <td><p>offset: A value to define the position</p></td>
     </tr>
     <tr>
-        <td>withLimit(Long limit)</td>
-        <td>Specify a value to control the returned number of entities. Must be a positive value.Default value is 10, will return without limit.</td>
-        <td>limit: A value to define the limit of returned entities</td>
+        <td><p>withLimit(Long limit)</p></td>
+        <td><p>Specify a value to control the returned number of entities. Must be a positive value.Default value is 10, will return without limit.</p></td>
+        <td><p>limit: A value to define the limit of returned entities</p></td>
     </tr>
     <tr>
-        <td>withConsistencyLevel(ConsistencyLevelEnum consistencyLevel)</td>
-        <td>Consistency level used in the search. If no level is specified, will use default consistency. Please refer to ConsistencyLevelEnum in Misc.</td>
-        <td>consistencyLevel: The consistency level used in the search</td>
+        <td><p>withConsistencyLevel(ConsistencyLevelEnum consistencyLevel)</p></td>
+        <td><p>Consistency level used in the search. If no level is specified, will use default consistency. Please refer to ConsistencyLevelEnum in Misc.</p></td>
+        <td><p>consistencyLevel: The consistency level used in the search</p></td>
     </tr>
     <tr>
-        <td>build()</td>
-        <td>Construct a SearchSimpleParam object.</td>
-        <td>N/A</td>
+        <td><p>build()</p></td>
+        <td><p>Construct a SearchSimpleParam object.</p></td>
+        <td><p>N/A</p></td>
     </tr>
 </table>
 
@@ -69,7 +69,7 @@ The `SearchSimpleParam.Builder.build()` can throw the following exceptions:
 
 - ParamException: error if the parameter is invalid.
 
-## Returns
+#### Returns
 
 This method catches all the exceptions and returns an `R<SearchResponse>` object.
 
@@ -79,7 +79,7 @@ This method catches all the exceptions and returns an `R<SearchResponse>` object
 
 - If the API succeeds, it returns a valid `SearchResponse` held by the `R` template.
 
-## Example
+#### Example
 
 ```java
 import io.milvus.param.*;

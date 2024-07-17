@@ -14,7 +14,7 @@ MilvusClient interface. This method triggers a compaction operation on the serve
 R<ManualCompactionResponse> manualCompact(ManualCompactParam requestParam);
 ```
 
-## ManualCompactParam
+#### ManualCompactParam
 
 Use the `ManualCompactParam.Builder` to construct a `ManualCompactParam` object.
 
@@ -27,19 +27,19 @@ Methods of `ManualCompactParam.Builder`:
 
 <table>
     <tr>
-        <th>Method</th>
-        <th>Description</th>
-        <th>Parameters</th>
+        <th><p>Method</p></th>
+        <th><p>Description</p></th>
+        <th><p>Parameters</p></th>
     </tr>
     <tr>
-        <td>withCollectionName(String collectionName)</td>
-        <td>Sets the collection name. Collection name cannot be empty or null.</td>
-        <td>collectionName: The target collection name.</td>
+        <td><p>withCollectionName(String collectionName)</p></td>
+        <td><p>Sets the collection name. Collection name cannot be empty or null.</p></td>
+        <td><p>collectionName: The target collection name.</p></td>
     </tr>
     <tr>
-        <td>build()</td>
-        <td>Construct a ManualCompactParam object.</td>
-        <td>N/A</td>
+        <td><p>build()</p></td>
+        <td><p>Construct a ManualCompactParam object.</p></td>
+        <td><p>N/A</p></td>
     </tr>
 </table>
 
@@ -47,7 +47,7 @@ The `ManualCompactParam.Builder.build()` can throw the following exceptions:
 
 - ParamException: error if the parameter is invalid.
 
-## Returns
+#### Returns
 
 This method catches all the exceptions and returns an `R<ManualCompactionResponse>` object.
 
@@ -57,7 +57,7 @@ This method catches all the exceptions and returns an `R<ManualCompactionRespons
 
 - If the API succeeds, it returns a valid `ManualCompactionResponse` held by the `R` template. The `ManualCompactionResponse` contains an ID of this compaction operation, which you can check the state by `getCompactionState()` or `getCompactionStateWithPlans()` method.
 
-## Example
+#### Example
 
 ```java
 import io.milvus.param.*;

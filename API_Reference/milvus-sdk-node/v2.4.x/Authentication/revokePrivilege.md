@@ -53,7 +53,7 @@ milvusClient.revokePrivilege({
          <th><p>Enumeration Members</p></th>
        </tr>
        <tr>
-         <td><p>GlobalPrivileges<br/></p></td>
+         <td><p>GlobalPrivileges</p></td>
          <td><p>All, CreatAlias, CreateCollection, CreateDatabase, CreateOwnership, CreateResourceGroup, DescribeAlias, DescribeCollection, DescribeResourceGroup, DropAlias, DropCollection, DropDatabase, DropOwnership, DropResourceGroup, FlushAll, ListAliases, ListDatabases, ListResourceGroups, ManageOwnership, RenameCollection, SelectOwnership, ShowCollections, TransferNode, TransferReplica.</p></td>
        </tr>
        <tr>

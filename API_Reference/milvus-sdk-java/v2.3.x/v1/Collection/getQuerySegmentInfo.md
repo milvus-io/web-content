@@ -6,7 +6,7 @@ A MilvusClient interface. This method gets the query information of segments in 
 R<GetQuerySegmentInfoResponse> getQuerySegmentInfo(GetQuerySegmentInfoParam requestParam);
 ```
 
-## GetQuerySegmentInfoParam
+#### GetQuerySegmentInfoParam
 
 Use the `GetQuerySegmentInfoParam.Builder` to construct a `GetQuerySegmentInfoParam` object.
 
@@ -19,19 +19,19 @@ Methods of `GetQuerySegmentInfoParam.Builder`:
 
 <table>
     <tr>
-        <th>Method</th>
-        <th>Description</th>
-        <th>Parameters</th>
+        <th><p>Method</p></th>
+        <th><p>Description</p></th>
+        <th><p>Parameters</p></th>
     </tr>
     <tr>
-        <td>withCollectionName(String collectionName)</td>
-        <td>Sets the collection name. Collection name cannot be empty or null.</td>
-        <td>collectionName: The name of the collection to get the query information of the segment from.</td>
+        <td><p>withCollectionName(String collectionName)</p></td>
+        <td><p>Sets the collection name. Collection name cannot be empty or null.</p></td>
+        <td><p>collectionName: The name of the collection to get the query information of the segment from.</p></td>
     </tr>
     <tr>
-        <td>build()</td>
-        <td>Constructs a GetQuerySegmentInfoParam object.</td>
-        <td>N/A</td>
+        <td><p>build()</p></td>
+        <td><p>Constructs a GetQuerySegmentInfoParam object.</p></td>
+        <td><p>N/A</p></td>
     </tr>
 </table>
 
@@ -39,7 +39,7 @@ The `GetQuerySegmentInfoParam.Builder.build()` can throw the following exception
 
 - ParamException: error if the parameter is invalid.
 
-## Returns
+#### Returns
 
 This method catches all the exceptions and returns an `R<GetQuerySegmentInfoResponse>` object.
 
@@ -49,7 +49,7 @@ This method catches all the exceptions and returns an `R<GetQuerySegmentInfoResp
 
 - If the API succeeds, it returns a valid `GetQuerySegmentInfoResponse` held by the `R`  template. The `GetQuerySegmentInfoResponse` object contains a list of `QuerySegmentInfo`, and you can use `QuerySegmentInfo.getState()` to get the state of the segment. This process is similar to that of `PersistentSegmentInfo`.
 
-## Example
+#### Example
 
 ```java
 import io.milvus.param.*;

@@ -8,18 +8,20 @@ ListenableFuture<R<MutationResult>> upsertAsync(UpsertParam requestParam);
 
 This method uses the same parameter as `upsert()`, it invokes the RPC interface and returns a ListenableFuture object immediately.
 
-## Example
+#### Example
 
 ```java
 import io.milvus.param.*;
 import io.milvus.response.MutationResultWrapper;
 import io.milvus.grpc.MutationResult;
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 
 List<List<Float>> vectors = generateFloatVectors(1);
-List<JSONObject> rows = new ArrayList<>();
-JSONObject row = new JSONObject();
-row.put("id", 1L);
-row.put("vec", vectors.get(0);
+List<JsonObject> rows = new ArrayList<>();
+JsonObject row = new JsonObject();
+row.addProperty("id", (long)i);
+row.add("vector", gson.toJsonTree(vectors.get(0)));
 rows.add(row);
 
 UpsertParam param = UpsertParam.newBuilder()

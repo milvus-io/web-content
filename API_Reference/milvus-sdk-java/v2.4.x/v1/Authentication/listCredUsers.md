@@ -6,7 +6,7 @@ A MilvusClient interface. This method lists all user names.
 R<ListCredUsersResponse> listCredUsers(ListCredUsersParam requestParam);
 ```
 
-## ListCredUsersParam
+#### ListCredUsersParam
 
 Use the `ListCredUsersParam.Builder` to construct a `ListCredUsersParam` object.
 
@@ -19,18 +19,18 @@ Methods of `ListCredUsersParam.Builder`:
 
 <table>
     <tr>
-        <th>Method</th>
-        <th>Description</th>
-        <th>Parameters</th>
+        <th><p>Method</p></th>
+        <th><p>Description</p></th>
+        <th><p>Parameters</p></th>
     </tr>
     <tr>
-        <td>build()</td>
-        <td>Constructs a ListCredUsersParam object.</td>
-        <td>N/A</td>
+        <td><p>build()</p></td>
+        <td><p>Constructs a ListCredUsersParam object.</p></td>
+        <td><p>N/A</p></td>
     </tr>
 </table>
 
-## Returns
+#### Returns
 
 This method catches all the exceptions and returns an `R<RpcStatus>` object.
 
@@ -40,7 +40,7 @@ This method catches all the exceptions and returns an `R<RpcStatus>` object.
 
 - If the API succeeds, it returns a valid `ListCredUsersResponse` held by the `R` template. You can use `ListCredUsersResponse` to get the information of users.
 
-## Example
+#### Example
 
 ```java
 import io.milvus.param.*;

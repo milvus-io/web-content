@@ -6,7 +6,7 @@ A MilvusClient interface. This method creates a collection with simple parameter
 R<RpcStatus> createCollection(CreateSimpleCollectionParam requestParam);
 ```
 
-## CreateCollectionParam
+#### CreateSimpleCollectionParam
 
 Use the `CreateSimpleCollectionParam.Builder` to construct a `CreateSimpleCollectionParam` object.
 
@@ -19,69 +19,69 @@ Methods of `CreateSimpleCollectionParam.Builder`:
 
 <table>
     <tr>
-        <th>Method</th>
-        <th>Description</th>
-        <th>Parameters</th>
+        <th><p>Method</p></th>
+        <th><p>Description</p></th>
+        <th><p>Parameters</p></th>
     </tr>
     <tr>
-        <td>withCollectionName(String collectionName)</td>
-        <td>Sets the collection name. Collection name cannot be empty or null.</td>
-        <td>collectionName: The name of the collection to create.</td>
+        <td><p>withCollectionName(String collectionName)</p></td>
+        <td><p>Sets the collection name. Collection name cannot be empty or null.</p></td>
+        <td><p>collectionName: The name of the collection to create.</p></td>
     </tr>
     <tr>
-        <td>withDimension(int dimension)</td>
-        <td>Sets the collection vector dimension. Dimension value must be greater than zero and less than 32768.</td>
-        <td>dimension: The number of dimensions for the vector field of the collection.</td>
+        <td><p>withDimension(int dimension)</p></td>
+        <td><p>Sets the collection vector dimension. Dimension value must be greater than zero and less than 32768.</p></td>
+        <td><p>dimension: The number of dimensions for the vector field of the collection.</p></td>
     </tr>
     <tr>
-        <td>withMetricType(MetricType metricType)</td>
-        <td>Sets the metricType of vectorField. The distance metric used for the collection.</td>
-        <td>metricType: The distance metric used for the collection.</td>
+        <td><p>withMetricType(MetricType metricType)</p></td>
+        <td><p>Sets the metricType of vectorField. The distance metric used for the collection.</p></td>
+        <td><p>metricType: The distance metric used for the collection.</p></td>
     </tr>
     <tr>
-        <td>withDescription(String description)</td>
-        <td>Sets the collection description. The description can be empty. The default description is "".</td>
-        <td>description: The description of the collection to create.</td>
+        <td><p>withDescription(String description)</p></td>
+        <td><p>Sets the collection description. The description can be empty. The default description is "".</p></td>
+        <td><p>description: The description of the collection to create.</p></td>
     </tr>
     <tr>
-        <td>withPrimaryField(String primaryField)</td>
-        <td>Sets the primaryFiled name. The primaryField cannot be empty or null. The default is "id".</td>
-        <td>primaryField: The primary field name of the collection.</td>
+        <td><p>withPrimaryField(String primaryField)</p></td>
+        <td><p>Sets the primaryFiled name. The primaryField cannot be empty or null. The default is "id".</p></td>
+        <td><p>primaryField: The primary field name of the collection.</p></td>
     </tr>
     <tr>
-        <td>withVectorField(String vectorField)</td>
-        <td>Sets the vectorField name. The vectorField cannot be empty or null. The default is "vector".</td>
-        <td>vectorField: The vector field name of the collection.</td>
+        <td><p>withVectorField(String vectorField)</p></td>
+        <td><p>Sets the vectorField name. The vectorField cannot be empty or null. The default is "vector".</p></td>
+        <td><p>vectorField: The vector field name of the collection.</p></td>
     </tr>
     <tr>
-        <td>withAutoId(boolean autoId)</td>
-        <td>Sets the autoId. The default is Boolean.False.</td>
-        <td>autoId: If open autoId towards to this collection.</td>
+        <td><p>withAutoId(boolean autoId)</p></td>
+        <td><p>Sets the autoId. The default is Boolean.False.</p></td>
+        <td><p>autoId: If open autoId towards to this collection.</p></td>
     </tr>
     <tr>
-        <td>withSyncLoad(boolean syncLoad)</td>
-        <td>Sets the SyncLoad when loadCollection.The default is Boolean.True.</td>
-        <td>syncLoad: If syncLoad when loadCollection.</td>
+        <td><p>withSyncLoad(boolean syncLoad)</p></td>
+        <td><p>Sets the SyncLoad when loadCollection.The default is Boolean.True.</p></td>
+        <td><p>syncLoad: If syncLoad when loadCollection.</p></td>
     </tr>
     <tr>
-        <td>withConsistencyLevel(ConsistencyLevelEnum consistencyLevel)</td>
-        <td>Sets the consistency level. The default value is ConsistencyLevelEnum.BOUNDED</td>
-        <td>consistencyLevel: The consistency level of this collection.</td>
+        <td><p>withConsistencyLevel(ConsistencyLevelEnum consistencyLevel)</p></td>
+        <td><p>Sets the consistency level. The default value is ConsistencyLevelEnum.BOUNDED</p></td>
+        <td><p>consistencyLevel: The consistency level of this collection.</p></td>
     </tr>
     <tr>
-        <td>withPrimaryFieldType(DataType primaryFieldType)</td>
-        <td>Sets the primaryFiled type. The primaryField type cannot be empty or null. The default is "DataType.Int64".</td>
-        <td>primaryFieldType: The type of the primary field of this collection.</td>
+        <td><p>withPrimaryFieldType(DataType primaryFieldType)</p></td>
+        <td><p>Sets the primaryFiled type. The primaryField type cannot be empty or null. The default is "DataType.Int64".</p></td>
+        <td><p>primaryFieldType: The type of the primary field of this collection.</p></td>
     </tr>
     <tr>
-        <td>withMaxLength(Integer maxLength)</td>
-        <td>Sets the primaryFiled maxLength.<br/>If primaryFiled is specified as varchar, this parameter maxLength needs to be specified</td>
-        <td>maxLength: The max length of the primary field If primaryFiled is specified as varchar.</td>
+        <td><p>withMaxLength(Integer maxLength)</p></td>
+        <td><p>Sets the primaryFiled maxLength.<br/>If primaryFiled is specified as varchar, this parameter maxLength needs to be specified</p></td>
+        <td><p>maxLength: The max length of the primary field If primaryFiled is specified as varchar.</p></td>
     </tr>
     <tr>
-        <td>build()</td>
-        <td>Constructs a CreateSimpleCollectionParam object.</td>
-        <td>N/A</td>
+        <td><p>build()</p></td>
+        <td><p>Constructs a CreateSimpleCollectionParam object.</p></td>
+        <td><p>N/A</p></td>
     </tr>
 </table>
 
@@ -89,7 +89,7 @@ The `CreateSimpleCollectionParam.Builder.build()` can throw the following except
 
 - ParamException: error if the parameter is invalid.
 
-## Returns
+#### Returns
 
 This method catches all the exceptions and returns an `R<RpcStatus>` object.
 
@@ -99,7 +99,7 @@ This method catches all the exceptions and returns an `R<RpcStatus>` object.
 
 - If the API succeeds, it returns `R.Status.Success`.
 
-## Example
+#### Example
 
 ```java
 import io.milvus.param.highlevel.collection.*;

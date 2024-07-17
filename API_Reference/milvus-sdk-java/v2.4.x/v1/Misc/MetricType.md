@@ -9,31 +9,31 @@ public enum MetricType
 
 <table>
    <tr>
-     <th><strong>Type</strong></th>
-     <th><strong>Description</strong></th>
+     <th><p><strong>Type</strong></p></th>
+     <th><p><strong>Description</strong></p></th>
    </tr>
    <tr>
-     <td>NONE</td>
-     <td>For internal usage.</td>
+     <td><p>NONE</p></td>
+     <td><p>For internal usage.</p></td>
    </tr>
    <tr>
-     <td>L2</td>
-     <td>Euclidean distance. Only for float vectors.</td>
+     <td><p>L2</p></td>
+     <td><p>Euclidean distance. Only for float vectors.</p></td>
    </tr>
    <tr>
-     <td>IP</td>
-     <td>Inner product. Only for normalized float vectors.</td>
+     <td><p>IP</p></td>
+     <td><p>Inner product. Only for normalized float vectors.</p></td>
    </tr>
    <tr>
-     <td>COSINE</td>
-     <td>Cosine similarity. Only for float vectors</td>
+     <td><p>COSINE</p></td>
+     <td><p>Cosine similarity. Only for float vectors</p></td>
    </tr>
    <tr>
-     <td>HAMMING</td>
-     <td>Only for binary vectors.</td>
+     <td><p>HAMMING</p></td>
+     <td><p>Only for binary vectors.</p></td>
    </tr>
    <tr>
-     <td>JACCARD</td>
-     <td>Only for binary vectors.</td>
+     <td><p>JACCARD</p></td>
+     <td><p>Only for binary vectors.</p></td>
    </tr>
 </table>

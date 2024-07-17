@@ -6,7 +6,7 @@ A MilvusClient interface. This method creates an alias for a collection. Alias c
 R<RpcStatus> createAlias(CreateAliasParam requestParam);
 ```
 
-## CreateAliasParam
+#### CreateAliasParam
 
 Use the `CreateAliasParam.Builder` to construct a `CreateAliasParam` object.
 
@@ -19,24 +19,29 @@ Methods of `CreateAliasParam.Builder`:
 
 <table>
     <tr>
-        <th>Method</th>
-        <th>Description</th>
-        <th>Parameters</th>
+        <th><p>Method</p></th>
+        <th><p>Description</p></th>
+        <th><p>Parameters</p></th>
     </tr>
     <tr>
-        <td>withCollectionName(<br/>String collectionName)</td>
-        <td>Sets the target collection name. <br/>Collection name cannot be empty or null.</td>
-        <td>collectionName: The name of the target collection to create an alias for.</td>
+        <td><p>withCollectionName(<br/>String collectionName)</p></td>
+        <td><p>Sets the target collection name. <br/>Collection name cannot be empty or null.</p></td>
+        <td><p>collectionName: The name of the target collection to create an alias for.</p></td>
     </tr>
     <tr>
-        <td>withAlias(String alias)</td>
-        <td>Sets the collection alias.<br/>Collection alias cannot be empty or null.</td>
-        <td>alias: The alias of the target collection.</td>
+        <td><p>withDatabaseName(String databaseName)</p></td>
+        <td><p>Sets the database name. database name can be null for default database.</p></td>
+        <td><p>databaseName: The database name.</p></td>
     </tr>
     <tr>
-        <td>build()</td>
-        <td>Constructs a CreateAliasParam object.</td>
-        <td>N/A</td>
+        <td><p>withAlias(String alias)</p></td>
+        <td><p>Sets the collection alias.<br/>Collection alias cannot be empty or null.</p></td>
+        <td><p>alias: The alias of the target collection.</p></td>
+    </tr>
+    <tr>
+        <td><p>build()</p></td>
+        <td><p>Constructs a CreateAliasParam object.</p></td>
+        <td><p>N/A</p></td>
     </tr>
 </table>
 
@@ -44,7 +49,7 @@ Methods of `CreateAliasParam.Builder`:
 
 - ParamException: error if the parameter is invalid.
 
-## Returns
+#### Returns
 
 This method catches all the exceptions and returns an `R<RpcStatus>` object.
 
@@ -54,7 +59,7 @@ This method catches all the exceptions and returns an `R<RpcStatus>` object.
 
 - If the API succeeds, it returns `R.Status.Success`.
 
-## Example
+#### Example
 
 ```java
 import io.milvus.param.*;

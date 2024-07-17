@@ -6,7 +6,7 @@ A MilvusClient interface. This method renames the specified collection.
 R<RpcStatus> renameCollection(RenameCollectionParam requestParam)
 ```
 
-## RenameCollectionParam
+#### RenameCollectionParam
 
 Use the `RenameCollectionParam.Builder` to construct a `RenameCollectionParam` object.
 
@@ -19,24 +19,34 @@ Methods of `RenameCollectionParam.Builder`:
 
 <table>
     <tr>
-        <th>Method</th>
-        <th>Description</th>
-        <th>Parameters</th>
+        <th><p>Method</p></th>
+        <th><p>Description</p></th>
+        <th><p>Parameters</p></th>
     </tr>
     <tr>
-        <td>withOldCollectionName(String oldCollectionName)</td>
-        <td>Sets the old collection name. Old collection name cannot be empty or null.</td>
-        <td>oldCollectionName: The old name of the collection to rename.</td>
+        <td><p>withOldCollectionName(String oldCollectionName)</p></td>
+        <td><p>Sets the old collection name. Old collection name cannot be empty or null.</p></td>
+        <td><p>oldCollectionName: The old name of the collection to rename.</p></td>
     </tr>
     <tr>
-        <td>withNewCollectionName(String newCollectionName)</td>
-        <td>Sets the new collection name. New collection name cannot be empty or null.</td>
-        <td>newCollectionName: The new name of the collection to rename.</td>
+        <td><p>withNewCollectionName(String newCollectionName)</p></td>
+        <td><p>Sets the new collection name. New collection name cannot be empty or null.</p></td>
+        <td><p>newCollectionName: The new name of the collection to rename.</p></td>
     </tr>
     <tr>
-        <td>build()</td>
-        <td>Constructs a RenameCollectionParam object.</td>
-        <td>N/A</td>
+        <td><p>withOldDatabaseName(String databaseName)</p></td>
+        <td><p>Sets the database name of the old collection. database name can be null for default database.</p></td>
+        <td><p>databaseName: The database name.</p></td>
+    </tr>
+    <tr>
+        <td><p>withNewDatabaseName(String databaseName)</p></td>
+        <td><p>Sets the database name of the new collection. database name can be null for default database.</p></td>
+        <td><p>databaseName: The database name.</p></td>
+    </tr>
+    <tr>
+        <td><p>build()</p></td>
+        <td><p>Constructs a RenameCollectionParam object.</p></td>
+        <td><p>N/A</p></td>
     </tr>
 </table>
 
@@ -44,7 +54,7 @@ The `RenameCollectionParam.Builder.build()` can throw the following exceptions:
 
 - ParamException: error if the parameter is invalid.
 
-## Returns
+#### Returns
 
 This method catches all the exceptions and returns an `R<RpcStatus>` object.
 
@@ -54,7 +64,7 @@ This method catches all the exceptions and returns an `R<RpcStatus>` object.
 
 - If the API succeeds, it returns `R.Status.Success`.
 
-## Example
+#### Example
 
 ```java
 import io.milvus.param.*;

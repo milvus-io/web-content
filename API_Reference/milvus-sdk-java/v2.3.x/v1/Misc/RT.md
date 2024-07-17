@@ -7,7 +7,7 @@ package io.milvus.param;
 public class R<T>
 ```
 
-## R.Status
+#### R.Status
 
 `R.Status` is an enumeration of the status codes. Each `R<T>` object holds an integer value that can be mapped to the `R.Status`.
 
@@ -15,198 +15,198 @@ Note: Not all status codes are used, some of them are reserved.
 
 <table>
    <tr>
-     <th><strong>Status</strong></th>
-     <th><strong>Code</strong></th>
-     <th><strong>Description</strong></th>
+     <th><p><strong>Status</strong></p></th>
+     <th><p><strong>Code</strong></p></th>
+     <th><p><strong>Description</strong></p></th>
    </tr>
    <tr>
-     <td>IllegalResponse</td>
-     <td>-6</td>
-     <td>The response returned by the server is incorrect. Parsing the response on the client side fails.</td>
+     <td><p>IllegalResponse</p></td>
+     <td><p>-6</p></td>
+     <td><p>The response returned by the server is incorrect. Parsing the response on the client side fails.</p></td>
    </tr>
    <tr>
-     <td>ParamError</td>
-     <td>-5</td>
-     <td>The parameter is illegal on the client side.</td>
+     <td><p>ParamError</p></td>
+     <td><p>-5</p></td>
+     <td><p>The parameter is illegal on the client side.</p></td>
    </tr>
    <tr>
-     <td>VersionMismatch</td>
-     <td>-4</td>
-     <td>*<em>This error is reserved and not used for now.</em></td>
+     <td><p>VersionMismatch</p></td>
+     <td><p>-4</p></td>
+     <td><p>*<em>This error is reserved and not used for now.</em></p></td>
    </tr>
    <tr>
-     <td>Unknown</td>
-     <td>-3</td>
-     <td>General error for an unknown reason.</td>
+     <td><p>Unknown</p></td>
+     <td><p>-3</p></td>
+     <td><p>General error for an unknown reason.</p></td>
    </tr>
    <tr>
-     <td>ClientNotConnected</td>
-     <td>-2</td>
-     <td>The connection is not ready.</td>
+     <td><p>ClientNotConnected</p></td>
+     <td><p>-2</p></td>
+     <td><p>The connection is not ready.</p></td>
    </tr>
    <tr>
-     <td>RpcError</td>
-     <td>-1</td>
-     <td>*<em>This error is reserved and not used for now.</em></td>
+     <td><p>RpcError</p></td>
+     <td><p>-1</p></td>
+     <td><p>*<em>This error is reserved and not used for now.</em></p></td>
    </tr>
    <tr>
-     <td>Success</td>
-     <td>0</td>
-     <td>Operation succeeded.</td>
+     <td><p>Success</p></td>
+     <td><p>0</p></td>
+     <td><p>Operation succeeded.</p></td>
    </tr>
    <tr>
-     <td>UnexpectedError</td>
-     <td>1</td>
-     <td>Error caused by unexpected reason.</td>
+     <td><p>UnexpectedError</p></td>
+     <td><p>1</p></td>
+     <td><p>Error caused by unexpected reason.</p></td>
    </tr>
    <tr>
-     <td>ConnectFailed</td>
-     <td>2</td>
-     <td>*<em>This error is reserved and not used for now.</em></td>
+     <td><p>ConnectFailed</p></td>
+     <td><p>2</p></td>
+     <td><p>*<em>This error is reserved and not used for now.</em></p></td>
    </tr>
    <tr>
-     <td>PermissionDenied</td>
-     <td>3</td>
-     <td>*<em>This error is reserved and not used for now.</em></td>
+     <td><p>PermissionDenied</p></td>
+     <td><p>3</p></td>
+     <td><p>*<em>This error is reserved and not used for now.</em></p></td>
    </tr>
    <tr>
-     <td>CollectionNotExists</td>
-     <td>4</td>
-     <td>*<em>This error is reserved and not used for now.</em></td>
+     <td><p>CollectionNotExists</p></td>
+     <td><p>4</p></td>
+     <td><p>*<em>This error is reserved and not used for now.</em></p></td>
    </tr>
    <tr>
-     <td>IllegalArgument</td>
-     <td>5</td>
-     <td>The parameter is illegal on the server side.</td>
+     <td><p>IllegalArgument</p></td>
+     <td><p>5</p></td>
+     <td><p>The parameter is illegal on the server side.</p></td>
    </tr>
    <tr>
-     <td>IllegalDimension</td>
-     <td>7</td>
-     <td>*<em>This error is reserved and not used for now.</em></td>
+     <td><p>IllegalDimension</p></td>
+     <td><p>7</p></td>
+     <td><p>*<em>This error is reserved and not used for now.</em></p></td>
    </tr>
    <tr>
-     <td>IllegalIndexType</td>
-     <td>8</td>
-     <td>*<em>This error is reserved and not used for now.</em></td>
+     <td><p>IllegalIndexType</p></td>
+     <td><p>8</p></td>
+     <td><p>*<em>This error is reserved and not used for now.</em></p></td>
    </tr>
    <tr>
-     <td>IllegalCollectionName</td>
-     <td>9</td>
-     <td>*<em>This error is reserved and not used for now.</em></td>
+     <td><p>IllegalCollectionName</p></td>
+     <td><p>9</p></td>
+     <td><p>*<em>This error is reserved and not used for now.</em></p></td>
    </tr>
    <tr>
-     <td>IllegalTOPK</td>
-     <td>10</td>
-     <td>*<em>This error is reserved and not used for now.</em></td>
+     <td><p>IllegalTOPK</p></td>
+     <td><p>10</p></td>
+     <td><p>*<em>This error is reserved and not used for now.</em></p></td>
    </tr>
    <tr>
-     <td>IllegalRowRecord</td>
-     <td>11</td>
-     <td>*<em>This error is reserved and not used for now.</em></td>
+     <td><p>IllegalRowRecord</p></td>
+     <td><p>11</p></td>
+     <td><p>*<em>This error is reserved and not used for now.</em></p></td>
    </tr>
    <tr>
-     <td>IllegalVectorID</td>
-     <td>12</td>
-     <td>*<em>This error is reserved and not used for now.</em></td>
+     <td><p>IllegalVectorID</p></td>
+     <td><p>12</p></td>
+     <td><p>*<em>This error is reserved and not used for now.</em></p></td>
    </tr>
    <tr>
-     <td>IllegalSearchResult</td>
-     <td>13</td>
-     <td>*<em>This error is reserved and not used for now.</em></td>
+     <td><p>IllegalSearchResult</p></td>
+     <td><p>13</p></td>
+     <td><p>*<em>This error is reserved and not used for now.</em></p></td>
    </tr>
    <tr>
-     <td>FileNotFound</td>
-     <td>14</td>
-     <td>*<em>This error is reserved and not used for now.</em></td>
+     <td><p>FileNotFound</p></td>
+     <td><p>14</p></td>
+     <td><p>*<em>This error is reserved and not used for now.</em></p></td>
    </tr>
    <tr>
-     <td>MetaFailed</td>
-     <td>15</td>
-     <td>Getting metadata fails on the server side.</td>
+     <td><p>MetaFailed</p></td>
+     <td><p>15</p></td>
+     <td><p>Getting metadata fails on the server side.</p></td>
    </tr>
    <tr>
-     <td>CacheFailed</td>
-     <td>16</td>
-     <td>*<em>This error is reserved and not used for now.</em></td>
+     <td><p>CacheFailed</p></td>
+     <td><p>16</p></td>
+     <td><p>*<em>This error is reserved and not used for now.</em></p></td>
    </tr>
    <tr>
-     <td>CannotCreateFolder</td>
-     <td>17</td>
-     <td>*<em>This error is reserved and not used for now.</em></td>
+     <td><p>CannotCreateFolder</p></td>
+     <td><p>17</p></td>
+     <td><p>*<em>This error is reserved and not used for now.</em></p></td>
    </tr>
    <tr>
-     <td>CannotCreateFile</td>
-     <td>18</td>
-     <td>*<em>This error is reserved and not used for now.</em></td>
+     <td><p>CannotCreateFile</p></td>
+     <td><p>18</p></td>
+     <td><p>*<em>This error is reserved and not used for now.</em></p></td>
    </tr>
    <tr>
-     <td>CannotDeleteFolder</td>
-     <td>19</td>
-     <td>*<em>This error is reserved and not used for now.</em></td>
+     <td><p>CannotDeleteFolder</p></td>
+     <td><p>19</p></td>
+     <td><p>*<em>This error is reserved and not used for now.</em></p></td>
    </tr>
    <tr>
-     <td>CannotDeleteFile</td>
-     <td>20</td>
-     <td>*<em>This error is reserved and not used for now.</em></td>
+     <td><p>CannotDeleteFile</p></td>
+     <td><p>20</p></td>
+     <td><p>*<em>This error is reserved and not used for now.</em></p></td>
    </tr>
    <tr>
-     <td>BuildIndexError</td>
-     <td>21</td>
-     <td>*<em>This error is reserved and not used for now.</em></td>
+     <td><p>BuildIndexError</p></td>
+     <td><p>21</p></td>
+     <td><p>*<em>This error is reserved and not used for now.</em></p></td>
    </tr>
    <tr>
-     <td>IllegalNLIST</td>
-     <td>22</td>
-     <td>*<em>This error is reserved and not used for now.</em></td>
+     <td><p>IllegalNLIST</p></td>
+     <td><p>22</p></td>
+     <td><p>*<em>This error is reserved and not used for now.</em></p></td>
    </tr>
    <tr>
-     <td>IllegalMetricType</td>
-     <td>23</td>
-     <td>*<em>This error is reserved and not used for now.</em></td>
+     <td><p>IllegalMetricType</p></td>
+     <td><p>23</p></td>
+     <td><p>*<em>This error is reserved and not used for now.</em></p></td>
    </tr>
    <tr>
-     <td>OutOfMemory</td>
-     <td>24</td>
-     <td>*<em>This error is reserved and not used for now.</em></td>
+     <td><p>OutOfMemory</p></td>
+     <td><p>24</p></td>
+     <td><p>*<em>This error is reserved and not used for now.</em></p></td>
    </tr>
    <tr>
-     <td>IndexNotExist</td>
-     <td>25</td>
-     <td>*<em>This error is reserved and not used for now.</em></td>
+     <td><p>IndexNotExist</p></td>
+     <td><p>25</p></td>
+     <td><p>*<em>This error is reserved and not used for now.</em></p></td>
    </tr>
    <tr>
-     <td>EmptyCollection</td>
-     <td>26</td>
-     <td>*<em>This error is reserved and not used for now.</em></td>
+     <td><p>EmptyCollection</p></td>
+     <td><p>26</p></td>
+     <td><p>*<em>This error is reserved and not used for now.</em></p></td>
    </tr>
 </table>
 
-## Methods
+#### Methods
 
 <table>
     <tr>
-        <th>Method</th>
-        <th>Description</th>
-        <th>Return</th>
+        <th><p>Method</p></th>
+        <th><p>Description</p></th>
+        <th><p>Return</p></th>
     </tr>
     <tr>
-        <td>getMessage()</td>
-        <td>Gets the error message.</td>
-        <td>String</td>
+        <td><p>getMessage()</p></td>
+        <td><p>Gets the error message.</p></td>
+        <td><p>String</p></td>
     </tr>
     <tr>
-        <td>getStatus()</td>
-        <td>Gets the status code.</td>
-        <td>Integer</td>
+        <td><p>getStatus()</p></td>
+        <td><p>Gets the status code.</p></td>
+        <td><p>Integer</p></td>
     </tr>
     <tr>
-        <td>getData()</td>
-        <td>Gets the response object returned by the server.</td>
-        <td>RPC response class</td>
+        <td><p>getData()</p></td>
+        <td><p>Gets the response object returned by the server.</p></td>
+        <td><p>RPC response class</p></td>
     </tr>
 </table>
 
-## Example
+#### Example
 
 ```java
 import io.milvus.param.*;

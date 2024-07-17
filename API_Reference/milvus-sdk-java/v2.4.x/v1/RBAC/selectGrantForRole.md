@@ -6,7 +6,7 @@ MilvusClient interface. This method lists grant info for the role and the specif
 R<SelectGrantResponse> selectGrantForRole(SelectGrantForRoleParam requestParam);
 ```
 
-## SelectGrantForRoleParam
+#### SelectGrantForRoleParam
 
 Use the `SelectGrantForRoleParam.Builder` to construct a `SelectGrantForRoleParam` object.
 
@@ -19,19 +19,24 @@ Methods of `SelectGrantForRoleParam.Builder`:
 
 <table>
     <tr>
-        <th>Method</th>
-        <th>Description</th>
-        <th>Parameters</th>
+        <th><p>Method</p></th>
+        <th><p>Description</p></th>
+        <th><p>Parameters</p></th>
     </tr>
     <tr>
-        <td>withRoleName(String roleName)</td>
-        <td>Sets the roleName. RoleName cannot be empty or null.</td>
-        <td>roleName: The role name used to create the privilege.</td>
+        <td><p>withRoleName(String roleName)</p></td>
+        <td><p>Sets the roleName. RoleName cannot be empty or null.</p></td>
+        <td><p>roleName: The role name used to create the privilege.</p></td>
     </tr>
     <tr>
-        <td>build()</td>
-        <td>Construct a SelectGrantForRoleParam object.</td>
-        <td>N/A</td>
+        <td><p>withDatabaseName(String databaseName)</p></td>
+        <td><p>Sets the database name. database name can be null for default database.</p></td>
+        <td><p>databaseName: The database name.</p></td>
+    </tr>
+    <tr>
+        <td><p>build()</p></td>
+        <td><p>Construct a SelectGrantForRoleParam object.</p></td>
+        <td><p>N/A</p></td>
     </tr>
 </table>
 
@@ -39,7 +44,7 @@ The `SelectGrantForRoleParam.Builder.build()` can throw the following exceptions
 
 - ParamException: error if the parameter is invalid.
 
-## Returns
+#### Returns
 
 This method catches all the exceptions and returns an `R<SelectGrantResponse>` object.
 
@@ -49,7 +54,7 @@ This method catches all the exceptions and returns an `R<SelectGrantResponse>` o
 
 - If the API succeeds, it returns a valid `SelectGrantResponse` held by the `R` template. You can use `SelectGrantResponse` to get the grant information.
 
-## Example
+#### Example
 
 ```java
 import io.milvus.param.SelectGrantForRoleParam;

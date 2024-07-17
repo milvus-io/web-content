@@ -6,12 +6,12 @@ The MilvusClient interface. This method creates a database*.*
 R<RpcStatus> createDatabase(CreateDatabaseParam requestParam);
 ```
 
-## CreateDatabaseParam
+#### CreateDatabaseParam
 
 Use the `CreateDatabaseParam.Builder` to construct a `CreateDatabaseParam` object.
 
 ```java
-import io.milvus.param.CreateDatabaseParam;
+import io.milvus.param.collection.CreateDatabaseParam;
 CreateDatabaseParam.Builder builder = CreateDatabaseParam.newBuilder()
 ```
 
@@ -19,19 +19,19 @@ Methods of `CreateDatabaseParam.Builder`:
 
 <table>
     <tr>
-        <th>Method</th>
-        <th>Description</th>
-        <th>Parameters</th>
+        <th><p>Method</p></th>
+        <th><p>Description</p></th>
+        <th><p>Parameters</p></th>
     </tr>
     <tr>
-        <td>withDatabaseName(String databaseName)</td>
-        <td>Sets the database name. Database name cannot be empty or null.</td>
-        <td>databaseName: The database name.</td>
+        <td><p>withDatabaseName(String databaseName)</p></td>
+        <td><p>Sets the database name. Database name cannot be empty or null.</p></td>
+        <td><p>databaseName: The database name.</p></td>
     </tr>
     <tr>
-        <td>build()</td>
-        <td>Construct a CreateDatabaseParam object.</td>
-        <td>N/A</td>
+        <td><p>build()</p></td>
+        <td><p>Construct a CreateDatabaseParam object.</p></td>
+        <td><p>N/A</p></td>
     </tr>
 </table>
 
@@ -39,7 +39,7 @@ The `CreateDatabaseParam.Builder.build()` can throw the following exceptions:
 
 - ParamException: error if the parameter is invalid.
 
-## Returns
+#### Returns
 
 This method catches all the exceptions and returns an `R<RpcStatus>` object.
 
@@ -49,10 +49,10 @@ This method catches all the exceptions and returns an `R<RpcStatus>` object.
 
 - If the API succeeds, it returns `R.Status.Success`.
 
-## Example
+#### Example
 
 ```java
-import io.milvus.param.*;
+import io.milvus.param.collection.CreateDatabaseParam;
 
 CreateDatabaseParam param = CreateDatabaseParam.newBuilder()
         .withDatabaseName("mydb")

@@ -6,7 +6,7 @@ MilvusClient interface. This method shows all partitions in the specified collec
 R<ShowPartitionsResponse> showPartitions(ShowPartitionsParam requestParam);
 ```
 
-## ShowPartitionsParam
+#### ShowPartitionsParam
 
 Use the `ShowPartitionsParam.Builder` to construct a `ShowPartitionsParam` object.
 
@@ -19,29 +19,34 @@ Methods of `ShowPartitionsParam.Builder`:
 
 <table>
     <tr>
-        <th>Method</th>
-        <th>Description</th>
-        <th>Parameters</th>
+        <th><p>Method</p></th>
+        <th><p>Description</p></th>
+        <th><p>Parameters</p></th>
     </tr>
     <tr>
-        <td>withCollectionName(String collectionName)</td>
-        <td>Set the collection name. Collection name cannot be empty or null.</td>
-        <td>collectionName: The target collection name.</td>
+        <td><p>withCollectionName(String collectionName)</p></td>
+        <td><p>Set the collection name. Collection name cannot be empty or null.</p></td>
+        <td><p>collectionName: The target collection name.</p></td>
     </tr>
     <tr>
-        <td>withPartitionNames(List\<String> partitionNames)</td>
-        <td>Set the partition names list. Partition names list cannot be null or empty.</td>
-        <td>partitionNames: The name list of partitions to show.</td>
+        <td><p>withDatabaseName(String databaseName)</p></td>
+        <td><p>Sets the database name. database name can be null for default database.</p></td>
+        <td><p>databaseName: The database name.</p></td>
     </tr>
     <tr>
-        <td>addPartitionName(String partitionName)</td>
-        <td>Add a partition by name. Partition name cannot be empty or null.</td>
-        <td>partitionName: A target partition name.</td>
+        <td><p>withPartitionNames(List\<String> partitionNames)</p></td>
+        <td><p>Set the partition names list. Partition names list cannot be null or empty.</p></td>
+        <td><p>partitionNames: The name list of partitions to show.</p></td>
     </tr>
     <tr>
-        <td>build()</td>
-        <td>Construct a ShowPartitionsParam object.</td>
-        <td>N/A</td>
+        <td><p>addPartitionName(String partitionName)</p></td>
+        <td><p>Add a partition by name. Partition name cannot be empty or null.</p></td>
+        <td><p>partitionName: A target partition name.</p></td>
+    </tr>
+    <tr>
+        <td><p>build()</p></td>
+        <td><p>Construct a ShowPartitionsParam object.</p></td>
+        <td><p>N/A</p></td>
     </tr>
 </table>
 
@@ -49,7 +54,7 @@ The `ShowPartitionsParam.Builder.build()` can throw the following exceptions:
 
 - ParamException: error if the parameter is invalid.
 
-## Returns
+#### Returns
 
 This method catches all the exceptions and returns an `R<ShowPartitionsResponse>` object.
 
@@ -59,7 +64,7 @@ This method catches all the exceptions and returns an `R<ShowPartitionsResponse>
 
 - If the API succeeds, it returns a valid `ShowPartitionsResponse` held by the `R` template. You can use ShowPartResponseWrapper to get information easily.
 
-## ShowPartResponseWrapper
+#### ShowPartResponseWrapper
 
 A tool class to encapsulate the `ShowPartitionsResponse`. 
 
@@ -72,26 +77,26 @@ Methods of `ShowPartitionsResponse`:
 
 <table>
    <tr>
-     <th><strong>Method</strong></th>
-     <th><strong>Description</strong></th>
-     <th><strong>Parameters</strong></th>
-     <th><strong>Returns</strong></th>
+     <th><p><strong>Method</strong></p></th>
+     <th><p><strong>Description</strong></p></th>
+     <th><p><strong>Parameters</strong></p></th>
+     <th><p><strong>Returns</strong></p></th>
    </tr>
    <tr>
-     <td>getPartitionsInfo()<br/></td>
-     <td>Return a list of PartitionInfo.</td>
-     <td>N/A</td>
-     <td>List\<PartitionInfo></td>
+     <td><p>getPartitionsInfo()</p></td>
+     <td><p>Return a list of PartitionInfo.</p></td>
+     <td><p>N/A</p></td>
+     <td><p>List\<PartitionInfo></p></td>
    </tr>
    <tr>
-     <td>getPartitionInfoByName(String partitionName)<br/></td>
-     <td>Return a PartitionInfo object by a partition name.</td>
-     <td>partitionName: The target partition name.</td>
-     <td>PartitionInfo</td>
+     <td><p>getPartitionInfoByName(String partitionName)</p></td>
+     <td><p>Return a PartitionInfo object by a partition name.</p></td>
+     <td><p>partitionName: The target partition name.</p></td>
+     <td><p>PartitionInfo</p></td>
    </tr>
 </table>
 
-## PartitionInfo
+#### PartitionInfo
 
 A tool class to hold information of a partition.
 
@@ -99,28 +104,28 @@ Methods of `ShowPartitionsResponse.PartitionInfo`
 
 <table>
    <tr>
-     <th><strong>Method</strong></th>
-     <th><strong>Description</strong></th>
-     <th><strong>Returns</strong></th>
+     <th><p><strong>Method</strong></p></th>
+     <th><p><strong>Description</strong></p></th>
+     <th><p><strong>Returns</strong></p></th>
    </tr>
    <tr>
-     <td>getIndexType()</td>
-     <td>Get index type.</td>
-     <td>IndexType</td>
+     <td><p>getIndexType()</p></td>
+     <td><p>Get index type.</p></td>
+     <td><p>IndexType</p></td>
    </tr>
    <tr>
-     <td>getMetricType()</td>
-     <td>Get metric type.</td>
-     <td>MetricType</td>
+     <td><p>getMetricType()</p></td>
+     <td><p>Get metric type.</p></td>
+     <td><p>MetricType</p></td>
    </tr>
    <tr>
-     <td>getExtraParam()</td>
-     <td>Get index parameters in JSON format.</td>
-     <td>String</td>
+     <td><p>getExtraParam()</p></td>
+     <td><p>Get index parameters in JSON format.</p></td>
+     <td><p>String</p></td>
    </tr>
 </table>
 
-## Example
+#### Example
 
 ```java
 import io.milvus.param.*;

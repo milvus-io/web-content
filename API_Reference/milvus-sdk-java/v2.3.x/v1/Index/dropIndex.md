@@ -6,7 +6,7 @@ MilvusClient interface. This method drops an index of a field for the specified 
 R<RpcStatus> dropIndex(DropIndexParam requestParam);
 ```
 
-## DropIndexParam
+#### DropIndexParam
 
 Use the `DropIndexParam.Builder` to construct a `DropIndexParam` object.
 
@@ -19,24 +19,29 @@ Methods of `DropIndexParam.Builder`:
 
 <table>
     <tr>
-        <th>Method</th>
-        <th>Description</th>
-        <th>Parameters</th>
+        <th><p>Method</p></th>
+        <th><p>Description</p></th>
+        <th><p>Parameters</p></th>
     </tr>
     <tr>
-        <td>withCollectionName(collectionName)</td>
-        <td>Set the collection name. Collection name cannot be empty or null.</td>
-        <td>collectionName: The target collection name.</td>
+        <td><p>withCollectionName(collectionName)</p></td>
+        <td><p>Set the collection name. Collection name cannot be empty or null.</p></td>
+        <td><p>collectionName: The target collection name.</p></td>
     </tr>
     <tr>
-        <td>withIndexName(String indexName)</td>
-        <td>The name of index which will be dropped. If no index name is specified, the default index name is empty string which means let the server determine it.</td>
-        <td>indexName: The name of the index.</td>
+        <td><p>withDatabaseName(String databaseName)</p></td>
+        <td><p>Sets the database name. database name can be null for default database.</p></td>
+        <td><p>databaseName: The database name.</p></td>
     </tr>
     <tr>
-        <td>build()</td>
-        <td>Construct a CreateAliasParam object.</td>
-        <td>N/A</td>
+        <td><p>withIndexName(String indexName)</p></td>
+        <td><p>The name of index which will be dropped. If no index name is specified, the default index name is empty string which means let the server determine it.</p></td>
+        <td><p>indexName: The name of the index.</p></td>
+    </tr>
+    <tr>
+        <td><p>build()</p></td>
+        <td><p>Construct a CreateAliasParam object.</p></td>
+        <td><p>N/A</p></td>
     </tr>
 </table>
 
@@ -44,7 +49,7 @@ The `DropIndexParam.Builder.build()` can throw the following exceptions:
 
 - ParamException: error if the parameter is invalid.
 
-## Returns
+#### Returns
 
 This method catches all the exceptions and returns an `R<RpcStatus>` object.
 
@@ -54,7 +59,7 @@ This method catches all the exceptions and returns an `R<RpcStatus>` object.
 
 - If the API succeeds, it returns `R.Status.Success`.
 
-## Example
+#### Example
 
 ```java
 import io.milvus.param.*;
