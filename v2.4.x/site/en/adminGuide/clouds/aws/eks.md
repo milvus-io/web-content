@@ -127,9 +127,9 @@ You can set up the required AWS resources, including an AWS S3 bucket and an EKS
 
 - Attach the policy to your AWS User.
   
-      ```shell
-      aws iam attach-user-policy --user-name <your-user-name> --policy-arn "arn:aws:iam::<your-iam-account-id>:policy/MilvusS3ReadWrite"
-      ```
+  ```shell
+  aws iam attach-user-policy --user-name <your-user-name> --policy-arn "arn:aws:iam::<your-iam-account-id>:policy/MilvusS3ReadWrite"
+  ```
 
 ### Create an Amazon EKS Cluster
 
