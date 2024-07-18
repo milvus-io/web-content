@@ -44,7 +44,7 @@ from pymilvus import connections, db
 
 conn = connections.connect(host="127.0.0.1", port=19530)
 
-database = db.create_database("book")
+database = db.create_database("my_database")
 ```
 
 ```java
@@ -62,7 +62,7 @@ MilvusServiceClient client = new MilvusServiceClient(connectParam);
 
 // 3. Create a new database
 CreateDatabaseParam createDatabaseParam = CreateDatabaseParam.newBuilder()
-    .withDatabaseName("my_database")
+    .withDatabaseName("")
     .build();
 
 R<RpcStatus> response = client.createDatabase(createDatabaseParam);
@@ -76,7 +76,7 @@ client = new MilvusClient({address});
 
 // 3. Create a database
 res = await client.createDatabase({
-    db_name: "my_db"
+    db_name: "my_database"
 })
 
 console.log(res)
@@ -105,7 +105,7 @@ To change the default database, do as follows:
 </div>
 
 ```python
-db.using_database("book")
+db.using_database("my_database")
 ```
 
 ```java
@@ -115,7 +115,7 @@ db.using_database("book")
 ```javascript
 // 4. Activate another database
 res = await client.useDatabase({
-    db_name: "my_db"
+    db_name: "my_database"
 })
 
 console.log(res)
@@ -209,7 +209,7 @@ res = await client.listDatabases()
 
 console.log(res.db_names)
 
-// [ 'default', 'my_db' ]
+// [ 'default', 'my_database' ]
 ```
 
 ## Drop database
@@ -241,7 +241,7 @@ To drop a database, use the [dropDatabase()](https://milvus.io/api-reference/nod
 </div>
 
 ```python
-db.drop_database("book")
+db.drop_database("my_database")
 
 db.list_database()
 
@@ -261,7 +261,7 @@ response = client.dropDatabase(dropDatabaseParam);
 
 ```javascript
 res = await client.dropDatabase({
-    db_name: "my_db"
+    db_name: "my_database"
 })
 ```
 
