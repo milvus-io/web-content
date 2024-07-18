@@ -16,7 +16,7 @@ This guide describes how to upgrade your Milvus cluster with Milvus operator.
 
 ## Upgrade your Milvus operator
 
-Run the following command to upgrade the version of your Milvus Operator to v0.9.17.
+Run the following command to upgrade the version of your Milvus Operator to v1.0.0.
 
 ```
 helm repo add zilliztech-milvus-operator https://zilliztech.github.io/milvus-operator/
