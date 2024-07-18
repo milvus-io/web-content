@@ -103,7 +103,6 @@ _Mar 2024 - Milvus 2.4.0 release_
 - Added guidance on how to [conduct hybrid search](multi-vector-search.md).
 - Added description of [GPU index](gpu_index.md).
 - Added guidance on how to [embed your data using PyMilvus](embeddings.md).
-- Added guidance on how to [enable RBAC](rbac.md) with Milvus Operator.
 - Added descriptions of [Milvus CDC](milvus-cdc-overview.md).
 
 </div>

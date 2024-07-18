@@ -32,7 +32,7 @@ Under this section, you can configure query node port, graceful time, etc.
         <li>Milvus executes a search request directly when the search message timestamp is earlier the query node system time.</li>
         <li>When the search message timestamp is later than the query node system time, the Milvus waits until that the time diferrence between query node system time and the timestamp is less than this parameter, and then executes the search request.</li>
       </td>
-      <td>0</td>
+      <td>5000</td>
     </tr>
   </tbody>
 </table>

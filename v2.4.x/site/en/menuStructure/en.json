@@ -699,52 +699,76 @@
             "isMenu": true,
             "children": [
               {
-                "label": "Amazon EC2",
-                "id": "aws.md",
+                "label": "AWS",
+                "id": "aws",
                 "order": 0,
-                "children": []
+                "isMenu": true,
+                "children": [
+                  {
+                    "label": "Amazon EC2",
+                    "id": "aws.md",
+                    "order": 0,
+                    "children": []
+                  },
+                  {
+                    "label": "Deploy Milvus on AWS",
+                    "id": "eks.md",
+                    "order": 1,
+                    "children": []
+                  }
+                ]
               },
               {
-                "label": "Deploy Milvus on AWS",
-                "id": "eks.md",
-                "order": 1,
-                "children": []
+                "label": "GCP",
+                "id": "gcp",
+                "order": 0,
+                "isMenu": true,
+                "children": [
+                  {
+                    "label": "Deploy Milvus on GCP",
+                    "id": "gcp.md",
+                    "order": 2,
+                    "children": []
+                  },
+                  {
+                    "label": "Google Cloud Storage",
+                    "id": "gcs.md",
+                    "order": 4,
+                    "children": []
+                  },
+                  {
+                    "label": "GCP Layer-7 Load Balancing",
+                    "id": "gcp_layer7.md",
+                    "order": 5,
+                    "children": []
+                  }
+                ]
               },
               {
-                "label": "Deploy Milvus on GCP",
-                "id": "gcp.md",
-                "order": 2,
-                "children": []
-              },
-              {
-                "label": "Deploy Milvus on Azure",
-                "id": "azure.md",
-                "order": 3,
-                "children": []
-              },
-              {
-                "label": "Google Cloud Storage",
-                "id": "gcs.md",
-                "order": 4,
-                "children": []
-              },
-              {
-                "label": "GCP Layer-7 Load Balancing",
-                "id": "gcp_layer7.md",
-                "order": 5,
-                "children": []
-              },
-              {
-                "label": "Microsoft Azure Blob Storage",
-                "id": "abs.md",
-                "order": 6,
-                "children": []
-              },
-              {
-                "label": "Ingress Nginx",
-                "id": "ingress.md",
-                "order": 7,
-                "children": []
+                "label": "Azure",
+                "id": "azure",
+                "order": 0,
+                "isMenu": true,
+                "children": [
+                  {
+                    "label": "Deploy Milvus on Azure",
+                    "id": "azure.md",
+                    "order": 3,
+                    "children": []
+                  },
+                  {
+                    "label": "Microsoft Azure Blob Storage",
+                    "id": "abs.md",
+                    "order": 6,
+                    "children": []
+                  },
+                  {
+                    "label": "Ingress Nginx",
+                    "id": "ingress.md",
+                    "order": 7,
+                    "children": []
+                  }
+                ]
               }
             ]
           }
