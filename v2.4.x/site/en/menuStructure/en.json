@@ -62,15 +62,21 @@
         "isMenu": true,
         "children": [
           {
+            "label": "Overview",
+            "id": "install-overview.md",
+            "order": 0,
+            "children": []
+          },
+          {
             "label": "Run Milvus Lite",
             "id": "milvus_lite.md",
-            "order": 0,
+            "order": 1,
             "children": []
           },
           {
             "label": "Run Milvus in Docker",
             "id": "run_milvus_docker",
-            "order": 1,
+            "order": 2,
             "isMenu": true,
             "children": [
               {
@@ -96,7 +102,7 @@
           {
             "label": "Run Milvus in Kubernetes",
             "id": "run_milvus_k8s",
-            "order": 2,
+            "order": 3,
             "isMenu": true,
             "children": [
               {
@@ -122,7 +128,7 @@
           {
             "label": "Run Milvus with GPU",
             "id": "run_milvus_gpu",
-            "order": 3,
+            "order": 4,
             "isMenu": true,
             "children": [
               {
@@ -699,73 +705,59 @@
             "isMenu": true,
             "children": [
               {
-                "label": "AWS",
-                "id": "aws",
-                "order": 0,
-                "isMenu": true,
-                "children": [
-                  {
-                    "label": "Amazon EC2",
-                    "id": "aws.md",
-                    "order": 0,
-                    "children": []
-                  },
-                  {
-                    "label": "Deploy Milvus on AWS",
-                    "id": "eks.md",
-                    "order": 1,
-                    "children": []
-                  }
-                ]
+                "label": "Deploy Milvus on AWS",
+                "id": "eks.md",
+                "order": 1,
+                "children": []
               },
               {
-                "label": "GCP",
-                "id": "gcp",
-                "order": 0,
+                "label": "Deploy Milvus on GCP",
+                "id": "gcp.md",
+                "order": 2,
+                "children": []
+              },
+              {
+                "label": "Deploy Milvus on Azure",
+                "id": "azure.md",
+                "order": 3,
+                "children": []
+              },
+              {
+                "label": "Layer-7 Load Balacing",
+                "id": "layer-7-lb",
+                "order": 4,
                 "isMenu": true,
                 "children": [
-                  {
-                    "label": "Deploy Milvus on GCP",
-                    "id": "gcp.md",
-                    "order": 2,
-                    "children": []
-                  },
-                  {
-                    "label": "Google Cloud Storage",
-                    "id": "gcs.md",
-                    "order": 4,
-                    "children": []
-                  },
                   {
                     "label": "GCP Layer-7 Load Balancing",
                     "id": "gcp_layer7.md",
-                    "order": 5,
+                    "order": 1,
+                    "children": []
+                  },
+                  {
+                    "label": "Azure Ingress Nginx",
+                    "id": "ingress.md",
+                    "order": 2,
                     "children": []
                   }
                 ]
               },
               {
-                "label": "Azure",
-                "id": "azure",
-                "order": 0,
+                "label": "Cloud Storage",
+                "id": "cloud-storage",
+                "order": 5,
                 "isMenu": true,
                 "children": [
                   {
-                    "label": "Deploy Milvus on Azure",
-                    "id": "azure.md",
-                    "order": 3,
+                    "label": "Google Cloud Storage",
+                    "id": "gcs.md",
+                    "order": 1,
                     "children": []
                   },
                   {
-                    "label": "Microsoft Azure Blob Storage",
+                    "label": "Azure Blob Storage",
                     "id": "abs.md",
-                    "order": 6,
-                    "children": []
-                  },
-                  {
-                    "label": "Ingress Nginx",
-                    "id": "ingress.md",
-                    "order": 7,
+                    "order": 2,
                     "children": []
                   }
                 ]
@@ -822,6 +814,12 @@
             "label": "Coordinator HA",
             "id": "coordinator_ha.md",
             "order": 4,
+            "children": []
+          },
+          {
+            "label": "QueryNode Using Local Disk",
+            "id": "configure-querynode-localdisk.md",
+            "order": 5,
             "children": []
           }
         ]

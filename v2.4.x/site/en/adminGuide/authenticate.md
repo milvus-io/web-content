@@ -168,7 +168,6 @@ client.list_users()
 - You might also want to learn how to:
   - [Scale a Milvus cluster](scaleout.md)
 - If you are ready to deploy your cluster on clouds:
-  - Learn how to [Deploy Milvus on AWS with Terraform and Ansible](aws.md)
   - Learn how to [Deploy Milvus on Amazon EKS with Terraform](eks.md)
   - Learn how to [Deploy Milvus Cluster on GCP with Kubernetes](gcp.md)
   - Learn how to [Deploy Milvus on Microsoft Azure With Kubernetes](azure.md)

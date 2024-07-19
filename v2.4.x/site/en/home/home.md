@@ -77,7 +77,7 @@ id: home.md
 
 - [Configure Milvus](configure-docker.md)
 - [Manage Dependencies](deploy_s3.md)
-- [Deploy on Clouds](aws.md)
+- [Deploy on Clouds](eks.md)
 - [Scale a Milvus Cluster](scaleout.md)
 - [Monitor and Alert](monitor_overview.md)
 </div>

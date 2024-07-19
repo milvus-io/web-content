@@ -126,7 +126,6 @@ my-release-minio-5564fbbddc-9sbgv               1/1     Running   0          2m
   - Learn [Monitor Milvus with Prometheus Operator on Kubernetes](monitor.md)
 
 - If you are ready to deploy your cluster on clouds:
-  - Learn how to [Deploy Milvus on AWS with Terraform and Ansible](aws.md)
   - Learn how to [Deploy Milvus on Amazon EKS with Terraform](eks.md)
   - Learn how to [Deploy Milvus Cluster on GCP with Kubernetes](gcp.md)
   - Learn how to [Deploy Milvus on Microsoft Azure With Kubernetes](azure.md)
