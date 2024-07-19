@@ -91,6 +91,7 @@ Having installed Milvus in Docker, you can:
   - [Google Cloud Storage](gcs.md)
   - [Microsoft Azure](azure.md)
   - [Microsoft Azure Blob Storage](abs.md)
+  - [OpenShift](openshift.md)
 - Explore [Milvus Backup](milvus_backup_overview.md), an open-source tool for Milvus data backups.
 - Explore [Birdwatcher](birdwatcher_overview.md), an open-source tool for debugging Milvus and dynamic configuration updates.
 - Explore [Attu](https://github.com/zilliztech/attu), an open-source GUI tool for intuitive Milvus management.

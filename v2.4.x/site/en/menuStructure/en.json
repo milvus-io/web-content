@@ -769,6 +769,20 @@
                     "children": []
                   }
                 ]
+              },
+              {
+                "label": "OpenShift",
+                "id": "openshift",
+                "order": 8,
+                "isMenu": true,
+                "children": [
+                  {
+                    "label": "Deploy Milvus on OpenShift",
+                    "id": "openshift.md",
+                    "order": 0,
+                    "children": []
+                  }
+                ]
               }
             ]
           }
