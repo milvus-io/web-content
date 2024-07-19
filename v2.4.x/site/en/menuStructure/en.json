@@ -705,27 +705,33 @@
             "isMenu": true,
             "children": [
               {
-                "label": "Deploy Milvus on AWS",
+                "label": "Deploy on AWS",
                 "id": "eks.md",
                 "order": 1,
                 "children": []
               },
               {
-                "label": "Deploy Milvus on GCP",
+                "label": "Deploy on GCP",
                 "id": "gcp.md",
                 "order": 2,
                 "children": []
               },
               {
-                "label": "Deploy Milvus on Azure",
+                "label": "Deploy on Azure",
                 "id": "azure.md",
                 "order": 3,
                 "children": []
               },
               {
+                "label": "Deploy on OpenShift",
+                "id": "openshift.md",
+                "order": 4,
+                "children": []
+              },
+              {
                 "label": "Layer-7 Load Balacing",
                 "id": "layer-7-lb",
-                "order": 4,
+                "order": 5,
                 "isMenu": true,
                 "children": [
                   {
@@ -745,7 +751,7 @@
               {
                 "label": "Cloud Storage",
                 "id": "cloud-storage",
-                "order": 5,
+                "order": 6,
                 "isMenu": true,
                 "children": [
                   {
@@ -758,20 +764,6 @@
                     "label": "Azure Blob Storage",
                     "id": "abs.md",
                     "order": 2,
-                    "children": []
-                  }
-                ]
-              },
-              {
-                "label": "OpenShift",
-                "id": "openshift",
-                "order": 8,
-                "isMenu": true,
-                "children": [
-                  {
-                    "label": "Deploy Milvus on OpenShift",
-                    "id": "openshift.md",
-                    "order": 0,
                     "children": []
                   }
                 ]
