@@ -199,3 +199,11 @@ display(concatenated_image)
 
 
 We can see that most of the images are from the same category as the search image, which is the Afghan hound. This means that we found similar images to the search image.
+
+## Quick Deploy
+
+To learn about how to start an online demo with this tutorial, please refer to [the example application](https://github.com/milvus-io/bootcamp/tree/master/bootcamp/tutorials/quickstart/apps/image_search_with_milvus).
+
+<img src="https://raw.githubusercontent.com/milvus-io/bootcamp/master/bootcamp/tutorials/quickstart/apps/image_search_with_milvus/pics/image_search_demo.png"/>
+
+

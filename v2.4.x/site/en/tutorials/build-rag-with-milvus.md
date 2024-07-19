@@ -38,30 +38,29 @@ os.environ["OPENAI_API_KEY"] = "sk-***********"
 
 ### Prepare the data
 
-We use the [Milvus development guide](https://github.com/milvus-io/milvus/blob/master/DEVELOPMENT.md) to be as the private knowledge in our RAG, which is a good data source for a simple RAG pipeline.
+We use the FAQ pages from the [Milvus Documentation 2.4.x](https://github.com/milvus-io/milvus-docs/releases/download/v2.4.6-preview/milvus_docs_2.4.x_en.zip) as the private knowledge in our RAG, which is a good data source for a simple RAG pipeline.
 
-Download it and save it as a local text file.
+Download the zip file and extract documents to the folder `milvus_docs`.
 
 
-```python
-import json
-import urllib.request
-
-url = "https://raw.githubusercontent.com/milvus-io/milvus/master/DEVELOPMENT.md"
-file_path = "./Milvus_DEVELOPMENT.md"
-
-if not os.path.exists(file_path):
-    urllib.request.urlretrieve(url, file_path)
+```bash
+$ wget https://github.com/milvus-io/milvus-docs/releases/download/v2.4.6-preview/milvus_docs_2.4.x_en.zip
+$ unzip -q milvus_docs_2.4.x_en.zip -d milvus_docs
 ```
 
-We simply use "# " to separate the content in the file, which can roughly separate the content of each main part of the markdown file.
+We load all markdown files from the folder `milvus_docs/en/faq`. For each document, we just simply use "# " to separate the content in the file, which can roughly separate the content of each main part of the markdown file.
 
 
 ```python
-with open(file_path, "r") as file:
-    file_text = file.read()
+from glob import glob
 
-text_lines = file_text.split("# ")
+text_lines = []
+
+for file_path in glob("milvus_docs/en/faq/*.md", recursive=True):
+    with open(file_path, "r") as file:
+        file_text = file.read()
+
+    text_lines += file_text.split("# ")
 ```
 
 ### Prepare the Embedding Model
@@ -98,7 +97,7 @@ print(test_embedding[:10])
 ```
 
     1536
-    [0.009907577186822891, -0.0055520725436508656, 0.006800490897148848, -0.0380667969584465, -0.018235687166452408, -0.04122573509812355, -0.007634099572896957, 0.03221159428358078, 0.0189057644456625, 9.491520904703066e-05]
+    [0.00988506618887186, -0.005540902726352215, 0.0068014683201909065, -0.03810417652130127, -0.018254263326525688, -0.041231658309698105, -0.007651153020560741, 0.03220026567578316, 0.01892443746328354, 0.00010708322952268645]
 
 
 ## Load data into Milvus
@@ -163,14 +162,14 @@ for i, line in enumerate(tqdm(text_lines, desc="Creating embeddings")):
 milvus_client.insert(collection_name=collection_name, data=data)
 ```
 
-    Creating embeddings: 100%|█| 47/47 [00:16<00:00,  
+    Creating embeddings: 100%|██████████| 72/72 [00:27<00:00,  2.67it/s]
 
 
 
 
 
-    {'insert_count': 47,
-     'ids': [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46],
+    {'insert_count': 72,
+     'ids': [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71],
      'cost': 0}
 
 
@@ -179,11 +178,11 @@ milvus_client.insert(collection_name=collection_name, data=data)
 
 ### Retrieve data for a query
 
-Let's define a query question about the content of the development guide documentation.
+Let's specify a frequent question about Milvus.
 
 
 ```python
-question = "what is the hardware requirements specification if I want to build Milvus and run from source code?"
+question = "How is data stored in milvus?"
 ```
 
 Search for the question in the collection and retrieve the semantic top-3 matches.
@@ -206,6 +205,8 @@ Let's take a look at the search results of the query
 
 
 ```python
+import json
+
 retrieved_lines_with_distances = [
     (res["entity"]["text"], res["distance"]) for res in search_res[0]
 ]
@@ -214,16 +215,16 @@ print(json.dumps(retrieved_lines_with_distances, indent=4))
 
     [
         [
-            "Hardware Requirements\n\nThe following specification (either physical or virtual machine resources) is recommended for Milvus to build and run from source code.\n\n```\n- 8GB of RAM\n- 50GB of free disk space\n```\n\n##",
-            0.7718855142593384
+            " Where does Milvus store data?\n\nMilvus deals with two types of data, inserted data and metadata. \n\nInserted data, including vector data, scalar data, and collection-specific schema, are stored in persistent storage as incremental log. Milvus supports multiple object storage backends, including [MinIO](https://min.io/), [AWS S3](https://aws.amazon.com/s3/?nc1=h_ls), [Google Cloud Storage](https://cloud.google.com/storage?hl=en#object-storage-for-companies-of-all-sizes) (GCS), [Azure Blob Storage](https://azure.microsoft.com/en-us/products/storage/blobs), [Alibaba Cloud OSS](https://www.alibabacloud.com/product/object-storage-service), and [Tencent Cloud Object Storage](https://www.tencentcloud.com/products/cos) (COS).\n\nMetadata are generated within Milvus. Each Milvus module has its own metadata that are stored in etcd.\n\n###",
+            0.7883545756340027
         ],
         [
-            "Building Milvus on a local OS/shell environment\n\nThe details below outline the hardware and software requirements for building on Linux and MacOS.\n\n##",
-            0.7328144907951355
+            "How does Milvus handle vector data types and precision?\n\nMilvus supports Binary, Float32, Float16, and BFloat16 vector types.\n\n- Binary vectors: Store binary data as sequences of 0s and 1s, used in image processing and information retrieval.\n- Float32 vectors: Default storage with a precision of about 7 decimal digits. Even Float64 values are stored with Float32 precision, leading to potential precision loss upon retrieval.\n- Float16 and BFloat16 vectors: Offer reduced precision and memory usage. Float16 is suitable for applications with limited bandwidth and storage, while BFloat16 balances range and efficiency, commonly used in deep learning to reduce computational requirements without significantly impacting accuracy.\n\n###",
+            0.6757288575172424
         ],
         [
-            "Software Requirements\n\nAll Linux distributions are available for Milvus development. However a majority of our contributor worked with Ubuntu or CentOS systems, with a small portion of Mac (both x86_64 and Apple Silicon) contributors. If you would like Milvus to build and run on other distributions, you are more than welcome to file an issue and contribute!\n\nHere's a list of verified OS types where Milvus can successfully build and run:\n\n- Debian/Ubuntu\n- Amazon Linux\n- MacOS (x86_64)\n- MacOS (Apple Silicon)\n\n##",
-            0.6443224549293518
+            "How much does Milvus cost?\n\nMilvus is a 100% free open-source project.\n\nPlease adhere to [Apache License 2.0](http://www.apache.org/licenses/LICENSE-2.0) when using Milvus for production or distribution purposes.\n\nZilliz, the company behind Milvus, also offers a fully managed cloud version of the platform for those that don't want to build and maintain their own distributed instance. [Zilliz Cloud](https://zilliz.com/cloud) automatically maintains data reliability and allows users to pay only for what they use.\n\n###",
+            0.6421123147010803
         ]
     ]
 
@@ -271,8 +272,13 @@ response = openai_client.chat.completions.create(
 print(response.choices[0].message.content)
 ```
 
-    The hardware requirements specification for building Milvus and running it from the source code are as follows:
-    
-    - 8GB of RAM
-    - 50GB of free disk space
+    Milvus stores data in persistent storage as incremental logs, including inserted data (vector data, scalar data, and collection-specific schema) and metadata. Inserted data is stored in various object storage backends like MinIO, AWS S3, Google Cloud Storage, Azure Blob Storage, Alibaba Cloud OSS, and Tencent Cloud Object Storage. Metadata generated within Milvus is stored in etcd.
+
+
+## Quick Deploy
+
+To learn about how to start an online demo with this tutorial, please refer to [the example application](https://github.com/milvus-io/bootcamp/tree/master/bootcamp/tutorials/quickstart/apps/rag_search_with_milvus).
+
+<img src="https://raw.githubusercontent.com/milvus-io/bootcamp/master/bootcamp/tutorials/quickstart/apps/rag_search_with_milvus/pics/rag_demo.png"/>
+
 
