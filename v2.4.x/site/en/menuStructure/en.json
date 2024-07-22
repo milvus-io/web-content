@@ -74,7 +74,7 @@
             "children": []
           },
           {
-            "label": "Run Milvus in Docker",
+            "label": "Run Milvus Standalone",
             "id": "run_milvus_docker",
             "order": 2,
             "isMenu": true,
@@ -100,7 +100,7 @@
             ]
           },
           {
-            "label": "Run Milvus in Kubernetes",
+            "label": "Run Milvus Distributed",
             "id": "run_milvus_k8s",
             "order": 3,
             "isMenu": true,
