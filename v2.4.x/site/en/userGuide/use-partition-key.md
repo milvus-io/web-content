@@ -58,7 +58,6 @@ client = MilvusClient(
 schema = MilvusClient.create_schema(
     auto_id=False,
     enable_dynamic_field=True,
-    # highlight-next-line
     partition_key_field="color",
     num_partitions=16 # Number of partitions. Defaults to 16.
 )
@@ -108,7 +107,6 @@ schema.addField(AddFieldReq.builder()
     .fieldName("color")
     .dataType(DataType.VarChar)
     .maxLength(512)
-    // highlight-next-line
     .isPartitionKey(true)
     .build());
 ```
@@ -140,7 +138,6 @@ const fields = [
         name: "color",
         data_type: DataType.VarChar,
         max_length: 512,
-        // highlight-next-line
         is_partition_key: true
     }
 ]

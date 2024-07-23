@@ -208,7 +208,6 @@ schema = MilvusClient.create_schema(
 
 schema.add_field(field_name="id", datatype=DataType.INT64, is_primary=True)
 schema.add_field(field_name="vector", datatype=DataType.FLOAT_VECTOR, dim=5)
-# highlight-next-line
 schema.add_field(field_name="color", datatype=DataType.JSON)
 
 index_params = MilvusClient.prepare_index_params()
@@ -273,12 +272,10 @@ schema.addField(AddFieldReq.builder()
     .dimension(5)
     .build());
 
-// highlight-start    
 schema.addField(AddFieldReq.builder()
     .fieldName("color")
     .dataType(DataType.JSON)
     .build());
-// highlight-end
 
 // 2.3 Prepare index parameters
 IndexParam indexParamForIdField = IndexParam.builder()
@@ -342,12 +339,10 @@ const fields = [
         data_type: DataType.FloatVector,
         dim: 5
     },
-// highlight-start
     {
         name: "color",
         data_type: DataType.JSON,
     }
-// highlight-end
 ]
 
 // 2.2 Prepare index parameters
@@ -561,7 +556,6 @@ query_vectors = [ [ random.uniform(-1, 1) for _ in range(5) ]]
 res = client.search(
     collection_name="test_collection",
     data=query_vectors,
-    # highlight-next-line
     filter='color["label"] in ["red"]',
     search_params={
         "metric_type": "L2",
@@ -639,7 +633,6 @@ List<List<Float>> query_vectors = Arrays.asList(Arrays.asList(0.3580376395471989
 SearchReq searchReq = SearchReq.builder()
     .collectionName("test_collection")
     .data(query_vectors)
-    // highlight-next-line
     .filter("color[\"label\"] in [\"red\"]")
     .outputFields(Arrays.asList("id", "color"))
     .topK(3)
@@ -712,7 +705,6 @@ query_vectors = [[0.6765405125697714, 0.759217474274025, 0.4122471841491111, 0.3
 res = await client.search({
     collection_name: "test_collection",
     data: query_vectors,
-    // highlight-next-line
     filter: 'color["label"] in ["red"]',
     output_fields: ["color", "id"],
     limit: 3

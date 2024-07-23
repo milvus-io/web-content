@@ -59,7 +59,6 @@ client = MilvusClient(
 # 2. Create a collection
 schema = MilvusClient.create_schema(
     auto_id=False,
-    # highlight-next-line
     enable_dynamic_field=True,
 )
 
@@ -148,7 +147,6 @@ CreateCollectionReq customizedSetupReq = CreateCollectionReq.builder()
     .collectionName("customized_setup")
     .collectionSchema(schema)
     .indexParams(indexParams)
-    // highlight-next-line
     .enableDynamicField(true)
     .build();
 
@@ -210,7 +208,6 @@ res = await client.createCollection({
     collection_name: "test_collection",
     fields: fields, 
     index_params: index_params,
-    // highlight-next-line
     enable_dynamic_field: true
 })
 

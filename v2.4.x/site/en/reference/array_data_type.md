@@ -163,7 +163,6 @@ schema.add_field(field_name="id", datatype=DataType.INT64, is_primary=True)
 schema.add_field(field_name="vector", datatype=DataType.FLOAT_VECTOR, dim=5)
 schema.add_field(field_name="color", datatype=DataType.VARCHAR, max_length=512)
 schema.add_field(field_name="color_tag", datatype=DataType.INT64)
-# highlight-next-line
 schema.add_field(field_name="color_coord", datatype=DataType.ARRAY, element_type=DataType.INT64, max_capacity=5)
 
 index_params = MilvusClient.prepare_index_params()
@@ -247,14 +246,12 @@ schema.addField(AddFieldReq.builder()
     .dataType(DataType.Int64)
     .build());
 
-// highlight-start
 schema.addField(AddFieldReq.builder()
     .fieldName("color_coord")
     .dataType(DataType.Array)
     .elementType(DataType.Int64)
     .maxCapacity(5)
     .build());
-// highlight-end
 
 // 2.3 Prepare index parameters
 IndexParam indexParamForIdField = IndexParam.builder()
@@ -332,14 +329,12 @@ const fields = [
         name: "color_tag",
         data_type: DataType.Int64,
     },
-// highlight-start
     {
         name: "color_coord",
         data_type: DataType.Array,
         element_type: DataType.Int64,
         max_capacity: 5
     }
-// highlight-end
 ]
 
 // 2.2 Prepare index parameters

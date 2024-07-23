@@ -906,10 +906,8 @@ For more information, refer to [`query()`](https://milvus.io/api-reference/node/
 
     res = client.query(
         collection_name="quick_setup",
-        # highlight-start
         filter="1000 < tag < 1500",
         output_fields=["color_tag"],
-        # highlight-end
         limit=3
     )
 
@@ -1005,10 +1003,8 @@ For more information, refer to [`query()`](https://milvus.io/api-reference/node/
     ```python
     res = client.query(
         collection_name="quick_setup",
-        # highlight-start
         filter='color == "brown"',
         output_fields=["color_tag"],
-        # highlight-end
         limit=3
     )
 
@@ -1101,10 +1097,8 @@ For more information, refer to [`query()`](https://milvus.io/api-reference/node/
     ```python
     res = client.query(
         collection_name="quick_setup",
-        # highlight-start
         filter='color not in ["green", "purple"]',
         output_fields=["color_tag"],
-        # highlight-end
         limit=3
     )
 
@@ -1197,10 +1191,8 @@ For more information, refer to [`query()`](https://milvus.io/api-reference/node/
     ```python
     res = client.query(
         collection_name="quick_setup",
-        # highlight-start
         filter='color_tag like "red%"',
         output_fields=["color_tag"],
-        # highlight-end
         limit=3
     )
 
@@ -1293,10 +1285,8 @@ For more information, refer to [`query()`](https://milvus.io/api-reference/node/
     ```python
     res = client.query(
         collection_name="quick_setup",
-        # highlight-start
         filter='(color == "red") and (1000 < tag < 1500)',
         output_fields=["color_tag"],
-        # highlight-end
         limit=3
     )
 
@@ -1398,9 +1388,7 @@ In this section, you will find examples of how to use advanced operators in scal
     # Count the total number of entities in a collection
     res = client.query(
         collection_name="quick_setup",
-        # highlight-start
         output_fields=["count(*)"]
-        # highlight-end
     )
 
     print(res)
@@ -1459,10 +1447,8 @@ In this section, you will find examples of how to use advanced operators in scal
     # Count the number of entities in a partition
     res = client.query(
         collection_name="quick_setup",
-        # highlight-start
         output_fields=["count(*)"],
         partition_names=["partitionA"]
-        # highlight-end
     )
 
     print(res)
@@ -1521,10 +1507,8 @@ In this section, you will find examples of how to use advanced operators in scal
     # Count the number of entities that match a specific filter
     res = client.query(
         collection_name="quick_setup",
-        # highlight-start
         filter='(color == "red") and (1000 < tag < 1500)',
         output_fields=["count(*)"],
-        # highlight-end
     )
 
     print(res)
