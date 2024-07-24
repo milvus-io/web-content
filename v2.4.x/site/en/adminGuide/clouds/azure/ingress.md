@@ -137,7 +137,7 @@ my-release-milvus   nginx   milvustest.eastus2.cloudapp.azure.com   EXTERNAL-IP 
 ```
 
 ## Hello Milvus
-Please refer to [Hello Milvus](https://milvus.io/docs/example_code.md), change uri args, then run the code.
+Please refer to [Hello Milvus](https://milvus.io/docs/v2.3.x/example_code.md), change uri args, then run the code.
 ```python
 connections.connect("default",uri="https://milvustest.eastus2.cloudapp.azure.com:443") 
 ```

@@ -36,7 +36,15 @@ helm upgrade my-release milvus/milvus --set service.type=ClusterIP
 As a backend service of the Layer-7 load balancer, Milvus has to meet [certain encryption requirements](https://cloud.google.com/kubernetes-engine/docs/how-to/ingress-http2) so that it can understand the HTTP/2 requests from the load balancer. Therefore, you need to enable TLS on your Milvus cluster as follows.
 
 ```bash
-helm upgrade my-release milvus/milvus --set common.security.tlsMode=1
+helm upgrade my-release milvus/milvus -f tls.yaml
+```
+the tls.yaml content:
+```yaml
+extraConfigFiles:
+  user.yaml: |+
+    common:
+      security:
+        tlsMode: 1
 ```
 
 ### Set up a health check endpoint
@@ -70,7 +78,7 @@ Finally, update the annotations of the Milvus service to ask the Layer-7 load ba
 kubectl annotate service my-release-milvus \
     cloud.google.com/app-protocols='{"milvus":"HTTP2"}' \
     cloud.google.com/backend-config='{"default": "my-release-backendconfig"}' \
-    cloud.google.com/neg='{"ingress": true}'
+    cloud.google.com/neg='{"ingress": true}' --overwrite
 ```
 
 <div class="alert note">
@@ -91,7 +99,7 @@ kubectl annotate service my-release-milvus \
 
 ### Prepare TLS certificates
 
-TLS requires certificates to work. There are two ways to create certificates, namely self-managed and Google-managed.
+TLS requires certificates to work. **There are two ways to create certificates, namely self-managed and Google-managed.**
 
 This guide uses **my-release.milvus.io** as the domain name to access our Milvus service. 
 
@@ -166,24 +174,24 @@ Create a YAML file with one of the following snippets.
   apiVersion: networking.k8s.io/v1
   kind: Ingress
   metadata:
-  name: my-release-milvus
-  namespace: default
+    name: my-release-milvus
+    namespace: default
   spec:
-  tls:
-  - hosts:
+    tls:
+    - hosts:
       - my-release.milvus.io
       secretName: my-release-milvus-tls
-  rules:
-  - host: my-release.milvus.io
+    rules:
+    - host: my-release.milvus.io
       http:
-      paths:
-      - path: /
+        paths:
+        - path: /
           pathType: Prefix
           backend:
-          service:
+            service:
               name: my-release-milvus
               port:
-              number: 19530
+                number: 19530
   ```
 - Using Google-managed certificates
 
@@ -191,22 +199,22 @@ Create a YAML file with one of the following snippets.
   apiVersion: networking.k8s.io/v1
   kind: Ingress
   metadata:
-  name: my-release-milvus
-  namespace: default
-  annotations:
+    name: my-release-milvus
+    namespace: default
+    annotations:
       networking.gke.io/managed-certificates: "my-release-milvus-tls"
   spec:
-  rules:
-  - host: my-release.milvus.io
+    rules:
+    - host: my-release.milvus.io
       http:
-      paths:
-      - path: /
+        paths:
+        - path: /
           pathType: Prefix
           backend:
-          service:
+            service:
               name: my-release-milvus
               port:
-              number: 19530
+                number: 19530
   ```
 
 Then you can create the Ingress by applying the file to your GKE cluster.
@@ -233,7 +241,7 @@ Once an IP address is displayed in the **ADDRESS** field, the Layer-7 load balan
 
 ## Verify the connection through the Layer-7 load balancer
 
-This guide uses PyMilvus to verify the connection to the Milvus service behind the Layer-7 load balancer we have just created. For detailed steps, [read this](example_code).
+This guide uses PyMilvus to verify the connection to the Milvus service behind the Layer-7 load balancer we have just created. For detailed steps, [read this](https://milvus.io/docs/v2.3.x/example_code.md).
 
 Notice that connection parameters vary with the way you choose to manage the certificates in [Prepare TLS certificates](#prepare-tls-certificates).
 
