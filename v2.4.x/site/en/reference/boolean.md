@@ -198,12 +198,6 @@ VARCHAR > "str1"
 
 3. TermExpr and UnaryLogicOp
 
-<div class="alert note">
-
-Milvus only supports deleting entities with clearly specified primary keys, which can be achieved merely with the term expression <code>in</code>.
-
-</div>
-
 ```
 "int64 not in [1, 2, 3]"
 ```
