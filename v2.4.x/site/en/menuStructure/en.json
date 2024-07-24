@@ -735,19 +735,19 @@
                 "isMenu": true,
                 "children": [
                   {
-                    "label": "AWS Layer-7 Load Balancing",
+                    "label": "AWS",
                     "id": "aws_layer7.md",
                     "order": 1,
                     "children": []
                   },
                   {
-                    "label": "GCP Layer-7 Load Balancing",
+                    "label": "GCP",
                     "id": "gcp_layer7.md",
                     "order": 2,
                     "children": []
                   },
                   {
-                    "label": "Azure Ingress Nginx",
+                    "label": "Azure",
                     "id": "ingress.md",
                     "order": 3,
                     "children": []
@@ -761,19 +761,19 @@
                 "isMenu": true,
                 "children": [
                   {
-                    "label": "AWS S3",
+                    "label": "AWS",
                     "id": "s3.md",
                     "order": 1,
                     "children": []
                   },
                   {
-                    "label": "Google Cloud Storage",
+                    "label": "GCP",
                     "id": "gcs.md",
                     "order": 2,
                     "children": []
                   },
                   {
-                    "label": "Azure Blob Storage",
+                    "label": "Azure",
                     "id": "abs.md",
                     "order": 3,
                     "children": []
