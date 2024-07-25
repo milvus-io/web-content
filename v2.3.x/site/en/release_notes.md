@@ -7,6 +7,35 @@ title: Release Notes
 
 Find out what’s new in Milvus! This page summarizes new features, improvements, known issues, and bug fixes in each release. You can find the release notes for each released version after v2.3.0 in this section. We suggest that you regularly visit this page to learn about updates.
 
+## v2.3.20
+
+Release data: July 25, 2024
+
+| Milvus version | Python SDK version | Java SDK version | Go SDK version | Node.js SDK version |
+|----------------|--------------------|------------------|----------------|---------------------|
+| 2.3.20         | 2.3.7              | 2.3.6            | 2.3.6          | 2.3.5               |
+
+Milvus v2.3.20 brings several important bug fixes focused on enhancing segment management. This release also includes an upgrade to Go version 1.21, which allows the pprof tool to capture C++ code profiles, significantly aiding in diagnosing Milvus. Additionally, the Knowhere version has been updated to v2.2.7, enabling Milvus to be compiled with glibc versions ≤ 2.30. A new metric has been introduced to record the duration that requests wait in the proxy queue, improving Milvus's observability.
+
+### Features
+
+- Added a metric to record the duration of requests waiting in the proxy queue ([#34791](https://github.com/milvus-io/milvus/pull/34791)).
+
+### Improvements
+
+- Upgraded Knowhere to version 2.2.7 ([#34825](https://github.com/milvus-io/milvus/pull/34825)).
+- Upgraded Go version from 1.20 to 1.21 ([#34759](https://github.com/milvus-io/milvus/pull/34759)).
+
+### Bug fixes
+
+- Initialized the hook when creating the proxy object ([#34936](https://github.com/milvus-io/milvus/pull/34936)).
+- Fixed a parsing issue for the plan proto for search types ([#34945](https://github.com/milvus-io/milvus/pull/34945)).
+- Resolved an issue where segments could bounce between delegator and worker ([#34889](https://github.com/milvus-io/milvus/pull/34889)).
+- Prevented the generation of reduce channel tasks before channel balancing is complete ([#34721](https://github.com/milvus-io/milvus/pull/34721)).
+- Avoided segment shortages caused by deduplicated segment tasks ([#34882](https://github.com/milvus-io/milvus/pull/34882)).
+- Discarded compaction plans when closing DataSyncService ([#34737](https://github.com/milvus-io/milvus/pull/34737)).
+- Fixed a typo in the compatible ascending index ([#34712](https://github.com/milvus-io/milvus/pull/34712)).
+
 ## v2.3.19
 
 Release date: July 15, 2024
