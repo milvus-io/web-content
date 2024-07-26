@@ -1,4 +1,4 @@
-# hybridts_to_unixtime()
+# hybridts_to_datetime()
 
 This method converts a hybrid timestamp to datetime according to timezone.
 
