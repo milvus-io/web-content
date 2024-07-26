@@ -1,4 +1,4 @@
-# create_alias()
+# alter_alias()
 
 This method alters an alias of a collection to another.
 
