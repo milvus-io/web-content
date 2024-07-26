@@ -13,7 +13,21 @@ This topic introduces the general sections of the system configurations in Milvu
 Milvus maintains a considerable number of parameters that configure the system. Each configuration has a default value, which can be used directly. You can modify these parameters flexibly so that Milvus can better serve your application. See [Configure Milvus](configure-docker.md) for more information.
 
 <div class="alert note">
+
+<ul>
+
+<li>
 In current release, all parameters take effect only after being configured at the startup of Milvus.
+</li>
+
+<li>
+
+For Milvus Operator users, refer to [Configure Milvus with Milvus Operator](https://github.com/zilliztech/milvus-operator/blob/main/docs/administration/configure-milvus.md).
+
+</li>
+
+</ul>
+
 </div>
 
 ## Sections

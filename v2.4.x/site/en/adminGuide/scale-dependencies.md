@@ -7,7 +7,11 @@ title: Scale Dependencies
 
 Milvus relies on various dependencies such as MinIO, Kafka, Pulsar, and etcd. Scaling these components can enhance Milvus's adaptability to different requirements.
 
-For Milvus Operator users, please also refer to [Manage Dependencies For Milvus Operator](manage_dependencies.md)
+<div class="alert note">
+
+For Milvus Operator users, refer to [Manage Dependencies For Milvus Operator](manage_dependencies.md).
+
+</div>
 
 ## Scale MinIO
 
