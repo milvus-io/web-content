@@ -1,4 +1,4 @@
-# transfer_node()
+# transfer_replica()
 
 This method moves a specified number of replicas from a resource group to another.
 
