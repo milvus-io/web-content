@@ -1,4 +1,4 @@
-# has_collection()
+# drop_collection()
 
 This method drops a collection and the data within.
 
