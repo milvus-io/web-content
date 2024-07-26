@@ -74,6 +74,12 @@ You can scale in your Milvus cluster either manually or automatically. If autosc
 
 Currently, Milvus 2.1.0 only supports scaling in and out manually.
 
+<div class="alert note">
+
+For information on how to scale a cluster with Milvus Operator, refer to [Scale a Cluster with Milvus Operator](https://github.com/zilliztech/milvus-operator/blob/main/docs/administration/scale-a-milvus-cluster.md).
+
+</div>
+
 
 #### Scaling out
 

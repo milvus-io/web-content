@@ -10,6 +10,12 @@ This topic describes how to allocate resources to a Milvus cluster on Kubernetes
 
 Generally, the resources you allocate to a Milvus cluster in production should be proportionate to the machine workload. You should also consider the machine type when allocating resources. Although you can update the configurations when the cluster is running, we recommend setting the values before [deploying the cluster](install_cluster-helm.md).
 
+<div class="alert note">
+
+For information on how to allocate resources with Milvus Operator, refer to [Allocate Resources with Milvus Operator](https://github.com/zilliztech/milvus-operator/blob/main/docs/administration/allocate-resources.md#allocate-resources-with-milvus-operator).
+
+</div>
+
 ## 1. View available resources
 
 Run `kubectl describe nodes` to view the available resources on the instances that you have provisioned.

@@ -21,6 +21,7 @@ This guide explains how to manage user authentication in Milvus, including enabl
 <div class="filter">
   <a href="#docker">Docker Compose</a>
   <a href="#helm">Helm</a>
+  <a href="#operator">Milvus Operator</a>
 </div>
 
 <div class="filter-docker">
@@ -50,6 +51,27 @@ extraConfigFiles:
       security:
         authorizationEnabled: true
 ...
+```
+
+</div>
+
+<div class="filter-operator">
+
+To enable authentication, set `spec.common.security.authorizationEnabled` to `true` in the `Milvus` CRD. For more information on Milvus CRD, refer to [Configure Milvus with Milvus Operator](https://milvus.io/docs/configure_operator.md?tab=component).
+
+```yaml
+apiVersion: milvus.io/v1beta1
+kind: Milvus
+metadata:
+  name: my-release
+  labels:
+    app: milvus
+spec:
+  # Omit other fields ...
+  config:
+    common:
+      security:
+        authorizationEnabled: true
 ```
 
 </div>

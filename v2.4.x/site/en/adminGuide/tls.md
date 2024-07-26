@@ -505,7 +505,7 @@ This section outlines the steps to configure a Milvus server with TLS encryption
 
 <div class="alert note">
 
-Due to current limitations with milvus-helm and milvus-operator regarding certificate file path configurations, this guide will focus on deployment using Docker Compose.
+This guide focuses on deployment using Docker Compose. For information on Milvus Operator deployment, refer to [Milvus Operator TLS documentation](https://github.com/zilliztech/milvus-operator/blob/main/docs/administration/security/encryption-in-transit.md).
 
 </div>
 
