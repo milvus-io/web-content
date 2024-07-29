@@ -44,7 +44,7 @@ Fields used to configure an external object storage service include:
 The following example configures an external object storage service.
 
 ```YAML
-kind: MilvusCluster
+kind: Milvus
 
 metadata:
 
@@ -94,7 +94,7 @@ The following example configures an internal MinIO service.
 ```YAML
 apiVersion: milvus.io/v1alpha1
 
-kind: MilvusCluster
+kind: Milvus
 
 metadata:
 
@@ -179,7 +179,7 @@ Fields used to configure an external etcd service include:
 The following example configures an external etcd service.
 
 ```YAML
-kind: MilvusCluster
+kind: Milvus
 
 metadata:
 
@@ -223,7 +223,7 @@ The following example configures an internal etcd service.
 ```YAML
 apiVersion: milvus.io/v1alpha1
 
-kind: MilvusCluster
+kind: Milvus
 
 metadata:
 
@@ -294,7 +294,7 @@ The following example configures an external Pulsar service.
 ```YAML
 apiVersion: milvus.io/v1alpha1
 
-kind: MilvusCluster
+kind: Milvus
 
 metadata:
 
@@ -338,7 +338,7 @@ The following example configures an internal Pulsar service.
 ```YAML
 apiVersion: milvus.io/v1alpha1
 
-kind: MilvusCluster
+kind: Milvus
 
 metadata:
 

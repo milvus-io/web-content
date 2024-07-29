@@ -104,7 +104,7 @@ Run the following command to install Milvus Operator with Helm.
 $ helm install milvus-operator \
   -n milvus-operator --create-namespace \
   --wait --wait-for-jobs \
-  https://github.com/zilliztech/milvus-operator/releases/download/v1.0.0/milvus-operator-1.0.0.tgz
+  https://github.com/zilliztech/milvus-operator/releases/download/v1.0.1/milvus-operator-1.0.1.tgz
 ```
 
 You will see the output similar to the following after the installation process ends.
@@ -196,7 +196,7 @@ Once your Milvus cluster is ready, the output of the above command should be sim
 
 ```yaml
 apiVersion: milvus.io/v1alpha1
-kind: MilvusCluster
+kind: Milvus
 metadata:
 ...
 status:
@@ -235,14 +235,11 @@ NAME                                            READY   STATUS      RESTARTS   A
 my-release-etcd-0                               1/1     Running     0          14m
 my-release-etcd-1                               1/1     Running     0          14m
 my-release-etcd-2                               1/1     Running     0          14m
-my-release-milvus-datacoord-6c7bb4b488-k9htl    1/1     Running     0          6m
 my-release-milvus-datanode-5c686bd65-wxtmf      1/1     Running     0          6m
-my-release-milvus-indexcoord-586b9f4987-vb7m4   1/1     Running     0          6m
 my-release-milvus-indexnode-5b9787b54-xclbx     1/1     Running     0          6m
 my-release-milvus-proxy-84f67cdb7f-pg6wf        1/1     Running     0          6m
-my-release-milvus-querycoord-865cc56fb4-w2jmn   1/1     Running     0          6m
 my-release-milvus-querynode-5bcb59f6-nhqqw      1/1     Running     0          6m
-my-release-milvus-rootcoord-fdcccfc84-9964g     1/1     Running     0          6m
+my-release-milvus-mixcoord-fdcccfc84-9964g      1/1     Running     0          6m
 my-release-minio-0                              1/1     Running     0          14m
 my-release-minio-1                              1/1     Running     0          14m
 my-release-minio-2                              1/1     Running     0          14m
@@ -327,7 +324,7 @@ $ helm -n milvus-operator uninstall milvus-operator
 #### Uninstall with kubectl
 
 ```shell
-$ kubectl delete -f https://raw.githubusercontent.com/zilliztech/milvus-operator/v1.0.0/deploy/manifests/deployment.yaml
+$ kubectl delete -f https://raw.githubusercontent.com/zilliztech/milvus-operator/v1.0.1/deploy/manifests/deployment.yaml
 ```
 
 ## What's next

@@ -70,7 +70,6 @@ metadata:
 spec:
   mode: cluster
   components:
-    image: milvusdb/milvus:v2.1.0
     nodeSelector: {}
     tolerations: {}
     env: {}
@@ -267,7 +266,6 @@ metadata:
 spec:
   mode: cluster
   components:
-    image: milvusdb/milvus:v2.1.0
     resources:
       limits:
         cpu: '4'

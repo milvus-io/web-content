@@ -40,7 +40,7 @@ Fields used to configure an external etcd service include:
 The following example configures an external etcd service.
 
 ```YAML
-kind: MilvusCluster
+kind: Milvus
 metadata:
   name: my-release
   labels:
@@ -67,7 +67,7 @@ The following example configures an internal etcd service.
 
 ```YAML
 apiVersion: milvus.io/v1alpha1
-kind: MilvusCluster
+kind: Milvus
 metadata:
   name: my-release
   labels:

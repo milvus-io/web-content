@@ -156,7 +156,7 @@ The following example configures an external Pulsar service.
 
 ```YAML
 apiVersion: milvus.io/v1alpha1
-kind: MilvusCluster
+kind: Milvus
 metadata:
   name: my-release
   labels:
@@ -184,7 +184,7 @@ The following example configures an internal Pulsar service.
 
 ```YAML
 apiVersion: milvus.io/v1alpha1
-kind: MilvusCluster
+kind: Milvus
 metadata:
   name: my-release
   labels:
@@ -253,7 +253,7 @@ The following example configures an external Kafka service.
 
 ```yaml
 apiVersion: milvus.io/v1alpha1
-kind: MilvusCluster
+kind: Milvus
 metadata:
   name: my-release
   labels:
@@ -288,9 +288,9 @@ spec:
 
 The following example configures an internal Kafka service.
 
-```
+```yaml
 apiVersion: milvus.io/v1alpha1
-kind: MilvusCluster
+kind: Milvus
 metadata:
   name: my-release
   labels:
