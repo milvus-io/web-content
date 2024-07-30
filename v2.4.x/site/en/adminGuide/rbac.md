@@ -104,7 +104,7 @@ Before managing role privileges, make sure you have enabled user authentication.
 client.grant_privilege(
     role_name='roleA',
     object_type='User',
-    object_name='SelectUser',
+    object_name='user_1',
     privilege='SelectUser'
 )
 ```
@@ -121,7 +121,7 @@ client.describe_role(
 # output:
 # {'role': 'roleA',
 #  'privileges': [{'object_type': 'User',
-#    'object_name': 'SelectUser',
+#    'object_name': 'user_1',
 #    'db_name': 'default',
 #    'role_name': 'roleA',
 #    'privilege': 'SelectUser',
@@ -166,7 +166,7 @@ Exercise caution when performing the following operations because these operatio
 client.revoke_privilege(
     role_name='roleA',
     object_type='User',
-    object_name='SelectUser',
+    object_name='user_1',
     privilege='SelectUser'
 )
 ```
