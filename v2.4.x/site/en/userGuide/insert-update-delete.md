@@ -754,4 +754,55 @@ Milvus offers two ways for you to identify the entities to delete.
     // 
     ```
 
-For details on how to use filter expressions, refer to [Get & Scalar Query](get-and-scalar-query.md).
+    For details on how to use filter expressions, refer to [Get & Scalar Query](get-and-scalar-query.md).
+
+- __Delete entities by partition name__.
+
+    If you want to delete entities from a specific partition, you can specify the partition name with the `partition_name` parameter in the `delete()` method. The following example deletes entities from `partitionA` that have a color starting with `blue`.
+
+    <div class="multipleCode">
+    <a href="#python">Python </a>
+    <a href="#java">Java</a>
+    <a href="#javascript">Node.js</a>
+    </div>
+
+    ```python
+    res = client.delete(
+    collection_name='quick_setup',
+    partition_name='partitionA',
+    filter='color like "blue%"'
+    )
+
+    print("Entities deleted from partitionA: ", res['delete_count'])
+
+    # Output:
+    # Entities deleted from partitionA:  3
+    ```
+
+    ```java
+    deleteReq = DeleteReq.builder()
+        .collectionName("quick_setup")
+        .filter('color like "blue%"')
+        .partitionName("partitionA")
+        .build();
+
+    deleteResp = client.delete(deleteReq);
+
+    System.out.println(JSONObject.toJSON(deleteResp));
+
+    // Output:
+    // {"deleteCnt": 3}
+    ```
+
+    ```javascript
+    res = await client.delete({
+    collection_name: "quick_setup",
+    partition_name: "partitionA",
+    filter: 'color like "blue%"'
+    })
+
+    console.log("Entities deleted from partitionA: " + res.delete_cnt)
+
+    // Output:
+    // Entities deleted from partitionA: 3
+    ```
