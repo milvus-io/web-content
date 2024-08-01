@@ -6,6 +6,11 @@ title: Multimodal RAG with Milvus
 
 # Multimodal RAG with Milvus
 
+<a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/multimodal_rag_with_milvus.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
+
+<img src="https://raw.githubusercontent.com/milvus-io/bootcamp/master/bootcamp/tutorials/quickstart/apps/multimodal_rag_with_milvus/pics/step3.jpg
+"/>
+
 This tutorial showcases the multimodal RAG powered by Milvus, [Visualized BGE model](https://github.com/FlagOpen/FlagEmbedding/tree/master/FlagEmbedding/visual), and [GPT-4o](https://openai.com/index/hello-gpt-4o/). With this system, users are able to upload an image and edit text instructions, which are processed by BGE's composed retrieval model to search for candidate images. GPT-4o then acts as a reranker, selecting the most suitable image and providing the rationale behind the choice. This powerful combination enables a seamless and intuitive image search experience, leveraging Milvus for efficient retrieval, BGE model for precise image processing and matching, and GPT-4o for advanced reranking.
 
 ## Preparation
@@ -33,8 +38,8 @@ If you are using Google Colab, to enable dependencies just installed, you may ne
 
 The following command will download the example data and extract to a local folder "./images_folder" including:
 
-- **amazon_fashion**: A subset of [Amazon Reviews 2023](https://github.com/hyp1231/AmazonReviews2023) as containing approximately 145 images from the category "Amazon_Fashion".
-- **clothes.jpg**: An example query image.
+- **images**: A subset of [Amazon Reviews 2023](https://github.com/hyp1231/AmazonReviews2023) containing approximately 900 images from the categories "Appliance", "Cell_Phones_and_Accessories", and "Electronics".
+- **leopard.jpg**: An example query image.
 
 
 ```shell
@@ -102,7 +107,7 @@ data_dir = (
     "./images_folder"  # Change to your own value if using a different data directory
 )
 image_list = glob(
-    os.path.join(data_dir, "amazon_fashion", "*.jpg")
+    os.path.join(data_dir, "images", "*.jpg")
 )  # We will only use images ending with ".jpg"
 image_dict = {}
 for image_path in tqdm(image_list, desc="Generating image embeddings: "):
@@ -167,7 +172,7 @@ milvus_client.insert(
 
 
 
-    {'insert_count': 145,
+    {'insert_count': 900,
      'ids': [451503448502042624, 451503448502042625, ..., 451503448502042768],
      'cost': 0}
 
@@ -184,9 +189,9 @@ Now we are ready to perform the advanced image search with query data composed o
 
 ```python
 query_image = os.path.join(
-    data_dir, "clothes.jpg"
+    data_dir, "leopard.jpg"
 )  # Change to your own query image path
-query_text = "tops of this style"
+query_text = "hone case with this image theme"
 
 # Generate query embedding given image and text instructions
 query_vec = encoder.encode_query(image_path=query_image, text=query_text)
@@ -203,7 +208,7 @@ retrieved_images = [hit.get("entity").get("image_path") for hit in search_result
 print(retrieved_images)
 ```
 
-    ['./images_folder/amazon_fashion/41MVxQj+9YL._AC_.jpg', './images_folder/amazon_fashion/41gGwTCKeCL._AC_.jpg', './images_folder/amazon_fashion/41oJjy3dRwL._AC_.jpg', './images_folder/amazon_fashion/41TjExDA-RL._AC_.jpg', './images_folder/amazon_fashion/31YULz01TyL._AC_.jpg', './images_folder/amazon_fashion/41fVaN6RetL._AC_.jpg', './images_folder/amazon_fashion/51QnU31-8wL._AC_.jpg', './images_folder/amazon_fashion/51CqMDJOODL._AC_.jpg', './images_folder/amazon_fashion/41aHOvnSaZL._AC_.jpg']
+    ['./images_folder/images/518Gj1WQ-RL._AC_.jpg', './images_folder/images/41n00AOfWhL._AC_.jpg', './images_folder/images/51Wqge9HySL._AC_.jpg', './images_folder/images/51R2SZiywnL._AC_.jpg', './images_folder/images/516PebbMAcL._AC_.jpg', './images_folder/images/51RrgfYKUfL._AC_.jpg', './images_folder/images/515DzQVKKwL._AC_.jpg', './images_folder/images/51BsgVw6RhL._AC_.jpg', './images_folder/images/51INtcXu9FL._AC_.jpg']
 
 
 ### Rerank with GPT-4o
@@ -447,19 +452,15 @@ best_img = best_img.resize((150, 150))
 best_img.show()
 ```
 
-    Reasons: 
-    The most suitable item is index 0, as it features a top that is very similar in style to the one in the query image. Both tops are crop tops with long sleeves and have a similar design, making it the closest match to the user's instruction.
-
+    Reasons:
+    The most suitable item for the user's query intent is index 6 because the instruction specifies a phone case with the theme of the image, which is a leopard. The phone case with index 6 has a thematic design resembling the leopard pattern, making it the closest match to the user's request for a phone case with the image theme. 
 
 
     
-![Display the best result with explanation](../../../assets/multimodal_rag_with_milvus_28_1.png)
+![The best result](../../../assets/multimodal_rag_with_milvus_28_1.png)
     
 
 
 ### Quick Deploy
 
 To learn about how to start an online demo with this tutorial, please refer to [the example application](https://github.com/milvus-io/bootcamp/tree/master/bootcamp/tutorials/quickstart/apps/multimodal_rag_with_milvus).
-
-<img src="https://raw.githubusercontent.com/milvus-io/bootcamp/master/bootcamp/tutorials/quickstart/apps/multimodal_rag_with_milvus/pics/step3.jpg
-"/>

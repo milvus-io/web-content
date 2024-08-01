@@ -1327,12 +1327,6 @@
         "children": []
       },
       {
-        "label": "Composed Image Retrieval",
-        "id": "cir_with_milvus.md",
-        "order": 2,
-        "children": []
-      },
-      {
         "label": "Hybrid Search with Milvus",
         "id": "hybrid_search_with_milvus.md",
         "order": 3,
