@@ -191,7 +191,7 @@ Now we are ready to perform the advanced image search with query data composed o
 query_image = os.path.join(
     data_dir, "leopard.jpg"
 )  # Change to your own query image path
-query_text = "hone case with this image theme"
+query_text = "phone case with this image theme"
 
 # Generate query embedding given image and text instructions
 query_vec = encoder.encode_query(image_path=query_image, text=query_text)
