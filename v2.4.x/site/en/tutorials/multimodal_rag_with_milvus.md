@@ -156,7 +156,6 @@ milvus_client = MilvusClient(uri="./milvus_demo.db")
 # By default, vector field name is "vector"
 milvus_client.create_collection(
     collection_name=collection_name,
-    overwrite=True,  # This will drop the old collection if exists
     auto_id=True,
     dimension=dim,
     enable_dynamic_field=True,
