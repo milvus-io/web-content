@@ -44,6 +44,10 @@ The selection of a deployment mode typically depends on the development stage of
 
 The choice of Milvus deployment mode depends on your project's stage and scale. Milvus provides a flexible and powerful solution for various needs, from rapid prototyping to large-scale enterprise deployment.
 
+- **Milvus Lite** is recommended for smaller datasets, up to a few million vectors.
+- **Milvus Standalone** is suitable for medium-sized datasets, scaling up to 100 million vectors.
+- **Milvus Distributed** is designed for large-scale deployments, capable of handling datasets from 100 million up to tens of billions of vectors.
+
 ![Select deployment option for your use case](../../../assets/select-deployment-option.png)
 
 ## Comparison on functionalities

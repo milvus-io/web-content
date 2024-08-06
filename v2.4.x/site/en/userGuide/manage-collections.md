@@ -335,11 +335,11 @@ export fields='[{ \
   <tbody>
     <tr>
       <td><code>auto_id</code></td>
-      <td>Whether allows the primary field to automatically increment.<br>Setting this to <strong>True</strong> makes the primary field automatically increment. In this case, the primary field should not be included in the data to insert to avoid errors.</td>
+      <td>Determines if the primary field automatically increments.<br>Setting this to <strong>True</strong> makes the primary field automatically increment. In this case, the primary field should not be included in the data to insert to avoid errors. The auto-generated IDs have a fixed length and cannot be altered.</td>
     </tr>
     <tr>
       <td><code>enable_dynamic_field</code></td>
-      <td>Whether allows Milvus saves the values of undefined fields in a dynamic field if the data being inserted into the target collection includes fields that are not defined in the collection's schema.<br>When you set this to <strong>True</strong>, Milvus will create a field called <strong>$meta</strong> to store any undefined fields and their values from the data that is inserted.</td>
+      <td>Determines if Milvus saves the values of undefined fields in a dynamic field if the data being inserted into the target collection includes fields that are not defined in the collection's schema.<br>When you set this to <strong>True</strong>, Milvus will create a field called <strong>$meta</strong> to store any undefined fields and their values from the data that is inserted.</td>
     </tr>
     <tr>
       <td><code>field_name</code></td>

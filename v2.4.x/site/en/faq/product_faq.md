@@ -174,6 +174,10 @@ Milvus supports Binary, Float32, Float16, and BFloat16 vector types.
 - Float32 vectors: Default storage with a precision of about 7 decimal digits. Even Float64 values are stored with Float32 precision, leading to potential precision loss upon retrieval.
 - Float16 and BFloat16 vectors: Offer reduced precision and memory usage. Float16 is suitable for applications with limited bandwidth and storage, while BFloat16 balances range and efficiency, commonly used in deep learning to reduce computational requirements without significantly impacting accuracy.
 
+#### Does Milvus support specifying default values for scalar or vector fields?
+
+Currently, Milvus 2.4.x does not support specifying default values for scalar or vector fields. This feature is planned for future releases.
+
 #### Still have questions?
 
 You can:
