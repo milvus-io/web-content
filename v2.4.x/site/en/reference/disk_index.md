@@ -40,9 +40,9 @@ To use DiskANN, ensure that you
 
 - Search parameters
 
-  | Parameter     | Description                         | Range                                           |
-  | ------------- | ----------------------------------- | ----------------------------------------------- |
-  | `search_list` | Size of the candidate list, a larger size offers a higher recall rate with degraded performance. | [topk, int32_max] |
+  | Parameter     | Description                         | Range                                           | Default Value     |
+  | ------------- | ----------------------------------- | ----------------------------------------------- |-------------------|
+  | `search_list` | Size of the candidate list, a larger size offers a higher recall rate with degraded performance. | [topk, int32_max] | 16 |
 
 ## DiskANN-related Milvus configurations
 
