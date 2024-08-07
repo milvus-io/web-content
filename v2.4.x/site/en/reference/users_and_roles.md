@@ -29,7 +29,7 @@ If a user is bind with a `public` role, this user is entitled to the privileges 
 
 The following table lists the values you can choose when [enabling RBAC](rbac.md).
 
-| Object name | Privilege name        | Relevant API description on the client side       |
+| Object type | Privilege name        | Relevant API description on the client side       |
 | ----------- | --------------------- | ------------------------------------------------- |
 | Collection  | CreateIndex           | CreateIndex                                       |
 | Collection  | DropIndex             | DropIndex                                         |
