@@ -96,6 +96,8 @@ client.list_roles()
 
 The following example demonstrates how to grant the permission of searching all collections to the role named `roleA`. See [Users and Roles](users_and_roles.md) for other types of privileges you can grant.
 
+The `object_type` specifies the object type, which can also be understood as the resource type. Currently, valid values ​​include Collection/User/Global, etc., where Global means that there is no specific resource type. `object_name` is the object name, that is, the resource name. If object_type is Collection, then object name refers to a specific collection name. If object_type is Global, then object name is specified as *.
+
 Before managing role privileges, make sure you have enabled user authentication. Otherwise, an error may occur. For information on how to enable user authentication, refer to [Authenticate User Access](authenticate.md).
 
 ```python
