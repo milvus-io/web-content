@@ -7,7 +7,7 @@ title: With Iterators
 
 # With Iterators
 
-Milvus provides search and query iterators for iterating results with a large volume of entities.
+Milvus provides search and query iterators for iterating results with a large volume of entities. Since Milvus limits TopK to 16384, users can use iterators to return large numbers or even whole entities in a collection in batch mode.
 
 ## Overview
 
