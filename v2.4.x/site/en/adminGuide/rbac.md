@@ -94,9 +94,9 @@ client.list_roles()
 
 ## 4. Grant a privilege to a role
 
-The following example demonstrates how to grant the permission of searching all collections to the role named `roleA`. See [Users and Roles](users_and_roles.md) for other types of privileges you can grant.
+The following example demonstrates how to grant the permission of searching all collections to the role named `roleA`. 
 
-The `object_type` specifies the object type, which can also be understood as the resource type. Currently, valid values ​​include Collection/User/Global, etc., where Global means that there is no specific resource type. `object_name` is the object name, that is, the resource name. If object_type is Collection, then object name refers to a specific collection name. If object_type is Global, then object name is specified as *.
+The `object_type` specifies the object type, which can also be understood as the resource type. Currently, valid values ​​include Collection/User/Global, etc., where Global means that there is no specific resource type. The `object_name` is the resource name. If object_type is Collection, then object name can be referred to a specific collection name, or you can use * to specify all collections. If object_type is Global, then the object name can be only specified as *. See [Users and Roles](users_and_roles.md) for other types of privileges you can grant.
 
 Before managing role privileges, make sure you have enabled user authentication. Otherwise, an error may occur. For information on how to enable user authentication, refer to [Authenticate User Access](authenticate.md).
 
@@ -105,8 +105,8 @@ Before managing role privileges, make sure you have enabled user authentication.
 
 client.grant_privilege(
     role_name='roleA',
-    object_type='User',
-    object_name='user_1',
+    object_type='User',  # value here can be Global, Collection or User, object type also depends on the API defined in privilegeName 
+    object_name='user_1',  # value here can be * or a specific user name if object type is 'User'
     privilege='SelectUser'
 )
 ```
@@ -167,8 +167,8 @@ Exercise caution when performing the following operations because these operatio
 ```python
 client.revoke_privilege(
     role_name='roleA',
-    object_type='User',
-    object_name='user_1',
+    object_type='User',  # value here can be Global, Collection or User, object type also depends on the API defined in privilegeName 
+    object_name='user_1',  # value here can be * or a specific user name if object type is 'User'
     privilege='SelectUser'
 )
 ```
