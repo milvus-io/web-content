@@ -30,7 +30,7 @@ To compare between Milvus and Pinecone, two vector database solutions, the follo
 | Scalability | Scale up/down only | Scale out/in and Scale up/down | Milvus features a distributed architecture for enhanced scalability. |
 | Availability | Pod-based architecture within available zones | Available zone failover and cross-region HA | Milvus CDC (Change Data Capture) enables primary/standby modes for higher availability. |
 | Perf-Cost (Dollar per million queries) | Starts at $0.178 for a medium dataset, $1.222 for a large dataset | Zilliz Cloud starts at $0.148 for a medium dataset, $0.635 for a large dataset; free version available | Refer to [Cost Ranking report](https://zilliz.com/vector-database-benchmark-tool?database=ZillizCloud,Milvus,ElasticCloud,PgVector,Pinecone,QdrantCloud,WeaviateCloud&dataset=medium&filter=none,low,high&tab=2). |
-| GPU Accelaration | Not supported | Support Nividia GPU | GPU acceleration significantly enhances performance, often by orders of magnitude. |
+| GPU Acceleration | Not supported | Support NVIDIA GPU | GPU acceleration significantly enhances performance, often by orders of magnitude. |
 
 ## Terminology comparison
 
