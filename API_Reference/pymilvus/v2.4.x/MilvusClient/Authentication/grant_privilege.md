@@ -30,9 +30,10 @@ grant_privilege(
     The type of the object for which the privilege is being assigned.
 
     Possible values:
-      - __Global__: System-wide objects, allowing the user to perform actions that affect all collections, users, or system-wide settings. When __object_type__ is set to __Global__, set __object_name__ to the wildcard (__*__), indicating all objects of the specified type.
-      - __Collection__: Collection-specific objects, allowing the user to perform actions such as creating indexes, loading data, inserting or deleting data, and querying data within a specific collection.
-      - __User__: Objects related to user management, allowing the user to manage credentials and roles for database users, such as updating user credentials or viewing user details.
+
+    - __Global__: System-wide objects, allowing the user to perform actions that affect all collections, users, or system-wide settings. When __object_type__ is set to __Global__, set __object_name__ to the wildcard (__*__), indicating all objects of the specified type.
+    - __Collection__: Collection-specific objects, allowing the user to perform actions such as creating indexes, loading data, inserting or deleting data, and querying data within a specific collection.
+    - __User__: Objects related to user management, allowing the user to manage credentials and roles for database users, such as updating user credentials or viewing user details.
 
 - **privilege** (*str*) -
 
