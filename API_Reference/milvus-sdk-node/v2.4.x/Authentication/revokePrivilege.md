@@ -29,23 +29,26 @@ milvusClient.revokePrivilege({
 
     **[REQUIRED]**
 
-    The type of the privilege object to assign. 
+    The type of the object from which the privilege is being revoked. 
 
-    Possible values from the *RbacObjects* enumeration object are **Global**, **Collection**, and **User**.
+    Possible values:
+      - __Global__: System-wide objects, allowing the user to perform actions that affect all collections, users, or system-wide settings. When __object__ is set to __Global__, set __objectName__ to the wildcard (__*__), indicating all objects of the specified type.
+      - __Collection__: Collection-specific objects, allowing the user to perform actions such as creating indexes, loading data, inserting or deleting data, and querying data within a specific collection.
+      - __User__: Objects related to user management, allowing the user to manage credentials and roles for database users, such as updating user credentials or viewing user details.
 
 - **objectName** (*str*) - 
 
     **[REQUIRED]**
 
-    The name of the API to assign. 
+    The name of the object to control access for. For example, if the object type is __Collection__, the object name is the name of a collection. If the object type is __User__, the object name is the name of a database user.
 
-    You can either use the wildcard (*) to include all applicable APIs in the specified privilege or fill in a specific API. For details, refer to the Relevant API column in the table on page [Users and Roles](https://milvus.io/docs/users_and_roles.md).
+    When __object__ is set to __Global__, set __objectName__ to the wildcard (__*__), indicating all objects of the specified type. For details, refer to the Relevant API column in the table on page [Users and Roles](https://milvus.io/docs/users_and_roles.md).
 
 - **privilegeName** (*PrivilegesTypes*) -
 
     **[REQUIRED]**
 
-    The name of the privilege to assign. You can use any value in the **Enumeration Members** column of the following table.
+    The name of the privilege to revoke. You can use any value in the **Enumeration Members** column of the following table.
 
     <table>
        <tr>
@@ -105,8 +108,8 @@ This method returns a promise that resolves to a **ResStatus** object.
 ```java
 milvusClient.revokePrivilege({
    roleName: 'roleName',
-   object: '*',
-   objectName: 'Collection',
+   object: 'Collection', // Valid value: Global, Collection or User.
+   objectName: 'CollectionName', // The name of the collection to revoke privilege from. Use "*" to revoke privilege from all collections.
    privilegeName: 'CreateIndex'
  })
 ```

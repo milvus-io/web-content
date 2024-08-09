@@ -30,15 +30,20 @@ grantPrivilege(data): Promise<ResStatus>
 
     **[REQUIRED]**
 
-    The type of the privilege object to assign. 
+    The type of the object for which the privilege is being assigned.
 
-    Possible values are **Global**, **Collection**, and **User**.
+    Possible values:
+      - __Global__: System-wide objects, allowing the user to perform actions that affect all collections, users, or system-wide settings. When __object__ is set to __Global__, set __objectName__ to the wildcard (__*__), indicating all objects of the specified type.
+      - __Collection__: Collection-specific objects, allowing the user to perform actions such as creating indexes, loading data, inserting or deleting data, and querying data within a specific collection.
+      - __User__: Objects related to user management, allowing the user to manage credentials and roles for database users, such as updating user credentials or viewing user details.
 
 - **objectName** (*string*) -
 
     **[REQUIRED]**
 
-    The name of the API to assign.  For details, refer to the Relevant API column in the table on page [Users and Roles](https://milvus.io/docs/users_and_roles.md).
+    The name of the object to control access for. For example, if the object type is __Collection__, the object name is the name of a collection. If the object type is __User__, the object name is the name of a database user.
+
+    When __object__ is set to __Global__, set __objectName__ to the wildcard (__*__), indicating all objects of the specified type. For details, refer to the Relevant API column in the table on page [Users and Roles](https://milvus.io/docs/users_and_roles.md).
 
 - **privilegeName** (*string*) -
 
@@ -85,9 +90,8 @@ This method returns a promise that resolves to a **ResStatus** object.
 ```java
 milvusClient.grantPrivilege({
    roleName: 'roleName',
-   object: '*',
-   objectName: 'Collection',
+   object: 'Collection',  // Valid value: Global, Collection or User.
+   objectName: 'CollectionName', // The name of the collection to grant access to. Use "*" to grant access to all collections.
    privilegeName: 'CreateIndex'
  })
 ```
-
