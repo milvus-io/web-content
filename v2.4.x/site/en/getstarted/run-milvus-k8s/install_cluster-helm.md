@@ -106,14 +106,11 @@ NAME                                             READY  STATUS   RESTARTS  AGE
 my-release-etcd-0                                1/1    Running   0        3m23s
 my-release-etcd-1                                1/1    Running   0        3m23s
 my-release-etcd-2                                1/1    Running   0        3m23s
-my-release-milvus-datacoord-6fd4bd885c-gkzwx     1/1    Running   0        3m23s
 my-release-milvus-datanode-68cb87dcbd-4khpm      1/1    Running   0        3m23s
-my-release-milvus-indexcoord-5bfcf6bdd8-nmh5l    1/1    Running   0        3m23s
 my-release-milvus-indexnode-5c5f7b5bd9-l8hjg     1/1    Running   0        3m24s
+my-release-milvus-mixcoord-7fb9488465-dmbbj      1/1    Running   0        3m23s
 my-release-milvus-proxy-6bd7f5587-ds2xv          1/1    Running   0        3m24s
-my-release-milvus-querycoord-579cd79455-xht5n    1/1    Running   0        3m24s
 my-release-milvus-querynode-5cd8fff495-k6gtg     1/1    Running   0        3m24s
-my-release-milvus-rootcoord-7fb9488465-dmbbj     1/1    Running   0        3m23s
 my-release-minio-0                               1/1    Running   0        3m23s
 my-release-minio-1                               1/1    Running   0        3m23s
 my-release-minio-2                               1/1    Running   0        3m23s
