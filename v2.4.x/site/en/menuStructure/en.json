@@ -1324,6 +1324,12 @@
         "id": "integrate_with_camel.md",
         "order": 19,
         "children": []
+      },
+      {
+        "label": "Airbyte",
+        "id": "integrate_with_airbyte.md",
+        "order": 20,
+        "children": []
       }
     ]
   },
