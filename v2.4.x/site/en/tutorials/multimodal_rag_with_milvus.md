@@ -39,6 +39,7 @@ If you are using Google Colab, to enable dependencies just installed, you may ne
 The following command will download the example data and extract to a local folder "./images_folder" including:
 
 - **images**: A subset of [Amazon Reviews 2023](https://github.com/hyp1231/AmazonReviews2023) containing approximately 900 images from the categories "Appliance", "Cell_Phones_and_Accessories", and "Electronics".
+
 - **leopard.jpg**: An example query image.
 
 
@@ -119,9 +120,9 @@ for image_path in tqdm(image_list, desc="Generating image embeddings: "):
 print("Number of encoded images:", len(image_dict))
 ```
 
-    Generating image embeddings: 100%|██████████| 145/145 [00:03<00:00, 43.54it/s]
+    Generating image embeddings: 100%|██████████| 900/900 [00:20<00:00, 44.08it/s]
 
-    Number of encoded images: 145
+    Number of encoded images: 900
 
 
     
@@ -169,10 +170,8 @@ milvus_client.insert(
 ```
 
 
-
-
     {'insert_count': 900,
-     'ids': [451503448502042624, 451503448502042625, ..., 451503448502042768],
+     'ids': [451537887696781312, 451537887696781313, ..., 451537887696782211],
      'cost': 0}
 
 
@@ -451,8 +450,8 @@ best_img = best_img.resize((150, 150))
 best_img.show()
 ```
 
-    Reasons:
-    The most suitable item for the user's query intent is index 6 because the instruction specifies a phone case with the theme of the image, which is a leopard. The phone case with index 6 has a thematic design resembling the leopard pattern, making it the closest match to the user's request for a phone case with the image theme. 
+    Reasons: The most suitable item for the user's query intent is index 6 because the instruction specifies a phone case with the theme of the image, which is a leopard. The phone case with index 6 has a thematic design resembling the leopard pattern, making it the closest match to the user's request for a phone case with the image theme.
+
 
 
     

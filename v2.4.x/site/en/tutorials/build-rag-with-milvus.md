@@ -280,3 +280,4 @@ print(response.choices[0].message.content)
 ## Quick Deploy
 
 To learn about how to start an online demo with this tutorial, please refer to [the example application](https://github.com/milvus-io/bootcamp/tree/master/bootcamp/tutorials/quickstart/apps/rag_search_with_milvus).
+

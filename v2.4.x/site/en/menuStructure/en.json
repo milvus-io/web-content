@@ -1218,9 +1218,28 @@
       },
       {
         "label": "LangChain",
-        "id": "integrate_with_langchain.md",
+        "id": "langchain",
         "order": 6,
-        "children": []
+        "children": [
+          {
+            "label": "Basic Usage",
+            "id": "basic_usage_langchain.md",
+            "order": 1,
+            "children": []
+          },
+          {
+            "label": "RAG with LangChain",
+            "id": "integrate_with_langchain.md",
+            "order": 2,
+            "children": []
+          },
+          {
+            "label": "Hybrid Search",
+            "id": "milvus_hybrid_search_retriever.md",
+            "order": 3,
+            "children": []
+          }
+        ]
       },
       {
         "label": "HayStack",

@@ -186,7 +186,7 @@ display(concatenated_image)
 
 
     
-<img src="../../../assets/query.png" width="150" alt="query result" />
+![png](image_search_with_milvus_files/image_search_with_milvus_14_1.png)
     
 
 
@@ -205,4 +205,5 @@ We can see that most of the images are from the same category as the search imag
 ## Quick Deploy
 
 To learn about how to start an online demo with this tutorial, please refer to [the example application](https://github.com/milvus-io/bootcamp/tree/master/bootcamp/tutorials/quickstart/apps/image_search_with_milvus).
+
 
