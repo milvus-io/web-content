@@ -114,7 +114,7 @@ while True:
     res = iterator.next()
     
     if not res:
-        res.close()
+        iterator.close()
         break
 ```
 
