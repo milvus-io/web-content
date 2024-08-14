@@ -113,6 +113,8 @@ To use custom indexing, specify a particular index type using the __index_type__
 
 </div>
 
+The example below creates an inverted index for the scalar field `scalar_2`.
+
 <div class="multipleCode">
     <a href="#python">Python </a>
     <a href="#java">Java</a>
@@ -186,7 +188,7 @@ __Methods and Parameters__
 
         For custom indexing, valid values are:
 
-        - __INVERTED__: (Recommended) An inverted index consists of a term dictionary containing all tokenized words sorted alphabetically. For details, refer to Scalar Index.
+        - __INVERTED__: (Recommended) An inverted index consists of a term dictionary containing all tokenized words sorted alphabetically. For details, refer to [Scalar Index](scalar_index.md).
 
         - __STL_SORT__: Sorts scalar fields using the standard template library sort algorithm. Only supports numeric fields (e.g., INT8, INT16, INT32, INT64, FLOAT, DOUBLE).
 
@@ -223,7 +225,7 @@ __Methods and Parameters__
   - __indexType__ (_String_)
     The type of the scalar index to create. For implicit indexing, leave it empty or omit this parameter.
     For custom indexing, valid values are:
-    - __INVERTED__: (Recommended) An inverted index consists of a term dictionary containing all tokenized words sorted alphabetically. For details, refer to Scalar Index.
+    - __INVERTED__: (Recommended) An inverted index consists of a term dictionary containing all tokenized words sorted alphabetically. For details, refer to [Scalar Index](scalar_index.md).
     - __STL_SORT__: Sorts scalar fields using the standard template library sort algorithm. Supports Boolean and numeric fields (e.g., INT8, INT16, INT32, INT64, FLOAT, DOUBLE).
     - __Trie__: A tree data structure for fast prefix searches and retrievals. Supports VARCHAR fields.
 - __CreateIndexReq__
@@ -326,5 +328,4 @@ console.log(res.indexes)
 
 ## Limits
 
-- Currently, scalar indexing supports INT8, INT16, INT32, INT64, FLOAT, DOUBLE, BOOL, and VARCHAR data types, but not JSON and ARRAY types.
-
+- Currently, scalar indexing supports INT8, INT16, INT32, INT64, FLOAT, DOUBLE, BOOL, VARCHAR, and ARRAY data types, but not the JSON data type.
