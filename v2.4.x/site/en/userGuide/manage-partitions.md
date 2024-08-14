@@ -11,7 +11,7 @@ This guide walks you through how to create and manage partitions in a collection
 
 A partition in Milvus represents a sub-division of a collection. This functionality allows the physical storage of a collection to be divided into multiple parts, contributing to improved query performance by narrowing down the focus to a smaller subset of data rather than the entire collection.
 
-Upon the creation of a collection, at least a default partition named ___default__ is automatically created. You can create a maximum of 4,096 partitions within a collection.
+Upon the creation of a collection, at least a default partition named ___default__ is automatically created. You can create a maximum of 1,024 partitions within a collection.
 
 <div class="admonition note">
 
@@ -28,7 +28,7 @@ The code snippet below repurposes the existing code to establish a connection to
 
 <div class="language-python">
 
-For preparations, use [`MiluvsClient`](https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Client/MilvusClient.md) to connect to Milvus and [`create_collection()`](https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_collection.md) to create a collection in a quick-setup mode.
+For preparations, use [`MilvusClient`](https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Client/MilvusClient.md) to connect to Milvus and [`create_collection()`](https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_collection.md) to create a collection in a quick-setup mode.
 
 </div>
 
@@ -191,7 +191,7 @@ The output of the above code snippet includes the names of the partitions within
 
 ## Create Partitions
 
-You can add more partitions to the collection. A collection can have up to 64 partitions.
+You can add more partitions to the collection. A collection can have up to 1,024 partitions.
 
 <div class="language-python">
 
