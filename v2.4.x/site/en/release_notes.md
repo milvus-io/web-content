@@ -7,6 +7,116 @@ title: Release Notes
 
 Find out what’s new in Milvus! This page summarizes new features, improvements, known issues, and bug fixes in each release. You can find the release notes for each released version after v2.4.0 in this section. We suggest that you regularly visit this page to learn about updates.
 
+## v2.4.8
+
+Release Date: August 14, 2024
+
+| Milvus version | Python SDK version | Java SDK version    | Node.js SDK version |
+|----------------|--------------------| --------------------| --------------------|
+| 2.4.8          | 2.4.5              | 2.4.3               | 2.4.4               |
+
+Milvus 2.4.8 introduced several significant improvements to the system's performance and stability. The most notable feature was the implementation of clustering compaction, a mechanism that enhances search and query efficiency by redistributing data in large collections based on a designated clustering key, reducing the amount of data scanned. Compaction was also decoupled from the shard DataNode, allowing any DataNode to perform compaction independently, which improved fault tolerance, stability, performance, and scalability. Additionally, the interface between the Go and C++ components was refactored to use asynchronous CGO calls, addressing issues like session timeouts, while several other performance optimizations were made based on profiling. The application dependencies were also updated to address known security vulnerabilities. Moreover, this release also includes numerous performance optimizations and critical bug fixes.
+
+### Features
+
+- Implemented clustering compaction, allowing data to be redistributed based on a designated clustering key to enhance query efficiency ([#34326](https://github.com/milvus-io/milvus/pull/34326)), ([#34363](https://github.com/milvus-io/milvus/pull/34363)).
+
+### Improvements
+
+- Implemented asynchronous search and retrieval capabilities in CGO. ([#34200](https://github.com/milvus-io/milvus/pull/34200))
+- Separated the compaction process from the Shard DataNode to improve system modularity. ([#34157](https://github.com/milvus-io/milvus/pull/34157))
+- Added support for client pooling in QueryNode within the proxy/delegator to enhance performance. ([#35195](https://github.com/milvus-io/milvus/pull/35195))
+- Integrated Sonic to minimize CPU overhead during JSON marshaling and unmarshaling in Gin and RestfulV1 handlers. ([#35018](https://github.com/milvus-io/milvus/pull/35018))
+- Introduced an in-memory cache to optimize authentication result retrieval. ([#35272](https://github.com/milvus-io/milvus/pull/35272))
+- Modified the default metric type for autoindex. [[#34277](https://github.com/milvus-io/milvus/pull/34277), [#34479](https://github.com/milvus-io/milvus/pull/34479)]
+- Refactored the runtime memory format for variable columns, leading to reduced memory usage. [[#34367](https://github.com/milvus-io/milvus/pull/34367), [#35012](https://github.com/milvus-io/milvus/pull/35012), [#35041](https://github.com/milvus-io/milvus/pull/35041)]
+- Refactored compaction processes to enable persistent data storage. ([#34268](https://github.com/milvus-io/milvus/pull/34268))
+- Enabled memory-mapped file support for growing segments, improving memory management. ([#34110](https://github.com/milvus-io/milvus/pull/34110))
+- Improved access logs by adding RESTful API support, logging consistency levels, and distinguishing between system and user errors. [[#34295](https://github.com/milvus-io/milvus/pull/34295), [#34352](https://github.com/milvus-io/milvus/pull/34352), [#34396](https://github.com/milvus-io/milvus/pull/34396)]
+- Utilized the new `range_search_k` parameter in Knowhere to speed up range searches. ([#34709](https://github.com/milvus-io/milvus/pull/34709))
+- Applied blocked Bloom filters to enhance the speed of filter construction and querying. [[#34377](https://github.com/milvus-io/milvus/pull/34377), [#34922](https://github.com/milvus-io/milvus/pull/34922)]
+- Memory Usage Improvements: 
+  - Pre-allocated space for DataNode insert buffers. ([#34205](https://github.com/milvus-io/milvus/pull/34205))
+  - Pre-allocated `FieldData` for Reduce operations. ([#34254](https://github.com/milvus-io/milvus/pull/34254))
+  - Released records in delete codec to prevent memory leaks. ([#34506](https://github.com/milvus-io/milvus/pull/34506))
+  - Controlled concurrency level of the disk file manager during file loading. ([#35282](https://github.com/milvus-io/milvus/pull/35282))
+  - Optimized Go runtime garbage collection logic for timely memory release. ([#34950](https://github.com/milvus-io/milvus/pull/34950))
+  - Implemented a new seal policy for growing segments. ([#34779](https://github.com/milvus-io/milvus/pull/34779))
+- DataCoord Enhancements: 
+  - Reduced CPU usage. [[#34231](https://github.com/milvus-io/milvus/pull/34231), [#34309](https://github.com/milvus-io/milvus/pull/34309)]
+  - Implemented faster garbage collection exit logic. ([#35051](https://github.com/milvus-io/milvus/pull/35051))
+  - Improved worker node scheduling algorithms. ([#34382](https://github.com/milvus-io/milvus/pull/34382))
+  - Enhanced segment size control algorithm specifically for import operations. ([#35149](https://github.com/milvus-io/milvus/pull/35149))
+- Load Balancing Algorithm Improvements: 
+  - Reduced the memory overload factor on the delegator. ([#35164](https://github.com/milvus-io/milvus/pull/35164))
+  - Allocated fixed memory size for the delegator. ([#34600](https://github.com/milvus-io/milvus/pull/34600))
+  - Avoided excessive allocation of segments and channels for new query nodes. ([#34245](https://github.com/milvus-io/milvus/pull/34245))
+  - Reduced the number of tasks per scheduling cycle by Query Coordinator while increasing scheduling frequency. ([#34987](https://github.com/milvus-io/milvus/pull/34987))
+  - Enhanced channel balancing algorithm on the DataNode. ([#35033](https://github.com/milvus-io/milvus/pull/35033))
+- Expanded System Metrics: Added new metrics across various components to monitor specific aspects including:
+  - Force-deny-writing state. ([#34989](https://github.com/milvus-io/milvus/pull/34989))
+  - Queue latency. ([#34788](https://github.com/milvus-io/milvus/pull/34788))
+  - Disk quota. ([#35306](https://github.com/milvus-io/milvus/pull/35306))
+  - Task execution time. ([#35141](https://github.com/milvus-io/milvus/pull/35141))
+  - Binlog size. ([#35235](https://github.com/milvus-io/milvus/pull/35235))
+  - Insert rate. ([#35188](https://github.com/milvus-io/milvus/pull/35188))
+  - Memory high water level. ([#35188](https://github.com/milvus-io/milvus/pull/35188))
+  - RESTful API metrics. ([#35083](https://github.com/milvus-io/milvus/pull/35083))
+  - Search latency. ([#34783](https://github.com/milvus-io/milvus/pull/34783))
+
+### Changes
+
+- For open-source users, this version changes the metric types in AutoIndex for `FloatVector` and `BinaryVector` to `Cosine` and `Hamming`, respectively.
+
+- **Fixed Third-Party Dependency Versions**: 
+  - This release introduces fixed versions for certain third-party dependency libraries, significantly enhancing Milvus's software supply chain management. 
+  - By isolating the project from upstream changes, it safeguards daily builds from potential disruptions. 
+  - The update ensures stability by exclusively hosting validated C++ third-party packages on JFrog Cloud and utilizing Conan Recipe Revisions (RREV). 
+  - This approach mitigates the risk of breaking changes from updates in ConanCenter.
+  - Developers using Ubuntu 22.04 will benefit immediately from these changes. However, developers on other operating systems may need to upgrade their `glibc` version to avoid compatibility issues.
+
+### Critical bug fixes
+
+- Fixed an issue where deletion data was lost due to segments being omitted during L0 compaction. [[#33980](https://github.com/milvus-io/milvus/pull/33980), [#34363](https://github.com/milvus-io/milvus/pull/34363)]
+- Rectified a problem where delete messages failed to be forwarded due to incorrect data scope handling. ([#35313](https://github.com/milvus-io/milvus/pull/35313))
+- Resolved a SIGBUS exception that occurred due to incorrect usage of `mmap`. [[#34455](https://github.com/milvus-io/milvus/pull/34455), [#34530](https://github.com/milvus-io/milvus/pull/34530)]
+- Fixed crashes caused by illegal search expressions. ([#35307](https://github.com/milvus-io/milvus/pull/35307))
+- Corrected an issue where DataNode watch failed due to an incorrect timeout setting in the watch context. ([#35017](https://github.com/milvus-io/milvus/pull/35017))
+
+### Bug fixes
+
+- Addressed security vulnerabilities by upgrading certain dependencies. [[#33927](https://github.com/milvus-io/milvus/pull/33927), [#34693](https://github.com/milvus-io/milvus/pull/34693)]
+- Fixed a parsing error triggered by excessively long expressions. ([#34957](https://github.com/milvus-io/milvus/pull/34957))
+- Resolved a memory leak that occurred during query plan parsing. ([#34932](https://github.com/milvus-io/milvus/pull/34932))
+- Fixed an issue where dynamic log level modifications were not taking effect. ([#34777](https://github.com/milvus-io/milvus/pull/34777))
+- Resolved an issue where group by queries on growing data failed due to uninitialized segment offsets. ([#34750](https://github.com/milvus-io/milvus/pull/34750))
+- Corrected the setting of search parameters when using the Knowhere iterator. ([#34732](https://github.com/milvus-io/milvus/pull/34732))
+- Revised the logic for checking the status of the partition load. ([#34305](https://github.com/milvus-io/milvus/pull/34305))
+- Fixed an issue where privilege cache updates failed due to unhandled request errors. ([#34697](https://github.com/milvus-io/milvus/pull/34697))
+- Resolved a failure in loaded collection recovery after QueryCoord restarted. ([#35211](https://github.com/milvus-io/milvus/pull/35211))
+- Fixed an issue of load idempotence by removing unnecessary index parameter validation. ([#35179](https://github.com/milvus-io/milvus/pull/35179))
+- Ensured `compressBinlog` is executed to allow `reloadFromKV` to properly fill binlog's `logID` after DataCoord restarts. ([#34062](https://github.com/milvus-io/milvus/pull/34062))
+- Fixed an issue where collection metadata was not removed after garbage collection in DataCoord. ([#34884](https://github.com/milvus-io/milvus/pull/34884))
+- Resolved a memory leak in SegmentManager within DataCoord by removing flushed segments generated through imports. ([#34651](https://github.com/milvus-io/milvus/pull/34651))
+- Fixed a panic issue when compaction was disabled and a collection was dropped. ([#34206](https://github.com/milvus-io/milvus/pull/34206))
+- Fixed an out-of-memory issue in DataNode by enhancing the memory usage estimation algorithm. ([#34203](https://github.com/milvus-io/milvus/pull/34203))
+- Prevented burst memory usage when multiple vector retrieval requests hit a cache miss by implementing singleflight for chunk cache. ([#34283](https://github.com/milvus-io/milvus/pull/34283))
+- Captured `ErrKeyNotFound` during CAS (Compare and Swap) operations in the configuration. ([#34489](https://github.com/milvus-io/milvus/pull/34489))
+- Fixed an issue where configuration updates failed due to mistakenly using the formatted value in a CAS operation. ([#34373](https://github.com/milvus-io/milvus/pull/34373))
+
+### Miscellaneous
+
+- Added support for the OTLP HTTP exporter, enhancing observability and monitoring capabilities. [[#35073](https://github.com/milvus-io/milvus/pull/35073), [#35299](https://github.com/milvus-io/milvus/pull/35299)]
+- Enhanced database functionality by introducing properties such as "max collections" and "disk quota," which can now be dynamically modified. [[#34511](https://github.com/milvus-io/milvus/pull/34511), [#34386](https://github.com/milvus-io/milvus/pull/34386)]
+- Added tracing capabilities for L0 compaction processes within DataNode to improve diagnostics and monitoring. ([#33898](https://github.com/milvus-io/milvus/pull/33898))
+- Introduced quota configuration for the number of L0 segment entries per collection, enabling better control over deletion rates by applying backpressure. ([#34837](https://github.com/milvus-io/milvus/pull/34837))
+- Extended the rate-limiting mechanism for insert operations to also cover upsert operations, ensuring consistent performance under high load. ([#34616](https://github.com/milvus-io/milvus/pull/34616))
+- Implemented a dynamic CGO pool for proxy CGO calls, optimizing resource usage and performance. ([#34842](https://github.com/milvus-io/milvus/pull/34842))
+- Enabled the DiskAnn compile option for Ubuntu, Rocky, and Amazon operating systems, improving compatibility and performance on these platforms. ([#34244](https://github.com/milvus-io/milvus/pull/34244))
+- Upgraded Conan to version 1.64.1, ensuring compatibility with the latest features and improvements. ([#35216](https://github.com/milvus-io/milvus/pull/35216))
+- Updated Knowhere to version 2.3.7, bringing in performance enhancements and new features. ([#34709](https://github.com/milvus-io/milvus/pull/34709))
+- Fixed the revision of specific third-party packages to ensure consistent builds and reduce the risk of unexpected changes. ([#35316](https://github.com/milvus-io/milvus/pull/35316))
+
 ## v2.4.6
 
 Release date: July 16, 2024
