@@ -188,7 +188,7 @@ __Methods and Parameters__
 
         - __INVERTED__: (Recommended) An inverted index consists of a term dictionary containing all tokenized words sorted alphabetically. For details, refer to Scalar Index.
 
-        - __STL_SORT__: Sorts scalar fields using the standard template library sort algorithm. Supports Boolean and numeric fields (e.g., INT8, INT16, INT32, INT64, FLOAT, DOUBLE).
+        - __STL_SORT__: Sorts scalar fields using the standard template library sort algorithm. Only supports numeric fields (e.g., INT8, INT16, INT32, INT64, FLOAT, DOUBLE).
 
         - __Trie__: A tree data structure for fast prefix searches and retrievals. Supports VARCHAR fields.
 
