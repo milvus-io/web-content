@@ -7,6 +7,41 @@ title: Release Notes
 
 Find out what’s new in Milvus! This page summarizes new features, improvements, known issues, and bug fixes in each release. You can find the release notes for each released version after v2.3.0 in this section. We suggest that you regularly visit this page to learn about updates.
 
+## v2.3.21
+
+Release data: August 14, 2024
+
+| Milvus version | Python SDK version | Java SDK version | Go SDK version | Node.js SDK version |
+|----------------|--------------------|------------------|----------------|---------------------|
+| 2.3.21         | 2.3.7              | 2.3.6            | 2.3.6          | 2.3.5               |
+
+Miluvs v2.3.21 addresses a critical bug in data deletion ([#35390](https://github.com/milvus-io/milvus/pull/35390)) and introduces some improvements in metrics and performance.
+
+### Improvements
+
+- Enhanced data deletion process by modifying the delegator's delete buffer handling  ([#35074](https://github.com/milvus-io/milvus/pull/35074))
+- Added metrics to track disk quota usage  ([#35320](https://github.com/milvus-io/milvus/pull/35320))
+- Reduced delegator memory usage by adjusting the overloaded factor to 0.1  ([#35165](https://github.com/milvus-io/milvus/pull/35165))
+- Improved health check by skipping manually stopped components ([#35122](https://github.com/milvus-io/milvus/pull/35122))
+- Added metric to record maxinsertrate and querynodememoryhighwaterlevel  ([#35193](https://github.com/milvus-io/milvus/pull/35193))
+- Upgraded the Conan version ([#35217](https://github.com/milvus-io/milvus/pull/35217))
+- Changed the default metric type for autoindex ([#34328](https://github.com/milvus-io/milvus/pull/34328))
+- Sped up the datacoord gc quit process ([#35057](https://github.com/milvus-io/milvus/pull/35057))
+- Avoided panic due to nil schema  ([#35065](https://github.com/milvus-io/milvus/pull/35065))
+- Reduced duplicate primary keys in the segcore component  ([#35291](https://github.com/milvus-io/milvus/pull/35291))
+- Tracked the number of times Milvus enters a force-deny-writing state ([#34990](https://github.com/milvus-io/milvus/pull/34990))
+
+### Bug fixes
+
+- Resolved an issue with the BloomFilter returning false negatives when the statslog contained multiple K values, which could occur when a delete operation failed to apply ([#35390](https://github.com/milvus-io/milvus/pull/35390))
+- Enabled a limiter for RESTful server ([#35354](https://github.com/milvus-io/milvus/pull/35354))
+- Added a retry mechanism to avoid getting incomplete query results ([#35061](https://github.com/milvus-io/milvus/pull/35061))
+- Fixed issues with delete-by-expression operations failing during retry progress  ([#35421](https://github.com/milvus-io/milvus/pull/35421))
+- Addressed a problem where the datanode binlog size metrics included dropped segments  ([#35420](https://github.com/milvus-io/milvus/pull/35420))
+- Resolved comparison operations between incompatible operands  ([#35308](https://github.com/milvus-io/milvus/pull/35308))
+- Fixed an issue where the datanode could not watch the channel ([#35136](https://github.com/milvus-io/milvus/pull/35136))
+- Addressed a deadlock issue on compaction when stopping the datanode ([#35199](https://github.com/milvus-io/milvus/pull/35199))
+
 ## v2.3.20
 
 Release data: July 25, 2024
