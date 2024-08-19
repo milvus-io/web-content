@@ -3,7 +3,6 @@ id: system_configuration.md
 related_key: configure
 group: system_configuration.md
 summary: Learn about the system configuration of Milvus.
-title: Milvus System Configurations Checklist
 ---
 
 # Milvus System Configurations Checklist
@@ -13,246 +12,234 @@ This topic introduces the general sections of the system configurations in Milvu
 Milvus maintains a considerable number of parameters that configure the system. Each configuration has a default value, which can be used directly. You can modify these parameters flexibly so that Milvus can better serve your application. See [Configure Milvus](configure-docker.md) for more information.
 
 <div class="alert note">
-
-<ul>
-
-<li>
 In current release, all parameters take effect only after being configured at the startup of Milvus.
-</li>
-
-<li>
-
-For Milvus Operator users, refer to [Configure Milvus with Milvus Operator](https://github.com/zilliztech/milvus-operator/blob/main/docs/administration/configure-milvus.md).
-
-</li>
-
-</ul>
-
 </div>
 
 ## Sections
 
-For the convenience of maintenance, Milvus classifies its configurations into 17 sections based on its components, dependencies, and general usage.
+For the convenience of maintenance, Milvus classifies its configurations into %s sections based on its components, dependencies, and general usage.
 
 ### `etcd`
 
-etcd is the metadata engine supporting Milvus' metadata storage and access.
-
-Under this section, you can configure etcd endpoints, relevant key prefixes, etc.
+Related configuration of etcd, used to store Milvus metadata & service discovery.
 
 See [etcd-related Configurations](configure_etcd.md) for detailed description for each parameter under this section.
 
-### `minio`
+### `metastore`
 
-Milvus supports MinIO and Amazon S3 as the storage engine for data persistence of insert log files and index files. Whereas MinIO is the de facto standard for S3 compatibility, you can configure S3 parameters directly under MinIO section.
 
-Under this section, you can configure MinIO or S3 address, relevant access keys, etc.
 
-See [MinIO-related Configurations](configure_minio.md) for detailed description for each parameter under this section.
+See [metastore-related Configurations](configure_metastore.md) for detailed description for each parameter under this section.
 
-### `pulsar`
+### `tikv`
 
-Pulsar is the underlying engine supporting Milvus cluster's reliable storage and publication/subscription of message streams. 
+Related configuration of tikv, used to store Milvus metadata.
 
-Under this section, you can configure Pulsar address, the message size, etc.
+Notice that when TiKV is enabled for metastore, you still need to have etcd for service discovery.
 
-See [Pulsar-related Configurations](configure_pulsar.md) for detailed description for each parameter under this section.
+TiKV is a good option when the metadata size requires better horizontal scalability.
 
-### `rocksmq`
-
-RocksMQ is the underlying engine supporting Milvus standalone's reliable storage and publication/subscription of message streams. It is implemented on the basis of RocksDB.
-
-Under this section, you can configure message size, retention time and size, etc.
-
-See [RocksMQ-related Configurations](configure_rocksmq.md) for detailed description for each parameter under this section.
-
-### `nats`
-
-NATS is a message-oriented middleware that allows data exchange between applications and services, segmented in the form of messages. Milvus uses NATS as a underlying engine for reliable storage and pub/sub of message streams. You can use it as an alternative to RocksMQ.
-
-Under this section, you can configure NATS server, monitoring properties, and rention time and size, etc.
-
-See [NATS-related Configurations](configure_nats.md) for detailed description for each parameter under this section.
-
-### `kafka`
-
-Apache Kafka is an open-source distributed event streaming platform for high-performance data pipelines, streaming analytics, data integration, and mission-critical applications. It serves as an alternative to RocksMQ and Pulsar for reliable storage and publication/subscription of message streams.
-
-See [Kafka-related Configurations](configure_kafka.md) for detailed description for each parameter under this section.
-
-### `rootCoord`
-
-Root coordinator (root coord) handles data definition language (DDL) and data control language (DCL) requests, manages TSO (timestamp Oracle), and publishes time tick messages.
-
-Under this section, you can configure root coord address, index building threshold, etc.
-
-See [Root Coordinator-related Configurations](configure_rootcoord.md) for detailed description for each parameter under this section.
-
-### `proxy`
-
-Proxy is the access layer of the system and endpoint to users. It validates client requests and reduces the returned results.
-
-Under this section, you can configure proxy port, system limits, etc.
-
-See [Proxy-related Configurations](configure_proxy.md) for detailed description for each parameter under this section.
-
-### `queryCoord`
-
-Query coordinator (query coord) manages topology and load-balancing of the query nodes, and handoff operation from growing segments to sealed segments.
-
-Under this section, you can configure query coord address, auto handoff, auto load-balancing, etc.
-
-See [Query coordinator-related Configurations](configure_querycoord.md) for detailed description for each parameter under this section.
-
-### `queryNode`
-
-Query node performs hybrid search of vector and scalar data on both incremental and historical data.
-
-Under this section, you can configure query node port, graceful time, etc.
-
-See [Query Node-related Configurations](configure_querynode.md) for detailed description for each parameter under this section.
-
-### `indexNode`
-
-Index node builds indexes for vectors.
-
-Under this section, you can configure index node port, etc.
-
-See [Index Node-related Configurations](configure_indexnode.md) for detailed description for each parameter under this section.
-
-### `dataCoord`
-
-Data coordinator (data coord) manages the topology of data nodes, maintains metadata, and triggers flush, compact, and other background data operations.
-
-Under this section, you can configure data coord address, segment settings, compaction, garbage collection, etc.
-
-See [Data Coordinator-related Configurations](configure_datacoord.md) for detailed description for each parameter under this section.
-
-### `dataNode`
-
-Data node retrieves incremental log data by subscribing to the log broker, processes mutation requests, and packs log data into log snapshots and stores them in the object storage.
-
-Under this section, you can configure data node port, etc.
-
-See [Data Node-related Configurations](configure_datanode.md) for detailed description for each parameter under this section.
+See [tikv-related Configurations](configure_tikv.md) for detailed description for each parameter under this section.
 
 ### `localStorage`
 
-Milvus stores the vector data in local storage during search or query to avoid repetitive access to MinIO or S3 service.
 
-Under this section, you can enable local storage, and configure the path, etc.
 
-See [Local Storage-related Configurations](configure_localstorage.md) for detailed description for each parameter under this section.
+See [localStorage-related Configurations](configure_localstorage.md) for detailed description for each parameter under this section.
 
-### `log`
+### `minio`
 
-Using Milvus generates a collection of logs. By default, Milvus uses logs to record information at debug or even higher level for standard output (stdout) and standard error (stderr).
+Related configuration of MinIO/S3/GCS or any other service supports S3 API, which is responsible for data persistence for Milvus.
 
-Under this section, you can configure the system log output.
+We refer to the storage service as MinIO/S3 in the following description for simplicity.
 
-See [Log-related Configurations](configure_log.md) for detailed description for each parameter under this section.
+See [minio-related Configurations](configure_minio.md) for detailed description for each parameter under this section.
+
+### `mq`
+
+Milvus supports four MQ: rocksmq(based on RockDB), natsmq(embedded nats-server), Pulsar and Kafka.
+
+You can change your mq by setting mq.type field.
+
+If you don't set mq.type field as default, there is a note about enabling priority if we config multiple mq in this file.
+
+1. standalone(local) mode: rocksmq(default) > natsmq > Pulsar > Kafka
+
+2. cluster mode:  Pulsar(default) > Kafka (rocksmq and natsmq is unsupported in cluster mode)
+
+See [mq-related Configurations](configure_mq.md) for detailed description for each parameter under this section.
+
+### `pulsar`
+
+Related configuration of pulsar, used to manage Milvus logs of recent mutation operations, output streaming log, and provide log publish-subscribe services.
+
+See [pulsar-related Configurations](configure_pulsar.md) for detailed description for each parameter under this section.
+
+### `rocksmq`
+
+If you want to enable kafka, needs to comment the pulsar configs
+
+kafka:
+
+  brokerList: 
+
+  saslUsername: 
+
+  saslPassword: 
+
+  saslMechanisms: 
+
+  securityProtocol: 
+
+  ssl:
+
+    enabled: false # whether to enable ssl mode
+
+    tlsCert:  # path to client's public key (PEM) used for authentication
+
+    tlsKey:  # path to client's private key (PEM) used for authentication
+
+    tlsCaCert:  # file or directory path to CA certificate(s) for verifying the broker's key
+
+    tlsKeyPassword:  # private key passphrase for use with ssl.key.location and set_ssl_cert(), if any
+
+  readTimeout: 10
+
+
+
+See [rocksmq-related Configurations](configure_rocksmq.md) for detailed description for each parameter under this section.
+
+### `natsmq`
+
+natsmq configuration.
+
+more detail: https://docs.nats.io/running-a-nats-service/configuration
+
+See [natsmq-related Configurations](configure_natsmq.md) for detailed description for each parameter under this section.
+
+### `rootCoord`
+
+Related configuration of rootCoord, used to handle data definition language (DDL) and data control language (DCL) requests
+
+See [rootCoord-related Configurations](configure_rootcoord.md) for detailed description for each parameter under this section.
+
+### `proxy`
+
+Related configuration of proxy, used to validate client requests and reduce the returned results.
+
+See [proxy-related Configurations](configure_proxy.md) for detailed description for each parameter under this section.
+
+### `queryCoord`
+
+Related configuration of queryCoord, used to manage topology and load balancing for the query nodes, and handoff from growing segments to sealed segments.
+
+See [queryCoord-related Configurations](configure_querycoord.md) for detailed description for each parameter under this section.
+
+### `queryNode`
+
+Related configuration of queryNode, used to run hybrid search between vector and scalar data.
+
+See [queryNode-related Configurations](configure_querynode.md) for detailed description for each parameter under this section.
+
+### `indexCoord`
+
+
+
+See [indexCoord-related Configurations](configure_indexcoord.md) for detailed description for each parameter under this section.
+
+### `indexNode`
+
+
+
+See [indexNode-related Configurations](configure_indexnode.md) for detailed description for each parameter under this section.
+
+### `dataCoord`
+
+
+
+See [dataCoord-related Configurations](configure_datacoord.md) for detailed description for each parameter under this section.
+
+### `dataNode`
+
+
+
+See [dataNode-related Configurations](configure_datanode.md) for detailed description for each parameter under this section.
 
 ### `msgChannel`
 
-Under this section, you can configure the message channel name prefixes and component subscription name prefixes.
+This topic introduces the message channel-related configurations of Milvus.
 
-See [Message Channel-related Configurations](configure_messagechannel.md) for detailed description for each parameter under this section.
+See [msgChannel-related Configurations](configure_msgchannel.md) for detailed description for each parameter under this section.
+
+### `log`
+
+Configures the system log output.
+
+See [log-related Configurations](configure_log.md) for detailed description for each parameter under this section.
+
+### `grpc`
+
+
+
+See [grpc-related Configurations](configure_grpc.md) for detailed description for each parameter under this section.
+
+### `tls`
+
+Configure the proxy tls enable.
+
+See [tls-related Configurations](configure_tls.md) for detailed description for each parameter under this section.
 
 ### `common`
 
-Under this section, you can configure the default names of partition and index, and the Time Travel (data retention) span of Milvus.
-
-See [Common Configurations](configure_common.md) for detailed description for each parameter under this section.
-
-### `knowhere`
-
-Under this section, you can configure the default SIMD instruction set type of the system.
-
-See [Knowhere-related Configurations](configure_knowhere.md) for detailed description for each parameter under this section.
-
-## Frequently used parameters
-
-Below list some frequently used parameters categorized in accordance with the purposes of modification.
-
-### Performance tuning
-
-The following parameters control the system behaviors that influence the performance of index creation and vector similarity search.
-
-<ul>
-    <li><a href="configure_querynode.md#queryNode.gracefulTime"><code>queryNode.gracefulTime</code></a></li>
-    <li><a href="configure_rootcoord.md#rootCoord.minSegmentSizeToEnableIndex"><code>rootCoord.minSegmentSizeToEnableIndex</code></a></li>
-    <li><a href="configure_datacoord.md#dataCoord.segment.maxSize"><code>dataCoord.segment.maxSize</code></a></li>
-    <li><a href="configure_datacoord.md#dataCoord.segment.sealProportion"><code>dataCoord.segment.sealProportion</code></a></li>
-    <li><a href="configure_datanode.md#dataNode.flush.insertBufSize"><code>dataNode.flush.insertBufSize</code></a></li>
-    <li><a href="configure_querycoord.md#queryCoord.autoHandoff"><code>queryCoord.autoHandoff</code></a></li>
-    <li><a href="configure_querycoord.md#queryCoord.autoBalance"><code>queryCoord.autoBalance</code></a></li>
-    <li><a href="configure_localstorage.md#localStorage.enabled"><code>localStorage.enabled</code></a></li>
-</ul>
-
-### Data and metadata retention
-
-The following parameters control the retention of data and metadata.
-
-<ul>
-    <li><a href="configure_common.md#common.retentionDuration"><code>common.retentionDuration</code></a></li>
-    <li><a href="configure_rocksmq.md#rocksmq.retentionTimeInMinutes"><code>rocksmq.retentionTimeInMinutes</code></a></li>
-    <li><a href="configure_datacoord.md#dataCoord.enableCompaction"><code>dataCoord.enableCompaction</code></a></li>
-    <li><a href="configure_datacoord.md#dataCoord.enableGarbageCollection"><code>dataCoord.enableGarbageCollection</code></a></li>
-    <li><a href="configure_datacoord.md#dataCoord.gc.dropTolerance"><code>dataCoord.gc.dropTolerance</code></a></li>
-</ul>
 
 
-### Administration
+See [common-related Configurations](configure_common.md) for detailed description for each parameter under this section.
 
-The following parameters control the log output and object storage access.
+### `quotaAndLimits`
 
-<ul>
-    <li><a href="configure_log.md#log.level"><code>log.level</code></a></li>
-    <li><a href="configure_log.md#log.file.rootPath"><code>log.file.rootPath</code></a></li>
-    <li><a href="configure_log.md#log.file.maxAge"><code>log.file.maxAge</code></a></li>
-    <li><a href="configure_minio.md#minio.accessKeyID"><code>minio.accessKeyID</code></a></li>
-    <li><a href="configure_minio.md#minio.secretAccessKey"><code>minio.secretAccessKey</code></a></li>
-</ul>
+QuotaConfig, configurations of Milvus quota and limits.
 
-### Quotas and limits
+By default, we enable:
 
-<ul>
-    <li><a href="configure_quota_limits.md#quotaAndLimitsddlenabled"><code>quotaAndLimits.ddl.enabled</code></a></li>
-    <li><a href="configure_quota_limits.md#quotaAndLimitsddlcollectionRate"><code>quotaAndLimits.ddl.collectionRate</code></a></li>
-    <li><a href="configure_quota_limits.md#quotaAndLimitsddlpartitionRate"><code>quotaAndLimits.ddl.partitionRate</code></a></li>
-    <li><a href="configure_quota_limits.md#quotaAndLimitsindexRateenabled"><code>quotaAndLimits.indexRate.enabled</code></a></li>
-    <li><a href="configure_quota_limits.md#quotaAndLimitsindexRatemax"><code>quotaAndLimits.indexRate.max</code></a></li>
-    <li><a href="configure_quota_limits.md#quotaAndLimitsflushRateenabled"><code>quotaAndLimits.flushRate.enabled</code></a></li>
-    <li><a href="configure_quota_limits.md#quotaAndLimitsflushmax"><code>quotaAndLimits.flush.max</code></a></li>
-    <li><a href="configure_quota_limits.md#quotaAndLimitscompationenabled"><code>quotaAndLimits.compation.enabled</code></a></li>
-    <li><a href="configure_quota_limits.md#quotaAndLimitscompactionmax"><code>quotaAndLimits.compaction.max</code></a></li>
-    <li><a href="configure_quota_limits.md#quotaAndLimitsdmlenabled"><code>quotaAndLimits.dml.enabled</code></a></li>
-    <li><a href="configure_quota_limits.md#quotaAndLimitsdmlinsertRatemax"><code>quotaAndLimits.dml.insertRate.max</code></a></li>
-    <li><a href="configure_quota_limits.md#quotaAndLimitsdmldeleteRatemax"><code>quotaAndLimits.dml.deleteRate.max</code></a></li>
-    <li><a href="configure_quota_limits.md#quotaAndLimitsdqlenabled"><code>quotaAndLimits.dql.enabled</code></a></li>
-    <li><a href="configure_quota_limits.md#quotaAndLimitsdqlsearchRatemax"><code>quotaAndLimits.dql.searchRate.max</code></a></li>
-    <li><a href="configure_quota_limits.md#quotaAndLimitsdqlqueryRatemax"><code>quotaAndLimits.dql.queryRate.max</code></a></li>
-    <li><a href="configure_quota_limits.md#quotaAndLimitslimitWritingttProtectionenabled"><code>quotaAndLimits.limitWriting.ttProtection.enabled</code></a></li>
-    <li><a href="configure_quota_limits.md#quotaAndLimitslimitWritingttProtectionmaxTimeTickDelay"><code>quotaAndLimits.limitWriting.ttProtection.maxTimeTickDelay</code></a></li>
-    <li><a href="configure_quota_limits.md#quotaAndLimitslimitWritingmemProtectionenabled"><code>quotaAndLimits.limitWriting.memProtection.enabled</code></a></li>
-    <li><a href="configure_quota_limits.md#quotaAndLimitslimitWritingmemProtectiondataNodeMemoryLowWaterLevel"><code>quotaAndLimits.limitWriting.memProtection.dataNodeMemoryLowWaterLevel</code></a></li>
-    <li><a href="configure_quota_limits.md#quotaAndLimitslimitWritingmemProtectionqueryNodeMemoryLowWaterLevel"><code>quotaAndLimits.limitWriting.memProtection.queryNodeMemoryLowWaterLevel</code></a></li>
-    <li><a href="configure_quota_limits.md#quotaAndLimitslimitWritingmemProtectiondataNodeMemoryHighWaterLevel"><code>quotaAndLimits.limitWriting.memProtection.dataNodeMemoryHighWaterLevel</code></a></li>
-    <li><a href="configure_quota_limits.md#quotaAndLimitslimitWritingmemProtectionqueryNodeMemoryHighWaterLevel"><code>quotaAndLimits.limitWriting.memProtection.queryNodeMemoryHighWaterLevel</code></a></li>
-    <li><a href="configure_quota_limits.md#quotaAndLimitslimitWritingdiskProtectionenabled"><code>quotaAndLimits.limitWriting.diskProtection.enabled</code></a></li>
-    <li><a href="configure_quota_limits.md#quotaAndLimitslimitWritingdiskProtectiondiskQuota"><code>quotaAndLimits.limitWriting.diskProtection.diskQuota</code></a></li>
-    <li><a href="configure_quota_limits.md#quotaAndLimitslimitWritingforceDeny"><code>quotaAndLimits.limitWriting.forceDeny</code></a></li>
-    <li><a href="configure_quota_limits.md#quotaAndLimitslimitReadingqueueProtectionenabled"><code>quotaAndLimits.limitReading.queueProtection.enabled</code></a></li>
-    <li><a href="configure_quota_limits.md#quotaAndLimitslimitReadingqueueProtectionnqInQueueThreshold"><code>quotaAndLimits.limitReading.queueProtection.nqInQueueThreshold</code></a></li>
-    <li><a href="configure_quota_limits.md#quotaAndLimitslimitReadingqueueProtectionqueueLatencyThreshold"><code>quotaAndLimits.limitReading.queueProtection.queueLatencyThreshold</code></a></li>
-    <li><a href="configure_quota_limits.md#quotaAndLimitslimitReadingresultProtectionenabled"><code>quotaAndLimits.limitReading.resultProtection.enabled</code></a></li>
-    <li><a href="configure_quota_limits.md#quotaAndLimitslimitReadingresultProtectionmaxReadResultRate"><code>quotaAndLimits.limitReading.resultProtection.maxReadResultRate</code></a></li>
-    <li><a href="configure_quota_limits.md#quotaAndLimitslimitReadingforceDeny"><code>quotaAndLimits.limitReading.forceDeny</code></a></li>
-</ul>
+  1. TT protection;
 
-## What's next
+  2. Memory protection.
 
-- Learn how to [configure Milvus](configure-docker.md) before installation.
+  3. Disk quota protection.
 
-- Learn more about the installation of Milvus:
-  - [Install Milvus Standalone](install_standalone-docker.md)
+You can enable:
+
+  1. DML throughput limitation;
+
+  2. DDL, DQL qps/rps limitation;
+
+  3. DQL Queue length/latency protection;
+
+  4. DQL result rate protection;
+
+If necessary, you can also manually force to deny RW requests.
+
+See [quotaAndLimits-related Configurations](configure_quotaandlimits.md) for detailed description for each parameter under this section.
+
+### `trace`
+
+
+
+See [trace-related Configurations](configure_trace.md) for detailed description for each parameter under this section.
+
+### `gpu`
+
+#when using GPU indexing, Milvus will utilize a memory pool to avoid frequent memory allocation and deallocation.
+
+#here, you can set the size of the memory occupied by the memory pool, with the unit being MB.
+
+#note that there is a possibility of Milvus crashing when the actual memory demand exceeds the value set by maxMemSize.
+
+#if initMemSize and MaxMemSize both set zero,
+
+#milvus will automatically initialize half of the available GPU memory,
+
+#maxMemSize will the whole available GPU memory.
+
+See [gpu-related Configurations](configure_gpu.md) for detailed description for each parameter under this section.
+

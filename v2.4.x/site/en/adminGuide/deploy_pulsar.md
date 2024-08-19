@@ -69,7 +69,7 @@ helm install <your_release_name> milvus/milvus -f values.yaml
 
 For Milvus clusters on K8s, you can configure Kafka in the same command that starts Milvus. Alternatively, you can configure Kafka using the <code>values.yml</code> file on the /charts/milvus path in the [milvus-helm](https://github.com/milvus-io/milvus-helm) repository before you start Milvus.
 
-For details on how to configure Milvus using Helm, refer to [Configure Milvus with Helm Charts](configure-helm.md). For details on Pulsar-related configuration items, refer to [Kafka-related configurations](configure_kafka.md).
+For details on how to configure Milvus using Helm, refer to [Configure Milvus with Helm Charts](configure-helm.md). For details on Pulsar-related configuration items, refer to [Pulsar-related configurations](configure_pulsar.md).
 
 ### Using the YAML file
 
@@ -127,7 +127,7 @@ Changing the message store is not recommended. If this is you want to do this, s
 
 ## Configure NATS with Helm
 
-NATS is an experimental message store alternative to RocksMQ. For detailed steps on how to configure Milvus with Helm, refer to [Configure Milvus with Helm Charts](configure-helm.md). For details on RocksMQ-related configuration items, refer to [NATS-related configurations](configure_nats.md).
+NATS is an experimental message store alternative to RocksMQ. For detailed steps on how to configure Milvus with Helm, refer to [Configure Milvus with Helm Charts](configure-helm.md). For details on RocksMQ-related configuration items, refer to [NATS-related configurations](configure_natsmq.md).
 
 - If you start Milvus with NATS and want to change its settings, you can run `helm upgrade -f ` with the changed settings in the following YAML file.
 

@@ -79,7 +79,7 @@ In the `milvus-cdc/server/configs` directory, modify the `cdc.yaml` file to cust
 
     - `sourceConfig.pulsar`: Pulsar configurations for the source Milvus. If the source Milvus uses Kafka for message storage, remove all Pulsar-related configurations. For more information, refer to [Pulsar-related Configurations](https://milvus.io/docs/configure_pulsar.md).
 
-    - `sourceConfig.kafka.address`: Kafka address for the source Milvus. Uncomment this configuration if the source Milvus uses Kafka for message storage. For more information, refer to [Kafka-related Configurations](https://milvus.io/docs/configure_kafka.md).
+    - `sourceConfig.kafka.address`: Kafka address for the source Milvus. Uncomment this configuration if the source Milvus uses Kafka for message storage.
 
 Example configuration:
 

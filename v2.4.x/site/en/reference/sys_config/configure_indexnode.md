@@ -2,17 +2,47 @@
 id: configure_indexnode.md
 related_key: configure
 group: system_configuration.md
-summary: Learn how to configure index node of Milvus.
-title: Index Node-related Configurations
+summary: Learn how to configure indexNode for Milvus.
 ---
 
-# Index Node-related Configurations
+# indexNode-related Configurations
 
-This topic introduces the index node-related configurations of Milvus.
 
-Index node builds indexes for vectors.
 
-Under this section, you can configure index node port, etc.
+## `indexNode.enableDisk`
+
+<table id="indexNode.enableDisk">
+  <thead>
+    <tr>
+      <th class="width80">Description</th>
+      <th class="width20">Default Value</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        enable index node build disk vector index      </td>
+      <td>true</td>
+    </tr>
+  </tbody>
+</table>
+
+
+## `indexNode.ip`
+
+<table id="indexNode.ip">
+  <thead>
+    <tr>
+      <th class="width80">Description</th>
+      <th class="width20">Default Value</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        TCP/IP address of indexNode. If not specified, use the first unicastable address      </td>
+      <td></td>
+    </tr>
+  </tbody>
+</table>
 
 
 ## `indexNode.port`
@@ -26,31 +56,12 @@ Under this section, you can configure index node port, etc.
   </thead>
   <tbody>
     <tr>
-      <td>TCP port of index node.</td>
+      <td>        TCP port of indexNode      </td>
       <td>21121</td>
     </tr>
   </tbody>
 </table>
 
-## `indexNode.grpc.serverMaxRecvSize`
-
-<table id="indexNode.grpc.serverMaxRecvSize">
-  <thead>
-    <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>
-        <li>The maximum size of each RPC request that the index node can receive.</li>
-        <li>Unit: Byte</li>
-      </td>
-      <td>2147483647</td>
-    </tr>
-  </tbody>
-</table>
 
 ## `indexNode.grpc.serverMaxSendSize`
 
@@ -63,18 +74,16 @@ Under this section, you can configure index node port, etc.
   </thead>
   <tbody>
     <tr>
-      <td>
-        <li>The maximum size of each respond the index node can send when receiving an RPC request.</li>
-        <li>Unit: Byte</li>
-      </td>
-      <td>2147483647</td>
+      <td>        The maximum size of each RPC request that the indexNode can send, unit: byte      </td>
+      <td>536870912</td>
     </tr>
   </tbody>
 </table>
 
-## `indexNode.grpc.clientMaxRecvSize`
 
-<table id="indexNode.grpc.clientMaxRecvSize">
+## `indexNode.grpc.serverMaxRecvSize`
+
+<table id="indexNode.grpc.serverMaxRecvSize">
   <thead>
     <tr>
       <th class="width80">Description</th>
@@ -83,14 +92,12 @@ Under this section, you can configure index node port, etc.
   </thead>
   <tbody>
     <tr>
-      <td>
-        <li>The maximum size of each respond that the index node can receive when sending an RPC request.</li>
-        <li>Unit: Byte</li>
-      </td>
-      <td>104857600</td>
+      <td>        The maximum size of each RPC request that the indexNode can receive, unit: byte      </td>
+      <td>268435456</td>
     </tr>
   </tbody>
 </table>
+
 
 ## `indexNode.grpc.clientMaxSendSize`
 
@@ -103,11 +110,28 @@ Under this section, you can configure index node port, etc.
   </thead>
   <tbody>
     <tr>
-      <td>
-        <li>The maximum size of each RPC request that the index node can send.</li>
-        <li>Unit: Byte</li>
-      </td>
-      <td>104857600</td>
+      <td>        The maximum size of each RPC request that the clients on indexNode can send, unit: byte      </td>
+      <td>268435456</td>
     </tr>
   </tbody>
 </table>
+
+
+## `indexNode.grpc.clientMaxRecvSize`
+
+<table id="indexNode.grpc.clientMaxRecvSize">
+  <thead>
+    <tr>
+      <th class="width80">Description</th>
+      <th class="width20">Default Value</th> 
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>        The maximum size of each RPC request that the clients on indexNode can receive, unit: byte      </td>
+      <td>536870912</td>
+    </tr>
+  </tbody>
+</table>
+
+
