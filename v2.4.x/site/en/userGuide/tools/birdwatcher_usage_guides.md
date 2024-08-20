@@ -115,7 +115,7 @@ Use " show [command] --help" for more information about a command.
 
 ### List sessions
 
-You can list all etcd sessions as follows:
+To list sessions associated with different components in Milvus:
 
 ```shell
 Milvus(by-dev) > show session
@@ -129,7 +129,7 @@ Session:querynode, ServerID: 2, Version: 2.2.11, Address: 10.244.0.8:21123
 Session:rootcoord, ServerID: 1, Version: 2.2.11, Address: 10.244.0.8:53100
 ```
 
-In the command output, you can find sessions from all Milvus components to etcd.
+In the command output, each session entry listed by `show session` corresponds to a node or service that is currently active and registered in **etcd**.
 
 ### Check databases and collections
 

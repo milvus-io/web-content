@@ -52,7 +52,7 @@ After running the above code snippet, a database file named **milvus_demo.db** w
 > **_NOTE:_**  Note that the same API also applies to Milvus Standalone, Milvus Distributed and Zilliz Cloud, the only difference is to replace local file name to remote server endpoint and credentials, e.g. 
 `client = MilvusClient(uri="http://localhost:19530", token="username:password")`.
 
-# Examples
+## Examples
 
 Following is a simple demo showing how to use Milvus Lite for text search. There are more comprehensive [examples](https://github.com/milvus-io/bootcamp/tree/master/bootcamp/tutorials) for using Milvus Lite to build applications
 such as [RAG](https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/build_RAG_with_milvus.ipynb), [image search](https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/image_search_with_milvus.ipynb), and using Milvus Lite in popular RAG framework such as [LangChain](https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/rag_with_milvus_and_langchain.ipynb) and [LlamaIndex](https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/rag_with_milvus_and_llamaindex.ipynb)!
@@ -229,7 +229,7 @@ When running Milvus Lite, note that some features are not supported. The followi
 | [list_indexes()](https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/list_collections.md) | Listing indexes is supported.                                                                          |
 | `collection_name`                                                                                              | Y                                                                                                      |
 | `field_name`                                                                                                   | Y                                                                                                      |
-| [create_index()](https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/create_index.md)      | Only supports partial index types: `FLAT`, `HNSW`, `BIN_FLAT`, `SPARSE_INVERTED_INDEX`, `SPARSE_WAND`. |
+| [create_index()](https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/create_index.md)      | Only supports `FLAT` index type.                                                                      |
 | `index_params`                                                                                                 | Y                                                                                                      |
 | `timeout`                                                                                                      | Y                                                                                                      |
 | [drop_index()](https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/drop_index.md)          | Dropping indexes is supported.                                                                         |
@@ -261,7 +261,8 @@ Milvus Lite does not support users and roles and related methods.
 
 Milvus Lite does not support aliases and alias-related methods.
 
-# Migrating data from Milvus Lite
+## Migrating data from Milvus Lite
+
 All data stored in Milvus Lite can be easily exported and loaded into other types of Milvus deployment, such as Milvus Standalone on Docker, Milvus Distributed on K8s, or fully-managed Milvus on [Zilliz Cloud](https://zilliz.com/cloud).
 
 Milvus Lite provides a command line tool that can dump data into a json file, which can be imported into [milvus](https://github.com/milvus-io/milvus) and [Zilliz Cloud](https://zilliz.com/cloud)(the fully managed cloud service for Milvus). The milvus-lite command will be installed together with milvus-lite python package 
