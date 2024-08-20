@@ -335,7 +335,7 @@ SCANN (Score-aware quantization loss) is similar to IVF_PQ in terms of vector cl
     | Parameter | Description              | Range      | Default value |
     | --------- | ------------------------ | ---------- | ------------- |
     | `nprobe`  | Number of units to query | [1, nlist] |               |
-    | `reorder_k` | Number of candidate units to query | [`top_k`, ∞] | |
+    | `reorder_k` | Number of candidate units to query | [`top_k`, ∞] | `top_k` |
 
   - Range search
 
