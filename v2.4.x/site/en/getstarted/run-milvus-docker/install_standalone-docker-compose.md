@@ -21,7 +21,7 @@ Milvus provides a Docker Compose configuration file in the Milvus repository. To
 
 ```shell
 # Download the configuration file
-$ wget https://github.com/milvus-io/milvus/releases/download/v2.4.8/milvus-standalone-docker-compose.yml -O docker-compose.yml
+$ wget https://github.com/milvus-io/milvus/releases/download/v2.4.9/milvus-standalone-docker-compose.yml -O docker-compose.yml
 
 # Start Milvus
 $ sudo docker compose up -d

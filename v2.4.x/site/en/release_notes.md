@@ -7,6 +7,32 @@ title: Release Notes
 
 Find out what’s new in Milvus! This page summarizes new features, improvements, known issues, and bug fixes in each release. You can find the release notes for each released version after v2.4.0 in this section. We suggest that you regularly visit this page to learn about updates.
 
+## v2.4.9
+
+Release Date: August 20, 2024
+
+| Milvus version | Python SDK version | Java SDK version    | Node.js SDK version |
+|----------------|--------------------| --------------------| --------------------|
+| 2.4.9          | 2.4.5              | 2.4.3               | 2.4.4               |
+
+Milvus v2.4.9 addresses a critical issue which could return results less than limit (topk) in some corner cases and includes several key improvements to enhance the performance and usability of the platform.
+
+### Critical fixes
+
+- Excluded l0 segment from readable snapshot ([#35510](https://github.com/milvus-io/milvus/pull/35510)).
+
+
+### Improvements
+
+- Removed duplicated schema helper creation in the proxy ([#35502](https://github.com/milvus-io/milvus/pull/35502)).
+- Added support for compiling Milvus on Ubuntu 20.04 ([#35457](https://github.com/milvus-io/milvus/pull/35457)).
+- Optimized the use of locks and avoided double flush clustering buffer writer ([#35490](https://github.com/milvus-io/milvus/pull/35490)).
+- Removed the invalid log ([#35473](https://github.com/milvus-io/milvus/pull/35473)).
+- Added a clustering compaction user guide doc ([#35428](https://github.com/milvus-io/milvus/pull/35428)).
+- Added support for dynamic fields in the schema helper ([#35469](https://github.com/milvus-io/milvus/pull/35469)).
+- Added the msgchannel section in the generated YAML ([#35466](https://github.com/milvus-io/milvus/pull/35466)).
+
+
 ## v2.4.8
 
 Release Date: August 14, 2024

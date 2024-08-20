@@ -14,7 +14,7 @@ title: Upgrade Milvus Standalone with Docker Compose
 
 This topic describes how to upgrade your Milvus using Docker Compose. 
 
-In normal cases, you can [upgrade Milvus by changing its image](#Upgrade-Milvus-by-changing-its-image). However, you need to [migrate the metadata](#Migrate-the-metadata) before any upgrade from v2.1.x to v2.4.8.
+In normal cases, you can [upgrade Milvus by changing its image](#Upgrade-Milvus-by-changing-its-image). However, you need to [migrate the metadata](#Migrate-the-metadata) before any upgrade from v2.1.x to v2.4.9.
 
 <div class="alter note">
 
@@ -32,7 +32,7 @@ In normal cases, you can upgrade Milvus as follows:
     ...
     standalone:
       container_name: milvus-standalone
-      image: milvusdb/milvus:v2.4.8
+      image: milvusdb/milvus:v2.4.9
     ```
 
 2. Run the following commands to perform the upgrade.
@@ -60,7 +60,7 @@ In normal cases, you can upgrade Milvus as follows:
       runWithBackup: true
     config:
       sourceVersion: 2.1.4   # Specify your milvus version
-      targetVersion: 2.4.8
+      targetVersion: 2.4.9
       backupFilePath: /tmp/migration.bak
     metastore:
       type: etcd
