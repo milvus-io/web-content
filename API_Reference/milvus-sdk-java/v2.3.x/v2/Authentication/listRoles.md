@@ -16,7 +16,7 @@ List<String> roles = client.listRoles();
 
 **RETURN TYPE:**
 
-*List&lt;String\>*
+*List\<String\>*
 
 **RETURNS:**
 

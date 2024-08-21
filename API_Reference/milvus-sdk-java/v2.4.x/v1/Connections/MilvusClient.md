@@ -256,4 +256,3 @@ R<ShowCollectionsResponse> response = client.withTimeout(2, TimeUnit.SECONDS).sh
 
 client.close(1);
 ```
-

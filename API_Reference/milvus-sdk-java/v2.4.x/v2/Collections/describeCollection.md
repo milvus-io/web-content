@@ -45,11 +45,11 @@ A **DescribeCollectionResp** object that contains detailed information about the
 
     The number of partitions in the current collection.
 
-- **fieldNames** (*List&lt;String\>*)
+- **fieldNames** (*List\<String\>*)
 
     A list of fields in the current collection.
 
-- **vectorFieldName** (*List&lt;String\>*)
+- **vectorFieldName** (*List\<String\>*)
 
     The name of the vector field.
 

@@ -71,7 +71,7 @@ BaseVector is a base class for abstract vector classes. The following classes ar
    </tr>
    <tr>
      <td><p>FloatVec</p></td>
-     <td><p>FloatVec(List&lt;Float> data)FloatVec(float[] data)</p></td>
+     <td><p>FloatVec(List\<Float> data)FloatVec(float[] data)</p></td>
      <td><p>For DataType.FloatVector type field.</p></td>
    </tr>
    <tr>
@@ -81,17 +81,17 @@ BaseVector is a base class for abstract vector classes. The following classes ar
    </tr>
    <tr>
      <td><p>Float16Vec</p></td>
-     <td><p>Float16Vec(ByteBuffer data)Float16Vec(byte[] data)Float16Vec(List&lt;Float> data)</p></td>
+     <td><p>Float16Vec(ByteBuffer data)Float16Vec(byte[] data)Float16Vec(List\<Float> data)</p></td>
      <td><p>For DataType.Float16Vector type field.</p></td>
    </tr>
    <tr>
      <td><p>BFloat16Vec</p></td>
-     <td><p>BFloat16Vec(ByteBuffer data)BFloat16Vec(byte[] data)BFloat16Vec(List&lt;Float> data)</p></td>
+     <td><p>BFloat16Vec(ByteBuffer data)BFloat16Vec(byte[] data)BFloat16Vec(List\<Float> data)</p></td>
      <td><p>For DataType.BFloat16Vector type field.</p></td>
    </tr>
    <tr>
      <td><p>SparseFloatVec</p></td>
-     <td><p>SparseFloatVec(SortedMap&lt;Long, Float> data)</p></td>
+     <td><p>SparseFloatVec(SortedMap\<Long, Float> data)</p></td>
      <td><p>For DataType.SparseFloatVector type field.</p></td>
    </tr>
 </table>
@@ -142,7 +142,7 @@ A *SearchIterator* object to iterate search results.
 
 **METHODS:**
 
-- List&lt;QueryResultsWrapper.RowRecord> next()
+- List\<QueryResultsWrapper.RowRecord> next()
 
 Return a batch of results.
 

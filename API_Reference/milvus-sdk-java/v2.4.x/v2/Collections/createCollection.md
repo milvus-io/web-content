@@ -86,6 +86,8 @@ createCollection(CreateCollectionReq.builder()
 
     The value defaults to **False**. Setting this to **True** makes the primary field automatically increment. Skip this parameter if you need to set up a collection with a customized schema.
 
+    The auto-generated IDs have a fixed length and cannot be altered.
+
 - `enableDynamicField(boolean enableDynamicField)`
 
     Whether to use a reserved JSON field named **$meta** to store undefined fields and their values in key-value pairs.
