@@ -14,39 +14,82 @@
 ```shell
 export MILVUS_URI="localhost:19530"
 
-curl --location --request POST "http://${MILVUS_URI}/v2/vectordb/entities/search" \
+curl --request POST \
+--url "http://${MILVUS_URI}/v2/vectordb/entities/hybrid_search" \
+--header "Request-Timeout: 0" \
 --header "Content-Type: application/json" \
---data-raw '{
-    "collectionName": "quick_setup",
-    "data": [
-        [0.3580376395471989, -0.6023495712049978, 0.18414012509913835, -0.26286205330961354, 0.9029438446296592]
+-d '{
+    "collectionName": "test_collection",
+    "search": [
+        {
+            "data": [
+                [
+                    0.673437956701697,
+                    0.739243747672878
+                ]
+            ],
+            "annsField": "float_vector_1",
+            "limit": 10,
+            "outputFields": [
+                "*"
+            ]
+        },
+        {
+            "data": [
+                [
+                    0.075384179256879,
+                    0.9971545645073111
+                ]
+            ],
+            "annsField": "float_vector_2",
+            "limit": 10,
+            "outputFields": [
+                "*"
+            ]
+        }
     ],
-    "annsField": "vector",
+    "rerank": {
+        "strategy": "rrf",
+        "params": {
+            "k": 10
+        }
+    },
     "limit": 3,
     "outputFields": [
-        "color"
+        "user_id",
+        "word_count",
+        "book_describe"
     ]
 }'
 ```
+
 Possible response is similar to the following.
+
 ```json
 {
     "code": 0,
+    "cost": 0,
     "data": [
         {
-            "color": "pink_8682",
-            "distance": 1,
-            "id": 0
+            "book_describe": "book_105",
+            "distance": 0.09090909,
+            "id": 450519760774180800,
+            "user_id": 5,
+            "word_count": 105
         },
         {
-            "color": "red_7025",
-            "distance": 0.6290165,
-            "id": 1
+            "book_describe": "book_246",
+            "distance": 0.09090909,
+            "id": 450519760774180900,
+            "user_id": 46,
+            "word_count": 246
         },
         {
-            "color": "red_4794",
-            "distance": 0.5975797,
-            "id": 4
+            "book_describe": "book_367",
+            "distance": 0.08333333600000001,
+            "id": 450519760774181060,
+            "user_id": 67,
+            "word_count": 367
         }
     ]
 }
