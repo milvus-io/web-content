@@ -31,7 +31,7 @@ A **DescribeUserResp** object containing the details of the user.
 
 **PARAMETERS:**
 
-- **roles** (*List&lt;String\>*) -
+- **roles** (*List\<String\>*) -
 
     A list of role names associated with the user.
 

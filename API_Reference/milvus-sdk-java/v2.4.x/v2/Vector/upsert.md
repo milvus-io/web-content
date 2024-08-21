@@ -27,7 +27,13 @@ upsert(UpsertReq.builder()
 
     The following code assumes that the schema of the current collection has two fields named **id** and **vector**. The former is the primary field and the latter is a field to hold 5-dimensional vector embeddings.
 
-    Note: In Java SDK versions <= v2.4.1, the input is a fastjson.JSONObject. But fastjson is forbidden to use in my companies because of unsafe deserialization vulnerability. So, we replace fastjson with gson since v2.4.1.
+    <div class="admonition note">
+
+    <p><b>notes</b></p>
+
+    <p>In Java SDK versions v2.4.1 or earlier versions, the input is a <code>fastjson.JSONObject</code>. But <code>fastjson</code> is not recommended to use now because of its unsafe deserialization vulnerability. Therefore, replace <code>fastjson</code> with <code>gson</code> if you use the Java SDK of v2.4.2 or later releases.</p>
+
+    </div>
 
     ```java
     List<JsonObject> data = new ArrayList<>();

@@ -84,7 +84,7 @@ A *QueryIterator* object to iterate data.
 
 **METHODS:**
 
-- List&lt;QueryResultsWrapper.RowRecord> next()
+- List\<QueryResultsWrapper.RowRecord> next()
 
 Return a batch of results.
 
