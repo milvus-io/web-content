@@ -5,6 +5,8 @@ related_key: clustering, compaction
 summary: Clustering compaction is designed to improve search performance and reduce costs in large collections. This guide will help you understand clustering compaction and how this feature can improve search performance.
 ---
 
+# Clustering Compaction
+
 Clustering compaction is designed to improve search performance and reduce costs in large collections. This guide will help you understand clustering compaction and how this feature can improve search performance.
 
 ## Overview
