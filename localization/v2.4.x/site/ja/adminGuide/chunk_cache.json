@@ -1,0 +1,1 @@
+{"codeList":["queryNode:\n    cache:\n        warmup: async\n"],"headingContent":"","anchorList":[{"label":"チャンク・キャッシュの設定","href":"Configure-Chunk-Cache","type":1,"isActive":false},{"label":"背景","href":"Background","type":2,"isActive":false},{"label":"チャンク・キャッシュの設定","href":"Configure-Chunk-Cache","type":2,"isActive":false}]}
