@@ -118,7 +118,7 @@ The following table describes the parameters in the example config file. For a f
 
     | Parameter | Description |
     | --- | --- |
-    | `target.mode` | Storage location for dumped files. Valid values:<br>- `local`: Store dumped files on local disks.<br>- `remote`: Store dumped files on object storage. |
+    | `target.mode` | Storage location for dumped files. Valid values:<br/>- `local`: Store dumped files on local disks.<br/>- `remote`: Store dumped files on object storage. |
     | `target.remote.outputDir` | Output directory path in the cloud storage bucket. |
     | `target.remote.cloud` | Cloud storage service provider. Example values: `aws`, `gcp`, `azure`. |
     | `target.remote.region` | Cloud storage region. It can be any value if you use local MinIO. |

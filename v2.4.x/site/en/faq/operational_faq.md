@@ -6,10 +6,6 @@ title: Operational FAQ
 
 # Operational FAQ
 
-<!-- TOC -->
-
-
-<!-- /TOC -->
 
 #### What if I failed to pull the Milvus Docker image from Docker Hub?
 

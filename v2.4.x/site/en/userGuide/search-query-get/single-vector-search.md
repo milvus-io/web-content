@@ -478,15 +478,15 @@ console.log(res.results)
     </tr>
     <tr>
       <td><code>data</code></td>
-      <td>A list of vector embeddings.<br>Milvus searches for the most similar vector embeddings to the specified ones.</td>
+      <td>A list of vector embeddings.<br/>Milvus searches for the most similar vector embeddings to the specified ones.</td>
     </tr>
     <tr>
       <td><code>limit</code></td>
-      <td>The total number of entities to return.<br>You can use this parameter in combination with <strong>offset</strong> in <strong>param</strong> to enable pagination.<br>The sum of this value and <strong>offset</strong> in <strong>param</strong> should be less than 16,384.</td>
+      <td>The total number of entities to return.<br/>You can use this parameter in combination with <strong>offset</strong> in <strong>param</strong> to enable pagination.<br/>The sum of this value and <strong>offset</strong> in <strong>param</strong> should be less than 16,384.</td>
     </tr>
     <tr>
       <td><code>search_params</code></td>
-      <td>The parameter settings specific to this operation.<br><ul><li><code>metric_type</code>: The metric type applied to this operation. This should be the same as the one used when you index the vector field specified above. Possible values are <strong>L2</strong>, <strong>IP</strong>, <strong>COSINE</strong>, <strong>JACCARD</strong>, <strong>HAMMING</strong>.</li><li><code>params</code>: Additional parameters. For details, refer to <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Vector/search.md">search()</a>.</li></ul></td>
+      <td>The parameter settings specific to this operation.<br/><ul><li><code>metric_type</code>: The metric type applied to this operation. This should be the same as the one used when you index the vector field specified above. Possible values are <strong>L2</strong>, <strong>IP</strong>, <strong>COSINE</strong>, <strong>JACCARD</strong>, <strong>HAMMING</strong>.</li><li><code>params</code>: Additional parameters. For details, refer to <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Vector/search.md">search()</a>.</li></ul></td>
     </tr>
   </tbody>
 </table>
@@ -505,11 +505,11 @@ console.log(res.results)
     </tr>
     <tr>
       <td><code>data</code></td>
-      <td>A list of vector embeddings.<br>Milvus searches for the most similar vector embeddings to the specified ones.</td>
+      <td>A list of vector embeddings.<br/>Milvus searches for the most similar vector embeddings to the specified ones.</td>
     </tr>
     <tr>
       <td><code>topK</code></td>
-      <td>The number of records to return in the search result. This parameter uses the same syntax as the <strong>limit</strong> parameter, so you should only set one of them.<br>You can use this parameter in combination with <strong>offset</strong> in <strong>param</strong> to enable pagination.<br>The sum of this value and <strong>offset</strong> in <strong>param</strong> should be less than 16,384.</td>
+      <td>The number of records to return in the search result. This parameter uses the same syntax as the <strong>limit</strong> parameter, so you should only set one of them.<br/>You can use this parameter in combination with <strong>offset</strong> in <strong>param</strong> to enable pagination.<br/>The sum of this value and <strong>offset</strong> in <strong>param</strong> should be less than 16,384.</td>
     </tr>
   </tbody>
 </table>
@@ -528,11 +528,11 @@ console.log(res.results)
     </tr>
     <tr>
       <td><code>data</code></td>
-      <td>A list of vector embeddings.<br>Milvus searches for the most similar vector embeddings to the specified ones.</td>
+      <td>A list of vector embeddings.<br/>Milvus searches for the most similar vector embeddings to the specified ones.</td>
     </tr>
     <tr>
       <td><code>limit</code></td>
-      <td>The total number of entities to return.<br>You can use this parameter in combination with <strong>offset</strong> in <strong>param</strong> to enable pagination.<br>The sum of this value and <strong>offset</strong> in <strong>param</strong> should be less than 16,384.</td>
+      <td>The total number of entities to return.<br/>You can use this parameter in combination with <strong>offset</strong> in <strong>param</strong> to enable pagination.<br/>The sum of this value and <strong>offset</strong> in <strong>param</strong> should be less than 16,384.</td>
     </tr>
   </tbody>
 </table>

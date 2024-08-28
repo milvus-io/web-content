@@ -87,7 +87,7 @@ The following table describes the parameters in the example config file. For a f
 
     | Parameter | Description |
     | --- | --- |
-    | `source.mode` | Specifies where the source files are read from. Valid values:<br>- `local`: reads files from a local disk.<br>- `remote`: reads files from remote storage. |
+    | `source.mode` | Specifies where the source files are read from. Valid values:<br/>- `local`: reads files from a local disk.<br/>- `remote`: reads files from remote storage. |
     | `source.local.faissFile` | The directory path where the source files are located. For example, `/db/faiss.index`. |
 
 - `target`
@@ -98,7 +98,7 @@ The following table describes the parameters in the example config file. For a f
     | `target.create.collection.shardsNums` | Number of shards to be created in the collection. For more information on shards, refer to [Terminology](https://milvus.io/docs/glossary.md#Shard). |
     | `target.create.collection.dim` | Dimension of the vector field. |
     | `target.create.collection.metricType` | Metric type used to measure similarities between vectors. For more information, refer to [Terminology](https://milvus.io/docs/glossary.md#Metric-type). |
-    | `target.mode` | Storage location for dumped files. Valid values:<br>- `local`: Store dumped files on local disks.<br>- `remote`: Store dumped files on object storage. |
+    | `target.mode` | Storage location for dumped files. Valid values:<br/>- `local`: Store dumped files on local disks.<br/>- `remote`: Store dumped files on object storage. |
     | `target.remote.outputDir` | Output directory path in the cloud storage bucket. |
     | `target.remote.cloud` | Cloud storage service provider. Example values: `aws`, `gcp`, `azure`. |
     | `target.remote.endpoint` | Endpoint of Milvus 2.x storage. |

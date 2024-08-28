@@ -32,24 +32,24 @@ id: home.md
 
 <div class="start_card_container">
   <a href="install_standalone-docker.md">
-    <img  src="../../../assets/home_install.svg" alt="icon" />
-    <p class="link-btn">Install Milvus <i class="fas fa-chevron-right"></i></p>
+    <img src="../../../assets/home_install.svg" alt="icon" />
+    <p class="link-btn">Install Milvus</p>
   </a>
   <p>Learn how to install Milvus using either Docker Compose or on Kubernetes.</p>
 </div>
 
 <div class="start_card_container">
   <a href="quickstart.md">
-    <img  src="../../../assets/home_quick_start.svg" alt="icon" />
-    <p class="link-btn">Quick Start <i class="fas fa-chevron-right"></i></p>
+    <img src="../../../assets/home_quick_start.svg" alt="icon" />
+    <p class="link-btn">Quick Start</p>
   </a>
   <p>Learn how to quickly run Milvus with sample code.</p>
 </div>
 
 <div class="start_card_container">
   <a href="/bootcamp">
-    <img  src="../../../assets/home_bootcamp.svg" alt="icon" />
-    <p class="link-btn">Bootcamp <i class="fas fa-chevron-right"></i></p>
+    <img src="../../../assets/home_bootcamp.svg" alt="icon" />
+    <p class="link-btn">Bootcamp</p>
   </a>
   <p>
   Learn how to build vector similarity search applications with Milvus.

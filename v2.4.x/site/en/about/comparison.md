@@ -52,7 +52,7 @@ Although both serve similar functions as vector databases, the domain-specific t
 | Deployment Modes | SaaS-only | Milvus Lite, On-prem Standalone & Cluster,  Zilliz Cloud Saas & BYOC |
 | Embedding Functions | Not available	 | Support with <a href="https://github.com/milvus-io/milvus-model">pymilvus[model]</a> |
 | Data Types | String, Number, Bool, List of String | String, VarChar, Number (Int, Float, Double), Bool, Array, JSON, Float Vector, Binary Vector, BFloat16, Float16, Sparse Vector |
-| Metric and Index Types | Cos, Dot, Euclidean<br>P-family, S-family | Cosine, IP (Dot), L2 (Euclidean),  Hamming, Jaccard<br>FLAT, IVF_FLAT, IVF_SQ8, IVF_PQ, HNSW, SCANN, GPU Indexes |
+| Metric and Index Types | Cos, Dot, Euclidean<br/>P-family, S-family | Cosine, IP (Dot), L2 (Euclidean),  Hamming, Jaccard<br/>FLAT, IVF_FLAT, IVF_SQ8, IVF_PQ, HNSW, SCANN, GPU Indexes |
 | Schema Design | Flexible mode | Flexible mode, Strict mode |
 | Multiple Vector Fields | N/A | Multi-vector and hybrid search |
 | Tools | Datasets, text utilities, spark connector | Attu, Birdwatcher, Backup, CLI, CDC, Spark and Kafka connectors |

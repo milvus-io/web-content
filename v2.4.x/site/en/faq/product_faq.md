@@ -6,11 +6,6 @@ title: Product FAQ
 
 # Product FAQ
 
-<!-- TOC -->
-
-
-
-<!-- /TOC -->
 
 #### How much does Milvus cost?
 

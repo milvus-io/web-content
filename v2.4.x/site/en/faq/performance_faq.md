@@ -6,10 +6,6 @@ title: Performance FAQ
 
 # Performance FAQ
 
-<!-- TOC -->
-
-
-<!-- /TOC -->
 
 #### How to set `nlist` and `nprobe` for IVF indexes?
 

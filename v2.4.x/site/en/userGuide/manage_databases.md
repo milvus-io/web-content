@@ -35,8 +35,8 @@ Use [MilvusClient](https://milvus.io/api-reference/node/v2.4.x/Client/MilvusClie
 
 <div class="multipleCode">
     <a href="#python">Python </a>
-    <a href="#java"">Java</a>
-    <a href="#javascript"">Node.js</a>
+    <a href="#java">Java</a>
+    <a href="#javascript">Node.js</a>
 </div>
 
 ```python
@@ -69,17 +69,17 @@ R<RpcStatus> response = client.createDatabase(createDatabaseParam);
 ```
 
 ```javascript
-const address = "http://localhost:19530"
+const address = "http://localhost:19530";
 
 // 1. Set up a Milvus Client
-client = new MilvusClient({address}); 
+client = new MilvusClient({ address });
 
 // 3. Create a database
 res = await client.createDatabase({
-    db_name: "my_database"
-})
+	db_name: "my_database",
+});
 
-console.log(res)
+console.log(res);
 
 // {
 //   error_code: 'Success',
@@ -115,10 +115,10 @@ db.using_database("my_database")
 ```javascript
 // 4. Activate another database
 res = await client.useDatabase({
-    db_name: "my_database"
-})
+	db_name: "my_database",
+});
 
-console.log(res)
+console.log(res);
 ```
 
 You can also set a database to use upon connecting to your Milvus cluster as follows:
@@ -152,7 +152,7 @@ const address = "http://localhost:19530";
 const db_name = "my_database";
 
 // 1. Set up a Milvus Client
-client = new MilvusClient({address, db_name}); 
+client = new MilvusClient({ address, db_name });
 ```
 
 ## List databases
@@ -205,9 +205,9 @@ System.out.println(listDatabasesResponse.getData());
 ```
 
 ```javascript
-res = await client.listDatabases()
+res = await client.listDatabases();
 
-console.log(res.db_names)
+console.log(res.db_names);
 
 // [ 'default', 'my_database' ]
 ```
@@ -261,8 +261,8 @@ response = client.dropDatabase(dropDatabaseParam);
 
 ```javascript
 res = await client.dropDatabase({
-    db_name: "my_database"
-})
+	db_name: "my_database",
+});
 ```
 
 ## Use RBAC with database
@@ -328,14 +328,14 @@ public class ConnectToMilvus {
 const address = "http://localhost:19530";
 const token = "root:Milvus";
 
-function connectToMilvus(dbName="default") {
-    const client = new MilvusClient({
-        address,
-        token,
-        dbName
-    });
+function connectToMilvus(dbName = "default") {
+	const client = new MilvusClient({
+		address,
+		token,
+		dbName,
+	});
 
-    return client;
+	return client;
 }
 ```
 
@@ -347,116 +347,114 @@ function connectToMilvus(dbName="default") {
     <a href="#javascript">Node.js</a>
     </div>
 
-    ```python
-    _ROLE_NAME = "test_role"
-    _PRIVILEGE_INSERT = "Insert"
+  ```python
+  _ROLE_NAME = "test_role"
+  _PRIVILEGE_INSERT = "Insert"
 
-    connect_to_milvus()
-    role = Role(_ROLE_NAME)
-    role.create()
+  connect_to_milvus()
+  role = Role(_ROLE_NAME)
+  role.create()
 
-    connect_to_milvus()
-    role.grant("Collection", "*", _PRIVILEGE_INSERT)
-    print(role.list_grants())
-    print(role.list_grant("Collection", "*"))
-    role.revoke("Global", "*", _PRIVILEGE_INSERT)
-    ```
+  connect_to_milvus()
+  role.grant("Collection", "*", _PRIVILEGE_INSERT)
+  print(role.list_grants())
+  print(role.list_grant("Collection", "*"))
+  role.revoke("Global", "*", _PRIVILEGE_INSERT)
+  ```
 
-    ```java
-    String ROLE_NAME = "test_role";
-    String PRIVILEGE_INSERT = "Insert";
+  ```java
+  String ROLE_NAME = "test_role";
+  String PRIVILEGE_INSERT = "Insert";
 
-    MilvusServiceClient client = new ConnectToMilvus().build();
-    R<RpcStatus> response = client.createRole(CreateRoleParam.newBuilder()
-        .withRoleName(ROLE_NAME)
-        .build());
+  MilvusServiceClient client = new ConnectToMilvus().build();
+  R<RpcStatus> response = client.createRole(CreateRoleParam.newBuilder()
+      .withRoleName(ROLE_NAME)
+      .build());
 
-    if (response.getStatus() != R.Status.Success.getCode()) {
-        throw new RuntimeException(response.getMessage());
-    }
+  if (response.getStatus() != R.Status.Success.getCode()) {
+      throw new RuntimeException(response.getMessage());
+  }
 
-    response = client.grantRolePrivilege(GrantRolePriviledgeParam.newBuilder()
-        .withRoleName(ROLE_NAME)
-        .withObject("Collection")
-        .withObjectName("*")
-        .withPrivilege(PRIVILEGE_INSERT)
-        .build());
+  response = client.grantRolePrivilege(GrantRolePriviledgeParam.newBuilder()
+      .withRoleName(ROLE_NAME)
+      .withObject("Collection")
+      .withObjectName("*")
+      .withPrivilege(PRIVILEGE_INSERT)
+      .build());
 
-    if (response.getStatus() != R.Status.Success.getCode()) {
-        throw new RuntimeException(response.getMessage());
-    }
+  if (response.getStatus() != R.Status.Success.getCode()) {
+      throw new RuntimeException(response.getMessage());
+  }
 
-    R<SelectGrantResponse> grants = client.selectGrantForRole(SelectGrantForRoleParam.newBuilder()
-        .withRoleName(ROLE_NAME)
-        .build());
+  R<SelectGrantResponse> grants = client.selectGrantForRole(SelectGrantForRoleParam.newBuilder()
+      .withRoleName(ROLE_NAME)
+      .build());
 
-    if (grants.getStatus() != R.Status.Success.getCode()) {
-        throw new RuntimeException(grants.getMessage());
-    }
+  if (grants.getStatus() != R.Status.Success.getCode()) {
+      throw new RuntimeException(grants.getMessage());
+  }
 
-    System.out.println(grants.getData());
+  System.out.println(grants.getData());
 
-    grants = client.selectGrantForRoleAndObject(SelectGrantForRoleAndObjectParam.newBuilder()
-        .withRoleName(ROLE_NAME)
-        .withObject("Collection")
-        .withObjectName("*")
-        .build());
+  grants = client.selectGrantForRoleAndObject(SelectGrantForRoleAndObjectParam.newBuilder()
+      .withRoleName(ROLE_NAME)
+      .withObject("Collection")
+      .withObjectName("*")
+      .build());
 
-    if (grants.getStatus() != R.Status.Success.getCode()) {
-        throw new RuntimeException(grants.getMessage());
-    }
+  if (grants.getStatus() != R.Status.Success.getCode()) {
+      throw new RuntimeException(grants.getMessage());
+  }
 
-    System.out.println(grants.getData());
+  System.out.println(grants.getData());
 
-    response = client.revokeRolePrivilege(RevokeRolePrivilegeParam.newBuilder()
-        .withRoleName(ROLE_NAME)
-        .withObject("Global")
-        .withObjectName("*")
-        .withPrivilege(PRIVILEGE_INSERT)
-        .build());
+  response = client.revokeRolePrivilege(RevokeRolePrivilegeParam.newBuilder()
+      .withRoleName(ROLE_NAME)
+      .withObject("Global")
+      .withObjectName("*")
+      .withPrivilege(PRIVILEGE_INSERT)
+      .build());
 
-    if (response.getStatus() != R.Status.Success.getCode()) {
-        throw new RuntimeException(response.getMessage());
-    }
+  if (response.getStatus() != R.Status.Success.getCode()) {
+      throw new RuntimeException(response.getMessage());
+  }
 
-    response = client.revokeRolePrivilege(RevokeRolePrivilegeParam.newBuilder()
-        .withRoleName(ROLE_NAME)
-        .withObject("Global")
-        .withObjectName("*")
-        .withPrivilege(PRIVILEGE_INSERT)
-        .build());
+  response = client.revokeRolePrivilege(RevokeRolePrivilegeParam.newBuilder()
+      .withRoleName(ROLE_NAME)
+      .withObject("Global")
+      .withObjectName("*")
+      .withPrivilege(PRIVILEGE_INSERT)
+      .build());
 
-    if (response.getStatus() != R.Status.Success.getCode()) {
-        throw new RuntimeException(response.getMessage());
-    }
-    ```
+  if (response.getStatus() != R.Status.Success.getCode()) {
+      throw new RuntimeException(response.getMessage());
+  }
+  ```
 
-    ```javascript
-    const ROLE_NAME = "test_role";
-    const PRIVILEGE_INSERT = "Insert";
+  ```javascript
+  const ROLE_NAME = "test_role";
+  const PRIVILEGE_INSERT = "Insert";
 
-    const client = connectToMilvus();
+  const client = connectToMilvus();
 
-    async function demo() {
+  async function demo() {}
+  await client.createRole({
+  	roleName: ROLE_NAME,
+  });
 
-    }
-    await client.createRole({
-        roleName: ROLE_NAME
-    })
+  const grants = await client.listGrants({
+  	roleName: ROLE_NAME,
+  });
 
-    const grants = await client.listGrants({
-        roleName: ROLE_NAME
-    })
+  console.log(grants.grants);
 
-    console.log(grants.grants);
-
-    await client.revokePrivilege({
-        roleName: ROLE_NAME,
-        object: "Global",
-        objectName: "*",
-        privilege: PRIVILEGE_INSERT
-    })
-    ```
+  await client.revokePrivilege({
+  	roleName: ROLE_NAME,
+  	object: "Global",
+  	objectName: "*",
+  	privilege: PRIVILEGE_INSERT,
+  });
+  ```
 
 - If a Milvus connection specifies a `db_name`, but a Permission API call afterward does not, **database** refers to the database whose name was specified in the Milvus connection.
 
@@ -466,92 +464,90 @@ function connectToMilvus(dbName="default") {
     <a href="#javascript">Node.js</a>
     </div>
 
-    ```python
-    # NOTE: please make sure the 'foo' db has been created
-    connect_to_milvus(db_name="foo")
+  ```python
+  # NOTE: please make sure the 'foo' db has been created
+  connect_to_milvus(db_name="foo")
 
-    # This role will have the insert permission of all collections under foo db,
-    # excluding the insert permissions of collections under other dbs
-    role.grant("Collection", "*", _PRIVILEGE_INSERT)
-    print(role.list_grants())
-    print(role.list_grant("Collection", "*"))
-    role.revoke("Global", "*", _PRIVILEGE_INSERT)
-    ```
+  # This role will have the insert permission of all collections under foo db,
+  # excluding the insert permissions of collections under other dbs
+  role.grant("Collection", "*", _PRIVILEGE_INSERT)
+  print(role.list_grants())
+  print(role.list_grant("Collection", "*"))
+  role.revoke("Global", "*", _PRIVILEGE_INSERT)
+  ```
 
-    ```java
-    // NOTE: please make sure the 'foo' db has been created
-    MilvusServiceClient client = new ConnectToMilvus().withDbName("foo").build();
+  ```java
+  // NOTE: please make sure the 'foo' db has been created
+  MilvusServiceClient client = new ConnectToMilvus().withDbName("foo").build();
 
-    // This role will have the insert permission of all collections under foo db,
-    // excluding the insert permissions of collections under other dbs
-    R<RpcStatus> response = client.grantRolePrivilege(GrantRolePriviledgeParam.newBuilder()
-        .withRoleName(ROLE_NAME)
-        .withObject("Collection")
-        .withObjectName("*")
-        .withPrivilege(PRIVILEGE_INSERT)
-        .build());
+  // This role will have the insert permission of all collections under foo db,
+  // excluding the insert permissions of collections under other dbs
+  R<RpcStatus> response = client.grantRolePrivilege(GrantRolePriviledgeParam.newBuilder()
+      .withRoleName(ROLE_NAME)
+      .withObject("Collection")
+      .withObjectName("*")
+      .withPrivilege(PRIVILEGE_INSERT)
+      .build());
 
-    if (response.getStatus() != R.Status.Success.getCode()) {
-        throw new RuntimeException(response.getMessage());
-    }
+  if (response.getStatus() != R.Status.Success.getCode()) {
+      throw new RuntimeException(response.getMessage());
+  }
 
-    R<SelectGrantResponse> grants = client.selectGrantForRole(SelectGrantForRoleParam.newBuilder()
-        .withRoleName(ROLE_NAME)
-        .build());
+  R<SelectGrantResponse> grants = client.selectGrantForRole(SelectGrantForRoleParam.newBuilder()
+      .withRoleName(ROLE_NAME)
+      .build());
 
-    if (grants.getStatus() != R.Status.Success.getCode()) {
-        throw new RuntimeException(grants.getMessage());
-    }
+  if (grants.getStatus() != R.Status.Success.getCode()) {
+      throw new RuntimeException(grants.getMessage());
+  }
 
-    System.out.println(grants.getData());
+  System.out.println(grants.getData());
 
-    grants = client.selectGrantForRoleAndObject(SelectGrantForRoleAndObjectParam.newBuilder()
-        .withRoleName(ROLE_NAME)
-        .withObject("Collection")
-        .withObjectName("*")
-        .build());
+  grants = client.selectGrantForRoleAndObject(SelectGrantForRoleAndObjectParam.newBuilder()
+      .withRoleName(ROLE_NAME)
+      .withObject("Collection")
+      .withObjectName("*")
+      .build());
 
-    if (grants.getStatus() != R.Status.Success.getCode()) {
-        throw new RuntimeException(grants.getMessage());
-    }
+  if (grants.getStatus() != R.Status.Success.getCode()) {
+      throw new RuntimeException(grants.getMessage());
+  }
 
-    System.out.println(grants.getData());
+  System.out.println(grants.getData());
 
-    response = client.revokeRolePrivilege(RevokeRolePrivilegeParam.newBuilder()
-        .withRoleName(ROLE_NAME)
-        .withObject("Global")
-        .withObjectName("*")
-        .withPrivilege(PRIVILEGE_INSERT)
-        .build());
+  response = client.revokeRolePrivilege(RevokeRolePrivilegeParam.newBuilder()
+      .withRoleName(ROLE_NAME)
+      .withObject("Global")
+      .withObjectName("*")
+      .withPrivilege(PRIVILEGE_INSERT)
+      .build());
 
-    if (response.getStatus() != R.Status.Success.getCode()) {
-        throw new RuntimeException(response.getMessage());
-    }
-    ```
+  if (response.getStatus() != R.Status.Success.getCode()) {
+      throw new RuntimeException(response.getMessage());
+  }
+  ```
 
-    ```javascript
-    const client = connectToMilvus("foo");
+  ```javascript
+  const client = connectToMilvus("foo");
 
-    async function demo() {
+  async function demo() {}
+  await client.createRole({
+  	roleName: ROLE_NAME,
+  });
 
-    }
-    await client.createRole({
-        roleName: ROLE_NAME
-    })
+  const grants = await client.listGrants({
+  	roleName: ROLE_NAME,
+  });
 
-    const grants = await client.listGrants({
-        roleName: ROLE_NAME
-    })
+  console.log(grants.grants);
 
-    console.log(grants.grants);
-
-    await client.revokePrivilege({
-        roleName: ROLE_NAME,
-        object: "Global",
-        objectName: "*",
-        privilege: PRIVILEGE_INSERT
-    })
-    ```
+  await client.revokePrivilege({
+  	roleName: ROLE_NAME,
+  	object: "Global",
+  	objectName: "*",
+  	privilege: PRIVILEGE_INSERT,
+  });
+  ```
 
 - If a Permission API call is made upon a Milvus connection, with or without `db_name` specified, **database** refers to the database whose name was specified in the Permission API call.
 
@@ -561,75 +557,75 @@ function connectToMilvus(dbName="default") {
     <a href="#javascript">Node.js</a>
     </div>
 
-    ```python
-    # NOTE: please make sure the 'foo' db has been created
+  ```python
+  # NOTE: please make sure the 'foo' db has been created
 
-    db_name = "foo"
-    connect_to_milvus()
-    role.grant("Collection", "*", _PRIVILEGE_INSERT, db_name=db_name)
-    print(role.list_grants(db_name=db_name))
-    print(role.list_grant("Collection", "*", db_name=db_name))
-    role.revoke("Global", "*", _PRIVILEGE_INSERT, db_name=db_name)
-    ```
+  db_name = "foo"
+  connect_to_milvus()
+  role.grant("Collection", "*", _PRIVILEGE_INSERT, db_name=db_name)
+  print(role.list_grants(db_name=db_name))
+  print(role.list_grant("Collection", "*", db_name=db_name))
+  role.revoke("Global", "*", _PRIVILEGE_INSERT, db_name=db_name)
+  ```
 
-    ```java
-    // NOTE: please make sure the 'foo' db has been created
+  ```java
+  // NOTE: please make sure the 'foo' db has been created
 
-    String dbName = "foo";
-    MilvusServiceClient client = new ConnectToMilvus().build();
+  String dbName = "foo";
+  MilvusServiceClient client = new ConnectToMilvus().build();
 
-    R<RpcStatus> response = client.grantRolePrivilege(GrantRolePriviledgeParam.newBuilder()
-        .withRoleName(ROLE_NAME)
-        .withObject("Collection")
-        .withObjectName("*")
-        .withPrivilege(PRIVILEGE_INSERT)
-        .withDatabaseName(dbName)
-        .build());
+  R<RpcStatus> response = client.grantRolePrivilege(GrantRolePriviledgeParam.newBuilder()
+      .withRoleName(ROLE_NAME)
+      .withObject("Collection")
+      .withObjectName("*")
+      .withPrivilege(PRIVILEGE_INSERT)
+      .withDatabaseName(dbName)
+      .build());
 
-    if (response.getStatus() != R.Status.Success.getCode()) {
-        throw new RuntimeException(response.getMessage());
-    }
+  if (response.getStatus() != R.Status.Success.getCode()) {
+      throw new RuntimeException(response.getMessage());
+  }
 
-    R<SelectGrantResponse> grants = client.selectGrantForRole(SelectGrantForRoleParam.newBuilder()
-        .withRoleName(ROLE_NAME)
-        .withDatabaseName(dbName)
-        .build());
+  R<SelectGrantResponse> grants = client.selectGrantForRole(SelectGrantForRoleParam.newBuilder()
+      .withRoleName(ROLE_NAME)
+      .withDatabaseName(dbName)
+      .build());
 
-    if (grants.getStatus() != R.Status.Success.getCode()) {
-        throw new RuntimeException(grants.getMessage());
-    }
+  if (grants.getStatus() != R.Status.Success.getCode()) {
+      throw new RuntimeException(grants.getMessage());
+  }
 
-    System.out.println(grants.getData());
+  System.out.println(grants.getData());
 
-    grants = client.selectGrantForRoleAndObject(SelectGrantForRoleAndObjectParam.newBuilder()
-        .withRoleName(ROLE_NAME)
-        .withObject("Collection")
-        .withObjectName("*")
-        .withDatabaseName(dbName)
-        .build());
+  grants = client.selectGrantForRoleAndObject(SelectGrantForRoleAndObjectParam.newBuilder()
+      .withRoleName(ROLE_NAME)
+      .withObject("Collection")
+      .withObjectName("*")
+      .withDatabaseName(dbName)
+      .build());
 
-    if (grants.getStatus() != R.Status.Success.getCode()) {
-        throw new RuntimeException(grants.getMessage());
-    }
+  if (grants.getStatus() != R.Status.Success.getCode()) {
+      throw new RuntimeException(grants.getMessage());
+  }
 
-    System.out.println(grants.getData());
+  System.out.println(grants.getData());
 
-    response = client.revokeRolePrivilege(RevokeRolePrivilegeParam.newBuilder()
-        .withRoleName(ROLE_NAME)
-        .withObject("Global")
-        .withObjectName("*")
-        .withPrivilege(PRIVILEGE_INSERT)
-        .withDatabaseName(dbName)
-        .build());
+  response = client.revokeRolePrivilege(RevokeRolePrivilegeParam.newBuilder()
+      .withRoleName(ROLE_NAME)
+      .withObject("Global")
+      .withObjectName("*")
+      .withPrivilege(PRIVILEGE_INSERT)
+      .withDatabaseName(dbName)
+      .build());
 
-    if (response.getStatus() != R.Status.Success.getCode()) {
-        throw new RuntimeException(response.getMessage());
-    }
-    ```
+  if (response.getStatus() != R.Status.Success.getCode()) {
+      throw new RuntimeException(response.getMessage());
+  }
+  ```
 
-    ```javascript
-    // The Node.js SDK currently cannot support this case.
-    ```
+  ```javascript
+  // The Node.js SDK currently cannot support this case.
+  ```
 
 ## What's next
 

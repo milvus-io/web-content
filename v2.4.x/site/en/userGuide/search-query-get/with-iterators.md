@@ -362,7 +362,7 @@ System.out.println(results.size());
   <tbody>
     <tr>
       <td><code>data</code></td>
-      <td>A list of vector embeddings.<br>Milvus searches for the most similar vector embeddings to the specified ones.</td>
+      <td>A list of vector embeddings.<br/>Milvus searches for the most similar vector embeddings to the specified ones.</td>
     </tr>
     <tr>
       <td><code>anns_field</code></td>
@@ -370,19 +370,19 @@ System.out.println(results.size());
     </tr>
     <tr>
       <td><code>batch_size</code></td>
-      <td>The number of entities to return each time you call <code>next()</code> on the current iterator.<br>The value defaults to <strong>1000</strong>. Set it to a proper value to control the number of entities to return per iteration.</td>
+      <td>The number of entities to return each time you call <code>next()</code> on the current iterator.<br/>The value defaults to <strong>1000</strong>. Set it to a proper value to control the number of entities to return per iteration.</td>
     </tr>
     <tr>
       <td><code>param</code></td>
-      <td>The parameter settings specific to this operation.<br><ul><li><code>metric_type</code>: The metric type applied to this operation. This should be the same as the one used when you index the vector field specified above. Possible values are <strong>L2</strong>, <strong>IP</strong>, <strong>COSINE</strong>, <strong>JACCARD</strong>, <strong>HAMMING</strong>.</li><li><code>params</code>: Additional parameters. For details, refer to <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/ORM/Collection/search_iterator.md">search_iterator()</a>.</li></ul></td>
+      <td>The parameter settings specific to this operation.<br/><ul><li><code>metric_type</code>: The metric type applied to this operation. This should be the same as the one used when you index the vector field specified above. Possible values are <strong>L2</strong>, <strong>IP</strong>, <strong>COSINE</strong>, <strong>JACCARD</strong>, <strong>HAMMING</strong>.</li><li><code>params</code>: Additional parameters. For details, refer to <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/ORM/Collection/search_iterator.md">search_iterator()</a>.</li></ul></td>
     </tr>
     <tr>
       <td><code>output_fields</code></td>
-      <td>A list of field names to include in each entity in return.<br>The value defaults to <strong>None</strong>. If left unspecified, only the primary field is included.</td>
+      <td>A list of field names to include in each entity in return.<br/>The value defaults to <strong>None</strong>. If left unspecified, only the primary field is included.</td>
     </tr>
     <tr>
       <td><code>limit</code></td>
-      <td>The total number of entities to return.<br>The value defaults to <strong>-1</strong>, indicating all matching entities will be in return.</td>
+      <td>The total number of entities to return.<br/>The value defaults to <strong>-1</strong>, indicating all matching entities will be in return.</td>
     </tr>
   </tbody>
 </table>
@@ -409,7 +409,7 @@ System.out.println(results.size());
     </tr>
     <tr>
       <td><code>withBatchSize</code></td>
-      <td>The number of entities to return each time you call <code>next()</code> on the current iterator.<br>The value defaults to <strong>1000</strong>. Set it to a proper value to control the number of entities to return per iteration.</td>
+      <td>The number of entities to return each time you call <code>next()</code> on the current iterator.<br/>The value defaults to <strong>1000</strong>. Set it to a proper value to control the number of entities to return per iteration.</td>
     </tr>
     <tr>
       <td><code>withParams</code></td>
@@ -551,19 +551,19 @@ while (true) {
   <tbody>
     <tr>
       <td><code>batch_size</code></td>
-      <td>The number of entities to return each time you call <code>next()</code> on the current iterator.<br>The value defaults to <strong>1000</strong>. Set it to a proper value to control the number of entities to return per iteration.</td>
+      <td>The number of entities to return each time you call <code>next()</code> on the current iterator.<br/>The value defaults to <strong>1000</strong>. Set it to a proper value to control the number of entities to return per iteration.</td>
     </tr>
     <tr>
       <td><code>expr</code></td>
-      <td>A scalar filtering condition to filter matching entities.<br>The value defaults to <strong>None</strong>, indicating that scalar filtering is ignored. To build a scalar filtering condition, refer to <a href="https://milvus.io/docs/boolean.md">Boolean Expression Rules</a>.</td>
+      <td>A scalar filtering condition to filter matching entities.<br/>The value defaults to <strong>None</strong>, indicating that scalar filtering is ignored. To build a scalar filtering condition, refer to <a href="https://milvus.io/docs/boolean.md">Boolean Expression Rules</a>.</td>
     </tr>
     <tr>
       <td><code>output_fields</code></td>
-      <td>A list of field names to include in each entity in return.<br>The value defaults to <strong>None</strong>. If left unspecified, only the primary field is included.</td>
+      <td>A list of field names to include in each entity in return.<br/>The value defaults to <strong>None</strong>. If left unspecified, only the primary field is included.</td>
     </tr>
     <tr>
       <td><code>limit</code></td>
-      <td>The total number of entities to return.<br>The value defaults to <strong>-1</strong>, indicating all matching entities will be in return.</td>
+      <td>The total number of entities to return.<br/>The value defaults to <strong>-1</strong>, indicating all matching entities will be in return.</td>
     </tr>
   </tbody>
 </table>
@@ -586,7 +586,7 @@ while (true) {
     </tr>
     <tr>
       <td><code>withBatchSize</code></td>
-      <td>The number of entities to return each time you call <code>next()</code> on the current iterator.<br>The value defaults to <strong>1000</strong>. Set it to a proper value to control the number of entities to return per iteration.</td>
+      <td>The number of entities to return each time you call <code>next()</code> on the current iterator.<br/>The value defaults to <strong>1000</strong>. Set it to a proper value to control the number of entities to return per iteration.</td>
     </tr>
     <tr>
       <td><code>addOutField</code></td>
