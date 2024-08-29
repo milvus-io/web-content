@@ -13,9 +13,13 @@ Clustering compaction is designed to improve search performance and reduce costs
 
 Milvus stores incoming entities in segments within a collection and seals a segment when it is full. If this happens, a new segment is created to accommodate additional entities. As a result, entities are arbitrarily distributed across segments. This distribution requires Milvus to search multiple segments to find the nearest neighbors to a given query vector.
 
+![Without clustering Compaction](../../../assets/clustering-compaction.png)
+
 If Milvus can distribute entities among segments based on the values in a specific field, the search scope can be restricted within one segment, thus improving search performance.
 
 **Clustering Compaction** is a feature in Milvus that redistributes entities among segments in a collection based on the values in a scalar field. To enable this feature, you first need to select a scalar field as the **clustering key**. This allows Milvus to redistribute entities into a segment when their clustering key values fall within a specific range. When you trigger a clustering compaction, Milvus generates/updates a global index called **PartitionStats**, which records the mapping relationship between segments and clustering key values.
+
+![With Clustering Compaction](../../../assets/clustering-compaction-2.png)
 
 Using **PartitionStats** as a reference, Milvus can prune irrelevant data upon receiving a search/query request that carries a clustering key value and restricting the search scope within the segments mapping to the value, thus improving search performance. For details on performance improvement, refer to Benchmark tests.
 
