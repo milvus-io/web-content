@@ -96,7 +96,8 @@ metaStoreConfig:
 <li><p><strong>헬름</strong> 또는 <strong>도커 컴포즈</strong>: 기본값은 <code translate="no">by-dev</code> 입니다.</p></li>
 <li><p><strong>연산자</strong>: 기본값은 <code translate="no">&lt;release_name&gt;</code> 입니다.</p></li>
 </ul></li>
-<li><p><code translate="no">sourceConfig.pulsar</code>: 소스 Milvus에 대한 Pulsar 구성. 소스 Milvus가 메시지 저장소로 Kafka를 사용하는 경우, 모든 Pulsar 관련 구성을 제거하세요. 자세한 내용은 <a href="https://milvus.io/docs/configure_pulsar.md">Pulsar 관련 구성을</a> 참조하세요.</p></li>
+<li><p><code translate="no">replicateChan</code>밀버스 리플리케이트 채널 이름, milvus.yaml 파일에서 <code translate="no">{msgChannel.chanNamePrefix.cluster}/{msgChannel.chanNamePrefix.replicateMsg}</code> 입니다.</p></li>
+<li><p><code translate="no">sourceConfig.pulsar</code>: 소스 Milvus에 대한 펄서 구성. 소스 Milvus가 메시지 저장소로 Kafka를 사용하는 경우, 모든 Pulsar 관련 구성을 제거하세요. 자세한 내용은 <a href="https://milvus.io/docs/configure_pulsar.md">Pulsar 관련 구성을</a> 참조하세요.</p></li>
 <li><p><code translate="no">sourceConfig.kafka.address</code>: 소스 Milvus의 Kafka 주소. 소스 Milvus가 메시지 저장소로 Kafka를 사용하는 경우 이 구성의 주석 처리를 해제합니다.</p></li>
 </ul></li>
 </ul>
@@ -112,6 +113,7 @@ sourceConfig:
   defaultPartitionName: _default
   <span class="hljs-comment"># read buffer length, mainly used for buffering if writing data to milvus-target is slow.</span>
   readChanLen: <span class="hljs-number">10</span>
+  replicateChan: by-dev-replicate-msg
   <span class="hljs-comment"># milvus-source mq config, which is pulsar or kafka</span>
   pulsar:
     address: pulsar://localhost:<span class="hljs-number">6650</span>

@@ -44,21 +44,15 @@ title: CDC 작업 관리
   &quot;request_type&quot;: &quot;create&quot;,
   &quot;request_data&quot;: {
     &quot;milvus_connect_param&quot;: {
-      &quot;host&quot;: &quot;localhost&quot;,
-      &quot;port&quot;: 19530,
-      &quot;username&quot;: &quot;root&quot;,
-      &quot;password&quot;: &quot;Milvus&quot;,
-      &quot;enable_tls&quot;: false,
+      &quot;uri&quot;: &quot;http://localhost:19530&quot;,
+      &quot;token&quot;:&quot;root:Milvus&quot;,
       &quot;connect_timeout&quot;: 10
     },
     &quot;collection_infos&quot;: [
       {
         &quot;name&quot;: &quot;*&quot;
       }
-    ],
-    &quot;rpc_channel_info&quot;: {
-      &quot;name&quot;: &quot;by-dev-replicate-msg&quot;
-    }
+    ]
   }
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
@@ -75,7 +69,6 @@ title: CDC 작업 관리
 <li><p><strong>connect_timeout</strong>: 연결을 설정하기 위한 시간 제한 기간(초)입니다.</p></li>
 </ul></li>
 <li><p><strong>collection_infos</strong>: 동기화할 컬렉션. 현재 Milvus-CDC는 개별 컬렉션이 아닌 클러스터 수준에서 동기화하므로 별표<strong>(*)</strong>만 지원됩니다.</p></li>
-<li><p><strong>rpc_channel_info</strong>: 동기화를 위한 RPC 채널 이름으로, 소스 Milvus 구성의 <strong>common.chanNamePrefix.cluster</strong> 및 <strong>common.chanNamePrefix.replicateMsg</strong> 값을 연결하여 하이픈<strong>(-)</strong>으로 구분하여 구성합니다.</p></li>
 </ul>
 <p>예상 응답:</p>
 <pre><code translate="no" class="language-json">{
@@ -114,8 +107,7 @@ title: CDC 작업 관리
       {
         <span class="hljs-string">&quot;task_id&quot;</span>: <span class="hljs-string">&quot;xxxxx&quot;</span>,
         <span class="hljs-string">&quot;milvus_connect_param&quot;</span>: {
-          <span class="hljs-string">&quot;host&quot;</span>: <span class="hljs-string">&quot;localhost&quot;</span>,
-          <span class="hljs-string">&quot;port&quot;</span>: <span class="hljs-number">19530</span>,
+          <span class="hljs-string">&quot;uri&quot;</span>:<span class="hljs-string">&quot;http://localhost:19530&quot;</span>,
           <span class="hljs-string">&quot;connect_timeout&quot;</span>: <span class="hljs-number">10</span>
         },
         <span class="hljs-string">&quot;collection_infos&quot;</span>: [
@@ -237,9 +229,7 @@ title: CDC 작업 관리
       ],
       <span class="hljs-string">&quot;milvus_connect_param&quot;</span>: {
         <span class="hljs-string">&quot;connect_timeout&quot;</span>: <span class="hljs-number">10</span>,
-        <span class="hljs-string">&quot;enable_tls&quot;</span>: <span class="hljs-literal">true</span>,
-        <span class="hljs-string">&quot;host&quot;</span>: <span class="hljs-string">&quot;localhost&quot;</span>,
-        <span class="hljs-string">&quot;port&quot;</span>: <span class="hljs-number">19530</span>
+        <span class="hljs-string">&quot;uri&quot;</span>:<span class="hljs-string">&quot;http://localhost:19530&quot;</span>
       },
       <span class="hljs-string">&quot;state&quot;</span>: <span class="hljs-string">&quot;Running&quot;</span>,
       <span class="hljs-string">&quot;task_id&quot;</span>: <span class="hljs-string">&quot;xxxx&quot;</span>

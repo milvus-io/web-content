@@ -19,7 +19,7 @@ title: 管理疾病预防控制中心任务
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>捕获数据更改（CDC）任务可实现从源 Milvus 实例到目标 Milvus 实例的数据同步。它监控源操作日志，并将插入、删除和索引操作等数据变更实时复制到目标。这有助于 Milvus 部署之间的实时灾难恢复或主动-主动负载平衡。</p>
+    </button></h1><p>捕获数据更改（CDC）任务可实现从源 Milvus 实例到目标 Milvus 实例的数据同步。它监控源操作日志，并将插入、删除和索引操作等数据变更实时复制到目标。这有助于在 Milvus 部署之间实现实时灾难恢复或主动-主动负载平衡。</p>
 <p>本指南介绍如何管理 CDC 任务，包括通过 HTTP 请求创建、暂停、恢复、检索详细信息、列表和删除。</p>
 <h2 id="Create-a-task" class="common-anchor-header">创建任务<button data-href="#Create-a-task" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -44,28 +44,22 @@ title: 管理疾病预防控制中心任务
   &quot;request_type&quot;: &quot;create&quot;,
   &quot;request_data&quot;: {
     &quot;milvus_connect_param&quot;: {
-      &quot;host&quot;: &quot;localhost&quot;,
-      &quot;port&quot;: 19530,
-      &quot;username&quot;: &quot;root&quot;,
-      &quot;password&quot;: &quot;Milvus&quot;,
-      &quot;enable_tls&quot;: false,
+      &quot;uri&quot;: &quot;http://localhost:19530&quot;,
+      &quot;token&quot;:&quot;root:Milvus&quot;,
       &quot;connect_timeout&quot;: 10
     },
     &quot;collection_infos&quot;: [
       {
         &quot;name&quot;: &quot;*&quot;
       }
-    ],
-    &quot;rpc_channel_info&quot;: {
-      &quot;name&quot;: &quot;by-dev-replicate-msg&quot;
-    }
+    ]
   }
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>用目标 Milvus 服务器的 IP 地址替换<strong>localhost</strong>。</p>
 <p><strong>参数</strong>：</p>
 <ul>
-<li><p><strong>milvus_connect_param</strong>：目标<strong>Milvus</strong> 的连接参数。</p>
+<li><p><strong>milvus_connect_param</strong>: 目标 Milvus 的连接参数。</p>
 <ul>
 <li><p><strong>host</strong>：Milvus 服务器的主机名或 IP 地址。</p></li>
 <li><p><strong>port：端口号</strong>：Milvus 服务器监听的端口号。</p></li>
@@ -75,7 +69,6 @@ title: 管理疾病预防控制中心任务
 <li><p><strong>connect_timeout（连接超时）</strong>：建立连接的超时时间（秒）。</p></li>
 </ul></li>
 <li><p><strong>collection_infos</strong>：要同步的集合。目前只支持星号<strong>(*</strong>)，因为 Milvus-CDC 同步的是集群级别，而不是单个集合。</p></li>
-<li><p><strong>rpc_channel_info</strong>：用于同步的 RPC 通道名称，由源 Milvus 配置中<strong>common.chanNamePrefix.cluster</strong>和<strong>common.chanNamePrefix.replicateMsg</strong>的值连接而成，以连字符<strong>(-</strong>) 分隔。</p></li>
 </ul>
 <p>预期响应：</p>
 <pre><code translate="no" class="language-json">{
@@ -114,8 +107,7 @@ title: 管理疾病预防控制中心任务
       {
         <span class="hljs-string">&quot;task_id&quot;</span>: <span class="hljs-string">&quot;xxxxx&quot;</span>,
         <span class="hljs-string">&quot;milvus_connect_param&quot;</span>: {
-          <span class="hljs-string">&quot;host&quot;</span>: <span class="hljs-string">&quot;localhost&quot;</span>,
-          <span class="hljs-string">&quot;port&quot;</span>: <span class="hljs-number">19530</span>,
+          <span class="hljs-string">&quot;uri&quot;</span>:<span class="hljs-string">&quot;http://localhost:19530&quot;</span>,
           <span class="hljs-string">&quot;connect_timeout&quot;</span>: <span class="hljs-number">10</span>
         },
         <span class="hljs-string">&quot;collection_infos&quot;</span>: [
@@ -237,9 +229,7 @@ title: 管理疾病预防控制中心任务
       ],
       <span class="hljs-string">&quot;milvus_connect_param&quot;</span>: {
         <span class="hljs-string">&quot;connect_timeout&quot;</span>: <span class="hljs-number">10</span>,
-        <span class="hljs-string">&quot;enable_tls&quot;</span>: <span class="hljs-literal">true</span>,
-        <span class="hljs-string">&quot;host&quot;</span>: <span class="hljs-string">&quot;localhost&quot;</span>,
-        <span class="hljs-string">&quot;port&quot;</span>: <span class="hljs-number">19530</span>
+        <span class="hljs-string">&quot;uri&quot;</span>:<span class="hljs-string">&quot;http://localhost:19530&quot;</span>
       },
       <span class="hljs-string">&quot;state&quot;</span>: <span class="hljs-string">&quot;Running&quot;</span>,
       <span class="hljs-string">&quot;task_id&quot;</span>: <span class="hljs-string">&quot;xxxx&quot;</span>

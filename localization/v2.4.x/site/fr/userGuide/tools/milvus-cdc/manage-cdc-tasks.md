@@ -46,21 +46,15 @@ title: Gérer les tâches du CDC
   &quot;request_type&quot;: &quot;create&quot;,
   &quot;request_data&quot;: {
     &quot;milvus_connect_param&quot;: {
-      &quot;host&quot;: &quot;localhost&quot;,
-      &quot;port&quot;: 19530,
-      &quot;username&quot;: &quot;root&quot;,
-      &quot;password&quot;: &quot;Milvus&quot;,
-      &quot;enable_tls&quot;: false,
+      &quot;uri&quot;: &quot;http://localhost:19530&quot;,
+      &quot;token&quot;:&quot;root:Milvus&quot;,
       &quot;connect_timeout&quot;: 10
     },
     &quot;collection_infos&quot;: [
       {
         &quot;name&quot;: &quot;*&quot;
       }
-    ],
-    &quot;rpc_channel_info&quot;: {
-      &quot;name&quot;: &quot;by-dev-replicate-msg&quot;
-    }
+    ]
   }
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
@@ -77,7 +71,6 @@ title: Gérer les tâches du CDC
 <li><p><strong>connect_timeout</strong>: Délai d'attente en secondes pour l'établissement de la connexion.</p></li>
 </ul></li>
 <li><p><strong>collection_infos</strong>: Collections à synchroniser. Actuellement, seul un astérisque<strong>(*</strong>) est pris en charge, car Milvus-CDC se synchronise au niveau du cluster, et non des collections individuelles.</p></li>
-<li><p><strong>rpc_channel_info</strong>: Nom du canal RPC pour la synchronisation, construit en concaténant les valeurs de <strong>common.chanNamePrefix.cluster</strong> et <strong>common.chanNamePrefix.replicateMsg</strong> de la configuration Milvus source, séparées par un trait d'union<strong>(-)</strong>.</p></li>
 </ul>
 <p>Réponse attendue :</p>
 <pre><code translate="no" class="language-json">{
@@ -102,7 +95,7 @@ title: Gérer les tâches du CDC
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Pour dresser la liste de toutes les tâches CDC créées :</p>
+    </button></h2><p>Pour lister toutes les tâches CDC créées :</p>
 <pre><code translate="no" class="language-bash">curl -X POST -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> -d <span class="hljs-string">&#x27;{
   &quot;request_type&quot;: &quot;list&quot;
 }&#x27;</span> http://localhost:8444/cdc
@@ -116,8 +109,7 @@ title: Gérer les tâches du CDC
       {
         <span class="hljs-string">&quot;task_id&quot;</span>: <span class="hljs-string">&quot;xxxxx&quot;</span>,
         <span class="hljs-string">&quot;milvus_connect_param&quot;</span>: {
-          <span class="hljs-string">&quot;host&quot;</span>: <span class="hljs-string">&quot;localhost&quot;</span>,
-          <span class="hljs-string">&quot;port&quot;</span>: <span class="hljs-number">19530</span>,
+          <span class="hljs-string">&quot;uri&quot;</span>:<span class="hljs-string">&quot;http://localhost:19530&quot;</span>,
           <span class="hljs-string">&quot;connect_timeout&quot;</span>: <span class="hljs-number">10</span>
         },
         <span class="hljs-string">&quot;collection_infos&quot;</span>: [
@@ -239,9 +231,7 @@ title: Gérer les tâches du CDC
       ],
       <span class="hljs-string">&quot;milvus_connect_param&quot;</span>: {
         <span class="hljs-string">&quot;connect_timeout&quot;</span>: <span class="hljs-number">10</span>,
-        <span class="hljs-string">&quot;enable_tls&quot;</span>: <span class="hljs-literal">true</span>,
-        <span class="hljs-string">&quot;host&quot;</span>: <span class="hljs-string">&quot;localhost&quot;</span>,
-        <span class="hljs-string">&quot;port&quot;</span>: <span class="hljs-number">19530</span>
+        <span class="hljs-string">&quot;uri&quot;</span>:<span class="hljs-string">&quot;http://localhost:19530&quot;</span>
       },
       <span class="hljs-string">&quot;state&quot;</span>: <span class="hljs-string">&quot;Running&quot;</span>,
       <span class="hljs-string">&quot;task_id&quot;</span>: <span class="hljs-string">&quot;xxxx&quot;</span>

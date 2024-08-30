@@ -46,21 +46,15 @@ title: Gestire le attività del CDC
   &quot;request_type&quot;: &quot;create&quot;,
   &quot;request_data&quot;: {
     &quot;milvus_connect_param&quot;: {
-      &quot;host&quot;: &quot;localhost&quot;,
-      &quot;port&quot;: 19530,
-      &quot;username&quot;: &quot;root&quot;,
-      &quot;password&quot;: &quot;Milvus&quot;,
-      &quot;enable_tls&quot;: false,
+      &quot;uri&quot;: &quot;http://localhost:19530&quot;,
+      &quot;token&quot;:&quot;root:Milvus&quot;,
       &quot;connect_timeout&quot;: 10
     },
     &quot;collection_infos&quot;: [
       {
         &quot;name&quot;: &quot;*&quot;
       }
-    ],
-    &quot;rpc_channel_info&quot;: {
-      &quot;name&quot;: &quot;by-dev-replicate-msg&quot;
-    }
+    ]
   }
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
@@ -77,7 +71,6 @@ title: Gestire le attività del CDC
 <li><p><strong>connect_timeout</strong>: Periodo di timeout in secondi per stabilire la connessione.</p></li>
 </ul></li>
 <li><p><strong>collection_infos</strong>: Collezioni da sincronizzare. Attualmente è supportato solo un asterisco<strong>(*</strong>), poiché Milvus-CDC sincronizza a livello di cluster, non di singole collezioni.</p></li>
-<li><p><strong>rpc_channel_info</strong>: Nome del canale RPC per la sincronizzazione, costruito concatenando i valori di <strong>common.chanNamePrefix.cluster</strong> e <strong>common.chanNamePrefix.replicateMsg</strong> dalla configurazione Milvus di origine, separati da un trattino<strong>(-</strong>).</p></li>
 </ul>
 <p>Risposta attesa:</p>
 <pre><code translate="no" class="language-json">{
@@ -87,7 +80,7 @@ title: Gestire le attività del CDC
   }
 }
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="List-tasks" class="common-anchor-header">Elenco dei compiti<button data-href="#List-tasks" class="anchor-icon" translate="no">
+<h2 id="List-tasks" class="common-anchor-header">Elenco attività<button data-href="#List-tasks" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -116,8 +109,7 @@ title: Gestire le attività del CDC
       {
         <span class="hljs-string">&quot;task_id&quot;</span>: <span class="hljs-string">&quot;xxxxx&quot;</span>,
         <span class="hljs-string">&quot;milvus_connect_param&quot;</span>: {
-          <span class="hljs-string">&quot;host&quot;</span>: <span class="hljs-string">&quot;localhost&quot;</span>,
-          <span class="hljs-string">&quot;port&quot;</span>: <span class="hljs-number">19530</span>,
+          <span class="hljs-string">&quot;uri&quot;</span>:<span class="hljs-string">&quot;http://localhost:19530&quot;</span>,
           <span class="hljs-string">&quot;connect_timeout&quot;</span>: <span class="hljs-number">10</span>
         },
         <span class="hljs-string">&quot;collection_infos&quot;</span>: [
@@ -239,9 +231,7 @@ title: Gestire le attività del CDC
       ],
       <span class="hljs-string">&quot;milvus_connect_param&quot;</span>: {
         <span class="hljs-string">&quot;connect_timeout&quot;</span>: <span class="hljs-number">10</span>,
-        <span class="hljs-string">&quot;enable_tls&quot;</span>: <span class="hljs-literal">true</span>,
-        <span class="hljs-string">&quot;host&quot;</span>: <span class="hljs-string">&quot;localhost&quot;</span>,
-        <span class="hljs-string">&quot;port&quot;</span>: <span class="hljs-number">19530</span>
+        <span class="hljs-string">&quot;uri&quot;</span>:<span class="hljs-string">&quot;http://localhost:19530&quot;</span>
       },
       <span class="hljs-string">&quot;state&quot;</span>: <span class="hljs-string">&quot;Running&quot;</span>,
       <span class="hljs-string">&quot;task_id&quot;</span>: <span class="hljs-string">&quot;xxxx&quot;</span>

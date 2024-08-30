@@ -21,7 +21,7 @@ title: Gestionar las tareas de los CDC
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Una tarea de Captura de Cambio de Datos (CDC) permite la sincronización de datos desde una instancia Milvus de origen a una instancia Milvus de destino. Supervisa los registros de operaciones del origen y replica los cambios de datos, como inserciones, eliminaciones y operaciones de índice, en el destino en tiempo real. Esto facilita la recuperación de desastres en tiempo real o el equilibrio de carga activo-activo entre despliegues Milvus.</p>
+    </button></h1><p>Una tarea de Captura de Cambio de Datos (CDC) permite la sincronización de datos desde una instancia Milvus de origen a una instancia Milvus de destino. Supervisa los registros de operaciones del origen y replica los cambios de datos, como inserciones, eliminaciones y operaciones de índice, en el destino en tiempo real. Esto facilita la recuperación ante desastres en tiempo real o el equilibrio de carga activo-activo entre despliegues Milvus.</p>
 <p>Esta guía cubre cómo gestionar las tareas CDC, incluyendo la creación, pausa, reanudación, recuperación de detalles, listado y eliminación a través de peticiones HTTP.</p>
 <h2 id="Create-a-task" class="common-anchor-header">Crear una tarea<button data-href="#Create-a-task" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -46,21 +46,15 @@ title: Gestionar las tareas de los CDC
   &quot;request_type&quot;: &quot;create&quot;,
   &quot;request_data&quot;: {
     &quot;milvus_connect_param&quot;: {
-      &quot;host&quot;: &quot;localhost&quot;,
-      &quot;port&quot;: 19530,
-      &quot;username&quot;: &quot;root&quot;,
-      &quot;password&quot;: &quot;Milvus&quot;,
-      &quot;enable_tls&quot;: false,
+      &quot;uri&quot;: &quot;http://localhost:19530&quot;,
+      &quot;token&quot;:&quot;root:Milvus&quot;,
       &quot;connect_timeout&quot;: 10
     },
     &quot;collection_infos&quot;: [
       {
         &quot;name&quot;: &quot;*&quot;
       }
-    ],
-    &quot;rpc_channel_info&quot;: {
-      &quot;name&quot;: &quot;by-dev-replicate-msg&quot;
-    }
+    ]
   }
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
@@ -77,7 +71,6 @@ title: Gestionar las tareas de los CDC
 <li><p><strong>connect_timeout</strong>: Tiempo de espera en segundos para establecer la conexión.</p></li>
 </ul></li>
 <li><p><strong>colección_infos</strong>: Colecciones a sincronizar. Actualmente, sólo se admite un asterisco<strong>(*</strong>), ya que Milvus-CDC sincroniza a nivel de clúster, no colecciones individuales.</p></li>
-<li><p><strong>rpc_channel_info</strong>: Nombre del canal RPC para la sincronización, construido concatenando los valores de <strong>common</strong> <strong>.</strong> <strong>chanNamePrefix</strong> <strong>.cluster</strong> y <strong>common.chanNamePrefix.replicateMsg</strong> de la configuración Milvus de origen, separados por un guión<strong>(-</strong>).</p></li>
 </ul>
 <p>Respuesta esperada:</p>
 <pre><code translate="no" class="language-json">{
@@ -116,8 +109,7 @@ title: Gestionar las tareas de los CDC
       {
         <span class="hljs-string">&quot;task_id&quot;</span>: <span class="hljs-string">&quot;xxxxx&quot;</span>,
         <span class="hljs-string">&quot;milvus_connect_param&quot;</span>: {
-          <span class="hljs-string">&quot;host&quot;</span>: <span class="hljs-string">&quot;localhost&quot;</span>,
-          <span class="hljs-string">&quot;port&quot;</span>: <span class="hljs-number">19530</span>,
+          <span class="hljs-string">&quot;uri&quot;</span>:<span class="hljs-string">&quot;http://localhost:19530&quot;</span>,
           <span class="hljs-string">&quot;connect_timeout&quot;</span>: <span class="hljs-number">10</span>
         },
         <span class="hljs-string">&quot;collection_infos&quot;</span>: [
@@ -225,7 +217,7 @@ title: Gestionar las tareas de los CDC
 <p>Sustituya <strong>localhost</strong> por la dirección IP del servidor Milvus de destino.</p>
 <p><strong>Parámetros</strong>:</p>
 <ul>
-<li><strong>task_id</strong>: ID de la tarea CDC que se desea consultar.</li>
+<li><strong>task_id</strong>: ID de la tarea CDC a consultar.</li>
 </ul>
 <p>Respuesta esperada:</p>
 <pre><code translate="no" class="language-bash">{
@@ -239,9 +231,7 @@ title: Gestionar las tareas de los CDC
       ],
       <span class="hljs-string">&quot;milvus_connect_param&quot;</span>: {
         <span class="hljs-string">&quot;connect_timeout&quot;</span>: <span class="hljs-number">10</span>,
-        <span class="hljs-string">&quot;enable_tls&quot;</span>: <span class="hljs-literal">true</span>,
-        <span class="hljs-string">&quot;host&quot;</span>: <span class="hljs-string">&quot;localhost&quot;</span>,
-        <span class="hljs-string">&quot;port&quot;</span>: <span class="hljs-number">19530</span>
+        <span class="hljs-string">&quot;uri&quot;</span>:<span class="hljs-string">&quot;http://localhost:19530&quot;</span>
       },
       <span class="hljs-string">&quot;state&quot;</span>: <span class="hljs-string">&quot;Running&quot;</span>,
       <span class="hljs-string">&quot;task_id&quot;</span>: <span class="hljs-string">&quot;xxxx&quot;</span>

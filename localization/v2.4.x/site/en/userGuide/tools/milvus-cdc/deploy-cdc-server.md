@@ -96,6 +96,7 @@ metaStoreConfig:
 <li><p><strong>Helm</strong> or <strong>Docker Compose</strong>: Defaults to <code translate="no">by-dev</code>.</p></li>
 <li><p><strong>Operator</strong>: Defaults to <code translate="no">&lt;release_name&gt;</code>.</p></li>
 </ul></li>
+<li><p><code translate="no">replicateChan</code>: milvus replicate channel name, which is <code translate="no">{msgChannel.chanNamePrefix.cluster}/{msgChannel.chanNamePrefix.replicateMsg}</code> in the milvus.yaml file</p></li>
 <li><p><code translate="no">sourceConfig.pulsar</code>: Pulsar configurations for the source Milvus. If the source Milvus uses Kafka for message storage, remove all Pulsar-related configurations. For more information, refer to <a href="https://milvus.io/docs/configure_pulsar.md">Pulsar-related Configurations</a>.</p></li>
 <li><p><code translate="no">sourceConfig.kafka.address</code>: Kafka address for the source Milvus. Uncomment this configuration if the source Milvus uses Kafka for message storage.</p></li>
 </ul></li>
@@ -112,6 +113,7 @@ sourceConfig:
   defaultPartitionName: _default
   <span class="hljs-comment"># read buffer length, mainly used for buffering if writing data to milvus-target is slow.</span>
   readChanLen: <span class="hljs-number">10</span>
+  replicateChan: by-dev-replicate-msg
   <span class="hljs-comment"># milvus-source mq config, which is pulsar or kafka</span>
   pulsar:
     address: pulsar://localhost:<span class="hljs-number">6650</span>

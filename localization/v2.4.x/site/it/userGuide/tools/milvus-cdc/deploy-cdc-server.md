@@ -92,13 +92,14 @@ metaStoreConfig:
 <li><p><strong>Configurazione Milvus di origine:</strong></p>
 <p>Specificare i dettagli di connessione del Milvus di origine, compresi etcd e l'archiviazione dei messaggi, per stabilire una connessione tra il server Milvus-CDC e il Milvus di origine.</p>
 <ul>
-<li><p><code translate="no">sourceConfig.etcdAddress</code>: Indirizzo per la connessione all'etcd del Milvus di origine. Per ulteriori informazioni, fare riferimento a <a href="https://milvus.io/docs/configure_etcd.md#etcd-related-Configurations">Configurazioni relative a etcd</a>.</p></li>
+<li><p><code translate="no">sourceConfig.etcdAddress</code>: Indirizzo per la connessione all'etcd del Milvus di origine. Per ulteriori informazioni, consultare le <a href="https://milvus.io/docs/configure_etcd.md#etcd-related-Configurations">Configurazioni relative a etcd</a>.</p></li>
 <li><p><code translate="no">sourceConfig.etcdRootPath</code>: Prefisso radice della chiave in cui il Milvus di origine memorizza i dati in etcd. Il valore può variare in base al metodo di distribuzione dell'istanza Milvus:</p>
 <ul>
-<li><p><strong>Helm</strong> o <strong>Docker Compose</strong>: Valore predefinito: <code translate="no">by-dev</code>.</p></li>
+<li><p><strong>Helm</strong> o <strong>Docker Compose</strong>: valore predefinito: <code translate="no">by-dev</code>.</p></li>
 <li><p><strong>Operatore</strong>: Valore predefinito: <code translate="no">&lt;release_name&gt;</code>.</p></li>
 </ul></li>
-<li><p><code translate="no">sourceConfig.pulsar</code>: Configurazioni di Pulsar per il Milvus di origine. Se il Milvus di origine usa Kafka per l'archiviazione dei messaggi, rimuovere tutte le configurazioni relative a Pulsar. Per ulteriori informazioni, fare riferimento a <a href="https://milvus.io/docs/configure_pulsar.md">Configurazioni relative a Pulsar</a>.</p></li>
+<li><p><code translate="no">replicateChan</code>Nome del canale di replica di Milvus, che è <code translate="no">{msgChannel.chanNamePrefix.cluster}/{msgChannel.chanNamePrefix.replicateMsg}</code> nel file milvus.yaml.</p></li>
+<li><p><code translate="no">sourceConfig.pulsar</code>: Configurazioni Pulsar per il Milvus di origine. Se il Milvus di origine utilizza Kafka per l'archiviazione dei messaggi, rimuovere tutte le configurazioni relative a Pulsar. Per ulteriori informazioni, fare riferimento a <a href="https://milvus.io/docs/configure_pulsar.md">Configurazioni relative a Pulsar</a>.</p></li>
 <li><p><code translate="no">sourceConfig.kafka.address</code>: Indirizzo Kafka per il Milvus di origine. Togliere il commento a questa configurazione se il Milvus di origine usa Kafka per l'archiviazione dei messaggi.</p></li>
 </ul></li>
 </ul>
@@ -114,6 +115,7 @@ sourceConfig:
   defaultPartitionName: _default
   <span class="hljs-comment"># read buffer length, mainly used for buffering if writing data to milvus-target is slow.</span>
   readChanLen: <span class="hljs-number">10</span>
+  replicateChan: by-dev-replicate-msg
   <span class="hljs-comment"># milvus-source mq config, which is pulsar or kafka</span>
   pulsar:
     address: pulsar://localhost:<span class="hljs-number">6650</span>

@@ -94,9 +94,10 @@ metaStoreConfig:
 <li><p><code translate="no">sourceConfig.etcdRootPath</code>:ソースMilvusがetcdにデータを格納するキーのルート接頭辞。値はMilvusインスタンスのデプロイ方法によって異なる場合があります：</p>
 <ul>
 <li><p><strong>Helm</strong>または<strong>Docker Compose</strong>: デフォルトは<code translate="no">by-dev</code> です。</p></li>
-<li><p><strong>Operator</strong>：デフォルトは<code translate="no">&lt;release_name&gt;</code> です。</p></li>
+<li><p><strong>Operator</strong>：デフォルトは<code translate="no">&lt;release_name&gt;</code> 。</p></li>
 </ul></li>
-<li><p><code translate="no">sourceConfig.pulsar</code>:ソースMilvusのPulsar設定。ソースMilvusがメッセージ・ストレージにKafkaを使用している場合は、Pulsar関連の構成をすべて削除してください。詳細については、<a href="https://milvus.io/docs/configure_pulsar.md">Pulsar関連構成を</a>参照してください。</p></li>
+<li><p><code translate="no">replicateChan</code>: milvusレプリケートチャネル名。milvus.yamlファイルの<code translate="no">{msgChannel.chanNamePrefix.cluster}/{msgChannel.chanNamePrefix.replicateMsg}</code> 。</p></li>
+<li><p><code translate="no">sourceConfig.pulsar</code>:ソースMilvusのパルサー・コンフィギュレーション。ソースMilvusがメッセージ・ストレージにKafkaを使用している場合は、Pulsar関連の構成をすべて削除してください。詳細は<a href="https://milvus.io/docs/configure_pulsar.md">Pulsar関連コンフィギュレーションを</a>参照。</p></li>
 <li><p><code translate="no">sourceConfig.kafka.address</code>:ソースMilvusのKafkaアドレス。ソースMilvusがメッセージ保存にKafkaを使用する場合、このコンフィギュレーションのコメントを外します。</p></li>
 </ul></li>
 </ul>
@@ -112,6 +113,7 @@ sourceConfig:
   defaultPartitionName: _default
   <span class="hljs-comment"># read buffer length, mainly used for buffering if writing data to milvus-target is slow.</span>
   readChanLen: <span class="hljs-number">10</span>
+  replicateChan: by-dev-replicate-msg
   <span class="hljs-comment"># milvus-source mq config, which is pulsar or kafka</span>
   pulsar:
     address: pulsar://localhost:<span class="hljs-number">6650</span>
