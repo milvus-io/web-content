@@ -50,14 +50,14 @@ Collection(
 
     The number of shards to create along with the creation of this collection. 
 
-    The value defaults to **2**, indicating that two shards are to be created along with this collection.
+    The value defaults to **1**, indicating that one shard is to be created along with this collection.
 
     <div class="admonition note">
 
     <p><b>what is sharding?</b></p>
 
     <p>Sharding refers to distributing write operations to different nodes to make the most of the parallel computing potential of a Milvus cluster for writing data.</p>
-    <p>By default, a collection contains two shards.</p>
+    <p>By default, a collection contains one shard.</p>
 
     </div>
 

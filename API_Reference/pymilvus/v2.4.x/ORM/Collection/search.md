@@ -98,11 +98,35 @@ search(
 
     The timeout duration for this operation. Setting this to **None** indicates that this operation timeouts when any response arrives or any error occurs.
 
-- **round_decimal** (int) -
+- **round_decimal** (*int*) -
 
     The number of decimal places that Milvus rounds the calculated distances to.
 
     The value defaults to **-1**, indicating that Milvus skips rounding the calculated distances and returns the raw value.
+
+- **consistency_level** (*str*) -
+
+    The consistency level used when Milvus searches within the specified collection.
+
+    If this parameter is not specified, the consistency level specified during the collection creation will be used. Specifying this parameter will override the one specified during collection creation.
+
+    Possible values are **Strong**, **Bounded**, **Eventually**, **Session**, and **Customized**.
+
+- **page_retain_order** (*bool*) -
+
+    Whether to retain the order of the search result when `offset` is provided.
+
+- **guarantee_timestamp** (*int*) -
+
+    The timestamp that Milvus uses as a reference during the search.
+
+    If this parameter is left unspecified, Milvus searches within all flushed entities. Setting this value makes Milvus searches within the entities flushed before the specified timestamp.
+
+- **graceful_time** (*int*) -
+
+    A graceful period in seconds for the search.
+
+    Setting this value makes Milvus search within the entities flushed the specified seconds ago.
 
 **RETURN TYPE:**
 
@@ -223,7 +247,7 @@ param = {
     }
 }
 
-# Create a search iterator
+# Create a search request
 res = collection.search(
     data=[[0.1,0.2,-0.3,-0.4,0.5]],
     anns_field="vector",

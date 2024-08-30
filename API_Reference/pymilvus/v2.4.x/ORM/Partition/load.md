@@ -29,22 +29,30 @@ load(
 
     The timeout duration for this operation. Setting this to **None** indicates that this operation timeouts when any response arrives or any error occurs.
 
-- **kwargs** - 
+- **resource_groups** (*list*) -
 
-    - **_resource_groups** (*list*) -
+    A specific set of resource groups into which the current collection is to be loaded.
 
-        A specific set of resource groups into which the current collection is to be loaded.
+    If left unspecified, the default resource group applies.
 
-        If left unspecified, the default resource group applies.
+    <div class="admonition note">
 
-        <div class="admonition note">
+    <p><b>what is a resource group?</b></p>
 
-        <p><b>what is a resource group?</b></p>
+    <p>A resource group can hold several or all of the query nodes in a Milvus instance.</p>
+    <p>Setting this parameter for this operation makes Milvus loads the current collection to the query nodes in the specified resource groups.</p>
 
-        <p>A resource group can hold several or all of the query nodes in a Milvus instance.</p>
-        <p>Setting this parameter for this operation makes Milvus loads the current collection to the query nodes in the specified resource groups.</p>
+    </div>
 
-        </div>
+- **load_fields** (*str[]*) -
+
+    The names of the fields to load. 
+
+    If this parameter is left unspecified, Milvus loads all vector field indexes plus all scalar field data into memory. Setting this parameter makes Milvus load the data of the specified fields into memory, reducing memory usage and improving search performance.
+
+- **skip_load_dynamic_field** (*bool*) - 
+
+    Setting this to true makes Milvus skip loading the dynamic field, making it unavailable for filtering conditions and output fields for searches and queries.
 
 **RETURN TYPE:**
 

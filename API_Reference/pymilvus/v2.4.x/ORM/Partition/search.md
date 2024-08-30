@@ -193,7 +193,7 @@ param = {
     }
 }
 
-# Create a search iterator
+# Create a search request
 res = partition.search(
     data=[[0.1,0.2,-0.3,-0.4,0.5]],
     anns_field="vector",

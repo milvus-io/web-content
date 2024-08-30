@@ -116,6 +116,14 @@ add_field(
 
     </div>
 
+- **is_clustering_key** (*bool*) -
+
+    Whether the current field serves as the clustering key. Each collection can have one partition key. You can also use the partition key as the clustering key. For details, refer to Clustering Compaction.
+
+- **mmap_enabled** (*bool*) -
+
+    Whether Milvus maps the field data into memory instead of fully loading it. For details settings, refer to MMap-enabled Data Storage.
+
 **RETURN TYPE:**
 
 *[CollectionSchema](CollectionSchema.md)*
