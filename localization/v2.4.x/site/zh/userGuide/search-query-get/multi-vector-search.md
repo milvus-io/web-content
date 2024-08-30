@@ -4,6 +4,7 @@ order: 2
 summary: 本指南演示如何在 Milvus 中执行混合搜索，并了解结果的重新排序。
 title: 混合搜索
 ---
+
 <h1 id="Hybrid-Search" class="common-anchor-header">混合搜索<button data-href="#Hybrid-Search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -45,22 +46,22 @@ title: 混合搜索
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>在开始混合搜索之前，请确保您有一个包含多个矢量字段的集合。目前，Milvus 为每个集合引入了默认的四个矢量<a href="https://milvus.io/docs/configure_proxy.md#proxymaxVectorFieldNum">字段</a>，通过修改<a href="https://milvus.io/docs/configure_proxy.md#proxymaxVectorFieldNum">proxy.maxVectorFieldNum</a>配置，最多可以扩展到十个。</p>
-<p>下面是一个例子，说明如何创建一个名为<code translate="no">test_collection</code> 的集合，其中包含两个矢量字段<code translate="no">filmVector</code> 和<code translate="no">posterVector</code> ，并在其中插入随机实体。</p>
+    </button></h2><p>在开始混合搜索之前，请确保您有一个包含多个向量字段的集合。目前，Milvus 为每个集合引入了默认的四个向量<a href="https://milvus.io/docs/configure_proxy.md#proxymaxVectorFieldNum">字段</a>，通过修改<a href="https://milvus.io/docs/configure_proxy.md#proxymaxVectorFieldNum">proxy.maxVectorFieldNum</a>配置，最多可以扩展到十个。</p>
+<p>下面是一个例子，说明如何创建一个名为<code translate="no">test_collection</code> 的集合，其中包含两个向量字段<code translate="no">filmVector</code> 和<code translate="no">posterVector</code> ，并在其中插入随机实体。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> connections, Collection, FieldSchema, CollectionSchema, DataType
 <span class="hljs-keyword">import</span> random
 
 <span class="hljs-comment"># Connect to Milvus</span>
 connections.connect(
-    host=<span class="hljs-string">&quot;10.102.7.3&quot;</span>, <span class="hljs-comment"># Replace with your Milvus server IP</span>
-    port=<span class="hljs-string">&quot;19530&quot;</span>
+host=<span class="hljs-string">&quot;10.102.7.3&quot;</span>, <span class="hljs-comment"># Replace with your Milvus server IP</span>
+port=<span class="hljs-string">&quot;19530&quot;</span>
 )
 
 <span class="hljs-comment"># Create schema</span>
 fields = [
-    FieldSchema(name=<span class="hljs-string">&quot;film_id&quot;</span>, dtype=DataType.INT64, is_primary=<span class="hljs-literal">True</span>),
-    FieldSchema(name=<span class="hljs-string">&quot;filmVector&quot;</span>, dtype=DataType.FLOAT_VECTOR, dim=<span class="hljs-number">5</span>), <span class="hljs-comment"># Vector field for film vectors</span>
-    FieldSchema(name=<span class="hljs-string">&quot;posterVector&quot;</span>, dtype=DataType.FLOAT_VECTOR, dim=<span class="hljs-number">5</span>)] <span class="hljs-comment"># Vector field for poster vectors</span>
+FieldSchema(name=<span class="hljs-string">&quot;film_id&quot;</span>, dtype=DataType.INT64, is_primary=<span class="hljs-literal">True</span>),
+FieldSchema(name=<span class="hljs-string">&quot;filmVector&quot;</span>, dtype=DataType.FLOAT_VECTOR, dim=<span class="hljs-number">5</span>), <span class="hljs-comment"># Vector field for film vectors</span>
+FieldSchema(name=<span class="hljs-string">&quot;posterVector&quot;</span>, dtype=DataType.FLOAT_VECTOR, dim=<span class="hljs-number">5</span>)] <span class="hljs-comment"># Vector field for poster vectors</span>
 
 schema = CollectionSchema(fields=fields,enable_dynamic_field=<span class="hljs-literal">False</span>)
 
@@ -69,9 +70,9 @@ collection = Collection(name=<span class="hljs-string">&quot;test_collection&quo
 
 <span class="hljs-comment"># Create index for each vector field</span>
 index_params = {
-    <span class="hljs-string">&quot;metric_type&quot;</span>: <span class="hljs-string">&quot;L2&quot;</span>,
-    <span class="hljs-string">&quot;index_type&quot;</span>: <span class="hljs-string">&quot;IVF_FLAT&quot;</span>,
-    <span class="hljs-string">&quot;params&quot;</span>: {<span class="hljs-string">&quot;nlist&quot;</span>: <span class="hljs-number">128</span>},
+<span class="hljs-string">&quot;metric_type&quot;</span>: <span class="hljs-string">&quot;L2&quot;</span>,
+<span class="hljs-string">&quot;index_type&quot;</span>: <span class="hljs-string">&quot;IVF_FLAT&quot;</span>,
+<span class="hljs-string">&quot;params&quot;</span>: {<span class="hljs-string">&quot;nlist&quot;</span>: <span class="hljs-number">128</span>},
 }
 
 collection.create_index(<span class="hljs-string">&quot;filmVector&quot;</span>, index_params)
@@ -81,10 +82,10 @@ collection.create_index(<span class="hljs-string">&quot;posterVector&quot;</span
 entities = []
 
 <span class="hljs-keyword">for</span> _ <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">1000</span>):
-    <span class="hljs-comment"># generate random values for each field in the schema</span>
-    film_id = random.randint(<span class="hljs-number">1</span>, <span class="hljs-number">1000</span>)
-    film_vector = [ random.random() <span class="hljs-keyword">for</span> _ <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">5</span>) ]
-    poster_vector = [ random.random() <span class="hljs-keyword">for</span> _ <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">5</span>) ]
+<span class="hljs-comment"># generate random values for each field in the schema</span>
+film_id = random.randint(<span class="hljs-number">1</span>, <span class="hljs-number">1000</span>)
+film_vector = [ random.random() <span class="hljs-keyword">for</span> _ <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">5</span>) ]
+poster*vector = [ random.random() <span class="hljs-keyword">for</span> * <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">5</span>) ]
 
     <span class="hljs-comment"># create a dictionary for each entity</span>
     entity = {
@@ -95,9 +96,10 @@ entities = []
 
     <span class="hljs-comment"># add the entity to the list</span>
     entities.append(entity)
-    
+
 collection.insert(entities)
 <button class="copy-code-btn"></button></code></pre>
+
 <h2 id="Step-1-Create-Multiple-AnnSearchRequest-Instances" class="common-anchor-header">步骤 1：创建多个 AnnSearchRequest 实例<button data-href="#Step-1-Create-Multiple-AnnSearchRequest-Instances" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -121,32 +123,33 @@ collection.insert(entities)
 query_filmVector = [[<span class="hljs-number">0.8896863042430693</span>, <span class="hljs-number">0.370613100114602</span>, <span class="hljs-number">0.23779315077113428</span>, <span class="hljs-number">0.38227915951132996</span>, <span class="hljs-number">0.5997064603128835</span>]]
 
 search_param_1 = {
-    <span class="hljs-string">&quot;data&quot;</span>: query_filmVector, <span class="hljs-comment"># Query vector</span>
-    <span class="hljs-string">&quot;anns_field&quot;</span>: <span class="hljs-string">&quot;filmVector&quot;</span>, <span class="hljs-comment"># Vector field name</span>
-    <span class="hljs-string">&quot;param&quot;</span>: {
-        <span class="hljs-string">&quot;metric_type&quot;</span>: <span class="hljs-string">&quot;L2&quot;</span>, <span class="hljs-comment"># This parameter value must be identical to the one used in the collection schema</span>
-        <span class="hljs-string">&quot;params&quot;</span>: {<span class="hljs-string">&quot;nprobe&quot;</span>: <span class="hljs-number">10</span>}
-    },
-    <span class="hljs-string">&quot;limit&quot;</span>: <span class="hljs-number">2</span> <span class="hljs-comment"># Number of search results to return in this AnnSearchRequest</span>
+<span class="hljs-string">&quot;data&quot;</span>: query_filmVector, <span class="hljs-comment"># Query vector</span>
+<span class="hljs-string">&quot;anns_field&quot;</span>: <span class="hljs-string">&quot;filmVector&quot;</span>, <span class="hljs-comment"># Vector field name</span>
+<span class="hljs-string">&quot;param&quot;</span>: {
+<span class="hljs-string">&quot;metric_type&quot;</span>: <span class="hljs-string">&quot;L2&quot;</span>, <span class="hljs-comment"># This parameter value must be identical to the one used in the collection schema</span>
+<span class="hljs-string">&quot;params&quot;</span>: {<span class="hljs-string">&quot;nprobe&quot;</span>: <span class="hljs-number">10</span>}
+},
+<span class="hljs-string">&quot;limit&quot;</span>: <span class="hljs-number">2</span> <span class="hljs-comment"># Number of search results to return in this AnnSearchRequest</span>
 }
-request_1 = AnnSearchRequest(**search_param_1)
+request_1 = AnnSearchRequest(\*\*search_param_1)
 
 <span class="hljs-comment"># Create ANN search request 2 for posterVector</span>
 query_posterVector = [[<span class="hljs-number">0.02550758562349764</span>, <span class="hljs-number">0.006085637357292062</span>, <span class="hljs-number">0.5325251250159071</span>, <span class="hljs-number">0.7676432650114147</span>, <span class="hljs-number">0.5521074424751443</span>]]
 search_param_2 = {
-    <span class="hljs-string">&quot;data&quot;</span>: query_posterVector, <span class="hljs-comment"># Query vector</span>
-    <span class="hljs-string">&quot;anns_field&quot;</span>: <span class="hljs-string">&quot;posterVector&quot;</span>, <span class="hljs-comment"># Vector field name</span>
-    <span class="hljs-string">&quot;param&quot;</span>: {
-        <span class="hljs-string">&quot;metric_type&quot;</span>: <span class="hljs-string">&quot;L2&quot;</span>, <span class="hljs-comment"># This parameter value must be identical to the one used in the collection schema</span>
-        <span class="hljs-string">&quot;params&quot;</span>: {<span class="hljs-string">&quot;nprobe&quot;</span>: <span class="hljs-number">10</span>}
-    },
-    <span class="hljs-string">&quot;limit&quot;</span>: <span class="hljs-number">2</span> <span class="hljs-comment"># Number of search results to return in this AnnSearchRequest</span>
+<span class="hljs-string">&quot;data&quot;</span>: query_posterVector, <span class="hljs-comment"># Query vector</span>
+<span class="hljs-string">&quot;anns_field&quot;</span>: <span class="hljs-string">&quot;posterVector&quot;</span>, <span class="hljs-comment"># Vector field name</span>
+<span class="hljs-string">&quot;param&quot;</span>: {
+<span class="hljs-string">&quot;metric_type&quot;</span>: <span class="hljs-string">&quot;L2&quot;</span>, <span class="hljs-comment"># This parameter value must be identical to the one used in the collection schema</span>
+<span class="hljs-string">&quot;params&quot;</span>: {<span class="hljs-string">&quot;nprobe&quot;</span>: <span class="hljs-number">10</span>}
+},
+<span class="hljs-string">&quot;limit&quot;</span>: <span class="hljs-number">2</span> <span class="hljs-comment"># Number of search results to return in this AnnSearchRequest</span>
 }
-request_2 = AnnSearchRequest(**search_param_2)
+request_2 = AnnSearchRequest(\*\*search_param_2)
 
 <span class="hljs-comment"># Store these two requests as a list in `reqs`</span>
 reqs = [request_1, request_2]
 <button class="copy-code-btn"></button></code></pre>
+
 <p>参数：</p>
 <ul>
 <li><p><code translate="no">AnnSearchRequest</code> <em>对象</em></p>
@@ -154,9 +157,9 @@ reqs = [request_1, request_2]
 <li><p><code translate="no">data</code> <em>列表</em></p>
 <p>要在单个<code translate="no">AnnSearchRequest</code> 中搜索的查询向量。目前，该参数只接受包含单个查询向量的列表，例如<code translate="no">[[0.5791814851218929, 0.5792985702614121, 0.8480776460143558, 0.16098005945243, 0.2842979317256803]]</code> 。今后，该参数将扩展到接受多个查询向量。</p></li>
 <li><p><code translate="no">anns_field</code> <em>（字符串）</em></p>
-<p>在单个<code translate="no">AnnSearchRequest</code> 中使用的矢量字段名称。</p></li>
+<p>在单个<code translate="no">AnnSearchRequest</code> 中使用的向量字段名称。</p></li>
 <li><p><code translate="no">param</code> <em>（dict）</em></p>
-<p>单个<code translate="no">AnnSearchRequest</code> 的搜索参数字典。这些搜索参数与单矢量搜索参数相同。更多信息，请参阅<a href="https://milvus.io/docs/single-vector-search.md#Search-parameters">搜索参数</a>。</p></li>
+<p>单个<code translate="no">AnnSearchRequest</code> 的搜索参数字典。这些搜索参数与单向量搜索参数相同。更多信息，请参阅<a href="https://milvus.io/docs/single-vector-search.md#Search-parameters">搜索参数</a>。</p></li>
 <li><p><code translate="no">limit</code> <em>(int</em>)</p>
 <p>要包含在单个<code translate="no">ANNSearchRequest</code> 中的搜索结果的最大数量。</p>
 <p>该参数只影响单个<code translate="no">ANNSearchRequest</code> 中返回的搜索结果数，并不决定<code translate="no">hybrid_search</code> 调用的最终返回结果。在混合搜索中，最终结果由来自多个<code translate="no">ANNSearchRequest</code> 实例的结果组合和重排决定。</p></li>
@@ -179,7 +182,7 @@ reqs = [request_1, request_2]
     </button></h2><p>创建<code translate="no">AnnSearchRequest</code> 实例后，配置重新排序策略，对结果进行组合和重新排序。目前有两个选项：<code translate="no">WeightedRanker</code> 和<code translate="no">RRFRanker</code> 。有关重新排名策略的更多信息，请参阅<a href="/docs/zh/reranking.md">重新排名</a>。</p>
 <ul>
 <li><p>使用加权评分</p>
-<p><code translate="no">WeightedRanker</code> 用于以指定权重为每个向量场搜索结果分配重要性。如果您将某些矢量字段的优先级高于其他矢量字段，<code translate="no">WeightedRanker(value1, value2, ..., valueN)</code> 可以在合并搜索结果中反映这一点。</p>
+<p><code translate="no">WeightedRanker</code> 用于以指定权重为每个向量场搜索结果分配重要性。如果您将某些向量字段的优先级高于其他向量字段，<code translate="no">WeightedRanker(value1, value2, ..., valueN)</code> 可以在合并搜索结果中反映这一点。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> WeightedRanker
 <span class="hljs-comment"># Use WeightedRanker to combine results with specified weights</span>
 <span class="hljs-comment"># Assign weights of 0.8 to text search and 0.2 to image search</span>
@@ -196,6 +199,7 @@ rerank = WeightedRanker(<span class="hljs-number">0.8</span>, <span class="hljs-
 
 rerank = RRFRanker()
 <button class="copy-code-btn"></button></code></pre></li>
+
 </ul>
 <h2 id="Step-3-Perform-a-Hybrid-Search" class="common-anchor-header">步骤 3：执行混合搜索<button data-href="#Step-3-Perform-a-Hybrid-Search" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -217,13 +221,14 @@ rerank = RRFRanker()
 collection.load()
 
 res = collection.hybrid_search(
-    reqs, <span class="hljs-comment"># List of AnnSearchRequests created in step 1</span>
-    rerank, <span class="hljs-comment"># Reranking strategy specified in step 2</span>
-    limit=<span class="hljs-number">2</span> <span class="hljs-comment"># Number of final search results to return</span>
+reqs, <span class="hljs-comment"># List of AnnSearchRequests created in step 1</span>
+rerank, <span class="hljs-comment"># Reranking strategy specified in step 2</span>
+limit=<span class="hljs-number">2</span> <span class="hljs-comment"># Number of final search results to return</span>
 )
 
 <span class="hljs-built_in">print</span>(res)
 <button class="copy-code-btn"></button></code></pre>
+
 <p>参数：</p>
 <ul>
 <li><p><code translate="no">reqs</code> <em>列表</em></p>
@@ -253,7 +258,7 @@ res = collection.hybrid_search(
         ></path>
       </svg>
     </button></h2><ul>
-<li><p>通常情况下，每个集合默认最多允许 4 个矢量字段。不过，您可以选择调整<code translate="no">proxy.maxVectorFieldNum</code> 配置，以扩大集合中向量字段的最大数量，每个集合的最大限制为 10 个向量字段。有关更多信息，请参阅 "<a href="https://milvus.io/docs/configure_proxy.md#Proxy-related-Configurations">代理相关配置"</a>。</p></li>
+<li><p>通常情况下，每个集合默认最多允许 4 个向量字段。不过，您可以选择调整<code translate="no">proxy.maxVectorFieldNum</code> 配置，以扩大集合中向量字段的最大数量，每个集合的最大限制为 10 个向量字段。有关更多信息，请参阅 "<a href="https://milvus.io/docs/configure_proxy.md#Proxy-related-Configurations">代理相关配置"</a>。</p></li>
 <li><p>集合中的部分索引或加载的向量字段将导致错误。</p></li>
 <li><p>目前，混合搜索中的每个<code translate="no">AnnSearchRequest</code> 只能携带一个查询向量。</p></li>
 </ul>
@@ -274,13 +279,13 @@ res = collection.hybrid_search(
       </svg>
     </button></h2><ul>
 <li><p><strong>建议在哪些情况下使用混合搜索？</strong></p>
-<p>混合搜索非常适合需要高精确度的复杂情况，尤其是当一个实体可以由多个不同的向量表示时。这适用于同一数据（如一个句子）通过不同的嵌入模型进行处理的情况，或多模态信息（如个人的图像、指纹和声纹）转换成各种矢量格式的情况。通过给这些向量分配权重，它们的综合影响可以极大地丰富搜索结果的召回率并提高搜索结果的有效性。</p></li>
+<p>混合搜索非常适合需要高精确度的复杂情况，尤其是当一个实体可以由多个不同的向量表示时。这适用于同一数据（如一个句子）通过不同的嵌入模型进行处理的情况，或多模态信息（如个人的图像、指纹和声纹）转换成各种向量格式的情况。通过给这些向量分配权重，它们的综合影响可以极大地丰富搜索结果的召回率并提高搜索结果的有效性。</p></li>
 <li><p><strong>加权排序器如何对不同向量场之间的距离进行归一化处理？</strong></p>
 <p>加权排序器使用为每个字段分配的权重对向量字段之间的距离进行归一化处理。它根据每个向量场的权重计算其重要性，优先考虑权重较高的向量场。建议在 ANN 搜索请求中使用相同的度量类型，以确保一致性。这种方法可确保被认为更重要的向量对整体排名产生更大的影响。</p></li>
 <li><p><strong>是否可以使用 Cohere Ranker 或 BGE Ranker 等其他排名器？</strong></p>
 <p>目前只支持所提供的排名器。正在计划在未来的更新中加入其他排名器。</p></li>
 <li><p><strong>是否可以同时执行多个混合搜索操作？</strong></p>
 <p>可以，支持同时执行多个混合搜索操作。</p></li>
-<li><p><strong>能否在多个 AnnSearchRequest 对象中使用相同的矢量字段来执行混合搜索？</strong></p>
-<p>从技术上讲，可以在多个 AnnSearchRequest 对象中使用相同的矢量字段进行混合搜索。混合搜索并不需要多个矢量字段。</p></li>
+<li><p><strong>能否在多个 AnnSearchRequest 对象中使用相同的向量字段来执行混合搜索？</strong></p>
+<p>从技术上讲，可以在多个 AnnSearchRequest 对象中使用相同的向量字段进行混合搜索。混合搜索并不需要多个向量字段。</p></li>
 </ul>

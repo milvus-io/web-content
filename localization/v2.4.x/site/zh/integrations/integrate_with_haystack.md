@@ -3,6 +3,7 @@ id: integrate_with_haystack.md
 summary: 本指南演示了如何使用 Haystack 和 Milvus 建立检索增强生成（RAG）系统。
 title: 使用 Milvus 和 Haystack 的检索增强生成（RAG）
 ---
+
 <h1 id="Retrieval-Augmented-Generation-RAG-with-Milvus-and-Haystack" class="common-anchor-header">使用 Milvus 和 Haystack 的检索增强生成（RAG）<button data-href="#Retrieval-Augmented-Generation-RAG-with-Milvus-and-Haystack" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -21,7 +22,7 @@ title: 使用 Milvus 和 Haystack 的检索增强生成（RAG）
     </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/rag_with_milvus_and_haystack.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a></p>
 <p>本指南演示了如何使用 Haystack 和 Milvus 构建检索-增强生成（RAG）系统。</p>
 <p>RAG 系统结合了检索系统和生成模型，可根据给定提示生成新文本。该系统首先使用 Milvus 从语料库中检索相关文档，然后使用生成模型根据检索到的文档生成新文本。</p>
-<p><a href="https://haystack.deepset.ai/">Haystack</a>是 deepset 开发的开源 Python 框架，用于使用大型语言模型（LLM）构建自定义应用程序。<a href="https://milvus.io/">Milvus</a>是世界上最先进的开源矢量数据库，用于支持嵌入式相似性搜索和人工智能应用。</p>
+<p><a href="https://haystack.deepset.ai/">Haystack</a>是 deepset 开发的开源 Python 框架，用于使用大型语言模型（LLM）构建自定义应用程序。<a href="https://milvus.io/">Milvus</a>是世界上最先进的开源向量数据库，用于支持嵌入式相似性搜索和人工智能应用。</p>
 <h2 id="Prerequisites" class="common-anchor-header">前提条件<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -46,8 +47,9 @@ title: 使用 Milvus 和 Haystack 的检索增强生成（RAG）
 <p>我们将使用 OpenAI 的模型。您应将<a href="https://platform.openai.com/docs/quickstart">api key</a> <code translate="no">OPENAI_API_KEY</code> 作为环境变量。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> os
 
-os.<span class="hljs-property">environ</span>[<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</span>] = <span class="hljs-string">&quot;sk-***********&quot;</span>
+os.<span class="hljs-property">environ</span>[<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</span>] = <span class="hljs-string">&quot;sk-****\*\*\*****&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
+
 <h2 id="Prepare-the-data" class="common-anchor-header">准备数据<button data-href="#Prepare-the-data" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -72,8 +74,9 @@ os.<span class="hljs-property">environ</span>[<span class="hljs-string">&quot;OP
 file_path = <span class="hljs-string">&quot;./davinci.txt&quot;</span>
 
 <span class="hljs-keyword">if</span> not os.path.exists(file_path):
-    urllib.request.urlretrieve(url, file_path)
+urllib.request.urlretrieve(url, file_path)
 <button class="copy-code-btn"></button></code></pre>
+
 <h2 id="Create-the-indexing-Pipeline" class="common-anchor-header">创建索引管道<button data-href="#Create-the-indexing-Pipeline" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -100,14 +103,14 @@ file_path = <span class="hljs-string">&quot;./davinci.txt&quot;</span>
 <span class="hljs-keyword">from</span> milvus_haystack <span class="hljs-keyword">import</span> MilvusDocumentStore
 <span class="hljs-keyword">from</span> milvus_haystack.milvus_embedding_retriever <span class="hljs-keyword">import</span> MilvusEmbeddingRetriever
 
-
 document_store = MilvusDocumentStore(
-    connection_args={<span class="hljs-string">&quot;uri&quot;</span>: <span class="hljs-string">&quot;./milvus.db&quot;</span>},
-    <span class="hljs-comment"># connection_args={&quot;uri&quot;: &quot;http://localhost:19530&quot;},</span>
-    <span class="hljs-comment"># connection_args={&quot;uri&quot;: YOUR_ZILLIZ_CLOUD_URI, &quot;token&quot;: Secret.from_env_var(&quot;ZILLIZ_CLOUD_API_KEY&quot;)},</span>
-    drop_old=<span class="hljs-literal">True</span>,
+connection_args={<span class="hljs-string">&quot;uri&quot;</span>: <span class="hljs-string">&quot;./milvus.db&quot;</span>},
+<span class="hljs-comment"># connection_args={&quot;uri&quot;: &quot;http://localhost:19530&quot;},</span>
+<span class="hljs-comment"># connection_args={&quot;uri&quot;: YOUR_ZILLIZ_CLOUD_URI, &quot;token&quot;: Secret.from_env_var(&quot;ZILLIZ_CLOUD_API_KEY&quot;)},</span>
+drop_old=<span class="hljs-literal">True</span>,
 )
 <button class="copy-code-btn"></button></code></pre>
+
 <div class="alert note">
 <p>连接参数</p>
 <ul>
@@ -130,6 +133,7 @@ indexing_pipeline.run({<span class="hljs-string">&quot;converter&quot;</span>: {
 
 <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Number of documents:&quot;</span>, document_store.count_documents())
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no">Converting markdown files to Documents: 100%|█| 1/
 Calculating embeddings: 100%|█| 9/9 [00:05&lt;00:00, 
 E20240516 10:40:32.945937 5309095 milvus_local.cpp:189] [SERVER][GetCollection][] Collecton HaystackCollection not existed
@@ -155,22 +159,23 @@ Number of documents: 277
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>创建检索管道，使用矢量相似性搜索引擎从 Milvus 文档存储中检索文档。</p>
+    </button></h2><p>创建检索管道，使用向量相似性搜索引擎从 Milvus 文档存储中检索文档。</p>
 <pre><code translate="no" class="language-python">question = <span class="hljs-string">&#x27;Where is the painting &quot;Warrior&quot; currently stored?&#x27;</span>
 
 retrieval_pipeline = Pipeline()
 retrieval_pipeline.add_component(<span class="hljs-string">&quot;embedder&quot;</span>, OpenAITextEmbedder())
 retrieval_pipeline.add_component(
-    <span class="hljs-string">&quot;retriever&quot;</span>, MilvusEmbeddingRetriever(document_store=document_store, top_k=<span class="hljs-number">3</span>)
+<span class="hljs-string">&quot;retriever&quot;</span>, MilvusEmbeddingRetriever(document_store=document_store, top_k=<span class="hljs-number">3</span>)
 )
 retrieval_pipeline.connect(<span class="hljs-string">&quot;embedder&quot;</span>, <span class="hljs-string">&quot;retriever&quot;</span>)
 
 retrieval_results = retrieval_pipeline.run({<span class="hljs-string">&quot;embedder&quot;</span>: {<span class="hljs-string">&quot;text&quot;</span>: question}})
 
 <span class="hljs-keyword">for</span> doc <span class="hljs-keyword">in</span> retrieval_results[<span class="hljs-string">&quot;retriever&quot;</span>][<span class="hljs-string">&quot;documents&quot;</span>]:
-    <span class="hljs-built_in">print</span>(doc.content)
-    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;-&quot;</span> * <span class="hljs-number">10</span>)
+<span class="hljs-built_in">print</span>(doc.content)
+<span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;-&quot;</span> \* <span class="hljs-number">10</span>)
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no">). The
 composition of this oil-painting seems to have been built up on the
 second cartoon, which he had made some eight years earlier, and which
@@ -214,40 +219,41 @@ south-east staircase in the Victoria and Albert Museum.
 <span class="hljs-keyword">from</span> haystack.components.generators <span class="hljs-keyword">import</span> OpenAIGenerator
 
 prompt_template = <span class="hljs-string">&quot;&quot;&quot;Answer the following query based on the provided context. If the context does
-                     not include an answer, reply with &#x27;I don&#x27;t know&#x27;.\n
-                     Query: {{query}}
-                     Documents:
-                     {% for doc in documents %}
-                        {{ doc.content }}
-                     {% endfor %}
-                     Answer:
-                  &quot;&quot;&quot;</span>
+not include an answer, reply with &#x27;I don&#x27;t know&#x27;.\n
+Query: {{query}}
+Documents:
+{% for doc in documents %}
+{{ doc.content }}
+{% endfor %}
+Answer:
+&quot;&quot;&quot;</span>
 
 rag_pipeline = Pipeline()
 rag_pipeline.add_component(<span class="hljs-string">&quot;text_embedder&quot;</span>, OpenAITextEmbedder())
 rag_pipeline.add_component(
-    <span class="hljs-string">&quot;retriever&quot;</span>, MilvusEmbeddingRetriever(document_store=document_store, top_k=<span class="hljs-number">3</span>)
+<span class="hljs-string">&quot;retriever&quot;</span>, MilvusEmbeddingRetriever(document_store=document_store, top_k=<span class="hljs-number">3</span>)
 )
 rag_pipeline.add_component(<span class="hljs-string">&quot;prompt_builder&quot;</span>, PromptBuilder(template=prompt_template))
 rag_pipeline.add_component(
-    <span class="hljs-string">&quot;generator&quot;</span>,
-    OpenAIGenerator(
-        api_key=Secret.from_token(os.getenv(<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</span>)),
-        generation_kwargs={<span class="hljs-string">&quot;temperature&quot;</span>: <span class="hljs-number">0</span>},
-    ),
+<span class="hljs-string">&quot;generator&quot;</span>,
+OpenAIGenerator(
+api_key=Secret.from_token(os.getenv(<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</span>)),
+generation_kwargs={<span class="hljs-string">&quot;temperature&quot;</span>: <span class="hljs-number">0</span>},
+),
 )
 rag_pipeline.connect(<span class="hljs-string">&quot;text_embedder.embedding&quot;</span>, <span class="hljs-string">&quot;retriever.query_embedding&quot;</span>)
 rag_pipeline.connect(<span class="hljs-string">&quot;retriever.documents&quot;</span>, <span class="hljs-string">&quot;prompt_builder.documents&quot;</span>)
 rag_pipeline.connect(<span class="hljs-string">&quot;prompt_builder&quot;</span>, <span class="hljs-string">&quot;generator&quot;</span>)
 
 results = rag_pipeline.run(
-    {
-        <span class="hljs-string">&quot;text_embedder&quot;</span>: {<span class="hljs-string">&quot;text&quot;</span>: question},
-        <span class="hljs-string">&quot;prompt_builder&quot;</span>: {<span class="hljs-string">&quot;query&quot;</span>: question},
-    }
+{
+<span class="hljs-string">&quot;text_embedder&quot;</span>: {<span class="hljs-string">&quot;text&quot;</span>: question},
+<span class="hljs-string">&quot;prompt_builder&quot;</span>: {<span class="hljs-string">&quot;query&quot;</span>: question},
+}
 )
 <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;RAG answer:&quot;</span>, results[<span class="hljs-string">&quot;generator&quot;</span>][<span class="hljs-string">&quot;replies&quot;</span>][<span class="hljs-number">0</span>])
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no">RAG answer: The painting &quot;Warrior&quot; is currently stored in the Malcolm Collection in the British Museum.
 </code></pre>
 <p>有关如何使用 milvus-haystack 的更多信息，请参阅<a href="https://github.com/milvus-io/milvus-haystack">milvus-haystack Readme</a>。</p>

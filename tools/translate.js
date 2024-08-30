@@ -12,17 +12,10 @@ import {
 } from "./utils.js";
 
 const MOCK_TRANSLATE = false;
-const VERSIONS = [
-	"v2.4.x",
-	// "v2.3.x",
-	// "v2.2.x",
-	// "v2.1.x",
-	// "v2.0.x",
-];
+const VERSIONS = ["v2.4.x"];
 const sourceFilePath = "site/en";
 const sourceLang = "en";
-const targetLangs = ["en"];
-// const targetLangs = ["en", "zh", "ja", "ko", "fr", "de", "it", "pt", "es"];
+const targetLangs = ["en", "zh", "ja", "ko", "fr", "de", "it", "pt", "es"];
 const cacheFile = "./tools/cache.json";
 let total = 0;
 

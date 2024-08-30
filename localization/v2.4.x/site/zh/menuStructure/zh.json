@@ -193,7 +193,7 @@
     "order": 2,
     "children": [
       {
-        "label": "建筑学",
+        "label": "架构",
         "id": "architecture",
         "order": 0,
         "isMenu": true,
@@ -946,7 +946,7 @@
             "isMenu": true,
             "children": [
               {
-                "label": "建筑学",
+                "label": "架构",
                 "id": "monitor_overview.md",
                 "order": 0,
                 "children": []

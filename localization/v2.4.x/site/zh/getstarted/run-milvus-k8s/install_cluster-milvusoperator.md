@@ -5,6 +5,7 @@ related_key: Kubernetes
 summary: 了解如何使用 Milvus Operator 在 Kubernetes 上安装 Milvus 集群
 title: 使用 Milvus Operator 安装 Milvus 集群
 ---
+
 <h1 id="Run-Milvus-in-Kubernetes-with-Milvus-Operator" class="common-anchor-header">使用 Milvus Operator 在 Kubernetes 中运行 Milvus<button data-href="#Run-Milvus-in-Kubernetes-with-Milvus-Operator" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -57,9 +58,10 @@ title: 使用 Milvus Operator 安装 Milvus 集群
 <li><p>安装一个<a href="https://kubernetes.io/docs/tasks/administer-cluster/change-default-storage-class/">StorageClass</a>。可按以下步骤检查已安装的 StorageClass。</p>
 <pre><code translate="no" class="language-bash">$ kubectl get sc
 
-NAME                  PROVISIONER                  RECLAIMPOLICY    VOLUMEBIINDINGMODE    ALLOWVOLUMEEXPANSION     AGE
-<span class="hljs-title function_">standard</span> <span class="hljs-params">(<span class="hljs-keyword">default</span>)</span>    k8s.io/minikube-hostpath     Delete           Immediate             <span class="hljs-literal">false</span> 
+NAME PROVISIONER RECLAIMPOLICY VOLUMEBIINDINGMODE ALLOWVOLUMEEXPANSION AGE
+<span class="hljs-title function_">standard</span> <span class="hljs-params">(<span class="hljs-keyword">default</span>)</span> k8s.io/minikube-hostpath Delete Immediate <span class="hljs-literal">false</span>
 <button class="copy-code-btn"></button></code></pre></li>
+
 <li><p>安装前检查<a href="/docs/zh/prerequisite-helm.md">硬件和软件要求</a>。</p></li>
 <li><p>安装 Milvus 之前，建议使用<a href="https://milvus.io/tools/sizing">Milvus 大小工具</a>，根据数据大小估算硬件需求。这有助于确保 Milvus 安装的最佳性能和资源分配。</p></li>
 </ul>
@@ -113,11 +115,12 @@ validatingwebhookconfiguration.admissionregistration.k8s.io/cert-manager-webhook
 <p>您可以按以下步骤检查 cert-manager pod 是否正在运行：</p>
 <pre><code translate="no" class="language-shell">$ kubectl <span class="hljs-keyword">get</span> pods -n cert-manager
 
-NAME                                      READY   STATUS    RESTARTS   AGE
-cert-manager<span class="hljs-number">-848f</span>547974-gccz8             <span class="hljs-number">1</span>/<span class="hljs-number">1</span>     Running   <span class="hljs-number">0</span>          <span class="hljs-number">70</span>s
-cert-manager-cainjector<span class="hljs-number">-54f</span>4cc6b5-dpj84   <span class="hljs-number">1</span>/<span class="hljs-number">1</span>     Running   <span class="hljs-number">0</span>          <span class="hljs-number">70</span>s
-cert-manager-webhook<span class="hljs-number">-7</span>c9588c76-tqncn      <span class="hljs-number">1</span>/<span class="hljs-number">1</span>     Running   <span class="hljs-number">0</span>          <span class="hljs-number">70</span>s
+NAME READY STATUS RESTARTS AGE
+cert-manager<span class="hljs-number">-848f</span>547974-gccz8 <span class="hljs-number">1</span>/<span class="hljs-number">1</span> Running <span class="hljs-number">0</span> <span class="hljs-number">70</span>s
+cert-manager-cainjector<span class="hljs-number">-54f</span>4cc6b5-dpj84 <span class="hljs-number">1</span>/<span class="hljs-number">1</span> Running <span class="hljs-number">0</span> <span class="hljs-number">70</span>s
+cert-manager-webhook<span class="hljs-number">-7</span>c9588c76-tqncn <span class="hljs-number">1</span>/<span class="hljs-number">1</span> Running <span class="hljs-number">0</span> <span class="hljs-number">70</span>s
 <button class="copy-code-btn"></button></code></pre>
+
 <h3 id="2-Install-Milvus-Operator" class="common-anchor-header">2.安装 Milvus Operator</h3><p>你可以通过以下任一方式安装 Milvus Operator：</p>
 <ul>
 <li><a href="#Install-with-Helm">使用 Helm</a></li>
@@ -170,9 +173,10 @@ validatingwebhookconfiguration.admissionregistration.k8s.io/milvus-operator-vali
 <p>您可以按以下步骤检查 Milvus Operator pod 是否正在运行：</p>
 <pre><code translate="no" class="language-shell">$ kubectl <span class="hljs-keyword">get</span> pods -n milvus-<span class="hljs-keyword">operator</span>
 
-NAME                               READY   STATUS    RESTARTS   AGE
-milvus-<span class="hljs-keyword">operator</span><span class="hljs-number">-5f</span>d77b87dc-msrk4   <span class="hljs-number">1</span>/<span class="hljs-number">1</span>     Running   <span class="hljs-number">0</span>          <span class="hljs-number">46</span>s
+NAME READY STATUS RESTARTS AGE
+milvus-<span class="hljs-keyword">operator</span><span class="hljs-number">-5f</span>d77b87dc-msrk4 <span class="hljs-number">1</span>/<span class="hljs-number">1</span> Running <span class="hljs-number">0</span> <span class="hljs-number">46</span>s
 <button class="copy-code-btn"></button></code></pre>
+
 <h2 id="Deploy-Milvus" class="common-anchor-header">部署 Milvus<button data-href="#Deploy-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -234,33 +238,34 @@ status:
 <p>Milvus 集群准备就绪后，Milvus 集群中所有 pod 的状态应与下图类似。</p>
 <pre><code translate="no" class="language-shell">$ kubectl <span class="hljs-keyword">get</span> pods
 
-NAME                                            READY   STATUS      RESTARTS   AGE
-my-release-etcd<span class="hljs-number">-0</span>                               <span class="hljs-number">1</span>/<span class="hljs-number">1</span>     Running     <span class="hljs-number">0</span>          <span class="hljs-number">14</span>m
-my-release-etcd<span class="hljs-number">-1</span>                               <span class="hljs-number">1</span>/<span class="hljs-number">1</span>     Running     <span class="hljs-number">0</span>          <span class="hljs-number">14</span>m
-my-release-etcd<span class="hljs-number">-2</span>                               <span class="hljs-number">1</span>/<span class="hljs-number">1</span>     Running     <span class="hljs-number">0</span>          <span class="hljs-number">14</span>m
-my-release-milvus-datanode<span class="hljs-number">-5</span>c686bd65-wxtmf      <span class="hljs-number">1</span>/<span class="hljs-number">1</span>     Running     <span class="hljs-number">0</span>          <span class="hljs-number">6</span>m
-my-release-milvus-indexnode<span class="hljs-number">-5b</span>9787b54-xclbx     <span class="hljs-number">1</span>/<span class="hljs-number">1</span>     Running     <span class="hljs-number">0</span>          <span class="hljs-number">6</span>m
-my-release-milvus-proxy<span class="hljs-number">-84f</span>67cdb7f-pg6wf        <span class="hljs-number">1</span>/<span class="hljs-number">1</span>     Running     <span class="hljs-number">0</span>          <span class="hljs-number">6</span>m
-my-release-milvus-querynode<span class="hljs-number">-5b</span>cb59f6-nhqqw      <span class="hljs-number">1</span>/<span class="hljs-number">1</span>     Running     <span class="hljs-number">0</span>          <span class="hljs-number">6</span>m
-my-release-milvus-mixcoord-fdcccfc84<span class="hljs-number">-9964</span>g      <span class="hljs-number">1</span>/<span class="hljs-number">1</span>     Running     <span class="hljs-number">0</span>          <span class="hljs-number">6</span>m
-my-release-minio<span class="hljs-number">-0</span>                              <span class="hljs-number">1</span>/<span class="hljs-number">1</span>     Running     <span class="hljs-number">0</span>          <span class="hljs-number">14</span>m
-my-release-minio<span class="hljs-number">-1</span>                              <span class="hljs-number">1</span>/<span class="hljs-number">1</span>     Running     <span class="hljs-number">0</span>          <span class="hljs-number">14</span>m
-my-release-minio<span class="hljs-number">-2</span>                              <span class="hljs-number">1</span>/<span class="hljs-number">1</span>     Running     <span class="hljs-number">0</span>          <span class="hljs-number">14</span>m
-my-release-minio<span class="hljs-number">-3</span>                              <span class="hljs-number">1</span>/<span class="hljs-number">1</span>     Running     <span class="hljs-number">0</span>          <span class="hljs-number">14</span>m
-my-release-pulsar-bookie<span class="hljs-number">-0</span>                      <span class="hljs-number">1</span>/<span class="hljs-number">1</span>     Running     <span class="hljs-number">0</span>          <span class="hljs-number">14</span>m
-my-release-pulsar-bookie<span class="hljs-number">-1</span>                      <span class="hljs-number">1</span>/<span class="hljs-number">1</span>     Running     <span class="hljs-number">0</span>          <span class="hljs-number">14</span>m
-my-release-pulsar-bookie-<span class="hljs-keyword">init</span>-h6tfz             <span class="hljs-number">0</span>/<span class="hljs-number">1</span>     Completed   <span class="hljs-number">0</span>          <span class="hljs-number">14</span>m
-my-release-pulsar-broker<span class="hljs-number">-0</span>                      <span class="hljs-number">1</span>/<span class="hljs-number">1</span>     Running     <span class="hljs-number">0</span>          <span class="hljs-number">14</span>m
-my-release-pulsar-broker<span class="hljs-number">-1</span>                      <span class="hljs-number">1</span>/<span class="hljs-number">1</span>     Running     <span class="hljs-number">0</span>          <span class="hljs-number">14</span>m
-my-release-pulsar-proxy<span class="hljs-number">-0</span>                       <span class="hljs-number">1</span>/<span class="hljs-number">1</span>     Running     <span class="hljs-number">0</span>          <span class="hljs-number">14</span>m
-my-release-pulsar-proxy<span class="hljs-number">-1</span>                       <span class="hljs-number">1</span>/<span class="hljs-number">1</span>     Running     <span class="hljs-number">0</span>          <span class="hljs-number">14</span>m
-my-release-pulsar-pulsar-<span class="hljs-keyword">init</span>-d2t56             <span class="hljs-number">0</span>/<span class="hljs-number">1</span>     Completed   <span class="hljs-number">0</span>          <span class="hljs-number">14</span>m
-my-release-pulsar-recovery<span class="hljs-number">-0</span>                    <span class="hljs-number">1</span>/<span class="hljs-number">1</span>     Running     <span class="hljs-number">0</span>          <span class="hljs-number">14</span>m
-my-release-pulsar-toolset<span class="hljs-number">-0</span>                     <span class="hljs-number">1</span>/<span class="hljs-number">1</span>     Running     <span class="hljs-number">0</span>          <span class="hljs-number">14</span>m
-my-release-pulsar-zookeeper<span class="hljs-number">-0</span>                   <span class="hljs-number">1</span>/<span class="hljs-number">1</span>     Running     <span class="hljs-number">0</span>          <span class="hljs-number">14</span>m
-my-release-pulsar-zookeeper<span class="hljs-number">-1</span>                   <span class="hljs-number">1</span>/<span class="hljs-number">1</span>     Running     <span class="hljs-number">0</span>          <span class="hljs-number">13</span>m
-my-release-pulsar-zookeeper<span class="hljs-number">-2</span>                   <span class="hljs-number">1</span>/<span class="hljs-number">1</span>     Running     <span class="hljs-number">0</span>          <span class="hljs-number">13</span>m
+NAME READY STATUS RESTARTS AGE
+my-release-etcd<span class="hljs-number">-0</span> <span class="hljs-number">1</span>/<span class="hljs-number">1</span> Running <span class="hljs-number">0</span> <span class="hljs-number">14</span>m
+my-release-etcd<span class="hljs-number">-1</span> <span class="hljs-number">1</span>/<span class="hljs-number">1</span> Running <span class="hljs-number">0</span> <span class="hljs-number">14</span>m
+my-release-etcd<span class="hljs-number">-2</span> <span class="hljs-number">1</span>/<span class="hljs-number">1</span> Running <span class="hljs-number">0</span> <span class="hljs-number">14</span>m
+my-release-milvus-datanode<span class="hljs-number">-5</span>c686bd65-wxtmf <span class="hljs-number">1</span>/<span class="hljs-number">1</span> Running <span class="hljs-number">0</span> <span class="hljs-number">6</span>m
+my-release-milvus-indexnode<span class="hljs-number">-5b</span>9787b54-xclbx <span class="hljs-number">1</span>/<span class="hljs-number">1</span> Running <span class="hljs-number">0</span> <span class="hljs-number">6</span>m
+my-release-milvus-proxy<span class="hljs-number">-84f</span>67cdb7f-pg6wf <span class="hljs-number">1</span>/<span class="hljs-number">1</span> Running <span class="hljs-number">0</span> <span class="hljs-number">6</span>m
+my-release-milvus-querynode<span class="hljs-number">-5b</span>cb59f6-nhqqw <span class="hljs-number">1</span>/<span class="hljs-number">1</span> Running <span class="hljs-number">0</span> <span class="hljs-number">6</span>m
+my-release-milvus-mixcoord-fdcccfc84<span class="hljs-number">-9964</span>g <span class="hljs-number">1</span>/<span class="hljs-number">1</span> Running <span class="hljs-number">0</span> <span class="hljs-number">6</span>m
+my-release-minio<span class="hljs-number">-0</span> <span class="hljs-number">1</span>/<span class="hljs-number">1</span> Running <span class="hljs-number">0</span> <span class="hljs-number">14</span>m
+my-release-minio<span class="hljs-number">-1</span> <span class="hljs-number">1</span>/<span class="hljs-number">1</span> Running <span class="hljs-number">0</span> <span class="hljs-number">14</span>m
+my-release-minio<span class="hljs-number">-2</span> <span class="hljs-number">1</span>/<span class="hljs-number">1</span> Running <span class="hljs-number">0</span> <span class="hljs-number">14</span>m
+my-release-minio<span class="hljs-number">-3</span> <span class="hljs-number">1</span>/<span class="hljs-number">1</span> Running <span class="hljs-number">0</span> <span class="hljs-number">14</span>m
+my-release-pulsar-bookie<span class="hljs-number">-0</span> <span class="hljs-number">1</span>/<span class="hljs-number">1</span> Running <span class="hljs-number">0</span> <span class="hljs-number">14</span>m
+my-release-pulsar-bookie<span class="hljs-number">-1</span> <span class="hljs-number">1</span>/<span class="hljs-number">1</span> Running <span class="hljs-number">0</span> <span class="hljs-number">14</span>m
+my-release-pulsar-bookie-<span class="hljs-keyword">init</span>-h6tfz <span class="hljs-number">0</span>/<span class="hljs-number">1</span> Completed <span class="hljs-number">0</span> <span class="hljs-number">14</span>m
+my-release-pulsar-broker<span class="hljs-number">-0</span> <span class="hljs-number">1</span>/<span class="hljs-number">1</span> Running <span class="hljs-number">0</span> <span class="hljs-number">14</span>m
+my-release-pulsar-broker<span class="hljs-number">-1</span> <span class="hljs-number">1</span>/<span class="hljs-number">1</span> Running <span class="hljs-number">0</span> <span class="hljs-number">14</span>m
+my-release-pulsar-proxy<span class="hljs-number">-0</span> <span class="hljs-number">1</span>/<span class="hljs-number">1</span> Running <span class="hljs-number">0</span> <span class="hljs-number">14</span>m
+my-release-pulsar-proxy<span class="hljs-number">-1</span> <span class="hljs-number">1</span>/<span class="hljs-number">1</span> Running <span class="hljs-number">0</span> <span class="hljs-number">14</span>m
+my-release-pulsar-pulsar-<span class="hljs-keyword">init</span>-d2t56 <span class="hljs-number">0</span>/<span class="hljs-number">1</span> Completed <span class="hljs-number">0</span> <span class="hljs-number">14</span>m
+my-release-pulsar-recovery<span class="hljs-number">-0</span> <span class="hljs-number">1</span>/<span class="hljs-number">1</span> Running <span class="hljs-number">0</span> <span class="hljs-number">14</span>m
+my-release-pulsar-toolset<span class="hljs-number">-0</span> <span class="hljs-number">1</span>/<span class="hljs-number">1</span> Running <span class="hljs-number">0</span> <span class="hljs-number">14</span>m
+my-release-pulsar-zookeeper<span class="hljs-number">-0</span> <span class="hljs-number">1</span>/<span class="hljs-number">1</span> Running <span class="hljs-number">0</span> <span class="hljs-number">14</span>m
+my-release-pulsar-zookeeper<span class="hljs-number">-1</span> <span class="hljs-number">1</span>/<span class="hljs-number">1</span> Running <span class="hljs-number">0</span> <span class="hljs-number">13</span>m
+my-release-pulsar-zookeeper<span class="hljs-number">-2</span> <span class="hljs-number">1</span>/<span class="hljs-number">1</span> Running <span class="hljs-number">0</span> <span class="hljs-number">13</span>m
 <button class="copy-code-btn"></button></code></pre>
+
 <h3 id="3-Forward-a-local-port-to-Milvus" class="common-anchor-header">3.将本地端口转发到 Milvus</h3><p>运行以下命令获取 Milvus 集群的服务端口。</p>
 <pre><code translate="no" class="language-shell">$ kubectl <span class="hljs-keyword">get</span> pod my-release-milvus-proxy<span class="hljs-number">-84f</span>67cdb7f-pg6wf --template
 =<span class="hljs-string">&#x27;{{(index (index .spec.containers 0).ports 0).containerPort}}{{&quot;\n&quot;}}&#x27;</span>
@@ -351,7 +356,7 @@ my-release-pulsar-zookeeper<span class="hljs-number">-2</span>                  
 <li><a href="/docs/zh/manage-collections.md">管理集合</a></li>
 <li><a href="/docs/zh/manage-partitions.md">管理分区</a></li>
 <li><a href="/docs/zh/insert-update-delete.md">插入、倒置和删除</a></li>
-<li><a href="/docs/zh/single-vector-search.md">单矢量搜索</a></li>
+<li><a href="/docs/zh/single-vector-search.md">单向量搜索</a></li>
 <li><a href="/docs/zh/multi-vector-search.md">混合搜索</a></li>
 </ul></li>
 <li><p><a href="/docs/zh/upgrade_milvus_cluster-helm.md">使用 Helm 图表升级 Milvus</a>。</p></li>

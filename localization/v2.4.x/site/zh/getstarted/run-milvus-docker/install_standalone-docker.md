@@ -5,6 +5,7 @@ related_key: Docker
 summary: 了解如何使用 Docker 独立安装 Milvus。
 title: 在 Docker 中运行 Milvus
 ---
+
 <h1 id="Run-Milvus-in-Docker" class="common-anchor-header">在 Docker 中运行 Milvus<button data-href="#Run-Milvus-in-Docker" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -62,6 +63,7 @@ $ curl -sfL https://raw.githubusercontent.com/milvus-io/milvus/master/scripts/st
 <span class="hljs-comment"># Start the Docker container</span>
 $ bash standalone_embed.sh start
 <button class="copy-code-btn"></button></code></pre>
+
 <div class="alert note">
 <p>如果在拉取镜像时遇到任何问题，请通过<a href="mailto:community@zilliz.com">community@zilliz.com</a>联系我们，并提供有关问题的详细信息，我们会为你提供必要的支持。</p>
 </div>
@@ -79,6 +81,7 @@ $ bash standalone_embed.sh stop
 <span class="hljs-comment"># Delete Milvus data</span>
 $ bash standalone_embed.sh delete
 <button class="copy-code-btn"></button></code></pre>
+
 <h2 id="Whats-next" class="common-anchor-header">下一步<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -103,7 +106,7 @@ $ bash standalone_embed.sh delete
 <li><a href="/docs/zh/manage-collections.md">管理数据集</a></li>
 <li><a href="/docs/zh/manage-partitions.md">管理分区</a></li>
 <li><a href="/docs/zh/insert-update-delete.md">插入、倒置和删除</a></li>
-<li><a href="/docs/zh/single-vector-search.md">单矢量搜索</a></li>
+<li><a href="/docs/zh/single-vector-search.md">单向量搜索</a></li>
 <li><a href="/docs/zh/multi-vector-search.md">混合搜索</a></li>
 </ul></li>
 <li><p><a href="/docs/zh/upgrade_milvus_cluster-helm.md">使用 Helm 图表升级 Milvus</a>。</p></li>

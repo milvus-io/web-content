@@ -5,6 +5,7 @@ related_key: Kubernetes
 summary: 了解如何在 Kubernetes 上安装 Milvus 集群。
 title: 使用舵手图运行支持 GPU 的 Milvus
 ---
+
 <h1 id="Run-Milvus-with-GPU-Support-Using-Helm-Chart" class="common-anchor-header">使用 Helm Chart 运行支持 GPU 的 Milvus<button data-href="#Run-Milvus-with-GPU-Support-Using-Helm-Chart" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -58,9 +59,10 @@ title: 使用舵手图运行支持 GPU 的 Milvus
 <li><p>安装<a href="https://kubernetes.io/docs/tasks/administer-cluster/change-default-storage-class/">StorageClass</a>。您可以按以下步骤检查已安装的 StorageClass。</p>
 <pre><code translate="no" class="language-bash">$ kubectl get sc
 
-NAME                  PROVISIONER                  RECLAIMPOLICY    VOLUMEBIINDINGMODE    ALLOWVOLUMEEXPANSION     AGE
-<span class="hljs-title function_">standard</span> <span class="hljs-params">(<span class="hljs-keyword">default</span>)</span>    k8s.io/minikube-hostpath     Delete           Immediate             <span class="hljs-literal">false</span> 
+NAME PROVISIONER RECLAIMPOLICY VOLUMEBIINDINGMODE ALLOWVOLUMEEXPANSION AGE
+<span class="hljs-title function_">standard</span> <span class="hljs-params">(<span class="hljs-keyword">default</span>)</span> k8s.io/minikube-hostpath Delete Immediate <span class="hljs-literal">false</span>
 <button class="copy-code-btn"></button></code></pre></li>
+
 <li><p>安装前请检查<a href="/docs/zh/prerequisite-gpu.md">硬件和软件要求</a>。</p></li>
 </ul>
 <div class="alert note">
@@ -337,7 +339,7 @@ my-release-minio-5564fbbddc-mz7f5                  1/1     Running     0        
 <li><a href="/docs/zh/manage-collections.md">管理数据集</a></li>
 <li><a href="/docs/zh/manage-partitions.md">管理分区</a></li>
 <li><a href="/docs/zh/insert-update-delete.md">插入、倒置和删除</a></li>
-<li><a href="/docs/zh/single-vector-search.md">单矢量搜索</a></li>
+<li><a href="/docs/zh/single-vector-search.md">单向量搜索</a></li>
 <li><a href="/docs/zh/multi-vector-search.md">混合搜索</a></li>
 </ul></li>
 <li><p><a href="/docs/zh/upgrade_milvus_cluster-helm.md">使用 Helm 图表升级 Milvus</a>。</p></li>

@@ -3,6 +3,7 @@ id: es2m.md
 summary: 本指南提供了将数据从 Elasticsearch 迁移到 Milvus 2.x 的全面、循序渐进的过程。
 title: 来自 Elasticsearch
 ---
+
 <h1 id="From-Elasticsearch" class="common-anchor-header">从 Elasticsearch<button data-href="#From-Elasticsearch" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -252,7 +253,7 @@ target:
 <tr><th>Elasticsearch 字段类型</th><th>Milvus 字段类型</th><th>描述</th></tr>
 </thead>
 <tbody>
-<tr><td>密集向量</td><td>浮点矢量</td><td>向量尺寸在迁移过程中保持不变。</td></tr>
+<tr><td>密集向量</td><td>浮点向量</td><td>向量尺寸在迁移过程中保持不变。</td></tr>
 <tr><td>关键字</td><td>变量</td><td>设置最大长度（1 至 65,535）。超过限制的字符串会引发迁移错误。</td></tr>
 <tr><td>文本</td><td>字符串</td><td>设置最大长度（1 至 65,535）。超过限制的字符串会触发迁移错误。</td></tr>
 <tr><td>长</td><td>Int64</td><td>-</td></tr>

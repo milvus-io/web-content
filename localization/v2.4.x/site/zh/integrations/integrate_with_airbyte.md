@@ -5,6 +5,7 @@ summary: >-
   "开箱即用"，预置了 350 多个连接器。这些连接器可用于在短短几分钟内开始将数据从源复制到目标。
 title: Airbyte：开源数据移动基础设施
 ---
+
 <h1 id="Airbyte-Open-Source-Data-Movement-Infrastructure" class="common-anchor-header">Airbyte：开源数据移动基础架构<button data-href="#Airbyte-Open-Source-Data-Movement-Infrastructure" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -110,7 +111,7 @@ title: Airbyte：开源数据移动基础设施
 <p>让我们使用 1000 个标记的分块大小，以及正文、标题、描述和主题等文本字段，因为这些将出现在我们从 Zendesk 收到的数据中。</p>
 <ul>
 <li><strong>嵌入</strong>--使用机器学习模型将处理部分生成的文本块转换为向量嵌入，然后就可以搜索语义相似性了。要创建嵌入，您必须提供 OpenAI API 密钥。Airbyte 会将每个文本块发送到 OpenAI，并将生成的向量添加到加载到 Milvus 集群的实体中。</li>
-<li><strong>索引</strong>--一旦完成了块的矢量化，就可以将其加载到数据库中。为此，请插入在 Milvus 集群中设置集群和集合时获得的信息。 <div><img translate="no" src="/docs/v2.4.x/assets/airbyte_with_milvus_1.png" width="40%"/></div>点击 "测试并保存 "将检查一切是否正确（有效凭证、集合存在且与配置的嵌入具有相同的矢量维度等）。</li>
+<li><strong>索引</strong>--一旦完成了块的向量化，就可以将其加载到数据库中。为此，请插入在 Milvus 集群中设置集群和集合时获得的信息。 <div><img translate="no" src="/docs/v2.4.x/assets/airbyte_with_milvus_1.png" width="40%"/></div>点击 "测试并保存 "将检查一切是否正确（有效凭证、集合存在且与配置的嵌入具有相同的向量维度等）。</li>
 </ul>
 <h3 id="Set-up-stream-sync-flow" class="common-anchor-header">设置流同步流程</h3><p>数据流准备就绪前的最后一步是选择要同步的 "流"。数据流是源中记录的集合。由于 Zendesk 支持大量与我们的用例无关的流，因此我们只选择 "票单 "和 "文章"，禁用所有其他流，以节省带宽，并确保只有相关信息才会显示在搜索中：<div><img translate="no" src="/docs/v2.4.x/assets/airbyte_with_milvus_2.png" width="40%"/></div>您可以通过单击流名称来选择要从源中提取的字段。增量|追加+删减 "同步模式意味着后续连接运行将保持 Zendesk 和 Milvus 同步，同时传输最少的数据（仅传输自上次运行以来发生变化的文章和票单）。</p>
 <p>连接建立后，Airbyte 将立即开始同步数据。它可能需要几分钟才能出现在你的 Milvus 收集中。</p>
@@ -145,14 +146,16 @@ title: Airbyte：开源数据移动基础设施
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> streamlit <span class="hljs-keyword">as</span> st
 
 <span class="hljs-keyword">with</span> st.form(<span class="hljs-string">&quot;my_form&quot;</span>):
-    st.write(<span class="hljs-string">&quot;Submit a support case&quot;</span>)
-    text_val = st.text_area(<span class="hljs-string">&quot;Describe your problem&quot;</span>)
+st.write(<span class="hljs-string">&quot;Submit a support case&quot;</span>)
+text_val = st.text_area(<span class="hljs-string">&quot;Describe your problem&quot;</span>)
 
     submitted = st.form_submit_button(<span class="hljs-string">&quot;Submit&quot;</span>)
     <span class="hljs-keyword">if</span> submitted:
         <span class="hljs-comment"># TODO check for related support cases and articles</span>
         st.write(<span class="hljs-string">&quot;Submitted!&quot;</span>)
+
 <button class="copy-code-btn"></button></code></pre>
+
 <p>使用 Streamlit run 运行应用程序：</p>
 <pre><code translate="no" class="language-shell">streamlit run basic_support_form.py
 <button class="copy-code-btn"></button></code></pre>
@@ -163,10 +166,9 @@ title: Airbyte：开源数据移动基础设施
 <span class="hljs-keyword">import</span> pymilvus
 <span class="hljs-keyword">import</span> openai
 
-
 <span class="hljs-keyword">with</span> st.form(<span class="hljs-string">&quot;my_form&quot;</span>):
-    st.write(<span class="hljs-string">&quot;Submit a support case&quot;</span>)
-    text_val = st.text_area(<span class="hljs-string">&quot;Describe your problem?&quot;</span>)
+st.write(<span class="hljs-string">&quot;Submit a support case&quot;</span>)
+text_val = st.text_area(<span class="hljs-string">&quot;Describe your problem?&quot;</span>)
 
     submitted = st.form_submit_button(<span class="hljs-string">&quot;Submit&quot;</span>)
     <span class="hljs-keyword">if</span> submitted:
@@ -189,8 +191,10 @@ title: Airbyte：开源数据移动基础设施
             st.write(<span class="hljs-string">f&quot;This case seems very similar to <span class="hljs-subst">{matching_ticket.get(<span class="hljs-string">&#x27;subject&#x27;</span>)}</span> (id #<span class="hljs-subst">{matching_ticket.get(<span class="hljs-string">&#x27;_id&#x27;</span>)}</span>). Make sure it has not been submitted before&quot;</span>)
         <span class="hljs-keyword">else</span>:
             st.write(<span class="hljs-string">&quot;Submitted!&quot;</span>)
-            
+
+
 <button class="copy-code-btn"></button></code></pre>
+
 <p>这里发生了几件事：</p>
 <ul>
 <li>建立与 Milvus 集群的连接。</li>
@@ -205,6 +209,7 @@ title: Airbyte：开源数据移动基础设施
 
 streamlit run app.<span class="hljs-property">py</span>
 <button class="copy-code-btn"></button></code></pre>
+
 <p>当尝试提交已存在的票单时，结果将是这样的：<div><img translate="no" src="/docs/v2.4.x/assets/airbyte_with_milvus_5.png" width="40%"/></div>本示例的代码也可以在<a href="https://github.com/airbytehq/tutorial-similarity-search/blob/main/2_open_ticket_check.py">GitHub</a> 上找到。</p>
 <h3 id="Show-more-relevant-information" class="common-anchor-header">显示更多相关信息</h3><p>从隐藏在最终版本中的绿色调试输出中可以看到，有两张票单符合我们的搜索条件（状态为新票、来自当前组织且靠近嵌入向量）。但是，第一张（相关）的排名高于第二张（在这种情况下不相关），这反映在较低的距离值上。这种关系在嵌入向量中得到了体现，而不像常规全文搜索那样直接匹配单词。</p>
 <p>最后，让我们在提交票单后显示有用的信息，为用户提供尽可能多的相关信息。</p>
@@ -223,6 +228,7 @@ streamlit run app.<span class="hljs-property">py</span>
                         st.write(<span class="hljs-string">f&quot;* [<span class="hljs-subst">{hit.entity.get(<span class="hljs-string">&#x27;title&#x27;</span>)}</span>](<span class="hljs-subst">{hit.entity.get(<span class="hljs-string">&#x27;html_url&#x27;</span>)}</span>)&quot;</span>)
 
 <button class="copy-code-btn"></button></code></pre>
+
 <p>如果没有相似度较高的开放支持票单，则提交新票单，相关知识文章将显示在下方：<div><img translate="no" src="/docs/v2.4.x/assets/airbyte_with_milvus_6.png" width="40%"/></div>此示例的代码也可在<a href="https://github.com/airbytehq/tutorial-similarity-search/blob/main/3_relevant_articles.py">Github</a> 上找到。</p>
 <h2 id="Conclusion" class="common-anchor-header">结论<button data-href="#Conclusion" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -239,6 +245,6 @@ streamlit run app.<span class="hljs-property">py</span>
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>虽然这里显示的用户界面不是一个实际的支持表单，而是一个用来说明用例的示例，但 Airbyte 和 Milvus 的结合是非常强大的--它可以轻松地从各种来源（从 Postgres 等数据库到 Zendesk 或 GitHub 等 API，再到使用 Airbyte 的 SDK 或可视化连接器生成器构建的完全自定义来源）加载文本，并在 Milvus 中以嵌入形式进行索引，Milvus 是一个强大的矢量搜索引擎，可以扩展到海量数据。</p>
+    </button></h2><p>虽然这里显示的用户界面不是一个实际的支持表单，而是一个用来说明用例的示例，但 Airbyte 和 Milvus 的结合是非常强大的--它可以轻松地从各种来源（从 Postgres 等数据库到 Zendesk 或 GitHub 等 API，再到使用 Airbyte 的 SDK 或可视化连接器生成器构建的完全自定义来源）加载文本，并在 Milvus 中以嵌入形式进行索引，Milvus 是一个强大的向量搜索引擎，可以扩展到海量数据。</p>
 <p>Airbyte 和 Milvus 是开源的，完全免费，可在您的基础设施上使用，如果需要，还可通过云服务卸载操作。</p>
 <p>除了本文介绍的经典语义搜索用例外，一般设置还可用于使用 RAG 方法（检索增强生成）构建问题解答聊天机器人、推荐系统，或帮助提高广告的相关性和效率。</p>

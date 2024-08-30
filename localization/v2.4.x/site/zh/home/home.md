@@ -1,6 +1,7 @@
 ---
 id: home.md
 ---
+
 <div class="doc-h1-wrapper">
 <p><h1 class="title">
 欢迎访问 Milvus 文档！</h1></p>
@@ -45,7 +46,7 @@ id: home.md
   
    <a href="/bootcamp"> <img translate="no" src="/docs/v2.4.x/assets/home_bootcamp.svg" alt="icon" />
    </a> <a href="/bootcamp"> <p class="link-btn">Bootcamp</p> </a><p>
-  学习如何使用 Milvus 构建矢量相似性搜索应用程序。  </p>
+  学习如何使用 Milvus 构建向量相似性搜索应用程序。  </p>
 </div>
 </div>
 <h2 id="Recommended-articles" class="common-anchor-header">推荐文章<button data-href="#Recommended-articles" class="anchor-icon" translate="no">
@@ -69,8 +70,8 @@ id: home.md
 <ul>
 <li><a href="/docs/zh/manage-collections.md">管理集合</a></li>
 <li><a href="/docs/zh/insert-update-delete.md">插入、增加和删除</a></li>
-<li><a href="/docs/zh/index-vector-fields.md">索引矢量字段</a></li>
-<li><a href="/docs/zh/single-vector-search.md">单矢量搜索</a></li>
+<li><a href="/docs/zh/index-vector-fields.md">索引向量字段</a></li>
+<li><a href="/docs/zh/single-vector-search.md">单向量搜索</a></li>
 <li><a href="/docs/zh/get-and-scalar-query.md">获取和标量查询</a></li>
 </ul>
 </div>
@@ -89,7 +90,7 @@ id: home.md
 <ul>
 <li><a href="/docs/zh/system_configuration.md">系统配置</a></li>
 <li><a href="/docs/zh/architecture_overview.md">架构概述</a></li>
-<li><a href="/docs/zh/index.md">矢量索引</a></li>
+<li><a href="/docs/zh/index.md">向量索引</a></li>
 <li><a href="/docs/zh/metric.md">相似度指标</a></li>
 <li><a href="/docs/zh/glossary.md">术语表</a></li>
 </ul>

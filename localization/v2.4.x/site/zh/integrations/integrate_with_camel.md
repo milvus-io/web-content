@@ -3,6 +3,7 @@ id: integrate_with_camel.md
 summary: 本指南演示了如何使用 BentoCloud 上的开源嵌入模型和大型语言模型以及 Milvus 向量数据库来构建检索增强生成 (RAG) 应用程序。
 title: 使用 Milvus 和 BentoML 的检索增强生成（RAG）
 ---
+
 <h1 id="Retrieval-Augmented-Generation-RAG-with-Milvus-and-Camel" class="common-anchor-header">使用 Milvus 和 Camel 的检索增强生成（RAG）<button data-href="#Retrieval-Augmented-Generation-RAG-with-Milvus-and-Camel" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -59,8 +60,9 @@ os.makedirs(<span class="hljs-string">&quot;local_data&quot;</span>, exist_ok=<s
 url = <span class="hljs-string">&quot;https://arxiv.org/pdf/2303.17760.pdf&quot;</span>
 response = requests.get(url)
 <span class="hljs-keyword">with</span> <span class="hljs-built_in">open</span>(<span class="hljs-string">&quot;local_data/camel paper.pdf&quot;</span>, <span class="hljs-string">&quot;wb&quot;</span>) <span class="hljs-keyword">as</span> file:
-    file.write(response.content)
+file.write(response.content)
 <button class="copy-code-btn"></button></code></pre>
+
 <h2 id="1-Customized-RAG" class="common-anchor-header">1.自定义 RAG<button data-href="#1-Customized-RAG" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -83,20 +85,22 @@ response = requests.get(url)
 <p>导入并设置嵌入实例：</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> camel.<span class="hljs-property">embeddings</span> <span class="hljs-keyword">import</span> <span class="hljs-title class_">OpenAIEmbedding</span>
 
-embedding_instance = <span class="hljs-title class_">OpenAIEmbedding</span>()
+embedding*instance = <span class="hljs-title class*">OpenAIEmbedding</span>()
 <button class="copy-code-btn"></button></code></pre>
+
 <p>导入并设置向量存储实例：</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> camel.storages <span class="hljs-keyword">import</span> MilvusStorage
 
 storage_instance = MilvusStorage(
-    vector_dim=embedding_instance.get_output_dim(),
-    url_and_api_key=(
-        <span class="hljs-string">&quot;./milvus_demo.db&quot;</span>,  <span class="hljs-comment"># Your Milvus connection URI</span>
-        <span class="hljs-string">&quot;&quot;</span>,  <span class="hljs-comment"># Your Milvus token</span>
-    ),
-    collection_name=<span class="hljs-string">&quot;camel_paper&quot;</span>,
+vector_dim=embedding_instance.get_output_dim(),
+url_and_api_key=(
+<span class="hljs-string">&quot;./milvus_demo.db&quot;</span>, <span class="hljs-comment"># Your Milvus connection URI</span>
+<span class="hljs-string">&quot;&quot;</span>, <span class="hljs-comment"># Your Milvus token</span>
+),
+collection_name=<span class="hljs-string">&quot;camel_paper&quot;</span>,
 )
 <button class="copy-code-btn"></button></code></pre>
+
 <div class="alert note">
 <p>对于<code translate="no">url_and_api_key</code> ：</p>
 <ul>
@@ -109,11 +113,12 @@ storage_instance = MilvusStorage(
 <p>默认情况下，<code translate="no">similarity_threshold</code> 设置为 0.75。您可以更改。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> camel.<span class="hljs-property">retrievers</span> <span class="hljs-keyword">import</span> <span class="hljs-title class_">VectorRetriever</span>
 
-vector_retriever = <span class="hljs-title class_">VectorRetriever</span>(
-    embedding_model=embedding_instance, storage=storage_instance
+vector*retriever = <span class="hljs-title class*">VectorRetriever</span>(
+embedding_model=embedding_instance, storage=storage_instance
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>我们使用集成的<code translate="no">Unstructured Module</code> 将内容分割成小块，内容将通过<code translate="no">chunk_by_title</code> 功能自动分割，每个小块的最大字符数为 500 字符，这是<code translate="no">OpenAIEmbedding</code> 的合适长度。分块中的所有文本都将嵌入并存储到矢量存储实例中，这需要一些时间，请稍候。</p>
+
+<p>我们使用集成的<code translate="no">Unstructured Module</code> 将内容分割成小块，内容将通过<code translate="no">chunk_by_title</code> 功能自动分割，每个小块的最大字符数为 500 字符，这是<code translate="no">OpenAIEmbedding</code> 的合适长度。分块中的所有文本都将嵌入并存储到向量存储实例中，这需要一些时间，请稍候。</p>
 <pre><code translate="no" class="language-python">vector_retriever.<span class="hljs-title function_">process</span>(content_input_path=<span class="hljs-string">&quot;local_data/camel paper.pdf&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">[nltk_data] Downloading package punkt to /root/nltk_data...
@@ -122,7 +127,7 @@ vector_retriever = <span class="hljs-title class_">VectorRetriever</span>(
 [nltk_data]     /root/nltk_data...
 [nltk_data]   Unzipping taggers/averaged_perceptron_tagger.zip.
 </code></pre>
-<p>现在，我们可以通过查询从矢量存储中获取信息。默认情况下，它会返回余弦相似度得分最高的前 1 个块中的文本内容，相似度得分应高于 0.75，以确保检索到的内容与查询相关。您也可以更改<code translate="no">top_k</code> 值。</p>
+<p>现在，我们可以通过查询从向量存储中获取信息。默认情况下，它会返回余弦相似度得分最高的前 1 个块中的文本内容，相似度得分应高于 0.75，以确保检索到的内容与查询相关。您也可以更改<code translate="no">top_k</code> 值。</p>
 <p>返回的字符串列表包括</p>
 <ul>
 <li>相似度得分</li>
@@ -142,6 +147,7 @@ vector_retriever = <span class="hljs-title class_">VectorRetriever</span>(
 
 <span class="hljs-built_in">print</span>(retrieved_info_irrelevant)
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no">[{'text': 'No suitable information retrieved from local_data/camel paper.pdf                 with similarity_threshold = 0.75.'}]
 </code></pre>
 <h2 id="2-Auto-RAG" class="common-anchor-header">2.自动 RAG<button data-href="#2-Auto-RAG" class="anchor-icon" translate="no">
@@ -171,26 +177,27 @@ vector_retriever = <span class="hljs-title class_">VectorRetriever</span>(
 <span class="hljs-keyword">from</span> camel.types <span class="hljs-keyword">import</span> StorageType
 
 auto_retriever = AutoRetriever(
-    url_and_api_key=(
-        <span class="hljs-string">&quot;./milvus_demo.db&quot;</span>,  <span class="hljs-comment"># Your Milvus connection URI</span>
-        <span class="hljs-string">&quot;&quot;</span>,  <span class="hljs-comment"># Your Milvus token</span>
-    ),
-    storage_type=StorageType.MILVUS,
-    embedding_model=embedding_instance,
+url_and_api_key=(
+<span class="hljs-string">&quot;./milvus_demo.db&quot;</span>, <span class="hljs-comment"># Your Milvus connection URI</span>
+<span class="hljs-string">&quot;&quot;</span>, <span class="hljs-comment"># Your Milvus token</span>
+),
+storage_type=StorageType.MILVUS,
+embedding_model=embedding_instance,
 )
 
 retrieved_info = auto_retriever.run_vector_retriever(
-    query=<span class="hljs-string">&quot;What is CAMEL-AI&quot;</span>,
-    content_input_paths=[
-        <span class="hljs-string">&quot;local_data/camel paper.pdf&quot;</span>,  <span class="hljs-comment"># example local path</span>
-        <span class="hljs-string">&quot;https://www.camel-ai.org/&quot;</span>,  <span class="hljs-comment"># example remote url</span>
-    ],
-    top_k=<span class="hljs-number">1</span>,
-    return_detailed_info=<span class="hljs-literal">True</span>,
+query=<span class="hljs-string">&quot;What is CAMEL-AI&quot;</span>,
+content_input_paths=[
+<span class="hljs-string">&quot;local_data/camel paper.pdf&quot;</span>, <span class="hljs-comment"># example local path</span>
+<span class="hljs-string">&quot;https://www.camel-ai.org/&quot;</span>, <span class="hljs-comment"># example remote url</span>
+],
+top_k=<span class="hljs-number">1</span>,
+return_detailed_info=<span class="hljs-literal">True</span>,
 )
 
 <span class="hljs-built_in">print</span>(retrieved_info)
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no">Original Query:
 {What is CAMEL-AI}
 Retrieved Context:
@@ -220,18 +227,17 @@ Retrieved Context:
 <span class="hljs-keyword">from</span> camel.retrievers <span class="hljs-keyword">import</span> AutoRetriever
 <span class="hljs-keyword">from</span> camel.types <span class="hljs-keyword">import</span> StorageType
 
-
 <span class="hljs-keyword">def</span> <span class="hljs-title function_">single_agent</span>(<span class="hljs-params">query: <span class="hljs-built_in">str</span></span>) -&gt; <span class="hljs-built_in">str</span>:
-    <span class="hljs-comment"># Set agent role</span>
-    assistant_sys_msg = BaseMessage(
-        role_name=<span class="hljs-string">&quot;Assistant&quot;</span>,
-        role_type=RoleType.ASSISTANT,
-        meta_dict=<span class="hljs-literal">None</span>,
-        content=<span class="hljs-string">&quot;&quot;&quot;You are a helpful assistant to answer question,
-         I will give you the Original Query and Retrieved Context,
-        answer the Original Query based on the Retrieved Context,
-        if you can&#x27;t answer the question just say I don&#x27;t know.&quot;&quot;&quot;</span>,
-    )
+<span class="hljs-comment"># Set agent role</span>
+assistant_sys_msg = BaseMessage(
+role_name=<span class="hljs-string">&quot;Assistant&quot;</span>,
+role_type=RoleType.ASSISTANT,
+meta_dict=<span class="hljs-literal">None</span>,
+content=<span class="hljs-string">&quot;&quot;&quot;You are a helpful assistant to answer question,
+I will give you the Original Query and Retrieved Context,
+answer the Original Query based on the Retrieved Context,
+if you can&#x27;t answer the question just say I don&#x27;t know.&quot;&quot;&quot;</span>,
+)
 
     <span class="hljs-comment"># Add auto retriever</span>
     auto_retriever = AutoRetriever(
@@ -262,9 +268,9 @@ Retrieved Context:
     assistant_response = agent.step(user_msg)
     <span class="hljs-keyword">return</span> assistant_response.msg.content
 
-
 <span class="hljs-built_in">print</span>(single_agent(<span class="hljs-string">&quot;What is CAMEL-AI&quot;</span>))
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no">CAMEL-AI is an open-source community dedicated to the study of autonomous and communicative agents. It provides, implements, and supports various types of agents, tasks, prompts, models, datasets, and simulated environments to facilitate research in this field.
 </code></pre>
 <h2 id="4-Role-playing-with-Auto-RAG" class="common-anchor-header">4.使用自动 RAG 进行角色扮演<button data-href="#4-Role-playing-with-Auto-RAG" class="anchor-icon" translate="no">
@@ -289,18 +295,17 @@ Retrieved Context:
 <span class="hljs-keyword">from</span> camel.agents.chat_agent <span class="hljs-keyword">import</span> FunctionCallingRecord
 <span class="hljs-keyword">from</span> camel.configs <span class="hljs-keyword">import</span> ChatGPTConfig
 <span class="hljs-keyword">from</span> camel.functions <span class="hljs-keyword">import</span> (
-    MATH_FUNCS,
-    RETRIEVAL_FUNCS,
+MATH_FUNCS,
+RETRIEVAL_FUNCS,
 )
 <span class="hljs-keyword">from</span> camel.societies <span class="hljs-keyword">import</span> RolePlaying
 <span class="hljs-keyword">from</span> camel.types <span class="hljs-keyword">import</span> ModelType
 <span class="hljs-keyword">from</span> camel.utils <span class="hljs-keyword">import</span> print_text_animated
 
-
 <span class="hljs-keyword">def</span> <span class="hljs-title function_">role_playing_with_rag</span>(<span class="hljs-params">
-    task_prompt, model_type=ModelType.GPT_4O, chat_turn_limit=<span class="hljs-number">10</span>
+task_prompt, model_type=ModelType.GPT_4O, chat_turn_limit=<span class="hljs-number">10</span>
 </span>) -&gt; <span class="hljs-literal">None</span>:
-    task_prompt = task_prompt
+task_prompt = task_prompt
 
     user_model_config = ChatGPTConfig(temperature=<span class="hljs-number">0.0</span>)
 
@@ -382,7 +387,9 @@ Retrieved Context:
             <span class="hljs-keyword">break</span>
 
         input_msg = assistant_response.msg
+
 <button class="copy-code-btn"></button></code></pre>
+
 <p>使用定义的检索器函数运行角色扮演：</p>
 <pre><code translate="no" class="language-python">role_playing_with_rag(
     task_prompt=<span class="hljs-string">&quot;&quot;&quot;What is the main termination reasons for AI Society
@@ -406,19 +413,16 @@ None
 Final task prompt:
 What is the main termination reasons for AI Society dataset, how many number of messages did camel decided to limit, what's the value plus 100?
 
-
-
 AI User:
 
 Instruction: Provide a summary of the main termination reasons in the AI Society dataset.
 Input: None
 
-
 AI Assistant:
 
 Function Execution: local_retriever
-    Args: {'query': 'main termination reasons for AI Society dataset'}
-    Result: Original Query:
+Args: {'query': 'main termination reasons for AI Society dataset'}
+Result: Original Query:
 {main termination reasons for AI Society dataset}
 Retrieved Context:
 Next we examine the conversation termination reasons for both AI Society and Code datasets. As can be seen in Figure 8, the main termination reasons for AI Society dataset is Assistant Instruct whereas for Code it is Token Limit. The latter is expected as the since responses that contain code tend to be long. It is also interesting to note that in both datasets, the termination due to Maximum Number of Messages is low indicating that the limit of 40 maximum messages is reasonable. Our decision t
@@ -427,12 +431,10 @@ Solution: The main termination reason for the AI Society dataset is &quot;Assist
 
 Next request.
 
-
 AI User:
 
 Instruction: Identify the number of messages that the camel decided to limit in the context provided.
 Input: None
-
 
 AI Assistant:
 
@@ -440,28 +442,24 @@ Solution: The context provided from the local retriever indicates that the camel
 
 Next request.
 
-
 AI User:
 
 Instruction: Calculate the value of the message limit plus 100.
 Input: None
 
-
 AI Assistant:
 
 Function Execution: add
-    Args: {'a': 40, 'b': 100}
-    Result: 140
+Args: {'a': 40, 'b': 100}
+Result: 140
 
 Solution: The value of the message limit plus 100 is 140.
 
 Next request.
 
-
 AI User:
 
 CAMEL_TASK_DONE
-
 
 AI Assistant:
 

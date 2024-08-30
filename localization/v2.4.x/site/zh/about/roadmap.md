@@ -2,8 +2,9 @@
 id: roadmap.md
 title: 米尔沃斯路线图
 related_key: Milvus roadmap
-summary: Milvus 是一个开源矢量数据库，旨在为人工智能应用提供支持。以下是我们的发展路线图。
+summary: Milvus 是一个开源向量数据库，旨在为人工智能应用提供支持。以下是我们的发展路线图。
 ---
+
 <h1 id="Milvus-Roadmap" class="common-anchor-header">Milvus 路线图<button data-href="#Milvus-Roadmap" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -49,7 +50,7 @@ summary: Milvus 是一个开源矢量数据库，旨在为人工智能应用提�
             <td><strong>对人工智能开发人员友好的</strong><br/><i>对开发人员友好的技术堆栈，采用最新的人工智能创新技术进行增强</i></td>
             <td><strong>多向量与混合搜索</strong><br/><i>用于多重召回和融合的框架</i><br/><br/><strong>GPU 索引加速</strong><br/><i>支持更高的 QPS 和更快的索引创建</i><br/><br/><strong>PyMilvus 中的模型库</strong><br/><i>Milvus</i><strong>的</strong><i>集成嵌入模型</i></td>
             <td><strong>Sparse Vector (GA)</strong><br/><i>本地特征提取和关键词搜索</i><br/><br/><strong>Milvus Lite (GA)</strong><br/><i>Milvus 的轻量级内存版本</i><br/><br/><strong>嵌入模型</strong><i>库</i><br/><i>支持模型库中</i><i>的</i><i>图像和多模态嵌入以及 reranker 模型</i></td>
-            <td><strong>原始数据输入和数据输出</strong><br/><i>支持 Blob 数据类型</i><br/><br/><strong>数据聚类</strong><br/><i>数据共定位</i><br/><br/><strong>面向场景的矢量搜索</strong><br/> 例如<i>多目标搜索和 NN 过滤</i><br/><br/><strong>支持嵌入和 Reranker 端点</strong></td>
+            <td><strong>原始数据输入和数据输出</strong><br/><i>支持 Blob 数据类型</i><br/><br/><strong>数据聚类</strong><br/><i>数据共定位</i><br/><br/><strong>面向场景的向量搜索</strong><br/> 例如<i>多目标搜索和 NN 过滤</i><br/><br/><strong>支持嵌入和 Reranker 端点</strong></td>
         </tr>
         <tr>
             <td><strong>丰富的功能</strong><br/><i>增强的检索和数据管理功能</i></td>

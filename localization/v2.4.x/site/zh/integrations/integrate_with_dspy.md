@@ -3,6 +3,7 @@ id: integrate_with_dspy.md
 summary: 本指南演示了如何使用 DSPy 的 Retriever 模块之一 MilvusRM 来优化 RAG 程序。
 title: 将 Milvus 与 DSPy 集成
 ---
+
 <h1 id="Integrate-Milvus-with-DSPy" class="common-anchor-header">将 Milvus 与 DSPy 集成<button data-href="#Integrate-Milvus-with-DSPy" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -91,7 +92,7 @@ title: 将 Milvus 与 DSPy 集成
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>DSPy 是一个功能强大的编程框架，可促进 RAG 应用程序的发展。此类应用程序需要检索有用信息以提高答案质量，这就需要向量数据库。Milvus 是著名的开源矢量数据库，可提高性能和可扩展性。有了 DSPy 中的检索模块 MilvusRM，集成 Milvus 就变得天衣无缝。现在，开发人员可以利用 Milvus 强大的矢量搜索功能，使用 DSPy 轻松定义和优化 RAG 程序。这种合作结合了 DSPy 的编程能力和 Milvus 的搜索功能，使 RAG 应用程序更高效、更可扩展。</p>
+    </button></h2><p>DSPy 是一个功能强大的编程框架，可促进 RAG 应用程序的发展。此类应用程序需要检索有用信息以提高答案质量，这就需要向量数据库。Milvus 是著名的开源向量数据库，可提高性能和可扩展性。有了 DSPy 中的检索模块 MilvusRM，集成 Milvus 就变得天衣无缝。现在，开发人员可以利用 Milvus 强大的向量搜索功能，使用 DSPy 轻松定义和优化 RAG 程序。这种合作结合了 DSPy 的编程能力和 Milvus 的搜索功能，使 RAG 应用程序更高效、更可扩展。</p>
 <h2 id="Examples" class="common-anchor-header">示例<button data-href="#Examples" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -119,13 +120,14 @@ $ pip install -U pymilvus
 
 <span class="hljs-comment"># Load the dataset.</span>
 dataset = HotPotQA(
-    train_seed=<span class="hljs-number">1</span>, train_size=<span class="hljs-number">20</span>, eval_seed=<span class="hljs-number">2023</span>, dev_size=<span class="hljs-number">50</span>, test_size=<span class="hljs-number">0</span>
+train_seed=<span class="hljs-number">1</span>, train_size=<span class="hljs-number">20</span>, eval_seed=<span class="hljs-number">2023</span>, dev_size=<span class="hljs-number">50</span>, test_size=<span class="hljs-number">0</span>
 )
 
 <span class="hljs-comment"># Tell DSPy that the &#x27;question&#x27; field is the input. Any other fields are labels and/or metadata.</span>
 trainset = [x.with_inputs(<span class="hljs-string">&quot;question&quot;</span>) <span class="hljs-keyword">for</span> x <span class="hljs-keyword">in</span> dataset.train]
 devset = [x.with_inputs(<span class="hljs-string">&quot;question&quot;</span>) <span class="hljs-keyword">for</span> x <span class="hljs-keyword">in</span> dataset.dev]
 <button class="copy-code-btn"></button></code></pre>
+
 <h3 id="Ingest-data-into-the-Milvus-vector-database" class="common-anchor-header">将数据输入 Milvus 向量数据库</h3><p>将上下文信息输入 Milvus 数据集，以便进行向量检索。该集合应有一个<code translate="no">embedding</code> 字段和一个<code translate="no">text</code> 字段。在这种情况下，我们使用 OpenAI 的<code translate="no">text-embedding-3-small</code> 模型作为默认查询嵌入函数。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> requests
 <span class="hljs-keyword">import</span> os
@@ -140,48 +142,50 @@ MILVUS_TOKEN = <span class="hljs-string">&quot;&quot;</span>
 client = MilvusClient(uri=MILVUS_URI, token=MILVUS_TOKEN)
 
 <span class="hljs-keyword">if</span> <span class="hljs-string">&quot;dspy_example&quot;</span> <span class="hljs-keyword">not</span> <span class="hljs-keyword">in</span> client.list_collections():
-    client.create_collection(
-        collection_name=<span class="hljs-string">&quot;dspy_example&quot;</span>,
-        overwrite=<span class="hljs-literal">True</span>,
-        dimension=<span class="hljs-number">1536</span>,
-        primary_field_name=<span class="hljs-string">&quot;id&quot;</span>,
-        vector_field_name=<span class="hljs-string">&quot;embedding&quot;</span>,
-        id_type=<span class="hljs-string">&quot;int&quot;</span>,
-        metric_type=<span class="hljs-string">&quot;IP&quot;</span>,
-        max_length=<span class="hljs-number">65535</span>,
-        enable_dynamic=<span class="hljs-literal">True</span>,
-    )
+client.create_collection(
+collection_name=<span class="hljs-string">&quot;dspy_example&quot;</span>,
+overwrite=<span class="hljs-literal">True</span>,
+dimension=<span class="hljs-number">1536</span>,
+primary_field_name=<span class="hljs-string">&quot;id&quot;</span>,
+vector_field_name=<span class="hljs-string">&quot;embedding&quot;</span>,
+id_type=<span class="hljs-string">&quot;int&quot;</span>,
+metric_type=<span class="hljs-string">&quot;IP&quot;</span>,
+max_length=<span class="hljs-number">65535</span>,
+enable_dynamic=<span class="hljs-literal">True</span>,
+)
 text = requests.get(
-    <span class="hljs-string">&quot;https://raw.githubusercontent.com/wxywb/dspy_dataset_sample/master/sample_data.txt&quot;</span>
+<span class="hljs-string">&quot;https://raw.githubusercontent.com/wxywb/dspy_dataset_sample/master/sample_data.txt&quot;</span>
 ).text
 
 <span class="hljs-keyword">for</span> idx, passage <span class="hljs-keyword">in</span> <span class="hljs-built_in">enumerate</span>(text.split(<span class="hljs-string">&quot;\n&quot;</span>)):
-    <span class="hljs-keyword">if</span> <span class="hljs-built_in">len</span>(passage) == <span class="hljs-number">0</span>:
-        <span class="hljs-keyword">continue</span>
-    client.insert(
-        collection_name=<span class="hljs-string">&quot;dspy_example&quot;</span>,
-        data=[
-            {
-                <span class="hljs-string">&quot;id&quot;</span>: idx,
-                <span class="hljs-string">&quot;embedding&quot;</span>: openai_embedding_function(passage)[<span class="hljs-number">0</span>],
-                <span class="hljs-string">&quot;text&quot;</span>: passage,
-            }
-        ],
-    )
+<span class="hljs-keyword">if</span> <span class="hljs-built_in">len</span>(passage) == <span class="hljs-number">0</span>:
+<span class="hljs-keyword">continue</span>
+client.insert(
+collection_name=<span class="hljs-string">&quot;dspy_example&quot;</span>,
+data=[
+{
+<span class="hljs-string">&quot;id&quot;</span>: idx,
+<span class="hljs-string">&quot;embedding&quot;</span>: openai_embedding_function(passage)[<span class="hljs-number">0</span>],
+<span class="hljs-string">&quot;text&quot;</span>: passage,
+}
+],
+)
 <button class="copy-code-btn"></button></code></pre>
+
 <h3 id="Define-MilvusRM" class="common-anchor-header">定义 MilvusRM。</h3><p>现在，您需要定义 MilvusRM。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> dspy.retrieve.milvus_rm <span class="hljs-keyword">import</span> MilvusRM
 <span class="hljs-keyword">import</span> dspy
 
 retriever_model = MilvusRM(
-    collection_name=<span class="hljs-string">&quot;dspy_example&quot;</span>,
-    uri=MILVUS_URI,
-    token=MILVUS_TOKEN,  <span class="hljs-comment"># ignore this if no token is required for Milvus connection</span>
-    embedding_function=openai_embedding_function,
+collection_name=<span class="hljs-string">&quot;dspy_example&quot;</span>,
+uri=MILVUS_URI,
+token=MILVUS_TOKEN, <span class="hljs-comment"># ignore this if no token is required for Milvus connection</span>
+embedding_function=openai_embedding_function,
 )
 turbo = dspy.OpenAI(model=<span class="hljs-string">&quot;gpt-3.5-turbo&quot;</span>)
 dspy.settings.configure(lm=turbo)
 <button class="copy-code-btn"></button></code></pre>
+
 <h3 id="Building-signatures" class="common-anchor-header">构建签名</h3><p>现在我们已经加载了数据，让我们开始为管道的子任务定义签名。我们可以确定简单的输入<code translate="no">question</code> 和输出<code translate="no">answer</code> ，但由于我们正在构建一个 RAG 管道，我们将从 Milvus 获取上下文信息。因此，我们将签名定义为<code translate="no">context, question --&gt; answer</code> 。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">class</span> <span class="hljs-title class_">GenerateAnswer</span>(dspy.Signature):
     <span class="hljs-string">&quot;&quot;&quot;Answer questions with short factoid answers.&quot;&quot;&quot;</span>
@@ -189,7 +193,9 @@ dspy.settings.configure(lm=turbo)
     context = dspy.InputField(desc=<span class="hljs-string">&quot;may contain relevant facts&quot;</span>)
     question = dspy.InputField()
     answer = dspy.OutputField(desc=<span class="hljs-string">&quot;often between 1 and 5 words&quot;</span>)
+
 <button class="copy-code-btn"></button></code></pre>
+
 <p>我们在<code translate="no">context</code> 和<code translate="no">answer</code> 字段中加入了简短的描述，以便更清晰地定义模型将接收和应生成的内容。</p>
 <h3 id="Building-the-pipeline" class="common-anchor-header">构建管道</h3><p>现在，让我们定义 RAG 管道。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">class</span> <span class="hljs-title class_">RAG</span>(dspy.Module):
@@ -208,7 +214,9 @@ dspy.settings.configure(lm=turbo)
         <span class="hljs-keyword">return</span> dspy.Prediction(
             context=[item.long_text <span class="hljs-keyword">for</span> item <span class="hljs-keyword">in</span> context], answer=prediction.answer
         )
+
 <button class="copy-code-btn"></button></code></pre>
+
 <h3 id="Executing-the-pipeline-and-getting-the-results" class="common-anchor-header">执行管道并获取结果</h3><p>现在，我们已经构建了 RAG 管道。让我们试一试并获取结果。</p>
 <pre><code translate="no" class="language-python">rag = RAG(retriever_model)
 <span class="hljs-built_in">print</span>(rag(<span class="hljs-string">&quot;who write At My Window&quot;</span>).answer)
@@ -220,13 +228,14 @@ dspy.settings.configure(lm=turbo)
 <span class="hljs-keyword">from</span> dspy.datasets <span class="hljs-keyword">import</span> HotPotQA
 
 evaluate_on_hotpotqa = Evaluate(
-    devset=devset, num_threads=<span class="hljs-number">1</span>, display_progress=<span class="hljs-literal">False</span>, display_table=<span class="hljs-number">5</span>
+devset=devset, num_threads=<span class="hljs-number">1</span>, display_progress=<span class="hljs-literal">False</span>, display_table=<span class="hljs-number">5</span>
 )
 
 metric = dspy.evaluate.answer_exact_match
 score = evaluate_on_hotpotqa(rag, metric=metric)
 <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;rag:&quot;</span>, score)
 <button class="copy-code-btn"></button></code></pre>
+
 <h3 id="Optimizing-the-pipeline" class="common-anchor-header">优化管道</h3><p>定义完程序后，下一步就是编译。这个过程会更新每个模块内的参数，以提高性能。编译过程取决于三个关键因素：</p>
 <ul>
 <li>训练集：我们将利用训练数据集中的 20 个问答示例进行演示。</li>
@@ -237,12 +246,10 @@ score = evaluate_on_hotpotqa(rag, metric=metric)
 
 <span class="hljs-comment"># Validation logic: check that the predicted answer is correct.# Also check that the retrieved context does contain that answer.</span>
 
-
 <span class="hljs-keyword">def</span> <span class="hljs-title function_">validate_context_and_answer</span>(<span class="hljs-params">example, pred, trace=<span class="hljs-literal">None</span></span>):
-    answer_EM = dspy.evaluate.answer_exact_match(example, pred)
-    answer_PM = dspy.evaluate.answer_passage_match(example, pred)
-    <span class="hljs-keyword">return</span> answer_EM <span class="hljs-keyword">and</span> answer_PM
-
+answer_EM = dspy.evaluate.answer_exact_match(example, pred)
+answer_PM = dspy.evaluate.answer_passage_match(example, pred)
+<span class="hljs-keyword">return</span> answer_EM <span class="hljs-keyword">and</span> answer_PM
 
 <span class="hljs-comment"># Set up a basic teleprompter, which will compile our RAG program.</span>
 teleprompter = BootstrapFewShot(metric=validate_context_and_answer)
@@ -256,6 +263,7 @@ score = evaluate_on_hotpotqa(compiled_rag, metric=metric)
 <span class="hljs-built_in">print</span>(score)
 <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;compile_rag:&quot;</span>, score)
 <button class="copy-code-btn"></button></code></pre>
+
 <p>Ragas 分数从之前的 50.0 增加到 52.0，表明答案质量有所提高。</p>
 <h2 id="Summary" class="common-anchor-header">总结<button data-href="#Summary" class="anchor-icon" translate="no">
       <svg translate="no"

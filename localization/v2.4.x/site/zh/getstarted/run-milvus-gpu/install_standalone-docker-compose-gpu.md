@@ -5,6 +5,7 @@ related_key: Kubernetes
 summary: 了解如何在 Kubernetes 上安装 Milvus 集群。
 title: 使用 Docker Compose 运行支持 GPU 的 Milvus
 ---
+
 <h1 id="Run-Milvus-with-GPU-Support-Using-Docker-Compose" class="common-anchor-header">使用 Docker Compose 运行支持 GPU 的 Milvus<button data-href="#Run-Milvus-with-GPU-Support-Using-Docker-Compose" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -95,10 +96,11 @@ title: 使用 Docker Compose 运行支持 GPU 的 Milvus
 <h3 id="2-Start-Milvus" class="common-anchor-header">2.启动 Milvus</h3><p>在保存 docker-compose.yml 的目录下，运行命令启动 Milvus：</p>
 <pre><code translate="no" class="language-shell">$ <span class="hljs-built_in">sudo</span> docker compose up -d
 
-Creating milvus-etcd  ... <span class="hljs-keyword">done</span>
+Creating milvus-etcd ... <span class="hljs-keyword">done</span>
 Creating milvus-minio ... <span class="hljs-keyword">done</span>
 Creating milvus-standalone ... <span class="hljs-keyword">done</span>
 <button class="copy-code-btn"></button></code></pre>
+
 <div class="alert note">
 <p>如果运行上述命令失败，请检查系统是否安装了 Docker Compose V1。如果是这样，建议你根据<a href="https://docs.docker.com/compose/">本页</a>的说明迁移到 Docker Compose V2。</p>
 </div>
@@ -114,11 +116,14 @@ Creating milvus-standalone ... <span class="hljs-keyword">done</span>
 <pre><code translate="no" class="language-shell">$ <span class="hljs-built_in">sudo</span> docker compose ps
 
       Name                     Command                  State                            Ports
---------------------------------------------------------------------------------------------------------------------
-milvus-etcd         etcd -advertise-client-url ...   Up             2379/tcp, 2380/tcp
-milvus-minio        /usr/bin/docker-entrypoint ...   Up (healthy)   9000/tcp
-milvus-standalone   /tini -- milvus run standalone   Up             0.0.0.0:19530-&gt;19530/tcp, 0.0.0.0:9091-&gt;9091/tcp
+
+---
+
+milvus-etcd etcd -advertise-client-url ... Up 2379/tcp, 2380/tcp
+milvus-minio /usr/bin/docker-entrypoint ... Up (healthy) 9000/tcp
+milvus-standalone /tini -- milvus run standalone Up 0.0.0.0:19530-&gt;19530/tcp, 0.0.0.0:9091-&gt;9091/tcp
 <button class="copy-code-btn"></button></code></pre>
+
 <p>如果在 docker-compose.yml 中为 Milvus 分配了多个 GPU 设备，可以指定哪个 GPU 设备可见或可用。</p>
 <p>让 GPU 设备<code translate="no">0</code> 对 Milvus 可见：</p>
 <pre><code translate="no" class="language-shell">$ CUDA_VISIBLE_DEVICES=0 ./milvus run standalone
@@ -133,6 +138,7 @@ $ <span class="hljs-built_in">sudo</span> docker compose down
 <span class="hljs-comment"># Delete service data</span>
 $ <span class="hljs-built_in">sudo</span> <span class="hljs-built_in">rm</span> -rf volumes
 <button class="copy-code-btn"></button></code></pre>
+
 <h2 id="Configure-memory-pool" class="common-anchor-header">配置内存池<button data-href="#Configure-memory-pool" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -203,7 +209,7 @@ docker start &lt;milvus_container_id&gt;
 <li><a href="/docs/zh/manage-collections.md">管理数据集</a></li>
 <li><a href="/docs/zh/manage-partitions.md">管理分区</a></li>
 <li><a href="/docs/zh/insert-update-delete.md">插入、倒置和删除</a></li>
-<li><a href="/docs/zh/single-vector-search.md">单矢量搜索</a></li>
+<li><a href="/docs/zh/single-vector-search.md">单向量搜索</a></li>
 <li><a href="/docs/zh/multi-vector-search.md">混合搜索</a></li>
 </ul></li>
 <li><p><a href="/docs/zh/upgrade_milvus_cluster-helm.md">使用 Helm 图表升级 Milvus</a>。</p></li>

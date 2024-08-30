@@ -3,6 +3,7 @@ id: milvus_lite.md
 summary: 开始使用 Milvus Lite。
 title: 在当地运行 Milvus Lite
 ---
+
 <h1 id="Run-Milvus-Lite-Locally" class="common-anchor-header">本地运行 Milvus Lite<button data-href="#Run-Milvus-Lite-Locally" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -18,7 +19,7 @@ title: 在当地运行 Milvus Lite
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>本页说明如何使用 Milvus Lite 在本地运行 Milvus。Milvus Lite 是<a href="https://github.com/milvus-io/milvus">Milvus</a> 的轻量级版本，它是一个开源矢量数据库，可通过矢量嵌入和相似性搜索为人工智能应用提供支持。</p>
+    </button></h1><p>本页说明如何使用 Milvus Lite 在本地运行 Milvus。Milvus Lite 是<a href="https://github.com/milvus-io/milvus">Milvus</a> 的轻量级版本，它是一个开源向量数据库，可通过向量嵌入和相似性搜索为人工智能应用提供支持。</p>
 <h2 id="Overview" class="common-anchor-header">概述<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -34,14 +35,14 @@ title: 在当地运行 Milvus Lite
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus Lite 可导入您的 Python 应用程序，提供 Milvus 的核心矢量搜索功能。Milvus Lite 已包含在<a href="https://github.com/milvus-io/pymilvus">Milvus 的 Python SDK</a> 中。它可以通过<code translate="no">pip install pymilvus</code> 简单地部署。</p>
-<p>使用 Milvus Lite，您可以在几分钟内开始构建具有矢量相似性搜索功能的人工智能应用程序！Milvus Lite 适合在以下环境中运行：</p>
+    </button></h2><p>Milvus Lite 可导入您的 Python 应用程序，提供 Milvus 的核心向量搜索功能。Milvus Lite 已包含在<a href="https://github.com/milvus-io/pymilvus">Milvus 的 Python SDK</a> 中。它可以通过<code translate="no">pip install pymilvus</code> 简单地部署。</p>
+<p>使用 Milvus Lite，您可以在几分钟内开始构建具有向量相似性搜索功能的人工智能应用程序！Milvus Lite 适合在以下环境中运行：</p>
 <ul>
 <li>Jupyter Notebook / Google Colab</li>
 <li>笔记本电脑</li>
 <li>边缘设备</li>
 </ul>
-<p>Milvus Lite 与 Milvus Standalone 和 Distributed 共享相同的 API，并涵盖了大部分功能，如矢量数据持久化和管理、矢量 CRUD 操作、稀疏和密集矢量搜索、元数据过滤、多矢量和混合搜索。它们共同为不同类型的环境提供了一致的体验，从边缘设备到云中的集群，适合不同规模的使用案例。使用相同的客户端代码，您可以在笔记本电脑或 Jupyter Notebook 上使用 Milvus Lite 运行 GenAI 应用程序，或在 Docker 容器上使用 Milvus Standalone，或在大规模 Kubernetes 集群上使用 Milvus Distributed，为生产中的数十亿向量提供服务。</p>
+<p>Milvus Lite 与 Milvus Standalone 和 Distributed 共享相同的 API，并涵盖了大部分功能，如向量数据持久化和管理、向量 CRUD 操作、稀疏和密集向量搜索、元数据过滤、多向量和混合搜索。它们共同为不同类型的环境提供了一致的体验，从边缘设备到云中的集群，适合不同规模的使用案例。使用相同的客户端代码，您可以在笔记本电脑或 Jupyter Notebook 上使用 Milvus Lite 运行 GenAI 应用程序，或在 Docker 容器上使用 Milvus Standalone，或在大规模 Kubernetes 集群上使用 Milvus Distributed，为生产中的数十亿向量提供服务。</p>
 <h2 id="Prerequisites" class="common-anchor-header">先决条件<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -62,7 +63,7 @@ title: 在当地运行 Milvus Lite
 <li>Ubuntu &gt;= 20.04（x86_64 和 arm64）</li>
 <li>MacOS &gt;= 11.0（苹果硅 M1/M2 和 x86_64）</li>
 </ul>
-<p>请注意，Milvus Lite 仅适用于小规模矢量搜索使用案例。对于大规模用例，我们建议使用<a href="https://milvus.io/docs/install-overview.md#Milvus-Standalone">Milvus Standalone</a>或<a href="https://milvus.io/docs/install-overview.md#Milvus-Distributed">Milvus Distributed</a>。你也可以考虑在<a href="https://zilliz.com/cloud">Zilliz 云上</a>使用全面管理的 Milvus。</p>
+<p>请注意，Milvus Lite 仅适用于小规模向量搜索使用案例。对于大规模用例，我们建议使用<a href="https://milvus.io/docs/install-overview.md#Milvus-Standalone">Milvus Standalone</a>或<a href="https://milvus.io/docs/install-overview.md#Milvus-Distributed">Milvus Distributed</a>。你也可以考虑在<a href="https://zilliz.com/cloud">Zilliz 云上</a>使用全面管理的 Milvus。</p>
 <h2 id="Set-up-Milvus-Lite" class="common-anchor-header">设置 Milvus Lite<button data-href="#Set-up-Milvus-Lite" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -126,50 +127,51 @@ client = <span class="hljs-title class_">MilvusClient</span>(<span class="hljs-s
 
 client = MilvusClient(<span class="hljs-string">&quot;./milvus_demo.db&quot;</span>)
 client.create_collection(
-    collection_name=<span class="hljs-string">&quot;demo_collection&quot;</span>,
-    dimension=<span class="hljs-number">384</span>  <span class="hljs-comment"># The vectors we will use in this demo has 384 dimensions</span>
+collection_name=<span class="hljs-string">&quot;demo_collection&quot;</span>,
+dimension=<span class="hljs-number">384</span> <span class="hljs-comment"># The vectors we will use in this demo has 384 dimensions</span>
 )
 
 <span class="hljs-comment"># Text strings to search from.</span>
 docs = [
-    <span class="hljs-string">&quot;Artificial intelligence was founded as an academic discipline in 1956.&quot;</span>,
-    <span class="hljs-string">&quot;Alan Turing was the first person to conduct substantial research in AI.&quot;</span>,
-    <span class="hljs-string">&quot;Born in Maida Vale, London, Turing was raised in southern England.&quot;</span>,
+<span class="hljs-string">&quot;Artificial intelligence was founded as an academic discipline in 1956.&quot;</span>,
+<span class="hljs-string">&quot;Alan Turing was the first person to conduct substantial research in AI.&quot;</span>,
+<span class="hljs-string">&quot;Born in Maida Vale, London, Turing was raised in southern England.&quot;</span>,
 ]
 <span class="hljs-comment"># For illustration, here we use fake vectors with random numbers (384 dimension).</span>
 
-vectors = [[ np.random.uniform(-<span class="hljs-number">1</span>, <span class="hljs-number">1</span>) <span class="hljs-keyword">for</span> _ <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">384</span>) ] <span class="hljs-keyword">for</span> _ <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-built_in">len</span>(docs)) ]
+vectors = [[ np.random.uniform(-<span class="hljs-number">1</span>, <span class="hljs-number">1</span>) <span class="hljs-keyword">for</span> _ <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">384</span>) ] <span class="hljs-keyword">for</span> \_ <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-built_in">len</span>(docs)) ]
 data = [ {<span class="hljs-string">&quot;id&quot;</span>: i, <span class="hljs-string">&quot;vector&quot;</span>: vectors[i], <span class="hljs-string">&quot;text&quot;</span>: docs[i], <span class="hljs-string">&quot;subject&quot;</span>: <span class="hljs-string">&quot;history&quot;</span>} <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-built_in">len</span>(vectors)) ]
 res = client.insert(
-    collection_name=<span class="hljs-string">&quot;demo_collection&quot;</span>,
-    data=data
+collection_name=<span class="hljs-string">&quot;demo_collection&quot;</span>,
+data=data
 )
 
 <span class="hljs-comment"># This will exclude any text in &quot;history&quot; subject despite close to the query vector.</span>
 res = client.search(
-    collection_name=<span class="hljs-string">&quot;demo_collection&quot;</span>,
-    data=[vectors[<span class="hljs-number">0</span>]],
-    <span class="hljs-built_in">filter</span>=<span class="hljs-string">&quot;subject == &#x27;history&#x27;&quot;</span>,
-    limit=<span class="hljs-number">2</span>,
-    output_fields=[<span class="hljs-string">&quot;text&quot;</span>, <span class="hljs-string">&quot;subject&quot;</span>],
+collection_name=<span class="hljs-string">&quot;demo_collection&quot;</span>,
+data=[vectors[<span class="hljs-number">0</span>]],
+<span class="hljs-built_in">filter</span>=<span class="hljs-string">&quot;subject == &#x27;history&#x27;&quot;</span>,
+limit=<span class="hljs-number">2</span>,
+output_fields=[<span class="hljs-string">&quot;text&quot;</span>, <span class="hljs-string">&quot;subject&quot;</span>],
 )
 <span class="hljs-built_in">print</span>(res)
 
 <span class="hljs-comment"># a query that retrieves all entities matching filter expressions.</span>
 res = client.query(
-    collection_name=<span class="hljs-string">&quot;demo_collection&quot;</span>,
-    <span class="hljs-built_in">filter</span>=<span class="hljs-string">&quot;subject == &#x27;history&#x27;&quot;</span>,
-    output_fields=[<span class="hljs-string">&quot;text&quot;</span>, <span class="hljs-string">&quot;subject&quot;</span>],
+collection_name=<span class="hljs-string">&quot;demo_collection&quot;</span>,
+<span class="hljs-built_in">filter</span>=<span class="hljs-string">&quot;subject == &#x27;history&#x27;&quot;</span>,
+output_fields=[<span class="hljs-string">&quot;text&quot;</span>, <span class="hljs-string">&quot;subject&quot;</span>],
 )
 <span class="hljs-built_in">print</span>(res)
 
 <span class="hljs-comment"># delete</span>
 res = client.delete(
-    collection_name=<span class="hljs-string">&quot;demo_collection&quot;</span>,
-    <span class="hljs-built_in">filter</span>=<span class="hljs-string">&quot;subject == &#x27;history&#x27;&quot;</span>,
+collection_name=<span class="hljs-string">&quot;demo_collection&quot;</span>,
+<span class="hljs-built_in">filter</span>=<span class="hljs-string">&quot;subject == &#x27;history&#x27;&quot;</span>,
 )
 <span class="hljs-built_in">print</span>(res)
 <button class="copy-code-btn"></button></code></pre>
+
 <h2 id="Limits" class="common-anchor-header">限制<button data-href="#Limits" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -325,8 +327,8 @@ res = client.delete(
 <tr><td><code translate="no">timeout</code></td><td>Y</td></tr>
 </tbody>
 </table>
-<h3 id="Vector-Index-Types" class="common-anchor-header">矢量索引类型</h3><p>Milvus Lite 仅支持<a href="https://milvus.io/docs/index.md?tab=floating#FLAT">FLAT</a>索引类型。无论在集合中指定了哪种索引类型，它都使用 FLAT 类型。</p>
-<h3 id="Search-Features" class="common-anchor-header">搜索功能</h3><p>Milvus Lite 支持稀疏矢量、多矢量和混合搜索。</p>
+<h3 id="Vector-Index-Types" class="common-anchor-header">向量索引类型</h3><p>Milvus Lite 仅支持<a href="https://milvus.io/docs/index.md?tab=floating#FLAT">FLAT</a>索引类型。无论在集合中指定了哪种索引类型，它都使用 FLAT 类型。</p>
+<h3 id="Search-Features" class="common-anchor-header">搜索功能</h3><p>Milvus Lite 支持稀疏向量、多向量和混合搜索。</p>
 <h3 id="Partition" class="common-anchor-header">分区</h3><p>Milvus Lite 不支持分区和与分区相关的方法。</p>
 <h3 id="Users--Roles" class="common-anchor-header">用户和角色</h3><p>Milvus Lite 不支持用户和角色及相关方法。</p>
 <h3 id="Alias" class="common-anchor-header">别名</h3><p>Milvus Lite 不支持别名和与别名相关的方法。</p>
@@ -355,13 +357,14 @@ milvus-lite dump -h
 usage: milvus-lite dump [-h] [-d DB_FILE] [-c COLLECTION] [-p PATH]
 
 optional arguments:
-  -h, --<span class="hljs-built_in">help</span>            show this <span class="hljs-built_in">help</span> message and <span class="hljs-built_in">exit</span>
-  -d DB_FILE, --db-file DB_FILE
-                        milvus lite db file
-  -c COLLECTION, --collection COLLECTION
-                        collection that need to be dumped
-  -p PATH, --path PATH  dump file storage <span class="hljs-built_in">dir</span>
+-h, --<span class="hljs-built_in">help</span> show this <span class="hljs-built_in">help</span> message and <span class="hljs-built_in">exit</span>
+-d DB_FILE, --db-file DB_FILE
+milvus lite db file
+-c COLLECTION, --collection COLLECTION
+collection that need to be dumped
+-p PATH, --path PATH dump file storage <span class="hljs-built_in">dir</span>
 <button class="copy-code-btn"></button></code></pre>
+
 <p>下面的示例将转储<code translate="no">demo_collection</code> 系列中存储在<code translate="no">./milvus_demo.db</code> （Milvus Lite 数据库文件）中的所有数据</p>
 <p>导出数据：</p>
 <pre><code translate="no" class="language-shell">milvus-lite dump -d ./milvus_demo.db -c demo_collection -p ./data_dir
@@ -394,7 +397,7 @@ optional arguments:
 <li><a href="/docs/zh/manage-collections.md">管理数据集</a></li>
 <li><a href="/docs/zh/manage-partitions.md">管理分区</a></li>
 <li><a href="/docs/zh/insert-update-delete.md">插入、倒置和删除</a></li>
-<li><a href="/docs/zh/single-vector-search.md">单矢量搜索</a></li>
+<li><a href="/docs/zh/single-vector-search.md">单向量搜索</a></li>
 <li><a href="/docs/zh/multi-vector-search.md">混合搜索</a></li>
 </ul></li>
 <li><p><a href="/docs/zh/upgrade_milvus_cluster-helm.md">使用 Helm 图表升级 Milvus</a>。</p></li>

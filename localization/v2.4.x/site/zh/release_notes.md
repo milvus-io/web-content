@@ -3,6 +3,7 @@ id: release_notes.md
 summary: Milvus 发行说明
 title: 发布说明
 ---
+
 <h1 id="Release-Notes" class="common-anchor-header">发布说明<button data-href="#Release-Notes" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -256,7 +257,7 @@ title: 发布说明
 <tr><td>2.4.5</td><td>2.4.4</td><td>2.4.1</td><td>2.4.3</td></tr>
 </tbody>
 </table>
-<p>Milvus 2.4.5 版引入了多项改进和错误修复，以提高性能、稳定性和功能性。Milvus 2.4.5 通过自动索引简化了稀疏、float16 和 bfloat16 向量搜索，通过 Bloom 过滤器优化加快了搜索、删除和压缩速度，并通过更快的加载时间和导入 L0 段支持解决了数据管理问题。它还引入了用于高效高维稀疏数据搜索的稀疏 HNSW 索引，增强了支持稀疏浮点矢量的 RESTful API，并修复了关键错误以提高稳定性。</p>
+<p>Milvus 2.4.5 版引入了多项改进和错误修复，以提高性能、稳定性和功能性。Milvus 2.4.5 通过自动索引简化了稀疏、float16 和 bfloat16 向量搜索，通过 Bloom 过滤器优化加快了搜索、删除和压缩速度，并通过更快的加载时间和导入 L0 段支持解决了数据管理问题。它还引入了用于高效高维稀疏数据搜索的稀疏 HNSW 索引，增强了支持稀疏浮点向量的 RESTful API，并修复了关键错误以提高稳定性。</p>
 <h3 id="New-Features" class="common-anchor-header">新功能</h3><ul>
 <li>为 describe/alter 数据库应用程序添加了 rbac 支持<a href="https://github.com/milvus-io/milvus/pull/33804">（#33804）</a></li>
 <li>支持为稀疏向量构建 HNSW 索引<a href="https://github.com/milvus-io/milvus/pull/33653">(#33653</a>,<a href="https://github.com/milvus-io/milvus/pull/33662">#33662</a>)</li>
@@ -300,7 +301,7 @@ title: 发布说明
 <li>确保 Milvus 能够正确导入包含多个向量字段的数据<a href="https://github.com/milvus-io/milvus/pull/33724">(#33724</a>)</li>
 <li>通过在启动前检查导入任务是否存在，提高了导入的可靠性。<a href="https://github.com/milvus-io/milvus/pull/33673">(#33673</a>)</li>
 <li>改进了稀疏 HNSW 索引的处理（内部功能）<a href="https://github.com/milvus-io/milvus/pull/33714">(#33714</a>)</li>
-<li>清理矢量内存以避免内存泄漏<a href="https://github.com/milvus-io/milvus/pull/33708">（#33708）</a></li>
+<li>清理向量内存以避免内存泄漏<a href="https://github.com/milvus-io/milvus/pull/33708">（#33708）</a></li>
 <li>通过修复状态锁问题，确保异步预热更加顺畅<a href="https://github.com/milvus-io/milvus/pull/33687">(#33687</a>)</li>
 <li>解决了一个可能导致查询迭代器丢失结果的 bug。<a href="https://github.com/milvus-io/milvus/pull/33506">(#33506</a>)</li>
 <li>修正了一个可能导致导入段大小不均的错误（<a href="https://github.com/milvus-io/milvus/pull/33634">＃33634）</a></li>
@@ -326,7 +327,7 @@ title: 发布说明
 <li>确保 Milvus 能够正确导入包含多个向量字段的数据<a href="https://github.com/milvus-io/milvus/pull/33724">(#33724</a>)</li>
 <li>通过在启动前检查导入任务是否存在，提高了导入的可靠性。<a href="https://github.com/milvus-io/milvus/pull/33673">(#33673</a>)</li>
 <li>改进了稀疏 HNSW 索引的处理（内部功能）<a href="https://github.com/milvus-io/milvus/pull/33714">(#33714</a>)</li>
-<li>清理矢量内存以避免内存泄漏<a href="https://github.com/milvus-io/milvus/pull/33708">（#33708）</a></li>
+<li>清理向量内存以避免内存泄漏<a href="https://github.com/milvus-io/milvus/pull/33708">（#33708）</a></li>
 <li>通过修复状态锁问题，确保异步预热更加顺畅<a href="https://github.com/milvus-io/milvus/pull/33687">(#33687</a>)</li>
 <li>解决了一个可能导致查询迭代器丢失结果的 bug。<a href="https://github.com/milvus-io/milvus/pull/33506">(#33506</a>)</li>
 <li>修正了一个可能导致导入段大小不均的错误（<a href="https://github.com/milvus-io/milvus/pull/33634">＃33634）</a></li>
@@ -402,9 +403,9 @@ title: 发布说明
 <tr><td>2.4.3</td><td>2.4.3</td><td>2.4.1</td><td>2.4.2</td></tr>
 </tbody>
 </table>
-<p>Milvus 2.4.3 版引入了大量功能、改进和错误修复，以提高性能和可靠性。值得注意的改进包括支持稀疏浮点矢量批量插入和优化的 Bloom 过滤器加速。改进涵盖了从动态配置更新到内存使用优化等多个领域。错误修复解决了恐慌情景等关键问题，确保系统运行更加顺畅。该版本强调了 Milvus 对增强功能、优化性能和提供强大用户体验的持续承诺。</p>
+<p>Milvus 2.4.3 版引入了大量功能、改进和错误修复，以提高性能和可靠性。值得注意的改进包括支持稀疏浮点向量批量插入和优化的 Bloom 过滤器加速。改进涵盖了从动态配置更新到内存使用优化等多个领域。错误修复解决了恐慌情景等关键问题，确保系统运行更加顺畅。该版本强调了 Milvus 对增强功能、优化性能和提供强大用户体验的持续承诺。</p>
 <h3 id="Features" class="common-anchor-header">功能特性</h3><ul>
-<li>支持 binlog/json/parquet 的稀疏浮点矢量批量插入<a href="https://github.com/milvus-io/milvus/pull/32649">(#32649</a>)</li>
+<li>支持 binlog/json/parquet 的稀疏浮点向量批量插入<a href="https://github.com/milvus-io/milvus/pull/32649">(#32649</a>)</li>
 </ul>
 <h3 id="Improvements" class="common-anchor-header">改进</h3><ul>
 <li>基于 RPC 实现了 Datacoord/节点观察通道<a href="https://github.com/milvus-io/milvus/pull/32036">(#32036</a>)</li>
@@ -531,13 +532,13 @@ title: 发布说明
 <tr><td>2.4.1</td><td>2.4.1</td><td>2.4.0</td><td>2.4.2</td></tr>
 </tbody>
 </table>
-<p>Milvus 2.4.1 版带来了大量改进和错误修复，旨在提高软件的性能、可观察性和稳定性。这些改进包括声明式资源组 API、支持 Float16/BFloat16 矢量数据类型的增强型批量插入功能、可减少对象存储的列表操作的改进型垃圾回收（GC）机制，以及与性能优化相关的其他更改。此外，错误修复还解决了编译错误、换行符模糊匹配失败、RESTful 接口参数数据类型不正确，以及启用动态字段时 BulkInsert 在 numpy 文件上引发错误等问题。</p>
+<p>Milvus 2.4.1 版带来了大量改进和错误修复，旨在提高软件的性能、可观察性和稳定性。这些改进包括声明式资源组 API、支持 Float16/BFloat16 向量数据类型的增强型批量插入功能、可减少对象存储的列表操作的改进型垃圾回收（GC）机制，以及与性能优化相关的其他更改。此外，错误修复还解决了编译错误、换行符模糊匹配失败、RESTful 接口参数数据类型不正确，以及启用动态字段时 BulkInsert 在 numpy 文件上引发错误等问题。</p>
 <h3 id="Breaking-changes" class="common-anchor-header">破坏性更改</h3><ul>
 <li>不再支持使用空筛选表达式删除。<a href="https://github.com/milvus-io/milvus/pull/32472">(#32472</a>)</li>
 </ul>
 <h3 id="Features" class="common-anchor-header">新增功能</h3><ul>
 <li>在批量插入中添加了对 Float16/BFloat16 向量数据类型的支持<a href="https://github.com/milvus-io/milvus/pull/32157">（#32157）</a></li>
-<li>增强了稀疏浮点矢量，以支持暴力迭代器搜索和范围搜索<a href="https://github.com/milvus-io/milvus/pull/32635">(#32635</a>)</li>
+<li>增强了稀疏浮点向量，以支持暴力迭代器搜索和范围搜索<a href="https://github.com/milvus-io/milvus/pull/32635">(#32635</a>)</li>
 </ul>
 <h3 id="Improvements" class="common-anchor-header">改进</h3><ul>
 <li>添加了声明式资源组 api<a href="https://github.com/milvus-io/milvus/pull/31930">（＃31930</a>、<a href="https://github.com/milvus-io/milvus/pull/32297">＃32297</a>、<a href="https://github.com/milvus-io/milvus/pull/32297">＃</a> <a href="https://github.com/milvus-io/milvus/pull/32536">32536</a>、<a href="https://github.com/milvus-io/milvus/pull/32666">＃32666）</a></li>
@@ -671,21 +672,21 @@ title: 发布说明
 <p>示例代码见<a href="https://github.com/milvus-io/pymilvus/blob/2.4/examples/example_gpu_cagra.py">example_gpu_cagra.py</a>。</p>
 <h4 id="Sparse-Vector-Beta" class="common-anchor-header">稀疏向量（测试版）</h4><p>在此版本中，我们引入了一种名为稀疏向量的新型向量场。稀疏向量与稠密向量不同，它们的维数比稠密向量高出数倍，只有少数几个维数是非零的。由于其基于项的性质，这一特征具有更好的可解释性，在某些领域可能更有效。事实证明，SPLADEv2/BGE-M3 等学习的稀疏模型对于常见的第一阶段排名任务非常有用。Milvus 这一新功能的主要用例是允许对 SPLADEv2/BGE-M3 等神经模型和 BM25 算法等统计模型生成的稀疏向量进行高效的近似语义近邻搜索。Milvus 现在支持稀疏向量的高效和高性能存储、索引和搜索（MIPS，最大内积搜索）。</p>
 <p>示例代码请参见<a href="https://github.com/milvus-io/pymilvus/blob/2.4/examples/hello_sparse.py">hello_sparse.py</a>。</p>
-<h4 id="Multi-Embedding---Hybrid-Search" class="common-anchor-header">多嵌入和混合搜索</h4><p>多矢量支持是需要多模型数据处理或混合密集矢量和稀疏矢量的应用的基石。有了多向量支持，您现在可以</p>
+<h4 id="Multi-Embedding---Hybrid-Search" class="common-anchor-header">多嵌入和混合搜索</h4><p>多向量支持是需要多模型数据处理或混合密集向量和稀疏向量的应用的基石。有了多向量支持，您现在可以</p>
 <ul>
 <li>存储从多个模型中为非结构化文本、图像或音频样本生成的向量嵌入。</li>
 <li>进行包含每个实体的多个向量的 ANN 搜索。</li>
 <li>通过为不同的嵌入模型分配权重来定制搜索策略。</li>
 <li>尝试使用各种嵌入模型，以找到最佳模型组合。</li>
 </ul>
-<p>多向量支持允许在一个集合中对不同类型的多个向量场（如 FLOAT_VECTOR 和 SPARSE_FLOAT_VECTOR）进行存储、索引和应用重排策略。目前有两种重排策略可供选择：<strong>互易排名融合（RRF）</strong>和<strong>平均加权评分（Average Weighted Scoring</strong>）。这两种策略都是将来自不同向量场的搜索结果合并为一个统一的结果集。第一种策略优先处理在不同矢量字段搜索结果中持续出现的实体，而另一种策略则为每个矢量字段的搜索结果分配权重，以确定它们在最终结果集中的重要性。</p>
+<p>多向量支持允许在一个集合中对不同类型的多个向量场（如 FLOAT_VECTOR 和 SPARSE_FLOAT_VECTOR）进行存储、索引和应用重排策略。目前有两种重排策略可供选择：<strong>互易排名融合（RRF）</strong>和<strong>平均加权评分（Average Weighted Scoring</strong>）。这两种策略都是将来自不同向量场的搜索结果合并为一个统一的结果集。第一种策略优先处理在不同向量字段搜索结果中持续出现的实体，而另一种策略则为每个向量字段的搜索结果分配权重，以确定它们在最终结果集中的重要性。</p>
 <p>示例代码见<a href="https://github.com/milvus-io/pymilvus/blob/2.4/examples/hybrid_search.py">hybrid_search.py</a>。</p>
 <h4 id="Inverted-Index-and-Fuzzy-Match" class="common-anchor-header">反向索引和模糊匹配</h4><p>在 Milvus 以前的版本中，标量字段索引使用了基于内存的二进制搜索索引和 Marisa Trie 索引。不过，这些方法需要消耗大量内存。现在，Milvus 的最新版本采用了基于 Tantivy 的倒排索引，可用于所有数字和字符串数据类型。这种新索引大大提高了标量查询性能，将字符串中关键字的查询量减少了十倍。此外，由于对数据压缩和内部索引结构的内存映射存储（MMap）机制进行了额外优化，倒置索引消耗的内存更少。</p>
 <p>该版本还支持在标量过滤中使用前缀、后缀和后缀进行模糊匹配。</p>
 <p>示例代码可在<a href="https://github.com/milvus-io/pymilvus/blob/2.4/examples/inverted_index_example.py">inverted_index_example.py</a>和<a href="https://github.com/milvus-io/pymilvus/blob/2.4/examples/fuzzy_match.py">fuzzy_match.py</a> 中找到。</p>
 <h4 id="Grouping-Search" class="common-anchor-header">分组搜索</h4><p>现在，您可以根据特定标量字段中的值对搜索结果进行聚合。这有助于 RAG 应用程序实现文档级召回。考虑一个文档集合，每个文档分成不同的段落。每个段落由一个向量嵌入表示，属于一个文档。为了找到最相关的文档而不是分散的段落，可以在 search() 操作中加入 group_by_field 参数，根据文档 ID 对搜索结果进行分组。</p>
 <p>示例代码见<a href="https://github.com/milvus-io/pymilvus/blob/2.4/examples/example_group_by.py">example_group_by.py</a>。</p>
-<h4 id="Float16-and-BFloat--Vector-DataType" class="common-anchor-header">Float16 和 BFloat 向量数据类型</h4><p>机器学习和神经网络经常使用半精度数据类型，如 Float16 和 BFloat--虽然这些数据类型可以提高查询效率并减少内存使用量，但同时也会降低精度。在此版本中，Milvus 现在支持矢量字段的这些数据类型。</p>
+<h4 id="Float16-and-BFloat--Vector-DataType" class="common-anchor-header">Float16 和 BFloat 向量数据类型</h4><p>机器学习和神经网络经常使用半精度数据类型，如 Float16 和 BFloat--虽然这些数据类型可以提高查询效率并减少内存使用量，但同时也会降低精度。在此版本中，Milvus 现在支持向量字段的这些数据类型。</p>
 <p>示例代码可在<a href="https://github.com/milvus-io/pymilvus/blob/2.4/examples/float16_example.py">float16_example.py</a>和<a href="https://github.com/milvus-io/pymilvus/blob/2.4/examples/bfloat16_example.py">bfloat16_example.py</a> 中找到。</p>
 <h3 id="Upgraded-Architecture" class="common-anchor-header">升级后的架构</h3><h4 id="L0-Segment" class="common-anchor-header">L0 段</h4><p>此版本包含一个名为 L0 段的新网段，用于记录删除的数据。该分段会定期压缩已存储的删除记录，并将其分割成密封分段，从而减少小规模删除所需的数据刷新次数，并留下少量存储空间。有了这种机制，Milvus 可以将数据压缩与数据刷新完全分开，从而提高删除和上载操作的性能。</p>
 <h4 id="Refactored-BulkInsert" class="common-anchor-header">重构的批量插入</h4><p>此版本还引入了改进的批量插入逻辑。这样就可以在单个批量插入请求中导入多个文件。通过重构版本，批量插入的性能和稳定性都有了显著提高。用户体验也得到了增强，例如对速率限制进行了微调，错误信息也更加友好。此外，你还可以通过 Milvus 的 RESTful API 轻松访问批量插入端点。</p>

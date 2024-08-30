@@ -3,6 +3,7 @@ id: operational_faq.md
 summary: 查找有关米尔沃斯运营的常见问题的答案。
 title: 操作常见问题
 ---
+
 <h1 id="Operational-FAQ" class="common-anchor-header">操作常见问题<button data-href="#Operational-FAQ" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -29,13 +30,13 @@ title: 操作常见问题
 <p>对于 FLAT 索引，Milvus 在集合内进行穷举扫描，100% 返回。</p>
 <p>对于 IVF 索引，nprobe 参数决定了在集合内的搜索范围。增加 nprobe 会增加搜索向量的比例和召回率，但会降低查询性能。</p>
 <p>对于 HNSW 索引，ef 参数决定图搜索的广度。增加 ef 会增加在图上搜索的点数和召回率，但会降低查询性能。</p>
-<p>有关详细信息，请参阅<a href="https://www.zilliz.com/blog/Accelerating-Similarity-Search-on-Really-Big-Data-with-Vector-Indexing">矢量索引</a>。</p>
+<p>有关详细信息，请参阅<a href="https://www.zilliz.com/blog/Accelerating-Similarity-Search-on-Really-Big-Data-with-Vector-Indexing">向量索引</a>。</p>
 <h4 id="Why-did-my-changes-to-the-configuration-files-not-take-effect" class="common-anchor-header">为什么我对配置文件的修改没有生效？</h4><p>Milvus 不支持在运行期间修改配置文件。必须重新启动 Milvus Docker，配置文件的更改才能生效。</p>
 <h4 id="How-do-I-know-if-Milvus-has-started-successfully" class="common-anchor-header">我如何知道 Milvus 是否已成功启动？</h4><p>如果使用 Docker Compose 启动 Milvus，请运行<code translate="no">docker ps</code> 观察有多少 Docker 容器在运行，并检查 Milvus 服务是否正确启动。</p>
 <p>对于单机版 Milvus，你应该至少能观察到三个正在运行的 Docker 容器，其中一个是 Milvus 服务，另外两个是 etcd 管理和存储服务。更多信息，请参阅<a href="/docs/zh/install_standalone-docker.md">安装 Milvus 单机版</a>。</p>
 <h4 id="Why-is-the-time-in-the-log-files-different-from-the-system-time" class="common-anchor-header">为什么日志文件中的时间与系统时间不同？</h4><p>时间不同通常是由于主机不使用协调世界时（UTC）。</p>
 <p>Docker 映像中的日志文件默认使用 UTC。如果您的主机不使用 UTC，可能会出现这个问题。</p>
-<h4 id="How-do-I-know-if-my-CPU-supports-Milvus" class="common-anchor-header">我如何知道我的 CPU 是否支持 Milvus？</h4><p>Milvus 的计算操作取决于 CPU 对 SIMD（单指令、多数据）扩展指令集的支持。您的中央处理器是否支持 SIMD 扩展指令集对 Milvus 中的索引构建和矢量相似性搜索至关重要。确保 CPU 至少支持以下一种 SIMD 指令集：</p>
+<h4 id="How-do-I-know-if-my-CPU-supports-Milvus" class="common-anchor-header">我如何知道我的 CPU 是否支持 Milvus？</h4><p>Milvus 的计算操作取决于 CPU 对 SIMD（单指令、多数据）扩展指令集的支持。您的中央处理器是否支持 SIMD 扩展指令集对 Milvus 中的索引构建和向量相似性搜索至关重要。确保 CPU 至少支持以下一种 SIMD 指令集：</p>
 <ul>
 <li>SSE4.2</li>
 <li>AVX</li>

@@ -30,8 +30,9 @@ const DEEPL_HEADERS = {
 	"Content-Type": "application/json",
 	Authorization: `DeepL-Auth-Key ${DEEPL_API_KEY}`,
 };
-const GLOSSARY_ID = "3764a5a5-f380-41da-ad7d-f8242e82ef85"
-const ENTRIES = "vector\t向量\nHugging Face\tHugging Face\nmilvus\tmilvus\nMilvus\tMilvus"
+const GLOSSARY_ID = "a0bbab3b-2b1e-413a-89f2-58dfee38261a";
+const ENTRIES =
+	"vector\t向量\nHugging Face\tHugging Face\nmilvus\tmilvus\nMilvus\tMilvus\narchitecture\t架构\n";
 
 export function traverseDirectory(dirPath, fileList = []) {
 	const files = fs.readdirSync(dirPath);
