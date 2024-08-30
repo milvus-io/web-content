@@ -7,6 +7,65 @@ title: Release Notes
 
 Find out what’s new in Milvus! This page summarizes new features, improvements, known issues, and bug fixes in each release. You can find the release notes for each released version after v2.4.0 in this section. We suggest that you regularly visit this page to learn about updates.
 
+## v2.4.10
+
+Release Date: August 30, 2024
+
+| Milvus version | Python SDK version | Java SDK version | Node.js SDK version |
+|----------------|--------------------|------------------|---------------------|
+| 2.4.10         | 2.4.6              | 2.4.3            | 2.4.6               |
+
+Milvus 2.4.10 introduces significant improvements in functionality and stability. Key features include support for upsert operations on AutoID-enabled collections, partial collection loading capabilities, and various memory-mapped (MMAP) configurations to optimize memory usage. This release also addresses several bugs causing panics, core dumps, and resource leaks. We recommend upgrading to take full advantage of these improvements.
+
+### Features
+
+- **Upsert with Auto ID**: Support for upsert operations with automatic ID generation ([#34633](https://github.com/milvus-io/milvus/pull/34633))
+- **Field Partial Load Collection** [Beta Preview]: Allows loading specific fields of a collection ([#35696](https://github.com/milvus-io/milvus/pull/35696))
+- **RBAC Enhancements**:
+  - Added RBAC message support for Change Data Capture (CDC) ([#35562](https://github.com/milvus-io/milvus/pull/35562))
+  - Introduced readonly/readwrite/admin privilege groups to simplify RBAC grant process ([#35543](https://github.com/milvus-io/milvus/pull/35543))
+  - New API for backing up and restoring RBAC configurations ([#35513](https://github.com/milvus-io/milvus/pull/35513))
+  - Refresh proxy cache after restoring RBAC metadata ([#35636](https://github.com/milvus-io/milvus/pull/35636))
+- **Improved MMAP Configuration**: More general configuration options to control MMAP behavior ([#35609](https://github.com/milvus-io/milvus/pull/35609))
+- **Database Access Restrictions**: New properties to restrict read access to databases ([#35754](https://github.com/milvus-io/milvus/pull/35754))
+
+### Bug fixes
+
+- Fixed Arrow Go client don't return error issue ([#35820](https://github.com/milvus-io/milvus/pull/35820))
+- Corrected inaccurate rate limiting ([#35700](https://github.com/milvus-io/milvus/pull/35700))
+- Resolved proxy panic after import-related API failures ([#35559](https://github.com/milvus-io/milvus/pull/35559))
+- Fixed potential mistaken deletions during GC channel checkpoints ([#35708](https://github.com/milvus-io/milvus/pull/35708))
+- Addressed panic due to empty candidate import segments ([#35674](https://github.com/milvus-io/milvus/pull/35674))
+- Corrected mmap memory deallocation ([#35726](https://github.com/milvus-io/milvus/pull/35726))
+- Ensured proper channel watching for upgrades from 2.2 to 2.4 ([#35695](https://github.com/milvus-io/milvus/pull/35695))
+- Fixed DataNode unwatching channel release function ([#35657](https://github.com/milvus-io/milvus/pull/35657))
+- Corrected partition count in RootCoord metadata ([#35601](https://github.com/milvus-io/milvus/pull/35601))
+- Resolved issues with dynamic config updates for certain parameters ([#35637](https://github.com/milvus-io/milvus/pull/35637))
+
+### Improvements
+
+#### Performance
+
+- Optimized retrieval on dynamic fields ([#35602](https://github.com/milvus-io/milvus/pull/35602))
+- Improved bitset performance for AVX512 ([#35480](https://github.com/milvus-io/milvus/pull/35480))
+- Re-read value after `once` initialization for better efficiency ([#35643](https://github.com/milvus-io/milvus/pull/35643))
+
+#### Rolling upgrade improvements
+
+- Marked query node as read-only after suspended ([#35586](https://github.com/milvus-io/milvus/pull/35586))
+- Prevented coexistence of old coordinator with new node/proxy ([#35760](https://github.com/milvus-io/milvus/pull/35760))
+
+#### Others
+
+- Optimized Milvus core building process ([#35660](https://github.com/milvus-io/milvus/pull/35660))
+- Updated to protobuf-go v2 ([#35555](https://github.com/milvus-io/milvus/pull/35555))
+- Enhanced tracing with hex string encoding for traceid and spanid ([#35568](https://github.com/milvus-io/milvus/pull/35568))
+- Added hit segment number metrics for query hook ([#35619](https://github.com/milvus-io/milvus/pull/35619))
+- Improved compatibility with old SDK for configure load param feature ([#35573](https://github.com/milvus-io/milvus/pull/35573))
+- Added support for HTTP v1/v2 throttling ([#35504](https://github.com/milvus-io/milvus/pull/35504))
+- Fixed index memory estimation ([#35670](https://github.com/milvus-io/milvus/pull/35670))
+- Ability to write multiple segments in mix compactor to avoid large segment generation ([#35648](https://github.com/milvus-io/milvus/pull/35648))
+
 ## v2.4.9
 
 Release Date: August 20, 2024
