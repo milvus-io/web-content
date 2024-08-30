@@ -3,7 +3,6 @@ id: quickstart.md
 summary: Get started with Milvus.
 title: Quickstart
 ---
-
 <h1 id="Quickstart-with-Milvus-Lite" class="common-anchor-header">Quickstart with Milvus Lite<button data-href="#Quickstart-with-Milvus-Lite" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

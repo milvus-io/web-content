@@ -4,7 +4,6 @@ title: Milvus Adopters
 related_key: Milvus adopters
 summary: Learn about companies that have adopted Milvus in production applications.
 ---
-
 <h1 id="Milvus-Adopters" class="common-anchor-header">Milvus Adopters<button data-href="#Milvus-Adopters" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

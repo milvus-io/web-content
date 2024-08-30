@@ -4,7 +4,6 @@ related_key: configure
 group: system_configuration.md
 summary: Learn how to configure indexNode for Milvus.
 ---
-
 <h1 id="indexNode-related-Configurations" class="common-anchor-header">indexNode-related Configurations<button data-href="#indexNode-related-Configurations" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

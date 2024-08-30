@@ -1,9 +1,10 @@
 ---
 id: troubleshooting.md
-summary: Learn about common issues you may encounter with Milvus and how to overcome them.
+summary: >-
+  Learn about common issues you may encounter with Milvus and how to overcome
+  them.
 title: Troubleshooting
 ---
-
 <h1 id="Troubleshooting" class="common-anchor-header">Troubleshooting<button data-href="#Troubleshooting" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

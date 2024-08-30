@@ -4,7 +4,6 @@ related_key: Manage Resource Groups
 summary: Learn how to manage resource groups.
 title: Manage Resource Groups
 ---
-
 <h1 id="Manage-Resource-Groups" class="common-anchor-header">Manage Resource Groups<button data-href="#Manage-Resource-Groups" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

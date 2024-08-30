@@ -4,7 +4,6 @@ related_key: configure
 group: system_configuration.md
 summary: Learn how to configure mq for Milvus.
 ---
-
 <h1 id="mq-related-Configurations" class="common-anchor-header">mq-related Configurations<button data-href="#mq-related-Configurations" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

@@ -3,7 +3,6 @@ id: text_search_engine.md
 summary: Build a text search engine with Milvus.
 title: Text Search Engine
 ---
-
 <h1 id="Text-Search-Engine" class="common-anchor-header">Text Search Engine<button data-href="#Text-Search-Engine" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

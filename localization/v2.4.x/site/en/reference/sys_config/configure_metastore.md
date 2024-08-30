@@ -4,7 +4,6 @@ related_key: configure
 group: system_configuration.md
 summary: Learn how to configure metastore for Milvus.
 ---
-
 <h1 id="metastore-related-Configurations" class="common-anchor-header">metastore-related Configurations<button data-href="#metastore-related-Configurations" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

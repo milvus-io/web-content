@@ -3,7 +3,6 @@ id: replica.md
 summary: Learn about in-memory replica in Milvus.
 title: In-Memory Replica
 ---
-
 <h1 id="In-Memory-Replica" class="common-anchor-header">In-Memory Replica<button data-href="#In-Memory-Replica" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

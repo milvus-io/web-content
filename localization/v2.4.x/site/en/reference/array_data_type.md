@@ -2,7 +2,6 @@
 id: array_data_type.md
 title: Use Array Fields
 ---
-
 <h1 id="Use-Array-Fields" class="common-anchor-header">Use Array Fields<button data-href="#Use-Array-Fields" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

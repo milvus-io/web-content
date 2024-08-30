@@ -4,7 +4,6 @@ related_key: configure
 group: system_configuration.md
 summary: Learn how to configure quotaAndLimits for Milvus.
 ---
-
 <h1 id="quotaAndLimits-related-Configurations" class="common-anchor-header">quotaAndLimits-related Configurations<button data-href="#quotaAndLimits-related-Configurations" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

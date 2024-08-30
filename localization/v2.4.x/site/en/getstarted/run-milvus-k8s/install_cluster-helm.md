@@ -5,7 +5,6 @@ related_key: Kubernetes
 summary: Learn how to install Milvus cluster on Kubernetes.
 title: Install Milvus Cluster with Helm
 ---
-
 <h1 id="Run-Milvus-in-Kubernetes-with-Helm" class="common-anchor-header">Run Milvus in Kubernetes with Helm<button data-href="#Run-Milvus-in-Kubernetes-with-Helm" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

@@ -4,7 +4,6 @@ title: Create an alert
 related_key: monitor and alert.
 summary: Learn how to create an alert for Milvus services in Grafana.
 ---
-
 <h1 id="Create-an-Alert-for-Milvus-Services" class="common-anchor-header">Create an Alert for Milvus Services<button data-href="#Create-an-Alert-for-Milvus-Services" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

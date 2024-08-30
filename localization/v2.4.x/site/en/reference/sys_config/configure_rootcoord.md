@@ -4,7 +4,6 @@ related_key: configure
 group: system_configuration.md
 summary: Learn how to configure rootCoord for Milvus.
 ---
-
 <h1 id="rootCoord-related-Configurations" class="common-anchor-header">rootCoord-related Configurations<button data-href="#rootCoord-related-Configurations" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

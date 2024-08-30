@@ -1,10 +1,9 @@
 ---
 id: visualize.md
 title: Visualize Metrics
-related_key: monitor, alert
+related_key: 'monitor, alert'
 summary: Learn how to visualize Milvus metrics in Grafana.
 ---
-
 <h1 id="Visualize-Milvus-Metrics-in-Grafana" class="common-anchor-header">Visualize Milvus Metrics in Grafana<button data-href="#Visualize-Milvus-Metrics-in-Grafana" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

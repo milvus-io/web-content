@@ -1,10 +1,11 @@
 ---
 id: embed-with-splade.md
 order: 6
-summary: This article describes how to use the SpladeEmbeddingFunction to encode documents and queries using the SPLADE model.
+summary: >-
+  This article describes how to use the SpladeEmbeddingFunction to encode
+  documents and queries using the SPLADE model.
 title: SPLADE
 ---
-
 <h1 id="SPLADE" class="common-anchor-header">SPLADE<button data-href="#SPLADE" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

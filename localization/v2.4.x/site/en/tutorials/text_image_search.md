@@ -3,7 +3,6 @@ id: text_image_search.md
 summary: Build a text to image search engine with Milvus.
 title: Text to Image Search Engine
 ---
-
 <h1 id="Text-to-Image-Search-Engine" class="common-anchor-header">Text to Image Search Engine<button data-href="#Text-to-Image-Search-Engine" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

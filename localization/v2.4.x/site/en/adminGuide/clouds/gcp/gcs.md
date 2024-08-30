@@ -1,10 +1,9 @@
 ---
 id: gcs.md
 title: Configure GCS Access by Workload Identity
-related_key: gcs, storage, workload identity, iam
+related_key: 'gcs, storage, workload identity, iam'
 summary: Learn how to configure gcs with Workload Identity.
 ---
-
 <h1 id="Configure-GCS-Access-by-Workload-Identity" class="common-anchor-header">Configure GCS Access by Workload Identity<button data-href="#Configure-GCS-Access-by-Workload-Identity" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

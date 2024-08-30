@@ -1,9 +1,10 @@
 ---
 id: basic_usage_langchain.md
-summary: This notebook shows how to use functionality related to the Milvus vector database.
+summary: >-
+  This notebook shows how to use functionality related to the Milvus vector
+  database.
 title: Use Milvus as a Vector Store
 ---
-
 <h1 id="Use-Milvus-as-a-Vector-Store" class="common-anchor-header">Use Milvus as a Vector Store<button data-href="#Use-Milvus-as-a-Vector-Store" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

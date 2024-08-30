@@ -4,7 +4,6 @@ related_key: configure
 group: system_configuration.md
 summary: Learn how to configure proxy for Milvus.
 ---
-
 <h1 id="proxy-related-Configurations" class="common-anchor-header">proxy-related Configurations<button data-href="#proxy-related-Configurations" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

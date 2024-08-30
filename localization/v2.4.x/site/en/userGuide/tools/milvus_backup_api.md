@@ -3,7 +3,6 @@ id: milvus_backup_api.md
 summary: Learn how to use Milvus Backup through API
 title: Back up and Restore Data Using APIs
 ---
-
 <h1 id="Back-up-and-Restore-Data-Using-APIs" class="common-anchor-header">Back up and Restore Data Using APIs<button data-href="#Back-up-and-Restore-Data-Using-APIs" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

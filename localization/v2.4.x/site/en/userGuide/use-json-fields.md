@@ -2,7 +2,6 @@
 id: use-json-fields.md
 title: Use JSON Fields
 ---
-
 <h1 id="Use-JSON-Fields" class="common-anchor-header">Use JSON Fields<button data-href="#Use-JSON-Fields" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

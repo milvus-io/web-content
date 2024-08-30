@@ -1,9 +1,10 @@
 ---
 id: integrate_with_llamaindex.md
-summary: This guide demonstrates how to build a Retrieval-Augmented Generation (RAG) system using LlamaIndex and Milvus.
+summary: >-
+  This guide demonstrates how to build a Retrieval-Augmented Generation (RAG)
+  system using LlamaIndex and Milvus.
 title: Retrieval-Augmented Generation (RAG) with Milvus and LlamaIndex
 ---
-
 <h1 id="Retrieval-Augmented-Generation-RAG-with-Milvus-and-LlamaIndex" class="common-anchor-header">Retrieval-Augmented Generation (RAG) with Milvus and LlamaIndex<button data-href="#Retrieval-Augmented-Generation-RAG-with-Milvus-and-LlamaIndex" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -197,4 +198,5 @@ res = query_engine.query(<span class="hljs-string">&quot;What challenges did the
 
 <span class="hljs-built_in">print</span>(res)
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no">The disease posed challenges for the author as it affected his mother's health, leading to a stroke caused by colon cancer. This resulted in his mother losing her balance and needing to be placed in a nursing home. The author and his sister were determined to help their mother get out of the nursing home and back to her house.</code></pre>
+<pre><code translate="no">The disease posed challenges for the author as it affected his mother's health, leading to a stroke caused by colon cancer. This resulted in his mother losing her balance and needing to be placed in a nursing home. The author and his sister were determined to help their mother get out of the nursing home and back to her house.
+</code></pre>

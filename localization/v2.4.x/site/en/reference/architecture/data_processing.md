@@ -3,7 +3,6 @@ id: data_processing.md
 summary: Learn about the data processing procedure in Milvus.
 title: Data Processing
 ---
-
 <h1 id="Data-Processing" class="common-anchor-header">Data Processing<button data-href="#Data-Processing" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

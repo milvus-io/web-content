@@ -1,10 +1,11 @@
 ---
 id: embed-with-voyage.md
 order: 7
-summary: This article describes how to use the VoyageEmbeddingFunction to encode documents and queries using the Voyage model.
+summary: >-
+  This article describes how to use the VoyageEmbeddingFunction to encode
+  documents and queries using the Voyage model.
 title: Embed Voyage
 ---
-
 <h1 id="Voyage" class="common-anchor-header">Voyage<button data-href="#Voyage" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

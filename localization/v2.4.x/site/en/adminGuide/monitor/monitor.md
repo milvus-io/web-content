@@ -1,10 +1,9 @@
 ---
 id: monitor.md
 title: Deploy Monitoring Services
-related_key: monitor, alert
+related_key: 'monitor, alert'
 summary: Learn how to deploy monitoring services for a Milvus cluster using Prometheus.
 ---
-
 <h1 id="Deploying-Monitoring-Services-on-Kubernetes" class="common-anchor-header">Deploying Monitoring Services on Kubernetes<button data-href="#Deploying-Monitoring-Services-on-Kubernetes" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

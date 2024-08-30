@@ -4,7 +4,6 @@ related_key: configure
 group: system_configuration.md
 summary: Learn how to configure etcd for Milvus.
 ---
-
 <h1 id="etcd-related-Configurations" class="common-anchor-header">etcd-related Configurations<button data-href="#etcd-related-Configurations" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

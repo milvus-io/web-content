@@ -3,7 +3,6 @@ id: integrate_with_sentencetransformers.md
 summary: This page discusses movie search using Milvus
 title: Movie Search Using Milvus and SentenceTransformers
 ---
-
 <h1 id="Movie-Search-Using-Milvus-and-SentenceTransformers" class="common-anchor-header">Movie Search Using Milvus and SentenceTransformers<button data-href="#Movie-Search-Using-Milvus-and-SentenceTransformers" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

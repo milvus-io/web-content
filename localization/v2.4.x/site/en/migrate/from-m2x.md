@@ -1,9 +1,10 @@
 ---
 id: from-m2x.md
-summary: This guide provides a comprehensive, step-by-step process for migrating data from Milvus 2.3.x to Milvus 2.3.x or above.
+summary: >-
+  This guide provides a comprehensive, step-by-step process for migrating data
+  from Milvus 2.3.x to Milvus 2.3.x or above.
 title: From Milvus 2.3.x
 ---
-
 <h1 id="From-Milvus-23x" class="common-anchor-header">From Milvus 2.3.x<button data-href="#From-Milvus-23x" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

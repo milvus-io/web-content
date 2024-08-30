@@ -3,7 +3,6 @@ id: consistency.md
 summary: Learn about the four levels of consistency in Milvus.
 title: Consistency
 ---
-
 <h1 id="Consistency" class="common-anchor-header">Consistency<button data-href="#Consistency" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

@@ -1,9 +1,10 @@
 ---
 id: integrate_with_snowpark.md
-summary: This guide demonstrates how to start a Milvus demo on Snowpark container services. 
+summary: >-
+  This guide demonstrates how to start a Milvus demo on Snowpark container
+  services.
 title: Milvus on Snowpark Container Services
 ---
-
 <h1 id="Milvus-on-Snowpark-Container-Services" class="common-anchor-header">Milvus on Snowpark Container Services<button data-href="#Milvus-on-Snowpark-Container-Services" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

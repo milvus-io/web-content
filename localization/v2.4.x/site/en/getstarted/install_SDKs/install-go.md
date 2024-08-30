@@ -5,7 +5,6 @@ related_key: SDK
 summary: Learn how to install the GO SDK of Milvus.
 title: Install Milvus Go SDK
 ---
-
 <h1 id="Install-Milvus-Go-SDK" class="common-anchor-header">Install Milvus Go SDK<button data-href="#Install-Milvus-Go-SDK" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

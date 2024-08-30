@@ -2,7 +2,6 @@
 id: limit_collection_counts.md
 title: Set Limits on Collection Number
 ---
-
 <h1 id="Limit-Collection-Counts" class="common-anchor-header">Limit Collection Counts<button data-href="#Limit-Collection-Counts" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

@@ -1,10 +1,9 @@
 ---
 id: configure-querynode-localdisk.md
 title: Configure Milvus QueryNode with Local Disk
-related_key: querynode, query node, local disk
+related_key: 'querynode, query node, local disk'
 summary: Learn how to configure Milvus QueryNode to use local disk.
 ---
-
 <h1 id="Configure-Milvus-QueryNode-with-Local-Disk" class="common-anchor-header">Configure Milvus QueryNode with Local Disk<button data-href="#Configure-Milvus-QueryNode-with-Local-Disk" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

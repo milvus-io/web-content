@@ -3,7 +3,6 @@ id: time_sync.md
 title: Time Synchronization
 summary: Learn about the time synchronization system in Milvus.
 ---
-
 <h1 id="Time-Synchronization" class="common-anchor-header">Time Synchronization<button data-href="#Time-Synchronization" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

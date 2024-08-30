@@ -1,10 +1,9 @@
 ---
 id: message_storage_operator.md
 title: Configure Message Storage with Milvus Operator
-related_key: minio, s3, storage, etcd, pulsar
+related_key: 'minio, s3, storage, etcd, pulsar'
 summary: Learn how to configure message storage with Milvus Operator.
 ---
-
 <h1 id="Configure-Message-Storage-with-Milvus-Operator" class="common-anchor-header">Configure Message Storage with Milvus Operator<button data-href="#Configure-Message-Storage-with-Milvus-Operator" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

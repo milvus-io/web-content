@@ -1,10 +1,11 @@
 ---
 id: milvus-cdc-overview.md
 order: 1
-summary: Milvus-CDC is a user-friendly tool that can capture and synchronize incremental data in Milvus instances.
+summary: >-
+  Milvus-CDC is a user-friendly tool that can capture and synchronize
+  incremental data in Milvus instances.
 title: CDC Overview
 ---
-
 <h1 id="Overview" class="common-anchor-header">Overview<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

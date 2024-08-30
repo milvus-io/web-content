@@ -4,7 +4,6 @@ related_key: configure
 summary: Learn about the dynamic configuration of Milvus.
 title: Configure Milvus on the Fly
 ---
-
 <h1 id="Configure-Milvus-on-the-Fly" class="common-anchor-header">Configure Milvus on the Fly<button data-href="#Configure-Milvus-on-the-Fly" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

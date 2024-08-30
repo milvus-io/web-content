@@ -1,9 +1,10 @@
 ---
 id: integrate_with_dspy.md
-summary: This guide demonstrates how to use MilvusRM, one of DSPy's retriever modules, to optimize RAG programs. 
+summary: >-
+  This guide demonstrates how to use MilvusRM, one of DSPy's retriever modules,
+  to optimize RAG programs.
 title: Integrate Milvus with DSPy
 ---
-
 <h1 id="Integrate-Milvus-with-DSPy" class="common-anchor-header">Integrate Milvus with DSPy<button data-href="#Integrate-Milvus-with-DSPy" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

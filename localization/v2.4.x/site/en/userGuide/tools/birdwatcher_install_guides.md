@@ -3,7 +3,6 @@ id: birdwatcher_install_guides.md
 summary: Learn how to install Birdwatch to debug Milvus.
 title: Install Birdwatcher
 ---
-
 <h1 id="Install-Birdwatcher" class="common-anchor-header">Install Birdwatcher<button data-href="#Install-Birdwatcher" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

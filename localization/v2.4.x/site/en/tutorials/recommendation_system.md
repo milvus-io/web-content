@@ -3,7 +3,6 @@ id: recommendation_system.md
 summary: Build a personalized recommender system with Milvus.
 title: Recommender System
 ---
-
 <h1 id="Recommender-System" class="common-anchor-header">Recommender System<button data-href="#Recommender-System" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

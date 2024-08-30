@@ -4,7 +4,6 @@ related_key: configure
 group: system_configuration.md
 summary: Learn how to configure minio for Milvus.
 ---
-
 <h1 id="minio-related-Configurations" class="common-anchor-header">minio-related Configurations<button data-href="#minio-related-Configurations" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

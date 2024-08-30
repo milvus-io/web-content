@@ -3,7 +3,6 @@ id: audio_similarity_search.md
 summary: Build an audio similarity search system with Milvus.
 title: Audio Similarity Search
 ---
-
 <h1 id="Audio-Similarity-Search" class="common-anchor-header">Audio Similarity Search<button data-href="#Audio-Similarity-Search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

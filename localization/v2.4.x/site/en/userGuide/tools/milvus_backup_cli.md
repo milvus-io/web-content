@@ -3,7 +3,6 @@ id: milvus_backup_cli.md
 summary: Learn how to use Milvus Backup through CLI
 title: Back up and Restore Data Using Commands
 ---
-
 <h1 id="Back-up-and-Restore-Data-Using-Commands" class="common-anchor-header">Back up and Restore Data Using Commands<button data-href="#Back-up-and-Restore-Data-Using-Commands" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

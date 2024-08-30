@@ -1,10 +1,11 @@
 ---
 id: multi-vector-search.md
 order: 2
-summary: This guide demonstrates how to perform hybrid search in Milvus and understand the reranking of results.
+summary: >-
+  This guide demonstrates how to perform hybrid search in Milvus and understand
+  the reranking of results.
 title: Hybrid Search
 ---
-
 <h1 id="Hybrid-Search" class="common-anchor-header">Hybrid Search<button data-href="#Hybrid-Search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

@@ -5,7 +5,6 @@ related_key: Docker
 summary: Learn the necessary preparations before installing Milvus with Docker Compose.
 title: Requirements for Installing Milvus with Docker Compose
 ---
-
 <h1 id="Requirements-for-Installing-Milvus-with-Docker-Compose" class="common-anchor-header">Requirements for Installing Milvus with Docker Compose<button data-href="#Requirements-for-Installing-Milvus-with-Docker-Compose" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

@@ -1,10 +1,12 @@
 ---
 id: rerankers-voyage.md
 order: 5
-summary: Milvus supports Voyage reranker model through the `VoyageRerankFunction` class. This functionality allows you to score the relevance of query-document pairs effectively.
+summary: >-
+  Milvus supports Voyage reranker model through the `VoyageRerankFunction`
+  class. This functionality allows you to score the relevance of query-document
+  pairs effectively.
 title: Rerankers Voyage
 ---
-
 <h1 id="Voyage" class="common-anchor-header">Voyage<button data-href="#Voyage" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

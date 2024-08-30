@@ -5,7 +5,6 @@ related_key: configure
 summary: Configure Milvus with Helm Charts.
 title: Configure Milvus with Helm Charts
 ---
-
 <h1 id="Configure-Milvus-with-Helm-Charts" class="common-anchor-header">Configure Milvus with Helm Charts<button data-href="#Configure-Milvus-with-Helm-Charts" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

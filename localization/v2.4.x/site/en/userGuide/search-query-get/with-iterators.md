@@ -1,10 +1,11 @@
 ---
 id: with-iterators.md
 order: 4
-summary: Milvus provides search and query iterators for iterating results with a large volume of entities.
+summary: >-
+  Milvus provides search and query iterators for iterating results with a large
+  volume of entities.
 title: With Iterators
 ---
-
 <h1 id="With-Iterators" class="common-anchor-header">With Iterators<button data-href="#With-Iterators" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

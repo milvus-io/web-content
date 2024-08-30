@@ -1,9 +1,10 @@
 ---
 id: integrate_with_cohere.md
-summary: This page goes over how to search for the best answer to questions using Milvus as the Vector Database and Hugging Face as the embedding system.
+summary: >-
+  This page goes over how to search for the best answer to questions using
+  Milvus as the Vector Database and Hugging Face as the embedding system.
 title: Question Answering Using Milvus and Cohere
 ---
-
 <h1 id="Question-Answering-Using-Milvus-and-Cohere" class="common-anchor-header">Question Answering Using Milvus and Cohere<button data-href="#Question-Answering-Using-Milvus-and-Cohere" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

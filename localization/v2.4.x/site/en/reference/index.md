@@ -4,7 +4,6 @@ related_key: index
 summary: Index mechanism in Milvus.
 title: In-memory Index
 ---
-
 <h1 id="In-memory-Index" class="common-anchor-header">In-memory Index<button data-href="#In-memory-Index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

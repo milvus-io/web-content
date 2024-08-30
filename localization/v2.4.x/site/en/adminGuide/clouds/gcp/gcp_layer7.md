@@ -4,7 +4,6 @@ title: Set up a Layer-7 Load Balancer for Milvus on GCP
 related_key: cluster
 summary: Learn how to deploy a Milvus cluster behind a Layer-7 load balancer on GCP.
 ---
-
 <h1 id="Set-up-a-Layer-7-Load-Balancer-for-Milvus-on-GCP" class="common-anchor-header">Set up a Layer-7 Load Balancer for Milvus on GCP<button data-href="#Set-up-a-Layer-7-Load-Balancer-for-Milvus-on-GCP" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

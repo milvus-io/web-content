@@ -4,7 +4,6 @@ related_key: gpu_index
 summary: GPU index mechanism in Milvus.
 title: GPU Index
 ---
-
 <h1 id="GPU-Index" class="common-anchor-header">GPU Index<button data-href="#GPU-Index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

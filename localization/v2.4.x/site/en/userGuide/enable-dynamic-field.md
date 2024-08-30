@@ -2,7 +2,6 @@
 id: enable-dynamic-field.md
 title: Enable Dynamic Field
 ---
-
 <h1 id="Enable-Dynamic-Field" class="common-anchor-header">Enable Dynamic Field<button data-href="#Enable-Dynamic-Field" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

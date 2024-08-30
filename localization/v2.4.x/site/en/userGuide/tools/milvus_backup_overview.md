@@ -3,7 +3,6 @@ id: milvus_backup_overview.md
 summary: Milvus-Backup is a tool that allows users to backup and restore Milvus data.
 title: Milvus Backup
 ---
-
 <h1 id="Milvus-Backup" class="common-anchor-header">Milvus Backup<button data-href="#Milvus-Backup" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

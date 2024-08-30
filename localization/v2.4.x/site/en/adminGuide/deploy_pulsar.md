@@ -1,10 +1,9 @@
 ---
 id: deploy_pulsar.md
 title: Configure Message Storage with Docker Compose or Helm
-related_key: Pulsar, storage
+related_key: 'Pulsar, storage'
 summary: Learn how to configure message storage with Docker Compose or Helm.
 ---
-
 <h1 id="Configure-Message-Storage-with-Docker-Compose-or-Helm" class="common-anchor-header">Configure Message Storage with Docker Compose or Helm<button data-href="#Configure-Message-Storage-with-Docker-Compose-or-Helm" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

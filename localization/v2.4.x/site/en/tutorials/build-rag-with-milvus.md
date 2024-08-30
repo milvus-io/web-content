@@ -3,7 +3,6 @@ id: build-rag-with-milvus.md
 summary: build rag with milvus
 title: Build RAG with Milvus
 ---
-
 <h1 id="Build-RAG-with-Milvus" class="common-anchor-header">Build RAG with Milvus<button data-href="#Build-RAG-with-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

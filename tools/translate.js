@@ -21,7 +21,7 @@ const VERSIONS = [
 ];
 const sourceFilePath = "site/en";
 const sourceLang = "en";
-const targetLangs = ["zh", "ja", "ko", "fr", "de", "it", "pt", "es"];
+const targetLangs = ["en"];
 // const targetLangs = ["en", "zh", "ja", "ko", "fr", "de", "it", "pt", "es"];
 const cacheFile = "./tools/cache.json";
 let total = 0;

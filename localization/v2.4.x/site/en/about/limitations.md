@@ -4,7 +4,6 @@ title: Milvus Limits
 related_key: Limitations
 summary: Learn about the limits while using Milvus.
 ---
-
 <h1 id="Milvus-Limits" class="common-anchor-header">Milvus Limits<button data-href="#Milvus-Limits" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

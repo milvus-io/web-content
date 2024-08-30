@@ -1,10 +1,9 @@
 ---
 id: object_storage_operator.md
 title: Configure Object Storage with Milvus Operator
-related_key: minio, s3, storage, etcd, pulsar
+related_key: 'minio, s3, storage, etcd, pulsar'
 summary: Learn how to configure object storage with Milvus Operator.
 ---
-
 <h1 id="Configure-Object-Storage-with-Milvus-Operator" class="common-anchor-header">Configure Object Storage with Milvus Operator<button data-href="#Configure-Object-Storage-with-Milvus-Operator" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

@@ -4,7 +4,6 @@ related_key: configure
 group: system_configuration.md
 summary: Learn how to configure queryCoord for Milvus.
 ---
-
 <h1 id="queryCoord-related-Configurations" class="common-anchor-header">queryCoord-related Configurations<button data-href="#queryCoord-related-Configurations" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

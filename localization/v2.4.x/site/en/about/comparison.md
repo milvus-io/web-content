@@ -3,7 +3,6 @@ id: comparison.md
 title: Comparison
 summary: This article compares Milvus with other vector search solutions.
 ---
-
 <h1 id="Comparing-Milvus-with-Alternatives" class="common-anchor-header">Comparing Milvus with Alternatives<button data-href="#Comparing-Milvus-with-Alternatives" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

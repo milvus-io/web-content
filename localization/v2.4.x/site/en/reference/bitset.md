@@ -3,7 +3,6 @@ id: bitset.md
 summary: Learn about bitsets in Milvus.
 title: Bitset
 ---
-
 <h1 id="Bitset" class="common-anchor-header">Bitset<button data-href="#Bitset" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

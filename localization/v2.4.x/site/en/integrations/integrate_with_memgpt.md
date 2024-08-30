@@ -1,9 +1,11 @@
 ---
 id: integrate_with_memgpt.md
-summary: MemGPT makes it easy to build and deploy stateful LLM agents. With Milvus integration, you can build agents with connections to external data sources (RAG).
+summary: >-
+  MemGPT makes it easy to build and deploy stateful LLM agents. With Milvus
+  integration, you can build agents with connections to external data sources
+  (RAG).
 title: MemGPT with Milvus Integration
 ---
-
 <h1 id="MemGPT-with-Milvus-Integration" class="common-anchor-header">MemGPT with Milvus Integration<button data-href="#MemGPT-with-Milvus-Integration" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

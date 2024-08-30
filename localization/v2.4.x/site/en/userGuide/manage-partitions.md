@@ -2,7 +2,6 @@
 id: manage-partitions.md
 title: Manage Partitions
 ---
-
 <h1 id="Manage-Partitions" class="common-anchor-header">Manage Partitions<button data-href="#Manage-Partitions" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

@@ -4,7 +4,6 @@ order: 1
 title: Import Data
 summary: This page demonstrates the procedure to import the prepared data.
 ---
-
 <h1 id="Import-data" class="common-anchor-header">Import data<button data-href="#Import-data" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

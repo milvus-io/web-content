@@ -3,7 +3,6 @@ id: knowhere.md
 summary: Learn about Knowhere in Milvus.
 title: Knowhere
 ---
-
 <h1 id="Knowhere" class="common-anchor-header">Knowhere<button data-href="#Knowhere" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

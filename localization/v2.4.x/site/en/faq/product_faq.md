@@ -1,9 +1,10 @@
 ---
 id: product_faq.md
-summary: Find answers to frequently asked questions about the world's most advanced vector database.
+summary: >-
+  Find answers to frequently asked questions about the world's most advanced
+  vector database.
 title: Product FAQ
 ---
-
 <h1 id="Product-FAQ" class="common-anchor-header">Product FAQ<button data-href="#Product-FAQ" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

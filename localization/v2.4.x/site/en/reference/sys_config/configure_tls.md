@@ -4,7 +4,6 @@ related_key: configure
 group: system_configuration.md
 summary: Learn how to configure tls for Milvus.
 ---
-
 <h1 id="tls-related-Configurations" class="common-anchor-header">tls-related Configurations<button data-href="#tls-related-Configurations" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

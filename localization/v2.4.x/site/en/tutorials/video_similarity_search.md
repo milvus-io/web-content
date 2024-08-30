@@ -3,7 +3,6 @@ id: video_similarity_search.md
 summary: Build a video similarity search system with Milvus.
 title: Video Similarity Search
 ---
-
 <h1 id="Video-Similarity-Search" class="common-anchor-header">Video Similarity Search<button data-href="#Video-Similarity-Search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

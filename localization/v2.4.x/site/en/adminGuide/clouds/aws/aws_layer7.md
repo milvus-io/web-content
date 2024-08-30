@@ -4,7 +4,6 @@ title: Set up a Layer-7 Load Balancer for Milvus on AWS
 related_key: cluster
 summary: Learn how to deploy a Milvus cluster behind a Layer-7 load balancer on AWS.
 ---
-
 <h1 id="Set-up-a-Layer-7-Load-Balancer-for-Milvus-on-AWS" class="common-anchor-header">Set up a Layer-7 Load Balancer for Milvus on AWS<button data-href="#Set-up-a-Layer-7-Load-Balancer-for-Milvus-on-AWS" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

@@ -1,9 +1,10 @@
 ---
 id: reranking.md
-summary: This topic covers the reranking process, explaining its significance and implementation of two reranking methods.
+summary: >-
+  This topic covers the reranking process, explaining its significance and
+  implementation of two reranking methods.
 title: Reranking
 ---
-
 <h1 id="Reranking" class="common-anchor-header">Reranking<button data-href="#Reranking" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

@@ -1,10 +1,11 @@
 ---
 id: index-scalar-fields.md
 order: 2
-summary: This guide will walk you through creating and configuring scalar indexes for fields such as integers, strings, etc.
+summary: >-
+  This guide will walk you through creating and configuring scalar indexes for
+  fields such as integers, strings, etc.
 title: Index Scalar Fields
 ---
-
 <h1 id="Index-Scalar-Fields" class="common-anchor-header">Index Scalar Fields<button data-href="#Index-Scalar-Fields" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

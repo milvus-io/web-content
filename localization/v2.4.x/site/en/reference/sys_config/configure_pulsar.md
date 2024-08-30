@@ -4,7 +4,6 @@ related_key: configure
 group: system_configuration.md
 summary: Learn how to configure pulsar for Milvus.
 ---
-
 <h1 id="pulsar-related-Configurations" class="common-anchor-header">pulsar-related Configurations<button data-href="#pulsar-related-Configurations" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

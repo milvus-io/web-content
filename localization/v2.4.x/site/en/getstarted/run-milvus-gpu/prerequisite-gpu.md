@@ -5,7 +5,6 @@ related_key: GPU
 summary: Learn the necessary preparations before installing Milvus with GPU.
 title: Requirements for Installing Milvus with GPU
 ---
-
 <h1 id="Requirements-for-Installing-Milvus-with-GPU" class="common-anchor-header">Requirements for Installing Milvus with GPU<button data-href="#Requirements-for-Installing-Milvus-with-GPU" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -146,4 +145,5 @@ title: Requirements for Installing Milvus with GPU
   ...
   nvidia.com/gpu:     4
   ...
-  ```<button class="copy-code-btn"></button></code></pre>
+  ```  
+<button class="copy-code-btn"></button></code></pre>

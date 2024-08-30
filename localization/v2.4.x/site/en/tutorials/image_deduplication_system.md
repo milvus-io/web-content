@@ -3,7 +3,6 @@ id: image_deduplication_system.md
 summary: Build an image deduplication system with Milvus.
 title: Image Deduplication
 ---
-
 <h1 id="Image-Deduplication" class="common-anchor-header">Image Deduplication<button data-href="#Image-Deduplication" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

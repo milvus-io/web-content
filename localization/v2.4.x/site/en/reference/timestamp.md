@@ -1,9 +1,10 @@
 ---
 id: timestamp.md
 title: Timestamp in Milvus
-summary: Learn about the concept of timestamp and the four main timestamp-related parameters in the Milvus vector database.
+summary: >-
+  Learn about the concept of timestamp and the four main timestamp-related
+  parameters in the Milvus vector database.
 ---
-
 <h1 id="Timestamp" class="common-anchor-header">Timestamp<button data-href="#Timestamp" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

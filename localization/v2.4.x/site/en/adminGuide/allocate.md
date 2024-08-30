@@ -3,7 +3,6 @@ id: allocate.md
 title: Allocate Resources to Milvus on Kubernetes
 summary: Learn how to allocate resources to Milvus on Kubernetes.
 ---
-
 <h1 id="Allocate-Resources-on-Kubernetes" class="common-anchor-header">Allocate Resources on Kubernetes<button data-href="#Allocate-Resources-on-Kubernetes" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

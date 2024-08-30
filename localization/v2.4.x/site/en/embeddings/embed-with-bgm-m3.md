@@ -1,10 +1,11 @@
 ---
 id: embed-with-bgm-m3.md
 order: 4
-summary: BGE-M3 is named for its capabilities in Multi-Linguality, Multi-Functionality, and Multi-Granularity.
+summary: >-
+  BGE-M3 is named for its capabilities in Multi-Linguality, Multi-Functionality,
+  and Multi-Granularity.
 title: BGE M3
 ---
-
 <h1 id="BGE-M3" class="common-anchor-header">BGE M3<button data-href="#BGE-M3" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

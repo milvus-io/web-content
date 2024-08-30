@@ -1,10 +1,11 @@
 ---
 id: embed-with-cohere.md
 order: 9
-summary: This article describes how to use the CohereEmbeddingFunction to encode documents and queries using the Cohere embedding model.
+summary: >-
+  This article describes how to use the CohereEmbeddingFunction to encode
+  documents and queries using the Cohere embedding model.
 title: Embed Cohere
 ---
-
 <h1 id="Cohere" class="common-anchor-header">Cohere<button data-href="#Cohere" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

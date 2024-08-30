@@ -3,7 +3,6 @@ id: multimodal_rag_with_milvus.md
 summary: Multimodal RAG with Milvus
 title: Multimodal RAG with Milvus
 ---
-
 <h1 id="Multimodal-RAG-with-Milvus" class="common-anchor-header">Multimodal RAG with Milvus<button data-href="#Multimodal-RAG-with-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

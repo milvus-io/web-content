@@ -1,9 +1,10 @@
 ---
 id: integrate_with_haystack.md
-summary: This guide demonstrates how to build a Retrieval-Augmented Generation (RAG) system using Haystack and Milvus.
+summary: >-
+  This guide demonstrates how to build a Retrieval-Augmented Generation (RAG)
+  system using Haystack and Milvus.
 title: Retrieval-Augmented Generation (RAG) with Milvus and Haystack
 ---
-
 <h1 id="Retrieval-Augmented-Generation-RAG-with-Milvus-and-Haystack" class="common-anchor-header">Retrieval-Augmented Generation (RAG) with Milvus and Haystack<button data-href="#Retrieval-Augmented-Generation-RAG-with-Milvus-and-Haystack" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

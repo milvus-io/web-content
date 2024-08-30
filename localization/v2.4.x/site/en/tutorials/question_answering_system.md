@@ -3,7 +3,6 @@ id: question_answering_system.md
 summary: Build a question answering system with Milvus.
 title: Question Answering System
 ---
-
 <h1 id="Question-Answering-System" class="common-anchor-header">Question Answering System<button data-href="#Question-Answering-System" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

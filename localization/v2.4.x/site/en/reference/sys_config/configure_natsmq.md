@@ -4,7 +4,6 @@ related_key: configure
 group: system_configuration.md
 summary: Learn how to configure natsmq for Milvus.
 ---
-
 <h1 id="natsmq-related-Configurations" class="common-anchor-header">natsmq-related Configurations<button data-href="#natsmq-related-Configurations" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

@@ -1,9 +1,10 @@
 ---
 id: integrate_with_ragas.md
-summary: This guide demonstrates how to use Ragas to evaluate a Retrieval-Augmented Generation (RAG) pipeline built upon Milvus.
+summary: >-
+  This guide demonstrates how to use Ragas to evaluate a Retrieval-Augmented
+  Generation (RAG) pipeline built upon Milvus.
 title: Evaluation with Ragas
 ---
-
 <h1 id="Evaluation-with-Ragas" class="common-anchor-header">Evaluation with Ragas<button data-href="#Evaluation-with-Ragas" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -357,4 +358,5 @@ result
 
 
 
-{'answer_relevancy': 0.9445, 'faithfulness': 1.0000, 'context_recall': 1.0000, 'context_precision': 1.0000}</code></pre>
+{'answer_relevancy': 0.9445, 'faithfulness': 1.0000, 'context_recall': 1.0000, 'context_precision': 1.0000}
+</code></pre>

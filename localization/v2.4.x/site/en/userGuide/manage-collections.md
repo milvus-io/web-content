@@ -2,7 +2,6 @@
 id: manage-collections.md
 title: Manage Collections
 ---
-
 <h1 id="Manage-Collections" class="common-anchor-header">Manage Collections<button data-href="#Manage-Collections" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

@@ -1,10 +1,11 @@
 ---
 id: get-and-scalar-query.md
 order: 3
-summary: This guide demonstrates how to get entities by ID and conduct scalar filtering.
+summary: >-
+  This guide demonstrates how to get entities by ID and conduct scalar
+  filtering.
 title: Get & Scalar Query
 ---
-
 <h1 id="Get--Scalar-Query" class="common-anchor-header">Get &amp; Scalar Query<button data-href="#Get--Scalar-Query" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

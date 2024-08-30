@@ -1,9 +1,10 @@
 ---
 id: cli_overview.md
-summary: Milvus Command-Line Interface (CLI) is a command-line tool that supports database connection, data operations, and import and export of data.
+summary: >-
+  Milvus Command-Line Interface (CLI) is a command-line tool that supports
+  database connection, data operations, and import and export of data.
 title: Milvus Command-Line Interface
 ---
-
 <h1 id="Milvus-Command-Line-Interface" class="common-anchor-header">Milvus Command-Line Interface<button data-href="#Milvus-Command-Line-Interface" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

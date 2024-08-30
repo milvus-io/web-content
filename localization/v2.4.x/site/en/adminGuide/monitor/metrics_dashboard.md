@@ -1,9 +1,10 @@
 ---
 id: metrics_dashboard.md
 title: Milvus Metrics Dashboard
-summary: This topic introduces the monitoring metrics displayed in the Milvus Dashboard.
+summary: >-
+  This topic introduces the monitoring metrics displayed in the Milvus
+  Dashboard.
 ---
-
 <h1 id="Milvus-Metrics-Dashboard" class="common-anchor-header">Milvus Metrics Dashboard<button data-href="#Milvus-Metrics-Dashboard" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

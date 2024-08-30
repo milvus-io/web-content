@@ -1,9 +1,10 @@
 ---
 id: integrate_with_vanna.md
-summary: This guide demonstrates how to use Vanna to generate and execute SQL queries based on your data stored in a database.
+summary: >-
+  This guide demonstrates how to use Vanna to generate and execute SQL queries
+  based on your data stored in a database.
 title: Write SQL with Vanna and Milvus
 ---
-
 <h1 id="Write-SQL-with-Vanna-and-Milvus" class="common-anchor-header">Write SQL with Vanna and Milvus<button data-href="#Write-SQL-with-Vanna-and-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
