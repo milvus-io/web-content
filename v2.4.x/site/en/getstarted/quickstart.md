@@ -222,7 +222,7 @@ In addition to vector search, you can also perform other types of searches:
 
 ### Query
 
-A query() is an operation that retrieves all entities matching a cretria, such as a [filter expression](https://milvus.io/docs/boolean.md) or matching some ids.
+A query() is an operation that retrieves all entities matching a criteria, such as a [filter expression](https://milvus.io/docs/boolean.md) or matching some ids.
 
 For example, retrieving all entities whose scalar field has a particular value:
 
