@@ -1,0 +1,1454 @@
+[
+  {
+    "label": "About Milvus",
+    "id": "about",
+    "isMenu": true,
+    "order": 0,
+    "children": [
+      {
+        "label": "What is Milvus",
+        "id": "overview.md",
+        "order": 0,
+        "children": []
+      },
+      {
+        "label": "Milvus Adopters",
+        "id": "milvus_adopters.md",
+        "order": 1,
+        "children": []
+      },
+      {
+        "label": "Milvus Roadmap",
+        "id": "roadmap.md",
+        "order": 2,
+        "children": []
+      },
+      {
+        "label": "Releases",
+        "id": "release_notes.md",
+        "order": 3,
+        "children": []
+      },
+      {
+        "label": "Benchmarks",
+        "id": "benchmark.md",
+        "order": 4,
+        "children": []
+      },
+      {
+        "label": "Comparison",
+        "id": "comparison.md",
+        "order": 5,
+        "children": []
+      }
+    ]
+  },
+  {
+    "label": "Get Started",
+    "id": "getstarted",
+    "isMenu": true,
+    "order": 1,
+    "children": [
+      {
+        "label": "Quickstart",
+        "id": "quickstart.md",
+        "order": 0,
+        "children": []
+      },
+      {
+        "label": "Install Milvus",
+        "id": "install_milvus",
+        "order": 1,
+        "isMenu": true,
+        "children": [
+          {
+            "label": "Overview",
+            "id": "install-overview.md",
+            "order": 0,
+            "children": []
+          },
+          {
+            "label": "Run Milvus Lite",
+            "id": "milvus_lite.md",
+            "order": 1,
+            "children": []
+          },
+          {
+            "label": "Run Milvus Standalone",
+            "id": "run_milvus_docker",
+            "order": 2,
+            "isMenu": true,
+            "children": [
+              {
+                "label": "Requirements",
+                "id": "prerequisite-docker.md",
+                "order": 0,
+                "children": []
+              },
+              {
+                "label": "Docker",
+                "id": "install_standalone-docker.md",
+                "order": 1,
+                "children": []
+              },
+              {
+                "label": "Docker Compose",
+                "id": "install_standalone-docker-compose.md",
+                "order": 2,
+                "children": []
+              }
+            ]
+          },
+          {
+            "label": "Run Milvus Distributed",
+            "id": "run_milvus_k8s",
+            "order": 3,
+            "isMenu": true,
+            "children": [
+              {
+                "label": "Requirements",
+                "id": "prerequisite-helm.md",
+                "order": 0,
+                "children": []
+              },
+              {
+                "label": "Milvus Operator",
+                "id": "install_cluster-milvusoperator.md",
+                "order": 1,
+                "children": []
+              },
+              {
+                "label": "Helm Chart",
+                "id": "install_cluster-helm.md",
+                "order": 2,
+                "children": []
+              }
+            ]
+          },
+          {
+            "label": "Run Milvus with GPU",
+            "id": "run_milvus_gpu",
+            "order": 4,
+            "isMenu": true,
+            "children": [
+              {
+                "label": "Requirements",
+                "id": "prerequisite-gpu.md",
+                "order": 0,
+                "children": []
+              },
+              {
+                "label": "Helm Chart",
+                "id": "install_cluster-helm-gpu.md",
+                "order": 1,
+                "children": []
+              },
+              {
+                "label": "Docker Compose",
+                "id": "install_standalone-docker-compose-gpu.md",
+                "order": 2,
+                "children": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "label": "Install SDKs",
+        "id": "install_sdks",
+        "order": 2,
+        "children": [
+          {
+            "label": "PyMilvus",
+            "id": "install-pymilvus.md",
+            "order": 0,
+            "children": []
+          },
+          {
+            "label": "Java SDK",
+            "id": "install-java.md",
+            "order": 1,
+            "children": []
+          },
+          {
+            "label": "Go SDK",
+            "id": "install-go.md",
+            "order": 2,
+            "children": []
+          },
+          {
+            "label": "Node.js SDK",
+            "id": "install-node.md",
+            "order": 3,
+            "children": []
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "label": "Concepts",
+    "id": "concepts",
+    "isMenu": true,
+    "order": 2,
+    "children": [
+      {
+        "label": "Architecture",
+        "id": "architecture",
+        "order": 0,
+        "isMenu": true,
+        "children": [
+          {
+            "label": "Overview",
+            "id": "architecture_overview.md",
+            "order": 0,
+            "children": []
+          },
+          {
+            "label": "Storage/Computing",
+            "id": "four_layers.md",
+            "order": 1,
+            "children": []
+          },
+          {
+            "label": "Main Components",
+            "id": "main_components.md",
+            "order": 2,
+            "children": []
+          },
+          {
+            "label": "Data Processing",
+            "id": "data_processing.md",
+            "order": 3,
+            "children": []
+          },
+          {
+            "label": "Knowhere",
+            "id": "knowhere.md",
+            "order": 5,
+            "children": []
+          }
+        ]
+      },
+      {
+        "label": "Bitset",
+        "id": "bitset.md",
+        "order": 1,
+        "children": []
+      },
+      {
+        "label": "Consistency",
+        "id": "consistency.md",
+        "order": 2,
+        "children": []
+      },
+      {
+        "label": "Multi-tenancy",
+        "id": "multi_tenancy.md",
+        "order": 3,
+        "children": []
+      },
+      {
+        "label": "Timestamp",
+        "id": "timestamp.md",
+        "order": 4,
+        "children": []
+      },
+      {
+        "label": "Similarity Metrics",
+        "id": "metric.md",
+        "order": 5,
+        "children": []
+      },
+      {
+        "label": "Time Synchronization",
+        "id": "time_sync.md",
+        "order": 6,
+        "children": []
+      },
+      {
+        "label": "Vector Index",
+        "id": "vector_index",
+        "order": 7,
+        "isMenu": true,
+        "children": [
+          {
+            "label": "In-memory Index",
+            "id": "index.md",
+            "order": 0,
+            "children": []
+          },
+          {
+            "label": "On-disk Index",
+            "id": "disk_index.md",
+            "order": 1,
+            "children": []
+          },
+          {
+            "label": "GPU Index",
+            "id": "gpu_index.md",
+            "order": 2,
+            "children": []
+          }
+        ]
+      },
+      {
+        "label": "Scalar Index",
+        "id": "scalar_index.md",
+        "order": 8,
+        "children": []
+      },
+      {
+        "label": "Reranking",
+        "id": "reranking.md",
+        "order": 9,
+        "children": []
+      },
+      {
+        "label": "Users and Roles",
+        "id": "users_and_roles.md",
+        "order": 10,
+        "children": []
+      },
+      {
+        "label": "In-memory Replica",
+        "id": "replica.md",
+        "order": 11,
+        "children": []
+      },
+      {
+        "label": "Terminology",
+        "id": "glossary.md",
+        "order": 12,
+        "children": []
+      }
+    ]
+  },
+  {
+    "label": "User Guide",
+    "id": "userguide",
+    "isMenu": true,
+    "order": 3,
+    "children": [
+      {
+        "label": "Manage Databases",
+        "id": "manage_databases.md",
+        "order": 0,
+        "children": []
+      },
+      {
+        "label": "Manage Schema",
+        "id": "schema.md",
+        "order": 1,
+        "children": []
+      },
+      {
+        "label": "Manage Collections",
+        "id": "manage-collections.md",
+        "order": 2,
+        "children": []
+      },
+      {
+        "label": "Manage Indexes",
+        "id": "manage_indexes",
+        "order": 3,
+        "isMenu": true,
+        "children": [
+          {
+            "label": "Index Vector Fields",
+            "id": "index-vector-fields.md",
+            "order": 0,
+            "children": []
+          },
+          {
+            "label": "Index Scalar Fields",
+            "id": "index-scalar-fields.md",
+            "order": 1,
+            "children": []
+          },
+          {
+            "label": "Index with GPU",
+            "id": "index-with-gpu.md",
+            "order": 2,
+            "children": []
+          }
+        ]
+      },
+      {
+        "label": "Manage Partitions",
+        "id": "manage-partitions.md",
+        "order": 4,
+        "children": []
+      },
+      {
+        "label": "Insert, Upsert & Delete",
+        "id": "insert-update-delete.md",
+        "order": 5,
+        "children": []
+      },
+      {
+        "label": "Data Import",
+        "id": "data_import",
+        "order": 6,
+        "isMenu": true,
+        "children": [
+          {
+            "label": "Prepare Source Data",
+            "id": "prepare-source-data.md",
+            "order": 0,
+            "children": []
+          },
+          {
+            "label": "Import Data",
+            "id": "import-data.md",
+            "order": 1,
+            "children": []
+          }
+        ]
+      },
+      {
+        "label": "Search, Query & Get",
+        "id": "search_query_get",
+        "order": 7,
+        "isMenu": true,
+        "children": [
+          {
+            "label": "Single-Vector Search",
+            "id": "single-vector-search.md",
+            "order": 0,
+            "children": []
+          },
+          {
+            "label": "Hybrid Search",
+            "id": "multi-vector-search.md",
+            "order": 1,
+            "children": []
+          },
+          {
+            "label": "Get & Scalar Query",
+            "id": "get-and-scalar-query.md",
+            "order": 2,
+            "children": []
+          },
+          {
+            "label": "With Iterators",
+            "id": "with-iterators.md",
+            "order": 3,
+            "children": []
+          }
+        ]
+      },
+      {
+        "label": "Advanced Features",
+        "id": "advanced_features",
+        "order": 8,
+        "isMenu": true,
+        "children": [
+          {
+            "label": "Dynamic Field",
+            "id": "enable-dynamic-field.md",
+            "order": 0,
+            "children": []
+          },
+          {
+            "label": "Partition Key",
+            "id": "use-partition-key.md",
+            "order": 1,
+            "children": []
+          },
+          {
+            "label": "JSON Field",
+            "id": "use-json-fields.md",
+            "order": 2,
+            "children": []
+          },
+          {
+            "label": "Array Field",
+            "id": "array_data_type.md",
+            "order": 3,
+            "children": []
+          },
+          {
+            "label": "Sparse Vector",
+            "id": "sparse_vector.md",
+            "order": 4,
+            "children": []
+          },
+          {
+            "label": "Scalar Filtering Rules",
+            "id": "boolean.md",
+            "order": 5,
+            "children": []
+          },
+          {
+            "label": "MMap Storage",
+            "id": "mmap.md",
+            "order": 6,
+            "children": []
+          },
+          {
+            "label": "Manage Resource Groups",
+            "id": "resource_group.md",
+            "order": 7,
+            "children": []
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "label": "Models",
+    "id": "models",
+    "isMenu": true,
+    "order": 4,
+    "children": [
+      {
+        "label": "Embeddings",
+        "id": "embeddings",
+        "order": 0,
+        "isMenu": true,
+        "children": [
+          {
+            "label": "Overview",
+            "id": "embeddings.md",
+            "order": 0,
+            "children": []
+          },
+          {
+            "label": "OpenAI",
+            "id": "embed-with-openai.md",
+            "order": 1,
+            "children": []
+          },
+          {
+            "label": "Sentence Transformers",
+            "id": "embed-with-sentence-transform.md",
+            "order": 2,
+            "children": []
+          },
+          {
+            "label": "BGE M3",
+            "id": "embed-with-bgm-m3.md",
+            "order": 3,
+            "children": []
+          },
+          {
+            "label": "BM25",
+            "id": "embed-with-bm25.md",
+            "order": 4,
+            "children": []
+          },
+          {
+            "label": "SPLADE",
+            "id": "embed-with-splade.md",
+            "order": 5,
+            "children": []
+          },
+          {
+            "label": "Voyage",
+            "id": "embed-with-voyage.md",
+            "order": 6,
+            "children": []
+          },
+          {
+            "label": "Jina AI",
+            "id": "embed-with-jina.md",
+            "order": 7,
+            "children": []
+          },
+          {
+            "label": "Cohere",
+            "id": "embed-with-cohere.md",
+            "order": 8,
+            "children": []
+          }
+        ]
+      },
+      {
+        "label": "Rerankers",
+        "id": "rerankers",
+        "order": 1,
+        "isMenu": true,
+        "children": [
+          {
+            "label": "Overview",
+            "id": "rerankers-overview.md",
+            "order": 0,
+            "children": []
+          },
+          {
+            "label": "BGE",
+            "id": "rerankers-bge.md",
+            "order": 1,
+            "children": []
+          },
+          {
+            "label": "Cohere",
+            "id": "rerankers-cohere.md",
+            "order": 2,
+            "children": []
+          },
+          {
+            "label": "Cross Encoder",
+            "id": "rerankers-cross-encoder.md",
+            "order": 3,
+            "children": []
+          },
+          {
+            "label": "Voyage",
+            "id": "rerankers-voyage.md",
+            "order": 4,
+            "children": []
+          },
+          {
+            "label": "Jina AI",
+            "id": "rerankers-jina.md",
+            "order": 5,
+            "children": []
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "label": "Milvus Migration",
+    "id": "milvus_migration",
+    "isMenu": true,
+    "order": 5,
+    "children": [
+      {
+        "label": "Overview",
+        "id": "migrate_overview.md",
+        "order": 0,
+        "children": []
+      },
+      {
+        "label": "Install Migration Tool",
+        "id": "milvusdm_install.md",
+        "order": 1,
+        "children": []
+      },
+      {
+        "label": "From Elasticsearch",
+        "id": "es2m.md",
+        "order": 2,
+        "children": []
+      },
+      {
+        "label": "From Faiss",
+        "id": "f2m.md",
+        "order": 3,
+        "children": []
+      },
+      {
+        "label": "From Milvus 1.x",
+        "id": "m2m.md",
+        "order": 4,
+        "children": []
+      },
+      {
+        "label": "From Milvus 2.3.x",
+        "id": "from-m2x.md",
+        "order": 5,
+        "children": []
+      }
+    ]
+  },
+  {
+    "label": "Administration Guide",
+    "id": "admin_guide",
+    "isMenu": true,
+    "order": 9,
+    "children": [
+      {
+        "label": "Deployment",
+        "id": "deployment",
+        "order": 0,
+        "isMenu": true,
+        "children": [
+          {
+            "label": "On Premises",
+            "id": "on_premises",
+            "order": 0,
+            "isMenu": true,
+            "children": [
+              {
+                "label": "With Docker",
+                "id": "configure-docker.md",
+                "order": 0,
+                "children": []
+              },
+              {
+                "label": "With Helm",
+                "id": "configure-helm.md",
+                "order": 1,
+                "children": []
+              },
+              {
+                "label": "With Milvus Operator",
+                "id": "configure_operator.md",
+                "order": 2,
+                "children": []
+              },
+              {
+                "label": "Allocate Resources",
+                "id": "allocate.md",
+                "order": 3,
+                "children": []
+              }
+            ]
+          },
+          {
+            "label": "On Clouds",
+            "id": "on_cloud",
+            "order": 1,
+            "isMenu": true,
+            "children": [
+              {
+                "label": "Deploy on AWS",
+                "id": "eks.md",
+                "order": 1,
+                "children": []
+              },
+              {
+                "label": "Deploy on GCP",
+                "id": "gcp.md",
+                "order": 2,
+                "children": []
+              },
+              {
+                "label": "Deploy on Azure",
+                "id": "azure.md",
+                "order": 3,
+                "children": []
+              },
+              {
+                "label": "Deploy on OpenShift",
+                "id": "openshift.md",
+                "order": 4,
+                "children": []
+              },
+              {
+                "label": "Layer-7 Load Balacing",
+                "id": "layer-7-lb",
+                "order": 5,
+                "isMenu": true,
+                "children": [
+                  {
+                    "label": "AWS",
+                    "id": "aws_layer7.md",
+                    "order": 1,
+                    "children": []
+                  },
+                  {
+                    "label": "GCP",
+                    "id": "gcp_layer7.md",
+                    "order": 2,
+                    "children": []
+                  },
+                  {
+                    "label": "Azure",
+                    "id": "ingress.md",
+                    "order": 3,
+                    "children": []
+                  }
+                ]
+              },
+              {
+                "label": "Cloud Storage",
+                "id": "cloud-storage",
+                "order": 6,
+                "isMenu": true,
+                "children": [
+                  {
+                    "label": "AWS",
+                    "id": "s3.md",
+                    "order": 1,
+                    "children": []
+                  },
+                  {
+                    "label": "GCP",
+                    "id": "gcs.md",
+                    "order": 2,
+                    "children": []
+                  },
+                  {
+                    "label": "Azure",
+                    "id": "abs.md",
+                    "order": 3,
+                    "children": []
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "label": "Configuration",
+        "id": "configuration",
+        "order": 1,
+        "isMenu": true,
+        "children": [
+          {
+            "label": "System Configurations",
+            "id": "system_configuration.md",
+            "order": 0,
+            "children": []
+          },
+          {
+            "label": "On the Fly",
+            "id": "dynamic_config.md",
+            "order": 1,
+            "children": []
+          },
+          {
+            "label": "Limit Collection Counts",
+            "id": "limit_collection_counts.md",
+            "order": 2,
+            "children": []
+          },
+          {
+            "label": "Configure Chunk Cache",
+            "id": "chunk_cache.md",
+            "order": 3,
+            "children": []
+          },
+          {
+            "label": "Coordinator HA",
+            "id": "coordinator_ha.md",
+            "order": 4,
+            "children": []
+          },
+          {
+            "label": "QueryNode Using Local Disk",
+            "id": "configure-querynode-localdisk.md",
+            "order": 5,
+            "children": []
+          }
+        ]
+      },
+      {
+        "label": "Manage Dependencies",
+        "id": "manage_dependencies",
+        "order": 2,
+        "isMenu": true,
+        "children": [
+          {
+            "label": "With Docker or Helm",
+            "id": "docker_helm_dependencies",
+            "order": 0,
+            "isMenu": true,
+            "children": [
+              {
+                "label": "Object Storage",
+                "id": "deploy_s3.md",
+                "order": 0,
+                "children": []
+              },
+              {
+                "label": "Meta Storage",
+                "id": "deploy_etcd.md",
+                "order": 1,
+                "children": []
+              },
+              {
+                "label": "Message Storage",
+                "id": "deploy_pulsar.md",
+                "order": 2,
+                "children": []
+              }
+            ]
+          },
+          {
+            "label": "With Milvus Operator",
+            "id": "milvus_operator_dependencies",
+            "order": 1,
+            "isMenu": true,
+            "children": [
+              {
+                "label": "Object Storage",
+                "id": "object_storage_operator.md",
+                "order": 0,
+                "children": []
+              },
+              {
+                "label": "Meta Storage",
+                "id": "meta_storage_operator.md",
+                "order": 1,
+                "children": []
+              },
+              {
+                "label": "Message Storage",
+                "id": "message_storage_operator.md",
+                "order": 2,
+                "children": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "label": "Scaling",
+        "id": "scaling",
+        "order": 4,
+        "isMenu": true,
+        "children": [
+          {
+            "label": "Scale Cluster",
+            "id": "scaleout.md",
+            "order": 0,
+            "children": []
+          },
+          {
+            "label": "Scale Dependencies",
+            "id": "scale-dependencies.md",
+            "order": 1,
+            "children": []
+          }
+        ]
+      },
+      {
+        "label": "Upgrade",
+        "id": "upgrade_milvus",
+        "order": 7,
+        "children": [
+          {
+            "label": "Upgrade Milvus Cluster",
+            "id": "upgrade_milvus_cluster-operator.md",
+            "order": 0,
+            "children": []
+          },
+          {
+            "label": "Upgrade Milvus Standalone",
+            "id": "upgrade_milvus_standalone-operator.md",
+            "order": 1,
+            "children": []
+          }
+        ]
+      },
+      {
+        "label": "Monitoring, Alerts & Logs",
+        "id": "monitor_alert_log",
+        "order": 8,
+        "isMenu": true,
+        "children": [
+          {
+            "label": "Monitoring",
+            "id": "monitoring",
+            "order": 0,
+            "isMenu": true,
+            "children": [
+              {
+                "label": "Architecture",
+                "id": "monitor_overview.md",
+                "order": 0,
+                "children": []
+              },
+              {
+                "label": "Deploy Monitoring Services",
+                "id": "monitor.md",
+                "order": 1,
+                "children": []
+              },
+              {
+                "label": "Visualize Metrics",
+                "id": "visualize.md",
+                "order": 2,
+                "children": []
+              },
+              {
+                "label": "Milvus Metrics Dashboard",
+                "id": "metrics_dashboard.md",
+                "order": 3,
+                "children": []
+              }
+            ]
+          },
+          {
+            "label": "Alerts",
+            "id": "alerts",
+            "order": 1,
+            "isMenu": true,
+            "children": [
+              {
+                "label": "Create an Alert",
+                "id": "alert.md",
+                "order": 0,
+                "children": []
+              }
+            ]
+          },
+          {
+            "label": "Logs",
+            "id": "logs",
+            "order": 2,
+            "isMenu": true,
+            "children": [
+              {
+                "label": "Configure Grafana Loki",
+                "id": "configure_grafana_loki.md",
+                "order": 0,
+                "children": []
+              },
+              {
+                "label": "Configure Access Logs",
+                "id": "configure_access_logs.md",
+                "order": 1,
+                "children": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "label": "Security",
+        "id": "security",
+        "order": 9,
+        "isMenu": true,
+        "children": [
+          {
+            "label": "Enable Authentication",
+            "id": "authenticate.md",
+            "order": 0,
+            "children": []
+          },
+          {
+            "label": "Enable RBAC",
+            "id": "rbac.md",
+            "order": 1,
+            "isMenu": true,
+            "children": []
+          },
+          {
+            "label": "Encryption in Transit",
+            "id": "tls.md",
+            "order": 2,
+            "children": []
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "label": "Tools",
+    "id": "tools",
+    "isMenu": true,
+    "order": 6,
+    "children": [
+      {
+        "label": "Milvus CLI",
+        "id": "cli",
+        "order": 0,
+        "isMenu": true,
+        "children": [
+          {
+            "label": "Overview",
+            "id": "cli_overview.md",
+            "order": 0,
+            "children": []
+          },
+          {
+            "label": "Installation",
+            "id": "install_cli.md",
+            "order": 1,
+            "children": []
+          },
+          {
+            "label": "Commands",
+            "id": "cli_commands.md",
+            "order": 2,
+            "children": []
+          }
+        ]
+      },
+      {
+        "label": "Milvus Backup",
+        "id": "milvus_backup",
+        "order": 1,
+        "children": [
+          {
+            "label": "Overview",
+            "id": "milvus_backup_overview.md",
+            "order": 0,
+            "children": []
+          },
+          {
+            "label": "Commands",
+            "id": "milvus_backup_cli.md",
+            "order": 1,
+            "children": []
+          },
+          {
+            "label": "RESTful API",
+            "id": "milvus_backup_api.md",
+            "order": 2,
+            "children": []
+          }
+        ]
+      },
+      {
+        "label": "Milvus CDC",
+        "id": "milvus_cdc",
+        "order": 3,
+        "isMenu": true,
+        "children": [
+          {
+            "label": "Overview",
+            "id": "milvus-cdc-overview.md",
+            "order": 0,
+            "children": []
+          },
+          {
+            "label": "Deploy CDC Server",
+            "id": "deploy-cdc-server.md",
+            "order": 1,
+            "children": []
+          },
+          {
+            "label": "Manage CDC Tasks",
+            "id": "manage-cdc-tasks.md",
+            "order": 2,
+            "children": []
+          },
+          {
+            "label": "Monitoring",
+            "id": "cdc-monitoring.md",
+            "order": 3,
+            "children": []
+          }
+        ]
+      },
+      {
+        "label": "Attu(Milvus GUI)",
+        "id": "milvus_attu",
+        "order": 4,
+        "externalLink": "https://github.com/zilliztech/attu",
+        "children": []
+      },
+      {
+        "label": "Birdwatcher",
+        "id": "birdwatcher",
+        "order": 5,
+        "children": [
+          {
+            "label": "Overview",
+            "id": "birdwatcher_overview.md",
+            "order": 0,
+            "children": []
+          },
+          {
+            "label": "Install Guides",
+            "id": "birdwatcher_install_guides.md",
+            "order": 1,
+            "children": []
+          },
+          {
+            "label": "Usage Guides",
+            "id": "birdwatcher_usage_guides.md",
+            "order": 2,
+            "children": []
+          }
+        ]
+      },
+      {
+        "label": "Milvus Sizing Tool",
+        "id": "sizing",
+        "order": 6,
+        "externalLink": "https://milvus.io/tools/sizing/",
+        "children": []
+      },
+      {
+        "label": "Milvus Connectors",
+        "id": "milvus_connectors",
+        "order": 7,
+        "isMenu": true,
+        "children": [
+          {
+            "label": "Spark",
+            "id": "integrate_with_spark.md",
+            "order": 0,
+            "children": []
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "label": "Integrations",
+    "id": "integrations",
+    "isMenu": true,
+    "order": 8,
+    "children": [
+      {
+        "label": "OpenAI",
+        "id": "integrate_with_openai.md",
+        "order": 0,
+        "children": []
+      },
+      {
+        "label": "Cohere",
+        "id": "integrate_with_cohere.md",
+        "order": 1,
+        "children": []
+      },
+      {
+        "label": "HuggingFace",
+        "id": "integrate_with_hugging-face.md",
+        "order": 2,
+        "children": []
+      },
+      {
+        "label": "PyTorch",
+        "id": "integrate_with_pytorch.md",
+        "order": 3,
+        "children": []
+      },
+      {
+        "label": "SentenceTransformers",
+        "id": "integrate_with_sentencetransformers.md",
+        "order": 4,
+        "children": []
+      },
+      {
+        "label": "LlamaIndex",
+        "id": "integrate_with_llamaindex.md",
+        "order": 4,
+        "children": []
+      },
+      {
+        "label": "LangChain",
+        "id": "langchain",
+        "order": 6,
+        "children": [
+          {
+            "label": "Basic Usage",
+            "id": "basic_usage_langchain.md",
+            "order": 1,
+            "children": []
+          },
+          {
+            "label": "RAG with LangChain",
+            "id": "integrate_with_langchain.md",
+            "order": 2,
+            "children": []
+          },
+          {
+            "label": "Hybrid Search",
+            "id": "milvus_hybrid_search_retriever.md",
+            "order": 3,
+            "children": []
+          }
+        ]
+      },
+      {
+        "label": "HayStack",
+        "id": "integrate_with_haystack.md",
+        "order": 7,
+        "children": []
+      },
+      {
+        "label": "FiftyOne",
+        "id": "integrate_with_voxel51.md",
+        "order": 7,
+        "children": []
+      },
+      {
+        "label": "VoyageAI",
+        "id": "integrate_with_voyageai.md",
+        "order": 8,
+        "children": []
+      },
+      {
+        "label": "BentoML",
+        "id": "integrate_with_bentoml.md",
+        "order": 9,
+        "children": []
+      },
+      {
+        "label": "DSPy",
+        "id": "integrate_with_dspy.md",
+        "order": 10,
+        "children": []
+      },
+      {
+        "label": "Jina AI",
+        "id": "integrate_with_jina.md",
+        "order": 11,
+        "children": []
+      },
+      {
+        "label": "Snowflake",
+        "id": "integrate_with_snowpark.md",
+        "order": 12,
+        "children": []
+      },
+      {
+        "label": "WhyHow",
+        "id": "integrate_with_whyhow.md",
+        "order": 13,
+        "children": []
+      },
+      {
+        "label": "LangFuse",
+        "id": "integrate_with_langfuse.md",
+        "order": 14,
+        "children": []
+      },
+      {
+        "label": "Ragas",
+        "id": "integrate_with_ragas.md",
+        "order": 15,
+        "children": []
+      },
+      {
+        "label": "MemGPT",
+        "id": "integrate_with_memgpt.md",
+        "order": 16,
+        "children": []
+      },
+      {
+        "label": "FastGPT",
+        "id": "integrate_with_fastgpt.md",
+        "order": 17,
+        "children": []
+      },
+      {
+        "label": "Vanna",
+        "id": "integrate_with_vanna.md",
+        "order": 18,
+        "children": []
+      },
+      {
+        "label": "Camel",
+        "id": "integrate_with_camel.md",
+        "order": 19,
+        "children": []
+      },
+      {
+        "label": "Airbyte",
+        "id": "integrate_with_airbyte.md",
+        "order": 20,
+        "children": []
+      }
+    ]
+  },
+  {
+    "label": "Tutorials",
+    "id": "tutorials",
+    "isMenu": true,
+    "order": 7,
+    "children": [
+      {
+        "label": "Build RAG with Milvus",
+        "id": "build-rag-with-milvus.md",
+        "order": 0,
+        "children": []
+      },
+      {
+        "label": "Image Search with Milvus",
+        "id": "image_similarity_search.md",
+        "order": 1,
+        "children": []
+      },
+      {
+        "label": "Hybrid Search with Milvus",
+        "id": "hybrid_search_with_milvus.md",
+        "order": 3,
+        "children": []
+      },
+      {
+        "label": "Multimodal RAG",
+        "id": "multimodal_rag_with_milvus.md",
+        "order": 4,
+        "children": []
+      },
+      {
+        "label": "Question Answering System",
+        "id": "question_answering_system.md",
+        "order": 5,
+        "children": []
+      },
+      {
+        "label": "Recommender System",
+        "id": "recommendation_system.md",
+        "order": 6,
+        "children": []
+      },
+      {
+        "label": "Video Similarity Search",
+        "id": "video_similarity_search.md",
+        "order": 7,
+        "children": []
+      },
+      {
+        "label": "Audio Similarity Search",
+        "id": "audio_similarity_search.md",
+        "order": 8,
+        "children": []
+      },
+      {
+        "label": "DNA Sequence Classification",
+        "id": "dna_sequence_classification.md",
+        "order": 9,
+        "children": []
+      },
+      {
+        "label": "Text Search Engine",
+        "id": "text_search_engine.md",
+        "order": 10,
+        "children": []
+      },
+      {
+        "label": "Text to Image Search Engine",
+        "id": "text_image_search.md",
+        "order": 11,
+        "children": []
+      },
+      {
+        "label": "Image Deduplication System",
+        "id": "image_deduplication_system.md",
+        "order": 12,
+        "children": []
+      }
+    ]
+  },
+  {
+    "label": "FAQs",
+    "id": "faq",
+    "isMenu": true,
+    "order": 9,
+    "children": [
+      {
+        "label": "Performance FAQs",
+        "id": "performance_faq.md",
+        "order": 0,
+        "children": []
+      },
+      {
+        "label": "Product FAQs",
+        "id": "product_faq.md",
+        "order": 1,
+        "children": []
+      },
+      {
+        "label": "Operational FAQs",
+        "id": "operational_faq.md",
+        "order": 2,
+        "children": []
+      },
+      {
+        "label": "Milvus Limits",
+        "id": "limitations.md",
+        "order": 3,
+        "children": []
+      },
+      {
+        "label": "Troubleshooting",
+        "id": "troubleshooting.md",
+        "order": 4,
+        "children": []
+      }
+    ]
+  }
+]

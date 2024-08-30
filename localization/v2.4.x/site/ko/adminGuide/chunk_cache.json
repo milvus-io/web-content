@@ -1,0 +1,1 @@
+{"codeList":["queryNode:\n    cache:\n        warmup: async\n"],"headingContent":"","anchorList":[{"label":"청크 캐시 구성","href":"Configure-Chunk-Cache","type":1,"isActive":false},{"label":"배경","href":"Background","type":2,"isActive":false},{"label":"청크 캐시 구성","href":"Configure-Chunk-Cache","type":2,"isActive":false}]}

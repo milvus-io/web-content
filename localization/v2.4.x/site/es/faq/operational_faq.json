@@ -1,0 +1,1 @@
+{"codeList":["{\n  \"registry-mirrors\": [\"https://registry.docker-cn.com\"]\n}\n","$ lscpu | grep -e sse4_2 -e avx -e avx2 -e avx512\n","pip install pymilvus>=2.4.2\n"],"headingContent":"","anchorList":[{"label":"FAQ Operativas","href":"Operational-FAQ","type":1,"isActive":false}]}
