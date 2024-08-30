@@ -3,7 +3,6 @@ id: authenticate.md
 summary: Learn how to manage user authentication in Milvus.
 title: Authenticate User Access
 ---
-
 <h1 id="Authenticate-User-Access" class="common-anchor-header">Authenticate User Access<button data-href="#Authenticate-User-Access" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

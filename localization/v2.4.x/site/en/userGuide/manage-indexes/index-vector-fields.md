@@ -1,10 +1,11 @@
 ---
 id: index-vector-fields.md
 order: 1
-summary: This guide walks you through the basic operations on creating and managing indexes on vector fields in a collection.
+summary: >-
+  This guide walks you through the basic operations on creating and managing
+  indexes on vector fields in a collection.
 title: Index Vector Fields
 ---
-
 <h1 id="Index-Vector-Fields" class="common-anchor-header">Index Vector Fields<button data-href="#Index-Vector-Fields" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

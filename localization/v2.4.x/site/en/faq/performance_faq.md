@@ -1,9 +1,10 @@
 ---
 id: performance_faq.md
-summary: Find answers to frequently asked questions about search performance, performance enhancements, and other performance related issues.
+summary: >-
+  Find answers to frequently asked questions about search performance,
+  performance enhancements, and other performance related issues.
 title: Performance FAQ
 ---
-
 <h1 id="Performance-FAQ" class="common-anchor-header">Performance FAQ<button data-href="#Performance-FAQ" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

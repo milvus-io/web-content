@@ -1,10 +1,12 @@
 ---
 id: rerankers-cross-encoder.md
 order: 4
-summary: Milvus supports Cross Encoder reranker models through the `CrossEncoderRerankFunction` class. This functionality allows you to score the relevance of query-document pairs effectively.
+summary: >-
+  Milvus supports Cross Encoder reranker models through the
+  `CrossEncoderRerankFunction` class. This functionality allows you to score the
+  relevance of query-document pairs effectively.
 title: Cross Encoder
 ---
-
 <h1 id="Cross-Encoder" class="common-anchor-header">Cross Encoder<button data-href="#Cross-Encoder" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

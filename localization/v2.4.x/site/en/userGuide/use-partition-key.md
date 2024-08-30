@@ -2,7 +2,6 @@
 id: use-partition-key.md
 title: Use Partition Key
 ---
-
 <h1 id="Use-Partition-Key" class="common-anchor-header">Use Partition Key<button data-href="#Use-Partition-Key" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

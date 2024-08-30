@@ -2,7 +2,6 @@
 id: glossary.md
 title: Terminology
 ---
-
 <h1 id="Terminology" class="common-anchor-header">Terminology<button data-href="#Terminology" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

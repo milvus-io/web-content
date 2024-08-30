@@ -4,7 +4,6 @@ related_key: configure
 group: system_configuration.md
 summary: Learn how to configure log for Milvus.
 ---
-
 <h1 id="log-related-Configurations" class="common-anchor-header">log-related Configurations<button data-href="#log-related-Configurations" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

@@ -1,10 +1,11 @@
 ---
 id: scaleout.md
 related_key: scale Milvus cluster
-summary: Learn how to manually or automatically scale out and scale in a Milvus cluster.
+summary: >-
+  Learn how to manually or automatically scale out and scale in a Milvus
+  cluster.
 title: Scale a Milvus Cluster
 ---
-
 <h1 id="Scale-a-Milvus-Cluster" class="common-anchor-header">Scale a Milvus Cluster<button data-href="#Scale-a-Milvus-Cluster" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

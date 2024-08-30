@@ -4,7 +4,6 @@ order: 2
 summary: This guide provides a step-by-step process for deploying a Milvus-CDC server.
 title: Deploy CDC Server
 ---
-
 <h1 id="Deploy-CDC-Server" class="common-anchor-header">Deploy CDC Server<button data-href="#Deploy-CDC-Server" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

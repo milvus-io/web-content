@@ -3,7 +3,6 @@ id: operational_faq.md
 summary: Find answers to commonly asked questions about operations in Milvus.
 title: Operational FAQ
 ---
-
 <h1 id="Operational-FAQ" class="common-anchor-header">Operational FAQ<button data-href="#Operational-FAQ" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

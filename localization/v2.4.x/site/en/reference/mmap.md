@@ -3,7 +3,6 @@ id: mmap.md
 summary: MMap enables more data in a single node.
 title: MMap-enabled Data Storage
 ---
-
 <h1 id="MMap-enabled-Data-Storage" class="common-anchor-header">MMap-enabled Data Storage<button data-href="#MMap-enabled-Data-Storage" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

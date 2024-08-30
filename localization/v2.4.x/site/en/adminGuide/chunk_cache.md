@@ -2,7 +2,6 @@
 id: chunk_cache.md
 title: Configure Chunk Cache
 ---
-
 <h1 id="Configure-Chunk-Cache" class="common-anchor-header">Configure Chunk Cache<button data-href="#Configure-Chunk-Cache" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

@@ -4,7 +4,6 @@ related_key: configure
 group: system_configuration.md
 summary: Learn how to configure grpc for Milvus.
 ---
-
 <h1 id="grpc-related-Configurations" class="common-anchor-header">grpc-related Configurations<button data-href="#grpc-related-Configurations" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

@@ -3,7 +3,6 @@ id: four_layers.md
 summary: Storage/computing disaggregation structure in Milvus.
 title: Storage/Computing Disaggregation
 ---
-
 <h1 id="StorageComputing-Disaggregation" class="common-anchor-header">Storage/Computing Disaggregation<button data-href="#StorageComputing-Disaggregation" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

@@ -3,7 +3,6 @@ id: integrate_with_pytorch.md
 summary: This page discusses image search using Milvus
 title: Image Search with Milvus - Integration
 ---
-
 <h1 id="Image-Search-with-Milvus" class="common-anchor-header">Image Search with Milvus<button data-href="#Image-Search-with-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

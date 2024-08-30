@@ -1,9 +1,11 @@
 ---
 id: integrate_with_hugging-face.md
-summary: This tutorial shows how to build a question answering system using Hugging Face as the data loader & embedding generator for data processing and Milvus as the vector database for semantic search.
+summary: >-
+  This tutorial shows how to build a question answering system using Hugging
+  Face as the data loader & embedding generator for data processing and Milvus
+  as the vector database for semantic search.
 title: Question Answering Using Milvus and Hugging Face
 ---
-
 <h1 id="Question-Answering-Using-Milvus-and-Hugging-Face" class="common-anchor-header">Question Answering Using Milvus and Hugging Face<button data-href="#Question-Answering-Using-Milvus-and-Hugging-Face" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -238,4 +240,5 @@ search_results = milvus_client.search(
 Question: When did Massachusetts first mandate that children be educated in schools?
 {'answer': '1852', 'score': 0.9709997177124023, 'original question': 'In what year did Massachusetts first require children to be educated in schools?'}
 {'answer': 'several regional colleges and universities', 'score': 0.34164726734161377, 'original question': 'In 1890, who did the university decide to team up with?'}
-{'answer': '1962', 'score': 0.1931006908416748, 'original question': 'When were stromules discovered?'}</code></pre>
+{'answer': '1962', 'score': 0.1931006908416748, 'original question': 'When were stromules discovered?'}
+</code></pre>

@@ -2,7 +2,6 @@
 id: configure_access_logs.md
 title: Configure Access Logs
 ---
-
 <h1 id="Configure-Access-Logs" class="common-anchor-header">Configure Access Logs<button data-href="#Configure-Access-Logs" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

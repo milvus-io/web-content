@@ -1,10 +1,11 @@
 ---
 id: monitor_overview.md
 title: Monitor Overview
-related_key: monitor, alert
-summary: Learn how Prometheus and Grafana are used in Milvus for montoring and alerting services.
+related_key: 'monitor, alert'
+summary: >-
+  Learn how Prometheus and Grafana are used in Milvus for montoring and alerting
+  services.
 ---
-
 <h1 id="Milvus-monitoring-framework-overview" class="common-anchor-header">Milvus monitoring framework overview<button data-href="#Milvus-monitoring-framework-overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

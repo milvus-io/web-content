@@ -4,7 +4,6 @@ related_key: configure
 group: system_configuration.md
 summary: Learn how to configure gpu for Milvus.
 ---
-
 <h1 id="gpu-related-Configurations" class="common-anchor-header">gpu-related Configurations<button data-href="#gpu-related-Configurations" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

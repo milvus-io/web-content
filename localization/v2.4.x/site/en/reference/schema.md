@@ -3,7 +3,6 @@ id: schema.md
 summary: Learn how to define a schema in Milvus.
 title: Manage Schema
 ---
-
 <h1 id="Manage-Schema" class="common-anchor-header">Manage Schema<button data-href="#Manage-Schema" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

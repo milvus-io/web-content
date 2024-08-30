@@ -2,9 +2,10 @@
 id: prepare-source-data.md
 order: 0
 title: Prepare Source Data
-summary: This page discusses something you should consider before you start bulk-inserting data into your collection.
+summary: >-
+  This page discusses something you should consider before you start
+  bulk-inserting data into your collection.
 ---
-
 <h1 id="Prepare-Source-Data" class="common-anchor-header">Prepare Source Data<button data-href="#Prepare-Source-Data" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

@@ -3,7 +3,6 @@ id: tls.md
 title: Encryption in Transit
 summary: Learn how to enable TLS proxy in Milvus.
 ---
-
 <h1 id="Encryption-in-Transit" class="common-anchor-header">Encryption in Transit<button data-href="#Encryption-in-Transit" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

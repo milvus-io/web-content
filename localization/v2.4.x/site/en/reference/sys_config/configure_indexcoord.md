@@ -4,7 +4,6 @@ related_key: configure
 group: system_configuration.md
 summary: Learn how to configure indexCoord for Milvus.
 ---
-
 <h1 id="indexCoord-related-Configurations" class="common-anchor-header">indexCoord-related Configurations<button data-href="#indexCoord-related-Configurations" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

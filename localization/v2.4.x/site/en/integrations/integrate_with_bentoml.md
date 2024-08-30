@@ -1,9 +1,11 @@
 ---
 id: integrate_with_bentoml.md
-summary: This guide demonstrates how to use an open-source embedding model and large-language model on BentoCloud with Milvus vector database to build a Retrieval Augmented Generation (RAG) application. 
+summary: >-
+  This guide demonstrates how to use an open-source embedding model and
+  large-language model on BentoCloud with Milvus vector database to build a
+  Retrieval Augmented Generation (RAG) application.
 title: Retrieval-Augmented Generation (RAG) with Milvus and BentoML
 ---
-
 <h1 id="Retrieval-Augmented-Generation-RAG-with-Milvus-and-BentoML" class="common-anchor-header">Retrieval-Augmented Generation (RAG) with Milvus and BentoML<button data-href="#Retrieval-Augmented-Generation-RAG-with-Milvus-and-BentoML" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

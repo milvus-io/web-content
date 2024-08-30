@@ -1,10 +1,9 @@
 ---
 id: deploy_etcd.md
 title: Configure Meta Storage with Docker Compose or Helm
-related_key: S3, storage
+related_key: 'S3, storage'
 summary: Learn how to configure meta storage for Milvus with Docker Compose/Helm.
 ---
-
 <h1 id="Configure-Meta-Storage-with-Docker-Compose-or-Helm" class="common-anchor-header">Configure Meta Storage with Docker Compose or Helm<button data-href="#Configure-Meta-Storage-with-Docker-Compose-or-Helm" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

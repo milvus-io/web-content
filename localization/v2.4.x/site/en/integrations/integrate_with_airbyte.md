@@ -1,9 +1,13 @@
 ---
 id: integrate_with_airbyte.md
-summary: Airbyte is an open-source data movement infrastructure for building extract and load (EL) data pipelines. It is designed for versatility, scalability, and ease of use. Airbyte’s connector catalog comes “out-of-the-box” with over 350 pre-built connectors. These connectors can be used to start replicating data from a source to a destination in just a few minutes.
-title: "Airbyte: Open-Source Data Movement Infrastructure"
+summary: >-
+  Airbyte is an open-source data movement infrastructure for building extract
+  and load (EL) data pipelines. It is designed for versatility, scalability, and
+  ease of use. Airbyte’s connector catalog comes “out-of-the-box” with over 350
+  pre-built connectors. These connectors can be used to start replicating data
+  from a source to a destination in just a few minutes.
+title: 'Airbyte: Open-Source Data Movement Infrastructure'
 ---
-
 <h1 id="Airbyte-Open-Source-Data-Movement-Infrastructure" class="common-anchor-header">Airbyte: Open-Source Data Movement Infrastructure<button data-href="#Airbyte-Open-Source-Data-Movement-Infrastructure" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

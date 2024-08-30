@@ -4,7 +4,6 @@ related_key: disk_index
 summary: Disk index mechanism in Milvus.
 title: On-disk Index
 ---
-
 <h1 id="On-disk-Index" class="common-anchor-header">On-disk Index<button data-href="#On-disk-Index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

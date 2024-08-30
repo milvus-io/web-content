@@ -1,9 +1,10 @@
 ---
 id: integrate_with_whyhow.md
-summary: This guide demonstrates how to use whyhow.ai and Milvus Lite to conduct Rule-based Retrieval.  
+summary: >-
+  This guide demonstrates how to use whyhow.ai and Milvus Lite to conduct
+  Rule-based Retrieval.
 title: Integrate Milvus with WhyHow
 ---
-
 <h1 id="Integrate-Milvus-with-WhyHow" class="common-anchor-header">Integrate Milvus with WhyHow<button data-href="#Integrate-Milvus-with-WhyHow" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

@@ -3,7 +3,6 @@ id: dna_sequence_classification.md
 summary: Build a DNA sequence classification system with Milvus.
 title: DNA Sequence Classification
 ---
-
 <h1 id="DNA-Sequence-Classification" class="common-anchor-header">DNA Sequence Classification<button data-href="#DNA-Sequence-Classification" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

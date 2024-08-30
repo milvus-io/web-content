@@ -3,7 +3,6 @@ id: main_components.md
 summary: Learn about the main components in Milvus standalone and cluster.
 title: Main Components
 ---
-
 <h1 id="Main-Components" class="common-anchor-header">Main Components<button data-href="#Main-Components" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

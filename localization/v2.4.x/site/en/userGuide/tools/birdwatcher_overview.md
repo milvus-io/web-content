@@ -1,9 +1,10 @@
 ---
 id: birdwatcher_overview.md
-summary: Birdwatcher is a debug tool for Milvus 2.x. It connects to etcd and inspects the status of the Milvus system.
+summary: >-
+  Birdwatcher is a debug tool for Milvus 2.x. It connects to etcd and inspects
+  the status of the Milvus system.
 title: Birdwatcher
 ---
-
 <h1 id="Birdwatcher" class="common-anchor-header">Birdwatcher<button data-href="#Birdwatcher" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

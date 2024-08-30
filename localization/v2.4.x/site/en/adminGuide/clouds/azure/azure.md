@@ -4,7 +4,6 @@ title: Deploying Milvus on Microsoft Azure With Kubernetes
 related_key: cluster
 summary: Learn how to deploy a Milvus cluster on Azure.
 ---
-
 <h1 id="Deploy-Milvus-on-Azure-with-AKS" class="common-anchor-header">Deploy Milvus on Azure with AKS<button data-href="#Deploy-Milvus-on-Azure-with-AKS" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

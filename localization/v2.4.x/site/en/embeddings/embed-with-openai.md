@@ -4,7 +4,6 @@ order: 2
 summary: Milvus integrates with OpenAI's models via the OpenAIEmbeddingFunction class.
 title: OpenAI
 ---
-
 <h1 id="OpenAI" class="common-anchor-header">OpenAI<button data-href="#OpenAI" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

@@ -2,7 +2,6 @@
 id: scale-dependencies.md
 title: Scale Dependencies
 ---
-
 <h1 id="Scale-Milvus-Dependencies" class="common-anchor-header">Scale Milvus Dependencies<button data-href="#Scale-Milvus-Dependencies" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

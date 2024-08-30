@@ -3,7 +3,6 @@ id: integrate_with_spark.md
 summary: This page discusses the Spark-Milvus connector.
 title: Spark-Milvus Connector User Guide
 ---
-
 <h1 id="Spark-Milvus-Connector-User-Guide" class="common-anchor-header">Spark-Milvus Connector User Guide<button data-href="#Spark-Milvus-Connector-User-Guide" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

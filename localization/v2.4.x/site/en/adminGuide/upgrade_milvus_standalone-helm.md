@@ -7,7 +7,6 @@ related_key: upgrade Milvus Standalone
 summary: Learn how to upgrade Milvus standalone with Helm Chart.
 title: Upgrade Milvus Standalone with Helm Chart
 ---
-
 <div class="tab-wrapper"><a href="/docs/upgrade_milvus_standalone-operator.md" class=''>Milvus Operator</a><a href="/docs/upgrade_milvus_standalone-helm.md" class='active '>Helm</a><a href="/docs/upgrade_milvus_standalone-docker.md" class=''>Docker Compose</a></div>
 <h1 id="Upgrade-Milvus-Standalone-with-Helm-Chart" class="common-anchor-header">Upgrade Milvus Standalone with Helm Chart<button data-href="#Upgrade-Milvus-Standalone-with-Helm-Chart" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -233,5 +232,6 @@ my-release-minio-744dd9586f-qngzv               1/1     Running   0          84s
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>Rollback and migrate again if the migration fails.</p>
 <pre><code translate="no">./migrate.sh -i my-release -n milvus -s 2.1.4 -t 2.4.9 -r by-dev -o rollback -w milvusdb/milvus:v2.1.1
-./migrate.sh -i my-release -n milvus -s 2.1.4 -t 2.4.9 -r by-dev -o migrate -w milvusdb/milvus:v2.4.9<button class="copy-code-btn"></button></code></pre></li>
+./migrate.sh -i my-release -n milvus -s 2.1.4 -t 2.4.9 -r by-dev -o migrate -w milvusdb/milvus:v2.4.9
+<button class="copy-code-btn"></button></code></pre></li>
 </ol>

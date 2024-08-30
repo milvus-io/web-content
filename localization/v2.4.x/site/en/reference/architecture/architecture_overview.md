@@ -1,9 +1,10 @@
 ---
 id: architecture_overview.md
-summary: Milvus provides a fast, reliable, and stable vector database built specifically for similarity search and artificial intelligence.
+summary: >-
+  Milvus provides a fast, reliable, and stable vector database built
+  specifically for similarity search and artificial intelligence.
 title: Milvus Architecture Overview
 ---
-
 <h1 id="Milvus-Architecture-Overview" class="common-anchor-header">Milvus Architecture Overview<button data-href="#Milvus-Architecture-Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

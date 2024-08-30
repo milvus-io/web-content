@@ -4,7 +4,6 @@ related_key: configure
 group: system_configuration.md
 summary: Learn about the system configuration of Milvus.
 ---
-
 <h1 id="Milvus-System-Configurations-Checklist" class="common-anchor-header">Milvus System Configurations Checklist<button data-href="#Milvus-System-Configurations-Checklist" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

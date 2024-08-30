@@ -1,9 +1,10 @@
 ---
 id: milvus_hybrid_search_retriever.md
-summary: This notebook shows how to use functionality related to the Milvus vector database.
+summary: >-
+  This notebook shows how to use functionality related to the Milvus vector
+  database.
 title: Milvus Hybrid Search Retriever
 ---
-
 <h1 id="Milvus-Hybrid-Search-Retriever" class="common-anchor-header">Milvus Hybrid Search Retriever<button data-href="#Milvus-Hybrid-Search-Retriever" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

@@ -3,7 +3,6 @@ id: image_similarity_search.md
 summary: image search with Milvus
 title: Image Search with Milvus
 ---
-
 <h1 id="Image-Search-with-Milvus" class="common-anchor-header">Image Search with Milvus<button data-href="#Image-Search-with-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

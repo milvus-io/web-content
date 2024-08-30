@@ -3,7 +3,6 @@ id: integrate_with_openai.md
 title: Semantic Search with Milvus and OpenAI
 summary: This page discusses vector database integration with OpenAI's embedding API.
 ---
-
 <h1 id="Semantic-Search-with-Milvus-and-OpenAI" class="common-anchor-header">Semantic Search with Milvus and OpenAI<button data-href="#Semantic-Search-with-Milvus-and-OpenAI" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

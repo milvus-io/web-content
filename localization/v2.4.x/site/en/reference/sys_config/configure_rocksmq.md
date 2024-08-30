@@ -4,7 +4,6 @@ related_key: configure
 group: system_configuration.md
 summary: Learn how to configure rocksmq for Milvus.
 ---
-
 <h1 id="rocksmq-related-Configurations" class="common-anchor-header">rocksmq-related Configurations<button data-href="#rocksmq-related-Configurations" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

@@ -5,7 +5,6 @@ related_key: SDK
 summary: Learn how to install the Node.js SDK of Milvus.
 title: Install Milvus Nodejs SDK
 ---
-
 <h1 id="Install-Milvus-Nodejs-SDK" class="common-anchor-header">Install Milvus Nodejs SDK<button data-href="#Install-Milvus-Nodejs-SDK" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

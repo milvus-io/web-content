@@ -3,7 +3,6 @@ id: birdwatcher_usage_guides.md
 summary: Learn how to use Birdwatch to debug Milvus.
 title: Use Birdwatcher
 ---
-
 <h1 id="Use-Birdwatcher" class="common-anchor-header">Use Birdwatcher<button data-href="#Use-Birdwatcher" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

@@ -3,7 +3,6 @@ id: milvus_lite.md
 summary: Get started with Milvus Lite.
 title: Run Milvus Lite Locally
 ---
-
 <h1 id="Run-Milvus-Lite-Locally" class="common-anchor-header">Run Milvus Lite Locally<button data-href="#Run-Milvus-Lite-Locally" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

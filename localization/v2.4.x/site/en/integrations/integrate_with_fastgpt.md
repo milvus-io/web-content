@@ -1,9 +1,10 @@
 ---
 id: integrate_with_fastgpt.md
-summary: This tutorial will guide you on how to swiftly deploy your own exclusive FastGPT application using [Milvus](https://milvus.io/). 
+summary: >-
+  This tutorial will guide you on how to swiftly deploy your own exclusive
+  FastGPT application using [Milvus](https://milvus.io/).
 title: Deploying FastGPT with Milvus
 ---
-
 <h1 id="Deploying-FastGPT-with-Milvus" class="common-anchor-header">Deploying FastGPT with Milvus<button data-href="#Deploying-FastGPT-with-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

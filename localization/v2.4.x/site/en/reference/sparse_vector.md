@@ -3,7 +3,6 @@ id: sparse_vector.md
 summary: Learn how to use sparse vectors in Milvus.
 title: Sparse Vector
 ---
-
 <h1 id="Sparse-Vector" class="common-anchor-header">Sparse Vector<button data-href="#Sparse-Vector" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

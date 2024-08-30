@@ -3,7 +3,6 @@ id: benchmark.md
 summary: Learn about the benchmark result of Milvus.
 title: Milvus 2.2 Benchmark Test Report
 ---
-
 <h1 id="Milvus-22-Benchmark-Test-Report" class="common-anchor-header">Milvus 2.2 Benchmark Test Report<button data-href="#Milvus-22-Benchmark-Test-Report" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

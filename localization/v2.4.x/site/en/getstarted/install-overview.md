@@ -1,9 +1,13 @@
 ---
 id: install-overview.md
-summary: Milvus is a highly performant, scalable vector database. It supports use cases of a wide range of sizes, from demos running locally in Jupyter Notebooks to massive-scale Kubernetes clusters handling tens of billions of vectors. Currently, there are three Milvus deployment options_ Milvus Lite, Milvus Standalone, and Milvus Distributed.
+summary: >-
+  Milvus is a highly performant, scalable vector database. It supports use cases
+  of a wide range of sizes, from demos running locally in Jupyter Notebooks to
+  massive-scale Kubernetes clusters handling tens of billions of vectors.
+  Currently, there are three Milvus deployment options_ Milvus Lite, Milvus
+  Standalone, and Milvus Distributed.
 title: Overview of Milvus Deployment Options
 ---
-
 <h1 id="Overview-of-Milvus-Deployment-Options" class="common-anchor-header">Overview of Milvus Deployment Options<button data-href="#Overview-of-Milvus-Deployment-Options" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

@@ -1,9 +1,10 @@
 ---
 id: es2m.md
-summary: This guide provides a comprehensive, step-by-step process for migrating data from Elasticsearch to Milvus 2.x.
+summary: >-
+  This guide provides a comprehensive, step-by-step process for migrating data
+  from Elasticsearch to Milvus 2.x.
 title: From Elasticsearch
 ---
-
 <h1 id="From-Elasticsearch" class="common-anchor-header">From Elasticsearch<button data-href="#From-Elasticsearch" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

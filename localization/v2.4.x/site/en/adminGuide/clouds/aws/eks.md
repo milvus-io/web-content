@@ -4,7 +4,6 @@ title: Deploy a Milvus Cluster on EKS
 related_key: cluster
 summary: Learn how to deploy a Milvus cluster on EKS
 ---
-
 <h1 id="Deploy-a-Milvus-Cluster-on-EKS" class="common-anchor-header">Deploy a Milvus Cluster on EKS<button data-href="#Deploy-a-Milvus-Cluster-on-EKS" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

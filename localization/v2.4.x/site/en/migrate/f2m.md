@@ -1,10 +1,9 @@
 ---
 id: f2m.md
 title: From Faiss
-related_key: Faiss, migrate, import
+related_key: 'Faiss, migrate, import'
 summary: Learn how to migrate Faiss data to Milvus.
 ---
-
 <h1 id="From-Faiss" class="common-anchor-header">From Faiss<button data-href="#From-Faiss" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

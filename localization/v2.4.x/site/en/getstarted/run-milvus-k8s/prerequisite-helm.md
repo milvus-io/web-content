@@ -5,7 +5,6 @@ related_key: Kubernetes
 summary: Learn the necessary preparations before installing Milvus with Helm.
 title: Requirements for running Milvus on Kubernetes
 ---
-
 <h1 id="Requirements-for-running-Milvus-on-Kubernetes" class="common-anchor-header">Requirements for running Milvus on Kubernetes<button data-href="#Requirements-for-running-Milvus-on-Kubernetes" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

@@ -3,7 +3,6 @@ id: integrate_with_voxel51.md
 summary: This page discusses the integration with voxel51
 title: Conduct Vision Searches with Milvus and FiftyOne
 ---
-
 <h1 id="Conduct-Vision-Searches-with-Milvus-and-FiftyOne" class="common-anchor-header">Conduct Vision Searches with Milvus and FiftyOne<button data-href="#Conduct-Vision-Searches-with-Milvus-and-FiftyOne" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

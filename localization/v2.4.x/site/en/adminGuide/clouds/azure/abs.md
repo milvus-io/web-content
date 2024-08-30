@@ -1,10 +1,9 @@
 ---
 id: abs.md
 title: Configure Blob Storage Access by Workload Identity
-related_key: blob storage, workload identity, iam
+related_key: 'blob storage, workload identity, iam'
 summary: Learn how to configure Blob Storage with Workload Identity.
 ---
-
 <h1 id="Configure-Blob-Storage-Access-by-Workload-Identity" class="common-anchor-header">Configure Blob Storage Access by Workload Identity<button data-href="#Configure-Blob-Storage-Access-by-Workload-Identity" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

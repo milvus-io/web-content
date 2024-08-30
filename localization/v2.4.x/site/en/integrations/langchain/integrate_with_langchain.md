@@ -1,9 +1,10 @@
 ---
 id: integrate_with_langchain.md
-summary: This guide demonstrates how to build a Retrieval-Augmented Generation (RAG) system using LangChain and Milvus.
+summary: >-
+  This guide demonstrates how to build a Retrieval-Augmented Generation (RAG)
+  system using LangChain and Milvus.
 title: Retrieval-Augmented Generation (RAG) with Milvus and LangChain
 ---
-
 <h1 id="Retrieval-Augmented-Generation-RAG-with-Milvus-and-LangChain" class="common-anchor-header">Retrieval-Augmented Generation (RAG) with Milvus and LangChain<button data-href="#Retrieval-Augmented-Generation-RAG-with-Milvus-and-LangChain" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

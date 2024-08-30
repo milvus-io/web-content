@@ -4,7 +4,6 @@ title: Configure ingress nginx with Milvus
 related_key: ingress nginx
 summary: Learn how to configure ingress nginx with Milvus.
 ---
-
 <h1 id="Configure-ingress-nginx-with-Milvus" class="common-anchor-header">Configure ingress nginx with Milvus<button data-href="#Configure-ingress-nginx-with-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

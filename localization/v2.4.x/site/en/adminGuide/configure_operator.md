@@ -5,7 +5,6 @@ related_key: Milvus Operator
 summary: Learn how to configure Milvus with Milvus Operator.
 title: Configure Milvus with Milvus Operator
 ---
-
 <h1 id="Configure-Milvus-with-Milvus-Operator" class="common-anchor-header">Configure Milvus with Milvus Operator<button data-href="#Configure-Milvus-with-Milvus-Operator" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

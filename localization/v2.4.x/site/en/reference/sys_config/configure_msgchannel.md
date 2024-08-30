@@ -4,7 +4,6 @@ related_key: configure
 group: system_configuration.md
 summary: Learn how to configure msgChannel for Milvus.
 ---
-
 <h1 id="msgChannel-related-Configurations" class="common-anchor-header">msgChannel-related Configurations<button data-href="#msgChannel-related-Configurations" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

@@ -3,7 +3,6 @@ id: hybrid_search_with_milvus.md
 summary: Hybrid Search with Milvus
 title: Hybrid Search with Milvus
 ---
-
 <h1 id="Hybrid-Search-with-Milvus" class="common-anchor-header">Hybrid Search with Milvus<button data-href="#Hybrid-Search-with-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

@@ -4,7 +4,6 @@ title: Deploy a Milvus Cluster on EC2
 related_key: cluster
 summary: Learn how to deploy a Milvus cluster on AWS EC2.
 ---
-
 <h1 id="Deprecated-Deploy-a-Milvus-Cluster-on-EC2" class="common-anchor-header">(Deprecated) Deploy a Milvus Cluster on EC2<button data-href="#Deprecated-Deploy-a-Milvus-Cluster-on-EC2" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

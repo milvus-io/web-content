@@ -1,10 +1,12 @@
 ---
 id: rerankers-jina.md
 order: 6
-summary: Milvus supports Jina reranker model through the `JinaRerankFunction` class. This functionality allows you to score the relevance of query-document pairs effectively.
+summary: >-
+  Milvus supports Jina reranker model through the `JinaRerankFunction` class.
+  This functionality allows you to score the relevance of query-document pairs
+  effectively.
 title: Jina AI - Rerankers
 ---
-
 <h1 id="Jina-AI" class="common-anchor-header">Jina AI<button data-href="#Jina-AI" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

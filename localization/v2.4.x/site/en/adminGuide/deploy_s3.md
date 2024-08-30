@@ -1,10 +1,9 @@
 ---
 id: deploy_s3.md
 title: Configure Object Storage with Docker Compose or Helm
-related_key: S3, storage
+related_key: 'S3, storage'
 summary: Learn how to set up S3 storage for Milvus with Docker Compose or Helm.
 ---
-
 <h1 id="Configure-Object-Storage-with-Docker-Compose-or-Helm" class="common-anchor-header">Configure Object Storage with Docker Compose or Helm<button data-href="#Configure-Object-Storage-with-Docker-Compose-or-Helm" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

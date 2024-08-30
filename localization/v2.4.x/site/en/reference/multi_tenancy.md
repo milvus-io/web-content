@@ -4,7 +4,6 @@ related_key: multi-tenancy
 summary: Multi-tenancy in Milvus.
 title: Multi-tenancy strategies
 ---
-
 <h1 id="Multi-tenancy-strategies" class="common-anchor-header">Multi-tenancy strategies<button data-href="#Multi-tenancy-strategies" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

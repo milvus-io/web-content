@@ -3,7 +3,6 @@ id: milvusdm_install.md
 summary: Learn how to install Milvus-Migration to migrate your data.
 title: Install Migration Tool
 ---
-
 <h1 id="Install-Migration-Tool" class="common-anchor-header">Install Migration Tool<button data-href="#Install-Migration-Tool" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

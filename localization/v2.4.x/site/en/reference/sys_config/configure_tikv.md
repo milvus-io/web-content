@@ -4,7 +4,6 @@ related_key: configure
 group: system_configuration.md
 summary: Learn how to configure tikv for Milvus.
 ---
-
 <h1 id="tikv-related-Configurations" class="common-anchor-header">tikv-related Configurations<button data-href="#tikv-related-Configurations" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

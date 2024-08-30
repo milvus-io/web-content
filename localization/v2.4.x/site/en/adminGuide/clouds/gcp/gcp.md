@@ -4,7 +4,6 @@ title: Deploy a Milvus Cluster on GKE
 related_key: cluster
 summary: Learn how to deploy a Milvus cluster on GKE.
 ---
-
 <h1 id="Deploy-a-Milvus-Cluster-on-GKE" class="common-anchor-header">Deploy a Milvus Cluster on GKE<button data-href="#Deploy-a-Milvus-Cluster-on-GKE" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

@@ -3,7 +3,6 @@ id: boolean.md
 summary: Learn about boolean expression rules in Milvus.
 title: Scalar Filtering Rules
 ---
-
 <h1 id="Scalar-Filtering-Rules" class="common-anchor-header">Scalar Filtering Rules<button data-href="#Scalar-Filtering-Rules" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

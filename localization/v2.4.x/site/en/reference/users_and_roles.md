@@ -1,10 +1,11 @@
 ---
 id: users_and_roles.md
-related_key: users, roles
-summary: Learn about the definition of users, roles, objects, and privileges in role-based access control (RBAC).
+related_key: 'users, roles'
+summary: >-
+  Learn about the definition of users, roles, objects, and privileges in
+  role-based access control (RBAC).
 title: Users and Roles
 ---
-
 <h1 id="Users-and-Roles" class="common-anchor-header">Users and Roles<button data-href="#Users-and-Roles" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

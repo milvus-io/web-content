@@ -5,7 +5,6 @@ related_key: Docker
 summary: Learn how to install Milvus standalone with Docker.
 title: Run Milvus in Docker
 ---
-
 <h1 id="Run-Milvus-in-Docker" class="common-anchor-header">Run Milvus in Docker<button data-href="#Run-Milvus-in-Docker" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

@@ -3,7 +3,6 @@ id: integrate_with_voyageai.md
 title: Semantic Search with Milvus and VoyageAI
 summary: This page discusses vector database integration with VoyageAI's embedding API.
 ---
-
 <h1 id="Semantic-Search-with-Milvus-and-VoyageAI" class="common-anchor-header">Semantic Search with Milvus and VoyageAI<button data-href="#Semantic-Search-with-Milvus-and-VoyageAI" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -130,4 +129,5 @@ res = milvus_client.search(
     <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;\n&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">Query: When was artificial intelligence founded?
-[{'id': 0, 'distance': 0.7196218371391296, 'entity': {'text': 'Artificial intelligence was founded as an academic discipline in 1956.', 'subject': 'history'}}, {'id': 1, 'distance': 0.6297335028648376, 'entity': {'text': 'Alan Turing was the first person to conduct substantial research in AI.', 'subject': 'history'}}]</code></pre>
+[{'id': 0, 'distance': 0.7196218371391296, 'entity': {'text': 'Artificial intelligence was founded as an academic discipline in 1956.', 'subject': 'history'}}, {'id': 1, 'distance': 0.6297335028648376, 'entity': {'text': 'Alan Turing was the first person to conduct substantial research in AI.', 'subject': 'history'}}]
+</code></pre>

@@ -491,6 +491,12 @@
             "id": "resource_group.md",
             "order": 7,
             "children": []
+          },
+          {
+            "label": "Clustering Compaction",
+            "id": "clustering-compaction.md",
+            "order": 8,
+            "children": []
           }
         ]
       }

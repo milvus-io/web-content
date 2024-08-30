@@ -4,7 +4,6 @@ order: 1
 summary: Learn how to generate embeddings for your data.
 title: Embedding Overview
 ---
-
 <h1 id="Embedding-Overview" class="common-anchor-header">Embedding Overview<button data-href="#Embedding-Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

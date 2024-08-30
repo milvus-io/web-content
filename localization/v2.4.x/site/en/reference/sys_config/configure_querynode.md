@@ -4,7 +4,6 @@ related_key: configure
 group: system_configuration.md
 summary: Learn how to configure queryNode for Milvus.
 ---
-
 <h1 id="queryNode-related-Configurations" class="common-anchor-header">queryNode-related Configurations<button data-href="#queryNode-related-Configurations" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

@@ -1,9 +1,10 @@
 ---
 id: insert-update-delete.md
-summary: This guide walks you through the data manipulation operations within a collection, including insertion, upsertion, and deletion.
-title: Insert, Upsert & Delete
+summary: >-
+  This guide walks you through the data manipulation operations within a
+  collection, including insertion, upsertion, and deletion.
+title: 'Insert, Upsert & Delete'
 ---
-
 <h1 id="Insert-Upsert--Delete" class="common-anchor-header">Insert, Upsert &amp; Delete<button data-href="#Insert-Upsert--Delete" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
