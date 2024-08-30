@@ -3,6 +3,7 @@ id: integrate_with_bentoml.md
 summary: 本指南演示了如何使用 BentoCloud 上的开源嵌入模型和大型语言模型以及 Milvus 向量数据库来构建检索增强生成 (RAG) 应用程序。
 title: 使用 Milvus 和 BentoML 的检索增强生成（RAG）
 ---
+
 <h1 id="Retrieval-Augmented-Generation-RAG-with-Milvus-and-BentoML" class="common-anchor-header">使用 Milvus 和 BentoML 的检索增强生成（RAG）<button data-href="#Retrieval-Augmented-Generation-RAG-with-Milvus-and-BentoML" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -79,9 +80,10 @@ title: 使用 Milvus 和 BentoML 的检索增强生成（RAG）
 BENTO_API_TOKEN = <span class="hljs-string">&quot;BENTO_API_TOKEN&quot;</span>
 
 embedding_client = bentoml.SyncHTTPClient(
-    BENTO_EMBEDDING_MODEL_END_POINT, token=BENTO_API_TOKEN
+BENTO_EMBEDDING_MODEL_END_POINT, token=BENTO_API_TOKEN
 )
 <button class="copy-code-btn"></button></code></pre>
+
 <p>连接到 embedding_client 后，我们需要处理数据。我们提供了几个函数来执行数据分割和嵌入。</p>
 <p>读取文件并将文本预处理为字符串列表。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># naively chunk on newlines</span>
@@ -102,19 +104,19 @@ directory = <span class="hljs-string">&quot;data&quot;</span>
 save_dir = <span class="hljs-string">&quot;./city_data&quot;</span>
 api_url = <span class="hljs-string">f&quot;https://api.github.com/repos/<span class="hljs-subst">{repo}</span>/contents/<span class="hljs-subst">{directory}</span>&quot;</span>
 
-
 response = requests.get(api_url)
 data = response.json()
 
 <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> os.path.exists(save_dir):
-    os.makedirs(save_dir)
+os.makedirs(save_dir)
 
 <span class="hljs-keyword">for</span> item <span class="hljs-keyword">in</span> data:
-    <span class="hljs-keyword">if</span> item[<span class="hljs-string">&quot;type&quot;</span>] == <span class="hljs-string">&quot;file&quot;</span>:
-        file_url = item[<span class="hljs-string">&quot;download_url&quot;</span>]
-        file_path = os.path.join(save_dir, item[<span class="hljs-string">&quot;name&quot;</span>])
-        urllib.request.urlretrieve(file_url, file_path)
+<span class="hljs-keyword">if</span> item[<span class="hljs-string">&quot;type&quot;</span>] == <span class="hljs-string">&quot;file&quot;</span>:
+file_url = item[<span class="hljs-string">&quot;download_url&quot;</span>]
+file_path = os.path.join(save_dir, item[<span class="hljs-string">&quot;name&quot;</span>])
+urllib.request.urlretrieve(file_url, file_path)
 <button class="copy-code-btn"></button></code></pre>
+
 <p>接下来，我们将对每个文件进行处理。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># please upload your data directory under this file&#x27;s folder</span>
 cities = os.listdir(<span class="hljs-string">&quot;city_data&quot;</span>)
@@ -159,7 +161,7 @@ city_chunks = []
         entries.append(entry)
     <span class="hljs-built_in">print</span>(entries)
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Inserting-Data-into-a-Vector-Database-for-Retrieval" class="common-anchor-header">将数据插入矢量数据库以便检索<button data-href="#Inserting-Data-into-a-Vector-Database-for-Retrieval" class="anchor-icon" translate="no">
+<h2 id="Inserting-Data-into-a-Vector-Database-for-Retrieval" class="common-anchor-header">将数据插入向量数据库以便检索<button data-href="#Inserting-Data-into-a-Vector-Database-for-Retrieval" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -174,15 +176,16 @@ city_chunks = []
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>准备好嵌入和数据后，我们就可以将矢量和元数据一起插入 Milvus Lite，以便稍后进行矢量搜索。本节的第一步是通过连接 Milvus Lite 来启动客户端。我们只需导入<code translate="no">MilvusClient</code> 模块，然后初始化一个连接到 Milvus Lite 向量数据库的 Milvus Lite 客户端。维度大小来自嵌入模型的大小，例如，句子转换器模型<code translate="no">all-MiniLM-L6-v2</code> 产生的向量维度为 384。</p>
+    </button></h2><p>准备好嵌入和数据后，我们就可以将向量和元数据一起插入 Milvus Lite，以便稍后进行向量搜索。本节的第一步是通过连接 Milvus Lite 来启动客户端。我们只需导入<code translate="no">MilvusClient</code> 模块，然后初始化一个连接到 Milvus Lite 向量数据库的 Milvus Lite 客户端。维度大小来自嵌入模型的大小，例如，句子转换器模型<code translate="no">all-MiniLM-L6-v2</code> 产生的向量维度为 384。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
-COLLECTION_NAME = <span class="hljs-string">&quot;Bento_Milvus_RAG&quot;</span>  <span class="hljs-comment"># random name for your collection</span>
+COLLECTION_NAME = <span class="hljs-string">&quot;Bento_Milvus_RAG&quot;</span> <span class="hljs-comment"># random name for your collection</span>
 DIMENSION = <span class="hljs-number">384</span>
 
 <span class="hljs-comment"># Initialize a Milvus Lite client</span>
 milvus_client = MilvusClient(<span class="hljs-string">&quot;milvus_demo.db&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
+
 <div class="alert note">
 <p>至于<code translate="no">MilvusClient</code> 的参数：</p>
 <ul>
@@ -196,6 +199,7 @@ milvus_client = MilvusClient(<span class="hljs-string">&quot;milvus_demo.db&quot
 
 connections.<span class="hljs-title function_">connect</span>(uri=<span class="hljs-string">&quot;milvus_demo.db&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
+
 <h2 id="Creating-Your-Milvus-Lite-Collection" class="common-anchor-header">创建 Milvus Lite 数据集<button data-href="#Creating-Your-Milvus-Lite-Collection" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -216,14 +220,15 @@ connections.<span class="hljs-title function_">connect</span>(uri=<span class="h
 
 <span class="hljs-comment"># Create schema</span>
 schema = MilvusClient.create_schema(
-    auto_id=<span class="hljs-literal">True</span>,
-    enable_dynamic_field=<span class="hljs-literal">True</span>,
+auto_id=<span class="hljs-literal">True</span>,
+enable_dynamic_field=<span class="hljs-literal">True</span>,
 )
 
 <span class="hljs-comment"># 3.2. Add fields to schema</span>
 schema.add_field(field_name=<span class="hljs-string">&quot;id&quot;</span>, datatype=DataType.INT64, is_primary=<span class="hljs-literal">True</span>)
 schema.add_field(field_name=<span class="hljs-string">&quot;embedding&quot;</span>, datatype=DataType.FLOAT_VECTOR, dim=DIMENSION)
 <button class="copy-code-btn"></button></code></pre>
+
 <p>现在我们已经创建了模式并成功定义了数据字段，我们需要定义索引。就搜索而言，"索引 "定义了我们如何映射数据以供检索。在本项目中，我们使用默认的<a href="https://docs.zilliz.com/docs/autoindex-explained">"AUTOINDEX</a>"为数据建立索引。</p>
 <p>接下来，我们使用之前给定的名称、模式和索引创建集合。最后，插入之前处理过的数据。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># prepare index parameters</span>
@@ -231,21 +236,22 @@ index_params = milvus_client.prepare_index_params()
 
 <span class="hljs-comment"># add index</span>
 index_params.add_index(
-    field_name=<span class="hljs-string">&quot;embedding&quot;</span>,
-    index_type=<span class="hljs-string">&quot;AUTOINDEX&quot;</span>,  <span class="hljs-comment"># use autoindex instead of other complex indexing method</span>
-    metric_type=<span class="hljs-string">&quot;COSINE&quot;</span>,  <span class="hljs-comment"># L2, COSINE, or IP</span>
+field_name=<span class="hljs-string">&quot;embedding&quot;</span>,
+index_type=<span class="hljs-string">&quot;AUTOINDEX&quot;</span>, <span class="hljs-comment"># use autoindex instead of other complex indexing method</span>
+metric_type=<span class="hljs-string">&quot;COSINE&quot;</span>, <span class="hljs-comment"># L2, COSINE, or IP</span>
 )
 
 <span class="hljs-comment"># create collection</span>
 <span class="hljs-keyword">if</span> milvus_client.has_collection(collection_name=COLLECTION_NAME):
-    milvus_client.drop_collection(collection_name=COLLECTION_NAME)
+milvus_client.drop_collection(collection_name=COLLECTION_NAME)
 milvus_client.create_collection(
-    collection_name=COLLECTION_NAME, schema=schema, index_params=index_params
+collection_name=COLLECTION_NAME, schema=schema, index_params=index_params
 )
 
 <span class="hljs-comment"># Outside the loop, now you upsert all the entries at once</span>
 milvus_client.insert(collection_name=COLLECTION_NAME, data=entries)
 <button class="copy-code-btn"></button></code></pre>
+
 <h2 id="Set-up-Your-LLM-for-RAG" class="common-anchor-header">为 RAG 设置 LLM<button data-href="#Set-up-Your-LLM-for-RAG" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -264,8 +270,9 @@ milvus_client.insert(collection_name=COLLECTION_NAME, data=entries)
     </button></h2><p>要构建 RAG 应用程序，我们需要在 BentoCloud 上部署 LLM。让我们使用最新的 Llama3 LLM。启动并运行后，只需复制该模型服务的端点和令牌，并为其设置客户端即可。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-variable constant_">BENTO_LLM_END_POINT</span> = <span class="hljs-string">&quot;BENTO_LLM_END_POINT&quot;</span>
 
-llm_client = bentoml.<span class="hljs-title class_">SyncHTTPClient</span>(<span class="hljs-variable constant_">BENTO_LLM_END_POINT</span>, token=<span class="hljs-variable constant_">BENTO_API_TOKEN</span>)
+llm*client = bentoml.<span class="hljs-title class*">SyncHTTPClient</span>(<span class="hljs-variable constant_">BENTO*LLM_END_POINT</span>, token=<span class="hljs-variable constant*">BENTO_API_TOKEN</span>)
 <button class="copy-code-btn"></button></code></pre>
+
 <h2 id="LLM-Instructions" class="common-anchor-header">LLM 说明<button data-href="#LLM-Instructions" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -299,7 +306,9 @@ llm_client = bentoml.<span class="hljs-title class_">SyncHTTPClient</span>(<span
         res += result
 
     <span class="hljs-keyword">return</span> res
+
 <button class="copy-code-btn"></button></code></pre>
+
 <h2 id="A-RAG-Example" class="common-anchor-header">RAG 示例<button data-href="#A-RAG-Example" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -318,16 +327,15 @@ llm_client = bentoml.<span class="hljs-title class_">SyncHTTPClient</span>(<span
     </button></h2><p>现在我们可以提问了。该函数只需接收一个问题，然后通过 RAG 从背景信息中生成相关上下文。然后，我们将上下文和问题传递给 dorag() 并得到结果。</p>
 <pre><code translate="no" class="language-python">question = <span class="hljs-string">&quot;What state is Cambridge in?&quot;</span>
 
-
 <span class="hljs-keyword">def</span> <span class="hljs-title function_">ask_a_question</span>(<span class="hljs-params">question</span>):
-    embeddings = get_embeddings([question])
-    res = milvus_client.search(
-        collection_name=COLLECTION_NAME,
-        data=embeddings,  <span class="hljs-comment"># search for the one (1) embedding returned as a list of lists</span>
-        anns_field=<span class="hljs-string">&quot;embedding&quot;</span>,  <span class="hljs-comment"># Search across embeddings</span>
-        limit=<span class="hljs-number">5</span>,  <span class="hljs-comment"># get me the top 5 results</span>
-        output_fields=[<span class="hljs-string">&quot;sentence&quot;</span>],  <span class="hljs-comment"># get the sentence/chunk and city</span>
-    )
+embeddings = get_embeddings([question])
+res = milvus_client.search(
+collection_name=COLLECTION_NAME,
+data=embeddings, <span class="hljs-comment"># search for the one (1) embedding returned as a list of lists</span>
+anns_field=<span class="hljs-string">&quot;embedding&quot;</span>, <span class="hljs-comment"># Search across embeddings</span>
+limit=<span class="hljs-number">5</span>, <span class="hljs-comment"># get me the top 5 results</span>
+output_fields=[<span class="hljs-string">&quot;sentence&quot;</span>], <span class="hljs-comment"># get the sentence/chunk and city</span>
+)
 
     sentences = []
     <span class="hljs-keyword">for</span> hits <span class="hljs-keyword">in</span> res:
@@ -337,10 +345,10 @@ llm_client = bentoml.<span class="hljs-title class_">SyncHTTPClient</span>(<span
     context = <span class="hljs-string">&quot;. &quot;</span>.join(sentences)
     <span class="hljs-keyword">return</span> context
 
-
 context = ask_a_question(question=question)
 <span class="hljs-built_in">print</span>(context)
 <button class="copy-code-btn"></button></code></pre>
+
 <p>实现 RAG</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">print</span>(dorag(question=question, context=context))
 <button class="copy-code-btn"></button></code></pre>

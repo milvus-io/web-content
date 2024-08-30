@@ -1,8 +1,9 @@
 ---
 id: integrate_with_cohere.md
-summary: 本页将介绍如何使用 Milvus 作为矢量数据库、Hugging Face 作为嵌入系统来搜索问题的最佳答案。
+summary: 本页将介绍如何使用 Milvus 作为向量数据库、Hugging Face 作为嵌入系统来搜索问题的最佳答案。
 title: 使用 Milvus 和 Cohere 进行问题解答
 ---
+
 <h1 id="Question-Answering-Using-Milvus-and-Cohere" class="common-anchor-header">使用 Milvus 和 Cohere 进行问题解答<button data-href="#Question-Answering-Using-Milvus-and-Cohere" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -18,7 +19,7 @@ title: 使用 Milvus 和 Cohere 进行问题解答
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>本页说明了如何使用 Milvus 作为矢量数据库和 Cohere 作为嵌入系统，创建基于 SQuAD 数据集的问题解答系统。</p>
+    </button></h1><p>本页说明了如何使用 Milvus 作为向量数据库和 Cohere 作为嵌入系统，创建基于 SQuAD 数据集的问题解答系统。</p>
 <h2 id="Before-you-begin" class="common-anchor-header">开始之前<button data-href="#Before-you-begin" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -92,10 +93,10 @@ dataset = pandas.read_json(FILE)
 <span class="hljs-comment"># Clean up the dataset by grabbing all the question answer pairs</span>
 simplified_records = []
 <span class="hljs-keyword">for</span> x <span class="hljs-keyword">in</span> dataset[<span class="hljs-string">&#x27;data&#x27;</span>]:
-    <span class="hljs-keyword">for</span> y <span class="hljs-keyword">in</span> x[<span class="hljs-string">&#x27;paragraphs&#x27;</span>]:
-        <span class="hljs-keyword">for</span> z <span class="hljs-keyword">in</span> y[<span class="hljs-string">&#x27;qas&#x27;</span>]:
-            <span class="hljs-keyword">if</span> <span class="hljs-built_in">len</span>(z[<span class="hljs-string">&#x27;answers&#x27;</span>]) != <span class="hljs-number">0</span>:
-                simplified_records.append({<span class="hljs-string">&#x27;question&#x27;</span>: z[<span class="hljs-string">&#x27;question&#x27;</span>], <span class="hljs-string">&#x27;answer&#x27;</span>: z[<span class="hljs-string">&#x27;answers&#x27;</span>][<span class="hljs-number">0</span>][<span class="hljs-string">&#x27;text&#x27;</span>]})
+<span class="hljs-keyword">for</span> y <span class="hljs-keyword">in</span> x[<span class="hljs-string">&#x27;paragraphs&#x27;</span>]:
+<span class="hljs-keyword">for</span> z <span class="hljs-keyword">in</span> y[<span class="hljs-string">&#x27;qas&#x27;</span>]:
+<span class="hljs-keyword">if</span> <span class="hljs-built_in">len</span>(z[<span class="hljs-string">&#x27;answers&#x27;</span>]) != <span class="hljs-number">0</span>:
+simplified_records.append({<span class="hljs-string">&#x27;question&#x27;</span>: z[<span class="hljs-string">&#x27;question&#x27;</span>], <span class="hljs-string">&#x27;answer&#x27;</span>: z[<span class="hljs-string">&#x27;answers&#x27;</span>][<span class="hljs-number">0</span>][<span class="hljs-string">&#x27;text&#x27;</span>]})
 
 <span class="hljs-comment"># Grab the amount of records based on COUNT</span>
 simplified_records = pandas.DataFrame.from_records(simplified_records)
@@ -104,6 +105,7 @@ simplified_records = simplified_records.sample(n=<span class="hljs-built_in">min
 <span class="hljs-comment"># Check the length of the cleaned dataset matches count</span>
 <span class="hljs-built_in">print</span>(<span class="hljs-built_in">len</span>(simplified_records))
 <button class="copy-code-btn"></button></code></pre>
+
 <p>输出结果应该是数据集中的记录数</p>
 <pre><code translate="no" class="language-shell">5000
 <button class="copy-code-btn"></button></code></pre>
@@ -128,27 +130,28 @@ connections.connect(host=MILVUS_HOST, port=MILVUS_PORT)
 
 <span class="hljs-comment"># Remove collection if it already exists</span>
 <span class="hljs-keyword">if</span> utility.has_collection(COLLECTION_NAME):
-    utility.drop_collection(COLLECTION_NAME)
+utility.drop_collection(COLLECTION_NAME)
 
 <span class="hljs-comment"># Create collection which includes the id, title, and embedding.</span>
 fields = [
-    FieldSchema(name=<span class="hljs-string">&#x27;id&#x27;</span>, dtype=DataType.INT64, is_primary=<span class="hljs-literal">True</span>, auto_id=<span class="hljs-literal">True</span>),
-    FieldSchema(name=<span class="hljs-string">&#x27;original_question&#x27;</span>, dtype=DataType.VARCHAR, max_length=<span class="hljs-number">1000</span>),
-    FieldSchema(name=<span class="hljs-string">&#x27;answer&#x27;</span>, dtype=DataType.VARCHAR, max_length=<span class="hljs-number">1000</span>),
-    FieldSchema(name=<span class="hljs-string">&#x27;original_question_embedding&#x27;</span>, dtype=DataType.FLOAT_VECTOR, dim=DIMENSION)
+FieldSchema(name=<span class="hljs-string">&#x27;id&#x27;</span>, dtype=DataType.INT64, is_primary=<span class="hljs-literal">True</span>, auto_id=<span class="hljs-literal">True</span>),
+FieldSchema(name=<span class="hljs-string">&#x27;original_question&#x27;</span>, dtype=DataType.VARCHAR, max_length=<span class="hljs-number">1000</span>),
+FieldSchema(name=<span class="hljs-string">&#x27;answer&#x27;</span>, dtype=DataType.VARCHAR, max_length=<span class="hljs-number">1000</span>),
+FieldSchema(name=<span class="hljs-string">&#x27;original_question_embedding&#x27;</span>, dtype=DataType.FLOAT_VECTOR, dim=DIMENSION)
 ]
 schema = CollectionSchema(fields=fields)
 collection = Collection(name=COLLECTION_NAME, schema=schema)
 
 <span class="hljs-comment"># Create an IVF_FLAT index for collection.</span>
 index_params = {
-    <span class="hljs-string">&#x27;metric_type&#x27;</span>:<span class="hljs-string">&#x27;IP&#x27;</span>,
-    <span class="hljs-string">&#x27;index_type&#x27;</span>:<span class="hljs-string">&quot;IVF_FLAT&quot;</span>,
-    <span class="hljs-string">&#x27;params&#x27;</span>:{<span class="hljs-string">&quot;nlist&quot;</span>: <span class="hljs-number">1024</span>}
+<span class="hljs-string">&#x27;metric_type&#x27;</span>:<span class="hljs-string">&#x27;IP&#x27;</span>,
+<span class="hljs-string">&#x27;index_type&#x27;</span>:<span class="hljs-string">&quot;IVF_FLAT&quot;</span>,
+<span class="hljs-string">&#x27;params&#x27;</span>:{<span class="hljs-string">&quot;nlist&quot;</span>: <span class="hljs-number">1024</span>}
 }
 collection.create_index(field_name=<span class="hljs-string">&quot;original_question_embedding&quot;</span>, index_params=index_params)
 collection.load()
 <button class="copy-code-btn"></button></code></pre>
+
 <h2 id="Insert-data" class="common-anchor-header">插入数据<button data-href="#Insert-data" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -176,15 +179,15 @@ cohere_client = cohere.Client(COHERE_API_KEY)
 
 <span class="hljs-comment"># Extract embeddings from questions using Cohere</span>
 <span class="hljs-keyword">def</span> <span class="hljs-title function_">embed</span>(<span class="hljs-params">texts, input_type</span>):
-    res = cohere_client.embed(texts, model=<span class="hljs-string">&#x27;embed-multilingual-v3.0&#x27;</span>, input_type=input_type)
-    <span class="hljs-keyword">return</span> res.embeddings
+res = cohere_client.embed(texts, model=<span class="hljs-string">&#x27;embed-multilingual-v3.0&#x27;</span>, input_type=input_type)
+<span class="hljs-keyword">return</span> res.embeddings
 
 <span class="hljs-comment"># Insert each question, answer, and qustion embedding</span>
 total = pandas.DataFrame()
 <span class="hljs-keyword">for</span> batch <span class="hljs-keyword">in</span> tqdm(np.array_split(simplified_records, (COUNT/BATCH_SIZE) + <span class="hljs-number">1</span>)):
-    questions = batch[<span class="hljs-string">&#x27;question&#x27;</span>].tolist()
-    embeddings = embed(questions, <span class="hljs-string">&quot;search_document&quot;</span>)
-    
+questions = batch[<span class="hljs-string">&#x27;question&#x27;</span>].tolist()
+embeddings = embed(questions, <span class="hljs-string">&quot;search_document&quot;</span>)
+
     data = [
         {
             <span class="hljs-string">&#x27;original_question&#x27;</span>: x,
@@ -197,6 +200,7 @@ total = pandas.DataFrame()
 
 time.sleep(<span class="hljs-number">10</span>)
 <button class="copy-code-btn"></button></code></pre>
+
 <h2 id="Ask-questions" class="common-anchor-header">提问<button data-href="#Ask-questions" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -248,6 +252,7 @@ search_questions = [<span class="hljs-string">&#x27;What kills bacteria?&#x27;</
 
 ret = [ { <span class="hljs-string">&quot;question&quot;</span>: x, <span class="hljs-string">&quot;candidates&quot;</span>: search(x) } <span class="hljs-keyword">for</span> x <span class="hljs-keyword">in</span> search_questions ]
 <button class="copy-code-btn"></button></code></pre>
+
 <p>输出结果应类似于下图：</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-comment"># Output</span>
 <span class="hljs-comment">#</span>

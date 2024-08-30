@@ -3,6 +3,7 @@ id: benchmark.md
 summary: 了解 Milvus 的基准结果。
 title: Milvus 2.2 基准测试报告
 ---
+
 <h1 id="Milvus-22-Benchmark-Test-Report" class="common-anchor-header">Milvus 2.2 基准测试报告<button data-href="#Milvus-22-Benchmark-Test-Report" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -85,7 +86,7 @@ title: Milvus 2.2 基准测试报告
 <tbody>
 <tr>
 <td>nq</td>
-<td>一次搜索请求中要搜索的矢量数</td>
+<td>一次搜索请求中要搜索的向量数</td>
 </tr>
 <tr>
 <td>topk</td>

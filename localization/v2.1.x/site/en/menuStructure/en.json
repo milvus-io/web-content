@@ -1,0 +1,883 @@
+[
+  {
+    "label": "About Milvus",
+    "id": "about",
+    "isMenu": true,
+    "order": 0,
+    "children": [
+      {
+        "label": "What is Milvus",
+        "id": "overview.md",
+        "order": 0,
+        "children": []
+      },
+      {
+        "label": "Milvus Adopters",
+        "id": "milvus_adopters.md",
+        "order": 1,
+        "children": []
+      },
+      {
+        "label": "Milvus Roadmap",
+        "id": "roadmap",
+        "order": 2,
+        "externalLink": "https://wiki.lfaidata.foundation/display/MIL/Milvus+2.X+Roadmap+and+Time+schedule",
+        "children": []
+      },
+      {
+        "label": "Milvus Limits",
+        "id": "limitations.md",
+        "order": 3,
+        "children": []
+      },
+      {
+        "label": "Releases",
+        "id": "release_notes.md",
+        "order": 4,
+        "children": []
+      },
+      {
+        "label": "Enhancement Proposals",
+        "id": "enhancementproposals",
+        "order": 5,
+        "externalLink": "https://wiki.lfaidata.foundation/pages/viewpage.action?pageId=43287103",
+        "children": []
+      },
+      {
+        "label": "Bootcamp",
+        "id": "bootcamp_about",
+        "order": 6,
+        "externalLink": "https://milvus.io/bootcamp",
+        "children": []
+      }
+    ]
+  },
+  {
+    "label": "Get Started",
+    "id": "getstarted",
+    "isMenu": true,
+    "order": 1,
+    "children": [
+      {
+        "label": "Prerequisites",
+        "id": "prerequisites",
+        "order": 0,
+        "children": [
+          {
+            "label": "on Kubernetes",
+            "id": "prerequisite-helm.md",
+            "order": 0,
+            "children": []
+          }
+        ]
+      },
+      {
+        "label": "Install Milvus",
+        "id": "installmilvus",
+        "order": 1,
+        "isMenu": true,
+        "children": [
+          {
+            "label": "Milvus Standalone",
+            "id": "install_standalone-docker.md",
+            "order": 0,
+            "children": []
+          },
+          {
+            "label": "Milvus Cluster",
+            "id": "install_cluster-milvusoperator.md",
+            "order": 1,
+            "children": []
+          },
+          {
+            "label": "Install Offline",
+            "id": "install_offline-helm.md",
+            "order": 2,
+            "children": []
+          },
+          {
+            "label": "Install Embedded Milvus",
+            "id": "install_embedded_milvus.md",
+            "order": 3,
+            "children": []
+          }
+        ]
+      },
+      {
+        "label": "Install SDKs",
+        "id": "install_sdks",
+        "order": 2,
+        "children": [
+          {
+            "label": "Pymilvus",
+            "id": "install-pymilvus.md",
+            "order": 0,
+            "children": []
+          },
+          {
+            "label": "Java SDK",
+            "id": "install-java.md",
+            "order": 1,
+            "children": []
+          },
+          {
+            "label": "Go SDK",
+            "id": "install-go.md",
+            "order": 2,
+            "children": []
+          },
+          {
+            "label": "Node.js SDK",
+            "id": "install-node.md",
+            "order": 3,
+            "children": []
+          }
+        ]
+      },
+      {
+        "label": "Hello Milvus",
+        "id": "example_code.md",
+        "order": 3,
+        "children": []
+      }
+    ]
+  },
+  {
+    "label": "User Guide",
+    "id": "userguide",
+    "isMenu": true,
+    "order": 2,
+    "children": [
+      {
+        "label": "Manage Milvus Connections",
+        "id": "manage_connection.md",
+        "order": 0,
+        "children": []
+      },
+      {
+        "label": "Manage Collections",
+        "id": "manage_collection",
+        "order": 1,
+        "isMenu": true,
+        "children": [
+          {
+            "label": "Create a Collection",
+            "id": "create_collection.md",
+            "order": 0,
+            "children": []
+          },
+          {
+            "label": "Check Collection Information",
+            "id": "check_collection.md",
+            "order": 1,
+            "children": []
+          },
+          {
+            "label": "Drop a Collection",
+            "id": "drop_collection.md",
+            "order": 2,
+            "children": []
+          },
+          {
+            "label": "Manage Collection Alias",
+            "id": "collection_alias.md",
+            "order": 3,
+            "children": []
+          },
+          {
+            "label": "Load Collection",
+            "id": "load_collection.md",
+            "order": 4,
+            "children": []
+          },
+          {
+            "label": "Release Collection",
+            "id": "release_collection.md",
+            "order": 5,
+            "children": []
+          }
+        ]
+      },
+      {
+        "label": "Manage Partitions",
+        "id": "manage_partition",
+        "order": 2,
+        "isMenu": true,
+        "children": [
+          {
+            "label": "Create a Partition",
+            "id": "create_partition.md",
+            "order": 0,
+            "children": []
+          },
+          {
+            "label": "Check Partition Information",
+            "id": "check_partition.md",
+            "order": 1,
+            "children": []
+          },
+          {
+            "label": "Drop a Partition",
+            "id": "drop_partition.md",
+            "order": 2,
+            "children": []
+          },
+          {
+            "label": "Load a Partition",
+            "id": "load_partition.md",
+            "order": 3,
+            "children": []
+          },
+          {
+            "label": "Release a Partition",
+            "id": "release_partition.md",
+            "order": 4,
+            "children": []
+          }
+        ]
+      },
+      {
+        "label": "Manage Data",
+        "id": "manage_data",
+        "order": 3,
+        "isMenu": true,
+        "children": [
+          {
+            "label": "Insert Data",
+            "id": "insert_data.md",
+            "order": 0,
+            "children": []
+          },
+          {
+            "label": "Delete Entities",
+            "id": "delete_data.md",
+            "order": 1,
+            "children": []
+          },
+          {
+            "label": "Compact Data",
+            "id": "compact_data.md",
+            "order": 2,
+            "children": []
+          }
+        ]
+      },
+      {
+        "label": "Manage Indexes",
+        "id": "manage_index",
+        "order": 4,
+        "isMenu": true,
+        "children": [
+          {
+            "label": "Build an Index",
+            "id": "build_index.md",
+            "order": 0,
+            "children": []
+          },
+          {
+            "label": "Drop an Index",
+            "id": "drop_index.md",
+            "order": 1,
+            "children": []
+          }
+        ]
+      },
+      {
+        "label": "Search and Query",
+        "id": "search",
+        "order": 5,
+        "isMenu": true,
+        "children": [
+          {
+            "label": "Search",
+            "id": "search.md",
+            "order": 0,
+            "children": []
+          },
+          {
+            "label": "Hybrid Search",
+            "id": "hybridsearch.md",
+            "order": 2,
+            "children": []
+          },
+          {
+            "label": "Query",
+            "id": "query.md",
+            "order": 1,
+            "children": []
+          }
+        ]
+      },
+      {
+        "label": "Search with Time Travel",
+        "id": "timetravel.md",
+        "order": 6,
+        "children": []
+      },
+      {
+        "label": "Calculate Distance",
+        "id": "calculate_distance.md",
+        "order": 7,
+        "children": []
+      },
+      {
+        "label": "Bootcamp",
+        "id": "bootcamp_userguide",
+        "order": 8,
+        "externalLink": "https://milvus.io/bootcamp",
+        "children": []
+      }
+    ]
+  },
+  {
+    "label": "Administration Guide",
+    "id": "admin_guide",
+    "isMenu": true,
+    "order": 3,
+    "children": [
+      {
+        "label": "Configure Milvus",
+        "id": "configure_milvus",
+        "order": 0,
+        "isMenu": true,
+        "children": [
+          {
+            "label": "With Docker",
+            "id": "configure-docker.md",
+            "order": 2,
+            "children": []
+          },
+          {
+            "label": "With Helm",
+            "id": "configure-helm.md",
+            "order": 1,
+            "children": []
+          },
+          {
+            "label": "With Milvus Operator",
+            "id": "configure_operator.md",
+            "order": 0,
+            "children": []
+          }
+        ]
+      },
+      {
+        "label": "Manage Dependencies",
+        "id": "manage_dependencies",
+        "order": 1,
+        "isMenu": true,
+        "children": [
+          {
+            "label": "With Docker or Helm",
+            "id": "docker_helm_dependencies",
+            "order": 0,
+            "isMenu": true,
+            "children": [
+              {
+                "label": "Object Storage",
+                "id": "deploy_s3.md",
+                "order": 0,
+                "children": []
+              },
+              {
+                "label": "Meta Storage",
+                "id": "deploy_etcd.md",
+                "order": 1,
+                "children": []
+              },
+              {
+                "label": "Message Storage",
+                "id": "deploy_pulsar.md",
+                "order": 2,
+                "children": []
+              }
+            ]
+          },
+          {
+            "label": "With Milvus Operator",
+            "id": "milvus_operator_dependencies",
+            "order": 1,
+            "isMenu": true,
+            "children": [
+              {
+                "label": "Object Storage",
+                "id": "object_storage_operator.md",
+                "order": 0,
+                "children": []
+              },
+              {
+                "label": "Meta Storage",
+                "id": "meta_storage_operator.md",
+                "order": 1,
+                "children": []
+              },
+              {
+                "label": "Message Storage",
+                "id": "message_storage_operator.md",
+                "order": 2,
+                "children": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "label": "Allocate Resources",
+        "id": "allocate.md",
+        "order": 2,
+        "children": []
+      },
+      {
+        "label": "Deploy on Clouds",
+        "id": "cloud",
+        "order": 3,
+        "isMenu": true,
+        "children": [
+          {
+            "label": "AWS",
+            "id": "aws",
+            "order": 0,
+            "isMenu": true,
+            "children": [
+              {
+                "label": "Amazon EC2",
+                "id": "aws.md",
+                "order": 0,
+                "children": []
+              },
+              {
+                "label": "Amazon EKS",
+                "id": "eks.md",
+                "order": 1,
+                "children": []
+              }
+            ]
+          },
+          {
+            "label": "GCP",
+            "id": "gcp.md",
+            "order": 1,
+            "children": []
+          },
+          {
+            "label": "Azure",
+            "id": "azure.md",
+            "order": 2,
+            "children": []
+          }
+        ]
+      },
+      {
+        "label": "Scale a Milvus Cluster",
+        "id": "scaleout.md",
+        "order": 3,
+        "children": []
+      },
+      {
+        "label": "Upgrade",
+        "id": "upgrade.md",
+        "order": 4,
+        "children": []
+      },
+      {
+        "label": "Monitor and Alert",
+        "id": "monitor",
+        "order": 5,
+        "isMenu": true,
+        "children": [
+          {
+            "label": "Monitoring Architecture",
+            "id": "monitor_overview.md",
+            "order": 0,
+            "children": []
+          },
+          {
+            "label": "Deploy Monitoring Services",
+            "id": "monitor.md",
+            "order": 1,
+            "children": []
+          },
+          {
+            "label": "Visualize Milvus Metrics",
+            "id": "visualize.md",
+            "order": 2,
+            "children": []
+          },
+          {
+            "label": "Milvus Metrics Dashboard",
+            "id": "metrics_dashboard.md",
+            "order": 3,
+            "children": []
+          },
+          {
+            "label": "Create an Alert",
+            "id": "alert.md",
+            "order": 4,
+            "children": []
+          }
+        ]
+      },
+      {
+        "label": "Security",
+        "id": "security",
+        "order": 6,
+        "isMenu": true,
+        "children": [
+          {
+            "label": "Enable Authentication",
+            "id": "authenticate.md",
+            "order": 0,
+            "children": []
+          },
+          {
+            "label": "Encryption in Transit",
+            "id": "tls.md",
+            "order": 1,
+            "children": []
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "label": "Tools",
+    "id": "tools",
+    "isMenu": true,
+    "order": 4,
+    "children": [
+      {
+        "label": "Milvus CLI",
+        "id": "cli",
+        "order": 0,
+        "isMenu": true,
+        "children": [
+          {
+            "label": "Overview",
+            "id": "cli_overview.md",
+            "order": 0,
+            "children": []
+          },
+          {
+            "label": "Installation",
+            "id": "install_cli.md",
+            "order": 1,
+            "children": []
+          },
+          {
+            "label": "Commands",
+            "id": "cli_commands.md",
+            "order": 2,
+            "children": []
+          }
+        ]
+      },
+      {
+        "label": "MilvusDM",
+        "id": "milvusdm",
+        "order": 1,
+        "isMenu": true,
+        "children": [
+          {
+            "label": "Overview",
+            "id": "migrate_overview.md",
+            "order": 0,
+            "children": []
+          },
+          {
+            "label": "Installation",
+            "id": "milvusdm_install.md",
+            "order": 1,
+            "children": []
+          }
+        ]
+      },
+      {
+        "label": "Attu",
+        "id": "milvus_attu",
+        "order": 2,
+        "isMenu": true,
+        "children": [
+          {
+            "label": "Overview",
+            "id": "attu.md",
+            "order": 0,
+            "children": []
+          },
+          {
+            "label": "Installation",
+            "id": "attu_install-docker.md",
+            "order": 1,
+            "children": []
+          },
+          {
+            "label": "Manage Collections",
+            "id": "attu_collection.md",
+            "order": 2,
+            "children": []
+          },
+          {
+            "label": "Manage Partitions",
+            "id": "attu_partition.md",
+            "order": 3,
+            "children": []
+          },
+          {
+            "label": "Manage Data",
+            "id": "attu_data.md",
+            "order": 4,
+            "children": []
+          },
+          {
+            "label": "Manage Index",
+            "id": "attu_index.md",
+            "order": 5,
+            "children": []
+          },
+          {
+            "label": "Query Data",
+            "id": "attu_query.md",
+            "order": 6,
+            "children": []
+          },
+          {
+            "label": "Search Data",
+            "id": "attu_search.md",
+            "order": 7,
+            "children": []
+          },
+          {
+            "label": "System Status",
+            "id": "attu_system.md",
+            "order": 8,
+            "children": []
+          },
+          {
+            "label": "Attu FAQ",
+            "id": "attu_faq.md",
+            "order": 9,
+            "children": []
+          }
+        ]
+      },
+      {
+        "label": "Milvus Sizing Tool",
+        "id": "sizing",
+        "order": 3,
+        "externalLink": "https://milvus.io/tools/sizing/",
+        "children": []
+      }
+    ]
+  },
+  {
+    "label": "Reference",
+    "id": "reference",
+    "isMenu": true,
+    "order": 5,
+    "children": [
+      {
+        "label": "Architecture",
+        "id": "architecture",
+        "order": 0,
+        "isMenu": true,
+        "children": [
+          {
+            "label": "Overview",
+            "id": "architecture_overview.md",
+            "order": 0,
+            "children": []
+          },
+          {
+            "label": "Storage/Computing",
+            "id": "four_layers.md",
+            "order": 1,
+            "children": []
+          },
+          {
+            "label": "Main Components",
+            "id": "main_components.md",
+            "order": 2,
+            "children": []
+          },
+          {
+            "label": "Data Processing",
+            "id": "data_processing.md",
+            "order": 3,
+            "children": []
+          }
+        ]
+      },
+      {
+        "label": "Benchmarks",
+        "id": "benchmark.md",
+        "order": 1,
+        "children": []
+      },
+      {
+        "label": "Bitset",
+        "id": "bitset.md",
+        "order": 2,
+        "children": []
+      },
+      {
+        "label": "Boolean Expression Rules",
+        "id": "boolean.md",
+        "order": 3,
+        "children": []
+      },
+      {
+        "label": "Consistency",
+        "id": "consistency.md",
+        "order": 4,
+        "children": []
+      },
+      {
+        "label": "Glossary",
+        "id": "glossary.md",
+        "order": 5,
+        "children": []
+      },
+      {
+        "label": "In-memory Replica",
+        "id": "replica.md",
+        "order": 6,
+        "children": []
+      },
+      {
+        "label": "Knowhere",
+        "id": "knowhere.md",
+        "order": 7,
+        "children": []
+      },
+      {
+        "label": "Schema",
+        "id": "schema.md",
+        "order": 8,
+        "children": []
+      },
+      {
+        "label": "Similarity Metrics",
+        "id": "metric.md",
+        "order": 9,
+        "children": []
+      },
+      {
+        "label": "System Configurations",
+        "id": "system_configuration.md",
+        "order": 10,
+        "children": []
+      },
+      {
+        "label": "Timestamp",
+        "id": "timestamp.md",
+        "order": 11,
+        "children": []
+      },
+      {
+        "label": "Time Synchronization",
+        "id": "time_sync.md",
+        "order": 12,
+        "children": []
+      },
+      {
+        "label": "Time Travel",
+        "id": "timetravel_ref.md",
+        "order": 13,
+        "children": []
+      },
+      {
+        "label": "Vector Index",
+        "id": "index.md",
+        "order": 14,
+        "children": []
+      }
+    ]
+  },
+  {
+    "label": "Example Applications",
+    "id": "tutorials",
+    "isMenu": true,
+    "order": 6,
+    "children": [
+      {
+        "label": "Image Similarity Search",
+        "id": "image_similarity_search.md",
+        "order": 0,
+        "children": []
+      },
+      {
+        "label": "Question Answering System",
+        "id": "question_answering_system.md",
+        "order": 1,
+        "children": []
+      },
+      {
+        "label": "Recommender System",
+        "id": "recommendation_system.md",
+        "order": 2,
+        "children": []
+      },
+      {
+        "label": "Video Similarity Search",
+        "id": "video_similarity_search.md",
+        "order": 3,
+        "children": []
+      },
+      {
+        "label": "Audio Similarity Search",
+        "id": "audio_similarity_search.md",
+        "order": 4,
+        "children": []
+      },
+      {
+        "label": "Molecular Similarity Search",
+        "id": "molecular_similarity_search.md",
+        "order": 5,
+        "children": []
+      },
+      {
+        "label": "DNA Sequence Classification",
+        "id": "dna_sequence_classification.md",
+        "order": 6,
+        "children": []
+      },
+      {
+        "label": "Text Search Engine",
+        "id": "text_search_engine.md",
+        "order": 7,
+        "children": []
+      }
+    ]
+  },
+  {
+    "label": "FAQs",
+    "id": "faq",
+    "isMenu": true,
+    "order": 7,
+    "children": [
+      {
+        "label": "Performance FAQs",
+        "id": "performance_faq.md",
+        "order": 0,
+        "children": []
+      },
+      {
+        "label": "Product FAQs",
+        "id": "product_faq.md",
+        "order": 1,
+        "children": []
+      },
+      {
+        "label": "Operational FAQs",
+        "id": "operational_faq.md",
+        "order": 2,
+        "children": []
+      },
+      {
+        "label": "Troubleshooting",
+        "id": "troubleshooting.md",
+        "order": 3,
+        "children": []
+      }
+    ]
+  }
+]

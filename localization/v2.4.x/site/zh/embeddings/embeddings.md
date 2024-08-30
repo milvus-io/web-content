@@ -4,6 +4,7 @@ order: 1
 summary: 了解如何为数据生成嵌入。
 title: 嵌入概述
 ---
+
 <h1 id="Embedding-Overview" class="common-anchor-header">嵌入概述<button data-href="#Embedding-Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -22,10 +23,10 @@ title: 嵌入概述
     </button></h1><p>嵌入是一种机器学习概念，用于将数据映射到高维空间，将语义相似的数据放在一起。嵌入模型通常是 BERT 或其他 Transformer 系列中的深度神经网络，可以用一系列称为向量的数字有效地表示文本、图像和其他数据类型的语义。这些模型的一个主要特点是，高维空间中向量之间的数学距离可以表示原始文本或图像语义的相似性。这一特性开启了许多信息检索应用，如谷歌和必应等网络搜索引擎、电子商务网站上的产品搜索和推荐，以及最近流行的生成式人工智能中的检索增强生成（RAG）范式。</p>
 <p>嵌入有两大类，每一类产生不同类型的向量：</p>
 <ul>
-<li><p><strong>密集嵌入</strong>：大多数嵌入模型将信息表示为数百到数千维的浮点矢量。由于大多数维度的值都不为零，因此输出结果被称为 "密集 "向量。例如，流行的开源嵌入模型 BAAI/bge-base-en-v1.5 输出的向量包含 768 个浮点数（768 维浮点向量）。</p></li>
+<li><p><strong>密集嵌入</strong>：大多数嵌入模型将信息表示为数百到数千维的浮点向量。由于大多数维度的值都不为零，因此输出结果被称为 "密集 "向量。例如，流行的开源嵌入模型 BAAI/bge-base-en-v1.5 输出的向量包含 768 个浮点数（768 维浮点向量）。</p></li>
 <li><p><strong>稀疏嵌入</strong>：相比之下，稀疏嵌入的输出向量大部分维数为零，即 "稀疏 "向量。这些向量通常具有更高的维度（数万或更多），这是由标记词汇量的大小决定的。稀疏向量可以通过深度神经网络或文本语料库统计分析生成。由于稀疏嵌入向量具有可解释性和更好的域外泛化能力，开发人员越来越多地采用稀疏嵌入向量作为高密度嵌入向量的补充。</p></li>
 </ul>
-<p>Milvus 是一个矢量数据库，专为矢量数据管理、存储和检索而设计。通过整合主流的嵌入和<a href="https://milvus.io/docs/rerankers-overview.md">重新排序</a>模型，您可以轻松地将原始文本转换为可搜索的矢量，或使用强大的模型对结果进行重新排序，从而获得更准确的 RAG 结果。这种集成简化了文本转换，无需额外的嵌入或重排组件，从而简化了 RAG 的开发和验证。</p>
+<p>Milvus 是一个向量数据库，专为向量数据管理、存储和检索而设计。通过整合主流的嵌入和<a href="https://milvus.io/docs/rerankers-overview.md">重新排序</a>模型，您可以轻松地将原始文本转换为可搜索的向量，或使用强大的模型对结果进行重新排序，从而获得更准确的 RAG 结果。这种集成简化了文本转换，无需额外的嵌入或重排组件，从而简化了 RAG 的开发和验证。</p>
 <p>要在实际中创建嵌入，请参阅<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/model/embedding_functions.ipynb">使用 PyMilvus 的模型生成文本嵌入</a>。</p>
 <table>
 <thead>
@@ -39,7 +40,7 @@ title: 嵌入概述
 <tr><td><a href="https://milvus.io/api-reference/pymilvus/v2.4.x/EmbeddingModels/BGEM3EmbeddingFunction/BGEM3EmbeddingFunction.md">bge-m3</a></td><td>混合</td><td>开源</td></tr>
 <tr><td><a href="https://milvus.io/api-reference/pymilvus/v2.4.x/EmbeddingModels/VoyageEmbeddingFunction/VoyageEmbeddingFunction.md">航程</a></td><td>密集型</td><td>应用程序接口</td></tr>
 <tr><td><a href="https://milvus.io/api-reference/pymilvus/v2.4.x/EmbeddingModels/JinaEmbeddingFunction/JinaEmbeddingFunction.md">jina</a></td><td>密集</td><td>API</td></tr>
-<tr><td><a href="https://milvus.io/api-reference/pymilvus/v2.4.x/EmbeddingModels/CohereEmbeddingFunction/CohereEmbeddingFunction.md">cohere</a></td><td>密集</td><td>密集矢量</td></tr>
+<tr><td><a href="https://milvus.io/api-reference/pymilvus/v2.4.x/EmbeddingModels/CohereEmbeddingFunction/CohereEmbeddingFunction.md">cohere</a></td><td>密集</td><td>密集向量</td></tr>
 </tbody>
 </table>
 <h2 id="Example-1-Use-default-embedding-function-to-generate-dense-vectors" class="common-anchor-header">例 1：使用默认嵌入函数生成密集向量<button data-href="#Example-1-Use-default-embedding-function-to-generate-dense-vectors" class="anchor-icon" translate="no">
@@ -68,9 +69,9 @@ ef = model.DefaultEmbeddingFunction()
 
 <span class="hljs-comment"># Data from which embeddings are to be generated </span>
 docs = [
-    <span class="hljs-string">&quot;Artificial intelligence was founded as an academic discipline in 1956.&quot;</span>,
-    <span class="hljs-string">&quot;Alan Turing was the first person to conduct substantial research in AI.&quot;</span>,
-    <span class="hljs-string">&quot;Born in Maida Vale, London, Turing was raised in southern England.&quot;</span>,
+<span class="hljs-string">&quot;Artificial intelligence was founded as an academic discipline in 1956.&quot;</span>,
+<span class="hljs-string">&quot;Alan Turing was the first person to conduct substantial research in AI.&quot;</span>,
+<span class="hljs-string">&quot;Born in Maida Vale, London, Turing was raised in southern England.&quot;</span>,
 ]
 
 embeddings = ef.encode_documents(docs)
@@ -80,6 +81,7 @@ embeddings = ef.encode_documents(docs)
 <span class="hljs-comment"># Print dimension and shape of embeddings</span>
 <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Dim:&quot;</span>, ef.dim, embeddings[<span class="hljs-number">0</span>].shape)
 <button class="copy-code-btn"></button></code></pre>
+
 <p>预期输出类似于下面的内容：</p>
 <pre><code translate="no" class="language-python">Embeddings: [array([<span class="hljs-number">-3.09392996e-02</span>, <span class="hljs-number">-1.80662833e-02</span>,  <span class="hljs-number">1.34775648e-02</span>,  <span class="hljs-number">2.77156215e-02</span>,
        <span class="hljs-number">-4.86349640e-03</span>, <span class="hljs-number">-3.12581174e-02</span>, <span class="hljs-number">-3.55921760e-02</span>,  <span class="hljs-number">5.76934684e-03</span>,
@@ -138,6 +140,7 @@ bge_m3_ef = BGEM3EmbeddingFunction(use_fp16=<span class="hljs-literal">False</sp
 docs_embeddings = bge_m3_ef(docs)
 query_embeddings = bge_m3_ef([query])
 <button class="copy-code-btn"></button></code></pre>
+
 <h2 id="Example-3-Generate--sparse-vectors-using-BM25-model" class="common-anchor-header">例 3：使用 BM25 模型生成稀疏向量<button data-href="#Example-3-Generate--sparse-vectors-using-BM25-model" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -181,6 +184,7 @@ docs_embeddings = new_bm25_ef.encode_documents(docs)
 query_embeddings = new_bm25_ef.encode_queries([query])
 <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Dim:&quot;</span>, new_bm25_ef.dim, <span class="hljs-built_in">list</span>(docs_embeddings)[<span class="hljs-number">0</span>].shape)
 <button class="copy-code-btn"></button></code></pre>
+
 <p>预期的输出结果类似于下图：</p>
 <pre><code translate="no" class="language-python">Dim: 21 (1, 21)
 <button class="copy-code-btn"></button></code></pre>

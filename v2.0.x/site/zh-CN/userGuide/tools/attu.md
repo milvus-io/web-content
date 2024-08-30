@@ -30,9 +30,9 @@ Attu 正在快速开发中，每周都会添加新功能。每当新功能准备
 
 ![attu_operations](../../../../assets/attu/insight_operations.png "执行 CRUD 或批量操作。")
 
-- 创建矢量索引。
+- 创建向量索引。
 
-![attu_create_index](../../../../assets/attu/insight_create_index.png "创建矢量索引。")
+![attu_create_index](../../../../assets/attu/insight_create_index.png "创建向量索引。")
 
 - 以全新的方式进行向量相似度搜索。
 

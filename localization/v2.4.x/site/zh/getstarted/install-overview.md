@@ -1,11 +1,12 @@
 ---
 id: install-overview.md
 summary: >-
-  Milvus 是一个高性能、可扩展的向量数据库。它支持各种规模的用例，从在 Jupyter 笔记本中本地运行的演示到处理数百亿矢量的大规模
+  Milvus 是一个高性能、可扩展的向量数据库。它支持各种规模的用例，从在 Jupyter 笔记本中本地运行的演示到处理数百亿向量的大规模
   Kubernetes 集群。目前，Milvus 有三种部署选项：Milvus Lite、Milvus Standalone 和 Milvus
   Distributed。
 title: Milvus 部署选项概览
 ---
+
 <h1 id="Overview-of-Milvus-Deployment-Options" class="common-anchor-header">Milvus 部署选项概述<button data-href="#Overview-of-Milvus-Deployment-Options" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -21,7 +22,7 @@ title: Milvus 部署选项概览
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Milvus 是一个高性能、可扩展的矢量数据库。它支持各种规模的用例，从在 Jupyter 笔记本中本地运行的演示到处理数百亿矢量的大规模 Kubernetes 集群。目前，Milvus 有三种部署选项：Milvus Lite、Milvus Standalone 和 Milvus Distributed。</p>
+    </button></h1><p>Milvus 是一个高性能、可扩展的向量数据库。它支持各种规模的用例，从在 Jupyter 笔记本中本地运行的演示到处理数百亿向量的大规模 Kubernetes 集群。目前，Milvus 有三种部署选项：Milvus Lite、Milvus Standalone 和 Milvus Distributed。</p>
 <h2 id="Milvus-Lite" class="common-anchor-header">Milvus Lite<button data-href="#Milvus-Lite" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -38,7 +39,7 @@ title: Milvus 部署选项概览
         ></path>
       </svg>
     </button></h2><p><a href="https://milvus.io/docs/milvus_lite.md">Milvus Lite</a>是一个 Python 库，可导入到您的应用程序中。作为 Milvus 的轻量级版本，它非常适合在 Jupyter 笔记本或资源有限的智能设备上运行快速原型。Milvus Lite 支持与其他 Milvus 部署相同的 API。与 Milvus Lite 交互的客户端代码也可以与其他部署模式下的 Milvus 实例协同工作。</p>
-<p>要将 Milvus Lite 集成到应用程序中，请运行<code translate="no">pip install pymilvus</code> 进行安装，并使用<code translate="no">MilvusClient(&quot;./demo.db&quot;)</code> 语句实例化一个带有本地文件的矢量数据库，以持久化所有数据。更多详情，请参阅<a href="https://milvus.io/docs/milvus_lite.md">运行 Milvus Lite</a>。</p>
+<p>要将 Milvus Lite 集成到应用程序中，请运行<code translate="no">pip install pymilvus</code> 进行安装，并使用<code translate="no">MilvusClient(&quot;./demo.db&quot;)</code> 语句实例化一个带有本地文件的向量数据库，以持久化所有数据。更多详情，请参阅<a href="https://milvus.io/docs/milvus_lite.md">运行 Milvus Lite</a>。</p>
 <h2 id="Milvus-Standalone" class="common-anchor-header">Milvus 单机版<button data-href="#Milvus-Standalone" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -70,7 +71,7 @@ title: Milvus 部署选项概览
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus Distributed 可部署在<a href="https://milvus.io/docs/install_cluster-milvusoperator.md">Kubernetes</a>集群上。这种部署采用云原生架构，摄取负载和搜索查询分别由独立节点处理，允许关键组件冗余。它具有最高的可扩展性和可用性，并能灵活定制每个组件中分配的资源。Milvus Distributed 是在生产中运行大规模矢量搜索系统的企业用户的首选。</p>
+    </button></h2><p>Milvus Distributed 可部署在<a href="https://milvus.io/docs/install_cluster-milvusoperator.md">Kubernetes</a>集群上。这种部署采用云原生架构，摄取负载和搜索查询分别由独立节点处理，允许关键组件冗余。它具有最高的可扩展性和可用性，并能灵活定制每个组件中分配的资源。Milvus Distributed 是在生产中运行大规模向量搜索系统的企业用户的首选。</p>
 <h2 id="Choose-the-Right-Deployment-for-Your-Use-Case" class="common-anchor-header">为您的使用案例选择正确的部署方式<button data-href="#Choose-the-Right-Deployment-for-Your-Use-Case" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -99,7 +100,7 @@ title: Milvus 部署选项概览
 </ul>
 <p>Milvus 部署模式的选择取决于项目的阶段和规模。Milvus 提供灵活而强大的解决方案，可满足从快速原型开发到大规模企业部署的各种需求。</p>
 <ul>
-<li><strong>Milvus Lite</strong>建议用于较小的数据集，多达几百万个矢量。</li>
+<li><strong>Milvus Lite</strong>建议用于较小的数据集，多达几百万个向量。</li>
 <li><strong>Milvus Standalone</strong>适用于中型数据集，可扩展至 1 亿向量。</li>
 <li><strong>Milvus Distributed 专为</strong>大规模部署而设计，能够处理从 1 亿到数百亿载体的数据集。</li>
 </ul>
@@ -128,8 +129,8 @@ title: Milvus 部署选项概览
 </thead>
 <tbody>
 <tr><td>SDK / 客户端软件</td><td>Python<br/>gRPC</td><td>Python<br/>Go<br/>Java<br/>Node.js<br/>C#<br/>RESTful</td><td>Python<br/>Java<br/>Go<br/>Node.js<br/>C#<br/>RESTful</td></tr>
-<tr><td>数据类型</td><td>密集矢量<br/>稀疏矢量<br/>二进制矢量<br/>布尔型<br/>整数<br/>浮点型<br/>VarChar<br/>数组<br/>JSON</td><td>密集矢量<br/>稀疏矢量<br/>二进制矢量<br/>布尔型<br/>整数<br/>浮点型<br/>VarChar<br/>数组<br/>JSON</td><td>密集矢量<br/>稀疏矢量<br/>二进制矢量<br/>布尔值<br/>整数<br/>浮点<br/>VarChar<br/>数组<br/>JSON</td></tr>
-<tr><td>搜索功能</td><td>矢量搜索（ANN 搜索）<br/>元数据过滤<br/>范围搜索<br/>标量查询<br/>通过主键获取实体<br/>混合搜索</td><td>矢量搜索（ANN 搜索）<br/>元数据过滤<br/>范围搜索<br/>标量查询<br/>通过主键获取实体<br/>混合搜索</td><td>矢量搜索（ANN 搜索）<br/>元数据过滤<br/>范围搜索<br/>标量查询<br/>通过主键获取实体<br/>混合搜索</td></tr>
+<tr><td>数据类型</td><td>密集向量<br/>稀疏向量<br/>二进制向量<br/>布尔型<br/>整数<br/>浮点型<br/>VarChar<br/>数组<br/>JSON</td><td>密集向量<br/>稀疏向量<br/>二进制向量<br/>布尔型<br/>整数<br/>浮点型<br/>VarChar<br/>数组<br/>JSON</td><td>密集向量<br/>稀疏向量<br/>二进制向量<br/>布尔值<br/>整数<br/>浮点<br/>VarChar<br/>数组<br/>JSON</td></tr>
+<tr><td>搜索功能</td><td>向量搜索（ANN 搜索）<br/>元数据过滤<br/>范围搜索<br/>标量查询<br/>通过主键获取实体<br/>混合搜索</td><td>向量搜索（ANN 搜索）<br/>元数据过滤<br/>范围搜索<br/>标量查询<br/>通过主键获取实体<br/>混合搜索</td><td>向量搜索（ANN 搜索）<br/>元数据过滤<br/>范围搜索<br/>标量查询<br/>通过主键获取实体<br/>混合搜索</td></tr>
 <tr><td>CRUD 操作</td><td>✔️</td><td>✔️</td><td>✔️</td></tr>
 <tr><td>高级数据管理</td><td>不适用</td><td>访问控制<br/>分区<br/>分区密钥</td><td>访问控制<br/>分区<br/>分区密钥<br/>物理资源分组</td></tr>
 <tr><td>一致性级别</td><td>强</td><td>强<br/>有界停滞<br/>会话<br/>最终</td><td>强<br/>有界稳定性<br/>会话<br/>最终</td></tr>

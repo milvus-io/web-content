@@ -4,6 +4,7 @@ order: 9
 summary: 本文介绍如何使用 CohereEmbeddingFunction 使用 Cohere 嵌入模型对文档和查询进行编码。
 title: 嵌入 Cohere
 ---
+
 <h1 id="Cohere" class="common-anchor-header">嵌入模型<button data-href="#Cohere" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -42,7 +43,7 @@ pip install <span class="hljs-string">&quot;pymilvus[model]&quot;</span>
 <li><p><code translate="no">input_type</code> <em>（字符串）</em></p>
 <p>传递给模型的输入类型。嵌入模型 v3 及更高版本时必须使用。</p>
 <ul>
-<li><code translate="no">&quot;search_document&quot;</code>:用于存储在矢量数据库中的嵌入，以备搜索之用。</li>
+<li><code translate="no">&quot;search_document&quot;</code>:用于存储在向量数据库中的嵌入，以备搜索之用。</li>
 <li><code translate="no">&quot;search_query&quot;</code>:用于嵌入针对向量数据库运行的搜索查询，以查找相关文档。</li>
 <li><code translate="no">&quot;classification&quot;</code>:用于通过文本分类器进行嵌入。</li>
 <li><code translate="no">&quot;clustering&quot;</code>:用于通过聚类算法运行的嵌入。</li>
@@ -69,6 +70,7 @@ docs_embeddings = cohere_ef.encode_documents(docs)
 <span class="hljs-comment"># Print dimension and shape of embeddings</span>
 <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Dim:&quot;</span>, cohere_ef.dim, docs_embeddings[<span class="hljs-number">0</span>].shape)
 <button class="copy-code-btn"></button></code></pre>
+
 <p>预期输出类似于下图：</p>
 <pre><code translate="no" class="language-python">Embeddings: [array([ <span class="hljs-number">3.43322754e-02</span>,  <span class="hljs-number">1.16252899e-03</span>, <span class="hljs-number">-5.25207520e-02</span>,  <span class="hljs-number">1.32846832e-03</span>,
        <span class="hljs-number">-6.80541992e-02</span>,  <span class="hljs-number">6.10961914e-02</span>, <span class="hljs-number">-7.06176758e-02</span>,  <span class="hljs-number">1.48925781e-01</span>,
@@ -89,6 +91,7 @@ query_embeddings = cohere_ef.encode_queries(queries)
 <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Embeddings:&quot;</span>, query_embeddings)
 <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Dim&quot;</span>, cohere_ef.dim, query_embeddings[<span class="hljs-number">0</span>].shape)
 <button class="copy-code-btn"></button></code></pre>
+
 <p>预期输出类似于下面的内容：</p>
 <pre><code translate="no" class="language-python">Embeddings: [array([<span class="hljs-number">-1.33361816e-02</span>,  <span class="hljs-number">9.79423523e-04</span>, <span class="hljs-number">-7.28759766e-02</span>, <span class="hljs-number">-1.93786621e-02</span>,
        <span class="hljs-number">-9.71679688e-02</span>,  <span class="hljs-number">4.34875488e-02</span>, <span class="hljs-number">-9.81445312e-02</span>,  <span class="hljs-number">1.16882324e-01</span>,

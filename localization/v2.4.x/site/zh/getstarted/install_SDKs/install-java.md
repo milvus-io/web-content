@@ -5,6 +5,7 @@ related_key: SDK
 summary: 了解如何安装 Milvus 的 Java SDK。
 title: 安装 Milvus Java SDK
 ---
+
 <h1 id="Install-Milvus-Java-SDK" class="common-anchor-header">安装 Milvus Java SDK<button data-href="#Install-Milvus-Java-SDK" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -93,7 +94,7 @@ title: 安装 Milvus Java SDK
 <li><a href="/docs/zh/manage-collections.md">管理集合</a></li>
 <li><a href="/docs/zh/manage-partitions.md">管理分区</a></li>
 <li><a href="/docs/zh/insert-update-delete.md">插入、倒置和删除</a></li>
-<li><a href="/docs/zh/single-vector-search.md">单矢量搜索</a></li>
+<li><a href="/docs/zh/single-vector-search.md">单向量搜索</a></li>
 <li><a href="/docs/zh/multi-vector-search.md">混合搜索</a></li>
 </ul></li>
 <li><p>探索<a href="/api-reference/java/v2.4.x/About.md">Milvus Java API 参考</a></p></li>

@@ -4,6 +4,7 @@ title: 米尔沃斯限额
 related_key: Limitations
 summary: 了解使用 Milvus 时的限制。
 ---
+
 <h1 id="Milvus-Limits" class="common-anchor-header">Milvus 限制<button data-href="#Milvus-Limits" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -19,7 +20,7 @@ summary: 了解使用 Milvus 时的限制。
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Milvus 致力于为人工智能应用和矢量相似性搜索提供最好的矢量数据库。不过，我们的团队仍在不断努力，以引入更多的功能和最好的实用工具，从而提升用户体验。本页列出了用户在使用 Milvus 时可能遇到的一些已知限制。</p>
+    </button></h1><p>Milvus 致力于为人工智能应用和向量相似性搜索提供最好的向量数据库。不过，我们的团队仍在不断努力，以引入更多的功能和最好的实用工具，从而提升用户体验。本页列出了用户在使用 Milvus 时可能遇到的一些已知限制。</p>
 <h2 id="Length-of-a-resource-name" class="common-anchor-header">资源名称长度<button data-href="#Length-of-a-resource-name" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

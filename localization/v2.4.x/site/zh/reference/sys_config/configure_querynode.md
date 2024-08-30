@@ -3,8 +3,9 @@ id: configure_querynode.md
 related_key: configure
 group: system_configuration.md
 summary: 了解如何为 Milvus 配置 queryNode。
-title: ''
+title: ""
 ---
+
 <h1 id="queryNode-related-Configurations" class="common-anchor-header">queryNode 相关配置<button data-href="#queryNode-related-Configurations" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -429,7 +430,7 @@ title: ''
         <li>选项：async、sync、disable。 </li>      
         <li>指定预热块缓存的必要性。 </li>      
         <li>1.如果设置为 "sync"（同步）或 "async"（异步），原始向量数据将在加载过程中同步/异步加载到 </li>      
-        <li>在加载过程中，原始矢量数据将同步/异步加载到块缓存中。这种方法有可能在加载后的特定时间内大幅减少查询/搜索延迟。</li>      
+        <li>在加载过程中，原始向量数据将同步/异步加载到块缓存中。这种方法有可能在加载后的特定时间内大幅减少查询/搜索延迟。</li>      
         <li>尽管同时会增加磁盘使用量；</li>      
         <li>2.如果设置为 "禁用"，原始向量数据将只在搜索/查询过程中加载到块缓存中。</li>      </td>
       <td>禁用</td>

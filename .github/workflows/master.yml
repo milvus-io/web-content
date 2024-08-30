@@ -13,15 +13,26 @@ jobs:
     runs-on: "ubuntu-latest"
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
 
-      # - name: Stats Docs Words
-      #   env:
-      #     MSERVICE_URL: ${{secrets.MSERVICE_URL}}
-      #   run: |
-      #     mv word-count.md word-count.js
-      #     yarn
-      #     node word-count.js
+      - name: Set Node.js 20.x
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20.x
+
+      - name: Yarn install
+        uses: borales/actions-yarn@v4
+        with:
+          cmd: install
+
+      - name: Translate Docs
+        run: |
+          touch .env
+          echo DEEPL_API_KEY=${{secrets.DEEPL_API_KEY}} >> .env
+          # yarn translate
+          # git add .
+          # git commit -m "Translate docs"
+          # git push -f origin master
 
       - name: Trigger milvus.io
         run: |

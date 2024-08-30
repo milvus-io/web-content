@@ -46,21 +46,15 @@ title: Verwalten von CDC-Aufgaben
   &quot;request_type&quot;: &quot;create&quot;,
   &quot;request_data&quot;: {
     &quot;milvus_connect_param&quot;: {
-      &quot;host&quot;: &quot;localhost&quot;,
-      &quot;port&quot;: 19530,
-      &quot;username&quot;: &quot;root&quot;,
-      &quot;password&quot;: &quot;Milvus&quot;,
-      &quot;enable_tls&quot;: false,
+      &quot;uri&quot;: &quot;http://localhost:19530&quot;,
+      &quot;token&quot;:&quot;root:Milvus&quot;,
       &quot;connect_timeout&quot;: 10
     },
     &quot;collection_infos&quot;: [
       {
         &quot;name&quot;: &quot;*&quot;
       }
-    ],
-    &quot;rpc_channel_info&quot;: {
-      &quot;name&quot;: &quot;by-dev-replicate-msg&quot;
-    }
+    ]
   }
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
@@ -77,7 +71,6 @@ title: Verwalten von CDC-Aufgaben
 <li><p><strong>connect_timeout</strong>: Timeout-Zeit in Sekunden für den Aufbau der Verbindung.</p></li>
 </ul></li>
 <li><p><strong>sammlungs_infos</strong>: Zu synchronisierende Sammlungen. Derzeit wird nur ein Sternchen<strong>(*</strong>) unterstützt, da Milvus-CDC auf Clusterebene synchronisiert, nicht auf Ebene einzelner Sammlungen.</p></li>
-<li><p><strong>rpc_channel_info</strong>: RPC-Kanal-Name für die Synchronisierung, gebildet durch Verkettung der Werte von <strong>common.chanNamePrefix.cluster</strong> und <strong>common.chanNamePrefix.replicateMsg</strong> aus der Milvus-Quellkonfiguration, getrennt durch einen Bindestrich<strong>(-</strong>).</p></li>
 </ul>
 <p>Erwartete Antwort:</p>
 <pre><code translate="no" class="language-json">{
@@ -107,7 +100,7 @@ title: Verwalten von CDC-Aufgaben
   &quot;request_type&quot;: &quot;list&quot;
 }&#x27;</span> http://localhost:8444/cdc
 <button class="copy-code-btn"></button></code></pre>
-<p>Ersetzen Sie <strong>localhost</strong> durch die IP-Adresse des Ziel-Milvus-Servers.</p>
+<p>Ersetzen Sie <strong>localhost</strong> durch die IP-Adresse des Milvus-Zielservers.</p>
 <p>Erwartete Antwort:</p>
 <pre><code translate="no" class="language-json">{
   <span class="hljs-string">&quot;code&quot;</span>: <span class="hljs-number">200</span>,
@@ -116,8 +109,7 @@ title: Verwalten von CDC-Aufgaben
       {
         <span class="hljs-string">&quot;task_id&quot;</span>: <span class="hljs-string">&quot;xxxxx&quot;</span>,
         <span class="hljs-string">&quot;milvus_connect_param&quot;</span>: {
-          <span class="hljs-string">&quot;host&quot;</span>: <span class="hljs-string">&quot;localhost&quot;</span>,
-          <span class="hljs-string">&quot;port&quot;</span>: <span class="hljs-number">19530</span>,
+          <span class="hljs-string">&quot;uri&quot;</span>:<span class="hljs-string">&quot;http://localhost:19530&quot;</span>,
           <span class="hljs-string">&quot;connect_timeout&quot;</span>: <span class="hljs-number">10</span>
         },
         <span class="hljs-string">&quot;collection_infos&quot;</span>: [
@@ -239,9 +231,7 @@ title: Verwalten von CDC-Aufgaben
       ],
       <span class="hljs-string">&quot;milvus_connect_param&quot;</span>: {
         <span class="hljs-string">&quot;connect_timeout&quot;</span>: <span class="hljs-number">10</span>,
-        <span class="hljs-string">&quot;enable_tls&quot;</span>: <span class="hljs-literal">true</span>,
-        <span class="hljs-string">&quot;host&quot;</span>: <span class="hljs-string">&quot;localhost&quot;</span>,
-        <span class="hljs-string">&quot;port&quot;</span>: <span class="hljs-number">19530</span>
+        <span class="hljs-string">&quot;uri&quot;</span>:<span class="hljs-string">&quot;http://localhost:19530&quot;</span>
       },
       <span class="hljs-string">&quot;state&quot;</span>: <span class="hljs-string">&quot;Running&quot;</span>,
       <span class="hljs-string">&quot;task_id&quot;</span>: <span class="hljs-string">&quot;xxxx&quot;</span>
