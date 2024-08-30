@@ -26,6 +26,10 @@ load(
 
     The partitions of the current collection to load. If left unspecified, all partitions are to be loaded.
 
+- **timeout** (*float* | *None*)  -
+
+    The timeout duration for this operation. Setting this to **None** indicates that this operation timeouts when any response arrives or any error occurs.
+
 - **replica_number** (*int*) -
 
     The number of replicas to create. The value defaults to 1 and ranges from 1 to the number of query nodes available. Setting this to `1` indicates that segments in the current collection or any specified partitions are to be loaded onto one query node.
@@ -39,26 +43,30 @@ load(
 
     </div>
 
-- **timeout** (*float* | *None*)  -
+- **resource_groups** (*str[]*) **-**
 
-    The timeout duration for this operation. Setting this to **None** indicates that this operation timeouts when any response arrives or any error occurs.
+    A specific set of resource groups into which the current collection is to be loaded.
 
-- **kwargs** - 
+    If left unspecified, the default resource group applies.
 
-    - **_resource_groups** (*list*) -
+    <div class="admonition note">
 
-        A specific set of resource groups into which the current collection is to be loaded.
+    <p><b>what is a resource group?</b></p>
 
-        If left unspecified, the default resource group applies.
+    <p>A resource group can hold several or all of the query nodes in a Milvus instance.</p>
+    <p>Setting this parameter for this operation makes Milvus loads the current collection to the query nodes in the specified resource groups.</p>
 
-        <div class="admonition note">
+    </div>
 
-        <p><b>what is a resource group?</b></p>
+- **load_fields** (*str[]*) -
 
-        <p>A resource group can hold several or all of the query nodes in a Milvus instance.</p>
-        <p>Setting this parameter for this operation makes Milvus loads the current collection to the query nodes in the specified resource groups.</p>
+    The names of the fields to load. 
 
-        </div>
+    If this parameter is left unspecified, Milvus loads all vector field indexes plus all scalar field data into memory. Setting this parameter makes Milvus load the data of the specified fields into memory, reducing memory usage and improving search performance.
+
+- **skip_load_dynamic_field** (*bool*) - 
+
+    Setting this to true makes Milvus skip loading the dynamic field, making it unavailable for filtering conditions and output fields for searches and queries.
 
 **RETURN TYPE:**
 

@@ -37,6 +37,20 @@ load_collection(
 
     </div>
 
+- **resource_groups** (*str[]*) -
+
+    The target resource groups of this operation.
+
+- **load_fields** (*str[]*) -
+
+    The names of the fields to load. 
+
+    If this parameter is left unspecified, Milvus loads all vector field indexes plus all scalar field data into memory. Setting this parameter makes Milvus load the data of the specified fields into memory, reducing memory usage and improving search performance.
+
+- **skip_load_dynamic_field** (*bool*) - 
+
+    Setting this to true makes Milvus skip loading the dynamic field, making it unavailable for filtering conditions and output fields for searches and queries.
+
 - **timeout** (*float* | *None*) -
 
     The timeout duration for this operation. 
