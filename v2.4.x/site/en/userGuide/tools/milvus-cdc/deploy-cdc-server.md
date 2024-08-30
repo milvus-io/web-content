@@ -76,6 +76,8 @@ In the `milvus-cdc/server/configs` directory, modify the `cdc.yaml` file to cust
         - __Helm__ or __Docker Compose__: Defaults to `by-dev`.
 
         - __Operator__: Defaults to `<release_name>`.
+    
+    - `replicateChan`: milvus replicate channel name, which is `{msgChannel.chanNamePrefix.cluster}/{msgChannel.chanNamePrefix.replicateMsg}` in the milvus.yaml file
 
     - `sourceConfig.pulsar`: Pulsar configurations for the source Milvus. If the source Milvus uses Kafka for message storage, remove all Pulsar-related configurations. For more information, refer to [Pulsar-related Configurations](https://milvus.io/docs/configure_pulsar.md).
 
@@ -95,6 +97,7 @@ sourceConfig:
   defaultPartitionName: _default
   # read buffer length, mainly used for buffering if writing data to milvus-target is slow.
   readChanLen: 10
+  replicateChan: by-dev-replicate-msg
   # milvus-source mq config, which is pulsar or kafka
   pulsar:
     address: pulsar://localhost:6650

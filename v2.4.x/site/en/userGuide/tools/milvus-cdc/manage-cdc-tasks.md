@@ -24,21 +24,15 @@ curl -X POST http:_//localhost:8444/cdc \
   "request_type": "create",
   "request_data": {
     "milvus_connect_param": {
-      "host": "localhost",
-      "port": 19530,
-      "username": "root",
-      "password": "Milvus",
-      "enable_tls": false,
+      "uri": "http://localhost:19530",
+      "token":"root:Milvus",
       "connect_timeout": 10
     },
     "collection_infos": [
       {
         "name": "*"
       }
-    ],
-    "rpc_channel_info": {
-      "name": "by-dev-replicate-msg"
-    }
+    ]
   }
 }'
 ```
@@ -62,8 +56,6 @@ __Parameters__:
     - __connect_timeout__: Timeout period in seconds for establishing the connection.
 
 - __collection_infos__: Collections to synchronize. Currently, only an asterisk (__*__) is supported, as Milvus-CDC synchronizes at the cluster level, not individual collections.
-
-- __rpc_channel_info__: RPC channel name for synchronization, constructed by concatenating the values of __common.chanNamePrefix.cluster__ and __common.chanNamePrefix.replicateMsg__ from the source Milvus configuration, separated by a hyphen (__-__).
 
 Expected response:
 
@@ -98,8 +90,7 @@ Expected response:
       {
         "task_id": "xxxxx",
         "milvus_connect_param": {
-          "host": "localhost",
-          "port": 19530,
+          "uri":"http://localhost:19530",
           "connect_timeout": 10
         },
         "collection_infos": [
@@ -203,9 +194,7 @@ Expected response:
       ],
       "milvus_connect_param": {
         "connect_timeout": 10,
-        "enable_tls": true,
-        "host": "localhost",
-        "port": 19530
+        "uri":"http://localhost:19530"
       },
       "state": "Running",
       "task_id": "xxxx"
