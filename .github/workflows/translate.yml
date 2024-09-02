@@ -24,6 +24,8 @@ jobs:
 
       - name: Translate Docs
         run: |
+          git config --global user.email "Milvus-doc-bot@zilliz.com"
+          git config --global user.name "Milvus-doc-bot"
           touch .env
           echo DEEPL_API_KEY=${{secrets.DEEPL_API_KEY}} >> .env
           echo GITHUB_TOKEN=${{secrets.GH_TOKEN}} >> .env
