@@ -1,8 +1,9 @@
 ---
 id: knowhere.md
-summary: 了解米尔沃斯的 Knowhere。
+summary: 了解Milvus的 Knowhere。
 title: Knowhere
 ---
+
 <h1 id="Knowhere" class="common-anchor-header">Knowhere<button data-href="#Knowhere" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

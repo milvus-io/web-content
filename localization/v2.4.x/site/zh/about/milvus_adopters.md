@@ -1,6 +1,6 @@
 ---
 id: milvus_adopters.md
-title: 米尔沃斯采用者
+title: Milvus采用者
 related_key: Milvus adopters
 summary: 了解在生产应用中采用 Milvus 的公司。
 ---

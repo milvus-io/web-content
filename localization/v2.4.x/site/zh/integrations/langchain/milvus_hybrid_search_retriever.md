@@ -1,8 +1,9 @@
 ---
 id: milvus_hybrid_search_retriever.md
 summary: 本笔记本介绍如何使用与 Milvus 向量数据库相关的功能。
-title: 米尔沃斯混合搜索寻回犬
+title: Milvus混合搜索寻回犬
 ---
+
 <h1 id="Milvus-Hybrid-Search-Retriever" class="common-anchor-header">Milvus 混合动力搜索寻回犬<button data-href="#Milvus-Hybrid-Search-Retriever" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -267,9 +268,10 @@ Use the following pieces of information to provide a concise answer to the quest
 Assistant:&quot;&quot;&quot;</span>
 
 prompt = PromptTemplate(
-    template=PROMPT_TEMPLATE, input_variables=[<span class="hljs-string">&quot;context&quot;</span>, <span class="hljs-string">&quot;question&quot;</span>]
+template=PROMPT_TEMPLATE, input_variables=[<span class="hljs-string">&quot;context&quot;</span>, <span class="hljs-string">&quot;question&quot;</span>]
 )
 <button class="copy-code-btn"></button></code></pre>
+
 <p>定义一个用于格式化文档的函数</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">format_docs</span>(<span class="hljs-params">docs</span>):
     <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;\n\n&quot;</span>.join(doc.page_content <span class="hljs-keyword">for</span> doc <span class="hljs-keyword">in</span> docs)

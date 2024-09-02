@@ -1,8 +1,9 @@
 ---
 id: glossary.md
 title: 术语
-summary: ''
+summary: ""
 ---
+
 <h1 id="Terminology" class="common-anchor-header">术语<button data-href="#Terminology" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -50,7 +51,7 @@ summary: ''
         ></path>
       </svg>
     </button></h2><p>Milvus 会根据经验数据自动为特定字段决定最合适的索引类型和参数。这非常适合不需要控制特定索引参数的情况。更多信息，请参阅<a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/add_index.md">add_index</a>。</p>
-<h2 id="Attu" class="common-anchor-header">阿图<button data-href="#Attu" class="anchor-icon" translate="no">
+<h2 id="Attu" class="common-anchor-header">Attu<button data-href="#Attu" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -66,7 +67,7 @@ summary: ''
         ></path>
       </svg>
     </button></h2><p><a href="https://github.com/zilliztech/attu">Attu</a>是 Milvus 的一体化管理工具，可大大降低系统管理的复杂性和成本。</p>
-<h2 id="Birdwatcher" class="common-anchor-header">观鸟者<button data-href="#Birdwatcher" class="anchor-icon" translate="no">
+<h2 id="Birdwatcher" class="common-anchor-header">Birdwatcher<button data-href="#Birdwatcher" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

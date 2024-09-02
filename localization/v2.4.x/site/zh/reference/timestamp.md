@@ -1,8 +1,9 @@
 ---
 id: timestamp.md
-title: 米尔沃斯时间戳
+title: Milvus时间戳
 summary: 了解时间戳的概念以及 Milvus 向量数据库中与时间戳相关的四个主要参数。
 ---
+
 <h1 id="Timestamp" class="common-anchor-header">时间戳<button data-href="#Timestamp" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

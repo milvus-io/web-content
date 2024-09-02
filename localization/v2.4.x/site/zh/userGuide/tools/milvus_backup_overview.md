@@ -1,8 +1,9 @@
 ---
 id: milvus_backup_overview.md
 summary: Milvus-Backup 是一款允许用户备份和恢复 Milvus 数据的工具。
-title: 米尔沃斯备份
+title: Milvus备份
 ---
+
 <h1 id="Milvus-Backup" class="common-anchor-header">Milvus 备份<button data-href="#Milvus-Backup" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
