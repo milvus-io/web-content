@@ -19,6 +19,7 @@ import {
 	rehypeAnchorHeadingPlugin,
 } from "./plugins.js";
 
+export const CACHE_FILE = "./tools/cache.json";
 const VERSION = "v2.4.x";
 const PATH = "/docs/";
 const DEEPL_API_KEY = process.env.DEEPL_API_KEY;
@@ -245,4 +246,67 @@ export const createDeepLGlossary = async () => {
 		headers: DEEPL_HEADERS,
 	});
 	console.log(res.data);
+};
+
+export const generateMenuStructureLocales = async (params) => {
+	const { versions = [], useCache = true, targetLangs = [] } = params;
+	console.log("Translating menu structure...");
+	for (let version of versions) {
+		const sourceMenuPath = `${version}/site/en/menuStructure/en.json`;
+		const stats = fs.statSync(sourceMenuPath);
+
+		const cache =
+			useCache && fs.existsSync(CACHE_FILE)
+				? JSON.parse(fs.readFileSync(CACHE_FILE, "utf8") || "{}")
+				: {};
+		const cacheOutdated = useCache
+			? !cache[version] ||
+				!cache[version][sourceMenuPath] ||
+				new Date(cache[version][sourceMenuPath]) < stats.mtime
+			: true;
+
+		if (!cacheOutdated) {
+			continue;
+		}
+
+		for (let targetLang of targetLangs) {
+			const targetMenuPath = `localization/${version}/site/${targetLang}/menuStructure/${targetLang}.json`;
+			const menuData = JSON.parse(fs.readFileSync(sourceMenuPath, "utf8"));
+
+			await translateMenu({
+				data: menuData,
+				targetLang,
+				version,
+			});
+
+			mkdir(targetMenuPath);
+			fs.writeFileSync(
+				targetMenuPath,
+				JSON.stringify(menuData, null, 2),
+				"utf8"
+			);
+			console.info("--> Menu translated successfully:", targetLang);
+		}
+
+		if (useCache) {
+			cache[version][sourceMenuPath] = new Date().toISOString();
+			fs.writeFileSync(CACHE_FILE, JSON.stringify(cache, null, 2), "utf8");
+		}
+	}
+};
+
+export const getFileUpdatedTime = async (path) => {
+	try {
+		const apiUrl = `https://api.github.com/repos/milvus-io/web-content/commits?path=${path}`;
+		const headers = {
+			Authorization: `token ${process.env.GITHUB_TOKEN}`,
+		};
+		const { data } = await axios.get(apiUrl, { headers });
+		return data.length > 0
+			? data[0].commit.author.date
+			: new Date().toISOString();
+	} catch (error) {
+		console.error(error);
+		return new Date().toISOString();
+	}
 };

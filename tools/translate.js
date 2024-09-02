@@ -1,3 +1,10 @@
+/**
+ * This script is used to translate markdown files from English to other languages.
+ * Run `node tools/translate.js` to translate markdown files.
+ *
+ * This script will auto run every Monday.
+ */
+
 import fs from "fs";
 import matter from "gray-matter";
 import "dotenv/config";
@@ -8,16 +15,17 @@ import {
 	remarkToHtml,
 	remarkableToHtml,
 	extractText,
-	translateMenu,
+	generateMenuStructureLocales,
+	CACHE_FILE,
+	getFileUpdatedTime,
 } from "./utils.js";
 
 const MOCK_TRANSLATE = false;
 const VERSIONS = ["v2.4.x"];
 const sourceFilePath = "site/en";
 const sourceLang = "en";
-const targetLangs = ["en"];
-// const targetLangs = ["en", "zh", "ja", "ko", "fr", "de", "it", "pt", "es"];
-const cacheFile = "./tools/cache.json";
+const targetLangs = ["zh", "ja", "ko", "fr", "de", "it", "pt", "es"];
+const cacheFile = CACHE_FILE;
 let total = 0;
 
 async function bootstrap() {
@@ -41,9 +49,13 @@ async function bootstrap() {
 		/**
 		 * step 3: filter out updated files
 		 */
-		const updatedFiles = mdFiles.filter((path) => {
-			const stats = fs.statSync(path);
-			const modifiedTime = stats.mtime;
+		let updatedFiles = [];
+		for (let index = 0; index < mdFiles.length; index++) {
+			const path = mdFiles[index];
+			const modifiedTime = await getFileUpdatedTime(path);
+
+			console.info(`--> cache check: ${index + 1}/${mdFiles.length}`);
+
 			const markdown = fs.readFileSync(path, "utf8");
 			const { data = {} } = matter(markdown);
 			const deprecated = data.deprecate;
@@ -51,8 +63,10 @@ async function bootstrap() {
 				!cache[version] ||
 				!cache[version][path] ||
 				new Date(cache[version][path]) < modifiedTime;
-			return !deprecated && cacheOutdated;
-		});
+			if (!deprecated && cacheOutdated) {
+				updatedFiles.push(path);
+			}
+		}
 		console.log(`--> ${updatedFiles.length} updated files`);
 
 		for (let path of updatedFiles) {
@@ -159,42 +173,10 @@ async function bootstrap() {
 	/**
 	 * step 11: translate menu structure
 	 */
-	console.log("Translating menu structure...");
-	for (let version of VERSIONS) {
-		const sourceMenuPath = `${version}/site/en/menuStructure/en.json`;
-		const stats = fs.statSync(sourceMenuPath);
-
-		const cacheOutdated =
-			!cache[version] ||
-			!cache[version][sourceMenuPath] ||
-			new Date(cache[version][sourceMenuPath]) < stats.mtime;
-
-		if (!cacheOutdated) {
-			continue;
-		}
-
-		for (let targetLang of targetLangs) {
-			const targetMenuPath = `localization/${version}/site/${targetLang}/menuStructure/${targetLang}.json`;
-			const menuData = JSON.parse(fs.readFileSync(sourceMenuPath, "utf8"));
-
-			await translateMenu({
-				data: menuData,
-				targetLang,
-				version,
-			});
-
-			mkdir(targetMenuPath);
-			fs.writeFileSync(
-				targetMenuPath,
-				JSON.stringify(menuData, null, 2),
-				"utf8"
-			);
-			console.info("--> Menu translated successfully:", targetLang);
-		}
-
-		cache[version][sourceMenuPath] = new Date().toISOString();
-		fs.writeFileSync(cacheFile, JSON.stringify(cache, null, 2), "utf8");
-	}
+	generateMenuStructureLocales({
+		versions: VERSIONS,
+		targetLangs,
+	});
 }
 
 bootstrap();
