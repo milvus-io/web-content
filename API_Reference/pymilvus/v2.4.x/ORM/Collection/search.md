@@ -112,10 +112,6 @@ search(
 
     Possible values are **Strong**, **Bounded**, **Eventually**, **Session**, and **Customized**.
 
-- **page_retain_order** (*bool*) -
-
-    Whether to retain the order of the search result when `offset` is provided.
-
 - **guarantee_timestamp** (*int*) -
 
     The timestamp that Milvus uses as a reference during the search.
