@@ -3,8 +3,9 @@ id: configure_common.md
 related_key: configure
 group: system_configuration.md
 summary: 了解如何为 Milvus 配置通用功能。
-title: ''
+title: ""
 ---
+
 <h1 id="common-related-Configurations" class="common-anchor-header">常用相关配置<button data-href="#common-related-Configurations" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -398,7 +399,7 @@ title: ''
   <tbody>
     <tr>
       <td>        根用户的默认密码      </td>
-      <td>米尔沃斯</td>
+      <td>Milvus</td>
     </tr>
   </tbody>
 </table>

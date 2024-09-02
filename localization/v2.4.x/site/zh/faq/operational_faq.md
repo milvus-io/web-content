@@ -1,6 +1,6 @@
 ---
 id: operational_faq.md
-summary: 查找有关米尔沃斯运营的常见问题的答案。
+summary: 查找有关Milvus运营的常见问题的答案。
 title: 操作常见问题
 ---
 

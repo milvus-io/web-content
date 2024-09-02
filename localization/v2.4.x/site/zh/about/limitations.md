@@ -1,6 +1,6 @@
 ---
 id: limitations.md
-title: 米尔沃斯限额
+title: Milvus限额
 related_key: Limitations
 summary: 了解使用 Milvus 时的限制。
 ---

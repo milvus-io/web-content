@@ -1,6 +1,6 @@
 ---
 id: roadmap.md
-title: 米尔沃斯路线图
+title: Milvus路线图
 related_key: Milvus roadmap
 summary: Milvus 是一个开源向量数据库，旨在为人工智能应用提供支持。以下是我们的发展路线图。
 ---

@@ -1,8 +1,9 @@
 ---
 id: build-rag-with-milvus.md
-summary: 与米尔沃斯一起建造抹布
+summary: 与Milvus一起建造抹布
 title: 用 Milvus 打造 RAG
 ---
+
 <h1 id="Build-RAG-with-Milvus" class="common-anchor-header">使用 Milvus 构建 RAG<button data-href="#Build-RAG-with-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -45,8 +46,9 @@ title: 用 Milvus 打造 RAG
 <p>在本例中，我们将使用 OpenAI 作为 LLM。您应将<a href="https://platform.openai.com/docs/quickstart">api key</a> <code translate="no">OPENAI_API_KEY</code> 作为环境变量。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> os
 
-os.<span class="hljs-property">environ</span>[<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</span>] = <span class="hljs-string">&quot;sk-***********&quot;</span>
+os.<span class="hljs-property">environ</span>[<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</span>] = <span class="hljs-string">&quot;sk-****\*\*\*****&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
+
 <h3 id="Prepare-the-data" class="common-anchor-header">准备数据</h3><p>我们使用<a href="https://github.com/milvus-io/milvus-docs/releases/download/v2.4.6-preview/milvus_docs_2.4.x_en.zip">Milvus Documentation 2.4.x</a>中的常见问题页面作为 RAG 中的私有知识，这对于简单的 RAG 管道来说是一个很好的数据源。</p>
 <p>下载 zip 文件并将文档解压缩到<code translate="no">milvus_docs</code> 文件夹中。</p>
 <pre><code translate="no" class="language-bash">$ wget https://github.com/milvus-io/milvus-docs/releases/download/v2<span class="hljs-number">.4</span><span class="hljs-number">.6</span>-preview/milvus_docs_2<span class="hljs-number">.4</span>.x_en.<span class="hljs-built_in">zip</span>
@@ -57,17 +59,20 @@ $ unzip -q milvus_docs_2<span class="hljs-number">.4</span>.x_en.<span class="hl
 
 text_lines = []
 
-<span class="hljs-keyword">for</span> file_path <span class="hljs-keyword">in</span> glob(<span class="hljs-string">&quot;milvus_docs/en/faq/*.md&quot;</span>, recursive=<span class="hljs-literal">True</span>):
-    <span class="hljs-keyword">with</span> <span class="hljs-built_in">open</span>(file_path, <span class="hljs-string">&quot;r&quot;</span>) <span class="hljs-keyword">as</span> file:
-        file_text = file.read()
+<span class="hljs-keyword">for</span> file_path <span class="hljs-keyword">in</span> glob(<span class="hljs-string">&quot;milvus_docs/en/faq/\*.md&quot;</span>, recursive=<span class="hljs-literal">True</span>):
+<span class="hljs-keyword">with</span> <span class="hljs-built_in">open</span>(file_path, <span class="hljs-string">&quot;r&quot;</span>) <span class="hljs-keyword">as</span> file:
+file_text = file.read()
 
     text_lines += file_text.split(<span class="hljs-string">&quot;# &quot;</span>)
+
 <button class="copy-code-btn"></button></code></pre>
+
 <h3 id="Prepare-the-Embedding-Model" class="common-anchor-header">准备嵌入模型</h3><p>我们对 OpenAI 客户端进行初始化，准备嵌入模型。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> openai <span class="hljs-keyword">import</span> <span class="hljs-title class_">OpenAI</span>
 
-openai_client = <span class="hljs-title class_">OpenAI</span>()
+openai*client = <span class="hljs-title class*">OpenAI</span>()
 <button class="copy-code-btn"></button></code></pre>
+
 <p>定义一个函数，使用 OpenAI 客户端生成文本嵌入。我们以<a href="https://platform.openai.com/docs/guides/embeddings">text-embedding-3-small</a>模型为例。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">emb_text</span>(<span class="hljs-params">text</span>):
     <span class="hljs-keyword">return</span> (
@@ -102,10 +107,11 @@ embedding_dim = <span class="hljs-built_in">len</span>(test_embedding)
       </svg>
     </button></h2><h3 id="Create-the-Collection" class="common-anchor-header">创建集合</h3><pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> <span class="hljs-title class_">MilvusClient</span>
 
-milvus_client = <span class="hljs-title class_">MilvusClient</span>(uri=<span class="hljs-string">&quot;./milvus_demo.db&quot;</span>)
+milvus*client = <span class="hljs-title class*">MilvusClient</span>(uri=<span class="hljs-string">&quot;./milvus_demo.db&quot;</span>)
 
 collection_name = <span class="hljs-string">&quot;my_rag_collection&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
+
 <div class="alert note">
 <p>至于<code translate="no">MilvusClient</code> 的参数：</p>
 <ul>
@@ -134,10 +140,11 @@ collection_name = <span class="hljs-string">&quot;my_rag_collection&quot;</span>
 data = []
 
 <span class="hljs-keyword">for</span> i, line <span class="hljs-keyword">in</span> <span class="hljs-built_in">enumerate</span>(tqdm(text_lines, desc=<span class="hljs-string">&quot;Creating embeddings&quot;</span>)):
-    data.append({<span class="hljs-string">&quot;id&quot;</span>: i, <span class="hljs-string">&quot;vector&quot;</span>: emb_text(line), <span class="hljs-string">&quot;text&quot;</span>: line})
+data.append({<span class="hljs-string">&quot;id&quot;</span>: i, <span class="hljs-string">&quot;vector&quot;</span>: emb_text(line), <span class="hljs-string">&quot;text&quot;</span>: line})
 
 milvus_client.insert(collection_name=collection_name, data=data)
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no">Creating embeddings: 100%|██████████| 72/72 [00:27&lt;00:00,  2.67it/s]
 
 
@@ -181,10 +188,11 @@ milvus_client.insert(collection_name=collection_name, data=data)
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> json
 
 retrieved_lines_with_distances = [
-    (res[<span class="hljs-string">&quot;entity&quot;</span>][<span class="hljs-string">&quot;text&quot;</span>], res[<span class="hljs-string">&quot;distance&quot;</span>]) <span class="hljs-keyword">for</span> res <span class="hljs-keyword">in</span> search_res[<span class="hljs-number">0</span>]
+(res[<span class="hljs-string">&quot;entity&quot;</span>][<span class="hljs-string">&quot;text&quot;</span>], res[<span class="hljs-string">&quot;distance&quot;</span>]) <span class="hljs-keyword">for</span> res <span class="hljs-keyword">in</span> search_res[<span class="hljs-number">0</span>]
 ]
 <span class="hljs-built_in">print</span>(json.dumps(retrieved_lines_with_distances, indent=<span class="hljs-number">4</span>))
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no">[
     [
         &quot; Where does Milvus store data?\n\nMilvus deals with two types of data, inserted data and metadata. \n\nInserted data, including vector data, scalar data, and collection-specific schema, are stored in persistent storage as incremental log. Milvus supports multiple object storage backends, including [MinIO](https://min.io/), [AWS S3](https://aws.amazon.com/s3/?nc1=h_ls), [Google Cloud Storage](https://cloud.google.com/storage?hl=en#object-storage-for-companies-of-all-sizes) (GCS), [Azure Blob Storage](https://azure.microsoft.com/en-us/products/storage/blobs), [Alibaba Cloud OSS](https://www.alibabacloud.com/product/object-storage-service), and [Tencent Cloud Object Storage](https://www.tencentcloud.com/products/cos) (COS).\n\nMetadata are generated within Milvus. Each Milvus module has its own metadata that are stored in etcd.\n\n###&quot;,

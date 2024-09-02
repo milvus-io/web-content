@@ -3,7 +3,8 @@ id: birdwatcher_install_guides.md
 summary: 了解如何安装 Birdwatch 来调试 Milvus。
 title: 安装观鸟器
 ---
-<h1 id="Install-Birdwatcher" class="common-anchor-header">安装观鸟者<button data-href="#Install-Birdwatcher" class="anchor-icon" translate="no">
+
+<h1 id="Install-Birdwatcher" class="common-anchor-header">安装Birdwatcher<button data-href="#Install-Birdwatcher" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

@@ -74,7 +74,7 @@
             "children": []
           },
           {
-            "label": "独立运行 Milvus",
+            "label": "运行 Milvus Standalone",
             "id": "run_milvus_docker",
             "order": 2,
             "isMenu": true,
@@ -503,7 +503,7 @@
     ]
   },
   {
-    "label": "机型",
+    "label": "模型",
     "id": "models",
     "isMenu": true,
     "order": 4,
@@ -617,7 +617,7 @@
     ]
   },
   {
-    "label": "Milvus 迁徙",
+    "label": "Milvus 迁移",
     "id": "milvus_migration",
     "isMenu": true,
     "order": 5,
@@ -1126,14 +1126,14 @@
         ]
       },
       {
-        "label": "阿图（Milvus 图形用户界面）",
+        "label": "Attu（Milvus 图形用户界面）",
         "id": "milvus_attu",
         "order": 4,
         "externalLink": "https://github.com/zilliztech/attu",
         "children": []
       },
       {
-        "label": "观鸟者",
+        "label": "Birdwatcher",
         "id": "birdwatcher",
         "order": 5,
         "children": [
@@ -1171,7 +1171,7 @@
         "isMenu": true,
         "children": [
           {
-            "label": "火花",
+            "label": "Spark",
             "id": "integrate_with_spark.md",
             "order": 0,
             "children": []
@@ -1199,7 +1199,7 @@
         "children": []
       },
       {
-        "label": "拥抱的脸",
+        "label": "HuggingFace",
         "id": "integrate_with_hugging-face.md",
         "order": 2,
         "children": []
@@ -1211,7 +1211,7 @@
         "children": []
       },
       {
-        "label": "句子变形",
+        "label": "SentenceTransformers",
         "id": "integrate_with_sentencetransformers.md",
         "order": 4,
         "children": []
@@ -1248,13 +1248,13 @@
         ]
       },
       {
-        "label": "干草堆",
+        "label": "HayStack",
         "id": "integrate_with_haystack.md",
         "order": 7,
         "children": []
       },
       {
-        "label": "五十一",
+        "label": "FiftyOne",
         "id": "integrate_with_voxel51.md",
         "order": 7,
         "children": []
@@ -1284,13 +1284,13 @@
         "children": []
       },
       {
-        "label": "雪花",
+        "label": "Snowflake",
         "id": "integrate_with_snowpark.md",
         "order": 12,
         "children": []
       },
       {
-        "label": "如何",
+        "label": "WhyHow",
         "id": "integrate_with_whyhow.md",
         "order": 13,
         "children": []
@@ -1302,7 +1302,7 @@
         "children": []
       },
       {
-        "label": "拉格",
+        "label": "Ragas",
         "id": "integrate_with_ragas.md",
         "order": 15,
         "children": []
@@ -1320,13 +1320,13 @@
         "children": []
       },
       {
-        "label": "万娜",
+        "label": "Vanna",
         "id": "integrate_with_vanna.md",
         "order": 18,
         "children": []
       },
       {
-        "label": "骆驼",
+        "label": "Camel",
         "id": "integrate_with_camel.md",
         "order": 19,
         "children": []

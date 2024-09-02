@@ -3,7 +3,8 @@ id: birdwatcher_usage_guides.md
 summary: 了解如何使用 Birdwatch 调试 Milvus。
 title: 使用观鸟器
 ---
-<h1 id="Use-Birdwatcher" class="common-anchor-header">使用观鸟者<button data-href="#Use-Birdwatcher" class="anchor-icon" translate="no">
+
+<h1 id="Use-Birdwatcher" class="common-anchor-header">使用Birdwatcher<button data-href="#Use-Birdwatcher" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -108,33 +109,34 @@ Usage:
    show [command]
 
 Available Commands:
-  alias               <span class="hljs-built_in">list</span> alias meta info
-  channel-watch       display channel watching info <span class="hljs-keyword">from</span> data coord meta store
-  checkpoint          <span class="hljs-built_in">list</span> checkpoint collection vchannels
-  collection-history  display collection change history
-  collection-loaded   display information of loaded collection <span class="hljs-keyword">from</span> querycoord
-  collections         <span class="hljs-built_in">list</span> current available collection <span class="hljs-keyword">from</span> RootCoord
-  config-etcd         <span class="hljs-built_in">list</span> configuations <span class="hljs-built_in">set</span> by etcd source
-  configurations      iterate <span class="hljs-built_in">all</span> online components <span class="hljs-keyword">and</span> inspect configuration
-  current-version     
-  database            display Database info <span class="hljs-keyword">from</span> rootcoord meta
-  index               
-  partition           <span class="hljs-built_in">list</span> partitions of provided collection
-  querycoord-channel  display querynode information <span class="hljs-keyword">from</span> querycoord cluster
-  querycoord-cluster  display querynode information <span class="hljs-keyword">from</span> querycoord cluster
-  querycoord-task     display task information <span class="hljs-keyword">from</span> querycoord
-  replica             <span class="hljs-built_in">list</span> current replica information <span class="hljs-keyword">from</span> QueryCoord
-  segment             display segment information <span class="hljs-keyword">from</span> data coord meta store
-  segment-index       display segment index information
-  segment-loaded      display segment information <span class="hljs-keyword">from</span> querycoordv1 meta
-  segment-loaded-grpc <span class="hljs-built_in">list</span> segments loaded information
-  session             <span class="hljs-built_in">list</span> online milvus components
+alias <span class="hljs-built_in">list</span> alias meta info
+channel-watch display channel watching info <span class="hljs-keyword">from</span> data coord meta store
+checkpoint <span class="hljs-built_in">list</span> checkpoint collection vchannels
+collection-history display collection change history
+collection-loaded display information of loaded collection <span class="hljs-keyword">from</span> querycoord
+collections <span class="hljs-built_in">list</span> current available collection <span class="hljs-keyword">from</span> RootCoord
+config-etcd <span class="hljs-built_in">list</span> configuations <span class="hljs-built_in">set</span> by etcd source
+configurations iterate <span class="hljs-built_in">all</span> online components <span class="hljs-keyword">and</span> inspect configuration
+current-version  
+ database display Database info <span class="hljs-keyword">from</span> rootcoord meta
+index  
+ partition <span class="hljs-built_in">list</span> partitions of provided collection
+querycoord-channel display querynode information <span class="hljs-keyword">from</span> querycoord cluster
+querycoord-cluster display querynode information <span class="hljs-keyword">from</span> querycoord cluster
+querycoord-task display task information <span class="hljs-keyword">from</span> querycoord
+replica <span class="hljs-built_in">list</span> current replica information <span class="hljs-keyword">from</span> QueryCoord
+segment display segment information <span class="hljs-keyword">from</span> data coord meta store
+segment-index display segment index information
+segment-loaded display segment information <span class="hljs-keyword">from</span> querycoordv1 meta
+segment-loaded-grpc <span class="hljs-built_in">list</span> segments loaded information
+session <span class="hljs-built_in">list</span> online milvus components
 
 Flags:
-  -h, --<span class="hljs-built_in">help</span>   <span class="hljs-built_in">help</span> <span class="hljs-keyword">for</span> show
+-h, --<span class="hljs-built_in">help</span> <span class="hljs-built_in">help</span> <span class="hljs-keyword">for</span> show
 
 Use <span class="hljs-string">&quot; show [command] --help&quot;</span> <span class="hljs-keyword">for</span> more information about a command.
 <button class="copy-code-btn"></button></code></pre>
+
 <h3 id="List-sessions" class="common-anchor-header">列出会话</h3><p>列出与 Milvus 不同组件相关的会话：</p>
 <pre><code translate="no" class="language-shell">Milvus(<span class="hljs-keyword">by</span>-dev) &gt; show session
 Session:datacoord, ServerID: <span class="hljs-number">3</span>, Version: <span class="hljs-number">2.2</span><span class="hljs-number">.11</span>, Address: <span class="hljs-number">10.244</span><span class="hljs-number">.0</span><span class="hljs-number">.8</span>:<span class="hljs-number">13333</span>
@@ -335,6 +337,7 @@ Key: querycoord.balancer, Value: ScoreBasedBalancer
 Key: querycoord.autobalance, Value: <span class="hljs-literal">true</span>
 Key: querycoord.segmenttasktimeout, Value: <span class="hljs-number">120000</span>
 <button class="copy-code-btn"></button></code></pre>
+
 <h2 id="Backup-metrics" class="common-anchor-header">备份指标<button data-href="#Backup-metrics" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
