@@ -31,6 +31,15 @@ create_index(
 
     The timeout duration for this operation. Setting this to **None** indicates that this operation timeouts when any response arrives or any error occurs.
 
+- **kwargs** -
+
+  - **sync** (*bool*)
+
+    Controls how the index is built in relation to the client’s request. Valid values:
+
+    - **True** (default): The client waits until the index is fully built before it returns. This means you will not get a response until the process is complete.
+    - **False**: The client returns immediately after the request is received and the index is being built in the background. To find out if index creation has been completed, use the [describe_index()](https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/describe_index.md) method.
+
 **RETURN TYPE:**
 
 *NoneType*
@@ -129,7 +138,8 @@ client.create_collection(
 # 6. Create indexes
 client.create_index(
     collection_name="customized_setup",
-    index_params=index_params
+    index_params=index_params,
+    sync=False
 )
 
 # 6. List indexes
