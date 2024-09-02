@@ -300,7 +300,7 @@ res = client.search(
 <button class="copy-code-btn"></button></code></pre>
 <p>By default, the scalar fields are not indexed. If you need to perform metadata filtered search in large dataset, you can consider using fixed schema and also turn on the <a href="https://milvus.io/docs/scalar_index.md">index</a> to improve the search performance.</p>
 <p>In addition to vector search, you can also perform other types of searches:</p>
-<h3 id="Query" class="common-anchor-header">Query</h3><p>A query() is an operation that retrieves all entities matching a cretria, such as a <a href="https://milvus.io/docs/boolean.md">filter expression</a> or matching some ids.</p>
+<h3 id="Query" class="common-anchor-header">Query</h3><p>A query() is an operation that retrieves all entities matching a criteria, such as a <a href="https://milvus.io/docs/boolean.md">filter expression</a> or matching some ids.</p>
 <p>For example, retrieving all entities whose scalar field has a particular value:</p>
 <pre><code translate="no" class="language-python">res = client.query(
     collection_name=<span class="hljs-string">&quot;demo_collection&quot;</span>,
