@@ -59,7 +59,7 @@ summary: 本文将 Milvus 与其他向量搜索解决方案进行比较。
     </button></h2><p>为了比较 Milvus 和 Pinecone 这两个向量数据库解决方案，下表列出了各种功能之间的差异。</p>
 <table>
 <thead>
-<tr><th>特征</th><th>松果</th><th>Milvus</th><th>备注</th></tr>
+<tr><th>特征</th><th>Pinecone</th><th>Milvus</th><th>备注</th></tr>
 </thead>
 <tbody>
 <tr><td>部署模式</td><td>纯 SaaS</td><td>Milvus Lite、内部独立和集群、Zilliz 云 Saas 和 BYOC</td><td>Milvus 提供更灵活的部署模式。</td></tr>
@@ -89,10 +89,10 @@ summary: 本文将 Milvus 与其他向量搜索解决方案进行比较。
     </button></h2><p>虽然 Milvus 和 Pinecone 都具有类似的向量数据库功能，但两者在特定领域的术语略有不同。详细的术语比较如下。</p>
 <table>
 <thead>
-<tr><th>松果</th><th>Milvus</th><th>备注</th></tr>
+<tr><th>Pinecone</th><th>Milvus</th><th>备注</th></tr>
 </thead>
 <tbody>
-<tr><td>索引</td><td><a href="https://zilliz.com/comparison">收集</a></td><td>在 Pinecone 中，索引是存储和管理相同大小向量的组织单位，索引与硬件（称为 pod）紧密结合。相比之下，Milvus 集合的作用类似，但能在单个实例中处理多个集合。</td></tr>
+<tr><td>索引</td><td><a href="https://zilliz.com/comparison">Collection</a></td><td>在 Pinecone 中，索引是存储和管理相同大小向量的组织单位，索引与硬件（称为 pod）紧密结合。相比之下，Milvus 集合的作用类似，但能在单个实例中处理多个集合。</td></tr>
 <tr><td>集合</td><td><a href="https://milvus.io/docs/milvus_backup_overview.md#Milvus-Backup">备份</a></td><td>在 Pinecone 中，集合本质上是索引的静态快照，主要用于备份目的，不能被查询。在 Milvus 中，用于创建备份的等效功能更加透明，名称也更直观。</td></tr>
 <tr><td>命名空间</td><td><a href="https://milvus.io/docs/use-partition-key.md#Use-Partition-Key">分区键</a></td><td>命名空间允许将索引中的向量分割成子集。Milvus 提供了多种方法，如分区或分区键，以确保集合内数据的有效隔离。</td></tr>
 <tr><td>元数据</td><td><a href="https://milvus.io/docs/boolean.md">标量字段</a></td><td>Pinecone 的元数据处理依赖于键值对，而 Milvus 允许使用复杂的标量字段，包括标准数据类型和动态 JSON 字段。</td></tr>
@@ -117,7 +117,7 @@ summary: 本文将 Milvus 与其他向量搜索解决方案进行比较。
       </svg>
     </button></h2><table>
 <thead>
-<tr><th>功能</th><th>松果</th><th>Milvus</th></tr>
+<tr><th>功能</th><th>Pinecone</th><th>Milvus</th></tr>
 </thead>
 <tbody>
 <tr><td>部署模式</td><td>纯 SaaS</td><td>Milvus Lite、内部独立和集群、Zilliz 云 Saas 和 BYOC</td></tr>

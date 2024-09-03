@@ -1,9 +1,9 @@
 ---
 id: limit_collection_counts.md
-title: 设置收集数量限制
+title: 设置 Collection 数量限制
 summary: ''
 ---
-<h1 id="Limit-Collection-Counts" class="common-anchor-header">限制收集数<button data-href="#Limit-Collection-Counts" class="anchor-icon" translate="no">
+<h1 id="Limit-Collection-Counts" class="common-anchor-header">限制 Collection 数<button data-href="#Limit-Collection-Counts" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

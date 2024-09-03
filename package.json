@@ -5,6 +5,7 @@
 	"scripts": {
 		"generate:en": "node tools/generate-en.js",
 		"translate": "node tools/translate.js",
+		"glossary": "node tools/glossary.js",
 		"test": "echo \"Error: no test specified\" && exit 1"
 	},
 	"type": "module",

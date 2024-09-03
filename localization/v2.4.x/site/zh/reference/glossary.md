@@ -115,7 +115,7 @@ summary: ""
         ></path>
       </svg>
     </button></h2><p><a href="https://milvus.io/api-reference/pymilvus/v2.4.x/ORM/utility/do_bulk_insert.md">批量插入（Bulk Insert</a>）是一种应用程序接口（API），通过允许在单个请求中导入多个文件来提高写入性能，从而优化大型数据集的操作。</p>
-<h2 id="Cardinal" class="common-anchor-header">卡迪纳尔<button data-href="#Cardinal" class="anchor-icon" translate="no">
+<h2 id="Cardinal" class="common-anchor-header">Cardinal<button data-href="#Cardinal" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
