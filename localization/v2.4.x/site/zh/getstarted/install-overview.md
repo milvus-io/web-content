@@ -40,7 +40,7 @@ title: Milvus 部署选项概览
       </svg>
     </button></h2><p><a href="https://milvus.io/docs/milvus_lite.md">Milvus Lite</a>是一个 Python 库，可导入到您的应用程序中。作为 Milvus 的轻量级版本，它非常适合在 Jupyter 笔记本或资源有限的智能设备上运行快速原型。Milvus Lite 支持与其他 Milvus 部署相同的 API。与 Milvus Lite 交互的客户端代码也可以与其他部署模式下的 Milvus 实例协同工作。</p>
 <p>要将 Milvus Lite 集成到应用程序中，请运行<code translate="no">pip install pymilvus</code> 进行安装，并使用<code translate="no">MilvusClient(&quot;./demo.db&quot;)</code> 语句实例化一个带有本地文件的向量数据库，以持久化所有数据。更多详情，请参阅<a href="https://milvus.io/docs/milvus_lite.md">运行 Milvus Lite</a>。</p>
-<h2 id="Milvus-Standalone" class="common-anchor-header">Milvus 单机版<button data-href="#Milvus-Standalone" class="anchor-icon" translate="no">
+<h2 id="Milvus-Standalone" class="common-anchor-header">Milvus Standalone<button data-href="#Milvus-Standalone" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -56,7 +56,7 @@ title: Milvus 部署选项概览
         ></path>
       </svg>
     </button></h2><p>Milvus Standalone 是单机服务器部署。Milvus Standalone 的所有组件都打包到一个<a href="https://milvus.io/docs/install_standalone-docker.md">Docker 映像</a>中，因此部署非常方便。如果你有生产工作负载，但不想使用 Kubernetes，那么在内存充足的单机上运行 Milvus Standalone 是一个不错的选择。此外，Milvus Standalone 通过主从复制支持高可用性。</p>
-<h2 id="Milvus-Distributed" class="common-anchor-header">分布式<button data-href="#Milvus-Distributed" class="anchor-icon" translate="no">
+<h2 id="Milvus-Distributed" class="common-anchor-header">Milvus Distributed<button data-href="#Milvus-Distributed" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

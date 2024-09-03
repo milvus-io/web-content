@@ -7,6 +7,7 @@ related_key: upgrade Milvus Cluster
 summary: 了解如何使用 Milvus Operator 升级 Milvus 集群。
 title: 使用 Milvus Operator 升级 Milvus 集群
 ---
+
 <div class="tab-wrapper"><a href="/docs/zh/upgrade_milvus_cluster-operator.md" class='active '>Milvus</a><a href="/docs/zh/upgrade_milvus_cluster-helm.md" class=''>OperatorHelm</a></div>
 <h1 id="Upgrade-Milvus-Cluster-with-Milvus-Operator" class="common-anchor-header">使用 Milvus Operator 升级 Milvus 群集<button data-href="#Upgrade-Milvus-Cluster-with-Milvus-Operator" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -24,7 +25,7 @@ title: 使用 Milvus Operator 升级 Milvus 集群
         ></path>
       </svg>
     </button></h1><p>本指南介绍如何使用 Milvus Operator 升级 Milvus 群集。</p>
-<h2 id="Upgrade-your-Milvus-operator" class="common-anchor-header">升级 Milvus 操作员<button data-href="#Upgrade-your-Milvus-operator" class="anchor-icon" translate="no">
+<h2 id="Upgrade-your-Milvus-operator" class="common-anchor-header">升级 Milvus Operator<button data-href="#Upgrade-your-Milvus-operator" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -39,12 +40,12 @@ title: 使用 Milvus Operator 升级 Milvus 集群
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>运行以下命令将 Milvus 操作员版本升级到 v1.0.1。</p>
+    </button></h2><p>运行以下命令将 Milvus Operator 版本升级到 v1.0.1。</p>
 <pre><code translate="no">helm repo <span class="hljs-keyword">add</span> zilliztech-milvus-<span class="hljs-keyword">operator</span> https:<span class="hljs-comment">//zilliztech.github.io/milvus-operator/</span>
 helm repo update zilliztech-milvus-<span class="hljs-keyword">operator</span>
 helm -n milvus-<span class="hljs-keyword">operator</span> upgrade milvus-<span class="hljs-keyword">operator</span> zilliztech-milvus-<span class="hljs-keyword">operator</span>/milvus-<span class="hljs-keyword">operator</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>将 Milvus 操作员升级到最新版本后，您有以下选择：</p>
+<p>将 Milvus Operator 升级到最新版本后，您有以下选择：</p>
 <ul>
 <li>要将 Milvus 从 2.2.3 或更高<a href="#Conduct-a-rolling-upgrade">版本升级</a>到 2.4.9，可以<a href="#Conduct-a-rolling-upgrade">进行滚动升级</a>。</li>
 <li>要将 Milvus 从 v2.2.3 之前的次版本升级到 2.4.9，建议<a href="#Upgrade-Milvus-by-changing-its-image">通过更改映像版本升级 Milvus</a>。</li>
@@ -66,7 +67,7 @@ helm -n milvus-<span class="hljs-keyword">operator</span> upgrade milvus-<span c
         ></path>
       </svg>
     </button></h2><p>从 Milvus 2.2.3 版开始，你可以将 Milvus 协调器配置为主动待机模式，并为它们启用滚动升级功能，这样 Milvus 就能在协调器升级期间响应传入的请求。在以前的版本中，升级时需要移除协调器，然后再创建协调器，这可能会导致服务出现一定的停机时间。</p>
-<p>基于 Kubernetes 提供的滚动更新功能，Milvus 操作员会根据部署的依赖关系对部署进行有序更新。此外，Milvus 还实施了一种机制，确保其组件在升级期间与依赖于它们的组件保持兼容，从而大大减少了潜在的服务停机时间。</p>
+<p>基于 Kubernetes 提供的滚动更新功能，Milvus Operator 会根据部署的依赖关系对部署进行有序更新。此外，Milvus 还实施了一种机制，确保其组件在升级期间与依赖于它们的组件保持兼容，从而大大减少了潜在的服务停机时间。</p>
 <p>滚动升级功能默认为禁用。你需要通过配置文件明确启用它。</p>
 <pre><code translate="no" class="language-yaml">apiVersion: milvus.io/v1beta1
 kind: Milvus

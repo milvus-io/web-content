@@ -54,7 +54,7 @@
 			"isActive": false
 		},
 		{
-			"label": "卸载 Milvus 操作员",
+			"label": "卸载 Milvus Operator",
 			"href": "Uninstall-Milvus-Operator",
 			"type": 2,
 			"isActive": false

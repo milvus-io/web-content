@@ -31,12 +31,7 @@ const DEEPL_HEADERS = {
 	"Content-Type": "application/json",
 	Authorization: `DeepL-Auth-Key ${DEEPL_API_KEY}`,
 };
-const GLOSSARY_ID = "0aee7342-ef33-490f-9c12-40319f93970b";
-const ENTRIES =
-	"vector\t向量\nHugging Face\tHugging Face\nmilvus\tmilvus\nMilvus\tMilvus\narchitecture\t架构\nschema\tschema\ncollection\tcollection\nZilliz Cloud\tZilliz Cloud\nZilliz Cloud China\tZilliz Cloud 中国\n" +
-	"Run Milvus Standalone\t运行 Milvus Standalone\nModels\t模型\nRerankers\tRerankers\nEmbeddings\tEmbeddings\nMigration\t迁移\nAttu\tAttu\nBirdwatcher\tBirdwatcher\n" +
-	"Spark\tSpark\nHuggingFace\tHuggingFace\nSentenceTransformers\tSentenceTransformers\nHayStack\tHayStack\nFiftyOne\tFiftyOne\nSnowflake\tSnowflake\nWhyHow\tWhyHow\n" +
-	"Ragas\tRagas\nVanna\tVanna\nCamel\tCamel\n";
+const GLOSSARY_ID = "7eb24f3c-0cb9-4bf6-9201-8c48860e9bbe";
 
 export function traverseDirectory(dirPath, fileList = []) {
 	const files = fs.readdirSync(dirPath);
@@ -234,18 +229,19 @@ export const extractText = (id = "", htmlString = "") => {
  * entries example:
  * Source1\tTarget1\nSource2\tTarget2\n...
  */
-export const createDeepLGlossary = async () => {
+export const createDeepLGlossary = async (entries) => {
 	const body = {
 		name: "milvus-docs-en-to-zh-glossary",
 		source_lang: "en",
 		target_lang: "zh",
-		entries: ENTRIES,
+		entries,
 		entries_format: "tsv",
 	};
 	const res = await axios.post(DEEPL_ENDPOINT + GLOSSARY_PATH, body, {
 		headers: DEEPL_HEADERS,
 	});
 	console.log(res.data);
+	return res.data;
 };
 
 export const generateMenuStructureLocales = async (params) => {

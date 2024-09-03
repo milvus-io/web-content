@@ -3,6 +3,7 @@ id: milvus_backup_api.md
 summary: 了解如何通过 API 使用 Milvus 备份
 title: 使用 API 备份和还原数据
 ---
+
 <h1 id="Back-up-and-Restore-Data-Using-APIs" class="common-anchor-header">使用 API 备份和恢复数据<button data-href="#Back-up-and-Restore-Data-Using-APIs" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -66,7 +67,7 @@ go build
 <p>默认 Minio 存储桶的名称因安装 Milvus 的方式而异。更改 Minio 设置时，请参阅下表。</p>
 <table>
 <thead>
-<tr><th>字段</th><th>Docker Compose</th><th>Helm / Milvus 操作员</th></tr>
+<tr><th>字段</th><th>Docker Compose</th><th>Helm / Milvus Operator</th></tr>
 </thead>
 <tbody>
 <tr><td><code translate="no">bucketName</code></td><td>a-bucket</td><td>milvus-bucket</td></tr>

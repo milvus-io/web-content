@@ -4,9 +4,10 @@ label: Milvus Operator
 order: 0
 group: upgrade_milvus_standalone-operator.md
 related_key: upgrade Milvus Standalone
-summary: 了解如何使用 Milvus 操作员升级 Milvus 单机版。
+summary: 了解如何使用 Milvus Operator 升级 Milvus 单机版。
 title: 用 Milvus Operator 升级 Milvus 单机版
 ---
+
 <div class="tab-wrapper"><a href="/docs/zh/upgrade_milvus_standalone-operator.md" class='active '>Milvus</a><a href="/docs/zh/upgrade_milvus_standalone-helm.md" class=''>OperatorHelmDocker</a><a href="/docs/zh/upgrade_milvus_standalone-docker.md" class=''>Compose</a></div>
 <h1 id="Upgrade-Milvus-Standalone-with-Milvus-Operator" class="common-anchor-header">使用 Milvus Operator 升级 Milvus 单机版<button data-href="#Upgrade-Milvus-Standalone-with-Milvus-Operator" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -24,7 +25,7 @@ title: 用 Milvus Operator 升级 Milvus 单机版
         ></path>
       </svg>
     </button></h1><p>本指南介绍如何用 Milvus Operator 升级 Milvus 单机版。</p>
-<h2 id="Upgrade-your-Milvus-operator" class="common-anchor-header">升级 Milvus 操作员<button data-href="#Upgrade-your-Milvus-operator" class="anchor-icon" translate="no">
+<h2 id="Upgrade-your-Milvus-operator" class="common-anchor-header">升级 Milvus Operator<button data-href="#Upgrade-your-Milvus-operator" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -44,7 +45,7 @@ title: 用 Milvus Operator 升级 Milvus 单机版
 helm repo update zilliztech-milvus-<span class="hljs-keyword">operator</span>
 helm -n milvus-<span class="hljs-keyword">operator</span> upgrade milvus-<span class="hljs-keyword">operator</span> zilliztech-milvus-<span class="hljs-keyword">operator</span>/milvus-<span class="hljs-keyword">operator</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>将 Milvus 操作员升级到最新版本后，您有以下选择：</p>
+<p>将 Milvus Operator 升级到最新版本后，您有以下选择：</p>
 <ul>
 <li>要将 Milvus 从 2.2.3 或更高<a href="#Conduct-a-rolling-upgrade">版本升级</a>到 2.4.9，可以<a href="#Conduct-a-rolling-upgrade">进行滚动升级</a>。</li>
 <li>要将 Milvus 从 v2.2.3 之前的次版本升级到 2.4.9，建议<a href="#Upgrade-Milvus-by-changing-its-image">通过更改映像版本升级 Milvus</a>。</li>
@@ -66,7 +67,7 @@ helm -n milvus-<span class="hljs-keyword">operator</span> upgrade milvus-<span c
         ></path>
       </svg>
     </button></h2><p>从 Milvus 2.2.3 版开始，你可以将 Milvus 协调器配置为主动待机模式，并为它们启用滚动升级功能，这样 Milvus 就能在协调器升级期间响应传入的请求。在以前的版本中，升级时需要移除协调器，然后再创建协调器，这可能会导致服务出现一定程度的停机。</p>
-<p>基于 Kubernetes 提供的滚动更新功能，Milvus 操作员会根据部署的依赖关系对部署进行有序更新。此外，Milvus 还实施了一种机制，确保其组件在升级期间与依赖于它们的组件保持兼容，从而大大减少了潜在的服务停机时间。</p>
+<p>基于 Kubernetes 提供的滚动更新功能，Milvus Operator 会根据部署的依赖关系对部署进行有序更新。此外，Milvus 还实施了一种机制，确保其组件在升级期间与依赖于它们的组件保持兼容，从而大大减少了潜在的服务停机时间。</p>
 <p>滚动升级功能默认为禁用。你需要通过配置文件明确启用它。</p>
 <pre><code translate="no" class="language-yaml">apiVersion: milvus.io/v1beta1
 kind: Milvus

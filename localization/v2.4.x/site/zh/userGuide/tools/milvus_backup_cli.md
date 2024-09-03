@@ -3,6 +3,7 @@ id: milvus_backup_cli.md
 summary: 了解如何通过 CLI 使用 Milvus 备份
 title: 使用命令备份和还原数据
 ---
+
 <h1 id="Back-up-and-Restore-Data-Using-Commands" class="common-anchor-header">使用命令备份和恢复数据<button data-href="#Back-up-and-Restore-Data-Using-Commands" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -66,7 +67,7 @@ go build
 <p>默认 Minio 存储桶的名称因安装 Milvus 的方式而异。更改 Minio 设置时，请参阅下表。</p>
 <table>
 <thead>
-<tr><th>字段</th><th>Docker Compose</th><th>Helm / Milvus 操作员</th></tr>
+<tr><th>字段</th><th>Docker Compose</th><th>Helm / Milvus Operator</th></tr>
 </thead>
 <tbody>
 <tr><td><code translate="no">bucketName</code></td><td>a-bucket</td><td>milvus-bucket</td></tr>
@@ -126,6 +127,7 @@ mc ls my_minio
 <span class="hljs-comment"># Download a bucket recursively</span>
 mc cp --recursive my_minio/&lt;your-bucket-path&gt; &lt;local_dir_path&gt;
 <button class="copy-code-btn"></button></code></pre>
+
 <p>现在，您可以将备份文件保存到安全的地方以便将来还原，或者将它们上传到<a href="https://cloud.zilliz.com">Zilliz Cloud</a>，以创建一个包含您的数据的受管向量数据库。有关详情，请参阅<a href="https://zilliz.com/doc/migrate_from_milvus-2x">从 Milvus 迁移到 Zilliz Cloud</a>。</p>
 <h2 id="Restore-data" class="common-anchor-header">恢复数据<button data-href="#Restore-data" class="anchor-icon" translate="no">
       <svg translate="no"

@@ -20,7 +20,7 @@
 			"isActive": false
 		},
 		{
-			"label": "升级您的 Milvus 操作员",
+			"label": "升级您的 Milvus Operator",
 			"href": "Upgrade-your-Milvus-operator",
 			"type": 2,
 			"isActive": false

@@ -3,6 +3,7 @@ id: authenticate.md
 summary: 了解如何在 Milvus 中管理用户身份验证。
 title: 验证用户访问
 ---
+
 <h1 id="Authenticate-User-Access" class="common-anchor-header">验证用户访问<button data-href="#Authenticate-User-Access" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -41,7 +42,7 @@ title: 验证用户访问
         ></path>
       </svg>
     </button></h2><div class="filter">
- <a href="#docker">Docker Compose</a> <a href="#helm">Helm</a> <a href="#operator">Milvus 操作员</a></div>
+ <a href="#docker">Docker Compose</a> <a href="#helm">Helm</a> <a href="#operator">Milvus Operator</a></div>
 <div class="filter-docker">
 <p>要为 Milvus 服务器启用用户身份验证，请在 Milvus 配置文件<code translate="no">milvus.yaml</code> 中将 common.security.authorizationEnabled 设为 true。有关配置的更多信息，请参阅<a href="https://milvus.io/docs/configure-docker.md?tab=component">使用 Docker Compose 配置 Milvus</a>。</p>
 <pre><code translate="no" class="language-yaml">...
@@ -100,10 +101,11 @@ spec:
 <span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client = MilvusClient(
-    uri=<span class="hljs-string">&#x27;http://localhost:19530&#x27;</span>, <span class="hljs-comment"># replace with your own Milvus server address</span>
-    token=<span class="hljs-string">&quot;root:Milvus&quot;</span>
-) 
+uri=<span class="hljs-string">&#x27;http://localhost:19530&#x27;</span>, <span class="hljs-comment"># replace with your own Milvus server address</span>
+token=<span class="hljs-string">&quot;root:Milvus&quot;</span>
+)
 <button class="copy-code-btn"></button></code></pre>
+
 <div class="alert note">
 如果在启用身份验证的情况下连接 Milvus 时未能提供有效令牌，则会收到 gRPC 错误。</div>
 <h2 id="Create-a-new-user" class="common-anchor-header">创建新用户<button data-href="#Create-a-new-user" class="anchor-icon" translate="no">
@@ -135,6 +137,7 @@ client.describe_user(<span class="hljs-string">&quot;user_1&quot;</span>)
 <span class="hljs-comment"># output</span>
 <span class="hljs-comment"># {&#x27;user_name&#x27;: &#x27;user_1&#x27;, &#x27;roles&#x27;: ()}</span>
 <button class="copy-code-btn"></button></code></pre>
+
 <p>有关创建用户的更多信息，请参阅<a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Authentication/create_user.md">create_user()</a>。</p>
 <h2 id="Connect-to-Milvus-with-a-new-user" class="common-anchor-header">使用新用户连接 Milvus<button data-href="#Connect-to-Milvus-with-a-new-user" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -155,10 +158,11 @@ client.describe_user(<span class="hljs-string">&quot;user_1&quot;</span>)
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># connect to milvus with the newly created user</span>
 
 client = MilvusClient(
-    uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>,
-    token=<span class="hljs-string">&quot;user_1:P@ssw0rd&quot;</span>
+uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>,
+token=<span class="hljs-string">&quot;user_1:P@ssw0rd&quot;</span>
 )
 <button class="copy-code-btn"></button></code></pre>
+
 <h2 id="Update-user-password" class="common-anchor-header">更新用户密码<button data-href="#Update-user-password" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -178,11 +182,12 @@ client = MilvusClient(
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># update password</span>
 
 client.update_password(
-    user_name=<span class="hljs-string">&quot;user_1&quot;</span>,
-    old_password=<span class="hljs-string">&quot;P@ssw0rd&quot;</span>,
-    new_password=<span class="hljs-string">&quot;P@ssw0rd123&quot;</span>
+user_name=<span class="hljs-string">&quot;user_1&quot;</span>,
+old_password=<span class="hljs-string">&quot;P@ssw0rd&quot;</span>,
+new_password=<span class="hljs-string">&quot;P@ssw0rd123&quot;</span>
 )
 <button class="copy-code-btn"></button></code></pre>
+
 <p>有关更新用户密码的更多信息，请参阅<a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Authentication/update_password.md">update_password()</a>。</p>
 <p>如果忘记了旧密码，Milvus 提供了一个配置项，允许将某些用户指定为超级用户。这样，重置密码时就不需要旧密码了。</p>
 <p>默认情况下，Milvus 配置文件中的<code translate="no">common.security.superUsers</code> 字段为空，这意味着所有用户在重置密码时都必须提供旧密码。不过，你可以将特定用户指定为超级用户，他们不需要提供旧密码。在下面的代码段中，<code translate="no">root</code> 和<code translate="no">foo</code> 被指定为超级用户。</p>
@@ -231,6 +236,7 @@ client.update_password(
 
 client.list_users()
 <button class="copy-code-btn"></button></code></pre>
+
 <h2 id="Limitations" class="common-anchor-header">限制条件<button data-href="#Limitations" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

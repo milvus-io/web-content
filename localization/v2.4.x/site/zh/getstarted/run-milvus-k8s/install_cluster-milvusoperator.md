@@ -68,7 +68,7 @@ NAME PROVISIONER RECLAIMPOLICY VOLUMEBIINDINGMODE ALLOWVOLUMEEXPANSION AGE
 <div class="alert note">
 <p>如果您在拉动映像时遇到任何问题，请通过<a href="mailto:community@zilliz.com">community@zilliz.com</a>联系我们，并提供有关问题的详细信息，我们将为您提供必要的支持。</p>
 </div>
-<h2 id="Install-Milvus-Operator" class="common-anchor-header">安装 Milvus 操作器<button data-href="#Install-Milvus-Operator" class="anchor-icon" translate="no">
+<h2 id="Install-Milvus-Operator" class="common-anchor-header">安装 Milvus Operator<button data-href="#Install-Milvus-Operator" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -308,7 +308,7 @@ my-release-pulsar-zookeeper<span class="hljs-number">-2</span> <span class="hljs
 <li>要连同 Milvus 群集一起删除依赖项和私有虚拟云 (PVC)，请参阅<a href="https://github.com/zilliztech/milvus-operator/blob/main/config/samples/milvus_deletion.yaml">配置文件</a>。</li>
 </ul>
 </div>
-<h2 id="Uninstall-Milvus-Operator" class="common-anchor-header">卸载 Milvus 操作员<button data-href="#Uninstall-Milvus-Operator" class="anchor-icon" translate="no">
+<h2 id="Uninstall-Milvus-Operator" class="common-anchor-header">卸载 Milvus Operator<button data-href="#Uninstall-Milvus-Operator" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

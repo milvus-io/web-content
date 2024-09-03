@@ -24,7 +24,7 @@
 			"type": 2,
 			"isActive": false
 		},
-		{ "label": "卡迪纳尔", "href": "Cardinal", "type": 2, "isActive": false },
+		{ "label": "Cardinal", "href": "Cardinal", "type": 2, "isActive": false },
 		{ "label": "通道", "href": "Channel", "type": 2, "isActive": false },
 		{ "label": "集合", "href": "Collection", "type": 2, "isActive": false },
 		{ "label": "依赖程序", "href": "Dependency", "type": 2, "isActive": false },

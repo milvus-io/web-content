@@ -1,10 +1,11 @@
 ---
 id: meta_storage_operator.md
 title: 使用 Milvus Operator 配置元存储
-related_key: 'minio, s3, storage, etcd, pulsar'
+related_key: "minio, s3, storage, etcd, pulsar"
 summary: 了解如何使用 Milvus Operator 配置元存储。
 ---
-<h1 id="Configure-Meta-Storage-with-Milvus-Operator" class="common-anchor-header">使用 Milvus 操作员配置元数据存储<button data-href="#Configure-Meta-Storage-with-Milvus-Operator" class="anchor-icon" translate="no">
+
+<h1 id="Configure-Meta-Storage-with-Milvus-Operator" class="common-anchor-header">使用 Milvus Operator 配置元数据存储<button data-href="#Configure-Meta-Storage-with-Milvus-Operator" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
