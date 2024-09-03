@@ -32,9 +32,13 @@ jobs:
           git config --global user.email "Milvus-doc-bot@zilliz.com"
           git config --global user.name "Milvus-doc-bot"
           yarn generate:en
+
+      - name: Commit and push
+        run: |
           git add .
           git commit -m "Generate en docs"
           git push -f origin master
+        continue-on-error: true
 
       - name: Trigger milvus.io
         run: |
