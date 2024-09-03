@@ -30,9 +30,13 @@ jobs:
           echo DEEPL_API_KEY=${{secrets.DEEPL_API_KEY}} >> .env
           echo GITHUB_TOKEN=${{secrets.GH_TOKEN}} >> .env
           yarn translate
+
+      - name: Commit and push
+        run: |
           git add .
           git commit -m "Translate docs"
           git push -f origin master
+        continue-on-error: true
 
       - name: Trigger milvus.io
         run: |
