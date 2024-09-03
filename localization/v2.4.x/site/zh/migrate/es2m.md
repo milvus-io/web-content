@@ -146,7 +146,7 @@ target:
 <tr><td><code translate="no">meta.fields.dims</code></td><td>向量字段的尺寸。只有在<code translate="no">meta.fields.type</code> 是<code translate="no">dense_vector</code> 时才需要此参数。</td></tr>
 <tr><td><code translate="no">meta.milvus</code></td><td>在 Milvus 2.x 中创建集合的特定配置。</td></tr>
 <tr><td><code translate="no">meta.milvus.collection</code></td><td>Milvus 集合的名称。如果未指定，默认为 Elasticsearch 索引名称。</td></tr>
-<tr><td><code translate="no">meta.milvus.closeDynamicField</code></td><td>指定是否禁用集合中的动态字段。默认为<code translate="no">false</code> 。有关动态字段的更多信息，请参阅<a href="https://milvus.io/docs/enable-dynamic-field.md#Enable-Dynamic-Field">启用动态字段</a>。</td></tr>
+<tr><td><code translate="no">meta.milvus.closeDynamicField</code></td><td>指定是否禁用集合中的Dynamic Field。默认为<code translate="no">false</code> 。有关Dynamic Field的更多信息，请参阅<a href="https://milvus.io/docs/enable-dynamic-field.md#Enable-Dynamic-Field">启用Dynamic Field</a>。</td></tr>
 <tr><td><code translate="no">meta.milvus.shardNum</code></td><td>要在集合中创建的分片数量。有关分片的更多信息，请参阅<a href="https://milvus.io/docs/glossary.md#Shard">术语</a>。</td></tr>
 <tr><td><code translate="no">meta.milvus.consistencyLevel</code></td><td>集合在 Milvus 中的一致性级别。有关更多信息，请参阅<a href="https://milvus.io/docs/consistency.md">一致性</a>。</td></tr>
 </tbody>

@@ -4,6 +4,7 @@ related_key: multi-tenancy
 summary: Milvus 中的多租户。
 title: 多租户战略
 ---
+
 <h1 id="Multi-tenancy-strategies" class="common-anchor-header">多租户策略<button data-href="#Multi-tenancy-strategies" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -72,7 +73,7 @@ title: 多租户战略
       </svg>
     </button></h2><p>实现面向分区的多租户也有两种可能的方法：</p>
 <h3 id="One-partition-per-tenant" class="common-anchor-header">每个租户一个分区</h3><p>管理单个集合比管理多个集合容易得多。与其创建多个集合，不如考虑为每个租户分配一个分区，以实现灵活的数据隔离和内存管理。面向分区的多租户搜索性能比面向集合的多租户要好得多。但需要注意的是，集合的租户数量不应超过集合可容纳分区的最大数量。</p>
-<h3 id="Partition-key-based-multi-tenancy" class="common-anchor-header">基于分区密钥的多租户</h3><p>Milvus 2.2.9 引入了名为分区密钥的新功能。创建集合时，指定一个租户字段并将其作为分区密钥字段。Milvus 将根据分区键字段中的值在分区中存储实体。在进行 ANN 搜索时，Milvus 会根据指定的分区键切换到一个分区，根据分区键过滤实体，并在过滤后的实体中进行搜索。</p>
+<h3 id="Partition-key-based-multi-tenancy" class="common-anchor-header">基于Partition Key的多租户</h3><p>Milvus 2.2.9 引入了名为Partition Key的新功能。创建集合时，指定一个租户字段并将其作为Partition Key字段。Milvus 将根据分区键字段中的值在分区中存储实体。在进行 ANN 搜索时，Milvus 会根据指定的分区键切换到一个分区，根据分区键过滤实体，并在过滤后的实体中进行搜索。</p>
 </div>
 <p>这种策略取消了 Milvus 集合可支持的最大租户数限制，并大大简化了资源管理，因为 Milvus 会自动为你管理分区。</p>
 <p>总而言之，你可以使用上述任一或某些多租户策略来形成自己的解决方案。下表从数据隔离、搜索性能和最大租户数等方面对这些策略进行了比较。</p>
@@ -85,7 +86,7 @@ title: 多租户战略
 <tr><td>一个集合适用于所有项目</td><td>弱</td><td>中等</td><td>不适用</td><td>适用于资源有限且对数据隔离不敏感的企业。</td></tr>
 <tr><td>每个租户一个集合</td><td>强</td><td>强</td><td>少于 10,000</td><td>适用于每个群集拥有少于 10,000 个租户的情况。</td></tr>
 <tr><td>每个租户一个分区</td><td>中</td><td>强</td><td>4,096</td><td>适用于每个集群租户少于 4 096 个的情况。</td></tr>
-<tr><td>基于分区密钥</td><td>中</td><td>强</td><td>10,000,000+</td><td>适用于预测租户数量会迅速增加到数百万的用户。</td></tr>
+<tr><td>基于Partition Key</td><td>中</td><td>强</td><td>10,000,000+</td><td>适用于预测租户数量会迅速增加到数百万的用户。</td></tr>
 </tbody>
 </table>
 <h2 id="Whats-next" class="common-anchor-header">下一步计划<button data-href="#Whats-next" class="anchor-icon" translate="no">

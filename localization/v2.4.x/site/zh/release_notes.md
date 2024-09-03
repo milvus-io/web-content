@@ -54,7 +54,7 @@ title: 发布说明
 <li>优化了锁的使用，避免了集群缓冲区写入器的双重刷新<a href="https://github.com/milvus-io/milvus/pull/35490">（#35490</a>）。</li>
 <li>删除了无效日志<a href="https://github.com/milvus-io/milvus/pull/35473">（#35473</a>）。</li>
 <li>添加了聚类压缩用户指南文档<a href="https://github.com/milvus-io/milvus/pull/35428">（#35428</a>）。</li>
-<li>在模式助手中添加了对动态字段的支持<a href="https://github.com/milvus-io/milvus/pull/35469">（#35469</a>）。</li>
+<li>在模式助手中添加了对Dynamic Field的支持<a href="https://github.com/milvus-io/milvus/pull/35469">（#35469</a>）。</li>
 <li>在生成的 YAML 中添加了 msgchannel 部分<a href="https://github.com/milvus-io/milvus/pull/35466">（#35466</a>）。</li>
 </ul>
 <h2 id="v248" class="common-anchor-header">v2.4.8<button data-href="#v248" class="anchor-icon" translate="no">
@@ -429,7 +429,7 @@ title: 发布说明
 <li>清理元存储中的通道节点信息<a href="https://github.com/milvus-io/milvus/pull/32988">（#32988）</a></li>
 <li>从数据节点代理中移除根节点<a href="https://github.com/milvus-io/milvus/pull/32818">（＃32818）</a></li>
 <li>启用批量上传<a href="https://github.com/milvus-io/milvus/pull/32788">（#32788）</a></li>
-<li>使用分区密钥时，将默认分区数改为 16<a href="https://github.com/milvus-io/milvus/pull/32950">(#32950</a>)</li>
+<li>使用Partition Key时，将默认分区数改为 16<a href="https://github.com/milvus-io/milvus/pull/32950">(#32950</a>)</li>
 <li>改进了超大 top-k 查询的还原性能<a href="https://github.com/milvus-io/milvus/pull/32871">（＃32871）</a></li>
 <li>利用 TestLocations 功能加速写入和压缩<a href="https://github.com/milvus-io/milvus/pull/32948">（＃32948）</a></li>
 <li>优化了计划解析器池，以避免不必要的循环<a href="https://github.com/milvus-io/milvus/pull/32869">（#32869）</a></li>
@@ -450,7 +450,7 @@ title: 发布说明
 <li>移除过时的应用程序接口和字段<a href="https://github.com/milvus-io/milvus/pull/32808">（＃32808</a>，<a href="https://github.com/milvus-io/milvus/pull/32704">＃32704）</a></li>
 <li>添加了 metautil.channel 以将字符串比较转换为 int<a href="https://github.com/milvus-io/milvus/pull/32749">(#32749</a>)</li>
 <li>当 querynode 发现新集合时，为有效载荷写入器错误信息和日志添加了类型信息<a href="https://github.com/milvus-io/milvus/pull/32522">（＃32522）</a></li>
-<li>使用分区密钥创建集合时检查分区编号<a href="https://github.com/milvus-io/milvus/pull/32670">(#32670</a>)</li>
+<li>使用Partition Key创建集合时检查分区编号<a href="https://github.com/milvus-io/milvus/pull/32670">(#32670</a>)</li>
 <li>如果观察失败，则删除传统的 l0 段<a href="https://github.com/milvus-io/milvus/pull/32725">(#32725</a>)</li>
 <li>改进了请求类型的打印<a href="https://github.com/milvus-io/milvus/pull/33319">(#33319</a>)</li>
 <li>在获取类型前检查数组字段数据是否为零<a href="https://github.com/milvus-io/milvus/pull/33311">（＃33311）</a></li>
@@ -472,7 +472,7 @@ title: 发布说明
 <li>修复了因建立索引失败而导致的恐慌<a href="https://github.com/milvus-io/milvus/pull/33314">(#33314</a>)</li>
 <li>为 segcore 中的稀疏向量添加了验证，以确保合法性<a href="https://github.com/milvus-io/milvus/pull/33312">（#33312）</a></li>
 <li>任务完成后从同步管理中移除任务<a href="https://github.com/milvus-io/milvus/pull/33303">（#33303）</a></li>
-<li>修复了数据导入过程中分区密钥过滤失败的问题<a href="https://github.com/milvus-io/milvus/pull/33277">（#33277）</a></li>
+<li>修复了数据导入过程中Partition Key过滤失败的问题<a href="https://github.com/milvus-io/milvus/pull/33277">（#33277）</a></li>
 <li>修复了使用 noop 输出程序时无法生成 traceID 的问题<a href="https://github.com/milvus-io/milvus/pull/33208">（#33208）</a></li>
 <li>改进了查询结果检索<a href="https://github.com/milvus-io/milvus/pull/33179">（#33179）</a></li>
 <li>标记通道检查点已放弃，以防止检查点滞后指标泄漏<a href="https://github.com/milvus-io/milvus/pull/33201">（#33201）</a></li>
@@ -532,7 +532,7 @@ title: 发布说明
 <tr><td>2.4.1</td><td>2.4.1</td><td>2.4.0</td><td>2.4.2</td></tr>
 </tbody>
 </table>
-<p>Milvus 2.4.1 版带来了大量改进和错误修复，旨在提高软件的性能、可观察性和稳定性。这些改进包括声明式资源组 API、支持 Float16/BFloat16 向量数据类型的增强型批量插入功能、可减少对象存储的列表操作的改进型垃圾回收（GC）机制，以及与性能优化相关的其他更改。此外，错误修复还解决了编译错误、换行符模糊匹配失败、RESTful 接口参数数据类型不正确，以及启用动态字段时 BulkInsert 在 numpy 文件上引发错误等问题。</p>
+<p>Milvus 2.4.1 版带来了大量改进和错误修复，旨在提高软件的性能、可观察性和稳定性。这些改进包括声明式资源组 API、支持 Float16/BFloat16 向量数据类型的增强型批量插入功能、可减少对象存储的列表操作的改进型垃圾回收（GC）机制，以及与性能优化相关的其他更改。此外，错误修复还解决了编译错误、换行符模糊匹配失败、RESTful 接口参数数据类型不正确，以及启用Dynamic Field时 BulkInsert 在 numpy 文件上引发错误等问题。</p>
 <h3 id="Breaking-changes" class="common-anchor-header">破坏性更改</h3><ul>
 <li>不再支持使用空筛选表达式删除。<a href="https://github.com/milvus-io/milvus/pull/32472">(#32472</a>)</li>
 </ul>
@@ -568,7 +568,7 @@ title: 发布说明
 <li>修正了基于 ARM 的 GPU 图像的崩溃问题<a href="https://github.com/milvus-io/milvus/pull/31980">(#31980</a>)</li>
 <li>修正了 regex 查询无法处理带换行的文本<a href="https://github.com/milvus-io/milvus/pull/32569">(#32569</a>)</li>
 <li>修正了因 GetShardLeaders 返回空节点列表而导致搜索结果为空的问题<a href="https://github.com/milvus-io/milvus/pull/32685">（＃32685）</a></li>
-<li>修正了 BulkInsert 在遇到 numpy 文件中的动态字段时引发错误的问题<a href="https://github.com/milvus-io/milvus/pull/32596">(#32596</a>)</li>
+<li>修正了 BulkInsert 在遇到 numpy 文件中的Dynamic Field时引发错误的问题<a href="https://github.com/milvus-io/milvus/pull/32596">(#32596</a>)</li>
 <li>修正了与 RESTFulV2 接口相关的错误，包括允许请求中的数字参数接受数字输入而非字符串类型的重要修正<a href="https://github.com/milvus-io/milvus/pull/32485">(#32485</a>,<a href="https://github.com/milvus-io/milvus/pull/32355">#32355</a>)</li>
 <li>通过移除速率限制器中的观察配置事件，修复了代理中的内存泄漏问题<a href="https://github.com/milvus-io/milvus/pull/32313">(#32313</a>)</li>
 <li>修正了当未指定 partitionName 时，速率限制器会错误地报告无法找到分区的问题<a href="https://github.com/milvus-io/milvus/pull/32647">(#32647</a>)</li>

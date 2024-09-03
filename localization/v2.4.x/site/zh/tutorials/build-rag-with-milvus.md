@@ -46,7 +46,7 @@ title: 用 Milvus 打造 RAG
 <p>在本例中，我们将使用 OpenAI 作为 LLM。您应将<a href="https://platform.openai.com/docs/quickstart">api key</a> <code translate="no">OPENAI_API_KEY</code> 作为环境变量。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> os
 
-os.<span class="hljs-property">environ</span>[<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</span>] = <span class="hljs-string">&quot;sk-****\*\*\*****&quot;</span>
+os.<span class="hljs-property">environ</span>[<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</span>] = <span class="hljs-string">&quot;sk-\***\*\*\*\*\*\***&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 
 <h3 id="Prepare-the-data" class="common-anchor-header">准备数据</h3><p>我们使用<a href="https://github.com/milvus-io/milvus-docs/releases/download/v2.4.6-preview/milvus_docs_2.4.x_en.zip">Milvus Documentation 2.4.x</a>中的常见问题页面作为 RAG 中的私有知识，这对于简单的 RAG 管道来说是一个很好的数据源。</p>
@@ -134,7 +134,7 @@ collection_name = <span class="hljs-string">&quot;my_rag_collection&quot;</span>
 )
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Insert-data" class="common-anchor-header">插入数据</h3><p>遍历文本行，创建嵌入，然后将数据插入 Milvus。</p>
-<p>这里有一个新字段<code translate="no">text</code> ，它是集合模式中的一个未定义字段。它将被自动添加到保留的 JSON 动态字段中，在高层次上可被视为普通字段。</p>
+<p>这里有一个新字段<code translate="no">text</code> ，它是Collection Schema 中的一个未定义字段。它将被自动添加到保留的 JSON Dynamic Field中，在高层次上可被视为普通字段。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> tqdm <span class="hljs-keyword">import</span> tqdm
 
 data = []

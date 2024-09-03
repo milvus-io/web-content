@@ -337,13 +337,13 @@
 				"children": []
 			},
 			{
-				"label": "管理模式",
+				"label": "管理 Schema",
 				"id": "schema.md",
 				"order": 1,
 				"children": []
 			},
 			{
-				"label": "管理收藏",
+				"label": "管理 Collection",
 				"id": "manage-collections.md",
 				"order": 2,
 				"children": []
@@ -445,13 +445,13 @@
 				"isMenu": true,
 				"children": [
 					{
-						"label": "动态领域",
+						"label": "Dynamic Field",
 						"id": "enable-dynamic-field.md",
 						"order": 0,
 						"children": []
 					},
 					{
-						"label": "分区密钥",
+						"label": "Partition Key",
 						"id": "use-partition-key.md",
 						"order": 1,
 						"children": []

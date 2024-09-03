@@ -3,6 +3,7 @@ id: insert-update-delete.md
 summary: 本指南将引导您了解集合中的数据操作，包括插入、向上插入和删除。
 title: 插入、倒置和删除
 ---
+
 <h1 id="Insert-Upsert--Delete" class="common-anchor-header">插入、上插和删除<button data-href="#Insert-Upsert--Delete" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -56,7 +57,7 @@ title: 插入、倒置和删除
       </svg>
     </button></h2><p>在 Milvus 数据集中，实体是一个数据集中可识别的单一实例。它代表特定类别中的一个独特成员，无论是图书馆中的一本书、基因组中的一个基因，还是任何其他可识别的实体。</p>
 <p>集合中的实体共享一组共同的属性，称为模式，概述了每个实体必须遵守的结构，包括字段名称、数据类型和任何其他限制。</p>
-<p>要将实体成功插入到集合中，所提供的数据必须包含目标集合的所有模式定义字段。此外，只有启用了动态字段，才能包含非模式定义的字段。有关详细信息，请参阅<a href="/docs/zh/enable-dynamic-field.md">启用动态字段</a>。</p>
+<p>要将实体成功插入到集合中，所提供的数据必须包含目标集合的所有模式定义字段。此外，只有启用了Dynamic Field，才能包含非模式定义的字段。有关详细信息，请参阅<a href="/docs/zh/enable-dynamic-field.md">启用Dynamic Field</a>。</p>
 <h2 id="Preparations" class="common-anchor-header">准备工作<button data-href="#Preparations" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -88,16 +89,17 @@ title: 插入、倒置和删除
 
 <span class="hljs-comment"># 1. Set up a Milvus client</span>
 client = MilvusClient(
-    uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>
+uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>
 )
 
 <span class="hljs-comment"># 2. Create a collection</span>
 client.create_collection(
-    collection_name=<span class="hljs-string">&quot;quick_setup&quot;</span>,
-    dimension=<span class="hljs-number">5</span>,
-    metric_type=<span class="hljs-string">&quot;IP&quot;</span>
+collection_name=<span class="hljs-string">&quot;quick_setup&quot;</span>,
+dimension=<span class="hljs-number">5</span>,
+metric_type=<span class="hljs-string">&quot;IP&quot;</span>
 )
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.client.ConnectConfig;
 <span class="hljs-keyword">import</span> io.milvus.v2.client.MilvusClientV2;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.CreateCollectionReq;
@@ -157,7 +159,7 @@ client = <span class="hljs-keyword">new</span> <span class="hljs-title class_">M
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>要插入实体，需要将数据组织成一个字典列表，其中每个字典代表一个实体。每个字典都包含与目标集合中预定义字段和动态字段相对应的键。</p>
+    </button></h2><p>要插入实体，需要将数据组织成一个字典列表，其中每个字典代表一个实体。每个字典都包含与目标集合中预定义字段和Dynamic Field相对应的键。</p>
 <div class="language-python">
 <p>要在集合中插入实体，请使用 <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Vector/insert.md"><code translate="no">insert()</code></a>方法。</p>
 </div>
@@ -184,8 +186,8 @@ data=[
 ]
 
 res = client.insert(
-    collection_name=<span class="hljs-string">&quot;quick_setup&quot;</span>,
-    data=data
+collection_name=<span class="hljs-string">&quot;quick_setup&quot;</span>,
+data=data
 )
 
 <span class="hljs-built_in">print</span>(res)
@@ -193,21 +195,22 @@ res = client.insert(
 <span class="hljs-comment"># Output</span>
 <span class="hljs-comment">#</span>
 <span class="hljs-comment"># {</span>
-<span class="hljs-comment">#     &quot;insert_count&quot;: 10,</span>
-<span class="hljs-comment">#     &quot;ids&quot;: [</span>
-<span class="hljs-comment">#         0,</span>
-<span class="hljs-comment">#         1,</span>
-<span class="hljs-comment">#         2,</span>
-<span class="hljs-comment">#         3,</span>
-<span class="hljs-comment">#         4,</span>
-<span class="hljs-comment">#         5,</span>
-<span class="hljs-comment">#         6,</span>
-<span class="hljs-comment">#         7,</span>
-<span class="hljs-comment">#         8,</span>
-<span class="hljs-comment">#         9</span>
-<span class="hljs-comment">#     ]</span>
+<span class="hljs-comment"># &quot;insert_count&quot;: 10,</span>
+<span class="hljs-comment"># &quot;ids&quot;: [</span>
+<span class="hljs-comment"># 0,</span>
+<span class="hljs-comment"># 1,</span>
+<span class="hljs-comment"># 2,</span>
+<span class="hljs-comment"># 3,</span>
+<span class="hljs-comment"># 4,</span>
+<span class="hljs-comment"># 5,</span>
+<span class="hljs-comment"># 6,</span>
+<span class="hljs-comment"># 7,</span>
+<span class="hljs-comment"># 8,</span>
+<span class="hljs-comment"># 9</span>
+<span class="hljs-comment"># ]</span>
 <span class="hljs-comment"># }</span>
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> java.<span class="hljs-property">util</span>.<span class="hljs-property">Arrays</span>;
 <span class="hljs-keyword">import</span> java.<span class="hljs-property">util</span>.<span class="hljs-property">List</span>;
 <span class="hljs-keyword">import</span> java.<span class="hljs-property">util</span>.<span class="hljs-property">Map</span>;
@@ -285,14 +288,14 @@ data=[
 ]
 
 client.create_partition(
-    collection_name=<span class="hljs-string">&quot;quick_setup&quot;</span>,
-    partition_name=<span class="hljs-string">&quot;partitionA&quot;</span>
+collection_name=<span class="hljs-string">&quot;quick_setup&quot;</span>,
+partition_name=<span class="hljs-string">&quot;partitionA&quot;</span>
 )
 
 res = client.insert(
-    collection_name=<span class="hljs-string">&quot;quick_setup&quot;</span>,
-    data=data,
-    partition_name=<span class="hljs-string">&quot;partitionA&quot;</span>
+collection_name=<span class="hljs-string">&quot;quick_setup&quot;</span>,
+data=data,
+partition_name=<span class="hljs-string">&quot;partitionA&quot;</span>
 )
 
 <span class="hljs-built_in">print</span>(res)
@@ -300,21 +303,22 @@ res = client.insert(
 <span class="hljs-comment"># Output</span>
 <span class="hljs-comment">#</span>
 <span class="hljs-comment"># {</span>
-<span class="hljs-comment">#     &quot;insert_count&quot;: 10,</span>
-<span class="hljs-comment">#     &quot;ids&quot;: [</span>
-<span class="hljs-comment">#         10,</span>
-<span class="hljs-comment">#         11,</span>
-<span class="hljs-comment">#         12,</span>
-<span class="hljs-comment">#         13,</span>
-<span class="hljs-comment">#         14,</span>
-<span class="hljs-comment">#         15,</span>
-<span class="hljs-comment">#         16,</span>
-<span class="hljs-comment">#         17,</span>
-<span class="hljs-comment">#         18,</span>
-<span class="hljs-comment">#         19</span>
-<span class="hljs-comment">#     ]</span>
+<span class="hljs-comment"># &quot;insert_count&quot;: 10,</span>
+<span class="hljs-comment"># &quot;ids&quot;: [</span>
+<span class="hljs-comment"># 10,</span>
+<span class="hljs-comment"># 11,</span>
+<span class="hljs-comment"># 12,</span>
+<span class="hljs-comment"># 13,</span>
+<span class="hljs-comment"># 14,</span>
+<span class="hljs-comment"># 15,</span>
+<span class="hljs-comment"># 16,</span>
+<span class="hljs-comment"># 17,</span>
+<span class="hljs-comment"># 18,</span>
+<span class="hljs-comment"># 19</span>
+<span class="hljs-comment"># ]</span>
 <span class="hljs-comment"># }</span>
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-comment">// 4. Insert some more data into a specific partition</span>
 data = <span class="hljs-title class_">Arrays</span>.<span class="hljs-title function_">asList</span>(
     <span class="hljs-keyword">new</span> <span class="hljs-title class_">JSON</span><span class="hljs-built_in">Object</span>(<span class="hljs-title class_">Map</span>.<span class="hljs-title function_">of</span>(<span class="hljs-string">&quot;id&quot;</span>, 10L, <span class="hljs-string">&quot;vector&quot;</span>, <span class="hljs-title class_">Arrays</span>.<span class="hljs-title function_">asList</span>(-<span class="hljs-number">0.</span>5570353903748935f, -<span class="hljs-number">0.</span>8997887893201304f, -<span class="hljs-number">0.</span>7123782431855732f, -<span class="hljs-number">0.</span>6298990746450119f, <span class="hljs-number">0.</span>6699215060604258f), <span class="hljs-string">&quot;color&quot;</span>, <span class="hljs-string">&quot;red_1202&quot;</span>)),
@@ -435,8 +439,8 @@ data=[
 ]
 
 res = client.upsert(
-    collection_name=<span class="hljs-string">&#x27;quick_setup&#x27;</span>,
-    data=data
+collection_name=<span class="hljs-string">&#x27;quick_setup&#x27;</span>,
+data=data
 )
 
 <span class="hljs-built_in">print</span>(res)
@@ -444,9 +448,10 @@ res = client.upsert(
 <span class="hljs-comment"># Output</span>
 <span class="hljs-comment">#</span>
 <span class="hljs-comment"># {</span>
-<span class="hljs-comment">#     &quot;upsert_count&quot;: 10</span>
+<span class="hljs-comment"># &quot;upsert_count&quot;: 10</span>
 <span class="hljs-comment"># }</span>
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-comment">// 5. Upsert some data</span>
 data = <span class="hljs-title class_">Arrays</span>.<span class="hljs-title function_">asList</span>(
     <span class="hljs-keyword">new</span> <span class="hljs-title class_">JSON</span><span class="hljs-built_in">Object</span>(<span class="hljs-title class_">Map</span>.<span class="hljs-title function_">of</span>(<span class="hljs-string">&quot;id&quot;</span>, 0L, <span class="hljs-string">&quot;vector&quot;</span>, <span class="hljs-title class_">Arrays</span>.<span class="hljs-title function_">asList</span>(-<span class="hljs-number">0.</span>619954382375778f, <span class="hljs-number">0.</span>4479436794798608f, -<span class="hljs-number">0.</span>17493894838751745f, -<span class="hljs-number">0.</span>4248030059917294f, -<span class="hljs-number">0.</span>8648452746018911f), <span class="hljs-string">&quot;color&quot;</span>, <span class="hljs-string">&quot;black_9898&quot;</span>)),
@@ -517,9 +522,9 @@ data=[
 ]
 
 res = client.upsert(
-    collection_name=<span class="hljs-string">&quot;quick_setup&quot;</span>,
-    data=data,
-    partition_name=<span class="hljs-string">&quot;partitionA&quot;</span>
+collection_name=<span class="hljs-string">&quot;quick_setup&quot;</span>,
+data=data,
+partition_name=<span class="hljs-string">&quot;partitionA&quot;</span>
 )
 
 <span class="hljs-built_in">print</span>(res)
@@ -527,9 +532,10 @@ res = client.upsert(
 <span class="hljs-comment"># Output</span>
 <span class="hljs-comment">#</span>
 <span class="hljs-comment"># {</span>
-<span class="hljs-comment">#     &quot;upsert_count&quot;: 10</span>
+<span class="hljs-comment"># &quot;upsert_count&quot;: 10</span>
 <span class="hljs-comment"># }</span>
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.<span class="hljs-property">milvus</span>.<span class="hljs-property">v2</span>.<span class="hljs-property">service</span>.<span class="hljs-property">vector</span>.<span class="hljs-property">request</span>.<span class="hljs-property">UpsertReq</span>;
 <span class="hljs-keyword">import</span> io.<span class="hljs-property">milvus</span>.<span class="hljs-property">v2</span>.<span class="hljs-property">service</span>.<span class="hljs-property">vector</span>.<span class="hljs-property">response</span>.<span class="hljs-property">UpsertResp</span>;
 
@@ -632,9 +638,10 @@ res = client.delete(
 <span class="hljs-comment"># Output</span>
 <span class="hljs-comment">#</span>
 <span class="hljs-comment"># {</span>
-<span class="hljs-comment">#     &quot;delete_count&quot;: 3</span>
+<span class="hljs-comment"># &quot;delete_count&quot;: 3</span>
 <span class="hljs-comment"># }</span>
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.<span class="hljs-property">milvus</span>.<span class="hljs-property">v2</span>.<span class="hljs-property">service</span>.<span class="hljs-property">vector</span>.<span class="hljs-property">request</span>.<span class="hljs-property">DeleteReq</span>;
 <span class="hljs-keyword">import</span> io.<span class="hljs-property">milvus</span>.<span class="hljs-property">v2</span>.<span class="hljs-property">service</span>.<span class="hljs-property">vector</span>.<span class="hljs-property">response</span>.<span class="hljs-property">DeleteResp</span>;
 
@@ -681,9 +688,10 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 <span class="hljs-comment"># Output</span>
 <span class="hljs-comment">#</span>
 <span class="hljs-comment"># {</span>
-<span class="hljs-comment">#     &quot;delete_count&quot;: 2</span>
+<span class="hljs-comment"># &quot;delete_count&quot;: 2</span>
 <span class="hljs-comment"># }</span>
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java">deleteReq = <span class="hljs-title class_">DeleteReq</span>.<span class="hljs-title function_">builder</span>()
     .<span class="hljs-title function_">collectionName</span>(<span class="hljs-string">&quot;quick_setup&quot;</span>)
     .<span class="hljs-title function_">ids</span>(<span class="hljs-title class_">Arrays</span>.<span class="hljs-title function_">asList</span>(18L, 19L))
@@ -724,8 +732,9 @@ partition_name=<span class="hljs-string">&#x27;partitionA&#x27;</span>,
 <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Entities deleted from partitionA: &quot;</span>, res[<span class="hljs-string">&#x27;delete_count&#x27;</span>])
 
 <span class="hljs-comment"># Output:</span>
-<span class="hljs-comment"># Entities deleted from partitionA:  3</span>
+<span class="hljs-comment"># Entities deleted from partitionA: 3</span>
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java">deleteReq = <span class="hljs-title class_">DeleteReq</span>.<span class="hljs-title function_">builder</span>()
     .<span class="hljs-title function_">collectionName</span>(<span class="hljs-string">&quot;quick_setup&quot;</span>)
     .<span class="hljs-title function_">filter</span>(<span class="hljs-string">&#x27;color like &quot;blue%&quot;&#x27;</span>)
