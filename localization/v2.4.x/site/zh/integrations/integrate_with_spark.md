@@ -179,7 +179,7 @@ object Hello <span class="hljs-keyword">extends</span> <span class="hljs-title c
 <li><code translate="no">milvusbinlog</code>:用于读取 Milvus 内置 binlog 数据的 Milvus 数据格式。</li>
 <li><code translate="no">mjson</code>:用于向 Milvus 批量插入数据的 Milvus JSON 格式。</li>
 </ul>
-<h3 id="milvus" class="common-anchor-header">Milvus</h3><p>在<a href="#Quick-start">快速入门</a>中，我们使用<strong>milvus</strong>格式将样本数据写入 Milvus 集群。<strong>milvus</strong>格式是一种新的数据格式，支持将 Spark DataFrame 数据无缝写入 Milvus 集合。这是通过批量调用 Milvus SDK 的插入 API 来实现的。如果 Milvus 中不存在集合，则会根据数据帧的模式创建新的集合。不过，自动创建的集合可能不支持集合模式的所有功能。因此，建议先通过 SDK 创建一个集合，然后再使用 spark-milvus 进行编写。有关详细信息，请参阅<a href="https://github.com/zilliztech/spark-milvus/blob/main/examples/src/main/scala/InsertDemo.scala">演示</a>。</p>
+<h3 id="milvus" class="common-anchor-header">Milvus</h3><p>在<a href="#Quick-start">快速入门</a>中，我们使用<strong>milvus</strong>格式将样本数据写入 Milvus 集群。<strong>milvus</strong>格式是一种新的数据格式，支持将 Spark DataFrame 数据无缝写入 Milvus 集合。这是通过批量调用 Milvus SDK 的插入 API 来实现的。如果 Milvus 中不存在集合，则会根据数据帧的模式创建新的集合。不过，自动创建的集合可能不支持Collection Schema 的所有功能。因此，建议先通过 SDK 创建一个集合，然后再使用 spark-milvus 进行编写。有关详细信息，请参阅<a href="https://github.com/zilliztech/spark-milvus/blob/main/examples/src/main/scala/InsertDemo.scala">演示</a>。</p>
 <h3 id="milvusbinlog" class="common-anchor-header">milvusbinlog</h3><p>新数据格式<strong>milvusbinlog</strong>用于读取 Milvus 内置的 binlog 数据。Binlog 是 Milvus 基于 parquet 的内部数据存储格式。除非你熟悉<strong>Milvus</strong>内部存储的细节，否则不建议直接使用<strong>milvusbinlog</strong>。我们建议使用下一节将介绍的<a href="#MilvusUtils">MilvusUtils</a>函数。</p>
 <pre><code translate="no" class="language-scalar">val df = spark.read
   .<span class="hljs-built_in">format</span>(<span class="hljs-string">&quot;milvusbinlog&quot;</span>)

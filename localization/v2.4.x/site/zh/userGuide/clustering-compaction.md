@@ -1,9 +1,10 @@
 ---
 id: clustering-compaction.md
 title: 聚类压缩
-related_key: 'clustering, compaction'
+related_key: "clustering, compaction"
 summary: 聚类压缩旨在提高搜索性能并降低大型集合的成本。本指南将帮助您了解聚类压缩以及该功能如何提高搜索性能。
 ---
+
 <h1 id="Clustering-Compaction" class="common-anchor-header">聚类压缩<button data-href="#Clustering-Compaction" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -76,15 +77,16 @@ summary: 聚类压缩旨在提高搜索性能并降低大型集合的成本。�
       <span class="hljs-built_in">timeout</span>: 7200
      
 queryNode:
-  enableSegmentPrune: <span class="hljs-literal">true</span> 
+  enableSegmentPrune: <span class="hljs-literal">true</span>
 
 datanode:
-  clusteringCompaction:
-    memoryBufferRatio: 0.1 
-    workPoolSize: 8  
+clusteringCompaction:
+memoryBufferRatio: 0.1
+workPoolSize: 8  
 common:
-  usePartitionKeyAsClusteringKey: <span class="hljs-literal">true</span> 
+usePartitionKeyAsClusteringKey: <span class="hljs-literal">true</span>
 <button class="copy-code-btn"></button></code></pre>
+
 <ul>
 <li><p><code translate="no">dataCoord.compaction.clustering</code></p>
 <table>
@@ -129,7 +131,7 @@ common:
 <tr><th>配置项</th><th>配置项</th><th>默认值</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">usePartitionKeyAsClusteringKey</code></td><td>指定是否将集合中的分区密钥用作聚类密钥。<br>将其设置为<code translate="no">true</code> 表示将分区密钥用作聚类密钥。<br>您可以在集合中通过显式设置聚类密钥来覆盖此设置。</td><td><code translate="no">false</code></td></tr>
+<tr><td><code translate="no">usePartitionKeyAsClusteringKey</code></td><td>指定是否将集合中的Partition Key用作聚类密钥。<br>将其设置为<code translate="no">true</code> 表示将Partition Key用作聚类密钥。<br>您可以在集合中通过显式设置聚类密钥来覆盖此设置。</td><td><code translate="no">false</code></td></tr>
 </tbody>
 </table>
 </li>
@@ -159,12 +161,13 @@ common:
 ]
 
 default_schema = CollectionSchema(
-    fields=default_fields, 
-    description=<span class="hljs-string">&quot;test clustering-key collection&quot;</span>
+fields=default_fields,
+description=<span class="hljs-string">&quot;test clustering-key collection&quot;</span>
 )
 
 coll1 = Collection(name=<span class="hljs-string">&quot;clustering_test&quot;</span>, schema=default_schema)
 <button class="copy-code-btn"></button></code></pre>
+
 <div class="alert note">
 <p>可以使用以下数据类型的标量字段作为聚类键：<code translate="no">Int8</code>,<code translate="no">Int16</code>,<code translate="no">Int32</code>,<code translate="no">Int64</code>,<code translate="no">Float</code>,<code translate="no">Double</code>, 和<code translate="no">VarChar</code> 。</p>
 </div>

@@ -1,8 +1,9 @@
 ---
 id: manage-collections.md
-title: 管理收藏
-summary: ''
+title: 管理 Collection
+summary: ""
 ---
+
 <h1 id="Manage-Collections" class="common-anchor-header">Manage Collections<button data-href="#Manage-Collections" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -107,17 +108,17 @@ summary: ''
 
 <span class="hljs-comment"># 1. Set up a Milvus client</span>
 client = MilvusClient(
-    uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>
+uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>
 )
 
 <span class="hljs-comment"># 2. Create a collection in quick setup mode</span>
 client.create_collection(
-    collection_name=<span class="hljs-string">&quot;quick_setup&quot;</span>,
-    dimension=<span class="hljs-number">5</span>
+collection_name=<span class="hljs-string">&quot;quick_setup&quot;</span>,
+dimension=<span class="hljs-number">5</span>
 )
 
 res = client.get_load_state(
-    collection_name=<span class="hljs-string">&quot;quick_setup&quot;</span>
+collection_name=<span class="hljs-string">&quot;quick_setup&quot;</span>
 )
 
 <span class="hljs-built_in">print</span>(res)
@@ -125,9 +126,10 @@ res = client.get_load_state(
 <span class="hljs-comment"># Output</span>
 <span class="hljs-comment">#</span>
 <span class="hljs-comment"># {</span>
-<span class="hljs-comment">#     &quot;state&quot;: &quot;&lt;LoadState: Loaded&gt;&quot;</span>
+<span class="hljs-comment"># &quot;state&quot;: &quot;&lt;LoadState: Loaded&gt;&quot;</span>
 <span class="hljs-comment"># }</span>
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.client.ConnectConfig;
 <span class="hljs-keyword">import</span> io.milvus.v2.client.MilvusClientV2;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.GetLoadStateReq;
@@ -254,14 +256,15 @@ $ curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable
 
 <span class="hljs-comment"># 3.1. Create schema</span>
 schema = MilvusClient.create_schema(
-    auto_id=<span class="hljs-literal">False</span>,
-    enable_dynamic_field=<span class="hljs-literal">True</span>,
+auto_id=<span class="hljs-literal">False</span>,
+enable_dynamic_field=<span class="hljs-literal">True</span>,
 )
 
 <span class="hljs-comment"># 3.2. Add fields to schema</span>
 schema.add_field(field_name=<span class="hljs-string">&quot;my_id&quot;</span>, datatype=DataType.INT64, is_primary=<span class="hljs-literal">True</span>)
 schema.add_field(field_name=<span class="hljs-string">&quot;my_vector&quot;</span>, datatype=DataType.FLOAT_VECTOR, dim=<span class="hljs-number">5</span>)
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.common.DataType;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.CreateCollectionReq;
 
@@ -461,17 +464,18 @@ index_params = client.prepare_index_params()
 
 <span class="hljs-meta"># 3.4. Add indexes</span>
 index_params.add_index(
-    field_name=<span class="hljs-string">&quot;my_id&quot;</span>,
-    index_type=<span class="hljs-string">&quot;STL_SORT&quot;</span>
+field_name=<span class="hljs-string">&quot;my_id&quot;</span>,
+index_type=<span class="hljs-string">&quot;STL_SORT&quot;</span>
 )
 
 index_params.add_index(
-    field_name=<span class="hljs-string">&quot;my_vector&quot;</span>, 
-    index_type=<span class="hljs-string">&quot;IVF_FLAT&quot;</span>,
-    metric_type=<span class="hljs-string">&quot;IP&quot;</span>,
-    <span class="hljs-keyword">params</span>={ <span class="hljs-string">&quot;nlist&quot;</span>: <span class="hljs-number">128</span> }
+field_name=<span class="hljs-string">&quot;my_vector&quot;</span>,
+index_type=<span class="hljs-string">&quot;IVF_FLAT&quot;</span>,
+metric_type=<span class="hljs-string">&quot;IP&quot;</span>,
+<span class="hljs-keyword">params</span>={ <span class="hljs-string">&quot;nlist&quot;</span>: <span class="hljs-number">128</span> }
 )
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.common.IndexParam;
 
 <span class="hljs-comment">// 3.3 Prepare index parameters</span>
@@ -659,7 +663,7 @@ client.create_collection(
 time.sleep(<span class="hljs-number">5</span>)
 
 res = client.get_load_state(
-    collection_name=<span class="hljs-string">&quot;customized_setup_1&quot;</span>
+collection_name=<span class="hljs-string">&quot;customized_setup_1&quot;</span>
 )
 
 <span class="hljs-built_in">print</span>(res)
@@ -667,9 +671,10 @@ res = client.get_load_state(
 <span class="hljs-comment"># Output</span>
 <span class="hljs-comment">#</span>
 <span class="hljs-comment"># {</span>
-<span class="hljs-comment">#     &quot;state&quot;: &quot;&lt;LoadState: Loaded&gt;&quot;</span>
+<span class="hljs-comment"># &quot;state&quot;: &quot;&lt;LoadState: Loaded&gt;&quot;</span>
 <span class="hljs-comment"># }</span>
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.CreateCollectionReq;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.GetLoadStateReq;
 
@@ -799,7 +804,7 @@ client.create_collection(
 )
 
 res = client.get_load_state(
-    collection_name=<span class="hljs-string">&quot;customized_setup_2&quot;</span>
+collection_name=<span class="hljs-string">&quot;customized_setup_2&quot;</span>
 )
 
 <span class="hljs-built_in">print</span>(res)
@@ -807,9 +812,10 @@ res = client.get_load_state(
 <span class="hljs-comment"># Output</span>
 <span class="hljs-comment">#</span>
 <span class="hljs-comment"># {</span>
-<span class="hljs-comment">#     &quot;state&quot;: &quot;&lt;LoadState: NotLoad&gt;&quot;</span>
+<span class="hljs-comment"># &quot;state&quot;: &quot;&lt;LoadState: NotLoad&gt;&quot;</span>
 <span class="hljs-comment"># }</span>
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-comment">// 3.6 Create a collection and index it separately</span>
 <span class="hljs-type">CreateCollectionReq</span> <span class="hljs-variable">customizedSetupReq2</span> <span class="hljs-operator">=</span> CreateCollectionReq.builder()
     .collectionName(<span class="hljs-string">&quot;customized_setup_2&quot;</span>)
@@ -1018,7 +1024,7 @@ client.create_index(
 )
 
 res = client.get_load_state(
-    collection_name=<span class="hljs-string">&quot;customized_setup_2&quot;</span>
+collection_name=<span class="hljs-string">&quot;customized_setup_2&quot;</span>
 )
 
 <span class="hljs-built_in">print</span>(res)
@@ -1026,9 +1032,10 @@ res = client.get_load_state(
 <span class="hljs-comment"># Output</span>
 <span class="hljs-comment">#</span>
 <span class="hljs-comment"># {</span>
-<span class="hljs-comment">#     &quot;state&quot;: &quot;&lt;LoadState: NotLoad&gt;&quot;</span>
+<span class="hljs-comment"># &quot;state&quot;: &quot;&lt;LoadState: NotLoad&gt;&quot;</span>
 <span class="hljs-comment"># }</span>
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-type">CreateIndexReq</span>  <span class="hljs-variable">createIndexReq</span> <span class="hljs-operator">=</span> CreateIndexReq.builder()
     .collectionName(<span class="hljs-string">&quot;customized_setup_2&quot;</span>)
     .indexParams(indexParams)
@@ -1256,40 +1263,41 @@ res = client.describe_collection(
 <span class="hljs-comment"># Output</span>
 <span class="hljs-comment">#</span>
 <span class="hljs-comment"># {</span>
-<span class="hljs-comment">#     &quot;collection_name&quot;: &quot;customized_setup_2&quot;,</span>
-<span class="hljs-comment">#     &quot;auto_id&quot;: false,</span>
-<span class="hljs-comment">#     &quot;num_shards&quot;: 1,</span>
-<span class="hljs-comment">#     &quot;description&quot;: &quot;&quot;,</span>
-<span class="hljs-comment">#     &quot;fields&quot;: [</span>
-<span class="hljs-comment">#         {</span>
-<span class="hljs-comment">#             &quot;field_id&quot;: 100,</span>
-<span class="hljs-comment">#             &quot;name&quot;: &quot;my_id&quot;,</span>
-<span class="hljs-comment">#             &quot;description&quot;: &quot;&quot;,</span>
-<span class="hljs-comment">#             &quot;type&quot;: 5,</span>
-<span class="hljs-comment">#             &quot;params&quot;: {},</span>
-<span class="hljs-comment">#             &quot;element_type&quot;: 0,</span>
-<span class="hljs-comment">#             &quot;is_primary&quot;: true</span>
-<span class="hljs-comment">#         },</span>
-<span class="hljs-comment">#         {</span>
-<span class="hljs-comment">#             &quot;field_id&quot;: 101,</span>
-<span class="hljs-comment">#             &quot;name&quot;: &quot;my_vector&quot;,</span>
-<span class="hljs-comment">#             &quot;description&quot;: &quot;&quot;,</span>
-<span class="hljs-comment">#             &quot;type&quot;: 101,</span>
-<span class="hljs-comment">#             &quot;params&quot;: {</span>
-<span class="hljs-comment">#                 &quot;dim&quot;: 5</span>
-<span class="hljs-comment">#             },</span>
-<span class="hljs-comment">#             &quot;element_type&quot;: 0</span>
-<span class="hljs-comment">#         }</span>
-<span class="hljs-comment">#     ],</span>
-<span class="hljs-comment">#     &quot;aliases&quot;: [],</span>
-<span class="hljs-comment">#     &quot;collection_id&quot;: 448143479230158446,</span>
-<span class="hljs-comment">#     &quot;consistency_level&quot;: 2,</span>
-<span class="hljs-comment">#     &quot;properties&quot;: {},</span>
-<span class="hljs-comment">#     &quot;num_partitions&quot;: 1,</span>
-<span class="hljs-comment">#     &quot;enable_dynamic_field&quot;: true</span>
+<span class="hljs-comment"># &quot;collection_name&quot;: &quot;customized_setup_2&quot;,</span>
+<span class="hljs-comment"># &quot;auto_id&quot;: false,</span>
+<span class="hljs-comment"># &quot;num_shards&quot;: 1,</span>
+<span class="hljs-comment"># &quot;description&quot;: &quot;&quot;,</span>
+<span class="hljs-comment"># &quot;fields&quot;: [</span>
+<span class="hljs-comment"># {</span>
+<span class="hljs-comment"># &quot;field_id&quot;: 100,</span>
+<span class="hljs-comment"># &quot;name&quot;: &quot;my_id&quot;,</span>
+<span class="hljs-comment"># &quot;description&quot;: &quot;&quot;,</span>
+<span class="hljs-comment"># &quot;type&quot;: 5,</span>
+<span class="hljs-comment"># &quot;params&quot;: {},</span>
+<span class="hljs-comment"># &quot;element_type&quot;: 0,</span>
+<span class="hljs-comment"># &quot;is_primary&quot;: true</span>
+<span class="hljs-comment"># },</span>
+<span class="hljs-comment"># {</span>
+<span class="hljs-comment"># &quot;field_id&quot;: 101,</span>
+<span class="hljs-comment"># &quot;name&quot;: &quot;my_vector&quot;,</span>
+<span class="hljs-comment"># &quot;description&quot;: &quot;&quot;,</span>
+<span class="hljs-comment"># &quot;type&quot;: 101,</span>
+<span class="hljs-comment"># &quot;params&quot;: {</span>
+<span class="hljs-comment"># &quot;dim&quot;: 5</span>
+<span class="hljs-comment"># },</span>
+<span class="hljs-comment"># &quot;element_type&quot;: 0</span>
+<span class="hljs-comment"># }</span>
+<span class="hljs-comment"># ],</span>
+<span class="hljs-comment"># &quot;aliases&quot;: [],</span>
+<span class="hljs-comment"># &quot;collection_id&quot;: 448143479230158446,</span>
+<span class="hljs-comment"># &quot;consistency_level&quot;: 2,</span>
+<span class="hljs-comment"># &quot;properties&quot;: {},</span>
+<span class="hljs-comment"># &quot;num_partitions&quot;: 1,</span>
+<span class="hljs-comment"># &quot;enable_dynamic_field&quot;: true</span>
 <span class="hljs-comment"># }</span>
 
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java">import io.milvus.v2.service.collection.request.DescribeCollectionReq;
 import io.milvus.v2.service.collection.response.DescribeCollectionResp;
 
@@ -1453,11 +1461,12 @@ res = client.list_collections()
 <span class="hljs-comment"># Output</span>
 <span class="hljs-comment">#</span>
 <span class="hljs-comment"># [</span>
-<span class="hljs-comment">#     &quot;customized_setup_2&quot;,</span>
-<span class="hljs-comment">#     &quot;quick_setup&quot;,</span>
-<span class="hljs-comment">#     &quot;customized_setup_1&quot;</span>
+<span class="hljs-comment"># &quot;customized_setup_2&quot;,</span>
+<span class="hljs-comment"># &quot;quick_setup&quot;,</span>
+<span class="hljs-comment"># &quot;customized_setup_1&quot;</span>
 <span class="hljs-comment"># ]</span>
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.collection.response.ListCollectionsResp;
 
 <span class="hljs-comment">// 5. List all collection names</span>
@@ -1544,7 +1553,7 @@ client.load_collection(
 )
 
 res = client.get_load_state(
-    collection_name=<span class="hljs-string">&quot;customized_setup_2&quot;</span>
+collection_name=<span class="hljs-string">&quot;customized_setup_2&quot;</span>
 )
 
 <span class="hljs-built_in">print</span>(res)
@@ -1552,9 +1561,10 @@ res = client.get_load_state(
 <span class="hljs-comment"># Output</span>
 <span class="hljs-comment">#</span>
 <span class="hljs-comment"># {</span>
-<span class="hljs-comment">#     &quot;state&quot;: &quot;&lt;LoadState: Loaded&gt;&quot;</span>
+<span class="hljs-comment"># &quot;state&quot;: &quot;&lt;LoadState: Loaded&gt;&quot;</span>
 <span class="hljs-comment"># }</span>
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.LoadCollectionReq;
 
 <span class="hljs-comment">// 6. Load the collection</span>
@@ -1654,7 +1664,7 @@ client.release_collection(
 )
 
 res = client.get_load_state(
-    collection_name=<span class="hljs-string">&quot;customized_setup_2&quot;</span>
+collection_name=<span class="hljs-string">&quot;customized_setup_2&quot;</span>
 )
 
 <span class="hljs-built_in">print</span>(res)
@@ -1662,9 +1672,10 @@ res = client.get_load_state(
 <span class="hljs-comment"># Output</span>
 <span class="hljs-comment">#</span>
 <span class="hljs-comment"># {</span>
-<span class="hljs-comment">#     &quot;state&quot;: &quot;&lt;LoadState: NotLoad&gt;&quot;</span>
+<span class="hljs-comment"># &quot;state&quot;: &quot;&lt;LoadState: NotLoad&gt;&quot;</span>
 <span class="hljs-comment"># }</span>
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.ReleaseCollectionReq;
 
 <span class="hljs-comment">// 8. Release the collection</span>
@@ -1775,10 +1786,11 @@ client.create_alias(
 )
 
 client.create_alias(
-    collection_name=<span class="hljs-string">&quot;customized_setup_2&quot;</span>,
-    <span class="hljs-built_in">alias</span>=<span class="hljs-string">&quot;alice&quot;</span>
+collection_name=<span class="hljs-string">&quot;customized_setup_2&quot;</span>,
+<span class="hljs-built_in">alias</span>=<span class="hljs-string">&quot;alice&quot;</span>
 )
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.utility.request.CreateAliasReq;
 
 <span class="hljs-comment">// 9. Manage aliases</span>
@@ -1952,14 +1964,15 @@ res = client.list_aliases(
 <span class="hljs-comment"># Output</span>
 <span class="hljs-comment">#</span>
 <span class="hljs-comment"># {</span>
-<span class="hljs-comment">#     &quot;aliases&quot;: [</span>
-<span class="hljs-comment">#         &quot;bob&quot;,</span>
-<span class="hljs-comment">#         &quot;alice&quot;</span>
-<span class="hljs-comment">#     ],</span>
-<span class="hljs-comment">#     &quot;collection_name&quot;: &quot;customized_setup_2&quot;,</span>
-<span class="hljs-comment">#     &quot;db_name&quot;: &quot;default&quot;</span>
+<span class="hljs-comment"># &quot;aliases&quot;: [</span>
+<span class="hljs-comment"># &quot;bob&quot;,</span>
+<span class="hljs-comment"># &quot;alice&quot;</span>
+<span class="hljs-comment"># ],</span>
+<span class="hljs-comment"># &quot;collection_name&quot;: &quot;customized_setup_2&quot;,</span>
+<span class="hljs-comment"># &quot;db_name&quot;: &quot;default&quot;</span>
 <span class="hljs-comment"># }</span>
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.utility.request.ListAliasesReq;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.utility.response.ListAliasResp;
 
@@ -2032,11 +2045,12 @@ res = client.describe_alias(
 <span class="hljs-comment"># Output</span>
 <span class="hljs-comment">#</span>
 <span class="hljs-comment"># {</span>
-<span class="hljs-comment">#     &quot;alias&quot;: &quot;bob&quot;,</span>
-<span class="hljs-comment">#     &quot;collection_name&quot;: &quot;customized_setup_2&quot;,</span>
-<span class="hljs-comment">#     &quot;db_name&quot;: &quot;default&quot;</span>
+<span class="hljs-comment"># &quot;alias&quot;: &quot;bob&quot;,</span>
+<span class="hljs-comment"># &quot;collection_name&quot;: &quot;customized_setup_2&quot;,</span>
+<span class="hljs-comment"># &quot;db_name&quot;: &quot;default&quot;</span>
 <span class="hljs-comment"># }</span>
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.<span class="hljs-property">milvus</span>.<span class="hljs-property">v2</span>.<span class="hljs-property">service</span>.<span class="hljs-property">utility</span>.<span class="hljs-property">request</span>.<span class="hljs-property">DescribeAliasReq</span>;
 <span class="hljs-keyword">import</span> io.<span class="hljs-property">milvus</span>.<span class="hljs-property">v2</span>.<span class="hljs-property">service</span>.<span class="hljs-property">utility</span>.<span class="hljs-property">response</span>.<span class="hljs-property">DescribeAliasResp</span>;
 
@@ -2120,7 +2134,7 @@ client.alter_alias(
 )
 
 res = client.list_aliases(
-    collection_name=<span class="hljs-string">&quot;customized_setup_1&quot;</span>
+collection_name=<span class="hljs-string">&quot;customized_setup_1&quot;</span>
 )
 
 <span class="hljs-built_in">print</span>(res)
@@ -2128,15 +2142,15 @@ res = client.list_aliases(
 <span class="hljs-comment"># Output</span>
 <span class="hljs-comment">#</span>
 <span class="hljs-comment"># {</span>
-<span class="hljs-comment">#     &quot;aliases&quot;: [</span>
-<span class="hljs-comment">#         &quot;alice&quot;</span>
-<span class="hljs-comment">#     ],</span>
-<span class="hljs-comment">#     &quot;collection_name&quot;: &quot;customized_setup_1&quot;,</span>
-<span class="hljs-comment">#     &quot;db_name&quot;: &quot;default&quot;</span>
+<span class="hljs-comment"># &quot;aliases&quot;: [</span>
+<span class="hljs-comment"># &quot;alice&quot;</span>
+<span class="hljs-comment"># ],</span>
+<span class="hljs-comment"># &quot;collection_name&quot;: &quot;customized_setup_1&quot;,</span>
+<span class="hljs-comment"># &quot;db_name&quot;: &quot;default&quot;</span>
 <span class="hljs-comment"># }</span>
 
 res = client.list_aliases(
-    collection_name=<span class="hljs-string">&quot;customized_setup_2&quot;</span>
+collection_name=<span class="hljs-string">&quot;customized_setup_2&quot;</span>
 )
 
 <span class="hljs-built_in">print</span>(res)
@@ -2144,13 +2158,14 @@ res = client.list_aliases(
 <span class="hljs-comment"># Output</span>
 <span class="hljs-comment">#</span>
 <span class="hljs-comment"># {</span>
-<span class="hljs-comment">#     &quot;aliases&quot;: [</span>
-<span class="hljs-comment">#         &quot;bob&quot;</span>
-<span class="hljs-comment">#     ],</span>
-<span class="hljs-comment">#     &quot;collection_name&quot;: &quot;customized_setup_2&quot;,</span>
-<span class="hljs-comment">#     &quot;db_name&quot;: &quot;default&quot;</span>
+<span class="hljs-comment"># &quot;aliases&quot;: [</span>
+<span class="hljs-comment"># &quot;bob&quot;</span>
+<span class="hljs-comment"># ],</span>
+<span class="hljs-comment"># &quot;collection_name&quot;: &quot;customized_setup_2&quot;,</span>
+<span class="hljs-comment"># &quot;db_name&quot;: &quot;default&quot;</span>
 <span class="hljs-comment"># }</span>
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.utility.request.AlterAliasReq;
 
 <span class="hljs-comment">// 9.4 Reassign alias to other collections</span>
@@ -2283,9 +2298,10 @@ client.drop_alias(
 )
 
 client.drop_alias(
-    <span class="hljs-built_in">alias</span>=<span class="hljs-string">&quot;alice&quot;</span>
+<span class="hljs-built_in">alias</span>=<span class="hljs-string">&quot;alice&quot;</span>
 )
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.utility.request.DropAliasReq;
 
 <span class="hljs-comment">// 9.5 Drop alias</span>
@@ -2378,11 +2394,12 @@ collection = Collection(<span class="hljs-string">&quot;quick_setup&quot;</span>
 
 <span class="hljs-comment"># Set the TTL for the data in the collection</span>
 collection.set_properties(
-    properties={
-        <span class="hljs-string">&quot;collection.ttl.seconds&quot;</span>: <span class="hljs-number">60</span>
-    }
+properties={
+<span class="hljs-string">&quot;collection.ttl.seconds&quot;</span>: <span class="hljs-number">60</span>
+}
 )
 <button class="copy-code-btn"></button></code></pre>
+
 <h3 id="Set-MMAP" class="common-anchor-header">Set MMAP</h3><p>Configure the memory mapping (MMAP) property for the collection, which determines whether data is mapped into memory to improve query performance. For more information, refer to <a href="https://milvus.io/docs/mmap.md#Configure-memory-mapping">Configure memory mapping
 </a>.</p>
 <div class="alert note">
@@ -2401,11 +2418,12 @@ collection.release()
 
 <span class="hljs-comment"># Set memory mapping property to True or Flase</span>
 collection.set_properties(
-    properties={
-        <span class="hljs-string">&quot;mmap.enabled&quot;</span>: <span class="hljs-literal">True</span>
-    }
+properties={
+<span class="hljs-string">&quot;mmap.enabled&quot;</span>: <span class="hljs-literal">True</span>
+}
 )
 <button class="copy-code-btn"></button></code></pre>
+
 <h2 id="Drop-a-Collection" class="common-anchor-header">Drop a Collection<button data-href="#Drop-a-Collection" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -2446,13 +2464,14 @@ client.drop_collection(
 )
 
 client.drop_collection(
-    collection_name=<span class="hljs-string">&quot;customized_setup_1&quot;</span>
+collection_name=<span class="hljs-string">&quot;customized_setup_1&quot;</span>
 )
 
 client.drop_collection(
-    collection_name=<span class="hljs-string">&quot;customized_setup_2&quot;</span>
+collection_name=<span class="hljs-string">&quot;customized_setup_2&quot;</span>
 )
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.DropCollectionReq;
 
 <span class="hljs-comment">// 10. Drop collections</span>

@@ -3,8 +3,9 @@ id: configure_proxy.md
 related_key: configure
 group: system_configuration.md
 summary: 了解如何为 Milvus 配置代理。
-title: ''
+title: ""
 ---
+
 <h1 id="proxy-related-Configurations" class="common-anchor-header">代理相关配置<button data-href="#proxy-related-Configurations" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -366,7 +367,7 @@ title: ''
   </thead>
   <tbody>
     <tr>
-      <td>        代理是否必须使用分区密钥进行收集的开关      </td>
+      <td>        代理是否必须使用Partition Key进行收集的开关      </td>
       <td>假</td>
     </tr>
   </tbody>

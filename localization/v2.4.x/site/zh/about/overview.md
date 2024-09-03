@@ -6,6 +6,7 @@ summary: >-
   Milvus
   是一个高性能、高度可扩展的向量数据库，可在从笔记本电脑到大型分布式系统等各种环境中高效运行。它既可以开源软件的形式提供，也可以云服务的形式提供。
 ---
+
 <h1 id="What-is-Milvus" class="common-anchor-header">Milvus 是什么？<button data-href="#What-is-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -152,10 +153,10 @@ summary: >-
 </ul>
 <h3 id="Acceleration" class="common-anchor-header">加速</h3><ul>
 <li><p>搜索算法 Milvus 支持一系列可调整的索引和搜索算法。有关详情，请参阅<a href="/docs/zh/index.md">内存索引</a>、<a href="/docs/zh/disk_index.md">磁盘索引</a>和<a href="/docs/zh/gpu_index.md">GPU 索引</a>。</p></li>
-<li><p>分区和分区键分区是 Milvus 集合的子分区。可以选择标量字段作为分区键，以提高搜索性能。有关详情，请参阅<a href="/docs/zh/manage-partitions.md">管理分区</a>和<a href="/docs/zh/use-partition-key.md">使用分区密钥</a>。</p></li>
+<li><p>分区和分区键分区是 Milvus 集合的子分区。可以选择标量字段作为分区键，以提高搜索性能。有关详情，请参阅<a href="/docs/zh/manage-partitions.md">管理分区</a>和<a href="/docs/zh/use-partition-key.md">使用Partition Key</a>。</p></li>
 <li><p>可调一致性模型 一致性可确保每个 Milvus 节点或副本在给定时间写入或读取数据时拥有相同的数据视图。在 Milvus 中进行 ANN 搜索时，可以轻松调整一致性级别。有关详细信息，请参阅<a href="/docs/zh/consistency.md">一致性</a>。</p></li>
 <li><p>高通量数据导入 要将大量数据导入 Milvus，而不是一个接一个地插入，可以考虑使用我们的高通量数据导入工具。有关详情，请参阅<a href="/docs/zh/prepare-source-data.md">准备源数据</a>和<a href="/docs/zh/import-data.md">导入数据</a>。</p></li>
-<li><p>多租户支持 Milvus 实现了许多面向多租户场景的功能，包括分区密钥、集群密钥等。有关详情，请参阅<a href="/docs/zh/multi_tenancy.md">多租户策略</a>。</p></li>
+<li><p>多租户支持 Milvus 实现了许多面向多租户场景的功能，包括Partition Key、集群密钥等。有关详情，请参阅<a href="/docs/zh/multi_tenancy.md">多租户策略</a>。</p></li>
 </ul>
 <h3 id="Security-and-Authorization" class="common-anchor-header">安全和授权</h3><ul>
 <li><p>可调一致性模型 一致性可确保每个 Milvus 节点或副本在给定时间写入或读取数据时具有相同的数据视图。在 Milvus 中进行 ANN 搜索时，您可以轻松调整一致性级别。有关详细信息，请参阅<a href="/docs/zh/consistency.md">一致性</a>。</p></li>

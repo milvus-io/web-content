@@ -1,9 +1,10 @@
 ---
 id: schema.md
 summary: 了解如何在 Milvus 中定义模式。
-title: 管理模式
+title: 管理 Schema
 ---
-<h1 id="Manage-Schema" class="common-anchor-header">管理模式<button data-href="#Manage-Schema" class="anchor-icon" translate="no">
+
+<h1 id="Manage-Schema" class="common-anchor-header">管理 Schema<button data-href="#Manage-Schema" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -18,8 +19,8 @@ title: 管理模式
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>本主题介绍 Milvus 中的模式。模式用于定义集合的属性和其中的字段。</p>
-<h2 id="Field-schema" class="common-anchor-header">字段模式<button data-href="#Field-schema" class="anchor-icon" translate="no">
+    </button></h1><p>本主题介绍 Milvus 中的 Schema。Schema 用于定义集合的属性和其中的字段。</p>
+<h2 id="Field-schema" class="common-anchor-header">字段 Schema <button data-href="#Field-schema" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -34,9 +35,9 @@ title: 管理模式
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>字段模式是字段的逻辑定义。在定义<a href="#Collection-schema">集合模式</a>和<a href="/docs/zh/manage-collections.md">管理集合</a>之前，首先需要定义它。</p>
+    </button></h2><p>字段 Schema 是字段的逻辑定义。在定义<a href="#Collection-schema">Collection Schema</a>和<a href="/docs/zh/manage-collections.md">管理 Collection</a>之前，首先需要定义它。</p>
 <p>Milvus 只支持在一个集合中使用一个主键字段。</p>
-<h3 id="Field-schema-properties" class="common-anchor-header">字段模式属性</h3><table class="properties">
+<h3 id="Field-schema-properties" class="common-anchor-header">字段 Schema 属性</h3><table class="properties">
     <thead>
     <tr>
        <th>属性</td><th>说明</th> <th>备注</th>   </tr>
@@ -84,8 +85,8 @@ title: 管理模式
     </tr>
     </tbody>
 </table>
-<h3 id="Create-a-field-schema" class="common-anchor-header">创建字段模式</h3><p>为降低数据插入的复杂性，Milvus 允许在创建字段模式时为每个标量字段指定默认值，主键字段除外。这表明，如果在插入数据时某个字段为空，则您为该字段指定的默认值将适用。</p>
-<p>创建常规字段模式：</p>
+<h3 id="Create-a-field-schema" class="common-anchor-header">创建字段 Schema </h3><p>为降低数据插入的复杂性，Milvus 允许在创建字段 Schema 时为每个标量字段指定默认值，主键字段除外。这表明，如果在插入数据时某个字段为空，则您为该字段指定的默认值将适用。</p>
+<p>创建常规字段 Schema ：</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> FieldSchema
 id_field = FieldSchema(name=<span class="hljs-string">&quot;id&quot;</span>, dtype=DataType.INT64, is_primary=<span class="hljs-literal">True</span>, description=<span class="hljs-string">&quot;primary id&quot;</span>)
 age_field = FieldSchema(name=<span class="hljs-string">&quot;age&quot;</span>, dtype=DataType.INT64, description=<span class="hljs-string">&quot;age&quot;</span>)
@@ -94,16 +95,18 @@ embedding_field = FieldSchema(name=<span class="hljs-string">&quot;embedding&quo
 <span class="hljs-comment"># The following creates a field and use it as the partition key</span>
 position_field = FieldSchema(name=<span class="hljs-string">&quot;position&quot;</span>, dtype=DataType.VARCHAR, max_length=<span class="hljs-number">256</span>, is_partition_key=<span class="hljs-literal">True</span>)
 <button class="copy-code-btn"></button></code></pre>
-<p>创建带有默认字段值的字段模式：</p>
+
+<p>创建带有默认字段值的字段 Schema ：</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> FieldSchema
 
 fields = [
-  FieldSchema(name=<span class="hljs-string">&quot;id&quot;</span>, dtype=DataType.INT64, is_primary=<span class="hljs-literal">True</span>),
-  <span class="hljs-comment"># configure default value `25` for field `age`</span>
-  FieldSchema(name=<span class="hljs-string">&quot;age&quot;</span>, dtype=DataType.INT64, default_value=<span class="hljs-number">25</span>, description=<span class="hljs-string">&quot;age&quot;</span>),
-  embedding_field = FieldSchema(name=<span class="hljs-string">&quot;embedding&quot;</span>, dtype=DataType.FLOAT_VECTOR, dim=<span class="hljs-number">128</span>, description=<span class="hljs-string">&quot;vector&quot;</span>)
+FieldSchema(name=<span class="hljs-string">&quot;id&quot;</span>, dtype=DataType.INT64, is_primary=<span class="hljs-literal">True</span>),
+<span class="hljs-comment"># configure default value `25` for field `age`</span>
+FieldSchema(name=<span class="hljs-string">&quot;age&quot;</span>, dtype=DataType.INT64, default_value=<span class="hljs-number">25</span>, description=<span class="hljs-string">&quot;age&quot;</span>),
+embedding_field = FieldSchema(name=<span class="hljs-string">&quot;embedding&quot;</span>, dtype=DataType.FLOAT_VECTOR, dim=<span class="hljs-number">128</span>, description=<span class="hljs-string">&quot;vector&quot;</span>)
 ]
 <button class="copy-code-btn"></button></code></pre>
+
 <h3 id="Supported-data-types" class="common-anchor-header">支持的数据类型</h3><p><code translate="no">DataType</code> 定义字段包含的数据类型。不同的字段支持不同的数据类型。</p>
 <ul>
 <li><p>主键字段支持</p>
@@ -135,7 +138,7 @@ fields = [
 </ul>
 <p>Milvus 支持在一个集合中包含多个向量场。更多信息，请参阅<a href="/docs/zh/multi-vector-search.md">混合搜索</a>。</p></li>
 </ul>
-<h2 id="Collection-schema" class="common-anchor-header">集合模式<button data-href="#Collection-schema" class="anchor-icon" translate="no">
+<h2 id="Collection-schema" class="common-anchor-header">Collection Schema <button data-href="#Collection-schema" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -150,8 +153,8 @@ fields = [
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>集合模式是集合的逻辑定义。通常，在定义集合模式和<a href="/docs/zh/manage-collections.md">管理集合</a>之前，需要先定义<a href="#Field-schema">字段</a>模式。</p>
-<h3 id="Collection-schema-properties" class="common-anchor-header">集合模式属性</h3><table class="properties">
+    </button></h2><p>Collection Schema 是集合的逻辑定义。通常，在定义Collection Schema 和<a href="/docs/zh/manage-collections.md">管理集合</a>之前，需要先定义<a href="#Field-schema">字段</a>Schema。</p>
+<h3 id="Collection-schema-properties" class="common-anchor-header">Collection Schema 属性</h3><table class="properties">
     <thead>
     <tr>
        <th>属性</td><th>说明</th> <th>备注</th>   </tr>
@@ -174,13 +177,13 @@ fields = [
     </tr>
     <tr>
         <td><code translate="no">enable_dynamic_field</code></td>
-        <td>是否启用动态模式</td>
-        <td>数据类型：<code translate="no">true</code> <code translate="no">false</code><br/>可选，默认为 。 有关动态模式的详细信息，请参阅动态<code translate="no">False</code><br/><a herf="enable-dynamic-field.md">模式</a>和管理集合的用户指南。</td>
+        <td>是否启用 Dynamic Field</td>
+        <td>数据类型：<code translate="no">true</code> <code translate="no">false</code><br/>可选，默认为 。 有关 Dynamic Field 的详细信息，请参阅动态<code translate="no">False</code><br/><a herf="enable-dynamic-field.md">Schema</a>和管理集合的用户指南。</td>
     </tr>
     </tbody>
 </table>
-<h3 id="Create-a-collection-schema" class="common-anchor-header">创建集合模式</h3><div class="alert note">
-  在定义集合模式之前，先定义字段模式。</div>
+<h3 id="Create-a-collection-schema" class="common-anchor-header">创建Collection Schema </h3><div class="alert note">
+  在定义Collection Schema 之前，先定义字段 Schema 。</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> FieldSchema, CollectionSchema
 id_field = FieldSchema(name=<span class="hljs-string">&quot;id&quot;</span>, dtype=DataType.INT64, is_primary=<span class="hljs-literal">True</span>, description=<span class="hljs-string">&quot;primary id&quot;</span>)
 age_field = FieldSchema(name=<span class="hljs-string">&quot;age&quot;</span>, dtype=DataType.INT64, description=<span class="hljs-string">&quot;age&quot;</span>)
@@ -192,7 +195,8 @@ position_field = FieldSchema(name=<span class="hljs-string">&quot;position&quot;
 <span class="hljs-comment"># Set enable_dynamic_field to True if you need to use dynamic fields. </span>
 schema = CollectionSchema(fields=[id_field, age_field, embedding_field], auto_id=<span class="hljs-literal">False</span>, enable_dynamic_field=<span class="hljs-literal">True</span>, description=<span class="hljs-string">&quot;desc of a collection&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
-<p>使用指定的模式创建集合：</p>
+
+<p>使用指定的 Schema 创建 Collection：</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> <span class="hljs-title class_">Collection</span>
 collection_name1 = <span class="hljs-string">&quot;tutorial_1&quot;</span>
 collection1 = <span class="hljs-title class_">Collection</span>(name=collection_name1, schema=schema, using=<span class="hljs-string">&#x27;default&#x27;</span>, shards_num=<span class="hljs-number">2</span>)
@@ -202,11 +206,11 @@ collection1 = <span class="hljs-title class_">Collection</span>(name=collection_
 <li>可以使用<code translate="no">shards_num</code> 定义分区编号。</li>
 <li>通过在<code translate="no">using</code> 中指定别名，可以定义要创建集合的 Milvus 服务器。</li>
 <li>如果需要实施<a href="/docs/zh/multi_tenancy.md">基于分区</a>密钥<a href="/docs/zh/multi_tenancy.md">的多租户</a>，可以通过将<code translate="no">is_partition_key</code> 设置为<code translate="no">True</code> 来启用<a href="/docs/zh/multi_tenancy.md">字段</a>的分区<a href="/docs/zh/multi_tenancy.md">密钥</a>功能。</li>
-<li>如果需要<a href="/docs/zh/enable-dynamic-field.md">启用动态字段</a>，可以通过在集合模式中将<code translate="no">enable_dynamic_field</code> 设置为<code translate="no">True</code> 来启用<a href="/docs/zh/enable-dynamic-field.md">动态</a>模式。</li>
+<li>如果需要<a href="/docs/zh/enable-dynamic-field.md">启用Dynamic Field</a>，可以通过在Collection Schema 中将<code translate="no">enable_dynamic_field</code> 设置为<code translate="no">True</code> 来启用<a href="/docs/zh/enable-dynamic-field.md">动态</a>Schema。</li>
 </ul>
 </div>
 <p><br/>
-您还可以使用<code translate="no">Collection.construct_from_dataframe</code> 创建一个集合，它会自动从 DataFrame 生成集合模式并创建一个集合。</p>
+您还可以使用<code translate="no">Collection.construct_from_dataframe</code> 创建一个集合，它会自动从 DataFrame 生成Collection Schema 并创建一个集合。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> pandas <span class="hljs-keyword">as</span> pd
 df = pd.DataFrame({
     <span class="hljs-string">&quot;id&quot;</span>: [i <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(nb)],
@@ -216,12 +220,13 @@ df = pd.DataFrame({
 })
 
 collection, ins_res = Collection.construct_from_dataframe(
-    <span class="hljs-string">&#x27;my_collection&#x27;</span>,
-    df,
-    primary_field=<span class="hljs-string">&#x27;id&#x27;</span>,
-    auto_id=<span class="hljs-literal">False</span>
-    )
+<span class="hljs-string">&#x27;my_collection&#x27;</span>,
+df,
+primary_field=<span class="hljs-string">&#x27;id&#x27;</span>,
+auto_id=<span class="hljs-literal">False</span>
+)
 <button class="copy-code-btn"></button></code></pre>
+
 <h2 id="Whats-next" class="common-anchor-header">下一步<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -238,7 +243,7 @@ collection, ins_res = Collection.construct_from_dataframe(
         ></path>
       </svg>
     </button></h2><ul>
-<li>了解如何在<a href="/docs/zh/manage-collections.md">管理集合</a>时准备模式。</li>
-<li>进一步了解<a href="/docs/zh/enable-dynamic-field.md">动态模式</a>。</li>
-<li>进一步了解<a href="/docs/zh/multi_tenancy.md">多租户</a>中的分区密钥。</li>
+<li>了解如何在<a href="/docs/zh/manage-collections.md">管理 Collection</a>时准备 Schema。</li>
+<li>进一步了解<a href="/docs/zh/enable-dynamic-field.md">Dynamic Field</a>。</li>
+<li>进一步了解<a href="/docs/zh/multi_tenancy.md">多租户</a>中的Partition Key。</li>
 </ul>

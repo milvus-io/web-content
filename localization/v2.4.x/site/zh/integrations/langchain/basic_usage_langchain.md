@@ -3,6 +3,7 @@ id: basic_usage_langchain.md
 summary: 本笔记本介绍如何使用与 Milvus 向量数据库相关的功能。
 title: 将 Milvus 用作向量存储库
 ---
+
 <h1 id="Use-Milvus-as-a-Vector-Store" class="common-anchor-header">将 Milvus 用作向量存储库<button data-href="#Use-Milvus-as-a-Vector-Store" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -61,6 +62,7 @@ title: 将 Milvus 用作向量存储库
 
 &lt;EmbeddingTabs/&gt;
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># | output: false</span>
 <span class="hljs-comment"># | echo: false</span>
 <span class="hljs-keyword">from</span> langchain_openai <span class="hljs-keyword">import</span> OpenAIEmbeddings
@@ -82,13 +84,14 @@ vector_store = Milvus(
 <p>以下是创建新集合的方法</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> langchain_core.<span class="hljs-property">documents</span> <span class="hljs-keyword">import</span> <span class="hljs-title class_">Document</span>
 
-vector_store_saved = <span class="hljs-title class_">Milvus</span>.<span class="hljs-title function_">from_documents</span>(
-    [<span class="hljs-title class_">Document</span>(page_content=<span class="hljs-string">&quot;foo!&quot;</span>)],
-    embeddings,
-    collection_name=<span class="hljs-string">&quot;langchain_example&quot;</span>,
-    connection_args={<span class="hljs-string">&quot;uri&quot;</span>: <span class="hljs-variable constant_">URI</span>},
+vector*store_saved = <span class="hljs-title class*">Milvus</span>.<span class="hljs-title function_">from*documents</span>(
+[<span class="hljs-title class*">Document</span>(page*content=<span class="hljs-string">&quot;foo!&quot;</span>)],
+embeddings,
+collection_name=<span class="hljs-string">&quot;langchain_example&quot;</span>,
+connection_args={<span class="hljs-string">&quot;uri&quot;</span>: <span class="hljs-variable constant*">URI</span>},
 )
 <button class="copy-code-btn"></button></code></pre>
+
 <p>以下是如何检索存储的集合</p>
 <pre><code translate="no" class="language-python">vector_store_loaded = <span class="hljs-title class_">Milvus</span>(
     embeddings,
@@ -118,71 +121,72 @@ vector_store_saved = <span class="hljs-title class_">Milvus</span>.<span class="
 <span class="hljs-keyword">from</span> langchain_core.documents <span class="hljs-keyword">import</span> Document
 
 document_1 = Document(
-    page_content=<span class="hljs-string">&quot;I had chocalate chip pancakes and scrambled eggs for breakfast this morning.&quot;</span>,
-    metadata={<span class="hljs-string">&quot;source&quot;</span>: <span class="hljs-string">&quot;tweet&quot;</span>},
+page_content=<span class="hljs-string">&quot;I had chocalate chip pancakes and scrambled eggs for breakfast this morning.&quot;</span>,
+metadata={<span class="hljs-string">&quot;source&quot;</span>: <span class="hljs-string">&quot;tweet&quot;</span>},
 )
 
 document_2 = Document(
-    page_content=<span class="hljs-string">&quot;The weather forecast for tomorrow is cloudy and overcast, with a high of 62 degrees.&quot;</span>,
-    metadata={<span class="hljs-string">&quot;source&quot;</span>: <span class="hljs-string">&quot;news&quot;</span>},
+page_content=<span class="hljs-string">&quot;The weather forecast for tomorrow is cloudy and overcast, with a high of 62 degrees.&quot;</span>,
+metadata={<span class="hljs-string">&quot;source&quot;</span>: <span class="hljs-string">&quot;news&quot;</span>},
 )
 
 document_3 = Document(
-    page_content=<span class="hljs-string">&quot;Building an exciting new project with LangChain - come check it out!&quot;</span>,
-    metadata={<span class="hljs-string">&quot;source&quot;</span>: <span class="hljs-string">&quot;tweet&quot;</span>},
+page_content=<span class="hljs-string">&quot;Building an exciting new project with LangChain - come check it out!&quot;</span>,
+metadata={<span class="hljs-string">&quot;source&quot;</span>: <span class="hljs-string">&quot;tweet&quot;</span>},
 )
 
 document_4 = Document(
-    page_content=<span class="hljs-string">&quot;Robbers broke into the city bank and stole $1 million in cash.&quot;</span>,
-    metadata={<span class="hljs-string">&quot;source&quot;</span>: <span class="hljs-string">&quot;news&quot;</span>},
+page_content=<span class="hljs-string">&quot;Robbers broke into the city bank and stole $1 million in cash.&quot;</span>,
+metadata={<span class="hljs-string">&quot;source&quot;</span>: <span class="hljs-string">&quot;news&quot;</span>},
 )
 
 document_5 = Document(
-    page_content=<span class="hljs-string">&quot;Wow! That was an amazing movie. I can&#x27;t wait to see it again.&quot;</span>,
-    metadata={<span class="hljs-string">&quot;source&quot;</span>: <span class="hljs-string">&quot;tweet&quot;</span>},
+page_content=<span class="hljs-string">&quot;Wow! That was an amazing movie. I can&#x27;t wait to see it again.&quot;</span>,
+metadata={<span class="hljs-string">&quot;source&quot;</span>: <span class="hljs-string">&quot;tweet&quot;</span>},
 )
 
 document_6 = Document(
-    page_content=<span class="hljs-string">&quot;Is the new iPhone worth the price? Read this review to find out.&quot;</span>,
-    metadata={<span class="hljs-string">&quot;source&quot;</span>: <span class="hljs-string">&quot;website&quot;</span>},
+page_content=<span class="hljs-string">&quot;Is the new iPhone worth the price? Read this review to find out.&quot;</span>,
+metadata={<span class="hljs-string">&quot;source&quot;</span>: <span class="hljs-string">&quot;website&quot;</span>},
 )
 
 document_7 = Document(
-    page_content=<span class="hljs-string">&quot;The top 10 soccer players in the world right now.&quot;</span>,
-    metadata={<span class="hljs-string">&quot;source&quot;</span>: <span class="hljs-string">&quot;website&quot;</span>},
+page_content=<span class="hljs-string">&quot;The top 10 soccer players in the world right now.&quot;</span>,
+metadata={<span class="hljs-string">&quot;source&quot;</span>: <span class="hljs-string">&quot;website&quot;</span>},
 )
 
 document_8 = Document(
-    page_content=<span class="hljs-string">&quot;LangGraph is the best framework for building stateful, agentic applications!&quot;</span>,
-    metadata={<span class="hljs-string">&quot;source&quot;</span>: <span class="hljs-string">&quot;tweet&quot;</span>},
+page_content=<span class="hljs-string">&quot;LangGraph is the best framework for building stateful, agentic applications!&quot;</span>,
+metadata={<span class="hljs-string">&quot;source&quot;</span>: <span class="hljs-string">&quot;tweet&quot;</span>},
 )
 
 document_9 = Document(
-    page_content=<span class="hljs-string">&quot;The stock market is down 500 points today due to fears of a recession.&quot;</span>,
-    metadata={<span class="hljs-string">&quot;source&quot;</span>: <span class="hljs-string">&quot;news&quot;</span>},
+page_content=<span class="hljs-string">&quot;The stock market is down 500 points today due to fears of a recession.&quot;</span>,
+metadata={<span class="hljs-string">&quot;source&quot;</span>: <span class="hljs-string">&quot;news&quot;</span>},
 )
 
 document_10 = Document(
-    page_content=<span class="hljs-string">&quot;I have a bad feeling I am going to get deleted :(&quot;</span>,
-    metadata={<span class="hljs-string">&quot;source&quot;</span>: <span class="hljs-string">&quot;tweet&quot;</span>},
+page_content=<span class="hljs-string">&quot;I have a bad feeling I am going to get deleted :(&quot;</span>,
+metadata={<span class="hljs-string">&quot;source&quot;</span>: <span class="hljs-string">&quot;tweet&quot;</span>},
 )
 
 documents = [
-    document_1,
-    document_2,
-    document_3,
-    document_4,
-    document_5,
-    document_6,
-    document_7,
-    document_8,
-    document_9,
-    document_10,
+document_1,
+document_2,
+document_3,
+document_4,
+document_5,
+document_6,
+document_7,
+document_8,
+document_9,
+document_10,
 ]
 uuids = [<span class="hljs-built_in">str</span>(uuid4()) <span class="hljs-keyword">for</span> _ <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-built_in">len</span>(documents))]
 
 vector_store.add_documents(documents=documents, ids=uuids)
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no">['b0248595-2a41-4f6b-9c25-3a24c1278bb3',
  'fa642726-5329-4495-a072-187e948dd71f',
  '9905001c-a4a3-455e-ab94-72d0ed11b476',
@@ -266,27 +270,28 @@ retriever.invoke(<span class="hljs-string">&quot;Stealing from the bank is a cri
 <h3 id="Per-User-Retrieval" class="common-anchor-header">按用户检索</h3><p>在构建检索应用程序时，您通常需要考虑到多个用户。这意味着您可能不仅要为一个用户存储数据，还要为许多不同的用户存储数据，而且这些用户不能查看彼此的数据。</p>
 <p>Milvus 建议使用<a href="https://milvus.io/docs/multi_tenancy.md#Partition-key-based-multi-tenancy">partition_key</a>来实现多租户，下面是一个例子。</p>
 <blockquote>
-<p>Milvus Lite 目前不提供分区密钥功能，如果要使用该功能，需要从<a href="https://milvus.io/docs/install_standalone-docker.md#Start-Milvus">docker 或 kubernetes</a> 启动 Milvus 服务器。</p>
+<p>Milvus Lite 目前不提供Partition Key功能，如果要使用该功能，需要从<a href="https://milvus.io/docs/install_standalone-docker.md#Start-Milvus">docker 或 kubernetes</a> 启动 Milvus 服务器。</p>
 </blockquote>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> langchain_core.documents <span class="hljs-keyword">import</span> Document
 
 docs = [
-    Document(page_content=<span class="hljs-string">&quot;i worked at kensho&quot;</span>, metadata={<span class="hljs-string">&quot;namespace&quot;</span>: <span class="hljs-string">&quot;harrison&quot;</span>}),
-    Document(page_content=<span class="hljs-string">&quot;i worked at facebook&quot;</span>, metadata={<span class="hljs-string">&quot;namespace&quot;</span>: <span class="hljs-string">&quot;ankush&quot;</span>}),
+Document(page_content=<span class="hljs-string">&quot;i worked at kensho&quot;</span>, metadata={<span class="hljs-string">&quot;namespace&quot;</span>: <span class="hljs-string">&quot;harrison&quot;</span>}),
+Document(page_content=<span class="hljs-string">&quot;i worked at facebook&quot;</span>, metadata={<span class="hljs-string">&quot;namespace&quot;</span>: <span class="hljs-string">&quot;ankush&quot;</span>}),
 ]
 vectorstore = Milvus.from_documents(
-    docs,
-    embeddings,
-    connection_args={<span class="hljs-string">&quot;uri&quot;</span>: URI},
-    drop_old=<span class="hljs-literal">True</span>,
-    partition_key_field=<span class="hljs-string">&quot;namespace&quot;</span>,  <span class="hljs-comment"># Use the &quot;namespace&quot; field as the partition key</span>
+docs,
+embeddings,
+connection_args={<span class="hljs-string">&quot;uri&quot;</span>: URI},
+drop_old=<span class="hljs-literal">True</span>,
+partition_key_field=<span class="hljs-string">&quot;namespace&quot;</span>, <span class="hljs-comment"># Use the &quot;namespace&quot; field as the partition key</span>
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>要使用分区密钥进行搜索，应在搜索请求的布尔表达式中包含以下任一内容：</p>
+
+<p>要使用Partition Key进行搜索，应在搜索请求的布尔表达式中包含以下任一内容：</p>
 <p><code translate="no">search_kwargs={&quot;expr&quot;: '&lt;partition_key&gt; == &quot;xxxx&quot;'}</code></p>
 <p><code translate="no">search_kwargs={&quot;expr&quot;: '&lt;partition_key&gt; == in [&quot;xxx&quot;, &quot;xxx&quot;]'}</code></p>
-<p>将<code translate="no">&lt;partition_key&gt;</code> 替换为指定为分区密钥的字段名称。</p>
-<p>Milvus 会根据指定的分区密钥更改分区，根据分区密钥过滤实体，并在过滤后的实体中进行搜索。</p>
+<p>将<code translate="no">&lt;partition_key&gt;</code> 替换为指定为Partition Key的字段名称。</p>
+<p>Milvus 会根据指定的Partition Key更改分区，根据Partition Key过滤实体，并在过滤后的实体中进行搜索。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># This will only get documents for Ankush</span>
 vectorstore.as_retriever(search_kwargs={<span class="hljs-string">&quot;expr&quot;</span>: <span class="hljs-string">&#x27;namespace == &quot;ankush&quot;&#x27;</span>}).invoke(
     <span class="hljs-string">&quot;where did i work?&quot;</span>

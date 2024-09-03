@@ -297,12 +297,12 @@ title: Milvus_CLI 命令参考
 </thead>
 <tbody>
 <tr><td style="text-align:left">-c</td><td style="text-align:left">-集合名称</td><td style="text-align:left">集合的名称。</td></tr>
-<tr><td style="text-align:left">-f</td><td style="text-align:left">-字段模式</td><td style="text-align:left">(多个）<code translate="no">&lt;fieldName&gt;:&lt;dataType&gt;:&lt;dimOfVector/desc&gt;</code> 格式的字段模式。</td></tr>
+<tr><td style="text-align:left">-f</td><td style="text-align:left">-字段 Schema </td><td style="text-align:left">(多个）<code translate="no">&lt;fieldName&gt;:&lt;dataType&gt;:&lt;dimOfVector/desc&gt;</code> 格式的字段 Schema 。</td></tr>
 <tr><td style="text-align:left">-p</td><td style="text-align:left">-主键字段</td><td style="text-align:left">主键字段的名称。</td></tr>
 <tr><td style="text-align:left">-a</td><td style="text-align:left">-schema-auto-id（自动 ID</td><td style="text-align:left">(可选）自动生成 ID 的标志。</td></tr>
 <tr><td style="text-align:left">-desc</td><td style="text-align:left">-模式描述</td><td style="text-align:left">(可选）集合的描述。</td></tr>
 <tr><td style="text-align:left">-级别</td><td style="text-align:left">-一致性级别</td><td style="text-align:left">(可选）一致性级别：有界、会话、强、最终。</td></tr>
-<tr><td style="text-align:left">-d</td><td style="text-align:left">-是否动态</td><td style="text-align:left">(可选）集合模式是否支持动态字段。</td></tr>
+<tr><td style="text-align:left">-d</td><td style="text-align:left">-是否动态</td><td style="text-align:left">(可选）Collection Schema 是否支持Dynamic Field。</td></tr>
 <tr><td style="text-align:left">-s</td><td style="text-align:left">-碎片数</td><td style="text-align:left">(可选）分区编号</td></tr>
 <tr><td style="text-align:left">-帮助</td><td style="text-align:left">不适用</td><td style="text-align:left">显示命令使用帮助。</td></tr>
 </tbody>

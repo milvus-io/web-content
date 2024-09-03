@@ -4,6 +4,7 @@ order: 0
 title: 准备源数据
 summary: 本页将讨论在开始将数据批量插入数据集之前应该考虑的问题。
 ---
+
 <h1 id="Prepare-Source-Data" class="common-anchor-header">准备源数据<button data-href="#Prepare-Source-Data" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -41,13 +42,13 @@ summary: 本页将讨论在开始将数据批量插入数据集之前应该考�
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/map-data-to-schema.png" alt="Map data to schema" class="doc-image" id="map-data-to-schema" />
    </span> <span class="img-wrapper"> <span>将数据映射到模式</span> </span></p>
 <p>您应仔细检查数据，并据此设计目标数据集的模式。</p>
-<p>以上图中的 JSON 数据为例，行列表中有两个实体，每个行有六个字段。集合模式选择性地包括四个：<strong>id</strong>、<strong>向量</strong>、<strong>标量_1</strong> 和<strong>标量_2</strong>。</p>
+<p>以上图中的 JSON 数据为例，行列表中有两个实体，每个行有六个字段。Collection Schema 选择性地包括四个：<strong>id</strong>、<strong>向量</strong>、<strong>标量_1</strong> 和<strong>标量_2</strong>。</p>
 <p>在设计模式时，还有两件事需要考虑：</p>
 <ul>
 <li><p><strong>是否启用自动识别</strong></p>
 <p><strong>id</strong>字段是集合的主字段。要使主字段自动递增，可以在模式中启用<strong>AutoID</strong>。在这种情况下，应从源数据的每一行中排除<strong>id</strong>字段。</p></li>
-<li><p><strong>是否启用动态字段</strong></p>
-<p>如果模式启用了动态字段，目标集合也可以存储未包含在预定义模式中的字段。<strong>$meta</strong>字段是一个保留的 JSON 字段，用于保存动态字段及其键值对中的值。在上图中，字段<strong>dynamic_field_1</strong>和<strong>dynamic_field_2</strong>及其值将作为键值对保存在<strong>$meta</strong>字段中。</p></li>
+<li><p><strong>是否启用Dynamic Field</strong></p>
+<p>如果模式启用了Dynamic Field，目标集合也可以存储未包含在预定义模式中的字段。<strong>$meta</strong>字段是一个保留的 JSON 字段，用于保存Dynamic Field及其键值对中的值。在上图中，字段<strong>dynamic_field_1</strong>和<strong>dynamic_field_2</strong>及其值将作为键值对保存在<strong>$meta</strong>字段中。</p></li>
 </ul>
 <p>下面的代码展示了如何为上图所示的集合设置模式。</p>
 <div class="language-python">
@@ -62,8 +63,8 @@ summary: 本页将讨论在开始将数据批量插入数据集之前应该考�
 
 <span class="hljs-comment"># You need to work out a collection schema out of your dataset.</span>
 schema = MilvusClient.create_schema(
-    auto_id=<span class="hljs-literal">False</span>,
-    enable_dynamic_field=<span class="hljs-literal">True</span>
+auto_id=<span class="hljs-literal">False</span>,
+enable_dynamic_field=<span class="hljs-literal">True</span>
 )
 
 schema.add_field(field_name=<span class="hljs-string">&quot;id&quot;</span>, datatype=DataType.INT64, is_primary=<span class="hljs-literal">True</span>)
@@ -73,6 +74,7 @@ schema.add_field(field_name=<span class="hljs-string">&quot;scalar_2&quot;</span
 
 schema.verify()
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.grpc.DataType;
 <span class="hljs-keyword">import</span> io.milvus.param.collection.CollectionSchemaParam;
 <span class="hljs-keyword">import</span> io.milvus.param.collection.FieldType;
@@ -139,12 +141,13 @@ schema.verify()
 <span class="hljs-comment"># when you use pymilvus earlier than 2.4.2 </span>
 
 writer = LocalBulkWriter(
-    schema=schema,
-    local_path=<span class="hljs-string">&#x27;.&#x27;</span>,
-    segment_size=<span class="hljs-number">512</span> * <span class="hljs-number">1024</span> * <span class="hljs-number">1024</span>, <span class="hljs-comment"># Default value</span>
-    file_type=BulkFileType.PARQUET
+schema=schema,
+local*path=<span class="hljs-string">&#x27;.&#x27;</span>,
+segment_size=<span class="hljs-number">512</span> * <span class="hljs-number">1024</span> \_ <span class="hljs-number">1024</span>, <span class="hljs-comment"># Default value</span>
+file_type=BulkFileType.PARQUET
 )
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.bulkwriter.LocalBulkWriter;
 <span class="hljs-keyword">import</span> io.milvus.bulkwriter.LocalBulkWriterParam;
 <span class="hljs-keyword">import</span> io.milvus.bulkwriter.common.clientenum.BulkFileType;
@@ -192,13 +195,14 @@ BUCKET_NAME=<span class="hljs-string">&quot;milvus-bucket&quot;</span>
 
 <span class="hljs-comment"># Connections parameters to access the remote bucket</span>
 conn = RemoteBulkWriter.S3ConnectParam(
-    endpoint=<span class="hljs-string">&quot;localhost:9000&quot;</span>, <span class="hljs-comment"># the default MinIO service started along with Milvus</span>
-    access_key=ACCESS_KEY,
-    secret_key=SECRET_KEY,
-    bucket_name=BUCKET_NAME,
-    secure=<span class="hljs-literal">False</span>
+endpoint=<span class="hljs-string">&quot;localhost:9000&quot;</span>, <span class="hljs-comment"># the default MinIO service started along with Milvus</span>
+access_key=ACCESS_KEY,
+secret_key=SECRET_KEY,
+bucket_name=BUCKET_NAME,
+secure=<span class="hljs-literal">False</span>
 )
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.bulkwriter.common.clientenum.BulkFileType;
 <span class="hljs-keyword">import</span> io.milvus.bulkwriter.connect.S3ConnectParam;
 <span class="hljs-keyword">import</span> io.milvus.bulkwriter.connect.StorageConnectParam;
@@ -222,12 +226,13 @@ conn = RemoteBulkWriter.S3ConnectParam(
 <span class="hljs-comment"># when you use pymilvus earlier than 2.4.2 </span>
 
 writer = RemoteBulkWriter(
-    schema=schema,
-    remote_path=<span class="hljs-string">&quot;/&quot;</span>,
-    connect_param=conn,
-    file_type=BulkFileType.PARQUET
+schema=schema,
+remote_path=<span class="hljs-string">&quot;/&quot;</span>,
+connect_param=conn,
+file_type=BulkFileType.PARQUET
 )
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.bulkwriter.RemoteBulkWriter;
 <span class="hljs-keyword">import</span> io.milvus.bulkwriter.RemoteBulkWriterParam;
 
@@ -275,21 +280,22 @@ writer = RemoteBulkWriter(
 <span class="hljs-keyword">import</span> <span class="hljs-type">string</span>
 
 def generate_random_str(length=<span class="hljs-number">5</span>):
-    letters = <span class="hljs-type">string</span>.ascii_uppercase
-    digits = <span class="hljs-type">string</span>.digits
-    
+letters = <span class="hljs-type">string</span>.ascii_uppercase
+digits = <span class="hljs-type">string</span>.digits
+
     <span class="hljs-keyword">return</span> <span class="hljs-string">&#x27;&#x27;</span>.join(random.choices(letters + digits, k=length))
 
 <span class="hljs-keyword">for</span> i in <span class="hljs-keyword">range</span>(<span class="hljs-number">10000</span>):
-    writer.append_row({
-        <span class="hljs-string">&quot;id&quot;</span>: i, 
-        <span class="hljs-string">&quot;vector&quot;</span>: [random.uniform(<span class="hljs-number">-1</span>, <span class="hljs-number">1</span>) <span class="hljs-keyword">for</span> _ in <span class="hljs-keyword">range</span>(<span class="hljs-number">768</span>)],
-        <span class="hljs-string">&quot;scalar_1&quot;</span>: generate_random_str(random.randint(<span class="hljs-number">1</span>, <span class="hljs-number">20</span>)),
-        <span class="hljs-string">&quot;scalar_2&quot;</span>: random.randint(<span class="hljs-number">0</span>, <span class="hljs-number">100</span>)
-    })
-    
+writer.append*row({
+<span class="hljs-string">&quot;id&quot;</span>: i,
+<span class="hljs-string">&quot;vector&quot;</span>: [random.uniform(<span class="hljs-number">-1</span>, <span class="hljs-number">1</span>) <span class="hljs-keyword">for</span> * in <span class="hljs-keyword">range</span>(<span class="hljs-number">768</span>)],
+<span class="hljs-string">&quot;scalar_1&quot;</span>: generate_random_str(random.randint(<span class="hljs-number">1</span>, <span class="hljs-number">20</span>)),
+<span class="hljs-string">&quot;scalar_2&quot;</span>: random.randint(<span class="hljs-number">0</span>, <span class="hljs-number">100</span>)
+})
+
 writer.commit()
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> com.<span class="hljs-property">alibaba</span>.<span class="hljs-property">fastjson</span>.<span class="hljs-property">JSONObject</span>;
 
 <span class="hljs-keyword">for</span> (int i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">10000</span>; i++) {
@@ -306,30 +312,31 @@ writer.commit()
 <span class="hljs-comment">// localBulkWriter.commit(false);</span>
 remoteBulkWriter.<span class="hljs-title function_">commit</span>(<span class="hljs-literal">false</span>);
 <button class="copy-code-btn"></button></code></pre>
-<p>由于定义的模式允许动态字段，因此您也可以在要插入的数据中包含非模式定义的字段，如下所示。</p>
+<p>由于定义的模式允许Dynamic Field，因此您也可以在要插入的数据中包含非模式定义的字段，如下所示。</p>
 <div class="multipleCode">
  <a href="#python">Python </a> <a href="#java">Java</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> random
 <span class="hljs-keyword">import</span> string
 
 <span class="hljs-keyword">def</span> <span class="hljs-title function_">generate_random_string</span>(<span class="hljs-params">length=<span class="hljs-number">5</span></span>):
-    letters = string.ascii_uppercase
-    digits = string.digits
-    
+letters = string.ascii_uppercase
+digits = string.digits
+
     <span class="hljs-keyword">return</span> <span class="hljs-string">&#x27;&#x27;</span>.join(random.choices(letters + digits, k=length))
 
 <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">10000</span>):
-    writer.append_row({
-        <span class="hljs-string">&quot;id&quot;</span>: i, 
-        <span class="hljs-string">&quot;vector&quot;</span>:[random.uniform(-<span class="hljs-number">1</span>, <span class="hljs-number">1</span>) <span class="hljs-keyword">for</span> _ <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">768</span>)],
-        <span class="hljs-string">&quot;scalar_1&quot;</span>: generate_random_string(),
-        <span class="hljs-string">&quot;scalar_2&quot;</span>: random.randint(<span class="hljs-number">0</span>, <span class="hljs-number">100</span>),
-        <span class="hljs-string">&quot;dynamic_field_1&quot;</span>: random.choice([<span class="hljs-literal">True</span>, <span class="hljs-literal">False</span>]),
-        <span class="hljs-string">&quot;dynamic_field_2&quot;</span>: random.randint(<span class="hljs-number">0</span>, <span class="hljs-number">100</span>)
-    })
-    
+writer.append*row({
+<span class="hljs-string">&quot;id&quot;</span>: i,
+<span class="hljs-string">&quot;vector&quot;</span>:[random.uniform(-<span class="hljs-number">1</span>, <span class="hljs-number">1</span>) <span class="hljs-keyword">for</span> * <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">768</span>)],
+<span class="hljs-string">&quot;scalar_1&quot;</span>: generate_random_string(),
+<span class="hljs-string">&quot;scalar_2&quot;</span>: random.randint(<span class="hljs-number">0</span>, <span class="hljs-number">100</span>),
+<span class="hljs-string">&quot;dynamic_field_1&quot;</span>: random.choice([<span class="hljs-literal">True</span>, <span class="hljs-literal">False</span>]),
+<span class="hljs-string">&quot;dynamic_field_2&quot;</span>: random.randint(<span class="hljs-number">0</span>, <span class="hljs-number">100</span>)
+})
+
 writer.commit()
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">for</span> (int i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">10000</span>; i++) {
     <span class="hljs-title class_">JSON</span><span class="hljs-built_in">Object</span> json = <span class="hljs-keyword">new</span> <span class="hljs-title class_">JSON</span><span class="hljs-built_in">Object</span>();
     json.<span class="hljs-title function_">put</span>(<span class="hljs-string">&quot;id&quot;</span>, i);
@@ -374,6 +381,7 @@ remoteBulkWriter.<span class="hljs-title function_">commit</span>(<span class="h
 <span class="hljs-comment"># [[&#x27;d4220a9e-45be-4ccb-8cb5-bf09304b9f23/1.parquet&#x27;],</span>
 <span class="hljs-comment">#  [&#x27;d4220a9e-45be-4ccb-8cb5-bf09304b9f23/2.parquet&#x27;]]</span>
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-comment">// localBulkWriter.getBatchFiles();</span>
 remoteBulkWriter.<span class="hljs-title function_">getBatchFiles</span>();
 
@@ -393,10 +401,10 @@ remoteBulkWriter.<span class="hljs-title function_">getBatchFiles</span>();
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># JSON</span>
 ├── folder
 │   └── 45ae1139-1d87-4aff-85f5-0039111f9e6b
-│       └── <span class="hljs-number">1.j</span>son 
+│       └── <span class="hljs-number">1.j</span>son
 
 <span class="hljs-comment"># Parquet</span>
 ├── folder
-│   └── 45ae1139-1d87-4aff-85f5-0039111f9e6b
-│       └── <span class="hljs-number">1.</span>parquet 
+│ └── 45ae1139-1d87-4aff-85f5-0039111f9e6b
+│ └── <span class="hljs-number">1.</span>parquet
 <button class="copy-code-btn"></button></code></pre>

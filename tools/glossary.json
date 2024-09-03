@@ -39,5 +39,7 @@
 	{ "source": "Azure", "target": "Azure" },
 	{ "source": "On the Fly", "target": "动态配置" },
 	{ "source": "Milvus CDC", "target": "Milvus CDC" },
-	{ "source": "CDC", "target": "CDC" }
+	{ "source": "CDC", "target": "CDC" },
+	{ "source": "Dynamic Field", "target": "Dynamic Field" },
+	{ "source": "Partition Key", "target": "Partition Key" }
 ]

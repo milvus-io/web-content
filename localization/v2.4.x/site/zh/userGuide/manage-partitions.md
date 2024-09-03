@@ -1,8 +1,9 @@
 ---
 id: manage-partitions.md
 title: 管理分区
-summary: ''
+summary: ""
 ---
+
 <h1 id="Manage-Partitions" class="common-anchor-header">管理分区<button data-href="#Manage-Partitions" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -38,8 +39,8 @@ summary: ''
 <p>创建数据集时，至少会自动创建一个名为<strong>_default</strong>的默认分区。在一个数据集中最多可以创建 1,024 个分区。</p>
 <div class="admonition note">
 <p><b>注释</b></p>
-<p>Milvus 引入了一项名为 "<strong>分区密钥"（Partition Key</strong>）的功能，可利用底层分区根据特定字段的散列值来存储实体。该功能有助于实现多租户，提高搜索性能。有关详细信息，请阅读<a href="https://milvus.io/docs/use-partition-key.md">使用分区密钥</a>。</p>
-<p>如果在集合中开启了<strong>分区密钥</strong>功能，Milvus 就会负责管理所有分区，从而减轻你的责任。</p>
+<p>Milvus 引入了一项名为 "<strong>Partition Key"（Partition Key</strong>）的功能，可利用底层分区根据特定字段的散列值来存储实体。该功能有助于实现多租户，提高搜索性能。有关详细信息，请阅读<a href="https://milvus.io/docs/use-partition-key.md">使用Partition Key</a>。</p>
+<p>如果在集合中开启了<strong>Partition Key</strong>功能，Milvus 就会负责管理所有分区，从而减轻你的责任。</p>
 </div>
 <h2 id="Preparations" class="common-anchor-header">准备工作<button data-href="#Preparations" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -72,16 +73,17 @@ summary: ''
 
 <span class="hljs-comment"># 1. Set up a Milvus client</span>
 client = MilvusClient(
-    uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>
+uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>
 )
 
 <span class="hljs-comment"># 2. Create a collection</span>
 client.create_collection(
-    collection_name=<span class="hljs-string">&quot;quick_setup&quot;</span>,
-    dimension=<span class="hljs-number">5</span>,
+collection_name=<span class="hljs-string">&quot;quick_setup&quot;</span>,
+dimension=<span class="hljs-number">5</span>,
 )
 
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.client.ConnectConfig;
 <span class="hljs-keyword">import</span> io.milvus.v2.client.MilvusClientV2;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.CreateCollectionReq;
@@ -153,6 +155,7 @@ res = client.list_partitions(collection_name=<span class="hljs-string">&quot;qui
 <span class="hljs-comment">#</span>
 <span class="hljs-comment"># [&quot;_default&quot;]</span>
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.<span class="hljs-property">milvus</span>.<span class="hljs-property">v2</span>.<span class="hljs-property">service</span>.<span class="hljs-property">partition</span>.<span class="hljs-property">request</span>.<span class="hljs-property">ListPartitionsReq</span>;
 
 <span class="hljs-comment">// 3. List all partitions in the collection</span>
@@ -219,8 +222,8 @@ client.create_partition(
 )
 
 client.create_partition(
-    collection_name=<span class="hljs-string">&quot;quick_setup&quot;</span>,
-    partition_name=<span class="hljs-string">&quot;partitionB&quot;</span>
+collection_name=<span class="hljs-string">&quot;quick_setup&quot;</span>,
+partition_name=<span class="hljs-string">&quot;partitionB&quot;</span>
 )
 
 res = client.list_partitions(collection_name=<span class="hljs-string">&quot;quick_setup&quot;</span>)
@@ -230,6 +233,7 @@ res = client.list_partitions(collection_name=<span class="hljs-string">&quot;qui
 <span class="hljs-comment">#</span>
 <span class="hljs-comment"># [&quot;_default&quot;, &quot;partitionA&quot;, &quot;partitionB&quot;]</span>
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.partition.request.CreatePartitionReq;
 
 <span class="hljs-comment">// 4. Create more partitions</span>
@@ -288,7 +292,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 <div class="admonition note">
 <p><b>注释</b></p>
 <p>如果将某个字段设置为集合中的分区键，Milvus 将负责管理集合中的分区。因此，在尝试创建分区时可能会遇到提示错误。</p>
-<p>有关详细信息，请参阅<a href="https://milvus.io/docs/use-partition-key.md">使用分区密钥</a>。</p>
+<p>有关详细信息，请参阅<a href="https://milvus.io/docs/use-partition-key.md">使用Partition Key</a>。</p>
 </div>
 <h2 id="Check-for-a-Specific-Partition" class="common-anchor-header">检查特定分区<button data-href="#Check-for-a-Specific-Partition" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -329,8 +333,8 @@ res = client.has_partition(
 <span class="hljs-comment"># True</span>
 
 res = client.has_partition(
-    collection_name=<span class="hljs-string">&quot;quick_setup&quot;</span>,
-    partition_name=<span class="hljs-string">&quot;partitionC&quot;</span>
+collection_name=<span class="hljs-string">&quot;quick_setup&quot;</span>,
+partition_name=<span class="hljs-string">&quot;partitionC&quot;</span>
 )
 <span class="hljs-built_in">print</span>(res)
 
@@ -338,6 +342,7 @@ res = client.has_partition(
 <span class="hljs-comment">#</span>
 <span class="hljs-comment"># False</span>
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.partition.request.HasPartitionReq;
 
 <span class="hljs-comment">// 5. Check whether a partition exists</span>
@@ -428,12 +433,12 @@ res = client.get_load_state(collection_name=<span class="hljs-string">&quot;quic
 <span class="hljs-comment"># Output</span>
 <span class="hljs-comment">#</span>
 <span class="hljs-comment"># {</span>
-<span class="hljs-comment">#     &quot;state&quot;: &quot;&lt;LoadState: Loaded&gt;&quot;</span>
+<span class="hljs-comment"># &quot;state&quot;: &quot;&lt;LoadState: Loaded&gt;&quot;</span>
 <span class="hljs-comment"># }</span>
 
 res = client.get_load_state(
-    collection_name=<span class="hljs-string">&quot;quick_setup&quot;</span>, 
-    partition_name=<span class="hljs-string">&quot;partitionA&quot;</span>
+collection_name=<span class="hljs-string">&quot;quick_setup&quot;</span>,
+partition_name=<span class="hljs-string">&quot;partitionA&quot;</span>
 )
 
 <span class="hljs-built_in">print</span>(res)
@@ -441,12 +446,12 @@ res = client.get_load_state(
 <span class="hljs-comment"># Output</span>
 <span class="hljs-comment">#</span>
 <span class="hljs-comment"># {</span>
-<span class="hljs-comment">#     &quot;state&quot;: &quot;&lt;LoadState: Loaded&gt;&quot;</span>
+<span class="hljs-comment"># &quot;state&quot;: &quot;&lt;LoadState: Loaded&gt;&quot;</span>
 <span class="hljs-comment"># }</span>
 
 res = client.get_load_state(
-    collection_name=<span class="hljs-string">&quot;quick_setup&quot;</span>, 
-    partition_name=<span class="hljs-string">&quot;partitionB&quot;</span>
+collection_name=<span class="hljs-string">&quot;quick_setup&quot;</span>,
+partition_name=<span class="hljs-string">&quot;partitionB&quot;</span>
 )
 
 <span class="hljs-built_in">print</span>(res)
@@ -454,10 +459,11 @@ res = client.get_load_state(
 <span class="hljs-comment"># Output</span>
 <span class="hljs-comment">#</span>
 <span class="hljs-comment"># {</span>
-<span class="hljs-comment">#     &quot;state&quot;: &quot;&lt;LoadState: NotLoad&gt;&quot;</span>
+<span class="hljs-comment"># &quot;state&quot;: &quot;&lt;LoadState: NotLoad&gt;&quot;</span>
 <span class="hljs-comment"># }</span>
 
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.GetLoadStateReq;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.ReleaseCollectionReq;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.partition.request.LoadPartitionsReq;
@@ -606,9 +612,10 @@ res = client.get_load_state(collection_name=<span class="hljs-string">&quot;quic
 <span class="hljs-comment"># Output</span>
 <span class="hljs-comment">#</span>
 <span class="hljs-comment"># {</span>
-<span class="hljs-comment">#     &quot;state&quot;: &quot;&lt;LoadState: Loaded&gt;&quot;</span>
+<span class="hljs-comment"># &quot;state&quot;: &quot;&lt;LoadState: Loaded&gt;&quot;</span>
 <span class="hljs-comment"># }</span>
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-type">LoadPartitionsReq</span> <span class="hljs-variable">loadPartitionsReq</span> <span class="hljs-operator">=</span> LoadPartitionsReq.builder()
     .collectionName(<span class="hljs-string">&quot;quick_setup&quot;</span>)
     .partitionNames(List.of(<span class="hljs-string">&quot;partitionA&quot;</span>))
@@ -654,27 +661,28 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 )
 
 res = client.get_load_status(
-    collection_name=<span class="hljs-string">&quot;quick_setup&quot;</span>,
-    partition_name=<span class="hljs-string">&quot;partitionA&quot;</span>
+collection_name=<span class="hljs-string">&quot;quick_setup&quot;</span>,
+partition_name=<span class="hljs-string">&quot;partitionA&quot;</span>
 )
 
 <span class="hljs-comment"># Output</span>
 <span class="hljs-comment">#</span>
 <span class="hljs-comment"># {</span>
-<span class="hljs-comment">#     &quot;state&quot;: &quot;&lt;LoadState: Loaded&gt;&quot;</span>
+<span class="hljs-comment"># &quot;state&quot;: &quot;&lt;LoadState: Loaded&gt;&quot;</span>
 <span class="hljs-comment"># }</span>
 
 res = client.get_load_status(
-    collection_name=<span class="hljs-string">&quot;quick_setup&quot;</span>,
-    partition_name=<span class="hljs-string">&quot;partitionB&quot;</span>
+collection_name=<span class="hljs-string">&quot;quick_setup&quot;</span>,
+partition_name=<span class="hljs-string">&quot;partitionB&quot;</span>
 )
 
 <span class="hljs-comment"># Output</span>
 <span class="hljs-comment">#</span>
 <span class="hljs-comment"># {</span>
-<span class="hljs-comment">#     &quot;state&quot;: &quot;&lt;LoadState: Loaded&gt;&quot;</span>
+<span class="hljs-comment"># &quot;state&quot;: &quot;&lt;LoadState: Loaded&gt;&quot;</span>
 <span class="hljs-comment"># }</span>
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java">LoadPartitionsReq loadPartitionsReq = LoadPartitionsReq.builder()
     .collectionName(<span class="hljs-string">&quot;quick_setup&quot;</span>)
     .partitionNames(List.of(<span class="hljs-string">&quot;partitionA&quot;</span>, <span class="hljs-string">&quot;partitionB&quot;</span>))
@@ -753,8 +761,8 @@ client.release_partitions(
 )
 
 res = client.get_load_state(
-    collection_name=<span class="hljs-string">&quot;quick_setup&quot;</span>, 
-    partition_name=<span class="hljs-string">&quot;partitionA&quot;</span>
+collection_name=<span class="hljs-string">&quot;quick_setup&quot;</span>,
+partition_name=<span class="hljs-string">&quot;partitionA&quot;</span>
 )
 
 <span class="hljs-built_in">print</span>(res)
@@ -762,10 +770,11 @@ res = client.get_load_state(
 <span class="hljs-comment"># Output</span>
 <span class="hljs-comment">#</span>
 <span class="hljs-comment"># {</span>
-<span class="hljs-comment">#     &quot;state&quot;: &quot;&lt;LoadState: NotLoad&gt;&quot;</span>
+<span class="hljs-comment"># &quot;state&quot;: &quot;&lt;LoadState: NotLoad&gt;&quot;</span>
 <span class="hljs-comment"># }</span>
 
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.partition.request.ReleasePartitionsReq;
 
 <span class="hljs-comment">// 7. Release a partition</span>
@@ -812,15 +821,16 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 )
 
 res = client.get_load_status(
-    collection_name=<span class="hljs-string">&quot;quick_setup&quot;</span>,
+collection_name=<span class="hljs-string">&quot;quick_setup&quot;</span>,
 )
 
 <span class="hljs-comment"># Output</span>
 <span class="hljs-comment">#</span>
 <span class="hljs-comment"># {</span>
-<span class="hljs-comment">#     &quot;state&quot;: &quot;&lt;LoadState: NotLoad&gt;&quot;</span>
+<span class="hljs-comment"># &quot;state&quot;: &quot;&lt;LoadState: NotLoad&gt;&quot;</span>
 <span class="hljs-comment"># }</span>
 <button class="copy-code-btn"></button></code></pre>
+
 <h2 id="Drop-Partitions" class="common-anchor-header">丢弃分区<button data-href="#Drop-Partitions" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -861,6 +871,7 @@ res = client.list_partitions(collection_name=<span class="hljs-string">&quot;qui
 <span class="hljs-comment">#</span>
 <span class="hljs-comment"># [&quot;_default&quot;, &quot;partitionA&quot;]</span>
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.partition.request.ReleasePartitionsReq;
 
 <span class="hljs-type">ReleasePartitionsReq</span> <span class="hljs-variable">releasePartitionsReq</span> <span class="hljs-operator">=</span> ReleasePartitionsReq.builder()
@@ -931,9 +942,9 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 <p>建议在一个分区中存储少于 1B 的数据。</p></li>
 <li><p><strong>最多可以创建多少个分区？</strong></p>
 <p>默认情况下，Milvus 最多允许创建 4,096 个分区。您可以通过配置<code translate="no">rootCoord.maxPartitionNum</code> 来调整分区的最大数量。有关详情，请参阅<a href="https://milvus.io/docs/configure_rootcoord.md#rootCoordmaxPartitionNum">系统配置</a>。</p></li>
-<li><p><strong>如何区分分区和分区密钥？</strong></p>
-<p>分区是物理存储单元，而分区密钥是逻辑概念，可根据指定列自动将数据分配到特定分区。</p>
+<li><p><strong>如何区分分区和Partition Key？</strong></p>
+<p>分区是物理存储单元，而Partition Key是逻辑概念，可根据指定列自动将数据分配到特定分区。</p>
 <p>例如，在 Milvus 中，如果你有一个定义了分区键为<code translate="no">color</code> 字段的集合，系统会根据每个实体的<code translate="no">color</code> 字段的散列值自动将数据分配到分区。这一自动化流程免除了用户在插入或搜索数据时手动指定分区的责任。</p>
 <p>另一方面，在手动创建分区时，需要根据分区键的标准为每个分区分配数据。如果你有一个带有<code translate="no">color</code> 字段的集合，你需要手动将<code translate="no">color</code> 值为<code translate="no">red</code> 的实体分配到<code translate="no">partition A</code> ，将<code translate="no">color</code> 值为<code translate="no">blue</code> 的实体分配到<code translate="no">partition B</code> 。这种手动管理需要更多的精力。</p>
-<p>总之，分区和分区键都是用来优化数据计算和提高查询效率的。必须认识到，启用分区密钥意味着放弃对分区数据插入和加载的人工管理控制，因为这些过程完全由 Milvus 自动处理。</p></li>
+<p>总之，分区和分区键都是用来优化数据计算和提高查询效率的。必须认识到，启用Partition Key意味着放弃对分区数据插入和加载的人工管理控制，因为这些过程完全由 Milvus 自动处理。</p></li>
 </ul>
