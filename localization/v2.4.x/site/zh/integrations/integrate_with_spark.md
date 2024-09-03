@@ -1,7 +1,7 @@
 ---
 id: integrate_with_spark.md
 summary: 本页讨论 Spark-Milvus 连接器。
-title: 斯帕克-Milvus连接器用户指南
+title: Spark-Milvus 连接器用户指南
 ---
 
 <h1 id="Spark-Milvus-Connector-User-Guide" class="common-anchor-header">Spark-Milvus 连接器用户指南<button data-href="#Spark-Milvus-Connector-User-Guide" class="anchor-icon" translate="no">
