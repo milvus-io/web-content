@@ -71,7 +71,7 @@ Currently, a vector field only supports one index type. Milvus automatically del
     </button></h2><p>To use DiskANN, ensure that you</p>
 <ul>
 <li>Use only float vectors with at least 1 dimensions in your data.</li>
-<li>Use only Euclidean Distance (L2) or Inner Product (IP) to measure the distance between vectors.</li>
+<li>Use only Euclidean Distance (L2), Inner Product (IP), or COSINE to measure the distance between vectors.</li>
 </ul>
 <h2 id="Index-and-search-settings" class="common-anchor-header">Index and search settings<button data-href="#Index-and-search-settings" class="anchor-icon" translate="no">
       <svg translate="no"
