@@ -31,7 +31,7 @@ const DEEPL_HEADERS = {
 	"Content-Type": "application/json",
 	Authorization: `DeepL-Auth-Key ${DEEPL_API_KEY}`,
 };
-const GLOSSARY_ID = fs.readFileSync("./tools/glossary_id.txt", "utf8");
+const GLOSSARY_ID = fs.readFileSync("./tools/GLOSSARY_ID.txt", "utf8");
 
 export function traverseDirectory(dirPath, fileList = []) {
 	const files = fs.readdirSync(dirPath);
