@@ -16,6 +16,7 @@ import {
 	remarkToHtml,
 	remarkableToHtml,
 	generateMenuStructureLocales,
+	CACHE_FILE,
 } from "./utils.js";
 
 const VERSIONS = ["v2.4.x"];
@@ -25,6 +26,12 @@ const targetLang = "en";
 
 async function bootstrap() {
 	console.log("Starting generate en docs...");
+
+	let newFilesFound = false;
+	const cache = fs.existsSync(CACHE_FILE)
+		? JSON.parse(fs.readFileSync(CACHE_FILE, "utf8") || "{}")
+		: {};
+
 	for (let version of VERSIONS) {
 		/**
 		 * step 1: get all md files by version
@@ -43,6 +50,16 @@ async function bootstrap() {
 			const deprecated = data.deprecate;
 			return !deprecated;
 		});
+
+		if (!newFilesFound) {
+			newFilesFound = updatedFiles.some((path) => {
+				const isUnExist = !cache[version] || !cache[version][path];
+				if (isUnExist) {
+					console.info(`-> New file found:`, path);
+				}
+				return isUnExist;
+			});
+		}
 
 		for (let path of updatedFiles) {
 			/**
@@ -88,11 +105,20 @@ async function bootstrap() {
 	/**
 	 * step 6: generate menu structure locales
 	 */
-	generateMenuStructureLocales({
+	await generateMenuStructureLocales({
 		versions: VERSIONS,
 		useCache: false,
 		targetLangs: [targetLang],
 	});
+
+	/**
+	 * step 7: translate en docs to other languages if new files added
+	 */
+	if (newFilesFound) {
+		import("./translate.js");
+	} else {
+		console.log("No new files found, skip translation.");
+	}
 }
 
 bootstrap();
