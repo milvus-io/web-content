@@ -27,38 +27,17 @@ jobs:
         with:
           cmd: install
 
-      - name: Check for new files
-        id: check-new-files
-        run: |
-          new_files=$(git diff --name-status HEAD~1 HEAD | grep '^A' | awk '{print $2}' | grep '^v2\.4\.x/.*\.md$')
-          if [ -z "$new_files" ]; then
-            echo "No new files detected."
-            echo "::set-output name=new_files_detected::false"
-          else
-            echo "New files detected: $new_files"
-            echo "::set-output name=new_files_detected::true"
-          fi
-
       - name: Generate EN Docs
         run: |
           git config --global user.email "Milvus-doc-bot@zilliz.com"
           git config --global user.name "Milvus-doc-bot"
-          yarn generate:en
-
-      - name: Run translate if new files detected
-        if: steps.check-new-files.outputs.new_files_detected == 'true'
-        run: |
-          echo "New file detected, running script..."
-          
           touch .env
           echo DEEPL_API_KEY=${{secrets.DEEPL_API_KEY}} >> .env
           echo GITHUB_TOKEN=${{secrets.GH_TOKEN}} >> .env
-          yarn translate
+          yarn generate:en
 
       - name: Commit and push
         run: |
-          git config --global user.email "Milvus-doc-bot@zilliz.com"
-          git config --global user.name "Milvus-doc-bot"
           git add .
           git commit -m "Generate en docs"
           git push -f origin master
