@@ -31,7 +31,7 @@ const DEEPL_HEADERS = {
 	"Content-Type": "application/json",
 	Authorization: `DeepL-Auth-Key ${DEEPL_API_KEY}`,
 };
-const GLOSSARY_ID = "d9c474dc-b052-4aee-938e-997ac704e880";
+const GLOSSARY_ID = fs.readFileSync("./tools/glossary_id.txt", "utf8");
 
 export function traverseDirectory(dirPath, fileList = []) {
 	const files = fs.readdirSync(dirPath);
@@ -231,7 +231,7 @@ export const extractText = (id = "", htmlString = "") => {
  */
 export const createDeepLGlossary = async (entries) => {
 	const body = {
-		name: "milvus-docs-en-to-zh-glossary",
+		name: `milvus-docs-en-to-zh-glossary-${new Date().toISOString()}`,
 		source_lang: "en",
 		target_lang: "zh",
 		entries,
@@ -242,6 +242,15 @@ export const createDeepLGlossary = async (entries) => {
 	});
 	console.log(res.data);
 	return res.data;
+};
+
+export const deleteDeepLGlossary = async () => {
+	return await axios.delete(
+		DEEPL_ENDPOINT + GLOSSARY_PATH + "/" + GLOSSARY_ID,
+		{
+			headers: DEEPL_HEADERS,
+		}
+	);
 };
 
 export const generateMenuStructureLocales = async (params) => {
@@ -305,4 +314,15 @@ export const getFileUpdatedTime = async (path) => {
 		console.error(error);
 		return new Date().toISOString();
 	}
+};
+
+export const splitAndExtractPreTags = (htmlString) => {
+	const placeholder = "<!-- translate-split -->";
+	const regex = /<pre>[\s\S]*?<\/pre>/g;
+
+	const matches = htmlString.match(regex) || [];
+	const result = htmlString.replace(regex, placeholder);
+	const htmlArray = result.split(placeholder);
+
+	return { result, matches, htmlArray };
 };

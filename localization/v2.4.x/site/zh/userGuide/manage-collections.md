@@ -1,10 +1,9 @@
 ---
 id: manage-collections.md
-title: 管理 Collection
-summary: ""
+title: 管理 Collections
 ---
 
-<h1 id="Manage-Collections" class="common-anchor-header">Manage Collections<button data-href="#Manage-Collections" class="anchor-icon" translate="no">
+<h1 id="Manage-Collections" class="common-anchor-header">管理 Collections<button data-href="#Manage-Collections" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -19,8 +18,8 @@ summary: ""
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>This guide walks you through creating and managing collections using the SDK of your choice.</p>
-<h2 id="Before-you-start" class="common-anchor-header">Before you start<button data-href="#Before-you-start" class="anchor-icon" translate="no">
+    </button></h1><p>本指南将指导您使用所选的 SDK 创建和管理 Collections。</p>
+<h2 id="Before-you-start" class="common-anchor-header">开始之前<button data-href="#Before-you-start" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -36,10 +35,10 @@ summary: ""
         ></path>
       </svg>
     </button></h2><ul>
-<li><p>You have installed <a href="https://milvus.io/docs/install_standalone-docker.md">Milvus standalone</a> or <a href="https://milvus.io/docs/install_cluster-milvusoperator.md">Milvus cluster</a>.</p></li>
-<li><p>You have installed preferred SDKs. You can choose among various languages, including <a href="https://milvus.io/docs/install-pymilvus.md">Python</a>, <a href="https://milvus.io/docs/install-java.md">Java</a>, <a href="https://milvus.io/docs/install-go.md">Go</a>, and <a href="https://milvus.io/docs/install-node.md">Node.js</a>.</p></li>
+<li><p>您已安装<a href="https://milvus.io/docs/install_standalone-docker.md">Milvus 单机版</a>或<a href="https://milvus.io/docs/install_cluster-milvusoperator.md">Milvus 集群</a>。</p></li>
+<li><p>已安装首选 SDK。您可以选择多种语言，包括<a href="https://milvus.io/docs/install-pymilvus.md">Python</a>、<a href="https://milvus.io/docs/install-java.md">Java</a>、<a href="https://milvus.io/docs/install-go.md">Go</a> 和<a href="https://milvus.io/docs/install-node.md">Node.js</a>。</p></li>
 </ul>
-<h2 id="Overview" class="common-anchor-header">Overview<button data-href="#Overview" class="anchor-icon" translate="no">
+<h2 id="Overview" class="common-anchor-header">概述<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -54,11 +53,11 @@ summary: ""
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>In Milvus, you store your vector embeddings in collections. All vector embeddings within a collection share the same dimensionality and distance metric for measuring similarity.</p>
-<p>Milvus collections support dynamic fields (i.e., fields not pre-defined in the schema) and automatic incrementation of primary keys.</p>
-<p>To accommodate different preferences, Milvus offers two methods for creating a collection. One provides a quick setup, while the other allows for detailed customization of the collection schema and index parameters.</p>
-<p>Additionally, you can view, load, release, and drop a collection when necessary.</p>
-<h2 id="Create-Collection" class="common-anchor-header">Create Collection<button data-href="#Create-Collection" class="anchor-icon" translate="no">
+    </button></h2><p>在 Milvus 中，您可以将向量嵌入存储在 Collections 中。一个 Collections 中的所有向量嵌入都具有相同的维度和距离度量相似性。</p>
+<p>Milvus Collections 支持动态字段（即 Schema 中未预定义的字）和主键的自动递增。</p>
+<p>为了适应不同的偏好，Milvus 提供了两种创建 Collections 的方法。其中一种提供快速设置，其他则允许对 Collections 模式和索引参数进行详细定制。</p>
+<p>此外，你还可以在必要时查看、加载、释放和删除一个 Collection。</p>
+<h2 id="Create-Collection" class="common-anchor-header">创建 Collections<button data-href="#Create-Collection" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -73,37 +72,33 @@ summary: ""
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>You can create a collection in either of the following manners:</p>
+    </button></h2><p>您可以通过以下任一方式创建 Collections：</p>
 <ul>
-<li><p><strong>Quick setup</strong></p>
-<p>In this manner, you can create a collection by simply giving it a name and specifying the number of dimensions of the vector embeddings to be stored in this collection. For details, refer to <a href="/docs/zh/manage-collections.md">Quick setup</a>.</p></li>
-<li><p><strong>Customized setup</strong></p>
-<p>Instead of letting In Milvus decide almost everything for your collection, you can determine the <strong>schema</strong> and <strong>index parameters</strong> of the collection on your own. For details, refer to <a href="/docs/zh/manage-collections.md">Customized setup</a>.</p></li>
+<li><p><strong>快速设置</strong></p>
+<p>在这种方式下，只需给集合命名并指定要存储在此集合中的向量嵌入的维数，即可创建集合。详情请参阅<a href="/docs/zh/manage-collections.md">快速设置</a>。</p></li>
+<li><p><strong>自定义设置</strong></p>
+<p>与让 In Milvus 为你的 Collections 决定几乎所有事情不同，你可以自己决定 Collections 的<strong>Schema</strong>和<strong>索引参数</strong>。详情请参阅<a href="/docs/zh/manage-collections.md">自定义设置</a>。</p></li>
 </ul>
-<h3 id="Quick-setup" class="common-anchor-header">Quick setup</h3><p>Against the backdrop of the great leap in the AI industry, most developers just need a simple yet dynamic collection to start with. Milvus allows a quick setup of such a collection with just three arguments:</p>
+<h3 id="Quick-setup" class="common-anchor-header">快速设置</h3><p>在人工智能行业大跃进的背景下，大多数开发人员只需要一个简单而又充满活力的 Collections 就可以开始使用了。Milvus 只需三个参数就能快速设置这样的 Collections：</p>
 <ul>
-<li><p>Name of the collection to create,</p></li>
-<li><p>Dimension of the vector embeddings to insert, and</p></li>
-<li><p>Metric type used to measure similarities between vector embeddings.</p></li>
+<li><p>要创建的 Collections 名称、</p></li>
+<li><p>要插入的向量 Embeddings 的维度，以及</p></li>
+<li><p>用于衡量向量嵌入之间相似性的度量类型。</p></li>
 </ul>
 <div class="language-python">
-<p>For quick setup, use the <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_collection.md"><code translate="no">create_collection()</code></a> method of the <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Client/MilvusClient.md"><code translate="no">MilvusClient</code></a> class to create a collection with the specified name and dimension.</p>
+<p>为了快速设置，请使用 <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_collection.md"><code translate="no">create_collection()</code></a>方法 <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Client/MilvusClient.md"><code translate="no">MilvusClient</code></a>类的方法创建一个具有指定名称和维度的 Collection。</p>
 </div>
 <div class="language-java">
-<p>For quick setup, use the <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Collections/createCollection.md"><code translate="no">createCollection()</code></a> method of the <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Client/MilvusClientV2.md"><code translate="no">MilvusClientV2</code></a> class to create a collection with the specified name and dimension.</p>
+<p>如需快速设置，请使用 <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Collections/createCollection.md"><code translate="no">createCollection()</code></a>方法创建一个具有指定名称和维度的集合。 <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Client/MilvusClientV2.md"><code translate="no">MilvusClientV2</code></a>类的方法创建一个具有指定名称和维度的 Collection。</p>
 </div>
 <div class="language-javascript">
-<p>For quick setup, use the <a href="https://milvus.io/api-reference/node/v2.4.x/Collections/createCollection.md"><code translate="no">createCollection()</code></a> method of the <a href="https://milvus.io/api-reference/node/v2.4.x/Client/MilvusClient.md"><code translate="no">MilvusClient</code></a> class to create a collection with the specified name and dimension.</p>
+<p>快速设置时，使用 <a href="https://milvus.io/api-reference/node/v2.4.x/Collections/createCollection.md"><code translate="no">createCollection()</code></a>方法创建一个具有指定名称和维度的集合。 <a href="https://milvus.io/api-reference/node/v2.4.x/Client/MilvusClient.md"><code translate="no">MilvusClient</code></a>类的方法创建一个具有指定名称和维度的 Collection。</p>
 </div>
 <div class="language-shell">
-<p>For quick setup, use the <a href="https://milvus.io/api-reference/restful/v2.4.x/v2/Collection%20(v2)/Create.md"><code translate="no">POST /v2/vectordb/collections/create</code></a> API endpoint to create a collection with the specified name and dimension.</p>
+<p>如需快速设置，请使用 <a href="https://milvus.io/api-reference/restful/v2.4.x/v2/Collection%20(v2)/Create.md"><code translate="no">POST /v2/vectordb/collections/create</code></a>API 端点创建具有指定名称和维度的 Collection。</p>
 </div>
 <div class="multipleCode">
-  <a href="#python">Python </a>
-  <a href="#java">Java</a>
-  <a href="#javascript">Node.js</a>
-  <a href="#shell">cURL</a>
-</div>
+ <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#shell">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType
 
 <span class="hljs-comment"># 1. Set up a Milvus client</span>
@@ -224,34 +219,30 @@ $ curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable
 <span class="hljs-comment">#     }</span>
 <span class="hljs-comment"># }</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>The collection generated in the above code contains only two fields: <code translate="no">id</code> (as the primary key) and <code translate="no">vector</code> (as the vector field), with <code translate="no">auto_id</code> and <code translate="no">enable_dynamic_field</code> settings enabled by default.</p>
+<p>上述代码生成的 Collections 只包含两个字段：<code translate="no">id</code> （作为主键）和<code translate="no">vector</code> （作为向量字段），默认情况下启用<code translate="no">auto_id</code> 和<code translate="no">enable_dynamic_field</code> 设置。</p>
 <ul>
 <li><p><code translate="no">auto_id</code></p>
-<p>Enabling this setting ensures that the primary key increments automatically. There’s no need for manual provision of primary keys during data insertion.</p></li>
+<p>启用该设置可确保主键自动递增。数据插入时无需手动提供主键。</p></li>
 <li><p><code translate="no">enable_dynamic_field</code></p>
-<p>When enabled, all fields, excluding <code translate="no">id</code> and <code translate="no">vector</code> in the data to be inserted, are treated as dynamic fields. These additional fields are saved as key-value pairs within a special field named <code translate="no">$meta</code>. This feature allows the inclusion of extra fields during data insertion.</p></li>
+<p>启用后，待插入数据中除<code translate="no">id</code> 和<code translate="no">vector</code> 以外的所有字段都会被视为动态字段。这些附加字段以键值对的形式保存在一个名为<code translate="no">$meta</code> 的特殊字段中。此功能允许在插入数据时包含额外字段。</p></li>
 </ul>
-<p>The automatically indexed and loaded collection from the provided code is ready for immediate data insertions.</p>
-<h3 id="Customized-setup" class="common-anchor-header">Customized setup</h3><p>Instead of letting Milvus decide almost everything for your collection, you can determine the <strong>schema</strong> and <strong>index parameters</strong> of the collection on your own.</p>
-<h4 id="Step-1-Set-up-schema" class="common-anchor-header">Step 1: Set up schema</h4><p>A schema defines the structure of a collection. Within the schema, you have the option to enable or disable <code translate="no">enable_dynamic_field</code>, add pre-defined fields, and set attributes for each field. For a detailed explanation of the concept and available data types, refer to <a href="/docs/zh/schema.md">Schema Explained</a>.</p>
+<p>从提供的代码中自动索引和加载的 Collections 可以立即插入数据。</p>
+<h3 id="Customized-setup" class="common-anchor-header">自定义设置</h3><p>与其让 Milvus 为你的 Collections 决定几乎一切，你可以自己决定 Collections 的<strong>Schema</strong>和<strong>索引参数</strong>。</p>
+<h4 id="Step-1-Set-up-schema" class="common-anchor-header">第一步：设置 Schema</h4><p>Schema 定义了 Collections 的结构。在 Schema 中，您可以选择启用或禁用<code translate="no">enable_dynamic_field</code> 、添加预定义字段以及为每个字段设置属性。有关概念和可用数据类型的详细解释，请参阅<a href="/docs/zh/schema.md">Schema Explained</a>。</p>
 <div class="language-python">
-<p>To set up a schema, use <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_schema.md"><code translate="no">create_schema()</code></a> to create a schema object and <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/CollectionSchema/add_field.md"><code translate="no">add_field()</code></a> to add fields to the schema.</p>
+<p>要设置模式，请使用 <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_schema.md"><code translate="no">create_schema()</code></a>创建模式对象，并使用 <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/CollectionSchema/add_field.md"><code translate="no">add_field()</code></a>为模式添加字段。</p>
 </div>
 <div class="language-java">
-<p>To set up a schema, use <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Collections/createSchema.md"><code translate="no">createSchema()</code></a> to create a schema object and <a href="https://milvus.io/api-reference/java/v2.4.x/v2/CollectionSchema/addField.md"><code translate="no">addField()</code></a> to add fields to the schema.</p>
+<p>要设置模式，使用 <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Collections/createSchema.md"><code translate="no">createSchema()</code></a>创建模式对象，并使用 <a href="https://milvus.io/api-reference/java/v2.4.x/v2/CollectionSchema/addField.md"><code translate="no">addField()</code></a>为模式添加字段。</p>
 </div>
 <div class="language-javascript">
-<p>To set up a schema, use <a href="https://milvus.io/api-reference/node/v2.4.x/Collections/createCollection.md"><code translate="no">createCollection()</code></a>.</p>
+<p>要设置模式，使用 <a href="https://milvus.io/api-reference/node/v2.4.x/Collections/createCollection.md"><code translate="no">createCollection()</code></a>.</p>
 </div>
 <div class="language-shell">
-<p>To set up a schema, you need to define a JSON object that follows the schema format as displayed on the <a href="https://milvus.io/api-reference/restful/v2.4.x/v2/Collection%20(v2)/Create.md"><code translate="no">POST /v2/vectordb/collections/create</code></a> API endpoint reference page.</p>
+<p>要设置模式，您需要定义一个 JSON 对象，该对象应遵循模式格式，如 <a href="https://milvus.io/api-reference/restful/v2.4.x/v2/Collection%20(v2)/Create.md"><code translate="no">POST /v2/vectordb/collections/create</code></a>API 端点参考页面上显示的模式格式定义一个 JSON 对象。</p>
 </div>
 <div class="multipleCode">
-  <a href="#python">Python </a>
-  <a href="#java">Java</a>
-  <a href="#javascript">Node.js</a>
-  <a href="#shell">cURL</a>
-</div>
+ <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#shell">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># 3. Create a collection in customized setup mode</span>
 
 <span class="hljs-comment"># 3.1. Create schema</span>
@@ -319,146 +310,142 @@ schema.addField(AddFieldReq.builder()
 <table class="language-python">
   <thead>
     <tr>
-      <th>Parameter</th>
-      <th>Description</th>
+      <th>参数</th>
+      <th>参数</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <td><code translate="no">auto_id</code></td>
-      <td>Determines if the primary field automatically increments.<br/>Setting this to <strong>True</strong> makes the primary field automatically increment. In this case, the primary field should not be included in the data to insert to avoid errors. The auto-generated IDs have a fixed length and cannot be altered.</td>
+      <td>确定主字段是否自动递增。<br/>设置为<strong>True 时</strong>，主字段将自动递增。在这种情况下，主字段不应包含在要插入的数据中，以免出错。自动生成的 ID 有固定长度，不能更改。</td>
     </tr>
     <tr>
       <td><code translate="no">enable_dynamic_field</code></td>
-      <td>Determines if Milvus saves the values of undefined fields in a dynamic field if the data being inserted into the target collection includes fields that are not defined in the collection's schema.<br/>When you set this to <strong>True</strong>, Milvus will create a field called <strong>$meta</strong> to store any undefined fields and their values from the data that is inserted.</td>
+      <td>如果插入到目标 Collections 的数据包括未在 Collections 模式中定义的字段，则决定 Milvus 是否将未定义字段的值保存在动态字段中。<br/>设置为<strong>"true</strong> <strong>"</strong>时，Milvus 将创建一个名为<strong>$meta</strong>的字段，用于保存插入数据中的任何未定义字段及其值。</td>
     </tr>
     <tr>
       <td><code translate="no">field_name</code></td>
-      <td>The name of the field.</td>
+      <td>字段的名称。</td>
     </tr>
     <tr>
       <td><code translate="no">datatype</code></td>
-      <td>The data type of the field. For a list of available data types, refer to <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/DataType.md">DataType</a>.</td>
+      <td>字段的数据类型。有关可用数据类型的列表，请参阅<a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/DataType.md">数据类型</a>。</td>
     </tr>
     <tr>
       <td><code translate="no">is_primary</code></td>
-      <td>Whether the current field is the primary field in a collection.<br/>Each collection has only one primary field. A primary field should be of either the <strong>DataType.INT64</strong> type or the <strong>DataType.VARCHAR</strong> type.</td>
+      <td>当前字段是否为集合中的主字段。<br/>每个集合只有一个主字段。主字段应为<strong>DataType.INT64</strong>类型或<strong>DataType.VARCHAR</strong>类型。</td>
     </tr>
     <tr>
       <td><code translate="no">dim</code></td>
-      <td>The dimension of the vector embeddings.<br/>This is mandatory for a field of the <strong>DataType.FLOAT_VECTOR</strong>, <strong>DataType.BINARY_VECTOR</strong>, <strong>DataType.FLOAT16_VECTOR</strong>, or <strong>DataType.BFLOAT16_VECTOR</strong> type. If you use <strong>DataType.SPARSE_FLOAT_VECTOR</strong>, omit this parameter.</td>
+      <td>向量 Embeddings 的维数。<br/>对于<strong>DataType.FLOAT_VECTOR</strong>、<strong>DataType</strong> <strong>.BINARY</strong> <strong>_</strong> <strong>VECTOR</strong>、<strong>DataType.</strong> <strong>FLOAT16_VECTOR</strong> 或<strong>DataType.BFLOAT16_VECTOR</strong>类型的字段，这是必填项。如果使用<strong>DataType.SPARSE_FLOAT_VECTOR</strong>，请省略此参数。</td>
     </tr>
   </tbody>
 </table>
 <table class="language-java">
   <thead>
     <tr>
-      <th>Parameter</th>
-      <th>Description</th>
+      <th>参数</th>
+      <th>说明</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <td><code translate="no">fieldName</code></td>
-      <td>The name of the field.</td>
+      <td>字段的名称。</td>
     </tr>
     <tr>
       <td><code translate="no">dataType</code></td>
-      <td>The data type of the field. For a list of available data types, refer to <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Collections/DataType.md">DataType</a>.</td>
+      <td>字段的数据类型。有关可用数据类型的列表，请参阅<a href="https://milvus.io/api-reference/java/v2.4.x/v2/Collections/DataType.md">DataType</a>。</td>
     </tr>
     <tr>
       <td><code translate="no">isPrimaryKey</code></td>
-      <td>Whether the current field is the primary field in a collection.<br/>Each collection has only one primary field. A primary field should be of either the <strong>DataType.Int64</strong> type or the <strong>DataType.VarChar</strong> type.</td>
+      <td>当前字段是否为集合中的主字段。<br/>每个集合只有一个主字段。主字段应为<strong>DataType.Int64</strong>类型或<strong>DataType.VarChar</strong>类型。</td>
     </tr>
     <tr>
       <td><code translate="no">autoID</code></td>
-      <td>Whether allows the primary field to automatically increment.<br/>Setting this to <strong>true</strong> makes the primary field automatically increment. In this case, the primary field should not be included in the data to insert to avoid errors.</td>
+      <td>是否允许主字段自动递增。<br/>设置为<strong>true 时</strong>，主字段将自动递增。在这种情况下，主字段不应包含在要插入的数据中，以免出错。</td>
     </tr>
     <tr>
       <td><code translate="no">dimension</code></td>
-      <td>The dimension of the vector embeddings.<br/>This is mandatory for a field of the <strong>DataType.FloatVector</strong>, <strong>DataType.BinaryVector</strong>, <strong>DataType.Float16Vector</strong>, or <strong>DataType.BFloat16Vector</strong> type.</td>
+      <td>向量 Embeddings 的维数。<br/>对于<strong>DataType.FloatVector</strong>、<strong>DataType</strong> <strong>.BinaryVector</strong>、<strong>DataType.Float16Vector</strong>或<strong>DataType.BFloat16Vector</strong>类型的字段，此项为必填项。</td>
     </tr>
   </tbody>
 </table>
 <table class="language-javascript">
   <thead>
     <tr>
-      <th>Parameter</th>
-      <th>Description</th>
+      <th>参数</th>
+      <th>字段名称。</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <td><code translate="no">name</code></td>
-      <td>The name of the field.</td>
+      <td>字段的名称。</td>
     </tr>
     <tr>
       <td><code translate="no">data_type</code></td>
-      <td>The data type of the field. For an enumeration of all available data types, refer to <a href="https://milvus.io/api-reference/node/v2.4.x/Collections/DataType.md">DataType</a>.</td>
+      <td>字段的数据类型。有关所有可用数据类型的枚举，请参阅<a href="https://milvus.io/api-reference/node/v2.4.x/Collections/DataType.md">DataType</a>。</td>
     </tr>
     <tr>
       <td><code translate="no">is_primary_key</code></td>
-      <td>Whether the current field is the primary field in a collection.<br/>Each collection has only one primary field. A primary field should be of either the <strong>DataType.INT64</strong> type or the <strong>DataType.VARCHAR</strong> type.</td>
+      <td>当前字段是否为集合中的主字段。<br/>每个集合只有一个主字段。主字段应为<strong>DataType.INT64</strong>类型或<strong>DataType.VARCHAR</strong>类型。</td>
     </tr>
     <tr>
       <td><code translate="no">auto_id</code></td>
-      <td>Whether the primary field automatically increments upon data insertions into this collection.<br/>The value defaults to <strong>False</strong>. Setting this to <strong>True</strong> makes the primary field automatically increment. Skip this parameter if you need to set up a collection with a customized schema.</td>
+      <td>主字段是否会在数据插入此 Collections 时自动递增。<br/>默认值为 "<strong>假</strong>"。设置为<strong>True 时</strong>，主字段将自动递增。如果需要使用自定义 Schema 设置 Collections，请跳过该参数。</td>
     </tr>
     <tr>
       <td><code translate="no">dim</code></td>
-      <td>The dimensionality of the collection field that holds vector embeddings.<br/>The value should be an integer greater than 1 and is usually determined by the model you use to generate vector embeddings.</td>
+      <td>保存向量嵌入的 Collections 字段的维度。<br/>该值应为大于 1 的整数，通常由用于生成向量嵌入的模型决定。</td>
     </tr>
   </tbody>
 </table>
 <table class="language-shell">
   <thead>
     <tr>
-      <th>Parameter</th>
-      <th>Description</th>
+      <th>参数</th>
+      <th>描述</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <td><code translate="no">fieldName</code></td>
-      <td>The name of the field to create in the target collection.</td>
+      <td>要在目标 Collections 中创建的字段名称。</td>
     </tr>
     <tr>
       <td><code translate="no">dataType</code></td>
-      <td>The data type of the field values.</td>
+      <td>字段值的数据类型。</td>
     </tr>
     <tr>
       <td><code translate="no">isPrimary</code></td>
-      <td>Whether the current field is the primary field. Setting this to <code translate="no">True</code> makes the current field the primary field.</td>
+      <td>当前字段是否为主字段。将其设置为<code translate="no">True</code> 后，当前字段就是主字段。</td>
     </tr>
     <tr>
       <td><code translate="no">elementTypeParams</code></td>
-      <td>Extra field parameters.</td>
+      <td>额外字段参数。</td>
     </tr>
     <tr>
       <td><code translate="no">dim</code></td>
-      <td>An optional parameter for FloatVector or BinaryVector fields that determines the vector dimension.</td>
+      <td>FloatVector 或 BinaryVector 字段的可选参数，用于确定向量维度。</td>
     </tr>
   </tbody>
 </table>
-<h4 id="Step-2-Set-up-index-parameters" class="common-anchor-header">Step 2: Set up index parameters</h4><p>Index parameters dictate how Milvus organizes your data within a collection. You can tailor the indexing process for specific fields by adjusting their <code translate="no">metric_type</code> and <code translate="no">index_type</code>. For the vector field, you have the flexibility to select <code translate="no">COSINE</code>, <code translate="no">L2</code>, <code translate="no">IP</code>, <code translate="no">HAMMING</code>, or <code translate="no">JACCARD</code> as the <code translate="no">metric_type</code>, depending on the type of vectors you are working with. For more information, refer to <a href="/docs/zh/metric.md">Similarity Metrics</a>.</p>
+<h4 id="Step-2-Set-up-index-parameters" class="common-anchor-header">第二步：设置索引参数</h4><p>索引参数决定了 Milvus 如何在 Collections 中组织数据。您可以通过调整<code translate="no">metric_type</code> 和<code translate="no">index_type</code> 来定制特定字段的索引过程。对于向量字段，您可以根据所处理的向量类型，灵活选择<code translate="no">COSINE</code>,<code translate="no">L2</code>,<code translate="no">IP</code>,<code translate="no">HAMMING</code> 或<code translate="no">JACCARD</code> 作为<code translate="no">metric_type</code> 。更多信息，请参阅 "<a href="/docs/zh/metric.md">相似度指标"</a>。</p>
 <div class="language-python">
-<p>To set up index parameters, use <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/prepare_index_params.md"><code translate="no">prepare_index_params()</code></a> to prepare index parameters and <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/add_index.md"><code translate="no">add_index()</code></a> to add the index.</p>
+<p>要设置索引参数，请使用 <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/prepare_index_params.md"><code translate="no">prepare_index_params()</code></a>准备索引参数，并使用 <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/add_index.md"><code translate="no">add_index()</code></a>来添加索引。</p>
 </div>
 <div class="language-java">
-<p>To set up index parameters, use <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Management/IndexParam.md">IndexParam</a>.</p>
+<p>要设置索引参数，请使用<a href="https://milvus.io/api-reference/java/v2.4.x/v2/Management/IndexParam.md">IndexParam</a>。</p>
 </div>
 <div class="language-javascript">
-<p>To set up index parameters, use <a href="https://milvus.io/api-reference/node/v2.4.x/Management/createIndex.md"><code translate="no">createIndex()</code></a>.</p>
+<p>要设置索引参数，请使用 <a href="https://milvus.io/api-reference/node/v2.4.x/Management/createIndex.md"><code translate="no">createIndex()</code></a>.</p>
 </div>
 <div class="language-shell">
-<p>To set up index parameters, you need to define a JSON object that follows the index parameters format as displayed on the <a href="https://milvus.io/api-reference/restful/v2.4.x/v2/Collection%20(v2)/Create.md"><code translate="no">POST /v2/vectordb/collections/create</code></a> API endpoint reference page.</p>
+<p>要设置索引参数，您需要定义一个 JSON 对象，该对象应遵循 API 端点参考页面上显示的索引参数格式。 <a href="https://milvus.io/api-reference/restful/v2.4.x/v2/Collection%20(v2)/Create.md"><code translate="no">POST /v2/vectordb/collections/create</code></a>API 端点参考页面上显示的索引参数格式定义一个 JSON 对象。</p>
 </div>
 <div class="multipleCode">
-  <a href="#python">Python </a>
-  <a href="#java">Java</a>
-  <a href="#javascript">Node.js</a>
-  <a href="#shell">cURL</a>
-</div>
+ <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#shell">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-meta"># 3.3. Prepare index parameters</span>
 index_params = client.prepare_index_params()
 
@@ -525,134 +512,130 @@ indexParams.add(indexParamForVectorField);
 <table class="language-python">
   <thead>
     <tr>
-      <th>Parameter</th>
-      <th>Description</th>
+      <th>参数</th>
+      <th>说明</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <td><code translate="no">field_name</code></td>
-      <td>The name of the target file to apply this object applies.</td>
+      <td>应用此对象的目标文件名称。</td>
     </tr>
     <tr>
       <td><code translate="no">index_type</code></td>
-      <td>The name of the algorithm used to arrange data in the specific field. For applicable algorithms, refer to <a href="https://milvus.io/docs/index.md">In-memory Index</a> and <a href="https://milvus.io/docs/disk_index.md">On-disk Index</a>.</td>
+      <td>用于在特定字段中排列数据的算法名称。有关适用算法，请参阅<a href="https://milvus.io/docs/index.md">内存索引</a>和<a href="https://milvus.io/docs/disk_index.md">磁盘索引</a>。</td>
     </tr>
     <tr>
       <td><code translate="no">metric_type</code></td>
-      <td>The algorithm that is used to measure similarity between vectors. Possible values are <strong>IP</strong>, <strong>L2</strong>, <strong>COSINE</strong>, <strong>JACCARD</strong>, <strong>HAMMING</strong>. This is available only when the specified field is a vector field. For more information, refer to <a href="https://milvus.io/docs/index.md#Indexes-supported-in-Milvus">Indexes supported in Milvus</a>.</td>
+      <td>用于衡量向量间相似性的算法。可能的值有<strong>IP</strong>、<strong>L2</strong>、<strong>COSINE</strong>、<strong>JACCARD</strong>、<strong>HAMMING</strong>。只有当指定字段是向量字段时才可用。更多信息，请参阅<a href="https://milvus.io/docs/index.md#Indexes-supported-in-Milvus">Milvus 支持的索引</a>。</td>
     </tr>
     <tr>
       <td><code translate="no">params</code></td>
-      <td>The fine-tuning parameters for the specified index type. For details on possible keys and value ranges, refer to <a href="https://milvus.io/docs/index.md">In-memory Index</a>.</td>
+      <td>指定索引类型的微调参数。有关可能的键和值范围的详细信息，请参阅<a href="https://milvus.io/docs/index.md">内存索引</a>。</td>
     </tr>
   </tbody>
 </table>
 <table class="language-java">
   <thead>
     <tr>
-      <th>Parameter</th>
-      <th>Description</th>
+      <th>参数</th>
+      <th>说明</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <td><code translate="no">fieldName</code></td>
-      <td>The name of the target field to apply this IndexParam object applies.</td>
+      <td>应用此 IndexParam 对象的目标字段的名称。</td>
     </tr>
     <tr>
       <td><code translate="no">indexType</code></td>
-      <td>The name of the algorithm used to arrange data in the specific field. For applicable algorithms, refer to <a href="https://milvus.io/docs/index.md">In-memory Index</a> and <a href="https://milvus.io/docs/disk_index.md">On-disk Index</a>.</td>
+      <td>用于在特定字段中排列数据的算法名称。有关适用算法，请参阅<a href="https://milvus.io/docs/index.md">内存索引</a>和<a href="https://milvus.io/docs/disk_index.md">磁盘索引</a>。</td>
     </tr>
     <tr>
       <td><code translate="no">metricType</code></td>
-      <td>The distance metric to use for the index. Possible values are <strong>IP</strong>, <strong>L2</strong>, <strong>COSINE</strong>, <strong>JACCARD</strong>, <strong>HAMMING</strong>.</td>
+      <td>索引使用的距离度量。可能的值有<strong>IP</strong>、<strong>L2</strong>、<strong>COSINE</strong>、<strong>JACCARD</strong>、<strong>HAMMING</strong>。</td>
     </tr>
     <tr>
       <td><code translate="no">extraParams</code></td>
-      <td>Extra index parameters. For details, refer to <a href="https://milvus.io/docs/index.md">In-memory Index</a> and <a href="https://milvus.io/docs/disk_index.md">On-disk Index</a>.</td>
+      <td>额外的索引参数。有关详细信息，请参阅<a href="https://milvus.io/docs/index.md">内存索引</a>和<a href="https://milvus.io/docs/disk_index.md">磁盘索引</a>。</td>
     </tr>
   </tbody>
 </table>
 <table class="language-javascript">
   <thead>
     <tr>
-      <th>Parameter</th>
-      <th>Description</th>
+      <th>参数</th>
+      <th>说明</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <td><code translate="no">field_name</code></td>
-      <td>The name of the target field on which an index is to be created.</td>
+      <td>要创建索引的目标字段的名称。</td>
     </tr>
     <tr>
       <td><code translate="no">index_type</code></td>
-      <td>The name of the algorithm used to arrange data in the specific field. For applicable algorithms, refer to <a href="https://milvus.io/docs/index.md">In-memory Index</a> and <a href="https://milvus.io/docs/disk_index.md">On-disk Index</a>.</td>
+      <td>用于在特定字段中排列数据的算法名称。有关适用算法，请参阅<a href="https://milvus.io/docs/index.md">内存索引</a>和<a href="https://milvus.io/docs/disk_index.md">磁盘索引</a>。</td>
     </tr>
     <tr>
       <td><code translate="no">metric_type</code></td>
-      <td>The algorithm that is used to measure similarity between vectors. Possible values are <strong>IP</strong>, <strong>L2</strong>, <strong>COSINE</strong>, <strong>JACCARD</strong>, <strong>HAMMING</strong>. This is available only when the specified field is a vector field. For more information, refer to <a href="https://milvus.io/docs/index.md#Indexes-supported-in-Milvus">Indexes supported in Milvus</a>.</td>
+      <td>用于衡量向量间相似性的算法。可能的值有<strong>IP</strong>、<strong>L2</strong>、<strong>COSINE</strong>、<strong>JACCARD</strong>、<strong>HAMMING</strong>。只有当指定字段是向量字段时才可用。更多信息，请参阅<a href="https://milvus.io/docs/index.md#Indexes-supported-in-Milvus">Milvus 支持的索引</a>。</td>
     </tr>
     <tr>
       <td><code translate="no">params</code></td>
-      <td>The fine-tuning parameters for the specified index type. For details on possible keys and value ranges, refer to <a href="https://milvus.io/docs/index.md">In-memory Index</a>.</td>
+      <td>指定索引类型的微调参数。有关可能的键和值范围的详细信息，请参阅<a href="https://milvus.io/docs/index.md">内存索引</a>。</td>
     </tr>
   </tbody>
 </table>
 <table class="language-shell">
   <thead>
     <tr>
-      <th>Parameter</th>
-      <th>Description</th>
+      <th>参数</th>
+      <th>说明</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <td><code translate="no">fieldName</code></td>
-      <td>The name of the target field on which an index is to be created.</td>
+      <td>要创建索引的目标字段的名称。</td>
     </tr>
     <tr>
       <td><code translate="no">indexName</code></td>
-      <td>The name of the index to create. The value defaults to the target field name.</td>
+      <td>要创建的索引的名称。默认值为目标字段名称。</td>
     </tr>
     <tr>
       <td><code translate="no">metricType</code></td>
-      <td>The algorithm that is used to measure similarity between vectors. Possible values are <strong>IP</strong>, <strong>L2</strong>, <strong>COSINE</strong>, <strong>JACCARD</strong>, <strong>HAMMING</strong>. This is available only when the specified field is a vector field. For more information, refer to <a href="https://milvus.io/docs/index.md#Indexes-supported-in-Milvus">Indexes supported in Milvus</a>.</td>
+      <td>用于衡量向量间相似性的算法。可能的值有<strong>IP</strong>、<strong>L2</strong>、<strong>COSINE</strong>、<strong>JACCARD</strong>、<strong>HAMMING</strong>。只有当指定字段是向量字段时才可用。更多信息，请参阅<a href="https://milvus.io/docs/index.md#Indexes-supported-in-Milvus">Milvus 支持的索引</a>。</td>
     </tr>
     <tr>
       <td><code translate="no">params</code></td>
-      <td>The index type and related settings. For details, refer to <a href="https://milvus.io/docs/index.md">In-memory Index</a>.</td>
+      <td>索引类型和相关设置。详情请参阅<a href="https://milvus.io/docs/index.md">内存索引</a>。</td>
     </tr>
     <tr>
       <td><code translate="no">params.index_type</code></td>
-      <td>The type of the index to create.</td>
+      <td>要创建的索引类型。</td>
     </tr>
     <tr>
       <td><code translate="no">params.nlist</code></td>
-      <td>The number of cluster units. This applies to IVF-related index types.</td>
+      <td>群集单元数。这适用于与 IVF 相关的索引类型。</td>
     </tr>
   </tbody>
 </table>
-<p>The code snippet above demonstrates how to set up index parameters for the vector field and a scalar field, respectively. For the vector field, set both the metric type and the index type. For a scalar field, set only the index type. It is recommended to create an index for the vector field and any scalar fields that are frequently used for filtering.</p>
-<h4 id="Step-3-Create-the-collection" class="common-anchor-header">Step 3: Create the collection</h4><p>You have the option to create a collection and an index file separately or to create a collection with the index loaded simultaneously upon creation.</p>
+<p>上面的代码片段演示了如何分别为向量场和标量场设置索引参数。对于向量场，同时设置度量类型和索引类型。对于标量字段，只需设置索引类型。建议为向量场和任何经常用于筛选的标量场创建索引。</p>
+<h4 id="Step-3-Create-the-collection" class="common-anchor-header">第 3 步：创建 Collections</h4><p>你可以选择分别创建 Collections 和索引文件，或者在创建 Collections 时同时加载索引。</p>
 <div class="language-python">
-<p>Use <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_collection.md">create_collection()</a> to create a collection with the specified schema and index parameters and <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/get_load_state.md">get_load_state()</a> to check the load state of the collection.</p>
+<p>使用<a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_collection.md">create_collection()</a>以指定的 Schema 和索引参数创建集合，并使用<a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/get_load_state.md">get_load_state()</a>检查集合的<a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/get_load_state.md">加载</a>状态。</p>
 </div>
 <div class="language-java">
-<p>Use <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Collections/createCollection.md">createCollection()</a> to create a collection with the specified schema and index parameters and <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Management/getLoadState.md">getLoadState()</a> to check the load state of the collection.</p>
+<p>使用<a href="https://milvus.io/api-reference/java/v2.4.x/v2/Collections/createCollection.md">createCollection()</a>以指定的 Schema 和索引参数创建集合，并使用<a href="https://milvus.io/api-reference/java/v2.4.x/v2/Management/getLoadState.md">getLoadState()</a>检查集合的加载状态。</p>
 </div>
 <div class="language-javascript">
-<p>Use <a href="https://milvus.io/api-reference/node/v2.4.x/Collections/createCollection.md">createCollection()</a> to create a collection with the specified schema and index parameters and <a href="https://milvus.io/api-reference/node/v2.4.x/Management/getLoadState.md">getLoadState()</a> to check the load state of the collection.</p>
+<p>使用<a href="https://milvus.io/api-reference/node/v2.4.x/Collections/createCollection.md">createCollection()</a>以指定的 Schema 和索引参数创建集合，并使用<a href="https://milvus.io/api-reference/node/v2.4.x/Management/getLoadState.md">getLoadState()</a>检查集合的加载状态。</p>
 </div>
 <ul>
-<li><p><strong>Create a collection with the index loaded simultaneously upon creation.</strong></p>
+<li><p><strong>创建集合时同时加载索引。</strong></p>
 <p><div class="multipleCode">
-<a href="#python">Python </a>
-<a href="#java">Java</a>
-<a href="#javascript">Node.js</a>
-<a href="#shell">cURL</a>
-</div></p>
+<a href="#python">Python </a><a href="#java">Java</a><a href="#javascript">Node.js</a><a href="#shell">cURL</a></div></p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># 3.5. Create a collection with the index loaded simultaneously</span>
 client.create_collection(
     collection_name=<span class="hljs-string">&quot;customized_setup_1&quot;</span>,
@@ -789,14 +772,10 @@ $ curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable
 <span class="hljs-comment">#     }</span>
 <span class="hljs-comment"># }</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>The collection created above is loaded automatically. To learn more about loading and releasing a collection, refer to <a href="/docs/zh/manage-collections.md#Load--Release-Collection">Load &amp; Release Collection</a>.</p></li>
-<li><p><strong>Create a collection and an index file separately.</strong></p>
+<p>上面创建的 Collection 会自动加载。要了解加载和释放集合的更多信息，请参阅<a href="/docs/zh/manage-collections.md#Load--Release-Collection">加载</a>和<a href="/docs/zh/manage-collections.md#Load--Release-Collection">释放集合</a>。</p></li>
+<li><p><strong>分别创建 Collections 和索引文件。</strong></p>
 <p><div class="multipleCode">
-<a href="#python">Python </a>
-<a href="#java">Java</a>
-<a href="#javascript">Node.js</a>
-<a href="#shell">cURL</a>
-</div></p>
+<a href="#python">Python </a><a href="#java">Java</a><a href="#javascript">Node.js</a><a href="#shell">cURL</a></div></p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># 3.6. Create a collection and index it separately</span>
 client.create_collection(
     collection_name=<span class="hljs-string">&quot;customized_setup_2&quot;</span>,
@@ -893,130 +872,126 @@ $ curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable
 <span class="hljs-comment">#     }</span>
 <span class="hljs-comment"># }</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>The collection created above is not loaded automatically. You can create an index for the collection as follows. Creating an index for the collection in a separate manner does not automatically load the collection. For details, refer to <a href="/docs/zh/manage-collections.md#Load--Release-Collection">Load &amp; Release Collection</a>.</p>
+<p>上面创建的 Collection 不会自动加载。您可以按如下方式为 Collections 创建索引。以单独的方式为 Collection 创建索引不会自动加载 Collection。有关详情，请参阅<a href="/docs/zh/manage-collections.md#Load--Release-Collection">加载和释放 Collections</a>。</p>
 <p><table class="language-python">
 <thead>
 <tr>
-<th>Parameter</th>
-<th>Description</th>
+<th>参数</th>
+<th>说明</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td><code translate="no">collection_name</code></td>
-<td>The name of the collection.</td>
+<td>Collection 的名称。</td>
 </tr>
 <tr>
 <td><code translate="no">schema</code></td>
-<td>The schema of this collection.<br/>Setting this to <strong>None</strong> indicates this collection will be created with default settings.<br/>To set up a collection with a customized schema, you need to create a <strong>CollectionSchema</strong> object and reference it here. In this case, Milvus ignores all other schema-related settings carried in the request.</td>
+<td>此 Collection 的<strong>Schema</strong>。<br/>设置为 "<strong>无 "</strong>表示将使用默认设置创建此 Collection。<br/>要使用自定义<strong>Schema</strong>设置 Collection，需要创建一个<strong>CollectionSchema</strong>对象并在此处引用它。在这种情况下，Milvus 会忽略请求中携带的所有其他 Schema 相关设置。</td>
 </tr>
 <tr>
 <td><code translate="no">index_params</code></td>
-<td>The parameters for building the index on the vector field in this collection. To set up a collection with a customized schema and automatically load the collection to memory, you need to create an IndexParams object and reference it here.<br/>You should at least add an index for the vector field in this collection. You can also skip this parameter if you prefer to set up the index parameters later on.</td>
+<td>在此 Collections 中建立向量字段索引的参数。要使用自定义 Schema 设置集合并自动将集合加载到内存中，需要创建一个 IndexParams 对象并在此处引用。<br/>至少应为此集合中的向量字段添加一个索引。如果希望稍后再设置索引参数，也可以跳过此参数。</td>
 </tr>
 </tbody>
 </table></p>
 <p><table class="language-java">
 <thead>
 <tr>
-<th>Parameter</th>
-<th>Description</th>
+<th>参数</th>
+<th>说明</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td><code translate="no">collectionName</code></td>
-<td>The name of the collection.</td>
+<td>Collections 的名称。</td>
 </tr>
 <tr>
 <td><code translate="no">collectionSchema</code></td>
-<td>The schema of this collection.<br/>Leaving it empty indicates this collection will be created with default settings. To set up a collection with a customized schema, you need to create a <strong>CollectionSchema</strong> object and reference it here.</td>
+<td>此 Collection 的 Schema。<br/>留空表示将以默认设置创建此 Collection。要使用自定义模式设置集合，需要创建一个<strong>CollectionSchema</strong>对象并在此处引用。</td>
 </tr>
 <tr>
 <td><code translate="no">indexParams</code></td>
-<td>The parameters for building the index on the vector field in this collection. To set up a collection with a customized schema and automatically load the collection to memory, create an <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Management/IndexParam.md">IndexParams</a> object with a list of IndexParam objects and reference it here.</td>
+<td>在此 Collection 中建立向量场索引的参数。要使用自定义<a href="https://milvus.io/api-reference/java/v2.4.x/v2/Management/IndexParam.md">Schema</a>设置集合并自动将集合加载到内存中，需要创建一个包含<a href="https://milvus.io/api-reference/java/v2.4.x/v2/Management/IndexParam.md">IndexParam</a>对象列表的<a href="https://milvus.io/api-reference/java/v2.4.x/v2/Management/IndexParam.md">IndexParams</a>对象，并在此处引用该对象。</td>
 </tr>
 </tbody>
 </table></p>
 <p><table class="language-javascript">
 <thead>
 <tr>
-<th>Parameter</th>
-<th>Description</th>
+<th>参数</th>
+<th>说明</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td><code translate="no">collection_name</code></td>
-<td>The name of the collection.</td>
+<td>Collections 的名称。</td>
 </tr>
 <tr>
 <td><code translate="no">fields</code></td>
-<td>The fields in the collection.</td>
+<td>Collections 中的字段。</td>
 </tr>
 <tr>
 <td><code translate="no">index_params</code></td>
-<td>The index parameters for the collection to create.</td>
+<td>要创建的 Collections 的索引参数。</td>
 </tr>
 </tbody>
 </table></p>
 <p><table class="language-shell">
 <thead>
 <tr>
-<th>Parameter</th>
-<th>Description</th>
+<th>参数</th>
+<th>说明</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td><code translate="no">collectionName</code></td>
-<td>The name of the collection.</td>
+<td>Collections 的名称。</td>
 </tr>
 <tr>
 <td><code translate="no">schema</code></td>
-<td>The schema is responsible for organizing data in the target collection. A valid schema should have multiple fields, which must include a primary key, a vector field, and several scalar fields.</td>
+<td>Schema 负责组织目标 Collections 中的数据。一个有效的 Schema 应该有多个字段，其中必须包括一个主键、一个向量字段和几个标量字段。</td>
 </tr>
 <tr>
 <td><code translate="no">schema.autoID</code></td>
-<td>Whether allows the primary field to automatically increment. Setting this to True makes the primary field automatically increment. In this case, the primary field should not be included in the data to insert to avoid errors. Set this parameter in the field with is_primary set to True.</td>
+<td>是否允许主字段自动递增。设置为 True 时，主字段将自动递增。在这种情况下，主字段不应包含在要插入的数据中，以免出错。在 is_primary 设置为 True 的字段中设置此参数。</td>
 </tr>
 <tr>
 <td><code translate="no">schema.enableDynamicField</code></td>
-<td>Whether allows to use the reserved $meta field to hold non-schema-defined fields in key-value pairs.</td>
+<td>是否允许使用保留的 $meta 字段来保存键值对中的非 Schema 定义字段。</td>
 </tr>
 <tr>
 <td><code translate="no">fields</code></td>
-<td>A list of field objects.</td>
+<td>字段对象列表。</td>
 </tr>
 <tr>
 <td><code translate="no">fields.fieldName</code></td>
-<td>The name of the field to create in the target collection.</td>
+<td>要在目标 Collections 中创建的字段名称。</td>
 </tr>
 <tr>
 <td><code translate="no">fields.dataType</code></td>
-<td>The data type of the field values.</td>
+<td>字段值的数据类型。</td>
 </tr>
 <tr>
 <td><code translate="no">fields.isPrimary</code></td>
-<td>Whether the current field is the primary field. Setting this to True makes the current field the primary field.</td>
+<td>当前字段是否为主字段。将此设置为 True 时，当前字段就是主字段。</td>
 </tr>
 <tr>
 <td><code translate="no">fields.elementTypeParams</code></td>
-<td>Extra field parameters.</td>
+<td>额外字段参数。</td>
 </tr>
 <tr>
 <td><code translate="no">fields.elementTypeParams.dim</code></td>
-<td>An optional parameter for FloatVector or BinaryVector fields that determines the vector dimension.</td>
+<td>FloatVector 或 BinaryVector 字段的可选参数，用于确定向量维度。</td>
 </tr>
 </tbody>
 </table></p>
-<p>The collection created above is not loaded automatically. You can create an index for the collection as follows. Creating an index for the collection in a separate manner does not automatically load the collection. For details, refer to <a href="/docs/zh/manage-collections.md">Load &amp; Release Collection</a>.</p>
+<p>上面创建的 Collection 不会自动加载。你可以按以下方法为 Collections 创建索引。以单独方式为集合创建索引不会自动加载集合。有关详细信息，请参阅<a href="/docs/zh/manage-collections.md">加载和释放集合</a>。</p>
 <p><div class="multipleCode">
-<a href="#python">Python </a>
-<a href="#java">Java</a>
-<a href="#javascript">Node.js</a>
-<a href="#shell">cURL</a>
-</div></p>
+<a href="#python">Python </a><a href="#java">Java</a><a href="#javascript">Node.js</a><a href="#shell">cURL</a></div></p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># 3.6 Create index</span>
 client.create_index(
     collection_name=<span class="hljs-string">&quot;customized_setup_2&quot;</span>,
@@ -1117,18 +1092,18 @@ $ curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable
   <table class="language-python">
   <thead>
     <tr>
-      <th>Parameter</th>
-      <th>Description</th>
+      <th>参数</th>
+      <th>说明</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <td><code translate="no">collection_name</code></td>
-      <td>The name of the collection.</td>
+      <td>Collections 的名称。</td>
     </tr>
     <tr>
       <td><code translate="no">index_params</code></td>
-      <td>An <strong>IndexParams</strong> object containing a list of <strong>IndexParam</strong> objects.</td>
+      <td><strong>IndexParams</strong>对象，包含一个<strong>IndexParam</strong>对象列表。</td>
     </tr>
   </tbody>
 </table>
@@ -1137,90 +1112,90 @@ $ curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable
 <table class="language-java">
   <thead>
     <tr>
-      <th>Parameter</th>
-      <th>Description</th>
+      <th>参数</th>
+      <th>说明</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <td><code translate="no">collectionName</code></td>
-      <td>The name of the collection.</td>
+      <td>Collections 名称。</td>
     </tr>
     <tr>
       <td><code translate="no">indexParams</code></td>
-      <td>A list of <strong>IndexParam</strong> objects.</td>
+      <td><strong>IndexParam</strong>对象列表。</td>
     </tr>
   </tbody>
 </table>
 <table class="language-javascript">
   <thead>
     <tr>
-      <th>Parameter</th>
-      <th>Description</th>
+      <th>参数</th>
+      <th>说明</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <td><code translate="no">collection_name</code></td>
-      <td>The name of the collection.</td>
+      <td>Collections 的名称。</td>
     </tr>
     <tr>
       <td><code translate="no">field_name</code></td>
-      <td>The name of the field in which to create an index.</td>
+      <td>要创建索引的字段名称。</td>
     </tr>
     <tr>
       <td><code translate="no">index_type</code></td>
-      <td>The name of the algorithm used to arrange data in the specific field. For applicable algorithms, refer to <a href="https://milvus.io/docs/index.md">In-memory Index</a> and <a href="https://milvus.io/docs/disk_index.md">On-disk Index</a>.</td>
+      <td>用于在特定字段中排列数据的算法名称。有关适用算法，请参阅<a href="https://milvus.io/docs/index.md">内存索引</a>和<a href="https://milvus.io/docs/disk_index.md">磁盘索引</a>。</td>
     </tr>
     <tr>
       <td><code translate="no">metric_type</code></td>
-      <td>The algorithm that is used to measure similarity between vectors. Possible values are <strong>IP</strong>, <strong>L2</strong>, <strong>COSINE</strong>, <strong>JACCARD</strong>, <strong>HAMMING</strong>. This is available only when the specified field is a vector field. For more information, refer to <a href="https://milvus.io/docs/index.md#Indexes-supported-in-Milvus">Indexes supported in Milvus</a>.</td>
+      <td>用于衡量向量间相似性的算法。可能的值有<strong>IP</strong>、<strong>L2</strong>、<strong>COSINE</strong>、<strong>JACCARD</strong>、<strong>HAMMING</strong>。只有当指定字段是向量字段时才可用。更多信息，请参阅<a href="https://milvus.io/docs/index.md#Indexes-supported-in-Milvus">Milvus 支持的索引</a>。</td>
     </tr>
     <tr>
       <td><code translate="no">params</code></td>
-      <td>The fine-tuning parameters for the specified index type. For details on possible keys and value ranges, refer to <a href="https://milvus.io/docs/index.md">In-memory Index</a>.</td>
+      <td>指定索引类型的微调参数。有关可能的键和值范围的详细信息，请参阅<a href="https://milvus.io/docs/index.md">内存索引</a>。</td>
     </tr>
   </tbody>
 </table>
 <table class="language-shell">
     <thead>
         <tr>
-        <th>Parameter</th>
-        <th>Description</th>
+        <th>参数</th>
+        <th>说明</th>
         </tr>
     </thead>
     <tbody>
         <tr>
         <td><code translate="no">collectionName</code></td>
-        <td>The name of the collection.</td>
+        <td>Collections 的名称。</td>
         </tr>
         <tr>
         <td><code translate="no">indexParams</code></td>
-        <td>The index parameters for the collection to create.</td>
+        <td>要创建的 Collection 的索引参数。</td>
         </tr>
         <tr>
         <td><code translate="no">indexParams.metricType</code></td>
-        <td>The similarity metric type used to build the index. The value defaults to COSINE.</td>
+        <td>用于建立索引的相似度度量类型。默认值为 COSINE。</td>
         </tr>
         <tr>
         <td><code translate="no">indexParams.fieldName</code></td>
-        <td>The name of the target field on which an index is to be created.</td>
+        <td>要创建索引的目标字段的名称。</td>
         </tr>
         <tr>
         <td><code translate="no">indexParams.indexName</code></td>
-        <td>The name of the index to create, the value defaults to the target field name.</td>
+        <td>要创建的索引的名称，值默认为目标字段名称。</td>
         </tr>
         <tr>
         <td><code translate="no">indexParams.indexConfig.index_type</code></td>
-        <td>The type of the index to create.</td>
+        <td>要创建的索引类型。</td>
         </tr>
         <tr>
         <td><code translate="no">indexParams.indexConfig.nlist</code></td>
-        <td>The number of cluster units. This applies to IVF-related index types.</td>
+        <td>群集单元数。这适用于与 IVF 相关的索引类型。</td>
         </tr>
     </tbody>
 </table>
-<h2 id="View-Collections" class="common-anchor-header">View Collections<button data-href="#View-Collections" class="anchor-icon" translate="no">
+<h2 id="View-Collections" class="common-anchor-header">查看集合<button data-href="#View-Collections" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -1236,23 +1211,19 @@ $ curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable
         ></path>
       </svg>
     </button></h2><div class="language-python">
-<p>To check the details of an existing collection, use <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/describe_collection.md">describe_collection()</a>.</p>
+<p>要查看现有集合的详细信息，请使用<a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/describe_collection.md">describe_collection()</a>。</p>
 </div>
 <div class="language-java">
-<p>To check the details of an existing collection, use <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Collections/describeCollection.md">describeCollection()</a>.</p>
+<p>要查看现有集合的详细信息，请使用<a href="https://milvus.io/api-reference/java/v2.4.x/v2/Collections/describeCollection.md">describeCollection()</a>。</p>
 </div>
 <div class="language-javascript">
-<p>To check the details of an existing collection, use <a href="https://milvus.io/api-reference/node/v2.4.x/Collections/describeCollection.md">describeCollection()</a>.</p>
+<p>要查看现有集合的详细信息，请使用<a href="https://milvus.io/api-reference/node/v2.4.x/Collections/describeCollection.md">describeCollection()</a>。</p>
 </div>
 <div class="language-shell">
-<p>To view the definition of a collection, you can use the <a href="https://milvus.io/api-reference/restful/v2.4.x/v2/Collection%20(v2)/Describe.md"><code translate="no">POST /v2/vectordb/collections/describe</code></a> and the <a href="https://milvus.io/api-reference/restful/v2.4.x/v2/Collection%20(v2)/List.md"><code translate="no">POST /v2/vectordb/collections/list</code></a> API endpoints.</p>
+<p>要查看 Collections 的定义，可以使用 <a href="https://milvus.io/api-reference/restful/v2.4.x/v2/Collection%20(v2)/Describe.md"><code translate="no">POST /v2/vectordb/collections/describe</code></a>和 <a href="https://milvus.io/api-reference/restful/v2.4.x/v2/Collection%20(v2)/List.md"><code translate="no">POST /v2/vectordb/collections/list</code></a>API 端点查看集合的定义。</p>
 </div>
 <div class="multipleCode">
-    <a href="#python">Python </a>
-    <a href="#java">Java</a>
-    <a href="#javascript">Node.js</a>
-    <a href="#shell">cURL</a>
-</div>
+   <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#shell">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># 5. View Collections</span>
 res = client.describe_collection(
     collection_name=<span class="hljs-string">&quot;customized_setup_2&quot;</span>
@@ -1446,13 +1417,9 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 <span class="hljs-comment">#     }</span>
 <span class="hljs-comment"># }</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>To list all existing collections, you can do as follows:</p>
+<p>要列出所有现有的 Collections，可以按以下方式操作：</p>
 <div class="multipleCode">
-    <a href="#python">Python </a>
-    <a href="#java">Java</a>
-    <a href="#javascript">Node.js</a>
-    <a href="#shell">cURL</a>
-</div>
+   <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#shell">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># 6. List all collection names</span>
 res = client.list_collections()
 
@@ -1508,7 +1475,7 @@ System.out.println(listCollectionsRes.getCollectionNames());
 <span class="hljs-comment">#   ]</span>
 <span class="hljs-comment"># }</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Load--Release-Collection" class="common-anchor-header">Load &amp; Release Collection<button data-href="#Load--Release-Collection" class="anchor-icon" translate="no">
+<h2 id="Load--Release-Collection" class="common-anchor-header">加载和释放 Collections<button data-href="#Load--Release-Collection" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -1523,29 +1490,25 @@ System.out.println(listCollectionsRes.getCollectionNames());
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>During the loading process of a collection, Milvus loads the collection’s index file into memory. Conversely, when releasing a collection, Milvus unloads the index file from memory. Before conducting searches in a collection, ensure that the collection is loaded.</p>
-<h3 id="Load-a-collection" class="common-anchor-header">Load a collection</h3><div class="language-python">
-<p>To load a collection, use the <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/load_collection.md"><code translate="no">load_collection()</code></a> method, specifying the collection name. You can also set <code translate="no">replica_number</code> to determine how many in-memory replicas of data segments to create on query nodes when the collection is loaded.</p>
+    </button></h2><p>在加载 Collection 的过程中，Milvus 会将 Collection 的索引文件加载到内存中。相反，在释放 Collections 时，Milvus 会从内存中卸载索引文件。在某个 Collection 中进行搜索之前，请确保该 Collection 已加载。</p>
+<h3 id="Load-a-collection" class="common-anchor-header">加载 Collections</h3><div class="language-python">
+<p>要加载一个 Collection，请使用 <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/load_collection.md"><code translate="no">load_collection()</code></a>方法，指定 Collections 名称。还可以设置<code translate="no">replica_number</code> ，以确定加载 Collections 时在查询节点上创建多少个数据段内存副本。</p>
 <ul>
-<li>Milvus Standalone: The maximum allowed value for <code translate="no">replica_number</code> is 1.</li>
-<li>Milvus Cluster: The maximum value should not exceed the <code translate="no">queryNode.replicas</code> set in your Milvus configurations. For additional details, refer to <a href="https://milvus.io/docs/configure_querynode.md#Query-Node-related-Configurations">Query Node-related Configurations</a>.</li>
+<li>Milvus Standalone：<code translate="no">replica_number</code> 的最大允许值为 1。</li>
+<li>Milvus 群集：最大值不应超过 Milvus 配置中设置的<code translate="no">queryNode.replicas</code> 。有关其他详细信息，请参阅<a href="https://milvus.io/docs/configure_querynode.md#Query-Node-related-Configurations">查询节点相关配置</a>。</li>
 </ul>
 </div>
 <div class="language-java">
-<p>To load a collection, use the <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Management/loadCollection.md"><code translate="no">loadCollection()</code></a> method, specifying the collection name.</p>
+<p>要加载一个 Collection，请使用 <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Management/loadCollection.md"><code translate="no">loadCollection()</code></a>方法，指定 Collections 名称。</p>
 </div>
 <div class="language-javascript">
-<p>To load a collection, use the <a href="https://milvus.io/api-reference/node/v2.4.x/Management/loadCollection.md"><code translate="no">loadCollection()</code></a> method, specifying the collection name.</p>
+<p>要加载 Collections，请使用 <a href="https://milvus.io/api-reference/node/v2.4.x/Management/loadCollection.md"><code translate="no">loadCollection()</code></a>方法，指定 Collections 名称。</p>
 </div>
 <div class="language-shell">
-<p>To load a collection, you can use the <a href="https://milvus.io/api-reference/restful/v2.4.x/v2/Collection%20(v2)/Load.md"><code translate="no">POST /v2/vectordb/collections/load</code></a> and the <a href="https://milvus.io/api-reference/restful/v2.4.x/v2/Collection%20(v2)/GetLoadState.md"><code translate="no">POST /v2/vectordb/collections/get_load_state</code></a> API endpoints.</p>
+<p>要加载一个 Collection，可以使用 <a href="https://milvus.io/api-reference/restful/v2.4.x/v2/Collection%20(v2)/Load.md"><code translate="no">POST /v2/vectordb/collections/load</code></a>和 <a href="https://milvus.io/api-reference/restful/v2.4.x/v2/Collection%20(v2)/GetLoadState.md"><code translate="no">POST /v2/vectordb/collections/get_load_state</code></a>API 端点。</p>
 </div>
 <div class="multipleCode">
-    <a href="#python">Python </a>
-    <a href="#java">Java</a>
-    <a href="#javascript">Node.js</a>
-    <a href="#shell">cURL</a>
-</div>
+   <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#shell">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># 7. Load the collection</span>
 client.load_collection(
     collection_name=<span class="hljs-string">&quot;customized_setup_2&quot;</span>,
@@ -1640,24 +1603,20 @@ $ curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable
 <span class="hljs-comment">#     }</span>
 <span class="hljs-comment"># }</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Release-a-collection" class="common-anchor-header">Release a collection</h3><div class="language-python">
-<p>To release a collection, use the <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/release_collection.md"><code translate="no">release_collection()</code></a> method, specifying the collection name.</p>
+<h3 id="Release-a-collection" class="common-anchor-header">发布 Collections</h3><div class="language-python">
+<p>要释放一个 Collections，请使用 <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/release_collection.md"><code translate="no">release_collection()</code></a>方法，并指定 Collections 名称。</p>
 </div>
 <div class="language-java">
-<p>To release a collection, use the <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Management/releaseCollection.md"><code translate="no">releaseCollection()</code></a> method, specifying the collection name.</p>
+<p>要释放 Collections，请使用 <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Management/releaseCollection.md"><code translate="no">releaseCollection()</code></a>方法，指定 Collections 名称。</p>
 </div>
 <div class="language-javascript">
-<p>To release a collection, use the <a href="https://milvus.io/api-reference/node/v2.4.x/Management/releaseCollection.md"><code translate="no">releaseCollection()</code></a> method, specifying the collection name.</p>
+<p>要释放一个 Collection，请使用 <a href="https://milvus.io/api-reference/node/v2.4.x/Management/releaseCollection.md"><code translate="no">releaseCollection()</code></a>方法，指定 Collections 名称。</p>
 </div>
 <div class="language-shell">
-<p>To release a collection, you can use the <a href="https://milvus.io/api-reference/restful/v2.4.x/v2/Collection%20(v2)/Release.md"><code translate="no">POST /v2/vectordb/collections/release</code></a> and the <a href="https://milvus.io/api-reference/restful/v2.4.x/v2/Collection%20(v2)/GetLoadState.md"><code translate="no">POST /v2/vectordb/collections/get_load_state</code></a> API endpoints.</p>
+<p>要释放一个 Collection，可以使用 <a href="https://milvus.io/api-reference/restful/v2.4.x/v2/Collection%20(v2)/Release.md"><code translate="no">POST /v2/vectordb/collections/release</code></a>和 <a href="https://milvus.io/api-reference/restful/v2.4.x/v2/Collection%20(v2)/GetLoadState.md"><code translate="no">POST /v2/vectordb/collections/get_load_state</code></a>API 端点。</p>
 </div>
 <div class="multipleCode">
-    <a href="#python">Python </a>
-    <a href="#java">Java</a>
-    <a href="#javascript">Node.js</a>
-    <a href="#shell">cURL</a>
-</div>
+   <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#shell">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># 8. Release the collection</span>
 client.release_collection(
     collection_name=<span class="hljs-string">&quot;customized_setup_2&quot;</span>
@@ -1745,7 +1704,7 @@ $ curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable
 <span class="hljs-comment">#     }</span>
 <span class="hljs-comment"># }</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Set-up-aliases" class="common-anchor-header">Set up aliases<button data-href="#Set-up-aliases" class="anchor-icon" translate="no">
+<h2 id="Set-up-aliases" class="common-anchor-header">设置别名<button data-href="#Set-up-aliases" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -1760,25 +1719,21 @@ $ curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>You can assign aliases for collections to make them more meaningful in a specific context. You can assign multiple aliases for a collection, but multiple collections cannot share an alias.</p>
-<h3 id="Create-aliases" class="common-anchor-header">Create aliases</h3><div class="language-python">
-<p>To create aliases, use the <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_alias.md"><code translate="no">create_alias()</code></a> method, specifying the collection name and the alias.</p>
+    </button></h2><p>您可以为集合指定别名，使它们在特定上下文中更有意义。您可以为一个 Collection 指定多个别名，但多个 Collection 不能共享一个别名。</p>
+<h3 id="Create-aliases" class="common-anchor-header">创建别名</h3><div class="language-python">
+<p>要创建别名，请使用 <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_alias.md"><code translate="no">create_alias()</code></a>方法，指定 Collections 名称和别名。</p>
 </div>
 <div class="language-java">
-<p>To create aliases, use the <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Collections/createAlias.md"><code translate="no">createAlias()</code></a> method, specifying the collection name and the alias.</p>
+<p>要创建别名，请使用 <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Collections/createAlias.md"><code translate="no">createAlias()</code></a>方法，指定 Collections 名称和别名。</p>
 </div>
 <div class="language-javascript">
-<p>To create aliases, use the <a href="https://milvus.io/api-reference/node/v2.4.x/Collections/createAlias.md"><code translate="no">createAlias()</code></a> method, specifying the collection name and the alias.</p>
+<p>要创建别名，请使用 <a href="https://milvus.io/api-reference/node/v2.4.x/Collections/createAlias.md"><code translate="no">createAlias()</code></a>方法，指定 Collections 名称和别名。</p>
 </div>
 <div class="language-shell">
-<p>To create aliases for a collection, you can use the <a href="https://milvus.io/api-reference/restful/v2.4.x/v2/Alias%20(v2)/Create.md"><code translate="no">POST /v2/vectordb/aliases/create</code></a> API endpoint.</p>
+<p>要为 Collections 创建别名，可以使用 <a href="https://milvus.io/api-reference/restful/v2.4.x/v2/Alias%20(v2)/Create.md"><code translate="no">POST /v2/vectordb/aliases/create</code></a>API 端点。</p>
 </div>
 <div class="multipleCode">
-    <a href="#python">Python </a>
-    <a href="#java">Java</a>
-    <a href="#javascript">Node.js</a>
-    <a href="#shell">cURL</a>
-</div>
+   <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#shell">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># 9.1. Create aliases</span>
 client.create_alias(
     collection_name=<span class="hljs-string">&quot;customized_setup_2&quot;</span>,
@@ -1867,93 +1822,89 @@ $ curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable
 <table class="language-python">
   <thead>
     <tr>
-      <th>Parameter</th>
-      <th>Description</th>
+      <th>参数</th>
+      <th>说明</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <td><code translate="no">collection_name</code></td>
-      <td>The name of the collection to create an alias for.</td>
+      <td>要创建别名的 Collections 名称。</td>
     </tr>
     <tr>
       <td><code translate="no">alias</code></td>
-      <td>The alias of the collection. Before this operation, ensure that the alias does not already exist. If it does, exceptions will occur.</td>
+      <td>Collections 的别名。操作前，请确保别名不存在。如果已经存在，则会出现异常。</td>
     </tr>
   </tbody>
 </table>
 <table class="language-java">
   <thead>
     <tr>
-      <th>Parameter</th>
-      <th>Description</th>
+      <th>参数</th>
+      <th>参数</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <td><code translate="no">collectionName</code></td>
-      <td>The name of the collection to create an alias for.</td>
+      <td>要创建别名的 Collection 的名称。</td>
     </tr>
     <tr>
       <td><code translate="no">alias</code></td>
-      <td>The alias of the collection. Before this operation, ensure that the alias does not already exist. If it does, exceptions will occur.</td>
+      <td>Collections 的别名。在进行此操作前，请确保别名不存在。如果已经存在，则会出现异常。</td>
     </tr>
   </tbody>
 </table>
 <table class="language-javascript">
   <thead>
     <tr>
-      <th>Parameter</th>
-      <th>Description</th>
+      <th>参数</th>
+      <th>参数</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <td><code translate="no">collection_name</code></td>
-      <td>The name of the collection to create an alias for.</td>
+      <td>要创建别名的 Collection 的名称。</td>
     </tr>
     <tr>
       <td><code translate="no">alias</code></td>
-      <td>The alias of the collection. Before this operation, ensure that the alias does not already exist. If it does, exceptions will occur.</td>
+      <td>Collections 的别名。在进行此操作前，请确保别名不存在。如果已经存在，则会出现异常。</td>
     </tr>
   </tbody>
 </table>
 <table class="language-shell">
   <thead>
     <tr>
-      <th>Parameter</th>
-      <th>Description</th>
+      <th>参数</th>
+      <th>参数</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <td><code translate="no">collectionName</code></td>
-      <td>The name of the collection to create an alias for.</td>
+      <td>要创建别名的 Collection 的名称。</td>
     </tr>
     <tr>
       <td><code translate="no">aliasName</code></td>
-      <td>The alias of the collection. Before this operation, ensure that the alias does not already exist. If it does, exceptions will occur.</td>
+      <td>Collections 的别名。在进行此操作前，请确保别名不存在。如果已经存在，则会出现异常。</td>
     </tr>
   </tbody>
 </table>
-<h3 id="List-aliases" class="common-anchor-header">List aliases</h3><div class="language-python">
-<p>To list aliases, use the <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/list_aliases.md"><code translate="no">list_aliases()</code></a> method, specifying the collection name.</p>
+<h3 id="List-aliases" class="common-anchor-header">列出别名</h3><div class="language-python">
+<p>要列出别名，请使用 <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/list_aliases.md"><code translate="no">list_aliases()</code></a>方法，并指定 Collections 名称。</p>
 </div>
 <div class="language-java">
-<p>To list aliases, use the <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Collections/listAliases.md"><code translate="no">listAliases()</code></a> method, specifying the collection name.</p>
+<p>要列出别名，请使用 <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Collections/listAliases.md"><code translate="no">listAliases()</code></a>方法，并指定 Collection 名称。</p>
 </div>
 <div class="language-javascript">
-<p>To list aliases, use the <a href="https://milvus.io/api-reference/node/v2.4.x/Collections/listAliases.md"><code translate="no">listAliases()</code></a> method, specifying the collection name.</p>
+<p>要列出别名，请使用 <a href="https://milvus.io/api-reference/node/v2.4.x/Collections/listAliases.md"><code translate="no">listAliases()</code></a>方法，并指定 Collections 名称。</p>
 </div>
 <div class="language-shell">
-<p>To list aliases for a collection, you can use the <a href="https://milvus.io/api-reference/restful/v2.4.x/v2/Alias%20(v2)/List.md"><code translate="no">POST /v2/vectordb/aliases/list</code></a> API endpoint.</p>
+<p>要列出 Collections 的别名，可使用 <a href="https://milvus.io/api-reference/restful/v2.4.x/v2/Alias%20(v2)/List.md"><code translate="no">POST /v2/vectordb/aliases/list</code></a>API 端点。</p>
 </div>
 <div class="multipleCode">
-    <a href="#python">Python </a>
-    <a href="#java">Java</a>
-    <a href="#javascript">Node.js</a>
-    <a href="#shell">cURL</a>
-</div>
+   <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#shell">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># 9.2. List aliases</span>
 res = client.list_aliases(
     collection_name=<span class="hljs-string">&quot;customized_setup_2&quot;</span>
@@ -2017,24 +1968,20 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 <span class="hljs-comment">#     ]</span>
 <span class="hljs-comment"># }</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Describe-aliases" class="common-anchor-header">Describe aliases</h3><div class="language-python">
-<p>To describe aliases, use the <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/describe_alias.md"><code translate="no">describe_alias()</code></a> method, specifying the alias.</p>
+<h3 id="Describe-aliases" class="common-anchor-header">描述别名</h3><div class="language-python">
+<p>要描述别名，请使用 <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/describe_alias.md"><code translate="no">describe_alias()</code></a>方法指定别名。</p>
 </div>
 <div class="language-java">
-<p>To describe aliases, use the <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Collections/describeAlias.md"><code translate="no">describeAlias()</code></a> method, specifying the alias.</p>
+<p>要描述别名，请使用 <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Collections/describeAlias.md"><code translate="no">describeAlias()</code></a>方法指定别名。</p>
 </div>
 <div class="language-javascript">
-<p>To describe aliases, use the <a href="https://milvus.io/api-reference/node/v2.4.x/Collections/describeAlias.md"><code translate="no">describeAlias()</code></a> method, specifying the alias.</p>
+<p>要描述别名，请使用 <a href="https://milvus.io/api-reference/node/v2.4.x/Collections/describeAlias.md"><code translate="no">describeAlias()</code></a>方法指定别名。</p>
 </div>
 <div class="language-shell">
-<p>To describe aliases for a collection, you can use the <a href="https://milvus.io/api-reference/restful/v2.4.x/v2/Alias%20(v2)/Describe.md"><code translate="no">POST /v2/vectordb/aliases/describe</code></a> API endpoint.</p>
+<p>要描述 Collections 的别名，可以使用 <a href="https://milvus.io/api-reference/restful/v2.4.x/v2/Alias%20(v2)/Describe.md"><code translate="no">POST /v2/vectordb/aliases/describe</code></a>API 端点。</p>
 </div>
 <div class="multipleCode">
-    <a href="#python">Python </a>
-    <a href="#java">Java</a>
-    <a href="#javascript">Node.js</a>
-    <a href="#shell">cURL</a>
-</div>
+   <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#shell">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># 9.3. Describe aliases</span>
 res = client.describe_alias(
     <span class="hljs-built_in">alias</span>=<span class="hljs-string">&quot;bob&quot;</span>
@@ -2109,24 +2056,20 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 <span class="hljs-comment">#     }</span>
 <span class="hljs-comment"># }</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Reassign-aliases" class="common-anchor-header">Reassign aliases</h3><div class="language-python">
-<p>To reassign aliases to other collections, use the <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/alter_alias.md"><code translate="no">alter_alias()</code></a> method, specifying the collection name and the alias.</p>
+<h3 id="Reassign-aliases" class="common-anchor-header">重新指定别名</h3><div class="language-python">
+<p>要将别名重新分配给其他 Collections，请使用 <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/alter_alias.md"><code translate="no">alter_alias()</code></a>方法，指定 Collections 名称和别名。</p>
 </div>
 <div class="language-java">
-<p>To reassign aliases to other collections, use the <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Collections/alterAlias.md"><code translate="no">alterAlias()</code></a> method, specifying the collection name and the alias.</p>
+<p>要将别名重新指定给其他 Collections，请使用 <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Collections/alterAlias.md"><code translate="no">alterAlias()</code></a>方法，指定集合名称和别名。</p>
 </div>
 <div class="language-javascript">
-<p>To reassign aliases to other collections, use the <a href="https://milvus.io/api-reference/node/v2.4.x/Collections/alterAlias.md"><code translate="no">alterAlias()</code></a> method, specifying the collection name and the alias.</p>
+<p>要将别名重新分配给其他 Collections，请使用 <a href="https://milvus.io/api-reference/node/v2.4.x/Collections/alterAlias.md"><code translate="no">alterAlias()</code></a>方法，指定 Collections 名称和别名。</p>
 </div>
 <div class="language-shell">
-<p>To reassign aliases to other collections, you can use the <a href="https://milvus.io/api-reference/restful/v2.4.x/v2/Alias%20(v2)/Alter.md"><code translate="no">POST /v2/vectordb/aliases/alter</code></a> API endpoint.</p>
+<p>要将别名重新指定给其他 Collections，可使用 <a href="https://milvus.io/api-reference/restful/v2.4.x/v2/Alias%20(v2)/Alter.md"><code translate="no">POST /v2/vectordb/aliases/alter</code></a>API 端点。</p>
 </div>
 <div class="multipleCode">
-    <a href="#python">Python </a>
-    <a href="#java">Java</a>
-    <a href="#javascript">Node.js</a>
-    <a href="#shell">cURL</a>
-</div>
+   <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#shell">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># 9.4 Reassign aliases to other collections</span>
 client.alter_alias(
     collection_name=<span class="hljs-string">&quot;customized_setup_1&quot;</span>,
@@ -2275,23 +2218,20 @@ $ curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable
 <span class="hljs-comment">#     ]</span>
 <span class="hljs-comment"># }</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Drop-aliases" class="common-anchor-header">Drop aliases</h3><div class="language-python">
-<p>To drop aliases, use the <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/drop_alias.md"><code translate="no">drop_alias()</code></a> method, specifying the alias.</p>
+<h3 id="Drop-aliases" class="common-anchor-header">删除别名</h3><div class="language-python">
+<p>要删除别名，请使用 <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/drop_alias.md"><code translate="no">drop_alias()</code></a>方法指定别名。</p>
 </div>
 <div class="language-java">
-<p>To drop aliases, use the <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Collections/dropAlias.md"><code translate="no">dropAlias()</code></a> method, specifying the alias.</p>
+<p>要删除别名，请使用 <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Collections/dropAlias.md"><code translate="no">dropAlias()</code></a>方法，指定别名。</p>
 </div>
 <div class="language-javascript">
-<p>To drop aliases, use the <a href="https://milvus.io/api-reference/node/v2.4.x/Collections/dropAlias.md"><code translate="no">dropAlias()</code></a> method, specifying the alias.</p>
+<p>要删除别名，请使用 <a href="https://milvus.io/api-reference/node/v2.4.x/Collections/dropAlias.md"><code translate="no">dropAlias()</code></a>方法，指定别名。</p>
 </div>
 <div class="language-shell">
-<p>To drop aliases for a collection, you can use the <a href="https://milvus.io/api-reference/restful/v2.4.x/v2/Alias%20(v2)/Drop.md"><code translate="no">POST /v2/vectordb/aliases/drop</code></a> API endpoint.</p>
+<p>要为 Collections 删除别名，可使用 <a href="https://milvus.io/api-reference/restful/v2.4.x/v2/Alias%20(v2)/Drop.md"><code translate="no">POST /v2/vectordb/aliases/drop</code></a>API 端点。</p>
 </div>
 <div class="multipleCode">
-    <a href="#python">Python </a>
-    <a href="#java">Java</a>
-    <a href="#javascript">Node.js</a>
-</div>
+   <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># 9.5 Drop aliases</span>
 client.drop_alias(
     <span class="hljs-built_in">alias</span>=<span class="hljs-string">&quot;bob&quot;</span>
@@ -2364,7 +2304,7 @@ $ curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable
 <span class="hljs-comment">#     &quot;data&quot;: {}</span>
 <span class="hljs-comment"># }</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Set-Properties" class="common-anchor-header">Set Properties<button data-href="#Set-Properties" class="anchor-icon" translate="no">
+<h2 id="Set-Properties" class="common-anchor-header">设置属性<button data-href="#Set-Properties" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -2379,11 +2319,11 @@ $ curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>You can set properties for a collection, such as <code translate="no">ttl.seconds</code> and <code translate="no">mmap.enabled</code>. For more information, refer to <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/ORM/Collection/set_properties.md">set_properties()</a>.</p>
+    </button></h2><p>可以为 Collections 设置属性，如<code translate="no">ttl.seconds</code> 和<code translate="no">mmap.enabled</code> 。更多信息，请参阅<a href="https://milvus.io/api-reference/pymilvus/v2.4.x/ORM/Collection/set_properties.md">set_properties()</a>。</p>
 <div class="alert note">
-<p>The code snippets in this section use the <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/ORM/Connections/connect.md">PyMilvus ORM module</a> to interact with Milvus. Code snippets with the new <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/About.md">MilvusClient SDK</a> will be available soon.</p>
+<p>本节中的代码片段使用<a href="https://milvus.io/api-reference/pymilvus/v2.4.x/ORM/Connections/connect.md">PyMilvus ORM 模块</a>与 Milvus 进行交互。使用新的<a href="https://milvus.io/api-reference/pymilvus/v2.4.x/About.md">MilvusClient SDK</a>的代码片段即将发布。</p>
 </div>
-<h3 id="Set-TTL" class="common-anchor-header">Set TTL</h3><p>Set the Time-To-Live (TTL) for the data in the collection, which specifies how long the data should be retained before it is automatically deleted.</p>
+<h3 id="Set-TTL" class="common-anchor-header">设置 TTL</h3><p>为 Collections 中的数据设置生存时间（TTL），指定数据在自动删除前应保留多长时间。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> Collection, connections
 
 <span class="hljs-comment"># Connect to Milvus server</span>
@@ -2400,10 +2340,9 @@ properties={
 )
 <button class="copy-code-btn"></button></code></pre>
 
-<h3 id="Set-MMAP" class="common-anchor-header">Set MMAP</h3><p>Configure the memory mapping (MMAP) property for the collection, which determines whether data is mapped into memory to improve query performance. For more information, refer to <a href="https://milvus.io/docs/mmap.md#Configure-memory-mapping">Configure memory mapping
-</a>.</p>
+<h3 id="Set-MMAP" class="common-anchor-header">设置 MMAP</h3><p>为 Collections 配置内存映射 (MMAP) 属性，该属性决定数据是否映射到内存中以提高查询性能。有关详细信息，请参阅<a href="https://milvus.io/docs/mmap.md#Configure-memory-mapping">配置内存映射 。</a></p>
 <div class="alert note">
-<p>Before setting the MMAP property, release the collection first. Otherwise, an error will occur.</p>
+<p>在设置 MMAP 属性之前，请先释放 Collection。否则会出错。</p>
 </div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> Collection, connections
 
@@ -2424,7 +2363,7 @@ properties={
 )
 <button class="copy-code-btn"></button></code></pre>
 
-<h2 id="Drop-a-Collection" class="common-anchor-header">Drop a Collection<button data-href="#Drop-a-Collection" class="anchor-icon" translate="no">
+<h2 id="Drop-a-Collection" class="common-anchor-header">放弃收藏<button data-href="#Drop-a-Collection" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -2439,25 +2378,21 @@ properties={
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>If a collection is no longer needed, you can drop the collection.</p>
+    </button></h2><p>如果不再需要某个 Collection，您可以放弃该 Collection。</p>
 <div class="language-python">
-<p>To drop a collection, use the <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/drop_collection.md"><code translate="no">drop_collection()</code></a> method, specifying the collection name.</p>
+<p>要删除一个 Collection，请使用 <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/drop_collection.md"><code translate="no">drop_collection()</code></a>方法，并指定 Collections 名称。</p>
 </div>
 <div class="language-java">
-<p>To drop a collection, use the <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Collections/dropCollection.md"><code translate="no">dropCollection()</code></a> method, specifying the collection name.</p>
+<p>要删除一个 Collection，请使用 <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Collections/dropCollection.md"><code translate="no">dropCollection()</code></a>方法，指定 Collections 名称。</p>
 </div>
 <div class="language-javascript">
-<p>To drop a collection, use the <a href="https://milvus.io/api-reference/node/v2.4.x/Collections/dropCollection.md"><code translate="no">dropCollection()</code></a> method, specifying the collection name.</p>
+<p>要放弃一个 Collection，请使用 <a href="https://milvus.io/api-reference/node/v2.4.x/Collections/dropCollection.md"><code translate="no">dropCollection()</code></a>方法，指定 Collections 名称。</p>
 </div>
 <div class="language-shell">
-<p>To drop a collection, you can use the <a href="https://milvus.io/api-reference/restful/v2.4.x/v2/Collection%20(v2)/Drop.md"><code translate="no">POST /v2/vectordb/collections/drop</code></a> API endpoint.</p>
+<p>要删除一个 Collection，可以使用 <a href="https://milvus.io/api-reference/restful/v2.4.x/v2/Collection%20(v2)/Drop.md"><code translate="no">POST /v2/vectordb/collections/drop</code></a>API 端点。</p>
 </div>
 <div class="multipleCode">
-    <a href="#python">Python </a>
-    <a href="#java">Java</a>
-    <a href="#javascript">Node.js</a>
-    <a href="#shell">cURL</a>
-</div>
+   <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#shell">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># 10. Drop the collections</span>
 client.drop_collection(
     collection_name=<span class="hljs-string">&quot;quick_setup&quot;</span>
