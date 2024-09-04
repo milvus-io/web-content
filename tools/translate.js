@@ -18,6 +18,7 @@ import {
 	generateMenuStructureLocales,
 	CACHE_FILE,
 	getFileUpdatedTime,
+	splitAndExtractPreTags,
 } from "./utils.js";
 
 const MOCK_TRANSLATE = false;
@@ -27,6 +28,12 @@ const sourceLang = "en";
 const targetLangs = ["zh", "ja", "ko", "fr", "de", "it", "pt", "es"];
 const cacheFile = CACHE_FILE;
 let total = 0;
+const SPLIT_TRANSLATE_FILES = [
+	"v2.4.x/site/en/userGuide/manage-collections.md",
+	"v2.4.x/site/en/userGuide/search-query-get/single-vector-search.md",
+	"v2.4.x/site/en/userGuide/use-json-fields.md",
+	"v2.4.x/site/en/reference/array_data_type.md",
+];
 
 async function bootstrap() {
 	console.log("Starting translation...", process.env.DEEPL_API_KEY);
@@ -90,16 +97,35 @@ async function bootstrap() {
 				} = isMdx ? await remarkToHtml(params) : await remarkableToHtml(params);
 
 				/**
-				 * step 6.1: translate html content
+				 * step 6.1: split and translate specific files
 				 */
-				const translateContent = await translate({
-					text: htmlContent,
+				const neededSplit = SPLIT_TRANSLATE_FILES.includes(path);
+				const { matches, htmlArray } = neededSplit
+					? splitAndExtractPreTags(htmlContent)
+					: { matches: [], htmlArray: [] };
+
+				/**
+				 * step 6.2: translate html content
+				 */
+				const translateRes = await translate({
+					text: neededSplit ? htmlArray : htmlContent,
 					targetLang: targetLang.toUpperCase(),
 					mock: MOCK_TRANSLATE,
 				});
 
+				let translateContent =
+					typeof translateRes === "string"
+						? translateRes
+						: translateRes.reduce((acc, cur, index) => {
+								const match = matches[index - 1];
+								if (match) {
+									return acc + match + cur;
+								}
+								return acc + cur;
+							}, "");
+
 				/**
-				 * step 6.2:translate title and summary
+				 * step 6.3:translate title and summary
 				 */
 				const cloneData = { ...data };
 				if (data.title || data.summary) {
@@ -117,7 +143,7 @@ async function bootstrap() {
 				}
 
 				/**
-				 * step 6.3: replace anchor label
+				 * step 6.4: replace anchor label
 				 */
 				if (anchorList.length > 0) {
 					const anchorIds = anchorList.map((anchor) => anchor.href);

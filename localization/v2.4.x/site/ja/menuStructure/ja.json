@@ -367,7 +367,7 @@
             "children": []
           },
           {
-            "label": "GPUによるインデックス",
+            "label": "GPU付きインデックス",
             "id": "index-with-gpu.md",
             "order": 2,
             "children": []
@@ -1187,155 +1187,242 @@
     "order": 8,
     "children": [
       {
-        "label": "オープンAI",
-        "id": "integrate_with_openai.md",
+        "label": "概要",
+        "id": "integrations_overview.md",
         "order": 0,
         "children": []
       },
       {
-        "label": "コヒーレ",
-        "id": "integrate_with_cohere.md",
+        "label": "モデルの埋め込み",
+        "id": "integrate-embeddings-models",
         "order": 1,
-        "children": []
-      },
-      {
-        "label": "ハグ顔",
-        "id": "integrate_with_hugging-face.md",
-        "order": 2,
-        "children": []
-      },
-      {
-        "label": "パイトーチ",
-        "id": "integrate_with_pytorch.md",
-        "order": 3,
-        "children": []
-      },
-      {
-        "label": "センテンス・トランスフォーマー",
-        "id": "integrate_with_sentencetransformers.md",
-        "order": 4,
-        "children": []
-      },
-      {
-        "label": "ラマインデックス",
-        "id": "integrate_with_llamaindex.md",
-        "order": 4,
-        "children": []
-      },
-      {
-        "label": "ラングチェーン",
-        "id": "langchain",
-        "order": 6,
         "children": [
           {
-            "label": "基本的な使い方",
-            "id": "basic_usage_langchain.md",
+            "label": "オープンAI",
+            "id": "integrate_with_openai.md",
+            "order": 0,
+            "children": []
+          },
+          {
+            "label": "コヒーレ",
+            "id": "integrate_with_cohere.md",
             "order": 1,
             "children": []
           },
           {
-            "label": "RAGとLangChain",
-            "id": "integrate_with_langchain.md",
+            "label": "ハグ顔",
+            "id": "integrate_with_hugging-face.md",
             "order": 2,
             "children": []
           },
           {
-            "label": "ハイブリッド検索",
-            "id": "milvus_hybrid_search_retriever.md",
+            "label": "パイトーチ",
+            "id": "integrate_with_pytorch.md",
             "order": 3,
+            "children": []
+          },
+          {
+            "label": "センテンス・トランスフォーマー",
+            "id": "integrate_with_sentencetransformers.md",
+            "order": 4,
+            "children": []
+          },
+          {
+            "label": "ボヤージュAI",
+            "id": "integrate_with_voyageai.md",
+            "order": 8,
+            "children": []
+          },
+          {
+            "label": "ジーナAI",
+            "id": "integrate_with_jina.md",
+            "order": 11,
+            "children": []
+          },
+          {
+            "label": "トゥエルブ・ラボ",
+            "id": "video_search_with_twelvelabs_and_milvus.md",
+            "order": 12,
             "children": []
           }
         ]
       },
       {
-        "label": "ヘイスタック",
-        "id": "integrate_with_haystack.md",
-        "order": 7,
-        "children": []
+        "label": "LLM",
+        "id": "integrate-llms",
+        "order": 2,
+        "children": [
+          {
+            "label": "ブイエルエルエム",
+            "id": "milvus_rag_with_vllm.md",
+            "order": 0,
+            "children": []
+          },
+          {
+            "label": "ミストラルAI",
+            "id": "llama_agents_metadata.md",
+            "order": 1,
+            "children": []
+          }
+        ]
       },
       {
-        "label": "フィフティワン",
-        "id": "integrate_with_voxel51.md",
-        "order": 7,
-        "children": []
+        "label": "オーケストレーション",
+        "id": "orchestrate-with-milvus",
+        "order": 3,
+        "children": [
+          {
+            "label": "ラングチェーン",
+            "id": "langchain",
+            "order": 0,
+            "children": [
+              {
+                "label": "基本的な使い方",
+                "id": "basic_usage_langchain.md",
+                "order": 1,
+                "children": []
+              },
+              {
+                "label": "ラグ",
+                "id": "integrate_with_langchain.md",
+                "order": 2,
+                "children": []
+              },
+              {
+                "label": "ハイブリッド検索",
+                "id": "milvus_hybrid_search_retriever.md",
+                "order": 3,
+                "children": []
+              }
+            ]
+          },
+          {
+            "label": "ラマインデックス",
+            "id": "llamaindex",
+            "order": 1,
+            "children": [
+              {
+                "label": "ラグ",
+                "id": "integrate_with_llamaindex.md",
+                "order": 4,
+                "children": []
+              }
+            ]
+          },
+          {
+            "label": "DSPy",
+            "id": "integrate_with_dspy.md",
+            "order": 2,
+            "children": []
+          },
+          {
+            "label": "ファストGPT",
+            "id": "integrate_with_fastgpt.md",
+            "order": 3,
+            "children": []
+          },
+          {
+            "label": "ヘイスタック",
+            "id": "integrate_with_haystack.md",
+            "order": 4,
+            "children": []
+          },
+          {
+            "label": "ベントML",
+            "id": "integrate_with_bentoml.md",
+            "order": 5,
+            "children": []
+          }
+        ]
       },
       {
-        "label": "ボヤージュAI",
-        "id": "integrate_with_voyageai.md",
+        "label": "代理店",
+        "id": "integrate-agents",
+        "order": 4,
+        "children": [
+          {
+            "label": "メモGPT",
+            "id": "integrate_with_memgpt.md",
+            "order": 0,
+            "children": []
+          },
+          {
+            "label": "キャメル",
+            "id": "integrate_with_camel.md",
+            "order": 1,
+            "children": []
+          }
+        ]
+      },
+      {
+        "label": "ナレッジ・エンジニアリング",
+        "id": "knowledge-engineering",
+        "order": 5,
+        "children": [
+          {
+            "label": "なぜなぜ",
+            "id": "integrate_with_whyhow.md",
+            "order": 0,
+            "children": []
+          },
+          {
+            "label": "バンナ",
+            "id": "integrate_with_vanna.md",
+            "order": 1,
+            "children": []
+          }
+        ]
+      },
+      {
+        "label": "評価と観測可能性",
+        "id": "evaluation-observability",
+        "order": 6,
+        "children": [
+          {
+            "label": "ラガス",
+            "id": "integrate_with_ragas.md",
+            "order": 0,
+            "children": []
+          },
+          {
+            "label": "ラングヒューズ",
+            "id": "integrate_with_langfuse.md",
+            "order": 1,
+            "children": []
+          },
+          {
+            "label": "フィフティワン",
+            "id": "integrate_with_voxel51.md",
+            "order": 2,
+            "children": []
+          }
+        ]
+      },
+      {
+        "label": "データソース",
+        "id": "data-sources",
+        "order": 7,
+        "children": [
+          {
+            "label": "エアバイト",
+            "id": "integrate_with_airbyte.md",
+            "order": 0,
+            "children": []
+          }
+        ]
+      },
+      {
+        "label": "その他",
+        "id": "other-integrations",
         "order": 8,
-        "children": []
-      },
-      {
-        "label": "ベントML",
-        "id": "integrate_with_bentoml.md",
-        "order": 9,
-        "children": []
-      },
-      {
-        "label": "DSPy",
-        "id": "integrate_with_dspy.md",
-        "order": 10,
-        "children": []
-      },
-      {
-        "label": "ジーナAI",
-        "id": "integrate_with_jina.md",
-        "order": 11,
-        "children": []
-      },
-      {
-        "label": "スノーフレーク",
-        "id": "integrate_with_snowpark.md",
-        "order": 12,
-        "children": []
-      },
-      {
-        "label": "なぜなぜ",
-        "id": "integrate_with_whyhow.md",
-        "order": 13,
-        "children": []
-      },
-      {
-        "label": "ラングヒューズ",
-        "id": "integrate_with_langfuse.md",
-        "order": 14,
-        "children": []
-      },
-      {
-        "label": "ラガス",
-        "id": "integrate_with_ragas.md",
-        "order": 15,
-        "children": []
-      },
-      {
-        "label": "メモGPT",
-        "id": "integrate_with_memgpt.md",
-        "order": 16,
-        "children": []
-      },
-      {
-        "label": "ファストGPT",
-        "id": "integrate_with_fastgpt.md",
-        "order": 17,
-        "children": []
-      },
-      {
-        "label": "バンナ",
-        "id": "integrate_with_vanna.md",
-        "order": 18,
-        "children": []
-      },
-      {
-        "label": "キャメル",
-        "id": "integrate_with_camel.md",
-        "order": 19,
-        "children": []
-      },
-      {
-        "label": "エアバイト",
-        "id": "integrate_with_airbyte.md",
-        "order": 20,
-        "children": []
+        "children": [
+          {
+            "label": "スノーフレーク",
+            "id": "integrate_with_snowpark.md",
+            "order": 0,
+            "children": []
+          }
+        ]
       }
     ]
   },
@@ -1346,15 +1433,21 @@
     "order": 7,
     "children": [
       {
+        "label": "概要",
+        "id": "tutorials-overview.md",
+        "order": 0,
+        "children": []
+      },
+      {
         "label": "ミルバスでRAGを作る",
         "id": "build-rag-with-milvus.md",
-        "order": 0,
+        "order": 1,
         "children": []
       },
       {
         "label": "Milvusによる画像検索",
         "id": "image_similarity_search.md",
-        "order": 1,
+        "order": 2,
         "children": []
       },
       {
@@ -1370,52 +1463,59 @@
         "children": []
       },
       {
-        "label": "質問応答システム",
-        "id": "question_answering_system.md",
-        "order": 5,
-        "children": []
-      },
-      {
-        "label": "レコメンダー・システム",
-        "id": "recommendation_system.md",
-        "order": 6,
-        "children": []
-      },
-      {
-        "label": "ビデオ類似性検索",
-        "id": "video_similarity_search.md",
-        "order": 7,
-        "children": []
-      },
-      {
-        "label": "オーディオ類似性検索",
-        "id": "audio_similarity_search.md",
-        "order": 8,
-        "children": []
-      },
-      {
-        "label": "DNA配列の分類",
-        "id": "dna_sequence_classification.md",
-        "order": 9,
-        "children": []
-      },
-      {
-        "label": "テキスト検索エンジン",
-        "id": "text_search_engine.md",
-        "order": 10,
-        "children": []
-      },
-      {
-        "label": "テキスト画像検索エンジン",
-        "id": "text_image_search.md",
-        "order": 11,
-        "children": []
-      },
-      {
-        "label": "画像重複排除システム",
-        "id": "image_deduplication_system.md",
-        "order": 12,
-        "children": []
+        "label": "もっと見る",
+        "id": "explore-more",
+        "order": 4,
+        "children": [
+          {
+            "label": "質問応答システム",
+            "id": "question_answering_system.md",
+            "order": 5,
+            "children": []
+          },
+          {
+            "label": "レコメンダー・システム",
+            "id": "recommendation_system.md",
+            "order": 6,
+            "children": []
+          },
+          {
+            "label": "ビデオ類似性検索",
+            "id": "video_similarity_search.md",
+            "order": 7,
+            "children": []
+          },
+          {
+            "label": "オーディオ類似性検索",
+            "id": "audio_similarity_search.md",
+            "order": 8,
+            "children": []
+          },
+          {
+            "label": "DNA配列の分類",
+            "id": "dna_sequence_classification.md",
+            "order": 9,
+            "children": []
+          },
+          {
+            "label": "テキスト検索エンジン",
+            "id": "text_search_engine.md",
+            "order": 10,
+            "children": []
+          },
+          {
+            "label": "テキスト画像検索エンジン",
+            "id": "text_image_search.md",
+            "order": 11,
+            "children": []
+          },
+          {
+            "label": "画像重複排除システム",
+            "id": "image_deduplication_system.md",
+            "order": 12,
+            "children": []
+          }
+        ]
       }
     ]
   },

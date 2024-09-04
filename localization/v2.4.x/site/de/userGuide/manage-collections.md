@@ -1,9 +1,8 @@
 ---
 id: manage-collections.md
 title: Sammlungen verwalten
-summary: ''
 ---
-<h1 id="Manage-Collections" class="common-anchor-header">Manage Collections<button data-href="#Manage-Collections" class="anchor-icon" translate="no">
+<h1 id="Manage-Collections" class="common-anchor-header">Verwalten von Sammlungen<button data-href="#Manage-Collections" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -18,8 +17,8 @@ summary: ''
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>This guide walks you through creating and managing collections using the SDK of your choice.</p>
-<h2 id="Before-you-start" class="common-anchor-header">Before you start<button data-href="#Before-you-start" class="anchor-icon" translate="no">
+    </button></h1><p>Dieser Leitfaden führt Sie durch die Erstellung und Verwaltung von Sammlungen mit dem SDK Ihrer Wahl.</p>
+<h2 id="Before-you-start" class="common-anchor-header">Bevor Sie beginnen<button data-href="#Before-you-start" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -35,10 +34,10 @@ summary: ''
         ></path>
       </svg>
     </button></h2><ul>
-<li><p>You have installed <a href="https://milvus.io/docs/install_standalone-docker.md">Milvus standalone</a> or <a href="https://milvus.io/docs/install_cluster-milvusoperator.md">Milvus cluster</a>.</p></li>
-<li><p>You have installed preferred SDKs. You can choose among various languages, including <a href="https://milvus.io/docs/install-pymilvus.md">Python</a>, <a href="https://milvus.io/docs/install-java.md">Java</a>, <a href="https://milvus.io/docs/install-go.md">Go</a>, and <a href="https://milvus.io/docs/install-node.md">Node.js</a>.</p></li>
+<li><p>Sie haben <a href="https://milvus.io/docs/install_standalone-docker.md">Milvus standalone</a> oder <a href="https://milvus.io/docs/install_cluster-milvusoperator.md">Milvus cluster</a> installiert.</p></li>
+<li><p>Sie haben die gewünschten SDKs installiert. Sie können zwischen verschiedenen Sprachen wählen, darunter <a href="https://milvus.io/docs/install-pymilvus.md">Python</a>, <a href="https://milvus.io/docs/install-java.md">Java</a>, <a href="https://milvus.io/docs/install-go.md">Go</a> und <a href="https://milvus.io/docs/install-node.md">Node.js</a>.</p></li>
 </ul>
-<h2 id="Overview" class="common-anchor-header">Overview<button data-href="#Overview" class="anchor-icon" translate="no">
+<h2 id="Overview" class="common-anchor-header">Überblick<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -53,11 +52,11 @@ summary: ''
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>In Milvus, you store your vector embeddings in collections. All vector embeddings within a collection share the same dimensionality and distance metric for measuring similarity.</p>
-<p>Milvus collections support dynamic fields (i.e., fields not pre-defined in the schema) and automatic incrementation of primary keys.</p>
-<p>To accommodate different preferences, Milvus offers two methods for creating a collection. One provides a quick setup, while the other allows for detailed customization of the collection schema and index parameters.</p>
-<p>Additionally, you can view, load, release, and drop a collection when necessary.</p>
-<h2 id="Create-Collection" class="common-anchor-header">Create Collection<button data-href="#Create-Collection" class="anchor-icon" translate="no">
+    </button></h2><p>In Milvus speichern Sie Ihre Vektoreinbettungen in Sammlungen. Alle Vektoreinbettungen innerhalb einer Sammlung haben die gleiche Dimensionalität und Distanzmetrik zur Messung der Ähnlichkeit.</p>
+<p>Milvus-Sammlungen unterstützen dynamische Felder (d. h. Felder, die nicht im Schema vordefiniert sind) und die automatische Inkrementierung von Primärschlüsseln.</p>
+<p>Um verschiedenen Präferenzen gerecht zu werden, bietet Milvus zwei Methoden zur Erstellung einer Sammlung. Die eine bietet eine schnelle Einrichtung, während die andere eine detaillierte Anpassung des Sammlungsschemas und der Indexparameter ermöglicht.</p>
+<p>Außerdem können Sie eine Sammlung bei Bedarf anzeigen, laden, freigeben und löschen.</p>
+<h2 id="Create-Collection" class="common-anchor-header">Sammlung erstellen<button data-href="#Create-Collection" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -72,37 +71,33 @@ summary: ''
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>You can create a collection in either of the following manners:</p>
+    </button></h2><p>Sie können eine Sammlung auf eine der beiden folgenden Weisen erstellen:</p>
 <ul>
-<li><p><strong>Quick setup</strong></p>
-<p>In this manner, you can create a collection by simply giving it a name and specifying the number of dimensions of the vector embeddings to be stored in this collection. For details, refer to <a href="/docs/de/manage-collections.md">Quick setup</a>.</p></li>
-<li><p><strong>Customized setup</strong></p>
-<p>Instead of letting In Milvus decide almost everything for your collection, you can determine the <strong>schema</strong> and <strong>index parameters</strong> of the collection on your own. For details, refer to <a href="/docs/de/manage-collections.md">Customized setup</a>.</p></li>
+<li><p><strong>Schnelleinrichtung</strong></p>
+<p>Auf diese Weise können Sie eine Sammlung erstellen, indem Sie ihr einfach einen Namen geben und die Anzahl der Dimensionen der Vektoreinbettungen angeben, die in dieser Sammlung gespeichert werden sollen. Einzelheiten finden Sie unter <a href="/docs/de/manage-collections.md">Schnelleinrichtung</a>.</p></li>
+<li><p><strong>Benutzerdefinierte Einrichtung</strong></p>
+<p>Anstatt In Milvus fast alles für Ihre Sammlung entscheiden zu lassen, können Sie das <strong>Schema</strong> und die <strong>Indexparameter</strong> der Sammlung selbst bestimmen. Details dazu finden Sie unter <a href="/docs/de/manage-collections.md">Benutzerdefinierte Einrichtung</a>.</p></li>
 </ul>
-<h3 id="Quick-setup" class="common-anchor-header">Quick setup</h3><p>Against the backdrop of the great leap in the AI industry, most developers just need a simple yet dynamic collection to start with. Milvus allows a quick setup of such a collection with just three arguments:</p>
+<h3 id="Quick-setup" class="common-anchor-header">Schnelle Einrichtung</h3><p>Vor dem Hintergrund des großen Sprungs in der KI-Industrie brauchen die meisten Entwickler nur eine einfache, aber dynamische Sammlung, um damit zu beginnen. Milvus ermöglicht eine schnelle Einrichtung einer solchen Sammlung mit nur drei Argumenten:</p>
 <ul>
-<li><p>Name of the collection to create,</p></li>
-<li><p>Dimension of the vector embeddings to insert, and</p></li>
-<li><p>Metric type used to measure similarities between vector embeddings.</p></li>
+<li><p>Name der zu erstellenden Sammlung,</p></li>
+<li><p>Dimension der einzufügenden Vektoreinbettungen und</p></li>
+<li><p>Metrischer Typ, der zur Messung der Ähnlichkeiten zwischen den Vektoreinbettungen verwendet wird.</p></li>
 </ul>
 <div class="language-python">
-<p>For quick setup, use the <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_collection.md"><code translate="no">create_collection()</code></a> method of the <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Client/MilvusClient.md"><code translate="no">MilvusClient</code></a> class to create a collection with the specified name and dimension.</p>
+<p>Für eine schnelle Einrichtung verwenden Sie die <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_collection.md"><code translate="no">create_collection()</code></a> Methode der <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Client/MilvusClient.md"><code translate="no">MilvusClient</code></a> Klasse, um eine Sammlung mit dem angegebenen Namen und der Dimension zu erstellen.</p>
 </div>
 <div class="language-java">
-<p>For quick setup, use the <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Collections/createCollection.md"><code translate="no">createCollection()</code></a> method of the <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Client/MilvusClientV2.md"><code translate="no">MilvusClientV2</code></a> class to create a collection with the specified name and dimension.</p>
+<p>Für eine schnelle Einrichtung verwenden Sie die <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Collections/createCollection.md"><code translate="no">createCollection()</code></a> Methode der Klasse <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Client/MilvusClientV2.md"><code translate="no">MilvusClientV2</code></a> Klasse, um eine Sammlung mit dem angegebenen Namen und der angegebenen Dimension zu erstellen.</p>
 </div>
 <div class="language-javascript">
-<p>For quick setup, use the <a href="https://milvus.io/api-reference/node/v2.4.x/Collections/createCollection.md"><code translate="no">createCollection()</code></a> method of the <a href="https://milvus.io/api-reference/node/v2.4.x/Client/MilvusClient.md"><code translate="no">MilvusClient</code></a> class to create a collection with the specified name and dimension.</p>
+<p>Für eine schnelle Einrichtung verwenden Sie die <a href="https://milvus.io/api-reference/node/v2.4.x/Collections/createCollection.md"><code translate="no">createCollection()</code></a> Methode der Klasse <a href="https://milvus.io/api-reference/node/v2.4.x/Client/MilvusClient.md"><code translate="no">MilvusClient</code></a> Klasse, um eine Sammlung mit dem angegebenen Namen und der angegebenen Dimension zu erstellen.</p>
 </div>
 <div class="language-shell">
-<p>For quick setup, use the <a href="https://milvus.io/api-reference/restful/v2.4.x/v2/Collection%20(v2)/Create.md"><code translate="no">POST /v2/vectordb/collections/create</code></a> API endpoint to create a collection with the specified name and dimension.</p>
+<p>Für eine schnelle Einrichtung verwenden Sie den <a href="https://milvus.io/api-reference/restful/v2.4.x/v2/Collection%20(v2)/Create.md"><code translate="no">POST /v2/vectordb/collections/create</code></a> API-Endpunkt, um eine Sammlung mit dem angegebenen Namen und der angegebenen Dimension zu erstellen.</p>
 </div>
 <div class="multipleCode">
-  <a href="#python">Python </a>
-  <a href="#java">Java</a>
-  <a href="#javascript">Node.js</a>
-  <a href="#shell">cURL</a>
-</div>
+ <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#shell">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType
 
 <span class="hljs-comment"># 1. Set up a Milvus client</span>
@@ -222,34 +217,30 @@ $ curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable
 <span class="hljs-comment">#     }</span>
 <span class="hljs-comment"># }</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>The collection generated in the above code contains only two fields: <code translate="no">id</code> (as the primary key) and <code translate="no">vector</code> (as the vector field), with <code translate="no">auto_id</code> and <code translate="no">enable_dynamic_field</code> settings enabled by default.</p>
+<p>Die im obigen Code generierte Sammlung enthält nur zwei Felder: <code translate="no">id</code> (als Primärschlüssel) und <code translate="no">vector</code> (als Vektorfeld), wobei die Einstellungen <code translate="no">auto_id</code> und <code translate="no">enable_dynamic_field</code> standardmäßig aktiviert sind.</p>
 <ul>
 <li><p><code translate="no">auto_id</code></p>
-<p>Enabling this setting ensures that the primary key increments automatically. There’s no need for manual provision of primary keys during data insertion.</p></li>
+<p>Durch die Aktivierung dieser Einstellung wird sichergestellt, dass der Primärschlüssel automatisch inkrementiert wird. Die manuelle Bereitstellung von Primärschlüsseln während der Dateneingabe ist nicht erforderlich.</p></li>
 <li><p><code translate="no">enable_dynamic_field</code></p>
-<p>When enabled, all fields, excluding <code translate="no">id</code> and <code translate="no">vector</code> in the data to be inserted, are treated as dynamic fields. These additional fields are saved as key-value pairs within a special field named <code translate="no">$meta</code>. This feature allows the inclusion of extra fields during data insertion.</p></li>
+<p>Wenn diese Einstellung aktiviert ist, werden alle Felder, außer <code translate="no">id</code> und <code translate="no">vector</code> in den einzufügenden Daten, als dynamische Felder behandelt. Diese zusätzlichen Felder werden als Schlüssel-Wert-Paare in einem speziellen Feld namens <code translate="no">$meta</code> gespeichert. Diese Funktion ermöglicht die Einbeziehung zusätzlicher Felder beim Einfügen von Daten.</p></li>
 </ul>
-<p>The automatically indexed and loaded collection from the provided code is ready for immediate data insertions.</p>
-<h3 id="Customized-setup" class="common-anchor-header">Customized setup</h3><p>Instead of letting Milvus decide almost everything for your collection, you can determine the <strong>schema</strong> and <strong>index parameters</strong> of the collection on your own.</p>
-<h4 id="Step-1-Set-up-schema" class="common-anchor-header">Step 1: Set up schema</h4><p>A schema defines the structure of a collection. Within the schema, you have the option to enable or disable <code translate="no">enable_dynamic_field</code>, add pre-defined fields, and set attributes for each field. For a detailed explanation of the concept and available data types, refer to <a href="/docs/de/schema.md">Schema Explained</a>.</p>
+<p>Die automatisch indizierte und geladene Sammlung aus dem bereitgestellten Code ist für die sofortige Dateneinfügung bereit.</p>
+<h3 id="Customized-setup" class="common-anchor-header">Benutzerdefinierte Einrichtung</h3><p>Anstatt Milvus fast alles für Ihre Sammlung entscheiden zu lassen, können Sie das <strong>Schema</strong> und die <strong>Indexparameter</strong> der Sammlung selbst bestimmen.</p>
+<h4 id="Step-1-Set-up-schema" class="common-anchor-header">Schritt 1: Schema einrichten</h4><p>Ein Schema definiert die Struktur einer Sammlung. Innerhalb des Schemas haben Sie die Möglichkeit, <code translate="no">enable_dynamic_field</code> zu aktivieren oder zu deaktivieren, vordefinierte Felder hinzuzufügen und Attribute für jedes Feld festzulegen. Eine ausführliche Erläuterung des Konzepts und der verfügbaren Datentypen finden Sie unter <a href="/docs/de/schema.md">Schema erklärt</a>.</p>
 <div class="language-python">
-<p>To set up a schema, use <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_schema.md"><code translate="no">create_schema()</code></a> to create a schema object and <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/CollectionSchema/add_field.md"><code translate="no">add_field()</code></a> to add fields to the schema.</p>
+<p>Um ein Schema einzurichten, verwenden Sie <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_schema.md"><code translate="no">create_schema()</code></a> um ein Schemaobjekt zu erstellen und <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/CollectionSchema/add_field.md"><code translate="no">add_field()</code></a> um dem Schema Felder hinzuzufügen.</p>
 </div>
 <div class="language-java">
-<p>To set up a schema, use <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Collections/createSchema.md"><code translate="no">createSchema()</code></a> to create a schema object and <a href="https://milvus.io/api-reference/java/v2.4.x/v2/CollectionSchema/addField.md"><code translate="no">addField()</code></a> to add fields to the schema.</p>
+<p>Um ein Schema einzurichten, verwenden Sie <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Collections/createSchema.md"><code translate="no">createSchema()</code></a> um ein Schemaobjekt zu erstellen und <a href="https://milvus.io/api-reference/java/v2.4.x/v2/CollectionSchema/addField.md"><code translate="no">addField()</code></a> um dem Schema Felder hinzuzufügen.</p>
 </div>
 <div class="language-javascript">
-<p>To set up a schema, use <a href="https://milvus.io/api-reference/node/v2.4.x/Collections/createCollection.md"><code translate="no">createCollection()</code></a>.</p>
+<p>Um ein Schema einzurichten, verwenden Sie <a href="https://milvus.io/api-reference/node/v2.4.x/Collections/createCollection.md"><code translate="no">createCollection()</code></a>.</p>
 </div>
 <div class="language-shell">
-<p>To set up a schema, you need to define a JSON object that follows the schema format as displayed on the <a href="https://milvus.io/api-reference/restful/v2.4.x/v2/Collection%20(v2)/Create.md"><code translate="no">POST /v2/vectordb/collections/create</code></a> API endpoint reference page.</p>
+<p>Um ein Schema einzurichten, müssen Sie ein JSON-Objekt definieren, das dem Schemaformat entspricht, das auf der <a href="https://milvus.io/api-reference/restful/v2.4.x/v2/Collection%20(v2)/Create.md"><code translate="no">POST /v2/vectordb/collections/create</code></a> API-Endpunkt-Referenzseite angezeigt wird.</p>
 </div>
 <div class="multipleCode">
-  <a href="#python">Python </a>
-  <a href="#java">Java</a>
-  <a href="#javascript">Node.js</a>
-  <a href="#shell">cURL</a>
-</div>
+ <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#shell">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># 3. Create a collection in customized setup mode</span>
 
 <span class="hljs-comment"># 3.1. Create schema</span>
@@ -317,33 +308,33 @@ schema.addField(AddFieldReq.builder()
   <thead>
     <tr>
       <th>Parameter</th>
-      <th>Description</th>
+      <th>Beschreibung</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <td><code translate="no">auto_id</code></td>
-      <td>Determines if the primary field automatically increments.<br/>Setting this to <strong>True</strong> makes the primary field automatically increment. In this case, the primary field should not be included in the data to insert to avoid errors. The auto-generated IDs have a fixed length and cannot be altered.</td>
+      <td>Legt fest, ob das Primärfeld automatisch inkrementiert wird.<br/>Wenn dieser Wert auf <strong>True</strong> gesetzt wird, wird das Primärfeld automatisch inkrementiert. In diesem Fall sollte das Primärfeld nicht in den einzufügenden Daten enthalten sein, um Fehler zu vermeiden. Die automatisch generierten IDs haben eine feste Länge und können nicht geändert werden.</td>
     </tr>
     <tr>
       <td><code translate="no">enable_dynamic_field</code></td>
-      <td>Determines if Milvus saves the values of undefined fields in a dynamic field if the data being inserted into the target collection includes fields that are not defined in the collection's schema.<br/>When you set this to <strong>True</strong>, Milvus will create a field called <strong>$meta</strong> to store any undefined fields and their values from the data that is inserted.</td>
+      <td>Legt fest, ob Milvus die Werte von undefinierten Feldern in einem dynamischen Feld speichert, wenn die in die Zielsammlung eingefügten Daten Felder enthalten, die nicht im Schema der Sammlung definiert sind.<br/>Wenn Sie dies auf <strong>True</strong> setzen, erstellt Milvus ein Feld namens <strong>$meta</strong>, um alle undefinierten Felder und deren Werte aus den eingefügten Daten zu speichern.</td>
     </tr>
     <tr>
       <td><code translate="no">field_name</code></td>
-      <td>The name of the field.</td>
+      <td>Der Name des Feldes.</td>
     </tr>
     <tr>
       <td><code translate="no">datatype</code></td>
-      <td>The data type of the field. For a list of available data types, refer to <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/DataType.md">DataType</a>.</td>
+      <td>Der Datentyp des Feldes. Eine Liste der verfügbaren Datentypen finden Sie unter <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/DataType.md">DataType</a>.</td>
     </tr>
     <tr>
       <td><code translate="no">is_primary</code></td>
-      <td>Whether the current field is the primary field in a collection.<br/>Each collection has only one primary field. A primary field should be of either the <strong>DataType.INT64</strong> type or the <strong>DataType.VARCHAR</strong> type.</td>
+      <td>Ob das aktuelle Feld das Primärfeld in einer Sammlung ist.<br/>Jede Sammlung hat nur ein Primärfeld. Ein Primärfeld sollte entweder vom Typ <strong>DataType.INT64</strong> oder vom Typ <strong>DataType.VARCHAR</strong> sein.</td>
     </tr>
     <tr>
       <td><code translate="no">dim</code></td>
-      <td>The dimension of the vector embeddings.<br/>This is mandatory for a field of the <strong>DataType.FLOAT_VECTOR</strong>, <strong>DataType.BINARY_VECTOR</strong>, <strong>DataType.FLOAT16_VECTOR</strong>, or <strong>DataType.BFLOAT16_VECTOR</strong> type. If you use <strong>DataType.SPARSE_FLOAT_VECTOR</strong>, omit this parameter.</td>
+      <td>Die Dimension der Vektoreinbettungen.<br/>Dies ist obligatorisch für ein Feld vom Typ <strong>DataType.FLOAT_VECTOR</strong>, <strong>DataType.BINARY_VECTOR</strong>, <strong>DataType.FLOAT16_VECTOR</strong> oder <strong>DataType.BFLOAT16_VECTOR</strong>. Wenn Sie <strong>DataType.SPARSE_FLOAT_VECTOR</strong> verwenden, lassen Sie diesen Parameter weg.</td>
     </tr>
   </tbody>
 </table>
@@ -351,29 +342,29 @@ schema.addField(AddFieldReq.builder()
   <thead>
     <tr>
       <th>Parameter</th>
-      <th>Description</th>
+      <th>Beschreibung</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <td><code translate="no">fieldName</code></td>
-      <td>The name of the field.</td>
+      <td>Der Name des Feldes.</td>
     </tr>
     <tr>
       <td><code translate="no">dataType</code></td>
-      <td>The data type of the field. For a list of available data types, refer to <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Collections/DataType.md">DataType</a>.</td>
+      <td>Der Datentyp des Feldes. Eine Liste der verfügbaren Datentypen finden Sie unter <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Collections/DataType.md">DataType</a>.</td>
     </tr>
     <tr>
       <td><code translate="no">isPrimaryKey</code></td>
-      <td>Whether the current field is the primary field in a collection.<br/>Each collection has only one primary field. A primary field should be of either the <strong>DataType.Int64</strong> type or the <strong>DataType.VarChar</strong> type.</td>
+      <td>Ob das aktuelle Feld das Primärfeld in einer Sammlung ist.<br/>Jede Sammlung hat nur ein Primärfeld. Ein Primärfeld sollte entweder vom Typ <strong>DataType.Int64</strong> oder vom Typ <strong>DataType.VarChar</strong> sein.</td>
     </tr>
     <tr>
       <td><code translate="no">autoID</code></td>
-      <td>Whether allows the primary field to automatically increment.<br/>Setting this to <strong>true</strong> makes the primary field automatically increment. In this case, the primary field should not be included in the data to insert to avoid errors.</td>
+      <td>Ob das Primärfeld automatisch inkrementiert werden kann.<br/>Wenn dieser Wert auf <strong>true</strong> gesetzt wird, wird das Primärfeld automatisch inkrementiert. In diesem Fall sollte das Primärfeld nicht in den einzufügenden Daten enthalten sein, um Fehler zu vermeiden.</td>
     </tr>
     <tr>
       <td><code translate="no">dimension</code></td>
-      <td>The dimension of the vector embeddings.<br/>This is mandatory for a field of the <strong>DataType.FloatVector</strong>, <strong>DataType.BinaryVector</strong>, <strong>DataType.Float16Vector</strong>, or <strong>DataType.BFloat16Vector</strong> type.</td>
+      <td>Die Dimension der Vektoreinbettungen.<br/>Dies ist obligatorisch für ein Feld vom Typ <strong>DataType.FloatVector</strong>, <strong>DataType.BinaryVector</strong>, <strong>DataType.Float16Vector</strong> oder <strong>DataType.BFloat16Vector</strong>.</td>
     </tr>
   </tbody>
 </table>
@@ -381,29 +372,29 @@ schema.addField(AddFieldReq.builder()
   <thead>
     <tr>
       <th>Parameter</th>
-      <th>Description</th>
+      <th>Beschreibung</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <td><code translate="no">name</code></td>
-      <td>The name of the field.</td>
+      <td>Der Name des Feldes.</td>
     </tr>
     <tr>
       <td><code translate="no">data_type</code></td>
-      <td>The data type of the field. For an enumeration of all available data types, refer to <a href="https://milvus.io/api-reference/node/v2.4.x/Collections/DataType.md">DataType</a>.</td>
+      <td>Der Datentyp des Feldes. Eine Aufzählung aller verfügbaren Datentypen finden Sie unter <a href="https://milvus.io/api-reference/node/v2.4.x/Collections/DataType.md">DataType</a>.</td>
     </tr>
     <tr>
       <td><code translate="no">is_primary_key</code></td>
-      <td>Whether the current field is the primary field in a collection.<br/>Each collection has only one primary field. A primary field should be of either the <strong>DataType.INT64</strong> type or the <strong>DataType.VARCHAR</strong> type.</td>
+      <td>Ob das aktuelle Feld das Primärfeld in einer Sammlung ist.<br/>Jede Sammlung hat nur ein Primärfeld. Ein Primärfeld sollte entweder vom Typ <strong>DataType.INT64</strong> oder vom Typ <strong>DataType.VARCHAR</strong> sein.</td>
     </tr>
     <tr>
       <td><code translate="no">auto_id</code></td>
-      <td>Whether the primary field automatically increments upon data insertions into this collection.<br/>The value defaults to <strong>False</strong>. Setting this to <strong>True</strong> makes the primary field automatically increment. Skip this parameter if you need to set up a collection with a customized schema.</td>
+      <td>Ob das Primärfeld beim Einfügen von Daten in diese Sammlung automatisch inkrementiert wird.<br/>Der Standardwert ist <strong>False</strong>. Wenn Sie diesen Wert auf <strong>True</strong> setzen, wird das Primärfeld automatisch inkrementiert. Überspringen Sie diesen Parameter, wenn Sie eine Sammlung mit einem benutzerdefinierten Schema einrichten müssen.</td>
     </tr>
     <tr>
       <td><code translate="no">dim</code></td>
-      <td>The dimensionality of the collection field that holds vector embeddings.<br/>The value should be an integer greater than 1 and is usually determined by the model you use to generate vector embeddings.</td>
+      <td>Die Dimensionalität des Sammlungsfelds, das die Vektoreinbettungen enthält.<br/>Der Wert sollte eine ganze Zahl größer als 1 sein und wird in der Regel durch das Modell bestimmt, das Sie zur Erzeugung von Vektoreinbettungen verwenden.</td>
     </tr>
   </tbody>
 </table>
@@ -411,51 +402,47 @@ schema.addField(AddFieldReq.builder()
   <thead>
     <tr>
       <th>Parameter</th>
-      <th>Description</th>
+      <th>Beschreibung</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <td><code translate="no">fieldName</code></td>
-      <td>The name of the field to create in the target collection.</td>
+      <td>Der Name des zu erstellenden Feldes in der Zielsammlung.</td>
     </tr>
     <tr>
       <td><code translate="no">dataType</code></td>
-      <td>The data type of the field values.</td>
+      <td>Der Datentyp der Feldwerte.</td>
     </tr>
     <tr>
       <td><code translate="no">isPrimary</code></td>
-      <td>Whether the current field is the primary field. Setting this to <code translate="no">True</code> makes the current field the primary field.</td>
+      <td>Ob das aktuelle Feld das Primärfeld ist. Die Einstellung <code translate="no">True</code> macht das aktuelle Feld zum Primärfeld.</td>
     </tr>
     <tr>
       <td><code translate="no">elementTypeParams</code></td>
-      <td>Extra field parameters.</td>
+      <td>Zusätzliche Feldparameter.</td>
     </tr>
     <tr>
       <td><code translate="no">dim</code></td>
-      <td>An optional parameter for FloatVector or BinaryVector fields that determines the vector dimension.</td>
+      <td>Ein optionaler Parameter für FloatVector- oder BinaryVector-Felder, der die Vektordimension bestimmt.</td>
     </tr>
   </tbody>
 </table>
-<h4 id="Step-2-Set-up-index-parameters" class="common-anchor-header">Step 2: Set up index parameters</h4><p>Index parameters dictate how Milvus organizes your data within a collection. You can tailor the indexing process for specific fields by adjusting their <code translate="no">metric_type</code> and <code translate="no">index_type</code>. For the vector field, you have the flexibility to select <code translate="no">COSINE</code>, <code translate="no">L2</code>, <code translate="no">IP</code>, <code translate="no">HAMMING</code>, or <code translate="no">JACCARD</code> as the <code translate="no">metric_type</code>, depending on the type of vectors you are working with. For more information, refer to <a href="/docs/de/metric.md">Similarity Metrics</a>.</p>
+<h4 id="Step-2-Set-up-index-parameters" class="common-anchor-header">Schritt 2: Einrichten von Indexparametern</h4><p>Die Indexparameter bestimmen, wie Milvus Ihre Daten innerhalb einer Sammlung organisiert. Sie können den Indexierungsprozess für bestimmte Felder anpassen, indem Sie deren <code translate="no">metric_type</code> und <code translate="no">index_type</code> einstellen. Für das Vektorfeld haben Sie die Möglichkeit, <code translate="no">COSINE</code>, <code translate="no">L2</code>, <code translate="no">IP</code>, <code translate="no">HAMMING</code> oder <code translate="no">JACCARD</code> als <code translate="no">metric_type</code> zu wählen, je nach Art der Vektoren, mit denen Sie arbeiten. Weitere Informationen finden Sie unter <a href="/docs/de/metric.md">Ähnlichkeitsmetriken</a>.</p>
 <div class="language-python">
-<p>To set up index parameters, use <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/prepare_index_params.md"><code translate="no">prepare_index_params()</code></a> to prepare index parameters and <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/add_index.md"><code translate="no">add_index()</code></a> to add the index.</p>
+<p>Um Indexparameter einzurichten, verwenden Sie <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/prepare_index_params.md"><code translate="no">prepare_index_params()</code></a> um Index-Parameter vorzubereiten und <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/add_index.md"><code translate="no">add_index()</code></a> um den Index hinzuzufügen.</p>
 </div>
 <div class="language-java">
-<p>To set up index parameters, use <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Management/IndexParam.md">IndexParam</a>.</p>
+<p>Um Index-Parameter einzurichten, verwenden Sie <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Management/IndexParam.md">IndexParam</a>.</p>
 </div>
 <div class="language-javascript">
-<p>To set up index parameters, use <a href="https://milvus.io/api-reference/node/v2.4.x/Management/createIndex.md"><code translate="no">createIndex()</code></a>.</p>
+<p>Um Index-Parameter einzurichten, verwenden Sie <a href="https://milvus.io/api-reference/node/v2.4.x/Management/createIndex.md"><code translate="no">createIndex()</code></a>.</p>
 </div>
 <div class="language-shell">
-<p>To set up index parameters, you need to define a JSON object that follows the index parameters format as displayed on the <a href="https://milvus.io/api-reference/restful/v2.4.x/v2/Collection%20(v2)/Create.md"><code translate="no">POST /v2/vectordb/collections/create</code></a> API endpoint reference page.</p>
+<p>Um Index-Parameter einzurichten, müssen Sie ein JSON-Objekt definieren, das dem Format der Index-Parameter entspricht, das auf der <a href="https://milvus.io/api-reference/restful/v2.4.x/v2/Collection%20(v2)/Create.md"><code translate="no">POST /v2/vectordb/collections/create</code></a> API-Endpunkt-Referenzseite angezeigt wird.</p>
 </div>
 <div class="multipleCode">
-  <a href="#python">Python </a>
-  <a href="#java">Java</a>
-  <a href="#javascript">Node.js</a>
-  <a href="#shell">cURL</a>
-</div>
+ <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#shell">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-meta"># 3.3. Prepare index parameters</span>
 index_params = client.prepare_index_params()
 
@@ -522,25 +509,25 @@ indexParams.add(indexParamForVectorField);
   <thead>
     <tr>
       <th>Parameter</th>
-      <th>Description</th>
+      <th>Beschreibung</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <td><code translate="no">field_name</code></td>
-      <td>The name of the target file to apply this object applies.</td>
+      <td>Der Name der Zieldatei, für die dieses Objekt gilt.</td>
     </tr>
     <tr>
       <td><code translate="no">index_type</code></td>
-      <td>The name of the algorithm used to arrange data in the specific field. For applicable algorithms, refer to <a href="https://milvus.io/docs/index.md">In-memory Index</a> and <a href="https://milvus.io/docs/disk_index.md">On-disk Index</a>.</td>
+      <td>Der Name des Algorithmus, der für die Anordnung der Daten in dem betreffenden Feld verwendet wird. Anwendbare Algorithmen finden Sie unter <a href="https://milvus.io/docs/index.md">In-memory Index</a> und <a href="https://milvus.io/docs/disk_index.md">On-disk Index</a>.</td>
     </tr>
     <tr>
       <td><code translate="no">metric_type</code></td>
-      <td>The algorithm that is used to measure similarity between vectors. Possible values are <strong>IP</strong>, <strong>L2</strong>, <strong>COSINE</strong>, <strong>JACCARD</strong>, <strong>HAMMING</strong>. This is available only when the specified field is a vector field. For more information, refer to <a href="https://milvus.io/docs/index.md#Indexes-supported-in-Milvus">Indexes supported in Milvus</a>.</td>
+      <td>Der Algorithmus, der zur Messung der Ähnlichkeit zwischen Vektoren verwendet wird. Mögliche Werte sind <strong>IP</strong>, <strong>L2</strong>, <strong>COSINE</strong>, <strong>JACCARD</strong>, <strong>HAMMING</strong>. Diese Option ist nur verfügbar, wenn das angegebene Feld ein Vektorfeld ist. Weitere Informationen finden Sie unter <a href="https://milvus.io/docs/index.md#Indexes-supported-in-Milvus">In Milvus unterstützte Indizes</a>.</td>
     </tr>
     <tr>
       <td><code translate="no">params</code></td>
-      <td>The fine-tuning parameters for the specified index type. For details on possible keys and value ranges, refer to <a href="https://milvus.io/docs/index.md">In-memory Index</a>.</td>
+      <td>Die Feinabstimmungsparameter für den angegebenen Indextyp. Einzelheiten zu den möglichen Schlüsseln und Wertebereichen finden Sie unter <a href="https://milvus.io/docs/index.md">In-Memory-Index</a>.</td>
     </tr>
   </tbody>
 </table>
@@ -548,25 +535,25 @@ indexParams.add(indexParamForVectorField);
   <thead>
     <tr>
       <th>Parameter</th>
-      <th>Description</th>
+      <th>Beschreibung</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <td><code translate="no">fieldName</code></td>
-      <td>The name of the target field to apply this IndexParam object applies.</td>
+      <td>Der Name des Zielfeldes, auf das dieses IndexParam-Objekt angewendet wird.</td>
     </tr>
     <tr>
       <td><code translate="no">indexType</code></td>
-      <td>The name of the algorithm used to arrange data in the specific field. For applicable algorithms, refer to <a href="https://milvus.io/docs/index.md">In-memory Index</a> and <a href="https://milvus.io/docs/disk_index.md">On-disk Index</a>.</td>
+      <td>Der Name des Algorithmus, der zur Anordnung der Daten in dem bestimmten Feld verwendet wird. Anwendbare Algorithmen finden Sie unter <a href="https://milvus.io/docs/index.md">In-memory Index</a> und <a href="https://milvus.io/docs/disk_index.md">On-disk Index</a>.</td>
     </tr>
     <tr>
       <td><code translate="no">metricType</code></td>
-      <td>The distance metric to use for the index. Possible values are <strong>IP</strong>, <strong>L2</strong>, <strong>COSINE</strong>, <strong>JACCARD</strong>, <strong>HAMMING</strong>.</td>
+      <td>Die für den Index zu verwendende Abstandsmetrik. Mögliche Werte sind <strong>IP</strong>, <strong>L2</strong>, <strong>COSINE</strong>, <strong>JACCARD</strong>, <strong>HAMMING</strong>.</td>
     </tr>
     <tr>
       <td><code translate="no">extraParams</code></td>
-      <td>Extra index parameters. For details, refer to <a href="https://milvus.io/docs/index.md">In-memory Index</a> and <a href="https://milvus.io/docs/disk_index.md">On-disk Index</a>.</td>
+      <td>Zusätzliche Index-Parameter. Einzelheiten finden Sie unter <a href="https://milvus.io/docs/index.md">In-Memory-Index</a> und <a href="https://milvus.io/docs/disk_index.md">On-Disk-Index</a>.</td>
     </tr>
   </tbody>
 </table>
@@ -574,25 +561,25 @@ indexParams.add(indexParamForVectorField);
   <thead>
     <tr>
       <th>Parameter</th>
-      <th>Description</th>
+      <th>Beschreibung</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <td><code translate="no">field_name</code></td>
-      <td>The name of the target field on which an index is to be created.</td>
+      <td>Der Name des Zielfeldes, auf dem ein Index erstellt werden soll.</td>
     </tr>
     <tr>
       <td><code translate="no">index_type</code></td>
-      <td>The name of the algorithm used to arrange data in the specific field. For applicable algorithms, refer to <a href="https://milvus.io/docs/index.md">In-memory Index</a> and <a href="https://milvus.io/docs/disk_index.md">On-disk Index</a>.</td>
+      <td>Der Name des Algorithmus, der verwendet wird, um Daten in einem bestimmten Feld anzuordnen. Anwendbare Algorithmen finden Sie unter <a href="https://milvus.io/docs/index.md">In-Memory-Index</a> und <a href="https://milvus.io/docs/disk_index.md">On-Disk-Index</a>.</td>
     </tr>
     <tr>
       <td><code translate="no">metric_type</code></td>
-      <td>The algorithm that is used to measure similarity between vectors. Possible values are <strong>IP</strong>, <strong>L2</strong>, <strong>COSINE</strong>, <strong>JACCARD</strong>, <strong>HAMMING</strong>. This is available only when the specified field is a vector field. For more information, refer to <a href="https://milvus.io/docs/index.md#Indexes-supported-in-Milvus">Indexes supported in Milvus</a>.</td>
+      <td>Der Algorithmus, der zur Messung der Ähnlichkeit zwischen Vektoren verwendet wird. Mögliche Werte sind <strong>IP</strong>, <strong>L2</strong>, <strong>COSINE</strong>, <strong>JACCARD</strong>, <strong>HAMMING</strong>. Diese Option ist nur verfügbar, wenn das angegebene Feld ein Vektorfeld ist. Weitere Informationen finden Sie unter <a href="https://milvus.io/docs/index.md#Indexes-supported-in-Milvus">In Milvus unterstützte Indizes</a>.</td>
     </tr>
     <tr>
       <td><code translate="no">params</code></td>
-      <td>The fine-tuning parameters for the specified index type. For details on possible keys and value ranges, refer to <a href="https://milvus.io/docs/index.md">In-memory Index</a>.</td>
+      <td>Die Feinabstimmungsparameter für den angegebenen Indextyp. Einzelheiten zu den möglichen Schlüsseln und Wertebereichen finden Sie unter <a href="https://milvus.io/docs/index.md">In-Memory-Index</a>.</td>
     </tr>
   </tbody>
 </table>
@@ -600,55 +587,51 @@ indexParams.add(indexParamForVectorField);
   <thead>
     <tr>
       <th>Parameter</th>
-      <th>Description</th>
+      <th>Beschreibung</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <td><code translate="no">fieldName</code></td>
-      <td>The name of the target field on which an index is to be created.</td>
+      <td>Der Name des Zielfeldes, für das ein Index erstellt werden soll.</td>
     </tr>
     <tr>
       <td><code translate="no">indexName</code></td>
-      <td>The name of the index to create. The value defaults to the target field name.</td>
+      <td>Der Name des zu erstellenden Indexes. Der Wert ist standardmäßig der Name des Zielfelds.</td>
     </tr>
     <tr>
       <td><code translate="no">metricType</code></td>
-      <td>The algorithm that is used to measure similarity between vectors. Possible values are <strong>IP</strong>, <strong>L2</strong>, <strong>COSINE</strong>, <strong>JACCARD</strong>, <strong>HAMMING</strong>. This is available only when the specified field is a vector field. For more information, refer to <a href="https://milvus.io/docs/index.md#Indexes-supported-in-Milvus">Indexes supported in Milvus</a>.</td>
+      <td>Der Algorithmus, der zur Messung der Ähnlichkeit zwischen Vektoren verwendet wird. Mögliche Werte sind <strong>IP</strong>, <strong>L2</strong>, <strong>COSINE</strong>, <strong>JACCARD</strong>, <strong>HAMMING</strong>. Diese Option ist nur verfügbar, wenn das angegebene Feld ein Vektorfeld ist. Weitere Informationen finden Sie unter <a href="https://milvus.io/docs/index.md#Indexes-supported-in-Milvus">In Milvus unterstützte Indizes</a>.</td>
     </tr>
     <tr>
       <td><code translate="no">params</code></td>
-      <td>The index type and related settings. For details, refer to <a href="https://milvus.io/docs/index.md">In-memory Index</a>.</td>
+      <td>Der Indextyp und die zugehörigen Einstellungen. Weitere Informationen finden Sie unter <a href="https://milvus.io/docs/index.md">In-Memory-Index</a>.</td>
     </tr>
     <tr>
       <td><code translate="no">params.index_type</code></td>
-      <td>The type of the index to create.</td>
+      <td>Der Typ des zu erstellenden Indexes.</td>
     </tr>
     <tr>
       <td><code translate="no">params.nlist</code></td>
-      <td>The number of cluster units. This applies to IVF-related index types.</td>
+      <td>Die Anzahl der Cluster-Einheiten. Dies gilt für IVF-bezogene Indextypen.</td>
     </tr>
   </tbody>
 </table>
-<p>The code snippet above demonstrates how to set up index parameters for the vector field and a scalar field, respectively. For the vector field, set both the metric type and the index type. For a scalar field, set only the index type. It is recommended to create an index for the vector field and any scalar fields that are frequently used for filtering.</p>
-<h4 id="Step-3-Create-the-collection" class="common-anchor-header">Step 3: Create the collection</h4><p>You have the option to create a collection and an index file separately or to create a collection with the index loaded simultaneously upon creation.</p>
+<p>Der obige Codeschnipsel zeigt, wie Indexparameter für ein Vektorfeld bzw. ein Skalarfeld eingerichtet werden. Für das Vektorfeld müssen Sie sowohl den metrischen Typ als auch den Indextyp festlegen. Für ein Skalarfeld legen Sie nur den Indextyp fest. Es wird empfohlen, einen Index für das Vektorfeld und alle Skalarfelder zu erstellen, die häufig für die Filterung verwendet werden.</p>
+<h4 id="Step-3-Create-the-collection" class="common-anchor-header">Schritt 3: Erstellen der Sammlung</h4><p>Sie haben die Möglichkeit, eine Sammlung und eine Indexdatei separat zu erstellen oder eine Sammlung zu erstellen, bei der der Index gleichzeitig mit der Erstellung geladen wird.</p>
 <div class="language-python">
-<p>Use <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_collection.md">create_collection()</a> to create a collection with the specified schema and index parameters and <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/get_load_state.md">get_load_state()</a> to check the load state of the collection.</p>
+<p>Verwenden Sie <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_collection.md">create_collection()</a>, um eine Collection mit den angegebenen Schema- und Indexparametern zu erstellen und <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/get_load_state.md">get_load_state()</a>, um den Ladezustand der Collection zu überprüfen.</p>
 </div>
 <div class="language-java">
-<p>Use <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Collections/createCollection.md">createCollection()</a> to create a collection with the specified schema and index parameters and <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Management/getLoadState.md">getLoadState()</a> to check the load state of the collection.</p>
+<p>Verwenden Sie <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Collections/createCollection.md">createCollection()</a>, um eine Sammlung mit den angegebenen Schema- und Indexparametern zu erstellen, und <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Management/getLoadState.md">getLoadState()</a>, um den Ladestatus der Sammlung zu überprüfen.</p>
 </div>
 <div class="language-javascript">
-<p>Use <a href="https://milvus.io/api-reference/node/v2.4.x/Collections/createCollection.md">createCollection()</a> to create a collection with the specified schema and index parameters and <a href="https://milvus.io/api-reference/node/v2.4.x/Management/getLoadState.md">getLoadState()</a> to check the load state of the collection.</p>
+<p>Verwenden Sie <a href="https://milvus.io/api-reference/node/v2.4.x/Collections/createCollection.md">createCollection()</a>, um eine Collection mit den angegebenen Schema- und Indexparametern zu erstellen und <a href="https://milvus.io/api-reference/node/v2.4.x/Management/getLoadState.md">getLoadState()</a>, um den Ladezustand der Collection zu überprüfen.</p>
 </div>
 <ul>
-<li><p><strong>Create a collection with the index loaded simultaneously upon creation.</strong></p>
+<li><p><strong>Erstellen Sie eine Sammlung, bei der der Index gleichzeitig mit der Erstellung geladen wird.</strong></p>
 <p><div class="multipleCode">
-<a href="#python">Python </a>
-<a href="#java">Java</a>
-<a href="#javascript">Node.js</a>
-<a href="#shell">cURL</a>
-</div></p>
+<a href="#python">Python </a><a href="#java">Java</a><a href="#javascript">Node.js</a><a href="#shell">cURL</a></div></p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># 3.5. Create a collection with the index loaded simultaneously</span>
 client.create_collection(
     collection_name=<span class="hljs-string">&quot;customized_setup_1&quot;</span>,
@@ -784,14 +767,10 @@ $ curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable
 <span class="hljs-comment">#     }</span>
 <span class="hljs-comment"># }</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>The collection created above is loaded automatically. To learn more about loading and releasing a collection, refer to <a href="/docs/de/manage-collections.md#Load--Release-Collection">Load &amp; Release Collection</a>.</p></li>
-<li><p><strong>Create a collection and an index file separately.</strong></p>
+<p>Die oben erstellte Sammlung wird automatisch geladen. Weitere Informationen zum Laden und Freigeben einer Sammlung finden Sie unter <a href="/docs/de/manage-collections.md#Load--Release-Collection">Laden und Freigeben einer Sammlung</a>.</p></li>
+<li><p><strong>Erstellen Sie eine Sammlung und eine Indexdatei separat.</strong></p>
 <p><div class="multipleCode">
-<a href="#python">Python </a>
-<a href="#java">Java</a>
-<a href="#javascript">Node.js</a>
-<a href="#shell">cURL</a>
-</div></p>
+<a href="#python">Python </a><a href="#java">Java</a><a href="#javascript">Node.js</a><a href="#shell">cURL</a></div></p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># 3.6. Create a collection and index it separately</span>
 client.create_collection(
     collection_name=<span class="hljs-string">&quot;customized_setup_2&quot;</span>,
@@ -887,26 +866,26 @@ $ curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable
 <span class="hljs-comment">#     }</span>
 <span class="hljs-comment"># }</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>The collection created above is not loaded automatically. You can create an index for the collection as follows. Creating an index for the collection in a separate manner does not automatically load the collection. For details, refer to <a href="/docs/de/manage-collections.md#Load--Release-Collection">Load &amp; Release Collection</a>.</p>
+<p>Die oben erstellte Sammlung wird nicht automatisch geladen. Sie können wie folgt einen Index für die Sammlung erstellen. Wenn Sie einen Index für die Sammlung auf eine andere Weise erstellen, wird die Sammlung nicht automatisch geladen. Weitere Informationen finden Sie unter <a href="/docs/de/manage-collections.md#Load--Release-Collection">Sammlung laden und freigeben</a>.</p>
 <p><table class="language-python">
 <thead>
 <tr>
 <th>Parameter</th>
-<th>Description</th>
+<th>Beschreibung</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td><code translate="no">collection_name</code></td>
-<td>The name of the collection.</td>
+<td>Der Name der Sammlung.</td>
 </tr>
 <tr>
 <td><code translate="no">schema</code></td>
-<td>The schema of this collection.<br/>Setting this to <strong>None</strong> indicates this collection will be created with default settings.<br/>To set up a collection with a customized schema, you need to create a <strong>CollectionSchema</strong> object and reference it here. In this case, Milvus ignores all other schema-related settings carried in the request.</td>
+<td>Das Schema dieser Sammlung.<br/>Die Einstellung <strong>None</strong> bedeutet, dass diese Sammlung mit den Standardeinstellungen erstellt wird.<br/>Um eine Sammlung mit einem benutzerdefinierten Schema einzurichten, müssen Sie ein <strong>CollectionSchema-Objekt</strong> erstellen und es hier referenzieren. In diesem Fall ignoriert Milvus alle anderen schema-bezogenen Einstellungen, die in der Anfrage enthalten sind.</td>
 </tr>
 <tr>
 <td><code translate="no">index_params</code></td>
-<td>The parameters for building the index on the vector field in this collection. To set up a collection with a customized schema and automatically load the collection to memory, you need to create an IndexParams object and reference it here.<br/>You should at least add an index for the vector field in this collection. You can also skip this parameter if you prefer to set up the index parameters later on.</td>
+<td>Die Parameter für die Erstellung des Indexes für das Vektorfeld in dieser Sammlung. Um eine Sammlung mit einem angepassten Schema einzurichten und die Sammlung automatisch in den Speicher zu laden, müssen Sie ein IndexParams-Objekt erstellen und es hier referenzieren.<br/>Sie sollten zumindest einen Index für das Vektorfeld in dieser Sammlung hinzufügen. Sie können diesen Parameter auch weglassen, wenn Sie die Indexparameter später einrichten möchten.</td>
 </tr>
 </tbody>
 </table></p>
@@ -914,21 +893,21 @@ $ curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable
 <thead>
 <tr>
 <th>Parameter</th>
-<th>Description</th>
+<th>Beschreibung</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td><code translate="no">collectionName</code></td>
-<td>The name of the collection.</td>
+<td>Der Name der Sammlung.</td>
 </tr>
 <tr>
 <td><code translate="no">collectionSchema</code></td>
-<td>The schema of this collection.<br/>Leaving it empty indicates this collection will be created with default settings. To set up a collection with a customized schema, you need to create a <strong>CollectionSchema</strong> object and reference it here.</td>
+<td>Das Schema dieser Sammlung.<br/>Wenn Sie diesen Parameter leer lassen, wird diese Sammlung mit den Standardeinstellungen erstellt. Um eine Sammlung mit einem benutzerdefinierten Schema einzurichten, müssen Sie ein <strong>CollectionSchema-Objekt</strong> erstellen und es hier referenzieren.</td>
 </tr>
 <tr>
 <td><code translate="no">indexParams</code></td>
-<td>The parameters for building the index on the vector field in this collection. To set up a collection with a customized schema and automatically load the collection to memory, create an <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Management/IndexParam.md">IndexParams</a> object with a list of IndexParam objects and reference it here.</td>
+<td>Die Parameter für die Erstellung des Indexes für das Vektorfeld in dieser Sammlung. Um eine Sammlung mit einem benutzerdefinierten Schema einzurichten und die Sammlung automatisch in den Speicher zu laden, erstellen Sie ein <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Management/IndexParam.md">IndexParams-Objekt</a> mit einer Liste von IndexParam-Objekten und referenzieren Sie es hier.</td>
 </tr>
 </tbody>
 </table></p>
@@ -936,21 +915,21 @@ $ curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable
 <thead>
 <tr>
 <th>Parameter</th>
-<th>Description</th>
+<th>Beschreibung</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td><code translate="no">collection_name</code></td>
-<td>The name of the collection.</td>
+<td>Der Name der Sammlung.</td>
 </tr>
 <tr>
 <td><code translate="no">fields</code></td>
-<td>The fields in the collection.</td>
+<td>Die Felder in der Auflistung.</td>
 </tr>
 <tr>
 <td><code translate="no">index_params</code></td>
-<td>The index parameters for the collection to create.</td>
+<td>Die Indexparameter für die zu erstellende Sammlung.</td>
 </tr>
 </tbody>
 </table></p>
@@ -958,59 +937,55 @@ $ curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable
 <thead>
 <tr>
 <th>Parameter</th>
-<th>Description</th>
+<th>Beschreibung</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td><code translate="no">collectionName</code></td>
-<td>The name of the collection.</td>
+<td>Der Name der Sammlung.</td>
 </tr>
 <tr>
 <td><code translate="no">schema</code></td>
-<td>The schema is responsible for organizing data in the target collection. A valid schema should have multiple fields, which must include a primary key, a vector field, and several scalar fields.</td>
+<td>Das Schema ist für die Organisation der Daten in der Zielsammlung verantwortlich. Ein gültiges Schema sollte mehrere Felder haben, die einen Primärschlüssel, ein Vektorfeld und mehrere Skalarfelder umfassen müssen.</td>
 </tr>
 <tr>
 <td><code translate="no">schema.autoID</code></td>
-<td>Whether allows the primary field to automatically increment. Setting this to True makes the primary field automatically increment. In this case, the primary field should not be included in the data to insert to avoid errors. Set this parameter in the field with is_primary set to True.</td>
+<td>Ob das Primärfeld automatisch inkrementiert werden kann. Wenn Sie diese Option auf True setzen, wird das Primärfeld automatisch inkrementiert. In diesem Fall sollte das Primärfeld nicht in den einzufügenden Daten enthalten sein, um Fehler zu vermeiden. Setzen Sie diesen Parameter in dem Feld, in dem is_primary auf True gesetzt ist.</td>
 </tr>
 <tr>
 <td><code translate="no">schema.enableDynamicField</code></td>
-<td>Whether allows to use the reserved $meta field to hold non-schema-defined fields in key-value pairs.</td>
+<td>Erlaubt die Verwendung des reservierten Feldes $meta zur Aufnahme von nicht schema-definierten Feldern in Schlüssel-Wert-Paaren.</td>
 </tr>
 <tr>
 <td><code translate="no">fields</code></td>
-<td>A list of field objects.</td>
+<td>Eine Liste von Feldobjekten.</td>
 </tr>
 <tr>
 <td><code translate="no">fields.fieldName</code></td>
-<td>The name of the field to create in the target collection.</td>
+<td>Der Name des zu erstellenden Feldes in der Zielsammlung.</td>
 </tr>
 <tr>
 <td><code translate="no">fields.dataType</code></td>
-<td>The data type of the field values.</td>
+<td>Der Datentyp der Feldwerte.</td>
 </tr>
 <tr>
 <td><code translate="no">fields.isPrimary</code></td>
-<td>Whether the current field is the primary field. Setting this to True makes the current field the primary field.</td>
+<td>Ob das aktuelle Feld das Primärfeld ist. Durch die Einstellung auf True wird das aktuelle Feld zum Primärfeld.</td>
 </tr>
 <tr>
 <td><code translate="no">fields.elementTypeParams</code></td>
-<td>Extra field parameters.</td>
+<td>Zusätzliche Feldparameter.</td>
 </tr>
 <tr>
 <td><code translate="no">fields.elementTypeParams.dim</code></td>
-<td>An optional parameter for FloatVector or BinaryVector fields that determines the vector dimension.</td>
+<td>Ein optionaler Parameter für FloatVector- oder BinaryVector-Felder, der die Vektordimension bestimmt.</td>
 </tr>
 </tbody>
 </table></p>
-<p>The collection created above is not loaded automatically. You can create an index for the collection as follows. Creating an index for the collection in a separate manner does not automatically load the collection. For details, refer to <a href="/docs/de/manage-collections.md">Load &amp; Release Collection</a>.</p>
+<p>Die oben erstellte Sammlung wird nicht automatisch geladen. Sie können einen Index für die Sammlung wie folgt erstellen. Wenn Sie einen Index für die Sammlung auf separate Weise erstellen, wird die Sammlung nicht automatisch geladen. Einzelheiten finden Sie unter <a href="/docs/de/manage-collections.md">Laden und Freigeben der Sammlung</a>.</p>
 <p><div class="multipleCode">
-<a href="#python">Python </a>
-<a href="#java">Java</a>
-<a href="#javascript">Node.js</a>
-<a href="#shell">cURL</a>
-</div></p>
+<a href="#python">Python </a><a href="#java">Java</a><a href="#javascript">Node.js</a><a href="#shell">cURL</a></div></p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># 3.6 Create index</span>
 client.create_index(
     collection_name=<span class="hljs-string">&quot;customized_setup_2&quot;</span>,
@@ -1111,17 +1086,17 @@ $ curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable
   <thead>
     <tr>
       <th>Parameter</th>
-      <th>Description</th>
+      <th>Beschreibung</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <td><code translate="no">collection_name</code></td>
-      <td>The name of the collection.</td>
+      <td>Der Name der Sammlung.</td>
     </tr>
     <tr>
       <td><code translate="no">index_params</code></td>
-      <td>An <strong>IndexParams</strong> object containing a list of <strong>IndexParam</strong> objects.</td>
+      <td>Ein <strong>IndexParams-Objekt</strong>, das eine Liste von <strong>IndexParam-Objekten</strong> enthält.</td>
     </tr>
   </tbody>
 </table>
@@ -1131,17 +1106,17 @@ $ curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable
   <thead>
     <tr>
       <th>Parameter</th>
-      <th>Description</th>
+      <th>Beschreibung</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <td><code translate="no">collectionName</code></td>
-      <td>The name of the collection.</td>
+      <td>Der Name der Sammlung.</td>
     </tr>
     <tr>
       <td><code translate="no">indexParams</code></td>
-      <td>A list of <strong>IndexParam</strong> objects.</td>
+      <td>Eine Liste von <strong>IndexParam-Objekten</strong>.</td>
     </tr>
   </tbody>
 </table>
@@ -1149,29 +1124,29 @@ $ curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable
   <thead>
     <tr>
       <th>Parameter</th>
-      <th>Description</th>
+      <th>Beschreibung</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <td><code translate="no">collection_name</code></td>
-      <td>The name of the collection.</td>
+      <td>Der Name der Auflistung.</td>
     </tr>
     <tr>
       <td><code translate="no">field_name</code></td>
-      <td>The name of the field in which to create an index.</td>
+      <td>Der Name des Feldes, in dem ein Index erstellt werden soll.</td>
     </tr>
     <tr>
       <td><code translate="no">index_type</code></td>
-      <td>The name of the algorithm used to arrange data in the specific field. For applicable algorithms, refer to <a href="https://milvus.io/docs/index.md">In-memory Index</a> and <a href="https://milvus.io/docs/disk_index.md">On-disk Index</a>.</td>
+      <td>Der Name des Algorithmus, der für die Anordnung der Daten in dem betreffenden Feld verwendet wird. Anwendbare Algorithmen finden Sie unter <a href="https://milvus.io/docs/index.md">In-Memory-Index</a> und <a href="https://milvus.io/docs/disk_index.md">On-Disk-Index</a>.</td>
     </tr>
     <tr>
       <td><code translate="no">metric_type</code></td>
-      <td>The algorithm that is used to measure similarity between vectors. Possible values are <strong>IP</strong>, <strong>L2</strong>, <strong>COSINE</strong>, <strong>JACCARD</strong>, <strong>HAMMING</strong>. This is available only when the specified field is a vector field. For more information, refer to <a href="https://milvus.io/docs/index.md#Indexes-supported-in-Milvus">Indexes supported in Milvus</a>.</td>
+      <td>Der Algorithmus, der zur Messung der Ähnlichkeit zwischen Vektoren verwendet wird. Mögliche Werte sind <strong>IP</strong>, <strong>L2</strong>, <strong>COSINE</strong>, <strong>JACCARD</strong>, <strong>HAMMING</strong>. Diese Option ist nur verfügbar, wenn das angegebene Feld ein Vektorfeld ist. Weitere Informationen finden Sie unter <a href="https://milvus.io/docs/index.md#Indexes-supported-in-Milvus">In Milvus unterstützte Indizes</a>.</td>
     </tr>
     <tr>
       <td><code translate="no">params</code></td>
-      <td>The fine-tuning parameters for the specified index type. For details on possible keys and value ranges, refer to <a href="https://milvus.io/docs/index.md">In-memory Index</a>.</td>
+      <td>Die Feinabstimmungsparameter für den angegebenen Indextyp. Einzelheiten zu den möglichen Schlüsseln und Wertebereichen finden Sie unter <a href="https://milvus.io/docs/index.md">In-Memory-Index</a>.</td>
     </tr>
   </tbody>
 </table>
@@ -1179,41 +1154,41 @@ $ curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable
     <thead>
         <tr>
         <th>Parameter</th>
-        <th>Description</th>
+        <th>Beschreibung</th>
         </tr>
     </thead>
     <tbody>
         <tr>
         <td><code translate="no">collectionName</code></td>
-        <td>The name of the collection.</td>
+        <td>Der Name der Sammlung.</td>
         </tr>
         <tr>
         <td><code translate="no">indexParams</code></td>
-        <td>The index parameters for the collection to create.</td>
+        <td>Die Indexparameter für die zu erstellende Sammlung.</td>
         </tr>
         <tr>
         <td><code translate="no">indexParams.metricType</code></td>
-        <td>The similarity metric type used to build the index. The value defaults to COSINE.</td>
+        <td>Der Typ der Ähnlichkeitsmetrik, der für den Aufbau des Index verwendet wird. Der Standardwert ist COSINE.</td>
         </tr>
         <tr>
         <td><code translate="no">indexParams.fieldName</code></td>
-        <td>The name of the target field on which an index is to be created.</td>
+        <td>Der Name des Zielfeldes, für das ein Index erstellt werden soll.</td>
         </tr>
         <tr>
         <td><code translate="no">indexParams.indexName</code></td>
-        <td>The name of the index to create, the value defaults to the target field name.</td>
+        <td>Der Name des zu erstellenden Indexes; der Standardwert ist der Name des Zielfeldes.</td>
         </tr>
         <tr>
         <td><code translate="no">indexParams.indexConfig.index_type</code></td>
-        <td>The type of the index to create.</td>
+        <td>Der Typ des zu erstellenden Indexes.</td>
         </tr>
         <tr>
         <td><code translate="no">indexParams.indexConfig.nlist</code></td>
-        <td>The number of cluster units. This applies to IVF-related index types.</td>
+        <td>Die Anzahl der Cluster-Einheiten. Dies gilt für IVF-bezogene Indextypen.</td>
         </tr>
     </tbody>
 </table>
-<h2 id="View-Collections" class="common-anchor-header">View Collections<button data-href="#View-Collections" class="anchor-icon" translate="no">
+<h2 id="View-Collections" class="common-anchor-header">Sammlungen anzeigen<button data-href="#View-Collections" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -1229,23 +1204,19 @@ $ curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable
         ></path>
       </svg>
     </button></h2><div class="language-python">
-<p>To check the details of an existing collection, use <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/describe_collection.md">describe_collection()</a>.</p>
+<p>Um die Details einer bestehenden Sammlung zu überprüfen, verwenden Sie <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/describe_collection.md">describe_collection()</a>.</p>
 </div>
 <div class="language-java">
-<p>To check the details of an existing collection, use <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Collections/describeCollection.md">describeCollection()</a>.</p>
+<p>Um die Details einer bestehenden Sammlung zu überprüfen, verwenden Sie <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Collections/describeCollection.md">describeCollection()</a>.</p>
 </div>
 <div class="language-javascript">
-<p>To check the details of an existing collection, use <a href="https://milvus.io/api-reference/node/v2.4.x/Collections/describeCollection.md">describeCollection()</a>.</p>
+<p>Um die Details einer bestehenden Sammlung zu prüfen, verwenden Sie <a href="https://milvus.io/api-reference/node/v2.4.x/Collections/describeCollection.md">describeCollection()</a>.</p>
 </div>
 <div class="language-shell">
-<p>To view the definition of a collection, you can use the <a href="https://milvus.io/api-reference/restful/v2.4.x/v2/Collection%20(v2)/Describe.md"><code translate="no">POST /v2/vectordb/collections/describe</code></a> and the <a href="https://milvus.io/api-reference/restful/v2.4.x/v2/Collection%20(v2)/List.md"><code translate="no">POST /v2/vectordb/collections/list</code></a> API endpoints.</p>
+<p>Um die Definition einer Sammlung anzuzeigen, können Sie die <a href="https://milvus.io/api-reference/restful/v2.4.x/v2/Collection%20(v2)/Describe.md"><code translate="no">POST /v2/vectordb/collections/describe</code></a> und die <a href="https://milvus.io/api-reference/restful/v2.4.x/v2/Collection%20(v2)/List.md"><code translate="no">POST /v2/vectordb/collections/list</code></a> API-Endpunkte verwenden.</p>
 </div>
 <div class="multipleCode">
-    <a href="#python">Python </a>
-    <a href="#java">Java</a>
-    <a href="#javascript">Node.js</a>
-    <a href="#shell">cURL</a>
-</div>
+   <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#shell">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># 5. View Collections</span>
 res = client.describe_collection(
     collection_name=<span class="hljs-string">&quot;customized_setup_2&quot;</span>
@@ -1438,13 +1409,9 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 <span class="hljs-comment">#     }</span>
 <span class="hljs-comment"># }</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>To list all existing collections, you can do as follows:</p>
+<p>Um alle vorhandenen Sammlungen aufzulisten, können Sie wie folgt vorgehen:</p>
 <div class="multipleCode">
-    <a href="#python">Python </a>
-    <a href="#java">Java</a>
-    <a href="#javascript">Node.js</a>
-    <a href="#shell">cURL</a>
-</div>
+   <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#shell">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># 6. List all collection names</span>
 res = client.list_collections()
 
@@ -1499,7 +1466,7 @@ System.out.println(listCollectionsRes.getCollectionNames());
 <span class="hljs-comment">#   ]</span>
 <span class="hljs-comment"># }</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Load--Release-Collection" class="common-anchor-header">Load &amp; Release Collection<button data-href="#Load--Release-Collection" class="anchor-icon" translate="no">
+<h2 id="Load--Release-Collection" class="common-anchor-header">Sammlung laden und freigeben<button data-href="#Load--Release-Collection" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -1514,29 +1481,25 @@ System.out.println(listCollectionsRes.getCollectionNames());
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>During the loading process of a collection, Milvus loads the collection’s index file into memory. Conversely, when releasing a collection, Milvus unloads the index file from memory. Before conducting searches in a collection, ensure that the collection is loaded.</p>
-<h3 id="Load-a-collection" class="common-anchor-header">Load a collection</h3><div class="language-python">
-<p>To load a collection, use the <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/load_collection.md"><code translate="no">load_collection()</code></a> method, specifying the collection name. You can also set <code translate="no">replica_number</code> to determine how many in-memory replicas of data segments to create on query nodes when the collection is loaded.</p>
+    </button></h2><p>Während des Ladevorgangs einer Sammlung lädt Milvus die Indexdatei der Sammlung in den Speicher. Umgekehrt entlädt Milvus beim Freigeben einer Sammlung die Indexdatei aus dem Speicher. Bevor Sie eine Suche in einer Sammlung durchführen, stellen Sie sicher, dass die Sammlung geladen ist.</p>
+<h3 id="Load-a-collection" class="common-anchor-header">Laden einer Sammlung</h3><div class="language-python">
+<p>Um eine Sammlung zu laden, verwenden Sie die <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/load_collection.md"><code translate="no">load_collection()</code></a> Methode und geben Sie den Namen der Sammlung an. Sie können auch <code translate="no">replica_number</code> einstellen, um zu bestimmen, wie viele speicherinterne Repliken von Datensegmenten auf Abfrageknoten erstellt werden sollen, wenn die Sammlung geladen wird.</p>
 <ul>
-<li>Milvus Standalone: The maximum allowed value for <code translate="no">replica_number</code> is 1.</li>
-<li>Milvus Cluster: The maximum value should not exceed the <code translate="no">queryNode.replicas</code> set in your Milvus configurations. For additional details, refer to <a href="https://milvus.io/docs/configure_querynode.md#Query-Node-related-Configurations">Query Node-related Configurations</a>.</li>
+<li>Milvus Standalone: Der maximal zulässige Wert für <code translate="no">replica_number</code> ist 1.</li>
+<li>Milvus Cluster: Der Höchstwert sollte die in Ihren Milvus-Konfigurationen festgelegte <code translate="no">queryNode.replicas</code> nicht überschreiten. Weitere Einzelheiten finden Sie unter <a href="https://milvus.io/docs/configure_querynode.md#Query-Node-related-Configurations">Abfrage von knotenbezogenen Konfigurationen</a>.</li>
 </ul>
 </div>
 <div class="language-java">
-<p>To load a collection, use the <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Management/loadCollection.md"><code translate="no">loadCollection()</code></a> method, specifying the collection name.</p>
+<p>Um eine Sammlung zu laden, verwenden Sie die <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Management/loadCollection.md"><code translate="no">loadCollection()</code></a> Methode und geben Sie den Namen der Sammlung an.</p>
 </div>
 <div class="language-javascript">
-<p>To load a collection, use the <a href="https://milvus.io/api-reference/node/v2.4.x/Management/loadCollection.md"><code translate="no">loadCollection()</code></a> method, specifying the collection name.</p>
+<p>Um eine Sammlung zu laden, verwenden Sie die <a href="https://milvus.io/api-reference/node/v2.4.x/Management/loadCollection.md"><code translate="no">loadCollection()</code></a> Methode und geben Sie den Namen der Sammlung an.</p>
 </div>
 <div class="language-shell">
-<p>To load a collection, you can use the <a href="https://milvus.io/api-reference/restful/v2.4.x/v2/Collection%20(v2)/Load.md"><code translate="no">POST /v2/vectordb/collections/load</code></a> and the <a href="https://milvus.io/api-reference/restful/v2.4.x/v2/Collection%20(v2)/GetLoadState.md"><code translate="no">POST /v2/vectordb/collections/get_load_state</code></a> API endpoints.</p>
+<p>Um eine Sammlung zu laden, können Sie die <a href="https://milvus.io/api-reference/restful/v2.4.x/v2/Collection%20(v2)/Load.md"><code translate="no">POST /v2/vectordb/collections/load</code></a> und die <a href="https://milvus.io/api-reference/restful/v2.4.x/v2/Collection%20(v2)/GetLoadState.md"><code translate="no">POST /v2/vectordb/collections/get_load_state</code></a> API-Endpunkte verwenden.</p>
 </div>
 <div class="multipleCode">
-    <a href="#python">Python </a>
-    <a href="#java">Java</a>
-    <a href="#javascript">Node.js</a>
-    <a href="#shell">cURL</a>
-</div>
+   <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#shell">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># 7. Load the collection</span>
 client.load_collection(
     collection_name=<span class="hljs-string">&quot;customized_setup_2&quot;</span>,
@@ -1630,24 +1593,20 @@ $ curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable
 <span class="hljs-comment">#     }</span>
 <span class="hljs-comment"># }</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Release-a-collection" class="common-anchor-header">Release a collection</h3><div class="language-python">
-<p>To release a collection, use the <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/release_collection.md"><code translate="no">release_collection()</code></a> method, specifying the collection name.</p>
+<h3 id="Release-a-collection" class="common-anchor-header">Eine Sammlung freigeben</h3><div class="language-python">
+<p>Um eine Sammlung freizugeben, verwenden Sie die <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/release_collection.md"><code translate="no">release_collection()</code></a> Methode und geben Sie den Namen der Sammlung an.</p>
 </div>
 <div class="language-java">
-<p>To release a collection, use the <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Management/releaseCollection.md"><code translate="no">releaseCollection()</code></a> method, specifying the collection name.</p>
+<p>Um eine Sammlung freizugeben, verwenden Sie die <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Management/releaseCollection.md"><code translate="no">releaseCollection()</code></a> Methode und geben Sie den Namen der Sammlung an.</p>
 </div>
 <div class="language-javascript">
-<p>To release a collection, use the <a href="https://milvus.io/api-reference/node/v2.4.x/Management/releaseCollection.md"><code translate="no">releaseCollection()</code></a> method, specifying the collection name.</p>
+<p>Um eine Sammlung freizugeben, verwenden Sie die <a href="https://milvus.io/api-reference/node/v2.4.x/Management/releaseCollection.md"><code translate="no">releaseCollection()</code></a> Methode und geben Sie den Namen der Sammlung an.</p>
 </div>
 <div class="language-shell">
-<p>To release a collection, you can use the <a href="https://milvus.io/api-reference/restful/v2.4.x/v2/Collection%20(v2)/Release.md"><code translate="no">POST /v2/vectordb/collections/release</code></a> and the <a href="https://milvus.io/api-reference/restful/v2.4.x/v2/Collection%20(v2)/GetLoadState.md"><code translate="no">POST /v2/vectordb/collections/get_load_state</code></a> API endpoints.</p>
+<p>Um eine Sammlung freizugeben, können Sie die <a href="https://milvus.io/api-reference/restful/v2.4.x/v2/Collection%20(v2)/Release.md"><code translate="no">POST /v2/vectordb/collections/release</code></a> und die <a href="https://milvus.io/api-reference/restful/v2.4.x/v2/Collection%20(v2)/GetLoadState.md"><code translate="no">POST /v2/vectordb/collections/get_load_state</code></a> API-Endpunkte verwenden.</p>
 </div>
 <div class="multipleCode">
-    <a href="#python">Python </a>
-    <a href="#java">Java</a>
-    <a href="#javascript">Node.js</a>
-    <a href="#shell">cURL</a>
-</div>
+   <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#shell">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># 8. Release the collection</span>
 client.release_collection(
     collection_name=<span class="hljs-string">&quot;customized_setup_2&quot;</span>
@@ -1734,7 +1693,7 @@ $ curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable
 <span class="hljs-comment">#     }</span>
 <span class="hljs-comment"># }</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Set-up-aliases" class="common-anchor-header">Set up aliases<button data-href="#Set-up-aliases" class="anchor-icon" translate="no">
+<h2 id="Set-up-aliases" class="common-anchor-header">Aliasnamen einrichten<button data-href="#Set-up-aliases" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -1749,25 +1708,21 @@ $ curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>You can assign aliases for collections to make them more meaningful in a specific context. You can assign multiple aliases for a collection, but multiple collections cannot share an alias.</p>
-<h3 id="Create-aliases" class="common-anchor-header">Create aliases</h3><div class="language-python">
-<p>To create aliases, use the <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_alias.md"><code translate="no">create_alias()</code></a> method, specifying the collection name and the alias.</p>
+    </button></h2><p>Sie können Sammlungen Aliasnamen zuweisen, um ihnen in einem bestimmten Kontext mehr Bedeutung zu verleihen. Sie können einer Sammlung mehrere Aliasnamen zuweisen, aber nicht mehrere Sammlungen können sich einen Alias teilen.</p>
+<h3 id="Create-aliases" class="common-anchor-header">Aliasnamen erstellen</h3><div class="language-python">
+<p>Um Aliasnamen zu erstellen, verwenden Sie die <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_alias.md"><code translate="no">create_alias()</code></a> Methode und geben Sie den Namen der Sammlung und den Alias an.</p>
 </div>
 <div class="language-java">
-<p>To create aliases, use the <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Collections/createAlias.md"><code translate="no">createAlias()</code></a> method, specifying the collection name and the alias.</p>
+<p>Um Aliasnamen zu erstellen, verwenden Sie die Methode <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Collections/createAlias.md"><code translate="no">createAlias()</code></a> unter Angabe des Sammlungsnamens und des Alias.</p>
 </div>
 <div class="language-javascript">
-<p>To create aliases, use the <a href="https://milvus.io/api-reference/node/v2.4.x/Collections/createAlias.md"><code translate="no">createAlias()</code></a> method, specifying the collection name and the alias.</p>
+<p>Um Aliasnamen zu erstellen, verwenden Sie die Methode <a href="https://milvus.io/api-reference/node/v2.4.x/Collections/createAlias.md"><code translate="no">createAlias()</code></a> unter Angabe des Sammlungsnamens und des Alias.</p>
 </div>
 <div class="language-shell">
-<p>To create aliases for a collection, you can use the <a href="https://milvus.io/api-reference/restful/v2.4.x/v2/Alias%20(v2)/Create.md"><code translate="no">POST /v2/vectordb/aliases/create</code></a> API endpoint.</p>
+<p>Um Aliasnamen für eine Sammlung zu erstellen, können Sie den <a href="https://milvus.io/api-reference/restful/v2.4.x/v2/Alias%20(v2)/Create.md"><code translate="no">POST /v2/vectordb/aliases/create</code></a> API-Endpunkt verwenden.</p>
 </div>
 <div class="multipleCode">
-    <a href="#python">Python </a>
-    <a href="#java">Java</a>
-    <a href="#javascript">Node.js</a>
-    <a href="#shell">cURL</a>
-</div>
+   <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#shell">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># 9.1. Create aliases</span>
 client.create_alias(
     collection_name=<span class="hljs-string">&quot;customized_setup_2&quot;</span>,
@@ -1856,17 +1811,17 @@ $ curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable
   <thead>
     <tr>
       <th>Parameter</th>
-      <th>Description</th>
+      <th>Beschreibung</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <td><code translate="no">collection_name</code></td>
-      <td>The name of the collection to create an alias for.</td>
+      <td>Der Name der Sammlung, für die ein Alias erstellt werden soll.</td>
     </tr>
     <tr>
       <td><code translate="no">alias</code></td>
-      <td>The alias of the collection. Before this operation, ensure that the alias does not already exist. If it does, exceptions will occur.</td>
+      <td>Der Alias der Sammlung. Vergewissern Sie sich vor diesem Vorgang, dass der Alias nicht bereits existiert. Ist dies der Fall, treten Ausnahmen auf.</td>
     </tr>
   </tbody>
 </table>
@@ -1874,17 +1829,17 @@ $ curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable
   <thead>
     <tr>
       <th>Parameter</th>
-      <th>Description</th>
+      <th>Beschreibung</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <td><code translate="no">collectionName</code></td>
-      <td>The name of the collection to create an alias for.</td>
+      <td>Der Name der Sammlung, für die ein Alias erstellt werden soll.</td>
     </tr>
     <tr>
       <td><code translate="no">alias</code></td>
-      <td>The alias of the collection. Before this operation, ensure that the alias does not already exist. If it does, exceptions will occur.</td>
+      <td>Der Alias der Sammlung. Vergewissern Sie sich vor diesem Vorgang, dass der Alias nicht bereits existiert. Ist dies der Fall, treten Ausnahmen auf.</td>
     </tr>
   </tbody>
 </table>
@@ -1892,17 +1847,17 @@ $ curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable
   <thead>
     <tr>
       <th>Parameter</th>
-      <th>Description</th>
+      <th>Beschreibung</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <td><code translate="no">collection_name</code></td>
-      <td>The name of the collection to create an alias for.</td>
+      <td>Der Name der Sammlung, für die ein Alias erstellt werden soll.</td>
     </tr>
     <tr>
       <td><code translate="no">alias</code></td>
-      <td>The alias of the collection. Before this operation, ensure that the alias does not already exist. If it does, exceptions will occur.</td>
+      <td>Der Alias der Sammlung. Vergewissern Sie sich vor diesem Vorgang, dass der Alias nicht bereits existiert. Ist dies der Fall, treten Ausnahmen auf.</td>
     </tr>
   </tbody>
 </table>
@@ -1910,38 +1865,34 @@ $ curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable
   <thead>
     <tr>
       <th>Parameter</th>
-      <th>Description</th>
+      <th>Beschreibung</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <td><code translate="no">collectionName</code></td>
-      <td>The name of the collection to create an alias for.</td>
+      <td>Der Name der Sammlung, für die ein Alias erstellt werden soll.</td>
     </tr>
     <tr>
       <td><code translate="no">aliasName</code></td>
-      <td>The alias of the collection. Before this operation, ensure that the alias does not already exist. If it does, exceptions will occur.</td>
+      <td>Der Alias der Sammlung. Vergewissern Sie sich vor diesem Vorgang, dass der Alias nicht bereits existiert. Ist dies der Fall, treten Ausnahmen auf.</td>
     </tr>
   </tbody>
 </table>
-<h3 id="List-aliases" class="common-anchor-header">List aliases</h3><div class="language-python">
-<p>To list aliases, use the <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/list_aliases.md"><code translate="no">list_aliases()</code></a> method, specifying the collection name.</p>
+<h3 id="List-aliases" class="common-anchor-header">Aliasnamen auflisten</h3><div class="language-python">
+<p>Um Aliasnamen aufzulisten, verwenden Sie die <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/list_aliases.md"><code translate="no">list_aliases()</code></a> Methode und geben Sie den Namen der Sammlung an.</p>
 </div>
 <div class="language-java">
-<p>To list aliases, use the <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Collections/listAliases.md"><code translate="no">listAliases()</code></a> method, specifying the collection name.</p>
+<p>Um Aliasnamen aufzulisten, verwenden Sie die Methode <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Collections/listAliases.md"><code translate="no">listAliases()</code></a> Methode unter Angabe des Sammlungsnamens.</p>
 </div>
 <div class="language-javascript">
-<p>To list aliases, use the <a href="https://milvus.io/api-reference/node/v2.4.x/Collections/listAliases.md"><code translate="no">listAliases()</code></a> method, specifying the collection name.</p>
+<p>Um Aliasnamen aufzulisten, verwenden Sie die Methode <a href="https://milvus.io/api-reference/node/v2.4.x/Collections/listAliases.md"><code translate="no">listAliases()</code></a> Methode unter Angabe des Sammlungsnamens.</p>
 </div>
 <div class="language-shell">
-<p>To list aliases for a collection, you can use the <a href="https://milvus.io/api-reference/restful/v2.4.x/v2/Alias%20(v2)/List.md"><code translate="no">POST /v2/vectordb/aliases/list</code></a> API endpoint.</p>
+<p>Um Aliasnamen für eine Sammlung aufzulisten, können Sie den <a href="https://milvus.io/api-reference/restful/v2.4.x/v2/Alias%20(v2)/List.md"><code translate="no">POST /v2/vectordb/aliases/list</code></a> API-Endpunkt verwenden.</p>
 </div>
 <div class="multipleCode">
-    <a href="#python">Python </a>
-    <a href="#java">Java</a>
-    <a href="#javascript">Node.js</a>
-    <a href="#shell">cURL</a>
-</div>
+   <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#shell">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># 9.2. List aliases</span>
 res = client.list_aliases(
     collection_name=<span class="hljs-string">&quot;customized_setup_2&quot;</span>
@@ -2004,24 +1955,20 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 <span class="hljs-comment">#     ]</span>
 <span class="hljs-comment"># }</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Describe-aliases" class="common-anchor-header">Describe aliases</h3><div class="language-python">
-<p>To describe aliases, use the <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/describe_alias.md"><code translate="no">describe_alias()</code></a> method, specifying the alias.</p>
+<h3 id="Describe-aliases" class="common-anchor-header">Aliasnamen beschreiben</h3><div class="language-python">
+<p>Um Aliasnamen zu beschreiben, verwenden Sie die <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/describe_alias.md"><code translate="no">describe_alias()</code></a> Methode und geben Sie den Alias an.</p>
 </div>
 <div class="language-java">
-<p>To describe aliases, use the <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Collections/describeAlias.md"><code translate="no">describeAlias()</code></a> method, specifying the alias.</p>
+<p>Um Aliasnamen zu beschreiben, verwenden Sie die <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Collections/describeAlias.md"><code translate="no">describeAlias()</code></a> Methode unter Angabe des Alias.</p>
 </div>
 <div class="language-javascript">
-<p>To describe aliases, use the <a href="https://milvus.io/api-reference/node/v2.4.x/Collections/describeAlias.md"><code translate="no">describeAlias()</code></a> method, specifying the alias.</p>
+<p>Um Aliasnamen zu beschreiben, verwenden Sie die Methode <a href="https://milvus.io/api-reference/node/v2.4.x/Collections/describeAlias.md"><code translate="no">describeAlias()</code></a> Methode und geben Sie den Alias an.</p>
 </div>
 <div class="language-shell">
-<p>To describe aliases for a collection, you can use the <a href="https://milvus.io/api-reference/restful/v2.4.x/v2/Alias%20(v2)/Describe.md"><code translate="no">POST /v2/vectordb/aliases/describe</code></a> API endpoint.</p>
+<p>Um Aliase für eine Sammlung zu beschreiben, können Sie den <a href="https://milvus.io/api-reference/restful/v2.4.x/v2/Alias%20(v2)/Describe.md"><code translate="no">POST /v2/vectordb/aliases/describe</code></a> API-Endpunkt verwenden.</p>
 </div>
 <div class="multipleCode">
-    <a href="#python">Python </a>
-    <a href="#java">Java</a>
-    <a href="#javascript">Node.js</a>
-    <a href="#shell">cURL</a>
-</div>
+   <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#shell">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># 9.3. Describe aliases</span>
 res = client.describe_alias(
     <span class="hljs-built_in">alias</span>=<span class="hljs-string">&quot;bob&quot;</span>
@@ -2095,24 +2042,20 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 <span class="hljs-comment">#     }</span>
 <span class="hljs-comment"># }</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Reassign-aliases" class="common-anchor-header">Reassign aliases</h3><div class="language-python">
-<p>To reassign aliases to other collections, use the <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/alter_alias.md"><code translate="no">alter_alias()</code></a> method, specifying the collection name and the alias.</p>
+<h3 id="Reassign-aliases" class="common-anchor-header">Aliasnamen neu zuweisen</h3><div class="language-python">
+<p>Um Aliase anderen Sammlungen neu zuzuordnen, verwenden Sie die <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/alter_alias.md"><code translate="no">alter_alias()</code></a> und geben Sie dabei den Namen der Sammlung und den Alias an.</p>
 </div>
 <div class="language-java">
-<p>To reassign aliases to other collections, use the <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Collections/alterAlias.md"><code translate="no">alterAlias()</code></a> method, specifying the collection name and the alias.</p>
+<p>Um Aliase anderen Sammlungen neu zuzuordnen, verwenden Sie die Methode <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Collections/alterAlias.md"><code translate="no">alterAlias()</code></a> unter Angabe des Sammlungsnamens und des Alias.</p>
 </div>
 <div class="language-javascript">
-<p>To reassign aliases to other collections, use the <a href="https://milvus.io/api-reference/node/v2.4.x/Collections/alterAlias.md"><code translate="no">alterAlias()</code></a> method, specifying the collection name and the alias.</p>
+<p>Um Aliasnamen anderen Sammlungen zuzuordnen, verwenden Sie die Methode <a href="https://milvus.io/api-reference/node/v2.4.x/Collections/alterAlias.md"><code translate="no">alterAlias()</code></a> unter Angabe des Sammlungsnamens und des Alias.</p>
 </div>
 <div class="language-shell">
-<p>To reassign aliases to other collections, you can use the <a href="https://milvus.io/api-reference/restful/v2.4.x/v2/Alias%20(v2)/Alter.md"><code translate="no">POST /v2/vectordb/aliases/alter</code></a> API endpoint.</p>
+<p>Um Aliase anderen Sammlungen neu zuzuordnen, können Sie den <a href="https://milvus.io/api-reference/restful/v2.4.x/v2/Alias%20(v2)/Alter.md"><code translate="no">POST /v2/vectordb/aliases/alter</code></a> API-Endpunkt verwenden.</p>
 </div>
 <div class="multipleCode">
-    <a href="#python">Python </a>
-    <a href="#java">Java</a>
-    <a href="#javascript">Node.js</a>
-    <a href="#shell">cURL</a>
-</div>
+   <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#shell">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># 9.4 Reassign aliases to other collections</span>
 client.alter_alias(
     collection_name=<span class="hljs-string">&quot;customized_setup_1&quot;</span>,
@@ -2260,23 +2203,20 @@ $ curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable
 <span class="hljs-comment">#     ]</span>
 <span class="hljs-comment"># }</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Drop-aliases" class="common-anchor-header">Drop aliases</h3><div class="language-python">
-<p>To drop aliases, use the <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/drop_alias.md"><code translate="no">drop_alias()</code></a> method, specifying the alias.</p>
+<h3 id="Drop-aliases" class="common-anchor-header">Aliasnamen löschen</h3><div class="language-python">
+<p>Um Aliasnamen zu löschen, verwenden Sie die <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/drop_alias.md"><code translate="no">drop_alias()</code></a> und geben dabei den Alias an.</p>
 </div>
 <div class="language-java">
-<p>To drop aliases, use the <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Collections/dropAlias.md"><code translate="no">dropAlias()</code></a> method, specifying the alias.</p>
+<p>Um Aliasnamen zu löschen, verwenden Sie die Methode <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Collections/dropAlias.md"><code translate="no">dropAlias()</code></a> und geben Sie dabei den Alias an.</p>
 </div>
 <div class="language-javascript">
-<p>To drop aliases, use the <a href="https://milvus.io/api-reference/node/v2.4.x/Collections/dropAlias.md"><code translate="no">dropAlias()</code></a> method, specifying the alias.</p>
+<p>Um Aliasnamen zu löschen, verwenden Sie die Methode <a href="https://milvus.io/api-reference/node/v2.4.x/Collections/dropAlias.md"><code translate="no">dropAlias()</code></a> und geben Sie dabei den Alias an.</p>
 </div>
 <div class="language-shell">
-<p>To drop aliases for a collection, you can use the <a href="https://milvus.io/api-reference/restful/v2.4.x/v2/Alias%20(v2)/Drop.md"><code translate="no">POST /v2/vectordb/aliases/drop</code></a> API endpoint.</p>
+<p>Um Aliasnamen für eine Sammlung zu löschen, können Sie den <a href="https://milvus.io/api-reference/restful/v2.4.x/v2/Alias%20(v2)/Drop.md"><code translate="no">POST /v2/vectordb/aliases/drop</code></a> API-Endpunkt verwenden.</p>
 </div>
 <div class="multipleCode">
-    <a href="#python">Python </a>
-    <a href="#java">Java</a>
-    <a href="#javascript">Node.js</a>
-</div>
+   <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># 9.5 Drop aliases</span>
 client.drop_alias(
     <span class="hljs-built_in">alias</span>=<span class="hljs-string">&quot;bob&quot;</span>
@@ -2348,7 +2288,7 @@ $ curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable
 <span class="hljs-comment">#     &quot;data&quot;: {}</span>
 <span class="hljs-comment"># }</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Set-Properties" class="common-anchor-header">Set Properties<button data-href="#Set-Properties" class="anchor-icon" translate="no">
+<h2 id="Set-Properties" class="common-anchor-header">Eigenschaften festlegen<button data-href="#Set-Properties" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -2363,11 +2303,11 @@ $ curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>You can set properties for a collection, such as <code translate="no">ttl.seconds</code> and <code translate="no">mmap.enabled</code>. For more information, refer to <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/ORM/Collection/set_properties.md">set_properties()</a>.</p>
+    </button></h2><p>Sie können Eigenschaften für eine Sammlung festlegen, z. B. <code translate="no">ttl.seconds</code> und <code translate="no">mmap.enabled</code>. Weitere Informationen finden Sie unter <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/ORM/Collection/set_properties.md">set_properties()</a>.</p>
 <div class="alert note">
-<p>The code snippets in this section use the <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/ORM/Connections/connect.md">PyMilvus ORM module</a> to interact with Milvus. Code snippets with the new <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/About.md">MilvusClient SDK</a> will be available soon.</p>
+<p>Die Codeschnipsel in diesem Abschnitt verwenden das <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/ORM/Connections/connect.md">PyMilvus ORM-Modul</a> zur Interaktion mit Milvus. Code-Schnipsel mit dem neuen <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/About.md">MilvusClient SDK</a> werden bald verfügbar sein.</p>
 </div>
-<h3 id="Set-TTL" class="common-anchor-header">Set TTL</h3><p>Set the Time-To-Live (TTL) for the data in the collection, which specifies how long the data should be retained before it is automatically deleted.</p>
+<h3 id="Set-TTL" class="common-anchor-header">TTL setzen</h3><p>Setzen Sie die Time-To-Live (TTL) für die Daten in der Sammlung, die angibt, wie lange die Daten aufbewahrt werden sollen, bevor sie automatisch gelöscht werden.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> Collection, connections
 
 <span class="hljs-comment"># Connect to Milvus server</span>
@@ -2383,10 +2323,9 @@ collection.set_properties(
     }
 )
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Set-MMAP" class="common-anchor-header">Set MMAP</h3><p>Configure the memory mapping (MMAP) property for the collection, which determines whether data is mapped into memory to improve query performance. For more information, refer to <a href="https://milvus.io/docs/mmap.md#Configure-memory-mapping">Configure memory mapping
-</a>.</p>
+<h3 id="Set-MMAP" class="common-anchor-header">MMAP einstellen</h3><p>Konfigurieren Sie die Eigenschaft Speicherzuordnung (MMAP) für die Sammlung, die festlegt, ob Daten im Speicher abgebildet werden, um die Abfrageleistung zu verbessern. Weitere Informationen finden Sie unter <a href="https://milvus.io/docs/mmap.md#Configure-memory-mapping">Konfigurieren der Speicherzuordnung .</a></p>
 <div class="alert note">
-<p>Before setting the MMAP property, release the collection first. Otherwise, an error will occur.</p>
+<p>Bevor Sie die MMAP-Eigenschaft einstellen, müssen Sie die Sammlung zuerst freigeben. Andernfalls tritt ein Fehler auf.</p>
 </div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> Collection, connections
 
@@ -2406,7 +2345,7 @@ collection.set_properties(
     }
 )
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Drop-a-Collection" class="common-anchor-header">Drop a Collection<button data-href="#Drop-a-Collection" class="anchor-icon" translate="no">
+<h2 id="Drop-a-Collection" class="common-anchor-header">Eine Sammlung löschen<button data-href="#Drop-a-Collection" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -2421,25 +2360,21 @@ collection.set_properties(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>If a collection is no longer needed, you can drop the collection.</p>
+    </button></h2><p>Wenn eine Sammlung nicht mehr benötigt wird, können Sie die Sammlung löschen.</p>
 <div class="language-python">
-<p>To drop a collection, use the <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/drop_collection.md"><code translate="no">drop_collection()</code></a> method, specifying the collection name.</p>
+<p>Um eine Sammlung zu löschen, verwenden Sie die <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/drop_collection.md"><code translate="no">drop_collection()</code></a> Methode und geben Sie den Namen der Sammlung an.</p>
 </div>
 <div class="language-java">
-<p>To drop a collection, use the <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Collections/dropCollection.md"><code translate="no">dropCollection()</code></a> method, specifying the collection name.</p>
+<p>Um eine Sammlung zu löschen, verwenden Sie die <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Collections/dropCollection.md"><code translate="no">dropCollection()</code></a> und geben Sie dabei den Namen der Sammlung an.</p>
 </div>
 <div class="language-javascript">
-<p>To drop a collection, use the <a href="https://milvus.io/api-reference/node/v2.4.x/Collections/dropCollection.md"><code translate="no">dropCollection()</code></a> method, specifying the collection name.</p>
+<p>Um eine Sammlung zu löschen, verwenden Sie die <a href="https://milvus.io/api-reference/node/v2.4.x/Collections/dropCollection.md"><code translate="no">dropCollection()</code></a> Methode unter Angabe des Sammlungsnamens.</p>
 </div>
 <div class="language-shell">
-<p>To drop a collection, you can use the <a href="https://milvus.io/api-reference/restful/v2.4.x/v2/Collection%20(v2)/Drop.md"><code translate="no">POST /v2/vectordb/collections/drop</code></a> API endpoint.</p>
+<p>Um eine Sammlung zu löschen, können Sie den <a href="https://milvus.io/api-reference/restful/v2.4.x/v2/Collection%20(v2)/Drop.md"><code translate="no">POST /v2/vectordb/collections/drop</code></a> API-Endpunkt verwenden.</p>
 </div>
 <div class="multipleCode">
-    <a href="#python">Python </a>
-    <a href="#java">Java</a>
-    <a href="#javascript">Node.js</a>
-    <a href="#shell">cURL</a>
-</div>
+   <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#shell">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># 10. Drop the collections</span>
 client.drop_collection(
     collection_name=<span class="hljs-string">&quot;quick_setup&quot;</span>

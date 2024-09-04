@@ -6,7 +6,7 @@ summary: >-
   utilizzando un singolo vettore di interrogazione.
 title: Ricerca a vettore singolo
 ---
-<h1 id="Single-Vector-Search" class="common-anchor-header">Single-Vector Search<button data-href="#Single-Vector-Search" class="anchor-icon" translate="no">
+<h1 id="Single-Vector-Search" class="common-anchor-header">Ricerca per singolo vettore<button data-href="#Single-Vector-Search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -21,14 +21,14 @@ title: Ricerca a vettore singolo
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Once you have inserted your data, the next step is to perform similarity searches on your collection in Milvus.</p>
-<p>Milvus allows you to conduct two types of searches, depending on the number of vector fields in your collection:</p>
+    </button></h1><p>Una volta inseriti i dati, il passo successivo consiste nell'eseguire ricerche di similarità sulla collezione in Milvus.</p>
+<p>Milvus consente di effettuare due tipi di ricerca, a seconda del numero di campi vettoriali presenti nella collezione:</p>
 <ul>
-<li><strong>Single-vector search</strong>: If your collection has only one vector field, use the <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Vector/search.md"><code translate="no">search()</code></a> method to find the most similar entities. This method compares your query vector with the existing vectors in your collection and returns the IDs of the closest matches along with the distances between them. Optionally, it can also return the vector values and metadata of the results.</li>
-<li><strong>Hybrid search</strong>: For collections with two or more vector fields, use the <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/ORM/Collection/hybrid_search.md"><code translate="no">hybrid_search()</code></a> method. This method performs multiple Approximate Nearest Neighbor (ANN) search requests and combines the results to return the most relevant matches after reranking.</li>
+<li><strong>Ricerca a vettore singolo</strong>: Se la vostra collezione ha un solo campo vettoriale, utilizzate il metodo <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Vector/search.md"><code translate="no">search()</code></a> per trovare le entità più simili. Questo metodo confronta il vettore dell'interrogazione con i vettori esistenti nella collezione e restituisce gli ID delle corrispondenze più vicine insieme alle distanze tra loro. Opzionalmente, può anche restituire i valori del vettore e i metadati dei risultati.</li>
+<li><strong>Ricerca ibrida</strong>: Per le raccolte con due o più campi vettoriali, utilizzare il metodo <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/ORM/Collection/hybrid_search.md"><code translate="no">hybrid_search()</code></a> . Questo metodo esegue più richieste di ricerca Approximate Nearest Neighbor (ANN) e combina i risultati per restituire le corrispondenze più rilevanti dopo una nuova classificazione.</li>
 </ul>
-<p>This guide focuses on how to perform a single-vector search in Milvus. For details on hybrid search, refer to <a href="https://milvus.io/docs/multi-vector-search.md">Hybrid search</a>.</p>
-<h2 id="Overview" class="common-anchor-header">Overview<button data-href="#Overview" class="anchor-icon" translate="no">
+<p>Questa guida si concentra su come eseguire una ricerca monovettoriale in Milvus. Per maggiori dettagli sulla ricerca ibrida, consultare la sezione <a href="https://milvus.io/docs/multi-vector-search.md">Ricerca ibrida</a>.</p>
+<h2 id="Overview" class="common-anchor-header">Panoramica<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -43,14 +43,14 @@ title: Ricerca a vettore singolo
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>There are a variety of search types to meet different requirements:</p>
+    </button></h2><p>Esistono vari tipi di ricerca per soddisfare esigenze diverse:</p>
 <ul>
-<li><p><a href="https://milvus.io/docs/single-vector-search.md#Basic-search">Basic search</a>: Includes single-vector search, bulk-vector search, partition search, and search with specified output fields.</p></li>
-<li><p><a href="https://milvus.io/docs/single-vector-search.md#Filtered-search">Filtered search</a>: Applies filtering criteria based on scalar fields to refine search results.</p></li>
-<li><p><a href="https://milvus.io/docs/single-vector-search.md#Range-search">Range search</a>: Finds vectors within a specific distance range from the query vector.</p></li>
-<li><p><a href="https://milvus.io/docs/single-vector-search.md#Grouping-search">Grouping search</a>: Groups search results based on a specific field to ensure diversity in the results.</p></li>
+<li><p><a href="https://milvus.io/docs/single-vector-search.md#Basic-search">Ricerca di base</a>: Include la ricerca a vettore singolo, la ricerca a vettore multiplo, la ricerca per partizione e la ricerca con campi di output specificati.</p></li>
+<li><p><a href="https://milvus.io/docs/single-vector-search.md#Filtered-search">Ricerca filtrata</a>: Applica criteri di filtraggio basati su campi scalari per affinare i risultati della ricerca.</p></li>
+<li><p><a href="https://milvus.io/docs/single-vector-search.md#Range-search">Ricerca per intervallo</a>: Trova i vettori entro un intervallo di distanza specifico dal vettore di interrogazione.</p></li>
+<li><p><a href="https://milvus.io/docs/single-vector-search.md#Grouping-search">Ricerca per raggruppamento</a>: Raggruppa i risultati della ricerca in base a un campo specifico per garantire la diversità dei risultati.</p></li>
 </ul>
-<h2 id="Preparations" class="common-anchor-header">Preparations<button data-href="#Preparations" class="anchor-icon" translate="no">
+<h2 id="Preparations" class="common-anchor-header">Preparazioni<button data-href="#Preparations" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -65,12 +65,9 @@ title: Ricerca a vettore singolo
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>The code snippet below repurposes the existing code to establish a connection to Milvus and quickly set up a collection.</p>
+    </button></h2><p>Il frammento di codice seguente ripropone il codice esistente per stabilire una connessione a Milvus e impostare rapidamente una raccolta.</p>
 <div class="multipleCode">
-    <a href="#python">Python </a>
-    <a href="#java">Java</a>
-    <a href="#javascript">Node.js</a>
-</div>
+   <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># 1. Set up a Milvus client</span>
 client = MilvusClient(
     uri=CLUSTER_ENDPOINT,
@@ -428,7 +425,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 <span class="hljs-comment">// 500</span>
 <span class="hljs-comment">// </span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Basic-search" class="common-anchor-header">Basic search<button data-href="#Basic-search" class="anchor-icon" translate="no">
+<h2 id="Basic-search" class="common-anchor-header">Ricerca di base<button data-href="#Basic-search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -443,16 +440,13 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>When sending a <code translate="no">search</code> request, you can provide one or more vector values representing your query embeddings and a <code translate="no">limit</code> value indicating the number of results to return.</p>
-<p>Depending on your data and your query vector, you may get fewer than <code translate="no">limit</code> results. This happens when <code translate="no">limit</code> is larger than the number of possible matching vectors for your query.</p>
-<h3 id="Single-vector-search" class="common-anchor-header">Single-vector search</h3><p>Single-vector search is the simplest form of <code translate="no">search</code> operations in Milvus, designed to find the most similar vectors to a given query vector.</p>
-<p>To perform a single-vector search, specify the target collection name, the query vector, and the desired number of results (<code translate="no">limit</code>). This operation returns a result set comprising the most similar vectors, their IDs, and distances from the query vector.</p>
-<p>Here is an example of searching for the top 5 entities that are most similar to the query vector:</p>
+    </button></h2><p>Quando si invia una richiesta <code translate="no">search</code>, si possono fornire uno o più valori vettoriali che rappresentano gli embedding della query e un valore <code translate="no">limit</code> che indica il numero di risultati da restituire.</p>
+<p>A seconda dei dati e del vettore della query, è possibile che si ottengano meno di <code translate="no">limit</code> risultati. Questo accade quando <code translate="no">limit</code> è più grande del numero di vettori possibili per la query.</p>
+<h3 id="Single-vector-search" class="common-anchor-header">Ricerca a vettore singolo</h3><p>La ricerca a vettore singolo è la forma più semplice delle operazioni di <code translate="no">search</code> in Milvus, che ha lo scopo di trovare i vettori più simili a un determinato vettore di interrogazione.</p>
+<p>Per eseguire una ricerca a vettore singolo, specificare il nome della collezione di destinazione, il vettore di interrogazione e il numero di risultati desiderato (<code translate="no">limit</code>). Questa operazione restituisce un insieme di risultati che comprende i vettori più simili, i loro ID e le distanze dal vettore di interrogazione.</p>
+<p>Ecco un esempio di ricerca delle 5 entità più simili al vettore di interrogazione:</p>
 <div class="multipleCode">
-    <a href="#python">Python </a>
-    <a href="#java">Java</a>
-    <a href="#javascript">Node.js</a>
-</div>
+   <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Single vector search</span>
 res = client.search(
     collection_name=<span class="hljs-string">&quot;test_collection&quot;</span>, <span class="hljs-comment"># Replace with the actual name of your collection</span>
@@ -493,79 +487,76 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 <table class="language-python">
   <thead>
     <tr>
-      <th>Parameter</th>
-      <th>Description</th>
+      <th>Parametro</th>
+      <th>Descrizione</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <td><code translate="no">collection_name</code></td>
-      <td>The name of an existing collection.</td>
+      <td>Il nome di una collezione esistente.</td>
     </tr>
     <tr>
       <td><code translate="no">data</code></td>
-      <td>A list of vector embeddings.<br/>Milvus searches for the most similar vector embeddings to the specified ones.</td>
+      <td>Un elenco di incorporazioni vettoriali.<br/>Milvus cerca le incorporazioni vettoriali più simili a quelle specificate.</td>
     </tr>
     <tr>
       <td><code translate="no">limit</code></td>
-      <td>The total number of entities to return.<br/>You can use this parameter in combination with <strong>offset</strong> in <strong>param</strong> to enable pagination.<br/>The sum of this value and <strong>offset</strong> in <strong>param</strong> should be less than 16,384.</td>
+      <td>Il numero totale di entità da restituire.<br/>Si può usare questo parametro in combinazione con l'<strong>offset</strong> in <strong>param</strong> per abilitare la paginazione.<br/>La somma di questo valore e dell'<strong>offset</strong> in <strong>param</strong> deve essere inferiore a 16.384.</td>
     </tr>
     <tr>
       <td><code translate="no">search_params</code></td>
-      <td>The parameter settings specific to this operation.<br/><ul><li><code translate="no">metric_type</code>: The metric type applied to this operation. This should be the same as the one used when you index the vector field specified above. Possible values are <strong>L2</strong>, <strong>IP</strong>, <strong>COSINE</strong>, <strong>JACCARD</strong>, <strong>HAMMING</strong>.</li><li><code translate="no">params</code>: Additional parameters. For details, refer to <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Vector/search.md">search()</a>.</li></ul></td>
+      <td>Le impostazioni dei parametri specifiche per questa operazione.<br/><ul><li><code translate="no">metric_type</code>: Il tipo di metrica applicata a questa operazione. Deve essere lo stesso utilizzato quando si indicizza il campo vettoriale specificato sopra. I valori possibili sono <strong>L2</strong>, <strong>IP</strong>, <strong>COSINE</strong>, <strong>JACCARD</strong>, <strong>HAMMING</strong>.</li><li><code translate="no">params</code>: Parametri aggiuntivi. Per i dettagli, fare riferimento a <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Vector/search.md">search()</a>.</li></ul></td>
     </tr>
   </tbody>
 </table>
 <table class="language-java">
   <thead>
     <tr>
-      <th>Parameter</th>
-      <th>Description</th>
+      <th>Parametro</th>
+      <th>Descrizione</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <td><code translate="no">collectionName</code></td>
-      <td>The name of an existing collection.</td>
+      <td>Il nome di una collezione esistente.</td>
     </tr>
     <tr>
       <td><code translate="no">data</code></td>
-      <td>A list of vector embeddings.<br/>Milvus searches for the most similar vector embeddings to the specified ones.</td>
+      <td>Un elenco di incorporazioni vettoriali.<br/>Milvus cerca le incorporazioni vettoriali più simili a quelle specificate.</td>
     </tr>
     <tr>
       <td><code translate="no">topK</code></td>
-      <td>The number of records to return in the search result. This parameter uses the same syntax as the <strong>limit</strong> parameter, so you should only set one of them.<br/>You can use this parameter in combination with <strong>offset</strong> in <strong>param</strong> to enable pagination.<br/>The sum of this value and <strong>offset</strong> in <strong>param</strong> should be less than 16,384.</td>
+      <td>Il numero di record da restituire nel risultato della ricerca. Questo parametro usa la stessa sintassi del parametro <strong>limit</strong>, quindi bisogna impostarne solo uno.<br/>È possibile usare questo parametro in combinazione con <strong>offset</strong> in <strong>param</strong> per abilitare la paginazione.<br/>La somma di questo valore e <strong>offset</strong> in <strong>param</strong> deve essere inferiore a 16.384.</td>
     </tr>
   </tbody>
 </table>
 <table class="language-javascript">
   <thead>
     <tr>
-      <th>Parameter</th>
-      <th>Description</th>
+      <th>Parametro</th>
+      <th>Descrizione</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <td><code translate="no">collection_name</code></td>
-      <td>The name of an existing collection.</td>
+      <td>Il nome di una collezione esistente.</td>
     </tr>
     <tr>
       <td><code translate="no">data</code></td>
-      <td>A list of vector embeddings.<br/>Milvus searches for the most similar vector embeddings to the specified ones.</td>
+      <td>Un elenco di incorporazioni vettoriali.<br/>Milvus cerca le incorporazioni vettoriali più simili a quelle specificate.</td>
     </tr>
     <tr>
       <td><code translate="no">limit</code></td>
-      <td>The total number of entities to return.<br/>You can use this parameter in combination with <strong>offset</strong> in <strong>param</strong> to enable pagination.<br/>The sum of this value and <strong>offset</strong> in <strong>param</strong> should be less than 16,384.</td>
+      <td>Il numero totale di entità da restituire.<br/>È possibile usare questo parametro in combinazione con l'<strong>offset</strong> in <strong>param</strong> per abilitare la paginazione.<br/>La somma di questo valore e dell'<strong>offset</strong> in <strong>param</strong> deve essere inferiore a 16.384.</td>
     </tr>
   </tbody>
 </table>
-<p>The output is similar to the following:</p>
+<p>L'output è simile al seguente:</p>
 <div class="multipleCode">
-    <a href="#python">Python </a>
-    <a href="#java">Java</a>
-    <a href="#javascript">Node.js</a>
-</div>
+   <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a></div>
 <pre><code translate="no" class="language-python">[
     [
         {
@@ -644,15 +635,12 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
   { score: <span class="hljs-number">1.7258622646331787</span>, <span class="hljs-built_in">id</span>: <span class="hljs-string">&#x27;718&#x27;</span> }
 ]
 <button class="copy-code-btn"></button></code></pre>
-<p>The output showcases the top 5 neighbors nearest to your query vector, including their unique IDs and the calculated distances.</p>
-<h3 id="Bulk-vector-search" class="common-anchor-header">Bulk-vector search</h3><p>A bulk-vector search extends the <a href="https://milvus.io/docs/single-vector-search.md#Single-Vector-Search">single-vector search</a> concept by allowing multiple query vectors to be searched in a single request. This type of search is ideal for scenarios where you need to find similar vectors for a set of query vectors, significantly reducing the time and computational resources required.</p>
-<p>In a bulk-vector search, you can include several query vectors in the <code translate="no">data</code> field. The system processes these vectors in parallel, returning a separate result set for each query vector, each set containing the closest matches found within the collection.</p>
-<p>Here is an example of searching for two distinct sets of the most similar entities from two query vectors:</p>
+<p>L'output mostra i 5 vicini più vicini al vettore richiesto, compresi i loro ID unici e le distanze calcolate.</p>
+<h3 id="Bulk-vector-search" class="common-anchor-header">Ricerca per vettori multipli</h3><p>La ricerca per vettore multiplo estende il concetto di <a href="https://milvus.io/docs/single-vector-search.md#Single-Vector-Search">ricerca per vettore singolo</a>, consentendo la ricerca di più vettori di query in un'unica richiesta. Questo tipo di ricerca è ideale per gli scenari in cui è necessario trovare vettori simili per un insieme di vettori di query, riducendo significativamente il tempo e le risorse computazionali necessarie.</p>
+<p>In una ricerca di tipo bulk-vector, è possibile includere diversi vettori di query nel campo <code translate="no">data</code>. Il sistema elabora questi vettori in parallelo, restituendo un set di risultati separato per ogni vettore di query, ognuno dei quali contiene le corrispondenze più vicine trovate all'interno della raccolta.</p>
+<p>Ecco un esempio di ricerca di due serie distinte di entità più simili da due vettori di query:</p>
 <div class="multipleCode">
-    <a href="#python">Python </a>
-    <a href="#java">Java</a>
-    <a href="#javascript">Node.js</a>
-</div>
+   <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Bulk-vector search</span>
 res = client.search(
     collection_name=<span class="hljs-string">&quot;test_collection&quot;</span>, <span class="hljs-comment"># Replace with the actual name of your collection</span>
@@ -697,12 +685,9 @@ res = <span class="hljs-keyword">await</span> client.search({
 
 console.log(res.results)
 <button class="copy-code-btn"></button></code></pre>
-<p>The output is similar to the following:</p>
+<p>L'output è simile al seguente:</p>
 <div class="multipleCode">
-    <a href="#python">Python </a>
-    <a href="#java">Java</a>
-    <a href="#javascript">Node.js</a>
-</div>
+   <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a></div>
 <pre><code translate="no" class="language-python">[
     [
         {
@@ -801,15 +786,12 @@ console.log(res.results)
   ]
 ]
 <button class="copy-code-btn"></button></code></pre>
-<p>The results include two sets of nearest neighbors, one for each query vector, showcasing the efficiency of bulk-vector searches in handling multiple query vectors at once.</p>
-<h3 id="Partition-search" class="common-anchor-header">Partition search</h3><p>Partition search narrows the scope of your search to a specific subset or partition of your collection. This is particularly useful for organized datasets where data is segmented into logical or categorical divisions, allowing for faster search operations by reducing the volume of data to scan.</p>
-<p>To conduct a partition search, simply include the name of the target partition in <code translate="no">partition_names</code> of your search request. This specifies that the <code translate="no">search</code> operation only considers vectors within the specified partition.</p>
-<p>Here is an example of searching for entities in <code translate="no">red</code>:</p>
+<p>I risultati includono due serie di vicini, una per ogni vettore di query, mostrando l'efficienza delle ricerche bulk-vector nel gestire più vettori di query contemporaneamente.</p>
+<h3 id="Partition-search" class="common-anchor-header">Ricerca per partizione</h3><p>La ricerca per partizione restringe l'ambito della ricerca a un sottoinsieme o a una partizione specifica della raccolta. È particolarmente utile per gli insiemi di dati organizzati in cui i dati sono segmentati in divisioni logiche o categoriali, consentendo operazioni di ricerca più rapide grazie alla riduzione del volume di dati da analizzare.</p>
+<p>Per effettuare una ricerca per partizione, è sufficiente includere il nome della partizione di destinazione in <code translate="no">partition_names</code> della richiesta di ricerca. Questo specifica che l'operazione <code translate="no">search</code> considera solo i vettori all'interno della partizione specificata.</p>
+<p>Ecco un esempio di ricerca di entità in <code translate="no">red</code>:</p>
 <div class="multipleCode">
-    <a href="#python">Python </a>
-    <a href="#java">Java</a>
-    <a href="#javascript">Node.js</a>
-</div>
+   <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># 6.2 Search within a partition</span>
 query_vector = [<span class="hljs-number">0.3580376395471989</span>, -<span class="hljs-number">0.6023495712049978</span>, <span class="hljs-number">0.18414012509913835</span>, -<span class="hljs-number">0.26286205330961354</span>, <span class="hljs-number">0.9029438446296592</span>]
 
@@ -849,12 +831,9 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 
 <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(res.<span class="hljs-property">results</span>)
 <button class="copy-code-btn"></button></code></pre>
-<p>The output is similar to the following:</p>
+<p>L'output è simile al seguente:</p>
 <div class="multipleCode">
-    <a href="#python">Python </a>
-    <a href="#java">Java</a>
-    <a href="#javascript">Node.js</a>
-</div>
+   <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a></div>
 <pre><code translate="no" class="language-python">[
     [
         {
@@ -1030,12 +1009,9 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
   { score: <span class="hljs-number">2.797295093536377</span>, <span class="hljs-built_in">id</span>: <span class="hljs-string">&#x27;1406&#x27;</span> }
 ]
 <button class="copy-code-btn"></button></code></pre>
-<p>Then, search for entities in <code translate="no">blue</code>:</p>
+<p>Quindi, cercare le entità in <code translate="no">blue</code>:</p>
 <div class="multipleCode">
-    <a href="#python">Python </a>
-    <a href="#java">Java</a>
-    <a href="#javascript">Node.js</a>
-</div>
+   <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a></div>
 <pre><code translate="no" class="language-python">res = client.search(
     collection_name=<span class="hljs-string">&quot;quick_setup&quot;</span>,
     data=[query_vector],
@@ -1066,12 +1042,9 @@ searchResp = client.<span class="hljs-title function_">search</span>(searchReq);
 
 <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(res.<span class="hljs-property">results</span>)
 <button class="copy-code-btn"></button></code></pre>
-<p>The output is similar to the following:</p>
+<p>L'output è simile al seguente:</p>
 <div class="multipleCode">
-    <a href="#python">Python </a>
-    <a href="#java">Java</a>
-    <a href="#javascript">Node.js</a>
-</div>
+   <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a></div>
 <pre><code translate="no" class="language-python">[
     [
         {
@@ -1247,15 +1220,12 @@ searchResp = client.<span class="hljs-title function_">search</span>(searchReq);
   { score: <span class="hljs-number">2.7014894485473633</span>, <span class="hljs-built_in">id</span>: <span class="hljs-string">&#x27;1597&#x27;</span> }
 ]
 <button class="copy-code-btn"></button></code></pre>
-<p>The data in <code translate="no">red</code> differs from that in <code translate="no">blue</code>. Therefore, the search results will be constrained to the specified partition, reflecting the unique characteristics and data distribution of that subset.</p>
-<h3 id="Search-with-output-fields" class="common-anchor-header">Search with output fields</h3><p>Search with output fields allows you to specify which attributes or fields of the matched vectors should be included in the search results.</p>
-<p>You can specify <code translate="no">output_fields</code> in a request to return results with specific fields.</p>
-<p>Here is an example of returning results with <code translate="no">color</code> attribute values:</p>
+<p>I dati contenuti in <code translate="no">red</code> differiscono da quelli contenuti in <code translate="no">blue</code>. Pertanto, i risultati della ricerca saranno limitati alla partizione specificata, riflettendo le caratteristiche uniche e la distribuzione dei dati di quel sottoinsieme.</p>
+<h3 id="Search-with-output-fields" class="common-anchor-header">Ricerca con campi di output</h3><p>La ricerca con campi di output consente di specificare quali attributi o campi dei vettori abbinati devono essere inclusi nei risultati della ricerca.</p>
+<p>È possibile specificare <code translate="no">output_fields</code> in una richiesta per restituire risultati con campi specifici.</p>
+<p>Ecco un esempio di restituzione dei risultati con i valori dell'attributo <code translate="no">color</code>:</p>
 <div class="multipleCode">
-    <a href="#python">Python </a>
-    <a href="#java">Java</a>
-    <a href="#javascript">Node.js</a>
-</div>
+   <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Search with output fields</span>
 res = client.search(
     collection_name=<span class="hljs-string">&quot;test_collection&quot;</span>, <span class="hljs-comment"># Replace with the actual name of your collection</span>
@@ -1294,12 +1264,9 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 
 <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(res.<span class="hljs-property">results</span>)
 <button class="copy-code-btn"></button></code></pre>
-<p>The output is similar to the following:</p>
+<p>L'output è simile al seguente:</p>
 <div class="multipleCode">
-    <a href="#python">Python </a>
-    <a href="#java">Java</a>
-    <a href="#javascript">Node.js</a>
-</div>
+   <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a></div>
 <pre><code translate="no" class="language-python">[
     [
         {
@@ -1374,8 +1341,8 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
   { score: <span class="hljs-number">2.916019916534424</span>, <span class="hljs-built_in">id</span>: <span class="hljs-string">&#x27;425&#x27;</span>, color: <span class="hljs-string">&#x27;purple&#x27;</span> }
 ]
 <button class="copy-code-btn"></button></code></pre>
-<p>Alongside the nearest neighbors, the search results will include the specified field <code translate="no">color</code>, providing a richer set of information for each matching vector.</p>
-<h2 id="Filtered-search" class="common-anchor-header">Filtered search<button data-href="#Filtered-search" class="anchor-icon" translate="no">
+<p>Oltre ai vicini più prossimi, i risultati della ricerca includeranno il campo specificato <code translate="no">color</code>, fornendo un insieme più ricco di informazioni per ogni vettore corrispondente.</p>
+<h2 id="Filtered-search" class="common-anchor-header">Ricerca filtrata<button data-href="#Filtered-search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -1390,26 +1357,23 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Filtered search applies scalar filters to vector searches, allowing you to refine the search results based on specific criteria. You can find more about filter expressions in <a href="https://milvus.io/docs/boolean.md">Boolean Expression Rules</a> and examples in <a href="https://milvus.io/docs/get-and-scalar-query.md">Get &amp; Scalar Query</a>.</p>
-<h3 id="Use-the-like-operator" class="common-anchor-header">Use the <code translate="no">like</code> operator</h3><p>The <code translate="no">like</code> operator enhances string searches by evaluating patterns including prefixes, infixes, and suffixes:</p>
+    </button></h2><p>La ricerca filtrata applica filtri scalari alle ricerche vettoriali, consentendo di affinare i risultati della ricerca in base a criteri specifici. Maggiori informazioni sulle espressioni di filtro sono disponibili in <a href="https://milvus.io/docs/boolean.md">Regole di espressione booleana</a> ed esempi in <a href="https://milvus.io/docs/get-and-scalar-query.md">Ottieni e Query scalari</a>.</p>
+<h3 id="Use-the-like-operator" class="common-anchor-header">Utilizzare l'operatore <code translate="no">like</code> </h3><p>L'operatore <code translate="no">like</code> migliora la ricerca di stringhe valutando modelli che includono prefissi, infissi e suffissi:</p>
 <ul>
-<li><strong>Prefix matching</strong>: To find values starting with a specific prefix, use the syntax <code translate="no">'like &quot;prefix%&quot;'</code>.</li>
-<li><strong>Infix matching</strong>: To find values containing a specific sequence of characters anywhere within the string, use the syntax <code translate="no">'like &quot;%infix%&quot;'</code>.</li>
-<li><strong>Suffix matching</strong>: To find values ending with a specific suffix, use the syntax <code translate="no">'like &quot;%suffix&quot;'</code>.</li>
+<li><strong>Corrispondenza dei prefissi</strong>: per trovare valori che iniziano con un prefisso specifico, utilizzare la sintassi <code translate="no">'like &quot;prefix%&quot;'</code>.</li>
+<li><strong>Corrispondenza per prefisso</strong>: per trovare valori contenenti una specifica sequenza di caratteri in qualsiasi punto della stringa, utilizzare la sintassi <code translate="no">'like &quot;%infix%&quot;'</code>.</li>
+<li><strong>Corrispondenza per suffisso</strong>: per trovare i valori che terminano con un suffisso specifico, usare la sintassi <code translate="no">'like &quot;%suffix&quot;'</code>.</li>
 </ul>
-<p>For single-character matching, underscore (<code translate="no">_</code>) acts as a wildcard for one character, e.g., <code translate="no">'like &quot;y_llow&quot;'</code>.</p>
-<h3 id="Special-characters-in-search-strings" class="common-anchor-header">Special characters in search strings</h3><p>If you want to search for a string that contains special characters like underscores (<code translate="no">_</code>) or percent signs (<code translate="no">%</code>), which are normally used as wildcards in search patterns (<code translate="no">_</code> for any single character and <code translate="no">%</code> for any sequence of characters), you must escape these characters to treat them as literal characters. Use a backslash (<code translate="no">\</code>) to escape special characters, and remember to escape the backslash itself. For instance:</p>
+<p>Per la ricerca di un singolo carattere, il trattino basso (<code translate="no">_</code>) funge da carattere jolly per un carattere, ad esempio <code translate="no">'like &quot;y_llow&quot;'</code>.</p>
+<h3 id="Special-characters-in-search-strings" class="common-anchor-header">Caratteri speciali nelle stringhe di ricerca</h3><p>Se si desidera cercare una stringa che contiene caratteri speciali come i trattini bassi (<code translate="no">_</code>) o i segni di percentuale (<code translate="no">%</code>), che sono normalmente usati come caratteri jolly negli schemi di ricerca (<code translate="no">_</code> per qualsiasi singolo carattere e <code translate="no">%</code> per qualsiasi sequenza di caratteri), è necessario eseguire l'escape di questi caratteri per trattarli come caratteri letterali. Usare una barra rovesciata (<code translate="no">\</code>) per sfuggire ai caratteri speciali e ricordarsi di sfuggire alla barra rovesciata stessa. Ad esempio:</p>
 <ul>
-<li>To search for a literal underscore, use <code translate="no">\\_</code>.</li>
-<li>To search for a literal percent sign, use <code translate="no">\\%</code>.</li>
+<li>Per cercare un trattino basso letterale, usare <code translate="no">\\_</code>.</li>
+<li>Per cercare un segno percentuale letterale, usare <code translate="no">\\%</code>.</li>
 </ul>
-<p>So, if you need to search for the text <code translate="no">&quot;_version_&quot;</code>, your query should be formatted as <code translate="no">'like &quot;\\_version\\_&quot;'</code> to ensure the underscores are treated as part of the search term and not as wildcards.</p>
-<p>Filter results whose <strong>color</strong> is prefixed with <strong>red</strong>:</p>
+<p>Quindi, se si deve cercare il testo <code translate="no">&quot;_version_&quot;</code>, la query deve essere formattata come <code translate="no">'like &quot;\\_version\\_&quot;'</code> per garantire che i trattini bassi siano trattati come parte del termine di ricerca e non come caratteri jolly.</p>
+<p>Filtrare i risultati il cui <strong>colore</strong> ha un prefisso <strong>rosso</strong>:</p>
 <div class="multipleCode">
-    <a href="#python">Python </a>
-    <a href="#java">Java</a>
-    <a href="#javascript">Node.js</a>
-</div>
+   <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Search with filter</span>
 res = client.search(
     collection_name=<span class="hljs-string">&quot;test_collection&quot;</span>, <span class="hljs-comment"># Replace with the actual name of your collection</span>
@@ -1452,12 +1416,9 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 
 <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(res.<span class="hljs-property">results</span>)
 <button class="copy-code-btn"></button></code></pre>
-<p>The output is similar to the following:</p>
+<p>L'output è simile al seguente:</p>
 <div class="multipleCode">
-    <a href="#python">Python </a>
-    <a href="#java">Java</a>
-    <a href="#javascript">Node.js</a>
-</div>
+   <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a></div>
 <pre><code translate="no" class="language-python">[
     [
         {
@@ -1517,12 +1478,9 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
   { score: <span class="hljs-number">2.4004223346710205</span>, <span class="hljs-built_in">id</span>: <span class="hljs-string">&#x27;854&#x27;</span>, color_tag: <span class="hljs-string">&#x27;black_5990&#x27;</span> }
 ]
 <button class="copy-code-btn"></button></code></pre>
-<p>Filter results whose <strong>color</strong> contains the letters <strong>ll</strong> anywhere within the string:</p>
+<p>Filtra i risultati il cui <strong>colore</strong> contiene le lettere <strong>ll</strong> in qualsiasi punto della stringa:</p>
 <div class="multipleCode">
-    <a href="#python">Python </a>
-    <a href="#java">Java</a>
-    <a href="#javascript">Node.js</a>
-</div>
+   <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Infix match on color field</span>
 res = client.search(
     collection_name=<span class="hljs-string">&quot;test_collection&quot;</span>, <span class="hljs-comment"># Replace with the actual name of your collection</span>
@@ -1565,12 +1523,9 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 
 <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(res.<span class="hljs-property">results</span>)
 <button class="copy-code-btn"></button></code></pre>
-<p>The output is similar to the following:</p>
+<p>L'output è simile al seguente:</p>
 <div class="multipleCode">
-    <a href="#python">Python </a>
-    <a href="#java">Java</a>
-    <a href="#javascript">Node.js</a>
-</div>
+   <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a></div>
 <pre><code translate="no" class="language-python">[
     [
         {
@@ -1596,7 +1551,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
   { score: <span class="hljs-number">2.5080761909484863</span>, <span class="hljs-built_in">id</span>: <span class="hljs-string">&#x27;1201&#x27;</span>, color_tag: <span class="hljs-string">&#x27;yellow_4222&#x27;</span> }
 ]
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Range-search" class="common-anchor-header">Range search<button data-href="#Range-search" class="anchor-icon" translate="no">
+<h2 id="Range-search" class="common-anchor-header">Ricerca per intervallo<button data-href="#Range-search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -1611,17 +1566,14 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Range search allows you to find vectors that lie within a specified distance range from your query vector.</p>
-<p>By setting <code translate="no">radius</code> and optionally <code translate="no">range_filter</code>, you can adjust the breadth of your search to include vectors that are somewhat similar to the query vector, providing a more comprehensive view of potential matches.</p>
+    </button></h2><p>La ricerca per intervallo consente di trovare i vettori che si trovano entro un intervallo di distanza specifico dal vettore di interrogazione.</p>
+<p>Impostando <code translate="no">radius</code> e, facoltativamente, <code translate="no">range_filter</code>, è possibile regolare l'ampiezza della ricerca in modo da includere vettori in qualche modo simili al vettore di interrogazione, fornendo una visione più completa delle potenziali corrispondenze.</p>
 <ul>
-<li><p><code translate="no">radius</code>: Defines the outer boundary of your search space. Only vectors that are within this distance from the query vector are considered potential matches.</p></li>
-<li><p><code translate="no">range_filter</code>: While <code translate="no">radius</code> sets the outer limit of the search, <code translate="no">range_filter</code> can be optionally used to define an inner boundary, creating a distance range within which vectors must fall to be considered matches.</p></li>
+<li><p><code translate="no">radius</code>: Definisce il confine esterno dello spazio di ricerca. Solo i vettori che si trovano entro questa distanza dal vettore di interrogazione sono considerati potenziali corrispondenze.</p></li>
+<li><p><code translate="no">range_filter</code>: Mentre <code translate="no">radius</code> stabilisce il limite esterno della ricerca, <code translate="no">range_filter</code> può essere usato facoltativamente per definire un limite interno, creando un intervallo di distanza entro il quale i vettori devono rientrare per essere considerati corrispondenti.</p></li>
 </ul>
 <div class="multipleCode">
-    <a href="#python">Python </a>
-    <a href="#java">Java</a>
-    <a href="#javascript">Node.js</a>
-</div>
+   <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Conduct a range search</span>
 search_params = {
     <span class="hljs-string">&quot;metric_type&quot;</span>: <span class="hljs-string">&quot;IP&quot;</span>,
@@ -1673,12 +1625,9 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 
 <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(res.<span class="hljs-property">results</span>)
 <button class="copy-code-btn"></button></code></pre>
-<p>The output is similar to the following:</p>
+<p>L'output è simile al seguente:</p>
 <div class="multipleCode">
-    <a href="#python">Python </a>
-    <a href="#java">Java</a>
-    <a href="#javascript">Node.js</a>
-</div>
+   <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a></div>
 <pre><code translate="no" class="language-python">[
     [
         {
@@ -1738,22 +1687,22 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
   { score: <span class="hljs-number">2.2593345642089844</span>, <span class="hljs-built_in">id</span>: <span class="hljs-string">&#x27;1309&#x27;</span>, color_tag: <span class="hljs-string">&#x27;red_8458&#x27;</span> }
 ]
 <button class="copy-code-btn"></button></code></pre>
-<p>You will observe that all the entities returned have a distance that falls within the range of 0.8 to 1.0 from the query vector.</p>
-<p>The parameter settings for <code translate="no">radius</code> and <code translate="no">range_filter</code> vary with the metric type in use.</p>
+<p>Si noterà che tutte le entità restituite hanno una distanza compresa tra 0,8 e 1,0 dal vettore della query.</p>
+<p>Le impostazioni dei parametri <code translate="no">radius</code> e <code translate="no">range_filter</code> variano a seconda del tipo di metrica in uso.</p>
 <table>
 <thead>
-<tr><th><strong>Metric Type</strong></th><th><strong>Charactericstics</strong></th><th><strong>Range Search Settings</strong></th></tr>
+<tr><th><strong>Tipo di metrica</strong></th><th><strong>Caratteristiche</strong></th><th><strong>Intervallo Impostazioni di ricerca</strong></th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">L2</code></td><td>Smaller L2 distances indicate higher similarity.</td><td>To exclude the closest vectors from results, ensure that:<br/> <code translate="no">range_filter</code> &lt;= distance &lt; <code translate="no">radius</code></td></tr>
-<tr><td><code translate="no">IP</code></td><td>Larger IP distances indicate higher similarity.</td><td>To exclude the closest vectors from results, ensure that:<br/> <code translate="no">radius</code> &lt; distance &lt;= <code translate="no">range_filter</code></td></tr>
-<tr><td><code translate="no">COSINE</code></td><td>Larger cosine value indicates higher similarity.</td><td>To exclude the closest vectors from results, ensure that:<br/> <code translate="no">radius</code> &lt; distance &lt;= <code translate="no">range_filter</code></td></tr>
-<tr><td><code translate="no">JACCARD</code></td><td>Smaller Jaccard distances indicate higher similarity.</td><td>To exclude the closest vectors from results, ensure that:<br/> <code translate="no">range_filter</code> &lt;= distance &lt; <code translate="no">radius</code></td></tr>
-<tr><td><code translate="no">HAMMING</code></td><td>Smaller Hamming distances indicate higher similarity.</td><td>To exclude the closest vectors from results, ensure that:<br/> <code translate="no">range_filter</code> &lt;= distance &lt; <code translate="no">radius</code></td></tr>
+<tr><td><code translate="no">L2</code></td><td>Le distanze L2 più piccole indicano una maggiore somiglianza.</td><td>Per escludere i vettori più vicini dai risultati, assicurarsi che:<br/> <code translate="no">range_filter</code> &lt;= distanza &lt; <code translate="no">radius</code></td></tr>
+<tr><td><code translate="no">IP</code></td><td>Distanze IP più grandi indicano una maggiore somiglianza.</td><td>Per escludere i vettori più vicini dai risultati, accertarsi che:<br/> <code translate="no">radius</code> &lt; distanza &lt;= <code translate="no">range_filter</code></td></tr>
+<tr><td><code translate="no">COSINE</code></td><td>Un valore di coseno maggiore indica una maggiore somiglianza.</td><td>Per escludere i vettori più vicini dai risultati, assicurarsi che:<br/> <code translate="no">radius</code> &lt; distanza &lt;= <code translate="no">range_filter</code></td></tr>
+<tr><td><code translate="no">JACCARD</code></td><td>Le distanze di Jaccard più piccole indicano una maggiore somiglianza.</td><td>Per escludere i vettori più vicini dai risultati, assicurarsi che:<br/> <code translate="no">range_filter</code> &lt;= distanza &lt; <code translate="no">radius</code></td></tr>
+<tr><td><code translate="no">HAMMING</code></td><td>Distanze di Hamming più piccole indicano una maggiore somiglianza.</td><td>Per escludere i vettori più vicini dai risultati, assicurarsi che:<br/> <code translate="no">range_filter</code> &lt;= distanza &lt; <code translate="no">radius</code></td></tr>
 </tbody>
 </table>
-<p>To learn more about distance metric types, refer to <a href="/docs/it/metric.md">Similarity Metrics</a>.</p>
-<h2 id="Grouping-search" class="common-anchor-header">Grouping search<button data-href="#Grouping-search" class="anchor-icon" translate="no">
+<p>Per saperne di più sui tipi di metriche di distanza, consultare <a href="/docs/it/metric.md">Metriche di somiglianza</a>.</p>
+<h2 id="Grouping-search" class="common-anchor-header">Ricerca per raggruppamento<button data-href="#Grouping-search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -1768,9 +1717,9 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>In Milvus, grouping search by a specific field can avoid redundancy of the same field item in the results. You can get a varied set of results for the specific field.</p>
-<p>Consider a collection of documents, each document splits into various passages. Each passage is represented by one vector embedding and belongs to one document. To find relevant documents instead of similar passages, you can include the <code translate="no">group_by_field</code> argument in the <code translate="no">search()</code> opeartion to group results by the document ID. This helps return the most relevant and unique documents, rather than separate passages from the same document.</p>
-<p>Here is the example code to group search results by field:</p>
+    </button></h2><p>In Milvus, il raggruppamento della ricerca in base a un campo specifico può evitare la ridondanza di voci dello stesso campo nei risultati. È possibile ottenere un insieme vario di risultati per il campo specifico.</p>
+<p>Consideriamo una collezione di documenti, ogni documento è suddiviso in vari passaggi. Ogni passaggio è rappresentato da un vettore incorporato e appartiene a un documento. Per trovare documenti rilevanti invece di passaggi simili, si può includere l'argomento <code translate="no">group_by_field</code> nell'opzione <code translate="no">search()</code> per raggruppare i risultati in base all'ID del documento. Questo aiuta a restituire i documenti più rilevanti e unici, piuttosto che passaggi separati dello stesso documento.</p>
+<p>Ecco un esempio di codice per raggruppare i risultati della ricerca per campo:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Connect to Milvus</span>
 client = MilvusClient(uri=<span class="hljs-string">&#x27;http://localhost:19530&#x27;</span>) <span class="hljs-comment"># Milvus server address</span>
 
@@ -1795,11 +1744,11 @@ doc_ids = [result[<span class="hljs-string">&#x27;entity&#x27;</span>][<span cla
 
 <span class="hljs-built_in">print</span>(doc_ids)
 <button class="copy-code-btn"></button></code></pre>
-<p>The output is similar to the following:</p>
+<p>Il risultato è simile al seguente:</p>
 <pre><code translate="no" class="language-python">[<span class="hljs-meta">5, 10, 1, 7, 9, 6, 3, 4, 8, 2</span>]
 <button class="copy-code-btn"></button></code></pre>
-<p>In the given output, it can be observed that the returned entities do not contain any duplicate <code translate="no">doc_id</code> values.</p>
-<p>For comparison, let’s comment out the <code translate="no">group_by_field</code> and conduct a regular search:</p>
+<p>Nell'output dato, si può osservare che le entità restituite non contengono valori <code translate="no">doc_id</code> duplicati.</p>
+<p>Per un confronto, commentiamo <code translate="no">group_by_field</code> ed eseguiamo una ricerca regolare:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Connect to Milvus</span>
 client = MilvusClient(uri=<span class="hljs-string">&#x27;http://localhost:19530&#x27;</span>) <span class="hljs-comment"># Milvus server address</span>
 
@@ -1824,19 +1773,19 @@ doc_ids = [result[<span class="hljs-string">&#x27;entity&#x27;</span>][<span cla
 
 <span class="hljs-built_in">print</span>(doc_ids)
 <button class="copy-code-btn"></button></code></pre>
-<p>The output is similar to the following:</p>
+<p>Il risultato è simile al seguente:</p>
 <pre><code translate="no" class="language-python">[<span class="hljs-meta">1, 10, 3, 10, 1, 9, 4, 4, 8, 6</span>]
 <button class="copy-code-btn"></button></code></pre>
-<p>In the given output, it can be observed that the returned entities contain duplicate <code translate="no">doc_id</code> values.</p>
-<p><strong>Limitations</strong></p>
+<p>Nell'output dato, si può osservare che le entità restituite contengono valori duplicati <code translate="no">doc_id</code>.</p>
+<p><strong>Limitazioni</strong></p>
 <ul>
-<li><p><strong>Indexing</strong>: This grouping feature works only for collections that are indexed with the <strong>HNSW</strong>, <strong>IVF_FLAT</strong>, or <strong>FLAT</strong> type. For more information, refer to <a href="https://milvus.io/docs/index.md#HNSW">In-memory Index</a>.</p></li>
-<li><p><strong>Vector</strong>: Currently, grouping search does not support a vector field of the <strong>BINARY_VECTOR</strong> type. For more information on data types, refer to <a href="https://milvus.io/docs/schema.md#Supported-data-types">Supported data types</a>.</p></li>
-<li><p><strong>Field</strong>: Currently, grouping search allows only for a single column. You cannot specify multiple field names in the <code translate="no">group_by_field</code> config.  Additionally, grouping search is incompatible with data types of JSON, FLOAT, DOUBLE, ARRAY, or vector fields.</p></li>
-<li><p><strong>Performance Impact</strong>: Be mindful that performance degrades with increasing query vector counts. Using a cluster with 2 CPU cores and 8 GB of memory as an example, the execution time for grouping search increases proportionally with the number of input query vectors.</p></li>
-<li><p><strong>Functionality</strong>: Currently, grouping search is not supported by <a href="https://milvus.io/docs/single-vector-search.md#Range-search">range search</a>, <a href="https://milvus.io/docs/with-iterators.md#Search-with-iterator">search iterators</a>, or <a href="/docs/it/multi-vector-search.md">hybrid search</a>.</p></li>
+<li><p><strong>Indicizzazione</strong>: Questa funzione di raggruppamento funziona solo per le collezioni indicizzate con il tipo <strong>HNSW</strong>, <strong>IVF_FLAT</strong> o <strong>FLAT</strong>. Per ulteriori informazioni, consultare <a href="https://milvus.io/docs/index.md#HNSW">Indice in memoria</a>.</p></li>
+<li><p><strong>Vettore</strong>: Attualmente, la ricerca per raggruppamento non supporta un campo vettoriale di tipo <strong>BINARY_VECTOR</strong>. Per ulteriori informazioni sui tipi di dati, consultare <a href="https://milvus.io/docs/schema.md#Supported-data-types">Tipi di dati supportati</a>.</p></li>
+<li><p><strong>Campo</strong>: Attualmente, la ricerca per raggruppamento consente solo una singola colonna. Non è possibile specificare più nomi di campi nella configurazione <code translate="no">group_by_field</code>.  Inoltre, la ricerca per gruppi è incompatibile con i tipi di dati JSON, FLOAT, DOUBLE, ARRAY o campi vettoriali.</p></li>
+<li><p><strong>Impatto sulle prestazioni</strong>: Tenere presente che le prestazioni diminuiscono con l'aumentare del numero di vettori di query. Prendendo come esempio un cluster con 2 core CPU e 8 GB di memoria, il tempo di esecuzione della ricerca per raggruppamento aumenta proporzionalmente al numero di vettori di query in ingresso.</p></li>
+<li><p><strong>Funzionalità</strong>: Attualmente la ricerca per gruppi non è supportata dalla <a href="https://milvus.io/docs/single-vector-search.md#Range-search">ricerca per intervallo</a>, dagli <a href="https://milvus.io/docs/with-iterators.md#Search-with-iterator">iteratori di ricerca</a> o dalla <a href="/docs/it/multi-vector-search.md">ricerca ibrida</a>.</p></li>
 </ul>
-<h2 id="Search-parameters" class="common-anchor-header">Search parameters<button data-href="#Search-parameters" class="anchor-icon" translate="no">
+<h2 id="Search-parameters" class="common-anchor-header">Parametri di ricerca<button data-href="#Search-parameters" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -1851,7 +1800,7 @@ doc_ids = [result[<span class="hljs-string">&#x27;entity&#x27;</span>][<span cla
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>In the above searches except the range search, the default search parameters apply. In normal cases, you do not need to manually set search parameters.</p>
+    </button></h2><p>Nelle ricerche di cui sopra, ad eccezione della ricerca per intervallo, si applicano i parametri di ricerca predefiniti. In casi normali, non è necessario impostare manualmente i parametri di ricerca.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># In normal cases, you do not need to set search parameters manually</span>
 <span class="hljs-comment"># Except for range searches.</span>
 search_parameters = {
@@ -1864,21 +1813,21 @@ search_parameters = {
     }
 }
 <button class="copy-code-btn"></button></code></pre>
-<p>The following table lists all possible settings in the search parameters.</p>
+<p>La tabella seguente elenca tutte le possibili impostazioni dei parametri di ricerca.</p>
 <table>
 <thead>
-<tr><th><strong>Parameter Name</strong></th><th><strong>Parameter Description</strong></th></tr>
+<tr><th><strong>Nome del parametro</strong></th><th><strong>Descrizione del parametro</strong></th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">metric_type</code></td><td>How to measure similarity between vector embeddings.<br/> Possible values are <code translate="no">IP</code>, <code translate="no">L2</code>, <code translate="no">COSINE</code>, <code translate="no">JACCARD</code>, and <code translate="no">HAMMING</code>, and defaults to that of the loaded index file.</td></tr>
-<tr><td><code translate="no">params.nprobe</code></td><td>Number of units to query during the search.<br/> The value falls in the range [1, nlist<sub>[1]</sub>].</td></tr>
-<tr><td><code translate="no">params.level</code></td><td>Search precision level.<br/> Possible values are <code translate="no">1</code>, <code translate="no">2</code>, and <code translate="no">3</code>, and defaults to <code translate="no">1</code>. Higher values yield more accurate results but slower performance.</td></tr>
-<tr><td><code translate="no">params.radius</code></td><td>Defines the outer boundary of your search space. Only vectors that are within this distance from the query vector are considered potential matches.<br/>The value range is determined by the <code translate="no">metric_type</code> parameter. For instance, if <code translate="no">metric_type</code> is set to <code translate="no">L2</code>, the valid value range is <code translate="no">[0, ∞]</code>. If <code translate="no">metric_type</code> is set to <code translate="no">COSINE</code>, the valid value range is <code translate="no">[-1, 1]</code>. For more information, refer to <a href="/docs/it/metric.md">Similarity Metrics</a>.</td></tr>
-<tr><td><code translate="no">params.range_filter</code></td><td>While <code translate="no">radius</code> sets the outer limit of the search, <code translate="no">range_filter</code> can be optionally used to define an inner boundary, creating a distance range within which vectors must fall to be considered matches.<br/>The value range is determined by the <code translate="no">metric_type</code> parameter. For instance, if <code translate="no">metric_type</code> is set to <code translate="no">L2</code>, the valid value range is <code translate="no">[0, ∞]</code>. If <code translate="no">metric_type</code> is set to <code translate="no">COSINE</code>, the valid value range is <code translate="no">[-1, 1]</code>. For more information, refer to <a href="/docs/it/metric.md">Similarity Metrics</a>.</td></tr>
+<tr><td><code translate="no">metric_type</code></td><td>Come misurare la somiglianza tra le incorporazioni vettoriali.<br/> I valori possibili sono <code translate="no">IP</code>, <code translate="no">L2</code>, <code translate="no">COSINE</code>, <code translate="no">JACCARD</code>, e <code translate="no">HAMMING</code>, e il valore predefinito è quello del file di indice caricato.</td></tr>
+<tr><td><code translate="no">params.nprobe</code></td><td>Numero di unità da interrogare durante la ricerca.<br/> Il valore rientra nell'intervallo [1, nlist<sub>[1]</sub>].</td></tr>
+<tr><td><code translate="no">params.level</code></td><td>Livello di precisione della ricerca.<br/> I valori possibili sono <code translate="no">1</code>, <code translate="no">2</code>, e <code translate="no">3</code>, per impostazione predefinita <code translate="no">1</code>. Valori più alti danno risultati più precisi ma prestazioni più lente.</td></tr>
+<tr><td><code translate="no">params.radius</code></td><td>Definisce il confine esterno dello spazio di ricerca. Solo i vettori che si trovano all'interno di questa distanza dal vettore di interrogazione sono considerati potenziali corrispondenze.<br/>L'intervallo di valori è determinato dal parametro <code translate="no">metric_type</code>. Ad esempio, se <code translate="no">metric_type</code> è impostato su <code translate="no">L2</code>, l'intervallo di valori valido è <code translate="no">[0, ∞]</code>. Se <code translate="no">metric_type</code> è impostato su <code translate="no">COSINE</code>, l'intervallo di valori valido è <code translate="no">[-1, 1]</code>. Per ulteriori informazioni, consultare <a href="/docs/it/metric.md">Metriche di somiglianza</a>.</td></tr>
+<tr><td><code translate="no">params.range_filter</code></td><td>Mentre <code translate="no">radius</code> stabilisce il limite esterno della ricerca, <code translate="no">range_filter</code> può essere usato opzionalmente per definire un confine interno, creando un intervallo di distanza entro il quale i vettori devono rientrare per essere considerati corrispondenti.<br/>L'intervallo di valori è determinato dal parametro <code translate="no">metric_type</code>. Ad esempio, se <code translate="no">metric_type</code> è impostato su <code translate="no">L2</code>, l'intervallo di valori valido è <code translate="no">[0, ∞]</code>. Se <code translate="no">metric_type</code> è impostato su <code translate="no">COSINE</code>, l'intervallo di valori valido è <code translate="no">[-1, 1]</code>. Per ulteriori informazioni, consultare <a href="/docs/it/metric.md">Metriche di somiglianza</a>.</td></tr>
 </tbody>
 </table>
 <div class="admonition note">
-<p><strong>notes</strong></p>
-<p>[1] Number of cluster units after indexing. When indexing a collection, Milvus sub-divides the vector data into multiple cluster units, the number of which varies with the actual index settings.</p>
-<p>[2] Number of entities to return in a search.</p>
+<p><strong>note</strong></p>
+<p>[1] Numero di unità di cluster dopo l'indicizzazione. Quando si indicizza una collezione, Milvus suddivide i dati vettoriali in più unità cluster, il cui numero varia in base alle impostazioni dell'indice.</p>
+<p>[2] Numero di entità da restituire in una ricerca.</p>
 </div>

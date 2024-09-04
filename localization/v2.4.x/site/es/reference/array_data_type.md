@@ -1,9 +1,8 @@
 ---
 id: array_data_type.md
 title: Utilizar campos de matriz
-summary: ''
 ---
-<h1 id="Use-Array-Fields" class="common-anchor-header">Use Array Fields<button data-href="#Use-Array-Fields" class="anchor-icon" translate="no">
+<h1 id="Use-Array-Fields" class="common-anchor-header">Utilizar campos de matriz<button data-href="#Use-Array-Fields" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -18,8 +17,8 @@ summary: ''
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>This guide explains how to use the array fields, such as inserting array values, creating indexes on vector and array fields, as well as searching and querying in array fields with basic and advanced operators.</p>
-<h2 id="Prerequisites" class="common-anchor-header">Prerequisites<button data-href="#Prerequisites" class="anchor-icon" translate="no">
+    </button></h1><p>Esta guía explica cómo utilizar los campos de array, como insertar valores de array, crear índices en campos de vector y array, así como buscar y consultar en campos de array con operadores básicos y avanzados.</p>
+<h2 id="Prerequisites" class="common-anchor-header">Requisitos previos<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -34,12 +33,12 @@ summary: ''
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Ensure you have the following:</p>
+    </button></h2><p>Asegúrese de tener lo siguiente:</p>
 <ul>
-<li>Milvus installed and running. For information on how to install Milvus, refer to <a href="/docs/es/install-overview.md">Install Milvus</a>.</li>
-<li>One of Milvus SDKs installed in your environment. For details, refer to <a href="/docs/es/install-pymilvus.md">Install SDKs</a>.</li>
+<li>Milvus instalado y en ejecución. Para obtener información sobre cómo instalar Milvus, consulte <a href="/docs/es/install-overview.md">Instalar Milvus</a>.</li>
+<li>Uno de los SDK de Milvus instalado en su entorno. Para más detalles, consulte <a href="/docs/es/install-pymilvus.md">Instalar SDKs</a>.</li>
 </ul>
-<h2 id="Prepare-data-with-an-array-field" class="common-anchor-header">Prepare data with an array field<button data-href="#Prepare-data-with-an-array-field" class="anchor-icon" translate="no">
+<h2 id="Prepare-data-with-an-array-field" class="common-anchor-header">Preparar datos con un campo array<button data-href="#Prepare-data-with-an-array-field" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -54,13 +53,10 @@ summary: ''
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus supports arrays as one of the field data types. An array in a Milvus collection should always have elements of the same data type, and the data type for array elements can be any of the supported data types in Milvus. For a list of supported data types, refer to <a href="https://milvus.io/docs/schema.md#Supported-data-types">Supported data types</a>.</p>
-<p>The following code snippet generates a random dataset containing an array field named <code translate="no">color_coord</code>, with all elements of the interger data type.</p>
+    </button></h2><p>Milvus soporta arrays como uno de los tipos de datos de campo. Un array en una colección Milvus debe tener siempre elementos del mismo tipo de datos, y el tipo de datos para los elementos del array puede ser cualquiera de los tipos de datos soportados en Milvus. Para obtener una lista de los tipos de datos admitidos, consulte <a href="https://milvus.io/docs/schema.md#Supported-data-types">Tipos de datos admitidos</a>.</p>
+<p>El siguiente fragmento de código genera un conjunto de datos aleatorio que contiene un campo array llamado <code translate="no">color_coord</code>, con todos los elementos del tipo de datos interger.</p>
 <div class="multipleCode">
-    <a href="#python">Python </a>
-    <a href="#java">Java</a>
-    <a href="#javascript">Node.js</a>
-</div>
+   <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> random
 
 colors = [<span class="hljs-string">&quot;green&quot;</span>, <span class="hljs-string">&quot;blue&quot;</span>, <span class="hljs-string">&quot;yellow&quot;</span>, <span class="hljs-string">&quot;red&quot;</span>, <span class="hljs-string">&quot;black&quot;</span>, <span class="hljs-string">&quot;white&quot;</span>, <span class="hljs-string">&quot;purple&quot;</span>, <span class="hljs-string">&quot;pink&quot;</span>, <span class="hljs-string">&quot;orange&quot;</span>, <span class="hljs-string">&quot;brown&quot;</span>, <span class="hljs-string">&quot;grey&quot;</span>]
@@ -127,8 +123,8 @@ data = []
 
 <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(data[<span class="hljs-number">0</span>]);
 <button class="copy-code-btn"></button></code></pre>
-<p>This code snippet prepares a list of random colors and generates a dataset containing 1,000 entities. Each entity has an ID, a vector of five floating-point numbers, a color, a color tag, and an array field <code translate="no">color_coord</code> containing between 3 to 5 integer values. The sample data is printed to verify its structure.</p>
-<p>Output structure:</p>
+<p>Este fragmento de código prepara una lista de colores aleatorios y genera un conjunto de datos que contiene 1.000 entidades. Cada entidad tiene un ID, un vector de cinco números en coma flotante, un color, una etiqueta de color y un campo de matriz <code translate="no">color_coord</code> que contiene entre 3 y 5 valores enteros. Los datos de muestra se imprimen para verificar su estructura.</p>
+<p>Estructura de salida:</p>
 <pre><code translate="no" class="language-json">{
     <span class="hljs-built_in">id</span>: <span class="hljs-number">0</span>,
     vector: [
@@ -143,7 +139,7 @@ data = []
     color_coord: [ <span class="hljs-number">3</span>, <span class="hljs-number">0</span>, <span class="hljs-number">18</span>, <span class="hljs-number">29</span> ]
 }
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Set-up-MilvusClient" class="common-anchor-header">Set up MilvusClient<button data-href="#Set-up-MilvusClient" class="anchor-icon" translate="no">
+<h2 id="Set-up-MilvusClient" class="common-anchor-header">Configurar MilvusClient<button data-href="#Set-up-MilvusClient" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -158,12 +154,9 @@ data = []
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>To interact with Milvus, set up the Milvus client by specifying the server address.</p>
+    </button></h2><p>Para interactuar con Milvus, configure el cliente Milvus especificando la dirección del servidor.</p>
 <div class="multipleCode">
-    <a href="#python">Python </a>
-    <a href="#java">Java</a>
-    <a href="#javascript">Node.js</a>
-</div>
+   <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> <span class="hljs-title class_">MilvusClient</span>, <span class="hljs-title class_">DataType</span>
 
 <span class="hljs-variable constant_">SERVER_ADDR</span> = <span class="hljs-string">&quot;http://localhost:19530&quot;</span>
@@ -190,7 +183,7 @@ client = <span class="hljs-title class_">MilvusClient</span>(uri=<span class="hl
 
 <span class="hljs-keyword">const</span> milvusClient = <span class="hljs-keyword">new</span> <span class="hljs-title class_">MilvusClient</span>({<span class="hljs-attr">address</span>: address});
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Create-a-collection-with-an-array-field" class="common-anchor-header">Create a collection with an array field<button data-href="#Create-a-collection-with-an-array-field" class="anchor-icon" translate="no">
+<h2 id="Create-a-collection-with-an-array-field" class="common-anchor-header">Crear una colección con un campo array<button data-href="#Create-a-collection-with-an-array-field" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -205,35 +198,32 @@ client = <span class="hljs-title class_">MilvusClient</span>(uri=<span class="hl
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Define-collection-schema" class="common-anchor-header">Define collection schema</h3><p>A schema defines the structure of the collection, including the fields and their data types. The example below defines a collection schema matching the sample data generated in the <a href="#prepare-data-with-an-array-field">previous section</a>.</p>
-<p>To configure an array field in a collection:</p>
+    </button></h2><h3 id="Define-collection-schema" class="common-anchor-header">Definir el esquema de la colección</h3><p>Un esquema define la estructura de la colección, incluidos los campos y sus tipos de datos. El siguiente ejemplo define un esquema de colección que coincide con los datos de ejemplo generados en la <a href="#prepare-data-with-an-array-field">sección anterior</a>.</p>
+<p>Para configurar un campo de matriz en una colección:</p>
 <div class="language-python">
 <ol>
-<li>Set the <code translate="no">datatype</code>: Configure it as <code translate="no">DataType.ARRAY</code>.</li>
-<li>Specify the <code translate="no">element_type</code>: Choose the data type for the elements in the array. Elements in an array field should all have the same data type. In this example, the <code translate="no">element_type</code> is set to <code translate="no">DataType.INT64</code>.</li>
-<li>Define the <code translate="no">max_capacity</code>: Set this parameter to specify the maximum number of elements the array field can hold.</li>
+<li>Establezca el <code translate="no">datatype</code>: Configúrelo como <code translate="no">DataType.ARRAY</code>.</li>
+<li>Especifique el <code translate="no">element_type</code>: Elija el tipo de datos para los elementos del array. Los elementos de un campo de matriz deben tener todos el mismo tipo de datos. En este ejemplo, el <code translate="no">element_type</code> se configura como <code translate="no">DataType.INT64</code>.</li>
+<li>Defina el <code translate="no">max_capacity</code>: Configure este parámetro para especificar el número máximo de elementos que puede contener el campo array.</li>
 </ol>
 </div>
 <div class="language-java">
 <ol>
-<li>Set the <code translate="no">dataType</code>: Configure it as <code translate="no">DataType.Array</code>.</li>
-<li>Specify the <code translate="no">elementType</code>: Choose the data type for the elements in the array. Elements in an array field should all have the same data type. In this example, the <code translate="no">elementType</code> is set to <code translate="no">DataType.Int64</code>.</li>
-<li>Define the <code translate="no">maxCapacity</code>: Set this parameter to specify the maximum number of elements the array field can hold.</li>
+<li>Defina el <code translate="no">dataType</code>: Configúrelo como <code translate="no">DataType.Array</code>.</li>
+<li>Especifique el <code translate="no">elementType</code>: Elija el tipo de datos para los elementos del array. Los elementos de un campo de matriz deben tener todos el mismo tipo de datos. En este ejemplo, el <code translate="no">elementType</code> se configura como <code translate="no">DataType.Int64</code>.</li>
+<li>Defina el <code translate="no">maxCapacity</code>: Configure este parámetro para especificar el número máximo de elementos que puede contener el campo array.</li>
 </ol>
 </div>
 <div class="language-javascript">
 <ol>
-<li>Set the <code translate="no">data_type</code>: Configure it as <code translate="no">DataType.Array</code>.</li>
-<li>Specify the <code translate="no">element_type</code>: Choose the data type for the elements in the array. Elements in an array field should all have the same data type. In this example, the <code translate="no">element_type</code> is set to <code translate="no">DataType.Int64</code>.</li>
-<li>Define the <code translate="no">max_capacity</code>: Set this parameter to specify the maximum number of elements the array field can hold.</li>
+<li>Defina el <code translate="no">data_type</code>: Configúrelo como <code translate="no">DataType.Array</code>.</li>
+<li>Especifique el <code translate="no">element_type</code>: Elija el tipo de datos para los elementos del array. Los elementos de un campo de matriz deben tener todos el mismo tipo de datos. En este ejemplo, el <code translate="no">element_type</code> se configura como <code translate="no">DataType.Int64</code>.</li>
+<li>Defina el <code translate="no">max_capacity</code>: Establezca este parámetro para especificar el número máximo de elementos que puede contener el campo de matriz.</li>
 </ol>
 </div>
-<p>The example code below defines the collection schema with an array field <code translate="no">color_coord</code>, with a maximum of 5 elements and each element of the integer data type.</p>
+<p>El siguiente código de ejemplo define el esquema de la colección con un campo array <code translate="no">color_coord</code>, con un máximo de 5 elementos y cada elemento del tipo de datos entero.</p>
 <div class="multipleCode">
-    <a href="#python">Python </a>
-    <a href="#java">Java</a>
-    <a href="#javascript">Node.js</a>
-</div>
+   <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a></div>
 <pre><code translate="no" class="language-python">schema = client.create_schema(auto_id=<span class="hljs-literal">False</span>, enable_dynamic_field=<span class="hljs-literal">False</span>)
 
 schema.add_field(field_name=<span class="hljs-string">&quot;id&quot;</span>, datatype=DataType.INT64, is_primary=<span class="hljs-literal">True</span>)
@@ -307,20 +297,17 @@ schema.addField(AddFieldReq.builder()
 ];
 <button class="copy-code-btn"></button></code></pre>
 <div class="language-python">
-<p>For more information on methods and parameters, refer to <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_schema.md">create_schema</a> and <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/CollectionSchema/add_field.md">add_field</a>.</p>
+<p>Para más información sobre métodos y parámetros, consulte <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_schema.md">create_schema</a> y <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/CollectionSchema/add_field.md">add_field</a>.</p>
 </div>
 <div class="language-java">
-<p>For more information on methods and parameters, refer to <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Collections/createSchema.md">createSchema</a> and <a href="https://milvus.io/api-reference/java/v2.4.x/v2/CollectionSchema/addField.md">addField</a>.</p>
+<p>Para más información sobre métodos y parámetros, consulte <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Collections/createSchema.md">createSchema</a> y <a href="https://milvus.io/api-reference/java/v2.4.x/v2/CollectionSchema/addField.md">addField</a>.</p>
 </div>
 <div class="language-javascript">
-<p>For more information on methods and parameters, refer to <a href="https://milvus.io/api-reference/node/v2.4.x/Collections/createCollection.md">createCollection</a>.</p>
+<p>Para más información sobre métodos y parámetros, consulta <a href="https://milvus.io/api-reference/node/v2.4.x/Collections/createCollection.md">createCollection</a>.</p>
 </div>
-<h3 id="Create-the-collection" class="common-anchor-header">Create the collection</h3><p>Then, create the collection using the defined schema.</p>
+<h3 id="Create-the-collection" class="common-anchor-header">Crear la colección</h3><p>A continuación, crea la colección utilizando el esquema definido.</p>
 <div class="multipleCode">
-    <a href="#python">Python </a>
-    <a href="#java">Java</a>
-    <a href="#javascript">Node.js</a>
-</div>
+   <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a></div>
 <pre><code translate="no" class="language-python">client.create_collection(collection_name=<span class="hljs-string">&quot;test_collection&quot;</span>, schema=schema)
 client.list_collections()
 
@@ -347,15 +334,15 @@ client.createCollection(customizedSetupReq);
 <span class="hljs-comment">// Existing collections: test_collection</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="language-python">
-<p>For more information on methods and parameters, refer to <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_collection.md">create_collection</a> and <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/list_collections.md">list_collections</a>.</p>
+<p>Para más información sobre métodos y parámetros, consulte <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_collection.md">create_collection</a> y <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/list_collections.md">list_collections</a>.</p>
 </div>
 <div class="language-java">
-<p>For more information on methods and parameters, refer to <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Collections/createCollection.md">createCollection</a>.</p>
+<p>Para más información sobre métodos y parámetros, consulte <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Collections/createCollection.md">createCollection</a>.</p>
 </div>
 <div class="language-javascript">
-<p>For more information on methods and parameters, refer to <a href="https://milvus.io/api-reference/node/v2.4.x/Collections/createCollection.md">createCollection</a> and <a href="https://milvus.io/api-reference/node/v2.4.x/Collections/listCollections.md">listCollections</a>.</p>
+<p>Para más información sobre métodos y parámetros, consulta <a href="https://milvus.io/api-reference/node/v2.4.x/Collections/createCollection.md">createCollection</a> y <a href="https://milvus.io/api-reference/node/v2.4.x/Collections/listCollections.md">listCollections</a>.</p>
 </div>
-<h2 id="Create-indexes" class="common-anchor-header">Create indexes<button data-href="#Create-indexes" class="anchor-icon" translate="no">
+<h2 id="Create-indexes" class="common-anchor-header">Crear índices<button data-href="#Create-indexes" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -370,14 +357,11 @@ client.createCollection(customizedSetupReq);
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Indexes improve the performance of search and query operations. In Milvus, you can create indexes on both vector fields and scalar fields. In this example, we’ll create an <code translate="no">IVF_FLAT</code> index on the vector field <code translate="no">vector</code> and an <code translate="no">INVERTED</code> index on the array field <code translate="no">color_coord</code>. For more information on indexes, refer to <a href="https://milvus.io/docs/index-vector-fields.md?tab=floating">Index Vector Fields</a> and <a href="https://milvus.io/docs/index-scalar-fields.md">Index Scalar Fields</a>.</p>
-<h3 id="Index-vector-field" class="common-anchor-header">Index vector field</h3><p>Creating an index on a vector field can improve the performance of vector similarity search, which is necessary for each search operation.</p>
-<p>The example below creates an index of type <code translate="no">IVF_FLAT</code> on the vector field <code translate="no">vector</code>.</p>
+    </button></h2><p>Los índices mejoran el rendimiento de las operaciones de búsqueda y consulta. En Milvus, puede crear índices tanto en campos vectoriales como en campos escalares. En este ejemplo, crearemos un índice <code translate="no">IVF_FLAT</code> en el campo vectorial <code translate="no">vector</code> y un índice <code translate="no">INVERTED</code> en el campo escalar <code translate="no">color_coord</code>. Para más información sobre índices, consulta <a href="https://milvus.io/docs/index-vector-fields.md?tab=floating">Indexar campos vectoriales</a> e <a href="https://milvus.io/docs/index-scalar-fields.md">Indexar campos escalares</a>.</p>
+<h3 id="Index-vector-field" class="common-anchor-header">Campo vectorial indexado</h3><p>La creación de un índice en un campo vectorial puede mejorar el rendimiento de la búsqueda de similitud vectorial, que es necesaria para cada operación de búsqueda.</p>
+<p>El siguiente ejemplo crea un índice de tipo <code translate="no">IVF_FLAT</code> en el campo vectorial <code translate="no">vector</code>.</p>
 <div class="multipleCode">
-    <a href="#python">Python </a>
-    <a href="#java">Java</a>
-    <a href="#javascript">Node.js</a>
-</div>
+   <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a></div>
 <pre><code translate="no" class="language-python">index_params = client.prepare_index_params()
 
 index_params.add_index(
@@ -430,21 +414,18 @@ console.log(<span class="hljs-string">&quot;Vector index description: &quot;</sp
 // Vector index description: {<span class="hljs-string">&quot;index_descriptions&quot;</span>:[{<span class="hljs-string">&quot;params&quot;</span>:[{<span class="hljs-string">&quot;key&quot;</span>:<span class="hljs-string">&quot;params&quot;</span>,<span class="hljs-string">&quot;value&quot;</span>:<span class="hljs-string">&quot;{\&quot;nlist\&quot;:128}&quot;</span>},{<span class="hljs-string">&quot;key&quot;</span>:<span class="hljs-string">&quot;index_type&quot;</span>,<span class="hljs-string">&quot;value&quot;</span>:<span class="hljs-string">&quot;IVF_FLAT&quot;</span>},{<span class="hljs-string">&quot;key&quot;</span>:<span class="hljs-string">&quot;metric_type&quot;</span>,<span class="hljs-string">&quot;value&quot;</span>:<span class="hljs-string">&quot;COSINE&quot;</span>}],<span class="hljs-string">&quot;index_name&quot;</span>:<span class="hljs-string">&quot;vector_index&quot;</span>,<span class="hljs-string">&quot;indexID&quot;</span>:<span class="hljs-string">&quot;451543183233666062&quot;</span>,<span class="hljs-string">&quot;field_name&quot;</span>:<span class="hljs-string">&quot;vector&quot;</span>,<span class="hljs-string">&quot;indexed_rows&quot;</span>:<span class="hljs-string">&quot;0&quot;</span>,<span class="hljs-string">&quot;total_rows&quot;</span>:<span class="hljs-string">&quot;0&quot;</span>,<span class="hljs-string">&quot;state&quot;</span>:<span class="hljs-string">&quot;Finished&quot;</span>,<span class="hljs-string">&quot;index_state_fail_reason&quot;</span>:<span class="hljs-string">&quot;&quot;</span>,<span class="hljs-string">&quot;pending_index_rows&quot;</span>:<span class="hljs-string">&quot;0&quot;</span>}],<span class="hljs-string">&quot;status&quot;</span>:{<span class="hljs-string">&quot;extra_info&quot;</span>:{},<span class="hljs-string">&quot;error_code&quot;</span>:<span class="hljs-string">&quot;Success&quot;</span>,<span class="hljs-string">&quot;reason&quot;</span>:<span class="hljs-string">&quot;&quot;</span>,<span class="hljs-string">&quot;code&quot;</span>:<span class="hljs-number">0</span>,<span class="hljs-string">&quot;retriable&quot;</span>:false,<span class="hljs-string">&quot;detail&quot;</span>:<span class="hljs-string">&quot;&quot;</span>}}
 <button class="copy-code-btn"></button></code></pre>
 <div class="language-python">
-<p>For more information on methods and parameters, refer to <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/prepare_index_params.md">prepare_index_params</a>, <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/create_index.md">create_index</a>, and <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/describe_index.md">describe_index</a>.</p>
+<p>Para obtener más información sobre métodos y parámetros, consulte <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/prepare_index_params.md">prepare_index_params</a>, <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/create_index.md">create_index</a> y <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/describe_index.md">describe_index</a>.</p>
 </div>
 <div class="language-java">
-<p>For more information on methods and parameters, refer to <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Management/IndexParam.md">IndexParam</a> and <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Management/createIndex.md">createIndex</a>.</p>
+<p>Para más información sobre métodos y parámetros, consulte <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Management/IndexParam.md">IndexParam</a> y <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Management/createIndex.md">createIndex</a>.</p>
 </div>
 <div class="language-javascript">
-<p>For more information on methods and parameters, refer to <a href="https://milvus.io/api-reference/node/v2.4.x/Management/createIndex.md">createIndex</a>, and <a href="https://milvus.io/api-reference/node/v2.4.x/Management/describeIndex.md">describeIndex</a>.</p>
+<p>Para obtener más información sobre métodos y parámetros, consulta <a href="https://milvus.io/api-reference/node/v2.4.x/Management/createIndex.md">createIndex</a> y <a href="https://milvus.io/api-reference/node/v2.4.x/Management/describeIndex.md">describeIndex</a>.</p>
 </div>
-<h3 id="Index-array-field" class="common-anchor-header">Index array field</h3><p>Creating an index on a scalar field can improve the retrieval performance of queries on that field, which is optional but recommended for large datasets.</p>
-<p>In this example, we’ll create an inverted index on the <code translate="no">color_coord</code> array field. This will allow us to speed up filtering based on this field. The inverted index demonstrates excellent overall performance, significantly outperforming brute force filtering using raw data when data is not frequently retrieved, and maintaining comparable performance with frequent retrieval operations. For more information on inverted indexes, refer to <a href="/docs/es/scalar_index.md#Inverted-indexing">Scalar Index</a>.</p>
+<h3 id="Index-array-field" class="common-anchor-header">Campo escalar de índice</h3><p>La creación de un índice en un campo escalar puede mejorar el rendimiento de recuperación de las consultas en ese campo, lo cual es opcional pero recomendable para grandes conjuntos de datos.</p>
+<p>En este ejemplo, crearemos un índice invertido en el campo de matriz <code translate="no">color_coord</code>. Esto nos permitirá acelerar el filtrado basado en este campo. El índice invertido muestra un rendimiento general excelente, superando significativamente al filtrado por fuerza bruta que utiliza datos sin procesar cuando los datos no se recuperan con frecuencia, y manteniendo un rendimiento comparable con operaciones de recuperación frecuentes. Para obtener más información sobre los índices invertidos, consulte <a href="/docs/es/scalar_index.md#Inverted-indexing">Índice escalar</a>.</p>
 <div class="multipleCode">
-    <a href="#python">Python </a>
-    <a href="#java">Java</a>
-    <a href="#javascript">Node.js</a>
-</div>
+   <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a></div>
 <pre><code translate="no" class="language-python">index_params = client.prepare_index_params()
 
 index_params.add_index(
@@ -490,15 +471,15 @@ console.log(<span class="hljs-string">&quot;Array index description: &quot;</spa
 // Array index description: {<span class="hljs-string">&quot;index_descriptions&quot;</span>:[{<span class="hljs-string">&quot;params&quot;</span>:[{<span class="hljs-string">&quot;key&quot;</span>:<span class="hljs-string">&quot;index_type&quot;</span>,<span class="hljs-string">&quot;value&quot;</span>:<span class="hljs-string">&quot;INVERTED&quot;</span>}],<span class="hljs-string">&quot;index_name&quot;</span>:<span class="hljs-string">&quot;inverted_index&quot;</span>,<span class="hljs-string">&quot;indexID&quot;</span>:<span class="hljs-string">&quot;451543183233667243&quot;</span>,<span class="hljs-string">&quot;field_name&quot;</span>:<span class="hljs-string">&quot;color_coord&quot;</span>,<span class="hljs-string">&quot;indexed_rows&quot;</span>:<span class="hljs-string">&quot;0&quot;</span>,<span class="hljs-string">&quot;total_rows&quot;</span>:<span class="hljs-string">&quot;0&quot;</span>,<span class="hljs-string">&quot;state&quot;</span>:<span class="hljs-string">&quot;Finished&quot;</span>,<span class="hljs-string">&quot;index_state_fail_reason&quot;</span>:<span class="hljs-string">&quot;&quot;</span>,<span class="hljs-string">&quot;pending_index_rows&quot;</span>:<span class="hljs-string">&quot;0&quot;</span>}],<span class="hljs-string">&quot;status&quot;</span>:{<span class="hljs-string">&quot;extra_info&quot;</span>:{},<span class="hljs-string">&quot;error_code&quot;</span>:<span class="hljs-string">&quot;Success&quot;</span>,<span class="hljs-string">&quot;reason&quot;</span>:<span class="hljs-string">&quot;&quot;</span>,<span class="hljs-string">&quot;code&quot;</span>:<span class="hljs-number">0</span>,<span class="hljs-string">&quot;retriable&quot;</span>:false,<span class="hljs-string">&quot;detail&quot;</span>:<span class="hljs-string">&quot;&quot;</span>}}
 <button class="copy-code-btn"></button></code></pre>
 <div class="language-python">
-<p>For more information on methods and parameters, refer to <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/prepare_index_params.md">prepare_index_params</a>, <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/create_index.md">create_index</a>, and <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/describe_index.md">describe_index</a>.</p>
+<p>Para obtener más información sobre métodos y parámetros, consulte <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/prepare_index_params.md">prepare_index_params</a>, <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/create_index.md">create_index</a> y <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/describe_index.md">describe_index</a>.</p>
 </div>
 <div class="language-java">
-<p>For more information on methods and parameters, refer to <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Management/IndexParam.md">IndexParam</a> and <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Management/createIndex.md">createIndex</a>.</p>
+<p>Para obtener más información sobre métodos y parámetros, consulte <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Management/IndexParam.md">IndexParam</a> y <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Management/createIndex.md">createIndex</a>.</p>
 </div>
 <div class="language-javascript">
-<p>For more information on methods and parameters, refer to <a href="https://milvus.io/api-reference/node/v2.4.x/Management/createIndex.md">createIndex</a>, and <a href="https://milvus.io/api-reference/node/v2.4.x/Management/describeIndex.md">describeIndex</a>.</p>
+<p>Para más información sobre métodos y parámetros, consulta <a href="https://milvus.io/api-reference/node/v2.4.x/Management/createIndex.md">createIndex</a> y <a href="https://milvus.io/api-reference/node/v2.4.x/Management/describeIndex.md">describeIndex</a>.</p>
 </div>
-<h2 id="Insert-data" class="common-anchor-header">Insert data<button data-href="#Insert-data" class="anchor-icon" translate="no">
+<h2 id="Insert-data" class="common-anchor-header">Insertar datos<button data-href="#Insert-data" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -513,12 +494,9 @@ console.log(<span class="hljs-string">&quot;Array index description: &quot;</spa
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Once the collection and indexes are created, we can insert the data into the collection. This step inserts 1,000 entities into the <code translate="no">test_collection</code>.</p>
+    </button></h2><p>Una vez creados la colección y los índices, podemos insertar los datos en la colección. Este paso inserta 1.000 entidades en <code translate="no">test_collection</code>.</p>
 <div class="multipleCode">
-    <a href="#python">Python </a>
-    <a href="#java">Java</a>
-    <a href="#javascript">Node.js</a>
-</div>
+   <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a></div>
 <pre><code translate="no" class="language-python">res = client.insert(collection_name=<span class="hljs-string">&quot;test_collection&quot;</span>, data=data)
 <span class="hljs-built_in">print</span>(res)
 
@@ -542,7 +520,7 @@ console.log(<span class="hljs-string">&quot;Array index description: &quot;</spa
 <span class="hljs-comment">// Output:</span>
 <span class="hljs-comment">// Inserted 1000 entities</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Load-the-collection" class="common-anchor-header">Load the collection<button data-href="#Load-the-collection" class="anchor-icon" translate="no">
+<h2 id="Load-the-collection" class="common-anchor-header">Cargar la colección<button data-href="#Load-the-collection" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -557,12 +535,9 @@ console.log(<span class="hljs-string">&quot;Array index description: &quot;</spa
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>After inserting data, we need to load the collection to make it available for search and query operations.</p>
+    </button></h2><p>Después de insertar los datos, tenemos que cargar la colección para que esté disponible para las operaciones de búsqueda y consulta.</p>
 <div class="multipleCode">
-    <a href="#python">Python </a>
-    <a href="#java">Java</a>
-    <a href="#javascript">Node.js</a>
-</div>
+   <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a></div>
 <pre><code translate="no" class="language-python">client.<span class="hljs-title function_">load_collection</span>(<span class="hljs-string">&#x27;test_collection&#x27;</span>)
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-java"><span class="hljs-type">LoadCollectionReq</span> <span class="hljs-variable">loadCollectionReq</span> <span class="hljs-operator">=</span> LoadCollectionReq.builder()
@@ -583,7 +558,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 <span class="hljs-comment">// Output:</span>
 <span class="hljs-comment">// Collection load state: LoadStateLoaded</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Basic-scalar-filtering" class="common-anchor-header">Basic scalar filtering<button data-href="#Basic-scalar-filtering" class="anchor-icon" translate="no">
+<h2 id="Basic-scalar-filtering" class="common-anchor-header">Filtrado escalar básico<button data-href="#Basic-scalar-filtering" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -598,21 +573,18 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Once all of your data has been added, you can conduct searches and queries using the elements in the array field in the same manner as you would with a standard scalar field.</p>
+    </button></h2><p>Una vez añadidos todos los datos, puede realizar búsquedas y consultas utilizando los elementos del campo de matriz del mismo modo que lo haría con un campo escalar estándar.</p>
 <div class="language-python">
-<p>For more information on parameters, refer to <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Vector/search.md"><code translate="no">search()</code></a> in the SDK reference.</p>
+<p>Para obtener más información sobre los parámetros, consulte <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Vector/search.md"><code translate="no">search()</code></a> en la referencia del SDK.</p>
 </div>
 <div class="language-java">
-<p>For more information on parameters, refer to <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Vector/search.md"><code translate="no">search()</code></a> in the SDK reference.</p>
+<p>Para obtener más información sobre los parámetros, consulte <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Vector/search.md"><code translate="no">search()</code></a> en la referencia del SDK.</p>
 </div>
 <div class="language-javascript">
-<p>For more information on parameters, refer to <a href="https://milvus.io/api-reference/node/v2.4.x/Vector/search.md"><code translate="no">search()</code></a> in the SDK reference.</p>
+<p>Para obtener más información sobre los parámetros, consulte <a href="https://milvus.io/api-reference/node/v2.4.x/Vector/search.md"><code translate="no">search()</code></a> en la referencia del SDK.</p>
 </div>
 <div class="multipleCode">
-    <a href="#python">Python </a>
-    <a href="#java">Java</a>
-    <a href="#javascript">Node.js</a>
-</div>
+   <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># 4. Basic search with the array field</span>
 query_vectors = [ [ random.uniform(-<span class="hljs-number">1</span>, <span class="hljs-number">1</span>) <span class="hljs-keyword">for</span> _ <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">5</span>) ]]
 
@@ -733,7 +705,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 <span class="hljs-comment">//     }</span>
 <span class="hljs-comment">// ]</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Advanced-filtering" class="common-anchor-header">Advanced filtering<button data-href="#Advanced-filtering" class="anchor-icon" translate="no">
+<h2 id="Advanced-filtering" class="common-anchor-header">Filtrado avanzado<button data-href="#Advanced-filtering" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -748,14 +720,11 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>As what we have in a JSON field, Milvus also provides advanced filtering operators for arrays, namely <code translate="no">ARRAY_CONTAINS</code>, <code translate="no">ARRAY_CONTAINS_ALL</code>, <code translate="no">ARRAY_CONTAINS_ANY</code>, and <code translate="no">ARRAY_LENGTH</code>. For more information on operators, refer to <a href="#reference-on-array-filters">Reference on array filters</a>.</p>
+    </button></h2><p>Como lo que tenemos en un campo JSON, Milvus también proporciona operadores avanzados de filtrado para arrays, a saber <code translate="no">ARRAY_CONTAINS</code>, <code translate="no">ARRAY_CONTAINS_ALL</code>, <code translate="no">ARRAY_CONTAINS_ANY</code>, y <code translate="no">ARRAY_LENGTH</code>. Para más información sobre los operadores, consulte <a href="#reference-on-array-filters">Referencia sobre filtros de matrices</a>.</p>
 <ul>
-<li><p>Filters all entities having a <code translate="no">10</code> in their <code translate="no">color_coord</code> values.</p>
+<li><p>Filtra todas las entidades que tienen un <code translate="no">10</code> en sus valores <code translate="no">color_coord</code>.</p>
 <p><div class="multipleCode">
-<a href="#python">Python </a>
-<a href="#java">Java</a>
-<a href="#javascript">Node.js</a>
-</div></p>
+<a href="#python">Python </a><a href="#java">Java</a><a href="#javascript">Node.js</a></div></p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># 5. Advanced query within the array field</span>
 
 res = client.query(
@@ -868,12 +837,9 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 <span class="hljs-comment">// ]</span>
 <span class="hljs-comment">// </span>
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p>Filters all entities having a <code translate="no">7</code> and an <code translate="no">8</code> in their <code translate="no">color_coord</code> values.</p>
+<li><p>Filtra todas las entidades que tienen un <code translate="no">7</code> y un <code translate="no">8</code> en sus valores <code translate="no">color_coord</code>.</p>
 <p><div class="multipleCode">
-<a href="#python">Python </a>
-<a href="#java">Java</a>
-<a href="#javascript">Node.js</a>
-</div></p>
+<a href="#python">Python </a><a href="#java">Java</a><a href="#javascript">Node.js</a></div></p>
 <pre><code translate="no" class="language-python">res = client.query(
     collection_name=<span class="hljs-string">&quot;test_collection&quot;</span>,
     filter=<span class="hljs-string">&quot;ARRAY_CONTAINS_ALL(color_coord, [7, 8])&quot;</span>,
@@ -963,12 +929,9 @@ queryResp = client.<span class="hljs-title function_">query</span>(queryReq);
 <span class="hljs-comment">// ]</span>
 <span class="hljs-comment">// </span>
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p>Filters all entities having either 7, 8, or 9 in their <code translate="no">color_coord</code> values.</p>
+<li><p>Filtra todas las entidades que tienen 7, 8 o 9 en sus valores <code translate="no">color_coord</code>.</p>
 <p><div class="multipleCode">
-<a href="#python">Python </a>
-<a href="#java">Java</a>
-<a href="#javascript">Node.js</a>
-</div></p>
+<a href="#python">Python </a><a href="#java">Java</a><a href="#javascript">Node.js</a></div></p>
 <pre><code translate="no" class="language-python">res = client.query(
     collection_name=<span class="hljs-string">&quot;test_collection&quot;</span>,
     filter=<span class="hljs-string">&quot;ARRAY_CONTAINS_ANY(color_coord, [7, 8, 9])&quot;</span>,
@@ -1074,12 +1037,9 @@ queryResp = client.<span class="hljs-title function_">query</span>(queryReq);
 <span class="hljs-comment">// ]</span>
 <span class="hljs-comment">// </span>
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p>Filters entities that have exactly four elements.</p>
+<li><p>Filtra las entidades que tienen exactamente cuatro elementos.</p>
 <p><div class="multipleCode">
-<a href="#python">Python </a>
-<a href="#java">Java</a>
-<a href="#javascript">Node.js</a>
-</div></p>
+<a href="#python">Python </a><a href="#java">Java</a><a href="#javascript">Node.js</a></div></p>
 <pre><code translate="no" class="language-python">res = client.query(
     collection_name=<span class="hljs-string">&quot;test_collection&quot;</span>,
     filter=<span class="hljs-string">&quot;ARRAY_LENGTH(color_coord) == 4&quot;</span>,
@@ -1193,7 +1153,7 @@ queryResp = client.<span class="hljs-title function_">query</span>(queryReq);
 <span class="hljs-comment">// </span>
 <button class="copy-code-btn"></button></code></pre></li>
 </ul>
-<h2 id="Limits" class="common-anchor-header">Limits<button data-href="#Limits" class="anchor-icon" translate="no">
+<h2 id="Limits" class="common-anchor-header">Límites<button data-href="#Limits" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -1209,10 +1169,10 @@ queryResp = client.<span class="hljs-title function_">query</span>(queryReq);
         ></path>
       </svg>
     </button></h2><ul>
-<li><p>Elements in an ARRAY field should be of the same data type, specified by <code translate="no">element_type</code>. Any valid data type available for scalar fields in Milvus can be used as <code translate="no">element_type</code>. For a list of supported data types, refer to <a href="https://milvus.io/docs/schema.md#Supported-data-types">Supported data types</a>.</p></li>
-<li><p>The number of elements in an ARRAY field should be less than or equal to the maximum capacity of the array field, specified by <code translate="no">max_capacity</code>.</p></li>
+<li><p>Los elementos de un campo ARRAY deben ser del mismo tipo de datos, especificado en <code translate="no">element_type</code>. Cualquier tipo de datos válido disponible para campos escalares en Milvus puede utilizarse como <code translate="no">element_type</code>. Para obtener una lista de los tipos de datos admitidos, consulte <a href="https://milvus.io/docs/schema.md#Supported-data-types">Tipos de datos admitidos</a>.</p></li>
+<li><p>El número de elementos de un campo ARRAY debe ser menor o igual que la capacidad máxima del campo array, especificada por <code translate="no">max_capacity</code>.</p></li>
 </ul>
-<h2 id="Reference-on-array-filters" class="common-anchor-header">Reference on array filters<button data-href="#Reference-on-array-filters" class="anchor-icon" translate="no">
+<h2 id="Reference-on-array-filters" class="common-anchor-header">Referencia sobre filtros de matrices<button data-href="#Reference-on-array-filters" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -1227,28 +1187,28 @@ queryResp = client.<span class="hljs-title function_">query</span>(queryReq);
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>When working with array fields, you can enclose a string value with either double quotation marks (“”) or single quotation marks (‘’). It’s important to note that Milvus stores string values in the array field as is without performing semantic escape or conversion. For instance, <strong>‘a&quot;b’</strong>, <strong>“a’b”</strong>, <strong>‘a’b’</strong>, and <strong>“a&quot;b”</strong> will be saved as is, while <strong>‘a’b’</strong> and <strong>“a&quot;b”</strong> will be treated as invalid values.</p>
-<p>Assume that two array fields <code translate="no">int_array</code> and <code translate="no">var_array</code> have been defined. The following table describes the supported boolean expressions that you can use in <code translate="no">expr</code> when searching with array fields.</p>
+    </button></h2><p>Cuando trabaje con campos array, puede encerrar un valor de cadena entre comillas dobles ("") o simples (''). Es importante tener en cuenta que Milvus almacena los valores de cadena en el campo de matriz tal cual, sin realizar escapes semánticos ni conversiones. Por ejemplo, <strong>'a &quot;</strong> <strong>b</strong> <strong>',</strong> <strong>&quot;a'b&quot;,</strong> <strong>'a'b'</strong> y <strong>&quot;a &quot;b&quot;</strong> se guardarán tal cual, mientras que <strong>'a'b'</strong> y <strong>&quot;a &quot;b&quot;</strong> se tratarán como valores no válidos.</p>
+<p>Supongamos que se han definido dos campos de matriz <code translate="no">int_array</code> y <code translate="no">var_array</code>. En la siguiente tabla se describen las expresiones booleanas admitidas que se pueden utilizar en <code translate="no">expr</code> al realizar búsquedas con campos de matriz.</p>
 <table>
 <thead>
-<tr><th>Operator</th><th>Examples</th><th>Remarks</th></tr>
+<tr><th>Operador</th><th>Ejemplos</th><th>Observaciones</th></tr>
 </thead>
 <tbody>
-<tr><td>&lt;</td><td><code translate="no">‘int_array[0] &lt; 3’</code></td><td>This expression evaluates to true if the value of <code translate="no">int_array[0]</code> is less than 3.</td></tr>
-<tr><td>&gt;</td><td><code translate="no">‘int_array[0] &gt; 5’</code></td><td>This expression evaluates to true if the value of <code translate="no">int_array[0]</code> is greater than 5.</td></tr>
-<tr><td>==</td><td><code translate="no">‘int_array[0] == 0’</code></td><td>This expression evaluates to true if the value of <code translate="no">int_array[0]</code> is equal to 0.</td></tr>
-<tr><td>!=</td><td><code translate="no">‘var_array[0] != &quot;a&quot;’</code></td><td>This expression evaluates to true if the value of <code translate="no">var_array[0]</code> is not equal to <code translate="no">“a”</code>.</td></tr>
-<tr><td>&lt;=</td><td><code translate="no">‘int_array[0] &lt;= 3’</code></td><td>This expression evaluates to true if the value of <code translate="no">int_array[0]</code> is smaller than or equal to 3.</td></tr>
-<tr><td>&gt;=</td><td><code translate="no">‘int_array[0] &gt;= 10’</code></td><td>This expression evaluates to true if the value of <code translate="no">int_array[0]</code> is greater than or equal to 10.</td></tr>
-<tr><td>in</td><td><code translate="no">'var_array[0] in [&quot;str1&quot;, “str2”]'</code></td><td>This expression evaluates to true if the value of <code translate="no">var_array[0]</code> is <code translate="no">“str1”</code> or <code translate="no">“str2”</code>.</td></tr>
-<tr><td>not in</td><td><code translate="no">'int_array[0] not in [1, 2, 3]'</code></td><td>This expression evaluates to true if the value of <code translate="no">int_array[0]</code> is not 1, 2, or 3.</td></tr>
-<tr><td>+, -, *, /, %, **</td><td><code translate="no">‘int_array[0] + 100 &gt; 200’</code></td><td>This expression evaluates to true if the value of <code translate="no">int_array[0] + 100</code> is greater than 200.</td></tr>
-<tr><td>like (LIKE)</td><td><code translate="no">‘var_array[0] like &quot;prefix%&quot;’</code></td><td>This expression evaluates to true if the value of <code translate="no">var_array[0]</code> is prefixed with <code translate="no">“prefix”</code>.</td></tr>
-<tr><td>and (&amp;&amp;)</td><td><code translate="no">‘var_array[0] like “prefix%” &amp;&amp; int_array[0] &lt;= 100’</code></td><td>This expression evaluates to true if the value of <code translate="no">var_array[0]</code> is prefixed with <code translate="no">“prefix”</code>, and the value of <code translate="no">int_array[0]</code> is smaller than or equal to 100.</td></tr>
-<tr><td>or (||)</td><td><code translate="no">‘var_array[0] like “prefix%” || int_array[0] &lt;= 100’</code></td><td>This expression evaluates to true if the value of <code translate="no">var_array[0]</code> is prefixed with <code translate="no">“prefix”</code>, or the value of <code translate="no">int_array[0]</code> is smaller than or equal to 100.</td></tr>
-<tr><td>array_contains (ARRAY_CONTAINS)</td><td><code translate="no">'array_contains(int_array, 100)'</code></td><td>This expression evaluates to true if <code translate="no">int_array</code> contains element <code translate="no">100</code>.</td></tr>
-<tr><td>array_contains_all (ARRAY_CONTAINS_ALL)</td><td><code translate="no">'array_contains_all(int_array, [1, 2, 3])'</code></td><td>This expression evaluates to true if <code translate="no">int_array</code> contains all elements <code translate="no">1</code>, <code translate="no">2</code>, and <code translate="no">3</code>.</td></tr>
-<tr><td>array_contains_any (ARRAY_CONTAINS_ANY)</td><td><code translate="no">'array_contains_any(var_array, [&quot;a&quot;, &quot;b&quot;, “c”])'</code></td><td>This expression evaluates to true if <code translate="no">var_array</code> contains any element of <code translate="no">“a”</code>, <code translate="no">“b”</code>, and <code translate="no">“c”</code>.</td></tr>
-<tr><td>array_length</td><td><code translate="no">‘array_length(int_array) == 10’</code></td><td>This expression evaluates to true if <code translate="no">int_array</code> contains exactly 10 elements.</td></tr>
+<tr><td>&lt;</td><td><code translate="no">‘int_array[0] &lt; 3’</code></td><td>Esta expresión se evalúa como verdadero si el valor de <code translate="no">int_array[0]</code> es menor que 3.</td></tr>
+<tr><td>&gt;</td><td><code translate="no">‘int_array[0] &gt; 5’</code></td><td>Esta expresión es verdadera si el valor de <code translate="no">int_array[0]</code> es mayor que 5.</td></tr>
+<tr><td>==</td><td><code translate="no">‘int_array[0] == 0’</code></td><td>Esta expresión es verdadera si el valor de <code translate="no">int_array[0]</code> es igual a 0.</td></tr>
+<tr><td>!=</td><td><code translate="no">‘var_array[0] != &quot;a&quot;’</code></td><td>Esta expresión es verdadera si el valor de <code translate="no">var_array[0]</code> no es igual a <code translate="no">“a”</code>.</td></tr>
+<tr><td>&lt;=</td><td><code translate="no">‘int_array[0] &lt;= 3’</code></td><td>Esta expresión es verdadera si el valor de <code translate="no">int_array[0]</code> es menor o igual que 3.</td></tr>
+<tr><td>&gt;=</td><td><code translate="no">‘int_array[0] &gt;= 10’</code></td><td>Esta expresión es verdadera si el valor de <code translate="no">int_array[0]</code> es mayor o igual que 10.</td></tr>
+<tr><td>en</td><td><code translate="no">'var_array[0] in [&quot;str1&quot;, “str2”]'</code></td><td>Esta expresión es verdadera si el valor de <code translate="no">var_array[0]</code> es <code translate="no">“str1”</code> o <code translate="no">“str2”</code>.</td></tr>
+<tr><td>no en</td><td><code translate="no">'int_array[0] not in [1, 2, 3]'</code></td><td>Esta expresión es verdadera si el valor de <code translate="no">int_array[0]</code> no es 1, 2 ó 3.</td></tr>
+<tr><td>+, -, *, /, %, **</td><td><code translate="no">‘int_array[0] + 100 &gt; 200’</code></td><td>Esta expresión es verdadera si el valor de <code translate="no">int_array[0] + 100</code> es mayor que 200.</td></tr>
+<tr><td>como (LIKE)</td><td><code translate="no">‘var_array[0] like &quot;prefix%&quot;’</code></td><td>Esta expresión es verdadera si el valor de <code translate="no">var_array[0]</code> tiene como prefijo <code translate="no">“prefix”</code>.</td></tr>
+<tr><td>y (&amp;&amp;)</td><td><code translate="no">‘var_array[0] like “prefix%” &amp;&amp; int_array[0] &lt;= 100’</code></td><td>Esta expresión es verdadera si el valor de <code translate="no">var_array[0]</code> tiene como prefijo <code translate="no">“prefix”</code> y el valor de <code translate="no">int_array[0]</code> es menor o igual que 100.</td></tr>
+<tr><td>o (||)</td><td><code translate="no">‘var_array[0] like “prefix%” || int_array[0] &lt;= 100’</code></td><td>Esta expresión se evalúa como verdadera si el valor de <code translate="no">var_array[0]</code> tiene como prefijo <code translate="no">“prefix”</code>, o el valor de <code translate="no">int_array[0]</code> es menor o igual que 100.</td></tr>
+<tr><td>array_contains (ARRAY_CONTAINS)</td><td><code translate="no">'array_contains(int_array, 100)'</code></td><td>Esta expresión se evalúa como verdadero si <code translate="no">int_array</code> contiene el elemento <code translate="no">100</code>.</td></tr>
+<tr><td>array_contains_all (ARRAY_CONTAINS_ALL)</td><td><code translate="no">'array_contains_all(int_array, [1, 2, 3])'</code></td><td>Esta expresión es verdadera si <code translate="no">int_array</code> contiene todos los elementos <code translate="no">1</code>, <code translate="no">2</code>, y <code translate="no">3</code>.</td></tr>
+<tr><td>array_contains_any (ARRAY_CONTAINS_ANY)</td><td><code translate="no">'array_contains_any(var_array, [&quot;a&quot;, &quot;b&quot;, “c”])'</code></td><td>Esta expresión se evalúa como verdadera si <code translate="no">var_array</code> contiene cualquier elemento de <code translate="no">“a”</code>, <code translate="no">“b”</code>, y <code translate="no">“c”</code>.</td></tr>
+<tr><td>longitud_de_array</td><td><code translate="no">‘array_length(int_array) == 10’</code></td><td>Esta expresión es verdadera si <code translate="no">int_array</code> contiene exactamente 10 elementos.</td></tr>
 </tbody>
 </table>

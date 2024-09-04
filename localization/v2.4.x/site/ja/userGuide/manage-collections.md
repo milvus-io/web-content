@@ -1,9 +1,8 @@
 ---
 id: manage-collections.md
 title: コレクション管理
-summary: ''
 ---
-<h1 id="Manage-Collections" class="common-anchor-header">Manage Collections<button data-href="#Manage-Collections" class="anchor-icon" translate="no">
+<h1 id="Manage-Collections" class="common-anchor-header">コレクションの管理<button data-href="#Manage-Collections" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -18,8 +17,8 @@ summary: ''
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>This guide walks you through creating and managing collections using the SDK of your choice.</p>
-<h2 id="Before-you-start" class="common-anchor-header">Before you start<button data-href="#Before-you-start" class="anchor-icon" translate="no">
+    </button></h1><p>このガイドでは、選択したSDKを使用して、コレクションの作成と管理について説明します。</p>
+<h2 id="Before-you-start" class="common-anchor-header">始める前に<button data-href="#Before-you-start" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -35,10 +34,10 @@ summary: ''
         ></path>
       </svg>
     </button></h2><ul>
-<li><p>You have installed <a href="https://milvus.io/docs/install_standalone-docker.md">Milvus standalone</a> or <a href="https://milvus.io/docs/install_cluster-milvusoperator.md">Milvus cluster</a>.</p></li>
-<li><p>You have installed preferred SDKs. You can choose among various languages, including <a href="https://milvus.io/docs/install-pymilvus.md">Python</a>, <a href="https://milvus.io/docs/install-java.md">Java</a>, <a href="https://milvus.io/docs/install-go.md">Go</a>, and <a href="https://milvus.io/docs/install-node.md">Node.js</a>.</p></li>
+<li><p><a href="https://milvus.io/docs/install_standalone-docker.md">Milvusスタンドアロン</a>または<a href="https://milvus.io/docs/install_cluster-milvusoperator.md">Milvusクラスタを</a>インストールしている。</p></li>
+<li><p>お好みのSDKをインストール済みであること。<a href="https://milvus.io/docs/install-pymilvus.md">Python</a>、<a href="https://milvus.io/docs/install-java.md">Java</a>、<a href="https://milvus.io/docs/install-go.md">Go</a>、<a href="https://milvus.io/docs/install-node.md">Node.jsを</a>含む様々な言語から選択できる。</p></li>
 </ul>
-<h2 id="Overview" class="common-anchor-header">Overview<button data-href="#Overview" class="anchor-icon" translate="no">
+<h2 id="Overview" class="common-anchor-header">概要<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -53,11 +52,11 @@ summary: ''
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>In Milvus, you store your vector embeddings in collections. All vector embeddings within a collection share the same dimensionality and distance metric for measuring similarity.</p>
-<p>Milvus collections support dynamic fields (i.e., fields not pre-defined in the schema) and automatic incrementation of primary keys.</p>
-<p>To accommodate different preferences, Milvus offers two methods for creating a collection. One provides a quick setup, while the other allows for detailed customization of the collection schema and index parameters.</p>
-<p>Additionally, you can view, load, release, and drop a collection when necessary.</p>
-<h2 id="Create-Collection" class="common-anchor-header">Create Collection<button data-href="#Create-Collection" class="anchor-icon" translate="no">
+    </button></h2><p>Milvusでは、ベクトル埋め込みをコレクションに格納します。コレクション内のすべてのベクトル埋め込みは、同じ次元と類似度を測定するための距離メトリックを共有します。</p>
+<p>Milvusのコレクションは動的フィールド（スキーマで定義されていないフィールド）と主キーの自動インクリメントをサポートしています。</p>
+<p>様々な好みに対応するため、Milvusはコレクションの作成に2つの方法を提供しています。1つはクイックセットアップを提供し、もう1つはコレクションスキーマとインデックスパラメータの詳細なカスタマイズを可能にします。</p>
+<p>さらに、必要に応じてコレクションを表示、ロード、リリース、ドロップすることができます。</p>
+<h2 id="Create-Collection" class="common-anchor-header">コレクションの作成<button data-href="#Create-Collection" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -72,37 +71,33 @@ summary: ''
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>You can create a collection in either of the following manners:</p>
+    </button></h2><p>以下のいずれかの方法でコレクションを作成できます：</p>
 <ul>
-<li><p><strong>Quick setup</strong></p>
-<p>In this manner, you can create a collection by simply giving it a name and specifying the number of dimensions of the vector embeddings to be stored in this collection. For details, refer to <a href="/docs/ja/manage-collections.md">Quick setup</a>.</p></li>
-<li><p><strong>Customized setup</strong></p>
-<p>Instead of letting In Milvus decide almost everything for your collection, you can determine the <strong>schema</strong> and <strong>index parameters</strong> of the collection on your own. For details, refer to <a href="/docs/ja/manage-collections.md">Customized setup</a>.</p></li>
+<li><p><strong>クイックセットアップ</strong></p>
+<p>この方法では、名前を付けて、このコレクションに格納するベクトル埋込みの次元数を指定するだけで、コレクションを作成できます。詳細は、<a href="/docs/ja/manage-collections.md">Quick setupを</a>参照。</p></li>
+<li><p><strong>カスタマイズセットアップ</strong></p>
+<p>コレクションのほとんどすべてをIn Milvusに任せる代わりに、コレクションの<strong>スキーマと</strong> <strong>インデックス・パラメータを</strong>自分で決めることができる。詳細は<a href="/docs/ja/manage-collections.md">カスタマイズセットアップを</a>参照してください。</p></li>
 </ul>
-<h3 id="Quick-setup" class="common-anchor-header">Quick setup</h3><p>Against the backdrop of the great leap in the AI industry, most developers just need a simple yet dynamic collection to start with. Milvus allows a quick setup of such a collection with just three arguments:</p>
+<h3 id="Quick-setup" class="common-anchor-header">クイックセットアップ</h3><p>AI業界における大きな飛躍を背景に、ほとんどの開発者はシンプルかつダイナミックなコレクションを必要としています。Milvusでは、3つの引数だけで、そのようなコレクションを素早くセットアップできます：</p>
 <ul>
-<li><p>Name of the collection to create,</p></li>
-<li><p>Dimension of the vector embeddings to insert, and</p></li>
-<li><p>Metric type used to measure similarities between vector embeddings.</p></li>
+<li><p>作成するコレクションの名前、</p></li>
+<li><p>挿入するベクトル埋め込み次元</p></li>
+<li><p>ベクトル埋め込み間の類似度を測定するためのメトリックタイプ。</p></li>
 </ul>
 <div class="language-python">
-<p>For quick setup, use the <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_collection.md"><code translate="no">create_collection()</code></a> method of the <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Client/MilvusClient.md"><code translate="no">MilvusClient</code></a> class to create a collection with the specified name and dimension.</p>
+<p>素早くセットアップするには <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_collection.md"><code translate="no">create_collection()</code></a>クラスの <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Client/MilvusClient.md"><code translate="no">MilvusClient</code></a>クラスのメソッドを使用して、指定された名前と次元を持つコレクションを作成します。</p>
 </div>
 <div class="language-java">
-<p>For quick setup, use the <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Collections/createCollection.md"><code translate="no">createCollection()</code></a> method of the <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Client/MilvusClientV2.md"><code translate="no">MilvusClientV2</code></a> class to create a collection with the specified name and dimension.</p>
+<p>素早くセットアップするには <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Collections/createCollection.md"><code translate="no">createCollection()</code></a>クラスの <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Client/MilvusClientV2.md"><code translate="no">MilvusClientV2</code></a>クラスのメソッドを使用して、指定された名前とディメンジョンを持つコレクションを作成します。</p>
 </div>
 <div class="language-javascript">
-<p>For quick setup, use the <a href="https://milvus.io/api-reference/node/v2.4.x/Collections/createCollection.md"><code translate="no">createCollection()</code></a> method of the <a href="https://milvus.io/api-reference/node/v2.4.x/Client/MilvusClient.md"><code translate="no">MilvusClient</code></a> class to create a collection with the specified name and dimension.</p>
+<p>クイック・セットアップには <a href="https://milvus.io/api-reference/node/v2.4.x/Collections/createCollection.md"><code translate="no">createCollection()</code></a>メソッドを使用します。 <a href="https://milvus.io/api-reference/node/v2.4.x/Client/MilvusClient.md"><code translate="no">MilvusClient</code></a>クラスのメソッドを使用して、指定された名前とディメンジョンを持つコレクションを作成します。</p>
 </div>
 <div class="language-shell">
-<p>For quick setup, use the <a href="https://milvus.io/api-reference/restful/v2.4.x/v2/Collection%20(v2)/Create.md"><code translate="no">POST /v2/vectordb/collections/create</code></a> API endpoint to create a collection with the specified name and dimension.</p>
+<p>を使用します。 <a href="https://milvus.io/api-reference/restful/v2.4.x/v2/Collection%20(v2)/Create.md"><code translate="no">POST /v2/vectordb/collections/create</code></a>API エンドポイントを使用して、指定された名前とディメンジョンを持つコレクションを作成します。</p>
 </div>
 <div class="multipleCode">
-  <a href="#python">Python </a>
-  <a href="#java">Java</a>
-  <a href="#javascript">Node.js</a>
-  <a href="#shell">cURL</a>
-</div>
+ <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#shell">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType
 
 <span class="hljs-comment"># 1. Set up a Milvus client</span>
@@ -222,34 +217,30 @@ $ curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable
 <span class="hljs-comment">#     }</span>
 <span class="hljs-comment"># }</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>The collection generated in the above code contains only two fields: <code translate="no">id</code> (as the primary key) and <code translate="no">vector</code> (as the vector field), with <code translate="no">auto_id</code> and <code translate="no">enable_dynamic_field</code> settings enabled by default.</p>
+<p>上記のコードで生成されたコレクションには、<code translate="no">id</code> (主キーとして) と<code translate="no">vector</code> (ベクトル・フィールドとして) の2つのフィールドのみが含まれ、<code translate="no">auto_id</code> と<code translate="no">enable_dynamic_field</code> の設定はデフォルトで有効になっています。</p>
 <ul>
 <li><p><code translate="no">auto_id</code></p>
-<p>Enabling this setting ensures that the primary key increments automatically. There’s no need for manual provision of primary keys during data insertion.</p></li>
+<p>この設定を有効にすると、主キーが自動的にインクリメントされます。データ挿入時に主キーを手動で指定する必要はない。</p></li>
 <li><p><code translate="no">enable_dynamic_field</code></p>
-<p>When enabled, all fields, excluding <code translate="no">id</code> and <code translate="no">vector</code> in the data to be inserted, are treated as dynamic fields. These additional fields are saved as key-value pairs within a special field named <code translate="no">$meta</code>. This feature allows the inclusion of extra fields during data insertion.</p></li>
+<p>この設定を有効にすると、挿入されるデータの<code translate="no">id</code> 、<code translate="no">vector</code> を除くすべてのフィールドがダイナミック・フィールドとして扱われる。これらの追加フィールドは、<code translate="no">$meta</code> という特別なフィールド内にキーと値のペアとして保存される。この機能により、データ挿入時に追加フィールドを含めることができる。</p></li>
 </ul>
-<p>The automatically indexed and loaded collection from the provided code is ready for immediate data insertions.</p>
-<h3 id="Customized-setup" class="common-anchor-header">Customized setup</h3><p>Instead of letting Milvus decide almost everything for your collection, you can determine the <strong>schema</strong> and <strong>index parameters</strong> of the collection on your own.</p>
-<h4 id="Step-1-Set-up-schema" class="common-anchor-header">Step 1: Set up schema</h4><p>A schema defines the structure of a collection. Within the schema, you have the option to enable or disable <code translate="no">enable_dynamic_field</code>, add pre-defined fields, and set attributes for each field. For a detailed explanation of the concept and available data types, refer to <a href="/docs/ja/schema.md">Schema Explained</a>.</p>
+<p>提供されたコードから自動的にインデックス付けされ、ロードされたコレクションは、すぐにデータ挿入の準備ができます。</p>
+<h3 id="Customized-setup" class="common-anchor-header">カスタマイズされたセットアップ</h3><p>Milvusにコレクションのほとんどすべてを決定させる代わりに、あなた自身でコレクションの<strong>スキーマと</strong> <strong>インデックスパラメータを</strong>決定することができます。</p>
+<h4 id="Step-1-Set-up-schema" class="common-anchor-header">ステップ1: スキーマの設定</h4><p>スキーマはコレクションの構造を定義します。スキーマ内では、<code translate="no">enable_dynamic_field</code> を有効または無効にし、定義済みフィールドを追加し、各フィールドに属性を設定するオプションがあります。スキーマの概念と使用可能なデータ型の詳細については、<a href="/docs/ja/schema.md">スキーマの</a>説明を参照してください。</p>
 <div class="language-python">
-<p>To set up a schema, use <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_schema.md"><code translate="no">create_schema()</code></a> to create a schema object and <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/CollectionSchema/add_field.md"><code translate="no">add_field()</code></a> to add fields to the schema.</p>
+<p>スキーマを設定するには <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_schema.md"><code translate="no">create_schema()</code></a>を使用してスキーマ・オブジェクトを作成し <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/CollectionSchema/add_field.md"><code translate="no">add_field()</code></a>を使用してスキーマにフィールドを追加する。</p>
 </div>
 <div class="language-java">
-<p>To set up a schema, use <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Collections/createSchema.md"><code translate="no">createSchema()</code></a> to create a schema object and <a href="https://milvus.io/api-reference/java/v2.4.x/v2/CollectionSchema/addField.md"><code translate="no">addField()</code></a> to add fields to the schema.</p>
+<p>スキーマを設定するには <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Collections/createSchema.md"><code translate="no">createSchema()</code></a>を使ってスキーマ・オブジェクトを作成し <a href="https://milvus.io/api-reference/java/v2.4.x/v2/CollectionSchema/addField.md"><code translate="no">addField()</code></a>スキーマにフィールドを追加する。</p>
 </div>
 <div class="language-javascript">
-<p>To set up a schema, use <a href="https://milvus.io/api-reference/node/v2.4.x/Collections/createCollection.md"><code translate="no">createCollection()</code></a>.</p>
+<p>スキーマをセットアップするには <a href="https://milvus.io/api-reference/node/v2.4.x/Collections/createCollection.md"><code translate="no">createCollection()</code></a>.</p>
 </div>
 <div class="language-shell">
-<p>To set up a schema, you need to define a JSON object that follows the schema format as displayed on the <a href="https://milvus.io/api-reference/restful/v2.4.x/v2/Collection%20(v2)/Create.md"><code translate="no">POST /v2/vectordb/collections/create</code></a> API endpoint reference page.</p>
+<p>スキーマを設定するには、API エンドポイントのリファレンス・ページに表示されているスキーマ・フォーマットに従った JSON オブジェクトを定義する必要があります。 <a href="https://milvus.io/api-reference/restful/v2.4.x/v2/Collection%20(v2)/Create.md"><code translate="no">POST /v2/vectordb/collections/create</code></a>API エンドポイントのリファレンス・ページに表示されているスキーマ・フォーマットに従った JSON オブジェクトを定義する必要があります。</p>
 </div>
 <div class="multipleCode">
-  <a href="#python">Python </a>
-  <a href="#java">Java</a>
-  <a href="#javascript">Node.js</a>
-  <a href="#shell">cURL</a>
-</div>
+ <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#shell">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># 3. Create a collection in customized setup mode</span>
 
 <span class="hljs-comment"># 3.1. Create schema</span>
@@ -316,146 +307,142 @@ schema.addField(AddFieldReq.builder()
 <table class="language-python">
   <thead>
     <tr>
-      <th>Parameter</th>
-      <th>Description</th>
+      <th>パラメータ</th>
+      <th>説明</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <td><code translate="no">auto_id</code></td>
-      <td>Determines if the primary field automatically increments.<br/>Setting this to <strong>True</strong> makes the primary field automatically increment. In this case, the primary field should not be included in the data to insert to avoid errors. The auto-generated IDs have a fixed length and cannot be altered.</td>
+      <td><br/>これを<strong>Trueに</strong>設定すると、プライマリ・フィールドが自動的にインクリメントされる。この場合、エラーを避けるため、プライマリ・フィールドを挿入するデータに含めるべきではありません。自動生成されたIDは固定長で、変更することはできません。</td>
     </tr>
     <tr>
       <td><code translate="no">enable_dynamic_field</code></td>
-      <td>Determines if Milvus saves the values of undefined fields in a dynamic field if the data being inserted into the target collection includes fields that are not defined in the collection's schema.<br/>When you set this to <strong>True</strong>, Milvus will create a field called <strong>$meta</strong> to store any undefined fields and their values from the data that is inserted.</td>
+      <td><br/>これを<strong>True</strong> に設定すると、Milvus は挿入されるデータから未定義のフィールドとその値を保存する<strong>$meta</strong>というフィールドを作成します。</td>
     </tr>
     <tr>
       <td><code translate="no">field_name</code></td>
-      <td>The name of the field.</td>
+      <td>フィールド名。</td>
     </tr>
     <tr>
       <td><code translate="no">datatype</code></td>
-      <td>The data type of the field. For a list of available data types, refer to <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/DataType.md">DataType</a>.</td>
+      <td>フィールドのデータ型。使用可能なデータ型のリストについては、<a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/DataType.md">DataTypeを</a>参照してください。</td>
     </tr>
     <tr>
       <td><code translate="no">is_primary</code></td>
-      <td>Whether the current field is the primary field in a collection.<br/>Each collection has only one primary field. A primary field should be of either the <strong>DataType.INT64</strong> type or the <strong>DataType.VARCHAR</strong> type.</td>
+      <td><br/>各コレクションは、1 つのプライマリ・フィールドのみを持つ。プライマリ・フィールドは、<strong>DataType.INT64</strong>型または<strong>DataType.VARCHAR</strong>型のいずれかである必要があります。</td>
     </tr>
     <tr>
       <td><code translate="no">dim</code></td>
-      <td>The dimension of the vector embeddings.<br/>This is mandatory for a field of the <strong>DataType.FLOAT_VECTOR</strong>, <strong>DataType.BINARY_VECTOR</strong>, <strong>DataType.FLOAT16_VECTOR</strong>, or <strong>DataType.BFLOAT16_VECTOR</strong> type. If you use <strong>DataType.SPARSE_FLOAT_VECTOR</strong>, omit this parameter.</td>
+      <td><br/><strong>DataType.FLOAT_VECTOR</strong>、<strong>DataType.BINARY_VECTOR</strong>、<strong>DataType.FLOAT16_VECTOR</strong>、または<strong>DataType.BFLOAT16_VECTOR</strong>型のフィールドでは必須です。<strong>DataType.SPARSE_FLOAT_VECTORを</strong>使用する場合は、このパラメータを省略します。</td>
     </tr>
   </tbody>
 </table>
 <table class="language-java">
   <thead>
     <tr>
-      <th>Parameter</th>
-      <th>Description</th>
+      <th>パラメータ</th>
+      <th>説明</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <td><code translate="no">fieldName</code></td>
-      <td>The name of the field.</td>
+      <td>フィールド名。</td>
     </tr>
     <tr>
       <td><code translate="no">dataType</code></td>
-      <td>The data type of the field. For a list of available data types, refer to <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Collections/DataType.md">DataType</a>.</td>
+      <td>フィールドのデータ型。使用可能なデータ型のリストについては、<a href="https://milvus.io/api-reference/java/v2.4.x/v2/Collections/DataType.md">DataTypeを</a>参照してください。</td>
     </tr>
     <tr>
       <td><code translate="no">isPrimaryKey</code></td>
-      <td>Whether the current field is the primary field in a collection.<br/>Each collection has only one primary field. A primary field should be of either the <strong>DataType.Int64</strong> type or the <strong>DataType.VarChar</strong> type.</td>
+      <td><br/>各コレクションは、1 つのプライマリ・フィールドのみを持つ。プライマリ・フィールドは<strong>DataType.Int64</strong>型または<strong>DataType.VarChar</strong>型のいずれかでなければなりません。</td>
     </tr>
     <tr>
       <td><code translate="no">autoID</code></td>
-      <td>Whether allows the primary field to automatically increment.<br/>Setting this to <strong>true</strong> makes the primary field automatically increment. In this case, the primary field should not be included in the data to insert to avoid errors.</td>
+      <td><br/>これを<strong>trueに</strong>設定すると、プライマリフィールドが自動的にインクリメントされます。この場合、エラーを避けるため、プライマリ・フィールドは挿入するデータに含めるべきではありません。</td>
     </tr>
     <tr>
       <td><code translate="no">dimension</code></td>
-      <td>The dimension of the vector embeddings.<br/>This is mandatory for a field of the <strong>DataType.FloatVector</strong>, <strong>DataType.BinaryVector</strong>, <strong>DataType.Float16Vector</strong>, or <strong>DataType.BFloat16Vector</strong> type.</td>
+      <td><br/><strong>DataType.FloatVector</strong>、<strong>DataType.BinaryVector</strong>、<strong>DataType.Float16Vector</strong>、<strong>DataType.BFloat16Vector</strong>型のフィールドでは必須。</td>
     </tr>
   </tbody>
 </table>
 <table class="language-javascript">
   <thead>
     <tr>
-      <th>Parameter</th>
-      <th>Description</th>
+      <th>パラメータ</th>
+      <th>説明</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <td><code translate="no">name</code></td>
-      <td>The name of the field.</td>
+      <td>フィールド名。</td>
     </tr>
     <tr>
       <td><code translate="no">data_type</code></td>
-      <td>The data type of the field. For an enumeration of all available data types, refer to <a href="https://milvus.io/api-reference/node/v2.4.x/Collections/DataType.md">DataType</a>.</td>
+      <td>フィールドのデータ型。使用可能なすべてのデータ型の列挙については、<a href="https://milvus.io/api-reference/node/v2.4.x/Collections/DataType.md">DataTypeを</a>参照してください。</td>
     </tr>
     <tr>
       <td><code translate="no">is_primary_key</code></td>
-      <td>Whether the current field is the primary field in a collection.<br/>Each collection has only one primary field. A primary field should be of either the <strong>DataType.INT64</strong> type or the <strong>DataType.VARCHAR</strong> type.</td>
+      <td><br/>各コレクションは、1 つのプライマリ・フィールドのみを持つ。プライマリ・フィールドは、<strong>DataType.INT64</strong>型または<strong>DataType.VARCHAR</strong>型のいずれかでなければなりません。</td>
     </tr>
     <tr>
       <td><code translate="no">auto_id</code></td>
-      <td>Whether the primary field automatically increments upon data insertions into this collection.<br/>The value defaults to <strong>False</strong>. Setting this to <strong>True</strong> makes the primary field automatically increment. Skip this parameter if you need to set up a collection with a customized schema.</td>
+      <td><br/>デフォルト値は<strong>False</strong> です。<strong>True</strong>に設定すると、プライマリ・フィールドが自動的にインクリメントされます。カスタマイズしたスキーマでコレクションをセットアップする必要がある場合は、このパラメータをスキップします。</td>
     </tr>
     <tr>
       <td><code translate="no">dim</code></td>
-      <td>The dimensionality of the collection field that holds vector embeddings.<br/>The value should be an integer greater than 1 and is usually determined by the model you use to generate vector embeddings.</td>
+      <td>ベクトル埋め込みを保持するコレクションフィールドの次元数。<br/>値は1以上の整数である必要があり、通常はベクトル埋め込みを生成するために使用するモデルによって決定される。</td>
     </tr>
   </tbody>
 </table>
 <table class="language-shell">
   <thead>
     <tr>
-      <th>Parameter</th>
-      <th>Description</th>
+      <th>パラメータ</th>
+      <th>説明</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <td><code translate="no">fieldName</code></td>
-      <td>The name of the field to create in the target collection.</td>
+      <td>ターゲット・コレクションに作成するフィールドの名前。</td>
     </tr>
     <tr>
       <td><code translate="no">dataType</code></td>
-      <td>The data type of the field values.</td>
+      <td>フィールド値のデータ型。</td>
     </tr>
     <tr>
       <td><code translate="no">isPrimary</code></td>
-      <td>Whether the current field is the primary field. Setting this to <code translate="no">True</code> makes the current field the primary field.</td>
+      <td>現在のフィールドがプライマリ・フィールドかどうか。これを<code translate="no">True</code> に設定すると、現在のフィールドがプライマリ・フィールドになります。</td>
     </tr>
     <tr>
       <td><code translate="no">elementTypeParams</code></td>
-      <td>Extra field parameters.</td>
+      <td>追加フィールド・パラメータ。</td>
     </tr>
     <tr>
       <td><code translate="no">dim</code></td>
-      <td>An optional parameter for FloatVector or BinaryVector fields that determines the vector dimension.</td>
+      <td>FloatVector または BinaryVector フィールドのオプション・パラメータで、ベクトル次元を決定します。</td>
     </tr>
   </tbody>
 </table>
-<h4 id="Step-2-Set-up-index-parameters" class="common-anchor-header">Step 2: Set up index parameters</h4><p>Index parameters dictate how Milvus organizes your data within a collection. You can tailor the indexing process for specific fields by adjusting their <code translate="no">metric_type</code> and <code translate="no">index_type</code>. For the vector field, you have the flexibility to select <code translate="no">COSINE</code>, <code translate="no">L2</code>, <code translate="no">IP</code>, <code translate="no">HAMMING</code>, or <code translate="no">JACCARD</code> as the <code translate="no">metric_type</code>, depending on the type of vectors you are working with. For more information, refer to <a href="/docs/ja/metric.md">Similarity Metrics</a>.</p>
+<h4 id="Step-2-Set-up-index-parameters" class="common-anchor-header">ステップ2：インデックスパラメータの設定</h4><p>インデックスパラメータは、Milvusがコレクション内でデータをどのように整理するかを決定します。<code translate="no">metric_type</code> と<code translate="no">index_type</code> を調整することで、特定のフィールドのインデックス作成プロセスを調整できます。ベクトル・フィールドでは、扱うベクトルのタイプに応じて、<code translate="no">metric_type</code> 、<code translate="no">COSINE</code> 、<code translate="no">L2</code> 、<code translate="no">IP</code> 、<code translate="no">HAMMING</code> 、<code translate="no">JACCARD</code> を柔軟に選択できます。詳細については、<a href="/docs/ja/metric.md">類似度メトリクスを</a>参照してください。</p>
 <div class="language-python">
-<p>To set up index parameters, use <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/prepare_index_params.md"><code translate="no">prepare_index_params()</code></a> to prepare index parameters and <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/add_index.md"><code translate="no">add_index()</code></a> to add the index.</p>
+<p>インデックス・パラメータを設定するには <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/prepare_index_params.md"><code translate="no">prepare_index_params()</code></a>を使用してインデックス・パラメータを準備し <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/add_index.md"><code translate="no">add_index()</code></a>を使用してインデックスを追加します。</p>
 </div>
 <div class="language-java">
-<p>To set up index parameters, use <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Management/IndexParam.md">IndexParam</a>.</p>
+<p>インデックス・パラメータを設定するには、<a href="https://milvus.io/api-reference/java/v2.4.x/v2/Management/IndexParam.md">IndexParam</a> を使用します。</p>
 </div>
 <div class="language-javascript">
-<p>To set up index parameters, use <a href="https://milvus.io/api-reference/node/v2.4.x/Management/createIndex.md"><code translate="no">createIndex()</code></a>.</p>
+<p>インデックス・パラメータを設定するには <a href="https://milvus.io/api-reference/node/v2.4.x/Management/createIndex.md"><code translate="no">createIndex()</code></a>.</p>
 </div>
 <div class="language-shell">
-<p>To set up index parameters, you need to define a JSON object that follows the index parameters format as displayed on the <a href="https://milvus.io/api-reference/restful/v2.4.x/v2/Collection%20(v2)/Create.md"><code translate="no">POST /v2/vectordb/collections/create</code></a> API endpoint reference page.</p>
+<p>インデックス・パラメータを設定するには、以下のAPIエンドポイント・リファレンス・ページに表示されているインデックス・パラメータの書式に従ったJSONオブジェクトを定義する必要があります。 <a href="https://milvus.io/api-reference/restful/v2.4.x/v2/Collection%20(v2)/Create.md"><code translate="no">POST /v2/vectordb/collections/create</code></a>API エンドポイント・リファレンス・ページに表示されているインデックス・パラメータ・フォーマットに従った JSON オブジェクトを定義する必要があります。</p>
 </div>
 <div class="multipleCode">
-  <a href="#python">Python </a>
-  <a href="#java">Java</a>
-  <a href="#javascript">Node.js</a>
-  <a href="#shell">cURL</a>
-</div>
+ <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#shell">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-meta"># 3.3. Prepare index parameters</span>
 index_params = client.prepare_index_params()
 
@@ -521,134 +508,130 @@ indexParams.add(indexParamForVectorField);
 <table class="language-python">
   <thead>
     <tr>
-      <th>Parameter</th>
-      <th>Description</th>
+      <th>パラメータ</th>
+      <th>説明</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <td><code translate="no">field_name</code></td>
-      <td>The name of the target file to apply this object applies.</td>
+      <td>このオブジェクトが適用されるターゲット・ファイルの名前。</td>
     </tr>
     <tr>
       <td><code translate="no">index_type</code></td>
-      <td>The name of the algorithm used to arrange data in the specific field. For applicable algorithms, refer to <a href="https://milvus.io/docs/index.md">In-memory Index</a> and <a href="https://milvus.io/docs/disk_index.md">On-disk Index</a>.</td>
+      <td>特定のフィールドにデータを配置するために使用されるアルゴリズムの名前。適用可能なアルゴリズムについては、<a href="https://milvus.io/docs/index.md">In-memory Index</a>および<a href="https://milvus.io/docs/disk_index.md">On-disk Index</a> を参照してください。</td>
     </tr>
     <tr>
       <td><code translate="no">metric_type</code></td>
-      <td>The algorithm that is used to measure similarity between vectors. Possible values are <strong>IP</strong>, <strong>L2</strong>, <strong>COSINE</strong>, <strong>JACCARD</strong>, <strong>HAMMING</strong>. This is available only when the specified field is a vector field. For more information, refer to <a href="https://milvus.io/docs/index.md#Indexes-supported-in-Milvus">Indexes supported in Milvus</a>.</td>
+      <td>ベクトル間の類似度を測定するために使用されるアルゴリズム。指定可能な値は<strong>IP</strong>、<strong>L2</strong>、<strong>COSINE</strong>、<strong>JACCARD</strong>、<strong>HAMMING</strong>。これは、指定されたフィールドがベクトル・フィールドである場合にのみ使用できる。詳細は<a href="https://milvus.io/docs/index.md#Indexes-supported-in-Milvus">Milvusでサポートされているインデックスを</a>参照してください。</td>
     </tr>
     <tr>
       <td><code translate="no">params</code></td>
-      <td>The fine-tuning parameters for the specified index type. For details on possible keys and value ranges, refer to <a href="https://milvus.io/docs/index.md">In-memory Index</a>.</td>
+      <td>指定されたインデックス・タイプの微調整パラメータ。指定可能なキーと値の範囲の詳細については、<a href="https://milvus.io/docs/index.md">メモリ内インデックスを</a>参照してください。</td>
     </tr>
   </tbody>
 </table>
 <table class="language-java">
   <thead>
     <tr>
-      <th>Parameter</th>
-      <th>Description</th>
+      <th>パラメータ</th>
+      <th>説明</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <td><code translate="no">fieldName</code></td>
-      <td>The name of the target field to apply this IndexParam object applies.</td>
+      <td>このIndexParamオブジェクトを適用する対象フィールドの名前。</td>
     </tr>
     <tr>
       <td><code translate="no">indexType</code></td>
-      <td>The name of the algorithm used to arrange data in the specific field. For applicable algorithms, refer to <a href="https://milvus.io/docs/index.md">In-memory Index</a> and <a href="https://milvus.io/docs/disk_index.md">On-disk Index</a>.</td>
+      <td>特定のフィールドにデータを配置するために使用されるアルゴリズムの名前。適用可能なアルゴリズムについては、<a href="https://milvus.io/docs/index.md">In-memory Index</a>および<a href="https://milvus.io/docs/disk_index.md">On-disk Index</a> を参照してください。</td>
     </tr>
     <tr>
       <td><code translate="no">metricType</code></td>
-      <td>The distance metric to use for the index. Possible values are <strong>IP</strong>, <strong>L2</strong>, <strong>COSINE</strong>, <strong>JACCARD</strong>, <strong>HAMMING</strong>.</td>
+      <td>インデックスに使用する距離メトリック。指定可能な値は<strong>IP</strong>、<strong>L2</strong>、<strong>COSINE</strong>、<strong>JACCARD</strong>、<strong>HAMMING</strong>。</td>
     </tr>
     <tr>
       <td><code translate="no">extraParams</code></td>
-      <td>Extra index parameters. For details, refer to <a href="https://milvus.io/docs/index.md">In-memory Index</a> and <a href="https://milvus.io/docs/disk_index.md">On-disk Index</a>.</td>
+      <td>インデックスの追加パラメータ。詳細は<a href="https://milvus.io/docs/index.md">インメモリ・インデックスと</a> <a href="https://milvus.io/docs/disk_index.md">オンディスク・インデックスを</a>参照。</td>
     </tr>
   </tbody>
 </table>
 <table class="language-javascript">
   <thead>
     <tr>
-      <th>Parameter</th>
-      <th>Description</th>
+      <th>パラメータ</th>
+      <th>説明</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <td><code translate="no">field_name</code></td>
-      <td>The name of the target field on which an index is to be created.</td>
+      <td>インデックスを作成する対象フィールドの名前。</td>
     </tr>
     <tr>
       <td><code translate="no">index_type</code></td>
-      <td>The name of the algorithm used to arrange data in the specific field. For applicable algorithms, refer to <a href="https://milvus.io/docs/index.md">In-memory Index</a> and <a href="https://milvus.io/docs/disk_index.md">On-disk Index</a>.</td>
+      <td>特定のフィールドにデータを配置するために使用されるアルゴリズム名。適用可能なアルゴリズムについては、<a href="https://milvus.io/docs/index.md">インメモリ・インデックスと</a> <a href="https://milvus.io/docs/disk_index.md">オンディスク・インデックスを</a>参照のこと。</td>
     </tr>
     <tr>
       <td><code translate="no">metric_type</code></td>
-      <td>The algorithm that is used to measure similarity between vectors. Possible values are <strong>IP</strong>, <strong>L2</strong>, <strong>COSINE</strong>, <strong>JACCARD</strong>, <strong>HAMMING</strong>. This is available only when the specified field is a vector field. For more information, refer to <a href="https://milvus.io/docs/index.md#Indexes-supported-in-Milvus">Indexes supported in Milvus</a>.</td>
+      <td>ベクトル間の類似度を測定するために使用されるアルゴリズム。指定可能な値は<strong>IP</strong>、<strong>L2</strong>、<strong>COSINE</strong>、<strong>JACCARD</strong>、<strong>HAMMING</strong>。これは、指定されたフィールドがベクトル・フィールドである場合にのみ使用できる。詳細は<a href="https://milvus.io/docs/index.md#Indexes-supported-in-Milvus">Milvusでサポートされているインデックスを</a>参照してください。</td>
     </tr>
     <tr>
       <td><code translate="no">params</code></td>
-      <td>The fine-tuning parameters for the specified index type. For details on possible keys and value ranges, refer to <a href="https://milvus.io/docs/index.md">In-memory Index</a>.</td>
+      <td>指定されたインデックス・タイプの微調整パラメータ。指定可能なキーと値の範囲の詳細については、<a href="https://milvus.io/docs/index.md">メモリ内インデックスを</a>参照してください。</td>
     </tr>
   </tbody>
 </table>
 <table class="language-shell">
   <thead>
     <tr>
-      <th>Parameter</th>
-      <th>Description</th>
+      <th>パラメータ</th>
+      <th>説明</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <td><code translate="no">fieldName</code></td>
-      <td>The name of the target field on which an index is to be created.</td>
+      <td>インデックスを作成する対象フィールドの名前。</td>
     </tr>
     <tr>
       <td><code translate="no">indexName</code></td>
-      <td>The name of the index to create. The value defaults to the target field name.</td>
+      <td>作成するインデックスの名前。デフォルト値はターゲット・フィールド名。</td>
     </tr>
     <tr>
       <td><code translate="no">metricType</code></td>
-      <td>The algorithm that is used to measure similarity between vectors. Possible values are <strong>IP</strong>, <strong>L2</strong>, <strong>COSINE</strong>, <strong>JACCARD</strong>, <strong>HAMMING</strong>. This is available only when the specified field is a vector field. For more information, refer to <a href="https://milvus.io/docs/index.md#Indexes-supported-in-Milvus">Indexes supported in Milvus</a>.</td>
+      <td>ベクトル間の類似度の測定に使用するアルゴリズム。指定可能な値は<strong>IP</strong>、<strong>L2</strong>、<strong>COSINE</strong>、<strong>JACCARD</strong>、<strong>HAMMING</strong> です。これは、指定されたフィールドがベクトル・フィールドである場合にのみ使用できます。詳細については、<a href="https://milvus.io/docs/index.md#Indexes-supported-in-Milvus">Milvusでサポートされているインデックスを</a>参照してください。</td>
     </tr>
     <tr>
       <td><code translate="no">params</code></td>
-      <td>The index type and related settings. For details, refer to <a href="https://milvus.io/docs/index.md">In-memory Index</a>.</td>
+      <td>インデックス・タイプと関連する設定。詳細は「<a href="https://milvus.io/docs/index.md">メモリ内インデックス</a>」を参照。</td>
     </tr>
     <tr>
       <td><code translate="no">params.index_type</code></td>
-      <td>The type of the index to create.</td>
+      <td>作成するインデックスのタイプ。</td>
     </tr>
     <tr>
       <td><code translate="no">params.nlist</code></td>
-      <td>The number of cluster units. This applies to IVF-related index types.</td>
+      <td>クラスタ単位の数。これはIVF関連のインデックスタイプに適用されます。</td>
     </tr>
   </tbody>
 </table>
-<p>The code snippet above demonstrates how to set up index parameters for the vector field and a scalar field, respectively. For the vector field, set both the metric type and the index type. For a scalar field, set only the index type. It is recommended to create an index for the vector field and any scalar fields that are frequently used for filtering.</p>
-<h4 id="Step-3-Create-the-collection" class="common-anchor-header">Step 3: Create the collection</h4><p>You have the option to create a collection and an index file separately or to create a collection with the index loaded simultaneously upon creation.</p>
+<p>上のコード・スニペットは、ベクトル・フィールドとスカラー・フィールドそれぞれのインデックス・パラメータの設定方法を示しています。ベクトル・フィールドには、メトリック型とインデックス型の両方を設定します。スカラー・フィールドの場合は、インデックス・タイプのみを設定します。ベクトル・フィールドと、フィルタリングに頻繁に使用されるスカラー・フィールドには、インデックスを作成することを推奨する。</p>
+<h4 id="Step-3-Create-the-collection" class="common-anchor-header">ステップ 3: コレクションの作成</h4><p>コレクションとインデックス・ファイルを別々に作成するか、作成時にインデックスを同時にロードしてコ レクションを作成するかを選択できます。</p>
 <div class="language-python">
-<p>Use <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_collection.md">create_collection()</a> to create a collection with the specified schema and index parameters and <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/get_load_state.md">get_load_state()</a> to check the load state of the collection.</p>
+<p><a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_collection.md">create_collection()</a>を使用して、指定されたスキーマおよびインデックス・パラメータでコレクションを作成し、<a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/get_load_state.md">get_load_state()</a>でコレクションのロード状態を確認します。</p>
 </div>
 <div class="language-java">
-<p>Use <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Collections/createCollection.md">createCollection()</a> to create a collection with the specified schema and index parameters and <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Management/getLoadState.md">getLoadState()</a> to check the load state of the collection.</p>
+<p><a href="https://milvus.io/api-reference/java/v2.4.x/v2/Collections/createCollection.md">createCollection() を</a>使用して、指定したスキーマおよびインデックス・パラメータを持つコレクションを作成し、<a href="https://milvus.io/api-reference/java/v2.4.x/v2/Management/getLoadState.md">getLoadState() を</a>使用してコレクションのロード状態を確認します。</p>
 </div>
 <div class="language-javascript">
-<p>Use <a href="https://milvus.io/api-reference/node/v2.4.x/Collections/createCollection.md">createCollection()</a> to create a collection with the specified schema and index parameters and <a href="https://milvus.io/api-reference/node/v2.4.x/Management/getLoadState.md">getLoadState()</a> to check the load state of the collection.</p>
+<p><a href="https://milvus.io/api-reference/node/v2.4.x/Collections/createCollection.md">createCollection() を</a>使用して、指定されたスキーマおよびインデックス・パラメータを持つコレクションを作成し、<a href="https://milvus.io/api-reference/node/v2.4.x/Management/getLoadState.md">getLoadState() を</a>使用してコレクションのロード状態を確認します。</p>
 </div>
 <ul>
-<li><p><strong>Create a collection with the index loaded simultaneously upon creation.</strong></p>
+<li><p><strong>作成時にインデックスが同時にロードされたコレクションを作成します。</strong></p>
 <p><div class="multipleCode">
-<a href="#python">Python </a>
-<a href="#java">Java</a>
-<a href="#javascript">Node.js</a>
-<a href="#shell">cURL</a>
-</div></p>
+<a href="#python">Python </a><a href="#java">Java</a><a href="#javascript">Node.js</a><a href="#shell">cURL</a></div></p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># 3.5. Create a collection with the index loaded simultaneously</span>
 client.create_collection(
     collection_name=<span class="hljs-string">&quot;customized_setup_1&quot;</span>,
@@ -784,14 +767,10 @@ $ curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable
 <span class="hljs-comment">#     }</span>
 <span class="hljs-comment"># }</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>The collection created above is loaded automatically. To learn more about loading and releasing a collection, refer to <a href="/docs/ja/manage-collections.md#Load--Release-Collection">Load &amp; Release Collection</a>.</p></li>
-<li><p><strong>Create a collection and an index file separately.</strong></p>
+<p>上記で作成されたコレクションは自動的にロードされます。コレクションのロードとリリースの詳細は、<a href="/docs/ja/manage-collections.md#Load--Release-Collection">Load &amp; Release Collection</a> を参照してください。</p></li>
+<li><p><strong>コレクションとインデックスファイルを別々に作成する。</strong></p>
 <p><div class="multipleCode">
-<a href="#python">Python </a>
-<a href="#java">Java</a>
-<a href="#javascript">Node.js</a>
-<a href="#shell">cURL</a>
-</div></p>
+<a href="#python">Python </a><a href="#java">Java</a><a href="#javascript">Node.js</a><a href="#shell">cURL</a></div></p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># 3.6. Create a collection and index it separately</span>
 client.create_collection(
     collection_name=<span class="hljs-string">&quot;customized_setup_2&quot;</span>,
@@ -887,130 +866,126 @@ $ curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable
 <span class="hljs-comment">#     }</span>
 <span class="hljs-comment"># }</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>The collection created above is not loaded automatically. You can create an index for the collection as follows. Creating an index for the collection in a separate manner does not automatically load the collection. For details, refer to <a href="/docs/ja/manage-collections.md#Load--Release-Collection">Load &amp; Release Collection</a>.</p>
+<p>上記で作成したコレクションは自動的にロードされません。以下のように、コレクションのインデックスを作成できます。別の方法でコレクションのインデックスを作成しても、コレクションは自動的にロード されません。詳細は、<a href="/docs/ja/manage-collections.md#Load--Release-Collection">Load &amp; Release Collection</a> を参照してください。</p>
 <p><table class="language-python">
 <thead>
 <tr>
-<th>Parameter</th>
-<th>Description</th>
+<th>パラメータ</th>
+<th>説明</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td><code translate="no">collection_name</code></td>
-<td>The name of the collection.</td>
+<td>コレクションの名前。</td>
 </tr>
 <tr>
 <td><code translate="no">schema</code></td>
-<td>The schema of this collection.<br/>Setting this to <strong>None</strong> indicates this collection will be created with default settings.<br/>To set up a collection with a customized schema, you need to create a <strong>CollectionSchema</strong> object and reference it here. In this case, Milvus ignores all other schema-related settings carried in the request.</td>
+<td>このコレクションのスキーマ。<br/>これを<strong>None</strong>に設定すると、このコレクションはデフォルト設定で作成されます。<br/>カスタマイズしたスキーマでコレクションを設定するには、<strong>CollectionSchema</strong>オブジェクトを作成し、それをここで参照する必要があります。この場合、Milvusはリクエストに含まれる他のスキーマ関連設定をすべて無視します。</td>
 </tr>
 <tr>
 <td><code translate="no">index_params</code></td>
-<td>The parameters for building the index on the vector field in this collection. To set up a collection with a customized schema and automatically load the collection to memory, you need to create an IndexParams object and reference it here.<br/>You should at least add an index for the vector field in this collection. You can also skip this parameter if you prefer to set up the index parameters later on.</td>
+<td>このコレクション内のベクトルフィールドのインデックスを構築するためのパラメータです。カスタマイズされたスキーマでコレクションを設定し、自動的にコレクションをメモリにロードするには、IndexParamsオブジェクトを作成し、ここで参照する必要があります。<br/>少なくとも、このコレクション内のベクトルフィールドのインデックスを追加する必要があります。インデックスパラメータを後で設定したい場合は、このパラメータを省略することもできます。</td>
 </tr>
 </tbody>
 </table></p>
 <p><table class="language-java">
 <thead>
 <tr>
-<th>Parameter</th>
-<th>Description</th>
+<th>パラメータ</th>
+<th>説明</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td><code translate="no">collectionName</code></td>
-<td>The name of the collection.</td>
+<td>コレクションの名前。</td>
 </tr>
 <tr>
 <td><code translate="no">collectionSchema</code></td>
-<td>The schema of this collection.<br/>Leaving it empty indicates this collection will be created with default settings. To set up a collection with a customized schema, you need to create a <strong>CollectionSchema</strong> object and reference it here.</td>
+<td><br/>これを空にすると、このコレクションはデフォルト設定で作成されます。カスタマイズしたスキーマでコレクションをセットアップするには、<strong>CollectionSchema</strong>オブジェクトを作成し、ここでそれを参照する必要があります。</td>
 </tr>
 <tr>
 <td><code translate="no">indexParams</code></td>
-<td>The parameters for building the index on the vector field in this collection. To set up a collection with a customized schema and automatically load the collection to memory, create an <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Management/IndexParam.md">IndexParams</a> object with a list of IndexParam objects and reference it here.</td>
+<td>このコレクション内のベクトル・フィールドにインデックスを構築するためのパラメータ。カスタマイズされたスキーマでコレクションをセットアップし、コレクションを自動的にメモリにロードするには、<a href="https://milvus.io/api-reference/java/v2.4.x/v2/Management/IndexParam.md">IndexParam</a>オブジェクトのリストで<a href="https://milvus.io/api-reference/java/v2.4.x/v2/Management/IndexParam.md">IndexParams</a>オブジェクトを作成し、ここでそれを参照します。</td>
 </tr>
 </tbody>
 </table></p>
 <p><table class="language-javascript">
 <thead>
 <tr>
-<th>Parameter</th>
-<th>Description</th>
+<th>パラメータ</th>
+<th>説明</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td><code translate="no">collection_name</code></td>
-<td>The name of the collection.</td>
+<td>コレクションの名前。</td>
 </tr>
 <tr>
 <td><code translate="no">fields</code></td>
-<td>The fields in the collection.</td>
+<td>コレクション内のフィールド。</td>
 </tr>
 <tr>
 <td><code translate="no">index_params</code></td>
-<td>The index parameters for the collection to create.</td>
+<td>作成するコレクションのインデックス・パラメータ。</td>
 </tr>
 </tbody>
 </table></p>
 <p><table class="language-shell">
 <thead>
 <tr>
-<th>Parameter</th>
-<th>Description</th>
+<th>パラメータ</th>
+<th>説明</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td><code translate="no">collectionName</code></td>
-<td>The name of the collection.</td>
+<td>コレクションの名前。</td>
 </tr>
 <tr>
 <td><code translate="no">schema</code></td>
-<td>The schema is responsible for organizing data in the target collection. A valid schema should have multiple fields, which must include a primary key, a vector field, and several scalar fields.</td>
+<td>スキーマは、ターゲット・コレクション内のデータを整理する役割を果たします。有効なスキーマは複数のフィールドを持つ必要があり、プライマリ・キー、ベクトル・フィールド、および複数のスカラー・フィールドを含む必要があります。</td>
 </tr>
 <tr>
 <td><code translate="no">schema.autoID</code></td>
-<td>Whether allows the primary field to automatically increment. Setting this to True makes the primary field automatically increment. In this case, the primary field should not be included in the data to insert to avoid errors. Set this parameter in the field with is_primary set to True.</td>
+<td>主フィールドの自動インクリメントを許可するかどうか。これをTrueに設定すると、プライマリ・フィールドは自動的にインクリメントされます。この場合、エラーを避けるためにプライマリ・フィールドを挿入するデータに含めるべきではありません。is_primaryをTrueに設定したフィールドにこのパラメータを設定します。</td>
 </tr>
 <tr>
 <td><code translate="no">schema.enableDynamicField</code></td>
-<td>Whether allows to use the reserved $meta field to hold non-schema-defined fields in key-value pairs.</td>
+<td>予約された$metaフィールドを使用して、スキーマで定義されていないフィールドをkey-valueペアで保持することを許可するかどうか。</td>
 </tr>
 <tr>
 <td><code translate="no">fields</code></td>
-<td>A list of field objects.</td>
+<td>フィールド・オブジェクトのリスト。</td>
 </tr>
 <tr>
 <td><code translate="no">fields.fieldName</code></td>
-<td>The name of the field to create in the target collection.</td>
+<td>ターゲット・コレクションに作成するフィールドの名前。</td>
 </tr>
 <tr>
 <td><code translate="no">fields.dataType</code></td>
-<td>The data type of the field values.</td>
+<td>フィールド値のデータ型。</td>
 </tr>
 <tr>
 <td><code translate="no">fields.isPrimary</code></td>
-<td>Whether the current field is the primary field. Setting this to True makes the current field the primary field.</td>
+<td>現在のフィールドがプライマリ・フィールドかどうか。True に設定すると、現在のフィールドがプライマリ・フィールドになります。</td>
 </tr>
 <tr>
 <td><code translate="no">fields.elementTypeParams</code></td>
-<td>Extra field parameters.</td>
+<td>追加のフィールド・パラメータ。</td>
 </tr>
 <tr>
 <td><code translate="no">fields.elementTypeParams.dim</code></td>
-<td>An optional parameter for FloatVector or BinaryVector fields that determines the vector dimension.</td>
+<td>FloatVector または BinaryVector フィールドのオプション・パラメータで、ベクトル次元を決定します。</td>
 </tr>
 </tbody>
 </table></p>
-<p>The collection created above is not loaded automatically. You can create an index for the collection as follows. Creating an index for the collection in a separate manner does not automatically load the collection. For details, refer to <a href="/docs/ja/manage-collections.md">Load &amp; Release Collection</a>.</p>
+<p>上記で作成したコレクションは自動的にロードされません。以下のように、コレクションのインデックスを作成できます。別の方法でコレクションのインデックスを作成しても、コレクションは自動的にロード されません。詳細は、<a href="/docs/ja/manage-collections.md">Load &amp; Release Collection</a> を参照。</p>
 <p><div class="multipleCode">
-<a href="#python">Python </a>
-<a href="#java">Java</a>
-<a href="#javascript">Node.js</a>
-<a href="#shell">cURL</a>
-</div></p>
+<a href="#python">Python </a><a href="#java">Java</a><a href="#javascript">Node.js</a><a href="#shell">cURL</a></div></p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># 3.6 Create index</span>
 client.create_index(
     collection_name=<span class="hljs-string">&quot;customized_setup_2&quot;</span>,
@@ -1110,18 +1085,18 @@ $ curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable
   <table class="language-python">
   <thead>
     <tr>
-      <th>Parameter</th>
-      <th>Description</th>
+      <th>パラメータ</th>
+      <th>説明</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <td><code translate="no">collection_name</code></td>
-      <td>The name of the collection.</td>
+      <td>コレクションの名前。</td>
     </tr>
     <tr>
       <td><code translate="no">index_params</code></td>
-      <td>An <strong>IndexParams</strong> object containing a list of <strong>IndexParam</strong> objects.</td>
+      <td><strong>IndexParam</strong>オブジェクトのリストを含む<strong>IndexParams</strong>オブジェクト。</td>
     </tr>
   </tbody>
 </table>
@@ -1130,90 +1105,90 @@ $ curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable
 <table class="language-java">
   <thead>
     <tr>
-      <th>Parameter</th>
-      <th>Description</th>
+      <th>パラメータ</th>
+      <th>説明</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <td><code translate="no">collectionName</code></td>
-      <td>The name of the collection.</td>
+      <td>コレクションの名前。</td>
     </tr>
     <tr>
       <td><code translate="no">indexParams</code></td>
-      <td>A list of <strong>IndexParam</strong> objects.</td>
+      <td><strong>IndexParam</strong>オブジェクトのリスト。</td>
     </tr>
   </tbody>
 </table>
 <table class="language-javascript">
   <thead>
     <tr>
-      <th>Parameter</th>
-      <th>Description</th>
+      <th>パラメータ</th>
+      <th>説明</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <td><code translate="no">collection_name</code></td>
-      <td>The name of the collection.</td>
+      <td>コレクションの名前。</td>
     </tr>
     <tr>
       <td><code translate="no">field_name</code></td>
-      <td>The name of the field in which to create an index.</td>
+      <td>インデックスを作成するフィールドの名前。</td>
     </tr>
     <tr>
       <td><code translate="no">index_type</code></td>
-      <td>The name of the algorithm used to arrange data in the specific field. For applicable algorithms, refer to <a href="https://milvus.io/docs/index.md">In-memory Index</a> and <a href="https://milvus.io/docs/disk_index.md">On-disk Index</a>.</td>
+      <td>特定のフィールドにデータを配置するために使用するアルゴリズム名。適用可能なアルゴリズムについては、<a href="https://milvus.io/docs/index.md">In-memory Index</a>および<a href="https://milvus.io/docs/disk_index.md">On-disk Index</a> を参照してください。</td>
     </tr>
     <tr>
       <td><code translate="no">metric_type</code></td>
-      <td>The algorithm that is used to measure similarity between vectors. Possible values are <strong>IP</strong>, <strong>L2</strong>, <strong>COSINE</strong>, <strong>JACCARD</strong>, <strong>HAMMING</strong>. This is available only when the specified field is a vector field. For more information, refer to <a href="https://milvus.io/docs/index.md#Indexes-supported-in-Milvus">Indexes supported in Milvus</a>.</td>
+      <td>ベクトル間の類似度を測定するために使用されるアルゴリズム。指定可能な値は<strong>IP</strong>、<strong>L2</strong>、<strong>COSINE</strong>、<strong>JACCARD</strong>、<strong>HAMMING</strong>。これは、指定されたフィールドがベクトル・フィールドである場合にのみ使用できる。詳細は<a href="https://milvus.io/docs/index.md#Indexes-supported-in-Milvus">Milvusでサポートされているインデックスを</a>参照してください。</td>
     </tr>
     <tr>
       <td><code translate="no">params</code></td>
-      <td>The fine-tuning parameters for the specified index type. For details on possible keys and value ranges, refer to <a href="https://milvus.io/docs/index.md">In-memory Index</a>.</td>
+      <td>指定されたインデックス・タイプの微調整パラメータ。指定可能なキーと値の範囲の詳細については、<a href="https://milvus.io/docs/index.md">メモリ内インデックスを</a>参照してください。</td>
     </tr>
   </tbody>
 </table>
 <table class="language-shell">
     <thead>
         <tr>
-        <th>Parameter</th>
-        <th>Description</th>
+        <th>パラメータ</th>
+        <th>説明</th>
         </tr>
     </thead>
     <tbody>
         <tr>
         <td><code translate="no">collectionName</code></td>
-        <td>The name of the collection.</td>
+        <td>コレクションの名前。</td>
         </tr>
         <tr>
         <td><code translate="no">indexParams</code></td>
-        <td>The index parameters for the collection to create.</td>
+        <td>作成するコレクションのインデックス・パラメータ。</td>
         </tr>
         <tr>
         <td><code translate="no">indexParams.metricType</code></td>
-        <td>The similarity metric type used to build the index. The value defaults to COSINE.</td>
+        <td>インデックスの構築に使用される類似度メトリックのタイプ。既定値は COSINE。</td>
         </tr>
         <tr>
         <td><code translate="no">indexParams.fieldName</code></td>
-        <td>The name of the target field on which an index is to be created.</td>
+        <td>インデックスを作成する対象フィールドの名前。</td>
         </tr>
         <tr>
         <td><code translate="no">indexParams.indexName</code></td>
-        <td>The name of the index to create, the value defaults to the target field name.</td>
+        <td>作成するインデックスの名前。値の既定値はターゲット・フィールド名です。</td>
         </tr>
         <tr>
         <td><code translate="no">indexParams.indexConfig.index_type</code></td>
-        <td>The type of the index to create.</td>
+        <td>作成するインデックスの種類。</td>
         </tr>
         <tr>
         <td><code translate="no">indexParams.indexConfig.nlist</code></td>
-        <td>The number of cluster units. This applies to IVF-related index types.</td>
+        <td>クラスタ・ユニットの数。これはIVF関連のインデックス・タイプに適用されます。</td>
         </tr>
     </tbody>
 </table>
-<h2 id="View-Collections" class="common-anchor-header">View Collections<button data-href="#View-Collections" class="anchor-icon" translate="no">
+<h2 id="View-Collections" class="common-anchor-header">コレクションの表示<button data-href="#View-Collections" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -1229,23 +1204,19 @@ $ curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable
         ></path>
       </svg>
     </button></h2><div class="language-python">
-<p>To check the details of an existing collection, use <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/describe_collection.md">describe_collection()</a>.</p>
+<p>既存のコレクションの詳細を確認するには<a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/describe_collection.md">describe_collection()</a> を使用します。</p>
 </div>
 <div class="language-java">
-<p>To check the details of an existing collection, use <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Collections/describeCollection.md">describeCollection()</a>.</p>
+<p>既存のコレクションの詳細を確認するには<a href="https://milvus.io/api-reference/java/v2.4.x/v2/Collections/describeCollection.md">describeCollection()</a> を使用します。</p>
 </div>
 <div class="language-javascript">
-<p>To check the details of an existing collection, use <a href="https://milvus.io/api-reference/node/v2.4.x/Collections/describeCollection.md">describeCollection()</a>.</p>
+<p>既存のコレクションの詳細を確認するには<a href="https://milvus.io/api-reference/node/v2.4.x/Collections/describeCollection.md">describeCollection()</a> を使用します。</p>
 </div>
 <div class="language-shell">
-<p>To view the definition of a collection, you can use the <a href="https://milvus.io/api-reference/restful/v2.4.x/v2/Collection%20(v2)/Describe.md"><code translate="no">POST /v2/vectordb/collections/describe</code></a> and the <a href="https://milvus.io/api-reference/restful/v2.4.x/v2/Collection%20(v2)/List.md"><code translate="no">POST /v2/vectordb/collections/list</code></a> API endpoints.</p>
+<p>コレクションの定義を表示するには <a href="https://milvus.io/api-reference/restful/v2.4.x/v2/Collection%20(v2)/Describe.md"><code translate="no">POST /v2/vectordb/collections/describe</code></a>および <a href="https://milvus.io/api-reference/restful/v2.4.x/v2/Collection%20(v2)/List.md"><code translate="no">POST /v2/vectordb/collections/list</code></a>API エンドポイントを使用します。</p>
 </div>
 <div class="multipleCode">
-    <a href="#python">Python </a>
-    <a href="#java">Java</a>
-    <a href="#javascript">Node.js</a>
-    <a href="#shell">cURL</a>
-</div>
+   <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#shell">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># 5. View Collections</span>
 res = client.describe_collection(
     collection_name=<span class="hljs-string">&quot;customized_setup_2&quot;</span>
@@ -1438,13 +1409,9 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 <span class="hljs-comment">#     }</span>
 <span class="hljs-comment"># }</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>To list all existing collections, you can do as follows:</p>
+<p>既存のコレクションをすべてリストアップするには、以下のようにする：</p>
 <div class="multipleCode">
-    <a href="#python">Python </a>
-    <a href="#java">Java</a>
-    <a href="#javascript">Node.js</a>
-    <a href="#shell">cURL</a>
-</div>
+   <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#shell">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># 6. List all collection names</span>
 res = client.list_collections()
 
@@ -1499,7 +1466,7 @@ System.out.println(listCollectionsRes.getCollectionNames());
 <span class="hljs-comment">#   ]</span>
 <span class="hljs-comment"># }</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Load--Release-Collection" class="common-anchor-header">Load &amp; Release Collection<button data-href="#Load--Release-Collection" class="anchor-icon" translate="no">
+<h2 id="Load--Release-Collection" class="common-anchor-header">コレクションのロードとリリース<button data-href="#Load--Release-Collection" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -1514,29 +1481,25 @@ System.out.println(listCollectionsRes.getCollectionNames());
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>During the loading process of a collection, Milvus loads the collection’s index file into memory. Conversely, when releasing a collection, Milvus unloads the index file from memory. Before conducting searches in a collection, ensure that the collection is loaded.</p>
-<h3 id="Load-a-collection" class="common-anchor-header">Load a collection</h3><div class="language-python">
-<p>To load a collection, use the <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/load_collection.md"><code translate="no">load_collection()</code></a> method, specifying the collection name. You can also set <code translate="no">replica_number</code> to determine how many in-memory replicas of data segments to create on query nodes when the collection is loaded.</p>
+    </button></h2><p>コレクションのロード処理中、Milvusはコレクションのインデックスファイルをメモリにロードします。逆に、コレクションをリリースするとき、Milvusはメモリからインデックスファイルをアンロードします。コレクションで検索を行う前に、コレクションがロードされていることを確認してください。</p>
+<h3 id="Load-a-collection" class="common-anchor-header">コレクションのロード</h3><div class="language-python">
+<p>コレクションをロードするには <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/load_collection.md"><code translate="no">load_collection()</code></a>メソッドを使用し、コレクション名を指定します。また、<code translate="no">replica_number</code> を設定して、コレクションのロード時にクエリノード上に作成するデータセグメントのメモリ内レプリカの数を決定することもできます。</p>
 <ul>
-<li>Milvus Standalone: The maximum allowed value for <code translate="no">replica_number</code> is 1.</li>
-<li>Milvus Cluster: The maximum value should not exceed the <code translate="no">queryNode.replicas</code> set in your Milvus configurations. For additional details, refer to <a href="https://milvus.io/docs/configure_querynode.md#Query-Node-related-Configurations">Query Node-related Configurations</a>.</li>
+<li>Milvus Standalone：<code translate="no">replica_number</code> の最大許容値は 1 です。</li>
+<li>Milvusクラスタ：最大値はMilvus構成で設定された<code translate="no">queryNode.replicas</code> を超えないようにしてください。詳細については、<a href="https://milvus.io/docs/configure_querynode.md#Query-Node-related-Configurations">クエリ・ノード関連設定を</a>参照してください。</li>
 </ul>
 </div>
 <div class="language-java">
-<p>To load a collection, use the <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Management/loadCollection.md"><code translate="no">loadCollection()</code></a> method, specifying the collection name.</p>
+<p>コレクションをロードするには <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Management/loadCollection.md"><code translate="no">loadCollection()</code></a>メソッドを使用し、コレクション名を指定します。</p>
 </div>
 <div class="language-javascript">
-<p>To load a collection, use the <a href="https://milvus.io/api-reference/node/v2.4.x/Management/loadCollection.md"><code translate="no">loadCollection()</code></a> method, specifying the collection name.</p>
+<p>コレクションをロードするには <a href="https://milvus.io/api-reference/node/v2.4.x/Management/loadCollection.md"><code translate="no">loadCollection()</code></a>メソッドを使用します。</p>
 </div>
 <div class="language-shell">
-<p>To load a collection, you can use the <a href="https://milvus.io/api-reference/restful/v2.4.x/v2/Collection%20(v2)/Load.md"><code translate="no">POST /v2/vectordb/collections/load</code></a> and the <a href="https://milvus.io/api-reference/restful/v2.4.x/v2/Collection%20(v2)/GetLoadState.md"><code translate="no">POST /v2/vectordb/collections/get_load_state</code></a> API endpoints.</p>
+<p>コレクションをロードするには <a href="https://milvus.io/api-reference/restful/v2.4.x/v2/Collection%20(v2)/Load.md"><code translate="no">POST /v2/vectordb/collections/load</code></a>および <a href="https://milvus.io/api-reference/restful/v2.4.x/v2/Collection%20(v2)/GetLoadState.md"><code translate="no">POST /v2/vectordb/collections/get_load_state</code></a>API エンドポイントを使用します。</p>
 </div>
 <div class="multipleCode">
-    <a href="#python">Python </a>
-    <a href="#java">Java</a>
-    <a href="#javascript">Node.js</a>
-    <a href="#shell">cURL</a>
-</div>
+   <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#shell">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># 7. Load the collection</span>
 client.load_collection(
     collection_name=<span class="hljs-string">&quot;customized_setup_2&quot;</span>,
@@ -1630,24 +1593,20 @@ $ curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable
 <span class="hljs-comment">#     }</span>
 <span class="hljs-comment"># }</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Release-a-collection" class="common-anchor-header">Release a collection</h3><div class="language-python">
-<p>To release a collection, use the <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/release_collection.md"><code translate="no">release_collection()</code></a> method, specifying the collection name.</p>
+<h3 id="Release-a-collection" class="common-anchor-header">コレクションをリリースする</h3><div class="language-python">
+<p>コレクションを解放するには <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/release_collection.md"><code translate="no">release_collection()</code></a>メソッドを使用します。</p>
 </div>
 <div class="language-java">
-<p>To release a collection, use the <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Management/releaseCollection.md"><code translate="no">releaseCollection()</code></a> method, specifying the collection name.</p>
+<p>コレクションを解放するには <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Management/releaseCollection.md"><code translate="no">releaseCollection()</code></a>メソッドを使用します。</p>
 </div>
 <div class="language-javascript">
-<p>To release a collection, use the <a href="https://milvus.io/api-reference/node/v2.4.x/Management/releaseCollection.md"><code translate="no">releaseCollection()</code></a> method, specifying the collection name.</p>
+<p>コレクションを解放するには <a href="https://milvus.io/api-reference/node/v2.4.x/Management/releaseCollection.md"><code translate="no">releaseCollection()</code></a>メソッドを使用します。</p>
 </div>
 <div class="language-shell">
-<p>To release a collection, you can use the <a href="https://milvus.io/api-reference/restful/v2.4.x/v2/Collection%20(v2)/Release.md"><code translate="no">POST /v2/vectordb/collections/release</code></a> and the <a href="https://milvus.io/api-reference/restful/v2.4.x/v2/Collection%20(v2)/GetLoadState.md"><code translate="no">POST /v2/vectordb/collections/get_load_state</code></a> API endpoints.</p>
+<p>コレクションを解放するには <a href="https://milvus.io/api-reference/restful/v2.4.x/v2/Collection%20(v2)/Release.md"><code translate="no">POST /v2/vectordb/collections/release</code></a>および <a href="https://milvus.io/api-reference/restful/v2.4.x/v2/Collection%20(v2)/GetLoadState.md"><code translate="no">POST /v2/vectordb/collections/get_load_state</code></a>APIエンドポイントを使用します。</p>
 </div>
 <div class="multipleCode">
-    <a href="#python">Python </a>
-    <a href="#java">Java</a>
-    <a href="#javascript">Node.js</a>
-    <a href="#shell">cURL</a>
-</div>
+   <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#shell">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># 8. Release the collection</span>
 client.release_collection(
     collection_name=<span class="hljs-string">&quot;customized_setup_2&quot;</span>
@@ -1734,7 +1693,7 @@ $ curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable
 <span class="hljs-comment">#     }</span>
 <span class="hljs-comment"># }</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Set-up-aliases" class="common-anchor-header">Set up aliases<button data-href="#Set-up-aliases" class="anchor-icon" translate="no">
+<h2 id="Set-up-aliases" class="common-anchor-header">エイリアスの設定<button data-href="#Set-up-aliases" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -1749,25 +1708,21 @@ $ curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>You can assign aliases for collections to make them more meaningful in a specific context. You can assign multiple aliases for a collection, but multiple collections cannot share an alias.</p>
-<h3 id="Create-aliases" class="common-anchor-header">Create aliases</h3><div class="language-python">
-<p>To create aliases, use the <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_alias.md"><code translate="no">create_alias()</code></a> method, specifying the collection name and the alias.</p>
+    </button></h2><p>コレクションにエイリアスを割り当てて、特定のコンテキストでより意味のあるものにすることができます。コレクションには複数のエイリアスを割り当てることができますが、複数のコレクションでエイリアスを共有することはできません。</p>
+<h3 id="Create-aliases" class="common-anchor-header">エイリアスの作成</h3><div class="language-python">
+<p>エイリアスを作成するには <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_alias.md"><code translate="no">create_alias()</code></a>メソッドを使用して、コレクション名とエイリアスを指定します。</p>
 </div>
 <div class="language-java">
-<p>To create aliases, use the <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Collections/createAlias.md"><code translate="no">createAlias()</code></a> method, specifying the collection name and the alias.</p>
+<p>エイリアスを作成するには <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Collections/createAlias.md"><code translate="no">createAlias()</code></a>メソッドを使用し、コレクション名とエイリアスを指定します。</p>
 </div>
 <div class="language-javascript">
-<p>To create aliases, use the <a href="https://milvus.io/api-reference/node/v2.4.x/Collections/createAlias.md"><code translate="no">createAlias()</code></a> method, specifying the collection name and the alias.</p>
+<p>エイリアスを作成するには <a href="https://milvus.io/api-reference/node/v2.4.x/Collections/createAlias.md"><code translate="no">createAlias()</code></a>メソッドを使用し、コレクション名とエイリアスを指定します。</p>
 </div>
 <div class="language-shell">
-<p>To create aliases for a collection, you can use the <a href="https://milvus.io/api-reference/restful/v2.4.x/v2/Alias%20(v2)/Create.md"><code translate="no">POST /v2/vectordb/aliases/create</code></a> API endpoint.</p>
+<p>コレクションのエイリアスを作成するには <a href="https://milvus.io/api-reference/restful/v2.4.x/v2/Alias%20(v2)/Create.md"><code translate="no">POST /v2/vectordb/aliases/create</code></a>API エンドポイントを使用します。</p>
 </div>
 <div class="multipleCode">
-    <a href="#python">Python </a>
-    <a href="#java">Java</a>
-    <a href="#javascript">Node.js</a>
-    <a href="#shell">cURL</a>
-</div>
+   <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#shell">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># 9.1. Create aliases</span>
 client.create_alias(
     collection_name=<span class="hljs-string">&quot;customized_setup_2&quot;</span>,
@@ -1855,93 +1810,89 @@ $ curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable
 <table class="language-python">
   <thead>
     <tr>
-      <th>Parameter</th>
-      <th>Description</th>
+      <th>パラメータ</th>
+      <th>説明</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <td><code translate="no">collection_name</code></td>
-      <td>The name of the collection to create an alias for.</td>
+      <td>エイリアスを作成するコレクションの名前。</td>
     </tr>
     <tr>
       <td><code translate="no">alias</code></td>
-      <td>The alias of the collection. Before this operation, ensure that the alias does not already exist. If it does, exceptions will occur.</td>
+      <td>コレクションのエイリアス。この操作の前に、エイリアスが既に存在しないことを確認してください。存在する場合は例外が発生します。</td>
     </tr>
   </tbody>
 </table>
 <table class="language-java">
   <thead>
     <tr>
-      <th>Parameter</th>
-      <th>Description</th>
+      <th>パラメータ</th>
+      <th>説明</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <td><code translate="no">collectionName</code></td>
-      <td>The name of the collection to create an alias for.</td>
+      <td>エイリアスを作成するコレクションの名前。</td>
     </tr>
     <tr>
       <td><code translate="no">alias</code></td>
-      <td>The alias of the collection. Before this operation, ensure that the alias does not already exist. If it does, exceptions will occur.</td>
+      <td>コレクションのエイリアス。この操作の前に、エイリアスが既に存在しないことを確認してください。存在する場合は例外が発生します。</td>
     </tr>
   </tbody>
 </table>
 <table class="language-javascript">
   <thead>
     <tr>
-      <th>Parameter</th>
-      <th>Description</th>
+      <th>パラメータ</th>
+      <th>説明</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <td><code translate="no">collection_name</code></td>
-      <td>The name of the collection to create an alias for.</td>
+      <td>エイリアスを作成するコレクションの名前。</td>
     </tr>
     <tr>
       <td><code translate="no">alias</code></td>
-      <td>The alias of the collection. Before this operation, ensure that the alias does not already exist. If it does, exceptions will occur.</td>
+      <td>コレクションのエイリアス。この操作の前に、エイリアスが既に存在しないことを確認してください。存在する場合は例外が発生します。</td>
     </tr>
   </tbody>
 </table>
 <table class="language-shell">
   <thead>
     <tr>
-      <th>Parameter</th>
-      <th>Description</th>
+      <th>パラメータ</th>
+      <th>説明</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <td><code translate="no">collectionName</code></td>
-      <td>The name of the collection to create an alias for.</td>
+      <td>エイリアスを作成するコレクションの名前。</td>
     </tr>
     <tr>
       <td><code translate="no">aliasName</code></td>
-      <td>The alias of the collection. Before this operation, ensure that the alias does not already exist. If it does, exceptions will occur.</td>
+      <td>コレクションのエイリアス。この操作の前に、エイリアスが既に存在しないことを確認してください。存在する場合は例外が発生します。</td>
     </tr>
   </tbody>
 </table>
-<h3 id="List-aliases" class="common-anchor-header">List aliases</h3><div class="language-python">
-<p>To list aliases, use the <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/list_aliases.md"><code translate="no">list_aliases()</code></a> method, specifying the collection name.</p>
+<h3 id="List-aliases" class="common-anchor-header">エイリアスのリスト</h3><div class="language-python">
+<p>エイリアスをリストするには <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/list_aliases.md"><code translate="no">list_aliases()</code></a>メソッドを使用します。</p>
 </div>
 <div class="language-java">
-<p>To list aliases, use the <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Collections/listAliases.md"><code translate="no">listAliases()</code></a> method, specifying the collection name.</p>
+<p>エイリアスをリストするには <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Collections/listAliases.md"><code translate="no">listAliases()</code></a>メソッドを使用します。</p>
 </div>
 <div class="language-javascript">
-<p>To list aliases, use the <a href="https://milvus.io/api-reference/node/v2.4.x/Collections/listAliases.md"><code translate="no">listAliases()</code></a> method, specifying the collection name.</p>
+<p>エイリアスをリストするには <a href="https://milvus.io/api-reference/node/v2.4.x/Collections/listAliases.md"><code translate="no">listAliases()</code></a>メソッドを使用します。</p>
 </div>
 <div class="language-shell">
-<p>To list aliases for a collection, you can use the <a href="https://milvus.io/api-reference/restful/v2.4.x/v2/Alias%20(v2)/List.md"><code translate="no">POST /v2/vectordb/aliases/list</code></a> API endpoint.</p>
+<p>コレクションのエイリアスをリストするには <a href="https://milvus.io/api-reference/restful/v2.4.x/v2/Alias%20(v2)/List.md"><code translate="no">POST /v2/vectordb/aliases/list</code></a>API エンドポイントを使用します。</p>
 </div>
 <div class="multipleCode">
-    <a href="#python">Python </a>
-    <a href="#java">Java</a>
-    <a href="#javascript">Node.js</a>
-    <a href="#shell">cURL</a>
-</div>
+   <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#shell">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># 9.2. List aliases</span>
 res = client.list_aliases(
     collection_name=<span class="hljs-string">&quot;customized_setup_2&quot;</span>
@@ -2004,24 +1955,20 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 <span class="hljs-comment">#     ]</span>
 <span class="hljs-comment"># }</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Describe-aliases" class="common-anchor-header">Describe aliases</h3><div class="language-python">
-<p>To describe aliases, use the <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/describe_alias.md"><code translate="no">describe_alias()</code></a> method, specifying the alias.</p>
+<h3 id="Describe-aliases" class="common-anchor-header">エイリアスの記述</h3><div class="language-python">
+<p>エイリアスを記述するには <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/describe_alias.md"><code translate="no">describe_alias()</code></a>メソッドを使います。</p>
 </div>
 <div class="language-java">
-<p>To describe aliases, use the <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Collections/describeAlias.md"><code translate="no">describeAlias()</code></a> method, specifying the alias.</p>
+<p>エイリアスを記述するには <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Collections/describeAlias.md"><code translate="no">describeAlias()</code></a>メソッドを使う。</p>
 </div>
 <div class="language-javascript">
-<p>To describe aliases, use the <a href="https://milvus.io/api-reference/node/v2.4.x/Collections/describeAlias.md"><code translate="no">describeAlias()</code></a> method, specifying the alias.</p>
+<p>エイリアスを記述するには <a href="https://milvus.io/api-reference/node/v2.4.x/Collections/describeAlias.md"><code translate="no">describeAlias()</code></a>メソッドを使用します。</p>
 </div>
 <div class="language-shell">
-<p>To describe aliases for a collection, you can use the <a href="https://milvus.io/api-reference/restful/v2.4.x/v2/Alias%20(v2)/Describe.md"><code translate="no">POST /v2/vectordb/aliases/describe</code></a> API endpoint.</p>
+<p>コレクションのエイリアスを記述するには <a href="https://milvus.io/api-reference/restful/v2.4.x/v2/Alias%20(v2)/Describe.md"><code translate="no">POST /v2/vectordb/aliases/describe</code></a>API エンドポイントを使用します。</p>
 </div>
 <div class="multipleCode">
-    <a href="#python">Python </a>
-    <a href="#java">Java</a>
-    <a href="#javascript">Node.js</a>
-    <a href="#shell">cURL</a>
-</div>
+   <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#shell">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># 9.3. Describe aliases</span>
 res = client.describe_alias(
     <span class="hljs-built_in">alias</span>=<span class="hljs-string">&quot;bob&quot;</span>
@@ -2095,24 +2042,20 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 <span class="hljs-comment">#     }</span>
 <span class="hljs-comment"># }</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Reassign-aliases" class="common-anchor-header">Reassign aliases</h3><div class="language-python">
-<p>To reassign aliases to other collections, use the <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/alter_alias.md"><code translate="no">alter_alias()</code></a> method, specifying the collection name and the alias.</p>
+<h3 id="Reassign-aliases" class="common-anchor-header">エイリアスの再割り当て</h3><div class="language-python">
+<p>エイリアスを他のコレクションに再割り当てするには <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/alter_alias.md"><code translate="no">alter_alias()</code></a>メソッドを使用して、コレクション名とエイリアスを指定します。</p>
 </div>
 <div class="language-java">
-<p>To reassign aliases to other collections, use the <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Collections/alterAlias.md"><code translate="no">alterAlias()</code></a> method, specifying the collection name and the alias.</p>
+<p>エイリアスを他のコレクションに再割り当てするには <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Collections/alterAlias.md"><code translate="no">alterAlias()</code></a>メソッドを使用して、コレクション名とエイリアスを指定します。</p>
 </div>
 <div class="language-javascript">
-<p>To reassign aliases to other collections, use the <a href="https://milvus.io/api-reference/node/v2.4.x/Collections/alterAlias.md"><code translate="no">alterAlias()</code></a> method, specifying the collection name and the alias.</p>
+<p>エイリアスを他のコレクションに再割り当てするには <a href="https://milvus.io/api-reference/node/v2.4.x/Collections/alterAlias.md"><code translate="no">alterAlias()</code></a>メソッドを使用して、コレクション名とエイリアスを指定します。</p>
 </div>
 <div class="language-shell">
-<p>To reassign aliases to other collections, you can use the <a href="https://milvus.io/api-reference/restful/v2.4.x/v2/Alias%20(v2)/Alter.md"><code translate="no">POST /v2/vectordb/aliases/alter</code></a> API endpoint.</p>
+<p>エイリアスを他のコレクションに再割り当てするには <a href="https://milvus.io/api-reference/restful/v2.4.x/v2/Alias%20(v2)/Alter.md"><code translate="no">POST /v2/vectordb/aliases/alter</code></a>APIエンドポイントを使用します。</p>
 </div>
 <div class="multipleCode">
-    <a href="#python">Python </a>
-    <a href="#java">Java</a>
-    <a href="#javascript">Node.js</a>
-    <a href="#shell">cURL</a>
-</div>
+   <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#shell">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># 9.4 Reassign aliases to other collections</span>
 client.alter_alias(
     collection_name=<span class="hljs-string">&quot;customized_setup_1&quot;</span>,
@@ -2260,23 +2203,20 @@ $ curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable
 <span class="hljs-comment">#     ]</span>
 <span class="hljs-comment"># }</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Drop-aliases" class="common-anchor-header">Drop aliases</h3><div class="language-python">
-<p>To drop aliases, use the <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/drop_alias.md"><code translate="no">drop_alias()</code></a> method, specifying the alias.</p>
+<h3 id="Drop-aliases" class="common-anchor-header">エイリアスの削除</h3><div class="language-python">
+<p>エイリアスを削除するには <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/drop_alias.md"><code translate="no">drop_alias()</code></a>メソッドを使う。</p>
 </div>
 <div class="language-java">
-<p>To drop aliases, use the <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Collections/dropAlias.md"><code translate="no">dropAlias()</code></a> method, specifying the alias.</p>
+<p>エイリアスを削除するには <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Collections/dropAlias.md"><code translate="no">dropAlias()</code></a>メソッドを使う。</p>
 </div>
 <div class="language-javascript">
-<p>To drop aliases, use the <a href="https://milvus.io/api-reference/node/v2.4.x/Collections/dropAlias.md"><code translate="no">dropAlias()</code></a> method, specifying the alias.</p>
+<p>エイリアスを削除するには <a href="https://milvus.io/api-reference/node/v2.4.x/Collections/dropAlias.md"><code translate="no">dropAlias()</code></a>メソッドを使用します。</p>
 </div>
 <div class="language-shell">
-<p>To drop aliases for a collection, you can use the <a href="https://milvus.io/api-reference/restful/v2.4.x/v2/Alias%20(v2)/Drop.md"><code translate="no">POST /v2/vectordb/aliases/drop</code></a> API endpoint.</p>
+<p>コレクションのエイリアスを削除するには <a href="https://milvus.io/api-reference/restful/v2.4.x/v2/Alias%20(v2)/Drop.md"><code translate="no">POST /v2/vectordb/aliases/drop</code></a>APIエンドポイントを使用します。</p>
 </div>
 <div class="multipleCode">
-    <a href="#python">Python </a>
-    <a href="#java">Java</a>
-    <a href="#javascript">Node.js</a>
-</div>
+   <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># 9.5 Drop aliases</span>
 client.drop_alias(
     <span class="hljs-built_in">alias</span>=<span class="hljs-string">&quot;bob&quot;</span>
@@ -2348,7 +2288,7 @@ $ curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable
 <span class="hljs-comment">#     &quot;data&quot;: {}</span>
 <span class="hljs-comment"># }</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Set-Properties" class="common-anchor-header">Set Properties<button data-href="#Set-Properties" class="anchor-icon" translate="no">
+<h2 id="Set-Properties" class="common-anchor-header">プロパティの設定<button data-href="#Set-Properties" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -2363,11 +2303,11 @@ $ curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>You can set properties for a collection, such as <code translate="no">ttl.seconds</code> and <code translate="no">mmap.enabled</code>. For more information, refer to <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/ORM/Collection/set_properties.md">set_properties()</a>.</p>
+    </button></h2><p><code translate="no">ttl.seconds</code> や<code translate="no">mmap.enabled</code> など、コレクションのプロパティを設定できます。詳細は<a href="https://milvus.io/api-reference/pymilvus/v2.4.x/ORM/Collection/set_properties.md">set_properties()</a> を参照してください。</p>
 <div class="alert note">
-<p>The code snippets in this section use the <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/ORM/Connections/connect.md">PyMilvus ORM module</a> to interact with Milvus. Code snippets with the new <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/About.md">MilvusClient SDK</a> will be available soon.</p>
+<p>このセクションのコードスニペットは<a href="https://milvus.io/api-reference/pymilvus/v2.4.x/ORM/Connections/connect.md">PyMilvus ORMモジュールを</a>使用してMilvusとやりとりします。新しい<a href="https://milvus.io/api-reference/pymilvus/v2.4.x/About.md">MilvusClient SDKを</a>使用したコードスニペットは近日公開予定です。</p>
 </div>
-<h3 id="Set-TTL" class="common-anchor-header">Set TTL</h3><p>Set the Time-To-Live (TTL) for the data in the collection, which specifies how long the data should be retained before it is automatically deleted.</p>
+<h3 id="Set-TTL" class="common-anchor-header">TTLの設定</h3><p>コレクション内のデータのTTL(Time-To-Live)を設定します。これはデータが自動的に削除されるまでの保持期間を指定します。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> Collection, connections
 
 <span class="hljs-comment"># Connect to Milvus server</span>
@@ -2383,10 +2323,9 @@ collection.set_properties(
     }
 )
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Set-MMAP" class="common-anchor-header">Set MMAP</h3><p>Configure the memory mapping (MMAP) property for the collection, which determines whether data is mapped into memory to improve query performance. For more information, refer to <a href="https://milvus.io/docs/mmap.md#Configure-memory-mapping">Configure memory mapping
-</a>.</p>
+<h3 id="Set-MMAP" class="common-anchor-header">MMAP の設定</h3><p>これは、クエリのパフォーマンスを向上させるために、データをメモリにマッピングするかどうかを決定します。詳細は、<a href="https://milvus.io/docs/mmap.md#Configure-memory-mapping">メモリ・マッピングの構成 を</a>参照してください<a href="https://milvus.io/docs/mmap.md#Configure-memory-mapping">。</a></p>
 <div class="alert note">
-<p>Before setting the MMAP property, release the collection first. Otherwise, an error will occur.</p>
+<p>MMAP プロパティを設定する前に、まずコレクションを解放します。そうしないと、エラーが発生します。</p>
 </div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> Collection, connections
 
@@ -2406,7 +2345,7 @@ collection.set_properties(
     }
 )
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Drop-a-Collection" class="common-anchor-header">Drop a Collection<button data-href="#Drop-a-Collection" class="anchor-icon" translate="no">
+<h2 id="Drop-a-Collection" class="common-anchor-header">コレクションを放棄する<button data-href="#Drop-a-Collection" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -2421,25 +2360,21 @@ collection.set_properties(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>If a collection is no longer needed, you can drop the collection.</p>
+    </button></h2><p>コレクションが不要になった場合、コレクションを削除できます。</p>
 <div class="language-python">
-<p>To drop a collection, use the <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/drop_collection.md"><code translate="no">drop_collection()</code></a> method, specifying the collection name.</p>
+<p>コレクションを削除するには <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/drop_collection.md"><code translate="no">drop_collection()</code></a>メソッドを使用します。</p>
 </div>
 <div class="language-java">
-<p>To drop a collection, use the <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Collections/dropCollection.md"><code translate="no">dropCollection()</code></a> method, specifying the collection name.</p>
+<p>コレクションを削除するには <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Collections/dropCollection.md"><code translate="no">dropCollection()</code></a>メソッドを使用します。</p>
 </div>
 <div class="language-javascript">
-<p>To drop a collection, use the <a href="https://milvus.io/api-reference/node/v2.4.x/Collections/dropCollection.md"><code translate="no">dropCollection()</code></a> method, specifying the collection name.</p>
+<p>コレクションを削除するには <a href="https://milvus.io/api-reference/node/v2.4.x/Collections/dropCollection.md"><code translate="no">dropCollection()</code></a>メソッドを使用します。</p>
 </div>
 <div class="language-shell">
-<p>To drop a collection, you can use the <a href="https://milvus.io/api-reference/restful/v2.4.x/v2/Collection%20(v2)/Drop.md"><code translate="no">POST /v2/vectordb/collections/drop</code></a> API endpoint.</p>
+<p>コレクションを削除するには <a href="https://milvus.io/api-reference/restful/v2.4.x/v2/Collection%20(v2)/Drop.md"><code translate="no">POST /v2/vectordb/collections/drop</code></a>APIエンドポイントを使用します。</p>
 </div>
 <div class="multipleCode">
-    <a href="#python">Python </a>
-    <a href="#java">Java</a>
-    <a href="#javascript">Node.js</a>
-    <a href="#shell">cURL</a>
-</div>
+   <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#shell">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># 10. Drop the collections</span>
 client.drop_collection(
     collection_name=<span class="hljs-string">&quot;quick_setup&quot;</span>
