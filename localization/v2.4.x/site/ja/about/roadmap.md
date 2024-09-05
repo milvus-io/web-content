@@ -1,10 +1,11 @@
 ---
 id: roadmap.md
-title: ミルバス・ロードマップ
+title: Milvus・ロードマップ
 related_key: Milvus roadmap
 summary: Milvusは、AIアプリケーションを強化するために構築されたオープンソースのベクトルデータベースです。私たちの開発ロードマップは以下の通りです。
 ---
-<h1 id="Milvus-Roadmap" class="common-anchor-header">ミルバス・ロードマップ<button data-href="#Milvus-Roadmap" class="anchor-icon" translate="no">
+
+<h1 id="Milvus-Roadmap" class="common-anchor-header">Milvus・ロードマップ<button data-href="#Milvus-Roadmap" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

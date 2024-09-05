@@ -1,8 +1,9 @@
 ---
 id: coordinator_ha.md
-summary: ミルバス・コーディネーターが現役でスタンバイする動機と手順について学ぶ。
+summary: Milvus・コーディネーターが現役でスタンバイする動機と手順について学ぶ。
 title: コーディネーター HA
 ---
+
 <h1 id="Coordinator-HA" class="common-anchor-header">コーディネータHA<button data-href="#Coordinator-HA" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -95,23 +96,24 @@ title: コーディネーター HA
       - <span class="hljs-string">&quot;pulsar&quot;</span>
       - <span class="hljs-string">&quot;minio&quot;</span>
 
-<span class="hljs-comment">#   add the following to have RootCoords work in active-standby mode</span>
-<span class="hljs-comment">#   rootcoord-1:</span>
-<span class="hljs-comment">#    container_name: milvus-rootcoord-1</span>
-<span class="hljs-comment">#    image: milvusdb/milvus:v2.2.3</span>
-<span class="hljs-comment">#    command: [&quot;milvus&quot;, &quot;run&quot;, &quot;rootcoord&quot;]</span>
-<span class="hljs-comment">#    environment:</span>
-<span class="hljs-comment">#      ETCD_ENDPOINTS: etcd:2379</span>
-<span class="hljs-comment">#      MINIO_ADDRESS: minio:9000</span>
-<span class="hljs-comment">#      PULSAR_ADDRESS: pulsar://pulsar:6650</span>
-<span class="hljs-comment">#      ROOT_COORD_ADDRESS: rootcoord-1:53100</span>
-<span class="hljs-comment">#      # add ROOT_COORD_ENABLE_ACTIVE_STANDBY to enable active standby</span>
-<span class="hljs-comment">#      ROOT_COORD_ENABLE_ACTIVE_STANDBY: true</span>
-<span class="hljs-comment">#    depends_on:</span>
-<span class="hljs-comment">#      - &quot;etcd&quot;</span>
-<span class="hljs-comment">#      - &quot;pulsar&quot;</span>
-<span class="hljs-comment">#      - &quot;minio&quot;</span>
+<span class="hljs-comment"># add the following to have RootCoords work in active-standby mode</span>
+<span class="hljs-comment"># rootcoord-1:</span>
+<span class="hljs-comment"># container_name: milvus-rootcoord-1</span>
+<span class="hljs-comment"># image: milvusdb/milvus:v2.2.3</span>
+<span class="hljs-comment"># command: [&quot;milvus&quot;, &quot;run&quot;, &quot;rootcoord&quot;]</span>
+<span class="hljs-comment"># environment:</span>
+<span class="hljs-comment"># ETCD_ENDPOINTS: etcd:2379</span>
+<span class="hljs-comment"># MINIO_ADDRESS: minio:9000</span>
+<span class="hljs-comment"># PULSAR_ADDRESS: pulsar://pulsar:6650</span>
+<span class="hljs-comment"># ROOT_COORD_ADDRESS: rootcoord-1:53100</span>
+<span class="hljs-comment"># # add ROOT_COORD_ENABLE_ACTIVE_STANDBY to enable active standby</span>
+<span class="hljs-comment"># ROOT_COORD_ENABLE_ACTIVE_STANDBY: true</span>
+<span class="hljs-comment"># depends_on:</span>
+<span class="hljs-comment"># - &quot;etcd&quot;</span>
+<span class="hljs-comment"># - &quot;pulsar&quot;</span>
+<span class="hljs-comment"># - &quot;minio&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
+
 <h3 id="With-MacLinux-shell" class="common-anchor-header">Mac/Linuxシェル</h3><p>複数のコーディネータを起動し、アクティブスタンバイで動作させるには、次のようにします。</p>
 <ol>
 <li><p>Milvusのソースコードをローカルドライブにダウンロードし、以下のように<a href="https://github.com/milvus-io/milvus/blob/master/DEVELOPMENT.md">ソースコードからMilvusクラスタを起動</a>します：</p>

@@ -1,8 +1,9 @@
 ---
 id: benchmark.md
-summary: ミルバスのベンチマーク結果について。
+summary: Milvusのベンチマーク結果について。
 title: Milvus 2.2ベンチマークテストレポート
 ---
+
 <h1 id="Milvus-22-Benchmark-Test-Report" class="common-anchor-header">Milvus 2.2 ベンチマークテストレポート<button data-href="#Milvus-22-Benchmark-Test-Report" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

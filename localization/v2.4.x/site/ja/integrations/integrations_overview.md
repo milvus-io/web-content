@@ -3,6 +3,7 @@ id: integrations_overview.md
 summary: このページでは、Milvusとサードパーティツールとの対話のためのチュートリアルのリストを提供します。
 title: 統合の概要
 ---
+
 <h1 id="Integrations-Overview" class="common-anchor-header">インテグレーション概要<button data-href="#Integrations-Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -47,7 +48,7 @@ title: 統合の概要
 <tr><td><a href="/docs/ja/integrate_with_fastgpt.md">MilvusでFastGPTをデプロイする方法</a></td><td>ラグ</td><td>Milvus、FastGPT</td></tr>
 <tr><td><a href="/docs/ja/integrate_with_vanna.md">VannaとMilvusでSQLを書く</a></td><td>RAG</td><td>Milvus、Vanna</td></tr>
 <tr><td><a href="/docs/ja/integrate_with_camel.md">MilvusとCamelを使ったRAG</a></td><td>RAG</td><td>Milvus、Camel</td></tr>
-<tr><td><a href="/docs/ja/integrate_with_airbyte.md">AirbyteとMilvus：オープンソースのデータ移動基盤</a></td><td>データ接続</td><td>ミルバス、エアバイト</td></tr>
+<tr><td><a href="/docs/ja/integrate_with_airbyte.md">AirbyteとMilvus：オープンソースのデータ移動基盤</a></td><td>データ接続</td><td>Milvus、エアバイト</td></tr>
 <tr><td><a href="/docs/ja/video_search_with_twelvelabs_and_milvus.md">高度なビデオ検索：Twelve LabsとMilvusを活用したセマンティック検索</a></td><td>セマンティック検索</td><td>Milvus、Twelve Labs</td></tr>
 <tr><td><a href="/docs/ja/milvus_rag_with_vllm.md">Milvus、vLLM、Llama 3.1によるRAGの構築</a></td><td>RAG</td><td>Milvus、vLLM、LlamaIndex</td></tr>
 <tr><td><a href="/docs/ja/llama_agents_metadata.md">Mistral AI、Milvus、Llamaエージェントによるマルチエージェントシステム</a></td><td>エージェント</td><td>Milvus、Mistral AI、LlamaIndex</td></tr>

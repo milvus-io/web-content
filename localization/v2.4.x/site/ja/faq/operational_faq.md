@@ -1,8 +1,9 @@
 ---
 id: operational_faq.md
-summary: ミルバスでのオペレーションに関するよくある質問と回答をご覧いただけます。
+summary: Milvusでのオペレーションに関するよくある質問と回答をご覧いただけます。
 title: 運用に関するFAQ
 ---
+
 <h1 id="Operational-FAQ" class="common-anchor-header">運用に関するFAQ<button data-href="#Operational-FAQ" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

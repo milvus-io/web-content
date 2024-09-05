@@ -1,8 +1,9 @@
 ---
 id: metrics_dashboard.md
-title: ミルバス指標ダッシュボード
+title: Milvus指標ダッシュボード
 summary: このトピックでは、Milvus ダッシュボードに表示される監視メトリクスを紹介します。
 ---
+
 <h1 id="Milvus-Metrics-Dashboard" class="common-anchor-header">Milvusメトリクスダッシュボード<button data-href="#Milvus-Metrics-Dashboard" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

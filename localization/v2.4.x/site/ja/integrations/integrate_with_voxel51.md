@@ -3,6 +3,7 @@ id: integrate_with_voxel51.md
 summary: このページでは、voxel51との統合について説明します。
 title: MilvusとFiftyOneによるビジョン・サーチの実施
 ---
+
 <h1 id="Conduct-Vision-Searches-with-Milvus-and-FiftyOne" class="common-anchor-header">MilvusとFiftyOneでビジョン検索を行う<button data-href="#Conduct-Vision-Searches-with-Milvus-and-FiftyOne" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -78,7 +79,7 @@ title: MilvusとFiftyOneによるビジョン・サーチの実施
 <ol>
 <li><a href="https://docs.voxel51.com/user_guide/dataset_creation/index.html#loading-datasets">データセットを</a>FiftyOne にロードする</li>
 <li>データセット内のサンプルまたはパッチに対してベクトル埋め込みを計算するか、埋め込みを生成するために使用するモデルを選択します。</li>
-<li>モデルを選択します。 <a href="https://docs.voxel51.com/api/fiftyone.brain.html#fiftyone.brain.compute_similarity"><code translate="no">compute_similarity()</code></a>メソッドを使用して、パラメータ<code translate="no">backend=&quot;milvus&quot;</code> を設定し、<code translate="no">brain_key</code> を指定して、データセット内のサンプルまたはオブジェクトパッチに対するミルバス類似度インデックスを生成します。</li>
+<li>モデルを選択します。 <a href="https://docs.voxel51.com/api/fiftyone.brain.html#fiftyone.brain.compute_similarity"><code translate="no">compute_similarity()</code></a>メソッドを使用して、パラメータ<code translate="no">backend=&quot;milvus&quot;</code> を設定し、<code translate="no">brain_key</code> を指定して、データセット内のサンプルまたはオブジェクトパッチに対するMilvus類似度インデックスを生成します。</li>
 <li>このMilvus類似度インデックスを使用して、次のようにデータをクエリします。 <a href="https://docs.voxel51.com/api/fiftyone.core.collections.html#fiftyone.core.collections.SampleCollection.sort_by_similarity"><code translate="no">sort_by_similarity()</code></a>.</li>
 <li>必要であれば、インデックスを削除してください。</li>
 </ol>
@@ -108,11 +109,12 @@ dataset = foz.load_zoo_dataset(<span class="hljs-string">&quot;quickstart&quot;<
 
 <span class="hljs-comment"># Steps 2 and 3: Compute embeddings and create a similarity index</span>
 milvus_index = fob.compute_similarity(
-    dataset,
-    brain_key=<span class="hljs-string">&quot;milvus_index&quot;</span>,
-    backend=<span class="hljs-string">&quot;milvus&quot;</span>,
+dataset,
+brain_key=<span class="hljs-string">&quot;milvus_index&quot;</span>,
+backend=<span class="hljs-string">&quot;milvus&quot;</span>,
 )
 <button class="copy-code-btn"></button></code></pre>
+
 <h3 id="2-Conduct-vision-similarity-searches" class="common-anchor-header">2.視覚類似検索の実行</h3><p>Milvus類似度インデックスを使用して、データセットの視覚類似度検索を行うことができます。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Step 4: Query your data</span>
 query = dataset.first().<span class="hljs-built_in">id</span>  <span class="hljs-comment"># query by sample ID</span>
@@ -130,6 +132,7 @@ milvus_index.cleanup()
 <span class="hljs-comment"># Delete run record from FiftyOne</span>
 dataset.delete_brain_run(<span class="hljs-string">&quot;milvus_index&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
+
 <h3 id="3-Delete-the-index" class="common-anchor-header">3.インデックスの削除</h3><p>Milvus類似度インデックスが不要になった場合、以下のコードで削除することができます：</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Step 5: Delete the index</span>
 milvus_index.delete()
@@ -155,6 +158,7 @@ milvus_index.delete()
 
 fob.<span class="hljs-title function_">compute_similarity</span>(..., backend=<span class="hljs-string">&quot;milvus&quot;</span>, ...)
 <button class="copy-code-btn"></button></code></pre>
+
 <p>また、以下の環境変数を設定することで、Milvusバックエンドを使用するようにFiftyOneを恒久的に設定することもできます：</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-keyword">export</span> <span class="hljs-variable constant_">FIFTYONE_BRAIN_DEFAULT_SIMILARITY_BACKEND</span>=milvus
 <button class="copy-code-btn"></button></code></pre>
@@ -194,6 +198,7 @@ fob.<span class="hljs-title function_">compute_similarity</span>(..., backend=<s
 <span class="hljs-built_in">export</span> FIFTYONE_BRAIN_SIMILARITY_MILVUS_SERVER_PEM_PATH=XXXXXX
 <span class="hljs-built_in">export</span> FIFTYONE_BRAIN_SIMILARITY_MILVUS_SERVER_NAME=XXXXXX
 <button class="copy-code-btn"></button></code></pre>
+
 <h3 id="FiftyOne-Brain-config" class="common-anchor-header">FiftyOne Brain config</h3><p><code translate="no">~/.fiftyone/brain_config.json</code> にある<a href="https://docs.voxel51.com/user_guide/brain.html#brain-config">brain config</a>に認証情報を保存することもできます：</p>
 <pre><code translate="no" class="language-python">{
     <span class="hljs-string">&quot;similarity_backends&quot;</span>: {
@@ -213,19 +218,21 @@ fob.<span class="hljs-title function_">compute_similarity</span>(..., backend=<s
             <span class="hljs-string">&quot;server_name&quot;</span>: <span class="hljs-string">&quot;XXXXXX&quot;</span>
         }
     }
+
 }
 <button class="copy-code-btn"></button></code></pre>
+
 <p>このファイルは作成するまで存在しないことに注意してください。</p>
 <h3 id="Keyword-arguments" class="common-anchor-header">キーワード引数</h3><p>のようなメソッドを呼び出すたびに、キーワード引数としてMilvusの認証情報を手動で与えることができます。 <a href="https://docs.voxel51.com/api/fiftyone.brain.html#fiftyone.brain.compute_similarity"><code translate="no">compute_similarity()</code></a>のようなMilvusへの接続を必要とするメソッドを呼び出すたびに、キーワード引数としてあなたのMilvus認証情報を手動で与えることができます：</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> fiftyone.brain <span class="hljs-keyword">as</span> fob
 
 milvus_index = fob.compute_similarity(
-    ...
-    backend=<span class="hljs-string">&quot;milvus&quot;</span>,
-    brain_key=<span class="hljs-string">&quot;milvus_index&quot;</span>,
-    uri=<span class="hljs-string">&quot;XXXXXX&quot;</span>,
-    user=<span class="hljs-string">&quot;XXXXXX&quot;</span>,
-    password=<span class="hljs-string">&quot;XXXXXX&quot;</span>,
+...
+backend=<span class="hljs-string">&quot;milvus&quot;</span>,
+brain_key=<span class="hljs-string">&quot;milvus_index&quot;</span>,
+uri=<span class="hljs-string">&quot;XXXXXX&quot;</span>,
+user=<span class="hljs-string">&quot;XXXXXX&quot;</span>,
+password=<span class="hljs-string">&quot;XXXXXX&quot;</span>,
 
     <span class="hljs-comment"># also available if necessary</span>
     secure=<span class="hljs-literal">True</span>,
@@ -236,8 +243,10 @@ milvus_index = fob.compute_similarity(
     ca_pem_path=<span class="hljs-string">&quot;XXXXXX&quot;</span>,
     server_pem_path=<span class="hljs-string">&quot;XXXXXX&quot;</span>,
     server_name=<span class="hljs-string">&quot;XXXXXX&quot;</span>,
+
 )
 <button class="copy-code-btn"></button></code></pre>
+
 <p>この方法を使用する場合、後でインデックスをロードする際に、手動で認証情報を提供しなければならないことに注意してください。 <a href="https://docs.voxel51.com/api/fiftyone.core.collections.html#fiftyone.core.collections.SampleCollection.load_brain_results"><code translate="no">load_brain_results()</code></a>:</p>
 <pre><code translate="no" class="language-python">milvus_index = dataset.load_brain_results(
     <span class="hljs-string">&quot;milvus_index&quot;</span>,
@@ -254,8 +263,10 @@ milvus_index = fob.compute_similarity(
     ca_pem_path=<span class="hljs-string">&quot;XXXXXX&quot;</span>,
     server_pem_path=<span class="hljs-string">&quot;XXXXXX&quot;</span>,
     server_name=<span class="hljs-string">&quot;XXXXXX&quot;</span>,
+
 )
 <button class="copy-code-btn"></button></code></pre>
+
 <h3 id="Milvus-config-parameters" class="common-anchor-header">Milvus設定パラメータ</h3><p>Milvusバックエンドは様々なクエリパラメータをサポートしており、類似クエリをカスタマイズするために使用することができます。これらのパラメータには以下が含まれます：</p>
 <ul>
 <li><p><strong>collection_name</strong><em>(None</em>): 使用または作成するMilvusコレクションの名前。何も指定しない場合、新しいコレクションが作成されます。</p></li>
@@ -311,11 +322,12 @@ dataset.list_brain_runs(<span class="hljs-built_in">type</span>=fob.Similarity)
 
 <span class="hljs-comment"># Only list specific similarity runs</span>
 dataset.list_brain_runs(
-    <span class="hljs-built_in">type</span>=fob.Similarity,
-    patches_field=<span class="hljs-string">&quot;ground_truth&quot;</span>,
-    supports_prompts=<span class="hljs-literal">True</span>,
+<span class="hljs-built_in">type</span>=fob.Similarity,
+patches_field=<span class="hljs-string">&quot;ground_truth&quot;</span>,
+supports_prompts=<span class="hljs-literal">True</span>,
 )
 <button class="copy-code-btn"></button></code></pre>
+
 <p>また <a href="https://docs.voxel51.com/api/fiftyone.core.collections.html#fiftyone.core.collections.SampleCollection.get_brain_info"><code translate="no">get_brain_info()</code></a>を使用して、ブレーンランの構成に関する情報を取得できます：</p>
 <pre><code translate="no" class="language-python">info = dataset.get_brain_info(brain_key)
 <span class="hljs-built_in">print</span>(info)
