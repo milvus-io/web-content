@@ -86,7 +86,7 @@ const client = new MilvusClient({ address, ssl, username, password });
 | address         | The Milvus IP address                                                                                                    | String  | '192.168.0.1:19530' |
 | ssl?            | SSL connection. It is false by default.                                                                                  | Boolean | false               |
 | username?       | The username used to connect to Milvus                                                                                   | String  | milvus              |
-| address?        | The password used to connect to Milvus                                                                                   | String  | milvus              |
+| password?        | The password used to connect to Milvus                                                                                   | String  | milvus              |
 | maxRetries?     | The number of retries for the grpc method, by default: 3                                                                 | Number  | 3                   |
 | retryDelay?     | The delay between attempts at retrying a failed grpc method in ms, by default: 30                                        | Number  | 30                  |
 | channelOptions? | an optional configuration object that can be passed to a gRPC client when creating a channel to connect to a gRPC server | Number  | 30                  |
