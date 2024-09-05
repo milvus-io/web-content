@@ -31,7 +31,9 @@ const DEEPL_HEADERS = {
 	"Content-Type": "application/json",
 	Authorization: `DeepL-Auth-Key ${DEEPL_API_KEY}`,
 };
-const GLOSSARY_ID = fs.readFileSync("./tools/GLOSSARY_ID.txt", "utf8");
+const GLOSSARY_ID_MAP = JSON.parse(
+	fs.readFileSync("./tools/glossary/glossary-id.json", "utf8")
+);
 
 export function traverseDirectory(dirPath, fileList = []) {
 	const files = fs.readdirSync(dirPath);
@@ -137,10 +139,9 @@ export async function translate(params) {
 			return text;
 		}
 
-		const glossaryParams =
-			sourceLang === "EN" && targetLang === "ZH"
-				? { glossary_id: GLOSSARY_ID }
-				: {};
+		const glossaryKey = `${sourceLang.toLowerCase()}-${targetLang.toUpperCase()}`;
+		const GLOSSARY_ID = GLOSSARY_ID_MAP[glossaryKey]?.id;
+		const glossaryParams = GLOSSARY_ID ? { glossary_id: GLOSSARY_ID } : {};
 
 		// Translation logic
 		const res = await axios.post(
@@ -229,11 +230,11 @@ export const extractText = (id = "", htmlString = "") => {
  * entries example:
  * Source1\tTarget1\nSource2\tTarget2\n...
  */
-export const createDeepLGlossary = async (entries) => {
+export const createDeepLGlossary = async (entries, targetLang) => {
 	const body = {
-		name: `milvus-docs-en-to-zh-glossary-${new Date().toISOString()}`,
+		name: `milvus-docs-en-to-${targetLang}-glossary-${new Date().toISOString()}`,
 		source_lang: "en",
-		target_lang: "zh",
+		target_lang: targetLang,
 		entries,
 		entries_format: "tsv",
 	};
@@ -244,13 +245,14 @@ export const createDeepLGlossary = async (entries) => {
 	return res.data;
 };
 
-export const deleteDeepLGlossary = async () => {
-	return await axios.delete(
-		DEEPL_ENDPOINT + GLOSSARY_PATH + "/" + GLOSSARY_ID,
-		{
-			headers: DEEPL_HEADERS,
-		}
-	);
+export const deleteDeepLGlossary = async (glossaryId) => {
+	if (!glossaryId) {
+		return;
+	}
+
+	return await axios.delete(DEEPL_ENDPOINT + GLOSSARY_PATH + "/" + glossaryId, {
+		headers: DEEPL_HEADERS,
+	});
 };
 
 export const generateMenuStructureLocales = async (params) => {

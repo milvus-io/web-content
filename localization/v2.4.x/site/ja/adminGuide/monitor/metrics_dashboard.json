@@ -1,1 +1,12 @@
-{"codeList":[],"headingContent":"","anchorList":[{"label":"ミルバス指標ダッシュボード","href":"Milvus-Metrics-Dashboard","type":1,"isActive":false}]}
+{
+	"codeList": [],
+	"headingContent": "",
+	"anchorList": [
+		{
+			"label": "Milvus指標ダッシュボード",
+			"href": "Milvus-Metrics-Dashboard",
+			"type": 1,
+			"isActive": false
+		}
+	]
+}

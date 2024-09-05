@@ -1,9 +1,10 @@
 ---
 id: scalar_index.md
 related_key: scalar_index
-summary: ミルバスにおけるスカラー指数。
+summary: Milvusにおけるスカラー指数。
 title: スカラー指数
 ---
+
 <h1 id="Scalar-Index" class="common-anchor-header">スカラーインデックス<button data-href="#Scalar-Index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
