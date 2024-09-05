@@ -15,7 +15,6 @@ This page provides a list of tutorials for you to interact with Milvus.
 | [Image Search with Milvus](image_similarity_search.md) | Semantic Search | vector search, dynamic field |
 | [Hybrid Search with Milvus](hybrid_search_with_milvus.md) | Hybrid Search | hybrid search, multi vector, dense embedding, sparse embedding |
 | [Multimodal Search using multi vectors](multimodal_rag_with_milvus.md) | Semantic Search | multi vector, hybrid search |
-| 
 | [Question Answering System](question_answering_system.md) | Question Answering | vector search |
 | [Recommender System](recommendation_system.md) | Recommendation System | vector search |
 | [Video Similarity Search](video_similarity_search.md) | Semantic Search | vector search |
