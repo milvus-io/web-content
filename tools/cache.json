@@ -68,7 +68,6 @@
     "v2.4.x/site/en/getstarted/install_SDKs/install-java.md": "2024-08-30T02:00:01.707Z",
     "v2.4.x/site/en/getstarted/install_SDKs/install-node.md": "2024-08-30T02:00:01.739Z",
     "v2.4.x/site/en/getstarted/install_SDKs/install-pymilvus.md": "2024-08-30T02:00:01.759Z",
-    "v2.4.x/site/en/getstarted/milvus_lite.md": "2024-08-30T02:00:01.864Z",
     "v2.4.x/site/en/getstarted/quickstart.md": "2024-08-30T02:00:01.998Z",
     "v2.4.x/site/en/home/home.md": "2024-08-30T02:00:02.013Z",
     "v2.4.x/site/en/reference/benchmark.md": "2024-08-30T02:00:02.064Z",
@@ -215,8 +214,9 @@
     "v2.4.x/site/en/reference/array_data_type.md": "2024-09-04T05:52:37.189Z",
     "v2.4.x/site/en/userGuide/search-query-get/single-vector-search.md": "2024-09-04T05:52:54.234Z",
     "v2.4.x/site/en/userGuide/use-json-fields.md": "2024-09-04T05:53:07.135Z",
-    "v2.4.x/site/en/menuStructure/en.json": "2024-09-04T07:46:22.299Z",
-    "v2.4.x/site/en/userGuide/manage-collections.md": "2024-09-04T06:47:02.070Z"
+    "v2.4.x/site/en/menuStructure/en.json": "2024-09-06T02:50:20.640Z",
+    "v2.4.x/site/en/userGuide/manage-collections.md": "2024-09-04T06:47:02.070Z",
+    "v2.4.x/site/en/getstarted/milvus_lite.md": "2024-09-06T02:54:42.351Z"
   },
   "v2.3.x": {
     "v2.3.x/site/en/about/limitations.md": "2024-08-28T10:40:29.333Z",

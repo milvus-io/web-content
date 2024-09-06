@@ -3,7 +3,7 @@ id: integrate_with_airbyte.md
 summary: >-
   Airbyte 是一种开源数据移动基础架构，用于构建提取和加载（EL）数据管道。它具有多功能性、可扩展性和易用性。Airbyte 的连接器目录
   "开箱即用"，预置了 350 多个连接器。这些连接器可用于在短短几分钟内开始将数据从源复制到目标。
-title: Airbyte：开源数据移动基础设施
+title: Airbyte：开源数据移动基础架构
 ---
 
 <h1 id="Airbyte-Open-Source-Data-Movement-Infrastructure" class="common-anchor-header">Airbyte：开源数据移动基础架构<button data-href="#Airbyte-Open-Source-Data-Movement-Infrastructure" class="anchor-icon" translate="no">
