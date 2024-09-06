@@ -19,6 +19,7 @@ import {
 	CACHE_FILE,
 	getFileUpdatedTime,
 	splitAndExtractPreTags,
+	getTitleFromMarkdown,
 } from "./utils.js";
 
 const MOCK_TRANSLATE = false;
@@ -83,6 +84,8 @@ async function bootstrap() {
 			const markdown = fs.readFileSync(path, "utf8");
 			const { data = {}, content } = matter(markdown);
 			const isMdx = path.endsWith(".mdx");
+			const h1Title = getTitleFromMarkdown(content);
+			const isSameTitle = h1Title === data.title;
 
 			for (let targetLang of targetLangs) {
 				/**
@@ -125,7 +128,18 @@ async function bootstrap() {
 							}, "");
 
 				/**
-				 * step 6.3:translate title and summary
+				 * step 6.3: replace anchor label
+				 */
+				if (anchorList.length > 0) {
+					const anchorIds = anchorList.map((anchor) => anchor.href);
+					anchorIds.forEach((id, index) => {
+						const text = extractText(id, translateContent);
+						anchorList[index].label = text;
+					});
+				}
+
+				/**
+				 * step 6.4:translate title and summary
 				 */
 				const cloneData = { ...data };
 				if (data.title || data.summary) {
@@ -135,22 +149,12 @@ async function bootstrap() {
 						mock: MOCK_TRANSLATE,
 					});
 					if (title) {
-						cloneData.title = title;
+						const translatedMdTitle = anchorList?.[0]?.label || title
+						cloneData.title = !isSameTitle ? title : translatedMdTitle;
 					}
 					if (summary) {
 						cloneData.summary = summary;
 					}
-				}
-
-				/**
-				 * step 6.4: replace anchor label
-				 */
-				if (anchorList.length > 0) {
-					const anchorIds = anchorList.map((anchor) => anchor.href);
-					anchorIds.forEach((id, index) => {
-						const text = extractText(id, translateContent);
-						anchorList[index].label = text;
-					});
 				}
 
 				/**

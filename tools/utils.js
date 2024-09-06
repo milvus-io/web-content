@@ -139,7 +139,7 @@ export async function translate(params) {
 			return text;
 		}
 
-		const glossaryKey = `${sourceLang.toLowerCase()}-${targetLang.toUpperCase()}`;
+		const glossaryKey = `${sourceLang.toLowerCase()}-${targetLang.toLowerCase()}`;
 		const GLOSSARY_ID = GLOSSARY_ID_MAP[glossaryKey]?.id;
 		const glossaryParams = GLOSSARY_ID ? { glossary_id: GLOSSARY_ID } : {};
 
@@ -327,4 +327,10 @@ export const splitAndExtractPreTags = (htmlString) => {
 	const htmlArray = result.split(placeholder);
 
 	return { result, matches, htmlArray };
+};
+
+export const getTitleFromMarkdown = (markdown) => {
+	const headingRegex = /^#\s+(.*)$/m;
+	const match = headingRegex.exec(markdown);
+	return match ? match[1] : null;
 };
