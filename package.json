@@ -1,38 +1,39 @@
 {
-	"name": "web-content",
-	"version": "1.0.0",
-	"description": "milvus docs",
-	"scripts": {
-		"generate:en": "node tools/generate-en.js",
-		"translate": "node tools/translate.js",
-		"glossary": "node tools/glossary.js",
-		"test": "echo \"Error: no test specified\" && exit 1"
-	},
-	"type": "module",
-	"devDependencies": {
-		"@zilliz/toolkit": "^0.1.9",
-		"dotenv": "^16.4.5",
-		"gray-matter": "^4.0.3",
-		"highlight.js": "^11.10.0",
-		"jsdom": "^25.0.0",
-		"katex": "^0.16.11",
-		"prettier": "^3.3.3",
-		"rehype-stringify": "^10.0.0",
-		"remark-parse": "^11.0.0",
-		"remark-rehype": "^11.1.0",
-		"remarkable": "^2.0.1",
-		"remarkable-katex": "^1.2.1",
-		"unified": "^11.0.5",
-		"unist-util-visit": "^5.0.0"
-	},
-	"dependencies": {
-		"axios": "^1.6.0",
-		"fs": "^0.0.1-security",
-		"html-word-count": "^2.0.0",
-		"node-html-parser": "^5.2.0",
-		"path": "^0.12.7",
-		"rehype-highlight": "^7.0.0",
-		"remark": "^15.0.1",
-		"remark-mdx": "^3.0.1"
-	}
+  "name": "web-content",
+  "version": "1.0.0",
+  "description": "milvus docs",
+  "scripts": {
+    "generate:en": "node tools/generate-en.js",
+    "translate": "node tools/translate.js",
+    "glossary": "node tools/glossary.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "type": "module",
+  "devDependencies": {
+    "@babel/core": "^7.25.2",
+    "@babel/preset-react": "^7.24.7",
+    "@babel/traverse": "^7.25.6",
+    "@mdx-js/mdx": "^3.0.1",
+    "@zilliz/toolkit": "^0.1.9",
+    "dotenv": "^16.4.5",
+    "gray-matter": "^4.0.3",
+    "highlight.js": "^11.10.0",
+    "jsdom": "^25.0.0",
+    "katex": "^0.16.11",
+    "next-mdx-remote": "^5.0.0",
+    "prettier": "^3.3.3",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "rehype-highlight": "^7.0.0",
+    "remarkable": "^2.0.1",
+    "remarkable-katex": "^1.2.1",
+    "unist-util-visit": "^5.0.0"
+  },
+  "dependencies": {
+    "axios": "^1.6.0",
+    "fs": "^0.0.1-security",
+    "html-word-count": "^2.0.0",
+    "node-html-parser": "^5.2.0",
+    "path": "^0.12.7"
+  }
 }
