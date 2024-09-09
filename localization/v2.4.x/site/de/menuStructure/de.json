@@ -1020,7 +1020,7 @@
             "children": []
           },
           {
-            "label": "RBAC aktivieren",
+            "label": "RBAC einschalten",
             "id": "rbac.md",
             "order": 1,
             "isMenu": true,
@@ -1412,7 +1412,7 @@
         ]
       },
       {
-        "label": "andere",
+        "label": "Andere",
         "id": "other-integrations",
         "order": 8,
         "children": [

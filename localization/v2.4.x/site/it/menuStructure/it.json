@@ -1412,7 +1412,7 @@
         ]
       },
       {
-        "label": "altri",
+        "label": "Altri",
         "id": "other-integrations",
         "order": 8,
         "children": [
@@ -1486,7 +1486,7 @@
             "children": []
           },
           {
-            "label": "Ricerca di somiglianza audio",
+            "label": "Ricerca della somiglianza audio",
             "id": "audio_similarity_search.md",
             "order": 8,
             "children": []

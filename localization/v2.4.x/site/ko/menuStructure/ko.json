@@ -1094,7 +1094,7 @@
         ]
       },
       {
-        "label": "Milvus CDC",
+        "label": "밀버스 CDC",
         "id": "milvus_cdc",
         "order": 3,
         "isMenu": true,
