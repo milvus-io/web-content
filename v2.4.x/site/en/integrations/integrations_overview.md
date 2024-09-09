@@ -20,7 +20,7 @@ This page provides a list of tutorials for you to interact with Milvus and third
 | [Movie Search using Milvus and SentenceTransfromers](integrate_with_sentencetransformers.md) | Semantic Search | Milvus, SentenceTransformers |
 | [Use Milvus as a Vector Store in LangChain](basic_usage_langchain.md) | Semantic Search | Milvus, LangChain |
 | [RAG with Milvus and Haystack](integrate_with_haystack.md) | RAG | Milvus, Haystack |
-| [Conduct Vision Searches with Milvus and FiftyOne](integrate_with_voxel51) | Semantic Search | Milvus, FiftyOne |
+| [Conduct Vision Searches with Milvus and FiftyOne](integrate_with_voxel51.md) | Semantic Search | Milvus, FiftyOne |
 | [Semantic Search with Milvus and VoyageAI](integrate_with_voyageai.md) | Semantic Search | Milvus, VoyageAI |
 | [RAG with Milvus and BentoML](integrate_with_bentoml.md) | RAG | Milvus, BentoML |
 | [RAG with Milvus and DSPy](integrate_with_dspy.md) | RAG | Milvus, DSPy |
