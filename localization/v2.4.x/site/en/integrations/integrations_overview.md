@@ -36,7 +36,7 @@ title: Integrations Overview
 <tr><td><a href="/docs/integrate_with_sentencetransformers.md">Movie Search using Milvus and SentenceTransfromers</a></td><td>Semantic Search</td><td>Milvus, SentenceTransformers</td></tr>
 <tr><td><a href="/docs/basic_usage_langchain.md">Use Milvus as a Vector Store in LangChain</a></td><td>Semantic Search</td><td>Milvus, LangChain</td></tr>
 <tr><td><a href="/docs/integrate_with_haystack.md">RAG with Milvus and Haystack</a></td><td>RAG</td><td>Milvus, Haystack</td></tr>
-<tr><td><a href="/docs/integrate_with_voxel51">Conduct Vision Searches with Milvus and FiftyOne</a></td><td>Semantic Search</td><td>Milvus, FiftyOne</td></tr>
+<tr><td><a href="/docs/integrate_with_voxel51.md">Conduct Vision Searches with Milvus and FiftyOne</a></td><td>Semantic Search</td><td>Milvus, FiftyOne</td></tr>
 <tr><td><a href="/docs/integrate_with_voyageai.md">Semantic Search with Milvus and VoyageAI</a></td><td>Semantic Search</td><td>Milvus, VoyageAI</td></tr>
 <tr><td><a href="/docs/integrate_with_bentoml.md">RAG with Milvus and BentoML</a></td><td>RAG</td><td>Milvus, BentoML</td></tr>
 <tr><td><a href="/docs/integrate_with_dspy.md">RAG with Milvus and DSPy</a></td><td>RAG</td><td>Milvus, DSPy</td></tr>
