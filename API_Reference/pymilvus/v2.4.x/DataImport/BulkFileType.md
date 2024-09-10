@@ -13,6 +13,9 @@ Sets the file type to **JSON** (*.json*).
 - **PARQUET** = 3
 Sets the file type to [Parquet](https://parquet.apache.org/) (*.parquet*).
 
+- **CSV** = 4
+Sets the file type to **CSV** (*.csv*).
+
 ## Examples
 
 ```python
