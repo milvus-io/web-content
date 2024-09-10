@@ -1,8 +1,9 @@
 ---
 id: milvus_backup_overview.md
 summary: Milvus-Backupは、Milvusのデータのバックアップと復元を可能にするツールです。
-title: ミルバスのバックアップ
+title: Milvusのバックアップ
 ---
+
 <h1 id="Milvus-Backup" class="common-anchor-header">Milvusバックアップ<button data-href="#Milvus-Backup" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

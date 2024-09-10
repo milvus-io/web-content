@@ -2,7 +2,7 @@
 id: install_standalone-operator.md
 label: Milvus Operator
 order: 1
-group: install_standalone-operator.md
+group: install_standalone-docker.md
 summary: Learn how to install Milvus stanalone with Milvus Operator.
 ---
 

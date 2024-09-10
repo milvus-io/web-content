@@ -1,9 +1,8 @@
 ---
 id: manage-collections.md
 title: 컬렉션 관리
-summary: ''
 ---
-<h1 id="Manage-Collections" class="common-anchor-header">Manage Collections<button data-href="#Manage-Collections" class="anchor-icon" translate="no">
+<h1 id="Manage-Collections" class="common-anchor-header">컬렉션 관리<button data-href="#Manage-Collections" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -18,8 +17,8 @@ summary: ''
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>This guide walks you through creating and managing collections using the SDK of your choice.</p>
-<h2 id="Before-you-start" class="common-anchor-header">Before you start<button data-href="#Before-you-start" class="anchor-icon" translate="no">
+    </button></h1><p>이 가이드에서는 선택한 SDK를 사용하여 컬렉션을 만들고 관리하는 방법을 안내합니다.</p>
+<h2 id="Before-you-start" class="common-anchor-header">시작하기 전에<button data-href="#Before-you-start" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -35,10 +34,10 @@ summary: ''
         ></path>
       </svg>
     </button></h2><ul>
-<li><p>You have installed <a href="https://milvus.io/docs/install_standalone-docker.md">Milvus standalone</a> or <a href="https://milvus.io/docs/install_cluster-milvusoperator.md">Milvus cluster</a>.</p></li>
-<li><p>You have installed preferred SDKs. You can choose among various languages, including <a href="https://milvus.io/docs/install-pymilvus.md">Python</a>, <a href="https://milvus.io/docs/install-java.md">Java</a>, <a href="https://milvus.io/docs/install-go.md">Go</a>, and <a href="https://milvus.io/docs/install-node.md">Node.js</a>.</p></li>
+<li><p><a href="https://milvus.io/docs/install_standalone-docker.md">Milvus 스탠드얼론</a> 또는 <a href="https://milvus.io/docs/install_cluster-milvusoperator.md">Milvus 클러스터를</a> 설치했습니다.</p></li>
+<li><p>선호하는 SDK를 설치했습니다. <a href="https://milvus.io/docs/install-pymilvus.md">Python</a>, <a href="https://milvus.io/docs/install-java.md">Java</a>, <a href="https://milvus.io/docs/install-go.md">Go</a>, <a href="https://milvus.io/docs/install-node.md">Node.js</a> 등 다양한 언어 중에서 선택할 수 있습니다.</p></li>
 </ul>
-<h2 id="Overview" class="common-anchor-header">Overview<button data-href="#Overview" class="anchor-icon" translate="no">
+<h2 id="Overview" class="common-anchor-header">개요<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -53,11 +52,11 @@ summary: ''
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>In Milvus, you store your vector embeddings in collections. All vector embeddings within a collection share the same dimensionality and distance metric for measuring similarity.</p>
-<p>Milvus collections support dynamic fields (i.e., fields not pre-defined in the schema) and automatic incrementation of primary keys.</p>
-<p>To accommodate different preferences, Milvus offers two methods for creating a collection. One provides a quick setup, while the other allows for detailed customization of the collection schema and index parameters.</p>
-<p>Additionally, you can view, load, release, and drop a collection when necessary.</p>
-<h2 id="Create-Collection" class="common-anchor-header">Create Collection<button data-href="#Create-Collection" class="anchor-icon" translate="no">
+    </button></h2><p>Milvus에서는 벡터 임베딩을 컬렉션에 저장합니다. 컬렉션 내의 모든 벡터 임베딩은 유사성 측정을 위해 동일한 차원과 거리 메트릭을 공유합니다.</p>
+<p>Milvus 컬렉션은 동적 필드(즉, 스키마에 미리 정의되지 않은 필드)와 기본 키의 자동 증분을 지원합니다.</p>
+<p>다양한 환경 설정을 수용하기 위해 Milvus는 컬렉션을 만드는 두 가지 방법을 제공합니다. 하나는 빠른 설정을 제공하는 반면, 다른 하나는 컬렉션 스키마와 인덱스 매개변수를 세부적으로 사용자 지정할 수 있습니다.</p>
+<p>또한 필요할 때 컬렉션을 보고, 로드하고, 해제하고, 삭제할 수 있습니다.</p>
+<h2 id="Create-Collection" class="common-anchor-header">컬렉션 만들기<button data-href="#Create-Collection" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -72,37 +71,33 @@ summary: ''
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>You can create a collection in either of the following manners:</p>
+    </button></h2><p>다음 중 한 가지 방법으로 컬렉션을 만들 수 있습니다:</p>
 <ul>
-<li><p><strong>Quick setup</strong></p>
-<p>In this manner, you can create a collection by simply giving it a name and specifying the number of dimensions of the vector embeddings to be stored in this collection. For details, refer to <a href="/docs/ko/manage-collections.md">Quick setup</a>.</p></li>
-<li><p><strong>Customized setup</strong></p>
-<p>Instead of letting In Milvus decide almost everything for your collection, you can determine the <strong>schema</strong> and <strong>index parameters</strong> of the collection on your own. For details, refer to <a href="/docs/ko/manage-collections.md">Customized setup</a>.</p></li>
+<li><p><strong>빠른 설정</strong></p>
+<p>이 방식에서는 이름을 지정하고 이 컬렉션에 저장할 벡터 임베딩의 차원 수를 지정하기만 하면 컬렉션을 만들 수 있습니다. 자세한 내용은 <a href="/docs/ko/manage-collections.md">빠른 설정을</a> 참조하세요.</p></li>
+<li><p><strong>사용자 지정 설정</strong></p>
+<p>컬렉션의 거의 모든 것을 In Milvus가 결정하도록 하는 대신, 컬렉션의 <strong>스키마와</strong> <strong>인덱스 매개변수를</strong> 직접 결정할 수 있습니다. 자세한 내용은 <a href="/docs/ko/manage-collections.md">사용자 지정 설정을</a> 참조하세요.</p></li>
 </ul>
-<h3 id="Quick-setup" class="common-anchor-header">Quick setup</h3><p>Against the backdrop of the great leap in the AI industry, most developers just need a simple yet dynamic collection to start with. Milvus allows a quick setup of such a collection with just three arguments:</p>
+<h3 id="Quick-setup" class="common-anchor-header">빠른 설정</h3><p>AI 산업의 비약적인 발전을 배경으로 대부분의 개발자는 간단하면서도 역동적인 컬렉션만 있으면 시작할 수 있습니다. Milvus에서는 단 세 가지 인수를 사용하여 이러한 컬렉션을 빠르게 설정할 수 있습니다:</p>
 <ul>
-<li><p>Name of the collection to create,</p></li>
-<li><p>Dimension of the vector embeddings to insert, and</p></li>
-<li><p>Metric type used to measure similarities between vector embeddings.</p></li>
+<li><p>생성할 컬렉션의 이름,</p></li>
+<li><p>삽입할 벡터 임베딩의 차원, 그리고</p></li>
+<li><p>벡터 임베딩 간의 유사성을 측정하는 데 사용되는 메트릭 유형입니다.</p></li>
 </ul>
 <div class="language-python">
-<p>For quick setup, use the <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_collection.md"><code translate="no">create_collection()</code></a> method of the <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Client/MilvusClient.md"><code translate="no">MilvusClient</code></a> class to create a collection with the specified name and dimension.</p>
+<p>빠른 설정을 위해서는 <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_collection.md"><code translate="no">create_collection()</code></a> 클래스의 <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Client/MilvusClient.md"><code translate="no">MilvusClient</code></a> 클래스의 메서드를 사용하여 지정된 이름과 차원을 가진 컬렉션을 만듭니다.</p>
 </div>
 <div class="language-java">
-<p>For quick setup, use the <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Collections/createCollection.md"><code translate="no">createCollection()</code></a> method of the <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Client/MilvusClientV2.md"><code translate="no">MilvusClientV2</code></a> class to create a collection with the specified name and dimension.</p>
+<p>빠른 설정을 위해서는 클래스의 <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Collections/createCollection.md"><code translate="no">createCollection()</code></a> 클래스의 메서드를 사용하여 <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Client/MilvusClientV2.md"><code translate="no">MilvusClientV2</code></a> 클래스의 메서드를 사용하여 지정된 이름과 차원을 가진 컬렉션을 만듭니다.</p>
 </div>
 <div class="language-javascript">
-<p>For quick setup, use the <a href="https://milvus.io/api-reference/node/v2.4.x/Collections/createCollection.md"><code translate="no">createCollection()</code></a> method of the <a href="https://milvus.io/api-reference/node/v2.4.x/Client/MilvusClient.md"><code translate="no">MilvusClient</code></a> class to create a collection with the specified name and dimension.</p>
+<p>빠른 설정을 위해서는 클래스의 <a href="https://milvus.io/api-reference/node/v2.4.x/Collections/createCollection.md"><code translate="no">createCollection()</code></a> 클래스의 메서드를 사용하여 <a href="https://milvus.io/api-reference/node/v2.4.x/Client/MilvusClient.md"><code translate="no">MilvusClient</code></a> 클래스의 메서드를 사용하여 지정된 이름과 차원을 가진 컬렉션을 만듭니다.</p>
 </div>
 <div class="language-shell">
-<p>For quick setup, use the <a href="https://milvus.io/api-reference/restful/v2.4.x/v2/Collection%20(v2)/Create.md"><code translate="no">POST /v2/vectordb/collections/create</code></a> API endpoint to create a collection with the specified name and dimension.</p>
+<p>빠른 설정의 경우 <a href="https://milvus.io/api-reference/restful/v2.4.x/v2/Collection%20(v2)/Create.md"><code translate="no">POST /v2/vectordb/collections/create</code></a> API 엔드포인트를 사용하여 지정된 이름과 차원을 가진 컬렉션을 만듭니다.</p>
 </div>
 <div class="multipleCode">
-  <a href="#python">Python </a>
-  <a href="#java">Java</a>
-  <a href="#javascript">Node.js</a>
-  <a href="#shell">cURL</a>
-</div>
+ <a href="#python">파이썬 </a> <a href="#java">자바</a> <a href="#javascript">Node.js</a> <a href="#shell">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType
 
 <span class="hljs-comment"># 1. Set up a Milvus client</span>
@@ -222,34 +217,30 @@ $ curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable
 <span class="hljs-comment">#     }</span>
 <span class="hljs-comment"># }</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>The collection generated in the above code contains only two fields: <code translate="no">id</code> (as the primary key) and <code translate="no">vector</code> (as the vector field), with <code translate="no">auto_id</code> and <code translate="no">enable_dynamic_field</code> settings enabled by default.</p>
+<p>위 코드에서 생성된 컬렉션에는 <code translate="no">id</code> (기본 키)와 <code translate="no">vector</code> (벡터 필드)의 두 필드만 포함되며 <code translate="no">auto_id</code> 및 <code translate="no">enable_dynamic_field</code> 설정이 기본적으로 활성화되어 있습니다.</p>
 <ul>
 <li><p><code translate="no">auto_id</code></p>
-<p>Enabling this setting ensures that the primary key increments automatically. There’s no need for manual provision of primary keys during data insertion.</p></li>
+<p>이 설정을 활성화하면 기본 키가 자동으로 증가합니다. 데이터 삽입 중에 기본 키를 수동으로 제공할 필요가 없습니다.</p></li>
 <li><p><code translate="no">enable_dynamic_field</code></p>
-<p>When enabled, all fields, excluding <code translate="no">id</code> and <code translate="no">vector</code> in the data to be inserted, are treated as dynamic fields. These additional fields are saved as key-value pairs within a special field named <code translate="no">$meta</code>. This feature allows the inclusion of extra fields during data insertion.</p></li>
+<p>이 설정을 활성화하면 삽입할 데이터에서 <code translate="no">id</code> 및 <code translate="no">vector</code> 을 제외한 모든 필드가 동적 필드로 처리됩니다. 이러한 추가 필드는 <code translate="no">$meta</code> 이라는 특수 필드 내에 키-값 쌍으로 저장됩니다. 이 기능을 사용하면 데이터 삽입 중에 추가 필드를 포함할 수 있습니다.</p></li>
 </ul>
-<p>The automatically indexed and loaded collection from the provided code is ready for immediate data insertions.</p>
-<h3 id="Customized-setup" class="common-anchor-header">Customized setup</h3><p>Instead of letting Milvus decide almost everything for your collection, you can determine the <strong>schema</strong> and <strong>index parameters</strong> of the collection on your own.</p>
-<h4 id="Step-1-Set-up-schema" class="common-anchor-header">Step 1: Set up schema</h4><p>A schema defines the structure of a collection. Within the schema, you have the option to enable or disable <code translate="no">enable_dynamic_field</code>, add pre-defined fields, and set attributes for each field. For a detailed explanation of the concept and available data types, refer to <a href="/docs/ko/schema.md">Schema Explained</a>.</p>
+<p>제공된 코드에서 자동으로 색인되고 로드된 컬렉션은 즉시 데이터를 삽입할 수 있습니다.</p>
+<h3 id="Customized-setup" class="common-anchor-header">맞춤형 설정</h3><p>Milvus가 컬렉션의 거의 모든 것을 결정하는 대신, 사용자가 직접 컬렉션의 <strong>스키마와</strong> <strong>인덱스 매개변수를</strong> 결정할 수 있습니다.</p>
+<h4 id="Step-1-Set-up-schema" class="common-anchor-header">1단계: 스키마 설정</h4><p>스키마는 컬렉션의 구조를 정의합니다. 스키마 내에서 <code translate="no">enable_dynamic_field</code> 를 활성화 또는 비활성화하고, 미리 정의된 필드를 추가하고, 각 필드에 대한 속성을 설정하는 옵션이 있습니다. <a href="/docs/ko/schema.md">스키마의</a> 개념과 사용 가능한 데이터 유형에 대한 자세한 설명은 <a href="/docs/ko/schema.md">스키마 설명을</a> 참조하세요.</p>
 <div class="language-python">
-<p>To set up a schema, use <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_schema.md"><code translate="no">create_schema()</code></a> to create a schema object and <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/CollectionSchema/add_field.md"><code translate="no">add_field()</code></a> to add fields to the schema.</p>
+<p>스키마를 설정하려면 <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_schema.md"><code translate="no">create_schema()</code></a> 을 사용하여 스키마 개체를 만들고 <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/CollectionSchema/add_field.md"><code translate="no">add_field()</code></a> 를 사용하여 스키마에 필드를 추가합니다.</p>
 </div>
 <div class="language-java">
-<p>To set up a schema, use <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Collections/createSchema.md"><code translate="no">createSchema()</code></a> to create a schema object and <a href="https://milvus.io/api-reference/java/v2.4.x/v2/CollectionSchema/addField.md"><code translate="no">addField()</code></a> to add fields to the schema.</p>
+<p>스키마를 설정하려면 <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Collections/createSchema.md"><code translate="no">createSchema()</code></a> 을 사용하여 스키마 개체를 만들고 <a href="https://milvus.io/api-reference/java/v2.4.x/v2/CollectionSchema/addField.md"><code translate="no">addField()</code></a> 를 사용하여 스키마에 필드를 추가합니다.</p>
 </div>
 <div class="language-javascript">
-<p>To set up a schema, use <a href="https://milvus.io/api-reference/node/v2.4.x/Collections/createCollection.md"><code translate="no">createCollection()</code></a>.</p>
+<p>스키마를 설정하려면 <a href="https://milvus.io/api-reference/node/v2.4.x/Collections/createCollection.md"><code translate="no">createCollection()</code></a>.</p>
 </div>
 <div class="language-shell">
-<p>To set up a schema, you need to define a JSON object that follows the schema format as displayed on the <a href="https://milvus.io/api-reference/restful/v2.4.x/v2/Collection%20(v2)/Create.md"><code translate="no">POST /v2/vectordb/collections/create</code></a> API endpoint reference page.</p>
+<p>스키마를 설정하려면 스키마 참조 페이지에 표시된 대로 스키마 형식을 따르는 JSON 개체를 정의해야 합니다. <a href="https://milvus.io/api-reference/restful/v2.4.x/v2/Collection%20(v2)/Create.md"><code translate="no">POST /v2/vectordb/collections/create</code></a> API 엔드포인트 참조 페이지를 참조하세요.</p>
 </div>
 <div class="multipleCode">
-  <a href="#python">Python </a>
-  <a href="#java">Java</a>
-  <a href="#javascript">Node.js</a>
-  <a href="#shell">cURL</a>
-</div>
+ <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#shell">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># 3. Create a collection in customized setup mode</span>
 
 <span class="hljs-comment"># 3.1. Create schema</span>
@@ -316,146 +307,142 @@ schema.addField(AddFieldReq.builder()
 <table class="language-python">
   <thead>
     <tr>
-      <th>Parameter</th>
-      <th>Description</th>
+      <th>매개변수</th>
+      <th>설명</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <td><code translate="no">auto_id</code></td>
-      <td>Determines if the primary field automatically increments.<br/>Setting this to <strong>True</strong> makes the primary field automatically increment. In this case, the primary field should not be included in the data to insert to avoid errors. The auto-generated IDs have a fixed length and cannot be altered.</td>
+      <td>기본 필드가 자동으로 증가하는지 여부를 결정합니다.<br/>이 값을 <strong>True로</strong> 설정하면 기본 필드가 자동으로 증가합니다. 이 경우 오류를 방지하기 위해 기본 필드가 삽입할 데이터에 포함되지 않아야 합니다. 자동 생성된 ID는 길이가 고정되어 있으며 변경할 수 없습니다.</td>
     </tr>
     <tr>
       <td><code translate="no">enable_dynamic_field</code></td>
-      <td>Determines if Milvus saves the values of undefined fields in a dynamic field if the data being inserted into the target collection includes fields that are not defined in the collection's schema.<br/>When you set this to <strong>True</strong>, Milvus will create a field called <strong>$meta</strong> to store any undefined fields and their values from the data that is inserted.</td>
+      <td>대상 컬렉션에 삽입되는 데이터에 컬렉션의 스키마에 정의되지 않은 필드가 포함된 경우 Milvus가 정의되지 않은 필드의 값을 동적 필드에 저장할지 여부를 결정합니다.<br/>이 값을 <strong>True로</strong> 설정하면 Milvus는 <strong>$meta라는</strong> 필드를 만들어 삽입되는 데이터에서 정의되지 않은 필드와 해당 값을 저장합니다.</td>
     </tr>
     <tr>
       <td><code translate="no">field_name</code></td>
-      <td>The name of the field.</td>
+      <td>필드의 이름입니다.</td>
     </tr>
     <tr>
       <td><code translate="no">datatype</code></td>
-      <td>The data type of the field. For a list of available data types, refer to <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/DataType.md">DataType</a>.</td>
+      <td>필드의 데이터 유형입니다. 사용 가능한 데이터 유형 목록은 <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/DataType.md">데이터 유형을</a> 참조하세요.</td>
     </tr>
     <tr>
       <td><code translate="no">is_primary</code></td>
-      <td>Whether the current field is the primary field in a collection.<br/>Each collection has only one primary field. A primary field should be of either the <strong>DataType.INT64</strong> type or the <strong>DataType.VARCHAR</strong> type.</td>
+      <td>현재 필드가 컬렉션의 기본 필드인지 여부.<br/>각 컬렉션에는 기본 필드가 하나만 있습니다. 기본 필드는 <strong>DataType.INT64</strong> 유형 또는 <strong>DataType.VARCHAR</strong> 유형이어야 합니다.</td>
     </tr>
     <tr>
       <td><code translate="no">dim</code></td>
-      <td>The dimension of the vector embeddings.<br/>This is mandatory for a field of the <strong>DataType.FLOAT_VECTOR</strong>, <strong>DataType.BINARY_VECTOR</strong>, <strong>DataType.FLOAT16_VECTOR</strong>, or <strong>DataType.BFLOAT16_VECTOR</strong> type. If you use <strong>DataType.SPARSE_FLOAT_VECTOR</strong>, omit this parameter.</td>
+      <td>벡터 임베딩의 차원.<br/><strong>DataType.FLOAT_VECTOR</strong>, <strong>DataType.BINARY_VECTOR</strong>, <strong>DataType</strong> <strong>.FLOAT16_VECTOR</strong> 또는 <strong>DataType.BFLOAT16_VECTOR</strong> 유형의 필드에 필수입니다. <strong>DataType.SPARSE_FLOAT_VECTOR를</strong> 사용하는 경우 이 매개변수는 생략하세요.</td>
     </tr>
   </tbody>
 </table>
 <table class="language-java">
   <thead>
     <tr>
-      <th>Parameter</th>
-      <th>Description</th>
+      <th>파라미터</th>
+      <th>설명</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <td><code translate="no">fieldName</code></td>
-      <td>The name of the field.</td>
+      <td>필드의 이름입니다.</td>
     </tr>
     <tr>
       <td><code translate="no">dataType</code></td>
-      <td>The data type of the field. For a list of available data types, refer to <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Collections/DataType.md">DataType</a>.</td>
+      <td>필드의 데이터 유형입니다. 사용 가능한 데이터 유형 목록은 <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Collections/DataType.md">데이터 유형을</a> 참조하십시오.</td>
     </tr>
     <tr>
       <td><code translate="no">isPrimaryKey</code></td>
-      <td>Whether the current field is the primary field in a collection.<br/>Each collection has only one primary field. A primary field should be of either the <strong>DataType.Int64</strong> type or the <strong>DataType.VarChar</strong> type.</td>
+      <td>현재 필드가 컬렉션의 기본 필드인지 여부입니다.<br/>각 컬렉션에는 기본 필드가 하나만 있습니다. 기본 필드는 <strong>DataType.Int64</strong> 유형 또는 <strong>DataType.VarChar</strong> 유형이어야 합니다.</td>
     </tr>
     <tr>
       <td><code translate="no">autoID</code></td>
-      <td>Whether allows the primary field to automatically increment.<br/>Setting this to <strong>true</strong> makes the primary field automatically increment. In this case, the primary field should not be included in the data to insert to avoid errors.</td>
+      <td>기본 필드가 자동으로 증가하도록 허용 여부<br/>이 값을 <strong>true로</strong> 설정하면 기본 필드가 자동으로 증가합니다. 이 경우 오류를 방지하기 위해 기본 필드를 삽입할 데이터에 포함하지 않아야 합니다.</td>
     </tr>
     <tr>
       <td><code translate="no">dimension</code></td>
-      <td>The dimension of the vector embeddings.<br/>This is mandatory for a field of the <strong>DataType.FloatVector</strong>, <strong>DataType.BinaryVector</strong>, <strong>DataType.Float16Vector</strong>, or <strong>DataType.BFloat16Vector</strong> type.</td>
+      <td>벡터 임베딩의 차원.<br/><strong>DataType.FloatVector</strong>, <strong>DataType.BinaryVector</strong>, <strong>DataType</strong> <strong>.Float16Vector</strong> 또는 <strong>DataType.BFloat16Vector</strong> 유형의 필드에 대해 필수입니다.</td>
     </tr>
   </tbody>
 </table>
 <table class="language-javascript">
   <thead>
     <tr>
-      <th>Parameter</th>
-      <th>Description</th>
+      <th>파라미터</th>
+      <th>설명</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <td><code translate="no">name</code></td>
-      <td>The name of the field.</td>
+      <td>필드의 이름입니다.</td>
     </tr>
     <tr>
       <td><code translate="no">data_type</code></td>
-      <td>The data type of the field. For an enumeration of all available data types, refer to <a href="https://milvus.io/api-reference/node/v2.4.x/Collections/DataType.md">DataType</a>.</td>
+      <td>필드의 데이터 유형입니다. 사용 가능한 모든 데이터 유형에 대한 열거는 <a href="https://milvus.io/api-reference/node/v2.4.x/Collections/DataType.md">DataType을</a> 참조하십시오.</td>
     </tr>
     <tr>
       <td><code translate="no">is_primary_key</code></td>
-      <td>Whether the current field is the primary field in a collection.<br/>Each collection has only one primary field. A primary field should be of either the <strong>DataType.INT64</strong> type or the <strong>DataType.VARCHAR</strong> type.</td>
+      <td>현재 필드가 컬렉션의 기본 필드인지 여부입니다.<br/>각 컬렉션에는 기본 필드가 하나만 있습니다. 기본 필드는 <strong>DataType.INT64</strong> 유형 또는 <strong>DataType.VARCHAR</strong> 유형이어야 합니다.</td>
     </tr>
     <tr>
       <td><code translate="no">auto_id</code></td>
-      <td>Whether the primary field automatically increments upon data insertions into this collection.<br/>The value defaults to <strong>False</strong>. Setting this to <strong>True</strong> makes the primary field automatically increment. Skip this parameter if you need to set up a collection with a customized schema.</td>
+      <td>이 컬렉션에 데이터가 삽입될 때 기본 필드가 자동으로 증가하는지 여부입니다.<br/>기본값은 <strong>False입니다</strong>. 이를 <strong>True로</strong> 설정하면 기본 필드가 자동으로 증가합니다. 사용자 지정 스키마로 컬렉션을 설정해야 하는 경우 이 매개 변수를 건너뛰세요.</td>
     </tr>
     <tr>
       <td><code translate="no">dim</code></td>
-      <td>The dimensionality of the collection field that holds vector embeddings.<br/>The value should be an integer greater than 1 and is usually determined by the model you use to generate vector embeddings.</td>
+      <td>벡터 임베딩을 보유하는 컬렉션 필드의 차원.<br/>이 값은 1보다 큰 정수여야 하며 일반적으로 벡터 임베딩을 생성하는 데 사용하는 모델에 따라 결정됩니다.</td>
     </tr>
   </tbody>
 </table>
 <table class="language-shell">
   <thead>
     <tr>
-      <th>Parameter</th>
-      <th>Description</th>
+      <th>파라미터</th>
+      <th>설명</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <td><code translate="no">fieldName</code></td>
-      <td>The name of the field to create in the target collection.</td>
+      <td>대상 컬렉션에 생성할 필드의 이름입니다.</td>
     </tr>
     <tr>
       <td><code translate="no">dataType</code></td>
-      <td>The data type of the field values.</td>
+      <td>필드 값의 데이터 유형입니다.</td>
     </tr>
     <tr>
       <td><code translate="no">isPrimary</code></td>
-      <td>Whether the current field is the primary field. Setting this to <code translate="no">True</code> makes the current field the primary field.</td>
+      <td>현재 필드가 기본 필드인지 여부입니다. <code translate="no">True</code> 로 설정하면 현재 필드가 기본 필드가 됩니다.</td>
     </tr>
     <tr>
       <td><code translate="no">elementTypeParams</code></td>
-      <td>Extra field parameters.</td>
+      <td>추가 필드 매개 변수.</td>
     </tr>
     <tr>
       <td><code translate="no">dim</code></td>
-      <td>An optional parameter for FloatVector or BinaryVector fields that determines the vector dimension.</td>
+      <td>플로트벡터 또는 이진벡터 필드에 대한 선택적 매개변수로 벡터 차원을 결정합니다.</td>
     </tr>
   </tbody>
 </table>
-<h4 id="Step-2-Set-up-index-parameters" class="common-anchor-header">Step 2: Set up index parameters</h4><p>Index parameters dictate how Milvus organizes your data within a collection. You can tailor the indexing process for specific fields by adjusting their <code translate="no">metric_type</code> and <code translate="no">index_type</code>. For the vector field, you have the flexibility to select <code translate="no">COSINE</code>, <code translate="no">L2</code>, <code translate="no">IP</code>, <code translate="no">HAMMING</code>, or <code translate="no">JACCARD</code> as the <code translate="no">metric_type</code>, depending on the type of vectors you are working with. For more information, refer to <a href="/docs/ko/metric.md">Similarity Metrics</a>.</p>
+<h4 id="Step-2-Set-up-index-parameters" class="common-anchor-header">2단계: 인덱스 매개변수 설정</h4><p>인덱스 매개변수는 Milvus가 컬렉션 내에서 데이터를 구성하는 방법을 결정합니다. <code translate="no">metric_type</code> 및 <code translate="no">index_type</code> 을 조정하여 특정 필드에 대한 인덱싱 프로세스를 맞춤 설정할 수 있습니다. 벡터 필드의 경우, 작업 중인 벡터 유형에 따라 <code translate="no">COSINE</code>, <code translate="no">L2</code>, <code translate="no">IP</code>, <code translate="no">HAMMING</code> 또는 <code translate="no">JACCARD</code> 를 <code translate="no">metric_type</code> 로 유연하게 선택할 수 있습니다. 자세한 내용은 <a href="/docs/ko/metric.md">유사성 메트릭을</a> 참조하세요.</p>
 <div class="language-python">
-<p>To set up index parameters, use <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/prepare_index_params.md"><code translate="no">prepare_index_params()</code></a> to prepare index parameters and <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/add_index.md"><code translate="no">add_index()</code></a> to add the index.</p>
+<p>인덱스 매개변수를 설정하려면 <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/prepare_index_params.md"><code translate="no">prepare_index_params()</code></a> 을 사용하여 인덱스 매개변수를 준비하고 <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/add_index.md"><code translate="no">add_index()</code></a> 을 사용하여 인덱스를 추가합니다.</p>
 </div>
 <div class="language-java">
-<p>To set up index parameters, use <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Management/IndexParam.md">IndexParam</a>.</p>
+<p>인덱스 매개변수를 설정하려면 <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Management/IndexParam.md">IndexParam을</a> 사용합니다.</p>
 </div>
 <div class="language-javascript">
-<p>To set up index parameters, use <a href="https://milvus.io/api-reference/node/v2.4.x/Management/createIndex.md"><code translate="no">createIndex()</code></a>.</p>
+<p>인덱스 매개변수를 설정하려면 <a href="https://milvus.io/api-reference/node/v2.4.x/Management/createIndex.md"><code translate="no">createIndex()</code></a>.</p>
 </div>
 <div class="language-shell">
-<p>To set up index parameters, you need to define a JSON object that follows the index parameters format as displayed on the <a href="https://milvus.io/api-reference/restful/v2.4.x/v2/Collection%20(v2)/Create.md"><code translate="no">POST /v2/vectordb/collections/create</code></a> API endpoint reference page.</p>
+<p>인덱스 매개변수를 설정하려면 인덱스 매개변수 형식을 따르는 JSON 객체를 정의해야 합니다. <a href="https://milvus.io/api-reference/restful/v2.4.x/v2/Collection%20(v2)/Create.md"><code translate="no">POST /v2/vectordb/collections/create</code></a> API 엔드포인트 참조 페이지를 참조하세요.</p>
 </div>
 <div class="multipleCode">
-  <a href="#python">Python </a>
-  <a href="#java">Java</a>
-  <a href="#javascript">Node.js</a>
-  <a href="#shell">cURL</a>
-</div>
+ <a href="#python">파이썬 </a> <a href="#java">자바</a> <a href="#javascript">Node.js</a> <a href="#shell">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-meta"># 3.3. Prepare index parameters</span>
 index_params = client.prepare_index_params()
 
@@ -521,134 +508,130 @@ indexParams.add(indexParamForVectorField);
 <table class="language-python">
   <thead>
     <tr>
-      <th>Parameter</th>
-      <th>Description</th>
+      <th>매개변수</th>
+      <th>설명</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <td><code translate="no">field_name</code></td>
-      <td>The name of the target file to apply this object applies.</td>
+      <td>이 객체를 적용할 대상 파일의 이름입니다.</td>
     </tr>
     <tr>
       <td><code translate="no">index_type</code></td>
-      <td>The name of the algorithm used to arrange data in the specific field. For applicable algorithms, refer to <a href="https://milvus.io/docs/index.md">In-memory Index</a> and <a href="https://milvus.io/docs/disk_index.md">On-disk Index</a>.</td>
+      <td>특정 필드에서 데이터를 정렬하는 데 사용되는 알고리즘의 이름입니다. 적용 가능한 알고리즘은 <a href="https://milvus.io/docs/index.md">인메모리 인덱스</a> 및 <a href="https://milvus.io/docs/disk_index.md">온디스크 인덱스를</a> 참조하세요.</td>
     </tr>
     <tr>
       <td><code translate="no">metric_type</code></td>
-      <td>The algorithm that is used to measure similarity between vectors. Possible values are <strong>IP</strong>, <strong>L2</strong>, <strong>COSINE</strong>, <strong>JACCARD</strong>, <strong>HAMMING</strong>. This is available only when the specified field is a vector field. For more information, refer to <a href="https://milvus.io/docs/index.md#Indexes-supported-in-Milvus">Indexes supported in Milvus</a>.</td>
+      <td>벡터 간의 유사성을 측정하는 데 사용되는 알고리즘입니다. 사용 가능한 값은 <strong>IP</strong>, <strong>L2</strong>, <strong>COSINE</strong>, <strong>JACCARD</strong>, <strong>HAMMING입니다</strong>. 지정된 필드가 벡터 필드인 경우에만 사용할 수 있습니다. 자세한 내용은 <a href="https://milvus.io/docs/index.md#Indexes-supported-in-Milvus">Milvus에서 지원되는 인덱스를</a> 참조하세요.</td>
     </tr>
     <tr>
       <td><code translate="no">params</code></td>
-      <td>The fine-tuning parameters for the specified index type. For details on possible keys and value ranges, refer to <a href="https://milvus.io/docs/index.md">In-memory Index</a>.</td>
+      <td>지정된 인덱스 유형에 대한 미세 조정 매개변수입니다. 사용 가능한 키 및 값 범위에 대한 자세한 내용은 <a href="https://milvus.io/docs/index.md">인메모리 인덱스를</a> 참조하세요.</td>
     </tr>
   </tbody>
 </table>
 <table class="language-java">
   <thead>
     <tr>
-      <th>Parameter</th>
-      <th>Description</th>
+      <th>파라미터</th>
+      <th>설명</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <td><code translate="no">fieldName</code></td>
-      <td>The name of the target field to apply this IndexParam object applies.</td>
+      <td>이 IndexParam 객체를 적용할 대상 필드의 이름입니다.</td>
     </tr>
     <tr>
       <td><code translate="no">indexType</code></td>
-      <td>The name of the algorithm used to arrange data in the specific field. For applicable algorithms, refer to <a href="https://milvus.io/docs/index.md">In-memory Index</a> and <a href="https://milvus.io/docs/disk_index.md">On-disk Index</a>.</td>
+      <td>특정 필드에서 데이터를 정렬하는 데 사용되는 알고리즘의 이름입니다. 적용 가능한 알고리즘에 대해서는 <a href="https://milvus.io/docs/index.md">인메모리 인덱스</a> 및 <a href="https://milvus.io/docs/disk_index.md">온디스크 인덱스를</a> 참조하세요.</td>
     </tr>
     <tr>
       <td><code translate="no">metricType</code></td>
-      <td>The distance metric to use for the index. Possible values are <strong>IP</strong>, <strong>L2</strong>, <strong>COSINE</strong>, <strong>JACCARD</strong>, <strong>HAMMING</strong>.</td>
+      <td>인덱스에 사용할 거리 메트릭입니다. 사용 가능한 값은 <strong>IP</strong>, <strong>L2</strong>, <strong>COSINE</strong>, <strong>JACCARD</strong>, <strong>HAMMING입니다</strong>.</td>
     </tr>
     <tr>
       <td><code translate="no">extraParams</code></td>
-      <td>Extra index parameters. For details, refer to <a href="https://milvus.io/docs/index.md">In-memory Index</a> and <a href="https://milvus.io/docs/disk_index.md">On-disk Index</a>.</td>
+      <td>추가 인덱스 매개변수. 자세한 내용은 <a href="https://milvus.io/docs/index.md">인메모리 인덱스</a> 및 <a href="https://milvus.io/docs/disk_index.md">온디스크 인덱스를</a> 참조하세요.</td>
     </tr>
   </tbody>
 </table>
 <table class="language-javascript">
   <thead>
     <tr>
-      <th>Parameter</th>
-      <th>Description</th>
+      <th>파라미터</th>
+      <th>설명</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <td><code translate="no">field_name</code></td>
-      <td>The name of the target field on which an index is to be created.</td>
+      <td>인덱스를 생성할 대상 필드의 이름입니다.</td>
     </tr>
     <tr>
       <td><code translate="no">index_type</code></td>
-      <td>The name of the algorithm used to arrange data in the specific field. For applicable algorithms, refer to <a href="https://milvus.io/docs/index.md">In-memory Index</a> and <a href="https://milvus.io/docs/disk_index.md">On-disk Index</a>.</td>
+      <td>특정 필드에서 데이터를 정렬하는 데 사용되는 알고리즘의 이름입니다. 적용 가능한 알고리즘은 <a href="https://milvus.io/docs/index.md">인메모리 인덱스</a> 및 <a href="https://milvus.io/docs/disk_index.md">온디스크 인덱스를</a> 참조하십시오.</td>
     </tr>
     <tr>
       <td><code translate="no">metric_type</code></td>
-      <td>The algorithm that is used to measure similarity between vectors. Possible values are <strong>IP</strong>, <strong>L2</strong>, <strong>COSINE</strong>, <strong>JACCARD</strong>, <strong>HAMMING</strong>. This is available only when the specified field is a vector field. For more information, refer to <a href="https://milvus.io/docs/index.md#Indexes-supported-in-Milvus">Indexes supported in Milvus</a>.</td>
+      <td>벡터 간의 유사성을 측정하는 데 사용되는 알고리즘입니다. 사용 가능한 값은 <strong>IP</strong>, <strong>L2</strong>, <strong>COSINE</strong>, <strong>JACCARD</strong>, <strong>HAMMING입니다</strong>. 지정된 필드가 벡터 필드인 경우에만 사용할 수 있습니다. 자세한 내용은 <a href="https://milvus.io/docs/index.md#Indexes-supported-in-Milvus">Milvus에서 지원되는 인덱스를</a> 참조하세요.</td>
     </tr>
     <tr>
       <td><code translate="no">params</code></td>
-      <td>The fine-tuning parameters for the specified index type. For details on possible keys and value ranges, refer to <a href="https://milvus.io/docs/index.md">In-memory Index</a>.</td>
+      <td>지정된 인덱스 유형에 대한 미세 조정 매개변수입니다. 사용 가능한 키 및 값 범위에 대한 자세한 내용은 <a href="https://milvus.io/docs/index.md">인메모리 인덱스를</a> 참조하세요.</td>
     </tr>
   </tbody>
 </table>
 <table class="language-shell">
   <thead>
     <tr>
-      <th>Parameter</th>
-      <th>Description</th>
+      <th>파라미터</th>
+      <th>설명</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <td><code translate="no">fieldName</code></td>
-      <td>The name of the target field on which an index is to be created.</td>
+      <td>인덱스를 생성할 대상 필드의 이름입니다.</td>
     </tr>
     <tr>
       <td><code translate="no">indexName</code></td>
-      <td>The name of the index to create. The value defaults to the target field name.</td>
+      <td>만들 인덱스의 이름입니다. 기본값은 대상 필드 이름입니다.</td>
     </tr>
     <tr>
       <td><code translate="no">metricType</code></td>
-      <td>The algorithm that is used to measure similarity between vectors. Possible values are <strong>IP</strong>, <strong>L2</strong>, <strong>COSINE</strong>, <strong>JACCARD</strong>, <strong>HAMMING</strong>. This is available only when the specified field is a vector field. For more information, refer to <a href="https://milvus.io/docs/index.md#Indexes-supported-in-Milvus">Indexes supported in Milvus</a>.</td>
+      <td>벡터 간의 유사성을 측정하는 데 사용되는 알고리즘입니다. 사용 가능한 값은 <strong>IP</strong>, <strong>L2</strong>, <strong>COSINE</strong>, <strong>JACCARD</strong>, <strong>HAMMING입니다</strong>. 지정된 필드가 벡터 필드인 경우에만 사용할 수 있습니다. 자세한 내용은 <a href="https://milvus.io/docs/index.md#Indexes-supported-in-Milvus">Milvus에서 지원되는 인덱스를</a> 참조하세요.</td>
     </tr>
     <tr>
       <td><code translate="no">params</code></td>
-      <td>The index type and related settings. For details, refer to <a href="https://milvus.io/docs/index.md">In-memory Index</a>.</td>
+      <td>인덱스 유형 및 관련 설정. 자세한 내용은 <a href="https://milvus.io/docs/index.md">인메모리 인덱스를</a> 참조하세요.</td>
     </tr>
     <tr>
       <td><code translate="no">params.index_type</code></td>
-      <td>The type of the index to create.</td>
+      <td>생성할 인덱스의 유형입니다.</td>
     </tr>
     <tr>
       <td><code translate="no">params.nlist</code></td>
-      <td>The number of cluster units. This applies to IVF-related index types.</td>
+      <td>클러스터 단위 수입니다. IVF 관련 인덱스 유형에 적용됩니다.</td>
     </tr>
   </tbody>
 </table>
-<p>The code snippet above demonstrates how to set up index parameters for the vector field and a scalar field, respectively. For the vector field, set both the metric type and the index type. For a scalar field, set only the index type. It is recommended to create an index for the vector field and any scalar fields that are frequently used for filtering.</p>
-<h4 id="Step-3-Create-the-collection" class="common-anchor-header">Step 3: Create the collection</h4><p>You have the option to create a collection and an index file separately or to create a collection with the index loaded simultaneously upon creation.</p>
+<p>위의 코드 조각은 각각 벡터 필드와 스칼라 필드에 대한 인덱스 파라미터를 설정하는 방법을 보여줍니다. 벡터 필드의 경우 메트릭 유형과 인덱스 유형을 모두 설정합니다. 스칼라 필드의 경우 인덱스 유형만 설정합니다. 필터링에 자주 사용되는 벡터 필드와 스칼라 필드에 대한 인덱스를 만드는 것이 좋습니다.</p>
+<h4 id="Step-3-Create-the-collection" class="common-anchor-header">3단계: 컬렉션 만들기</h4><p>컬렉션과 인덱스 파일을 따로 만들거나, 만들 때 인덱스가 동시에 로드된 컬렉션을 만들 수 있습니다.</p>
 <div class="language-python">
-<p>Use <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_collection.md">create_collection()</a> to create a collection with the specified schema and index parameters and <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/get_load_state.md">get_load_state()</a> to check the load state of the collection.</p>
+<p><a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_collection.md">create_collection()을</a> 사용하여 지정된 스키마 및 인덱스 매개변수로 컬렉션을 생성하고 <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/get_load_state.md">get_load_state()를</a> 사용하여 컬렉션의 로드 상태를 확인합니다.</p>
 </div>
 <div class="language-java">
-<p>Use <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Collections/createCollection.md">createCollection()</a> to create a collection with the specified schema and index parameters and <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Management/getLoadState.md">getLoadState()</a> to check the load state of the collection.</p>
+<p><a href="https://milvus.io/api-reference/java/v2.4.x/v2/Collections/createCollection.md">createCollection()을</a> 사용하여 지정된 스키마 및 인덱스 매개변수로 컬렉션을 생성하고 <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Management/getLoadState.md">getLoadState()를</a> 사용하여 컬렉션의 로드 상태를 확인합니다.</p>
 </div>
 <div class="language-javascript">
-<p>Use <a href="https://milvus.io/api-reference/node/v2.4.x/Collections/createCollection.md">createCollection()</a> to create a collection with the specified schema and index parameters and <a href="https://milvus.io/api-reference/node/v2.4.x/Management/getLoadState.md">getLoadState()</a> to check the load state of the collection.</p>
+<p><a href="https://milvus.io/api-reference/node/v2.4.x/Collections/createCollection.md">createCollection()을</a> 사용하여 지정된 스키마 및 인덱스 매개변수로 컬렉션을 만들고 <a href="https://milvus.io/api-reference/node/v2.4.x/Management/getLoadState.md">getLoadState()를</a> 사용하여 컬렉션의 로드 상태를 확인합니다.</p>
 </div>
 <ul>
-<li><p><strong>Create a collection with the index loaded simultaneously upon creation.</strong></p>
+<li><p><strong>생성 시 인덱스가 동시에 로드된 컬렉션을 생성합니다.</strong></p>
 <p><div class="multipleCode">
-<a href="#python">Python </a>
-<a href="#java">Java</a>
-<a href="#javascript">Node.js</a>
-<a href="#shell">cURL</a>
-</div></p>
+<a href="#python">파이썬 </a><a href="#java">자바</a><a href="#javascript">Node.js</a><a href="#shell">cURL</a></div></p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># 3.5. Create a collection with the index loaded simultaneously</span>
 client.create_collection(
     collection_name=<span class="hljs-string">&quot;customized_setup_1&quot;</span>,
@@ -784,14 +767,10 @@ $ curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable
 <span class="hljs-comment">#     }</span>
 <span class="hljs-comment"># }</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>The collection created above is loaded automatically. To learn more about loading and releasing a collection, refer to <a href="/docs/ko/manage-collections.md#Load--Release-Collection">Load &amp; Release Collection</a>.</p></li>
-<li><p><strong>Create a collection and an index file separately.</strong></p>
+<p>위에서 만든 컬렉션은 자동으로 로드됩니다. 컬렉션 로드 및 해제에 대해 자세히 알아보려면 <a href="/docs/ko/manage-collections.md#Load--Release-Collection">컬렉션 로드 및 해제하기를</a> 참조하세요.</p></li>
+<li><p><strong>컬렉션과 인덱스 파일을 별도로 생성합니다.</strong></p>
 <p><div class="multipleCode">
-<a href="#python">Python </a>
-<a href="#java">Java</a>
-<a href="#javascript">Node.js</a>
-<a href="#shell">cURL</a>
-</div></p>
+<a href="#python">파이썬 </a><a href="#java">자바</a><a href="#javascript">Node.js</a><a href="#shell">cURL</a></div></p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># 3.6. Create a collection and index it separately</span>
 client.create_collection(
     collection_name=<span class="hljs-string">&quot;customized_setup_2&quot;</span>,
@@ -887,130 +866,126 @@ $ curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable
 <span class="hljs-comment">#     }</span>
 <span class="hljs-comment"># }</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>The collection created above is not loaded automatically. You can create an index for the collection as follows. Creating an index for the collection in a separate manner does not automatically load the collection. For details, refer to <a href="/docs/ko/manage-collections.md#Load--Release-Collection">Load &amp; Release Collection</a>.</p>
+<p>위에서 만든 컬렉션은 자동으로 로드되지 않습니다. 컬렉션에 대한 인덱스는 다음과 같이 만들 수 있습니다. 컬렉션에 대한 인덱스를 별도로 생성해도 컬렉션이 자동으로 로드되지 않습니다. 자세한 내용은 <a href="/docs/ko/manage-collections.md#Load--Release-Collection">컬렉션 로드 및 해제하기를</a> 참조하세요.</p>
 <p><table class="language-python">
 <thead>
 <tr>
-<th>Parameter</th>
-<th>Description</th>
+<th>파라미터</th>
+<th>설명</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td><code translate="no">collection_name</code></td>
-<td>The name of the collection.</td>
+<td>컬렉션의 이름입니다.</td>
 </tr>
 <tr>
 <td><code translate="no">schema</code></td>
-<td>The schema of this collection.<br/>Setting this to <strong>None</strong> indicates this collection will be created with default settings.<br/>To set up a collection with a customized schema, you need to create a <strong>CollectionSchema</strong> object and reference it here. In this case, Milvus ignores all other schema-related settings carried in the request.</td>
+<td>이 컬렉션의 스키마입니다.<br/>이를 <strong>없음으로</strong> 설정하면 이 컬렉션이 기본 설정으로 생성됩니다.<br/>사용자 정의 스키마로 컬렉션을 설정하려면 <strong>CollectionSchema</strong> 개체를 만들어 여기에서 참조해야 합니다. 이 경우 Milvus는 요청에 포함된 다른 모든 스키마 관련 설정을 무시합니다.</td>
 </tr>
 <tr>
 <td><code translate="no">index_params</code></td>
-<td>The parameters for building the index on the vector field in this collection. To set up a collection with a customized schema and automatically load the collection to memory, you need to create an IndexParams object and reference it here.<br/>You should at least add an index for the vector field in this collection. You can also skip this parameter if you prefer to set up the index parameters later on.</td>
+<td>이 컬렉션의 벡터 필드에 인덱스를 구축하기 위한 매개변수입니다. 사용자 정의 스키마로 컬렉션을 설정하고 컬렉션을 메모리에 자동으로 로드하려면 IndexParams 개체를 만들고 여기에서 참조해야 합니다.<br/>이 컬렉션의 벡터 필드에 대한 인덱스는 최소한 추가해야 합니다. 나중에 인덱스 매개변수를 설정하려는 경우 이 매개변수를 건너뛸 수도 있습니다.</td>
 </tr>
 </tbody>
 </table></p>
 <p><table class="language-java">
 <thead>
 <tr>
-<th>Parameter</th>
-<th>Description</th>
+<th>파라미터</th>
+<th>설명</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td><code translate="no">collectionName</code></td>
-<td>The name of the collection.</td>
+<td>컬렉션의 이름입니다.</td>
 </tr>
 <tr>
 <td><code translate="no">collectionSchema</code></td>
-<td>The schema of this collection.<br/>Leaving it empty indicates this collection will be created with default settings. To set up a collection with a customized schema, you need to create a <strong>CollectionSchema</strong> object and reference it here.</td>
+<td>이 컬렉션의 스키마입니다.<br/>비워 두면 이 컬렉션이 기본 설정으로 만들어집니다. 사용자 정의 스키마로 컬렉션을 설정하려면 <strong>CollectionSchema</strong> 개체를 만들어 여기에서 참조해야 합니다.</td>
 </tr>
 <tr>
 <td><code translate="no">indexParams</code></td>
-<td>The parameters for building the index on the vector field in this collection. To set up a collection with a customized schema and automatically load the collection to memory, create an <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Management/IndexParam.md">IndexParams</a> object with a list of IndexParam objects and reference it here.</td>
+<td>이 컬렉션의 벡터 필드에 인덱스를 구축하기 위한 매개 변수입니다. 사용자 정의 스키마로 컬렉션을 설정하고 컬렉션을 메모리에 자동으로 로드하려면 <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Management/IndexParam.md">IndexParams</a> 객체 목록이 포함된 <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Management/IndexParam.md">IndexParams</a> 객체를 만들고 여기에서 참조하세요.</td>
 </tr>
 </tbody>
 </table></p>
 <p><table class="language-javascript">
 <thead>
 <tr>
-<th>Parameter</th>
-<th>Description</th>
+<th>매개변수</th>
+<th>설명</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td><code translate="no">collection_name</code></td>
-<td>The name of the collection.</td>
+<td>컬렉션의 이름입니다.</td>
 </tr>
 <tr>
 <td><code translate="no">fields</code></td>
-<td>The fields in the collection.</td>
+<td>컬렉션의 필드입니다.</td>
 </tr>
 <tr>
 <td><code translate="no">index_params</code></td>
-<td>The index parameters for the collection to create.</td>
+<td>만들 컬렉션의 인덱스 매개변수입니다.</td>
 </tr>
 </tbody>
 </table></p>
 <p><table class="language-shell">
 <thead>
 <tr>
-<th>Parameter</th>
-<th>Description</th>
+<th>매개변수</th>
+<th>설명</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td><code translate="no">collectionName</code></td>
-<td>The name of the collection.</td>
+<td>컬렉션의 이름입니다.</td>
 </tr>
 <tr>
 <td><code translate="no">schema</code></td>
-<td>The schema is responsible for organizing data in the target collection. A valid schema should have multiple fields, which must include a primary key, a vector field, and several scalar fields.</td>
+<td>스키마는 대상 컬렉션의 데이터를 구성하는 역할을 합니다. 유효한 스키마에는 기본 키, 벡터 필드 및 여러 스칼라 필드를 포함하는 여러 필드가 있어야 합니다.</td>
 </tr>
 <tr>
 <td><code translate="no">schema.autoID</code></td>
-<td>Whether allows the primary field to automatically increment. Setting this to True makes the primary field automatically increment. In this case, the primary field should not be included in the data to insert to avoid errors. Set this parameter in the field with is_primary set to True.</td>
+<td>기본 필드가 자동으로 증가하도록 허용할지 여부를 설정합니다. 이 옵션을 True로 설정하면 기본 필드가 자동으로 증가합니다. 이 경우 오류를 방지하기 위해 기본 필드를 삽입할 데이터에 포함하지 않아야 합니다. 필드에서 이 매개변수를 is_primary를 True로 설정합니다.</td>
 </tr>
 <tr>
 <td><code translate="no">schema.enableDynamicField</code></td>
-<td>Whether allows to use the reserved $meta field to hold non-schema-defined fields in key-value pairs.</td>
+<td>예약된 $meta 필드를 사용하여 스키마에 정의되지 않은 필드를 키-값 쌍으로 보유할 수 있도록 허용할지 여부입니다.</td>
 </tr>
 <tr>
 <td><code translate="no">fields</code></td>
-<td>A list of field objects.</td>
+<td>필드 객체 목록입니다.</td>
 </tr>
 <tr>
 <td><code translate="no">fields.fieldName</code></td>
-<td>The name of the field to create in the target collection.</td>
+<td>대상 컬렉션에 생성할 필드의 이름입니다.</td>
 </tr>
 <tr>
 <td><code translate="no">fields.dataType</code></td>
-<td>The data type of the field values.</td>
+<td>필드 값의 데이터 유형입니다.</td>
 </tr>
 <tr>
 <td><code translate="no">fields.isPrimary</code></td>
-<td>Whether the current field is the primary field. Setting this to True makes the current field the primary field.</td>
+<td>현재 필드가 기본 필드인지 여부입니다. 이 값을 True로 설정하면 현재 필드가 기본 필드가 됩니다.</td>
 </tr>
 <tr>
 <td><code translate="no">fields.elementTypeParams</code></td>
-<td>Extra field parameters.</td>
+<td>추가 필드 매개 변수.</td>
 </tr>
 <tr>
 <td><code translate="no">fields.elementTypeParams.dim</code></td>
-<td>An optional parameter for FloatVector or BinaryVector fields that determines the vector dimension.</td>
+<td>벡터 차원을 결정하는 플로트벡터 또는 바이너리벡터 필드에 대한 선택적 매개 변수입니다.</td>
 </tr>
 </tbody>
 </table></p>
-<p>The collection created above is not loaded automatically. You can create an index for the collection as follows. Creating an index for the collection in a separate manner does not automatically load the collection. For details, refer to <a href="/docs/ko/manage-collections.md">Load &amp; Release Collection</a>.</p>
+<p>위에서 만든 컬렉션은 자동으로 로드되지 않습니다. 다음과 같이 컬렉션에 대한 인덱스를 만들 수 있습니다. 컬렉션에 대한 인덱스를 별도로 생성해도 컬렉션이 자동으로 로드되지 않습니다. 자세한 내용은 <a href="/docs/ko/manage-collections.md">컬렉션 로드 및 해제하기를</a> 참조하세요.</p>
 <p><div class="multipleCode">
-<a href="#python">Python </a>
-<a href="#java">Java</a>
-<a href="#javascript">Node.js</a>
-<a href="#shell">cURL</a>
-</div></p>
+<a href="#python">파이썬 </a><a href="#java">자바</a><a href="#javascript">Node.js</a><a href="#shell">cURL</a></div></p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># 3.6 Create index</span>
 client.create_index(
     collection_name=<span class="hljs-string">&quot;customized_setup_2&quot;</span>,
@@ -1110,18 +1085,18 @@ $ curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable
   <table class="language-python">
   <thead>
     <tr>
-      <th>Parameter</th>
-      <th>Description</th>
+      <th>매개변수</th>
+      <th>설명</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <td><code translate="no">collection_name</code></td>
-      <td>The name of the collection.</td>
+      <td>컬렉션의 이름입니다.</td>
     </tr>
     <tr>
       <td><code translate="no">index_params</code></td>
-      <td>An <strong>IndexParams</strong> object containing a list of <strong>IndexParam</strong> objects.</td>
+      <td><strong>인덱스 파라미터</strong> 객체 목록이 포함된 <strong>인덱스 파라미터</strong> 객체입니다.</td>
     </tr>
   </tbody>
 </table>
@@ -1130,90 +1105,90 @@ $ curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable
 <table class="language-java">
   <thead>
     <tr>
-      <th>Parameter</th>
-      <th>Description</th>
+      <th>파라미터</th>
+      <th>설명</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <td><code translate="no">collectionName</code></td>
-      <td>The name of the collection.</td>
+      <td>컬렉션의 이름입니다.</td>
     </tr>
     <tr>
       <td><code translate="no">indexParams</code></td>
-      <td>A list of <strong>IndexParam</strong> objects.</td>
+      <td><strong>IndexParam</strong> 객체 목록입니다.</td>
     </tr>
   </tbody>
 </table>
 <table class="language-javascript">
   <thead>
     <tr>
-      <th>Parameter</th>
-      <th>Description</th>
+      <th>파라미터</th>
+      <th>설명</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <td><code translate="no">collection_name</code></td>
-      <td>The name of the collection.</td>
+      <td>컬렉션의 이름입니다.</td>
     </tr>
     <tr>
       <td><code translate="no">field_name</code></td>
-      <td>The name of the field in which to create an index.</td>
+      <td>인덱스를 생성할 필드의 이름입니다.</td>
     </tr>
     <tr>
       <td><code translate="no">index_type</code></td>
-      <td>The name of the algorithm used to arrange data in the specific field. For applicable algorithms, refer to <a href="https://milvus.io/docs/index.md">In-memory Index</a> and <a href="https://milvus.io/docs/disk_index.md">On-disk Index</a>.</td>
+      <td>특정 필드에서 데이터를 정렬하는 데 사용되는 알고리즘의 이름입니다. 적용 가능한 알고리즘은 <a href="https://milvus.io/docs/index.md">인메모리 인덱스</a> 및 <a href="https://milvus.io/docs/disk_index.md">온디스크 인덱스를</a> 참조하세요.</td>
     </tr>
     <tr>
       <td><code translate="no">metric_type</code></td>
-      <td>The algorithm that is used to measure similarity between vectors. Possible values are <strong>IP</strong>, <strong>L2</strong>, <strong>COSINE</strong>, <strong>JACCARD</strong>, <strong>HAMMING</strong>. This is available only when the specified field is a vector field. For more information, refer to <a href="https://milvus.io/docs/index.md#Indexes-supported-in-Milvus">Indexes supported in Milvus</a>.</td>
+      <td>벡터 간의 유사성을 측정하는 데 사용되는 알고리즘입니다. 사용 가능한 값은 <strong>IP</strong>, <strong>L2</strong>, <strong>COSINE</strong>, <strong>JACCARD</strong>, <strong>HAMMING입니다</strong>. 지정된 필드가 벡터 필드인 경우에만 사용할 수 있습니다. 자세한 내용은 <a href="https://milvus.io/docs/index.md#Indexes-supported-in-Milvus">Milvus에서 지원되는 인덱스를</a> 참조하세요.</td>
     </tr>
     <tr>
       <td><code translate="no">params</code></td>
-      <td>The fine-tuning parameters for the specified index type. For details on possible keys and value ranges, refer to <a href="https://milvus.io/docs/index.md">In-memory Index</a>.</td>
+      <td>지정된 인덱스 유형에 대한 미세 조정 매개변수입니다. 사용 가능한 키 및 값 범위에 대한 자세한 내용은 <a href="https://milvus.io/docs/index.md">인메모리 인덱스를</a> 참조하세요.</td>
     </tr>
   </tbody>
 </table>
 <table class="language-shell">
     <thead>
         <tr>
-        <th>Parameter</th>
-        <th>Description</th>
+        <th>파라미터</th>
+        <th>설명</th>
         </tr>
     </thead>
     <tbody>
         <tr>
         <td><code translate="no">collectionName</code></td>
-        <td>The name of the collection.</td>
+        <td>컬렉션의 이름입니다.</td>
         </tr>
         <tr>
         <td><code translate="no">indexParams</code></td>
-        <td>The index parameters for the collection to create.</td>
+        <td>만들 컬렉션의 인덱스 매개변수입니다.</td>
         </tr>
         <tr>
         <td><code translate="no">indexParams.metricType</code></td>
-        <td>The similarity metric type used to build the index. The value defaults to COSINE.</td>
+        <td>인덱스를 작성하는 데 사용되는 유사성 메트릭 유형입니다. 기본값은 COSINE입니다.</td>
         </tr>
         <tr>
         <td><code translate="no">indexParams.fieldName</code></td>
-        <td>The name of the target field on which an index is to be created.</td>
+        <td>인덱스를 생성할 대상 필드의 이름입니다.</td>
         </tr>
         <tr>
         <td><code translate="no">indexParams.indexName</code></td>
-        <td>The name of the index to create, the value defaults to the target field name.</td>
+        <td>만들 인덱스의 이름(기본값은 대상 필드 이름)입니다.</td>
         </tr>
         <tr>
         <td><code translate="no">indexParams.indexConfig.index_type</code></td>
-        <td>The type of the index to create.</td>
+        <td>생성할 인덱스의 유형입니다.</td>
         </tr>
         <tr>
         <td><code translate="no">indexParams.indexConfig.nlist</code></td>
-        <td>The number of cluster units. This applies to IVF-related index types.</td>
+        <td>클러스터 단위 수입니다. IVF 관련 인덱스 유형에 적용됩니다.</td>
         </tr>
     </tbody>
 </table>
-<h2 id="View-Collections" class="common-anchor-header">View Collections<button data-href="#View-Collections" class="anchor-icon" translate="no">
+<h2 id="View-Collections" class="common-anchor-header">컬렉션 보기<button data-href="#View-Collections" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -1229,23 +1204,19 @@ $ curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable
         ></path>
       </svg>
     </button></h2><div class="language-python">
-<p>To check the details of an existing collection, use <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/describe_collection.md">describe_collection()</a>.</p>
+<p>기존 컬렉션의 세부 정보를 확인하려면 <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/describe_collection.md">describe_collection()을</a> 사용합니다.</p>
 </div>
 <div class="language-java">
-<p>To check the details of an existing collection, use <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Collections/describeCollection.md">describeCollection()</a>.</p>
+<p>기존 컬렉션의 세부 정보를 확인하려면 <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Collections/describeCollection.md">describeCollection()을</a> 사용합니다.</p>
 </div>
 <div class="language-javascript">
-<p>To check the details of an existing collection, use <a href="https://milvus.io/api-reference/node/v2.4.x/Collections/describeCollection.md">describeCollection()</a>.</p>
+<p>기존 컬렉션의 세부 정보를 확인하려면 <a href="https://milvus.io/api-reference/node/v2.4.x/Collections/describeCollection.md">describeCollection()을</a> 사용합니다.</p>
 </div>
 <div class="language-shell">
-<p>To view the definition of a collection, you can use the <a href="https://milvus.io/api-reference/restful/v2.4.x/v2/Collection%20(v2)/Describe.md"><code translate="no">POST /v2/vectordb/collections/describe</code></a> and the <a href="https://milvus.io/api-reference/restful/v2.4.x/v2/Collection%20(v2)/List.md"><code translate="no">POST /v2/vectordb/collections/list</code></a> API endpoints.</p>
+<p>컬렉션의 정의를 보려면 컬렉션에서 <a href="https://milvus.io/api-reference/restful/v2.4.x/v2/Collection%20(v2)/Describe.md"><code translate="no">POST /v2/vectordb/collections/describe</code></a> 및 <a href="https://milvus.io/api-reference/restful/v2.4.x/v2/Collection%20(v2)/List.md"><code translate="no">POST /v2/vectordb/collections/list</code></a> API 엔드포인트를 사용하면 됩니다.</p>
 </div>
 <div class="multipleCode">
-    <a href="#python">Python </a>
-    <a href="#java">Java</a>
-    <a href="#javascript">Node.js</a>
-    <a href="#shell">cURL</a>
-</div>
+   <a href="#python">파이썬 </a> <a href="#java">자바</a> <a href="#javascript">Node.js</a> <a href="#shell">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># 5. View Collections</span>
 res = client.describe_collection(
     collection_name=<span class="hljs-string">&quot;customized_setup_2&quot;</span>
@@ -1438,13 +1409,9 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 <span class="hljs-comment">#     }</span>
 <span class="hljs-comment"># }</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>To list all existing collections, you can do as follows:</p>
+<p>기존 컬렉션을 모두 나열하려면 다음과 같이 하면 됩니다:</p>
 <div class="multipleCode">
-    <a href="#python">Python </a>
-    <a href="#java">Java</a>
-    <a href="#javascript">Node.js</a>
-    <a href="#shell">cURL</a>
-</div>
+   <a href="#python">파이썬 </a> <a href="#java">자바</a> <a href="#javascript">Node.js</a> <a href="#shell">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># 6. List all collection names</span>
 res = client.list_collections()
 
@@ -1499,7 +1466,7 @@ System.out.println(listCollectionsRes.getCollectionNames());
 <span class="hljs-comment">#   ]</span>
 <span class="hljs-comment"># }</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Load--Release-Collection" class="common-anchor-header">Load &amp; Release Collection<button data-href="#Load--Release-Collection" class="anchor-icon" translate="no">
+<h2 id="Load--Release-Collection" class="common-anchor-header">컬렉션 로드 및 릴리스<button data-href="#Load--Release-Collection" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -1514,29 +1481,25 @@ System.out.println(listCollectionsRes.getCollectionNames());
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>During the loading process of a collection, Milvus loads the collection’s index file into memory. Conversely, when releasing a collection, Milvus unloads the index file from memory. Before conducting searches in a collection, ensure that the collection is loaded.</p>
-<h3 id="Load-a-collection" class="common-anchor-header">Load a collection</h3><div class="language-python">
-<p>To load a collection, use the <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/load_collection.md"><code translate="no">load_collection()</code></a> method, specifying the collection name. You can also set <code translate="no">replica_number</code> to determine how many in-memory replicas of data segments to create on query nodes when the collection is loaded.</p>
+    </button></h2><p>컬렉션을 로드하는 과정에서 Milvus는 컬렉션의 인덱스 파일을 메모리에 로드합니다. 반대로 컬렉션을 해제할 때는 Milvus가 메모리에서 인덱스 파일을 언로드합니다. 컬렉션에서 검색을 수행하기 전에 컬렉션이 로드되었는지 확인하세요.</p>
+<h3 id="Load-a-collection" class="common-anchor-header">컬렉션 로드하기</h3><div class="language-python">
+<p>컬렉션을 로드하려면 컬렉션 이름을 지정하여 <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/load_collection.md"><code translate="no">load_collection()</code></a> 메서드를 사용하여 컬렉션 이름을 지정합니다. 또한 <code translate="no">replica_number</code> 을 설정하여 컬렉션이 로드될 때 쿼리 노드에 생성할 데이터 세그먼트의 인메모리 복제본 수를 결정할 수 있습니다.</p>
 <ul>
-<li>Milvus Standalone: The maximum allowed value for <code translate="no">replica_number</code> is 1.</li>
-<li>Milvus Cluster: The maximum value should not exceed the <code translate="no">queryNode.replicas</code> set in your Milvus configurations. For additional details, refer to <a href="https://milvus.io/docs/configure_querynode.md#Query-Node-related-Configurations">Query Node-related Configurations</a>.</li>
+<li>Milvus 독립형: <code translate="no">replica_number</code> 의 최대 허용 값은 1입니다.</li>
+<li>Milvus 클러스터: 최대값은 Milvus 구성에 설정된 <code translate="no">queryNode.replicas</code> 을 초과하지 않아야 합니다. 자세한 내용은 <a href="https://milvus.io/docs/configure_querynode.md#Query-Node-related-Configurations">쿼리 노드 관련 구성을</a> 참조하세요.</li>
 </ul>
 </div>
 <div class="language-java">
-<p>To load a collection, use the <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Management/loadCollection.md"><code translate="no">loadCollection()</code></a> method, specifying the collection name.</p>
+<p>컬렉션을 로드하려면 컬렉션 이름을 지정하여 <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Management/loadCollection.md"><code translate="no">loadCollection()</code></a> 메서드를 사용하여 컬렉션 이름을 지정합니다.</p>
 </div>
 <div class="language-javascript">
-<p>To load a collection, use the <a href="https://milvus.io/api-reference/node/v2.4.x/Management/loadCollection.md"><code translate="no">loadCollection()</code></a> method, specifying the collection name.</p>
+<p>컬렉션을 로드하려면 컬렉션 이름을 지정하여 <a href="https://milvus.io/api-reference/node/v2.4.x/Management/loadCollection.md"><code translate="no">loadCollection()</code></a> 메서드를 사용하여 컬렉션 이름을 지정합니다.</p>
 </div>
 <div class="language-shell">
-<p>To load a collection, you can use the <a href="https://milvus.io/api-reference/restful/v2.4.x/v2/Collection%20(v2)/Load.md"><code translate="no">POST /v2/vectordb/collections/load</code></a> and the <a href="https://milvus.io/api-reference/restful/v2.4.x/v2/Collection%20(v2)/GetLoadState.md"><code translate="no">POST /v2/vectordb/collections/get_load_state</code></a> API endpoints.</p>
+<p>컬렉션을 로드하려면 <a href="https://milvus.io/api-reference/restful/v2.4.x/v2/Collection%20(v2)/Load.md"><code translate="no">POST /v2/vectordb/collections/load</code></a> 및 <a href="https://milvus.io/api-reference/restful/v2.4.x/v2/Collection%20(v2)/GetLoadState.md"><code translate="no">POST /v2/vectordb/collections/get_load_state</code></a> API 엔드포인트를 사용합니다.</p>
 </div>
 <div class="multipleCode">
-    <a href="#python">Python </a>
-    <a href="#java">Java</a>
-    <a href="#javascript">Node.js</a>
-    <a href="#shell">cURL</a>
-</div>
+   <a href="#python">파이썬 </a> <a href="#java">자바</a> <a href="#javascript">Node.js</a> <a href="#shell">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># 7. Load the collection</span>
 client.load_collection(
     collection_name=<span class="hljs-string">&quot;customized_setup_2&quot;</span>,
@@ -1630,24 +1593,20 @@ $ curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable
 <span class="hljs-comment">#     }</span>
 <span class="hljs-comment"># }</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Release-a-collection" class="common-anchor-header">Release a collection</h3><div class="language-python">
-<p>To release a collection, use the <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/release_collection.md"><code translate="no">release_collection()</code></a> method, specifying the collection name.</p>
+<h3 id="Release-a-collection" class="common-anchor-header">컬렉션 릴리즈</h3><div class="language-python">
+<p>컬렉션을 릴리스하려면 컬렉션 이름을 지정하여 <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/release_collection.md"><code translate="no">release_collection()</code></a> 메서드를 사용하여 컬렉션 이름을 지정합니다.</p>
 </div>
 <div class="language-java">
-<p>To release a collection, use the <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Management/releaseCollection.md"><code translate="no">releaseCollection()</code></a> method, specifying the collection name.</p>
+<p>컬렉션을 릴리스하려면 컬렉션 이름을 지정하여 <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Management/releaseCollection.md"><code translate="no">releaseCollection()</code></a> 메서드를 사용하여 컬렉션 이름을 지정합니다.</p>
 </div>
 <div class="language-javascript">
-<p>To release a collection, use the <a href="https://milvus.io/api-reference/node/v2.4.x/Management/releaseCollection.md"><code translate="no">releaseCollection()</code></a> method, specifying the collection name.</p>
+<p>컬렉션을 릴리스하려면 컬렉션 이름을 지정하여 <a href="https://milvus.io/api-reference/node/v2.4.x/Management/releaseCollection.md"><code translate="no">releaseCollection()</code></a> 메서드를 사용하여 컬렉션 이름을 지정합니다.</p>
 </div>
 <div class="language-shell">
-<p>To release a collection, you can use the <a href="https://milvus.io/api-reference/restful/v2.4.x/v2/Collection%20(v2)/Release.md"><code translate="no">POST /v2/vectordb/collections/release</code></a> and the <a href="https://milvus.io/api-reference/restful/v2.4.x/v2/Collection%20(v2)/GetLoadState.md"><code translate="no">POST /v2/vectordb/collections/get_load_state</code></a> API endpoints.</p>
+<p>컬렉션을 릴리스하려면 <a href="https://milvus.io/api-reference/restful/v2.4.x/v2/Collection%20(v2)/Release.md"><code translate="no">POST /v2/vectordb/collections/release</code></a> 및 <a href="https://milvus.io/api-reference/restful/v2.4.x/v2/Collection%20(v2)/GetLoadState.md"><code translate="no">POST /v2/vectordb/collections/get_load_state</code></a> API 엔드포인트를 사용합니다.</p>
 </div>
 <div class="multipleCode">
-    <a href="#python">Python </a>
-    <a href="#java">Java</a>
-    <a href="#javascript">Node.js</a>
-    <a href="#shell">cURL</a>
-</div>
+   <a href="#python">파이썬 </a> <a href="#java">자바</a> <a href="#javascript">Node.js</a> <a href="#shell">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># 8. Release the collection</span>
 client.release_collection(
     collection_name=<span class="hljs-string">&quot;customized_setup_2&quot;</span>
@@ -1734,7 +1693,7 @@ $ curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable
 <span class="hljs-comment">#     }</span>
 <span class="hljs-comment"># }</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Set-up-aliases" class="common-anchor-header">Set up aliases<button data-href="#Set-up-aliases" class="anchor-icon" translate="no">
+<h2 id="Set-up-aliases" class="common-anchor-header">별칭 설정<button data-href="#Set-up-aliases" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -1749,25 +1708,21 @@ $ curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>You can assign aliases for collections to make them more meaningful in a specific context. You can assign multiple aliases for a collection, but multiple collections cannot share an alias.</p>
-<h3 id="Create-aliases" class="common-anchor-header">Create aliases</h3><div class="language-python">
-<p>To create aliases, use the <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_alias.md"><code translate="no">create_alias()</code></a> method, specifying the collection name and the alias.</p>
+    </button></h2><p>컬렉션에 별칭을 지정하여 컬렉션을 특정 맥락에서 더 의미 있게 만들 수 있습니다. 컬렉션에 여러 개의 별칭을 지정할 수 있지만 여러 컬렉션이 하나의 별칭을 공유할 수는 없습니다.</p>
+<h3 id="Create-aliases" class="common-anchor-header">별칭 만들기</h3><div class="language-python">
+<p>별칭을 만들려면 컬렉션 이름과 <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_alias.md"><code translate="no">create_alias()</code></a> 메서드를 사용하여 컬렉션 이름과 별칭을 지정합니다.</p>
 </div>
 <div class="language-java">
-<p>To create aliases, use the <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Collections/createAlias.md"><code translate="no">createAlias()</code></a> method, specifying the collection name and the alias.</p>
+<p>별칭을 만들려면 컬렉션 이름과 별칭을 지정하여 <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Collections/createAlias.md"><code translate="no">createAlias()</code></a> 메서드를 사용하여 컬렉션 이름과 별칭을 지정합니다.</p>
 </div>
 <div class="language-javascript">
-<p>To create aliases, use the <a href="https://milvus.io/api-reference/node/v2.4.x/Collections/createAlias.md"><code translate="no">createAlias()</code></a> method, specifying the collection name and the alias.</p>
+<p>별칭을 만들려면 컬렉션 이름과 별칭을 지정하여 <a href="https://milvus.io/api-reference/node/v2.4.x/Collections/createAlias.md"><code translate="no">createAlias()</code></a> 메서드를 사용하여 컬렉션 이름과 별칭을 지정합니다.</p>
 </div>
 <div class="language-shell">
-<p>To create aliases for a collection, you can use the <a href="https://milvus.io/api-reference/restful/v2.4.x/v2/Alias%20(v2)/Create.md"><code translate="no">POST /v2/vectordb/aliases/create</code></a> API endpoint.</p>
+<p>컬렉션의 별칭을 만들려면 컬렉션의 <a href="https://milvus.io/api-reference/restful/v2.4.x/v2/Alias%20(v2)/Create.md"><code translate="no">POST /v2/vectordb/aliases/create</code></a> API 엔드포인트를 사용하면 됩니다.</p>
 </div>
 <div class="multipleCode">
-    <a href="#python">Python </a>
-    <a href="#java">Java</a>
-    <a href="#javascript">Node.js</a>
-    <a href="#shell">cURL</a>
-</div>
+   <a href="#python">파이썬 </a> <a href="#java">자바</a> <a href="#javascript">Node.js</a> <a href="#shell">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># 9.1. Create aliases</span>
 client.create_alias(
     collection_name=<span class="hljs-string">&quot;customized_setup_2&quot;</span>,
@@ -1855,93 +1810,89 @@ $ curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable
 <table class="language-python">
   <thead>
     <tr>
-      <th>Parameter</th>
-      <th>Description</th>
+      <th>매개변수</th>
+      <th>설명</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <td><code translate="no">collection_name</code></td>
-      <td>The name of the collection to create an alias for.</td>
+      <td>별칭을 만들 컬렉션의 이름입니다.</td>
     </tr>
     <tr>
       <td><code translate="no">alias</code></td>
-      <td>The alias of the collection. Before this operation, ensure that the alias does not already exist. If it does, exceptions will occur.</td>
+      <td>컬렉션의 별칭입니다. 이 작업을 수행하기 전에 별칭이 이미 존재하지 않는지 확인하세요. 존재하는 경우 예외가 발생합니다.</td>
     </tr>
   </tbody>
 </table>
 <table class="language-java">
   <thead>
     <tr>
-      <th>Parameter</th>
-      <th>Description</th>
+      <th>매개변수</th>
+      <th>설명</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <td><code translate="no">collectionName</code></td>
-      <td>The name of the collection to create an alias for.</td>
+      <td>별칭을 만들 컬렉션의 이름입니다.</td>
     </tr>
     <tr>
       <td><code translate="no">alias</code></td>
-      <td>The alias of the collection. Before this operation, ensure that the alias does not already exist. If it does, exceptions will occur.</td>
+      <td>컬렉션의 별칭입니다. 이 작업을 수행하기 전에 별칭이 이미 존재하지 않는지 확인하세요. 존재하는 경우 예외가 발생합니다.</td>
     </tr>
   </tbody>
 </table>
 <table class="language-javascript">
   <thead>
     <tr>
-      <th>Parameter</th>
-      <th>Description</th>
+      <th>매개변수</th>
+      <th>설명</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <td><code translate="no">collection_name</code></td>
-      <td>The name of the collection to create an alias for.</td>
+      <td>별칭을 만들 컬렉션의 이름입니다.</td>
     </tr>
     <tr>
       <td><code translate="no">alias</code></td>
-      <td>The alias of the collection. Before this operation, ensure that the alias does not already exist. If it does, exceptions will occur.</td>
+      <td>컬렉션의 별칭입니다. 이 작업을 수행하기 전에 별칭이 이미 존재하지 않는지 확인하세요. 존재하는 경우 예외가 발생합니다.</td>
     </tr>
   </tbody>
 </table>
 <table class="language-shell">
   <thead>
     <tr>
-      <th>Parameter</th>
-      <th>Description</th>
+      <th>매개변수</th>
+      <th>설명</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <td><code translate="no">collectionName</code></td>
-      <td>The name of the collection to create an alias for.</td>
+      <td>별칭을 만들 컬렉션의 이름입니다.</td>
     </tr>
     <tr>
       <td><code translate="no">aliasName</code></td>
-      <td>The alias of the collection. Before this operation, ensure that the alias does not already exist. If it does, exceptions will occur.</td>
+      <td>컬렉션의 별칭입니다. 이 작업을 수행하기 전에 별칭이 이미 존재하지 않는지 확인하세요. 존재하는 경우 예외가 발생합니다.</td>
     </tr>
   </tbody>
 </table>
-<h3 id="List-aliases" class="common-anchor-header">List aliases</h3><div class="language-python">
-<p>To list aliases, use the <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/list_aliases.md"><code translate="no">list_aliases()</code></a> method, specifying the collection name.</p>
+<h3 id="List-aliases" class="common-anchor-header">별칭 목록</h3><div class="language-python">
+<p>별칭을 나열하려면 컬렉션 이름을 지정하여 <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/list_aliases.md"><code translate="no">list_aliases()</code></a> 메서드를 사용하여 컬렉션 이름을 지정합니다.</p>
 </div>
 <div class="language-java">
-<p>To list aliases, use the <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Collections/listAliases.md"><code translate="no">listAliases()</code></a> method, specifying the collection name.</p>
+<p>별칭을 나열하려면 컬렉션 이름을 지정하여 <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Collections/listAliases.md"><code translate="no">listAliases()</code></a> 메서드를 사용하여 컬렉션 이름을 지정합니다.</p>
 </div>
 <div class="language-javascript">
-<p>To list aliases, use the <a href="https://milvus.io/api-reference/node/v2.4.x/Collections/listAliases.md"><code translate="no">listAliases()</code></a> method, specifying the collection name.</p>
+<p>별칭을 나열하려면 컬렉션 이름을 지정하여 <a href="https://milvus.io/api-reference/node/v2.4.x/Collections/listAliases.md"><code translate="no">listAliases()</code></a> 메서드를 사용하여 컬렉션 이름을 지정합니다.</p>
 </div>
 <div class="language-shell">
-<p>To list aliases for a collection, you can use the <a href="https://milvus.io/api-reference/restful/v2.4.x/v2/Alias%20(v2)/List.md"><code translate="no">POST /v2/vectordb/aliases/list</code></a> API endpoint.</p>
+<p>컬렉션의 별칭을 나열하려면 컬렉션의 <a href="https://milvus.io/api-reference/restful/v2.4.x/v2/Alias%20(v2)/List.md"><code translate="no">POST /v2/vectordb/aliases/list</code></a> API 엔드포인트를 사용하면 됩니다.</p>
 </div>
 <div class="multipleCode">
-    <a href="#python">Python </a>
-    <a href="#java">Java</a>
-    <a href="#javascript">Node.js</a>
-    <a href="#shell">cURL</a>
-</div>
+   <a href="#python">파이썬 </a> <a href="#java">자바</a> <a href="#javascript">Node.js</a> <a href="#shell">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># 9.2. List aliases</span>
 res = client.list_aliases(
     collection_name=<span class="hljs-string">&quot;customized_setup_2&quot;</span>
@@ -2004,24 +1955,20 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 <span class="hljs-comment">#     ]</span>
 <span class="hljs-comment"># }</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Describe-aliases" class="common-anchor-header">Describe aliases</h3><div class="language-python">
-<p>To describe aliases, use the <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/describe_alias.md"><code translate="no">describe_alias()</code></a> method, specifying the alias.</p>
+<h3 id="Describe-aliases" class="common-anchor-header">별칭 설명하기</h3><div class="language-python">
+<p>별칭을 설명하려면 별칭을 지정하는 <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/describe_alias.md"><code translate="no">describe_alias()</code></a> 메서드를 사용하여 별칭을 지정합니다.</p>
 </div>
 <div class="language-java">
-<p>To describe aliases, use the <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Collections/describeAlias.md"><code translate="no">describeAlias()</code></a> method, specifying the alias.</p>
+<p>별칭을 설명하려면 별칭을 지정하여 <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Collections/describeAlias.md"><code translate="no">describeAlias()</code></a> 메서드를 사용하여 별칭을 지정합니다.</p>
 </div>
 <div class="language-javascript">
-<p>To describe aliases, use the <a href="https://milvus.io/api-reference/node/v2.4.x/Collections/describeAlias.md"><code translate="no">describeAlias()</code></a> method, specifying the alias.</p>
+<p>별칭을 설명하려면 별칭을 지정하여 <a href="https://milvus.io/api-reference/node/v2.4.x/Collections/describeAlias.md"><code translate="no">describeAlias()</code></a> 메서드를 사용하여 별칭을 지정합니다.</p>
 </div>
 <div class="language-shell">
-<p>To describe aliases for a collection, you can use the <a href="https://milvus.io/api-reference/restful/v2.4.x/v2/Alias%20(v2)/Describe.md"><code translate="no">POST /v2/vectordb/aliases/describe</code></a> API endpoint.</p>
+<p>컬렉션의 별칭을 설명하려면 컬렉션의 <a href="https://milvus.io/api-reference/restful/v2.4.x/v2/Alias%20(v2)/Describe.md"><code translate="no">POST /v2/vectordb/aliases/describe</code></a> API 엔드포인트를 사용하면 됩니다.</p>
 </div>
 <div class="multipleCode">
-    <a href="#python">Python </a>
-    <a href="#java">Java</a>
-    <a href="#javascript">Node.js</a>
-    <a href="#shell">cURL</a>
-</div>
+   <a href="#python">파이썬 </a> <a href="#java">자바</a> <a href="#javascript">Node.js</a> <a href="#shell">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># 9.3. Describe aliases</span>
 res = client.describe_alias(
     <span class="hljs-built_in">alias</span>=<span class="hljs-string">&quot;bob&quot;</span>
@@ -2095,24 +2042,20 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 <span class="hljs-comment">#     }</span>
 <span class="hljs-comment"># }</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Reassign-aliases" class="common-anchor-header">Reassign aliases</h3><div class="language-python">
-<p>To reassign aliases to other collections, use the <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/alter_alias.md"><code translate="no">alter_alias()</code></a> method, specifying the collection name and the alias.</p>
+<h3 id="Reassign-aliases" class="common-anchor-header">별칭 재할당하기</h3><div class="language-python">
+<p>별칭을 다른 컬렉션에 다시 할당하려면 컬렉션 이름과 별칭을 지정하여 <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/alter_alias.md"><code translate="no">alter_alias()</code></a> 메서드를 사용하여 컬렉션 이름과 별칭을 지정합니다.</p>
 </div>
 <div class="language-java">
-<p>To reassign aliases to other collections, use the <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Collections/alterAlias.md"><code translate="no">alterAlias()</code></a> method, specifying the collection name and the alias.</p>
+<p>별칭을 다른 컬렉션에 재할당하려면 컬렉션 이름과 별칭을 지정하여 <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Collections/alterAlias.md"><code translate="no">alterAlias()</code></a> 메서드를 사용하여 컬렉션 이름과 별칭을 지정합니다.</p>
 </div>
 <div class="language-javascript">
-<p>To reassign aliases to other collections, use the <a href="https://milvus.io/api-reference/node/v2.4.x/Collections/alterAlias.md"><code translate="no">alterAlias()</code></a> method, specifying the collection name and the alias.</p>
+<p>별칭을 다른 컬렉션에 재할당하려면 컬렉션 이름과 별칭을 지정하여 <a href="https://milvus.io/api-reference/node/v2.4.x/Collections/alterAlias.md"><code translate="no">alterAlias()</code></a> 메서드를 사용하여 컬렉션 이름과 별칭을 지정합니다.</p>
 </div>
 <div class="language-shell">
-<p>To reassign aliases to other collections, you can use the <a href="https://milvus.io/api-reference/restful/v2.4.x/v2/Alias%20(v2)/Alter.md"><code translate="no">POST /v2/vectordb/aliases/alter</code></a> API endpoint.</p>
+<p>다른 컬렉션에 별칭을 재할당하려면 별칭을 다른 컬렉션에 재할당하려면 <a href="https://milvus.io/api-reference/restful/v2.4.x/v2/Alias%20(v2)/Alter.md"><code translate="no">POST /v2/vectordb/aliases/alter</code></a> API 엔드포인트를 사용하면 됩니다.</p>
 </div>
 <div class="multipleCode">
-    <a href="#python">Python </a>
-    <a href="#java">Java</a>
-    <a href="#javascript">Node.js</a>
-    <a href="#shell">cURL</a>
-</div>
+   <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#shell">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># 9.4 Reassign aliases to other collections</span>
 client.alter_alias(
     collection_name=<span class="hljs-string">&quot;customized_setup_1&quot;</span>,
@@ -2260,23 +2203,20 @@ $ curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable
 <span class="hljs-comment">#     ]</span>
 <span class="hljs-comment"># }</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Drop-aliases" class="common-anchor-header">Drop aliases</h3><div class="language-python">
-<p>To drop aliases, use the <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/drop_alias.md"><code translate="no">drop_alias()</code></a> method, specifying the alias.</p>
+<h3 id="Drop-aliases" class="common-anchor-header">별칭 삭제</h3><div class="language-python">
+<p>별칭을 삭제하려면 별칭을 지정하는 <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/drop_alias.md"><code translate="no">drop_alias()</code></a> 메서드를 사용하여 별칭을 지정합니다.</p>
 </div>
 <div class="language-java">
-<p>To drop aliases, use the <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Collections/dropAlias.md"><code translate="no">dropAlias()</code></a> method, specifying the alias.</p>
+<p>별칭을 삭제하려면 별칭을 지정하여 <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Collections/dropAlias.md"><code translate="no">dropAlias()</code></a> 메서드를 사용하여 별칭을 지정합니다.</p>
 </div>
 <div class="language-javascript">
-<p>To drop aliases, use the <a href="https://milvus.io/api-reference/node/v2.4.x/Collections/dropAlias.md"><code translate="no">dropAlias()</code></a> method, specifying the alias.</p>
+<p>별칭을 삭제하려면 별칭을 지정하여 <a href="https://milvus.io/api-reference/node/v2.4.x/Collections/dropAlias.md"><code translate="no">dropAlias()</code></a> 메서드를 사용하여 별칭을 지정합니다.</p>
 </div>
 <div class="language-shell">
-<p>To drop aliases for a collection, you can use the <a href="https://milvus.io/api-reference/restful/v2.4.x/v2/Alias%20(v2)/Drop.md"><code translate="no">POST /v2/vectordb/aliases/drop</code></a> API endpoint.</p>
+<p>컬렉션에 대한 별칭을 삭제하려면 <a href="https://milvus.io/api-reference/restful/v2.4.x/v2/Alias%20(v2)/Drop.md"><code translate="no">POST /v2/vectordb/aliases/drop</code></a> API 엔드포인트를 사용하면 됩니다.</p>
 </div>
 <div class="multipleCode">
-    <a href="#python">Python </a>
-    <a href="#java">Java</a>
-    <a href="#javascript">Node.js</a>
-</div>
+   <a href="#python">파이썬 </a> <a href="#java">자바</a> <a href="#javascript">Node.js</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># 9.5 Drop aliases</span>
 client.drop_alias(
     <span class="hljs-built_in">alias</span>=<span class="hljs-string">&quot;bob&quot;</span>
@@ -2348,7 +2288,7 @@ $ curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable
 <span class="hljs-comment">#     &quot;data&quot;: {}</span>
 <span class="hljs-comment"># }</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Set-Properties" class="common-anchor-header">Set Properties<button data-href="#Set-Properties" class="anchor-icon" translate="no">
+<h2 id="Set-Properties" class="common-anchor-header">속성 설정<button data-href="#Set-Properties" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -2363,11 +2303,11 @@ $ curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>You can set properties for a collection, such as <code translate="no">ttl.seconds</code> and <code translate="no">mmap.enabled</code>. For more information, refer to <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/ORM/Collection/set_properties.md">set_properties()</a>.</p>
+    </button></h2><p><code translate="no">ttl.seconds</code> 및 <code translate="no">mmap.enabled</code> 과 같은 컬렉션의 속성을 설정할 수 있습니다. 자세한 내용은 <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/ORM/Collection/set_properties.md">set_properties()를</a> 참조하세요.</p>
 <div class="alert note">
-<p>The code snippets in this section use the <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/ORM/Connections/connect.md">PyMilvus ORM module</a> to interact with Milvus. Code snippets with the new <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/About.md">MilvusClient SDK</a> will be available soon.</p>
+<p>이 섹션의 코드 스니펫은 <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/ORM/Connections/connect.md">PyMilvus ORM 모듈을</a> 사용하여 Milvus와 상호 작용합니다. 새로운 <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/About.md">MilvusClient SDK가</a> 포함된 코드 스니펫은 곧 제공될 예정입니다.</p>
 </div>
-<h3 id="Set-TTL" class="common-anchor-header">Set TTL</h3><p>Set the Time-To-Live (TTL) for the data in the collection, which specifies how long the data should be retained before it is automatically deleted.</p>
+<h3 id="Set-TTL" class="common-anchor-header">TTL 설정</h3><p>컬렉션의 데이터에 대한 TTL(Time-To-Live)을 설정하여 데이터가 자동으로 삭제되기 전에 유지되어야 하는 기간을 지정합니다.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> Collection, connections
 
 <span class="hljs-comment"># Connect to Milvus server</span>
@@ -2383,10 +2323,9 @@ collection.set_properties(
     }
 )
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Set-MMAP" class="common-anchor-header">Set MMAP</h3><p>Configure the memory mapping (MMAP) property for the collection, which determines whether data is mapped into memory to improve query performance. For more information, refer to <a href="https://milvus.io/docs/mmap.md#Configure-memory-mapping">Configure memory mapping
-</a>.</p>
+<h3 id="Set-MMAP" class="common-anchor-header">MMAP 설정</h3><p>쿼리 성능을 개선하기 위해 데이터를 메모리에 매핑할지 여부를 결정하는 컬렉션의 메모리 매핑(MMAP) 속성을 구성합니다. 자세한 내용은 <a href="https://milvus.io/docs/mmap.md#Configure-memory-mapping">메모리 매핑 구성을</a> 참조하세요 <a href="https://milvus.io/docs/mmap.md#Configure-memory-mapping">.</a></p>
 <div class="alert note">
-<p>Before setting the MMAP property, release the collection first. Otherwise, an error will occur.</p>
+<p>MMAP 속성을 설정하기 전에 먼저 컬렉션을 해제하세요. 그렇지 않으면 오류가 발생합니다.</p>
 </div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> Collection, connections
 
@@ -2406,7 +2345,7 @@ collection.set_properties(
     }
 )
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Drop-a-Collection" class="common-anchor-header">Drop a Collection<button data-href="#Drop-a-Collection" class="anchor-icon" translate="no">
+<h2 id="Drop-a-Collection" class="common-anchor-header">컬렉션 삭제<button data-href="#Drop-a-Collection" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -2421,25 +2360,21 @@ collection.set_properties(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>If a collection is no longer needed, you can drop the collection.</p>
+    </button></h2><p>컬렉션이 더 이상 필요하지 않은 경우 컬렉션을 삭제할 수 있습니다.</p>
 <div class="language-python">
-<p>To drop a collection, use the <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/drop_collection.md"><code translate="no">drop_collection()</code></a> method, specifying the collection name.</p>
+<p>컬렉션을 삭제하려면 컬렉션 이름을 지정하여 <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/drop_collection.md"><code translate="no">drop_collection()</code></a> 메서드를 사용하여 컬렉션 이름을 지정합니다.</p>
 </div>
 <div class="language-java">
-<p>To drop a collection, use the <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Collections/dropCollection.md"><code translate="no">dropCollection()</code></a> method, specifying the collection name.</p>
+<p>컬렉션을 삭제하려면 컬렉션 이름을 지정하여 <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Collections/dropCollection.md"><code translate="no">dropCollection()</code></a> 메서드를 사용하여 컬렉션 이름을 지정합니다.</p>
 </div>
 <div class="language-javascript">
-<p>To drop a collection, use the <a href="https://milvus.io/api-reference/node/v2.4.x/Collections/dropCollection.md"><code translate="no">dropCollection()</code></a> method, specifying the collection name.</p>
+<p>컬렉션을 삭제하려면 컬렉션 이름을 지정하여 <a href="https://milvus.io/api-reference/node/v2.4.x/Collections/dropCollection.md"><code translate="no">dropCollection()</code></a> 메서드를 사용하여 컬렉션 이름을 지정합니다.</p>
 </div>
 <div class="language-shell">
-<p>To drop a collection, you can use the <a href="https://milvus.io/api-reference/restful/v2.4.x/v2/Collection%20(v2)/Drop.md"><code translate="no">POST /v2/vectordb/collections/drop</code></a> API endpoint.</p>
+<p>컬렉션을 삭제하려면 <a href="https://milvus.io/api-reference/restful/v2.4.x/v2/Collection%20(v2)/Drop.md"><code translate="no">POST /v2/vectordb/collections/drop</code></a> API 엔드포인트를 사용하면 됩니다.</p>
 </div>
 <div class="multipleCode">
-    <a href="#python">Python </a>
-    <a href="#java">Java</a>
-    <a href="#javascript">Node.js</a>
-    <a href="#shell">cURL</a>
-</div>
+   <a href="#python">파이썬 </a> <a href="#java">자바</a> <a href="#javascript">Node.js</a> <a href="#shell">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># 10. Drop the collections</span>
 client.drop_collection(
     collection_name=<span class="hljs-string">&quot;quick_setup&quot;</span>

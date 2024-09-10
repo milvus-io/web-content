@@ -1,8 +1,9 @@
 ---
 id: consistency.md
-summary: ミルバスの4つの一貫性レベルについて学ぶ。
+summary: Milvusの4つの一貫性レベルについて学ぶ。
 title: 一貫性
 ---
+
 <h1 id="Consistency" class="common-anchor-header">一貫性<button data-href="#Consistency" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

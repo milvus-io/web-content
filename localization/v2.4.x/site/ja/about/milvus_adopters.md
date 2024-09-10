@@ -1,9 +1,10 @@
 ---
 id: milvus_adopters.md
-title: ミルバス採用者
+title: Milvus採用者
 related_key: Milvus adopters
 summary: 本番アプリケーションにMilvusを採用した企業についてご紹介します。
 ---
+
 <h1 id="Milvus-Adopters" class="common-anchor-header">Milvus採用企業<button data-href="#Milvus-Adopters" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

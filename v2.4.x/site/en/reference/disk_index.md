@@ -30,7 +30,7 @@ To use DiskANN, note that
 
 To use DiskANN, ensure that you
 - Use only float vectors with at least 1 dimensions in your data.
-- Use only Euclidean Distance (L2) or Inner Product (IP) to measure the distance between vectors.
+- Use only Euclidean Distance (L2), Inner Product (IP), or COSINE to measure the distance between vectors.
 
 ## Index and search settings
 

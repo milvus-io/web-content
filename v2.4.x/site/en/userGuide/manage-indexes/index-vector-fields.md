@@ -248,7 +248,8 @@ index_params.add_index(
 # 4.3. Create an index file
 client.create_index(
     collection_name="customized_setup",
-    index_params=index_params
+    index_params=index_params,
+    sync=False # Whether to wait for index creation to complete before returning. Defaults to True.
 )
 ```
 
@@ -334,6 +335,10 @@ console.log(res.error_code)
     <tr>
       <td><code>index_params</code></td>
       <td>An <strong>IndexParams</strong> object containing a list of <strong>IndexParam</strong> objects.</td>
+    </tr>
+    <tr>
+      <td><code>sync</code></td>
+      <td>Controls how the index is built in relation to the client’s request. Valid values:<br><ul><li><code>True</code> (default): The client waits until the index is fully built before it returns. This means you will not get a response until the process is complete.</li><li><code>False</code>: The client returns immediately after the request is received and the index is being built in the background. To find out if index creation has been completed, use the <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/describe_index.md">describe_index()</a> method.</li></ul></td>
     </tr>
   </tbody>
 </table>

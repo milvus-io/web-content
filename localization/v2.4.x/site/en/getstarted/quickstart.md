@@ -154,6 +154,7 @@ vectors = embedding_fn.encode_documents(docs)
 <span class="hljs-comment"># to demo metadata filtering later.</span>
 data = [
     {<span class="hljs-string">&quot;id&quot;</span>: i, <span class="hljs-string">&quot;vector&quot;</span>: vectors[i], <span class="hljs-string">&quot;text&quot;</span>: docs[i], <span class="hljs-string">&quot;subject&quot;</span>: <span class="hljs-string">&quot;history&quot;</span>}
+    <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-built_in">len</span>(vectors))
 ]
 
 <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Data has&quot;</span>, <span class="hljs-built_in">len</span>(data), <span class="hljs-string">&quot;entities, each with fields: &quot;</span>, data[<span class="hljs-number">0</span>].keys())
@@ -300,7 +301,7 @@ res = client.search(
 <button class="copy-code-btn"></button></code></pre>
 <p>By default, the scalar fields are not indexed. If you need to perform metadata filtered search in large dataset, you can consider using fixed schema and also turn on the <a href="https://milvus.io/docs/scalar_index.md">index</a> to improve the search performance.</p>
 <p>In addition to vector search, you can also perform other types of searches:</p>
-<h3 id="Query" class="common-anchor-header">Query</h3><p>A query() is an operation that retrieves all entities matching a cretria, such as a <a href="https://milvus.io/docs/boolean.md">filter expression</a> or matching some ids.</p>
+<h3 id="Query" class="common-anchor-header">Query</h3><p>A query() is an operation that retrieves all entities matching a criteria, such as a <a href="https://milvus.io/docs/boolean.md">filter expression</a> or matching some ids.</p>
 <p>For example, retrieving all entities whose scalar field has a particular value:</p>
 <pre><code translate="no" class="language-python">res = client.query(
     collection_name=<span class="hljs-string">&quot;demo_collection&quot;</span>,

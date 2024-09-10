@@ -2,8 +2,10 @@ name: Trigger milvus.io production build
 
 on:
   repository_dispatch:
-    types: prod-deploy
+    types: [prod-deploy]
   push:
+    branches:
+      - master
     paths-ignore:
       - "preview/**.md"
   workflow_dispatch:
@@ -25,14 +27,21 @@ jobs:
         with:
           cmd: install
 
-      - name: Translate Docs
+      - name: Generate EN Docs
         run: |
+          git config --global user.email "Milvus-doc-bot@zilliz.com"
+          git config --global user.name "Milvus-doc-bot"
           touch .env
           echo DEEPL_API_KEY=${{secrets.DEEPL_API_KEY}} >> .env
-          # yarn translate
-          # git add .
-          # git commit -m "Translate docs"
-          # git push -f origin master
+          echo GITHUB_TOKEN=${{secrets.GH_TOKEN}} >> .env
+          yarn generate:en
+
+      - name: Commit and push
+        run: |
+          git add .
+          git commit -m "Generate en docs"
+          git push -f origin master
+        continue-on-error: true
 
       - name: Trigger milvus.io
         run: |

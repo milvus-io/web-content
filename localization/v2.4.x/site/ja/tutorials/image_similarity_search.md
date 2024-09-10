@@ -1,8 +1,9 @@
 ---
 id: image_similarity_search.md
-summary: ミルバスによる画像検索
+summary: Milvusによる画像検索
 title: Milvusによる画像検索
 ---
+
 <h1 id="Image-Search-with-Milvus" class="common-anchor-header">Milvusによる画像検索<button data-href="#Image-Search-with-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -94,14 +95,13 @@ $ pip install timm
 <span class="hljs-keyword">from</span> timm.data <span class="hljs-keyword">import</span> resolve_data_config
 <span class="hljs-keyword">from</span> timm.data.transforms_factory <span class="hljs-keyword">import</span> create_transform
 
-
 <span class="hljs-keyword">class</span> <span class="hljs-title class_">FeatureExtractor</span>:
-    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__init__</span>(<span class="hljs-params">self, modelname</span>):
-        <span class="hljs-comment"># Load the pre-trained model</span>
-        <span class="hljs-variable language_">self</span>.model = timm.create_model(
-            modelname, pretrained=<span class="hljs-literal">True</span>, num_classes=<span class="hljs-number">0</span>, global_pool=<span class="hljs-string">&quot;avg&quot;</span>
-        )
-        <span class="hljs-variable language_">self</span>.model.<span class="hljs-built_in">eval</span>()
+<span class="hljs-keyword">def</span> <span class="hljs-title function_">**init**</span>(<span class="hljs-params">self, modelname</span>):
+<span class="hljs-comment"># Load the pre-trained model</span>
+<span class="hljs-variable language_">self</span>.model = timm.create*model(
+modelname, pretrained=<span class="hljs-literal">True</span>, num_classes=<span class="hljs-number">0</span>, global_pool=<span class="hljs-string">&quot;avg&quot;</span>
+)
+<span class="hljs-variable language*">self</span>.model.<span class="hljs-built_in">eval</span>()
 
         <span class="hljs-comment"># Get the input size required by the model</span>
         <span class="hljs-variable language_">self</span>.input_size = <span class="hljs-variable language_">self</span>.model.default_cfg[<span class="hljs-string">&quot;input_size&quot;</span>]
@@ -126,7 +126,9 @@ $ pip install timm
         feature_vector = output.squeeze().numpy()
 
         <span class="hljs-keyword">return</span> normalize(feature_vector.reshape(<span class="hljs-number">1</span>, -<span class="hljs-number">1</span>), norm=<span class="hljs-string">&quot;l2&quot;</span>).flatten()
+
 <button class="copy-code-btn"></button></code></pre>
+
 <h2 id="Create-a-Milvus-Collection" class="common-anchor-header">Milvusコレクションの作成<button data-href="#Create-a-Milvus-Collection" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -149,16 +151,17 @@ $ pip install timm
 client = MilvusClient(uri=<span class="hljs-string">&quot;example.db&quot;</span>)
 <span class="hljs-comment"># Create a collection in quick setup mode</span>
 <span class="hljs-keyword">if</span> client.has_collection(collection_name=<span class="hljs-string">&quot;image_embeddings&quot;</span>):
-    client.drop_collection(collection_name=<span class="hljs-string">&quot;image_embeddings&quot;</span>)
+client.drop_collection(collection_name=<span class="hljs-string">&quot;image_embeddings&quot;</span>)
 client.create_collection(
-    collection_name=<span class="hljs-string">&quot;image_embeddings&quot;</span>,
-    vector_field_name=<span class="hljs-string">&quot;vector&quot;</span>,
-    dimension=<span class="hljs-number">512</span>,
-    auto_id=<span class="hljs-literal">True</span>,
-    enable_dynamic_field=<span class="hljs-literal">True</span>,
-    metric_type=<span class="hljs-string">&quot;COSINE&quot;</span>,
+collection_name=<span class="hljs-string">&quot;image_embeddings&quot;</span>,
+vector_field_name=<span class="hljs-string">&quot;vector&quot;</span>,
+dimension=<span class="hljs-number">512</span>,
+auto_id=<span class="hljs-literal">True</span>,
+enable_dynamic_field=<span class="hljs-literal">True</span>,
+metric_type=<span class="hljs-string">&quot;COSINE&quot;</span>,
 )
 <button class="copy-code-btn"></button></code></pre>
+
 <div class="alert note">
 <p>引数は<code translate="no">MilvusClient</code> ：</p>
 <ul>
@@ -190,16 +193,17 @@ extractor = FeatureExtractor(<span class="hljs-string">&quot;resnet34&quot;</spa
 root = <span class="hljs-string">&quot;./train&quot;</span>
 insert = <span class="hljs-literal">True</span>
 <span class="hljs-keyword">if</span> insert <span class="hljs-keyword">is</span> <span class="hljs-literal">True</span>:
-    <span class="hljs-keyword">for</span> dirpath, foldername, filenames <span class="hljs-keyword">in</span> os.walk(root):
-        <span class="hljs-keyword">for</span> filename <span class="hljs-keyword">in</span> filenames:
-            <span class="hljs-keyword">if</span> filename.endswith(<span class="hljs-string">&quot;.JPEG&quot;</span>):
-                filepath = dirpath + <span class="hljs-string">&quot;/&quot;</span> + filename
-                image_embedding = extractor(filepath)
-                client.insert(
-                    <span class="hljs-string">&quot;image_embeddings&quot;</span>,
-                    {<span class="hljs-string">&quot;vector&quot;</span>: image_embedding, <span class="hljs-string">&quot;filename&quot;</span>: filepath},
-                )
+<span class="hljs-keyword">for</span> dirpath, foldername, filenames <span class="hljs-keyword">in</span> os.walk(root):
+<span class="hljs-keyword">for</span> filename <span class="hljs-keyword">in</span> filenames:
+<span class="hljs-keyword">if</span> filename.endswith(<span class="hljs-string">&quot;.JPEG&quot;</span>):
+filepath = dirpath + <span class="hljs-string">&quot;/&quot;</span> + filename
+image_embedding = extractor(filepath)
+client.insert(
+<span class="hljs-string">&quot;image_embeddings&quot;</span>,
+{<span class="hljs-string">&quot;vector&quot;</span>: image_embedding, <span class="hljs-string">&quot;filename&quot;</span>: filepath},
+)
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> IPython.display <span class="hljs-keyword">import</span> display
 
 query_image = <span class="hljs-string">&quot;./test/Afghan_hound/n02088094_4261.JPEG&quot;</span>

@@ -3,8 +3,9 @@ id: configure_common.md
 related_key: configure
 group: system_configuration.md
 summary: Milvusの共通設定方法をご紹介します。
-title: ''
+title: ""
 ---
+
 <h1 id="common-related-Configurations" class="common-anchor-header">共通関連設定<button data-href="#common-related-Configurations" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -398,7 +399,7 @@ title: ''
   <tbody>
     <tr>
       <td>        rootユーザのデフォルトパスワード      </td>
-      <td>ミルバス</td>
+      <td>Milvus</td>
     </tr>
   </tbody>
 </table>

@@ -1,9 +1,10 @@
 ---
 id: scalar_index.md
 related_key: scalar_index
-summary: 米尔沃斯的标量指数。
+summary: Milvus的标量指数。
 title: 标量指数
 ---
+
 <h1 id="Scalar-Index" class="common-anchor-header">标量索引<button data-href="#Scalar-Index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

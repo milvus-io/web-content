@@ -2,7 +2,7 @@
 id: install_standalone-helm.md
 label: Helm
 order: 2
-group: install_standalone-operator.md
+group: install_standalone-docker.md
 summary: Learn how to install Milvus stanalone on Kubernetes.
 ---
 

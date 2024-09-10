@@ -1,9 +1,10 @@
 ---
 id: birdwatcher_overview.md
 summary: Birdwatcher 是 Milvus 2.x 的调试工具。它连接到 etcd 并检查 Milvus 系统的状态。
-title: 观鸟者
+title: Birdwatcher
 ---
-<h1 id="Birdwatcher" class="common-anchor-header">观鸟者<button data-href="#Birdwatcher" class="anchor-icon" translate="no">
+
+<h1 id="Birdwatcher" class="common-anchor-header">Birdwatcher<button data-href="#Birdwatcher" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

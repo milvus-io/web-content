@@ -3,12 +3,14 @@
 	"version": "1.0.0",
 	"description": "milvus docs",
 	"scripts": {
+		"generate:en": "node tools/generate-en.js",
 		"translate": "node tools/translate.js",
+		"glossary": "node tools/glossary.js",
 		"test": "echo \"Error: no test specified\" && exit 1"
 	},
 	"type": "module",
 	"devDependencies": {
-		"@zilliz/toolkit": "^0.1.5",
+		"@zilliz/toolkit": "^0.1.9",
 		"dotenv": "^16.4.5",
 		"gray-matter": "^4.0.3",
 		"highlight.js": "^11.10.0",

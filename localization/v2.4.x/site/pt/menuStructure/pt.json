@@ -381,7 +381,7 @@
         "children": []
       },
       {
-        "label": "Inserir, Upsert e Eliminar",
+        "label": "Inserir, Upsert e Apagar",
         "id": "insert-update-delete.md",
         "order": 5,
         "children": []
@@ -1187,155 +1187,242 @@
     "order": 8,
     "children": [
       {
-        "label": "OpenAI",
-        "id": "integrate_with_openai.md",
+        "label": "Visão geral",
+        "id": "integrations_overview.md",
         "order": 0,
         "children": []
       },
       {
-        "label": "Coesão",
-        "id": "integrate_with_cohere.md",
+        "label": "Modelos de incorporação",
+        "id": "integrate-embeddings-models",
         "order": 1,
-        "children": []
-      },
-      {
-        "label": "Cara de Abraço",
-        "id": "integrate_with_hugging-face.md",
-        "order": 2,
-        "children": []
-      },
-      {
-        "label": "PyTorch",
-        "id": "integrate_with_pytorch.md",
-        "order": 3,
-        "children": []
-      },
-      {
-        "label": "SentençaTransformadores",
-        "id": "integrate_with_sentencetransformers.md",
-        "order": 4,
-        "children": []
-      },
-      {
-        "label": "LlamaIndex",
-        "id": "integrate_with_llamaindex.md",
-        "order": 4,
-        "children": []
-      },
-      {
-        "label": "LangChain",
-        "id": "langchain",
-        "order": 6,
         "children": [
           {
-            "label": "Utilização básica",
-            "id": "basic_usage_langchain.md",
+            "label": "OpenAI",
+            "id": "integrate_with_openai.md",
+            "order": 0,
+            "children": []
+          },
+          {
+            "label": "Coesão",
+            "id": "integrate_with_cohere.md",
             "order": 1,
             "children": []
           },
           {
-            "label": "RAG com LangChain",
-            "id": "integrate_with_langchain.md",
+            "label": "Cara de Abraço",
+            "id": "integrate_with_hugging-face.md",
             "order": 2,
             "children": []
           },
           {
-            "label": "Pesquisa híbrida",
-            "id": "milvus_hybrid_search_retriever.md",
+            "label": "PyTorch",
+            "id": "integrate_with_pytorch.md",
             "order": 3,
+            "children": []
+          },
+          {
+            "label": "SentençaTransformadores",
+            "id": "integrate_with_sentencetransformers.md",
+            "order": 4,
+            "children": []
+          },
+          {
+            "label": "VoyageAI",
+            "id": "integrate_with_voyageai.md",
+            "order": 8,
+            "children": []
+          },
+          {
+            "label": "Jina AI",
+            "id": "integrate_with_jina.md",
+            "order": 11,
+            "children": []
+          },
+          {
+            "label": "Doze laboratórios",
+            "id": "video_search_with_twelvelabs_and_milvus.md",
+            "order": 12,
             "children": []
           }
         ]
       },
       {
-        "label": "Pilha de feno",
-        "id": "integrate_with_haystack.md",
-        "order": 7,
-        "children": []
+        "label": "LLMs",
+        "id": "integrate-llms",
+        "order": 2,
+        "children": [
+          {
+            "label": "vLLM",
+            "id": "milvus_rag_with_vllm.md",
+            "order": 0,
+            "children": []
+          },
+          {
+            "label": "Mistral AI",
+            "id": "llama_agents_metadata.md",
+            "order": 1,
+            "children": []
+          }
+        ]
       },
       {
-        "label": "Cinquenta e um",
-        "id": "integrate_with_voxel51.md",
-        "order": 7,
-        "children": []
+        "label": "Orquestração",
+        "id": "orchestrate-with-milvus",
+        "order": 3,
+        "children": [
+          {
+            "label": "LangChain",
+            "id": "langchain",
+            "order": 0,
+            "children": [
+              {
+                "label": "Utilização básica",
+                "id": "basic_usage_langchain.md",
+                "order": 1,
+                "children": []
+              },
+              {
+                "label": "RAG",
+                "id": "integrate_with_langchain.md",
+                "order": 2,
+                "children": []
+              },
+              {
+                "label": "Pesquisa híbrida",
+                "id": "milvus_hybrid_search_retriever.md",
+                "order": 3,
+                "children": []
+              }
+            ]
+          },
+          {
+            "label": "LlamaIndex",
+            "id": "llamaindex",
+            "order": 1,
+            "children": [
+              {
+                "label": "RAG",
+                "id": "integrate_with_llamaindex.md",
+                "order": 4,
+                "children": []
+              }
+            ]
+          },
+          {
+            "label": "DSPy",
+            "id": "integrate_with_dspy.md",
+            "order": 2,
+            "children": []
+          },
+          {
+            "label": "FastGPT",
+            "id": "integrate_with_fastgpt.md",
+            "order": 3,
+            "children": []
+          },
+          {
+            "label": "Pilha de feno",
+            "id": "integrate_with_haystack.md",
+            "order": 4,
+            "children": []
+          },
+          {
+            "label": "BentoML",
+            "id": "integrate_with_bentoml.md",
+            "order": 5,
+            "children": []
+          }
+        ]
       },
       {
-        "label": "VoyageAI",
-        "id": "integrate_with_voyageai.md",
+        "label": "Agentes",
+        "id": "integrate-agents",
+        "order": 4,
+        "children": [
+          {
+            "label": "MemGPT",
+            "id": "integrate_with_memgpt.md",
+            "order": 0,
+            "children": []
+          },
+          {
+            "label": "Camelo",
+            "id": "integrate_with_camel.md",
+            "order": 1,
+            "children": []
+          }
+        ]
+      },
+      {
+        "label": "Engenharia do conhecimento",
+        "id": "knowledge-engineering",
+        "order": 5,
+        "children": [
+          {
+            "label": "PorquêComo",
+            "id": "integrate_with_whyhow.md",
+            "order": 0,
+            "children": []
+          },
+          {
+            "label": "Vanna",
+            "id": "integrate_with_vanna.md",
+            "order": 1,
+            "children": []
+          }
+        ]
+      },
+      {
+        "label": "Avaliação e observabilidade",
+        "id": "evaluation-observability",
+        "order": 6,
+        "children": [
+          {
+            "label": "Ragas",
+            "id": "integrate_with_ragas.md",
+            "order": 0,
+            "children": []
+          },
+          {
+            "label": "LangFuse",
+            "id": "integrate_with_langfuse.md",
+            "order": 1,
+            "children": []
+          },
+          {
+            "label": "Cinquenta e um",
+            "id": "integrate_with_voxel51.md",
+            "order": 2,
+            "children": []
+          }
+        ]
+      },
+      {
+        "label": "Fontes de dados",
+        "id": "data-sources",
+        "order": 7,
+        "children": [
+          {
+            "label": "Airbyte",
+            "id": "integrate_with_airbyte.md",
+            "order": 0,
+            "children": []
+          }
+        ]
+      },
+      {
+        "label": "Outros",
+        "id": "other-integrations",
         "order": 8,
-        "children": []
-      },
-      {
-        "label": "BentoML",
-        "id": "integrate_with_bentoml.md",
-        "order": 9,
-        "children": []
-      },
-      {
-        "label": "DSPy",
-        "id": "integrate_with_dspy.md",
-        "order": 10,
-        "children": []
-      },
-      {
-        "label": "Jina AI",
-        "id": "integrate_with_jina.md",
-        "order": 11,
-        "children": []
-      },
-      {
-        "label": "Floco de neve",
-        "id": "integrate_with_snowpark.md",
-        "order": 12,
-        "children": []
-      },
-      {
-        "label": "PorquêComo",
-        "id": "integrate_with_whyhow.md",
-        "order": 13,
-        "children": []
-      },
-      {
-        "label": "LangFuse",
-        "id": "integrate_with_langfuse.md",
-        "order": 14,
-        "children": []
-      },
-      {
-        "label": "Ragas",
-        "id": "integrate_with_ragas.md",
-        "order": 15,
-        "children": []
-      },
-      {
-        "label": "MemGPT",
-        "id": "integrate_with_memgpt.md",
-        "order": 16,
-        "children": []
-      },
-      {
-        "label": "FastGPT",
-        "id": "integrate_with_fastgpt.md",
-        "order": 17,
-        "children": []
-      },
-      {
-        "label": "Vanna",
-        "id": "integrate_with_vanna.md",
-        "order": 18,
-        "children": []
-      },
-      {
-        "label": "Camelo",
-        "id": "integrate_with_camel.md",
-        "order": 19,
-        "children": []
-      },
-      {
-        "label": "Airbyte",
-        "id": "integrate_with_airbyte.md",
-        "order": 20,
-        "children": []
+        "children": [
+          {
+            "label": "Floco de neve",
+            "id": "integrate_with_snowpark.md",
+            "order": 0,
+            "children": []
+          }
+        ]
       }
     ]
   },
@@ -1346,15 +1433,21 @@
     "order": 7,
     "children": [
       {
+        "label": "Visão geral",
+        "id": "tutorials-overview.md",
+        "order": 0,
+        "children": []
+      },
+      {
         "label": "Construir RAG com Milvus",
         "id": "build-rag-with-milvus.md",
-        "order": 0,
+        "order": 1,
         "children": []
       },
       {
         "label": "Pesquisa de imagens com Milvus",
         "id": "image_similarity_search.md",
-        "order": 1,
+        "order": 2,
         "children": []
       },
       {
@@ -1370,52 +1463,59 @@
         "children": []
       },
       {
-        "label": "Sistema de resposta a perguntas",
-        "id": "question_answering_system.md",
-        "order": 5,
-        "children": []
-      },
-      {
-        "label": "Sistema de recomendação",
-        "id": "recommendation_system.md",
-        "order": 6,
-        "children": []
-      },
-      {
-        "label": "Pesquisa de semelhança de vídeo",
-        "id": "video_similarity_search.md",
-        "order": 7,
-        "children": []
-      },
-      {
-        "label": "Pesquisa de similaridade de áudio",
-        "id": "audio_similarity_search.md",
-        "order": 8,
-        "children": []
-      },
-      {
-        "label": "Classificação da sequência de ADN",
-        "id": "dna_sequence_classification.md",
-        "order": 9,
-        "children": []
-      },
-      {
-        "label": "Motor de pesquisa de texto",
-        "id": "text_search_engine.md",
-        "order": 10,
-        "children": []
-      },
-      {
-        "label": "Motor de pesquisa de texto para imagem",
-        "id": "text_image_search.md",
-        "order": 11,
-        "children": []
-      },
-      {
-        "label": "Sistema de deduplicação de imagens",
-        "id": "image_deduplication_system.md",
-        "order": 12,
-        "children": []
+        "label": "Explorar mais",
+        "id": "explore-more",
+        "order": 4,
+        "children": [
+          {
+            "label": "Sistema de resposta a perguntas",
+            "id": "question_answering_system.md",
+            "order": 5,
+            "children": []
+          },
+          {
+            "label": "Sistema de recomendação",
+            "id": "recommendation_system.md",
+            "order": 6,
+            "children": []
+          },
+          {
+            "label": "Pesquisa de semelhança de vídeo",
+            "id": "video_similarity_search.md",
+            "order": 7,
+            "children": []
+          },
+          {
+            "label": "Pesquisa de similaridade de áudio",
+            "id": "audio_similarity_search.md",
+            "order": 8,
+            "children": []
+          },
+          {
+            "label": "Classificação da sequência de ADN",
+            "id": "dna_sequence_classification.md",
+            "order": 9,
+            "children": []
+          },
+          {
+            "label": "Motor de pesquisa de texto",
+            "id": "text_search_engine.md",
+            "order": 10,
+            "children": []
+          },
+          {
+            "label": "Motor de pesquisa de texto para imagem",
+            "id": "text_image_search.md",
+            "order": 11,
+            "children": []
+          },
+          {
+            "label": "Sistema de deduplicação de imagens",
+            "id": "image_deduplication_system.md",
+            "order": 12,
+            "children": []
+          }
+        ]
       }
     ]
   },

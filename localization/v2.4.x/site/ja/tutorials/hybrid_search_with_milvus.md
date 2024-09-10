@@ -1,8 +1,9 @@
 ---
 id: hybrid_search_with_milvus.md
-summary: ミルバスとのハイブリッド検索
-title: ミルバスとのハイブリッド検索
+summary: Milvusとのハイブリッド検索
+title: Milvusとのハイブリッド検索
 ---
+
 <h1 id="Hybrid-Search-with-Milvus" class="common-anchor-header">Milvusによるハイブリッド検索<button data-href="#Hybrid-Search-with-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -38,21 +39,22 @@ $ wget http://qim.fs.quoracdn.net/quora_duplicate_questions.tsv
 <h3 id="Load-and-Prepare-Data" class="common-anchor-header">データのロードと準備</h3><p>データセットをロードし、検索用の小さなコーパスを準備する。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> pandas <span class="hljs-keyword">as</span> pd
 
-file_path = <span class="hljs-string">&quot;quora_duplicate_questions.tsv&quot;</span>
+file*path = <span class="hljs-string">&quot;quora_duplicate_questions.tsv&quot;</span>
 df = pd.read_csv(file_path, sep=<span class="hljs-string">&quot;\t&quot;</span>)
 questions = <span class="hljs-built_in">set</span>()
-<span class="hljs-keyword">for</span> _, row <span class="hljs-keyword">in</span> df.iterrows():
-    obj = row.to_dict()
-    questions.add(obj[<span class="hljs-string">&quot;question1&quot;</span>][:<span class="hljs-number">512</span>])
-    questions.add(obj[<span class="hljs-string">&quot;question2&quot;</span>][:<span class="hljs-number">512</span>])
-    <span class="hljs-keyword">if</span> <span class="hljs-built_in">len</span>(questions) &gt; <span class="hljs-number">500</span>:  <span class="hljs-comment"># Skip this if you want to use the full dataset</span>
-        <span class="hljs-keyword">break</span>
+<span class="hljs-keyword">for</span> *, row <span class="hljs-keyword">in</span> df.iterrows():
+obj = row.to_dict()
+questions.add(obj[<span class="hljs-string">&quot;question1&quot;</span>][:<span class="hljs-number">512</span>])
+questions.add(obj[<span class="hljs-string">&quot;question2&quot;</span>][:<span class="hljs-number">512</span>])
+<span class="hljs-keyword">if</span> <span class="hljs-built_in">len</span>(questions) &gt; <span class="hljs-number">500</span>: <span class="hljs-comment"># Skip this if you want to use the full dataset</span>
+<span class="hljs-keyword">break</span>
 
 docs = <span class="hljs-built_in">list</span>(questions)
 
 <span class="hljs-comment"># example question</span>
 <span class="hljs-built_in">print</span>(docs[<span class="hljs-number">0</span>])
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no">What is the strongest Kevlar cord?
 </code></pre>
 <h3 id="Use-BGE-M3-Model-for-Embeddings" class="common-anchor-header">埋め込みにBGE-M3モデルを使う</h3><p>BGE-M3モデルはテキストを密なベクトルと疎なベクトルとして埋め込むことができる。</p>
@@ -64,6 +66,7 @@ dense_dim = ef.dim[<span class="hljs-string">&quot;dense&quot;</span>]
 <span class="hljs-comment"># Generate embeddings using BGE-M3 model</span>
 docs_embeddings = ef(docs)
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no">Fetching 30 files: 100%|██████████| 30/30 [00:00&lt;00:00, 302473.85it/s]
 Inference Embeddings: 100%|██████████| 32/32 [01:59&lt;00:00,  3.74s/it]
 </code></pre>
@@ -89,23 +92,23 @@ connections.connect(uri=<span class="hljs-string">&quot;./milvus.db&quot;</span>
 
 <span class="hljs-comment"># Specify the data schema for the new Collection</span>
 fields = [
-    <span class="hljs-comment"># Use auto generated id as primary key</span>
-    FieldSchema(
-        name=<span class="hljs-string">&quot;pk&quot;</span>, dtype=DataType.VARCHAR, is_primary=<span class="hljs-literal">True</span>, auto_id=<span class="hljs-literal">True</span>, max_length=<span class="hljs-number">100</span>
-    ),
-    <span class="hljs-comment"># Store the original text to retrieve based on semantically distance</span>
-    FieldSchema(name=<span class="hljs-string">&quot;text&quot;</span>, dtype=DataType.VARCHAR, max_length=<span class="hljs-number">512</span>),
-    <span class="hljs-comment"># Milvus now supports both sparse and dense vectors,</span>
-    <span class="hljs-comment"># we can store each in a separate field to conduct hybrid search on both vectors</span>
-    FieldSchema(name=<span class="hljs-string">&quot;sparse_vector&quot;</span>, dtype=DataType.SPARSE_FLOAT_VECTOR),
-    FieldSchema(name=<span class="hljs-string">&quot;dense_vector&quot;</span>, dtype=DataType.FLOAT_VECTOR, dim=dense_dim),
+<span class="hljs-comment"># Use auto generated id as primary key</span>
+FieldSchema(
+name=<span class="hljs-string">&quot;pk&quot;</span>, dtype=DataType.VARCHAR, is_primary=<span class="hljs-literal">True</span>, auto_id=<span class="hljs-literal">True</span>, max_length=<span class="hljs-number">100</span>
+),
+<span class="hljs-comment"># Store the original text to retrieve based on semantically distance</span>
+FieldSchema(name=<span class="hljs-string">&quot;text&quot;</span>, dtype=DataType.VARCHAR, max_length=<span class="hljs-number">512</span>),
+<span class="hljs-comment"># Milvus now supports both sparse and dense vectors,</span>
+<span class="hljs-comment"># we can store each in a separate field to conduct hybrid search on both vectors</span>
+FieldSchema(name=<span class="hljs-string">&quot;sparse_vector&quot;</span>, dtype=DataType.SPARSE_FLOAT_VECTOR),
+FieldSchema(name=<span class="hljs-string">&quot;dense_vector&quot;</span>, dtype=DataType.FLOAT_VECTOR, dim=dense_dim),
 ]
 schema = CollectionSchema(fields)
 
 <span class="hljs-comment"># Create collection (drop the old one if exists)</span>
 col_name = <span class="hljs-string">&quot;hybrid_demo&quot;</span>
 <span class="hljs-keyword">if</span> utility.has_collection(col_name):
-    Collection(col_name).drop()
+Collection(col_name).drop()
 col = Collection(col_name, schema, consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>)
 
 <span class="hljs-comment"># To make vector search efficient, we need to create indices for the vector fields</span>
@@ -115,6 +118,7 @@ dense_index = {<span class="hljs-string">&quot;index_type&quot;</span>: <span cl
 col.create_index(<span class="hljs-string">&quot;dense_vector&quot;</span>, dense_index)
 col.load()
 <button class="copy-code-btn"></button></code></pre>
+
 <h3 id="Insert-Data-into-Milvus-Collection" class="common-anchor-header">Milvusコレクションにデータを挿入する</h3><p>ドキュメントとその埋め込みデータをコレクションに挿入します。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># For efficiency, we insert 50 records in each small batch</span>
 <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">0</span>, <span class="hljs-built_in">len</span>(docs), <span class="hljs-number">50</span>):
@@ -136,6 +140,7 @@ query = <span class="hljs-built_in">input</span>(<span class="hljs-string">&quot
 query_embeddings = ef([query])
 <span class="hljs-comment"># print(query_embeddings)</span>
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no">How to start learning programming?
 </code></pre>
 <h3 id="Run-the-Search" class="common-anchor-header">検索を実行する</h3><p>まず、検索に役立つ関数を用意します：</p>
@@ -149,56 +154,54 @@ query_embeddings = ef([query])
     WeightedRanker,
 </span>)
 
-
 def <span class="hljs-title">dense_search</span>(<span class="hljs-params">col, query_dense_embedding, limit=<span class="hljs-number">10</span></span>):
-    search_params</span> = {<span class="hljs-string">&quot;metric_type&quot;</span>: <span class="hljs-string">&quot;IP&quot;</span>, <span class="hljs-string">&quot;params&quot;</span>: {}}
-    res = col.search(
-        [<span class="hljs-meta">query_dense_embedding</span>],
-        anns_field=<span class="hljs-string">&quot;dense_vector&quot;</span>,
-        limit=limit,
-        output_fields=[<span class="hljs-string">&quot;text&quot;</span>],
-        param=search_params,
-    )[<span class="hljs-number">0</span>]
-    <span class="hljs-keyword">return</span> [hit.<span class="hljs-keyword">get</span>(<span class="hljs-string">&quot;text&quot;</span>) <span class="hljs-keyword">for</span> hit <span class="hljs-keyword">in</span> res]
-
+search_params</span> = {<span class="hljs-string">&quot;metric_type&quot;</span>: <span class="hljs-string">&quot;IP&quot;</span>, <span class="hljs-string">&quot;params&quot;</span>: {}}
+res = col.search(
+[<span class="hljs-meta">query_dense_embedding</span>],
+anns_field=<span class="hljs-string">&quot;dense_vector&quot;</span>,
+limit=limit,
+output_fields=[<span class="hljs-string">&quot;text&quot;</span>],
+param=search_params,
+)[<span class="hljs-number">0</span>]
+<span class="hljs-keyword">return</span> [hit.<span class="hljs-keyword">get</span>(<span class="hljs-string">&quot;text&quot;</span>) <span class="hljs-keyword">for</span> hit <span class="hljs-keyword">in</span> res]
 
 <span class="hljs-function">def <span class="hljs-title">sparse_search</span>(<span class="hljs-params">col, query_sparse_embedding, limit=<span class="hljs-number">10</span></span>):
-    search_params</span> = {
-        <span class="hljs-string">&quot;metric_type&quot;</span>: <span class="hljs-string">&quot;IP&quot;</span>,
-        <span class="hljs-string">&quot;params&quot;</span>: {},
-    }
-    res = col.search(
-        [<span class="hljs-meta">query_sparse_embedding</span>],
-        anns_field=<span class="hljs-string">&quot;sparse_vector&quot;</span>,
-        limit=limit,
-        output_fields=[<span class="hljs-string">&quot;text&quot;</span>],
-        param=search_params,
-    )[<span class="hljs-number">0</span>]
-    <span class="hljs-keyword">return</span> [hit.<span class="hljs-keyword">get</span>(<span class="hljs-string">&quot;text&quot;</span>) <span class="hljs-keyword">for</span> hit <span class="hljs-keyword">in</span> res]
-
+search_params</span> = {
+<span class="hljs-string">&quot;metric_type&quot;</span>: <span class="hljs-string">&quot;IP&quot;</span>,
+<span class="hljs-string">&quot;params&quot;</span>: {},
+}
+res = col.search(
+[<span class="hljs-meta">query_sparse_embedding</span>],
+anns_field=<span class="hljs-string">&quot;sparse_vector&quot;</span>,
+limit=limit,
+output_fields=[<span class="hljs-string">&quot;text&quot;</span>],
+param=search_params,
+)[<span class="hljs-number">0</span>]
+<span class="hljs-keyword">return</span> [hit.<span class="hljs-keyword">get</span>(<span class="hljs-string">&quot;text&quot;</span>) <span class="hljs-keyword">for</span> hit <span class="hljs-keyword">in</span> res]
 
 <span class="hljs-function">def <span class="hljs-title">hybrid_search</span>(<span class="hljs-params">
-    col,
-    query_dense_embedding,
-    query_sparse_embedding,
-    sparse_weight=<span class="hljs-number">1.0</span>,
-    dense_weight=<span class="hljs-number">1.0</span>,
-    limit=<span class="hljs-number">10</span>,
+col,
+query_dense_embedding,
+query_sparse_embedding,
+sparse_weight=<span class="hljs-number">1.0</span>,
+dense_weight=<span class="hljs-number">1.0</span>,
+limit=<span class="hljs-number">10</span>,
 </span>):
-    dense_search_params</span> = {<span class="hljs-string">&quot;metric_type&quot;</span>: <span class="hljs-string">&quot;IP&quot;</span>, <span class="hljs-string">&quot;params&quot;</span>: {}}
-    dense_req = AnnSearchRequest(
-        [<span class="hljs-meta">query_dense_embedding</span>], <span class="hljs-string">&quot;dense_vector&quot;</span>, dense_search_params, limit=limit
-    )
-    sparse_search_params = {<span class="hljs-string">&quot;metric_type&quot;</span>: <span class="hljs-string">&quot;IP&quot;</span>, <span class="hljs-string">&quot;params&quot;</span>: {}}
-    sparse_req = AnnSearchRequest(
-        [<span class="hljs-meta">query_sparse_embedding</span>], <span class="hljs-string">&quot;sparse_vector&quot;</span>, sparse_search_params, limit=limit
-    )
-    rerank = WeightedRanker(sparse_weight, dense_weight)
-    res = col.hybrid_search(
-        [<span class="hljs-meta">sparse_req, dense_req</span>], rerank=rerank, limit=limit, output_fields=[<span class="hljs-string">&quot;text&quot;</span>]
-    )[<span class="hljs-number">0</span>]
-    <span class="hljs-keyword">return</span> [hit.<span class="hljs-keyword">get</span>(<span class="hljs-string">&quot;text&quot;</span>) <span class="hljs-keyword">for</span> hit <span class="hljs-keyword">in</span> res]
+dense_search_params</span> = {<span class="hljs-string">&quot;metric_type&quot;</span>: <span class="hljs-string">&quot;IP&quot;</span>, <span class="hljs-string">&quot;params&quot;</span>: {}}
+dense_req = AnnSearchRequest(
+[<span class="hljs-meta">query_dense_embedding</span>], <span class="hljs-string">&quot;dense_vector&quot;</span>, dense_search_params, limit=limit
+)
+sparse_search_params = {<span class="hljs-string">&quot;metric_type&quot;</span>: <span class="hljs-string">&quot;IP&quot;</span>, <span class="hljs-string">&quot;params&quot;</span>: {}}
+sparse_req = AnnSearchRequest(
+[<span class="hljs-meta">query_sparse_embedding</span>], <span class="hljs-string">&quot;sparse_vector&quot;</span>, sparse_search_params, limit=limit
+)
+rerank = WeightedRanker(sparse_weight, dense_weight)
+res = col.hybrid_search(
+[<span class="hljs-meta">sparse_req, dense_req</span>], rerank=rerank, limit=limit, output_fields=[<span class="hljs-string">&quot;text&quot;</span>]
+)[<span class="hljs-number">0</span>]
+<span class="hljs-keyword">return</span> [hit.<span class="hljs-keyword">get</span>(<span class="hljs-string">&quot;text&quot;</span>) <span class="hljs-keyword">for</span> hit <span class="hljs-keyword">in</span> res]
 <button class="copy-code-btn"></button></code></pre>
+
 <p>定義された関数を使って3種類の検索を実行してみよう：</p>
 <pre><code translate="no" class="language-python">dense_results = <span class="hljs-title function_">dense_search</span>(col, query_embeddings[<span class="hljs-string">&quot;dense&quot;</span>][<span class="hljs-number">0</span>])
 sparse_results = <span class="hljs-title function_">sparse_search</span>(col, query_embeddings[<span class="hljs-string">&quot;sparse&quot;</span>][<span class="hljs-number">0</span>])
@@ -247,7 +250,9 @@ hybrid_results = <span class="hljs-title function_">hybrid_search</span>(
             formatted_text += <span class="hljs-string">&quot;&lt;/span&gt;&quot;</span>
         formatted_texts.append(formatted_text)
     <span class="hljs-keyword">return</span> formatted_texts
+
 <button class="copy-code-btn"></button></code></pre>
+
 <p>そうすれば、検索結果をテキストでハイライト表示することができる：</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> IPython.display <span class="hljs-keyword">import</span> Markdown, display
 
@@ -255,20 +260,21 @@ hybrid_results = <span class="hljs-title function_">hybrid_search</span>(
 display(Markdown(<span class="hljs-string">&quot;**Dense Search Results:**&quot;</span>))
 formatted_results = doc_text_formatting(ef, query, dense_results)
 <span class="hljs-keyword">for</span> result <span class="hljs-keyword">in</span> dense_results:
-    display(Markdown(result))
+display(Markdown(result))
 
 <span class="hljs-comment"># Sparse search results</span>
 display(Markdown(<span class="hljs-string">&quot;\n**Sparse Search Results:**&quot;</span>))
 formatted_results = doc_text_formatting(ef, query, sparse_results)
 <span class="hljs-keyword">for</span> result <span class="hljs-keyword">in</span> formatted_results:
-    display(Markdown(result))
+display(Markdown(result))
 
 <span class="hljs-comment"># Hybrid search results</span>
 display(Markdown(<span class="hljs-string">&quot;\n**Hybrid Search Results:**&quot;</span>))
 formatted_results = doc_text_formatting(ef, query, hybrid_results)
 <span class="hljs-keyword">for</span> result <span class="hljs-keyword">in</span> formatted_results:
-    display(Markdown(result))
+display(Markdown(result))
 <button class="copy-code-btn"></button></code></pre>
+
 <p><strong>密な検索結果</strong></p>
 <p>ロボット工学の学習を始めるのに最も良い方法は？</p>
 <p>javaのようなコンピュータ言語を学ぶにはどうしたらいいですか？</p>

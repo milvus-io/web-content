@@ -1,9 +1,10 @@
 ---
 id: enable-dynamic-field.md
-title: 启用动态字段
-summary: ''
+title: 启用Dynamic Field
+summary: ""
 ---
-<h1 id="Enable-Dynamic-Field" class="common-anchor-header">启用动态字段<button data-href="#Enable-Dynamic-Field" class="anchor-icon" translate="no">
+
+<h1 id="Enable-Dynamic-Field" class="common-anchor-header">启用Dynamic Field<button data-href="#Enable-Dynamic-Field" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -18,7 +19,7 @@ summary: ''
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>本页介绍如何在集合中使用动态字段，以灵活插入和检索数据。</p>
+    </button></h1><p>本页介绍如何在集合中使用Dynamic Field，以灵活插入和检索数据。</p>
 <h2 id="Overview" class="common-anchor-header">概述<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -35,9 +36,9 @@ summary: ''
         ></path>
       </svg>
     </button></h2><p>Milvus 允许你通过设置每个特定字段的名称和数据类型来定义集合的模式，以便在这些字段中创建索引，提高搜索性能。</p>
-<p>一旦定义了字段，您就需要在插入数据时包含该字段。如果某些字段并不总是出现在所有数据条目中，该怎么办？这就是动态字段的用武之地。</p>
-<p>集合中的动态字段是一个名为 $meta 的保留 JSON 字段。它可以将非模式定义的字段及其值作为键值对保存。使用动态字段，您可以搜索和查询模式定义的字段以及它们可能包含的任何非模式定义的字段。</p>
-<h2 id="Enable-dynamic-field" class="common-anchor-header">启用动态字段<button data-href="#Enable-dynamic-field" class="anchor-icon" translate="no">
+<p>一旦定义了字段，您就需要在插入数据时包含该字段。如果某些字段并不总是出现在所有数据条目中，该怎么办？这就是Dynamic Field的用武之地。</p>
+<p>集合中的Dynamic Field是一个名为 $meta 的保留 JSON 字段。它可以将非模式定义的字段及其值作为键值对保存。使用Dynamic Field，您可以搜索和查询模式定义的字段以及它们可能包含的任何非模式定义的字段。</p>
+<h2 id="Enable-dynamic-field" class="common-anchor-header">启用Dynamic Field<button data-href="#Enable-dynamic-field" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -52,8 +53,8 @@ summary: ''
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>在为集合定义模式时，可将<code translate="no">enable_dynamic_field</code> 设置为<code translate="no">True</code> 以启用预留动态字段，这表示以后插入的任何非模式定义字段及其值都将作为键值对保存在预留动态字段中。</p>
-<p>下面的代码段创建了一个带有两个模式定义字段（即 id 和向量）的集合，并启用了动态字段。</p>
+    </button></h2><p>在为集合定义模式时，可将<code translate="no">enable_dynamic_field</code> 设置为<code translate="no">True</code> 以启用预留Dynamic Field，这表示以后插入的任何非模式定义字段及其值都将作为键值对保存在预留Dynamic Field中。</p>
+<p>下面的代码段创建了一个带有两个模式定义字段（即 id 和向量）的集合，并启用了Dynamic Field。</p>
 <div class="language-python">
 <p>有关参数的更多信息，请参阅 <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_collection.md"><code translate="no">create_collection()</code></a>有关参数的更多信息，请参阅 SDK 参考资料中的</p>
 </div>
@@ -72,13 +73,13 @@ SERVER_ADDR = <span class="hljs-string">&quot;http://localhost:19530&quot;</span
 
 <span class="hljs-comment"># 1. Set up a Milvus client</span>
 client = MilvusClient(
-    uri=SERVER_ADDR
+uri=SERVER_ADDR
 )
 
 <span class="hljs-comment"># 2. Create a collection</span>
 schema = MilvusClient.create_schema(
-    auto_id=<span class="hljs-literal">False</span>,
-    enable_dynamic_field=<span class="hljs-literal">True</span>,
+auto_id=<span class="hljs-literal">False</span>,
+enable_dynamic_field=<span class="hljs-literal">True</span>,
 )
 
 schema.add_field(field_name=<span class="hljs-string">&quot;id&quot;</span>, datatype=DataType.INT64, is_primary=<span class="hljs-literal">True</span>)
@@ -87,25 +88,25 @@ schema.add_field(field_name=<span class="hljs-string">&quot;vector&quot;</span>,
 index_params = MilvusClient.prepare_index_params()
 
 index_params.add_index(
-    field_name=<span class="hljs-string">&quot;id&quot;</span>,
-    index_type=<span class="hljs-string">&quot;STL_SORT&quot;</span>
+field_name=<span class="hljs-string">&quot;id&quot;</span>,
+index_type=<span class="hljs-string">&quot;STL_SORT&quot;</span>
 )
 
 index_params.add_index(
-    field_name=<span class="hljs-string">&quot;vector&quot;</span>,
-    index_type=<span class="hljs-string">&quot;IVF_FLAT&quot;</span>,
-    metric_type=<span class="hljs-string">&quot;L2&quot;</span>,
-    params={<span class="hljs-string">&quot;nlist&quot;</span>: <span class="hljs-number">1024</span>}
+field_name=<span class="hljs-string">&quot;vector&quot;</span>,
+index_type=<span class="hljs-string">&quot;IVF_FLAT&quot;</span>,
+metric_type=<span class="hljs-string">&quot;L2&quot;</span>,
+params={<span class="hljs-string">&quot;nlist&quot;</span>: <span class="hljs-number">1024</span>}
 )
 
 client.create_collection(
-    collection_name=<span class="hljs-string">&quot;test_collection&quot;</span>,
-    schema=schema,
-    index_params=index_params
+collection_name=<span class="hljs-string">&quot;test_collection&quot;</span>,
+schema=schema,
+index_params=index_params
 )
 
 res = client.get_load_state(
-    collection_name=<span class="hljs-string">&quot;test_collection&quot;</span>
+collection_name=<span class="hljs-string">&quot;test_collection&quot;</span>
 )
 
 <span class="hljs-built_in">print</span>(res)
@@ -113,9 +114,10 @@ res = client.get_load_state(
 <span class="hljs-comment"># Output</span>
 <span class="hljs-comment">#</span>
 <span class="hljs-comment"># {</span>
-<span class="hljs-comment">#     &quot;state&quot;: &quot;&lt;LoadState: Loaded&gt;&quot;</span>
+<span class="hljs-comment"># &quot;state&quot;: &quot;&lt;LoadState: Loaded&gt;&quot;</span>
 <span class="hljs-comment"># }</span>
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.client.ConnectConfig;
 <span class="hljs-keyword">import</span> io.milvus.v2.client.MilvusClientV2;
 <span class="hljs-keyword">import</span> io.milvus.v2.common.DataType;
@@ -267,18 +269,19 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 data = []
 
 <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">1000</span>):
-    current_color = random.choice(colors)
-    current_tag = random.randint(<span class="hljs-number">1000</span>, <span class="hljs-number">9999</span>)
-    data.append({
-        <span class="hljs-string">&quot;id&quot;</span>: i,
-        <span class="hljs-string">&quot;vector&quot;</span>: [ random.uniform(-<span class="hljs-number">1</span>, <span class="hljs-number">1</span>) <span class="hljs-keyword">for</span> _ <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">5</span>) ],
-        <span class="hljs-string">&quot;color&quot;</span>: current_color,
-        <span class="hljs-string">&quot;tag&quot;</span>: current_tag,
-        <span class="hljs-string">&quot;color_tag&quot;</span>: <span class="hljs-string">f&quot;<span class="hljs-subst">{current_color}</span>_<span class="hljs-subst">{<span class="hljs-built_in">str</span>(current_tag)}</span>&quot;</span>
-    })
+current*color = random.choice(colors)
+current_tag = random.randint(<span class="hljs-number">1000</span>, <span class="hljs-number">9999</span>)
+data.append({
+<span class="hljs-string">&quot;id&quot;</span>: i,
+<span class="hljs-string">&quot;vector&quot;</span>: [ random.uniform(-<span class="hljs-number">1</span>, <span class="hljs-number">1</span>) <span class="hljs-keyword">for</span> * <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">5</span>) ],
+<span class="hljs-string">&quot;color&quot;</span>: current*color,
+<span class="hljs-string">&quot;tag&quot;</span>: current_tag,
+<span class="hljs-string">&quot;color_tag&quot;</span>: <span class="hljs-string">f&quot;<span class="hljs-subst">{current_color}</span>*<span class="hljs-subst">{<span class="hljs-built_in">str</span>(current_tag)}</span>&quot;</span>
+})
 
 <span class="hljs-built_in">print</span>(data[<span class="hljs-number">0</span>])
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-title class_">List</span>&lt;<span class="hljs-title class_">String</span>&gt; colors = <span class="hljs-title class_">Arrays</span>.<span class="hljs-title function_">asList</span>(<span class="hljs-string">&quot;green&quot;</span>, <span class="hljs-string">&quot;blue&quot;</span>, <span class="hljs-string">&quot;yellow&quot;</span>, <span class="hljs-string">&quot;red&quot;</span>, <span class="hljs-string">&quot;black&quot;</span>, <span class="hljs-string">&quot;white&quot;</span>, <span class="hljs-string">&quot;purple&quot;</span>, <span class="hljs-string">&quot;pink&quot;</span>, <span class="hljs-string">&quot;orange&quot;</span>, <span class="hljs-string">&quot;brown&quot;</span>, <span class="hljs-string">&quot;grey&quot;</span>);
 <span class="hljs-title class_">List</span>&lt;<span class="hljs-title class_">JSON</span><span class="hljs-built_in">Object</span>&gt; data = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();
 
@@ -351,24 +354,25 @@ data = []
 <span class="hljs-comment"># Output</span>
 <span class="hljs-comment">#</span>
 <span class="hljs-comment"># {</span>
-<span class="hljs-comment">#     &quot;insert_count&quot;: 1000,</span>
-<span class="hljs-comment">#     &quot;ids&quot;: [</span>
-<span class="hljs-comment">#         0,</span>
-<span class="hljs-comment">#         1,</span>
-<span class="hljs-comment">#         2,</span>
-<span class="hljs-comment">#         3,</span>
-<span class="hljs-comment">#         4,</span>
-<span class="hljs-comment">#         5,</span>
-<span class="hljs-comment">#         6,</span>
-<span class="hljs-comment">#         7,</span>
-<span class="hljs-comment">#         8,</span>
-<span class="hljs-comment">#         9,</span>
-<span class="hljs-comment">#         &quot;(990 more items hidden)&quot;</span>
-<span class="hljs-comment">#     ]</span>
+<span class="hljs-comment"># &quot;insert_count&quot;: 1000,</span>
+<span class="hljs-comment"># &quot;ids&quot;: [</span>
+<span class="hljs-comment"># 0,</span>
+<span class="hljs-comment"># 1,</span>
+<span class="hljs-comment"># 2,</span>
+<span class="hljs-comment"># 3,</span>
+<span class="hljs-comment"># 4,</span>
+<span class="hljs-comment"># 5,</span>
+<span class="hljs-comment"># 6,</span>
+<span class="hljs-comment"># 7,</span>
+<span class="hljs-comment"># 8,</span>
+<span class="hljs-comment"># 9,</span>
+<span class="hljs-comment"># &quot;(990 more items hidden)&quot;</span>
+<span class="hljs-comment"># ]</span>
 <span class="hljs-comment"># }</span>
 
 time.sleep(<span class="hljs-number">5</span>)
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-comment">// 3.1 Insert data into the collection</span>
 <span class="hljs-title class_">InsertReq</span> insertReq = <span class="hljs-title class_">InsertReq</span>.<span class="hljs-title function_">builder</span>()
     .<span class="hljs-title function_">collectionName</span>(<span class="hljs-string">&quot;customized_setup&quot;</span>)
@@ -398,7 +402,7 @@ time.sleep(<span class="hljs-number">5</span>)
 
 <span class="hljs-keyword">await</span> <span class="hljs-title function_">sleep</span>(<span class="hljs-number">5000</span>)
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Search-with-dynamic-fields" class="common-anchor-header">使用动态字段搜索<button data-href="#Search-with-dynamic-fields" class="anchor-icon" translate="no">
+<h2 id="Search-with-dynamic-fields" class="common-anchor-header">使用Dynamic Field搜索<button data-href="#Search-with-dynamic-fields" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -413,7 +417,7 @@ time.sleep(<span class="hljs-number">5</span>)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>如果在创建集合时启用了动态字段并插入了非模式定义的字段，则可以在搜索或查询的筛选表达式中使用这些字段，如下所示。</p>
+    </button></h2><p>如果在创建集合时启用了Dynamic Field并插入了非模式定义的字段，则可以在搜索或查询的筛选表达式中使用这些字段，如下所示。</p>
 <div class="language-python">
 <p>有关参数的更多信息，请参阅 <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Vector/search.md"><code translate="no">search()</code></a>有关参数的更多信息，请参阅 SDK 参考资料中的</p>
 </div>
@@ -429,11 +433,11 @@ time.sleep(<span class="hljs-number">5</span>)
 query_vectors = [[<span class="hljs-number">0.3580376395471989</span>, -<span class="hljs-number">0.6023495712049978</span>, <span class="hljs-number">0.18414012509913835</span>, -<span class="hljs-number">0.26286205330961354</span>, <span class="hljs-number">0.9029438446296592</span>]]
 
 res = client.search(
-    collection_name=<span class="hljs-string">&quot;test_collection&quot;</span>,
-    data=query_vectors,
-    <span class="hljs-built_in">filter</span>=<span class="hljs-string">&quot;color in [\&quot;red\&quot;, \&quot;green\&quot;]&quot;</span>,
-    search_params={<span class="hljs-string">&quot;metric_type&quot;</span>: <span class="hljs-string">&quot;L2&quot;</span>, <span class="hljs-string">&quot;params&quot;</span>: {<span class="hljs-string">&quot;nprobe&quot;</span>: <span class="hljs-number">10</span>}},
-    limit=<span class="hljs-number">3</span>
+collection_name=<span class="hljs-string">&quot;test_collection&quot;</span>,
+data=query_vectors,
+<span class="hljs-built_in">filter</span>=<span class="hljs-string">&quot;color in [\&quot;red\&quot;, \&quot;green\&quot;]&quot;</span>,
+search_params={<span class="hljs-string">&quot;metric_type&quot;</span>: <span class="hljs-string">&quot;L2&quot;</span>, <span class="hljs-string">&quot;params&quot;</span>: {<span class="hljs-string">&quot;nprobe&quot;</span>: <span class="hljs-number">10</span>}},
+limit=<span class="hljs-number">3</span>
 )
 
 <span class="hljs-built_in">print</span>(res)
@@ -441,34 +445,35 @@ res = client.search(
 <span class="hljs-comment"># Output</span>
 <span class="hljs-comment">#</span>
 <span class="hljs-comment"># [</span>
-<span class="hljs-comment">#     [</span>
-<span class="hljs-comment">#         {</span>
-<span class="hljs-comment">#             &quot;id&quot;: 863,</span>
-<span class="hljs-comment">#             &quot;distance&quot;: 0.188413605093956,</span>
-<span class="hljs-comment">#             &quot;entity&quot;: {</span>
-<span class="hljs-comment">#                 &quot;id&quot;: 863,</span>
-<span class="hljs-comment">#                 &quot;color_tag&quot;: &quot;red_2371&quot;</span>
-<span class="hljs-comment">#             }</span>
-<span class="hljs-comment">#         },</span>
-<span class="hljs-comment">#         {</span>
-<span class="hljs-comment">#             &quot;id&quot;: 799,</span>
-<span class="hljs-comment">#             &quot;distance&quot;: 0.29188022017478943,</span>
-<span class="hljs-comment">#             &quot;entity&quot;: {</span>
-<span class="hljs-comment">#                 &quot;id&quot;: 799,</span>
-<span class="hljs-comment">#                 &quot;color_tag&quot;: &quot;red_2235&quot;</span>
-<span class="hljs-comment">#             }</span>
-<span class="hljs-comment">#         },</span>
-<span class="hljs-comment">#         {</span>
-<span class="hljs-comment">#             &quot;id&quot;: 564,</span>
-<span class="hljs-comment">#             &quot;distance&quot;: 0.3492690920829773,</span>
-<span class="hljs-comment">#             &quot;entity&quot;: {</span>
-<span class="hljs-comment">#                 &quot;id&quot;: 564,</span>
-<span class="hljs-comment">#                 &quot;color_tag&quot;: &quot;red_9186&quot;</span>
-<span class="hljs-comment">#             }</span>
-<span class="hljs-comment">#         }</span>
-<span class="hljs-comment">#     ]</span>
+<span class="hljs-comment"># [</span>
+<span class="hljs-comment"># {</span>
+<span class="hljs-comment"># &quot;id&quot;: 863,</span>
+<span class="hljs-comment"># &quot;distance&quot;: 0.188413605093956,</span>
+<span class="hljs-comment"># &quot;entity&quot;: {</span>
+<span class="hljs-comment"># &quot;id&quot;: 863,</span>
+<span class="hljs-comment"># &quot;color_tag&quot;: &quot;red_2371&quot;</span>
+<span class="hljs-comment"># }</span>
+<span class="hljs-comment"># },</span>
+<span class="hljs-comment"># {</span>
+<span class="hljs-comment"># &quot;id&quot;: 799,</span>
+<span class="hljs-comment"># &quot;distance&quot;: 0.29188022017478943,</span>
+<span class="hljs-comment"># &quot;entity&quot;: {</span>
+<span class="hljs-comment"># &quot;id&quot;: 799,</span>
+<span class="hljs-comment"># &quot;color_tag&quot;: &quot;red_2235&quot;</span>
+<span class="hljs-comment"># }</span>
+<span class="hljs-comment"># },</span>
+<span class="hljs-comment"># {</span>
+<span class="hljs-comment"># &quot;id&quot;: 564,</span>
+<span class="hljs-comment"># &quot;distance&quot;: 0.3492690920829773,</span>
+<span class="hljs-comment"># &quot;entity&quot;: {</span>
+<span class="hljs-comment"># &quot;id&quot;: 564,</span>
+<span class="hljs-comment"># &quot;color_tag&quot;: &quot;red_9186&quot;</span>
+<span class="hljs-comment"># }</span>
+<span class="hljs-comment"># }</span>
+<span class="hljs-comment"># ]</span>
 <span class="hljs-comment"># ]</span>
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no" class="language-java"><span class="hljs-comment">// 4. Search with non-schema-defined fields</span>
 <span class="hljs-title class_">List</span>&lt;<span class="hljs-title class_">List</span>&lt;<span class="hljs-title class_">Float</span>&gt;&gt; queryVectors = <span class="hljs-title class_">Arrays</span>.<span class="hljs-title function_">asList</span>(<span class="hljs-title class_">Arrays</span>.<span class="hljs-title function_">asList</span>(<span class="hljs-number">0.</span>3580376395471989f, -<span class="hljs-number">0.</span>6023495712049978f, <span class="hljs-number">0.</span>18414012509913835f, -<span class="hljs-number">0.</span>26286205330961354f, <span class="hljs-number">0.</span>9029438446296592f));
 
@@ -549,7 +554,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>值得注意的是，<strong>color</strong>、<strong>tag</strong>和<strong>color_tag</strong>在定义集合模式时并不存在，但您可以在进行搜索和查询时将它们用作模式定义的字段。</p>
+    </button></h2><p>值得注意的是，<strong>color</strong>、<strong>tag</strong>和<strong>color_tag</strong>在定义Collection Schema 时并不存在，但您可以在进行搜索和查询时将它们用作模式定义的字段。</p>
 <p>如果非模式定义字段的名称包含除数字、字母和下划线以外的字符，如加号 (+)、星号 (*) 或美元符号 ($)，则在布尔表达式中使用该字段或将其包含在输出字段中时，必须将该键包含在<strong>$meta[]</strong>中，如以下代码片段所示。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-meta">... </span>
 <span class="hljs-built_in">filter</span>=<span class="hljs-string">&#x27;$meta[&quot;$key&quot;] in [&quot;a&quot;, &quot;b&quot;, &quot;c&quot;]&#x27;</span>, 

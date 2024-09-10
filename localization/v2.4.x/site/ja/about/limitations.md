@@ -1,9 +1,10 @@
 ---
 id: limitations.md
-title: ミルバス制限
+title: Milvus制限
 related_key: Limitations
-summary: ミルバス使用中の制限について学ぶ。
+summary: Milvus使用中の制限について学ぶ。
 ---
+
 <h1 id="Milvus-Limits" class="common-anchor-header">Milvusの限界<button data-href="#Milvus-Limits" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

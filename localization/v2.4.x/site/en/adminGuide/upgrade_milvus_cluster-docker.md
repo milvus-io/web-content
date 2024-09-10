@@ -20,7 +20,7 @@ title: Upgrade Milvus Cluster with Docker Compose
         ></path>
       </svg>
     </button></h1><p>This topic describes how to upgrade your Milvus using Docker Compose.</p>
-<p>In normal cases, you can <a href="#Upgrade-Milvus-by-changing-its-image">upgrade Milvus by changing its image</a>. However, you need to <a href="#Migrate-the-metadata">migrate the metadata</a> before any upgrade from v2.1.x to v2.4.9.</p>
+<p>In normal cases, you can <a href="#Upgrade-Milvus-by-changing-its-image">upgrade Milvus by changing its image</a>. However, you need to <a href="#Migrate-the-metadata">migrate the metadata</a> before any upgrade from v2.1.x to v2.4.10.</p>
 <h2 id="Upgrade-Milvus-by-changing-its-image" class="common-anchor-header">Upgrade Milvus by changing its image<button data-href="#Upgrade-Milvus-by-changing-its-image" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -43,35 +43,35 @@ title: Upgrade Milvus Cluster with Docker Compose
 <pre><code translate="no" class="language-yaml">...
 rootcoord:
   container_name: milvus-rootcoord
-  image: milvusdb/milvus:v2.4.9
+  image: milvusdb/milvus:v2.4.10
 ...
 proxy:
   container_name: milvus-proxy
-  image: milvusdb/milvus:v2.4.9
+  image: milvusdb/milvus:v2.4.10
 ...
 querycoord:
   container_name: milvus-querycoord
-  image: milvusdb/milvus:v2.4.9  
+  image: milvusdb/milvus:v2.4.10  
 ...
 querynode:
   container_name: milvus-querynode
-  image: milvusdb/milvus:v2.4.9
+  image: milvusdb/milvus:v2.4.10
 ...
 indexcoord:
   container_name: milvus-indexcoord
-  image: milvusdb/milvus:v2.4.9
+  image: milvusdb/milvus:v2.4.10
 ...
 indexnode:
   container_name: milvus-indexnode
-  image: milvusdb/milvus:v2.4.9 
+  image: milvusdb/milvus:v2.4.10 
 ...
 datacoord:
   container_name: milvus-datacoord
-  image: milvusdb/milvus:v2.4.9   
+  image: milvusdb/milvus:v2.4.10   
 ...
 datanode:
   container_name: milvus-datanode
-  image: milvusdb/milvus:v2.4.9
+  image: milvusdb/milvus:v2.4.10
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>Run the following commands to perform the upgrade.</p>
 <pre><code translate="no" class="language-shell">docker compose down
@@ -105,7 +105,7 @@ cmd:
   runWithBackup: true
 config:
   sourceVersion: <span class="hljs-number">2.1</span><span class="hljs-number">.4</span>   <span class="hljs-comment"># Specify your milvus version</span>
-  targetVersion: <span class="hljs-number">2.4</span><span class="hljs-number">.9</span>
+  targetVersion: <span class="hljs-number">2.4</span><span class="hljs-number">.10</span>
   backupFilePath: /tmp/migration.bak
 metastore:
   <span class="hljs-built_in">type</span>: etcd

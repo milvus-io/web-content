@@ -1,1 +1,25 @@
-{"codeList":[],"headingContent":"","anchorList":[{"label":"观鸟者","href":"Birdwatcher","type":1,"isActive":false},{"label":"前提条件","href":"Prerequisite","type":2,"isActive":false},{"label":"架构","href":"Architecture","type":2,"isActive":false},{"label":"最新版本","href":"Latest-release","type":2,"isActive":false}]}
+{
+	"codeList": [],
+	"headingContent": "",
+	"anchorList": [
+		{
+			"label": "Birdwatcher",
+			"href": "Birdwatcher",
+			"type": 1,
+			"isActive": false
+		},
+		{
+			"label": "前提条件",
+			"href": "Prerequisite",
+			"type": 2,
+			"isActive": false
+		},
+		{ "label": "架构", "href": "Architecture", "type": 2, "isActive": false },
+		{
+			"label": "最新版本",
+			"href": "Latest-release",
+			"type": 2,
+			"isActive": false
+		}
+	]
+}

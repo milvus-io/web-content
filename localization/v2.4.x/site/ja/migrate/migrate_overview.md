@@ -1,8 +1,9 @@
 ---
 id: migrate_overview.md
 summary: この記事では、サポートされているマイグレーション、機能、アーキテクチャなど、Milvus-migrationツールの概要を説明します。
-title: ミルバス移住の概要
+title: Milvus移住の概要
 ---
+
 <h1 id="Milvus-Migration-Overview" class="common-anchor-header">Milvusマイグレーション概要<button data-href="#Milvus-Migration-Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

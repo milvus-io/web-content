@@ -1,8 +1,9 @@
 ---
 id: architecture_overview.md
 summary: Milvusは、類似検索と人工知能のために特別に構築された、高速で信頼性が高く、安定したベクトルデータベースを提供します。
-title: ミルバス・アーキテクチャの概要
+title: Milvus・アーキテクチャの概要
 ---
+
 <h1 id="Milvus-Architecture-Overview" class="common-anchor-header">Milvusアーキテクチャの概要<button data-href="#Milvus-Architecture-Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

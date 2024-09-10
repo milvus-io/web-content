@@ -1,8 +1,9 @@
 ---
 id: glossary.md
 title: 用語解説
-summary: ''
+summary: ""
 ---
+
 <h1 id="Terminology" class="common-anchor-header">用語解説<button data-href="#Terminology" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -435,7 +436,7 @@ summary: ''
         ></path>
       </svg>
     </button></h2><p>メモリマップされたファイルは、ファイルの内容を直接メモリにマッピングすることで、効率的なデータ処理を可能にします。これは、メモリが限られており、すべてのデータをロードできない場合に特に有効です。このテクニックは、データ容量を増加させ、パフォーマンスをある程度維持することができる。しかし、データがメモリ容量を大幅に超える場合、検索やクエリの速度が大幅に低下する可能性があります。詳細については、<a href="https://milvus.io/docs/mmap.md">MMap-enabled Data Storageを</a>参照してください。</p>
-<h2 id="Milvus-Backup" class="common-anchor-header">ミルバス・バックアップ<button data-href="#Milvus-Backup" class="anchor-icon" translate="no">
+<h2 id="Milvus-Backup" class="common-anchor-header">Milvus・バックアップ<button data-href="#Milvus-Backup" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -451,7 +452,7 @@ summary: ''
         ></path>
       </svg>
     </button></h2><p><a href="https://milvus.io/docs/milvus_backup_overview.md#Milvus-Backup">Milvus Backupは</a>データのコピーを作成するためのツールであり、データ消失後にオリジナルを復元するために使用することができます。</p>
-<h2 id="Milvus-CDC" class="common-anchor-header">ミルバスCDC<button data-href="#Milvus-CDC" class="anchor-icon" translate="no">
+<h2 id="Milvus-CDC" class="common-anchor-header">MilvusCDC<button data-href="#Milvus-CDC" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

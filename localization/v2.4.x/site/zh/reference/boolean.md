@@ -3,6 +3,7 @@ id: boolean.md
 summary: 了解 Milvus 中的布尔表达规则。
 title: 标量过滤规则
 ---
+
 <h1 id="Scalar-Filtering-Rules" class="common-anchor-header">标量过滤规则<button data-href="#Scalar-Filtering-Rules" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -351,5 +352,5 @@ array_length(int_array) <span class="hljs-comment"># ==&gt; 7</span>
 <ul>
 <li>学习如何进行<a href="/docs/zh/multi-vector-search.md">混合搜索</a>。</li>
 <li>学习如何<a href="https://milvus.io/blog/2022-08-08-How-to-use-string-data-to-empower-your-similarity-search-applications.md">使用字符串过滤</a>搜索结果。</li>
-<li>学习如何<a href="/docs/zh/enable-dynamic-field.md">在构建布尔表达式时使用动态字段</a>。</li>
+<li>学习如何<a href="/docs/zh/enable-dynamic-field.md">在构建布尔表达式时使用Dynamic Field</a>。</li>
 </ul>

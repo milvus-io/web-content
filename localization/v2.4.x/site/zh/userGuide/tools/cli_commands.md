@@ -1,8 +1,9 @@
 ---
 id: cli_commands.md
-summary: 使用命令与米尔沃斯互动。
+summary: 使用命令与Milvus互动。
 title: Milvus_CLI 命令参考
 ---
+
 <h1 id="MilvusCLI-Command-Reference" class="common-anchor-header">Milvus_CLI 命令参考<button data-href="#MilvusCLI-Command-Reference" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -296,12 +297,12 @@ title: Milvus_CLI 命令参考
 </thead>
 <tbody>
 <tr><td style="text-align:left">-c</td><td style="text-align:left">-集合名称</td><td style="text-align:left">集合的名称。</td></tr>
-<tr><td style="text-align:left">-f</td><td style="text-align:left">-字段模式</td><td style="text-align:left">(多个）<code translate="no">&lt;fieldName&gt;:&lt;dataType&gt;:&lt;dimOfVector/desc&gt;</code> 格式的字段模式。</td></tr>
+<tr><td style="text-align:left">-f</td><td style="text-align:left">-字段 Schema </td><td style="text-align:left">(多个）<code translate="no">&lt;fieldName&gt;:&lt;dataType&gt;:&lt;dimOfVector/desc&gt;</code> 格式的字段 Schema 。</td></tr>
 <tr><td style="text-align:left">-p</td><td style="text-align:left">-主键字段</td><td style="text-align:left">主键字段的名称。</td></tr>
 <tr><td style="text-align:left">-a</td><td style="text-align:left">-schema-auto-id（自动 ID</td><td style="text-align:left">(可选）自动生成 ID 的标志。</td></tr>
 <tr><td style="text-align:left">-desc</td><td style="text-align:left">-模式描述</td><td style="text-align:left">(可选）集合的描述。</td></tr>
 <tr><td style="text-align:left">-级别</td><td style="text-align:left">-一致性级别</td><td style="text-align:left">(可选）一致性级别：有界、会话、强、最终。</td></tr>
-<tr><td style="text-align:left">-d</td><td style="text-align:left">-是否动态</td><td style="text-align:left">(可选）集合模式是否支持动态字段。</td></tr>
+<tr><td style="text-align:left">-d</td><td style="text-align:left">-是否动态</td><td style="text-align:left">(可选）Collection Schema 是否支持Dynamic Field。</td></tr>
 <tr><td style="text-align:left">-s</td><td style="text-align:left">-碎片数</td><td style="text-align:left">(可选）分区编号</td></tr>
 <tr><td style="text-align:left">-帮助</td><td style="text-align:left">不适用</td><td style="text-align:left">显示命令使用帮助。</td></tr>
 </tbody>
@@ -311,6 +312,7 @@ title: Milvus_CLI 命令参考
 
 milvus_cli &gt; create collection -c car -f <span class="hljs-built_in">id</span>:INT64:primary_field -f vector:FLOAT_VECTOR:<span class="hljs-number">128</span> -f color:INT64:color -f brand:ARRAY:<span class="hljs-number">64</span>:VARCHAR:<span class="hljs-number">128</span> -p <span class="hljs-built_in">id</span> -A -d <span class="hljs-string">&#x27;car_collection&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
+
 <h2 id="create-partition" class="common-anchor-header">创建分区<button data-href="#create-partition" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -385,13 +387,14 @@ The name of the field to create an index <span class="hljs-keyword">for</span> (
 Index name: vectorIndex
 
 <span class="hljs-comment"># Default is &#x27;&#x27;</span>
-Index <span class="hljs-built_in">type</span> FLAT, IVF_FLAT, IVF_SQ8, IVF_PQ, RNSG, HNSW, ANNOY, AUTOINDEX, DISKANN, GPU_IVF_FLAT, GPU_IVF_PQ, SPARSE_INVERTED_INDEX, SPARSE_WAND, SCANN, STL_SORT, Trie, INVERTED, ) []: IVF_FLAT  
+Index <span class="hljs-built_in">type</span> FLAT, IVF_FLAT, IVF_SQ8, IVF_PQ, RNSG, HNSW, ANNOY, AUTOINDEX, DISKANN, GPU_IVF_FLAT, GPU_IVF_PQ, SPARSE_INVERTED_INDEX, SPARSE_WAND, SCANN, STL_SORT, Trie, INVERTED, ) []: IVF_FLAT
 
 <span class="hljs-comment"># Default is &#x27;&#x27;</span>
-Index metric <span class="hljs-built_in">type</span> (L2, IP, HAMMING, TANIMOTO, COSINE, ) []: 
+Index metric <span class="hljs-built_in">type</span> (L2, IP, HAMMING, TANIMOTO, COSINE, ) []:
 
 Timeout []:
 <button class="copy-code-btn"></button></code></pre>
+
 <h2 id="delete-user" class="common-anchor-header">删除用户<button data-href="#delete-user" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -522,6 +525,7 @@ Timeout []:
 
 <span class="hljs-title class_">Do</span> you want to <span class="hljs-keyword">continue</span>? [y/N]: y
 <button class="copy-code-btn"></button></code></pre>
+
 <h2 id="delete-partition" class="common-anchor-header">删除分区<button data-href="#delete-partition" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -792,7 +796,7 @@ Timeout []:
 下面的示例导入了一个本地 CSV 文件。</p>
 <pre><code translate="no" class="language-shell">milvus_cli &gt; <span class="hljs-keyword">import</span> -c car <span class="hljs-string">&#x27;examples/import_csv/vectors.csv&#x27;</span>
 
-Reading csv file...  [<span class="hljs-comment">####################################]  100%</span>
+Reading csv file... [<span class="hljs-comment">####################################] 100%</span>
 
 Column names are [<span class="hljs-string">&#x27;vector&#x27;</span>, <span class="hljs-string">&#x27;color&#x27;</span>, <span class="hljs-string">&#x27;brand&#x27;</span>]
 
@@ -801,12 +805,17 @@ Processed <span class="hljs-number">50001</span> lines.
 Inserting ...
 
 Insert successfully.
---------------------------  ------------------
-Total insert entities:                   <span class="hljs-number">50000</span>
-Total collection entities:              <span class="hljs-number">150000</span>
-Milvus timestamp:           <span class="hljs-number">428849214449254403</span>
---------------------------  ------------------
+
+---
+
+Total insert entities: <span class="hljs-number">50000</span>
+Total collection entities: <span class="hljs-number">150000</span>
+Milvus timestamp: <span class="hljs-number">428849214449254403</span>
+
+---
+
 <button class="copy-code-btn"></button></code></pre>
+
 <p><h3 id="import">示例 2</h3>
 下面的示例导入了一个远程 CSV 文件。</p>
 <pre><code translate="no" class="language-shell">milvus_cli &gt; import -c car <span class="hljs-string">&#x27;https://raw.githubusercontent.com/milvus-
@@ -814,7 +823,7 @@ io/milvus_cli/main/examples/import_csv/vectors.csv&#x27;</span>
 
 Reading file from remote URL.
 
-Reading csv file...  [####################################]  100%
+Reading csv file... [####################################] 100%
 
 Column names are [<span class="hljs-string">&#x27;vector&#x27;</span>, <span class="hljs-string">&#x27;color&#x27;</span>, <span class="hljs-string">&#x27;brand&#x27;</span>]
 
@@ -824,12 +833,16 @@ Inserting ...
 
 Insert successfully.
 
---------------------------  ------------------
-Total insert entities:                   50000
-Total collection entities:              150000
-Milvus timestamp:           428849214449254403
---------------------------  ------------------
+---
+
+Total insert entities: 50000
+Total collection entities: 150000
+Milvus timestamp: 428849214449254403
+
+---
+
 <button class="copy-code-btn"></button></code></pre>
+
 <h2 id="list-users" class="common-anchor-header">列出用户<button data-href="#list-users" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -1014,6 +1027,7 @@ timeout []:
 Guarantee timestamp. This instructs Milvus to see all operations performed before a provided timestamp. If no such timestamp <span class="hljs-keyword">is</span> provided, then Milvus will search all operations performed to date. [0]:
 Graceful time. Only used <span class="hljs-keyword">in</span> bounded consistency level. If graceful_time <span class="hljs-keyword">is</span> <span class="hljs-keyword">set</span>, PyMilvus will use current timestamp minus the graceful_time <span class="hljs-keyword">as</span> the guarantee_timestamp. This option <span class="hljs-keyword">is</span> 5s <span class="hljs-keyword">by</span> <span class="hljs-literal">default</span> <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> <span class="hljs-keyword">set</span>. [5]:
 </span><button class="copy-code-btn"></button></code></pre>
+
 <p><h4 id="query">例 2</h4></p>
 <p>执行查询并提示输入所需内容：</p>
 <pre><code translate="no" class="language-shell">milvus_cli &gt; query
@@ -1033,6 +1047,7 @@ timeout []:
 Guarantee timestamp. This instructs Milvus to see <span class="hljs-built_in">all</span> operations performed before a provided timestamp. If no such timestamp <span class="hljs-keyword">is</span> provided, then Milvus will search <span class="hljs-built_in">all</span> operations performed to date. [<span class="hljs-number">0</span>]:
 Graceful time. Only used <span class="hljs-keyword">in</span> bounded consistency level. If graceful_time <span class="hljs-keyword">is</span> <span class="hljs-built_in">set</span>, PyMilvus will use current timestamp minus the graceful_time <span class="hljs-keyword">as</span> the guarantee_timestamp. This option <span class="hljs-keyword">is</span> 5s by default <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> <span class="hljs-built_in">set</span>. [<span class="hljs-number">5</span>]:
 <button class="copy-code-btn"></button></code></pre>
+
 <h2 id="release" class="common-anchor-header">释放<button data-href="#release" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -1109,13 +1124,14 @@ The max number of returned <span class="hljs-keyword">record</span>, also known 
 
 The boolean expression used to filter attribute []: id &gt; 0
 
-The names of partitions to <span class="hljs-title">search</span> (<span class="hljs-params">split <span class="hljs-keyword">by</span> <span class="hljs-string">&quot;,&quot;</span> <span class="hljs-keyword">if</span> multiple</span>) [&#x27;_default&#x27;] []: _default
+The names of partitions to <span class="hljs-title">search</span> (<span class="hljs-params">split <span class="hljs-keyword">by</span> <span class="hljs-string">&quot;,&quot;</span> <span class="hljs-keyword">if</span> multiple</span>) [&#x27;_default&#x27;] []: \_default
 
 timeout []:
 
 Guarantee <span class="hljs-title">Timestamp</span>(<span class="hljs-params">It instructs Milvus to see all operations performed before a provided timestamp. If no such timestamp <span class="hljs-keyword">is</span> provided, then Milvus will search all operations performed to date</span>) [0]:
 
 </span><button class="copy-code-btn"></button></code></pre>
+
 <p><h4 id="search">例 2</h4></p>
 <p>在索引库中执行搜索，并提示输入所需内容：</p>
 <pre><code translate="no" class="language-shell">milvus_cli &gt; <span class="hljs-function">search
@@ -1123,7 +1139,7 @@ Guarantee <span class="hljs-title">Timestamp</span>(<span class="hljs-params">It
 Collection <span class="hljs-title">name</span> (<span class="hljs-params">car, test_collection</span>): car
 
 The vectors of search <span class="hljs-title">data</span>(<span class="hljs-params">the length of data <span class="hljs-keyword">is</span> number of query (nq</span>), the dim of every vector <span class="hljs-keyword">in</span> data must be equal to vector field’s of collection. You can also import a csv file without headers):
-    [[0.71, 0.76, 0.17, 0.13, 0.42, 0.07, 0.15, 0.67, 0.58, 0.02, 0.39, 0.47, 0.58, 0.88, 0.73, 0.31, 0.23, 0.57, 0.33, 0.2, 0.03, 0.43, 0.78, 0.49, 0.17, 0.56, 0.76, 0.54, 0.45, 0.46, 0.05, 0.1, 0.43, 0.63, 0.29, 0.44, 0.65, 0.01, 0.35, 0.46, 0.66, 0.7, 0.88, 0.07, 0.49, 0.92, 0.57, 0.5, 0.16, 0.77, 0.98, 0.1, 0.44, 0.88, 0.82, 0.16, 0.67, 0.63, 0.57, 0.55, 0.95, 0.13, 0.64, 0.43, 0.71, 0.81, 0.43, 0.65, 0.76, 0.7, 0.05, 0.24, 0.03, 0.9, 0.46, 0.28, 0.92, 0.25, 0.97, 0.79, 0.73, 0.97, 0.49, 0.28, 0.64, 0.19, 0.23, 0.51, 0.09, 0.1, 0.53, 0.03, 0.23, 0.94, 0.87, 0.14, 0.42, 0.82, 0.91, 0.11, 0.91, 0.37, 0.26, 0.6, 0.89, 0.6, 0.32, 0.11, 0.98, 0.67, 0.12, 0.66, 0.47, 0.02, 0.15, 0.6, 0.64, 0.57, 0.14, 0.81, 0.75, 0.11, 0.49, 0.78, 0.16, 0.63, 0.57, 0.18]]
+[[0.71, 0.76, 0.17, 0.13, 0.42, 0.07, 0.15, 0.67, 0.58, 0.02, 0.39, 0.47, 0.58, 0.88, 0.73, 0.31, 0.23, 0.57, 0.33, 0.2, 0.03, 0.43, 0.78, 0.49, 0.17, 0.56, 0.76, 0.54, 0.45, 0.46, 0.05, 0.1, 0.43, 0.63, 0.29, 0.44, 0.65, 0.01, 0.35, 0.46, 0.66, 0.7, 0.88, 0.07, 0.49, 0.92, 0.57, 0.5, 0.16, 0.77, 0.98, 0.1, 0.44, 0.88, 0.82, 0.16, 0.67, 0.63, 0.57, 0.55, 0.95, 0.13, 0.64, 0.43, 0.71, 0.81, 0.43, 0.65, 0.76, 0.7, 0.05, 0.24, 0.03, 0.9, 0.46, 0.28, 0.92, 0.25, 0.97, 0.79, 0.73, 0.97, 0.49, 0.28, 0.64, 0.19, 0.23, 0.51, 0.09, 0.1, 0.53, 0.03, 0.23, 0.94, 0.87, 0.14, 0.42, 0.82, 0.91, 0.11, 0.91, 0.37, 0.26, 0.6, 0.89, 0.6, 0.32, 0.11, 0.98, 0.67, 0.12, 0.66, 0.47, 0.02, 0.15, 0.6, 0.64, 0.57, 0.14, 0.81, 0.75, 0.11, 0.49, 0.78, 0.16, 0.63, 0.57, 0.18]]
 
 The vector field used to search of <span class="hljs-title">collection</span> (<span class="hljs-params">vector</span>): vector
 
@@ -1135,13 +1151,14 @@ The max number of returned <span class="hljs-keyword">record</span>, also known 
 
 The boolean expression used to filter attribute []: id &gt; 0
 
-The names of partitions to <span class="hljs-title">search</span> (<span class="hljs-params">split <span class="hljs-keyword">by</span> <span class="hljs-string">&quot;,&quot;</span> <span class="hljs-keyword">if</span> multiple</span>) [&#x27;_default&#x27;] []: _default
+The names of partitions to <span class="hljs-title">search</span> (<span class="hljs-params">split <span class="hljs-keyword">by</span> <span class="hljs-string">&quot;,&quot;</span> <span class="hljs-keyword">if</span> multiple</span>) [&#x27;_default&#x27;] []: \_default
 
 timeout []:
 
 Guarantee <span class="hljs-title">Timestamp</span>(<span class="hljs-params">It instructs Milvus to see all operations performed before a provided timestamp. If no such timestamp <span class="hljs-keyword">is</span> provided, then Milvus will search all operations performed to date</span>) [0]:
 
 </span><button class="copy-code-btn"></button></code></pre>
+
 <p><h4 id="search">例 3</h4></p>
 <p>在非索引集合上执行搜索，并提示输入所需内容：</p>
 <pre><code translate="no" class="language-shell">milvus_cli &gt; search
@@ -1165,6 +1182,7 @@ timeout []:
 Guarantee Timestamp(It instructs Milvus to see <span class="hljs-built_in">all</span> operations performed before a provided timestamp. If no such timestamp <span class="hljs-keyword">is</span> provided, then Milvus will search <span class="hljs-built_in">all</span> operations performed to date) [<span class="hljs-number">0</span>]:
 
 <button class="copy-code-btn"></button></code></pre>
+
 <h2 id="List-connection" class="common-anchor-header">列出连接<button data-href="#List-connection" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

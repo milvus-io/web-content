@@ -97,6 +97,7 @@ print("Dim:", embedding_fn.dim, vectors[0].shape)  # Dim: 768 (768,)
 # to demo metadata filtering later.
 data = [
     {"id": i, "vector": vectors[i], "text": docs[i], "subject": "history"}
+    for i in range(len(vectors))
 ]
 
 print("Data has", len(data), "entities, each with fields: ", data[0].keys())

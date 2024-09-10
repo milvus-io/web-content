@@ -1,3 +1,10 @@
+/**
+ * This script is used to translate markdown files from English to other languages.
+ * Run `node tools/translate.js` to translate markdown files.
+ *
+ * This script will auto run every Monday.
+ */
+
 import fs from "fs";
 import matter from "gray-matter";
 import "dotenv/config";
@@ -8,17 +15,26 @@ import {
 	remarkToHtml,
 	remarkableToHtml,
 	extractText,
-	translateMenu,
+	generateMenuStructureLocales,
+	CACHE_FILE,
+	getFileUpdatedTime,
+	splitAndExtractPreTags,
+	getTitleFromMarkdown,
 } from "./utils.js";
 
 const MOCK_TRANSLATE = false;
 const VERSIONS = ["v2.4.x"];
 const sourceFilePath = "site/en";
 const sourceLang = "en";
-const targetLangs = ["en"];
-// const targetLangs = ["en", "zh", "ja", "ko", "fr", "de", "it", "pt", "es"];
-const cacheFile = "./tools/cache.json";
+const targetLangs = ["zh", "ja", "ko", "fr", "de", "it", "pt", "es"];
+const cacheFile = CACHE_FILE;
 let total = 0;
+const SPLIT_TRANSLATE_FILES = [
+	"v2.4.x/site/en/userGuide/manage-collections.md",
+	"v2.4.x/site/en/userGuide/search-query-get/single-vector-search.md",
+	"v2.4.x/site/en/userGuide/use-json-fields.md",
+	"v2.4.x/site/en/reference/array_data_type.md",
+];
 
 async function bootstrap() {
 	console.log("Starting translation...", process.env.DEEPL_API_KEY);
@@ -41,9 +57,13 @@ async function bootstrap() {
 		/**
 		 * step 3: filter out updated files
 		 */
-		const updatedFiles = mdFiles.filter((path) => {
-			const stats = fs.statSync(path);
-			const modifiedTime = stats.mtime;
+		let updatedFiles = [];
+		for (let index = 0; index < mdFiles.length; index++) {
+			const path = mdFiles[index];
+			const modifiedTime = await getFileUpdatedTime(path);
+
+			console.info(`--> cache check: ${index + 1}/${mdFiles.length}`);
+
 			const markdown = fs.readFileSync(path, "utf8");
 			const { data = {} } = matter(markdown);
 			const deprecated = data.deprecate;
@@ -51,8 +71,10 @@ async function bootstrap() {
 				!cache[version] ||
 				!cache[version][path] ||
 				new Date(cache[version][path]) < modifiedTime;
-			return !deprecated && cacheOutdated;
-		});
+			if (!deprecated && cacheOutdated) {
+				updatedFiles.push(path);
+			}
+		}
 		console.log(`--> ${updatedFiles.length} updated files`);
 
 		for (let path of updatedFiles) {
@@ -62,6 +84,8 @@ async function bootstrap() {
 			const markdown = fs.readFileSync(path, "utf8");
 			const { data = {}, content } = matter(markdown);
 			const isMdx = path.endsWith(".mdx");
+			const h1Title = getTitleFromMarkdown(content);
+			const isSameTitle = h1Title === data.title;
 
 			for (let targetLang of targetLangs) {
 				/**
@@ -76,31 +100,32 @@ async function bootstrap() {
 				} = isMdx ? await remarkToHtml(params) : await remarkableToHtml(params);
 
 				/**
-				 * step 6.1: translate html content
+				 * step 6.1: split and translate specific files
 				 */
-				const translateContent = await translate({
-					text: htmlContent,
+				const neededSplit = SPLIT_TRANSLATE_FILES.includes(path);
+				const { matches, htmlArray } = neededSplit
+					? splitAndExtractPreTags(htmlContent)
+					: { matches: [], htmlArray: [] };
+
+				/**
+				 * step 6.2: translate html content
+				 */
+				const translateRes = await translate({
+					text: neededSplit ? htmlArray : htmlContent,
 					targetLang: targetLang.toUpperCase(),
 					mock: MOCK_TRANSLATE,
 				});
 
-				/**
-				 * step 6.2:translate title and summary
-				 */
-				const cloneData = { ...data };
-				if (data.title || data.summary) {
-					const [title, summary] = await translate({
-						text: [data.title || "", data.summary || ""],
-						targetLang: targetLang.toUpperCase(),
-						mock: MOCK_TRANSLATE,
-					});
-					if (title) {
-						cloneData.title = title;
-					}
-					if (summary) {
-						cloneData.summary = summary;
-					}
-				}
+				let translateContent =
+					typeof translateRes === "string"
+						? translateRes
+						: translateRes.reduce((acc, cur, index) => {
+								const match = matches[index - 1];
+								if (match) {
+									return acc + match + cur;
+								}
+								return acc + cur;
+							}, "");
 
 				/**
 				 * step 6.3: replace anchor label
@@ -111,6 +136,25 @@ async function bootstrap() {
 						const text = extractText(id, translateContent);
 						anchorList[index].label = text;
 					});
+				}
+
+				/**
+				 * step 6.4:translate title and summary
+				 */
+				const cloneData = { ...data };
+				if (data.title || data.summary) {
+					const [title, summary] = await translate({
+						text: [data.title || "", data.summary || ""],
+						targetLang: targetLang.toUpperCase(),
+						mock: MOCK_TRANSLATE,
+					});
+					if (title) {
+						const translatedMdTitle = anchorList?.[0]?.label || title
+						cloneData.title = !isSameTitle ? title : translatedMdTitle;
+					}
+					if (summary) {
+						cloneData.summary = summary;
+					}
 				}
 
 				/**
@@ -159,42 +203,10 @@ async function bootstrap() {
 	/**
 	 * step 11: translate menu structure
 	 */
-	console.log("Translating menu structure...");
-	for (let version of VERSIONS) {
-		const sourceMenuPath = `${version}/site/en/menuStructure/en.json`;
-		const stats = fs.statSync(sourceMenuPath);
-
-		const cacheOutdated =
-			!cache[version] ||
-			!cache[version][sourceMenuPath] ||
-			new Date(cache[version][sourceMenuPath]) < stats.mtime;
-
-		if (!cacheOutdated) {
-			continue;
-		}
-
-		for (let targetLang of targetLangs) {
-			const targetMenuPath = `localization/${version}/site/${targetLang}/menuStructure/${targetLang}.json`;
-			const menuData = JSON.parse(fs.readFileSync(sourceMenuPath, "utf8"));
-
-			await translateMenu({
-				data: menuData,
-				targetLang,
-				version,
-			});
-
-			mkdir(targetMenuPath);
-			fs.writeFileSync(
-				targetMenuPath,
-				JSON.stringify(menuData, null, 2),
-				"utf8"
-			);
-			console.info("--> Menu translated successfully:", targetLang);
-		}
-
-		cache[version][sourceMenuPath] = new Date().toISOString();
-		fs.writeFileSync(cacheFile, JSON.stringify(cache, null, 2), "utf8");
-	}
+	generateMenuStructureLocales({
+		versions: VERSIONS,
+		targetLangs,
+	});
 }
 
 bootstrap();

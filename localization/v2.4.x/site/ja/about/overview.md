@@ -1,10 +1,11 @@
 ---
 id: overview.md
-title: ミルバスとは
+title: Milvusとは
 related_key: Milvus Overview
 summary: >-
   Milvusは、ラップトップから大規模な分散システムまで、幅広い環境で効率的に動作する高性能で拡張性の高いベクターデータベースです。オープンソースソフトウェアとしても、クラウドサービスとしても利用可能です。
 ---
+
 <h1 id="What-is-Milvus" class="common-anchor-header">Milvusとは？<button data-href="#What-is-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

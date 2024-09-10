@@ -3,7 +3,8 @@ id: milvus_hybrid_search_retriever.md
 summary: このノートブックでは、Milvusベクトルデータベースに関連する機能の使用方法を説明します。
 title: ミルヴァス・ハイブリッド・サーチ・レトリバー
 ---
-<h1 id="Milvus-Hybrid-Search-Retriever" class="common-anchor-header">ミルバス ハイブリッド サーチレトリバー<button data-href="#Milvus-Hybrid-Search-Retriever" class="anchor-icon" translate="no">
+
+<h1 id="Milvus-Hybrid-Search-Retriever" class="common-anchor-header">Milvus ハイブリッド サーチレトリバー<button data-href="#Milvus-Hybrid-Search-Retriever" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -267,9 +268,10 @@ Use the following pieces of information to provide a concise answer to the quest
 Assistant:&quot;&quot;&quot;</span>
 
 prompt = PromptTemplate(
-    template=PROMPT_TEMPLATE, input_variables=[<span class="hljs-string">&quot;context&quot;</span>, <span class="hljs-string">&quot;question&quot;</span>]
+template=PROMPT_TEMPLATE, input_variables=[<span class="hljs-string">&quot;context&quot;</span>, <span class="hljs-string">&quot;question&quot;</span>]
 )
 <button class="copy-code-btn"></button></code></pre>
+
 <p>ドキュメントをフォーマットする関数を定義する</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">format_docs</span>(<span class="hljs-params">docs</span>):
     <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;\n\n&quot;</span>.join(doc.page_content <span class="hljs-keyword">for</span> doc <span class="hljs-keyword">in</span> docs)

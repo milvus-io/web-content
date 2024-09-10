@@ -19,6 +19,7 @@ import {
 	rehypeAnchorHeadingPlugin,
 } from "./plugins.js";
 
+export const CACHE_FILE = "./tools/cache.json";
 const VERSION = "v2.4.x";
 const PATH = "/docs/";
 const DEEPL_API_KEY = process.env.DEEPL_API_KEY;
@@ -30,9 +31,9 @@ const DEEPL_HEADERS = {
 	"Content-Type": "application/json",
 	Authorization: `DeepL-Auth-Key ${DEEPL_API_KEY}`,
 };
-const GLOSSARY_ID = "a0bbab3b-2b1e-413a-89f2-58dfee38261a";
-const ENTRIES =
-	"vector\t向量\nHugging Face\tHugging Face\nmilvus\tmilvus\nMilvus\tMilvus\narchitecture\t架构\n";
+const GLOSSARY_ID_MAP = JSON.parse(
+	fs.readFileSync("./tools/glossary/glossary-id.json", "utf8")
+);
 
 export function traverseDirectory(dirPath, fileList = []) {
 	const files = fs.readdirSync(dirPath);
@@ -138,10 +139,9 @@ export async function translate(params) {
 			return text;
 		}
 
-		const glossaryParams =
-			sourceLang === "EN" && targetLang === "ZH"
-				? { glossary_id: GLOSSARY_ID }
-				: {};
+		const glossaryKey = `${sourceLang.toLowerCase()}-${targetLang.toLowerCase()}`;
+		const GLOSSARY_ID = GLOSSARY_ID_MAP[glossaryKey]?.id;
+		const glossaryParams = GLOSSARY_ID ? { glossary_id: GLOSSARY_ID } : {};
 
 		// Translation logic
 		const res = await axios.post(
@@ -230,16 +230,107 @@ export const extractText = (id = "", htmlString = "") => {
  * entries example:
  * Source1\tTarget1\nSource2\tTarget2\n...
  */
-export const createDeepLGlossary = async () => {
+export const createDeepLGlossary = async (entries, targetLang) => {
 	const body = {
-		name: "milvus-docs-en-to-zh-glossary",
+		name: `milvus-docs-en-to-${targetLang}-glossary-${new Date().toISOString()}`,
 		source_lang: "en",
-		target_lang: "zh",
-		entries: ENTRIES,
+		target_lang: targetLang,
+		entries,
 		entries_format: "tsv",
 	};
 	const res = await axios.post(DEEPL_ENDPOINT + GLOSSARY_PATH, body, {
 		headers: DEEPL_HEADERS,
 	});
 	console.log(res.data);
+	return res.data;
+};
+
+export const deleteDeepLGlossary = async (glossaryId) => {
+	if (!glossaryId) {
+		return;
+	}
+
+	return await axios.delete(DEEPL_ENDPOINT + GLOSSARY_PATH + "/" + glossaryId, {
+		headers: DEEPL_HEADERS,
+	});
+};
+
+export const generateMenuStructureLocales = async (params) => {
+	const { versions = [], useCache = true, targetLangs = [] } = params;
+	console.log("Translating menu structure...");
+	for (let version of versions) {
+		const sourceMenuPath = `${version}/site/en/menuStructure/en.json`;
+		const stats = fs.statSync(sourceMenuPath);
+
+		const cache =
+			useCache && fs.existsSync(CACHE_FILE)
+				? JSON.parse(fs.readFileSync(CACHE_FILE, "utf8") || "{}")
+				: {};
+		const cacheOutdated = useCache
+			? !cache[version] ||
+				!cache[version][sourceMenuPath] ||
+				new Date(cache[version][sourceMenuPath]) < stats.mtime
+			: true;
+
+		if (!cacheOutdated) {
+			continue;
+		}
+
+		for (let targetLang of targetLangs) {
+			const targetMenuPath = `localization/${version}/site/${targetLang}/menuStructure/${targetLang}.json`;
+			const menuData = JSON.parse(fs.readFileSync(sourceMenuPath, "utf8"));
+
+			await translateMenu({
+				data: menuData,
+				targetLang,
+				version,
+			});
+
+			mkdir(targetMenuPath);
+			fs.writeFileSync(
+				targetMenuPath,
+				JSON.stringify(menuData, null, 2),
+				"utf8"
+			);
+			console.info("--> Menu translated successfully:", targetLang);
+		}
+
+		if (useCache) {
+			cache[version][sourceMenuPath] = new Date().toISOString();
+			fs.writeFileSync(CACHE_FILE, JSON.stringify(cache, null, 2), "utf8");
+		}
+	}
+};
+
+export const getFileUpdatedTime = async (path) => {
+	try {
+		const apiUrl = `https://api.github.com/repos/milvus-io/web-content/commits?path=${path}`;
+		const headers = {
+			Authorization: `token ${process.env.GITHUB_TOKEN}`,
+		};
+		const { data } = await axios.get(apiUrl, { headers });
+		return data.length > 0
+			? data[0].commit.author.date
+			: new Date().toISOString();
+	} catch (error) {
+		console.error(error);
+		return new Date().toISOString();
+	}
+};
+
+export const splitAndExtractPreTags = (htmlString) => {
+	const placeholder = "<!-- translate-split -->";
+	const regex = /<pre>[\s\S]*?<\/pre>/g;
+
+	const matches = htmlString.match(regex) || [];
+	const result = htmlString.replace(regex, placeholder);
+	const htmlArray = result.split(placeholder);
+
+	return { result, matches, htmlArray };
+};
+
+export const getTitleFromMarkdown = (markdown) => {
+	const headingRegex = /^#\s+(.*)$/m;
+	const match = headingRegex.exec(markdown);
+	return match ? match[1] : null;
 };

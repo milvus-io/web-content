@@ -1,8 +1,9 @@
 ---
 id: multimodal_rag_with_milvus.md
-summary: ミルバスとのマルチモーダルRAG
-title: ミルバスとのマルチモーダルRAG
+summary: MilvusとのマルチモーダルRAG
+title: MilvusとのマルチモーダルRAG
 ---
+
 <h1 id="Multimodal-RAG-with-Milvus" class="common-anchor-header">MilvusによるマルチモーダルRAG<button data-href="#Multimodal-RAG-with-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -61,11 +62,10 @@ $ tar -xzf amazon_reviews_2023_subset.<span class="hljs-property">tar</span>.<sp
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> torch
 <span class="hljs-keyword">from</span> FlagEmbedding.visual.modeling <span class="hljs-keyword">import</span> Visualized_BGE
 
-
 <span class="hljs-keyword">class</span> <span class="hljs-title class_">Encoder</span>:
-    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__init__</span>(<span class="hljs-params">self, model_name: <span class="hljs-built_in">str</span>, model_path: <span class="hljs-built_in">str</span></span>):
-        <span class="hljs-variable language_">self</span>.model = Visualized_BGE(model_name_bge=model_name, model_weight=model_path)
-        <span class="hljs-variable language_">self</span>.model.<span class="hljs-built_in">eval</span>()
+<span class="hljs-keyword">def</span> <span class="hljs-title function_">**init**</span>(<span class="hljs-params">self, model*name: <span class="hljs-built_in">str</span>, model_path: <span class="hljs-built_in">str</span></span>):
+<span class="hljs-variable language*">self</span>.model = Visualized*BGE(model_name_bge=model_name, model_weight=model_path)
+<span class="hljs-variable language*">self</span>.model.<span class="hljs-built_in">eval</span>()
 
     <span class="hljs-keyword">def</span> <span class="hljs-title function_">encode_query</span>(<span class="hljs-params">self, image_path: <span class="hljs-built_in">str</span>, text: <span class="hljs-built_in">str</span></span>) -&gt; <span class="hljs-built_in">list</span>[<span class="hljs-built_in">float</span>]:
         <span class="hljs-keyword">with</span> torch.no_grad():
@@ -77,11 +77,11 @@ $ tar -xzf amazon_reviews_2023_subset.<span class="hljs-property">tar</span>.<sp
             query_emb = <span class="hljs-variable language_">self</span>.model.encode(image=image_path)
         <span class="hljs-keyword">return</span> query_emb.tolist()[<span class="hljs-number">0</span>]
 
-
 model_name = <span class="hljs-string">&quot;BAAI/bge-base-en-v1.5&quot;</span>
-model_path = <span class="hljs-string">&quot;./Visualized_base_en_v1.5.pth&quot;</span>  <span class="hljs-comment"># Change to your own value if using a different model path</span>
+model_path = <span class="hljs-string">&quot;./Visualized_base_en_v1.5.pth&quot;</span> <span class="hljs-comment"># Change to your own value if using a different model path</span>
 encoder = Encoder(model_name, model_path)
 <button class="copy-code-btn"></button></code></pre>
+
 <h2 id="Load-Data" class="common-anchor-header">データのロード<button data-href="#Load-Data" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -103,23 +103,23 @@ encoder = Encoder(model_name, model_path)
 <span class="hljs-keyword">from</span> tqdm <span class="hljs-keyword">import</span> tqdm
 <span class="hljs-keyword">from</span> glob <span class="hljs-keyword">import</span> glob
 
-
 <span class="hljs-comment"># Generate embeddings for the image dataset</span>
 data_dir = (
-    <span class="hljs-string">&quot;./images_folder&quot;</span>  <span class="hljs-comment"># Change to your own value if using a different data directory</span>
+<span class="hljs-string">&quot;./images_folder&quot;</span> <span class="hljs-comment"># Change to your own value if using a different data directory</span>
 )
 image_list = glob(
-    os.path.join(data_dir, <span class="hljs-string">&quot;images&quot;</span>, <span class="hljs-string">&quot;*.jpg&quot;</span>)
-)  <span class="hljs-comment"># We will only use images ending with &quot;.jpg&quot;</span>
+os.path.join(data_dir, <span class="hljs-string">&quot;images&quot;</span>, <span class="hljs-string">&quot;\*.jpg&quot;</span>)
+) <span class="hljs-comment"># We will only use images ending with &quot;.jpg&quot;</span>
 image_dict = {}
 <span class="hljs-keyword">for</span> image_path <span class="hljs-keyword">in</span> tqdm(image_list, desc=<span class="hljs-string">&quot;Generating image embeddings: &quot;</span>):
-    <span class="hljs-keyword">try</span>:
-        image_dict[image_path] = encoder.encode_image(image_path)
-    <span class="hljs-keyword">except</span> Exception <span class="hljs-keyword">as</span> e:
-        <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;Failed to generate embedding for <span class="hljs-subst">{image_path}</span>. Skipped.&quot;</span>)
-        <span class="hljs-keyword">continue</span>
+<span class="hljs-keyword">try</span>:
+image_dict[image_path] = encoder.encode_image(image_path)
+<span class="hljs-keyword">except</span> Exception <span class="hljs-keyword">as</span> e:
+<span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;Failed to generate embedding for <span class="hljs-subst">{image_path}</span>. Skipped.&quot;</span>)
+<span class="hljs-keyword">continue</span>
 <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Number of encoded images:&quot;</span>, <span class="hljs-built_in">len</span>(image_dict))
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no">Generating image embeddings: 100%|██████████| 900/900 [00:20&lt;00:00, 44.08it/s]
 
 Number of encoded images: 900
@@ -135,7 +135,6 @@ Number of encoded images: 900
 </div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
-
 dim = <span class="hljs-built_in">len</span>(<span class="hljs-built_in">list</span>(image_dict.values())[<span class="hljs-number">0</span>])
 collection_name = <span class="hljs-string">&quot;multimodal_rag_demo&quot;</span>
 
@@ -145,18 +144,19 @@ milvus_client = MilvusClient(uri=<span class="hljs-string">&quot;./milvus_demo.d
 <span class="hljs-comment"># Create Milvus Collection</span>
 <span class="hljs-comment"># By default, vector field name is &quot;vector&quot;</span>
 milvus_client.create_collection(
-    collection_name=collection_name,
-    auto_id=<span class="hljs-literal">True</span>,
-    dimension=dim,
-    enable_dynamic_field=<span class="hljs-literal">True</span>,
+collection_name=collection_name,
+auto_id=<span class="hljs-literal">True</span>,
+dimension=dim,
+enable_dynamic_field=<span class="hljs-literal">True</span>,
 )
 
 <span class="hljs-comment"># Insert data into collection</span>
 milvus_client.insert(
-    collection_name=collection_name,
-    data=[{<span class="hljs-string">&quot;image_path&quot;</span>: k, <span class="hljs-string">&quot;vector&quot;</span>: v} <span class="hljs-keyword">for</span> k, v <span class="hljs-keyword">in</span> image_dict.items()],
+collection_name=collection_name,
+data=[{<span class="hljs-string">&quot;image_path&quot;</span>: k, <span class="hljs-string">&quot;vector&quot;</span>: v} <span class="hljs-keyword">for</span> k, v <span class="hljs-keyword">in</span> image_dict.items()],
 )
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no">{'insert_count': 900,
  'ids': [451537887696781312, 451537887696781313, ..., 451537887696782211],
  'cost': 0}
@@ -187,16 +187,17 @@ query_text = <span class="hljs-string">&quot;phone case with this image theme&qu
 query_vec = encoder.encode_query(image_path=query_image, text=query_text)
 
 search_results = milvus_client.search(
-    collection_name=collection_name,
-    data=[query_vec],
-    output_fields=[<span class="hljs-string">&quot;image_path&quot;</span>],
-    limit=<span class="hljs-number">9</span>,  <span class="hljs-comment"># Max number of search results to return</span>
-    search_params={<span class="hljs-string">&quot;metric_type&quot;</span>: <span class="hljs-string">&quot;COSINE&quot;</span>, <span class="hljs-string">&quot;params&quot;</span>: {}},  <span class="hljs-comment"># Search parameters</span>
+collection_name=collection_name,
+data=[query_vec],
+output_fields=[<span class="hljs-string">&quot;image_path&quot;</span>],
+limit=<span class="hljs-number">9</span>, <span class="hljs-comment"># Max number of search results to return</span>
+search_params={<span class="hljs-string">&quot;metric_type&quot;</span>: <span class="hljs-string">&quot;COSINE&quot;</span>, <span class="hljs-string">&quot;params&quot;</span>: {}}, <span class="hljs-comment"># Search parameters</span>
 )[<span class="hljs-number">0</span>]
 
 retrieved_images = [hit.get(<span class="hljs-string">&quot;entity&quot;</span>).get(<span class="hljs-string">&quot;image_path&quot;</span>) <span class="hljs-keyword">for</span> hit <span class="hljs-keyword">in</span> search_results]
 <span class="hljs-built_in">print</span>(retrieved_images)
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no">['./images_folder/images/518Gj1WQ-RL._AC_.jpg', './images_folder/images/41n00AOfWhL._AC_.jpg', './images_folder/images/51Wqge9HySL._AC_.jpg', './images_folder/images/51R2SZiywnL._AC_.jpg', './images_folder/images/516PebbMAcL._AC_.jpg', './images_folder/images/51RrgfYKUfL._AC_.jpg', './images_folder/images/515DzQVKKwL._AC_.jpg', './images_folder/images/51BsgVw6RhL._AC_.jpg', './images_folder/images/51INtcXu9FL._AC_.jpg']
 </code></pre>
 <h3 id="Rerank-with-GPT-4o" class="common-anchor-header">GPT-4oによる再ランク</h3><p>LLMを使って画像のランク付けを行い、ユーザのクエリと検索結果に基づいて最適な結果の説明を生成します。</p>
@@ -208,10 +209,9 @@ img_height = <span class="hljs-number">300</span>
 img_width = <span class="hljs-number">300</span>
 row_count = <span class="hljs-number">3</span>
 
-
 <span class="hljs-keyword">def</span> <span class="hljs-title function_">create_panoramic_view</span>(<span class="hljs-params">query_image_path: <span class="hljs-built_in">str</span>, retrieved_images: <span class="hljs-built_in">list</span></span>) -&gt; np.ndarray:
-    <span class="hljs-string">&quot;&quot;&quot;
-    creates a 5x5 panoramic view image from a list of images
+<span class="hljs-string">&quot;&quot;&quot;
+creates a 5x5 panoramic view image from a list of images
 
     args:
         images: list of images to be combined
@@ -315,7 +315,9 @@ row_count = <span class="hljs-number">3</span>
     <span class="hljs-comment"># combine the query image with the panoramic view</span>
     panoramic_image = np.hstack([query_image_null, panoramic_image])
     <span class="hljs-keyword">return</span> panoramic_image
+
 <button class="copy-code-btn"></button></code></pre>
+
 <p>クエリ画像と検索された画像をインデックスと組み合わせてパノラマビューにします。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> PIL <span class="hljs-keyword">import</span> Image
 
@@ -327,6 +329,7 @@ combined_image = Image.<span class="hljs-built_in">open</span>(combined_image_pa
 show_combined_image = combined_image.resize((<span class="hljs-number">300</span>, <span class="hljs-number">300</span>))
 show_combined_image.show()
 <button class="copy-code-btn"></button></code></pre>
+
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/multimodal_rag_with_milvus_22_0.png" alt="Create a panoramic view" class="doc-image" id="create-a-panoramic-view" />
@@ -336,14 +339,13 @@ show_combined_image.show()
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> requests
 <span class="hljs-keyword">import</span> base64
 
-openai_api_key = <span class="hljs-string">&quot;sk-***&quot;</span>  <span class="hljs-comment"># Change to your OpenAI API Key</span>
-
+openai_api_key = <span class="hljs-string">&quot;sk-\*\*\*&quot;</span> <span class="hljs-comment"># Change to your OpenAI API Key</span>
 
 <span class="hljs-keyword">def</span> <span class="hljs-title function_">generate_ranking_explanation</span>(<span class="hljs-params">
-    combined_image_path: <span class="hljs-built_in">str</span>, caption: <span class="hljs-built_in">str</span>, infos: <span class="hljs-built_in">dict</span> = <span class="hljs-literal">None</span>
+combined_image_path: <span class="hljs-built_in">str</span>, caption: <span class="hljs-built_in">str</span>, infos: <span class="hljs-built_in">dict</span> = <span class="hljs-literal">None</span>
 </span>) -&gt; <span class="hljs-built_in">tuple</span>[<span class="hljs-built_in">list</span>[<span class="hljs-built_in">int</span>], <span class="hljs-built_in">str</span>]:
-    <span class="hljs-keyword">with</span> <span class="hljs-built_in">open</span>(combined_image_path, <span class="hljs-string">&quot;rb&quot;</span>) <span class="hljs-keyword">as</span> image_file:
-        base64_image = base64.b64encode(image_file.read()).decode(<span class="hljs-string">&quot;utf-8&quot;</span>)
+<span class="hljs-keyword">with</span> <span class="hljs-built_in">open</span>(combined_image_path, <span class="hljs-string">&quot;rb&quot;</span>) <span class="hljs-keyword">as</span> image_file:
+base64_image = base64.b64encode(image_file.read()).decode(<span class="hljs-string">&quot;utf-8&quot;</span>)
 
     information = (
         <span class="hljs-string">&quot;You are responsible for ranking results for a Composed Image Retrieval. &quot;</span>
@@ -400,7 +402,9 @@ openai_api_key = <span class="hljs-string">&quot;sk-***&quot;</span>  <span clas
     explanation = result[end_idx + <span class="hljs-number">1</span> :].strip()
 
     <span class="hljs-keyword">return</span> ranked_indices, explanation
+
 <button class="copy-code-btn"></button></code></pre>
+
 <p>ランク付け後の画像インデックスと最も良い結果の理由を取得します：</p>
 <pre><code translate="no" class="language-python">ranked_indices, explanation = generate_ranking_explanation(
     combined_image_path, query_text
@@ -414,6 +418,7 @@ best_img = Image.<span class="hljs-built_in">open</span>(retrieved_images[best_i
 best_img = best_img.resize((<span class="hljs-number">150</span>, <span class="hljs-number">150</span>))
 best_img.show()
 <button class="copy-code-btn"></button></code></pre>
+
 <pre><code translate="no">Reasons: The most suitable item for the user's query intent is index 6 because the instruction specifies a phone case with the theme of the image, which is a leopard. The phone case with index 6 has a thematic design resembling the leopard pattern, making it the closest match to the user's request for a phone case with the image theme.
 </code></pre>
 <p>

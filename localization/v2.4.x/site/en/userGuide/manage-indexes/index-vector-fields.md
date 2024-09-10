@@ -258,7 +258,8 @@ index_params.add_index(
 <span class="hljs-comment"># 4.3. Create an index file</span>
 client.create_index(
     collection_name=<span class="hljs-string">&quot;customized_setup&quot;</span>,
-    index_params=index_params
+    index_params=index_params,
+    sync=<span class="hljs-literal">False</span> <span class="hljs-comment"># Whether to wait for index creation to complete before returning. Defaults to True.</span>
 )
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.common.IndexParam;
@@ -339,6 +340,10 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
     <tr>
       <td><code translate="no">index_params</code></td>
       <td>An <strong>IndexParams</strong> object containing a list of <strong>IndexParam</strong> objects.</td>
+    </tr>
+    <tr>
+      <td><code translate="no">sync</code></td>
+      <td>Controls how the index is built in relation to the client’s request. Valid values:<br><ul><li><code translate="no">True</code> (default): The client waits until the index is fully built before it returns. This means you will not get a response until the process is complete.</li><li><code translate="no">False</code>: The client returns immediately after the request is received and the index is being built in the background. To find out if index creation has been completed, use the <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/describe_index.md">describe_index()</a> method.</li></ul></td>
     </tr>
   </tbody>
 </table>
