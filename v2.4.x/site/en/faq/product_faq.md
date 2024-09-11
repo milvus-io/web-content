@@ -127,7 +127,7 @@ Milvus can manage vectors with up to 32,768 dimensions by default. You can incre
 
 #### Does Milvus support Apple M1 CPU?
 
-Current Milvus release does not support Apple M1 CPU.
+Current Milvus release does not support Apple M1 CPU directly. After Milvus 2.3, Milvus provides Docker images for the ARM64 architecture.
 
 #### What data types does Milvus support on the primary key field?
 
