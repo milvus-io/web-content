@@ -18,7 +18,7 @@ This is an enumeration that provides the following constants.
 
 - Int16 = 3
 
-  Sets the data type to **Int64**.
+  Sets the data type to **Int16**.
 
 - Int32 = 4
 
