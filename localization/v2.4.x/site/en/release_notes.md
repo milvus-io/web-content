@@ -19,6 +19,75 @@ title: Release Notes
         ></path>
       </svg>
     </button></h1><p>Find out what’s new in Milvus! This page summarizes new features, improvements, known issues, and bug fixes in each release. You can find the release notes for each released version after v2.4.0 in this section. We suggest that you regularly visit this page to learn about updates.</p>
+<h2 id="v2411" class="common-anchor-header">v2.4.11<button data-href="#v2411" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>Release Date: September 11, 2024</p>
+<table>
+<thead>
+<tr><th>Milvus version</th><th>Python SDK version</th><th>Java SDK version</th><th>Node.js SDK version</th></tr>
+</thead>
+<tbody>
+<tr><td>2.4.11</td><td>2.4.6</td><td>2.4.3</td><td>2.4.8</td></tr>
+</tbody>
+</table>
+<p>Milvus 2.4.11 is a bug-fix release that addresses multiple critical issues related to the MARISA trie index, compaction, and loading operations. This release introduces new features to view expressions and improve delete stability. We recommend all users of the 2.4.x series to upgrade to this version to benefit from these improvements and fixes.</p>
+<h3 id="Features" class="common-anchor-header">Features</h3><ul>
+<li>Added static view for expressions in 2.4 (<a href="https://github.com/milvus-io/milvus/pull/35954">#35954</a>)</li>
+<li>Implemented delete buffer related quota logic (<a href="https://github.com/milvus-io/milvus/pull/35997">#35997</a>)</li>
+</ul>
+<h3 id="Bug-fixes" class="common-anchor-header">Bug fixes</h3><ul>
+<li>Resolved Trie index range operation issue for GreaterThan and GreaterThanEqual comparisons (<a href="https://github.com/milvus-io/milvus/pull/36126">#36126</a>)</li>
+<li>Corrected <code translate="no">marisa_label_order</code> usage in Trie index construction (<a href="https://github.com/milvus-io/milvus/pull/36060">#36060</a>)</li>
+<li>Enhanced value checking for <code translate="no">trie.predictive_search</code> (<a href="https://github.com/milvus-io/milvus/pull/35999">#35999</a>)</li>
+<li>Enabled Binary arithmetic expression support on inverted index (<a href="https://github.com/milvus-io/milvus/pull/36097">#36097</a>)</li>
+<li>Fixed segment fault caused by Skipindex (<a href="https://github.com/milvus-io/milvus/pull/35908">#35908</a>)</li>
+<li>Resolved memory leak in proxy meta cache (<a href="https://github.com/milvus-io/milvus/pull/36076">#36076</a>)</li>
+<li>Renamed mmap file path to prevent directory conflicts (<a href="https://github.com/milvus-io/milvus/pull/35975">#35975</a>)</li>
+<li>Improved logging and cleanup for failed/timeout tasks in mix compaction (<a href="https://github.com/milvus-io/milvus/pull/35967">#35967</a>)</li>
+<li>Addressed logic deadlock during high memory usage by delegator (<a href="https://github.com/milvus-io/milvus/pull/36066">#36066</a>)</li>
+<li>Implemented empty segment creation when compaction deletes all inserts (<a href="https://github.com/milvus-io/milvus/pull/36045">#36045</a>)</li>
+<li>Corrected load field list population from old version load info in 2.4 (<a href="https://github.com/milvus-io/milvus/pull/36018">#36018</a>)</li>
+<li>Fixed tracing config update logic in 2.4 (<a href="https://github.com/milvus-io/milvus/pull/35998">#35998</a>)</li>
+<li>Resolved search/query request failures during dynamic partition release (<a href="https://github.com/milvus-io/milvus/pull/36019">#36019</a>)</li>
+<li>Prevented override of fallback parameters (<a href="https://github.com/milvus-io/milvus/pull/36006">#36006</a>)</li>
+<li>Ensured proper registration of privilege groups for validation (<a href="https://github.com/milvus-io/milvus/pull/35938">#35938</a>)</li>
+<li>Prevented mistaken cleanup of db limiter nodes (<a href="https://github.com/milvus-io/milvus/pull/35992">#35992</a>)</li>
+<li>Addressed issue with replicas not participating in queries after failure recovery (<a href="https://github.com/milvus-io/milvus/pull/35925">#35925</a>)</li>
+<li>Resolved data race in clustering compaction writer (<a href="https://github.com/milvus-io/milvus/pull/35958">#35958</a>)</li>
+<li>Fixed variable reference after move operation (<a href="https://github.com/milvus-io/milvus/pull/35904">#35904</a>)</li>
+<li>Implemented clustering key skip load behavior check (<a href="https://github.com/milvus-io/milvus/pull/35899">#35899</a>)</li>
+<li>Ensured single startup of querycoord observers in 2.4 (<a href="https://github.com/milvus-io/milvus/pull/35817">#35817</a>)</li>
+</ul>
+<h3 id="Improvements" class="common-anchor-header">Improvements</h3><ul>
+<li>Upgraded Milvus &amp; proto version to 2.4.11 (<a href="https://github.com/milvus-io/milvus/pull/36069">#36069</a>)</li>
+<li>Addressed memory leak in unit tests and enable use_asan option for unittest builds (<a href="https://github.com/milvus-io/milvus/pull/35857">#35857</a>)</li>
+<li>Adjusted l0segmentsrowcount limits to more appropriate values (<a href="https://github.com/milvus-io/milvus/pull/36015">#36015</a>)</li>
+<li>Modified deltalog memory estimation factor to one (<a href="https://github.com/milvus-io/milvus/pull/36035">#36035</a>)</li>
+<li>Implemented slicesetequal for load field list comparisons (<a href="https://github.com/milvus-io/milvus/pull/36062">#36062</a>)</li>
+<li>Reduced log frequency for delete operations (<a href="https://github.com/milvus-io/milvus/pull/35981">#35981</a>)</li>
+<li>Upgraded etcd version to 3.5.14 (<a href="https://github.com/milvus-io/milvus/pull/35977">#35977</a>)</li>
+<li>Optimized mmap-rss reduction after warmup (<a href="https://github.com/milvus-io/milvus/pull/35965">#35965</a>)</li>
+<li>Removed cooling off period in rate limiter for read requests (<a href="https://github.com/milvus-io/milvus/pull/35936">#35936</a>)</li>
+<li>Enhanced load field checking for previously loaded collections (<a href="https://github.com/milvus-io/milvus/pull/35910">#35910</a>)</li>
+<li>Added support for dropping roles related to privilege lists in 2.4 (<a href="https://github.com/milvus-io/milvus/pull/35863">#35863</a>)</li>
+<li>Implemented depguard rules to prohibit deprecated proto library usage (<a href="https://github.com/milvus-io/milvus/pull/35818">#35818</a>)</li>
+</ul>
+<h3 id="Others" class="common-anchor-header">Others</h3><ul>
+<li>Updated Knowhere version (<a href="https://github.com/milvus-io/milvus/pull/36067">#36067</a>)</li>
+</ul>
 <h2 id="v2410" class="common-anchor-header">v2.4.10<button data-href="#v2410" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
