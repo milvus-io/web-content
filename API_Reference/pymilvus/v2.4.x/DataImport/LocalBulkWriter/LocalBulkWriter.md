@@ -57,7 +57,7 @@ writer = LocalBulkWriter(
 
     <p>The way <strong>BulkWriter</strong> segments your data varies with the target file type.</p>
     <ul>
-    <li><strong>JSON_RB</strong> or <strong>Parquet</strong></li>
+    <li><strong>JSON_RB</strong>, <strong>Parquet</strong> or <strong>CSV</strong></li>
     </ul>
     <p>If the generated file exceeds the specified segment size, <strong>BulkWriter</strong> creates multiple files and names them in sequence numbers, each no larger than the segment size.</p>
     <ul>
@@ -73,7 +73,11 @@ writer = LocalBulkWriter(
 
     The value defaults to **BulkFileType.NPY**. 
 
-    Possible options are **BulkFileType.NPY**, **BulkFileType.JSON_RB** and **BulkFileType.PARQUET**.
+    Possible options are **BulkFileType.NPY**, **BulkFileType.JSON_RB**, **BulkFileType.PARQUET** and **BulkFileType.CSV**.
+
+- **config** (*[Config](../Config.md)*) -
+
+    The configuration of the **CSV** format currently.
 
 **RETURN TYPE:**
 

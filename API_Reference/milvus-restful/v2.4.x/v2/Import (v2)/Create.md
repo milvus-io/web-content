@@ -82,6 +82,8 @@ Possible response is similar to the following
 | `files[][]`  | __string__<br/>A list of file paths, relative to the root of your Milvus bucket on the MinIO instance shipped along with the Milvus instance.  |
 | `options` | __object__<br/>Bulk-import options. |
 | `options.timeout`  | __string__<br/>The timeout duration of the created import jobs. The value should be a positive number suffixed by __s__ (seconds), __m__ (minutes), and __h__(hours). For example, _300s_, _1.5h_, and _1h45_ are all valid values.  |
+| `options.sep` | __string__<br/>The delimiter of CSV file. The value must be a string of length 1, which defaults to ```","```. And the following strings are not allowed: ```"\0"```, ```"\n"```, ```"\r"```, ```"""```. |
+| `options.nullkey` | __string__<br/>Special string representing null value. The value defaults to empty string: ```""```. |
 
 ## Response
 
