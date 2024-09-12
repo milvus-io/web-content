@@ -11,6 +11,7 @@ related_key: index
 你可以通过页面右边的 <b>编辑</b> 按钮直接贡献你的翻译。更多详情，参考 <a href="https://github.com/milvus-io/milvus-docs/blob/v2.0.0/CONTRIBUTING.md">贡献指南</a>。如需帮助，你可以 <a href="https://github.com/milvus-io/milvus-docs/issues/new/choose">提交 GitHub Issue</a>。
 </div>
 
+
 创建索引是一个组织数据的过程，是向量数据库实现快速查询百万、十亿、甚至万亿级数据集所依赖的一个巨大组成部分。
 
 ## 加速向量查询
@@ -27,7 +28,9 @@ related_key: index
   默认设定下，Milvus 不会对插入的数据少于 1024 行的 segment 创建索引。如修改此项参数，需修改 <code>milvus.yaml</code> 中的 <a href="configure_rootcoord.md#rootCoord.minSegmentSizeToEnableIndex"><code>rootCoord.minSegmentSizeToEnableIndex</code></a> 配置项。
 </div>
 
+
 ## 根据应用场景选择索引
+
 
 Milvus 目前支持的向量索引类型大都属于 ANNS（Approximate Nearest Neighbors Search，近似最近邻搜索）。ANNS 的核心思想是不再局限于只返回最精确的结果项，而是仅搜索可能是近邻的数据项，即以牺牲可接受范围内的精度的方式提高检索效率。
 
@@ -170,7 +173,7 @@ FLAT 之所以精准是因为它采取了详尽查询的方法，即对于每个
 
 <a name="IVF_FLAT"></a>​
 
-IVF_FLAT 它通过聚类方法把空间里的点划分至 `nlist` 个单元，然后比较目标向量与所有单元中心的距离，选出 `nprobe` 个最近单元。然后比较这些被选中单元里的所有向量，得到最终的结果，极大地缩短了查询时间。
+IVF_FLAT 它通过聚类方法把空间里的点划分至 `nlist` 个单元，然后比较目标向量与所有单元中心的距离，选出 `nprobe` 个最近单元。然后比较这些被选中单元里的所有向量，得到最终的结果，极大地缩短了查询时间。 
 
 通过调整 `nprobe`，可以找到特定场景下查询准确性和查询速度之间的理想平衡。IVF_FLAT 性能测试结果表明，随着目标输入向量的数量（`nq`）和需要检索的集群数量（`nprobe`）的增加，查询时间也急剧增加。
 
@@ -178,15 +181,16 @@ IVF_FLAT 是最基础的 IVF 索引，存储在各个单元中的数据编码与
 
 - 建索引参数
 
-  | 参数    | 说明       | 取值范围   |
-  | ------- | ---------- | ---------- |
-  | `nlist` | 聚类单元数 | [1, 65536] |
+   | 参数   | 说明     | 取值范围     |
+   | ------- | -------- |----------- |
+   | `nlist` | 聚类单元数 |[1, 65536] |
+   
 
 - 查询参数
 
-  | 参数     | 说明           | 取值范围   |
-  | -------- | -------------- | ---------- |
-  | `nprobe` | 查询取的单元数 | [1, 65536] |
+   | 参数     | 说明        | 取值范围    |
+   | -------- | ----------- | ---------- |
+   | `nprobe` | 查询取的单元数 | [1, 65536] |
 
 #### IVF_SQ8
 
@@ -198,21 +202,22 @@ IVF_FLAT 是最基础的 IVF 索引，存储在各个单元中的数据编码与
 
 - 建索引参数
 
-  | 参数    | 说明       | 取值范围   |
-  | ------- | ---------- | ---------- |
-  | `nlist` | 聚类单元数 | [1, 65536] |
+   | 参数   | 说明     | 取值范围     |
+   | ------- | -------- |----------- |
+   | `nlist` | 聚类单元数 |[1, 65536] |
+   
 
 - 查询参数
 
-  | 参数     | 说明           | 取值范围   |
-  | -------- | -------------- | ---------- |
-  | `nprobe` | 查询取的单元数 | [1, nlist] |
-
+   | 参数     | 说明        | 取值范围    |
+   | -------- | ----------- | ---------- |
+   | `nprobe` | 查询取的单元数 | [1, nlist] |
+   
 #### IVF_PQ
 
 <a name="IVF_PQ"></a>
 
-`PQ`（Product Quantization，乘积量化）会将原来的高维向量空间均匀分解成 `m` 个低维向量空间的笛卡尔积，然后对分解得到的低维向量空间分别做向量量化。最终每条向量会存储在 `m` × `nbits` 个 bit 位里。乘积量化能将全样本的距离计算转化为到各低维空间聚类中心的距离计算，从而大大降低算法的时间复杂度。
+`PQ`（Product Quantization，乘积量化）会将原来的高维向量空间均匀分解成 `m` 个低维向量空间的笛卡尔积，然后对分解得到的低维向量空间分别做矢量量化。最终每条向量会存储在 `m` × `nbits` 个 bit 位里。乘积量化能将全样本的距离计算转化为到各低维空间聚类中心的距离计算，从而大大降低算法的时间复杂度。
 
 IVF_PQ 是先对向量做乘积量化，然后进行 IVF 索引聚类。其索引文件甚至可以比 IVF_SQ8 更小，不过同样地也会导致查询时的精度损失。
 
@@ -224,44 +229,47 @@ IVF_PQ 是先对向量做乘积量化，然后进行 IVF 索引聚类。其索�
 
 - 建索引参数
 
-  | 参数    | 说明                                | 取值范围          |
-  | ------- | ----------------------------------- | ----------------- |
-  | `nlist` | 聚类单元数　                        | [1, 65536]        |
-  | `m`     | 乘积量化因子个数                    | dim ≡ 0 (mod m)   |
-  | `nbits` | 分解后每个低维向量的存储位数 (可选) | [1, 16]（默认 8） |
+   | 参数   | 说明          | 取值范围     |
+   | --------| ------------- | ----------- |
+   | `nlist` | 聚类单元数　    | [1, 65536] |
+   | `m`     | 乘积量化因子个数 | dim ≡ 0 (mod m) |
+   | `nbits` | 分解后每个低维向量的存储位数 (可选) | [1, 16]（默认 8）|
 
 - 查询参数
 
-  | 参数     | 说明           | 取值范围   |
-  | -------- | -------------- | ---------- |
-  | `nprobe` | 查询取的单元数 | [1, nlist] |
+   | 参数   | 说明          | 取值范围     |
+   | -------- | ----------- | ---------- |
+   | `nprobe` | 查询取的单元数 | [1, nlist] |
+
 
 #### HNSW
-
 <a name="HNSW"></a>
 
 HNSW（Hierarchical Small World Graph）是一种基于图的索引算法。它会为一张图按规则建成多层导航图，并让越上层的图越稀疏，结点间的距离越远；越下层的图越稠密，结点间的距离越近。搜索时从最上层开始，找到本层距离目标最近的结点后进入下一层再查找。如此迭代，快速逼近目标位置。
-
+  
 为了提高性能，HNSW 限定了每层图上结点的最大度数 `M` 。此外，建索引时可以用 `efConstruction`，查询时可以用 `ef` 来指定搜索范围。
+
+
 
 - 建索引参数
 
-  | 参数             | 说明           | 取值范围 |
-  | ---------------- | -------------- | -------- |
-  | `M`              | 结点的最大度数 | [4, 64]  |
-  | `efConstruction` | 搜索范围       | [8, 512] |
+   | 参数            | 说明                | 取值范围   |
+   | ---------------- | ------------------ | --------- |
+   | `M`              | 结点的最大度数        | [4, 64]  |
+   | `efConstruction` | 搜索范围      | [8, 512] |
 
 - 查询参数
 
-  | 参数 | 说明     | 取值范围         |
-  | ---- | -------- | ---------------- |
-  | `ef` | 搜索范围 | [`top_k`, 32768] |
+   | 参数   | 说明            | 取值范围      |
+   | --------|--------------- | ------------ |
+   | `ef`    | 搜索范围  | [`top_k`, 32768] |
 
 #### IVF_HNSW
 
 <a name="IVF_HNSW"></a>
 
 IVF_HNSW is an indexing algorithm based on IVF_FLAT and HNSW. Using HNSW indexing algorithm as quantizer, this index type builds the multi-layer navigation structure with the `nlist` cluster units divided by IVF_FLAT indexing algorithm, so that it can approach the target position quickly.
+
 
 - Index building parameters
 
@@ -273,10 +281,10 @@ IVF_HNSW is an indexing algorithm based on IVF_FLAT and HNSW. Using HNSW indexin
 
 - Search parameters
 
-  | Parameter | Description              | Range            |
-  | --------- | ------------------------ | ---------------- |
-  | `nprobe`  | Number of units to query | [1, nlist]       |
-  | `ef`      | Search scope             | [`top_k`, 32768] |
+  | Parameter | Description                | Range            |
+  | --------- | -------------------------- | ---------------- |
+  | `nprobe`  | Number of units to query   | [1, nlist]       |
+  | `ef`      | Search scope               | [`top_k`, 32768] |
 
 #### RHNSW_FLAT
 
@@ -290,6 +298,7 @@ RHNSW_FLAT (Refined Hierarchical Small World Graph) is a refined indexing algori
   | ---------------- | -------------------------- | -------- |
   | `M`              | Maximum degree of the node | [4, 64]  |
   | `efConstruction` | Search scope               | [8, 512] |
+
 
 - Search parameters
 
@@ -309,6 +318,7 @@ RHNSW_SQ (Refined Hierarchical Small World Graph and Scalar Quantization) is a r
   | ---------------- | -------------------------- | -------- |
   | `M`              | Maximum degree of the node | [4, 64]  |
   | `efConstruction` | Search scope               | [8, 512] |
+
 
 - Search parameters
 
@@ -330,14 +340,15 @@ RHNSW_SQ (Refined Hierarchical Small World Graph and Product Quantization) is a 
   | `efConstruction` | Search scope                              | [8, 512]            |
   | `PQM`            | Number of factors of product quantization | dim ≡ 0 (mod `PQM`) |
 
+
 - Search parameters
 
   | Parameter | Description  | Range            |
   | --------- | ------------ | ---------------- |
   | `ef`      | Search scope | [`top_k`, 32768] |
 
-#### Annoy
 
+#### Annoy
 <a name="Annoy"></a>
 
 Annoy（Approximate Nearest Neighbors Oh Yeah）是一种用超平面把高维空间分割成多个子空间，并把这些子空间以树型结构存储的索引方式。
@@ -346,16 +357,16 @@ Annoy（Approximate Nearest Neighbors Oh Yeah）是一种用超平面把高维�
 
 - 建索引参数
 
-  | 参数      | 说明 　          | 取值范围  |
-  | --------- | ---------------- | --------- |
-  | `n_trees` | 空间划分的方法数 | [1, 1024] |
+   | 参数     | 说明     　    | 取值范围  |
+   | --------- |-------------- | -------- |
+   | `n_trees` | 空间划分的方法数 | [1, 1024] |
 
 - 查询参数
 
-  | 参数       | 说明                                   | 取值范围                        |
-  | ---------- | -------------------------------------- | ------------------------------- |
-  | `search_k` | 搜索的结点数。`-1` 表示用全数据量的 5% | {-1} ∪ [`top_k`, n × `n_trees`] |
-
+   | 参数      | 说明                              | 取值范围          |
+   | -----------|--------------------------------- | ---------------- |
+   | `search_k` | 搜索的结点数。`-1` 表示用全数据量的 5% | {-1} ∪ [`top_k`, n × `n_trees`] |
+   
 ## 常见问题
 
 <details>
