@@ -44,9 +44,9 @@ title: Set Limits on Collection Number
         ></path>
       </svg>
     </button></h2><pre><code translate="no" class="language-yaml">rootCoord:
-    maxGeneralCapacity: 1024
+    maxGeneralCapacity: 65536
 <button class="copy-code-btn"></button></code></pre>
-<p>The <code translate="no">maxGeneralCapacity</code> parameter sets the maximum number of collections that the current Milvus instance can hold. The default value is <code translate="no">1024</code>.</p>
+<p>The <code translate="no">maxGeneralCapacity</code> parameter sets the maximum number of collections that the current Milvus instance can hold. The default value is <code translate="no">65536</code>.</p>
 <h2 id="Calculating-the-number-of-collections" class="common-anchor-header">Calculating the number of collections<button data-href="#Calculating-the-number-of-collections" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
