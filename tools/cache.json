@@ -71,7 +71,6 @@
     "v2.4.x/site/en/getstarted/quickstart.md": "2024-08-30T02:00:01.998Z",
     "v2.4.x/site/en/home/home.md": "2024-08-30T02:00:02.013Z",
     "v2.4.x/site/en/reference/benchmark.md": "2024-08-30T02:00:02.064Z",
-    "v2.4.x/site/en/release_notes.md": "2024-08-30T02:00:02.435Z",
     "v2.4.x/site/en/getstarted/run-milvus-docker/install_standalone-docker-compose.md": "2024-08-30T02:00:15.613Z",
     "v2.4.x/site/en/getstarted/run-milvus-docker/install_standalone-docker.md": "2024-08-30T02:00:15.641Z",
     "v2.4.x/site/en/getstarted/run-milvus-docker/prerequisite-docker.md": "2024-08-30T02:00:15.692Z",
@@ -216,7 +215,8 @@
     "v2.4.x/site/en/userGuide/use-json-fields.md": "2024-09-04T05:53:07.135Z",
     "v2.4.x/site/en/menuStructure/en.json": "2024-09-09T08:38:56.720Z",
     "v2.4.x/site/en/userGuide/manage-collections.md": "2024-09-04T06:47:02.070Z",
-    "v2.4.x/site/en/getstarted/milvus_lite.md": "2024-09-06T02:54:42.351Z"
+    "v2.4.x/site/en/getstarted/milvus_lite.md": "2024-09-06T02:54:42.351Z",
+    "v2.4.x/site/en/release_notes.md": "2024-09-13T08:16:46.312Z"
   },
   "v2.3.x": {
     "v2.3.x/site/en/about/limitations.md": "2024-08-28T10:40:29.333Z",
