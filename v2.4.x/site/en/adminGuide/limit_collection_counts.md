@@ -27,10 +27,10 @@ Configuration varies with the way you install the Milvus instance.
 
 ```yaml
 rootCoord:
-    maxGeneralCapacity: 1024
+    maxGeneralCapacity: 65536
 ```
 
-The `maxGeneralCapacity` parameter sets the maximum number of collections that the current Milvus instance can hold. The default value is `1024`.
+The `maxGeneralCapacity` parameter sets the maximum number of collections that the current Milvus instance can hold. The default value is `65536`.
 
 ## Calculating the number of collections
 
