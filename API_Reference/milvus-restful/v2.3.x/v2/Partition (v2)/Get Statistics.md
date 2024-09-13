@@ -68,7 +68,7 @@ Possible response is similar to the following
 
 ## Response
 
-成功
+Possible response bodies are as follows:
 
 ### Response Bodies
 
