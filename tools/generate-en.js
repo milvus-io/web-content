@@ -13,11 +13,11 @@ import "dotenv/config";
 import {
 	traverseDirectory,
 	mkdir,
-	remarkToHtml,
 	remarkableToHtml,
 	generateMenuStructureLocales,
 	CACHE_FILE,
 } from "./utils.js";
+import { remarkToHtml } from "./remark.js";
 
 const VERSIONS = ["v2.4.x"];
 const sourceFilePath = "site/en";
