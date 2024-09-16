@@ -10,7 +10,7 @@ The delimiter of CSV file.
 
 The value must be a string of length 1, which defaults to ```","```.
 
-And the following strings are not allowed: ```"\0"```, ```"\n"```, ```"\r"```, ```"""```.
+And the following strings are not allowed: ```"\0"```, ```"\n"```, ```"\r"```, ```"""```, ```0xFFFD```.
 
 - **nullkey** (*string*)
 
