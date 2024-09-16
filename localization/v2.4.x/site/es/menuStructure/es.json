@@ -1412,7 +1412,7 @@
         ]
       },
       {
-        "label": "Otros",
+        "label": "Others",
         "id": "other-integrations",
         "order": 8,
         "children": [
