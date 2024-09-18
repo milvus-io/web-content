@@ -10,13 +10,13 @@ The prefix of an API endpoint should always be the URI of your Milvus instance, 
 
 The following is the API endpoint used to list collections in a Milvus cluster.
 
-```shell
-curl --request GET \
+export const code = `curl --request GET \
     --url "${MILVUS_HOST}:${MILVUS_PORT}/v1/vector/collections" \
     --header "Authorization: Bearer ${TOKEN}" \
     --header "accept: application/json" \
     --header "content-type: application/json"
-```
+`
+<CodeBlock children={code} />
 
 ## Authentication credentials
 
