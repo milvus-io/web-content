@@ -948,7 +948,7 @@ show index_progress -c (text) [-i (text)]
 
 ## show loading_progress
 
-Shows the progress of entity loading.
+Displays the progress of loading a collection.
 
 <h3 id="show-loading-progress">Syntax</h3>
  
