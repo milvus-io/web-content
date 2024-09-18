@@ -74,6 +74,31 @@ ANN Search: Milvus selects the entity with the highest similarity score, even if
 This prioritization can result in fewer unique results than the limit if your collection has many duplicate primary keys.</p></li>
 <li><p><strong>Insufficient Matches</strong>: Your search filtering expressions might be too strict, resulting in fewer entities meeting the similarity threshold. If the conditions set for the search are too restrictive, not enough entities will match, leading to fewer results than expected.</p></li>
 </ul>
+<h4 id="MilvusClientmilvusdemodb-gives-an-error-ModuleNotFoundError-No-module-named-milvuslite-What-causes-this-and-how-can-it-be-solved" class="common-anchor-header"><code translate="no">MilvusClient(&quot;milvus_demo.db&quot;) gives an error: ModuleNotFoundError: No module named 'milvus_lite'</code>. What causes this and how can it be solved?</h4><p>This error occurs when you attempt to use Milvus Lite on a Windows platform. Milvus Lite is primarily designed for Linux environments and may not have native support for Windows.</p>
+<p>The solution is to utilize a Linux environment:</p>
+<ul>
+<li>Use a Linux-based operating system or virtual machine to run Milvus Lite.</li>
+<li>This approach will ensure compatibility with the library’s dependencies and functionality.</li>
+</ul>
+<h4 id="What-are-the-length-exceeds-max-length-errors-in-Milvus-and-how-can-they-be-understood-and-addressed" class="common-anchor-header">What are the “length exceeds max length” errors in Milvus, and how can they be understood and addressed?</h4><p>“Length exceeds max length” errors in Milvus occur when the size of a data element surpasses the maximum allowable size for a collection or field. Here are some examples and explanations:</p>
+<ul>
+<li><p>JSON field error: <code translate="no">&lt;MilvusException: (code=1100, message=the length (398324) of json field (metadata) exceeds max length (65536): expected=valid length json string, actual=length exceeds max length: invalid parameter)&gt;</code></p></li>
+<li><p>String length error: <code translate="no">&lt;ParamError: (code=1, message=invalid input, length of string exceeds max length. length: 74238, max length: 60535)&gt;</code></p></li>
+<li><p>VarChar field error: <code translate="no">&lt;MilvusException: (code=1100, message=the length (60540) of 0th VarChar paragraph exceeds max length (0)%!(EXTRA int64=60535): invalid parameter)&gt;</code></p></li>
+</ul>
+<p>To understand and address these errors:</p>
+<ul>
+<li>Understand that <code translate="no">len(str)</code> in Python represents the number of characters, not the size in bytes.</li>
+<li>For string-based data types like VARCHAR and JSON, use <code translate="no">len(bytes(str, encoding='utf-8'))</code> to determine the actual size in bytes, which is what Milvus uses for &quot;max-length&quot;.</li>
+</ul>
+<p>Example in Python:</p>
+<pre><code translate="no" class="language-python"><span class="hljs-comment"># Python Example: result of len() str cannot be used as &quot;max-length&quot; in Milvus </span>
+<span class="hljs-meta">&gt;&gt;&gt; </span>s = <span class="hljs-string">&quot;你好，世界！&quot;</span>
+<span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-built_in">len</span>(s) <span class="hljs-comment"># Number of characters of s.</span>
+<span class="hljs-number">6</span>
+<span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-built_in">len</span>(<span class="hljs-built_in">bytes</span>(s, <span class="hljs-string">&quot;utf-8&quot;</span>)) <span class="hljs-comment"># Size in bytes of s, max-length in Milvus.</span>
+<span class="hljs-number">18</span>
+<button class="copy-code-btn"></button></code></pre>
 <h4 id="Still-have-questions" class="common-anchor-header">Still have questions?</h4><p>You can:</p>
 <ul>
 <li>Check out <a href="https://github.com/milvus-io/milvus/issues">Milvus</a> on GitHub. Feel free to ask questions, share ideas, and help others.</li>
