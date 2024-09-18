@@ -13,10 +13,11 @@ The following is the API endpoint used to list collections in a Milvus cluster.
 export const code1 = `export MILVUS_URI="http://localhost:19530"
 
 curl --request GET \
-    --url '${MILVUS_URI}/v1/vector/collections' \
-    --header 'accept: application/json' \
-    --header 'content-type: application/json'
+ --url '${MILVUS_URI}/v1/vector/collections' \
+ --header 'accept: application/json' \
+ --header 'content-type: application/json'
 `
+
 <CodeBlock children={code1} />
 
 ## Authentication credentials
@@ -27,11 +28,12 @@ export const code2 = `export MILVUS_URI="http://localhost:19530"
 export TOKEN="root:milvus"
 
 curl --request GET \
-    --url '${MILVUS_URI}/v1/vector/collections' \
-    --header "Authorization: Bearer ${TOKEN}" \
-    --header 'accept: application/json' \
-    --header 'content-type: application/json'
+ --url '${MILVUS_URI}/v1/vector/collections' \
+ --header "Authorization: Bearer ${TOKEN}" \
+ --header 'accept: application/json' \
+ --header 'content-type: application/json'
 `
+
 <CodeBlock children={code2} />
 
 ## API endpoint versioning
