@@ -1020,7 +1020,7 @@
             "children": []
           },
           {
-            "label": "RBAC einschalten",
+            "label": "RBAC aktivieren",
             "id": "rbac.md",
             "order": 1,
             "isMenu": true,
@@ -1263,6 +1263,12 @@
             "id": "llama_agents_metadata.md",
             "order": 1,
             "children": []
+          },
+          {
+            "label": "Kotaemon",
+            "id": "kotaemon_with_milvus.md",
+            "order": 2,
+            "children": []
           }
         ]
       },
@@ -1460,6 +1466,12 @@
         "label": "Multimodale RAG",
         "id": "multimodal_rag_with_milvus.md",
         "order": 4,
+        "children": []
+      },
+      {
+        "label": "RAG mit Milvus abbilden",
+        "id": "graph_rag_with_milvus.md",
+        "order": 5,
         "children": []
       },
       {

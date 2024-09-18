@@ -717,7 +717,7 @@
                 "children": []
               },
               {
-                "label": "Despliegue en GCP",
+                "label": "Implantación en GCP",
                 "id": "gcp.md",
                 "order": 2,
                 "children": []
@@ -1263,6 +1263,12 @@
             "id": "llama_agents_metadata.md",
             "order": 1,
             "children": []
+          },
+          {
+            "label": "Kotaemon",
+            "id": "kotaemon_with_milvus.md",
+            "order": 2,
+            "children": []
           }
         ]
       },
@@ -1412,7 +1418,7 @@
         ]
       },
       {
-        "label": "Others",
+        "label": "Otros",
         "id": "other-integrations",
         "order": 8,
         "children": [
@@ -1460,6 +1466,12 @@
         "label": "RAG multimodal",
         "id": "multimodal_rag_with_milvus.md",
         "order": 4,
+        "children": []
+      },
+      {
+        "label": "Gráfico RAG con Milvus",
+        "id": "graph_rag_with_milvus.md",
+        "order": 5,
         "children": []
       },
       {
