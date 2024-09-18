@@ -1,0 +1,20 @@
+---
+displayed_sidebar: restfulSidebar
+sidebar_positition: 63
+slug: /restful/Drop (v2)
+title: "Drop Alias | RESTful"
+description: "This operation drops a specified alias.  | RESTful"
+hide_table_of_contents: true
+sidebar_label: "Drop Alias"
+sidebar_custom_props: { badges: ['post']}
+---
+
+# Drop Alias
+
+import RestSpecs from '@site/src/components/RestSpecs';
+
+<RestSpecs specs={specs} endpoint={endpoint} method={method} target="zilliz" lang="zh-CN" />
+
+export const specs = {"summary":"Drop Alias","deprecated":false,"description":"This operation drops a specified alias. ","x-i18n":{"zh-CN":{"summary":"删除 Alias","description":"本接口可删除指定的 Collection 别名。"}},"tags":["Alias Operations (V2)"],"parameters":[{"name":"Request-Timeout","in":"header","description":"The timeout duration for this operation in seconds. Setting this to None indicates that this operation timeouts when any response arrives or any error occurs.","x-i18n":{"zh-CN":{"description":"本操作的超时时间。设置为 None 表示本操作在任何响应或错误发生时超时。"}},"required":false,"example":0,"schema":{"type":"integer","minimum":0,"maximum":3600,"exclusiveMinimum":true},"x-include-target":["milvus"]},{"name":"Authorization","in":"header","description":"The authentication token should be <include target=\"zilliz\">an API key with appropriate privileges or </include>a pair of colon-joined username and password, like `username:password`.","required":true,"example":"Bearer {{TOKEN}}","schema":{"type":"string"},"x-i18n":{"zh-CN":{"description":"认证令牌，应为<include target=\"zilliz\">具备适当权限的 API 密钥或</include>用冒号分隔的用户名和密码，如 `username:password`。"}}}],"requestBody":{"content":{"application/json":{"schema":{"type":"object","properties":{"dbName":{"type":"string","description":"The name of the database to which the collection belongs.","x-i18n":{"zh-CN":{"description":"数据库名称。"}},"x-include-target":["milvus"]},"collectionName":{"type":"string","description":"The name of the collection to which the alias is assigned to.","x-i18n":{"zh-CN":{"description":"分配了指定别名的 Collection 名称。"}}},"aliasName":{"type":"string","description":"The alias to drop.\nWhen dropping an alias, you do not need to provide the collection name because one alias can only be assigned to exactly one collection. Therefore, the server knows which collection the specified alias belongs to.","x-i18n":{"zh-CN":{"description":"待删除的 Collection 别名。\n 删除别名时无需提供 Collection 名称，因为一个别名只能分配给一个 Collection。因此，服务器可以确定指定的别名属于哪个 Collection。"}}}},"required":["aliasName"]},"example":{"aliasName":"bob"}}}},"responses":{"200":{"description":"Return an empty object or an error message.","content":{"application/json":{"schema":{"anyOf":[{"x-tab-label":"success","description":"A success response","x-i18n":{"zh-CN":{"description":"成功响应。"}},"x-i18n-langs":["zh-CN"],"type":"object","properties":{"code":{"description":"Response code.","x-i18n":{"zh-CN":{"description":"响应码。"}},"type":"integer","example":0},"data":{"type":"object","properties":{},"description":"Response payload which is an empty object.","x-i18n":{"zh-CN":{"description":"响应载荷。为空对象。"}}}}},{"x-tab-label":"failure","x-i18n":{"zh-CN":{"description":"返回错误消息。"}},"x-i18n-langs":["zh-CN"],"type":"object","properties":{"code":{"type":"integer","description":"Response code.","x-i18n":{"zh-CN":{"description":"响应码。"}}},"message":{"type":"string","description":"Error message.","x-i18n":{"zh-CN":{"description":"错误描述。"}}}}}]},"examples":{"1":{"summary":"success","x-target-response":"OPTION 1","value":{"code":0,"data":{}}},"2":{"summary":"failure","x-target-response":"OPTION 2","value":{"code":0,"message":"The token is illegal."}}}}}}},"security":[]}
+export const endpoint = "/v2/vectordb/aliases/drop"
+export const method = "post"

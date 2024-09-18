@@ -1,0 +1,20 @@
+---
+displayed_sidebar: restfulSidebar
+sidebar_positition: 37
+slug: /restful/Describe (v2)
+title: "Describe Alias | RESTful"
+description: "This operation describes the details of a specific alias. | RESTful"
+hide_table_of_contents: true
+sidebar_label: "Describe Alias"
+sidebar_custom_props: { badges: ['post']}
+---
+
+# Describe Alias
+
+import RestSpecs from '@site/src/components/RestSpecs';
+
+<RestSpecs specs={specs} endpoint={endpoint} method={method} target="zilliz" lang="zh-CN" />
+
+export const specs = {"summary":"Describe Alias","deprecated":false,"description":"This operation describes the details of a specific alias.","x-i18n":{"zh-CN":{"summary":"查看 Alias 详情","description":"本接口可列出指定 Collection 别名的详细信息。"}},"tags":["Alias Operations (V2)"],"parameters":[{"name":"Request-Timeout","in":"header","description":"The timeout duration for this operation. Setting this to None indicates that this operation times out when any response returns or an error occurs.\n","required":false,"example":0,"schema":{"type":"integer"},"x-i18n":{"zh-CN":{"description":"操作超时时长。设置为 None 表示操作在任何响应返回或任何错误发生时超时。"}},"x-include-target":["milvus"]},{"name":"Authorization","in":"header","description":"The authentication token should be <include target=\"zilliz\">an API key with appropriate privileges or </include>a pair of colon-joined username and password, like `username:password`.","required":true,"example":"Bearer {{TOKEN}}","schema":{"type":"string"},"x-i18n":{"zh-CN":{"description":"认证令牌，应为<include target=\"zilliz\">具备适当权限的 API 密钥或</include>用冒号分隔的用户名和密码，如 `username:password`。"}}}],"requestBody":{"content":{"application/json":{"schema":{"type":"object","properties":{"dbName":{"type":"string","description":"The name of the database to which the alias belongs.","x-i18n":{"zh-CN":{"description":"当前别名所属的数据库名称。"}},"x-include-target":["milvus"]},"aliasName":{"type":"string","description":"The name of the alias whose details are to be listed.","x-i18n":{"zh-CN":{"description":"目标别名。"}}}},"required":["aliasName"]},"example":{"aliasName":"alice"}}}},"responses":{"200":{"description":"An alias object that contains the detailed description of an alias.","x-i18n":{"zh-CN":{"description":"返回别名的详细信息。"}},"content":{"application/json":{"schema":{"anyOf":[{"x-tab-label":"success","type":"object","properties":{"code":{"description":"Response code.","x-i18n":{"zh-CN":{"description":"响应码。"}},"type":"integer","example":0},"data":{"type":"object","description":"Response payload which carries the detailed description of an alias.","x-i18n":{"zh-CN":{"description":"响应负载，包含了指定 Collection 别名的详细信息。"}},"properties":{"dbName":{"type":"string","description":"The name of the database to which the collection belongs.","x-i18n":{"zh-CN":{"description":"当前别名对应的 Collection 所属的数据库名称。"}},"x-include-target":["milvus"]},"collectionName":{"type":"string","description":"the name of the collection to which an alias belongs.","x-i18n":{"zh-CN":{"description":"当前别名所属的 Collection 名称。"}}},"aliasName":{"type":"string","description":"The name of the alias.","x-i18n":{"zh-CN":{"description":"当前别名。"}}}}}}},{"x-tab-label":"failure","description":"Returns an error message.","x-i18n":{"zh-CN":{"description":"返回错误消息。"}},"x-i18n-langs":["zh-CN"],"type":"object","properties":{"code":{"type":"integer","description":"Response code.","x-i18n":{"zh-CN":{"description":"响应码。"}}},"message":{"type":"string","description":"Error message.","x-i18n":{"zh-CN":{"description":"错误描述。"}}}}}]},"examples":{"1":{"summary":"success","x-target-response":"OPTION 1","value":{"code":0,"data":{"aliasName":"alice","collectionName":"quick_setup","dbName":"default"}}},"2":{"summary":"failure","x-target-response":"OPTION 2","value":{"code":0,"message":"The token is illegal."}}}}}}},"security":[]}
+export const endpoint = "/v2/vectordb/aliases/describe"
+export const method = "post"

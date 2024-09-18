@@ -1,0 +1,20 @@
+---
+displayed_sidebar: restfulSidebar
+sidebar_positition: 45
+slug: /restful/Lists (v2)
+title: "List Users | RESTful"
+description: "This operation lists the information of all existing users. | RESTful"
+hide_table_of_contents: true
+sidebar_label: "List Users"
+sidebar_custom_props: { badges: ['post']}
+---
+
+# List Users
+
+import RestSpecs from '@site/src/components/RestSpecs';
+
+<RestSpecs specs={specs} endpoint={endpoint} method={method} target="zilliz" lang="zh-CN" />
+
+export const specs = {"summary":"List Users","deprecated":false,"description":"This operation lists the information of all existing users.","x-i18n":{"zh-CN":{"summary":"查看用户列表","description":"本接口可列出所有已创建用户的相关信息。"}},"tags":["User Operations (V2)"],"parameters":[{"name":"Request-Timeout","in":"header","description":"The timeout duration for this operation.\nSetting this to None indicates that this operation timeouts when any response arrives or any error occurs.","x-i18n":{"zh-CN":{"description":"当前操作的超时时间。\n设置为 None 表示本操作在任何响应或错误发生时超时。"}},"required":false,"example":0,"schema":{"type":"integer","minimum":0,"maximum":3600,"exclusiveMinimum":true},"x-include-target":["milvus"]},{"name":"Authorization","in":"header","description":"The authentication token should be <include target=\"zilliz\">an API key with appropriate privileges or </include>a pair of colon-joined username and password, like `username:password`.","x-i18n":{"zh-CN":{"description":"认证令牌。应为<include target=\"zilliz\">具备适当权限的 API 密钥或</include>用冒号分隔的用户名和密码，如 `username:password`。"}},"required":true,"example":"Bearer {{TOKEN}}","schema":{"type":"string"}}],"requestBody":{"content":{"application/json":{"schema":{"type":"object","properties":{},"description":"An empty object.","x-i18n":{"zh-CN":{"description":"空对象。"}}},"example":{}}}},"responses":{"200":{"description":"An object that contains contains the user information.","x-i18n":{"zh-CN":{"description":"返回包含所有用户名称的数组。"}},"content":{"application/json":{"schema":{"oneOf":[{"x-tab-label":"success","type":"object","properties":{"code":{"description":"Response code.","x-i18n":{"zh-CN":{"description":"响应码。"}},"type":"integer","example":0},"data":{"type":"array","items":{"type":"string","description":"A username.","x-i18n":{"zh-CN":{"description":"用户名。"}}},"description":"Response payload which is a list of usernames.","x-i18n":{"zh-CN":{"description":"响应载荷，为所有用户名列表。"}}}},"description":"A success response.","x-i18n":{"zh-CN":{"description":"成功响应。"}}},{"x-tab-label":"failure","description":"A failure response.","x-i18n":{"zh-CN":{"description":"失败响应。"}},"x-i18n-langs":["zh-CN"],"type":"object","properties":{"code":{"type":"integer","description":"Response code.","x-i18n":{"zh-CN":{"description":"响应码。"}}},"message":{"type":"string","description":"Error message.","x-i18n":{"zh-CN":{"description":"错误描述。"}}}}}]},"examples":{"1":{"summary":"success","x-target-response":"OPTION 1","x-include-target":["milvus"],"value":{"code":0,"data":["root"]}},"2":{"summary":"success","x-target-response":"OPTION 1","x-include-target":["zilliz"],"value":{"code":0,"data":["db_admin"]}},"3":{"summary":"failure","x-target-response":"OPTION 2","value":{"code":0,"message":"The token is illegal."}}}}}}},"security":[]}
+export const endpoint = "/v2/vectordb/users/list"
+export const method = "post"

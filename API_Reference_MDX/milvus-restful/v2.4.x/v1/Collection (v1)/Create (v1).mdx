@@ -1,0 +1,20 @@
+---
+displayed_sidebar: restfulSidebar
+sidebar_positition: 13
+slug: /restful/Create (v1)
+title: "Create Collection | RESTful"
+description: "Creates a collection in a cluster. | RESTful"
+hide_table_of_contents: true
+sidebar_label: "Create Collection"
+sidebar_custom_props: { badges: ['post']}
+---
+
+# Create Collection
+
+import RestSpecs from '@site/src/components/RestSpecs';
+
+<RestSpecs specs={specs} endpoint={endpoint} method={method} target="zilliz" lang="zh-CN" />
+
+export const specs = {"summary":"Create Collection","deprecated":false,"description":"Creates a collection in a cluster.","x-i18n":{"zh-CN":{"summary":"创建 Collection","description":"在集群中创建 Collection。"}},"tags":["Collection Operations"],"parameters":[{"name":"Authorization","in":"header","description":"The authentication token should be <include target=\"zilliz\">an API key with appropriate privileges or </include>a pair of colon-joined username and password, like `username:password`.","required":true,"example":"Bearer {{TOKEN}}","schema":{"type":"string"},"x-i18n":{"zh-CN":{"description":"认证令牌，应为<include target=\"zilliz\">具备适当权限的 API 密钥或</include>用冒号分隔的用户名和密码，如 `username:password`。"}}}],"requestBody":{"content":{"application/json":{"schema":{"type":"object","properties":{"dbName":{"type":"string","description":"The name of the database. <include target=\"zilliz\">This parameter applies only to dedicated clusters.</include>","x-i18n":{"zh-CN":{"description":"数据库名称。"}},"x-include-target":["milvus"]},"collectionName":{"type":"string","description":"The name of the collection to create.","x-i18n":{"zh-CN":{"description":"Collection 名称。"}}},"dimension":{"type":"integer","description":"The number of dimensions for the vector field of the collection. ","x-i18n":{"zh-CN":{"description":"Vector 字段的维度数。"}},"minimum":1,"maximum":32768},"metricType":{"type":"string","description":"The distance metric used for the collection.","x-i18n":{"zh-CN":{"description":"用于 Collection 的距离度量方式。"}},"default":"COSINE","enum":["L2","IP","COSINE"]},"primaryField":{"type":"string","description":"The primary key field name.","x-i18n":{"zh-CN":{"description":"主键字段名称。"}},"default":"id"},"vectorField":{"type":"string","description":"The vector field.","default":"vector","x-i18n":{"zh-CN":{"description":"向量字段名称。"}}},"description":{"type":"string","description":"The description of the collection","x-i18n":{"zh-CN":{"description":"Collection 描述。"}}}},"required":["collectionName","dimension"]},"examples":{"1":{"summary":"Option 1","value":{"collectionName":"medium_articles","dimension":256,"metricType":"COSINE","primaryField":"id","vectorField":"vector"}}}}}},"responses":{"200":{"description":"Returns an empty object.","x-i18n":{"zh-CN":{"description":"返回空对象。"}},"content":{"application/json":{"schema":{"oneOf":[{"x-tab-label":"success","type":"object","properties":{"code":{"type":"integer","description":"Response code.","x-i18n":{"zh-CN":{"description":"响应码。"}}},"data":{"type":"object","description":"Response payload which is an empty object.","x-i18n":{"zh-CN":{"description":"响应负载，为空对象。"}},"properties":{}}}},{"x-tab-label":"failure","description":"Returns an error message.","x-i18n":{"zh-CN":{"description":"返回错误消息。"}},"x-i18n-langs":["zh-CN"],"type":"object","properties":{"code":{"type":"integer","description":"Response code.","x-i18n":{"zh-CN":{"description":"响应码。"}}},"message":{"type":"string","description":"Error message.","x-i18n":{"zh-CN":{"description":"错误描述。"}}}}}]},"examples":{"1":{"summary":"success","x-target-response":"OPTION 1","value":{"code":200,"data":{}}},"2":{"summary":"failure","x-target-response":"OPTION 2","value":{"code":200,"message":"The token is illegal."}}}}}}},"security":[]}
+export const endpoint = "/v1/vector/collections/create"
+export const method = "post"

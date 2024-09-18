@@ -1,0 +1,20 @@
+---
+displayed_sidebar: restfulSidebar
+sidebar_positition: 83
+slug: /restful/Get Stats (v2)
+title: "Get Collection Stats | RESTful"
+description: "This operation gets the number of entities in a collection. | RESTful"
+hide_table_of_contents: true
+sidebar_label: "Get Collection Stats"
+sidebar_custom_props: { badges: ['post']}
+---
+
+# Get Collection Stats
+
+import RestSpecs from '@site/src/components/RestSpecs';
+
+<RestSpecs specs={specs} endpoint={endpoint} method={method} target="zilliz" lang="zh-CN" />
+
+export const specs = {"summary":"Get Collection Stats","deprecated":false,"description":"This operation gets the number of entities in a collection.","x-i18n":{"zh-CN":{"summary":"获取 Collection 统计信息","description":"本接口可以获取 Collection 中的 Entity 数量。"}},"tags":["Collection Operations (V2)"],"parameters":[{"name":"Request-Timeout","in":"header","description":"The timeout duration for this operation in seconds. Setting this to None indicates that this operation timeouts when any response arrives or any error occurs.","x-i18n":{"zh-CN":{"description":"当前操作的超时时间。设置为 None 表示本操作在任何响应或错误发生时超时。"}},"required":false,"example":0,"schema":{"type":"integer","minimum":0,"maximum":3600,"exclusiveMinimum":true},"x-include-target":["milvus"]},{"name":"Authorization","in":"header","description":"The authentication token should be <include target=\"zilliz\">an API key with appropriate privileges or </include>a pair of colon-joined username and password, like `username:password`.","required":true,"example":"Bearer {{TOKEN}}","schema":{"type":"string"},"x-i18n":{"zh-CN":{"description":"认证令牌，应为<include target=\"zilliz\">具备适当权限的 API 密钥或</include>用冒号分隔的用户名和密码，如 `username:password`。"}}}],"requestBody":{"content":{"application/json":{"schema":{"type":"object","properties":{"dbName":{"type":"string","description":"The name of the database which the collection belongs to. Setting this to a non-existing database results in an error.","x-i18n":{"zh-CN":{"description":"数据库名称。"}},"x-include-target":["milvus"]},"collectionName":{"type":"string","description":"The name of the collection to check.\nSetting this to a non-existing collection results in an error.","x-i18n":{"zh-CN":{"description":"Collection 名称。"}}}},"required":["collectionName"]},"example":{"collectionName":"quick_setup"}}}},"responses":{"200":{"description":"The number of entities in a collection.","x-i18n":{"zh-CN":{"description":"指定 Collection 中的 Entity 数量。"}},"content":{"application/json":{"schema":{"anyOf":[{"x-tab-label":"success","type":"object","properties":{"code":{"description":"Response code.","x-i18n":{"zh-CN":{"description":"响应码。"}},"type":"integer","example":0},"data":{"type":"object","description":"Statistics of the specified collection","x-i18n":{"zh-CN":{"description":"指定 Collection 的统计信息。"}},"properties":{"rowCount":{"type":"integer","description":"The number of entities.","x-i18n":{"zh-CN":{"description":"Entity 数量。"}}}}}}},{"x-tab-label":"failure","description":"Returns an error message.","x-i18n":{"zh-CN":{"description":"返回错误消息。"}},"x-i18n-langs":["zh-CN"],"type":"object","properties":{"code":{"type":"integer","description":"Response code.","x-i18n":{"zh-CN":{"description":"响应码。"}}},"message":{"type":"string","description":"Error message.","x-i18n":{"zh-CN":{"description":"错误描述。"}}}}}]},"examples":{"1":{"summary":"success","x-target-response":"OPTION 1","value":{"code":0,"data":{"rowCount":0}}},"2":{"summary":"failure","x-target-response":"OPTION 2","value":{"code":0,"message":"The token is illegal."}}}}}}},"security":[]}
+export const endpoint = "/v2/vectordb/collections/get_stats"
+export const method = "post"

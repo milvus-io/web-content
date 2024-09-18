@@ -1,0 +1,20 @@
+---
+displayed_sidebar: restfulSidebar
+sidebar_positition: 61
+slug: /restful/Revoke Privilege (v2)
+title: "Revoke Privilege From Role | RESTful"
+description: "This operation revokes a privilege granted to the current role. | RESTful"
+hide_table_of_contents: true
+sidebar_label: "Revoke Privilege From Role"
+sidebar_custom_props: { badges: ['post']}
+---
+
+# Revoke Privilege From Role
+
+import RestSpecs from '@site/src/components/RestSpecs';
+
+<RestSpecs specs={specs} endpoint={endpoint} method={method} target="zilliz" lang="zh-CN" />
+
+export const specs = {"summary":"Revoke Privilege From Role","deprecated":false,"description":"This operation revokes a privilege granted to the current role.","x-i18n":{"zh-CN":{"summary":"撤销角色权限","description":"本操作可撤销当前角色所授予的权限。"}},"x-include-target":["milvus"],"tags":["Role Operations (V2)"],"parameters":[{"name":"Request-Timeout","in":"header","description":"The timeout duration for this operation.\nSetting this to None indicates that this operation timeouts when any response arrives or any error occurs.","x-i18n":{"zh-CN":{"description":"当前操作的超时时间。\n设置为 None 表示本操作在任何响应或错误发生时超时。"}},"required":false,"example":0,"schema":{"type":"integer"},"x-include-target":["milvus"]},{"name":"Authorization","in":"header","description":"The authentication token should be <include target=\"zilliz\">an API key with appropriate privileges or </include>a pair of colon-joined username and password, like `username:password`.","x-i18n":{"zh-CN":{"description":"认证令牌。应为<include target=\"zilliz\">具备适当权限的 API 密钥或</include>用冒号分隔的用户名和密码，如 `username:password`。"}},"required":true,"example":"Bearer {{TOKEN}}","schema":{"type":"string"}}],"requestBody":{"content":{"application/json":{"schema":{"type":"object","properties":{"roleName":{"type":"string","description":"The name of the role.","x-i18n":{"zh-CN":{"description":"角色名称。"}}},"objectType":{"type":"string","description":"The type of the object to which the specified privilege belongs.","x-i18n":{"zh-CN":{"description":"指定权限所属的对象类型。"}}},"objectName":{"type":"string","description":"The name of the object to which the specified privilege belongs.","x-i18n":{"zh-CN":{"description":"指定权限所属的对象名称。"}}},"privilege":{"type":"string","description":"The privilege that is revoked from the role.","x-i18n":{"zh-CN":{"description":"当前角色需撤销的权限名称。"}}}},"required":["objectType","privilege","objectName","roleName"],"x-i18n-langs":["zh-CN"]}}}},"responses":{"200":{"description":"Return an empty object or an error message.","content":{"application/json":{"schema":{"oneOf":[{"x-tab-label":"success","description":"A success response","x-i18n":{"zh-CN":{"description":"成功响应。"}},"x-i18n-langs":["zh-CN"],"type":"object","properties":{"code":{"description":"Response code.","x-i18n":{"zh-CN":{"description":"响应码。"}},"type":"integer","example":0},"data":{"type":"object","properties":{},"description":"Response payload which is an empty object.","x-i18n":{"zh-CN":{"description":"响应载荷。为空对象。"}}}}},{"x-tab-label":"failure","description":"A failure response.","x-i18n":{"zh-CN":{"description":"失败响应。"}},"x-i18n-langs":["zh-CN"],"type":"object","properties":{"code":{"type":"integer","description":"Response code.","x-i18n":{"zh-CN":{"description":"响应码。"}}},"message":{"type":"string","description":"Error message.","x-i18n":{"zh-CN":{"description":"错误描述。"}}}}}]},"examples":{"1":{"summary":"success","x-target-response":"OPTION 1","value":{"code":0,"data":{}}},"2":{"summary":"failure","x-target-response":"OPTION 2","value":{"code":0,"message":"The token is illegal."}}}}}}},"security":[]}
+export const endpoint = "/v2/vectordb/roles/revoke_privilege"
+export const method = "post"

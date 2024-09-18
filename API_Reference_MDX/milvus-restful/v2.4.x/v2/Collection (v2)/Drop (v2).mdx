@@ -1,0 +1,20 @@
+---
+displayed_sidebar: restfulSidebar
+sidebar_positition: 62
+slug: /restful/Drop (v2)
+title: "Drop Collection | RESTful"
+description: "This operation drops the current collection and all data within the collection. | RESTful"
+hide_table_of_contents: true
+sidebar_label: "Drop Collection"
+sidebar_custom_props: { badges: ['post']}
+---
+
+# Drop Collection
+
+import RestSpecs from '@site/src/components/RestSpecs';
+
+<RestSpecs specs={specs} endpoint={endpoint} method={method} target="zilliz" lang="zh-CN" />
+
+export const specs = {"summary":"Drop Collection","deprecated":false,"description":"This operation drops the current collection and all data within the collection.","x-i18n":{"zh-CN":{"summary":"删除 Collection","description":"本接口可删除指定 Collection 及存放其中的所有数据。"}},"tags":["Collection Operations (V2)"],"parameters":[{"name":"Request-Timeout","in":"header","description":"The timeout duration for this operation. \nSetting this to **None** indicates that this operation timeouts when any response arrives or any error occurs.","x-i18n":{"zh-CN":{"description":"当前操作的超时时间。\n设置为 **None** 表示本操作在任何响应或错误发生时超时。"}},"required":false,"example":0,"schema":{"type":"integer"},"x-include-target":["milvus"]},{"name":"Authorization","in":"header","description":"The authentication token should be <include target=\"zilliz\">an API key with appropriate privileges or </include>a pair of colon-joined username and password, like `username:password`.","required":true,"example":"Bearer {{TOKEN}}","schema":{"type":"string"},"x-i18n":{"zh-CN":{"description":"认证令牌，应为<include target=\"zilliz\">具备适当权限的 API 密钥或</include>用冒号分隔的用户名和密码，如 `username:password`。"}}}],"requestBody":{"content":{"application/json":{"schema":{"type":"object","properties":{"dbName":{"type":"string","description":"The name of the database that to which the collection belongs .\nSetting this to a non-existing database results in an error.","x-i18n":{"zh-CN":{"description":"Collection 所属的数据库名称。设置为不存在的数据库将导致错误。"}},"x-include-target":["milvus"]},"collectionName":{"type":"string","description":"The name of the target collection.\nSetting this to a non-existing collection results in an error.","x-i18n":{"zh-CN":{"description":"目标 Collection 的名称。设置为不存在的 Collection 将导致错误。"}}}},"required":["collectionName"],"x-i18n-langs":["zh-CN"]},"example":{"collectionName":"my_collection"}}}},"responses":{"200":{"description":"None","content":{"application/json":{"schema":{"anyOf":[{"x-tab-label":"success","type":"object","properties":{"code":{"type":"integer","description":"Response code.","x-i18n":{"zh-CN":{"description":"响应码。"}}},"data":{"type":"object","description":"Response payload which is an empty object.","x-i18n":{"zh-CN":{"description":"响应负载，为空对象。"}},"properties":{}}}},{"x-tab-label":"failure","description":"Returns an error message.","x-i18n":{"zh-CN":{"description":"返回错误消息。"}},"x-i18n-langs":["zh-CN"],"type":"object","properties":{"code":{"type":"integer","description":"Response code.","x-i18n":{"zh-CN":{"description":"响应码。"}}},"message":{"type":"string","description":"Error message.","x-i18n":{"zh-CN":{"description":"错误描述。"}}}}}]},"examples":{"1":{"summary":"success","x-target-response":"OPTION 1","value":{"code":0,"data":{}}},"2":{"summary":"failure","x-target-response":"OPTION 2","value":{"code":0,"message":"The token is illegal."}}}}}}},"security":[{"bearer":[]}]}
+export const endpoint = "/v2/vectordb/collections/drop"
+export const method = "post"

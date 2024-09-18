@@ -1,0 +1,20 @@
+---
+displayed_sidebar: restfulSidebar
+sidebar_positition: 65
+slug: /restful/Has (v2)
+title: "Has Partition | RESTful"
+description: "This operation checks whether a partition exists. | RESTful"
+hide_table_of_contents: true
+sidebar_label: "Has Partition"
+sidebar_custom_props: { badges: ['post']}
+---
+
+# Has Partition
+
+import RestSpecs from '@site/src/components/RestSpecs';
+
+<RestSpecs specs={specs} endpoint={endpoint} method={method} target="zilliz" lang="zh-CN" />
+
+export const specs = {"summary":"Has Partition","deprecated":false,"description":"This operation checks whether a partition exists.","x-i18n":{"zh-CN":{"summary":"查看 Partition 是否存在","description":"本接口可检查指定的 Partition 是否存在。"}},"tags":["Partition Operations (V2)"],"parameters":[{"name":"Request-Timeout","in":"header","description":"The timeout duration for this operation.\nSetting this to None indicates that this operation timeouts when any response arrives or any error occurs.","x-i18n":{"zh-CN":{"description":"本操作的超时时间。\n设置为 None 表示本操作在任何响应或错误发生时超时。"}},"required":false,"example":0,"schema":{"type":"integer","minimum":0,"maximum":3600,"exclusiveMinimum":true},"x-include-target":["milvus"]},{"name":"Authorization","in":"header","description":"The authentication token should be <include target=\"zilliz\">an API key with appropriate privileges or </include>a pair of colon-joined username and password, like `username:password`.","required":true,"example":"Bearer {{TOKEN}}","schema":{"type":"string"},"x-i18n":{"zh-CN":{"description":"认证令牌，应为<include target=\"zilliz\">具备适当权限的 API 密钥或</include>用冒号分隔的用户名和密码，如 `username:password`。"}}}],"requestBody":{"content":{"application/json":{"schema":{"type":"object","properties":{"dbName":{"type":"string","description":"The name of an existing database.","x-i18n":{"zh-CN":{"description":"数据库名称。"}},"default":"_default","x-include-target":["milvus"]},"collectionName":{"type":"string","description":"The name of an existing collection.","x-i18n":{"zh-CN":{"description":"Collection 名称。"}}},"partitionName":{"type":"string","description":"The name of the partition to test.","x-i18n":{"zh-CN":{"description":"待检查的 Partition 名称。"}}}},"required":["partitionName","collectionName"]},"example":{"partitionName":"january","collectionName":"test_collection"}}}},"responses":{"200":{"description":"A boolean value indicating whether the specified partition exists.","x-i18n":{"zh-CN":{"description":"返回一个表示指定 Partition 是否存在的布尔值。"}},"content":{"application/json":{"schema":{"anyOf":[{"x-tab-label":"success","type":"object","properties":{"code":{"description":"Response code.","x-i18n":{"zh-CN":{"description":"响应码。"}},"type":"integer","example":0},"data":{"type":"object","description":"Response payload which carries a boolean value.","x-i18n":{"zh-CN":{"description":"响应负载，携带表示指定 Partition 是否存在的布尔值。"}},"properties":{"has":{"type":"boolean","description":"A boolean value indicates whether the specified partition exists.","x-i18n":{"zh-CN":{"description":"表示指定 Partition 是否存在的布尔值。"}}}}}}},{"x-tab-label":"failure","description":"Returns an error message.","x-i18n":{"zh-CN":{"description":"返回错误消息。"}},"x-i18n-langs":["zh-CN"],"type":"object","properties":{"code":{"type":"integer","description":"Response code.","x-i18n":{"zh-CN":{"description":"响应码。"}}},"message":{"type":"string","description":"Error message.","x-i18n":{"zh-CN":{"description":"错误描述。"}}}}}]},"examples":{"1":{"summary":"success","x-target-response":"OPTION 1","value":{"code":0,"data":{"has":true}}},"2":{"summary":"failure","x-target-response":"OPTION 2","value":{"code":0,"message":"The token is illegal."}}}}}}},"security":[]}
+export const endpoint = "/v2/vectordb/partitions/has"
+export const method = "post"
