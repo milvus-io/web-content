@@ -1,0 +1,20 @@
+---
+displayed_sidebar: restfulSidebar
+sidebar_positition: 5
+slug: /restful/List (v1)
+title: "List Collections | RESTful"
+description: "Lists collections in a cluster. | RESTful"
+hide_table_of_contents: true
+sidebar_label: "List Collections"
+sidebar_custom_props: { badges: ['get']}
+---
+
+# List Collections
+
+import RestSpecs from '@site/src/components/RestSpecs';
+
+<RestSpecs specs={specs} endpoint={endpoint} method={method} target="zilliz" lang="zh-CN" />
+
+export const specs = {"summary":"List Collections","deprecated":false,"description":"Lists collections in a cluster.","x-i18n":{"zh-CN":{"summary":"查看 Collection 列表","description":"列出集群中的 Collection 名称。"}},"tags":["Collection Operations"],"parameters":[{"name":"dbName","in":"query","description":"The name of the database","x-i18n":{"zh-CN":{"description":"数据库名称。"}},"required":false,"example":"default","schema":{"type":"string"},"x-include-target":["milvus"]},{"name":"Authorization","in":"header","description":"The authentication token should be <include target=\"zilliz\">an API key with appropriate privileges or </include>a pair of colon-joined username and password, like `username:password`.","required":true,"example":"Bearer {{TOKEN}}","schema":{"type":"string"},"x-i18n":{"zh-CN":{"description":"认证令牌，应为<include target=\"zilliz\">具备适当权限的 API 密钥或</include>用冒号分隔的用户名和密码，如 `username:password`。"}}}],"responses":{"200":{"description":"Returns a list of collections in the specified cluster.","content":{"application/json":{"schema":{"oneOf":[{"x-tab-label":"success","description":"A success response.","x-i18n":{"zh-CN":{"description":"成功响应。"}},"x-i18n-langs":["zh-CN"],"type":"object","properties":{"code":{"type":"integer","description":"Response code.","x-i18n":{"zh-CN":{"description":"响应码。"}}},"data":{"type":"array","items":{"type":"string","description":"A collection name.","x-i18n":{"zh-CN":{"description":"Collection 名称。"}}},"description":"Response payload which is a list of collection names.","x-i18n":{"zh-CN":{"description":"响应载荷，为 Collection 名称列表。"}}}}},{"x-tab-label":"failure","description":"Returns an error message.","x-i18n":{"zh-CN":{"description":"返回错误消息。"}},"x-i18n-langs":["zh-CN"],"type":"object","properties":{"code":{"type":"integer","description":"Response code.","x-i18n":{"zh-CN":{"description":"响应码。"}}},"message":{"type":"string","description":"Error message.","x-i18n":{"zh-CN":{"description":"错误描述。"}}}}}]},"examples":{"1":{"summary":"success","x-target-response":"OPTION 1","value":{"code":200,"data":["custom_setup_not_indexed","quick_setup","custom_setup_indexed"]}},"2":{"summary":"failure","x-target-response":"OPTION 2","value":{"code":200,"message":"The token is illegal."}}}}}}},"security":[]}
+export const endpoint = "/v1/vector/collections"
+export const method = "get"

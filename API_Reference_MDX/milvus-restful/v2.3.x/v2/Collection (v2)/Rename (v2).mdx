@@ -1,0 +1,20 @@
+---
+displayed_sidebar: restfulSidebar
+sidebar_positition: 85
+slug: /restful/Rename (v2)
+title: "Rename Collection | RESTful"
+description: "This operation renames an existing collection and optionally moves the collection to a new database. | RESTful"
+hide_table_of_contents: true
+sidebar_label: "Rename Collection"
+sidebar_custom_props: { badges: ['post']}
+---
+
+# Rename Collection
+
+import RestSpecs from '@site/src/components/RestSpecs';
+
+<RestSpecs specs={specs} endpoint={endpoint} method={method} target="zilliz" lang="zh-CN" />
+
+export const specs = {"summary":"Rename Collection","deprecated":false,"description":"This operation renames an existing collection<include target=\"milvus\"> and optionally moves the collection to a new database</include>.","x-i18n":{"zh-CN":{"summary":"重命名 Collection","description":"本接口重命名指定 Collection。<include target=\"milvus\">您还可将其移动到指定的数据库中。</include>"}},"tags":["Collection Operations (V2)"],"parameters":[{"name":"Request-Timeout","in":"header","description":"The timeout duration for this operation in seconds. Setting this to None indicates that this operation timeouts when any response arrives or any error occurs.","required":false,"example":0,"schema":{"type":"integer","minimum":0,"maximum":3600,"exclusiveMinimum":true},"x-include-target":["milvus"]},{"name":"Authorization","in":"header","description":"The authentication token","required":true,"example":"Bearer {{TOKEN}}","schema":{"type":"string"}}],"requestBody":{"content":{"application/json":{"schema":{"type":"object","properties":{"collectionName":{"type":"string","description":"The name of the target collection.\nSetting this to a non-existing collection results in an error.","x-i18n":{"zh-CN":{"description":"目标 Collection 的名称。设置为不存在的 Collection 将导致错误。"}}},"dbName":{"type":"string","description":"The name of the database that to which the collection belongs .\nSetting this to a non-existing database results in an error.","x-i18n":{"zh-CN":{"description":"Collection 所属的数据库名称。设置为不存在的数据库将导致错误。"}},"x-include-target":["milvus"]},"newDbName":{"type":"string","description":"The name of the database to which the collection belongs after this operation.\nThe value defaults to **default**. Setting this to a database rather than the one the collection belongs to before this operation moves this collection to the specified database.\nSetting this to a non-existing database results in an error.","x-include-target":["milvus"]},"newCollectionName":{"type":"string","description":"The name of the target collection after this operation.\nSetting this to the value of **old_collection_name** results in an error."}},"required":["newCollectionName","collectionName"]},"example":{"collectionName":"test_collection","newCollectionName":"quick_setup"}}}},"responses":{"200":{"description":"None","content":{"application/json":{"schema":{"anyOf":[{"x-tab-label":"success","description":"A success response","x-i18n":{"zh-CN":{"description":"成功响应。"}},"x-i18n-langs":["zh-CN"],"type":"object","properties":{"code":{"description":"Response code.","x-i18n":{"zh-CN":{"description":"响应码。"}},"type":"integer","example":0},"data":{"type":"object","properties":{},"description":"Response payload which is an empty object.","x-i18n":{"zh-CN":{"description":"响应载荷。为空对象。"}}}}},{"x-tab-label":"failure","description":"Returns an error message.","x-i18n":{"zh-CN":{"description":"返回错误消息。"}},"x-i18n-langs":["zh-CN"],"type":"object","properties":{"code":{"type":"integer","description":"Response code.","x-i18n":{"zh-CN":{"description":"响应码。"}}},"message":{"type":"string","description":"Error message.","x-i18n":{"zh-CN":{"description":"错误描述。"}}}}}]},"examples":{"1":{"summary":"success","x-target-response":"OPTION 1","value":{"code":0,"data":{}}},"2":{"summary":"failure","x-target-response":"OPTION 2","value":{"code":0,"message":"The token is illegal."}}}}}}},"security":[]}
+export const endpoint = "/v2/vectordb/collections/rename"
+export const method = "post"

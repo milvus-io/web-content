@@ -1,0 +1,20 @@
+---
+displayed_sidebar: restfulSidebar
+sidebar_positition: 55
+slug: /restful/Drop (v2)
+title: "Drop User | RESTful"
+description: "This operation deletes an existing user. | RESTful"
+hide_table_of_contents: true
+sidebar_label: "Drop User"
+sidebar_custom_props: { badges: ['post']}
+---
+
+# Drop User
+
+import RestSpecs from '@site/src/components/RestSpecs';
+
+<RestSpecs specs={specs} endpoint={endpoint} method={method} target="zilliz" lang="zh-CN" />
+
+export const specs = {"summary":"Drop User","deprecated":false,"description":"This operation deletes an existing user.","x-i18n":{"zh-CN":{"summary":"删除用户","description":"本接口会删除一个已存在的用户。"}},"tags":["User Operations (V2)"],"parameters":[{"name":"Request-Timeout","in":"header","description":"The timeout duration for this operation.\nSetting this to None indicates that this operation timeouts when any response arrives or any error occurs.","x-i18n":{"zh-CN":{"description":"当前操作的超时时间。\n设置为 None 表示本操作在任何响应或错误发生时超时。"}},"required":false,"example":0,"schema":{"type":"integer","minimum":0,"maximum":3600,"exclusiveMinimum":true}},{"name":"Authorization","in":"header","description":"The authentication token should be <include target=\"zilliz\">an API key with appropriate privileges or </include>a pair of colon-joined username and password, like `username:password`.","x-i18n":{"zh-CN":{"description":"认证令牌。应为<include target=\"zilliz\">具备适当权限的 API 密钥或</include>用冒号分隔的用户名和密码，如 `username:password`。"}},"required":true,"example":"Bearer {{TOKEN}}","schema":{"type":"string"},"x-include-target":["milvus"]}],"requestBody":{"content":{"application/json":{"schema":{"type":"object","properties":{"userName":{"type":"string","description":"The name of the target user. The value should start with a letter and can only contain underline, letters and numbers.","x-i18n":{"zh-CN":{"description":"待创建用户的用户名。\n用户名须以字母开头，并包含下划线、字母和数字。"}}}},"required":["userName"],"x-i18n-langs":["zh-CN"]},"example":{"userName":"my_user"}}}},"responses":{"200":{"description":"Return an empty object or an error message.","content":{"application/json":{"schema":{"oneOf":[{"x-tab-label":"success","description":"A success response","x-i18n":{"zh-CN":{"description":"成功响应。"}},"x-i18n-langs":["zh-CN"],"type":"object","properties":{"code":{"description":"Response code.","x-i18n":{"zh-CN":{"description":"响应码。"}},"type":"integer","example":0},"data":{"type":"object","properties":{},"description":"Response payload which is an empty object.","x-i18n":{"zh-CN":{"description":"响应载荷。为空对象。"}}}}},{"x-tab-label":"failure","description":"A failure response.","x-i18n":{"zh-CN":{"description":"失败响应。"}},"x-i18n-langs":["zh-CN"],"type":"object","properties":{"code":{"type":"integer","description":"Response code.","x-i18n":{"zh-CN":{"description":"响应码。"}}},"message":{"type":"string","description":"Error message.","x-i18n":{"zh-CN":{"description":"错误描述。"}}}}}]},"examples":{"1":{"summary":"success","x-target-response":"OPTION 1","value":{"code":0,"data":{}}},"2":{"summary":"failure","x-target-response":"OPTION 2","value":{"code":0,"message":"The token is illegal."}}}}}}},"security":[]}
+export const endpoint = "/v2/vectordb/users/drop"
+export const method = "post"

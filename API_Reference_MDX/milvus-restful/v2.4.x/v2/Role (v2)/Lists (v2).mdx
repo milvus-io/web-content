@@ -1,0 +1,20 @@
+---
+displayed_sidebar: restfulSidebar
+sidebar_positition: 20
+slug: /restful/Lists (v2)
+title: "List Roles | RESTful"
+description: "This operation lists the information about all existing roles. | RESTful"
+hide_table_of_contents: true
+sidebar_label: "List Roles"
+sidebar_custom_props: { badges: ['post']}
+---
+
+# List Roles
+
+import RestSpecs from '@site/src/components/RestSpecs';
+
+<RestSpecs specs={specs} endpoint={endpoint} method={method} target="zilliz" lang="zh-CN" />
+
+export const specs = {"summary":"List Roles","deprecated":false,"description":"This operation lists the information about all existing roles.","x-i18n":{"zh-CN":{"summary":"查看角色列表","description":"本接口可列出所有已创建角色的相关信息。"}},"tags":["Role Operations (V2)"],"parameters":[{"name":"Request-Timeout","in":"header","description":"The timeout duration for this operation. Setting this to None indicates that this operation times out when any response returns or an error occurs.\n","required":false,"example":0,"schema":{"type":"integer"},"x-i18n":{"zh-CN":{"description":"操作超时时长。设置为 None 表示操作在任何响应返回或任何错误发生时超时。"}},"x-include-target":["milvus"]},{"name":"Authorization","in":"header","description":"The authentication token should be <include target=\"zilliz\">an API key with appropriate privileges or </include>a pair of colon-joined username and password, like `username:password`.","required":true,"example":"Bearer {{TOKEN}}","schema":{"type":"string"},"x-i18n":{"zh-CN":{"description":"认证令牌，应为<include target=\"zilliz\">具备适当权限的 API 密钥或</include>用冒号分隔的用户名和密码，如 `username:password`。"}}}],"requestBody":{"content":{"application/json":{"schema":{"type":"object","properties":{},"description":"An empty object.","x-i18n":{"zh-CN":{"description":"空对象"}}},"example":{}}}},"responses":{"200":{"description":"A RoleInfo object that contains a list of RoleItem objects.","x-i18n":{"zh-CN":{"description":"包含 RoleItem 对象列表的 RoleInfo 对象"}},"content":{"application/json":{"schema":{"oneOf":[{"x-tab-label":"success","type":"object","properties":{"code":{"description":"Response code.","x-i18n":{"zh-CN":{"description":"响应码。"}},"type":"integer","example":0},"data":{"type":"array","items":{"type":"string","description":"A list of item objects."},"description":"Response payload which is a list of item objects.","x-i18n":{"zh-CN":{"description":"响应载荷，为元素对象列表。"}}}}},{"x-tab-label":"failure","description":"A failure response.","x-i18n":{"zh-CN":{"description":"失败响应。"}},"x-i18n-langs":["zh-CN"],"type":"object","properties":{"code":{"type":"integer","description":"Response code.","x-i18n":{"zh-CN":{"description":"响应码。"}}},"message":{"type":"string","description":"Error message.","x-i18n":{"zh-CN":{"description":"错误描述。"}}}}}]},"examples":{"1":{"summary":"success","x-target-response":"OPTION 1","x-include-target":["milvus"],"value":{"code":0,"data":["admin","public"]}},"2":{"summary":"success","x-target-response":"OPTION 1","x-include-target":["zilliz"],"value":{"code":0,"data":["db_admin","db_ro","db_rw"]}},"3":{"summary":"failure","x-target-response":"OPTION 2","value":{"code":0,"message":"The token is illegal."}}}}}}},"security":[]}
+export const endpoint = "/v2/vectordb/roles/list"
+export const method = "post"

@@ -1,0 +1,20 @@
+---
+displayed_sidebar: restfulSidebar
+sidebar_positition: 6
+slug: /restful/delete (v1)
+title: "Delete | RESTful"
+description: "Deletes one or more entities from a collection. | RESTful"
+hide_table_of_contents: true
+sidebar_label: "Delete"
+sidebar_custom_props: { badges: ['post']}
+---
+
+# Delete
+
+import RestSpecs from '@site/src/components/RestSpecs';
+
+<RestSpecs specs={specs} endpoint={endpoint} method={method} target="zilliz" lang="zh-CN" />
+
+export const specs = {"summary":"Delete","deprecated":false,"description":"Deletes one or more entities from a collection.","x-i18n":{"zh-CN":{"summary":"删除 Entity","description":"从 Collection 中删除一个或多个 Entity。"}},"tags":["Vector Operations"],"parameters":[{"name":"Authorization","in":"header","description":"The authentication token should be <include target=\"zilliz\">an API key with appropriate privileges or </include>a pair of colon-joined username and password, like `username:password`.","required":true,"example":"Bearer {{TOKEN}}","schema":{"type":"string"},"x-i18n":{"zh-CN":{"description":"认证令牌，应为<include target=\"zilliz\">具备适当权限的 API 密钥或</include>用冒号分隔的用户名和密码，如 `username:password`。"}}}],"requestBody":{"content":{"application/json":{"schema":{"type":"object","properties":{"dbName":{"type":"string","description":"The name of the database.","x-i18n":{"zh-CN":{"description":"数据库名称。"}},"x-include-target":["milvus"]},"collectionName":{"type":"string","description":"The name of the collection to which this operation applies.","x-i18n":{"zh-CN":{"description":"Collection 名称。"}}},"id":{"oneOf":[{"type":"string","description":"The ID of the entity to be deleted","x-i18n":{"zh-CN":{"description":"Entity ID。"}}},{"type":"array","items":{"type":"string"},"description":"An array of IDs of the entities to be deleted","x-i18n":{"zh-CN":{"description":"Entity ID 列表。"}}},{"type":"integer","description":"The ID of the entity to be deleted","x-i18n":{"zh-CN":{"description":"Entity ID。"}}},{"type":"array","items":{"type":"integer"},"description":"An array of IDs of the entities to be deleted","x-i18n":{"zh-CN":{"description":"Entity ID 列表。"}}}]}},"required":["collectionName","id"]},"examples":{"1":{"summary":"Option 1","value":{"dbName":"default","collectionName":"my_collection","id":"4321034832910"},"x-include-target":["milvus"]},"2":{"summary":"Option 2","value":{"collectionName":"my_collection","id":[4321034832910,4321034832911]},"x-include-target":["zilliz"]}}}}},"responses":{"200":{"description":"Returns an empty object.","x-i18n":{"zh-CN":{"description":"返回空对象。"}},"content":{"application/json":{"schema":{"oneOf":[{"x-tab-label":"success","type":"object","properties":{"code":{"type":"integer","description":"Response code.","x-i18n":{"zh-CN":{"description":"响应码。"}}},"data":{"type":"object","description":"Response payload which is an empty object.","x-i18n":{"zh-CN":{"description":"响应载荷，为空对象。"}},"properties":{}}}},{"x-tab-label":"failure","description":"Returns an error message.","x-i18n":{"zh-CN":{"description":"返回错误消息。"}},"type":"object","properties":{"code":{"type":"integer","description":"Response code.","x-i18n":{"zh-CN":{"description":"响应码。"}}},"message":{"type":"string","description":"Error message.","x-i18n":{"zh-CN":{"description":"错误描述。"}}}}}]},"examples":{"1":{"summary":"success","x-target-response":"OPTION 1","value":{"code":200,"data":{}}},"2":{"summary":"failure","x-target-response":"OPTION 2","value":{"code":200,"message":"The token is illegal."}}}}}}},"security":[]}
+export const endpoint = "/v1/vector/delete"
+export const method = "post"
