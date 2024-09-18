@@ -137,6 +137,41 @@ This prioritization can result in fewer unique results than the limit if your co
 
 - **Insufficient Matches**: Your search filtering expressions might be too strict, resulting in fewer entities meeting the similarity threshold. If the conditions set for the search are too restrictive, not enough entities will match, leading to fewer results than expected.
 
+#### `MilvusClient("milvus_demo.db") gives an error: ModuleNotFoundError: No module named 'milvus_lite'`. What causes this and how can it be solved?
+
+This error occurs when you attempt to use Milvus Lite on a Windows platform. Milvus Lite is primarily designed for Linux environments and may not have native support for Windows.
+
+The solution is to utilize a Linux environment:
+
+- Use a Linux-based operating system or virtual machine to run Milvus Lite.
+- This approach will ensure compatibility with the library's dependencies and functionality.
+
+#### What are the "length exceeds max length" errors in Milvus, and how can they be understood and addressed?
+
+"Length exceeds max length" errors in Milvus occur when the size of a data element surpasses the maximum allowable size for a collection or field. Here are some examples and explanations:
+
+- JSON field error: `<MilvusException: (code=1100, message=the length (398324) of json field (metadata) exceeds max length (65536): expected=valid length json string, actual=length exceeds max length: invalid parameter)>`
+
+- String length error: `<ParamError: (code=1, message=invalid input, length of string exceeds max length. length: 74238, max length: 60535)>`
+
+- VarChar field error: `<MilvusException: (code=1100, message=the length (60540) of 0th VarChar paragraph exceeds max length (0)%!(EXTRA int64=60535): invalid parameter)>`
+
+To understand and address these errors:
+
+- Understand that `len(str)` in Python represents the number of characters, not the size in bytes.
+- For string-based data types like VARCHAR and JSON, use `len(bytes(str, encoding='utf-8'))` to determine the actual size in bytes, which is what Milvus uses for "max-length".
+
+Example in Python:
+
+```python
+# Python Example: result of len() str cannot be used as "max-length" in Milvus 
+>>> s = "你好，世界！"
+>>> len(s) # Number of characters of s.
+6
+>>> len(bytes(s, "utf-8")) # Size in bytes of s, max-length in Milvus.
+18
+```
+
 #### Still have questions?
 
 You can:
