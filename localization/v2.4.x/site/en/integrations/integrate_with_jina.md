@@ -94,16 +94,21 @@ $ pip install <span class="hljs-string">&quot;pymilvus[model]&quot;</span>
         ></path>
       </svg>
     </button></h2><p>Jina AI’s core embedding model, excels in understanding detailed text, making it ideal for semantic search, content classification thus supports advanced sentiment analysis, text summarization, and personalized recommendation systems.</p>
-<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus.<span class="hljs-property">model</span>.<span class="hljs-property">dense</span> <span class="hljs-keyword">import</span> <span class="hljs-title class_">JinaEmbeddingFunction</span>
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus.model.dense <span class="hljs-keyword">import</span> JinaEmbeddingFunction
 
 jina_api_key = <span class="hljs-string">&quot;&lt;YOUR_JINA_API_KEY&gt;&quot;</span>
-ef = <span class="hljs-title class_">JinaEmbeddingFunction</span>(<span class="hljs-string">&quot;jina-embeddings-v2-base-en&quot;</span>, jina_api_key)
+ef = JinaEmbeddingFunction(
+    <span class="hljs-string">&quot;jina-embeddings-v3&quot;</span>, 
+    jina_api_key,
+    task=<span class="hljs-string">&quot;retrieval.passage&quot;</span>,
+    dimensions=<span class="hljs-number">1024</span>
+)
 
 query = <span class="hljs-string">&quot;what is information retrieval?&quot;</span>
 doc = <span class="hljs-string">&quot;Information retrieval is the process of finding relevant information from a large collection of data or documents.&quot;</span>
 
-qvecs = ef.<span class="hljs-title function_">encode_queries</span>([query])
-dvecs = ef.<span class="hljs-title function_">encode_documents</span>([doc])
+qvecs = ef.encode_queries([query])  <span class="hljs-comment"># This method uses `retrieval.query` as the task</span>
+dvecs = ef.encode_documents([doc])  <span class="hljs-comment"># This method uses `retrieval.passage` as the task</span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Bilingual-Embeddings" class="common-anchor-header">Bilingual Embeddings<button data-href="#Bilingual-Embeddings" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -205,8 +210,14 @@ dvecs = ef.encode_documents([doc])
 <span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 jina_api_key = <span class="hljs-string">&quot;&lt;YOUR_JINA_API_KEY&gt;&quot;</span>
-ef = JinaEmbeddingFunction(<span class="hljs-string">&quot;jina-embeddings-v2-base-en&quot;</span>, jina_api_key)
-DIMENSION = <span class="hljs-number">768</span>  <span class="hljs-comment"># size of jina-embeddings-v2-base-en</span>
+DIMENSION = <span class="hljs-number">1024</span>  <span class="hljs-comment"># `jina-embeddings-v3` supports flexible embedding sizes (32, 64, 128, 256, 512, 768, 1024), allowing for truncating embeddings to fit your application. </span>
+ef = JinaEmbeddingFunction(
+    <span class="hljs-string">&quot;jina-embeddings-v3&quot;</span>, 
+    jina_api_key,
+    task=<span class="hljs-string">&quot;retrieval.passage&quot;</span>,
+    dimensions=DIMENSION,
+)
+
 
 doc = [
     <span class="hljs-string">&quot;In 1950, Alan Turing published his seminal paper, &#x27;Computing Machinery and Intelligence,&#x27; proposing the Turing Test as a criterion of intelligence, a foundational concept in the philosophy and development of artificial intelligence.&quot;</span>,
@@ -215,7 +226,7 @@ doc = [
     <span class="hljs-string">&quot;The invention of the Logic Theorist by Allen Newell, Herbert A. Simon, and Cliff Shaw in 1955 marked the creation of the first true AI program, which was capable of solving logic problems, akin to proving mathematical theorems.&quot;</span>,
 ]
 
-dvecs = ef.encode_documents(doc)
+dvecs = ef.encode_documents(doc) <span class="hljs-comment"># This method uses `retrieval.passage` as the task</span>
 
 data = [
     {<span class="hljs-string">&quot;id&quot;</span>: i, <span class="hljs-string">&quot;vector&quot;</span>: dvecs[i], <span class="hljs-string">&quot;text&quot;</span>: doc[i], <span class="hljs-string">&quot;subject&quot;</span>: <span class="hljs-string">&quot;history&quot;</span>}
@@ -242,7 +253,7 @@ res = milvus_client.insert(collection_name=COLLECTION_NAME, data=data)
 </div>
 <p>With all data in Milvus vector database, we can now perform semantic search by generating vector embedding for the query and conduct vector search.</p>
 <pre><code translate="no" class="language-python">queries = <span class="hljs-string">&quot;What event in 1956 marked the official birth of artificial intelligence as a discipline?&quot;</span>
-qvecs = ef.encode_queries([queries])
+qvecs = ef.encode_queries([queries]) <span class="hljs-comment"># This method uses `retrieval.query` as the task</span>
 
 res = milvus_client.search(
     collection_name=COLLECTION_NAME,  <span class="hljs-comment"># target collection</span>
