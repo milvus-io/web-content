@@ -27,7 +27,7 @@ Milvus Java SDK is an open-source project and its source code is hosted on [GitH
     </tr>
     <tr>
         <td>2.3.x</td>
-        <td>2.3.9</td>
+        <td>2.3.10</td>
     </tr>
 </table>
 
@@ -41,20 +41,20 @@ You can use **[Apache Maven](https://maven.apache.org/install.html)** or **[Grad
  <dependency>
      <groupId>io.milvus</groupId>
      <artifactId>milvus-sdk-java</artifactId>
-     <version>2.3.6</version>
+     <version>2.3.10</version>
  </dependency>
 ```
 
 - Gradle/Groovy
 
 ```plaintext
-implementation 'io.milvus:milvus-sdk-java:2.3.6'
+implementation 'io.milvus:milvus-sdk-java:2.3.10'
 ```
 
 - Gradle/Kotlin
 
 ```sql
-implementation("io.milvus:milvus-sdk-java:2.3.6")
+implementation("io.milvus:milvus-sdk-java:2.3.10")
 ```
 
 ## **Contributing**
