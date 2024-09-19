@@ -28,7 +28,7 @@ In-memory replicas help Milvus recover faster if a query node crashes. When a qu
 
 In-memory replicas are organized as replica groups. Each replica group contains [shard](https://milvus.io/docs/v2.1.x/glossary.md#Sharding) replicas. Each shard replica has a streaming replica and a historical replica that correspond to the growing and sealed [segments](https://milvus.io/docs/v2.1.x/glossary.md#Segment) in the shard (i.e. DML channel).
 
-![An illustration of how in-memory replica works](../../../assets/replica_availability.jpg)
+![An illustration of how in-memory replica works](../../../assets/replica_group.png)
 
 ### Replica group
 
