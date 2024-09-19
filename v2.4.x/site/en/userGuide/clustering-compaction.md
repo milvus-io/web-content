@@ -61,8 +61,8 @@ common:
     | `enable` | Specifies whether to enable clustering compaction.<br>Setting this to `true` if you need to enable this feature for every collection having a clustering key. | `false` |
     | `autoEnable` | Specifies whether to enable automatically triggered compaction.<br>Setting this to `true` indicates that Milvus compacts the collections having a clustering key at the specified intervals. | `false` |
     | `triggerInterval` | Specifies the interval in milliseconds at which Milvus starts clustering compaction.<br>This parameter is valid only when `autoEnable` is set to `true`. | - |
-    | `minInterval` | Specifies the minimum interval in milliseconds.<br>This parameter is valid only when `autoEnable` is set to `true`.<br>Setting this to an integer greater than triggerInterval helps avoid repeated compactions within a short period. | - |
-    | `maxInterval` | Specifies the maximum interval in milliseconds.<br>This parameter is valid only when `autoEnable` is set to `true`.<br>Once Milvus detects that a collection has not been clustering-compacted for a duration longer than this value, it forces a clustering compaction. | - |
+    | `minInterval` | Specifies the minimum interval in seconds.<br>This parameter is valid only when `autoEnable` is set to `true`.<br>Setting this to an integer greater than triggerInterval helps avoid repeated compactions within a short period. | - |
+    | `maxInterval` | Specifies the maximum interval in seconds.<br>This parameter is valid only when `autoEnable` is set to `true`.<br>Once Milvus detects that a collection has not been clustering-compacted for a duration longer than this value, it forces a clustering compaction. | - |
     | `newDataSizeThreshold` | Specifies the upper threshold to trigger a clustering compaction.<br>This parameter is valid only when `autoEnable` is set to `true`.<br>Once Milvus detects that the data volume in a collection exceeds this value, it initiates a clustering compaction process. | - |    
     | `timeout` | Specifies the timeout duration for a clustering compaction.<br>A clustering compaction fails if its execution time exceeds this value. | - |
 
