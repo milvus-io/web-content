@@ -42,13 +42,18 @@ Jina AI's core embedding model, excels in understanding detailed text, making it
 from pymilvus.model.dense import JinaEmbeddingFunction
 
 jina_api_key = "<YOUR_JINA_API_KEY>"
-ef = JinaEmbeddingFunction("jina-embeddings-v2-base-en", jina_api_key)
+ef = JinaEmbeddingFunction(
+    "jina-embeddings-v3", 
+    jina_api_key,
+    task="retrieval.passage",
+    dimensions=1024
+)
 
 query = "what is information retrieval?"
 doc = "Information retrieval is the process of finding relevant information from a large collection of data or documents."
 
-qvecs = ef.encode_queries([query])
-dvecs = ef.encode_documents([doc])
+qvecs = ef.encode_queries([query])  # This method uses `retrieval.query` as the task
+dvecs = ef.encode_documents([doc])  # This method uses `retrieval.passage` as the task
 ```
 
 ## Bilingual Embeddings
@@ -120,8 +125,14 @@ from pymilvus.model.dense import JinaEmbeddingFunction
 from pymilvus import MilvusClient
 
 jina_api_key = "<YOUR_JINA_API_KEY>"
-ef = JinaEmbeddingFunction("jina-embeddings-v2-base-en", jina_api_key)
-DIMENSION = 768  # size of jina-embeddings-v2-base-en
+DIMENSION = 1024  # `jina-embeddings-v3` supports flexible embedding sizes (32, 64, 128, 256, 512, 768, 1024), allowing for truncating embeddings to fit your application. 
+ef = JinaEmbeddingFunction(
+    "jina-embeddings-v3", 
+    jina_api_key,
+    task="retrieval.passage",
+    dimensions=DIMENSION,
+)
+
 
 doc = [
     "In 1950, Alan Turing published his seminal paper, 'Computing Machinery and Intelligence,' proposing the Turing Test as a criterion of intelligence, a foundational concept in the philosophy and development of artificial intelligence.",
@@ -130,7 +141,7 @@ doc = [
     "The invention of the Logic Theorist by Allen Newell, Herbert A. Simon, and Cliff Shaw in 1955 marked the creation of the first true AI program, which was capable of solving logic problems, akin to proving mathematical theorems.",
 ]
 
-dvecs = ef.encode_documents(doc)
+dvecs = ef.encode_documents(doc) # This method uses `retrieval.passage` as the task
 
 data = [
     {"id": i, "vector": dvecs[i], "text": doc[i], "subject": "history"}
@@ -162,7 +173,7 @@ With all data in Milvus vector database, we can now perform semantic search by g
 
 ```python
 queries = "What event in 1956 marked the official birth of artificial intelligence as a discipline?"
-qvecs = ef.encode_queries([queries])
+qvecs = ef.encode_queries([queries]) # This method uses `retrieval.query` as the task
 
 res = milvus_client.search(
     collection_name=COLLECTION_NAME,  # target collection
