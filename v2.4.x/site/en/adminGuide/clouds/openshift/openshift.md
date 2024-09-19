@@ -44,24 +44,24 @@ Ensure you are logged in as `kubeadmin` or have equivalent privileges.
     apiVersion: cert-manager.io/v1
     kind: Certificate
     metadata:
-    name: milvus-operator-serving-cert
-    namespace: milvus-operator
+      name: milvus-operator-serving-cert
+      namespace: milvus-operator
     spec:
-    dnsNames:
-    - milvus-operator-webhook-service.milvus-operator.svc
-    - milvus-operator-webhook-service.milvus-operator.svc.cluster.local
-    issuerRef:
+      dnsNames:
+      - milvus-operator-webhook-service.milvus-operator.svc
+      - milvus-operator-webhook-service.milvus-operator.svc.cluster.local
+      issuerRef:
         kind: Issuer
         name: milvus-operator-selfsigned-issuer
-    secretName: milvus-operator-webhook-cert
+      secretName: milvus-operator-webhook-cert
     ---
     apiVersion: cert-manager.io/v1
     kind: Issuer
     metadata:
-    name: milvus-operator-selfsigned-issuer
-    namespace: milvus-operator
+      name: milvus-operator-selfsigned-issuer
+      namespace: milvus-operator
     spec:
-    selfSigned: {}
+      selfSigned: {}
     ```
 
 2. Apply the file:
