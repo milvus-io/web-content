@@ -7,11 +7,11 @@ title: With Iterators
 
 # With Iterators
 
-Milvus provides search and query iterators for iterating results with a large volume of entities. Since Milvus limits TopK to 16384, users can use iterators to return large numbers or even whole entities in a collection in batch mode.
+Milvus provides search and query iterators for iterating through a large volume of entities. Since Milvus limits TopK to 16384, users can use iterators to return large numbers or even whole entities in a collection in batch mode.
 
 ## Overview
 
-Iterators are powerful tools that help you iterate through a large volume of or all data within a collection using primary key values and Boolean expressions. This can significantly improve the way you retrieve data. Unlike the traditional use of __offset__ and __limit__ parameters, which may become less efficient over time, iterators offer a more scalable solution.
+Iterators are efficient tool for scanning a whole collection or iterating through a large volume of entities by specifying primary key values or a filter expression. Compared to a search or query call with __offset__ and __limit__ parameters, using iterators is more efficient and scalable.
 
 ### Benefits of using iterators
 
@@ -35,7 +35,7 @@ Iterators are powerful tools that help you iterate through a large volume of or 
 
 ## Preparations
 
-The following steps repurpose the code to connect to Milvus, quickly set up a collection, and insert over 10,000 randomly generated entities into the collection.
+The following preparation step connects to Milvus and inserts randomly generated entities into a collection.
 
 ### Step 1: Create a collection
 
