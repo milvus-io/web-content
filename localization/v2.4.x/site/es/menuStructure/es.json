@@ -717,7 +717,7 @@
                 "children": []
               },
               {
-                "label": "Implantación en GCP",
+                "label": "Despliegue en GCP",
                 "id": "gcp.md",
                 "order": 2,
                 "children": []
@@ -1244,6 +1244,12 @@
             "id": "video_search_with_twelvelabs_and_milvus.md",
             "order": 12,
             "children": []
+          },
+          {
+            "label": "BentoML",
+            "id": "integrate_with_bentoml.md",
+            "order": 5,
+            "children": []
           }
         ]
       },
@@ -1262,12 +1268,6 @@
             "label": "Mistral AI",
             "id": "llama_agents_metadata.md",
             "order": 1,
-            "children": []
-          },
-          {
-            "label": "Kotaemon",
-            "id": "kotaemon_with_milvus.md",
-            "order": 2,
             "children": []
           }
         ]
@@ -1334,9 +1334,9 @@
             "children": []
           },
           {
-            "label": "BentoML",
-            "id": "integrate_with_bentoml.md",
-            "order": 5,
+            "label": "Kotaemon",
+            "id": "kotaemon_with_milvus.md",
+            "order": 2,
             "children": []
           }
         ]
@@ -1413,6 +1413,12 @@
             "label": "Airbyte",
             "id": "integrate_with_airbyte.md",
             "order": 0,
+            "children": []
+          },
+          {
+            "label": "Kafka",
+            "id": "kafka-connect-milvus.md",
+            "order": 1,
             "children": []
           }
         ]

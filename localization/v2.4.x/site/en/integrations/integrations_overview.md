@@ -53,5 +53,7 @@ title: Integrations Overview
 <tr><td><a href="/docs/video_search_with_twelvelabs_and_milvus.md">Advanced Video Search: Leveraging Twelve Labs and Milvus for Semantic Retrieval</a></td><td>Semantic Search</td><td>Milvus, Twelve Labs</td></tr>
 <tr><td><a href="/docs/milvus_rag_with_vllm.md">Building RAG with Milvus, vLLM, and Llama 3.1</a></td><td>RAG</td><td>Milvus, vLLM, LlamaIndex</td></tr>
 <tr><td><a href="/docs/llama_agents_metadata.md">Multi-agent Systems with Mistral AI, Milvus and Llama-agents</a></td><td>Agent</td><td>Milvus, Mistral AI, LlamaIndex</td></tr>
+<tr><td><a href="/docs/kafka-connect-milvus.md">Connect Kafka with Milvus</a></td><td>Data Sources</td><td>Milvus, Kafka</td></tr>
+<tr><td><a href="/docs/kotaemon_with_milvus.md">Kotaemon RAG with Milvus</a></td><td>RAG</td><td>Milvus, Kotaemon</td></tr>
 </tbody>
 </table>
