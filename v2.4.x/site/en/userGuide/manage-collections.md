@@ -1752,6 +1752,45 @@ $ curl -X POST "http://${MILVUS_URI}/v2/vectordb/collections/get_load_state" \
 # }
 ```
 
+### Load a collection partially (Public Preview)
+
+<div class="alert note">
+
+This feature is currently in public preview. The API and functionality may change in the future.
+
+</div>
+
+Upon receiving your load request, Milvus loads all vector field indexes and all scalar field data into memory. If some fields are not to be involved in searches and queries, you can exclude them from loading to reduce memory usage, improving search performance.
+
+<div class="language-python">
+
+```python
+# 7. Load the collection
+client.load_collection(
+    collection_name="customized_setup_2",
+    load_fields=["my_id", "my_vector"] # Load only the specified fields
+    skip_load_dynamic_field=True # Skip loading the dynamic field
+)
+
+res = client.get_load_state(
+    collection_name="customized_setup_2"
+)
+
+print(res)
+
+# Output
+#
+# {
+#     "state": "<LoadState: Loaded>"
+# }
+```
+
+Note that only the fields listed in `load_fields` can be used as filtering conditions and output fields in searches and queries. You should always include the primary key in the list. The field names excluded from loading will not be available for filtering or output.
+
+You can use `skip_load_dynamic_field=True` to skip loading the dynamic field. Milvus treats the dynamic field as a single field, so all the keys in the dynamic field will be included or excluded together.
+
+</div>
+
 ### Release a collection
 
 <div class="language-python">
