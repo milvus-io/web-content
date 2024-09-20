@@ -13,9 +13,9 @@ The following is the API endpoint used to list collections in a Milvus cluster.
 export const code1 =`export CLUSTER_ENDPOINT="http://localhost:19530"
 
 curl --request GET \
-    --url "${CLUSTER_ENDPOINT}/v2/vectordb/collections/list" \
-    --header 'accept: application/json' \
-    --header 'content-type: application/json'`
+ --url "${CLUSTER_ENDPOINT}/v2/vectordb/collections/list" \
+ --header 'accept: application/json' \
+ --header 'content-type: application/json'`
 
 <CodeBlock children={code1} />
 
@@ -23,16 +23,16 @@ curl --request GET \
 
 With default settings, you do not need to provide any authentication credentials to access the API endpoints. However, if you have enabled authentication in your Milvus instance, you need to provide the correct credentials in the request header. You can use a token as the authentication method when you access the API endpoints. To obtain a token, you should use a colon (:) to concatenate the username and password that you use to access your Milvus instance. For example, `root:milvus`.
 
-export const code2 = `export CLUSTER_ENDPOINT="http://localhost:19530"
+```shell
+export CLUSTER_ENDPOINT="http://localhost:19530"
 export TOKEN="root:milvus"
 
 curl --request GET \
     --url "${CLUSTER_ENDPOINT}/v2/vectordb/collections/list" \
     --header "Authorization: Bearer ${TOKEN}" \
     --header 'accept: application/json' \
-    --header 'content-type: application/json'`
-
-<CodeBlock children={code2} />
+    --header 'content-type: application/json'
+```
 
 ## API endpoint versioning
 
