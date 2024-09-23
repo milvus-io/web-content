@@ -22,7 +22,7 @@ Then, instantiate the `VoyageEmbeddingFunction`:
 from pymilvus.model.dense import VoyageEmbeddingFunction
 
 voyage_ef = VoyageEmbeddingFunction(
-    model_name="voyage-lite-02-instruct", # Defaults to `voyage-2`
+    model_name="voyage-3", # Defaults to `voyage-3`
     api_key=VOYAGE_API_KEY # Provide your Voyage API key
 )
 ```
@@ -30,7 +30,7 @@ voyage_ef = VoyageEmbeddingFunction(
 __Parameters__:
 
 - `model_name` (string)
-  The name of the Voyage model to use for encoding. You can specify any of the available Voyage model names, for example, `voyage-law-2`, `voyage-code-2`, etc. If you leave this parameter unspecified, `voyage-2` will be used. For a list of available models, refer to [Voyage official documentation](https://docs.voyageai.com/docs/embeddings).
+  The name of the Voyage model to use for encoding. You can specify any of the available Voyage model names, for example, `voyage-3-lite`, `voyage-finance-2`, etc. If you leave this parameter unspecified, `voyage-3` will be used. For a list of available models, refer to [Voyage official documentation](https://docs.voyageai.com/docs/embeddings).
 - `api_key` (string)
   The API key for accessing the Voyage API. For information on how to create an API key, refer to [API Key and Python Client](https://docs.voyageai.com/docs/api-key-and-installation).
 

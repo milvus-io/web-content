@@ -29,6 +29,10 @@ To create embeddings in action, refer to [Using PyMilvus's Model To Generate Tex
 |  [voyageai](https://milvus.io/api-reference/pymilvus/v2.4.x/EmbeddingModels/VoyageEmbeddingFunction/VoyageEmbeddingFunction.md)                            |  Dense  |  API                 |
 |  [jina](https://milvus.io/api-reference/pymilvus/v2.4.x/EmbeddingModels/JinaEmbeddingFunction/JinaEmbeddingFunction.md)                            |  Dense  |  API                 |
 |  [cohere](https://milvus.io/api-reference/pymilvus/v2.4.x/EmbeddingModels/CohereEmbeddingFunction/CohereEmbeddingFunction.md)                            |  Dense  |  API                 |
+|  [Instructor](https://milvus.io/api-reference/pymilvus/v2.4.x/EmbeddingModels/InstructorEmbeddingFunction/InstructorEmbeddingFunction.md)                            |  Dense  |  Open-sourced                 |
+|  [Mistral AI](https://milvus.io/api-reference/pymilvus/v2.4.x/EmbeddingModels/MistralAIEmbeddingFunction/MistralAIEmbeddingFunction.md)                            |  Dense  |  API                 |
+|  [Nomic](https://milvus.io/api-reference/pymilvus/v2.4.x/EmbeddingModels/NomicEmbeddingFunction/NomicEmbeddingFunction.md)                            |  Dense  |  API                 |
+|  [mGTE](https://milvus.io/api-reference/pymilvus/v2.4.x/EmbeddingModels/MGTEEmbeddingFunction/MGTEEmbeddingFunction.md)                            |  Hybrid  |  Open-sourced                 |
 
 ## Example 1: Use default embedding function to generate dense vectors
 
