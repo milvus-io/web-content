@@ -839,7 +839,7 @@
             "children": []
           },
           {
-            "label": "Configure Chunk Cache",
+            "label": "配置块缓存",
             "id": "chunk_cache.md",
             "order": 3,
             "children": []
@@ -944,7 +944,7 @@
         "order": 7,
         "children": [
           {
-            "label": "Upgrade Milvus Cluster",
+            "label": "升级 Milvus 集群",
             "id": "upgrade_milvus_cluster-operator.md",
             "order": 0,
             "children": []

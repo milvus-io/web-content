@@ -381,7 +381,7 @@
         "children": []
       },
       {
-        "label": "挿入、アップサート、削除",
+        "label": "Insert, Upsert & Delete",
         "id": "insert-update-delete.md",
         "order": 5,
         "children": []

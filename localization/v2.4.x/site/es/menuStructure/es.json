@@ -839,7 +839,7 @@
             "children": []
           },
           {
-            "label": "Configurar la caché de trozos",
+            "label": "Configurar Chunk Cache",
             "id": "chunk_cache.md",
             "order": 3,
             "children": []

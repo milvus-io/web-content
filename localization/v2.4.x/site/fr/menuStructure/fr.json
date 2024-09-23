@@ -74,7 +74,7 @@
             "children": []
           },
           {
-            "label": "Run Milvus Standalone",
+            "label": "Exécuter Milvus en mode autonome",
             "id": "run_milvus_docker",
             "order": 2,
             "isMenu": true,
@@ -735,7 +735,7 @@
             "isMenu": true,
             "children": [
               {
-                "label": "Deploy on AWS",
+                "label": "Déployer sur AWS",
                 "id": "eks.md",
                 "order": 1,
                 "children": []
@@ -747,7 +747,7 @@
                 "children": []
               },
               {
-                "label": "Deploy on Azure",
+                "label": "Déployer sur Azure",
                 "id": "azure.md",
                 "order": 3,
                 "children": []

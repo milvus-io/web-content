@@ -741,7 +741,7 @@
                 "children": []
               },
               {
-                "label": "Deploy on GCP",
+                "label": "Bereitstellung auf GCP",
                 "id": "gcp.md",
                 "order": 2,
                 "children": []
@@ -1044,7 +1044,7 @@
             "children": []
           },
           {
-            "label": "RBAC einschalten",
+            "label": "RBAC aktivieren",
             "id": "rbac.md",
             "order": 1,
             "isMenu": true,
