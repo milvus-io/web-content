@@ -12,7 +12,7 @@ Constructs a JinaEmbeddingFunction for common use cases.
 
 ```python
 JinaEmbeddingFunction(
-    model_name: str = "jina-embeddings-v2-base-en",
+    model_name: str = "jina-embeddings-v3",
     api_key: Optional[str] = None,
     **kwargs
 )
@@ -22,7 +22,7 @@ JinaEmbeddingFunction(
 
 - **model_name** (*string*)
 
-    The name of the Jina AI embedding model to use for encoding. You can specify any of the available Jina AI embedding model names, for example, `jina-embeddings-v2-base-en`, `jina-embeddings-v2-small-en`, etc. If you leave this parameter unspecified, `jina-embeddings-v2-base-en` will be used. For a list of available models, refer to [Jina Embeddings](https://jina.ai/embeddings/).
+    The name of the Jina AI embedding model to use for encoding. You can specify any of the available Jina AI embedding model names. If you leave this parameter unspecified, `jina-embeddings-v3` will be used. For a list of available models, refer to [Jina Embeddings](https://jina.ai/embeddings/).
 
 - **api_key** (*string*)
 

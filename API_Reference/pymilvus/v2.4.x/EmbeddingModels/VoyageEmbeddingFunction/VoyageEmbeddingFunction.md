@@ -12,7 +12,7 @@ Constructs an VoyageEmbeddingFunction for common use cases.
 
 ```python
 VoyageEmbeddingFunction(
-    model_name: str = "voyage-2",
+    model_name: str = "voyage-3",
     api_key: Optional[str] = None,
     **kwargs
 )
@@ -22,7 +22,7 @@ VoyageEmbeddingFunction(
 
 - **model_name** (*string*)
 
-    The name of the Voyage model to use for encoding. You can specify any of the available Voyage model names, for example, `voyage-law-2`, `voyage-code-2`, etc. If you leave this parameter unspecified, `voyage-2` will be used. For a list of available models, refer to [Voyage official documentation](https://docs.voyageai.com/docs/embeddings).
+    The name of the Voyage model to use for encoding. You can specify any of the available Voyage model names, etc. If you leave this parameter unspecified, `voyage-3` will be used. For a list of available models, refer to [Voyage official documentation](https://docs.voyageai.com/docs/embeddings).
 
 - **api_key** (*string*)
 

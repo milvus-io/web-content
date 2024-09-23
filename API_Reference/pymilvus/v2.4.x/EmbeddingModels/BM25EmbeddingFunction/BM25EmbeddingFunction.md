@@ -17,7 +17,7 @@ BM25EmbeddingFunction(
     k1: float = 1.5,
     b: float = 0.75,
     epsilon: float = 0.25,
-    num_workers: Optional[int] = None,
+    num_workers: int = 1,
 )
 ```
 
@@ -45,7 +45,7 @@ BM25EmbeddingFunction(
 
 - **num_workers** (*int*)
 
-    The number of worker processes to use for parallelization. Defaults to the number of CPU cores if not specified.
+    The number of worker processes to use for parallelization. Defaults to `1`.
 
 ## Examples
 
