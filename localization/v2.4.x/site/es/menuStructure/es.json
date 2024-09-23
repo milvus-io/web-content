@@ -567,6 +567,30 @@
             "id": "embed-with-cohere.md",
             "order": 8,
             "children": []
+          },
+          {
+            "label": "Instructor",
+            "id": "embed-with-instructor.md",
+            "order": 9,
+            "children": []
+          },
+          {
+            "label": "Mistral AI",
+            "id": "embed-with-mistral-ai.md",
+            "order": 10,
+            "children": []
+          },
+          {
+            "label": "Nomic",
+            "id": "embed-with-nomic.md",
+            "order": 11,
+            "children": []
+          },
+          {
+            "label": "mGTE",
+            "id": "embed-with-mgte.md",
+            "order": 12,
+            "children": []
           }
         ]
       },
@@ -815,7 +839,7 @@
             "children": []
           },
           {
-            "label": "Configurar Chunk Cache",
+            "label": "Configurar la caché de trozos",
             "id": "chunk_cache.md",
             "order": 3,
             "children": []

@@ -30,14 +30,14 @@ pip install <span class="hljs-string">&quot;pymilvus[model]&quot;</span>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus.model.dense <span class="hljs-keyword">import</span> VoyageEmbeddingFunction
 
 voyage_ef = VoyageEmbeddingFunction(
-    model_name=<span class="hljs-string">&quot;voyage-lite-02-instruct&quot;</span>, <span class="hljs-comment"># Defaults to `voyage-2`</span>
+    model_name=<span class="hljs-string">&quot;voyage-3&quot;</span>, <span class="hljs-comment"># Defaults to `voyage-3`</span>
     api_key=VOYAGE_API_KEY <span class="hljs-comment"># Provide your Voyage API key</span>
 )
 <button class="copy-code-btn"></button></code></pre>
 <p><strong>Parameters</strong>:</p>
 <ul>
 <li><code translate="no">model_name</code> (string)
-The name of the Voyage model to use for encoding. You can specify any of the available Voyage model names, for example, <code translate="no">voyage-law-2</code>, <code translate="no">voyage-code-2</code>, etc. If you leave this parameter unspecified, <code translate="no">voyage-2</code> will be used. For a list of available models, refer to <a href="https://docs.voyageai.com/docs/embeddings">Voyage official documentation</a>.</li>
+The name of the Voyage model to use for encoding. You can specify any of the available Voyage model names, for example, <code translate="no">voyage-3-lite</code>, <code translate="no">voyage-finance-2</code>, etc. If you leave this parameter unspecified, <code translate="no">voyage-3</code> will be used. For a list of available models, refer to <a href="https://docs.voyageai.com/docs/embeddings">Voyage official documentation</a>.</li>
 <li><code translate="no">api_key</code> (string)
 The API key for accessing the Voyage API. For information on how to create an API key, refer to <a href="https://docs.voyageai.com/docs/api-key-and-installation">API Key and Python Client</a>.</li>
 </ul>

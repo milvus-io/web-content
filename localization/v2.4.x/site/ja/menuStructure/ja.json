@@ -567,6 +567,30 @@
             "id": "embed-with-cohere.md",
             "order": 8,
             "children": []
+          },
+          {
+            "label": "講師",
+            "id": "embed-with-instructor.md",
+            "order": 9,
+            "children": []
+          },
+          {
+            "label": "ミストラルAI",
+            "id": "embed-with-mistral-ai.md",
+            "order": 10,
+            "children": []
+          },
+          {
+            "label": "ノミック",
+            "id": "embed-with-nomic.md",
+            "order": 11,
+            "children": []
+          },
+          {
+            "label": "エムジーティーイー",
+            "id": "embed-with-mgte.md",
+            "order": 12,
+            "children": []
           }
         ]
       },
