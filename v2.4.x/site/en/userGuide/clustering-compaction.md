@@ -87,7 +87,7 @@ common:
 
 To apply the above changes to your Milvus cluster, please follow the steps in [Configure Milvus with Helm](configure-helm.md) and [Configure Milvus with Milvus Operators](configure_operator.md).
 
-## Collection Configuration
+### Collection Configuration
 
 For clustering compacting in a specific collection, you should select a scalar field from the collection as the clustering key.
 
