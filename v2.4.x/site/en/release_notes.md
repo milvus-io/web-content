@@ -7,6 +7,47 @@ title: Release Notes
 
 Find out what’s new in Milvus! This page summarizes new features, improvements, known issues, and bug fixes in each release. You can find the release notes for each released version after v2.4.0 in this section. We suggest that you regularly visit this page to learn about updates.
 
+## v2.4.12
+
+Release Date: September 26, 2024
+
+| Milvus version | Python SDK version | Java SDK version | Node.js SDK version |
+|----------------|--------------------|------------------|---------------------|
+| 2.4.12         | 2.4.7              | 2.4.4            | 2.4.9               |
+
+Milvus 2.4.12 introduces significant enhancements and critical bug fixes. This release addresses data duplication issues and improves failure recovery speed, particularly when handling large numbers of deletions. However, a known issue persists where failure recovery can be slow when deleting massive amounts of data. We are actively working on resolving this issue.
+
+### Improvements
+
+- Implemented graceful stop for flowgraph manager ([#36358](https://github.com/milvus-io/milvus/pull/36358))
+- Disabled index checks for non-loaded vector fields ([#36280](https://github.com/milvus-io/milvus/pull/36280))
+- Filtered out non-hit delete records during delta loading ([#36272](https://github.com/milvus-io/milvus/pull/36272))
+- Improved error handling for std::stoi exceptions ([#36296](https://github.com/milvus-io/milvus/pull/36296))
+- Disallowed keywords as field names or dynamic field names ([#36108](https://github.com/milvus-io/milvus/pull/36108))
+- Added metrics for delete entries in L0 segments ([#36227](https://github.com/milvus-io/milvus/pull/36227))
+- Implemented L0 forward policy to support remote loading ([#36208](https://github.com/milvus-io/milvus/pull/36208))
+- Added ANN field loading check in proxy ([#36194](https://github.com/milvus-io/milvus/pull/36194))
+- Enabled empty sparse row support ([#36061](https://github.com/milvus-io/milvus/pull/36061))
+- Fixed a security vulnerability ([#36156](https://github.com/milvus-io/milvus/pull/36156))
+- Implemented stats handler for request/response size metrics ([#36118](https://github.com/milvus-io/milvus/pull/36118))
+- Corrected size estimation for encoded array data ([#36379](https://github.com/milvus-io/milvus/pull/36379))
+
+### Bug fixes
+
+- Resolved metric type errors for collections with two vector fields ([#36473](https://github.com/milvus-io/milvus/pull/36473))
+- Fixed long buffering issues causing message queue reception failures ([#36425](https://github.com/milvus-io/milvus/pull/36425))
+- Implemented proper compact-to-segments return after split support ([#36429](https://github.com/milvus-io/milvus/pull/36429))
+- Resolved data race issues with node ID check goroutine ([#36377](https://github.com/milvus-io/milvus/pull/36377))
+- Removed element type check ([#36324](https://github.com/milvus-io/milvus/pull/36324))
+- Fixed concurrent access issues for growing and sealed segments ([#36288](https://github.com/milvus-io/milvus/pull/36288))
+- Implemented future stateful lock ([#36333](https://github.com/milvus-io/milvus/pull/36333))
+- Corrected offset usage in HybridSearch ([#36287](https://github.com/milvus-io/milvus/pull/36287), [#36253](https://github.com/milvus-io/milvus/pull/36253))
+- Resolved dirty segment/channel leaks on QueryNode ([#36259](https://github.com/milvus-io/milvus/pull/36259))
+- Fixed primary key duplication handling ([#36274](https://github.com/milvus-io/milvus/pull/36274))
+- Enforced metric type setting in search requests ([#36279](https://github.com/milvus-io/milvus/pull/36279))
+- Fixed stored_index_files_size metric clearing issue ([#36161](https://github.com/milvus-io/milvus/pull/36161))
+- Corrected readwrite privilege group behavior for global API access ([#36145](https://github.com/milvus-io/milvus/pull/36145))
+
 ## v2.4.11
 
 Release Date: September 11, 2024
