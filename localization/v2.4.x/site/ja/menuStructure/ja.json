@@ -381,7 +381,7 @@
         "children": []
       },
       {
-        "label": "Insert, Upsert & Delete",
+        "label": "挿入、アップサート、削除",
         "id": "insert-update-delete.md",
         "order": 5,
         "children": []
@@ -1360,7 +1360,13 @@
           {
             "label": "幸太右衛門",
             "id": "kotaemon_with_milvus.md",
-            "order": 2,
+            "order": 5,
+            "children": []
+          },
+          {
+            "label": "ダイファイ",
+            "id": "dify_with_milvus.md",
+            "order": 6,
             "children": []
           }
         ]
@@ -1425,6 +1431,18 @@
             "id": "integrate_with_voxel51.md",
             "order": 2,
             "children": []
+          },
+          {
+            "label": "アリゼ・フェニックス",
+            "id": "evaluation_with_phoenix.md",
+            "order": 3,
+            "children": []
+          },
+          {
+            "label": "ディープエヴァル",
+            "id": "evaluation_with_deepeval.md",
+            "order": 4,
+            "children": []
           }
         ]
       },
@@ -1443,6 +1461,12 @@
             "label": "カフカ",
             "id": "kafka-connect-milvus.md",
             "order": 1,
+            "children": []
+          },
+          {
+            "label": "アピファイ",
+            "id": "apify_milvus_rag.md",
+            "order": 2,
             "children": []
           }
         ]

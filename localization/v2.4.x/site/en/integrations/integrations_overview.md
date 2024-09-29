@@ -55,5 +55,9 @@ title: Integrations Overview
 <tr><td><a href="/docs/llama_agents_metadata.md">Multi-agent Systems with Mistral AI, Milvus and Llama-agents</a></td><td>Agent</td><td>Milvus, Mistral AI, LlamaIndex</td></tr>
 <tr><td><a href="/docs/kafka-connect-milvus.md">Connect Kafka with Milvus</a></td><td>Data Sources</td><td>Milvus, Kafka</td></tr>
 <tr><td><a href="/docs/kotaemon_with_milvus.md">Kotaemon RAG with Milvus</a></td><td>RAG</td><td>Milvus, Kotaemon</td></tr>
+<tr><td><a href="/docs/apify_milvus_rag.md">Retrieval-Augmented Generation: Crawling Websites with Apify and Saving Data to Milvus for Question Answering</a></td><td>Data Sources</td><td>Milvus, Apify</td></tr>
+<tr><td><a href="/docs/evaluation_with_deepeval.md">Evaluation with DeepEval</a></td><td>Evaluation &amp; Observability</td><td>Milvus, DeepEval</td></tr>
+<tr><td><a href="/docs/evaluation_with_phoenix.md">Evaluation with Arize Pheonix</a></td><td>Evaluation &amp; Observability</td><td>Milvus, Arize Pheonix</td></tr>
+<tr><td><a href="/docs/dify_with_milvus.md">Deploying Dify with Milvus</a></td><td>Ochestration</td><td>Milvus, Dify</td></tr>
 </tbody>
 </table>

@@ -1360,7 +1360,13 @@
           {
             "label": "小太右卫门",
             "id": "kotaemon_with_milvus.md",
-            "order": 2,
+            "order": 5,
+            "children": []
+          },
+          {
+            "label": "Dify",
+            "id": "dify_with_milvus.md",
+            "order": 6,
             "children": []
           }
         ]
@@ -1425,6 +1431,18 @@
             "id": "integrate_with_voxel51.md",
             "order": 2,
             "children": []
+          },
+          {
+            "label": "阿里兹-菲尼克斯",
+            "id": "evaluation_with_phoenix.md",
+            "order": 3,
+            "children": []
+          },
+          {
+            "label": "深度评估",
+            "id": "evaluation_with_deepeval.md",
+            "order": 4,
+            "children": []
           }
         ]
       },
@@ -1443,6 +1461,12 @@
             "label": "卡夫卡",
             "id": "kafka-connect-milvus.md",
             "order": 1,
+            "children": []
+          },
+          {
+            "label": "Apify",
+            "id": "apify_milvus_rag.md",
+            "order": 2,
             "children": []
           }
         ]

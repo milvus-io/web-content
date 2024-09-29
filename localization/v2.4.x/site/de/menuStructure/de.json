@@ -1044,7 +1044,7 @@
             "children": []
           },
           {
-            "label": "RBAC aktivieren",
+            "label": "RBAC einschalten",
             "id": "rbac.md",
             "order": 1,
             "isMenu": true,
@@ -1360,7 +1360,13 @@
           {
             "label": "Kotaemon",
             "id": "kotaemon_with_milvus.md",
-            "order": 2,
+            "order": 5,
+            "children": []
+          },
+          {
+            "label": "Dify",
+            "id": "dify_with_milvus.md",
+            "order": 6,
             "children": []
           }
         ]
@@ -1425,6 +1431,18 @@
             "id": "integrate_with_voxel51.md",
             "order": 2,
             "children": []
+          },
+          {
+            "label": "Arize Pheonix",
+            "id": "evaluation_with_phoenix.md",
+            "order": 3,
+            "children": []
+          },
+          {
+            "label": "DeepEval",
+            "id": "evaluation_with_deepeval.md",
+            "order": 4,
+            "children": []
           }
         ]
       },
@@ -1443,6 +1461,12 @@
             "label": "Kafka",
             "id": "kafka-connect-milvus.md",
             "order": 1,
+            "children": []
+          },
+          {
+            "label": "Apify",
+            "id": "apify_milvus_rag.md",
+            "order": 2,
             "children": []
           }
         ]
