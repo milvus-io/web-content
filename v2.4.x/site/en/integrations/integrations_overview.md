@@ -39,3 +39,7 @@ This page provides a list of tutorials for you to interact with Milvus and third
 | [Multi-agent Systems with Mistral AI, Milvus and Llama-agents](llama_agents_metadata.md) | Agent | Milvus, Mistral AI, LlamaIndex |
 | [Connect Kafka with Milvus](kafka-connect-milvus.md) | Data Sources | Milvus, Kafka |
 | [Kotaemon RAG with Milvus](kotaemon_with_milvus.md) | RAG | Milvus, Kotaemon |
+| [Retrieval-Augmented Generation: Crawling Websites with Apify and Saving Data to Milvus for Question Answering](apify_milvus_rag.md) | Data Sources | Milvus, Apify |
+| [Evaluation with DeepEval](evaluation_with_deepeval.md) | Evaluation & Observability | Milvus, DeepEval |
+| [Evaluation with Arize Pheonix](evaluation_with_phoenix.md) | Evaluation & Observability | Milvus, Arize Pheonix |
+| [Deploying Dify with Milvus](dify_with_milvus.md) | Ochestration | Milvus, Dify |
