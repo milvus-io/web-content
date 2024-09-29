@@ -416,7 +416,6 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 <div class="alert note">
 <ul>
 <li>Upsert operations will not update the primary keys.</li>
-<li>Upsert operations does not support collections with <code translate="no">autoID</code> enabled.</li>
 <li>If you plan to use the <code translate="no">upsert</code> operation instead of <code translate="no">insert</code> for large-scale data ingestion (e.g. millions of vectors), be aware that this can lead to high memory consumption on Milvus data nodes.</li>
 </ul>
 </div>
