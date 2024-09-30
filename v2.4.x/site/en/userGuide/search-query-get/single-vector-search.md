@@ -1849,9 +1849,11 @@ To learn more about distance metric types, refer to [Similarity Metrics](metric.
 
 ## Grouping search
 
-In Milvus, grouping search by a specific field can avoid redundancy of the same field item in the results. You can get a varied set of results for the specific field. 
+In Milvus, grouping search is designed to improve comprehensiveness and accuracy for search results.
 
-Consider a collection of documents, each document splits into various passages. Each passage is represented by one vector embedding and belongs to one document. To find relevant documents instead of similar passages, you can include the `group_by_field` argument in the `search()` opeartion to group results by the document ID. This helps return the most relevant and unique documents, rather than separate passages from the same document.
+Consider a scenario in RAG, where loads of documents are split into various passages, and each passage is represented by one vector embedding. Users want to find the most relevant passages to prompt the LLMs accurately. The ordinary Milvus search function can meet this requirement, but it may result in highly skewed and biased results: most of the passages come from only a few documents, and the comprehensiveness of the search results is very poor. This can seriously impair the accuracy or even correctness of the results given by the LLM and influence the LLM users' experience negatively.
+
+Grouping search can effectively solve this problem. By passing a group_by_field and group_size, Milvus users can bucket the search results into several groups and ensure that the number of entities from each group does not exceed a specific group_size. This feature can significantly enhance the comprehensiveness and fairness of search results, noticeably improving the quality of LLM output.
 
 Here is the example code to group search results by field:
 
@@ -1870,26 +1872,31 @@ res = client.search(
     "metric_type": "L2",
     "params": {"nprobe": 10},
     }, # Search parameters
-    limit=10, # Max. number of search results to return
+    limit=5, # Max. number of groups to return
     group_by_field="doc_id", # Group results by document ID
+    group_size=2, # returned at most 2 passages per document, the default value is 1
+    group_strict_size=True, # ensure every group contains exactly 3 passages
     output_fields=["doc_id", "passage_id"]
 )
 
 # Retrieve the values in the `doc_id` column
 doc_ids = [result['entity']['doc_id'] for result in res[0]]
+passage_ids = [result['entity']['passage_id'] for result in res[0]]
 
 print(doc_ids)
+print(passage_ids)
 ```
 
 The output is similar to the following:
 
 ```python
-[5, 10, 1, 7, 9, 6, 3, 4, 8, 2]
+["doc_11", "doc_11", "doc_7", "doc_7", "doc_3", "doc_3", "doc_2", "doc_2", "doc_8", "doc_8"]
+[5, 10, 11, 10, 9, 6, 5, 4, 9, 2]
 ```
 
-In the given output, it can be observed that the returned entities do not contain any duplicate `doc_id` values.
+In the given output, it can be observed that for each document, exactly two passages are retrieved and a total of 5 documents collectively make up the results.
 
-For comparison, let's comment out the `group_by_field` and conduct a regular search:
+For comparison, let's comment out the group-related parameters and conduct a regular search:
 
 ```python
 # Connect to Milvus
@@ -1906,24 +1913,31 @@ res = client.search(
     "metric_type": "L2",
     "params": {"nprobe": 10},
     }, # Search parameters
-    limit=10, # Max. number of search results to return
+    limit=5, # Max. number of search results to return
     # group_by_field="doc_id", # Group results by document ID
+    # group_size=2, 
+    # group_strict_size=True,
     output_fields=["doc_id", "passage_id"]
 )
 
 # Retrieve the values in the `doc_id` column
 doc_ids = [result['entity']['doc_id'] for result in res[0]]
+passage_ids = [result['entity']['passage_id'] for result in res[0]]
 
 print(doc_ids)
+print(passage_ids)
 ```
 
 The output is similar to the following:
 
 ```python
-[1, 10, 3, 10, 1, 9, 4, 4, 8, 6]
+["doc_11", "doc_11", "doc_11", "doc_11", "doc_11"]
+[1, 10, 3, 12, 9]
 ```
 
-In the given output, it can be observed that the returned entities contain duplicate `doc_id` values.
+In the given output, it can be observed that "doc_11" completely dominated the search results, overshadowing the high-quality paragraphs from other documents, which can be a poor prompt to LLM.
+
+One more point to note: by default, grouping_search will return results instantly when it has enough groups, which may lead to the number of results in each group not being sufficient to meet the group_size. If you care about the number of results for each group, set group_strict_size=True as shown in the code above. This will make Milvus strive to obtain enough results for each group, at a slight cost to performance.
 
 __Limitations__
 
@@ -1935,7 +1949,7 @@ __Limitations__
 
 - __Performance Impact__: Be mindful that performance degrades with increasing query vector counts. Using a cluster with 2 CPU cores and 8 GB of memory as an example, the execution time for grouping search increases proportionally with the number of input query vectors.
 
-- __Functionality__: Currently, grouping search is not supported by [range search](https://milvus.io/docs/single-vector-search.md#Range-search), [search iterators](https://milvus.io/docs/with-iterators.md#Search-with-iterator), or [hybrid search](multi-vector-search.md).
+- __Functionality__: Currently, grouping search is not supported by [range search](https://milvus.io/docs/single-vector-search.md#Range-search), [search iterators](https://milvus.io/docs/with-iterators.md#Search-with-iterator)
 
 ## Search parameters
 

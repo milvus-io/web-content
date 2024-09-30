@@ -267,8 +267,9 @@ iterator = collection.search_iterator(
     batch_size=10,
     param=search_params,
     output_fields=["color_tag"],
-    limit=3
+    limit=300
 )
+# search 300 entities totally with 10 entities per page
 
 results = []
 
