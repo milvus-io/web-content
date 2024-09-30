@@ -1768,8 +1768,9 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>In Milvus, grouping search by a specific field can avoid redundancy of the same field item in the results. You can get a varied set of results for the specific field.</p>
-<p>Consider a collection of documents, each document splits into various passages. Each passage is represented by one vector embedding and belongs to one document. To find relevant documents instead of similar passages, you can include the <code translate="no">group_by_field</code> argument in the <code translate="no">search()</code> opeartion to group results by the document ID. This helps return the most relevant and unique documents, rather than separate passages from the same document.</p>
+    </button></h2><p>In Milvus, grouping search is designed to improve comprehensiveness and accuracy for search results.</p>
+<p>Consider a scenario in RAG, where loads of documents are split into various passages, and each passage is represented by one vector embedding. Users want to find the most relevant passages to prompt the LLMs accurately. The ordinary Milvus search function can meet this requirement, but it may result in highly skewed and biased results: most of the passages come from only a few documents, and the comprehensiveness of the search results is very poor. This can seriously impair the accuracy or even correctness of the results given by the LLM and influence the LLM users’ experience negatively.</p>
+<p>Grouping search can effectively solve this problem. By passing a group_by_field and group_size, Milvus users can bucket the search results into several groups and ensure that the number of entities from each group does not exceed a specific group_size. This feature can significantly enhance the comprehensiveness and fairness of search results, noticeably improving the quality of LLM output.</p>
 <p>Here is the example code to group search results by field:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Connect to Milvus</span>
 client = MilvusClient(uri=<span class="hljs-string">&#x27;http://localhost:19530&#x27;</span>) <span class="hljs-comment"># Milvus server address</span>
@@ -1785,21 +1786,26 @@ res = client.search(
     <span class="hljs-string">&quot;metric_type&quot;</span>: <span class="hljs-string">&quot;L2&quot;</span>,
     <span class="hljs-string">&quot;params&quot;</span>: {<span class="hljs-string">&quot;nprobe&quot;</span>: <span class="hljs-number">10</span>},
     }, <span class="hljs-comment"># Search parameters</span>
-    limit=<span class="hljs-number">10</span>, <span class="hljs-comment"># Max. number of search results to return</span>
+    limit=<span class="hljs-number">5</span>, <span class="hljs-comment"># Max. number of groups to return</span>
     group_by_field=<span class="hljs-string">&quot;doc_id&quot;</span>, <span class="hljs-comment"># Group results by document ID</span>
+    group_size=<span class="hljs-number">2</span>, <span class="hljs-comment"># returned at most 2 passages per document, the default value is 1</span>
+    group_strict_size=<span class="hljs-literal">True</span>, <span class="hljs-comment"># ensure every group contains exactly 3 passages</span>
     output_fields=[<span class="hljs-string">&quot;doc_id&quot;</span>, <span class="hljs-string">&quot;passage_id&quot;</span>]
 )
 
 <span class="hljs-comment"># Retrieve the values in the `doc_id` column</span>
 doc_ids = [result[<span class="hljs-string">&#x27;entity&#x27;</span>][<span class="hljs-string">&#x27;doc_id&#x27;</span>] <span class="hljs-keyword">for</span> result <span class="hljs-keyword">in</span> res[<span class="hljs-number">0</span>]]
+passage_ids = [result[<span class="hljs-string">&#x27;entity&#x27;</span>][<span class="hljs-string">&#x27;passage_id&#x27;</span>] <span class="hljs-keyword">for</span> result <span class="hljs-keyword">in</span> res[<span class="hljs-number">0</span>]]
 
 <span class="hljs-built_in">print</span>(doc_ids)
+<span class="hljs-built_in">print</span>(passage_ids)
 <button class="copy-code-btn"></button></code></pre>
 <p>The output is similar to the following:</p>
-<pre><code translate="no" class="language-python">[<span class="hljs-meta">5, 10, 1, 7, 9, 6, 3, 4, 8, 2</span>]
+<pre><code translate="no" class="language-python">[<span class="hljs-string">&quot;doc_11&quot;</span>, <span class="hljs-string">&quot;doc_11&quot;</span>, <span class="hljs-string">&quot;doc_7&quot;</span>, <span class="hljs-string">&quot;doc_7&quot;</span>, <span class="hljs-string">&quot;doc_3&quot;</span>, <span class="hljs-string">&quot;doc_3&quot;</span>, <span class="hljs-string">&quot;doc_2&quot;</span>, <span class="hljs-string">&quot;doc_2&quot;</span>, <span class="hljs-string">&quot;doc_8&quot;</span>, <span class="hljs-string">&quot;doc_8&quot;</span>]
+[<span class="hljs-meta">5, 10, 11, 10, 9, 6, 5, 4, 9, 2</span>]
 <button class="copy-code-btn"></button></code></pre>
-<p>In the given output, it can be observed that the returned entities do not contain any duplicate <code translate="no">doc_id</code> values.</p>
-<p>For comparison, let’s comment out the <code translate="no">group_by_field</code> and conduct a regular search:</p>
+<p>In the given output, it can be observed that for each document, exactly two passages are retrieved and a total of 5 documents collectively make up the results.</p>
+<p>For comparison, let’s comment out the group-related parameters and conduct a regular search:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Connect to Milvus</span>
 client = MilvusClient(uri=<span class="hljs-string">&#x27;http://localhost:19530&#x27;</span>) <span class="hljs-comment"># Milvus server address</span>
 
@@ -1814,27 +1820,33 @@ res = client.search(
     <span class="hljs-string">&quot;metric_type&quot;</span>: <span class="hljs-string">&quot;L2&quot;</span>,
     <span class="hljs-string">&quot;params&quot;</span>: {<span class="hljs-string">&quot;nprobe&quot;</span>: <span class="hljs-number">10</span>},
     }, <span class="hljs-comment"># Search parameters</span>
-    limit=<span class="hljs-number">10</span>, <span class="hljs-comment"># Max. number of search results to return</span>
+    limit=<span class="hljs-number">5</span>, <span class="hljs-comment"># Max. number of search results to return</span>
     <span class="hljs-comment"># group_by_field=&quot;doc_id&quot;, # Group results by document ID</span>
+    <span class="hljs-comment"># group_size=2, </span>
+    <span class="hljs-comment"># group_strict_size=True,</span>
     output_fields=[<span class="hljs-string">&quot;doc_id&quot;</span>, <span class="hljs-string">&quot;passage_id&quot;</span>]
 )
 
 <span class="hljs-comment"># Retrieve the values in the `doc_id` column</span>
 doc_ids = [result[<span class="hljs-string">&#x27;entity&#x27;</span>][<span class="hljs-string">&#x27;doc_id&#x27;</span>] <span class="hljs-keyword">for</span> result <span class="hljs-keyword">in</span> res[<span class="hljs-number">0</span>]]
+passage_ids = [result[<span class="hljs-string">&#x27;entity&#x27;</span>][<span class="hljs-string">&#x27;passage_id&#x27;</span>] <span class="hljs-keyword">for</span> result <span class="hljs-keyword">in</span> res[<span class="hljs-number">0</span>]]
 
 <span class="hljs-built_in">print</span>(doc_ids)
+<span class="hljs-built_in">print</span>(passage_ids)
 <button class="copy-code-btn"></button></code></pre>
 <p>The output is similar to the following:</p>
-<pre><code translate="no" class="language-python">[<span class="hljs-meta">1, 10, 3, 10, 1, 9, 4, 4, 8, 6</span>]
+<pre><code translate="no" class="language-python">[<span class="hljs-string">&quot;doc_11&quot;</span>, <span class="hljs-string">&quot;doc_11&quot;</span>, <span class="hljs-string">&quot;doc_11&quot;</span>, <span class="hljs-string">&quot;doc_11&quot;</span>, <span class="hljs-string">&quot;doc_11&quot;</span>]
+[<span class="hljs-meta">1, 10, 3, 12, 9</span>]
 <button class="copy-code-btn"></button></code></pre>
-<p>In the given output, it can be observed that the returned entities contain duplicate <code translate="no">doc_id</code> values.</p>
+<p>In the given output, it can be observed that “doc_11” completely dominated the search results, overshadowing the high-quality paragraphs from other documents, which can be a poor prompt to LLM.</p>
+<p>One more point to note: by default, grouping_search will return results instantly when it has enough groups, which may lead to the number of results in each group not being sufficient to meet the group_size. If you care about the number of results for each group, set group_strict_size=True as shown in the code above. This will make Milvus strive to obtain enough results for each group, at a slight cost to performance.</p>
 <p><strong>Limitations</strong></p>
 <ul>
 <li><p><strong>Indexing</strong>: This grouping feature works only for collections that are indexed with the <strong>HNSW</strong>, <strong>IVF_FLAT</strong>, or <strong>FLAT</strong> type. For more information, refer to <a href="https://milvus.io/docs/index.md#HNSW">In-memory Index</a>.</p></li>
 <li><p><strong>Vector</strong>: Currently, grouping search does not support a vector field of the <strong>BINARY_VECTOR</strong> type. For more information on data types, refer to <a href="https://milvus.io/docs/schema.md#Supported-data-types">Supported data types</a>.</p></li>
 <li><p><strong>Field</strong>: Currently, grouping search allows only for a single column. You cannot specify multiple field names in the <code translate="no">group_by_field</code> config.  Additionally, grouping search is incompatible with data types of JSON, FLOAT, DOUBLE, ARRAY, or vector fields.</p></li>
 <li><p><strong>Performance Impact</strong>: Be mindful that performance degrades with increasing query vector counts. Using a cluster with 2 CPU cores and 8 GB of memory as an example, the execution time for grouping search increases proportionally with the number of input query vectors.</p></li>
-<li><p><strong>Functionality</strong>: Currently, grouping search is not supported by <a href="https://milvus.io/docs/single-vector-search.md#Range-search">range search</a>, <a href="https://milvus.io/docs/with-iterators.md#Search-with-iterator">search iterators</a>, or <a href="/docs/multi-vector-search.md">hybrid search</a>.</p></li>
+<li><p><strong>Functionality</strong>: Currently, grouping search is not supported by <a href="https://milvus.io/docs/single-vector-search.md#Range-search">range search</a>, <a href="https://milvus.io/docs/with-iterators.md#Search-with-iterator">search iterators</a></p></li>
 </ul>
 <h2 id="Search-parameters" class="common-anchor-header">Search parameters<button data-href="#Search-parameters" class="anchor-icon" translate="no">
       <svg translate="no"
