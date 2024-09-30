@@ -74,7 +74,7 @@
             "children": []
           },
           {
-            "label": "Run Milvus Standalone",
+            "label": "Exécuter Milvus en mode autonome",
             "id": "run_milvus_docker",
             "order": 2,
             "isMenu": true,

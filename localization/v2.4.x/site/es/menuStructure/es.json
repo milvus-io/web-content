@@ -12,7 +12,7 @@
         "children": []
       },
       {
-        "label": "Adoptantes de Milvus",
+        "label": "Milvus Adoptantes",
         "id": "milvus_adopters.md",
         "order": 1,
         "children": []
@@ -1505,7 +1505,7 @@
         "children": []
       },
       {
-        "label": "Image Search with Milvus",
+        "label": "Búsqueda de imágenes con Milvus",
         "id": "image_similarity_search.md",
         "order": 2,
         "children": []
@@ -1546,7 +1546,7 @@
             "children": []
           },
           {
-            "label": "Búsqueda por similitud de vídeos",
+            "label": "Video Similarity Search",
             "id": "video_similarity_search.md",
             "order": 7,
             "children": []

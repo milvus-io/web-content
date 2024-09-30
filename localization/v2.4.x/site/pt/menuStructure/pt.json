@@ -50,7 +50,7 @@
     "order": 1,
     "children": [
       {
-        "label": "Início rápido",
+        "label": "Quickstart",
         "id": "quickstart.md",
         "order": 0,
         "children": []
@@ -381,7 +381,7 @@
         "children": []
       },
       {
-        "label": "Inserir, Upsert e Apagar",
+        "label": "Inserir, Upsert e Eliminar",
         "id": "insert-update-delete.md",
         "order": 5,
         "children": []
@@ -1093,7 +1093,7 @@
         ]
       },
       {
-        "label": "Backup de Milvus",
+        "label": "Milvus Backup",
         "id": "milvus_backup",
         "order": 1,
         "children": [
