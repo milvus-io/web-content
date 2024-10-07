@@ -1546,7 +1546,7 @@
             "children": []
           },
           {
-            "label": "Video Similarity Search",
+            "label": "Búsqueda por similitud de vídeos",
             "id": "video_similarity_search.md",
             "order": 7,
             "children": []

@@ -653,7 +653,7 @@
         "children": []
       },
       {
-        "label": "移行ツールのインストール",
+        "label": "Install Migration Tool",
         "id": "milvusdm_install.md",
         "order": 1,
         "children": []
