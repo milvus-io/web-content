@@ -24,7 +24,7 @@ Milvus provides a Docker Compose configuration file in the Milvus repository. To
 $ wget https://github.com/milvus-io/milvus/releases/download/v2.4.12/milvus-standalone-docker-compose.yml -O docker-compose.yml
 
 # Start Milvus
-$ sudo docker compose up -d
+$ sudo docker-compose up -d
 
 Creating milvus-etcd  ... done
 Creating milvus-minio ... done
@@ -49,7 +49,7 @@ After starting up Milvus,
 You can check if the containers are up and running using the following command:
 
 ```shell
-$ sudo docker compose ps
+$ sudo docker-compose ps
 
       Name                     Command                  State                            Ports
 --------------------------------------------------------------------------------------------------------------------
@@ -62,7 +62,7 @@ You can stop and delete this container as follows
 
 ```shell
 # Stop Milvus
-$ sudo docker compose down
+$ sudo docker-compose down
 
 # Delete service data
 $ sudo rm -rf volumes
