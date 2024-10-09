@@ -14,6 +14,11 @@ Milvus adopts a shared-storage architecture featuring storage and computing disa
 
 ![Architecture_diagram](../../../../assets/milvus_architecture.png "Milvus architecture.")
 
+According to the figure, interfaces can be classified into the following categories:
+
+- **DDL / DCL:** createCollection / createPartition / dropCollection / dropPartition / hasCollection / hasPartition
+- **DML / Produce:** insert / delete / upsert
+- **DQL:** search / query
 
 ## What's next
 
