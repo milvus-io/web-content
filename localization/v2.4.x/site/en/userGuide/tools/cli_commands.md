@@ -143,7 +143,7 @@ title: Milvus_CLI Command Reference
 <h3 id="Examples" class="common-anchor-header">Examples</h3><h4 id="Example-1" class="common-anchor-header">Example 1</h4><p>The following example use the database <code translate="no">testdb</code>  in milvus.</p>
 <pre><code translate="no" class="language-shell">milvus_cli &gt; use database -db testdb
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="List-Databases" class="common-anchor-header">List Databases<button data-href="#List-Databases" class="anchor-icon" translate="no">
+<h2 id="list-Databases" class="common-anchor-header">list Databases<button data-href="#list-Databases" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -165,7 +165,7 @@ title: Milvus_CLI Command Reference
 <h3 id="Examples" class="common-anchor-header">Examples</h3><h4 id="Example-1" class="common-anchor-header">Example 1</h4><p>The following example list the databases in milvus.</p>
 <pre><code translate="no" class="language-shell">milvus_cli &gt; list databases
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Delete-Database" class="common-anchor-header">Delete Database<button data-href="#Delete-Database" class="anchor-icon" translate="no">
+<h2 id="delete-Database" class="common-anchor-header">delete Database<button data-href="#delete-Database" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -1166,7 +1166,7 @@ timeout []:
 Guarantee Timestamp(It instructs Milvus to see <span class="hljs-built_in">all</span> operations performed before a provided timestamp. If no such timestamp <span class="hljs-keyword">is</span> provided, then Milvus will search <span class="hljs-built_in">all</span> operations performed to date) [<span class="hljs-number">0</span>]:
 
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="List-connection" class="common-anchor-header">List connection<button data-href="#List-connection" class="anchor-icon" translate="no">
+<h2 id="list-connection" class="common-anchor-header">list connection<button data-href="#list-connection" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
