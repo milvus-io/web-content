@@ -246,11 +246,11 @@ Let's run three different searches with defined functions:
 
 ```python
 dense_results = dense_search(col, query_embeddings["dense"][0])
-sparse_results = sparse_search(col, query_embeddings["sparse"][[0]])
+sparse_results = sparse_search(col, query_embeddings["sparse"]._getrow(0))
 hybrid_results = hybrid_search(
     col,
     query_embeddings["dense"][0],
-    query_embeddings["sparse"][[0]],
+    query_embeddings["sparse"]._getrow(0),
     sparse_weight=0.7,
     dense_weight=1.0,
 )
