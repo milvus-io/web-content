@@ -79,5 +79,5 @@ title: Milvus Backup
         ></path>
       </svg>
     </button></h2><ul>
-<li><a href="https://github.com/zilliztech/milvus-backup/releases/tag/v0.4.12">v0.4.12</a></li>
+<li><a href="https://github.com/zilliztech/milvus-backup/releases/tag/v0.4.15">v0.4.15</a></li>
 </ul>

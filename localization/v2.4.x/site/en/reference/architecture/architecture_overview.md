@@ -29,6 +29,12 @@ title: Milvus Architecture Overview
     <span>Architecture_diagram</span>
   </span>
 </p>
+<p>According to the figure, interfaces can be classified into the following categories:</p>
+<ul>
+<li><strong>DDL / DCL:</strong> createCollection / createPartition / dropCollection / dropPartition / hasCollection / hasPartition</li>
+<li><strong>DML / Produce:</strong> insert / delete / upsert</li>
+<li><strong>DQL:</strong> search / query</li>
+</ul>
 <h2 id="Whats-next" class="common-anchor-header">What’s next<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
