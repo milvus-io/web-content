@@ -51,7 +51,7 @@ title: Use Partition Key
         ></path>
       </svg>
     </button></h2><p>To set a field as the partition key, specify <code translate="no">partition_key_field</code> when creating a collection schema.</p>
-<p>In the example code below, <code translate="no">num_partitions</code> determines the number of partitions that will be created. By default, it is set to <code translate="no">16</code>. We recommend you retain the default value.</p>
+<p>In the example code below, <code translate="no">num_partitions</code> determines the number of partitions that will be created. By default, it is set to <code translate="no">64</code>. We recommend you retain the default value.</p>
 <div class="language-python">
 <p>For more information on parameters, refer to <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Client/MilvusClient.md"><code translate="no">MilvusClient</code></a>, <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_schema.md"><code translate="no">create_schema()</code></a>, and <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/CollectionSchema/add_field.md"><code translate="no">add_field()</code></a> in the SDK reference.</p>
 </div>
@@ -81,7 +81,7 @@ schema = MilvusClient.create_schema(
     auto_id=<span class="hljs-literal">False</span>,
     enable_dynamic_field=<span class="hljs-literal">True</span>,
     partition_key_field=<span class="hljs-string">&quot;color&quot;</span>,
-    num_partitions=<span class="hljs-number">16</span> <span class="hljs-comment"># Number of partitions. Defaults to 16.</span>
+    num_partitions=<span class="hljs-number">64</span> <span class="hljs-comment"># Number of partitions. Defaults to 64.</span>
 )
 
 schema.add_field(field_name=<span class="hljs-string">&quot;id&quot;</span>, datatype=DataType.INT64, is_primary=<span class="hljs-literal">True</span>)

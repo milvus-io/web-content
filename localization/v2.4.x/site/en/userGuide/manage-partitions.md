@@ -966,7 +966,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 <li><p><strong>How much data can be stored in a partition?</strong></p>
 <p>It is recommended to store less than 1B of data in a partition.</p></li>
 <li><p><strong>What is the maximum number of partitions that can be created?</strong></p>
-<p>By default, Milvus allows a maximum of 4,096 partitions to be created. You can adjust the maximum number of partitions by configuring <code translate="no">rootCoord.maxPartitionNum</code>. For details, refer to <a href="https://milvus.io/docs/configure_rootcoord.md#rootCoordmaxPartitionNum">System Configurations</a>.</p></li>
+<p>By default, Milvus allows a maximum of 1,024 partitions to be created. You can adjust the maximum number of partitions by configuring <code translate="no">rootCoord.maxPartitionNum</code>. For details, refer to <a href="https://milvus.io/docs/configure_rootcoord.md#rootCoordmaxPartitionNum">System Configurations</a>.</p></li>
 <li><p><strong>How can I differentiate between partitions and partition keys?</strong></p>
 <p>Partitions are physical storage units, whereas partition keys are logical concepts that automatically assign data to specific partitions based on a designated column.</p>
 <p>For instance, in Milvus, if you have a collection with a partition key defined as the <code translate="no">color</code> field, the system automatically assigns data to partitions based on the hashed values of the <code translate="no">color</code> field for each entity. This automated process relieves the user of the responsibility to manually specify the partition when inserting or searching data.</p>
