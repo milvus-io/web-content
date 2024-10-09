@@ -60,7 +60,7 @@ title: Run Milvus with Docker Compose
 $ wget https://github.com/milvus-io/milvus/releases/download/v2.4.12/milvus-standalone-docker-compose.yml -O docker-compose.yml
 
 <span class="hljs-comment"># Start Milvus</span>
-$ <span class="hljs-built_in">sudo</span> docker compose up -d
+$ <span class="hljs-built_in">sudo</span> docker-compose up -d
 
 Creating milvus-etcd  ... <span class="hljs-keyword">done</span>
 Creating milvus-minio ... <span class="hljs-keyword">done</span>
@@ -82,7 +82,7 @@ Creating milvus-standalone ... <span class="hljs-keyword">done</span>
 </ul></li>
 </ul>
 <p>You can check if the containers are up and running using the following command:</p>
-<pre><code translate="no" class="language-shell">$ <span class="hljs-built_in">sudo</span> docker compose ps
+<pre><code translate="no" class="language-shell">$ <span class="hljs-built_in">sudo</span> docker-compose ps
 
       Name                     Command                  State                            Ports
 --------------------------------------------------------------------------------------------------------------------
@@ -92,7 +92,7 @@ milvus-standalone   /tini -- milvus run standalone   Up             0.0.0.0:1953
 <button class="copy-code-btn"></button></code></pre>
 <p>You can stop and delete this container as follows</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-comment"># Stop Milvus</span>
-$ <span class="hljs-built_in">sudo</span> docker compose down
+$ <span class="hljs-built_in">sudo</span> docker-compose down
 
 <span class="hljs-comment"># Delete service data</span>
 $ <span class="hljs-built_in">sudo</span> <span class="hljs-built_in">rm</span> -rf volumes
