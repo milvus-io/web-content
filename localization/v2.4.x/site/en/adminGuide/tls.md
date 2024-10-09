@@ -19,7 +19,7 @@ summary: Learn how to enable TLS proxy in Milvus.
         ></path>
       </svg>
     </button></h1><p>TLS (Transport Layer Security) is an encryption protocol to ensure communication security. Milvus proxy uses TLS one-way and two-way authentication.</p>
-<p>This topic describes how to enable TLS proxy in Milvus.</p>
+<p>This topic describes how to enable TLS in Milvus proxy for both gRPC and RESTful traffics.</p>
 <div class="alert note">
 <p>TLS and user authentication are two distinct security approaches. If you have enabled both user authentication and TLS in your Milvus system, you will need to provide a username, password, and certificate file paths. For information on how to enable user authentication, refer to <a href="/docs/authenticate.md">Authenticate User Access</a>.</p>
 </div>
@@ -563,7 +563,7 @@ openssl x509 -req -days 3650 -<span class="hljs-keyword">in</span> client.csr -o
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client = MilvusClient(
-    uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>,
+    uri=<span class="hljs-string">&quot;https://localhost:19530&quot;</span>,
     secure=<span class="hljs-literal">True</span>,
     server_pem_path=<span class="hljs-string">&quot;path_to/server.pem&quot;</span>,
     server_name=<span class="hljs-string">&quot;localhost&quot;</span>
@@ -573,7 +573,7 @@ client = MilvusClient(
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client = MilvusClient(
-    uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>,
+    uri=<span class="hljs-string">&quot;https://localhost:19530&quot;</span>,
     secure=<span class="hljs-literal">True</span>,
     client_pem_path=<span class="hljs-string">&quot;path_to/client.pem&quot;</span>,
     client_key_path=<span class="hljs-string">&quot;path_to/client.key&quot;</span>,
@@ -582,3 +582,23 @@ client = MilvusClient(
 )
 <button class="copy-code-btn"></button></code></pre>
 <p>See <a href="https://github.com/milvus-io/pymilvus/blob/master/examples/example_tls1.py">example_tls1.py</a> and <a href="https://github.com/milvus-io/pymilvus/blob/master/examples/example_tls2.py">example_tls2.py</a> for more information.</p>
+<h2 id="Connect-to-the-Milvus-RESTful-server-with-TLS" class="common-anchor-header">Connect to the Milvus RESTful server with TLS<button data-href="#Connect-to-the-Milvus-RESTful-server-with-TLS" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>For RESTful APIs, you can check tls by using the <code translate="no">curl</code> command.</p>
+<h3 id="One-way-TLS-connection" class="common-anchor-header">One-way TLS connection</h3><pre><code translate="no" class="language-bash">curl --cacert path_to/ca.pem https://localhost:19530/v2/vectordb/collections/list
+<button class="copy-code-btn"></button></code></pre>
+<h3 id="Two-way-TLS-connection" class="common-anchor-header">Two-way TLS connection</h3><pre><code translate="no" class="language-bash">curl --cert path_to/client.pem --key path_to/client.key --cacert path_to/ca.pem https://localhost:19530/v2/vectordb/collections/list
+<button class="copy-code-btn"></button></code></pre>
