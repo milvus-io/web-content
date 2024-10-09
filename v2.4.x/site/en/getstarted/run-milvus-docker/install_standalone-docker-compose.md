@@ -84,7 +84,7 @@ Having installed Milvus in Docker, you can:
 
 - [Upgrade Milvus Using Helm Chart](upgrade_milvus_cluster-helm.md).
 - [Scale your Milvus cluster](scaleout.md).
-- Deploy your Milvu cluster on clouds:
+- Deploy your Milvus cluster on clouds:
   - [Amazon EKS](eks.md)
   - [Google Cloud](gcp.md)
   - [Microsoft Azure](azure.md)
