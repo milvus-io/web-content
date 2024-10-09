@@ -21,7 +21,7 @@ title: Milvus Architecture Overview
         ></path>
       </svg>
     </button></h1><p>Built on top of popular vector search libraries including Faiss, HNSW, DiskANN, SCANN and more, Milvus was designed for similarity search on dense vector datasets containing millions, billions, or even trillions of vectors. Before proceeding, familiarize yourself with the <a href="/docs/glossary.md">basic principles</a> of embedding retrieval.</p>
-<p>Milvus also supports data sharding, streaming data ingestion, dynamic schema, search combine vector and scalar data, multi-vetor and hybrid search, sparse vector and many other advanced functions. The platform offers performance on demand and can be optimized to suit any embedding retrieval scenario. We recommend deploying Milvus using Kubernetes for optimal availability and elasticity.</p>
+<p>Milvus also supports data sharding, streaming data ingestion, dynamic schema, search combine vector and scalar data, multi-vector and hybrid search, sparse vector and many other advanced functions. The platform offers performance on demand and can be optimized to suit any embedding retrieval scenario. We recommend deploying Milvus using Kubernetes for optimal availability and elasticity.</p>
 <p>Milvus adopts a shared-storage architecture featuring storage and computing disaggregation and horizontal scalability for its computing nodes. Following the principle of data plane and control plane disaggregation, Milvus comprises <a href="/docs/four_layers.md">four layers</a>: access layer, coordinator service, worker node, and storage. These layers are mutually independent when it comes to scaling or disaster recovery.</p>
 <p>
   <span class="img-wrapper">
