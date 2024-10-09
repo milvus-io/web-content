@@ -104,7 +104,7 @@ The following example use the database <code>testdb</code>  in milvus.
 milvus_cli > use database -db testdb
 ```
 
-## List Databases
+## list Databases
 
 List Databases in Milvus
 
@@ -123,7 +123,7 @@ The following example list the databases in milvus.
 milvus_cli > list databases
 ```
 
-## Delete Database
+## delete Database
 
 Delete Database in Milvus
 
@@ -912,7 +912,7 @@ Guarantee Timestamp(It instructs Milvus to see all operations performed before a
 
 ```
 
-## List connection
+## list connection
 
 List connections.
 
