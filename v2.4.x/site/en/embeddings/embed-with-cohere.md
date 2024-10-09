@@ -21,6 +21,8 @@ pip install "pymilvus[model]"
 Then, instantiate the `CohereEmbeddingFunction`:
 
 ```python
+from pymilvus.model.dense import CohereEmbeddingFunction
+
 cohere_ef = CohereEmbeddingFunction(
     model_name="embed-english-light-v3.0",
     api_key="YOUR_COHERE_API_KEY",
