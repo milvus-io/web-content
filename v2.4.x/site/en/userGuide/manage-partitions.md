@@ -1041,7 +1041,7 @@ console.log(res)
 
 - __What is the maximum number of partitions that can be created?__
 
-    By default, Milvus allows a maximum of 4,096 partitions to be created. You can adjust the maximum number of partitions by configuring `rootCoord.maxPartitionNum`. For details, refer to [System Configurations](https://milvus.io/docs/configure_rootcoord.md#rootCoordmaxPartitionNum).
+    By default, Milvus allows a maximum of 1,024 partitions to be created. You can adjust the maximum number of partitions by configuring `rootCoord.maxPartitionNum`. For details, refer to [System Configurations](https://milvus.io/docs/configure_rootcoord.md#rootCoordmaxPartitionNum).
 
 - __How can I differentiate between partitions and partition keys?__
 
