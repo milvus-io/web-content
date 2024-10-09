@@ -8,7 +8,7 @@ summary: Learn how to enable TLS proxy in Milvus.
 
 TLS (Transport Layer Security) is an encryption protocol to ensure communication security. Milvus proxy uses TLS one-way and two-way authentication.
 
-This topic describes how to enable TLS proxy in Milvus.
+This topic describes how to enable TLS in Milvus proxy for both gRPC and RESTful traffics.
 
 <div class="alert note">
 
@@ -588,7 +588,7 @@ Provide the path to `server.pem` and ensure the `server_name` matches the `Commo
 from pymilvus import MilvusClient
 
 client = MilvusClient(
-    uri="http://localhost:19530",
+    uri="https://localhost:19530",
     secure=True,
     server_pem_path="path_to/server.pem",
     server_name="localhost"
@@ -603,7 +603,7 @@ Provide paths to `client.pem`, `client.key`, and `ca.pem`, and ensure the `serve
 from pymilvus import MilvusClient
 
 client = MilvusClient(
-    uri="http://localhost:19530",
+    uri="https://localhost:19530",
     secure=True,
     client_pem_path="path_to/client.pem",
     client_key_path="path_to/client.key",
@@ -613,3 +613,19 @@ client = MilvusClient(
 ```
 
 See [example_tls1.py](https://github.com/milvus-io/pymilvus/blob/master/examples/example_tls1.py) and [example_tls2.py](https://github.com/milvus-io/pymilvus/blob/master/examples/example_tls2.py) for more information.
+
+## Connect to the Milvus RESTful server with TLS
+
+For RESTful APIs, you can check tls by using the `curl` command.
+
+### One-way TLS connection
+
+```bash
+curl --cacert path_to/ca.pem https://localhost:19530/v2/vectordb/collections/list
+```
+
+### Two-way TLS connection
+
+```bash
+curl --cert path_to/client.pem --key path_to/client.key --cacert path_to/ca.pem https://localhost:19530/v2/vectordb/collections/list
+```
