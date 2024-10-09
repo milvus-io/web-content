@@ -143,7 +143,7 @@ client.grant_role(
 )
 ```
 
-After granting the role, verity that it has been granted:
+After granting the role, verify that it has been granted:
 
 ```python
 client.describe_user(
