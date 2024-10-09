@@ -28,7 +28,9 @@ title: Embed Cohere
 pip install <span class="hljs-string">&quot;pymilvus[model]&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Then, instantiate the <code translate="no">CohereEmbeddingFunction</code>:</p>
-<pre><code translate="no" class="language-python">cohere_ef = <span class="hljs-title class_">CohereEmbeddingFunction</span>(
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus.<span class="hljs-property">model</span>.<span class="hljs-property">dense</span> <span class="hljs-keyword">import</span> <span class="hljs-title class_">CohereEmbeddingFunction</span>
+
+cohere_ef = <span class="hljs-title class_">CohereEmbeddingFunction</span>(
     model_name=<span class="hljs-string">&quot;embed-english-light-v3.0&quot;</span>,
     api_key=<span class="hljs-string">&quot;YOUR_COHERE_API_KEY&quot;</span>,
     input_type=<span class="hljs-string">&quot;search_document&quot;</span>,
