@@ -26,7 +26,7 @@ IndexParams.add_index(
 
 - **index_type** (*str*) -
 
-    The name of the algorithm used to arrange data in the specific field. For applicable algorithms, refer to [In-memory Index](https://milvus.io/docs/index.md) and [On-disk Index](https://milvus.io/docs/disk_index.md).On Zilliz Cloud, the index type is always **AUTOINDEX**. For details, refer to [AUTOINDEX]() Explained.
+    The name of the algorithm used to arrange data in the specific field. For applicable algorithms, refer to [In-memory Index](https://milvus.io/docs/index.md) and [On-disk Index](https://milvus.io/docs/disk_index.md).
 
 - **metric_type** (*str*) -
 
