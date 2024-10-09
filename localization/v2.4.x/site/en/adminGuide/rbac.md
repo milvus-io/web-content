@@ -190,7 +190,7 @@ client.grant_role(
     role_name=<span class="hljs-string">&#x27;roleA&#x27;</span>
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>After granting the role, verity that it has been granted:</p>
+<p>After granting the role, verify that it has been granted:</p>
 <pre><code translate="no" class="language-python">client.describe_user(
     user_name=<span class="hljs-string">&#x27;user_1&#x27;</span>
 )
