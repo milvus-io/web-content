@@ -7,9 +7,28 @@ title: Release Notes
 
 Find out what’s new in Milvus! This page summarizes new features, improvements, known issues, and bug fixes in each release. You can find the release notes for each released version after v2.3.0 in this section. We suggest that you regularly visit this page to learn about updates.
 
+## v2.3.22
+
+Release date: October 9, 2024
+
+| Milvus version | Python SDK version | Java SDK version | Go SDK version | Node.js SDK version |
+|----------------|--------------------|------------------|----------------|----------|
+| 2.3.22         | 2.3.7              | 2.3.6            | 2.3.6          | 2.3.5   |
+
+Milvus v2.3.22 introduces several improvements and bug fixes, including:
+
+### Features
+
+- [cherry-pick] changes to propagate traceid from client  ([#34640](https://github.com/milvus-io/milvus/pull/34640))
+
+### Bug fixes
+
+- Fix a security vulnerability ([#36155](https://github.com/milvus-io/milvus/pull/36155))
+- Fix proxy panic after getimportstate failed ([#35541](https://github.com/milvus-io/milvus/pull/35541))
+
 ## v2.3.21
 
-Release data: August 14, 2024
+Release date: August 14, 2024
 
 | Milvus version | Python SDK version | Java SDK version | Go SDK version | Node.js SDK version |
 |----------------|--------------------|------------------|----------------|---------------------|
@@ -44,7 +63,7 @@ Miluvs v2.3.21 addresses a critical bug in data deletion ([#35390](https://githu
 
 ## v2.3.20
 
-Release data: July 25, 2024
+Release date: July 25, 2024
 
 | Milvus version | Python SDK version | Java SDK version | Go SDK version | Node.js SDK version |
 |----------------|--------------------|------------------|----------------|---------------------|
