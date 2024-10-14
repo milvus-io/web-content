@@ -653,7 +653,7 @@
         "children": []
       },
       {
-        "label": "Install Migration Tool",
+        "label": "移行ツールのインストール",
         "id": "milvusdm_install.md",
         "order": 1,
         "children": []
@@ -1201,6 +1201,13 @@
             "children": []
           }
         ]
+      },
+      {
+        "label": "Powershellミルバスクライアント",
+        "id": "milvus_powershell",
+        "order": 8,
+        "externalLink": "https://github.com/rrg92/ps-milvus/blob/main/docs/integrate_powershell.md",
+        "children": []
       }
     ]
   },
