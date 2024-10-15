@@ -28,39 +28,39 @@ MGTEEmbeddingFunction(
 
 - **model_name** (*string*)
 
-  The name of the GTE embedding model to use for encoding. The value defaults to `Alibaba-NLP/gte-multilingual-base`. For more information, refer to [Models](https://huggingface.co/Alibaba-NLP).
+    The name of the GTE embedding model to use for encoding. The value defaults to `Alibaba-NLP/gte-multilingual-base`. For more information, refer to [Models](https://huggingface.co/Alibaba-NLP).
 
 - **batch_size** (*int*)
 
-  The batch size to use for encoding.
+    The batch size to use for encoding.
 
 - **device** (*string*)
 
-  The device to use for the model.
+    The device to use for the model.
 
 - **normalize_embeddings** (*bool*)
 
-  Whether to normalize the dense embeddings.
+    Whether to normalize the dense embeddings.
 
 - **dimensions** (*int*)
 
-  The number of dimensions for the dense embeddings. If not provided, it will use the model's default hidden size.
+    The number of dimensions for the dense embeddings. If not provided, it will use the model's default hidden size.
 
 - **use_fp16** (*bool*)
 
-  Whether to use 16-bit floating point precision.
+    Whether to use 16-bit floating point precision.
 
 - **return_dense** (*bool*)
 
-  Whether to return dense embeddings.
+    Whether to return dense embeddings.
 
 - **return_sparse** (*bool*)
 
-  Whether to return sparse embeddings.
+    Whether to return sparse embeddings.
 
 - **kwargs**
 
-  Allows additional keyword arguments to be passed to the model initialization.
+    Allows additional keyword arguments to be passed to the model initialization.
 
 ## Examples
 

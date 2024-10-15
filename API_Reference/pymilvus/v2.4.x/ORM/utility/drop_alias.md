@@ -81,7 +81,7 @@ utility.create_alias(collection_name="collection_1", alias="tom")
 utility.list_aliases(collection_name="collection_1") # ['bob', 'tom']
 
 # Drop the alias bob
-utility.drop_alias(alias="bob")
+utility.drop_alise(alias="bob")
 
 # List aliases for the collection
 utility.list_aliases(collection_name="collection_1") # ['tom']

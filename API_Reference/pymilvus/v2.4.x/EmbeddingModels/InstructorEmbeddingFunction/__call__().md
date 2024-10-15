@@ -1,4 +1,4 @@
-# \_\_call()\_\_
+# \_\_call\_\_()
 
 This operation in [InstructorEmbeddingFunction](InstructorEmbeddingFunction.md) takes a list of text strings and directly encodes them into vector embeddings.
 

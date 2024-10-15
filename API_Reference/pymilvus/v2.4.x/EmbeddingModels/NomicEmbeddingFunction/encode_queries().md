@@ -28,7 +28,7 @@ A list where each element is a NumPy array.
 
 - **ValueError**
 
-  This exception will be raised when `api_key` is not provided and the `NOMIC_API_KEY` environment variable is also not set.
+    This exception will be raised when `api_key` is not provided and the `NOMIC_API_KEY` environment variable is also not set.
 
 ## Examples
 
