@@ -38,5 +38,6 @@ title: Tutorials Overview
 <tr><td><a href="/docs/text_image_search.md">Search Image by Text</a></td><td>Semantic Search</td><td>vector search</td></tr>
 <tr><td><a href="/docs/image_deduplication_system.md">Image Deduplication</a></td><td>Deduplication</td><td>vector search</td></tr>
 <tr><td><a href="/docs/graph_rag_with_milvus.md">Graph RAG with Milvus</a></td><td>RAG</td><td>graph search</td></tr>
+<tr><td><a href="/docs/contextual_retrieval_with_milvus.md">Contextual Retrieval with Milvus</a></td><td>Quickstart</td><td>vector search</td></tr>
 </tbody>
 </table>

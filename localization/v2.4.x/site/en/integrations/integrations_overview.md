@@ -59,5 +59,7 @@ title: Integrations Overview
 <tr><td><a href="/docs/evaluation_with_deepeval.md">Evaluation with DeepEval</a></td><td>Evaluation &amp; Observability</td><td>Milvus, DeepEval</td></tr>
 <tr><td><a href="/docs/evaluation_with_phoenix.md">Evaluation with Arize Pheonix</a></td><td>Evaluation &amp; Observability</td><td>Milvus, Arize Pheonix</td></tr>
 <tr><td><a href="/docs/dify_with_milvus.md">Deploying Dify with Milvus</a></td><td>Ochestration</td><td>Milvus, Dify</td></tr>
+<tr><td><a href="/docs/rag_with_langflow.md">Building a RAG System Using Langflow with Milvus</a></td><td>Ochestration</td><td>Milvus, Langflow</td></tr>
+<tr><td><a href="/docs/build_rag_on_arm.md">Build RAG on Arm Architecture</a></td><td>RAG</td><td>Milvus, Arm</td></tr>
 </tbody>
 </table>

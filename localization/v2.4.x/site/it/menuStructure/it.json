@@ -493,7 +493,7 @@
             "children": []
           },
           {
-            "label": "Compattazione del clustering",
+            "label": "Compattazione dei cluster",
             "id": "clustering-compaction.md",
             "order": 8,
             "children": []
@@ -1375,6 +1375,12 @@
             "id": "dify_with_milvus.md",
             "order": 6,
             "children": []
+          },
+          {
+            "label": "Langflow",
+            "id": "rag_with_langflow.md",
+            "order": 7,
+            "children": []
           }
         ]
       },
@@ -1488,6 +1494,12 @@
             "id": "integrate_with_snowpark.md",
             "order": 0,
             "children": []
+          },
+          {
+            "label": "Braccio",
+            "id": "build_rag_on_arm.md",
+            "order": 1,
+            "children": []
           }
         ]
       }
@@ -1532,13 +1544,19 @@
       {
         "label": "Grafico RAG con Milvus",
         "id": "graph_rag_with_milvus.md",
+        "order": 6,
+        "children": []
+      },
+      {
+        "label": "Recupero contestuale",
+        "id": "contextual_retrieval_with_milvus.md",
         "order": 5,
         "children": []
       },
       {
         "label": "Per saperne di più",
         "id": "explore-more",
-        "order": 4,
+        "order": 99,
         "children": [
           {
             "label": "Sistema di risposta alle domande",
@@ -1559,7 +1577,7 @@
             "children": []
           },
           {
-            "label": "Ricerca di somiglianza audio",
+            "label": "Ricerca della somiglianza audio",
             "id": "audio_similarity_search.md",
             "order": 8,
             "children": []

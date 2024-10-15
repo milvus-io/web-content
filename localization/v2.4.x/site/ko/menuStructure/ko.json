@@ -1271,7 +1271,7 @@
             "children": []
           },
           {
-            "label": "12개의 실험실",
+            "label": "12개의 랩",
             "id": "video_search_with_twelvelabs_and_milvus.md",
             "order": 12,
             "children": []
@@ -1374,6 +1374,12 @@
             "label": "Dify",
             "id": "dify_with_milvus.md",
             "order": 6,
+            "children": []
+          },
+          {
+            "label": "Langflow",
+            "id": "rag_with_langflow.md",
+            "order": 7,
             "children": []
           }
         ]
@@ -1488,6 +1494,12 @@
             "id": "integrate_with_snowpark.md",
             "order": 0,
             "children": []
+          },
+          {
+            "label": "Arm",
+            "id": "build_rag_on_arm.md",
+            "order": 1,
+            "children": []
           }
         ]
       }
@@ -1532,13 +1544,19 @@
       {
         "label": "밀버스를 사용한 그래프 RAG",
         "id": "graph_rag_with_milvus.md",
+        "order": 6,
+        "children": []
+      },
+      {
+        "label": "문맥 검색",
+        "id": "contextual_retrieval_with_milvus.md",
         "order": 5,
         "children": []
       },
       {
         "label": "자세히 알아보기",
         "id": "explore-more",
-        "order": 4,
+        "order": 99,
         "children": [
           {
             "label": "질문 답변 시스템",

@@ -74,7 +74,7 @@
             "children": []
           },
           {
-            "label": "Exécuter Milvus en mode autonome",
+            "label": "Run Milvus Standalone",
             "id": "run_milvus_docker",
             "order": 2,
             "isMenu": true,
@@ -1375,6 +1375,12 @@
             "id": "dify_with_milvus.md",
             "order": 6,
             "children": []
+          },
+          {
+            "label": "Langflow",
+            "id": "rag_with_langflow.md",
+            "order": 7,
+            "children": []
           }
         ]
       },
@@ -1488,6 +1494,12 @@
             "id": "integrate_with_snowpark.md",
             "order": 0,
             "children": []
+          },
+          {
+            "label": "Bras",
+            "id": "build_rag_on_arm.md",
+            "order": 1,
+            "children": []
           }
         ]
       }
@@ -1532,13 +1544,19 @@
       {
         "label": "Graphique RAG avec Milvus",
         "id": "graph_rag_with_milvus.md",
+        "order": 6,
+        "children": []
+      },
+      {
+        "label": "Recherche contextuelle",
+        "id": "contextual_retrieval_with_milvus.md",
         "order": 5,
         "children": []
       },
       {
         "label": "En savoir plus",
         "id": "explore-more",
-        "order": 4,
+        "order": 99,
         "children": [
           {
             "label": "Système de réponse aux questions",

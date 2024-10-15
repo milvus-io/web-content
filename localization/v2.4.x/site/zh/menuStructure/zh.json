@@ -1375,6 +1375,12 @@
             "id": "dify_with_milvus.md",
             "order": 6,
             "children": []
+          },
+          {
+            "label": "朗流",
+            "id": "rag_with_langflow.md",
+            "order": 7,
+            "children": []
           }
         ]
       },
@@ -1488,6 +1494,12 @@
             "id": "integrate_with_snowpark.md",
             "order": 0,
             "children": []
+          },
+          {
+            "label": "手臂",
+            "id": "build_rag_on_arm.md",
+            "order": 1,
+            "children": []
           }
         ]
       }
@@ -1532,13 +1544,19 @@
       {
         "label": "用 Milvus 绘制 RAG 图表",
         "id": "graph_rag_with_milvus.md",
+        "order": 6,
+        "children": []
+      },
+      {
+        "label": "上下文检索",
+        "id": "contextual_retrieval_with_milvus.md",
         "order": 5,
         "children": []
       },
       {
         "label": "探索更多",
         "id": "explore-more",
-        "order": 4,
+        "order": 99,
         "children": [
           {
             "label": "答题系统",
