@@ -23,21 +23,21 @@ NomicEmbeddingFunction(
 
 - **model_name** (*string*)
 
-  The name of the Nomic embedding model to use for encoding. The value defaults to nomic-embed-text-v1.5. For more information, refer to Nomic official documentation.
+    The name of the Nomic embedding model to use for encoding. The value defaults to `nomic-embed-text-v1.5`. For more information, refer to [Nomic official documentation](https://docs.nomic.ai/atlas/models/image-embedding).
 
 - **task_type** (*string*)
 
-  The type of task the model is being used for.
+    The type of task the model is being used for.
 
 - **dimensions** (*int*)
 
-  The dimensionality of the output embeddings.
+    The dimensionality of the output embeddings.
 
 - **kwargs**
 
-  - **long_text_mode** (*string*)
+    - **long_text_mode** (*string*)
 
-    How to handle texts longer than the model can accept. One of mean or truncate.
+        How to handle texts longer than the model can accept. One of `mean` or `truncate`.
 
 ## Examples
 

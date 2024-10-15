@@ -1,6 +1,6 @@
 # JinaRerankFunction
 
-**JinaRerankFunction** is a class in [milvus_model](https://github.com/milvus-io/milvus-model) that takes a query and document as input and directly returns a similarity score instead of embeddings. This functionality uses the underlying Jina AI reranking model.
+JinaRerankFunction is a class in [milvus_model](https://github.com/milvus-io/milvus-model) that takes a query and document as input and directly returns a similarity score instead of embeddings. This functionality uses the underlying Jina AI reranking model.
 
 ```python
 pymilvus.model.reranker.JinaRerankFunction
@@ -17,7 +17,7 @@ JinaRerankFunction(
 )
 ```
 
-**Parameters**:
+**PARAMETERS:**
 
 - **model_name** (*string*)
 
@@ -37,5 +37,3 @@ jina_rf = JinaRerankFunction(
     api_key="YOUR_JINAAI_API_KEY"
 )
 ```
-
-<DocCardList />

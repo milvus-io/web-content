@@ -21,13 +21,8 @@ append_row(
 ## Examples
 
 ```python
-from pymilvus import (
-    CollectionSchema, 
-    FieldSchema, 
-    LocalBulkWriter, 
-    DataType, 
-    BulkFileType
-)
+from pymilvus import CollectionSchema, FieldSchema, DataType
+from pymilvus.bulk_writer import LocalBulkWriter, BulkFileType
 
 # Set up a schema
 schema = CollectionSchema(fields=[

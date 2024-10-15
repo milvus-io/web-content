@@ -22,9 +22,9 @@ Constructs an **S3ConnectParam** object by a set of parameters, such as **bucket
 ```python
 from urllib3.poolmanager import PoolManager
 from minio.credentials import Provider
-from pymilvus.RemoteBulkWriter import S3ConnectParam
+from pymilvus.bulk_writer import RemoteBulkWriter
 
-connect_param = S3ConnectParam(
+connect_param = RemoteBulkWriter.S3ConnectParam(
     bucket_name="string",
     endpoint="string",
     access_key="string",

@@ -18,11 +18,11 @@ encode_queries(
 
 **RETURN TYPE:**
 
-*List[np.array]*
+*Dict*
 
 **RETURNS:**
 
-*Dict*
+A dictionary that contains the encoded embeddings, both dense and sparse.
 
 **Exceptions:**
 

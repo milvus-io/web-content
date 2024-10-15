@@ -1,4 +1,4 @@
-# \_\_call()\_\_
+# \_\_call\_\_()
 
 This operation in [NomicEmbeddingFunction](NomicEmbeddingFunction.md) takes a list of text strings and directly encodes them into vector embeddings.
 
@@ -33,9 +33,7 @@ A list where each element is a NumPy array.
 
 **Exceptions:**
 
-- **ValueError**
-
-  This exception will be raised when `api_key` is not provided and the `NOMIC_API_KEY` environment variable is also not set.
+*None*
 
 ## Examples
 

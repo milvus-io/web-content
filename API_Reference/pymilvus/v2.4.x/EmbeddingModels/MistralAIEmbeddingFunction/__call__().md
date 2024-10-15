@@ -1,4 +1,4 @@
-# \_\_call()\_\_
+# \_\_call\_\_()
 
 This operation in [MistralAIEmbeddingFunction](MistralAIEmbeddingFunction.md) takes a list of text strings and directly encodes them into vector embeddings.
 
@@ -35,7 +35,7 @@ A list where each element is a NumPy array.
 
 - **ValueError**
 
-  This exception will be raised when `api_key` is not provided and the `MISTRALAI_API_KEY` environment variable is also not set.
+    This exception will be raised when `api_key` is not provided and the `MISTRALAI_API_KEY` environment variable is also not set.
 
 ## Examples
 
