@@ -24,3 +24,4 @@ This page provides a list of tutorials for you to interact with Milvus.
 | [Search Image by Text](text_image_search.md) | Semantic Search | vector search |
 | [Image Deduplication](image_deduplication_system.md) | Deduplication | vector search |
 | [Graph RAG with Milvus](graph_rag_with_milvus.md) | RAG | graph search |
+| [Contextual Retrieval with Milvus](contextual_retrieval_with_milvus.md) | Quickstart | vector search |
