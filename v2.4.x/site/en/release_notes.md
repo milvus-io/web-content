@@ -7,7 +7,21 @@ title: Release Notes
 
 Find out what’s new in Milvus! This page summarizes new features, improvements, known issues, and bug fixes in each release. You can find the release notes for each released version after v2.4.0 in this section. We suggest that you regularly visit this page to learn about updates.
 
-## v2.4.13
+## v2.4.13-hotfix
+
+Release Date: October 17, 2024
+
+| Milvus version | Python SDK version | Java SDK version | Node.js SDK version |
+|----------------|--------------------|------------------|---------------------|
+| 2.4.13-hotfix  | 2.4.8              | 2.4.5            | 2.4.9               |
+
+Milvus v2.4.13-hotfix addresses a critical issue specific to v2.4.13, where Milvus may fail to retrieve collection information after a restart if all MetaKV snapshots were garbage-collected ([#36933](https://github.com/milvus-io/milvus/pull/36933)). Users currently running v2.4.13 are advised to upgrade to v2.4.13-hotfix at the earliest opportunity to avoid potential disruptions.
+
+### Critical fixes
+
+- Load original key if timestamp is MaxTimestamp ([#36935](https://github.com/milvus-io/milvus/pull/36935))
+
+## [Deprecated] v2.4.13
 
 Release Date: October 12, 2024
 
