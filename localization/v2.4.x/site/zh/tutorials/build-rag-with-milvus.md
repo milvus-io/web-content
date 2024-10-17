@@ -70,7 +70,7 @@ file_text = file.read()
 <h3 id="Prepare-the-Embedding-Model" class="common-anchor-header">准备嵌入模型</h3><p>我们对 OpenAI 客户端进行初始化，准备嵌入模型。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> openai <span class="hljs-keyword">import</span> <span class="hljs-title class_">OpenAI</span>
 
-openai*client = <span class="hljs-title class*">OpenAI</span>()
+openai_client = <span class="hljs-title class*">OpenAI</span>()
 <button class="copy-code-btn"></button></code></pre>
 
 <p>定义一个函数，使用 OpenAI 客户端生成文本嵌入。我们以<a href="https://platform.openai.com/docs/guides/embeddings">text-embedding-3-small</a>模型为例。</p>
@@ -107,7 +107,7 @@ embedding_dim = <span class="hljs-built_in">len</span>(test_embedding)
       </svg>
     </button></h2><h3 id="Create-the-Collection" class="common-anchor-header">创建集合</h3><pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> <span class="hljs-title class_">MilvusClient</span>
 
-milvus*client = <span class="hljs-title class*">MilvusClient</span>(uri=<span class="hljs-string">&quot;./milvus_demo.db&quot;</span>)
+milvus_client = <span class="hljs-title class*">MilvusClient</span>(uri=<span class="hljs-string">&quot;./milvus_demo.db&quot;</span>)
 
 collection_name = <span class="hljs-string">&quot;my_rag_collection&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
