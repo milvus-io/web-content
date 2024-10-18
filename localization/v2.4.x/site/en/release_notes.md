@@ -43,7 +43,7 @@ title: Release Notes
 <tr><td>2.4.13-hotfix</td><td>2.4.8</td><td>2.4.5</td><td>2.4.9</td></tr>
 </tbody>
 </table>
-<p>Milvus v2.4.13-hotfix addresses a critical issue specific to v2.4.13, where Milvus may fail to retrieve collection information after a restart if all MetaKV snapshots were garbage-collected (<a href="https://github.com/milvus-io/milvus/pull/36933">#36933</a>). Users currently running v2.4.13 are advised to upgrade to v2.4.13-hotfix at the earliest opportunity to avoid potential disruptions.</p>
+<p>Milvus v2.4.13-hotfix addresses a critical issue specific to v2.4.13, where Milvus may fail to retrieve collection information after a restart if all MetaKV snapshots were garbage-collected (<a href="https://github.com/milvus-io/milvus/pull/36933">#36933</a>). <strong>Users currently running v2.4.13 are advised to upgrade to v2.4.13-hotfix at the earliest opportunity to avoid potential disruptions</strong>.</p>
 <h3 id="Critical-fixes" class="common-anchor-header">Critical fixes</h3><ul>
 <li>Load original key if timestamp is MaxTimestamp (<a href="https://github.com/milvus-io/milvus/pull/36935">#36935</a>)</li>
 </ul>
