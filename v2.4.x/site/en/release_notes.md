@@ -15,7 +15,7 @@ Release Date: October 17, 2024
 |----------------|--------------------|------------------|---------------------|
 | 2.4.13-hotfix  | 2.4.8              | 2.4.5            | 2.4.9               |
 
-Milvus v2.4.13-hotfix addresses a critical issue specific to v2.4.13, where Milvus may fail to retrieve collection information after a restart if all MetaKV snapshots were garbage-collected ([#36933](https://github.com/milvus-io/milvus/pull/36933)). Users currently running v2.4.13 are advised to upgrade to v2.4.13-hotfix at the earliest opportunity to avoid potential disruptions.
+Milvus v2.4.13-hotfix addresses a critical issue specific to v2.4.13, where Milvus may fail to retrieve collection information after a restart if all MetaKV snapshots were garbage-collected ([#36933](https://github.com/milvus-io/milvus/pull/36933)). **Users currently running v2.4.13 are advised to upgrade to v2.4.13-hotfix at the earliest opportunity to avoid potential disruptions**.
 
 ### Critical fixes
 
