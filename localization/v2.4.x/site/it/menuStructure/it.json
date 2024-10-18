@@ -493,7 +493,7 @@
             "children": []
           },
           {
-            "label": "Compattazione dei cluster",
+            "label": "Compattazione del clustering",
             "id": "clustering-compaction.md",
             "order": 8,
             "children": []
@@ -1028,6 +1028,20 @@
                 "children": []
               }
             ]
+          },
+          {
+            "label": "Traccia",
+            "id": "trace",
+            "order": 3,
+            "isMenu": true,
+            "children": [
+              {
+                "label": "Rintracciamento di Jaeger",
+                "id": "config_jaeger_tracing.md",
+                "order": 0,
+                "children": []
+              }
+            ]
           }
         ]
       },
@@ -1054,6 +1068,12 @@
             "label": "Crittografia in transito",
             "id": "tls.md",
             "order": 2,
+            "children": []
+          },
+          {
+            "label": "Connettersi a Kafka con SASL/SSL",
+            "id": "connect_kafka_ssl.md",
+            "order": 3,
             "children": []
           }
         ]
@@ -1371,7 +1391,7 @@
             "children": []
           },
           {
-            "label": "Dificare",
+            "label": "Dify",
             "id": "dify_with_milvus.md",
             "order": 6,
             "children": []

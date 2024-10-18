@@ -1028,6 +1028,20 @@
                 "children": []
               }
             ]
+          },
+          {
+            "label": "추적",
+            "id": "trace",
+            "order": 3,
+            "isMenu": true,
+            "children": [
+              {
+                "label": "예거 트레이싱",
+                "id": "config_jaeger_tracing.md",
+                "order": 0,
+                "children": []
+              }
+            ]
           }
         ]
       },
@@ -1054,6 +1068,12 @@
             "label": "전송 중 암호화",
             "id": "tls.md",
             "order": 2,
+            "children": []
+          },
+          {
+            "label": "SASL/SSL로 Kafka에 연결하기",
+            "id": "connect_kafka_ssl.md",
+            "order": 3,
             "children": []
           }
         ]

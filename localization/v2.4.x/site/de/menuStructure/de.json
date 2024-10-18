@@ -1028,6 +1028,20 @@
                 "children": []
               }
             ]
+          },
+          {
+            "label": "Spurensuche",
+            "id": "trace",
+            "order": 3,
+            "isMenu": true,
+            "children": [
+              {
+                "label": "Jaeger-Suche",
+                "id": "config_jaeger_tracing.md",
+                "order": 0,
+                "children": []
+              }
+            ]
           }
         ]
       },
@@ -1044,7 +1058,7 @@
             "children": []
           },
           {
-            "label": "RBAC einschalten",
+            "label": "RBAC aktivieren",
             "id": "rbac.md",
             "order": 1,
             "isMenu": true,
@@ -1054,6 +1068,12 @@
             "label": "Verschlüsselung im Transit",
             "id": "tls.md",
             "order": 2,
+            "children": []
+          },
+          {
+            "label": "Verbindung zu Kafka mit SASL/SSL",
+            "id": "connect_kafka_ssl.md",
+            "order": 3,
             "children": []
           }
         ]

@@ -1022,9 +1022,23 @@
                 "children": []
               },
               {
-                "label": "Configurar registos de acesso",
+                "label": "Configurar os registos de acesso",
                 "id": "configure_access_logs.md",
                 "order": 1,
+                "children": []
+              }
+            ]
+          },
+          {
+            "label": "Traço",
+            "id": "trace",
+            "order": 3,
+            "isMenu": true,
+            "children": [
+              {
+                "label": "Localização de Jaeger",
+                "id": "config_jaeger_tracing.md",
+                "order": 0,
                 "children": []
               }
             ]
@@ -1054,6 +1068,12 @@
             "label": "Encriptação em trânsito",
             "id": "tls.md",
             "order": 2,
+            "children": []
+          },
+          {
+            "label": "Ligar ao Kafka com SASL/SSL",
+            "id": "connect_kafka_ssl.md",
+            "order": 3,
             "children": []
           }
         ]

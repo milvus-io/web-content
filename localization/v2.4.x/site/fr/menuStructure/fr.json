@@ -1028,6 +1028,20 @@
                 "children": []
               }
             ]
+          },
+          {
+            "label": "Trace",
+            "id": "trace",
+            "order": 3,
+            "isMenu": true,
+            "children": [
+              {
+                "label": "Recherche de Jaeger",
+                "id": "config_jaeger_tracing.md",
+                "order": 0,
+                "children": []
+              }
+            ]
           }
         ]
       },
@@ -1054,6 +1068,12 @@
             "label": "Chiffrement en transit",
             "id": "tls.md",
             "order": 2,
+            "children": []
+          },
+          {
+            "label": "Se connecter à Kafka avec SASL/SSL",
+            "id": "connect_kafka_ssl.md",
+            "order": 3,
             "children": []
           }
         ]

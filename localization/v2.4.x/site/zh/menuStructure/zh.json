@@ -407,7 +407,7 @@
         ]
       },
       {
-        "label": "搜索、查询和获取",
+        "label": "Search, Query & Get",
         "id": "search_query_get",
         "order": 7,
         "isMenu": true,
@@ -909,7 +909,7 @@
                 "children": []
               },
               {
-                "label": "信息存储",
+                "label": "Message Storage",
                 "id": "message_storage_operator.md",
                 "order": 2,
                 "children": []
@@ -1028,6 +1028,20 @@
                 "children": []
               }
             ]
+          },
+          {
+            "label": "跟踪",
+            "id": "trace",
+            "order": 3,
+            "isMenu": true,
+            "children": [
+              {
+                "label": "积格追踪",
+                "id": "config_jaeger_tracing.md",
+                "order": 0,
+                "children": []
+              }
+            ]
           }
         ]
       },
@@ -1054,6 +1068,12 @@
             "label": "传输中加密",
             "id": "tls.md",
             "order": 2,
+            "children": []
+          },
+          {
+            "label": "使用 SASL/SSL 连接 Kafka",
+            "id": "connect_kafka_ssl.md",
+            "order": 3,
             "children": []
           }
         ]

@@ -213,7 +213,7 @@
     "v2.4.x/site/en/reference/array_data_type.md": "2024-09-04T05:52:37.189Z",
     "v2.4.x/site/en/userGuide/search-query-get/single-vector-search.md": "2024-09-04T05:52:54.234Z",
     "v2.4.x/site/en/userGuide/use-json-fields.md": "2024-09-04T05:53:07.135Z",
-    "v2.4.x/site/en/menuStructure/en.json": "2024-10-15T03:31:31.564Z",
+    "v2.4.x/site/en/menuStructure/en.json": "2024-10-18T08:13:59.947Z",
     "v2.4.x/site/en/userGuide/manage-collections.md": "2024-09-04T06:47:02.070Z",
     "v2.4.x/site/en/getstarted/milvus_lite.md": "2024-09-06T02:54:42.351Z",
     "v2.4.x/site/en/release_notes.md": "2024-09-13T08:16:46.312Z",
@@ -230,7 +230,9 @@
     "v2.4.x/site/en/integrations/evaluation_with_phoenix.md": "2024-09-29T02:58:18.531Z",
     "v2.4.x/site/en/integrations/build_rag_on_arm.md": "2024-10-15T03:26:00.948Z",
     "v2.4.x/site/en/integrations/rag_with_langflow.md": "2024-10-15T03:26:07.319Z",
-    "v2.4.x/site/en/tutorials/contextual_retrieval_with_milvus.md": "2024-10-15T03:26:17.061Z"
+    "v2.4.x/site/en/tutorials/contextual_retrieval_with_milvus.md": "2024-10-15T03:26:17.061Z",
+    "v2.4.x/site/en/adminGuide/config_jaeger_tracing.md": "2024-10-18T08:07:16.076Z",
+    "v2.4.x/site/en/adminGuide/connect_kafka_ssl.md": "2024-10-18T08:07:23.842Z"
   },
   "v2.3.x": {
     "v2.3.x/site/en/about/limitations.md": "2024-08-28T10:40:29.333Z",

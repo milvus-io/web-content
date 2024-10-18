@@ -839,7 +839,7 @@
             "children": []
           },
           {
-            "label": "Configurar Chunk Cache",
+            "label": "Configurar la caché de trozos",
             "id": "chunk_cache.md",
             "order": 3,
             "children": []
@@ -1028,6 +1028,20 @@
                 "children": []
               }
             ]
+          },
+          {
+            "label": "Rastrear",
+            "id": "trace",
+            "order": 3,
+            "isMenu": true,
+            "children": [
+              {
+                "label": "Rastreo de Jaeger",
+                "id": "config_jaeger_tracing.md",
+                "order": 0,
+                "children": []
+              }
+            ]
           }
         ]
       },
@@ -1054,6 +1068,12 @@
             "label": "Cifrado en tránsito",
             "id": "tls.md",
             "order": 2,
+            "children": []
+          },
+          {
+            "label": "Conectarse a Kafka con SASL/SSL",
+            "id": "connect_kafka_ssl.md",
+            "order": 3,
             "children": []
           }
         ]
