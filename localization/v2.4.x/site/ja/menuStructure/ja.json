@@ -367,7 +367,7 @@
             "children": []
           },
           {
-            "label": "GPUによるインデックス",
+            "label": "GPU付きインデックス",
             "id": "index-with-gpu.md",
             "order": 2,
             "children": []

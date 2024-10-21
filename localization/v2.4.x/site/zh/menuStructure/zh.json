@@ -407,7 +407,7 @@
         ]
       },
       {
-        "label": "Search, Query & Get",
+        "label": "搜索、查询和获取",
         "id": "search_query_get",
         "order": 7,
         "isMenu": true,
@@ -909,7 +909,7 @@
                 "children": []
               },
               {
-                "label": "Message Storage",
+                "label": "信息存储",
                 "id": "message_storage_operator.md",
                 "order": 2,
                 "children": []

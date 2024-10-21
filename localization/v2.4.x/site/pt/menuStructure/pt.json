@@ -1022,7 +1022,7 @@
                 "children": []
               },
               {
-                "label": "Configurar os registos de acesso",
+                "label": "Configurar registos de acesso",
                 "id": "configure_access_logs.md",
                 "order": 1,
                 "children": []
