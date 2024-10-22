@@ -2,7 +2,7 @@
 id: rbac.md
 related_key: enable RBAC
 summary: 'Saiba como gerir utilizadores, funções e privilégios.'
-title: Ativar RBAC
+title: Ativar o RBAC
 ---
 <h1 id="Enable-RBAC" class="common-anchor-header">Ativar o RBAC<button data-href="#Enable-RBAC" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -139,7 +139,7 @@ client = MilvusClient(
         ></path>
       </svg>
     </button></h2><p>O exemplo seguinte demonstra como conceder a permissão de pesquisar todas as colecções à função denominada <code translate="no">roleA</code>.</p>
-<p>O <code translate="no">object_type</code> especifica o tipo de objeto, que também pode ser entendido como o tipo de recurso. Atualmente, os valores válidos incluem Coleção/Utilizador/Global, etc., em que Global significa que não existe um tipo de recurso específico. O <code translate="no">object_name</code> é o nome do recurso. Se o tipo de objeto<em>for Coleção, então o nome do objeto pode ser referido a um nome de coleção específico, ou pode utilizar * para especificar todas as colecções. Se</em>o<em>tipo de objeto</em>for Global, o nome do objeto só pode ser especificado como *. Consulte <a href="/docs/pt/users_and_roles.md">Utilizadores e funções</a> para outros tipos de privilégios que pode conceder.</p>
+<p>O <code translate="no">object_type</code> especifica o tipo de objeto, que também pode ser entendido como o tipo de recurso. Atualmente, os valores válidos incluem Coleção/Utilizador/Global, etc., em que Global significa que não existe um tipo de recurso específico. O <code translate="no">object_name</code> é o nome do recurso. Se o tipo de objeto<em>for Coleção, então o nome do objeto pode ser referido a um nome de coleção específico, ou pode utilizar * para especificar todas as colecções. Se</em>o tipo de objeto for Global, o nome do objeto só pode ser especificado como *. Consulte <a href="/docs/pt/users_and_roles.md">Utilizadores e funções</a> para outros tipos de privilégios que pode conceder.</p>
 <p>Antes de gerir os privilégios de função, certifique-se de que activou a autenticação do utilizador. Caso contrário, poderá ocorrer um erro. Para obter informações sobre como ativar a autenticação do utilizador, consulte <a href="/docs/pt/authenticate.md">Autenticar o acesso do utilizador</a>.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># grant privilege to a role</span>
 
@@ -182,7 +182,7 @@ client.grant_privilege(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Conceder a função a um utilizador para que este utilizador possa herdar todos os privilégios da função.</p>
+    </button></h2><p>Conceder a função a um utilizador para que este possa herdar todos os privilégios da função.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># grant a role to a user</span>
 
 client.grant_role(

@@ -75,7 +75,7 @@ nvme1n1     259:1    0 250.0G  0 disk
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Para configurar el QueryNode de Milvus Distributed para utilizar el almacenamiento en disco NVMe, debe configurar los nodos trabajadores de los clústeres Kubernetes de destino para almacenar los contenedores y las imágenes en un disco NVMe. El procedimiento para ello varía en función de los proveedores de nube.</p>
+    </button></h2><p>Para configurar el QueryNode de Milvus Distributed para que utilice almacenamiento en disco NVMe, debe configurar los nodos trabajadores de los clústeres Kubernetes de destino para que almacenen los contenedores y las imágenes en un disco NVMe. El procedimiento para ello varía en función de los proveedores de nube.</p>
 <h3 id="AWS" class="common-anchor-header">AWS</h3><p>Al utilizar Amazon EKS, puede personalizar los nodos administrados con plantillas de lanzamiento, en las que puede especificar los ajustes de configuración para sus grupos de nodos. A continuación se muestra un ejemplo de cómo montar un disco NVMe en los nodos trabajadores de su clúster de Amazon EKS:</p>
 <pre><code translate="no" class="language-bash">MIME-Version: 1.0
 Content-Type: multipart/mixed; boundary=<span class="hljs-string">&quot;==MYBOUNDARY==&quot;</span>
@@ -215,7 +215,7 @@ apt-get install fio -y
 <span class="hljs-built_in">cd</span> /data
 
 <span class="hljs-comment"># write 10GB</span>
-fio -direct=1-iodepth=128 -rw=randwrite -ioengine=libaio -bs=4K -size=10G -numjobs=10 -runtime=600 -group_reporting -filename=<span class="hljs-built_in">test</span> -name=Rand_Write_IOPS_Test
+fio -direct=1 -iodepth=128 -rw=randwrite -ioengine=libaio -bs=4K -size=10G -numjobs=10 -runtime=600 -group_reporting -filename=<span class="hljs-built_in">test</span> -name=Rand_Write_IOPS_Test
 
 <span class="hljs-comment"># verify the read speed</span>
 <span class="hljs-comment"># compare with the disk performance indicators provided by various cloud providers.</span>

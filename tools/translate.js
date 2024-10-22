@@ -70,7 +70,7 @@ async function bootstrap() {
       const cacheOutdated =
         !cache[version] ||
         !cache[version][path] ||
-        new Date(cache[version][path]) < modifiedTime;
+        new Date(cache[version][path]) < new Date(modifiedTime);
       if (!deprecated && cacheOutdated) {
         updatedFiles.push(path);
       }

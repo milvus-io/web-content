@@ -68,9 +68,9 @@ Atualmente, um campo vetorial apenas suporta um tipo de índice. O Milvus exclui
     </button></h2><p>Para utilizar o DiskANN, certifique-se de que</p>
 <ul>
 <li>Utilize apenas vectores de flutuação com pelo menos 1 dimensão nos seus dados.</li>
-<li>Utilize apenas a Distância Euclidiana (L2) ou o Produto Interno (IP) para medir a distância entre vectores.</li>
+<li>Utilize apenas a Distância Euclidiana (L2), o Produto Interno (IP) ou COSINE para medir a distância entre vectores.</li>
 </ul>
-<h2 id="Index-and-search-settings" class="common-anchor-header">Definições de índice e pesquisa<button data-href="#Index-and-search-settings" class="anchor-icon" translate="no">
+<h2 id="Index-and-search-settings" class="common-anchor-header">Configurações de índice e pesquisa<button data-href="#Index-and-search-settings" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

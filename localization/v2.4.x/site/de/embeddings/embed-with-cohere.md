@@ -2,8 +2,8 @@
 id: embed-with-cohere.md
 order: 9
 summary: >-
-  Dieser Artikel beschreibt die Verwendung der CohereEmbeddingFunction, um
-  Dokumente und Abfragen mit dem Cohere-Einbettungsmodell zu kodieren.
+  Dieser Artikel beschreibt die Verwendung der CohereEmbeddingFunction zur
+  Kodierung von Dokumenten und Abfragen mit dem Cohere-Einbettungsmodell.
 title: Cohere einbetten
 ---
 <h1 id="Cohere" class="common-anchor-header">Cohere<button data-href="#Cohere" class="anchor-icon" translate="no">
@@ -23,12 +23,14 @@ title: Cohere einbetten
       </svg>
     </button></h1><p>Die Einbettungsmodelle von Cohere dienen zur Erzeugung von Texteinbettungen, d. h. von Listen mit Fließkommazahlen, die semantische Informationen über den Text enthalten. Diese Einbettungen können für Aufgaben wie Textklassifizierung und semantische Suche verwendet werden.</p>
 <p>Milvus lässt sich mit den Einbettungsmodellen von Cohere über die Klasse <code translate="no">CohereEmbeddingFunction</code> integrieren. Diese Klasse übernimmt die Berechnung der Einbettungen und gibt sie in einem mit Milvus kompatiblen Format zur Indizierung und Suche zurück.</p>
-<p>Um diese Funktion zu nutzen, installieren Sie die erforderlichen Abhängigkeiten:</p>
+<p>Um diese Funktion zu nutzen, installieren Sie die notwendigen Abhängigkeiten:</p>
 <pre><code translate="no" class="language-bash">pip install --upgrade pymilvus
 pip install <span class="hljs-string">&quot;pymilvus[model]&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Dann instanziieren Sie die Klasse <code translate="no">CohereEmbeddingFunction</code>:</p>
-<pre><code translate="no" class="language-python">cohere_ef = <span class="hljs-title class_">CohereEmbeddingFunction</span>(
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus.<span class="hljs-property">model</span>.<span class="hljs-property">dense</span> <span class="hljs-keyword">import</span> <span class="hljs-title class_">CohereEmbeddingFunction</span>
+
+cohere_ef = <span class="hljs-title class_">CohereEmbeddingFunction</span>(
     model_name=<span class="hljs-string">&quot;embed-english-light-v3.0&quot;</span>,
     api_key=<span class="hljs-string">&quot;YOUR_COHERE_API_KEY&quot;</span>,
     input_type=<span class="hljs-string">&quot;search_document&quot;</span>,

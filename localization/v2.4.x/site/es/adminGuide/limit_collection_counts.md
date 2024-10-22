@@ -1,7 +1,6 @@
 ---
 id: limit_collection_counts.md
 title: Limitar el número de cobros
-summary: ''
 ---
 <h1 id="Limit-Collection-Counts" class="common-anchor-header">Limitar el número de colecciones<button data-href="#Limit-Collection-Counts" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -45,9 +44,9 @@ summary: ''
         ></path>
       </svg>
     </button></h2><pre><code translate="no" class="language-yaml">rootCoord:
-    maxGeneralCapacity: 1024
+    maxGeneralCapacity: 65536
 <button class="copy-code-btn"></button></code></pre>
-<p>El parámetro <code translate="no">maxGeneralCapacity</code> establece el número máximo de colecciones que puede contener la instancia Milvus actual. El valor por defecto es <code translate="no">1024</code>.</p>
+<p>El parámetro <code translate="no">maxGeneralCapacity</code> establece el número máximo de colecciones que puede contener la instancia Milvus actual. El valor por defecto es <code translate="no">65536</code>.</p>
 <h2 id="Calculating-the-number-of-collections" class="common-anchor-header">Cálculo del número de colecciones<button data-href="#Calculating-the-number-of-collections" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -63,7 +62,7 @@ summary: ''
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>En una colección, puede configurar múltiples shards y particiones. Los shards son unidades lógicas utilizadas para distribuir las operaciones de escritura de datos entre múltiples nodos de datos. Las particiones son unidades lógicas utilizadas para mejorar la eficiencia de la recuperación de datos cargando sólo un subconjunto de los datos de la colección. Al calcular el número de colecciones en la instancia actual de Milvus, también debe contar los fragmentos y las particiones.</p>
+    </button></h2><p>En una colección, puede configurar múltiples shards y particiones. Los fragmentos son unidades lógicas utilizadas para distribuir las operaciones de escritura de datos entre múltiples nodos de datos. Las particiones son unidades lógicas utilizadas para mejorar la eficiencia de la recuperación de datos cargando sólo un subconjunto de los datos de la colección. Al calcular el número de colecciones en la instancia actual de Milvus, también debe contar los fragmentos y las particiones.</p>
 <p>Por ejemplo, supongamos que ya ha creado <strong>100</strong> colecciones, con <strong>2</strong> fragmentos y <strong>4</strong> particiones en <strong>60</strong> de ellas y con <strong>1</strong> fragmento y <strong>12</strong> particiones en las <strong>40</strong> colecciones restantes. El número actual de colecciones se puede calcular como:</p>
 <pre><code translate="no">60 (collections) x 2 (shards) x 4 (partitions) + 40 (collections) x 1 (shard) x 12 (partitions) = 960
 <button class="copy-code-btn"></button></code></pre>

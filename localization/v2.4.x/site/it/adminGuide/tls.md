@@ -18,10 +18,10 @@ summary: Scoprite come attivare il proxy TLS in Milvus.
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>TLS (Transport Layer Security) è un protocollo di crittografia che garantisce la sicurezza delle comunicazioni. Il proxy Milvus utilizza l'autenticazione TLS unidirezionale e bidirezionale.</p>
-<p>Questo argomento descrive come abilitare il proxy TLS in Milvus.</p>
+    </button></h1><p>TLS (Transport Layer Security) è un protocollo di crittografia che garantisce la sicurezza delle comunicazioni. Milvus proxy utilizza l'autenticazione TLS unidirezionale e bidirezionale.</p>
+<p>Questo argomento descrive come abilitare TLS in Milvus proxy per il traffico gRPC e RESTful.</p>
 <div class="alert note">
-<p>TLS e l'autenticazione utente sono due approcci di sicurezza distinti. Se avete abilitato sia l'autenticazione utente che il TLS nel vostro sistema Milvus, dovrete fornire un nome utente, una password e i percorsi dei file dei certificati. Per informazioni su come abilitare l'autenticazione dell'utente, fate riferimento a <a href="/docs/it/authenticate.md">Autenticare l'accesso dell'utente</a>.</p>
+<p>TLS e l'autenticazione utente sono due approcci di sicurezza distinti. Se avete abilitato sia l'autenticazione utente che il TLS nel vostro sistema Milvus, dovrete fornire un nome utente, una password e il percorso del file del certificato. Per informazioni su come abilitare l'autenticazione dell'utente, fate riferimento a <a href="/docs/it/authenticate.md">Autenticare l'accesso dell'utente</a>.</p>
 </div>
 <h2 id="Create-your-own-certificate" class="common-anchor-header">Creare il proprio certificato<button data-href="#Create-your-own-certificate" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -562,7 +562,7 @@ openssl x509 -req -days 3650 -<span class="hljs-keyword">in</span> client.csr -o
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client = MilvusClient(
-    uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>,
+    uri=<span class="hljs-string">&quot;https://localhost:19530&quot;</span>,
     secure=<span class="hljs-literal">True</span>,
     server_pem_path=<span class="hljs-string">&quot;path_to/server.pem&quot;</span>,
     server_name=<span class="hljs-string">&quot;localhost&quot;</span>
@@ -572,7 +572,7 @@ client = MilvusClient(
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client = MilvusClient(
-    uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>,
+    uri=<span class="hljs-string">&quot;https://localhost:19530&quot;</span>,
     secure=<span class="hljs-literal">True</span>,
     client_pem_path=<span class="hljs-string">&quot;path_to/client.pem&quot;</span>,
     client_key_path=<span class="hljs-string">&quot;path_to/client.key&quot;</span>,
@@ -580,4 +580,24 @@ client = MilvusClient(
     server_name=<span class="hljs-string">&quot;localhost&quot;</span>
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>Per ulteriori informazioni, vedere <a href="https://github.com/milvus-io/pymilvus/blob/master/examples/example_tls1.py">example_tls1.py</a> e <a href="https://github.com/milvus-io/pymilvus/blob/master/examples/example_tls2.py">example_tls2.py</a>.</p>
+<p>Per ulteriori informazioni, vedere <a href="https://github.com/milvus-io/pymilvus/blob/master/examples/example_tls1.py">esempio_tls1.py</a> e <a href="https://github.com/milvus-io/pymilvus/blob/master/examples/example_tls2.py">esempio_tls2.py</a>.</p>
+<h2 id="Connect-to-the-Milvus-RESTful-server-with-TLS" class="common-anchor-header">Connettersi al server RESTful di Milvus con TLS<button data-href="#Connect-to-the-Milvus-RESTful-server-with-TLS" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>Per le API RESTful, è possibile verificare il tls utilizzando il comando <code translate="no">curl</code>.</p>
+<h3 id="One-way-TLS-connection" class="common-anchor-header">Connessione TLS unidirezionale</h3><pre><code translate="no" class="language-bash">curl --cacert path_to/ca.pem https://localhost:19530/v2/vectordb/collections/list
+<button class="copy-code-btn"></button></code></pre>
+<h3 id="Two-way-TLS-connection" class="common-anchor-header">Connessione TLS bidirezionale</h3><pre><code translate="no" class="language-bash">curl --cert path_to/client.pem --key path_to/client.key --cacert path_to/ca.pem https://localhost:19530/v2/vectordb/collections/list
+<button class="copy-code-btn"></button></code></pre>

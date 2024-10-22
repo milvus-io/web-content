@@ -18,7 +18,8 @@ title: 使用 Arize Pheonix 进行评估
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/evaluation_with_phoenix.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a></p>
+    </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/evaluation_with_phoenix.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
+<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/evaluation_with_phoenix.ipynb" target="_blank"><img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/></a></p>
 <p>本指南演示了如何使用<a href="https://phoenix.arize.com/">Arize Pheonix</a>评估基于<a href="https://milvus.io/">Milvus</a> 的检索增强生成（RAG）管道。</p>
 <p>RAG 系统将检索系统与生成模型相结合，根据给定提示生成新文本。该系统首先使用 Milvus 从语料库中检索相关文档，然后使用生成模型根据检索到的文档生成新文本。</p>
 <p>Arize Pheonix 是一个帮助您评估 RAG 管道的框架。现有的工具和框架可以帮助您构建这些管道，但评估和量化管道性能可能很难。这就是 Arize Pheonix 的用武之地。</p>
@@ -357,7 +358,7 @@ OpenAIInstrumentor().instrument()
 </code></pre>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/images/phoenix01.png" alt="Alt Text" class="doc-image" id="alt-text" />
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/phoenix01.png" alt="Alt Text" class="doc-image" id="alt-text" />
    </span> <span class="img-wrapper"> <span>文本</span> </span></p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> nest_asyncio
 

@@ -5,7 +5,7 @@ order: 1
 group: upgrade_milvus_standalone-operator.md
 related_key: upgrade Milvus Standalone
 summary: Docker Compose를 사용하여 Milvus를 스탠드얼론으로 업그레이드하는 방법을 알아보세요.
-title: 도커 컴포즈로 Milvus 스탠드얼론 업그레이드하기
+title: Docker Compose로 Milvus 독립형 업그레이드하기
 ---
 <div class="tab-wrapper"><a href="/docs/ko/upgrade_milvus_standalone-operator.md" class=''>밀버스</a><a href="/docs/ko/upgrade_milvus_standalone-helm.md" class=''>오퍼레이터헬름도커</a><a href="/docs/ko/upgrade_milvus_standalone-docker.md" class='active '>컴포즈</a></div>
 <h1 id="Upgrade-Milvus-Standalone-with-Docker-Compose" class="common-anchor-header">Docker Compose로 Milvus 독립형 업그레이드하기<button data-href="#Upgrade-Milvus-Standalone-with-Docker-Compose" class="anchor-icon" translate="no">
@@ -24,7 +24,7 @@ title: 도커 컴포즈로 Milvus 스탠드얼론 업그레이드하기
         ></path>
       </svg>
     </button></h1><p>이 항목에서는 Docker Compose를 사용하여 Milvus를 업그레이드하는 방법을 설명합니다.</p>
-<p>일반적인 경우, <a href="#Upgrade-Milvus-by-changing-its-image">Milvus의 이미지를 변경하여 업그레이드할</a> 수 있습니다. 그러나 v2.1.x에서 v2.4.9로 업그레이드하기 전에 <a href="#Migrate-the-metadata">메타데이터를 마이그레이션해야</a> 합니다.</p>
+<p>일반적인 경우, <a href="#Upgrade-Milvus-by-changing-its-image">Milvus의 이미지를 변경하여 업그레이드할</a> 수 있습니다. 그러나 v2.1.x에서 v2.4.13-핫픽스로 업그레이드하기 전에 <a href="#Migrate-the-metadata">메타데이터를 마이그레이션해야</a> 합니다.</p>
 <div class="alter note">
 <p>보안 문제로 인해 Milvus는 v2.2.5 릴리스와 함께 MinIO를 RELEASE.2023-03-20T20-16-18Z로 업그레이드합니다. Docker Compose를 사용하여 설치된 이전 Milvus 독립 실행형 릴리스에서 업그레이드하기 전에 단일 노드 단일 드라이브 MinIO 배포를 생성하고 기존 MinIO 설정 및 콘텐츠를 새 배포로 마이그레이션해야 합니다. 자세한 내용은 <a href="https://min.io/docs/minio/linux/operations/install-deploy-manage/migrate-fs-gateway.html#id2">이 가이드를</a> 참조하세요.</p>
 </div>
@@ -49,7 +49,7 @@ title: 도커 컴포즈로 Milvus 스탠드얼론 업그레이드하기
 <pre><code translate="no" class="language-yaml">...
 standalone:
   container_name: milvus-standalone
-  image: milvusdb/milvus:v2.4.9
+  image: milvusdb/milvus:v2.4.13-hotfix
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>다음 명령을 실행하여 업그레이드를 수행합니다.</p>
 <pre><code translate="no" class="language-shell">docker compose down
@@ -83,7 +83,7 @@ cmd:
   runWithBackup: true
 config:
   sourceVersion: <span class="hljs-number">2.1</span><span class="hljs-number">.4</span>   <span class="hljs-comment"># Specify your milvus version</span>
-  targetVersion: <span class="hljs-number">2.4</span><span class="hljs-number">.9</span>
+  targetVersion: <span class="hljs-number">2.4</span><span class="hljs-number">.13</span>-hotfix
   backupFilePath: /tmp/migration.bak
 metastore:
   <span class="hljs-built_in">type</span>: etcd

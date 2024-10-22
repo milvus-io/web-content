@@ -19,7 +19,7 @@ title: 使用迭代器
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Milvus 提供搜索和查询迭代器，用于迭代大量实体的结果。由于 Milvus 将 TopK 限制在 16384，用户可以使用迭代器在批处理模式下返回大量甚至整个集合中的实体。</p>
+    </button></h1><p>Milvus 提供搜索和查询迭代器，用于迭代大量实体。由于 Milvus 将 TopK 限制在 16384，用户可以使用迭代器以批处理模式返回大量甚至整个 Collections 中的实体。</p>
 <h2 id="Overview" class="common-anchor-header">概述<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -35,7 +35,7 @@ title: 使用迭代器
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>迭代器是一种功能强大的工具，能帮助你使用主键值和布尔表达式迭代大量数据或集合中的所有数据。这可以大大改进检索数据的方式。传统的<strong>偏移</strong>和<strong>限制</strong>参数会随着时间的<strong>推移</strong>而降低效率，而迭代器则不同，它提供了一种更具可扩展性的解决方案。</p>
+    </button></h2><p>迭代器是扫描整个 Collections 或通过指定主键值或过滤表达式迭代大量实体的有效工具。与带有<strong>偏移</strong>和<strong>限制</strong>参数的搜索或查询调用相比，使用迭代器更高效、更可扩展。</p>
 <h3 id="Benefits-of-using-iterators" class="common-anchor-header">使用迭代器的好处</h3><ul>
 <li><p><strong>简单</strong>：消除了复杂的<strong>偏移</strong>和<strong>限制</strong>设置。</p></li>
 <li><p><strong>高效</strong>：只获取需要的数据，提供可扩展的数据检索。</p></li>
@@ -62,12 +62,12 @@ title: 使用迭代器
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>以下步骤重新利用代码连接到 Milvus，快速建立一个数据集，并在数据集中插入超过 10,000 个随机生成的实体。</p>
-<h3 id="Step-1-Create-a-collection" class="common-anchor-header">步骤 1：创建集合</h3><div class="language-python">
-<p>使用 <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Client/MilvusClient.md"><code translate="no">MilvusClient</code></a>连接到 Milvus 服务器，并使用 <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_collection.md"><code translate="no">create_collection()</code></a>来创建集合。</p>
+    </button></h2><p>以下准备步骤连接 Milvus 并将随机生成的实体插入 Collections。</p>
+<h3 id="Step-1-Create-a-collection" class="common-anchor-header">步骤 1：创建 Collections</h3><div class="language-python">
+<p>使用 <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Client/MilvusClient.md"><code translate="no">MilvusClient</code></a>连接到 Milvus 服务器，并使用 <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_collection.md"><code translate="no">create_collection()</code></a>来创建 Collections。</p>
 </div>
 <div class="language-java">
-<p>使用 <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Client/MilvusClientV2.md"><code translate="no">MilvusClientV2</code></a>连接到 Milvus 服务器并 <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Collections/createCollection.md"><code translate="no">createCollection()</code></a>创建集合。</p>
+<p>使用 <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Client/MilvusClientV2.md"><code translate="no">MilvusClientV2</code></a>连接到 Milvus 服务器，并使用 <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Collections/createCollection.md"><code translate="no">createCollection()</code></a>创建 Collections。</p>
 </div>
 <div class="multipleCode">
    <a href="#python">Python </a> <a href="#java">Java</a></div>
@@ -106,10 +106,10 @@ client.create_collection(
 client.createCollection(createCollectionParam);
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Step-2-Insert-randomly-generated-entities" class="common-anchor-header">第二步：插入随机生成的实体</h3><div class="language-python">
-<p>使用 <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Vector/insert.md"><code translate="no">insert()</code></a>将实体插入集合。</p>
+<p>使用 <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Vector/insert.md"><code translate="no">insert()</code></a>将实体插入 Collections。</p>
 </div>
 <div class="language-java">
-<p>使用 <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Vector/insert.md"><code translate="no">insert()</code></a>将实体插入集合。</p>
+<p>使用 <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Vector/insert.md"><code translate="no">insert()</code></a>将实体插入 Collections。</p>
 </div>
 <div class="multipleCode">
    <a href="#python">Python </a> <a href="#java">Java</a></div>
@@ -264,8 +264,9 @@ iterator = collection.search_iterator(
     batch_size=<span class="hljs-number">10</span>,
     param=search_params,
     output_fields=[<span class="hljs-string">&quot;color_tag&quot;</span>],
-    limit=<span class="hljs-number">3</span>
+    limit=<span class="hljs-number">300</span>
 )
+<span class="hljs-comment"># search 300 entities totally with 10 entities per page</span>
 
 results = []
 
@@ -356,23 +357,23 @@ System.out.println(results.size());
   <tbody>
     <tr>
       <td><code translate="no">data</code></td>
-      <td>向量嵌入的列表。<br/>Milvus 会搜索与指定向量嵌入最相似的向量嵌入。</td>
+      <td>一个向量嵌入列表。<br/>Milvus 会搜索与指定向量嵌入最相似的向量嵌入。</td>
     </tr>
     <tr>
       <td><code translate="no">anns_field</code></td>
-      <td>当前集合中的向量字段名称。</td>
+      <td>当前 Collections 中的向量字段名称。</td>
     </tr>
     <tr>
       <td><code translate="no">batch_size</code></td>
-      <td>每次在当前迭代器上调用<code translate="no">next()</code> 时要返回的实体数量。<br/>默认值为<strong>1000</strong>。将其设置为适当的值，以控制每次迭代返回的实体数量。</td>
+      <td>每次在当前迭代器上调用<code translate="no">next()</code> 时要返回的实体数量。<br/>默认值为<strong>1000</strong>。将其设置为合适的值，以控制每次迭代返回的实体数量。</td>
     </tr>
     <tr>
       <td><code translate="no">param</code></td>
-      <td>此操作的特定参数设置。<br/><ul><li><code translate="no">metric_type</code>:应用于此操作的度量类型。应与上面指定的向量场索引时使用的类型相同。可能的值有<strong>L2</strong>、<strong>IP</strong>、<strong>COSINE</strong>、<strong>JACCARD</strong>、<strong>HAMMING</strong>。</li><li><code translate="no">params</code>:附加参数。详情请参阅<a href="https://milvus.io/api-reference/pymilvus/v2.4.x/ORM/Collection/search_iterator.md">search_iterator()</a>。</li></ul></td>
+      <td>该操作符特有的参数设置。<br/><ul><li><code translate="no">metric_type</code>:应用于此操作的度量类型。应与上面指定的向量场索引时使用的类型相同。可能的值有<strong>L2</strong>、<strong>IP</strong>、<strong>COSINE</strong>、<strong>JACCARD</strong>、<strong>HAMMING</strong>。</li><li><code translate="no">params</code>:附加参数。详情请参阅<a href="https://milvus.io/api-reference/pymilvus/v2.4.x/ORM/Collection/search_iterator.md">search_iterator()</a>。</li></ul></td>
     </tr>
     <tr>
       <td><code translate="no">output_fields</code></td>
-      <td>要包含在返回的每个实体中的字段名列表。<br/>默认值为<strong>"无"</strong>。如果未指定，则只包含主字段。</td>
+      <td>要包含在返回的每个实体中的字段名列表。<br/>默认值为 "<strong>无"</strong>。如果未指定，则只包含主字段。</td>
     </tr>
     <tr>
       <td><code translate="no">limit</code></td>
@@ -390,7 +391,7 @@ System.out.println(results.size());
   <tbody>
     <tr>
       <td><code translate="no">withCollectionName</code></td>
-      <td>设置集合名称。集合名称不能为空或空值。</td>
+      <td>设置 Collections 名称。Collection 名称不能为空或 null。</td>
     </tr>
     <tr>
       <td><code translate="no">withVectorFieldName</code></td>
@@ -551,7 +552,7 @@ R&lt;<span class="hljs-title class_">QueryIterator</span>&gt; queryIteratRes = c
     </tr>
     <tr>
       <td><code translate="no">output_fields</code></td>
-      <td>要包含在返回的每个实体中的字段名列表。<br/>该值默认为<strong>"无"</strong>。如果未指定，则只包含主字段。</td>
+      <td>要包含在返回的每个实体中的字段名列表。<br/>该值默认为 "<strong>无"</strong>。如果未指定，则只包含主字段。</td>
     </tr>
     <tr>
       <td><code translate="no">limit</code></td>
@@ -569,7 +570,7 @@ R&lt;<span class="hljs-title class_">QueryIterator</span>&gt; queryIteratRes = c
   <tbody>
     <tr>
       <td><code translate="no">withCollectionName</code></td>
-      <td>设置集合名称。集合名称不能为空或空值。</td>
+      <td>设置 Collections 名称。Collection 名称不能为空或 null。</td>
     </tr>
     <tr>
       <td><code translate="no">withExpr</code></td>

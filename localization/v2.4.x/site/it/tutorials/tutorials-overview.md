@@ -1,7 +1,7 @@
 ---
 id: tutorials-overview.md
 summary: Questa pagina fornisce un elenco di esercitazioni per interagire con Milvus.
-title: Panoramica delle esercitazioni
+title: Panoramica dei tutorial
 ---
 <h1 id="Tutorials-Overview" class="common-anchor-header">Panoramica dei tutorial<button data-href="#Tutorials-Overview" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -29,7 +29,6 @@ title: Panoramica delle esercitazioni
 <tr><td><a href="/docs/it/image_similarity_search.md">Ricerca per immagini con Milvus</a></td><td>Ricerca semantica</td><td>ricerca vettoriale, campo dinamico</td></tr>
 <tr><td><a href="/docs/it/hybrid_search_with_milvus.md">Ricerca ibrida con Milvus</a></td><td>Ricerca ibrida</td><td>ricerca ibrida, multi vettoriale, incorporazione densa, incorporazione rada</td></tr>
 <tr><td><a href="/docs/it/multimodal_rag_with_milvus.md">Ricerca multimodale con più vettori</a></td><td>Ricerca semantica</td><td>multi vettoriale, ricerca ibrida</td></tr>
-<tr><td></td></tr>
 <tr><td><a href="/docs/it/question_answering_system.md">Sistema di risposta alle domande</a></td><td>Risposta alle domande</td><td>ricerca vettoriale</td></tr>
 <tr><td><a href="/docs/it/recommendation_system.md">Sistema di raccomandazione</a></td><td>Sistema di raccomandazione</td><td>ricerca vettoriale</td></tr>
 <tr><td><a href="/docs/it/video_similarity_search.md">Ricerca per similarità video</a></td><td>Ricerca semantica</td><td>ricerca vettoriale</td></tr>
@@ -38,5 +37,7 @@ title: Panoramica delle esercitazioni
 <tr><td><a href="/docs/it/text_search_engine.md">Motore di ricerca testuale</a></td><td>Ricerca semantica</td><td>ricerca vettoriale</td></tr>
 <tr><td><a href="/docs/it/text_image_search.md">Ricerca di immagini per testo</a></td><td>Ricerca semantica</td><td>ricerca vettoriale</td></tr>
 <tr><td><a href="/docs/it/image_deduplication_system.md">Deduplicazione delle immagini</a></td><td>Deduplicazione</td><td>ricerca vettoriale</td></tr>
+<tr><td><a href="/docs/it/graph_rag_with_milvus.md">RAG grafico con Milvus</a></td><td>RAG</td><td>ricerca a grafo</td></tr>
+<tr><td><a href="/docs/it/contextual_retrieval_with_milvus.md">Ricerca contestuale con Milvus</a></td><td>Avvio rapido</td><td>ricerca vettoriale</td></tr>
 </tbody>
 </table>

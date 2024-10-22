@@ -1,6 +1,6 @@
 ---
 id: cli_commands.md
-summary: Interagieren Sie mit Milvus über Befehle.
+summary: Interaktion mit Milvus über Befehle.
 title: Milvus_CLI Befehlsreferenz
 ---
 <h1 id="MilvusCLI-Command-Reference" class="common-anchor-header">Milvus_CLI Befehlsreferenz<button data-href="#MilvusCLI-Command-Reference" class="anchor-icon" translate="no">
@@ -143,7 +143,7 @@ title: Milvus_CLI Befehlsreferenz
 <h3 id="Examples" class="common-anchor-header">Beispiele</h3><h4 id="Example-1" class="common-anchor-header">Beispiel 1</h4><p>Das folgende Beispiel verwendet die Datenbank <code translate="no">testdb</code> in milvus.</p>
 <pre><code translate="no" class="language-shell">milvus_cli &gt; use database -db testdb
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="List-Databases" class="common-anchor-header">Datenbanken auflisten<button data-href="#List-Databases" class="anchor-icon" translate="no">
+<h2 id="list-Databases" class="common-anchor-header">Datenbanken auflisten<button data-href="#list-Databases" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -165,7 +165,7 @@ title: Milvus_CLI Befehlsreferenz
 <h3 id="Examples" class="common-anchor-header">Beispiele</h3><h4 id="Example-1" class="common-anchor-header">Beispiel 1</h4><p>Das folgende Beispiel listet die Datenbanken in Milvus auf.</p>
 <pre><code translate="no" class="language-shell">milvus_cli &gt; list databases
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Delete-Database" class="common-anchor-header">Datenbank löschen<button data-href="#Delete-Database" class="anchor-icon" translate="no">
+<h2 id="delete-Database" class="common-anchor-header">delete Datenbank<button data-href="#delete-Database" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -180,7 +180,7 @@ title: Milvus_CLI Befehlsreferenz
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Datenbank löschen in Milvus</p>
+    </button></h2><p>Datenbank in Milvus löschen</p>
 <p><h3 id="delete-database">Syntax</h3></p>
 <pre><code translate="no" class="language-shell"><span class="hljs-keyword">delete</span> database -<span class="hljs-title function_">db</span> (text) 
 <button class="copy-code-btn"></button></code></pre>
@@ -669,7 +669,7 @@ Timeout []:
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Zeigt die detaillierten Informationen eines Indexes an.</p>
+    </button></h2><p>Zeigt die detaillierten Informationen zu einem Index an.</p>
 <p><h3 id="show-index">Syntax</h3></p>
 <pre><code translate="no" class="language-shell">show index -c (text) -in (text)
 <button class="copy-code-btn"></button></code></pre>
@@ -785,7 +785,7 @@ Timeout []:
 <tbody>
 <tr><td style="text-align:left">-c</td><td style="text-align:left">-sammlung-name</td><td style="text-align:left">Der Name der Sammlung, in die die Daten eingefügt werden.</td></tr>
 <tr><td style="text-align:left">-p</td><td style="text-align:left">-partition</td><td style="text-align:left">(Optional) Der Name der Partition, in die die Daten eingefügt werden. Wenn Sie diese Partitionsoption nicht angeben, wird die Partition "_default" gewählt.</td></tr>
-<tr><td style="text-align:left">-help</td><td style="text-align:left">n/a</td><td style="text-align:left">Zeigt die Hilfe zur Verwendung des Befehls an.</td></tr>
+<tr><td style="text-align:left">-help</td><td style="text-align:left">k.A.</td><td style="text-align:left">Zeigt die Hilfe zur Verwendung des Befehls an.</td></tr>
 </tbody>
 </table>
 <p><h3 id="import">Beispiel 1</h3>
@@ -1165,7 +1165,7 @@ timeout []:
 Guarantee Timestamp(It instructs Milvus to see <span class="hljs-built_in">all</span> operations performed before a provided timestamp. If no such timestamp <span class="hljs-keyword">is</span> provided, then Milvus will search <span class="hljs-built_in">all</span> operations performed to date) [<span class="hljs-number">0</span>]:
 
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="List-connection" class="common-anchor-header">Verbindung auflisten<button data-href="#List-connection" class="anchor-icon" translate="no">
+<h2 id="list-connection" class="common-anchor-header">Verbindung auflisten<button data-href="#list-connection" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -1238,7 +1238,7 @@ Guarantee Timestamp(It instructs Milvus to see <span class="hljs-built_in">all</
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Zeigt den Fortschritt des Ladens von Entitäten an.</p>
+    </button></h2><p>Zeigt den Fortschritt beim Laden einer Sammlung an.</p>
 <p><h3 id="show-loading-progress">Syntax</h3></p>
 <pre><code translate="no" class="language-shell">show loading_progress -c (text) [-p (text)]
 <button class="copy-code-btn"></button></code></pre>

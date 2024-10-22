@@ -18,7 +18,8 @@ title: Recherche hybride avec Milvus
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/hybrid_search_with_milvus.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a></p>
+    </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/hybrid_search_with_milvus.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
+<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/hybrid_search_with_milvus.ipynb" target="_blank"><img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/></a></p>
 <p><img translate="no" src="https://raw.githubusercontent.com/milvus-io/bootcamp/master/bootcamp/tutorials/quickstart/apps/hybrid_demo_with_milvus/pics/demo.png"/></p>
 <p>Dans ce tutoriel, nous allons montrer comment effectuer une recherche hybride avec <a href="https://milvus.io/docs/multi-vector-search.md">Milvus</a> et le <a href="https://github.com/FlagOpen/FlagEmbedding/tree/master/FlagEmbedding/BGE_M3">modèle BGE-M3</a>. Le modèle BGE-M3 peut convertir le texte en vecteurs denses et épars. Milvus prend en charge le stockage des deux types de vecteurs dans une collection, ce qui permet d'effectuer une recherche hybride qui améliore la pertinence des résultats.</p>
 <p>Milvus prend en charge les méthodes de recherche denses, éparses et hybrides :</p>
@@ -71,7 +72,7 @@ Inference Embeddings: 100%|██████████| 32/32 [01:59&lt;00:00
 <div class="note alert">
 <ul>
 <li>Définir l'uri comme un fichier local, par exemple &quot;./milvus.db&quot;, est la méthode la plus pratique, car elle utilise automatiquement <a href="https://milvus.io/docs/milvus_lite.md">Milvus Lite</a> pour stocker toutes les données dans ce fichier.</li>
-<li>Si vous avez des données à grande échelle, par exemple plus d'un million de vecteurs, vous pouvez configurer un serveur Milvus plus performant sur <a href="https://milvus.io/docs/quickstart.md">Docker ou Kubernetes</a>. Dans cette configuration, veuillez utiliser l'uri du serveur, par exemple http://localhost:19530, comme uri.</li>
+<li>Si vous disposez de données à grande échelle, par exemple plus d'un million de vecteurs, vous pouvez configurer un serveur Milvus plus performant sur <a href="https://milvus.io/docs/quickstart.md">Docker ou Kubernetes</a>. Dans cette configuration, veuillez utiliser l'uri du serveur, par exemple http://localhost:19530, comme uri.</li>
 <li>Si vous souhaitez utiliser <a href="https://zilliz.com/cloud">Zilliz Cloud</a>, le service en nuage entièrement géré pour Milvus, ajustez l'uri et le token, qui correspondent au <a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#cluster-details">point final public et à la clé API</a> dans Zilliz Cloud.</li>
 </ul>
 </div>
@@ -201,11 +202,11 @@ def <span class="hljs-title">dense_search</span>(<span class="hljs-params">col, 
 <button class="copy-code-btn"></button></code></pre>
 <p>Exécutons trois recherches différentes avec les fonctions définies :</p>
 <pre><code translate="no" class="language-python">dense_results = <span class="hljs-title function_">dense_search</span>(col, query_embeddings[<span class="hljs-string">&quot;dense&quot;</span>][<span class="hljs-number">0</span>])
-sparse_results = <span class="hljs-title function_">sparse_search</span>(col, query_embeddings[<span class="hljs-string">&quot;sparse&quot;</span>][<span class="hljs-number">0</span>])
+sparse_results = <span class="hljs-title function_">sparse_search</span>(col, query_embeddings[<span class="hljs-string">&quot;sparse&quot;</span>].<span class="hljs-title function_">_getrow</span>(<span class="hljs-number">0</span>))
 hybrid_results = <span class="hljs-title function_">hybrid_search</span>(
     col,
     query_embeddings[<span class="hljs-string">&quot;dense&quot;</span>][<span class="hljs-number">0</span>],
-    query_embeddings[<span class="hljs-string">&quot;sparse&quot;</span>][<span class="hljs-number">0</span>],
+    query_embeddings[<span class="hljs-string">&quot;sparse&quot;</span>].<span class="hljs-title function_">_getrow</span>(<span class="hljs-number">0</span>),
     sparse_weight=<span class="hljs-number">0.7</span>,
     dense_weight=<span class="hljs-number">1.0</span>,
 )
@@ -287,7 +288,7 @@ formatted_results = doc_text_formatting(ef, query, hybrid_results)
 <p><span style='color:red'>Comment</span> créer un nouveau terminal et un nouvel interpréteur de commandes sous Linux en utilisant la<span style='color:red'> programmation</span> C<span style='color:red'>?</span></p>
 <p><span style='color:red'>Comment</span> créer un nouveau shell dans un nouveau terminal en utilisant la<span style='color:red'> programmation</span> C (terminal Linux)<span style='color:red'>?</span></p>
 <p>Quelle est la meilleure entreprise<span style='color:red'> à démarrer</span> à Hyderabad<span style='color:red'>?</span></p>
-<p>Quel est le meilleur moyen de<span style='color:red'> démarrer une</span> entreprise à Hyderabad<span style='color:red'>?</span></p>
+<p>Quel est le meilleur moyen de<span style='color:red'> démarrer</span> une entreprise à Hyderabad<span style='color:red'>?</span></p>
 <p>Quelle est la meilleure façon de<span style='color:red'> commencer la</span> robotique<span style='color:red'>?</span> Quelle est la meilleure carte de développement pour que je puisse<span style='color:red'> commencer à</span> travailler dessus<span style='color:red'>?</span></p>
 <p>Quelle est la<span style='color:red'> meilleure</span> façon de commencer à travailler en robotique<span style='color:red'>?</span> Quels sont les livres sur les algorithmes qui conviennent à un débutant complet<span style='color:red'>?</span></p>
 <p><span style='color:red'>Comment</span> faire pour que la vie vous convienne et que la vie cesse de vous <span style='color:red'>maltraiter</span> mentalement et émotionnellement<span style='color:red'>?</span></p>
@@ -306,7 +307,7 @@ formatted_results = doc_text_formatting(ef, query, hybrid_results)
 <p><span style='color:red'>Comment</span> créer un nouveau terminal et un nouvel interpréteur de commandes sous Linux en utilisant la<span style='color:red'> programmation</span> C<span style='color:red'>?</span></p>
 <p><span style='color:red'>Comment</span> créer un nouveau shell dans un nouveau terminal en utilisant la<span style='color:red'> programmation</span> C (terminal Linux)<span style='color:red'>?</span></p>
 <p>Quelle est la meilleure entreprise<span style='color:red'> à démarrer</span> à Hyderabad<span style='color:red'>?</span></p>
-<p>Quelle est la meilleure façon de<span style='color:red'> démarrer une</span> entreprise à Hyderabad<span style='color:red'>?</span></p>
-<p>Quelles sont les mathématiques dont un débutant<span style='color:red'> a</span> besoin<span style='color:red'> pour</span> comprendre les algorithmes de<span style='color:red'> programmation</span> informatique<span style='color:red'>?</span> Quels sont les livres sur les algorithmes qui conviennent à un débutant complet<span style='color:red'>?</span></p>
+<p>Quelle est la meilleure façon de<span style='color:red'> démarrer</span> une entreprise à Hyderabad<span style='color:red'>?</span></p>
+<p>Quelles sont les mathématiques dont un débutant a besoin<span style='color:red'> pour</span> comprendre les algorithmes de<span style='color:red'> programmation</span> informatique<span style='color:red'>?</span> Quels sont les livres sur les algorithmes qui conviennent à un débutant complet<span style='color:red'>?</span></p>
 <p><span style='color:red'>Comment</span> faire en sorte que la vie vous convienne et qu'elle cesse de vous <span style='color:red'>maltraiter</span> mentalement et émotionnellement<span style='color:red'>?</span></p>
 <h3 id="Quick-Deploy" class="common-anchor-header">Déploiement rapide</h3><p>Pour savoir comment démarrer une démonstration en ligne avec ce tutoriel, veuillez vous référer à l <a href="https://github.com/milvus-io/bootcamp/tree/master/bootcamp/tutorials/quickstart/apps/hybrid_demo_with_milvus">'exemple d'application.</a></p>

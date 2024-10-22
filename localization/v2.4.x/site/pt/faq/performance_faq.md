@@ -3,7 +3,7 @@ id: performance_faq.md
 summary: >-
   Encontre respostas a perguntas frequentes sobre o desempenho da pesquisa,
   melhorias de desempenho e outras questões relacionadas com o desempenho.
-title: FAQ de desempenho
+title: FAQ sobre desempenho
 ---
 <h1 id="Performance-FAQ" class="common-anchor-header">FAQ sobre desempenho<button data-href="#Performance-FAQ" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -54,5 +54,5 @@ title: FAQ de desempenho
 <h4 id="Still-have-questions" class="common-anchor-header">Ainda tem dúvidas?</h4><p>Você pode:</p>
 <ul>
 <li>Verificar o <a href="https://github.com/milvus-io/milvus/issues">Milvus</a> no GitHub. Sinta-se à vontade para fazer perguntas, compartilhar ideias e ajudar outras pessoas.</li>
-<li>Junte-se ao nosso <a href="https://join.slack.com/t/milvusio/shared_invite/enQtNzY1OTQ0NDI3NjMzLWNmYmM1NmNjOTQ5MGI5NDhhYmRhMGU5M2NhNzhhMDMzY2MzNDdlYjM5ODQ5MmE3ODFlYzU3YjJkNmVlNDQ2ZTk">Canal Slack</a> para encontrar suporte e envolver-se com a nossa comunidade de código aberto.</li>
+<li>Junte-se ao nosso <a href="https://join.slack.com/t/milvusio/shared_invite/enQtNzY1OTQ0NDI3NjMzLWNmYmM1NmNjOTQ5MGI5NDhhYmRhMGU5M2NhNzhhMDMzY2MzNDdlYjM5ODQ5MmE3ODFlYzU3YjJkNmVlNDQ2ZTk">Canal Slack</a> para obter suporte e envolver-se com a nossa comunidade de código aberto.</li>
 </ul>

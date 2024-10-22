@@ -18,16 +18,17 @@ title: Hybride Suche mit Milvus
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/hybrid_search_with_milvus.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a></p>
+    </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/hybrid_search_with_milvus.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
+<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/hybrid_search_with_milvus.ipynb" target="_blank"><img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/></a></p>
 <p><img translate="no" src="https://raw.githubusercontent.com/milvus-io/bootcamp/master/bootcamp/tutorials/quickstart/apps/hybrid_demo_with_milvus/pics/demo.png"/></p>
 <p>In diesem Tutorium wird gezeigt, wie man eine hybride Suche mit <a href="https://milvus.io/docs/multi-vector-search.md">Milvus</a> und dem <a href="https://github.com/FlagOpen/FlagEmbedding/tree/master/FlagEmbedding/BGE_M3">BGE-M3-Modell</a> durchführt. Das BGE-M3-Modell kann Text in dichte und spärliche Vektoren umwandeln. Milvus unterstützt die Speicherung beider Arten von Vektoren in einer Sammlung und ermöglicht so eine hybride Suche, die die Relevanz der Ergebnisse erhöht.</p>
 <p>Milvus unterstützt dichte, spärliche und hybride Retrievalmethoden:</p>
 <ul>
-<li>Dense Retrieval: Nutzt den semantischen Kontext, um die Bedeutung hinter den Abfragen zu verstehen.</li>
+<li>Dichtes Retrieval: Nutzt den semantischen Kontext, um die Bedeutung hinter den Abfragen zu verstehen.</li>
 <li>Sparse Retrieval: Konzentriert sich auf den Abgleich von Schlüsselwörtern, um Ergebnisse auf der Grundlage bestimmter Begriffe zu finden, was einer Volltextsuche entspricht.</li>
 <li>Hybrides Retrieval: Kombiniert sowohl Dense- als auch Sparse-Ansätze und erfasst den vollständigen Kontext und spezifische Schlüsselwörter für umfassende Suchergebnisse.</li>
 </ul>
-<p>Durch die Integration dieser Methoden gleicht die Milvus-Hybridsuche semantische und lexikalische Ähnlichkeiten aus und verbessert so die Gesamtrelevanz der Suchergebnisse. Dieses Notizbuch führt durch den Prozess der Einrichtung und Verwendung dieser Suchstrategien und zeigt ihre Effektivität in verschiedenen Such-Szenarien auf.</p>
+<p>Durch die Integration dieser Methoden gleicht die Milvus-Hybridsuche semantische und lexikalische Ähnlichkeiten aus und verbessert so die Gesamtrelevanz der Suchergebnisse. Dieses Notebook führt durch den Prozess der Einrichtung und Verwendung dieser Suchstrategien und zeigt ihre Effektivität in verschiedenen Suchszenarien auf.</p>
 <h3 id="Dependencies-and-Environment" class="common-anchor-header">Abhängigkeiten und Umgebung</h3><pre><code translate="no" class="language-shell">$ pip install --upgrade pymilvus <span class="hljs-string">&quot;pymilvus[model]&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Download-Dataset" class="common-anchor-header">Datensatz herunterladen</h3><p>Um die Suche zu demonstrieren, benötigen wir einen Korpus von Dokumenten. Wir verwenden das Quora Duplicate Questions Dataset und legen es im lokalen Verzeichnis ab.</p>
@@ -201,11 +202,11 @@ def <span class="hljs-title">dense_search</span>(<span class="hljs-params">col, 
 <button class="copy-code-btn"></button></code></pre>
 <p>Lassen Sie uns drei verschiedene Suchen mit den definierten Funktionen durchführen:</p>
 <pre><code translate="no" class="language-python">dense_results = <span class="hljs-title function_">dense_search</span>(col, query_embeddings[<span class="hljs-string">&quot;dense&quot;</span>][<span class="hljs-number">0</span>])
-sparse_results = <span class="hljs-title function_">sparse_search</span>(col, query_embeddings[<span class="hljs-string">&quot;sparse&quot;</span>][<span class="hljs-number">0</span>])
+sparse_results = <span class="hljs-title function_">sparse_search</span>(col, query_embeddings[<span class="hljs-string">&quot;sparse&quot;</span>].<span class="hljs-title function_">_getrow</span>(<span class="hljs-number">0</span>))
 hybrid_results = <span class="hljs-title function_">hybrid_search</span>(
     col,
     query_embeddings[<span class="hljs-string">&quot;dense&quot;</span>][<span class="hljs-number">0</span>],
-    query_embeddings[<span class="hljs-string">&quot;sparse&quot;</span>][<span class="hljs-number">0</span>],
+    query_embeddings[<span class="hljs-string">&quot;sparse&quot;</span>].<span class="hljs-title function_">_getrow</span>(<span class="hljs-number">0</span>),
     sparse_weight=<span class="hljs-number">0.7</span>,
     dense_weight=<span class="hljs-number">1.0</span>,
 )
@@ -282,17 +283,17 @@ formatted_results = doc_text_formatting(ef, query, hybrid_results)
 <p>Wie bereiten wir uns auf UPSC vor?</p>
 <p><strong>Sparsame Suchergebnisse:</strong></p>
 <p>Was ist<span style='color:red'> Java-Programmierung? Wie</span> lernt man die Programmiersprache Java?</p>
-<p>Wie<span style='color:red'> fängt</span> man am besten<span style='color:red'> an,</span> Robotik<span style='color:red'> zu lernen</span><span style='color:red'>?</span></p>
+<p>Wie fängt man am besten an, Robotik<span style='color:red'> zu lernen</span><span style='color:red'>?</span></p>
 <p>Was ist die Alternative<span style='color:red'> zum</span> maschinellen<span style='color:red'> Lernen?</span></p>
 <p><span style='color:red'>Wie</span> erstelle ich ein neues Terminal und eine neue Shell in Linux mit<span style='color:red'> C-Programmierung?</span></p>
 <p><span style='color:red'>Wie</span> erstelle ich eine neue Shell in einem neuen Terminal mit<span style='color:red'> C-Programmierung</span> (Linux-Terminal)<span style='color:red'>?</span></p>
 <p>Welches Unternehmen ist in Hyderabad besser<span style='color:red'> zu gründen</span><span style='color:red'>?</span></p>
 <p>Welches Unternehmen ist ein guter<span style='color:red'> Start</span> in Hyderabad<span style='color:red'>?</span></p>
-<p>Was ist der beste Weg<span style='color:red'>, um mit der</span> Robotik<span style='color:red'> zu beginnen</span><span style='color:red'>?</span> Welches ist die beste Entwicklungsplatine,<span style='color:red'> mit</span> der ich<span style='color:red'> anfangen</span> kann zu arbeiten<span style='color:red'>?</span></p>
+<p>Was ist der beste Weg<span style='color:red'>, um mit der</span> Robotik<span style='color:red'> zu beginnen</span><span style='color:red'>?</span> Welches ist die beste Entwicklungsplatine, mit der ich<span style='color:red'> anfangen</span> kann zu arbeiten<span style='color:red'>?</span></p>
 <p>Welche Mathematik braucht ein absoluter Neuling<span style='color:red'>, um</span> Algorithmen für die<span style='color:red'> Computerprogrammierung</span> zu verstehen<span style='color:red'>?</span> Welche Bücher über Algorithmen sind für einen absoluten Anfänger geeignet<span style='color:red'>?</span></p>
 <p><span style='color:red'>Wie</span> kann man das Leben so gestalten, dass es zu einem passt, und wie kann man verhindern, dass das Leben einen geistig und emotional <span style='color:red'>missbraucht</span><span style='color:red'>?</span></p>
 <p><strong>Hybride Suchergebnisse:</strong></p>
-<p>Wie<span style='color:red'> fange ich</span> am besten<span style='color:red'> mit der</span> Robotik<span style='color:red'> an</span><span style='color:red'>?</span> Welches ist die beste Entwicklungsplatine,<span style='color:red'> mit</span> der ich<span style='color:red'> anfangen</span> kann zu arbeiten<span style='color:red'>?</span></p>
+<p>Wie fange ich am besten mit der Robotik<span style='color:red'> an</span><span style='color:red'>?</span> Welches ist die beste Entwicklungsplatine, mit der ich<span style='color:red'> anfangen</span> kann zu arbeiten<span style='color:red'>?</span></p>
 <p>Was ist<span style='color:red'> Java-Programmierung? Wie</span> lernt man die Programmiersprache Java?</p>
 <p>Was ist der beste Weg<span style='color:red'>, um mit dem Lernen von</span> Robotik<span style='color:red'> zu beginnen</span><span style='color:red'>?</span></p>
 <p><span style='color:red'>Wie</span> bereitet man sich auf UPSC vor<span style='color:red'>?</span></p>

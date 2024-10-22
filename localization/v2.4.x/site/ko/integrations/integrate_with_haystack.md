@@ -1,7 +1,7 @@
 ---
 id: integrate_with_haystack.md
 summary: 이 가이드는 헤이스택과 밀버스를 사용하여 검색 증강 세대(RAG) 시스템을 구축하는 방법을 설명합니다.
-title: 밀버스 및 헤이스택을 사용한 검색 증강 세대(RAG)
+title: Milvus 및 Haystack을 사용한 검색 증강 생성(RAG)
 ---
 <h1 id="Retrieval-Augmented-Generation-RAG-with-Milvus-and-Haystack" class="common-anchor-header">Milvus 및 Haystack을 사용한 검색 증강 생성(RAG)<button data-href="#Retrieval-Augmented-Generation-RAG-with-Milvus-and-Haystack" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -18,7 +18,8 @@ title: 밀버스 및 헤이스택을 사용한 검색 증강 세대(RAG)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/rag_with_milvus_and_haystack.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a></p>
+    </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/rag_with_milvus_and_haystack.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
+<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/rag_with_milvus_and_haystack.ipynb" target="_blank"><img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/></a></p>
 <p>이 가이드에서는 Haystack과 Milvus를 사용하여 검색 증강 생성(RAG) 시스템을 구축하는 방법을 설명합니다.</p>
 <p>RAG 시스템은 검색 시스템과 생성 모델을 결합하여 주어진 프롬프트에 따라 새 텍스트를 생성합니다. 이 시스템은 먼저 Milvus를 사용하여 말뭉치에서 관련 문서를 검색한 다음 생성 모델을 사용하여 검색된 문서를 기반으로 새 텍스트를 생성합니다.</p>
 <p><a href="https://haystack.deepset.ai/">헤이스택은</a> 대규모 언어 모델(LLM)로 사용자 지정 앱을 구축하기 위한 딥셋의 오픈 소스 Python 프레임워크입니다. <a href="https://milvus.io/">Milvus는</a> 세계에서 가장 진보된 오픈 소스 벡터 데이터베이스로, 임베딩 유사도 검색 및 AI 애플리케이션을 강화하기 위해 구축되었습니다.</p>

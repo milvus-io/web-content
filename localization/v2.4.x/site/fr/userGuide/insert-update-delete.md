@@ -3,7 +3,7 @@ id: insert-update-delete.md
 summary: >-
   Ce guide présente les opérations de manipulation des données au sein d'une
   collection, notamment l'insertion, la réinsertion et la suppression.
-title: 'Insérer, surinsérer et supprimer'
+title: 'Insérer, réinsérer et supprimer'
 ---
 <h1 id="Insert-Upsert--Delete" class="common-anchor-header">Insérer, réinsérer et supprimer<button data-href="#Insert-Upsert--Delete" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -271,7 +271,7 @@ res = client.insert(
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Insert-into-partitions" class="common-anchor-header">Insérer dans des partitions</h3><p>Pour insérer des données dans une partition spécifique, vous pouvez spécifier le nom de la partition dans la requête d'insertion comme suit :</p>
 <div class="multipleCode">
-   <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a></div>
+   <a href="#python">Python </a> <a href="#java">Java Node</a> <a href="#javascript">.js</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># 4. Insert some more data into a specific partition</span>
 data=[
     {<span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">10</span>, <span class="hljs-string">&quot;vector&quot;</span>: [-<span class="hljs-number">0.5570353903748935</span>, -<span class="hljs-number">0.8997887893201304</span>, -<span class="hljs-number">0.7123782431855732</span>, -<span class="hljs-number">0.6298990746450119</span>, <span class="hljs-number">0.6699215060604258</span>], <span class="hljs-string">&quot;color&quot;</span>: <span class="hljs-string">&quot;red_1202&quot;</span>},
@@ -407,7 +407,6 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 <div class="alert note">
 <ul>
 <li>Les opérations d'insertion ne mettent pas à jour les clés primaires.</li>
-<li>Les opérations d'insertion ne prennent pas en charge les collections pour lesquelles l'option <code translate="no">autoID</code> est activée.</li>
 <li>Si vous prévoyez d'utiliser l'opération <code translate="no">upsert</code> au lieu de <code translate="no">insert</code> pour l'ingestion de données à grande échelle (par exemple, des millions de vecteurs), sachez que cela peut entraîner une consommation de mémoire élevée sur les nœuds de données Milvus.</li>
 </ul>
 </div>

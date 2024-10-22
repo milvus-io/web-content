@@ -1,7 +1,7 @@
 ---
 id: build-rag-with-milvus.md
 summary: Lappen mit Milvus bauen
-title: RAG mit Milvus aufbauen
+title: RAG mit Milvus erstellen
 ---
 <h1 id="Build-RAG-with-Milvus" class="common-anchor-header">RAG mit Milvus erstellen<button data-href="#Build-RAG-with-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -18,10 +18,11 @@ title: RAG mit Milvus aufbauen
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/build_RAG_with_milvus.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a></p>
+    </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/build_RAG_with_milvus.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
+<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/build_RAG_with_milvus.ipynb" target="_blank"><img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/></a></p>
 <p><img translate="no" src="https://raw.githubusercontent.com/milvus-io/bootcamp/master/bootcamp/tutorials/quickstart/apps/rag_search_with_milvus/pics/rag_demo.png"/></p>
 <p>In diesem Tutorial zeigen wir Ihnen, wie Sie eine RAG-Pipeline (Retrieval-Augmented Generation) mit Milvus aufbauen können.</p>
-<p>Das RAG-System kombiniert ein Retrievalsystem mit einem generativen Modell, um neuen Text auf der Grundlage einer vorgegebenen Aufforderung zu generieren. Das System holt zunächst relevante Dokumente aus einem Korpus mit Milvus und verwendet dann ein generatives Modell, um neuen Text auf der Grundlage der geholten Dokumente zu erzeugen.</p>
+<p>Das RAG-System kombiniert ein Retrievalsystem mit einem generativen Modell, um neuen Text auf der Grundlage einer vorgegebenen Aufforderung zu generieren. Das System sucht zunächst relevante Dokumente aus einem Korpus mit Milvus und verwendet dann ein generatives Modell, um neuen Text auf der Grundlage der gefundenen Dokumente zu erzeugen.</p>
 <h2 id="Preparation" class="common-anchor-header">Vorbereitung<button data-href="#Preparation" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -76,7 +77,7 @@ openai_client = <span class="hljs-title class_">OpenAI</span>()
         .embedding
     )
 <button class="copy-code-btn"></button></code></pre>
-<p>Erzeugen Sie eine Testeinbettung und geben Sie ihre Dimension und die ersten Elemente aus.</p>
+<p>Erzeugen Sie eine Testeinbettung und geben Sie deren Dimension und die ersten Elemente aus.</p>
 <pre><code translate="no" class="language-python">test_embedding = emb_text(<span class="hljs-string">&quot;This is a test&quot;</span>)
 embedding_dim = <span class="hljs-built_in">len</span>(test_embedding)
 <span class="hljs-built_in">print</span>(embedding_dim)

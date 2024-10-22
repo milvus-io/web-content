@@ -1,6 +1,6 @@
 ---
 id: manage-collections.md
-title: Gestionar cobros
+title: Gestionar colecciones
 ---
 <h1 id="Manage-Collections" class="common-anchor-header">Gestionar colecciones<button data-href="#Manage-Collections" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -220,7 +220,7 @@ $ curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable
 <p>La colección generada en el código anterior contiene sólo dos campos: <code translate="no">id</code> (como clave primaria) y <code translate="no">vector</code> (como campo vectorial), con las opciones <code translate="no">auto_id</code> y <code translate="no">enable_dynamic_field</code> activadas por defecto.</p>
 <ul>
 <li><p><code translate="no">auto_id</code></p>
-<p>Activar esta configuración garantiza que la clave primaria se incremente automáticamente. No es necesario proporcionar manualmente claves primarias durante la inserción de datos.</p></li>
+<p>La activación de esta configuración garantiza que la clave primaria se incremente automáticamente. No es necesario proporcionar manualmente claves primarias durante la inserción de datos.</p></li>
 <li><p><code translate="no">enable_dynamic_field</code></p>
 <p>Cuando está activada, todos los campos, excepto <code translate="no">id</code> y <code translate="no">vector</code> en los datos que se van a insertar, se tratan como campos dinámicos. Estos campos adicionales se guardan como pares clave-valor dentro de un campo especial denominado <code translate="no">$meta</code>. Esta función permite incluir campos adicionales durante la inserción de datos.</p></li>
 </ul>
@@ -394,7 +394,7 @@ schema.addField(AddFieldReq.builder()
     </tr>
     <tr>
       <td><code translate="no">dim</code></td>
-      <td>La dimensionalidad del campo de la colección que contiene las incrustaciones vectoriales.<br/>El valor debe ser un número entero mayor que 1 y suele estar determinado por el modelo que se utiliza para generar incrustaciones vectoriales.</td>
+      <td>Dimensionalidad del campo de la colección que contiene las incrustaciones vectoriales.<br/>El valor debe ser un número entero mayor que 1 y suele estar determinado por el modelo que se utiliza para generar incrustaciones vectoriales.</td>
     </tr>
   </tbody>
 </table>
@@ -527,7 +527,7 @@ indexParams.add(indexParamForVectorField);
     </tr>
     <tr>
       <td><code translate="no">params</code></td>
-      <td>Los parámetros de ajuste fino para el tipo de índice especificado. Para más información sobre posibles claves y rangos de valores, consulte <a href="https://milvus.io/docs/index.md">Índice en memoria</a>.</td>
+      <td>Los parámetros de ajuste para el tipo de índice especificado. Para más información sobre posibles claves y rangos de valores, consulte <a href="https://milvus.io/docs/index.md">Índice en memoria</a>.</td>
     </tr>
   </tbody>
 </table>
@@ -579,7 +579,7 @@ indexParams.add(indexParamForVectorField);
     </tr>
     <tr>
       <td><code translate="no">params</code></td>
-      <td>Los parámetros de ajuste fino para el tipo de índice especificado. Para más información sobre posibles claves y rangos de valores, consulte <a href="https://milvus.io/docs/index.md">Índice en memoria</a>.</td>
+      <td>Los parámetros de ajuste para el tipo de índice especificado. Para más información sobre posibles claves y rangos de valores, consulte <a href="https://milvus.io/docs/index.md">Índice en memoria</a>.</td>
     </tr>
   </tbody>
 </table>
@@ -620,7 +620,7 @@ indexParams.add(indexParamForVectorField);
 <p>El fragmento de código anterior muestra cómo configurar los parámetros de índice para un campo vectorial y un campo escalar, respectivamente. Para el campo vectorial, establezca tanto el tipo métrico como el tipo de índice. Para un campo escalar, establezca sólo el tipo de índice. Se recomienda crear un índice para el campo vectorial y cualquier campo escalar que se utilice con frecuencia para filtrar.</p>
 <h4 id="Step-3-Create-the-collection" class="common-anchor-header">Paso 3: Crear la colección</h4><p>Tiene la opción de crear una colección y un archivo de índice por separado o crear una colección con el índice cargado simultáneamente en el momento de la creación.</p>
 <div class="language-python">
-<p>Utilice <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_collection.md">create_collection()</a> para crear una colección con los parámetros de esquema e índice especificados y <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/get_load_state.md">get_load_state()</a> para comprobar el estado de carga de la colección.</p>
+<p>Utilice <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_collection.md">create_collection(</a> ) para crear una colección con los parámetros de esquema e índice especificados y <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/get_load_state.md">get_load_state()</a> para comprobar el estado de carga de la colección.</p>
 </div>
 <div class="language-java">
 <p>Utilice <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Collections/createCollection.md">createCollection()</a> para crear una colección con los parámetros de esquema e índice especificados y <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Management/getLoadState.md">getLoadState()</a> para comprobar el estado de carga de la colección.</p>
@@ -1593,6 +1593,33 @@ $ curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable
 <span class="hljs-comment">#     }</span>
 <span class="hljs-comment"># }</span>
 <button class="copy-code-btn"></button></code></pre>
+<h3 id="Load-a-collection-partially-Public-Preview" class="common-anchor-header">Cargar una colección parcialmente (Vista previa pública)</h3><div class="alert note">
+<p>Esta función se encuentra actualmente en fase de vista previa pública. La API y la funcionalidad pueden cambiar en el futuro.</p>
+</div>
+<p>Al recibir su solicitud de carga, Milvus carga en memoria todos los índices de los campos vectoriales y todos los datos de los campos escalares. Si algunos campos no van a estar implicados en búsquedas y consultas, puede excluirlos de la carga para reducir el uso de memoria, mejorando el rendimiento de la búsqueda.</p>
+<div class="language-python">
+<pre><code translate="no" class="language-python"><span class="hljs-comment"># 7. Load the collection</span>
+client.load_collection(
+    collection_name=<span class="hljs-string">&quot;customized_setup_2&quot;</span>,
+    load_fields=[<span class="hljs-string">&quot;my_id&quot;</span>, <span class="hljs-string">&quot;my_vector&quot;</span>] <span class="hljs-comment"># Load only the specified fields</span>
+    skip_load_dynamic_field=<span class="hljs-literal">True</span> <span class="hljs-comment"># Skip loading the dynamic field</span>
+)
+
+res = client.get_load_state(
+    collection_name=<span class="hljs-string">&quot;customized_setup_2&quot;</span>
+)
+
+<span class="hljs-built_in">print</span>(res)
+
+<span class="hljs-comment"># Output</span>
+<span class="hljs-comment">#</span>
+<span class="hljs-comment"># {</span>
+<span class="hljs-comment">#     &quot;state&quot;: &quot;&lt;LoadState: Loaded&gt;&quot;</span>
+<span class="hljs-comment"># }</span>
+<button class="copy-code-btn"></button></code></pre>
+<p>Tenga en cuenta que sólo los campos enumerados en <code translate="no">load_fields</code> pueden utilizarse como condiciones de filtrado y campos de salida en búsquedas y consultas. Siempre debe incluir la clave primaria en la lista. Los nombres de campo excluidos de la carga no estarán disponibles para el filtrado o la salida.</p>
+<p>Puede utilizar <code translate="no">skip_load_dynamic_field=True</code> para omitir la carga del campo dinámico. Milvus trata el campo dinámico como un único campo, por lo que todas las claves del campo dinámico se incluirán o excluirán juntas.</p>
+</div>
 <h3 id="Release-a-collection" class="common-anchor-header">Liberar una colección</h3><div class="language-python">
 <p>Para liberar una colección, utilice el método <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/release_collection.md"><code translate="no">release_collection()</code></a> especificando el nombre de la colección.</p>
 </div>
@@ -2323,7 +2350,7 @@ collection.set_properties(
     }
 )
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Set-MMAP" class="common-anchor-header">Establecer MMAP</h3><p>Configure la propiedad de asignación de memoria (MMAP) para la colección, que determina si los datos se asignan a la memoria para mejorar el rendimiento de la consulta. Para obtener más información, consulte <a href="https://milvus.io/docs/mmap.md#Configure-memory-mapping">Configurar la asignación de memoria .</a></p>
+<h3 id="Set-MMAP" class="common-anchor-header">Establecer MMAP</h3><p>Configure la propiedad de asignación de memoria (MMAP) para la colección, que determina si los datos se asignan a la memoria para mejorar el rendimiento de la consulta. Para obtener más información, consulte <a href="https://milvus.io/docs/mmap.md#Configure-memory-mapping">Configurar la asignación de memoria</a>.</p>
 <div class="alert note">
 <p>Antes de configurar la propiedad MMAP, libere primero la colección. De lo contrario, se producirá un error.</p>
 </div>

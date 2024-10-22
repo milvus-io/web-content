@@ -20,7 +20,7 @@ title: エンベデッド・ボヤージュ
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>MilvusはVoyageEmbeddingFunctionクラスを通してVoyageのモデルと統合します。このクラスはVoyageのモデルを用いてドキュメントやクエリをエンコードし、Milvusのインデックスと互換性のある密なベクトルとしてエンベッディングを返すメソッドを提供します。この機能を利用するには、<a href="https://docs.voyageai.com/docs/api-key-and-installation">Voyageの</a>プラットフォームでアカウントを作成し、APIキーを取得してください。</p>
+    </button></h1><p>MilvusはVoyageEmbeddingFunctionクラスを通してVoyageのモデルと統合しています。このクラスはVoyageのモデルを用いてドキュメントやクエリをエンコードし、Milvusのインデックスと互換性のある密なベクトルとしてエンベッディングを返すメソッドを提供します。この機能を利用するには、<a href="https://docs.voyageai.com/docs/api-key-and-installation">Voyageの</a>プラットフォームでアカウントを作成し、APIキーを取得してください。</p>
 <p>この機能を使用するには、必要な依存関係をインストールします：</p>
 <pre><code translate="no" class="language-bash">pip install --upgrade pymilvus
 pip install <span class="hljs-string">&quot;pymilvus[model]&quot;</span>
@@ -29,13 +29,13 @@ pip install <span class="hljs-string">&quot;pymilvus[model]&quot;</span>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus.model.dense <span class="hljs-keyword">import</span> VoyageEmbeddingFunction
 
 voyage_ef = VoyageEmbeddingFunction(
-    model_name=<span class="hljs-string">&quot;voyage-lite-02-instruct&quot;</span>, <span class="hljs-comment"># Defaults to `voyage-2`</span>
+    model_name=<span class="hljs-string">&quot;voyage-3&quot;</span>, <span class="hljs-comment"># Defaults to `voyage-3`</span>
     api_key=VOYAGE_API_KEY <span class="hljs-comment"># Provide your Voyage API key</span>
 )
 <button class="copy-code-btn"></button></code></pre>
 <p><strong>パラメータ</strong></p>
 <ul>
-<li><code translate="no">model_name</code> (string) エンコードに使用する Voyage モデルの名前。例えば、 、 などです。このパラメータを指定しない場合、 が使用されます。利用可能なモデルのリストについては、<code translate="no">voyage-law-2</code> <code translate="no">voyage-code-2</code> <code translate="no">voyage-2</code> <a href="https://docs.voyageai.com/docs/embeddings">Voyage公式ドキュメントを</a>参照してください。</li>
+<li><code translate="no">model_name</code> (string) エンコードに使用する Voyage モデルの名前。例えば、 、 などです。このパラメータを指定しない場合、 が使用されます。利用可能なモデルのリストについては、<code translate="no">voyage-3-lite</code> <code translate="no">voyage-finance-2</code> <code translate="no">voyage-3</code> <a href="https://docs.voyageai.com/docs/embeddings">Voyageの公式ドキュメントを</a>参照してください。</li>
 <li><code translate="no">api_key</code> (文字列） Voyage APIにアクセスするためのAPIキー。APIキーの作成方法については<a href="https://docs.voyageai.com/docs/api-key-and-installation">APIキーとPythonクライアントを</a>参照してください。</li>
 </ul>
 <p>ドキュメントの埋め込みを作成するには、<code translate="no">encode_documents()</code> メソッドを使用します：</p>

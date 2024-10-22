@@ -4,7 +4,7 @@ order: 1
 summary: >-
   Ce guide vous présente les opérations de base pour créer et gérer des index
   sur les champs vectoriels d'une collection.
-title: Champs vectoriels d'index
+title: Indexer des champs vectoriels
 ---
 <h1 id="Index-Vector-Fields" class="common-anchor-header">Indexer des champs vectoriels<button data-href="#Index-Vector-Fields" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -249,7 +249,8 @@ index_params.add_index(
 <span class="hljs-comment"># 4.3. Create an index file</span>
 client.create_index(
     collection_name=<span class="hljs-string">&quot;customized_setup&quot;</span>,
-    index_params=index_params
+    index_params=index_params,
+    sync=<span class="hljs-literal">False</span> <span class="hljs-comment"># Whether to wait for index creation to complete before returning. Defaults to True.</span>
 )
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.common.IndexParam;
@@ -331,13 +332,17 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
       <td><code translate="no">index_params</code></td>
       <td>Un objet <strong>IndexParams</strong> contenant une liste d'objets <strong>IndexParam</strong>.</td>
     </tr>
+    <tr>
+      <td><code translate="no">sync</code></td>
+      <td>Contrôle la façon dont l'index est construit en fonction de la demande du client. Valeurs valides :<br><ul><li><code translate="no">True</code> (par défaut) : Le client attend que l'index soit entièrement construit avant de revenir. Cela signifie que vous n'obtiendrez pas de réponse tant que le processus ne sera pas terminé.</li><li><code translate="no">False</code>: Le client retourne immédiatement après la réception de la demande et l'index est construit en arrière-plan. Pour savoir si la création de l'index est terminée, utilisez la méthode <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/describe_index.md">describe_index()</a>.</li></ul></td>
+    </tr>
   </tbody>
 </table>
 <table class="language-java">
   <thead>
     <tr>
       <th>Paramètre</th>
-      <th>Description de l'objet</th>
+      <th>Description</th>
     </tr>
   </thead>
   <tbody>
@@ -351,7 +356,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
     </tr>
     <tr>
       <td><code translate="no">indexType</code></td>
-      <td>Le nom de l'algorithme utilisé pour organiser les données dans le champ spécifique. Pour les algorithmes applicables, voir <a href="https://milvus.io/docs/index.md">Index en mémoire</a> et <a href="https://milvus.io/docs/disk_index.md">Index sur disque</a>.</td>
+      <td>Le nom de l'algorithme utilisé pour classer les données dans le champ spécifique. Pour les algorithmes applicables, voir <a href="https://milvus.io/docs/index.md">Index en mémoire</a> et <a href="https://milvus.io/docs/disk_index.md">Index sur disque</a>.</td>
     </tr>
     <tr>
       <td><code translate="no">metricType</code></td>

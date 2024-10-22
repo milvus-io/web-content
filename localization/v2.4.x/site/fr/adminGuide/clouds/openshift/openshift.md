@@ -96,24 +96,24 @@ summary: Découvrez comment déployer un cluster Milvus sur OpenShift.
 apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
-name: milvus-operator-serving-cert
-namespace: milvus-operator
+  name: milvus-operator-serving-cert
+  namespace: milvus-operator
 spec:
-dnsNames:
-- milvus-operator-webhook-service.milvus-operator.svc
-- milvus-operator-webhook-service.milvus-operator.svc.cluster.local
-issuerRef:
+  dnsNames:
+  - milvus-operator-webhook-service.milvus-operator.svc
+  - milvus-operator-webhook-service.milvus-operator.svc.cluster.local
+  issuerRef:
     kind: Issuer
     name: milvus-operator-selfsigned-issuer
-secretName: milvus-operator-webhook-cert
+  secretName: milvus-operator-webhook-cert
 ---
 apiVersion: cert-manager.io/v1
 kind: Issuer
 metadata:
-name: milvus-operator-selfsigned-issuer
-namespace: milvus-operator
+  name: milvus-operator-selfsigned-issuer
+  namespace: milvus-operator
 spec:
-selfSigned: {}
+  selfSigned: {}
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>Appliquer le fichier :</p>
 <pre><code translate="no" class="language-shell">kubectl apply -f milvus-<span class="hljs-keyword">operator</span>-certificate.yaml
@@ -160,7 +160,7 @@ helm repo update milvus-<span class="hljs-keyword">operator</span>
         ></path>
       </svg>
     </button></h2><p>Suivre le reste du guide sur le site de documentation de Milvus : <a href="https://milvus.io/docs/install_cluster-milvusoperator.md#Deploy-Milvus">Déployer Milvus</a>.</p>
-<h2 id="Whats-Next" class="common-anchor-header">Prochaines étapes<button data-href="#Whats-Next" class="anchor-icon" translate="no">
+<h2 id="Whats-Next" class="common-anchor-header">Prochaine étape<button data-href="#Whats-Next" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

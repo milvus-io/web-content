@@ -68,7 +68,7 @@ Attualmente, un campo vettoriale supporta solo un tipo di indice. Milvus cancell
     </button></h2><p>Per utilizzare DiskANN, assicurarsi che</p>
 <ul>
 <li>Usare solo vettori float con almeno 1 dimensione nei dati.</li>
-<li>Utilizzare solo la distanza euclidea (L2) o il prodotto interno (IP) per misurare la distanza tra i vettori.</li>
+<li>Utilizzare solo la distanza euclidea (L2), il prodotto interno (IP) o COSINE per misurare la distanza tra i vettori.</li>
 </ul>
 <h2 id="Index-and-search-settings" class="common-anchor-header">Impostazioni dell'indice e della ricerca<button data-href="#Index-and-search-settings" class="anchor-icon" translate="no">
       <svg translate="no"

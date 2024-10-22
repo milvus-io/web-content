@@ -143,7 +143,7 @@ title: Referencia de comandos Milvus_CLI
 <h3 id="Examples" class="common-anchor-header">Ejemplos</h3><h4 id="Example-1" class="common-anchor-header">Ejemplo 1</h4><p>El siguiente ejemplo utiliza la base de datos <code translate="no">testdb</code> en milvus.</p>
 <pre><code translate="no" class="language-shell">milvus_cli &gt; use database -db testdb
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="List-Databases" class="common-anchor-header">Listar Bases de Datos<button data-href="#List-Databases" class="anchor-icon" translate="no">
+<h2 id="list-Databases" class="common-anchor-header">list Bases de datos<button data-href="#list-Databases" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -165,7 +165,7 @@ title: Referencia de comandos Milvus_CLI
 <h3 id="Examples" class="common-anchor-header">Ejemplos</h3><h4 id="Example-1" class="common-anchor-header">Ejemplo 1</h4><p>El siguiente ejemplo lista las bases de datos en milvus.</p>
 <pre><code translate="no" class="language-shell">milvus_cli &gt; list databases
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Delete-Database" class="common-anchor-header">Borrar Base de Datos<button data-href="#Delete-Database" class="anchor-icon" translate="no">
+<h2 id="delete-Database" class="common-anchor-header">delete Base de Datos<button data-href="#delete-Database" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -744,7 +744,7 @@ Timeout []:
 <tr><td style="text-align:left">conectar</td><td style="text-align:left">Se conecta a Milvus.</td></tr>
 <tr><td style="text-align:left">crear</td><td style="text-align:left">Crea colección, base de datos, partición, usuario e índice.</td></tr>
 <tr><td style="text-align:left">borrar</td><td style="text-align:left">Elimina colección, base de datos, partición, alias, usuario o índice.</td></tr>
-<tr><td style="text-align:left">salir</td><td style="text-align:left">Cierra la ventana de la línea de comandos.</td></tr>
+<tr><td style="text-align:left">salir</td><td style="text-align:left">Cierra la ventana de línea de comandos.</td></tr>
 <tr><td style="text-align:left">ayuda</td><td style="text-align:left">Muestra la ayuda para utilizar un comando.</td></tr>
 <tr><td style="text-align:left">insertar</td><td style="text-align:left">Importa datos a una partición.</td></tr>
 <tr><td style="text-align:left">list</td><td style="text-align:left">Lista colecciones, bases de datos, particiones, usuarios o índices.</td></tr>
@@ -1165,7 +1165,7 @@ timeout []:
 Guarantee Timestamp(It instructs Milvus to see <span class="hljs-built_in">all</span> operations performed before a provided timestamp. If no such timestamp <span class="hljs-keyword">is</span> provided, then Milvus will search <span class="hljs-built_in">all</span> operations performed to date) [<span class="hljs-number">0</span>]:
 
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="List-connection" class="common-anchor-header">Lista de conexiones<button data-href="#List-connection" class="anchor-icon" translate="no">
+<h2 id="list-connection" class="common-anchor-header">listar conexiones<button data-href="#list-connection" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -1238,7 +1238,7 @@ Guarantee Timestamp(It instructs Milvus to see <span class="hljs-built_in">all</
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Muestra el progreso de la carga de entidades.</p>
+    </button></h2><p>Muestra el progreso de carga de una colección.</p>
 <p><h3 id="show-loading-progress">Sintaxis</h3></p>
 <pre><code translate="no" class="language-shell">show loading_progress -c (text) [-p (text)]
 <button class="copy-code-btn"></button></code></pre>

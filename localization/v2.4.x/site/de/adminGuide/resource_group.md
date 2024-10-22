@@ -62,7 +62,7 @@ title: Verwalten von Ressourcengruppen
 }
 <button class="copy-code-btn"></button></code></pre>
 <ul>
-<li>Das <strong>requests-Attribut</strong> legt die Bedingungen fest, die eine Ressourcengruppe erfüllen muss.</li>
+<li>Das Attribut <strong>requests</strong> gibt die Bedingungen an, die eine Ressourcengruppe erfüllen muss.</li>
 <li>Das <strong>limits-Attribut</strong> legt die Höchstgrenzen für eine Ressourcengruppe fest.</li>
 <li>Die Attribute <strong>transfer_from</strong> und <strong>transfer_to</strong> beschreiben, von welchen Ressourcengruppen eine Ressourcengruppe vorzugsweise Ressourcen beziehen bzw. an welche Ressourcengruppen sie Ressourcen übertragen soll.</li>
 </ul>
@@ -90,7 +90,7 @@ title: Verwalten von Ressourcengruppen
         ></path>
       </svg>
     </button></h2><div class="alert note">
-<p>Alle Codebeispiele auf dieser Seite sind in PyMilvus 2.4.5. Aktualisieren Sie Ihre PyMilvus-Installation, bevor Sie sie ausführen.</p>
+<p>Alle Codebeispiele auf dieser Seite sind in PyMilvus 2.4.8. Aktualisieren Sie Ihre PyMilvus-Installation, bevor Sie sie ausführen.</p>
 </div>
 <ol>
 <li><p>Erstellen Sie eine Ressourcengruppe.</p>

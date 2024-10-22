@@ -19,7 +19,7 @@ title: 이터레이터 사용
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Milvus는 대량의 엔티티로 결과를 반복하기 위한 검색 및 쿼리 반복기를 제공합니다. Milvus는 TopK를 16384로 제한하므로 사용자는 반복기를 사용하여 일괄 모드에서 컬렉션의 많은 수 또는 전체 엔티티를 반환할 수 있습니다.</p>
+    </button></h1><p>Milvus는 대량의 엔티티를 반복할 수 있는 검색 및 쿼리 반복기를 제공합니다. Milvus는 TopK를 16384로 제한하므로 사용자는 반복기를 사용하여 일괄 모드에서 컬렉션의 많은 수 또는 전체 엔티티를 반환할 수 있습니다.</p>
 <h2 id="Overview" class="common-anchor-header">개요<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -35,9 +35,9 @@ title: 이터레이터 사용
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>반복기는 기본 키 값과 부울 표현식을 사용하여 컬렉션 내의 대량의 데이터 또는 모든 데이터를 반복할 수 있는 강력한 도구입니다. 이를 통해 데이터를 검색하는 방식을 크게 개선할 수 있습니다. 시간이 지나면서 효율성이 떨어질 수 있는 기존의 <strong>오프셋</strong> 및 <strong>제한</strong> 매개변수 사용과 달리, 반복기는 보다 확장 가능한 솔루션을 제공합니다.</p>
+    </button></h2><p>반복기는 기본 키 값이나 필터 표현식을 지정하여 전체 컬렉션을 스캔하거나 대량의 엔티티를 반복하는 데 효율적인 도구입니다. <strong>오프셋</strong> 및 <strong>제한</strong> 매개변수가 있는 검색 또는 쿼리 호출에 비해 반복기를 사용하는 것이 더 효율적이고 확장성이 뛰어납니다.</p>
 <h3 id="Benefits-of-using-iterators" class="common-anchor-header">반복기 사용의 이점</h3><ul>
-<li><p><strong>단순성</strong>: 복잡한 <strong>오프셋</strong> 및 <strong>제한</strong> 설정이 필요 없습니다.</p></li>
+<li><p><strong>단순성</strong>: 복잡한 <strong>오프셋</strong> 및 <strong>제한</strong> 설정이 필요하지 않습니다.</p></li>
 <li><p><strong>효율성</strong>: 필요한 데이터만 가져와서 확장 가능한 데이터 검색을 제공합니다.</p></li>
 <li><p><strong>일관성</strong>: 부울 필터로 일관된 데이터 세트 크기를 보장합니다.</p></li>
 </ul>
@@ -62,12 +62,12 @@ title: 이터레이터 사용
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>다음 단계에서는 Milvus에 연결하고, 컬렉션을 빠르게 설정하고, 무작위로 생성된 10,000개 이상의 엔티티를 컬렉션에 삽입하기 위해 코드의 용도를 변경합니다.</p>
+    </button></h2><p>다음 준비 단계에서는 Milvus에 연결하여 무작위로 생성된 엔티티를 컬렉션에 삽입합니다.</p>
 <h3 id="Step-1-Create-a-collection" class="common-anchor-header">1단계: 컬렉션 만들기</h3><div class="language-python">
 <p>를 사용하여 <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Client/MilvusClient.md"><code translate="no">MilvusClient</code></a> 을 사용하여 Milvus 서버에 연결하고 <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_collection.md"><code translate="no">create_collection()</code></a> 를 사용하여 컬렉션을 만듭니다.</p>
 </div>
 <div class="language-java">
-<p>사용 <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Client/MilvusClientV2.md"><code translate="no">MilvusClientV2</code></a> 을 사용하여 Milvus 서버에 연결하고 <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Collections/createCollection.md"><code translate="no">createCollection()</code></a> 를 사용하여 컬렉션을 만듭니다.</p>
+<p>를 사용하여 <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Client/MilvusClientV2.md"><code translate="no">MilvusClientV2</code></a> 을 사용하여 Milvus 서버에 연결하고 <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Collections/createCollection.md"><code translate="no">createCollection()</code></a> 를 사용하여 컬렉션을 만듭니다.</p>
 </div>
 <div class="multipleCode">
    <a href="#python">Python </a> <a href="#java">Java</a></div>
@@ -264,8 +264,9 @@ iterator = collection.search_iterator(
     batch_size=<span class="hljs-number">10</span>,
     param=search_params,
     output_fields=[<span class="hljs-string">&quot;color_tag&quot;</span>],
-    limit=<span class="hljs-number">3</span>
+    limit=<span class="hljs-number">300</span>
 )
+<span class="hljs-comment"># search 300 entities totally with 10 entities per page</span>
 
 results = []
 

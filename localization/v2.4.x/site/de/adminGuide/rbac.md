@@ -2,7 +2,7 @@
 id: rbac.md
 related_key: enable RBAC
 summary: 'Erfahren Sie, wie Sie Benutzer, Rollen und Berechtigungen verwalten können.'
-title: RBAC einschalten
+title: RBAC aktivieren
 ---
 <h1 id="Enable-RBAC" class="common-anchor-header">RBAC aktivieren<button data-href="#Enable-RBAC" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -19,7 +19,7 @@ title: RBAC einschalten
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Wenn Sie RBAC aktivieren, können Sie den Zugriff auf bestimmte Milvus-Ressourcen (z. B. eine Sammlung oder eine Partition) oder Berechtigungen auf der Grundlage von Benutzerrollen und -rechten steuern. Derzeit ist diese Funktion nur in Python und Java verfügbar.</p>
+    </button></h1><p>Wenn Sie RBAC aktivieren, können Sie den Zugriff auf bestimmte Milvus-Ressourcen (z. B. eine Sammlung oder eine Partition) oder Berechtigungen auf der Grundlage von Benutzerrollen und Privilegien steuern. Derzeit ist diese Funktion nur in Python und Java verfügbar.</p>
 <p>Dieses Thema beschreibt, wie man RBAC aktiviert und <a href="/docs/de/users_and_roles.md">Benutzer und Rollen</a> verwaltet.</p>
 <div class="alert note">
 <p>Die Codeschnipsel auf dieser Seite verwenden den neuen <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/About.md">MilvusClient</a> (Python) zur Interaktion mit Milvus. Neue MilvusClient SDKs für andere Sprachen werden in zukünftigen Updates veröffentlicht.</p>
@@ -190,7 +190,7 @@ client.grant_role(
     role_name=<span class="hljs-string">&#x27;roleA&#x27;</span>
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>Nach der Erteilung der Rolle überprüfen, ob sie erteilt wurde:</p>
+<p>Überprüfen Sie nach der Vergabe der Rolle, ob sie vergeben wurde:</p>
 <pre><code translate="no" class="language-python">client.describe_user(
     user_name=<span class="hljs-string">&#x27;user_1&#x27;</span>
 )

@@ -143,7 +143,7 @@ title: Milvus_CLI 명령 참조
 <h3 id="Examples" class="common-anchor-header">예제</h3><h4 id="Example-1" class="common-anchor-header">예제 1</h4><p>다음 예에서는 밀버스에서 <code translate="no">testdb</code> 데이터베이스를 사용합니다.</p>
 <pre><code translate="no" class="language-shell">milvus_cli &gt; use database -db testdb
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="List-Databases" class="common-anchor-header">데이터베이스 나열<button data-href="#List-Databases" class="anchor-icon" translate="no">
+<h2 id="list-Databases" class="common-anchor-header">데이터베이스 목록<button data-href="#list-Databases" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -162,10 +162,10 @@ title: Milvus_CLI 명령 참조
 <p><h3 id="list-database">구문</h3></p>
 <pre><code translate="no" class="language-shell">list databases 
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Examples" class="common-anchor-header">예제</h3><h4 id="Example-1" class="common-anchor-header">예제 1</h4><p>다음 예제는 밀버스에서 데이터베이스를 나열합니다.</p>
+<h3 id="Examples" class="common-anchor-header">예제</h3><h4 id="Example-1" class="common-anchor-header">예제 1</h4><p>다음 예제는 밀버스로 데이터베이스를 나열합니다.</p>
 <pre><code translate="no" class="language-shell">milvus_cli &gt; list databases
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Delete-Database" class="common-anchor-header">데이터베이스 삭제<button data-href="#Delete-Database" class="anchor-icon" translate="no">
+<h2 id="delete-Database" class="common-anchor-header">데이터베이스 삭제<button data-href="#delete-Database" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -1143,7 +1143,7 @@ Guarantee <span class="hljs-title">Timestamp</span>(<span class="hljs-params">It
 
 </span><button class="copy-code-btn"></button></code></pre>
 <p><h4 id="search">예 3</h4></p>
-<p>색인되지 않은 컬렉션에서 검색을 수행하고 필요한 입력을 묻는 메시지를 표시하려면 다음과 같이 하세요:</p>
+<p>인덱싱되지 않은 컬렉션에서 검색을 수행하고 필요한 입력을 묻는 메시지를 표시하려면 다음과 같이 하세요:</p>
 <pre><code translate="no" class="language-shell">milvus_cli &gt; search
 
 Collection name (car, car2): car
@@ -1165,7 +1165,7 @@ timeout []:
 Guarantee Timestamp(It instructs Milvus to see <span class="hljs-built_in">all</span> operations performed before a provided timestamp. If no such timestamp <span class="hljs-keyword">is</span> provided, then Milvus will search <span class="hljs-built_in">all</span> operations performed to date) [<span class="hljs-number">0</span>]:
 
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="List-connection" class="common-anchor-header">목록 연결<button data-href="#List-connection" class="anchor-icon" translate="no">
+<h2 id="list-connection" class="common-anchor-header">목록 연결<button data-href="#list-connection" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -1238,7 +1238,7 @@ Guarantee Timestamp(It instructs Milvus to see <span class="hljs-built_in">all</
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>엔티티 로딩 진행률을 표시합니다.</p>
+    </button></h2><p>컬렉션 로딩 진행률을 표시합니다.</p>
 <p><h3 id="show-loading-progress">구문</h3></p>
 <pre><code translate="no" class="language-shell">show loading_progress -c (text) [-p (text)]
 <button class="copy-code-btn"></button></code></pre>

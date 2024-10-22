@@ -2,7 +2,7 @@
 id: index-vector-fields.md
 order: 1
 summary: 이 가이드에서는 컬렉션의 벡터 필드에서 인덱스를 만들고 관리하는 기본 작업을 안내합니다.
-title: 인덱스 벡터 필드
+title: 벡터 필드 색인 생성
 ---
 <h1 id="Index-Vector-Fields" class="common-anchor-header">벡터 필드 색인 생성<button data-href="#Index-Vector-Fields" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -247,7 +247,8 @@ index_params.add_index(
 <span class="hljs-comment"># 4.3. Create an index file</span>
 client.create_index(
     collection_name=<span class="hljs-string">&quot;customized_setup&quot;</span>,
-    index_params=index_params
+    index_params=index_params,
+    sync=<span class="hljs-literal">False</span> <span class="hljs-comment"># Whether to wait for index creation to complete before returning. Defaults to True.</span>
 )
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.common.IndexParam;
@@ -327,7 +328,11 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
     </tr>
     <tr>
       <td><code translate="no">index_params</code></td>
-      <td><strong>인덱스 파라미터</strong> 객체 목록을 포함하는 <strong>인덱스 파라미터</strong> 객체입니다.</td>
+      <td><strong>IndexParams</strong> 객체 목록이 포함된 <strong>IndexParams</strong> 객체입니다.</td>
+    </tr>
+    <tr>
+      <td><code translate="no">sync</code></td>
+      <td>클라이언트의 요청과 관련하여 인덱스가 빌드되는 방식을 제어합니다. 유효한 값은 다음과 같습니다:<br><ul><li><code translate="no">True</code> (기본값): 클라이언트는 인덱스가 완전히 빌드될 때까지 기다렸다가 반환합니다. 즉, 프로세스가 완료될 때까지 응답을 받지 못합니다.</li><li><code translate="no">False</code>: 클라이언트는 요청이 수신되고 인덱스가 백그라운드에서 빌드되는 즉시 반환합니다. 인덱스 생성이 완료되었는지 확인하려면 <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/describe_index.md">describe_index()</a> 메서드를 사용합니다.</li></ul></td>
     </tr>
   </tbody>
 </table>

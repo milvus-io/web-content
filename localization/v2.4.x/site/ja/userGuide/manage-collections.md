@@ -1,6 +1,6 @@
 ---
 id: manage-collections.md
-title: コレクション管理
+title: コレクションの管理
 ---
 <h1 id="Manage-Collections" class="common-anchor-header">コレクションの管理<button data-href="#Manage-Collections" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -76,9 +76,9 @@ title: コレクション管理
 <li><p><strong>クイックセットアップ</strong></p>
 <p>この方法では、名前を付けて、このコレクションに格納するベクトル埋込みの次元数を指定するだけで、コレクションを作成できます。詳細は、<a href="/docs/ja/manage-collections.md">Quick setupを</a>参照。</p></li>
 <li><p><strong>カスタマイズセットアップ</strong></p>
-<p>コレクションのほとんどすべてをIn Milvusに任せる代わりに、コレクションの<strong>スキーマと</strong> <strong>インデックス・パラメータを</strong>自分で決めることができる。詳細は<a href="/docs/ja/manage-collections.md">カスタマイズセットアップを</a>参照してください。</p></li>
+<p>In Milvusにコレクションのほとんどすべてを任せる代わりに、コレクションの<strong>スキーマと</strong> <strong>インデックスパラメータを</strong>自分で決めることができます。詳細は<a href="/docs/ja/manage-collections.md">カスタマイズセットアップを</a>参照してください。</p></li>
 </ul>
-<h3 id="Quick-setup" class="common-anchor-header">クイックセットアップ</h3><p>AI業界における大きな飛躍を背景に、ほとんどの開発者はシンプルかつダイナミックなコレクションを必要としています。Milvusでは、3つの引数だけで、そのようなコレクションを素早くセットアップできます：</p>
+<h3 id="Quick-setup" class="common-anchor-header">クイックセットアップ</h3><p>AI業界における大きな飛躍を背景に、ほとんどの開発者はシンプルかつダイナミックなコレクションを必要としています。Milvusでは、3つの引数を指定するだけで、そのようなコレクションを素早くセットアップできます：</p>
 <ul>
 <li><p>作成するコレクションの名前、</p></li>
 <li><p>挿入するベクトル埋め込み次元</p></li>
@@ -225,7 +225,7 @@ $ curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable
 <p>この設定を有効にすると、挿入されるデータの<code translate="no">id</code> 、<code translate="no">vector</code> を除くすべてのフィールドがダイナミック・フィールドとして扱われる。これらの追加フィールドは、<code translate="no">$meta</code> という特別なフィールド内にキーと値のペアとして保存される。この機能により、データ挿入時に追加フィールドを含めることができる。</p></li>
 </ul>
 <p>提供されたコードから自動的にインデックス付けされ、ロードされたコレクションは、すぐにデータ挿入の準備ができます。</p>
-<h3 id="Customized-setup" class="common-anchor-header">カスタマイズされたセットアップ</h3><p>Milvusにコレクションのほとんどすべてを決定させる代わりに、あなた自身でコレクションの<strong>スキーマと</strong> <strong>インデックスパラメータを</strong>決定することができます。</p>
+<h3 id="Customized-setup" class="common-anchor-header">カスタマイズされたセットアップ</h3><p>Milvusにコレクションのほとんど全てを決定させる代わりに、あなた自身でコレクションの<strong>スキーマと</strong> <strong>インデックスパラメータを</strong>決定することができます。</p>
 <h4 id="Step-1-Set-up-schema" class="common-anchor-header">ステップ1: スキーマの設定</h4><p>スキーマはコレクションの構造を定義します。スキーマ内では、<code translate="no">enable_dynamic_field</code> を有効または無効にし、定義済みフィールドを追加し、各フィールドに属性を設定するオプションがあります。スキーマの概念と使用可能なデータ型の詳細については、<a href="/docs/ja/schema.md">スキーマの</a>説明を参照してください。</p>
 <div class="language-python">
 <p>スキーマを設定するには <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_schema.md"><code translate="no">create_schema()</code></a>を使用してスキーマ・オブジェクトを作成し <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/CollectionSchema/add_field.md"><code translate="no">add_field()</code></a>を使用してスキーマにフィールドを追加する。</p>
@@ -360,7 +360,7 @@ schema.addField(AddFieldReq.builder()
     </tr>
     <tr>
       <td><code translate="no">autoID</code></td>
-      <td><br/>これを<strong>trueに</strong>設定すると、プライマリフィールドが自動的にインクリメントされます。この場合、エラーを避けるため、プライマリ・フィールドは挿入するデータに含めるべきではありません。</td>
+      <td><br/>これを<strong>trueに</strong>設定すると、プライマリフィールドが自動的にインクリメントされます。この場合、プライマリ・フィールドはエラーを避けるために挿入するデータに含めるべきではありません。</td>
     </tr>
     <tr>
       <td><code translate="no">dimension</code></td>
@@ -523,7 +523,7 @@ indexParams.add(indexParamForVectorField);
     </tr>
     <tr>
       <td><code translate="no">metric_type</code></td>
-      <td>ベクトル間の類似度を測定するために使用されるアルゴリズム。指定可能な値は<strong>IP</strong>、<strong>L2</strong>、<strong>COSINE</strong>、<strong>JACCARD</strong>、<strong>HAMMING</strong>。これは、指定されたフィールドがベクトル・フィールドである場合にのみ使用できる。詳細は<a href="https://milvus.io/docs/index.md#Indexes-supported-in-Milvus">Milvusでサポートされているインデックスを</a>参照してください。</td>
+      <td>ベクトル間の類似度を測定するために使用されるアルゴリズム。指定可能な値は<strong>IP</strong>、<strong>L2</strong>、<strong>COSINE</strong>、<strong>JACCARD</strong>、<strong>HAMMING</strong>。これは、指定されたフィールドがベクトル・フィールドである場合にのみ使用できる。詳しくは<a href="https://milvus.io/docs/index.md#Indexes-supported-in-Milvus">Milvusでサポートされているインデックスを</a>参照してください。</td>
     </tr>
     <tr>
       <td><code translate="no">params</code></td>
@@ -571,11 +571,11 @@ indexParams.add(indexParamForVectorField);
     </tr>
     <tr>
       <td><code translate="no">index_type</code></td>
-      <td>特定のフィールドにデータを配置するために使用されるアルゴリズム名。適用可能なアルゴリズムについては、<a href="https://milvus.io/docs/index.md">インメモリ・インデックスと</a> <a href="https://milvus.io/docs/disk_index.md">オンディスク・インデックスを</a>参照のこと。</td>
+      <td>特定のフィールドにデータを配置するために使用されるアルゴリズムの名前。適用可能なアルゴリズムについては、<a href="https://milvus.io/docs/index.md">インメモリ・インデックスと</a> <a href="https://milvus.io/docs/disk_index.md">オンディスク・インデックスを</a>参照のこと。</td>
     </tr>
     <tr>
       <td><code translate="no">metric_type</code></td>
-      <td>ベクトル間の類似度を測定するために使用されるアルゴリズム。指定可能な値は<strong>IP</strong>、<strong>L2</strong>、<strong>COSINE</strong>、<strong>JACCARD</strong>、<strong>HAMMING</strong>。これは、指定されたフィールドがベクトル・フィールドである場合にのみ使用できる。詳細は<a href="https://milvus.io/docs/index.md#Indexes-supported-in-Milvus">Milvusでサポートされているインデックスを</a>参照してください。</td>
+      <td>ベクトル間の類似度を測定するために使用されるアルゴリズム。指定可能な値は<strong>IP</strong>、<strong>L2</strong>、<strong>COSINE</strong>、<strong>JACCARD</strong>、<strong>HAMMING</strong>。これは、指定されたフィールドがベクトル・フィールドである場合にのみ使用できる。詳しくは<a href="https://milvus.io/docs/index.md#Indexes-supported-in-Milvus">Milvusでサポートされているインデックスを</a>参照してください。</td>
     </tr>
     <tr>
       <td><code translate="no">params</code></td>
@@ -601,7 +601,7 @@ indexParams.add(indexParamForVectorField);
     </tr>
     <tr>
       <td><code translate="no">metricType</code></td>
-      <td>ベクトル間の類似度の測定に使用するアルゴリズム。指定可能な値は<strong>IP</strong>、<strong>L2</strong>、<strong>COSINE</strong>、<strong>JACCARD</strong>、<strong>HAMMING</strong> です。これは、指定されたフィールドがベクトル・フィールドである場合にのみ使用できます。詳細については、<a href="https://milvus.io/docs/index.md#Indexes-supported-in-Milvus">Milvusでサポートされているインデックスを</a>参照してください。</td>
+      <td>ベクトル間の類似度の測定に使用するアルゴリズム。指定可能な値は<strong>IP</strong>、<strong>L2</strong>、<strong>COSINE</strong>、<strong>JACCARD</strong>、<strong>HAMMING</strong> です。これは、指定されたフィールドがベクトル・フィールドである場合にのみ使用できます。詳しくは<a href="https://milvus.io/docs/index.md#Indexes-supported-in-Milvus">Milvusでサポートされているインデックスを</a>参照してください。</td>
     </tr>
     <tr>
       <td><code translate="no">params</code></td>
@@ -881,7 +881,7 @@ $ curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable
 </tr>
 <tr>
 <td><code translate="no">schema</code></td>
-<td>このコレクションのスキーマ。<br/>これを<strong>None</strong>に設定すると、このコレクションはデフォルト設定で作成されます。<br/>カスタマイズしたスキーマでコレクションを設定するには、<strong>CollectionSchema</strong>オブジェクトを作成し、それをここで参照する必要があります。この場合、Milvusはリクエストに含まれる他のスキーマ関連設定をすべて無視します。</td>
+<td>このコレクションのスキーマ。<br/>これを<strong>None</strong>に設定すると、このコレクションはデフォルト設定で作成されます。<br/>カスタマイズしたスキーマでコレクションを設定するには、<strong>CollectionSchema</strong>オブジェクトを作成し、それをここで参照する必要があります。この場合、milvusはリクエストに含まれる他のスキーマ関連の設定をすべて無視します。</td>
 </tr>
 <tr>
 <td><code translate="no">index_params</code></td>
@@ -903,11 +903,11 @@ $ curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable
 </tr>
 <tr>
 <td><code translate="no">collectionSchema</code></td>
-<td><br/>これを空にすると、このコレクションはデフォルト設定で作成されます。カスタマイズしたスキーマでコレクションをセットアップするには、<strong>CollectionSchema</strong>オブジェクトを作成し、ここでそれを参照する必要があります。</td>
+<td><br/>これを空にすると、このコレクションはデフォルト設定で作成されます。カスタマイズしたスキーマでコレクションをセットアップするには、<strong>CollectionSchema</strong>オブジェクトを作成し、それをここで参照する必要があります。</td>
 </tr>
 <tr>
 <td><code translate="no">indexParams</code></td>
-<td>このコレクション内のベクトル・フィールドにインデックスを構築するためのパラメータ。カスタマイズされたスキーマでコレクションをセットアップし、コレクションを自動的にメモリにロードするには、<a href="https://milvus.io/api-reference/java/v2.4.x/v2/Management/IndexParam.md">IndexParam</a>オブジェクトのリストで<a href="https://milvus.io/api-reference/java/v2.4.x/v2/Management/IndexParam.md">IndexParams</a>オブジェクトを作成し、ここでそれを参照します。</td>
+<td>このコレクション内のベクトル・フィールドにインデックスを構築するためのパラメータ。カスタマイズされたスキーマでコレクションをセットアップし、コレクションを自動的にメモリにロードするには、<a href="https://milvus.io/api-reference/java/v2.4.x/v2/Management/IndexParam.md">IndexParam</a>オブジェクトのリストで<a href="https://milvus.io/api-reference/java/v2.4.x/v2/Management/IndexParam.md">IndexParams</a>オブジェクトを作成し、ここを参照します。</td>
 </tr>
 </tbody>
 </table></p>
@@ -951,7 +951,7 @@ $ curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable
 </tr>
 <tr>
 <td><code translate="no">schema.autoID</code></td>
-<td>主フィールドの自動インクリメントを許可するかどうか。これをTrueに設定すると、プライマリ・フィールドは自動的にインクリメントされます。この場合、エラーを避けるためにプライマリ・フィールドを挿入するデータに含めるべきではありません。is_primaryをTrueに設定したフィールドにこのパラメータを設定します。</td>
+<td>主フィールドの自動インクリメントを許可するかどうか。これをTrueに設定すると、プライマリ・フィールドは自動的にインクリメントされます。この場合、エラーを避けるために、プライマリ・フィールドを挿入するデータに含めるべきではありません。is_primaryをTrueに設定したフィールドにこのパラメータを設定します。</td>
 </tr>
 <tr>
 <td><code translate="no">schema.enableDynamicField</code></td>
@@ -1142,7 +1142,7 @@ $ curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable
     </tr>
     <tr>
       <td><code translate="no">metric_type</code></td>
-      <td>ベクトル間の類似度を測定するために使用されるアルゴリズム。指定可能な値は<strong>IP</strong>、<strong>L2</strong>、<strong>COSINE</strong>、<strong>JACCARD</strong>、<strong>HAMMING</strong>。これは、指定されたフィールドがベクトル・フィールドである場合にのみ使用できる。詳細は<a href="https://milvus.io/docs/index.md#Indexes-supported-in-Milvus">Milvusでサポートされているインデックスを</a>参照してください。</td>
+      <td>ベクトル間の類似度を測定するために使用されるアルゴリズム。指定可能な値は<strong>IP</strong>、<strong>L2</strong>、<strong>COSINE</strong>、<strong>JACCARD</strong>、<strong>HAMMING</strong>。これは、指定されたフィールドがベクトル・フィールドである場合にのみ使用できる。詳しくは<a href="https://milvus.io/docs/index.md#Indexes-supported-in-Milvus">Milvusでサポートされているインデックスを</a>参照してください。</td>
     </tr>
     <tr>
       <td><code translate="no">params</code></td>
@@ -1180,7 +1180,7 @@ $ curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable
         </tr>
         <tr>
         <td><code translate="no">indexParams.indexConfig.index_type</code></td>
-        <td>作成するインデックスの種類。</td>
+        <td>作成するインデックスのタイプ。</td>
         </tr>
         <tr>
         <td><code translate="no">indexParams.indexConfig.nlist</code></td>
@@ -1481,12 +1481,12 @@ System.out.println(listCollectionsRes.getCollectionNames());
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>コレクションのロード処理中、Milvusはコレクションのインデックスファイルをメモリにロードします。逆に、コレクションをリリースするとき、Milvusはメモリからインデックスファイルをアンロードします。コレクションで検索を行う前に、コレクションがロードされていることを確認してください。</p>
+    </button></h2><p>コレクションをロードする際、Milvusはコレクションのインデックスファイルをメモリにロードします。逆に、コレクションをリリースする際、Milvusはインデックスファイルをメモリからアンロードします。コレクションで検索を行う前に、コレクションがロードされていることを確認してください。</p>
 <h3 id="Load-a-collection" class="common-anchor-header">コレクションのロード</h3><div class="language-python">
 <p>コレクションをロードするには <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/load_collection.md"><code translate="no">load_collection()</code></a>メソッドを使用し、コレクション名を指定します。また、<code translate="no">replica_number</code> を設定して、コレクションのロード時にクエリノード上に作成するデータセグメントのメモリ内レプリカの数を決定することもできます。</p>
 <ul>
-<li>Milvus Standalone：<code translate="no">replica_number</code> の最大許容値は 1 です。</li>
-<li>Milvusクラスタ：最大値はMilvus構成で設定された<code translate="no">queryNode.replicas</code> を超えないようにしてください。詳細については、<a href="https://milvus.io/docs/configure_querynode.md#Query-Node-related-Configurations">クエリ・ノード関連設定を</a>参照してください。</li>
+<li>Milvus Standaloneの場合：<code translate="no">replica_number</code> の最大許容値は 1 です。</li>
+<li>Milvus Cluster：最大値はMilvus構成で設定された<code translate="no">queryNode.replicas</code> を超えないようにしてください。詳細については、<a href="https://milvus.io/docs/configure_querynode.md#Query-Node-related-Configurations">クエリ・ノード関連設定を</a>参照してください。</li>
 </ul>
 </div>
 <div class="language-java">
@@ -1593,7 +1593,34 @@ $ curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable
 <span class="hljs-comment">#     }</span>
 <span class="hljs-comment"># }</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Release-a-collection" class="common-anchor-header">コレクションをリリースする</h3><div class="language-python">
+<h3 id="Load-a-collection-partially-Public-Preview" class="common-anchor-header">コレクションを部分的に読み込む（パブリックプレビュー）</h3><div class="alert note">
+<p>この機能は現在パブリックプレビュー中です。APIと機能は将来変更される可能性があります。</p>
+</div>
+<p>ロード要求を受け取ると、Milvusは全てのベクトルフィールドインデックスと全てのスカラーフィールドデータをメモリにロードします。検索やクエリに関与しないフィールドがある場合、それらをロードから除外してメモリ使用量を削減し、検索パフォーマンスを向上させることができます。</p>
+<div class="language-python">
+<pre><code translate="no" class="language-python"><span class="hljs-comment"># 7. Load the collection</span>
+client.load_collection(
+    collection_name=<span class="hljs-string">&quot;customized_setup_2&quot;</span>,
+    load_fields=[<span class="hljs-string">&quot;my_id&quot;</span>, <span class="hljs-string">&quot;my_vector&quot;</span>] <span class="hljs-comment"># Load only the specified fields</span>
+    skip_load_dynamic_field=<span class="hljs-literal">True</span> <span class="hljs-comment"># Skip loading the dynamic field</span>
+)
+
+res = client.get_load_state(
+    collection_name=<span class="hljs-string">&quot;customized_setup_2&quot;</span>
+)
+
+<span class="hljs-built_in">print</span>(res)
+
+<span class="hljs-comment"># Output</span>
+<span class="hljs-comment">#</span>
+<span class="hljs-comment"># {</span>
+<span class="hljs-comment">#     &quot;state&quot;: &quot;&lt;LoadState: Loaded&gt;&quot;</span>
+<span class="hljs-comment"># }</span>
+<button class="copy-code-btn"></button></code></pre>
+<p>検索やクエリでフィルタリング条件や出力フィールドとして使用できるのは、<code translate="no">load_fields</code> にリストされたフィールドだけであることに注意してください。リストには常に主キーを含める必要があります。ロードから除外されたフィールド名はフィルタリングや出力に使用できません。</p>
+<p><code translate="no">skip_load_dynamic_field=True</code> 、ダイナミック・フィールドのロードをスキップすることができます。Milvusはダイナミックフィールドを1つのフィールドとして扱うため、ダイナミックフィールド内のすべてのキーが一緒にインクルードまたは除外されます。</p>
+</div>
+<h3 id="Release-a-collection" class="common-anchor-header">コレクションの解放</h3><div class="language-python">
 <p>コレクションを解放するには <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/release_collection.md"><code translate="no">release_collection()</code></a>メソッドを使用します。</p>
 </div>
 <div class="language-java">
@@ -2323,7 +2350,7 @@ collection.set_properties(
     }
 )
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Set-MMAP" class="common-anchor-header">MMAP の設定</h3><p>これは、クエリのパフォーマンスを向上させるために、データをメモリにマッピングするかどうかを決定します。詳細は、<a href="https://milvus.io/docs/mmap.md#Configure-memory-mapping">メモリ・マッピングの構成 を</a>参照してください<a href="https://milvus.io/docs/mmap.md#Configure-memory-mapping">。</a></p>
+<h3 id="Set-MMAP" class="common-anchor-header">MMAP の設定</h3><p>これは、クエリのパフォーマンスを向上させるために、データをメモリにマッピングするかどうかを決定します。詳細は、<a href="https://milvus.io/docs/mmap.md#Configure-memory-mapping">メモリ・マッピングの構成</a> を参照してください。</p>
 <div class="alert note">
 <p>MMAP プロパティを設定する前に、まずコレクションを解放します。そうしないと、エラーが発生します。</p>
 </div>

@@ -1,9 +1,8 @@
 ---
 id: manage-collections.md
-title: 管理 Collections
+title: 管理收藏集
 ---
-
-<h1 id="Manage-Collections" class="common-anchor-header">管理 Collections<button data-href="#Manage-Collections" class="anchor-icon" translate="no">
+<h1 id="Manage-Collections" class="common-anchor-header">管理收藏集<button data-href="#Manage-Collections" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -103,17 +102,17 @@ title: 管理 Collections
 
 <span class="hljs-comment"># 1. Set up a Milvus client</span>
 client = MilvusClient(
-uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>
+    uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>
 )
 
 <span class="hljs-comment"># 2. Create a collection in quick setup mode</span>
 client.create_collection(
-collection_name=<span class="hljs-string">&quot;quick_setup&quot;</span>,
-dimension=<span class="hljs-number">5</span>
+    collection_name=<span class="hljs-string">&quot;quick_setup&quot;</span>,
+    dimension=<span class="hljs-number">5</span>
 )
 
 res = client.get_load_state(
-collection_name=<span class="hljs-string">&quot;quick_setup&quot;</span>
+    collection_name=<span class="hljs-string">&quot;quick_setup&quot;</span>
 )
 
 <span class="hljs-built_in">print</span>(res)
@@ -121,10 +120,9 @@ collection_name=<span class="hljs-string">&quot;quick_setup&quot;</span>
 <span class="hljs-comment"># Output</span>
 <span class="hljs-comment">#</span>
 <span class="hljs-comment"># {</span>
-<span class="hljs-comment"># &quot;state&quot;: &quot;&lt;LoadState: Loaded&gt;&quot;</span>
+<span class="hljs-comment">#     &quot;state&quot;: &quot;&lt;LoadState: Loaded&gt;&quot;</span>
 <span class="hljs-comment"># }</span>
 <button class="copy-code-btn"></button></code></pre>
-
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.client.ConnectConfig;
 <span class="hljs-keyword">import</span> io.milvus.v2.client.MilvusClientV2;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.GetLoadStateReq;
@@ -247,15 +245,14 @@ $ curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable
 
 <span class="hljs-comment"># 3.1. Create schema</span>
 schema = MilvusClient.create_schema(
-auto_id=<span class="hljs-literal">False</span>,
-enable_dynamic_field=<span class="hljs-literal">True</span>,
+    auto_id=<span class="hljs-literal">False</span>,
+    enable_dynamic_field=<span class="hljs-literal">True</span>,
 )
 
 <span class="hljs-comment"># 3.2. Add fields to schema</span>
 schema.add_field(field_name=<span class="hljs-string">&quot;my_id&quot;</span>, datatype=DataType.INT64, is_primary=<span class="hljs-literal">True</span>)
 schema.add_field(field_name=<span class="hljs-string">&quot;my_vector&quot;</span>, datatype=DataType.FLOAT_VECTOR, dim=<span class="hljs-number">5</span>)
 <button class="copy-code-btn"></button></code></pre>
-
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.common.DataType;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.CreateCollectionReq;
 
@@ -321,7 +318,7 @@ schema.addField(AddFieldReq.builder()
     </tr>
     <tr>
       <td><code translate="no">enable_dynamic_field</code></td>
-      <td>如果插入到目标 Collections 的数据包括未在 Collections 模式中定义的字段，则决定 Milvus 是否将未定义字段的值保存在动态字段中。<br/>设置为<strong>"true</strong> <strong>"</strong>时，Milvus 将创建一个名为<strong>$meta</strong>的字段，用于保存插入数据中的任何未定义字段及其值。</td>
+      <td>如果插入到目标 Collections 的数据包括未在 Collections 模式中定义的字段，则决定 Milvus 是否将未定义字段的值保存在动态字段中。<br/>设置为 "<strong>true</strong>"时，Milvus 将创建一个名为<strong>$meta</strong>的字段，用于保存插入数据中的任何未定义字段及其值。</td>
     </tr>
     <tr>
       <td><code translate="no">field_name</code></td>
@@ -337,7 +334,7 @@ schema.addField(AddFieldReq.builder()
     </tr>
     <tr>
       <td><code translate="no">dim</code></td>
-      <td>向量 Embeddings 的维数。<br/>对于<strong>DataType.FLOAT_VECTOR</strong>、<strong>DataType</strong> <strong>.BINARY</strong> <strong>_</strong> <strong>VECTOR</strong>、<strong>DataType.</strong> <strong>FLOAT16_VECTOR</strong> 或<strong>DataType.BFLOAT16_VECTOR</strong>类型的字段，这是必填项。如果使用<strong>DataType.SPARSE_FLOAT_VECTOR</strong>，请省略此参数。</td>
+      <td>向量 Embeddings 的维数。<br/>对于<strong>DataType.FLOAT_VECTOR</strong>、<strong>DataType</strong>.<strong>BINARY</strong> <strong>_VECTOR</strong>、<strong>DataType</strong> <strong>.FLOAT16_VECTOR</strong> 或<strong>DataType.BFLOAT16_VECTOR</strong>类型的字段，这是必填项。如果使用<strong>DataType.SPARSE_FLOAT_VECTOR</strong>，请省略此参数。</td>
     </tr>
   </tbody>
 </table>
@@ -367,7 +364,7 @@ schema.addField(AddFieldReq.builder()
     </tr>
     <tr>
       <td><code translate="no">dimension</code></td>
-      <td>向量 Embeddings 的维数。<br/>对于<strong>DataType.FloatVector</strong>、<strong>DataType</strong> <strong>.BinaryVector</strong>、<strong>DataType.Float16Vector</strong>或<strong>DataType.BFloat16Vector</strong>类型的字段，此项为必填项。</td>
+      <td>向量 Embeddings 的维数。<br/>对于<strong>DataType.FloatVector</strong>、<strong>DataType</strong>.<strong>BinaryVector</strong>、<strong>DataType</strong> <strong>.Float16Vector</strong> 或<strong>DataType.BFloat16Vector</strong>类型的字段，此项为必填项。</td>
     </tr>
   </tbody>
 </table>
@@ -451,18 +448,17 @@ index_params = client.prepare_index_params()
 
 <span class="hljs-meta"># 3.4. Add indexes</span>
 index_params.add_index(
-field_name=<span class="hljs-string">&quot;my_id&quot;</span>,
-index_type=<span class="hljs-string">&quot;STL_SORT&quot;</span>
+    field_name=<span class="hljs-string">&quot;my_id&quot;</span>,
+    index_type=<span class="hljs-string">&quot;STL_SORT&quot;</span>
 )
 
 index_params.add_index(
-field_name=<span class="hljs-string">&quot;my_vector&quot;</span>,
-index_type=<span class="hljs-string">&quot;IVF_FLAT&quot;</span>,
-metric_type=<span class="hljs-string">&quot;IP&quot;</span>,
-<span class="hljs-keyword">params</span>={ <span class="hljs-string">&quot;nlist&quot;</span>: <span class="hljs-number">128</span> }
+    field_name=<span class="hljs-string">&quot;my_vector&quot;</span>, 
+    index_type=<span class="hljs-string">&quot;IVF_FLAT&quot;</span>,
+    metric_type=<span class="hljs-string">&quot;IP&quot;</span>,
+    <span class="hljs-keyword">params</span>={ <span class="hljs-string">&quot;nlist&quot;</span>: <span class="hljs-number">128</span> }
 )
 <button class="copy-code-btn"></button></code></pre>
-
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.common.IndexParam;
 
 <span class="hljs-comment">// 3.3 Prepare index parameters</span>
@@ -624,7 +620,7 @@ indexParams.add(indexParamForVectorField);
 <p>上面的代码片段演示了如何分别为向量场和标量场设置索引参数。对于向量场，同时设置度量类型和索引类型。对于标量字段，只需设置索引类型。建议为向量场和任何经常用于筛选的标量场创建索引。</p>
 <h4 id="Step-3-Create-the-collection" class="common-anchor-header">第 3 步：创建 Collections</h4><p>你可以选择分别创建 Collections 和索引文件，或者在创建 Collections 时同时加载索引。</p>
 <div class="language-python">
-<p>使用<a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_collection.md">create_collection()</a>以指定的 Schema 和索引参数创建集合，并使用<a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/get_load_state.md">get_load_state()</a>检查集合的<a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/get_load_state.md">加载</a>状态。</p>
+<p>使用<a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_collection.md">create_collection()</a>以指定的 Schema 和索引参数创建集合，并使用<a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/get_load_state.md">get_load_state()</a>检查集合的加载状态。</p>
 </div>
 <div class="language-java">
 <p>使用<a href="https://milvus.io/api-reference/java/v2.4.x/v2/Collections/createCollection.md">createCollection()</a>以指定的 Schema 和索引参数创建集合，并使用<a href="https://milvus.io/api-reference/java/v2.4.x/v2/Management/getLoadState.md">getLoadState()</a>检查集合的加载状态。</p>
@@ -646,7 +642,7 @@ client.create_collection(
 time.sleep(<span class="hljs-number">5</span>)
 
 res = client.get_load_state(
-collection_name=<span class="hljs-string">&quot;customized_setup_1&quot;</span>
+    collection_name=<span class="hljs-string">&quot;customized_setup_1&quot;</span>
 )
 
 <span class="hljs-built_in">print</span>(res)
@@ -654,10 +650,9 @@ collection_name=<span class="hljs-string">&quot;customized_setup_1&quot;</span>
 <span class="hljs-comment"># Output</span>
 <span class="hljs-comment">#</span>
 <span class="hljs-comment"># {</span>
-<span class="hljs-comment"># &quot;state&quot;: &quot;&lt;LoadState: Loaded&gt;&quot;</span>
+<span class="hljs-comment">#     &quot;state&quot;: &quot;&lt;LoadState: Loaded&gt;&quot;</span>
 <span class="hljs-comment"># }</span>
 <button class="copy-code-btn"></button></code></pre>
-
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.CreateCollectionReq;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.GetLoadStateReq;
 
@@ -772,7 +767,7 @@ $ curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable
 <span class="hljs-comment">#     }</span>
 <span class="hljs-comment"># }</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>上面创建的 Collection 会自动加载。要了解加载和释放集合的更多信息，请参阅<a href="/docs/zh/manage-collections.md#Load--Release-Collection">加载</a>和<a href="/docs/zh/manage-collections.md#Load--Release-Collection">释放集合</a>。</p></li>
+<p>上面创建的 Collection 会自动加载。要了解加载和释放集合的更多信息，请参阅加载和<a href="/docs/zh/manage-collections.md#Load--Release-Collection">释放集合</a>。</p></li>
 <li><p><strong>分别创建 Collections 和索引文件。</strong></p>
 <p><div class="multipleCode">
 <a href="#python">Python </a><a href="#java">Java</a><a href="#javascript">Node.js</a><a href="#shell">cURL</a></div></p>
@@ -783,7 +778,7 @@ client.create_collection(
 )
 
 res = client.get_load_state(
-collection_name=<span class="hljs-string">&quot;customized_setup_2&quot;</span>
+    collection_name=<span class="hljs-string">&quot;customized_setup_2&quot;</span>
 )
 
 <span class="hljs-built_in">print</span>(res)
@@ -791,10 +786,9 @@ collection_name=<span class="hljs-string">&quot;customized_setup_2&quot;</span>
 <span class="hljs-comment"># Output</span>
 <span class="hljs-comment">#</span>
 <span class="hljs-comment"># {</span>
-<span class="hljs-comment"># &quot;state&quot;: &quot;&lt;LoadState: NotLoad&gt;&quot;</span>
+<span class="hljs-comment">#     &quot;state&quot;: &quot;&lt;LoadState: NotLoad&gt;&quot;</span>
 <span class="hljs-comment"># }</span>
 <button class="copy-code-btn"></button></code></pre>
-
 <pre><code translate="no" class="language-java"><span class="hljs-comment">// 3.6 Create a collection and index it separately</span>
 <span class="hljs-type">CreateCollectionReq</span> <span class="hljs-variable">customizedSetupReq2</span> <span class="hljs-operator">=</span> CreateCollectionReq.builder()
     .collectionName(<span class="hljs-string">&quot;customized_setup_2&quot;</span>)
@@ -887,7 +881,7 @@ $ curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable
 </tr>
 <tr>
 <td><code translate="no">schema</code></td>
-<td>此 Collection 的<strong>Schema</strong>。<br/>设置为 "<strong>无 "</strong>表示将使用默认设置创建此 Collection。<br/>要使用自定义<strong>Schema</strong>设置 Collection，需要创建一个<strong>CollectionSchema</strong>对象并在此处引用它。在这种情况下，Milvus 会忽略请求中携带的所有其他 Schema 相关设置。</td>
+<td>此 Collection 的 Schema。<br/>设置为 "<strong>无 "</strong>表示将使用默认设置创建此 Collection。<br/>要使用自定义<strong>Schema</strong>设置 Collection，需要创建一个<strong>CollectionSchema</strong>对象并在此处引用它。在这种情况下，Milvus 会忽略请求中携带的所有其他 Schema 相关设置。</td>
 </tr>
 <tr>
 <td><code translate="no">index_params</code></td>
@@ -913,7 +907,7 @@ $ curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable
 </tr>
 <tr>
 <td><code translate="no">indexParams</code></td>
-<td>在此 Collection 中建立向量场索引的参数。要使用自定义<a href="https://milvus.io/api-reference/java/v2.4.x/v2/Management/IndexParam.md">Schema</a>设置集合并自动将集合加载到内存中，需要创建一个包含<a href="https://milvus.io/api-reference/java/v2.4.x/v2/Management/IndexParam.md">IndexParam</a>对象列表的<a href="https://milvus.io/api-reference/java/v2.4.x/v2/Management/IndexParam.md">IndexParams</a>对象，并在此处引用该对象。</td>
+<td>在此 Collection 中建立向量场索引的参数。要使用自定义 Schema 设置集合并自动将集合加载到内存中，需要创建一个包含 IndexParam 对象列表的<a href="https://milvus.io/api-reference/java/v2.4.x/v2/Management/IndexParam.md">IndexParams</a>对象，并在此处引用该对象。</td>
 </tr>
 </tbody>
 </table></p>
@@ -981,7 +975,7 @@ $ curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable
 </tr>
 <tr>
 <td><code translate="no">fields.elementTypeParams</code></td>
-<td>额外字段参数。</td>
+<td>额外的字段参数。</td>
 </tr>
 <tr>
 <td><code translate="no">fields.elementTypeParams.dim</code></td>
@@ -999,7 +993,7 @@ client.create_index(
 )
 
 res = client.get_load_state(
-collection_name=<span class="hljs-string">&quot;customized_setup_2&quot;</span>
+    collection_name=<span class="hljs-string">&quot;customized_setup_2&quot;</span>
 )
 
 <span class="hljs-built_in">print</span>(res)
@@ -1007,10 +1001,9 @@ collection_name=<span class="hljs-string">&quot;customized_setup_2&quot;</span>
 <span class="hljs-comment"># Output</span>
 <span class="hljs-comment">#</span>
 <span class="hljs-comment"># {</span>
-<span class="hljs-comment"># &quot;state&quot;: &quot;&lt;LoadState: NotLoad&gt;&quot;</span>
+<span class="hljs-comment">#     &quot;state&quot;: &quot;&lt;LoadState: NotLoad&gt;&quot;</span>
 <span class="hljs-comment"># }</span>
 <button class="copy-code-btn"></button></code></pre>
-
 <pre><code translate="no" class="language-java"><span class="hljs-type">CreateIndexReq</span>  <span class="hljs-variable">createIndexReq</span> <span class="hljs-operator">=</span> CreateIndexReq.builder()
     .collectionName(<span class="hljs-string">&quot;customized_setup_2&quot;</span>)
     .indexParams(indexParams)
@@ -1234,41 +1227,40 @@ res = client.describe_collection(
 <span class="hljs-comment"># Output</span>
 <span class="hljs-comment">#</span>
 <span class="hljs-comment"># {</span>
-<span class="hljs-comment"># &quot;collection_name&quot;: &quot;customized_setup_2&quot;,</span>
-<span class="hljs-comment"># &quot;auto_id&quot;: false,</span>
-<span class="hljs-comment"># &quot;num_shards&quot;: 1,</span>
-<span class="hljs-comment"># &quot;description&quot;: &quot;&quot;,</span>
-<span class="hljs-comment"># &quot;fields&quot;: [</span>
-<span class="hljs-comment"># {</span>
-<span class="hljs-comment"># &quot;field_id&quot;: 100,</span>
-<span class="hljs-comment"># &quot;name&quot;: &quot;my_id&quot;,</span>
-<span class="hljs-comment"># &quot;description&quot;: &quot;&quot;,</span>
-<span class="hljs-comment"># &quot;type&quot;: 5,</span>
-<span class="hljs-comment"># &quot;params&quot;: {},</span>
-<span class="hljs-comment"># &quot;element_type&quot;: 0,</span>
-<span class="hljs-comment"># &quot;is_primary&quot;: true</span>
-<span class="hljs-comment"># },</span>
-<span class="hljs-comment"># {</span>
-<span class="hljs-comment"># &quot;field_id&quot;: 101,</span>
-<span class="hljs-comment"># &quot;name&quot;: &quot;my_vector&quot;,</span>
-<span class="hljs-comment"># &quot;description&quot;: &quot;&quot;,</span>
-<span class="hljs-comment"># &quot;type&quot;: 101,</span>
-<span class="hljs-comment"># &quot;params&quot;: {</span>
-<span class="hljs-comment"># &quot;dim&quot;: 5</span>
-<span class="hljs-comment"># },</span>
-<span class="hljs-comment"># &quot;element_type&quot;: 0</span>
-<span class="hljs-comment"># }</span>
-<span class="hljs-comment"># ],</span>
-<span class="hljs-comment"># &quot;aliases&quot;: [],</span>
-<span class="hljs-comment"># &quot;collection_id&quot;: 448143479230158446,</span>
-<span class="hljs-comment"># &quot;consistency_level&quot;: 2,</span>
-<span class="hljs-comment"># &quot;properties&quot;: {},</span>
-<span class="hljs-comment"># &quot;num_partitions&quot;: 1,</span>
-<span class="hljs-comment"># &quot;enable_dynamic_field&quot;: true</span>
+<span class="hljs-comment">#     &quot;collection_name&quot;: &quot;customized_setup_2&quot;,</span>
+<span class="hljs-comment">#     &quot;auto_id&quot;: false,</span>
+<span class="hljs-comment">#     &quot;num_shards&quot;: 1,</span>
+<span class="hljs-comment">#     &quot;description&quot;: &quot;&quot;,</span>
+<span class="hljs-comment">#     &quot;fields&quot;: [</span>
+<span class="hljs-comment">#         {</span>
+<span class="hljs-comment">#             &quot;field_id&quot;: 100,</span>
+<span class="hljs-comment">#             &quot;name&quot;: &quot;my_id&quot;,</span>
+<span class="hljs-comment">#             &quot;description&quot;: &quot;&quot;,</span>
+<span class="hljs-comment">#             &quot;type&quot;: 5,</span>
+<span class="hljs-comment">#             &quot;params&quot;: {},</span>
+<span class="hljs-comment">#             &quot;element_type&quot;: 0,</span>
+<span class="hljs-comment">#             &quot;is_primary&quot;: true</span>
+<span class="hljs-comment">#         },</span>
+<span class="hljs-comment">#         {</span>
+<span class="hljs-comment">#             &quot;field_id&quot;: 101,</span>
+<span class="hljs-comment">#             &quot;name&quot;: &quot;my_vector&quot;,</span>
+<span class="hljs-comment">#             &quot;description&quot;: &quot;&quot;,</span>
+<span class="hljs-comment">#             &quot;type&quot;: 101,</span>
+<span class="hljs-comment">#             &quot;params&quot;: {</span>
+<span class="hljs-comment">#                 &quot;dim&quot;: 5</span>
+<span class="hljs-comment">#             },</span>
+<span class="hljs-comment">#             &quot;element_type&quot;: 0</span>
+<span class="hljs-comment">#         }</span>
+<span class="hljs-comment">#     ],</span>
+<span class="hljs-comment">#     &quot;aliases&quot;: [],</span>
+<span class="hljs-comment">#     &quot;collection_id&quot;: 448143479230158446,</span>
+<span class="hljs-comment">#     &quot;consistency_level&quot;: 2,</span>
+<span class="hljs-comment">#     &quot;properties&quot;: {},</span>
+<span class="hljs-comment">#     &quot;num_partitions&quot;: 1,</span>
+<span class="hljs-comment">#     &quot;enable_dynamic_field&quot;: true</span>
 <span class="hljs-comment"># }</span>
 
 <button class="copy-code-btn"></button></code></pre>
-
 <pre><code translate="no" class="language-java">import io.milvus.v2.service.collection.request.DescribeCollectionReq;
 import io.milvus.v2.service.collection.response.DescribeCollectionResp;
 
@@ -1428,12 +1420,11 @@ res = client.list_collections()
 <span class="hljs-comment"># Output</span>
 <span class="hljs-comment">#</span>
 <span class="hljs-comment"># [</span>
-<span class="hljs-comment"># &quot;customized_setup_2&quot;,</span>
-<span class="hljs-comment"># &quot;quick_setup&quot;,</span>
-<span class="hljs-comment"># &quot;customized_setup_1&quot;</span>
+<span class="hljs-comment">#     &quot;customized_setup_2&quot;,</span>
+<span class="hljs-comment">#     &quot;quick_setup&quot;,</span>
+<span class="hljs-comment">#     &quot;customized_setup_1&quot;</span>
 <span class="hljs-comment"># ]</span>
 <button class="copy-code-btn"></button></code></pre>
-
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.collection.response.ListCollectionsResp;
 
 <span class="hljs-comment">// 5. List all collection names</span>
@@ -1516,7 +1507,7 @@ client.load_collection(
 )
 
 res = client.get_load_state(
-collection_name=<span class="hljs-string">&quot;customized_setup_2&quot;</span>
+    collection_name=<span class="hljs-string">&quot;customized_setup_2&quot;</span>
 )
 
 <span class="hljs-built_in">print</span>(res)
@@ -1524,10 +1515,9 @@ collection_name=<span class="hljs-string">&quot;customized_setup_2&quot;</span>
 <span class="hljs-comment"># Output</span>
 <span class="hljs-comment">#</span>
 <span class="hljs-comment"># {</span>
-<span class="hljs-comment"># &quot;state&quot;: &quot;&lt;LoadState: Loaded&gt;&quot;</span>
+<span class="hljs-comment">#     &quot;state&quot;: &quot;&lt;LoadState: Loaded&gt;&quot;</span>
 <span class="hljs-comment"># }</span>
 <button class="copy-code-btn"></button></code></pre>
-
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.LoadCollectionReq;
 
 <span class="hljs-comment">// 6. Load the collection</span>
@@ -1603,7 +1593,34 @@ $ curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable
 <span class="hljs-comment">#     }</span>
 <span class="hljs-comment"># }</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Release-a-collection" class="common-anchor-header">发布 Collections</h3><div class="language-python">
+<h3 id="Load-a-collection-partially-Public-Preview" class="common-anchor-header">部分加载 Collections（公开预览版）</h3><div class="alert note">
+<p>此功能目前处于公开预览阶段。应用程序接口和功能将来可能会更改。</p>
+</div>
+<p>收到加载请求后，Milvus 会将所有向量字段索引和所有标量字段数据加载到内存中。如果某些字段不参与搜索和查询，您可以将其排除在加载之外，以减少内存使用，提高搜索性能。</p>
+<div class="language-python">
+<pre><code translate="no" class="language-python"><span class="hljs-comment"># 7. Load the collection</span>
+client.load_collection(
+    collection_name=<span class="hljs-string">&quot;customized_setup_2&quot;</span>,
+    load_fields=[<span class="hljs-string">&quot;my_id&quot;</span>, <span class="hljs-string">&quot;my_vector&quot;</span>] <span class="hljs-comment"># Load only the specified fields</span>
+    skip_load_dynamic_field=<span class="hljs-literal">True</span> <span class="hljs-comment"># Skip loading the dynamic field</span>
+)
+
+res = client.get_load_state(
+    collection_name=<span class="hljs-string">&quot;customized_setup_2&quot;</span>
+)
+
+<span class="hljs-built_in">print</span>(res)
+
+<span class="hljs-comment"># Output</span>
+<span class="hljs-comment">#</span>
+<span class="hljs-comment"># {</span>
+<span class="hljs-comment">#     &quot;state&quot;: &quot;&lt;LoadState: Loaded&gt;&quot;</span>
+<span class="hljs-comment"># }</span>
+<button class="copy-code-btn"></button></code></pre>
+<p>请注意，只有<code translate="no">load_fields</code> 中列出的字段才能用作搜索和查询的筛选条件和输出字段。在列表中应始终包含主键。不加载的字段名将不能用于筛选或输出。</p>
+<p>可以使用<code translate="no">skip_load_dynamic_field=True</code> 跳过加载动态字段。Milvus 将动态字段视为单个字段，因此动态字段中的所有键将一起被包含或排除。</p>
+</div>
+<h3 id="Release-a-collection" class="common-anchor-header">释放 Collections</h3><div class="language-python">
 <p>要释放一个 Collections，请使用 <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/release_collection.md"><code translate="no">release_collection()</code></a>方法，并指定 Collections 名称。</p>
 </div>
 <div class="language-java">
@@ -1623,7 +1640,7 @@ client.release_collection(
 )
 
 res = client.get_load_state(
-collection_name=<span class="hljs-string">&quot;customized_setup_2&quot;</span>
+    collection_name=<span class="hljs-string">&quot;customized_setup_2&quot;</span>
 )
 
 <span class="hljs-built_in">print</span>(res)
@@ -1631,10 +1648,9 @@ collection_name=<span class="hljs-string">&quot;customized_setup_2&quot;</span>
 <span class="hljs-comment"># Output</span>
 <span class="hljs-comment">#</span>
 <span class="hljs-comment"># {</span>
-<span class="hljs-comment"># &quot;state&quot;: &quot;&lt;LoadState: NotLoad&gt;&quot;</span>
+<span class="hljs-comment">#     &quot;state&quot;: &quot;&lt;LoadState: NotLoad&gt;&quot;</span>
 <span class="hljs-comment"># }</span>
 <button class="copy-code-btn"></button></code></pre>
-
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.ReleaseCollectionReq;
 
 <span class="hljs-comment">// 8. Release the collection</span>
@@ -1741,11 +1757,10 @@ client.create_alias(
 )
 
 client.create_alias(
-collection_name=<span class="hljs-string">&quot;customized_setup_2&quot;</span>,
-<span class="hljs-built_in">alias</span>=<span class="hljs-string">&quot;alice&quot;</span>
+    collection_name=<span class="hljs-string">&quot;customized_setup_2&quot;</span>,
+    <span class="hljs-built_in">alias</span>=<span class="hljs-string">&quot;alice&quot;</span>
 )
 <button class="copy-code-btn"></button></code></pre>
-
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.utility.request.CreateAliasReq;
 
 <span class="hljs-comment">// 9. Manage aliases</span>
@@ -1915,15 +1930,14 @@ res = client.list_aliases(
 <span class="hljs-comment"># Output</span>
 <span class="hljs-comment">#</span>
 <span class="hljs-comment"># {</span>
-<span class="hljs-comment"># &quot;aliases&quot;: [</span>
-<span class="hljs-comment"># &quot;bob&quot;,</span>
-<span class="hljs-comment"># &quot;alice&quot;</span>
-<span class="hljs-comment"># ],</span>
-<span class="hljs-comment"># &quot;collection_name&quot;: &quot;customized_setup_2&quot;,</span>
-<span class="hljs-comment"># &quot;db_name&quot;: &quot;default&quot;</span>
+<span class="hljs-comment">#     &quot;aliases&quot;: [</span>
+<span class="hljs-comment">#         &quot;bob&quot;,</span>
+<span class="hljs-comment">#         &quot;alice&quot;</span>
+<span class="hljs-comment">#     ],</span>
+<span class="hljs-comment">#     &quot;collection_name&quot;: &quot;customized_setup_2&quot;,</span>
+<span class="hljs-comment">#     &quot;db_name&quot;: &quot;default&quot;</span>
 <span class="hljs-comment"># }</span>
 <button class="copy-code-btn"></button></code></pre>
-
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.utility.request.ListAliasesReq;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.utility.response.ListAliasResp;
 
@@ -1992,12 +2006,11 @@ res = client.describe_alias(
 <span class="hljs-comment"># Output</span>
 <span class="hljs-comment">#</span>
 <span class="hljs-comment"># {</span>
-<span class="hljs-comment"># &quot;alias&quot;: &quot;bob&quot;,</span>
-<span class="hljs-comment"># &quot;collection_name&quot;: &quot;customized_setup_2&quot;,</span>
-<span class="hljs-comment"># &quot;db_name&quot;: &quot;default&quot;</span>
+<span class="hljs-comment">#     &quot;alias&quot;: &quot;bob&quot;,</span>
+<span class="hljs-comment">#     &quot;collection_name&quot;: &quot;customized_setup_2&quot;,</span>
+<span class="hljs-comment">#     &quot;db_name&quot;: &quot;default&quot;</span>
 <span class="hljs-comment"># }</span>
 <button class="copy-code-btn"></button></code></pre>
-
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.<span class="hljs-property">milvus</span>.<span class="hljs-property">v2</span>.<span class="hljs-property">service</span>.<span class="hljs-property">utility</span>.<span class="hljs-property">request</span>.<span class="hljs-property">DescribeAliasReq</span>;
 <span class="hljs-keyword">import</span> io.<span class="hljs-property">milvus</span>.<span class="hljs-property">v2</span>.<span class="hljs-property">service</span>.<span class="hljs-property">utility</span>.<span class="hljs-property">response</span>.<span class="hljs-property">DescribeAliasResp</span>;
 
@@ -2077,7 +2090,7 @@ client.alter_alias(
 )
 
 res = client.list_aliases(
-collection_name=<span class="hljs-string">&quot;customized_setup_1&quot;</span>
+    collection_name=<span class="hljs-string">&quot;customized_setup_1&quot;</span>
 )
 
 <span class="hljs-built_in">print</span>(res)
@@ -2085,15 +2098,15 @@ collection_name=<span class="hljs-string">&quot;customized_setup_1&quot;</span>
 <span class="hljs-comment"># Output</span>
 <span class="hljs-comment">#</span>
 <span class="hljs-comment"># {</span>
-<span class="hljs-comment"># &quot;aliases&quot;: [</span>
-<span class="hljs-comment"># &quot;alice&quot;</span>
-<span class="hljs-comment"># ],</span>
-<span class="hljs-comment"># &quot;collection_name&quot;: &quot;customized_setup_1&quot;,</span>
-<span class="hljs-comment"># &quot;db_name&quot;: &quot;default&quot;</span>
+<span class="hljs-comment">#     &quot;aliases&quot;: [</span>
+<span class="hljs-comment">#         &quot;alice&quot;</span>
+<span class="hljs-comment">#     ],</span>
+<span class="hljs-comment">#     &quot;collection_name&quot;: &quot;customized_setup_1&quot;,</span>
+<span class="hljs-comment">#     &quot;db_name&quot;: &quot;default&quot;</span>
 <span class="hljs-comment"># }</span>
 
 res = client.list_aliases(
-collection_name=<span class="hljs-string">&quot;customized_setup_2&quot;</span>
+    collection_name=<span class="hljs-string">&quot;customized_setup_2&quot;</span>
 )
 
 <span class="hljs-built_in">print</span>(res)
@@ -2101,14 +2114,13 @@ collection_name=<span class="hljs-string">&quot;customized_setup_2&quot;</span>
 <span class="hljs-comment"># Output</span>
 <span class="hljs-comment">#</span>
 <span class="hljs-comment"># {</span>
-<span class="hljs-comment"># &quot;aliases&quot;: [</span>
-<span class="hljs-comment"># &quot;bob&quot;</span>
-<span class="hljs-comment"># ],</span>
-<span class="hljs-comment"># &quot;collection_name&quot;: &quot;customized_setup_2&quot;,</span>
-<span class="hljs-comment"># &quot;db_name&quot;: &quot;default&quot;</span>
+<span class="hljs-comment">#     &quot;aliases&quot;: [</span>
+<span class="hljs-comment">#         &quot;bob&quot;</span>
+<span class="hljs-comment">#     ],</span>
+<span class="hljs-comment">#     &quot;collection_name&quot;: &quot;customized_setup_2&quot;,</span>
+<span class="hljs-comment">#     &quot;db_name&quot;: &quot;default&quot;</span>
 <span class="hljs-comment"># }</span>
 <button class="copy-code-btn"></button></code></pre>
-
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.utility.request.AlterAliasReq;
 
 <span class="hljs-comment">// 9.4 Reassign alias to other collections</span>
@@ -2238,10 +2250,9 @@ client.drop_alias(
 )
 
 client.drop_alias(
-<span class="hljs-built_in">alias</span>=<span class="hljs-string">&quot;alice&quot;</span>
+    <span class="hljs-built_in">alias</span>=<span class="hljs-string">&quot;alice&quot;</span>
 )
 <button class="copy-code-btn"></button></code></pre>
-
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.utility.request.DropAliasReq;
 
 <span class="hljs-comment">// 9.5 Drop alias</span>
@@ -2334,13 +2345,12 @@ collection = Collection(<span class="hljs-string">&quot;quick_setup&quot;</span>
 
 <span class="hljs-comment"># Set the TTL for the data in the collection</span>
 collection.set_properties(
-properties={
-<span class="hljs-string">&quot;collection.ttl.seconds&quot;</span>: <span class="hljs-number">60</span>
-}
+    properties={
+        <span class="hljs-string">&quot;collection.ttl.seconds&quot;</span>: <span class="hljs-number">60</span>
+    }
 )
 <button class="copy-code-btn"></button></code></pre>
-
-<h3 id="Set-MMAP" class="common-anchor-header">设置 MMAP</h3><p>为 Collections 配置内存映射 (MMAP) 属性，该属性决定数据是否映射到内存中以提高查询性能。有关详细信息，请参阅<a href="https://milvus.io/docs/mmap.md#Configure-memory-mapping">配置内存映射 。</a></p>
+<h3 id="Set-MMAP" class="common-anchor-header">设置 MMAP</h3><p>为 Collections 配置内存映射 (MMAP) 属性，该属性决定数据是否映射到内存中以提高查询性能。有关详细信息，请参阅<a href="https://milvus.io/docs/mmap.md#Configure-memory-mapping">配置内存映射</a> 。</p>
 <div class="alert note">
 <p>在设置 MMAP 属性之前，请先释放 Collection。否则会出错。</p>
 </div>
@@ -2357,12 +2367,11 @@ collection.release()
 
 <span class="hljs-comment"># Set memory mapping property to True or Flase</span>
 collection.set_properties(
-properties={
-<span class="hljs-string">&quot;mmap.enabled&quot;</span>: <span class="hljs-literal">True</span>
-}
+    properties={
+        <span class="hljs-string">&quot;mmap.enabled&quot;</span>: <span class="hljs-literal">True</span>
+    }
 )
 <button class="copy-code-btn"></button></code></pre>
-
 <h2 id="Drop-a-Collection" class="common-anchor-header">放弃收藏<button data-href="#Drop-a-Collection" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -2399,14 +2408,13 @@ client.drop_collection(
 )
 
 client.drop_collection(
-collection_name=<span class="hljs-string">&quot;customized_setup_1&quot;</span>
+    collection_name=<span class="hljs-string">&quot;customized_setup_1&quot;</span>
 )
 
 client.drop_collection(
-collection_name=<span class="hljs-string">&quot;customized_setup_2&quot;</span>
+    collection_name=<span class="hljs-string">&quot;customized_setup_2&quot;</span>
 )
 <button class="copy-code-btn"></button></code></pre>
-
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.DropCollectionReq;
 
 <span class="hljs-comment">// 10. Drop collections</span>

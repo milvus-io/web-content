@@ -1,10 +1,9 @@
 ---
 id: configure-querynode-localdisk.md
-title: 使用本地磁盘配置 Milvus 查询节点
-related_key: "querynode, query node, local disk"
+title: 使用本地磁盘配置 Milvus QueryNode
+related_key: 'querynode, query node, local disk'
 summary: 了解如何配置 Milvus QueryNode 以使用本地磁盘。
 ---
-
 <h1 id="Configure-Milvus-QueryNode-with-Local-Disk" class="common-anchor-header">使用本地磁盘配置 Milvus QueryNode<button data-href="#Configure-Milvus-QueryNode-with-Local-Disk" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -87,22 +86,21 @@ Content-Type: text/x-shellscript; charset=<span class="hljs-string">&quot;us-asc
 <span class="hljs-comment">#!/bin/bash</span>
 <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;Running custom user data script&quot;</span>
 <span class="hljs-keyword">if</span> ( lsblk | fgrep -q nvme1n1 ); <span class="hljs-keyword">then</span>
-<span class="hljs-built_in">mkdir</span> -p /mnt/data /var/lib/kubelet /var/lib/docker
-mkfs.xfs /dev/nvme1n1
-mount /dev/nvme1n1 /mnt/data
-<span class="hljs-built_in">chmod</span> 0755 /mnt/data
-<span class="hljs-built_in">mv</span> /var/lib/kubelet /mnt/data/
-<span class="hljs-built_in">mv</span> /var/lib/docker /mnt/data/
-<span class="hljs-built_in">ln</span> -sf /mnt/data/kubelet /var/lib/kubelet
-<span class="hljs-built_in">ln</span> -sf /mnt/data/docker /var/lib/docker
-UUID=$(lsblk -f | grep nvme1n1 | awk <span class="hljs-string">&#x27;{print $3}&#x27;</span>)
-    <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;UUID=<span class="hljs-variable">$UUID</span> /mnt/data xfs defaults,noatime 1 1&quot;</span> &gt;&gt; /etc/fstab
+    <span class="hljs-built_in">mkdir</span> -p /mnt/data /var/lib/kubelet /var/lib/docker
+    mkfs.xfs /dev/nvme1n1
+    mount /dev/nvme1n1 /mnt/data
+    <span class="hljs-built_in">chmod</span> 0755 /mnt/data
+    <span class="hljs-built_in">mv</span> /var/lib/kubelet /mnt/data/
+    <span class="hljs-built_in">mv</span> /var/lib/docker /mnt/data/
+    <span class="hljs-built_in">ln</span> -sf /mnt/data/kubelet /var/lib/kubelet
+    <span class="hljs-built_in">ln</span> -sf /mnt/data/docker /var/lib/docker
+    UUID=$(lsblk -f | grep nvme1n1 | awk <span class="hljs-string">&#x27;{print $3}&#x27;</span>)
+    <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;UUID=<span class="hljs-variable">$UUID</span>     /mnt/data   xfs    defaults,noatime  1   1&quot;</span> &gt;&gt; /etc/fstab
 <span class="hljs-keyword">fi</span>
 <span class="hljs-built_in">echo</span> 10485760 &gt; /proc/sys/fs/aio-max-nr
 
 --==MYBOUNDARY==--
 <button class="copy-code-btn"></button></code></pre>
-
 <div class="alert note">
 <p>在上述示例中，我们假设 NVMe 磁盘为<code translate="no">/dev/nvme1n1</code> 。您需要根据具体配置修改脚本。</p>
 </div>
@@ -124,7 +122,6 @@ mkfs.xfs /dev/md0
 <span class="hljs-built_in">echo</span> <span class="hljs-string">&#x27;/dev/md0 /var/lib/kubelet xfs defaults 0 0&#x27;</span> &gt;&gt; /etc/fstab
 mount -a
 <button class="copy-code-btn"></button></code></pre>
-
 <div class="alert note">
 <p>在上述示例中，我们假设 NVMe 磁盘为<code translate="no">/dev/nvme0n1</code> 和<code translate="no">/dev/nvme1n1</code> 。您需要修改脚本以匹配您的特定配置。</p>
 </div>
@@ -137,7 +134,7 @@ mkfs.xfs /dev/nvme0n1
 mount -a
 
 <span class="hljs-built_in">mkdir</span> -p /mnt/data/kubelet /mnt/data/containerd /mnt/data/log/pods
-<span class="hljs-built_in">mkdir</span> -p /var/lib/kubelet /var/lib/containerd /var/log/pods
+<span class="hljs-built_in">mkdir</span> -p  /var/lib/kubelet /var/lib/containerd /var/log/pods
 
 <span class="hljs-built_in">echo</span> <span class="hljs-string">&#x27;/mnt/data/kubelet /var/lib/kubelet none defaults,bind 0 0&#x27;</span> &gt;&gt; /etc/fstab
 <span class="hljs-built_in">echo</span> <span class="hljs-string">&#x27;/mnt/data/containerd /var/lib/containerd none defaults,bind 0 0&#x27;</span> &gt;&gt; /etc/fstab
@@ -146,7 +143,6 @@ mount -a
 
 <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;nvme init end...&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-
 <div class="alert note">
 <p>在上述示例中，我们假设 NVMe 磁盘为<code translate="no">/dev/nvme0n1</code> 。您需要修改脚本以符合您的具体配置。</p>
 </div>
@@ -219,13 +215,12 @@ apt-get install fio -y
 <span class="hljs-built_in">cd</span> /data
 
 <span class="hljs-comment"># write 10GB</span>
-fio -direct=1-iodepth=128 -rw=randwrite -ioengine=libaio -bs=4K -size=10G -numjobs=10 -runtime=600 -group_reporting -filename=<span class="hljs-built_in">test</span> -name=Rand_Write_IOPS_Test
+fio -direct=1 -iodepth=128 -rw=randwrite -ioengine=libaio -bs=4K -size=10G -numjobs=10 -runtime=600 -group_reporting -filename=<span class="hljs-built_in">test</span> -name=Rand_Write_IOPS_Test
 
 <span class="hljs-comment"># verify the read speed</span>
 <span class="hljs-comment"># compare with the disk performance indicators provided by various cloud providers.</span>
-fio --filename=<span class="hljs-built_in">test</span> --direct=1 --rw=randread --bs=4k --ioengine=libaio --iodepth=64 --runtime=120 --numjobs=128 --time_based --group_reporting --name=iops-test-job --eta-newline=1 --<span class="hljs-built_in">readonly</span>
+fio --filename=<span class="hljs-built_in">test</span> --direct=1 --rw=randread --bs=4k --ioengine=libaio --iodepth=64 --runtime=120 --numjobs=128 --time_based --group_reporting --name=iops-test-job --eta-newline=1  --<span class="hljs-built_in">readonly</span>
 <button class="copy-code-btn"></button></code></pre>
-
 <p>输出结果应如下所示：</p>
 <pre><code translate="no" class="language-bash">Jobs: <span class="hljs-number">128</span> (f=<span class="hljs-number">128</span>): [r(<span class="hljs-number">128</span>)][<span class="hljs-number">100.0</span>%][r=1458MiB/s][r=373k IOPS][eta 00m:00s]
 iops-test-job: (groupid=<span class="hljs-number">0</span>, jobs=<span class="hljs-number">128</span>): err= <span class="hljs-number">0</span>: pid=<span class="hljs-number">768</span>: Mon Jun <span class="hljs-number">24</span> 09:<span class="hljs-number">35</span>:06 <span class="hljs-number">2024</span>
@@ -269,7 +264,7 @@ IO depths    : <span class="hljs-number">1</span>=<span class="hljs-number">0.1<
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>一旦验证结果令人满意，就可以按以下步骤部署 Milvus Distributed：</p>
+    </button></h2><p>验证结果令人满意后，就可以按以下步骤部署 Milvus Distributed：</p>
 <h3 id="Tips-for-deploying-Milvus-Distributed-using-Helm" class="common-anchor-header">使用 Helm 部署 Milvus Distributed 的提示</h3><p>QueryNode pod 默认使用 NVMe 磁盘作为 EmptyDir 卷。建议在 QueryNode pod 中将 NVMe 磁盘挂载到<code translate="no">/var/lib/milvus/data</code> ，以确保最佳性能。</p>
 <p>有关如何使用 Helm 部署 Milvus Distributed 的详细信息，请参阅使用<a href="/docs/zh/install_cluster-helm.md">Helm 在 Kubernetes 中运行 Milvus</a>。</p>
 <h3 id="Tips-for-deploying-Milvus-Distributed-using-Milvus-Operator" class="common-anchor-header">使用 Milvus Operator 部署 Milvus Distributed 的提示</h3><p>Milvus Operator 会自动配置 QueryNode pod 将 NVMe 磁盘用作 EmptyDir 卷。建议将以下配置添加到<code translate="no">MilvusCluster</code> 自定义资源：</p>
@@ -284,4 +279,4 @@ IO depths    : <span class="hljs-number">1</span>=<span class="hljs-number">0.1<
       - <span class="hljs-attr">emptyDir</span>:
         <span class="hljs-attr">name</span>: data
 <button class="copy-code-btn"></button></code></pre>
-<p>这将确保 QueryNode pod 将 NVMe 磁盘用作数据卷。有关如何使用 Milvus Operator 部署分布式<a href="/docs/zh/install_cluster-milvusoperator.md">Milvus 的</a>详细信息，请参阅<a href="/docs/zh/install_cluster-milvusoperator.md">使用 Milvus Operator 在 Kubernetes 中运行 Milvus</a>。</p>
+<p>这将确保 QueryNode pod 将 NVMe 磁盘用作数据卷。有关如何使用 Milvus Operator 部署<a href="/docs/zh/install_cluster-milvusoperator.md">Milvus</a> Distributed 的详细信息，请参阅<a href="/docs/zh/install_cluster-milvusoperator.md">使用 Milvus Operator 在 Kubernetes 中运行 Milvus</a>。</p>

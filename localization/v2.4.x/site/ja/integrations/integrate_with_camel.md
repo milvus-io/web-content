@@ -3,7 +3,7 @@ id: integrate_with_camel.md
 summary: >-
   このガイドでは、MilvusベクトルデータベースとBentoCloud上でオープンソースのエンベッディングモデルと大規模言語モデルを使用して、RAG（Retrieval
   Augmented Generation）アプリケーションを構築する方法を紹介します。
-title: MilvusとBentoMLによる検索支援型生成（RAG）
+title: MilvusとBentoMLによる検索補強型生成(RAG)
 ---
 <h1 id="Retrieval-Augmented-Generation-RAG-with-Milvus-and-Camel" class="common-anchor-header">MilvusとCamelを使用した検索拡張ジェネレーション（RAG）<button data-href="#Retrieval-Augmented-Generation-RAG-with-Milvus-and-Camel" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -20,12 +20,13 @@ title: MilvusとBentoMLによる検索支援型生成（RAG）
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/rag_with_milvus_and_camel.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a></p>
+    </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/rag_with_milvus_and_camel.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
+<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/rag_with_milvus_and_camel.ipynb" target="_blank"><img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/></a></p>
 <p>このガイドでは、CAMELとMilvusを使用したRAG（Retrieval-Augmented Generation）システムの構築方法を示します。</p>
 <p>RAGシステムは検索システムと生成モデルを組み合わせ、与えられたプロンプトに基づいて新しいテキストを生成する。このシステムは、まずMilvusを用いてコーパスから関連文書を検索し、次に生成モデルを用いて検索された文書に基づいて新しいテキストを生成する。</p>
 <p><a href="https://www.camel-ai.org/">CAMELは</a>マルチエージェントフレームワークである。<a href="https://milvus.io/">Milvusは</a>世界で最も先進的なオープンソースのベクトルデータベースであり、埋め込み類似検索やAIアプリケーションのために構築されている。</p>
 <p>このノートブックでは、CAMEL Retrieve Moduleの使い方を、カスタマイズ方法と自動方法の両方で紹介する。また、<code translate="no">AutoRetriever</code> を<code translate="no">ChatAgent</code> と組み合わせ、さらに<code translate="no">Function Calling</code> を使って<code translate="no">AutoRetriever</code> を<code translate="no">RolePlaying</code> と組み合わせる方法も紹介します。</p>
-<p>4つの主要な部分が含まれる：</p>
+<p>4つの主要な部分を含む：</p>
 <ul>
 <li>カスタマイズRAG</li>
 <li>自動RAG</li>
@@ -102,7 +103,7 @@ storage_instance = MilvusStorage(
 <div class="alert note">
 <p><code translate="no">url_and_api_key</code> ：</p>
 <ul>
-<li>ローカルファイル、例えば<code translate="no">./milvus.db</code> を<a href="https://milvus.io/docs/milvus_lite.md">Milvusの</a>接続URIとして使用する方法が最も便利です。</li>
+<li>ローカルファイル、例えば<code translate="no">./milvus.db</code> を<a href="https://milvus.io/docs/milvus_lite.md">Milvus</a>接続URIとして使用するのが最も便利です。</li>
 <li>データ規模が大きい場合は、<a href="https://milvus.io/docs/quickstart.md">dockerやkubernetes</a>上に、よりパフォーマンスの高いMilvusサーバを構築することができます。この場合、URLはサーバのURI、例えば<code translate="no">http://localhost:19530</code> を使用してください。</li>
 <li>Milvusのフルマネージドクラウドサービスである<a href="https://zilliz.com/cloud">Zilliz Cloudを</a>利用する場合は、Zilliz Cloudの<a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">Public EndpointとApi keyに</a>対応する接続uriとtokenを調整してください。</li>
 </ul>

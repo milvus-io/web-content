@@ -1,9 +1,8 @@
 ---
 id: cli_commands.md
-summary: 使用命令与Milvus互动。
+summary: 使用命令与 Milvus 互动。
 title: Milvus_CLI 命令参考
 ---
-
 <h1 id="MilvusCLI-Command-Reference" class="common-anchor-header">Milvus_CLI 命令参考<button data-href="#MilvusCLI-Command-Reference" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -19,7 +18,7 @@ title: Milvus_CLI 命令参考
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Milvus 命令行界面（CLI）是一种命令行工具，支持数据库连接、数据操作以及数据导入和导出。</p>
+    </button></h1><p>Milvus 命令行界面（CLI）是一个命令行工具，支持数据库连接、数据操作和数据导入导出。</p>
 <p>本主题介绍所有支持的命令和相应的选项。还包括一些示例供您参考。</p>
 <h2 id="clear" class="common-anchor-header">清除<button data-href="#clear" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -75,7 +74,7 @@ title: Milvus_CLI 命令参考
 </thead>
 <tbody>
 <tr><td style="text-align:left">-uri</td><td style="text-align:left">-uri</td><td style="text-align:left">(可选）uri 名称。默认为 &quot;http://127.0.0.1:19530&quot;。</td></tr>
-<tr><td style="text-align:left">-t</td><td style="text-align:left">-令牌</td><td style="text-align:left">(可选）zilliz 云 apikey 或<code translate="no">username:password</code> 。默认为 "无"。</td></tr>
+<tr><td style="text-align:left">-t</td><td style="text-align:left">-令牌</td><td style="text-align:left">(可选）Zilliz Cloud Apikey 或<code translate="no">username:password</code> 。默认为 "无"。</td></tr>
 <tr><td style="text-align:left">-help</td><td style="text-align:left">无</td><td style="text-align:left">显示命令使用帮助。</td></tr>
 </tbody>
 </table>
@@ -106,7 +105,7 @@ title: Milvus_CLI 命令参考
 <tr><th style="text-align:left">选项</th><th style="text-align:left">全名</th><th style="text-align:left">说明</th></tr>
 </thead>
 <tbody>
-<tr><td style="text-align:left">-db</td><td style="text-align:left">-数据库</td><td style="text-align:left">[必填] milvus 中的数据库名称。</td></tr>
+<tr><td style="text-align:left">-db</td><td style="text-align:left">-数据库</td><td style="text-align:left">[必填] Milvus 中的数据库名称。</td></tr>
 <tr><td style="text-align:left">-帮助</td><td style="text-align:left">不适用</td><td style="text-align:left">显示命令使用帮助。</td></tr>
 </tbody>
 </table>
@@ -137,14 +136,14 @@ title: Milvus_CLI 命令参考
 <tr><th style="text-align:left">选项</th><th style="text-align:left">全名</th><th style="text-align:left">说明</th></tr>
 </thead>
 <tbody>
-<tr><td style="text-align:left">-db</td><td style="text-align:left">-数据库</td><td style="text-align:left">[必填] milvus 中的数据库名称。</td></tr>
+<tr><td style="text-align:left">-db</td><td style="text-align:left">-数据库</td><td style="text-align:left">[必填] Milvus 中的数据库名称。</td></tr>
 <tr><td style="text-align:left">-帮助</td><td style="text-align:left">不适用</td><td style="text-align:left">显示命令使用帮助。</td></tr>
 </tbody>
 </table>
 <h3 id="Examples" class="common-anchor-header">示例</h3><h4 id="Example-1" class="common-anchor-header">示例 1</h4><p>下面的示例使用 milvus 中的数据库<code translate="no">testdb</code> 。</p>
 <pre><code translate="no" class="language-shell">milvus_cli &gt; use database -db testdb
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="List-Databases" class="common-anchor-header">列出数据库<button data-href="#List-Databases" class="anchor-icon" translate="no">
+<h2 id="list-Databases" class="common-anchor-header">列出数据库<button data-href="#list-Databases" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -166,7 +165,7 @@ title: Milvus_CLI 命令参考
 <h3 id="Examples" class="common-anchor-header">示例</h3><h4 id="Example-1" class="common-anchor-header">示例 1</h4><p>下面的示例列出了 milvus 中的数据库。</p>
 <pre><code translate="no" class="language-shell">milvus_cli &gt; list databases
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Delete-Database" class="common-anchor-header">删除数据库<button data-href="#Delete-Database" class="anchor-icon" translate="no">
+<h2 id="delete-Database" class="common-anchor-header">删除数据库<button data-href="#delete-Database" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -190,7 +189,7 @@ title: Milvus_CLI 命令参考
 <tr><th style="text-align:left">选项</th><th style="text-align:left">全名</th><th style="text-align:left">说明</th></tr>
 </thead>
 <tbody>
-<tr><td style="text-align:left">-db</td><td style="text-align:left">-数据库</td><td style="text-align:left">[必填] milvus 中的数据库名称。</td></tr>
+<tr><td style="text-align:left">-db</td><td style="text-align:left">-数据库</td><td style="text-align:left">[必填] Milvus 中的数据库名称。</td></tr>
 <tr><td style="text-align:left">-帮助</td><td style="text-align:left">不适用</td><td style="text-align:left">显示命令使用帮助。</td></tr>
 </tbody>
 </table>
@@ -221,8 +220,8 @@ title: Milvus_CLI 命令参考
 <tr><th style="text-align:left">选项</th><th style="text-align:left">全名</th><th style="text-align:left">说明</th></tr>
 </thead>
 <tbody>
-<tr><td style="text-align:left">-p</td><td style="text-align:left">-密码</td><td style="text-align:left">以 milvus 为单位的用户密码。默认为 &quot;无&quot;。</td></tr>
-<tr><td style="text-align:left">-u</td><td style="text-align:left">-用户名</td><td style="text-align:left">milvus 中的用户名。默认为 &quot;无&quot;。</td></tr>
+<tr><td style="text-align:left">-p</td><td style="text-align:left">-密码</td><td style="text-align:left">Milvus 中的用户密码。默认为 &quot;无&quot;。</td></tr>
+<tr><td style="text-align:left">-u</td><td style="text-align:left">-用户名</td><td style="text-align:left">Milvus 中的用户名。默认为 &quot;无&quot;。</td></tr>
 <tr><td style="text-align:left">-help</td><td style="text-align:left">不适用</td><td style="text-align:left">显示命令使用帮助。</td></tr>
 </tbody>
 </table>
@@ -244,8 +243,8 @@ title: Milvus_CLI 命令参考
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>为集合指定唯一的别名。</p>
-<div class="alert note">一个数据集可以有多个别名。但是，一个别名最多只能对应一个数据集。</div>
+    </button></h2><p>为 Collections 指定唯一的别名。</p>
+<div class="alert note">一个 Collection 可以有多个别名。不过，一个别名最多对应一个 Collection。</div>
 <p><h3 id="create-alias">语法</h3></p>
 <pre><code translate="no" class="language-shell">create <span class="hljs-built_in">alias</span> -c (text) -a (text) [-A] 
 <button class="copy-code-btn"></button></code></pre>
@@ -255,23 +254,23 @@ title: Milvus_CLI 命令参考
 <tr><th style="text-align:left">选项</th><th style="text-align:left">全名</th><th style="text-align:left">说明</th></tr>
 </thead>
 <tbody>
-<tr><td style="text-align:left">-c</td><td style="text-align:left">-集合名称</td><td style="text-align:left">集合名称。</td></tr>
+<tr><td style="text-align:left">-c</td><td style="text-align:left">-collection-名称</td><td style="text-align:left">Collections 的名称。</td></tr>
 <tr><td style="text-align:left">-a</td><td style="text-align:left">-别名</td><td style="text-align:left">别名。</td></tr>
-<tr><td style="text-align:left">-A</td><td style="text-align:left">-alter</td><td style="text-align:left">(可选）将别名转移到指定集合的标志。</td></tr>
+<tr><td style="text-align:left">-A</td><td style="text-align:left">-alter</td><td style="text-align:left">(可选）将别名转移到指定 Collections 的标志。</td></tr>
 <tr><td style="text-align:left">-help</td><td style="text-align:left">不适用</td><td style="text-align:left">显示命令使用帮助。</td></tr>
 </tbody>
 </table>
 <p><h3 id="create-alias">示例</h3></p>
 <p><h4>示例 1</h4></p>
-<p>下面的示例为<code translate="no">car</code> 程序集创建了<code translate="no">carAlias1</code> 和<code translate="no">carAlias2</code> 别名。</p>
+<p>下面的示例为<code translate="no">car</code> Collection 创建了<code translate="no">carAlias1</code> 和<code translate="no">carAlias2</code> 别名。</p>
 <pre><code translate="no" class="language-shell">milvus_cli &gt; create <span class="hljs-built_in">alias</span> -c car -a carAlias1
 <button class="copy-code-btn"></button></code></pre>
 <p><h4>例 2</h4></p>
 <div class="alert note">例 2 基于例 1。</div>
-<p>下面的示例将<code translate="no">carAlias1</code> 别名从<code translate="no">car</code> 集合转移到<code translate="no">car2</code> 集合。</p>
+<p>下面的示例将<code translate="no">carAlias1</code> 别名从<code translate="no">car</code> Collection 转移到<code translate="no">car2</code> Collection。</p>
 <pre><code translate="no" class="language-shell">milvus_cli &gt; create <span class="hljs-built_in">alias</span> -c car2 -A -a carAlias1
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="create-collection" class="common-anchor-header">创建集合<button data-href="#create-collection" class="anchor-icon" translate="no">
+<h2 id="create-collection" class="common-anchor-header">创建 Collection<button data-href="#create-collection" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -286,7 +285,7 @@ title: Milvus_CLI 命令参考
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>创建集合。</p>
+    </button></h2><p>创建一个 Collection。</p>
 <p><h3 id="create-collection">语法</h3></p>
 <pre><code translate="no" class="language-shell">create collection -c (text) -f (text) -p (text) [-a] [-d (text)]
 <button class="copy-code-btn"></button></code></pre>
@@ -296,13 +295,13 @@ title: Milvus_CLI 命令参考
 <tr><th style="text-align:left">选项</th><th style="text-align:left">全名</th><th style="text-align:left">说明</th></tr>
 </thead>
 <tbody>
-<tr><td style="text-align:left">-c</td><td style="text-align:left">-集合名称</td><td style="text-align:left">集合的名称。</td></tr>
-<tr><td style="text-align:left">-f</td><td style="text-align:left">-字段 Schema </td><td style="text-align:left">(多个）<code translate="no">&lt;fieldName&gt;:&lt;dataType&gt;:&lt;dimOfVector/desc&gt;</code> 格式的字段 Schema 。</td></tr>
-<tr><td style="text-align:left">-p</td><td style="text-align:left">-主键字段</td><td style="text-align:left">主键字段的名称。</td></tr>
-<tr><td style="text-align:left">-a</td><td style="text-align:left">-schema-auto-id（自动 ID</td><td style="text-align:left">(可选）自动生成 ID 的标志。</td></tr>
-<tr><td style="text-align:left">-desc</td><td style="text-align:left">-模式描述</td><td style="text-align:left">(可选）集合的描述。</td></tr>
+<tr><td style="text-align:left">-c</td><td style="text-align:left">-Collection-名称</td><td style="text-align:left">Collections 的名称。</td></tr>
+<tr><td style="text-align:left">-f</td><td style="text-align:left">-Schema 字段</td><td style="text-align:left">(多个）<code translate="no">&lt;fieldName&gt;:&lt;dataType&gt;:&lt;dimOfVector/desc&gt;</code> 格式的字段 Schema。</td></tr>
+<tr><td style="text-align:left">-p</td><td style="text-align:left">-Schema-主键字段</td><td style="text-align:left">主键字段的名称。</td></tr>
+<tr><td style="text-align:left">-a</td><td style="text-align:left">-Schema-auto-id</td><td style="text-align:left">(可选）自动生成 ID 的标志。</td></tr>
+<tr><td style="text-align:left">-desc</td><td style="text-align:left">-Schema-描述</td><td style="text-align:left">(可选） Collections 的描述。</td></tr>
 <tr><td style="text-align:left">-级别</td><td style="text-align:left">-一致性级别</td><td style="text-align:left">(可选）一致性级别：有界、会话、强、最终。</td></tr>
-<tr><td style="text-align:left">-d</td><td style="text-align:left">-是否动态</td><td style="text-align:left">(可选）Collection Schema 是否支持Dynamic Field。</td></tr>
+<tr><td style="text-align:left">-d</td><td style="text-align:left">-是否动态</td><td style="text-align:left">(可选） Collections Schema 是否支持动态字段。</td></tr>
 <tr><td style="text-align:left">-s</td><td style="text-align:left">-碎片数</td><td style="text-align:left">(可选）分区编号</td></tr>
 <tr><td style="text-align:left">-帮助</td><td style="text-align:left">不适用</td><td style="text-align:left">显示命令使用帮助。</td></tr>
 </tbody>
@@ -312,7 +311,6 @@ title: Milvus_CLI 命令参考
 
 milvus_cli &gt; create collection -c car -f <span class="hljs-built_in">id</span>:INT64:primary_field -f vector:FLOAT_VECTOR:<span class="hljs-number">128</span> -f color:INT64:color -f brand:ARRAY:<span class="hljs-number">64</span>:VARCHAR:<span class="hljs-number">128</span> -p <span class="hljs-built_in">id</span> -A -d <span class="hljs-string">&#x27;car_collection&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-
 <h2 id="create-partition" class="common-anchor-header">创建分区<button data-href="#create-partition" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -338,7 +336,7 @@ milvus_cli &gt; create collection -c car -f <span class="hljs-built_in">id</span
 <tr><th style="text-align:left">选项</th><th style="text-align:left">全名</th><th style="text-align:left">说明</th></tr>
 </thead>
 <tbody>
-<tr><td style="text-align:left">-c</td><td style="text-align:left">-集合名称</td><td style="text-align:left">集合名称。</td></tr>
+<tr><td style="text-align:left">-c</td><td style="text-align:left">-collection-名称</td><td style="text-align:left">Collections 的名称。</td></tr>
 <tr><td style="text-align:left">-p</td><td style="text-align:left">-分区</td><td style="text-align:left">分区名称。</td></tr>
 <tr><td style="text-align:left">-d</td><td style="text-align:left">-分区描述</td><td style="text-align:left">(可选）分区描述。</td></tr>
 <tr><td style="text-align:left">-help</td><td style="text-align:left">不适用</td><td style="text-align:left">显示命令使用帮助。</td></tr>
@@ -363,7 +361,7 @@ milvus_cli &gt; create collection -c car -f <span class="hljs-built_in">id</span
         ></path>
       </svg>
     </button></h2><p>为字段创建索引。</p>
-<div class="alert note">目前，一个集合最多支持一个索引。</div>
+<div class="alert note">目前，一个 Collection 最多支持一个索引。</div>
 <p><h3 id="creat-index">语法</h3></p>
 <pre><code translate="no" class="language-shell">create index
 <button class="copy-code-btn"></button></code></pre>
@@ -387,14 +385,13 @@ The name of the field to create an index <span class="hljs-keyword">for</span> (
 Index name: vectorIndex
 
 <span class="hljs-comment"># Default is &#x27;&#x27;</span>
-Index <span class="hljs-built_in">type</span> FLAT, IVF_FLAT, IVF_SQ8, IVF_PQ, RNSG, HNSW, ANNOY, AUTOINDEX, DISKANN, GPU_IVF_FLAT, GPU_IVF_PQ, SPARSE_INVERTED_INDEX, SPARSE_WAND, SCANN, STL_SORT, Trie, INVERTED, ) []: IVF_FLAT
+Index <span class="hljs-built_in">type</span> FLAT, IVF_FLAT, IVF_SQ8, IVF_PQ, RNSG, HNSW, ANNOY, AUTOINDEX, DISKANN, GPU_IVF_FLAT, GPU_IVF_PQ, SPARSE_INVERTED_INDEX, SPARSE_WAND, SCANN, STL_SORT, Trie, INVERTED, ) []: IVF_FLAT  
 
 <span class="hljs-comment"># Default is &#x27;&#x27;</span>
-Index metric <span class="hljs-built_in">type</span> (L2, IP, HAMMING, TANIMOTO, COSINE, ) []:
+Index metric <span class="hljs-built_in">type</span> (L2, IP, HAMMING, TANIMOTO, COSINE, ) []: 
 
 Timeout []:
 <button class="copy-code-btn"></button></code></pre>
-
 <h2 id="delete-user" class="common-anchor-header">删除用户<button data-href="#delete-user" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -454,7 +451,7 @@ Timeout []:
 <tr><td style="text-align:left"></td></tr>
 </tbody>
 </table>
-<h2 id="delete-collection" class="common-anchor-header">删除集合<button data-href="#delete-collection" class="anchor-icon" translate="no">
+<h2 id="delete-collection" class="common-anchor-header">delete Collections<button data-href="#delete-collection" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -469,7 +466,7 @@ Timeout []:
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>删除集合。</p>
+    </button></h2><p>删除一个 Collection。</p>
 <p><h3 id="delete-collection">语法</h3></p>
 <pre><code translate="no" class="language-shell"><span class="hljs-keyword">delete</span> collection -<span class="hljs-title function_">c</span> (text) 
 <button class="copy-code-btn"></button></code></pre>
@@ -479,7 +476,7 @@ Timeout []:
 <tr><th style="text-align:left">选项</th><th style="text-align:left">全名</th><th style="text-align:left">说明</th></tr>
 </thead>
 <tbody>
-<tr><td style="text-align:left">-c</td><td style="text-align:left">-集合名称</td><td style="text-align:left">要删除的集合名称。</td></tr>
+<tr><td style="text-align:left">-c</td><td style="text-align:left">-collection-名称</td><td style="text-align:left">要删除的 Collection 的名称。</td></tr>
 <tr><td style="text-align:left">-帮助</td><td style="text-align:left">不适用</td><td style="text-align:left">显示命令使用帮助。</td></tr>
 </tbody>
 </table>
@@ -511,7 +508,7 @@ Timeout []:
 <tr><th style="text-align:left">选项</th><th style="text-align:left">全名</th><th style="text-align:left">说明</th></tr>
 </thead>
 <tbody>
-<tr><td style="text-align:left">-c</td><td style="text-align:left">-集合名称</td><td style="text-align:left">要删除的实体所属的集合名称。</td></tr>
+<tr><td style="text-align:left">-c</td><td style="text-align:left">-collection-名称</td><td style="text-align:left">要删除的实体所属的 Collections 名称。</td></tr>
 <tr><td style="text-align:left">-p</td><td style="text-align:left">-分区</td><td style="text-align:left">(可选）要删除的分区名称。</td></tr>
 <tr><td style="text-align:left">-help</td><td style="text-align:left">不适用</td><td style="text-align:left">显示命令使用帮助。</td></tr>
 </tbody>
@@ -525,7 +522,6 @@ Timeout []:
 
 <span class="hljs-title class_">Do</span> you want to <span class="hljs-keyword">continue</span>? [y/N]: y
 <button class="copy-code-btn"></button></code></pre>
-
 <h2 id="delete-partition" class="common-anchor-header">删除分区<button data-href="#delete-partition" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -551,7 +547,7 @@ Timeout []:
 <tr><th style="text-align:left">选项</th><th style="text-align:left">全名</th><th style="text-align:left">说明</th></tr>
 </thead>
 <tbody>
-<tr><td style="text-align:left">-c</td><td style="text-align:left">-集合名称</td><td style="text-align:left">要删除的分区所属的集合名称。</td></tr>
+<tr><td style="text-align:left">-c</td><td style="text-align:left">-Collection-名称</td><td style="text-align:left">要删除的分区所属的 Collections 名称。</td></tr>
 <tr><td style="text-align:left">-p</td><td style="text-align:left">-分区</td><td style="text-align:left">要删除的分区的名称。</td></tr>
 <tr><td style="text-align:left">-help</td><td style="text-align:left">不适用</td><td style="text-align:left">显示命令使用帮助。</td></tr>
 </tbody>
@@ -575,7 +571,7 @@ Timeout []:
         ></path>
       </svg>
     </button></h2><p>删除索引和相应的索引文件。</p>
-<div class="alert note">目前，一个数据集最多支持一个索引。</div>
+<div class="alert note">目前，一个 Collection 最多支持一个索引。</div>
 <p><h3 id="delete-index">语法</h3></p>
 <pre><code translate="no" class="language-shell"><span class="hljs-keyword">delete</span> index -<span class="hljs-title function_">c</span> (text) -<span class="hljs-title function_">in</span> (text)
 <button class="copy-code-btn"></button></code></pre>
@@ -585,7 +581,7 @@ Timeout []:
 <tr><th style="text-align:left">选项</th><th style="text-align:left">全名</th><th style="text-align:left">说明</th></tr>
 </thead>
 <tbody>
-<tr><td style="text-align:left">-c</td><td style="text-align:left">-集合名称</td><td style="text-align:left">集合名称。</td></tr>
+<tr><td style="text-align:left">-c</td><td style="text-align:left">-Collection-名称</td><td style="text-align:left">Collections 的名称。</td></tr>
 <tr><td style="text-align:left">-在</td><td style="text-align:left">-索引名称</td><td style="text-align:left">索引名称。</td></tr>
 <tr><td style="text-align:left">-帮助</td><td style="text-align:left">不适用</td><td style="text-align:left">显示命令使用帮助。</td></tr>
 </tbody>
@@ -593,7 +589,7 @@ Timeout []:
 <p><h3 id="delete-index">示例</h3></p>
 <pre><code translate="no" class="language-shell">milvus_cli &gt; <span class="hljs-keyword">delete</span> index -c car -<span class="hljs-keyword">in</span> indexName
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="show-collection" class="common-anchor-header">show collection<button data-href="#show-collection" class="anchor-icon" translate="no">
+<h2 id="show-collection" class="common-anchor-header">show Collections<button data-href="#show-collection" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -608,7 +604,7 @@ Timeout []:
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>显示集合的详细信息。</p>
+    </button></h2><p>显示 Collection 的详细信息。</p>
 <p><h3 id="show-collection">语法</h3></p>
 <pre><code translate="no" class="language-shell">show collection -c (text)
 <button class="copy-code-btn"></button></code></pre>
@@ -618,7 +614,7 @@ Timeout []:
 <tr><th style="text-align:left">选项</th><th style="text-align:left">全名</th><th style="text-align:left">说明</th></tr>
 </thead>
 <tbody>
-<tr><td style="text-align:left">-c</td><td style="text-align:left">-集合名称</td><td style="text-align:left">集合名称。</td></tr>
+<tr><td style="text-align:left">-c</td><td style="text-align:left">-collection-名称</td><td style="text-align:left">Collections 的名称。</td></tr>
 <tr><td style="text-align:left">-帮助</td><td style="text-align:left">不适用</td><td style="text-align:left">显示命令使用帮助。</td></tr>
 </tbody>
 </table>
@@ -650,7 +646,7 @@ Timeout []:
 <tr><th style="text-align:left">选项</th><th style="text-align:left">全名</th><th style="text-align:left">说明</th></tr>
 </thead>
 <tbody>
-<tr><td style="text-align:left">-c</td><td style="text-align:left">-集合名称</td><td style="text-align:left">分区所属集合的名称。</td></tr>
+<tr><td style="text-align:left">-c</td><td style="text-align:left">-Collection-名称</td><td style="text-align:left">分区所属 Collections 的名称。</td></tr>
 <tr><td style="text-align:left">-p</td><td style="text-align:left">-分区</td><td style="text-align:left">分区的名称。</td></tr>
 <tr><td style="text-align:left">-help</td><td style="text-align:left">不适用</td><td style="text-align:left">显示命令使用帮助。</td></tr>
 </tbody>
@@ -683,7 +679,7 @@ Timeout []:
 <tr><th style="text-align:left">选项</th><th style="text-align:left">全名</th><th style="text-align:left">说明</th></tr>
 </thead>
 <tbody>
-<tr><td style="text-align:left">-c</td><td style="text-align:left">-集合名称</td><td style="text-align:left">集合名称。</td></tr>
+<tr><td style="text-align:left">-c</td><td style="text-align:left">-collection-名称</td><td style="text-align:left">Collections 的名称。</td></tr>
 <tr><td style="text-align:left">-在</td><td style="text-align:left">-索引名称</td><td style="text-align:left">索引名称。</td></tr>
 </tbody>
 </table>
@@ -746,18 +742,18 @@ Timeout []:
 <tbody>
 <tr><td style="text-align:left">清除</td><td style="text-align:left">清除屏幕。</td></tr>
 <tr><td style="text-align:left">连接</td><td style="text-align:left">连接 Milvus。</td></tr>
-<tr><td style="text-align:left">创建</td><td style="text-align:left">创建数据集、数据库、分区、用户和索引。</td></tr>
-<tr><td style="text-align:left">删除</td><td style="text-align:left">删除数据集、数据库、分区、别名、用户或索引。</td></tr>
+<tr><td style="text-align:left">创建</td><td style="text-align:left">创建 Collections、数据库、分区、用户和索引。</td></tr>
+<tr><td style="text-align:left">删除</td><td style="text-align:left">删除 Collections、数据库、分区、别名、用户或索引。</td></tr>
 <tr><td style="text-align:left">退出</td><td style="text-align:left">关闭命令行窗口。</td></tr>
 <tr><td style="text-align:left">帮助</td><td style="text-align:left">显示命令使用帮助。</td></tr>
 <tr><td style="text-align:left">插入</td><td style="text-align:left">将数据导入分区。</td></tr>
-<tr><td style="text-align:left">列表</td><td style="text-align:left">列出集合、数据库、分区、用户或索引。</td></tr>
-<tr><td style="text-align:left">加载</td><td style="text-align:left">加载集合或分区。</td></tr>
+<tr><td style="text-align:left">列表</td><td style="text-align:left">列出 Collections、数据库、分区、用户或索引。</td></tr>
+<tr><td style="text-align:left">加载</td><td style="text-align:left">加载一个 Collection 或分区。</td></tr>
 <tr><td style="text-align:left">查询</td><td style="text-align:left">显示符合所有输入条件的查询结果。</td></tr>
-<tr><td style="text-align:left">释放</td><td style="text-align:left">释放数据集或分区。</td></tr>
+<tr><td style="text-align:left">释放</td><td style="text-align:left">释放一个 Collection 或分区。</td></tr>
 <tr><td style="text-align:left">搜索</td><td style="text-align:left">执行向量相似性搜索或混合搜索。</td></tr>
-<tr><td style="text-align:left">显示</td><td style="text-align:left">显示连接、数据库、数据集、加载进度或索引进度。</td></tr>
-<tr><td style="text-align:left">重命名</td><td style="text-align:left">重命名数据集</td></tr>
+<tr><td style="text-align:left">显示</td><td style="text-align:left">显示连接、数据库、Collection、加载进度或索引进度。</td></tr>
+<tr><td style="text-align:left">重命名</td><td style="text-align:left">重命名 Collections</td></tr>
 <tr><td style="text-align:left">使用</td><td style="text-align:left">使用数据库</td></tr>
 <tr><td style="text-align:left">版本</td><td style="text-align:left">显示 Milvus_CLI 的版本。</td></tr>
 </tbody>
@@ -787,7 +783,7 @@ Timeout []:
 <tr><th style="text-align:left">选项</th><th style="text-align:left">全名</th><th style="text-align:left">说明</th></tr>
 </thead>
 <tbody>
-<tr><td style="text-align:left">-c</td><td style="text-align:left">-数据集名称</td><td style="text-align:left">插入数据的集合名称。</td></tr>
+<tr><td style="text-align:left">-c</td><td style="text-align:left">-collection-名称</td><td style="text-align:left">插入数据的 Collection 的名称。</td></tr>
 <tr><td style="text-align:left">-p</td><td style="text-align:left">-分区</td><td style="text-align:left">(可选）插入数据的分区名称。不通过此分区选项表示选择"_默认 "分区。</td></tr>
 <tr><td style="text-align:left">-help</td><td style="text-align:left">不适用</td><td style="text-align:left">显示命令使用帮助。</td></tr>
 </tbody>
@@ -796,7 +792,7 @@ Timeout []:
 下面的示例导入了一个本地 CSV 文件。</p>
 <pre><code translate="no" class="language-shell">milvus_cli &gt; <span class="hljs-keyword">import</span> -c car <span class="hljs-string">&#x27;examples/import_csv/vectors.csv&#x27;</span>
 
-Reading csv file... [<span class="hljs-comment">####################################] 100%</span>
+Reading csv file...  [<span class="hljs-comment">####################################]  100%</span>
 
 Column names are [<span class="hljs-string">&#x27;vector&#x27;</span>, <span class="hljs-string">&#x27;color&#x27;</span>, <span class="hljs-string">&#x27;brand&#x27;</span>]
 
@@ -805,17 +801,12 @@ Processed <span class="hljs-number">50001</span> lines.
 Inserting ...
 
 Insert successfully.
-
----
-
-Total insert entities: <span class="hljs-number">50000</span>
-Total collection entities: <span class="hljs-number">150000</span>
-Milvus timestamp: <span class="hljs-number">428849214449254403</span>
-
----
-
+--------------------------  ------------------
+Total insert entities:                   <span class="hljs-number">50000</span>
+Total collection entities:              <span class="hljs-number">150000</span>
+Milvus timestamp:           <span class="hljs-number">428849214449254403</span>
+--------------------------  ------------------
 <button class="copy-code-btn"></button></code></pre>
-
 <p><h3 id="import">示例 2</h3>
 下面的示例导入了一个远程 CSV 文件。</p>
 <pre><code translate="no" class="language-shell">milvus_cli &gt; import -c car <span class="hljs-string">&#x27;https://raw.githubusercontent.com/milvus-
@@ -823,7 +814,7 @@ io/milvus_cli/main/examples/import_csv/vectors.csv&#x27;</span>
 
 Reading file from remote URL.
 
-Reading csv file... [####################################] 100%
+Reading csv file...  [####################################]  100%
 
 Column names are [<span class="hljs-string">&#x27;vector&#x27;</span>, <span class="hljs-string">&#x27;color&#x27;</span>, <span class="hljs-string">&#x27;brand&#x27;</span>]
 
@@ -833,16 +824,12 @@ Inserting ...
 
 Insert successfully.
 
----
-
-Total insert entities: 50000
-Total collection entities: 150000
-Milvus timestamp: 428849214449254403
-
----
-
+--------------------------  ------------------
+Total insert entities:                   50000
+Total collection entities:              150000
+Milvus timestamp:           428849214449254403
+--------------------------  ------------------
 <button class="copy-code-btn"></button></code></pre>
-
 <h2 id="list-users" class="common-anchor-header">列出用户<button data-href="#list-users" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -862,7 +849,7 @@ Milvus timestamp: 428849214449254403
 <h3 id="Syntax" class="common-anchor-header">语法</h3><pre><code translate="no" class="language-shell">list <span class="hljs-built_in">users</span>
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Options" class="common-anchor-header">选项</h3><p>| 选项 | 全名 | 说明 | | --help | n/a | 显示命令使用帮助。|</p>
-<h2 id="list-collections" class="common-anchor-header">list collections<button data-href="#list-collections" class="anchor-icon" translate="no">
+<h2 id="list-collections" class="common-anchor-header">list Collections<button data-href="#list-collections" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -877,7 +864,7 @@ Milvus timestamp: 428849214449254403
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>列出所有集合。</p>
+    </button></h2><p>列出所有 Collections。</p>
 <p><h3 id="list-collections">语法<h3></p>
 <pre><code translate="no" class="language-shell">list collections
 <button class="copy-code-btn"></button></code></pre>
@@ -905,8 +892,8 @@ Milvus timestamp: 428849214449254403
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>列出集合的所有索引。</p>
-<div class="alert note">目前，一个数据集最多支持一个索引。 </div>
+    </button></h2><p>列出 Collections 的所有索引。</p>
+<div class="alert note">目前，一个 Collection 最多支持一个索引。 </div>
 <p><h3 id="list-indexes">语法</h3></p>
 <pre><code translate="no" class="language-shell">list indexes -c (text)
 <button class="copy-code-btn"></button></code></pre>
@@ -916,7 +903,7 @@ Milvus timestamp: 428849214449254403
 <tr><th style="text-align:left">选项</th><th style="text-align:left">全名</th><th style="text-align:left">说明</th></tr>
 </thead>
 <tbody>
-<tr><td style="text-align:left">-c</td><td style="text-align:left">-集合名称</td><td style="text-align:left">集合名称。</td></tr>
+<tr><td style="text-align:left">-c</td><td style="text-align:left">-collection-名称</td><td style="text-align:left">Collections 的名称。</td></tr>
 <tr><td style="text-align:left">-帮助</td><td style="text-align:left">不适用</td><td style="text-align:left">显示命令使用帮助。</td></tr>
 </tbody>
 </table>
@@ -935,7 +922,7 @@ Milvus timestamp: 428849214449254403
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>列出数据集中的所有分区。</p>
+    </button></h2><p>列出 Collections 的所有分区。</p>
 <p><h3 id="list-partitions">语法</h3></p>
 <pre><code translate="no" class="language-shell">list partitions -c (text)
 <button class="copy-code-btn"></button></code></pre>
@@ -945,7 +932,7 @@ Milvus timestamp: 428849214449254403
 <tr><th style="text-align:left">选项</th><th style="text-align:left">全名</th><th style="text-align:left">说明</th></tr>
 </thead>
 <tbody>
-<tr><td style="text-align:left">-c</td><td style="text-align:left">-集合名称</td><td style="text-align:left">集合名称。</td></tr>
+<tr><td style="text-align:left">-c</td><td style="text-align:left">-Collection-名称</td><td style="text-align:left">Collections 的名称。</td></tr>
 <tr><td style="text-align:left">-帮助</td><td style="text-align:left">不适用</td><td style="text-align:left">显示命令使用帮助。</td></tr>
 </tbody>
 </table>
@@ -964,7 +951,7 @@ Milvus timestamp: 428849214449254403
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>将数据集或分区从硬盘空间加载到 RAM。</p>
+    </button></h2><p>将一个 Collection 或分区从硬盘空间加载到 RAM。</p>
 <p><h3 id="load">语法</h3></p>
 <pre><code translate="no" class="language-shell">load -c (text) [-p (text)]
 <button class="copy-code-btn"></button></code></pre>
@@ -974,7 +961,7 @@ Milvus timestamp: 428849214449254403
 <tr><th style="text-align:left">选项</th><th style="text-align:left">全名</th><th style="text-align:left">说明</th></tr>
 </thead>
 <tbody>
-<tr><td style="text-align:left">-c</td><td style="text-align:left">-集合名称</td><td style="text-align:left">分区所属集合的名称。</td></tr>
+<tr><td style="text-align:left">-c</td><td style="text-align:left">-Collection-名称</td><td style="text-align:left">分区所属 Collections 的名称。</td></tr>
 <tr><td style="text-align:left">-p</td><td style="text-align:left">-分区</td><td style="text-align:left">(可选/多个）分区的名称。</td></tr>
 <tr><td style="text-align:left">-help</td><td style="text-align:left">不适用</td><td style="text-align:left">显示命令使用帮助。</td></tr>
 </tbody>
@@ -1027,7 +1014,6 @@ timeout []:
 Guarantee timestamp. This instructs Milvus to see all operations performed before a provided timestamp. If no such timestamp <span class="hljs-keyword">is</span> provided, then Milvus will search all operations performed to date. [0]:
 Graceful time. Only used <span class="hljs-keyword">in</span> bounded consistency level. If graceful_time <span class="hljs-keyword">is</span> <span class="hljs-keyword">set</span>, PyMilvus will use current timestamp minus the graceful_time <span class="hljs-keyword">as</span> the guarantee_timestamp. This option <span class="hljs-keyword">is</span> 5s <span class="hljs-keyword">by</span> <span class="hljs-literal">default</span> <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> <span class="hljs-keyword">set</span>. [5]:
 </span><button class="copy-code-btn"></button></code></pre>
-
 <p><h4 id="query">例 2</h4></p>
 <p>执行查询并提示输入所需内容：</p>
 <pre><code translate="no" class="language-shell">milvus_cli &gt; query
@@ -1047,7 +1033,6 @@ timeout []:
 Guarantee timestamp. This instructs Milvus to see <span class="hljs-built_in">all</span> operations performed before a provided timestamp. If no such timestamp <span class="hljs-keyword">is</span> provided, then Milvus will search <span class="hljs-built_in">all</span> operations performed to date. [<span class="hljs-number">0</span>]:
 Graceful time. Only used <span class="hljs-keyword">in</span> bounded consistency level. If graceful_time <span class="hljs-keyword">is</span> <span class="hljs-built_in">set</span>, PyMilvus will use current timestamp minus the graceful_time <span class="hljs-keyword">as</span> the guarantee_timestamp. This option <span class="hljs-keyword">is</span> 5s by default <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> <span class="hljs-built_in">set</span>. [<span class="hljs-number">5</span>]:
 <button class="copy-code-btn"></button></code></pre>
-
 <h2 id="release" class="common-anchor-header">释放<button data-href="#release" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -1063,7 +1048,7 @@ Graceful time. Only used <span class="hljs-keyword">in</span> bounded consistenc
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>从 RAM 中释放数据集或分区。</p>
+    </button></h2><p>从 RAM 中释放一个 Collection 或分区。</p>
 <p><h3 id="release">语法</h3></p>
 <pre><code translate="no" class="language-shell">release -c (text) [-p (text)]
 <button class="copy-code-btn"></button></code></pre>
@@ -1073,7 +1058,7 @@ Graceful time. Only used <span class="hljs-keyword">in</span> bounded consistenc
 <tr><th style="text-align:left">选项</th><th style="text-align:left">全名</th><th style="text-align:left">说明</th></tr>
 </thead>
 <tbody>
-<tr><td style="text-align:left">-c</td><td style="text-align:left">-集合名称</td><td style="text-align:left">分区所属集合的名称。</td></tr>
+<tr><td style="text-align:left">-c</td><td style="text-align:left">-Collection-名称</td><td style="text-align:left">分区所属 Collections 的名称。</td></tr>
 <tr><td style="text-align:left">-p</td><td style="text-align:left">-分区</td><td style="text-align:left">(可选/多个）分区的名称。</td></tr>
 <tr><td style="text-align:left">-help</td><td style="text-align:left">不适用</td><td style="text-align:left">显示命令使用帮助。</td></tr>
 </tbody>
@@ -1124,22 +1109,21 @@ The max number of returned <span class="hljs-keyword">record</span>, also known 
 
 The boolean expression used to filter attribute []: id &gt; 0
 
-The names of partitions to <span class="hljs-title">search</span> (<span class="hljs-params">split <span class="hljs-keyword">by</span> <span class="hljs-string">&quot;,&quot;</span> <span class="hljs-keyword">if</span> multiple</span>) [&#x27;_default&#x27;] []: \_default
+The names of partitions to <span class="hljs-title">search</span> (<span class="hljs-params">split <span class="hljs-keyword">by</span> <span class="hljs-string">&quot;,&quot;</span> <span class="hljs-keyword">if</span> multiple</span>) [&#x27;_default&#x27;] []: _default
 
 timeout []:
 
 Guarantee <span class="hljs-title">Timestamp</span>(<span class="hljs-params">It instructs Milvus to see all operations performed before a provided timestamp. If no such timestamp <span class="hljs-keyword">is</span> provided, then Milvus will search all operations performed to date</span>) [0]:
 
 </span><button class="copy-code-btn"></button></code></pre>
-
 <p><h4 id="search">例 2</h4></p>
-<p>在索引库中执行搜索，并提示输入所需内容：</p>
+<p>对索引 Collections 执行搜索，并提示输入所需内容：</p>
 <pre><code translate="no" class="language-shell">milvus_cli &gt; <span class="hljs-function">search
 
 Collection <span class="hljs-title">name</span> (<span class="hljs-params">car, test_collection</span>): car
 
 The vectors of search <span class="hljs-title">data</span>(<span class="hljs-params">the length of data <span class="hljs-keyword">is</span> number of query (nq</span>), the dim of every vector <span class="hljs-keyword">in</span> data must be equal to vector field’s of collection. You can also import a csv file without headers):
-[[0.71, 0.76, 0.17, 0.13, 0.42, 0.07, 0.15, 0.67, 0.58, 0.02, 0.39, 0.47, 0.58, 0.88, 0.73, 0.31, 0.23, 0.57, 0.33, 0.2, 0.03, 0.43, 0.78, 0.49, 0.17, 0.56, 0.76, 0.54, 0.45, 0.46, 0.05, 0.1, 0.43, 0.63, 0.29, 0.44, 0.65, 0.01, 0.35, 0.46, 0.66, 0.7, 0.88, 0.07, 0.49, 0.92, 0.57, 0.5, 0.16, 0.77, 0.98, 0.1, 0.44, 0.88, 0.82, 0.16, 0.67, 0.63, 0.57, 0.55, 0.95, 0.13, 0.64, 0.43, 0.71, 0.81, 0.43, 0.65, 0.76, 0.7, 0.05, 0.24, 0.03, 0.9, 0.46, 0.28, 0.92, 0.25, 0.97, 0.79, 0.73, 0.97, 0.49, 0.28, 0.64, 0.19, 0.23, 0.51, 0.09, 0.1, 0.53, 0.03, 0.23, 0.94, 0.87, 0.14, 0.42, 0.82, 0.91, 0.11, 0.91, 0.37, 0.26, 0.6, 0.89, 0.6, 0.32, 0.11, 0.98, 0.67, 0.12, 0.66, 0.47, 0.02, 0.15, 0.6, 0.64, 0.57, 0.14, 0.81, 0.75, 0.11, 0.49, 0.78, 0.16, 0.63, 0.57, 0.18]]
+    [[0.71, 0.76, 0.17, 0.13, 0.42, 0.07, 0.15, 0.67, 0.58, 0.02, 0.39, 0.47, 0.58, 0.88, 0.73, 0.31, 0.23, 0.57, 0.33, 0.2, 0.03, 0.43, 0.78, 0.49, 0.17, 0.56, 0.76, 0.54, 0.45, 0.46, 0.05, 0.1, 0.43, 0.63, 0.29, 0.44, 0.65, 0.01, 0.35, 0.46, 0.66, 0.7, 0.88, 0.07, 0.49, 0.92, 0.57, 0.5, 0.16, 0.77, 0.98, 0.1, 0.44, 0.88, 0.82, 0.16, 0.67, 0.63, 0.57, 0.55, 0.95, 0.13, 0.64, 0.43, 0.71, 0.81, 0.43, 0.65, 0.76, 0.7, 0.05, 0.24, 0.03, 0.9, 0.46, 0.28, 0.92, 0.25, 0.97, 0.79, 0.73, 0.97, 0.49, 0.28, 0.64, 0.19, 0.23, 0.51, 0.09, 0.1, 0.53, 0.03, 0.23, 0.94, 0.87, 0.14, 0.42, 0.82, 0.91, 0.11, 0.91, 0.37, 0.26, 0.6, 0.89, 0.6, 0.32, 0.11, 0.98, 0.67, 0.12, 0.66, 0.47, 0.02, 0.15, 0.6, 0.64, 0.57, 0.14, 0.81, 0.75, 0.11, 0.49, 0.78, 0.16, 0.63, 0.57, 0.18]]
 
 The vector field used to search of <span class="hljs-title">collection</span> (<span class="hljs-params">vector</span>): vector
 
@@ -1151,16 +1135,15 @@ The max number of returned <span class="hljs-keyword">record</span>, also known 
 
 The boolean expression used to filter attribute []: id &gt; 0
 
-The names of partitions to <span class="hljs-title">search</span> (<span class="hljs-params">split <span class="hljs-keyword">by</span> <span class="hljs-string">&quot;,&quot;</span> <span class="hljs-keyword">if</span> multiple</span>) [&#x27;_default&#x27;] []: \_default
+The names of partitions to <span class="hljs-title">search</span> (<span class="hljs-params">split <span class="hljs-keyword">by</span> <span class="hljs-string">&quot;,&quot;</span> <span class="hljs-keyword">if</span> multiple</span>) [&#x27;_default&#x27;] []: _default
 
 timeout []:
 
 Guarantee <span class="hljs-title">Timestamp</span>(<span class="hljs-params">It instructs Milvus to see all operations performed before a provided timestamp. If no such timestamp <span class="hljs-keyword">is</span> provided, then Milvus will search all operations performed to date</span>) [0]:
 
 </span><button class="copy-code-btn"></button></code></pre>
-
 <p><h4 id="search">例 3</h4></p>
-<p>在非索引集合上执行搜索，并提示输入所需内容：</p>
+<p>在非索引 Collections 上执行搜索，并提示输入所需内容：</p>
 <pre><code translate="no" class="language-shell">milvus_cli &gt; search
 
 Collection name (car, car2): car
@@ -1182,8 +1165,7 @@ timeout []:
 Guarantee Timestamp(It instructs Milvus to see <span class="hljs-built_in">all</span> operations performed before a provided timestamp. If no such timestamp <span class="hljs-keyword">is</span> provided, then Milvus will search <span class="hljs-built_in">all</span> operations performed to date) [<span class="hljs-number">0</span>]:
 
 <button class="copy-code-btn"></button></code></pre>
-
-<h2 id="List-connection" class="common-anchor-header">列出连接<button data-href="#List-connection" class="anchor-icon" translate="no">
+<h2 id="list-connection" class="common-anchor-header">列出连接<button data-href="#list-connection" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -1236,7 +1218,7 @@ Guarantee Timestamp(It instructs Milvus to see <span class="hljs-built_in">all</
 <tr><th style="text-align:left">选项</th><th style="text-align:left">全名</th><th style="text-align:left">说明</th></tr>
 </thead>
 <tbody>
-<tr><td style="text-align:left">-c</td><td style="text-align:left">-集合名称</td><td style="text-align:left">实体所属集合的名称。</td></tr>
+<tr><td style="text-align:left">-c</td><td style="text-align:left">-collection-名称</td><td style="text-align:left">实体所属 Collections 的名称。</td></tr>
 <tr><td style="text-align:left">-i</td><td style="text-align:left">-索引</td><td style="text-align:left">(可选）索引名称。</td></tr>
 <tr><td style="text-align:left">-help</td><td style="text-align:left">不适用</td><td style="text-align:left">显示命令使用帮助。</td></tr>
 </tbody>
@@ -1256,17 +1238,17 @@ Guarantee Timestamp(It instructs Milvus to see <span class="hljs-built_in">all</
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>显示实体加载的进度。</p>
+    </button></h2><p>显示 Collections 的加载进度。</p>
 <p><h3 id="show-loading-progress">语法</h3></p>
 <pre><code translate="no" class="language-shell">show loading_progress -c (text) [-p (text)]
 <button class="copy-code-btn"></button></code></pre>
 <p><h3 id="show-loading-progress">选项</h3></p>
 <table>
 <thead>
-<tr><th style="text-align:left">选项</th><th style="text-align:left">全名</th><th style="text-align:left">说明</th></tr>
+<tr><th style="text-align:left">选项</th><th style="text-align:left">全称</th><th style="text-align:left">说明</th></tr>
 </thead>
 <tbody>
-<tr><td style="text-align:left">-c</td><td style="text-align:left">-集合名称</td><td style="text-align:left">实体所属集合的名称。</td></tr>
+<tr><td style="text-align:left">-c</td><td style="text-align:left">-collection-名称</td><td style="text-align:left">实体所属 Collections 的名称。</td></tr>
 <tr><td style="text-align:left">-p</td><td style="text-align:left">-分区</td><td style="text-align:left">(可选/多个）加载分区的名称。</td></tr>
 <tr><td style="text-align:left">-help</td><td style="text-align:left">不适用</td><td style="text-align:left">显示命令使用帮助。</td></tr>
 </tbody>

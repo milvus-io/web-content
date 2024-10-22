@@ -1,7 +1,7 @@
 ---
 id: single-vector-search.md
 order: 1
-summary: この記事では、1つのクエリベクターを使用してMilvusコレクション内のベクターを検索する方法について説明します。
+summary: この記事では、Milvusコレクション内のベクターを単一のクエリーベクターを使って検索する方法について説明します。
 title: 単一ベクトル検索
 ---
 <h1 id="Single-Vector-Search" class="common-anchor-header">単一ベクトル検索<button data-href="#Single-Vector-Search" class="anchor-icon" translate="no">
@@ -440,7 +440,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
       </svg>
     </button></h2><p><code translate="no">search</code> リクエストを送信する際、クエリの埋め込みを表す1つ以上のベクトル値と、返す結果の数を示す<code translate="no">limit</code> 値を指定することができます。</p>
 <p>データとクエリーベクトルによっては、<code translate="no">limit</code> より少ない結果しか得られないかもしれません。これは、<code translate="no">limit</code> がクエリにマッチする可能性のあるベクトルの数よりも大きい場合に起こります。</p>
-<h3 id="Single-vector-search" class="common-anchor-header">単一ベクトル検索</h3><p>単一ベクトル検索は Milvus の<code translate="no">search</code> 操作の中で最も単純なもので、与えられたクエリーベクトルに最も類似したベクトルを検索するように設計されています。</p>
+<h3 id="Single-vector-search" class="common-anchor-header">単一ベクトル検索</h3><p>単一ベクトル検索はMilvusの<code translate="no">search</code> 操作の中で最も単純なもので、与えられたクエリーベクトルに最も類似したベクトルを検索するように設計されています。</p>
 <p>単一ベクトル検索を実行するには、ターゲットコレクション名、クエリベクトル、希望する結果数 (<code translate="no">limit</code>) を指定します。この操作は、最も類似したベクトル、そのID、クエリ・ベクトルからの距離からなる結果セットを返します。</p>
 <p>以下は、クエリ・ベクトルに最も似ている上位 5 つのエンティティを検索する例です：</p>
 <div class="multipleCode">
@@ -496,7 +496,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
     </tr>
     <tr>
       <td><code translate="no">data</code></td>
-      <td><br/>Milvus は、指定されたベクトル埋め込みに最も類似したベクトル埋め込みを検索する。</td>
+      <td><br/>Milvusは指定されたベクトル埋め込みに最も類似したベクトル埋め込みを検索する。</td>
     </tr>
     <tr>
       <td><code translate="no">limit</code></td>
@@ -544,11 +544,11 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
     </tr>
     <tr>
       <td><code translate="no">data</code></td>
-      <td><br/>Milvus は、指定されたベクトル埋め込みに最も類似したベクトル埋め込みを検索する。</td>
+      <td><br/>Milvusは指定されたベクトル埋め込みに最も類似したベクトル埋め込みを検索する。</td>
     </tr>
     <tr>
       <td><code translate="no">limit</code></td>
-      <td><br/>このパラメータと<strong>paramの</strong> <strong>offsetを組み合わせて</strong>使用すると、ページ分割が可能になります。<br/>この値と<strong>paramの</strong> <strong>offsetの</strong>和は、16,384未満でなければなりません。</td>
+      <td><br/>このパラメータは、<strong>paramの</strong> <strong>offsetと組み合わせて</strong>使用することで、ページ分割を有効にすることができます。<br/>この値と<strong>paramの</strong> <strong>offsetの</strong>合計は、16,384未満でなければなりません。</td>
     </tr>
   </tbody>
 </table>
@@ -634,9 +634,9 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 ]
 <button class="copy-code-btn"></button></code></pre>
 <p>出力には、クエリベクトルに最も近い上位5つの近傍ベクトルが表示され、一意のIDと計算された距離も表示されます。</p>
-<h3 id="Bulk-vector-search" class="common-anchor-header">一括ベクトル検索</h3><p>一括ベクトル検索は、<a href="https://milvus.io/docs/single-vector-search.md#Single-Vector-Search">1回の</a>リクエストで複数のクエリベクトルを<a href="https://milvus.io/docs/single-vector-search.md#Single-Vector-Search">検索</a>できるようにすることで、<a href="https://milvus.io/docs/single-vector-search.md#Single-Vector-Search">単一ベクトル検索の</a>概念を拡張します。このタイプの検索は、クエリベクターのセットに対して類似したベクトルを検索する必要があるシナリオに最適で、必要な時間と計算リソースを大幅に削減します。</p>
-<p>一括ベクトル検索では、<code translate="no">data</code> フィールドに複数のクエリベクトルを含めることができます。システムはこれらのベクトルを並列処理し、クエリ・ベクターごとに個別の結果セットを返し、各セットにはコレクション内で見つかった最も近い一致が含まれます。</p>
-<p>以下は、2 つのクエリ・ベクタから、最も類似したエンティティの 2 つの異なるセットを検索する例です：</p>
+<h3 id="Bulk-vector-search" class="common-anchor-header">一括ベクトル検索</h3><p>一括ベクトル検索は、<a href="https://milvus.io/docs/single-vector-search.md#Single-Vector-Search">1回の</a>リクエストで複数のクエリベクトルを検索できるようにすることで、<a href="https://milvus.io/docs/single-vector-search.md#Single-Vector-Search">単一ベクトル検索の</a>概念を拡張します。このタイプの検索は、クエリベクターのセットに対して類似したベクトルを検索する必要があるシナリオに最適で、必要な時間と計算リソースを大幅に削減します。</p>
+<p>一括ベクトル検索では、<code translate="no">data</code> フィールドに複数のクエリベクトルを含めることができます。システムはこれらのベクトルを並列に処理し、各クエリ・ベクトルに対して個別の結果セットを返し、各セットにはコレクション内で見つかった最も近い一致が含まれます。</p>
+<p>以下は、2 つのクエリ・ベクターから、最も類似したエンティティの 2 つの異なるセットを検索する例です：</p>
 <div class="multipleCode">
    <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Bulk-vector search</span>
@@ -1715,9 +1715,10 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvusでは、特定のフィールドで検索をグループ化することで、結果に同じフィールドの項目が重複することを避けることができます。特定のフィールドに対して様々な検索結果を得ることができます。</p>
-<p>各文書は様々なパッセージに分割されます。各パッセージは1つのベクトル埋め込みで表現され、1つの文書に属する。似たようなパッセージではなく、関連するドキュメントを見つけるには、<code translate="no">search()</code> opeartionに<code translate="no">group_by_field</code> 引数を含めることで、ドキュメントIDで結果をグループ化することができます。これにより、同じ文書の別々の文章ではなく、最も関連性の高いユニークな文書を返すことができます。</p>
-<p>以下は、検索結果をフィールドでグループ化するコード例です：</p>
+    </button></h2><p>Milvusでは、検索結果の網羅性と精度を向上させるためにグループ化検索が設計されています。</p>
+<p>RAGのシナリオを考えてみましょう。ここでは、ロードされた文書が様々なパッセージに分割され、各パッセージが1つのベクトル埋め込みで表現されています。ユーザはLLMを正確に促すために最も関連性の高い文章を見つけたい。Milvusの通常の検索機能はこの要求を満たすことができるが、検索結果が非常に偏ったものになる可能性がある：ほとんどのパッセージは数個の文書からしか得られず、検索結果の包括性は非常に低い。これは、LLMが提供する検索結果の正確さ、あるいは正しさを著しく損ない、LLM利用者の経験に悪影響を与える可能性がある。</p>
+<p>グループ化検索は、この問題を効果的に解決することができます。group_by_fieldとgroup_sizeを渡すことにより、Milvusユーザは検索結果をいくつかのグループに分け、各グループからのエンティティ数が特定のgroup_sizeを超えないようにすることができる。この機能により、検索結果の網羅性と公平性が大幅に向上し、LLM出力の品質が顕著に改善されます。</p>
+<p>検索結果をフィールドごとにグループ化するコード例を以下に示す：</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Connect to Milvus</span>
 client = MilvusClient(uri=<span class="hljs-string">&#x27;http://localhost:19530&#x27;</span>) <span class="hljs-comment"># Milvus server address</span>
 
@@ -1732,21 +1733,26 @@ res = client.search(
     <span class="hljs-string">&quot;metric_type&quot;</span>: <span class="hljs-string">&quot;L2&quot;</span>,
     <span class="hljs-string">&quot;params&quot;</span>: {<span class="hljs-string">&quot;nprobe&quot;</span>: <span class="hljs-number">10</span>},
     }, <span class="hljs-comment"># Search parameters</span>
-    limit=<span class="hljs-number">10</span>, <span class="hljs-comment"># Max. number of search results to return</span>
+    limit=<span class="hljs-number">5</span>, <span class="hljs-comment"># Max. number of groups to return</span>
     group_by_field=<span class="hljs-string">&quot;doc_id&quot;</span>, <span class="hljs-comment"># Group results by document ID</span>
+    group_size=<span class="hljs-number">2</span>, <span class="hljs-comment"># returned at most 2 passages per document, the default value is 1</span>
+    group_strict_size=<span class="hljs-literal">True</span>, <span class="hljs-comment"># ensure every group contains exactly 3 passages</span>
     output_fields=[<span class="hljs-string">&quot;doc_id&quot;</span>, <span class="hljs-string">&quot;passage_id&quot;</span>]
 )
 
 <span class="hljs-comment"># Retrieve the values in the `doc_id` column</span>
 doc_ids = [result[<span class="hljs-string">&#x27;entity&#x27;</span>][<span class="hljs-string">&#x27;doc_id&#x27;</span>] <span class="hljs-keyword">for</span> result <span class="hljs-keyword">in</span> res[<span class="hljs-number">0</span>]]
+passage_ids = [result[<span class="hljs-string">&#x27;entity&#x27;</span>][<span class="hljs-string">&#x27;passage_id&#x27;</span>] <span class="hljs-keyword">for</span> result <span class="hljs-keyword">in</span> res[<span class="hljs-number">0</span>]]
 
 <span class="hljs-built_in">print</span>(doc_ids)
+<span class="hljs-built_in">print</span>(passage_ids)
 <button class="copy-code-btn"></button></code></pre>
 <p>出力は以下のようになる：</p>
-<pre><code translate="no" class="language-python">[<span class="hljs-meta">5, 10, 1, 7, 9, 6, 3, 4, 8, 2</span>]
+<pre><code translate="no" class="language-python">[<span class="hljs-string">&quot;doc_11&quot;</span>, <span class="hljs-string">&quot;doc_11&quot;</span>, <span class="hljs-string">&quot;doc_7&quot;</span>, <span class="hljs-string">&quot;doc_7&quot;</span>, <span class="hljs-string">&quot;doc_3&quot;</span>, <span class="hljs-string">&quot;doc_3&quot;</span>, <span class="hljs-string">&quot;doc_2&quot;</span>, <span class="hljs-string">&quot;doc_2&quot;</span>, <span class="hljs-string">&quot;doc_8&quot;</span>, <span class="hljs-string">&quot;doc_8&quot;</span>]
+[<span class="hljs-meta">5, 10, 11, 10, 9, 6, 5, 4, 9, 2</span>]
 <button class="copy-code-btn"></button></code></pre>
-<p>指定された出力では、返されたエンティティに<code translate="no">doc_id</code> 値の重複がないことが確認できる。</p>
-<p>比較のために、<code translate="no">group_by_field</code> をコメントアウトして、通常の検索を行ってみよう：</p>
+<p>与えられた出力では、各文書に対してちょうど2つの文章が検索され、合計で5つの文書が結果を構成していることがわかる。</p>
+<p>比較のために、グループ関連のパラメーターをコメントアウトして、通常の検索を行ってみよう：</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Connect to Milvus</span>
 client = MilvusClient(uri=<span class="hljs-string">&#x27;http://localhost:19530&#x27;</span>) <span class="hljs-comment"># Milvus server address</span>
 
@@ -1761,27 +1767,33 @@ res = client.search(
     <span class="hljs-string">&quot;metric_type&quot;</span>: <span class="hljs-string">&quot;L2&quot;</span>,
     <span class="hljs-string">&quot;params&quot;</span>: {<span class="hljs-string">&quot;nprobe&quot;</span>: <span class="hljs-number">10</span>},
     }, <span class="hljs-comment"># Search parameters</span>
-    limit=<span class="hljs-number">10</span>, <span class="hljs-comment"># Max. number of search results to return</span>
+    limit=<span class="hljs-number">5</span>, <span class="hljs-comment"># Max. number of search results to return</span>
     <span class="hljs-comment"># group_by_field=&quot;doc_id&quot;, # Group results by document ID</span>
+    <span class="hljs-comment"># group_size=2, </span>
+    <span class="hljs-comment"># group_strict_size=True,</span>
     output_fields=[<span class="hljs-string">&quot;doc_id&quot;</span>, <span class="hljs-string">&quot;passage_id&quot;</span>]
 )
 
 <span class="hljs-comment"># Retrieve the values in the `doc_id` column</span>
 doc_ids = [result[<span class="hljs-string">&#x27;entity&#x27;</span>][<span class="hljs-string">&#x27;doc_id&#x27;</span>] <span class="hljs-keyword">for</span> result <span class="hljs-keyword">in</span> res[<span class="hljs-number">0</span>]]
+passage_ids = [result[<span class="hljs-string">&#x27;entity&#x27;</span>][<span class="hljs-string">&#x27;passage_id&#x27;</span>] <span class="hljs-keyword">for</span> result <span class="hljs-keyword">in</span> res[<span class="hljs-number">0</span>]]
 
 <span class="hljs-built_in">print</span>(doc_ids)
+<span class="hljs-built_in">print</span>(passage_ids)
 <button class="copy-code-btn"></button></code></pre>
 <p>出力は以下のようになる：</p>
-<pre><code translate="no" class="language-python">[<span class="hljs-meta">1, 10, 3, 10, 1, 9, 4, 4, 8, 6</span>]
+<pre><code translate="no" class="language-python">[<span class="hljs-string">&quot;doc_11&quot;</span>, <span class="hljs-string">&quot;doc_11&quot;</span>, <span class="hljs-string">&quot;doc_11&quot;</span>, <span class="hljs-string">&quot;doc_11&quot;</span>, <span class="hljs-string">&quot;doc_11&quot;</span>]
+[<span class="hljs-meta">1, 10, 3, 12, 9</span>]
 <button class="copy-code-btn"></button></code></pre>
-<p>指定された出力では、返されたエンティティに重複した<code translate="no">doc_id</code> 値が含まれていることが確認できる。</p>
+<p>与えられた出力では、"doc_11 "が検索結果を完全に支配し、他の文書からの質の高いパラグラフを覆い隠していることが観察できる。</p>
+<p>もう一つ注意すべき点があります。デフォルトでは、grouping_searchは十分なグループ数があれば即座に結果を返しますが、その結果、各グループの検索結果数がgroup_sizeを満たさない可能性があります。各グループの検索結果数を気にするのであれば、上のコードのようにgroup_strict_size=Trueを設定してください。これにより、Milvusは各グループで十分な結果を得ようと努力するようになりますが、パフォーマンスは若干低下します。</p>
 <p><strong>制限事項</strong></p>
 <ul>
-<li><p><strong>インデックス作成</strong>：このグループ化機能は、<strong>HNSW</strong>、<strong>IVF_FLAT</strong>、または<strong>FLAT</strong>タイプでインデックス付けされたコレクションに対してのみ機能します。詳細については、「<a href="https://milvus.io/docs/index.md#HNSW">メモリ内インデックス</a>」を参照してください。</p></li>
+<li><p><strong>インデックス作成</strong>：このグループ化機能は<strong>HNSW</strong>、<strong>IVF_FLAT</strong>、または<strong>FLAT</strong>タイプでインデックスされたコレクションに対してのみ機能します。詳細については、<a href="https://milvus.io/docs/index.md#HNSW">メモリ内インデックスを</a>参照してください。</p></li>
 <li><p><strong>ベクトル</strong>：現在、グループ化検索は<strong>BINARY_VECTOR</strong>型のベクトル・フィールドをサポートしていません。データ型の詳細については、<a href="https://milvus.io/docs/schema.md#Supported-data-types">サポートされるデータ</a>型を参照してください。</p></li>
 <li><p><strong>フィールド</strong>：現在のところ、グループ化検索では1つの列しか使用できません。<code translate="no">group_by_field</code> コンフィグで複数のフィールド名を指定することはできません。  また、グループ化検索は、JSON、FLOAT、DOUBLE、ARRAY、またはvectorフィールドのデータ型とは互換性がありません。</p></li>
 <li><p><strong>パフォーマンスへの影響</strong>：クエリ・ベクタ数が増えるとパフォーマンスが低下することに注意してください。CPUコア2個、メモリ8GBのクラスタを例にとると、グルーピング検索の実行時間は入力クエリベクタ数に比例して増加します。</p></li>
-<li><p><strong>機能</strong>現在のところ、グルーピング検索は<a href="https://milvus.io/docs/single-vector-search.md#Range-search">範囲検索</a>、<a href="https://milvus.io/docs/with-iterators.md#Search-with-iterator">検索イテレータ</a>、<a href="/docs/ja/multi-vector-search.md">ハイブリッド検索では</a>サポートされていない。</p></li>
+<li><p><strong>機能</strong>現在のところ、グルーピング検索は<a href="https://milvus.io/docs/single-vector-search.md#Range-search">範囲検索</a>、<a href="https://milvus.io/docs/with-iterators.md#Search-with-iterator">検索イテレータでは</a>サポートされていません。</p></li>
 </ul>
 <h2 id="Search-parameters" class="common-anchor-header">検索パラメータ<button data-href="#Search-parameters" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -1820,12 +1832,12 @@ search_parameters = {
 <tr><td><code translate="no">metric_type</code></td><td>ベクトル埋め込み間の類似度を測定する方法。<br/> 指定可能な値は<code translate="no">IP</code>,<code translate="no">L2</code>,<code translate="no">COSINE</code>,<code translate="no">JACCARD</code>,<code translate="no">HAMMING</code> で、デフォルトは読み込まれたインデックス・ファイルの値。</td></tr>
 <tr><td><code translate="no">params.nprobe</code></td><td>検索中にクエリーするユニット数。<br/> 値は[1, nlist<sub>[1</sub>]]の範囲です。</td></tr>
 <tr><td><code translate="no">params.level</code></td><td>検索精度レベル。<br/> 指定可能な値は<code translate="no">1</code> 、<code translate="no">2</code> 、および<code translate="no">3</code> で、デフォルトは<code translate="no">1</code> です。値を高くすると、より正確な結果が得られますが、パフォーマンスは低下します。</td></tr>
-<tr><td><code translate="no">params.radius</code></td><td>検索空間の外側の境界を定義します。<br/>値の範囲は<code translate="no">metric_type</code> パラメータによって決まります。たとえば、<code translate="no">metric_type</code> が<code translate="no">L2</code> に設定されている場合、有効な値の範囲は<code translate="no">[0, ∞]</code> です。<code translate="no">metric_type</code> が<code translate="no">COSINE</code> に設定されている場合、有効な値の範囲は<code translate="no">[-1, 1]</code> です。詳細については、「<a href="/docs/ja/metric.md">類似度メトリクス</a>」を参照のこと。</td></tr>
+<tr><td><code translate="no">params.radius</code></td><td>検索空間の外側の境界を定義します。<br/>値の範囲は<code translate="no">metric_type</code> パラメータによって決まります。たとえば、<code translate="no">metric_type</code> が<code translate="no">L2</code> に設定されている場合、有効な値域は<code translate="no">[0, ∞]</code> です。<code translate="no">metric_type</code> が<code translate="no">COSINE</code> に設定されている場合、有効な値域は<code translate="no">[-1, 1]</code> です。詳細については、「<a href="/docs/ja/metric.md">類似度メトリクス</a>」を参照のこと。</td></tr>
 <tr><td><code translate="no">params.range_filter</code></td><td><code translate="no">radius</code> は検索の外側の限界を設定しますが、<code translate="no">range_filter</code> はオプションで内側の境界を定義するために使用することができ、ベクターが一致とみなされるために必要な距離範囲を作成します。<br/>値の範囲は<code translate="no">metric_type</code> パラメータによって決定されます。例えば、<code translate="no">metric_type</code> が<code translate="no">L2</code> に設定されている場合、有効な値の範囲は<code translate="no">[0, ∞]</code> です。<code translate="no">metric_type</code> が<code translate="no">COSINE</code> に設定されている場合、有効な値の範囲は<code translate="no">[-1, 1]</code> です。詳細については、「<a href="/docs/ja/metric.md">類似度メトリクス</a>」を参照してください。</td></tr>
 </tbody>
 </table>
 <div class="admonition note">
 <p><strong>注釈</strong></p>
-<p>[1] インデックス作成後のクラスタ単位数。コレクションにインデックスを付けるとき、Milvusはベクトルデータを複数のクラスタユニットに細分化します。</p>
+<p>[1] インデックス作成後のクラスタ単位数。Milvusはコレクションのインデックスを作成する際、ベクトルデータを複数のクラスタ単位に分割します。</p>
 <p>[2] 検索で返すエンティティの数。</p>
 </div>

@@ -1,11 +1,10 @@
 ---
 id: upgrade_milvus_cluster-docker.md
 summary: 了解如何使用 Docker Compose 升级 Milvus 集群。
-title: 使用 Docker Compose 升级 Milvus 集群
+title: 使用 Docker Compose 升级 Milvus 群集
 ---
-
-<div class="tab-wrapper"><a href="/docs/zh/upgrade_milvus_standalone-operator.md" class=''>Milvus OperatorMilvus</a><a href="/docs/zh/upgrade_milvus_cluster-operator.md" class=''>操作员Milvus Operator</a><a href="/docs/zh/configure-helm.md" class=''>HelmDocker</a><a href="/docs/zh/configure_operator.md" class=''></a><a href="/docs/zh/upgrade_milvus_standalone-helm.md" class=''>ComposeHelmDocker</a><a href="/docs/zh/configure-docker.md" class=''></a><a href="/docs/zh/upgrade_milvus_cluster-helm.md" class=''>ComposeHelm</a></div>
-<h1 id="Upgrade-Milvus-Cluster-with-Docker-Compose" class="common-anchor-header">使用 Docker Compose 升级 Milvus 集群<button data-href="#Upgrade-Milvus-Cluster-with-Docker-Compose" class="anchor-icon" translate="no">
+<div class="tab-wrapper"><a href="/docs/zh/upgrade_milvus_standalone-operator.md" class=''>Milvus OperatorMilvus</a><a href="/docs/zh/upgrade_milvus_cluster-operator.md" class=''>OperatorMilvus</a><a href="/docs/zh/configure-helm.md" class=''>OperatorHelmDocker</a><a href="/docs/zh/upgrade_milvus_standalone-helm.md" class=''>ComposeHelmDocker</a><a href="/docs/zh/upgrade_milvus_cluster-helm.md" class=''>ComposeHelm</a></div>
+<h1 id="Upgrade-Milvus-Cluster-with-Docker-Compose" class="common-anchor-header">使用 Docker Compose 升级 Milvus 群集<button data-href="#Upgrade-Milvus-Cluster-with-Docker-Compose" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -21,7 +20,7 @@ title: 使用 Docker Compose 升级 Milvus 集群
         ></path>
       </svg>
     </button></h1><p>本主题介绍如何使用 Docker Compose 升级 Milvus。</p>
-<p>在正常情况下，你可以<a href="#Upgrade-Milvus-by-changing-its-image">通过更改映像来升级 Milvus</a>。不过，在从 v2.1.x 升级到 v2.4.9 之前，需要<a href="#Migrate-the-metadata">迁移元数据</a>。</p>
+<p>在正常情况下，你可以<a href="#Upgrade-Milvus-by-changing-its-image">通过更改映像来升级 Milvus</a>。不过，在从 v2.1.x 升级到 v2.4.13-hotfix 之前，需要<a href="#Migrate-the-metadata">迁移元数据</a>。</p>
 <h2 id="Upgrade-Milvus-by-changing-its-image" class="common-anchor-header">通过更改映像升级 Milvus<button data-href="#Upgrade-Milvus-by-changing-its-image" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -39,40 +38,40 @@ title: 使用 Docker Compose 升级 Milvus 集群
       </svg>
     </button></h2><p>在正常情况下，你可以按以下方法升级 Milvus：</p>
 <ol>
-<li><p>更改<code translate="no">docker-compose.yaml</code> 中的 Milvus 图像标签。</p>
+<li><p>在<code translate="no">docker-compose.yaml</code> 中更改 Milvus 图像标签。</p>
 <p>请注意，您需要更改代理、所有协调器和所有工作节点的镜像标签。</p>
 <pre><code translate="no" class="language-yaml">...
 rootcoord:
   container_name: milvus-rootcoord
-  image: milvusdb/milvus:v2.4.9
+  image: milvusdb/milvus:v2.4.13-hotfix
 ...
 proxy:
   container_name: milvus-proxy
-  image: milvusdb/milvus:v2.4.9
+  image: milvusdb/milvus:v2.4.13-hotfix
 ...
 querycoord:
   container_name: milvus-querycoord
-  image: milvusdb/milvus:v2.4.9  
+  image: milvusdb/milvus:v2.4.13-hotfix  
 ...
 querynode:
   container_name: milvus-querynode
-  image: milvusdb/milvus:v2.4.9
+  image: milvusdb/milvus:v2.4.13-hotfix
 ...
 indexcoord:
   container_name: milvus-indexcoord
-  image: milvusdb/milvus:v2.4.9
+  image: milvusdb/milvus:v2.4.13-hotfix
 ...
 indexnode:
   container_name: milvus-indexnode
-  image: milvusdb/milvus:v2.4.9 
+  image: milvusdb/milvus:v2.4.13-hotfix 
 ...
 datacoord:
   container_name: milvus-datacoord
-  image: milvusdb/milvus:v2.4.9   
+  image: milvusdb/milvus:v2.4.13-hotfix   
 ...
 datanode:
   container_name: milvus-datanode
-  image: milvusdb/milvus:v2.4.9
+  image: milvusdb/milvus:v2.4.13-hotfix
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>运行以下命令执行升级。</p>
 <pre><code translate="no" class="language-shell">docker compose down
@@ -98,7 +97,7 @@ docker compose up -d
 <li><p>停止所有 Milvus 组件。</p>
 <pre><code translate="no">docker stop &lt;milvus-component-docker-container-name&gt;
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p>为元数据迁移准备配置文件<code translate="no">migrate.yaml</code> 。</p>
+<li><p>为元迁移准备配置文件<code translate="no">migrate.yaml</code> 。</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># migration.yaml</span>
 cmd:
   <span class="hljs-comment"># Option: run/backup/rollback</span>
@@ -106,7 +105,7 @@ cmd:
   runWithBackup: true
 config:
   sourceVersion: <span class="hljs-number">2.1</span><span class="hljs-number">.4</span>   <span class="hljs-comment"># Specify your milvus version</span>
-  targetVersion: <span class="hljs-number">2.4</span><span class="hljs-number">.9</span>
+  targetVersion: <span class="hljs-number">2.4</span><span class="hljs-number">.13</span>-hotfix
   backupFilePath: /tmp/migration.bak
 metastore:
   <span class="hljs-built_in">type</span>: etcd

@@ -18,7 +18,8 @@ title: Construir RAG con Milvus
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/build_RAG_with_milvus.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a></p>
+    </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/build_RAG_with_milvus.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
+<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/build_RAG_with_milvus.ipynb" target="_blank"><img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/></a></p>
 <p><img translate="no" src="https://raw.githubusercontent.com/milvus-io/bootcamp/master/bootcamp/tutorials/quickstart/apps/rag_search_with_milvus/pics/rag_demo.png"/></p>
 <p>En este tutorial, le mostraremos cómo construir un sistema RAG (Retrieval-Augmented Generation) con Milvus.</p>
 <p>El sistema RAG combina un sistema de recuperación con un modelo generativo para generar nuevo texto basado en una petición dada. En primer lugar, el sistema recupera documentos relevantes de un corpus utilizando Milvus y, a continuación, utiliza un modelo generativo para generar un nuevo texto basado en los documentos recuperados.</p>
@@ -85,7 +86,7 @@ embedding_dim = <span class="hljs-built_in">len</span>(test_embedding)
 <pre><code translate="no">1536
 [0.00988506618887186, -0.005540902726352215, 0.0068014683201909065, -0.03810417652130127, -0.018254263326525688, -0.041231658309698105, -0.007651153020560741, 0.03220026567578316, 0.01892443746328354, 0.00010708322952268645]
 </code></pre>
-<h2 id="Load-data-into-Milvus" class="common-anchor-header">Cargar los datos en Milvus<button data-href="#Load-data-into-Milvus" class="anchor-icon" translate="no">
+<h2 id="Load-data-into-Milvus" class="common-anchor-header">Cargar datos en Milvus<button data-href="#Load-data-into-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

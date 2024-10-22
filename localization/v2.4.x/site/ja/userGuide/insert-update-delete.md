@@ -54,8 +54,8 @@ title: 挿入、アップサート、削除
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvusコレクションにおけるエンティティとは、コレクション内の単一で識別可能なインスタンスのことです。図書館の本、ゲノムの遺伝子、その他の識別可能なエンティティなど、特定のクラスの明確なメンバーを表します。</p>
-<p>コレクション内のエンティティは、スキーマと呼ばれる共通の属性セットを共有し、フィールド名、データ型、 その他の制約など、各エンティティが準拠しなければならない構造の概要を示す。</p>
+    </button></h2><p>Milvusコレクションにおけるエンティティとは、コレクション内の識別可能なインスタンスのことです。図書館の本、ゲノムの遺伝子、その他の識別可能なエンティティなど、特定のクラスの明確なメンバーを表します。</p>
+<p>コレクション内のエンティティは、スキーマと呼ばれる共通の属性セットを共有し、フィールド名、データ型、 その他の制約など、各エンティティが遵守すべき構造を概説する。</p>
 <p>コレクションへのエンティティの挿入を成功させるには、提供されたデータにターゲット・コレクションのスキーマ定義フィールドがすべて含まれている必要があります。さらに、動的フィールドを有効にしている場合に限り、スキーマ定義以外のフィールドを含めることもできます。詳細は、<a href="/docs/ja/enable-dynamic-field.md">Enable Dynamic Field</a> を参照してください。</p>
 <h2 id="Preparations" class="common-anchor-header">準備<button data-href="#Preparations" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -72,15 +72,15 @@ title: 挿入、アップサート、削除
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>以下のコードスニペットは、既存のコードを再利用してMilvusクラスタへの接続を確立し、コレクションを迅速にセットアップします。</p>
+    </button></h2><p>以下のコードスニペットは、Milvusクラスタへの接続を確立し、コレクションを素早くセットアップするために既存のコードを再利用しています。</p>
 <div class="language-python">
 <p>準備のために <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Client/MilvusClient.md"><code translate="no">MilvusClient</code></a>を使用してMilvusサーバに接続し <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_collection.md"><code translate="no">create_collection()</code></a>を使用してクイックセットアップモードでコレクションを作成します。</p>
 </div>
 <div class="language-java">
-<p>準備には <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Client/MilvusClientV2.md"><code translate="no">MilvusClientV2</code></a>を使用してMilvusサーバに接続し <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Collections/createCollection.md"><code translate="no">createCollection()</code></a>クイックセットアップモードでコレクションを作成します。</p>
+<p>準備には <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Client/MilvusClientV2.md"><code translate="no">MilvusClientV2</code></a>でMilvusサーバに接続し <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Collections/createCollection.md"><code translate="no">createCollection()</code></a>クイックセットアップモードでコレクションを作成します。</p>
 </div>
 <div class="language-javascript">
-<p>準備には <a href="https://milvus.io/api-reference/node/v2.4.x/Client/MilvusClient.md"><code translate="no">MilvusClient</code></a>でMilvusサーバに接続し <a href="https://milvus.io/api-reference/node/v2.4.x/Collections/createCollection.md"><code translate="no">createCollection()</code></a>クイックセットアップモードでコレクションを作成します。</p>
+<p>準備には <a href="https://milvus.io/api-reference/node/v2.4.x/Client/MilvusClient.md"><code translate="no">MilvusClient</code></a>を使ってMilvusサーバに接続し <a href="https://milvus.io/api-reference/node/v2.4.x/Collections/createCollection.md"><code translate="no">createCollection()</code></a>クイックセットアップモードでコレクションを作成します。</p>
 </div>
 <div class="multipleCode">
    <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a></div>
@@ -397,16 +397,15 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>データのアップサートは、更新操作と挿入操作を組み合わせたものです。Milvusでは、upsert操作は、その主キーが既にコレクションに存在するかどうかに基づいて、エンティティを挿入または更新するデータレベルのアクションを実行します。具体的には</p>
+    </button></h2><p>データのアップサートは、更新操作と挿入操作を組み合わせたものです。Milvusでは、upsertオペレーションは、その主キーが既にコレクションに存在するかどうかに基づいて、エンティティを挿入または更新するデータレベルのアクションを実行します。具体的には</p>
 <ul>
 <li><p>エンティティの主キーが既にコレクションに存在する場合、既存のエンティティは上書きされます。</p></li>
 <li><p>主キーがコレクションに存在しない場合は、新しいエンティティが挿入されます。</p></li>
 </ul>
 <div class="alert note">
 <ul>
-<li>Upsert 操作では、主キーは更新されません。</li>
-<li>Upsert 操作は、<code translate="no">autoID</code> が有効なコレクションをサポートしません。</li>
-<li>大規模なデータ取り込み（例：数百万のベクトル）に<code translate="no">insert</code> の代わりに<code translate="no">upsert</code> オペレーションを使用する場合、Milvus データノードでメモリを大量に消費する可能性があることに注意してください。</li>
+<li>Upsert 操作では主キーは更新されません。</li>
+<li>大規模なデータ取り込み(例えば数百万のベクター)に<code translate="no">insert</code> の代わりに<code translate="no">upsert</code> の操作を使用する場合、Milvusデータノードでのメモリ消費量が多くなる可能性がありますのでご注意ください。</li>
 </ul>
 </div>
 <div class="language-python">
@@ -613,7 +612,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 <div class="language-javascript">
 <p>エンティティが不要になった場合、. <a href="https://milvus.io/api-reference/node/v2.4.x/Vector/delete.md"><code translate="no">delete()</code></a>.</p>
 </div>
-<p>Milvus には、削除するエンティティを特定するための 2 つの方法があります。</p>
+<p>Milvusには、削除するエンティティを特定する2つの方法があります。</p>
 <ul>
 <li><p><strong>フィルタによるエンティティの削除。</strong></p>
    <div class='alert note'>

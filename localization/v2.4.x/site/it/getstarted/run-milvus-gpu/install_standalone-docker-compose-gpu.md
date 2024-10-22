@@ -3,7 +3,7 @@ id: install_standalone-docker-compose-gpu.md
 label: Standalone (Docker Compose)
 related_key: Kubernetes
 summary: Scoprite come installare il cluster Milvus su Kubernetes.
-title: Eseguire Milvus con il supporto delle GPU usando Docker Compose
+title: Esecuzione di Milvus con supporto GPU tramite Docker Compose
 ---
 <h1 id="Run-Milvus-with-GPU-Support-Using-Docker-Compose" class="common-anchor-header">Esecuzione di Milvus con supporto GPU tramite Docker Compose<button data-href="#Run-Milvus-with-GPU-Support-Using-Docker-Compose" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -59,8 +59,8 @@ title: Eseguire Milvus con il supporto delle GPU usando Docker Compose
         ></path>
       </svg>
     </button></h2><p>Per installare Milvus con supporto GPU usando Docker Compose, seguite i seguenti passi.</p>
-<h3 id="1-Download-and-configure-the-YAML-file" class="common-anchor-header">1. Scaricare e configurare il file YAML</h3><p>Scaricare <a href="https://github.com/milvus-io/milvus/releases/download/v2.4.9/milvus-standalone-docker-compose-gpu.yml"><code translate="no">milvus-standalone-docker-compose-gpu.yml</code></a> e salvarlo come docker-compose.yml manualmente o con il seguente comando.</p>
-<pre><code translate="no" class="language-shell">$ wget https://github.com/milvus-io/milvus/releases/download/v2.4.9/milvus-standalone-docker-compose-gpu.yml -O docker-compose.yml
+<h3 id="1-Download-and-configure-the-YAML-file" class="common-anchor-header">1. Scaricare e configurare il file YAML</h3><p>Scaricare <a href="https://github.com/milvus-io/milvus/releases/download/v2.4.13-hotfix/milvus-standalone-docker-compose-gpu.yml"><code translate="no">milvus-standalone-docker-compose-gpu.yml</code></a> e salvarlo come docker-compose.yml manualmente o con il seguente comando.</p>
+<pre><code translate="no" class="language-shell">$ wget https://github.com/milvus-io/milvus/releases/download/v2.4.13-hotfix/milvus-standalone-docker-compose-gpu.yml -O docker-compose.yml
 <button class="copy-code-btn"></button></code></pre>
 <p>È necessario apportare alcune modifiche alle variabili d'ambiente del servizio standalone nel file YAML come segue:</p>
 <ul>

@@ -18,7 +18,8 @@ title: Milvus를 사용한 하이브리드 검색
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/hybrid_search_with_milvus.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a></p>
+    </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/hybrid_search_with_milvus.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
+<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/hybrid_search_with_milvus.ipynb" target="_blank"><img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/></a></p>
 <p><img translate="no" src="https://raw.githubusercontent.com/milvus-io/bootcamp/master/bootcamp/tutorials/quickstart/apps/hybrid_demo_with_milvus/pics/demo.png"/></p>
 <p>이 튜토리얼에서는 <a href="https://milvus.io/docs/multi-vector-search.md">Milvus와</a> <a href="https://github.com/FlagOpen/FlagEmbedding/tree/master/FlagEmbedding/BGE_M3">BGE-M3 모델을</a> 사용하여 하이브리드 검색을 수행하는 방법을 보여드리겠습니다. BGE-M3 모델은 텍스트를 조밀하고 희박한 벡터로 변환할 수 있습니다. Milvus는 두 가지 유형의 벡터를 하나의 컬렉션에 저장하여 결과 연관성을 향상시키는 하이브리드 검색을 지원합니다.</p>
 <p>Milvus는 밀도, 스파스, 하이브리드 검색 방식을 지원합니다:</p>
@@ -201,11 +202,11 @@ def <span class="hljs-title">dense_search</span>(<span class="hljs-params">col, 
 <button class="copy-code-btn"></button></code></pre>
 <p>정의된 함수를 사용하여 세 가지 다른 검색을 실행해 보겠습니다:</p>
 <pre><code translate="no" class="language-python">dense_results = <span class="hljs-title function_">dense_search</span>(col, query_embeddings[<span class="hljs-string">&quot;dense&quot;</span>][<span class="hljs-number">0</span>])
-sparse_results = <span class="hljs-title function_">sparse_search</span>(col, query_embeddings[<span class="hljs-string">&quot;sparse&quot;</span>][<span class="hljs-number">0</span>])
+sparse_results = <span class="hljs-title function_">sparse_search</span>(col, query_embeddings[<span class="hljs-string">&quot;sparse&quot;</span>].<span class="hljs-title function_">_getrow</span>(<span class="hljs-number">0</span>))
 hybrid_results = <span class="hljs-title function_">hybrid_search</span>(
     col,
     query_embeddings[<span class="hljs-string">&quot;dense&quot;</span>][<span class="hljs-number">0</span>],
-    query_embeddings[<span class="hljs-string">&quot;sparse&quot;</span>][<span class="hljs-number">0</span>],
+    query_embeddings[<span class="hljs-string">&quot;sparse&quot;</span>].<span class="hljs-title function_">_getrow</span>(<span class="hljs-number">0</span>),
     sparse_weight=<span class="hljs-number">0.7</span>,
     dense_weight=<span class="hljs-number">1.0</span>,
 )
@@ -283,30 +284,30 @@ formatted_results = doc_text_formatting(ef, query, hybrid_results)
 <p><strong>스파스 검색 결과:</strong></p>
 <p>자바<span style='color:red'> 프로그래밍이란</span> 무엇인가요<span style='color:red'>?</span> 자바 프로그래밍 언어를 배우는<span style='color:red'> 방법</span>?</p>
 <p>로봇 공학을<span style='color:red'> 배우는</span> 가장 좋은 방법은 무엇인가요<span style='color:red'>?</span></p>
-<p>머신<span style='color:red'> 러닝의</span> 대안은 무엇인가요<span style='color:red'>?</span></p>
+<p>머신<span style='color:red'> 러닝의</span> 대안은 무엇인가요?</p>
 <p>C<span style='color:red'> 프로그래밍을</span> 사용하여 Linux에서 새 터미널과 새 셸을 만들려면<span style='color:red'>어떻게해야합니까</span><span style='color:red'>?</span></p>
 <p>C<span style='color:red'> 프로그래밍</span> (Linux 터미널)을 사용하여 새 터미널에서 새 셸을 만들려면<span style='color:red'>어떻게해야하나요</span><span style='color:red'>?</span></p>
 <p>하이데라바드에서 어떤 사업을<span style='color:red'> 시작하는</span> 것이 더 낫습니까<span style='color:red'>?</span></p>
 <p>하이데라바드에서 어떤 사업을<span style='color:red'> 시작하는</span> 것이 좋은가요<span style='color:red'>?</span></p>
 <p>로봇 공학을<span style='color:red'> 시작하는</span> 가장 좋은 방법은 무엇인가요<span style='color:red'>?</span> 작업을<span style='color:red'> 시작할</span> 수있는 최고의 개발 보드는 무엇입니까<span style='color:red'>?</span></p>
-<p>초보자가 컴퓨터<span style='color:red'> 프로그래밍</span> 알고리즘을<span style='color:red'> 이해하려면</span> 어떤 수학이 필요하나요<span style='color:red'>?</span> 완전 초보자에게 적합한 알고리즘 관련 서적은<span style='color:red'> 무엇인가요?</span></p>
-<p><span style='color:red'>어떻게</span> 하면 삶이 자신에게 적합하게 만들고 삶이 정신적, 정서적으로 <span style='color:red'>학대하는</span> 것을 막을 수<span style='color:red'> 있습니까?</span></p>
+<p>초보자가 컴퓨터<span style='color:red'> 프로그래밍</span> 알고리즘을<span style='color:red'> 이해하려면</span> 어떤 수학이 필요하나요<span style='color:red'>?</span> 완전 초보자에게 적합한 알고리즘 관련 서적은 무엇인가요<span style='color:red'>?</span></p>
+<p><span style='color:red'>어떻게</span> 하면 삶이 자신에게 적합하게 만들고 삶이 정신적, 정서적으로 자신을 <span style='color:red'>학대하는</span> 것을 막을 수 있습니까<span style='color:red'>?</span></p>
 <p><strong>하이브리드 검색 결과:</strong></p>
 <p>로봇 공학을<span style='color:red'> 시작하는</span> 가장 좋은 방법은 무엇인가요<span style='color:red'>?</span> 작업을<span style='color:red'> 시작할</span> 수있는 최고의 개발 보드는 무엇입니까<span style='color:red'>?</span></p>
 <p>자바<span style='color:red'> 프로그래밍이란</span> 무엇인가요<span style='color:red'>?</span> 자바 프로그래밍 언어를 배우는<span style='color:red'> 방법</span>?</p>
 <p>로봇 공학을<span style='color:red'> 배우는</span> 가장 좋은 방법은 무엇인가요<span style='color:red'>?</span></p>
 <p>UPSC는<span style='color:red'>어떻게</span> 준비하나요<span style='color:red'>?</span></p>
-<p>물리학을<span style='color:red'> 쉽게</span> 배우려면<span style='color:red'>어떻게</span> 해야<span style='color:red'> 하나요?</span></p>
+<p>물리학을<span style='color:red'> 쉽게</span> 배우려면<span style='color:red'>어떻게</span> 해야 하나요<span style='color:red'>?</span></p>
 <p>프랑스어를 배우는 가장<span style='color:red'> 좋은</span> 방법은 무엇인가요<span style='color:red'>?</span></p>
-<p>영어를 유창하게<span style='color:red'> 배우려면</span><span style='color:red'>어떻게</span> 해야<span style='color:red'> 하나요?</span></p>
+<p>영어를 유창하게<span style='color:red'> 배우려면</span><span style='color:red'>어떻게</span> 해야 하나요<span style='color:red'>?</span></p>
 <p>컴퓨터 보안은<span style='color:red'>어떻게</span> 배울 수 있나요<span style='color:red'>?</span></p>
-<p>정보 보안을<span style='color:red'> 배우려면</span><span style='color:red'>어떻게</span> 시작해야<span style='color:red'> 하나요?</span></p>
-<p>자바 같은 컴퓨터 언어를 배우려면<span style='color:red'>어떻게</span> 해야<span style='color:red'> 하나요?</span></p>
-<p>머신<span style='color:red'> 러닝의</span> 대안은 무엇인가요<span style='color:red'>?</span></p>
-<p>C<span style='color:red'> 프로그래밍을</span> 사용하여 Linux에서 새 터미널과 새 셸을 만들려면<span style='color:red'>어떻게</span> 해야<span style='color:red'> 하나요?</span></p>
+<p>정보 보안을<span style='color:red'> 배우려면</span><span style='color:red'>어떻게</span> 시작해야 하나요<span style='color:red'>?</span></p>
+<p>자바 같은 컴퓨터 언어를 배우려면<span style='color:red'>어떻게</span> 해야 하나요<span style='color:red'>?</span></p>
+<p>머신<span style='color:red'> 러닝의</span> 대안은 무엇인가요?</p>
+<p>C<span style='color:red'> 프로그래밍을</span> 사용하여 Linux에서 새 터미널과 새 셸을 만들려면<span style='color:red'>어떻게</span> 해야 하나요<span style='color:red'>?</span></p>
 <p>C<span style='color:red'> 프로그래밍</span> (Linux 터미널)을 사용하여 새 터미널에서 새 셸을 만들려면<span style='color:red'>어떻게해야하나요</span><span style='color:red'>?</span></p>
 <p>하이데라바드에서 어떤 사업을<span style='color:red'> 시작하는</span> 것이 더 낫습니까<span style='color:red'>?</span></p>
 <p>하이데라바드에서 어떤 사업을<span style='color:red'> 시작하는</span> 것이 좋은가요<span style='color:red'>?</span></p>
-<p>완전한 초보자가 컴퓨터<span style='color:red'> 프로그래밍</span> 알고리즘을<span style='color:red'> 이해하려면</span> 어떤 수학이 필요합니까<span style='color:red'>?</span> 완전한 초보자에게 적합한 알고리즘에 관한 책은<span style='color:red'> 무엇입니까?</span></p>
-<p><span style='color:red'>어떻게</span> 삶을 자신에게 적합하게 만들고 삶이 정신적, 정서적으로 당신을 <span style='color:red'>학대하는</span> 것을 막을 수<span style='color:red'> 있습니까?</span></p>
+<p>완전한 초보자가 컴퓨터<span style='color:red'> 프로그래밍</span> 알고리즘을<span style='color:red'> 이해하려면</span> 어떤 수학이 필요합니까<span style='color:red'>?</span> 완전한 초보자에게 적합한 알고리즘에 관한 책은 무엇입니까<span style='color:red'>?</span></p>
+<p><span style='color:red'>어떻게</span> 삶을 자신에게 적합하게 만들고 삶이 정신적, 정서적으로 당신을 <span style='color:red'>학대하는</span> 것을 막을 수 있습니까<span style='color:red'>?</span></p>
 <h3 id="Quick-Deploy" class="common-anchor-header">빠른 배포</h3><p>이 튜토리얼을 통해 온라인 데모를 시작하는 방법에 대해 알아보려면 <a href="https://github.com/milvus-io/bootcamp/tree/master/bootcamp/tutorials/quickstart/apps/hybrid_demo_with_milvus">예제 애플리케이션을</a> 참조하세요.</p>

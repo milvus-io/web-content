@@ -18,7 +18,8 @@ title: Pesquisa híbrida com Milvus
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/hybrid_search_with_milvus.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a></p>
+    </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/hybrid_search_with_milvus.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
+<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/hybrid_search_with_milvus.ipynb" target="_blank"><img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/></a></p>
 <p><img translate="no" src="https://raw.githubusercontent.com/milvus-io/bootcamp/master/bootcamp/tutorials/quickstart/apps/hybrid_demo_with_milvus/pics/demo.png"/></p>
 <p>Neste tutorial, vamos demonstrar como efetuar uma pesquisa híbrida com <a href="https://milvus.io/docs/multi-vector-search.md">Milvus</a> e <a href="https://github.com/FlagOpen/FlagEmbedding/tree/master/FlagEmbedding/BGE_M3">o modelo BGE-M3</a>. O modelo BGE-M3 pode converter texto em vectores densos e esparsos. O Milvus suporta o armazenamento de ambos os tipos de vectores numa única coleção, permitindo uma pesquisa híbrida que aumenta a relevância dos resultados.</p>
 <p>Milvus suporta métodos de recuperação densos, esparsos e híbridos:</p>
@@ -201,11 +202,11 @@ def <span class="hljs-title">dense_search</span>(<span class="hljs-params">col, 
 <button class="copy-code-btn"></button></code></pre>
 <p>Vamos executar três pesquisas diferentes com as funções definidas:</p>
 <pre><code translate="no" class="language-python">dense_results = <span class="hljs-title function_">dense_search</span>(col, query_embeddings[<span class="hljs-string">&quot;dense&quot;</span>][<span class="hljs-number">0</span>])
-sparse_results = <span class="hljs-title function_">sparse_search</span>(col, query_embeddings[<span class="hljs-string">&quot;sparse&quot;</span>][<span class="hljs-number">0</span>])
+sparse_results = <span class="hljs-title function_">sparse_search</span>(col, query_embeddings[<span class="hljs-string">&quot;sparse&quot;</span>].<span class="hljs-title function_">_getrow</span>(<span class="hljs-number">0</span>))
 hybrid_results = <span class="hljs-title function_">hybrid_search</span>(
     col,
     query_embeddings[<span class="hljs-string">&quot;dense&quot;</span>][<span class="hljs-number">0</span>],
-    query_embeddings[<span class="hljs-string">&quot;sparse&quot;</span>][<span class="hljs-number">0</span>],
+    query_embeddings[<span class="hljs-string">&quot;sparse&quot;</span>].<span class="hljs-title function_">_getrow</span>(<span class="hljs-number">0</span>),
     sparse_weight=<span class="hljs-number">0.7</span>,
     dense_weight=<span class="hljs-number">1.0</span>,
 )
@@ -294,13 +295,13 @@ formatted_results = doc_text_formatting(ef, query, hybrid_results)
 <p><strong>Resultados da pesquisa híbrida:</strong></p>
 <p>Qual é a melhor maneira<span style='color:red'> de começar a trabalhar</span> com robótica<span style='color:red'>?</span> Qual é a melhor placa de desenvolvimento para<span style='color:red'> começar a</span> trabalhar nela<span style='color:red'>?</span></p>
 <p>O que é a<span style='color:red'> programação</span> Java<span style='color:red'>?</span><span style='color:red'> Como</span> aprender a linguagem de programação Java?</p>
-<p>Qual é a melhor forma<span style='color:red'> de começar a aprender</span> robótica<span style='color:red'>?</span></p>
+<p>Qual é a melhor forma de<span style='color:red'> começar a aprender</span> robótica<span style='color:red'>?</span></p>
 <p><span style='color:red'>Como</span> é que nos preparamos para o UPSC<span style='color:red'>?</span></p>
 <p><span style='color:red'>Como</span> é que se pode tornar a física fácil<span style='color:red'> de</span> aprender<span style='color:red'>?</span></p>
 <p>Quais são as melhores maneiras<span style='color:red'> de</span> aprender francês<span style='color:red'>?</span></p>
 <p><span style='color:red'>Como</span> posso aprender<span style='color:red'> a</span> falar inglês fluentemente<span style='color:red'>?</span></p>
-<p><span style='color:red'>Como</span> é<span style='color:red'>que</span> posso aprender segurança informática<span style='color:red'>?</span></p>
-<p><span style='color:red'>Como</span> é<span style='color:red'>que</span> posso começar<span style='color:red'> a</span> aprender segurança informática<span style='color:red'>?</span></p>
+<p><span style='color:red'>Como</span> é que posso aprender segurança informática<span style='color:red'>?</span></p>
+<p><span style='color:red'>Como</span> é que posso começar<span style='color:red'> a</span> aprender segurança informática<span style='color:red'>?</span></p>
 <p><span style='color:red'>Como</span> é que aprendo uma linguagem informática como o java<span style='color:red'>?</span></p>
 <p>Qual é a alternativa<span style='color:red'> à</span><span style='color:red'> aprendizagem</span> automática<span style='color:red'>?</span></p>
 <p><span style='color:red'>Como</span> criar um novo Terminal e um novo shell no Linux usando<span style='color:red'> programação</span> C<span style='color:red'>?</span></p>

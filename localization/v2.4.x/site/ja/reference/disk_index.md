@@ -22,7 +22,7 @@ title: ディスク上のインデックス
     </button></h1><p>この記事では、DiskANN と名付けられたディスク上のインデックス作成アルゴリズムを紹介する。Vamana グラフに基づき、DiskANN は大規模データセット内の効率的な検索を可能にします。</p>
 <p>クエリー性能を向上させるため、各ベクトルフィールドに<a href="/docs/ja/index-vector-fields.md">インデックスタイプを指定する</a>ことができます。</p>
 <div class="alert note"> 
-現在、ベクトルフィールドは1つのインデックスタイプしかサポートしていません。インデックスタイプを切り替えると、Milvusは古いインデックスを自動的に削除します。</div>
+現在、ベクトルフィールドは1つのインデックスタイプしかサポートしていません。Milvusはインデックスタイプを切り替えると、古いインデックスを自動的に削除します。</div>
 <h2 id="Prerequisites" class="common-anchor-header">前提条件<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -40,11 +40,11 @@ title: ディスク上のインデックス
       </svg>
     </button></h2><p>DiskANNを使用するには、以下の点に注意してください。</p>
 <ul>
-<li>DiskANNはデフォルトで有効になっています。オンディスクインデックスよりもインメモリインデックスを好む場合は、より良いパフォーマンスのためにこの機能を無効にすることをお勧めします。<ul>
-<li>無効にするには、milvus設定ファイルの<code translate="no">queryNode.enableDisk</code> を<code translate="no">false</code> に変更します。</li>
+<li>DiskANNはデフォルトで有効になっています。オンディスクインデックスよりもインメモリインデックスを使用したい場合は、パフォーマンスを向上させるためにこの機能を無効にすることをお勧めします。<ul>
+<li>無効にするには、milvus設定ファイルの<code translate="no">queryNode.enableDisk</code> を<code translate="no">false</code> に変更してください。</li>
 <li>再び有効にするには、<code translate="no">queryNode.enableDisk</code> を<code translate="no">true</code> に設定します。</li>
 </ul></li>
-<li>MilvusインスタンスはUbuntu 18.04.6またはそれ以降のリリースで動作します。</li>
+<li>milvusインスタンスはUbuntu 18.04.6またはそれ以降のリリースで動作します。</li>
 <li>MilvusデータパスはNVMe SSDにマウントしてください：<ul>
 <li>Milvusスタンドアロンインスタンスの場合、データパスはインスタンスが動作するコンテナ内の<strong>/var/lib/milvus/dataに</strong>する。</li>
 <li>Milvusクラスタインスタンスの場合、データパスはQueryNodesおよびIndexNodesが実行されるコンテナ内の<strong>/var/lib/milvus/data</strong>である必要があります。</li>
@@ -68,7 +68,7 @@ title: ディスク上のインデックス
     </button></h2><p>DiskANNを使用するには、以下を確認してください。</p>
 <ul>
 <li>データに少なくとも 1 次元の浮動小数点ベクトルだけを使用する。</li>
-<li>ベクトル間の距離を測定するためにユークリッド距離 (L2) または内積 (IP) のみを使用する。</li>
+<li>ベクトル間の距離の測定にはユークリッド距離 (L2)、内積 (IP)、または COSINE のみを使用する。</li>
 </ul>
 <h2 id="Index-and-search-settings" class="common-anchor-header">インデックスと検索の設定<button data-href="#Index-and-search-settings" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -130,7 +130,7 @@ DiskIndex:
 </thead>
 <tbody>
 <tr><td><code translate="no">MaxDegree</code></td><td>Vamanaグラフの最大次数。 <br/> 値を大きくすると想起率が高くなるが、インデックスのサイズと構築時間が増加する。</td><td>[1, 512]</td><td>56</td></tr>
-<tr><td><code translate="no">SearchListSize</code></td><td>候補リストのサイズ。 <br/> 値が大きいほどインデックス構築にかかる時間が長くなるが、高い想起率が得られる。 <br/> インデックス構築時間を短縮する必要がない限り、<code translate="no">MaxDegree</code> より小さい値に設定する。</td><td>[1, int32_max］</td><td>100</td></tr>
+<tr><td><code translate="no">SearchListSize</code></td><td>候補リストのサイズ。 <br/> 値を大きくするとインデックス構築に費やす時間が長くなるが、想起率は高くなる。 <br/> インデックス構築時間を短縮する必要がない限り、<code translate="no">MaxDegree</code> より小さい値に設定する。</td><td>[1, int32_max］</td><td>100</td></tr>
 <tr><td><code translate="no">PQCodeBugetGBRatio</code></td><td>PQコードのサイズ制限。 <br/> 値を大きくすると想起率が高くなるが、メモリ使用量が増加する。</td><td>(0.0, 0.25]</td><td>0.125</td></tr>
 <tr><td><code translate="no">SearchCacheBudgetGBRatio</code></td><td>生データに対するキャッシュされたノード番号の比率。 <br/> 値を大きくするとインデックス構築性能が向上するが、メモリ使用量は増加する。</td><td>[0.0, 0.3)</td><td>0.10</td></tr>
 <tr><td><code translate="no">BeamWidthRatio</code></td><td>検索反復あたりの最大 IO リクエスト数と CPU 数との比率。</td><td>[1, max(128 / CPU数, 16)] を指定する。</td><td>4.0</td></tr>

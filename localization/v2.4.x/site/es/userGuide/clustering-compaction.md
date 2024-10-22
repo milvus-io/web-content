@@ -1,6 +1,6 @@
 ---
 id: clustering-compaction.md
-title: Agrupación Compactación
+title: Compactación en clústeres
 related_key: 'clustering, compaction'
 summary: >-
   La compactación en clústeres está diseñada para mejorar el rendimiento de la
@@ -45,7 +45,7 @@ summary: >-
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/clustering-compaction.png" alt="Without clustering Compaction" class="doc-image" id="without-clustering-compaction" />
    </span> <span class="img-wrapper"> <span>Compactación sin agrupación</span> </span></p>
 <p>Si Milvus puede distribuir entidades entre segmentos basándose en los valores de un campo específico, el alcance de la búsqueda puede restringirse dentro de un segmento, mejorando así el rendimiento de la búsqueda.</p>
-<p><strong>La compactación por agrupamiento</strong> es una función de Milvus que redistribuye las entidades entre los segmentos de una colección basándose en los valores de un campo escalar. Para activar esta función, primero debe seleccionar un campo escalar como <strong>clave de agrupación</strong>. Esto permite a Milvus redistribuir entidades en un segmento cuando sus valores de clave de agrupación caen dentro de un rango específico. Cuando usted activa una compactación de clustering, Milvus genera/actualiza un índice global llamado <strong>PartitionStats</strong>, que registra la relación de mapeo entre segmentos y valores de clave de clustering.</p>
+<p>La<strong>compactación por agrupamiento</strong> es una función de Milvus que redistribuye las entidades entre los segmentos de una colección basándose en los valores de un campo escalar. Para activar esta función, primero debe seleccionar un campo escalar como <strong>clave de agrupación</strong>. Esto permite a Milvus redistribuir entidades en un segmento cuando sus valores de clave de agrupación caen dentro de un rango específico. Cuando usted activa una compactación de clustering, Milvus genera/actualiza un índice global llamado <strong>PartitionStats</strong>, que registra la relación de mapeo entre segmentos y valores de clave de clustering.</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/clustering-compaction-2.png" alt="With Clustering Compaction" class="doc-image" id="with-clustering-compaction" />
@@ -99,8 +99,8 @@ common:
 <tr><td><code translate="no">enable</code></td><td>Especifica si se habilita la compactación en clúster.<br>Configure esta opción en <code translate="no">true</code> si necesita habilitar esta función para cada colección que tenga una clave de agrupación.</td><td><code translate="no">false</code></td></tr>
 <tr><td><code translate="no">autoEnable</code></td><td>Especifica si se activa la compactación automática.<br>Si se establece en <code translate="no">true</code>, Milvus compactará las colecciones que tengan una clave de agrupación en los intervalos especificados.</td><td><code translate="no">false</code></td></tr>
 <tr><td><code translate="no">triggerInterval</code></td><td>Especifica el intervalo en milisegundos en el que Milvus inicia la compactación de agrupaciones.<br>Este parámetro sólo es válido cuando <code translate="no">autoEnable</code> se establece en <code translate="no">true</code>.</td><td>-</td></tr>
-<tr><td><code translate="no">minInterval</code></td><td>Especifica el intervalo mínimo en milisegundos.<br>Este parámetro sólo es válido si <code translate="no">autoEnable</code> está configurado como <code translate="no">true</code>.<br>Establecerlo en un número entero mayor que triggerInterval ayuda a evitar compactaciones repetidas en un período corto.</td><td>-</td></tr>
-<tr><td><code translate="no">maxInterval</code></td><td>Especifica el intervalo máximo en milisegundos.<br>Este parámetro sólo es válido cuando <code translate="no">autoEnable</code> está configurado como <code translate="no">true</code>.<br>Una vez que Milvus detecta que una colección no ha sido compactada en clúster durante un periodo superior a este valor, fuerza una compactación en clúster.</td><td>-</td></tr>
+<tr><td><code translate="no">minInterval</code></td><td>Especifica el intervalo mínimo en segundos.<br>Este parámetro sólo es válido cuando <code translate="no">autoEnable</code> está configurado como <code translate="no">true</code>.<br>Establecerlo en un número entero mayor que triggerInterval ayuda a evitar compactaciones repetidas en un período corto.</td><td>-</td></tr>
+<tr><td><code translate="no">maxInterval</code></td><td>Especifica el intervalo máximo en segundos.<br>Este parámetro sólo es válido cuando <code translate="no">autoEnable</code> está configurado como <code translate="no">true</code>.<br>Una vez que Milvus detecta que una colección no ha sido compactada en clúster durante un periodo superior a este valor, fuerza una compactación en clúster.</td><td>-</td></tr>
 <tr><td><code translate="no">newDataSizeThreshold</code></td><td>Especifica el umbral superior para activar una compactación en clúster.<br>Este parámetro sólo es válido cuando <code translate="no">autoEnable</code> está configurado como <code translate="no">true</code>.<br>Una vez que Milvus detecta que el volumen de datos de una colección supera este valor, inicia un proceso de compactación en clúster.</td><td>-</td></tr>
 <tr><td><code translate="no">timeout</code></td><td>Especifica la duración del tiempo de espera para una compactación en clúster.<br>Una compactación en clúster falla si su tiempo de ejecución supera este valor.</td><td>-</td></tr>
 </tbody>
@@ -119,7 +119,7 @@ common:
 <li><p><code translate="no">dataNode.clusteringCompaction</code></p>
 <table>
 <thead>
-<tr><th>Elemento de configuración</th><th>Descripción</th><th>Valor por defecto</th></tr>
+<tr><th>Configuración Elemento</th><th>Descripción</th><th>Valor por defecto</th></tr>
 </thead>
 <tbody>
 <tr><td><code translate="no">memoryBufferRatio</code></td><td>Especifica la proporción de memoria intermedia para las tareas de compactación en clúster. <br>Milvus vacía los datos cuando el tamaño de los datos excede el tamaño del búfer asignado calculado utilizando este ratio.</td><td>-</td></tr>
@@ -139,22 +139,7 @@ common:
 </li>
 </ul>
 <p>Para aplicar los cambios anteriores a su cluster Milvus, por favor siga los pasos en <a href="/docs/es/configure-helm.md">Configurar Milvus con Helm</a> y <a href="/docs/es/configure_operator.md">Configurar Milvus con Milvus Operators</a>.</p>
-<h2 id="Collection-Configuration" class="common-anchor-header">Configuración de la colección<button data-href="#Collection-Configuration" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h2><p>Para la compactación en cluster en una colección específica, debe seleccionar un campo escalar de la colección como clave de cluster.</p>
+<h3 id="Collection-Configuration" class="common-anchor-header">Configuración de la colección</h3><p>Para la compactación en cluster en una colección específica, debe seleccionar un campo escalar de la colección como clave de cluster.</p>
 <pre><code translate="no" class="language-python">default_fields = [
     FieldSchema(name=<span class="hljs-string">&quot;id&quot;</span>, dtype=DataType.INT64, is_primary=<span class="hljs-literal">True</span>),
     FieldSchema(name=<span class="hljs-string">&quot;key&quot;</span>, dtype=DataType.INT64, is_clustering_key=<span class="hljs-literal">True</span>),
@@ -170,7 +155,7 @@ default_schema = CollectionSchema(
 coll1 = Collection(name=<span class="hljs-string">&quot;clustering_test&quot;</span>, schema=default_schema)
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>Puede utilizar los campos escalares de los siguientes tipos de datos como clave de agrupación: <code translate="no">Int8</code>, <code translate="no">Int16</code>, <code translate="no">Int32</code>, <code translate="no">Int64</code>, <code translate="no">Float</code>, <code translate="no">Double</code>, y <code translate="no">VarChar</code>.</p>
+<p>Puede utilizar los campos escalares de los siguientes tipos de datos como clave de agrupación: <code translate="no">Int8</code>, <code translate="no">Int16</code>, <code translate="no">Int32</code>, <code translate="no">Int64</code>, <code translate="no">Float</code>, <code translate="no">Double</code> y <code translate="no">VarChar</code>.</p>
 </div>
 <h2 id="Trigger-Clustering-Compaction" class="common-anchor-header">Activar la compactación en clúster<button data-href="#Trigger-Clustering-Compaction" class="anchor-icon" translate="no">
       <svg translate="no"

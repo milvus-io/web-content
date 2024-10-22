@@ -1,7 +1,6 @@
 ---
 id: manage-partitions.md
-title: Partitionen verwalten
-summary: ''
+title: Verwalten von Partitionen
 ---
 <h1 id="Manage-Partitions" class="common-anchor-header">Verwalten von Partitionen<button data-href="#Manage-Partitions" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -64,7 +63,7 @@ summary: ''
 <p>Für Vorbereitungen verwenden Sie <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Client/MilvusClientV2.md"><code translate="no">MilvusClientV2</code></a> um eine Verbindung zu Milvus herzustellen und <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Collections/createCollection.md"><code translate="no">createCollection()</code></a> um eine Sammlung im Schnelleinstellungsmodus anzulegen.</p>
 </div>
 <div class="language-javascript">
-<p>Für Vorbereitungen, verwenden Sie <a href="https://milvus.io/api-reference/node/v2.4.x/Client/MilvusClient.md"><code translate="no">MilvusClient</code></a> um eine Verbindung zu Milvus herzustellen und <a href="https://milvus.io/api-reference/node/v2.4.x/Collections/createCollection.md"><code translate="no">createCollection()</code></a> um eine Sammlung im Schnelleinrichtungsmodus zu erstellen.</p>
+<p>Für Vorbereitungen, verwenden Sie <a href="https://milvus.io/api-reference/node/v2.4.x/Client/MilvusClient.md"><code translate="no">MilvusClient</code></a> um eine Verbindung zu Milvus herzustellen und <a href="https://milvus.io/api-reference/node/v2.4.x/Collections/createCollection.md"><code translate="no">createCollection()</code></a> um eine Sammlung im Quick-Setup-Modus zu erstellen.</p>
 </div>
 <div class="multipleCode">
    <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a></div>
@@ -183,7 +182,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 <div class="admonition note">
 <p><b>Hinweise</b></p>
 <p>Wenn Sie ein Feld als Partitionsschlüssel in einer Sammlung festgelegt haben, erstellt Milvus mindestens <strong>64</strong> Partitionen zusammen mit der Sammlung. Bei der Auflistung der Partitionen können die Ergebnisse von der Ausgabe der obigen Codeschnipsel abweichen.</p>
-<p>Details finden Sie unter <a href="https://milvus.io/docs/use-partition-key.md">Partitionsschlüssel verwenden</a>.</p>
+<p>Details dazu finden Sie unter <a href="https://milvus.io/docs/use-partition-key.md">Partitionsschlüssel verwenden</a>.</p>
 </div>
 <h2 id="Create-Partitions" class="common-anchor-header">Partitionen erstellen<button data-href="#Create-Partitions" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -735,6 +734,16 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 <span class="hljs-comment">// LoadStateLoaded</span>
 <span class="hljs-comment">// </span>
 <button class="copy-code-btn"></button></code></pre>
+<p>Um bestimmte Felder in einer oder mehreren Partitionen zu laden, gehen Sie wie folgt vor:</p>
+<pre><code translate="no" class="language-python">client.load_partitions(
+    collection_name=<span class="hljs-string">&quot;quick_setup&quot;</span>,
+    partition_names=[<span class="hljs-string">&quot;partitionA&quot;</span>],
+    load_fields=[<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-string">&quot;vector&quot;</span>],
+    skip_load_dynamic_field=<span class="hljs-literal">True</span>
+)
+<button class="copy-code-btn"></button></code></pre>
+<p>Beachten Sie, dass nur die in <code translate="no">load_fields</code> aufgeführten Felder als Filterbedingungen und Ausgabefelder in Suchen und Abfragen verwendet werden können. Sie sollten immer den Primärschlüssel in die Liste aufnehmen. Die Feldnamen, die vom Laden ausgeschlossen sind, stehen nicht für die Filterung oder Ausgabe zur Verfügung.</p>
+<p>Sie können <code translate="no">skip_load_dynamic_field=True</code> verwenden, um das Laden des dynamischen Feldes zu überspringen. Milvus behandelt das dynamische Feld als ein einziges Feld, so dass alle Schlüssel des dynamischen Feldes gemeinsam ein- oder ausgeschlossen werden.</p>
 <h3 id="Release-Partitions" class="common-anchor-header">Partitionen freigeben</h3><div class="language-python">
 <p>Um alle Partitionen einer Sammlung freizugeben, können Sie einfach <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/release_collection.md"><code translate="no">release_collection()</code></a>. Um bestimmte Partitionen einer Sammlung freizugeben, verwenden Sie <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Partitions/release_partitions.md"><code translate="no">release_partitions()</code></a>.</p>
 </div>
@@ -930,7 +939,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 <li><p><strong>Wie viele Daten können in einer Partition gespeichert werden?</strong></p>
 <p>Es wird empfohlen, weniger als 1B an Daten in einer Partition zu speichern.</p></li>
 <li><p><strong>Wie viele Partitionen können maximal erstellt werden?</strong></p>
-<p>Standardmäßig erlaubt Milvus die Erstellung von bis zu 4.096 Partitionen. Sie können die maximale Anzahl der Partitionen anpassen, indem Sie <code translate="no">rootCoord.maxPartitionNum</code> konfigurieren. Einzelheiten finden Sie unter <a href="https://milvus.io/docs/configure_rootcoord.md#rootCoordmaxPartitionNum">Systemkonfigurationen</a>.</p></li>
+<p>Standardmäßig erlaubt Milvus die Erstellung von maximal 1.024 Partitionen. Sie können die maximale Anzahl der Partitionen anpassen, indem Sie <code translate="no">rootCoord.maxPartitionNum</code> konfigurieren. Einzelheiten finden Sie unter <a href="https://milvus.io/docs/configure_rootcoord.md#rootCoordmaxPartitionNum">Systemkonfigurationen</a>.</p></li>
 <li><p><strong>Wie kann ich zwischen Partitionen und Partitionsschlüsseln unterscheiden?</strong></p>
 <p>Partitionen sind physische Speichereinheiten, während Partitionsschlüssel logische Konzepte sind, die Daten automatisch bestimmten Partitionen auf der Grundlage einer bestimmten Spalte zuweisen.</p>
 <p>Wenn Sie beispielsweise in Milvus eine Sammlung mit einem Partitionsschlüssel haben, der als Feld <code translate="no">color</code> definiert ist, ordnet das System die Daten automatisch den Partitionen zu, basierend auf den Hash-Werten des Feldes <code translate="no">color</code> für jede Entität. Dieser automatisierte Prozess entbindet den Benutzer von der Verantwortung, die Partition beim Einfügen oder Suchen von Daten manuell anzugeben.</p>

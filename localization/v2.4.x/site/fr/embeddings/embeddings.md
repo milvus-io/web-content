@@ -23,7 +23,7 @@ title: Vue d'ensemble de l'intégration
 <p>Il existe deux catégories principales d'encastrements, chacune produisant un type de vecteur différent :</p>
 <ul>
 <li><p><strong>L</strong>'<strong>encastrement dense</strong>: La plupart des modèles d'intégration représentent l'information sous la forme d'un vecteur à virgule flottante de centaines ou de milliers de dimensions. Les résultats sont appelés vecteurs "denses" car la plupart des dimensions ont des valeurs non nulles. Par exemple, le modèle d'intégration à code source ouvert BAAI/bge-base-fr-v1.5 produit des vecteurs de 768 nombres à virgule flottante (vecteur flottant à 768 dimensions).</p></li>
-<li><p><strong>Enrobage clairsemé</strong>: En revanche, les vecteurs de sortie des encapsulages épars ont la plupart des dimensions égales à zéro, c'est-à-dire des vecteurs "épars". Ces vecteurs ont souvent des dimensions beaucoup plus élevées (des dizaines de milliers ou plus), qui sont déterminées par la taille du vocabulaire de jetons. Les vecteurs épars peuvent être générés par des réseaux neuronaux profonds ou par l'analyse statistique de corpus de textes. En raison de leur facilité d'interprétation et de leurs meilleures capacités de généralisation hors domaine, les vecteurs épars sont de plus en plus adoptés par les développeurs en complément des vecteurs denses.</p></li>
+<li><p><strong>Enrobage clairsemé</strong>: En revanche, les vecteurs de sortie des encapsulages épars ont la plupart des dimensions égales à zéro, c'est-à-dire des vecteurs "épars". Ces vecteurs ont souvent des dimensions beaucoup plus élevées (des dizaines de milliers ou plus) qui sont déterminées par la taille du vocabulaire de jetons. Les vecteurs épars peuvent être générés par des réseaux neuronaux profonds ou par l'analyse statistique de corpus de textes. En raison de leur facilité d'interprétation et de leurs meilleures capacités de généralisation hors domaine, les vecteurs épars sont de plus en plus adoptés par les développeurs en complément des vecteurs denses.</p></li>
 </ul>
 <p>Milvus est une base de données vectorielles conçue pour la gestion, le stockage et l'extraction de données vectorielles. Grâce à l'intégration des modèles d'intégration et de <a href="https://milvus.io/docs/rerankers-overview.md">reclassement</a>, vous pouvez facilement transformer un texte original en vecteurs consultables ou reclasser les résultats à l'aide de modèles puissants afin d'obtenir des résultats plus précis pour le RAG. Cette intégration simplifie la transformation du texte et élimine le besoin de composants d'intégration ou de reclassement supplémentaires, ce qui rationalise le développement et la validation des RAG.</p>
 <p>Pour créer des embeddings en action, voir <a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/model/embedding_functions.ipynb">Utilisation du modèle de PyMilvus pour générer des embeddings de texte</a>.</p>
@@ -40,9 +40,13 @@ title: Vue d'ensemble de l'intégration
 <tr><td><a href="https://milvus.io/api-reference/pymilvus/v2.4.x/EmbeddingModels/VoyageEmbeddingFunction/VoyageEmbeddingFunction.md">voyageai</a></td><td>Dense</td><td>API</td></tr>
 <tr><td><a href="https://milvus.io/api-reference/pymilvus/v2.4.x/EmbeddingModels/JinaEmbeddingFunction/JinaEmbeddingFunction.md">jina</a></td><td>Dense</td><td>API</td></tr>
 <tr><td><a href="https://milvus.io/api-reference/pymilvus/v2.4.x/EmbeddingModels/CohereEmbeddingFunction/CohereEmbeddingFunction.md">cohère</a></td><td>Dense</td><td>API</td></tr>
+<tr><td><a href="https://milvus.io/api-reference/pymilvus/v2.4.x/EmbeddingModels/InstructorEmbeddingFunction/InstructorEmbeddingFunction.md">Instructeur</a></td><td>Dense</td><td>Open-sourced</td></tr>
+<tr><td><a href="https://milvus.io/api-reference/pymilvus/v2.4.x/EmbeddingModels/MistralAIEmbeddingFunction/MistralAIEmbeddingFunction.md">Mistral AI</a></td><td>Dense</td><td>API</td></tr>
+<tr><td><a href="https://milvus.io/api-reference/pymilvus/v2.4.x/EmbeddingModels/NomicEmbeddingFunction/NomicEmbeddingFunction.md">Nomic</a></td><td>Dense</td><td>API</td></tr>
+<tr><td><a href="https://milvus.io/api-reference/pymilvus/v2.4.x/EmbeddingModels/MGTEEmbeddingFunction/MGTEEmbeddingFunction.md">mGTE</a></td><td>Hybride</td><td>Open-sourced</td></tr>
 </tbody>
 </table>
-<h2 id="Example-1-Use-default-embedding-function-to-generate-dense-vectors" class="common-anchor-header">Exemple 1 : utiliser la fonction d'intégration par défaut pour générer des vecteurs denses<button data-href="#Example-1-Use-default-embedding-function-to-generate-dense-vectors" class="anchor-icon" translate="no">
+<h2 id="Example-1-Use-default-embedding-function-to-generate-dense-vectors" class="common-anchor-header">Exemple 1 : Utiliser la fonction d'intégration par défaut pour générer des vecteurs denses<button data-href="#Example-1-Use-default-embedding-function-to-generate-dense-vectors" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -57,7 +61,7 @@ title: Vue d'ensemble de l'intégration
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Pour utiliser les fonctions d'intégration avec Milvus, installez d'abord la bibliothèque client PyMilvus avec le sous-paquetage <code translate="no">model</code> qui contient tous les utilitaires de génération d'intégration.</p>
+    </button></h2><p>Pour utiliser les fonctions d'intégration avec Milvus, installez d'abord la bibliothèque client PyMilvus avec le sous-paquetage <code translate="no">model</code> qui contient tous les utilitaires pour la génération d'intégration.</p>
 <pre><code translate="no" class="language-python">pip install <span class="hljs-string">&quot;pymilvus[model]&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Le sous-paquet <code translate="no">model</code> prend en charge différents modèles d'intégration, depuis <a href="https://milvus.io/docs/embed-with-openai.md">OpenAI</a>, <a href="https://milvus.io/docs/embed-with-sentence-transform.md">Sentence Transformers</a>, <a href="https://milvus.io/docs/embed-with-bgm-m3.md">BGE M3</a>, <a href="https://milvus.io/docs/embed-with-bm25.md">BM25</a>, jusqu'aux modèles pré-entraînés <a href="https://milvus.io/docs/embed-with-splade.md">SPLADE</a>. Par souci de simplicité, cet exemple utilise le modèle <code translate="no">DefaultEmbeddingFunction</code> qui est un modèle de transformateur de phrase <strong>tout-MiniLM-L6-v2</strong>. Le modèle pèse environ 70 Mo et il sera téléchargé lors de la première utilisation :</p>
@@ -108,7 +112,7 @@ Dim: <span class="hljs-number">384</span> (<span class="hljs-number">384</span>,
     </button></h2><p>Dans cet exemple, nous utilisons le modèle hybride <a href="https://milvus.io/docs/embed-with-bgm-m3.md">BGE M3</a> pour intégrer du texte dans des vecteurs denses et épars et les utiliser pour retrouver des documents pertinents. Les étapes générales sont les suivantes :</p>
 <ol>
 <li><p>Incorporer le texte dans des vecteurs denses et épars à l'aide du modèle BGE-M3 ;</p></li>
-<li><p>Création d'une collection Milvus pour stocker les vecteurs denses et épars ;</p></li>
+<li><p>Mise en place d'une collection Milvus pour stocker les vecteurs denses et épars ;</p></li>
 <li><p>Insérer les données dans Milvus ;</p></li>
 <li><p>Rechercher et inspecter le résultat.</p></li>
 </ol>
@@ -153,7 +157,7 @@ query_embeddings = bge_m3_ef([query])
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>BM25 est une méthode bien connue qui utilise les fréquences d'occurrence des mots pour déterminer la pertinence entre les requêtes et les documents. Dans cet exemple, nous allons montrer comment utiliser <code translate="no">BM25EmbeddingFunction</code> pour générer des vecteurs d'encastrement clairsemés pour les requêtes et les documents.</p>
+    </button></h2><p>BM25 est une méthode bien connue qui utilise les fréquences d'occurrence des mots pour déterminer la pertinence entre les requêtes et les documents. Dans cet exemple, nous allons montrer comment utiliser <code translate="no">BM25EmbeddingFunction</code> pour générer des encastrements épars pour les requêtes et les documents.</p>
 <p>Tout d'abord, importez la classe <strong>BM25EmbeddingFunction</strong>.</p>
 <pre><code translate="no" class="language-xml"><span class="hljs-keyword">from</span> pymilvus.<span class="hljs-property">model</span>.<span class="hljs-property">sparse</span> <span class="hljs-keyword">import</span> <span class="hljs-title class_">BM25EmbeddingFunction</span>
 <button class="copy-code-btn"></button></code></pre>

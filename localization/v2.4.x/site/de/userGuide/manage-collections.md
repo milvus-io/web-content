@@ -1,6 +1,6 @@
 ---
 id: manage-collections.md
-title: Sammlungen verwalten
+title: Verwalten von Sammlungen
 ---
 <h1 id="Manage-Collections" class="common-anchor-header">Verwalten von Sammlungen<button data-href="#Manage-Collections" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -1138,7 +1138,7 @@ $ curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable
     </tr>
     <tr>
       <td><code translate="no">index_type</code></td>
-      <td>Der Name des Algorithmus, der für die Anordnung der Daten in dem betreffenden Feld verwendet wird. Anwendbare Algorithmen finden Sie unter <a href="https://milvus.io/docs/index.md">In-Memory-Index</a> und <a href="https://milvus.io/docs/disk_index.md">On-Disk-Index</a>.</td>
+      <td>Der Name des Algorithmus, der zur Anordnung der Daten in dem spezifischen Feld verwendet wird. Anwendbare Algorithmen finden Sie unter <a href="https://milvus.io/docs/index.md">In-Memory-Index</a> und <a href="https://milvus.io/docs/disk_index.md">On-Disk-Index</a>.</td>
     </tr>
     <tr>
       <td><code translate="no">metric_type</code></td>
@@ -1176,7 +1176,7 @@ $ curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable
         </tr>
         <tr>
         <td><code translate="no">indexParams.indexName</code></td>
-        <td>Der Name des zu erstellenden Indexes; der Standardwert ist der Name des Zielfeldes.</td>
+        <td>Der Name des zu erstellenden Index, der Wert ist standardmäßig der Name des Zielfeldes.</td>
         </tr>
         <tr>
         <td><code translate="no">indexParams.indexConfig.index_type</code></td>
@@ -1210,10 +1210,10 @@ $ curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable
 <p>Um die Details einer bestehenden Sammlung zu überprüfen, verwenden Sie <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Collections/describeCollection.md">describeCollection()</a>.</p>
 </div>
 <div class="language-javascript">
-<p>Um die Details einer bestehenden Sammlung zu prüfen, verwenden Sie <a href="https://milvus.io/api-reference/node/v2.4.x/Collections/describeCollection.md">describeCollection()</a>.</p>
+<p>Um die Details einer bestehenden Sammlung zu überprüfen, verwenden Sie <a href="https://milvus.io/api-reference/node/v2.4.x/Collections/describeCollection.md">describeCollection()</a>.</p>
 </div>
 <div class="language-shell">
-<p>Um die Definition einer Sammlung anzuzeigen, können Sie die <a href="https://milvus.io/api-reference/restful/v2.4.x/v2/Collection%20(v2)/Describe.md"><code translate="no">POST /v2/vectordb/collections/describe</code></a> und die <a href="https://milvus.io/api-reference/restful/v2.4.x/v2/Collection%20(v2)/List.md"><code translate="no">POST /v2/vectordb/collections/list</code></a> API-Endpunkte verwenden.</p>
+<p>Um die Definition einer Sammlung zu sehen, können Sie die <a href="https://milvus.io/api-reference/restful/v2.4.x/v2/Collection%20(v2)/Describe.md"><code translate="no">POST /v2/vectordb/collections/describe</code></a> und die <a href="https://milvus.io/api-reference/restful/v2.4.x/v2/Collection%20(v2)/List.md"><code translate="no">POST /v2/vectordb/collections/list</code></a> API-Endpunkte verwenden.</p>
 </div>
 <div class="multipleCode">
    <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#shell">cURL</a></div>
@@ -1593,11 +1593,38 @@ $ curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable
 <span class="hljs-comment">#     }</span>
 <span class="hljs-comment"># }</span>
 <button class="copy-code-btn"></button></code></pre>
+<h3 id="Load-a-collection-partially-Public-Preview" class="common-anchor-header">Eine Sammlung teilweise laden (öffentliche Vorschau)</h3><div class="alert note">
+<p>Diese Funktion befindet sich derzeit in der öffentlichen Vorschau. Die API und die Funktionalität können sich in Zukunft noch ändern.</p>
+</div>
+<p>Beim Empfang Ihrer Ladeanforderung lädt Milvus alle Vektorfeld-Indizes und alle skalaren Felddaten in den Speicher. Wenn einige Felder nicht in Suchen und Abfragen einbezogen werden sollen, können Sie sie vom Laden ausschließen, um die Speichernutzung zu reduzieren und die Suchleistung zu verbessern.</p>
+<div class="language-python">
+<pre><code translate="no" class="language-python"><span class="hljs-comment"># 7. Load the collection</span>
+client.load_collection(
+    collection_name=<span class="hljs-string">&quot;customized_setup_2&quot;</span>,
+    load_fields=[<span class="hljs-string">&quot;my_id&quot;</span>, <span class="hljs-string">&quot;my_vector&quot;</span>] <span class="hljs-comment"># Load only the specified fields</span>
+    skip_load_dynamic_field=<span class="hljs-literal">True</span> <span class="hljs-comment"># Skip loading the dynamic field</span>
+)
+
+res = client.get_load_state(
+    collection_name=<span class="hljs-string">&quot;customized_setup_2&quot;</span>
+)
+
+<span class="hljs-built_in">print</span>(res)
+
+<span class="hljs-comment"># Output</span>
+<span class="hljs-comment">#</span>
+<span class="hljs-comment"># {</span>
+<span class="hljs-comment">#     &quot;state&quot;: &quot;&lt;LoadState: Loaded&gt;&quot;</span>
+<span class="hljs-comment"># }</span>
+<button class="copy-code-btn"></button></code></pre>
+<p>Beachten Sie, dass nur die in <code translate="no">load_fields</code> aufgeführten Felder als Filterbedingungen und Ausgabefelder in Suchen und Abfragen verwendet werden können. Sie sollten immer den Primärschlüssel in die Liste aufnehmen. Die Feldnamen, die vom Laden ausgeschlossen sind, sind nicht für die Filterung oder Ausgabe verfügbar.</p>
+<p>Sie können <code translate="no">skip_load_dynamic_field=True</code> verwenden, um das Laden des dynamischen Feldes zu überspringen. Milvus behandelt das dynamische Feld als ein einziges Feld, so dass alle Schlüssel des dynamischen Feldes zusammen einbezogen oder ausgeschlossen werden.</p>
+</div>
 <h3 id="Release-a-collection" class="common-anchor-header">Eine Sammlung freigeben</h3><div class="language-python">
 <p>Um eine Sammlung freizugeben, verwenden Sie die <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/release_collection.md"><code translate="no">release_collection()</code></a> Methode und geben Sie den Namen der Sammlung an.</p>
 </div>
 <div class="language-java">
-<p>Um eine Sammlung freizugeben, verwenden Sie die <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Management/releaseCollection.md"><code translate="no">releaseCollection()</code></a> Methode und geben Sie den Namen der Sammlung an.</p>
+<p>Um eine Sammlung freizugeben, verwenden Sie die Methode <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Management/releaseCollection.md"><code translate="no">releaseCollection()</code></a> Methode unter Angabe des Sammlungsnamens.</p>
 </div>
 <div class="language-javascript">
 <p>Um eine Sammlung freizugeben, verwenden Sie die <a href="https://milvus.io/api-reference/node/v2.4.x/Management/releaseCollection.md"><code translate="no">releaseCollection()</code></a> Methode und geben Sie den Namen der Sammlung an.</p>
@@ -2323,7 +2350,7 @@ collection.set_properties(
     }
 )
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Set-MMAP" class="common-anchor-header">MMAP einstellen</h3><p>Konfigurieren Sie die Eigenschaft Speicherzuordnung (MMAP) für die Sammlung, die festlegt, ob Daten im Speicher abgebildet werden, um die Abfrageleistung zu verbessern. Weitere Informationen finden Sie unter <a href="https://milvus.io/docs/mmap.md#Configure-memory-mapping">Konfigurieren der Speicherzuordnung .</a></p>
+<h3 id="Set-MMAP" class="common-anchor-header">MMAP einstellen</h3><p>Konfigurieren Sie die Eigenschaft Speicherzuordnung (MMAP) für die Sammlung, die festlegt, ob Daten im Speicher abgebildet werden, um die Abfrageleistung zu verbessern. Weitere Informationen finden Sie unter <a href="https://milvus.io/docs/mmap.md#Configure-memory-mapping">Konfigurieren der Speicherzuordnung</a>.</p>
 <div class="alert note">
 <p>Bevor Sie die MMAP-Eigenschaft einstellen, müssen Sie die Sammlung zuerst freigeben. Andernfalls tritt ein Fehler auf.</p>
 </div>

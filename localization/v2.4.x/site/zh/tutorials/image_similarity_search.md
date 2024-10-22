@@ -1,7 +1,7 @@
 ---
 id: image_similarity_search.md
 summary: 使用 Milvus 进行图像搜索
-title: 使用 Milvus 进行图像搜索
+title: 使用 Milvus 搜索图像
 ---
 <h1 id="Image-Search-with-Milvus" class="common-anchor-header">使用 Milvus 搜索图像<button data-href="#Image-Search-with-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -18,7 +18,8 @@ title: 使用 Milvus 进行图像搜索
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/image_search_with_milvus.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a></p>
+    </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/image_search_with_milvus.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
+<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/image_search_with_milvus.ipynb" target="_blank"><img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/></a></p>
 <p><img translate="no" src="https://raw.githubusercontent.com/milvus-io/bootcamp/master/bootcamp/tutorials/quickstart/apps/image_search_with_milvus/pics/image_search_demo.png"/></p>
 <p>在本笔记本中，我们将向您展示如何使用 Milvus 在数据集中搜索相似图像。我们将使用<a href="https://www.image-net.org/">ImageNet</a>数据集的一个子集，然后搜索阿富汗猎犬的图像来演示这一点。</p>
 <h2 id="Dataset-Preparation" class="common-anchor-header">数据集准备<button data-href="#Dataset-Preparation" class="anchor-icon" translate="no">
@@ -86,7 +87,7 @@ $ pip install timm
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>然后，我们需要定义一个特征提取器，使用 timm 的 ResNet-34 模型从图像中提取嵌入。</p>
+    </button></h2><p>然后，我们需要定义一个特征提取器，使用 timm 的 ResNet-34 模型从图像中提取嵌入信息。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> torch
 <span class="hljs-keyword">from</span> PIL <span class="hljs-keyword">import</span> Image
 <span class="hljs-keyword">import</span> timm
@@ -127,7 +128,7 @@ $ pip install timm
 
         <span class="hljs-keyword">return</span> normalize(feature_vector.reshape(<span class="hljs-number">1</span>, -<span class="hljs-number">1</span>), norm=<span class="hljs-string">&quot;l2&quot;</span>).flatten()
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Create-a-Milvus-Collection" class="common-anchor-header">创建 Milvus 集合<button data-href="#Create-a-Milvus-Collection" class="anchor-icon" translate="no">
+<h2 id="Create-a-Milvus-Collection" class="common-anchor-header">创建 Milvus Collections<button data-href="#Create-a-Milvus-Collection" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -142,7 +143,7 @@ $ pip install timm
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>然后，我们需要创建一个 Milvus 集合来存储图像嵌入。</p>
+    </button></h2><p>然后，我们需要创建 Milvus Collections 来存储图像嵌入信息</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 <span class="hljs-comment"># Set up a Milvus client</span>
@@ -167,7 +168,7 @@ client.create_collection(
 <li>如果你想使用<a href="https://zilliz.com/cloud">Zilliz Cloud</a>（Milvus 的全托管云服务），请调整<code translate="no">uri</code> 和<code translate="no">token</code> ，它们与 Zilliz Cloud 中的<a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">公共端点和 Api 密钥</a>相对应。</li>
 </ul>
 </div>
-<h2 id="Insert-the-Embeddings-to-Milvus" class="common-anchor-header">将嵌入信息插入 Milvus<button data-href="#Insert-the-Embeddings-to-Milvus" class="anchor-icon" translate="no">
+<h2 id="Insert-the-Embeddings-to-Milvus" class="common-anchor-header">将嵌入数据插入 Milvus<button data-href="#Insert-the-Embeddings-to-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -182,7 +183,7 @@ client.create_collection(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>我们将使用 ResNet34 模型提取每张图片的嵌入信息，并将训练集中的图片插入 Milvus。</p>
+    </button></h2><p>我们将使用 ResNet34 模型提取每张图片的嵌入，并将训练集中的图片插入 Milvus。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> os
 
 extractor = FeatureExtractor(<span class="hljs-string">&quot;resnet34&quot;</span>)

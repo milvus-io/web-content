@@ -2,7 +2,7 @@
 id: resource_group.md
 related_key: Manage Resource Groups
 summary: Apprenez à gérer les groupes de ressources.
-title: Gérer les groupes de ressources
+title: Gestion des groupes de ressources
 ---
 <h1 id="Manage-Resource-Groups" class="common-anchor-header">Gestion des groupes de ressources<button data-href="#Manage-Resource-Groups" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -36,9 +36,9 @@ title: Gérer les groupes de ressources
         ></path>
       </svg>
     </button></h2><p>Un groupe de ressources peut contenir plusieurs ou tous les nœuds de requête d'un cluster Milvus. Vous décidez de la manière dont vous souhaitez répartir les nœuds de requête entre les groupes de ressources en fonction de ce qui vous semble le plus judicieux. Par exemple, dans un scénario à plusieurs collections, vous pouvez allouer un nombre approprié de nœuds de requête à chaque groupe de ressources et charger les collections dans différents groupes de ressources, de sorte que les opérations au sein de chaque collection soient physiquement indépendantes de celles des autres collections.</p>
-<p>Notez qu'une instance Milvus maintient un groupe de ressources par défaut pour contenir tous les nœuds de requête au démarrage et le nomme <strong>__default_resource_group.</strong></p>
+<p>Notez qu'une instance Milvus maintient un groupe de ressources par défaut pour contenir tous les nœuds de requête au démarrage et le nomme <strong>__default_resource_group</strong>.</p>
 <p>À partir de la version 2.4.1, Milvus fournit une API de groupe de ressources déclarative, tandis que l'ancienne API de groupe de ressources a été supprimée. La nouvelle API déclarative permet aux utilisateurs d'atteindre l'idempotence, afin de faciliter le développement secondaire dans les environnements "cloud-native".</p>
-<h2 id="Concepts-of-resource-group" class="common-anchor-header">Concepts de groupe de ressources<button data-href="#Concepts-of-resource-group" class="anchor-icon" translate="no">
+<h2 id="Concepts-of-resource-group" class="common-anchor-header">Concepts du groupe de ressources<button data-href="#Concepts-of-resource-group" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -71,7 +71,7 @@ title: Gérer les groupes de ressources
 <p>Sauf dans les cas suivants :</p>
 <ul>
 <li>Lorsque le nombre de QueryNodes dans le cluster Milvus est insuffisant, c'est-à-dire <code translate="no">NumOfQueryNode &lt; sum(.requests.nodeNum)</code>, il y aura toujours des groupes de ressources sans suffisamment de QueryNodes.</li>
-<li>Lorsque le nombre de QueryNodes dans le cluster Milvus est excessif ( <code translate="no">NumOfQueryNode &gt; sum(.limits.nodeNum)</code>), les QueryNodes redondants seront toujours placés en premier dans le <strong>__default_resource_group.</strong> </li>
+<li>Lorsque le nombre de QueryNodes dans le cluster Milvus est excessif, c'est-à-dire <code translate="no">NumOfQueryNode &gt; sum(.limits.nodeNum)</code>, les QueryNodes redondants seront toujours placés en premier dans le <strong>__default_resource_group</strong>.</li>
 </ul>
 <p>Bien entendu, si le nombre de QueryNodes dans le cluster change, Milvus tentera continuellement de s'adapter pour répondre aux conditions finales. Par conséquent, vous pouvez d'abord appliquer les modifications de configuration du groupe de ressources, puis procéder à la mise à l'échelle des QueryNodes.</p>
 <h2 id="Use-declarative-api-to-manage-resource-group" class="common-anchor-header">Utiliser l'API déclarative pour gérer le groupe de ressources<button data-href="#Use-declarative-api-to-manage-resource-group" class="anchor-icon" translate="no">
@@ -90,7 +90,7 @@ title: Gérer les groupes de ressources
         ></path>
       </svg>
     </button></h2><div class="alert note">
-<p>Tous les exemples de code sur cette page sont dans PyMilvus 2.4.5. Mettez à jour votre installation PyMilvus avant de les exécuter.</p>
+<p>Tous les exemples de code sur cette page sont dans PyMilvus 2.4.8. Mettez à jour votre installation PyMilvus avant de les exécuter.</p>
 </div>
 <ol>
 <li><p>Créer un groupe de ressources.</p>
@@ -230,7 +230,7 @@ num_replicas = <span class="hljs-number">1</span>
       </svg>
     </button></h2><p>Actuellement, Milvus ne peut pas être mis à l'échelle de manière indépendante dans les environnements cloud-native. Toutefois, en utilisant l'<strong>API Declarative Resource Group</strong> conjointement avec l'orchestration de conteneurs, Milvus peut facilement isoler et gérer les ressources pour les QueryNodes. Voici une bonne pratique pour gérer les QueryNodes dans un environnement en nuage :</p>
 <ol>
-<li><p>Par défaut, Milvus crée un <strong>__default_resource_group</strong>. Ce groupe de ressources ne peut pas être supprimé et sert également de groupe de ressources de chargement par défaut pour toutes les collections et les QueryNodes redondants lui sont toujours affectés. Par conséquent, nous pouvons créer un groupe de ressources en attente pour contenir les ressources QueryNode inutilisées, empêchant ainsi les ressources QueryNode d'être occupées par le <strong>__default_resource_group.</strong></p>
+<li><p>Par défaut, Milvus crée un <strong>__default_resource_group</strong>. Ce groupe de ressources ne peut pas être supprimé et sert également de groupe de ressources de chargement par défaut pour toutes les collections et les QueryNodes redondants lui sont toujours affectés. Par conséquent, nous pouvons créer un groupe de ressources en attente pour contenir les ressources QueryNode inutilisées, empêchant ainsi les ressources QueryNode d'être occupées par le <strong>__default_resource_group</strong>.</p>
 <p>De plus, si nous appliquons strictement la contrainte <code translate="no">sum(.requests.nodeNum) &lt;= queryNodeNum</code>, nous pouvons contrôler précisément l'affectation des QueryNodes dans le cluster. Supposons qu'il n'y ait actuellement qu'un seul QueryNode dans le cluster et initialisons le cluster. Voici un exemple de configuration :</p>
 <pre><code translate="no" class="language-Python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> utility
 <span class="hljs-keyword">from</span> pymilvus.client.types <span class="hljs-keyword">import</span> ResourceGroupConfig
@@ -296,7 +296,7 @@ scale_to(<span class="hljs-number">5</span>)
 <span class="hljs-comment"># rg1 has 3 nodes, rg2 has 1 node, __default_resource_group has 1 node.</span>
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>Mise à l'échelle du cluster</p>
-<p>De même, nous pouvons établir des règles de mise à l'échelle qui donnent la priorité à la sélection des QueryNodes dans le groupe de ressources <strong>__pending_nodes.</strong> Ces informations peuvent être obtenues via l'API <code translate="no">describe_resource_group</code>. Atteindre l'objectif de mise à l'échelle du groupe de ressources spécifié.</p>
+<p>De même, nous pouvons établir des règles de mise à l'échelle qui donnent la priorité à la sélection des QueryNodes dans le groupe de ressources <strong>__pending_nodes</strong>. Ces informations peuvent être obtenues via l'API <code translate="no">describe_resource_group</code>. Atteindre l'objectif de mise à l'échelle du groupe de ressources spécifié.</p>
 <pre><code translate="no" class="language-Python"><span class="hljs-comment"># scale rg1 from 3 nodes into 2 nodes</span>
 utility.update_resource_groups({
     <span class="hljs-string">&quot;rg1&quot;</span>: ResourceGroupConfig(
@@ -348,6 +348,6 @@ scale_to(<span class="hljs-number">4</span>)
       </svg>
     </button></h1><p>Pour déployer une instance Milvus multi-tenant, lisez ce qui suit :</p>
 <ul>
-<li><a href="/docs/fr/rbac.md">Activer le RBAC</a></li>
+<li><a href="/docs/fr/rbac.md">Activer RBAC</a></li>
 <li><a href="/docs/fr/users_and_roles.md">Utilisateurs et rôles</a></li>
 </ul>

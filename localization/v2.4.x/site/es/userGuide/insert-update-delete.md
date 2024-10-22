@@ -4,9 +4,9 @@ summary: >-
   Esta guía le guiará a través de las operaciones de manipulación de datos
   dentro de una colección, incluidas la inserción, la inserción ascendente y la
   eliminación.
-title: 'Insertar, volver a insertar y eliminar'
+title: 'Insertar, reinsertar y eliminar'
 ---
-<h1 id="Insert-Upsert--Delete" class="common-anchor-header">Inserción, inserción ascendente y supresión<button data-href="#Insert-Upsert--Delete" class="anchor-icon" translate="no">
+<h1 id="Insert-Upsert--Delete" class="common-anchor-header">Insertar, reinsertar y eliminar<button data-href="#Insert-Upsert--Delete" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -59,7 +59,7 @@ title: 'Insertar, volver a insertar y eliminar'
       </svg>
     </button></h2><p>Una entidad, en el contexto de las colecciones Milvus, es una instancia singular e identificable dentro de una colección. Representa un miembro distinto de una clase particular, ya sea un libro en una biblioteca, un gen en un genoma o cualquier otra entidad identificable.</p>
 <p>Las entidades de una colección comparten un conjunto común de atributos, denominado esquema, que define la estructura que debe seguir cada entidad, incluidos los nombres de los campos, los tipos de datos y cualquier otra restricción.</p>
-<p>Para insertar con éxito entidades en una colección es necesario que los datos proporcionados contengan todos los campos definidos por el esquema de la colección de destino. Además, también puede incluir campos no definidos por el esquema sólo si ha habilitado el campo dinámico. Para obtener más información, consulte <a href="/docs/es/enable-dynamic-field.md">Activación del campo dinámico</a>.</p>
+<p>Para insertar con éxito entidades en una colección es necesario que los datos proporcionados contengan todos los campos definidos por el esquema de la colección de destino. Además, también puede incluir campos no definidos por el esquema sólo si ha habilitado el campo dinámico. Para obtener más información, consulte <a href="/docs/es/enable-dynamic-field.md">Activación del campo</a> dinámico.</p>
 <h2 id="Preparations" class="common-anchor-header">Preparativos<button data-href="#Preparations" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -407,13 +407,12 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 </ul>
 <div class="alert note">
 <ul>
-<li>Las operaciones Upsert no actualizarán las claves primarias.</li>
-<li>Las operaciones Upsert no admiten colecciones con <code translate="no">autoID</code> activado.</li>
-<li>Si planea utilizar la operación <code translate="no">upsert</code> en lugar de <code translate="no">insert</code> para la ingesta de datos a gran escala (por ejemplo, millones de vectores), tenga en cuenta que esto puede provocar un alto consumo de memoria en los nodos de datos Milvus.</li>
+<li>Las operaciones de sobreinserción no actualizarán las claves primarias.</li>
+<li>Si planea utilizar la operación <code translate="no">upsert</code> en lugar de <code translate="no">insert</code> para la ingestión de datos a gran escala (por ejemplo, millones de vectores), tenga en cuenta que esto puede conducir a un alto consumo de memoria en los nodos de datos Milvus.</li>
 </ul>
 </div>
 <div class="language-python">
-<p>Para insertar entidades, utilice el método <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Vector/upsert.md"><code translate="no">upsert()</code></a> método.</p>
+<p>Para upsert entidades, utilice el método <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Vector/upsert.md"><code translate="no">upsert()</code></a> método.</p>
 </div>
 <div class="language-java">
 <p>Para insertar entidades, utilice el método <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Vector/insert.md"><code translate="no">upsert()</code></a> método.</p>

@@ -4,7 +4,7 @@ order: 1
 summary: >-
   Cet article décrit comment rechercher des vecteurs dans une collection Milvus
   à l'aide d'un seul vecteur d'interrogation.
-title: Recherche d'un seul vecteur
+title: Recherche à vecteur unique
 ---
 <h1 id="Single-Vector-Search" class="common-anchor-header">Recherche à vecteur unique<button data-href="#Single-Vector-Search" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -45,7 +45,7 @@ title: Recherche d'un seul vecteur
       </svg>
     </button></h2><p>Il existe plusieurs types de recherche pour répondre à différents besoins :</p>
 <ul>
-<li><p><a href="https://milvus.io/docs/single-vector-search.md#Basic-search">Recherche de base</a>: Comprend la recherche à vecteur unique, la recherche à vecteur multiple, la recherche de partition et la recherche avec des champs de sortie spécifiés.</p></li>
+<li><p><a href="https://milvus.io/docs/single-vector-search.md#Basic-search">Recherche de base</a>: Comprend la recherche sur un seul vecteur, la recherche sur un grand nombre de vecteurs, la recherche sur une partition et la recherche avec des champs de sortie spécifiés.</p></li>
 <li><p><a href="https://milvus.io/docs/single-vector-search.md#Filtered-search">Recherche filtrée</a>: Elle applique des critères de filtrage basés sur des champs scalaires pour affiner les résultats de la recherche.</p></li>
 <li><p><a href="https://milvus.io/docs/single-vector-search.md#Range-search">Recherche par plage</a>: Permet de trouver des vecteurs situés dans une plage de distance spécifique par rapport au vecteur de la requête.</p></li>
 <li><p><a href="https://milvus.io/docs/single-vector-search.md#Grouping-search">Recherche groupée</a>: Regroupe les résultats de la recherche sur la base d'un champ spécifique afin de garantir la diversité des résultats.</p></li>
@@ -441,7 +441,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
         ></path>
       </svg>
     </button></h2><p>Lors de l'envoi d'une requête <code translate="no">search</code>, vous pouvez fournir une ou plusieurs valeurs vectorielles représentant vos enchâssements de requête et une valeur <code translate="no">limit</code> indiquant le nombre de résultats à renvoyer.</p>
-<p>En fonction de vos données et de votre vecteur d'interrogation, il se peut que vous obteniez moins de <code translate="no">limit</code> résultats. Cela se produit lorsque <code translate="no">limit</code> est plus grand que le nombre de vecteurs correspondant à votre requête.</p>
+<p>En fonction de vos données et de votre vecteur d'interrogation, il se peut que vous obteniez moins de <code translate="no">limit</code> résultats. Cela se produit lorsque <code translate="no">limit</code> est plus grand que le nombre de vecteurs correspondants possibles pour votre requête.</p>
 <h3 id="Single-vector-search" class="common-anchor-header">Recherche à vecteur unique</h3><p>La recherche à vecteur unique est la forme la plus simple des opérations <code translate="no">search</code> dans Milvus, conçue pour trouver les vecteurs les plus similaires à un vecteur d'interrogation donné.</p>
 <p>Pour effectuer une recherche à vecteur unique, indiquez le nom de la collection cible, le vecteur d'interrogation et le nombre de résultats souhaité (<code translate="no">limit</code>). Cette opération renvoie un ensemble de résultats comprenant les vecteurs les plus similaires, leurs identifiants et les distances par rapport au vecteur d'interrogation.</p>
 <p>Voici un exemple de recherche des 5 entités les plus similaires au vecteur d'interrogation :</p>
@@ -1701,7 +1701,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 <tr><td><code translate="no">HAMMING</code></td><td>Des distances de Hamming plus faibles indiquent une plus grande similarité.</td><td>Pour exclure les vecteurs les plus proches des résultats, assurez-vous que :<br/> <code translate="no">range_filter</code> &lt;= distance &lt; <code translate="no">radius</code></td></tr>
 </tbody>
 </table>
-<p>Pour en savoir plus sur les types de métriques <a href="/docs/fr/metric.md">de</a> distance, reportez-vous à la section <a href="/docs/fr/metric.md">Métriques de similarité</a>.</p>
+<p>Pour en savoir plus sur les types de métriques de distance, reportez-vous à la section <a href="/docs/fr/metric.md">Métriques de similarité</a>.</p>
 <h2 id="Grouping-search" class="common-anchor-header">Recherche par regroupement<button data-href="#Grouping-search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -1717,9 +1717,10 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Dans Milvus, le regroupement de la recherche en fonction d'un champ spécifique permet d'éviter la redondance d'un même élément de champ dans les résultats. Vous pouvez obtenir un ensemble varié de résultats pour le champ spécifique.</p>
-<p>Considérons une collection de documents, chaque document étant divisé en plusieurs passages. Chaque passage est représenté par un vecteur intégré et appartient à un document. Pour trouver des documents pertinents plutôt que des passages similaires, vous pouvez inclure l'argument <code translate="no">group_by_field</code> dans l'option <code translate="no">search()</code> afin de regrouper les résultats en fonction de l'ID du document. Cela permet de renvoyer les documents les plus pertinents et les plus uniques, plutôt que des passages distincts d'un même document.</p>
-<p>Voici un exemple de code permettant de regrouper les résultats de la recherche par champ :</p>
+    </button></h2><p>Dans Milvus, la recherche par regroupement est conçue pour améliorer l'exhaustivité et la précision des résultats de recherche.</p>
+<p>Considérons un scénario dans RAG, où des charges de documents sont divisées en divers passages, et où chaque passage est représenté par un vecteur intégré. Les utilisateurs souhaitent trouver les passages les plus pertinents afin de déclencher les MLD avec précision. La fonction de recherche ordinaire de Milvus peut répondre à cette exigence, mais elle peut produire des résultats très biaisés : la plupart des passages ne proviennent que de quelques documents et l'exhaustivité des résultats de la recherche est très faible. Cela peut sérieusement nuire à la précision, voire à l'exactitude des résultats fournis par le LLM et influencer négativement l'expérience des utilisateurs du LLM.</p>
+<p>La recherche groupée peut résoudre efficacement ce problème. En passant un champ group_by_field et group_size, les utilisateurs de Milvus peuvent répartir les résultats de la recherche en plusieurs groupes et s'assurer que le nombre d'entités de chaque groupe ne dépasse pas un group_size spécifique. Cette fonction permet d'améliorer considérablement l'exhaustivité et l'équité des résultats de la recherche, ce qui améliore sensiblement la qualité des résultats du LLM.</p>
+<p>Voici un exemple de code pour regrouper les résultats de recherche par champ :</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Connect to Milvus</span>
 client = MilvusClient(uri=<span class="hljs-string">&#x27;http://localhost:19530&#x27;</span>) <span class="hljs-comment"># Milvus server address</span>
 
@@ -1734,21 +1735,26 @@ res = client.search(
     <span class="hljs-string">&quot;metric_type&quot;</span>: <span class="hljs-string">&quot;L2&quot;</span>,
     <span class="hljs-string">&quot;params&quot;</span>: {<span class="hljs-string">&quot;nprobe&quot;</span>: <span class="hljs-number">10</span>},
     }, <span class="hljs-comment"># Search parameters</span>
-    limit=<span class="hljs-number">10</span>, <span class="hljs-comment"># Max. number of search results to return</span>
+    limit=<span class="hljs-number">5</span>, <span class="hljs-comment"># Max. number of groups to return</span>
     group_by_field=<span class="hljs-string">&quot;doc_id&quot;</span>, <span class="hljs-comment"># Group results by document ID</span>
+    group_size=<span class="hljs-number">2</span>, <span class="hljs-comment"># returned at most 2 passages per document, the default value is 1</span>
+    group_strict_size=<span class="hljs-literal">True</span>, <span class="hljs-comment"># ensure every group contains exactly 3 passages</span>
     output_fields=[<span class="hljs-string">&quot;doc_id&quot;</span>, <span class="hljs-string">&quot;passage_id&quot;</span>]
 )
 
 <span class="hljs-comment"># Retrieve the values in the `doc_id` column</span>
 doc_ids = [result[<span class="hljs-string">&#x27;entity&#x27;</span>][<span class="hljs-string">&#x27;doc_id&#x27;</span>] <span class="hljs-keyword">for</span> result <span class="hljs-keyword">in</span> res[<span class="hljs-number">0</span>]]
+passage_ids = [result[<span class="hljs-string">&#x27;entity&#x27;</span>][<span class="hljs-string">&#x27;passage_id&#x27;</span>] <span class="hljs-keyword">for</span> result <span class="hljs-keyword">in</span> res[<span class="hljs-number">0</span>]]
 
 <span class="hljs-built_in">print</span>(doc_ids)
+<span class="hljs-built_in">print</span>(passage_ids)
 <button class="copy-code-btn"></button></code></pre>
 <p>Le résultat est similaire à ce qui suit :</p>
-<pre><code translate="no" class="language-python">[<span class="hljs-meta">5, 10, 1, 7, 9, 6, 3, 4, 8, 2</span>]
+<pre><code translate="no" class="language-python">[<span class="hljs-string">&quot;doc_11&quot;</span>, <span class="hljs-string">&quot;doc_11&quot;</span>, <span class="hljs-string">&quot;doc_7&quot;</span>, <span class="hljs-string">&quot;doc_7&quot;</span>, <span class="hljs-string">&quot;doc_3&quot;</span>, <span class="hljs-string">&quot;doc_3&quot;</span>, <span class="hljs-string">&quot;doc_2&quot;</span>, <span class="hljs-string">&quot;doc_2&quot;</span>, <span class="hljs-string">&quot;doc_8&quot;</span>, <span class="hljs-string">&quot;doc_8&quot;</span>]
+[<span class="hljs-meta">5, 10, 11, 10, 9, 6, 5, 4, 9, 2</span>]
 <button class="copy-code-btn"></button></code></pre>
-<p>Dans le résultat donné, on peut observer que les entités renvoyées ne contiennent pas de valeurs <code translate="no">doc_id</code> en double.</p>
-<p>À titre de comparaison, commentons la valeur <code translate="no">group_by_field</code> et effectuons une recherche régulière :</p>
+<p>Dans le résultat donné, on peut observer que pour chaque document, exactement deux passages sont extraits et qu'un total de 5 documents composent collectivement les résultats.</p>
+<p>À titre de comparaison, commentons les paramètres liés au groupe et effectuons une recherche normale :</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Connect to Milvus</span>
 client = MilvusClient(uri=<span class="hljs-string">&#x27;http://localhost:19530&#x27;</span>) <span class="hljs-comment"># Milvus server address</span>
 
@@ -1763,27 +1769,33 @@ res = client.search(
     <span class="hljs-string">&quot;metric_type&quot;</span>: <span class="hljs-string">&quot;L2&quot;</span>,
     <span class="hljs-string">&quot;params&quot;</span>: {<span class="hljs-string">&quot;nprobe&quot;</span>: <span class="hljs-number">10</span>},
     }, <span class="hljs-comment"># Search parameters</span>
-    limit=<span class="hljs-number">10</span>, <span class="hljs-comment"># Max. number of search results to return</span>
+    limit=<span class="hljs-number">5</span>, <span class="hljs-comment"># Max. number of search results to return</span>
     <span class="hljs-comment"># group_by_field=&quot;doc_id&quot;, # Group results by document ID</span>
+    <span class="hljs-comment"># group_size=2, </span>
+    <span class="hljs-comment"># group_strict_size=True,</span>
     output_fields=[<span class="hljs-string">&quot;doc_id&quot;</span>, <span class="hljs-string">&quot;passage_id&quot;</span>]
 )
 
 <span class="hljs-comment"># Retrieve the values in the `doc_id` column</span>
 doc_ids = [result[<span class="hljs-string">&#x27;entity&#x27;</span>][<span class="hljs-string">&#x27;doc_id&#x27;</span>] <span class="hljs-keyword">for</span> result <span class="hljs-keyword">in</span> res[<span class="hljs-number">0</span>]]
+passage_ids = [result[<span class="hljs-string">&#x27;entity&#x27;</span>][<span class="hljs-string">&#x27;passage_id&#x27;</span>] <span class="hljs-keyword">for</span> result <span class="hljs-keyword">in</span> res[<span class="hljs-number">0</span>]]
 
 <span class="hljs-built_in">print</span>(doc_ids)
+<span class="hljs-built_in">print</span>(passage_ids)
 <button class="copy-code-btn"></button></code></pre>
 <p>Le résultat est similaire à ce qui suit :</p>
-<pre><code translate="no" class="language-python">[<span class="hljs-meta">1, 10, 3, 10, 1, 9, 4, 4, 8, 6</span>]
+<pre><code translate="no" class="language-python">[<span class="hljs-string">&quot;doc_11&quot;</span>, <span class="hljs-string">&quot;doc_11&quot;</span>, <span class="hljs-string">&quot;doc_11&quot;</span>, <span class="hljs-string">&quot;doc_11&quot;</span>, <span class="hljs-string">&quot;doc_11&quot;</span>]
+[<span class="hljs-meta">1, 10, 3, 12, 9</span>]
 <button class="copy-code-btn"></button></code></pre>
-<p>Dans le résultat donné, on peut observer que les entités renvoyées contiennent des valeurs <code translate="no">doc_id</code> en double.</p>
+<p>Dans le résultat donné, on peut observer que "doc_11" a complètement dominé les résultats de la recherche, éclipsant les paragraphes de haute qualité des autres documents, ce qui peut être une mauvaise incitation au LLM.</p>
+<p>Un dernier point à noter : par défaut, grouping_search renvoie les résultats instantanément lorsqu'il a suffisamment de groupes, ce qui peut conduire à ce que le nombre de résultats dans chaque groupe ne soit pas suffisant pour répondre à la taille du groupe (group_size). Si vous vous souciez du nombre de résultats pour chaque groupe, définissez group_strict_size=True comme indiqué dans le code ci-dessus. Milvus s'efforcera alors d'obtenir suffisamment de résultats pour chaque groupe, au prix d'une légère baisse des performances.</p>
 <p><strong>Limitations</strong></p>
 <ul>
-<li><p><strong>Indexation</strong>: Cette fonction de regroupement ne fonctionne que pour les collections indexées avec le type <strong>HNSW</strong>, <strong>IVF_FLAT</strong> ou <strong>FLAT</strong>. Pour plus d'informations, voir <a href="https://milvus.io/docs/index.md#HNSW">Index en mémoire</a>.</p></li>
-<li><p><strong>Vecteur</strong>: Actuellement, la recherche par regroupement ne prend pas en charge les champs vectoriels de type <strong>BINARY_VECTOR.</strong> Pour plus d'informations sur les <a href="https://milvus.io/docs/schema.md#Supported-data-types">types de</a> données, voir <a href="https://milvus.io/docs/schema.md#Supported-data-types">Types de données pris en charge</a>.</p></li>
+<li><p><strong>Indexation</strong>: Cette fonction de regroupement ne fonctionne que pour les collections indexées avec le type <strong>HNSW</strong>, <strong>IVF_FLAT</strong> ou <strong>FLAT</strong>. Pour plus d'informations, reportez-vous à la section <a href="https://milvus.io/docs/index.md#HNSW">Index en mémoire</a>.</p></li>
+<li><p><strong>Vecteur</strong>: Actuellement, la recherche par regroupement ne prend pas en charge les champs vectoriels de type <strong>BINARY_VECTOR</strong>. Pour plus d'informations sur les types de données, voir <a href="https://milvus.io/docs/schema.md#Supported-data-types">Types de données pris en charge</a>.</p></li>
 <li><p><strong>Champ</strong>: Actuellement, la recherche par regroupement n'autorise qu'une seule colonne. Vous ne pouvez pas spécifier plusieurs noms de champs dans la configuration de <code translate="no">group_by_field</code>.  En outre, la recherche groupée est incompatible avec les types de données JSON, FLOAT, DOUBLE, ARRAY ou les champs vectoriels.</p></li>
 <li><p><strong>Impact sur les performances</strong>: Soyez conscient que les performances se dégradent avec l'augmentation du nombre de vecteurs de requête. Si l'on prend l'exemple d'un cluster doté de 2 cœurs de CPU et de 8 Go de mémoire, le temps d'exécution de la recherche par regroupement augmente proportionnellement au nombre de vecteurs de requête en entrée.</p></li>
-<li><p><strong>Fonctionnalité</strong>: Actuellement, la recherche par regroupement n'est pas prise en charge par la <a href="https://milvus.io/docs/single-vector-search.md#Range-search">recherche par plage</a>, les <a href="https://milvus.io/docs/with-iterators.md#Search-with-iterator">itérateurs de recherche</a> ou la <a href="/docs/fr/multi-vector-search.md">recherche hybride</a>.</p></li>
+<li><p><strong>Fonctionnalité</strong>: Actuellement, la recherche par regroupement n'est pas prise en charge par la <a href="https://milvus.io/docs/single-vector-search.md#Range-search">recherche d'intervalle</a>, les <a href="https://milvus.io/docs/with-iterators.md#Search-with-iterator">itérateurs de recherche</a>, etc.</p></li>
 </ul>
 <h2 id="Search-parameters" class="common-anchor-header">Paramètres de recherche<button data-href="#Search-parameters" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -1800,7 +1812,7 @@ doc_ids = [result[<span class="hljs-string">&#x27;entity&#x27;</span>][<span cla
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Dans les recherches ci-dessus, à l'exception de la recherche par plage, les paramètres de recherche par défaut s'appliquent. Dans la plupart des cas, il n'est pas nécessaire de définir manuellement les paramètres de recherche.</p>
+    </button></h2><p>Dans les recherches ci-dessus, à l'exception de la recherche par plage, les paramètres de recherche par défaut s'appliquent. Dans les cas normaux, il n'est pas nécessaire de définir manuellement les paramètres de recherche.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># In normal cases, you do not need to set search parameters manually</span>
 <span class="hljs-comment"># Except for range searches.</span>
 search_parameters = {

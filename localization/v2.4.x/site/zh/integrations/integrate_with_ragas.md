@@ -1,7 +1,7 @@
 ---
 id: integrate_with_ragas.md
 summary: 本指南演示了如何使用 Ragas 评估基于 Milvus 的检索增强生成（RAG）管道。
-title: 用拉格舞曲进行评估
+title: 使用 Ragas 进行评估
 ---
 <h1 id="Evaluation-with-Ragas" class="common-anchor-header">使用 Ragas 进行评估<button data-href="#Evaluation-with-Ragas" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -18,7 +18,8 @@ title: 用拉格舞曲进行评估
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/evaluation_with_ragas.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a></p>
+    </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/evaluation_with_ragas.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
+<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/evaluation_with_ragas.ipynb" target="_blank"><img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/></a></p>
 <p>本指南演示了如何使用 Ragas 评估基于<a href="https://milvus.io/">Milvus</a> 的检索增强生成（RAG）管道。</p>
 <p>RAG 系统结合了检索系统和生成模型，可根据给定提示生成新文本。该系统首先使用 Milvus 从语料库中检索相关文档，然后使用生成模型根据检索到的文档生成新文本。</p>
 <p><a href="https://docs.ragas.io/en/latest/index.html#">Ragas</a>是一个帮助您评估 RAG 管道的框架。现有的工具和框架可以帮助您构建这些管道，但评估和量化管道性能可能很难。这就是 Ragas（RAG 评估）的用武之地。</p>
@@ -181,9 +182,9 @@ my_rag = <span class="hljs-title function_">RAG</span>(openai_client=openai_clie
 <div class="alert note">
 <p>至于<code translate="no">MilvusClient</code> 的参数：</p>
 <ul>
-<li>将<code translate="no">uri</code> 设置为本地文件（如<code translate="no">./milvus.db</code> ）是最方便的方法，因为它会自动利用<a href="https://milvus.io/docs/milvus_lite.md">Milvus Lite</a>将所有数据存储到该文件中。</li>
+<li>将<code translate="no">uri</code> 设置为本地文件，如<code translate="no">./milvus.db</code> ，是最方便的方法，因为它会自动利用<a href="https://milvus.io/docs/milvus_lite.md">Milvus Lite</a>将所有数据存储在此文件中。</li>
 <li>如果数据规模较大，可以在<a href="https://milvus.io/docs/quickstart.md">docker 或 kubernetes</a> 上设置性能更强的 Milvus 服务器。在此设置中，请使用服务器 uri，例如<code translate="no">http://localhost:19530</code> ，作为您的<code translate="no">uri</code> 。</li>
-<li>如果要使用<a href="https://zilliz.com/cloud">Zilliz Cloud</a>（Milvus 的完全托管云服务），请调整<code translate="no">uri</code> 和<code translate="no">token</code> ，它们与 Zilliz Cloud 中的<a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">公共端点和 Api 密钥</a>相对应。</li>
+<li>如果你想使用<a href="https://zilliz.com/cloud">Zilliz Cloud</a>（Milvus 的全托管云服务），请调整<code translate="no">uri</code> 和<code translate="no">token</code> ，它们与 Zilliz Cloud 中的<a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">公共端点和 Api 密钥</a>相对应。</li>
 </ul>
 </div>
 <h2 id="Run-the-RAG-pipeline-and-get-results" class="common-anchor-header">运行 RAG 管道并获取结果<button data-href="#Run-the-RAG-pipeline-and-get-results" class="anchor-icon" translate="no">
@@ -290,7 +291,7 @@ df
       <td>硬件要求是什么？</td>
       <td>[硬件要求（Hardware Requirements/n）：以下是...</td>
       <td>构建Milvus的硬件要求规范是什么？</td>
-      <td>如果您想构建 Milvus 并从源代码中运行...</td>
+      <td>如果您想构建 Milvus 并从源代码运行...</td>
     </tr>
     <tr>
       <th>1</th>
@@ -325,7 +326,7 @@ df
         ></path>
       </svg>
     </button></h2><p>我们使用 Ragas 来评估 RAG 管道结果的性能。</p>
-<p>Ragas 提供了一套易于使用的指标。我们将<code translate="no">Answer relevancy</code> 、<code translate="no">Faithfulness</code> 、<code translate="no">Context recall</code> 和<code translate="no">Context precision</code> 作为评估 RAG 管道的指标。有关指标的更多信息，请参阅<a href="https://docs.ragas.io/en/latest/concepts/metrics/index.html">Ragas 指标</a>。</p>
+<p>Ragas 提供了一套易于使用的度量指标。我们将<code translate="no">Answer relevancy</code> 、<code translate="no">Faithfulness</code> 、<code translate="no">Context recall</code> 和<code translate="no">Context precision</code> 作为评估 RAG 管道的指标。有关指标的更多信息，请参阅<a href="https://docs.ragas.io/en/latest/concepts/metrics/index.html">Ragas 指标</a>。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> ragas <span class="hljs-keyword">import</span> evaluate
 <span class="hljs-keyword">from</span> ragas.<span class="hljs-property">metrics</span> <span class="hljs-keyword">import</span> (
     answer_relevancy,

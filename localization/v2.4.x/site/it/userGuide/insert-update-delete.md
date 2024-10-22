@@ -3,7 +3,7 @@ id: insert-update-delete.md
 summary: >-
   Questa guida illustra le operazioni di manipolazione dei dati all'interno di
   una collezione, tra cui l'inserimento, l'upsertion e la cancellazione.
-title: 'Inserire, inserire ed eliminare'
+title: 'Inserimento, upsert e cancellazione'
 ---
 <h1 id="Insert-Upsert--Delete" class="common-anchor-header">Inserimento, upsert e cancellazione<button data-href="#Insert-Upsert--Delete" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -407,7 +407,6 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 <div class="alert note">
 <ul>
 <li>Le operazioni di Upsert non aggiornano le chiavi primarie.</li>
-<li>Le operazioni di Upsert non supportano le raccolte con <code translate="no">autoID</code> abilitato.</li>
 <li>Se si intende utilizzare l'operazione <code translate="no">upsert</code> invece di <code translate="no">insert</code> per l'ingestione di dati su larga scala (ad esempio, milioni di vettori), si tenga presente che ciò può comportare un elevato consumo di memoria sui nodi dati Milvus.</li>
 </ul>
 </div>

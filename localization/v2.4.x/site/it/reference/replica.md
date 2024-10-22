@@ -60,7 +60,7 @@ title: Replica in memoria
     </button></h2><p>Le repliche in memoria sono organizzate come gruppi di repliche. Ogni gruppo di repliche contiene repliche <a href="https://milvus.io/docs/v2.1.x/glossary.md#Sharding">shard</a>. Ogni replica shard ha una replica streaming e una replica storica che corrispondono ai <a href="https://milvus.io/docs/v2.1.x/glossary.md#Segment">segmenti</a> in crescita e sigillati nello shard (ad esempio, il canale DML).</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/replica_availability.jpg" alt="An illustration of how in-memory replica works" class="doc-image" id="an-illustration-of-how-in-memory-replica-works" />
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/replica_group.png" alt="An illustration of how in-memory replica works" class="doc-image" id="an-illustration-of-how-in-memory-replica-works" />
    </span> <span class="img-wrapper"> <span>Un'illustrazione del funzionamento della replica in-memory</span> </span></p>
 <h3 id="Replica-group" class="common-anchor-header">Gruppo di replica</h3><p>Un gruppo di replica è costituito da più <a href="https://milvus.io/docs/v2.1.x/four_layers.md#Query-node">nodi di query</a> responsabili della gestione dei dati storici e delle repliche.</p>
 <h3 id="Shard-replica" class="common-anchor-header">Replica shard</h3><p>Una replica shard consiste in una replica streaming e in una replica storica, entrambe appartenenti allo stesso <a href="https://milvus.io/blog/deep-dive-1-milvus-architecture-overview.md#Shard">shard</a>. Il numero di repliche shard in un gruppo di repliche è determinato dal numero di shard in una raccolta specifica.</p>

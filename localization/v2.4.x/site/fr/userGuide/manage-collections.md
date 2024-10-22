@@ -224,9 +224,9 @@ $ curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable
 <li><p><code translate="no">enable_dynamic_field</code></p>
 <p>Lorsque cette option est activée, tous les champs, à l'exception de <code translate="no">id</code> et <code translate="no">vector</code> dans les données à insérer, sont traités comme des champs dynamiques. Ces champs supplémentaires sont enregistrés sous forme de paires clé-valeur dans un champ spécial appelé <code translate="no">$meta</code>. Cette fonction permet d'inclure des champs supplémentaires lors de l'insertion des données.</p></li>
 </ul>
-<p>La collection indexée et chargée automatiquement à partir du code fourni est prête pour des insertions de données immédiates.</p>
+<p>La collection indexée et chargée automatiquement à partir du code fourni est prête pour l'insertion immédiate des données.</p>
 <h3 id="Customized-setup" class="common-anchor-header">Configuration personnalisée</h3><p>Au lieu de laisser Milvus décider de presque tout pour votre collection, vous pouvez déterminer vous-même le <strong>schéma</strong> et les <strong>paramètres d'indexation</strong> de la collection.</p>
-<h4 id="Step-1-Set-up-schema" class="common-anchor-header">Étape 1 : configuration du schéma</h4><p>Un schéma définit la structure d'une collection. Dans le schéma, vous avez la possibilité d'activer ou de désactiver <code translate="no">enable_dynamic_field</code>, d'ajouter des champs prédéfinis et de définir des attributs pour chaque champ. Pour une explication détaillée du concept et des types de données disponibles, reportez-vous à <a href="/docs/fr/schema.md">Schema Explained.</a></p>
+<h4 id="Step-1-Set-up-schema" class="common-anchor-header">Étape 1 : configuration du schéma</h4><p>Un schéma définit la structure d'une collection. Dans le schéma, vous avez la possibilité d'activer ou de désactiver <code translate="no">enable_dynamic_field</code>, d'ajouter des champs prédéfinis et de définir des attributs pour chaque champ. Pour une explication détaillée du concept et des types de données disponibles, reportez-vous à <a href="/docs/fr/schema.md">Schema Explained</a>.</p>
 <div class="language-python">
 <p>Pour configurer un schéma, utilisez <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_schema.md"><code translate="no">create_schema()</code></a> pour créer un objet schéma et <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/CollectionSchema/add_field.md"><code translate="no">add_field()</code></a> pour ajouter des champs au schéma.</p>
 </div>
@@ -334,7 +334,7 @@ schema.addField(AddFieldReq.builder()
     </tr>
     <tr>
       <td><code translate="no">dim</code></td>
-      <td>Dimension de l'intégration vectorielle.<br/>Cette information est obligatoire pour les champs de type <strong>DataType.FLOAT_VECTOR</strong>, <strong>DataType.BINARY_VECTOR</strong>, <strong>DataType.FLOAT16_VECTOR</strong> ou <strong>DataType.BFLOAT16_VECTOR.</strong> Si vous utilisez le <strong>type DataType.SPARSE_FLOAT_VECTOR</strong>, omettez ce paramètre.</td>
+      <td>Dimension de l'intégration vectorielle.<br/>Cette information est obligatoire pour les champs de type <strong>DataType.FLOAT_VECTOR</strong>, <strong>DataType.BINARY_VECTOR</strong>, <strong>DataType.FLOAT16_VECTOR</strong> ou <strong>DataType.BFLOAT16_VECTOR</strong>. Si vous utilisez le <strong>type DataType.SPARSE_FLOAT_VECTOR</strong>, omettez ce paramètre.</td>
     </tr>
   </tbody>
 </table>
@@ -364,7 +364,7 @@ schema.addField(AddFieldReq.builder()
     </tr>
     <tr>
       <td><code translate="no">dimension</code></td>
-      <td>La dimension des encastrements vectoriels.<br/>Ce paramètre est obligatoire pour un champ de type <strong>DataType.FloatVector</strong>, <strong>DataType.BinaryVector</strong>, <strong>DataType.Float16Vector</strong> ou <strong>DataType.BFloat16Vector.</strong> </td>
+      <td>La dimension des encastrements vectoriels.<br/>Ce paramètre est obligatoire pour un champ de type <strong>DataType.FloatVector</strong>, <strong>DataType.BinaryVector</strong>, <strong>DataType.Float16Vector</strong> ou <strong>DataType.BFloat16Vector</strong>.</td>
     </tr>
   </tbody>
 </table>
@@ -1096,7 +1096,7 @@ $ curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable
     </tr>
     <tr>
       <td><code translate="no">index_params</code></td>
-      <td>Un objet <strong>IndexParams</strong> contenant une liste d'objets <strong>IndexParam.</strong> </td>
+      <td>Un objet <strong>IndexParams</strong> contenant une liste d'objets <strong>IndexParam</strong>.</td>
     </tr>
   </tbody>
 </table>
@@ -1593,7 +1593,34 @@ $ curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable
 <span class="hljs-comment">#     }</span>
 <span class="hljs-comment"># }</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Release-a-collection" class="common-anchor-header">Débloquer une collection</h3><div class="language-python">
+<h3 id="Load-a-collection-partially-Public-Preview" class="common-anchor-header">Charger partiellement une collection (aperçu public)</h3><div class="alert note">
+<p>Cette fonctionnalité est actuellement en avant-première publique. L'API et la fonctionnalité peuvent changer à l'avenir.</p>
+</div>
+<p>Lors de la réception de votre demande de chargement, Milvus charge tous les index des champs vectoriels et toutes les données des champs scalaires en mémoire. Si certains champs ne doivent pas être impliqués dans les recherches et les requêtes, vous pouvez les exclure du chargement pour réduire l'utilisation de la mémoire et améliorer les performances de recherche.</p>
+<div class="language-python">
+<pre><code translate="no" class="language-python"><span class="hljs-comment"># 7. Load the collection</span>
+client.load_collection(
+    collection_name=<span class="hljs-string">&quot;customized_setup_2&quot;</span>,
+    load_fields=[<span class="hljs-string">&quot;my_id&quot;</span>, <span class="hljs-string">&quot;my_vector&quot;</span>] <span class="hljs-comment"># Load only the specified fields</span>
+    skip_load_dynamic_field=<span class="hljs-literal">True</span> <span class="hljs-comment"># Skip loading the dynamic field</span>
+)
+
+res = client.get_load_state(
+    collection_name=<span class="hljs-string">&quot;customized_setup_2&quot;</span>
+)
+
+<span class="hljs-built_in">print</span>(res)
+
+<span class="hljs-comment"># Output</span>
+<span class="hljs-comment">#</span>
+<span class="hljs-comment"># {</span>
+<span class="hljs-comment">#     &quot;state&quot;: &quot;&lt;LoadState: Loaded&gt;&quot;</span>
+<span class="hljs-comment"># }</span>
+<button class="copy-code-btn"></button></code></pre>
+<p>Notez que seuls les champs répertoriés sur <code translate="no">load_fields</code> peuvent être utilisés comme conditions de filtrage et champs de sortie dans les recherches et les requêtes. Vous devez toujours inclure la clé primaire dans la liste. Les noms de champs exclus du chargement ne seront pas disponibles pour le filtrage ou la sortie.</p>
+<p>Vous pouvez utiliser <code translate="no">skip_load_dynamic_field=True</code> pour ne pas charger le champ dynamique. Milvus traite le champ dynamique comme un champ unique, de sorte que toutes les clés du champ dynamique seront incluses ou exclues ensemble.</p>
+</div>
+<h3 id="Release-a-collection" class="common-anchor-header">Libération d'une collection</h3><div class="language-python">
 <p>Pour libérer une collection, utilisez la méthode <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/release_collection.md"><code translate="no">release_collection()</code></a> en spécifiant le nom de la collection.</p>
 </div>
 <div class="language-java">
@@ -2049,7 +2076,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 <p>Pour réaffecter des alias à d'autres collections, utilisez la méthode <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Collections/alterAlias.md"><code translate="no">alterAlias()</code></a> en spécifiant le nom de la collection et l'alias.</p>
 </div>
 <div class="language-javascript">
-<p>Pour réaffecter des alias à d'autres collections, utilisez la méthode <a href="https://milvus.io/api-reference/node/v2.4.x/Collections/alterAlias.md"><code translate="no">alterAlias()</code></a> en spécifiant le nom de la collection et l'alias.</p>
+<p>Pour réaffecter des alias à d'autres collections, utilisez la méthode <a href="https://milvus.io/api-reference/node/v2.4.x/Collections/alterAlias.md"><code translate="no">alterAlias()</code></a> en précisant le nom de la collection et l'alias.</p>
 </div>
 <div class="language-shell">
 <p>Pour réaffecter des alias à d'autres collections, vous pouvez utiliser le point de terminaison de l'API <a href="https://milvus.io/api-reference/restful/v2.4.x/v2/Alias%20(v2)/Alter.md"><code translate="no">POST /v2/vectordb/aliases/alter</code></a> pour réaffecter des alias à d'autres collections, vous pouvez utiliser le point de terminaison de l'API.</p>
@@ -2323,7 +2350,7 @@ collection.set_properties(
     }
 )
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Set-MMAP" class="common-anchor-header">Définir MMAP</h3><p>Configurer la propriété de mappage de la mémoire (MMAP) pour la collection, qui détermine si les données sont mappées en mémoire pour améliorer les performances des requêtes. Pour plus d'informations, reportez-vous à la section <a href="https://milvus.io/docs/mmap.md#Configure-memory-mapping">Configurer le mappage de la mémoire .</a></p>
+<h3 id="Set-MMAP" class="common-anchor-header">Définir MMAP</h3><p>Configurer la propriété de mappage de la mémoire (MMAP) pour la collection, qui détermine si les données sont mappées en mémoire pour améliorer les performances des requêtes. Pour plus d'informations, reportez-vous à la section <a href="https://milvus.io/docs/mmap.md#Configure-memory-mapping">Configurer le mappage de la mémoire</a>.</p>
 <div class="alert note">
 <p>Avant de définir la propriété MMAP, libérez d'abord la collection. Sinon, une erreur se produira.</p>
 </div>

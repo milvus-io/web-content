@@ -1,10 +1,8 @@
 ---
 id: use-partition-key.md
-title: 使用Partition Key
-summary: ""
+title: 使用分区密钥
 ---
-
-<h1 id="Use-Partition-Key" class="common-anchor-header">使用Partition Key<button data-href="#Use-Partition-Key" class="anchor-icon" translate="no">
+<h1 id="Use-Partition-Key" class="common-anchor-header">使用分区密钥<button data-href="#Use-Partition-Key" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -19,7 +17,7 @@ summary: ""
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>本指南将指导您使用Partition Key来加速从收藏中检索数据。</p>
+    </button></h1><p>本指南将指导您使用分区密钥来加速从 Collections 中检索数据。</p>
 <h2 id="Overview" class="common-anchor-header">概述<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -35,9 +33,9 @@ summary: ""
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>你可以将集合中的一个特定字段设置为分区键，这样 Milvus 就会根据该字段中各自的分区值，将进入的实体分配到不同的分区中。这样，具有相同键值的实体就会被归类到一个分区中，从而在通过键字段进行过滤时，无需扫描无关的分区，从而加快了搜索性能。与传统的过滤方法相比，分区键可以大大提高查询性能。</p>
-<p>您可以使用Partition Key实现多租户。有关多租户的详细信息，请阅读<a href="https://milvus.io/docs/multi_tenancy.md">多租户</a>。</p>
-<h2 id="Enable-partition-key" class="common-anchor-header">启用Partition Key<button data-href="#Enable-partition-key" class="anchor-icon" translate="no">
+    </button></h2><p>你可以将 Collections 中的一个特定字段设置为分区键，这样 Milvus 就会根据这个字段中各自的分区值，将进入的实体分配到不同的分区中。这样，具有相同键值的实体就会被归类到一个分区中，通过键字段进行过滤时，就无需扫描不相关的分区，从而加快了搜索性能。与传统的过滤方法相比，分区键可以大大提高查询性能。</p>
+<p>可以使用 Partition Key 实现多租户。有关多租户的详细信息，请阅读<a href="https://milvus.io/docs/multi_tenancy.md">多租户</a>。</p>
+<h2 id="Enable-partition-key" class="common-anchor-header">启用分区密钥<button data-href="#Enable-partition-key" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -52,8 +50,8 @@ summary: ""
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>要将某个字段设置为分区键，请在创建Collection Schema 时指定<code translate="no">partition_key_field</code> 。</p>
-<p>在下面的示例代码中，<code translate="no">num_partitions</code> 决定将创建的分区数量。默认情况下，它被设置为<code translate="no">16</code> 。建议保留默认值。</p>
+    </button></h2><p>要将某个字段设置为分区键，请在创建 Collections Schema 时指定<code translate="no">partition_key_field</code> 。</p>
+<p>在下面的示例代码中，<code translate="no">num_partitions</code> 决定将创建的分区数量。默认情况下，它被设置为<code translate="no">64</code> 。建议保留默认值。</p>
 <div class="language-python">
 <p>有关参数的更多信息，请参阅 <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Client/MilvusClient.md"><code translate="no">MilvusClient</code></a>, <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_schema.md"><code translate="no">create_schema()</code></a>和 <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/CollectionSchema/add_field.md"><code translate="no">add_field()</code></a>有关参数的更多信息，请参阅 SDK 参考资料。</p>
 </div>
@@ -72,22 +70,21 @@ SERVER_ADDR = <span class="hljs-string">&quot;http://localhost:19530&quot;</span
 
 <span class="hljs-comment"># 1. Set up a Milvus client</span>
 client = MilvusClient(
-uri=SERVER_ADDR
+    uri=SERVER_ADDR
 )
 
 <span class="hljs-comment"># 2. Create a collection</span>
 schema = MilvusClient.create_schema(
-auto_id=<span class="hljs-literal">False</span>,
-enable_dynamic_field=<span class="hljs-literal">True</span>,
-partition_key_field=<span class="hljs-string">&quot;color&quot;</span>,
-num_partitions=<span class="hljs-number">16</span> <span class="hljs-comment"># Number of partitions. Defaults to 16.</span>
+    auto_id=<span class="hljs-literal">False</span>,
+    enable_dynamic_field=<span class="hljs-literal">True</span>,
+    partition_key_field=<span class="hljs-string">&quot;color&quot;</span>,
+    num_partitions=<span class="hljs-number">64</span> <span class="hljs-comment"># Number of partitions. Defaults to 64.</span>
 )
 
 schema.add_field(field_name=<span class="hljs-string">&quot;id&quot;</span>, datatype=DataType.INT64, is_primary=<span class="hljs-literal">True</span>)
 schema.add_field(field_name=<span class="hljs-string">&quot;vector&quot;</span>, datatype=DataType.FLOAT_VECTOR, dim=<span class="hljs-number">5</span>)
 schema.add_field(field_name=<span class="hljs-string">&quot;color&quot;</span>, datatype=DataType.VARCHAR, max_length=<span class="hljs-number">512</span>)
 <button class="copy-code-btn"></button></code></pre>
-
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.client.ConnectConfig;
 <span class="hljs-keyword">import</span> io.milvus.v2.client.MilvusClientV2;
 <span class="hljs-keyword">import</span> io.milvus.v2.common.DataType;
@@ -166,23 +163,22 @@ client = <span class="hljs-keyword">new</span> <span class="hljs-title class_">M
 <pre><code translate="no" class="language-python">index_params = MilvusClient.prepare_index_params()
 
 index_params.add_index(
-field_name=<span class="hljs-string">&quot;id&quot;</span>,
-index_type=<span class="hljs-string">&quot;STL_SORT&quot;</span>
+    field_name=<span class="hljs-string">&quot;id&quot;</span>,
+    index_type=<span class="hljs-string">&quot;STL_SORT&quot;</span>
 )
 
 index_params.add_index(
-field_name=<span class="hljs-string">&quot;color&quot;</span>,
-index_type=<span class="hljs-string">&quot;Trie&quot;</span>
+    field_name=<span class="hljs-string">&quot;color&quot;</span>,
+    index_type=<span class="hljs-string">&quot;Trie&quot;</span>
 )
 
 index_params.add_index(
-field_name=<span class="hljs-string">&quot;vector&quot;</span>,
-index_type=<span class="hljs-string">&quot;IVF_FLAT&quot;</span>,
-metric_type=<span class="hljs-string">&quot;L2&quot;</span>,
-<span class="hljs-keyword">params</span>={<span class="hljs-string">&quot;nlist&quot;</span>: <span class="hljs-number">1024</span>}
+    field_name=<span class="hljs-string">&quot;vector&quot;</span>,
+    index_type=<span class="hljs-string">&quot;IVF_FLAT&quot;</span>,
+    metric_type=<span class="hljs-string">&quot;L2&quot;</span>,
+    <span class="hljs-keyword">params</span>={<span class="hljs-string">&quot;nlist&quot;</span>: <span class="hljs-number">1024</span>}
 )
 <button class="copy-code-btn"></button></code></pre>
-
 <pre><code translate="no" class="language-java"><span class="hljs-comment">// 2.3 Prepare index parameters</span>
 <span class="hljs-title class_">IndexParam</span> indexParamForVectorField = <span class="hljs-title class_">IndexParam</span>.<span class="hljs-title function_">builder</span>()
     .<span class="hljs-title function_">fieldName</span>(<span class="hljs-string">&quot;vector&quot;</span>)
@@ -208,7 +204,7 @@ indexParams.<span class="hljs-title function_">add</span>(indexParamForVectorFie
     <span class="hljs-keyword">params</span>: { nlist: <span class="hljs-number">1024</span>}
 }]
 <button class="copy-code-btn"></button></code></pre>
-<p>最后，您可以创建一个集合。</p>
+<p>最后，您可以创建一个 Collection。</p>
 <div class="multipleCode">
    <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a></div>
 <pre><code translate="no" class="language-python">client.<span class="hljs-title function_">create_collection</span>(
@@ -226,7 +222,6 @@ indexParams.<span class="hljs-title function_">add</span>(indexParamForVectorFie
 
 client.createCollection(customizedSetupReq);
 <button class="copy-code-btn"></button></code></pre>
-
 <pre><code translate="no" class="language-javascript"><span class="hljs-comment">// 2.3 Create a collection with fields and index parameters</span>
 res = <span class="hljs-keyword">await</span> client.<span class="hljs-title function_">createCollection</span>({
     <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;test_collection&quot;</span>,
@@ -256,8 +251,8 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>一旦某个集合的字段被用作分区键，Milvus 就会创建指定数量的分区，并代表你管理它们。因此，你不能再操作该集合中的分区。</p>
-<p>下面的代码段演示了一旦某个字段被用作分区键，会在集合中创建 64 个分区。</p>
+    </button></h2><p>一旦 Collection 的某个字段被用作分区 Key，Milvus 就会创建指定数量的分区，并代表你管理它们。因此，你不能再操作此 Collection 中的分区。</p>
+<p>下面的代码段演示了一旦某个 Collection 的某个字段被用作分区键，该 Collection 中就会出现 64 个分区。</p>
 <h2 id="Insert-data" class="common-anchor-header">插入数据<button data-href="#Insert-data" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -273,7 +268,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>集合准备就绪后，开始按如下步骤插入数据：</p>
+    </button></h2><p>Collections 准备就绪后，按如下步骤开始插入数据：</p>
 <h3 id="Prepare-data" class="common-anchor-header">准备数据</h3><div class="multipleCode">
    <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># 3. Insert randomly generated vectors </span>
@@ -281,19 +276,18 @@ colors = [<span class="hljs-string">&quot;green&quot;</span>, <span class="hljs-
 data = []
 
 <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">1000</span>):
-current*color = random.choice(colors)
-current_tag = random.randint(<span class="hljs-number">1000</span>, <span class="hljs-number">9999</span>)
-data.append({
-<span class="hljs-string">&quot;id&quot;</span>: i,
-<span class="hljs-string">&quot;vector&quot;</span>: [ random.uniform(-<span class="hljs-number">1</span>, <span class="hljs-number">1</span>) <span class="hljs-keyword">for</span> * <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">5</span>) ],
-<span class="hljs-string">&quot;color&quot;</span>: current*color,
-<span class="hljs-string">&quot;tag&quot;</span>: current_tag,
-<span class="hljs-string">&quot;color_tag&quot;</span>: <span class="hljs-string">f&quot;<span class="hljs-subst">{current_color}</span>*<span class="hljs-subst">{<span class="hljs-built_in">str</span>(current_tag)}</span>&quot;</span>
-})
+    current_color = random.choice(colors)
+    current_tag = random.randint(<span class="hljs-number">1000</span>, <span class="hljs-number">9999</span>)
+    data.append({
+        <span class="hljs-string">&quot;id&quot;</span>: i,
+        <span class="hljs-string">&quot;vector&quot;</span>: [ random.uniform(-<span class="hljs-number">1</span>, <span class="hljs-number">1</span>) <span class="hljs-keyword">for</span> _ <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">5</span>) ],
+        <span class="hljs-string">&quot;color&quot;</span>: current_color,
+        <span class="hljs-string">&quot;tag&quot;</span>: current_tag,
+        <span class="hljs-string">&quot;color_tag&quot;</span>: <span class="hljs-string">f&quot;<span class="hljs-subst">{current_color}</span>_<span class="hljs-subst">{<span class="hljs-built_in">str</span>(current_tag)}</span>&quot;</span>
+    })
 
 <span class="hljs-built_in">print</span>(data[<span class="hljs-number">0</span>])
 <button class="copy-code-btn"></button></code></pre>
-
 <pre><code translate="no" class="language-java"><span class="hljs-comment">// 3. Insert randomly generated vectors</span>
 <span class="hljs-title class_">List</span>&lt;<span class="hljs-title class_">String</span>&gt; colors = <span class="hljs-title class_">Arrays</span>.<span class="hljs-title function_">asList</span>(<span class="hljs-string">&quot;green&quot;</span>, <span class="hljs-string">&quot;blue&quot;</span>, <span class="hljs-string">&quot;yellow&quot;</span>, <span class="hljs-string">&quot;red&quot;</span>, <span class="hljs-string">&quot;black&quot;</span>, <span class="hljs-string">&quot;white&quot;</span>, <span class="hljs-string">&quot;purple&quot;</span>, <span class="hljs-string">&quot;pink&quot;</span>, <span class="hljs-string">&quot;orange&quot;</span>, <span class="hljs-string">&quot;brown&quot;</span>, <span class="hljs-string">&quot;grey&quot;</span>);
 <span class="hljs-title class_">List</span>&lt;<span class="hljs-title class_">JSON</span><span class="hljs-built_in">Object</span>&gt; data = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();
@@ -347,13 +341,13 @@ data.append({
 }
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Insert-data" class="common-anchor-header">插入数据</h3><div class="language-python">
-<p>使用 <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Vector/insert.md"><code translate="no">insert()</code></a>方法将数据插入集合。</p>
+<p>使用 <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Vector/insert.md"><code translate="no">insert()</code></a>方法将数据插入 Collections。</p>
 </div>
 <div class="language-java">
-<p>使用 <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Vector/insert.md"><code translate="no">insert()</code></a>方法将数据插入数据集。</p>
+<p>使用 <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Vector/insert.md"><code translate="no">insert()</code></a>方法将数据插入 Collections。</p>
 </div>
 <div class="language-javascript">
-<p>使用 <a href="https://milvus.io/api-reference/node/v2.4.x/Vector/insert.md"><code translate="no">insert()</code></a>方法将数据插入集合。</p>
+<p>使用 <a href="https://milvus.io/api-reference/node/v2.4.x/Vector/insert.md"><code translate="no">insert()</code></a>方法将数据插入 Collections。</p>
 </div>
 <div class="multipleCode">
    <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a></div>
@@ -367,23 +361,22 @@ data.append({
 <span class="hljs-comment"># Output</span>
 <span class="hljs-comment">#</span>
 <span class="hljs-comment"># {</span>
-<span class="hljs-comment"># &quot;insert_count&quot;: 1000,</span>
-<span class="hljs-comment"># &quot;ids&quot;: [</span>
-<span class="hljs-comment"># 0,</span>
-<span class="hljs-comment"># 1,</span>
-<span class="hljs-comment"># 2,</span>
-<span class="hljs-comment"># 3,</span>
-<span class="hljs-comment"># 4,</span>
-<span class="hljs-comment"># 5,</span>
-<span class="hljs-comment"># 6,</span>
-<span class="hljs-comment"># 7,</span>
-<span class="hljs-comment"># 8,</span>
-<span class="hljs-comment"># 9,</span>
-<span class="hljs-comment"># &quot;(990 more items hidden)&quot;</span>
-<span class="hljs-comment"># ]</span>
+<span class="hljs-comment">#     &quot;insert_count&quot;: 1000,</span>
+<span class="hljs-comment">#     &quot;ids&quot;: [</span>
+<span class="hljs-comment">#         0,</span>
+<span class="hljs-comment">#         1,</span>
+<span class="hljs-comment">#         2,</span>
+<span class="hljs-comment">#         3,</span>
+<span class="hljs-comment">#         4,</span>
+<span class="hljs-comment">#         5,</span>
+<span class="hljs-comment">#         6,</span>
+<span class="hljs-comment">#         7,</span>
+<span class="hljs-comment">#         8,</span>
+<span class="hljs-comment">#         9,</span>
+<span class="hljs-comment">#         &quot;(990 more items hidden)&quot;</span>
+<span class="hljs-comment">#     ]</span>
 <span class="hljs-comment"># }</span>
 <button class="copy-code-btn"></button></code></pre>
-
 <pre><code translate="no" class="language-java"><span class="hljs-comment">// 3.1 Insert data into the collection</span>
 <span class="hljs-title class_">InsertReq</span> insertReq = <span class="hljs-title class_">InsertReq</span>.<span class="hljs-title function_">builder</span>()
     .<span class="hljs-title function_">collectionName</span>(<span class="hljs-string">&quot;test_collection&quot;</span>)
@@ -409,7 +402,7 @@ data.append({
 <span class="hljs-comment">// 1000</span>
 <span class="hljs-comment">// </span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Use-partition-key" class="common-anchor-header">使用分区键<button data-href="#Use-partition-key" class="anchor-icon" translate="no">
+<h2 id="Use-partition-key" class="common-anchor-header">使用 Partition Key<button data-href="#Use-partition-key" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -424,7 +417,7 @@ data.append({
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>索引和加载集合并插入数据后，就可以使用分区键进行相似性搜索。</p>
+    </button></h2><p>索引和加载集合以及插入数据后，就可以使用 Partition Key 进行相似性搜索。</p>
 <div class="language-python">
 <p>有关参数的更多信息，请参阅 <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Vector/search.md"><code translate="no">search()</code></a>中的</p>
 </div>
@@ -436,12 +429,12 @@ data.append({
 </div>
 <div class="admonition note">
 <p><b>备注</b></p>
-<p>要使用分区键进行相似性搜索，应在搜索请求的布尔表达式中包含以下任一项：</p>
+<p>要使用 Partition Key 进行相似性搜索，应在搜索请求的布尔表达式中包含以下任一项：</p>
 <ul>
 <li><p><code translate="no">expr='&lt;partition_key&gt;=="xxxx"'</code></p></li>
 <li><p><code translate="no">expr='&lt;partition_key&gt; in ["xxx", "xxx"]'</code></p></li>
 </ul>
-<p>请将<code translate="no">&lt;partition_key&gt;</code> 替换为指定为分区键的字段名称。</p>
+<p>请将<code translate="no">&lt;partition_key&gt;</code> 替换为指定为 Partition Key 的字段名称。</p>
 </div>
 <div class="multipleCode">
    <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a></div>
@@ -449,12 +442,12 @@ data.append({
 query_vectors = [[<span class="hljs-number">0.3580376395471989</span>, -<span class="hljs-number">0.6023495712049978</span>, <span class="hljs-number">0.18414012509913835</span>, -<span class="hljs-number">0.26286205330961354</span>, <span class="hljs-number">0.9029438446296592</span>]]
 
 res = client.search(
-collection_name=<span class="hljs-string">&quot;test_collection&quot;</span>,
-data=query_vectors,
-<span class="hljs-built_in">filter</span>=<span class="hljs-string">&quot;color == &#x27;green&#x27;&quot;</span>,
-search_params={<span class="hljs-string">&quot;metric_type&quot;</span>: <span class="hljs-string">&quot;L2&quot;</span>, <span class="hljs-string">&quot;params&quot;</span>: {<span class="hljs-string">&quot;nprobe&quot;</span>: <span class="hljs-number">10</span>}},
-output_fields=[<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-string">&quot;color_tag&quot;</span>],
-limit=<span class="hljs-number">3</span>
+    collection_name=<span class="hljs-string">&quot;test_collection&quot;</span>,
+    data=query_vectors,
+    <span class="hljs-built_in">filter</span>=<span class="hljs-string">&quot;color == &#x27;green&#x27;&quot;</span>,
+    search_params={<span class="hljs-string">&quot;metric_type&quot;</span>: <span class="hljs-string">&quot;L2&quot;</span>, <span class="hljs-string">&quot;params&quot;</span>: {<span class="hljs-string">&quot;nprobe&quot;</span>: <span class="hljs-number">10</span>}},
+    output_fields=[<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-string">&quot;color_tag&quot;</span>],
+    limit=<span class="hljs-number">3</span>
 )
 
 <span class="hljs-built_in">print</span>(res)
@@ -462,35 +455,34 @@ limit=<span class="hljs-number">3</span>
 <span class="hljs-comment"># Output</span>
 <span class="hljs-comment">#</span>
 <span class="hljs-comment"># [</span>
-<span class="hljs-comment"># [</span>
-<span class="hljs-comment"># {</span>
-<span class="hljs-comment"># &quot;id&quot;: 970,</span>
-<span class="hljs-comment"># &quot;distance&quot;: 0.5770174264907837,</span>
-<span class="hljs-comment"># &quot;entity&quot;: {</span>
-<span class="hljs-comment"># &quot;id&quot;: 970,</span>
-<span class="hljs-comment"># &quot;color_tag&quot;: &quot;green_9828&quot;</span>
-<span class="hljs-comment"># }</span>
-<span class="hljs-comment"># },</span>
-<span class="hljs-comment"># {</span>
-<span class="hljs-comment"># &quot;id&quot;: 115,</span>
-<span class="hljs-comment"># &quot;distance&quot;: 0.6898155808448792,</span>
-<span class="hljs-comment"># &quot;entity&quot;: {</span>
-<span class="hljs-comment"># &quot;id&quot;: 115,</span>
-<span class="hljs-comment"># &quot;color_tag&quot;: &quot;green_4073&quot;</span>
-<span class="hljs-comment"># }</span>
-<span class="hljs-comment"># },</span>
-<span class="hljs-comment"># {</span>
-<span class="hljs-comment"># &quot;id&quot;: 899,</span>
-<span class="hljs-comment"># &quot;distance&quot;: 0.7028976678848267,</span>
-<span class="hljs-comment"># &quot;entity&quot;: {</span>
-<span class="hljs-comment"># &quot;id&quot;: 899,</span>
-<span class="hljs-comment"># &quot;color_tag&quot;: &quot;green_9897&quot;</span>
-<span class="hljs-comment"># }</span>
-<span class="hljs-comment"># }</span>
-<span class="hljs-comment"># ]</span>
+<span class="hljs-comment">#     [</span>
+<span class="hljs-comment">#         {</span>
+<span class="hljs-comment">#             &quot;id&quot;: 970,</span>
+<span class="hljs-comment">#             &quot;distance&quot;: 0.5770174264907837,</span>
+<span class="hljs-comment">#             &quot;entity&quot;: {</span>
+<span class="hljs-comment">#                 &quot;id&quot;: 970,</span>
+<span class="hljs-comment">#                 &quot;color_tag&quot;: &quot;green_9828&quot;</span>
+<span class="hljs-comment">#             }</span>
+<span class="hljs-comment">#         },</span>
+<span class="hljs-comment">#         {</span>
+<span class="hljs-comment">#             &quot;id&quot;: 115,</span>
+<span class="hljs-comment">#             &quot;distance&quot;: 0.6898155808448792,</span>
+<span class="hljs-comment">#             &quot;entity&quot;: {</span>
+<span class="hljs-comment">#                 &quot;id&quot;: 115,</span>
+<span class="hljs-comment">#                 &quot;color_tag&quot;: &quot;green_4073&quot;</span>
+<span class="hljs-comment">#             }</span>
+<span class="hljs-comment">#         },</span>
+<span class="hljs-comment">#         {</span>
+<span class="hljs-comment">#             &quot;id&quot;: 899,</span>
+<span class="hljs-comment">#             &quot;distance&quot;: 0.7028976678848267,</span>
+<span class="hljs-comment">#             &quot;entity&quot;: {</span>
+<span class="hljs-comment">#                 &quot;id&quot;: 899,</span>
+<span class="hljs-comment">#                 &quot;color_tag&quot;: &quot;green_9897&quot;</span>
+<span class="hljs-comment">#             }</span>
+<span class="hljs-comment">#         }</span>
+<span class="hljs-comment">#     ]</span>
 <span class="hljs-comment"># ]</span>
 <button class="copy-code-btn"></button></code></pre>
-
 <pre><code translate="no" class="language-java"><span class="hljs-comment">// 4. Search with partition key</span>
 <span class="hljs-title class_">List</span>&lt;<span class="hljs-title class_">List</span>&lt;<span class="hljs-title class_">Float</span>&gt;&gt; query_vectors = <span class="hljs-title class_">Arrays</span>.<span class="hljs-title function_">asList</span>(<span class="hljs-title class_">Arrays</span>.<span class="hljs-title function_">asList</span>(<span class="hljs-number">0.</span>3580376395471989f, -<span class="hljs-number">0.</span>6023495712049978f, <span class="hljs-number">0.</span>18414012509913835f, -<span class="hljs-number">0.</span>26286205330961354f, <span class="hljs-number">0.</span>9029438446296592f));
 
@@ -561,4 +553,4 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>您可以利用Partition Key功能实现更好的搜索性能并启用多租户功能。具体做法是为每个实体指定一个特定于租户的值作为分区键字段。在搜索或查询集合时，通过在布尔表达式中包含分区键字段，可以根据租户特定值过滤实体。这种方法可确保按租户进行数据隔离，并避免扫描不必要的分区。</p>
+    </button></h2><p>您可以利用 Partition Key 功能实现更好的搜索性能并启用多租户功能。具体做法是为每个实体指定一个特定于租户的值作为分区键字段。在搜索或查询 Collections 时，可以通过在布尔表达式中包含 Partition Key 字段，根据租户特定值过滤实体。这种方法可确保按租户进行数据隔离，并避免扫描不必要的分区。</p>

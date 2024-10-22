@@ -5,7 +5,6 @@ related_key: SDK
 summary: 了解如何安装 Milvus 的 Java SDK。
 title: 安装 Milvus Java SDK
 ---
-
 <h1 id="Install-Milvus-Java-SDK" class="common-anchor-header">安装 Milvus Java SDK<button data-href="#Install-Milvus-Java-SDK" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -64,13 +63,13 @@ title: 安装 Milvus Java SDK
 <pre><code translate="no" class="language-xml">&lt;dependency&gt;
     &lt;groupId&gt;io.milvus&lt;/groupId&gt;
     &lt;artifactId&gt;milvus-sdk-java&lt;/artifactId&gt;
-    &lt;version&gt;2.4.3&lt;/version&gt;
+    &lt;version&gt;2.4.5&lt;/version&gt;
 &lt;/dependency&gt;
 <button class="copy-code-btn"></button></code></pre>
 <ul>
 <li>Gradle/Grails</li>
 </ul>
-<pre><code translate="no">implementation <span class="hljs-string">&#x27;io.milvus:milvus-sdk-java:2.4.3&#x27;</span>
+<pre><code translate="no">implementation <span class="hljs-string">&#x27;io.milvus:milvus-sdk-java:2.4.5&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Whats-next" class="common-anchor-header">下一步<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -91,11 +90,11 @@ title: 安装 Milvus Java SDK
 <ul>
 <li><p>学习 Milvus 的基本操作：</p>
 <ul>
-<li><a href="/docs/zh/manage-collections.md">管理集合</a></li>
+<li><a href="/docs/zh/manage-collections.md">管理 Collections</a></li>
 <li><a href="/docs/zh/manage-partitions.md">管理分区</a></li>
 <li><a href="/docs/zh/insert-update-delete.md">插入、倒置和删除</a></li>
 <li><a href="/docs/zh/single-vector-search.md">单向量搜索</a></li>
 <li><a href="/docs/zh/multi-vector-search.md">混合搜索</a></li>
 </ul></li>
-<li><p>探索<a href="/api-reference/java/v2.4.x/About.md">Milvus Java API 参考</a></p></li>
+<li><p>探索<a href="/api-reference/java/v2.4.x/About.md">Milvus Java 应用程序接口参考</a></p></li>
 </ul>

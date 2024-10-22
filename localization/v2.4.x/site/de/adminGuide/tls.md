@@ -1,6 +1,6 @@
 ---
 id: tls.md
-title: Verschlüsselung im Transit
+title: Verschlüsselung bei der Übermittlung
 summary: 'Erfahren Sie, wie Sie den TLS-Proxy in Milvus aktivieren.'
 ---
 <h1 id="Encryption-in-Transit" class="common-anchor-header">Verschlüsselung bei der Übermittlung<button data-href="#Encryption-in-Transit" class="anchor-icon" translate="no">
@@ -18,8 +18,8 @@ summary: 'Erfahren Sie, wie Sie den TLS-Proxy in Milvus aktivieren.'
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>TLS (Transport Layer Security) ist ein Verschlüsselungsprotokoll zur Gewährleistung der Kommunikationssicherheit. Der Milvus-Proxy verwendet TLS für die einseitige und zweiseitige Authentifizierung.</p>
-<p>Dieses Thema beschreibt, wie man TLS-Proxy in Milvus aktiviert.</p>
+    </button></h1><p>TLS (Transport Layer Security) ist ein Verschlüsselungsprotokoll zur Gewährleistung der Kommunikationssicherheit. Milvus Proxy verwendet TLS für die einseitige und zweiseitige Authentifizierung.</p>
+<p>In diesem Thema wird beschrieben, wie TLS in Milvus-Proxy sowohl für gRPC- als auch für RESTful-Verkehr aktiviert werden kann.</p>
 <div class="alert note">
 <p>TLS und Benutzerauthentifizierung sind zwei unterschiedliche Sicherheitsansätze. Wenn Sie sowohl die Benutzerauthentifizierung als auch TLS in Ihrem Milvus-System aktiviert haben, müssen Sie einen Benutzernamen, ein Passwort und Pfade für Zertifikatsdateien angeben. Informationen zur Aktivierung der Benutzerauthentifizierung finden Sie unter <a href="/docs/de/authenticate.md">Authentifizierung des Benutzerzugangs</a>.</p>
 </div>
@@ -474,7 +474,7 @@ openssl x509 -req -days 3650 -<span class="hljs-keyword">in</span> client.csr -o
 <ol start="5">
 <li>Signieren Sie das Zertifikat.</li>
 </ol>
-<p>Öffnen Sie die Dateien <code translate="no">server.csr</code>, <code translate="no">ca.key</code> und <code translate="no">ca.pem</code>, um das Zertifikat zu signieren. Die Befehlsoption <code translate="no">CAcreateserial</code> wird verwendet, um eine CA-Seriennummerndatei zu erstellen, falls sie nicht existiert. Sie erhalten eine <code translate="no">aca.srl</code> Datei, wenn Sie diese Befehlsoption wählen.</p>
+<p>Öffnen Sie die Dateien <code translate="no">server.csr</code>, <code translate="no">ca.key</code> und <code translate="no">ca.pem</code>, um das Zertifikat zu signieren. Die Befehlsoption <code translate="no">CAcreateserial</code> wird verwendet, um eine CA-Seriennummerndatei zu erstellen, falls sie nicht existiert. Sie erhalten eine <code translate="no">aca.srl</code> Datei, nachdem Sie diese Befehlsoption gewählt haben.</p>
 <pre><code translate="no">openssl x509 -req -days 3650 -<span class="hljs-keyword">in</span> server.csr -out server.pem -CA ca.pem -CAkey ca.key -CAcreateserial -extfile ./openssl.cnf -extensions v3_req
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Set-up-a-Milvus-server-with-TLS" class="common-anchor-header">Einrichten eines Milvus-Servers mit TLS<button data-href="#Set-up-a-Milvus-server-with-TLS" class="anchor-icon" translate="no">
@@ -512,7 +512,7 @@ openssl x509 -req -days 3650 -<span class="hljs-keyword">in</span> client.csr -o
 <li><code translate="no">serverKeyPath</code>: Der Pfad zur Server-Schlüsseldatei.</li>
 <li><code translate="no">caPemPath</code>: Der Pfad zur CA-Zertifikatsdatei.</li>
 <li><code translate="no">tlsMode</code>: Der TLS-Modus für die Verschlüsselung. Gültige Werte:<ul>
-<li><code translate="no">1</code>: Einseitige Authentifizierung, bei der nur der Server ein Zertifikat benötigt und der Client es verifiziert. Dieser Modus erfordert <code translate="no">server.pem</code> und <code translate="no">server.key</code> auf der Server-Seite und <code translate="no">server.pem</code> auf der Client-Seite.</li>
+<li><code translate="no">1</code>: Einseitige Authentifizierung, bei der nur der Server ein Zertifikat benötigt und der Client es verifiziert. Dieser Modus erfordert <code translate="no">server.pem</code> und <code translate="no">server.key</code> auf der Serverseite und <code translate="no">server.pem</code> auf der Clientseite.</li>
 <li><code translate="no">2</code>: Zwei-Wege-Authentifizierung, bei der sowohl der Server als auch der Client Zertifikate benötigen, um eine sichere Verbindung herzustellen. Für diesen Modus sind <code translate="no">server.pem</code>, <code translate="no">server.key</code> und <code translate="no">ca.pem</code> auf der Serverseite und <code translate="no">client.pem</code>, <code translate="no">client.key</code> und <code translate="no">ca.pem</code> auf der Clientseite erforderlich.</li>
 </ul></li>
 </ul>
@@ -562,7 +562,7 @@ openssl x509 -req -days 3650 -<span class="hljs-keyword">in</span> client.csr -o
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client = MilvusClient(
-    uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>,
+    uri=<span class="hljs-string">&quot;https://localhost:19530&quot;</span>,
     secure=<span class="hljs-literal">True</span>,
     server_pem_path=<span class="hljs-string">&quot;path_to/server.pem&quot;</span>,
     server_name=<span class="hljs-string">&quot;localhost&quot;</span>
@@ -572,7 +572,7 @@ client = MilvusClient(
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client = MilvusClient(
-    uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>,
+    uri=<span class="hljs-string">&quot;https://localhost:19530&quot;</span>,
     secure=<span class="hljs-literal">True</span>,
     client_pem_path=<span class="hljs-string">&quot;path_to/client.pem&quot;</span>,
     client_key_path=<span class="hljs-string">&quot;path_to/client.key&quot;</span>,
@@ -581,3 +581,23 @@ client = MilvusClient(
 )
 <button class="copy-code-btn"></button></code></pre>
 <p>Siehe <a href="https://github.com/milvus-io/pymilvus/blob/master/examples/example_tls1.py">example_tls1.py</a> und <a href="https://github.com/milvus-io/pymilvus/blob/master/examples/example_tls2.py">example_tls2.py</a> für weitere Informationen.</p>
+<h2 id="Connect-to-the-Milvus-RESTful-server-with-TLS" class="common-anchor-header">Verbinden mit dem Milvus RESTful Server mit TLS<button data-href="#Connect-to-the-Milvus-RESTful-server-with-TLS" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>Für RESTful-APIs können Sie tls mit dem Befehl <code translate="no">curl</code> überprüfen.</p>
+<h3 id="One-way-TLS-connection" class="common-anchor-header">Einseitige TLS-Verbindung</h3><pre><code translate="no" class="language-bash">curl --cacert path_to/ca.pem https://localhost:19530/v2/vectordb/collections/list
+<button class="copy-code-btn"></button></code></pre>
+<h3 id="Two-way-TLS-connection" class="common-anchor-header">Zwei-Wege-TLS-Verbindung</h3><pre><code translate="no" class="language-bash">curl --cert path_to/client.pem --key path_to/client.key --cacert path_to/ca.pem https://localhost:19530/v2/vectordb/collections/list
+<button class="copy-code-btn"></button></code></pre>

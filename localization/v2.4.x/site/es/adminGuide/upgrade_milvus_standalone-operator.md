@@ -46,9 +46,9 @@ helm -n milvus-<span class="hljs-keyword">operator</span> upgrade milvus-<span c
 <button class="copy-code-btn"></button></code></pre>
 <p>Una vez que haya actualizado su operador Milvus a la última versión, tiene las siguientes opciones:</p>
 <ul>
-<li>Para actualizar Milvus desde v2.2.3 o versiones posteriores a 2.4.9, puede <a href="#Conduct-a-rolling-upgrade">realizar una actualización continua</a>.</li>
-<li>Para actualizar <a href="#Upgrade-Milvus-by-changing-its-image">Milvus</a> desde una versión menor anterior a v2.2.3 a 2.4.9, se recomienda <a href="#Upgrade-Milvus-by-changing-its-image">actualizar Milvus cambiando su versión de imagen</a>.</li>
-<li>Para actualizar Milvus de v2.1.x a 2.4.9, debe <a href="#Migrate-the-metadata">migrar los metadatos</a> antes de la actualización.</li>
+<li>Para actualizar Milvus desde v2.2.3 o versiones posteriores a 2.4.13-hotfix, puede <a href="#Conduct-a-rolling-upgrade">realizar una actualización continua</a>.</li>
+<li>Para actualizar Milvus desde una versión menor anterior a v2.2.3 a 2.4.13-hotfix, se recomienda <a href="#Upgrade-Milvus-by-changing-its-image">actualizar Milvus cambiando su versión de imagen</a>.</li>
+<li>Para actualizar Milvus de v2.1.x a 2.4.13-hotfix, debe <a href="#Migrate-the-metadata">migrar los metadatos</a> antes de la actualización.</li>
 </ul>
 <h2 id="Conduct-a-rolling-upgrade" class="common-anchor-header">Realizar una actualización continua<button data-href="#Conduct-a-rolling-upgrade" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -65,9 +65,9 @@ helm -n milvus-<span class="hljs-keyword">operator</span> upgrade milvus-<span c
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Desde Milvus 2.2.3, puede configurar los coordinadores de Milvus para que funcionen en modo activo-espera y activar la función de actualización continua para ellos, de modo que Milvus pueda responder a las solicitudes entrantes durante las actualizaciones de los coordinadores. En versiones anteriores, los coordinadores debían eliminarse y luego crearse durante una actualización, lo que podía introducir cierto tiempo de inactividad del servicio.</p>
-<p>Basándose en las capacidades de actualización continua proporcionadas por Kubernetes, el operador Milvus aplica una actualización ordenada de los despliegues en función de sus dependencias. Además, Milvus implementa un mecanismo para garantizar que sus componentes sigan siendo compatibles con aquellos que dependen de ellos durante la actualización, lo que reduce significativamente el posible tiempo de inactividad del servicio.</p>
-<p>La función de actualización continua está desactivada por defecto. Es necesario habilitarla explícitamente a través de un fichero de configuración.</p>
+    </button></h2><p>Desde Milvus 2.2.3, puede configurar los coordinadores de Milvus para que funcionen en modo activo-espera y habilitar la función de actualización continua para ellos, de forma que Milvus pueda responder a las peticiones entrantes durante las actualizaciones de los coordinadores. En versiones anteriores, los coordinadores debían eliminarse y luego crearse durante una actualización, lo que podía introducir cierto tiempo de inactividad del servicio.</p>
+<p>Basándose en las capacidades de actualización continua proporcionadas por Kubernetes, el operador Milvus aplica una actualización ordenada de los despliegues según sus dependencias. Además, Milvus implementa un mecanismo para garantizar que sus componentes sigan siendo compatibles con aquellos que dependen de ellos durante la actualización, lo que reduce significativamente el posible tiempo de inactividad del servicio.</p>
+<p>La función de actualización continua está desactivada por defecto. Es necesario habilitarla explícitamente a través de un archivo de configuración.</p>
 <pre><code translate="no" class="language-yaml">apiVersion: milvus.io/v1beta1
 kind: Milvus
 metadata:
@@ -76,7 +76,7 @@ spec:
   components:
     enableRollingUpdate: <span class="hljs-literal">true</span>
     imageUpdateMode: rollingUpgrade <span class="hljs-comment"># Default value, can be omitted</span>
-    image: milvusdb/milvus:v2.4.9
+    image: milvusdb/milvus:v2.4.13-hotfix
 <button class="copy-code-btn"></button></code></pre>
 <p>En el archivo de configuración anterior, establezca <code translate="no">spec.components.enableRollingUpdate</code> en <code translate="no">true</code> y <code translate="no">spec.components.image</code> en la versión de Milvus deseada.</p>
 <p>Por defecto, Milvus realiza una actualización continua para los coordinadores de forma ordenada, en la que sustituye las imágenes del pod de coordinador una tras otra. Para reducir el tiempo de actualización, considere configurar <code translate="no">spec.components.imageUpdateMode</code> a <code translate="no">all</code> para que Milvus reemplace todas las imágenes de pod al mismo tiempo.</p>
@@ -88,7 +88,7 @@ spec:
   components:
     enableRollingUpdate: <span class="hljs-literal">true</span>
     imageUpdateMode: all
-    image: milvusdb/milvus:v2.4.9
+    image: milvusdb/milvus:v2.4.13-hotfix
 <button class="copy-code-btn"></button></code></pre>
 <p>Puede configurar <code translate="no">spec.components.imageUpdateMode</code> a <code translate="no">rollingDowngrade</code> para que Milvus reemplace las imágenes de pod coordinador con una versión inferior.</p>
 <pre><code translate="no" class="language-yaml">apiVersion: milvus.io/v1beta1
@@ -130,7 +130,7 @@ labels:
 spec:
   <span class="hljs-comment"># Omit other fields ...</span>
   components:
-   image: milvusdb/milvus:v2.4.9
+   image: milvusdb/milvus:v2.4.13-hotfix
 <button class="copy-code-btn"></button></code></pre>
 <p>A continuación, ejecute lo siguiente para realizar la actualización:</p>
 <pre><code translate="no" class="language-shell">kubectl apply -f milvusupgrade.yaml
@@ -150,8 +150,8 @@ spec:
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Desde Milvus 2.2.0, los metadatos son incompatibles con los de versiones anteriores. Los siguientes ejemplos suponen una actualización de Milvus 2.1.4 a Milvus v2.4.9.</p>
-<h3 id="1-Create-a-yaml-file-for-metadata-migration" class="common-anchor-header">1. Crear un archivo <code translate="no">.yaml</code> para la migración de metadatos</h3><p>Cree un archivo de migración de metadatos. El siguiente es un ejemplo. Debe especificar <code translate="no">name</code>, <code translate="no">sourceVersion</code> y <code translate="no">targetVersion</code> en el archivo de configuración. El siguiente ejemplo establece <code translate="no">name</code> en <code translate="no">my-release-upgrade</code>, <code translate="no">sourceVersion</code> en <code translate="no">v2.1.4</code> y <code translate="no">targetVersion</code> en <code translate="no">v2.4.9</code>. Esto significa que su instancia de Milvus se actualizará de v2.1.4 a v2.4.9.</p>
+    </button></h2><p>Desde Milvus 2.2.0, los metadatos son incompatibles con los de versiones anteriores. Los siguientes ejemplos suponen una actualización de Milvus 2.1.4 a Milvus v2.4.13-hotfix.</p>
+<h3 id="1-Create-a-yaml-file-for-metadata-migration" class="common-anchor-header">1. Crear un archivo <code translate="no">.yaml</code> para la migración de metadatos</h3><p>Cree un archivo de migración de metadatos. El siguiente es un ejemplo. Debe especificar <code translate="no">name</code>, <code translate="no">sourceVersion</code> y <code translate="no">targetVersion</code> en el archivo de configuración. El siguiente ejemplo establece <code translate="no">name</code> en <code translate="no">my-release-upgrade</code>, <code translate="no">sourceVersion</code> en <code translate="no">v2.1.4</code> y <code translate="no">targetVersion</code> en <code translate="no">v2.4.13-hotfix</code>. Esto significa que su instancia de Milvus se actualizará de v2.1.4 a v2.4.13-hotfix.</p>
 <pre><code translate="no">apiVersion: milvus.io/v1beta1
 kind: MilvusUpgrade
 metadata:
@@ -161,9 +161,9 @@ spec:
     namespace: default
     name: my-release
   sourceVersion: <span class="hljs-string">&quot;v2.1.4&quot;</span>
-  targetVersion: <span class="hljs-string">&quot;v2.4.9&quot;</span>
+  targetVersion: <span class="hljs-string">&quot;v2.4.13-hotfix&quot;</span>
   <span class="hljs-comment"># below are some omit default values:</span>
-  <span class="hljs-comment"># targetImage: &quot;milvusdb/milvus:v2.4.9&quot;</span>
+  <span class="hljs-comment"># targetImage: &quot;milvusdb/milvus:v2.4.13-hotfix&quot;</span>
   <span class="hljs-comment"># toolImage: &quot;milvusdb/meta-migration:v2.2.0&quot;</span>
   <span class="hljs-comment"># operation: upgrade</span>
   <span class="hljs-comment"># rollbackIfFailed: true</span>
@@ -173,7 +173,7 @@ spec:
 <h3 id="2-Apply-the-new-configuration" class="common-anchor-header">2. Aplique la nueva configuración</h3><p>Ejecute el siguiente comando para aplicar la nueva configuración.</p>
 <pre><code translate="no">$ kubectl apply -f <span class="hljs-attr">https</span>:<span class="hljs-comment">//raw.githubusercontent.com/zilliztech/milvus-operator/main/config/samples/milvusupgrade.yaml</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="3-Check-the-status-of-metadata-migration" class="common-anchor-header">3. Compruebe el estado de la migración de metadatos</h3><p>Ejecute el siguiente comando para comprobar el estado de la migración de metadatos.</p>
+<h3 id="3-Check-the-status-of-metadata-migration" class="common-anchor-header">3. 3. Compruebe el estado de la migración de metadatos</h3><p>Ejecute el siguiente comando para comprobar el estado de la migración de metadatos.</p>
 <pre><code translate="no">kubectl describe milvus release-name
 <button class="copy-code-btn"></button></code></pre>
 <p>El estado de <code translate="no">ready</code> en la salida significa que la migración de metadatos se ha realizado correctamente.</p>

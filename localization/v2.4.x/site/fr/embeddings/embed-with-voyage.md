@@ -30,13 +30,13 @@ pip install <span class="hljs-string">&quot;pymilvus[model]&quot;</span>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus.model.dense <span class="hljs-keyword">import</span> VoyageEmbeddingFunction
 
 voyage_ef = VoyageEmbeddingFunction(
-    model_name=<span class="hljs-string">&quot;voyage-lite-02-instruct&quot;</span>, <span class="hljs-comment"># Defaults to `voyage-2`</span>
+    model_name=<span class="hljs-string">&quot;voyage-3&quot;</span>, <span class="hljs-comment"># Defaults to `voyage-3`</span>
     api_key=VOYAGE_API_KEY <span class="hljs-comment"># Provide your Voyage API key</span>
 )
 <button class="copy-code-btn"></button></code></pre>
 <p><strong>Paramètres</strong>:</p>
 <ul>
-<li><code translate="no">model_name</code> (string) Le nom du modèle Voyage à utiliser pour l'encodage. Vous pouvez spécifier n'importe quel nom de modèle Voyage disponible, par exemple, <code translate="no">voyage-law-2</code>, <code translate="no">voyage-code-2</code>, etc. Si ce paramètre n'est pas spécifié, <code translate="no">voyage-2</code> sera utilisé. Pour obtenir la liste des modèles disponibles, reportez-vous à la <a href="https://docs.voyageai.com/docs/embeddings">documentation officielle de Voyage</a>.</li>
+<li><code translate="no">model_name</code> (string) Le nom du modèle Voyage à utiliser pour l'encodage. Vous pouvez spécifier n'importe quel nom de modèle Voyage disponible, par exemple, <code translate="no">voyage-3-lite</code>, <code translate="no">voyage-finance-2</code>, etc. Si ce paramètre n'est pas spécifié, <code translate="no">voyage-3</code> sera utilisé. Pour obtenir la liste des modèles disponibles, reportez-vous à la <a href="https://docs.voyageai.com/docs/embeddings">documentation officielle de Voyage</a>.</li>
 <li><code translate="no">api_key</code> (chaîne) La clé API pour accéder à l'API de Voyage. Pour plus d'informations sur la création d'une clé API, reportez-vous à <a href="https://docs.voyageai.com/docs/api-key-and-installation">Clé API et client Python</a>.</li>
 </ul>
 <p>Pour créer des embeddings pour les documents, utilisez la méthode <code translate="no">encode_documents()</code>:</p>

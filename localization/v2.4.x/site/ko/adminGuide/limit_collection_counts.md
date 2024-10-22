@@ -1,7 +1,6 @@
 ---
 id: limit_collection_counts.md
 title: 수거 횟수 제한 설정
-summary: ''
 ---
 <h1 id="Limit-Collection-Counts" class="common-anchor-header">수집 횟수 제한<button data-href="#Limit-Collection-Counts" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -19,7 +18,7 @@ summary: ''
         ></path>
       </svg>
     </button></h1><p>Milvus 인스턴스는 최대 65,536건의 수집을 허용합니다. 그러나 컬렉션 수가 너무 많으면 성능 문제가 발생할 수 있습니다. 따라서 Milvus 인스턴스에서 생성되는 컬렉션 수를 제한하는 것이 좋습니다.</p>
-<p>이 가이드는 Milvus 인스턴스에서 컬렉션 수를 제한하는 방법에 대한 지침을 제공합니다.</p>
+<p>이 가이드에서는 Milvus 인스턴스에서 컬렉션 수를 제한하는 방법에 대한 지침을 제공합니다.</p>
 <p>구성은 Milvus 인스턴스를 설치하는 방식에 따라 다릅니다.</p>
 <ul>
 <li><p>헬름 차트를 사용하여 설치한 Milvus 인스턴스의 경우</p>
@@ -45,9 +44,9 @@ summary: ''
         ></path>
       </svg>
     </button></h2><pre><code translate="no" class="language-yaml">rootCoord:
-    maxGeneralCapacity: 1024
+    maxGeneralCapacity: 65536
 <button class="copy-code-btn"></button></code></pre>
-<p><code translate="no">maxGeneralCapacity</code> 매개 변수는 현재 Milvus 인스턴스가 보유할 수 있는 최대 컬렉션 수를 설정합니다. 기본값은 <code translate="no">1024</code> 입니다.</p>
+<p><code translate="no">maxGeneralCapacity</code> 매개 변수는 현재 Milvus 인스턴스가 보유할 수 있는 최대 컬렉션 수를 설정합니다. 기본값은 <code translate="no">65536</code> 입니다.</p>
 <h2 id="Calculating-the-number-of-collections" class="common-anchor-header">컬렉션 수 계산하기<button data-href="#Calculating-the-number-of-collections" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

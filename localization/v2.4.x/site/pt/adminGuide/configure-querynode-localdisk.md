@@ -215,7 +215,7 @@ apt-get install fio -y
 <span class="hljs-built_in">cd</span> /data
 
 <span class="hljs-comment"># write 10GB</span>
-fio -direct=1-iodepth=128 -rw=randwrite -ioengine=libaio -bs=4K -size=10G -numjobs=10 -runtime=600 -group_reporting -filename=<span class="hljs-built_in">test</span> -name=Rand_Write_IOPS_Test
+fio -direct=1 -iodepth=128 -rw=randwrite -ioengine=libaio -bs=4K -size=10G -numjobs=10 -runtime=600 -group_reporting -filename=<span class="hljs-built_in">test</span> -name=Rand_Write_IOPS_Test
 
 <span class="hljs-comment"># verify the read speed</span>
 <span class="hljs-comment"># compare with the disk performance indicators provided by various cloud providers.</span>

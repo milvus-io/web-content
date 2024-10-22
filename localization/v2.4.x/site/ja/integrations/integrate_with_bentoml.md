@@ -3,7 +3,7 @@ id: integrate_with_bentoml.md
 summary: >-
   このガイドでは、MilvusベクトルデータベースとBentoCloud上でオープンソースのエンベッディングモデルと大規模言語モデルを使用して、RAG（Retrieval
   Augmented Generation）アプリケーションを構築する方法を紹介します。
-title: MilvusとBentoMLによる検索支援型生成（RAG）
+title: MilvusとBentoMLによる検索支援型生成(RAG)
 ---
 <h1 id="Retrieval-Augmented-Generation-RAG-with-Milvus-and-BentoML" class="common-anchor-header">MilvusとBentoMLによる検索支援型生成(RAG)<button data-href="#Retrieval-Augmented-Generation-RAG-with-Milvus-and-BentoML" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -20,7 +20,8 @@ title: MilvusとBentoMLによる検索支援型生成（RAG）
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/rag_with_milvus_and_bentoml.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a></p>
+    </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/rag_with_milvus_and_bentoml.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
+<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/rag_with_milvus_and_bentoml.ipynb" target="_blank"><img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/></a></p>
 <h2 id="Introduction" class="common-anchor-header">はじめに<button data-href="#Introduction" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -36,7 +37,7 @@ title: MilvusとBentoMLによる検索支援型生成（RAG）
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>このガイドでは、BentoCloud上のオープンソースの埋め込みモデルと大規模言語モデルとMilvusベクトルデータベースを使用して、RAG（Retrieval Augmented Generation）アプリケーションを構築する方法を説明します。 BentoCloudは、モデル推論用に調整されたフルマネージドインフラストラクチャを提供する、動きの速いAIチームのためのAI推論プラットフォームです。オープンソースのモデル・サービング・フレームワークである BentoML と連携し、高性能なモデル・サービスの簡単な作成とデプロイを容易にします。このデモでは、Pythonアプリケーションに組み込むことができるMilvusの軽量版であるMilvus Liteをベクターデータベースとして使用します。</p>
+    </button></h2><p>このガイドでは、BentoCloud上のオープンソースのエンベッディングモデルと大規模言語モデルをMilvusベクトルデータベースと組み合わせて使用し、RAG（Retrieval Augmented Generation）アプリケーションを構築する方法を説明します。 BentoCloudは、動きの速いAIチームのためのAI推論プラットフォームであり、モデル推論用に調整されたフルマネージドインフラストラクチャを提供します。オープンソースのモデル・サービング・フレームワークである BentoML と連携し、高性能なモデル・サービスの簡単な作成とデプロイを容易にします。このデモでは、Pythonアプリケーションに組み込むことができるMilvusの軽量版であるMilvus Liteをベクターデータベースとして使用します。</p>
 <h2 id="Before-you-begin" class="common-anchor-header">始める前に<button data-href="#Before-you-begin" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -117,7 +118,7 @@ data = response.json()
         file_path = os.path.join(save_dir, item[<span class="hljs-string">&quot;name&quot;</span>])
         urllib.request.urlretrieve(file_url, file_path)
 <button class="copy-code-btn"></button></code></pre>
-<p>次に、持っているファイルをそれぞれ処理します。</p>
+<p>次に、持っている各ファイルを処理します。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># please upload your data directory under this file&#x27;s folder</span>
 cities = os.listdir(<span class="hljs-string">&quot;city_data&quot;</span>)
 <span class="hljs-comment"># store chunked text for each of the cities in a list of dicts</span>
@@ -176,7 +177,7 @@ city_chunks = []
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>埋め込みとデータの準備ができたら、Milvus Liteにメタデータとともにベクトルを挿入し、後でベクトル検索を行う。ここではまず、Milvus Liteに接続してクライアントを起動します。<code translate="no">MilvusClient</code> モジュールをインポートして、Milvus Lite ベクトルデータベースに接続するMilvus Lite クライアントを初期化します。次元サイズは埋め込みモデルのサイズに由来します。例えば、Sentence Transformerモデル<code translate="no">all-MiniLM-L6-v2</code> は384次元のベクトルを生成します。</p>
+    </button></h2><p>埋め込みとデータの準備ができたら、Milvus Liteにメタデータとともにベクトルを挿入し、後でベクトル検索を行う。ここではまず、Milvus Liteに接続してクライアントを起動します。<code translate="no">MilvusClient</code> モジュールをインポートし、Milvus Lite ベクトルデータベースに接続するMilvus Lite クライアントを初期化します。次元サイズは埋め込みモデルのサイズに由来します。例えば、Sentence Transformerモデル<code translate="no">all-MiniLM-L6-v2</code> は384次元のベクトルを生成します。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 COLLECTION_NAME = <span class="hljs-string">&quot;Bento_Milvus_RAG&quot;</span>  <span class="hljs-comment"># random name for your collection</span>
@@ -213,7 +214,7 @@ connections.<span class="hljs-title function_">connect</span>(uri=<span class="h
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus Liteを使用してコレクションを作成するには2つのステップがあります。このセクションでは、1つのモジュールが必要です：DataTypeはフィールドにどのようなデータタイプが入るかを示します。create_schema()：コレクションのスキーマを作成し、add_field()：コレクションのスキーマにフィールドを追加します。</p>
+    </button></h2><p>Milvus Liteを使ってコレクションを作成するには、スキーマの定義とインデックスの定義の2つのステップがあります。このセクションでは、1つのモジュールが必要です：DataTypeはフィールドにどのようなデータタイプが入るかを示します。create_schema()：コレクションのスキーマを作成し、add_field()：コレクションのスキーマにフィールドを追加します。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType, Collection
 
 <span class="hljs-comment"># Create schema</span>
@@ -226,7 +227,7 @@ schema = MilvusClient.create_schema(
 schema.add_field(field_name=<span class="hljs-string">&quot;id&quot;</span>, datatype=DataType.INT64, is_primary=<span class="hljs-literal">True</span>)
 schema.add_field(field_name=<span class="hljs-string">&quot;embedding&quot;</span>, datatype=DataType.FLOAT_VECTOR, dim=DIMENSION)
 <button class="copy-code-btn"></button></code></pre>
-<p>スキーマを作成し、データ・フィールドをうまく定義できたので、インデックスを定義する必要があります。検索に関しては、"インデックス "はデータを検索するためにどのようにマッピングするかを定義します。このプロジェクトでは、デフォルトの<a href="https://docs.zilliz.com/docs/autoindex-explained">AUTOINDEXを</a>使用してインデックスを作成します。</p>
+<p>スキーマを作成し、データ・フィールドをうまく定義できたので、次はインデックスを定義する必要があります。検索に関しては、"インデックス "はデータを検索するためにどのようにマッピングするかを定義します。このプロジェクトでは、デフォルトの<a href="https://docs.zilliz.com/docs/autoindex-explained">AUTOINDEXを</a>使用してインデックスを作成します。</p>
 <p>次に、先に指定した名前、スキーマ、インデックスでコレクションを作成します。最後に、前に処理したデータを挿入します。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># prepare index parameters</span>
 index_params = milvus_client.prepare_index_params()
@@ -283,7 +284,7 @@ llm_client = bentoml.<span class="hljs-title class_">SyncHTTPClient</span>(<span
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>次に、プロンプト、コンテキスト、質問でLLM命令をセットアップします。以下は、LLMとして動作し、クライアントからの出力を文字列形式で返す関数です。</p>
+    </button></h2><p>さて、プロンプト、コンテキスト、質問でLLM命令をセットアップします。以下は、LLMとして動作し、クライアントからの出力を文字列形式で返す関数です。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">dorag</span>(<span class="hljs-params">question: <span class="hljs-built_in">str</span>, context: <span class="hljs-built_in">str</span></span>):
 
     prompt = (
@@ -346,4 +347,4 @@ context = ask_a_question(question=question)
 <p>RAGの実装</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">print</span>(dorag(question=question, context=context))
 <button class="copy-code-btn"></button></code></pre>
-<p>ケンブリッジがどの州にあるかという質問例では、BentoMLから回答全体を表示することができます。しかし、時間をかけて解析すれば、より見栄えが良くなり、ケンブリッジがマサチューセッツ州にあることを教えてくれるはずです。</p>
+<p>ケンブリッジがどの州にあるかという質問例では、BentoMLから回答全体を表示することができます。しかし、時間をかけて解析すれば、より見栄えがよくなり、ケンブリッジがマサチューセッツ州にあることを教えてくれるはずです。</p>

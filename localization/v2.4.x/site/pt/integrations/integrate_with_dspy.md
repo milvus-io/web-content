@@ -20,7 +20,8 @@ title: Integrar Milvus com DSPy
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/milvus_and_DSPy.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a></p>
+    </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/milvus_and_DSPy.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
+<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/milvus_and_DSPy.ipynb" target="_blank"><img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/></a></p>
 <h2 id="What-is-DSPy" class="common-anchor-header">O que é DSPy<button data-href="#What-is-DSPy" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -232,7 +233,7 @@ score = evaluate_on_hotpotqa(rag, metric=metric)
 <h3 id="Optimizing-the-pipeline" class="common-anchor-header">Otimização do pipeline</h3><p>Depois de definir esse programa, a próxima etapa é a compilação. Esse processo atualiza os parâmetros em cada módulo para melhorar o desempenho. O processo de compilação depende de três fatores críticos:</p>
 <ul>
 <li>Conjunto de treinamento: Utilizaremos os 20 exemplos de perguntas e respostas do nosso conjunto de dados de treinamento para esta demonstração.</li>
-<li>Métrica de validação: Estabeleceremos uma métrica <code translate="no">validate_context_and_answer</code> simples. Esta métrica verifica a exatidão da resposta prevista e garante que o contexto recuperado inclui a resposta.</li>
+<li>Métrica de validação: Estabeleceremos uma métrica <code translate="no">validate_context_and_answer</code> simples. Esta métrica verifica a exatidão da resposta prevista e assegura que o contexto recuperado inclui a resposta.</li>
 <li>Optimizador específico (Teleprompter): O compilador do DSPy incorpora vários teleprompters concebidos para otimizar os seus programas de forma eficaz.</li>
 </ul>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> dspy.teleprompt <span class="hljs-keyword">import</span> BootstrapFewShot

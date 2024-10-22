@@ -1,7 +1,6 @@
 ---
 id: use-partition-key.md
 title: パーティション・キーの使用
-summary: ''
 ---
 <h1 id="Use-Partition-Key" class="common-anchor-header">パーティション・キーの使用<button data-href="#Use-Partition-Key" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -34,7 +33,7 @@ summary: ''
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>コレクション内の特定のフィールドをパーティションキーとして設定すると、Milvusはこのフィールドのそれぞれのパーティション値に従って、受信エンティティを異なるパーティションに分配します。これにより、同じキー値を持つエンティティをパーティションにまとめることができ、キーフィールドによるフィルタリング時に無関係なパーティションをスキャンする必要がなくなるため、検索パフォーマンスが向上します。従来のフィルタリング方法と比較すると、パーティション・キーはクエリ・パフォーマンスを大幅に向上させることができます。</p>
+    </button></h2><p>コレクション内の特定のフィールドをパーティションキーとして設定することで、Milvusは入力されたエンティティをこのフィールドのそれぞれのパーティション値に従って異なるパーティションに振り分けることができます。これにより、同じキー値を持つエンティティをパーティションにまとめることができ、キーフィールドによるフィルタリング時に無関係なパーティションをスキャンする必要がなくなるため、検索パフォーマンスが向上します。従来のフィルタリング方法と比較すると、パーティション・キーはクエリ・パフォーマンスを大幅に向上させることができます。</p>
 <p>パーティション・キーを使用してマルチテナンシーを実装できます。マルチ・テナンシーの詳細については、<a href="https://milvus.io/docs/multi_tenancy.md">マルチ・テナンシーを</a>お読みください。</p>
 <h2 id="Enable-partition-key" class="common-anchor-header">パーティション・キーの有効化<button data-href="#Enable-partition-key" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -52,7 +51,7 @@ summary: ''
         ></path>
       </svg>
     </button></h2><p>フィールドをパーティション・キーとして設定するには、コレクション・スキーマを作成するときに<code translate="no">partition_key_field</code> 。</p>
-<p>以下のコード例では、<code translate="no">num_partitions</code> が作成されるパーティション数を決定します。デフォルトでは、<code translate="no">16</code> に設定されています。 デフォルト値を保持することをお勧めします。</p>
+<p>以下のコード例では、<code translate="no">num_partitions</code> が作成されるパーティション数を決定します。デフォルトでは、<code translate="no">64</code> に設定されています。 デフォルト値を保持することをお勧めします。</p>
 <div class="language-python">
 <p>パラメータの詳細については <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Client/MilvusClient.md"><code translate="no">MilvusClient</code></a>, <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_schema.md"><code translate="no">create_schema()</code></a>および <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/CollectionSchema/add_field.md"><code translate="no">add_field()</code></a>を参照してください。</p>
 </div>
@@ -79,7 +78,7 @@ schema = MilvusClient.create_schema(
     auto_id=<span class="hljs-literal">False</span>,
     enable_dynamic_field=<span class="hljs-literal">True</span>,
     partition_key_field=<span class="hljs-string">&quot;color&quot;</span>,
-    num_partitions=<span class="hljs-number">16</span> <span class="hljs-comment"># Number of partitions. Defaults to 16.</span>
+    num_partitions=<span class="hljs-number">64</span> <span class="hljs-comment"># Number of partitions. Defaults to 64.</span>
 )
 
 schema.add_field(field_name=<span class="hljs-string">&quot;id&quot;</span>, datatype=DataType.INT64, is_primary=<span class="hljs-literal">True</span>)
@@ -345,7 +344,7 @@ data = []
 <p>データを挿入するには <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Vector/insert.md"><code translate="no">insert()</code></a>メソッドを使用して、データをコレクションに挿入します。</p>
 </div>
 <div class="language-java">
-<p>コレクションにデータを挿入するには <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Vector/insert.md"><code translate="no">insert()</code></a>メソッドを使用して、データをコレクションに挿入します。</p>
+<p>データをコレクションに挿入するには <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Vector/insert.md"><code translate="no">insert()</code></a>メソッドを使用して、データをコレクションに挿入します。</p>
 </div>
 <div class="language-javascript">
 <p>データをコレクションに挿入するには <a href="https://milvus.io/api-reference/node/v2.4.x/Vector/insert.md"><code translate="no">insert()</code></a>メソッドを使用して、データをコレクションに挿入します。</p>
@@ -554,4 +553,4 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>パーティション・キー機能を利用することで、より優れた検索パフォーマンスを実現し、マルチテナントを有効にすることができる。これは、テナント固有の値を各エンティティのパーティション・キー・フィールドとして割り当てることで実現できます。コレクションを検索またはクエリするとき、ブーリアン式にパーティション・キー・フィールドを含めることで、テナント固有の値によってエンティティをフィルタリングできます。このアプローチにより、テナントによるデータの分離が保証され、不要なパーティションのスキャンが回避されます。</p>
+    </button></h2><p>パーティション・キー機能を利用することで、より優れた検索パフォーマンスを実現し、マルチテナントを有効にすることができる。これは、テナント固有の値を各エンティティのパーティション・キー・フィールドとして割り当てることで実現できます。コレクションを検索またはクエリするときに、ブーリアン式にパーティション・キー・フィールドを含めることで、テナント固有の値によってエンティティをフィルタリングできます。このアプローチにより、テナントによるデータの分離が保証され、不要なパーティションのスキャンが回避されます。</p>

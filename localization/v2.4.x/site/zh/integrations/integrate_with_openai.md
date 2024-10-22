@@ -1,7 +1,7 @@
 ---
 id: integrate_with_openai.md
-title: 利用 Milvus 和 OpenAI 进行语义搜索
-summary: 本页讨论向量数据库与 OpenAI 的嵌入式 API 的集成。
+title: 使用 Milvus 和 OpenAI 进行语义搜索
+summary: 本页讨论向量数据库与 OpenAI 的 Embeddings API 的集成。
 ---
 <h1 id="Semantic-Search-with-Milvus-and-OpenAI" class="common-anchor-header">使用 Milvus 和 OpenAI 进行语义搜索<button data-href="#Semantic-Search-with-Milvus-and-OpenAI" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -18,8 +18,9 @@ summary: 本页讨论向量数据库与 OpenAI 的嵌入式 API 的集成。
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/semantic_search_with_milvus_and_openai.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a></p>
-<p>本指南展示了如何将<a href="https://platform.openai.com/docs/guides/embeddings">OpenAI的嵌入式API</a>与Milvus向量数据库结合使用，对文本进行语义搜索。</p>
+    </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/semantic_search_with_milvus_and_openai.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
+<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/semantic_search_with_milvus_and_openai.ipynb" target="_blank"><img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/></a></p>
+<p>本指南展示了如何将<a href="https://platform.openai.com/docs/guides/embeddings">OpenAI 的 Embedding API</a>与 Milvus 向量数据库结合使用，对文本进行语义搜索。</p>
 <h2 id="Getting-started" class="common-anchor-header">开始<button data-href="#Getting-started" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -43,7 +44,7 @@ summary: 本页讨论向量数据库与 OpenAI 的嵌入式 API 的集成。
 <div class="alert note">
 <p>如果您使用的是 Google Colab，为了启用刚刚安装的依赖项，您可能需要<strong>重启运行时</strong>。(点击屏幕上方的 "运行时 "菜单，从下拉菜单中选择 "重启会话"）。</p>
 </div>
-<p>这样，我们就可以生成嵌入并使用向量数据库进行语义搜索了。</p>
+<p>这样，我们就可以生成 Embeddings 并使用向量数据库进行语义搜索了。</p>
 <h2 id="Searching-book-titles-with-OpenAI--Milvus" class="common-anchor-header">使用 OpenAI 和 Milvus 搜索书名<button data-href="#Searching-book-titles-with-OpenAI--Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -111,7 +112,7 @@ res = milvus_client.insert(collection_name=<span class="hljs-string">&quot;demo_
 <li>如果你想使用<a href="https://zilliz.com/cloud">Zilliz Cloud</a>（Milvus 的全托管云服务），请调整<code translate="no">uri</code> 和<code translate="no">token</code> ，它们与 Zilliz Cloud 中的<a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">公共端点和 Api 密钥</a>相对应。</li>
 </ul>
 </div>
-<p>有了 Milvus 向量数据库中的所有数据，我们现在就可以通过为查询生成向量嵌入来执行语义搜索，并进行向量搜索。</p>
+<p>有了 Milvus 向量数据库中的所有数据，我们现在就可以通过为查询生成向量 Embeddings 来执行语义搜索，并进行向量搜索。</p>
 <pre><code translate="no" class="language-python">queries = [<span class="hljs-string">&quot;When was artificial intelligence founded?&quot;</span>]
 
 query_vectors = [

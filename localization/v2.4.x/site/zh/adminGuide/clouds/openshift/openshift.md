@@ -1,6 +1,6 @@
 ---
 id: openshift.md
-title: 在 OpenShift 上部署 Milvus 集群
+title: 在 OpenShift 上部署 Milvus 群集
 related_key: cluster
 summary: 了解如何在 OpenShift 上部署 Milvus 集群。
 ---
@@ -19,7 +19,7 @@ summary: 了解如何在 OpenShift 上部署 Milvus 集群。
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>本主题逐步介绍如何在 OpenShift 上部署 Milvus。</p>
+    </button></h1><p>本主题将逐步介绍如何在 OpenShift 上部署 Milvus。</p>
 <h2 id="Prerequisites" class="common-anchor-header">先决条件<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -35,7 +35,7 @@ summary: 了解如何在 OpenShift 上部署 Milvus 集群。
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>在开始部署流程之前，请确保您拥有</p>
+    </button></h2><p>在开始部署过程之前，请确保您拥有</p>
 <ul>
 <li>运行中的 OpenShift 群集。</li>
 <li>具有足够权限的 OpenShift 群集访问权限（<code translate="no">cluster-admin</code> 角色或同等权限）。</li>
@@ -74,7 +74,7 @@ summary: 了解如何在 OpenShift 上部署 Milvus 集群。
    </span> <span class="img-wrapper"> <span>证书管理器-2</span> </span></p></li>
 </ol></li>
 </ol>
-<h2 id="Step-2-Issue-a-Self-Signed-Certificate-for-Milvus-Operator" class="common-anchor-header">第 2 步：为 Milvus Operator 签发自签名证书<button data-href="#Step-2-Issue-a-Self-Signed-Certificate-for-Milvus-Operator" class="anchor-icon" translate="no">
+<h2 id="Step-2-Issue-a-Self-Signed-Certificate-for-Milvus-Operator" class="common-anchor-header">步骤 2：为 Milvus Operator 签发自签名证书<button data-href="#Step-2-Issue-a-Self-Signed-Certificate-for-Milvus-Operator" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -96,30 +96,30 @@ summary: 了解如何在 OpenShift 上部署 Milvus 集群。
 apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
-name: milvus-operator-serving-cert
-namespace: milvus-operator
+  name: milvus-operator-serving-cert
+  namespace: milvus-operator
 spec:
-dnsNames:
-- milvus-operator-webhook-service.milvus-operator.svc
-- milvus-operator-webhook-service.milvus-operator.svc.cluster.local
-issuerRef:
+  dnsNames:
+  - milvus-operator-webhook-service.milvus-operator.svc
+  - milvus-operator-webhook-service.milvus-operator.svc.cluster.local
+  issuerRef:
     kind: Issuer
     name: milvus-operator-selfsigned-issuer
-secretName: milvus-operator-webhook-cert
+  secretName: milvus-operator-webhook-cert
 ---
 apiVersion: cert-manager.io/v1
 kind: Issuer
 metadata:
-name: milvus-operator-selfsigned-issuer
-namespace: milvus-operator
+  name: milvus-operator-selfsigned-issuer
+  namespace: milvus-operator
 spec:
-selfSigned: {}
+  selfSigned: {}
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>应用该文件：</p>
 <pre><code translate="no" class="language-shell">kubectl apply -f milvus-<span class="hljs-keyword">operator</span>-certificate.yaml
 <button class="copy-code-btn"></button></code></pre></li>
 </ol>
-<h2 id="Step-3-Install-Milvus-Operator" class="common-anchor-header">第 3 步：安装 Milvus Operator<button data-href="#Step-3-Install-Milvus-Operator" class="anchor-icon" translate="no">
+<h2 id="Step-3-Install-Milvus-Operator" class="common-anchor-header">第 3 步：安装 Milvus 操作符<button data-href="#Step-3-Install-Milvus-Operator" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

@@ -24,9 +24,9 @@ title: Aggiornamento di Milvus Standalone con Docker Compose
         ></path>
       </svg>
     </button></h1><p>Questo argomento descrive come aggiornare Milvus utilizzando Docker Compose.</p>
-<p>In casi normali, è possibile <a href="#Upgrade-Milvus-by-changing-its-image">aggiornare Milvus cambiando l'immagine</a>. Tuttavia, è necessario <a href="#Migrate-the-metadata">migrare i metadati</a> prima di qualsiasi aggiornamento dalla versione v2.1.x alla versione v2.4.9.</p>
+<p>In casi normali, è possibile <a href="#Upgrade-Milvus-by-changing-its-image">aggiornare Milvus cambiando l'immagine</a>. Tuttavia, è necessario <a href="#Migrate-the-metadata">migrare i metadati</a> prima di qualsiasi aggiornamento da v2.1.x a v2.4.13-hotfix.</p>
 <div class="alter note">
-<p>A causa di problemi di sicurezza, Milvus aggiorna il proprio MinIO a RELEASE.2023-03-20T20-16-18Z con il rilascio della v2.2.5. Prima di qualsiasi aggiornamento da versioni precedenti di Milvus Standalone installate con Docker Compose, è necessario creare un deployment MinIO a singolo nodo e singola unità e migrare le impostazioni e i contenuti di MinIO esistenti al nuovo deployment. Per i dettagli, fate riferimento a <a href="https://min.io/docs/minio/linux/operations/install-deploy-manage/migrate-fs-gateway.html#id2">questa guida</a>.</p>
+<p>A causa di problemi di sicurezza, Milvus aggiorna il suo MinIO a RELEASE.2023-03-20T20-16-18Z con il rilascio della v2.2.5. Prima di qualsiasi aggiornamento da versioni precedenti di Milvus Standalone installate con Docker Compose, è necessario creare un deployment MinIO a singolo nodo e singola unità e migrare le impostazioni e i contenuti di MinIO esistenti al nuovo deployment. Per i dettagli, fate riferimento a <a href="https://min.io/docs/minio/linux/operations/install-deploy-manage/migrate-fs-gateway.html#id2">questa guida</a>.</p>
 </div>
 <h2 id="Upgrade-Milvus-by-changing-its-image" class="common-anchor-header">Aggiornare Milvus cambiando l'immagine<button data-href="#Upgrade-Milvus-by-changing-its-image" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -49,7 +49,7 @@ title: Aggiornamento di Milvus Standalone con Docker Compose
 <pre><code translate="no" class="language-yaml">...
 standalone:
   container_name: milvus-standalone
-  image: milvusdb/milvus:v2.4.9
+  image: milvusdb/milvus:v2.4.13-hotfix
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>Eseguite i seguenti comandi per eseguire l'aggiornamento.</p>
 <pre><code translate="no" class="language-shell">docker compose down
@@ -83,7 +83,7 @@ cmd:
   runWithBackup: true
 config:
   sourceVersion: <span class="hljs-number">2.1</span><span class="hljs-number">.4</span>   <span class="hljs-comment"># Specify your milvus version</span>
-  targetVersion: <span class="hljs-number">2.4</span><span class="hljs-number">.9</span>
+  targetVersion: <span class="hljs-number">2.4</span><span class="hljs-number">.13</span>-hotfix
   backupFilePath: /tmp/migration.bak
 metastore:
   <span class="hljs-built_in">type</span>: etcd
@@ -126,7 +126,7 @@ docker compose up -d
 </ul></li>
 <li>Se siete pronti a distribuire il vostro cluster su cloud:<ul>
 <li>Imparare a <a href="/docs/it/eks.md">distribuire Milvus su Amazon EKS con Terraform</a></li>
-<li>Imparare a <a href="/docs/it/gcp.md">distribuire il cluster Milvus su GCP con Kubernetes</a></li>
+<li>Imparare a distribuire <a href="/docs/it/gcp.md">il cluster Milvus su GCP con Kubernetes</a></li>
 <li>Imparare a <a href="/docs/it/azure.md">distribuire Milvus su Microsoft Azure con Kubernetes</a></li>
 </ul></li>
 </ul>

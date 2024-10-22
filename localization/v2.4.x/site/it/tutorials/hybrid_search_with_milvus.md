@@ -18,7 +18,8 @@ title: Ricerca ibrida con Milvus
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/hybrid_search_with_milvus.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a></p>
+    </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/hybrid_search_with_milvus.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
+<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/hybrid_search_with_milvus.ipynb" target="_blank"><img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/></a></p>
 <p><img translate="no" src="https://raw.githubusercontent.com/milvus-io/bootcamp/master/bootcamp/tutorials/quickstart/apps/hybrid_demo_with_milvus/pics/demo.png"/></p>
 <p>In questa esercitazione dimostreremo come condurre una ricerca ibrida con <a href="https://milvus.io/docs/multi-vector-search.md">Milvus</a> e il <a href="https://github.com/FlagOpen/FlagEmbedding/tree/master/FlagEmbedding/BGE_M3">modello BGE-M3</a>. Il modello BGE-M3 può convertire il testo in vettori densi e radi. Milvus supporta la memorizzazione di entrambi i tipi di vettori in un'unica raccolta, consentendo una ricerca ibrida che migliora la rilevanza dei risultati.</p>
 <p>Milvus supporta metodi di recupero densi, radi e ibridi:</p>
@@ -201,11 +202,11 @@ def <span class="hljs-title">dense_search</span>(<span class="hljs-params">col, 
 <button class="copy-code-btn"></button></code></pre>
 <p>Eseguiamo tre diverse ricerche con le funzioni definite:</p>
 <pre><code translate="no" class="language-python">dense_results = <span class="hljs-title function_">dense_search</span>(col, query_embeddings[<span class="hljs-string">&quot;dense&quot;</span>][<span class="hljs-number">0</span>])
-sparse_results = <span class="hljs-title function_">sparse_search</span>(col, query_embeddings[<span class="hljs-string">&quot;sparse&quot;</span>][<span class="hljs-number">0</span>])
+sparse_results = <span class="hljs-title function_">sparse_search</span>(col, query_embeddings[<span class="hljs-string">&quot;sparse&quot;</span>].<span class="hljs-title function_">_getrow</span>(<span class="hljs-number">0</span>))
 hybrid_results = <span class="hljs-title function_">hybrid_search</span>(
     col,
     query_embeddings[<span class="hljs-string">&quot;dense&quot;</span>][<span class="hljs-number">0</span>],
-    query_embeddings[<span class="hljs-string">&quot;sparse&quot;</span>][<span class="hljs-number">0</span>],
+    query_embeddings[<span class="hljs-string">&quot;sparse&quot;</span>].<span class="hljs-title function_">_getrow</span>(<span class="hljs-number">0</span>),
     sparse_weight=<span class="hljs-number">0.7</span>,
     dense_weight=<span class="hljs-number">1.0</span>,
 )
@@ -309,4 +310,4 @@ formatted_results = doc_text_formatting(ef, query, hybrid_results)
 <p>Quale attività è meglio<span style='color:red'> avviare</span> a Hyderabad<span style='color:red'>?</span></p>
 <p>Di quale matematica ha bisogno un principiante<span style='color:red'> per</span> capire gli algoritmi della<span style='color:red'> programmazione</span> informatica<span style='color:red'>?</span> Quali libri sugli algoritmi sono adatti a un principiante assoluto<span style='color:red'>?</span></p>
 <p><span style='color:red'>Come</span> fare in modo che la vita si adatti a voi e impedisca alla vita di <span style='color:red'>abusare</span> di voi mentalmente ed emotivamente<span style='color:red'>?</span></p>
-<h3 id="Quick-Deploy" class="common-anchor-header">Distribuzione rapida</h3><p>Per sapere come avviare una demo online con questo tutorial, fate riferimento <a href="https://github.com/milvus-io/bootcamp/tree/master/bootcamp/tutorials/quickstart/apps/hybrid_demo_with_milvus">all'applicazione di esempio</a>.</p>
+<h3 id="Quick-Deploy" class="common-anchor-header">Distribuzione rapida</h3><p>Per sapere come avviare una demo online con questo tutorial, fate riferimento all <a href="https://github.com/milvus-io/bootcamp/tree/master/bootcamp/tutorials/quickstart/apps/hybrid_demo_with_milvus">'applicazione di esempio</a>.</p>

@@ -215,7 +215,7 @@ apt-get install fio -y
 <span class="hljs-built_in">cd</span> /data
 
 <span class="hljs-comment"># write 10GB</span>
-fio -direct=1-iodepth=128 -rw=randwrite -ioengine=libaio -bs=4K -size=10G -numjobs=10 -runtime=600 -group_reporting -filename=<span class="hljs-built_in">test</span> -name=Rand_Write_IOPS_Test
+fio -direct=1 -iodepth=128 -rw=randwrite -ioengine=libaio -bs=4K -size=10G -numjobs=10 -runtime=600 -group_reporting -filename=<span class="hljs-built_in">test</span> -name=Rand_Write_IOPS_Test
 
 <span class="hljs-comment"># verify the read speed</span>
 <span class="hljs-comment"># compare with the disk performance indicators provided by various cloud providers.</span>
@@ -265,7 +265,7 @@ IO depths    : <span class="hljs-number">1</span>=<span class="hljs-number">0.1<
         ></path>
       </svg>
     </button></h2><p>확인 결과가 만족스러우면 다음 단계에 따라 Milvus Distributed를 배포할 수 있습니다:</p>
-<h3 id="Tips-for-deploying-Milvus-Distributed-using-Helm" class="common-anchor-header">헬름을 사용하여 밀버스 배포를 위한 팁</h3><p>쿼리노드 파드는 기본적으로 NVMe 디스크를 EmptyDir 볼륨으로 사용한다. 최적의 성능을 보장하려면 NVMe 디스크를 쿼리노드 파드 내의 <code translate="no">/var/lib/milvus/data</code> 에 마운트하는 것이 좋다.</p>
+<h3 id="Tips-for-deploying-Milvus-Distributed-using-Helm" class="common-anchor-header">헬름을 사용하여 밀버스 디스트리뷰티드 배포를 위한 팁</h3><p>쿼리노드 파드는 기본적으로 NVMe 디스크를 EmptyDir 볼륨으로 사용한다. 최적의 성능을 보장하려면 NVMe 디스크를 쿼리노드 파드 내의 <code translate="no">/var/lib/milvus/data</code> 에 마운트하는 것이 좋다.</p>
 <p>헬름을 사용하여 밀버스 디스트리뷰션을 배포하는 방법에 대한 자세한 내용은 <a href="/docs/ko/install_cluster-helm.md">헬름으로 쿠버네티스에서 밀버스 실행하기를</a> 참조한다.</p>
 <h3 id="Tips-for-deploying-Milvus-Distributed-using-Milvus-Operator" class="common-anchor-header">밀버스 오퍼레이터를 사용하여 밀버스 디스트리뷰티드 배포를 위한 팁</h3><p>밀버스 오퍼레이터는 NVMe 디스크를 EmptyDir 볼륨으로 사용하도록 쿼리노드 파드를 자동으로 구성한다. <code translate="no">MilvusCluster</code> 사용자 정의 리소스에 다음 구성을 추가하는 것이 좋습니다:</p>
 <pre><code translate="no" class="language-yaml">...

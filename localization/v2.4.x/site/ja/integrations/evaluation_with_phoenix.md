@@ -20,7 +20,8 @@ title: Arize Pheonixによる評価
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/evaluation_with_phoenix.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a></p>
+    </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/evaluation_with_phoenix.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
+<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/evaluation_with_phoenix.ipynb" target="_blank"><img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/></a></p>
 <p>このガイドでは、<a href="https://phoenix.arize.com/">Arize Pheonixを</a>使用して、<a href="https://milvus.io/">Milvusを</a>ベースに構築されたRAG（Retrieval-Augmented Generation）パイプラインを評価する方法を示します。</p>
 <p>RAGシステムは、検索システムと生成モデルを組み合わせて、与えられたプロンプトに基づいて新しいテキストを生成します。このシステムは、まずMilvusを使ってコーパスから関連文書を検索し、次に生成モデルを使って検索された文書に基づいて新しいテキストを生成する。</p>
 <p>Arize Pheonixは、RAGパイプラインの評価を支援するフレームワークである。パイプラインの構築を支援する既存のツールやフレームワークはありますが、パイプラインを評価し、パイプラインのパフォーマンスを定量化することは困難です。そこでArize Pheonixの登場です。</p>
@@ -334,10 +335,10 @@ Answering questions: 100%|██████████| 3/3 [00:03&lt;00:00,  
 </ul></li>
 <li><p><strong>QA評価</strong>：入力クエリに対するモデルの回答の正確性を評価する。</p>
 <ul>
-<li><strong>QA説明</strong>：回答が正しい、または正しくない理由を詳細に説明します。</li>
+<li><strong>QA説明</strong>：回答が正しいか正しくないかの理由を詳細に説明します。</li>
 </ul></li>
 </ul>
-<h3 id="Phoenix-Tracing-Overview" class="common-anchor-header">Phoenixトレースの概要</h3><p>Phoenixは、<strong>Langchainや</strong> <strong>LlamaIndexの</strong>ようなフレームワーク、<strong>OpenAIや</strong> <strong>Mistralの</strong>ようなSDKとの統合により、LLMアプリケーションに<strong>OTEL互換のトレースを</strong>提供します。トレースはリクエストフロー全体をキャプチャし、以下のような洞察を提供します：</p>
+<h3 id="Phoenix-Tracing-Overview" class="common-anchor-header">Phoenixトレースの概要</h3><p>Phoenixは<strong>OTEL互換のトレースを</strong>LLMアプリケーションに提供し、<strong>Langchainや</strong> <strong>LlamaIndexの</strong>ようなフレームワーク、<strong>OpenAIや</strong> <strong>Mistralの</strong>ようなSDKを統合します。トレースはリクエストフロー全体をキャプチャし、以下のような洞察を提供します：</p>
 <ul>
 <li><strong>アプリケーション遅延</strong>：遅いLLMの呼び出しとコンポーネントのパフォーマンスを特定し、最適化します。</li>
 <li><strong>トークンの使用状況</strong>：コスト最適化のためにトークン消費を分解します。</li>
@@ -359,7 +360,7 @@ OpenAIInstrumentor().instrument()
 </code></pre>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/images/phoenix01.png" alt="Alt Text" class="doc-image" id="alt-text" />
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/phoenix01.png" alt="Alt Text" class="doc-image" id="alt-text" />
    </span> <span class="img-wrapper"> <span>Altテキスト</span> </span></p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> nest_asyncio
 

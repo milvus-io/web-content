@@ -1,9 +1,8 @@
 ---
 id: milvus_backup_overview.md
-summary: Milvus-Backupは、Milvusのデータのバックアップと復元を可能にするツールです。
-title: Milvusのバックアップ
+summary: Milvus-BackupはMilvusデータのバックアップとリストアを可能にするツールです。
+title: Milvusバックアップ
 ---
-
 <h1 id="Milvus-Backup" class="common-anchor-header">Milvusバックアップ<button data-href="#Milvus-Backup" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -60,7 +59,7 @@ title: Milvusのバックアップ
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/milvus_backup_architecture.png" alt="Milvus Backup architecture" class="doc-image" id="milvus-backup-architecture" />
    </span> <span class="img-wrapper"> <span>Milvus Backupのアーキテクチャ</span> </span></p>
 <p>Milvus BackupはMilvusインスタンス間のメタデータ、セグメント、データのバックアップとリストアを容易にします。バックアップおよびリストアプロセスを柔軟に操作するために、CLI、API、gRPCベースのGoモジュールなどのノースバウンドインターフェースを提供します。</p>
-<p>Milvus Backupはバックアップを作成するためにソースMilvusインスタンスからコレクションのメタデータとセグメントを読み込みます。その後、ソースMilvusインスタンスのルートパスからコレクションデータをコピーし、コピーしたデータをバックアップのルートパスに保存します。</p>
+<p>Milvus Backupはバックアップを作成するために、ソースのMilvusインスタンスからコレクションのメタデータとセグメントを読み込みます。そして、ソースMilvusインスタンスのルートパスからコレクションデータをコピーし、コピーしたデータをバックアップのルートパスに保存します。</p>
 <p>バックアップからリストアするために、Milvusバックアップはバックアップのコレクションメタデータとセグメント情報に基づいてターゲットMilvusインスタンスに新しいコレクションを作成します。そしてバックアップデータをバックアップルートパスからターゲットインスタンスのルートパスにコピーします。</p>
 <h2 id="Latest-release" class="common-anchor-header">最新リリース<button data-href="#Latest-release" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -78,5 +77,5 @@ title: Milvusのバックアップ
         ></path>
       </svg>
     </button></h2><ul>
-<li><a href="https://github.com/zilliztech/milvus-backup/releases/tag/v0.4.12">v0.4.12</a></li>
+<li><a href="https://github.com/zilliztech/milvus-backup/releases/tag/v0.4.15">v0.4.15</a></li>
 </ul>

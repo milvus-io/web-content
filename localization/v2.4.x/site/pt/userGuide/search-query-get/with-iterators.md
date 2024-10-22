@@ -21,7 +21,7 @@ title: Com Iteradores
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>O Milvus fornece iteradores de pesquisa e consulta para iterar resultados com um grande volume de entidades. Uma vez que o Milvus limita o TopK a 16384, os utilizadores podem utilizar iteradores para devolver grandes números ou mesmo entidades inteiras numa coleção em modo batch.</p>
+    </button></h1><p>Milvus fornece iteradores de pesquisa e consulta para iterar através de um grande volume de entidades. Uma vez que o Milvus limita o TopK a 16384, os utilizadores podem utilizar iteradores para devolver grandes números ou mesmo entidades inteiras numa coleção em modo batch.</p>
 <h2 id="Overview" class="common-anchor-header">Visão geral<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -37,10 +37,10 @@ title: Com Iteradores
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Os iteradores são ferramentas poderosas que ajudam a iterar através de um grande volume de dados ou de todos os dados de uma coleção, utilizando valores de chave primária e expressões booleanas. Isto pode melhorar significativamente a forma como recupera os dados. Ao contrário da utilização tradicional de parâmetros <strong>de</strong> <strong>desvio</strong> e <strong>limite</strong>, que podem tornar-se menos eficientes ao longo do tempo, os iteradores oferecem uma solução mais escalável.</p>
+    </button></h2><p>Os iteradores são uma ferramenta eficiente para pesquisar uma coleção inteira ou iterar através de um grande volume de entidades, especificando valores de chave primária ou uma expressão de filtro. Em comparação com uma chamada de pesquisa ou consulta com parâmetros <strong>de deslocamento</strong> e <strong>limite</strong>, a utilização de iteradores é mais eficiente e escalável.</p>
 <h3 id="Benefits-of-using-iterators" class="common-anchor-header">Vantagens da utilização de iteradores</h3><ul>
-<li><p><strong>Simplicidade</strong>: Elimina as complexas definições de <strong>desvio</strong> e <strong>limite</strong>.</p></li>
-<li><p><strong>Eficiência</strong>: Fornece recuperação de dados escalável, buscando apenas os dados necessários.</p></li>
+<li><p><strong>Simplicidade</strong>: Elimina as complexas definições de <strong>offset</strong> e <strong>limite</strong>.</p></li>
+<li><p><strong>Eficiência</strong>: Fornece recuperação escalável de dados, buscando apenas os dados necessários.</p></li>
 <li><p><strong>Consistência</strong>: Garante um tamanho de conjunto de dados consistente com filtros booleanos.</p></li>
 </ul>
 <div class="admonition note">
@@ -64,9 +64,9 @@ title: Com Iteradores
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>As etapas a seguir redirecionam o código para se conectar ao Milvus, configurar rapidamente uma coleção e inserir mais de 10.000 entidades geradas aleatoriamente na coleção.</p>
+    </button></h2><p>O seguinte passo de preparação liga-se ao Milvus e insere entidades geradas aleatoriamente numa coleção.</p>
 <h3 id="Step-1-Create-a-collection" class="common-anchor-header">Passo 1: Criar uma coleção</h3><div class="language-python">
-<p>Utilize <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Client/MilvusClient.md"><code translate="no">MilvusClient</code></a> para se ligar ao servidor Milvus e <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_collection.md"><code translate="no">create_collection()</code></a> para criar uma coleção.</p>
+<p>Use <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Client/MilvusClient.md"><code translate="no">MilvusClient</code></a> para se ligar ao servidor Milvus e <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_collection.md"><code translate="no">create_collection()</code></a> para criar uma coleção.</p>
 </div>
 <div class="language-java">
 <p>Utilize <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Client/MilvusClientV2.md"><code translate="no">MilvusClientV2</code></a> para se ligar ao servidor Milvus e <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Collections/createCollection.md"><code translate="no">createCollection()</code></a> para criar uma coleção.</p>
@@ -266,8 +266,9 @@ iterator = collection.search_iterator(
     batch_size=<span class="hljs-number">10</span>,
     param=search_params,
     output_fields=[<span class="hljs-string">&quot;color_tag&quot;</span>],
-    limit=<span class="hljs-number">3</span>
+    limit=<span class="hljs-number">300</span>
 )
+<span class="hljs-comment"># search 300 entities totally with 10 entities per page</span>
 
 results = []
 

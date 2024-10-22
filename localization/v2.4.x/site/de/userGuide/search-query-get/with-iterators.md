@@ -21,7 +21,7 @@ title: Mit Iteratoren
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Milvus bietet Such- und Abfrage-Iteratoren für die Iteration von Ergebnissen mit einer großen Anzahl von Entitäten. Da Milvus TopK auf 16384 begrenzt, können Benutzer Iteratoren verwenden, um große Zahlen oder sogar ganze Entitäten in einer Sammlung im Batch-Modus zurückzugeben.</p>
+    </button></h1><p>Milvus bietet Such- und Abfrage-Iteratoren für die Iteration durch ein großes Volumen von Entitäten. Da Milvus TopK auf 16384 begrenzt, können Benutzer Iteratoren verwenden, um große Zahlen oder sogar ganze Entitäten in einer Sammlung im Batch-Modus zurückzugeben.</p>
 <h2 id="Overview" class="common-anchor-header">Überblick<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -37,10 +37,10 @@ title: Mit Iteratoren
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Iteratoren sind leistungsstarke Werkzeuge, mit denen Sie eine große Menge von Daten oder alle Daten innerhalb einer Sammlung mit Hilfe von Primärschlüsselwerten und booleschen Ausdrücken durchlaufen können. Dies kann die Art und Weise, wie Sie Daten abrufen, erheblich verbessern. Im Gegensatz zur herkömmlichen Verwendung von <strong>Offset-</strong> und <strong>Limit-Parametern</strong>, die mit der Zeit an Effizienz verlieren können, bieten Iteratoren eine besser skalierbare Lösung.</p>
+    </button></h2><p>Iteratoren sind ein effizientes Werkzeug zum Scannen einer ganzen Sammlung oder zum Iterieren durch eine große Menge von Entitäten durch Angabe von Primärschlüsselwerten oder eines Filterausdrucks. Im Vergleich zu einem Such- oder Abfrageaufruf mit <strong>Offset-</strong> und <strong>Limit-Parametern</strong> ist die Verwendung von Iteratoren effizienter und skalierbarer.</p>
 <h3 id="Benefits-of-using-iterators" class="common-anchor-header">Vorteile der Verwendung von Iteratoren</h3><ul>
-<li><p><strong>Vereinfachung</strong>: Komplexe <strong>Offset-</strong> und <strong>Grenzwerteinstellungen</strong> entfallen.</p></li>
-<li><p><strong>Effizient</strong>: Skalierbarer Datenabruf, da nur die benötigten Daten abgerufen werden.</p></li>
+<li><p><strong>Vereinfachung</strong>: Die komplexen <strong>Offset-</strong> und <strong>Limit-Einstellungen</strong> entfallen.</p></li>
+<li><p><strong>Effizient</strong>: Ermöglicht einen skalierbaren Datenabruf, indem nur die benötigten Daten abgerufen werden.</p></li>
 <li><p><strong>Konsistenz</strong>: Gewährleistet eine konsistente Datensatzgröße mit booleschen Filtern.</p></li>
 </ul>
 <div class="admonition note">
@@ -64,7 +64,7 @@ title: Mit Iteratoren
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>In den folgenden Schritten wird der Code für die Verbindung mit Milvus, die schnelle Einrichtung einer Sammlung und das Einfügen von über 10.000 zufällig generierten Entitäten in die Sammlung wiederholt.</p>
+    </button></h2><p>Der folgende Vorbereitungsschritt stellt eine Verbindung zu Milvus her und fügt zufällig generierte Entitäten in eine Sammlung ein.</p>
 <h3 id="Step-1-Create-a-collection" class="common-anchor-header">Schritt 1: Erstellen einer Sammlung</h3><div class="language-python">
 <p>Verwenden Sie <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Client/MilvusClient.md"><code translate="no">MilvusClient</code></a> um sich mit dem Milvus-Server zu verbinden und <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_collection.md"><code translate="no">create_collection()</code></a> um eine Sammlung zu erstellen.</p>
 </div>
@@ -266,8 +266,9 @@ iterator = collection.search_iterator(
     batch_size=<span class="hljs-number">10</span>,
     param=search_params,
     output_fields=[<span class="hljs-string">&quot;color_tag&quot;</span>],
-    limit=<span class="hljs-number">3</span>
+    limit=<span class="hljs-number">300</span>
 )
+<span class="hljs-comment"># search 300 entities totally with 10 entities per page</span>
 
 results = []
 
@@ -366,7 +367,7 @@ System.out.println(results.size());
     </tr>
     <tr>
       <td><code translate="no">batch_size</code></td>
-      <td>Die Anzahl der Entitäten, die jedes Mal zurückgegeben werden sollen, wenn Sie <code translate="no">next()</code> für den aktuellen Iterator aufrufen.<br/>Der Wert ist standardmäßig <strong>1000</strong>. Setzen Sie ihn auf einen geeigneten Wert, um die Anzahl der pro Iteration zurückzugebenden Objekte zu steuern.</td>
+      <td>Die Anzahl der Entitäten, die jedes Mal zurückgegeben werden sollen, wenn Sie <code translate="no">next()</code> für den aktuellen Iterator aufrufen.<br/>Der Standardwert ist <strong>1000</strong>. Setzen Sie ihn auf einen geeigneten Wert, um die Anzahl der pro Iteration zurückzugebenden Objekte zu steuern.</td>
     </tr>
     <tr>
       <td><code translate="no">param</code></td>

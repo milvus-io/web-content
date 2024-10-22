@@ -1,7 +1,7 @@
 ---
 id: insert-update-delete.md
 summary: '이 가이드에서는 삽입, 삽입, 삭제 등 컬렉션 내 데이터 조작 작업에 대해 안내합니다.'
-title: '삽입, 업서트 및 삭제'
+title: '삽입, 위로 올리기 및 삭제'
 ---
 <h1 id="Insert-Upsert--Delete" class="common-anchor-header">삽입, 위로 올리기 및 삭제<button data-href="#Insert-Upsert--Delete" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -405,7 +405,6 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 <div class="alert note">
 <ul>
 <li>업서트 작업은 기본 키를 업데이트하지 않습니다.</li>
-<li>Upsert 작업은 <code translate="no">autoID</code> 가 활성화된 컬렉션을 지원하지 않습니다.</li>
 <li>대규모 데이터 수집(예: 수백만 개의 벡터)을 위해 <code translate="no">insert</code> 대신 <code translate="no">upsert</code> 작업을 사용하려는 경우, 이 경우 Milvus 데이터 노드에서 높은 메모리 소비가 발생할 수 있다는 점에 유의하세요.</li>
 </ul>
 </div>

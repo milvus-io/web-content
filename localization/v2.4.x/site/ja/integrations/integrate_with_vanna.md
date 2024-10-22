@@ -1,10 +1,9 @@
 ---
 id: integrate_with_vanna.md
 summary: このガイドでは、Vannaを使用して、データベースに格納されたデータに基づいてSQLクエリを生成し、実行する方法を示します。
-title: バンナとMilvusとSQLを書く
+title: VannaとmilvusでSQLを書く
 ---
-
-<h1 id="Write-SQL-with-Vanna-and-Milvus" class="common-anchor-header">VannaとMilvusでSQLを書く<button data-href="#Write-SQL-with-Vanna-and-Milvus" class="anchor-icon" translate="no">
+<h1 id="Write-SQL-with-Vanna-and-Milvus" class="common-anchor-header">VannaとmilvusでSQLを書く<button data-href="#Write-SQL-with-Vanna-and-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -19,7 +18,9 @@ title: バンナとMilvusとSQLを書く
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p><a href="https://vanna.ai/">Vannaは</a>SQL生成と関連機能のためのオープンソースのPython RAG (Retrieval-Augmented Generation)フレームワークです。<a href="https://milvus.io/">Milvusは</a>世界で最も先進的なオープンソースのベクトル・データベースで、埋め込み類似検索やAIアプリケーションのために構築されています。</p>
+    </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/vanna_write_sql.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
+<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/vanna_write_sql.ipynb" target="_blank"><img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/></a></p>
+<p><a href="https://vanna.ai/">Vannaは</a>SQL生成と関連機能のためのオープンソースのPython RAG (Retrieval-Augmented Generation)フレームワークです。<a href="https://milvus.io/">Milvusは</a>世界で最も先進的なオープンソースのベクターデータベースで、埋め込み類似検索やAIアプリケーションのために構築されています。</p>
 <p>Vannaは2つの簡単なステップで動作します - あなたのデータ上でRAG「モデル」を訓練し、次にあなたのデータベース上で実行するように設定することができるSQLクエリを返す質問をします。このガイドでは、Vannaを使用して、データベースに保存されたデータに基づいてSQLクエリを生成し、実行する方法を示します。</p>
 <h2 id="Prerequisites" class="common-anchor-header">前提条件<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -45,9 +46,8 @@ title: バンナとMilvusとSQLを書く
 <p>また、環境変数に<code translate="no">OPENAI_API_KEY</code> 。APIキーは<a href="https://platform.openai.com/docs/guides/production-best-practices/api-keys">OpenAIから</a>入手できます。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> os
 
-os.<span class="hljs-property">environ</span>[<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</span>] = <span class="hljs-string">&quot;sk-****\*\*\*****&quot;</span>
+os.<span class="hljs-property">environ</span>[<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</span>] = <span class="hljs-string">&quot;sk-***********&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-
 <h2 id="Data-preparation" class="common-anchor-header">データの準備<button data-href="#Data-preparation" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -68,18 +68,18 @@ os.<span class="hljs-property">environ</span>[<span class="hljs-string">&quot;OP
 <span class="hljs-keyword">from</span> vanna.milvus <span class="hljs-keyword">import</span> Milvus_VectorStore
 <span class="hljs-keyword">from</span> vanna.openai <span class="hljs-keyword">import</span> OpenAI_Chat
 
-<span class="hljs-keyword">class</span> <span class="hljs-title class_">VannaMilvus</span>(Milvus*VectorStore, OpenAI_Chat):
-<span class="hljs-keyword">def</span> <span class="hljs-title function*">**init**</span>(<span class="hljs-params">self, config=<span class="hljs-literal">None</span></span>):
-Milvus*VectorStore.**init**(<span class="hljs-variable language*">self</span>, config=config)
-OpenAI*Chat.**init**(<span class="hljs-variable language*">self</span>, config=config)
-<button class="copy-code-btn"></button></code></pre>
 
-<p><code translate="no">VannaMilvus</code> クラスを必要な設定パラメータで初期化する。エンベッディングの格納には<code translate="no">milvus_client</code> のインスタンスを使い、エンベッディングの生成には<a href="https://milvus.io/docs/embeddings.md">milvus_model</a>から初期化した<code translate="no">model.DefaultEmbeddingFunction()</code> を使います。</p>
+<span class="hljs-keyword">class</span> <span class="hljs-title class_">VannaMilvus</span>(Milvus_VectorStore, OpenAI_Chat):
+    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__init__</span>(<span class="hljs-params">self, config=<span class="hljs-literal">None</span></span>):
+        Milvus_VectorStore.__init__(<span class="hljs-variable language_">self</span>, config=config)
+        OpenAI_Chat.__init__(<span class="hljs-variable language_">self</span>, config=config)
+<button class="copy-code-btn"></button></code></pre>
+<p><code translate="no">VannaMilvus</code> クラスを必要な設定パラメータで初期化する。エンベッディングの保存には<code translate="no">milvus_client</code> のインスタンスを使い、エンベッディングの生成には<a href="https://milvus.io/docs/embeddings.md">milvus_model</a>から初期化した<code translate="no">model.DefaultEmbeddingFunction()</code> を使います。</p>
 <div class="alert note">
 <p><code translate="no">MilvusClient</code> の引数については、次のようにします：</p>
 <ul>
-<li><code translate="no">uri</code> をローカルファイル、例えば<code translate="no">./milvus.db</code> に設定するのが最も便利な方法です。</li>
-<li>データ規模が大きい場合は、<a href="https://milvus.io/docs/quickstart.md">dockerやkubernetes</a>上に、よりパフォーマンスの高いMilvusサーバを構築することができます。このセットアップでは、<code translate="no">http://localhost:19530</code> などのサーバ uri を<code translate="no">uri</code> として使用してください。</li>
+<li><code translate="no">uri</code> をローカルファイル、例えば<code translate="no">./milvus.db</code> に設定するのが最も便利である。</li>
+<li>データ規模が大きい場合は、<a href="https://milvus.io/docs/quickstart.md">dockerやkubernetes</a>上に、よりパフォーマンスの高いMilvusサーバを構築することができます。このセットアップでは、サーバの uri、例えば<code translate="no">http://localhost:19530</code> を<code translate="no">uri</code> として使用してください。</li>
 <li>Milvusのフルマネージドクラウドサービスである<a href="https://zilliz.com/cloud">Zilliz Cloudを</a>利用する場合は、Zilliz Cloudの<a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">Public EndpointとApi keyに</a>対応する<code translate="no">uri</code> と<code translate="no">token</code> を調整してください。</li>
 </ul>
 </div>
@@ -88,16 +88,15 @@ OpenAI*Chat.**init**(<span class="hljs-variable language*">self</span>, config=c
 milvus_client = MilvusClient(uri=milvus_uri)
 
 vn_milvus = VannaMilvus(
-config={
-<span class="hljs-string">&quot;api_key&quot;</span>: os.getenv(<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</span>),
-<span class="hljs-string">&quot;model&quot;</span>: <span class="hljs-string">&quot;gpt-3.5-turbo&quot;</span>,
-<span class="hljs-string">&quot;milvus_client&quot;</span>: milvus_client,
-<span class="hljs-string">&quot;embedding_function&quot;</span>: model.DefaultEmbeddingFunction(),
-<span class="hljs-string">&quot;n_results&quot;</span>: <span class="hljs-number">2</span>, <span class="hljs-comment"># The number of results to return from Milvus semantic search.</span>
-}
+    config={
+        <span class="hljs-string">&quot;api_key&quot;</span>: os.getenv(<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</span>),
+        <span class="hljs-string">&quot;model&quot;</span>: <span class="hljs-string">&quot;gpt-3.5-turbo&quot;</span>,
+        <span class="hljs-string">&quot;milvus_client&quot;</span>: milvus_client,
+        <span class="hljs-string">&quot;embedding_function&quot;</span>: model.DefaultEmbeddingFunction(),
+        <span class="hljs-string">&quot;n_results&quot;</span>: <span class="hljs-number">2</span>,  <span class="hljs-comment"># The number of results to return from Milvus semantic search.</span>
+    }
 )
 <button class="copy-code-btn"></button></code></pre>
-
 <p>これは数サンプルのデータしかない単純な例なので、<code translate="no">n_results</code> を 2 に設定し、最も類似した上位2つの結果を検索するようにしています。実際には、より大きなトレーニングデータセットを扱う場合は、<code translate="no">n_results</code> をより大きな値に設定する必要があります。</p>
 <p>いくつかのサンプルデータを含むいくつかのテーブルを持つサンプルSQLiteデータベースを使用します。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> sqlite3
@@ -108,31 +107,31 @@ c = sql_connect.cursor()
 
 init_sqls = <span class="hljs-string">&quot;&quot;&quot;
 CREATE TABLE IF NOT EXISTS Customer (
-ID INTEGER PRIMARY KEY AUTOINCREMENT,
-Name TEXT NOT NULL,
-Company TEXT NOT NULL,
-City TEXT NOT NULL,
-Phone TEXT NOT NULL
+    ID INTEGER PRIMARY KEY AUTOINCREMENT,
+    Name TEXT NOT NULL,
+    Company TEXT NOT NULL,
+    City TEXT NOT NULL,
+    Phone TEXT NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS Company (
-ID INTEGER PRIMARY KEY AUTOINCREMENT,
-Name TEXT NOT NULL,
-Industry TEXT NOT NULL,
-Location TEXT NOT NULL,
-EmployeeCount INTEGER NOT NULL
+    ID INTEGER PRIMARY KEY AUTOINCREMENT,
+    Name TEXT NOT NULL,
+    Industry TEXT NOT NULL,
+    Location TEXT NOT NULL,
+    EmployeeCount INTEGER NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS User (
-ID INTEGER PRIMARY KEY AUTOINCREMENT,
-Username TEXT NOT NULL UNIQUE,
-Email TEXT NOT NULL UNIQUE
+    ID INTEGER PRIMARY KEY AUTOINCREMENT,
+    Username TEXT NOT NULL UNIQUE,
+    Email TEXT NOT NULL UNIQUE
 );
 
-INSERT INTO Customer (Name, Company, City, Phone)
+INSERT INTO Customer (Name, Company, City, Phone) 
 VALUES (&#x27;John Doe&#x27;, &#x27;ABC Corp&#x27;, &#x27;New York&#x27;, &#x27;123-456-7890&#x27;);
 
-INSERT INTO Customer (Name, Company, City, Phone)
+INSERT INTO Customer (Name, Company, City, Phone) 
 VALUES (&#x27;Jane Smith&#x27;, &#x27;XYZ Inc&#x27;, &#x27;Los Angeles&#x27;, &#x27;098-765-4321&#x27;);
 
 INSERT INTO Company (Name, Industry, Location, EmployeeCount)
@@ -143,14 +142,13 @@ VALUES (&#x27;johndoe123&#x27;, &#x27;johndoe123@example.com&#x27;);
 &quot;&quot;&quot;</span>
 
 <span class="hljs-keyword">for</span> sql <span class="hljs-keyword">in</span> init_sqls.split(<span class="hljs-string">&quot;;&quot;</span>):
-c.execute(sql)
+    c.execute(sql)
 
 sql_connect.commit()
 
 <span class="hljs-comment"># Connect to the SQLite database</span>
 vn_milvus.connect_to_sqlite(sqlite_path)
 <button class="copy-code-btn"></button></code></pre>
-
 <h2 id="Train-with-data" class="common-anchor-header">データで訓練する<button data-href="#Train-with-data" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -178,9 +176,8 @@ df_ddl = vn_milvus.run_sql(<span class="hljs-string">&quot;SELECT type, sql FROM
 
 <span class="hljs-comment"># Train the model on the DDL data</span>
 <span class="hljs-keyword">for</span> ddl <span class="hljs-keyword">in</span> df_ddl[<span class="hljs-string">&quot;sql&quot;</span>].to_list():
-vn_milvus.train(ddl=ddl)
+    vn_milvus.train(ddl=ddl)
 <button class="copy-code-btn"></button></code></pre>
-
 <pre><code translate="no">Adding ddl: CREATE TABLE Customer (
     ID INTEGER PRIMARY KEY AUTOINCREMENT,
     Name TEXT NOT NULL,
@@ -212,9 +209,8 @@ vn_milvus.train(
 )
 
 <span class="hljs-comment"># You can also add SQL queries to your training data.</span>
-vn_milvus.train(sql=<span class="hljs-string">&quot;SELECT \* FROM Customer WHERE Name = &#x27;John Doe&#x27;&quot;</span>)
+vn_milvus.train(sql=<span class="hljs-string">&quot;SELECT * FROM Customer WHERE Name = &#x27;John Doe&#x27;&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
-
 <pre><code translate="no">Adding documentation....
 Adding documentation....
 Using model gpt-3.5-turbo for 65.0 tokens (approx)
@@ -367,5 +363,5 @@ milvus_client.<span class="hljs-built_in">close</span>()
 
 os.remove(sqlite_path)
 <span class="hljs-keyword">if</span> os.path.exists(milvus_uri):
-os.remove(milvus_uri)
+    os.remove(milvus_uri)
 <button class="copy-code-btn"></button></code></pre>

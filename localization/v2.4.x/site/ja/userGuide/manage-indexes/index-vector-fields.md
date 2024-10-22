@@ -2,7 +2,7 @@
 id: index-vector-fields.md
 order: 1
 summary: このガイドでは、コレクション内のベクトル・フィールドに対するインデックスの作成と管理に関する基本的な操作について説明します。
-title: インデックス・ベクトル・フィールド
+title: ベクトルフィールドのインデックス
 ---
 <h1 id="Index-Vector-Fields" class="common-anchor-header">ベクトルフィールドのインデックス<button data-href="#Index-Vector-Fields" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -35,7 +35,7 @@ title: インデックス・ベクトル・フィールド
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>インデックスファイルに格納されたメタデータを活用することで、Milvusはデータを特殊な構造で整理し、検索やクエリ時に要求された情報の迅速な取得を容易にします。</p>
+    </button></h2><p>Milvusはインデックスファイルに保存されたメタデータを活用し、データを特殊な構造で整理することで、検索やクエリ時に要求された情報を迅速に取り出すことができます。</p>
 <p>Milvusは効率的な類似検索のために、いくつかのインデックスタイプとフィールド値をソートするメトリックを提供します。以下の表は、さまざまなベクトル・フィールド・タイプでサポートされているインデックス・タイプとメトリクスの一覧です。詳細については、「<a href="/docs/ja/index.md">メモリ内インデックスと</a> <a href="/docs/ja/metric.md">類似度メトリクス</a>」を参照してください。</p>
 <div class="filter">
  <a href="#floating">浮動小数点埋め込み</a> <a href="#binary">バイナリ埋め込み</a> <a href="#sparse">疎な埋め込み</a></div>
@@ -103,20 +103,20 @@ title: インデックス・ベクトル・フィールド
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><a href="/docs/ja/manage-collections.md">Manage Collectionsで</a>説明したように、Milvusはコレクション作成要求で以下の条件のいずれかが指定された場合、コレクション作成時に自動的にインデックスを生成し、メモリにロードします：</p>
+    </button></h2><p><a href="/docs/ja/manage-collections.md">Manageコレクションで</a>説明したように、Milvusはコレクション作成リクエストで以下の条件のいずれかが指定された場合、コレクション作成時に自動的にインデックスを生成し、メモリにロードします：</p>
 <ul>
 <li><p>ベクトルフィールドの次元とメトリックタイプ、または</p></li>
 <li><p>スキーマとインデックス・パラメータ。</p></li>
 </ul>
-<p>以下のコードスニペットは、既存のコードを再利用して、Milvusインスタンスへの接続を確立し、インデックスパラメータを指定せずにコレクションを作成します。この場合、コレクションにはインデックスがなく、アンロードされたままになります。</p>
+<p>以下のコードスニペットは、Milvusインスタンスへの接続を確立し、インデックスパラメータを指定せずにコレクションを作成するために、既存のコードを再利用しています。この場合、コレクションにはインデックスがなく、アンロードされたままになります。</p>
 <div class="language-python">
 <p>インデックス作成の準備のために <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Client/MilvusClient.md"><code translate="no">MilvusClient</code></a>を使用してMilvusサーバに接続し、コレクションをセットアップします。 <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_schema.md"><code translate="no">create_schema()</code></a>, <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/CollectionSchema/add_field.md"><code translate="no">add_field()</code></a>および <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_collection.md"><code translate="no">create_collection()</code></a>.</p>
 </div>
 <div class="language-java">
-<p>インデックス作成の準備には <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Client/MilvusClientV2.md"><code translate="no">MilvusClientV2</code></a>を使用してMilvusサーバーに接続し、コレクションをセットアップする。 <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Collections/createSchema.md"><code translate="no">createSchema()</code></a>, <a href="https://milvus.io/api-reference/java/v2.4.x/v2/CollectionSchema/addField.md"><code translate="no">addField()</code></a>および <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Collections/createCollection.md"><code translate="no">createCollection()</code></a>.</p>
+<p>インデックス作成の準備には <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Client/MilvusClientV2.md"><code translate="no">MilvusClientV2</code></a>を使ってMilvusサーバーに接続し、コレクションを設定する。 <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Collections/createSchema.md"><code translate="no">createSchema()</code></a>, <a href="https://milvus.io/api-reference/java/v2.4.x/v2/CollectionSchema/addField.md"><code translate="no">addField()</code></a>および <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Collections/createCollection.md"><code translate="no">createCollection()</code></a>.</p>
 </div>
 <div class="language-javascript">
-<p>インデックス作成の準備には <a href="https://milvus.io/api-reference/node/v2.4.x/Client/MilvusClient.md"><code translate="no">MilvusClient</code></a>を使用してMilvusサーバーに接続し、コレクションをセットアップする。 <a href="https://milvus.io/api-reference/node/v2.4.x/Collections/createCollection.md"><code translate="no">createCollection()</code></a>.</p>
+<p>インデックス作成の準備には <a href="https://milvus.io/api-reference/node/v2.4.x/Client/MilvusClient.md"><code translate="no">MilvusClient</code></a>を使ってMilvusサーバーに接続し、コレクションをセットアップする。 <a href="https://milvus.io/api-reference/node/v2.4.x/Collections/createCollection.md"><code translate="no">createCollection()</code></a>.</p>
 </div>
 <div class="multipleCode">
    <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a></div>
@@ -247,7 +247,8 @@ index_params.add_index(
 <span class="hljs-comment"># 4.3. Create an index file</span>
 client.create_index(
     collection_name=<span class="hljs-string">&quot;customized_setup&quot;</span>,
-    index_params=index_params
+    index_params=index_params,
+    sync=<span class="hljs-literal">False</span> <span class="hljs-comment"># Whether to wait for index creation to complete before returning. Defaults to True.</span>
 )
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.common.IndexParam;
@@ -329,6 +330,10 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
       <td><code translate="no">index_params</code></td>
       <td><strong>IndexParam</strong>オブジェクトのリストを含む<strong>IndexParams</strong>オブジェクト。</td>
     </tr>
+    <tr>
+      <td><code translate="no">sync</code></td>
+      <td>クライアントの要求に関連するインデックスの構築方法を制御します。有効な値：<br><ul><li><code translate="no">True</code> (既定値)：クライアントは、インデックスが完全に構築されるまで待ってから返します。これは、処理が完了するまでレスポンスを受け取らないことを意味します。</li><li><code translate="no">False</code>:クライアントはリクエストを受け取った直後に戻り、バックグラウンドでインデックスが作成されます。インデックスの作成が完了したかどうかを調べるには<a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/describe_index.md">describe_index()</a>メソッドを使用します。</li></ul></td>
+    </tr>
   </tbody>
 </table>
 <table class="language-java">
@@ -341,11 +346,11 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
   <tbody>
     <tr>
       <td><code translate="no">fieldName</code></td>
-      <td>この IndexParam オブジェクトが適用されるターゲット・フィールドの名前。</td>
+      <td>この IndexParam オブジェクトを適用する対象フィールドの名前。</td>
     </tr>
     <tr>
       <td><code translate="no">indexName</code></td>
-      <td>このオブジェクトが適用された後に生成されるインデックス・ファイルの名前。</td>
+      <td>このオブジェクトが適用された後に生成されるインデックスファイルの名前。</td>
     </tr>
     <tr>
       <td><code translate="no">indexType</code></td>

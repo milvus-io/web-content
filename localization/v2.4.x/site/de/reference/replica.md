@@ -1,7 +1,7 @@
 ---
 id: replica.md
 summary: Erfahren Sie mehr über die In-Memory-Replikation in Milvus.
-title: In-Memory-Replik
+title: In-Memory-Replikation
 ---
 <h1 id="In-Memory-Replica" class="common-anchor-header">In-Memory-Replikation<button data-href="#In-Memory-Replica" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -60,7 +60,7 @@ title: In-Memory-Replik
     </button></h2><p>In-Memory-Replikate sind als Replikatgruppen organisiert. Jede Replikatgruppe enthält <a href="https://milvus.io/docs/v2.1.x/glossary.md#Sharding">Shard-Replikate</a>. Jedes Shard-Replikat hat ein Streaming-Replikat und ein historisches Replikat, die den wachsenden und versiegelten <a href="https://milvus.io/docs/v2.1.x/glossary.md#Segment">Segmenten</a> im Shard entsprechen (d. h. DML-Kanal).</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/replica_availability.jpg" alt="An illustration of how in-memory replica works" class="doc-image" id="an-illustration-of-how-in-memory-replica-works" />
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/replica_group.png" alt="An illustration of how in-memory replica works" class="doc-image" id="an-illustration-of-how-in-memory-replica-works" />
    </span> <span class="img-wrapper"> <span>Ein Beispiel für die Funktionsweise der In-Memory-Replikation</span> </span></p>
 <h3 id="Replica-group" class="common-anchor-header">Replikatgruppe</h3><p>Eine Replikatgruppe besteht aus mehreren <a href="https://milvus.io/docs/v2.1.x/four_layers.md#Query-node">Abfrageknoten</a>, die für die Verarbeitung historischer Daten und Replikate zuständig sind.</p>
 <h3 id="Shard-replica" class="common-anchor-header">Shard-Replikat</h3><p>Ein Shard-Replikat besteht aus einem Streaming-Replikat und einem historischen Replikat, die beide zu demselben <a href="https://milvus.io/blog/deep-dive-1-milvus-architecture-overview.md#Shard">Shard</a> gehören. Die Anzahl der Shard-Replikate in einer Replikatgruppe wird durch die Anzahl der Shards in einer bestimmten Sammlung bestimmt.</p>
@@ -85,7 +85,7 @@ title: In-Memory-Replik
     </button></h2><h3 id="Balance" class="common-anchor-header">Balance</h3><p>Ein neues Segment, das geladen werden muss, wird auf mehrere verschiedene Abfrageknoten verteilt. Eine Suchanfrage kann bearbeitet werden, sobald mindestens ein Replikat erfolgreich geladen wurde.</p>
 <h3 id="Search" class="common-anchor-header">Suche</h3><h4 id="Cache" class="common-anchor-header">Cache</h4><p>Der Proxy unterhält einen Cache, der die Segmente den Abfrageknoten zuordnet, und aktualisiert ihn in regelmäßigen Abständen. Wenn der Proxy eine Anfrage erhält, holt Milvus alle versiegelten Segmente, die durchsucht werden müssen, aus dem Cache und versucht, sie gleichmäßig den Abfrageknoten zuzuordnen.</p>
 <p>Für wachsende Segmente unterhält der Proxy auch einen Channel-to-Query-Node-Cache und sendet Anfragen an die entsprechenden Query-Nodes.</p>
-<h4 id="Failover" class="common-anchor-header">Ausfallsicherung</h4><p>Die Caches des Proxys sind nicht immer auf dem neuesten Stand. Einige Segmente oder Kanäle können zu anderen Abfrageknoten verschoben worden sein, wenn eine Anfrage eingeht. In diesem Fall erhält der Proxy eine Fehlerantwort, aktualisiert den Cache und versucht, sie einem anderen Abfrageknoten zuzuweisen.</p>
+<h4 id="Failover" class="common-anchor-header">Ausfallsicherung</h4><p>Die Caches des Proxys sind nicht immer auf dem neuesten Stand. Einige Segmente oder Kanäle können zu anderen Abfrageknoten verschoben worden sein, wenn eine Anfrage eingeht. In diesem Fall erhält der Proxy eine Fehlerantwort, aktualisiert den Cache und versucht, sie einem anderen Abfrageknoten zuzuordnen.</p>
 <p>Ein Segment wird ignoriert, wenn der Proxy es auch nach der Aktualisierung des Caches nicht finden kann. Dies kann der Fall sein, wenn das Segment verdichtet wurde.</p>
 <p>Wenn der Cache nicht genau ist, kann der Proxy einige Segmente übersehen. Abfrageknoten mit DML-Kanälen (wachsende Segmente) geben Suchantworten zusammen mit einer Liste zuverlässiger Segmente zurück, mit denen der Proxy vergleichen und den Cache aktualisieren kann.</p>
-<h3 id="Enhancement" class="common-anchor-header">Erweiterung</h3><p>Der Proxy kann Suchanfragen nicht vollständig gleichmäßig auf die Abfrageknoten verteilen, und die Abfrageknoten können über unterschiedliche Ressourcen zur Bedienung von Suchanfragen verfügen. Um eine langschwänzige Verteilung der Ressourcen zu vermeiden, weist der Proxy aktive Segmente auf anderen Abfrageknoten einem untätigen Abfrageknoten zu, der ebenfalls über diese Segmente verfügt.</p>
+<h3 id="Enhancement" class="common-anchor-header">Erweiterung</h3><p>Der Proxy kann Suchanfragen nicht vollständig gleichmäßig auf die Abfrageknoten verteilen, und die Abfrageknoten verfügen möglicherweise über unterschiedliche Ressourcen zur Bedienung von Suchanfragen. Um eine langschwänzige Verteilung der Ressourcen zu vermeiden, weist der Proxy aktive Segmente auf anderen Abfrageknoten einem untätigen Abfrageknoten zu, der ebenfalls über diese Segmente verfügt.</p>

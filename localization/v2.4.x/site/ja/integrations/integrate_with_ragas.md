@@ -3,7 +3,7 @@ id: integrate_with_ragas.md
 summary: >-
   このガイドでは、Milvusをベースに構築されたRAG（Retrieval-Augmented
   Generation）パイプラインを評価するためにRagasを使用する方法を示します。
-title: ラガによる評価
+title: Ragasによる評価
 ---
 <h1 id="Evaluation-with-Ragas" class="common-anchor-header">Ragasによる評価<button data-href="#Evaluation-with-Ragas" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -20,7 +20,8 @@ title: ラガによる評価
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/evaluation_with_ragas.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a></p>
+    </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/evaluation_with_ragas.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
+<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/evaluation_with_ragas.ipynb" target="_blank"><img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/></a></p>
 <p>このガイドでは、<a href="https://milvus.io/">Milvusを</a>ベースに構築されたRAG（Retrieval-Augmented Generation）パイプラインを評価するためにRagasを使用する方法を示します。</p>
 <p>RAGシステムは検索システムと生成モデルを組み合わせ、与えられたプロンプトに基づいて新しいテキストを生成します。システムはまずMilvusを使ってコーパスから関連文書を検索し、次に生成モデルを使って検索された文書に基づいて新しいテキストを生成する。</p>
 <p><a href="https://docs.ragas.io/en/latest/index.html#">Ragasは</a>RAGパイプラインの評価を支援するフレームワークである。パイプラインの構築を支援する既存のツールやフレームワークはありますが、パイプラインを評価し、パイプラインのパフォーマンスを定量化することは困難です。そこでRagas（RAGアセスメント）の登場です。</p>
@@ -65,7 +66,7 @@ os.<span class="hljs-property">environ</span>[<span class="hljs-string">&quot;OP
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>ベクトルストアとしてMilvus、LLMとしてOpenAIを使用するRAGクラスを定義します。このクラスには、テキストデータをMilvusにロードする<code translate="no">load</code> メソッド、与えられた質問に最も類似したテキストデータを検索する<code translate="no">retrieve</code> メソッド、検索された知識を使って与えられた質問に回答する<code translate="no">answer</code> メソッドが含まれます。</p>
+    </button></h2><p>Milvusをベクトルストアとして、OpenAIをLLMとして使用するRAGクラスを定義します。このクラスには、テキストデータをMilvusにロードする<code translate="no">load</code> メソッド、与えられた質問に最も類似したテキストデータを検索する<code translate="no">retrieve</code> メソッド、検索された知識を用いて与えられた質問に回答する<code translate="no">answer</code> メソッドが含まれます。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> typing <span class="hljs-keyword">import</span> <span class="hljs-type">List</span>
 <span class="hljs-keyword">from</span> tqdm <span class="hljs-keyword">import</span> tqdm
 <span class="hljs-keyword">from</span> openai <span class="hljs-keyword">import</span> OpenAI
@@ -174,7 +175,7 @@ Use the following pieces of information enclosed in &lt;context&gt; tags to prov
         <span class="hljs-keyword">else</span>:
             <span class="hljs-keyword">return</span> response.choices[<span class="hljs-number">0</span>].message.content, retrieved_texts
 <button class="copy-code-btn"></button></code></pre>
-<p>OpenAIとMilvusのクライアントでRAGクラスを初期化しよう。</p>
+<p>RAGクラスをOpenAIとMilvusクライアントで初期化してみよう。</p>
 <pre><code translate="no" class="language-python">openai_client = <span class="hljs-title class_">OpenAI</span>()
 milvus_client = <span class="hljs-title class_">MilvusClient</span>(uri=<span class="hljs-string">&quot;./milvus_demo.db&quot;</span>)
 
@@ -183,7 +184,7 @@ my_rag = <span class="hljs-title function_">RAG</span>(openai_client=openai_clie
 <div class="alert note">
 <p><code translate="no">MilvusClient</code> の引数については以下の通り：</p>
 <ul>
-<li><code translate="no">uri</code> の引数をローカルファイル、例えば<code translate="no">./milvus.db</code> に設定するのが最も便利です。</li>
+<li><code translate="no">uri</code> の引数をローカルファイル、例えば<code translate="no">./milvus.db</code> に設定するのが最も便利である。</li>
 <li>データ規模が大きい場合は、<a href="https://milvus.io/docs/quickstart.md">dockerやkubernetes</a>上に、よりパフォーマンスの高いMilvusサーバを構築することができます。このセットアップでは、<code translate="no">http://localhost:19530</code> などのサーバ uri を<code translate="no">uri</code> として使用してください。</li>
 <li>Milvusのフルマネージドクラウドサービスである<a href="https://zilliz.com/cloud">Zilliz Cloudを</a>使用する場合は、Zilliz Cloudの<a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">Public EndpointとApi keyに</a>対応する<code translate="no">uri</code> と<code translate="no">token</code> を調整してください。</li>
 </ul>
@@ -203,7 +204,7 @@ my_rag = <span class="hljs-title function_">RAG</span>(openai_client=openai_clie
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><a href="https://github.com/milvus-io/milvus/blob/master/DEVELOPMENT.md">Milvusの開発ガイドを</a>RAGのプライベート知識として使用します。</p>
+    </button></h2><p><a href="https://github.com/milvus-io/milvus/blob/master/DEVELOPMENT.md">Milvusの開発ガイドを</a>RAGのプライベートナレッジとして使用します。</p>
 <p>ダウンロードし、RAGパイプラインにロードする。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> os
 <span class="hljs-keyword">import</span> urllib.request

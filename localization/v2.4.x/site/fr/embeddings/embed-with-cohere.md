@@ -29,7 +29,9 @@ title: Intégrer Cohere
 pip install <span class="hljs-string">&quot;pymilvus[model]&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Ensuite, instanciez la classe <code translate="no">CohereEmbeddingFunction</code>:</p>
-<pre><code translate="no" class="language-python">cohere_ef = <span class="hljs-title class_">CohereEmbeddingFunction</span>(
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus.<span class="hljs-property">model</span>.<span class="hljs-property">dense</span> <span class="hljs-keyword">import</span> <span class="hljs-title class_">CohereEmbeddingFunction</span>
+
+cohere_ef = <span class="hljs-title class_">CohereEmbeddingFunction</span>(
     model_name=<span class="hljs-string">&quot;embed-english-light-v3.0&quot;</span>,
     api_key=<span class="hljs-string">&quot;YOUR_COHERE_API_KEY&quot;</span>,
     input_type=<span class="hljs-string">&quot;search_document&quot;</span>,
@@ -39,7 +41,7 @@ pip install <span class="hljs-string">&quot;pymilvus[model]&quot;</span>
 <p><strong>Paramètres</strong>:</p>
 <ul>
 <li><p><code translate="no">model_name</code> <em>(chaîne</em>)</p>
-<p>Le nom du modèle d'intégration Cohere à utiliser pour l'encodage. Vous pouvez spécifier n'importe quel nom de modèle d'intégration Cohere disponible, par exemple, <code translate="no">embed-english-v3.0</code>, <code translate="no">embed-multilingual-v3.0</code>, etc. Si ce paramètre n'est pas spécifié, <code translate="no">embed-english-light-v3.0</code> sera utilisé. Pour obtenir la liste des modèles disponibles, reportez-vous à <a href="https://docs.cohere.com/docs/models#embed">Embed</a>.</p></li>
+<p>Le nom du modèle d'intégration Cohere à utiliser pour l'encodage. Vous pouvez spécifier n'importe quel nom de modèle d'intégration Cohere, par exemple, <code translate="no">embed-english-v3.0</code>, <code translate="no">embed-multilingual-v3.0</code>, etc. Si ce paramètre n'est pas spécifié, <code translate="no">embed-english-light-v3.0</code> sera utilisé. Pour obtenir la liste des modèles disponibles, reportez-vous à <a href="https://docs.cohere.com/docs/models#embed">Embed</a>.</p></li>
 <li><p><code translate="no">api_key</code> <em>(chaîne</em>)</p>
 <p>La clé d'API pour accéder à l'API Cohere.</p></li>
 <li><p><code translate="no">input_type</code> <em>(chaîne</em>)</p>

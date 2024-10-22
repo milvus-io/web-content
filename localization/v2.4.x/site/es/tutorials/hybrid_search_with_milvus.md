@@ -18,9 +18,10 @@ title: Búsqueda híbrida con Milvus
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/hybrid_search_with_milvus.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a></p>
+    </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/hybrid_search_with_milvus.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
+<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/hybrid_search_with_milvus.ipynb" target="_blank"><img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/></a></p>
 <p><img translate="no" src="https://raw.githubusercontent.com/milvus-io/bootcamp/master/bootcamp/tutorials/quickstart/apps/hybrid_demo_with_milvus/pics/demo.png"/></p>
-<p>En este tutorial, demostraremos cómo realizar una búsqueda híbrida con <a href="https://milvus.io/docs/multi-vector-search.md">Milvus</a> y <a href="https://github.com/FlagOpen/FlagEmbedding/tree/master/FlagEmbedding/BGE_M3">el modelo BGE-M3</a>. El modelo BGE-M3 puede convertir texto en vectores densos y dispersos. Milvus admite el almacenamiento de ambos tipos de vectores en una colección, lo que permite una búsqueda híbrida que mejora la relevancia de los resultados.</p>
+<p>En este tutorial, demostraremos cómo realizar una búsqueda híbrida con <a href="https://milvus.io/docs/multi-vector-search.md">Milvus</a> y el <a href="https://github.com/FlagOpen/FlagEmbedding/tree/master/FlagEmbedding/BGE_M3">modelo BGE-M3</a>. El modelo BGE-M3 puede convertir texto en vectores densos y dispersos. Milvus admite el almacenamiento de ambos tipos de vectores en una colección, lo que permite una búsqueda híbrida que mejora la relevancia de los resultados.</p>
 <p>Milvus admite métodos de recuperación densos, dispersos e híbridos:</p>
 <ul>
 <li>Recuperación densa: Utiliza el contexto semántico para comprender el significado de las consultas.</li>
@@ -55,7 +56,7 @@ docs = <span class="hljs-built_in">list</span>(questions)
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">What is the strongest Kevlar cord?
 </code></pre>
-<h3 id="Use-BGE-M3-Model-for-Embeddings" class="common-anchor-header">Utilizar el modelo BGE-M3 para la incrustación</h3><p>El modelo BGE-M3 puede incrustar textos como vectores densos y dispersos.</p>
+<h3 id="Use-BGE-M3-Model-for-Embeddings" class="common-anchor-header">Uso del modelo BGE-M3 para la incrustación</h3><p>El modelo BGE-M3 puede incrustar textos como vectores densos y dispersos.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> milvus_model.hybrid <span class="hljs-keyword">import</span> BGEM3EmbeddingFunction
 
 ef = BGEM3EmbeddingFunction(use_fp16=<span class="hljs-literal">False</span>, device=<span class="hljs-string">&quot;cpu&quot;</span>)
@@ -201,11 +202,11 @@ def <span class="hljs-title">dense_search</span>(<span class="hljs-params">col, 
 <button class="copy-code-btn"></button></code></pre>
 <p>Vamos a ejecutar tres búsquedas diferentes con las funciones definidas:</p>
 <pre><code translate="no" class="language-python">dense_results = <span class="hljs-title function_">dense_search</span>(col, query_embeddings[<span class="hljs-string">&quot;dense&quot;</span>][<span class="hljs-number">0</span>])
-sparse_results = <span class="hljs-title function_">sparse_search</span>(col, query_embeddings[<span class="hljs-string">&quot;sparse&quot;</span>][<span class="hljs-number">0</span>])
+sparse_results = <span class="hljs-title function_">sparse_search</span>(col, query_embeddings[<span class="hljs-string">&quot;sparse&quot;</span>].<span class="hljs-title function_">_getrow</span>(<span class="hljs-number">0</span>))
 hybrid_results = <span class="hljs-title function_">hybrid_search</span>(
     col,
     query_embeddings[<span class="hljs-string">&quot;dense&quot;</span>][<span class="hljs-number">0</span>],
-    query_embeddings[<span class="hljs-string">&quot;sparse&quot;</span>][<span class="hljs-number">0</span>],
+    query_embeddings[<span class="hljs-string">&quot;sparse&quot;</span>].<span class="hljs-title function_">_getrow</span>(<span class="hljs-number">0</span>),
     sparse_weight=<span class="hljs-number">0.7</span>,
     dense_weight=<span class="hljs-number">1.0</span>,
 )
@@ -277,26 +278,26 @@ formatted_results = doc_text_formatting(ef, query, hybrid_results)
 <p>¿Cómo puedo aprender seguridad informática?</p>
 <p>¿Cuál es la mejor manera de iniciarse en la robótica? ¿Cuál es la mejor placa de desarrollo con la que puedo empezar a trabajar?</p>
 <p>¿Cómo puedo aprender a hablar inglés con fluidez?</p>
-<p>¿Cuáles son las mejores maneras de aprender francés?</p>
+<p>¿Cuáles son las mejores formas de aprender francés?</p>
 <p>¿Cómo se puede hacer que la física sea fácil de aprender?</p>
 <p>¿Cómo nos preparamos para el UPSC?</p>
 <p><strong>Resultados de la búsqueda dispersa:</strong></p>
 <p>¿Qué es<span style='color:red'> la programación</span> Java<span style='color:red'>?</span><span style='color:red'> ¿Cómo</span> aprender el lenguaje de programación Java?</p>
-<p>¿Cuál es<span style='color:red'> la</span> mejor manera<span style='color:red'> de empezar a aprender</span> robótica<span style='color:red'>?</span></p>
+<p>¿Cuál es la mejor manera<span style='color:red'> de empezar a aprender</span> robótica<span style='color:red'>?</span></p>
 <p>¿Cuál es la alternativa<span style='color:red'> al</span><span style='color:red'> aprendizaje</span> automático<span style='color:red'>?</span></p>
 <p><span style='color:red'>¿Cómo</span> creo un nuevo Terminal y un nuevo shell en Linux usando<span style='color:red'> programación</span> en C<span style='color:red'>?</span></p>
-<p><span style='color:red'>¿Cómo</span> puedo crear un nuevo shell en un nuevo terminal utilizando<span style='color:red'> la programación</span> C (terminal de Linux)<span style='color:red'>?</span></p>
+<p><span style='color:red'>¿Cómo</span> puedo crear un nuevo shell en un nuevo terminal utilizando la<span style='color:red'> programación</span> C (terminal de Linux)<span style='color:red'>?</span></p>
 <p>¿Qué negocio es mejor<span style='color:red'> empezar</span> en Hyderabad<span style='color:red'>?</span></p>
 <p>¿Qué negocio es mejor para empezar en Hyderabad<span style='color:red'>?</span></p>
-<p>¿Cuál es<span style='color:red'> la</span> mejor forma<span style='color:red'> de iniciarse</span> en la robótica<span style='color:red'>?</span> ¿Cuál es la mejor placa de desarrollo con la que puedo<span style='color:red'> empezar a</span> trabajar<span style='color:red'>?</span></p>
+<p>¿Cuál es la mejor forma<span style='color:red'> de iniciarse</span> en la robótica<span style='color:red'>?</span> ¿Cuál es la mejor placa de desarrollo con la que puedo<span style='color:red'> empezar</span> a trabajar<span style='color:red'>?</span></p>
 <p>¿Qué matemáticas necesita un novato<span style='color:red'> para</span> entender los algoritmos de<span style='color:red'> programación</span> informática<span style='color:red'>?</span> ¿Qué libros sobre algoritmos son adecuados para un completo principiante<span style='color:red'>?</span></p>
 <p><span style='color:red'>¿Cómo</span> hacer que la vida se adapte a ti y que la vida deje de <span style='color:red'>maltratarte</span> mental y emocionalmente<span style='color:red'>?</span></p>
 <p><strong>Resultados de la búsqueda híbrida:</strong></p>
-<p>¿Cuál es<span style='color:red'> la</span> mejor manera<span style='color:red'> de iniciarse en</span> la robótica<span style='color:red'>?</span> ¿Cuál es la mejor placa de desarrollo con la que puedo<span style='color:red'> empezar a</span> trabajar<span style='color:red'>?</span></p>
+<p>¿Cuál es la mejor manera<span style='color:red'> de iniciarse</span> en la robótica<span style='color:red'>?</span> ¿Cuál es la mejor placa de desarrollo con la que puedo<span style='color:red'> empezar a</span> trabajar<span style='color:red'>?</span></p>
 <p>¿Qué es la<span style='color:red'> programación</span> Java<span style='color:red'>?</span><span style='color:red'> ¿Cómo</span> aprender el lenguaje de programación Java?</p>
-<p>¿Cuál es la mejor manera<span style='color:red'> de empezar a aprender</span> robótica<span style='color:red'>?</span></p>
+<p>¿Cuál es la mejor manera de<span style='color:red'> empezar a aprender</span> robótica<span style='color:red'>?</span></p>
 <p><span style='color:red'>¿Cómo</span> nos preparamos para el UPSC<span style='color:red'>?</span></p>
-<p><span style='color:red'>¿Cómo</span> hacer que la física<span style='color:red'> sea</span> fácil<span style='color:red'> de</span> aprender<span style='color:red'>?</span></p>
+<p><span style='color:red'>¿Cómo</span> hacer que la física sea fácil<span style='color:red'> de</span> aprender<span style='color:red'>?</span></p>
 <p>¿Cuáles son las mejores maneras<span style='color:red'> de</span> aprender francés<span style='color:red'>?</span></p>
 <p><span style='color:red'>¿Cómo</span> puedo aprender<span style='color:red'> a</span> hablar inglés con fluidez<span style='color:red'>?</span></p>
 <p><span style='color:red'>¿Cómo</span> puedo aprender seguridad informática<span style='color:red'>?</span></p>

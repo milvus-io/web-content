@@ -20,7 +20,8 @@ title: Integrieren Sie Milvus mit DSPy
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/milvus_and_DSPy.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a></p>
+    </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/milvus_and_DSPy.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
+<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/milvus_and_DSPy.ipynb" target="_blank"><img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/></a></p>
 <h2 id="What-is-DSPy" class="common-anchor-header">Was ist DSPy?<button data-href="#What-is-DSPy" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -53,7 +54,7 @@ title: Integrieren Sie Milvus mit DSPy
         ></path>
       </svg>
     </button></h2><ul>
-<li>Programmieransatz: DSPy bietet einen systematischen Programmieransatz für die Entwicklung von LM-Pipelines, indem Pipelines als Texttransformationsgraphen abstrahiert werden, anstatt nur die LLMs zu instruieren. Seine deklarativen Module ermöglichen einen strukturierten Entwurf und eine Optimierung, die die Trial-and-Error-Methode der traditionellen Prompt-Templates ersetzt.</li>
+<li>Programmieransatz: DSPy bietet einen systematischen Programmieransatz für die Entwicklung von LM-Pipelines, indem es die Pipelines als Texttransformationsgraphen abstrahiert, anstatt nur die LLMs zu instruieren. Die deklarativen Module ermöglichen ein strukturiertes Design und eine Optimierung, die die Trial-and-Error-Methode der traditionellen Prompt-Templates ersetzt.</li>
 <li>Leistungsverbesserung: DSPy demonstriert signifikante Leistungssteigerungen gegenüber bestehenden Methoden. In Fallstudien übertrifft es Standard-Prompting und von Experten erstellte Demonstrationen und zeigt seine Vielseitigkeit und Effektivität, selbst wenn es zu kleineren LM-Modellen kompiliert wird.</li>
 <li>Modularisierte Abstraktion: DSPy abstrahiert effektiv die komplizierten Aspekte der LM-Pipeline-Entwicklung, wie z.B. die Dekomposition, die Feinabstimmung und die Modellauswahl. Mit DSPy kann ein prägnantes Programm nahtlos in Anweisungen für verschiedene Modelle, wie GPT-4, Llama2-13b oder T5-Basis, übersetzt werden, was die Entwicklung rationalisiert und die Leistung erhöht.</li>
 </ul>
@@ -77,7 +78,7 @@ title: Integrieren Sie Milvus mit DSPy
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/dspy-01.png" alt="DSPy Modules" class="doc-image" id="dspy-modules" />
    </span> <span class="img-wrapper"> <span>DSPy-Module</span> </span></p>
-<p>Unterschrift: Signaturen in DSPy dienen als deklarative Spezifikationen, die das Eingabe-/Ausgabeverhalten von Modulen umreißen und das Sprachmodell bei der Ausführung von Aufgaben leiten. Modul: DSPy-Module dienen als grundlegende Komponenten für Programme, die Sprachmodelle (LMs) nutzen. Sie abstrahieren verschiedene Prompting-Techniken, wie z.B. Chain of Thought oder ReAct, und sind anpassbar, um jede DSPy-Signatur zu behandeln. Mit lernfähigen Parametern und der Fähigkeit, Eingaben zu verarbeiten und Ausgaben zu erzeugen, können diese Module zu größeren Programmen kombiniert werden, wobei sie sich an den NN-Modulen in PyTorch orientieren, aber auf LM-Anwendungen zugeschnitten sind. Optimierer: Optimierer in DSPy nehmen eine Feinabstimmung der Parameter von DSPy-Programmen vor, wie z. B. Prompts und LLM-Gewichte, um bestimmte Metriken wie die Genauigkeit zu maximieren und die Effizienz des Programms zu verbessern.</p>
+<p>Unterschrift: Signaturen in DSPy dienen als deklarative Spezifikationen, die das Eingabe-/Ausgabeverhalten von Modulen umreißen und das Sprachmodell bei der Ausführung von Aufgaben leiten. Modul: DSPy-Module dienen als grundlegende Komponenten für Programme, die Sprachmodelle (LMs) nutzen. Sie abstrahieren verschiedene Prompting-Techniken, wie z.B. Chain of Thought oder ReAct, und sind anpassbar, um jede DSPy-Signatur zu behandeln. Mit lernfähigen Parametern und der Fähigkeit, Eingaben zu verarbeiten und Ausgaben zu erzeugen, können diese Module zu größeren Programmen kombiniert werden, wobei sie sich an den NN-Modulen in PyTorch orientieren, aber auf LM-Anwendungen zugeschnitten sind. Optimierer: Optimierer in DSPy nehmen eine Feinabstimmung der Parameter von DSPy-Programmen vor, wie z. B. Prompts und LLM-Gewichte, um bestimmte Metriken wie die Genauigkeit zu maximieren und die Programmeffizienz zu verbessern.</p>
 <h2 id="Why-Milvus-in-DSPy" class="common-anchor-header">Warum Milvus in DSPy<button data-href="#Why-Milvus-in-DSPy" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -258,7 +259,7 @@ score = evaluate_on_hotpotqa(compiled_rag, metric=metric)
 <span class="hljs-built_in">print</span>(score)
 <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;compile_rag:&quot;</span>, score)
 <button class="copy-code-btn"></button></code></pre>
-<p>Der Ragas-Score ist von seinem vorherigen Wert von 50,0 auf 52,0 gestiegen, was auf eine Verbesserung der Antwortqualität hinweist.</p>
+<p>Der Ragas-Score hat sich von seinem vorherigen Wert von 50,0 auf 52,0 erhöht, was auf eine Verbesserung der Antwortqualität hinweist.</p>
 <h2 id="Summary" class="common-anchor-header">Zusammenfassung<button data-href="#Summary" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -274,4 +275,4 @@ score = evaluate_on_hotpotqa(compiled_rag, metric=metric)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>DSPy stellt durch seine programmierbare Schnittstelle, die eine algorithmische und automatische Optimierung von Modellaufforderungen und -gewichtungen ermöglicht, einen Sprung in der Interaktion mit Sprachmodellen dar. Durch den Einsatz von DSPy für die RAG-Implementierung wird die Anpassung an unterschiedliche Sprachmodelle oder Datensätze zum Kinderspiel, was den Bedarf an mühsamen manuellen Eingriffen drastisch reduziert.</p>
+    </button></h2><p>DSPy stellt durch seine programmierbare Schnittstelle, die eine algorithmische und automatisierte Optimierung von Modellaufforderungen und Gewichtungen ermöglicht, einen Sprung in der Interaktion mit Sprachmodellen dar. Durch den Einsatz von DSPy für die RAG-Implementierung wird die Anpassung an unterschiedliche Sprachmodelle oder Datensätze zum Kinderspiel, was den Bedarf an mühsamen manuellen Eingriffen drastisch reduziert.</p>

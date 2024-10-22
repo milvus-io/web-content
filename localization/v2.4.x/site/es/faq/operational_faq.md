@@ -3,7 +3,7 @@ id: operational_faq.md
 summary: >-
   Encuentre respuestas a las preguntas más frecuentes sobre las operaciones en
   Milvus.
-title: Preguntas más frecuentes
+title: FAQ Operativas
 ---
 <h1 id="Operational-FAQ" class="common-anchor-header">FAQ Operativas<button data-href="#Operational-FAQ" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -26,13 +26,13 @@ title: Preguntas más frecuentes
   <span class="hljs-string">&quot;registry-mirrors&quot;</span>: [<span class="hljs-string">&quot;https://registry.docker-cn.com&quot;</span>]
 }
 <button class="copy-code-btn"></button></code></pre>
-<h4 id="Is-Docker-the-only-way-to-install-and-run-Milvus" class="common-anchor-header">¿Es Docker la única forma de instalar y ejecutar Milvus?</h4><p>Docker es una forma eficiente de desplegar Milvus, pero no la única. También puede desplegar Milvus desde el código fuente. Esto requiere Ubuntu (18.04 o superior) o CentOS (7 o superior). Vea <a href="https://github.com/milvus-io/milvus#build-milvus-from-source-code">Construir Milvus desde el código fuente</a> para más información.</p>
+<h4 id="Is-Docker-the-only-way-to-install-and-run-Milvus" class="common-anchor-header">¿Es Docker la única forma de instalar y ejecutar Milvus?</h4><p>Docker es una forma eficiente de desplegar Milvus, pero no la única. También puede desplegar Milvus desde el código fuente. Esto requiere Ubuntu (18.04 o superior) o CentOS (7 o superior). Vea <a href="https://github.com/milvus-io/milvus#build-milvus-from-source-code">Construir Milvus desde el código</a> fuente para más información.</p>
 <h4 id="What-are-the-main-factors-affecting-recall" class="common-anchor-header">¿Cuáles son los principales factores que afectan a la recuperación?</h4><p>La recuperación se ve afectada principalmente por el tipo de índice y los parámetros de búsqueda.</p>
 <p>Para índices FLAT, Milvus realiza una búsqueda exhaustiva dentro de una colección, con un retorno del 100%.</p>
 <p>En los índices IVF, el parámetro nprobe determina el alcance de la búsqueda dentro de la colección. Aumentar nprobe aumenta la proporción de vectores buscados y la recuperación, pero disminuye el rendimiento de la consulta.</p>
 <p>En los índices HNSW, el parámetro ef determina la amplitud de la búsqueda en el grafo. Aumentar ef incrementa el número de puntos buscados en el gráfico y la recuperación, pero disminuye el rendimiento de la consulta.</p>
 <p>Para más información, véase <a href="https://www.zilliz.com/blog/Accelerating-Similarity-Search-on-Really-Big-Data-with-Vector-Indexing">Indexación vectorial</a>.</p>
-<h4 id="Why-did-my-changes-to-the-configuration-files-not-take-effect" class="common-anchor-header">¿Por qué no surten efecto mis cambios en los archivos de configuración?</h4><p>Milvus no admite la modificación de los archivos de configuración durante el tiempo de ejecución. Debe reiniciar Milvus Docker para que los cambios en los archivos de configuración surtan efecto.</p>
+<h4 id="Why-did-my-changes-to-the-configuration-files-not-take-effect" class="common-anchor-header">¿Por qué no surten efecto mis cambios en los archivos de configuración?</h4><p>Milvus no soporta la modificación de los archivos de configuración durante el tiempo de ejecución. Debe reiniciar Milvus Docker para que los cambios en los archivos de configuración surtan efecto.</p>
 <h4 id="How-do-I-know-if-Milvus-has-started-successfully" class="common-anchor-header">¿Cómo sé si Milvus se ha iniciado correctamente?</h4><p>Si Milvus se inicia utilizando Docker Compose, ejecute <code translate="no">docker ps</code> para observar cuántos contenedores Docker se están ejecutando y comprobar si los servicios de Milvus se han iniciado correctamente.</p>
 <p>Para Milvus standalone, debería poder observar al menos tres contenedores Docker en ejecución, siendo uno el servicio Milvus y los otros dos la gestión etcd y el servicio de almacenamiento. Para obtener más información, consulte <a href="/docs/es/install_standalone-docker.md">Instalación de Milvus Standalone</a>.</p>
 <h4 id="Why-is-the-time-in-the-log-files-different-from-the-system-time" class="common-anchor-header">¿Por qué la hora en los archivos de registro es diferente de la hora del sistema?</h4><p>La diferencia horaria suele deberse a que la máquina anfitriona no utiliza el Tiempo Universal Coordinado (UTC).</p>
@@ -48,7 +48,7 @@ title: Preguntas más frecuentes
 <pre><code translate="no">$ lscpu | grep -e sse4_2 -e avx -e avx2 -e avx512
 <button class="copy-code-btn"></button></code></pre>
 <h4 id="Why-does-Milvus-return-illegal-instruction-during-startup" class="common-anchor-header">¿Por qué Milvus devuelve <code translate="no">illegal instruction</code> durante el arranque?</h4><p>Milvus requiere que su CPU soporte un conjunto de instrucciones SIMD: SSE4.2, AVX, AVX2, o AVX512. La CPU debe soportar al menos uno de estos conjuntos para asegurar que Milvus funciona con normalidad. Un error <code translate="no">illegal instruction</code> devuelto durante el arranque sugiere que su CPU no soporta ninguno de los cuatro conjuntos de instrucciones anteriores.</p>
-<p>Consulte la <a href="/docs/es/prerequisite-docker.md">compatibilidad de la CPU con el conjunto de instrucciones SIMD</a>.</p>
+<p>Consulte la <a href="/docs/es/prerequisite-docker.md">compatibilidad de</a> la <a href="/docs/es/prerequisite-docker.md">CPU con el conjunto de instrucciones SIMD</a>.</p>
 <h4 id="Can-I-install-Milvus-on-Windows" class="common-anchor-header">¿Puedo instalar Milvus en Windows?</h4><p>Sí. Puede instalar Milvus en Windows compilando desde el código fuente o desde un paquete binario.</p>
 <p>Consulte <a href="https://milvus.io/blog/2021-11-19-run-milvus-2.0-on-windows.md">Ejecutar Milvus en Windows</a> para saber cómo instalar Milvus en Windows.</p>
 <h4 id="I-got-an-error-when-installing-pymilvus-on-Windows-What-shall-I-do" class="common-anchor-header">Obtuve un error al instalar pymilvus en Windows. ¿Qué debo hacer?</h4><p>No se recomienda instalar PyMilvus en Windows. Pero si tiene que instalar PyMilvus en Windows pero obtiene un error, intente instalarlo en un entorno <a href="https://docs.conda.io/projects/conda/en/latest/user-guide/install/index.html">Conda</a>. Vea <a href="/docs/es/install-pymilvus.md">Instalar Milvus SDK</a> para más información sobre cómo instalar PyMilvus en el entorno Conda.</p>
@@ -74,8 +74,33 @@ title: Preguntas más frecuentes
 <li><p><strong>Consulta (Coincidencia exacta)</strong>: Milvus selecciona la última entidad con la PK coincidente. Búsqueda RNA: Milvus selecciona la entidad con la puntuación de similitud más alta, incluso si las entidades comparten el mismo PK. Esta priorización puede dar lugar a menos resultados únicos que el límite si su colección tiene muchas claves primarias duplicadas.</p></li>
 <li><p><strong>Coincidencias insuficientes</strong>: Es posible que las expresiones de filtrado de la búsqueda sean demasiado estrictas, por lo que habrá menos entidades que cumplan el umbral de similitud. Si las condiciones establecidas para la búsqueda son demasiado restrictivas, no coincidirán suficientes entidades, lo que dará lugar a menos resultados de los esperados.</p></li>
 </ul>
-<h4 id="Still-have-questions" class="common-anchor-header">¿Aún tiene preguntas?</h4><p>Puede hacerlo:</p>
+<h4 id="MilvusClientmilvusdemodb-gives-an-error-ModuleNotFoundError-No-module-named-milvuslite-What-causes-this-and-how-can-it-be-solved" class="common-anchor-header"><code translate="no">MilvusClient(&quot;milvus_demo.db&quot;) gives an error: ModuleNotFoundError: No module named 'milvus_lite'</code>. ¿Cuál es la causa y cómo puede solucionarse?</h4><p>Este error se produce cuando intenta utilizar Milvus Lite en una plataforma Windows. Milvus Lite está diseñado principalmente para entornos Linux y puede no tener soporte nativo para Windows.</p>
+<p>La solución es utilizar un entorno Linux:</p>
 <ul>
-<li>Eche un vistazo a <a href="https://github.com/milvus-io/milvus/issues">Milvus</a> en GitHub. Siéntase libre de hacer preguntas, compartir ideas y ayudar a otros.</li>
+<li>Utilice un sistema operativo basado en Linux o una máquina virtual para ejecutar Milvus Lite.</li>
+<li>Este enfoque garantizará la compatibilidad con las dependencias y la funcionalidad de la biblioteca.</li>
+</ul>
+<h4 id="What-are-the-length-exceeds-max-length-errors-in-Milvus-and-how-can-they-be-understood-and-addressed" class="common-anchor-header">¿Qué son los errores "la longitud excede la longitud máxima" en Milvus, y cómo pueden entenderse y solucionarse?</h4><p>Los errores "La longitud excede la longitud máxima" en Milvus se producen cuando el tamaño de un elemento de datos supera el tamaño máximo permitido para una colección o campo. He aquí algunos ejemplos y explicaciones:</p>
+<ul>
+<li><p>Error de campo JSON: <code translate="no">&lt;MilvusException: (code=1100, message=the length (398324) of json field (metadata) exceeds max length (65536): expected=valid length json string, actual=length exceeds max length: invalid parameter)&gt;</code></p></li>
+<li><p>Error de longitud de cadena: <code translate="no">&lt;ParamError: (code=1, message=invalid input, length of string exceeds max length. length: 74238, max length: 60535)&gt;</code></p></li>
+<li><p>Error de campo VarChar: <code translate="no">&lt;MilvusException: (code=1100, message=the length (60540) of 0th VarChar paragraph exceeds max length (0)%!(EXTRA int64=60535): invalid parameter)&gt;</code></p></li>
+</ul>
+<p>Para entender y solucionar estos errores</p>
+<ul>
+<li>Comprenda que <code translate="no">len(str)</code> en Python representa el número de caracteres, no el tamaño en bytes.</li>
+<li>Para tipos de datos basados en cadenas como VARCHAR y JSON, utilice <code translate="no">len(bytes(str, encoding='utf-8'))</code> para determinar el tamaño real en bytes, que es lo que Milvus utiliza para &quot;max-length&quot;.</li>
+</ul>
+<p>Ejemplo en Python:</p>
+<pre><code translate="no" class="language-python"><span class="hljs-comment"># Python Example: result of len() str cannot be used as &quot;max-length&quot; in Milvus </span>
+<span class="hljs-meta">&gt;&gt;&gt; </span>s = <span class="hljs-string">&quot;你好，世界！&quot;</span>
+<span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-built_in">len</span>(s) <span class="hljs-comment"># Number of characters of s.</span>
+<span class="hljs-number">6</span>
+<span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-built_in">len</span>(<span class="hljs-built_in">bytes</span>(s, <span class="hljs-string">&quot;utf-8&quot;</span>)) <span class="hljs-comment"># Size in bytes of s, max-length in Milvus.</span>
+<span class="hljs-number">18</span>
+<button class="copy-code-btn"></button></code></pre>
+<h4 id="Still-have-questions" class="common-anchor-header">¿Todavía tiene preguntas?</h4><p>Puede hacerlo:</p>
+<ul>
+<li>Echa un vistazo a <a href="https://github.com/milvus-io/milvus/issues">Milvus</a> en GitHub. Siéntase libre de hacer preguntas, compartir ideas y ayudar a otros.</li>
 <li>Únase a nuestro <a href="https://discuss.milvus.io/">Foro Milvus</a> o <a href="https://join.slack.com/t/milvusio/shared_invite/enQtNzY1OTQ0NDI3NjMzLWNmYmM1NmNjOTQ5MGI5NDhhYmRhMGU5M2NhNzhhMDMzY2MzNDdlYjM5ODQ5MmE3ODFlYzU3YjJkNmVlNDQ2ZTk">Canal Slack</a> para encontrar apoyo y participar con nuestra comunidad de código abierto.</li>
 </ul>

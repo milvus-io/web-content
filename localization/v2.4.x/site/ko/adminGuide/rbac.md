@@ -2,7 +2,7 @@
 id: rbac.md
 related_key: enable RBAC
 summary: '사용자, 역할 및 권한을 관리하는 방법을 알아보세요.'
-title: RBAC 사용
+title: RBAC 활성화
 ---
 <h1 id="Enable-RBAC" class="common-anchor-header">RBAC 활성화<button data-href="#Enable-RBAC" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -139,7 +139,7 @@ client = MilvusClient(
         ></path>
       </svg>
     </button></h2><p>다음 예는 <code translate="no">roleA</code> 이라는 역할에 모든 컬렉션을 검색할 수 있는 권한을 부여하는 방법을 보여줍니다.</p>
-<p><code translate="no">object_type</code> 은 리소스 유형으로도 이해할 수 있는 객체 유형을 지정합니다. 현재 유효한 값으로는 컬렉션/사용자/글로벌 등이 있으며, 여기서 글로벌은 특정 리소스 유형이 없음을 의미합니다. <code translate="no">object_name</code> 은 리소스 이름입니다. 객체 유형이<em>Collection인 경우 객체 이름은 특정 컬렉션 이름을 참조하거나 *를 사용하여 모든 컬렉션을 지정할 수 있습니다. 개체 유형이</em>Global인 경우에는 개체 이름을 *로만 지정할 수 있습니다. 부여할 수 있는 다른 유형의 권한은 <a href="/docs/ko/users_and_roles.md">사용자 및 역할을</a> 참조하세요.</p>
+<p><code translate="no">object_type</code> 은 리소스 유형으로도 이해할 수 있는 객체 유형을 지정합니다. 현재 유효한 값으로는 컬렉션/사용자/글로벌 등이 있으며, 여기서 글로벌은 특정 리소스 유형이 없음을 의미합니다. <code translate="no">object_name</code> 은 리소스 이름입니다. 객체 유형이<em>Collection인 경우 객체 이름은 특정 컬렉션 이름을 참조하거나 *를 사용하여 모든 컬렉션을 지정할 수 있습니다.</em>개체<em>유형이</em>Global인 경우에는 개체 이름을 *로만 지정할 수 있습니다. 부여할 수 있는 다른 유형의 권한은 <a href="/docs/ko/users_and_roles.md">사용자 및 역할을</a> 참조하세요.</p>
 <p>역할 권한을 관리하기 전에 사용자 인증을 사용 설정했는지 확인하세요. 그렇지 않으면 오류가 발생할 수 있습니다. 사용자 인증을 사용 설정하는 방법에 대한 자세한 내용은 <a href="/docs/ko/authenticate.md">사용자 액세스 인증하기를</a> 참조하세요.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># grant privilege to a role</span>
 

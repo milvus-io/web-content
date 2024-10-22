@@ -1,10 +1,9 @@
 ---
 id: hybrid_search_with_milvus.md
 summary: Milvusとのハイブリッド検索
-title: Milvusとのハイブリッド検索
+title: Milvusを使ったハイブリッド検索
 ---
-
-<h1 id="Hybrid-Search-with-Milvus" class="common-anchor-header">Milvusによるハイブリッド検索<button data-href="#Hybrid-Search-with-Milvus" class="anchor-icon" translate="no">
+<h1 id="Hybrid-Search-with-Milvus" class="common-anchor-header">Milvusを使ったハイブリッド検索<button data-href="#Hybrid-Search-with-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -19,16 +18,17 @@ title: Milvusとのハイブリッド検索
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/hybrid_search_with_milvus.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a></p>
+    </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/hybrid_search_with_milvus.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
+<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/hybrid_search_with_milvus.ipynb" target="_blank"><img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/></a></p>
 <p><img translate="no" src="https://raw.githubusercontent.com/milvus-io/bootcamp/master/bootcamp/tutorials/quickstart/apps/hybrid_demo_with_milvus/pics/demo.png"/></p>
-<p>このチュートリアルでは、<a href="https://milvus.io/docs/multi-vector-search.md">Milvusと</a> <a href="https://github.com/FlagOpen/FlagEmbedding/tree/master/FlagEmbedding/BGE_M3">BGE-M3モデルを</a>使ったハイブリッド検索の方法を紹介します。BGE-M3モデルはテキストを密なベクトルと疎なベクトルに変換することができます。Milvusは1つのコレクションに両方のタイプのベクトルを格納することをサポートし、結果の関連性を高めるハイブリッド検索を可能にします。</p>
+<p>このチュートリアルでは、<a href="https://milvus.io/docs/multi-vector-search.md">Milvusと</a> <a href="https://github.com/FlagOpen/FlagEmbedding/tree/master/FlagEmbedding/BGE_M3">BGE-M3モデルを</a>使ったハイブリッド検索の方法を説明します。BGE-M3モデルはテキストを密なベクトルと疎なベクトルに変換することができます。Milvusは1つのコレクションに両方のタイプのベクトルを格納することをサポートし、結果の関連性を高めるハイブリッド検索を可能にします。</p>
 <p>Milvusは密検索、疎検索、ハイブリッド検索をサポートしています：</p>
 <ul>
 <li>密検索：クエリの背後にある意味を理解するためにセマンティックコンテキストを利用します。</li>
 <li>スパース検索：キーワードのマッチングを重視し、全文検索に相当する特定の用語に基づいた検索結果を得る。</li>
 <li>ハイブリッド検索：DenseとSparseの両アプローチを組み合わせ、包括的な検索結果のために完全な文脈と特定のキーワードを捕捉する。</li>
 </ul>
-<p>これらの方法を統合することで、Milvusハイブリッド検索は意味と語彙の類似性のバランスをとり、検索結果の全体的な関連性を向上させます。このノートブックでは、これらの検索ストラテジーのセットアップと使用方法を説明し、様々な検索シナリオにおける有効性を強調します。</p>
+<p>Milvusハイブリッド検索は、これらの手法を統合することで、意味的な類似性と語彙的な類似性のバランスをとり、検索結果の全体的な関連性を向上させます。このノートブックでは、これらの検索ストラテジーのセットアップと使用方法を説明し、様々な検索シナリオにおける有効性を強調します。</p>
 <h3 id="Dependencies-and-Environment" class="common-anchor-header">依存関係と環境</h3><pre><code translate="no" class="language-shell">$ pip install --upgrade pymilvus <span class="hljs-string">&quot;pymilvus[model]&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Download-Dataset" class="common-anchor-header">データセットのダウンロード</h3><p>検索を実証するには、文書のコーパスが必要だ。Quora Duplicate Questionsデータセットを使い、ローカルディレクトリに置いてみよう。</p>
@@ -39,22 +39,21 @@ $ wget http://qim.fs.quoracdn.net/quora_duplicate_questions.tsv
 <h3 id="Load-and-Prepare-Data" class="common-anchor-header">データのロードと準備</h3><p>データセットをロードし、検索用の小さなコーパスを準備する。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> pandas <span class="hljs-keyword">as</span> pd
 
-file*path = <span class="hljs-string">&quot;quora_duplicate_questions.tsv&quot;</span>
+file_path = <span class="hljs-string">&quot;quora_duplicate_questions.tsv&quot;</span>
 df = pd.read_csv(file_path, sep=<span class="hljs-string">&quot;\t&quot;</span>)
 questions = <span class="hljs-built_in">set</span>()
-<span class="hljs-keyword">for</span> *, row <span class="hljs-keyword">in</span> df.iterrows():
-obj = row.to_dict()
-questions.add(obj[<span class="hljs-string">&quot;question1&quot;</span>][:<span class="hljs-number">512</span>])
-questions.add(obj[<span class="hljs-string">&quot;question2&quot;</span>][:<span class="hljs-number">512</span>])
-<span class="hljs-keyword">if</span> <span class="hljs-built_in">len</span>(questions) &gt; <span class="hljs-number">500</span>: <span class="hljs-comment"># Skip this if you want to use the full dataset</span>
-<span class="hljs-keyword">break</span>
+<span class="hljs-keyword">for</span> _, row <span class="hljs-keyword">in</span> df.iterrows():
+    obj = row.to_dict()
+    questions.add(obj[<span class="hljs-string">&quot;question1&quot;</span>][:<span class="hljs-number">512</span>])
+    questions.add(obj[<span class="hljs-string">&quot;question2&quot;</span>][:<span class="hljs-number">512</span>])
+    <span class="hljs-keyword">if</span> <span class="hljs-built_in">len</span>(questions) &gt; <span class="hljs-number">500</span>:  <span class="hljs-comment"># Skip this if you want to use the full dataset</span>
+        <span class="hljs-keyword">break</span>
 
 docs = <span class="hljs-built_in">list</span>(questions)
 
 <span class="hljs-comment"># example question</span>
 <span class="hljs-built_in">print</span>(docs[<span class="hljs-number">0</span>])
 <button class="copy-code-btn"></button></code></pre>
-
 <pre><code translate="no">What is the strongest Kevlar cord?
 </code></pre>
 <h3 id="Use-BGE-M3-Model-for-Embeddings" class="common-anchor-header">埋め込みにBGE-M3モデルを使う</h3><p>BGE-M3モデルはテキストを密なベクトルと疎なベクトルとして埋め込むことができる。</p>
@@ -66,7 +65,6 @@ dense_dim = ef.dim[<span class="hljs-string">&quot;dense&quot;</span>]
 <span class="hljs-comment"># Generate embeddings using BGE-M3 model</span>
 docs_embeddings = ef(docs)
 <button class="copy-code-btn"></button></code></pre>
-
 <pre><code translate="no">Fetching 30 files: 100%|██████████| 30/30 [00:00&lt;00:00, 302473.85it/s]
 Inference Embeddings: 100%|██████████| 32/32 [01:59&lt;00:00,  3.74s/it]
 </code></pre>
@@ -92,23 +90,23 @@ connections.connect(uri=<span class="hljs-string">&quot;./milvus.db&quot;</span>
 
 <span class="hljs-comment"># Specify the data schema for the new Collection</span>
 fields = [
-<span class="hljs-comment"># Use auto generated id as primary key</span>
-FieldSchema(
-name=<span class="hljs-string">&quot;pk&quot;</span>, dtype=DataType.VARCHAR, is_primary=<span class="hljs-literal">True</span>, auto_id=<span class="hljs-literal">True</span>, max_length=<span class="hljs-number">100</span>
-),
-<span class="hljs-comment"># Store the original text to retrieve based on semantically distance</span>
-FieldSchema(name=<span class="hljs-string">&quot;text&quot;</span>, dtype=DataType.VARCHAR, max_length=<span class="hljs-number">512</span>),
-<span class="hljs-comment"># Milvus now supports both sparse and dense vectors,</span>
-<span class="hljs-comment"># we can store each in a separate field to conduct hybrid search on both vectors</span>
-FieldSchema(name=<span class="hljs-string">&quot;sparse_vector&quot;</span>, dtype=DataType.SPARSE_FLOAT_VECTOR),
-FieldSchema(name=<span class="hljs-string">&quot;dense_vector&quot;</span>, dtype=DataType.FLOAT_VECTOR, dim=dense_dim),
+    <span class="hljs-comment"># Use auto generated id as primary key</span>
+    FieldSchema(
+        name=<span class="hljs-string">&quot;pk&quot;</span>, dtype=DataType.VARCHAR, is_primary=<span class="hljs-literal">True</span>, auto_id=<span class="hljs-literal">True</span>, max_length=<span class="hljs-number">100</span>
+    ),
+    <span class="hljs-comment"># Store the original text to retrieve based on semantically distance</span>
+    FieldSchema(name=<span class="hljs-string">&quot;text&quot;</span>, dtype=DataType.VARCHAR, max_length=<span class="hljs-number">512</span>),
+    <span class="hljs-comment"># Milvus now supports both sparse and dense vectors,</span>
+    <span class="hljs-comment"># we can store each in a separate field to conduct hybrid search on both vectors</span>
+    FieldSchema(name=<span class="hljs-string">&quot;sparse_vector&quot;</span>, dtype=DataType.SPARSE_FLOAT_VECTOR),
+    FieldSchema(name=<span class="hljs-string">&quot;dense_vector&quot;</span>, dtype=DataType.FLOAT_VECTOR, dim=dense_dim),
 ]
 schema = CollectionSchema(fields)
 
 <span class="hljs-comment"># Create collection (drop the old one if exists)</span>
 col_name = <span class="hljs-string">&quot;hybrid_demo&quot;</span>
 <span class="hljs-keyword">if</span> utility.has_collection(col_name):
-Collection(col_name).drop()
+    Collection(col_name).drop()
 col = Collection(col_name, schema, consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>)
 
 <span class="hljs-comment"># To make vector search efficient, we need to create indices for the vector fields</span>
@@ -118,8 +116,7 @@ dense_index = {<span class="hljs-string">&quot;index_type&quot;</span>: <span cl
 col.create_index(<span class="hljs-string">&quot;dense_vector&quot;</span>, dense_index)
 col.load()
 <button class="copy-code-btn"></button></code></pre>
-
-<h3 id="Insert-Data-into-Milvus-Collection" class="common-anchor-header">Milvusコレクションにデータを挿入する</h3><p>ドキュメントとその埋め込みデータをコレクションに挿入します。</p>
+<h3 id="Insert-Data-into-Milvus-Collection" class="common-anchor-header">Milvusコレクションへのデータ挿入</h3><p>ドキュメントとその埋め込みデータをコレクションに挿入します。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># For efficiency, we insert 50 records in each small batch</span>
 <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">0</span>, <span class="hljs-built_in">len</span>(docs), <span class="hljs-number">50</span>):
     batched_entities = [
@@ -140,7 +137,6 @@ query = <span class="hljs-built_in">input</span>(<span class="hljs-string">&quot
 query_embeddings = ef([query])
 <span class="hljs-comment"># print(query_embeddings)</span>
 <button class="copy-code-btn"></button></code></pre>
-
 <pre><code translate="no">How to start learning programming?
 </code></pre>
 <h3 id="Run-the-Search" class="common-anchor-header">検索を実行する</h3><p>まず、検索に役立つ関数を用意します：</p>
@@ -154,61 +150,63 @@ query_embeddings = ef([query])
     WeightedRanker,
 </span>)
 
+
 def <span class="hljs-title">dense_search</span>(<span class="hljs-params">col, query_dense_embedding, limit=<span class="hljs-number">10</span></span>):
-search_params</span> = {<span class="hljs-string">&quot;metric_type&quot;</span>: <span class="hljs-string">&quot;IP&quot;</span>, <span class="hljs-string">&quot;params&quot;</span>: {}}
-res = col.search(
-[<span class="hljs-meta">query_dense_embedding</span>],
-anns_field=<span class="hljs-string">&quot;dense_vector&quot;</span>,
-limit=limit,
-output_fields=[<span class="hljs-string">&quot;text&quot;</span>],
-param=search_params,
-)[<span class="hljs-number">0</span>]
-<span class="hljs-keyword">return</span> [hit.<span class="hljs-keyword">get</span>(<span class="hljs-string">&quot;text&quot;</span>) <span class="hljs-keyword">for</span> hit <span class="hljs-keyword">in</span> res]
+    search_params</span> = {<span class="hljs-string">&quot;metric_type&quot;</span>: <span class="hljs-string">&quot;IP&quot;</span>, <span class="hljs-string">&quot;params&quot;</span>: {}}
+    res = col.search(
+        [<span class="hljs-meta">query_dense_embedding</span>],
+        anns_field=<span class="hljs-string">&quot;dense_vector&quot;</span>,
+        limit=limit,
+        output_fields=[<span class="hljs-string">&quot;text&quot;</span>],
+        param=search_params,
+    )[<span class="hljs-number">0</span>]
+    <span class="hljs-keyword">return</span> [hit.<span class="hljs-keyword">get</span>(<span class="hljs-string">&quot;text&quot;</span>) <span class="hljs-keyword">for</span> hit <span class="hljs-keyword">in</span> res]
+
 
 <span class="hljs-function">def <span class="hljs-title">sparse_search</span>(<span class="hljs-params">col, query_sparse_embedding, limit=<span class="hljs-number">10</span></span>):
-search_params</span> = {
-<span class="hljs-string">&quot;metric_type&quot;</span>: <span class="hljs-string">&quot;IP&quot;</span>,
-<span class="hljs-string">&quot;params&quot;</span>: {},
-}
-res = col.search(
-[<span class="hljs-meta">query_sparse_embedding</span>],
-anns_field=<span class="hljs-string">&quot;sparse_vector&quot;</span>,
-limit=limit,
-output_fields=[<span class="hljs-string">&quot;text&quot;</span>],
-param=search_params,
-)[<span class="hljs-number">0</span>]
-<span class="hljs-keyword">return</span> [hit.<span class="hljs-keyword">get</span>(<span class="hljs-string">&quot;text&quot;</span>) <span class="hljs-keyword">for</span> hit <span class="hljs-keyword">in</span> res]
+    search_params</span> = {
+        <span class="hljs-string">&quot;metric_type&quot;</span>: <span class="hljs-string">&quot;IP&quot;</span>,
+        <span class="hljs-string">&quot;params&quot;</span>: {},
+    }
+    res = col.search(
+        [<span class="hljs-meta">query_sparse_embedding</span>],
+        anns_field=<span class="hljs-string">&quot;sparse_vector&quot;</span>,
+        limit=limit,
+        output_fields=[<span class="hljs-string">&quot;text&quot;</span>],
+        param=search_params,
+    )[<span class="hljs-number">0</span>]
+    <span class="hljs-keyword">return</span> [hit.<span class="hljs-keyword">get</span>(<span class="hljs-string">&quot;text&quot;</span>) <span class="hljs-keyword">for</span> hit <span class="hljs-keyword">in</span> res]
+
 
 <span class="hljs-function">def <span class="hljs-title">hybrid_search</span>(<span class="hljs-params">
-col,
-query_dense_embedding,
-query_sparse_embedding,
-sparse_weight=<span class="hljs-number">1.0</span>,
-dense_weight=<span class="hljs-number">1.0</span>,
-limit=<span class="hljs-number">10</span>,
+    col,
+    query_dense_embedding,
+    query_sparse_embedding,
+    sparse_weight=<span class="hljs-number">1.0</span>,
+    dense_weight=<span class="hljs-number">1.0</span>,
+    limit=<span class="hljs-number">10</span>,
 </span>):
-dense_search_params</span> = {<span class="hljs-string">&quot;metric_type&quot;</span>: <span class="hljs-string">&quot;IP&quot;</span>, <span class="hljs-string">&quot;params&quot;</span>: {}}
-dense_req = AnnSearchRequest(
-[<span class="hljs-meta">query_dense_embedding</span>], <span class="hljs-string">&quot;dense_vector&quot;</span>, dense_search_params, limit=limit
-)
-sparse_search_params = {<span class="hljs-string">&quot;metric_type&quot;</span>: <span class="hljs-string">&quot;IP&quot;</span>, <span class="hljs-string">&quot;params&quot;</span>: {}}
-sparse_req = AnnSearchRequest(
-[<span class="hljs-meta">query_sparse_embedding</span>], <span class="hljs-string">&quot;sparse_vector&quot;</span>, sparse_search_params, limit=limit
-)
-rerank = WeightedRanker(sparse_weight, dense_weight)
-res = col.hybrid_search(
-[<span class="hljs-meta">sparse_req, dense_req</span>], rerank=rerank, limit=limit, output_fields=[<span class="hljs-string">&quot;text&quot;</span>]
-)[<span class="hljs-number">0</span>]
-<span class="hljs-keyword">return</span> [hit.<span class="hljs-keyword">get</span>(<span class="hljs-string">&quot;text&quot;</span>) <span class="hljs-keyword">for</span> hit <span class="hljs-keyword">in</span> res]
+    dense_search_params</span> = {<span class="hljs-string">&quot;metric_type&quot;</span>: <span class="hljs-string">&quot;IP&quot;</span>, <span class="hljs-string">&quot;params&quot;</span>: {}}
+    dense_req = AnnSearchRequest(
+        [<span class="hljs-meta">query_dense_embedding</span>], <span class="hljs-string">&quot;dense_vector&quot;</span>, dense_search_params, limit=limit
+    )
+    sparse_search_params = {<span class="hljs-string">&quot;metric_type&quot;</span>: <span class="hljs-string">&quot;IP&quot;</span>, <span class="hljs-string">&quot;params&quot;</span>: {}}
+    sparse_req = AnnSearchRequest(
+        [<span class="hljs-meta">query_sparse_embedding</span>], <span class="hljs-string">&quot;sparse_vector&quot;</span>, sparse_search_params, limit=limit
+    )
+    rerank = WeightedRanker(sparse_weight, dense_weight)
+    res = col.hybrid_search(
+        [<span class="hljs-meta">sparse_req, dense_req</span>], rerank=rerank, limit=limit, output_fields=[<span class="hljs-string">&quot;text&quot;</span>]
+    )[<span class="hljs-number">0</span>]
+    <span class="hljs-keyword">return</span> [hit.<span class="hljs-keyword">get</span>(<span class="hljs-string">&quot;text&quot;</span>) <span class="hljs-keyword">for</span> hit <span class="hljs-keyword">in</span> res]
 <button class="copy-code-btn"></button></code></pre>
-
 <p>定義された関数を使って3種類の検索を実行してみよう：</p>
 <pre><code translate="no" class="language-python">dense_results = <span class="hljs-title function_">dense_search</span>(col, query_embeddings[<span class="hljs-string">&quot;dense&quot;</span>][<span class="hljs-number">0</span>])
-sparse_results = <span class="hljs-title function_">sparse_search</span>(col, query_embeddings[<span class="hljs-string">&quot;sparse&quot;</span>][<span class="hljs-number">0</span>])
+sparse_results = <span class="hljs-title function_">sparse_search</span>(col, query_embeddings[<span class="hljs-string">&quot;sparse&quot;</span>].<span class="hljs-title function_">_getrow</span>(<span class="hljs-number">0</span>))
 hybrid_results = <span class="hljs-title function_">hybrid_search</span>(
     col,
     query_embeddings[<span class="hljs-string">&quot;dense&quot;</span>][<span class="hljs-number">0</span>],
-    query_embeddings[<span class="hljs-string">&quot;sparse&quot;</span>][<span class="hljs-number">0</span>],
+    query_embeddings[<span class="hljs-string">&quot;sparse&quot;</span>].<span class="hljs-title function_">_getrow</span>(<span class="hljs-number">0</span>),
     sparse_weight=<span class="hljs-number">0.7</span>,
     dense_weight=<span class="hljs-number">1.0</span>,
 )
@@ -250,9 +248,7 @@ hybrid_results = <span class="hljs-title function_">hybrid_search</span>(
             formatted_text += <span class="hljs-string">&quot;&lt;/span&gt;&quot;</span>
         formatted_texts.append(formatted_text)
     <span class="hljs-keyword">return</span> formatted_texts
-
 <button class="copy-code-btn"></button></code></pre>
-
 <p>そうすれば、検索結果をテキストでハイライト表示することができる：</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> IPython.display <span class="hljs-keyword">import</span> Markdown, display
 
@@ -260,21 +256,20 @@ hybrid_results = <span class="hljs-title function_">hybrid_search</span>(
 display(Markdown(<span class="hljs-string">&quot;**Dense Search Results:**&quot;</span>))
 formatted_results = doc_text_formatting(ef, query, dense_results)
 <span class="hljs-keyword">for</span> result <span class="hljs-keyword">in</span> dense_results:
-display(Markdown(result))
+    display(Markdown(result))
 
 <span class="hljs-comment"># Sparse search results</span>
 display(Markdown(<span class="hljs-string">&quot;\n**Sparse Search Results:**&quot;</span>))
 formatted_results = doc_text_formatting(ef, query, sparse_results)
 <span class="hljs-keyword">for</span> result <span class="hljs-keyword">in</span> formatted_results:
-display(Markdown(result))
+    display(Markdown(result))
 
 <span class="hljs-comment"># Hybrid search results</span>
 display(Markdown(<span class="hljs-string">&quot;\n**Hybrid Search Results:**&quot;</span>))
 formatted_results = doc_text_formatting(ef, query, hybrid_results)
 <span class="hljs-keyword">for</span> result <span class="hljs-keyword">in</span> formatted_results:
-display(Markdown(result))
+    display(Markdown(result))
 <button class="copy-code-btn"></button></code></pre>
-
 <p><strong>密な検索結果</strong></p>
 <p>ロボット工学の学習を始めるのに最も良い方法は？</p>
 <p>javaのようなコンピュータ言語を学ぶにはどうしたらいいですか？</p>
@@ -292,27 +287,27 @@ display(Markdown(result))
 <p>機械<span style='color:red'> 学習に</span>代わるものは何<span style='color:red'> ですか？</span></p>
 <p>C<span style='color:red'> プログラミングを使って</span>Linuxで新しいターミナルと新しいシェルを作成<span style='color:red'>するには</span><span style='color:red'> ？</span></p>
 <p>C<span style='color:red'> プログラミングを</span>使用して、新しいターミナルで新しいシェルを作成する<span style='color:red'>方法を教えてください</span>（Linuxターミナル）<span style='color:red'>。</span></p>
-<p>ハイデラバードで<span style='color:red'> 起業するのに</span>適したビジネスはどれ<span style='color:red'>ですか？</span></p>
 <p>ハイデラバードで<span style='color:red'> 起業</span>するのに適したビジネスはどれ<span style='color:red'>ですか？</span></p>
-<p>ロボット工学を<span style='color:red'> 始めるのに</span>最適な方法は何<span style='color:red'>ですか？</span>私が作業を<span style='color:red'> 開始</span>できる最適な開発ボードはどれ<span style='color:red'>ですか？</span></p>
-<p>全くの初心者がコンピュータ・<span style='color:red'> プログラミングの</span>アルゴリズムを理解<span style='color:red'> するには、</span>どのような数学が必要<span style='color:red'> ですか？</span>全くの初心者に適したアルゴリズムに関する本は何<span style='color:red'>ですか？</span></p>
+<p>ハイデラバードで<span style='color:red'> 起業</span>するのに適したビジネスはどれ<span style='color:red'>ですか？</span></p>
+<p>ロボット工学を<span style='color:red'> 始める</span>のに最適な方法は何<span style='color:red'>ですか？</span>私が作業を<span style='color:red'> 開始</span>できる最適な開発ボードはどれ<span style='color:red'>ですか？</span></p>
+<p>全くの初心者がコンピュータ・<span style='color:red'> プログラミングの</span>アルゴリズムを理解するには<span style='color:red'> 、</span>どのような数学が必要ですか<span style='color:red'> ？</span>全くの初心者に適したアルゴリズムに関する本は何<span style='color:red'>ですか？</span></p>
 <p>人生を自分に合ったものにし、精神的・感情的に虐待<span style='color:red'>さ</span>れないように<span style='color:red'>するには</span><span style='color:red'>？</span></p>
 <p><strong>ハイブリッドの検索結果</strong></p>
-<p>ロボット工学を<span style='color:red'> 始めるのに</span>最適な方法は<span style='color:red'>？</span>開発ボードはどれが<span style='color:red'>いいですか？</span></p>
+<p>ロボット工学を<span style='color:red'> 始めるのに</span>最適な方法は<span style='color:red'>？</span>開発ボードはどれがいいですか<span style='color:red'>？</span></p>
 <p>Java<span style='color:red'> プログラミングとは</span>何<span style='color:red'> ですか？</span>Javaプログラミング言語を<span style='color:red'> 学ぶには</span>？</p>
-<p>ロボット工学を<span style='color:red'> 学ぶ</span>最良の方法は何<span style='color:red'>ですか？</span></p>
+<p>ロボット工学を<span style='color:red'> 学ぶ</span>最良の方法は何<span style='color:red'>ですか</span>？</p>
 <p><span style='color:red'>どのように</span>UPSCの準備をするの<span style='color:red'>ですか？</span></p>
 <p>物理を<span style='color:red'> 簡単に</span><span style='color:red'>学ぶには</span><span style='color:red'>？</span></p>
 <p>フランス語を学ぶ最善の<span style='color:red'> 方法は</span>何<span style='color:red'>ですか？</span></p>
-<p><span style='color:red'>どう</span>すれば英語を流暢に話せるように<span style='color:red'>なりますか？</span></p>
+<p><span style='color:red'>どう</span>すれば英語を流暢に話せる<span style='color:red'> ように</span><span style='color:red'>なりますか？</span></p>
 <p>コンピュータ・セキュリティを学ぶには<span style='color:red'>どう</span>したら<span style='color:red'>いいですか？</span></p>
-<p>情報<span style='color:red'> セキュリティを</span><span style='color:red'>学ぶにはどう</span>したら<span style='color:red'>いいですか？</span></p>
-<p>Javaのようなコンピュータ言語は<span style='color:red'>どのように</span>学べば<span style='color:red'>いいですか？</span></p>
+<p>情報<span style='color:red'> セキュリティを</span>学ぶには<span style='color:red'>どう</span>したら<span style='color:red'>いいですか？</span></p>
+<p>Javaのようなコンピュータ言語はどの<span style='color:red'>ように</span>学べば<span style='color:red'>いいですか？</span></p>
 <p>機械<span style='color:red'> 学習に</span>代わるものは何<span style='color:red'> ですか？</span></p>
-<p>LinuxでC<span style='color:red'> 言語を使って</span>新しいターミナルとシェルを作成するには<span style='color:red'>どう</span>すれば<span style='color:red'> いいですか？</span></p>
-<p>C<span style='color:red'> プログラミングを</span>使用して、新しいターミナルに新しいシェルを作成する<span style='color:red'>方法を教えてください。</span></p>
-<p>ハイデラバードで<span style='color:red'> 起業するのに</span>適したビジネスはどれ<span style='color:red'>ですか？</span></p>
+<p>LinuxでC言語を使って新しいターミナルとシェルを作成するには<span style='color:red'>どう</span>すれば<span style='color:red'> いいですか？</span></p>
+<p>C<span style='color:red'> プログラミングを</span>使用して、新しいターミナルに新しいシェルを作成する<span style='color:red'>方法を教えてください</span>。</p>
+<p>ハイデラバードで<span style='color:red'> 起業</span>するのに適したビジネスはどれ<span style='color:red'>ですか？</span></p>
 <p>ハイデラバードで<span style='color:red'> 起業</span>するのに適したビジネスはどれ<span style='color:red'>ですか？</span></p>
 <p>全くの初心者がコンピュータ<span style='color:red'> プログラミングの</span>アルゴリズムを理解する<span style='color:red'> ために</span>必要な数学は何<span style='color:red'> ですか？</span>全くの初心者に適したアルゴリズムに関する本は何<span style='color:red'>ですか？</span></p>
-<p>人生を自分に合ったものにし、精神的・感情的に虐待<span style='color:red'>さ</span>れないようにするには<span style='color:red'>どう</span>したら<span style='color:red'>いいですか？</span></p>
+<p>人生を自分に合ったものにし、精神的・感情的に虐待<span style='color:red'>さ</span>れないように<span style='color:red'>するには</span>どうしたら<span style='color:red'>いいですか？</span></p>
 <h3 id="Quick-Deploy" class="common-anchor-header">クイックデプロイ</h3><p>このチュートリアルでオンライン・デモを始める方法については、<a href="https://github.com/milvus-io/bootcamp/tree/master/bootcamp/tutorials/quickstart/apps/hybrid_demo_with_milvus">アプリケーションの例を</a>参照してください。</p>

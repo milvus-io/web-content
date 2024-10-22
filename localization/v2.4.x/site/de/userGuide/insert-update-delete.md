@@ -3,7 +3,7 @@ id: insert-update-delete.md
 summary: >-
   Dieses Handbuch führt Sie durch die Datenmanipulationsoperationen innerhalb
   einer Sammlung, einschließlich Einfügen, Hochstellen und Löschen.
-title: 'Einfügen, Hochstellen und Löschen'
+title: 'Einfügen, Upsert und Löschen'
 ---
 <h1 id="Insert-Upsert--Delete" class="common-anchor-header">Einfügen, Upsert und Löschen<button data-href="#Insert-Upsert--Delete" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -57,7 +57,7 @@ title: 'Einfügen, Hochstellen und Löschen'
         ></path>
       </svg>
     </button></h2><p>Eine Entität im Kontext von Milvus-Sammlungen ist eine einzelne, identifizierbare Instanz innerhalb einer Sammlung. Sie stellt ein eindeutiges Mitglied einer bestimmten Klasse dar, sei es ein Buch in einer Bibliothek, ein Gen in einem Genom oder eine andere identifizierbare Einheit.</p>
-<p>Entitäten innerhalb einer Sammlung haben einen gemeinsamen Satz von Attributen, die als Schema bezeichnet werden und die Struktur beschreiben, die jede Entität einhalten muss, einschließlich Feldnamen, Datentypen und andere Einschränkungen.</p>
+<p>Entitäten innerhalb einer Sammlung haben einen gemeinsamen Satz von Attributen, der als Schema bezeichnet wird und die Struktur umreißt, die jede Entität einhalten muss, einschließlich Feldnamen, Datentypen und andere Beschränkungen.</p>
 <p>Das erfolgreiche Einfügen von Entitäten in eine Sammlung erfordert, dass die bereitgestellten Daten alle schema-definierten Felder der Zielsammlung enthalten. Darüber hinaus können Sie auch nicht schema-definierte Felder einfügen, wenn Sie das dynamische Feld aktiviert haben. Weitere Informationen finden Sie unter <a href="/docs/de/enable-dynamic-field.md">Dynamisches Feld aktivieren</a>.</p>
 <h2 id="Preparations" class="common-anchor-header">Vorbereitungen<button data-href="#Preparations" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -406,9 +406,8 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 </ul>
 <div class="alert note">
 <ul>
-<li>Upsert-Operationen aktualisieren die Primärschlüssel nicht.</li>
-<li>Upsert-Operationen unterstützen keine Sammlungen, für die <code translate="no">autoID</code> aktiviert ist.</li>
-<li>Wenn Sie planen, die Operation <code translate="no">upsert</code> anstelle von <code translate="no">insert</code> für die Aufnahme großer Datenmengen (z. B. Millionen von Vektoren) zu verwenden, beachten Sie bitte, dass dies zu einem hohen Speicherverbrauch auf Milvus-Datenknoten führen kann.</li>
+<li>Upsert-Vorgänge aktualisieren die Primärschlüssel nicht.</li>
+<li>Wenn Sie planen, die Operation <code translate="no">upsert</code> anstelle von <code translate="no">insert</code> für die Aufnahme großer Datenmengen (z. B. Millionen von Vektoren) zu verwenden, beachten Sie, dass dies zu einem hohen Speicherverbrauch auf Milvus-Datenknoten führen kann.</li>
 </ul>
 </div>
 <div class="language-python">

@@ -5,7 +5,7 @@ summary: >-
   utilizzando Hugging Face come caricatore di dati e generatore di
   incorporazioni per l'elaborazione dei dati e Milvus come database vettoriale
   per la ricerca semantica.
-title: Risposta alle domande con Milvus e la faccia abbracciata
+title: Risposta alle domande con Milvus e Hugging Face
 ---
 <h1 id="Question-Answering-Using-Milvus-and-Hugging-Face" class="common-anchor-header">Risposta alle domande con Milvus e Hugging Face<button data-href="#Question-Answering-Using-Milvus-and-Hugging-Face" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -22,7 +22,8 @@ title: Risposta alle domande con Milvus e la faccia abbracciata
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/qa_with_milvus_and_hf.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a></p>
+    </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/qa_with_milvus_and_hf.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
+<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/qa_with_milvus_and_hf.ipynb" target="_blank"><img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/></a></p>
 <p>Un sistema di risposta alle domande basato sulla ricerca semantica funziona trovando la domanda più simile da un insieme di coppie domanda-risposta per una determinata domanda. Una volta identificata la domanda più simile, la risposta corrispondente dal set di dati viene considerata come la risposta alla domanda. Questo approccio si basa su misure di somiglianza semantica per determinare la somiglianza tra le domande e recuperare le risposte pertinenti.</p>
 <p>Questo tutorial mostra come costruire un sistema di risposta alle domande utilizzando <a href="https://huggingface.co">Hugging Face</a> come caricatore di dati e generatore di incorporazioni per l'elaborazione dei dati e <a href="https://milvus.io">Milvus</a> come database vettoriale per la ricerca semantica.</p>
 <h2 id="Before-you-begin" class="common-anchor-header">Prima di iniziare<button data-href="#Before-you-begin" class="anchor-icon" translate="no">

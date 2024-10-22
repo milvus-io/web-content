@@ -1,6 +1,6 @@
 ---
 id: tls.md
-title: Chiffrement en transit
+title: Cryptage en transit
 summary: Découvrez comment activer le proxy TLS dans Milvus.
 ---
 <h1 id="Encryption-in-Transit" class="common-anchor-header">Cryptage en transit<button data-href="#Encryption-in-Transit" class="anchor-icon" translate="no">
@@ -19,9 +19,9 @@ summary: Découvrez comment activer le proxy TLS dans Milvus.
         ></path>
       </svg>
     </button></h1><p>TLS (Transport Layer Security) est un protocole de cryptage qui garantit la sécurité des communications. Le proxy Milvus utilise l'authentification unidirectionnelle et bidirectionnelle TLS.</p>
-<p>Cette rubrique décrit comment activer le proxy TLS dans Milvus.</p>
+<p>Cette rubrique décrit comment activer TLS dans le proxy Milvus pour les trafics gRPC et RESTful.</p>
 <div class="alert note">
-<p>TLS et l'authentification de l'utilisateur sont deux approches de sécurité distinctes. Si vous avez activé l'authentification utilisateur et TLS dans votre système Milvus, vous devrez fournir un nom d'utilisateur, un mot de passe et des chemins d'accès aux fichiers de certificats. Pour plus d'informations sur l'activation de l'authentification utilisateur, voir <a href="/docs/fr/authenticate.md">Authentifier l'accès utilisateur</a>.</p>
+<p>TLS et l'authentification utilisateur sont deux approches de sécurité distinctes. Si vous avez activé l'authentification utilisateur et TLS dans votre système Milvus, vous devrez fournir un nom d'utilisateur, un mot de passe et des chemins d'accès aux fichiers de certificats. Pour plus d'informations sur l'activation de l'authentification de l'utilisateur, voir <a href="/docs/fr/authenticate.md">Authentifier l'accès de l'utilisateur</a>.</p>
 </div>
 <h2 id="Create-your-own-certificate" class="common-anchor-header">Créer votre propre certificat<button data-href="#Create-your-own-certificate" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -516,7 +516,7 @@ openssl x509 -req -days 3650 -<span class="hljs-keyword">in</span> client.csr -o
 <li><code translate="no">2</code>: Authentification bidirectionnelle, où le serveur et le client ont tous deux besoin de certificats pour établir une connexion sécurisée. Ce mode nécessite <code translate="no">server.pem</code>, <code translate="no">server.key</code>, et <code translate="no">ca.pem</code> du côté serveur, et <code translate="no">client.pem</code>, <code translate="no">client.key</code>, et <code translate="no">ca.pem</code> du côté client.</li>
 </ul></li>
 </ul>
-<h3 id="2-Map-certificate-files-to-the-container" class="common-anchor-header">2. Mettez en correspondance les fichiers de certificats avec le conteneur</h3><h4 id="Prepare-certificate-files" class="common-anchor-header">Préparer les fichiers de certificat</h4><p>Créez un nouveau dossier nommé <code translate="no">tls</code> dans le même répertoire que <code translate="no">docker-compose.yaml</code>. Copiez les fichiers <code translate="no">server.pem</code>, <code translate="no">server.key</code> et <code translate="no">ca.pem</code> dans le dossier <code translate="no">tls</code>. Placez-les dans une structure de répertoire comme suit :</p>
+<h3 id="2-Map-certificate-files-to-the-container" class="common-anchor-header">2. Mettez en correspondance les fichiers de certificats avec le conteneur</h3><h4 id="Prepare-certificate-files" class="common-anchor-header">Préparer les fichiers de certificat</h4><p>Créez un nouveau dossier nommé <code translate="no">tls</code> dans le même répertoire que votre <code translate="no">docker-compose.yaml</code>. Copiez les fichiers <code translate="no">server.pem</code>, <code translate="no">server.key</code> et <code translate="no">ca.pem</code> dans le dossier <code translate="no">tls</code>. Placez-les dans une structure de répertoire comme suit :</p>
 <pre><code translate="no">├── docker-compose.yml
 ├── milvus.yaml
 └── tls
@@ -524,7 +524,7 @@ openssl x509 -req -days 3650 -<span class="hljs-keyword">in</span> client.csr -o
      ├── server.key
      └── ca.pem
 <button class="copy-code-btn"></button></code></pre>
-<h4 id="Update-Docker-Compose-configuration" class="common-anchor-header">Mise à jour de la configuration de Docker Compose</h4><p>Modifiez le fichier <code translate="no">docker-compose.yaml</code> pour mapper les chemins d'accès aux fichiers de certificats à l'intérieur du conteneur comme indiqué ci-dessous :</p>
+<h4 id="Update-Docker-Compose-configuration" class="common-anchor-header">Mise à jour de la configuration de Docker Compose</h4><p>Modifiez le fichier <code translate="no">docker-compose.yaml</code> pour mapper les chemins d'accès aux fichiers de certificats à l'intérieur du conteneur, comme indiqué ci-dessous :</p>
 <pre><code translate="no" class="language-yaml">  standalone:
     container_name: milvus-standalone
     image: milvusdb/milvus:latest
@@ -562,7 +562,7 @@ openssl x509 -req -days 3650 -<span class="hljs-keyword">in</span> client.csr -o
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client = MilvusClient(
-    uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>,
+    uri=<span class="hljs-string">&quot;https://localhost:19530&quot;</span>,
     secure=<span class="hljs-literal">True</span>,
     server_pem_path=<span class="hljs-string">&quot;path_to/server.pem&quot;</span>,
     server_name=<span class="hljs-string">&quot;localhost&quot;</span>
@@ -572,7 +572,7 @@ client = MilvusClient(
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client = MilvusClient(
-    uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>,
+    uri=<span class="hljs-string">&quot;https://localhost:19530&quot;</span>,
     secure=<span class="hljs-literal">True</span>,
     client_pem_path=<span class="hljs-string">&quot;path_to/client.pem&quot;</span>,
     client_key_path=<span class="hljs-string">&quot;path_to/client.key&quot;</span>,
@@ -581,3 +581,23 @@ client = MilvusClient(
 )
 <button class="copy-code-btn"></button></code></pre>
 <p>Voir <a href="https://github.com/milvus-io/pymilvus/blob/master/examples/example_tls1.py">example_tls1.py</a> et <a href="https://github.com/milvus-io/pymilvus/blob/master/examples/example_tls2.py">example_tls2.py</a> pour plus d'informations.</p>
+<h2 id="Connect-to-the-Milvus-RESTful-server-with-TLS" class="common-anchor-header">Connexion au serveur RESTful Milvus avec TLS<button data-href="#Connect-to-the-Milvus-RESTful-server-with-TLS" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>Pour les API RESTful, vous pouvez vérifier tls à l'aide de la commande <code translate="no">curl</code>.</p>
+<h3 id="One-way-TLS-connection" class="common-anchor-header">Connexion TLS unidirectionnelle</h3><pre><code translate="no" class="language-bash">curl --cacert path_to/ca.pem https://localhost:19530/v2/vectordb/collections/list
+<button class="copy-code-btn"></button></code></pre>
+<h3 id="Two-way-TLS-connection" class="common-anchor-header">Connexion TLS bidirectionnelle</h3><pre><code translate="no" class="language-bash">curl --cert path_to/client.pem --key path_to/client.key --cacert path_to/ca.pem https://localhost:19530/v2/vectordb/collections/list
+<button class="copy-code-btn"></button></code></pre>

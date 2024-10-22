@@ -18,7 +18,8 @@ title: 빠른 시작
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/quickstart.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a></p>
+    </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/quickstart.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
+<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/quickstart.ipynb" target="_blank"><img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/></a></p>
 <p>신경망 모델의 출력 데이터 형식인 벡터는 정보를 효과적으로 인코딩하고 지식 베이스, 시맨틱 검색, 검색 증강 생성(RAG) 등과 같은 AI 애플리케이션에서 중추적인 역할을 할 수 있습니다.</p>
 <p>Milvus는 오픈 소스 벡터 데이터베이스로, Jupyter 노트북에서 데모 챗봇을 실행하는 것부터 수십억 명의 사용자에게 서비스를 제공하는 웹 규모 검색 구축에 이르기까지 모든 규모의 AI 애플리케이션에 적합합니다. 이 가이드에서는 몇 분 안에 Milvus를 로컬에서 설정하고 Python 클라이언트 라이브러리를 사용하여 벡터를 생성, 저장 및 검색하는 방법을 안내해 드립니다.</p>
 <h2 id="Install-Milvus" class="common-anchor-header">Milvus 설치하기<button data-href="#Install-Milvus" class="anchor-icon" translate="no">
@@ -153,6 +154,7 @@ vectors = embedding_fn.encode_documents(docs)
 <span class="hljs-comment"># to demo metadata filtering later.</span>
 data = [
     {<span class="hljs-string">&quot;id&quot;</span>: i, <span class="hljs-string">&quot;vector&quot;</span>: vectors[i], <span class="hljs-string">&quot;text&quot;</span>: docs[i], <span class="hljs-string">&quot;subject&quot;</span>: <span class="hljs-string">&quot;history&quot;</span>}
+    <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-built_in">len</span>(vectors))
 ]
 
 <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Data has&quot;</span>, <span class="hljs-built_in">len</span>(data), <span class="hljs-string">&quot;entities, each with fields: &quot;</span>, data[<span class="hljs-number">0</span>].keys())
@@ -253,7 +255,7 @@ res = client.search(
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no"><span class="hljs-attr">data</span>: [<span class="hljs-string">&quot;[{&#x27;id&#x27;: 2, &#x27;distance&#x27;: 0.5859944820404053, &#x27;entity&#x27;: {&#x27;text&#x27;: &#x27;Born in Maida Vale, London, Turing was raised in southern England.&#x27;, &#x27;subject&#x27;: &#x27;history&#x27;}}, {&#x27;id&#x27;: 1, &#x27;distance&#x27;: 0.5118255615234375, &#x27;entity&#x27;: {&#x27;text&#x27;: &#x27;Alan Turing was the first person to conduct substantial research in AI.&#x27;, &#x27;subject&#x27;: &#x27;history&#x27;}}]&quot;</span>] , <span class="hljs-attr">extra_info</span>: {<span class="hljs-string">&#x27;cost&#x27;</span>: <span class="hljs-number">0</span>}
 <button class="copy-code-btn"></button></code></pre>
-<p>출력은 결과 목록이며, 각 결과는 벡터 검색 쿼리에 매핑됩니다. 각 쿼리에는 결과 목록이 포함되며, 각 결과에는 엔티티 기본 키, 쿼리 벡터까지의 거리, 지정된 <code translate="no">output_fields</code> 으로 엔티티 세부 정보가 포함됩니다.</p>
+<p>출력은 결과 목록이며, 각 결과는 벡터 검색 쿼리에 매핑됩니다. 각 쿼리에는 결과 목록이 포함되며, 각 결과에는 엔티티 기본 키, 쿼리 벡터까지의 거리 및 지정된 <code translate="no">output_fields</code> 으로 엔티티 세부 정보가 포함됩니다.</p>
 <h2 id="Vector-Search-with-Metadata-Filtering" class="common-anchor-header">메타데이터 필터링을 사용한 벡터 검색<button data-href="#Vector-Search-with-Metadata-Filtering" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -269,7 +271,7 @@ res = client.search(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>메타데이터의 값을 고려하면서 벡터 검색을 수행할 수도 있습니다(Milvus에서는 "스칼라" 필드라고 하며, 스칼라는 벡터가 아닌 데이터를 의미함). 이는 특정 기준을 지정하는 필터 표현식을 사용하여 수행됩니다. 다음 예제에서 <code translate="no">subject</code> 필드를 사용하여 검색 및 필터링하는 방법을 살펴보겠습니다.</p>
+    </button></h2><p>메타데이터의 값을 고려하면서 벡터 검색을 수행할 수도 있습니다(밀버스에서는 "스칼라" 필드라고 하는데, 스칼라는 벡터가 아닌 데이터를 의미하기 때문입니다). 이는 특정 기준을 지정하는 필터 표현식을 사용하여 수행됩니다. 다음 예제에서 <code translate="no">subject</code> 필드를 사용하여 검색 및 필터링하는 방법을 살펴보겠습니다.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Insert more docs in another subject.</span>
 docs = [
     <span class="hljs-string">&quot;Machine learning has been used for drug design.&quot;</span>,
@@ -299,8 +301,8 @@ res = client.search(
 <button class="copy-code-btn"></button></code></pre>
 <p>기본적으로 스칼라 필드는 인덱싱되지 않습니다. 대규모 데이터 세트에서 메타데이터 필터링 검색을 수행해야 하는 경우 고정 스키마를 사용하고 <a href="https://milvus.io/docs/scalar_index.md">인덱스를</a> 켜서 검색 성능을 개선하는 것도 고려해 볼 수 있습니다.</p>
 <p>벡터 검색 외에도 다른 유형의 검색을 수행할 수도 있습니다:</p>
-<h3 id="Query" class="common-anchor-header">쿼리</h3><p>쿼리()는 <a href="https://milvus.io/docs/boolean.md">필터 표현식이나</a> 일부 ID와 일치하는 크레트리아와 일치하는 모든 엔티티를 검색하는 작업입니다.</p>
-<p>예를 들어 스칼라 필드에 특정 값이 있는 모든 엔티티를 검색합니다:</p>
+<h3 id="Query" class="common-anchor-header">쿼리</h3><p>쿼리()는 <a href="https://milvus.io/docs/boolean.md">필터 표현식이나</a> 일부 ID와 일치하는 등 조건에 일치하는 모든 엔터티를 검색하는 작업입니다.</p>
+<p>예를 들어, 스칼라 필드에 특정 값이 있는 모든 엔터티를 검색합니다:</p>
 <pre><code translate="no" class="language-python">res = client.query(
     collection_name=<span class="hljs-string">&quot;demo_collection&quot;</span>,
     <span class="hljs-built_in">filter</span>=<span class="hljs-string">&quot;subject == &#x27;history&#x27;&quot;</span>,

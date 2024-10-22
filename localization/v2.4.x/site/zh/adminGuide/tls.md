@@ -1,7 +1,7 @@
 ---
 id: tls.md
-title: 传输中加密
-summary: 了解如何在 Milvus 中启用 TLS 代理。
+title: 传输中的加密
+summary: 了解如何在 Milvus 启用 TLS 代理。
 ---
 <h1 id="Encryption-in-Transit" class="common-anchor-header">传输中的加密<button data-href="#Encryption-in-Transit" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -19,9 +19,9 @@ summary: 了解如何在 Milvus 中启用 TLS 代理。
         ></path>
       </svg>
     </button></h1><p>TLS（传输层安全）是一种确保通信安全的加密协议。Milvus 代理使用 TLS 单向和双向验证。</p>
-<p>本主题介绍如何在 Milvus 中启用 TLS 代理。</p>
+<p>本主题将介绍如何在 Milvus 代理中启用 TLS，用于 gRPC 和 RESTful 流量。</p>
 <div class="alert note">
-<p>TLS 和用户身份验证是两种不同的安全方法。如果在 Milvus 系统中同时启用了用户身份验证和 TLS，则需要提供用户名、密码和证书文件路径。有关如何启用用户身份验证<a href="/docs/zh/authenticate.md">的</a>信息，请参阅<a href="/docs/zh/authenticate.md">验证用户访问</a>。</p>
+<p>TLS 和用户身份验证是两种不同的安全方法。如果在 Milvus 系统中同时启用了用户身份验证和 TLS，则需要提供用户名、密码和证书文件路径。有关如何启用用户身份验证的信息，请参阅<a href="/docs/zh/authenticate.md">验证用户访问</a>。</p>
 </div>
 <h2 id="Create-your-own-certificate" class="common-anchor-header">创建自己的证书<button data-href="#Create-your-own-certificate" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -562,7 +562,7 @@ openssl x509 -req -days 3650 -<span class="hljs-keyword">in</span> client.csr -o
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client = MilvusClient(
-    uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>,
+    uri=<span class="hljs-string">&quot;https://localhost:19530&quot;</span>,
     secure=<span class="hljs-literal">True</span>,
     server_pem_path=<span class="hljs-string">&quot;path_to/server.pem&quot;</span>,
     server_name=<span class="hljs-string">&quot;localhost&quot;</span>
@@ -572,7 +572,7 @@ client = MilvusClient(
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client = MilvusClient(
-    uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>,
+    uri=<span class="hljs-string">&quot;https://localhost:19530&quot;</span>,
     secure=<span class="hljs-literal">True</span>,
     client_pem_path=<span class="hljs-string">&quot;path_to/client.pem&quot;</span>,
     client_key_path=<span class="hljs-string">&quot;path_to/client.key&quot;</span>,
@@ -580,4 +580,24 @@ client = MilvusClient(
     server_name=<span class="hljs-string">&quot;localhost&quot;</span>
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>更多信息，请参阅<a href="https://github.com/milvus-io/pymilvus/blob/master/examples/example_tls1.py">example_tls1.py</a>和<a href="https://github.com/milvus-io/pymilvus/blob/master/examples/example_tls2.py">example_tls2.</a> <a href="https://github.com/milvus-io/pymilvus/blob/master/examples/example_tls1.py">py</a>。</p>
+<p>更多信息请参阅<a href="https://github.com/milvus-io/pymilvus/blob/master/examples/example_tls1.py">example_tls1.py</a>和<a href="https://github.com/milvus-io/pymilvus/blob/master/examples/example_tls2.py">example_tls2.</a> <a href="https://github.com/milvus-io/pymilvus/blob/master/examples/example_tls1.py">py</a>。</p>
+<h2 id="Connect-to-the-Milvus-RESTful-server-with-TLS" class="common-anchor-header">使用 TLS 连接到 Milvus RESTful 服务器<button data-href="#Connect-to-the-Milvus-RESTful-server-with-TLS" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>对于 RESTful API，可以使用<code translate="no">curl</code> 命令检查 TLS。</p>
+<h3 id="One-way-TLS-connection" class="common-anchor-header">单向 TLS 连接</h3><pre><code translate="no" class="language-bash">curl --cacert path_to/ca.pem https://localhost:19530/v2/vectordb/collections/list
+<button class="copy-code-btn"></button></code></pre>
+<h3 id="Two-way-TLS-connection" class="common-anchor-header">双向 TLS 连接</h3><pre><code translate="no" class="language-bash">curl --cert path_to/client.pem --key path_to/client.key --cacert path_to/ca.pem https://localhost:19530/v2/vectordb/collections/list
+<button class="copy-code-btn"></button></code></pre>

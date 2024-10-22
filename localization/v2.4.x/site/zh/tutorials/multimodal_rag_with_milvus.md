@@ -18,10 +18,11 @@ title: 使用 Milvus 的多模式 RAG
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/multimodal_rag_with_milvus.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a></p>
+    </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/multimodal_rag_with_milvus.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
+<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/multimodal_rag_with_milvus.ipynb" target="_blank"><img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/></a></p>
 <p><img translate="no" src="https://raw.githubusercontent.com/milvus-io/bootcamp/master/bootcamp/tutorials/quickstart/apps/multimodal_rag_with_milvus/pics/step3.jpg
 "/></p>
-<p>本教程展示了由 Milvus、<a href="https://github.com/FlagOpen/FlagEmbedding/tree/master/FlagEmbedding/visual">可视化 BGE 模型</a>和<a href="https://openai.com/index/hello-gpt-4o/">GPT-4o</a> 支持的多模式 RAG。通过该系统，用户可以上传图像并编辑文本说明，然后由 BGE 组成的检索模型进行处理，搜索候选图像。然后，GPT-4o 将充当重选器，选择最合适的图像，并提供选择背后的理由。这种强大的组合利用 Milvus 实现高效检索，利用 BGE 模型进行精确的图像处理和匹配，利用 GPT-4o 进行高级重新排序，从而带来无缝、直观的图像搜索体验。</p>
+<p>本教程展示了由 Milvus、<a href="https://github.com/FlagOpen/FlagEmbedding/tree/master/FlagEmbedding/visual">可视化 BGE 模型</a>和<a href="https://openai.com/index/hello-gpt-4o/">GPT-4o</a> 支持的多模式 RAG。通过该系统，用户可以上传图像并编辑文本说明，然后由 BGE 组成的检索模型进行处理，搜索候选图像。然后，GPT-4o 作为 Reranker，选择最合适的图像，并提供选择背后的理由。这种强大的组合实现了无缝、直观的图像搜索体验，利用 Milvus 实现高效检索，利用 BGE 模型实现精确图像处理和匹配，利用 GPT-4o 实现高级 Rerankers。</p>
 <h2 id="Preparation" class="common-anchor-header">准备工作<button data-href="#Preparation" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -53,7 +54,7 @@ $ pip install -e FlagEmbedding
 <pre><code translate="no" class="language-shell">$ wget <span class="hljs-attr">https</span>:<span class="hljs-comment">//github.com/milvus-io/bootcamp/releases/download/data/amazon_reviews_2023_subset.tar.gz</span>
 $ tar -xzf amazon_reviews_2023_subset.<span class="hljs-property">tar</span>.<span class="hljs-property">gz</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Load-Embedding-Model" class="common-anchor-header">加载嵌入模型</h3><p>我们将使用 Visualized BGE 模型 "bge-visualized-base-en-v1.5 "来生成图像和文本的嵌入模型。</p>
+<h3 id="Load-Embedding-Model" class="common-anchor-header">加载嵌入模型</h3><p>我们将使用可视化 BGE 模型 "bge-visualized-base-en-v1.5 "来生成图像和文本的嵌入模型。</p>
 <p><strong>1.下载权重</strong></p>
 <pre><code translate="no" class="language-shell">$ wget https://huggingface.co/BAAI/bge-visualized/resolve/main/Visualized_base_en_v1.5.pth
 <button class="copy-code-btn"></button></code></pre>
@@ -124,7 +125,7 @@ image_dict = {}
 
 Number of encoded images: 900
 </code></pre>
-<h3 id="Insert-into-Milvus" class="common-anchor-header">插入 Milvus</h3><p>将带有相应路径和嵌入信息的图片插入 Milvus 图片库。</p>
+<h3 id="Insert-into-Milvus" class="common-anchor-header">插入 Milvus</h3><p>将带有相应路径和嵌入信息的图片插入 Milvus Collections。</p>
 <div class="alert note">
 <p>至于<code translate="no">MilvusClient</code> 的参数：</p>
 <ul>
@@ -161,7 +162,7 @@ milvus_client.insert(
  'ids': [451537887696781312, 451537887696781313, ..., 451537887696782211],
  'cost': 0}
 </code></pre>
-<h2 id="Multimodal-Search-with-Generative-Reranker" class="common-anchor-header">使用生成式重排器进行多模态搜索<button data-href="#Multimodal-Search-with-Generative-Reranker" class="anchor-icon" translate="no">
+<h2 id="Multimodal-Search-with-Generative-Reranker" class="common-anchor-header">使用生成式 Reranker 进行多模态搜索<button data-href="#Multimodal-Search-with-Generative-Reranker" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -176,7 +177,7 @@ milvus_client.insert(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>在本节中，我们将首先通过多模态查询搜索相关图片，然后使用 LLM 服务对结果进行重排，并找出附带解释的最佳结果。</p>
+    </button></h2><p>在本节中，我们将首先通过多模态查询搜索相关图片，然后使用 LLM 服务对结果进行 Reranker，并找出带有解释的最佳结果。</p>
 <h3 id="Run-search" class="common-anchor-header">运行搜索</h3><p>现在，我们准备使用由图像和文本指令组成的查询数据执行高级图像搜索。</p>
 <pre><code translate="no" class="language-python">query_image = os.path.join(
     data_dir, <span class="hljs-string">&quot;leopard.jpg&quot;</span>
@@ -331,7 +332,7 @@ show_combined_image.show()
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/multimodal_rag_with_milvus_22_0.png" alt="Create a panoramic view" class="doc-image" id="create-a-panoramic-view" />
    </span> <span class="img-wrapper"> <span>创建全景视图</span> </span></p>
-<p><strong>2.重新排名并解释</strong></p>
+<p><strong>2.Rerankers 和解释</strong></p>
 <p>我们将把组合图像发送到多模态 LLM 服务，同时发送适当的提示，以便对检索到的结果进行排序和解释。要启用 GPT-4o 作为 LLM，您需要准备<a href="https://platform.openai.com/docs/quickstart">OpenAI API 密钥</a>。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> requests
 <span class="hljs-keyword">import</span> base64

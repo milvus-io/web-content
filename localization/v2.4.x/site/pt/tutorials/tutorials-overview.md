@@ -29,7 +29,6 @@ title: Visão geral dos tutoriais
 <tr><td><a href="/docs/pt/image_similarity_search.md">Pesquisa de imagens com Milvus</a></td><td>Pesquisa semântica</td><td>pesquisa vetorial, campo dinâmico</td></tr>
 <tr><td><a href="/docs/pt/hybrid_search_with_milvus.md">Pesquisa híbrida com Milvus</a></td><td>Pesquisa híbrida</td><td>pesquisa híbrida, multi-vetor, incorporação densa, incorporação esparsa</td></tr>
 <tr><td><a href="/docs/pt/multimodal_rag_with_milvus.md">Pesquisa multimodal com vários vectores</a></td><td>Pesquisa semântica</td><td>multi-vetorial, pesquisa híbrida</td></tr>
-<tr><td></td></tr>
 <tr><td><a href="/docs/pt/question_answering_system.md">Sistema de resposta a perguntas</a></td><td>Resposta a perguntas</td><td>pesquisa vetorial</td></tr>
 <tr><td><a href="/docs/pt/recommendation_system.md">Sistema de recomendação</a></td><td>Sistema de recomendação</td><td>pesquisa vetorial</td></tr>
 <tr><td><a href="/docs/pt/video_similarity_search.md">Pesquisa de similaridade de vídeo</a></td><td>Pesquisa semântica</td><td>pesquisa vetorial</td></tr>
@@ -38,5 +37,7 @@ title: Visão geral dos tutoriais
 <tr><td><a href="/docs/pt/text_search_engine.md">Motor de pesquisa de texto</a></td><td>Pesquisa semântica</td><td>pesquisa vetorial</td></tr>
 <tr><td><a href="/docs/pt/text_image_search.md">Pesquisa de imagem por texto</a></td><td>Pesquisa Semântica</td><td>pesquisa vetorial</td></tr>
 <tr><td><a href="/docs/pt/image_deduplication_system.md">Deduplicação de imagens</a></td><td>Deduplicação</td><td>pesquisa vetorial</td></tr>
+<tr><td><a href="/docs/pt/graph_rag_with_milvus.md">RAG gráfico com Milvus</a></td><td>RAG</td><td>pesquisa em grafos</td></tr>
+<tr><td><a href="/docs/pt/contextual_retrieval_with_milvus.md">Recuperação contextual com Milvus</a></td><td>Início rápido</td><td>pesquisa vetorial</td></tr>
 </tbody>
 </table>

@@ -3,7 +3,7 @@ id: architecture_overview.md
 summary: >-
   Milvus offre un database vettoriale veloce, affidabile e stabile, costruito
   appositamente per la ricerca di similarità e l'intelligenza artificiale.
-title: Panoramica dell'architettura Milvus
+title: Panoramica dell'architettura di Milvus
 ---
 <h1 id="Milvus-Architecture-Overview" class="common-anchor-header">Panoramica dell'architettura di Milvus<button data-href="#Milvus-Architecture-Overview" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -21,12 +21,18 @@ title: Panoramica dell'architettura Milvus
         ></path>
       </svg>
     </button></h1><p>Costruito sulla base delle più diffuse librerie di ricerca vettoriale, tra cui Faiss, HNSW, DiskANN, SCANN e altre, Milvus è stato progettato per la ricerca di similarità su insiemi di dati vettoriali densi, contenenti milioni, miliardi o addirittura trilioni di vettori. Prima di procedere, è bene familiarizzare con i <a href="/docs/it/glossary.md">principi di base</a> dell'embedding retrieval.</p>
-<p>Milvus supporta anche lo sharding dei dati, l'ingestione di dati in streaming, lo schema dinamico, la ricerca combinata di dati vettoriali e scalari, la ricerca ibrida e multi-vettore, il vettore sparse e molte altre funzioni avanzate. La piattaforma offre prestazioni on demand e può essere ottimizzata per adattarsi a qualsiasi scenario di embedding retrieval. Si consiglia di distribuire Milvus utilizzando Kubernetes per ottenere disponibilità ed elasticità ottimali.</p>
+<p>Milvus supporta anche lo sharding dei dati, l'ingestione di dati in streaming, lo schema dinamico, la ricerca di dati vettoriali e scalari, la ricerca multivettoriale e ibrida, il vettore sparse e molte altre funzioni avanzate. La piattaforma offre prestazioni on demand e può essere ottimizzata per adattarsi a qualsiasi scenario di embedding retrieval. Si consiglia di distribuire Milvus utilizzando Kubernetes per ottenere disponibilità ed elasticità ottimali.</p>
 <p>Milvus adotta un'architettura di storage condiviso che prevede la disaggregazione dello storage e dell'elaborazione e la scalabilità orizzontale dei nodi di elaborazione. Seguendo il principio della disaggregazione del piano dati e del piano di controllo, Milvus comprende <a href="/docs/it/four_layers.md">quattro livelli</a>: livello di accesso, servizio di coordinamento, nodo lavoratore e storage. Questi livelli sono indipendenti l'uno dall'altro per quanto riguarda la scalabilità o il disaster recovery.</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/milvus_architecture.png" alt="Architecture_diagram" class="doc-image" id="architecture_diagram" />
-   </span> <span class="img-wrapper"> <span>Diagramma_architettura</span> </span></p>
+   </span> <span class="img-wrapper"> <span>Diagramma_di_architettura</span> </span></p>
+<p>Secondo la figura, le interfacce possono essere classificate nelle seguenti categorie:</p>
+<ul>
+<li><strong>DDL / DCL:</strong> createCollection / createPartition / dropCollection / dropPartition / hasCollection / hasPartition</li>
+<li><strong>DML / Produce:</strong> insert / delete / upsert</li>
+<li><strong>DQL:</strong> ricerca / interrogazione</li>
+</ul>
 <h2 id="Whats-next" class="common-anchor-header">Cosa c'è dopo<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -43,6 +49,6 @@ title: Panoramica dell'architettura Milvus
         ></path>
       </svg>
     </button></h2><ul>
-<li>Per saperne di più sulla <a href="/docs/it/four_layers.md">disaggregazione tra calcolo e storage</a> in Milvus</li>
-<li>Scopri i <a href="/docs/it/main_components.md">componenti principali</a> di Milvus.</li>
+<li>Per saperne di più sulla <a href="/docs/it/four_layers.md">disaggregazione di calcolo e di stoccaggio</a> in Milvus</li>
+<li>Conoscere i <a href="/docs/it/main_components.md">componenti principali</a> di Milvus.</li>
 </ul>

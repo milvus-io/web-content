@@ -2,7 +2,7 @@
 id: configure-querynode-localdisk.md
 title: ローカルディスクを使用したMilvus QueryNodeの設定
 related_key: 'querynode, query node, local disk'
-summary: ローカルディスクを使用するようにMilvus QueryNodeを設定する方法について説明します。
+summary: Milvus QueryNodeがローカルディスクを使用するように設定する方法について説明します。
 ---
 <h1 id="Configure-Milvus-QueryNode-with-Local-Disk" class="common-anchor-header">ローカルディスクを使用したMilvus QueryNodeの設定<button data-href="#Configure-Milvus-QueryNode-with-Local-Disk" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -19,7 +19,7 @@ summary: ローカルディスクを使用するようにMilvus QueryNodeを設�
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>この記事ではローカルディスクを使用するMilvus QueryNodeの設定方法について説明します。</p>
+    </button></h1><p>Milvus QueryNodeでローカルディスクを使用するための設定方法について説明します。</p>
 <h2 id="Overview" class="common-anchor-header">概要<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -35,14 +35,14 @@ summary: ローカルディスクを使用するようにMilvus QueryNodeを設�
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>MilvusはAIに特化したベクトルデータベースで、膨大なベクトルデータの効率的な保存と検索が可能です。画像・動画解析、自然言語処理、推薦システムなどのタスクに最適です。最適なパフォーマンスを確保するには、ディスクの読み取りレイテンシを最小限に抑えることが極めて重要です。遅延を防ぎ、システムの安定性を維持するためには、ローカルのNVMe SSDを使用することが強く推奨されます。</p>
+    </button></h2><p>MilvusはAIに特化したベクトルデータベースであり、膨大なベクトルデータの効率的な保存と検索が可能です。画像・動画解析、自然言語処理、推薦システムなどのタスクに最適です。最適なパフォーマンスを確保するには、ディスクの読み取りレイテンシを最小限に抑えることが極めて重要です。遅延を防ぎ、システムの安定性を維持するためには、ローカルのNVMe SSDを使用することが強く推奨されます。</p>
 <p>ローカル・ディスク・ストレージが活躍する主な機能は以下のとおりです：</p>
 <ul>
-<li><a href="/docs/ja/chunk_cache.md"><strong>チャンク・キャッシュ</strong></a>：データをローカル・ディスク・キャッシュにプリロードして検索を高速化します。</li>
-<li><a href="/docs/ja/mmap.md"><strong>MMap</strong></a>：ファイルの内容をメモリに直接マッピングし、メモリ効率を向上させます。</li>
+<li><a href="/docs/ja/chunk_cache.md"><strong>チャンク・キャッシュ</strong></a>：データをローカル・ディスク・キャッシュにプリロードし、検索を高速化します。</li>
+<li><a href="/docs/ja/mmap.md"><strong>MMap</strong></a>：ファイルの内容を直接メモリにマップし、メモリ効率を向上させます。</li>
 <li><a href="/docs/ja/disk_index.md"><strong>DiskANNインデックス</strong></a>：効率的なインデックス管理のためにディスク・ストレージを必要とする。</li>
 </ul>
-<p>この記事では、クラウドプラットフォーム上での<a href="/docs/ja/install-overview.md#Milvus-Distributed">Milvus Distributedの</a>展開と、NVMeディスクストレージを使用するためのQueryNodeの設定方法に焦点を当てます。以下の表は、様々なクラウドプロバイダーの推奨マシンタイプの一覧です。</p>
+<p>本記事では、<a href="/docs/ja/install-overview.md#Milvus-Distributed">Milvus Distributedを</a>クラウドプラットフォームにデプロイし、NVMeディスクストレージを使用するようにQueryNodeを設定する方法に焦点を当てます。以下の表は、様々なクラウドプロバイダーの推奨マシンタイプの一覧です。</p>
 <table>
 <thead>
 <tr><th style="text-align:center">クラウドプロバイダ</th><th style="text-align:center">マシンタイプ</th></tr>
@@ -181,7 +181,7 @@ state = <span class="hljs-string">&quot;/mnt/nvme/containerd/state&quot;</span>
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>ディスク性能をベンチマークするための一般的なツールである<a href="https://github.com/axboe/fio">Fio を</a>使用して、ディスク性能を検証することを推奨する。以下は、ディスク性能をテストするために Fio を実行する方法の例である。</p>
+    </button></h2><p>ディスク性能をベンチマークするための一般的なツールである<a href="https://github.com/axboe/fio">Fio</a> を使用して、ディスク性能を検証することを推奨する。以下は、ディスク性能をテストするために Fio を実行する方法の例である。</p>
 <ul>
 <li><p><strong>NVMe ディスクのあるノードにテストポッドをデプロイします。</strong></p>
 <pre><code translate="no" class="language-bash">kubectl create -f ubuntu.yaml
@@ -215,7 +215,7 @@ apt-get install fio -y
 <span class="hljs-built_in">cd</span> /data
 
 <span class="hljs-comment"># write 10GB</span>
-fio -direct=1-iodepth=128 -rw=randwrite -ioengine=libaio -bs=4K -size=10G -numjobs=10 -runtime=600 -group_reporting -filename=<span class="hljs-built_in">test</span> -name=Rand_Write_IOPS_Test
+fio -direct=1 -iodepth=128 -rw=randwrite -ioengine=libaio -bs=4K -size=10G -numjobs=10 -runtime=600 -group_reporting -filename=<span class="hljs-built_in">test</span> -name=Rand_Write_IOPS_Test
 
 <span class="hljs-comment"># verify the read speed</span>
 <span class="hljs-comment"># compare with the disk performance indicators provided by various cloud providers.</span>
@@ -249,7 +249,7 @@ IO depths    : <span class="hljs-number">1</span>=<span class="hljs-number">0.1<
     latency   : target=<span class="hljs-number">0</span>, window=<span class="hljs-number">0</span>, percentile=<span class="hljs-number">100.00</span>%, depth=<span class="hljs-number">64</span>
 <button class="copy-code-btn"></button></code></pre></li>
 </ul>
-<h2 id="Deploy-Milvus-Distributed" class="common-anchor-header">Milvus Distributedをデプロイする<button data-href="#Deploy-Milvus-Distributed" class="anchor-icon" translate="no">
+<h2 id="Deploy-Milvus-Distributed" class="common-anchor-header">Milvus Distributedをデプロイします。<button data-href="#Deploy-Milvus-Distributed" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -266,7 +266,7 @@ IO depths    : <span class="hljs-number">1</span>=<span class="hljs-number">0.1<
       </svg>
     </button></h2><p>検証結果が満足のいくものであれば、以下の手順でMilvus Distributedをデプロイすることができる：</p>
 <h3 id="Tips-for-deploying-Milvus-Distributed-using-Helm" class="common-anchor-header">Helmを使用してMilvus Distributedをデプロイするためのヒント</h3><p>QueryNodeポッドはデフォルトでNVMeディスクをEmptyDirボリュームとして使用します。最適なパフォーマンスを確保するために、NVMeディスクをQueryNodeポッド内の<code translate="no">/var/lib/milvus/data</code> 。</p>
-<p>Helmを使用してMilvus Distributedをデプロイする方法の詳細については、<a href="/docs/ja/install_cluster-helm.md">Helmを使用してKubernetesでMilvusを実行するを</a>参照してください。</p>
+<p>Helmを使用したMilvus Distributedのデプロイ方法の詳細については、「<a href="/docs/ja/install_cluster-helm.md">Run Milvus in Kubernetes with Helm</a>」を参照してください。</p>
 <h3 id="Tips-for-deploying-Milvus-Distributed-using-Milvus-Operator" class="common-anchor-header">Milvus Operatorを使用してMilvus Distributedをデプロイするためのヒント</h3><p>Milvus Operatorは、NVMeディスクをEmptyDirボリュームとして使用するようにQueryNodeポッドを自動的に設定します。<code translate="no">MilvusCluster</code> カスタムリソースに以下の設定を追加することをお勧めします：</p>
 <pre><code translate="no" class="language-yaml">...
 <span class="hljs-attr">spec</span>:

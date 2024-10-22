@@ -1,7 +1,7 @@
 ---
 id: replica.md
 summary: Saiba mais sobre a réplica na memória em Milvus.
-title: Réplica na memória
+title: Réplica na Memória
 ---
 <h1 id="In-Memory-Replica" class="common-anchor-header">Réplica na Memória<button data-href="#In-Memory-Replica" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -60,7 +60,7 @@ title: Réplica na memória
     </button></h2><p>As réplicas na memória são organizadas como grupos de réplicas. Cada grupo de réplicas contém réplicas <a href="https://milvus.io/docs/v2.1.x/glossary.md#Sharding">de fragmento</a>. Cada réplica de fragmento tem uma réplica de fluxo contínuo e uma réplica histórica que correspondem aos <a href="https://milvus.io/docs/v2.1.x/glossary.md#Segment">segmentos</a> crescentes e selados no fragmento (ou seja, canal DML).</p>
 <p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/replica_availability.jpg" alt="An illustration of how in-memory replica works" class="doc-image" id="an-illustration-of-how-in-memory-replica-works" />
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/replica_group.png" alt="An illustration of how in-memory replica works" class="doc-image" id="an-illustration-of-how-in-memory-replica-works" />
    </span> <span class="img-wrapper"> <span>Uma ilustração de como funciona a réplica na memória</span> </span></p>
 <h3 id="Replica-group" class="common-anchor-header">Grupo de réplicas</h3><p>Um grupo de réplicas consiste em vários <a href="https://milvus.io/docs/v2.1.x/four_layers.md#Query-node">nós de consulta</a> que são responsáveis pelo tratamento de dados históricos e réplicas.</p>
 <h3 id="Shard-replica" class="common-anchor-header">Réplica de fragmento</h3><p>Uma réplica de fragmento é composta por uma réplica de fluxo contínuo e uma réplica histórica, ambas pertencentes ao mesmo <a href="https://milvus.io/blog/deep-dive-1-milvus-architecture-overview.md#Shard">fragmento</a>. O número de réplicas de fragmentos num grupo de réplicas é determinado pelo número de fragmentos numa coleção especificada.</p>
@@ -88,4 +88,4 @@ title: Réplica na memória
 <h4 id="Failover" class="common-anchor-header">Transferência em caso de falha</h4><p>As caches no proxy nem sempre estão actualizadas. Alguns segmentos ou canais podem ter sido movidos para outros nós de consulta quando um pedido é recebido. Neste caso, o proxy receberá uma resposta de erro, actualizará a cache e tentará atribuí-la a outro nó de consulta.</p>
 <p>Um segmento será ignorado se o proxy ainda não o conseguir encontrar depois de atualizar a cache. Isto pode acontecer se o segmento tiver sido compactado.</p>
 <p>Se a cache não for exacta, o proxy pode não encontrar alguns segmentos. Os nós de consulta com canais DML (segmentos crescentes) devolvem respostas de pesquisa juntamente com uma lista de segmentos fiáveis com os quais o proxy pode comparar e atualizar a cache.</p>
-<h3 id="Enhancement" class="common-anchor-header">Melhoria</h3><p>O proxy não pode atribuir pedidos de pesquisa aos nós de consulta de forma completamente igual e os nós de consulta podem ter recursos diferentes para servir os pedidos de pesquisa. Para evitar uma distribuição de recursos com cauda longa, o proxy atribuirá segmentos activos noutros nós de consulta a um nó de consulta inativo que também tenha esses segmentos.</p>
+<h3 id="Enhancement" class="common-anchor-header">Melhoria</h3><p>O proxy não pode atribuir os pedidos de pesquisa aos nós de consulta de forma completamente igual e os nós de consulta podem ter recursos diferentes para servir os pedidos de pesquisa. Para evitar uma distribuição de recursos com cauda longa, o proxy atribuirá segmentos activos noutros nós de consulta a um nó de consulta inativo que também tenha esses segmentos.</p>

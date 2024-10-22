@@ -3,7 +3,7 @@ id: install-java.md
 label: Install Java SDK
 related_key: SDK
 summary: Apprenez à installer le SDK Java de Milvus.
-title: Installer le SDK Java Milvus
+title: Installation de Milvus Java SDK
 ---
 <h1 id="Install-Milvus-Java-SDK" class="common-anchor-header">Installation de Milvus Java SDK<button data-href="#Install-Milvus-Java-SDK" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -63,13 +63,13 @@ title: Installer le SDK Java Milvus
 <pre><code translate="no" class="language-xml">&lt;dependency&gt;
     &lt;groupId&gt;io.milvus&lt;/groupId&gt;
     &lt;artifactId&gt;milvus-sdk-java&lt;/artifactId&gt;
-    &lt;version&gt;2.4.3&lt;/version&gt;
+    &lt;version&gt;2.4.5&lt;/version&gt;
 &lt;/dependency&gt;
 <button class="copy-code-btn"></button></code></pre>
 <ul>
 <li>Gradle/Grails</li>
 </ul>
-<pre><code translate="no">implementation <span class="hljs-string">&#x27;io.milvus:milvus-sdk-java:2.4.3&#x27;</span>
+<pre><code translate="no">implementation <span class="hljs-string">&#x27;io.milvus:milvus-sdk-java:2.4.5&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Whats-next" class="common-anchor-header">Prochaines étapes<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"

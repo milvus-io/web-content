@@ -1,9 +1,8 @@
 ---
 id: insert-update-delete.md
-summary: 本指南将引导您了解集合中的数据操作，包括插入、向上插入和删除。
-title: 插入、倒置和删除
+summary: 本指南将向您介绍 Collections 中的数据操作符操作，包括插入、向上插入和删除。
+title: 插入、上插和删除
 ---
-
 <h1 id="Insert-Upsert--Delete" class="common-anchor-header">插入、上插和删除<button data-href="#Insert-Upsert--Delete" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -19,7 +18,7 @@ title: 插入、倒置和删除
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>本指南将指导你在集合中进行数据操作，包括插入、上载和删除。</p>
+    </button></h1><p>本指南将向您介绍 Collections 中的数据操作符，包括插入、向上插入和删除。</p>
 <h2 id="Before-you-start" class="common-anchor-header">开始之前<button data-href="#Before-you-start" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -37,7 +36,7 @@ title: 插入、倒置和删除
       </svg>
     </button></h2><ul>
 <li><p>您已安装了所选的 SDK。要安装 SDK，请参阅<a href="https://milvus.io/docs/install-pymilvus.md">安装 SDK</a>。</p></li>
-<li><p>您已创建了一个数据集。要创建数据集，请参阅<a href="/docs/zh/manage-collections.md">管理</a>数据集。</p></li>
+<li><p>您已创建了一个 Collections。要创建一个<a href="/docs/zh/manage-collections.md">Collections</a>，请参阅<a href="/docs/zh/manage-collections.md">管理 Collections</a>。</p></li>
 <li><p>要插入大量数据，建议使用<a href="https://milvus.io/api-reference/pymilvus/v2.4.x/DataImport/LocalBulkWriter/LocalBulkWriter.md">数据导入</a>。</p></li>
 </ul>
 <h2 id="Overview" class="common-anchor-header">概述<button data-href="#Overview" class="anchor-icon" translate="no">
@@ -55,9 +54,9 @@ title: 插入、倒置和删除
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>在 Milvus 数据集中，实体是一个数据集中可识别的单一实例。它代表特定类别中的一个独特成员，无论是图书馆中的一本书、基因组中的一个基因，还是任何其他可识别的实体。</p>
-<p>集合中的实体共享一组共同的属性，称为模式，概述了每个实体必须遵守的结构，包括字段名称、数据类型和任何其他限制。</p>
-<p>要将实体成功插入到集合中，所提供的数据必须包含目标集合的所有模式定义字段。此外，只有启用了Dynamic Field，才能包含非模式定义的字段。有关详细信息，请参阅<a href="/docs/zh/enable-dynamic-field.md">启用Dynamic Field</a>。</p>
+    </button></h2><p>实体，在 Milvus 集合的上下文中，是集合中的一个单一的、可识别的实例。它代表特定类别中的一个独特成员，无论是图书馆中的一本书、基因组中的一个基因，还是其他任何可识别的实体。</p>
+<p>Collections 中的实体共享一组共同的属性（称为 Schema），这些属性概述了每个实体必须遵守的结构，包括字段名称、数据类型和其他限制条件。</p>
+<p>要将实体成功插入 Collections，所提供的数据必须包含目标 Collections 的所有 Schema 定义字段。此外，只有启用了动态字段，才能包含非 Schema 定义的字段。有关详细信息，请参阅<a href="/docs/zh/enable-dynamic-field.md">启用动态字段</a>。</p>
 <h2 id="Preparations" class="common-anchor-header">准备工作<button data-href="#Preparations" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -73,15 +72,15 @@ title: 插入、倒置和删除
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>下面的代码片段重新利用了现有代码，以建立与 Milvus 集群的连接，并快速建立一个数据集。</p>
+    </button></h2><p>下面的代码片段重新利用了现有代码，以建立与 Milvus 集群的连接，并快速设置一个 Collections。</p>
 <div class="language-python">
-<p>对于准备工作，使用 <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Client/MilvusClient.md"><code translate="no">MilvusClient</code></a>连接到 Milvus 服务器，并使用 <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_collection.md"><code translate="no">create_collection()</code></a>在快速设置模式下创建集合。</p>
+<p>对于准备工作，使用 <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Client/MilvusClient.md"><code translate="no">MilvusClient</code></a>连接到 Milvus 服务器，并使用 <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_collection.md"><code translate="no">create_collection()</code></a>以快速设置模式创建 Collections。</p>
 </div>
 <div class="language-java">
-<p>对于准备工作，使用 <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Client/MilvusClientV2.md"><code translate="no">MilvusClientV2</code></a>连接到 Milvus 服务器 <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Collections/createCollection.md"><code translate="no">createCollection()</code></a>以快速设置模式创建采集。</p>
+<p>对于准备工作，使用 <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Client/MilvusClientV2.md"><code translate="no">MilvusClientV2</code></a>连接到 Milvus 服务器，并使用 <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Collections/createCollection.md"><code translate="no">createCollection()</code></a>以快速设置模式创建 Collections。</p>
 </div>
 <div class="language-javascript">
-<p>对于准备工作，使用 <a href="https://milvus.io/api-reference/node/v2.4.x/Client/MilvusClient.md"><code translate="no">MilvusClient</code></a>连接到 Milvus 服务器 <a href="https://milvus.io/api-reference/node/v2.4.x/Collections/createCollection.md"><code translate="no">createCollection()</code></a>以快速设置模式创建集合。</p>
+<p>对于准备工作，使用 <a href="https://milvus.io/api-reference/node/v2.4.x/Client/MilvusClient.md"><code translate="no">MilvusClient</code></a>连接到 Milvus 服务器，并使用 <a href="https://milvus.io/api-reference/node/v2.4.x/Collections/createCollection.md"><code translate="no">createCollection()</code></a>以快速设置模式创建 Collections。</p>
 </div>
 <div class="multipleCode">
    <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a></div>
@@ -89,17 +88,16 @@ title: 插入、倒置和删除
 
 <span class="hljs-comment"># 1. Set up a Milvus client</span>
 client = MilvusClient(
-uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>
+    uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>
 )
 
 <span class="hljs-comment"># 2. Create a collection</span>
 client.create_collection(
-collection_name=<span class="hljs-string">&quot;quick_setup&quot;</span>,
-dimension=<span class="hljs-number">5</span>,
-metric_type=<span class="hljs-string">&quot;IP&quot;</span>
+    collection_name=<span class="hljs-string">&quot;quick_setup&quot;</span>,
+    dimension=<span class="hljs-number">5</span>,
+    metric_type=<span class="hljs-string">&quot;IP&quot;</span>
 )
 <button class="copy-code-btn"></button></code></pre>
-
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.client.ConnectConfig;
 <span class="hljs-keyword">import</span> io.milvus.v2.client.MilvusClientV2;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.CreateCollectionReq;
@@ -138,10 +136,10 @@ client = <span class="hljs-keyword">new</span> <span class="hljs-title class_">M
 <button class="copy-code-btn"></button></code></pre>
 <div class="admonition note">
 <p><b>注释</b></p>
-<p>上述代码生成的集合只包含两个字段：<code translate="no">id</code> （作为主键）和<code translate="no">vector</code> （作为向量字段），默认启用<code translate="no">auto_id</code> 和<code translate="no">enable_dynamic_field</code> 设置。插入数据时、</p>
+<p>上述代码生成的 Collections 只包含两个字段：<code translate="no">id</code> （作为主键）和<code translate="no">vector</code> （作为向量字段），默认启用<code translate="no">auto_id</code> 和<code translate="no">enable_dynamic_field</code> 设置。插入数据时、</p>
 <ul>
-<li><p>无需在要插入的数据中包含<strong>id</strong>，因为<strong>主字段</strong>会在插入数据时自动递增。</p></li>
-<li><p>非模式定义的字段将以键值对的形式保存在名为<strong>$meta</strong> 的预留 JSON 字段中。</p></li>
+<li><p>无需在要插入的数据中包含<strong>id</strong>，因为主字段会在插入数据时自动递增。</p></li>
+<li><p>非 Schema 定义的字段将以键值对的形式保存在名为<strong>$meta</strong> 的预留 JSON 字段中。</p></li>
 </ul>
 </div>
 <h2 id="Insert-entities" class="common-anchor-header">插入实体<button data-href="#Insert-entities" class="anchor-icon" translate="no">
@@ -159,15 +157,15 @@ client = <span class="hljs-keyword">new</span> <span class="hljs-title class_">M
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>要插入实体，需要将数据组织成一个字典列表，其中每个字典代表一个实体。每个字典都包含与目标集合中预定义字段和Dynamic Field相对应的键。</p>
+    </button></h2><p>要插入实体，需要将数据组织成一个字典列表，其中每个字典代表一个实体。每个字典都包含与目标 Collections 中预定义字段和动态字段相对应的键。</p>
 <div class="language-python">
-<p>要在集合中插入实体，请使用 <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Vector/insert.md"><code translate="no">insert()</code></a>方法。</p>
+<p>要将实体插入 Collections，请使用 <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Vector/insert.md"><code translate="no">insert()</code></a>方法。</p>
 </div>
 <div class="language-java">
-<p>要将实体插入集合，请使用 <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Vector/insert.md"><code translate="no">insert()</code></a>方法。</p>
+<p>要将实体插入 Collections，请使用 <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Vector/insert.md"><code translate="no">insert()</code></a>方法。</p>
 </div>
 <div class="language-javascript">
-<p>要将实体插入集合，请使用 <a href="https://milvus.io/api-reference/node/v2.4.x/Vector/insert.md"><code translate="no">insert()</code></a>方法。</p>
+<p>要将实体插入 Collections，请使用 <a href="https://milvus.io/api-reference/node/v2.4.x/Vector/insert.md"><code translate="no">insert()</code></a>方法。</p>
 </div>
 <div class="multipleCode">
    <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a></div>
@@ -186,8 +184,8 @@ data=[
 ]
 
 res = client.insert(
-collection_name=<span class="hljs-string">&quot;quick_setup&quot;</span>,
-data=data
+    collection_name=<span class="hljs-string">&quot;quick_setup&quot;</span>,
+    data=data
 )
 
 <span class="hljs-built_in">print</span>(res)
@@ -195,22 +193,21 @@ data=data
 <span class="hljs-comment"># Output</span>
 <span class="hljs-comment">#</span>
 <span class="hljs-comment"># {</span>
-<span class="hljs-comment"># &quot;insert_count&quot;: 10,</span>
-<span class="hljs-comment"># &quot;ids&quot;: [</span>
-<span class="hljs-comment"># 0,</span>
-<span class="hljs-comment"># 1,</span>
-<span class="hljs-comment"># 2,</span>
-<span class="hljs-comment"># 3,</span>
-<span class="hljs-comment"># 4,</span>
-<span class="hljs-comment"># 5,</span>
-<span class="hljs-comment"># 6,</span>
-<span class="hljs-comment"># 7,</span>
-<span class="hljs-comment"># 8,</span>
-<span class="hljs-comment"># 9</span>
-<span class="hljs-comment"># ]</span>
+<span class="hljs-comment">#     &quot;insert_count&quot;: 10,</span>
+<span class="hljs-comment">#     &quot;ids&quot;: [</span>
+<span class="hljs-comment">#         0,</span>
+<span class="hljs-comment">#         1,</span>
+<span class="hljs-comment">#         2,</span>
+<span class="hljs-comment">#         3,</span>
+<span class="hljs-comment">#         4,</span>
+<span class="hljs-comment">#         5,</span>
+<span class="hljs-comment">#         6,</span>
+<span class="hljs-comment">#         7,</span>
+<span class="hljs-comment">#         8,</span>
+<span class="hljs-comment">#         9</span>
+<span class="hljs-comment">#     ]</span>
 <span class="hljs-comment"># }</span>
 <button class="copy-code-btn"></button></code></pre>
-
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> java.<span class="hljs-property">util</span>.<span class="hljs-property">Arrays</span>;
 <span class="hljs-keyword">import</span> java.<span class="hljs-property">util</span>.<span class="hljs-property">List</span>;
 <span class="hljs-keyword">import</span> java.<span class="hljs-property">util</span>.<span class="hljs-property">Map</span>;
@@ -288,14 +285,14 @@ data=[
 ]
 
 client.create_partition(
-collection_name=<span class="hljs-string">&quot;quick_setup&quot;</span>,
-partition_name=<span class="hljs-string">&quot;partitionA&quot;</span>
+    collection_name=<span class="hljs-string">&quot;quick_setup&quot;</span>,
+    partition_name=<span class="hljs-string">&quot;partitionA&quot;</span>
 )
 
 res = client.insert(
-collection_name=<span class="hljs-string">&quot;quick_setup&quot;</span>,
-data=data,
-partition_name=<span class="hljs-string">&quot;partitionA&quot;</span>
+    collection_name=<span class="hljs-string">&quot;quick_setup&quot;</span>,
+    data=data,
+    partition_name=<span class="hljs-string">&quot;partitionA&quot;</span>
 )
 
 <span class="hljs-built_in">print</span>(res)
@@ -303,22 +300,21 @@ partition_name=<span class="hljs-string">&quot;partitionA&quot;</span>
 <span class="hljs-comment"># Output</span>
 <span class="hljs-comment">#</span>
 <span class="hljs-comment"># {</span>
-<span class="hljs-comment"># &quot;insert_count&quot;: 10,</span>
-<span class="hljs-comment"># &quot;ids&quot;: [</span>
-<span class="hljs-comment"># 10,</span>
-<span class="hljs-comment"># 11,</span>
-<span class="hljs-comment"># 12,</span>
-<span class="hljs-comment"># 13,</span>
-<span class="hljs-comment"># 14,</span>
-<span class="hljs-comment"># 15,</span>
-<span class="hljs-comment"># 16,</span>
-<span class="hljs-comment"># 17,</span>
-<span class="hljs-comment"># 18,</span>
-<span class="hljs-comment"># 19</span>
-<span class="hljs-comment"># ]</span>
+<span class="hljs-comment">#     &quot;insert_count&quot;: 10,</span>
+<span class="hljs-comment">#     &quot;ids&quot;: [</span>
+<span class="hljs-comment">#         10,</span>
+<span class="hljs-comment">#         11,</span>
+<span class="hljs-comment">#         12,</span>
+<span class="hljs-comment">#         13,</span>
+<span class="hljs-comment">#         14,</span>
+<span class="hljs-comment">#         15,</span>
+<span class="hljs-comment">#         16,</span>
+<span class="hljs-comment">#         17,</span>
+<span class="hljs-comment">#         18,</span>
+<span class="hljs-comment">#         19</span>
+<span class="hljs-comment">#     ]</span>
 <span class="hljs-comment"># }</span>
 <button class="copy-code-btn"></button></code></pre>
-
 <pre><code translate="no" class="language-java"><span class="hljs-comment">// 4. Insert some more data into a specific partition</span>
 data = <span class="hljs-title class_">Arrays</span>.<span class="hljs-title function_">asList</span>(
     <span class="hljs-keyword">new</span> <span class="hljs-title class_">JSON</span><span class="hljs-built_in">Object</span>(<span class="hljs-title class_">Map</span>.<span class="hljs-title function_">of</span>(<span class="hljs-string">&quot;id&quot;</span>, 10L, <span class="hljs-string">&quot;vector&quot;</span>, <span class="hljs-title class_">Arrays</span>.<span class="hljs-title function_">asList</span>(-<span class="hljs-number">0.</span>5570353903748935f, -<span class="hljs-number">0.</span>8997887893201304f, -<span class="hljs-number">0.</span>7123782431855732f, -<span class="hljs-number">0.</span>6298990746450119f, <span class="hljs-number">0.</span>6699215060604258f), <span class="hljs-string">&quot;color&quot;</span>, <span class="hljs-string">&quot;red_1202&quot;</span>)),
@@ -401,16 +397,15 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>向上插入数据是更新和插入操作的组合。在 Milvus 中，upsert 操作会根据实体的主键是否已存在于集合中，执行插入或更新实体的数据级操作。具体来说</p>
+    </button></h2><p>向上插入数据是更新和插入操作的组合。在 Milvus 中，upsert 操作执行数据级操作，根据实体的主键是否已存在于 Collections 中来插入或更新实体。具体来说</p>
 <ul>
-<li><p>如果实体的主键已存在于集合中，现有实体将被覆盖。</p></li>
+<li><p>如果实体的主键已经存在于 Collections 中，现有实体将被覆盖。</p></li>
 <li><p>如果集合中不存在主键，则会插入一个新实体。</p></li>
 </ul>
 <div class="alert note">
 <ul>
-<li>Upsert 操作不会更新主键。</li>
-<li>Upsert 操作不支持已启用<code translate="no">autoID</code> 的集合。</li>
-<li>如果计划在大规模数据摄取（如数百万向量）时使用<code translate="no">upsert</code> 操作而不是<code translate="no">insert</code> ，请注意这会导致 Milvus 数据节点的内存消耗过高。</li>
+<li>向上插入操作不会更新主键。</li>
+<li>如果计划在大规模数据摄取（如数百万向量）时使用<code translate="no">upsert</code> 操作符而不是<code translate="no">insert</code> ，请注意这会导致 Milvus 数据节点的内存消耗过高。</li>
 </ul>
 </div>
 <div class="language-python">
@@ -439,8 +434,8 @@ data=[
 ]
 
 res = client.upsert(
-collection_name=<span class="hljs-string">&#x27;quick_setup&#x27;</span>,
-data=data
+    collection_name=<span class="hljs-string">&#x27;quick_setup&#x27;</span>,
+    data=data
 )
 
 <span class="hljs-built_in">print</span>(res)
@@ -448,10 +443,9 @@ data=data
 <span class="hljs-comment"># Output</span>
 <span class="hljs-comment">#</span>
 <span class="hljs-comment"># {</span>
-<span class="hljs-comment"># &quot;upsert_count&quot;: 10</span>
+<span class="hljs-comment">#     &quot;upsert_count&quot;: 10</span>
 <span class="hljs-comment"># }</span>
 <button class="copy-code-btn"></button></code></pre>
-
 <pre><code translate="no" class="language-java"><span class="hljs-comment">// 5. Upsert some data</span>
 data = <span class="hljs-title class_">Arrays</span>.<span class="hljs-title function_">asList</span>(
     <span class="hljs-keyword">new</span> <span class="hljs-title class_">JSON</span><span class="hljs-built_in">Object</span>(<span class="hljs-title class_">Map</span>.<span class="hljs-title function_">of</span>(<span class="hljs-string">&quot;id&quot;</span>, 0L, <span class="hljs-string">&quot;vector&quot;</span>, <span class="hljs-title class_">Arrays</span>.<span class="hljs-title function_">asList</span>(-<span class="hljs-number">0.</span>619954382375778f, <span class="hljs-number">0.</span>4479436794798608f, -<span class="hljs-number">0.</span>17493894838751745f, -<span class="hljs-number">0.</span>4248030059917294f, -<span class="hljs-number">0.</span>8648452746018911f), <span class="hljs-string">&quot;color&quot;</span>, <span class="hljs-string">&quot;black_9898&quot;</span>)),
@@ -522,9 +516,9 @@ data=[
 ]
 
 res = client.upsert(
-collection_name=<span class="hljs-string">&quot;quick_setup&quot;</span>,
-data=data,
-partition_name=<span class="hljs-string">&quot;partitionA&quot;</span>
+    collection_name=<span class="hljs-string">&quot;quick_setup&quot;</span>,
+    data=data,
+    partition_name=<span class="hljs-string">&quot;partitionA&quot;</span>
 )
 
 <span class="hljs-built_in">print</span>(res)
@@ -532,10 +526,9 @@ partition_name=<span class="hljs-string">&quot;partitionA&quot;</span>
 <span class="hljs-comment"># Output</span>
 <span class="hljs-comment">#</span>
 <span class="hljs-comment"># {</span>
-<span class="hljs-comment"># &quot;upsert_count&quot;: 10</span>
+<span class="hljs-comment">#     &quot;upsert_count&quot;: 10</span>
 <span class="hljs-comment"># }</span>
 <button class="copy-code-btn"></button></code></pre>
-
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.<span class="hljs-property">milvus</span>.<span class="hljs-property">v2</span>.<span class="hljs-property">service</span>.<span class="hljs-property">vector</span>.<span class="hljs-property">request</span>.<span class="hljs-property">UpsertReq</span>;
 <span class="hljs-keyword">import</span> io.<span class="hljs-property">milvus</span>.<span class="hljs-property">v2</span>.<span class="hljs-property">service</span>.<span class="hljs-property">vector</span>.<span class="hljs-property">response</span>.<span class="hljs-property">UpsertResp</span>;
 
@@ -611,19 +604,19 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
         ></path>
       </svg>
     </button></h2><div class="language-python">
-<p>如果不再需要某个实体，可以使用 <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Vector/delete.md"><code translate="no">delete()</code></a>.</p>
+<p>如果不再需要某个实体，可以通过使用 <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Vector/delete.md"><code translate="no">delete()</code></a>.</p>
 </div>
 <div class="language-java">
-<p>如果不再需要某个实体，可以使用 <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Vector/delete.md"><code translate="no">delete()</code></a>.</p>
+<p>如果不再需要某个实体，可以通过使用 <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Vector/delete.md"><code translate="no">delete()</code></a>.</p>
 </div>
 <div class="language-javascript">
-<p>如果不再需要实体，可以使用 <a href="https://milvus.io/api-reference/node/v2.4.x/Vector/delete.md"><code translate="no">delete()</code></a>.</p>
+<p>如果不再需要某个实体，可以使用 . <a href="https://milvus.io/api-reference/node/v2.4.x/Vector/delete.md"><code translate="no">delete()</code></a>.</p>
 </div>
-<p>Milvus 提供了两种方法来确定要删除的实体。</p>
+<p>Milvus 提供两种方法让你确定要删除的实体。</p>
 <ul>
 <li><p><strong>通过过滤器删除实体。</strong></p>
    <div class='alert note'>
-<p>使用过滤表达式删除实体时，请确保已加载集合。否则，Milvus 将返回错误信息。</p>
+<p>使用过滤表达式删除实体时，请确保已加载集合。否则，Milvus 将返回错误。</p>
    </div>
 <p><div class="multipleCode">
 <a href="#python">Python </a><a href="#java">Java</a><a href="#javascript">Node.js</a></div></p>
@@ -638,10 +631,9 @@ res = client.delete(
 <span class="hljs-comment"># Output</span>
 <span class="hljs-comment">#</span>
 <span class="hljs-comment"># {</span>
-<span class="hljs-comment"># &quot;delete_count&quot;: 3</span>
+<span class="hljs-comment">#     &quot;delete_count&quot;: 3</span>
 <span class="hljs-comment"># }</span>
 <button class="copy-code-btn"></button></code></pre>
-
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.<span class="hljs-property">milvus</span>.<span class="hljs-property">v2</span>.<span class="hljs-property">service</span>.<span class="hljs-property">vector</span>.<span class="hljs-property">request</span>.<span class="hljs-property">DeleteReq</span>;
 <span class="hljs-keyword">import</span> io.<span class="hljs-property">milvus</span>.<span class="hljs-property">v2</span>.<span class="hljs-property">service</span>.<span class="hljs-property">vector</span>.<span class="hljs-property">response</span>.<span class="hljs-property">DeleteResp</span>;
 
@@ -688,10 +680,9 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 <span class="hljs-comment"># Output</span>
 <span class="hljs-comment">#</span>
 <span class="hljs-comment"># {</span>
-<span class="hljs-comment"># &quot;delete_count&quot;: 2</span>
+<span class="hljs-comment">#     &quot;delete_count&quot;: 2</span>
 <span class="hljs-comment"># }</span>
 <button class="copy-code-btn"></button></code></pre>
-
 <pre><code translate="no" class="language-java">deleteReq = <span class="hljs-title class_">DeleteReq</span>.<span class="hljs-title function_">builder</span>()
     .<span class="hljs-title function_">collectionName</span>(<span class="hljs-string">&quot;quick_setup&quot;</span>)
     .<span class="hljs-title function_">ids</span>(<span class="hljs-title class_">Arrays</span>.<span class="hljs-title function_">asList</span>(18L, 19L))
@@ -732,9 +723,8 @@ partition_name=<span class="hljs-string">&#x27;partitionA&#x27;</span>,
 <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Entities deleted from partitionA: &quot;</span>, res[<span class="hljs-string">&#x27;delete_count&#x27;</span>])
 
 <span class="hljs-comment"># Output:</span>
-<span class="hljs-comment"># Entities deleted from partitionA: 3</span>
+<span class="hljs-comment"># Entities deleted from partitionA:  3</span>
 <button class="copy-code-btn"></button></code></pre>
-
 <pre><code translate="no" class="language-java">deleteReq = <span class="hljs-title class_">DeleteReq</span>.<span class="hljs-title function_">builder</span>()
     .<span class="hljs-title function_">collectionName</span>(<span class="hljs-string">&quot;quick_setup&quot;</span>)
     .<span class="hljs-title function_">filter</span>(<span class="hljs-string">&#x27;color like &quot;blue%&quot;&#x27;</span>)

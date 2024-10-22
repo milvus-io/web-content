@@ -36,7 +36,7 @@ title: Visão geral das integrações
 <tr><td><a href="/docs/pt/integrate_with_sentencetransformers.md">Pesquisa de filmes usando Milvus e SentenceTransfromers</a></td><td>Pesquisa semântica</td><td>Milvus, SentenceTransformers</td></tr>
 <tr><td><a href="/docs/pt/basic_usage_langchain.md">Usar Milvus como um armazenamento vetorial em LangChain</a></td><td>Pesquisa semântica</td><td>Milvus, LangChain</td></tr>
 <tr><td><a href="/docs/pt/integrate_with_haystack.md">RAG com Milvus e Haystack</a></td><td>RAG</td><td>Milvus, Haystack</td></tr>
-<tr><td><a href="/docs/pt/integrate_with_voxel51">Realizar pesquisas de visão com Milvus e FiftyOne</a></td><td>Pesquisa semântica</td><td>Milvus, FiftyOne</td></tr>
+<tr><td><a href="/docs/pt/integrate_with_voxel51.md">Realizar pesquisas de visão com Milvus e FiftyOne</a></td><td>Pesquisa semântica</td><td>Milvus, FiftyOne</td></tr>
 <tr><td><a href="/docs/pt/integrate_with_voyageai.md">Pesquisa semântica com Milvus e VoyageAI</a></td><td>Pesquisa semântica</td><td>Milvus, VoyageAI</td></tr>
 <tr><td><a href="/docs/pt/integrate_with_bentoml.md">RAG com Milvus e BentoML</a></td><td>RAG</td><td>Milvus, BentoML</td></tr>
 <tr><td><a href="/docs/pt/integrate_with_dspy.md">RAG com Milvus e DSPy</a></td><td>RAG</td><td>Milvus, DSPy</td></tr>
@@ -53,5 +53,13 @@ title: Visão geral das integrações
 <tr><td><a href="/docs/pt/video_search_with_twelvelabs_and_milvus.md">Pesquisa avançada de vídeo: Aproveitamento de Twelve Labs e Milvus para recuperação semântica</a></td><td>Pesquisa semântica</td><td>Milvus, Twelve Labs</td></tr>
 <tr><td><a href="/docs/pt/milvus_rag_with_vllm.md">Criando o RAG com Milvus, vLLM e Llama 3.1</a></td><td>RAG</td><td>Milvus, vLLM, LlamaIndex</td></tr>
 <tr><td><a href="/docs/pt/llama_agents_metadata.md">Sistemas multiagentes com Mistral AI, Milvus e Llama-agents</a></td><td>Agente</td><td>Milvus, Mistral AI, LlamaIndex</td></tr>
+<tr><td><a href="/docs/pt/kafka-connect-milvus.md">Conectar Kafka com Milvus</a></td><td>Fontes de dados</td><td>Milvus, Kafka</td></tr>
+<tr><td><a href="/docs/pt/kotaemon_with_milvus.md">Kotaemon RAG com Milvus</a></td><td>RAG</td><td>Milvus, Kotaemon</td></tr>
+<tr><td><a href="/docs/pt/apify_milvus_rag.md">Geração aumentada por recuperação: Rastreio de sítios Web com o Apify e gravação de dados no Milvus para resposta a perguntas</a></td><td>Fontes de dados</td><td>Milvus, Apify</td></tr>
+<tr><td><a href="/docs/pt/evaluation_with_deepeval.md">Avaliação com DeepEval</a></td><td>Avaliação e observabilidade</td><td>Milvus, DeepEval</td></tr>
+<tr><td><a href="/docs/pt/evaluation_with_phoenix.md">Avaliação com Arize Pheonix</a></td><td>Avaliação e observabilidade</td><td>Milvus, Arize Pheonix</td></tr>
+<tr><td><a href="/docs/pt/dify_with_milvus.md">Implementação do Dify com Milvus</a></td><td>Ochestração</td><td>Milvus, Dify</td></tr>
+<tr><td><a href="/docs/pt/rag_with_langflow.md">Construindo um sistema RAG usando Langflow com Milvus</a></td><td>Ochestration</td><td>Milvus, Langflow</td></tr>
+<tr><td><a href="/docs/pt/build_rag_on_arm.md">Construir RAG na arquitetura Arm</a></td><td>RAG</td><td>Milvus, Arm</td></tr>
 </tbody>
 </table>

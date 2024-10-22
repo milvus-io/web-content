@@ -31,19 +31,36 @@ pip install <span class="hljs-string">&quot;pymilvus[model]&quot;</span>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus.model.dense <span class="hljs-keyword">import</span> JinaEmbeddingFunction
 
 jina_ef = JinaEmbeddingFunction(
-    model_name=<span class="hljs-string">&quot;jina-embeddings-v2-base-en&quot;</span>, <span class="hljs-comment"># Defaults to `jina-embeddings-v2-base-en`</span>
-    api_key=JINAAI_API_KEY <span class="hljs-comment"># Provide your Jina AI API key</span>
+    model_name=<span class="hljs-string">&quot;jina-embeddings-v3&quot;</span>, <span class="hljs-comment"># Defaults to `jina-embeddings-v3`</span>
+    api_key=JINAAI_API_KEY, <span class="hljs-comment"># Provide your Jina AI API key</span>
+    task=<span class="hljs-string">&quot;retrieval.passage&quot;</span>, <span class="hljs-comment"># Specify the task</span>
+    dimensions=<span class="hljs-number">1024</span>, <span class="hljs-comment"># Defaults to 1024</span>
 )
 <button class="copy-code-btn"></button></code></pre>
 <p><strong>매개변수</strong></p>
 <ul>
 <li><p><code translate="no">model_name</code> <em>(문자열</em>)</p>
-<p>인코딩에 사용할 Jina AI 임베딩 모델의 이름입니다. 예를 들어 <code translate="no">jina-embeddings-v2-base-en</code>, <code translate="no">jina-embeddings-v2-small-en</code> 등과 같이 사용 가능한 Jina AI 임베딩 모델 이름 중 하나를 지정할 수 있습니다. 이 파라미터를 지정하지 않으면 <code translate="no">jina-embeddings-v2-base-en</code> 이 사용됩니다. 사용 가능한 모델 목록은 <a href="https://jina.ai/embeddings">Jina 임베딩을</a> 참조하세요.</p></li>
+<p>인코딩에 사용할 Jina AI 임베딩 모델의 이름입니다. 예를 들어 <code translate="no">jina-embeddings-v3</code>, <code translate="no">jina-embeddings-v2-base-en</code> 등과 같이 사용 가능한 Jina AI 임베딩 모델 이름 중 하나를 지정할 수 있습니다. 이 파라미터를 지정하지 않으면 <code translate="no">jina-embeddings-v3</code> 이 사용됩니다. 사용 가능한 모델 목록은 <a href="https://jina.ai/embeddings">Jina 임베딩을</a> 참조하세요.</p></li>
 <li><p><code translate="no">api_key</code> <em>(문자열</em>)</p>
 <p>Jina AI API에 액세스하기 위한 API 키입니다.</p></li>
+<li><p><code translate="no">task</code> <em>(문자열</em>)</p>
+<p>모델에 전달된 입력 유형입니다. 임베딩 모델 v3 이상에 필요합니다.</p>
+<ul>
+<li><code translate="no">&quot;retrieval.passage&quot;</code>: 인덱싱 시 검색 작업에서 대용량 문서를 인코딩하는 데 사용됩니다.</li>
+<li><code translate="no">&quot;retrieval.query&quot;</code>: 검색 작업에서 사용자 쿼리 또는 질문을 인코딩하는 데 사용됩니다.</li>
+<li><code translate="no">&quot;classification&quot;</code>: 텍스트 분류 작업에서 텍스트를 인코딩하는 데 사용됩니다.</li>
+<li><code translate="no">&quot;text-matching&quot;</code>: 두 문장 간의 유사도 측정과 같은 유사도 매칭을 위해 텍스트를 인코딩하는 데 사용됩니다.</li>
+<li><code translate="no">&quot;clustering&quot;</code>: 클러스터링 또는 재순위 지정 작업에 사용됩니다.</li>
+</ul></li>
+<li><p><code translate="no">dimensions</code> <em>(int</em>)</p>
+<p>결과 출력 임베딩이 가져야 하는 차원 수입니다. 기본값은 1024입니다. 임베딩 모델 v3 이상에서만 지원됩니다.</p></li>
+<li><p><code translate="no">late_chunking</code> <em>(bool</em>)</p>
+<p>이 매개변수는 <a href="https://arxiv.org/abs/2409.04701">지난 달에 도입된</a> 새로운 청킹 방법인 <a href="https://arxiv.org/abs/2409.04701">Jina AI를</a> 문장 일괄 인코딩에 사용할지 여부를 제어합니다. 기본값은 <code translate="no">False</code> 입니다. <code translate="no">True</code> 으로 설정하면 Jina AI API가 입력 필드에 있는 모든 문장을 연결하여 단일 문자열로 모델에 공급합니다. 내부적으로 모델은 이 긴 연결 문자열을 임베딩한 다음 후기 청킹을 수행하여 입력 목록의 크기와 일치하는 임베딩 목록을 반환합니다.</p></li>
 </ul>
-<p>문서용 임베딩을 만들려면 <code translate="no">encode_documents()</code> 메서드를 사용합니다:</p>
-<pre><code translate="no" class="language-python">docs = [
+<p>문서에 대한 임베딩을 만들려면 <code translate="no">encode_documents()</code> 메서드를 사용합니다. 이 방법은 검색 또는 추천 작업을 위한 문서 색인화와 같은 비대칭 검색 작업에서 문서 임베딩을 위해 설계되었습니다. 이 방법은 <code translate="no">retrieval.passage</code> 을 작업으로 사용합니다.</p>
+<pre><code translate="no" class="language-python:">
+```python
+docs = [
     <span class="hljs-string">&quot;Artificial intelligence was founded as an academic discipline in 1956.&quot;</span>,
     <span class="hljs-string">&quot;Alan Turing was the first person to conduct substantial research in AI.&quot;</span>,
     <span class="hljs-string">&quot;Born in Maida Vale, London, Turing was raised in southern England.&quot;</span>,
@@ -56,18 +73,18 @@ docs_embeddings = jina_ef.encode_documents(docs)
 <span class="hljs-comment"># Print dimension and shape of embeddings</span>
 <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Dim:&quot;</span>, jina_ef.dim, docs_embeddings[<span class="hljs-number">0</span>].shape)
 <button class="copy-code-btn"></button></code></pre>
-<p>예상 출력은 다음과 유사합니다:</p>
-<pre><code translate="no" class="language-python">Embeddings: [array([-4.88487840e-01, -4.28095880e-01,  4.90086500e-01, -1.63274320e-01,
-        3.43437800e-01,  3.21476880e-01,  2.83173790e-02, -3.10403670e-01,
-        4.76985040e-01, -1.77410420e-01, -3.84803180e-01, -2.19224200e-01,
-       -2.52898000e-01,  6.62411900e-02, -8.58173100e-01,  1.05221800e+00,
+<p>예상 출력은 다음과 비슷합니다:</p>
+<pre><code translate="no" class="language-python">Embeddings: [array([9.80641991e-02, -8.51697400e-02,  7.36531913e-02,  1.42558888e-02,
+       -2.23589484e-02,  1.68494112e-03, -3.50753777e-02, -3.11530549e-02,
+       -3.26012149e-02,  5.04568312e-03,  3.69836427e-02,  3.48948985e-02,
+        8.19722563e-03,  5.88679723e-02, -6.71099266e-03, -1.82369724e-02,
 ...
-       -2.04462400e-01,  7.14229800e-01, -1.66823000e-01,  8.72551440e-01,
-        5.53560140e-01,  8.92506300e-01, -2.39408610e-01, -4.22413560e-01,
-       -3.19551350e-01,  5.59153850e-01,  2.44338100e-01, -8.60452100e-01])]
-Dim: 768 (768,)
+        2.48654783e-02,  3.43279652e-02, -1.66154150e-02, -9.90478322e-03,
+       -2.96043139e-03, -8.57473817e-03, -7.39028037e-04,  6.25024503e-03,
+       -1.08831357e-02, -4.00776342e-02,  3.25369164e-02, -1.42691191e-03])]
+Dim: 1024 (1024,)
 <button class="copy-code-btn"></button></code></pre>
-<p>쿼리에 대한 임베딩을 만들려면 <code translate="no">encode_queries()</code> 메서드를 사용합니다:</p>
+<p>쿼리용 임베딩을 만들려면 <code translate="no">encode_queries()</code> 메서드를 사용합니다. 이 방법은 검색 쿼리 또는 질문과 같은 비대칭 검색 작업의 쿼리 임베딩을 위해 설계되었습니다. 이 방법은 <code translate="no">retrieval.query</code> 을 작업으로 사용합니다.</p>
 <pre><code translate="no" class="language-python">queries = [<span class="hljs-string">&quot;When was artificial intelligence founded&quot;</span>, 
            <span class="hljs-string">&quot;Where was Alan Turing born?&quot;</span>]
 
@@ -77,13 +94,37 @@ query_embeddings = jina_ef.encode_queries(queries)
 <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Dim&quot;</span>, jina_ef.dim, query_embeddings[<span class="hljs-number">0</span>].shape)
 <button class="copy-code-btn"></button></code></pre>
 <p>예상 출력은 다음과 유사합니다:</p>
-<pre><code translate="no" class="language-python">Embeddings: [array([-5.99164660e-01, -3.49827350e-01,  8.22405160e-01, -1.18632730e-01,
-        5.78107540e-01,  1.09789170e-01,  2.91604200e-01, -3.29306450e-01,
-        2.93779640e-01, -2.17880800e-01, -6.84535440e-01, -3.79752000e-01,
-       -3.47541800e-01,  9.20846100e-02, -6.13804400e-01,  6.31312800e-01,
+<pre><code translate="no" class="language-python">Embeddings: [array([8.79201014e-03,  1.47551354e-02,  4.02722731e-02, -2.52991207e-02,
+        1.12719582e-02,  3.75947170e-02,  3.97946090e-02, -7.36681819e-02,
+       -2.17952449e-02, -1.16298944e-02, -6.83426252e-03, -5.12507409e-02,
+        5.26071340e-02,  6.75181448e-02,  3.92445624e-02, -1.40817231e-02,
 ...
-       -1.84993740e-02,  9.38629150e-01,  2.74858470e-02,  1.09396360e+00,
-        3.96270750e-01,  7.44445800e-01, -1.95404050e-01, -6.08383200e-01,
-       -3.75076300e-01,  3.87512200e-01,  8.11889650e-01, -3.76407620e-01])]
-Dim 768 (768,)
+        8.81703943e-03,  4.24629413e-02, -2.32944116e-02, -2.05193572e-02,
+       -3.22035812e-02,  2.81896023e-03,  3.85326855e-02,  3.64372656e-02,
+       -1.65050142e-02, -4.26847413e-02,  2.02664156e-02, -1.72684863e-02])]
+Dim 1024 (1024,)
+<button class="copy-code-btn"></button></code></pre>
+<p>유사도 매칭(예: STS 또는 대칭 검색 작업), 텍스트 분류, 클러스터링 또는 순위 재조정 작업에 대한 입력의 임베딩을 만들려면 <code translate="no">JinaEmbeddingFunction</code> 클래스를 인스턴스화할 때 적절한 <code translate="no">task</code> 매개 변수 값을 사용하세요.</p>
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus.model.dense <span class="hljs-keyword">import</span> JinaEmbeddingFunction
+
+jina_ef = JinaEmbeddingFunction(
+    model_name=<span class="hljs-string">&quot;jina-embeddings-v3&quot;</span>, <span class="hljs-comment"># Defaults to `jina-embeddings-v3`</span>
+    api_key=JINA_API_KEY, <span class="hljs-comment"># Provide your Jina AI API key</span>
+    task=<span class="hljs-string">&quot;text-matching&quot;</span>,
+    dimensions=<span class="hljs-number">1024</span>, <span class="hljs-comment"># Defaults to 1024</span>
+)
+
+texts = [
+    <span class="hljs-string">&quot;Follow the white rabbit.&quot;</span>,  <span class="hljs-comment"># English</span>
+    <span class="hljs-string">&quot;Sigue al conejo blanco.&quot;</span>,  <span class="hljs-comment"># Spanish</span>
+    <span class="hljs-string">&quot;Suis le lapin blanc.&quot;</span>,  <span class="hljs-comment"># French</span>
+    <span class="hljs-string">&quot;跟着白兔走。&quot;</span>,  <span class="hljs-comment"># Chinese</span>
+    <span class="hljs-string">&quot;اتبع الأرنب الأبيض.&quot;</span>,  <span class="hljs-comment"># Arabic</span>
+    <span class="hljs-string">&quot;Folge dem weißen Kaninchen.&quot;</span>,  <span class="hljs-comment"># German</span>
+]
+
+embeddings = jina_ef(texts)
+
+<span class="hljs-comment"># Compute similarities</span>
+<span class="hljs-built_in">print</span>(embeddings[<span class="hljs-number">0</span>] @ embeddings[<span class="hljs-number">1</span>].T)
 <button class="copy-code-btn"></button></code></pre>

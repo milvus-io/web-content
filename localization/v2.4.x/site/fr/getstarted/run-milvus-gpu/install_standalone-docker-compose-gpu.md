@@ -3,7 +3,7 @@ id: install_standalone-docker-compose-gpu.md
 label: Standalone (Docker Compose)
 related_key: Kubernetes
 summary: Découvrez comment installer le cluster Milvus sur Kubernetes.
-title: Exécuter Milvus avec support GPU en utilisant Docker Compose
+title: Exécution de Milvus avec prise en charge du GPU à l'aide de Docker Compose
 ---
 <h1 id="Run-Milvus-with-GPU-Support-Using-Docker-Compose" class="common-anchor-header">Exécution de Milvus avec prise en charge du GPU à l'aide de Docker Compose<button data-href="#Run-Milvus-with-GPU-Support-Using-Docker-Compose" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -59,8 +59,8 @@ title: Exécuter Milvus avec support GPU en utilisant Docker Compose
         ></path>
       </svg>
     </button></h2><p>Pour installer Milvus avec prise en charge du GPU à l'aide de Docker Compose, procédez comme suit.</p>
-<h3 id="1-Download-and-configure-the-YAML-file" class="common-anchor-header">1. Téléchargez et configurez le fichier YAML</h3><p>Télécharger <a href="https://github.com/milvus-io/milvus/releases/download/v2.4.9/milvus-standalone-docker-compose-gpu.yml"><code translate="no">milvus-standalone-docker-compose-gpu.yml</code></a> et enregistrez-le sous docker-compose.yml manuellement ou à l'aide de la commande suivante.</p>
-<pre><code translate="no" class="language-shell">$ wget https://github.com/milvus-io/milvus/releases/download/v2.4.9/milvus-standalone-docker-compose-gpu.yml -O docker-compose.yml
+<h3 id="1-Download-and-configure-the-YAML-file" class="common-anchor-header">1. Téléchargez et configurez le fichier YAML</h3><p>Télécharger <a href="https://github.com/milvus-io/milvus/releases/download/v2.4.13-hotfix/milvus-standalone-docker-compose-gpu.yml"><code translate="no">milvus-standalone-docker-compose-gpu.yml</code></a> et enregistrez-le sous docker-compose.yml manuellement ou à l'aide de la commande suivante.</p>
+<pre><code translate="no" class="language-shell">$ wget https://github.com/milvus-io/milvus/releases/download/v2.4.13-hotfix/milvus-standalone-docker-compose-gpu.yml -O docker-compose.yml
 <button class="copy-code-btn"></button></code></pre>
 <p>Vous devez apporter quelques modifications aux variables d'environnement du service autonome dans le fichier YAML, comme suit :</p>
 <ul>
@@ -123,7 +123,7 @@ milvus-standalone   /tini -- milvus run standalone   Up             0.0.0.0:1953
 <p>Rendez le dispositif GPU <code translate="no">0</code> visible pour Milvus :</p>
 <pre><code translate="no" class="language-shell">$ CUDA_VISIBLE_DEVICES=0 ./milvus run standalone
 <button class="copy-code-btn"></button></code></pre>
-<p>Rendre les périphériques GPU <code translate="no">0</code> et <code translate="no">1</code> visibles par Milvus :</p>
+<p>Rendre les dispositifs GPU <code translate="no">0</code> et <code translate="no">1</code> visibles par Milvus :</p>
 <pre><code translate="no" class="language-shell">$ CUDA_VISIBLE_DEVICES=0,1 ./milvus run standalone
 <button class="copy-code-btn"></button></code></pre>
 <p>Vous pouvez arrêter et supprimer ce conteneur comme suit.</p>

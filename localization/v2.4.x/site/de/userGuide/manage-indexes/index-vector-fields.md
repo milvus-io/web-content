@@ -2,9 +2,9 @@
 id: index-vector-fields.md
 order: 1
 summary: >-
-  Dieses Handbuch führt Sie durch die grundlegenden Vorgänge zum Erstellen und
-  Verwalten von Indizes für Vektorfelder in einer Sammlung.
-title: Index-Vektorfelder
+  Dieses Handbuch führt Sie durch die grundlegenden Operationen zum Erstellen
+  und Verwalten von Indizes für Vektorfelder in einer Sammlung.
+title: Vektorfelder indizieren
 ---
 <h1 id="Index-Vector-Fields" class="common-anchor-header">Vektorfelder indizieren<button data-href="#Index-Vector-Fields" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -38,7 +38,7 @@ title: Index-Vektorfelder
         ></path>
       </svg>
     </button></h2><p>Durch die Nutzung der in einer Indexdatei gespeicherten Metadaten organisiert Milvus Ihre Daten in einer spezialisierten Struktur, die ein schnelles Auffinden der gewünschten Informationen bei Suchen oder Abfragen erleichtert.</p>
-<p>Milvus bietet verschiedene Indextypen und Metriken zum Sortieren von Feldwerten für effiziente Ähnlichkeitssuchen. In der folgenden Tabelle sind die unterstützten Indextypen und Metriken für verschiedene Vektorfeldtypen aufgeführt. Einzelheiten finden Sie unter <a href="/docs/de/index.md">In-memory Index</a> und <a href="/docs/de/metric.md">Ähnlichkeitsmetriken</a>.</p>
+<p>Milvus bietet verschiedene Indextypen und Metriken zum Sortieren von Feldwerten für effiziente Ähnlichkeitssuchen. In der folgenden Tabelle sind die unterstützten Indextypen und Metriken für verschiedene Vektorfeldtypen aufgeführt. Details finden Sie unter <a href="/docs/de/index.md">In-memory Index</a> und <a href="/docs/de/metric.md">Ähnlichkeitsmetriken</a>.</p>
 <div class="filter">
  <a href="#floating">Fließkomma-Einbettungen</a> <a href="#binary">Binäre Einbettungen</a> <a href="#sparse">Sparsame Einbettungen</a></div>
 <div class="filter-floating table-wrapper" markdown="block">
@@ -249,7 +249,8 @@ index_params.add_index(
 <span class="hljs-comment"># 4.3. Create an index file</span>
 client.create_index(
     collection_name=<span class="hljs-string">&quot;customized_setup&quot;</span>,
-    index_params=index_params
+    index_params=index_params,
+    sync=<span class="hljs-literal">False</span> <span class="hljs-comment"># Whether to wait for index creation to complete before returning. Defaults to True.</span>
 )
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.common.IndexParam;
@@ -331,6 +332,10 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
       <td><code translate="no">index_params</code></td>
       <td>Ein <strong>IndexParams-Objekt</strong>, das eine Liste von <strong>IndexParam-Objekten</strong> enthält.</td>
     </tr>
+    <tr>
+      <td><code translate="no">sync</code></td>
+      <td>Steuert, wie der Index in Bezug auf die Anfrage des Clients aufgebaut wird. Gültige Werte:<br><ul><li><code translate="no">True</code> (Standard): Der Client wartet, bis der Index vollständig aufgebaut ist, bevor er zurückkehrt. Das bedeutet, dass Sie keine Antwort erhalten, bis der Prozess abgeschlossen ist.</li><li><code translate="no">False</code>: Der Client kehrt sofort zurück, nachdem die Anfrage eingegangen ist und der Index im Hintergrund aufgebaut wird. Um herauszufinden, ob die Indexerstellung abgeschlossen ist, verwenden Sie die Methode <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/describe_index.md">describe_index()</a>.</li></ul></td>
+    </tr>
   </tbody>
 </table>
 <table class="language-java">
@@ -347,7 +352,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
     </tr>
     <tr>
       <td><code translate="no">indexName</code></td>
-      <td>Der Name der Indexdatei, die nach Anwendung dieses Objekts erstellt wird.</td>
+      <td>Der Name der Indexdatei, die nach Anwendung dieses Objekts erstellt wurde.</td>
     </tr>
     <tr>
       <td><code translate="no">indexType</code></td>
@@ -527,7 +532,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 <span class="hljs-comment">// ]</span>
 <span class="hljs-comment">// </span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Sie können die Indexdatei überprüfen, die für ein bestimmtes Feld erstellt wurde, und die Statistik über die Anzahl der Zeilen, die mit dieser Indexdatei indiziert wurden, sammeln.</p>
+<p>Sie können die Indexdatei prüfen, die für ein bestimmtes Feld erstellt wurde, und die Statistik über die Anzahl der mit dieser Indexdatei indizierten Zeilen sammeln.</p>
 <h2 id="Drop-an-Index" class="common-anchor-header">Einen Index löschen<button data-href="#Drop-an-Index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

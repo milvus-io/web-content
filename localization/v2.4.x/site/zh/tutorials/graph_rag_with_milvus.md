@@ -18,7 +18,8 @@ title: 用 Milvus 绘制 RAG 图
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/graph_rag_with_milvus.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a></p>
+    </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/graph_rag_with_milvus.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
+<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/graph_rag_with_milvus.ipynb" target="_blank"><img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/></a></p>
 <p>大型语言模型的广泛应用凸显了提高其响应准确性和相关性的重要性。检索增强生成（RAG）利用外部知识库增强了模型，提供了更多上下文信息，缓解了幻觉和知识不足等问题。然而，仅仅依靠简单的 RAG 范式有其局限性，尤其是在处理复杂的实体关系和多跳问题时，模型往往难以提供准确的答案。</p>
 <p>将知识图谱（KG）引入 RAG 系统提供了一种新的解决方案。知识图谱以结构化的方式呈现实体及其关系，提供更精确的检索信息，帮助 RAG 更好地处理复杂的问题解答任务。KG-RAG 仍处于早期阶段，对于如何从 KG 中有效检索实体及其关系，以及如何将向量相似性搜索与图结构相结合，目前还没有达成共识。</p>
 <p>在本笔记本中，我们介绍了一种简单但功能强大的方法，可大大提高该场景的性能。它是一种简单的 RAG 范式，先进行多向检索，然后重新排序，但它在逻辑上实现了 Graph RAG，并在处理多跳问题时达到了最先进的性能。让我们看看它是如何实现的。</p>
@@ -165,7 +166,7 @@ embedding_model = <span class="hljs-title class_">OpenAIEmbeddings</span>(model=
 <li>实体是三元组中的主语或宾语，因此我们直接从三元组中提取它们。</li>
 <li>在这里，我们通过直接连接主语、谓语和宾语来构建关系概念，中间留有空格。</li>
 </ul>
-<p>我们还准备了一个 dict，用于将实体 id 映射到关系 id，以及另一个 dict，用于将关系 id 映射到通道 id，以备后用。</p>
+<p>我们还准备了一个将实体 id 映射到关系 id 的 dict，以及另一个将关系 id 映射到通道 id 的 dict，以备后用。</p>
 <pre><code translate="no" class="language-python">entityid_2_relationids = defaultdict(list)
 relationid_2_passageids = defaultdict(list)
 

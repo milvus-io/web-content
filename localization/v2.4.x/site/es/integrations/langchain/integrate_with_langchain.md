@@ -3,7 +3,7 @@ id: integrate_with_langchain.md
 summary: >-
   Esta guía muestra cómo construir un sistema de Generación Aumentada por
   Recuperación (RAG) utilizando LangChain y Milvus.
-title: Generación mejorada por recuperación (RAG) con Milvus y LangChain
+title: Retrieval-Augmented Generation (RAG) con Milvus y LangChain
 ---
 <h1 id="Retrieval-Augmented-Generation-RAG-with-Milvus-and-LangChain" class="common-anchor-header">Retrieval-Augmented Generation (RAG) con Milvus y LangChain<button data-href="#Retrieval-Augmented-Generation-RAG-with-Milvus-and-LangChain" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -20,7 +20,8 @@ title: Generación mejorada por recuperación (RAG) con Milvus y LangChain
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/rag_with_milvus_and_langchain.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a></p>
+    </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/rag_with_milvus_and_langchain.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
+<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/rag_with_milvus_and_langchain.ipynb" target="_blank"><img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/></a></p>
 <p>Esta guía muestra cómo construir un sistema de Generación Aumentada por Recuperación (RAG) utilizando LangChain y Milvus.</p>
 <p>El sistema RAG combina un sistema de recuperación con un modelo generativo para generar nuevo texto basado en una petición dada. En primer lugar, el sistema recupera documentos relevantes de un corpus utilizando Milvus y, a continuación, utiliza un modelo generativo para generar un nuevo texto basado en los documentos recuperados.</p>
 <p><a href="https://www.langchain.com/">LangChain</a> es un marco para el desarrollo de aplicaciones basadas en grandes modelos lingüísticos (LLM). <a href="https://milvus.io/">Milvus</a> es la base de datos vectorial de código abierto más avanzada del mundo, creada para potenciar la búsqueda de similitudes de incrustación y las aplicaciones de IA.</p>
@@ -210,7 +211,7 @@ res
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Podemos utilizar las <a href="https://milvus.io/docs/boolean.md">reglas de filtrado escalar de Milvus</a> para filtrar los documentos basándonos en los metadatos. Hemos cargado los documentos de dos fuentes diferentes, y podemos filtrar los documentos por los metadatos <code translate="no">source</code>.</p>
+    </button></h2><p>Podemos utilizar las <a href="https://milvus.io/docs/boolean.md">reglas de filtrado escalar</a> de Milvus para filtrar los documentos basándonos en los metadatos. Hemos cargado los documentos de dos fuentes diferentes, y podemos filtrar los documentos por los metadatos <code translate="no">source</code>.</p>
 <pre><code translate="no" class="language-python">vectorstore.similarity_search(
     <span class="hljs-string">&quot;What is CoT?&quot;</span>,
     k=1,

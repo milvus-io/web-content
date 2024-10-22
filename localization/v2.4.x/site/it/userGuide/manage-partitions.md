@@ -1,7 +1,6 @@
 ---
 id: manage-partitions.md
 title: Gestire le partizioni
-summary: ''
 ---
 <h1 id="Manage-Partitions" class="common-anchor-header">Gestire le partizioni<button data-href="#Manage-Partitions" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -735,8 +734,18 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 <span class="hljs-comment">// LoadStateLoaded</span>
 <span class="hljs-comment">// </span>
 <button class="copy-code-btn"></button></code></pre>
+<p>Per caricare campi specifici in una o più partizioni, procedere come segue:</p>
+<pre><code translate="no" class="language-python">client.load_partitions(
+    collection_name=<span class="hljs-string">&quot;quick_setup&quot;</span>,
+    partition_names=[<span class="hljs-string">&quot;partitionA&quot;</span>],
+    load_fields=[<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-string">&quot;vector&quot;</span>],
+    skip_load_dynamic_field=<span class="hljs-literal">True</span>
+)
+<button class="copy-code-btn"></button></code></pre>
+<p>Si noti che solo i campi elencati in <code translate="no">load_fields</code> possono essere usati come condizioni di filtraggio e campi di output nelle ricerche e nelle query. È necessario includere sempre la chiave primaria nell'elenco. I nomi dei campi esclusi dal caricamento non saranno disponibili per il filtraggio o l'output.</p>
+<p>È possibile utilizzare <code translate="no">skip_load_dynamic_field=True</code> per saltare il caricamento del campo dinamico. Milvus tratta il campo dinamico come un singolo campo, quindi tutte le chiavi del campo dinamico saranno incluse o escluse insieme.</p>
 <h3 id="Release-Partitions" class="common-anchor-header">Rilasciare le partizioni</h3><div class="language-python">
-<p>Per rilasciare tutte le partizioni di un insieme, è sufficiente richiamare il comando <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/release_collection.md"><code translate="no">release_collection()</code></a>. Per rilasciare partizioni specifiche di un insieme, si può usare il comando <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Partitions/release_partitions.md"><code translate="no">release_partitions()</code></a>.</p>
+<p>Per rilasciare tutte le partizioni di un insieme, è sufficiente chiamare il comando <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/release_collection.md"><code translate="no">release_collection()</code></a>. Per rilasciare partizioni specifiche di un insieme, si può usare il comando <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Partitions/release_partitions.md"><code translate="no">release_partitions()</code></a>.</p>
 </div>
 <div class="language-java">
 <p>Per rilasciare tutte le partizioni di un insieme, è sufficiente richiamare il comando <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Management/releaseCollection.md"><code translate="no">releaseCollection()</code></a>. Per rilasciare partizioni specifiche di un insieme, usare <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Partitions/releasePartitions.md"><code translate="no">releasePartitions()</code></a>.</p>
@@ -930,10 +939,10 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 <li><p><strong>Quanti dati possono essere memorizzati in una partizione?</strong></p>
 <p>Si raccomanda di memorizzare meno di 1B di dati in una partizione.</p></li>
 <li><p><strong>Qual è il numero massimo di partizioni che possono essere create?</strong></p>
-<p>Per impostazione predefinita, Milvus consente di creare un massimo di 4.096 partizioni. È possibile regolare il numero massimo di partizioni configurando <code translate="no">rootCoord.maxPartitionNum</code>. Per maggiori dettagli, consultare la sezione <a href="https://milvus.io/docs/configure_rootcoord.md#rootCoordmaxPartitionNum">Configurazioni di sistema</a>.</p></li>
+<p>Per impostazione predefinita, Milvus consente di creare un massimo di 1.024 partizioni. È possibile regolare il numero massimo di partizioni configurando <code translate="no">rootCoord.maxPartitionNum</code>. Per maggiori dettagli, consultare la sezione <a href="https://milvus.io/docs/configure_rootcoord.md#rootCoordmaxPartitionNum">Configurazioni di sistema</a>.</p></li>
 <li><p><strong>Come si fa a distinguere tra partizioni e chiavi di partizione?</strong></p>
 <p>Le partizioni sono unità di archiviazione fisiche, mentre le chiavi di partizione sono concetti logici che assegnano automaticamente i dati a partizioni specifiche in base a una colonna designata.</p>
-<p>Per esempio, in Milvus, se si dispone di una collezione con una chiave di partizione definita come campo <code translate="no">color</code>, il sistema assegna automaticamente i dati alle partizioni in base ai valori hash del campo <code translate="no">color</code> per ogni entità. Questo processo automatico solleva l'utente dalla responsabilità di specificare manualmente la partizione durante l'inserimento o la ricerca dei dati.</p>
+<p>Ad esempio, in Milvus, se si dispone di una raccolta con una chiave di partizione definita come campo <code translate="no">color</code>, il sistema assegna automaticamente i dati alle partizioni in base ai valori hash del campo <code translate="no">color</code> per ogni entità. Questo processo automatico solleva l'utente dalla responsabilità di specificare manualmente la partizione durante l'inserimento o la ricerca dei dati.</p>
 <p>D'altra parte, quando si creano manualmente le partizioni, è necessario assegnare i dati a ciascuna partizione in base ai criteri della chiave di partizione. Se si dispone di una collezione con un campo <code translate="no">color</code>, si dovranno assegnare manualmente le entità con un valore <code translate="no">color</code> di <code translate="no">red</code> a <code translate="no">partition A</code>, e le entità con un valore <code translate="no">color</code> di <code translate="no">blue</code> a <code translate="no">partition B</code>. Questa gestione manuale richiede uno sforzo maggiore.</p>
 <p>In sintesi, sia le partizioni che le chiavi di partizione vengono utilizzate per ottimizzare il calcolo dei dati e migliorare l'efficienza delle query. È essenziale riconoscere che l'abilitazione di una chiave di partizione significa rinunciare al controllo sulla gestione manuale dell'inserimento e del caricamento dei dati delle partizioni, poiché questi processi sono completamente automatizzati e gestiti da Milvus.</p></li>
 </ul>

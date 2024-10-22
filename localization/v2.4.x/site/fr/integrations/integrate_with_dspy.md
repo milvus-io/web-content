@@ -20,7 +20,8 @@ title: Intégrer Milvus à DSPy
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/milvus_and_DSPy.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a></p>
+    </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/milvus_and_DSPy.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
+<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/milvus_and_DSPy.ipynb" target="_blank"><img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/></a></p>
 <h2 id="What-is-DSPy" class="common-anchor-header">Qu'est-ce que DSPy ?<button data-href="#What-is-DSPy" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -53,7 +54,7 @@ title: Intégrer Milvus à DSPy
         ></path>
       </svg>
     </button></h2><ul>
-<li>Approche de la programmation : DSPy fournit une approche de programmation systématique pour le développement de pipelines LM en abstrayant les pipelines en tant que graphes de transformation de texte au lieu de se contenter d'inviter les LLM. Ses modules déclaratifs permettent une conception et une optimisation structurées, remplaçant la méthode d'essai et d'erreur des modèles d'invite traditionnels.</li>
+<li>Approche de la programmation : DSPy fournit une approche de programmation systématique pour le développement de pipelines LM en abstrayant les pipelines sous forme de graphes de transformation de texte au lieu de se contenter d'inviter les LLM. Ses modules déclaratifs permettent une conception et une optimisation structurées, remplaçant la méthode d'essai et d'erreur des modèles d'invite traditionnels.</li>
 <li>Amélioration des performances : DSPy démontre des gains de performance significatifs par rapport aux méthodes existantes. Grâce à des études de cas, il surpasse les messages-guides standard et les démonstrations créées par des experts, démontrant ainsi sa polyvalence et son efficacité, même lorsqu'il est compilé dans des modèles LM plus petits.</li>
 <li>Abstraction modulaire : DSPy abstrait efficacement les aspects complexes du développement du pipeline LM, tels que la décomposition, le réglage fin et la sélection du modèle. Avec DSPy, un programme concis peut se traduire de manière transparente en instructions pour différents modèles, tels que GPT-4, Llama2-13b ou T5-base, ce qui simplifie le développement et améliore les performances.</li>
 </ul>

@@ -2,8 +2,8 @@
 id: integrate_with_bentoml.md
 summary: >-
   Dieser Leitfaden zeigt, wie man ein Open-Source-Einbettungsmodell und ein
-  Großsprachenmodell auf BentoCloud mit einer Milvus-Vektordatenbank verwendet,
-  um eine Retrieval Augmented Generation (RAG)-Anwendung zu erstellen.
+  Großsprachenmodell auf BentoCloud mit der Milvus-Vektordatenbank verwendet, um
+  eine Retrieval Augmented Generation (RAG)-Anwendung zu erstellen.
 title: Retrieval-Augmented Generation (RAG) mit Milvus und BentoML
 ---
 <h1 id="Retrieval-Augmented-Generation-RAG-with-Milvus-and-BentoML" class="common-anchor-header">Retrieval-Augmented Generation (RAG) mit Milvus und BentoML<button data-href="#Retrieval-Augmented-Generation-RAG-with-Milvus-and-BentoML" class="anchor-icon" translate="no">
@@ -21,7 +21,8 @@ title: Retrieval-Augmented Generation (RAG) mit Milvus und BentoML
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/rag_with_milvus_and_bentoml.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a></p>
+    </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/rag_with_milvus_and_bentoml.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
+<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/rag_with_milvus_and_bentoml.ipynb" target="_blank"><img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/></a></p>
 <h2 id="Introduction" class="common-anchor-header">Einführung<button data-href="#Introduction" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -37,7 +38,7 @@ title: Retrieval-Augmented Generation (RAG) mit Milvus und BentoML
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Dieser Leitfaden zeigt, wie man ein Open-Source-Einbettungsmodell und ein Großsprachenmodell auf BentoCloud mit der Vektordatenbank Milvus verwendet, um eine RAG-Anwendung (Retrieval Augmented Generation) zu erstellen. BentoCloud ist eine KI-Inferenzplattform für schnell arbeitende KI-Teams, die eine vollständig verwaltete Infrastruktur bietet, die auf die Modellinferenz zugeschnitten ist. Sie arbeitet mit BentoML zusammen, einem Open-Source-Framework für die Modellbereitstellung, um die einfache Erstellung und Bereitstellung von Hochleistungsmodelldiensten zu ermöglichen. In dieser Demo verwenden wir Milvus Lite als Vektordatenbank, eine schlanke Version von Milvus, die in Ihre Python-Anwendung eingebettet werden kann.</p>
+    </button></h2><p>Dieser Leitfaden zeigt, wie man ein Open-Source-Einbettungsmodell und ein Großsprachenmodell auf BentoCloud mit der Vektordatenbank Milvus verwendet, um eine RAG-Anwendung (Retrieval Augmented Generation) zu erstellen. BentoCloud ist eine KI-Inferenzplattform für schnell arbeitende KI-Teams, die eine vollständig verwaltete Infrastruktur bietet, die auf die Modellinferenz zugeschnitten ist. Sie arbeitet mit BentoML zusammen, einem Open-Source-Framework für die Modellbereitstellung, um die einfache Erstellung und Bereitstellung von Hochleistungsmodelldiensten zu ermöglichen. In dieser Demo verwenden wir Milvus Lite als Vektordatenbank, die leichtgewichtige Version von Milvus, die in Ihre Python-Anwendung eingebettet werden kann.</p>
 <h2 id="Before-you-begin" class="common-anchor-header">Bevor Sie beginnen<button data-href="#Before-you-begin" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -57,7 +58,7 @@ title: Retrieval-Augmented Generation (RAG) mit Milvus und BentoML
 <pre><code translate="no" class="language-python">$ pip install -U pymilvus bentoml
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>Wenn Sie Google Colab verwenden, müssen Sie möglicherweise <strong>die Runtime neu starten</strong>, um die soeben installierten Abhängigkeiten zu aktivieren (klicken Sie auf das Menü "Runtime" am oberen Bildschirmrand und wählen Sie "Restart session" aus dem Dropdown-Menü).</p>
+<p>Wenn Sie Google Colab verwenden, müssen Sie möglicherweise <strong>die Runtime neu starten</strong>, um die soeben installierten Abhängigkeiten zu aktivieren (klicken Sie auf das Menü "Runtime" oben auf dem Bildschirm und wählen Sie "Restart session" aus dem Dropdown-Menü).</p>
 </div>
 <p>Nachdem Sie sich bei BentoCloud angemeldet haben, können Sie mit den bereitgestellten BentoCloud-Diensten in Deployments interagieren, und der entsprechende END_POINT und die API befinden sich in Playground -&gt; Python. Sie können die Stadtdaten <a href="https://github.com/ytang07/bento_octo_milvus_RAG/tree/main/data">hier</a> herunterladen.</p>
 <h2 id="Serving-Embeddings-with-BentoMLBentoCloud" class="common-anchor-header">Servieren von Einbettungen mit BentoML/BentoCloud<button data-href="#Serving-Embeddings-with-BentoMLBentoCloud" class="anchor-icon" translate="no">
@@ -177,7 +178,7 @@ city_chunks = []
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Nachdem wir unsere Einbettungen und Daten vorbereitet haben, können wir die Vektoren zusammen mit den Metadaten in Milvus Lite für die spätere Vektorsuche einfügen. Der erste Schritt in diesem Abschnitt besteht darin, einen Client zu starten, der eine Verbindung zu Milvus Lite herstellt. Wir importieren einfach das Modul <code translate="no">MilvusClient</code> und initialisieren einen Milvus-Lite-Client, der sich mit Ihrer Milvus-Lite-Vektordatenbank verbindet. Die Größe der Dimensionen ergibt sich aus der Größe des Einbettungsmodells, z.B. erzeugt das Sentence Transformer Modell <code translate="no">all-MiniLM-L6-v2</code> Vektoren mit 384 Dimensionen.</p>
+    </button></h2><p>Nachdem wir unsere Einbettungen und Daten vorbereitet haben, können wir die Vektoren zusammen mit den Metadaten in Milvus Lite für die spätere Vektorsuche einfügen. Der erste Schritt in diesem Abschnitt besteht darin, einen Client zu starten, der eine Verbindung zu Milvus Lite herstellt. Wir importieren einfach das Modul <code translate="no">MilvusClient</code> und initialisieren einen Milvus Lite-Client, der eine Verbindung zu Ihrer Milvus Lite-Vektordatenbank herstellt. Die Größe der Dimensionen ergibt sich aus der Größe des Einbettungsmodells, z.B. erzeugt das Sentence Transformer Modell <code translate="no">all-MiniLM-L6-v2</code> Vektoren mit 384 Dimensionen.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 COLLECTION_NAME = <span class="hljs-string">&quot;Bento_Milvus_RAG&quot;</span>  <span class="hljs-comment"># random name for your collection</span>
@@ -187,7 +188,7 @@ DIMENSION = <span class="hljs-number">384</span>
 milvus_client = MilvusClient(<span class="hljs-string">&quot;milvus_demo.db&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>Für das Argument von <code translate="no">MilvusClient</code> gilt Folgendes:</p>
+<p>Wie bei dem Argument von <code translate="no">MilvusClient</code>:</p>
 <ul>
 <li>Die Einstellung von <code translate="no">uri</code> als lokale Datei, z. B.<code translate="no">./milvus.db</code>, ist die bequemste Methode, da sie automatisch <a href="https://milvus.io/docs/milvus_lite.md">Milvus Lite</a> verwendet, um alle Daten in dieser Datei zu speichern.</li>
 <li>Wenn Sie große Datenmengen haben, können Sie einen leistungsfähigeren Milvus-Server auf <a href="https://milvus.io/docs/quickstart.md">Docker oder Kubernetes</a> einrichten. Bei dieser Einrichtung verwenden Sie bitte die Server-Uri, z. B.<code translate="no">http://localhost:19530</code>, als <code translate="no">uri</code>.</li>

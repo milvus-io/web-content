@@ -3,7 +3,7 @@ id: tutorials-overview.md
 summary: >-
   Cette page fournit une liste de tutoriels vous permettant d'interagir avec
   Milvus.
-title: Vue d'ensemble des tutoriels
+title: Vue d'ensemble des didacticiels
 ---
 <h1 id="Tutorials-Overview" class="common-anchor-header">Vue d'ensemble des didacticiels<button data-href="#Tutorials-Overview" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -31,7 +31,6 @@ title: Vue d'ensemble des tutoriels
 <tr><td><a href="/docs/fr/image_similarity_search.md">Recherche d'images avec Milvus</a></td><td>Recherche sémantique</td><td>recherche vectorielle, champ dynamique</td></tr>
 <tr><td><a href="/docs/fr/hybrid_search_with_milvus.md">Recherche hybride avec Milvus</a></td><td>Recherche hybride</td><td>recherche hybride, multi vectorielle, encastrement dense, encastrement clairsemé</td></tr>
 <tr><td><a href="/docs/fr/multimodal_rag_with_milvus.md">Recherche multimodale utilisant des vecteurs multiples</a></td><td>Recherche sémantique</td><td>multi vectorielle, recherche hybride</td></tr>
-<tr><td></td></tr>
 <tr><td><a href="/docs/fr/question_answering_system.md">Système de réponse aux questions</a></td><td>Réponse aux questions</td><td>recherche vectorielle</td></tr>
 <tr><td><a href="/docs/fr/recommendation_system.md">Système de recommandation</a></td><td>Système de recommandation</td><td>recherche vectorielle</td></tr>
 <tr><td><a href="/docs/fr/video_similarity_search.md">Recherche de similarité vidéo</a></td><td>Recherche sémantique</td><td>Recherche vectorielle</td></tr>
@@ -40,5 +39,7 @@ title: Vue d'ensemble des tutoriels
 <tr><td><a href="/docs/fr/text_search_engine.md">Moteur de recherche textuelle</a></td><td>Recherche sémantique</td><td>recherche vectorielle</td></tr>
 <tr><td><a href="/docs/fr/text_image_search.md">Recherche d'images par texte</a></td><td>Recherche sémantique</td><td>recherche vectorielle</td></tr>
 <tr><td><a href="/docs/fr/image_deduplication_system.md">Déduplication d'images</a></td><td>Déduplication</td><td>recherche vectorielle</td></tr>
+<tr><td><a href="/docs/fr/graph_rag_with_milvus.md">Graphique RAG avec Milvus</a></td><td>RAG</td><td>recherche par graphe</td></tr>
+<tr><td><a href="/docs/fr/contextual_retrieval_with_milvus.md">Recherche contextuelle avec Milvus</a></td><td>Démarrage rapide</td><td>recherche vectorielle</td></tr>
 </tbody>
 </table>

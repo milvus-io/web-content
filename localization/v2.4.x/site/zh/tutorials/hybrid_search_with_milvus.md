@@ -18,9 +18,10 @@ title: 使用 Milvus 进行混合搜索
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/hybrid_search_with_milvus.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a></p>
+    </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/hybrid_search_with_milvus.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
+<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/hybrid_search_with_milvus.ipynb" target="_blank"><img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/></a></p>
 <p><img translate="no" src="https://raw.githubusercontent.com/milvus-io/bootcamp/master/bootcamp/tutorials/quickstart/apps/hybrid_demo_with_milvus/pics/demo.png"/></p>
-<p>在本教程中，我们将演示如何使用<a href="https://milvus.io/docs/multi-vector-search.md">Milvus</a>和<a href="https://github.com/FlagOpen/FlagEmbedding/tree/master/FlagEmbedding/BGE_M3">BGE-M3 模型</a>进行混合搜索。BGE-M3 模型可以将文本转换为密集向量和稀疏向量。Milvus 支持在一个集合中存储这两种向量，从而实现混合搜索，提高搜索结果的相关性。</p>
+<p>在本教程中，我们将演示如何使用<a href="https://milvus.io/docs/multi-vector-search.md">Milvus</a>和<a href="https://github.com/FlagOpen/FlagEmbedding/tree/master/FlagEmbedding/BGE_M3">BGE-M3 模型</a>进行混合搜索。BGE-M3 模型可将文本转换为密集向量和稀疏向量。Milvus 支持在一个 Collections 中存储这两种向量，从而实现混合搜索，提高搜索结果的相关性。</p>
 <p>Milvus 支持密集、稀疏和混合检索方法：</p>
 <ul>
 <li>密集检索：利用语义上下文来理解查询背后的含义。</li>
@@ -67,10 +68,10 @@ docs_embeddings = ef(docs)
 <pre><code translate="no">Fetching 30 files: 100%|██████████| 30/30 [00:00&lt;00:00, 302473.85it/s]
 Inference Embeddings: 100%|██████████| 32/32 [01:59&lt;00:00,  3.74s/it]
 </code></pre>
-<h3 id="Setup-Milvus-Collection-and-Index" class="common-anchor-header">设置 Milvus 收集和索引</h3><p>我们将设置 Milvus 集合并为向量场创建索引。</p>
+<h3 id="Setup-Milvus-Collection-and-Index" class="common-anchor-header">设置 Milvus Collections 和索引</h3><p>我们将设置 Milvus Collections 并为向量场创建索引。</p>
 <div class="note alert">
 <ul>
-<li>将 uri 设置为本地文件，如&quot;./milvus.db&quot;，是最方便的方法，因为它会自动利用<a href="https://milvus.io/docs/milvus_lite.md">Milvus Lite</a>将所有数据存储在该文件中。</li>
+<li>将 uri 设置为本地文件，如&quot;./milvus.db&quot;，是最方便的方法，因为它会自动利用<a href="https://milvus.io/docs/milvus_lite.md">Milvus Lite</a>将所有数据存储在此文件中。</li>
 <li>如果你有大规模数据，比如超过一百万个向量，你可以在<a href="https://milvus.io/docs/quickstart.md">Docker 或 Kubernetes</a> 上设置性能更强的 Milvus 服务器。在此设置中，请使用服务器 uri（如 http://localhost:19530）作为您的 uri。</li>
 <li>如果你想使用<a href="https://zilliz.com/cloud">Zilliz Cloud</a>（Milvus 的全托管云服务），请调整 uri 和令牌，它们与 Zilliz Cloud 中的<a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#cluster-details">公共端点和 API 密钥</a>相对应。</li>
 </ul>
@@ -115,7 +116,7 @@ dense_index = {<span class="hljs-string">&quot;index_type&quot;</span>: <span cl
 col.create_index(<span class="hljs-string">&quot;dense_vector&quot;</span>, dense_index)
 col.load()
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Insert-Data-into-Milvus-Collection" class="common-anchor-header">将数据插入 Milvus 数据集</h3><p>将文档及其嵌入插入收藏集。</p>
+<h3 id="Insert-Data-into-Milvus-Collection" class="common-anchor-header">将数据插入 Milvus Collections</h3><p>将文档及其 Embeddings 插入 Collections。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># For efficiency, we insert 50 records in each small batch</span>
 <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">0</span>, <span class="hljs-built_in">len</span>(docs), <span class="hljs-number">50</span>):
     batched_entities = [
@@ -142,7 +143,7 @@ query_embeddings = ef([query])
 <ul>
 <li><code translate="no">dense_search</code>只搜索密集向量场</li>
 <li><code translate="no">sparse_search</code>只在稀疏向量场中搜索</li>
-<li><code translate="no">hybrid_search</code>在密集向量场和向量场中使用加权重排器进行搜索</li>
+<li><code translate="no">hybrid_search</code>：使用加权 Reranker 在密集向量场和向量场中搜索</li>
 </ul>
 <pre><code translate="no" class="language-python"><span class="hljs-function"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-title">import</span> (<span class="hljs-params">
     AnnSearchRequest,
@@ -201,11 +202,11 @@ def <span class="hljs-title">dense_search</span>(<span class="hljs-params">col, 
 <button class="copy-code-btn"></button></code></pre>
 <p>让我们用定义的函数运行三种不同的搜索：</p>
 <pre><code translate="no" class="language-python">dense_results = <span class="hljs-title function_">dense_search</span>(col, query_embeddings[<span class="hljs-string">&quot;dense&quot;</span>][<span class="hljs-number">0</span>])
-sparse_results = <span class="hljs-title function_">sparse_search</span>(col, query_embeddings[<span class="hljs-string">&quot;sparse&quot;</span>][<span class="hljs-number">0</span>])
+sparse_results = <span class="hljs-title function_">sparse_search</span>(col, query_embeddings[<span class="hljs-string">&quot;sparse&quot;</span>].<span class="hljs-title function_">_getrow</span>(<span class="hljs-number">0</span>))
 hybrid_results = <span class="hljs-title function_">hybrid_search</span>(
     col,
     query_embeddings[<span class="hljs-string">&quot;dense&quot;</span>][<span class="hljs-number">0</span>],
-    query_embeddings[<span class="hljs-string">&quot;sparse&quot;</span>][<span class="hljs-number">0</span>],
+    query_embeddings[<span class="hljs-string">&quot;sparse&quot;</span>].<span class="hljs-title function_">_getrow</span>(<span class="hljs-number">0</span>),
     sparse_weight=<span class="hljs-number">0.7</span>,
     dense_weight=<span class="hljs-number">1.0</span>,
 )
@@ -283,7 +284,7 @@ formatted_results = doc_text_formatting(ef, query, hybrid_results)
 <p><strong>稀疏搜索结果：</strong></p>
 <p>什么是 Java<span style='color:red'> 编程？如何</span>学习 Java 编程语言？</p>
 <p><span style='color:red'> 开始学习</span>机器人技术的最佳方法是什么<span style='color:red'>？</span></p>
-<p>机器<span style='color:red'> 学习</span><span style='color:red'> 的</span>替代方法是什么<span style='color:red'> ？</span></p>
+<p>机器<span style='color:red'> 学习的</span>替代方法是什么<span style='color:red'> ？</span></p>
 <p><span style='color:red'>如何</span>使用 C 语言在 Linux 中创建新终端和新 shell<span style='color:red'> ？</span></p>
 <p><span style='color:red'>如何</span>使用 C 语言在新终端（Linux 终端）中创建新 shell<span style='color:red'>？</span></p>
 <p>在海得拉巴<span style='color:red'> 做</span>哪一行比较好<span style='color:red'>？</span></p>
@@ -302,7 +303,7 @@ formatted_results = doc_text_formatting(ef, query, hybrid_results)
 <p><span style='color:red'>如何</span>学习计算机安全<span style='color:red'>？</span></p>
 <p><span style='color:red'>如何</span>开始<span style='color:red'> 学习</span>信息安全<span style='color:red'>？</span></p>
 <p><span style='color:red'>如何</span>学习 java 等计算机语言<span style='color:red'>？</span></p>
-<p>机器<span style='color:red'> 学习</span><span style='color:red'> 的</span>替代方法是什么<span style='color:red'> ？</span></p>
+<p>机器<span style='color:red'> 学习的</span>替代方法是什么？</p>
 <p><span style='color:red'>如何</span>使用 C<span style='color:red'> 语言</span>在 Linux 中创建新的终端和新的 shell<span style='color:red'> ？</span></p>
 <p><span style='color:red'>如何</span>使用 C<span style='color:red'> 语言</span>在新终端（Linux 终端）中创建新 shell<span style='color:red'>？</span></p>
 <p>在海得拉巴<span style='color:red'> 做</span>哪一行比较好<span style='color:red'>？</span></p>

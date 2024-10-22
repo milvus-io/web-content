@@ -40,9 +40,13 @@ title: 임베딩 개요
 <tr><td><a href="https://milvus.io/api-reference/pymilvus/v2.4.x/EmbeddingModels/VoyageEmbeddingFunction/VoyageEmbeddingFunction.md">voyageai</a></td><td>Dense</td><td>API</td></tr>
 <tr><td><a href="https://milvus.io/api-reference/pymilvus/v2.4.x/EmbeddingModels/JinaEmbeddingFunction/JinaEmbeddingFunction.md">jina</a></td><td>Dense</td><td>API</td></tr>
 <tr><td><a href="https://milvus.io/api-reference/pymilvus/v2.4.x/EmbeddingModels/CohereEmbeddingFunction/CohereEmbeddingFunction.md">cohere</a></td><td>Dense</td><td>API</td></tr>
+<tr><td><a href="https://milvus.io/api-reference/pymilvus/v2.4.x/EmbeddingModels/InstructorEmbeddingFunction/InstructorEmbeddingFunction.md">Instructor</a></td><td>Dense</td><td>오픈 소스</td></tr>
+<tr><td><a href="https://milvus.io/api-reference/pymilvus/v2.4.x/EmbeddingModels/MistralAIEmbeddingFunction/MistralAIEmbeddingFunction.md">미스트랄 AI</a></td><td>Dense</td><td>API</td></tr>
+<tr><td><a href="https://milvus.io/api-reference/pymilvus/v2.4.x/EmbeddingModels/NomicEmbeddingFunction/NomicEmbeddingFunction.md">Nomic</a></td><td>Dense</td><td>API</td></tr>
+<tr><td><a href="https://milvus.io/api-reference/pymilvus/v2.4.x/EmbeddingModels/MGTEEmbeddingFunction/MGTEEmbeddingFunction.md">mGTE</a></td><td>하이브리드</td><td>오픈 소스</td></tr>
 </tbody>
 </table>
-<h2 id="Example-1-Use-default-embedding-function-to-generate-dense-vectors" class="common-anchor-header">예제 1: 기본 임베딩 함수를 사용하여 밀도 벡터 생성하기<button data-href="#Example-1-Use-default-embedding-function-to-generate-dense-vectors" class="anchor-icon" translate="no">
+<h2 id="Example-1-Use-default-embedding-function-to-generate-dense-vectors" class="common-anchor-header">예제 1: 기본 임베딩 함수를 사용하여 고밀도 벡터 생성하기<button data-href="#Example-1-Use-default-embedding-function-to-generate-dense-vectors" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

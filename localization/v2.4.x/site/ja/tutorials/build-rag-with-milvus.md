@@ -1,9 +1,8 @@
 ---
 id: build-rag-with-milvus.md
-summary: Milvusでボロ布を作る
-title: MilvusでRAGを作る
+summary: milvusでボロ布を作る
+title: MilvusでRAGを構築する
 ---
-
 <h1 id="Build-RAG-with-Milvus" class="common-anchor-header">MilvusでRAGを構築する<button data-href="#Build-RAG-with-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -19,9 +18,10 @@ title: MilvusでRAGを作る
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/build_RAG_with_milvus.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a></p>
+    </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/build_RAG_with_milvus.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
+<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/build_RAG_with_milvus.ipynb" target="_blank"><img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/></a></p>
 <p><img translate="no" src="https://raw.githubusercontent.com/milvus-io/bootcamp/master/bootcamp/tutorials/quickstart/apps/rag_search_with_milvus/pics/rag_demo.png"/></p>
-<p>このチュートリアルでは、Milvusを使ってRAG（Retrieval-Augmented Generation）パイプラインを構築する方法を紹介します。</p>
+<p>このチュートリアルでは、Milvusを使ってRAG(Retrieval-Augmented Generation)パイプラインを構築する方法を紹介します。</p>
 <p>RAGシステムは検索システムと生成モデルを組み合わせ、与えられたプロンプトに基づいて新しいテキストを生成します。このシステムでは、まずMilvusを使ってコーパスから関連文書を検索し、次に生成モデルを使って検索された文書に基づいて新しいテキストを生成する。</p>
 <h2 id="Preparation" class="common-anchor-header">準備<button data-href="#Preparation" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -46,9 +46,8 @@ title: MilvusでRAGを作る
 <p>この例では、LLMとしてOpenAIを使います。環境変数として、<a href="https://platform.openai.com/docs/quickstart">api key</a> <code translate="no">OPENAI_API_KEY</code> を用意してください。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> os
 
-os.<span class="hljs-property">environ</span>[<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</span>] = <span class="hljs-string">&quot;sk-****\*\*\*****&quot;</span>
+os.<span class="hljs-property">environ</span>[<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</span>] = <span class="hljs-string">&quot;sk-***********&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-
 <h3 id="Prepare-the-data" class="common-anchor-header">データの準備</h3><p><a href="https://github.com/milvus-io/milvus-docs/releases/download/v2.4.6-preview/milvus_docs_2.4.x_en.zip">Milvusドキュメント2.4.xの</a>FAQページをRAGのプライベートナレッジとして使用します。</p>
 <p>zipファイルをダウンロードし、<code translate="no">milvus_docs</code> フォルダにドキュメントを展開する。</p>
 <pre><code translate="no" class="language-bash">$ wget https://github.com/milvus-io/milvus-docs/releases/download/v2<span class="hljs-number">.4</span><span class="hljs-number">.6</span>-preview/milvus_docs_2<span class="hljs-number">.4</span>.x_en.<span class="hljs-built_in">zip</span>
@@ -59,20 +58,17 @@ $ unzip -q milvus_docs_2<span class="hljs-number">.4</span>.x_en.<span class="hl
 
 text_lines = []
 
-<span class="hljs-keyword">for</span> file_path <span class="hljs-keyword">in</span> glob(<span class="hljs-string">&quot;milvus_docs/en/faq/\*.md&quot;</span>, recursive=<span class="hljs-literal">True</span>):
-<span class="hljs-keyword">with</span> <span class="hljs-built_in">open</span>(file_path, <span class="hljs-string">&quot;r&quot;</span>) <span class="hljs-keyword">as</span> file:
-file_text = file.read()
+<span class="hljs-keyword">for</span> file_path <span class="hljs-keyword">in</span> glob(<span class="hljs-string">&quot;milvus_docs/en/faq/*.md&quot;</span>, recursive=<span class="hljs-literal">True</span>):
+    <span class="hljs-keyword">with</span> <span class="hljs-built_in">open</span>(file_path, <span class="hljs-string">&quot;r&quot;</span>) <span class="hljs-keyword">as</span> file:
+        file_text = file.read()
 
     text_lines += file_text.split(<span class="hljs-string">&quot;# &quot;</span>)
-
 <button class="copy-code-btn"></button></code></pre>
-
 <h3 id="Prepare-the-Embedding-Model" class="common-anchor-header">埋め込みモデルの準備</h3><p>埋め込みモデルを準備するために、OpenAIクライアントを初期化します。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> openai <span class="hljs-keyword">import</span> <span class="hljs-title class_">OpenAI</span>
 
-openai*client = <span class="hljs-title class*">OpenAI</span>()
+openai_client = <span class="hljs-title class_">OpenAI</span>()
 <button class="copy-code-btn"></button></code></pre>
-
 <p>OpenAIクライアントを使って、テキスト埋め込みを生成する関数を定義します。例として、<a href="https://platform.openai.com/docs/guides/embeddings">text-embedding-3-small</a>モデルを使います。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">emb_text</span>(<span class="hljs-params">text</span>):
     <span class="hljs-keyword">return</span> (
@@ -107,17 +103,16 @@ embedding_dim = <span class="hljs-built_in">len</span>(test_embedding)
       </svg>
     </button></h2><h3 id="Create-the-Collection" class="common-anchor-header">コレクションの作成</h3><pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> <span class="hljs-title class_">MilvusClient</span>
 
-milvus*client = <span class="hljs-title class*">MilvusClient</span>(uri=<span class="hljs-string">&quot;./milvus_demo.db&quot;</span>)
+milvus_client = <span class="hljs-title class_">MilvusClient</span>(uri=<span class="hljs-string">&quot;./milvus_demo.db&quot;</span>)
 
 collection_name = <span class="hljs-string">&quot;my_rag_collection&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-
 <div class="alert note">
 <p><code translate="no">MilvusClient</code> の引数については、以下の通りです：</p>
 <ul>
-<li><code translate="no">uri</code> をローカルファイル、例えば<code translate="no">./milvus.db</code> とするのが最も便利です。</li>
-<li>データ規模が大きい場合は、<a href="https://milvus.io/docs/quickstart.md">dockerやkubernetes</a>上に、よりパフォーマンスの高いMilvusサーバを構築することができます。このセットアップでは、<code translate="no">http://localhost:19530</code> などのサーバ uri を<code translate="no">uri</code> として使用してください。</li>
-<li>Milvusのフルマネージドクラウドサービスである<a href="https://zilliz.com/cloud">Zilliz Cloudを</a>使用する場合は、Zilliz Cloudの<a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">Public EndpointとApi keyに</a>対応する<code translate="no">uri</code> と<code translate="no">token</code> を調整してください。</li>
+<li><code translate="no">./milvus.db</code> のように、<code translate="no">uri</code> をローカルファイルとして設定する方法が、<a href="https://milvus.io/docs/milvus_lite.md">Milvus Liteを</a>自動的に利用して、すべてのデータをこのファイルに格納することができるので、最も便利な方法です。</li>
+<li>データ規模が大きい場合は、<a href="https://milvus.io/docs/quickstart.md">dockerやkubernetes</a>上に、よりパフォーマンスの高いMilvusサーバを構築することができます。このセットアップでは、サーバの uri、例えば<code translate="no">http://localhost:19530</code> を<code translate="no">uri</code> として使用してください。</li>
+<li>Milvusのフルマネージドクラウドサービスである<a href="https://zilliz.com/cloud">Zilliz Cloudを</a>利用する場合は、Zilliz Cloudの<a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">Public EndpointとApi keyに</a>対応する<code translate="no">uri</code> と<code translate="no">token</code> を調整してください。</li>
 </ul>
 </div>
 <p>コレクションが既に存在するか確認し、存在する場合は削除します。</p>
@@ -133,18 +128,17 @@ collection_name = <span class="hljs-string">&quot;my_rag_collection&quot;</span>
     consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  <span class="hljs-comment"># Strong consistency level</span>
 )
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Insert-data" class="common-anchor-header">データの挿入</h3><p>テキスト行を繰り返し、埋め込みを作成し、Milvusにデータを挿入します。</p>
-<p>ここに新しいフィールド<code translate="no">text</code> 、コレクションスキーマで定義されていないフィールドがあります。これは、予約されたJSONダイナミックフィールドに自動的に追加され、高レベルでは通常のフィールドとして扱うことができます。</p>
+<h3 id="Insert-data" class="common-anchor-header">データの挿入</h3><p>テキスト行を繰り返し、エンベッディングを作成し、milvusにデータを挿入します。</p>
+<p>ここに新しいフィールド<code translate="no">text</code> 、コレクションスキーマで定義されていないフィールドです。これは予約されたJSONダイナミックフィールドに自動的に追加され、高レベルでは通常のフィールドとして扱われます。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> tqdm <span class="hljs-keyword">import</span> tqdm
 
 data = []
 
 <span class="hljs-keyword">for</span> i, line <span class="hljs-keyword">in</span> <span class="hljs-built_in">enumerate</span>(tqdm(text_lines, desc=<span class="hljs-string">&quot;Creating embeddings&quot;</span>)):
-data.append({<span class="hljs-string">&quot;id&quot;</span>: i, <span class="hljs-string">&quot;vector&quot;</span>: emb_text(line), <span class="hljs-string">&quot;text&quot;</span>: line})
+    data.append({<span class="hljs-string">&quot;id&quot;</span>: i, <span class="hljs-string">&quot;vector&quot;</span>: emb_text(line), <span class="hljs-string">&quot;text&quot;</span>: line})
 
 milvus_client.insert(collection_name=collection_name, data=data)
 <button class="copy-code-btn"></button></code></pre>
-
 <pre><code translate="no">Creating embeddings: 100%|██████████| 72/72 [00:27&lt;00:00,  2.67it/s]
 
 
@@ -188,11 +182,10 @@ milvus_client.insert(collection_name=collection_name, data=data)
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> json
 
 retrieved_lines_with_distances = [
-(res[<span class="hljs-string">&quot;entity&quot;</span>][<span class="hljs-string">&quot;text&quot;</span>], res[<span class="hljs-string">&quot;distance&quot;</span>]) <span class="hljs-keyword">for</span> res <span class="hljs-keyword">in</span> search_res[<span class="hljs-number">0</span>]
+    (res[<span class="hljs-string">&quot;entity&quot;</span>][<span class="hljs-string">&quot;text&quot;</span>], res[<span class="hljs-string">&quot;distance&quot;</span>]) <span class="hljs-keyword">for</span> res <span class="hljs-keyword">in</span> search_res[<span class="hljs-number">0</span>]
 ]
 <span class="hljs-built_in">print</span>(json.dumps(retrieved_lines_with_distances, indent=<span class="hljs-number">4</span>))
 <button class="copy-code-btn"></button></code></pre>
-
 <pre><code translate="no">[
     [
         &quot; Where does Milvus store data?\n\nMilvus deals with two types of data, inserted data and metadata. \n\nInserted data, including vector data, scalar data, and collection-specific schema, are stored in persistent storage as incremental log. Milvus supports multiple object storage backends, including [MinIO](https://min.io/), [AWS S3](https://aws.amazon.com/s3/?nc1=h_ls), [Google Cloud Storage](https://cloud.google.com/storage?hl=en#object-storage-for-companies-of-all-sizes) (GCS), [Azure Blob Storage](https://azure.microsoft.com/en-us/products/storage/blobs), [Alibaba Cloud OSS](https://www.alibabacloud.com/product/object-storage-service), and [Tencent Cloud Object Storage](https://www.tencentcloud.com/products/cos) (COS).\n\nMetadata are generated within Milvus. Each Milvus module has its own metadata that are stored in etcd.\n\n###&quot;,
@@ -213,7 +206,7 @@ retrieved_lines_with_distances = [
     [<span class="hljs-meta">line_with_distance[0</span>] <span class="hljs-keyword">for</span> line_with_distance <span class="hljs-keyword">in</span> retrieved_lines_with_distances]
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>ラネージ・モデルのシステム・プロンプトとユーザー・プロンプトを定義する。このプロンプトはMilvusから検索されたドキュメントで組み立てられる。</p>
+<p>ラネージ・モデルのシステム・プロンプトとユーザー・プロンプトを定義する。このプロンプトはmilvusから検索されたドキュメントで組み立てられる。</p>
 <pre><code translate="no" class="language-python">SYSTEM_PROMPT = <span class="hljs-string">&quot;&quot;&quot;
 Human: You are an AI assistant. You are able to find answers to the questions from the contextual passage snippets provided.
 &quot;&quot;&quot;</span>

@@ -2,7 +2,7 @@
 id: resource_group.md
 related_key: Manage Resource Groups
 summary: Saiba como gerir grupos de recursos.
-title: Gerir grupos de recursos
+title: Gerenciar grupos de recursos
 ---
 <h1 id="Manage-Resource-Groups" class="common-anchor-header">Gerenciar grupos de recursos<button data-href="#Manage-Resource-Groups" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -90,7 +90,7 @@ title: Gerir grupos de recursos
         ></path>
       </svg>
     </button></h2><div class="alert note">
-<p>Todos os exemplos de código nesta página estão no PyMilvus 2.4.5. Atualize sua instalação do PyMilvus antes de executá-los.</p>
+<p>Todos os exemplos de código nesta página estão no PyMilvus 2.4.8. Atualize sua instalação do PyMilvus antes de executá-los.</p>
 </div>
 <ol>
 <li><p>Criar um grupo de recursos.</p>

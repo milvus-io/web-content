@@ -59,8 +59,8 @@ title: 도커 컴포즈를 사용하여 GPU 지원으로 Milvus 실행하기
         ></path>
       </svg>
     </button></h2><p>Docker Compose를 사용하여 GPU를 지원하는 Milvus를 설치하려면 다음 단계를 따르세요.</p>
-<h3 id="1-Download-and-configure-the-YAML-file" class="common-anchor-header">1. YAML 파일 다운로드 및 구성</h3><p>다운로드 <a href="https://github.com/milvus-io/milvus/releases/download/v2.4.9/milvus-standalone-docker-compose-gpu.yml"><code translate="no">milvus-standalone-docker-compose-gpu.yml</code></a> 를 클릭하고 수동으로 또는 다음 명령을 사용하여 docker-compose.yml로 저장합니다.</p>
-<pre><code translate="no" class="language-shell">$ wget https://github.com/milvus-io/milvus/releases/download/v2.4.9/milvus-standalone-docker-compose-gpu.yml -O docker-compose.yml
+<h3 id="1-Download-and-configure-the-YAML-file" class="common-anchor-header">1. YAML 파일 다운로드 및 구성</h3><p>다운로드 <a href="https://github.com/milvus-io/milvus/releases/download/v2.4.13-hotfix/milvus-standalone-docker-compose-gpu.yml"><code translate="no">milvus-standalone-docker-compose-gpu.yml</code></a> 를 클릭하고 수동으로 또는 다음 명령을 사용하여 docker-compose.yml로 저장합니다.</p>
+<pre><code translate="no" class="language-shell">$ wget https://github.com/milvus-io/milvus/releases/download/v2.4.13-hotfix/milvus-standalone-docker-compose-gpu.yml -O docker-compose.yml
 <button class="copy-code-btn"></button></code></pre>
 <p>YAML 파일에서 독립형 서비스의 환경 변수를 다음과 같이 몇 가지 변경해야 합니다:</p>
 <ul>
@@ -104,7 +104,7 @@ Creating milvus-standalone ... <span class="hljs-keyword">done</span>
 </div>
 <p>Milvus를 시작한 후</p>
 <ul>
-<li><strong>밀버스 독립형</strong>, <strong>밀버스 미니오</strong>, <strong>밀버스-etcd라는</strong> 이름의 컨테이너가 가동됩니다.<ul>
+<li>밀버스 <strong>독립형</strong>, <strong>밀버스 미니오</strong>, <strong>밀버스-etcd라는</strong> 이름의 컨테이너가 가동됩니다.<ul>
 <li><strong>milvus-etcd</strong> 컨테이너는 호스트에 포트를 노출하지 않으며 데이터를 현재 폴더의 <strong>볼륨/etcd에</strong> 매핑합니다.</li>
 <li><strong>milvus-minio</strong> 컨테이너는 기본 인증 자격 증명을 사용하여 포트 <strong>9090</strong> 및 <strong>9091을</strong> 로컬로 제공하고 해당 데이터를 현재 폴더의 <strong>볼륨/minio에</strong> 매핑합니다.</li>
 <li><strong>밀버스-독립형</strong> 컨테이너는 기본 설정으로 포트 <strong>19530을</strong> 로컬로 서비스하고 데이터를 현재 폴더의 <strong>볼륨/milvus에</strong> 매핑합니다.</li>
@@ -214,7 +214,7 @@ docker start &lt;milvus_container_id&gt;
 <li><a href="/docs/ko/gcp.md">구글 클라우드</a></li>
 <li><a href="/docs/ko/azure.md">마이크로소프트 애저</a></li>
 </ul></li>
-<li><p>Milvus 데이터 백업을 위한 오픈 소스 도구인 <a href="/docs/ko/milvus_backup_overview.md">Milvus Backup을</a> 살펴보세요.</p></li>
+<li><p>Milvus 데이터 백업을 위한 오픈 소스 도구인 Milvus <a href="/docs/ko/milvus_backup_overview.md">Backup을</a> 살펴보세요.</p></li>
 <li><p>Milvus 디버깅 및 동적 구성 업데이트를 위한 오픈 소스 도구인 <a href="/docs/ko/birdwatcher_overview.md">Birdwatcher를</a> 살펴보세요.</p></li>
 <li><p>직관적인 Milvus 관리를 위한 오픈 소스 GUI 도구인 <a href="https://milvus.io/docs/attu.md">Attu를</a> 살펴보세요.</p></li>
 <li><p><a href="/docs/ko/monitor.md">Prometheus로 Milvus 모니터링</a>.</p></li>

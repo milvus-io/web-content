@@ -1,6 +1,6 @@
 ---
 id: clustering-compaction.md
-title: Regroupement Compaction
+title: Compaction de la mise en grappe
 related_key: 'clustering, compaction'
 summary: >-
   Le compactage en grappes est conçu pour améliorer les performances de
@@ -50,7 +50,7 @@ summary: >-
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/clustering-compaction-2.png" alt="With Clustering Compaction" class="doc-image" id="with-clustering-compaction" />
    </span> <span class="img-wrapper"> <span>Avec le compactage de clustering</span> </span></p>
-<p>En utilisant <strong>PartitionStats</strong> comme référence, Milvus peut élaguer les données non pertinentes lors de la réception d'une requête de recherche qui comporte une valeur de clé de clustering et limiter l'étendue de la recherche aux segments correspondant à la valeur, ce qui améliore les performances de la recherche. Pour plus de détails sur l'amélioration des performances, reportez-vous à la section Tests de référence.</p>
+<p>En utilisant <strong>PartitionStats</strong> comme référence, Milvus peut élaguer les données non pertinentes lors de la réception d'une requête de recherche qui comporte une valeur de clé de clustering et limiter la portée de la recherche aux segments correspondant à la valeur, ce qui améliore les performances de la recherche. Pour plus de détails sur l'amélioration des performances, reportez-vous à la section Tests de référence.</p>
 <h2 id="Use-Clustering-Compaction" class="common-anchor-header">Utiliser le compactage de clustering<button data-href="#Use-Clustering-Compaction" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -99,8 +99,8 @@ common:
 <tr><td><code translate="no">enable</code></td><td>Spécifie s'il faut activer le compactage de clustering.<br>Définissez cette valeur sur <code translate="no">true</code> si vous devez activer cette fonction pour chaque collection ayant une clé de clustering.</td><td><code translate="no">false</code></td></tr>
 <tr><td><code translate="no">autoEnable</code></td><td>Spécifie s'il faut activer le compactage déclenché automatiquement.<br>La valeur <code translate="no">true</code> indique que Milvus compacte les collections ayant une clé de clustering aux intervalles spécifiés.</td><td><code translate="no">false</code></td></tr>
 <tr><td><code translate="no">triggerInterval</code></td><td>Spécifie l'intervalle en millisecondes auquel Milvus démarre le compactage en grappes.<br>Ce paramètre n'est valide que lorsque <code translate="no">autoEnable</code> est défini sur <code translate="no">true</code>.</td><td>-</td></tr>
-<tr><td><code translate="no">minInterval</code></td><td>Spécifie l'intervalle minimum en millisecondes.<br>Ce paramètre n'est valide que lorsque <code translate="no">autoEnable</code> est défini sur <code translate="no">true</code>.<br>La définition d'un nombre entier supérieur à triggerInterval permet d'éviter des compactages répétés sur une courte période.</td><td>-</td></tr>
-<tr><td><code translate="no">maxInterval</code></td><td>Spécifie l'intervalle maximal en millisecondes.<br>Ce paramètre n'est valide que lorsque <code translate="no">autoEnable</code> est défini sur <code translate="no">true</code>.<br>Lorsque Milvus détecte qu'une collection n'a pas été compactée par clustering pendant une durée supérieure à cette valeur, il force un compactage par clustering.</td><td>-</td></tr>
+<tr><td><code translate="no">minInterval</code></td><td>Spécifie l'intervalle minimum en secondes.<br>Ce paramètre n'est valide que lorsque <code translate="no">autoEnable</code> est défini sur <code translate="no">true</code>.<br>La définition d'un nombre entier supérieur à triggerInterval permet d'éviter des compactages répétés sur une courte période.</td><td>-</td></tr>
+<tr><td><code translate="no">maxInterval</code></td><td>Spécifie l'intervalle maximal en secondes.<br>Ce paramètre n'est valide que lorsque <code translate="no">autoEnable</code> est défini sur <code translate="no">true</code>.<br>Lorsque Milvus détecte qu'une collection n'a pas été compactée par clustering pendant une durée supérieure à cette valeur, il force un compactage par clustering.</td><td>-</td></tr>
 <tr><td><code translate="no">newDataSizeThreshold</code></td><td>Spécifie le seuil supérieur de déclenchement du compactage en grappes.<br>Ce paramètre n'est valide que si <code translate="no">autoEnable</code> est défini sur <code translate="no">true</code>.<br>Lorsque Milvus détecte que le volume de données d'une collection dépasse cette valeur, il lance un processus de compactage en grappes.</td><td>-</td></tr>
 <tr><td><code translate="no">timeout</code></td><td>Spécifie le délai d'attente pour un compactage en grappe.<br>Un compactage en grappe échoue si sa durée d'exécution dépasse cette valeur.</td><td>-</td></tr>
 </tbody>
@@ -130,7 +130,7 @@ common:
 <li><p><code translate="no">common</code></p>
 <table>
 <thead>
-<tr><th>Élément de configuration</th><th>Description de l'élément de configuration</th><th>Valeur par défaut</th></tr>
+<tr><th>Configuration Elément</th><th>Description de l'élément de configuration</th><th>Valeur par défaut</th></tr>
 </thead>
 <tbody>
 <tr><td><code translate="no">usePartitionKeyAsClusteringKey</code></td><td>Spécifie s'il faut utiliser la clé de partition dans les collections comme clé de regroupement.<br>La valeur <code translate="no">true</code> indique que la clé de partition est utilisée comme clé de regroupement.<br>Vous pouvez toujours remplacer ce paramètre dans une collection en définissant explicitement une clé de regroupement.</td><td><code translate="no">false</code></td></tr>
@@ -139,22 +139,7 @@ common:
 </li>
 </ul>
 <p>Pour appliquer les modifications ci-dessus à votre cluster Milvus, veuillez suivre les étapes des sections <a href="/docs/fr/configure-helm.md">Configurer Milvus avec Helm</a> et <a href="/docs/fr/configure_operator.md">Configurer Milvus avec Milvus Operators</a>.</p>
-<h2 id="Collection-Configuration" class="common-anchor-header">Configuration de la collecte<button data-href="#Collection-Configuration" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h2><p>Pour compacter le clustering dans une collection spécifique, vous devez sélectionner un champ scalaire de la collection comme clé de clustering.</p>
+<h3 id="Collection-Configuration" class="common-anchor-header">Configuration de la collecte</h3><p>Pour compacter le clustering dans une collection spécifique, vous devez sélectionner un champ scalaire de la collection comme clé de clustering.</p>
 <pre><code translate="no" class="language-python">default_fields = [
     FieldSchema(name=<span class="hljs-string">&quot;id&quot;</span>, dtype=DataType.INT64, is_primary=<span class="hljs-literal">True</span>),
     FieldSchema(name=<span class="hljs-string">&quot;key&quot;</span>, dtype=DataType.INT64, is_clustering_key=<span class="hljs-literal">True</span>),

@@ -1,9 +1,9 @@
 ---
 id: integrate_with_vanna.md
 summary: 本指南演示如何使用 Vanna 根据存储在数据库中的数据生成并执行 SQL 查询。
-title: 与 Vanna 和 Milvus 一起编写 SQL
+title: 用 Vanna 和 Milvus 编写 SQL
 ---
-<h1 id="Write-SQL-with-Vanna-and-Milvus" class="common-anchor-header">使用 Vanna 和 Milvus 编写 SQL<button data-href="#Write-SQL-with-Vanna-and-Milvus" class="anchor-icon" translate="no">
+<h1 id="Write-SQL-with-Vanna-and-Milvus" class="common-anchor-header">用 Vanna 和 Milvus 编写 SQL<button data-href="#Write-SQL-with-Vanna-and-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -18,8 +18,10 @@ title: 与 Vanna 和 Milvus 一起编写 SQL
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p><a href="https://vanna.ai/">Vanna</a>是一个开源 Python RAG（检索增强生成）框架，用于生成 SQL 和相关功能。<a href="https://milvus.io/">Milvus</a>是世界上最先进的开源向量数据库，用于支持嵌入式相似性搜索和人工智能应用。</p>
-<p>Vanna 的工作分为两个简单的步骤--在数据上训练一个 RAG "模型"，然后提出问题，这些问题将返回 SQL 查询，这些查询可以设置为在数据库上运行。本指南演示了如何使用 Vanna 根据存储在数据库中的数据生成并执行 SQL 查询。</p>
+    </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/vanna_write_sql.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
+<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/vanna_write_sql.ipynb" target="_blank"><img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/></a></p>
+<p><a href="https://vanna.ai/">Vanna</a>是一个开源 Python RAG（检索增强生成）框架，用于生成 SQL 和相关功能。<a href="https://milvus.io/">Milvus</a>是世界上最先进的开源向量数据库，用于支持 Embeddings 相似性搜索和人工智能应用。</p>
+<p>Vanna 的工作分为两个简单的步骤--在你的数据上训练一个 RAG "模型"，然后提出问题，这些问题将返回 SQL 查询，这些查询可以设置为在你的数据库上运行。本指南演示了如何使用 Vanna 根据存储在数据库中的数据生成并执行 SQL 查询。</p>
 <h2 id="Prerequisites" class="common-anchor-header">前提条件<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -61,7 +63,7 @@ os.<span class="hljs-property">environ</span>[<span class="hljs-string">&quot;OP
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>首先，我们需要继承 Vanna 的<code translate="no">Milvus_VectorStore</code> 和<code translate="no">OpenAI_Chat</code> 类，并定义一个结合了这两个类功能的新类<code translate="no">VannaMilvus</code> 。</p>
+    </button></h2><p>首先，我们需要继承 Vanna 的<code translate="no">Milvus_VectorStore</code> 和<code translate="no">OpenAI_Chat</code> 类，并定义一个新类<code translate="no">VannaMilvus</code> ，将两者的功能结合起来。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, model
 <span class="hljs-keyword">from</span> vanna.milvus <span class="hljs-keyword">import</span> Milvus_VectorStore
 <span class="hljs-keyword">from</span> vanna.openai <span class="hljs-keyword">import</span> OpenAI_Chat
@@ -72,13 +74,13 @@ os.<span class="hljs-property">environ</span>[<span class="hljs-string">&quot;OP
         Milvus_VectorStore.__init__(<span class="hljs-variable language_">self</span>, config=config)
         OpenAI_Chat.__init__(<span class="hljs-variable language_">self</span>, config=config)
 <button class="copy-code-btn"></button></code></pre>
-<p>我们使用必要的配置参数初始化<code translate="no">VannaMilvus</code> 类。我们使用<code translate="no">milvus_client</code> 实例来存储嵌入式数据，并使用从<a href="https://milvus.io/docs/embeddings.md">milvus_model</a>初始化的<code translate="no">model.DefaultEmbeddingFunction()</code> 来生成嵌入式数据。</p>
+<p>我们使用必要的配置参数初始化<code translate="no">VannaMilvus</code> 类。我们使用<code translate="no">milvus_client</code> 实例来存储嵌入式数据，并使用从<a href="https://milvus.io/docs/embeddings.md">milvus_model</a>初始化的<code translate="no">model.DefaultEmbeddingFunction()</code> 来生成嵌入式数据。C</p>
 <div class="alert note">
 <p>至于<code translate="no">MilvusClient</code> 的参数：</p>
 <ul>
-<li>将<code translate="no">uri</code> 设置为本地文件（如<code translate="no">./milvus.db</code> ）是最方便的方法，因为它会自动利用<a href="https://milvus.io/docs/milvus_lite.md">Milvus Lite</a>将所有数据存储在该文件中。</li>
+<li>将<code translate="no">uri</code> 设置为本地文件，如<code translate="no">./milvus.db</code> ，是最方便的方法，因为它会自动利用<a href="https://milvus.io/docs/milvus_lite.md">Milvus Lite</a>将所有数据存储在此文件中。</li>
 <li>如果数据规模较大，可以在<a href="https://milvus.io/docs/quickstart.md">docker 或 kubernetes</a> 上设置性能更强的 Milvus 服务器。在此设置中，请使用服务器 uri，例如<code translate="no">http://localhost:19530</code> ，作为您的<code translate="no">uri</code> 。</li>
-<li>如果您想使用<a href="https://zilliz.com/cloud">Zilliz Cloud</a>（Milvus 的完全托管云服务），请调整<code translate="no">uri</code> 和<code translate="no">token</code> ，它们与 Zilliz Cloud 中的<a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">公共端点和 Api 密钥</a>相对应。</li>
+<li>如果你想使用<a href="https://zilliz.com/cloud">Zilliz Cloud</a>（Milvus 的全托管云服务），请调整<code translate="no">uri</code> 和<code translate="no">token</code> ，它们对应于 Zilliz Cloud 中的<a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">公共端点和 Api 密钥</a>。</li>
 </ul>
 </div>
 <pre><code translate="no" class="language-python">milvus_uri = <span class="hljs-string">&quot;./milvus_vanna.db&quot;</span>
@@ -355,7 +357,7 @@ WHERE Company = 'XYZ Inc'
   </tbody>
 </table>
 </div>
-<p>断开 SQLite 和 Milvus 的连接，并删除它们以释放资源。</p>
+<p>断开 SQLite 和 Milvus 的连接并将其删除，以释放资源。</p>
 <pre><code translate="no" class="language-python">sql_connect.<span class="hljs-built_in">close</span>()
 milvus_client.<span class="hljs-built_in">close</span>()
 

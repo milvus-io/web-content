@@ -1,6 +1,6 @@
 ---
 id: integrate_with_langchain.md
-summary: 本指南演示了如何使用 LangChain 和 Milvus 构建检索增强生成（RAG）系统。
+summary: 本指南演示了如何使用 LangChain 和 Milvus 构建检索-增强生成（RAG）系统。
 title: 使用 Milvus 和 LangChain 的检索增强生成（RAG）
 ---
 <h1 id="Retrieval-Augmented-Generation-RAG-with-Milvus-and-LangChain" class="common-anchor-header">使用 Milvus 和 LangChain 的检索增强生成（RAG）<button data-href="#Retrieval-Augmented-Generation-RAG-with-Milvus-and-LangChain" class="anchor-icon" translate="no">
@@ -18,10 +18,11 @@ title: 使用 Milvus 和 LangChain 的检索增强生成（RAG）
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/rag_with_milvus_and_langchain.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a></p>
+    </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/rag_with_milvus_and_langchain.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
+<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/rag_with_milvus_and_langchain.ipynb" target="_blank"><img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/></a></p>
 <p>本指南演示了如何使用 LangChain 和 Milvus 构建检索-增强生成（RAG）系统。</p>
 <p>RAG 系统结合了检索系统和生成模型，可根据给定提示生成新文本。该系统首先使用 Milvus 从语料库中检索相关文档，然后使用生成模型根据检索到的文档生成新文本。</p>
-<p><a href="https://www.langchain.com/">LangChain</a>是一个开发由大型语言模型（LLM）驱动的应用程序的框架。<a href="https://milvus.io/">Milvus</a>是世界上最先进的开源向量数据库，用于支持嵌入式相似性搜索和人工智能应用。</p>
+<p><a href="https://www.langchain.com/">LangChain</a>是一个开发由大型语言模型（LLMs）驱动的应用程序的框架。<a href="https://milvus.io/">Milvus</a>是世界上最先进的开源向量数据库，用于支持嵌入式相似性搜索和人工智能应用。</p>
 <h2 id="Prerequisites" class="common-anchor-header">前提条件<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -93,7 +94,7 @@ docs[<span class="hljs-number">1</span>]
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">Document(page_content='Fig. 1. Overview of a LLM-powered autonomous agent system.\nComponent One: Planning#\nA complicated task usually involves many steps. An agent needs to know what they are and plan ahead.\nTask Decomposition#\nChain of thought (CoT; Wei et al. 2022) has become a standard prompting technique for enhancing model performance on complex tasks. The model is instructed to “think step by step” to utilize more test-time computation to decompose hard tasks into smaller and simpler steps. CoT transforms big tasks into multiple manageable tasks and shed lights into an interpretation of the model’s thinking process.\nTree of Thoughts (Yao et al. 2023) extends CoT by exploring multiple reasoning possibilities at each step. It first decomposes the problem into multiple thought steps and generates multiple thoughts per step, creating a tree structure. The search process can be BFS (breadth-first search) or DFS (depth-first search) with each state evaluated by a classifier (via a prompt) or majority vote.\nTask decomposition can be done (1) by LLM with simple prompting like &quot;Steps for XYZ.\\n1.&quot;, &quot;What are the subgoals for achieving XYZ?&quot;, (2) by using task-specific instructions; e.g. &quot;Write a story outline.&quot; for writing a novel, or (3) with human inputs.\nAnother quite distinct approach, LLM+P (Liu et al. 2023), involves relying on an external classical planner to do long-horizon planning. This approach utilizes the Planning Domain Definition Language (PDDL) as an intermediate interface to describe the planning problem. In this process, LLM (1) translates the problem into “Problem PDDL”, then (2) requests a classical planner to generate a PDDL plan based on an existing “Domain PDDL”, and finally (3) translates the PDDL plan back into natural language. Essentially, the planning step is outsourced to an external tool, assuming the availability of domain-specific PDDL and a suitable planner which is common in certain robotic setups but not in many other domains.\nSelf-Reflection#', metadata={'source': 'https://lilianweng.github.io/posts/2023-06-23-agent/'})
 </code></pre>
-<p>正如我们所看到的，文档已经分割成块。数据内容是关于人工智能代理的。</p>
+<p>正如我们所看到的，文档已经分割成块。而数据内容是关于人工智能 Agents 的。</p>
 <h2 id="Build-RAG-chain-with-Milvus-Vector-Store" class="common-anchor-header">使用 Milvus 向量存储构建 RAG 链<button data-href="#Build-RAG-chain-with-Milvus-Vector-Store" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -127,9 +128,9 @@ vectorstore = Milvus.from_documents(  <span class="hljs-comment"># or Zilliz.fro
 <div class="alert note">
 <p>对于<code translate="no">connection_args</code> ：</p>
 <ul>
-<li>将<code translate="no">uri</code> 设置为本地文件，如<code translate="no">./milvus.db</code> ，是最方便的方法，因为它会自动利用<a href="https://milvus.io/docs/milvus_lite.md">Milvus Lite</a>将所有数据存储到该文件中。</li>
+<li>将<code translate="no">uri</code> 设置为本地文件，如<code translate="no">./milvus.db</code> ，是最方便的方法，因为它会自动利用<a href="https://milvus.io/docs/milvus_lite.md">Milvus Lite</a>将所有数据存储到这个文件中。</li>
 <li>如果数据规模较大，可以在<a href="https://milvus.io/docs/quickstart.md">docker 或 kubernetes</a> 上设置性能更强的 Milvus 服务器。在此设置中，请使用服务器 uri，例如<code translate="no">http://localhost:19530</code> ，作为您的<code translate="no">uri</code> 。</li>
-<li>如果你想使用<a href="https://zilliz.com/cloud">Zilliz Cloud</a>（Milvus 的全托管云服务），请将<code translate="no">Milvus.from_documents</code> 替换为<code translate="no">Zilliz.from_documents</code> ，并调整<code translate="no">uri</code> 和<code translate="no">token</code> ，它们与 Zilliz Cloud 中的<a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">公共端点和 Api 密钥</a>相对应。</li>
+<li>如果您想使用<a href="https://zilliz.com/cloud">Zilliz Cloud</a>（Milvus 的全托管云服务），请将<code translate="no">Milvus.from_documents</code> 替换为<code translate="no">Zilliz.from_documents</code> ，并调整<code translate="no">uri</code> 和<code translate="no">token</code> ，它们与 Zilliz Cloud 中的<a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">公共端点和 Api 密钥</a>相对应。</li>
 </ul>
 </div>
 <p>使用测试查询问题搜索 Milvus 向量存储中的文档。让我们看看排名前 1 的文档。</p>
@@ -192,7 +193,7 @@ res
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">&quot;Self-reflection of an AI agent involves the process of synthesizing memories into higher-level inferences over time to guide the agent's future behavior. It serves as a mechanism to create higher-level summaries of past events. One approach to self-reflection involves prompting the language model with the 100 most recent observations and asking it to generate the 3 most salient high-level questions based on those observations. This process helps the AI agent optimize believability in the current moment and over time.&quot;
 </code></pre>
-<p>恭喜您！您已经利用 Milvus 和 LangChain 构建了一个基本的 RAG 链。</p>
+<p>恭喜您！您已经构建了由 Milvus 和 LangChain 支持的基本 RAG 链。</p>
 <h2 id="Metadata-filtering" class="common-anchor-header">元数据过滤<button data-href="#Metadata-filtering" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

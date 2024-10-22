@@ -1,6 +1,6 @@
 ---
 id: clustering-compaction.md
-title: Compattazione del clustering
+title: Compattazione dei cluster
 related_key: 'clustering, compaction'
 summary: >-
   La compattazione del clustering è progettata per migliorare le prestazioni di
@@ -99,8 +99,8 @@ common:
 <tr><td><code translate="no">enable</code></td><td>Specifica se abilitare la compattazione del clustering.<br>Impostare questo valore su <code translate="no">true</code> se è necessario abilitare questa funzione per ogni raccolta che ha una chiave di clustering.</td><td><code translate="no">false</code></td></tr>
 <tr><td><code translate="no">autoEnable</code></td><td>Specifica se abilitare la compattazione automatica.<br>L'impostazione di <code translate="no">true</code> indica che Milvus compatta le raccolte che hanno una chiave di raggruppamento agli intervalli specificati.</td><td><code translate="no">false</code></td></tr>
 <tr><td><code translate="no">triggerInterval</code></td><td>Specifica l'intervallo in millisecondi in cui Milvus avvia la compattazione del cluster.<br>Questo parametro è valido solo quando <code translate="no">autoEnable</code> è impostato su <code translate="no">true</code>.</td><td>-</td></tr>
-<tr><td><code translate="no">minInterval</code></td><td>Specifica l'intervallo minimo in millisecondi.<br>Questo parametro è valido solo quando <code translate="no">autoEnable</code> è impostato su <code translate="no">true</code>.<br>L'impostazione di un numero intero superiore a triggerInterval consente di evitare compattazioni ripetute in un breve periodo.</td><td>-</td></tr>
-<tr><td><code translate="no">maxInterval</code></td><td>Specifica l'intervallo massimo in millisecondi.<br>Questo parametro è valido solo quando <code translate="no">autoEnable</code> è impostato su <code translate="no">true</code>.<br>Quando Milvus rileva che una raccolta non è stata compattata per un periodo superiore a questo valore, forza la compattazione del cluster.</td><td>-</td></tr>
+<tr><td><code translate="no">minInterval</code></td><td>Specifica l'intervallo minimo in secondi.<br>Questo parametro è valido solo quando <code translate="no">autoEnable</code> è impostato su <code translate="no">true</code>.<br>L'impostazione di un numero intero superiore a triggerInterval consente di evitare compattazioni ripetute in un breve periodo.</td><td>-</td></tr>
+<tr><td><code translate="no">maxInterval</code></td><td>Specifica l'intervallo massimo in secondi.<br>Questo parametro è valido solo quando <code translate="no">autoEnable</code> è impostato su <code translate="no">true</code>.<br>Quando Milvus rileva che una raccolta non è stata compattata con il cluster per un periodo superiore a questo valore, forza una compattazione con il cluster.</td><td>-</td></tr>
 <tr><td><code translate="no">newDataSizeThreshold</code></td><td>Specifica la soglia superiore per attivare la compattazione del clustering.<br>Questo parametro è valido solo quando <code translate="no">autoEnable</code> è impostato su <code translate="no">true</code>.<br>Quando Milvus rileva che il volume dei dati in una raccolta supera questo valore, avvia un processo di compattazione del clustering.</td><td>-</td></tr>
 <tr><td><code translate="no">timeout</code></td><td>Specifica la durata del timeout per la compattazione del clustering.<br>Una compattazione di clustering fallisce se il tempo di esecuzione supera questo valore.</td><td>-</td></tr>
 </tbody>
@@ -139,22 +139,7 @@ common:
 </li>
 </ul>
 <p>Per applicare le modifiche di cui sopra al vostro cluster Milvus, seguite i passaggi in <a href="/docs/it/configure-helm.md">Configurazione di Milvus con Helm</a> e <a href="/docs/it/configure_operator.md">Configurazione di Milvus con Milvus Operators</a>.</p>
-<h2 id="Collection-Configuration" class="common-anchor-header">Configurazione della raccolta<button data-href="#Collection-Configuration" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h2><p>Per la compattazione del cluster in una raccolta specifica, è necessario selezionare un campo scalare della raccolta come chiave di clustering.</p>
+<h3 id="Collection-Configuration" class="common-anchor-header">Configurazione della raccolta</h3><p>Per la compattazione del cluster in una raccolta specifica, è necessario selezionare un campo scalare della raccolta come chiave di clustering.</p>
 <pre><code translate="no" class="language-python">default_fields = [
     FieldSchema(name=<span class="hljs-string">&quot;id&quot;</span>, dtype=DataType.INT64, is_primary=<span class="hljs-literal">True</span>),
     FieldSchema(name=<span class="hljs-string">&quot;key&quot;</span>, dtype=DataType.INT64, is_clustering_key=<span class="hljs-literal">True</span>),

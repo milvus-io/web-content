@@ -255,7 +255,7 @@
         "children": []
       },
       {
-        "label": "유사성 메트릭",
+        "label": "유사성 지표",
         "id": "metric.md",
         "order": 5,
         "children": []

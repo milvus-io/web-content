@@ -1,6 +1,6 @@
 ---
 id: manage-collections.md
-title: Gestire le collezioni
+title: Gestire le raccolte
 ---
 <h1 id="Manage-Collections" class="common-anchor-header">Gestire le raccolte<button data-href="#Manage-Collections" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -220,7 +220,7 @@ $ curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable
 <p>L'insieme generato nel codice precedente contiene solo due campi: <code translate="no">id</code> (come chiave primaria) e <code translate="no">vector</code> (come campo vettore), con le impostazioni <code translate="no">auto_id</code> e <code translate="no">enable_dynamic_field</code> abilitate per default.</p>
 <ul>
 <li><p><code translate="no">auto_id</code></p>
-<p>L'attivazione di questa impostazione fa sì che la chiave primaria si incrementi automaticamente. Non è necessario fornire manualmente le chiavi primarie durante l'inserimento dei dati.</p></li>
+<p>L'abilitazione di questa impostazione fa sì che la chiave primaria si incrementi automaticamente. Non è necessario fornire manualmente le chiavi primarie durante l'inserimento dei dati.</p></li>
 <li><p><code translate="no">enable_dynamic_field</code></p>
 <p>Quando è abilitata, tutti i campi, esclusi <code translate="no">id</code> e <code translate="no">vector</code> nei dati da inserire, sono trattati come campi dinamici. Questi campi aggiuntivi vengono salvati come coppie chiave-valore all'interno di un campo speciale denominato <code translate="no">$meta</code>. Questa funzione consente di includere campi aggiuntivi durante l'inserimento dei dati.</p></li>
 </ul>
@@ -601,7 +601,7 @@ indexParams.add(indexParamForVectorField);
     </tr>
     <tr>
       <td><code translate="no">metricType</code></td>
-      <td>L'algoritmo utilizzato per misurare la somiglianza tra i vettori. I valori possibili sono <strong>IP</strong>, <strong>L2</strong>, <strong>COSINE</strong>, <strong>JACCARD</strong>, <strong>HAMMING</strong>. Questa opzione è disponibile solo quando il campo specificato è un campo vettoriale. Per ulteriori informazioni, consultare la sezione <a href="https://milvus.io/docs/index.md#Indexes-supported-in-Milvus">Indici supportati in Milvus</a>.</td>
+      <td>L'algoritmo utilizzato per misurare la somiglianza tra i vettori. I valori possibili sono <strong>IP</strong>, <strong>L2</strong>, <strong>COSINE</strong>, <strong>JACCARD</strong>, <strong>HAMMING</strong>. È disponibile solo quando il campo specificato è un campo vettoriale. Per ulteriori informazioni, consultare la sezione <a href="https://milvus.io/docs/index.md#Indexes-supported-in-Milvus">Indici supportati in Milvus</a>.</td>
     </tr>
     <tr>
       <td><code translate="no">params</code></td>
@@ -903,7 +903,7 @@ $ curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable
 </tr>
 <tr>
 <td><code translate="no">collectionSchema</code></td>
-<td>Lo schema di questa raccolta.<br/>Lasciando vuoto questo parametro si indica che la raccolta verrà creata con le impostazioni predefinite. Per impostare una raccolta con uno schema personalizzato, è necessario creare un oggetto <strong>CollectionSchema</strong> e fare riferimento ad esso.</td>
+<td>Lo schema di questa raccolta.<br/>Se lo si lascia vuoto, significa che la raccolta verrà creata con le impostazioni predefinite. Per impostare un insieme con uno schema personalizzato, è necessario creare un oggetto <strong>CollectionSchema</strong> e fare riferimento ad esso.</td>
 </tr>
 <tr>
 <td><code translate="no">indexParams</code></td>
@@ -983,7 +983,7 @@ $ curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable
 </tr>
 </tbody>
 </table></p>
-<p>L'insieme creato sopra non viene caricato automaticamente. È possibile creare un indice per l'insieme come segue. La creazione di un indice per l'insieme in modo separato non carica automaticamente l'insieme. Per maggiori informazioni, consultare la sezione <a href="/docs/it/manage-collections.md">Caricare e rilasciare la collezione</a>.</p>
+<p>L'insieme creato sopra non viene caricato automaticamente. È possibile creare un indice per l'insieme come segue. La creazione di un indice per l'insieme in modo separato non carica automaticamente l'insieme. Per ulteriori informazioni, consultare la sezione <a href="/docs/it/manage-collections.md">Caricare e rilasciare l'insieme</a>.</p>
 <p><div class="multipleCode">
 <a href="#python">Python </a><a href="#java">Java</a><a href="#javascript">Node.js</a><a href="#shell">cURL</a></div></p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># 3.6 Create index</span>
@@ -1483,7 +1483,7 @@ System.out.println(listCollectionsRes.getCollectionNames());
       </svg>
     </button></h2><p>Durante il processo di caricamento di una raccolta, Milvus carica in memoria il file di indice della raccolta. Al contrario, quando si rilascia una raccolta, Milvus scarica il file di indice dalla memoria. Prima di effettuare ricerche in una collezione, assicurarsi che la collezione sia caricata.</p>
 <h3 id="Load-a-collection" class="common-anchor-header">Caricare una collezione</h3><div class="language-python">
-<p>Per caricare un insieme, utilizzare il metodo <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/load_collection.md"><code translate="no">load_collection()</code></a> specificando il nome della collezione. Si può anche impostare <code translate="no">replica_number</code> per determinare il numero di repliche in memoria dei segmenti di dati da creare sui nodi di query quando la raccolta viene caricata.</p>
+<p>Per caricare un insieme, utilizzare il metodo <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/load_collection.md"><code translate="no">load_collection()</code></a> specificando il nome della collezione. Si può anche impostare <code translate="no">replica_number</code> per determinare quante repliche in memoria dei segmenti di dati creare sui nodi di query quando la raccolta viene caricata.</p>
 <ul>
 <li>Milvus Standalone: Il valore massimo consentito per <code translate="no">replica_number</code> è 1.</li>
 <li>Milvus Cluster: Il valore massimo non deve superare il valore <code translate="no">queryNode.replicas</code> impostato nelle configurazioni di Milvus. Per ulteriori dettagli, consultare la sezione <a href="https://milvus.io/docs/configure_querynode.md#Query-Node-related-Configurations">Configurazioni relative ai nodi di query</a>.</li>
@@ -1593,8 +1593,35 @@ $ curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable
 <span class="hljs-comment">#     }</span>
 <span class="hljs-comment"># }</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Release-a-collection" class="common-anchor-header">Rilasciare una raccolta</h3><div class="language-python">
-<p>Per rilasciare un insieme, utilizzare il metodo <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/release_collection.md"><code translate="no">release_collection()</code></a> specificando il nome dell'insieme.</p>
+<h3 id="Load-a-collection-partially-Public-Preview" class="common-anchor-header">Caricare parzialmente una raccolta (anteprima pubblica)</h3><div class="alert note">
+<p>Questa funzione è attualmente in anteprima pubblica. L'API e la funzionalità potrebbero cambiare in futuro.</p>
+</div>
+<p>Quando riceve la richiesta di caricamento, Milvus carica in memoria tutti gli indici dei campi vettoriali e tutti i dati dei campi scalari. Se alcuni campi non devono essere coinvolti nelle ricerche e nelle query, è possibile escluderli dal caricamento per ridurre l'utilizzo della memoria, migliorando le prestazioni della ricerca.</p>
+<div class="language-python">
+<pre><code translate="no" class="language-python"><span class="hljs-comment"># 7. Load the collection</span>
+client.load_collection(
+    collection_name=<span class="hljs-string">&quot;customized_setup_2&quot;</span>,
+    load_fields=[<span class="hljs-string">&quot;my_id&quot;</span>, <span class="hljs-string">&quot;my_vector&quot;</span>] <span class="hljs-comment"># Load only the specified fields</span>
+    skip_load_dynamic_field=<span class="hljs-literal">True</span> <span class="hljs-comment"># Skip loading the dynamic field</span>
+)
+
+res = client.get_load_state(
+    collection_name=<span class="hljs-string">&quot;customized_setup_2&quot;</span>
+)
+
+<span class="hljs-built_in">print</span>(res)
+
+<span class="hljs-comment"># Output</span>
+<span class="hljs-comment">#</span>
+<span class="hljs-comment"># {</span>
+<span class="hljs-comment">#     &quot;state&quot;: &quot;&lt;LoadState: Loaded&gt;&quot;</span>
+<span class="hljs-comment"># }</span>
+<button class="copy-code-btn"></button></code></pre>
+<p>Si noti che solo i campi elencati in <code translate="no">load_fields</code> possono essere utilizzati come condizioni di filtraggio e campi di output nelle ricerche e nelle query. È necessario includere sempre la chiave primaria nell'elenco. I nomi dei campi esclusi dal caricamento non saranno disponibili per il filtraggio o l'output.</p>
+<p>È possibile utilizzare <code translate="no">skip_load_dynamic_field=True</code> per saltare il caricamento del campo dinamico. Milvus tratta il campo dinamico come un singolo campo, quindi tutte le chiavi del campo dinamico saranno incluse o escluse insieme.</p>
+</div>
+<h3 id="Release-a-collection" class="common-anchor-header">Rilasciare una collezione</h3><div class="language-python">
+<p>Per rilasciare una collezione, utilizzare il metodo <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/release_collection.md"><code translate="no">release_collection()</code></a> specificando il nome della collezione.</p>
 </div>
 <div class="language-java">
 <p>Per rilasciare un insieme, utilizzare il metodo <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Management/releaseCollection.md"><code translate="no">releaseCollection()</code></a> specificando il nome dell'insieme.</p>
@@ -2323,7 +2350,7 @@ collection.set_properties(
     }
 )
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Set-MMAP" class="common-anchor-header">Imposta MMAP</h3><p>Configura la proprietà di mappatura della memoria (MMAP) per l'insieme, che determina se i dati sono mappati in memoria per migliorare le prestazioni delle query. Per ulteriori informazioni, consultare <a href="https://milvus.io/docs/mmap.md#Configure-memory-mapping">Configurazione della mappatura della memoria .</a></p>
+<h3 id="Set-MMAP" class="common-anchor-header">Imposta MMAP</h3><p>Configura la proprietà di mappatura della memoria (MMAP) per l'insieme, che determina se i dati sono mappati in memoria per migliorare le prestazioni delle query. Per ulteriori informazioni, consultare <a href="https://milvus.io/docs/mmap.md#Configure-memory-mapping">Configurazione della mappatura della memoria</a>.</p>
 <div class="alert note">
 <p>Prima di impostare la proprietà MMAP, rilasciare l'insieme. In caso contrario, si verificherà un errore.</p>
 </div>
@@ -2345,7 +2372,7 @@ collection.set_properties(
     }
 )
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Drop-a-Collection" class="common-anchor-header">Abbandono di una raccolta<button data-href="#Drop-a-Collection" class="anchor-icon" translate="no">
+<h2 id="Drop-a-Collection" class="common-anchor-header">Abbandonare una raccolta<button data-href="#Drop-a-Collection" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

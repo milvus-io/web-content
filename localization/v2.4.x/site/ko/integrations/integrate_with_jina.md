@@ -1,6 +1,6 @@
 ---
 id: integrate_with_jina.md
-summary: 이 가이드에서는 Jina 임베딩과 Milvus를 사용하여 유사도 검색 및 검색 작업을 수행하는 방법을 설명합니다.
+summary: 이 가이드에서는 Jina 임베딩과 Milvus를 사용하여 유사성 검색 및 검색 작업을 수행하는 방법을 설명합니다.
 title: Milvus와 Jina 통합
 ---
 <h1 id="Integrate-Milvus-with-Jina-AI" class="common-anchor-header">Milvus와 Jina AI 통합하기<button data-href="#Integrate-Milvus-with-Jina-AI" class="anchor-icon" translate="no">
@@ -18,7 +18,8 @@ title: Milvus와 Jina 통합
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/milvus_with_Jina.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a></p>
+    </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/milvus_with_Jina.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
+<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/milvus_with_Jina.ipynb" target="_blank"><img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/></a></p>
 <p>이 가이드에서는 Jina AI 임베딩과 Milvus를 사용하여 유사도 검색 및 검색 작업을 수행하는 방법을 설명합니다.</p>
 <h2 id="Who-is-Jina-AI" class="common-anchor-header">Jina AI란?<button data-href="#Who-is-Jina-AI" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -91,16 +92,21 @@ $ pip install <span class="hljs-string">&quot;pymilvus[model]&quot;</span>
         ></path>
       </svg>
     </button></h2><p>Jina AI의 핵심 임베딩 모델은 상세한 텍스트를 이해하는 데 탁월하여 시맨틱 검색, 콘텐츠 분류에 이상적이며 고급 감성 분석, 텍스트 요약 및 개인화된 추천 시스템을 지원합니다.</p>
-<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus.<span class="hljs-property">model</span>.<span class="hljs-property">dense</span> <span class="hljs-keyword">import</span> <span class="hljs-title class_">JinaEmbeddingFunction</span>
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus.model.dense <span class="hljs-keyword">import</span> JinaEmbeddingFunction
 
 jina_api_key = <span class="hljs-string">&quot;&lt;YOUR_JINA_API_KEY&gt;&quot;</span>
-ef = <span class="hljs-title class_">JinaEmbeddingFunction</span>(<span class="hljs-string">&quot;jina-embeddings-v2-base-en&quot;</span>, jina_api_key)
+ef = JinaEmbeddingFunction(
+    <span class="hljs-string">&quot;jina-embeddings-v3&quot;</span>, 
+    jina_api_key,
+    task=<span class="hljs-string">&quot;retrieval.passage&quot;</span>,
+    dimensions=<span class="hljs-number">1024</span>
+)
 
 query = <span class="hljs-string">&quot;what is information retrieval?&quot;</span>
 doc = <span class="hljs-string">&quot;Information retrieval is the process of finding relevant information from a large collection of data or documents.&quot;</span>
 
-qvecs = ef.<span class="hljs-title function_">encode_queries</span>([query])
-dvecs = ef.<span class="hljs-title function_">encode_documents</span>([doc])
+qvecs = ef.encode_queries([query])  <span class="hljs-comment"># This method uses `retrieval.query` as the task</span>
+dvecs = ef.encode_documents([doc])  <span class="hljs-comment"># This method uses `retrieval.passage` as the task</span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Bilingual-Embeddings" class="common-anchor-header">이중 언어 임베딩<button data-href="#Bilingual-Embeddings" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -202,8 +208,14 @@ dvecs = ef.encode_documents([doc])
 <span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 jina_api_key = <span class="hljs-string">&quot;&lt;YOUR_JINA_API_KEY&gt;&quot;</span>
-ef = JinaEmbeddingFunction(<span class="hljs-string">&quot;jina-embeddings-v2-base-en&quot;</span>, jina_api_key)
-DIMENSION = <span class="hljs-number">768</span>  <span class="hljs-comment"># size of jina-embeddings-v2-base-en</span>
+DIMENSION = <span class="hljs-number">1024</span>  <span class="hljs-comment"># `jina-embeddings-v3` supports flexible embedding sizes (32, 64, 128, 256, 512, 768, 1024), allowing for truncating embeddings to fit your application. </span>
+ef = JinaEmbeddingFunction(
+    <span class="hljs-string">&quot;jina-embeddings-v3&quot;</span>, 
+    jina_api_key,
+    task=<span class="hljs-string">&quot;retrieval.passage&quot;</span>,
+    dimensions=DIMENSION,
+)
+
 
 doc = [
     <span class="hljs-string">&quot;In 1950, Alan Turing published his seminal paper, &#x27;Computing Machinery and Intelligence,&#x27; proposing the Turing Test as a criterion of intelligence, a foundational concept in the philosophy and development of artificial intelligence.&quot;</span>,
@@ -212,7 +224,7 @@ doc = [
     <span class="hljs-string">&quot;The invention of the Logic Theorist by Allen Newell, Herbert A. Simon, and Cliff Shaw in 1955 marked the creation of the first true AI program, which was capable of solving logic problems, akin to proving mathematical theorems.&quot;</span>,
 ]
 
-dvecs = ef.encode_documents(doc)
+dvecs = ef.encode_documents(doc) <span class="hljs-comment"># This method uses `retrieval.passage` as the task</span>
 
 data = [
     {<span class="hljs-string">&quot;id&quot;</span>: i, <span class="hljs-string">&quot;vector&quot;</span>: dvecs[i], <span class="hljs-string">&quot;text&quot;</span>: doc[i], <span class="hljs-string">&quot;subject&quot;</span>: <span class="hljs-string">&quot;history&quot;</span>}
@@ -239,7 +251,7 @@ res = milvus_client.insert(collection_name=COLLECTION_NAME, data=data)
 </div>
 <p>이제 밀버스 벡터 데이터베이스의 모든 데이터로 쿼리에 대한 벡터 임베딩을 생성하여 시맨틱 검색을 수행하고 벡터 검색을 수행할 수 있습니다.</p>
 <pre><code translate="no" class="language-python">queries = <span class="hljs-string">&quot;What event in 1956 marked the official birth of artificial intelligence as a discipline?&quot;</span>
-qvecs = ef.encode_queries([queries])
+qvecs = ef.encode_queries([queries]) <span class="hljs-comment"># This method uses `retrieval.query` as the task</span>
 
 res = milvus_client.search(
     collection_name=COLLECTION_NAME,  <span class="hljs-comment"># target collection</span>

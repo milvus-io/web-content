@@ -4,7 +4,7 @@ order: 1
 summary: >-
   Questa guida illustra le operazioni di base per la creazione e la gestione
   degli indici sui campi vettoriali di una collezione.
-title: Campi vettoriali indice
+title: Indicizzare i campi vettoriali
 ---
 <h1 id="Index-Vector-Fields" class="common-anchor-header">Indicizzare i campi vettoriali<button data-href="#Index-Vector-Fields" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -249,7 +249,8 @@ index_params.add_index(
 <span class="hljs-comment"># 4.3. Create an index file</span>
 client.create_index(
     collection_name=<span class="hljs-string">&quot;customized_setup&quot;</span>,
-    index_params=index_params
+    index_params=index_params,
+    sync=<span class="hljs-literal">False</span> <span class="hljs-comment"># Whether to wait for index creation to complete before returning. Defaults to True.</span>
 )
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.common.IndexParam;
@@ -330,6 +331,10 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
     <tr>
       <td><code translate="no">index_params</code></td>
       <td>Un oggetto <strong>IndexParams</strong> contenente un elenco di oggetti <strong>IndexParam</strong>.</td>
+    </tr>
+    <tr>
+      <td><code translate="no">sync</code></td>
+      <td>Controlla il modo in cui l'indice viene costruito in relazione alla richiesta del client. Valori validi:<br><ul><li><code translate="no">True</code> (predefinito): Il client attende che l'indice sia completamente costruito prima di restituirlo. Ciò significa che non si otterrà una risposta finché il processo non sarà completato.</li><li><code translate="no">False</code>: Il client ritorna immediatamente dopo aver ricevuto la richiesta e l'indice viene costruito in background. Per sapere se la creazione dell'indice è stata completata, utilizzare il metodo <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/describe_index.md">describe_index()</a>.</li></ul></td>
     </tr>
   </tbody>
 </table>

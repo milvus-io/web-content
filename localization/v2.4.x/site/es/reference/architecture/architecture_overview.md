@@ -28,6 +28,12 @@ title: Visión general de la arquitectura de Milvus
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/milvus_architecture.png" alt="Architecture_diagram" class="doc-image" id="architecture_diagram" />
    </span> <span class="img-wrapper"> <span>Diagrama_de_arquitectura</span> </span></p>
+<p>Según la figura, las interfaces pueden clasificarse en las siguientes categorías:</p>
+<ul>
+<li><strong>DDL / DCL:</strong> createCollection / createPartition / dropCollection / dropPartition / hasCollection / hasPartition</li>
+<li><strong>DML / Produce:</strong> insert / delete / upsert</li>
+<li><strong>DQL:</strong> búsqueda / consulta</li>
+</ul>
 <h2 id="Whats-next" class="common-anchor-header">Más información<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -44,6 +50,6 @@ title: Visión general de la arquitectura de Milvus
         ></path>
       </svg>
     </button></h2><ul>
-<li>Más información sobre <a href="/docs/es/four_layers.md">la desagregación de computación/almacenamiento</a> en Milvus</li>
+<li>Más información sobre <a href="/docs/es/four_layers.md">la desagregación de cálculo/almacenamiento</a> en Milvus</li>
 <li>Conozca los <a href="/docs/es/main_components.md">componentes principales</a> de Milvus.</li>
 </ul>

@@ -1,7 +1,6 @@
 ---
 id: limit_collection_counts.md
 title: Begrenzung der Erfassungsanzahl festlegen
-summary: ''
 ---
 <h1 id="Limit-Collection-Counts" class="common-anchor-header">Begrenzung der Anzahl der Sammlungen<button data-href="#Limit-Collection-Counts" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -45,9 +44,9 @@ summary: ''
         ></path>
       </svg>
     </button></h2><pre><code translate="no" class="language-yaml">rootCoord:
-    maxGeneralCapacity: 1024
+    maxGeneralCapacity: 65536
 <button class="copy-code-btn"></button></code></pre>
-<p>Der Parameter <code translate="no">maxGeneralCapacity</code> legt die maximale Anzahl von Sammlungen fest, die die aktuelle Milvus-Instanz enthalten kann. Der Standardwert ist <code translate="no">1024</code>.</p>
+<p>Der Parameter <code translate="no">maxGeneralCapacity</code> legt die maximale Anzahl von Sammlungen fest, die die aktuelle Milvus-Instanz enthalten kann. Der Standardwert ist <code translate="no">65536</code>.</p>
 <h2 id="Calculating-the-number-of-collections" class="common-anchor-header">Berechnen der Anzahl der Sammlungen<button data-href="#Calculating-the-number-of-collections" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -67,7 +66,7 @@ summary: ''
 <p>Nehmen wir zum Beispiel an, Sie haben bereits <strong>100</strong> Sammlungen angelegt, von denen <strong>60</strong> <strong>mit 2</strong> Shards und <strong>4</strong> Partitionen und die restlichen <strong>40</strong> mit <strong>1</strong> Shard und <strong>12</strong> Partitionen ausgestattet sind. Die aktuelle Anzahl der Sammlungen kann wie folgt berechnet werden:</p>
 <pre><code translate="no">60 (collections) x 2 (shards) x 4 (partitions) + 40 (collections) x 1 (shard) x 12 (partitions) = 960
 <button class="copy-code-btn"></button></code></pre>
-<p>Im obigen Beispiel haben Sie bereits <strong>960</strong> der Standardgrenzen genutzt. Wenn Sie nun eine neue Sammlung mit <strong>4</strong> Scherben und <strong>20</strong> Partitionen erstellen wollen, erhalten Sie folgende Fehlermeldung, da die Gesamtzahl der Sammlungen die maximale Kapazität überschreitet:</p>
+<p>Im obigen Beispiel haben Sie bereits <strong>960</strong> der Standardgrenzen genutzt. Wenn Sie nun eine neue Sammlung mit <strong>4</strong> Scherben und <strong>20</strong> Partitionen erstellen möchten, erhalten Sie folgende Fehlermeldung, da die Gesamtzahl der Sammlungen die maximale Kapazität überschreitet:</p>
 <pre><code translate="no" class="language-shell">failed checking constraint: sum_collections(parition*shard) exceeding the <span class="hljs-built_in">max</span> general capacity:
 <button class="copy-code-btn"></button></code></pre>
 <p>Um diesen Fehler zu vermeiden, können Sie entweder die Anzahl der Shards oder Partitionen in bestehenden oder neuen Sammlungen reduzieren, einige Sammlungen löschen oder den Wert <code translate="no">maxGeneralCapacity</code> erhöhen.</p>

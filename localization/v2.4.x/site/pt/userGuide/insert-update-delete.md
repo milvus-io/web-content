@@ -3,7 +3,7 @@ id: insert-update-delete.md
 summary: >-
   Este guia orienta-o nas operações de manipulação de dados numa coleção,
   incluindo a inserção, a inserção ascendente e a eliminação.
-title: 'Inserir, Upsert e Apagar'
+title: 'Inserção, inserção ascendente e eliminação'
 ---
 <h1 id="Insert-Upsert--Delete" class="common-anchor-header">Inserção, inserção ascendente e eliminação<button data-href="#Insert-Upsert--Delete" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -407,8 +407,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 <div class="alert note">
 <ul>
 <li>As operações Upsert não actualizarão as chaves primárias.</li>
-<li>As operações Upsert não suportam colecções com <code translate="no">autoID</code> ativado.</li>
-<li>Se planeia utilizar a operação <code translate="no">upsert</code> em vez de <code translate="no">insert</code> para a ingestão de dados em grande escala (por exemplo, milhões de vectores), tenha em atenção que isto pode levar a um elevado consumo de memória nos nós de dados Milvus.</li>
+<li>Se planear utilizar a operação <code translate="no">upsert</code> em vez de <code translate="no">insert</code> para a ingestão de dados em grande escala (por exemplo, milhões de vectores), tenha em atenção que isto pode levar a um elevado consumo de memória nos nós de dados Milvus.</li>
 </ul>
 </div>
 <div class="language-python">

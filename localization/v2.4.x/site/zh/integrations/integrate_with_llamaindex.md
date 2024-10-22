@@ -1,6 +1,6 @@
 ---
 id: integrate_with_llamaindex.md
-summary: 本指南演示了如何使用 LlamaIndex 和 Milvus 构建检索增强生成（RAG）系统。
+summary: 本指南演示了如何使用 LlamaIndex 和 Milvus 建立检索增强生成（RAG）系统。
 title: 使用 Milvus 和 LlamaIndex 的检索增强生成（RAG）
 ---
 <h1 id="Retrieval-Augmented-Generation-RAG-with-Milvus-and-LlamaIndex" class="common-anchor-header">使用 Milvus 和 LlamaIndex 的检索增强生成（RAG）<button data-href="#Retrieval-Augmented-Generation-RAG-with-Milvus-and-LlamaIndex" class="anchor-icon" translate="no">
@@ -18,10 +18,11 @@ title: 使用 Milvus 和 LlamaIndex 的检索增强生成（RAG）
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/rag_with_milvus_and_llamaindex.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a></p>
+    </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/rag_with_milvus_and_llamaindex.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
+<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/rag_with_milvus_and_llamaindex.ipynb" target="_blank"><img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/></a></p>
 <p>本指南演示了如何使用 LlamaIndex 和 Milvus 构建检索-增强生成（RAG）系统。</p>
 <p>RAG 系统结合了检索系统和生成模型，可根据给定提示生成新文本。该系统首先使用 Milvus 从语料库中检索相关文档，然后使用生成模型根据检索到的文档生成新文本。</p>
-<p><a href="https://www.llamaindex.ai/">LlamaIndex</a>是一个简单、灵活的数据框架，用于将自定义数据源连接到大型语言模型（LLM）。<a href="https://milvus.io/">Milvus</a>是世界上最先进的开源向量数据库，专为支持嵌入式相似性搜索和人工智能应用而构建。</p>
+<p><a href="https://www.llamaindex.ai/">LlamaIndex</a>是一个简单、灵活的数据框架，用于将自定义数据源连接到大型语言模型（LLMs）。<a href="https://milvus.io/">Milvus</a>是世界上最先进的开源向量数据库，专为支持嵌入式相似性搜索和人工智能应用而构建。</p>
 <p>在本笔记本中，我们将快速演示如何使用 MilvusVectorStore。</p>
 <h2 id="Before-you-begin" class="common-anchor-header">开始之前<button data-href="#Before-you-begin" class="anchor-icon" translate="no">
       <svg translate="no"

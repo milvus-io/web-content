@@ -1,9 +1,8 @@
 ---
 id: use-partition-key.md
-title: Use Partition Key
-summary: ''
+title: Utilizar a chave de partição
 ---
-<h1 id="Use-Partition-Key" class="common-anchor-header">Use Partition Key<button data-href="#Use-Partition-Key" class="anchor-icon" translate="no">
+<h1 id="Use-Partition-Key" class="common-anchor-header">Utilizar a chave de partição<button data-href="#Use-Partition-Key" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -18,8 +17,8 @@ summary: ''
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>This guide walks you through using the partition key to accelerate data retrieval from your collection.</p>
-<h2 id="Overview" class="common-anchor-header">Overview<button data-href="#Overview" class="anchor-icon" translate="no">
+    </button></h1><p>Este guia orienta-o na utilização da chave de partição para acelerar a recuperação de dados da sua coleção.</p>
+<h2 id="Overview" class="common-anchor-header">Visão geral<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -34,9 +33,9 @@ summary: ''
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>You can set a particular field in a collection as the partition key so that Milvus distributes incoming entities into different partitions according to their respective partition values in this field. This allows entities with the same key value to be grouped in a partition, accelerating search performance by avoiding the need to scan irrelevant partitions when filtering by the key field. When compared to traditional filtering methods, the partition key can greatly enhance query performance.</p>
-<p>You can use the partition key to implement multi-tenancy. For details on multi-tenancy, read <a href="https://milvus.io/docs/multi_tenancy.md">Multi-tenancy</a> for more.</p>
-<h2 id="Enable-partition-key" class="common-anchor-header">Enable partition key<button data-href="#Enable-partition-key" class="anchor-icon" translate="no">
+    </button></h2><p>É possível definir um determinado campo numa coleção como chave de partição para que o Milvus distribua as entidades recebidas em diferentes partições de acordo com os respectivos valores de partição neste campo. Isto permite que entidades com o mesmo valor chave sejam agrupadas numa partição, acelerando o desempenho da pesquisa ao evitar a necessidade de pesquisar partições irrelevantes ao filtrar pelo campo chave. Quando comparada com os métodos de filtragem tradicionais, a chave de partição pode melhorar significativamente o desempenho da consulta.</p>
+<p>Pode utilizar a chave de partição para implementar o multi-tenancy. Para obter detalhes sobre multilocação, leia <a href="https://milvus.io/docs/multi_tenancy.md">Multilocação</a> para saber mais.</p>
+<h2 id="Enable-partition-key" class="common-anchor-header">Ativar a chave de partição<button data-href="#Enable-partition-key" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -51,22 +50,19 @@ summary: ''
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>To set a field as the partition key, specify <code translate="no">partition_key_field</code> when creating a collection schema.</p>
-<p>In the example code below, <code translate="no">num_partitions</code> determines the number of partitions that will be created. By default, it is set to <code translate="no">16</code>. We recommend you retain the default value.</p>
+    </button></h2><p>Para definir um campo como chave de partição, especifique <code translate="no">partition_key_field</code> ao criar um esquema de coleção.</p>
+<p>No código de exemplo abaixo, <code translate="no">num_partitions</code> determina o número de partições que serão criadas. Por predefinição, está definido para <code translate="no">64</code>. Recomendamos que mantenha o valor predefinido.</p>
 <div class="language-python">
-<p>For more information on parameters, refer to <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Client/MilvusClient.md"><code translate="no">MilvusClient</code></a>, <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_schema.md"><code translate="no">create_schema()</code></a>, and <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/CollectionSchema/add_field.md"><code translate="no">add_field()</code></a> in the SDK reference.</p>
+<p>Para obter mais informações sobre os parâmetros, consulte <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Client/MilvusClient.md"><code translate="no">MilvusClient</code></a>, <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_schema.md"><code translate="no">create_schema()</code></a>, e <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/CollectionSchema/add_field.md"><code translate="no">add_field()</code></a> na referência do SDK.</p>
 </div>
 <div class="language-java">
-<p>For more information on parameters, refer to <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Client/MilvusClientV2.md"><code translate="no">MilvusClientV2</code></a>, <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Collections/createSchema.md"><code translate="no">createSchema()</code></a>, and <a href="https://milvus.io/api-reference/java/v2.4.x/v2/CollectionSchema/addField.md"><code translate="no">addField()</code></a> in the SDK reference.</p>
+<p>Para obter mais informações sobre os parâmetros, consulte <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Client/MilvusClientV2.md"><code translate="no">MilvusClientV2</code></a>, <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Collections/createSchema.md"><code translate="no">createSchema()</code></a>, e <a href="https://milvus.io/api-reference/java/v2.4.x/v2/CollectionSchema/addField.md"><code translate="no">addField()</code></a> na referência do SDK.</p>
 </div>
 <div class="language-javascript">
-<p>For more information on parameters, refer to <a href="https://milvus.io/api-reference/node/v2.4.x/Client/MilvusClient.md"><code translate="no">MilvusClient</code></a> and <a href="https://milvus.io/api-reference/node/v2.4.x/Collections/createCollection.md"><code translate="no">createCollection()</code></a> in the SDK reference.</p>
+<p>Para mais informações sobre os parâmetros, consulte <a href="https://milvus.io/api-reference/node/v2.4.x/Client/MilvusClient.md"><code translate="no">MilvusClient</code></a> e <a href="https://milvus.io/api-reference/node/v2.4.x/Collections/createCollection.md"><code translate="no">createCollection()</code></a> na referência do SDK.</p>
 </div>
 <div class="multipleCode">
-    <a href="#python">Python </a>
-    <a href="#java">Java</a>
-    <a href="#javascript">Node.js</a>
-</div>
+   <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> random, time
 <span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> connections, MilvusClient, DataType
 
@@ -82,7 +78,7 @@ schema = MilvusClient.create_schema(
     auto_id=<span class="hljs-literal">False</span>,
     enable_dynamic_field=<span class="hljs-literal">True</span>,
     partition_key_field=<span class="hljs-string">&quot;color&quot;</span>,
-    num_partitions=<span class="hljs-number">16</span> <span class="hljs-comment"># Number of partitions. Defaults to 16.</span>
+    num_partitions=<span class="hljs-number">64</span> <span class="hljs-comment"># Number of partitions. Defaults to 64.</span>
 )
 
 schema.add_field(field_name=<span class="hljs-string">&quot;id&quot;</span>, datatype=DataType.INT64, is_primary=<span class="hljs-literal">True</span>)
@@ -161,12 +157,9 @@ client = <span class="hljs-keyword">new</span> <span class="hljs-title class_">M
     }
 ]
 <button class="copy-code-btn"></button></code></pre>
-<p>After you have defined the fields, set up the index parameters.</p>
+<p>Depois de ter definido os campos, configure os parâmetros de índice.</p>
 <div class="multipleCode">
-    <a href="#python">Python </a>
-    <a href="#java">Java</a>
-    <a href="#javascript">Node.js</a>
-</div>
+   <a href="#python">Python </a> <a href="#javascript">Java Node.js</a></div>
 <pre><code translate="no" class="language-python">index_params = MilvusClient.prepare_index_params()
 
 index_params.add_index(
@@ -211,12 +204,9 @@ indexParams.<span class="hljs-title function_">add</span>(indexParamForVectorFie
     <span class="hljs-keyword">params</span>: { nlist: <span class="hljs-number">1024</span>}
 }]
 <button class="copy-code-btn"></button></code></pre>
-<p>Finally, you can create a collection.</p>
+<p>Por fim, pode criar uma coleção.</p>
 <div class="multipleCode">
-    <a href="#python">Python </a>
-    <a href="#java">Java</a>
-    <a href="#javascript">Node.js</a>
-</div>
+   <a href="#python">Python </a> <a href="#javascript">Java Node.js</a></div>
 <pre><code translate="no" class="language-python">client.<span class="hljs-title function_">create_collection</span>(
     collection_name=<span class="hljs-string">&quot;test_collection&quot;</span>,
     schema=schema,
@@ -246,7 +236,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 <span class="hljs-comment">// Success</span>
 <span class="hljs-comment">//</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="List-partitions" class="common-anchor-header">List partitions<button data-href="#List-partitions" class="anchor-icon" translate="no">
+<h2 id="List-partitions" class="common-anchor-header">Listar partições<button data-href="#List-partitions" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -261,9 +251,9 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Once a field of a collection is used as the partition key, Milvus creates the specified number of partitions and manages them on your behalf. Therefore, you cannot manipulate the partitions in this collection anymore.</p>
-<p>The following snippet demonstrates that 64 partitions in a collection once one of its fields is used as the partition key.</p>
-<h2 id="Insert-data" class="common-anchor-header">Insert data<button data-href="#Insert-data" class="anchor-icon" translate="no">
+    </button></h2><p>Quando um campo de uma coleção é utilizado como chave de partição, o Milvus cria o número especificado de partições e gere-as em seu nome. Por conseguinte, já não pode manipular as partições desta coleção.</p>
+<p>O seguinte excerto demonstra a existência de 64 partições numa coleção quando um dos seus campos é utilizado como chave de partição.</p>
+<h2 id="Insert-data" class="common-anchor-header">Inserir dados<button data-href="#Insert-data" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -278,12 +268,9 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Once the collection is ready, start inserting data as follows:</p>
-<h3 id="Prepare-data" class="common-anchor-header">Prepare data</h3><div class="multipleCode">
-    <a href="#python">Python </a>
-    <a href="#java">Java</a>
-    <a href="#javascript">Node.js</a>
-</div>
+    </button></h2><p>Quando a coleção estiver pronta, comece a inserir os dados da seguinte forma:</p>
+<h3 id="Prepare-data" class="common-anchor-header">Preparar dados</h3><div class="multipleCode">
+   <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># 3. Insert randomly generated vectors </span>
 colors = [<span class="hljs-string">&quot;green&quot;</span>, <span class="hljs-string">&quot;blue&quot;</span>, <span class="hljs-string">&quot;yellow&quot;</span>, <span class="hljs-string">&quot;red&quot;</span>, <span class="hljs-string">&quot;black&quot;</span>, <span class="hljs-string">&quot;white&quot;</span>, <span class="hljs-string">&quot;purple&quot;</span>, <span class="hljs-string">&quot;pink&quot;</span>, <span class="hljs-string">&quot;orange&quot;</span>, <span class="hljs-string">&quot;brown&quot;</span>, <span class="hljs-string">&quot;grey&quot;</span>]
 data = []
@@ -338,7 +325,7 @@ data = []
 
 <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(data[<span class="hljs-number">0</span>])
 <button class="copy-code-btn"></button></code></pre>
-<p>You can view the structure of the generated data by checking its first entry.</p>
+<p>Pode ver a estrutura dos dados gerados verificando a sua primeira entrada.</p>
 <pre><code translate="no">{
     <span class="hljs-built_in">id</span>: <span class="hljs-number">0</span>,
     vector: [
@@ -353,20 +340,17 @@ data = []
     color_tag: <span class="hljs-string">&#x27;blue_2064&#x27;</span>
 }
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Insert-data" class="common-anchor-header">Insert data</h3><div class="language-python">
-<p>Use the <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Vector/insert.md"><code translate="no">insert()</code></a> method to insert the data into the collection.</p>
+<h3 id="Insert-data" class="common-anchor-header">Inserir dados</h3><div class="language-python">
+<p>Utilize o método <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Vector/insert.md"><code translate="no">insert()</code></a> para inserir os dados na coleção.</p>
 </div>
 <div class="language-java">
-<p>Use the <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Vector/insert.md"><code translate="no">insert()</code></a> method to insert the data into the collection.</p>
+<p>Utilize o método <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Vector/insert.md"><code translate="no">insert()</code></a> para inserir os dados na coleção.</p>
 </div>
 <div class="language-javascript">
-<p>Use the <a href="https://milvus.io/api-reference/node/v2.4.x/Vector/insert.md"><code translate="no">insert()</code></a> method to insert the data into the collection.</p>
+<p>Utilizar o método <a href="https://milvus.io/api-reference/node/v2.4.x/Vector/insert.md"><code translate="no">insert()</code></a> para inserir os dados na coleção.</p>
 </div>
 <div class="multipleCode">
-    <a href="#python">Python </a>
-    <a href="#java">Java</a>
-    <a href="#javascript">Node.js</a>
-</div>
+   <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a></div>
 <pre><code translate="no" class="language-python">res = client.insert(
     collection_name=<span class="hljs-string">&quot;test_collection&quot;</span>,
     data=data
@@ -418,7 +402,7 @@ data = []
 <span class="hljs-comment">// 1000</span>
 <span class="hljs-comment">// </span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Use-partition-key" class="common-anchor-header">Use partition key<button data-href="#Use-partition-key" class="anchor-icon" translate="no">
+<h2 id="Use-partition-key" class="common-anchor-header">Utilizar a chave de partição<button data-href="#Use-partition-key" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -433,30 +417,27 @@ data = []
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Once you have indexed and loaded the collection as well as inserted data, you can conduct a similarity search using the partition key.</p>
+    </button></h2><p>Depois de ter indexado e carregado a coleção, bem como os dados inseridos, pode realizar uma pesquisa de semelhança utilizando a chave de partição.</p>
 <div class="language-python">
-<p>For more information on parameters, refer to <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Vector/search.md"><code translate="no">search()</code></a> in the SDK reference.</p>
+<p>Para mais informações sobre parâmetros, consulte <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Vector/search.md"><code translate="no">search()</code></a> na referência do SDK.</p>
 </div>
 <div class="language-java">
-<p>For more information on parameters, refer to <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Vector/search.md"><code translate="no">search()</code></a> in the SDK reference.</p>
+<p>Para obter mais informações sobre os parâmetros, consulte <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Vector/search.md"><code translate="no">search()</code></a> na referência do SDK.</p>
 </div>
 <div class="language-javascript">
-<p>For more information on parameters, refer to <a href="https://milvus.io/api-reference/node/v2.4.x/Vector/search.md"><code translate="no">search()</code></a> in the SDK reference.</p>
+<p>Para obter mais informações sobre os parâmetros, consultar <a href="https://milvus.io/api-reference/node/v2.4.x/Vector/search.md"><code translate="no">search()</code></a> na referência do SDK.</p>
 </div>
 <div class="admonition note">
-<p><b>notes</b></p>
-<p>To conduct a similarity search using the partition key, you should include either of the following in the boolean expression of the search request:</p>
+<p><b>notas</b></p>
+<p>Para efetuar uma pesquisa de similaridade utilizando a chave de partição, deve incluir um dos seguintes itens na expressão booleana do pedido de pesquisa:</p>
 <ul>
 <li><p><code translate="no">expr='&lt;partition_key&gt;=="xxxx"'</code></p></li>
 <li><p><code translate="no">expr='&lt;partition_key&gt; in ["xxx", "xxx"]'</code></p></li>
 </ul>
-<p>Do replace <code translate="no">&lt;partition_key&gt;</code> with the name of the field that is designated as the partition key.</p>
+<p>Substituir <code translate="no">&lt;partition_key&gt;</code> pelo nome do campo que é designado como a chave de partição.</p>
 </div>
 <div class="multipleCode">
-    <a href="#python">Python </a>
-    <a href="#java">Java</a>
-    <a href="#javascript">Node.js</a>
-</div>
+   <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># 4. Search with partition key</span>
 query_vectors = [[<span class="hljs-number">0.3580376395471989</span>, -<span class="hljs-number">0.6023495712049978</span>, <span class="hljs-number">0.18414012509913835</span>, -<span class="hljs-number">0.26286205330961354</span>, <span class="hljs-number">0.9029438446296592</span>]]
 
@@ -557,7 +538,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 <span class="hljs-comment">// ]</span>
 <span class="hljs-comment">// </span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Typical-use-cases" class="common-anchor-header">Typical use cases<button data-href="#Typical-use-cases" class="anchor-icon" translate="no">
+<h2 id="Typical-use-cases" class="common-anchor-header">Casos de uso típicos<button data-href="#Typical-use-cases" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -572,4 +553,4 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>You can utilize the partition key feature to achieve better search performance and enable multi-tenancy. This can be done by assigning a tenant-specific value as the partition key field for each entity. When searching or querying the collection, you can filter entities by the tenant-specific value by including the partition key field in the boolean expression. This approach ensures data isolation by tenants and avoids scanning unnecessary partitions.</p>
+    </button></h2><p>Pode utilizar a funcionalidade de chave de partição para obter um melhor desempenho de pesquisa e permitir o multilocatário. Isso pode ser feito atribuindo um valor específico do locatário como o campo de chave de partição para cada entidade. Ao pesquisar ou consultar a coleção, é possível filtrar as entidades pelo valor específico do locatário, incluindo o campo da chave de partição na expressão booleana. Essa abordagem garante o isolamento de dados por locatários e evita a varredura de partições desnecessárias.</p>

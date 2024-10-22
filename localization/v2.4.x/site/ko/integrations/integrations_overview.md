@@ -34,7 +34,7 @@ title: 통합 개요
 <tr><td><a href="/docs/ko/integrate_with_sentencetransformers.md">밀버스와 센텐스 트랜스포머를 사용한 동영상 검색</a></td><td>시맨틱 검색</td><td>밀버스, 센텐스 트랜스포머</td></tr>
 <tr><td><a href="/docs/ko/basic_usage_langchain.md">LangChain에서 Milvus를 벡터 저장소로 사용하기</a></td><td>시맨틱 검색</td><td>밀버스, LangChain</td></tr>
 <tr><td><a href="/docs/ko/integrate_with_haystack.md">밀버스와 헤이스택을 사용한 RAG</a></td><td>RAG</td><td>밀버스, 헤이스택</td></tr>
-<tr><td><a href="/docs/ko/integrate_with_voxel51">밀버스 및 피프티원과 함께 비전 검색 수행하기</a></td><td>시맨틱 검색</td><td>밀버스, 피프티원</td></tr>
+<tr><td><a href="/docs/ko/integrate_with_voxel51.md">밀버스 및 피프티원과 함께 비전 검색 수행하기</a></td><td>시맨틱 검색</td><td>밀버스, 피프티원</td></tr>
 <tr><td><a href="/docs/ko/integrate_with_voyageai.md">Milvus와 VoyageAI를 이용한 시맨틱 검색</a></td><td>시맨틱 검색</td><td>Milvus, VoyageAI</td></tr>
 <tr><td><a href="/docs/ko/integrate_with_bentoml.md">Milvus 및 BentoML을 사용한 RAG</a></td><td>RAG</td><td>Milvus, BentoML</td></tr>
 <tr><td><a href="/docs/ko/integrate_with_dspy.md">Milvus 및 DSPy와 RAG</a></td><td>RAG</td><td>Milvus, DSPy</td></tr>
@@ -50,6 +50,14 @@ title: 통합 개요
 <tr><td><a href="/docs/ko/integrate_with_airbyte.md">에어바이트 &amp; 밀버스: 오픈소스 데이터 이동 인프라</a></td><td>데이터 연결</td><td>Milvus, Airbyte</td></tr>
 <tr><td><a href="/docs/ko/video_search_with_twelvelabs_and_milvus.md">고급 비디오 검색: 시맨틱 검색을 위한 Twelve Labs와 Milvus 활용하기</a></td><td>시맨틱 검색</td><td>Milvus, Twelve Labs</td></tr>
 <tr><td><a href="/docs/ko/milvus_rag_with_vllm.md">Milvus, vLLM, Llama 3.1로 RAG 구축하기</a></td><td>RAG</td><td>Milvus, vLLM, LlamaIndex</td></tr>
-<tr><td><a href="/docs/ko/llama_agents_metadata.md">미스트랄 AI, 밀버스, 라마 에이전트를 사용한 멀티 에이전트 시스템</a></td><td>에이전트</td><td>밀버스, 미스트랄 AI, 라마 인덱스</td></tr>
+<tr><td><a href="/docs/ko/llama_agents_metadata.md">미스트랄 AI, 밀버스, 라마 에이전트를 사용한 멀티 에이전트 시스템</a></td><td>에이전트</td><td>Milvus, Mistral AI, LlamaIndex</td></tr>
+<tr><td><a href="/docs/ko/kafka-connect-milvus.md">Milvus와 카프카 연결</a></td><td>데이터 소스</td><td>밀버스, 카프카</td></tr>
+<tr><td><a href="/docs/ko/kotaemon_with_milvus.md">밀버스와 코타에몬 RAG</a></td><td>RAG</td><td>밀버스, 코타에몬</td></tr>
+<tr><td><a href="/docs/ko/apify_milvus_rag.md">검색 증강 세대: Apify로 웹사이트를 크롤링하고 질문 답변을 위해 Milvus에 데이터 저장하기</a></td><td>데이터 소스</td><td>Milvus, Apify</td></tr>
+<tr><td><a href="/docs/ko/evaluation_with_deepeval.md">DeepEval을 사용한 평가</a></td><td>평가 및 관찰 가능성</td><td>Milvus, DeepEval</td></tr>
+<tr><td><a href="/docs/ko/evaluation_with_phoenix.md">아리제 피오닉스를 사용한 평가</a></td><td>평가 및 관찰 가능성</td><td>Milvus, 아리제 피닉스</td></tr>
+<tr><td><a href="/docs/ko/dify_with_milvus.md">Milvus로 Dify 배포</a></td><td>오케스트레이션</td><td>Milvus, Dify</td></tr>
+<tr><td><a href="/docs/ko/rag_with_langflow.md">Milvus와 함께 Langflow를 사용하여 RAG 시스템 구축하기</a></td><td>오케스트레이션</td><td>Milvus, Langflow</td></tr>
+<tr><td><a href="/docs/ko/build_rag_on_arm.md">Arm 아키텍처에 RAG 구축</a></td><td>RAG</td><td>Milvus, Arm</td></tr>
 </tbody>
 </table>

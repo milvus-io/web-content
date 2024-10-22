@@ -1,7 +1,6 @@
 ---
 id: limit_collection_counts.md
 title: Impostare limiti al numero di raccolte
-summary: ''
 ---
 <h1 id="Limit-Collection-Counts" class="common-anchor-header">Limitare il numero di raccolte<button data-href="#Limit-Collection-Counts" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -45,9 +44,9 @@ summary: ''
         ></path>
       </svg>
     </button></h2><pre><code translate="no" class="language-yaml">rootCoord:
-    maxGeneralCapacity: 1024
+    maxGeneralCapacity: 65536
 <button class="copy-code-btn"></button></code></pre>
-<p>Il parametro <code translate="no">maxGeneralCapacity</code> imposta il numero massimo di collezioni che l'istanza Milvus corrente può contenere. Il valore predefinito è <code translate="no">1024</code>.</p>
+<p>Il parametro <code translate="no">maxGeneralCapacity</code> imposta il numero massimo di collezioni che l'istanza Milvus corrente può contenere. Il valore predefinito è <code translate="no">65536</code>.</p>
 <h2 id="Calculating-the-number-of-collections" class="common-anchor-header">Calcolo del numero di collezioni<button data-href="#Calculating-the-number-of-collections" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

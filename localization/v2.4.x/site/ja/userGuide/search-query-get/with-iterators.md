@@ -19,7 +19,7 @@ title: イテレータ
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Milvusは大量のエンティティの結果を反復処理するための検索およびクエリのイテレータを提供します。MilvusはTopKを16384に制限しているため、ユーザはイテレータを使用してバッチモードでコレクション内の大量の、あるいはエンティティ全体を返すことができます。</p>
+    </button></h1><p>Milvusは大量のエンティティを反復処理するための検索および問い合わせイテレータを提供しています。MilvusはTopKを16384に制限しているため、ユーザはイテレータを使用して、バッチモードでコレクション内の大量の、あるいはエンティティ全体を返すことができます。</p>
 <h2 id="Overview" class="common-anchor-header">概要<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -35,9 +35,9 @@ title: イテレータ
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>イテレータは、主キー値とブール式を使用して、コレクション内の大量のデータまたはすべてのデータを反復処理するのに役立つ強力なツールです。これにより、データの取得方法を大幅に改善できます。時間の経過とともに効率が低下する可能性のある、従来の<strong>offset</strong>パラメータや<strong>limit</strong>パラメータの使用とは異なり、イテレータはよりスケーラブルなソリューションを提供します。</p>
-<h3 id="Benefits-of-using-iterators" class="common-anchor-header">イテレータを使用する利点</h3><ul>
-<li><p><strong>シンプルさ</strong>：複雑な<strong>オフセットや</strong> <strong>リミットの</strong>設定が不要になります。</p></li>
+    </button></h2><p>イテレータは、主キー値やフィルタ式を指定することで、コレクション全体をスキャンしたり、大量のエンティティを反復処理したりするための効率的なツールです。<strong>offset</strong>パラメータや<strong>limit</strong>パラメータを指定した検索コールやクエリコールと比較して、イテレータの使用はより効率的でスケーラブルです。</p>
+<h3 id="Benefits-of-using-iterators" class="common-anchor-header">イテレータを使用するメリット</h3><ul>
+<li><p><strong>単純さ</strong>：複雑な<strong>オフセットや</strong> <strong>リミットの</strong>設定が不要になります。</p></li>
 <li><p><strong>効率性</strong>：必要なデータのみをフェッチすることで、スケーラブルなデータ検索を実現。</p></li>
 <li><p><strong>一貫性</strong>：ブーリアンフィルターにより、一貫したデータセットサイズを保証します。</p></li>
 </ul>
@@ -62,12 +62,12 @@ title: イテレータ
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>以下のステップでは、Milvusに接続し、コレクションを素早くセットアップし、10,000以上のランダムに生成されたエンティティをコレクションに挿入するためのコードを再利用する。</p>
+    </button></h2><p>以下の準備ステップでは、Milvusに接続し、ランダムに生成されたエンティティをコレクションに挿入する。</p>
 <h3 id="Step-1-Create-a-collection" class="common-anchor-header">ステップ1: コレクションの作成</h3><div class="language-python">
-<p>コレクションを作成するには <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Client/MilvusClient.md"><code translate="no">MilvusClient</code></a>を使用してMilvusサーバに接続し <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_collection.md"><code translate="no">create_collection()</code></a>コレクションを作成します。</p>
+<p>以下の手順で <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Client/MilvusClient.md"><code translate="no">MilvusClient</code></a>を使用してMilvusサーバに接続し <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_collection.md"><code translate="no">create_collection()</code></a>を使用してコレクションを作成します。</p>
 </div>
 <div class="language-java">
-<p>使用方法 <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Client/MilvusClientV2.md"><code translate="no">MilvusClientV2</code></a>を使ってMilvusサーバに接続し <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Collections/createCollection.md"><code translate="no">createCollection()</code></a>コレクションを作成する。</p>
+<p>コレクションを作成するには <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Client/MilvusClientV2.md"><code translate="no">MilvusClientV2</code></a>を使ってMilvusサーバに接続し <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Collections/createCollection.md"><code translate="no">createCollection()</code></a>コレクションを作成する。</p>
 </div>
 <div class="multipleCode">
    <a href="#python">Python </a> <a href="#java">Java</a></div>
@@ -264,8 +264,9 @@ iterator = collection.search_iterator(
     batch_size=<span class="hljs-number">10</span>,
     param=search_params,
     output_fields=[<span class="hljs-string">&quot;color_tag&quot;</span>],
-    limit=<span class="hljs-number">3</span>
+    limit=<span class="hljs-number">300</span>
 )
+<span class="hljs-comment"># search 300 entities totally with 10 entities per page</span>
 
 results = []
 
@@ -356,7 +357,7 @@ System.out.println(results.size());
   <tbody>
     <tr>
       <td><code translate="no">data</code></td>
-      <td><br/>Milvus は指定されたものに最も類似したベクトル埋め込みを検索します。</td>
+      <td><br/>Milvusは指定されたものに最も類似したベクトル埋め込みを検索します。</td>
     </tr>
     <tr>
       <td><code translate="no">anns_field</code></td>
@@ -376,7 +377,7 @@ System.out.println(results.size());
     </tr>
     <tr>
       <td><code translate="no">limit</code></td>
-      <td><br/>デフォルト値は<strong>-1</strong> で、一致するすべてのエンティティが返されます。</td>
+      <td><br/>値の既定値は<strong>-1</strong> で、一致するすべてのエンティティが返されます。</td>
     </tr>
   </tbody>
 </table>
@@ -547,7 +548,7 @@ R&lt;<span class="hljs-title class_">QueryIterator</span>&gt; queryIteratRes = c
     </tr>
     <tr>
       <td><code translate="no">expr</code></td>
-      <td><br/>デフォルト値は<strong>None</strong> で、スカラー・フィルタリングが無視されることを示す。スカラー・フィルタリング条件を構築するには、「<a href="https://milvus.io/docs/boolean.md">Boolean Expression Rules</a>」を参照してください。</td>
+      <td><br/>この値のデフォルトは<strong>None</strong> で、スカラー・フィルタリングが無視されることを示す。スカラー・フィルタリング条件を構築するには、「<a href="https://milvus.io/docs/boolean.md">Boolean Expression Rules</a>」を参照してください。</td>
     </tr>
     <tr>
       <td><code translate="no">output_fields</code></td>
@@ -555,7 +556,7 @@ R&lt;<span class="hljs-title class_">QueryIterator</span>&gt; queryIteratRes = c
     </tr>
     <tr>
       <td><code translate="no">limit</code></td>
-      <td><br/>値の既定値は<strong>-1</strong> で、一致するすべてのエンティティが返されます。</td>
+      <td><br/>値の既定値は<strong>-1</strong> で、一致するすべてのエンティティが返されることを示します。</td>
     </tr>
   </tbody>
 </table>

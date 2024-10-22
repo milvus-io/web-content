@@ -215,7 +215,7 @@ apt-get install fio -y
 <span class="hljs-built_in">cd</span> /data
 
 <span class="hljs-comment"># write 10GB</span>
-fio -direct=1-iodepth=128 -rw=randwrite -ioengine=libaio -bs=4K -size=10G -numjobs=10 -runtime=600 -group_reporting -filename=<span class="hljs-built_in">test</span> -name=Rand_Write_IOPS_Test
+fio -direct=1 -iodepth=128 -rw=randwrite -ioengine=libaio -bs=4K -size=10G -numjobs=10 -runtime=600 -group_reporting -filename=<span class="hljs-built_in">test</span> -name=Rand_Write_IOPS_Test
 
 <span class="hljs-comment"># verify the read speed</span>
 <span class="hljs-comment"># compare with the disk performance indicators provided by various cloud providers.</span>
@@ -279,4 +279,4 @@ IO depths    : <span class="hljs-number">1</span>=<span class="hljs-number">0.1<
       - <span class="hljs-attr">emptyDir</span>:
         <span class="hljs-attr">name</span>: data
 <button class="copy-code-btn"></button></code></pre>
-<p>In questo modo si garantisce che il pod QueryNode utilizzi il disco NVMe come volume di dati. Per i dettagli su come distribuire Milvus Distributed usando Milvus Operator, vedere <a href="/docs/it/install_cluster-milvusoperator.md">Eseguire Milvus in Kubernetes con Milvus Operator</a>.</p>
+<p>Questo assicura che il pod QueryNode utilizzi il disco NVMe come volume di dati. Per i dettagli su come distribuire Milvus Distributed usando Milvus Operator, vedere <a href="/docs/it/install_cluster-milvusoperator.md">Eseguire Milvus in Kubernetes con Milvus Operator</a>.</p>

@@ -57,10 +57,10 @@ title: Eseguire Milvus con Docker Compose
       </svg>
     </button></h2><p>Milvus fornisce un file di configurazione di Docker Compose nel repository Milvus. Per installare Milvus usando Docker Compose, basta eseguire il comando</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-comment"># Download the configuration file</span>
-$ wget https://github.com/milvus-io/milvus/releases/download/v2.4.9/milvus-standalone-docker-compose.yml -O docker-compose.yml
+$ wget https://github.com/milvus-io/milvus/releases/download/v2.4.13-hotfix/milvus-standalone-docker-compose.yml -O docker-compose.yml
 
 <span class="hljs-comment"># Start Milvus</span>
-$ <span class="hljs-built_in">sudo</span> docker compose up -d
+$ <span class="hljs-built_in">sudo</span> docker-compose up -d
 
 Creating milvus-etcd  ... <span class="hljs-keyword">done</span>
 Creating milvus-minio ... <span class="hljs-keyword">done</span>
@@ -81,7 +81,7 @@ Creating milvus-standalone ... <span class="hljs-keyword">done</span>
 </ul></li>
 </ul>
 <p>È possibile verificare se i contenitori sono attivi e funzionanti usando il seguente comando:</p>
-<pre><code translate="no" class="language-shell">$ <span class="hljs-built_in">sudo</span> docker compose ps
+<pre><code translate="no" class="language-shell">$ <span class="hljs-built_in">sudo</span> docker-compose ps
 
       Name                     Command                  State                            Ports
 --------------------------------------------------------------------------------------------------------------------
@@ -91,7 +91,7 @@ milvus-standalone   /tini -- milvus run standalone   Up             0.0.0.0:1953
 <button class="copy-code-btn"></button></code></pre>
 <p>È possibile arrestare ed eliminare questo contenitore come segue</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-comment"># Stop Milvus</span>
-$ <span class="hljs-built_in">sudo</span> docker compose down
+$ <span class="hljs-built_in">sudo</span> docker-compose down
 
 <span class="hljs-comment"># Delete service data</span>
 $ <span class="hljs-built_in">sudo</span> <span class="hljs-built_in">rm</span> -rf volumes

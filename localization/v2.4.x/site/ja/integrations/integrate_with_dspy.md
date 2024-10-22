@@ -1,7 +1,7 @@
 ---
 id: integrate_with_dspy.md
-summary: このガイドでは、DSPyのレトリーバーモジュールの1つであるMilvusRMを使用して、RAGプログラムを最適化する方法を説明します。
-title: MilvusとDSPyの統合
+summary: このガイドでは、DSPyのレトリーバーモジュールの1つであるMilvusRMを使用してRAGプログラムを最適化する方法を説明します。
+title: MilvusとDSPyの連携
 ---
 <h1 id="Integrate-Milvus-with-DSPy" class="common-anchor-header">MilvusとDSPyの連携<button data-href="#Integrate-Milvus-with-DSPy" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -18,7 +18,8 @@ title: MilvusとDSPyの統合
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/milvus_and_DSPy.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a></p>
+    </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/milvus_and_DSPy.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
+<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/milvus_and_DSPy.ipynb" target="_blank"><img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/></a></p>
 <h2 id="What-is-DSPy" class="common-anchor-header">DSPyとは<button data-href="#What-is-DSPy" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -51,8 +52,8 @@ title: MilvusとDSPyの統合
         ></path>
       </svg>
     </button></h2><ul>
-<li>プログラミングアプローチ：DSPyは、LLMにプロンプトを与えるだけでなく、パイプラインをテキスト変換グラフとして抽象化することで、LMパイプライン開発のための体系的なプログラミングアプローチを提供します。DSPyの宣言型モジュールは、従来のプロンプトテンプレートによる試行錯誤的な手法に代わって、構造化された設計と最適化を可能にします。</li>
-<li>パフォーマンスの向上：DSPyは、既存の手法と比較して大幅な性能向上を示しています。ケーススタディを通じて、標準的なプロンプトや専門家が作成したデモを凌駕し、より小さなLMモデルにコンパイルした場合でも、その汎用性と有効性を示しています。</li>
+<li>プログラミングアプローチ：DSPyは、LLMのプロンプトを表示するだけでなく、パイプラインをテキスト変換グラフとして抽象化することで、LMパイプライン開発のための体系的なプログラミングアプローチを提供します。DSPyの宣言型モジュールは、従来のプロンプトテンプレートによる試行錯誤的な手法に代わって、構造化された設計と最適化を可能にします。</li>
+<li>パフォーマンスの向上：DSPyは、既存の手法と比較して大幅な性能向上を示しています。ケーススタディを通じて、標準的なプロンプトや専門家が作成したデモンストレーションを凌駕し、より小さなLMモデルにコンパイルした場合でも、その汎用性と有効性を示しています。</li>
 <li>モジュール化された抽象化DSPyは、分解、微調整、モデル選択など、LMパイプライン開発の複雑な側面を効果的に抽象化します。DSPyを使用すると、簡潔なプログラムをGPT-4、Llama2-13b、T5-baseなどのさまざまなモデルの命令にシームレスに変換できるため、開発が効率化され、性能が向上します。</li>
 </ul>
 <h2 id="Modules" class="common-anchor-header">モジュール<button data-href="#Modules" class="anchor-icon" translate="no">
@@ -75,8 +76,8 @@ title: MilvusとDSPyの統合
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/dspy-01.png" alt="DSPy Modules" class="doc-image" id="dspy-modules" />
    </span> <span class="img-wrapper"> <span>DSPyモジュール</span> </span></p>
-<p>シグネチャ：DSPyのシグネチャは宣言的な仕様として機能し、モジュールの入出力動作の概要を示し、タスク実行における言語モデルの指針となる。 モジュール：DSPyのモジュールは、言語モデル（LM）を活用したプログラムの基本コンポーネントとして機能します。連鎖思考やReActのような様々なプロンプト技術を抽象化し、あらゆるDSPyシグネチャを扱うことができます。学習可能なパラメータと、入力を処理して出力を生成する機能を持つこれらのモジュールは、PyTorchのNNモジュールからヒントを得つつ、LMアプリケーション用に調整された、より大きなプログラムを形成するために組み合わせることができます。 オプティマイザ：DSPyのオプティマイザは、プロンプトやLLMの重みなど、DSPyプログラムのパラメータを微調整し、精度などの指定されたメトリクスを最大化することで、プログラムの効率を高めます。</p>
-<h2 id="Why-Milvus-in-DSPy" class="common-anchor-header">なぜDSPyでMilvusなのか<button data-href="#Why-Milvus-in-DSPy" class="anchor-icon" translate="no">
+<p>シグネチャ：DSPyのシグネチャは宣言的な仕様として機能し、モジュールの入出力動作の概要を示し、タスク実行における言語モデルの指針となる。 モジュール：DSPyのモジュールは、言語モデル（LM）を活用したプログラムの基本コンポーネントとして機能します。連鎖思考やReActのような様々なプロンプト技術を抽象化し、あらゆるDSPyシグネチャを扱うことができます。学習可能なパラメータと、入力を処理して出力を生成する機能を持つこれらのモジュールは、PyTorchのNNモジュールからインスピレーションを受けつつも、LMアプリケーション向けに調整された、より大きなプログラムを形成するために組み合わせることができます。 オプティマイザ：DSPyのオプティマイザは、プロンプトやLLMの重みなど、DSPyプログラムのパラメータを微調整し、精度などの指定されたメトリクスを最大化することで、プログラムの効率を高めます。</p>
+<h2 id="Why-Milvus-in-DSPy" class="common-anchor-header">DSPyでmilvusを使う理由<button data-href="#Why-Milvus-in-DSPy" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -107,14 +108,14 @@ title: MilvusとDSPyの統合
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>それでは、RAGアプリケーションを最適化するためにDSPyでMilvusを活用する方法を簡単な例で説明します。</p>
+    </button></h2><p>それでは、RAGアプリケーションを最適化するためにDSPyでMilvusを活用する方法を、簡単な例で説明します。</p>
 <h3 id="Prerequisites" class="common-anchor-header">前提条件</h3><p>RAGアプリをビルドする前に、DSPyとPyMilvusをインストールしてください。</p>
 <pre><code translate="no" class="language-python">$ pip install <span class="hljs-string">&quot;dspy-ai[milvus]&quot;</span>
 $ pip install -U pymilvus
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 Google Colabを使用している場合、インストールしたばかりの依存関係を有効にするために、**ランタイムを再起動**する必要があるかもしれません（画面上部の "Runtime "メニューをクリックし、ドロップダウンメニューから "Restart session "を選択してください）。</div>
-<h3 id="Loading-the-dataset" class="common-anchor-header">データセットのロード</h3><p>この例では複雑な質問と答えのペアのコレクションであるHotPotQAをトレーニングデータセットとして使用します。HotPotQAクラスを通して読み込むことができます。</p>
+<h3 id="Loading-the-dataset" class="common-anchor-header">データセットのロード</h3><p>この例では、複雑な質問と回答のペアのコレクションであるHotPotQAをトレーニングデータセットとして使用します。HotPotQAクラスを通して読み込むことができます。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> dspy.datasets <span class="hljs-keyword">import</span> HotPotQA
 
 <span class="hljs-comment"># Load the dataset.</span>
@@ -126,7 +127,7 @@ dataset = HotPotQA(
 trainset = [x.with_inputs(<span class="hljs-string">&quot;question&quot;</span>) <span class="hljs-keyword">for</span> x <span class="hljs-keyword">in</span> dataset.train]
 devset = [x.with_inputs(<span class="hljs-string">&quot;question&quot;</span>) <span class="hljs-keyword">for</span> x <span class="hljs-keyword">in</span> dataset.dev]
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Ingest-data-into-the-Milvus-vector-database" class="common-anchor-header">Milvusベクトルデータベースにデータを取り込む</h3><p>ベクトル検索のためにコンテキスト情報をMilvusコレクションに取り込む。このコレクションには<code translate="no">embedding</code> フィールドと<code translate="no">text</code> フィールドが必要です。この場合、デフォルトのクエリ埋め込み関数としてOpenAIの<code translate="no">text-embedding-3-small</code> モデルを使用する。</p>
+<h3 id="Ingest-data-into-the-Milvus-vector-database" class="common-anchor-header">Milvusベクトルデータベースにデータを取り込む</h3><p>ベクトル検索のためにコンテキスト情報をmilvusコレクションに取り込む。このコレクションには<code translate="no">embedding</code> フィールドと<code translate="no">text</code> フィールドが必要です。この場合、デフォルトのクエリ埋め込み関数としてOpenAIの<code translate="no">text-embedding-3-small</code> モデルを使用する。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> requests
 <span class="hljs-keyword">import</span> os
 
@@ -272,4 +273,4 @@ score = evaluate_on_hotpotqa(compiled_rag, metric=metric)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>DSPyは、モデル・プロンプトとウェイトのアルゴリズム的かつ自動的な最適化を容易にするプログラマブルなインターフェースを通じて、言語モデル・インタラクションの飛躍的な進歩を示しています。RAGの実装にDSPyを活用することで、様々な言語モデルやデータセットへの適応が容易になり、面倒な手作業の必要性が大幅に減少します。</p>
+    </button></h2><p>DSPyは、プログラマブルなインターフェイスにより、言語モデルのインタラクションを飛躍的に向上させ、モデルのプロンプトとウェイトのアルゴリズムによる自動最適化を容易にします。RAGの実装にDSPyを活用することで、様々な言語モデルやデータセットへの適応が容易になり、面倒な手作業の必要性が大幅に減少します。</p>

@@ -30,13 +30,13 @@ pip install <span class="hljs-string">&quot;pymilvus[model]&quot;</span>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus.model.dense <span class="hljs-keyword">import</span> VoyageEmbeddingFunction
 
 voyage_ef = VoyageEmbeddingFunction(
-    model_name=<span class="hljs-string">&quot;voyage-lite-02-instruct&quot;</span>, <span class="hljs-comment"># Defaults to `voyage-2`</span>
+    model_name=<span class="hljs-string">&quot;voyage-3&quot;</span>, <span class="hljs-comment"># Defaults to `voyage-3`</span>
     api_key=VOYAGE_API_KEY <span class="hljs-comment"># Provide your Voyage API key</span>
 )
 <button class="copy-code-btn"></button></code></pre>
 <p><strong>Parámetros</strong>:</p>
 <ul>
-<li><code translate="no">model_name</code> (cadena) El nombre del modelo Voyage a utilizar para la codificación. Puede especificar cualquiera de los nombres de modelo Voyage disponibles, por ejemplo, <code translate="no">voyage-law-2</code>, <code translate="no">voyage-code-2</code>, etc. Si deja este parámetro sin especificar, se utilizará <code translate="no">voyage-2</code>. Para obtener una lista de los modelos disponibles, consulte <a href="https://docs.voyageai.com/docs/embeddings">la documentación oficial de Voyage</a>.</li>
+<li><code translate="no">model_name</code> (cadena) El nombre del modelo Voyage a utilizar para la codificación. Puede especificar cualquiera de los nombres de modelo Voyage disponibles, por ejemplo, <code translate="no">voyage-3-lite</code>, <code translate="no">voyage-finance-2</code>, etc. Si deja este parámetro sin especificar, se utilizará <code translate="no">voyage-3</code>. Para obtener una lista de los modelos disponibles, consulte <a href="https://docs.voyageai.com/docs/embeddings">la documentación oficial de Voyage</a>.</li>
 <li><code translate="no">api_key</code> (cadena) La clave API para acceder a la API de Voyage. Para más información sobre cómo crear una clave API, consulte <a href="https://docs.voyageai.com/docs/api-key-and-installation">Clave API y Cliente Python</a>.</li>
 </ul>
 <p>Para crear incrustaciones para documentos, utilice el método <code translate="no">encode_documents()</code>:</p>

@@ -2,7 +2,7 @@
 id: rbac.md
 related_key: enable RBAC
 summary: 'Aprenda a gestionar usuarios, funciones y privilegios.'
-title: Activar RBAC
+title: Habilitar RBAC
 ---
 <h1 id="Enable-RBAC" class="common-anchor-header">Habilitar RBAC<button data-href="#Enable-RBAC" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -22,7 +22,7 @@ title: Activar RBAC
     </button></h1><p>Habilitando RBAC, puede controlar el acceso a recursos específicos de Milvus (Ej. una colección o una partición) o permisos basados en el rol y privilegios del usuario. Actualmente, esta característica sólo está disponible en Python y Java.</p>
 <p>Este tema describe cómo habilitar RBAC y gestionar <a href="/docs/es/users_and_roles.md">usuarios y roles</a>.</p>
 <div class="alert note">
-<p>Los fragmentos de código de esta página utilizan <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/About.md">el</a> nuevo <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/About.md">MilvusClient</a> (Python) para interactuar con Milvus. En futuras actualizaciones se publicarán nuevos SDK de MilvusClient para otros lenguajes.</p>
+<p>Los fragmentos de código de esta página utilizan el nuevo <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/About.md">MilvusClient</a> (Python) para interactuar con Milvus. En futuras actualizaciones se publicarán nuevos SDK de MilvusClient para otros lenguajes.</p>
 </div>
 <h2 id="1-Initiate-a-Milvus-client-to-establish-a-connection" class="common-anchor-header">1. Inicie un cliente Milvus para establecer una conexión<button data-href="#1-Initiate-a-Milvus-client-to-establish-a-connection" class="anchor-icon" translate="no">
       <svg translate="no"

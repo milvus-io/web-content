@@ -48,12 +48,12 @@ title: FAQ opérationnelle
 <pre><code translate="no">$ lscpu | grep -e sse4_2 -e avx -e avx2 -e avx512
 <button class="copy-code-btn"></button></code></pre>
 <h4 id="Why-does-Milvus-return-illegal-instruction-during-startup" class="common-anchor-header">Pourquoi Milvus renvoie-t-il <code translate="no">illegal instruction</code> au démarrage ?</h4><p>Milvus exige que votre CPU prenne en charge un jeu d'instructions SIMD : SSE4.2, AVX, AVX2 ou AVX512. L'unité centrale doit prendre en charge au moins l'une de ces instructions pour que Milvus fonctionne normalement. Une erreur <code translate="no">illegal instruction</code> renvoyée lors du démarrage suggère que votre CPU ne prend pas en charge l'un des quatre jeux d'instructions ci-dessus.</p>
-<p>Voir la <a href="/docs/fr/prerequisite-docker.md">prise en charge du jeu d'instructions SIMD par le processeur</a>.</p>
+<p>Voir la <a href="/docs/fr/prerequisite-docker.md">prise en charge du jeu d'instructions SIMD par</a> le <a href="/docs/fr/prerequisite-docker.md">processeur</a>.</p>
 <h4 id="Can-I-install-Milvus-on-Windows" class="common-anchor-header">Puis-je installer Milvus sous Windows ?</h4><p>Oui, vous pouvez installer Milvus sur Windows soit en compilant à partir du code source, soit à partir d'un package binaire.</p>
 <p>Voir <a href="https://milvus.io/blog/2021-11-19-run-milvus-2.0-on-windows.md">Exécuter Milvus sous Windows</a> pour savoir comment installer Milvus sous Windows.</p>
 <h4 id="I-got-an-error-when-installing-pymilvus-on-Windows-What-shall-I-do" class="common-anchor-header">J'ai obtenu une erreur lors de l'installation de pymilvus sur Windows. Que dois-je faire ?</h4><p>Il n'est pas recommandé d'installer PyMilvus sous Windows. Mais si vous devez installer PyMilvus sur Windows mais que vous avez obtenu une erreur, essayez de l'installer dans un environnement <a href="https://docs.conda.io/projects/conda/en/latest/user-guide/install/index.html">Conda</a>. Voir <a href="/docs/fr/install-pymilvus.md">Installer Milvus SDK</a> pour plus d'informations sur l'installation de PyMilvus dans l'environnement Conda.</p>
 <h4 id="Can-I-deploy-Milvus-when-disconnected-from-the-Internet" class="common-anchor-header">Puis-je déployer Milvus lorsque je suis déconnecté d'Internet ?</h4><p>Oui, vous pouvez installer Milvus dans un environnement hors ligne. Voir <a href="/docs/fr/install_offline-helm.md">Installer Milvus hors ligne</a> pour plus d'informations.</p>
-<h4 id="Where-can-I-find-the-logs-generated-by-Milvus" class="common-anchor-header">Où puis-je trouver les journaux générés par Milvus ?</h4><p>Le journal Milvus est imprimé sur stout (sortie standard) et stderr (erreur standard) par défaut, mais nous vous recommandons vivement de rediriger votre journal vers un volume persistant en production. Pour ce faire, mettez à jour <code translate="no">log.file.rootPath</code> dans <strong>milvus.yaml.</strong> Et si vous déployez Milvus avec le diagramme <code translate="no">milvus-helm</code>, vous devez également activer la persistance du journal via <code translate="no">--set log.persistence.enabled=true</code>.</p>
+<h4 id="Where-can-I-find-the-logs-generated-by-Milvus" class="common-anchor-header">Où puis-je trouver les journaux générés par Milvus ?</h4><p>Le journal Milvus est imprimé sur stout (sortie standard) et stderr (erreur standard) par défaut, mais nous vous recommandons vivement de rediriger votre journal vers un volume persistant en production. Pour ce faire, mettez à jour <code translate="no">log.file.rootPath</code> dans <strong>milvus.yaml</strong>. Et si vous déployez Milvus avec le diagramme <code translate="no">milvus-helm</code>, vous devez également activer la persistance du journal via <code translate="no">--set log.persistence.enabled=true</code>.</p>
 <p>Si vous n'avez pas modifié la configuration, l'utilisation de kubectl logs &lt;pod-name&gt; ou de docker logs CONTAINER peut également vous aider à trouver le journal.</p>
 <h4 id="Can-I-create-index-for-a-segment-before-inserting-data-into-it" class="common-anchor-header">Puis-je créer un index pour un segment avant d'y insérer des données ?</h4><p>Oui, vous pouvez le faire. Mais nous recommandons d'insérer les données par lots, chacun ne devant pas dépasser 256 Mo, avant d'indexer chaque segment.</p>
 <h4 id="Can-I-share-an-etcd-instance-among-multiple-Milvus-instances" class="common-anchor-header">Puis-je partager une instance etcd entre plusieurs instances Milvus ?</h4><p>Oui, vous pouvez partager une instance etcd entre plusieurs instances Milvus. Pour ce faire, vous devez modifier <code translate="no">etcd.rootPath</code> en une valeur distincte pour chaque instance Milvus dans les fichiers de configuration de chacune d'entre elles avant de les démarrer.</p>
@@ -74,6 +74,31 @@ title: FAQ opérationnelle
 <li><p><strong>Requête (correspondance exacte)</strong>: Milvus sélectionne l'entité la plus récente avec la clé primaire correspondante. Recherche ANN : Milvus sélectionne l'entité ayant le score de similarité le plus élevé, même si les entités partagent le même PK. Cette priorisation peut entraîner moins de résultats uniques que la limite si votre collection comporte de nombreuses clés primaires en double.</p></li>
 <li><p><strong>Correspondances insuffisantes</strong>: Les expressions de filtrage de votre recherche peuvent être trop strictes, ce qui réduit le nombre d'entités répondant au seuil de similarité. Si les conditions définies pour la recherche sont trop restrictives, il n'y aura pas assez d'entités correspondantes, ce qui entraînera moins de résultats que prévu.</p></li>
 </ul>
+<h4 id="MilvusClientmilvusdemodb-gives-an-error-ModuleNotFoundError-No-module-named-milvuslite-What-causes-this-and-how-can-it-be-solved" class="common-anchor-header"><code translate="no">MilvusClient(&quot;milvus_demo.db&quot;) gives an error: ModuleNotFoundError: No module named 'milvus_lite'</code>. Quelle est la cause de cette erreur et comment la résoudre ?</h4><p>Cette erreur se produit lorsque vous essayez d'utiliser Milvus Lite sur une plate-forme Windows. Milvus Lite est principalement conçu pour les environnements Linux et peut ne pas avoir de support natif pour Windows.</p>
+<p>La solution consiste à utiliser un environnement Linux :</p>
+<ul>
+<li>Utilisez un système d'exploitation basé sur Linux ou une machine virtuelle pour exécuter Milvus Lite.</li>
+<li>Cette approche garantira la compatibilité avec les dépendances et les fonctionnalités de la bibliothèque.</li>
+</ul>
+<h4 id="What-are-the-length-exceeds-max-length-errors-in-Milvus-and-how-can-they-be-understood-and-addressed" class="common-anchor-header">Quelles sont les erreurs "length exceeds max length" dans Milvus, et comment les comprendre et les traiter ?</h4><p>Les erreurs "Length exceeds max length" dans Milvus se produisent lorsque la taille d'un élément de données dépasse la taille maximale autorisée pour une collection ou un champ. Voici quelques exemples et explications :</p>
+<ul>
+<li><p>Erreur de champ JSON : <code translate="no">&lt;MilvusException: (code=1100, message=the length (398324) of json field (metadata) exceeds max length (65536): expected=valid length json string, actual=length exceeds max length: invalid parameter)&gt;</code></p></li>
+<li><p>Erreur de longueur de chaîne : <code translate="no">&lt;ParamError: (code=1, message=invalid input, length of string exceeds max length. length: 74238, max length: 60535)&gt;</code></p></li>
+<li><p>Erreur de champ VarChar : <code translate="no">&lt;MilvusException: (code=1100, message=the length (60540) of 0th VarChar paragraph exceeds max length (0)%!(EXTRA int64=60535): invalid parameter)&gt;</code></p></li>
+</ul>
+<p>Pour comprendre et traiter ces erreurs :</p>
+<ul>
+<li>Comprenez que <code translate="no">len(str)</code> en Python représente le nombre de caractères, et non la taille en octets.</li>
+<li>Pour les types de données basés sur des chaînes comme VARCHAR et JSON, utilisez <code translate="no">len(bytes(str, encoding='utf-8'))</code> pour déterminer la taille réelle en octets, ce que Milvus utilise pour &quot;max-length&quot;.</li>
+</ul>
+<p>Exemple en Python :</p>
+<pre><code translate="no" class="language-python"><span class="hljs-comment"># Python Example: result of len() str cannot be used as &quot;max-length&quot; in Milvus </span>
+<span class="hljs-meta">&gt;&gt;&gt; </span>s = <span class="hljs-string">&quot;你好，世界！&quot;</span>
+<span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-built_in">len</span>(s) <span class="hljs-comment"># Number of characters of s.</span>
+<span class="hljs-number">6</span>
+<span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-built_in">len</span>(<span class="hljs-built_in">bytes</span>(s, <span class="hljs-string">&quot;utf-8&quot;</span>)) <span class="hljs-comment"># Size in bytes of s, max-length in Milvus.</span>
+<span class="hljs-number">18</span>
+<button class="copy-code-btn"></button></code></pre>
 <h4 id="Still-have-questions" class="common-anchor-header">Vous avez encore des questions ?</h4><p>Vous pouvez le faire :</p>
 <ul>
 <li>Consulter <a href="https://github.com/milvus-io/milvus/issues">Milvus</a> sur GitHub. N'hésitez pas à poser des questions, à partager des idées et à aider les autres.</li>

@@ -3,8 +3,8 @@ id: clustering-compaction.md
 title: 클러스터링 압축
 related_key: 'clustering, compaction'
 summary: >-
-  클러스터링 압축은 대규모 컬렉션에서 검색 성능을 개선하고 비용을 절감하기 위해 고안되었습니다. 이 가이드는 클러스터링 압축을 이해하고 이
-  기능을 통해 검색 성능을 개선하는 방법을 이해하는 데 도움이 됩니다.
+  클러스터링 압축은 대규모 컬렉션에서 검색 성능을 개선하고 비용을 절감하기 위해 고안되었습니다. 이 가이드는 클러스터링 압축과 이 기능이 검색
+  성능을 개선하는 방법을 이해하는 데 도움이 됩니다.
 ---
 <h1 id="Clustering-Compaction" class="common-anchor-header">클러스터링 압축<button data-href="#Clustering-Compaction" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -97,8 +97,8 @@ common:
 <tr><td><code translate="no">enable</code></td><td>클러스터링 압축을 활성화할지 여부를 지정합니다.<br>클러스터링 키가 있는 모든 컬렉션에 대해 이 기능을 활성화해야 하는 경우 <code translate="no">true</code> 로 설정합니다.</td><td><code translate="no">false</code></td></tr>
 <tr><td><code translate="no">autoEnable</code></td><td>자동으로 트리거되는 압축을 활성화할지 여부를 지정합니다.<br><code translate="no">true</code> 로 설정하면 Milvus가 클러스터링 키가 있는 컬렉션을 지정된 간격으로 압축합니다.</td><td><code translate="no">false</code></td></tr>
 <tr><td><code translate="no">triggerInterval</code></td><td>Milvus가 클러스터링 압축을 시작하는 간격(밀리초)을 지정합니다.<br>이 매개 변수는 <code translate="no">autoEnable</code> 가 <code translate="no">true</code> 로 설정된 경우에만 유효합니다.</td><td>-</td></tr>
-<tr><td><code translate="no">minInterval</code></td><td>최소 간격을 밀리초 단위로 지정합니다.<br>이 매개변수는 <code translate="no">autoEnable</code> 이 <code translate="no">true</code> 으로 설정된 경우에만 유효합니다.<br>이 값을 triggerInterval보다 큰 정수로 설정하면 짧은 기간 내에 반복되는 압축을 방지하는 데 도움이 됩니다.</td><td>-</td></tr>
-<tr><td><code translate="no">maxInterval</code></td><td>최대 간격을 밀리초 단위로 지정합니다.<br>이 매개변수는 <code translate="no">autoEnable</code> 가 <code translate="no">true</code> 로 설정된 경우에만 유효합니다.<br>이 값보다 긴 기간 동안 컬렉션이 클러스터링 압축되지 않은 것을 Milvus가 감지하면 클러스터링 압축을 강제로 수행합니다.</td><td>-</td></tr>
+<tr><td><code translate="no">minInterval</code></td><td>최소 간격을 초 단위로 지정합니다.<br>이 매개변수는 <code translate="no">autoEnable</code> 이 <code translate="no">true</code> 으로 설정된 경우에만 유효합니다.<br>이 값을 triggerInterval보다 큰 정수로 설정하면 짧은 기간 내에 반복되는 압축을 방지하는 데 도움이 됩니다.</td><td>-</td></tr>
+<tr><td><code translate="no">maxInterval</code></td><td>최대 간격을 초 단위로 지정합니다.<br>이 매개변수는 <code translate="no">autoEnable</code> 가 <code translate="no">true</code> 로 설정된 경우에만 유효합니다.<br>이 값보다 긴 기간 동안 컬렉션이 클러스터링 압축되지 않은 것을 Milvus가 감지하면 클러스터링 압축을 강제로 수행합니다.</td><td>-</td></tr>
 <tr><td><code translate="no">newDataSizeThreshold</code></td><td>클러스터링 압축을 트리거할 상한 임계값을 지정합니다.<br>이 매개변수는 <code translate="no">autoEnable</code> 이 <code translate="no">true</code> 으로 설정된 경우에만 유효합니다.<br>Milvus는 컬렉션의 데이터 볼륨이 이 값을 초과하는 것을 감지하면 클러스터링 압축 프로세스를 시작합니다.</td><td>-</td></tr>
 <tr><td><code translate="no">timeout</code></td><td>클러스터링 압축의 시간 초과 기간을 지정합니다.<br>실행 시간이 이 값을 초과하면 클러스터링 압축이 실패합니다.</td><td>-</td></tr>
 </tbody>
@@ -136,23 +136,8 @@ common:
 </table>
 </li>
 </ul>
-<p>위의 변경 사항을 Milvus 클러스터에 적용하려면 <a href="/docs/ko/configure-helm.md">헬름으로 Milvus 구성하기</a> 및 <a href="/docs/ko/configure_operator.md">Milvus 오퍼레이터로 Milvus 구성하기의</a> 단계를 따르세요.</p>
-<h2 id="Collection-Configuration" class="common-anchor-header">수집 구성<button data-href="#Collection-Configuration" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h2><p>특정 컬렉션에서 클러스터링 압축을 하려면 컬렉션에서 스칼라 필드를 클러스터링 키로 선택해야 합니다.</p>
+<p>위의 변경 사항을 Milvus 클러스터에 적용하려면 <a href="/docs/ko/configure-helm.md">헬름으로 Milvus 구성하기</a> 및 Milvus <a href="/docs/ko/configure_operator.md">오퍼레이터로 Milvus 구성하기의</a> 단계를 따르세요.</p>
+<h3 id="Collection-Configuration" class="common-anchor-header">수집 구성</h3><p>특정 컬렉션에서 클러스터링 압축을 하려면 컬렉션에서 스칼라 필드를 클러스터링 키로 선택해야 합니다.</p>
 <pre><code translate="no" class="language-python">default_fields = [
     FieldSchema(name=<span class="hljs-string">&quot;id&quot;</span>, dtype=DataType.INT64, is_primary=<span class="hljs-literal">True</span>),
     FieldSchema(name=<span class="hljs-string">&quot;key&quot;</span>, dtype=DataType.INT64, is_clustering_key=<span class="hljs-literal">True</span>),

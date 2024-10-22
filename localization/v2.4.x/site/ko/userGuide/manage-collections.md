@@ -226,7 +226,7 @@ $ curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable
 </ul>
 <p>제공된 코드에서 자동으로 색인되고 로드된 컬렉션은 즉시 데이터를 삽입할 수 있습니다.</p>
 <h3 id="Customized-setup" class="common-anchor-header">맞춤형 설정</h3><p>Milvus가 컬렉션의 거의 모든 것을 결정하는 대신, 사용자가 직접 컬렉션의 <strong>스키마와</strong> <strong>인덱스 매개변수를</strong> 결정할 수 있습니다.</p>
-<h4 id="Step-1-Set-up-schema" class="common-anchor-header">1단계: 스키마 설정</h4><p>스키마는 컬렉션의 구조를 정의합니다. 스키마 내에서 <code translate="no">enable_dynamic_field</code> 를 활성화 또는 비활성화하고, 미리 정의된 필드를 추가하고, 각 필드에 대한 속성을 설정하는 옵션이 있습니다. <a href="/docs/ko/schema.md">스키마의</a> 개념과 사용 가능한 데이터 유형에 대한 자세한 설명은 <a href="/docs/ko/schema.md">스키마 설명을</a> 참조하세요.</p>
+<h4 id="Step-1-Set-up-schema" class="common-anchor-header">1단계: 스키마 설정</h4><p>스키마는 컬렉션의 구조를 정의합니다. 스키마 내에서 <code translate="no">enable_dynamic_field</code> 를 활성화 또는 비활성화하고, 미리 정의된 필드를 추가하고, 각 필드에 대한 속성을 설정할 수 있는 옵션이 있습니다. 스키마의 개념과 사용 가능한 데이터 유형에 대한 자세한 설명은 <a href="/docs/ko/schema.md">스키마 설명을</a> 참조하세요.</p>
 <div class="language-python">
 <p>스키마를 설정하려면 <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_schema.md"><code translate="no">create_schema()</code></a> 을 사용하여 스키마 개체를 만들고 <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/CollectionSchema/add_field.md"><code translate="no">add_field()</code></a> 를 사용하여 스키마에 필드를 추가합니다.</p>
 </div>
@@ -334,7 +334,7 @@ schema.addField(AddFieldReq.builder()
     </tr>
     <tr>
       <td><code translate="no">dim</code></td>
-      <td>벡터 임베딩의 차원.<br/><strong>DataType.FLOAT_VECTOR</strong>, <strong>DataType.BINARY_VECTOR</strong>, <strong>DataType</strong> <strong>.FLOAT16_VECTOR</strong> 또는 <strong>DataType.BFLOAT16_VECTOR</strong> 유형의 필드에 필수입니다. <strong>DataType.SPARSE_FLOAT_VECTOR를</strong> 사용하는 경우 이 매개변수는 생략하세요.</td>
+      <td>벡터 임베딩의 차원.<br/><strong>DataType.FLOAT_VECTOR</strong>, <strong>DataType</strong> <strong>.BINARY_VECTOR</strong>, <strong>DataType</strong> <strong>.FLOAT16_VECTOR</strong> 또는 <strong>DataType.BFLOAT16_VECTOR</strong> 유형의 필드에 필수입니다. <strong>DataType.SPARSE_FLOAT_VECTOR를</strong> 사용하는 경우 이 매개변수는 생략하세요.</td>
     </tr>
   </tbody>
 </table>
@@ -571,7 +571,7 @@ indexParams.add(indexParamForVectorField);
     </tr>
     <tr>
       <td><code translate="no">index_type</code></td>
-      <td>특정 필드에서 데이터를 정렬하는 데 사용되는 알고리즘의 이름입니다. 적용 가능한 알고리즘은 <a href="https://milvus.io/docs/index.md">인메모리 인덱스</a> 및 <a href="https://milvus.io/docs/disk_index.md">온디스크 인덱스를</a> 참조하십시오.</td>
+      <td>특정 필드에서 데이터를 정렬하는 데 사용되는 알고리즘의 이름입니다. 적용 가능한 알고리즘은 <a href="https://milvus.io/docs/index.md">인메모리 인덱스</a> 및 <a href="https://milvus.io/docs/disk_index.md">온디스크 인덱</a>스를 참조하십시오.</td>
     </tr>
     <tr>
       <td><code translate="no">metric_type</code></td>
@@ -881,11 +881,11 @@ $ curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable
 </tr>
 <tr>
 <td><code translate="no">schema</code></td>
-<td>이 컬렉션의 스키마입니다.<br/>이를 <strong>없음으로</strong> 설정하면 이 컬렉션이 기본 설정으로 생성됩니다.<br/>사용자 정의 스키마로 컬렉션을 설정하려면 <strong>CollectionSchema</strong> 개체를 만들어 여기에서 참조해야 합니다. 이 경우 Milvus는 요청에 포함된 다른 모든 스키마 관련 설정을 무시합니다.</td>
+<td>이 컬렉션의 스키마입니다.<br/>이를 <strong>없음으로</strong> 설정하면 이 컬렉션이 기본 설정으로 만들어집니다.<br/>사용자 정의 스키마로 컬렉션을 설정하려면 <strong>CollectionSchema</strong> 개체를 만들어 여기에서 참조해야 합니다. 이 경우 Milvus는 요청에 포함된 다른 모든 스키마 관련 설정을 무시합니다.</td>
 </tr>
 <tr>
 <td><code translate="no">index_params</code></td>
-<td>이 컬렉션의 벡터 필드에 인덱스를 구축하기 위한 매개변수입니다. 사용자 정의 스키마로 컬렉션을 설정하고 컬렉션을 메모리에 자동으로 로드하려면 IndexParams 개체를 만들고 여기에서 참조해야 합니다.<br/>이 컬렉션의 벡터 필드에 대한 인덱스는 최소한 추가해야 합니다. 나중에 인덱스 매개변수를 설정하려는 경우 이 매개변수를 건너뛸 수도 있습니다.</td>
+<td>이 컬렉션의 벡터 필드에 인덱스를 구축하기 위한 매개변수입니다. 사용자 정의 스키마로 컬렉션을 설정하고 컬렉션을 메모리에 자동으로 로드하려면 IndexParams 개체를 만들고 여기에서 참조해야 합니다.<br/>이 컬렉션의 벡터 필드에 대한 인덱스를 최소한 추가해야 합니다. 나중에 인덱스 매개변수를 설정하려는 경우 이 매개변수를 건너뛸 수도 있습니다.</td>
 </tr>
 </tbody>
 </table></p>
@@ -1096,7 +1096,7 @@ $ curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable
     </tr>
     <tr>
       <td><code translate="no">index_params</code></td>
-      <td><strong>인덱스 파라미터</strong> 객체 목록이 포함된 <strong>인덱스 파라미터</strong> 객체입니다.</td>
+      <td><strong>인덱스 파라</strong> 미터 객체 목록이 포함된 <strong>인덱스 파라</strong> 미터 객체입니다.</td>
     </tr>
   </tbody>
 </table>
@@ -1593,11 +1593,38 @@ $ curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable
 <span class="hljs-comment">#     }</span>
 <span class="hljs-comment"># }</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Release-a-collection" class="common-anchor-header">컬렉션 릴리즈</h3><div class="language-python">
+<h3 id="Load-a-collection-partially-Public-Preview" class="common-anchor-header">컬렉션 부분 로드(공개 미리 보기)</h3><div class="alert note">
+<p>이 기능은 현재 공개 미리 보기 중입니다. API와 기능은 향후 변경될 수 있습니다.</p>
+</div>
+<p>로드 요청을 받으면 Milvus는 모든 벡터 필드 인덱스와 모든 스칼라 필드 데이터를 메모리에 로드합니다. 일부 필드가 검색 및 쿼리에 포함되지 않을 경우, 메모리 사용량을 줄이기 위해 로드에서 제외하여 검색 성능을 개선할 수 있습니다.</p>
+<div class="language-python">
+<pre><code translate="no" class="language-python"><span class="hljs-comment"># 7. Load the collection</span>
+client.load_collection(
+    collection_name=<span class="hljs-string">&quot;customized_setup_2&quot;</span>,
+    load_fields=[<span class="hljs-string">&quot;my_id&quot;</span>, <span class="hljs-string">&quot;my_vector&quot;</span>] <span class="hljs-comment"># Load only the specified fields</span>
+    skip_load_dynamic_field=<span class="hljs-literal">True</span> <span class="hljs-comment"># Skip loading the dynamic field</span>
+)
+
+res = client.get_load_state(
+    collection_name=<span class="hljs-string">&quot;customized_setup_2&quot;</span>
+)
+
+<span class="hljs-built_in">print</span>(res)
+
+<span class="hljs-comment"># Output</span>
+<span class="hljs-comment">#</span>
+<span class="hljs-comment"># {</span>
+<span class="hljs-comment">#     &quot;state&quot;: &quot;&lt;LoadState: Loaded&gt;&quot;</span>
+<span class="hljs-comment"># }</span>
+<button class="copy-code-btn"></button></code></pre>
+<p><code translate="no">load_fields</code> 에 나열된 필드만 검색 및 쿼리에서 필터링 조건 및 출력 필드로 사용할 수 있습니다. 목록에는 항상 기본 키를 포함해야 합니다. 로드에서 제외된 필드 이름은 필터링이나 출력에 사용할 수 없습니다.</p>
+<p><code translate="no">skip_load_dynamic_field=True</code> 을 사용하여 동적 필드 로드를 건너뛸 수 있습니다. Milvus는 동적 필드를 단일 필드로 취급하므로 동적 필드의 모든 키가 함께 포함되거나 제외됩니다.</p>
+</div>
+<h3 id="Release-a-collection" class="common-anchor-header">컬렉션 릴리스</h3><div class="language-python">
 <p>컬렉션을 릴리스하려면 컬렉션 이름을 지정하여 <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/release_collection.md"><code translate="no">release_collection()</code></a> 메서드를 사용하여 컬렉션 이름을 지정합니다.</p>
 </div>
 <div class="language-java">
-<p>컬렉션을 릴리스하려면 컬렉션 이름을 지정하여 <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Management/releaseCollection.md"><code translate="no">releaseCollection()</code></a> 메서드를 사용하여 컬렉션 이름을 지정합니다.</p>
+<p>컬렉션을 해제하려면 컬렉션 이름을 지정하여 <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Management/releaseCollection.md"><code translate="no">releaseCollection()</code></a> 메서드를 사용하여 컬렉션 이름을 지정합니다.</p>
 </div>
 <div class="language-javascript">
 <p>컬렉션을 릴리스하려면 컬렉션 이름을 지정하여 <a href="https://milvus.io/api-reference/node/v2.4.x/Management/releaseCollection.md"><code translate="no">releaseCollection()</code></a> 메서드를 사용하여 컬렉션 이름을 지정합니다.</p>
@@ -1708,7 +1735,7 @@ $ curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>컬렉션에 별칭을 지정하여 컬렉션을 특정 맥락에서 더 의미 있게 만들 수 있습니다. 컬렉션에 여러 개의 별칭을 지정할 수 있지만 여러 컬렉션이 하나의 별칭을 공유할 수는 없습니다.</p>
+    </button></h2><p>컬렉션에 별칭을 지정하여 컬렉션을 특정 맥락에서 더 의미 있게 만들 수 있습니다. 컬렉션에 별칭을 여러 개 지정할 수 있지만 여러 컬렉션이 별칭을 공유할 수는 없습니다.</p>
 <h3 id="Create-aliases" class="common-anchor-header">별칭 만들기</h3><div class="language-python">
 <p>별칭을 만들려면 컬렉션 이름과 <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_alias.md"><code translate="no">create_alias()</code></a> 메서드를 사용하여 컬렉션 이름과 별칭을 지정합니다.</p>
 </div>
@@ -2323,7 +2350,7 @@ collection.set_properties(
     }
 )
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Set-MMAP" class="common-anchor-header">MMAP 설정</h3><p>쿼리 성능을 개선하기 위해 데이터를 메모리에 매핑할지 여부를 결정하는 컬렉션의 메모리 매핑(MMAP) 속성을 구성합니다. 자세한 내용은 <a href="https://milvus.io/docs/mmap.md#Configure-memory-mapping">메모리 매핑 구성을</a> 참조하세요 <a href="https://milvus.io/docs/mmap.md#Configure-memory-mapping">.</a></p>
+<h3 id="Set-MMAP" class="common-anchor-header">MMAP 설정</h3><p>쿼리 성능을 개선하기 위해 데이터를 메모리에 매핑할지 여부를 결정하는 컬렉션의 메모리 매핑(MMAP) 속성을 구성합니다. 자세한 내용은 <a href="https://milvus.io/docs/mmap.md#Configure-memory-mapping">메모리 매핑 구성을</a> 참조하세요.</p>
 <div class="alert note">
 <p>MMAP 속성을 설정하기 전에 먼저 컬렉션을 해제하세요. 그렇지 않으면 오류가 발생합니다.</p>
 </div>

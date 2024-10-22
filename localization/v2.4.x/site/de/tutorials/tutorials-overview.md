@@ -3,7 +3,7 @@ id: tutorials-overview.md
 summary: >-
   Auf dieser Seite finden Sie eine Liste von Tutorials, die Ihnen helfen, mit
   Milvus zu arbeiten.
-title: Tutorials Übersicht
+title: Übersicht Tutorials
 ---
 <h1 id="Tutorials-Overview" class="common-anchor-header">Übersicht Tutorials<button data-href="#Tutorials-Overview" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -31,7 +31,6 @@ title: Tutorials Übersicht
 <tr><td><a href="/docs/de/image_similarity_search.md">Bildsuche mit Milvus</a></td><td>Semantische Suche</td><td>Vektorsuche, dynamisches Feld</td></tr>
 <tr><td><a href="/docs/de/hybrid_search_with_milvus.md">Hybride Suche mit Milvus</a></td><td>Hybride Suche</td><td>Hybride Suche, Multivektor, dichte Einbettung, spärliche Einbettung</td></tr>
 <tr><td><a href="/docs/de/multimodal_rag_with_milvus.md">Multimodale Suche mit mehreren Vektoren</a></td><td>Semantische Suche</td><td>Multivektor, hybride Suche</td></tr>
-<tr><td></td></tr>
 <tr><td><a href="/docs/de/question_answering_system.md">System zur Beantwortung von Fragen</a></td><td>Beantwortung von Fragen</td><td>Vektorsuche</td></tr>
 <tr><td><a href="/docs/de/recommendation_system.md">Empfehlungs-System</a></td><td>Empfehlungssystem</td><td>Vektorsuche</td></tr>
 <tr><td><a href="/docs/de/video_similarity_search.md">Video-Ähnlichkeitssuche</a></td><td>Semantische Suche</td><td>Vektorsuche</td></tr>
@@ -40,5 +39,7 @@ title: Tutorials Übersicht
 <tr><td><a href="/docs/de/text_search_engine.md">Text-Suchmaschine</a></td><td>Semantische Suche</td><td>Vektorsuche</td></tr>
 <tr><td><a href="/docs/de/text_image_search.md">Bildsuche nach Text</a></td><td>Semantische Suche</td><td>Vektorsuche</td></tr>
 <tr><td><a href="/docs/de/image_deduplication_system.md">Bild-Deduplizierung</a></td><td>Deduplizierung</td><td>Vektorsuche</td></tr>
+<tr><td><a href="/docs/de/graph_rag_with_milvus.md">Graph RAG mit Milvus</a></td><td>RAG</td><td>Graphen-Suche</td></tr>
+<tr><td><a href="/docs/de/contextual_retrieval_with_milvus.md">Kontextuelle Suche mit Milvus</a></td><td>Schnellstart</td><td>Vektorsuche</td></tr>
 </tbody>
 </table>

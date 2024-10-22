@@ -2,7 +2,7 @@
 id: disk_index.md
 related_key: disk_index
 summary: Plattenindex-Mechanismus in Milvus.
-title: Index auf der Festplatte
+title: On-Disk-Index
 ---
 <h1 id="On-disk-Index" class="common-anchor-header">On-Disk-Index<button data-href="#On-disk-Index" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -68,7 +68,7 @@ Derzeit unterstützt ein Vektorfeld nur einen Index-Typ. Milvus löscht automati
     </button></h2><p>Um DiskANN zu verwenden, müssen Sie sicherstellen, dass Sie</p>
 <ul>
 <li>Verwenden Sie nur Float-Vektoren mit mindestens 1 Dimension in Ihren Daten.</li>
-<li>Verwenden Sie nur den Euklidischen Abstand (L2) oder das Innere Produkt (IP), um den Abstand zwischen Vektoren zu messen.</li>
+<li>Verwenden Sie nur Euklidische Distanz (L2), Inneres Produkt (IP) oder COSINE, um den Abstand zwischen Vektoren zu messen.</li>
 </ul>
 <h2 id="Index-and-search-settings" class="common-anchor-header">Index- und Sucheinstellungen<button data-href="#Index-and-search-settings" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -129,7 +129,7 @@ DiskIndex:
 <tr><th>Parameter</th><th>Beschreibung</th><th>Wertebereich</th><th>Standardwert</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">MaxDegree</code></td><td>Maximaler Grad des Vamana-Graphen. <br/> Ein größerer Wert bietet eine höhere Auffindungsrate, erhöht jedoch die Größe des Index und die Zeit für den Aufbau des Index.</td><td>[1, 512]</td><td>56</td></tr>
+<tr><td><code translate="no">MaxDegree</code></td><td>Maximaler Grad des Vamana-Graphen. <br/> Ein größerer Wert bietet eine höhere Wiederauffindungsrate, erhöht aber die Größe des Index und die Zeit für den Aufbau des Index.</td><td>[1, 512]</td><td>56</td></tr>
 <tr><td><code translate="no">SearchListSize</code></td><td>Größe der Kandidatenliste. <br/> Ein größerer Wert erhöht den Zeitaufwand für den Aufbau des Indexes, bietet aber eine höhere Wiederfindungsrate. <br/> Setzen Sie ihn auf einen Wert kleiner als <code translate="no">MaxDegree</code>, es sei denn, Sie müssen die Zeit für den Indexaufbau reduzieren.</td><td>[1, int32_max]</td><td>100</td></tr>
 <tr><td><code translate="no">PQCodeBugetGBRatio</code></td><td>Größenbeschränkung für den PQ-Code. <br/> Ein größerer Wert bietet eine höhere Abrufrate, erhöht aber den Speicherverbrauch.</td><td>(0.0, 0.25]</td><td>0.125</td></tr>
 <tr><td><code translate="no">SearchCacheBudgetGBRatio</code></td><td>Verhältnis von zwischengespeicherten Knotennummern zu Rohdaten. <br/> Ein größerer Wert verbessert die Indexerstellungsleistung bei erhöhtem Speicherbedarf.</td><td>[0.0, 0.3)</td><td>0.10</td></tr>

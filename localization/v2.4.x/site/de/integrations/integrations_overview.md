@@ -23,7 +23,7 @@ title: Übersicht über Integrationen
     </button></h1><p>Auf dieser Seite finden Sie eine Liste von Tutorials, die Ihnen die Interaktion mit Milvus und Tools von Drittanbietern erleichtern.</p>
 <table>
 <thead>
-<tr><th>Lehrgang</th><th>Anwendungsfall</th><th>Partner oder Stacks</th></tr>
+<tr><th>Lernprogramm</th><th>Anwendungsfall</th><th>Partner oder Stacks</th></tr>
 </thead>
 <tbody>
 <tr><td><a href="/docs/de/integrate_with_llamaindex.md">RAG mit Milvus und LlamaIndex</a></td><td>RAG</td><td>Milvus, LLamaIndex</td></tr>
@@ -36,7 +36,7 @@ title: Übersicht über Integrationen
 <tr><td><a href="/docs/de/integrate_with_sentencetransformers.md">Filmsuche mit Milvus und SentenceTransfromers</a></td><td>Semantische Suche</td><td>Milvus, Satz-Transformatoren</td></tr>
 <tr><td><a href="/docs/de/basic_usage_langchain.md">Verwendung von Milvus als Vektorspeicher in LangChain</a></td><td>Semantische Suche</td><td>Milvus, LangChain</td></tr>
 <tr><td><a href="/docs/de/integrate_with_haystack.md">RAG mit Milvus und Haystack</a></td><td>RAG</td><td>Milvus, Haystack</td></tr>
-<tr><td><a href="/docs/de/integrate_with_voxel51">Vision Searches mit Milvus und FiftyOne durchführen</a></td><td>Semantische Suche</td><td>Milvus, FiftyOne</td></tr>
+<tr><td><a href="/docs/de/integrate_with_voxel51.md">Vision Searches mit Milvus und FiftyOne durchführen</a></td><td>Semantische Suche</td><td>Milvus, FiftyOne</td></tr>
 <tr><td><a href="/docs/de/integrate_with_voyageai.md">Semantische Suche mit Milvus und VoyageAI</a></td><td>Semantische Suche</td><td>Milvus, VoyageAI</td></tr>
 <tr><td><a href="/docs/de/integrate_with_bentoml.md">RAG mit Milvus und BentoML</a></td><td>RAG</td><td>Milvus, BentoML</td></tr>
 <tr><td><a href="/docs/de/integrate_with_dspy.md">RAG mit Milvus und DSPy</a></td><td>RAG</td><td>Milvus, DSPy</td></tr>
@@ -53,5 +53,13 @@ title: Übersicht über Integrationen
 <tr><td><a href="/docs/de/video_search_with_twelvelabs_and_milvus.md">Erweiterte Videosuche: Nutzung von Twelve Labs und Milvus für die semantische Suche</a></td><td>Semantische Suche</td><td>Milvus, Zwölf Laboratorien</td></tr>
 <tr><td><a href="/docs/de/milvus_rag_with_vllm.md">Aufbau von RAG mit Milvus, vLLM und Llama 3.1</a></td><td>RAG</td><td>Milvus, vLLM, LlamaIndex</td></tr>
 <tr><td><a href="/docs/de/llama_agents_metadata.md">Multiagentensysteme mit Mistral AI, Milvus und Llama-Agenten</a></td><td>Agent</td><td>Milvus, Mistral AI, LlamaIndex</td></tr>
+<tr><td><a href="/docs/de/kafka-connect-milvus.md">Kafka mit Milvus verbinden</a></td><td>Daten-Quellen</td><td>Milvus, Kafka</td></tr>
+<tr><td><a href="/docs/de/kotaemon_with_milvus.md">Kotaemon RAG mit Milvus</a></td><td>RAG</td><td>Milvus, Kotaemon</td></tr>
+<tr><td><a href="/docs/de/apify_milvus_rag.md">Retrieval-erweiterte Generierung: Crawlen von Websites mit Apify und Speichern der Daten in Milvus zur Beantwortung von Fragen</a></td><td>Daten-Quellen</td><td>Milvus, Apify</td></tr>
+<tr><td><a href="/docs/de/evaluation_with_deepeval.md">Auswertung mit DeepEval</a></td><td>Auswertung &amp; Beobachtbarkeit</td><td>Milvus, DeepEval</td></tr>
+<tr><td><a href="/docs/de/evaluation_with_phoenix.md">Auswertung mit Arize Pheonix</a></td><td>Bewertung &amp; Beobachtbarkeit</td><td>Milvus, Arize Pheonix</td></tr>
+<tr><td><a href="/docs/de/dify_with_milvus.md">Einsatz von Dify mit Milvus</a></td><td>Einrichtung</td><td>Milvus, Dify</td></tr>
+<tr><td><a href="/docs/de/rag_with_langflow.md">Aufbau eines RAG-Systems unter Verwendung von Langflow mit Milvus</a></td><td>Ochestration</td><td>Milvus, Langflow</td></tr>
+<tr><td><a href="/docs/de/build_rag_on_arm.md">RAG auf der Arm-Architektur aufbauen</a></td><td>RAG</td><td>Milvus, Arm</td></tr>
 </tbody>
 </table>

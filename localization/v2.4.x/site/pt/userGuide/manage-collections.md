@@ -74,7 +74,7 @@ title: Gerir colecções
     </button></h2><p>Pode criar uma coleção de uma das seguintes formas:</p>
 <ul>
 <li><p><strong>Configuração rápida</strong></p>
-<p>Desta forma, pode criar uma coleção dando-lhe simplesmente um nome e especificando o número de dimensões das incorporações vectoriais a armazenar nesta coleção. Para obter detalhes, consulte <a href="/docs/pt/manage-collections.md">Configuração rápida</a>.</p></li>
+<p>Desta forma, pode criar uma coleção dando-lhe simplesmente um nome e especificando o número de dimensões dos embeddings de vetor a armazenar nesta coleção. Para obter detalhes, consulte <a href="/docs/pt/manage-collections.md">Configuração rápida</a>.</p></li>
 <li><p><strong>Configuração personalizada</strong></p>
 <p>Em vez de deixar o In Milvus decidir quase tudo para a sua coleção, pode determinar o <strong>esquema</strong> e <strong>os parâmetros de índice</strong> da coleção por si próprio. Para mais detalhes, consulte <a href="/docs/pt/manage-collections.md">Configuração personalizada</a>.</p></li>
 </ul>
@@ -222,7 +222,7 @@ $ curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable
 <li><p><code translate="no">auto_id</code></p>
 <p>A ativação desta definição garante que a chave primária é incrementada automaticamente. Não há necessidade de fornecimento manual de chaves primárias durante a inserção de dados.</p></li>
 <li><p><code translate="no">enable_dynamic_field</code></p>
-<p>Quando activada, todos os campos, excluindo <code translate="no">id</code> e <code translate="no">vector</code> nos dados a inserir, são tratados como campos dinâmicos. Estes campos adicionais são guardados como pares chave-valor num campo especial denominado <code translate="no">$meta</code>. Esta funcionalidade permite a inclusão de campos extra durante a inserção de dados.</p></li>
+<p>Quando activada, todos os campos, excluindo <code translate="no">id</code> e <code translate="no">vector</code> nos dados a inserir, são tratados como campos dinâmicos. Estes campos adicionais são guardados como pares chave-valor num campo especial chamado <code translate="no">$meta</code>. Esta funcionalidade permite a inclusão de campos extra durante a inserção de dados.</p></li>
 </ul>
 <p>A coleção automaticamente indexada e carregada a partir do código fornecido está pronta para a inserção imediata de dados.</p>
 <h3 id="Customized-setup" class="common-anchor-header">Configuração personalizada</h3><p>Em vez de deixar o Milvus decidir quase tudo para a sua coleção, pode determinar o <strong>esquema</strong> e <strong>os parâmetros de indexação</strong> da coleção por si próprio.</p>
@@ -433,7 +433,7 @@ schema.addField(AddFieldReq.builder()
 <p>Para configurar os parâmetros de índice, utilize <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/prepare_index_params.md"><code translate="no">prepare_index_params()</code></a> para preparar os parâmetros do índice e <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/add_index.md"><code translate="no">add_index()</code></a> para adicionar o índice.</p>
 </div>
 <div class="language-java">
-<p>Para configurar os parâmetros do índice, utilize <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Management/IndexParam.md">IndexParam</a>.</p>
+<p>Para configurar os parâmetros de índice, utilize <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Management/IndexParam.md">IndexParam</a>.</p>
 </div>
 <div class="language-javascript">
 <p>Para configurar os parâmetros do índice, utilize <a href="https://milvus.io/api-reference/node/v2.4.x/Management/createIndex.md"><code translate="no">createIndex()</code></a>.</p>
@@ -515,7 +515,7 @@ indexParams.add(indexParamForVectorField);
   <tbody>
     <tr>
       <td><code translate="no">field_name</code></td>
-      <td>O nome do ficheiro de destino a que se aplica este objeto.</td>
+      <td>O nome do ficheiro de destino ao qual se aplica este objeto.</td>
     </tr>
     <tr>
       <td><code translate="no">index_type</code></td>
@@ -971,7 +971,7 @@ $ curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable
 </tr>
 <tr>
 <td><code translate="no">fields.isPrimary</code></td>
-<td>Se o campo atual é o campo primário. Definir isto como Verdadeiro torna o campo atual o campo primário.</td>
+<td>Se o campo atual é o campo primário. Definir isto como True torna o campo atual o campo primário.</td>
 </tr>
 <tr>
 <td><code translate="no">fields.elementTypeParams</code></td>
@@ -1466,7 +1466,7 @@ System.out.println(listCollectionsRes.getCollectionNames());
 <span class="hljs-comment">#   ]</span>
 <span class="hljs-comment"># }</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Load--Release-Collection" class="common-anchor-header">Carregar e libertar uma coleção<button data-href="#Load--Release-Collection" class="anchor-icon" translate="no">
+<h2 id="Load--Release-Collection" class="common-anchor-header">Carregar e libertar a coleção<button data-href="#Load--Release-Collection" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -1593,6 +1593,33 @@ $ curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable
 <span class="hljs-comment">#     }</span>
 <span class="hljs-comment"># }</span>
 <button class="copy-code-btn"></button></code></pre>
+<h3 id="Load-a-collection-partially-Public-Preview" class="common-anchor-header">Carregar uma coleção parcialmente (Pré-visualização pública)</h3><div class="alert note">
+<p>Esta funcionalidade está atualmente em pré-visualização pública. A API e a funcionalidade podem mudar no futuro.</p>
+</div>
+<p>Ao receber o seu pedido de carregamento, o Milvus carrega todos os índices dos campos vectoriais e todos os dados dos campos escalares para a memória. Se alguns campos não estiverem envolvidos em pesquisas e consultas, pode excluí-los do carregamento para reduzir a utilização da memória, melhorando o desempenho da pesquisa.</p>
+<div class="language-python">
+<pre><code translate="no" class="language-python"><span class="hljs-comment"># 7. Load the collection</span>
+client.load_collection(
+    collection_name=<span class="hljs-string">&quot;customized_setup_2&quot;</span>,
+    load_fields=[<span class="hljs-string">&quot;my_id&quot;</span>, <span class="hljs-string">&quot;my_vector&quot;</span>] <span class="hljs-comment"># Load only the specified fields</span>
+    skip_load_dynamic_field=<span class="hljs-literal">True</span> <span class="hljs-comment"># Skip loading the dynamic field</span>
+)
+
+res = client.get_load_state(
+    collection_name=<span class="hljs-string">&quot;customized_setup_2&quot;</span>
+)
+
+<span class="hljs-built_in">print</span>(res)
+
+<span class="hljs-comment"># Output</span>
+<span class="hljs-comment">#</span>
+<span class="hljs-comment"># {</span>
+<span class="hljs-comment">#     &quot;state&quot;: &quot;&lt;LoadState: Loaded&gt;&quot;</span>
+<span class="hljs-comment"># }</span>
+<button class="copy-code-btn"></button></code></pre>
+<p>Note-se que apenas os campos listados em <code translate="no">load_fields</code> podem ser utilizados como condições de filtragem e campos de saída em pesquisas e consultas. Deve incluir sempre a chave primária na lista. Os nomes de campo excluídos do carregamento não estarão disponíveis para filtragem ou saída.</p>
+<p>Pode utilizar <code translate="no">skip_load_dynamic_field=True</code> para saltar o carregamento do campo dinâmico. O Milvus trata o campo dinâmico como um único campo, pelo que todas as chaves do campo dinâmico serão incluídas ou excluídas em conjunto.</p>
+</div>
 <h3 id="Release-a-collection" class="common-anchor-header">Libertar uma coleção</h3><div class="language-python">
 <p>Para libertar uma coleção, utilize o método <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/release_collection.md"><code translate="no">release_collection()</code></a> especificando o nome da coleção.</p>
 </div>
@@ -2042,7 +2069,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 <span class="hljs-comment">#     }</span>
 <span class="hljs-comment"># }</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Reassign-aliases" class="common-anchor-header">Reatribuir aliases</h3><div class="language-python">
+<h3 id="Reassign-aliases" class="common-anchor-header">Reatribuir pseudónimos</h3><div class="language-python">
 <p>Para reatribuir aliases a outras colecções, utilize o método <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/alter_alias.md"><code translate="no">alter_alias()</code></a> especificando o nome da coleção e o alias.</p>
 </div>
 <div class="language-java">
@@ -2323,7 +2350,7 @@ collection.set_properties(
     }
 )
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Set-MMAP" class="common-anchor-header">Definir MMAP</h3><p>Configure a propriedade de mapeamento de memória (MMAP) para a coleção, que determina se os dados são mapeados na memória para melhorar o desempenho da consulta. Para obter mais informações, consulte <a href="https://milvus.io/docs/mmap.md#Configure-memory-mapping">Configurar mapeamento de memória.</a></p>
+<h3 id="Set-MMAP" class="common-anchor-header">Definir MMAP</h3><p>Configure a propriedade de mapeamento de memória (MMAP) para a coleção, que determina se os dados são mapeados na memória para melhorar o desempenho da consulta. Para obter mais informações, consulte <a href="https://milvus.io/docs/mmap.md#Configure-memory-mapping">Configurar mapeamento de memória</a>.</p>
 <div class="alert note">
 <p>Antes de definir a propriedade MMAP, liberte primeiro a coleção. Caso contrário, ocorrerá um erro.</p>
 </div>

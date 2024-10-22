@@ -18,7 +18,8 @@ title: Schnellstart
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/quickstart.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a></p>
+    </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/quickstart.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
+<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/quickstart.ipynb" target="_blank"><img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/></a></p>
 <p>Vektoren, das Ausgabedatenformat von Neuronalen Netzwerkmodellen, können Informationen effektiv kodieren und spielen eine zentrale Rolle in KI-Anwendungen wie Wissensdatenbanken, semantischer Suche, Retrieval Augmented Generation (RAG) und mehr.</p>
 <p>Milvus ist eine Open-Source-Vektordatenbank, die sich für KI-Anwendungen jeder Größe eignet, von der Ausführung eines Demo-Chatbots in einem Jupyter-Notebook bis zum Aufbau einer Web-Suche, die Milliarden von Nutzern bedient. In dieser Anleitung zeigen wir Ihnen, wie Sie Milvus innerhalb weniger Minuten lokal einrichten und die Python-Client-Bibliothek zum Erzeugen, Speichern und Durchsuchen von Vektoren verwenden können.</p>
 <h2 id="Install-Milvus" class="common-anchor-header">Milvus installieren<button data-href="#Install-Milvus" class="anchor-icon" translate="no">
@@ -153,6 +154,7 @@ vectors = embedding_fn.encode_documents(docs)
 <span class="hljs-comment"># to demo metadata filtering later.</span>
 data = [
     {<span class="hljs-string">&quot;id&quot;</span>: i, <span class="hljs-string">&quot;vector&quot;</span>: vectors[i], <span class="hljs-string">&quot;text&quot;</span>: docs[i], <span class="hljs-string">&quot;subject&quot;</span>: <span class="hljs-string">&quot;history&quot;</span>}
+    <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-built_in">len</span>(vectors))
 ]
 
 <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Data has&quot;</span>, <span class="hljs-built_in">len</span>(data), <span class="hljs-string">&quot;entities, each with fields: &quot;</span>, data[<span class="hljs-number">0</span>].keys())
@@ -269,7 +271,7 @@ res = client.search(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Sie können die Vektorsuche auch unter Berücksichtigung der Werte der Metadaten durchführen (in Milvus "skalare" Felder genannt, da sich skalar auf Nicht-Vektordaten bezieht). Dies geschieht mit einem Filterausdruck, der bestimmte Kriterien angibt. Im folgenden Beispiel wird gezeigt, wie man mit dem Feld <code translate="no">subject</code> suchen und filtern kann.</p>
+    </button></h2><p>Sie können die Vektorsuche auch unter Berücksichtigung der Werte der Metadaten (in Milvus "skalare" Felder genannt, da sich skalar auf Nicht-Vektordaten bezieht) durchführen. Dies geschieht mit einem Filterausdruck, der bestimmte Kriterien angibt. Im folgenden Beispiel wird gezeigt, wie man mit dem Feld <code translate="no">subject</code> suchen und filtern kann.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Insert more docs in another subject.</span>
 docs = [
     <span class="hljs-string">&quot;Machine learning has been used for drug design.&quot;</span>,
@@ -299,7 +301,7 @@ res = client.search(
 <button class="copy-code-btn"></button></code></pre>
 <p>Standardmäßig werden die skalaren Felder nicht indiziert. Wenn Sie eine gefilterte Metadatensuche in großen Datenbeständen durchführen müssen, können Sie die Verwendung eines festen Schemas in Betracht ziehen und auch den <a href="https://milvus.io/docs/scalar_index.md">Index</a> aktivieren, um die Suchleistung zu verbessern.</p>
 <p>Neben der Vektorsuche können Sie auch andere Arten von Suchen durchführen:</p>
-<h3 id="Query" class="common-anchor-header">Abfrage</h3><p>Eine Abfrage() ist eine Operation, die alle Entitäten abruft, die mit einer Kretrie übereinstimmen, wie z.B. einem <a href="https://milvus.io/docs/boolean.md">Filterausdruck</a> oder einigen IDs.</p>
+<h3 id="Query" class="common-anchor-header">Abfrage</h3><p>Eine Abfrage() ist eine Operation, die alle Entitäten abruft, die einem Kriterium entsprechen, wie z. B. einem <a href="https://milvus.io/docs/boolean.md">Filterausdruck</a> oder einigen IDs.</p>
 <p>Zum Beispiel werden alle Entitäten abgefragt, deren Skalarfeld einen bestimmten Wert hat:</p>
 <pre><code translate="no" class="language-python">res = client.query(
     collection_name=<span class="hljs-string">&quot;demo_collection&quot;</span>,
@@ -400,7 +402,7 @@ client.drop_collection(collection_name=<span class="hljs-string">&quot;demo_coll
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus Lite ist ideal für den Einstieg in ein lokales Python-Programm. Wenn Sie große Datenmengen haben oder Milvus in der Produktion verwenden möchten, können Sie sich über die Bereitstellung von Milvus auf <a href="https://milvus.io/docs/install_standalone-docker.md">Docker</a> und <a href="https://milvus.io/docs/install_cluster-milvusoperator.md">Kubernetes</a> informieren. Alle Bereitstellungsmodi von Milvus nutzen dieselbe API, sodass sich Ihr clientseitiger Code beim Wechsel zu einem anderen Bereitstellungsmodus nicht großartig ändern muss. Geben Sie einfach die <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Client/MilvusClient.md">URI und das Token</a> eines Milvus-Servers an, der überall eingesetzt wird:</p>
+    </button></h2><p>Milvus Lite ist ideal für den Einstieg in ein lokales Python-Programm. Wenn Sie große Datenmengen haben oder Milvus in der Produktion verwenden möchten, können Sie mehr über die Bereitstellung von Milvus auf <a href="https://milvus.io/docs/install_standalone-docker.md">Docker</a> und <a href="https://milvus.io/docs/install_cluster-milvusoperator.md">Kubernetes</a> erfahren. Alle Bereitstellungsmodi von Milvus nutzen dieselbe API, sodass sich Ihr clientseitiger Code beim Wechsel zu einem anderen Bereitstellungsmodus nicht großartig ändern muss. Geben Sie einfach die <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Client/MilvusClient.md">URI und das Token</a> eines Milvus-Servers an, der überall eingesetzt wird:</p>
 <pre><code translate="no" class="language-python">client = <span class="hljs-title class_">MilvusClient</span>(uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>, token=<span class="hljs-string">&quot;root:Milvus&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
 <p>Milvus bietet eine REST- und gRPC-API mit Client-Bibliotheken in Sprachen wie <a href="https://milvus.io/docs/install-pymilvus.md">Python</a>, <a href="https://milvus.io/docs/install-java.md">Java</a>, <a href="https://milvus.io/docs/install-go.md">Go</a>, C# und <a href="https://milvus.io/docs/install-node.md">Node.js</a>.</p>

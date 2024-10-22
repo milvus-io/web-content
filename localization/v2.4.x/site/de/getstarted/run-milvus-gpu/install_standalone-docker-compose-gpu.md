@@ -3,7 +3,7 @@ id: install_standalone-docker-compose-gpu.md
 label: Standalone (Docker Compose)
 related_key: Kubernetes
 summary: 'Erfahren Sie, wie Sie Milvus-Cluster auf Kubernetes installieren.'
-title: Milvus mit GPU-Unterstützung mit Docker Compose ausführen
+title: Milvus mit GPU-Unterstützung mit Docker Compose starten
 ---
 <h1 id="Run-Milvus-with-GPU-Support-Using-Docker-Compose" class="common-anchor-header">Milvus mit GPU-Unterstützung mit Docker Compose starten<button data-href="#Run-Milvus-with-GPU-Support-Using-Docker-Compose" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -59,8 +59,8 @@ title: Milvus mit GPU-Unterstützung mit Docker Compose ausführen
         ></path>
       </svg>
     </button></h2><p>Um Milvus mit GPU-Unterstützung mit Docker Compose zu installieren, führen Sie die folgenden Schritte aus.</p>
-<h3 id="1-Download-and-configure-the-YAML-file" class="common-anchor-header">1. Herunterladen und Konfigurieren der YAML-Datei</h3><p>Laden Sie  herunter <a href="https://github.com/milvus-io/milvus/releases/download/v2.4.9/milvus-standalone-docker-compose-gpu.yml"><code translate="no">milvus-standalone-docker-compose-gpu.yml</code></a> und speichern Sie sie als docker-compose.yml manuell oder mit dem folgenden Befehl.</p>
-<pre><code translate="no" class="language-shell">$ wget https://github.com/milvus-io/milvus/releases/download/v2.4.9/milvus-standalone-docker-compose-gpu.yml -O docker-compose.yml
+<h3 id="1-Download-and-configure-the-YAML-file" class="common-anchor-header">1. Herunterladen und Konfigurieren der YAML-Datei</h3><p>Laden Sie  herunter <a href="https://github.com/milvus-io/milvus/releases/download/v2.4.13-hotfix/milvus-standalone-docker-compose-gpu.yml"><code translate="no">milvus-standalone-docker-compose-gpu.yml</code></a> und speichern Sie sie als docker-compose.yml manuell oder mit dem folgenden Befehl.</p>
+<pre><code translate="no" class="language-shell">$ wget https://github.com/milvus-io/milvus/releases/download/v2.4.13-hotfix/milvus-standalone-docker-compose-gpu.yml -O docker-compose.yml
 <button class="copy-code-btn"></button></code></pre>
 <p>Sie müssen einige Änderungen an den Umgebungsvariablen des eigenständigen Dienstes in der YAML-Datei wie folgt vornehmen:</p>
 <ul>

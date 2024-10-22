@@ -99,9 +99,9 @@ common:
 <tr><td><code translate="no">enable</code></td><td>Especifica se a compactação do agrupamento deve ser activada.<br>Defina esta opção para <code translate="no">true</code> se precisar de ativar esta funcionalidade para todas as colecções que tenham uma chave de agrupamento.</td><td><code translate="no">false</code></td></tr>
 <tr><td><code translate="no">autoEnable</code></td><td>Especifica se a compactação é activada automaticamente.<br>Definir isto para <code translate="no">true</code> indica que o Milvus compacta as colecções com uma chave de agrupamento nos intervalos especificados.</td><td><code translate="no">false</code></td></tr>
 <tr><td><code translate="no">triggerInterval</code></td><td>Especifica o intervalo, em milissegundos, em que o Milvus inicia a compactação do agrupamento.<br>Este parâmetro só é válido se <code translate="no">autoEnable</code> estiver definido como <code translate="no">true</code>.</td><td>-</td></tr>
-<tr><td><code translate="no">minInterval</code></td><td>Especifica o intervalo mínimo em milissegundos.<br>Este parâmetro é válido apenas quando <code translate="no">autoEnable</code> está definido como <code translate="no">true</code>.<br>A definição deste parâmetro como um número inteiro superior a triggerInterval ajuda a evitar compactações repetidas num curto período.</td><td>-</td></tr>
-<tr><td><code translate="no">maxInterval</code></td><td>Especifica o intervalo máximo em milissegundos.<br>Este parâmetro é válido apenas quando <code translate="no">autoEnable</code> está definido como <code translate="no">true</code>.<br>Quando o Milvus detecta que uma coleção não foi compactada por um período superior a este valor, força uma compactação por clustering.</td><td>-</td></tr>
-<tr><td><code translate="no">newDataSizeThreshold</code></td><td>Especifica o limite superior para desencadear uma compactação de agrupamento.<br>Este parâmetro só é válido se <code translate="no">autoEnable</code> estiver definido como <code translate="no">true</code>.<br>Quando o Milvus detecta que o volume de dados de uma coleção excede este valor, inicia um processo de compactação em cluster.</td><td>-</td></tr>
+<tr><td><code translate="no">minInterval</code></td><td>Especifica o intervalo mínimo em segundos.<br>Este parâmetro é válido apenas quando <code translate="no">autoEnable</code> está definido como <code translate="no">true</code>.<br>Definir este parâmetro como um número inteiro superior a triggerInterval ajuda a evitar compactações repetidas num curto período de tempo.</td><td>-</td></tr>
+<tr><td><code translate="no">maxInterval</code></td><td>Especifica o intervalo máximo em segundos.<br>Este parâmetro só é válido se <code translate="no">autoEnable</code> estiver definido como <code translate="no">true</code>.<br>Quando o Milvus detecta que uma coleção não foi compactada por um período superior a este valor, força uma compactação por clustering.</td><td>-</td></tr>
+<tr><td><code translate="no">newDataSizeThreshold</code></td><td>Especifica o limite superior para desencadear uma compactação de agrupamento.<br>Este parâmetro só é válido quando <code translate="no">autoEnable</code> está definido como <code translate="no">true</code>.<br>Quando o Milvus detecta que o volume de dados de uma coleção excede este valor, inicia um processo de compactação em cluster.</td><td>-</td></tr>
 <tr><td><code translate="no">timeout</code></td><td>Especifica a duração do timeout para uma compactação de clustering.<br>Uma compactação de agrupamento falha se o tempo de execução exceder esse valor.</td><td>-</td></tr>
 </tbody>
 </table>
@@ -139,22 +139,7 @@ common:
 </li>
 </ul>
 <p>Para aplicar as alterações acima ao seu cluster Milvus, siga os passos em <a href="/docs/pt/configure-helm.md">Configurar Milvus com Helm</a> e <a href="/docs/pt/configure_operator.md">Configurar Milvus com Milvus Operators</a>.</p>
-<h2 id="Collection-Configuration" class="common-anchor-header">Configuração da coleção<button data-href="#Collection-Configuration" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h2><p>Para compactar o cluster numa coleção específica, deve selecionar um campo escalar da coleção como chave de cluster.</p>
+<h3 id="Collection-Configuration" class="common-anchor-header">Configuração da coleção</h3><p>Para compactar o cluster numa coleção específica, deve selecionar um campo escalar da coleção como chave de cluster.</p>
 <pre><code translate="no" class="language-python">default_fields = [
     FieldSchema(name=<span class="hljs-string">&quot;id&quot;</span>, dtype=DataType.INT64, is_primary=<span class="hljs-literal">True</span>),
     FieldSchema(name=<span class="hljs-string">&quot;key&quot;</span>, dtype=DataType.INT64, is_clustering_key=<span class="hljs-literal">True</span>),

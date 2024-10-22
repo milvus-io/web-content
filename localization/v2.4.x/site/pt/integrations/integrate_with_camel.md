@@ -21,7 +21,8 @@ title: Geração Aumentada por Recuperação (RAG) com Milvus e BentoML
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/rag_with_milvus_and_camel.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a></p>
+    </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/rag_with_milvus_and_camel.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
+<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/rag_with_milvus_and_camel.ipynb" target="_blank"><img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/></a></p>
 <p>Este guia demonstra como construir um sistema RAG (Retrieval-Augmented Generation) utilizando o CAMEL e o Milvus.</p>
 <p>O sistema RAG combina um sistema de recuperação com um modelo generativo para gerar novo texto com base num determinado pedido. O sistema começa por recuperar documentos relevantes de um corpus utilizando o Milvus e, em seguida, utiliza um modelo generativo para gerar novo texto com base nos documentos recuperados.</p>
 <p><a href="https://www.camel-ai.org/">CAMEL</a> é uma estrutura multi-agente. <a href="https://milvus.io/">O Milvus</a> é a base de dados vetorial de código aberto mais avançada do mundo, criada para alimentar a pesquisa de semelhanças de incorporação e as aplicações de IA.</p>
@@ -116,7 +117,7 @@ vector_retriever = <span class="hljs-title class_">VectorRetriever</span>(
     embedding_model=embedding_instance, storage=storage_instance
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>Utilizamos o <code translate="no">Unstructured Module</code> integrado para dividir o conteúdo em pequenos pedaços, o conteúdo será dividido automaticamente com a sua função <code translate="no">chunk_by_title</code>, o carácter máximo para cada pedaço é de 500 caracteres, que é um comprimento adequado para <code translate="no">OpenAIEmbedding</code>. Todo o texto nos pedaços será incorporado e armazenado na instância de armazenamento de vectores, o que levará algum tempo, por favor aguarde.</p>
+<p>Utilizamos o <code translate="no">Unstructured Module</code> integrado para dividir o conteúdo em pequenos pedaços, o conteúdo será dividido automaticamente com a sua função <code translate="no">chunk_by_title</code>, o carácter máximo para cada pedaço é de 500 caracteres, que é um comprimento adequado para <code translate="no">OpenAIEmbedding</code>. Todo o texto nos pedaços será incorporado e armazenado na instância de armazenamento de vectores, o que demorará algum tempo, por favor aguarde.</p>
 <pre><code translate="no" class="language-python">vector_retriever.<span class="hljs-title function_">process</span>(content_input_path=<span class="hljs-string">&quot;local_data/camel paper.pdf&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">[nltk_data] Downloading package punkt to /root/nltk_data...

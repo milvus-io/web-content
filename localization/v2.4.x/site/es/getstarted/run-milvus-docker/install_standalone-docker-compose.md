@@ -57,10 +57,10 @@ title: Ejecutar Milvus con Docker Compose
       </svg>
     </button></h2><p>Milvus proporciona un archivo de configuración Docker Compose en el repositorio Milvus. Para instalar Milvus utilizando Docker Compose, simplemente ejecute</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-comment"># Download the configuration file</span>
-$ wget https://github.com/milvus-io/milvus/releases/download/v2.4.9/milvus-standalone-docker-compose.yml -O docker-compose.yml
+$ wget https://github.com/milvus-io/milvus/releases/download/v2.4.13-hotfix/milvus-standalone-docker-compose.yml -O docker-compose.yml
 
 <span class="hljs-comment"># Start Milvus</span>
-$ <span class="hljs-built_in">sudo</span> docker compose up -d
+$ <span class="hljs-built_in">sudo</span> docker-compose up -d
 
 Creating milvus-etcd  ... <span class="hljs-keyword">done</span>
 Creating milvus-minio ... <span class="hljs-keyword">done</span>
@@ -81,7 +81,7 @@ Creating milvus-standalone ... <span class="hljs-keyword">done</span>
 </ul></li>
 </ul>
 <p>Puede comprobar si los contenedores están en funcionamiento utilizando el siguiente comando:</p>
-<pre><code translate="no" class="language-shell">$ <span class="hljs-built_in">sudo</span> docker compose ps
+<pre><code translate="no" class="language-shell">$ <span class="hljs-built_in">sudo</span> docker-compose ps
 
       Name                     Command                  State                            Ports
 --------------------------------------------------------------------------------------------------------------------
@@ -91,7 +91,7 @@ milvus-standalone   /tini -- milvus run standalone   Up             0.0.0.0:1953
 <button class="copy-code-btn"></button></code></pre>
 <p>Puede detener y eliminar este contenedor de la siguiente manera</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-comment"># Stop Milvus</span>
-$ <span class="hljs-built_in">sudo</span> docker compose down
+$ <span class="hljs-built_in">sudo</span> docker-compose down
 
 <span class="hljs-comment"># Delete service data</span>
 $ <span class="hljs-built_in">sudo</span> <span class="hljs-built_in">rm</span> -rf volumes
@@ -113,7 +113,7 @@ $ <span class="hljs-built_in">sudo</span> <span class="hljs-built_in">rm</span> 
       </svg>
     </button></h2><p>Habiendo instalado Milvus en Docker, puede:</p>
 <ul>
-<li><p>Comprobar <a href="/docs/es/quickstart.md">Quickstart</a> para ver lo que Milvus puede hacer.</p></li>
+<li><p>Comprobar <a href="/docs/es/quickstart.md">Quickstart</a> para ver qué puede hacer Milvus.</p></li>
 <li><p>Aprender las operaciones básicas de Milvus:</p>
 <ul>
 <li><a href="/docs/es/manage_databases.md">Gestionar bases de datos</a></li>
@@ -125,7 +125,7 @@ $ <span class="hljs-built_in">sudo</span> <span class="hljs-built_in">rm</span> 
 </ul></li>
 <li><p><a href="/docs/es/upgrade_milvus_cluster-helm.md">Actualice Milvus utilizando Helm Chart</a>.</p></li>
 <li><p><a href="/docs/es/scaleout.md">Escale su cluster Milvus</a>.</p></li>
-<li><p>Despliegue su clúster Milvu en nubes:</p>
+<li><p>Despliegue su clúster Milvus en nubes:</p>
 <ul>
 <li><a href="/docs/es/eks.md">Amazon EKS</a></li>
 <li><a href="/docs/es/gcp.md">Google Cloud</a></li>

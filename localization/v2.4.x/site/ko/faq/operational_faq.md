@@ -48,7 +48,7 @@ title: 운영 FAQ
 <h4 id="Why-does-Milvus-return-illegal-instruction-during-startup" class="common-anchor-header">Milvus가 시작 중에 <code translate="no">illegal instruction</code> 을 반환하는 이유는 무엇인가요?</h4><p>Milvus를 사용하려면 CPU가 SIMD 명령어 집합을 지원해야 합니다: SSE4.2, AVX, AVX2 또는 AVX512. CPU가 이 중 하나 이상을 지원해야 Milvus가 정상적으로 작동합니다. 시작 중에 <code translate="no">illegal instruction</code> 오류가 반환되면 CPU가 위의 네 가지 명령어 집합 중 어느 것도 지원하지 않는다는 뜻입니다.</p>
 <p><a href="/docs/ko/prerequisite-docker.md">CPU의 SIMD 명령어 세트 지원을</a> 참조하세요.</p>
 <h4 id="Can-I-install-Milvus-on-Windows" class="common-anchor-header">Windows에 Milvus를 설치할 수 있나요?</h4><p>예. 소스 코드 또는 바이너리 패키지에서 컴파일하여 Windows에 Milvus를 설치할 수 있습니다.</p>
-<p>Windows에서 Milvus를 설치하는 방법을 알아보려면 <a href="https://milvus.io/blog/2021-11-19-run-milvus-2.0-on-windows.md">Windows에서</a> Milvus <a href="https://milvus.io/blog/2021-11-19-run-milvus-2.0-on-windows.md">실행하기를</a> 참조하세요.</p>
+<p>Windows에서 Milvus를 설치하는 방법을 알아보려면 Windows에서 Milvus <a href="https://milvus.io/blog/2021-11-19-run-milvus-2.0-on-windows.md">실행하기를</a> 참조하세요.</p>
 <h4 id="I-got-an-error-when-installing-pymilvus-on-Windows-What-shall-I-do" class="common-anchor-header">Windows에 pymilvus를 설치할 때 오류가 발생했습니다. 어떻게 해야 하나요?</h4><p>Windows에 PyMilvus를 설치하지 않는 것이 좋습니다. 그러나 Windows에 PyMilvus를 설치해야 하는데 오류가 발생하면 <a href="https://docs.conda.io/projects/conda/en/latest/user-guide/install/index.html">Conda</a> 환경에서 설치해 보세요. Conda 환경에서 PyMilvus를 설치하는 방법에 대한 자세한 내용은 <a href="/docs/ko/install-pymilvus.md">Milvus SDK 설치하기를</a> 참조하세요.</p>
 <h4 id="Can-I-deploy-Milvus-when-disconnected-from-the-Internet" class="common-anchor-header">인터넷 연결이 끊긴 상태에서도 Milvus를 배포할 수 있나요?</h4><p>예. 오프라인 환경에서도 Milvus를 설치할 수 있습니다. 자세한 내용은 <a href="/docs/ko/install_offline-helm.md">Milvus 오프라인 설치를</a> 참조하세요.</p>
 <h4 id="Where-can-I-find-the-logs-generated-by-Milvus" class="common-anchor-header">Milvus에서 생성된 로그는 어디에서 찾을 수 있나요?</h4><p>Milvus 로그는 기본적으로 stout(표준 출력) 및 stderr(표준 오류)로 인쇄되지만, 프로덕션 환경에서 로그를 영구 볼륨으로 리디렉션하는 것을 적극 권장합니다. 이렇게 하려면 <strong>milvus.yaml에서</strong> <code translate="no">log.file.rootPath</code> 을 업데이트하세요. 또한 <code translate="no">milvus-helm</code> 차트와 함께 Milvus를 배포하는 경우, <code translate="no">--set log.persistence.enabled=true</code> 을 통해 로그 지속성을 먼저 활성화해야 합니다.</p>
@@ -72,7 +72,32 @@ title: 운영 FAQ
 <li><p><strong>쿼리(정확히 일치)</strong>: Milvus는 일치하는 PK가 있는 최신 엔티티를 선택합니다. ANN 검색: Milvus는 엔티티가 동일한 PK를 공유하더라도 유사성 점수가 가장 높은 엔티티를 선택합니다. 컬렉션에 중복된 기본 키가 많은 경우 이 우선 순위 지정으로 인해 제한보다 적은 수의 고유한 결과가 나올 수 있습니다.</p></li>
 <li><p><strong>불충분한 일치</strong>: 검색 필터링 표현식이 너무 엄격하여 유사성 임계값을 충족하는 엔티티 수가 적을 수 있습니다. 검색에 설정된 조건이 너무 제한적이면 일치하는 엔티티가 충분하지 않아 예상보다 적은 수의 결과가 나옵니다.</p></li>
 </ul>
-<h4 id="Still-have-questions" class="common-anchor-header">질문이 더 있으신가요?</h4><p>질문이 있으신가요?</p>
+<h4 id="MilvusClientmilvusdemodb-gives-an-error-ModuleNotFoundError-No-module-named-milvuslite-What-causes-this-and-how-can-it-be-solved" class="common-anchor-header"><code translate="no">MilvusClient(&quot;milvus_demo.db&quot;) gives an error: ModuleNotFoundError: No module named 'milvus_lite'</code>. 이 오류의 원인은 무엇이며 어떻게 해결할 수 있나요?</h4><p>이 오류는 Windows 플랫폼에서 Milvus Lite를 사용하려고 할 때 발생합니다. Milvus Lite는 주로 Linux 환경을 위해 설계되었으며 Windows에 대한 기본 지원이 없을 수 있습니다.</p>
+<p>해결책은 Linux 환경을 활용하는 것입니다:</p>
+<ul>
+<li>Linux 기반 운영 체제 또는 가상 머신을 사용하여 Milvus Lite를 실행합니다.</li>
+<li>이 접근 방식은 라이브러리의 종속성 및 기능과의 호환성을 보장합니다.</li>
+</ul>
+<h4 id="What-are-the-length-exceeds-max-length-errors-in-Milvus-and-how-can-they-be-understood-and-addressed" class="common-anchor-header">Milvus에서 "길이가 최대 길이를 초과함" 오류란 무엇이며 어떻게 이해하고 해결할 수 있나요?</h4><p>Milvus의 "길이가 최대 길이를 초과함" 오류는 데이터 요소의 크기가 컬렉션 또는 필드에 허용되는 최대 크기를 초과할 때 발생합니다. 다음은 몇 가지 예와 설명입니다:</p>
+<ul>
+<li><p>JSON 필드 오류: <code translate="no">&lt;MilvusException: (code=1100, message=the length (398324) of json field (metadata) exceeds max length (65536): expected=valid length json string, actual=length exceeds max length: invalid parameter)&gt;</code></p></li>
+<li><p>문자열 길이 오류: <code translate="no">&lt;ParamError: (code=1, message=invalid input, length of string exceeds max length. length: 74238, max length: 60535)&gt;</code></p></li>
+<li><p>VarChar 필드 오류: <code translate="no">&lt;MilvusException: (code=1100, message=the length (60540) of 0th VarChar paragraph exceeds max length (0)%!(EXTRA int64=60535): invalid parameter)&gt;</code></p></li>
+</ul>
+<p>이러한 오류를 이해하고 해결하려면 다음과 같이 하세요:</p>
+<ul>
+<li>Python에서 <code translate="no">len(str)</code> 은 바이트 단위의 크기가 아니라 문자 수를 나타냅니다.</li>
+<li>VARCHAR 및 JSON과 같은 문자열 기반 데이터 유형의 경우 <code translate="no">len(bytes(str, encoding='utf-8'))</code> 을 사용하여 실제 크기를 바이트 단위로 확인하며, 이는 Milvus가 &quot;최대 길이&quot;에 사용하는 것입니다.</li>
+</ul>
+<p>Python의 예제:</p>
+<pre><code translate="no" class="language-python"><span class="hljs-comment"># Python Example: result of len() str cannot be used as &quot;max-length&quot; in Milvus </span>
+<span class="hljs-meta">&gt;&gt;&gt; </span>s = <span class="hljs-string">&quot;你好，世界！&quot;</span>
+<span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-built_in">len</span>(s) <span class="hljs-comment"># Number of characters of s.</span>
+<span class="hljs-number">6</span>
+<span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-built_in">len</span>(<span class="hljs-built_in">bytes</span>(s, <span class="hljs-string">&quot;utf-8&quot;</span>)) <span class="hljs-comment"># Size in bytes of s, max-length in Milvus.</span>
+<span class="hljs-number">18</span>
+<button class="copy-code-btn"></button></code></pre>
+<h4 id="Still-have-questions" class="common-anchor-header">질문이 더 있으신가요?</h4><p>그럴 수 있습니다:</p>
 <ul>
 <li>GitHub에서 <a href="https://github.com/milvus-io/milvus/issues">Milvus를</a> 확인하세요. 자유롭게 질문하고, 아이디어를 공유하고, 다른 사람들을 도와주세요.</li>
 <li><a href="https://discuss.milvus.io/">Milvus 포럼</a> 또는 <a href="https://join.slack.com/t/milvusio/shared_invite/enQtNzY1OTQ0NDI3NjMzLWNmYmM1NmNjOTQ5MGI5NDhhYmRhMGU5M2NhNzhhMDMzY2MzNDdlYjM5ODQ5MmE3ODFlYzU3YjJkNmVlNDQ2ZTk">Slack 채널에</a> 가입하여 지원을 찾고 오픈 소스 커뮤니티에 참여하세요.</li>

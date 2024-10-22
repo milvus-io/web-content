@@ -2,7 +2,7 @@
 id: disk_index.md
 related_key: disk_index
 summary: Mécanisme d'indexation des disques dans Milvus.
-title: Index sur disque
+title: Indexation sur disque
 ---
 <h1 id="On-disk-Index" class="common-anchor-header">Indexation sur disque<button data-href="#On-disk-Index" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -68,7 +68,7 @@ Actuellement, un champ vectoriel ne prend en charge qu'un seul type d'index. Mil
     </button></h2><p>Pour utiliser DiskANN, veillez à</p>
 <ul>
 <li>N'utilisez que des vecteurs flottants ayant au moins une dimension dans vos données.</li>
-<li>d'utiliser uniquement la distance euclidienne (L2) ou le produit intérieur (IP) pour mesurer la distance entre les vecteurs.</li>
+<li>d'utiliser uniquement la distance euclidienne (L2), le produit intérieur (IP) ou COSINE pour mesurer la distance entre les vecteurs.</li>
 </ul>
 <h2 id="Index-and-search-settings" class="common-anchor-header">Paramètres d'index et de recherche<button data-href="#Index-and-search-settings" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -86,7 +86,7 @@ Actuellement, un champ vectoriel ne prend en charge qu'un seul type d'index. Mil
         ></path>
       </svg>
     </button></h2><ul>
-<li><p>Paramètres de construction de l'index</p>
+<li><p>Paramètres de construction d'index</p>
 <p>Lors de la création d'un index DiskANN, utilisez <code translate="no">DISKANN</code> comme type d'index. Aucun paramètre d'index n'est nécessaire.</p></li>
 <li><p>Paramètres de recherche</p>
 <table>
@@ -132,7 +132,7 @@ DiskIndex:
 <tr><td><code translate="no">MaxDegree</code></td><td>Degré maximal du graphe de Vamana. <br/> Une valeur plus élevée permet d'obtenir un taux de rappel plus important, mais augmente la taille de l'index et le temps nécessaire à sa construction.</td><td>[1, 512]</td><td>56</td></tr>
 <tr><td><code translate="no">SearchListSize</code></td><td>Taille de la liste des candidats. <br/> Une valeur plus élevée augmente le temps consacré à la construction de l'index mais offre un taux de rappel plus élevé. <br/> Fixez-la à une valeur inférieure à <code translate="no">MaxDegree</code>, sauf si vous avez besoin de réduire le temps de construction de l'index.</td><td>[1, int32_max]</td><td>100</td></tr>
 <tr><td><code translate="no">PQCodeBugetGBRatio</code></td><td>Limite de taille du code PQ. <br/> Une valeur plus élevée offre un taux de rappel plus important mais augmente l'utilisation de la mémoire.</td><td>(0.0, 0.25]</td><td>0.125</td></tr>
-<tr><td><code translate="no">SearchCacheBudgetGBRatio</code></td><td>Rapport entre les numéros de nœuds mis en cache et les données brutes. <br/> Une valeur plus élevée améliore les performances de construction d'index, mais augmente l'utilisation de la mémoire.</td><td>[0.0, 0.3)</td><td>0.10</td></tr>
+<tr><td><code translate="no">SearchCacheBudgetGBRatio</code></td><td>Rapport entre les numéros de nœuds mis en cache et les données brutes. <br/> Une valeur plus élevée améliore la performance de la construction de l'index mais augmente l'utilisation de la mémoire.</td><td>[0.0, 0.3)</td><td>0.10</td></tr>
 <tr><td><code translate="no">BeamWidthRatio</code></td><td>Rapport entre le nombre maximum de requêtes IO par itération de recherche et le nombre de CPU.</td><td>[1, max(128 / nombre de CPU, 16)]</td><td>4.0</td></tr>
 </tbody>
 </table>

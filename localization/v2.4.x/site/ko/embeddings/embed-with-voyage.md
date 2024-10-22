@@ -30,13 +30,13 @@ pip install <span class="hljs-string">&quot;pymilvus[model]&quot;</span>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus.model.dense <span class="hljs-keyword">import</span> VoyageEmbeddingFunction
 
 voyage_ef = VoyageEmbeddingFunction(
-    model_name=<span class="hljs-string">&quot;voyage-lite-02-instruct&quot;</span>, <span class="hljs-comment"># Defaults to `voyage-2`</span>
+    model_name=<span class="hljs-string">&quot;voyage-3&quot;</span>, <span class="hljs-comment"># Defaults to `voyage-3`</span>
     api_key=VOYAGE_API_KEY <span class="hljs-comment"># Provide your Voyage API key</span>
 )
 <button class="copy-code-btn"></button></code></pre>
 <p><strong>매개변수</strong></p>
 <ul>
-<li><code translate="no">model_name</code> (문자열) 인코딩에 사용할 Voyage 모델의 이름입니다. 예를 들어 <code translate="no">voyage-law-2</code>, <code translate="no">voyage-code-2</code> 등과 같이 사용 가능한 Voyage 모델 이름 중 하나를 지정할 수 있습니다. 이 매개변수를 지정하지 않으면 <code translate="no">voyage-2</code> 이 사용됩니다. 사용 가능한 모델 목록은 <a href="https://docs.voyageai.com/docs/embeddings">Voyage 공식 문서를</a> 참조하세요.</li>
+<li><code translate="no">model_name</code> (문자열) 인코딩에 사용할 Voyage 모델의 이름입니다. 예를 들어 <code translate="no">voyage-3-lite</code>, <code translate="no">voyage-finance-2</code> 등과 같이 사용 가능한 Voyage 모델 이름 중 하나를 지정할 수 있습니다. 이 매개변수를 지정하지 않으면 <code translate="no">voyage-3</code> 이 사용됩니다. 사용 가능한 모델 목록은 <a href="https://docs.voyageai.com/docs/embeddings">Voyage 공식 문서를</a> 참조하세요.</li>
 <li><code translate="no">api_key</code> (문자열) Voyage API에 액세스하기 위한 API 키입니다. API 키를 생성하는 방법에 대한 자세한 내용은 <a href="https://docs.voyageai.com/docs/api-key-and-installation">API 키 및 파이썬 클라이언트를</a> 참조하세요.</li>
 </ul>
 <p>문서용 임베딩을 만들려면 <code translate="no">encode_documents()</code> 메서드를 사용합니다:</p>

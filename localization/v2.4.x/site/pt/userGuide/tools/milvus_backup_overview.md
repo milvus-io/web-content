@@ -3,7 +3,7 @@ id: milvus_backup_overview.md
 summary: >-
   O Milvus-Backup é uma ferramenta que permite aos utilizadores fazer cópias de
   segurança e restaurar os dados do Milvus.
-title: Backup de Milvus
+title: Cópia de segurança do Milvus
 ---
 <h1 id="Milvus-Backup" class="common-anchor-header">Cópia de segurança do Milvus<button data-href="#Milvus-Backup" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -79,5 +79,5 @@ title: Backup de Milvus
         ></path>
       </svg>
     </button></h2><ul>
-<li><a href="https://github.com/zilliztech/milvus-backup/releases/tag/v0.4.12">v0.4.12</a></li>
+<li><a href="https://github.com/zilliztech/milvus-backup/releases/tag/v0.4.15">v0.4.15</a></li>
 </ul>

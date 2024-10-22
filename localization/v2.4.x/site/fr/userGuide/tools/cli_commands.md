@@ -1,7 +1,7 @@
 ---
 id: cli_commands.md
 summary: Interagir avec Milvus à l'aide de commandes.
-title: Référence des commandes Milvus_CLI
+title: Référence de la commande Milvus_CLI
 ---
 <h1 id="MilvusCLI-Command-Reference" class="common-anchor-header">Référence de la commande Milvus_CLI<button data-href="#MilvusCLI-Command-Reference" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -75,7 +75,7 @@ title: Référence des commandes Milvus_CLI
 <tbody>
 <tr><td style="text-align:left">-uri</td><td style="text-align:left">-uri</td><td style="text-align:left">(Facultatif) Nom de l'uri. La valeur par défaut est &quot;http://127.0.0.1:19530&quot;.</td></tr>
 <tr><td style="text-align:left">-t</td><td style="text-align:left">-token</td><td style="text-align:left">(Facultatif) L'apikey du nuage zilliz ou <code translate="no">username:password</code>. La valeur par défaut est None.</td></tr>
-<tr><td style="text-align:left">-help</td><td style="text-align:left">n/a</td><td style="text-align:left">Affiche l'aide pour l'utilisation de la commande.</td></tr>
+<tr><td style="text-align:left">-help</td><td style="text-align:left">s.o.</td><td style="text-align:left">Affiche l'aide pour l'utilisation de la commande.</td></tr>
 </tbody>
 </table>
 <p><h3 id="connect">Exemple</h3></p>
@@ -143,7 +143,7 @@ title: Référence des commandes Milvus_CLI
 <h3 id="Examples" class="common-anchor-header">Exemples d'utilisation</h3><h4 id="Example-1" class="common-anchor-header">Exemple 1</h4><p>L'exemple suivant utilise la base de données <code translate="no">testdb</code> dans milvus.</p>
 <pre><code translate="no" class="language-shell">milvus_cli &gt; use database -db testdb
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="List-Databases" class="common-anchor-header">Lister les bases de données<button data-href="#List-Databases" class="anchor-icon" translate="no">
+<h2 id="list-Databases" class="common-anchor-header">lister les bases de données<button data-href="#list-Databases" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -158,14 +158,14 @@ title: Référence des commandes Milvus_CLI
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Lister les bases de données dans Milvus</p>
+    </button></h2><p>Liste des bases de données dans Milvus</p>
 <p><h3 id="list-database">Syntaxe</h3></p>
 <pre><code translate="no" class="language-shell">list databases 
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Examples" class="common-anchor-header">Exemples de base de données</h3><h4 id="Example-1" class="common-anchor-header">Exemple 1</h4><p>L'exemple suivant répertorie les bases de données de Milvus.</p>
+<h3 id="Examples" class="common-anchor-header">Exemples de base de données</h3><h4 id="Example-1" class="common-anchor-header">Exemple 1</h4><p>L'exemple suivant répertorie les bases de données dans Milvus.</p>
 <pre><code translate="no" class="language-shell">milvus_cli &gt; list databases
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Delete-Database" class="common-anchor-header">Supprimer une base de données<button data-href="#Delete-Database" class="anchor-icon" translate="no">
+<h2 id="delete-Database" class="common-anchor-header">supprimer la base de données<button data-href="#delete-Database" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -447,7 +447,7 @@ Timeout []:
 </thead>
 <tbody>
 <tr><td style="text-align:left">-a</td><td style="text-align:left">-Nom de l'alias</td><td style="text-align:left">L'alias.</td></tr>
-<tr><td style="text-align:left">-help</td><td style="text-align:left">s.o.</td><td style="text-align:left">Affiche l'aide à l'utilisation de la commande.</td></tr>
+<tr><td style="text-align:left">-help</td><td style="text-align:left">s.o.</td><td style="text-align:left">Affiche l'aide pour l'utilisation de la commande.</td></tr>
 <tr><td style="text-align:left"></td></tr>
 </tbody>
 </table>
@@ -544,7 +544,7 @@ Timeout []:
 <p><h3 id="delete-partition">Options</h3></p>
 <table>
 <thead>
-<tr><th style="text-align:left">Option</th><th style="text-align:left">Nom complet</th><th style="text-align:left">Description de l'option</th></tr>
+<tr><th style="text-align:left">Option</th><th style="text-align:left">Nom complet</th><th style="text-align:left">Description</th></tr>
 </thead>
 <tbody>
 <tr><td style="text-align:left">-c</td><td style="text-align:left">-Nom de la collection</td><td style="text-align:left">Le nom de la collection à laquelle appartient la partition à supprimer.</td></tr>
@@ -615,7 +615,7 @@ Timeout []:
 </thead>
 <tbody>
 <tr><td style="text-align:left">-c</td><td style="text-align:left">-Nom de la collection</td><td style="text-align:left">Le nom de la collection.</td></tr>
-<tr><td style="text-align:left">-help</td><td style="text-align:left">n/a</td><td style="text-align:left">Affiche l'aide pour l'utilisation de la commande.</td></tr>
+<tr><td style="text-align:left">-help</td><td style="text-align:left">n/a</td><td style="text-align:left">Affiche l'aide à l'utilisation de la commande.</td></tr>
 </tbody>
 </table>
 <p><h3>Exemple</h3></p>
@@ -784,7 +784,7 @@ Timeout []:
 </thead>
 <tbody>
 <tr><td style="text-align:left">-c</td><td style="text-align:left">-Nom de la collection</td><td style="text-align:left">Le nom de la collection dans laquelle les données sont insérées.</td></tr>
-<tr><td style="text-align:left">-p</td><td style="text-align:left">-partition</td><td style="text-align:left">(Facultatif) Le nom de la partition dans laquelle les données sont insérées. Si l'option partition n'est pas activée, la partition "_default" est choisie.</td></tr>
+<tr><td style="text-align:left">-p</td><td style="text-align:left">-partition</td><td style="text-align:left">(Facultatif) Le nom de la partition dans laquelle les données sont insérées. Le fait de ne pas passer cette option de partition indique que l'on choisit la partition "_default".</td></tr>
 <tr><td style="text-align:left">-help</td><td style="text-align:left">s.o.</td><td style="text-align:left">Affiche l'aide à l'utilisation de la commande.</td></tr>
 </tbody>
 </table>
@@ -871,7 +871,7 @@ Milvus timestamp:           428849214449254403
 <p><h3 id="list-collections">Options<h3></p>
 <table>
 <thead>
-<tr><th style="text-align:left">Option</th><th style="text-align:left">Nom complet</th><th style="text-align:left">Description</th></tr>
+<tr><th style="text-align:left">Option</th><th style="text-align:left">Nom complet</th><th style="text-align:left">Description de l'option</th></tr>
 </thead>
 <tbody>
 <tr><td style="text-align:left">-help</td><td style="text-align:left">s.o.</td><td style="text-align:left">Affiche l'aide pour l'utilisation de la commande.</td></tr>
@@ -1088,7 +1088,7 @@ Graceful time. Only used <span class="hljs-keyword">in</span> bounded consistenc
 <tr><th style="text-align:left">Option</th><th style="text-align:left">Nom complet</th><th style="text-align:left">Description</th></tr>
 </thead>
 <tbody>
-<tr><td style="text-align:left">-help</td><td style="text-align:left">s.o.</td><td style="text-align:left">Affiche l'aide pour l'utilisation de la commande.</td></tr>
+<tr><td style="text-align:left">-help</td><td style="text-align:left">s.o.</td><td style="text-align:left">Affiche l'aide à l'utilisation de la commande.</td></tr>
 </tbody>
 </table>
 <p><h3 id="search">Exemples d'utilisation</h3>
@@ -1165,7 +1165,7 @@ timeout []:
 Guarantee Timestamp(It instructs Milvus to see <span class="hljs-built_in">all</span> operations performed before a provided timestamp. If no such timestamp <span class="hljs-keyword">is</span> provided, then Milvus will search <span class="hljs-built_in">all</span> operations performed to date) [<span class="hljs-number">0</span>]:
 
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="List-connection" class="common-anchor-header">Lister les connexions<button data-href="#List-connection" class="anchor-icon" translate="no">
+<h2 id="list-connection" class="common-anchor-header">liste des connexions<button data-href="#list-connection" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -1180,7 +1180,7 @@ Guarantee Timestamp(It instructs Milvus to see <span class="hljs-built_in">all</
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Répertorier les connexions.</p>
+    </button></h2><p>Répertorie les connexions.</p>
 <p><h3 id="show-connection">Syntaxe</h3></p>
 <pre><code translate="no" class="language-shell">list connections 
 <button class="copy-code-btn"></button></code></pre>
@@ -1238,7 +1238,7 @@ Guarantee Timestamp(It instructs Milvus to see <span class="hljs-built_in">all</
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Affiche la progression du chargement de l'entité.</p>
+    </button></h2><p>Affiche la progression du chargement d'une collection.</p>
 <p><h3 id="show-loading-progress">Syntaxe</h3></p>
 <pre><code translate="no" class="language-shell">show loading_progress -c (text) [-p (text)]
 <button class="copy-code-btn"></button></code></pre>

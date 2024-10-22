@@ -3,7 +3,6 @@ id: cli_commands.md
 summary: コマンドを使ってMilvusと対話する。
 title: Milvus_CLI コマンドリファレンス
 ---
-
 <h1 id="MilvusCLI-Command-Reference" class="common-anchor-header">Milvus_CLI コマンドリファレンス<button data-href="#MilvusCLI-Command-Reference" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -97,7 +96,7 @@ title: Milvus_CLI コマンドリファレンス
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvusでデータベースを作成する</p>
+    </button></h2><p>Milvusでデータベースを作成する。</p>
 <p><h3 id="create-database">構文</h3></p>
 <pre><code translate="no" class="language-shell">create database -db (text) 
 <button class="copy-code-btn"></button></code></pre>
@@ -110,7 +109,7 @@ title: Milvus_CLI コマンドリファレンス
 <tr><td style="text-align:left">-ヘルプ</td><td style="text-align:left">n/a</td><td style="text-align:left">コマンドの使用に関するヘルプを表示します。</td></tr>
 </tbody>
 </table>
-<h3 id="Examples" class="common-anchor-header">例</h3><h4 id="Example-1" class="common-anchor-header">例</h4><p>次の例では、milvusにデータベース<code translate="no">testdb</code> を作成します。</p>
+<h3 id="Examples" class="common-anchor-header">例</h3><h4 id="Example-1" class="common-anchor-header">例</h4><p>次の例では、milvusにデータベース<code translate="no">testdb</code> を作成しています。</p>
 <pre><code translate="no" class="language-shell">milvus_cli &gt; create database -db testdb
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="use-Database" class="common-anchor-header">データベース使用<button data-href="#use-Database" class="anchor-icon" translate="no">
@@ -128,7 +127,7 @@ title: Milvus_CLI コマンドリファレンス
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvusでデータベースを使用する</p>
+    </button></h2><p>milvusでデータベースを使用する。</p>
 <p><h3 id="use-database">構文</h3></p>
 <pre><code translate="no" class="language-shell">use database -db (text) 
 <button class="copy-code-btn"></button></code></pre>
@@ -144,7 +143,7 @@ title: Milvus_CLI コマンドリファレンス
 <h3 id="Examples" class="common-anchor-header">例</h3><h4 id="Example-1" class="common-anchor-header">例</h4><p>以下の例では、milvusのデータベース<code translate="no">testdb</code> 。</p>
 <pre><code translate="no" class="language-shell">milvus_cli &gt; use database -db testdb
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="List-Databases" class="common-anchor-header">データベースのリスト<button data-href="#List-Databases" class="anchor-icon" translate="no">
+<h2 id="list-Databases" class="common-anchor-header">リスト データベース<button data-href="#list-Databases" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -159,14 +158,14 @@ title: Milvus_CLI コマンドリファレンス
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvusのデータベースをリストする</p>
+    </button></h2><p>milvusのデータベースをリストアップする。</p>
 <p><h3 id="list-database">構文</h3></p>
 <pre><code translate="no" class="language-shell">list databases 
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Examples" class="common-anchor-header">例</h3><h4 id="Example-1" class="common-anchor-header">例 1</h4><p>以下の例では、milvusのデータベースをリストアップしています。</p>
+<h3 id="Examples" class="common-anchor-header">例</h3><h4 id="Example-1" class="common-anchor-header">例 1</h4><p>次の例はmilvusのデータベースをリストアップします。</p>
 <pre><code translate="no" class="language-shell">milvus_cli &gt; list databases
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Delete-Database" class="common-anchor-header">データベースの削除<button data-href="#Delete-Database" class="anchor-icon" translate="no">
+<h2 id="delete-Database" class="common-anchor-header">データベース削除<button data-href="#delete-Database" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -181,7 +180,7 @@ title: Milvus_CLI コマンドリファレンス
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvusにおけるデータベースの削除</p>
+    </button></h2><p>milvusのデータベースを削除する。</p>
 <p><h3 id="delete-database">構文</h3></p>
 <pre><code translate="no" class="language-shell"><span class="hljs-keyword">delete</span> database -<span class="hljs-title function_">db</span> (text) 
 <button class="copy-code-btn"></button></code></pre>
@@ -194,7 +193,7 @@ title: Milvus_CLI コマンドリファレンス
 <tr><td style="text-align:left">-ヘルプ</td><td style="text-align:left">n/a</td><td style="text-align:left">コマンドの使用に関するヘルプを表示します。</td></tr>
 </tbody>
 </table>
-<h3 id="Examples" class="common-anchor-header">例</h3><h4 id="Example-1" class="common-anchor-header">例</h4><p>次の例では、milvusのデータベース<code translate="no">testdb</code> を削除します。</p>
+<h3 id="Examples" class="common-anchor-header">例</h3><h4 id="Example-1" class="common-anchor-header">例</h4><p>次の例では、milvusのデータベース<code translate="no">testdb</code> を削除しています。</p>
 <pre><code translate="no" class="language-shell">milvus_cli &gt; <span class="hljs-keyword">delete</span> database -db testdb
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="create-user" class="common-anchor-header">ユーザ作成<button data-href="#create-user" class="anchor-icon" translate="no">
@@ -212,7 +211,7 @@ title: Milvus_CLI コマンドリファレンス
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvusにユーザを作成する。</p>
+    </button></h2><p>milvusにユーザを作成する。</p>
 <p><h3 id="create-user">構文</h3></p>
 <pre><code translate="no" class="language-shell">create user -u (text) -p (text)
 <button class="copy-code-btn"></button></code></pre>
@@ -221,12 +220,12 @@ title: Milvus_CLI コマンドリファレンス
 <tr><th style="text-align:left">オプション</th><th style="text-align:left">フルネーム</th><th style="text-align:left">説明</th></tr>
 </thead>
 <tbody>
-<tr><td style="text-align:left">-p</td><td style="text-align:left">-パスワード</td><td style="text-align:left">milvus でのユーザー・パスワード。デフォルトは &quot;None&quot;。</td></tr>
-<tr><td style="text-align:left">-u</td><td style="text-align:left">-ユーザー名</td><td style="text-align:left">milvus のユーザー名。デフォルトは &quot;None&quot; です。</td></tr>
+<tr><td style="text-align:left">-p</td><td style="text-align:left">-パスワード</td><td style="text-align:left">milvusのユーザーパスワード。デフォルトは &quot;None&quot;。</td></tr>
+<tr><td style="text-align:left">-u</td><td style="text-align:left">-ユーザー名</td><td style="text-align:left">milvusでのユーザー名。デフォルトは &quot;None&quot; です。</td></tr>
 <tr><td style="text-align:left">-ヘルプ</td><td style="text-align:left">n/a</td><td style="text-align:left">コマンドの使用に関するヘルプを表示します。</td></tr>
 </tbody>
 </table>
-<h3 id="Examples" class="common-anchor-header">例</h3><h4 id="Example-1" class="common-anchor-header">例</h4><p>次の例では、milvusにユーザー<code translate="no">zilliz</code> とパスワード<code translate="no">zilliz</code> を作成します。</p>
+<h3 id="Examples" class="common-anchor-header">例</h3><h4 id="Example-1" class="common-anchor-header">例</h4><p>次の例では、milvusにユーザー<code translate="no">zilliz</code> 、パスワード<code translate="no">zilliz</code> を作成します。</p>
 <pre><code translate="no" class="language-shell">milvus_cli &gt; create user -u zilliz -p zilliz
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="create-alias" class="common-anchor-header">エイリアスの作成<button data-href="#create-alias" class="anchor-icon" translate="no">
@@ -312,7 +311,6 @@ title: Milvus_CLI コマンドリファレンス
 
 milvus_cli &gt; create collection -c car -f <span class="hljs-built_in">id</span>:INT64:primary_field -f vector:FLOAT_VECTOR:<span class="hljs-number">128</span> -f color:INT64:color -f brand:ARRAY:<span class="hljs-number">64</span>:VARCHAR:<span class="hljs-number">128</span> -p <span class="hljs-built_in">id</span> -A -d <span class="hljs-string">&#x27;car_collection&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-
 <h2 id="create-partition" class="common-anchor-header">パーティション作成<button data-href="#create-partition" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -387,14 +385,13 @@ The name of the field to create an index <span class="hljs-keyword">for</span> (
 Index name: vectorIndex
 
 <span class="hljs-comment"># Default is &#x27;&#x27;</span>
-Index <span class="hljs-built_in">type</span> FLAT, IVF_FLAT, IVF_SQ8, IVF_PQ, RNSG, HNSW, ANNOY, AUTOINDEX, DISKANN, GPU_IVF_FLAT, GPU_IVF_PQ, SPARSE_INVERTED_INDEX, SPARSE_WAND, SCANN, STL_SORT, Trie, INVERTED, ) []: IVF_FLAT
+Index <span class="hljs-built_in">type</span> FLAT, IVF_FLAT, IVF_SQ8, IVF_PQ, RNSG, HNSW, ANNOY, AUTOINDEX, DISKANN, GPU_IVF_FLAT, GPU_IVF_PQ, SPARSE_INVERTED_INDEX, SPARSE_WAND, SCANN, STL_SORT, Trie, INVERTED, ) []: IVF_FLAT  
 
 <span class="hljs-comment"># Default is &#x27;&#x27;</span>
-Index metric <span class="hljs-built_in">type</span> (L2, IP, HAMMING, TANIMOTO, COSINE, ) []:
+Index metric <span class="hljs-built_in">type</span> (L2, IP, HAMMING, TANIMOTO, COSINE, ) []: 
 
 Timeout []:
 <button class="copy-code-btn"></button></code></pre>
-
 <h2 id="delete-user" class="common-anchor-header">delete user<button data-href="#delete-user" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -525,7 +522,6 @@ Timeout []:
 
 <span class="hljs-title class_">Do</span> you want to <span class="hljs-keyword">continue</span>? [y/N]: y
 <button class="copy-code-btn"></button></code></pre>
-
 <h2 id="delete-partition" class="common-anchor-header">パーティション削除<button data-href="#delete-partition" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -796,7 +792,7 @@ Timeout []:
 次の例は、ローカルのCSVファイルをインポートします。</p>
 <pre><code translate="no" class="language-shell">milvus_cli &gt; <span class="hljs-keyword">import</span> -c car <span class="hljs-string">&#x27;examples/import_csv/vectors.csv&#x27;</span>
 
-Reading csv file... [<span class="hljs-comment">####################################] 100%</span>
+Reading csv file...  [<span class="hljs-comment">####################################]  100%</span>
 
 Column names are [<span class="hljs-string">&#x27;vector&#x27;</span>, <span class="hljs-string">&#x27;color&#x27;</span>, <span class="hljs-string">&#x27;brand&#x27;</span>]
 
@@ -805,17 +801,12 @@ Processed <span class="hljs-number">50001</span> lines.
 Inserting ...
 
 Insert successfully.
-
----
-
-Total insert entities: <span class="hljs-number">50000</span>
-Total collection entities: <span class="hljs-number">150000</span>
-Milvus timestamp: <span class="hljs-number">428849214449254403</span>
-
----
-
+--------------------------  ------------------
+Total insert entities:                   <span class="hljs-number">50000</span>
+Total collection entities:              <span class="hljs-number">150000</span>
+Milvus timestamp:           <span class="hljs-number">428849214449254403</span>
+--------------------------  ------------------
 <button class="copy-code-btn"></button></code></pre>
-
 <p><h3 id="import">例 2</h3>
 次の例は、リモートの CSV ファイルをインポートします。</p>
 <pre><code translate="no" class="language-shell">milvus_cli &gt; import -c car <span class="hljs-string">&#x27;https://raw.githubusercontent.com/milvus-
@@ -823,7 +814,7 @@ io/milvus_cli/main/examples/import_csv/vectors.csv&#x27;</span>
 
 Reading file from remote URL.
 
-Reading csv file... [####################################] 100%
+Reading csv file...  [####################################]  100%
 
 Column names are [<span class="hljs-string">&#x27;vector&#x27;</span>, <span class="hljs-string">&#x27;color&#x27;</span>, <span class="hljs-string">&#x27;brand&#x27;</span>]
 
@@ -833,16 +824,12 @@ Inserting ...
 
 Insert successfully.
 
----
-
-Total insert entities: 50000
-Total collection entities: 150000
-Milvus timestamp: 428849214449254403
-
----
-
+--------------------------  ------------------
+Total insert entities:                   50000
+Total collection entities:              150000
+Milvus timestamp:           428849214449254403
+--------------------------  ------------------
 <button class="copy-code-btn"></button></code></pre>
-
 <h2 id="list-users" class="common-anchor-header">ユーザ一覧<button data-href="#list-users" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -935,7 +922,7 @@ Milvus timestamp: 428849214449254403
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>コレクションのすべてのパーティションを一覧表示します。</p>
+    </button></h2><p>コレクションのすべてのパーティションをリストする。</p>
 <p><h3 id="list-partitions">構文</h3></p>
 <pre><code translate="no" class="language-shell">list partitions -c (text)
 <button class="copy-code-btn"></button></code></pre>
@@ -1027,7 +1014,6 @@ timeout []:
 Guarantee timestamp. This instructs Milvus to see all operations performed before a provided timestamp. If no such timestamp <span class="hljs-keyword">is</span> provided, then Milvus will search all operations performed to date. [0]:
 Graceful time. Only used <span class="hljs-keyword">in</span> bounded consistency level. If graceful_time <span class="hljs-keyword">is</span> <span class="hljs-keyword">set</span>, PyMilvus will use current timestamp minus the graceful_time <span class="hljs-keyword">as</span> the guarantee_timestamp. This option <span class="hljs-keyword">is</span> 5s <span class="hljs-keyword">by</span> <span class="hljs-literal">default</span> <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> <span class="hljs-keyword">set</span>. [5]:
 </span><button class="copy-code-btn"></button></code></pre>
-
 <p><h4 id="query">例 2</h4></p>
 <p>クエリを実行し、必要な入力を求めるプロンプトを表示する：</p>
 <pre><code translate="no" class="language-shell">milvus_cli &gt; query
@@ -1047,7 +1033,6 @@ timeout []:
 Guarantee timestamp. This instructs Milvus to see <span class="hljs-built_in">all</span> operations performed before a provided timestamp. If no such timestamp <span class="hljs-keyword">is</span> provided, then Milvus will search <span class="hljs-built_in">all</span> operations performed to date. [<span class="hljs-number">0</span>]:
 Graceful time. Only used <span class="hljs-keyword">in</span> bounded consistency level. If graceful_time <span class="hljs-keyword">is</span> <span class="hljs-built_in">set</span>, PyMilvus will use current timestamp minus the graceful_time <span class="hljs-keyword">as</span> the guarantee_timestamp. This option <span class="hljs-keyword">is</span> 5s by default <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> <span class="hljs-built_in">set</span>. [<span class="hljs-number">5</span>]:
 <button class="copy-code-btn"></button></code></pre>
-
 <h2 id="release" class="common-anchor-header">リリース<button data-href="#release" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -1124,14 +1109,13 @@ The max number of returned <span class="hljs-keyword">record</span>, also known 
 
 The boolean expression used to filter attribute []: id &gt; 0
 
-The names of partitions to <span class="hljs-title">search</span> (<span class="hljs-params">split <span class="hljs-keyword">by</span> <span class="hljs-string">&quot;,&quot;</span> <span class="hljs-keyword">if</span> multiple</span>) [&#x27;_default&#x27;] []: \_default
+The names of partitions to <span class="hljs-title">search</span> (<span class="hljs-params">split <span class="hljs-keyword">by</span> <span class="hljs-string">&quot;,&quot;</span> <span class="hljs-keyword">if</span> multiple</span>) [&#x27;_default&#x27;] []: _default
 
 timeout []:
 
 Guarantee <span class="hljs-title">Timestamp</span>(<span class="hljs-params">It instructs Milvus to see all operations performed before a provided timestamp. If no such timestamp <span class="hljs-keyword">is</span> provided, then Milvus will search all operations performed to date</span>) [0]:
 
 </span><button class="copy-code-btn"></button></code></pre>
-
 <p><h4 id="search">例 2</h4></p>
 <p>インデックス付きコレクションで検索を実行し、必要な入力を求めるには：</p>
 <pre><code translate="no" class="language-shell">milvus_cli &gt; <span class="hljs-function">search
@@ -1139,7 +1123,7 @@ Guarantee <span class="hljs-title">Timestamp</span>(<span class="hljs-params">It
 Collection <span class="hljs-title">name</span> (<span class="hljs-params">car, test_collection</span>): car
 
 The vectors of search <span class="hljs-title">data</span>(<span class="hljs-params">the length of data <span class="hljs-keyword">is</span> number of query (nq</span>), the dim of every vector <span class="hljs-keyword">in</span> data must be equal to vector field’s of collection. You can also import a csv file without headers):
-[[0.71, 0.76, 0.17, 0.13, 0.42, 0.07, 0.15, 0.67, 0.58, 0.02, 0.39, 0.47, 0.58, 0.88, 0.73, 0.31, 0.23, 0.57, 0.33, 0.2, 0.03, 0.43, 0.78, 0.49, 0.17, 0.56, 0.76, 0.54, 0.45, 0.46, 0.05, 0.1, 0.43, 0.63, 0.29, 0.44, 0.65, 0.01, 0.35, 0.46, 0.66, 0.7, 0.88, 0.07, 0.49, 0.92, 0.57, 0.5, 0.16, 0.77, 0.98, 0.1, 0.44, 0.88, 0.82, 0.16, 0.67, 0.63, 0.57, 0.55, 0.95, 0.13, 0.64, 0.43, 0.71, 0.81, 0.43, 0.65, 0.76, 0.7, 0.05, 0.24, 0.03, 0.9, 0.46, 0.28, 0.92, 0.25, 0.97, 0.79, 0.73, 0.97, 0.49, 0.28, 0.64, 0.19, 0.23, 0.51, 0.09, 0.1, 0.53, 0.03, 0.23, 0.94, 0.87, 0.14, 0.42, 0.82, 0.91, 0.11, 0.91, 0.37, 0.26, 0.6, 0.89, 0.6, 0.32, 0.11, 0.98, 0.67, 0.12, 0.66, 0.47, 0.02, 0.15, 0.6, 0.64, 0.57, 0.14, 0.81, 0.75, 0.11, 0.49, 0.78, 0.16, 0.63, 0.57, 0.18]]
+    [[0.71, 0.76, 0.17, 0.13, 0.42, 0.07, 0.15, 0.67, 0.58, 0.02, 0.39, 0.47, 0.58, 0.88, 0.73, 0.31, 0.23, 0.57, 0.33, 0.2, 0.03, 0.43, 0.78, 0.49, 0.17, 0.56, 0.76, 0.54, 0.45, 0.46, 0.05, 0.1, 0.43, 0.63, 0.29, 0.44, 0.65, 0.01, 0.35, 0.46, 0.66, 0.7, 0.88, 0.07, 0.49, 0.92, 0.57, 0.5, 0.16, 0.77, 0.98, 0.1, 0.44, 0.88, 0.82, 0.16, 0.67, 0.63, 0.57, 0.55, 0.95, 0.13, 0.64, 0.43, 0.71, 0.81, 0.43, 0.65, 0.76, 0.7, 0.05, 0.24, 0.03, 0.9, 0.46, 0.28, 0.92, 0.25, 0.97, 0.79, 0.73, 0.97, 0.49, 0.28, 0.64, 0.19, 0.23, 0.51, 0.09, 0.1, 0.53, 0.03, 0.23, 0.94, 0.87, 0.14, 0.42, 0.82, 0.91, 0.11, 0.91, 0.37, 0.26, 0.6, 0.89, 0.6, 0.32, 0.11, 0.98, 0.67, 0.12, 0.66, 0.47, 0.02, 0.15, 0.6, 0.64, 0.57, 0.14, 0.81, 0.75, 0.11, 0.49, 0.78, 0.16, 0.63, 0.57, 0.18]]
 
 The vector field used to search of <span class="hljs-title">collection</span> (<span class="hljs-params">vector</span>): vector
 
@@ -1151,16 +1135,15 @@ The max number of returned <span class="hljs-keyword">record</span>, also known 
 
 The boolean expression used to filter attribute []: id &gt; 0
 
-The names of partitions to <span class="hljs-title">search</span> (<span class="hljs-params">split <span class="hljs-keyword">by</span> <span class="hljs-string">&quot;,&quot;</span> <span class="hljs-keyword">if</span> multiple</span>) [&#x27;_default&#x27;] []: \_default
+The names of partitions to <span class="hljs-title">search</span> (<span class="hljs-params">split <span class="hljs-keyword">by</span> <span class="hljs-string">&quot;,&quot;</span> <span class="hljs-keyword">if</span> multiple</span>) [&#x27;_default&#x27;] []: _default
 
 timeout []:
 
 Guarantee <span class="hljs-title">Timestamp</span>(<span class="hljs-params">It instructs Milvus to see all operations performed before a provided timestamp. If no such timestamp <span class="hljs-keyword">is</span> provided, then Milvus will search all operations performed to date</span>) [0]:
 
 </span><button class="copy-code-btn"></button></code></pre>
-
-<p><h4 id="search">例3</h4></p>
-<p>インデックス化されていないコレクションで検索を実行し、必要な入力を求めるプロンプトが表示される場合：</p>
+<p><h4 id="search">例 3</h4></p>
+<p>索引付けされていないコレクションで検索を実行し、必要な入力を求めるには：</p>
 <pre><code translate="no" class="language-shell">milvus_cli &gt; search
 
 Collection name (car, car2): car
@@ -1182,8 +1165,7 @@ timeout []:
 Guarantee Timestamp(It instructs Milvus to see <span class="hljs-built_in">all</span> operations performed before a provided timestamp. If no such timestamp <span class="hljs-keyword">is</span> provided, then Milvus will search <span class="hljs-built_in">all</span> operations performed to date) [<span class="hljs-number">0</span>]:
 
 <button class="copy-code-btn"></button></code></pre>
-
-<h2 id="List-connection" class="common-anchor-header">接続のリスト<button data-href="#List-connection" class="anchor-icon" translate="no">
+<h2 id="list-connection" class="common-anchor-header">リスト接続<button data-href="#list-connection" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -1256,7 +1238,7 @@ Guarantee Timestamp(It instructs Milvus to see <span class="hljs-built_in">all</
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>エンティティのロードの進行状況を表示します。</p>
+    </button></h2><p>コレクションのロードの進行状況を表示します。</p>
 <p><h3 id="show-loading-progress">構文</h3></p>
 <pre><code translate="no" class="language-shell">show loading_progress -c (text) [-p (text)]
 <button class="copy-code-btn"></button></code></pre>

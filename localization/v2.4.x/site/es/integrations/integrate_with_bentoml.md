@@ -22,7 +22,8 @@ title: Generación mejorada por recuperación (RAG) con Milvus y BentoML
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/rag_with_milvus_and_bentoml.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a></p>
+    </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/rag_with_milvus_and_bentoml.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
+<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/rag_with_milvus_and_bentoml.ipynb" target="_blank"><img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/></a></p>
 <h2 id="Introduction" class="common-anchor-header">Introducción<button data-href="#Introduction" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -60,7 +61,7 @@ title: Generación mejorada por recuperación (RAG) con Milvus y BentoML
 <div class="alert note">
 <p>Si estás utilizando Google Colab, para habilitar las dependencias que acabas de instalar, puede que necesites <strong>reiniciar el runtime</strong> (Haz clic en el menú "Runtime" en la parte superior de la pantalla, y selecciona "Restart session" en el menú desplegable).</p>
 </div>
-<p>Después de iniciar sesión en BentoCloud, podemos interactuar con los Servicios BentoCloud desplegados en Deployments, y el END_POINT y API correspondientes se encuentran en Playground -&gt; Python. Puede descargar los datos de la ciudad <a href="https://github.com/ytang07/bento_octo_milvus_RAG/tree/main/data">aquí</a>.</p>
+<p>Después de iniciar sesión en BentoCloud, podemos interactuar con los Servicios BentoCloud desplegados en Deployments, y el correspondiente END_POINT y API se encuentran en Playground -&gt; Python. Puede descargar los datos de la ciudad <a href="https://github.com/ytang07/bento_octo_milvus_RAG/tree/main/data">aquí</a>.</p>
 <h2 id="Serving-Embeddings-with-BentoMLBentoCloud" class="common-anchor-header">Sirviendo Embeddings con BentoML/BentoCloud<button data-href="#Serving-Embeddings-with-BentoMLBentoCloud" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -146,7 +147,7 @@ city_chunks = []
         sentences=texts,
     )
 <button class="copy-code-btn"></button></code></pre>
-<p>Ahora, tenemos que emparejar los embeddings y los trozos de texto. Como la lista de incrustaciones y la lista de frases deben coincidir por índice, podemos <code translate="no">enumerate</code> a través de cualquiera de las listas para emparejarlas.</p>
+<p>Ahora, tenemos que emparejar los embeddings y los trozos de texto. Dado que la lista de incrustaciones y la lista de frases deben coincidir por índice, podemos <code translate="no">enumerate</code> a través de cualquiera de las listas para hacerlas coincidir.</p>
 <pre><code translate="no" class="language-python">entries = []
 <span class="hljs-keyword">for</span> city_dict <span class="hljs-keyword">in</span> city_chunks:
     <span class="hljs-comment"># No need for the embeddings list if get_embeddings already returns a list of lists</span>
@@ -228,7 +229,7 @@ schema = MilvusClient.create_schema(
 schema.add_field(field_name=<span class="hljs-string">&quot;id&quot;</span>, datatype=DataType.INT64, is_primary=<span class="hljs-literal">True</span>)
 schema.add_field(field_name=<span class="hljs-string">&quot;embedding&quot;</span>, datatype=DataType.FLOAT_VECTOR, dim=DIMENSION)
 <button class="copy-code-btn"></button></code></pre>
-<p>Ahora que hemos creado nuestro esquema y definido correctamente el campo de datos, necesitamos definir el índice. En términos de búsqueda, un "índice" define cómo vamos a mapear nuestros datos para su recuperación. En este proyecto utilizaremos <a href="https://docs.zilliz.com/docs/autoindex-explained">la</a> opción <a href="https://docs.zilliz.com/docs/autoindex-explained">AUTOINDEX por defecto</a> para indexar nuestros datos.</p>
+<p>Ahora que hemos creado nuestro esquema y definido correctamente el campo de datos, necesitamos definir el índice. En términos de búsqueda, un "índice" define cómo vamos a mapear nuestros datos para su recuperación. En este proyecto utilizaremos la opción <a href="https://docs.zilliz.com/docs/autoindex-explained">AUTOINDEX</a> por defecto para indexar nuestros datos.</p>
 <p>A continuación, creamos la colección con el nombre, esquema e índice dados anteriormente. Finalmente, insertamos los datos previamente procesados.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># prepare index parameters</span>
 index_params = milvus_client.prepare_index_params()

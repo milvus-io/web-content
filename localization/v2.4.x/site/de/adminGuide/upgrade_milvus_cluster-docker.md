@@ -1,8 +1,6 @@
 ---
 id: upgrade_milvus_cluster-docker.md
-summary: >-
-  Erfahren Sie, wie Sie den Milvus-Cluster mit Docker Compose aktualisieren
-  können.
+summary: 'Erfahren Sie, wie Sie Milvus-Cluster mit Docker Compose aktualisieren können.'
 title: Upgrade des Milvus-Clusters mit Docker Compose
 ---
 <div class="tab-wrapper"><a href="/docs/de/upgrade_milvus_standalone-operator.md" class=''>Milvus OperatorMilvus</a><a href="/docs/de/upgrade_milvus_cluster-operator.md" class=''>OperatorMilvus</a><a href="/docs/de/configure-helm.md" class=''>OperatorHelmDocker</a><a href="/docs/de/upgrade_milvus_standalone-helm.md" class=''>ComposeHelmDocker</a><a href="/docs/de/upgrade_milvus_cluster-helm.md" class=''>ComposeHelm</a></div>
@@ -22,7 +20,7 @@ title: Upgrade des Milvus-Clusters mit Docker Compose
         ></path>
       </svg>
     </button></h1><p>Dieses Thema beschreibt, wie Sie Ihr Milvus mit Docker Compose aktualisieren können.</p>
-<p>Im Normalfall können Sie <a href="#Upgrade-Milvus-by-changing-its-image">Milvus aktualisieren, indem Sie sein Image ändern</a>. Sie müssen jedoch <a href="#Migrate-the-metadata">die Metadaten</a> vor einem Upgrade von v2.1.x auf v2.4.9 <a href="#Migrate-the-metadata">migrieren</a>.</p>
+<p>Im Normalfall können Sie <a href="#Upgrade-Milvus-by-changing-its-image">Milvus aktualisieren, indem Sie sein Image ändern</a>. Sie müssen jedoch <a href="#Migrate-the-metadata">die Metadaten</a> vor einem Upgrade von v2.1.x auf v2.4.13-Hotfix <a href="#Migrate-the-metadata">migrieren</a>.</p>
 <h2 id="Upgrade-Milvus-by-changing-its-image" class="common-anchor-header">Upgrade von Milvus durch Ändern des Images<button data-href="#Upgrade-Milvus-by-changing-its-image" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -45,35 +43,35 @@ title: Upgrade des Milvus-Clusters mit Docker Compose
 <pre><code translate="no" class="language-yaml">...
 rootcoord:
   container_name: milvus-rootcoord
-  image: milvusdb/milvus:v2.4.9
+  image: milvusdb/milvus:v2.4.13-hotfix
 ...
 proxy:
   container_name: milvus-proxy
-  image: milvusdb/milvus:v2.4.9
+  image: milvusdb/milvus:v2.4.13-hotfix
 ...
 querycoord:
   container_name: milvus-querycoord
-  image: milvusdb/milvus:v2.4.9  
+  image: milvusdb/milvus:v2.4.13-hotfix  
 ...
 querynode:
   container_name: milvus-querynode
-  image: milvusdb/milvus:v2.4.9
+  image: milvusdb/milvus:v2.4.13-hotfix
 ...
 indexcoord:
   container_name: milvus-indexcoord
-  image: milvusdb/milvus:v2.4.9
+  image: milvusdb/milvus:v2.4.13-hotfix
 ...
 indexnode:
   container_name: milvus-indexnode
-  image: milvusdb/milvus:v2.4.9 
+  image: milvusdb/milvus:v2.4.13-hotfix 
 ...
 datacoord:
   container_name: milvus-datacoord
-  image: milvusdb/milvus:v2.4.9   
+  image: milvusdb/milvus:v2.4.13-hotfix   
 ...
 datanode:
   container_name: milvus-datanode
-  image: milvusdb/milvus:v2.4.9
+  image: milvusdb/milvus:v2.4.13-hotfix
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>Führen Sie die folgenden Befehle aus, um das Upgrade durchzuführen.</p>
 <pre><code translate="no" class="language-shell">docker compose down
@@ -107,7 +105,7 @@ cmd:
   runWithBackup: true
 config:
   sourceVersion: <span class="hljs-number">2.1</span><span class="hljs-number">.4</span>   <span class="hljs-comment"># Specify your milvus version</span>
-  targetVersion: <span class="hljs-number">2.4</span><span class="hljs-number">.9</span>
+  targetVersion: <span class="hljs-number">2.4</span><span class="hljs-number">.13</span>-hotfix
   backupFilePath: /tmp/migration.bak
 metastore:
   <span class="hljs-built_in">type</span>: etcd

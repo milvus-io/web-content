@@ -22,7 +22,7 @@ title: 使用 Docker Compose 配置 Milvus
       </svg>
     </button></h1><p>本主题介绍如何使用 Docker Compose 配置 Milvus 组件及其第三方依赖项。</p>
 <div class="alert note">
-在当前版本中，所有参数仅在 Milvus 重新启动后生效。</div>
+在当前版本中，所有参数只有在 Milvus 重新启动后才会生效。</div>
 <h2 id="Download-a-configuration-file" class="common-anchor-header">下载配置文件<button data-href="#Download-a-configuration-file" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -38,8 +38,8 @@ title: 使用 Docker Compose 配置 Milvus
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>直接<a href="https://raw.githubusercontent.com/milvus-io/milvus/v2.4.9/configs/milvus.yaml">下载</a> <code translate="no">milvus.yaml</code> 或使用以下命令<a href="https://raw.githubusercontent.com/milvus-io/milvus/v2.4.9/configs/milvus.yaml">下载</a>。</p>
-<pre><code translate="no">$ wget https://raw.githubusercontent.com/milvus-io/milvus/v2.4.9/configs/milvus.yaml
+    </button></h2><p>直接<a href="https://raw.githubusercontent.com/milvus-io/milvus/v2.4.13-hotfix/configs/milvus.yaml">下载</a> <code translate="no">milvus.yaml</code> 或使用以下命令<a href="https://raw.githubusercontent.com/milvus-io/milvus/v2.4.13-hotfix/configs/milvus.yaml">下载</a>。</p>
+<pre><code translate="no">$ wget https://raw.githubusercontent.com/milvus-io/milvus/v2.4.13-hotfix/configs/milvus.yaml
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Modify-the-configuration-file" class="common-anchor-header">修改配置文件<button data-href="#Modify-the-configuration-file" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -56,7 +56,7 @@ title: 使用 Docker Compose 配置 Milvus
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>通过调整<code translate="no">milvus.yaml</code> 中的相应参数，配置 Milvus 实例，使其适合你的应用场景。</p>
+    </button></h2><p>通过调整<code translate="no">milvus.yaml</code> 中的相应参数，配置你的 Milvus 实例，以适应你的应用场景。</p>
 <p>有关各参数的详细信息，请查看以下链接。</p>
 <p>排序方式</p>
 <div class="filter">
@@ -211,10 +211,10 @@ title: 使用 Docker Compose 配置 Milvus
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>下载 Milvus<a href="https://github.com/milvus-io/milvus/releases/download/v2.4.9/milvus-standalone-docker-compose.yml">单机版</a>的安装文件，并将其保存为<code translate="no">docker-compose.yml</code> 。</p>
+    </button></h2><p>下载 Milvus<a href="https://github.com/milvus-io/milvus/releases/download/v2.4.13-hotfix/milvus-standalone-docker-compose.yml">Standalone</a> 的安装文件，并将其保存为<code translate="no">docker-compose.yml</code> 。</p>
 <p>也可以直接运行以下命令。</p>
 <pre><code translate="no"><span class="hljs-comment"># For Milvus standalone</span>
-$ wget https://github.com/milvus-io/milvus/releases/download/v2.4.9/milvus-standalone-docker-compose.yml -O docker-compose.yml
+$ wget https://github.com/milvus-io/milvus/releases/download/v2.4.13-hotfix/milvus-standalone-docker-compose.yml -O docker-compose.yml
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Modify-the-installation-file" class="common-anchor-header">修改安装文件<button data-href="#Modify-the-installation-file" class="anchor-icon" translate="no">
       <svg translate="no"

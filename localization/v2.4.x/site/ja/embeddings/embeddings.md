@@ -20,7 +20,7 @@ title: エンベッディングの概要
         ></path>
       </svg>
     </button></h1><p>エンベッディングは、データを高次元空間にマッピングするための機械学習の概念であり、類似したセマンティックのデータが近くに配置される。通常、BERTまたは他のTransformerファミリーのDeep Neural Networkであるエンベッディング・モデルは、テキスト、画像、および他のデータタイプのセマンティクスを、ベクトルとして知られる一連の数値で効果的に表現することができます。これらのモデルの主な特徴は、高次元空間におけるベクトル間の数学的距離が、元のテキストや画像のセマンティクスの類似性を示すことができることです。この特性は、GoogleやBingのようなウェブ検索エンジン、eコマースサイトの商品検索やレコメンデーション、そして最近話題の生成AIにおけるRAG（Retrieval Augmented Generation）パラダイムなど、多くの情報検索アプリケーションを解き放つ。</p>
-<p>エンベッディングには2つの主要なカテゴリがあり、それぞれが異なるタイプのベクトルを生成する：</p>
+<p>エンベッディングには主に2つのカテゴリがあり、それぞれが異なるタイプのベクトルを生成する：</p>
 <ul>
 <li><p><strong>高密度埋め込み</strong>：ほとんどの埋め込みモデルは、情報を数百から数千次元の浮動小数点ベクトルとして表現します。ほとんどの次元がゼロでないため、出力は「密な」ベクトルと呼ばれます。例えば、一般的なオープンソースの埋め込みモデルBAAI/bge-base-en-v1.5は、768個の浮動小数点数からなるベクトル（768次元浮動小数点ベクトル）を出力します。</p></li>
 <li><p><strong>疎な埋め込み</strong>：これに対して、スパース埋め込みは、ほとんどの次元がゼロのベクトル（スパースベクトル）を出力します。これらのベクトルは、トークン語彙のサイズによって決定される、はるかに高い次元（数万またはそれ以上）を持つことがよくあります。スパース・ベクトルはディープ・ニューラル・ネットワークやテキスト・コーパスの統計解析によって生成される。その解釈のしやすさと、より優れた領域外汎化能力により、スパース埋め込みは密な埋め込みを補完するものとして開発者に採用されつつあります。</p></li>
@@ -40,9 +40,13 @@ title: エンベッディングの概要
 <tr><td><a href="https://milvus.io/api-reference/pymilvus/v2.4.x/EmbeddingModels/VoyageEmbeddingFunction/VoyageEmbeddingFunction.md">ボヤガイ</a></td><td>密な</td><td>API</td></tr>
 <tr><td><a href="https://milvus.io/api-reference/pymilvus/v2.4.x/EmbeddingModels/JinaEmbeddingFunction/JinaEmbeddingFunction.md">ジーナ</a></td><td>密な</td><td>API</td></tr>
 <tr><td><a href="https://milvus.io/api-reference/pymilvus/v2.4.x/EmbeddingModels/CohereEmbeddingFunction/CohereEmbeddingFunction.md">コヒーレ</a></td><td>濃い</td><td>API</td></tr>
+<tr><td><a href="https://milvus.io/api-reference/pymilvus/v2.4.x/EmbeddingModels/InstructorEmbeddingFunction/InstructorEmbeddingFunction.md">講師</a></td><td>デンス</td><td>オープンソース</td></tr>
+<tr><td><a href="https://milvus.io/api-reference/pymilvus/v2.4.x/EmbeddingModels/MistralAIEmbeddingFunction/MistralAIEmbeddingFunction.md">ミストラルAI</a></td><td>デンス</td><td>API</td></tr>
+<tr><td><a href="https://milvus.io/api-reference/pymilvus/v2.4.x/EmbeddingModels/NomicEmbeddingFunction/NomicEmbeddingFunction.md">ノミック</a></td><td>密な</td><td>API</td></tr>
+<tr><td><a href="https://milvus.io/api-reference/pymilvus/v2.4.x/EmbeddingModels/MGTEEmbeddingFunction/MGTEEmbeddingFunction.md">mGTE</a></td><td>ハイブリッド</td><td>オープンソース</td></tr>
 </tbody>
 </table>
-<h2 id="Example-1-Use-default-embedding-function-to-generate-dense-vectors" class="common-anchor-header">例 1: 密なベクトルを生成するためにデフォルトの埋め込み関数を使う<button data-href="#Example-1-Use-default-embedding-function-to-generate-dense-vectors" class="anchor-icon" translate="no">
+<h2 id="Example-1-Use-default-embedding-function-to-generate-dense-vectors" class="common-anchor-header">例1: 密なベクトルを生成するためにデフォルトの埋め込み関数を使う<button data-href="#Example-1-Use-default-embedding-function-to-generate-dense-vectors" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -57,7 +61,7 @@ title: エンベッディングの概要
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvusでエンベッディング関数を使うには、まずPyMilvusクライアントライブラリを、エンベッディング生成のためのユーティリティをすべてラップした<code translate="no">model</code> サブパッケージとともにインストールします。</p>
+    </button></h2><p>Milvusで埋め込み関数を使うには、まずPyMilvusクライアントライブラリを、埋め込み生成のための全てのユーティリティをラップした<code translate="no">model</code> サブパッケージとともにインストールします。</p>
 <pre><code translate="no" class="language-python">pip install <span class="hljs-string">&quot;pymilvus[model]&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p><code translate="no">model</code> サブパッケージは<a href="https://milvus.io/docs/embed-with-openai.md">OpenAI</a>,<a href="https://milvus.io/docs/embed-with-sentence-transform.md">Sentence Transformers</a>,<a href="https://milvus.io/docs/embed-with-bgm-m3.md">BGE M3</a>,<a href="https://milvus.io/docs/embed-with-bm25.md">BM25</a>,<a href="https://milvus.io/docs/embed-with-splade.md">SPLADE</a>事前学習モデルなど様々な埋め込みモデルをサポートしています。簡略化のため、この例では<code translate="no">DefaultEmbeddingFunction</code> を使用します。これは<strong>すべてMiniLM-L6-v2の</strong>文変換モデルで、モデルは約70MBあり、最初の使用時にダウンロードされます：</p>
@@ -108,8 +112,8 @@ Dim: <span class="hljs-number">384</span> (<span class="hljs-number">384</span>,
     </button></h2><p>この例では、<a href="https://milvus.io/docs/embed-with-bgm-m3.md">BGE M3</a>ハイブリッドモデルを使用して、テキストを密なベクトルと疎なベクトルの両方に埋め込み、関連文書を検索するために使用します。全体的な手順は以下の通り：</p>
 <ol>
 <li><p>BGE-M3モデルを使ってテキストを密なベクトルと疎なベクトルに埋め込む；</p></li>
-<li><p>密なベクトルと疎なベクトルを格納するためにMilvusコレクションをセットアップする；</p></li>
-<li><p>データをMilvusに挿入する；</p></li>
+<li><p>密なベクトルと疎なベクトルを格納するMilvusコレクションをセットアップする；</p></li>
+<li><p>Milvusにデータを挿入；</p></li>
 <li><p>検索と結果の検査。</p></li>
 </ol>
 <p>まず、必要な依存関係をインストールする必要がある。</p>
@@ -153,11 +157,11 @@ query_embeddings = bge_m3_ef([query])
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>BM25は、クエリと文書間の関連性を決定するために単語の出現頻度を使用するよく知られた方法である。この例では、<code translate="no">BM25EmbeddingFunction</code> を使って、クエリとドキュメントの両方にスパース埋め込みを生成する方法を示します。</p>
+    </button></h2><p>BM25は、クエリと文書間の関連性を決定するために単語の出現頻度を使用するよく知られた方法である。この例では、<code translate="no">BM25EmbeddingFunction</code> を使って、クエリとドキュメントの両方に対してスパース埋め込みを生成する方法を示します。</p>
 <p>まず、<strong>BM25EmbeddingFunction</strong>クラスをインポートします。</p>
 <pre><code translate="no" class="language-xml"><span class="hljs-keyword">from</span> pymilvus.<span class="hljs-property">model</span>.<span class="hljs-property">sparse</span> <span class="hljs-keyword">import</span> <span class="hljs-title class_">BM25EmbeddingFunction</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>BM25では、ドキュメントのパターンを表すことができるIDF（逆ドキュメント頻度）を得るために、ドキュメントの統計量を計算することが重要です。IDFは、ある単語がどれだけの情報を提供するか、つまり、すべての文書でその単語が一般的か稀であるかを示す尺度です。</p>
+<p>BM25では、文書のパターンを表すことができるIDF（逆文書頻度）を得るために、文書の統計量を計算することが重要です。IDFは、ある単語がどれだけの情報を提供するか、つまり、すべての文書でその単語が一般的か稀であるかを示す尺度です。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># 1. prepare a small corpus to search</span>
 docs = [
     <span class="hljs-string">&quot;Artificial intelligence was founded as an academic discipline in 1956.&quot;</span>,

@@ -1,7 +1,6 @@
 ---
 id: manage-partitions.md
 title: 파티션 관리
-summary: ''
 ---
 <h1 id="Manage-Partitions" class="common-anchor-header">파티션 관리<button data-href="#Manage-Partitions" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -647,7 +646,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 <button class="copy-code-btn"></button></code></pre>
 <p>한 번에 여러 파티션을 로드하려면 다음과 같이 하세요:</p>
 <div class="multipleCode">
-   <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a></div>
+   <a href="#python">파이썬 </a> <a href="#java">자바</a> <a href="#javascript">노드.js</a></div>
 <pre><code translate="no" class="language-python">client.load_partitions(
     collection_name=<span class="hljs-string">&quot;quick_setup&quot;</span>,
     partition_names=[<span class="hljs-string">&quot;partitionA&quot;</span>, <span class="hljs-string">&quot;partitionB&quot;</span>]
@@ -735,8 +734,18 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 <span class="hljs-comment">// LoadStateLoaded</span>
 <span class="hljs-comment">// </span>
 <button class="copy-code-btn"></button></code></pre>
+<p>하나 이상의 파티션에서 지정된 필드를 로드하려면 다음과 같이 하세요:</p>
+<pre><code translate="no" class="language-python">client.load_partitions(
+    collection_name=<span class="hljs-string">&quot;quick_setup&quot;</span>,
+    partition_names=[<span class="hljs-string">&quot;partitionA&quot;</span>],
+    load_fields=[<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-string">&quot;vector&quot;</span>],
+    skip_load_dynamic_field=<span class="hljs-literal">True</span>
+)
+<button class="copy-code-btn"></button></code></pre>
+<p><code translate="no">load_fields</code> 에 나열된 필드만 검색 및 쿼리에서 필터링 조건 및 출력 필드로 사용할 수 있습니다. 목록에 항상 기본 키를 포함해야 합니다. 로드에서 제외된 필드 이름은 필터링이나 출력에 사용할 수 없습니다.</p>
+<p><code translate="no">skip_load_dynamic_field=True</code> 을 사용하여 동적 필드 로드를 건너뛸 수 있습니다. Milvus는 동적 필드를 단일 필드로 취급하므로 동적 필드의 모든 키가 함께 포함되거나 제외됩니다.</p>
 <h3 id="Release-Partitions" class="common-anchor-header">파티션 해제</h3><div class="language-python">
-<p>컬렉션의 모든 파티션을 해제하려면, 그냥 <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/release_collection.md"><code translate="no">release_collection()</code></a>. 컬렉션의 특정 파티션을 해제하려면 <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Partitions/release_partitions.md"><code translate="no">release_partitions()</code></a>.</p>
+<p>컬렉션의 모든 파티션을 해제하려면 간단히 <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/release_collection.md"><code translate="no">release_collection()</code></a>. 컬렉션의 특정 파티션을 해제하려면 <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Partitions/release_partitions.md"><code translate="no">release_partitions()</code></a>.</p>
 </div>
 <div class="language-java">
 <p>컬렉션의 모든 파티션을 해제하려면 <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Management/releaseCollection.md"><code translate="no">releaseCollection()</code></a>. 컬렉션의 특정 파티션을 해제하려면 <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Partitions/releasePartitions.md"><code translate="no">releasePartitions()</code></a>.</p>
@@ -930,7 +939,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 <li><p><strong>파티션에 얼마나 많은 데이터를 저장할 수 있나요?</strong></p>
 <p>파티션에는 1B 미만의 데이터를 저장하는 것이 좋습니다.</p></li>
 <li><p><strong>생성할 수 있는 파티션의 최대 개수는 몇 개인가요?</strong></p>
-<p>기본적으로 Milvus는 최대 4,096개의 파티션을 생성할 수 있습니다. <code translate="no">rootCoord.maxPartitionNum</code> 을 구성하여 최대 파티션 수를 조정할 수 있습니다. 자세한 내용은 <a href="https://milvus.io/docs/configure_rootcoord.md#rootCoordmaxPartitionNum">시스템 구성을</a> 참조하세요.</p></li>
+<p>기본적으로 Milvus는 최대 1,024개의 파티션을 생성할 수 있습니다. <code translate="no">rootCoord.maxPartitionNum</code> 을 구성하여 최대 파티션 수를 조정할 수 있습니다. 자세한 내용은 <a href="https://milvus.io/docs/configure_rootcoord.md#rootCoordmaxPartitionNum">시스템 구성을</a> 참조하세요.</p></li>
 <li><p><strong>파티션과 파티션 키를 어떻게 구분하나요?</strong></p>
 <p>파티션은 물리적 저장 단위인 반면, 파티션 키는 지정된 열을 기반으로 특정 파티션에 데이터를 자동으로 할당하는 논리적 개념입니다.</p>
 <p>예를 들어 Milvus에서 파티션 키가 <code translate="no">color</code> 필드로 정의된 컬렉션이 있는 경우, 시스템은 각 엔터티의 <code translate="no">color</code> 필드의 해시값을 기반으로 데이터를 파티션에 자동으로 할당합니다. 이 자동화된 프로세스는 사용자가 데이터를 삽입하거나 검색할 때 파티션을 수동으로 지정해야 하는 수고를 덜어줍니다.</p>

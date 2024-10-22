@@ -2,7 +2,7 @@
 id: disk_index.md
 related_key: disk_index
 summary: Milvus 的磁盘索引机制。
-title: 磁盘索引
+title: 盘上索引
 ---
 <h1 id="On-disk-Index" class="common-anchor-header">盘上索引<button data-href="#On-disk-Index" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -41,12 +41,12 @@ title: 磁盘索引
     </button></h2><p>要使用 DiskANN，请注意</p>
 <ul>
 <li>DiskANN 默认已启用。如果你更喜欢内存索引而不是磁盘索引，建议你禁用该功能以获得更好的性能。<ul>
-<li>要禁用该功能，可在 milvus 配置文件中将<code translate="no">queryNode.enableDisk</code> 更改为<code translate="no">false</code> 。</li>
+<li>要禁用该功能，可在 Milvus 配置文件中将<code translate="no">queryNode.enableDisk</code> 更改为<code translate="no">false</code> 。</li>
 <li>要重新启用该功能，可将<code translate="no">queryNode.enableDisk</code> 设为<code translate="no">true</code> 。</li>
 </ul></li>
 <li>Milvus 实例在 Ubuntu 18.04.6 或更高版本上运行。</li>
 <li>Milvus 数据路径应挂载到 NVMe SSD 上，以充分发挥性能：<ul>
-<li>对于 Milvus 独立实例，数据路径应为实例运行容器中的<strong>/var/lib/milvus/data</strong>。</li>
+<li>对于 Milvus Standalone 实例，数据路径应为实例运行容器中的<strong>/var/lib/milvus/data</strong>。</li>
 <li>对于 Milvus 群集实例，数据路径应为查询节点和索引节点所在容器中的<strong>/var/lib/milvus/data</strong>。</li>
 </ul></li>
 </ul>
@@ -68,7 +68,7 @@ title: 磁盘索引
     </button></h2><p>要使用 DiskANN，请确保</p>
 <ul>
 <li>在数据中只使用至少 1 维的浮点型向量。</li>
-<li>仅使用欧氏距离 (L2) 或内积 (IP) 来测量向量之间的距离。</li>
+<li>仅使用欧氏距离 (L2)、内积 (IP) 或 COSINE 来测量向量之间的距离。</li>
 </ul>
 <h2 id="Index-and-search-settings" class="common-anchor-header">索引和搜索设置<button data-href="#Index-and-search-settings" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -153,7 +153,7 @@ DiskIndex:
       </svg>
     </button></h2><ul>
 <li><p>如何处理<code translate="no">io_setup() failed; returned -11, errno=11:Resource temporarily unavailable</code> 错误？</p>
-<p>Linux 内核提供了异步非阻塞 I/O（AIO）功能，允许进程同时启动多个 I/O 操作，而无需等待任何一个操作完成。这有助于提高处理和 I/O 重叠的应用程序的性能。</p>
+<p>Linux 内核提供了异步非阻塞 I/O（AIO）功能，允许一个进程同时启动多个 I/O 操作，而无需等待任何一个操作完成。这有助于提高处理和 I/O 重叠的应用程序的性能。</p>
 <p>可以使用 proc 文件系统中的<code translate="no">/proc/sys/fs/aio-max-nr</code> 虚拟文件来调整性能。<code translate="no">aio-max-nr</code> 参数决定允许的最大并发请求数。</p>
 <p><code translate="no">aio-max-nr</code> 默认为<code translate="no">65535</code> ，也可设置为<code translate="no">10485760</code> 。</p></li>
 </ul>

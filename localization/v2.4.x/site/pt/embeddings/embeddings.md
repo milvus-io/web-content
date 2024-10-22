@@ -2,7 +2,7 @@
 id: embeddings.md
 order: 1
 summary: Saiba como gerar embeddings para os seus dados.
-title: Visão geral da incorporação
+title: Descrição geral da incorporação
 ---
 <h1 id="Embedding-Overview" class="common-anchor-header">Descrição geral da incorporação<button data-href="#Embedding-Overview" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -25,7 +25,7 @@ title: Visão geral da incorporação
 <li><p><strong>Incorporação densa</strong>: A maioria dos modelos de incorporação representa a informação como um vetor de vírgula flutuante de centenas a milhares de dimensões. O resultado é designado por vectores "densos", uma vez que a maioria das dimensões tem valores diferentes de zero. Por exemplo, o popular modelo de incorporação de código aberto BAAI/bge-base-en-v1.5 produz vectores de 768 números de vírgula flutuante (vetor flutuante de 768 dimensões).</p></li>
 <li><p><strong>Incorporação esparsa</strong>: Em contrapartida, os vectores de saída das incorporações esparsas têm a maior parte das dimensões igual a zero, nomeadamente os vectores "esparsos". Estes vectores têm frequentemente dimensões muito mais elevadas (dezenas de milhares ou mais), o que é determinado pela dimensão do vocabulário de símbolos. Os vectores esparsos podem ser gerados por redes neurais profundas ou pela análise estatística de corpora de texto. Devido à sua interpretabilidade e às melhores capacidades de generalização observadas fora do domínio, as incorporações esparsas são cada vez mais adoptadas pelos programadores como um complemento às incorporações densas.</p></li>
 </ul>
-<p>Milvus é uma base de dados vetorial concebida para a gestão, armazenamento e recuperação de dados vectoriais. Ao integrar os principais modelos <a href="https://milvus.io/docs/rerankers-overview.md">de</a> incorporação e <a href="https://milvus.io/docs/rerankers-overview.md">classificação</a>, pode facilmente transformar o texto original em vectores pesquisáveis ou classificar os resultados utilizando modelos poderosos para obter resultados mais precisos para RAG. Esta integração simplifica a transformação de texto e elimina a necessidade de componentes adicionais de incorporação ou classificação, optimizando assim o desenvolvimento e a validação de RAG.</p>
+<p>Milvus é uma base de dados vetorial concebida para a gestão, armazenamento e recuperação de dados vectoriais. Ao integrar os principais modelos de incorporação e <a href="https://milvus.io/docs/rerankers-overview.md">classificação</a>, pode facilmente transformar o texto original em vectores pesquisáveis ou classificar os resultados utilizando modelos poderosos para obter resultados mais precisos para RAG. Esta integração simplifica a transformação de texto e elimina a necessidade de componentes adicionais de incorporação ou classificação, optimizando assim o desenvolvimento e a validação de RAG.</p>
 <p>Para criar embeddings em ação, consulte <a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/model/embedding_functions.ipynb">Utilizar o modelo do PyMilvus para gerar embeddings de texto</a>.</p>
 <table>
 <thead>
@@ -40,9 +40,13 @@ title: Visão geral da incorporação
 <tr><td><a href="https://milvus.io/api-reference/pymilvus/v2.4.x/EmbeddingModels/VoyageEmbeddingFunction/VoyageEmbeddingFunction.md">voyageai</a></td><td>Densa</td><td>API</td></tr>
 <tr><td><a href="https://milvus.io/api-reference/pymilvus/v2.4.x/EmbeddingModels/JinaEmbeddingFunction/JinaEmbeddingFunction.md">jina</a></td><td>Densa</td><td>API</td></tr>
 <tr><td><a href="https://milvus.io/api-reference/pymilvus/v2.4.x/EmbeddingModels/CohereEmbeddingFunction/CohereEmbeddingFunction.md">cohere</a></td><td>Densa</td><td>API</td></tr>
+<tr><td><a href="https://milvus.io/api-reference/pymilvus/v2.4.x/EmbeddingModels/InstructorEmbeddingFunction/InstructorEmbeddingFunction.md">Instrutor</a></td><td>Densa</td><td>Código aberto</td></tr>
+<tr><td><a href="https://milvus.io/api-reference/pymilvus/v2.4.x/EmbeddingModels/MistralAIEmbeddingFunction/MistralAIEmbeddingFunction.md">IA Mistral</a></td><td>Densa</td><td>API</td></tr>
+<tr><td><a href="https://milvus.io/api-reference/pymilvus/v2.4.x/EmbeddingModels/NomicEmbeddingFunction/NomicEmbeddingFunction.md">Nomic</a></td><td>Densa</td><td>API</td></tr>
+<tr><td><a href="https://milvus.io/api-reference/pymilvus/v2.4.x/EmbeddingModels/MGTEEmbeddingFunction/MGTEEmbeddingFunction.md">mGTE</a></td><td>Híbrida</td><td>De fonte aberta</td></tr>
 </tbody>
 </table>
-<h2 id="Example-1-Use-default-embedding-function-to-generate-dense-vectors" class="common-anchor-header">Exemplo 1: Usar a função de embedding padrão para gerar vetores densos<button data-href="#Example-1-Use-default-embedding-function-to-generate-dense-vectors" class="anchor-icon" translate="no">
+<h2 id="Example-1-Use-default-embedding-function-to-generate-dense-vectors" class="common-anchor-header">Exemplo 1: Utilizar a função de incorporação predefinida para gerar vectores densos<button data-href="#Example-1-Use-default-embedding-function-to-generate-dense-vectors" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -57,7 +61,7 @@ title: Visão geral da incorporação
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Para usar funções de incorporação com Milvus, primeiro instale a biblioteca cliente PyMilvus com o subpacote <code translate="no">model</code> que envolve todos os utilitários para geração de incorporação.</p>
+    </button></h2><p>Para usar funções de incorporação com Milvus, primeiro instale a biblioteca cliente PyMilvus com o subpacote <code translate="no">model</code> que envolve todos os utilitários para a geração de incorporação.</p>
 <pre><code translate="no" class="language-python">pip install <span class="hljs-string">&quot;pymilvus[model]&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>O subpacote <code translate="no">model</code> suporta vários modelos de incorporação, desde <a href="https://milvus.io/docs/embed-with-openai.md">OpenAI</a>, <a href="https://milvus.io/docs/embed-with-sentence-transform.md">Sentence Transformers</a>, <a href="https://milvus.io/docs/embed-with-bgm-m3.md">BGE M3</a>, <a href="https://milvus.io/docs/embed-with-bm25.md">BM25</a>, até modelos pré-treinados <a href="https://milvus.io/docs/embed-with-splade.md">SPLADE</a>. Para simplificar, este exemplo utiliza o <code translate="no">DefaultEmbeddingFunction</code> que é um modelo de transformador de frases <strong>totalmente MiniLM-L6-v2</strong>, o modelo tem cerca de 70MB e será descarregado durante a primeira utilização:</p>

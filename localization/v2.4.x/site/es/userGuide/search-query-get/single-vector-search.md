@@ -4,7 +4,7 @@ order: 1
 summary: >-
   Este artículo describe cómo buscar vectores en una colección Milvus utilizando
   un único vector de consulta.
-title: Búsqueda monovectorial
+title: Búsqueda de un solo vector
 ---
 <h1 id="Single-Vector-Search" class="common-anchor-header">Búsqueda de un solo vector<button data-href="#Single-Vector-Search" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -24,7 +24,7 @@ title: Búsqueda monovectorial
     </button></h1><p>Una vez que haya insertado sus datos, el siguiente paso es realizar búsquedas de similitud en su colección en Milvus.</p>
 <p>Milvus le permite realizar dos tipos de búsquedas, dependiendo del número de campos vectoriales de su colección:</p>
 <ul>
-<li><strong>Búsqueda de un solo vector</strong>: Si su colección sólo tiene un campo vectorial, utilice el método <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Vector/search.md"><code translate="no">search()</code></a> para encontrar las entidades más similares. Este método compara su vector de consulta con los vectores existentes en su colección y devuelve los ID de las coincidencias más cercanas junto con las distancias entre ellos. Opcionalmente, también puede devolver los valores vectoriales y los metadatos de los resultados.</li>
+<li><strong>Búsqueda de un solo vector</strong>: Si su colección sólo tiene un campo vectorial, utilice el método <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Vector/search.md"><code translate="no">search()</code></a> para encontrar las entidades más similares. Este método compara su vector de consulta con los vectores existentes en su colección y devuelve los ID de las coincidencias más cercanas junto con las distancias entre ellos. Opcionalmente, también puede devolver los valores del vector y los metadatos de los resultados.</li>
 <li><strong>Búsqueda híbrida</strong>: Para colecciones con dos o más campos vectoriales, utilice el método <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/ORM/Collection/hybrid_search.md"><code translate="no">hybrid_search()</code></a> método. Este método realiza múltiples peticiones de búsqueda de Vecino más próximo aproximado (RNA) y combina los resultados para devolver las coincidencias más relevantes tras una nueva clasificación.</li>
 </ul>
 <p>Esta guía se centra en cómo realizar una búsqueda de un solo vector en Milvus. Para obtener más información sobre la búsqueda híbrida, consulte <a href="https://milvus.io/docs/multi-vector-search.md">Búsqueda híbrida</a>.</p>
@@ -441,7 +441,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
         ></path>
       </svg>
     </button></h2><p>Al enviar una solicitud a <code translate="no">search</code>, puede proporcionar uno o varios valores vectoriales que representen sus incrustaciones de consulta y un valor <code translate="no">limit</code> que indique el número de resultados que se devolverán.</p>
-<p>Dependiendo de los datos y del vector de consulta, es posible que obtenga menos resultados que <code translate="no">limit</code>. Esto ocurre cuando <code translate="no">limit</code> es mayor que el número de vectores que coinciden con la consulta.</p>
+<p>En función de los datos y del vector de consulta, es posible que obtenga menos resultados que <code translate="no">limit</code>. Esto ocurre cuando <code translate="no">limit</code> es mayor que el número de vectores que coinciden con la consulta.</p>
 <h3 id="Single-vector-search" class="common-anchor-header">Búsqueda monovectorial</h3><p>La búsqueda monovectorial es la forma más sencilla de las operaciones <code translate="no">search</code> en Milvus, diseñada para encontrar los vectores más similares a un vector de consulta dado.</p>
 <p>Para realizar una búsqueda monovectorial, especifique el nombre de la colección de destino, el vector de consulta y el número de resultados deseado (<code translate="no">limit</code>). Esta operación devuelve un conjunto de resultados que incluye los vectores más similares, sus ID y las distancias desde el vector de consulta.</p>
 <p>A continuación se muestra un ejemplo de búsqueda de las 5 entidades más similares al vector de consulta:</p>
@@ -1717,9 +1717,10 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>En Milvus, agrupar la búsqueda por un campo específico puede evitar la redundancia del mismo elemento de campo en los resultados. Puede obtener un conjunto variado de resultados para el campo específico.</p>
-<p>Considere una colección de documentos, cada documento se divide en varios pasajes. Cada pasaje está representado por un vector incrustado y pertenece a un documento. Para encontrar documentos relevantes en lugar de pasajes similares, puede incluir el argumento <code translate="no">group_by_field</code> en la opearción <code translate="no">search()</code> para agrupar los resultados por el ID del documento. Esto ayuda a devolver los documentos más relevantes y únicos, en lugar de pasajes separados del mismo documento.</p>
-<p>He aquí el código de ejemplo para agrupar los resultados de la búsqueda por campos:</p>
+    </button></h2><p>En Milvus, la búsqueda agrupada está diseñada para mejorar la exhaustividad y precisión de los resultados de búsqueda.</p>
+<p>Considere un escenario en RAG, donde un montón de documentos están divididos en varios pasajes, y cada pasaje está representado por un vector incrustado. Los usuarios quieren encontrar los pasajes más relevantes para que los LLMs sean precisos. La función de búsqueda ordinaria de Milvus puede cumplir este requisito, pero puede dar lugar a resultados muy sesgados y parciales: la mayoría de los pasajes proceden de unos pocos documentos, y la exhaustividad de los resultados de la búsqueda es muy pobre. Esto puede perjudicar seriamente la precisión o incluso la corrección de los resultados ofrecidos por el LLM e influir negativamente en la experiencia de los usuarios del LLM.</p>
+<p>La búsqueda agrupada puede resolver eficazmente este problema. Pasando un campo group_by y group_size, los usuarios de Milvus pueden agrupar los resultados de la búsqueda en varios grupos y asegurarse de que el número de entidades de cada grupo no excede un group_size específico. Esta característica puede mejorar significativamente la exhaustividad y equidad de los resultados de búsqueda, mejorando notablemente la calidad de los resultados del LLM.</p>
+<p>A continuación se muestra el código de ejemplo para agrupar los resultados de la búsqueda por campo:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Connect to Milvus</span>
 client = MilvusClient(uri=<span class="hljs-string">&#x27;http://localhost:19530&#x27;</span>) <span class="hljs-comment"># Milvus server address</span>
 
@@ -1734,21 +1735,26 @@ res = client.search(
     <span class="hljs-string">&quot;metric_type&quot;</span>: <span class="hljs-string">&quot;L2&quot;</span>,
     <span class="hljs-string">&quot;params&quot;</span>: {<span class="hljs-string">&quot;nprobe&quot;</span>: <span class="hljs-number">10</span>},
     }, <span class="hljs-comment"># Search parameters</span>
-    limit=<span class="hljs-number">10</span>, <span class="hljs-comment"># Max. number of search results to return</span>
+    limit=<span class="hljs-number">5</span>, <span class="hljs-comment"># Max. number of groups to return</span>
     group_by_field=<span class="hljs-string">&quot;doc_id&quot;</span>, <span class="hljs-comment"># Group results by document ID</span>
+    group_size=<span class="hljs-number">2</span>, <span class="hljs-comment"># returned at most 2 passages per document, the default value is 1</span>
+    group_strict_size=<span class="hljs-literal">True</span>, <span class="hljs-comment"># ensure every group contains exactly 3 passages</span>
     output_fields=[<span class="hljs-string">&quot;doc_id&quot;</span>, <span class="hljs-string">&quot;passage_id&quot;</span>]
 )
 
 <span class="hljs-comment"># Retrieve the values in the `doc_id` column</span>
 doc_ids = [result[<span class="hljs-string">&#x27;entity&#x27;</span>][<span class="hljs-string">&#x27;doc_id&#x27;</span>] <span class="hljs-keyword">for</span> result <span class="hljs-keyword">in</span> res[<span class="hljs-number">0</span>]]
+passage_ids = [result[<span class="hljs-string">&#x27;entity&#x27;</span>][<span class="hljs-string">&#x27;passage_id&#x27;</span>] <span class="hljs-keyword">for</span> result <span class="hljs-keyword">in</span> res[<span class="hljs-number">0</span>]]
 
 <span class="hljs-built_in">print</span>(doc_ids)
+<span class="hljs-built_in">print</span>(passage_ids)
 <button class="copy-code-btn"></button></code></pre>
 <p>La salida es similar a la siguiente:</p>
-<pre><code translate="no" class="language-python">[<span class="hljs-meta">5, 10, 1, 7, 9, 6, 3, 4, 8, 2</span>]
+<pre><code translate="no" class="language-python">[<span class="hljs-string">&quot;doc_11&quot;</span>, <span class="hljs-string">&quot;doc_11&quot;</span>, <span class="hljs-string">&quot;doc_7&quot;</span>, <span class="hljs-string">&quot;doc_7&quot;</span>, <span class="hljs-string">&quot;doc_3&quot;</span>, <span class="hljs-string">&quot;doc_3&quot;</span>, <span class="hljs-string">&quot;doc_2&quot;</span>, <span class="hljs-string">&quot;doc_2&quot;</span>, <span class="hljs-string">&quot;doc_8&quot;</span>, <span class="hljs-string">&quot;doc_8&quot;</span>]
+[<span class="hljs-meta">5, 10, 11, 10, 9, 6, 5, 4, 9, 2</span>]
 <button class="copy-code-btn"></button></code></pre>
-<p>En el resultado obtenido puede observarse que las entidades devueltas no contienen valores duplicados de <code translate="no">doc_id</code>.</p>
-<p>Para comparar, comentemos <code translate="no">group_by_field</code> y realicemos una búsqueda normal:</p>
+<p>En la salida dada, se puede observar que para cada documento, se recuperan exactamente dos pasajes y un total de 5 documentos componen colectivamente los resultados.</p>
+<p>Para comparar, comentemos los parámetros relacionados con el grupo y realicemos una búsqueda normal:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Connect to Milvus</span>
 client = MilvusClient(uri=<span class="hljs-string">&#x27;http://localhost:19530&#x27;</span>) <span class="hljs-comment"># Milvus server address</span>
 
@@ -1763,27 +1769,33 @@ res = client.search(
     <span class="hljs-string">&quot;metric_type&quot;</span>: <span class="hljs-string">&quot;L2&quot;</span>,
     <span class="hljs-string">&quot;params&quot;</span>: {<span class="hljs-string">&quot;nprobe&quot;</span>: <span class="hljs-number">10</span>},
     }, <span class="hljs-comment"># Search parameters</span>
-    limit=<span class="hljs-number">10</span>, <span class="hljs-comment"># Max. number of search results to return</span>
+    limit=<span class="hljs-number">5</span>, <span class="hljs-comment"># Max. number of search results to return</span>
     <span class="hljs-comment"># group_by_field=&quot;doc_id&quot;, # Group results by document ID</span>
+    <span class="hljs-comment"># group_size=2, </span>
+    <span class="hljs-comment"># group_strict_size=True,</span>
     output_fields=[<span class="hljs-string">&quot;doc_id&quot;</span>, <span class="hljs-string">&quot;passage_id&quot;</span>]
 )
 
 <span class="hljs-comment"># Retrieve the values in the `doc_id` column</span>
 doc_ids = [result[<span class="hljs-string">&#x27;entity&#x27;</span>][<span class="hljs-string">&#x27;doc_id&#x27;</span>] <span class="hljs-keyword">for</span> result <span class="hljs-keyword">in</span> res[<span class="hljs-number">0</span>]]
+passage_ids = [result[<span class="hljs-string">&#x27;entity&#x27;</span>][<span class="hljs-string">&#x27;passage_id&#x27;</span>] <span class="hljs-keyword">for</span> result <span class="hljs-keyword">in</span> res[<span class="hljs-number">0</span>]]
 
 <span class="hljs-built_in">print</span>(doc_ids)
+<span class="hljs-built_in">print</span>(passage_ids)
 <button class="copy-code-btn"></button></code></pre>
 <p>La salida es similar a la siguiente:</p>
-<pre><code translate="no" class="language-python">[<span class="hljs-meta">1, 10, 3, 10, 1, 9, 4, 4, 8, 6</span>]
+<pre><code translate="no" class="language-python">[<span class="hljs-string">&quot;doc_11&quot;</span>, <span class="hljs-string">&quot;doc_11&quot;</span>, <span class="hljs-string">&quot;doc_11&quot;</span>, <span class="hljs-string">&quot;doc_11&quot;</span>, <span class="hljs-string">&quot;doc_11&quot;</span>]
+[<span class="hljs-meta">1, 10, 3, 12, 9</span>]
 <button class="copy-code-btn"></button></code></pre>
-<p>En la salida dada, puede observarse que las entidades devueltas contienen valores <code translate="no">doc_id</code> duplicados.</p>
+<p>En la salida dada, puede observarse que "doc_11" dominó completamente los resultados de la búsqueda, eclipsando los párrafos de alta calidad de otros documentos, lo que puede ser una mala indicación para LLM.</p>
+<p>Un punto más a tener en cuenta: por defecto, grouping_search devolverá resultados instantáneamente cuando tenga suficientes grupos, lo que puede llevar a que el número de resultados en cada grupo no sea suficiente para cumplir el tamaño_grupo. Si le preocupa el número de resultados de cada grupo, establezca group_strict_size=True como se muestra en el código anterior. Esto hará que Milvus se esfuerce por obtener suficientes resultados para cada grupo, con un ligero coste para el rendimiento.</p>
 <p><strong>Limitaciones</strong></p>
 <ul>
 <li><p><strong>Indexación</strong>: Esta función de agrupación sólo funciona para colecciones indexadas con el tipo <strong>HNSW</strong>, <strong>IVF_FLAT</strong> o <strong>FLAT</strong>. Para más información, consulte <a href="https://milvus.io/docs/index.md#HNSW">Índice en memoria</a>.</p></li>
 <li><p><strong>Vector</strong>: Actualmente, la búsqueda de agrupaciones no admite un campo vectorial de tipo <strong>BINARY_VECTOR</strong>. Para obtener más información sobre los tipos de datos, consulte <a href="https://milvus.io/docs/schema.md#Supported-data-types">Tipos de datos admitidos</a>.</p></li>
 <li><p><strong>Campo</strong>: Actualmente, la búsqueda de agrupación sólo permite una única columna. No es posible especificar varios nombres de campo en la configuración de <code translate="no">group_by_field</code>.  Además, la búsqueda de agrupación es incompatible con los tipos de datos JSON, FLOAT, DOUBLE, ARRAY o campos vectoriales.</p></li>
 <li><p><strong>Impacto en el rendimiento</strong>: Tenga en cuenta que el rendimiento disminuye al aumentar el número de vectores de consulta. Utilizando como ejemplo un clúster con 2 núcleos de CPU y 8 GB de memoria, el tiempo de ejecución de la búsqueda de agrupación aumenta proporcionalmente con el número de vectores de consulta de entrada.</p></li>
-<li><p><strong>Funcionalidad</strong>: Actualmente, la <a href="https://milvus.io/docs/single-vector-search.md#Range-search">búsqueda</a> por agrupamiento no es compatible con la <a href="https://milvus.io/docs/single-vector-search.md#Range-search">búsqueda por rango</a>, los <a href="https://milvus.io/docs/with-iterators.md#Search-with-iterator">iteradores de búsqueda</a> ni <a href="/docs/es/multi-vector-search.md">la búsqueda híbrida</a>.</p></li>
+<li><p><strong>Funcionalidad</strong>: Actualmente, la búsqueda por agrupamiento no es compatible con <a href="https://milvus.io/docs/single-vector-search.md#Range-search">la búsqueda por rango</a>, los <a href="https://milvus.io/docs/with-iterators.md#Search-with-iterator">iteradores de búsqueda</a></p></li>
 </ul>
 <h2 id="Search-parameters" class="common-anchor-header">Parámetros de búsqueda<button data-href="#Search-parameters" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -1822,7 +1834,7 @@ search_parameters = {
 <tr><td><code translate="no">metric_type</code></td><td>Forma de medir la similitud entre las incrustaciones vectoriales.<br/> Los valores posibles son <code translate="no">IP</code>, <code translate="no">L2</code>, <code translate="no">COSINE</code>, <code translate="no">JACCARD</code>, y <code translate="no">HAMMING</code>, y el valor predeterminado es el del archivo de índice cargado.</td></tr>
 <tr><td><code translate="no">params.nprobe</code></td><td>Número de unidades a consultar durante la búsqueda.<br/> El valor se encuentra en el intervalo [1, nlist<sub>[1]</sub>].</td></tr>
 <tr><td><code translate="no">params.level</code></td><td>Nivel de precisión de la búsqueda.<br/> Los valores posibles son <code translate="no">1</code>, <code translate="no">2</code> y <code translate="no">3</code>, y el valor predeterminado es <code translate="no">1</code>. Los valores más altos producen resultados más precisos pero un rendimiento más lento.</td></tr>
-<tr><td><code translate="no">params.radius</code></td><td>Define el límite exterior del espacio de búsqueda. Sólo los vectores que se encuentran a esta distancia del vector de consulta se consideran coincidencias potenciales.<br/>El intervalo de valores viene determinado por el parámetro <code translate="no">metric_type</code>. Por ejemplo, si <code translate="no">metric_type</code> se establece en <code translate="no">L2</code>, el intervalo de valores válido es <code translate="no">[0, ∞]</code>. Si <code translate="no">metric_type</code> se establece en <code translate="no">COSINE</code>, el intervalo de valores válido es <code translate="no">[-1, 1]</code>. Para más información, consulte <a href="/docs/es/metric.md">Métricas de similitud</a>.</td></tr>
+<tr><td><code translate="no">params.radius</code></td><td>Define el límite exterior del espacio de búsqueda. Sólo los vectores que se encuentran a esta distancia del vector de consulta se consideran coincidencias potenciales.<br/>El rango de valores viene determinado por el parámetro <code translate="no">metric_type</code>. Por ejemplo, si <code translate="no">metric_type</code> se establece en <code translate="no">L2</code>, el intervalo de valores válido es <code translate="no">[0, ∞]</code>. Si <code translate="no">metric_type</code> se establece en <code translate="no">COSINE</code>, el intervalo de valores válido es <code translate="no">[-1, 1]</code>. Para más información, consulte <a href="/docs/es/metric.md">Métricas de similitud</a>.</td></tr>
 <tr><td><code translate="no">params.range_filter</code></td><td>Mientras que <code translate="no">radius</code> establece el límite exterior de la búsqueda, <code translate="no">range_filter</code> puede utilizarse opcionalmente para definir un límite interior, creando un rango de distancias dentro del cual deben encontrarse los vectores para ser considerados coincidentes.<br/>El rango de valores viene determinado por el parámetro <code translate="no">metric_type</code>. Por ejemplo, si <code translate="no">metric_type</code> se establece en <code translate="no">L2</code>, el rango de valores válido es <code translate="no">[0, ∞]</code>. Si <code translate="no">metric_type</code> se establece en <code translate="no">COSINE</code>, el rango de valores válido es <code translate="no">[-1, 1]</code>. Para más información, consulte <a href="/docs/es/metric.md">Métricas de similitud</a>.</td></tr>
 </tbody>
 </table>

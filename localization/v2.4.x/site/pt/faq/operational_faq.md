@@ -53,7 +53,7 @@ title: FAQ operacional
 <p>Veja <a href="https://milvus.io/blog/2021-11-19-run-milvus-2.0-on-windows.md">Executar o Milvus no Windows</a> para saber como instalar o Milvus no Windows.</p>
 <h4 id="I-got-an-error-when-installing-pymilvus-on-Windows-What-shall-I-do" class="common-anchor-header">Recebi um erro ao instalar o pymilvus no Windows. O que devo fazer?</h4><p>Não é recomendado instalar o PyMilvus no Windows. Mas se tiveres de instalar o PyMilvus no Windows mas obtiveres um erro, tenta instalá-lo num ambiente <a href="https://docs.conda.io/projects/conda/en/latest/user-guide/install/index.html">Conda</a>. Consulte <a href="/docs/pt/install-pymilvus.md">Instalar o Milvus SDK</a> para obter mais informações sobre como instalar o PyMilvus no ambiente Conda.</p>
 <h4 id="Can-I-deploy-Milvus-when-disconnected-from-the-Internet" class="common-anchor-header">Posso implementar o Milvus quando estou desligado da Internet?</h4><p>Sim. Pode instalar o Milvus num ambiente offline. Consulte <a href="/docs/pt/install_offline-helm.md">Instalar o Milvus offline</a> para obter mais informações.</p>
-<h4 id="Where-can-I-find-the-logs-generated-by-Milvus" class="common-anchor-header">Onde posso encontrar os registos gerados pelo Milvus?</h4><p>Por defeito, o registo do Milvus é impresso em stout (standard output) e stderr (standard error), no entanto recomendamos vivamente que redireccione o seu registo para um volume persistente em produção. Para o fazer, actualize <code translate="no">log.file.rootPath</code> em <strong>milvus.yaml</strong>. E se implementar o Milvus com o gráfico <code translate="no">milvus-helm</code>, também precisa de ativar a persistência do registo primeiro através de <code translate="no">--set log.persistence.enabled=true</code>.</p>
+<h4 id="Where-can-I-find-the-logs-generated-by-Milvus" class="common-anchor-header">Onde posso encontrar os registos gerados pelo Milvus?</h4><p>Por defeito, o registo do Milvus é impresso em stout (saída padrão) e stderr (erro padrão), no entanto, recomendamos vivamente que redireccione o seu registo para um volume persistente em produção. Para o fazer, actualize <code translate="no">log.file.rootPath</code> em <strong>milvus.yaml</strong>. E se implementar o Milvus com o gráfico <code translate="no">milvus-helm</code>, também precisa de ativar a persistência do registo primeiro através de <code translate="no">--set log.persistence.enabled=true</code>.</p>
 <p>Se você não alterou a configuração, usar kubectl logs &lt;pod-name&gt; ou docker logs CONTAINER também pode ajudá-lo a encontrar o log.</p>
 <h4 id="Can-I-create-index-for-a-segment-before-inserting-data-into-it" class="common-anchor-header">Posso criar um índice para um segmento antes de inserir dados nele?</h4><p>Sim, você pode. Mas recomendamos a inserção de dados em lotes, cada um dos quais não deve exceder 256 MB, antes de indexar cada segmento.</p>
 <h4 id="Can-I-share-an-etcd-instance-among-multiple-Milvus-instances" class="common-anchor-header">Posso partilhar uma instância etcd entre várias instâncias Milvus?</h4><p>Sim, pode partilhar uma instância etcd entre várias instâncias Milvus. Para isso, é necessário alterar <code translate="no">etcd.rootPath</code> para um valor separado para cada instância Milvus nos ficheiros de configuração de cada uma delas antes de as iniciar.</p>
@@ -72,9 +72,34 @@ title: FAQ operacional
 <li><p><strong>Dados limitados</strong>: A coleção pode não ter entidades suficientes para atender ao limite solicitado. Se o número total de entidades na coleção for inferior ao limite, receberá naturalmente menos resultados.</p></li>
 <li><p><strong>Chaves primárias duplicadas</strong>: O Milvus dá prioridade a entidades específicas quando encontra chaves primárias duplicadas durante uma pesquisa. Este comportamento varia consoante o tipo de pesquisa:</p></li>
 <li><p><strong>Consulta (correspondência exacta)</strong>: Milvus seleciona a última entidade com a PK correspondente. ANN Search: Milvus seleciona a entidade com a maior pontuação de similaridade, mesmo que as entidades partilhem o mesmo PK. Esta priorização pode resultar em menos resultados únicos do que o limite se a sua coleção tiver muitas chaves primárias duplicadas.</p></li>
-<li><p><strong>Correspondências insuficientes</strong>: As expressões de filtragem da pesquisa podem ser muito rigorosas, resultando em menos entidades que atendem ao limite de similaridade. Se as condições definidas para a pesquisa forem demasiado restritivas, não haverá correspondência suficiente entre as entidades, o que levará a menos resultados do que o esperado.</p></li>
+<li><p><strong>Correspondências insuficientes</strong>: As expressões de filtragem da pesquisa podem ser muito rigorosas, resultando em menos entidades que atendem ao limite de similaridade. Se as condições definidas para a pesquisa forem muito restritivas, não haverá correspondência suficiente de entidades, levando a menos resultados do que o esperado.</p></li>
 </ul>
-<h4 id="Still-have-questions" class="common-anchor-header">Ainda tem dúvidas?</h4><p>Pode fazê-lo:</p>
+<h4 id="MilvusClientmilvusdemodb-gives-an-error-ModuleNotFoundError-No-module-named-milvuslite-What-causes-this-and-how-can-it-be-solved" class="common-anchor-header"><code translate="no">MilvusClient(&quot;milvus_demo.db&quot;) gives an error: ModuleNotFoundError: No module named 'milvus_lite'</code>. O que é que provoca este erro e como é que pode ser resolvido?</h4><p>Este erro ocorre quando se tenta utilizar o Milvus Lite numa plataforma Windows. O Milvus Lite foi concebido principalmente para ambientes Linux e pode não ter suporte nativo para Windows.</p>
+<p>A solução é utilizar um ambiente Linux:</p>
+<ul>
+<li>Use um sistema operacional baseado em Linux ou uma máquina virtual para executar o Milvus Lite.</li>
+<li>Esta abordagem garantirá a compatibilidade com as dependências e funcionalidades da biblioteca.</li>
+</ul>
+<h4 id="What-are-the-length-exceeds-max-length-errors-in-Milvus-and-how-can-they-be-understood-and-addressed" class="common-anchor-header">O que são os erros de "comprimento excede o comprimento máximo" no Milvus, e como eles podem ser entendidos e resolvidos?</h4><p>Os erros de "comprimento excede o comprimento máximo" no Milvus ocorrem quando o tamanho de um elemento de dados ultrapassa o tamanho máximo permitido para uma coleção ou campo. Eis alguns exemplos e explicações:</p>
+<ul>
+<li><p>Erro de campo JSON: <code translate="no">&lt;MilvusException: (code=1100, message=the length (398324) of json field (metadata) exceeds max length (65536): expected=valid length json string, actual=length exceeds max length: invalid parameter)&gt;</code></p></li>
+<li><p>Erro de comprimento da cadeia de caracteres: <code translate="no">&lt;ParamError: (code=1, message=invalid input, length of string exceeds max length. length: 74238, max length: 60535)&gt;</code></p></li>
+<li><p>Erro no campo VarChar: <code translate="no">&lt;MilvusException: (code=1100, message=the length (60540) of 0th VarChar paragraph exceeds max length (0)%!(EXTRA int64=60535): invalid parameter)&gt;</code></p></li>
+</ul>
+<p>Para compreender e resolver estes erros:</p>
+<ul>
+<li>Compreenda que <code translate="no">len(str)</code> em Python representa o número de caracteres, não o tamanho em bytes.</li>
+<li>Para tipos de dados baseados em cadeias de caracteres como VARCHAR e JSON, utilize <code translate="no">len(bytes(str, encoding='utf-8'))</code> para determinar o tamanho real em bytes, que é o que Milvus utiliza para &quot;max-length&quot;.</li>
+</ul>
+<p>Exemplo em Python:</p>
+<pre><code translate="no" class="language-python"><span class="hljs-comment"># Python Example: result of len() str cannot be used as &quot;max-length&quot; in Milvus </span>
+<span class="hljs-meta">&gt;&gt;&gt; </span>s = <span class="hljs-string">&quot;你好，世界！&quot;</span>
+<span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-built_in">len</span>(s) <span class="hljs-comment"># Number of characters of s.</span>
+<span class="hljs-number">6</span>
+<span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-built_in">len</span>(<span class="hljs-built_in">bytes</span>(s, <span class="hljs-string">&quot;utf-8&quot;</span>)) <span class="hljs-comment"># Size in bytes of s, max-length in Milvus.</span>
+<span class="hljs-number">18</span>
+<button class="copy-code-btn"></button></code></pre>
+<h4 id="Still-have-questions" class="common-anchor-header">Ainda tem dúvidas?</h4><p>Você pode:</p>
 <ul>
 <li>Verificar o <a href="https://github.com/milvus-io/milvus/issues">Milvus</a> no GitHub. Sinta-se à vontade para fazer perguntas, partilhar ideias e ajudar os outros.</li>
 <li>Junte-se ao nosso <a href="https://discuss.milvus.io/">Fórum Milvus</a> ou <a href="https://join.slack.com/t/milvusio/shared_invite/enQtNzY1OTQ0NDI3NjMzLWNmYmM1NmNjOTQ5MGI5NDhhYmRhMGU5M2NhNzhhMDMzY2MzNDdlYjM5ODQ5MmE3ODFlYzU3YjJkNmVlNDQ2ZTk">Canal Slack</a> para encontrar apoio e envolver-se com a nossa comunidade de código aberto.</li>

@@ -46,7 +46,7 @@ title: 단일 벡터 검색
 <li><p><a href="https://milvus.io/docs/single-vector-search.md#Basic-search">기본 검색</a>: 단일 벡터 검색, 일괄 벡터 검색, 파티션 검색, 지정된 출력 필드를 사용한 검색이 포함됩니다.</p></li>
 <li><p><a href="https://milvus.io/docs/single-vector-search.md#Filtered-search">필터링된 검색</a>: 스칼라 필드를 기반으로 필터링 기준을 적용하여 검색 결과를 구체화합니다.</p></li>
 <li><p><a href="https://milvus.io/docs/single-vector-search.md#Range-search">범위 검색</a>: 쿼리 벡터로부터 특정 거리 범위 내의 벡터를 찾습니다.</p></li>
-<li><p><a href="https://milvus.io/docs/single-vector-search.md#Grouping-search">그룹화 검색</a>: 특정 필드를 기준으로 검색 결과를 그룹화하여 결과의 다양성을 보장합니다.</p></li>
+<li><p><a href="https://milvus.io/docs/single-vector-search.md#Grouping-search">그룹 검색</a>: 특정 필드를 기준으로 검색 결과를 그룹화하여 결과의 다양성을 보장합니다.</p></li>
 </ul>
 <h2 id="Preparations" class="common-anchor-header">준비 사항<button data-href="#Preparations" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -1358,9 +1358,9 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
     </button></h2><p>필터링된 검색은 벡터 검색에 스칼라 필터를 적용하여 특정 기준에 따라 검색 결과를 구체화할 수 있도록 해줍니다. 필터 표현식에 대한 자세한 내용은 <a href="https://milvus.io/docs/boolean.md">부울 표현식 규칙에서</a>, 예제는 <a href="https://milvus.io/docs/get-and-scalar-query.md">가져오기 및 스칼라 쿼리에서</a> 확인할 수 있습니다.</p>
 <h3 id="Use-the-like-operator" class="common-anchor-header"><code translate="no">like</code> 연산자 사용</h3><p><code translate="no">like</code> 연산자는 접두사, 접두사, 접미사 등의 패턴을 평가하여 문자열 검색을 향상시킵니다:</p>
 <ul>
-<li><strong>접두사 일치</strong>: 특정 접두사로 시작하는 값을 찾으려면 <code translate="no">'like &quot;prefix%&quot;'</code> 구문을 사용합니다.</li>
-<li><strong>접두사 일치</strong>: 문자열 내에서 특정 문자 시퀀스가 포함된 값을 찾으려면 <code translate="no">'like &quot;%infix%&quot;'</code> 구문을 사용합니다.</li>
-<li><strong>접미사 일치</strong>: 특정 접미사로 끝나는 값을 찾으려면 <code translate="no">'like &quot;%suffix&quot;'</code> 구문을 사용합니다.</li>
+<li>접두사<strong>일치</strong>: 특정 접두사로 시작하는 값을 찾으려면 <code translate="no">'like &quot;prefix%&quot;'</code> 구문을 사용합니다.</li>
+<li>접두사<strong>일치</strong>: 문자열 내에서 특정 문자 시퀀스가 포함된 값을 찾으려면 <code translate="no">'like &quot;%infix%&quot;'</code> 구문을 사용합니다.</li>
+<li><strong>접미사</strong> 일치: 특정 접미사로 끝나는 값을 찾으려면 <code translate="no">'like &quot;%suffix&quot;'</code> 구문을 사용합니다.</li>
 </ul>
 <p>단일 문자 일치의 경우 밑줄(<code translate="no">_</code>)은 한 문자에 대한 와일드카드 역할을 합니다(예: <code translate="no">'like &quot;y_llow&quot;'</code>).</p>
 <h3 id="Special-characters-in-search-strings" class="common-anchor-header">검색 문자열의 특수 문자</h3><p>일반적으로 검색 패턴에서 와일드카드로 사용되는 밑줄(<code translate="no">_</code>) 또는 퍼센트 기호(<code translate="no">%</code>)와 같은 특수 문자가 포함된 문자열을 검색하려면(단일 문자의 경우<code translate="no">_</code>, 문자 시퀀스의 경우 <code translate="no">%</code> ) 이러한 문자를 이스케이프 처리하여 리터럴 문자로 취급해야 합니다. 특수 문자를 이스케이프하려면 백슬래시(<code translate="no">\</code>)를 사용하고, 백슬래시 자체도 이스케이프해야 한다는 점을 잊지 마세요. 예를 들어</p>
@@ -1715,8 +1715,9 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus에서 특정 필드별로 그룹 검색을 하면 결과에서 동일한 필드 항목의 중복을 피할 수 있습니다. 특정 필드에 대한 다양한 결과 집합을 얻을 수 있습니다.</p>
-<p>각 문서가 여러 구절로 나뉘어져 있는 문서 모음을 생각해 보세요. 각 구절은 하나의 벡터 임베딩으로 표현되며 하나의 문서에 속합니다. 유사한 구절 대신 관련성 있는 문서를 찾으려면 <code translate="no">search()</code> 옵션에 <code translate="no">group_by_field</code> 인수를 포함하여 문서 ID별로 결과를 그룹화할 수 있습니다. 이렇게 하면 같은 문서에서 분리된 구절이 아닌 가장 관련성이 높고 고유한 문서를 반환하는 데 도움이 됩니다.</p>
+    </button></h2><p>Milvus에서 그룹화 검색은 검색 결과의 포괄성과 정확성을 향상시키기 위해 고안되었습니다.</p>
+<p>많은 문서가 여러 구절로 나뉘어 있고 각 구절이 하나의 벡터 임베딩으로 표현되는 RAG의 시나리오를 생각해 보겠습니다. 사용자는 가장 관련성이 높은 구절을 찾아서 LLM에게 정확하게 안내하기를 원합니다. 일반적인 밀버스 검색 기능은 이러한 요구 사항을 충족할 수 있지만, 대부분의 구절이 소수의 문서에서만 나오며 검색 결과의 포괄성이 매우 떨어지기 때문에 매우 왜곡되고 편향된 결과를 초래할 수 있습니다. 이는 LLM이 제공하는 결과의 정확성 또는 정확성을 심각하게 저해하고 LLM 사용자의 경험에 부정적인 영향을 미칠 수 있습니다.</p>
+<p>그룹 검색은 이 문제를 효과적으로 해결할 수 있습니다. Milvus 사용자는 그룹별 필드와 그룹 크기를 전달함으로써 검색 결과를 여러 그룹으로 버킷화하고 각 그룹의 엔티티 수가 특정 그룹 크기를 초과하지 않도록 할 수 있습니다. 이 기능은 검색 결과의 포괄성과 공정성을 크게 향상시켜 LLM 출력의 품질을 눈에 띄게 개선할 수 있습니다.</p>
 <p>다음은 필드별로 검색 결과를 그룹화하는 예제 코드입니다:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Connect to Milvus</span>
 client = MilvusClient(uri=<span class="hljs-string">&#x27;http://localhost:19530&#x27;</span>) <span class="hljs-comment"># Milvus server address</span>
@@ -1732,21 +1733,26 @@ res = client.search(
     <span class="hljs-string">&quot;metric_type&quot;</span>: <span class="hljs-string">&quot;L2&quot;</span>,
     <span class="hljs-string">&quot;params&quot;</span>: {<span class="hljs-string">&quot;nprobe&quot;</span>: <span class="hljs-number">10</span>},
     }, <span class="hljs-comment"># Search parameters</span>
-    limit=<span class="hljs-number">10</span>, <span class="hljs-comment"># Max. number of search results to return</span>
+    limit=<span class="hljs-number">5</span>, <span class="hljs-comment"># Max. number of groups to return</span>
     group_by_field=<span class="hljs-string">&quot;doc_id&quot;</span>, <span class="hljs-comment"># Group results by document ID</span>
+    group_size=<span class="hljs-number">2</span>, <span class="hljs-comment"># returned at most 2 passages per document, the default value is 1</span>
+    group_strict_size=<span class="hljs-literal">True</span>, <span class="hljs-comment"># ensure every group contains exactly 3 passages</span>
     output_fields=[<span class="hljs-string">&quot;doc_id&quot;</span>, <span class="hljs-string">&quot;passage_id&quot;</span>]
 )
 
 <span class="hljs-comment"># Retrieve the values in the `doc_id` column</span>
 doc_ids = [result[<span class="hljs-string">&#x27;entity&#x27;</span>][<span class="hljs-string">&#x27;doc_id&#x27;</span>] <span class="hljs-keyword">for</span> result <span class="hljs-keyword">in</span> res[<span class="hljs-number">0</span>]]
+passage_ids = [result[<span class="hljs-string">&#x27;entity&#x27;</span>][<span class="hljs-string">&#x27;passage_id&#x27;</span>] <span class="hljs-keyword">for</span> result <span class="hljs-keyword">in</span> res[<span class="hljs-number">0</span>]]
 
 <span class="hljs-built_in">print</span>(doc_ids)
+<span class="hljs-built_in">print</span>(passage_ids)
 <button class="copy-code-btn"></button></code></pre>
 <p>출력은 다음과 비슷합니다:</p>
-<pre><code translate="no" class="language-python">[<span class="hljs-meta">5, 10, 1, 7, 9, 6, 3, 4, 8, 2</span>]
+<pre><code translate="no" class="language-python">[<span class="hljs-string">&quot;doc_11&quot;</span>, <span class="hljs-string">&quot;doc_11&quot;</span>, <span class="hljs-string">&quot;doc_7&quot;</span>, <span class="hljs-string">&quot;doc_7&quot;</span>, <span class="hljs-string">&quot;doc_3&quot;</span>, <span class="hljs-string">&quot;doc_3&quot;</span>, <span class="hljs-string">&quot;doc_2&quot;</span>, <span class="hljs-string">&quot;doc_2&quot;</span>, <span class="hljs-string">&quot;doc_8&quot;</span>, <span class="hljs-string">&quot;doc_8&quot;</span>]
+[<span class="hljs-meta">5, 10, 11, 10, 9, 6, 5, 4, 9, 2</span>]
 <button class="copy-code-btn"></button></code></pre>
-<p>주어진 출력에서 반환된 엔티티에 중복된 <code translate="no">doc_id</code> 값이 포함되어 있지 않음을 확인할 수 있습니다.</p>
-<p>비교를 위해 <code translate="no">group_by_field</code> 을 주석 처리하고 일반 검색을 수행해 보겠습니다:</p>
+<p>주어진 출력에서 각 문서에 대해 정확히 두 개의 구절이 검색되고 총 5개의 문서가 결과를 구성하는 것을 볼 수 있습니다.</p>
+<p>비교를 위해 그룹 관련 매개변수를 주석 처리하고 일반 검색을 수행해 보겠습니다:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Connect to Milvus</span>
 client = MilvusClient(uri=<span class="hljs-string">&#x27;http://localhost:19530&#x27;</span>) <span class="hljs-comment"># Milvus server address</span>
 
@@ -1761,27 +1767,33 @@ res = client.search(
     <span class="hljs-string">&quot;metric_type&quot;</span>: <span class="hljs-string">&quot;L2&quot;</span>,
     <span class="hljs-string">&quot;params&quot;</span>: {<span class="hljs-string">&quot;nprobe&quot;</span>: <span class="hljs-number">10</span>},
     }, <span class="hljs-comment"># Search parameters</span>
-    limit=<span class="hljs-number">10</span>, <span class="hljs-comment"># Max. number of search results to return</span>
+    limit=<span class="hljs-number">5</span>, <span class="hljs-comment"># Max. number of search results to return</span>
     <span class="hljs-comment"># group_by_field=&quot;doc_id&quot;, # Group results by document ID</span>
+    <span class="hljs-comment"># group_size=2, </span>
+    <span class="hljs-comment"># group_strict_size=True,</span>
     output_fields=[<span class="hljs-string">&quot;doc_id&quot;</span>, <span class="hljs-string">&quot;passage_id&quot;</span>]
 )
 
 <span class="hljs-comment"># Retrieve the values in the `doc_id` column</span>
 doc_ids = [result[<span class="hljs-string">&#x27;entity&#x27;</span>][<span class="hljs-string">&#x27;doc_id&#x27;</span>] <span class="hljs-keyword">for</span> result <span class="hljs-keyword">in</span> res[<span class="hljs-number">0</span>]]
+passage_ids = [result[<span class="hljs-string">&#x27;entity&#x27;</span>][<span class="hljs-string">&#x27;passage_id&#x27;</span>] <span class="hljs-keyword">for</span> result <span class="hljs-keyword">in</span> res[<span class="hljs-number">0</span>]]
 
 <span class="hljs-built_in">print</span>(doc_ids)
+<span class="hljs-built_in">print</span>(passage_ids)
 <button class="copy-code-btn"></button></code></pre>
 <p>출력은 다음과 비슷합니다:</p>
-<pre><code translate="no" class="language-python">[<span class="hljs-meta">1, 10, 3, 10, 1, 9, 4, 4, 8, 6</span>]
+<pre><code translate="no" class="language-python">[<span class="hljs-string">&quot;doc_11&quot;</span>, <span class="hljs-string">&quot;doc_11&quot;</span>, <span class="hljs-string">&quot;doc_11&quot;</span>, <span class="hljs-string">&quot;doc_11&quot;</span>, <span class="hljs-string">&quot;doc_11&quot;</span>]
+[<span class="hljs-meta">1, 10, 3, 12, 9</span>]
 <button class="copy-code-btn"></button></code></pre>
-<p>주어진 출력에서 반환된 엔티티에 중복된 <code translate="no">doc_id</code> 값이 포함되어 있음을 확인할 수 있습니다.</p>
+<p>주어진 출력에서 'doc_11'이 검색 결과를 완전히 지배하여 다른 문서의 고품질 단락을 가리는 것을 볼 수 있으며, 이는 LLM에 좋지 않은 프롬프트가 될 수 있습니다.</p>
+<p>한 가지 더 주의할 점은 기본적으로 grouping_search는 그룹이 충분하면 즉시 결과를 반환하므로 각 그룹의 결과 수가 group_size를 충족하기에 충분하지 않을 수 있다는 점입니다. 각 그룹의 결과 수를 신경쓰는 경우 위 코드에 표시된 것처럼 group_strict_size=True로 설정하세요. 이렇게 하면 밀버스가 성능에 약간의 손해를 보더라도 각 그룹에 대해 충분한 결과를 얻기 위해 노력합니다.</p>
 <p><strong>제한 사항</strong></p>
 <ul>
 <li><p><strong>인덱싱</strong>: 이 그룹화 기능은 <strong>HNSW</strong>, <strong>IVF_FLAT</strong> 또는 <strong>FLAT</strong> 유형으로 인덱싱된 컬렉션에서만 작동합니다. 자세한 내용은 <a href="https://milvus.io/docs/index.md#HNSW">인메모리 인덱스를</a> 참조하세요.</p></li>
 <li><p><strong>벡터</strong>: 현재 그룹화 검색은 <strong>BINARY_VECTOR</strong> 유형의 벡터 필드를 지원하지 않습니다. 데이터 유형에 대한 자세한 내용은 <a href="https://milvus.io/docs/schema.md#Supported-data-types">지원되는 데이터 유형을</a> 참조하세요.</p></li>
 <li><p><strong>필드</strong>: 현재 그룹 검색에서는 단일 열만 허용됩니다. <code translate="no">group_by_field</code> 구성에서는 여러 필드 이름을 지정할 수 없습니다.  또한 그룹화 검색은 JSON, FLOAT, DOUBLE, ARRAY 또는 벡터 필드의 데이터 유형과 호환되지 않습니다.</p></li>
 <li><p><strong>성능 영향</strong>: 쿼리 벡터 수가 증가하면 성능이 저하된다는 점에 유의하세요. CPU 코어 2개와 8GB 메모리가 있는 클러스터를 예로 들면, 그룹화 검색의 실행 시간은 입력 쿼리 벡터의 수에 비례하여 증가합니다.</p></li>
-<li><p><strong>기능</strong>: 현재 그룹화 검색은 <a href="https://milvus.io/docs/single-vector-search.md#Range-search">범위 검색</a>, <a href="https://milvus.io/docs/with-iterators.md#Search-with-iterator">검색 반복자</a> 또는 <a href="/docs/ko/multi-vector-search.md">하이브리드 검색에서</a> 지원되지 않습니다.</p></li>
+<li><p><strong>기능</strong>: 현재 그룹화 검색은 <a href="https://milvus.io/docs/single-vector-search.md#Range-search">범위 검색</a>, <a href="https://milvus.io/docs/with-iterators.md#Search-with-iterator">검색 반복자에서</a> 지원되지 않습니다.</p></li>
 </ul>
 <h2 id="Search-parameters" class="common-anchor-header">검색 매개변수<button data-href="#Search-parameters" class="anchor-icon" translate="no">
       <svg translate="no"

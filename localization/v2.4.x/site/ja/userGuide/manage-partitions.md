@@ -1,7 +1,6 @@
 ---
 id: manage-partitions.md
 title: パーティションの管理
-summary: ''
 ---
 <h1 id="Manage-Partitions" class="common-anchor-header">パーティションの管理<button data-href="#Manage-Partitions" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -38,8 +37,8 @@ summary: ''
 <p>コレクションを作成すると、少なくとも_<strong>defaultという</strong>名前のデフォルト・パーティションが自動的に作成されます。コレクション内に最大1,024個のパーティションを作成できます。</p>
 <div class="admonition note">
 <p><b>注釈</b></p>
-<p>Milvusは<strong>パーティション・キーと</strong>呼ばれる機能を導入し、基礎となるパーティションを活用して、特定のフィールドのハッシュ値に基づいてエンティティを格納します。この機能により、マルチテナントの実装が容易になり、検索パフォーマンスが向上します。詳細については、「<a href="https://milvus.io/docs/use-partition-key.md">パーティション・キーの使用</a>」を参照してください。</p>
-<p>コレクションで<strong>パーティションキー</strong>機能がオンになっている場合、Milvusがすべてのパーティションの管理を行います。</p>
+<p>Milvusは<strong>パーティションキーと</strong>呼ばれる機能を導入し、基礎となるパーティションを活用して、特定のフィールドのハッシュ値に基づいてエンティティを格納します。この機能により、マルチテナントの実装が容易になり、検索パフォーマンスが向上します。詳細については、「<a href="https://milvus.io/docs/use-partition-key.md">パーティション・キーの使用</a>」を参照してください。</p>
+<p><strong>パーティションキー</strong>機能がオンになっているコレクションでは、milvusがすべてのパーティションの管理を行います。</p>
 </div>
 <h2 id="Preparations" class="common-anchor-header">準備<button data-href="#Preparations" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -56,12 +55,12 @@ summary: ''
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>以下のコードスニペットは、既存のコードを再利用してMilvusへの接続を確立し、クイックセットアップモードでコレクションを作成します。</p>
+    </button></h2><p>以下のコードスニペットは、既存のコードを再利用し、Milvusへの接続を確立し、クイックセットアップモードでコレクションを作成します。</p>
 <div class="language-python">
-<p>準備には <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Client/MilvusClient.md"><code translate="no">MilvusClient</code></a>を使用してMilvusに接続し <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_collection.md"><code translate="no">create_collection()</code></a>を使用して、クイックセットアップモードでコレクションを作成します。</p>
+<p>準備には <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Client/MilvusClient.md"><code translate="no">MilvusClient</code></a>でMilvusに接続し <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_collection.md"><code translate="no">create_collection()</code></a>を使用して、クイックセットアップモードでコレクションを作成します。</p>
 </div>
 <div class="language-java">
-<p>準備の場合 <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Client/MilvusClientV2.md"><code translate="no">MilvusClientV2</code></a>を使用してMilvusに接続し <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Collections/createCollection.md"><code translate="no">createCollection()</code></a>クイックセットアップモードでコレクションを作成します。</p>
+<p>準備の場合 <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Client/MilvusClientV2.md"><code translate="no">MilvusClientV2</code></a>でMilvusに接続し <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Collections/createCollection.md"><code translate="no">createCollection()</code></a>クイックセットアップモードでコレクションを作成します。</p>
 </div>
 <div class="language-javascript">
 <p>準備のために <a href="https://milvus.io/api-reference/node/v2.4.x/Client/MilvusClient.md"><code translate="no">MilvusClient</code></a>でMilvusに接続し <a href="https://milvus.io/api-reference/node/v2.4.x/Collections/createCollection.md"><code translate="no">createCollection()</code></a>クイックセットアップモードでコレクションを作成します。</p>
@@ -182,7 +181,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 <p>上記のコード・スニペットの出力には、指定されたコレクション内のパーティションの名前が含まれます。</p>
 <div class="admonition note">
 <p><b>注釈</b></p>
-<p>コレクション内のパーティション・キーとしてフィールドを設定した場合、Milvusはコレクションと共に少なくとも<strong>64の</strong>パーティションを作成します。パーティションをリストする場合、結果は上記のコード・スニペットの出力と異なる場合があります。</p>
+<p>コレクション内のパーティションキーにフィールドを設定した場合、Milvusはコレクションと一緒に少なくとも<strong>64の</strong>パーティションを作成します。パーティションをリストする場合、結果は上記のコード・スニペットの出力と異なる場合があります。</p>
 <p>詳細については、<a href="https://milvus.io/docs/use-partition-key.md">パーティションキーを使用するを</a>参照してください。</p>
 </div>
 <h2 id="Create-Partitions" class="common-anchor-header">パーティションの作成<button data-href="#Create-Partitions" class="anchor-icon" translate="no">
@@ -287,7 +286,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 <p>上記のコード・スニペットは、コレクションにパーティションを作成し、コレクションのパーティションを一覧表示します。</p>
 <div class="admonition note">
 <p><b>注釈</b></p>
-<p>コレクション内のパーティションキーとしてフィールドを設定した場合、Milvusがコレクション内のパーティションを管理します。そのため、パーティションを作成しようとすると、プロンプトエラーが表示されることがあります。</p>
+<p>コレクション内のパーティションキーにフィールドを設定した場合、milvusがコレクション内のパーティションを管理します。そのため、パーティションを作成しようとすると、プロンプトエラーが表示されることがあります。</p>
 <p>詳細については、<a href="https://milvus.io/docs/use-partition-key.md">パーティションキーの使用を</a>参照してください。</p>
 </div>
 <h2 id="Check-for-a-Specific-Partition" class="common-anchor-header">特定のパーティションのチェック<button data-href="#Check-for-a-Specific-Partition" class="anchor-icon" translate="no">
@@ -390,7 +389,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 <span class="hljs-comment">// false</span>
 <span class="hljs-comment">// </span>
 <button class="copy-code-btn"></button></code></pre>
-<p>上記のコード・スニペットは、コレクションに<code translate="no">partitionA</code> と<code translate="no">partitionC</code> というパーティションがあるかどうかをチェックします。</p>
+<p>上記のコード・スニペットは、コレクションに<code translate="no">partitionA</code> と<code translate="no">partitionC</code> という名前のパーティションがあるかどうかをチェックします。</p>
 <h2 id="Load--Release-Partitions" class="common-anchor-header">パーティションのロードと解放<button data-href="#Load--Release-Partitions" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -406,7 +405,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>特定のパーティションをロードしたり解放したりして、検索やクエリで利用可能にしたり利用不可能にしたりすることができます。</p>
+    </button></h2><p>特定のパーティションをロードおよびリリースして、検索やクエリで利用可能にしたり、利用不可能にしたりできます。</p>
 <h3 id="Get-Load-Status" class="common-anchor-header">ロードステータスの取得</h3><div class="language-python">
 <p>コレクションとそのパーティションのロード・ステータスをチェックするには <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/get_load_state.md"><code translate="no">get_load_state()</code></a>.</p>
 </div>
@@ -585,7 +584,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 <p>パーティションの少なくとも1つがロード中であれば、コレクションはLoadingとマークされます。</p></li>
 </ul>
 <h3 id="Load-Partitions" class="common-anchor-header">パーティションのロード</h3><div class="language-python">
-<p>コレクションのすべてのパーティションをロードするには、単に <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/load_collection.md"><code translate="no">load_collection()</code></a>.コレクション内の特定のパーティションをロードするには <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Partitions/load_partitions.md"><code translate="no">load_partitions()</code></a>.</p>
+<p>コレクションのすべてのパーティションをロードするには、単に <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/load_collection.md"><code translate="no">load_collection()</code></a>.コレクションの特定のパーティションをロードするには <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Partitions/load_partitions.md"><code translate="no">load_partitions()</code></a>.</p>
 </div>
 <div class="language-java">
 <p>コレクションのすべてのパーティションをロードするには、単に <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Management/loadCollection.md"><code translate="no">loadCollection()</code></a>.コレクションの特定のパーティションをロードするには <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Partitions/loadPartitions.md"><code translate="no">loadPartitions()</code></a>.</p>
@@ -735,6 +734,16 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 <span class="hljs-comment">// LoadStateLoaded</span>
 <span class="hljs-comment">// </span>
 <button class="copy-code-btn"></button></code></pre>
+<p>1つまたは複数のパーティションの指定されたフィールドをロードするには、次のようにする：</p>
+<pre><code translate="no" class="language-python">client.load_partitions(
+    collection_name=<span class="hljs-string">&quot;quick_setup&quot;</span>,
+    partition_names=[<span class="hljs-string">&quot;partitionA&quot;</span>],
+    load_fields=[<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-string">&quot;vector&quot;</span>],
+    skip_load_dynamic_field=<span class="hljs-literal">True</span>
+)
+<button class="copy-code-btn"></button></code></pre>
+<p>検索やクエリでフィルタリング条件や出力フィールドとして使用できるのは、<code translate="no">load_fields</code> にリストされたフィールドだけであることに注意してください。リストには必ず主キーを含めること。ロードから除外されたフィールド名は、フィルタリングや出力に使用できません。</p>
+<p><code translate="no">skip_load_dynamic_field=True</code> 、ダイナミック・フィールドのロードをスキップすることができます。Milvusはダイナミックフィールドを1つのフィールドとして扱いますので、ダイナミックフィールド内の全てのキーが一緒にロードまたは除外されます。</p>
 <h3 id="Release-Partitions" class="common-anchor-header">パーティションの解放</h3><div class="language-python">
 <p>コレクションのすべてのパーティションを解放するには <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/release_collection.md"><code translate="no">release_collection()</code></a>.コレクション内の特定のパーティションを解放するには <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Partitions/release_partitions.md"><code translate="no">release_partitions()</code></a>.</p>
 </div>
@@ -805,7 +814,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 <span class="hljs-comment">// LoadStateNotLoad</span>
 <span class="hljs-comment">// </span>
 <button class="copy-code-btn"></button></code></pre>
-<p>一度に複数のパーティションを解放するには、次のようにします：</p>
+<p>一度に複数のパーティションを解放するには、以下のようにします：</p>
 <pre><code translate="no" class="language-python">client.release_partitions(
     collection_name=<span class="hljs-string">&quot;quick_setup&quot;</span>,
     partition_names=[<span class="hljs-string">&quot;_default&quot;</span>, <span class="hljs-string">&quot;partitionA&quot;</span>, <span class="hljs-string">&quot;partitionB&quot;</span>]
@@ -929,11 +938,11 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
     </button></h2><ul>
 <li><p><strong>パーティションにはどれくらいのデータを格納できますか？</strong></p>
 <p>パーティションに格納できるデータは1B以下であることを推奨します。</p></li>
-<li><p><strong>パーティションの最大数は？</strong></p>
-<p>デフォルトでは4,096パーティションまで作成可能です。パーティションの最大数は<code translate="no">rootCoord.maxPartitionNum</code> 。詳細は<a href="https://milvus.io/docs/configure_rootcoord.md#rootCoordmaxPartitionNum">システム構成を</a>ご参照ください。</p></li>
+<li><p><strong>パーティションの最大作成数は？</strong></p>
+<p>Milvusのデフォルトでは、最大1,024パーティションまで作成可能です。パーティションの最大数は<code translate="no">rootCoord.maxPartitionNum</code> 。詳細は<a href="https://milvus.io/docs/configure_rootcoord.md#rootCoordmaxPartitionNum">システム構成を</a>ご参照ください。</p></li>
 <li><p><strong>パーティションとパーティション・キーはどのように区別できますか?</strong></p>
 <p>パーティションは物理的なストレージ単位であり、パーティション・キーは指定された列に基づいてデータを特定のパーティションに自動的に割り当てる論理的な概念です。</p>
-<p>例えば、Milvusにおいて、パーティション・キーが<code translate="no">color</code> フィールドとして定義されたコレクションがある場合、システムは自動的に各エンティティの<code translate="no">color</code> フィールドのハッシュ値に基づいてデータをパーティションに割り当てます。この自動化されたプロセスにより、ユーザーはデータの挿入や検索時に手動でパーティションを指定する責任から解放されます。</p>
+<p>例えば、milvusでは、パーティションキーが<code translate="no">color</code> フィールドとして定義されたコレクションがある場合、システムは自動的に各エンティティの<code translate="no">color</code> フィールドのハッシュ値に基づいてデータをパーティションに割り当てます。この自動化されたプロセスにより、ユーザーはデータの挿入や検索時に手動でパーティションを指定する責任から解放されます。</p>
 <p>一方、手動でパーティションを作成する場合は、パーティション・キーの基準に基づいて各パーティションにデータを割り当てる必要があります。<code translate="no">color</code> フィールドを持つコレクションがある場合、<code translate="no">color</code> の値が<code translate="no">red</code> のエンティ ティを手動で<code translate="no">partition A</code> に割り当て、<code translate="no">color</code> の値が<code translate="no">blue</code> のエンティティを手動で<code translate="no">partition B</code> に割り当てることになります。 この手動管理には、より多くの労力が必要です。</p>
-<p>要約すると、パーティションとパーティション・キーの両方を利用することで、データ計算を最適化し、クエリの効率を高めることができます。パーティション・キーを有効にすることは、パーティション・データの挿入とロードの手動管理の制御を放棄することを意味する。</p></li>
+<p>要約すると、パーティションとパーティション・キーの両方を利用することで、データ計算を最適化し、クエリの効率を高めることができます。パーティションキーを有効にすることは、パーティションデータの挿入とロードを手動で管理することを放棄することを意味する。</p></li>
 </ul>

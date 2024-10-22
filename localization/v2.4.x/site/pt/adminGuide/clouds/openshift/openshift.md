@@ -1,6 +1,6 @@
 ---
 id: openshift.md
-title: Implantar um cluster Milvus no OpenShift
+title: Implantar um cluster do Milvus no OpenShift
 related_key: cluster
 summary: Saiba como implementar um cluster Milvus no OpenShift.
 ---
@@ -96,24 +96,24 @@ summary: Saiba como implementar um cluster Milvus no OpenShift.
 apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
-name: milvus-operator-serving-cert
-namespace: milvus-operator
+  name: milvus-operator-serving-cert
+  namespace: milvus-operator
 spec:
-dnsNames:
-- milvus-operator-webhook-service.milvus-operator.svc
-- milvus-operator-webhook-service.milvus-operator.svc.cluster.local
-issuerRef:
+  dnsNames:
+  - milvus-operator-webhook-service.milvus-operator.svc
+  - milvus-operator-webhook-service.milvus-operator.svc.cluster.local
+  issuerRef:
     kind: Issuer
     name: milvus-operator-selfsigned-issuer
-secretName: milvus-operator-webhook-cert
+  secretName: milvus-operator-webhook-cert
 ---
 apiVersion: cert-manager.io/v1
 kind: Issuer
 metadata:
-name: milvus-operator-selfsigned-issuer
-namespace: milvus-operator
+  name: milvus-operator-selfsigned-issuer
+  namespace: milvus-operator
 spec:
-selfSigned: {}
+  selfSigned: {}
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>Aplique o ficheiro:</p>
 <pre><code translate="no" class="language-shell">kubectl apply -f milvus-<span class="hljs-keyword">operator</span>-certificate.yaml

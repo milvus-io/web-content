@@ -36,13 +36,13 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvusは、入力されたエンティティをコレクション内のセグメントに保存し、セグメントがいっぱいになるとそのセグメントを閉じます。この場合、追加のエンティティを収容するために新しいセグメントが作成されます。その結果、エンティティはセグメント間で任意に分散される。この分散によって、Milvus は複数のセグメントを検索して、指定したクエリベクトルに最も近いものを見つける必要がある。</p>
+    </button></h2><p>Milvusは入力されたエンティティをコレクション内のセグメントに保存し、セグメントが一杯になるとそのセグメントを封印します。この場合、追加のエンティティを格納するために新しいセグメントが作成されます。その結果、エンティティはセグメント間で任意に分散される。この分散により、Milvus は複数のセグメントを検索して、与えられたクエリベクトルに最も近いものを見つける必要がある。</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/clustering-compaction.png" alt="Without clustering Compaction" class="doc-image" id="without-clustering-compaction" />
    </span> <span class="img-wrapper"> <span>クラスタリングなしの場合</span> </span></p>
-<p>Milvus が特定のフィールドの値に基づいてエンティティをセグメント間に分散させることができれば、 検索範囲をセグメント内に制限することができ、検索性能が向上します。</p>
-<p><strong>クラスタリングコンパクションは</strong>、スカラーフィールドの値に基づいて、コレクション内のセグメント間でエンティティを再分配するMilvusの機能です。この機能を有効にするには、まず<strong>クラスタリングキーとして</strong>スカラーフィールドを選択する必要があります。これにより、Milvus は、クラスタリング・キー値が特定の範囲内にあるエンティティをセグメントに再分配します。クラスタリング コンパクションをトリガすると、Milvus はセグメントとクラスタリング キー値のマッピング関係を記録する<strong>PartitionStats</strong> というグローバル インデックスを生成/更新します。</p>
+<p>Milvus が特定のフィールドの値に基づいてエンティティをセグメント間に分散させることができれば、検索範囲をセグメント内に制限することができ、検索性能が向上します。</p>
+<p><strong>クラスタリングコンパクションは</strong>Milvusの機能で、スカラーフィールドの値に基づいてコレクション内のセグメント間でエンティティを再分配します。この機能を有効にするには、まず<strong>クラスタリングキーとして</strong>スカラーフィールドを選択する必要があります。これにより、Milvusはクラスタリングキーの値が特定の範囲内にあるエンティティをセグメントに再分配することができます。クラスタリングコンパクションをトリガーすると、Milvusは<strong>PartitionStatsと</strong>呼ばれるグローバルインデックスを生成/更新し、セグメントとクラスタリングキー値のマッピング関係を記録します。</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/clustering-compaction-2.png" alt="With Clustering Compaction" class="doc-image" id="with-clustering-compaction" />
@@ -63,8 +63,8 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvusのクラスタリングコンパクション機能は高度に設定可能です。手動で起動することも、Milvusが一定間隔で自動的に起動するように設定することもできます。クラスタリングコンパクションを有効にするには、次のようにします：</p>
-<h3 id="Global-Configuration" class="common-anchor-header">グローバル設定</h3><p>以下のようにMilvusの設定ファイルを変更する必要があります。</p>
+    </button></h2><p>MilvusのClustering Compaction機能は高度な設定が可能です。手動で起動させることも、Milvusが一定間隔で自動的に起動させるように設定することもできます。クラスタリングコンパクションを有効にするには、次のようにします：</p>
+<h3 id="Global-Configuration" class="common-anchor-header">グローバル設定</h3><p>Milvusの設定ファイルを以下のように変更する必要があります。</p>
 <pre><code translate="no" class="language-yaml">dataCoord:
   compaction:
     clustering:
@@ -94,11 +94,11 @@ common:
 </thead>
 <tbody>
 <tr><td><code translate="no">enable</code></td><td>クラスタリングコンパクションを有効にするかどうかを指定します。<br>クラスタリングキーを持つすべてのコレクションでこの機能を有効にする必要がある場合は、<code translate="no">true</code> に設定します。</td><td><code translate="no">false</code></td></tr>
-<tr><td><code translate="no">autoEnable</code></td><td>自動的にトリガーされるコンパクションを有効にするかどうかを指定します。<br>これを<code translate="no">true</code> に設定すると、Milvus は指定された間隔でクラスタリング キーを持つコレクションを圧縮します。</td><td><code translate="no">false</code></td></tr>
-<tr><td><code translate="no">triggerInterval</code></td><td>Milvus がクラスタリング圧縮を開始する間隔をミリ秒単位で指定します。<br>このパラメータは<code translate="no">autoEnable</code> が<code translate="no">true</code> に設定されている場合のみ有効です。</td><td>-</td></tr>
-<tr><td><code translate="no">minInterval</code></td><td>最小間隔をミリ秒単位で指定します。<br>このパラメータは<code translate="no">autoEnable</code> が<code translate="no">true</code> に設定されている場合のみ有効です。<br>triggerIntervalより大きい整数に設定すると、短時間に繰り返し圧縮が行われるのを防ぐことができます。</td><td>-</td></tr>
-<tr><td><code translate="no">maxInterval</code></td><td>最大間隔をミリ秒単位で指定する。<br>このパラメータは、<code translate="no">autoEnable</code> が<code translate="no">true</code> に設定されている場合のみ有効である。<br>Milvusは、コレクションがこの値より長い期間クラスタリング圧縮されていないことを検出すると、強制的にクラスタリング圧縮を行います。</td><td>-</td></tr>
-<tr><td><code translate="no">newDataSizeThreshold</code></td><td>クラスタリング圧縮をトリガする上限しきい値を指定します。<br>このパラメータは、<code translate="no">autoEnable</code> が<code translate="no">true</code> に設定されている場合にのみ有効です。<br>コレクション内のデータ量がこの値を超えたことをMilvusが検出すると、クラスタリングコンパクションプロセスが開始されます。</td><td>-</td></tr>
+<tr><td><code translate="no">autoEnable</code></td><td>自動的にトリガーされるコンパクションを有効にするかどうかを指定します。<br>これを<code translate="no">true</code> に設定すると、Milvusは指定された間隔でクラスタリングキーを持つコレクションを圧縮します。</td><td><code translate="no">false</code></td></tr>
+<tr><td><code translate="no">triggerInterval</code></td><td>Milvusがクラスタリング圧縮を開始する間隔をミリ秒単位で指定します。<br>このパラメータは<code translate="no">autoEnable</code> が<code translate="no">true</code> に設定されている場合のみ有効です。</td><td>-</td></tr>
+<tr><td><code translate="no">minInterval</code></td><td>最小間隔を秒単位で指定します。<br>このパラメータは<code translate="no">autoEnable</code> が<code translate="no">true</code> に設定されている場合のみ有効です。<br>triggerIntervalより大きい整数に設定することで、短時間に繰り返しコンパクションが行われるのを防ぐことができます。</td><td>-</td></tr>
+<tr><td><code translate="no">maxInterval</code></td><td>最大間隔を秒単位で指定する。<br>このパラメータは、<code translate="no">autoEnable</code> が<code translate="no">true</code> に設定されている場合のみ有効です。<br>Milvusは、コレクションがこの値よりも長い期間クラスタリング圧縮されていないことを検出すると、強制的にクラスタリング圧縮を行います。</td><td>-</td></tr>
+<tr><td><code translate="no">newDataSizeThreshold</code></td><td>クラスタリング圧縮をトリガする上限しきい値を指定します。<br>このパラメータは、<code translate="no">autoEnable</code> が<code translate="no">true</code> に設定されている場合にのみ有効です。<br>Milvusはコレクションのデータ量がこの値を超えたことを検出すると、クラスタリングコンパクションプロセスを開始します。</td><td>-</td></tr>
 <tr><td><code translate="no">timeout</code></td><td>クラスタリングコンパクションのタイムアウト時間を指定します。<br>実行時間がこの値を超えると、クラスタリングコンパクションは失敗します。</td><td>-</td></tr>
 </tbody>
 </table>
@@ -109,7 +109,7 @@ common:
 <tr><th>設定項目</th><th>説明</th><th>デフォルト値</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">enableSegmentPrune</code></td><td>Milvusが検索/クエリ要求を受信したときにPartitionStatsを参照してデータをプルーンするかどうかを指定します。<br>これを<code translate="no">true</code> に設定すると、Milvus は検索/クエリ要求時にセグメントから無関係なデータを削除します。</td><td><code translate="no">false</code></td></tr>
+<tr><td><code translate="no">enableSegmentPrune</code></td><td>Milvusが検索/クエリ要求を受信した際に、PartitionStatsを参照してデータをプルーンするかどうかを指定します。<br>これを<code translate="no">true</code> に設定すると、Milvus は検索/クエリ要求時にセグメントから無関係なデータを削除します。</td><td><code translate="no">false</code></td></tr>
 </tbody>
 </table>
 </li>
@@ -119,7 +119,7 @@ common:
 <tr><th>設定項目</th><th>設定項目</th><th>デフォルト値</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">memoryBufferRatio</code></td><td>クラスタリング圧縮タスクのメモリバッファ比率を指定します。 <br>Milvusは、データサイズがこの比率を使用して計算された割り当て済みバッファサイズを超えると、データをフラッシュします。</td><td>-</td></tr>
+<tr><td><code translate="no">memoryBufferRatio</code></td><td>クラスタリング圧縮タスクのメモリバッファ比率を指定します。 <br>Milvusは、データサイズがこの比率を使用して計算された割り当てバッファサイズを超えると、データをフラッシュします。</td><td>-</td></tr>
 <tr><td><code translate="no">workPoolSize</code></td><td>クラスタリング・コンパクション・タスクのワーカープールサイズを指定します。</td><td>-</td></tr>
 </tbody>
 </table>
@@ -136,22 +136,7 @@ common:
 </li>
 </ul>
 <p>上記の変更をMilvusクラスタに適用するには、<a href="/docs/ja/configure-helm.md">Configure Milvus with Helm</a>および<a href="/docs/ja/configure_operator.md">Configure Milvus with Milvus Operatorsの</a>手順に従ってください。</p>
-<h2 id="Collection-Configuration" class="common-anchor-header">コレクションの構成<button data-href="#Collection-Configuration" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h2><p>特定のコレクションでクラスタリングコンパクトを行うには、コレクションからスカラフィールドをクラスタリングキーとして選択する必要があります。</p>
+<h3 id="Collection-Configuration" class="common-anchor-header">コレクションの構成</h3><p>特定のコレクションでクラスタリングコンパクトを行うには、コレクションからスカラフィールドをクラスタリングキーとして選択する必要があります。</p>
 <pre><code translate="no" class="language-python">default_fields = [
     FieldSchema(name=<span class="hljs-string">&quot;id&quot;</span>, dtype=DataType.INT64, is_primary=<span class="hljs-literal">True</span>),
     FieldSchema(name=<span class="hljs-string">&quot;key&quot;</span>, dtype=DataType.INT64, is_clustering_key=<span class="hljs-literal">True</span>),
@@ -190,7 +175,7 @@ coll1.get_compaction_state(is_clustering=<span class="hljs-literal">True</span>)
 coll1.wait_for_compaction_completed(is_clustering=<span class="hljs-literal">True</span>)
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Benchmark-Test" class="common-anchor-header">ベンチマークテスト</h3><p>データ量とクエリパターンの組み合わせにより、クラスタリングコンパクションがもたらすパフォーマンスの向上が決まります。社内のベンチマーク・テストでは、クラスタリング・コンパクションによって1秒あたりのクエリ数（QPS）が最大25倍向上することが実証されています。</p>
-<p>ベンチマークテストは、2,000万、768次元のLAIONデータセットから、キーフィールドをクラスタリングキーとして指定したエンティティを含むコレクションを対象としている。コレクション内でクラスタリング圧縮がトリガーされた後、CPU使用率が高水準に達するまで同時検索が送信される。</p>
+<p>このベンチマークテストは、2,000万、768次元のLAIONデータセットから、キーフィールドをクラスタリングキーとして指定したエンティティを含むコレクションを対象としたものです。コレクション内でクラスタリング圧縮がトリガーされた後、CPU使用率が高水準に達するまで同時検索が送信される。</p>
 <table>
   <thead>
     <tr>
@@ -260,7 +245,7 @@ coll1.wait_for_compaction_completed(is_clustering=<span class="hljs-literal">Tru
     </tr>
   </tbody>
 </table>
-<p>検索フィルターで検索範囲を狭めると、プルーンの比率が高くなる。これは、検索プロセスでより多くのエンティティがスキップされることを意味します。最初の行と最後の行の統計値を比較すると、クラスタリング・コンパクションを使用しない検索では、コ レクション全体をスキャンする必要があることがわかります。一方、特定のキーを使用してクラスタリング・コンパクションを行う検索では、最大25倍の改善が得られます。</p>
+<p>検索フィルターで検索範囲を狭めると、プルーンの比率が高くなる。これは、検索プロセスでより多くのエンティティがスキップされることを意味します。最初の行と最後の行の統計値を比較すると、クラスタリング・コンパクションなしの検索では、コレクション全体をスキャンする必要があることがわかります。一方、特定のキーを使用してクラスタリング・コンパクションを行う検索では、最大25倍の改善が得られます。</p>
 <h2 id="Best-practices" class="common-anchor-header">ベストプラクティス<button data-href="#Best-practices" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -280,6 +265,6 @@ coll1.wait_for_compaction_completed(is_clustering=<span class="hljs-literal">Tru
 <ul>
 <li><p>データ・ボリュームの大きいコレクションでこれを有効にする。 コレクションのデータ・ボリュームが大きくなると、検索パフォーマンスが向上します。100万エンティティを超えるコレクションでは、この機能を有効にすることをお勧めします。</p></li>
 <li><p>適切なクラスタリングキーを選択します。 フィルタリング条件として一般的に使用されるスカラーフィールドをクラスタリングキーとして使用できます。複数のテナントからのデータを保持するコレクションでは、あるテナントと別のテナントを区別するフィールドをクラスタリ ング・キーとして使用できます。</p></li>
-<li><p>パーティションキーをクラスタリングキーとして使用します。Milvusインスタンスのすべてのコレクションでこの機能を有効にしたい場合、またはパーティションキーを持つ大規模なコレクションでパフォーマンスの問題にまだ直面している場合は、<code translate="no">common.usePartitionKeyAsClusteringKey</code> を true に設定できます。そうすることで、コレクション内のスカラーフィールドをパーティションキーとして選択した場合、クラスタリングキーとパーティションキーを持つことになります。</p>
+<li><p>パーティションキーをクラスタリングキーとして使用する milvusインスタンスのすべてのコレクションでこの機能を有効にしたい場合、またはパーティションキーを持つ大規模なコレクションでパフォーマンスの問題にまだ直面している場合は、<code translate="no">common.usePartitionKeyAsClusteringKey</code> を true に設定できます。そうすることで、コレクション内のスカラーフィールドをパーティションキーとして選択した場合、クラスタリングキーとパーティションキーを持つことになります。</p>
 <p>この設定は、別のスカラー・フィールドをクラスタリング・キーとして選択することを妨げるものではありません。明示的に指定されたクラスタリング・キーが常に優先されます。</p></li>
 </ul>

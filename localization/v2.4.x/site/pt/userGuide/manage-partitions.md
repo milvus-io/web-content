@@ -1,7 +1,6 @@
 ---
 id: manage-partitions.md
 title: Gerir partições
-summary: ''
 ---
 <h1 id="Manage-Partitions" class="common-anchor-header">Gerir partições<button data-href="#Manage-Partitions" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -735,8 +734,18 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 <span class="hljs-comment">// LoadStateLoaded</span>
 <span class="hljs-comment">// </span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Release-Partitions" class="common-anchor-header">Libertar partições</h3><div class="language-python">
-<p>Para liberar todas as partições de uma coleção, basta chamar <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/release_collection.md"><code translate="no">release_collection()</code></a>. Para liberar partições específicas de uma coleção, use <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Partitions/release_partitions.md"><code translate="no">release_partitions()</code></a>.</p>
+<p>Para carregar campos especificados numa ou mais partições, faça o seguinte:</p>
+<pre><code translate="no" class="language-python">client.load_partitions(
+    collection_name=<span class="hljs-string">&quot;quick_setup&quot;</span>,
+    partition_names=[<span class="hljs-string">&quot;partitionA&quot;</span>],
+    load_fields=[<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-string">&quot;vector&quot;</span>],
+    skip_load_dynamic_field=<span class="hljs-literal">True</span>
+)
+<button class="copy-code-btn"></button></code></pre>
+<p>Observe que apenas os campos listados em <code translate="no">load_fields</code> podem ser usados como condições de filtragem e campos de saída em pesquisas e consultas. Deve incluir sempre a chave primária na lista. Os nomes de campo excluídos do carregamento não estarão disponíveis para filtragem ou saída.</p>
+<p>Pode utilizar <code translate="no">skip_load_dynamic_field=True</code> para saltar o carregamento do campo dinâmico. O Milvus trata o campo dinâmico como um único campo, portanto todas as chaves no campo dinâmico serão incluídas ou excluídas juntas.</p>
+<h3 id="Release-Partitions" class="common-anchor-header">Liberar partições</h3><div class="language-python">
+<p>Para libertar todas as partições de uma coleção, basta chamar <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/release_collection.md"><code translate="no">release_collection()</code></a>. Para liberar partições específicas de uma coleção, use <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Partitions/release_partitions.md"><code translate="no">release_partitions()</code></a>.</p>
 </div>
 <div class="language-java">
 <p>Para liberar todas as partições de uma coleção, basta chamar <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Management/releaseCollection.md"><code translate="no">releaseCollection()</code></a>. Para libertar partições específicas de uma coleção, utilize <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Partitions/releasePartitions.md"><code translate="no">releasePartitions()</code></a>.</p>
@@ -930,7 +939,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 <li><p><strong>Quantos dados podem ser armazenados em uma partição?</strong></p>
 <p>Recomenda-se armazenar menos de 1B de dados em uma partição.</p></li>
 <li><p><strong>Qual é o número máximo de partições que podem ser criadas?</strong></p>
-<p>Por defeito, o Milvus permite a criação de um máximo de 4.096 partições. É possível ajustar o número máximo de partições configurando <code translate="no">rootCoord.maxPartitionNum</code>. Para obter detalhes, consulte <a href="https://milvus.io/docs/configure_rootcoord.md#rootCoordmaxPartitionNum">Configurações do sistema</a>.</p></li>
+<p>Por defeito, o Milvus permite a criação de um máximo de 1.024 partições. É possível ajustar o número máximo de partições configurando <code translate="no">rootCoord.maxPartitionNum</code>. Para obter detalhes, consulte <a href="https://milvus.io/docs/configure_rootcoord.md#rootCoordmaxPartitionNum">Configurações do sistema</a>.</p></li>
 <li><p><strong>Como posso diferenciar entre partições e chaves de partição?</strong></p>
 <p>As partições são unidades de armazenamento físicas, enquanto as chaves de partição são conceitos lógicos que atribuem automaticamente dados a partições específicas com base numa coluna designada.</p>
 <p>Por exemplo, no Milvus, se tiver uma coleção com uma chave de partição definida como o campo <code translate="no">color</code>, o sistema atribui automaticamente os dados às partições com base nos valores de hash do campo <code translate="no">color</code> para cada entidade. Este processo automatizado liberta o utilizador da responsabilidade de especificar manualmente a partição ao inserir ou pesquisar dados.</p>

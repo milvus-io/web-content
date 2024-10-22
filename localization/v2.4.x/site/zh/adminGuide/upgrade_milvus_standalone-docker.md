@@ -4,7 +4,7 @@ label: Docker Compose
 order: 1
 group: upgrade_milvus_standalone-operator.md
 related_key: upgrade Milvus Standalone
-summary: 了解如何使用 Docker Compose 独立升级 Milvus。
+summary: 了解如何使用 Docker Compose 升级 Milvus Standalone。
 title: 使用 Docker Compose 升级 Milvus 单机版
 ---
 <div class="tab-wrapper"><a href="/docs/zh/upgrade_milvus_standalone-operator.md" class=''>Milvus</a><a href="/docs/zh/upgrade_milvus_standalone-helm.md" class=''>OperatorHelmDocker</a><a href="/docs/zh/upgrade_milvus_standalone-docker.md" class='active '>Compose</a></div>
@@ -24,9 +24,9 @@ title: 使用 Docker Compose 升级 Milvus 单机版
         ></path>
       </svg>
     </button></h1><p>本主题介绍如何使用 Docker Compose 升级 Milvus。</p>
-<p>在正常情况下，你可以<a href="#Upgrade-Milvus-by-changing-its-image">通过更改映像来升级 Milvus</a>。不过，在从 v2.1.x 升级到 v2.4.9 之前，你需要<a href="#Migrate-the-metadata">迁移元数据</a>。</p>
+<p>在正常情况下，你可以<a href="#Upgrade-Milvus-by-changing-its-image">通过更改映像来升级 Milvus</a>。不过，在从 v2.1.x 升级到 v2.4.13-hotfix 之前，你需要<a href="#Migrate-the-metadata">迁移元数据</a>。</p>
 <div class="alter note">
-<p>出于安全考虑，Milvus 在发布 v2.2.5 时将 MinIO 升级到 RELEASE.2023-03-20T20-16-18Z。在使用 Docker Compose 从以前的 Milvus Standalone 版本升级之前，应创建单节点单硬盘 MinIO 部署，并将现有 MinIO 设置和内容迁移到新部署。有关详细信息，请参阅<a href="https://min.io/docs/minio/linux/operations/install-deploy-manage/migrate-fs-gateway.html#id2">本指南</a>。</p>
+<p>出于安全考虑，Milvus 在发布 v2.2.5 时将其 MinIO 升级到 RELEASE.2023-03-20T20-16-18Z。在使用 Docker Compose 从以前安装的 Milvus Standalone 版本升级之前，应创建一个 Single-Node Single-Drive MinIO 部署，并将现有 MinIO 设置和内容迁移到新部署。有关详细信息，请参阅<a href="https://min.io/docs/minio/linux/operations/install-deploy-manage/migrate-fs-gateway.html#id2">本指南</a>。</p>
 </div>
 <h2 id="Upgrade-Milvus-by-changing-its-image" class="common-anchor-header">通过更改映像升级 Milvus<button data-href="#Upgrade-Milvus-by-changing-its-image" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -43,13 +43,13 @@ title: 使用 Docker Compose 升级 Milvus 单机版
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>在正常情况下，可以按以下步骤升级 Milvus：</p>
+    </button></h2><p>在正常情况下，可以按以下方法升级 Milvus：</p>
 <ol>
 <li><p>在<code translate="no">docker-compose.yaml</code> 中更改 Milvus 映像标记。</p>
 <pre><code translate="no" class="language-yaml">...
 standalone:
   container_name: milvus-standalone
-  image: milvusdb/milvus:v2.4.9
+  image: milvusdb/milvus:v2.4.13-hotfix
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>运行以下命令执行升级。</p>
 <pre><code translate="no" class="language-shell">docker compose down
@@ -75,7 +75,7 @@ docker compose up -d
 <li><p>停止所有 Milvus 组件。</p>
 <pre><code translate="no">docker stop &lt;milvus-component-docker-container-name&gt;
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p>为元数据迁移准备配置文件<code translate="no">migration.yaml</code> 。</p>
+<li><p>为元迁移准备配置文件<code translate="no">migration.yaml</code> 。</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># migration.yaml</span>
 cmd:
   <span class="hljs-comment"># Option: run/backup/rollback</span>
@@ -83,7 +83,7 @@ cmd:
   runWithBackup: true
 config:
   sourceVersion: <span class="hljs-number">2.1</span><span class="hljs-number">.4</span>   <span class="hljs-comment"># Specify your milvus version</span>
-  targetVersion: <span class="hljs-number">2.4</span><span class="hljs-number">.9</span>
+  targetVersion: <span class="hljs-number">2.4</span><span class="hljs-number">.13</span>-hotfix
   backupFilePath: /tmp/migration.bak
 metastore:
   <span class="hljs-built_in">type</span>: etcd

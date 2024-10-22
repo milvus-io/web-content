@@ -70,8 +70,33 @@ title: FAQ operative
 <li><p><strong>Dati limitati</strong>: La collezione potrebbe non avere abbastanza entità per soddisfare il limite richiesto. Se il numero totale di entità nella raccolta è inferiore al limite, si riceveranno naturalmente meno risultati.</p></li>
 <li><p><strong>Chiavi primarie duplicate</strong>: Milvus dà priorità a entità specifiche quando incontra chiavi primarie duplicate durante una ricerca. Questo comportamento varia in base al tipo di ricerca:</p></li>
 <li><p><strong>Query (corrispondenza esatta)</strong>: Milvus seleziona l'entità più recente con la PK corrispondente. Ricerca RNA: Milvus seleziona l'entità con il punteggio di somiglianza più alto, anche se le entità condividono la stessa PK. Questa priorità può portare a un numero di risultati unici inferiore al limite se la collezione ha molte chiavi primarie duplicate.</p></li>
-<li><p><strong>Corrispondenze insufficienti</strong>: Le espressioni di filtraggio della ricerca potrebbero essere troppo rigide, con il risultato di un numero inferiore di entità che soddisfano la soglia di somiglianza. Se le condizioni impostate per la ricerca sono troppo restrittive, il numero di entità che corrispondono non è sufficiente e i risultati sono inferiori a quelli attesi.</p></li>
+<li><p><strong>Corrispondenze insufficienti</strong>: Le espressioni di filtraggio della ricerca potrebbero essere troppo rigide, con il risultato di un numero inferiore di entità che soddisfano la soglia di somiglianza. Se le condizioni impostate per la ricerca sono troppo restrittive, non ci sono abbastanza entità che corrispondono, il che porta a un numero di risultati inferiore a quello previsto.</p></li>
 </ul>
+<h4 id="MilvusClientmilvusdemodb-gives-an-error-ModuleNotFoundError-No-module-named-milvuslite-What-causes-this-and-how-can-it-be-solved" class="common-anchor-header"><code translate="no">MilvusClient(&quot;milvus_demo.db&quot;) gives an error: ModuleNotFoundError: No module named 'milvus_lite'</code>. Quali sono le cause e come si può risolvere?</h4><p>Questo errore si verifica quando si tenta di utilizzare Milvus Lite su una piattaforma Windows. Milvus Lite è stato progettato principalmente per ambienti Linux e potrebbe non avere un supporto nativo per Windows.</p>
+<p>La soluzione è utilizzare un ambiente Linux:</p>
+<ul>
+<li>Utilizzare un sistema operativo o una macchina virtuale basata su Linux per eseguire Milvus Lite.</li>
+<li>Questo approccio garantirà la compatibilità con le dipendenze e le funzionalità della libreria.</li>
+</ul>
+<h4 id="What-are-the-length-exceeds-max-length-errors-in-Milvus-and-how-can-they-be-understood-and-addressed" class="common-anchor-header">Cosa sono gli errori di "lunghezza superiore alla lunghezza massima" in Milvus e come si possono capire e risolvere?</h4><p>Gli errori "Length exceeds max length" in Milvus si verificano quando la dimensione di un elemento di dati supera la dimensione massima consentita per una collezione o un campo. Ecco alcuni esempi e spiegazioni:</p>
+<ul>
+<li><p>Errore di campo JSON: <code translate="no">&lt;MilvusException: (code=1100, message=the length (398324) of json field (metadata) exceeds max length (65536): expected=valid length json string, actual=length exceeds max length: invalid parameter)&gt;</code></p></li>
+<li><p>Errore di lunghezza della stringa: <code translate="no">&lt;ParamError: (code=1, message=invalid input, length of string exceeds max length. length: 74238, max length: 60535)&gt;</code></p></li>
+<li><p>Errore campo VarChar: <code translate="no">&lt;MilvusException: (code=1100, message=the length (60540) of 0th VarChar paragraph exceeds max length (0)%!(EXTRA int64=60535): invalid parameter)&gt;</code></p></li>
+</ul>
+<p>Per comprendere e risolvere questi errori:</p>
+<ul>
+<li>Capire che <code translate="no">len(str)</code> in Python rappresenta il numero di caratteri, non la dimensione in byte.</li>
+<li>Per i tipi di dati basati su stringhe come VARCHAR e JSON, utilizzare <code translate="no">len(bytes(str, encoding='utf-8'))</code> per determinare la dimensione effettiva in byte, che è quella utilizzata da Milvus per &quot;max-length&quot;.</li>
+</ul>
+<p>Esempio in Python:</p>
+<pre><code translate="no" class="language-python"><span class="hljs-comment"># Python Example: result of len() str cannot be used as &quot;max-length&quot; in Milvus </span>
+<span class="hljs-meta">&gt;&gt;&gt; </span>s = <span class="hljs-string">&quot;你好，世界！&quot;</span>
+<span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-built_in">len</span>(s) <span class="hljs-comment"># Number of characters of s.</span>
+<span class="hljs-number">6</span>
+<span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-built_in">len</span>(<span class="hljs-built_in">bytes</span>(s, <span class="hljs-string">&quot;utf-8&quot;</span>)) <span class="hljs-comment"># Size in bytes of s, max-length in Milvus.</span>
+<span class="hljs-number">18</span>
+<button class="copy-code-btn"></button></code></pre>
 <h4 id="Still-have-questions" class="common-anchor-header">Avete ancora domande?</h4><p>È possibile:</p>
 <ul>
 <li>Controllare <a href="https://github.com/milvus-io/milvus/issues">Milvus</a> su GitHub. Sentitevi liberi di fare domande, condividere idee e aiutare gli altri.</li>

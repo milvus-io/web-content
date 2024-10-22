@@ -19,10 +19,10 @@ title: 单向量搜索
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>插入数据后，下一步就是在 Milvus 中对集合进行相似性搜索。</p>
-<p>Milvus 允许您进行两种类型的搜索，具体取决于您的 Collections 中向量场的数量：</p>
+    </button></h1><p>插入数据后，下一步就是在 Milvus 中对 Collections 进行相似性搜索。</p>
+<p>根据 Collections 中向量场的数量，Milvus 允许您进行两种类型的搜索：</p>
 <ul>
-<li><strong>单向量搜索</strong>：如果您的 Collections 只有一个向量场，请使用 <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Vector/search.md"><code translate="no">search()</code></a>方法来查找最相似的实体。该方法会将您的查询向量与集合中的现有向量进行比较，并返回最匹配的 ID 以及它们之间的距离。作为选项，它还可以返回结果的向量值和元数据。</li>
+<li><strong>单向量搜索</strong>：如果您的 Collections 只有一个向量场，请使用 <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Vector/search.md"><code translate="no">search()</code></a>方法来查找最相似的实体。该方法会将您的查询向量与 Collections 中的现有向量进行比较，并返回最匹配的 ID 以及它们之间的距离。作为选项，它还可以返回结果的向量值和元数据。</li>
 <li><strong>混合搜索</strong>：对于有两个或更多向量字段的 Collections，可使用 <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/ORM/Collection/hybrid_search.md"><code translate="no">hybrid_search()</code></a>方法。该方法会执行多个近似近邻（ANN）搜索请求，并在重新排序后将结果组合起来，返回最相关的匹配结果。</li>
 </ul>
 <p>本指南主要介绍如何在 Milvus 中执行单向量搜索。有关混合搜索的详细信息，请参阅<a href="https://milvus.io/docs/multi-vector-search.md">混合搜索</a>。</p>
@@ -63,7 +63,7 @@ title: 单向量搜索
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>下面的代码片段对现有代码进行了重新利用，以建立与 Milvus 的连接并快速设置集合。</p>
+    </button></h2><p>下面的代码片段对现有代码进行了重新利用，以建立与 Milvus 的连接并快速设置 Collections。</p>
 <div class="multipleCode">
    <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># 1. Set up a Milvus client</span>
@@ -500,7 +500,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
     </tr>
     <tr>
       <td><code translate="no">limit</code></td>
-      <td>要返回的实体总数。<br/>可以将此参数与<strong>param</strong>中的<strong>偏移量</strong>结合使用，以启用分页。<br/>此值与<strong>param</strong>中的<strong>偏移量</strong>之和<strong>应</strong>小于 16,384。</td>
+      <td>要返回的实体总数。<br/>可以将此参数与<strong>param</strong>中的<strong>偏移量</strong>结合使用，以启用分页。<br/>此值与<strong>param</strong>中的<strong>偏移量</strong>之和应小于 16,384。</td>
     </tr>
     <tr>
       <td><code translate="no">search_params</code></td>
@@ -526,7 +526,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
     </tr>
     <tr>
       <td><code translate="no">topK</code></td>
-      <td>搜索结果中要返回的记录数。该参数使用与<strong>limit</strong>参数相同的语法，因此只需设置其中一个。<br/>可以将该参数与<strong>param</strong>中的<strong>偏移量</strong>结合使用，以启用分页。<br/>该值与<strong>param</strong>中的<strong>偏移量</strong>之和<strong>应</strong>小于 16,384。</td>
+      <td>搜索结果中要返回的记录数。该参数使用与<strong>limit</strong>参数相同的语法，因此只需设置其中一个。<br/>可以将该参数与<strong>param</strong>中的<strong>偏移量</strong>结合使用，以启用分页。<br/>该值与<strong>param</strong>中的<strong>偏移量</strong>之和应小于 16,384。</td>
     </tr>
   </tbody>
 </table>
@@ -548,7 +548,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
     </tr>
     <tr>
       <td><code translate="no">limit</code></td>
-      <td>要返回的实体总数。<br/>可以将此参数与<strong>param</strong>中的<strong>偏移量</strong>结合使用，以启用分页。<br/>此值与<strong>param</strong>中的<strong>偏移量</strong>之和<strong>应</strong>小于 16,384。</td>
+      <td>要返回的实体总数。<br/>可以将此参数与<strong>param</strong>中的<strong>偏移量</strong>结合使用，以启用分页。<br/>此值与<strong>param</strong>中的<strong>偏移量</strong>之和应小于 16,384。</td>
     </tr>
   </tbody>
 </table>
@@ -1699,7 +1699,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 <tr><td><code translate="no">HAMMING</code></td><td>汉明距离越小，相似度越高。</td><td>要从结果中排除最接近的向量，请确保：<br/> <code translate="no">range_filter</code> &lt;= distance &lt;<code translate="no">radius</code></td></tr>
 </tbody>
 </table>
-<p>要了解有关距离度量类型的更多信息，请参阅<a href="/docs/zh/metric.md">相似度量</a>。</p>
+<p>要了解有关距离度量类型的更多信息，请参阅 "<a href="/docs/zh/metric.md">相似度量"</a>。</p>
 <h2 id="Grouping-search" class="common-anchor-header">分组搜索<button data-href="#Grouping-search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -1715,9 +1715,10 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>在 Milvus 中，按特定字段分组搜索可以避免结果中出现相同字段项的冗余。你可以获得特定字段的不同结果集。</p>
-<p>考虑一个文档 Collections，每个文档分成不同的段落。每个段落由一个向量 Embeddings 表示，属于一个文档。要查找相关文档而不是相似段落，可以在<code translate="no">search()</code> 命令中加入<code translate="no">group_by_field</code> 参数，按文档 ID 对结果进行分组。这有助于返回最相关和最独特的文档，而不是同一文档中的不同段落。</p>
-<p>以下是按字段分组搜索结果的示例代码：</p>
+    </button></h2><p>在 Milvus 中，分组搜索旨在提高搜索结果的全面性和准确性。</p>
+<p>考虑 RAG 中的一种情况，即文档负载被分成不同的段落，每个段落由一个向量嵌入表示。用户希望找到最相关的段落，以准确地提示 LLMs。普通的 Milvus 搜索功能可以满足这一要求，但它可能会导致搜索结果高度倾斜和偏差：大部分段落只来自少数几个文档，搜索结果的全面性非常差。这可能会严重影响词法管理器给出结果的准确性甚至正确性，并对词法管理器用户的使用体验造成负面影响。</p>
+<p>分组搜索可以有效解决这个问题。通过传递 group_by_field 和 group_size，Milvus 用户可以将搜索结果分成若干组，并确保每组的实体数量不超过特定的 group_size。这一功能可以大大提高搜索结果的全面性和公平性，明显改善 LLM 输出的质量。</p>
+<p>以下是按字段对搜索结果分组的示例代码：</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Connect to Milvus</span>
 client = MilvusClient(uri=<span class="hljs-string">&#x27;http://localhost:19530&#x27;</span>) <span class="hljs-comment"># Milvus server address</span>
 
@@ -1732,21 +1733,26 @@ res = client.search(
     <span class="hljs-string">&quot;metric_type&quot;</span>: <span class="hljs-string">&quot;L2&quot;</span>,
     <span class="hljs-string">&quot;params&quot;</span>: {<span class="hljs-string">&quot;nprobe&quot;</span>: <span class="hljs-number">10</span>},
     }, <span class="hljs-comment"># Search parameters</span>
-    limit=<span class="hljs-number">10</span>, <span class="hljs-comment"># Max. number of search results to return</span>
+    limit=<span class="hljs-number">5</span>, <span class="hljs-comment"># Max. number of groups to return</span>
     group_by_field=<span class="hljs-string">&quot;doc_id&quot;</span>, <span class="hljs-comment"># Group results by document ID</span>
+    group_size=<span class="hljs-number">2</span>, <span class="hljs-comment"># returned at most 2 passages per document, the default value is 1</span>
+    group_strict_size=<span class="hljs-literal">True</span>, <span class="hljs-comment"># ensure every group contains exactly 3 passages</span>
     output_fields=[<span class="hljs-string">&quot;doc_id&quot;</span>, <span class="hljs-string">&quot;passage_id&quot;</span>]
 )
 
 <span class="hljs-comment"># Retrieve the values in the `doc_id` column</span>
 doc_ids = [result[<span class="hljs-string">&#x27;entity&#x27;</span>][<span class="hljs-string">&#x27;doc_id&#x27;</span>] <span class="hljs-keyword">for</span> result <span class="hljs-keyword">in</span> res[<span class="hljs-number">0</span>]]
+passage_ids = [result[<span class="hljs-string">&#x27;entity&#x27;</span>][<span class="hljs-string">&#x27;passage_id&#x27;</span>] <span class="hljs-keyword">for</span> result <span class="hljs-keyword">in</span> res[<span class="hljs-number">0</span>]]
 
 <span class="hljs-built_in">print</span>(doc_ids)
+<span class="hljs-built_in">print</span>(passage_ids)
 <button class="copy-code-btn"></button></code></pre>
 <p>输出结果类似于下面的内容：</p>
-<pre><code translate="no" class="language-python">[<span class="hljs-meta">5, 10, 1, 7, 9, 6, 3, 4, 8, 2</span>]
+<pre><code translate="no" class="language-python">[<span class="hljs-string">&quot;doc_11&quot;</span>, <span class="hljs-string">&quot;doc_11&quot;</span>, <span class="hljs-string">&quot;doc_7&quot;</span>, <span class="hljs-string">&quot;doc_7&quot;</span>, <span class="hljs-string">&quot;doc_3&quot;</span>, <span class="hljs-string">&quot;doc_3&quot;</span>, <span class="hljs-string">&quot;doc_2&quot;</span>, <span class="hljs-string">&quot;doc_2&quot;</span>, <span class="hljs-string">&quot;doc_8&quot;</span>, <span class="hljs-string">&quot;doc_8&quot;</span>]
+[<span class="hljs-meta">5, 10, 11, 10, 9, 6, 5, 4, 9, 2</span>]
 <button class="copy-code-btn"></button></code></pre>
-<p>在给定的输出中，可以看到返回的实体不包含任何重复的<code translate="no">doc_id</code> 值。</p>
-<p>为了进行比较，让我们注释掉<code translate="no">group_by_field</code> 并进行常规搜索：</p>
+<p>在给定的输出结果中，我们可以看到，每个文档都恰好检索到了两个段落，总共有 5 个文档集合构成了结果。</p>
+<p>为了便于比较，我们注释掉与组相关的参数，然后进行常规搜索：</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Connect to Milvus</span>
 client = MilvusClient(uri=<span class="hljs-string">&#x27;http://localhost:19530&#x27;</span>) <span class="hljs-comment"># Milvus server address</span>
 
@@ -1761,27 +1767,33 @@ res = client.search(
     <span class="hljs-string">&quot;metric_type&quot;</span>: <span class="hljs-string">&quot;L2&quot;</span>,
     <span class="hljs-string">&quot;params&quot;</span>: {<span class="hljs-string">&quot;nprobe&quot;</span>: <span class="hljs-number">10</span>},
     }, <span class="hljs-comment"># Search parameters</span>
-    limit=<span class="hljs-number">10</span>, <span class="hljs-comment"># Max. number of search results to return</span>
+    limit=<span class="hljs-number">5</span>, <span class="hljs-comment"># Max. number of search results to return</span>
     <span class="hljs-comment"># group_by_field=&quot;doc_id&quot;, # Group results by document ID</span>
+    <span class="hljs-comment"># group_size=2, </span>
+    <span class="hljs-comment"># group_strict_size=True,</span>
     output_fields=[<span class="hljs-string">&quot;doc_id&quot;</span>, <span class="hljs-string">&quot;passage_id&quot;</span>]
 )
 
 <span class="hljs-comment"># Retrieve the values in the `doc_id` column</span>
 doc_ids = [result[<span class="hljs-string">&#x27;entity&#x27;</span>][<span class="hljs-string">&#x27;doc_id&#x27;</span>] <span class="hljs-keyword">for</span> result <span class="hljs-keyword">in</span> res[<span class="hljs-number">0</span>]]
+passage_ids = [result[<span class="hljs-string">&#x27;entity&#x27;</span>][<span class="hljs-string">&#x27;passage_id&#x27;</span>] <span class="hljs-keyword">for</span> result <span class="hljs-keyword">in</span> res[<span class="hljs-number">0</span>]]
 
 <span class="hljs-built_in">print</span>(doc_ids)
+<span class="hljs-built_in">print</span>(passage_ids)
 <button class="copy-code-btn"></button></code></pre>
 <p>输出结果类似于下面的内容：</p>
-<pre><code translate="no" class="language-python">[<span class="hljs-meta">1, 10, 3, 10, 1, 9, 4, 4, 8, 6</span>]
+<pre><code translate="no" class="language-python">[<span class="hljs-string">&quot;doc_11&quot;</span>, <span class="hljs-string">&quot;doc_11&quot;</span>, <span class="hljs-string">&quot;doc_11&quot;</span>, <span class="hljs-string">&quot;doc_11&quot;</span>, <span class="hljs-string">&quot;doc_11&quot;</span>]
+[<span class="hljs-meta">1, 10, 3, 12, 9</span>]
 <button class="copy-code-btn"></button></code></pre>
-<p>在给定的输出中，可以看到返回的实体包含重复的<code translate="no">doc_id</code> 值。</p>
+<p>在给定的输出中，可以观察到 "doc_11 "完全占据了搜索结果，盖过了其他文档的高质量段落，这可能是对 LLM 的一个不良提示。</p>
+<p>还有一点需要注意：默认情况下，分组搜索（grouping_search）会在有足够多的组时立即返回结果，这可能会导致每个组中的结果数量不足以满足 group_size 的要求。如果你在意每个组的结果数量，请设置 group_strict_size=True，如上面的代码所示。这将使 Milvus 努力为每组获取足够的结果，但性能会略有下降。</p>
 <p><strong>限制</strong></p>
 <ul>
-<li><p><strong>索引</strong>：此分组功能仅适用于使用<strong>HNSW</strong>、<strong>IVF_</strong> <strong>FLAT</strong>或<strong>FLAT</strong>类型编制索引的 Collections。有关详细信息，请参阅<a href="https://milvus.io/docs/index.md#HNSW">内存索引</a>。</p></li>
+<li><p><strong>索引</strong>：此分组功能仅适用于使用<strong>HNSW</strong>、<strong>IVF_</strong> <strong>FLAT</strong>或<strong>FLAT</strong>类型编制索引的 Collections。更多信息，请参阅<a href="https://milvus.io/docs/index.md#HNSW">内存索引</a>。</p></li>
 <li><p><strong>向量</strong>：目前，分组搜索不支持<strong>BINARY_VECTOR</strong>类型的向量字段。有关数据类型的更多信息，请参阅<a href="https://milvus.io/docs/schema.md#Supported-data-types">支持的数据类型</a>。</p></li>
 <li><p><strong>字段</strong>：目前，分组搜索只支持单列。无法在<code translate="no">group_by_field</code> 配置中指定多个字段名。  此外，分组搜索与 JSON、FLOAT、DOUBLE、ARRAY 或向量字段的数据类型不兼容。</p></li>
 <li><p><strong>性能影响</strong>：请注意，性能会随着查询向量数的增加而降低。以具有 2 个 CPU 内核和 8 GB 内存的集群为例，分组搜索的执行时间会随着输入查询向量数量的增加而成正比增加。</p></li>
-<li><p><strong>功能</strong>：目前，<a href="https://milvus.io/docs/single-vector-search.md#Range-search">范围搜索</a>、<a href="https://milvus.io/docs/with-iterators.md#Search-with-iterator">搜索迭代器</a>或<a href="/docs/zh/multi-vector-search.md">混合</a> <a href="https://milvus.io/docs/with-iterators.md#Search-with-iterator">搜索</a>均不支持分组<a href="/docs/zh/multi-vector-search.md">搜索</a>。</p></li>
+<li><p><strong>功能</strong>：目前，<a href="https://milvus.io/docs/single-vector-search.md#Range-search">范围搜索</a>、<a href="https://milvus.io/docs/with-iterators.md#Search-with-iterator">搜索迭代器</a>不支持分组搜索。</p></li>
 </ul>
 <h2 id="Search-parameters" class="common-anchor-header">搜索参数<button data-href="#Search-parameters" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -1798,7 +1810,7 @@ doc_ids = [result[<span class="hljs-string">&#x27;entity&#x27;</span>][<span cla
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>除范围搜索外，上述搜索均使用默认搜索参数。在一般情况下，无需手动设置搜索参数。</p>
+    </button></h2><p>除范围搜索外，上述搜索均使用默认搜索参数。在正常情况下，无需手动设置搜索参数。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># In normal cases, you do not need to set search parameters manually</span>
 <span class="hljs-comment"># Except for range searches.</span>
 search_parameters = {
@@ -1818,7 +1830,7 @@ search_parameters = {
 </thead>
 <tbody>
 <tr><td><code translate="no">metric_type</code></td><td>如何测量向量 Embeddings 之间的相似性。<br/> 可能的值为<code translate="no">IP</code>,<code translate="no">L2</code>,<code translate="no">COSINE</code>,<code translate="no">JACCARD</code>, 和<code translate="no">HAMMING</code> ，默认值为已加载索引文件的值。</td></tr>
-<tr><td><code translate="no">params.nprobe</code></td><td>搜索时要查询的单位数量。<br/> 取值范围为 [1，nlist<sub>[1]]</sub>。</td></tr>
+<tr><td><code translate="no">params.nprobe</code></td><td>搜索时要查询的单位数量。<br/> 取值范围为 [1，nlist<sub>[1]</sub>]。</td></tr>
 <tr><td><code translate="no">params.level</code></td><td>搜索精度级别。<br/> 可能的值为<code translate="no">1</code> 、<code translate="no">2</code> 和<code translate="no">3</code> ，默认值为<code translate="no">1</code> 。值越高，结果越精确，但性能越差。</td></tr>
 <tr><td><code translate="no">params.radius</code></td><td>定义搜索空间的外部边界。只有与查询向量距离在此范围内的向量才会被视为潜在匹配。<br/>值范围由<code translate="no">metric_type</code> 参数决定。例如，如果<code translate="no">metric_type</code> 设置为<code translate="no">L2</code> ，则有效值范围为<code translate="no">[0, ∞]</code> 。如果<code translate="no">metric_type</code> 设置为<code translate="no">COSINE</code> ，则有效值范围为<code translate="no">[-1, 1]</code> 。更多信息，请参阅 "<a href="/docs/zh/metric.md">相似度指标"</a>。</td></tr>
 <tr><td><code translate="no">params.range_filter</code></td><td><code translate="no">radius</code> 设置搜索的外部界限，而<code translate="no">range_filter</code> 可选择用于定义内部界限，创建一个距离范围，向量必须在该范围内才会被视为匹配。<br/>值范围由<code translate="no">metric_type</code> 参数决定。例如，如果<code translate="no">metric_type</code> 设置为<code translate="no">L2</code> ，则有效值范围为<code translate="no">[0, ∞]</code> 。如果<code translate="no">metric_type</code> 设置为<code translate="no">COSINE</code> ，则有效值范围为<code translate="no">[-1, 1]</code> 。更多信息，请参阅 "<a href="/docs/zh/metric.md">相似度指标"</a>。</td></tr>

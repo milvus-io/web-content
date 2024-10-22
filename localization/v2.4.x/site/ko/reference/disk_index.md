@@ -2,7 +2,7 @@
 id: disk_index.md
 related_key: disk_index
 summary: Milvus의 디스크 인덱스 메커니즘.
-title: 디스크 색인
+title: 온디스크 인덱스
 ---
 <h1 id="On-disk-Index" class="common-anchor-header">온디스크 인덱스<button data-href="#On-disk-Index" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -68,7 +68,7 @@ title: 디스크 색인
     </button></h2><p>DiskANN을 사용하려면 다음 사항을 준수해야 합니다.</p>
 <ul>
 <li>데이터에 차원이 1개 이상인 플로트 벡터만 사용하세요.</li>
-<li>벡터 사이의 거리를 측정할 때는 유클리드 거리(L2) 또는 내적 곱(IP) 만 사용하세요.</li>
+<li>벡터 사이의 거리를 측정할 때는 유클리드 거리(L2), 내적 곱(IP) 또는 COSINE만 사용하세요.</li>
 </ul>
 <h2 id="Index-and-search-settings" class="common-anchor-header">색인 및 검색 설정<button data-href="#Index-and-search-settings" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -86,7 +86,7 @@ title: 디스크 색인
         ></path>
       </svg>
     </button></h2><ul>
-<li><p>색인 구축 매개변수</p>
+<li><p>인덱스 구축 매개변수</p>
 <p>DiskANN 인덱스를 구축할 때 인덱스 유형으로 <code translate="no">DISKANN</code> 을 사용합니다. 인덱스 매개변수는 필요하지 않습니다.</p></li>
 <li><p>검색 매개변수</p>
 <table>

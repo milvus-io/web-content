@@ -1,7 +1,6 @@
 ---
 id: limit_collection_counts.md
 title: Fixer des limites au nombre d'encaissements
-summary: ''
 ---
 <h1 id="Limit-Collection-Counts" class="common-anchor-header">Limiter le nombre de collections<button data-href="#Limit-Collection-Counts" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -45,9 +44,9 @@ summary: ''
         ></path>
       </svg>
     </button></h2><pre><code translate="no" class="language-yaml">rootCoord:
-    maxGeneralCapacity: 1024
+    maxGeneralCapacity: 65536
 <button class="copy-code-btn"></button></code></pre>
-<p>Le paramètre <code translate="no">maxGeneralCapacity</code> définit le nombre maximum de collections que l'instance Milvus actuelle peut contenir. La valeur par défaut est <code translate="no">1024</code>.</p>
+<p>Le paramètre <code translate="no">maxGeneralCapacity</code> définit le nombre maximum de collections que l'instance Milvus actuelle peut contenir. La valeur par défaut est <code translate="no">65536</code>.</p>
 <h2 id="Calculating-the-number-of-collections" class="common-anchor-header">Calcul du nombre de collections<button data-href="#Calculating-the-number-of-collections" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

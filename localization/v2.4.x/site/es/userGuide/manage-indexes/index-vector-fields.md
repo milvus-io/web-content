@@ -4,7 +4,7 @@ order: 1
 summary: >-
   Esta guía le guiará a través de las operaciones básicas de creación y gestión
   de índices en campos vectoriales de una colección.
-title: Campos vectoriales de índice
+title: Indexar campos vectoriales
 ---
 <h1 id="Index-Vector-Fields" class="common-anchor-header">Indexar campos vectoriales<button data-href="#Index-Vector-Fields" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -38,7 +38,7 @@ title: Campos vectoriales de índice
         ></path>
       </svg>
     </button></h2><p>Aprovechando los metadatos almacenados en un archivo de índice, Milvus organiza sus datos en una estructura especializada, facilitando la rápida recuperación de la información solicitada durante las búsquedas o consultas.</p>
-<p>Milvus proporciona varios tipos de índices y métricas para ordenar los valores de campo para realizar búsquedas de similitud eficientes. La siguiente tabla enumera los tipos de índices y métricas soportados para diferentes tipos de campos vectoriales. Para más detalles, consulte <a href="/docs/es/index.md">Índice en memoria</a> y <a href="/docs/es/metric.md">métricas de similitud</a>.</p>
+<p>Milvus proporciona varios tipos de índices y métricas para ordenar los valores de campo para realizar búsquedas de similitud eficientes. La siguiente tabla enumera los tipos de índices y métricas soportados para diferentes tipos de campos vectoriales. Para más detalles, consulte <a href="/docs/es/index.md">Índice en memoria</a> y <a href="/docs/es/metric.md">métricas</a> de <a href="/docs/es/metric.md">similitud</a>.</p>
 <div class="filter">
  <a href="#floating">Incrustaciones de coma flotante</a> <a href="#binary">Incrustaciones binarias</a> <a href="#sparse">Incrustaciones dispersas</a></div>
 <div class="filter-floating table-wrapper" markdown="block">
@@ -78,7 +78,7 @@ title: Campos vectoriales de índice
 <thead>
   <tr>
     <th class="tg-0pky" style="width: 204px;">Tipos métricos</th>
-    <th class="tg-0pky">Tipos de índices</th>
+    <th class="tg-0pky">Tipos de índice</th>
   </tr>
 </thead>
 <tbody>
@@ -249,7 +249,8 @@ index_params.add_index(
 <span class="hljs-comment"># 4.3. Create an index file</span>
 client.create_index(
     collection_name=<span class="hljs-string">&quot;customized_setup&quot;</span>,
-    index_params=index_params
+    index_params=index_params,
+    sync=<span class="hljs-literal">False</span> <span class="hljs-comment"># Whether to wait for index creation to complete before returning. Defaults to True.</span>
 )
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.common.IndexParam;
@@ -330,6 +331,10 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
     <tr>
       <td><code translate="no">index_params</code></td>
       <td>Un objeto <strong>IndexParams</strong> que contiene una lista de objetos <strong>IndexParam</strong>.</td>
+    </tr>
+    <tr>
+      <td><code translate="no">sync</code></td>
+      <td>Controla cómo se construye el índice en relación con la petición del cliente. Valores válidos:<br><ul><li><code translate="no">True</code> (por defecto): El cliente espera a que el índice esté completamente construido antes de devolverlo. Esto significa que no obtendrá una respuesta hasta que el proceso se haya completado.</li><li><code translate="no">False</code>: El cliente regresa inmediatamente después de recibir la petición y el índice se está construyendo en segundo plano. Para saber si se ha completado la creación del índice, utilice el método <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/describe_index.md">describe_index()</a>.</li></ul></td>
     </tr>
   </tbody>
 </table>

@@ -3,7 +3,7 @@ id: integrate_with_ragas.md
 summary: >-
   Ce guide montre comment utiliser Ragas pour évaluer un pipeline RAG
   (Retrieval-Augmented Generation) construit sur Milvus.
-title: Évaluation avec les ragas
+title: Évaluation avec Ragas
 ---
 <h1 id="Evaluation-with-Ragas" class="common-anchor-header">Évaluation avec Ragas<button data-href="#Evaluation-with-Ragas" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -20,8 +20,9 @@ title: Évaluation avec les ragas
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/evaluation_with_ragas.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a></p>
-<p>Ce guide montre comment utiliser Ragas pour évaluer un pipeline de génération assistée par récupération (RAG) construit à partir de <a href="https://milvus.io/">Milvus.</a></p>
+    </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/evaluation_with_ragas.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
+<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/evaluation_with_ragas.ipynb" target="_blank"><img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/></a></p>
+<p>Ce guide montre comment utiliser Ragas pour évaluer un pipeline de génération assistée par récupération (RAG) construit à partir de <a href="https://milvus.io/">Milvus</a>.</p>
 <p>Le système RAG combine un système de recherche avec un modèle génératif pour générer un nouveau texte basé sur une invite donnée. Le système récupère d'abord les documents pertinents d'un corpus à l'aide de Milvus, puis utilise un modèle génératif pour générer un nouveau texte basé sur les documents récupérés.</p>
 <p><a href="https://docs.ragas.io/en/latest/index.html#">Ragas</a> est un cadre qui vous aide à évaluer vos pipelines RAG. Il existe des outils et des cadres existants qui vous aident à construire ces pipelines, mais il peut être difficile de les évaluer et de quantifier leurs performances. C'est là que Ragas (RAG Assessment) entre en jeu.</p>
 <h2 id="Prerequisites" class="common-anchor-header">Conditions préalables<button data-href="#Prerequisites" class="anchor-icon" translate="no">

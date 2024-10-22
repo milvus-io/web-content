@@ -1,11 +1,11 @@
 ---
 id: integrate_with_llamaindex.md
 summary: >-
-  このガイドでは、LlamaIndexとMilvusを使用したRAG（Retrieval-Augmented
+  このガイドでは、LlamaIndexとmilvusを使用したRAG（Retrieval-Augmented
   Generation）システムの構築方法を説明します。
-title: MilvusとLlamaIndexによる検索補強型生成（RAG）
+title: MilvusとLlamaIndexによる検索拡張生成(RAG)
 ---
-<h1 id="Retrieval-Augmented-Generation-RAG-with-Milvus-and-LlamaIndex" class="common-anchor-header">MilvusとLlamaIndexによる検索補強型生成(RAG)<button data-href="#Retrieval-Augmented-Generation-RAG-with-Milvus-and-LlamaIndex" class="anchor-icon" translate="no">
+<h1 id="Retrieval-Augmented-Generation-RAG-with-Milvus-and-LlamaIndex" class="common-anchor-header">MilvusとLlamaIndexによる検索拡張生成(RAG)<button data-href="#Retrieval-Augmented-Generation-RAG-with-Milvus-and-LlamaIndex" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -20,11 +20,12 @@ title: MilvusとLlamaIndexによる検索補強型生成（RAG）
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/rag_with_milvus_and_llamaindex.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a></p>
+    </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/rag_with_milvus_and_llamaindex.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
+<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/rag_with_milvus_and_llamaindex.ipynb" target="_blank"><img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/></a></p>
 <p>このガイドでは、LlamaIndexとMilvusを使ったRAG（Retrieval-Augmented Generation）システムの構築方法を説明する。</p>
-<p>RAGシステムは検索システムと生成モデルを組み合わせ、与えられたプロンプトに基づいて新しいテキストを生成する。このシステムはまずMilvusを使ってコーパスから関連文書を検索し、次に生成モデルを使って検索された文書に基づいて新しいテキストを生成する。</p>
-<p><a href="https://www.llamaindex.ai/">LlamaIndexは</a>、カスタムデータソースを大規模言語モデル（LLM）に接続するためのシンプルで柔軟なデータフレームワークである。<a href="https://milvus.io/">Milvusは</a>世界で最も先進的なオープンソースのベクトル・データベースで、埋め込み類似検索やAIアプリケーションのために構築されている。</p>
-<p>このノートブックでは、MilvusVectorStoreの簡単なデモを紹介します。</p>
+<p>RAGシステムは検索システムと生成モデルを組み合わせ、与えられたプロンプトに基づいて新しいテキストを生成する。システムはまずMilvusを使ってコーパスから関連文書を検索し、次に生成モデルを使って検索された文書に基づいて新しいテキストを生成する。</p>
+<p><a href="https://www.llamaindex.ai/">LlamaIndexは</a>、カスタムデータソースを大規模言語モデル（LLM）に接続するためのシンプルで柔軟なデータフレームワークである。<a href="https://milvus.io/">Milvusは</a>世界で最も先進的なオープンソースのベクトル・データベースであり、埋め込み類似検索やAIアプリケーションのために構築されている。</p>
+<p>このノートブックでは、MilvusVectorStoreの簡単なデモをお見せします。</p>
 <h2 id="Before-you-begin" class="common-anchor-header">始める前に<button data-href="#Before-you-begin" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -89,7 +90,7 @@ documents = SimpleDirectoryReader(
 </code></pre>
 <h3 id="Create-an-index-across-the-data" class="common-anchor-header">データを横断するインデックスの作成</h3><p>文書ができたので、インデックスを作成し、文書を挿入することができます。</p>
 <blockquote>
-<p>なお、<strong>Milvus Liteには</strong> <code translate="no">pymilvus&gt;=2.4.2</code> が必要です。</p>
+<p><strong>Milvus Liteには</strong> <code translate="no">pymilvus&gt;=2.4.2</code> が必要です。</p>
 </blockquote>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Create an index over the documents</span>
 <span class="hljs-keyword">from</span> llama_index.core <span class="hljs-keyword">import</span> VectorStoreIndex, StorageContext
@@ -103,7 +104,7 @@ index = VectorStoreIndex.from_documents(documents, storage_context=storage_conte
 <div class="alert note">
 <p><code translate="no">MilvusVectorStore</code> ：</p>
 <ul>
-<li><code translate="no">./milvus.db</code> のように<code translate="no">uri</code> をローカルファイルとして設定すると、自動的に<a href="https://milvus.io/docs/milvus_lite.md">Milvus Liteを</a>利用してすべてのデータをこのファイルに格納するため、最も便利な方法です。</li>
+<li><code translate="no">uri</code> をローカルファイル、例えば<code translate="no">./milvus.db</code> に設定するのが最も便利な方法です。このファイルにすべてのデータが格納されるため、<a href="https://milvus.io/docs/milvus_lite.md">Milvus Lite が</a>自動的に利用されます。</li>
 <li>データ規模が大きい場合は、<a href="https://milvus.io/docs/quickstart.md">dockerやkubernetes</a>上に、よりパフォーマンスの高いMilvusサーバを構築することができます。このセットアップでは、<code translate="no">http://localhost:19530</code> などのサーバ uri を<code translate="no">uri</code> として使用してください。</li>
 <li>Milvusのフルマネージドクラウドサービスである<a href="https://zilliz.com/cloud">Zilliz Cloudを</a>利用する場合は、Zilliz Cloudの<a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">Public EndpointとApi keyに</a>対応する<code translate="no">uri</code> と<code translate="no">token</code> を調整してください。</li>
 </ul>
@@ -189,7 +190,7 @@ res = query_engine.query(<span class="hljs-string">&quot;What challenges did the
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">The disease posed challenges related to the adverse impact on the business and operations, including reduced demand for Mobility offerings globally, affecting travel behavior and demand. Additionally, the pandemic led to driver supply constraints, impacted by concerns regarding COVID-19, with uncertainties about when supply levels would return to normal. The rise of the Omicron variant further affected travel, resulting in advisories and restrictions that could adversely impact both driver supply and consumer demand for Mobility offerings.
 </code></pre>
-<p>こ こ で フ ァ イ ル<code translate="no">paul_graham_essay.txt</code> か ら 文書を取得す る と 、 別の結果が得 ら れます。</p>
+<p>今度はファイル<code translate="no">paul_graham_essay.txt</code> から取得すると、異なる結果が得られます。</p>
 <pre><code translate="no" class="language-python">filters = MetadataFilters(
     filters=[ExactMatchFilter(key=<span class="hljs-string">&quot;file_name&quot;</span>, value=<span class="hljs-string">&quot;paul_graham_essay.txt&quot;</span>)]
 )

@@ -18,7 +18,8 @@ title: Início rápido
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/quickstart.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a></p>
+    </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/quickstart.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
+<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/quickstart.ipynb" target="_blank"><img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/></a></p>
 <p>Os vectores, o formato de dados de saída dos modelos de Redes Neuronais, podem codificar eficazmente a informação e desempenhar um papel fundamental em aplicações de IA, tais como bases de dados de conhecimento, pesquisa semântica, Retrieval Augmented Generation (RAG) e muito mais.</p>
 <p>O Milvus é uma base de dados vetorial de código aberto que se adequa a aplicações de IA de todas as dimensões, desde a execução de um chatbot de demonstração no notebook Jupyter até à criação de uma pesquisa à escala da Web que serve milhares de milhões de utilizadores. Neste guia, vamos mostrar-lhe como configurar o Milvus localmente em minutos e utilizar a biblioteca cliente Python para gerar, armazenar e pesquisar vectores.</p>
 <h2 id="Install-Milvus" class="common-anchor-header">Instalar o Milvus<button data-href="#Install-Milvus" class="anchor-icon" translate="no">
@@ -153,6 +154,7 @@ vectors = embedding_fn.encode_documents(docs)
 <span class="hljs-comment"># to demo metadata filtering later.</span>
 data = [
     {<span class="hljs-string">&quot;id&quot;</span>: i, <span class="hljs-string">&quot;vector&quot;</span>: vectors[i], <span class="hljs-string">&quot;text&quot;</span>: docs[i], <span class="hljs-string">&quot;subject&quot;</span>: <span class="hljs-string">&quot;history&quot;</span>}
+    <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-built_in">len</span>(vectors))
 ]
 
 <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Data has&quot;</span>, <span class="hljs-built_in">len</span>(data), <span class="hljs-string">&quot;entities, each with fields: &quot;</span>, data[<span class="hljs-number">0</span>].keys())
@@ -299,7 +301,7 @@ res = client.search(
 <button class="copy-code-btn"></button></code></pre>
 <p>Por defeito, os campos escalares não são indexados. Se precisar de efetuar uma pesquisa filtrada de metadados num grande conjunto de dados, pode considerar a utilização de um esquema fixo e também ativar o <a href="https://milvus.io/docs/scalar_index.md">índice</a> para melhorar o desempenho da pesquisa.</p>
 <p>Para além da pesquisa vetorial, também pode efetuar outros tipos de pesquisa:</p>
-<h3 id="Query" class="common-anchor-header">Consulta</h3><p>Uma query() é uma operação que recupera todas as entidades que correspondem a uma cretria, tal como uma <a href="https://milvus.io/docs/boolean.md">expressão de filtro</a> ou que correspondem a alguns ids.</p>
+<h3 id="Query" class="common-anchor-header">Consulta</h3><p>Uma query() é uma operação que recupera todas as entidades que correspondem a um critério, tal como uma <a href="https://milvus.io/docs/boolean.md">expressão de filtro</a> ou a correspondência de alguns ids.</p>
 <p>Por exemplo, recuperar todas as entidades cujo campo escalar tem um determinado valor:</p>
 <pre><code translate="no" class="language-python">res = client.query(
     collection_name=<span class="hljs-string">&quot;demo_collection&quot;</span>,
@@ -329,7 +331,7 @@ res = client.search(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Se pretender limpar dados, pode eliminar entidades especificando a chave primária ou eliminar todas as entidades que correspondam a uma determinada expressão de filtro.</p>
+    </button></h2><p>Se pretender purgar dados, pode eliminar entidades especificando a chave primária ou eliminar todas as entidades que correspondam a uma determinada expressão de filtro.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Delete entities by primary key</span>
 res = client.delete(collection_name=<span class="hljs-string">&quot;demo_collection&quot;</span>, ids=[<span class="hljs-number">0</span>, <span class="hljs-number">2</span>])
 
@@ -361,7 +363,7 @@ res = client.delete(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Uma vez que todos os dados do Milvus Lite são armazenados num ficheiro local, pode carregar todos os dados para a memória mesmo depois do programa terminar, criando um <code translate="no">MilvusClient</code> com o ficheiro existente. Por exemplo, isto irá recuperar as colecções do ficheiro "milvus_demo.db" e continuar a escrever dados no mesmo.</p>
+    </button></h2><p>Uma vez que todos os dados do Milvus Lite são armazenados num ficheiro local, pode carregar todos os dados para a memória mesmo após o programa terminar, criando um <code translate="no">MilvusClient</code> com o ficheiro existente. Por exemplo, isto irá recuperar as colecções do ficheiro "milvus_demo.db" e continuar a escrever dados no mesmo.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> <span class="hljs-title class_">MilvusClient</span>
 
 client = <span class="hljs-title class_">MilvusClient</span>(<span class="hljs-string">&quot;milvus_demo.db&quot;</span>)
@@ -400,7 +402,7 @@ client.drop_collection(collection_name=<span class="hljs-string">&quot;demo_coll
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>O Milvus Lite é ótimo para começar com um programa python local. Se você tem dados em grande escala ou gostaria de usar o Milvus em produção, você pode aprender sobre a implantação do Milvus no <a href="https://milvus.io/docs/install_standalone-docker.md">Docker</a> e no <a href="https://milvus.io/docs/install_cluster-milvusoperator.md">Kubernetes</a>. Todos os modos de implantação do Milvus compartilham a mesma API, portanto, seu código do lado do cliente não precisa mudar muito se mudar para outro modo de implantação. Basta especificar o <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Client/MilvusClient.md">URI e</a> o <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Client/MilvusClient.md">Token</a> de um servidor Milvus implantado em qualquer lugar:</p>
+    </button></h2><p>O Milvus Lite é ótimo para começar com um programa python local. Se você tem dados em grande escala ou gostaria de usar o Milvus em produção, pode aprender sobre a implantação do Milvus no <a href="https://milvus.io/docs/install_standalone-docker.md">Docker</a> e no <a href="https://milvus.io/docs/install_cluster-milvusoperator.md">Kubernetes</a>. Todos os modos de implantação do Milvus compartilham a mesma API, portanto, seu código do lado do cliente não precisa mudar muito se mudar para outro modo de implantação. Basta especificar o <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Client/MilvusClient.md">URI e</a> o <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Client/MilvusClient.md">Token</a> de um servidor Milvus implantado em qualquer lugar:</p>
 <pre><code translate="no" class="language-python">client = <span class="hljs-title class_">MilvusClient</span>(uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>, token=<span class="hljs-string">&quot;root:Milvus&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
 <p>Milvus fornece API REST e gRPC, com bibliotecas de clientes em linguagens como <a href="https://milvus.io/docs/install-pymilvus.md">Python</a>, <a href="https://milvus.io/docs/install-java.md">Java</a>, <a href="https://milvus.io/docs/install-go.md">Go</a>, C# e <a href="https://milvus.io/docs/install-node.md">Node.js</a>.</p>
