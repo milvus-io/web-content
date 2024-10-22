@@ -193,7 +193,7 @@
     "order": 2,
     "children": [
       {
-        "label": "L'architecture",
+        "label": "Architecture",
         "id": "architecture",
         "order": 0,
         "isMenu": true,
@@ -1649,7 +1649,7 @@
         "children": []
       },
       {
-        "label": "FAQ opérationnelle",
+        "label": "FAQ opérationnelles",
         "id": "operational_faq.md",
         "order": 2,
         "children": []
