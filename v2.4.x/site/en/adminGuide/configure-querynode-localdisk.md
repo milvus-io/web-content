@@ -222,7 +222,7 @@ You are advised to verify the disk performance using [Fio](https://github.com/ax
     cd /data
 
     # write 10GB
-    fio -direct=1-iodepth=128 -rw=randwrite -ioengine=libaio -bs=4K -size=10G -numjobs=10 -runtime=600 -group_reporting -filename=test -name=Rand_Write_IOPS_Test
+    fio -direct=1 -iodepth=128 -rw=randwrite -ioengine=libaio -bs=4K -size=10G -numjobs=10 -runtime=600 -group_reporting -filename=test -name=Rand_Write_IOPS_Test
 
     # verify the read speed
     # compare with the disk performance indicators provided by various cloud providers.
