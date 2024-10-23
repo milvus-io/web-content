@@ -25,3 +25,6 @@ This page provides a list of tutorials for you to interact with Milvus.
 | [Image Deduplication](image_deduplication_system.md) | Deduplication | vector search |
 | [Graph RAG with Milvus](graph_rag_with_milvus.md) | RAG | graph search |
 | [Contextual Retrieval with Milvus](contextual_retrieval_with_milvus.md) | Quickstart | vector search |
+| [HDBSCAN Clustering with Milvus](hdbscan_clustering_with_milvus.md) | Quickstart | vector search |
+| [Use ColPALI for Multi-Modal Retrieval with Milvus](use_ColPALI_with_milvus.md) | Quickstart | vector search |
+| [Vector Visualization](vector_visualization.md) | Quickstart | vector search |

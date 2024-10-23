@@ -45,3 +45,6 @@ This page provides a list of tutorials for you to interact with Milvus and third
 | [Deploying Dify with Milvus](dify_with_milvus.md) | Ochestration | Milvus, Dify |
 | [Building a RAG System Using Langflow with Milvus](rag_with_langflow.md) | Ochestration | Milvus, Langflow |
 | [Build RAG on Arm Architecture](build_rag_on_arm.md) | RAG | Milvus, Arm |
+| [Build RAG with Milvus and Fireworks AI](build_RAG_with_milvus_and_fireworks.md) | LLMs | Milvus, Fireworks AI |
+| [Build RAG with Milvus and Lepton AI](build_RAG_with_milvus_and_lepton.md) | LLMs | Milvus, Lepton AI |
+| [Build RAG with Milvus and SiliconFlow](build_RAG_with_milvus_and_siliconflow) | LLMs | Milvus, SiliconFlow |
