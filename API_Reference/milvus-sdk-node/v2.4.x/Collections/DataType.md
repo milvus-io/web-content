@@ -4,57 +4,44 @@ This is an enumeration that provides the following constants.
 
 ## Constants
 
-- None = 0
+- NONE = 0
+Sets the data type to **NoneType**.
 
-  Sets the data type to **NoneType**.
+- BOOL = 1
+Sets the data type to **Boolean**.
 
-- Bool = 1
+- INT8 = 2
+Sets the data type to **Int8**.
 
-  Sets the data type to **Boolean**.
+- INT16 = 3
+Sets the data type to **Int64**.
 
-- Int8 = 2
+- INT32 = 4
+Sets the data type to **Int32**.
 
-  Sets the data type to **Int8**.
+- INT64 = 5
+Sets the data type to **Int64**.
 
-- Int16 = 3
+- FLOAT = 10
+Sets the data type to **Float**.
 
-  Sets the data type to **Int16**.
+- DOUBLE = 11
+Sets the data type to **Double**.
 
-- Int32 = 4
+- VARCHAR = 21
+Sets the data type to **Varchar**.
 
-  Sets the data type to **Int32**.
-
-- Int64 = 5
-
-  Sets the data type to **Int64**.
-
-- Float = 10
-
-  Sets the data type to **Float**.
-
-- Double = 11
-
-  Sets the data type to **Double**.
-
-- VarChar = 21
-
-  Sets the data type to **Varchar**.
-
-- Array = 22
-
-  Sets the data type to **Array**.
+- ARRAY = 22
+Sets the data type to **Array**.
 
 - JSON = 23
-
-  Sets the data type to **JSON**.
+Sets the data type to **JSON**.
 
 - BinaryVector = 100
-
-  Sets the data type to **Binary Vector**.
+Sets the data type to **Binary Vector**.
 
 - FloatVector = 101
-
-  Sets the data type to **Float Vector**.
+Sets the data type to **Float Vector**.
 
 - Float16Vector = 102
 
@@ -70,4 +57,3 @@ This is an enumeration that provides the following constants.
 
 ## Example
 
-  Sets the data type to **Sparse Vector**.

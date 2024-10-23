@@ -46,7 +46,11 @@ milvusClient.createCollection({
 
 - **auto_id** (*boolean*) - 
 
-    Whether the primary field automatically increments along with data insertions.
+    Whether the primary field automatically increments upon data insertions into this collection.
+
+    The value defaults to **False**. Setting this to **True** makes the primary field automatically increment. In this case, the primary field should not be included in the data to insert to avoid errors. The auto-generated IDs have a fixed length and cannot be altered.
+
+    This parameter is designed for the quick setup of a collection and will be ignored if **schema** is not **None**.
 
 - **consistency_level** (*number* | *string*)
 
@@ -249,14 +253,14 @@ milvusClient.createCollection({
 
     The number of shards to create along with the creation of this collection. 
 
-    The value defaults to **2**, indicating that two shards are to be created along with this collection.
+    The value defaults to **1**, indicating that one shard is to be created along with this collection.
 
     <div class="admonition note">
 
     <p><b>what is sharding?</b></p>
 
     <p>Sharding refers to distributing write operations to different nodes to make the most of the parallel computing potential of a Milvus cluster for writing data.</p>
-    <p>By default, a collection contains two shards.</p>
+    <p>By default, a collection contains one shard.</p>
 
     </div>
 
@@ -422,14 +426,14 @@ milvusClient.createCollection({
 
     The number of shards to create along with the creation of this collection. 
 
-    The value defaults to **2**, indicating that two shards are to be created along with this collection.
+    The value defaults to **1**, indicating that one shard is to be created along with this collection.
 
     <div class="admonition note">
 
     <p><b>what is sharding?</b></p>
 
     <p>Sharding refers to distributing write operations to different nodes to make the most of the parallel computing potential of a Milvus cluster for writing data.</p>
-    <p>By default, a collection contains two shards.</p>
+    <p>By default, a collection contains one shard.</p>
 
     </div>
 
