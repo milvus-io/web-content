@@ -51,6 +51,12 @@ $ bash standalone_embed.sh stop
 # Delete Milvus data
 $ bash standalone_embed.sh delete
 ```
+You can upgrade the latest version Milvus as follows
+
+```shell
+# upgrade Milvus
+$ bash standalone_embed.sh upgrade
+```
 
 ## What's next
 
