@@ -1320,6 +1320,24 @@
             "id": "llama_agents_metadata.md",
             "order": 1,
             "children": []
+          },
+          {
+            "label": "Fireworks",
+            "id": "build_RAG_with_milvus_and_fireworks.md",
+            "order": 2,
+            "children": []
+          },
+          {
+            "label": "Lepton",
+            "id": "build_RAG_with_milvus_and_lepton.md",
+            "order": 3,
+            "children": []
+          },
+          {
+            "label": "SiliconFlow",
+            "id": "build_RAG_with_milvus_and_siliconflow.md",
+            "order": 4,
+            "children": []
           }
         ]
       },
@@ -1571,6 +1589,24 @@
         "label": "Contextual Retrieval",
         "id": "contextual_retrieval_with_milvus.md",
         "order": 5,
+        "children": []
+      },
+      {
+        "label": "HDBSCAN Clustering",
+        "id": "hdbscan_clustering_with_milvus.md",
+        "order": 6,
+        "children": []
+      },
+      {
+        "label": "Use ColPALI for Multi-Modal Retrieval",
+        "id": "use_ColPALI_with_milvus.md",
+        "order": 7,
+        "children": []
+      },
+      {
+        "label": "Vector Visualization",
+        "id": "vector_visualization.md",
+        "order": 8,
         "children": []
       },
       {

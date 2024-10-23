@@ -38,6 +38,9 @@ title: Panoramica dei tutorial
 <tr><td><a href="/docs/it/text_image_search.md">Ricerca di immagini per testo</a></td><td>Ricerca semantica</td><td>ricerca vettoriale</td></tr>
 <tr><td><a href="/docs/it/image_deduplication_system.md">Deduplicazione delle immagini</a></td><td>Deduplicazione</td><td>ricerca vettoriale</td></tr>
 <tr><td><a href="/docs/it/graph_rag_with_milvus.md">RAG grafico con Milvus</a></td><td>RAG</td><td>ricerca a grafo</td></tr>
-<tr><td><a href="/docs/it/contextual_retrieval_with_milvus.md">Ricerca contestuale con Milvus</a></td><td>Avvio rapido</td><td>ricerca vettoriale</td></tr>
+<tr><td><a href="/docs/it/contextual_retrieval_with_milvus.md">Recupero contestuale con Milvus</a></td><td>Avvio rapido</td><td>ricerca vettoriale</td></tr>
+<tr><td><a href="/docs/it/hdbscan_clustering_with_milvus.md">Raggruppamento HDBSCAN con Milvus</a></td><td>Avvio rapido</td><td>ricerca vettoriale</td></tr>
+<tr><td><a href="/docs/it/use_ColPALI_with_milvus.md">Utilizzare ColPALI per il recupero multimodale con Milvus</a></td><td>Avvio rapido</td><td>ricerca vettoriale</td></tr>
+<tr><td><a href="/docs/it/vector_visualization.md">Visualizzazione vettoriale</a></td><td>Avvio rapido</td><td>ricerca vettoriale</td></tr>
 </tbody>
 </table>

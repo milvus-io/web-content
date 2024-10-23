@@ -79,6 +79,10 @@ $ bash standalone_embed.sh stop
 <span class="hljs-comment"># Delete Milvus data</span>
 $ bash standalone_embed.sh delete
 <button class="copy-code-btn"></button></code></pre>
+<p>다음과 같이 최신 버전 Milvus로 업그레이드할 수 있습니다.</p>
+<pre><code translate="no" class="language-shell"><span class="hljs-comment"># upgrade Milvus</span>
+$ bash standalone_embed.sh upgrade
+<button class="copy-code-btn"></button></code></pre>
 <h2 id="Whats-next" class="common-anchor-header">다음 단계<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -96,8 +100,8 @@ $ bash standalone_embed.sh delete
       </svg>
     </button></h2><p>Docker에 Milvus를 설치했으면 다음을 수행할 수 있습니다:</p>
 <ul>
-<li><p><a href="/docs/ko/quickstart.md">빠른 시작을</a> 확인하여 Milvus가 수행할 수 있는 작업을 확인합니다.</p></li>
-<li><p>Milvus의 기본 동작에 대해 알아보세요:</p>
+<li><p><a href="/docs/ko/quickstart.md">빠른 시작을</a> 확인하여 Milvus의 기능을 확인합니다.</p></li>
+<li><p>Milvus의 기본 작업에 대해 알아보세요:</p>
 <ul>
 <li><a href="/docs/ko/manage_databases.md">데이터베이스 관리</a></li>
 <li><a href="/docs/ko/manage-collections.md">컬렉션 관리</a></li>
@@ -114,8 +118,8 @@ $ bash standalone_embed.sh delete
 <li><a href="/docs/ko/gcp.md">구글 클라우드</a></li>
 <li><a href="/docs/ko/azure.md">마이크로소프트 애저</a></li>
 </ul></li>
-<li><p>Milvus 데이터 백업을 위한 오픈 소스 도구인 <a href="/docs/ko/milvus_backup_overview.md">Milvus Backup을</a> 살펴보세요.</p></li>
+<li><p>Milvus 데이터 백업을 위한 오픈 소스 도구인 Milvus <a href="/docs/ko/milvus_backup_overview.md">Backup을</a> 살펴보세요.</p></li>
 <li><p>Milvus 디버깅 및 동적 구성 업데이트를 위한 오픈 소스 도구인 <a href="/docs/ko/birdwatcher_overview.md">Birdwatcher를</a> 살펴보세요.</p></li>
 <li><p>직관적인 Milvus 관리를 위한 오픈 소스 GUI 도구인 <a href="https://milvus.io/docs/attu.md">Attu를</a> 살펴보세요.</p></li>
-<li><p><a href="/docs/ko/monitor.md">Prometheus로 Milvus 모니터링</a>.</p></li>
+<li><p><a href="/docs/ko/monitor.md">Prometheus로 Milvus 모니터링하기</a>.</p></li>
 </ul>

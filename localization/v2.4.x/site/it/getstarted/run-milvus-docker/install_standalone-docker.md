@@ -79,6 +79,10 @@ $ bash standalone_embed.sh stop
 <span class="hljs-comment"># Delete Milvus data</span>
 $ bash standalone_embed.sh delete
 <button class="copy-code-btn"></button></code></pre>
+<p>È possibile aggiornare l'ultima versione di Milvus come segue</p>
+<pre><code translate="no" class="language-shell"><span class="hljs-comment"># upgrade Milvus</span>
+$ bash standalone_embed.sh upgrade
+<button class="copy-code-btn"></button></code></pre>
 <h2 id="Whats-next" class="common-anchor-header">Cosa succede dopo<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

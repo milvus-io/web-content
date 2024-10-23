@@ -61,5 +61,8 @@ title: Integrations Overview
 <tr><td><a href="/docs/dify_with_milvus.md">Deploying Dify with Milvus</a></td><td>Ochestration</td><td>Milvus, Dify</td></tr>
 <tr><td><a href="/docs/rag_with_langflow.md">Building a RAG System Using Langflow with Milvus</a></td><td>Ochestration</td><td>Milvus, Langflow</td></tr>
 <tr><td><a href="/docs/build_rag_on_arm.md">Build RAG on Arm Architecture</a></td><td>RAG</td><td>Milvus, Arm</td></tr>
+<tr><td><a href="/docs/build_RAG_with_milvus_and_fireworks.md">Build RAG with Milvus and Fireworks AI</a></td><td>LLMs</td><td>Milvus, Fireworks AI</td></tr>
+<tr><td><a href="/docs/build_RAG_with_milvus_and_lepton.md">Build RAG with Milvus and Lepton AI</a></td><td>LLMs</td><td>Milvus, Lepton AI</td></tr>
+<tr><td><a href="/docs/build_RAG_with_milvus_and_siliconflow">Build RAG with Milvus and SiliconFlow</a></td><td>LLMs</td><td>Milvus, SiliconFlow</td></tr>
 </tbody>
 </table>

@@ -55,9 +55,12 @@ title: 통합 개요
 <tr><td><a href="/docs/ko/kotaemon_with_milvus.md">밀버스와 코타에몬 RAG</a></td><td>RAG</td><td>밀버스, 코타에몬</td></tr>
 <tr><td><a href="/docs/ko/apify_milvus_rag.md">검색 증강 세대: Apify로 웹사이트를 크롤링하고 질문 답변을 위해 Milvus에 데이터 저장하기</a></td><td>데이터 소스</td><td>Milvus, Apify</td></tr>
 <tr><td><a href="/docs/ko/evaluation_with_deepeval.md">DeepEval을 사용한 평가</a></td><td>평가 및 관찰 가능성</td><td>Milvus, DeepEval</td></tr>
-<tr><td><a href="/docs/ko/evaluation_with_phoenix.md">아리제 피오닉스를 사용한 평가</a></td><td>평가 및 관찰 가능성</td><td>Milvus, 아리제 피닉스</td></tr>
+<tr><td><a href="/docs/ko/evaluation_with_phoenix.md">아리제 피오닉스를 사용한 평가</a></td><td>평가 및 관찰 가능성</td><td>Milvus, 아리제 피오닉스</td></tr>
 <tr><td><a href="/docs/ko/dify_with_milvus.md">Milvus로 Dify 배포</a></td><td>오케스트레이션</td><td>Milvus, Dify</td></tr>
 <tr><td><a href="/docs/ko/rag_with_langflow.md">Milvus와 함께 Langflow를 사용하여 RAG 시스템 구축하기</a></td><td>오케스트레이션</td><td>Milvus, Langflow</td></tr>
 <tr><td><a href="/docs/ko/build_rag_on_arm.md">Arm 아키텍처에 RAG 구축</a></td><td>RAG</td><td>Milvus, Arm</td></tr>
+<tr><td><a href="/docs/ko/build_RAG_with_milvus_and_fireworks.md">Milvus 및 Fireworks AI를 사용한 RAG 빌드</a></td><td>LLM</td><td>Milvus, Fireworks AI</td></tr>
+<tr><td><a href="/docs/ko/build_RAG_with_milvus_and_lepton.md">Milvus 및 Lepton AI로 RAG 빌드하기</a></td><td>LLM</td><td>Milvus, 렙톤 AI</td></tr>
+<tr><td><a href="/docs/ko/build_RAG_with_milvus_and_siliconflow">Milvus 및 SiliconFlow를 사용한 RAG 빌드</a></td><td>LLM</td><td>Milvus, SiliconFlow</td></tr>
 </tbody>
 </table>

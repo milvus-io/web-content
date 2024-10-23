@@ -59,5 +59,8 @@ title: 集成概述
 <tr><td><a href="/docs/zh/dify_with_milvus.md">使用 Milvus 部署 Dify</a></td><td>协调</td><td>Milvus、Dify</td></tr>
 <tr><td><a href="/docs/zh/rag_with_langflow.md">使用 Milvus 和 Langflow 构建 RAG 系统</a></td><td>协调</td><td>Milvus、Langflow</td></tr>
 <tr><td><a href="/docs/zh/build_rag_on_arm.md">在 Arm 架构上构建 RAG</a></td><td>RAG</td><td>Milvus、Arm</td></tr>
+<tr><td><a href="/docs/zh/build_RAG_with_milvus_and_fireworks.md">使用 Milvus 和 Fireworks AI 构建 RAG</a></td><td>LLMs</td><td>Milvus、Fireworks AI</td></tr>
+<tr><td><a href="/docs/zh/build_RAG_with_milvus_and_lepton.md">使用 Milvus 和 Lepton AI 构建 RAG</a></td><td>LLMs</td><td>Milvus、Lepton AI</td></tr>
+<tr><td><a href="/docs/zh/build_RAG_with_milvus_and_siliconflow">使用 Milvus 和 SiliconFlow 构建 RAG</a></td><td>LLMs</td><td>Milvus、SiliconFlow</td></tr>
 </tbody>
 </table>

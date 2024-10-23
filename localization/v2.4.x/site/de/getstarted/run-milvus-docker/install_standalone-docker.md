@@ -63,7 +63,7 @@ $ curl -sfL https://raw.githubusercontent.com/milvus-io/milvus/master/scripts/st
 $ bash standalone_embed.sh start
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>Sollten Sie beim Ziehen des Images auf Probleme stoßen, kontaktieren Sie uns unter <a href="mailto:community@zilliz.com">community@zilliz.com</a> mit Details zum Problem, und wir werden Ihnen den nötigen Support bieten.</p>
+<p>Wenn Sie beim Ziehen des Images auf Probleme stoßen, kontaktieren Sie uns unter <a href="mailto:community@zilliz.com">community@zilliz.com</a> mit Details zum Problem, und wir werden Ihnen den nötigen Support bieten.</p>
 </div>
 <p>Nachdem Sie das Installationsskript ausgeführt haben:</p>
 <ul>
@@ -78,6 +78,10 @@ $ bash standalone_embed.sh stop
 
 <span class="hljs-comment"># Delete Milvus data</span>
 $ bash standalone_embed.sh delete
+<button class="copy-code-btn"></button></code></pre>
+<p>Sie können die neueste Version von Milvus wie folgt aktualisieren</p>
+<pre><code translate="no" class="language-shell"><span class="hljs-comment"># upgrade Milvus</span>
+$ bash standalone_embed.sh upgrade
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Whats-next" class="common-anchor-header">Wie geht es weiter?<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"

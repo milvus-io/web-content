@@ -2,8 +2,8 @@
 id: install_standalone-docker.md
 label: Docker
 related_key: Docker
-summary: Dockerを使用してMilvusをスタンドアロンインストールする方法をご紹介します。
-title: DockerでMilvusを実行する
+summary: MilvusをDockerでスタンドアロンインストールする方法をご紹介します。
+title: DockerでMilvusを起動する
 ---
 <h1 id="Run-Milvus-in-Docker" class="common-anchor-header">DockerでMilvusを起動する<button data-href="#Run-Milvus-in-Docker" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -37,10 +37,10 @@ title: DockerでMilvusを実行する
         ></path>
       </svg>
     </button></h2><ul>
-<li><a href="https://docs.docker.com/get-docker/">Dockerをインストールする</a>。</li>
+<li><a href="https://docs.docker.com/get-docker/">Dockerをインストール</a>する。</li>
 <li>インストール前に<a href="/docs/ja/prerequisite-docker.md">ハードウェアとソフトウェアの要件を確認して</a>ください。</li>
 </ul>
-<h2 id="Install-Milvus-in-Docker" class="common-anchor-header">DockerにMilvusをインストールする<button data-href="#Install-Milvus-in-Docker" class="anchor-icon" translate="no">
+<h2 id="Install-Milvus-in-Docker" class="common-anchor-header">DockerへのMilvusのインストール<button data-href="#Install-Milvus-in-Docker" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -67,17 +67,21 @@ $ bash standalone_embed.sh start
 </div>
 <p>インストールスクリプトの実行後</p>
 <ul>
-<li>milvus という名前の docker コンテナがポート<strong>19530</strong> で開始されました。</li>
-<li>同じコンテナ内にmilvusと一緒にembed etcdがインストールされ、ポート<strong>2379で</strong>サービスを提供しています。その設定ファイルは、現在のフォルダ内の<strong>embedEtcd.yaml</strong>にマップされています。</li>
-<li>デフォルトのMilvus設定を変更するには、カレントフォルダ内の<strong>user.yaml</strong>ファイルに設定を追加し、サービスを再起動します。</li>
+<li>milvusという名前のdockerコンテナがポート<strong>19530で</strong>開始されました。</li>
+<li>milvusと一緒にembed etcdが同じコンテナにインストールされ、ポート<strong>2379で</strong>サービスを提供しています。その設定ファイルは、現在のフォルダ内の<strong>embedEtcd.yaml</strong>にマップされています。</li>
+<li>Milvusのデフォルト設定を変更するには、カレントフォルダ内の<strong>user.yaml</strong>ファイルに設定を追加し、サービスを再起動します。</li>
 <li>Milvusデータボリュームはカレントフォルダの<strong>volumes/milvusに</strong>マッピングされます。</li>
 </ul>
-<p>このコンテナは、以下の手順で停止および削除できます。</p>
+<p>このコンテナは以下の手順で停止および削除できます。</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-comment"># Stop Milvus</span>
 $ bash standalone_embed.sh stop
 
 <span class="hljs-comment"># Delete Milvus data</span>
 $ bash standalone_embed.sh delete
+<button class="copy-code-btn"></button></code></pre>
+<p>Milvusの最新バージョンへのアップグレードは以下の手順で行うことができます。</p>
+<pre><code translate="no" class="language-shell"><span class="hljs-comment"># upgrade Milvus</span>
+$ bash standalone_embed.sh upgrade
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Whats-next" class="common-anchor-header">次のステップ<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -107,7 +111,7 @@ $ bash standalone_embed.sh delete
 <li><a href="/docs/ja/multi-vector-search.md">ハイブリッド検索</a></li>
 </ul></li>
 <li><p><a href="/docs/ja/upgrade_milvus_cluster-helm.md">Helm Chartを使用したMilvusのアップグレード</a>。</p></li>
-<li><p><a href="/docs/ja/scaleout.md">Milvusクラスタのスケール</a></p></li>
+<li><p><a href="/docs/ja/scaleout.md">Milvusクラスタをスケールする</a>。</p></li>
 <li><p>Milvuクラスタをクラウドにデプロイする：</p>
 <ul>
 <li><a href="/docs/ja/eks.md">Amazon EKS</a></li>
@@ -115,7 +119,7 @@ $ bash standalone_embed.sh delete
 <li><a href="/docs/ja/azure.md">Microsoft Azure</a></li>
 </ul></li>
 <li><p><a href="/docs/ja/milvus_backup_overview.md">Milvusの</a>データバックアップのためのオープンソースツールである<a href="/docs/ja/milvus_backup_overview.md">Milvus Backupを</a>紹介します。</p></li>
-<li><p>オープンソースのMilvusデバッグツールである<a href="/docs/ja/birdwatcher_overview.md">Birdwatcherの</a>ご紹介。</p></li>
+<li><p>Milvusのデバッグとダイナミックコンフィギュレーションアップデートのためのオープンソースツール、<a href="/docs/ja/birdwatcher_overview.md">Birdwatcherの</a>ご紹介。</p></li>
 <li><p>Milvusを直感的に管理するオープンソースのGUIツール<a href="https://milvus.io/docs/attu.md">Attuを</a>ご覧ください。</p></li>
-<li><p><a href="/docs/ja/monitor.md">PrometheusによるMilvusの監視</a></p></li>
+<li><p><a href="/docs/ja/monitor.md">PrometheusでMilvusを監視する</a>。</p></li>
 </ul>

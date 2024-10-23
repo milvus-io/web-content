@@ -39,5 +39,8 @@ title: Tutorials Overview
 <tr><td><a href="/docs/image_deduplication_system.md">Image Deduplication</a></td><td>Deduplication</td><td>vector search</td></tr>
 <tr><td><a href="/docs/graph_rag_with_milvus.md">Graph RAG with Milvus</a></td><td>RAG</td><td>graph search</td></tr>
 <tr><td><a href="/docs/contextual_retrieval_with_milvus.md">Contextual Retrieval with Milvus</a></td><td>Quickstart</td><td>vector search</td></tr>
+<tr><td><a href="/docs/hdbscan_clustering_with_milvus.md">HDBSCAN Clustering with Milvus</a></td><td>Quickstart</td><td>vector search</td></tr>
+<tr><td><a href="/docs/use_ColPALI_with_milvus.md">Use ColPALI for Multi-Modal Retrieval with Milvus</a></td><td>Quickstart</td><td>vector search</td></tr>
+<tr><td><a href="/docs/vector_visualization.md">Vector Visualization</a></td><td>Quickstart</td><td>vector search</td></tr>
 </tbody>
 </table>

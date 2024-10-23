@@ -39,5 +39,8 @@ title: Visão geral dos tutoriais
 <tr><td><a href="/docs/pt/image_deduplication_system.md">Deduplicação de imagens</a></td><td>Deduplicação</td><td>pesquisa vetorial</td></tr>
 <tr><td><a href="/docs/pt/graph_rag_with_milvus.md">RAG gráfico com Milvus</a></td><td>RAG</td><td>pesquisa em grafos</td></tr>
 <tr><td><a href="/docs/pt/contextual_retrieval_with_milvus.md">Recuperação contextual com Milvus</a></td><td>Início rápido</td><td>pesquisa vetorial</td></tr>
+<tr><td><a href="/docs/pt/hdbscan_clustering_with_milvus.md">Agrupamento HDBSCAN com Milvus</a></td><td>Início rápido</td><td>pesquisa vetorial</td></tr>
+<tr><td><a href="/docs/pt/use_ColPALI_with_milvus.md">Utilizar ColPALI para recuperação multimodal com Milvus</a></td><td>Início rápido</td><td>pesquisa vetorial</td></tr>
+<tr><td><a href="/docs/pt/vector_visualization.md">Visualização de vectores</a></td><td>Início rápido</td><td>pesquisa vetorial</td></tr>
 </tbody>
 </table>

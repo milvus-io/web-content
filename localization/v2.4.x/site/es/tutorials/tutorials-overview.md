@@ -1,6 +1,6 @@
 ---
 id: tutorials-overview.md
-summary: Esta página le ofrece una lista de tutoriales para interactuar con Milvus.
+summary: Esta página ofrece una lista de tutoriales para interactuar con Milvus.
 title: Visión general de los tutoriales
 ---
 <h1 id="Tutorials-Overview" class="common-anchor-header">Visión general de los tutoriales<button data-href="#Tutorials-Overview" class="anchor-icon" translate="no">
@@ -39,5 +39,8 @@ title: Visión general de los tutoriales
 <tr><td><a href="/docs/es/image_deduplication_system.md">Deduplicación de imágenes</a></td><td>Deduplicación</td><td>búsqueda vectorial</td></tr>
 <tr><td><a href="/docs/es/graph_rag_with_milvus.md">Graph RAG con Milvus</a></td><td>RAG</td><td>búsqueda gráfica</td></tr>
 <tr><td><a href="/docs/es/contextual_retrieval_with_milvus.md">Recuperación contextual con Milvus</a></td><td>Inicio rápido</td><td>búsqueda vectorial</td></tr>
+<tr><td><a href="/docs/es/hdbscan_clustering_with_milvus.md">Agrupación HDBSCAN con Milvus</a></td><td>Inicio rápido</td><td>búsqueda vectorial</td></tr>
+<tr><td><a href="/docs/es/use_ColPALI_with_milvus.md">Utilizar ColPALI para la recuperación multimodal con Milvus</a></td><td>Inicio rápido</td><td>Búsqueda vectorial</td></tr>
+<tr><td><a href="/docs/es/vector_visualization.md">Visualización de vectores</a></td><td>Inicio rápido</td><td>búsqueda vectorial</td></tr>
 </tbody>
 </table>

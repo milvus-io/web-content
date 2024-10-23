@@ -61,5 +61,8 @@ title: Panoramica delle integrazioni
 <tr><td><a href="/docs/it/dify_with_milvus.md">Distribuzione di Dify con Milvus</a></td><td>Ochestrazione</td><td>Milvus, Dify</td></tr>
 <tr><td><a href="/docs/it/rag_with_langflow.md">Costruire un sistema RAG usando Langflow con Milvus</a></td><td>Ochestrazione</td><td>Milvus, Langflow</td></tr>
 <tr><td><a href="/docs/it/build_rag_on_arm.md">Costruire RAG su architettura Arm</a></td><td>RAG</td><td>Milvus, Arm</td></tr>
+<tr><td><a href="/docs/it/build_RAG_with_milvus_and_fireworks.md">Costruire RAG con Milvus e Fireworks AI</a></td><td>LLM</td><td>Milvus, Fireworks AI</td></tr>
+<tr><td><a href="/docs/it/build_RAG_with_milvus_and_lepton.md">Costruire RAG con Milvus e Lepton AI</a></td><td>LLMs</td><td>Milvus, Lepton AI</td></tr>
+<tr><td><a href="/docs/it/build_RAG_with_milvus_and_siliconflow">Costruire RAG con Milvus e SiliconFlow</a></td><td>LLM</td><td>Milvus, SiliconFlow</td></tr>
 </tbody>
 </table>
