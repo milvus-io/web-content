@@ -1,28 +1,27 @@
 ---
-id: use_ColPALI_with_milvus.md
-summary: In this notebook, we refer to this kind of multi-vector representation as "ColBERT embeddings" for generality. However, the actual model being used is the ColPALI model. We will demonstrate how to use Milvus for multi-vector retrieval. Building on that, we will introduce how to use ColPALI for retrieving pages based on a given query.
-title: Use ColPALI for Multi-Modal Retrieval with Milvus
+id: use_ColPali_with_milvus.md
+summary: In this notebook, we refer to this kind of multi-vector representation as "ColBERT embeddings" for generality. However, the actual model being used is the ColPali model. We will demonstrate how to use Milvus for multi-vector retrieval. Building on that, we will introduce how to use ColPali for retrieving pages based on a given query.
+title: Use ColPali for Multi-Modal Retrieval with Milvus
 ---
 
-# Use ColPALI for Multi-Modal Retrieval with Milvus
+# Use ColPali for Multi-Modal Retrieval with Milvus
 
-<a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/use_ColPALI_with_milvus.ipynb" target="_parent">
+<a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/use_ColPali_with_milvus.ipynb" target="_parent">
     <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
 </a>
-<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/use_ColPALI_with_milvus.ipynb" target="_blank">
+<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/use_ColPali_with_milvus.ipynb" target="_blank">
     <img src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
 </a>
 
 Modern retrieval models typically use a single embedding to represent text or images. ColBERT, however, is a neural model that utilizes a list of embeddings for each data instance and employs a "MaxSim" operation to calculate the similarity between two texts. Beyond textual data, figures, tables, and diagrams also contain rich information, which is often disregarded in text-based information retrieval.
 
-$$
-S_{q,d} := \sum_{i \in |E_q|} \max_{j \in |E_d|} E_{q_i} \cdot E_{d_j}^T
-$$
+![](../../../assets/colpali_formula.png)
+
 MaxSim function compares a query with a document (what you're searching in) by looking at their token embeddings. For each word in the query, it picks the most similar word from the document (using cosine similarity or squared L2 distance) and sums these maximum similarities across all words in the query
 
-ColPALI is a method that combines ColBERT's multi-vector representation with PaliGemma (a multimodal large language model) to leverage its strong understanding capabilities. This approach enables a page with both text and images to be represented using a unified multi-vector embedding. The embeddings within this multi-vector representation can capture detailed information, improving the performance of retrieval-augmented generation (RAG) for multimodal data.
+ColPali is a method that combines ColBERT's multi-vector representation with PaliGemma (a multimodal large language model) to leverage its strong understanding capabilities. This approach enables a page with both text and images to be represented using a unified multi-vector embedding. The embeddings within this multi-vector representation can capture detailed information, improving the performance of retrieval-augmented generation (RAG) for multimodal data.
 
-In this notebook, we refer to this kind of multi-vector representation as "ColBERT embeddings" for generality. However, the actual model being used is the **ColPALI model**. We will demonstrate how to use Milvus for multi-vector retrieval. Building on that, we will introduce how to use ColPALI for retrieving pages based on a given query.
+ In this notebook, we refer to this kind of multi-vector representation as "ColBERT embeddings" for generality. However, the actual model being used is the **ColPali model**. We will demonstrate how to use Milvus for multi-vector retrieval. Building on that, we will introduce how to use ColPali for retrieving pages based on a given query.
 
 
 
@@ -38,7 +37,7 @@ $ pip instal pillow
 ```
 
 ## Prepare the data
-We will use PDF RAG as our example. You can download [ColBERT](https://arxiv.org/pdf/2004.12832) paper and put it into `./pdf`. ColPALI does not process text directly; instead, the entire page is rasterized into an image. The ColPALI model excels at understanding the textual information contained within these images. Therefore, we will convert each PDF page into an image for processing.
+We will use PDF RAG as our example. You can download [ColBERT](https://arxiv.org/pdf/2004.12832) paper and put it into `./pdf`. ColPali does not process text directly; instead, the entire page is rasterized into an image. The ColPali model excels at understanding the textual information contained within these images. Therefore, we will convert each PDF page into an image for processing.
 
 
 ```python
@@ -61,6 +60,7 @@ import concurrent.futures
 
 client = MilvusClient(uri="milvus.db")
 ```
+
 <div class="alert note">
 
 - If you only need a local vector database for small scale data or prototyping, setting the uri as a local file, e.g.`./milvus.db`, is the most convenient method, as it automatically utilizes [Milvus Lite](https://milvus.io/docs/milvus_lite.md) to store all data in this file.
@@ -337,4 +337,4 @@ for query in qs:
     ./pages/page_7.png
 
 
-Finally, we retrieve the original page name. With ColPALI, we can retrieve multimodal documents without the need for complex processing techniques to extract text and images from the documents. By leveraging large vision models, more information—such as tables and figures—can be analyzed without significant information loss.
+Finally, we retrieve the original page name. With ColPali, we can retrieve multimodal documents without the need for complex processing techniques to extract text and images from the documents. By leveraging large vision models, more information—such as tables and figures—can be analyzed without significant information loss.
