@@ -40,7 +40,7 @@ title: チュートリアル概要
 <tr><td><a href="/docs/ja/graph_rag_with_milvus.md">MilvusによるグラフRAG</a></td><td>RAG</td><td>グラフ検索</td></tr>
 <tr><td><a href="/docs/ja/contextual_retrieval_with_milvus.md">Milvusによる文脈検索</a></td><td>クイックスタート</td><td>ベクトル検索</td></tr>
 <tr><td><a href="/docs/ja/hdbscan_clustering_with_milvus.md">MilvusによるHDBSCANクラスタリング</a></td><td>クイックスタート</td><td>ベクトル検索</td></tr>
-<tr><td><a href="/docs/ja/use_ColPALI_with_milvus.md">Milvusでマルチモーダル検索のためにColPALIを使う</a></td><td>クイックスタート</td><td>ベクトル検索</td></tr>
+<tr><td><a href="/docs/ja/use_ColPali_with_milvus.md">Milvusでマルチモーダル検索のためにColPaliを使う</a></td><td>クイックスタート</td><td>ベクトル検索</td></tr>
 <tr><td><a href="/docs/ja/vector_visualization.md">ベクトルの可視化</a></td><td>クイックスタート</td><td>ベクター検索</td></tr>
 </tbody>
 </table>

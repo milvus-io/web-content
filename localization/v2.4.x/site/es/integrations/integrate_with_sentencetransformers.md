@@ -1,7 +1,7 @@
 ---
 id: integrate_with_sentencetransformers.md
 summary: Esta página trata de la búsqueda de películas con Milvus
-title: Búsqueda de películas con Milvus y SentenceTransformers
+title: Búsqueda de películas usando Milvus y SentenceTransformers
 ---
 <h1 id="Movie-Search-Using-Milvus-and-SentenceTransformers" class="common-anchor-header">Búsqueda de películas usando Milvus y SentenceTransformers<button data-href="#Movie-Search-Using-Milvus-and-SentenceTransformers" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -18,9 +18,9 @@ title: Búsqueda de películas con Milvus y SentenceTransformers
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>En este ejemplo, vamos a realizar una búsqueda de artículos en Wikipedia utilizando Milvus y la biblioteca SentenceTransformers. El conjunto de datos que estamos buscando es el Wikipedia-Movie-Plots Dataset que se encuentra en <a href="https://www.kaggle.com/datasets/jrobischon/wikipedia-movie-plots">Kaggle</a>. Para este ejemplo, hemos vuelto a alojar los datos en una unidad de Google pública.</p>
-<p>Vamos a empezar.</p>
-<h2 id="Installing-requirements" class="common-anchor-header">Requisitos de instalación<button data-href="#Installing-requirements" class="anchor-icon" translate="no">
+    </button></h1><p>En este ejemplo, vamos a realizar una búsqueda de artículos en Wikipedia utilizando Milvus y la biblioteca SentenceTransformers. El conjunto de datos en el que estamos buscando es <a href="https://huggingface.co/datasets/vishnupriyavr/wiki-movie-plots-with-summaries">Wikipedia Movie Plots with Summaries</a> alojado en HuggingFace.</p>
+<p>¡Vamos a empezar!</p>
+<h2 id="Required-Libraries" class="common-anchor-header">Bibliotecas necesarias<button data-href="#Required-Libraries" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -35,10 +35,20 @@ title: Búsqueda de películas con Milvus y SentenceTransformers
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Para este ejemplo, vamos a utilizar <code translate="no">pymilvus</code> para conectarnos y utilizar Milvus, <code translate="no">sentencetransformers</code> para generar incrustaciones vectoriales y <code translate="no">gdown</code> para descargar el conjunto de datos de ejemplo.</p>
-<pre><code translate="no" class="language-shell">pip install pymilvus sentence-transformers gdown
+    </button></h2><p>Para este ejemplo, vamos a utilizar <code translate="no">pymilvus</code> para conectarnos y utilizar Milvus, <code translate="no">sentence-transformers</code> para generar incrustaciones vectoriales y <code translate="no">datasets</code> para descargar el conjunto de datos de ejemplo.</p>
+<pre><code translate="no" class="language-shell">pip install pymilvus sentence-transformers datasets tqdm
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Grabbing-the-data" class="common-anchor-header">Obtención de los datos<button data-href="#Grabbing-the-data" class="anchor-icon" translate="no">
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> datasets <span class="hljs-keyword">import</span> load_dataset
+<span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> <span class="hljs-title class_">MilvusClient</span>, connections
+<span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> <span class="hljs-title class_">FieldSchema</span>, <span class="hljs-title class_">CollectionSchema</span>, <span class="hljs-title class_">DataType</span>, <span class="hljs-title class_">Collection</span>
+<span class="hljs-keyword">from</span> sentence_transformers <span class="hljs-keyword">import</span> <span class="hljs-title class_">SentenceTransformer</span>
+<span class="hljs-keyword">from</span> tqdm <span class="hljs-keyword">import</span> tqdm
+<button class="copy-code-btn"></button></code></pre>
+<p>Definiremos algunos parámetros globales,</p>
+<pre><code translate="no" class="language-python">embedding_dim = <span class="hljs-number">384</span>
+collection_name = <span class="hljs-string">&quot;movie_embeddings&quot;</span>
+<button class="copy-code-btn"></button></code></pre>
+<h2 id="Downloading-and-Opening-the-Dataset" class="common-anchor-header">Descarga y apertura del conjunto de datos<button data-href="#Downloading-and-Opening-the-Dataset" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -53,47 +63,11 @@ title: Búsqueda de películas con Milvus y SentenceTransformers
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Vamos a utilizar <code translate="no">gdown</code> para obtener el zip de Google Drive y luego descomprimirlo con la biblioteca incorporada <code translate="no">zipfile</code>.</p>
-<pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> gdown
-url = <span class="hljs-string">&#x27;https://drive.google.com/uc?id=11ISS45aO2ubNCGaC3Lvd3D7NT8Y7MeO8&#x27;</span>
-output = <span class="hljs-string">&#x27;./movies.zip&#x27;</span>
-gdown.<span class="hljs-title function_">download</span>(url, output)
-
-<span class="hljs-keyword">import</span> zipfile
-
-<span class="hljs-keyword">with</span> zipfile.<span class="hljs-title class_">ZipFile</span>(<span class="hljs-string">&quot;./movies.zip&quot;</span>,<span class="hljs-string">&quot;r&quot;</span>) <span class="hljs-keyword">as</span> <span class="hljs-attr">zip_ref</span>:
-    zip_ref.<span class="hljs-title function_">extractall</span>(<span class="hljs-string">&quot;./movies&quot;</span>)
+    </button></h2><p>En una sola línea, <code translate="no">datasets</code> nos permite descargar y abrir un conjunto de datos. La biblioteca almacenará en caché el conjunto de datos localmente y utilizará esa copia la próxima vez que se ejecute. Cada fila contiene los detalles de una película a la que acompaña un artículo de Wikipedia. Sólo utilizaremos las columnas <code translate="no">Title</code> y <code translate="no">PlotSummary</code>.</p>
+<pre><code translate="no" class="language-python">ds = load_dataset(<span class="hljs-string">&quot;vishnupriyavr/wiki-movie-plots-with-summaries&quot;</span>, <span class="hljs-built_in">split</span>=<span class="hljs-string">&quot;train&quot;</span>)
+<span class="hljs-built_in">print</span>(ds)
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Global-parameters" class="common-anchor-header">Parámetros globales<button data-href="#Global-parameters" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h2><p>Aquí podemos encontrar los principales argumentos que necesitan ser modificados para ejecutar con sus propias cuentas. Al lado de cada uno hay una descripción de lo que es.</p>
-<pre><code translate="no" class="language-python"><span class="hljs-comment"># Milvus Setup Arguments</span>
-COLLECTION_NAME = <span class="hljs-string">&#x27;movies_db&#x27;</span>  <span class="hljs-comment"># Collection name</span>
-DIMENSION = <span class="hljs-number">384</span>  <span class="hljs-comment"># Embeddings size</span>
-COUNT = <span class="hljs-number">1000</span>  <span class="hljs-comment"># Number of vectors to insert</span>
-MILVUS_HOST = <span class="hljs-string">&#x27;localhost&#x27;</span>
-MILVUS_PORT = <span class="hljs-string">&#x27;19530&#x27;</span>
-
-<span class="hljs-comment"># Inference Arguments</span>
-BATCH_SIZE = <span class="hljs-number">128</span>
-
-<span class="hljs-comment"># Search Arguments</span>
-TOP_K = <span class="hljs-number">3</span>
-<button class="copy-code-btn"></button></code></pre>
-<h2 id="Setting-up-Milvus" class="common-anchor-header">Configuración de Milvus<button data-href="#Setting-up-Milvus" class="anchor-icon" translate="no">
+<h2 id="Connecting-to-the-Database" class="common-anchor-header">Conexión a la base de datos<button data-href="#Connecting-to-the-Database" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -110,45 +84,37 @@ TOP_K = <span class="hljs-number">3</span>
       </svg>
     </button></h2><p>Llegados a este punto, vamos a empezar a configurar Milvus. Los pasos son los siguientes:</p>
 <ol>
-<li><p>Conéctese a la instancia de Milvus utilizando el URI proporcionado.</p>
-<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> connections
-
-<span class="hljs-comment"># Connect to Milvus Database</span>
-connections.connect(host=MILVUS_HOST, port=MILVUS_PORT)
-<button class="copy-code-btn"></button></code></pre></li>
-<li><p>Si la colección ya existe, elimínela.</p>
-<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> utility
-
-<span class="hljs-comment"># Remove any previous collections with the same name</span>
-<span class="hljs-keyword">if</span> utility.has_collection(COLLECTION_NAME):
-    utility.drop_collection(COLLECTION_NAME)
-<button class="copy-code-btn"></button></code></pre></li>
-<li><p>Cree la colección que contiene el id, el título de la película y las incrustaciones del texto de la trama.</p>
-<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> FieldSchema, CollectionSchema, DataType, Collection
-
-
-<span class="hljs-comment"># Create collection which includes the id, title, and embedding.</span>
-fields = [
-    FieldSchema(name=<span class="hljs-string">&#x27;id&#x27;</span>, dtype=DataType.INT64, is_primary=<span class="hljs-literal">True</span>, auto_id=<span class="hljs-literal">True</span>),
-    FieldSchema(name=<span class="hljs-string">&#x27;title&#x27;</span>, dtype=DataType.VARCHAR, max_length=<span class="hljs-number">200</span>),  <span class="hljs-comment"># VARCHARS need a maximum length, so for this example they are set to 200 characters</span>
-    FieldSchema(name=<span class="hljs-string">&#x27;embedding&#x27;</span>, dtype=DataType.FLOAT_VECTOR, dim=DIMENSION)
-]
-schema = CollectionSchema(fields=fields)
-collection = Collection(name=COLLECTION_NAME, schema=schema)
-<button class="copy-code-btn"></button></code></pre></li>
-<li><p>Cree un índice en la colección recién creada y cárguela en memoria.</p>
-<pre><code translate="no" class="language-python"><span class="hljs-comment"># Create an IVF_FLAT index for collection.</span>
-index_params = {
-    <span class="hljs-string">&#x27;metric_type&#x27;</span>:<span class="hljs-string">&#x27;L2&#x27;</span>,
-    <span class="hljs-string">&#x27;index_type&#x27;</span>:<span class="hljs-string">&quot;IVF_FLAT&quot;</span>,
-    <span class="hljs-string">&#x27;params&#x27;</span>:{<span class="hljs-string">&#x27;nlist&#x27;</span>: <span class="hljs-number">1536</span>}
-}
-collection.create_index(field_name=<span class="hljs-string">&quot;embedding&quot;</span>, index_params=index_params)
-collection.load()
-<button class="copy-code-btn"></button></code></pre></li>
+<li>Cree una base de datos Milvus Lite en un archivo local. (Sustituya este URI por la dirección del servidor para Milvus Standalone y Milvus Distributed).</li>
 </ol>
-<p>Una vez realizados estos pasos, la colección estará lista para ser insertada y buscada. Cualquier dato que se añada se indexará automáticamente y estará disponible para realizar búsquedas inmediatamente. Si los datos son muy recientes, la búsqueda puede ser más lenta, ya que se utilizará la búsqueda de fuerza bruta en los datos que aún están en proceso de indexación.</p>
-<h2 id="Inserting-the-data" class="common-anchor-header">Insertar los datos<button data-href="#Inserting-the-data" class="anchor-icon" translate="no">
+<pre><code translate="no" class="language-python">connections.<span class="hljs-title function_">connect</span>(uri=<span class="hljs-string">&quot;./sentence_transformers_example.db&quot;</span>)
+<button class="copy-code-btn"></button></code></pre>
+<ol start="2">
+<li>Cree el esquema de datos. En él se especifican los campos que componen un elemento, incluida la dimensión de la incrustación vectorial.</li>
+</ol>
+<pre><code translate="no" class="language-python">fields = [
+    FieldSchema(name=<span class="hljs-string">&#x27;id&#x27;</span>, dtype=DataType.INT64, is_primary=<span class="hljs-literal">True</span>, auto_id=<span class="hljs-literal">True</span>),
+    FieldSchema(name=<span class="hljs-string">&#x27;title&#x27;</span>, dtype=DataType.VARCHAR, max_length=<span class="hljs-number">256</span>),
+    FieldSchema(name=<span class="hljs-string">&#x27;embedding&#x27;</span>, dtype=DataType.FLOAT_VECTOR, dim=embedding_dim)
+]
+
+schema = CollectionSchema(fields=fields, enable_dynamic_field=<span class="hljs-literal">False</span>)
+collection = Collection(name=collection_name, schema=schema)
+<button class="copy-code-btn"></button></code></pre>
+<ol start="3">
+<li>Defina el algoritmo de indexación de búsqueda vectorial. Milvus Lite implementa la búsqueda por fuerza bruta y HNSW, mientras que Milvus Standalone y Milvus Distributed implementan una amplia variedad de métodos. Para esta escala de datos, basta con la búsqueda ingenua por fuerza bruta.</li>
+</ol>
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">params</span> = {
+    <span class="hljs-string">&#x27;index_type&#x27;</span>:<span class="hljs-string">&quot;FLAT&quot;</span>,
+    <span class="hljs-string">&#x27;metric_type&#x27;</span>: <span class="hljs-string">&quot;IP&quot;</span>
+    }
+
+collection.create_index(
+    <span class="hljs-string">&#x27;embedding&#x27;</span>,
+    <span class="hljs-keyword">params</span>
+)
+<button class="copy-code-btn"></button></code></pre>
+<p>Una vez realizados estos pasos, estamos listos para insertar datos en la colección y realizar una búsqueda. Todos los datos añadidos se indexarán automáticamente y estarán disponibles para la búsqueda de forma inmediata. Si los datos son muy recientes, la búsqueda puede ser más lenta, ya que la búsqueda por fuerza bruta se realizará sobre datos que aún están en proceso de indexación.</p>
+<h2 id="Inserting-the-Data" class="common-anchor-header">Inserción de los datos<button data-href="#Inserting-the-Data" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -163,65 +129,23 @@ collection.load()
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Para este ejemplo, vamos a utilizar el modelo miniLM de SentenceTransformers para crear incrustaciones del texto del gráfico. Este modelo devuelve incrustaciones de 384-dim.</p>
-<p>En los siguientes pasos vamos a:</p>
-<ol>
-<li>Cargar los datos.</li>
-<li>Incrustar los datos del texto del gráfico utilizando SentenceTransformers.</li>
-<li>Insertar los datos en Milvus.</li>
-</ol>
-<pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> csv
-<span class="hljs-keyword">from</span> sentence_transformers <span class="hljs-keyword">import</span> SentenceTransformer
-
-transformer = SentenceTransformer(<span class="hljs-string">&#x27;all-MiniLM-L6-v2&#x27;</span>)
-
-<span class="hljs-comment"># Extract the book titles</span>
-<span class="hljs-keyword">def</span> <span class="hljs-title function_">csv_load</span>(<span class="hljs-params">file</span>):
-    <span class="hljs-keyword">with</span> <span class="hljs-built_in">open</span>(file, newline=<span class="hljs-string">&#x27;&#x27;</span>) <span class="hljs-keyword">as</span> f:
-        reader = csv.reader(f, delimiter=<span class="hljs-string">&#x27;,&#x27;</span>)
-        <span class="hljs-keyword">for</span> row <span class="hljs-keyword">in</span> reader:
-            <span class="hljs-keyword">if</span> <span class="hljs-string">&#x27;&#x27;</span> <span class="hljs-keyword">in</span> (row[<span class="hljs-number">1</span>], row[<span class="hljs-number">7</span>]):
-                <span class="hljs-keyword">continue</span>
-            <span class="hljs-keyword">yield</span> (row[<span class="hljs-number">1</span>], row[<span class="hljs-number">7</span>])
-
-
-<span class="hljs-comment"># Extract embedding from text using OpenAI</span>
-<span class="hljs-keyword">def</span> <span class="hljs-title function_">embed_insert</span>(<span class="hljs-params">data</span>):
-    embeds = transformer.encode(data[<span class="hljs-number">1</span>]) 
-    ins = [
-            data[<span class="hljs-number">0</span>],
-            [x <span class="hljs-keyword">for</span> x <span class="hljs-keyword">in</span> embeds]
-    ]
-    collection.insert(ins)
-
-<span class="hljs-keyword">import</span> time
-
-data_batch = [[],[]]
-
-count = <span class="hljs-number">0</span>
-
-<span class="hljs-keyword">for</span> title, plot <span class="hljs-keyword">in</span> csv_load(<span class="hljs-string">&#x27;./movies/plots.csv&#x27;</span>):
-    <span class="hljs-keyword">if</span> count &lt;= COUNT:
-        data_batch[<span class="hljs-number">0</span>].append(title)
-        data_batch[<span class="hljs-number">1</span>].append(plot)
-        <span class="hljs-keyword">if</span> <span class="hljs-built_in">len</span>(data_batch[<span class="hljs-number">0</span>]) % BATCH_SIZE == <span class="hljs-number">0</span>:
-            embed_insert(data_batch)
-            data_batch = [[],[]]
-        count += <span class="hljs-number">1</span>
-    <span class="hljs-keyword">else</span>:
-        <span class="hljs-keyword">break</span>
-
-<span class="hljs-comment"># Embed and insert the remainder</span>
-<span class="hljs-keyword">if</span> <span class="hljs-built_in">len</span>(data_batch[<span class="hljs-number">0</span>]) != <span class="hljs-number">0</span>:
-    embed_insert(data_batch)
-
-<span class="hljs-comment"># Call a flush to index any unsealed segments.</span>
-collection.flush()
+    </button></h2><p>En este ejemplo, vamos a utilizar el modelo miniLM de SentenceTransformers para crear incrustaciones del texto del gráfico. Este modelo devuelve incrustaciones de 384 dimensiones.</p>
+<pre><code translate="no" class="language-python">model = <span class="hljs-title class_">SentenceTransformer</span>(<span class="hljs-string">&quot;all-MiniLM-L12-v2&quot;</span>)
+<button class="copy-code-btn"></button></code></pre>
+<p>Hacemos un bucle sobre las filas de los datos, incrustamos el campo de resumen del gráfico e insertamos las entidades en la base de datos vectorial. En general, debería realizar este paso en lotes de elementos de datos para maximizar el rendimiento de la CPU o GPU para el modelo de incrustación, como hacemos aquí.</p>
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">for</span> batch in <span class="hljs-title function_">tqdm</span><span class="hljs-params">(ds.batch(batch_size=<span class="hljs-number">512</span>)</span>):
+    embeddings = model.encode(batch[<span class="hljs-string">&#x27;PlotSummary&#x27;</span>])
+    data = [{<span class="hljs-string">&quot;title&quot;</span>: title, <span class="hljs-string">&quot;embedding&quot;</span>: embedding} <span class="hljs-keyword">for</span> title, embedding in <span class="hljs-title function_">zip</span><span class="hljs-params">(batch[<span class="hljs-string">&#x27;Title&#x27;</span>], embeddings)</span>]
+    res = collection.insert(data=data)
+<button class="copy-code-btn"></button></code></pre>
+<p>Para estar seguros, vaciamos la cola de escritura de datos y comprobamos que el número esperado de elementos está presente en la base de datos.</p>
+<pre><code translate="no" class="language-python">collection.flush()
+<span class="hljs-built_in">print</span>(collection.num_entities)
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>La operación anterior es relativamente lenta porque la incrustación lleva tiempo. Para mantener el tiempo consumido a un nivel aceptable, intente ajustar <code translate="no">COUNT</code> en <a href="#Global-parameters">los parámetros globales</a> a un valor apropiado. Tómese un descanso y disfrute de una taza de café.</p>
+<p>La operación anterior es relativamente lenta porque la incrustación lleva su tiempo. Este paso tarda unos 2 minutos usando la CPU en un MacBook Pro 2023 y será mucho más rápido con GPUs dedicadas. ¡Tómese un descanso y disfrute de una taza de café!</p>
 </div>
-<h2 id="Performing-the-search" class="common-anchor-header">Realizar la búsqueda<button data-href="#Performing-the-search" class="anchor-icon" translate="no">
+<h2 id="Performing-the-Search" class="common-anchor-header">Realizar la búsqueda<button data-href="#Performing-the-Search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -236,47 +160,67 @@ collection.flush()
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Con todos los datos insertados en Milvus, podemos empezar a realizar nuestras búsquedas. En este ejemplo, vamos a buscar películas basándonos en la trama. Como estamos realizando una búsqueda por lotes, el tiempo de búsqueda se reparte entre todas las búsquedas de películas.</p>
-<pre><code translate="no" class="language-python"><span class="hljs-comment"># Search for titles that closest match these phrases.</span>
-search_terms = [<span class="hljs-string">&#x27;A movie about cars&#x27;</span>, <span class="hljs-string">&#x27;A movie about monsters&#x27;</span>]
+    </button></h2><p>Con todos los datos insertados en Milvus, podemos empezar a realizar nuestras búsquedas. En este ejemplo, vamos a buscar películas basándonos en el argumento. Como estamos realizando una búsqueda por lotes, el tiempo de búsqueda se reparte entre todas las búsquedas de películas. (¿Puede adivinar cuál era el resultado previsto basándose en la búsqueda de películas?)</p>
+<pre><code translate="no" class="language-python">queries = [
+    <span class="hljs-string">&#x27;A shark terrorizes an LA beach.&#x27;</span>,
+    <span class="hljs-string">&#x27;An archaeologist searches for ancient artifacts while fighting Nazis.&#x27;</span>,
+    <span class="hljs-string">&#x27;Teenagers in detention learn about themselves.&#x27;</span>,
+    <span class="hljs-string">&#x27;A teenager fakes illness to get off school and have adventures with two friends.&#x27;</span>,
+    <span class="hljs-string">&#x27;A young couple with a kid look after a hotel during winter and the husband goes insane.&#x27;</span>,
+    <span class="hljs-string">&#x27;Four turtles fight bad guys.&#x27;</span>
+    ]
 
 <span class="hljs-comment"># Search the database based on input text</span>
 <span class="hljs-keyword">def</span> <span class="hljs-title function_">embed_search</span>(<span class="hljs-params">data</span>):
-    embeds = transformer.encode(data) 
+    embeds = model.encode(data) 
     <span class="hljs-keyword">return</span> [x <span class="hljs-keyword">for</span> x <span class="hljs-keyword">in</span> embeds]
 
-search_data = embed_search(search_terms)
+search_data = embed_search(queries)
 
-start = time.time()
 res = collection.search(
-    data=search_data,  <span class="hljs-comment"># Embeded search value</span>
-    anns_field=<span class="hljs-string">&quot;embedding&quot;</span>,  <span class="hljs-comment"># Search across embeddings</span>
+    data=search_data,
+    anns_field=<span class="hljs-string">&quot;embedding&quot;</span>,
     param={},
-    limit = TOP_K,  <span class="hljs-comment"># Limit to top_k results per search</span>
-    output_fields=[<span class="hljs-string">&#x27;title&#x27;</span>]  <span class="hljs-comment"># Include title field in result</span>
+    limit=<span class="hljs-number">3</span>,
+    output_fields=[<span class="hljs-string">&#x27;title&#x27;</span>]
 )
-end = time.time()
 
-<span class="hljs-keyword">for</span> hits_i, hits <span class="hljs-keyword">in</span> <span class="hljs-built_in">enumerate</span>(res):
-    <span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;Title:&#x27;</span>, search_terms[hits_i])
-    <span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;Search Time:&#x27;</span>, end-start)
+<span class="hljs-keyword">for</span> idx, hits <span class="hljs-keyword">in</span> <span class="hljs-built_in">enumerate</span>(res):
+    <span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;Title:&#x27;</span>, queries[idx])
+    <span class="hljs-comment"># print(&#x27;Search Time:&#x27;, end-start)</span>
     <span class="hljs-built_in">print</span>(<span class="hljs-string">&#x27;Results:&#x27;</span>)
     <span class="hljs-keyword">for</span> hit <span class="hljs-keyword">in</span> hits:
-        <span class="hljs-built_in">print</span>( hit.entity.get(<span class="hljs-string">&#x27;title&#x27;</span>), <span class="hljs-string">&#x27;----&#x27;</span>, hit.distance)
+        <span class="hljs-built_in">print</span>( hit.entity.get(<span class="hljs-string">&#x27;title&#x27;</span>), <span class="hljs-string">&#x27;(&#x27;</span>, <span class="hljs-built_in">round</span>(hit.distance, <span class="hljs-number">2</span>), <span class="hljs-string">&#x27;)&#x27;</span>)
     <span class="hljs-built_in">print</span>()
 <button class="copy-code-btn"></button></code></pre>
-<p>El resultado debería ser similar al siguiente:</p>
-<pre><code translate="no" class="language-shell">Title: A movie about cars
-Search Time: 0.08636689186096191
+<p>Los resultados son:</p>
+<pre><code translate="no" class="language-shell">Title: An archaeologist searches <span class="hljs-keyword">for</span> ancient artifacts <span class="hljs-keyword">while</span> fighting Nazis.
 Results:
-Youth<span class="hljs-string">&#x27;s Endearing Charm ---- 1.0954499244689941
-From Leadville to Aspen: A Hold-Up in the Rockies ---- 1.1019384860992432
-Gentlemen of Nerve ---- 1.1331942081451416
+<span class="hljs-string">&quot;Pimpernel&quot;</span> Smith ( <span class="hljs-number">0.48</span> )
+<span class="hljs-function">Phantom of <span class="hljs-title">Chinatown</span> (<span class="hljs-params"> <span class="hljs-number">0.42</span> </span>)
+<span class="hljs-title">Counterblast</span> (<span class="hljs-params"> <span class="hljs-number">0.41</span> </span>)
 
-Title: A movie about monsters
-Search Time: 0.08636689186096191
+Title: Teenagers <span class="hljs-keyword">in</span> detention learn about themselves.
 Results:
-The Suburbanite ---- 1.0666425228118896
-Youth&#x27;</span>s Endearing Charm ---- 1.1072258949279785
-The Godless Girl ---- 1.1511223316192627
-<button class="copy-code-btn"></button></code></pre>
+The Breakfast <span class="hljs-title">Club</span> (<span class="hljs-params"> <span class="hljs-number">0.54</span> </span>)
+Up the <span class="hljs-title">Academy</span> (<span class="hljs-params"> <span class="hljs-number">0.46</span> </span>)
+<span class="hljs-title">Fame</span> (<span class="hljs-params"> <span class="hljs-number">0.43</span> </span>)
+
+Title: A teenager fakes illness to <span class="hljs-keyword">get</span> off school <span class="hljs-keyword">and</span> have adventures <span class="hljs-keyword">with</span> two friends.
+Results:
+Ferris Bueller&#x27;s Day <span class="hljs-title">Off</span> (<span class="hljs-params"> <span class="hljs-number">0.48</span> </span>)
+Fever <span class="hljs-title">Lake</span> (<span class="hljs-params"> <span class="hljs-number">0.47</span> </span>)
+A Walk to <span class="hljs-title">Remember</span> (<span class="hljs-params"> <span class="hljs-number">0.45</span> </span>)
+
+Title: A young couple <span class="hljs-keyword">with</span> a kid look after a hotel during winter <span class="hljs-keyword">and</span> the husband goes insane.
+Results:
+Always a <span class="hljs-title">Bride</span> (<span class="hljs-params"> <span class="hljs-number">0.54</span> </span>)
+Fast <span class="hljs-keyword">and</span> <span class="hljs-title">Loose</span> (<span class="hljs-params"> <span class="hljs-number">0.49</span> </span>)
+The <span class="hljs-title">Shining</span> (<span class="hljs-params"> <span class="hljs-number">0.48</span> </span>)
+
+Title: Four turtles fight bad guys.
+Results:
+TMNT 2: Out of the <span class="hljs-title">Shadows</span> (<span class="hljs-params"> <span class="hljs-number">0.49</span> </span>)
+Teenage Mutant Ninja Turtles II: The Secret of the <span class="hljs-title">Ooze</span> (<span class="hljs-params"> <span class="hljs-number">0.47</span> </span>)
+Gamera: Super <span class="hljs-title">Monster</span> (<span class="hljs-params"> <span class="hljs-number">0.43</span> </span>)
+</span><button class="copy-code-btn"></button></code></pre>

@@ -40,7 +40,7 @@ title: 튜토리얼 개요
 <tr><td><a href="/docs/ko/graph_rag_with_milvus.md">밀버스를 사용한 그래프 RAG</a></td><td>RAG</td><td>그래프 검색</td></tr>
 <tr><td><a href="/docs/ko/contextual_retrieval_with_milvus.md">Milvus를 사용한 컨텍스트 검색</a></td><td>빠른 시작</td><td>벡터 검색</td></tr>
 <tr><td><a href="/docs/ko/hdbscan_clustering_with_milvus.md">Milvus를 사용한 HDBSCAN 클러스터링</a></td><td>빠른 시작</td><td>벡터 검색</td></tr>
-<tr><td><a href="/docs/ko/use_ColPALI_with_milvus.md">Milvus로 다중 모달 검색에 ColPALI 사용</a></td><td>빠른 시작</td><td>벡터 검색</td></tr>
+<tr><td><a href="/docs/ko/use_ColPali_with_milvus.md">Milvus로 다중 모달 검색에 ColPali 사용</a></td><td>빠른 시작</td><td>벡터 검색</td></tr>
 <tr><td><a href="/docs/ko/vector_visualization.md">벡터 시각화</a></td><td>빠른 시작</td><td>벡터 검색</td></tr>
 </tbody>
 </table>

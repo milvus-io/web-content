@@ -40,7 +40,7 @@ title: 教程概览
 <tr><td><a href="/docs/zh/graph_rag_with_milvus.md">使用 Milvus 的图形 RAG</a></td><td>RAG</td><td>图形搜索</td></tr>
 <tr><td><a href="/docs/zh/contextual_retrieval_with_milvus.md">使用 Milvus 进行上下文检索</a></td><td>快速启动</td><td>向量检索</td></tr>
 <tr><td><a href="/docs/zh/hdbscan_clustering_with_milvus.md">利用 Milvus 进行 HDBSCAN 聚类</a></td><td>快速启动</td><td>向量检索</td></tr>
-<tr><td><a href="/docs/zh/use_ColPALI_with_milvus.md">使用 Milvus 的 ColPALI 进行多模式检索</a></td><td>快速启动</td><td>向量搜索</td></tr>
+<tr><td><a href="/docs/zh/use_ColPali_with_milvus.md">使用 ColPali 与 Milvus 一起进行多模式检索</a></td><td>快速启动</td><td>向量搜索</td></tr>
 <tr><td><a href="/docs/zh/vector_visualization.md">向量可视化</a></td><td>快速启动</td><td>向量搜索</td></tr>
 </tbody>
 </table>

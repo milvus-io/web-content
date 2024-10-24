@@ -42,7 +42,7 @@ title: Übersicht Tutorials
 <tr><td><a href="/docs/de/graph_rag_with_milvus.md">Graph RAG mit Milvus</a></td><td>RAG</td><td>Graphen-Suche</td></tr>
 <tr><td><a href="/docs/de/contextual_retrieval_with_milvus.md">Kontextuelle Suche mit Milvus</a></td><td>Schnellstart</td><td>Vektorsuche</td></tr>
 <tr><td><a href="/docs/de/hdbscan_clustering_with_milvus.md">HDBSCAN Clustering mit Milvus</a></td><td>Schnellstart</td><td>Vektorsuche</td></tr>
-<tr><td><a href="/docs/de/use_ColPALI_with_milvus.md">ColPALI für multimodales Retrieval mit Milvus verwenden</a></td><td>Schnellstart</td><td>Vektorsuche</td></tr>
+<tr><td><a href="/docs/de/use_ColPali_with_milvus.md">ColPali für multimodales Retrieval mit Milvus verwenden</a></td><td>Schnellstart</td><td>Vektorsuche</td></tr>
 <tr><td><a href="/docs/de/vector_visualization.md">Vektor-Visualisierung</a></td><td>Schnellstart</td><td>Vektorsuche</td></tr>
 </tbody>
 </table>

@@ -42,7 +42,7 @@ title: Vue d'ensemble des didacticiels
 <tr><td><a href="/docs/fr/graph_rag_with_milvus.md">Graphique RAG avec Milvus</a></td><td>RAG</td><td>recherche par graphe</td></tr>
 <tr><td><a href="/docs/fr/contextual_retrieval_with_milvus.md">Recherche contextuelle avec Milvus</a></td><td>Démarrage rapide</td><td>recherche vectorielle</td></tr>
 <tr><td><a href="/docs/fr/hdbscan_clustering_with_milvus.md">HDBSCAN Clustering avec Milvus</a></td><td>Démarrage rapide</td><td>recherche vectorielle</td></tr>
-<tr><td><a href="/docs/fr/use_ColPALI_with_milvus.md">Utiliser ColPALI pour la recherche multimodale avec Milvus</a></td><td>Démarrage rapide</td><td>recherche vectorielle</td></tr>
+<tr><td><a href="/docs/fr/use_ColPali_with_milvus.md">Utiliser ColPali pour la recherche multimodale avec Milvus</a></td><td>Démarrage rapide</td><td>recherche vectorielle</td></tr>
 <tr><td><a href="/docs/fr/vector_visualization.md">Visualisation vectorielle</a></td><td>Démarrage rapide</td><td>recherche vectorielle</td></tr>
 </tbody>
 </table>

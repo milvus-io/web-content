@@ -367,7 +367,7 @@
             "children": []
           },
           {
-            "label": "GPU付きインデックス",
+            "label": "GPUによるインデックス",
             "id": "index-with-gpu.md",
             "order": 2,
             "children": []
@@ -569,7 +569,7 @@
             "children": []
           },
           {
-            "label": "講師",
+            "label": "インストラクター",
             "id": "embed-with-instructor.md",
             "order": 9,
             "children": []
@@ -1598,8 +1598,8 @@
         "children": []
       },
       {
-        "label": "マルチモーダル検索にはColPALIを使おう",
-        "id": "use_ColPALI_with_milvus.md",
+        "label": "マルチモーダル検索にColPaliを使用する",
+        "id": "use_ColPali_with_milvus.md",
         "order": 7,
         "children": []
       },

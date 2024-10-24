@@ -1598,8 +1598,8 @@
         "children": []
       },
       {
-        "label": "Utiliser ColPALI pour la recherche multimodale",
-        "id": "use_ColPALI_with_milvus.md",
+        "label": "Utiliser ColPali pour la récupération multimodale",
+        "id": "use_ColPali_with_milvus.md",
         "order": 7,
         "children": []
       },

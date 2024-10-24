@@ -1058,7 +1058,7 @@
             "children": []
           },
           {
-            "label": "RBAC aktivieren",
+            "label": "RBAC einschalten",
             "id": "rbac.md",
             "order": 1,
             "isMenu": true,
@@ -1598,8 +1598,8 @@
         "children": []
       },
       {
-        "label": "ColPALI für multimodale Abfrage verwenden",
-        "id": "use_ColPALI_with_milvus.md",
+        "label": "ColPali für multimodalen Abruf verwenden",
+        "id": "use_ColPali_with_milvus.md",
         "order": 7,
         "children": []
       },
