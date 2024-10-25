@@ -99,7 +99,7 @@
         "title": "Molecular Similarity Search",
         "link": "https://github.com/towhee-io/examples/tree/main/medical/molecular_search",
         "iconType": "MOLECULAR",
-        "desc": "Build a molecule similarity search system using Milvus paired with RDkit for cheminformatics.",
+        "desc": "Build a molecule similarity search system using Milvus paired with RDkit for cheminformatics."
       }
     ]
   },
