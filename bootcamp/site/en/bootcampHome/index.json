@@ -31,7 +31,7 @@
     "content": []
   },
   "section3": {
-    "title": "Use Cases",
+    "title": "Tutorials",
     "content": [
       {
         "id": 6,
@@ -40,6 +40,30 @@
         "iconType": "QUESTION_ANSWER",
         "desc": "Building a Retrieval-Augmented Generation (RAG) system using Milvus for efficient document retrieval and LLM for text generation based on retrieved context."
       },
+
+      {
+        "id": 7,
+        "title": "Multimodal RAG",
+        "link": "https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/multimodal_rag_with_milvus.ipynb",
+        "desc": "Demonstrate a multimodal RAG system using Milvus, a visualized BGE model, and GPT-4o to perform image retrieval based on text instructions and image queries.",
+        "liveDemo": "https://multimodal-demo.milvus.io/"
+      },
+
+      {
+        "id": 9,
+        "title": "Graph RAG",
+        "link": "https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/graph_rag_with_milvus.ipynb",
+        "desc": "Demonstrate a Graph RAG approach using Milvus, combining entity and relation retrieval with LLM reranking to improve multi-hop question answering performance."
+      },
+
+      {
+        "id": 8,
+        "title": "Hybrid Search",
+        "link": "https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/hybrid_search_with_milvus.ipynb",
+        "desc": "Perform hybrid search using dense and sparse vectors in Milvus, combining semantic and keyword-based search for improved relevance in information retrieval.",
+        "liveDemo": "https://demos.milvus.io/hybrid-search/"
+      },
+
       {
         "id": 5,
         "title": "Image Similarity Search",
@@ -50,34 +74,11 @@
       },
 
       {
-        "id": 7,
-        "title": "Multimodal RAG",
-        "link": "https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/multimodal_rag_with_milvus.ipynb",
-        "desc": "Demonstrate a multimodal Retrieval-Augmented Generation (RAG) system using Milvus, a visualized BGE model, and GPT-4o to perform image retrieval based on text instructions and image queries, with ranking and explanation of results.",
-        "liveDemo": "https://multimodal-demo.milvus.io/"
-      },
-
-      {
-        "id": 8,
-        "title": "Hybrid Search",
-        "link": "https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/hybrid_search_with_milvus.ipynb",
-        "desc": "Demonstrate how to perform hybrid search using dense and sparse vectors in Milvus, combining semantic and keyword-based search for improved relevance in information retrieval tasks.",
-        "liveDemo": "https://demos.milvus.io/hybrid-search/"
-      },
-
-      {
-        "id": 9,
-        "title": "Graph RAG",
-        "link": "https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/graph_rag_with_milvus.ipynb",
-        "desc": "Demonstrate a Graph RAG approach using Milvus for vector storage, combining entity and relation retrieval with LLM reranking to improve multi-hop question answering performance compared to naive RAG."
-      },
-
-      {
         "id": 10,
         "title": "Recommender System",
         "link": "https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/movie_recommendation_with_milvus.ipynb",
         "iconType": "RECOMMENDATION",
-        "desc": "Demonstrates how to build a movie recommendation system using Milvus for vector similarity search, including data loading, embedding creation, database insertion, and querying with filters."
+        "desc": "Build a movie recommendation system utilizing Milvus. This includes generating and loading embeddings of movie descriptions and enabling querying with filters."
       },
       {
         "id": 11,
@@ -89,9 +90,9 @@
       {
         "id": 12,
         "title": "Audio Similarity Search",
-        "link": "https://github.com/milvus-io/bootcamp/blob/master/solutions/audio/audio_similarity_search/audio_similarity_search.ipynb",
+        "link": "https://github.com/towhee-io/examples/tree/main/audio/audio_fingerprint",
         "iconType": "AUDIO_SEARCH",
-        "desc": "Build an audio search engine using Milvus paired with PANNs for audio pattern recognition."
+        "desc": "Help you to build an audio fingerprinting detection system using Milvus, which is a technique for identifying similar audio clips."
       },
       {
         "id": 13,
@@ -99,7 +100,6 @@
         "link": "https://github.com/towhee-io/examples/tree/main/medical/molecular_search",
         "iconType": "MOLECULAR",
         "desc": "Build a molecule similarity search system using Milvus paired with RDkit for cheminformatics.",
-        "liveDemo": "https://molsearch.milvus.io/"
       }
     ]
   },
