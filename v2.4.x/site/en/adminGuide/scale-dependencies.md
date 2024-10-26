@@ -9,7 +9,7 @@ Milvus relies on various dependencies such as MinIO, Kafka, Pulsar, and etcd. Sc
 
 <div class="alert note">
 
-For Milvus Operator users, refer to [Manage Dependencies For Milvus Operator](manage_dependencies.md).
+For Milvus Operator users, refer to [Configure Object Storage with Milvus Operator](object_storage_operator.md), [Configure Meta Storage with Milvus Operator](meta_storage_operator.md), and [Configure Message Storage with Milvus Operator](message_storage_operator.md).
 
 </div>
 
