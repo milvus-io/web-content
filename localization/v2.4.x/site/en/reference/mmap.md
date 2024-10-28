@@ -47,6 +47,25 @@ queryNode:
     mmapDirPath: <span class="hljs-built_in">any</span>/valid/path 
 ....
 <button class="copy-code-btn"></button></code></pre>
+<p>After <code translate="no">2.4.10</code>, the configuration <code translate="no">queryNode.mmap.mmapEnabled</code> splits into below four seperate fields, and all defaults are <code translate="no">false</code>:</p>
+<ul>
+<li><code translate="no">queryNode.mmap.vectorField</code>, controls whether vector data is mmap;</li>
+<li><code translate="no">queryNode.mmap.vectorIndex</code>, controls whether vector index is mmap;</li>
+<li><code translate="no">queryNode.mmap.scalarField</code>, controls whether scalar data is mmap;</li>
+<li><code translate="no">queryNode.mmap.scalarIndex</code>, controls whether scalar index is mmap;</li>
+</ul>
+<pre><code translate="no" class="language-yaml"><span class="hljs-comment"># This parameter was set in configs/milvus.yaml</span>
+...
+queryNode:
+  mmap:
+    vectorField: false <span class="hljs-comment"># Enable mmap for loading vector data</span>
+    vectorIndex: false <span class="hljs-comment"># Enable mmap for loading vector index</span>
+    scalarField: false <span class="hljs-comment"># Enable mmap for loading scalar data</span>
+    scalarIndex: false <span class="hljs-comment"># Enable mmap for loading scalar index</span>
+....
+<button class="copy-code-btn"></button></code></pre>
+<p>In addition, only vector index and vector data mmap can be turned on and off for a collection individually, but not for others.</p>
+<p>Compatibility: If the original configuration <code translate="no">queryNode.mmap.mmapEnabled</code> is set to <code translate="no">true</code>, the newly added configuration will be set to <code translate="no">true</code> at this time. If <code translate="no">queryNode.mmap.mmapEnabled</code> is set to <code translate="no">false</code>, if the new configuration is set to <code translate="no">true</code>, the final value will be <code translate="no">true</code>.</p>
 <h3 id="During-cluster-operation-dynamic-configuration" class="common-anchor-header">During cluster operation: dynamic configuration</h3><p>During cluster runtime, you can dynamically adjust memory mapping settings at either the collection or index level.</p>
 <p>At the <strong>collection level</strong>, memory mapping is applied to all unindexed raw data within a collection, excluding primary keys, timestamps, and row IDs. This approach is particularly suited for comprehensive management of large datasets.</p>
 <p>For dynamic adjustments to memory mapping settings within a collection, utilize the <code translate="no">set_properties()</code> method. Here, you can toggle <code translate="no">mmap.enabled</code> between <code translate="no">True</code> or <code translate="no">False</code> as needed.</p>
@@ -55,6 +74,11 @@ collection = Collection(<span class="hljs-string">&quot;test_collection&quot;</s
 
 <span class="hljs-comment"># Set memory mapping property to True or Flase</span>
 collection.set_properties({<span class="hljs-string">&#x27;mmap.enabled&#x27;</span>: <span class="hljs-literal">True</span>})
+<button class="copy-code-btn"></button></code></pre>
+<p>After <code translate="no">2.4.10</code>, the memory mapping settings within a collection, utilize the <code translate="no">add_field</code> method. Here, you can toggle <code translate="no">mmap_enabled</code> between <code translate="no">True</code> or <code translate="no">False</code> as needed.</p>
+<pre><code translate="no" class="language-python">schema = MilvusClient.create_schema()
+
+schema.add_field(field_name=<span class="hljs-string">&quot;embedding&quot;</span>, datatype=DataType.FLOAT_VECTOR, dim=<span class="hljs-number">768</span>, mmap_enabled=<span class="hljs-literal">True</span>)
 <button class="copy-code-btn"></button></code></pre>
 <p>For <strong>index-level</strong> settings, memory mapping can be specifically applied to vector indexes without affecting other data types. This feature is invaluable for collections that require optimized performance for vector searches.</p>
 <p>To enable or disable memory mapping for an index within a collection, call the <code translate="no">alter_index()</code> method, specifying the target index name in <code translate="no">index_name</code> and setting <code translate="no">mmap.enabled</code> to <code translate="no">True</code> or <code translate="no">False</code>.</p>
