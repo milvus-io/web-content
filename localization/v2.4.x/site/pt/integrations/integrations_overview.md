@@ -51,7 +51,7 @@ title: Visão geral das integrações
 <tr><td><a href="/docs/pt/integrate_with_camel.md">RAG com Milvus e Camel</a></td><td>RAG</td><td>Milvus, Camel</td></tr>
 <tr><td><a href="/docs/pt/integrate_with_airbyte.md">Airbyte &amp; Milvus: Infraestrutura de movimentação de dados de código aberto</a></td><td>Ligação de dados</td><td>Milvus, Airbyte</td></tr>
 <tr><td><a href="/docs/pt/video_search_with_twelvelabs_and_milvus.md">Pesquisa avançada de vídeo: Aproveitamento de Twelve Labs e Milvus para recuperação semântica</a></td><td>Pesquisa semântica</td><td>Milvus, Twelve Labs</td></tr>
-<tr><td><a href="/docs/pt/milvus_rag_with_vllm.md">Criando o RAG com Milvus, vLLM e Llama 3.1</a></td><td>RAG</td><td>Milvus, vLLM, LlamaIndex</td></tr>
+<tr><td><a href="/docs/pt/milvus_rag_with_vllm.md">Criando RAG com Milvus, vLLM e Llama 3.1</a></td><td>RAG</td><td>Milvus, vLLM, LlamaIndex</td></tr>
 <tr><td><a href="/docs/pt/llama_agents_metadata.md">Sistemas multiagentes com Mistral AI, Milvus e Llama-agents</a></td><td>Agente</td><td>Milvus, Mistral AI, LlamaIndex</td></tr>
 <tr><td><a href="/docs/pt/kafka-connect-milvus.md">Conectar Kafka com Milvus</a></td><td>Fontes de dados</td><td>Milvus, Kafka</td></tr>
 <tr><td><a href="/docs/pt/kotaemon_with_milvus.md">Kotaemon RAG com Milvus</a></td><td>RAG</td><td>Milvus, Kotaemon</td></tr>
@@ -62,7 +62,7 @@ title: Visão geral das integrações
 <tr><td><a href="/docs/pt/rag_with_langflow.md">Construindo um sistema RAG usando Langflow com Milvus</a></td><td>Ochestration</td><td>Milvus, Langflow</td></tr>
 <tr><td><a href="/docs/pt/build_rag_on_arm.md">Construir RAG na arquitetura Arm</a></td><td>RAG</td><td>Milvus, Arm</td></tr>
 <tr><td><a href="/docs/pt/build_RAG_with_milvus_and_fireworks.md">Construir o RAG com Milvus e Fireworks AI</a></td><td>LLMs</td><td>Milvus, Fireworks AI</td></tr>
-<tr><td><a href="/docs/pt/build_RAG_with_milvus_and_lepton.md">Criar um RAG com Milvus e Lepton AI</a></td><td>LLMs</td><td>Milvus, Lepton AI</td></tr>
-<tr><td><a href="/docs/pt/build_RAG_with_milvus_and_siliconflow">Construir RAG com Milvus e SiliconFlow</a></td><td>LLMs</td><td>Milvus, SiliconFlow</td></tr>
+<tr><td><a href="/docs/pt/build_RAG_with_milvus_and_lepton.md">Construir RAG com Milvus e Lepton AI</a></td><td>LLMs</td><td>Milvus, Lepton AI</td></tr>
+<tr><td><a href="/docs/pt/build_RAG_with_milvus_and_siliconflow.md">Construir RAG com Milvus e SiliconFlow</a></td><td>LLMs</td><td>Milvus, SiliconFlow</td></tr>
 </tbody>
 </table>

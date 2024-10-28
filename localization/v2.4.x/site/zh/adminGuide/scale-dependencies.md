@@ -1,7 +1,6 @@
 ---
 id: scale-dependencies.md
 title: 规模依赖性
-summary: ''
 ---
 <h1 id="Scale-Milvus-Dependencies" class="common-anchor-header">扩展 Milvus 依赖项<button data-href="#Scale-Milvus-Dependencies" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -20,7 +19,7 @@ summary: ''
       </svg>
     </button></h1><p>Milvus 依赖于 MinIO、Kafka、Pulsar 和 etcd 等各种依赖项。扩展这些组件可以增强 Milvus 对不同需求的适应性。</p>
 <div class="alert note">
-<p>对于 Milvus<a href="/docs/zh/manage_dependencies.md">Operator</a> 用户，请参阅<a href="/docs/zh/manage_dependencies.md">管理 Milvus Operator 的依赖关系</a>。</p>
+<p>Milvus Operator 用户请参阅《<a href="/docs/zh/object_storage_operator.md">使用 Milvus Operator 配置对象存储</a>》、《<a href="/docs/zh/meta_storage_operator.md">使用 Milvus Operator 配置元存储</a>》和《<a href="/docs/zh/message_storage_operator.md">使用 Milvus</a> Operator<a href="/docs/zh/message_storage_operator.md">配置消息存储</a>》。</p>
 </div>
 <h2 id="Scale-MinIO" class="common-anchor-header">扩展 MinIO<button data-href="#Scale-MinIO" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -49,7 +48,7 @@ minio:
 <pre><code translate="no" class="language-shell">helm upgrade &lt;milvus-release&gt; --reuse-values -f <span class="hljs-keyword">new</span>-values.<span class="hljs-property">yaml</span> milvus/milvus
 <button class="copy-code-btn"></button></code></pre>
 <p>您还可以通过手动更改每个 MioIO Persistent Volume Claim (PVC) 的<code translate="no">spec.resources.requests.storage</code> 值来增加 MioIO 集群的磁盘容量。请注意，您的默认存储类别应允许卷扩展。</p>
-<h3 id="Add-an-extra-MinIO-server-pool-Recommended" class="common-anchor-header">添加额外的 MinIO 服务器池（推荐）</h3><p>建议为 Milvus 实例添加一个额外的 MioIO 服务器池。</p>
+<h3 id="Add-an-extra-MinIO-server-pool-Recommended" class="common-anchor-header">添加额外的 MinIO 服务器池（推荐）</h3><p>建议您为 Milvus 实例添加一个额外的 MinIO 服务器池。</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># new-values.yam;</span>
 minio:
   zones: <span class="hljs-number">2</span>
@@ -57,7 +56,7 @@ minio:
 <p>保存文件后，使用以下命令应用更改：</p>
 <pre><code translate="no" class="language-shell">helm upgrade &lt;milvus-release&gt; --reuse-values -f <span class="hljs-keyword">new</span>-values.<span class="hljs-property">yaml</span> milvus/milvus
 <button class="copy-code-btn"></button></code></pre>
-<p>这将在 MinIO 集群中添加一个额外的服务器池，允许 Milvus 根据每个服务器池的可用磁盘容量写入 MinIO 服务器池。例如，如果一个由三个服务器池组成的群集共有 10 TiB 可用空间，各服务器池的分配情况如下：</p>
+<p>这将为你的 MinIO 集群添加一个额外的服务器池，允许 Milvus 根据每个服务器池的可用磁盘容量写入 MinIO 服务器池。例如，如果一个由三个服务器池组成的群集共有 10 TiB 可用空间，各服务器池的分配情况如下：</p>
 <table>
 <thead>
 <tr><th></th><th>可用空间</th><th>写入可能性</th></tr>

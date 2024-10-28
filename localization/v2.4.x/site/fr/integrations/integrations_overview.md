@@ -44,7 +44,7 @@ title: Vue d'ensemble des intégrations
 <tr><td><a href="/docs/fr/integrate_with_snowpark.md">Milvus sur Snowpark Container Services</a></td><td>Connexion de données</td><td>Milvus, Snowpark</td></tr>
 <tr><td><a href="/docs/fr/integrate_with_whyhow.md">Recherche basée sur des règles avec Milvus et WhyHow</a></td><td>Réponse aux questions</td><td>Milvus, WhyHow</td></tr>
 <tr><td><a href="/docs/fr/integrate_with_langfuse.md">Milvus dans Langfuse</a></td><td>Observabilité</td><td>Milvus, Langfuse</td></tr>
-<tr><td><a href="/docs/fr/integrate_with_ragas.md">Évaluation RAG avec Ragas et Milvus</a></td><td>Évaluation</td><td>Milvus, Ragas</td></tr>
+<tr><td><a href="/docs/fr/integrate_with_ragas.md">Évaluation RAG avec Ragas et Milvus</a></td><td>L'évaluation</td><td>Milvus, Ragas</td></tr>
 <tr><td><a href="/docs/fr/integrate_with_memgpt.md">Agent Chatbot avec Milvus et MemGPT</a></td><td>Agent</td><td>Milvus, MemGPT</td></tr>
 <tr><td><a href="/docs/fr/integrate_with_fastgpt.md">Comment déployer FastGPT avec Milvus</a></td><td>RAG</td><td>Milvus, FastGPT</td></tr>
 <tr><td><a href="/docs/fr/integrate_with_vanna.md">Ecrire du SQL avec Vanna et Milvus</a></td><td>RAG</td><td>Milvus, Vanna</td></tr>
@@ -63,6 +63,6 @@ title: Vue d'ensemble des intégrations
 <tr><td><a href="/docs/fr/build_rag_on_arm.md">Construire RAG sur l'architecture Arm</a></td><td>RAG</td><td>Milvus, Arm</td></tr>
 <tr><td><a href="/docs/fr/build_RAG_with_milvus_and_fireworks.md">Construire RAG avec Milvus et Fireworks AI</a></td><td>LLMs</td><td>Milvus, Fireworks AI</td></tr>
 <tr><td><a href="/docs/fr/build_RAG_with_milvus_and_lepton.md">Construire un GCR avec Milvus et Lepton AI</a></td><td>LLMs</td><td>Milvus, Lepton AI</td></tr>
-<tr><td><a href="/docs/fr/build_RAG_with_milvus_and_siliconflow">Construire un RAG avec Milvus et SiliconFlow</a></td><td>LLMs</td><td>Milvus, SiliconFlow</td></tr>
+<tr><td><a href="/docs/fr/build_RAG_with_milvus_and_siliconflow.md">Construire un RAG avec Milvus et SiliconFlow</a></td><td>LLMs</td><td>Milvus, SiliconFlow</td></tr>
 </tbody>
 </table>

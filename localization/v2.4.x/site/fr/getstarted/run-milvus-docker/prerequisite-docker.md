@@ -5,7 +5,7 @@ related_key: Docker
 summary: >-
   Apprenez les préparations nécessaires avant d'installer Milvus avec Docker
   Compose.
-title: Configuration requise pour l'installation de Milvus avec Docker Compose
+title: Conditions requises pour l'installation de Milvus avec Docker Compose
 ---
 <h1 id="Requirements-for-Installing-Milvus-with-Docker-Compose" class="common-anchor-header">Conditions requises pour l'installation de Milvus avec Docker Compose<button data-href="#Requirements-for-Installing-Milvus-with-Docker-Compose" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -45,7 +45,7 @@ title: Configuration requise pour l'installation de Milvus avec Docker Compose
 <tbody>
 <tr><td>UNITÉ CENTRALE</td><td><ul><li>Intel 2nd Gen Core CPU ou supérieur</li><li>Silicium Apple</li></ul></td><td><ul><li>Autonome : 4 cœurs ou plus</li><li>Cluster : 8 cœurs ou plus</li></ul></td><td></td></tr>
 <tr><td>Jeu d'instructions du CPU</td><td><ul><li>SSE4.2</li><li>AVX</li><li>AVX2</li><li>AVX-512</li></ul></td><td><ul><li>SSE4.2</li><li>AVX</li><li>AVX2</li><li>AVX-512</li></ul></td><td>La recherche de similarités vectorielles et la construction d'index dans Milvus nécessitent la prise en charge par l'unité centrale d'ensembles d'extensions SIMD (instructions uniques, données multiples). Assurez-vous que l'unité centrale prend en charge au moins l'une des extensions SIMD répertoriées. Voir <a href="https://en.wikipedia.org/wiki/Advanced_Vector_Extensions#CPUs_with_AVX">CPU avec AVX</a> pour plus d'informations.</td></tr>
-<tr><td>RAM</td><td><ul><li>Autonome : 8G</li><li>Cluster : 32G</li></ul></td><td><ul><li>Autonome : 16G</li><li>Cluster : 128G</li></ul></td><td>La taille de la RAM dépend du volume de données.</td></tr>
+<tr><td>RAM</td><td><ul><li>Autonome : 8G</li><li>Cluster : 32G</li></ul></td><td><ul><li>Autonome : 16G</li><li>Groupe de travail : 128G</li></ul></td><td>La taille de la RAM dépend du volume de données.</td></tr>
 <tr><td>Disque dur</td><td>SATA 3.0 SSD ou supérieur</td><td>NVMe SSD ou supérieur</td><td>La taille du disque dur dépend du volume de données.</td></tr>
 </tbody>
 </table>
@@ -69,11 +69,12 @@ title: Configuration requise pour l'installation de Milvus avec Docker Compose
 <tr><th>Système d'exploitation</th><th>Logiciel</th><th>Remarque</th></tr>
 </thead>
 <tbody>
-<tr><td>macOS 10.14 ou version ultérieure</td><td>Bureau Docker</td><td>Configurez la machine virtuelle (VM) Docker pour qu'elle utilise au moins 2 processeurs virtuels (vCPU) et 8 Go de mémoire initiale. Dans le cas contraire, l'installation risque d'échouer. <br/>Voir <a href="https://docs.docker.com/desktop/mac/install/">Installer Docker Desktop sur Mac</a> pour plus d'informations.</td></tr>
+<tr><td>macOS 10.14 ou version ultérieure</td><td>Bureau Docker</td><td>Configurez la machine virtuelle (VM) Docker pour qu'elle utilise au moins 2 CPU virtuels (vCPU) et 8 Go de mémoire initiale. Dans le cas contraire, l'installation risque d'échouer. <br/>Voir <a href="https://docs.docker.com/desktop/mac/install/">Installer Docker Desktop sur Mac</a> pour plus d'informations.</td></tr>
 <tr><td>Plateformes Linux</td><td><ul><li>Docker 19.03 ou version ultérieure</li><li>Docker Compose 1.25.1 ou version ultérieure</li></ul></td><td>Voir <a href="https://docs.docker.com/engine/install/">Installer Docker Engine</a> et <a href="https://docs.docker.com/compose/install/">Installer Docker Compose</a> pour plus d'informations.</td></tr>
 <tr><td>Windows avec WSL 2 activé</td><td>Bureau Docker</td><td>Nous vous recommandons de stocker le code source et les autres données montées dans des conteneurs Linux dans le système de fichiers Linux plutôt que dans le système de fichiers Windows.<br/>Voir <a href="https://docs.docker.com/desktop/windows/install/#wsl-2-backend">Installer Docker Desktop sur Windows avec le backend WSL 2</a> pour plus d'informations.</td></tr>
 </tbody>
 </table>
+<p>Les dépendances suivantes seront obtenues et configurées automatiquement lorsque Milvus Standalone est installé à l'aide du script Docker ou de la configuration Docker Compose :</p>
 <table>
 <thead>
 <tr><th>Logiciel</th><th>Version</th><th>Remarque</th></tr>

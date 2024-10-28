@@ -1,7 +1,6 @@
 ---
 id: scale-dependencies.md
 title: Dépendances d'échelle
-summary: ''
 ---
 <h1 id="Scale-Milvus-Dependencies" class="common-anchor-header">Dépendances de Scale Milvus<button data-href="#Scale-Milvus-Dependencies" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -20,7 +19,7 @@ summary: ''
       </svg>
     </button></h1><p>Milvus s'appuie sur diverses dépendances telles que MinIO, Kafka, Pulsar et etcd. La mise à l'échelle de ces composants peut améliorer l'adaptabilité de Milvus à différentes exigences.</p>
 <div class="alert note">
-<p>Pour les utilisateurs de Milvus Operator, voir <a href="/docs/fr/manage_dependencies.md">Gérer les dépendances pour Milvus Operator</a>.</p>
+<p>Pour les utilisateurs de Milvus Operator, voir <a href="/docs/fr/object_storage_operator.md">Configurer le stockage d'objets avec Milvus Oper</a>ator, <a href="/docs/fr/meta_storage_operator.md">Configurer le méta stockage avec Milvus Oper</a>ator et <a href="/docs/fr/message_storage_operator.md">Configurer le stockage de messages avec Milvus Operator</a>.</p>
 </div>
 <h2 id="Scale-MinIO" class="common-anchor-header">Mise à l'échelle de MinIO<button data-href="#Scale-MinIO" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -86,7 +85,7 @@ minio:
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Increase-resource-per-Kafka-broker-pod" class="common-anchor-header">Augmentation des ressources par pod de courtier Kafka</h3><p>Améliorez la capacité du courtier Kafka en ajustant les ressources de CPU et de mémoire pour chaque pod de courtier.</p>
+    </button></h2><h3 id="Increase-resource-per-Kafka-broker-pod" class="common-anchor-header">Augmentation des ressources par pod de courtier Kafka</h3><p>Augmentez la capacité du courtier Kafka en ajustant les ressources de CPU et de mémoire pour chaque pod de courtier.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># new-values.yaml</span>
 kafka:
   resources:

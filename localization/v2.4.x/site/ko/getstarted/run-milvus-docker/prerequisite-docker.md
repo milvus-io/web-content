@@ -3,7 +3,7 @@ id: prerequisite-docker.md
 label: Docker requirements
 related_key: Docker
 summary: Milvus를 설치하기 전에 필요한 준비 사항을 Docker Compose로 알아보세요.
-title: 도커 컴포즈와 함께 Milvus를 설치하기 위한 요구 사항
+title: Docker Compose로 Milvus를 설치하기 위한 요구 사항
 ---
 <h1 id="Requirements-for-Installing-Milvus-with-Docker-Compose" class="common-anchor-header">Docker Compose로 Milvus를 설치하기 위한 요구 사항<button data-href="#Requirements-for-Installing-Milvus-with-Docker-Compose" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -72,6 +72,7 @@ title: 도커 컴포즈와 함께 Milvus를 설치하기 위한 요구 사항
 <tr><td>WSL 2가 활성화된 Windows</td><td>Docker 데스크톱</td><td>소스 코드 및 Linux 컨테이너에 바인드 마운트된 기타 데이터는 Windows 파일 시스템 대신 Linux 파일 시스템에 저장하는 것이 좋습니다.<br/>자세한 내용은 <a href="https://docs.docker.com/desktop/windows/install/#wsl-2-backend">WSL 2 백엔드가 있는 Windows에 Docker Desktop 설치를</a> 참조하세요.</td></tr>
 </tbody>
 </table>
+<p>다음 종속성은 Docker 스크립트 또는 Docker Compose 구성을 사용하여 Milvus Standalone을 설치할 때 자동으로 가져와 구성됩니다:</p>
 <table>
 <thead>
 <tr><th>소프트웨어</th><th>버전</th><th>참고</th></tr>

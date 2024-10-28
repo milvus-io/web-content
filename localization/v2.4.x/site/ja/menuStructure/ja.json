@@ -311,7 +311,7 @@
         "children": []
       },
       {
-        "label": "インメモリ・レプリカ",
+        "label": "インメモリーレプリカ",
         "id": "replica.md",
         "order": 11,
         "children": []
@@ -569,7 +569,7 @@
             "children": []
           },
           {
-            "label": "インストラクター",
+            "label": "講師",
             "id": "embed-with-instructor.md",
             "order": 9,
             "children": []
@@ -1667,7 +1667,7 @@
     ]
   },
   {
-    "label": "よくあるご質問",
+    "label": "よくある質問",
     "id": "faq",
     "isMenu": true,
     "order": 9,

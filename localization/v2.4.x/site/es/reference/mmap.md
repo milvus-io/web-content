@@ -1,7 +1,7 @@
 ---
 id: mmap.md
 summary: MMap permite más datos en un solo nodo.
-title: Almacenamiento de datos con MMap
+title: Almacenamiento de datos habilitado para MMap
 ---
 <h1 id="MMap-enabled-Data-Storage" class="common-anchor-header">Almacenamiento de datos habilitado para MMap<button data-href="#MMap-enabled-Data-Storage" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -35,7 +35,7 @@ title: Almacenamiento de datos con MMap
         ></path>
       </svg>
     </button></h2><p>A partir de Milvus 2.4, tiene la flexibilidad de ajustar el archivo de configuración estática para configurar los ajustes predeterminados de asignación de memoria para todo el clúster antes del despliegue. Además, tiene la opción de modificar dinámicamente los parámetros para ajustar con precisión la configuración de la asignación de memoria tanto a nivel de clúster como de índice. De cara al futuro, las futuras actualizaciones ampliarán las capacidades de asignación de memoria para incluir configuraciones a nivel de campo.</p>
-<h3 id="Before-cluster-deployment-global-configuration" class="common-anchor-header">Antes del despliegue del clúster: configuración global</h3><p>Antes de desplegar un clúster, la configuración <strong>a nivel de clúster</strong> aplica la asignación de memoria a todo el clúster. Esto garantiza que todos los objetos nuevos se adhieran automáticamente a estas configuraciones. Es importante tener en cuenta que la modificación de estos ajustes requiere reiniciar el clúster para que surta efecto.</p>
+<h3 id="Before-cluster-deployment-global-configuration" class="common-anchor-header">Antes del despliegue del clúster: configuración global</h3><p>Antes de desplegar un clúster, la configuración <strong>a nivel de cl</strong> úster aplica la asignación de memoria a todo el clúster. Esto garantiza que todos los objetos nuevos se adhieran automáticamente a estas configuraciones. Es importante tener en cuenta que la modificación de estos ajustes requiere reiniciar el clúster para que surta efecto.</p>
 <p>Para ajustar la configuración de asignación de memoria de su clúster, edite el archivo <code translate="no">configs/milvus.yaml</code>. Dentro de este archivo, puede especificar si desea activar la asignación de memoria por defecto y determinar la ruta del directorio para almacenar los archivos asignados a la memoria. Si la ruta (<code translate="no">mmapDirPath</code>) se deja sin especificar, el sistema almacena por defecto los archivos mapeados en memoria en <code translate="no">{localStorage.path}/mmap</code>. Para obtener más información, consulte <a href="https://milvus.io/docs/configure_localstorage.md#localStoragepath">Configuraciones relacionadas con el almacenamiento local</a>.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># This parameter was set in configs/milvus.yaml</span>
 ...
@@ -47,8 +47,27 @@ queryNode:
     mmapDirPath: <span class="hljs-built_in">any</span>/valid/path 
 ....
 <button class="copy-code-btn"></button></code></pre>
+<p>Después de <code translate="no">2.4.10</code>, la configuración <code translate="no">queryNode.mmap.mmapEnabled</code> se divide en cuatro campos separados, y todos los valores por defecto son <code translate="no">false</code>:</p>
+<ul>
+<li><code translate="no">queryNode.mmap.vectorField</code>, controla si los datos del vector son mmap;</li>
+<li><code translate="no">queryNode.mmap.vectorIndex</code>, controla si el índice vectorial es mmap;</li>
+<li><code translate="no">queryNode.mmap.scalarField</code>, controla si los datos escalares son mmap;</li>
+<li><code translate="no">queryNode.mmap.scalarIndex</code>, controla si el índice escalar es mmap;</li>
+</ul>
+<pre><code translate="no" class="language-yaml"><span class="hljs-comment"># This parameter was set in configs/milvus.yaml</span>
+...
+queryNode:
+  mmap:
+    vectorField: false <span class="hljs-comment"># Enable mmap for loading vector data</span>
+    vectorIndex: false <span class="hljs-comment"># Enable mmap for loading vector index</span>
+    scalarField: false <span class="hljs-comment"># Enable mmap for loading scalar data</span>
+    scalarIndex: false <span class="hljs-comment"># Enable mmap for loading scalar index</span>
+....
+<button class="copy-code-btn"></button></code></pre>
+<p>Además, sólo el índice vectorial y el mmap de datos vectoriales pueden activarse y desactivarse para una colección individualmente, pero no para otras.</p>
+<p>Compatibilidad: Si la configuración original <code translate="no">queryNode.mmap.mmapEnabled</code> se establece en <code translate="no">true</code>, la nueva configuración añadida se establecerá en <code translate="no">true</code> en este momento. Si <code translate="no">queryNode.mmap.mmapEnabled</code> se establece en <code translate="no">false</code>, si la nueva configuración se establece en <code translate="no">true</code>, el valor final será <code translate="no">true</code>.</p>
 <h3 id="During-cluster-operation-dynamic-configuration" class="common-anchor-header">Durante el funcionamiento del clúster: configuración dinámica</h3><p>Durante el funcionamiento del clúster, puede ajustar dinámicamente la configuración de asignación de memoria a nivel de colección o de índice.</p>
-<p>En el <strong>nivel de colección</strong>, la asignación de memoria se aplica a todos los datos sin indexar de una colección, excluyendo las claves primarias, las marcas de tiempo y los ID de fila. Este enfoque es especialmente adecuado para la gestión integral de grandes conjuntos de datos.</p>
+<p>En el <strong>nivel</strong> de colección, la asignación de memoria se aplica a todos los datos brutos no indexados dentro de una colección, excluyendo las claves primarias, las marcas de tiempo y los ID de fila. Este enfoque es especialmente adecuado para la gestión integral de grandes conjuntos de datos.</p>
 <p>Para realizar ajustes dinámicos en la configuración de la asignación de memoria dentro de una colección, utilice el método <code translate="no">set_properties()</code>. Aquí, puede alternar <code translate="no">mmap.enabled</code> entre <code translate="no">True</code> o <code translate="no">False</code> según sea necesario.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Get existing collection</span>
 collection = Collection(<span class="hljs-string">&quot;test_collection&quot;</span>) <span class="hljs-comment"># Replace with your collection name</span>
@@ -56,7 +75,12 @@ collection = Collection(<span class="hljs-string">&quot;test_collection&quot;</s
 <span class="hljs-comment"># Set memory mapping property to True or Flase</span>
 collection.set_properties({<span class="hljs-string">&#x27;mmap.enabled&#x27;</span>: <span class="hljs-literal">True</span>})
 <button class="copy-code-btn"></button></code></pre>
-<p>Para los ajustes <strong>a nivel de índice</strong>, la asignación de memoria puede aplicarse específicamente a índices vectoriales sin afectar a otros tipos de datos. Esta característica es muy valiosa para las colecciones que requieren un rendimiento optimizado para las búsquedas vectoriales.</p>
+<p>Después de <code translate="no">2.4.10</code>, los ajustes de asignación de memoria dentro de una colección, utilice el método <code translate="no">add_field</code>. Aquí, puede alternar <code translate="no">mmap_enabled</code> entre <code translate="no">True</code> o <code translate="no">False</code> según sea necesario.</p>
+<pre><code translate="no" class="language-python">schema = MilvusClient.create_schema()
+
+schema.add_field(field_name=<span class="hljs-string">&quot;embedding&quot;</span>, datatype=DataType.FLOAT_VECTOR, dim=<span class="hljs-number">768</span>, mmap_enabled=<span class="hljs-literal">True</span>)
+<button class="copy-code-btn"></button></code></pre>
+<p>Para los ajustes <strong>a nivel de índice</strong>, la asignación de memoria puede aplicarse específicamente a los índices vectoriales sin afectar a otros tipos de datos. Esta característica es muy valiosa para las colecciones que requieren un rendimiento optimizado para las búsquedas vectoriales.</p>
 <p>Para activar o desactivar la asignación de memoria para un índice dentro de una colección, llame al método <code translate="no">alter_index()</code>, especificando el nombre del índice de destino en <code translate="no">index_name</code> y estableciendo <code translate="no">mmap.enabled</code> en <code translate="no">True</code> o <code translate="no">False</code>.</p>
 <pre><code translate="no" class="language-python">collection.alter_index(
     index_name=<span class="hljs-string">&quot;vector_index&quot;</span>, <span class="hljs-comment"># Replace with your vector index name</span>
@@ -126,7 +150,7 @@ spec:
         ></path>
       </svg>
     </button></h2><ul>
-<li><p>La asignación de memoria no se puede habilitar para una colección cargada, asegúrese de que la colección se ha liberado antes de habilitar la asignación de memoria.</p></li>
+<li><p>La asignación de memoria no puede habilitarse para una colección cargada, asegúrese de que la colección se ha liberado antes de habilitar la asignación de memoria.</p></li>
 <li><p>La asignación de memoria no es compatible con los índices de clase DiskANN o GPU.</p></li>
 </ul>
 <h2 id="FAQ" class="common-anchor-header">PREGUNTAS FRECUENTES<button data-href="#FAQ" class="anchor-icon" translate="no">
@@ -158,7 +182,7 @@ spec:
 <li><p><strong>¿Qué tipo de almacenamiento local se necesita para la asignación de memoria?</strong></p>
 <p>Un disco de alta calidad mejora el rendimiento, siendo las unidades NVMe la opción preferida.</p></li>
 <li><p><strong>¿Se pueden mapear en memoria los datos escalares?</strong></p>
-<p>La asignación de memoria puede aplicarse a datos escalares, pero no es aplicable a índices construidos sobre campos escalares.</p></li>
+<p>La asignación de memoria puede aplicarse a datos escalares, pero no es aplicable a índices creados sobre campos escalares.</p></li>
 <li><p><strong>¿Cómo se determina la prioridad de las configuraciones de asignación de memoria en los distintos niveles?</strong></p>
 <p>En Milvus, cuando las configuraciones de asignación de memoria se definen explícitamente en varios niveles, las configuraciones a nivel de índice y a nivel de colección comparten la prioridad más alta, seguidas por las configuraciones a nivel de clúster.</p></li>
 <li><p><strong>Si actualizo desde Milvus 2.3 y he configurado la ruta del directorio de asignación de memoria, ¿qué ocurrirá?</strong></p>

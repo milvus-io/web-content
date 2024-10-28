@@ -1,7 +1,7 @@
 ---
 id: mmap.md
 summary: O MMap permite mais dados num único nó.
-title: Armazenamento de dados com MMap
+title: Armazenamento de Dados com MMap
 ---
 <h1 id="MMap-enabled-Data-Storage" class="common-anchor-header">Armazenamento de Dados com MMap<button data-href="#MMap-enabled-Data-Storage" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -47,16 +47,40 @@ queryNode:
     mmapDirPath: <span class="hljs-built_in">any</span>/valid/path 
 ....
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="During-cluster-operation-dynamic-configuration" class="common-anchor-header">Durante a operação do cluster: configuração dinâmica</h3><p>Durante o tempo de execução do cluster, é possível ajustar dinamicamente as configurações de mapeamento de memória no nível da coleção ou do índice.</p>
-<p>No <strong>nível da coleção</strong>, o mapeamento de memória é aplicado a todos os dados brutos não indexados dentro de uma coleção, excluindo chaves primárias, carimbos de data/hora e IDs de linha. Essa abordagem é particularmente adequada para o gerenciamento abrangente de grandes conjuntos de dados.</p>
-<p>Para ajustes dinâmicos às definições de mapeamento de memória numa coleção, utilize o método <code translate="no">set_properties()</code>. Aqui, é possível alternar <code translate="no">mmap.enabled</code> entre <code translate="no">True</code> ou <code translate="no">False</code> conforme necessário.</p>
+<p>Após <code translate="no">2.4.10</code>, a configuração <code translate="no">queryNode.mmap.mmapEnabled</code> divide-se em quatro campos separados abaixo, e todas as predefinições são <code translate="no">false</code>:</p>
+<ul>
+<li><code translate="no">queryNode.mmap.vectorField</code>controla se os dados do vetor são mmap;</li>
+<li><code translate="no">queryNode.mmap.vectorIndex</code>controla se o índice do vetor é mmap;</li>
+<li><code translate="no">queryNode.mmap.scalarField</code>controla se os dados escalares são mmap;</li>
+<li><code translate="no">queryNode.mmap.scalarIndex</code>controla se o índice escalar é mmap;</li>
+</ul>
+<pre><code translate="no" class="language-yaml"><span class="hljs-comment"># This parameter was set in configs/milvus.yaml</span>
+...
+queryNode:
+  mmap:
+    vectorField: false <span class="hljs-comment"># Enable mmap for loading vector data</span>
+    vectorIndex: false <span class="hljs-comment"># Enable mmap for loading vector index</span>
+    scalarField: false <span class="hljs-comment"># Enable mmap for loading scalar data</span>
+    scalarIndex: false <span class="hljs-comment"># Enable mmap for loading scalar index</span>
+....
+<button class="copy-code-btn"></button></code></pre>
+<p>Além disso, apenas o índice vetorial e o mmap de dados vectoriais podem ser activados e desactivados para uma coleção individualmente, mas não para outras.</p>
+<p>Compatibilidade: Se a configuração original <code translate="no">queryNode.mmap.mmapEnabled</code> estiver definida como <code translate="no">true</code>, a configuração recém-adicionada será definida como <code translate="no">true</code> neste momento. Se <code translate="no">queryNode.mmap.mmapEnabled</code> estiver definido como <code translate="no">false</code>, se a nova configuração estiver definida como <code translate="no">true</code>, o valor final será <code translate="no">true</code>.</p>
+<h3 id="During-cluster-operation-dynamic-configuration" class="common-anchor-header">Durante o funcionamento do cluster: configuração dinâmica</h3><p>Durante o tempo de execução do cluster, é possível ajustar dinamicamente as definições de mapeamento de memória ao nível da coleção ou do índice.</p>
+<p>No <strong>nível</strong> da coleção, o mapeamento de memória é aplicado a todos os dados brutos não indexados dentro de uma coleção, excluindo chaves primárias, carimbos de data/hora e IDs de linha. Essa abordagem é particularmente adequada para o gerenciamento abrangente de grandes conjuntos de dados.</p>
+<p>Para ajustes dinâmicos às definições de mapeamento de memória numa coleção, utilize o método <code translate="no">set_properties()</code>. Aqui, é possível alternar <code translate="no">mmap.enabled</code> entre <code translate="no">True</code> ou <code translate="no">False</code>, conforme necessário.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Get existing collection</span>
 collection = Collection(<span class="hljs-string">&quot;test_collection&quot;</span>) <span class="hljs-comment"># Replace with your collection name</span>
 
 <span class="hljs-comment"># Set memory mapping property to True or Flase</span>
 collection.set_properties({<span class="hljs-string">&#x27;mmap.enabled&#x27;</span>: <span class="hljs-literal">True</span>})
 <button class="copy-code-btn"></button></code></pre>
-<p>Para definições <strong>ao nível do índice</strong>, o mapeamento de memória pode ser aplicado especificamente a índices de vectores sem afetar outros tipos de dados. Esta funcionalidade é valiosa para colecções que requerem um desempenho optimizado para pesquisas vectoriais.</p>
+<p>Depois de <code translate="no">2.4.10</code>, as definições de mapeamento de memória numa coleção, utilize o método <code translate="no">add_field</code>. Aqui, pode alternar <code translate="no">mmap_enabled</code> entre <code translate="no">True</code> ou <code translate="no">False</code>, conforme necessário.</p>
+<pre><code translate="no" class="language-python">schema = MilvusClient.create_schema()
+
+schema.add_field(field_name=<span class="hljs-string">&quot;embedding&quot;</span>, datatype=DataType.FLOAT_VECTOR, dim=<span class="hljs-number">768</span>, mmap_enabled=<span class="hljs-literal">True</span>)
+<button class="copy-code-btn"></button></code></pre>
+<p>Para configurações <strong>de nível de índice</strong>, o mapeamento de memória pode ser aplicado especificamente a índices de vetor sem afetar outros tipos de dados. Esta funcionalidade é valiosa para colecções que requerem um desempenho optimizado para pesquisas vectoriais.</p>
 <p>Para ativar ou desativar o mapeamento de memória para um índice numa coleção, chame o método <code translate="no">alter_index()</code>, especificando o nome do índice de destino em <code translate="no">index_name</code> e definindo <code translate="no">mmap.enabled</code> para <code translate="no">True</code> ou <code translate="no">False</code>.</p>
 <pre><code translate="no" class="language-python">collection.alter_index(
     index_name=<span class="hljs-string">&quot;vector_index&quot;</span>, <span class="hljs-comment"># Replace with your vector index name</span>
@@ -127,7 +151,7 @@ spec:
       </svg>
     </button></h2><ul>
 <li><p>O mapeamento de memória não pode ser ativado para uma coleção carregada, certifique-se de que a coleção foi liberada antes de ativar o mapeamento de memória.</p></li>
-<li><p>O mapeamento de memória não é compatível com os índices de classe DiskANN ou GPU.</p></li>
+<li><p>O mapeamento de memória não é compatível com os índices DiskANN ou de classe GPU.</p></li>
 </ul>
 <h2 id="FAQ" class="common-anchor-header">PERGUNTAS FREQUENTES<button data-href="#FAQ" class="anchor-icon" translate="no">
       <svg translate="no"

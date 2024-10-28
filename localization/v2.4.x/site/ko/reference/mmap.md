@@ -36,7 +36,7 @@ title: MMap 지원 데이터 스토리지
       </svg>
     </button></h2><p>Milvus 2.4부터는 배포 전에 정적 구성 파일을 유연하게 조정하여 전체 클러스터의 기본 메모리 매핑 설정을 구성할 수 있습니다. 또한, 클러스터와 인덱스 수준 모두에서 메모리 매핑 설정을 미세 조정하기 위해 매개변수를 동적으로 변경할 수 있는 옵션도 있습니다. 향후 업데이트에서는 필드 수준 구성을 포함하도록 메모리 매핑 기능을 확장할 예정입니다.</p>
 <h3 id="Before-cluster-deployment-global-configuration" class="common-anchor-header">클러스터 배포 전: 전역 구성</h3><p>클러스터를 배포하기 전에 <strong>클러스터 수준</strong> 설정으로 전체 클러스터에 메모리 매핑을 적용합니다. 이렇게 하면 모든 새 개체가 자동으로 이러한 구성을 따르게 됩니다. 이러한 설정을 수정하려면 클러스터를 다시 시작해야 적용된다는 점에 유의하세요.</p>
-<p>클러스터의 메모리 매핑 설정을 조정하려면 <code translate="no">configs/milvus.yaml</code> 파일을 편집하세요. 이 파일에서 기본적으로 메모리 매핑을 사용할지 여부를 지정하고 메모리 매핑된 파일을 저장할 디렉터리 경로를 결정할 수 있습니다. 경로(<code translate="no">mmapDirPath</code>)를 지정하지 않으면 시스템은 기본적으로 메모리 매핑된 파일을 <code translate="no">{localStorage.path}/mmap</code> 에 저장합니다. 자세한 내용은 <a href="https://milvus.io/docs/configure_localstorage.md#localStoragepath">로컬 스토리지 관련 구성을</a> 참조하세요.</p>
+<p>클러스터의 메모리 매핑 설정을 조정하려면 <code translate="no">configs/milvus.yaml</code> 파일을 편집하세요. 이 파일에서 기본적으로 메모리 매핑을 사용할지 여부를 지정하고 메모리 매핑된 파일을 저장할 디렉터리 경로를 결정할 수 있습니다. 경로(<code translate="no">mmapDirPath</code>)를 지정하지 않으면 시스템은 기본적으로 메모리 매핑된 파일을 <code translate="no">{localStorage.path}/mmap</code> 에 저장합니다. 자세한 내용은 <a href="https://milvus.io/docs/configure_localstorage.md#localStoragepath">로컬 저장소 관련 구성을</a> 참조하세요.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># This parameter was set in configs/milvus.yaml</span>
 ...
 queryNode:
@@ -47,7 +47,26 @@ queryNode:
     mmapDirPath: <span class="hljs-built_in">any</span>/valid/path 
 ....
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="During-cluster-operation-dynamic-configuration" class="common-anchor-header">클러스터 작동 중: 동적 구성</h3><p>클러스터 런타임 중에 컬렉션 또는 인덱스 수준에서 메모리 매핑 설정을 동적으로 조정할 수 있습니다.</p>
+<p><code translate="no">2.4.10</code> 이후 구성 <code translate="no">queryNode.mmap.mmapEnabled</code> 은 아래 4개의 개별 필드로 분할되며, 모든 기본값은 <code translate="no">false</code> 입니다:</p>
+<ul>
+<li><code translate="no">queryNode.mmap.vectorField</code>는 벡터 데이터가 mmap인지 여부를 제어합니다;</li>
+<li><code translate="no">queryNode.mmap.vectorIndex</code>는 벡터 인덱스가 mmap인지 여부를 제어합니다;</li>
+<li><code translate="no">queryNode.mmap.scalarField</code>는 스칼라 데이터가 mmap인지 여부를 제어합니다;</li>
+<li><code translate="no">queryNode.mmap.scalarIndex</code>는 스칼라 인덱스가 mmap인지 여부를 제어합니다;</li>
+</ul>
+<pre><code translate="no" class="language-yaml"><span class="hljs-comment"># This parameter was set in configs/milvus.yaml</span>
+...
+queryNode:
+  mmap:
+    vectorField: false <span class="hljs-comment"># Enable mmap for loading vector data</span>
+    vectorIndex: false <span class="hljs-comment"># Enable mmap for loading vector index</span>
+    scalarField: false <span class="hljs-comment"># Enable mmap for loading scalar data</span>
+    scalarIndex: false <span class="hljs-comment"># Enable mmap for loading scalar index</span>
+....
+<button class="copy-code-btn"></button></code></pre>
+<p>또한 벡터 인덱스와 벡터 데이터 mmap만 컬렉션에 대해 개별적으로 켜고 끌 수 있지만 다른 것들은 켜고 끌 수 없습니다.</p>
+<p>호환성: 원래 구성 <code translate="no">queryNode.mmap.mmapEnabled</code> 이 <code translate="no">true</code> 으로 설정되어 있는 경우 새로 추가된 구성은 현재 <code translate="no">true</code> 으로 설정됩니다. <code translate="no">queryNode.mmap.mmapEnabled</code> 이 <code translate="no">false</code> 으로 설정된 경우 , 새 구성이 <code translate="no">true</code> 으로 설정된 경우 최종 값은 <code translate="no">true</code> 이 됩니다.</p>
+<h3 id="During-cluster-operation-dynamic-configuration" class="common-anchor-header">클러스터 운영 중: 동적 구성</h3><p>클러스터 런타임 중에 컬렉션 또는 인덱스 수준에서 메모리 매핑 설정을 동적으로 조정할 수 있습니다.</p>
 <p><strong>컬렉션 수준에서</strong> 메모리 매핑은 기본 키, 타임스탬프, 행 ID를 제외한 컬렉션 내의 인덱싱되지 않은 모든 원시 데이터에 적용됩니다. 이 접근 방식은 특히 대규모 데이터 세트의 포괄적인 관리에 적합합니다.</p>
 <p>컬렉션 내에서 메모리 매핑 설정을 동적으로 조정하려면 <code translate="no">set_properties()</code> 방법을 활용하세요. 여기에서 필요에 따라 <code translate="no">True</code> 또는 <code translate="no">False</code> 사이에서 <code translate="no">mmap.enabled</code> 을 전환할 수 있습니다.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Get existing collection</span>
@@ -56,7 +75,12 @@ collection = Collection(<span class="hljs-string">&quot;test_collection&quot;</s
 <span class="hljs-comment"># Set memory mapping property to True or Flase</span>
 collection.set_properties({<span class="hljs-string">&#x27;mmap.enabled&#x27;</span>: <span class="hljs-literal">True</span>})
 <button class="copy-code-btn"></button></code></pre>
-<p><strong>인덱스 수준</strong> 설정의 경우, 다른 데이터 유형에 영향을 주지 않고 벡터 인덱스에 메모리 매핑을 특별히 적용할 수 있습니다. 이 기능은 벡터 검색에 최적화된 성능이 필요한 컬렉션에 매우 유용합니다.</p>
+<p>컬렉션 내의 메모리 매핑 설정인 <code translate="no">2.4.10</code> 이후에는 <code translate="no">add_field</code> 방법을 활용하세요. 여기에서 필요에 따라 <code translate="no">True</code> 또는 <code translate="no">False</code> 사이에서 <code translate="no">mmap_enabled</code> 을 전환할 수 있습니다.</p>
+<pre><code translate="no" class="language-python">schema = MilvusClient.create_schema()
+
+schema.add_field(field_name=<span class="hljs-string">&quot;embedding&quot;</span>, datatype=DataType.FLOAT_VECTOR, dim=<span class="hljs-number">768</span>, mmap_enabled=<span class="hljs-literal">True</span>)
+<button class="copy-code-btn"></button></code></pre>
+<p><strong>인덱스 수준</strong> 설정의 경우 다른 데이터 유형에 영향을 주지 않고 벡터 인덱스에 메모리 매핑을 특별히 적용할 수 있습니다. 이 기능은 벡터 검색에 최적화된 성능이 필요한 컬렉션에 매우 유용합니다.</p>
 <p>컬렉션 내의 인덱스에 대해 메모리 매핑을 활성화 또는 비활성화하려면 <code translate="no">alter_index()</code> 메서드를 호출하여 <code translate="no">index_name</code> 에 대상 인덱스 이름을 지정하고 <code translate="no">mmap.enabled</code> 를 <code translate="no">True</code> 또는 <code translate="no">False</code> 로 설정합니다.</p>
 <pre><code translate="no" class="language-python">collection.alter_index(
     index_name=<span class="hljs-string">&quot;vector_index&quot;</span>, <span class="hljs-comment"># Replace with your vector index name</span>

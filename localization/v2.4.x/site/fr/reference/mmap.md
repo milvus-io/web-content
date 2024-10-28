@@ -1,7 +1,7 @@
 ---
 id: mmap.md
 summary: MMap permet d'avoir plus de données dans un seul nœud.
-title: Stockage de données par MMap
+title: Stockage de données avec mappage en mémoire
 ---
 <h1 id="MMap-enabled-Data-Storage" class="common-anchor-header">Stockage de données avec mappage en mémoire<button data-href="#MMap-enabled-Data-Storage" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -47,14 +47,38 @@ queryNode:
     mmapDirPath: <span class="hljs-built_in">any</span>/valid/path 
 ....
 <button class="copy-code-btn"></button></code></pre>
+<p>Après <code translate="no">2.4.10</code>, la configuration <code translate="no">queryNode.mmap.mmapEnabled</code> se divise en quatre champs distincts, et toutes les valeurs par défaut sont <code translate="no">false</code>:</p>
+<ul>
+<li><code translate="no">queryNode.mmap.vectorField</code>, contrôle si les données vectorielles sont mmap ;</li>
+<li><code translate="no">queryNode.mmap.vectorIndex</code>contrôle si l'index du vecteur est mmap ; , contrôle si les données scalaires sont mmap ; , contrôle si les données scalaires sont mmap ;</li>
+<li><code translate="no">queryNode.mmap.scalarField</code>, contrôle si les données scalaires sont mmap ;</li>
+<li><code translate="no">queryNode.mmap.scalarIndex</code>, contrôle si l'index scalaire est mmap ;</li>
+</ul>
+<pre><code translate="no" class="language-yaml"><span class="hljs-comment"># This parameter was set in configs/milvus.yaml</span>
+...
+queryNode:
+  mmap:
+    vectorField: false <span class="hljs-comment"># Enable mmap for loading vector data</span>
+    vectorIndex: false <span class="hljs-comment"># Enable mmap for loading vector index</span>
+    scalarField: false <span class="hljs-comment"># Enable mmap for loading scalar data</span>
+    scalarIndex: false <span class="hljs-comment"># Enable mmap for loading scalar index</span>
+....
+<button class="copy-code-btn"></button></code></pre>
+<p>En outre, seuls l'index vectoriel et les données vectorielles peuvent être activés ou désactivés pour une collection donnée, mais pas pour les autres.</p>
+<p>Compatibilité : Si la configuration originale <code translate="no">queryNode.mmap.mmapEnabled</code> est définie sur <code translate="no">true</code>, la configuration nouvellement ajoutée sera définie sur <code translate="no">true</code> à ce moment-là. Si <code translate="no">queryNode.mmap.mmapEnabled</code> est défini sur <code translate="no">false</code>, si la nouvelle configuration est définie sur <code translate="no">true</code>, la valeur finale sera <code translate="no">true</code>.</p>
 <h3 id="During-cluster-operation-dynamic-configuration" class="common-anchor-header">Pendant le fonctionnement de la grappe : configuration dynamique</h3><p>Pendant l'exécution du cluster, vous pouvez ajuster dynamiquement les paramètres de mappage de la mémoire au niveau de la collection ou de l'index.</p>
-<p>Au <strong>niveau de la collection</strong>, le mappage de la mémoire est appliqué à toutes les données brutes non indexées d'une collection, à l'exception des clés primaires, des horodatages et des ID de ligne. Cette approche est particulièrement adaptée à la gestion complète de grands ensembles de données.</p>
-<p>Pour des ajustements dynamiques des paramètres de mappage de la mémoire au sein d'une collection, utilisez la méthode <code translate="no">set_properties()</code>. Ici, vous pouvez faire basculer <code translate="no">mmap.enabled</code> entre <code translate="no">True</code> et <code translate="no">False</code> selon vos besoins.</p>
+<p>Au niveau de la <strong>collection</strong>, le mappage de la mémoire est appliqué à toutes les données brutes non indexées d'une collection, à l'exclusion des clés primaires, des horodatages et des identifiants de ligne. Cette approche est particulièrement adaptée à la gestion complète de grands ensembles de données.</p>
+<p>Pour procéder à des ajustements dynamiques des paramètres de mappage de la mémoire au sein d'une collection, utilisez la méthode <code translate="no">set_properties()</code>. Ici, vous pouvez faire basculer <code translate="no">mmap.enabled</code> entre <code translate="no">True</code> et <code translate="no">False</code> selon vos besoins.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Get existing collection</span>
 collection = Collection(<span class="hljs-string">&quot;test_collection&quot;</span>) <span class="hljs-comment"># Replace with your collection name</span>
 
 <span class="hljs-comment"># Set memory mapping property to True or Flase</span>
 collection.set_properties({<span class="hljs-string">&#x27;mmap.enabled&#x27;</span>: <span class="hljs-literal">True</span>})
+<button class="copy-code-btn"></button></code></pre>
+<p>Après <code translate="no">2.4.10</code>, les paramètres de mappage de la mémoire dans une collection, utilisez la méthode <code translate="no">add_field</code>. Ici, vous pouvez faire basculer <code translate="no">mmap_enabled</code> entre <code translate="no">True</code> ou <code translate="no">False</code> selon vos besoins.</p>
+<pre><code translate="no" class="language-python">schema = MilvusClient.create_schema()
+
+schema.add_field(field_name=<span class="hljs-string">&quot;embedding&quot;</span>, datatype=DataType.FLOAT_VECTOR, dim=<span class="hljs-number">768</span>, mmap_enabled=<span class="hljs-literal">True</span>)
 <button class="copy-code-btn"></button></code></pre>
 <p>Pour les paramètres <strong>au niveau de l'index</strong>, le mappage de la mémoire peut être appliqué spécifiquement aux index vectoriels sans affecter les autres types de données. Cette fonctionnalité est inestimable pour les collections qui nécessitent des performances optimisées pour les recherches vectorielles.</p>
 <p>Pour activer ou désactiver le mappage de la mémoire pour un index au sein d'une collection, appelez la méthode <code translate="no">alter_index()</code>, en spécifiant le nom de l'index cible dans <code translate="no">index_name</code> et en réglant <code translate="no">mmap.enabled</code> sur <code translate="no">True</code> ou <code translate="no">False</code>.</p>
@@ -160,7 +184,7 @@ spec:
 <li><p><strong>Les données scalaires peuvent-elles être mappées en mémoire ?</strong></p>
 <p>Le mappage de mémoire peut être appliqué aux données scalaires, mais il n'est pas applicable aux index construits sur des champs scalaires.</p></li>
 <li><p><strong>Comment la priorité est-elle déterminée pour les configurations de mappage de mémoire à différents niveaux ?</strong></p>
-<p>Dans Milvus, lorsque des configurations de mappage de mémoire sont explicitement définies sur plusieurs niveaux, les configurations au niveau de l'index et de la collection ont la priorité la plus élevée, suivie par les configurations au niveau du cluster.</p></li>
-<li><p><strong>Si je mets à niveau Milvus 2.3 et que j'ai configuré le chemin d'accès au répertoire de mappage de mémoire, que se passe-t-il ?</strong></p>
+<p>Dans Milvus, lorsque des configurations de mappage de mémoire sont explicitement définies sur plusieurs niveaux, les configurations au niveau de l'index et de la collection ont la priorité la plus élevée, suivie des configurations au niveau du cluster.</p></li>
+<li><p><strong>Si je mets à niveau Milvus 2.3 et que j'ai configuré le chemin du répertoire de mappage de mémoire, que se passera-t-il ?</strong></p>
 <p>Si vous mettez à niveau Milvus 2.3 et que vous avez configuré le chemin du répertoire de mappage de la mémoire (<code translate="no">mmapDirPath</code>), votre configuration sera conservée et le paramètre par défaut pour le mappage de la mémoire activé (<code translate="no">mmapEnabled</code>) sera <code translate="no">true</code>. Il est important de migrer les métadonnées pour synchroniser la configuration de vos fichiers mappés en mémoire existants. Pour plus de détails, voir <a href="https://milvus.io/docs/upgrade_milvus_standalone-docker.md#Migrate-the-metadata">Migrer les métadonnées</a>.</p></li>
 </ul>

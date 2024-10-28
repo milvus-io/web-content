@@ -61,6 +61,6 @@ title: 통합 개요
 <tr><td><a href="/docs/ko/build_rag_on_arm.md">Arm 아키텍처에 RAG 구축</a></td><td>RAG</td><td>Milvus, Arm</td></tr>
 <tr><td><a href="/docs/ko/build_RAG_with_milvus_and_fireworks.md">Milvus 및 Fireworks AI를 사용한 RAG 빌드</a></td><td>LLM</td><td>Milvus, Fireworks AI</td></tr>
 <tr><td><a href="/docs/ko/build_RAG_with_milvus_and_lepton.md">Milvus 및 Lepton AI로 RAG 빌드하기</a></td><td>LLM</td><td>Milvus, 렙톤 AI</td></tr>
-<tr><td><a href="/docs/ko/build_RAG_with_milvus_and_siliconflow">Milvus 및 SiliconFlow를 사용한 RAG 빌드</a></td><td>LLM</td><td>Milvus, SiliconFlow</td></tr>
+<tr><td><a href="/docs/ko/build_RAG_with_milvus_and_siliconflow.md">Milvus 및 SiliconFlow를 사용한 RAG 빌드</a></td><td>LLM</td><td>Milvus, SiliconFlow</td></tr>
 </tbody>
 </table>

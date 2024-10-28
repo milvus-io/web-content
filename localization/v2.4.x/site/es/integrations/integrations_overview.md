@@ -63,6 +63,6 @@ title: Visión general de las integraciones
 <tr><td><a href="/docs/es/build_rag_on_arm.md">Construir RAG en Arquitectura Arm</a></td><td>RAG</td><td>Milvus, Arm</td></tr>
 <tr><td><a href="/docs/es/build_RAG_with_milvus_and_fireworks.md">Construir RAG con Milvus y Fireworks AI</a></td><td>LLMs</td><td>Milvus, Fireworks AI</td></tr>
 <tr><td><a href="/docs/es/build_RAG_with_milvus_and_lepton.md">Construir GAR con Milvus y Lepton AI</a></td><td>LLMs</td><td>Milvus, Lepton AI</td></tr>
-<tr><td><a href="/docs/es/build_RAG_with_milvus_and_siliconflow">Construir GAR con Milvus y SiliconFlow</a></td><td>LLMs</td><td>Milvus, SiliconFlow</td></tr>
+<tr><td><a href="/docs/es/build_RAG_with_milvus_and_siliconflow.md">Construir GAR con Milvus y SiliconFlow</a></td><td>LLMs</td><td>Milvus, SiliconFlow</td></tr>
 </tbody>
 </table>

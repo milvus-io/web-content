@@ -36,7 +36,7 @@ title: Memorizzazione dei dati abilitata da MMap
       </svg>
     </button></h2><p>A partire da Milvus 2.4, è possibile modificare il file di configurazione statica per configurare le impostazioni predefinite di mappatura della memoria per l'intero cluster prima della distribuzione. Inoltre, è possibile modificare dinamicamente i parametri per perfezionare le impostazioni di mappatura della memoria sia a livello di cluster che di indice. In futuro, gli aggiornamenti estenderanno le capacità di mappatura della memoria per includere le configurazioni a livello di campo.</p>
 <h3 id="Before-cluster-deployment-global-configuration" class="common-anchor-header">Prima della distribuzione del cluster: configurazione globale</h3><p>Prima di distribuire un cluster, le impostazioni <strong>a livello di cluster</strong> applicano la mappatura della memoria all'intero cluster. Questo assicura che tutti i nuovi oggetti aderiscano automaticamente a queste configurazioni. È importante notare che la modifica di queste impostazioni richiede il riavvio del cluster per diventare effettiva.</p>
-<p>Per regolare le impostazioni di mappatura della memoria del cluster, modificare il file <code translate="no">configs/milvus.yaml</code>. In questo file è possibile specificare se abilitare la mappatura della memoria per impostazione predefinita e determinare il percorso della directory per la memorizzazione dei file con mappatura della memoria. Se il percorso (<code translate="no">mmapDirPath</code>) viene lasciato non specificato, il sistema si imposta di memorizzare i file con mappatura della memoria in <code translate="no">{localStorage.path}/mmap</code>. Per ulteriori informazioni, consultare la sezione <a href="https://milvus.io/docs/configure_localstorage.md#localStoragepath">Configurazioni relative allo storage locale</a>.</p>
+<p>Per regolare le impostazioni di mappatura della memoria del cluster, modificare il file <code translate="no">configs/milvus.yaml</code>. In questo file è possibile specificare se abilitare la mappatura della memoria per impostazione predefinita e determinare il percorso della directory per la memorizzazione dei file con mappatura della memoria. Se il percorso (<code translate="no">mmapDirPath</code>) viene lasciato non specificato, il sistema si imposta di memorizzare i file con mappatura della memoria in <code translate="no">{localStorage.path}/mmap</code>. Per ulteriori informazioni, consultare la sezione <a href="https://milvus.io/docs/configure_localstorage.md#localStoragepath">Configurazioni relative alla memoria locale</a>.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># This parameter was set in configs/milvus.yaml</span>
 ...
 queryNode:
@@ -47,17 +47,41 @@ queryNode:
     mmapDirPath: <span class="hljs-built_in">any</span>/valid/path 
 ....
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="During-cluster-operation-dynamic-configuration" class="common-anchor-header">Durante il funzionamento del cluster: configurazione dinamica</h3><p>Durante l'esecuzione del cluster, è possibile regolare dinamicamente le impostazioni di mappatura della memoria a livello di raccolta o di indice.</p>
-<p>A <strong>livello di raccolta</strong>, la mappatura della memoria viene applicata a tutti i dati grezzi non indicizzati di una raccolta, escluse le chiavi primarie, i timestamp e gli ID riga. Questo approccio è particolarmente adatto alla gestione completa di grandi insiemi di dati.</p>
-<p>Per modificare dinamicamente le impostazioni di mappatura della memoria all'interno di un insieme, utilizzare il metodo <code translate="no">set_properties()</code>. In questo caso, è possibile alternare <code translate="no">mmap.enabled</code> tra <code translate="no">True</code> e <code translate="no">False</code>, a seconda delle necessità.</p>
+<p>Dopo <code translate="no">2.4.10</code>, la configurazione <code translate="no">queryNode.mmap.mmapEnabled</code> si divide in quattro campi separati e tutti i valori predefiniti sono <code translate="no">false</code>:</p>
+<ul>
+<li><code translate="no">queryNode.mmap.vectorField</code>, controlla se i dati del vettore sono mmap;</li>
+<li><code translate="no">queryNode.mmap.vectorIndex</code>, controlla se l'indice del vettore è mmap;</li>
+<li><code translate="no">queryNode.mmap.scalarField</code>, controlla se i dati scalari sono mmap;</li>
+<li><code translate="no">queryNode.mmap.scalarIndex</code>, controlla se l'indice scalare è mmap;</li>
+</ul>
+<pre><code translate="no" class="language-yaml"><span class="hljs-comment"># This parameter was set in configs/milvus.yaml</span>
+...
+queryNode:
+  mmap:
+    vectorField: false <span class="hljs-comment"># Enable mmap for loading vector data</span>
+    vectorIndex: false <span class="hljs-comment"># Enable mmap for loading vector index</span>
+    scalarField: false <span class="hljs-comment"># Enable mmap for loading scalar data</span>
+    scalarIndex: false <span class="hljs-comment"># Enable mmap for loading scalar index</span>
+....
+<button class="copy-code-btn"></button></code></pre>
+<p>Inoltre, solo l'indice vettoriale e l'mmap dei dati vettoriali possono essere attivati e disattivati per una collezione individualmente, ma non per altre.</p>
+<p>Compatibilità: Se la configurazione originale <code translate="no">queryNode.mmap.mmapEnabled</code> è impostata su <code translate="no">true</code>, la nuova configurazione aggiunta sarà impostata su <code translate="no">true</code> in questo momento. Se <code translate="no">queryNode.mmap.mmapEnabled</code> è impostato su <code translate="no">false</code>, se la nuova configurazione è impostata su <code translate="no">true</code>, il valore finale sarà <code translate="no">true</code>.</p>
+<h3 id="During-cluster-operation-dynamic-configuration" class="common-anchor-header">Durante il funzionamento del cluster: configurazione dinamica</h3><p>Durante l'esecuzione del cluster, è possibile regolare dinamicamente le impostazioni di mappatura della memoria a livello di collezione o di indice.</p>
+<p>A <strong>livello di collezione</strong>, la mappatura della memoria viene applicata a tutti i dati grezzi non indicizzati di una collezione, escluse le chiavi primarie, i timestamp e gli ID riga. Questo approccio è particolarmente adatto alla gestione completa di grandi insiemi di dati.</p>
+<p>Per modificare dinamicamente le impostazioni di mappatura della memoria all'interno di un insieme, utilizzare il metodo <code translate="no">set_properties()</code>. In questo caso, è possibile alternare <code translate="no">mmap.enabled</code> tra <code translate="no">True</code> o <code translate="no">False</code>, a seconda delle necessità.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Get existing collection</span>
 collection = Collection(<span class="hljs-string">&quot;test_collection&quot;</span>) <span class="hljs-comment"># Replace with your collection name</span>
 
 <span class="hljs-comment"># Set memory mapping property to True or Flase</span>
 collection.set_properties({<span class="hljs-string">&#x27;mmap.enabled&#x27;</span>: <span class="hljs-literal">True</span>})
 <button class="copy-code-btn"></button></code></pre>
+<p>Dopo <code translate="no">2.4.10</code>, le impostazioni di mappatura della memoria all'interno di una raccolta, utilizzare il metodo <code translate="no">add_field</code>. Qui è possibile alternare <code translate="no">mmap_enabled</code> tra <code translate="no">True</code> o <code translate="no">False</code>, a seconda delle necessità.</p>
+<pre><code translate="no" class="language-python">schema = MilvusClient.create_schema()
+
+schema.add_field(field_name=<span class="hljs-string">&quot;embedding&quot;</span>, datatype=DataType.FLOAT_VECTOR, dim=<span class="hljs-number">768</span>, mmap_enabled=<span class="hljs-literal">True</span>)
+<button class="copy-code-btn"></button></code></pre>
 <p>Per le impostazioni <strong>a livello di indice</strong>, la mappatura della memoria può essere applicata specificamente agli indici vettoriali senza influenzare gli altri tipi di dati. Questa funzione è preziosa per le collezioni che richiedono prestazioni ottimizzate per le ricerche vettoriali.</p>
-<p>Per attivare o disattivare la mappatura della memoria per un indice all'interno di una collezione, richiamare il metodo <code translate="no">alter_index()</code>, specificando il nome dell'indice di destinazione in <code translate="no">index_name</code> e impostando <code translate="no">mmap.enabled</code> su <code translate="no">True</code> o <code translate="no">False</code>.</p>
+<p>Per abilitare o disabilitare la mappatura della memoria per un indice all'interno di una collezione, richiamare il metodo <code translate="no">alter_index()</code>, specificando il nome dell'indice di destinazione in <code translate="no">index_name</code> e impostando <code translate="no">mmap.enabled</code> su <code translate="no">True</code> o <code translate="no">False</code>.</p>
 <pre><code translate="no" class="language-python">collection.alter_index(
     index_name=<span class="hljs-string">&quot;vector_index&quot;</span>, <span class="hljs-comment"># Replace with your vector index name</span>
     extra_params={<span class="hljs-string">&quot;mmap.enabled&quot;</span>: <span class="hljs-literal">True</span>} <span class="hljs-comment"># Enable memory mapping for index</span>

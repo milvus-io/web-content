@@ -1,7 +1,6 @@
 ---
 id: scale-dependencies.md
 title: 스케일 종속성
-summary: ''
 ---
 <h1 id="Scale-Milvus-Dependencies" class="common-anchor-header">Milvus 종속성 확장<button data-href="#Scale-Milvus-Dependencies" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -20,7 +19,7 @@ summary: ''
       </svg>
     </button></h1><p>Milvus는 MinIO, Kafka, Pulsar 등 다양한 종속 요소에 의존합니다. 이러한 구성 요소를 확장하면 다양한 요구 사항에 대한 Milvus의 적응성을 향상시킬 수 있습니다.</p>
 <div class="alert note">
-<p>밀버스 오퍼레이터 사용자의 경우 <a href="/docs/ko/manage_dependencies.md">밀버스 오퍼레이터 종속성 관리를</a> 참조하세요.</p>
+<p>Milvus 오퍼레이터 사용자의 경우 <a href="/docs/ko/object_storage_operator.md">Milvus 오퍼레이터로 오브젝트 스토리지 구성하기</a>, Milvus 오퍼레이터로 <a href="/docs/ko/meta_storage_operator.md">메타 스토리지 구성하기</a>, Milvus <a href="/docs/ko/message_storage_operator.md">오퍼레이터로 메시지 스토리지 구성을</a> 참조하세요.</p>
 </div>
 <h2 id="Scale-MinIO" class="common-anchor-header">MinIO 스케일링<button data-href="#Scale-MinIO" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -37,7 +36,7 @@ summary: ''
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Increase-resources-per-MinIO-pod" class="common-anchor-header">MinIO 포드당 리소스 늘리기</h3><p>Milvus에서 사용하는 오브젝트 스토리지 시스템인 MinIO는 각 포드에 대해 CPU 및 메모리 리소스를 늘릴 수 있습니다.</p>
+    </button></h2><h3 id="Increase-resources-per-MinIO-pod" class="common-anchor-header">MinIO 포드당 리소스 늘리기</h3><p>Milvus에서 사용하는 오브젝트 스토리지 시스템인 MinIO는 각 포드마다 CPU와 메모리 리소스를 늘릴 수 있습니다.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># new-values.yaml</span>
 minio:
   resources:

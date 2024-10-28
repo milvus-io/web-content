@@ -71,9 +71,10 @@ title: Requisitos para instalar o Milvus com o Docker Compose
 <tbody>
 <tr><td>macOS 10.14 ou posterior</td><td>Ambiente de trabalho do Docker</td><td>Defina a máquina virtual (VM) do Docker para usar um mínimo de 2 CPUs virtuais (vCPUs) e 8 GB de memória inicial. Caso contrário, a instalação poderá falhar. <br/>Consulte <a href="https://docs.docker.com/desktop/mac/install/">Instalar o Docker Desktop no Mac</a> para obter mais informações.</td></tr>
 <tr><td>Plataformas Linux</td><td><ul><li>Docker 19.03 ou posterior</li><li>Docker Compose 1.25.1 ou posterior</li></ul></td><td>Consulte <a href="https://docs.docker.com/engine/install/">Instalar o Docker Engine</a> e <a href="https://docs.docker.com/compose/install/">Instalar o Docker Compose</a> para obter mais informações.</td></tr>
-<tr><td>Windows com WSL 2 ativado</td><td>Ambiente de trabalho do Docker</td><td>Recomendamos que armazene o código-fonte e outros dados montados em contentores Linux no sistema de ficheiros Linux em vez de no sistema de ficheiros Windows.<br/>Consulte <a href="https://docs.docker.com/desktop/windows/install/#wsl-2-backend">Instalar o Docker Desktop no Windows com backend WSL 2</a> para obter mais informações.</td></tr>
+<tr><td>Windows com WSL 2 ativado</td><td>Ambiente de trabalho do Docker</td><td>Recomendamos que armazene o código-fonte e outros dados montados em contentores Linux no sistema de ficheiros Linux em vez do sistema de ficheiros Windows.<br/>Consulte <a href="https://docs.docker.com/desktop/windows/install/#wsl-2-backend">Instalar o Docker Desktop no Windows com backend WSL 2</a> para obter mais informações.</td></tr>
 </tbody>
 </table>
+<p>As seguintes dependências serão obtidas e configuradas automaticamente quando o Milvus Standalone for instalado usando o script do Docker ou a configuração do Docker Compose:</p>
 <table>
 <thead>
 <tr><th>Software</th><th>Versão do software</th><th>Nota</th></tr>

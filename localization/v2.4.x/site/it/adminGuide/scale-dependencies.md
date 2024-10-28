@@ -1,7 +1,6 @@
 ---
 id: scale-dependencies.md
 title: Dipendenze di scala
-summary: ''
 ---
 <h1 id="Scale-Milvus-Dependencies" class="common-anchor-header">Scala delle dipendenze di Milvus<button data-href="#Scale-Milvus-Dependencies" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -18,9 +17,9 @@ summary: ''
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Milvus si basa su varie dipendenze come MinIO, Kafka, Pulsar e etcd. Scalare questi componenti può migliorare l'adattabilità di Milvus a diversi requisiti.</p>
+    </button></h1><p>Milvus si basa su varie dipendenze come MinIO, Kafka, Pulsar e etcd. La scalabilità di questi componenti può migliorare l'adattabilità di Milvus alle diverse esigenze.</p>
 <div class="alert note">
-<p>Per gli utenti di Milvus Operator, consultare <a href="/docs/it/manage_dependencies.md">Gestione delle dipendenze per Milvus Operator</a>.</p>
+<p>Per gli utenti di Milvus Operator, consultare <a href="/docs/it/object_storage_operator.md">Configurare l'archiviazione degli oggetti con Milvus Operator</a>, <a href="/docs/it/meta_storage_operator.md">Configurare la metaconservazione con Milvus Operator</a> e <a href="/docs/it/message_storage_operator.md">Configurare l'archiviazione dei messaggi con Milvus Operator</a>.</p>
 </div>
 <h2 id="Scale-MinIO" class="common-anchor-header">Scalare MinIO<button data-href="#Scale-MinIO" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -37,7 +36,7 @@ summary: ''
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Increase-resources-per-MinIO-pod" class="common-anchor-header">Aumentare le risorse per pod MinIO</h3><p>MinIO, un sistema di archiviazione di oggetti utilizzato da Milvus, può essere aumentato nelle risorse di CPU e memoria per ogni pod.</p>
+    </button></h2><h3 id="Increase-resources-per-MinIO-pod" class="common-anchor-header">Aumentare le risorse per pod MinIO</h3><p>MinIO, un sistema di archiviazione a oggetti utilizzato da Milvus, può aumentare le risorse di CPU e memoria per ogni pod.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># new-values.yaml</span>
 minio:
   resources:

@@ -24,7 +24,7 @@ title: 集成概述
 <tr><th>教程</th><th>使用案例</th><th>合作伙伴或堆栈</th></tr>
 </thead>
 <tbody>
-<tr><td><a href="/docs/zh/integrate_with_llamaindex.md">使用 Milvus 和 LlamaIndex 的 RAG</a></td><td>RAG</td><td>Milvus 和 LLamaIndex</td></tr>
+<tr><td><a href="/docs/zh/integrate_with_llamaindex.md">使用 Milvus 和 LlamaIndex 的 RAG</a></td><td>RAG</td><td>Milvus、LLamaIndex</td></tr>
 <tr><td><a href="/docs/zh/integrate_with_langchain.md">使用 Milvus 和 LangChain 的 RAG</a></td><td>RAG</td><td>Milvus, LangChain</td></tr>
 <tr><td><a href="/docs/zh/milvus_hybrid_search_retriever.md">Milvus 混合搜索检索器在 LangChain 中的应用</a></td><td>混合搜索</td><td>Milvus、LangChain</td></tr>
 <tr><td><a href="/docs/zh/integrate_with_openai.md">使用 Milvus 和 OpenAI 的语义搜索</a></td><td>语义搜索</td><td>Milvus、OpenAI</td></tr>
@@ -61,6 +61,6 @@ title: 集成概述
 <tr><td><a href="/docs/zh/build_rag_on_arm.md">在 Arm 架构上构建 RAG</a></td><td>RAG</td><td>Milvus、Arm</td></tr>
 <tr><td><a href="/docs/zh/build_RAG_with_milvus_and_fireworks.md">使用 Milvus 和 Fireworks AI 构建 RAG</a></td><td>LLMs</td><td>Milvus、Fireworks AI</td></tr>
 <tr><td><a href="/docs/zh/build_RAG_with_milvus_and_lepton.md">使用 Milvus 和 Lepton AI 构建 RAG</a></td><td>LLMs</td><td>Milvus、Lepton AI</td></tr>
-<tr><td><a href="/docs/zh/build_RAG_with_milvus_and_siliconflow">使用 Milvus 和 SiliconFlow 构建 RAG</a></td><td>LLMs</td><td>Milvus、SiliconFlow</td></tr>
+<tr><td><a href="/docs/zh/build_RAG_with_milvus_and_siliconflow.md">使用 Milvus 和 SiliconFlow 构建 RAG</a></td><td>LLMs</td><td>Milvus、SiliconFlow</td></tr>
 </tbody>
 </table>

@@ -1,7 +1,7 @@
 ---
 id: mmap.md
 summary: MMap ermöglicht mehr Daten in einem einzigen Knoten.
-title: MMap-fähige Datenspeicherung
+title: MMap-aktivierte Datenspeicherung
 ---
 <h1 id="MMap-enabled-Data-Storage" class="common-anchor-header">MMap-aktivierte Datenspeicherung<button data-href="#MMap-enabled-Data-Storage" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -18,7 +18,7 @@ title: MMap-fähige Datenspeicherung
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>In Milvus ermöglichen memory-mapped Dateien die direkte Zuordnung von Dateiinhalten zum Speicher. Diese Funktion erhöht die Speichereffizienz, insbesondere in Situationen, in denen der verfügbare Speicher knapp, das vollständige Laden von Daten aber nicht möglich ist. Dieser Optimierungsmechanismus kann die Datenkapazität erhöhen und gleichzeitig die Leistung bis zu einer bestimmten Grenze sicherstellen; wenn die Datenmenge jedoch den Speicherplatz zu sehr übersteigt, kann die Such- und Abfrageleistung ernsthaft beeinträchtigt werden, daher sollten Sie diese Funktion je nach Bedarf ein- oder ausschalten.</p>
+    </button></h1><p>In Milvus ermöglichen memory-mapped Dateien die direkte Zuordnung von Dateiinhalten zum Speicher. Diese Funktion erhöht die Speichereffizienz, insbesondere in Situationen, in denen der verfügbare Speicher knapp, das vollständige Laden von Daten aber nicht möglich ist. Dieser Optimierungsmechanismus kann die Datenkapazität erhöhen und gleichzeitig die Leistung bis zu einer gewissen Grenze sicherstellen; wenn die Datenmenge jedoch den Speicherplatz zu sehr übersteigt, kann die Such- und Abfrageleistung ernsthaft beeinträchtigt werden, weshalb Sie diese Funktion je nach Bedarf ein- oder ausschalten sollten.</p>
 <h2 id="Configure-memory-mapping" class="common-anchor-header">Konfigurieren Sie die Speicherzuordnung<button data-href="#Configure-memory-mapping" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -47,6 +47,25 @@ queryNode:
     mmapDirPath: <span class="hljs-built_in">any</span>/valid/path 
 ....
 <button class="copy-code-btn"></button></code></pre>
+<p>Nach <code translate="no">2.4.10</code> teilt sich die Konfiguration <code translate="no">queryNode.mmap.mmapEnabled</code> in die folgenden vier separaten Felder auf, und alle Voreinstellungen sind <code translate="no">false</code>:</p>
+<ul>
+<li><code translate="no">queryNode.mmap.vectorField</code>, steuert, ob Vektordaten mmap sind;</li>
+<li><code translate="no">queryNode.mmap.vectorIndex</code>, steuert, ob der Vektorindex mmap ist;</li>
+<li><code translate="no">queryNode.mmap.scalarField</code>, steuert, ob skalare Daten mmap sind;</li>
+<li><code translate="no">queryNode.mmap.scalarIndex</code>, steuert, ob der Skalarindex mmap ist;</li>
+</ul>
+<pre><code translate="no" class="language-yaml"><span class="hljs-comment"># This parameter was set in configs/milvus.yaml</span>
+...
+queryNode:
+  mmap:
+    vectorField: false <span class="hljs-comment"># Enable mmap for loading vector data</span>
+    vectorIndex: false <span class="hljs-comment"># Enable mmap for loading vector index</span>
+    scalarField: false <span class="hljs-comment"># Enable mmap for loading scalar data</span>
+    scalarIndex: false <span class="hljs-comment"># Enable mmap for loading scalar index</span>
+....
+<button class="copy-code-btn"></button></code></pre>
+<p>Darüber hinaus können nur Vektorindex und Vektordaten mmap für eine einzelne Sammlung ein- und ausgeschaltet werden, nicht aber für andere.</p>
+<p>Kompatibilität: Wenn die ursprüngliche Konfiguration <code translate="no">queryNode.mmap.mmapEnabled</code> auf <code translate="no">true</code> eingestellt ist, wird die neu hinzugefügte Konfiguration zu diesem Zeitpunkt auf <code translate="no">true</code> eingestellt. Wenn <code translate="no">queryNode.mmap.mmapEnabled</code> auf <code translate="no">false</code> eingestellt ist, wird die neue Konfiguration auf <code translate="no">true</code> eingestellt, der endgültige Wert ist <code translate="no">true</code>.</p>
 <h3 id="During-cluster-operation-dynamic-configuration" class="common-anchor-header">Während des Clusterbetriebs: dynamische Konfiguration</h3><p>Während der Cluster-Laufzeit können Sie die Einstellungen für das Memory Mapping entweder auf der Ebene der Sammlung oder des Index dynamisch anpassen.</p>
 <p>Auf der <strong>Sammlungsebene</strong> wird das Memory Mapping auf alle nicht indizierten Rohdaten innerhalb einer Sammlung angewendet, mit Ausnahme von Primärschlüsseln, Zeitstempeln und Zeilen-IDs. Dieser Ansatz eignet sich besonders für die umfassende Verwaltung großer Datensätze.</p>
 <p>Für dynamische Anpassungen der Speicherzuordnungseinstellungen innerhalb einer Sammlung verwenden Sie die Methode <code translate="no">set_properties()</code>. Hier können Sie <code translate="no">mmap.enabled</code> je nach Bedarf zwischen <code translate="no">True</code> oder <code translate="no">False</code> hin- und herschalten.</p>
@@ -55,6 +74,11 @@ collection = Collection(<span class="hljs-string">&quot;test_collection&quot;</s
 
 <span class="hljs-comment"># Set memory mapping property to True or Flase</span>
 collection.set_properties({<span class="hljs-string">&#x27;mmap.enabled&#x27;</span>: <span class="hljs-literal">True</span>})
+<button class="copy-code-btn"></button></code></pre>
+<p>Nach <code translate="no">2.4.10</code> verwenden Sie für die Speicherzuordnungseinstellungen innerhalb einer Sammlung die Methode <code translate="no">add_field</code>. Hier können Sie <code translate="no">mmap_enabled</code> je nach Bedarf zwischen <code translate="no">True</code> oder <code translate="no">False</code> hin- und herschalten.</p>
+<pre><code translate="no" class="language-python">schema = MilvusClient.create_schema()
+
+schema.add_field(field_name=<span class="hljs-string">&quot;embedding&quot;</span>, datatype=DataType.FLOAT_VECTOR, dim=<span class="hljs-number">768</span>, mmap_enabled=<span class="hljs-literal">True</span>)
 <button class="copy-code-btn"></button></code></pre>
 <p>Bei Einstellungen <strong>auf Indexebene</strong> kann die Speicherzuordnung speziell auf Vektorindizes angewendet werden, ohne andere Datentypen zu beeinträchtigen. Diese Funktion ist von unschätzbarem Wert für Sammlungen, die eine optimierte Leistung für Vektorsuchen erfordern.</p>
 <p>Um das Memory Mapping für einen Index innerhalb einer Sammlung zu aktivieren oder zu deaktivieren, rufen Sie die Methode <code translate="no">alter_index()</code> auf, geben den Namen des Zielindex in <code translate="no">index_name</code> an und setzen <code translate="no">mmap.enabled</code> auf <code translate="no">True</code> oder <code translate="no">False</code>.</p>
@@ -146,7 +170,7 @@ spec:
       </svg>
     </button></h2><ul>
 <li><p><strong>In welchen Szenarien ist es empfehlenswert, Memory Mapping zu aktivieren? Was sind die Nachteile nach der Aktivierung dieser Funktion?</strong></p>
-<p>Memory Mapping wird empfohlen, wenn der Speicher begrenzt ist oder wenn die Leistungsanforderungen moderat sind. Die Aktivierung dieser Funktion erhöht die Kapazität für das Laden von Daten. Bei einer Konfiguration mit 2 CPUs und 8 GB Arbeitsspeicher können durch die Aktivierung des Memory Mappings beispielsweise bis zu viermal mehr Daten geladen werden, als wenn die Funktion nicht aktiviert ist. Die Auswirkungen auf die Leistung sind unterschiedlich:</p>
+<p>Memory Mapping wird empfohlen, wenn der Speicher begrenzt ist oder wenn die Leistungsanforderungen moderat sind. Die Aktivierung dieser Funktion erhöht die Kapazität für das Laden von Daten. Bei einer Konfiguration mit 2 CPUs und 8 GB Arbeitsspeicher können durch die Aktivierung des Memory Mappings beispielsweise bis zu viermal mehr Daten geladen werden, als wenn die Funktion nicht aktiviert wird. Die Auswirkungen auf die Leistung sind unterschiedlich:</p>
 <ul>
 <li><p>Bei ausreichendem Arbeitsspeicher ist die erwartete Leistung ähnlich wie bei der Verwendung von reinem Arbeitsspeicher.</p></li>
 <li><p>Bei unzureichendem Speicher kann sich die erwartete Leistung verschlechtern.</p></li>
@@ -162,5 +186,5 @@ spec:
 <li><p><strong>Wie wird die Priorität für Speicherzuordnungskonfigurationen über verschiedene Ebenen hinweg bestimmt?</strong></p>
 <p>Wenn in Milvus explizit Speicher-Mapping-Konfigurationen über mehrere Ebenen hinweg definiert werden, haben Konfigurationen auf Index- und Sammlungsebene die höchste Priorität, gefolgt von Konfigurationen auf Clusterebene.</p></li>
 <li><p><strong>Was passiert, wenn ich ein Upgrade von Milvus 2.3 durchführe und den Verzeichnispfad für das Memory Mapping konfiguriert habe?</strong></p>
-<p>Wenn Sie ein Upgrade von Milvus 2.3 durchführen und den Speicherabbildungsverzeichnispfad (<code translate="no">mmapDirPath</code>) konfiguriert haben, wird Ihre Konfiguration beibehalten, und die Standardeinstellung für aktiviertes Speicherabbild (<code translate="no">mmapEnabled</code>) lautet <code translate="no">true</code>. Es ist wichtig, die Metadaten zu migrieren, um die Konfiguration Ihrer bestehenden Memory-Mapping-Dateien zu synchronisieren. Weitere Einzelheiten finden Sie unter <a href="https://milvus.io/docs/upgrade_milvus_standalone-docker.md#Migrate-the-metadata">Migrieren der Metadaten</a>.</p></li>
+<p>Wenn Sie ein Upgrade von Milvus 2.3 durchführen und den Speicherabbildungsverzeichnispfad (<code translate="no">mmapDirPath</code>) konfiguriert haben, wird Ihre Konfiguration beibehalten, und die Standardeinstellung für das aktivierte Speicherabbild (<code translate="no">mmapEnabled</code>) lautet <code translate="no">true</code>. Es ist wichtig, die Metadaten zu migrieren, um die Konfiguration Ihrer bestehenden Memory-Mapping-Dateien zu synchronisieren. Weitere Einzelheiten finden Sie unter <a href="https://milvus.io/docs/upgrade_milvus_standalone-docker.md#Migrate-the-metadata">Migrieren der Metadaten</a>.</p></li>
 </ul>

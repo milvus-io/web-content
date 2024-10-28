@@ -74,6 +74,7 @@ title: Requisiti per l'installazione di Milvus con Docker Compose
 <tr><td>Windows con WSL 2 abilitato</td><td>Desktop Docker</td><td>Si consiglia di memorizzare il codice sorgente e gli altri dati montati in container Linux nel file system di Linux anziché in quello di Windows.<br/>Per ulteriori informazioni, vedere <a href="https://docs.docker.com/desktop/windows/install/#wsl-2-backend">Installazione di Docker Desktop su Windows con backend WSL 2</a>.</td></tr>
 </tbody>
 </table>
+<p>Le seguenti dipendenze vengono ottenute e configurate automaticamente quando Milvus Standalone viene installato utilizzando lo script Docker o la configurazione di Docker Compose:</p>
 <table>
 <thead>
 <tr><th>Software</th><th>Versione</th><th>Nota</th></tr>

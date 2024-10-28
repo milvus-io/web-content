@@ -42,7 +42,7 @@ title: Docker ComposeでMilvusをインストールするための要件
 </thead>
 <tbody>
 <tr><td>CPU</td><td><ul><li>インテル第2世代コアCPU以上</li><li>アップルシリコン</li></ul></td><td><ul><li>スタンドアロン：4コア以上</li><li>クラスタ8コア以上</li></ul></td><td></td></tr>
-<tr><td>CPU命令セット</td><td><ul><li>SSE4.2</li><li>AVX</li><li>AVX2</li><li>AVX-512</li></ul></td><td><ul><li>SSE4.2</li><li>AVX</li><li>AVX2</li><li>AVX-512</li></ul></td><td>Milvusのベクトル類似度検索とインデックス作成には、CPUが単一命令複数データ(SIMD)拡張セットをサポートしている必要があります。CPUが少なくとも1つのSIMD拡張セットに対応していることを確認してください。詳細は<a href="https://en.wikipedia.org/wiki/Advanced_Vector_Extensions#CPUs_with_AVX">AVXを搭載したCPUを</a>参照してください。</td></tr>
+<tr><td>CPU命令セット</td><td><ul><li>SSE4.2</li><li>AVX</li><li>AVX2</li><li>AVX-512</li></ul></td><td><ul><li>SSE4.2</li><li>AVX</li><li>AVX2</li><li>AVX-512</li></ul></td><td>Milvusのベクトル類似度検索とインデックス作成には、CPUがSIMD(Single Instruction, Multiple Data)拡張セットをサポートしている必要があります。CPUが少なくとも1つのSIMD拡張セットに対応していることを確認してください。詳細は<a href="https://en.wikipedia.org/wiki/Advanced_Vector_Extensions#CPUs_with_AVX">AVXを搭載したCPUを</a>参照してください。</td></tr>
 <tr><td>RAM</td><td><ul><li>スタンドアロン: 8G</li><li>クラスタ32G</li></ul></td><td><ul><li>スタンドアロン: 16G</li><li>クラスタ128G</li></ul></td><td>RAMのサイズはデータ容量によって異なります。</td></tr>
 <tr><td>ハードドライブ</td><td>SATA 3.0 SSD以上</td><td>NVMe SSD以上</td><td>ハードドライブのサイズはデータ容量によって異なります。</td></tr>
 </tbody>
@@ -69,9 +69,10 @@ title: Docker ComposeでMilvusをインストールするための要件
 <tbody>
 <tr><td>macOS 10.14以降</td><td>Dockerデスクトップ</td><td>Docker仮想マシン（VM）は、最低2つの仮想CPU（vCPU）と8GBの初期メモリを使用するように設定してください。そうしないとインストールに失敗する可能性があります。<br/>詳細については、<a href="https://docs.docker.com/desktop/mac/install/">MacにDocker Desktopをインストールするを</a>参照してください。</td></tr>
 <tr><td>Linuxプラットフォーム</td><td><ul><li>Docker 19.03以降</li><li>Docker Compose 1.25.1以降</li></ul></td><td>詳細は<a href="https://docs.docker.com/engine/install/">Docker Engineのインストールと</a> <a href="https://docs.docker.com/compose/install/">Docker Composeのインストールを</a>参照してください。</td></tr>
-<tr><td>WSL 2が有効なWindows</td><td>Dockerデスクトップ</td><td>Linuxコンテナにバインドマウントされたソースコードやその他のデータは、WindowsファイルシステムではなくLinuxファイルシステムに保存することをお勧めします。<br/>詳細は、<a href="https://docs.docker.com/desktop/windows/install/#wsl-2-backend">WSL 2バックエンドを使用したWindowsへのDocker Desktopのインストールを</a>参照してください。</td></tr>
+<tr><td>WSL 2が有効なWindows</td><td>Dockerデスクトップ</td><td>Linuxコンテナにバインドマウントされたソースコードやその他のデータは、Windowsファイルシステムではなく、Linuxファイルシステムに保存することをお勧めします。<br/>詳細は<a href="https://docs.docker.com/desktop/windows/install/#wsl-2-backend">Install Docker Desktop on Windows with WSL 2 backend</a>を参照してください。</td></tr>
 </tbody>
 </table>
+<p>Dockerスクリプト、またはDocker Compose設定を使用してMilvus Standaloneをインストールすると、以下の依存関係が自動的に取得され、設定されます：</p>
 <table>
 <thead>
 <tr><th>ソフトウェア</th><th>バージョン</th><th>備考</th></tr>
@@ -105,6 +106,6 @@ fio --rw=write --ioengine=<span class="hljs-built_in">sync</span> --fdatasync=1 
       </svg>
     </button></h2><p>ハードウェアとソフトウェアが上記の要件を満たしていれば、次のことができます。</p>
 <ul>
-<li><a href="/docs/ja/install_standalone-docker.md">DockerでMilvusを実行する</a></li>
+<li><a href="/docs/ja/install_standalone-docker.md">DockerでMilvusを実行する。</a></li>
 <li><a href="/docs/ja/install_standalone-docker-compose.md">Docker ComposeでMilvusを実行する</a></li>
 </ul>
