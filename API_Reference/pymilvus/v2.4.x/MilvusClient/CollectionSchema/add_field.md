@@ -78,7 +78,7 @@ add_field(
 
 - **max_length** (*int*) -
 
-    The maximum length of the field value.
+    The maximum byte length for strings allowed to be inserted. Note that multibyte characters (e.g., Unicode characters) may occupy more than one byte each, so ensure the byte length of inserted strings does not exceed the specified limit. Value range: [1, 65,535].
 
     This is mandatory for a **DataType.VARCHAR** field.
 

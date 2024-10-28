@@ -20,7 +20,7 @@ Constructs a **RemoteBulkWriter** object with a set of parameters, such as **sch
 
 ```python
 from pymilvus import CollectionSchema
-from pymilvus.bulk_writer import LocalBulkWriter, BulkFileType
+from pymilvus.bulk_writer import RemoteBulkWriter, BulkFileType
 
 writer = RemoteBulkWriter(
     schema=CollectionSchema(),
