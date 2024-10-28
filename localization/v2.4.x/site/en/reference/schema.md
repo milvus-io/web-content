@@ -72,7 +72,7 @@ title: Manage Schema
         </tr>
         <tr>
             <td><code translate="no">max_length</code> (Mandatory for VARCHAR field)</td>
-            <td>Maximum length of strings allowed to be inserted.</td>
+            <td>Maximum byte length for strings allowed to be inserted. Note that multibyte characters (e.g., Unicode characters) may occupy more than one byte each, so ensure the byte length of inserted strings does not exceed the specified limit.</td>
             <td>[1, 65,535]</td>
         </tr>
     <tr>
