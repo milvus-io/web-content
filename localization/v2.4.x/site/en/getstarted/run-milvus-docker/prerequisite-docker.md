@@ -72,6 +72,7 @@ title: Requirements for Installing Milvus with Docker Compose
 <tr><td>Windows with WSL 2 enabled</td><td>Docker Desktop</td><td>We recommend that you store source code and other data bind-mounted into Linux containers in the Linux file system instead of the Windows file system.<br/>See <a href="https://docs.docker.com/desktop/windows/install/#wsl-2-backend">Install Docker Desktop on Windows with WSL 2 backend</a> for more information.</td></tr>
 </tbody>
 </table>
+<p>The following dependencies will be obtained and configured automatically when Milvus Standalone is installed using the Docker script, or the Docker Compose configuration:</p>
 <table>
 <thead>
 <tr><th>Software</th><th>Version</th><th>Note</th></tr>
