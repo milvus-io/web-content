@@ -30,6 +30,30 @@ queryNode:
 ....
 ```
 
+After `2.4.10`, the configuration `queryNode.mmap.mmapEnabled` splits into below four seperate fields, and all defaults are `false`:
+
+- `queryNode.mmap.vectorField`, controls whether vector data is mmap;
+- `queryNode.mmap.vectorIndex`, controls whether vector index is mmap;
+- `queryNode.mmap.scalarField`, controls whether scalar data is mmap;
+- `queryNode.mmap.scalarIndex`, controls whether scalar index is mmap;
+
+```yaml
+# This parameter was set in configs/milvus.yaml
+...
+queryNode:
+  mmap:
+    vectorField: false # Enable mmap for loading vector data
+    vectorIndex: false # Enable mmap for loading vector index
+    scalarField: false # Enable mmap for loading scalar data
+    scalarIndex: false # Enable mmap for loading scalar index
+....
+```
+
+In addition, only vector index and vector data mmap can be turned on and off for a collection individually, but not for others.
+
+Compatibility: If the original configuration `queryNode.mmap.mmapEnabled` is set to `true`, the newly added configuration will be set to `true` at this time. If `queryNode.mmap.mmapEnabled` is set to `false`, if the new configuration is set to `true`, the final value will be `true`.
+
+
 ### During cluster operation: dynamic configuration
 
 During cluster runtime, you can dynamically adjust memory mapping settings at either the collection or index level.
@@ -44,6 +68,14 @@ collection = Collection("test_collection") # Replace with your collection name
 
 # Set memory mapping property to True or Flase
 collection.set_properties({'mmap.enabled': True})
+```
+
+After `2.4.10`, the memory mapping settings within a collection, utilize the `add_field` method. Here, you can toggle `mmap_enabled` between `True` or `False` as needed.
+
+```python
+schema = MilvusClient.create_schema()
+
+schema.add_field(field_name="embedding", datatype=DataType.FLOAT_VECTOR, dim=768, mmap_enabled=True)
 ```
 
 For __index-level__ settings, memory mapping can be specifically applied to vector indexes without affecting other data types. This feature is invaluable for collections that require optimized performance for vector searches.
