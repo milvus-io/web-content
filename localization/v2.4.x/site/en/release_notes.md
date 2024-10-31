@@ -19,6 +19,86 @@ title: Release Notes
         ></path>
       </svg>
     </button></h1><p>Find out what’s new in Milvus! This page summarizes new features, improvements, known issues, and bug fixes in each release. You can find the release notes for each released version after v2.4.0 in this section. We suggest that you regularly visit this page to learn about updates.</p>
+<h2 id="v2414" class="common-anchor-header">v2.4.14<button data-href="#v2414" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>Release Date: October 31, 2024</p>
+<table>
+<thead>
+<tr><th>Milvus version</th><th>Python SDK version</th><th>Java SDK version</th><th>Node.js SDK version</th></tr>
+</thead>
+<tbody>
+<tr><td>2.4.14</td><td>2.4.9</td><td>2.4.7</td><td>2.4.9</td></tr>
+</tbody>
+</table>
+<p>Milvus 2.4.14 addresses a critical issue from version 2.4.13 that could cause collection information to be lost after <code translate="no">snapshotKV</code> garbage collection. It also fixed a couple of resource leaks. Additionally, this release includes numerous enhancements focused on improving stability in large-scale delete operations and compaction performance.</p>
+<h3 id="Features" class="common-anchor-header">Features</h3><ul>
+<li>Supported memory mode chunk cache (<a href="https://github.com/milvus-io/milvus/pull/35836">#35836</a>)</li>
+<li>Supported db for bulkinsert (<a href="https://github.com/milvus-io/milvus/pull/37017">#37017</a>)</li>
+</ul>
+<h3 id="Improvements" class="common-anchor-header">Improvements</h3><ul>
+<li>Delete/Compaction Optimization
+<ul>
+<li>Enabled parallel execution of l0 compactions (<a href="https://github.com/milvus-io/milvus/pull/36985">#36985</a>)</li>
+<li>Batched forward delete when using direct forward (<a href="https://github.com/milvus-io/milvus/pull/37107">#37107</a>)</li>
+<li>Skipped loading delta data in delegater when using remoteload (<a href="https://github.com/milvus-io/milvus/pull/37112">#37112</a>)</li>
+<li>Directly forwarded delta excluding l0 segments (<a href="https://github.com/milvus-io/milvus/pull/36914">#36914</a>)</li>
+<li>Added prioritization of compaction tasks in DataCoord (<a href="https://github.com/milvus-io/milvus/pull/36979">#36979</a>)</li>
+<li>Tracked complex delete rates (<a href="https://github.com/milvus-io/milvus/pull/36958">#36958</a>)</li>
+</ul></li>
+<li>Refactored CreateCollection in RESTFul API (<a href="https://github.com/milvus-io/milvus/pull/36885">#36885</a>)</li>
+<li>Fused multiple ‘and’ and ‘or’ operations into a single op (<a href="https://github.com/milvus-io/milvus/pull/36973">#36973</a>)</li>
+<li>Made skip load work for all branches (<a href="https://github.com/milvus-io/milvus/pull/37161">#37161</a>)</li>
+<li>Upgraded Minio dependency to support EKS Pod Identities (<a href="https://github.com/milvus-io/milvus/pull/37089">#37089</a>)</li>
+<li>Tidied import options (<a href="https://github.com/milvus-io/milvus/pull/37078">#37078</a>)</li>
+<li>Limited maximum number of import jobs (<a href="https://github.com/milvus-io/milvus/pull/36892">#36892</a>)</li>
+<li>Preallocated data slice to avoid re-allocating memory (<a href="https://github.com/milvus-io/milvus/pull/37044">#37044</a>)</li>
+<li>Prevented DataNode from loading the bf (<a href="https://github.com/milvus-io/milvus/pull/37027">#37027</a>)</li>
+<li>Avoided limiting ddl operations repeatedly (<a href="https://github.com/milvus-io/milvus/pull/37011">#37011</a>)</li>
+<li>Made the configuration item <code translate="no">datanode.import.maxconcurrenttasknum</code> dynamically adjustable (<a href="https://github.com/milvus-io/milvus/pull/37103">#37103</a>)</li>
+<li>Used <code translate="no">queryNode.mmap.growingMmapEnabled</code> to control the behavior of interim index (<a href="https://github.com/milvus-io/milvus/pull/36391">#36391</a>)</li>
+<li>Populated the <code translate="no">Level</code> and <code translate="no">StartPosition</code> fields in segmentLoadInfo of growing segment (<a href="https://github.com/milvus-io/milvus/pull/36911">#36911</a>)</li>
+<li>Forced to stop buffer messages when receiving the drop collection message (<a href="https://github.com/milvus-io/milvus/pull/36917">#36917</a>)</li>
+<li>Added metrics for querynode delete buffer info (<a href="https://github.com/milvus-io/milvus/pull/37097">#37097</a>)</li>
+<li>Added collection name label for some metric (<a href="https://github.com/milvus-io/milvus/pull/37159">#37159</a>)</li>
+<li>Used middleware to observe RESTful v2 in/out rpc stats (<a href="https://github.com/milvus-io/milvus/pull/37224">#37224</a>)</li>
+<li>Changed GPU default memory pool size (<a href="https://github.com/milvus-io/milvus/pull/36969">#36969</a>)</li>
+<li>Updated Knowhere version to 2.3.12 (<a href="https://github.com/milvus-io/milvus/pull/37132">#37132</a>)</li>
+<li>Allowed deleting data when disk quota exhausted (<a href="https://github.com/milvus-io/milvus/pull/37139">#37139</a>)</li>
+</ul>
+<h3 id="Bug-fixes" class="common-anchor-header">Bug fixes</h3><ul>
+<li>Fixed collection info that could not be recovered from metakv after restart if all snapshots were garbage collected (<a href="https://github.com/milvus-io/milvus/pull/36950">#36950</a>)</li>
+<li>Corrected the rpc error code to avoid invalid retry in client (<a href="https://github.com/milvus-io/milvus/pull/37025">#37025</a>)</li>
+<li>Ignored db not found error in quota center (<a href="https://github.com/milvus-io/milvus/pull/36850">#36850</a>)</li>
+<li>Fixed goroutine leakage in QueryNode by using singleton delete pool (<a href="https://github.com/milvus-io/milvus/pull/37225">#37225</a>)</li>
+<li>Fixed collection leak in querynode (<a href="https://github.com/milvus-io/milvus/pull/37079">#37079</a>)</li>
+<li>Fixed leakage of clustering compaction task (<a href="https://github.com/milvus-io/milvus/pull/36803">#36803</a>)</li>
+<li>Prohibited renaming a collection that had an alias (<a href="https://github.com/milvus-io/milvus/pull/37208">#37208</a>)</li>
+<li>Made sure alias was cached (<a href="https://github.com/milvus-io/milvus/pull/36808">#36808</a>)</li>
+<li>Search/query could have failed during updating delegator cache (<a href="https://github.com/milvus-io/milvus/pull/37174">#37174</a>)</li>
+<li>Excluded l0 compaction when clustering was executing (<a href="https://github.com/milvus-io/milvus/pull/37142">#37142</a>)</li>
+<li>Referenced collection meta when loading l0 segment meta only (<a href="https://github.com/milvus-io/milvus/pull/37179">#37179</a>)</li>
+<li>Delegator might have become unserviceable after querycoord restart (<a href="https://github.com/milvus-io/milvus/pull/37100">#37100</a>)</li>
+<li>Dynamic release partition might have failed search/query (<a href="https://github.com/milvus-io/milvus/pull/37099">#37099</a>)</li>
+<li>Rectified delete buffer row count quota value (<a href="https://github.com/milvus-io/milvus/pull/37068">#37068</a>)</li>
+<li>Passed full field list when partial load enabled (<a href="https://github.com/milvus-io/milvus/pull/37063">#37063</a>)</li>
+<li>Query node panic occurred during sending rpc to worker (<a href="https://github.com/milvus-io/milvus/pull/36988">#36988</a>)</li>
+<li>Datacoord got stuck at stopping progress (<a href="https://github.com/milvus-io/milvus/pull/36961">#36961</a>)</li>
+<li>Fixed the out-of-bounds access in the growing segment when raw data was replaced by interim index (<a href="https://github.com/milvus-io/milvus/pull/36938">#36938</a>)</li>
+<li>Rootcoord got stuck at graceful stop progress (<a href="https://github.com/milvus-io/milvus/pull/36881">#36881</a>)</li>
+</ul>
 <h2 id="v2413-hotfix" class="common-anchor-header">v2.4.13-hotfix<button data-href="#v2413-hotfix" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
