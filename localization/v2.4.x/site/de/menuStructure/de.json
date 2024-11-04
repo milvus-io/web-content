@@ -1058,7 +1058,7 @@
             "children": []
           },
           {
-            "label": "RBAC aktivieren",
+            "label": "RBAC einschalten",
             "id": "rbac.md",
             "order": 1,
             "isMenu": true,

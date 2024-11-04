@@ -1370,7 +1370,7 @@
                 "children": []
               },
               {
-                "label": "PrivéGPT",
+                "label": "PrivateGPT",
                 "id": "use_milvus_in_private_gpt.md",
                 "order": 4,
                 "children": []

@@ -1182,7 +1182,7 @@
         "order": 5,
         "children": [
           {
-            "label": "Visão geral",
+            "label": "Overview",
             "id": "birdwatcher_overview.md",
             "order": 0,
             "children": []
