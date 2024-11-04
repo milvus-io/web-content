@@ -63,6 +63,9 @@ title: Integrations Overview
 <tr><td><a href="/docs/build_rag_on_arm.md">Build RAG on Arm Architecture</a></td><td>RAG</td><td>Milvus, Arm</td></tr>
 <tr><td><a href="/docs/build_RAG_with_milvus_and_fireworks.md">Build RAG with Milvus and Fireworks AI</a></td><td>LLMs</td><td>Milvus, Fireworks AI</td></tr>
 <tr><td><a href="/docs/build_RAG_with_milvus_and_lepton.md">Build RAG with Milvus and Lepton AI</a></td><td>LLMs</td><td>Milvus, Lepton AI</td></tr>
-<tr><td><a href="/docs/build_RAG_with_milvus_and_siliconflow.md">Build RAG with Milvus and SiliconFlow</a></td><td>LLMs</td><td>Milvus, SiliconFlow</td></tr>
+<tr><td><a href="/docs/build_RAG_with_milvus_and_siliconflow">Build RAG with Milvus and SiliconFlow</a></td><td>LLMs</td><td>Milvus, SiliconFlow</td></tr>
+<tr><td><a href="/docs/rag_with_milvus_and_unstructured.md">Build a RAG with Milvus and Unstructured</a></td><td>Data Sources</td><td>Milvus, Unstructured</td></tr>
+<tr><td><a href="/docs/RAG_with_pii_and_milvus.md">Build RAG with Milvus + PII Masker</a></td><td>Data Sources</td><td>Milvus, PII Masker</td></tr>
+<tr><td><a href="/docs/use_milvus_in_private_gpt.md">Use Milvus in PrivateGPT</a></td><td>Ochestration</td><td>vector search</td></tr>
 </tbody>
 </table>

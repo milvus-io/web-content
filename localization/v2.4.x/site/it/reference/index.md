@@ -4,7 +4,7 @@ related_key: index
 summary: Meccanismo di indicizzazione a Milvus.
 title: Indice in memoria
 ---
-<h1 id="In-memory-Index" class="common-anchor-header">Indice in-memory<button data-href="#In-memory-Index" class="anchor-icon" translate="no">
+<h1 id="In-memory-Index" class="common-anchor-header">Indice in memoria<button data-href="#In-memory-Index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -340,7 +340,7 @@ Attualmente, un campo vettoriale supporta solo un tipo di indice. Milvus cancell
 </li>
 </ul></li>
 </ul>
-<h3 id="SCANN" class="common-anchor-header">SCANN</h3><p>SCANN (Score-aware quantization loss) è simile a IVF_PQ in termini di clustering vettoriale e quantizzazione del prodotto. Le differenze risiedono nei dettagli di implementazione della quantizzazione del prodotto e nell'uso di SIMD (Single-Instruction / Multi-data) per un calcolo efficiente.</p>
+<h3 id="SCANN" class="common-anchor-header">SCANN</h3><p>ScaNN (Scalable Nearest Neighbors) è simile a IVF_PQ in termini di clustering vettoriale e quantizzazione del prodotto. Le differenze risiedono nei dettagli di implementazione della quantizzazione del prodotto e nell'uso di SIMD (Single-Instruction / Multi-data) per un calcolo efficiente.</p>
 <ul>
 <li><p>Parametri di costruzione dell'indice</p>
 <table>
@@ -381,8 +381,8 @@ Attualmente, un campo vettoriale supporta solo un tipo di indice. Milvus cancell
 </li>
 </ul></li>
 </ul>
-<h3 id="HNSW" class="common-anchor-header">HNSW</h3><p>HNSW (Hierarchical Navigable Small World Graph) è un algoritmo di indicizzazione basato su grafi. Costruisce una struttura di navigazione multistrato per un'immagine in base a determinate regole. In questa struttura, gli strati superiori sono più radi e le distanze tra i nodi sono maggiori; gli strati inferiori sono più densi e le distanze tra i nodi sono maggiori. La ricerca parte dal livello più alto, trova il nodo più vicino all'obiettivo in questo livello e poi passa al livello successivo per iniziare una nuova ricerca. Dopo diverse iterazioni, può avvicinarsi rapidamente alla posizione del target.</p>
-<p>Per migliorare le prestazioni, HNSW limita il grado massimo dei nodi su ogni livello del grafo a <code translate="no">M</code>. Inoltre, è possibile utilizzare <code translate="no">efConstruction</code> (quando si costruisce l'indice) o <code translate="no">ef</code> (quando si cercano i target) per specificare un intervallo di ricerca.</p>
+<h3 id="HNSW" class="common-anchor-header">HNSW</h3><p>HNSW (Hierarchical Navigable Small World Graph) è un algoritmo di indicizzazione basato su grafi. Costruisce una struttura di navigazione multistrato per un'immagine in base a determinate regole. In questa struttura, gli strati superiori sono più radi e le distanze tra i nodi sono maggiori; gli strati inferiori sono più densi e le distanze tra i nodi sono maggiori. La ricerca inizia dal livello più alto, trova il nodo più vicino all'obiettivo in questo livello e poi passa al livello successivo per iniziare una nuova ricerca. Dopo diverse iterazioni, può avvicinarsi rapidamente alla posizione del target.</p>
+<p>Per migliorare le prestazioni, HNSW limita il grado massimo dei nodi su ciascun livello del grafo a <code translate="no">M</code>. Inoltre, è possibile utilizzare <code translate="no">efConstruction</code> (quando si costruisce l'indice) o <code translate="no">ef</code> (quando si cercano i target) per specificare un intervallo di ricerca.</p>
 <ul>
 <li><p>Parametri di costruzione dell'indice</p>
 <table>

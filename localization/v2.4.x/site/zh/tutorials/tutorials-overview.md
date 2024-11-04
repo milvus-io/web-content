@@ -42,5 +42,6 @@ title: 教程概览
 <tr><td><a href="/docs/zh/hdbscan_clustering_with_milvus.md">利用 Milvus 进行 HDBSCAN 聚类</a></td><td>快速启动</td><td>向量检索</td></tr>
 <tr><td><a href="/docs/zh/use_ColPali_with_milvus.md">使用 ColPali 与 Milvus 一起进行多模式检索</a></td><td>快速启动</td><td>向量搜索</td></tr>
 <tr><td><a href="/docs/zh/vector_visualization.md">向量可视化</a></td><td>快速启动</td><td>向量搜索</td></tr>
+<tr><td><a href="/docs/zh/movie_recommendation_with_milvus.md">使用 Milvus 进行电影推荐</a></td><td>推荐系统</td><td>向量搜索</td></tr>
 </tbody>
 </table>

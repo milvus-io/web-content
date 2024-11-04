@@ -55,7 +55,7 @@ title: Schema verwalten
     <tr>
         <td><code translate="no">description</code></td>
         <td>Beschreibung des Feldes</td>
-        <td>Datentyp: Zeichenfolge.<br/>Fakultativ</td>
+        <td>Datentyp: String.<br/>Optional</td>
     </tr>
     <tr>
         <td><code translate="no">is_primary</code></td>
@@ -69,7 +69,7 @@ title: Schema verwalten
         </tr>
         <tr>
             <td><code translate="no">max_length</code> (Obligatorisch für das VARCHAR-Feld)</td>
-            <td>Maximale Länge der Zeichenketten, die eingefügt werden können.</td>
+            <td>Maximale Bytelänge für Zeichenketten, die eingefügt werden können. Beachten Sie, dass Multibyte-Zeichen (z. B. Unicode-Zeichen) jeweils mehr als ein Byte belegen können. Stellen Sie daher sicher, dass die Bytelänge der eingefügten Zeichenketten den angegebenen Grenzwert nicht überschreitet.</td>
             <td>[1, 65,535]</td>
         </tr>
     <tr>
@@ -127,7 +127,7 @@ fields = [
 <p>JSON ist als zusammengesetzter Datentyp verfügbar. Ein JSON-Feld besteht aus Schlüssel-Werte-Paaren. Jeder Schlüssel ist eine Zeichenfolge, und ein Wert kann eine Zahl, eine Zeichenfolge, ein boolescher Wert, ein Array oder eine Liste sein. Einzelheiten finden Sie unter <a href="/docs/de/use-json-fields.md">JSON: ein neuer Datentyp</a>.</p></li>
 <li><p>Vektorfeld unterstützt:</p>
 <ul>
-<li>BINARY_VECTOR: Speichert binäre Daten als eine Folge von 0en und 1en und wird für die kompakte Darstellung von Merkmalen in der Bildverarbeitung und beim Informationsabruf verwendet.</li>
+<li>BINARY_VECTOR: Speichert binäre Daten als eine Folge von 0en und 1en, die für eine kompakte Merkmalsdarstellung in der Bildverarbeitung und beim Informationsabruf verwendet werden.</li>
 <li>FLOAT_VECTOR: Speichert 32-Bit-Gleitkommazahlen, die häufig in der wissenschaftlichen Datenverarbeitung und beim maschinellen Lernen zur Darstellung reeller Zahlen verwendet werden.</li>
 <li>FLOAT16_VECTOR: Speichert 16-Bit-Gleitkommazahlen mit halber Genauigkeit, die bei Deep Learning und GPU-Berechnungen für Speicher- und Bandbreiteneffizienz verwendet werden.</li>
 <li>BFLOAT16_VECTOR: Speichert 16-Bit-Gleitkommazahlen mit verringerter Genauigkeit, aber demselben Exponentenbereich wie Float32, die beim Deep Learning zur Verringerung der Speicher- und Berechnungsanforderungen verwendet werden, ohne die Genauigkeit wesentlich zu beeinträchtigen.</li>

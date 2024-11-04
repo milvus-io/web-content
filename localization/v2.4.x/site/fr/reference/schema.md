@@ -1,7 +1,7 @@
 ---
 id: schema.md
 summary: Apprenez à définir un schéma dans Milvus.
-title: Gérer le schéma
+title: Gérer les schémas
 ---
 <h1 id="Manage-Schema" class="common-anchor-header">Gérer les schémas<button data-href="#Manage-Schema" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -69,7 +69,7 @@ title: Gérer le schéma
         </tr>
         <tr>
             <td><code translate="no">max_length</code> (Obligatoire pour le champ VARCHAR)</td>
-            <td>Longueur maximale des chaînes autorisées à être insérées.</td>
+            <td>Longueur maximale en octets des chaînes autorisées à être insérées. Notez que les caractères multioctets (par exemple, les caractères Unicode) peuvent occuper plus d'un octet chacun. Veillez donc à ce que la longueur en octets des chaînes insérées ne dépasse pas la limite spécifiée.</td>
             <td>[1, 65,535]</td>
         </tr>
     <tr>
@@ -129,9 +129,9 @@ fields = [
 <ul>
 <li>BINARY_VECTOR : stocke les données binaires sous la forme d'une séquence de 0 et de 1. Il est utilisé pour la représentation compacte des caractéristiques dans le traitement des images et la recherche d'informations.</li>
 <li>FLOAT_VECTOR : stocke les nombres à virgule flottante de 32 bits, couramment utilisés dans l'informatique scientifique et l'apprentissage automatique pour représenter les nombres réels.</li>
-<li>FLOAT16_VECTOR : stocke des nombres à virgule flottante de demi-précision sur 16 bits, utilisés dans l'apprentissage profond et les calculs GPU pour l'efficacité de la mémoire et de la bande passante.</li>
-<li>BFLOAT16_VECTOR : stocke les nombres à virgule flottante de 16 bits avec une précision réduite mais la même plage d'exposants que Float32, populaire dans l'apprentissage profond pour réduire les exigences en matière de mémoire et de calcul sans avoir un impact significatif sur la précision.</li>
-<li>SPARSE_FLOAT_VECTOR : stocke une liste d'éléments non nuls et leurs indices correspondants, utilisés pour représenter des vecteurs épars. Pour plus d'informations, voir <a href="/docs/fr/sparse_vector.md">Vecteurs épars.</a></li>
+<li>FLOAT16_VECTOR : stocke des nombres à virgule flottante de 16 bits en demi-précision, utilisés dans l'apprentissage profond et les calculs GPU pour l'efficacité de la mémoire et de la bande passante.</li>
+<li>BFLOAT16_VECTOR : Stocke les nombres à virgule flottante de 16 bits avec une précision réduite mais la même plage d'exposants que Float32, populaire dans l'apprentissage profond pour réduire les exigences en matière de mémoire et de calcul sans avoir un impact significatif sur la précision.</li>
+<li>SPARSE_FLOAT_VECTOR : stocke une liste d'éléments non nuls et leurs indices correspondants, utilisés pour représenter des vecteurs épars. Pour plus d'informations, voir <a href="/docs/fr/sparse_vector.md">Vecteurs épars</a>.</li>
 </ul>
 <p>Milvus prend en charge plusieurs champs de vecteurs dans une collection. Pour plus d'informations, voir <a href="/docs/fr/multi-vector-search.md">Recherche hybride</a>.</p></li>
 </ul>
@@ -202,7 +202,7 @@ collection1 = <span class="hljs-title class_">Collection</span>(name=collection_
 <li>Vous pouvez définir le numéro de dépôt avec <code translate="no">shards_num</code>.</li>
 <li>Vous pouvez définir le serveur Milvus sur lequel vous souhaitez créer une collection en spécifiant l'alias dans <code translate="no">using</code>.</li>
 <li>Vous pouvez activer la fonction de clé de partition sur un champ en définissant <code translate="no">is_partition_key</code> sur <code translate="no">True</code> sur le champ si vous devez mettre en œuvre une <a href="/docs/fr/multi_tenancy.md">multi-location basée sur la clé de partition</a>.</li>
-<li>Vous pouvez <a href="/docs/fr/enable-dynamic-field.md">activer</a> le schéma dynamique en remplaçant <code translate="no">enable_dynamic_field</code> par <code translate="no">True</code> dans le schéma de la collection si vous devez <a href="/docs/fr/enable-dynamic-field.md">activer le champ dynamique</a>.</li>
+<li>Vous pouvez activer le schéma dynamique en remplaçant <code translate="no">enable_dynamic_field</code> par <code translate="no">True</code> dans le schéma de la collection si vous devez <a href="/docs/fr/enable-dynamic-field.md">activer le champ dynamique</a>.</li>
 </ul>
 </div>
 <p><br/>

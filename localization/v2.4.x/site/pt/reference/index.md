@@ -160,7 +160,7 @@ Atualmente, um campo vetorial apenas suporta um tipo de índice. O Milvus elimin
 <tbody>
   <tr>
     <td>BIN_FLAT</td>
-    <td>Índice baseado em quantização</td>
+    <td>Índice baseado na quantização</td>
     <td><ul>
       <li>Depende de conjuntos de dados relativamente pequenos.</li>
       <li>Requer uma precisão perfeita.</li>
@@ -242,7 +242,7 @@ Atualmente, um campo vetorial apenas suporta um tipo de índice. O Milvus elimin
 <li><p>Pesquisa comum</p>
 <table>
 <thead>
-<tr><th>Parâmetro</th><th>Descrição do parâmetro</th><th>Intervalo</th><th>Valor por defeito</th></tr>
+<tr><th>Parâmetro</th><th>Descrição do parâmetro</th><th>Gama</th><th>Valor por defeito</th></tr>
 </thead>
 <tbody>
 <tr><td><code translate="no">nprobe</code></td><td>Número de unidades a consultar</td><td>[1, nlist]</td><td>8</td></tr>
@@ -299,7 +299,7 @@ Atualmente, um campo vetorial apenas suporta um tipo de índice. O Milvus elimin
 </ul></li>
 </ul>
 <h3 id="IVFPQ" class="common-anchor-header">IVF_PQ</h3><p><code translate="no">PQ</code> (Product Quantization) decompõe uniformemente o espaço vetorial de alta dimensão original em produtos cartesianos de <code translate="no">m</code> espaços vectoriais de baixa dimensão e quantifica depois os espaços vectoriais de baixa dimensão decompostos. Em vez de calcular as distâncias entre o vetor-alvo e o centro de todas as unidades, a quantização do produto permite o cálculo das distâncias entre o vetor-alvo e o centro de agrupamento de cada espaço de baixa dimensão e reduz consideravelmente a complexidade temporal e espacial do algoritmo.</p>
-<p>O IVF_PQ executa o agrupamento de índices IVF antes de quantificar o produto de vectores. O seu ficheiro de índice é ainda mais pequeno do que o IVF_SQ8, mas também causa uma perda de precisão durante a pesquisa de vectores.</p>
+<p>O IVF_PQ efectua o agrupamento de índices IVF antes de quantificar o produto de vectores. O seu ficheiro de índice é ainda mais pequeno do que o IVF_SQ8, mas também causa uma perda de precisão durante a pesquisa de vectores.</p>
 <div class="alert note">
 <p>Os parâmetros de construção do índice e os parâmetros de pesquisa variam consoante a distribuição Milvus. Selecione primeiro a sua distribuição Milvus.</p>
 </div>
@@ -340,7 +340,7 @@ Atualmente, um campo vetorial apenas suporta um tipo de índice. O Milvus elimin
 </li>
 </ul></li>
 </ul>
-<h3 id="SCANN" class="common-anchor-header">SCANN</h3><p>O SCANN (Score-aware quantization loss) é semelhante ao IVF_PQ em termos de agrupamento de vectores e de quantização de produtos. A diferença reside nos pormenores de implementação da quantização do produto e na utilização de SIMD (Instrução única/Multidados) para um cálculo eficiente.</p>
+<h3 id="SCANN" class="common-anchor-header">SCANN</h3><p>O ScaNN (Scalable Nearest Neighbors) é semelhante ao IVF_PQ em termos de agrupamento de vectores e quantização de produtos. A sua diferença reside nos pormenores de implementação da quantização do produto e na utilização de SIMD (Single-Instruction / Multi-data) para um cálculo eficiente.</p>
 <ul>
 <li><p>Parâmetros de construção do índice</p>
 <table>
@@ -425,7 +425,7 @@ Atualmente, um campo vetorial apenas suporta um tipo de índice. O Milvus elimin
 </ul>
 <h3 id="BINIVFFLAT" class="common-anchor-header">BIN_IVF_FLAT</h3><p>Este índice é exatamente o mesmo que IVF_FLAT, exceto que só pode ser utilizado para embeddings binários.</p>
 <p>BIN_IVF_FLAT divide os dados do vetor em <code translate="no">nlist</code> unidades de cluster e, em seguida, compara as distâncias entre o vetor de entrada alvo e o centro de cada cluster. Dependendo do número de clusters que o sistema está definido para consultar (<code translate="no">nprobe</code>), os resultados da pesquisa de semelhança são devolvidos com base em comparações entre a entrada de destino e os vectores apenas no(s) cluster(s) mais semelhante(s) - reduzindo drasticamente o tempo de consulta.</p>
-<p>Ao ajustar <code translate="no">nprobe</code>, é possível encontrar um equilíbrio ideal entre precisão e velocidade para um determinado cenário. O tempo de consulta aumenta drasticamente à medida que o número de vectores de entrada alvo (<code translate="no">nq</code>) e o número de clusters a pesquisar (<code translate="no">nprobe</code>) aumentam.</p>
+<p>Ajustando <code translate="no">nprobe</code>, pode ser encontrado um equilíbrio ideal entre precisão e velocidade para um determinado cenário. O tempo de consulta aumenta drasticamente à medida que o número de vectores de entrada alvo (<code translate="no">nq</code>) e o número de clusters a pesquisar (<code translate="no">nprobe</code>) aumentam.</p>
 <p>BIN_IVF_FLAT é o índice BIN_IVF mais básico, e os dados codificados armazenados em cada unidade são consistentes com os dados originais.</p>
 <ul>
 <li><p>Parâmetros de construção do índice</p>

@@ -90,7 +90,7 @@ title: Gestion des groupes de ressources
         ></path>
       </svg>
     </button></h2><div class="alert note">
-<p>Tous les exemples de code sur cette page sont dans PyMilvus 2.4.8. Mettez à jour votre installation PyMilvus avant de les exécuter.</p>
+<p>Tous les exemples de code sur cette page sont dans PyMilvus 2.4.9. Mettez à jour votre installation PyMilvus avant de les exécuter.</p>
 </div>
 <ol>
 <li><p>Créer un groupe de ressources.</p>
@@ -348,6 +348,6 @@ scale_to(<span class="hljs-number">4</span>)
       </svg>
     </button></h1><p>Pour déployer une instance Milvus multi-tenant, lisez ce qui suit :</p>
 <ul>
-<li><a href="/docs/fr/rbac.md">Activer RBAC</a></li>
+<li><a href="/docs/fr/rbac.md">Activer le RBAC</a></li>
 <li><a href="/docs/fr/users_and_roles.md">Utilisateurs et rôles</a></li>
 </ul>

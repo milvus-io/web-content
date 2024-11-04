@@ -62,8 +62,8 @@ $ pip install anthropic
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <p>If you are using Google Colab, to enable dependencies just installed, you may need to <strong>restart the runtime</strong> (click on the “Runtime” menu at the top of the screen, and select “Restart session” from the dropdown menu).</p>
-<p>You will need API keys from Cohere, Voyage, and Anthropic to run the code.</p>
 </div>
+<p>You will need API keys from Cohere, Voyage, and Anthropic to run the code.</p>
 <h2 id="Download-Data" class="common-anchor-header">Download Data<button data-href="#Download-Data" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -80,8 +80,8 @@ $ pip install anthropic
         ></path>
       </svg>
     </button></h2><p>The following command will download the example data used in original Anthropic <a href="https://github.com/anthropics/anthropic-cookbook/blob/main/skills/contextual-embeddings/guide.ipynb">demo</a>.</p>
-<pre><code translate="no" class="language-shell">$ wget <span class="hljs-attr">https</span>:<span class="hljs-comment">//github.com/anthropics/anthropic-cookbook/blob/main/skills/contextual-embeddings/data/codebase_chunks.json</span>
-$ wget <span class="hljs-attr">https</span>:<span class="hljs-comment">//github.com/anthropics/anthropic-cookbook/blob/main/skills/contextual-embeddings/data/evaluation_set.jsonl</span>
+<pre><code translate="no" class="language-shell">$ wget <span class="hljs-attr">https</span>:<span class="hljs-comment">//raw.githubusercontent.com/anthropics/anthropic-cookbook/refs/heads/main/skills/contextual-embeddings/data/codebase_chunks.json</span>
+$ wget <span class="hljs-attr">https</span>:<span class="hljs-comment">//raw.githubusercontent.com/anthropics/anthropic-cookbook/refs/heads/main/skills/contextual-embeddings/data/evaluation_set.jsonl</span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Define-Retriever" class="common-anchor-header">Define Retriever<button data-href="#Define-Retriever" class="anchor-icon" translate="no">
       <svg translate="no"

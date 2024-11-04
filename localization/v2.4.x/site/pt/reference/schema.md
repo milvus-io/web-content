@@ -69,13 +69,13 @@ title: Gerir o esquema
         </tr>
         <tr>
             <td><code translate="no">max_length</code> (Obrigatório para o campo VARCHAR)</td>
-            <td>Comprimento máximo das cadeias de caracteres que podem ser inseridas.</td>
+            <td>Comprimento máximo de bytes para cadeias que podem ser inseridas. Note que os caracteres multibyte (por exemplo, caracteres Unicode) podem ocupar mais do que um byte cada, por isso certifique-se de que o comprimento em bytes das cadeias inseridas não excede o limite especificado.</td>
             <td>[1, 65,535]</td>
         </tr>
     <tr>
         <td><code translate="no">dim</code></td>
         <td>Dimensão do vetor</td>
-            <td>Tipo de dado: Integer &isin;[1, 32768].<br/>Obrigatório para um campo vetorial denso. Omitir para um campo <a href="https://milvus.io/docs/sparse_vector.md">vetorial esparso</a>.</td>
+            <td>Tipo de dados: Integer &isin;[1, 32768].<br/>Obrigatório para um campo de vetor denso. Omitir para um campo <a href="https://milvus.io/docs/sparse_vector.md">vetorial esparso</a>.</td>
     </tr>
     <tr>
         <td><code translate="no">is_partition_key</code></td>
@@ -131,7 +131,7 @@ fields = [
 <li>FLOAT_VECTOR: Armazena números de ponto flutuante de 32 bits, normalmente utilizados na computação científica e na aprendizagem automática para representar números reais.</li>
 <li>FLOAT16_VECTOR: Armazena números de vírgula flutuante de meia precisão de 16 bits, utilizados em aprendizagem profunda e cálculos de GPU para eficiência de memória e largura de banda.</li>
 <li>BFLOAT16_VECTOR: Armazena números de vírgula flutuante de 16 bits com precisão reduzida, mas com o mesmo intervalo de expoentes que o Float32, popular na aprendizagem profunda para reduzir a memória e os requisitos computacionais sem afetar significativamente a precisão.</li>
-<li>SPARSE_FLOAT_VECTOR: armazena uma lista de elementos não nulos e os respectivos índices, utilizados para representar vectores esparsos. Para mais informações, consulte <a href="/docs/pt/sparse_vector.md">Vectores esparsos</a>.</li>
+<li>SPARSE_FLOAT_VECTOR: armazena uma lista de elementos não nulos e os respectivos índices, utilizados para representar vectores esparsos. Para mais informações, consulte <a href="/docs/pt/sparse_vector.md">Vectores es</a>parsos.</li>
 </ul>
 <p>O Milvus suporta múltiplos campos vectoriais numa coleção. Para obter mais informações, consulte <a href="/docs/pt/multi-vector-search.md">Pesquisa híbrida</a>.</p></li>
 </ul>
@@ -201,7 +201,7 @@ collection1 = <span class="hljs-title class_">Collection</span>(name=collection_
 <ul>
 <li>Pode definir o número do fragmento com <code translate="no">shards_num</code>.</li>
 <li>Pode definir o servidor Milvus no qual pretende criar uma coleção, especificando o alias em <code translate="no">using</code>.</li>
-<li>Pode ativar a funcionalidade de chave de partição num campo definindo <code translate="no">is_partition_key</code> para <code translate="no">True</code> no campo, se necessitar de implementar <a href="/docs/pt/multi_tenancy.md">um multi-tenancy baseado em chave de partição</a>.</li>
+<li>Pode ativar a funcionalidade de chave de partição num campo definindo <code translate="no">is_partition_key</code> para <code translate="no">True</code> no campo, se necessitar de implementar <a href="/docs/pt/multi_tenancy.md">um multi-tenancy baseado em chaves de partição</a>.</li>
 <li>Pode ativar o esquema dinâmico definindo <code translate="no">enable_dynamic_field</code> para <code translate="no">True</code> no esquema da coleção se precisar de <a href="/docs/pt/enable-dynamic-field.md">ativar o campo dinâmico</a>.</li>
 </ul>
 </div>
@@ -239,6 +239,6 @@ collection, ins_res = Collection.construct_from_dataframe(
       </svg>
     </button></h2><ul>
 <li>Saiba como preparar o esquema ao <a href="/docs/pt/manage-collections.md">gerir colecções</a>.</li>
-<li>Saiba mais sobre o <a href="/docs/pt/enable-dynamic-field.md">esquema dinâmico</a>.</li>
+<li>Leia mais sobre o <a href="/docs/pt/enable-dynamic-field.md">esquema dinâmico</a>.</li>
 <li>Leia mais sobre partition-key em <a href="/docs/pt/multi_tenancy.md">Multi-tenancy</a>.</li>
 </ul>

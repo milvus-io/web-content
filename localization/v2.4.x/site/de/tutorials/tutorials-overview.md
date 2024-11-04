@@ -44,5 +44,6 @@ title: Übersicht Tutorials
 <tr><td><a href="/docs/de/hdbscan_clustering_with_milvus.md">HDBSCAN Clustering mit Milvus</a></td><td>Schnellstart</td><td>Vektorsuche</td></tr>
 <tr><td><a href="/docs/de/use_ColPali_with_milvus.md">ColPali für multimodales Retrieval mit Milvus verwenden</a></td><td>Schnellstart</td><td>Vektorsuche</td></tr>
 <tr><td><a href="/docs/de/vector_visualization.md">Vektor-Visualisierung</a></td><td>Schnellstart</td><td>Vektorsuche</td></tr>
+<tr><td><a href="/docs/de/movie_recommendation_with_milvus.md">Filmempfehlung mit Milvus</a></td><td>Empfehlungssystem</td><td>Vektorsuche</td></tr>
 </tbody>
 </table>

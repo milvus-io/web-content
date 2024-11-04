@@ -25,13 +25,13 @@ title: Milvusによる文脈検索
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="https://raw.githubusercontent.com/milvus-io/bootcamp/refs/heads/master/images/contextual_retrieval_with_milvus.png" alt="image" class="doc-image" id="image" />
-   </span> <span class="img-wrapper"> <span>Image</span> </span><a href="https://www.anthropic.com/news/contextual-retrieval">Contextual Retrievalは</a>、現在のRAG（Retrieval-Augmented Generation）ソリューションで生じているチャンクの意味的分離の問題に対処するため、Anthropicによって提案された高度な検索手法である。現在の実用的なRAGパラダイムでは、文書はいくつかのチャンクに分割され、ベクトルデータベースを使ってクエリを検索し、最も関連性の高いチャンクを取り出す。そしてLLMは、検索されたチャンクを使ってクエリに応答する。しかし、このチャンキング処理によって文脈情報が失われ、検索者が関連性を判断することが難しくなる。</p>
+   </span> <span class="img-wrapper"> <span>画像</span> </span><a href="https://www.anthropic.com/news/contextual-retrieval">コンテキスト検索は</a>、現在のRAG（Retrieval-Augmented Generation）ソリューションで生じているチャンクの意味的分離の問題に対処するために、Anthropicによって提案された高度な検索手法である。現在の実用的なRAGパラダイムでは、文書はいくつかのチャンクに分割され、ベクトルデータベースを使ってクエリを検索し、最も関連性の高いチャンクを取り出す。そしてLLMは、検索されたチャンクを使ってクエリに応答する。しかし、このチャンキング処理によって文脈情報が失われ、検索者が関連性を判断することが難しくなる。</p>
 <p>コンテキスト検索は、埋め込みやインデックス付けの前に各文書チャンクに関連するコンテキストを追加することで、従来の検索システムを改善し、検索精度を高め、検索エラーを減らす。ハイブリッド検索やリランキングのような技術と組み合わせることで、特に大規模な知識ベースに対して、RAG（Retrieval-Augmented Generation）システムを強化する。さらに、プロンプト・キャッシングと組み合わせることで、待ち時間と運用コストを大幅に削減し、コンテキスト化されたチャンクのコストは100万文書トークンあたり約1.02ドルと、コスト効率の高いソリューションを提供します。これにより、大規模な知識ベースを扱うためのスケーラブルで効率的なアプローチとなります。Anthropicのソリューションは、2つの洞察に満ちた側面を示しています：</p>
 <ul>
 <li><code translate="no">Document Enhancement</code>:クエリの書き換えは現代の情報検索において重要な技術であり、クエリをより有益なものにするために補助的な情報を使用することが多い。同様に、RAGでより良いパフォーマンスを達成するために、インデックスを作成する前にLLMで文書を前処理（例えば、データソースのクリーニング、失われた情報の補完、要約など）することで、関連する文書を検索する可能性を大幅に向上させることができる。言い換えれば、この前処理ステップは、関連性の観点から文書をクエリに近づけるのに役立つ。</li>
 <li><code translate="no">Low-Cost Processing by Caching Long Context</code>:LLMを使って文書を処理する際の共通の懸念は、コストである。KVCacheは、同じ先行コンテキストに対する中間結果の再利用を可能にする一般的なソリューションである。ほとんどのホスト型LLMベンダーはこの機能をユーザーに透過的に提供していますが、Anthropicはユーザーにキャッシュ処理をコントロールさせます。キャッシュヒットが発生した場合、ほとんどの計算を保存することができます（これは、長いコンテキストが同じまま、各クエリの命令が変更される場合に一般的です）。詳細は<a href="https://www.anthropic.com/news/prompt-caching">こちらを</a>ご覧ください。</li>
 </ul>
-<p>このノートブックでは、LLMを使ったMilvusを使った文脈検索の方法を紹介し、密-疎ハイブリッド検索とリランカーを組み合わせて、徐々に強力な検索システムを構築する。データと実験設定は<a href="https://github.com/anthropics/anthropic-cookbook/blob/main/skills/contextual-embeddings/guide.ipynb">文脈検索に基づいて</a>います。</p>
+<p>このノートブックでは、LLMを使ったMilvusを使った文脈検索の実行方法を示す。密と疎のハイブリッド検索とリランカーを組み合わせることで、徐々に強力な検索システムを作ることができる。データと実験設定は<a href="https://github.com/anthropics/anthropic-cookbook/blob/main/skills/contextual-embeddings/guide.ipynb">文脈検索に基づいて</a>います。</p>
 <h2 id="Preparation" class="common-anchor-header">準備<button data-href="#Preparation" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -53,8 +53,8 @@ $ pip install anthropic
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <p>Google Colabを使用している場合、インストールしたばかりの依存関係を有効にするために、<strong>ランタイムを再起動</strong>する必要があるかもしれない（画面上部の "Runtime "メニューをクリックし、ドロップダウンメニューから "Restart session "を選択）。</p>
-<p>コードを実行するには、Cohere、Voyage、Anthropic の API キーが必要です。</p>
 </div>
+<p>コードを実行するには、Cohere、Voyage、Anthropic の API キーが必要です。</p>
 <h2 id="Download-Data" class="common-anchor-header">データのダウンロード<button data-href="#Download-Data" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -71,8 +71,8 @@ $ pip install anthropic
         ></path>
       </svg>
     </button></h2><p>以下のコマンドで、Anthropic<a href="https://github.com/anthropics/anthropic-cookbook/blob/main/skills/contextual-embeddings/guide.ipynb">デモで</a>使用したサンプルデータをダウンロードできます。</p>
-<pre><code translate="no" class="language-shell">$ wget <span class="hljs-attr">https</span>:<span class="hljs-comment">//github.com/anthropics/anthropic-cookbook/blob/main/skills/contextual-embeddings/data/codebase_chunks.json</span>
-$ wget <span class="hljs-attr">https</span>:<span class="hljs-comment">//github.com/anthropics/anthropic-cookbook/blob/main/skills/contextual-embeddings/data/evaluation_set.jsonl</span>
+<pre><code translate="no" class="language-shell">$ wget <span class="hljs-attr">https</span>:<span class="hljs-comment">//raw.githubusercontent.com/anthropics/anthropic-cookbook/refs/heads/main/skills/contextual-embeddings/data/codebase_chunks.json</span>
+$ wget <span class="hljs-attr">https</span>:<span class="hljs-comment">//raw.githubusercontent.com/anthropics/anthropic-cookbook/refs/heads/main/skills/contextual-embeddings/data/evaluation_set.jsonl</span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Define-Retriever" class="common-anchor-header">レトリバーの定義<button data-href="#Define-Retriever" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -89,7 +89,7 @@ $ wget <span class="hljs-attr">https</span>:<span class="hljs-comment">//github.
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>このクラスはフレキシブルに設計されており、ニーズに応じて様々な検索モードを選択することができます。初期化メソッドにオプションを指定することで、文脈検索、ハイブリッド検索（密な検索手法と疎な検索手法を組み合わせたもの）、リランカーのどれを使うかを決定し、結果を強化することができます。</p>
+    </button></h2><p>このクラスはフレキシブルに設計されており、ニーズに応じて様々な検索モードを選択することができます。初期化メソッドにオプションを指定することで、文脈検索、ハイブリッド検索（密な検索メソッドと疎な検索メソッドを組み合わせたもの）、リランカーのどれを使うかを決めることができます。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus.model.dense <span class="hljs-keyword">import</span> VoyageEmbeddingFunction
 <span class="hljs-keyword">from</span> pymilvus.model.hybrid <span class="hljs-keyword">import</span> BGEM3EmbeddingFunction
 <span class="hljs-keyword">from</span> pymilvus.model.reranker <span class="hljs-keyword">import</span> CohereRerankFunction
@@ -600,7 +600,7 @@ Total queries: 248
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Cohereのリランカーを追加することで、結果をさらに改善することができる。リランカーを持つ新しいRetrieverを別途初期化することなく、既存のRetrieverにリランカーを使用するように設定するだけで、パフォーマンスを向上させることができる。</p>
+    </button></h2><p>Cohereのリランカーを追加することで、結果をさらに改善することができる。リランカーを持つ新しいRetrieverを別に初期化することなく、既存のRetrieverをリランカーを使うように設定するだけで、性能を向上させることができる。</p>
 <pre><code translate="no" class="language-python">contextual_retriever.use_reranker = <span class="hljs-literal">True</span>
 contextual_retriever.rerank_function = cohere_rf
 <button class="copy-code-btn"></button></code></pre>

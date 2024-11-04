@@ -1058,7 +1058,7 @@
             "children": []
           },
           {
-            "label": "RBAC einschalten",
+            "label": "RBAC aktivieren",
             "id": "rbac.md",
             "order": 1,
             "isMenu": true,
@@ -1368,6 +1368,12 @@
                 "id": "milvus_hybrid_search_retriever.md",
                 "order": 3,
                 "children": []
+              },
+              {
+                "label": "PrivatGPT",
+                "id": "use_milvus_in_private_gpt.md",
+                "order": 4,
+                "children": []
               }
             ]
           },
@@ -1519,6 +1525,18 @@
             "id": "apify_milvus_rag.md",
             "order": 2,
             "children": []
+          },
+          {
+            "label": "Unstrukturiert",
+            "id": "rag_with_milvus_and_unstructured.md",
+            "order": 3,
+            "children": []
+          },
+          {
+            "label": "PII-Maskierer",
+            "id": "RAG_with_pii_and_milvus.md",
+            "order": 4,
+            "children": []
           }
         ]
       },
@@ -1607,6 +1625,12 @@
         "label": "Vektor-Visualisierung",
         "id": "vector_visualization.md",
         "order": 8,
+        "children": []
+      },
+      {
+        "label": "Filmempfehlung",
+        "id": "movie_recommendation_with_milvus.md",
+        "order": 9,
         "children": []
       },
       {

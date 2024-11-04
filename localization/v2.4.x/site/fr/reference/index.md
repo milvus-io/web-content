@@ -298,10 +298,10 @@ Actuellement, un champ vectoriel ne prend en charge qu'un seul type d'index. Mil
 </li>
 </ul></li>
 </ul>
-<h3 id="IVFPQ" class="common-anchor-header">IVF_PQ</h3><p><code translate="no">PQ</code> (Product Quantization) décompose uniformément l'espace vectoriel haute dimension original en produits cartésiens d'espaces vectoriels basse dimension <code translate="no">m</code>, puis quantifie les espaces vectoriels basse dimension décomposés. Au lieu de calculer les distances entre le vecteur cible et le centre de toutes les unités, la quantification par produit permet de calculer les distances entre le vecteur cible et le centre de regroupement de chaque espace de faible dimension, ce qui réduit considérablement la complexité temporelle et spatiale de l'algorithme.</p>
+<h3 id="IVFPQ" class="common-anchor-header">IVF_PQ</h3><p><code translate="no">PQ</code> (Product Quantization) décompose uniformément l'espace vectoriel haute dimension original en produits cartésiens d'espaces vectoriels basse dimension <code translate="no">m</code>, puis quantifie les espaces vectoriels basse dimension décomposés. Au lieu de calculer les distances entre le vecteur cible et le centre de toutes les unités, la quantification par produit permet de calculer les distances entre le vecteur cible et le centre de regroupement de chaque espace à faible dimension, ce qui réduit considérablement la complexité temporelle et spatiale de l'algorithme.</p>
 <p>IVF_PQ effectue le regroupement de l'index IVF avant de quantifier le produit des vecteurs. Son fichier d'index est encore plus petit que IVF_SQ8, mais il entraîne également une perte de précision lors de la recherche de vecteurs.</p>
 <div class="alert note">
-<p>Les paramètres de construction d'index et les paramètres de recherche varient en fonction de la distribution Milvus. Sélectionnez d'abord votre distribution Milvus.</p>
+<p>Les paramètres de construction de l'index et les paramètres de recherche varient en fonction de la distribution Milvus. Sélectionnez d'abord votre distribution Milvus.</p>
 </div>
 <ul>
 <li><p>Paramètres de construction d'index</p>
@@ -340,7 +340,7 @@ Actuellement, un champ vectoriel ne prend en charge qu'un seul type d'index. Mil
 </li>
 </ul></li>
 </ul>
-<h3 id="SCANN" class="common-anchor-header">SCANN</h3><p>SCANN (Score-aware quantization loss) est similaire à IVF_PQ en termes de regroupement de vecteurs et de quantification de produits. Ce qui les différencie, ce sont les détails de la mise en œuvre de la quantification du produit et l'utilisation de SIMD (Single-Instruction / Multi-data) pour un calcul efficace.</p>
+<h3 id="SCANN" class="common-anchor-header">SCANN</h3><p>ScaNN (Scalable Nearest Neighbors) est similaire à IVF_PQ en termes de regroupement de vecteurs et de quantification de produits. Ce qui les différencie, ce sont les détails de la mise en œuvre de la quantification du produit et l'utilisation de SIMD (Single-Instruction / Multi-data) pour un calcul efficace.</p>
 <ul>
 <li><p>Paramètres de construction de l'index</p>
 <table>
@@ -424,7 +424,7 @@ Actuellement, un champ vectoriel ne prend en charge qu'un seul type d'index. Mil
 </li>
 </ul>
 <h3 id="BINIVFFLAT" class="common-anchor-header">BIN_IVF_FLAT</h3><p>Cet index est exactement le même que IVF_FLAT, sauf qu'il ne peut être utilisé que pour les encastrements binaires.</p>
-<p>BIN_IVF_FLAT divise les données vectorielles en <code translate="no">nlist</code> unités de grappes, puis compare les distances entre le vecteur d'entrée cible et le centre de chaque grappe. En fonction du nombre de grappes que le système est configuré pour interroger (<code translate="no">nprobe</code>), les résultats de la recherche de similarité sont renvoyés sur la base des comparaisons entre l'entrée cible et les vecteurs dans la ou les grappes les plus similaires uniquement - ce qui réduit considérablement le temps de recherche.</p>
+<p>BIN_IVF_FLAT divise les données vectorielles en <code translate="no">nlist</code> unités de grappes, puis compare les distances entre le vecteur d'entrée cible et le centre de chaque grappe. Selon le nombre de grappes que le système est configuré pour interroger (<code translate="no">nprobe</code>), les résultats de la recherche de similarité sont renvoyés sur la base des comparaisons entre l'entrée cible et les vecteurs dans la ou les grappes les plus similaires uniquement - ce qui réduit considérablement le temps d'interrogation.</p>
 <p>En ajustant <code translate="no">nprobe</code>, un équilibre idéal entre la précision et la vitesse peut être trouvé pour un scénario donné. Le temps d'interrogation augmente fortement à mesure que le nombre de vecteurs d'entrée cibles (<code translate="no">nq</code>) et le nombre de grappes à rechercher (<code translate="no">nprobe</code>) augmentent.</p>
 <p>BIN_IVF_FLAT est l'index BIN_IVF le plus basique, et les données encodées stockées dans chaque unité sont cohérentes avec les données originales.</p>
 <ul>

@@ -311,7 +311,7 @@
         "children": []
       },
       {
-        "label": "インメモリーレプリカ",
+        "label": "インメモリ・レプリカ",
         "id": "replica.md",
         "order": 11,
         "children": []
@@ -641,7 +641,7 @@
     ]
   },
   {
-    "label": "Milvus移住",
+    "label": "Milvusマイグレーション",
     "id": "milvus_migration",
     "isMenu": true,
     "order": 5,
@@ -1368,6 +1368,12 @@
                 "id": "milvus_hybrid_search_retriever.md",
                 "order": 3,
                 "children": []
+              },
+              {
+                "label": "プライベートGPT",
+                "id": "use_milvus_in_private_gpt.md",
+                "order": 4,
+                "children": []
               }
             ]
           },
@@ -1519,6 +1525,18 @@
             "id": "apify_milvus_rag.md",
             "order": 2,
             "children": []
+          },
+          {
+            "label": "構造化されていない",
+            "id": "rag_with_milvus_and_unstructured.md",
+            "order": 3,
+            "children": []
+          },
+          {
+            "label": "PIIマスカー",
+            "id": "RAG_with_pii_and_milvus.md",
+            "order": 4,
+            "children": []
           }
         ]
       },
@@ -1610,6 +1628,12 @@
         "children": []
       },
       {
+        "label": "映画推薦",
+        "id": "movie_recommendation_with_milvus.md",
+        "order": 9,
+        "children": []
+      },
+      {
         "label": "もっと見る",
         "id": "explore-more",
         "order": 99,
@@ -1667,7 +1691,7 @@
     ]
   },
   {
-    "label": "よくある質問",
+    "label": "よくあるご質問",
     "id": "faq",
     "isMenu": true,
     "order": 9,

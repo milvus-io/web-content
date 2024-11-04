@@ -34,7 +34,7 @@ title: Gestire gli schemi
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Lo schema di un campo è la definizione logica di un campo. È la prima cosa da definire prima di definire uno <a href="#Collection-schema">schema di collezione</a> e di <a href="/docs/it/manage-collections.md">gestire le</a> <a href="#Collection-schema">collezioni</a>.</p>
+    </button></h2><p>Lo schema di un campo è la definizione logica di un campo. È la prima cosa da definire prima di definire uno <a href="#Collection-schema">schema di collezione</a> e di <a href="/docs/it/manage-collections.md">gestire le collezioni</a>.</p>
 <p>Milvus supporta solo un campo chiave primaria in una collezione.</p>
 <h3 id="Field-schema-properties" class="common-anchor-header">Proprietà dello schema di campo</h3><table class="properties">
     <thead>
@@ -69,7 +69,7 @@ title: Gestire gli schemi
         </tr>
         <tr>
             <td><code translate="no">max_length</code> (Obbligatorio per il campo VARCHAR)</td>
-            <td>Lunghezza massima delle stringhe che possono essere inserite.</td>
+            <td>Lunghezza massima di byte per le stringhe che possono essere inserite. Si noti che i caratteri multibyte (ad esempio, i caratteri Unicode) possono occupare più di un byte ciascuno, quindi assicurarsi che la lunghezza in byte delle stringhe inserite non superi il limite specificato.</td>
             <td>[1, 65,535]</td>
         </tr>
     <tr>
@@ -240,5 +240,5 @@ collection, ins_res = Collection.construct_from_dataframe(
     </button></h2><ul>
 <li>Imparare a preparare lo schema quando si <a href="/docs/it/manage-collections.md">gestiscono le raccolte</a>.</li>
 <li>Per saperne di più sullo <a href="/docs/it/enable-dynamic-field.md">schema dinamico</a>.</li>
-<li>Per saperne di più sulla chiave di partizione in <a href="/docs/it/multi_tenancy.md">Multi-tenancy</a>.</li>
+<li>Ulteriori informazioni sulla chiave di partizione in <a href="/docs/it/multi_tenancy.md">Multi-tenancy</a>.</li>
 </ul>

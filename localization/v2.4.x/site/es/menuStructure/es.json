@@ -839,7 +839,7 @@
             "children": []
           },
           {
-            "label": "Configurar Chunk Cache",
+            "label": "Configurar la caché de trozos",
             "id": "chunk_cache.md",
             "order": 3,
             "children": []
@@ -1036,7 +1036,7 @@
             "isMenu": true,
             "children": [
               {
-                "label": "Seguimiento de Jaeger",
+                "label": "Rastreo de Jaeger",
                 "id": "config_jaeger_tracing.md",
                 "order": 0,
                 "children": []
@@ -1368,6 +1368,12 @@
                 "id": "milvus_hybrid_search_retriever.md",
                 "order": 3,
                 "children": []
+              },
+              {
+                "label": "PrivadoGPT",
+                "id": "use_milvus_in_private_gpt.md",
+                "order": 4,
+                "children": []
               }
             ]
           },
@@ -1519,6 +1525,18 @@
             "id": "apify_milvus_rag.md",
             "order": 2,
             "children": []
+          },
+          {
+            "label": "Sin estructurar",
+            "id": "rag_with_milvus_and_unstructured.md",
+            "order": 3,
+            "children": []
+          },
+          {
+            "label": "Enmascarador PII",
+            "id": "RAG_with_pii_and_milvus.md",
+            "order": 4,
+            "children": []
           }
         ]
       },
@@ -1607,6 +1625,12 @@
         "label": "Visualización vectorial",
         "id": "vector_visualization.md",
         "order": 8,
+        "children": []
+      },
+      {
+        "label": "Recomendación de películas",
+        "id": "movie_recommendation_with_milvus.md",
+        "order": 9,
         "children": []
       },
       {

@@ -56,7 +56,7 @@ title: 인메모리 인덱스
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus는 처리하는 임베딩 유형에 따라 <strong>부동 소수점</strong>, <strong>이진</strong>, <strong>스파스</strong> 등 다양한 인덱스 유형을 지원합니다.</p>
+    </button></h2><p>Milvus는 처리하는 임베딩 유형에 따라 <strong>부동 소수</strong>점, <strong>이진</strong>, <strong>스파스</strong> 등 다양한 인덱스 유형을 지원합니다.</p>
 <div class="filter">
  <a href="#floating">부동 소수점 임베딩</a> <a href="#binary">이진 임베딩</a> <a href="#sparse">스파스 임베딩</a></div>
 <div class="filter-floating">
@@ -209,7 +209,7 @@ title: 인메모리 인덱스
 </table>
 </div>
 <div class="filter-floating">
-<h3 id="FLAT" class="common-anchor-header">FLAT</h3><p>완벽한 정확도가 필요하고 비교적 작은(백만 개 규모) 데이터 세트에 의존하는 벡터 유사도 검색 애플리케이션의 경우, FLAT 인덱스가 좋은 선택입니다. FLAT은 벡터를 압축하지 않으며, 정확한 검색 결과를 보장할 수 있는 유일한 인덱스입니다. 또한 FLAT의 결과는 다른 인덱스에서 생성된 결과의 비교 기준으로도 사용할 수 있습니다.</p>
+<h3 id="FLAT" class="common-anchor-header">FLAT</h3><p>완벽한 정확도가 필요하고 비교적 작은(백만 개 규모) 데이터 세트에 의존하는 벡터 유사도 검색 애플리케이션의 경우, FLAT 인덱스가 좋은 선택입니다. FLAT은 벡터를 압축하지 않으며, 정확한 검색 결과를 보장할 수 있는 유일한 인덱스입니다. 또한 FLAT의 결과는 다른 인덱스에서 생성된 결과의 비교 지점으로도 사용할 수 있습니다.</p>
 <p>FLAT은 각 쿼리마다 데이터 세트의 모든 벡터 세트와 대상 입력을 비교하는 철저한 검색 방식을 취하기 때문에 정확도가 높습니다. 따라서 FLAT은 목록에서 가장 느린 인덱스이며, 대규모 벡터 데이터를 쿼리하는 데는 적합하지 않습니다. Milvus의 FLAT 인덱스에는 파라미터가 필요하지 않으며, 이를 사용하는 데 데이터 학습이 필요하지 않습니다.</p>
 <ul>
 <li><p>검색 매개변수</p>
@@ -223,7 +223,7 @@ title: 인메모리 인덱스
 </table>
 </li>
 </ul>
-<h3 id="IVFFLAT" class="common-anchor-header">IVF_FLAT</h3><p>IVF_FLAT은 벡터 데이터를 <code translate="no">nlist</code> 클러스터 단위로 나눈 다음, 대상 입력 벡터와 각 클러스터의 중심 사이의 거리를 비교합니다. 시스템이 쿼리하도록 설정된 클러스터 수에 따라(<code translate="no">nprobe</code>), 목표 입력과 가장 유사한 클러스터에 있는 벡터 간의 비교를 기반으로 유사도 검색 결과가 반환되므로 쿼리 시간이 대폭 단축됩니다.</p>
+<h3 id="IVFFLAT" class="common-anchor-header">IVF_FLAT</h3><p>IVF_FLAT은 벡터 데이터를 <code translate="no">nlist</code> 클러스터 단위로 나눈 다음 대상 입력 벡터와 각 클러스터의 중심 사이의 거리를 비교합니다. 시스템이 쿼리하도록 설정된 클러스터 수에 따라(<code translate="no">nprobe</code>), 목표 입력과 가장 유사한 클러스터에 있는 벡터 간의 비교를 기반으로 유사도 검색 결과가 반환되므로 쿼리 시간이 대폭 단축됩니다.</p>
 <p><code translate="no">nprobe</code> 을 조정하면 주어진 시나리오에서 정확도와 속도 사이의 이상적인 균형을 찾을 수 있습니다. <a href="https://zilliz.com/blog/Accelerating-Similarity-Search-on-Really-Big-Data-with-Vector-Indexing">IVF_FLAT 성능 테스트</a> 결과는 대상 입력 벡터의 수(<code translate="no">nq</code>)와 검색할 클러스터의 수(<code translate="no">nprobe</code>)가 모두 증가함에 따라 쿼리 시간이 급격히 증가한다는 것을 보여줍니다.</p>
 <p>IVF_FLAT은 가장 기본적인 IVF 인덱스이며, 각 유닛에 저장된 인코딩된 데이터는 원본 데이터와 일치합니다.</p>
 <ul>
@@ -262,7 +262,7 @@ title: 인메모리 인덱스
 </ul></li>
 </ul>
 <h3 id="IVFSQ8" class="common-anchor-header">IVF_SQ8</h3><p>IVF_FLAT은 압축을 수행하지 않으므로 생성되는 인덱스 파일은 인덱싱되지 않은 원본 원시 벡터 데이터와 거의 같은 크기입니다. 예를 들어, 원본 1B SIFT 데이터 세트가 476GB인 경우, IVF_FLAT 인덱스 파일은 이보다 약간 더 작아집니다(~470GB). 모든 인덱스 파일을 메모리에 로드하면 470GB의 스토리지가 소모됩니다.</p>
-<p>디스크, CPU 또는 GPU 메모리 리소스가 제한되어 있는 경우 IVF_SQ8이 IVF_FLAT보다 더 나은 옵션입니다. 이 인덱스 유형은 스칼라 양자화(SQ)를 수행하여 각 FLOAT(4바이트)를 UINT8(1바이트)로 변환할 수 있습니다. 이렇게 하면 디스크, CPU, GPU 메모리 소비가 70~75%까지 줄어듭니다. 1B SIFT 데이터 세트의 경우, IVF_SQ8 인덱스 파일은 140GB의 스토리지만 필요합니다.</p>
+<p>디스크, CPU 또는 GPU 메모리 리소스가 제한되어 있는 경우 IVF_SQ8이 IVF_FLAT보다 더 나은 옵션입니다. 이 인덱스 유형은 스칼라 양자화(SQ)를 수행하여 각 FLOAT(4바이트)를 UINT8(1바이트)로 변환할 수 있습니다. 이렇게 하면 디스크, CPU, GPU 메모리 소비가 70~75% 감소합니다. 1B SIFT 데이터 세트의 경우, IVF_SQ8 인덱스 파일은 140GB의 스토리지만 필요합니다.</p>
 <ul>
 <li><p>인덱스 구축 매개변수</p>
 <table>
@@ -340,7 +340,7 @@ title: 인메모리 인덱스
 </li>
 </ul></li>
 </ul>
-<h3 id="SCANN" class="common-anchor-header">SCANN</h3><p>SCANN(점수 인식 양자화 손실)은 벡터 클러스터링 및 제품 양자화 측면에서 IVF_PQ와 유사합니다. 차이점은 제품 양자화의 구현 세부 사항과 효율적인 계산을 위해 SIMD(단일 명령어/다중 데이터)를 사용한다는 점입니다.</p>
+<h3 id="SCANN" class="common-anchor-header">SCANN</h3><p>ScaNN(확장 가능한 최인접 이웃)은 벡터 클러스터링 및 제품 정량화 측면에서 IVF_PQ와 유사합니다. 차이점은 제품 양자화의 구현 세부 사항과 효율적인 계산을 위해 SIMD(단일 명령어/다중 데이터)를 사용한다는 점입니다.</p>
 <ul>
 <li><p>인덱스 구축 매개변수</p>
 <table>
@@ -424,7 +424,7 @@ title: 인메모리 인덱스
 </li>
 </ul>
 <h3 id="BINIVFFLAT" class="common-anchor-header">BIN_IVF_FLAT</h3><p>이 인덱스는 이진 임베딩에만 사용할 수 있다는 점을 제외하면 IVF_FLAT과 완전히 동일합니다.</p>
-<p>BIN_IVF_FLAT은 벡터 데이터를 <code translate="no">nlist</code> 클러스터 단위로 나눈 다음, 대상 입력 벡터와 각 클러스터의 중심 사이의 거리를 비교합니다. 시스템이 쿼리하도록 설정된 클러스터 수에 따라(<code translate="no">nprobe</code>), 유사도 검색 결과는 대상 입력과 가장 유사한 클러스터에 있는 벡터 간의 비교만을 기반으로 반환되므로 쿼리 시간이 대폭 단축됩니다.</p>
+<p>BIN_IVF_FLAT은 벡터 데이터를 <code translate="no">nlist</code> 클러스터 단위로 나눈 다음, 대상 입력 벡터와 각 클러스터의 중심 사이의 거리를 비교합니다. 시스템이 쿼리하도록 설정된 클러스터 수에 따라(<code translate="no">nprobe</code>), 유사도 검색 결과는 대상 입력과 가장 유사한 클러스터의 벡터 간의 비교만을 기반으로 반환되므로 쿼리 시간이 대폭 단축됩니다.</p>
 <p><code translate="no">nprobe</code> 을 조정하면 주어진 시나리오에서 정확도와 속도 사이의 이상적인 균형을 찾을 수 있습니다. 쿼리 시간은 대상 입력 벡터의 수(<code translate="no">nq</code>)와 검색할 클러스터의 수(<code translate="no">nprobe</code>)가 모두 증가함에 따라 급격히 증가합니다.</p>
 <p>BIN_IVF_FLAT은 가장 기본적인 BIN_IVF 인덱스이며, 각 유닛에 저장된 인코딩된 데이터는 원본 데이터와 일치합니다.</p>
 <ul>
@@ -482,7 +482,7 @@ title: 인메모리 인덱스
 <tr><th>파라미터</th><th>설명</th><th>범위</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">drop_ratio_search</code></td><td>검색 과정에서 제외되는 작은 벡터 값의 비율입니다. 이 옵션을 사용하면 쿼리 벡터에서 무시할 가장 작은 값의 비율을 지정하여 검색 프로세스를 미세 조정할 수 있습니다. 검색 정확도와 성능의 균형을 맞추는 데 도움이 됩니다. <code translate="no">drop_ratio_search</code> 에 설정된 값이 작을수록 최종 점수에 기여하는 작은 값이 줄어듭니다. 일부 작은 값을 무시하면 정확도에 미치는 영향을 최소화하면서 검색 성능을 향상시킬 수 있습니다.</td><td>[0, 1]</td></tr>
+<tr><td><code translate="no">drop_ratio_search</code></td><td>검색 과정에서 제외되는 작은 벡터 값의 비율입니다. 이 옵션을 사용하면 쿼리 벡터에서 무시할 가장 작은 값의 비율을 지정하여 검색 프로세스를 미세 조정할 수 있습니다. 검색 정확도와 성능의 균형을 맞추는 데 도움이 됩니다. <code translate="no">drop_ratio_search</code> 에 설정된 값이 작을수록 최종 점수에 기여하는 작은 값이 줄어듭니다. 일부 작은 값을 무시하면 정확도에 미치는 영향을 최소화하면서 검색 성능을 개선할 수 있습니다.</td><td>[0, 1]</td></tr>
 </tbody>
 </table>
 </li>

@@ -5,7 +5,7 @@ summary: >-
   Anthropic pour résoudre le problème de l'isolation sémantique des morceaux,
   qui se pose dans les solutions actuelles de génération améliorée de recherche
   (RAG). Dans le paradigme pratique actuel de la RAG, les documents sont divisés
-  en plusieurs morceaux et une base de données vectorielle est utilisée pour
+  en plusieurs morceaux, et une base de données vectorielle est utilisée pour
   rechercher la requête, en récupérant les morceaux les plus pertinents. Un LLM
   répond ensuite à la requête en utilisant ces morceaux récupérés. Toutefois, ce
   processus de découpage peut entraîner la perte d'informations contextuelles,
@@ -33,7 +33,7 @@ title: Récupération contextuelle avec Milvus
   
    <span class="img-wrapper"> <img translate="no" src="https://raw.githubusercontent.com/milvus-io/bootcamp/refs/heads/master/images/contextual_retrieval_with_milvus.png" alt="image" class="doc-image" id="image" />
     La </span><a href="https://www.anthropic.com/news/contextual-retrieval">recherche contextuelle d'</a> <span class="img-wrapper"> <span>images</span> </span>est une méthode de recherche avancée proposée par Anthropic pour résoudre le problème de l'isolation sémantique des morceaux, qui se pose dans les solutions actuelles de génération améliorée de recherche (RAG). Dans le paradigme pratique actuel de la RAG, les documents sont divisés en plusieurs morceaux, et une base de données vectorielle est utilisée pour rechercher la requête, en récupérant les morceaux les plus pertinents. Un LLM répond ensuite à la requête en utilisant ces morceaux récupérés. Toutefois, ce processus de découpage peut entraîner la perte d'informations contextuelles, ce qui rend difficile la détermination de la pertinence par l'utilisateur.</p>
-<p>L'extraction contextuelle améliore les systèmes d'extraction traditionnels en ajoutant un contexte pertinent à chaque fragment de document avant l'intégration ou l'indexation, ce qui augmente la précision et réduit les erreurs d'extraction. Combinée à des techniques telles que la recherche hybride et le reranking, elle améliore les systèmes RAG (Retrieval-Augmented Generation), en particulier pour les grandes bases de connaissances. En outre, elle offre une solution rentable lorsqu'elle est associée à une mise en cache rapide, réduisant de manière significative la latence et les coûts opérationnels, les morceaux contextualisés coûtant environ 1,02 dollar par million de jetons de document. Il s'agit donc d'une approche évolutive et efficace pour le traitement de grandes bases de connaissances. La solution d'Anthropic présente deux aspects intéressants :</p>
+<p>La recherche contextuelle améliore les systèmes de recherche traditionnels en ajoutant un contexte pertinent à chaque fragment de document avant l'intégration ou l'indexation, ce qui augmente la précision et réduit les erreurs de recherche. Combinée à des techniques telles que la recherche hybride et le reranking, elle améliore les systèmes RAG (Retrieval-Augmented Generation), en particulier pour les grandes bases de connaissances. En outre, elle offre une solution rentable lorsqu'elle est associée à une mise en cache rapide, réduisant de manière significative la latence et les coûts opérationnels, les morceaux contextualisés coûtant environ 1,02 dollar par million de jetons de document. Il s'agit donc d'une approche évolutive et efficace pour le traitement de grandes bases de connaissances. La solution d'Anthropic présente deux aspects intéressants :</p>
 <ul>
 <li><code translate="no">Document Enhancement</code>: La réécriture des requêtes est une technique cruciale dans la recherche d'information moderne, qui utilise souvent des informations auxiliaires pour rendre la requête plus informative. De même, pour obtenir de meilleures performances dans RAG, le prétraitement des documents avec un LLM (par exemple, le nettoyage de la source de données, le complément des informations perdues, le résumé, etc. En d'autres termes, cette étape de prétraitement aide à rapprocher les documents des requêtes en termes de pertinence.</li>
 <li><code translate="no">Low-Cost Processing by Caching Long Context</code>: Une préoccupation commune lors de l'utilisation des LLM pour traiter les documents est le coût. Le KVCache est une solution populaire qui permet de réutiliser les résultats intermédiaires pour le même contexte précédent. Alors que la plupart des fournisseurs de LLM hébergés rendent cette fonctionnalité transparente pour l'utilisateur, Anthropic donne aux utilisateurs le contrôle sur le processus de mise en cache. Lorsqu'un hit du cache se produit, la plupart des calculs peuvent être sauvegardés (ceci est courant lorsque le contexte long reste le même, mais que l'instruction pour chaque requête change). Pour plus de détails, cliquez <a href="https://www.anthropic.com/news/prompt-caching">ici</a>.</li>
@@ -60,8 +60,8 @@ $ pip install anthropic
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <p>Si vous utilisez Google Colab, pour activer les dépendances qui viennent d'être installées, vous devrez peut-être <strong>redémarrer le runtime</strong> (cliquez sur le menu "Runtime" en haut de l'écran, et sélectionnez "Restart session" dans le menu déroulant).</p>
-<p>Vous aurez besoin des clés API de Cohere, Voyage et Anthropic pour exécuter le code.</p>
 </div>
+<p>Vous aurez besoin des clés API de Cohere, Voyage et Anthropic pour exécuter le code.</p>
 <h2 id="Download-Data" class="common-anchor-header">Télécharger les données<button data-href="#Download-Data" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -78,8 +78,8 @@ $ pip install anthropic
         ></path>
       </svg>
     </button></h2><p>La commande suivante permet de télécharger les données d'exemple utilisées dans la <a href="https://github.com/anthropics/anthropic-cookbook/blob/main/skills/contextual-embeddings/guide.ipynb">démonstration</a> originale <a href="https://github.com/anthropics/anthropic-cookbook/blob/main/skills/contextual-embeddings/guide.ipynb">d'</a>Anthropic.</p>
-<pre><code translate="no" class="language-shell">$ wget <span class="hljs-attr">https</span>:<span class="hljs-comment">//github.com/anthropics/anthropic-cookbook/blob/main/skills/contextual-embeddings/data/codebase_chunks.json</span>
-$ wget <span class="hljs-attr">https</span>:<span class="hljs-comment">//github.com/anthropics/anthropic-cookbook/blob/main/skills/contextual-embeddings/data/evaluation_set.jsonl</span>
+<pre><code translate="no" class="language-shell">$ wget <span class="hljs-attr">https</span>:<span class="hljs-comment">//raw.githubusercontent.com/anthropics/anthropic-cookbook/refs/heads/main/skills/contextual-embeddings/data/codebase_chunks.json</span>
+$ wget <span class="hljs-attr">https</span>:<span class="hljs-comment">//raw.githubusercontent.com/anthropics/anthropic-cookbook/refs/heads/main/skills/contextual-embeddings/data/evaluation_set.jsonl</span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Define-Retriever" class="common-anchor-header">Définir le récupérateur<button data-href="#Define-Retriever" class="anchor-icon" translate="no">
       <svg translate="no"

@@ -1368,6 +1368,12 @@
                 "id": "milvus_hybrid_search_retriever.md",
                 "order": 3,
                 "children": []
+              },
+              {
+                "label": "PrivéGPT",
+                "id": "use_milvus_in_private_gpt.md",
+                "order": 4,
+                "children": []
               }
             ]
           },
@@ -1519,6 +1525,18 @@
             "id": "apify_milvus_rag.md",
             "order": 2,
             "children": []
+          },
+          {
+            "label": "Non structuré",
+            "id": "rag_with_milvus_and_unstructured.md",
+            "order": 3,
+            "children": []
+          },
+          {
+            "label": "Masque PII",
+            "id": "RAG_with_pii_and_milvus.md",
+            "order": 4,
+            "children": []
           }
         ]
       },
@@ -1610,6 +1628,12 @@
         "children": []
       },
       {
+        "label": "Recommandation de film",
+        "id": "movie_recommendation_with_milvus.md",
+        "order": 9,
+        "children": []
+      },
+      {
         "label": "En savoir plus",
         "id": "explore-more",
         "order": 99,
@@ -1685,7 +1709,7 @@
         "children": []
       },
       {
-        "label": "FAQ opérationnelles",
+        "label": "FAQ opérationnelle",
         "id": "operational_faq.md",
         "order": 2,
         "children": []

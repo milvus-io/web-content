@@ -28,7 +28,7 @@ title: Milvus를 사용한 문맥 검색
   
    <span class="img-wrapper"> <img translate="no" src="https://raw.githubusercontent.com/milvus-io/bootcamp/refs/heads/master/images/contextual_retrieval_with_milvus.png" alt="image" class="doc-image" id="image" />
    </span> <span class="img-wrapper"> <span>이미지</span> </span><a href="https://www.anthropic.com/news/contextual-retrieval">문맥</a> 검색은 현재의 검색 증강 세대(RAG) 솔루션에서 발생하는 청크의 의미적 고립 문제를 해결하기 위해 Anthropic에서 제안한 고급 검색 방법입니다. 현재의 실용적인 RAG 패러다임에서는 문서를 여러 청크로 나누고 벡터 데이터베이스를 사용해 쿼리를 검색하여 가장 관련성이 높은 청크를 검색합니다. 그런 다음 LLM은 이렇게 검색된 청크를 사용하여 쿼리에 응답합니다. 그러나 이 청크 처리 과정에서는 문맥 정보가 손실되어 검색기가 관련성을 판단하기 어려울 수 있습니다.</p>
-<p>문맥 검색은 임베딩 또는 색인화 전에 각 문서 청크에 관련 문맥을 추가하여 정확도를 높이고 검색 오류를 줄임으로써 기존 검색 시스템을 개선합니다. 하이브리드 검색 및 재순위 지정과 같은 기술과 결합하여 특히 대규모 지식 베이스의 검색 증강 생성(RAG) 시스템을 향상시킵니다. 또한, 신속한 캐싱과 함께 사용하면 지연 시간과 운영 비용을 크게 줄여주는 비용 효율적인 솔루션을 제공하며, 문맥화된 청크는 문서 토큰 백만 개당 약 1.02달러의 비용이 듭니다. 따라서 대규모 지식 베이스를 처리하기 위한 확장 가능하고 효율적인 접근 방식입니다. Anthropic의 솔루션은 두 가지 측면에서 인사이트를 제공합니다:</p>
+<p>문맥 검색은 임베딩 또는 색인화 전에 각 문서 청크에 관련 문맥을 추가하여 정확도를 높이고 검색 오류를 줄임으로써 기존 검색 시스템을 개선합니다. 하이브리드 검색 및 재순위 지정과 같은 기술과 결합하면 특히 대규모 지식 베이스의 검색 증강 생성(RAG) 시스템을 향상시킬 수 있습니다. 또한, 신속한 캐싱과 함께 사용하면 지연 시간과 운영 비용을 크게 줄여주는 비용 효율적인 솔루션을 제공하며, 문맥화된 청크는 문서 토큰 백만 개당 약 1.02달러의 비용이 듭니다. 따라서 대규모 지식 베이스를 처리하기 위한 확장 가능하고 효율적인 접근 방식입니다. Anthropic의 솔루션은 두 가지 측면에서 인사이트를 제공합니다:</p>
 <ul>
 <li><code translate="no">Document Enhancement</code>: 쿼리 재작성은 최신 정보 검색에서 중요한 기술로, 종종 보조 정보를 사용해 쿼리를 더 유익하게 만드는 데 사용됩니다. 마찬가지로, RAG에서 더 나은 성능을 얻으려면 색인 전에 LLM으로 문서를 전처리(예: 데이터 소스 정리, 손실된 정보 보완, 요약 등)하면 관련 문서를 검색할 가능성이 크게 향상될 수 있습니다. 즉, 이 전처리 단계는 관련성 측면에서 문서를 쿼리에 더 가깝게 만드는 데 도움이 됩니다.</li>
 <li><code translate="no">Low-Cost Processing by Caching Long Context</code>: LLM을 사용해 문서를 처리할 때 흔히 우려하는 것 중 하나는 비용입니다. KVCache는 동일한 이전 컨텍스트에 대해 중간 결과를 재사용할 수 있는 인기 있는 솔루션입니다. 대부분의 호스팅 LLM 공급업체는 이 기능을 사용자에게 투명하게 제공하지만, Anthropic은 사용자가 캐싱 프로세스를 제어할 수 있습니다. 캐시 히트가 발생하면 대부분의 계산을 저장할 수 있습니다(긴 컨텍스트는 동일하게 유지되지만 각 쿼리에 대한 명령어가 변경되는 경우가 일반적입니다). 자세한 내용은 <a href="https://www.anthropic.com/news/prompt-caching">여기를</a> 클릭하세요.</li>
@@ -55,8 +55,8 @@ $ pip install anthropic
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <p>Google Colab을 사용하는 경우 방금 설치한 종속 요소를 사용하려면 <strong>런타임을 다시 시작해야</strong> 할 수 있습니다(화면 상단의 "런타임" 메뉴를 클릭하고 드롭다운 메뉴에서 "세션 다시 시작"을 선택).</p>
-<p>코드를 실행하려면 Cohere, Voyage, Anthropic의 API 키가 필요합니다.</p>
 </div>
+<p>코드를 실행하려면 Cohere, Voyage, Anthropic의 API 키가 필요합니다.</p>
 <h2 id="Download-Data" class="common-anchor-header">데이터 다운로드<button data-href="#Download-Data" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -73,8 +73,8 @@ $ pip install anthropic
         ></path>
       </svg>
     </button></h2><p>다음 명령은 원래 Anthropic <a href="https://github.com/anthropics/anthropic-cookbook/blob/main/skills/contextual-embeddings/guide.ipynb">데모에</a> 사용된 예제 데이터를 다운로드합니다.</p>
-<pre><code translate="no" class="language-shell">$ wget <span class="hljs-attr">https</span>:<span class="hljs-comment">//github.com/anthropics/anthropic-cookbook/blob/main/skills/contextual-embeddings/data/codebase_chunks.json</span>
-$ wget <span class="hljs-attr">https</span>:<span class="hljs-comment">//github.com/anthropics/anthropic-cookbook/blob/main/skills/contextual-embeddings/data/evaluation_set.jsonl</span>
+<pre><code translate="no" class="language-shell">$ wget <span class="hljs-attr">https</span>:<span class="hljs-comment">//raw.githubusercontent.com/anthropics/anthropic-cookbook/refs/heads/main/skills/contextual-embeddings/data/codebase_chunks.json</span>
+$ wget <span class="hljs-attr">https</span>:<span class="hljs-comment">//raw.githubusercontent.com/anthropics/anthropic-cookbook/refs/heads/main/skills/contextual-embeddings/data/evaluation_set.jsonl</span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Define-Retriever" class="common-anchor-header">리트리버 정의<button data-href="#Define-Retriever" class="anchor-icon" translate="no">
       <svg translate="no"

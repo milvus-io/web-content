@@ -59,8 +59,8 @@ title: Ejecutar Milvus con soporte GPU usando Docker Compose
         ></path>
       </svg>
     </button></h2><p>Para instalar Milvus con soporte GPU utilizando Docker Compose, siga estos pasos.</p>
-<h3 id="1-Download-and-configure-the-YAML-file" class="common-anchor-header">1. Descargue y configure el archivo YAML</h3><p>Descarga <a href="https://github.com/milvus-io/milvus/releases/download/v2.4.13-hotfix/milvus-standalone-docker-compose-gpu.yml"><code translate="no">milvus-standalone-docker-compose-gpu.yml</code></a> y guárdelo como docker-compose.yml manualmente, o con el siguiente comando.</p>
-<pre><code translate="no" class="language-shell">$ wget https://github.com/milvus-io/milvus/releases/download/v2.4.13-hotfix/milvus-standalone-docker-compose-gpu.yml -O docker-compose.yml
+<h3 id="1-Download-and-configure-the-YAML-file" class="common-anchor-header">1. Descargue y configure el archivo YAML</h3><p>Descarga <a href="https://github.com/milvus-io/milvus/releases/download/v2.4.14/milvus-standalone-docker-compose-gpu.yml"><code translate="no">milvus-standalone-docker-compose-gpu.yml</code></a> y guárdelo como docker-compose.yml manualmente, o con el siguiente comando.</p>
+<pre><code translate="no" class="language-shell">$ wget https://github.com/milvus-io/milvus/releases/download/v2.4.14/milvus-standalone-docker-compose-gpu.yml -O docker-compose.yml
 <button class="copy-code-btn"></button></code></pre>
 <p>Es necesario realizar algunos cambios en las variables de entorno del servicio autónomo en el archivo YAML como se indica a continuación:</p>
 <ul>
@@ -126,7 +126,7 @@ milvus-standalone   /tini -- milvus run standalone   Up             0.0.0.0:1953
 <p>Haga que los dispositivos GPU <code translate="no">0</code> y <code translate="no">1</code> sean visibles para Milvus:</p>
 <pre><code translate="no" class="language-shell">$ CUDA_VISIBLE_DEVICES=0,1 ./milvus run standalone
 <button class="copy-code-btn"></button></code></pre>
-<p>Puede detener y eliminar este contenedor como se indica a continuación.</p>
+<p>Puede detener y eliminar este contenedor de la siguiente manera.</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-comment"># Stop Milvus</span>
 $ <span class="hljs-built_in">sudo</span> docker compose down
 

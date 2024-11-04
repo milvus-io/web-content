@@ -90,7 +90,7 @@ title: Gestionar grupos de recursos
         ></path>
       </svg>
     </button></h2><div class="alert note">
-<p>Todos los ejemplos de código de esta página están en PyMilvus 2.4.8. Actualiza tu instalación de PyMilvus antes de ejecutarlos.</p>
+<p>Todos los ejemplos de código de esta página están en PyMilvus 2.4.9. Actualiza tu instalación de PyMilvus antes de ejecutarlos.</p>
 </div>
 <ol>
 <li><p>Crear un grupo de recursos.</p>
@@ -296,7 +296,7 @@ scale_to(<span class="hljs-number">5</span>)
 <span class="hljs-comment"># rg1 has 3 nodes, rg2 has 1 node, __default_resource_group has 1 node.</span>
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>Escalado en clúster</p>
-<p>De forma similar, podemos establecer reglas de escalado que prioricen la selección de QueryNodes del grupo de recursos <strong>__pending_nodes</strong>. Esta información puede obtenerse a través de la API <code translate="no">describe_resource_group</code>. Conseguir el objetivo de escalado en el grupo de recursos especificado.</p>
+<p>De forma similar, podemos establecer reglas de escalado de entrada que prioricen la selección de QueryNodes del grupo de recursos <strong>__pending_nodes</strong>. Esta información puede obtenerse a través de la API <code translate="no">describe_resource_group</code>. Conseguir el objetivo de escalado en el grupo de recursos especificado.</p>
 <pre><code translate="no" class="language-Python"><span class="hljs-comment"># scale rg1 from 3 nodes into 2 nodes</span>
 utility.update_resource_groups({
     <span class="hljs-string">&quot;rg1&quot;</span>: ResourceGroupConfig(
@@ -328,8 +328,8 @@ scale_to(<span class="hljs-number">4</span>)
         ></path>
       </svg>
     </button></h2><ul>
-<li>Las réplicas de una misma colección y los grupos de recursos tienen una relación de N a N.</li>
-<li>Cuando se cargan varias réplicas de una misma colección en un grupo de recursos, los QueryNodes de ese grupo de recursos se distribuyen uniformemente entre las réplicas, garantizando que la diferencia en el número de QueryNodes que tiene cada réplica no sea superior a 1.</li>
+<li>Las réplicas de una única colección y los grupos de recursos tienen una relación de N a N.</li>
+<li>Cuando se cargan varias réplicas de una única colección en un grupo de recursos, los QueryNodes de ese grupo de recursos se distribuyen uniformemente entre las réplicas, garantizando que la diferencia en el número de QueryNodes que tiene cada réplica no sea superior a 1.</li>
 </ul>
 <h1 id="Whats-next" class="common-anchor-header">Lo que sigue<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"

@@ -33,13 +33,13 @@ title: Kontextuelle Abfrage mit Milvus
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="https://raw.githubusercontent.com/milvus-io/bootcamp/refs/heads/master/images/contextual_retrieval_with_milvus.png" alt="image" class="doc-image" id="image" />
-   </span> <span class="img-wrapper"> <span>image</span> </span><a href="https://www.anthropic.com/news/contextual-retrieval">Contextual Retrieval</a> ist eine fortschrittliche Retrieval-Methode, die von Anthropic vorgeschlagen wurde, um das Problem der semantischen Isolierung von Chunks zu lösen, das bei aktuellen Retrieval-Augmented Generation (RAG) Lösungen auftritt. Im derzeitigen praktischen RAG-Paradigma werden Dokumente in mehrere Chunks unterteilt, und eine Vektordatenbank wird für die Suche nach der Anfrage verwendet, wobei die relevantesten Chunks abgerufen werden. Ein LLM antwortet dann auf die Anfrage unter Verwendung dieser abgerufenen Chunks. Dieser Chunking-Prozess kann jedoch zum Verlust von Kontextinformationen führen, wodurch es für den Retriever schwierig wird, die Relevanz zu bestimmen.</p>
+   </span> <span class="img-wrapper"> <span>image</span> </span><a href="https://www.anthropic.com/news/contextual-retrieval">Contextual Retrieval</a> ist eine fortschrittliche Retrieval-Methode, die von Anthropic vorgeschlagen wurde, um das Problem der semantischen Isolierung von Chunks zu lösen, das bei aktuellen Retrieval-Augmented Generation (RAG) Lösungen auftritt. Im derzeitigen praktischen RAG-Paradigma werden Dokumente in mehrere Chunks unterteilt, und eine Vektordatenbank wird für die Suche nach der Anfrage verwendet, wobei die relevantesten Chunks abgerufen werden. Ein LLM antwortet dann auf die Anfrage unter Verwendung dieser abgerufenen Chunks. Dieses Chunking-Verfahren kann jedoch zum Verlust von Kontextinformationen führen, so dass es für den Retriever schwierig ist, die Relevanz zu bestimmen.</p>
 <p>Contextual Retrieval verbessert herkömmliche Retrievalsysteme, indem es jedem Dokumentchunk vor der Einbettung oder Indizierung relevanten Kontext hinzufügt, was die Genauigkeit erhöht und Retrievalfehler reduziert. In Kombination mit Techniken wie Hybrid Retrieval und Reranking verbessert es Retrieval-Augmented Generation (RAG) Systeme, insbesondere für große Wissensdatenbanken. Darüber hinaus bietet es eine kosteneffiziente Lösung, wenn es mit promptem Caching gepaart wird, wodurch die Latenzzeit und die Betriebskosten erheblich reduziert werden, wobei kontextualisierte Chunks etwa 1,02 US-Dollar pro Million Dokument-Token kosten. Dies macht es zu einem skalierbaren und effizienten Ansatz für die Handhabung großer Wissensdatenbanken. Die Lösung von Anthropic weist zwei aufschlussreiche Aspekte auf:</p>
 <ul>
 <li><code translate="no">Document Enhancement</code>: Das Umschreiben von Abfragen ist eine wichtige Technik im modernen Information Retrieval, bei der häufig Zusatzinformationen verwendet werden, um die Abfrage informativer zu gestalten. In ähnlicher Weise kann die Vorverarbeitung von Dokumenten mit einem LLM (z. B. Bereinigung der Datenquelle, Ergänzung verlorener Informationen, Zusammenfassung usw.) vor der Indizierung die Chancen, relevante Dokumente zu finden, erheblich verbessern, um eine bessere Leistung bei RAG zu erzielen. Mit anderen Worten, dieser Vorverarbeitungsschritt trägt dazu bei, die Dokumente hinsichtlich ihrer Relevanz näher an die Suchanfragen heranzuführen.</li>
 <li><code translate="no">Low-Cost Processing by Caching Long Context</code>: Ein häufiges Problem bei der Verwendung von LLMs zur Verarbeitung von Dokumenten sind die Kosten. Der KVCache ist eine beliebte Lösung, die die Wiederverwendung von Zwischenergebnissen für denselben vorangegangenen Kontext ermöglicht. Während die meisten Anbieter von gehosteten LLMs diese Funktion für den Benutzer transparent machen, gibt Anthropic dem Benutzer die Kontrolle über den Caching-Prozess. Wenn ein Cache-Treffer auftritt, können die meisten Berechnungen gespeichert werden (dies ist üblich, wenn der lange Kontext derselbe bleibt, aber die Anweisung für jede Abfrage sich ändert). Für weitere Details klicken Sie <a href="https://www.anthropic.com/news/prompt-caching">hier</a>.</li>
 </ul>
-<p>In diesem Notizbuch demonstrieren wir, wie kontextuelles Retrieval unter Verwendung von Milvus mit einem LLM durchgeführt werden kann, wobei dicht-sparse Hybridretrieval und ein Reranker kombiniert werden, um ein immer leistungsfähigeres Retrievalsystem zu schaffen. Die Daten und der Versuchsaufbau basieren auf dem <a href="https://github.com/anthropics/anthropic-cookbook/blob/main/skills/contextual-embeddings/guide.ipynb">kontextuellen Retrieval</a>.</p>
+<p>In diesem Notizbuch demonstrieren wir, wie kontextuelles Retrieval unter Verwendung von Milvus mit einem LLM durchgeführt werden kann, wobei dicht-sparse Hybridretrieval und ein Reranker kombiniert werden, um ein zunehmend leistungsfähigeres Retrievalsystem zu schaffen. Die Daten und der Versuchsaufbau basieren auf dem <a href="https://github.com/anthropics/anthropic-cookbook/blob/main/skills/contextual-embeddings/guide.ipynb">kontextuellen Retrieval</a>.</p>
 <h2 id="Preparation" class="common-anchor-header">Vorbereitung<button data-href="#Preparation" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -61,8 +61,8 @@ $ pip install anthropic
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <p>Wenn Sie Google Colab verwenden, müssen Sie <strong>die Laufzeitumgebung neu starten</strong>, um die soeben installierten Abhängigkeiten zu aktivieren (klicken Sie auf das Menü "Laufzeit" am oberen Rand des Bildschirms und wählen Sie "Sitzung neu starten" aus dem Dropdown-Menü).</p>
-<p>Sie benötigen API-Schlüssel von Cohere, Voyage und Anthropic, um den Code auszuführen.</p>
 </div>
+<p>Sie benötigen API-Schlüssel von Cohere, Voyage und Anthropic, um den Code auszuführen.</p>
 <h2 id="Download-Data" class="common-anchor-header">Daten herunterladen<button data-href="#Download-Data" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -79,8 +79,8 @@ $ pip install anthropic
         ></path>
       </svg>
     </button></h2><p>Mit dem folgenden Befehl können Sie die Beispieldaten herunterladen, die in der ursprünglichen <a href="https://github.com/anthropics/anthropic-cookbook/blob/main/skills/contextual-embeddings/guide.ipynb">Anthropic-Demo</a> verwendet wurden.</p>
-<pre><code translate="no" class="language-shell">$ wget <span class="hljs-attr">https</span>:<span class="hljs-comment">//github.com/anthropics/anthropic-cookbook/blob/main/skills/contextual-embeddings/data/codebase_chunks.json</span>
-$ wget <span class="hljs-attr">https</span>:<span class="hljs-comment">//github.com/anthropics/anthropic-cookbook/blob/main/skills/contextual-embeddings/data/evaluation_set.jsonl</span>
+<pre><code translate="no" class="language-shell">$ wget <span class="hljs-attr">https</span>:<span class="hljs-comment">//raw.githubusercontent.com/anthropics/anthropic-cookbook/refs/heads/main/skills/contextual-embeddings/data/codebase_chunks.json</span>
+$ wget <span class="hljs-attr">https</span>:<span class="hljs-comment">//raw.githubusercontent.com/anthropics/anthropic-cookbook/refs/heads/main/skills/contextual-embeddings/data/evaluation_set.jsonl</span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Define-Retriever" class="common-anchor-header">Retriever definieren<button data-href="#Define-Retriever" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -555,7 +555,7 @@ Total queries: 248
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Das hybride Retrieval zeigt eine Verbesserung, aber die Ergebnisse können durch die Anwendung einer kontextuellen Retrieval-Methode weiter verbessert werden. Um dies zu erreichen, werden wir das Sprachmodell von Anthropic verwenden, um den Kontext des gesamten Dokuments für jeden Chunk voranzustellen.</p>
+    </button></h2><p>Das hybride Retrieval zeigt eine Verbesserung, aber die Ergebnisse können durch die Anwendung einer kontextbezogenen Retrieval-Methode weiter verbessert werden. Um dies zu erreichen, werden wir das Sprachmodell von Anthropic verwenden, um den Kontext des gesamten Dokuments für jeden Chunk voranzustellen.</p>
 <pre><code translate="no" class="language-python">anthropic_client = anthropic.<span class="hljs-title class_">Anthropic</span>(
     api_key=<span class="hljs-string">&quot;your-anthropic-api-key&quot;</span>,
 )
@@ -619,4 +619,4 @@ Pass@5: 90.91%
 Total Score: 0.9090821812596005
 Total queries: 248
 </code></pre>
-<p>Wir haben mehrere Methoden zur Verbesserung der Retrieval-Leistung demonstriert. Mit einem stärker auf das Szenario zugeschnittenen Ad-hoc-Design zeigt das kontextuelle Retrieval ein erhebliches Potenzial zur Vorverarbeitung von Dokumenten zu geringen Kosten, was zu einem besseren RAG-System führt.</p>
+<p>Wir haben mehrere Methoden zur Verbesserung der Retrieval-Leistung demonstriert. Mit einem stärker auf das Szenario zugeschnittenen Ad-hoc-Design zeigt das kontextuelle Retrieval ein erhebliches Potenzial für die Vorverarbeitung von Dokumenten zu geringen Kosten, was zu einem besseren RAG-System führt.</p>

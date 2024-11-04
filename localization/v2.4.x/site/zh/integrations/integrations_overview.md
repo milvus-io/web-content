@@ -61,6 +61,9 @@ title: 集成概述
 <tr><td><a href="/docs/zh/build_rag_on_arm.md">在 Arm 架构上构建 RAG</a></td><td>RAG</td><td>Milvus、Arm</td></tr>
 <tr><td><a href="/docs/zh/build_RAG_with_milvus_and_fireworks.md">使用 Milvus 和 Fireworks AI 构建 RAG</a></td><td>LLMs</td><td>Milvus、Fireworks AI</td></tr>
 <tr><td><a href="/docs/zh/build_RAG_with_milvus_and_lepton.md">使用 Milvus 和 Lepton AI 构建 RAG</a></td><td>LLMs</td><td>Milvus、Lepton AI</td></tr>
-<tr><td><a href="/docs/zh/build_RAG_with_milvus_and_siliconflow.md">使用 Milvus 和 SiliconFlow 构建 RAG</a></td><td>LLMs</td><td>Milvus、SiliconFlow</td></tr>
+<tr><td><a href="/docs/zh/build_RAG_with_milvus_and_siliconflow">使用 Milvus 和 SiliconFlow 构建 RAG</a></td><td>LLMs</td><td>Milvus、SiliconFlow</td></tr>
+<tr><td><a href="/docs/zh/rag_with_milvus_and_unstructured.md">利用 Milvus 和非结构化数据源构建 RAG</a></td><td>数据源</td><td>Milvus、非结构化</td></tr>
+<tr><td><a href="/docs/zh/RAG_with_pii_and_milvus.md">使用 Milvus + PII 屏蔽器构建 RAG</a></td><td>数据源</td><td>Milvus，PII 屏蔽器</td></tr>
+<tr><td><a href="/docs/zh/use_milvus_in_private_gpt.md">在 PrivateGPT 中使用 Milvus</a></td><td>协调</td><td>向量搜索</td></tr>
 </tbody>
 </table>

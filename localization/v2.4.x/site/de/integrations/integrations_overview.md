@@ -63,6 +63,9 @@ title: Übersicht über Integrationen
 <tr><td><a href="/docs/de/build_rag_on_arm.md">RAG auf der Arm-Architektur aufbauen</a></td><td>RAG</td><td>Milvus, Arm</td></tr>
 <tr><td><a href="/docs/de/build_RAG_with_milvus_and_fireworks.md">Aufbau von RAG mit Milvus und Fireworks AI</a></td><td>LLMs</td><td>Milvus, Feuerwerkskörper-KI</td></tr>
 <tr><td><a href="/docs/de/build_RAG_with_milvus_and_lepton.md">Bauen Sie eine RAG mit Milvus und Lepton AI</a></td><td>LLMs</td><td>Milvus, Lepton AI</td></tr>
-<tr><td><a href="/docs/de/build_RAG_with_milvus_and_siliconflow.md">Aufbau von RAG mit Milvus und SiliconFlow</a></td><td>LLMs</td><td>Milvus, SiliconFlow</td></tr>
+<tr><td><a href="/docs/de/build_RAG_with_milvus_and_siliconflow">Aufbau von RAG mit Milvus und SiliconFlow</a></td><td>LLMs</td><td>Milvus, SiliconFlow</td></tr>
+<tr><td><a href="/docs/de/rag_with_milvus_and_unstructured.md">Erstellen einer RAG mit Milvus und unstrukturierten</a></td><td>Datenquellen</td><td>Milvus, Unstrukturiert</td></tr>
+<tr><td><a href="/docs/de/RAG_with_pii_and_milvus.md">Aufbau einer RAG mit Milvus + PII Masker</a></td><td>Datenquellen</td><td>Milvus, PII-Masker</td></tr>
+<tr><td><a href="/docs/de/use_milvus_in_private_gpt.md">Verwendung von Milvus in PrivateGPT</a></td><td>Einrichtung</td><td>Vektorsuche</td></tr>
 </tbody>
 </table>

@@ -69,13 +69,13 @@ title: Gestionar esquema
         </tr>
         <tr>
             <td><code translate="no">max_length</code> (Obligatorio para el campo VARCHAR)</td>
-            <td>Longitud máxima de las cadenas que se permite insertar.</td>
+            <td>Longitud máxima en bytes de las cadenas que se permite insertar. Tenga en cuenta que los caracteres multibyte (por ejemplo, caracteres Unicode) pueden ocupar más de un byte cada uno, así que asegúrese de que la longitud en bytes de las cadenas insertadas no supera el límite especificado.</td>
             <td>[1, 65,535]</td>
         </tr>
     <tr>
         <td><code translate="no">dim</code></td>
         <td>Dimensión del vector</td>
-            <td>Tipo de dato: Integer &isin;[1, 32768].<br/>Obligatorio para un campo vectorial denso. Omitir para un campo <a href="https://milvus.io/docs/sparse_vector.md">vectorial disperso</a>.</td>
+            <td>Tipo de datos: Integer &isin;[1, 32768].<br/>Obligatorio para un campo vectorial denso. Omitir para un campo vectorial <a href="https://milvus.io/docs/sparse_vector.md">disperso</a>.</td>
     </tr>
     <tr>
         <td><code translate="no">is_partition_key</code></td>
@@ -129,8 +129,8 @@ fields = [
 <ul>
 <li>BINARY_VECTOR: Almacena datos binarios como una secuencia de 0 y 1. Se utiliza para la representación compacta de características en el procesamiento de imágenes y la recuperación de información.</li>
 <li>FLOAT_VECTOR: Almacena números de coma flotante de 32 bits, utilizados habitualmente en computación científica y aprendizaje automático para representar números reales.</li>
-<li>FLOAT16_VECTOR: Almacena números de coma flotante de 16 bits de media precisión, utilizados en el aprendizaje profundo y los cálculos de GPU para la eficiencia de la memoria y el ancho de banda.</li>
-<li>BFLOAT16_VECTOR: Almacena números de coma flotante de 16 bits con precisión reducida pero el mismo rango de exponentes que Float32, popular en el aprendizaje profundo para reducir los requisitos de memoria y computación sin afectar significativamente a la precisión.</li>
+<li>FLOAT16_VECTOR: Almacena números de coma flotante de 16 bits y media precisión, utilizados en el aprendizaje profundo y los cálculos de GPU para la eficiencia de la memoria y el ancho de banda.</li>
+<li>BFLOAT16_VECTOR: Almacena números de punto flotante de 16 bits con precisión reducida pero el mismo rango de exponentes que Float32, popular en el aprendizaje profundo para reducir los requisitos de memoria y computación sin afectar significativamente a la precisión.</li>
 <li>SPARSE_FLOAT_VECTOR: Almacena una lista de elementos distintos de cero y sus índices correspondientes, utilizados para representar vectores dispersos. Para más información, consulte <a href="/docs/es/sparse_vector.md">Vectores dispersos</a>.</li>
 </ul>
 <p>Milvus soporta múltiples campos vectoriales en una colección. Para más información, consulte <a href="/docs/es/multi-vector-search.md">Búsqueda híbrida</a>.</p></li>
@@ -202,7 +202,7 @@ collection1 = <span class="hljs-title class_">Collection</span>(name=collection_
 <li>Puede definir el número de fragmento con <code translate="no">shards_num</code>.</li>
 <li>Puede definir el servidor Milvus en el que desea crear una colección especificando el alias en <code translate="no">using</code>.</li>
 <li>Puede habilitar la característica de clave <a href="/docs/es/multi_tenancy.md">de partición</a> en un campo configurando <code translate="no">is_partition_key</code> a <code translate="no">True</code> en el campo si necesita implementar <a href="/docs/es/multi_tenancy.md">multi-tenancy basado en clave de partición</a>.</li>
-<li>Puede habilitar el esquema <a href="/docs/es/enable-dynamic-field.md">dinámico</a> configurando <code translate="no">enable_dynamic_field</code> en <code translate="no">True</code> en el esquema de la colección si necesita <a href="/docs/es/enable-dynamic-field.md">habilitar el campo dinámico</a>.</li>
+<li>Puede habilitar el esquema dinámico configurando <code translate="no">enable_dynamic_field</code> en <code translate="no">True</code> en el esquema de la colección si necesita <a href="/docs/es/enable-dynamic-field.md">habilitar el campo dinámico</a>.</li>
 </ul>
 </div>
 <p><br/>

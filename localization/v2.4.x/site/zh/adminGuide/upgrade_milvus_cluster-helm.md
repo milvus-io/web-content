@@ -86,10 +86,10 @@ zilliztech/milvus       4.1.1           2.3.0                   Milvus is an ope
 zilliztech/milvus       4.1.0           2.3.0                   Milvus is an open-source vector database built ...
 <button class="copy-code-btn"></button></code></pre>
 <p>您可以按以下方式选择 Milvus 的升级路径：</p>
-<div style="display: none;">- 进行滚动升级](#conduct-a-rolling-upgrade) 从 Milvus v2.2.3 及以后的版本升级到 v2.4.13-hotfix。</div>
+<div style="display: none;">- 进行滚动升级](#conduct-a-rolling-upgrade) 从 Milvus v2.2.3 及以后的版本升级到 v2.4.14。</div>
 <ul>
-<li><p><a href="#Upgrade-Milvus-using-Helm">使用 Helm 升级 Milvus</a>，从 v2.2.3 之前的次版本升级到 v2.4.13-hotfix。</p></li>
-<li><p>在从 Milvus v2.1.x 升级到 v2.4.13-hotfix 之前<a href="#Migrate-the-metadata">迁移元数据</a>。</p></li>
+<li><p><a href="#Upgrade-Milvus-using-Helm">使用 Helm 升级 Milvus</a>，从 v2.2.3 之前的次版本升级到 v2.4.14。</p></li>
+<li><p>在从 Milvus v2.1.x 升级到 v2.4.14 之前<a href="#Migrate-the-metadata">迁移元数据</a>。</p></li>
 </ul>
 <div style="display: none;">
 <h2 id="Conduct-a-rolling-upgrade" class="common-anchor-header">进行滚动升级<button data-href="#Conduct-a-rolling-upgrade" class="anchor-icon" translate="no">
@@ -107,7 +107,7 @@ zilliztech/milvus       4.1.0           2.3.0                   Milvus is an ope
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>自 Milvus 2.2.3 起，您可以将 Milvus 协调器配置为主动待机模式，并为它们启用滚动升级功能，这样 Milvus 就能在协调器升级期间响应传入的请求。在以前的版本中，升级时需要移除协调器，然后再创建协调器，这可能会导致服务出现一定的停机时间。</p>
+    </button></h2><p>自 Milvus 2.2.3 起，您可以将 Milvus 协调器配置为主动待机模式工作，并为它们启用滚动升级功能，这样 Milvus 就可以在协调器升级期间响应传入的请求。在以前的版本中，升级时需要移除协调器，然后再创建协调器，这可能会导致服务出现一定的停机时间。</p>
 <p>滚动升级要求协调程序以活动-待机模式工作。您可以使用我们提供的<a href="https://raw.githubusercontent.com/milvus-io/milvus/master/deployments/upgrade/rollingUpdate.sh">脚本</a>将协调程序配置为活动-待机模式，然后开始滚动升级。</p>
 <p>基于 Kubernetes 提供的滚动更新功能，上述脚本会根据部署的依赖关系对部署进行有序更新。此外，Milvus 还实现了一种机制，确保其组件在升级过程中与依赖它们的组件保持兼容，从而大大减少了潜在的服务停机时间。</p>
 <p>该脚本仅适用于升级与 Helm 一起安装的 Milvus。下表列出了脚本中可用的命令标志。</p>
@@ -123,12 +123,12 @@ zilliztech/milvus       4.1.0           2.3.0                   Milvus is an ope
 <tr><td><code translate="no">o</code></td><td>操作符</td><td><code translate="no">update</code></td><td>假</td></tr>
 </tbody>
 </table>
-<p>确保 Milvus 实例中的所有部署都处于正常状态后。可以运行以下命令将 Milvus 实例升级到 2.4.13-hotfix。</p>
-<pre><code translate="no" class="language-shell">sh rollingUpdate.<span class="hljs-property">sh</span> -n <span class="hljs-keyword">default</span> -i my-release -o update -t <span class="hljs-number">2.4</span><span class="hljs-number">.13</span>-hotfix -w <span class="hljs-string">&#x27;milvusdb/milvus:v2.4.13-hotfix&#x27;</span>
+<p>确保 Milvus 实例中的所有部署都处于正常状态后。可以运行以下命令将 Milvus 实例升级到 2.4.14。</p>
+<pre><code translate="no" class="language-shell">sh rollingUpdate.<span class="hljs-property">sh</span> -n <span class="hljs-keyword">default</span> -i my-release -o update -t <span class="hljs-number">2.4</span><span class="hljs-number">.14</span> -w <span class="hljs-string">&#x27;milvusdb/milvus:v2.4.14&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <ol>
-<li>脚本硬编码了部署的升级顺序，无法更改。</li>
+<li>脚本对部署的升级顺序进行了硬编码，无法更改。</li>
 <li>脚本使用<code translate="no">kubectl patch</code> 更新部署，使用<code translate="no">kubectl rollout status</code> 观察部署状态。</li>
 <li>脚本使用<code translate="no">kubectl patch</code> 将部署的<code translate="no">app.kubernetes.io/version</code> 标签更新为命令中<code translate="no">-t</code> 标志后指定的标签。</li>
 </ol>
@@ -235,25 +235,25 @@ my-release-pulsar-zookeeper<span class="hljs-number">-2</span>                  
 <li>迁移 Milvus 元数据。</li>
 <li>使用新镜像启动 Milvus 组件。</li>
 </ol>
-<h4 id="2-Upgrade-Milvus-from-v21x-to-2413-hotfix" class="common-anchor-header">2.将 Milvus 从 2.1.x 升级到 2.4.13-hotfix</h4><p>以下命令假定你将 Milvus 从 v2.1.4 升级到 2.4.13-hotfix。请将它们改为适合你需要的版本。</p>
+<h4 id="2-Upgrade-Milvus-from-v21x-to-2414" class="common-anchor-header">2.将 Milvus 从 2.1.x 版升级到 2.4.14 版</h4><p>以下命令假定你将 Milvus 从 v2.1.4 升级到 2.4.14。请将它们更改为适合你需要的版本。</p>
 <ol>
 <li><p>指定 Milvus 实例名称、源 Milvus 版本和目标 Milvus 版本。</p>
-<pre><code translate="no">./migrate.sh -i my-release -s 2.1.4 -t 2.4.13-hotfix
+<pre><code translate="no">./migrate.sh -i my-release -s 2.1.4 -t 2.4.14
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>如果你的 Milvus 没有安装在默认的 K8s 命名空间，请用<code translate="no">-n</code> 指定命名空间。</p>
-<pre><code translate="no">./migrate.sh -i my-release -n milvus -s 2.1.4 -t 2.4.13-hotfix
+<pre><code translate="no">./migrate.sh -i my-release -n milvus -s 2.1.4 -t 2.4.14
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>如果 Milvus 安装的是自定义<code translate="no">rootpath</code> ，请用<code translate="no">-r</code> 指定根路径。</p>
-<pre><code translate="no">./migrate.sh -i my-release -n milvus -s 2.1.4 -t 2.4.13-hotfix -r by-dev
+<pre><code translate="no">./migrate.sh -i my-release -n milvus -s 2.1.4 -t 2.4.14 -r by-dev
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>如果你的 Milvus 安装的是自定义<code translate="no">image</code> ，请用<code translate="no">-w</code> 指定图片标签。</p>
-<pre><code translate="no">./migrate.sh -i my-release -n milvus -s 2.1.4 -t 2.4.13-hotfix -r by-dev -w milvusdb/milvus:v2.4.13-hotfix
+<pre><code translate="no">./migrate.sh -i my-release -n milvus -s 2.1.4 -t 2.4.14 -r by-dev -w milvusdb/milvus:v2.4.14
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>如果想在迁移完成后自动移除迁移 pod，请设置<code translate="no">-d true</code> 。</p>
-<pre><code translate="no">./migrate.sh -i my-release -n milvus -s 2.1.4 -t 2.4.13-hotfix -w milvusdb/milvus:v2.4.13-hotfix -d <span class="hljs-literal">true</span>
+<pre><code translate="no">./migrate.sh -i my-release -n milvus -s 2.1.4 -t 2.4.14 -w milvusdb/milvus:v2.4.14 -d <span class="hljs-literal">true</span>
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>如果迁移失败，请回滚并重新迁移。</p>
-<pre><code translate="no">./migrate.sh -i my-release -n milvus -s 2.1.4 -t 2.4.13-hotfix -r by-dev -o rollback -w milvusdb/milvus:v2.1.1
-./migrate.sh -i my-release -n milvus -s 2.1.4 -t 2.4.13-hotfix -r by-dev -o migrate -w milvusdb/milvus:v2.4.13-hotfix
+<pre><code translate="no">./migrate.sh -i my-release -n milvus -s 2.1.4 -t 2.4.14 -r by-dev -o rollback -w milvusdb/milvus:v2.1.1
+./migrate.sh -i my-release -n milvus -s 2.1.4 -t 2.4.14 -r by-dev -o migrate -w milvusdb/milvus:v2.4.14
 <button class="copy-code-btn"></button></code></pre></li>
 </ol>

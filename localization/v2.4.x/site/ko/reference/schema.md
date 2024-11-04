@@ -69,13 +69,13 @@ title: 스키마 관리
         </tr>
         <tr>
             <td><code translate="no">max_length</code> (VARCHAR 필드에 필수)</td>
-            <td>삽입할 수 있는 최대 문자열 길이입니다.</td>
+            <td>삽입할 수 있는 문자열의 최대 바이트 길이입니다. 멀티바이트 문자(예: 유니코드 문자)는 각각 1바이트 이상을 차지할 수 있으므로 삽입된 문자열의 바이트 길이가 지정된 제한을 초과하지 않도록 주의하세요.</td>
             <td>[1, 65,535]</td>
         </tr>
     <tr>
         <td><code translate="no">dim</code></td>
         <td>벡터의 차원</td>
-            <td>데이터 유형: 정수 &isin;[1, 32768].<br/>고밀도 벡터 필드의 경우 필수입니다. <a href="https://milvus.io/docs/sparse_vector.md">스파스 벡터</a> 필드의 경우 생략합니다.</td>
+            <td>데이터 유형: 정수 &isin;[1, 32768]<br/>밀집 벡터 필드의 경우 필수입니다. <a href="https://milvus.io/docs/sparse_vector.md">스파스 벡터</a> 필드의 경우 생략합니다.</td>
     </tr>
     <tr>
         <td><code translate="no">is_partition_key</code></td>
@@ -130,7 +130,7 @@ fields = [
 <li>바이너리_벡터: 이진 데이터를 0과 1의 시퀀스로 저장하며, 이미지 처리 및 정보 검색에서 특징을 간결하게 표현하는 데 사용됩니다.</li>
 <li>FLOAT_VECTOR: 과학 컴퓨팅 및 머신 러닝에서 실수를 표현하는 데 일반적으로 사용되는 32비트 부동소수점 숫자를 저장합니다.</li>
 <li>FLOAT16_VECTOR: 메모리 및 대역폭 효율성을 위해 딥러닝 및 GPU 계산에 사용되는 16비트 반정밀도 부동소수점 숫자를 저장합니다.</li>
-<li>BFLOAT16_VECTOR: 정확도는 떨어지지만 지수 범위는 Float32와 동일한 16비트 부동 소수점 숫자를 저장하며, 정확도에 큰 영향을 주지 않고 메모리 및 계산 요구 사항을 줄이기 위해 딥러닝에서 널리 사용됩니다.</li>
+<li>BFLOAT16_VECTOR: 정확도는 떨어지지만 Float32와 동일한 지수 범위를 가진 16비트 부동 소수점 숫자를 저장하며, 정확도에 큰 영향을 주지 않고 메모리 및 계산 요구 사항을 줄이기 위해 딥 러닝에서 널리 사용됩니다.</li>
 <li>SPARSE_FLOAT_VECTOR: 희소 벡터를 표현하는 데 사용되는 0이 아닌 요소 목록과 해당 인덱스를 저장합니다. 자세한 내용은 <a href="/docs/ko/sparse_vector.md">스파스 벡터를</a> 참조하세요.</li>
 </ul>
 <p>Milvus는 컬렉션에서 여러 개의 벡터 필드를 지원합니다. 자세한 내용은 <a href="/docs/ko/multi-vector-search.md">하이브리드 검색을</a> 참조하세요.</p></li>
@@ -175,7 +175,7 @@ fields = [
     <tr>
         <td><code translate="no">enable_dynamic_field</code></td>
         <td>동적 스키마 활성화 여부</td>
-        <td>데이터 유형: 부울(<code translate="no">true</code> 또는 <code translate="no">false</code>).<br/>선택 사항, 기본값은 <code translate="no">False</code> 입니다.<br/>동적 스키마에 대한 자세한 내용은 <a herf="enable-dynamic-field.md">동적 스키마</a> 및 컬렉션 관리를 위한 사용자 가이드를 참조하세요.</td>
+        <td>데이터 유형: 부울(<code translate="no">true</code> 또는 <code translate="no">false</code>).<br/>선택 사항, 기본값은 <code translate="no">False</code> 입니다.<br/>동적 스키마에 대한 자세한 내용은 동적 <a herf="enable-dynamic-field.md">스키마</a> 및 컬렉션 관리를 위한 사용자 가이드를 참조하세요.</td>
     </tr>
     </tbody>
 </table>
@@ -202,7 +202,7 @@ collection1 = <span class="hljs-title class_">Collection</span>(name=collection_
 <li>샤드 번호는 <code translate="no">shards_num</code> 로 정의할 수 있습니다.</li>
 <li><code translate="no">using</code> 에 별칭을 지정하여 컬렉션을 생성할 Milvus 서버를 정의할 수 있습니다.</li>
 <li><a href="/docs/ko/multi_tenancy.md">파티션 키 기반 멀티 테넌시를</a> 구현해야 하는 경우 필드에서 <code translate="no">is_partition_key</code> 을 <code translate="no">True</code> 으로 설정하여 필드에서 파티션 키 기능을 활성화할 수 있습니다.</li>
-<li><a href="/docs/ko/enable-dynamic-field.md">동적 필드를 활성화해야</a> 하는 경우 컬렉션 스키마에서 <code translate="no">enable_dynamic_field</code> 을 <code translate="no">True</code> 으로 설정하여 동적 스키마를 활성화할 수 있습니다.</li>
+<li>동적 <a href="/docs/ko/enable-dynamic-field.md">필드를 활성화해야</a> 하는 경우 컬렉션 스키마에서 <code translate="no">enable_dynamic_field</code> 을 <code translate="no">True</code> 으로 설정하여 동적 스키마를 활성화할 수 있습니다.</li>
 </ul>
 </div>
 <p><br/>

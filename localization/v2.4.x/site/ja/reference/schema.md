@@ -1,6 +1,6 @@
 ---
 id: schema.md
-summary: Milvusでスキーマを定義する方法を学ぶ。
+summary: Milvusでスキーマを定義する方法を学びます。
 title: スキーマの管理
 ---
 <h1 id="Manage-Schema" class="common-anchor-header">スキーマの管理<button data-href="#Manage-Schema" class="anchor-icon" translate="no">
@@ -18,7 +18,7 @@ title: スキーマの管理
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>このトピックではMilvusのスキーマについて紹介します。スキーマはコレクションとその中のフィールドのプロパティを定義するために使用されます。</p>
+    </button></h1><p>このトピックではMilvusにおけるスキーマについて紹介します。スキーマはコレクションとその中のフィールドのプロパティを定義するために使用されます。</p>
 <h2 id="Field-schema" class="common-anchor-header">フィールドスキーマ<button data-href="#Field-schema" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -35,7 +35,7 @@ title: スキーマの管理
         ></path>
       </svg>
     </button></h2><p>フィールドスキーマはフィールドの論理的定義です。<a href="#Collection-schema">コレクションスキーマを</a>定義し、<a href="/docs/ja/manage-collections.md">コレクションを管理する</a>前に最初に定義する必要があります。</p>
-<p>Milvusはコレクション内で1つの主キーフィールドのみをサポートします。</p>
+<p>Milvusはコレクション内の主キーフィールドを1つだけサポートしています。</p>
 <h3 id="Field-schema-properties" class="common-anchor-header">フィールドスキーマプロパティ</h3><table class="properties">
     <thead>
     <tr>
@@ -69,22 +69,22 @@ title: スキーマの管理
         </tr>
         <tr>
             <td><code translate="no">max_length</code> (VARCHARフィールドでは必須）。</td>
-            <td>挿入可能な文字列の最大長。</td>
+            <td>挿入可能な文字列の最大バイト長。マルチバイト文字（Unicode文字など）はそれぞれ1バイト以上を占めることがあるので、挿入される文字列のバイト長が指定された上限を超えないようにしてください。</td>
             <td>[1, 65,535]</td>
         </tr>
     <tr>
         <td><code translate="no">dim</code></td>
         <td>ベクトルの次元</td>
-            <td>データ型：<br/>密ベクトルフィールドでは必須。<a href="https://milvus.io/docs/sparse_vector.md">疎なベクトル・</a>フィールドの場合は省略。</td>
+            <td>データ型：<br/>密なベクトル・フィールドでは必須。<a href="https://milvus.io/docs/sparse_vector.md">疎なベクトル・</a>フィールドでは省略。</td>
     </tr>
     <tr>
         <td><code translate="no">is_partition_key</code></td>
         <td>このフィールドがパーティション・キー・フィールドであるかどうか。</td>
-        <td>データ型：Boolean (<code translate="no">true</code> または<code translate="no">false</code>)。</td>
+        <td>データ型：データ型：Boolean (<code translate="no">true</code> または<code translate="no">false</code>)。</td>
     </tr>
     </tbody>
 </table>
-<h3 id="Create-a-field-schema" class="common-anchor-header">フィールド・スキーマの作成</h3><p>データ挿入の複雑さを軽減するため、Milvusではフィールドスキーマ作成時に主キーフィールドを除く各スカラーフィールドのデフォルト値を指定することができます。これは、データ挿入時にフィールドを空のままにした場合、このフィールドに指定したデフォルト値が適用されることを示します。</p>
+<h3 id="Create-a-field-schema" class="common-anchor-header">フィールド・スキーマの作成</h3><p>データ挿入の複雑さを軽減するために、Milvusではフィールドスキーマ作成時に、プライマリキーフィールドを除く各スカラーフィールドのデフォルト値を指定することができます。これは、データ挿入時にフィールドを空のままにした場合、このフィールドに指定したデフォルト値が適用されることを示します。</p>
 <p>通常のフィールド・スキーマを作成する：</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> FieldSchema
 id_field = FieldSchema(name=<span class="hljs-string">&quot;id&quot;</span>, dtype=DataType.INT64, is_primary=<span class="hljs-literal">True</span>, description=<span class="hljs-string">&quot;primary id&quot;</span>)
@@ -127,11 +127,11 @@ fields = [
 <p>複合データ型としてのJSONが利用できます。JSONフィールドはキーと値のペアで構成される。各キーは文字列で、値は数値、文字列、ブーリアン値、配列、リストのいずれかです。詳細は<a href="/docs/ja/use-json-fields.md">JSON: a new data typeを</a>参照。</p></li>
 <li><p>ベクター・フィールドのサポート</p>
 <ul>
-<li>BINARY_VECTOR：0と1のシーケンスとしてバイナリ・データを格納し、画像処理や情報検索でコンパクトな特徴表現に使用される。</li>
-<li>FLOAT_VECTOR: 32ビット浮動小数点数を格納。科学計算や機械学習で実数を表現する際によく使用される。</li>
+<li>BINARY_VECTOR：バイナリ・データを0と1のシーケンスとして格納し、画像処理や情報検索でコンパクトな特徴表現に使用される。</li>
+<li>FLOAT_VECTOR：32ビット浮動小数点数を格納。科学計算や機械学習で実数を表現する際によく使用される。</li>
 <li>FLOAT16_VECTOR：16ビットの半精度浮動小数点数を格納し、ディープラーニングやGPU計算でメモリと帯域幅の効率化のために使用されます。</li>
 <li>BFLOAT16_VECTOR：精度を落とした16ビット浮動小数点数を格納しますが、指数範囲はFloat32と同じで、精度に大きな影響を与えることなくメモリと計算量を削減するためにディープラーニングでよく使用されます。</li>
-<li>SPARSE_FLOAT_VECTOR: スパース・ベクトルを表現するために使用される、非ゼロ要素とそれに対応するインデックスのリストを格納する。詳細は<a href="/docs/ja/sparse_vector.md">スパースベクトルを</a>参照してください。</li>
+<li>SPARSE_FLOAT_VECTOR: スパース・ベクトルを表現するために使用される、非ゼロ要素とそれに対応するインデックスのリストを格納する。詳細は<a href="/docs/ja/sparse_vector.md">スパースベクタを</a>参照してください。</li>
 </ul>
 <p>Milvusはコレクション内の複数のベクトルフィールドをサポートしています。詳細は<a href="/docs/ja/multi-vector-search.md">ハイブリッド検索を</a>参照。</p></li>
 </ul>

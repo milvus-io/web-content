@@ -51,7 +51,7 @@ title: インテグレーション概要
 <tr><td><a href="/docs/ja/video_search_with_twelvelabs_and_milvus.md">高度なビデオ検索：Twelve LabsとMilvusを活用したセマンティック検索</a></td><td>セマンティック検索</td><td>Milvus、Twelve Labs</td></tr>
 <tr><td><a href="/docs/ja/milvus_rag_with_vllm.md">Milvus、vLLM、Llama 3.1によるRAGの構築</a></td><td>RAG</td><td>Milvus、vLLM、LlamaIndex</td></tr>
 <tr><td><a href="/docs/ja/llama_agents_metadata.md">Milvus, Milral AI, Llama-エージェントによるマルチエージェントシステム</a></td><td>エージェント</td><td>Milvus、Mistral AI、LlamaIndex</td></tr>
-<tr><td><a href="/docs/ja/kafka-connect-milvus.md">KafkaとMilvusの接続</a></td><td>データソース</td><td>Milvus, Kafka</td></tr>
+<tr><td><a href="/docs/ja/kafka-connect-milvus.md">KafkaとMilvusの接続</a></td><td>データソース</td><td>Milvus、Kafka</td></tr>
 <tr><td><a href="/docs/ja/kotaemon_with_milvus.md">Kotaemon RAGとMilvusの連携</a></td><td>RAG</td><td>Milvus、Kotaemon</td></tr>
 <tr><td><a href="/docs/ja/apify_milvus_rag.md">検索拡張生成：Apifyでウェブサイトをクロールし、Milvusにデータを保存して質問に答える。</a></td><td>データソース</td><td>Milvus、Apify</td></tr>
 <tr><td><a href="/docs/ja/evaluation_with_deepeval.md">DeepEvalによる評価</a></td><td>評価と観測可能性</td><td>Milvus、DeepEval</td></tr>
@@ -61,6 +61,9 @@ title: インテグレーション概要
 <tr><td><a href="/docs/ja/build_rag_on_arm.md">ArmアーキテクチャでRAGを構築する</a></td><td>RAG</td><td>Milvus、Arm</td></tr>
 <tr><td><a href="/docs/ja/build_RAG_with_milvus_and_fireworks.md">MilvusとFireworks AIによるRAGの構築</a></td><td>LLM</td><td>Milvus、Fireworks AI</td></tr>
 <tr><td><a href="/docs/ja/build_RAG_with_milvus_and_lepton.md">MilvusとLepton AIでRAGを構築する。</a></td><td>LLM</td><td>Milvus、Lepton AI</td></tr>
-<tr><td><a href="/docs/ja/build_RAG_with_milvus_and_siliconflow.md">MilvusとSiliconFlowによるRAGの構築</a></td><td>LLM</td><td>Milvus, SiliconFlow</td></tr>
+<tr><td><a href="/docs/ja/build_RAG_with_milvus_and_siliconflow">MilvusとSiliconFlowによるRAGの構築</a></td><td>LLM</td><td>Milvus、SiliconFlow</td></tr>
+<tr><td><a href="/docs/ja/rag_with_milvus_and_unstructured.md">Milvusと非構造化データでRAGを構築する</a></td><td>データソース</td><td>Milvus、非構造化データソース</td></tr>
+<tr><td><a href="/docs/ja/RAG_with_pii_and_milvus.md">Milvus + PII MaskerによるRAGの構築</a></td><td>データソース</td><td>Milvus、PIIマスカー</td></tr>
+<tr><td><a href="/docs/ja/use_milvus_in_private_gpt.md">PrivateGPTでのMilvusの使用</a></td><td>オーケストレーション</td><td>ベクター検索</td></tr>
 </tbody>
 </table>
