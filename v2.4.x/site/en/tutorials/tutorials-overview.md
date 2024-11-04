@@ -28,3 +28,4 @@ This page provides a list of tutorials for you to interact with Milvus.
 | [HDBSCAN Clustering with Milvus](hdbscan_clustering_with_milvus.md) | Quickstart | vector search |
 | [Use ColPali for Multi-Modal Retrieval with Milvus](use_ColPali_with_milvus.md) | Quickstart | vector search |
 | [Vector Visualization](vector_visualization.md) | Quickstart | vector search |
+| [Movie Recommendation with Milvus](movie_recommendation_with_milvus.md) | Recommendation System | vector search |

@@ -13,15 +13,16 @@ title: Contextual Retrieval with Milvus
 [Contextual Retrieval](https://www.anthropic.com/news/contextual-retrieval) is an advanced retrieval method proposed by Anthropic to address the issue of semantic isolation of chunks, which arises in current Retrieval-Augmented Generation (RAG) solutions. In the current practical RAG paradigm, documents are divided into several chunks, and a vector database is used to search for the query, retrieving the most relevant chunks. An LLM then responds to the query using these retrieved chunks. However, this chunking process can result in the loss of contextual information, making it difficult for the retriever to determine relevance.
 
 Contextual Retrieval improves traditional retrieval systems by adding relevant context to each document chunk before embedding or indexing, boosting accuracy and reducing retrieval errors. Combined with techniques like hybrid retrieval and reranking, it enhances Retrieval-Augmented Generation (RAG) systems, especially for large knowledge bases. Additionally, it offers a cost-effective solution when paired with prompt caching, significantly reducing latency and operational costs, with contextualized chunks costing approximately $1.02 per million document tokens. This makes it a scalable and efficient approach for handling large knowledge bases. Anthropic’s solution shows two insightful aspects:
-
 - `Document Enhancement`: Query rewriting is a crucial technique in modern information retrieval, often using auxiliary information to make the query more informative. Similarly, to achieve better performance in RAG, preprocessing documents with an LLM (e.g., cleaning the data source, complementing lost information, summarizing, etc.) before indexing can significantly improve the chances of retrieving relevant documents. In other words, this preprocessing step helps bring the documents closer to the queries in terms of relevance.
 - `Low-Cost Processing by Caching Long Context`: One common concern when using LLMs to process documents is the cost. The KVCache is a popular solution that allows reuse of intermediate results for the same preceding context. While most hosted LLM vendors make this feature transparent to user, Anthropic gives users control over the caching process. When a cache hit occurs, most computations can be saved (this is common when the long context remains the same, but the instruction for each query changes). For more details, click [here](https://www.anthropic.com/news/prompt-caching).
 
 In this notebook, we will demonstrate how to perform contextual retrieval using Milvus with an LLM, combining dense-sparse hybrid retrieval and a reranker to create a progressively more powerful retrieval system. The data and experimental setup are based on the [contextual retrieval](https://github.com/anthropics/anthropic-cookbook/blob/main/skills/contextual-embeddings/guide.ipynb).
 
-## Preparation
 
+
+## Preparation
 ### Install Dependencies
+
 
 ```shell
 $ pip install "pymilvus[model]"
@@ -33,18 +34,17 @@ $ pip install anthropic
 
 If you are using Google Colab, to enable dependencies just installed, you may need to **restart the runtime** (click on the "Runtime" menu at the top of the screen, and select "Restart session" from the dropdown menu).
 
-You will need API keys from Cohere, Voyage, and Anthropic to run the code.
-
 </div>
 
-## Download Data
+You will need API keys from Cohere, Voyage, and Anthropic to run the code.
 
+## Download Data
 The following command will download the example data used in original Anthropic [demo](https://github.com/anthropics/anthropic-cookbook/blob/main/skills/contextual-embeddings/guide.ipynb).
 
 
 ```shell
-$ wget https://github.com/anthropics/anthropic-cookbook/blob/main/skills/contextual-embeddings/data/codebase_chunks.json
-$ wget https://github.com/anthropics/anthropic-cookbook/blob/main/skills/contextual-embeddings/data/evaluation_set.jsonl
+$ wget https://raw.githubusercontent.com/anthropics/anthropic-cookbook/refs/heads/main/skills/contextual-embeddings/data/codebase_chunks.json
+$ wget https://raw.githubusercontent.com/anthropics/anthropic-cookbook/refs/heads/main/skills/contextual-embeddings/data/evaluation_set.jsonl
 ```
 
 ## Define Retriever
@@ -453,7 +453,6 @@ evaluate_db(standard_retriever, "evaluation_set.jsonl", 5)
     Total queries: 248
 
 ## Experiment II: Hybrid Retrieval
-
 Now that we've obtained promising results with the Voyage embedding, we will move on to performing hybrid retrieval using the BGE-M3 model which generates powerful sparse embeddings. The results from dense retrieval and sparse retrieval will be combined using the Reciprocal Rank Fusion (RRF) method to produce a hybrid result.
 
 
@@ -497,7 +496,6 @@ evaluate_db(hybrid_retriever, "evaluation_set.jsonl", 5)
 
 
 ## Experiment III: Contextual Retrieval
-
 Hybrid retrieval shows an improvement, but the results can be further enhanced by applying a contextual retrieval method. To achieve this, we will use Anthropic's language model to prepend the context from whole document for each chunk. 
 
 
@@ -548,7 +546,6 @@ evaluate_db(contextual_retriever, "evaluation_set.jsonl", 5)
 
 
 ## Experiment IV: Contextual Retrieval with Reranker
-
 The results can be further improved by adding a Cohere reranker. Without initializing a new retriever with reranker separately, we can simply configure the existing retriever to use the reranker for enhanced performance.
 
 

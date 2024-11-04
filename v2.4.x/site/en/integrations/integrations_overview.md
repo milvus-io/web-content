@@ -47,4 +47,7 @@ This page provides a list of tutorials for you to interact with Milvus and third
 | [Build RAG on Arm Architecture](build_rag_on_arm.md) | RAG | Milvus, Arm |
 | [Build RAG with Milvus and Fireworks AI](build_RAG_with_milvus_and_fireworks.md) | LLMs | Milvus, Fireworks AI |
 | [Build RAG with Milvus and Lepton AI](build_RAG_with_milvus_and_lepton.md) | LLMs | Milvus, Lepton AI |
-| [Build RAG with Milvus and SiliconFlow](build_RAG_with_milvus_and_siliconflow.md) | LLMs | Milvus, SiliconFlow |
+| [Build RAG with Milvus and SiliconFlow](build_RAG_with_milvus_and_siliconflow) | LLMs | Milvus, SiliconFlow |
+| [Build a RAG with Milvus and Unstructured](rag_with_milvus_and_unstructured.md) | Data Sources | Milvus, Unstructured |
+| [Build RAG with Milvus + PII Masker](RAG_with_pii_and_milvus.md) | Data Sources | Milvus, PII Masker |
+| [Use Milvus in PrivateGPT](use_milvus_in_private_gpt.md) | Ochestration | vector search |
