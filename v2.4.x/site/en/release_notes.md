@@ -7,6 +7,36 @@ title: Release Notes
 
 Find out what’s new in Milvus! This page summarizes new features, improvements, known issues, and bug fixes in each release. You can find the release notes for each released version after v2.4.0 in this section. We suggest that you regularly visit this page to learn about updates.
 
+## v2.4.15
+
+Release Date: November 5, 2024
+
+| Milvus version | Python SDK version | Java SDK version | Node.js SDK version |
+|----------------|--------------------|------------------|---------------------|
+| 2.4.15         | 2.4.9              | 2.4.8            | 2.4.9               |
+
+Milvus 2.4.15 was a critical bug-fix release focused on enhancing system stability, performance, and compatibility. This version addressed a major deadlock issue that could occur during QueryNode crashes and introduced compatibility updates for the backup tool with the database feature. Additionally, Milvus 2.4.15 improved delete performance and stability through significant optimizations in L0 handling. **Upgrading to v2.4.15 was strongly recommended** to benefit from these critical enhancements.
+
+### Critical bug fixes
+
+- Resolved a deadlock issue if the QueryNode crashed during shard client initialization ([#37354](https://github.com/milvus-io/milvus/pull/37354)).
+- Reverted the enhancement to support databases for bulk insert ([#37421](https://github.com/milvus-io/milvus/pull/37421)).
+
+### Bug fixes
+
+- Fixed a bug where certain expressions did not correctly parse values ([#37342](https://github.com/milvus-io/milvus/pull/37342)).
+- Enhanced the Proxy to retry getting the shard leader on unloaded collections ([#37326](https://github.com/milvus-io/milvus/pull/37326)).
+- Corrected an issue where the L0 row count metrics value was always empty ([#37307](https://github.com/milvus-io/milvus/pull/37307)).
+- Skipped marking compaction timeout for mixed and L0 compaction scenarios ([#37194](https://github.com/milvus-io/milvus/pull/37194)).
+- Rectified the containment logic of OffsetOrderedArray ([#37309](https://github.com/milvus-io/milvus/pull/37309)).
+- Added a check for resources when loading delta logs ([#37263](https://github.com/milvus-io/milvus/pull/37263)).
+
+### Improvements
+
+- Moved L0 logic outside of the delta lock for better performance ([#37340](https://github.com/milvus-io/milvus/pull/37340)).
+- Released compacted growing segments if present in the dropped list ([#37266](https://github.com/milvus-io/milvus/pull/37266)).
+- Introduced middleware to monitor RESTful V2 input/output RPC stats ([#37224](https://github.com/milvus-io/milvus/pull/37224), [#37440](https://github.com/milvus-io/milvus/pull/37440)).
+
 ## v2.4.14
 
 Release Date: October 31, 2024
