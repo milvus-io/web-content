@@ -19,6 +19,48 @@ title: Release Notes
         ></path>
       </svg>
     </button></h1><p>Find out what’s new in Milvus! This page summarizes new features, improvements, known issues, and bug fixes in each release. You can find the release notes for each released version after v2.4.0 in this section. We suggest that you regularly visit this page to learn about updates.</p>
+<h2 id="v2415" class="common-anchor-header">v2.4.15<button data-href="#v2415" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>Release Date: November 5, 2024</p>
+<table>
+<thead>
+<tr><th>Milvus version</th><th>Python SDK version</th><th>Java SDK version</th><th>Node.js SDK version</th></tr>
+</thead>
+<tbody>
+<tr><td>2.4.15</td><td>2.4.9</td><td>2.4.8</td><td>2.4.9</td></tr>
+</tbody>
+</table>
+<p>Milvus 2.4.15 was a critical bug-fix release focused on enhancing system stability, performance, and compatibility. This version addressed a major deadlock issue that could occur during QueryNode crashes and introduced compatibility updates for the backup tool with the database feature. Additionally, Milvus 2.4.15 improved delete performance and stability through significant optimizations in L0 handling. <strong>Upgrading to v2.4.15 was strongly recommended</strong> to benefit from these critical enhancements.</p>
+<h3 id="Critical-bug-fixes" class="common-anchor-header">Critical bug fixes</h3><ul>
+<li>Resolved a deadlock issue if the QueryNode crashed during shard client initialization (<a href="https://github.com/milvus-io/milvus/pull/37354">#37354</a>).</li>
+<li>Reverted the enhancement to support databases for bulk insert (<a href="https://github.com/milvus-io/milvus/pull/37421">#37421</a>).</li>
+</ul>
+<h3 id="Bug-fixes" class="common-anchor-header">Bug fixes</h3><ul>
+<li>Fixed a bug where certain expressions did not correctly parse values (<a href="https://github.com/milvus-io/milvus/pull/37342">#37342</a>).</li>
+<li>Enhanced the Proxy to retry getting the shard leader on unloaded collections (<a href="https://github.com/milvus-io/milvus/pull/37326">#37326</a>).</li>
+<li>Corrected an issue where the L0 row count metrics value was always empty (<a href="https://github.com/milvus-io/milvus/pull/37307">#37307</a>).</li>
+<li>Skipped marking compaction timeout for mixed and L0 compaction scenarios (<a href="https://github.com/milvus-io/milvus/pull/37194">#37194</a>).</li>
+<li>Rectified the containment logic of OffsetOrderedArray (<a href="https://github.com/milvus-io/milvus/pull/37309">#37309</a>).</li>
+<li>Added a check for resources when loading delta logs (<a href="https://github.com/milvus-io/milvus/pull/37263">#37263</a>).</li>
+</ul>
+<h3 id="Improvements" class="common-anchor-header">Improvements</h3><ul>
+<li>Moved L0 logic outside of the delta lock for better performance (<a href="https://github.com/milvus-io/milvus/pull/37340">#37340</a>).</li>
+<li>Released compacted growing segments if present in the dropped list (<a href="https://github.com/milvus-io/milvus/pull/37266">#37266</a>).</li>
+<li>Introduced middleware to monitor RESTful V2 input/output RPC stats (<a href="https://github.com/milvus-io/milvus/pull/37224">#37224</a>, <a href="https://github.com/milvus-io/milvus/pull/37440">#37440</a>).</li>
+</ul>
 <h2 id="v2414" class="common-anchor-header">v2.4.14<button data-href="#v2414" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
