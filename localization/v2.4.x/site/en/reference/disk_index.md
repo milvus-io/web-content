@@ -41,7 +41,7 @@ Currently, a vector field only supports one index type. Milvus automatically del
       </svg>
     </button></h2><p>To use DiskANN, note that</p>
 <ul>
-<li>DiskANN is enabled by default. If you prefer in-memory index over on-disk index, you are advised to disable this feature for a better performance.
+<li>DiskANN is disabled by default. If you prefer in-memory index over on-disk index, you are advised to disable this feature for a better performance.
 <ul>
 <li>To disable it, you can change <code translate="no">queryNode.enableDisk</code> to <code translate="no">false</code> in your milvus configuration file.</li>
 <li>To enable it again, you can set <code translate="no">queryNode.enableDisk</code> to <code translate="no">true</code>.</li>
