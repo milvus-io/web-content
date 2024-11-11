@@ -20,8 +20,7 @@ title: Milvus + PII 마스커로 RAG 구축하기
       </svg>
     </button></h1><p>PII(개인 식별 정보)는 개인을 식별하는 데 사용될 수 있는 민감한 데이터의 일종입니다.</p>
 <p><a href="https://www.hydrox.ai/">HydroX AI에서</a> 개발한<a href="https://github.com/HydroXai/pii-masker-v1/tree/main">PII 마스커는</a> 최첨단 AI 모델을 활용하여 민감한 데이터를 보호하도록 설계된 고급 오픈 소스 도구입니다. 고객 데이터를 처리하든, 데이터 분석을 수행하든, 개인정보 보호 규정을 준수하든, PII 마스커는 강력하고 확장 가능한 솔루션을 제공하여 정보를 안전하게 보호할 수 있습니다.</p>
-<p>이 튜토리얼에서는 Milvus와 PII 마스커를 사용하여 RAG(검색 증강 생성) 파이프라인을 구축하는 방법을 보여드립니다.</p>
-<p>이를 통해 PII 데이터를 효과적으로 보호할 수 있습니다.</p>
+<p>이 튜토리얼에서는 Milvus와 함께 PII 마스커를 사용하여 RAG(검색 증강 세대) 애플리케이션에서 개인 데이터를 보호하는 방법을 보여드립니다. PII 마스커의 데이터 마스킹 기능의 강점과 Milvus의 효율적인 데이터 검색 기능을 결합하면 민감한 정보를 안심하고 처리할 수 있는 안전하고 개인정보 보호 규정을 준수하는 파이프라인을 만들 수 있습니다. 이러한 접근 방식을 통해 애플리케이션이 개인정보 보호 표준을 충족하고 사용자 데이터를 효과적으로 보호할 수 있습니다.</p>
 <h2 id="Preparation" class="common-anchor-header">준비하기<button data-href="#Preparation" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -37,7 +36,7 @@ title: Milvus + PII 마스커로 RAG 구축하기
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Get-started-with-PII-Masker" class="common-anchor-header">PII 마스커 시작하기</h3><p>PII Masker의 <a href="https://github.com/HydroXai/pii-masker-v1/tree/main?tab=readme-ov-file#-installation">설치 가이드에</a> 따라 필요한 종속 요소를 설치하고 모델을 다운로드하세요. 다음은 간단한 가이드입니다:</p>
+    </button></h2><h3 id="Get-started-with-PII-Masker" class="common-anchor-header">PII 마스커 시작하기</h3><p>PII 마스커의 <a href="https://github.com/HydroXai/pii-masker-v1/tree/main?tab=readme-ov-file#-installation">설치 가이드에</a> 따라 필요한 종속 요소를 설치하고 모델을 다운로드하세요. 다음은 간단한 가이드입니다:</p>
 <pre><code translate="no" class="language-shell">$ git <span class="hljs-built_in">clone</span> https://github.com/HydroXai/pii-masker-v1.git
 $ <span class="hljs-built_in">cd</span> pii-masker-v1/pii-masker
 <button class="copy-code-btn"></button></code></pre>
@@ -123,7 +122,7 @@ milvus_client = <span class="hljs-title class_">MilvusClient</span>(uri=<span cl
 <p><code translate="no">MilvusClient</code> 의 인수를 사용합니다:</p>
 <ul>
 <li><code translate="no">uri</code> 을 로컬 파일(예:<code translate="no">./milvus.db</code>)로 설정하는 것이 가장 편리한 방법인데, <a href="https://milvus.io/docs/milvus_lite.md">Milvus Lite를</a> 자동으로 활용하여 모든 데이터를 이 파일에 저장하기 때문입니다.</li>
-<li>백만 개 이상의 벡터와 같이 대량의 데이터가 있는 경우, <a href="https://milvus.io/docs/quickstart.md">Docker 또는 Kubernetes에</a> 더 성능이 좋은 Milvus 서버를 설정할 수 있습니다. 이 설정에서는 서버 주소와 포트를 URI로 사용하세요(예:<code translate="no">http://localhost:19530</code>). Milvus에서 인증 기능을 활성화하는 경우 토큰으로 "&lt;사용자 이름&gt;:&lt;사용자 비밀번호&gt;"를 사용하고, 그렇지 않으면 토큰을 설정하지 마세요.</li>
+<li>백만 개 이상의 벡터와 같이 대량의 데이터가 있는 경우, <a href="https://milvus.io/docs/quickstart.md">Docker 또는 Kubernetes에</a> 더 성능이 좋은 Milvus 서버를 설정할 수 있습니다. 이 설정에서는 서버 주소와 포트를 URI로 사용하세요(예:<code translate="no">http://localhost:19530</code>). Milvus에서 인증 기능을 활성화하는 경우 토큰으로 "&lt;사용자 이름&gt;:&lt;사용자 비밀번호&gt;"를 사용하고, 그렇지 않은 경우 토큰을 설정하지 마세요.</li>
 <li>밀버스의 완전 관리형 클라우드 서비스인 <a href="https://zilliz.com/cloud">질리즈 클라우드를</a> 사용하려면 질리즈 클라우드의 <a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">퍼블릭 엔드포인트와 API 키에</a> 해당하는 <code translate="no">uri</code> 및 <code translate="no">token</code> 을 조정하세요.</li>
 </ul>
 </div>

@@ -19,6 +19,48 @@ title: Notes de mise à jour
         ></path>
       </svg>
     </button></h1><p>Découvrez les nouveautés de Milvus ! Cette page résume les nouvelles fonctionnalités, les améliorations, les problèmes connus et les corrections de bogues de chaque version. Vous trouverez dans cette section les notes de version pour chaque version publiée après la v2.4.0. Nous vous conseillons de consulter régulièrement cette page pour prendre connaissance des mises à jour.</p>
+<h2 id="v2415" class="common-anchor-header">v2.4.15<button data-href="#v2415" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>Date de sortie : 5 novembre 2024</p>
+<table>
+<thead>
+<tr><th>Version de Milvus</th><th>Version du SDK Python</th><th>Version du SDK Java</th><th>Version du SDK Node.js</th></tr>
+</thead>
+<tbody>
+<tr><td>2.4.15</td><td>2.4.9</td><td>2.4.8</td><td>2.4.9</td></tr>
+</tbody>
+</table>
+<p>Milvus 2.4.15 est une version critique de correction de bogues axée sur l'amélioration de la stabilité, des performances et de la compatibilité du système. Cette version a corrigé un problème majeur de blocage qui pouvait se produire lors des pannes de QueryNode et a introduit des mises à jour de compatibilité pour l'outil de sauvegarde avec la fonction de base de données. En outre, Milvus 2.4.15 a amélioré les performances et la stabilité des suppressions grâce à des optimisations significatives dans la gestion de L0. La <strong>mise à niveau vers la version 2.4.15 est fortement recommandée</strong> pour bénéficier de ces améliorations critiques.</p>
+<h3 id="Critical-bug-fixes" class="common-anchor-header">Corrections de bogues critiques</h3><ul>
+<li>Résolution d'un problème de blocage si le QueryNode se bloquait lors de l'initialisation du client shard<a href="https://github.com/milvus-io/milvus/pull/37354">(#37354</a>).</li>
+<li>Reprise de l'amélioration de la prise en charge des bases de données pour l'insertion en masse<a href="https://github.com/milvus-io/milvus/pull/37421">(#37421</a>).</li>
+</ul>
+<h3 id="Bug-fixes" class="common-anchor-header">Correction de bogues</h3><ul>
+<li>Correction d'un bogue où certaines expressions n'analysaient pas correctement les valeurs<a href="https://github.com/milvus-io/milvus/pull/37342">(#37342</a>).</li>
+<li>Amélioration du Proxy pour réessayer d'obtenir le shard leader sur les collections déchargées<a href="https://github.com/milvus-io/milvus/pull/37326">(#37326</a>).</li>
+<li>Correction d'un problème où la valeur de la métrique du nombre de lignes L0 était toujours vide<a href="https://github.com/milvus-io/milvus/pull/37307">(#37307</a>).</li>
+<li>Suppression du marquage du délai de compaction pour les scénarios de compaction mixte et L0<a href="https://github.com/milvus-io/milvus/pull/37194">(#37194</a>).</li>
+<li>Rectification de la logique de confinement de OffsetOrderedArray<a href="https://github.com/milvus-io/milvus/pull/37309">(#37309</a>).</li>
+<li>Ajout d'une vérification des ressources lors du chargement des journaux delta<a href="https://github.com/milvus-io/milvus/pull/37263">(#37263</a>).</li>
+</ul>
+<h3 id="Improvements" class="common-anchor-header">Améliorations</h3><ul>
+<li>Déplacement de la logique L0 en dehors du verrou delta pour de meilleures performances<a href="https://github.com/milvus-io/milvus/pull/37340">(#37340</a>).</li>
+<li>Libération des segments de croissance compactés s'ils sont présents dans la liste d'abandon<a href="https://github.com/milvus-io/milvus/pull/37266">(#37266</a>).</li>
+<li>Introduction d'un middleware pour surveiller les statistiques RPC d'entrée/sortie de la V2 RESTful<a href="https://github.com/milvus-io/milvus/pull/37224">(#37224</a>, <a href="https://github.com/milvus-io/milvus/pull/37440">#37440</a>).</li>
+</ul>
 <h2 id="v2414" class="common-anchor-header">v2.4.14<button data-href="#v2414" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -34,7 +76,7 @@ title: Notes de mise à jour
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Date de sortie : 31 octobre 2024</p>
+    </button></h2><p>Date de publication : 31 octobre 2024</p>
 <table>
 <thead>
 <tr><th>Version de Milvus</th><th>Version du SDK Python</th><th>Version du SDK Java</th><th>Version du SDK Node.js</th></tr>
@@ -43,7 +85,7 @@ title: Notes de mise à jour
 <tr><td>2.4.14</td><td>2.4.9</td><td>2.4.7</td><td>2.4.9</td></tr>
 </tbody>
 </table>
-<p>Milvus 2.4.14 corrige un problème critique de la version 2.4.13 qui pouvait entraîner la perte des informations de collecte après <code translate="no">snapshotKV</code> garbage collection. Elle corrige également quelques fuites de ressources. En outre, cette version comprend de nombreuses améliorations axées sur la stabilité des opérations de suppression à grande échelle et sur les performances de compactage.</p>
+<p>Milvus 2.4.14 corrige un problème critique de la version 2.4.13 qui pouvait entraîner la perte des informations de collecte après <code translate="no">snapshotKV</code> garbage collection. Elle corrige également quelques fuites de ressources. En outre, cette version comprend de nombreuses améliorations visant à accroître la stabilité des opérations de suppression à grande échelle et les performances de compactage.</p>
 <h3 id="Features" class="common-anchor-header">Fonctionnalités</h3><ul>
 <li>Prise en charge du cache de morceaux en mode mémoire<a href="https://github.com/milvus-io/milvus/pull/35836">(#35836</a>)</li>
 <li>Prise en charge de db pour bulkinsert<a href="https://github.com/milvus-io/milvus/pull/37017">(#37017</a>)</li>
@@ -216,7 +258,7 @@ title: Notes de mise à jour
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Date de sortie : 26 septembre 2024</p>
+    </button></h2><p>Date de publication : 26 septembre 2024</p>
 <table>
 <thead>
 <tr><th>Version de Milvus</th><th>Version du SDK Python</th><th>Version du SDK Java</th><th>Version du SDK Node.js</th></tr>
@@ -238,7 +280,7 @@ title: Notes de mise à jour
 <li>Activation de la prise en charge des lignes vides<a href="https://github.com/milvus-io/milvus/pull/36061">(#36061</a>)</li>
 <li>Correction d'une vulnérabilité de sécurité<a href="https://github.com/milvus-io/milvus/pull/36156">(#36156</a>)</li>
 <li>Implémentation d'un gestionnaire de statistiques pour les mesures de taille des requêtes/réponses<a href="https://github.com/milvus-io/milvus/pull/36118">(#36118</a>)</li>
-<li>Correction de l'estimation de la taille pour les données de tableau encodées<a href="https://github.com/milvus-io/milvus/pull/36379">(#36379</a>)</li>
+<li>Correction de l'estimation de la taille des données de tableaux encodés<a href="https://github.com/milvus-io/milvus/pull/36379">(#36379</a>)</li>
 </ul>
 <h3 id="Bug-fixes" class="common-anchor-header">Correction de bogues</h3><ul>
 <li>Résolution des erreurs de type de métrique pour les collections avec deux champs vectoriels<a href="https://github.com/milvus-io/milvus/pull/36473">(#36473</a>)</li>
@@ -270,7 +312,7 @@ title: Notes de mise à jour
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Date de publication : 11 septembre 2024</p>
+    </button></h2><p>Date de sortie : 11 septembre 2024</p>
 <table>
 <thead>
 <tr><th>Version de Milvus</th><th>Version du SDK Python</th><th>Version du SDK Java</th><th>Version du SDK Node.js</th></tr>
@@ -348,7 +390,7 @@ title: Notes de mise à jour
 <tr><td>2.4.10</td><td>2.4.6</td><td>2.4.3</td><td>2.4.6</td></tr>
 </tbody>
 </table>
-<p>Milvus 2.4.10 apporte des améliorations significatives en termes de fonctionnalité et de stabilité. Les principales caractéristiques comprennent la prise en charge des opérations d'insertion ascendante sur les collections compatibles AutoID, les capacités de chargement de collections partielles et diverses configurations à mémoire mappée (MMAP) pour optimiser l'utilisation de la mémoire. Cette version corrige également plusieurs bogues provoquant des paniques, des vidages de noyau et des fuites de ressources. Nous recommandons une mise à jour pour profiter pleinement de ces améliorations.</p>
+<p>Milvus 2.4.10 apporte des améliorations significatives en termes de fonctionnalité et de stabilité. Les principales caractéristiques comprennent la prise en charge des opérations d'insertion ascendante sur les collections compatibles avec AutoID, les capacités de chargement de collections partielles et diverses configurations à mémoire mappée (MMAP) pour optimiser l'utilisation de la mémoire. Cette version corrige également plusieurs bogues provoquant des paniques, des vidages de noyau et des fuites de ressources. Nous recommandons une mise à jour pour profiter pleinement de ces améliorations.</p>
 <h3 id="Features" class="common-anchor-header">Fonctionnalités</h3><ul>
 <li><strong>Upsert avec Auto ID</strong>: Prise en charge des opérations d'insertion avec génération automatique d'ID<a href="https://github.com/milvus-io/milvus/pull/34633">(#34633</a>)</li>
 <li><strong>Chargement partiel des champs d'une collection</strong> [Beta Preview] : Permet de charger des champs spécifiques d'une collection<a href="https://github.com/milvus-io/milvus/pull/35696">(#35696</a>)</li>
@@ -385,7 +427,7 @@ title: Notes de mise à jour
 <h4 id="Others" class="common-anchor-header">Autres</h4><ul>
 <li>Optimisation du processus de construction du noyau Milvus<a href="https://github.com/milvus-io/milvus/pull/35660">(#35660</a>)</li>
 <li>Mise à jour vers protobuf-go v2<a href="https://github.com/milvus-io/milvus/pull/35555">(#35555</a>)</li>
-<li>Amélioration du traçage avec encodage des chaînes hexagonales pour traceid et spanid<a href="https://github.com/milvus-io/milvus/pull/35568">(#35568</a>)</li>
+<li>Amélioration du traçage avec encodage de chaîne hexagonale pour traceid et spanid<a href="https://github.com/milvus-io/milvus/pull/35568">(#35568</a>)</li>
 <li>Ajout de la métrique "hit segment number" pour le "query hook"<a href="https://github.com/milvus-io/milvus/pull/35619">(#35619</a>)</li>
 <li>Amélioration de la compatibilité avec l'ancien SDK pour la fonctionnalité configure load param<a href="https://github.com/milvus-io/milvus/pull/35573">(#35573</a>)</li>
 <li>Ajout de la prise en charge de l'étranglement HTTP v1/v2<a href="https://github.com/milvus-io/milvus/pull/35504">(#35504</a>)</li>
@@ -453,7 +495,7 @@ title: Notes de mise à jour
 <tr><td>2.4.8</td><td>2.4.5</td><td>2.4.3</td><td>2.4.4</td></tr>
 </tbody>
 </table>
-<p>Milvus 2.4.8 a apporté plusieurs améliorations significatives aux performances et à la stabilité du système. La caractéristique la plus notable est la mise en œuvre du compactage par regroupement, un mécanisme qui améliore l'efficacité des recherches et des requêtes en redistribuant les données dans de grandes collections sur la base d'une clé de regroupement désignée, réduisant ainsi la quantité de données analysées. Le compactage a également été découplé du DataNode, ce qui permet à n'importe quel DataNode d'effectuer le compactage indépendamment, améliorant ainsi la tolérance aux pannes, la stabilité, les performances et l'évolutivité. En outre, l'interface entre les composants Go et C++ a été remaniée pour utiliser des appels CGO asynchrones, ce qui a permis de résoudre des problèmes tels que les délais de session, tandis que plusieurs autres optimisations des performances ont été réalisées sur la base du profilage. Les dépendances de l'application ont également été mises à jour pour corriger les vulnérabilités de sécurité connues. De plus, cette version comprend également de nombreuses optimisations de performance et des corrections de bogues critiques.</p>
+<p>Milvus 2.4.8 a apporté plusieurs améliorations significatives aux performances et à la stabilité du système. La caractéristique la plus notable était la mise en œuvre du compactage par regroupement, un mécanisme qui améliore l'efficacité des recherches et des requêtes en redistribuant les données dans de grandes collections sur la base d'une clé de regroupement désignée, réduisant ainsi la quantité de données analysées. Le compactage a également été découplé du DataNode, ce qui permet à n'importe quel DataNode d'effectuer le compactage indépendamment, améliorant ainsi la tolérance aux pannes, la stabilité, les performances et l'évolutivité. En outre, l'interface entre les composants Go et C++ a été remaniée pour utiliser des appels CGO asynchrones, ce qui a permis de résoudre des problèmes tels que les délais de session, tandis que plusieurs autres optimisations des performances ont été réalisées sur la base du profilage. Les dépendances de l'application ont également été mises à jour pour corriger les vulnérabilités de sécurité connues. De plus, cette version comprend également de nombreuses optimisations de performance et des corrections de bogues critiques.</p>
 <h3 id="Features" class="common-anchor-header">Fonctionnalités</h3><ul>
 <li>Implémentation du clustering compaction, permettant aux données d'être redistribuées sur la base d'une clé de clustering désignée afin d'améliorer l'efficacité des requêtes<a href="https://github.com/milvus-io/milvus/pull/34326">(#34326</a>),<a href="https://github.com/milvus-io/milvus/pull/34363">(#34363</a>).</li>
 </ul>
@@ -536,8 +578,8 @@ title: Notes de mise à jour
 <li>Correction d'un problème où les métadonnées de collecte n'étaient pas supprimées après le ramassage des ordures dans DataCoord.<a href="https://github.com/milvus-io/milvus/pull/34884">(#34884</a>)</li>
 <li>Résolution d'une fuite de mémoire dans SegmentManager au sein de DataCoord en supprimant les segments vidés générés par les importations.<a href="https://github.com/milvus-io/milvus/pull/34651">(#34651</a>)</li>
 <li>Correction d'un problème de panique lorsque le compactage était désactivé et qu'une collection était abandonnée.<a href="https://github.com/milvus-io/milvus/pull/34206">(#34206</a>)</li>
-<li>Correction d'un problème de mémoire insuffisante dans DataNode en améliorant l'algorithme d'estimation de l'utilisation de la mémoire.<a href="https://github.com/milvus-io/milvus/pull/34203">(#34203</a>)</li>
-<li>Prévention de l'utilisation de la mémoire en rafale lorsque plusieurs requêtes d'extraction de vecteur ont un échec de cache en implémentant le vol unique pour le cache de morceaux.<a href="https://github.com/milvus-io/milvus/pull/34283">(#34283</a>)</li>
+<li>Correction d'un problème de dépassement de mémoire dans DataNode en améliorant l'algorithme d'estimation de l'utilisation de la mémoire.<a href="https://github.com/milvus-io/milvus/pull/34203">(#34203</a>)</li>
+<li>Prévention de l'utilisation de la mémoire en rafale lorsque plusieurs requêtes d'extraction de vecteurs ont un échec de cache en implémentant le vol unique pour le cache de morceaux.<a href="https://github.com/milvus-io/milvus/pull/34283">(#34283</a>)</li>
 <li>Capture de <code translate="no">ErrKeyNotFound</code> pendant les opérations CAS (Compare and Swap) dans la configuration.<a href="https://github.com/milvus-io/milvus/pull/34489">(#34489</a>)</li>
 <li>Correction d'un problème où les mises à jour de configuration échouaient à cause de l'utilisation par erreur de la valeur formatée dans une opération CAS.<a href="https://github.com/milvus-io/milvus/pull/34373">(#34373</a>)</li>
 </ul>
@@ -548,7 +590,7 @@ title: Notes de mise à jour
 <li>Introduction d'une configuration de quotas pour le nombre d'entrées de segments L0 par collection, permettant un meilleur contrôle des taux de suppression en appliquant une rétropression.<a href="https://github.com/milvus-io/milvus/pull/34837">(#34837</a>)</li>
 <li>Extension du mécanisme de limitation du taux pour les opérations d'insertion afin de couvrir également les opérations d'insertion ascendante, garantissant des performances constantes en cas de charge élevée.<a href="https://github.com/milvus-io/milvus/pull/34616">(#34616</a>)</li>
 <li>Implémentation d'un pool CGO dynamique pour les appels CGO proxy, optimisant l'utilisation des ressources et les performances.<a href="https://github.com/milvus-io/milvus/pull/34842">(#34842</a>)</li>
-<li>Activation de l'option de compilation DiskAnn pour les systèmes d'exploitation Ubuntu, Rocky et Amazon, ce qui améliore la compatibilité et les performances sur ces plateformes.<a href="https://github.com/milvus-io/milvus/pull/34244">(#34244</a>)</li>
+<li>Activation de l'option de compilation DiskAnn pour les systèmes d'exploitation Ubuntu, Rocky et Amazon, améliorant la compatibilité et les performances sur ces plateformes.<a href="https://github.com/milvus-io/milvus/pull/34244">(#34244</a>)</li>
 <li>Mise à jour de Conan vers la version 1.64.1, assurant la compatibilité avec les dernières fonctionnalités et améliorations.<a href="https://github.com/milvus-io/milvus/pull/35216">(#35216</a>)</li>
 <li>Mise à jour de Knowhere vers la version 2.3.7, apportant des améliorations de performance et de nouvelles fonctionnalités.<a href="https://github.com/milvus-io/milvus/pull/34709">(#34709</a>)</li>
 <li>Correction de la révision de certains paquets tiers pour assurer des constructions cohérentes et réduire le risque de changements inattendus.<a href="https://github.com/milvus-io/milvus/pull/35316">(#35316</a>)</li>
@@ -629,7 +671,7 @@ title: Notes de mise à jour
 <tr><td>2.4.5</td><td>2.4.4</td><td>2.4.1</td><td>2.4.3</td></tr>
 </tbody>
 </table>
-<p>La version 2.4.5 de Milvus apporte plusieurs améliorations et corrections de bogues pour améliorer les performances, la stabilité et les fonctionnalités. Milvus 2.4.5 simplifie la recherche vectorielle sparse, float16 et bfloat16 grâce à l'indexation automatique, accélère les recherches, les suppressions et les compactions grâce aux optimisations du filtre Bloom et s'attaque à la gestion des données grâce à des temps de chargement plus rapides et à la prise en charge des segments L0 importés. Elle introduit également l'index sparse HNSW pour une recherche efficace de données spares en haute dimension, améliore l'API RESTful avec la prise en charge des vecteurs flottants sparse, et corrige des bogues critiques pour une meilleure stabilité.</p>
+<p>La version 2.4.5 de Milvus apporte plusieurs améliorations et corrections de bogues pour améliorer les performances, la stabilité et les fonctionnalités. Milvus 2.4.5 simplifie la recherche vectorielle sparse, float16 et bfloat16 grâce à l'indexation automatique, accélère les recherches, les suppressions et les compactions grâce aux optimisations du filtre Bloom, et s'attaque à la gestion des données grâce à des temps de chargement plus rapides et à la prise en charge des segments L0 importés. Elle introduit également l'index sparse HNSW pour une recherche efficace de données spares en haute dimension, améliore l'API RESTful avec la prise en charge des vecteurs flottants sparse, et corrige des bogues critiques pour une meilleure stabilité.</p>
 <h3 id="New-Features" class="common-anchor-header">Nouvelles fonctionnalités</h3><ul>
 <li>Ajout du support rbac à l'API de description/modification de base de données<a href="https://github.com/milvus-io/milvus/pull/33804">(#33804</a>)</li>
 <li>Support de la construction de l'index HNSW pour les vecteurs sparse<a href="https://github.com/milvus-io/milvus/pull/33653">(#33653</a>, <a href="https://github.com/milvus-io/milvus/pull/33662">#33662</a>)</li>
@@ -647,9 +689,9 @@ title: Notes de mise à jour
 <li>Accélération du chargement des petites collections<a href="https://github.com/milvus-io/milvus/pull/33746">(#33746</a>)</li>
 <li>Prise en charge de l'importation de données de suppression dans le segment L0 (<a href="https://github.com/milvus-io/milvus/pull/33712">#33712</a>)</li>
 <li>Suppression des tâches de compactage de marque pour être temporisées afin d'éviter d'exécuter la même tâche encore et encore<a href="https://github.com/milvus-io/milvus/pull/33833">(#33833</a>)</li>
-<li>Gestion des vecteurs float16 et bfloat16 comme des BinaryVector dans l'insertion en masse de numpy (<a href="https://github.com/milvus-io/milvus/pull/33788">#33788</a>)</li>
+<li>Gestion des vecteurs float16 et bfloat16 comme BinaryVector dans l'insertion en masse de numpy (<a href="https://github.com/milvus-io/milvus/pull/33788">#33788</a>)</li>
 <li>Ajout du drapeau includeCurrentMsg pour la méthode seek<a href="https://github.com/milvus-io/milvus/pull/33743">(#33743</a>)</li>
-<li>Ajout de mergeInterval, targetBufSize, maxTolerantLagde msgdispatcher aux configs<a href="https://github.com/milvus-io/milvus/pull/33680">(#33680</a>)</li>
+<li>Ajout de mergeInterval, targetBufSize, maxTolerantLagde msgdispatcher dans les configurations<a href="https://github.com/milvus-io/milvus/pull/33680">(#33680</a>)</li>
 <li>Amélioration de GetVectorByID pour les vecteurs épars<a href="https://github.com/milvus-io/milvus/pull/33652">(#33652</a>)</li>
 <li>Suppression de StringPrimarykey pour réduire les copies inutiles et le coût des appels de fonction (<a href="https://github.com/milvus-io/milvus/pull/33649">#33649</a>)</li>
 <li>Ajout de la correspondance autoindex pour le type de données binaire/sparse<a href="https://github.com/milvus-io/milvus/pull/33625">(#33625</a>)</li>
@@ -674,7 +716,7 @@ title: Notes de mise à jour
 <li>Amélioration de la fiabilité de l'importation en vérifiant si un travail d'importation existe avant de démarrer.<a href="https://github.com/milvus-io/milvus/pull/33673">(#33673</a>)</li>
 <li>Amélioration de la gestion de l'index HNSW clairsemé (fonctionnalité interne)<a href="https://github.com/milvus-io/milvus/pull/33714">(#33714</a>)</li>
 <li>Nettoyage de la mémoire vectorielle pour éviter les fuites de mémoire<a href="https://github.com/milvus-io/milvus/pull/33708">(#33708</a>)</li>
-<li>Garantie d'un échauffement asynchrone plus fluide en corrigeant un problème de verrouillage d'état<a href="https://github.com/milvus-io/milvus/pull/33687">(#33687</a>)</li>
+<li>Assurer un échauffement asynchrone plus fluide en corrigeant un problème de verrouillage d'état<a href="https://github.com/milvus-io/milvus/pull/33687">(#33687</a>)</li>
 <li>Correction d'un bogue qui pouvait causer des résultats manquants dans les itérateurs de requêtes.<a href="https://github.com/milvus-io/milvus/pull/33506">(#33506</a>)</li>
 <li>Correction d'un bogue pouvant entraîner une taille inégale des segments d'importation (<a href="https://github.com/milvus-io/milvus/pull/33634">#33634</a>)</li>
 <li>Correction d'une mauvaise gestion de la taille des données pour les types bf16, fp16 et les vecteurs binaires<a href="https://github.com/milvus-io/milvus/pull/33488">(#33488</a>)</li>
@@ -819,7 +861,7 @@ title: Notes de mise à jour
 <li>Ajustement du niveau et de la fréquence des journaux<a href="https://github.com/milvus-io/milvus/pull/33042">(#33042</a>, <a href="https://github.com/milvus-io/milvus/pull/32838">#32838</a>, <a href="https://github.com/milvus-io/milvus/pull/33337">#33337</a>)</li>
 <li>Activation de l'arrêt de l'équilibrage après que l'équilibrage ait été suspendu<a href="https://github.com/milvus-io/milvus/pull/32812">(#32812</a>)</li>
 <li>Mise à jour du cache du chef de file lorsque l'emplacement du chef de file a changé<a href="https://github.com/milvus-io/milvus/pull/32470">(#32470</a>)</li>
-<li>Suppression d'API et de champs obsolètes<a href="https://github.com/milvus-io/milvus/pull/32808">(#32808</a>, <a href="https://github.com/milvus-io/milvus/pull/32704">#32704</a>)</li>
+<li>Suppression des API et champs obsolètes<a href="https://github.com/milvus-io/milvus/pull/32808">(#32808</a>, <a href="https://github.com/milvus-io/milvus/pull/32704">#32704</a>)</li>
 <li>Ajout de metautil.channel pour convertir les comparaisons de chaînes en int<a href="https://github.com/milvus-io/milvus/pull/32749">(#32749</a>)</li>
 <li>Ajout d'informations sur le type pour le message d'erreur du rédacteur de la charge utile et le journal lorsque le querynode a trouvé une nouvelle collection<a href="https://github.com/milvus-io/milvus/pull/32522">(#32522</a>)</li>
 <li>Vérification du numéro de partition lors de la création d'une collection avec une clé de partition<a href="https://github.com/milvus-io/milvus/pull/32670">(#32670</a>)</li>
@@ -848,7 +890,7 @@ title: Notes de mise à jour
 <li>Correction de l'impossibilité de générer le traceID lors de l'utilisation de l'exportateur noop<a href="https://github.com/milvus-io/milvus/pull/33208">(#33208</a>)</li>
 <li>Amélioration de la récupération des résultats des requêtes<a href="https://github.com/milvus-io/milvus/pull/33179">(#33179</a>)</li>
 <li>Marquage de l'abandon du point de contrôle du canal pour éviter la fuite des métriques de décalage du point de contrôle<a href="https://github.com/milvus-io/milvus/pull/33201">(#33201</a>)</li>
-<li>Correction du blocage du noeud de la requête pendant l'arrêt de la progression<a href="https://github.com/milvus-io/milvus/pull/33154">(#33154</a>)</li>
+<li>Correction du blocage du noeud de la requête lors de l'arrêt de la progression<a href="https://github.com/milvus-io/milvus/pull/33154">(#33154</a>)</li>
 <li>Correction des segments manquants dans la réponse de rinçage<a href="https://github.com/milvus-io/milvus/pull/33061">(#33061</a>)</li>
 <li>Rendre l'opération de soumission idempotente<a href="https://github.com/milvus-io/milvus/pull/33053">(#33053</a>)</li>
 <li>Allocation d'une nouvelle tranche pour chaque lot dans le lecteur de flux<a href="https://github.com/milvus-io/milvus/pull/33360">(#33360</a>)</li>
@@ -1004,7 +1046,7 @@ title: Notes de mise à jour
 <li>Stockage des fichiers d'index inversé dans un chemin de stockage local de QueryNode au lieu de /tmp<a href="https://github.com/milvus-io/milvus/pull/32210">(#32210</a>)</li>
 <li>Correction des fuites de mémoire du datacoord pour collectionInfo<a href="https://github.com/milvus-io/milvus/pull/32243">(#32243</a>)</li>
 <li>Correction de bogues liés à fp16/bf16 pouvant causer une panique du système<a href="https://github.com/milvus-io/milvus/pull/31677">(#31677</a>, <a href="https://github.com/milvus-io/milvus/pull/31841">#31841</a>, <a href="https://github.com/milvus-io/milvus/pull/32196">#32196</a>)</li>
-<li>Résolution de problèmes avec la recherche par regroupement renvoyant des résultats insuffisants<a href="https://github.com/milvus-io/milvus/pull/32151">(#32151</a>)</li>
+<li>Résolution de problèmes avec la recherche de groupement renvoyant des résultats insuffisants<a href="https://github.com/milvus-io/milvus/pull/32151">(#32151</a>)</li>
 <li>Ajustement de la recherche avec itérateurs pour gérer plus efficacement les décalages dans l'étape de réduction et garantir des résultats adéquats lorsque "reduceStopForBest" est activé<a href="https://github.com/milvus-io/milvus/pull/32088">(#32088</a>)</li>
 </ul>
 <h2 id="v240-rc1" class="common-anchor-header">v2.4.0-rc.1<button data-href="#v240-rc1" class="anchor-icon" translate="no">
@@ -1040,7 +1082,7 @@ title: Notes de mise à jour
 <li><p><strong>Index inversé</strong> et <strong>correspondance floue</strong>: ces fonctionnalités améliorent la recherche par mot-clé pour les champs scalaires. Pour plus d'informations, reportez-vous à la section <a href="/docs/fr/index-scalar-fields.md">Champs scalaires indexés</a> et <a href="/docs/fr/single-vector-search.md#filtered-search">recherche filtrée</a>.</p></li>
 </ul>
 <h3 id="New-Features" class="common-anchor-header">Nouvelles fonctionnalités</h3><h4 id="GPU-Index---CAGRA" class="common-anchor-header">Index GPU - CAGRA</h4><p>Nous tenons à exprimer notre sincère gratitude à l'équipe de NVIDIA pour sa contribution inestimable à CAGRA, un index de graphes basé sur le GPU à la pointe de la technologie (SoTA) qui peut être utilisé en ligne.</p>
-<p>Contrairement aux index GPU précédents, CAGRA démontre une supériorité écrasante même dans les requêtes par petits lots, un domaine dans lequel les index CPU excellent traditionnellement. En outre, les performances de CAGRA dans les requêtes par lots importants et la vitesse de construction de l'index, domaines dans lesquels les index GPU brillent déjà, sont réellement inégalées.</p>
+<p>Contrairement aux index GPU précédents, CAGRA démontre une supériorité écrasante même dans les requêtes par petits lots, un domaine où les index CPU excellent traditionnellement. En outre, les performances de CAGRA dans les requêtes par lots importants et la vitesse de construction de l'index, domaines dans lesquels les index GPU brillent déjà, sont réellement inégalées.</p>
 <p>Un exemple de code peut être trouvé dans <a href="https://github.com/milvus-io/pymilvus/blob/2.4/examples/example_gpu_cagra.py">example_gpu_cagra.py</a>.</p>
 <h4 id="Sparse-Vector-Beta" class="common-anchor-header">Vecteur Sparse (Beta)</h4><p>Dans cette version, nous introduisons un nouveau type de champ vectoriel appelé vecteur clairsemé. Les vecteurs épars sont différents de leurs homologues denses car ils ont tendance à avoir un nombre de dimensions plus élevé de plusieurs magnitudes avec seulement une poignée de dimensions non nulles. Cette caractéristique offre une meilleure interprétabilité en raison de sa nature basée sur les termes et peut être plus efficace dans certains domaines. Les modèles peu denses appris, tels que SPLADEv2/BGE-M3, se sont révélés très utiles pour les tâches courantes de classement de première étape. Le principal cas d'utilisation de cette nouvelle fonctionnalité de Milvus est de permettre une recherche sémantique approximative efficace du plus proche voisin sur des vecteurs épars générés par des modèles neuronaux tels que SPLADEv2/BGE-M3 et des modèles statistiques tels que l'algorithme BM25. Milvus prend désormais en charge le stockage, l'indexation et la recherche efficaces et performants (MIPS, Maximum Inner Product Search) de vecteurs épars.</p>
 <p>Un exemple de code se trouve dans <a href="https://github.com/milvus-io/pymilvus/blob/2.4/examples/hello_sparse.py">hello_sparse.py</a>.</p>
@@ -1051,9 +1093,9 @@ title: Notes de mise à jour
 <li>Personnaliser les stratégies de recherche en attribuant des poids aux différents modèles d'intégration.</li>
 <li>Expérimenter divers modèles d'intégration pour trouver la combinaison de modèles optimale.</li>
 </ul>
-<p>La prise en charge de plusieurs vecteurs permet de stocker, d'indexer et d'appliquer des stratégies de reclassement à plusieurs champs de vecteurs de types différents, tels que FLOAT_VECTOR et SPARSE_FLOAT_VECTOR, dans une collection. Actuellement, deux stratégies de reclassement sont disponibles : <strong>Reciprocal Rank Fusion (RRF)</strong> et <strong>Average Weighted Scoring (notation moyenne pondérée</strong>). Ces deux stratégies combinent les résultats de recherche de différents champs vectoriels en un ensemble de résultats unifié. La première stratégie donne la priorité aux entités qui apparaissent systématiquement dans les résultats de recherche de différents champs vectoriels, tandis que l'autre stratégie attribue des poids aux résultats de recherche de chaque champ vectoriel pour déterminer leur importance dans l'ensemble de résultats final.</p>
+<p>La prise en charge de plusieurs vecteurs permet de stocker, d'indexer et d'appliquer des stratégies de reclassement à plusieurs champs de vecteurs de types différents, tels que FLOAT_VECTOR et SPARSE_FLOAT_VECTOR, dans une collection. Actuellement, deux stratégies de reclassement sont disponibles : <strong>Reciprocal Rank Fusion (RRF)</strong> et <strong>Average Weighted Scoring (notation moyenne pondérée</strong>). Ces deux stratégies combinent les résultats de recherche de différents champs vectoriels en un ensemble de résultats unifié. La première stratégie donne la priorité aux entités qui apparaissent systématiquement dans les résultats de recherche de différents champs vectoriels, tandis que l'autre stratégie attribue des poids aux résultats de recherche de chaque champ vectoriel afin de déterminer leur importance dans l'ensemble de résultats final.</p>
 <p>Un exemple de code se trouve dans <a href="https://github.com/milvus-io/pymilvus/blob/2.4/examples/hybrid_search.py">hybrid_search.py</a>.</p>
-<h4 id="Inverted-Index-and-Fuzzy-Match" class="common-anchor-header">Index inversé et correspondance floue</h4><p>Dans les versions précédentes de Milvus, les index de recherche binaire basés sur la mémoire et les index Marisa Trie étaient utilisés pour l'indexation des champs scalaires. Toutefois, ces méthodes étaient gourmandes en mémoire. La dernière version de Milvus utilise désormais l'index inversé basé sur Tantivy, qui peut être appliqué à tous les types de données numériques et de chaînes. Ce nouvel index améliore considérablement les performances des requêtes scalaires, en réduisant de dix fois les requêtes de mots-clés dans les chaînes de caractères. En outre, l'index inversé consomme moins de mémoire, grâce à des optimisations supplémentaires dans la compression des données et le mécanisme de stockage en mémoire (MMap) de la structure d'indexation interne.</p>
+<h4 id="Inverted-Index-and-Fuzzy-Match" class="common-anchor-header">Index inversé et correspondance floue</h4><p>Dans les versions précédentes de Milvus, les index de recherche binaire basés sur la mémoire et les index Marisa Trie étaient utilisés pour l'indexation des champs scalaires. Cependant, ces méthodes étaient gourmandes en mémoire. La dernière version de Milvus utilise désormais l'index inversé basé sur Tantivy, qui peut être appliqué à tous les types de données numériques et de chaînes. Ce nouvel index améliore considérablement les performances des requêtes scalaires, en réduisant de dix fois les requêtes de mots-clés dans les chaînes de caractères. En outre, l'index inversé consomme moins de mémoire, grâce à des optimisations supplémentaires dans la compression des données et le mécanisme de stockage en mémoire (MMap) de la structure d'indexation interne.</p>
 <p>Cette version prend également en charge les correspondances floues dans le filtrage scalaire en utilisant des préfixes, des infixes et des suffixes.</p>
 <p>Des exemples de code peuvent être trouvés dans <a href="https://github.com/milvus-io/pymilvus/blob/2.4/examples/inverted_index_example.py">inverted_index_example.py</a> et <a href="https://github.com/milvus-io/pymilvus/blob/2.4/examples/fuzzy_match.py">fuzzy_match.py</a>.</p>
 <h4 id="Grouping-Search" class="common-anchor-header">Regroupement de la recherche</h4><p>Vous pouvez maintenant regrouper les résultats de la recherche par les valeurs d'un champ scalaire spécifique. Cela permet aux applications RAG d'implémenter le rappel au niveau du document. Considérons une collection de documents, chaque document est divisé en plusieurs passages. Chaque passage est représenté par un vecteur intégré et appartient à un document. Pour trouver les documents les plus pertinents au lieu de disperser les passages, vous pouvez inclure l'argument group_by_field dans l'opération search() pour regrouper les résultats par l'ID du document.</p>

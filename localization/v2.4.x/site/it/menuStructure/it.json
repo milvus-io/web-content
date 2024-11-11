@@ -1368,12 +1368,6 @@
                 "id": "milvus_hybrid_search_retriever.md",
                 "order": 3,
                 "children": []
-              },
-              {
-                "label": "PrivatoGPT",
-                "id": "use_milvus_in_private_gpt.md",
-                "order": 4,
-                "children": []
               }
             ]
           },
@@ -1415,7 +1409,7 @@
             "children": []
           },
           {
-            "label": "Dificare",
+            "label": "Dify",
             "id": "dify_with_milvus.md",
             "order": 6,
             "children": []
@@ -1424,6 +1418,12 @@
             "label": "Langflow",
             "id": "rag_with_langflow.md",
             "order": 7,
+            "children": []
+          },
+          {
+            "label": "PrivatoGPT",
+            "id": "use_milvus_in_private_gpt.md",
+            "order": 8,
             "children": []
           }
         ]

@@ -22,8 +22,7 @@ title: RAG mit Milvus + PII Masker aufbauen
       </svg>
     </button></h1><p>PII (Personally Identifiable Information) ist eine Art von sensiblen Daten, die zur Identifizierung von Personen verwendet werden können.</p>
 <p><a href="https://github.com/HydroXai/pii-masker-v1/tree/main">PII Masker</a>, entwickelt von <a href="https://www.hydrox.ai/">HydroX AI</a>, ist ein fortschrittliches Open-Source-Tool zum Schutz Ihrer sensiblen Daten durch den Einsatz modernster KI-Modelle. Ganz gleich, ob Sie mit Kundendaten umgehen, Datenanalysen durchführen oder die Einhaltung von Datenschutzbestimmungen sicherstellen wollen, PII Masker bietet eine robuste, skalierbare Lösung, um Ihre Informationen zu schützen.</p>
-<p>In diesem Tutorial zeigen wir Ihnen, wie Sie mit Milvus und PII Masker eine RAG-Pipeline (Retrieval-Augmented Generation) aufbauen können.</p>
-<p>Dadurch werden PII-Daten wirksam geschützt.</p>
+<p>In diesem Tutorial zeigen wir Ihnen, wie Sie PII Masker mit Milvus verwenden, um private Daten in RAG-Anwendungen (Retrieval-Augmented Generation) zu schützen. Durch die Kombination der Stärken der Datenmaskierungsfunktionen von PII Masker mit dem effizienten Datenabruf von Milvus können Sie sichere, datenschutzkonforme Pipelines für den vertrauensvollen Umgang mit sensiblen Informationen erstellen. Dieser Ansatz stellt sicher, dass Ihre Anwendungen die Datenschutzstandards erfüllen und die Benutzerdaten effektiv schützen.</p>
 <h2 id="Preparation" class="common-anchor-header">Vorbereitung<button data-href="#Preparation" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -145,7 +144,7 @@ milvus_client = <span class="hljs-title class_">MilvusClient</span>(uri=<span cl
 )
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Insert-data" class="common-anchor-header">Daten einfügen</h3><p>Iterieren Sie durch die maskierten Textzeilen, erstellen Sie Einbettungen und fügen Sie dann die Daten in Milvus ein.</p>
-<p>Hier ist ein neues Feld <code translate="no">text</code>, das ein nicht definiertes Feld im Sammlungsschema ist. Es wird automatisch dem reservierten dynamischen JSON-Feld hinzugefügt, das auf hoher Ebene wie ein normales Feld behandelt werden kann.</p>
+<p>Hier ist ein neues Feld <code translate="no">text</code>, das ein nicht definiertes Feld im Sammelschema ist. Es wird automatisch dem reservierten dynamischen JSON-Feld hinzugefügt, das auf hoher Ebene wie ein normales Feld behandelt werden kann.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> tqdm <span class="hljs-keyword">import</span> tqdm
 
 data = []
@@ -240,4 +239,4 @@ Use the following pieces of information enclosed in &lt;context&gt; tags to prov
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">I don't know.
 </code></pre>
-<p>Hier können wir sehen, dass der LLM, da wir die PII durch Masken ersetzt haben, die PII-Informationen nicht im Kontext erhalten kann. So antwortet er: &quot;Ich weiß es nicht&quot;. Auf diese Weise können wir die Privatsphäre der Benutzer wirksam schützen.</p>
+<p>Hier können wir sehen, dass, da wir die PII durch Masken ersetzt haben, der LLM die PII-Informationen nicht im Kontext erhalten kann. So antwortet er: &quot;Ich weiß es nicht&quot;. Auf diese Weise können wir die Privatsphäre der Benutzer wirksam schützen.</p>

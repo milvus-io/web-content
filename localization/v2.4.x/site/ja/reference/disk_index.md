@@ -40,13 +40,13 @@ title: ディスク上のインデックス
       </svg>
     </button></h2><p>DiskANNを使用するには、以下の点に注意してください。</p>
 <ul>
-<li>DiskANNはデフォルトで有効になっています。オンディスクインデックスよりもインメモリインデックスを使用したい場合は、パフォーマンスを向上させるためにこの機能を無効にすることをお勧めします。<ul>
+<li>DiskANNはデフォルトで無効になっています。オンディスクインデックスよりもインメモリインデックスを好む場合は、より良いパフォーマンスのためにこの機能を無効にすることをお勧めします。<ul>
 <li>無効にするには、milvus設定ファイルの<code translate="no">queryNode.enableDisk</code> を<code translate="no">false</code> に変更してください。</li>
 <li>再び有効にするには、<code translate="no">queryNode.enableDisk</code> を<code translate="no">true</code> に設定します。</li>
 </ul></li>
 <li>milvusインスタンスはUbuntu 18.04.6またはそれ以降のリリースで動作します。</li>
 <li>MilvusデータパスはNVMe SSDにマウントしてください：<ul>
-<li>Milvusスタンドアロンインスタンスの場合、データパスはインスタンスが動作するコンテナ内の<strong>/var/lib/milvus/dataに</strong>する。</li>
+<li>Milvusスタンドアロンインスタンスの場合、データパスはインスタンスが動作するコンテナ内の<strong>/var/lib/milvus/dataに</strong>する必要があります。</li>
 <li>Milvusクラスタインスタンスの場合、データパスはQueryNodesおよびIndexNodesが実行されるコンテナ内の<strong>/var/lib/milvus/data</strong>である必要があります。</li>
 </ul></li>
 </ul>

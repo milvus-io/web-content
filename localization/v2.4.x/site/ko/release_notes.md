@@ -19,6 +19,48 @@ title: 릴리스 노트
         ></path>
       </svg>
     </button></h1><p>Milvus의 새로운 기능을 알아보세요! 이 페이지에는 각 릴리스의 새로운 기능, 개선 사항, 알려진 문제 및 버그 수정 사항이 요약되어 있습니다. 이 섹션에서 v2.4.0 이후 출시된 각 버전에 대한 릴리스 노트를 확인할 수 있습니다. 이 페이지를 정기적으로 방문하여 업데이트에 대해 알아보는 것이 좋습니다.</p>
+<h2 id="v2415" class="common-anchor-header">v2.4.15<button data-href="#v2415" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>릴리스 날짜: 2024년 11월 5일</p>
+<table>
+<thead>
+<tr><th>Milvus 버전</th><th>Python SDK 버전</th><th>Java SDK 버전</th><th>Node.js SDK 버전</th></tr>
+</thead>
+<tbody>
+<tr><td>2.4.15</td><td>2.4.9</td><td>2.4.8</td><td>2.4.9</td></tr>
+</tbody>
+</table>
+<p>Milvus 2.4.15는 시스템 안정성, 성능 및 호환성 향상에 중점을 둔 중요한 버그 수정 릴리스입니다. 이 버전에서는 쿼리노드 충돌 시 발생할 수 있는 주요 교착 상태 문제를 해결하고 백업 도구와 데이터베이스 기능의 호환성 업데이트를 도입했습니다. 또한 Milvus 2.4.15는 L0 처리의 대폭적인 최적화를 통해 삭제 성능과 안정성을 개선했습니다. 이러한 중요한 개선 사항의 혜택을 누리시려면 <strong>2.4.15 버전으로 업그레이드하실 것을 강력히 권장합니다</strong>.</p>
+<h3 id="Critical-bug-fixes" class="common-anchor-header">중요한 버그 수정</h3><ul>
+<li>샤드 클라이언트 초기화 중 쿼리 노드가 충돌하는 경우 교착 상태 문제를 해결했습니다<a href="https://github.com/milvus-io/milvus/pull/37354">(#37354</a>).</li>
+<li>대량 삽입을 위해 데이터베이스를 지원하도록 개선 사항을 되돌렸습니다<a href="https://github.com/milvus-io/milvus/pull/37421">(#37421</a>).</li>
+</ul>
+<h3 id="Bug-fixes" class="common-anchor-header">버그 수정</h3><ul>
+<li>특정 표현식이 값을 올바르게 구문 분석하지 않는 버그를 수정했습니다<a href="https://github.com/milvus-io/milvus/pull/37342">(#37342</a>).</li>
+<li>프록시가 언로드된 컬렉션에서 샤드 리더를 다시 가져오도록 개선했습니다<a href="https://github.com/milvus-io/milvus/pull/37326">(#37326</a>).</li>
+<li>L0 행 수 메트릭 값이 항상 비어 있던 문제를 수정했습니다<a href="https://github.com/milvus-io/milvus/pull/37307">(#37307</a>).</li>
+<li>혼합 및 L0 압축 시나리오에서 압축 시간 초과 표시를 건너뛰었습니다<a href="https://github.com/milvus-io/milvus/pull/37194">(#37194</a>).</li>
+<li>오프셋 정렬 배열의 포함 로직을 수정했습니다<a href="https://github.com/milvus-io/milvus/pull/37309">(#37309</a>).</li>
+<li>델타 로그를 로드할 때 리소스 확인을 추가했습니다<a href="https://github.com/milvus-io/milvus/pull/37263">(#37263</a>).</li>
+</ul>
+<h3 id="Improvements" class="common-anchor-header">개선 사항</h3><ul>
+<li>성능 향상을 위해 L0 로직을 델타 잠금 외부로 이동했습니다<a href="https://github.com/milvus-io/milvus/pull/37340">(#37340)</a>.</li>
+<li>삭제된 목록에 있는 경우 압축된 성장 세그먼트 해제<a href="https://github.com/milvus-io/milvus/pull/37266">(#37266</a>).</li>
+<li>RESTful V2 입력/출력 RPC 통계를 모니터링하는 미들웨어 도입<a href="https://github.com/milvus-io/milvus/pull/37224">(#37224</a>, <a href="https://github.com/milvus-io/milvus/pull/37440">#37440</a>).</li>
+</ul>
 <h2 id="v2414" class="common-anchor-header">v2.4.14<button data-href="#v2414" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -52,7 +94,7 @@ title: 릴리스 노트
 <li>삭제/압축 최적화<ul>
 <li>l0 압축의 병렬 실행 활성화<a href="https://github.com/milvus-io/milvus/pull/36985">(#36985</a>)</li>
 <li>직접 전달 사용 시 일괄 전달 삭제<a href="https://github.com/milvus-io/milvus/pull/37107">(#37107</a>)</li>
-<li>원격 로드 사용 시 델리게이터에서 델타 데이터 로드 생략<a href="https://github.com/milvus-io/milvus/pull/37112">(#37112</a>)</li>
+<li>원격 로드를 사용할 때 델리게이터에서 델타 데이터 로드 건너뛰기<a href="https://github.com/milvus-io/milvus/pull/37112">(#37112</a>)</li>
 <li>L0 세그먼트를 제외한 직접 전달 델타<a href="https://github.com/milvus-io/milvus/pull/36914">(#36914</a>)</li>
 <li>DataCoord에서 압축 작업의 우선순위 지정 추가<a href="https://github.com/milvus-io/milvus/pull/36979">(#36979</a>)</li>
 <li>복잡한 삭제율 추적<a href="https://github.com/milvus-io/milvus/pull/36958">(#36958</a>)</li>
@@ -80,7 +122,7 @@ title: 릴리스 노트
 <h3 id="Bug-fixes" class="common-anchor-header">버그 수정</h3><ul>
 <li>모든 스냅샷이 가비지 수집된 경우 재시작 후 metakv에서 복구할 수 없는 수집 정보 수정<a href="https://github.com/milvus-io/milvus/pull/36950">(#36950</a>).</li>
 <li>클라이언트에서 유효하지 않은 재시도를 방지하기 위해 rpc 오류 코드를 수정했습니다<a href="https://github.com/milvus-io/milvus/pull/37025">(#37025</a>).</li>
-<li>할당량 센터에서 DB를 찾을 수 없음 오류 무시<a href="https://github.com/milvus-io/milvus/pull/36850">(#36850</a>).</li>
+<li>할당량 센터에서 DB를 찾을 수 없음 오류 무시<a href="https://github.com/milvus-io/milvus/pull/36850">(#36850</a>)</li>
 <li>싱글톤 삭제 풀을 사용하여 쿼리노드에서 고루틴 누수 수정<a href="https://github.com/milvus-io/milvus/pull/37225">(#37225</a>).</li>
 <li>쿼리노드에서 수집 누수 수정<a href="https://github.com/milvus-io/milvus/pull/37079">(#37079</a>)</li>
 <li>클러스터링 압축 작업의 누수 수정<a href="https://github.com/milvus-io/milvus/pull/36803">(#36803</a>)</li>
@@ -233,7 +275,7 @@ title: 릴리스 노트
 <li>std::stoi 예외에 대한 오류 처리 개선<a href="https://github.com/milvus-io/milvus/pull/36296">(#36296</a>)</li>
 <li>필드 이름 또는 동적 필드 이름으로 허용되지 않는 키워드<a href="https://github.com/milvus-io/milvus/pull/36108">(#36108</a>)</li>
 <li>L0 세그먼트에서 항목 삭제에 대한 메트릭 추가<a href="https://github.com/milvus-io/milvus/pull/36227">(#36227</a>)</li>
-<li>원격 로딩을 지원하기 위해 L0 포워드 정책 구현<a href="https://github.com/milvus-io/milvus/pull/36208">(#36208</a>)</li>
+<li>원격 로딩을 지원하는 L0 포워드 정책 구현<a href="https://github.com/milvus-io/milvus/pull/36208">(#36208</a>)</li>
 <li>프록시에서 ANN 필드 로드 확인 추가<a href="https://github.com/milvus-io/milvus/pull/36194">(#36194</a>)</li>
 <li>빈 스파스 행 지원 활성화<a href="https://github.com/milvus-io/milvus/pull/36061">(#36061</a>)</li>
 <li>보안 취약점 수정<a href="https://github.com/milvus-io/milvus/pull/36156">(#36156</a>)</li>
@@ -453,9 +495,9 @@ title: 릴리스 노트
 <tr><td>2.4.8</td><td>2.4.5</td><td>2.4.3</td><td>2.4.4</td></tr>
 </tbody>
 </table>
-<p>Milvus 2.4.8은 시스템의 성능과 안정성에 몇 가지 중요한 개선 사항을 도입했습니다. 가장 눈에 띄는 기능은 지정된 클러스터링 키를 기반으로 대규모 컬렉션의 데이터를 재분배하여 검색 및 쿼리 효율성을 높이고 스캔하는 데이터의 양을 줄이는 클러스터링 압축의 구현입니다. 또한 압축은 샤드 데이터 노드에서 분리되어 모든 데이터 노드가 독립적으로 압축을 수행할 수 있어 내결함성, 안정성, 성능, 확장성이 향상되었습니다. 또한, Go와 C++ 구성 요소 간의 인터페이스가 비동기 CGO 호출을 사용하도록 리팩터링되어 세션 시간 초과와 같은 문제를 해결했으며, 프로파일링을 기반으로 여러 가지 다른 성능 최적화가 이루어졌습니다. 애플리케이션 종속성도 업데이트되어 알려진 보안 취약점을 해결했습니다. 또한 이번 릴리스에는 수많은 성능 최적화와 중요한 버그 수정도 포함되어 있습니다.</p>
+<p>Milvus 2.4.8은 시스템의 성능과 안정성에 몇 가지 중요한 개선 사항을 도입했습니다. 가장 주목할 만한 기능은 지정된 클러스터링 키를 기반으로 대규모 컬렉션의 데이터를 재분배하여 검색 및 쿼리 효율성을 향상시키고 스캔하는 데이터의 양을 줄이는 클러스터링 압축의 구현입니다. 또한 압축은 샤드 데이터 노드에서 분리되어 모든 데이터 노드가 독립적으로 압축을 수행할 수 있어 내결함성, 안정성, 성능, 확장성이 향상되었습니다. 또한, Go와 C++ 구성 요소 간의 인터페이스가 비동기 CGO 호출을 사용하도록 리팩터링되어 세션 시간 초과와 같은 문제를 해결했으며, 프로파일링을 기반으로 여러 가지 다른 성능 최적화가 이루어졌습니다. 애플리케이션 종속성도 업데이트되어 알려진 보안 취약점을 해결했습니다. 또한 이번 릴리스에는 수많은 성능 최적화와 중요한 버그 수정도 포함되어 있습니다.</p>
 <h3 id="Features" class="common-anchor-header">주요 기능</h3><ul>
-<li>클러스터링 압축을 구현하여 지정된 클러스터링 키를 기반으로 데이터를 재분배하여 쿼리 효율성을 향상시켰습니다<a href="https://github.com/milvus-io/milvus/pull/34326">(#34326</a>),<a href="https://github.com/milvus-io/milvus/pull/34363">(#34363</a>).</li>
+<li>클러스터링 압축을 구현하여 지정된 클러스터링 키를 기반으로 데이터를 재분배하여 쿼리 효율성을 높일 수 있습니다<a href="https://github.com/milvus-io/milvus/pull/34326">(#34326</a>),<a href="https://github.com/milvus-io/milvus/pull/34363">(#34363</a>).</li>
 </ul>
 <h3 id="Improvements" class="common-anchor-header">개선 사항</h3><ul>
 <li>CGO에서 비동기 검색 및 검색 기능을 구현했습니다.<a href="https://github.com/milvus-io/milvus/pull/34200">(#34200</a>)</li>
@@ -510,7 +552,7 @@ title: 릴리스 노트
 <li>이번 릴리스에서는 특정 타사 종속성 라이브러리에 대한 고정 버전이 도입되어 Milvus의 소프트웨어 공급망 관리가 크게 향상되었습니다.</li>
 <li>프로젝트를 업스트림 변경 사항으로부터 격리하여 잠재적인 중단으로부터 일일 빌드를 보호합니다.</li>
 <li>이 업데이트는 검증된 C++ 타사 패키지를 JFrog Cloud에서 독점적으로 호스팅하고 코난 레시피 리비전(RREV)을 활용함으로써 안정성을 보장합니다.</li>
-<li>이 접근 방식은 코난센터의 업데이트로 인한 변경 사항 중단의 위험을 완화합니다.</li>
+<li>이러한 접근 방식은 코난센터의 업데이트로 인한 변경 사항 중단의 위험을 완화합니다.</li>
 <li>우분투 22.04를 사용하는 개발자는 이러한 변경 사항의 혜택을 즉시 누릴 수 있습니다. 그러나 다른 운영 체제를 사용하는 개발자는 호환성 문제를 피하기 위해 <code translate="no">glibc</code> 버전을 업그레이드해야 할 수 있습니다.</li>
 </ul></li>
 </ul>
@@ -538,8 +580,8 @@ title: 릴리스 노트
 <li>압축이 비활성화되고 컬렉션이 삭제될 때 발생하는 패닉 문제를 수정했습니다.<a href="https://github.com/milvus-io/milvus/pull/34206">(#34206</a>)</li>
 <li>메모리 사용량 추정 알고리즘을 개선하여 데이터 노드에서 메모리 부족 문제를 수정했습니다.<a href="https://github.com/milvus-io/milvus/pull/34203">(#34203</a>)</li>
 <li>청크 캐시에 단일 비행을 구현하여 여러 벡터 검색 요청이 캐시 미스에 도달했을 때 버스트 메모리 사용을 방지했습니다.<a href="https://github.com/milvus-io/milvus/pull/34283">(#34283</a>)</li>
-<li>구성에서 CAS(비교 및 스왑) 작업 중 <code translate="no">ErrKeyNotFound</code> 캡처.<a href="https://github.com/milvus-io/milvus/pull/34489">(#34489</a>)</li>
-<li>CAS 작업에서 포맷된 값을 실수로 사용하여 구성 업데이트가 실패하는 문제를 수정했습니다.<a href="https://github.com/milvus-io/milvus/pull/34373">(#34373</a>)</li>
+<li>구성에서 CAS(비교 및 스왑) 작업 중 <code translate="no">ErrKeyNotFound</code> 을 캡처했습니다.<a href="https://github.com/milvus-io/milvus/pull/34489">(#34489</a>)</li>
+<li>CAS 작업에서 형식이 지정된 값을 잘못 사용하여 구성 업데이트가 실패하는 문제를 수정했습니다.<a href="https://github.com/milvus-io/milvus/pull/34373">(#34373</a>)</li>
 </ul>
 <h3 id="Miscellaneous" class="common-anchor-header">기타</h3><ul>
 <li>통합 가시성 및 모니터링 기능을 향상시키는 OTLP HTTP 내보내기에 대한 지원이 추가되었습니다.<a href="https://github.com/milvus-io/milvus/pull/35073">[#35073</a>, <a href="https://github.com/milvus-io/milvus/pull/35299">#35299</a>]</li>
@@ -577,7 +619,7 @@ title: 릴리스 노트
 <tr><td>2.4.6</td><td>2.4.4</td><td>2.4.2</td><td>2.4.4</td></tr>
 </tbody>
 </table>
-<p>Milvus v2.4.6은 삭제 중 패닉, 메모리 누수, 데이터 손실과 같은 중요한 문제를 해결하는 버그 수정 릴리스입니다. 또한 모니터링 메트릭 개선, Go 버전 1.21 업그레이드, RESTful 카운트(*) 쿼리 사용자 환경 개선 등 여러 가지 최적화 기능도 도입되었습니다.</p>
+<p>Milvus v2.4.6은 삭제 중 패닉, 메모리 누수, 데이터 손실과 같은 중요한 문제를 해결하는 버그 수정 릴리스입니다. 또한 모니터링 지표 개선, Go 버전 1.21 업그레이드, RESTful 카운트(*) 쿼리에 대한 사용자 환경 개선 등 몇 가지 최적화 기능도 도입되었습니다.</p>
 <h3 id="Improvements" class="common-anchor-header">개선 사항</h3><ul>
 <li>RESTful API 쿼리의 사용자 편의성이 향상되었습니다<a href="https://github.com/milvus-io/milvus/pull/34444">(#34444</a>).</li>
 <li>Go 버전이 1.20에서 1.21로 업그레이드되었습니다<a href="https://github.com/milvus-io/milvus/pull/33940">(#33940</a>).</li>
@@ -690,7 +732,7 @@ title: 릴리스 노트
 <li>캡처된 반복 변수 partitionID 사용 방지<a href="https://github.com/milvus-io/milvus/pull/33970">(#33970</a>)</li>
 <li>밀버스가 바이너리 및 스파스 벡터에서 자동 인덱스를 생성할 수 없는 버그를 수정했습니다<a href="https://github.com/milvus-io/milvus/pull/33867">(#33867</a>).</li>
 <li>모든 벡터의 잘못된 인덱스 파라미터에서 인덱스 노드가 인덱스 생성을 다시 시도할 수 있는 버그를 수정했습니다(<a href="https://github.com/milvus-io/milvus/pull/33878">#33878</a>).</li>
-<li>로드와 릴리스가 동시에 발생하면 서버가 충돌할 수 있는 버그 수정<a href="https://github.com/milvus-io/milvus/pull/33699">(#33699</a>)</li>
+<li>로드와 릴리스가 동시에 발생하면 서버가 충돌할 수 있는 버그 수정<a href="https://github.com/milvus-io/milvus/pull/33699">(#33699</a>).</li>
 <li>구성 값에 대한 캐시 일관성 개선<a href="https://github.com/milvus-io/milvus/pull/33797">(#33797</a>)</li>
 <li>삭제 중 데이터 손실 가능성 방지<a href="https://github.com/milvus-io/milvus/pull/33821">(#33821</a>)</li>
 <li>컬렉션 삭제 후 DroppedAt 필드(삭제 타임스탬프일 가능성이 있는)가 설정되도록 함<a href="https://github.com/milvus-io/milvus/pull/33767">(#33767</a>).</li>
@@ -1042,7 +1084,7 @@ title: 릴리스 노트
 <h3 id="New-Features" class="common-anchor-header">새로운 기능</h3><h4 id="GPU-Index---CAGRA" class="common-anchor-header">GPU 색인 - CAGRA</h4><p>온라인에서 사용할 수 있는 최신(SoTA) GPU 기반 그래프 인덱스인 CAGRA에 귀중한 기여를 해주신 NVIDIA 팀에 진심으로 감사드립니다.</p>
 <p>이전 GPU 인덱스와 달리 CAGRA는 전통적으로 CPU 인덱스가 뛰어난 영역인 소규모 배치 쿼리에서도 압도적인 우월성을 보여줍니다. 또한, GPU 인덱스가 이미 강세를 보이고 있는 영역인 대규모 배치 쿼리 및 인덱스 구축 속도에서 CAGRA의 성능은 정말 타의 추종을 불허합니다.</p>
 <p>예제 코드는 <a href="https://github.com/milvus-io/pymilvus/blob/2.4/examples/example_gpu_cagra.py">example_gpu_cagra.py에서</a> 확인할 수 있습니다.</p>
-<h4 id="Sparse-Vector-Beta" class="common-anchor-header">스파스 벡터(베타)</h4><p>이번 릴리스에서는 스파스 벡터라는 새로운 유형의 벡터 필드를 도입합니다. 스파스 벡터는 밀도가 높은 벡터와 달리 차원 수가 몇 배 더 많으며 소수만이 0이 아닌 경향이 있습니다. 이 기능은 용어 기반의 특성으로 인해 더 나은 해석 가능성을 제공하며 특정 도메인에서 더 효과적일 수 있습니다. SPLADEv2/BGE-M3와 같은 학습된 희소 모델은 일반적인 1단계 랭킹 작업에 매우 유용하다는 것이 입증되었습니다. Milvus의 이 새로운 기능의 주요 사용 사례는 SPLADEv2/BGE-M3와 같은 신경 모델과 BM25 알고리즘과 같은 통계 모델에 의해 생성된 희소 벡터에 대해 효율적인 근사 의미론적 최인접 이웃 검색을 가능하게 하는 것입니다. 밀버스는 이제 희소 벡터의 효과적인 고성능 저장, 인덱싱, 검색(MIPS, 최대 내부 제품 검색)을 지원합니다.</p>
+<h4 id="Sparse-Vector-Beta" class="common-anchor-header">스파스 벡터(베타)</h4><p>이번 릴리스에서는 스파스 벡터라는 새로운 유형의 벡터 필드를 도입합니다. 스파스 벡터는 밀도가 높은 벡터와 달리 차원 수가 몇 배 더 많으며 소수만 0이 아닌 경향이 있습니다. 이 기능은 용어 기반의 특성으로 인해 더 나은 해석 가능성을 제공하며 특정 도메인에서 더 효과적일 수 있습니다. SPLADEv2/BGE-M3와 같은 학습된 희소 모델은 일반적인 1단계 랭킹 작업에 매우 유용하다는 것이 입증되었습니다. Milvus의 이 새로운 기능의 주요 사용 사례는 SPLADEv2/BGE-M3와 같은 신경 모델과 BM25 알고리즘과 같은 통계 모델에 의해 생성된 희소 벡터에 대해 효율적인 근사 의미론적 최인접 이웃 검색을 가능하게 하는 것입니다. 밀버스는 이제 희소 벡터의 효과적인 고성능 저장, 인덱싱, 검색(MIPS, 최대 내부 제품 검색)을 지원합니다.</p>
 <p>예제 코드는 <a href="https://github.com/milvus-io/pymilvus/blob/2.4/examples/hello_sparse.py">hello_sparse.py에서</a> 확인할 수 있습니다.</p>
 <h4 id="Multi-Embedding---Hybrid-Search" class="common-anchor-header">멀티 임베딩 및 하이브리드 검색</h4><p>다중 벡터 지원은 다중 모델 데이터 처리 또는 고밀도 벡터와 희소 벡터의 혼합이 필요한 애플리케이션을 위한 초석입니다. 이제 멀티 벡터 지원으로 가능합니다:</p>
 <ul>

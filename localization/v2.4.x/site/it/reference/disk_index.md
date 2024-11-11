@@ -40,11 +40,11 @@ Attualmente, un campo vettoriale supporta solo un tipo di indice. Milvus cancell
       </svg>
     </button></h2><p>Per utilizzare DiskANN, tenere presente che</p>
 <ul>
-<li>DiskANN è abilitato per impostazione predefinita. Se si preferisce l'indice in-memory a quello su disco, si consiglia di disabilitare questa funzione per ottenere prestazioni migliori.<ul>
+<li>DiskANN è disattivato per impostazione predefinita. Se si preferisce un indice in-memory a uno su disco, si consiglia di disabilitare questa funzione per ottenere prestazioni migliori.<ul>
 <li>Per disabilitarla, si può cambiare <code translate="no">queryNode.enableDisk</code> in <code translate="no">false</code> nel file di configurazione di milvus.</li>
 <li>Per abilitarla di nuovo, si può impostare <code translate="no">queryNode.enableDisk</code> su <code translate="no">true</code>.</li>
 </ul></li>
-<li>L'istanza di Milvus funziona su Ubuntu 18.04.6 o una versione successiva.</li>
+<li>L'istanza di Milvus funziona su Ubuntu 18.04.6 o su una versione successiva.</li>
 <li>Il percorso dei dati di Milvus deve essere montato su un'unità SSD NVMe per ottenere prestazioni ottimali:<ul>
 <li>Per un'istanza Milvus Standalone, il percorso dei dati deve essere <strong>/var/lib/milvus/data</strong> nel contenitore in cui viene eseguita l'istanza.</li>
 <li>Per un'istanza Milvus Cluster, il percorso dei dati dovrebbe essere <strong>/var/lib/milvus/data</strong> nei container in cui girano i QueryNode e gli IndexNode.</li>
@@ -131,7 +131,7 @@ DiskIndex:
 <tbody>
 <tr><td><code translate="no">MaxDegree</code></td><td>Grado massimo del grafo Vamana. <br/> Un valore maggiore offre un tasso di richiamo più elevato, ma aumenta le dimensioni e il tempo di costruzione dell'indice.</td><td>[1, 512]</td><td>56</td></tr>
 <tr><td><code translate="no">SearchListSize</code></td><td>Dimensione dell'elenco dei candidati. <br/> Un valore maggiore aumenta il tempo impiegato per costruire l'indice, ma offre un tasso di richiamo più elevato. <br/> Impostare un valore inferiore a <code translate="no">MaxDegree</code> a meno che non sia necessario ridurre il tempo di costruzione dell'indice.</td><td>[1, int32_max]</td><td>100</td></tr>
-<tr><td><code translate="no">PQCodeBugetGBRatio</code></td><td>Limite di dimensione del codice PQ. <br/> Un valore maggiore offre un tasso di richiamo più elevato, ma aumenta l'utilizzo della memoria.</td><td>(0.0, 0.25]</td><td>0.125</td></tr>
+<tr><td><code translate="no">PQCodeBugetGBRatio</code></td><td>Limite di dimensione del codice PQ. <br/> Un valore maggiore offre un tasso di richiamo più alto, ma aumenta l'uso della memoria.</td><td>(0.0, 0.25]</td><td>0.125</td></tr>
 <tr><td><code translate="no">SearchCacheBudgetGBRatio</code></td><td>Rapporto tra i numeri dei nodi in cache e i dati grezzi. <br/> Un valore maggiore migliora le prestazioni di costruzione dell'indice, ma aumenta l'uso della memoria.</td><td>[0.0, 0.3)</td><td>0.10</td></tr>
 <tr><td><code translate="no">BeamWidthRatio</code></td><td>Rapporto tra il numero massimo di richieste IO per iterazione di ricerca e il numero di CPU.</td><td>[1, max(128/numero di CPU, 16)].</td><td>4.0</td></tr>
 </tbody>

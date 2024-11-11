@@ -20,8 +20,7 @@ title: 使用 Milvus + PII 屏蔽器构建 RAG
       </svg>
     </button></h1><p>PII（个人身份信息）是一种可用于识别个人身份的敏感数据。</p>
 <p>由<a href="https://www.hydrox.ai/">HydroX AI</a> 开发的<a href="https://github.com/HydroXai/pii-masker-v1/tree/main">PII Masker</a> 是一款先进的开源工具，旨在利用尖端的人工智能模型保护您的敏感数据。无论您是在处理客户数据、执行数据分析，还是在确保遵守隐私法规，PII Masker 都能提供强大、可扩展的解决方案，确保您的信息安全。</p>
-<p>在本教程中，我们将向您展示如何使用 Milvus 和 PII Masker 构建 RAG（检索-增强生成）管道。</p>
-<p>这将有效保护 PII 数据。</p>
+<p>在本教程中，我们将展示如何将 PII Masker 与 Milvus 结合使用，以保护 RAG（检索-增强生成）应用中的隐私数据。通过将 PII Masker 的数据屏蔽功能与 Milvus 的高效数据检索功能相结合，您可以创建安全、符合隐私标准的管道，放心地处理敏感信息。这种方法可确保您的应用程序符合隐私标准，并有效保护用户数据。</p>
 <h2 id="Preparation" class="common-anchor-header">准备工作<button data-href="#Preparation" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

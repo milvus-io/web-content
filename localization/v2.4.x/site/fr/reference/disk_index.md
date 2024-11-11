@@ -40,7 +40,7 @@ Actuellement, un champ vectoriel ne prend en charge qu'un seul type d'index. Mil
       </svg>
     </button></h2><p>Pour utiliser DiskANN, notez que</p>
 <ul>
-<li>DiskANN est activé par défaut. Si vous préférez les index en mémoire aux index sur disque, il est conseillé de désactiver cette fonction pour obtenir de meilleures performances.<ul>
+<li>DiskANN est désactivé par défaut. Si vous préférez les index en mémoire aux index sur disque, il est conseillé de désactiver cette fonction pour obtenir de meilleures performances.<ul>
 <li>Pour la désactiver, vous pouvez remplacer <code translate="no">queryNode.enableDisk</code> par <code translate="no">false</code> dans votre fichier de configuration milvus.</li>
 <li>Pour la réactiver, vous pouvez remplacer <code translate="no">queryNode.enableDisk</code> par <code translate="no">true</code>.</li>
 </ul></li>
@@ -153,7 +153,7 @@ DiskIndex:
       </svg>
     </button></h2><ul>
 <li><p>Comment traiter l'erreur <code translate="no">io_setup() failed; returned -11, errno=11:Resource temporarily unavailable</code>?</p>
-<p>Le noyau Linux propose la fonction E/S asynchrone non bloquante (AIO) qui permet à un processus de lancer simultanément plusieurs opérations d'E/S sans avoir à attendre la fin de l'une d'entre elles. Cela permet d'améliorer les performances des applications qui peuvent chevaucher le traitement et les E/S.</p>
+<p>Le noyau Linux offre la fonction E/S asynchrone non bloquante (AIO) qui permet à un processus de lancer simultanément plusieurs opérations d'E/S sans avoir à attendre la fin de l'une d'entre elles. Cela permet d'améliorer les performances des applications qui peuvent chevaucher le traitement et les E/S.</p>
 <p>Les performances peuvent être ajustées à l'aide du fichier virtuel <code translate="no">/proc/sys/fs/aio-max-nr</code> dans le système de fichiers proc. Le paramètre <code translate="no">aio-max-nr</code> détermine le nombre maximum de requêtes simultanées autorisées.</p>
 <p>La valeur par défaut de <code translate="no">aio-max-nr</code> est <code translate="no">65535</code>, mais vous pouvez la régler sur <code translate="no">10485760</code>.</p></li>
 </ul>

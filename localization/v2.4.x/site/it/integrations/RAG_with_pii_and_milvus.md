@@ -22,8 +22,7 @@ title: Costruire RAG con Milvus + PII Masker
       </svg>
     </button></h1><p>Le PII (Personally Identifiable Information) sono un tipo di dati sensibili che possono essere utilizzati per identificare le persone.</p>
 <p><a href="https://github.com/HydroXai/pii-masker-v1/tree/main">PII Masker</a>, sviluppato da <a href="https://www.hydrox.ai/">HydroX AI</a>, è uno strumento open-source avanzato progettato per proteggere i vostri dati sensibili sfruttando modelli AI all'avanguardia. Che si tratti di gestire i dati dei clienti, di eseguire analisi dei dati o di garantire la conformità alle normative sulla privacy, PII Masker offre una soluzione robusta e scalabile per mantenere al sicuro le informazioni.</p>
-<p>In questo tutorial vi mostreremo come costruire una pipeline RAG (Retrieval-Augmented Generation) con Milvus e PII Masker.</p>
-<p>In questo modo si proteggono efficacemente i dati PII.</p>
+<p>In questo tutorial mostreremo come utilizzare PII Masker con Milvus per proteggere i dati privati nelle applicazioni RAG (Retrieval-Augmented Generation). Combinando i punti di forza delle capacità di mascheramento dei dati di PII Masker con l'efficiente recupero dei dati di Milvus, è possibile creare pipeline sicure e conformi alla privacy per gestire le informazioni sensibili con fiducia. Questo approccio garantisce che le vostre applicazioni siano in grado di soddisfare gli standard di privacy e di proteggere efficacemente i dati degli utenti.</p>
 <h2 id="Preparation" class="common-anchor-header">Preparazione<button data-href="#Preparation" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -85,7 +84,7 @@ Another user joined the conversation on topic of international volunteering oppo
 
 openai_client = <span class="hljs-title class_">OpenAI</span>()
 <button class="copy-code-btn"></button></code></pre>
-<p>Definiamo una funzione per generare embeddings di testo utilizzando il client OpenAI. Utilizziamo il modello <code translate="no">text-embedding-3-small</code> come esempio.</p>
+<p>Definiamo una funzione per generare embedding di testo utilizzando il client OpenAI. Utilizziamo il modello <code translate="no">text-embedding-3-small</code> come esempio.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">emb_text</span>(<span class="hljs-params">text</span>):
     <span class="hljs-keyword">return</span> (
         openai_client.embeddings.create(<span class="hljs-built_in">input</span>=text, model=<span class="hljs-string">&quot;text-embedding-3-small&quot;</span>)

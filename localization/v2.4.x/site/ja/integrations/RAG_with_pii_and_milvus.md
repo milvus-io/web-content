@@ -21,9 +21,8 @@ title: Milvus + PII MaskerでRAGを構築する
         ></path>
       </svg>
     </button></h1><p>PII（Personally Identifiable Information）とは、個人を特定するために使用できる機密データの一種です。</p>
-<p><a href="https://www.hydrox.ai/">HydroX AIが</a>開発した<a href="https://github.com/HydroXai/pii-masker-v1/tree/main">PII Maskerは</a>、最先端のAIモデルを活用することで機密データを保護するように設計された先進的なオープンソースツールです。PII Masker は、顧客データの取り扱い、データ分析の実行、プライバシー規制の遵守のいずれにおいても、情報を安全に保護するための堅牢で拡張可能なソリューションを提供します。</p>
-<p>このチュートリアルでは、MilvusとPII Maskerを使ってRAG(Retrieval-Augmented Generation)パイプラインを構築する方法をご紹介します。</p>
-<p>これにより、PIIデータを効果的に保護することができます。</p>
+<p><a href="https://www.hydrox.ai/">HydroX AIが</a>開発した<a href="https://github.com/HydroXai/pii-masker-v1/tree/main">PII Maskerは</a>、最先端のAIモデルを活用することで、機密データを保護するように設計された先進的なオープンソースツールです。PII Masker は、顧客データの取り扱い、データ分析の実行、プライバシー規制の遵守のいずれにおいても、情報を安全に保護するための堅牢で拡張可能なソリューションを提供します。</p>
+<p>このチュートリアルでは、RAG(Retrieval-Augmented Generation)アプリケーションでプライベートデータを保護するためにPII MaskerとMilvusを使用する方法を紹介します。PII Maskerのデータマスキング機能とMilvusの効率的なデータ検索機能を組み合わせることで、機密情報を安心して取り扱うためのセキュアでプライバシーに準拠したパイプラインを作成することができます。このアプローチにより、お客様のアプリケーションはプライバシー基準を満たし、ユーザーデータを効果的に保護することができます。</p>
 <h2 id="Preparation" class="common-anchor-header">準備<button data-href="#Preparation" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -126,7 +125,7 @@ milvus_client = <span class="hljs-title class_">MilvusClient</span>(uri=<span cl
 <ul>
 <li><code translate="no">uri</code> をローカルファイル、例えば<code translate="no">./milvus.db</code> とするのが最も便利な方法です。</li>
 <li>100万ベクトルを超えるような大規模なデータがある場合は、<a href="https://milvus.io/docs/quickstart.md">DockerやKubernetes</a>上に、よりパフォーマンスの高いMilvusサーバを構築することができます。このセットアップでは、サーバのアドレスとポートをURIとして使用してください（例：<code translate="no">http://localhost:19530</code> ）。Milvusの認証機能を有効にしている場合は、トークンに"&lt;your_username&gt;:&lt;your_password&gt;"を使用してください。</li>
-<li>Milvusのフルマネージドクラウドサービスである<a href="https://zilliz.com/cloud">Zilliz Cloudを</a>利用する場合は、Zilliz Cloudの<a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">Public EndpointとApi keyに</a>対応する<code translate="no">uri</code> 、<code translate="no">token</code> 。</li>
+<li>Milvusのフルマネージドクラウドサービスである<a href="https://zilliz.com/cloud">Zilliz Cloudを</a>利用する場合は、Zilliz Cloudの<a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">Public EndpointとApi keyに</a>対応する<code translate="no">uri</code> と<code translate="no">token</code> を調整してください。</li>
 </ul>
 </div>
 <p>コレクションが既に存在するか確認し、存在する場合は削除します。</p>
@@ -145,7 +144,7 @@ milvus_client = <span class="hljs-title class_">MilvusClient</span>(uri=<span cl
 )
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Insert-data" class="common-anchor-header">データの挿入</h3><p>マスクされたテキスト行を繰り返し、エンベッディングを作成し、Milvusにデータを挿入します。</p>
-<p>ここに新しいフィールド<code translate="no">text</code> 、コレクションスキーマの非定義フィールドです。これは、予約されたJSONダイナミックフィールドに自動的に追加され、高レベルでは通常のフィールドとして扱われます。</p>
+<p>ここに新しいフィールド<code translate="no">text</code> 、コレクションスキーマの非定義フィールドです。これは予約されたJSONダイナミックフィールドに自動的に追加され、高レベルでは通常のフィールドとして扱われる。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> tqdm <span class="hljs-keyword">import</span> tqdm
 
 data = []

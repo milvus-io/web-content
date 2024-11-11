@@ -24,7 +24,7 @@ title: Mise à niveau de Milvus Standalone avec Docker Compose
         ></path>
       </svg>
     </button></h1><p>Cette rubrique décrit comment mettre à niveau votre Milvus à l'aide de Docker Compose.</p>
-<p>Dans les cas normaux, vous pouvez <a href="#Upgrade-Milvus-by-changing-its-image">mettre à niveau Milvus en modifiant son image</a>. Cependant, vous devez <a href="#Migrate-the-metadata">migrer les métadonnées</a> avant toute mise à niveau de la version 2.1.x à la version 2.4.14.</p>
+<p>Dans les cas normaux, vous pouvez <a href="#Upgrade-Milvus-by-changing-its-image">mettre à niveau Milvus en modifiant son image</a>. Cependant, vous devez <a href="#Migrate-the-metadata">migrer les métadonnées</a> avant toute mise à niveau de la version 2.1.x à la version 2.4.15.</p>
 <div class="alter note">
 <p>Pour des raisons de sécurité, Milvus met à niveau son MinIO vers RELEASE.2023-03-20T20-16-18Z avec la publication de la v2.2.5. Avant toute mise à niveau à partir des versions précédentes de Milvus Standalone installées à l'aide de Docker Compose, vous devez créer un déploiement MinIO Single-Node Single-Drive et migrer les paramètres et le contenu MinIO existants vers le nouveau déploiement. Pour plus de détails, reportez-vous à <a href="https://min.io/docs/minio/linux/operations/install-deploy-manage/migrate-fs-gateway.html#id2">ce guide</a>.</p>
 </div>
@@ -49,7 +49,7 @@ title: Mise à niveau de Milvus Standalone avec Docker Compose
 <pre><code translate="no" class="language-yaml">...
 standalone:
   container_name: milvus-standalone
-  image: milvusdb/milvus:v2.4.14
+  image: milvusdb/milvus:v2.4.15
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>Exécutez les commandes suivantes pour effectuer la mise à niveau.</p>
 <pre><code translate="no" class="language-shell">docker compose down
@@ -83,7 +83,7 @@ cmd:
   runWithBackup: true
 config:
   sourceVersion: <span class="hljs-number">2.1</span><span class="hljs-number">.4</span>   <span class="hljs-comment"># Specify your milvus version</span>
-  targetVersion: <span class="hljs-number">2.4</span><span class="hljs-number">.14</span>
+  targetVersion: <span class="hljs-number">2.4</span><span class="hljs-number">.15</span>
   backupFilePath: /tmp/migration.bak
 metastore:
   <span class="hljs-built_in">type</span>: etcd

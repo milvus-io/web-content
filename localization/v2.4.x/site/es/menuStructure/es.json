@@ -839,7 +839,7 @@
             "children": []
           },
           {
-            "label": "Configurar la caché de trozos",
+            "label": "Configurar Chunk Cache",
             "id": "chunk_cache.md",
             "order": 3,
             "children": []
@@ -1036,7 +1036,7 @@
             "isMenu": true,
             "children": [
               {
-                "label": "Seguimiento de Jaeger",
+                "label": "Rastreo de Jaeger",
                 "id": "config_jaeger_tracing.md",
                 "order": 0,
                 "children": []
@@ -1368,12 +1368,6 @@
                 "id": "milvus_hybrid_search_retriever.md",
                 "order": 3,
                 "children": []
-              },
-              {
-                "label": "PrivadoGPT",
-                "id": "use_milvus_in_private_gpt.md",
-                "order": 4,
-                "children": []
               }
             ]
           },
@@ -1424,6 +1418,12 @@
             "label": "Langflow",
             "id": "rag_with_langflow.md",
             "order": 7,
+            "children": []
+          },
+          {
+            "label": "PrivadoGPT",
+            "id": "use_milvus_in_private_gpt.md",
+            "order": 8,
             "children": []
           }
         ]

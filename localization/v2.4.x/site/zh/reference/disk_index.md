@@ -40,7 +40,7 @@ title: 盘上索引
       </svg>
     </button></h2><p>要使用 DiskANN，请注意</p>
 <ul>
-<li>DiskANN 默认已启用。如果你更喜欢内存索引而不是磁盘索引，建议你禁用该功能以获得更好的性能。<ul>
+<li>DiskANN 默认为禁用。如果你更喜欢内存索引而不是磁盘索引，建议你禁用该功能以获得更好的性能。<ul>
 <li>要禁用该功能，可在 Milvus 配置文件中将<code translate="no">queryNode.enableDisk</code> 更改为<code translate="no">false</code> 。</li>
 <li>要重新启用该功能，可将<code translate="no">queryNode.enableDisk</code> 设为<code translate="no">true</code> 。</li>
 </ul></li>
@@ -67,8 +67,8 @@ title: 盘上索引
       </svg>
     </button></h2><p>要使用 DiskANN，请确保</p>
 <ul>
-<li>在数据中只使用至少 1 维的浮点型向量。</li>
-<li>仅使用欧氏距离 (L2)、内积 (IP) 或 COSINE 来测量向量之间的距离。</li>
+<li>数据中只使用至少 1 维的浮点矢量。</li>
+<li>仅使用欧氏距离 (L2)、内积 (IP) 或 COSINE 来测量向量间的距离。</li>
 </ul>
 <h2 id="Index-and-search-settings" class="common-anchor-header">索引和搜索设置<button data-href="#Index-and-search-settings" class="anchor-icon" translate="no">
       <svg translate="no"

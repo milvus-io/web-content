@@ -40,7 +40,7 @@ Derzeit unterstützt ein Vektorfeld nur einen Index-Typ. Milvus löscht automati
       </svg>
     </button></h2><p>Um DiskANN zu verwenden, beachten Sie, dass</p>
 <ul>
-<li>DiskANN ist standardmäßig aktiviert. Wenn Sie einen In-Memory-Index einem On-Disk-Index vorziehen, sollten Sie diese Funktion deaktivieren, um eine bessere Leistung zu erzielen.<ul>
+<li>DiskANN standardmäßig deaktiviert ist. Wenn Sie einen In-Memory-Index einem On-Disk-Index vorziehen, sollten Sie diese Funktion deaktivieren, um eine bessere Leistung zu erzielen.<ul>
 <li>Um sie zu deaktivieren, können Sie in Ihrer milvus-Konfigurationsdatei <code translate="no">queryNode.enableDisk</code> in <code translate="no">false</code> ändern.</li>
 <li>Um sie wieder zu aktivieren, können Sie <code translate="no">queryNode.enableDisk</code> auf <code translate="no">true</code> setzen.</li>
 </ul></li>
@@ -129,7 +129,7 @@ DiskIndex:
 <tr><th>Parameter</th><th>Beschreibung</th><th>Wertebereich</th><th>Standardwert</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">MaxDegree</code></td><td>Maximaler Grad des Vamana-Graphen. <br/> Ein größerer Wert bietet eine höhere Wiederauffindungsrate, erhöht aber die Größe des Index und die Zeit für den Aufbau des Index.</td><td>[1, 512]</td><td>56</td></tr>
+<tr><td><code translate="no">MaxDegree</code></td><td>Maximaler Grad des Vamana-Graphen. <br/> Ein größerer Wert bietet eine höhere Auffindungsrate, erhöht jedoch die Größe des Index und die Zeit für den Aufbau des Index.</td><td>[1, 512]</td><td>56</td></tr>
 <tr><td><code translate="no">SearchListSize</code></td><td>Größe der Kandidatenliste. <br/> Ein größerer Wert erhöht den Zeitaufwand für den Aufbau des Indexes, bietet aber eine höhere Wiederfindungsrate. <br/> Setzen Sie ihn auf einen Wert kleiner als <code translate="no">MaxDegree</code>, es sei denn, Sie müssen die Zeit für den Indexaufbau reduzieren.</td><td>[1, int32_max]</td><td>100</td></tr>
 <tr><td><code translate="no">PQCodeBugetGBRatio</code></td><td>Größenbeschränkung für den PQ-Code. <br/> Ein größerer Wert bietet eine höhere Abrufrate, erhöht aber den Speicherverbrauch.</td><td>(0.0, 0.25]</td><td>0.125</td></tr>
 <tr><td><code translate="no">SearchCacheBudgetGBRatio</code></td><td>Verhältnis von zwischengespeicherten Knotennummern zu Rohdaten. <br/> Ein größerer Wert verbessert die Indexerstellungsleistung bei erhöhtem Speicherbedarf.</td><td>[0.0, 0.3)</td><td>0.10</td></tr>

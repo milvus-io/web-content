@@ -40,7 +40,7 @@ Actualmente, un campo vectorial sólo admite un tipo de índice. Milvus elimina 
       </svg>
     </button></h2><p>Para utilizar DiskANN, tenga en cuenta que</p>
 <ul>
-<li>DiskANN está activado por defecto. Si prefiere el índice en memoria al índice en disco, le recomendamos que desactive esta función para obtener un mejor rendimiento.<ul>
+<li>DiskANN está desactivado por defecto. Si prefiere el índice en memoria al índice en disco, se recomienda desactivar esta función para obtener un mejor rendimiento.<ul>
 <li>Para desactivarla, puede cambiar <code translate="no">queryNode.enableDisk</code> a <code translate="no">false</code> en su archivo de configuración de milvus.</li>
 <li>Para habilitarla de nuevo, puede cambiar <code translate="no">queryNode.enableDisk</code> por <code translate="no">true</code>.</li>
 </ul></li>
@@ -129,7 +129,7 @@ DiskIndex:
 <tr><th>Parámetro</th><th>Descripción</th><th>Rango de valores</th><th>Valor por defecto</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">MaxDegree</code></td><td>Grado máximo del gráfico Vamana. <br/> Un valor mayor ofrece una mayor tasa de recuperación, pero aumenta el tamaño y el tiempo de creación del índice.</td><td>[1, 512]</td><td>56</td></tr>
+<tr><td><code translate="no">MaxDegree</code></td><td>Grado máximo del gráfico Vamana. <br/> Un valor mayor ofrece una mayor tasa de recuperación, pero aumenta el tamaño y el tiempo de construcción del índice.</td><td>[1, 512]</td><td>56</td></tr>
 <tr><td><code translate="no">SearchListSize</code></td><td>Tamaño de la lista de candidatos. <br/> Un valor mayor incrementa el tiempo empleado en construir el índice pero ofrece una mayor tasa de recuperación. <br/> Ajústalo a un valor menor que <code translate="no">MaxDegree</code> a menos que necesites reducir el tiempo de construcción del índice.</td><td>[1, int32_max]</td><td>100</td></tr>
 <tr><td><code translate="no">PQCodeBugetGBRatio</code></td><td>Límite de tamaño del código PQ. <br/> Un valor mayor ofrece una mayor tasa de recuperación, pero aumenta el uso de memoria.</td><td>(0.0, 0.25]</td><td>0.125</td></tr>
 <tr><td><code translate="no">SearchCacheBudgetGBRatio</code></td><td>Relación entre los números de los nodos almacenados en caché y los datos sin procesar. <br/> Un valor mayor mejora el rendimiento de la creación de índices, pero aumenta el uso de memoria.</td><td>[0.0, 0.3)</td><td>0.10</td></tr>

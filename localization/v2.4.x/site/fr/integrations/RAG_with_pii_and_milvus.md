@@ -22,8 +22,7 @@ title: Construire un RAG avec Milvus + PII Masker
       </svg>
     </button></h1><p>Les IIP (informations personnelles identifiables) sont un type de données sensibles qui peuvent être utilisées pour identifier des personnes.</p>
 <p>PII<a href="https://github.com/HydroXai/pii-masker-v1/tree/main">Masker</a>, développé par <a href="https://www.hydrox.ai/">HydroX AI</a>, est un outil open-source avancé conçu pour protéger vos données sensibles en exploitant des modèles d'IA de pointe. Que vous traitiez des données clients, réalisiez des analyses de données ou assuriez la conformité avec les réglementations en matière de confidentialité, PII Masker fournit une solution robuste et évolutive pour garder vos informations sécurisées.</p>
-<p>Dans ce tutoriel, nous vous montrons comment construire un pipeline RAG (Retrieval-Augmented Generation) avec Milvus et PII Masker.</p>
-<p>Cela permet de protéger efficacement les données PII.</p>
+<p>Dans ce tutoriel, nous allons montrer comment utiliser PII Masker avec Milvus pour protéger les données privées dans les applications RAG (Retrieval-Augmented Generation). En combinant les atouts des capacités de masquage des données de PII Masker avec la récupération efficace des données de Milvus, vous pouvez créer des pipelines sécurisés et conformes à la confidentialité pour traiter les informations sensibles en toute confiance. Cette approche garantit que vos applications sont équipées pour répondre aux normes de confidentialité et protéger efficacement les données des utilisateurs.</p>
 <h2 id="Preparation" class="common-anchor-header">Préparation<button data-href="#Preparation" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -125,7 +124,7 @@ milvus_client = <span class="hljs-title class_">MilvusClient</span>(uri=<span cl
 <p>Comme pour l'argument de <code translate="no">MilvusClient</code>:</p>
 <ul>
 <li>Définir <code translate="no">uri</code> comme fichier local, par exemple<code translate="no">./milvus.db</code>, est la méthode la plus pratique, car elle utilise automatiquement <a href="https://milvus.io/docs/milvus_lite.md">Milvus Lite</a> pour stocker toutes les données dans ce fichier.</li>
-<li>Si vous disposez de données à grande échelle, par exemple plus d'un million de vecteurs, vous pouvez configurer un serveur Milvus plus performant sur <a href="https://milvus.io/docs/quickstart.md">Docker ou Kubernetes</a>. Dans cette configuration, veuillez utiliser l'adresse et le port du serveur comme uri, par exemple<code translate="no">http://localhost:19530</code>. Si vous activez la fonction d'authentification sur Milvus, utilisez "&lt;votre_nom_d'utilisateur&gt;:&lt;votre_mot_de_passe&gt;" comme jeton, sinon ne définissez pas le jeton.</li>
+<li>Si vous avez des données à grande échelle, par exemple plus d'un million de vecteurs, vous pouvez configurer un serveur Milvus plus performant sur <a href="https://milvus.io/docs/quickstart.md">Docker ou Kubernetes</a>. Dans cette configuration, veuillez utiliser l'adresse et le port du serveur comme uri, par exemple<code translate="no">http://localhost:19530</code>. Si vous activez la fonction d'authentification sur Milvus, utilisez "&lt;votre_nom_d'utilisateur&gt;:&lt;votre_mot_de_passe&gt;" comme jeton, sinon ne définissez pas le jeton.</li>
 <li>Si vous souhaitez utiliser <a href="https://zilliz.com/cloud">Zilliz Cloud</a>, le service en nuage entièrement géré pour Milvus, réglez les paramètres <code translate="no">uri</code> et <code translate="no">token</code>, qui correspondent au <a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">point de terminaison public et à la clé Api</a> dans Zilliz Cloud.</li>
 </ul>
 </div>
