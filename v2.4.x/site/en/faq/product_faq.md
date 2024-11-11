@@ -21,14 +21,6 @@ Milvus cannot be installed or run on non-x86 platforms.
 
 Your CPU must support one of the following instruction sets to run Milvus: SSE4.2, AVX, AVX2, AVX512. These are all x86-dedicated SIMD instruction sets.
 
-#### What is the maximum dataset size Milvus can handle?
-
-  
-Theoretically, the maximum dataset size Milvus can handle is determined by the hardware it is run on, specifically system memory and storage:
-
-- Milvus loads all specified collections and partitions into memory before running queries. Therefore, memory size determines the maximum amount of data Milvus can query.
-- When new entities and and collection-related schema (currently only MinIO is supported for data persistence) are added to Milvus, system storage determines the maximum allowable size of inserted data.
-
 ####  Where does Milvus store data?
 
 Milvus deals with two types of data, inserted data and metadata. 
@@ -67,13 +59,13 @@ An insert operation must not exceed 1,024 MB in size. This is a limit imposed by
 
 No. If partitions for a search are specified, Milvus searches the specified partitions only.
 
-#### Does Milvus load the entire collection when partitions are specified for a search?
+#### Does Milvus need to load the entire collection when partitions are specified for a search?
 
-No. Milvus has varied behavior. Data must be loaded to memory before searching.
+It depends on what data is needed for search. All partitions potentially show up in search result must be loaded before searching.
 
-- If you know which partitions your data are located in, call `load_partition()` to load the intended partition(s) *then* specify partition(s) in the `search()` method call.
-- If you do not know the exact partitions, call `load_collection()` before calling `search()`.
-- If you fail to load collections or partitions before searching, Milvus returns an error.
+- For example, if you only want to search specific parition(s), you don't need to load all. Call `load_partition()` to load the intended partition(s) *then* specify partition(s) in the `search()` method call.
+- If you want to search all partitions, call `load_collection()` to load the whole collection including all partitions.
+- If you fail to load the collection or specific partition(s) before searching, Milvus will return an error.
 
 #### Can indexes be created after inserting vectors?
 
@@ -89,7 +81,7 @@ See [Vector Index](index.md) for more information.
 
 #### How does Milvus flush data?
 
-Milvus returns success when inserted data are loaded to the message queue. However, the data are not yet flushed to the disk. Then Milvus' data node writes the data in the message queue to persistent storage as incremental logs. If `flush()` is called, the data node is forced to write all data in the message queue to persistent storage immediately.
+Milvus returns success when inserted data are ingested to the message queue. However, the data are not yet flushed to the disk. Then Milvus' data node writes the data in the message queue to persistent storage as incremental logs. If `flush()` is called, the data node is forced to write all data in the message queue to persistent storage immediately.
 
 #### What is normalization? Why is normalization needed?
 
@@ -137,9 +129,9 @@ In current release, Milvus supports both INT64 and string.
 
 Yes. You can deploy Milvus cluster with multiple nodes via Helm Chart on Kubernetes. Refer to [Scale Guide](scaleout.md) for more instruction.
 
-#### Does the query perform in memory? What are incremental data and historical data?
+#### What are growing segment and sealed segment?
 
-Yes. When a query request comes, Milvus searches both incremental data and historical data by loading them into memory. Incremental data are in the growing segments, which are buffered in memory before they reach the threshold to be persisted in storage engine, while historical data are from the sealed segments that are stored in the object storage. Incremental data and historical data together constitute the whole dataset to search.
+When a search request comes, Milvus searches both incremental data and historical data. Incremental data are recent updates, they are stored in the growing segments, which are buffered in memory before they reach the threshold to be persisted in object storage and a more efficient index is built for them, while historical data are updates a while ago. They are in the sealed segments which have been persisted in the object storage. Incremental data and historical data together constitute the whole dataset for search. This design makes any data ingested to Milvus instantly searchable. For Milvus Distributed, there are more complex factors that decide when a record just ingested can show up in search result. Learn more nuance about that at [consistency levels](https://milvus.io/docs/consistency.md).
 
 #### Is Milvus available for concurrent search?
 
