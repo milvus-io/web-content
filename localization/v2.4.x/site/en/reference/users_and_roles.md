@@ -4,9 +4,9 @@ related_key: 'users, roles'
 summary: >-
   Learn about the definition of users, roles, objects, and privileges in
   role-based access control (RBAC).
-title: Users and Roles
+title: 'Users, Privileges, and Roles'
 ---
-<h1 id="Users-and-Roles" class="common-anchor-header">Users and Roles<button data-href="#Users-and-Roles" class="anchor-icon" translate="no">
+<h1 id="Users-Privileges-and-Roles" class="common-anchor-header">Users, Privileges, and Roles<button data-href="#Users-Privileges-and-Roles" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

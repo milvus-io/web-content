@@ -305,12 +305,6 @@
         "children": []
       },
       {
-        "label": "Users and Roles",
-        "id": "users_and_roles.md",
-        "order": 10,
-        "children": []
-      },
-      {
         "label": "In-memory Replica",
         "id": "replica.md",
         "order": 11,
@@ -1055,6 +1049,12 @@
             "label": "Enable Authentication",
             "id": "authenticate.md",
             "order": 0,
+            "children": []
+          },
+          {
+            "label": "Users, Privileges, and Roles",
+            "id": "users_and_roles.md",
+            "order": 10,
             "children": []
           },
           {
