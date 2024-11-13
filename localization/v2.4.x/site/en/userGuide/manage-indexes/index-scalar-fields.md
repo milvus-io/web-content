@@ -76,7 +76,7 @@ client = MilvusClient(
     uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>
 )
 
-index_params = client.create_index_params() <span class="hljs-comment"># Prepare an empty IndexParams object, without having to specify any index parameters</span>
+index_params = MilvusClient.prepare_index_params() <span class="hljs-comment"># Prepare an empty IndexParams object, without having to specify any index parameters</span>
 
 index_params.add_index(
     field_name=<span class="hljs-string">&quot;scalar_1&quot;</span>, <span class="hljs-comment"># Name of the scalar field to be indexed</span>
@@ -145,7 +145,7 @@ client.createIndex(createIndexReq);
     <a href="#java">Java</a>
     <a href="#javascript">Node.js</a>
 </div>
-<pre><code translate="no" class="language-python">index_params = client.create_index_params() <span class="hljs-comment">#  Prepare an IndexParams object</span>
+<pre><code translate="no" class="language-python">index_params = MilvusClient.prepare_index_params() <span class="hljs-comment">#  Prepare an IndexParams object</span>
 
 index_params.add_index(
     field_name=<span class="hljs-string">&quot;scalar_2&quot;</span>, <span class="hljs-comment"># Name of the scalar field to be indexed</span>
@@ -187,7 +187,7 @@ client.createIndex(createIndexReq);
 <div class="language-python">
 <p><strong>Methods and Parameters</strong></p>
 <ul>
-<li><p><strong>create_index_params()</strong></p>
+<li><p><strong>prepare_index_params()</strong></p>
 <p>Prepares an <strong>IndexParams</strong> object.</p></li>
 <li><p><strong>add_index()</strong></p>
 <p>Adds index configurations to the <strong>IndexParams</strong> object.</p>
