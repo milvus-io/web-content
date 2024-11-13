@@ -10,7 +10,7 @@ This topic introduces Knowhere, the core vector execution engine of Milvus.
 
 ## Overview
 
-Knowhere is the core vector execution engine of Milvus which incorporates several vector similarity search libraries including [Faiss](https://github.com/facebookresearch/faiss), [Hnswlib](https://github.com/nmslib/hnswlib) and [Annoy](https://github.com/spotify/annoy). Knowhere is also designed to support heterogeneous computing. It controls on which hardware (CPU or GPU) to execute index building and search requests. This is how Knowhere gets its name - knowing where to execute the operations. More types of hardware including DPU and TPU will be supported in future releases.
+Knowhere is the core vector execution engine of Milvus, which incorporates several vector similarity search libraries including [Faiss](https://github.com/facebookresearch/faiss), [Hnswlib](https://github.com/nmslib/hnswlib) and [Annoy](https://github.com/spotify/annoy). Knowhere is also designed to support heterogeneous computing. It controls on which hardware (CPU or GPU) to execute index building and search requests. This is how Knowhere gets its name - knowing where to execute the operations. More types of hardware including DPU and TPU will be supported in future releases.
 
 ## Knowhere in the Milvus architecture
 
@@ -18,7 +18,7 @@ The figure below illustrates the position of Knowhere in the Milvus architecture
 
 ![Knowhere](../../../assets/knowhere_architecture.png "Knowhere in the Milvus architecture.")
 
-The bottom-most layer is the system hardware. The third-party index libraries are on top of the hardware. Then Knowhere interacts with the index node and query node on the top via CGO, which allows Go packages to call C code.
+The bottom-most layer is the system hardware. Above this sit the third-party index libraries. At the top layer, Knowhere interacts with the index node and query node via CGO, which allows Go packages to call C code.
 
 ## Knowhere advantages
 
@@ -78,33 +78,33 @@ Some other index types are listed on the right in the figure above.
 
 Technically speaking, `IDMAP` is not an index, but rather used for brute-force search. When vectors are inserted into the database, neither data training nor index building is required. Searches will be conducted directly on the inserted vector data.
 
-However, for code consistency, `IDMAP` also inherits from the `VecIndex` class with all its virtual interfaces. The usage of `IDMAP` is the same as other indexes.
+However, for code consistency, `IDMAP` also inherits from the `VecIndex` class with all its virtual interfaces. The usage of `IDMAP` is the same as other indices.
 
-#### IVF indexes
+#### IVF indices
 
-![IVF](../../../assets/IVF.png "Code structure of IVF indexes.")
+![IVF](../../../assets/IVF.png "Code structure of IVF indices.")
 
-The IVF (inverted file) indexes are the most frequently used. The `IVF` class is derived from `VecIndex` and `FaissBaseIndex`, and further extends to `IVFSQ` and `IVFPQ`. `GPUIVF` is derived from `GPUIndex` and `IVF`. Then `GPUIVF` further extends to `GPUIVFSQ` and `GPUIVFPQ`.
+The IVF (inverted file) indices are the most frequently used. The `IVF` class is derived from `VecIndex` and `FaissBaseIndex`, and further extends to `IVFSQ` and `IVFPQ`. `GPUIVF` is derived from `GPUIndex` and `IVF`. Then `GPUIVF` further extends to `GPUIVFSQ` and `GPUIVFPQ`.
 
-`IVFSQHybrid` is a self-developed hybrid index. Coarse quantizer is executed on GPU while search in the bucket on CPU. This type of index can reduce the occurrence of memory copy between CPU and GPU by leveraging the computing power of GPU. `IVFSQHybrid` has the same recall rate as `GPUIVFSQ` but comes with better performance.
+`IVFSQHybrid` is a self-developed hybrid index. A coarse quantizer is executed on GPU while search in the bucket on CPU. This type of index can reduce the occurrence of memory copy between CPU and GPU by leveraging the computing power of GPU. `IVFSQHybrid` has the same recall rate as `GPUIVFSQ` but comes with better performance.
 
-The base class structure for binary indexes is relatively simpler. `BinaryIDMAP` and `BinaryIVF` are derived from `FaissBaseBinaryIndex` and `VecIndex`.
+The base class structure for binary indices is relatively simpler. `BinaryIDMAP` and `BinaryIVF` are derived from `FaissBaseBinaryIndex` and `VecIndex`.
 
-#### Third-party indexes
+#### Third-party indices
 
-![third-party indexes](../../../assets/third_party_index.png "Code structure of other third-party indexes.")
+![third-party indices](../../../assets/third_party_index.png "Code structure of other third-party indices.")
 
-Currently, only two types of third-party indexes are supported apart from Faiss: tree-based index `Annoy`, and graph-based index `HNSW`. These two common and frequently used third-party indexes are both derived from `VecIndex`.
+Currently, only two types of third-party indices are supported apart from Faiss: tree-based index `Annoy`, and graph-based index `HNSW`. These two common and frequently used third-party indices are both derived from `VecIndex`.
 
-## Adding indexes to Knowhere
+## Adding indices to Knowhere
 
-If you want to add new indexes to Knowhere, first you can refer to existing indexes:
+If you want to add new indices to Knowhere, first you can refer to existing indices:
 
-- To add quantization-based indexes, refer to `IVF_FLAT`.
+- To add quantization-based indices, refer to `IVF_FLAT`.
 
-- To add graph-based indexes, refer to `HNSW`.
+- To add graph-based indices, refer to `HNSW`.
 
-- To add tree-based indexes, refer to `Annoy`.
+- To add tree-based indices, refer to `Annoy`.
 
 After referring to the existing index, you can follow the steps below to add a new index to Knowhere.
 
@@ -122,7 +122,7 @@ After referring to the existing index, you can follow the steps below to add a n
 
 After learning how Knowhere works in Milvus, you might also want to:
 
-- Learn about [the various types of indexes Milvus supports](index.md).
+- Learn about [the various types of indices Milvus supports](index.md).
 - Learn about [the bitset mechanism](bitset.md).
 
 - Understand [how data are processed](data_processing.md) in Milvus.
