@@ -34,7 +34,7 @@ title: Knowhere
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Knowhere is the core vector execution engine of Milvus which incorporates several vector similarity search libraries including <a href="https://github.com/facebookresearch/faiss">Faiss</a>, <a href="https://github.com/nmslib/hnswlib">Hnswlib</a> and <a href="https://github.com/spotify/annoy">Annoy</a>. Knowhere is also designed to support heterogeneous computing. It controls on which hardware (CPU or GPU) to execute index building and search requests. This is how Knowhere gets its name - knowing where to execute the operations. More types of hardware including DPU and TPU will be supported in future releases.</p>
+    </button></h2><p>Knowhere is the core vector execution engine of Milvus, which incorporates several vector similarity search libraries including <a href="https://github.com/facebookresearch/faiss">Faiss</a>, <a href="https://github.com/nmslib/hnswlib">Hnswlib</a> and <a href="https://github.com/spotify/annoy">Annoy</a>. Knowhere is also designed to support heterogeneous computing. It controls on which hardware (CPU or GPU) to execute index building and search requests. This is how Knowhere gets its name - knowing where to execute the operations. More types of hardware including DPU and TPU will be supported in future releases.</p>
 <h2 id="Knowhere-in-the-Milvus-architecture" class="common-anchor-header">Knowhere in the Milvus architecture<button data-href="#Knowhere-in-the-Milvus-architecture" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -57,7 +57,7 @@ title: Knowhere
     <span>Knowhere</span>
   </span>
 </p>
-<p>The bottom-most layer is the system hardware. The third-party index libraries are on top of the hardware. Then Knowhere interacts with the index node and query node on the top via CGO, which allows Go packages to call C code.</p>
+<p>The bottom-most layer is the system hardware. Above this sit the third-party index libraries. At the top layer, Knowhere interacts with the index node and query node via CGO, which allows Go packages to call C code.</p>
 <h2 id="Knowhere-advantages" class="common-anchor-header">Knowhere advantages<button data-href="#Knowhere-advantages" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -120,24 +120,24 @@ title: Knowhere
   </span>
 </p>
 <p>Technically speaking, <code translate="no">IDMAP</code> is not an index, but rather used for brute-force search. When vectors are inserted into the database, neither data training nor index building is required. Searches will be conducted directly on the inserted vector data.</p>
-<p>However, for code consistency, <code translate="no">IDMAP</code> also inherits from the <code translate="no">VecIndex</code> class with all its virtual interfaces. The usage of <code translate="no">IDMAP</code> is the same as other indexes.</p>
-<h4 id="IVF-indexes" class="common-anchor-header">IVF indexes</h4><p>
+<p>However, for code consistency, <code translate="no">IDMAP</code> also inherits from the <code translate="no">VecIndex</code> class with all its virtual interfaces. The usage of <code translate="no">IDMAP</code> is the same as other indices.</p>
+<h4 id="IVF-indices" class="common-anchor-header">IVF indices</h4><p>
   <span class="img-wrapper">
     <img translate="no" src="/docs/v2.4.x/assets/IVF.png" alt="IVF" class="doc-image" id="ivf" />
     <span>IVF</span>
   </span>
 </p>
-<p>The IVF (inverted file) indexes are the most frequently used. The <code translate="no">IVF</code> class is derived from <code translate="no">VecIndex</code> and <code translate="no">FaissBaseIndex</code>, and further extends to <code translate="no">IVFSQ</code> and <code translate="no">IVFPQ</code>. <code translate="no">GPUIVF</code> is derived from <code translate="no">GPUIndex</code> and <code translate="no">IVF</code>. Then <code translate="no">GPUIVF</code> further extends to <code translate="no">GPUIVFSQ</code> and <code translate="no">GPUIVFPQ</code>.</p>
-<p><code translate="no">IVFSQHybrid</code> is a self-developed hybrid index. Coarse quantizer is executed on GPU while search in the bucket on CPU. This type of index can reduce the occurrence of memory copy between CPU and GPU by leveraging the computing power of GPU. <code translate="no">IVFSQHybrid</code> has the same recall rate as <code translate="no">GPUIVFSQ</code> but comes with better performance.</p>
-<p>The base class structure for binary indexes is relatively simpler. <code translate="no">BinaryIDMAP</code> and <code translate="no">BinaryIVF</code> are derived from <code translate="no">FaissBaseBinaryIndex</code> and <code translate="no">VecIndex</code>.</p>
-<h4 id="Third-party-indexes" class="common-anchor-header">Third-party indexes</h4><p>
+<p>The IVF (inverted file) indices are the most frequently used. The <code translate="no">IVF</code> class is derived from <code translate="no">VecIndex</code> and <code translate="no">FaissBaseIndex</code>, and further extends to <code translate="no">IVFSQ</code> and <code translate="no">IVFPQ</code>. <code translate="no">GPUIVF</code> is derived from <code translate="no">GPUIndex</code> and <code translate="no">IVF</code>. Then <code translate="no">GPUIVF</code> further extends to <code translate="no">GPUIVFSQ</code> and <code translate="no">GPUIVFPQ</code>.</p>
+<p><code translate="no">IVFSQHybrid</code> is a self-developed hybrid index. A coarse quantizer is executed on GPU while search in the bucket on CPU. This type of index can reduce the occurrence of memory copy between CPU and GPU by leveraging the computing power of GPU. <code translate="no">IVFSQHybrid</code> has the same recall rate as <code translate="no">GPUIVFSQ</code> but comes with better performance.</p>
+<p>The base class structure for binary indices is relatively simpler. <code translate="no">BinaryIDMAP</code> and <code translate="no">BinaryIVF</code> are derived from <code translate="no">FaissBaseBinaryIndex</code> and <code translate="no">VecIndex</code>.</p>
+<h4 id="Third-party-indices" class="common-anchor-header">Third-party indices</h4><p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.4.x/assets/third_party_index.png" alt="third-party indexes" class="doc-image" id="third-party-indexes" />
-    <span>third-party indexes</span>
+    <img translate="no" src="/docs/v2.4.x/assets/third_party_index.png" alt="third-party indices" class="doc-image" id="third-party-indices" />
+    <span>third-party indices</span>
   </span>
 </p>
-<p>Currently, only two types of third-party indexes are supported apart from Faiss: tree-based index <code translate="no">Annoy</code>, and graph-based index <code translate="no">HNSW</code>. These two common and frequently used third-party indexes are both derived from <code translate="no">VecIndex</code>.</p>
-<h2 id="Adding-indexes-to-Knowhere" class="common-anchor-header">Adding indexes to Knowhere<button data-href="#Adding-indexes-to-Knowhere" class="anchor-icon" translate="no">
+<p>Currently, only two types of third-party indices are supported apart from Faiss: tree-based index <code translate="no">Annoy</code>, and graph-based index <code translate="no">HNSW</code>. These two common and frequently used third-party indices are both derived from <code translate="no">VecIndex</code>.</p>
+<h2 id="Adding-indices-to-Knowhere" class="common-anchor-header">Adding indices to Knowhere<button data-href="#Adding-indices-to-Knowhere" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -152,11 +152,11 @@ title: Knowhere
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>If you want to add new indexes to Knowhere, first you can refer to existing indexes:</p>
+    </button></h2><p>If you want to add new indices to Knowhere, first you can refer to existing indices:</p>
 <ul>
-<li><p>To add quantization-based indexes, refer to <code translate="no">IVF_FLAT</code>.</p></li>
-<li><p>To add graph-based indexes, refer to <code translate="no">HNSW</code>.</p></li>
-<li><p>To add tree-based indexes, refer to <code translate="no">Annoy</code>.</p></li>
+<li><p>To add quantization-based indices, refer to <code translate="no">IVF_FLAT</code>.</p></li>
+<li><p>To add graph-based indices, refer to <code translate="no">HNSW</code>.</p></li>
+<li><p>To add tree-based indices, refer to <code translate="no">Annoy</code>.</p></li>
 </ul>
 <p>After referring to the existing index, you can follow the steps below to add a new index to Knowhere.</p>
 <ol>
@@ -183,7 +183,7 @@ title: Knowhere
       </svg>
     </button></h2><p>After learning how Knowhere works in Milvus, you might also want to:</p>
 <ul>
-<li><p>Learn about <a href="/docs/index.md">the various types of indexes Milvus supports</a>.</p></li>
+<li><p>Learn about <a href="/docs/index.md">the various types of indices Milvus supports</a>.</p></li>
 <li><p>Learn about <a href="/docs/bitset.md">the bitset mechanism</a>.</p></li>
 <li><p>Understand <a href="/docs/data_processing.md">how data are processed</a> in Milvus.</p></li>
 </ul>

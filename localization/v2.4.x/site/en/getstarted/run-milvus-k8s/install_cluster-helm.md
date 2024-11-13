@@ -277,7 +277,7 @@ $ helm upgrade my-release zilliztech/milvus
 </ul></li>
 <li><p><a href="/docs/upgrade_milvus_cluster-helm.md">Upgrade Milvus Using Helm Chart</a>.</p></li>
 <li><p><a href="/docs/scaleout.md">Scale your Milvus cluster</a>.</p></li>
-<li><p>Deploy your Milvu cluster on clouds:</p>
+<li><p>Deploy your Milvus cluster on clouds:</p>
 <ul>
 <li><a href="/docs/eks.md">Amazon EKS</a></li>
 <li><a href="/docs/gcp.md">Google Cloud</a></li>
