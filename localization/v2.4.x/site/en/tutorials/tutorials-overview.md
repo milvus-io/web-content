@@ -28,7 +28,7 @@ title: Tutorials Overview
 <tr><td><a href="/docs/multimodal_rag_with_milvus.md">Multimodal RAG with Milvus</a></td><td>RAG</td><td>vector search, dynamic field</td></tr>
 <tr><td><a href="/docs/image_similarity_search.md">Image Search with Milvus</a></td><td>Semantic Search</td><td>vector search, dynamic field</td></tr>
 <tr><td><a href="/docs/hybrid_search_with_milvus.md">Hybrid Search with Milvus</a></td><td>Hybrid Search</td><td>hybrid search, multi vector, dense embedding, sparse embedding</td></tr>
-<tr><td><a href="/docs/multimodal_rag_with_milvus.md">Multimodal Search using multi vectors</a></td><td>Semantic Search</td><td>multi vector, hybrid search</td></tr>
+<tr><td><a href="/docs/multimodal_rag_with_milvus.md">Multimodal Search using Multi Vectors</a></td><td>Semantic Search</td><td>multi vector, hybrid search</td></tr>
 <tr><td><a href="/docs/question_answering_system.md">Question Answering System</a></td><td>Question Answering</td><td>vector search</td></tr>
 <tr><td><a href="/docs/recommendation_system.md">Recommender System</a></td><td>Recommendation System</td><td>vector search</td></tr>
 <tr><td><a href="/docs/video_similarity_search.md">Video Similarity Search</a></td><td>Semantic Search</td><td>vector search</td></tr>
