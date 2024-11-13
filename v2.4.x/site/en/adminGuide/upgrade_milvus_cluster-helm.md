@@ -214,43 +214,43 @@ The following table lists the operations you can do for meta migration.
 4. Migrate the Milvus metadata.
 5. Start Milvus components with a new image.
 
-#### 2. Upgrade Milvus from v2.1.x to 2.4.15
+#### 2. Upgrade Milvus from v2.1.x to 2.2.0
 
-The following commands assume that you upgrade Milvus from v2.1.4 to 2.4.15. Change them to the versions that fit your needs.
+The following commands assume that you upgrade Milvus from v2.1.4 to 2.2.0. Change them to the versions that fit your needs.
 
 1. Specify Milvus instance name, source Milvus version, and target Milvus version.
 
     ```
-    ./migrate.sh -i my-release -s 2.1.4 -t 2.4.15
+    ./migrate.sh -i my-release -s 2.1.4 -t 2.2.0
     ```
 
 2. Specify the namespace with `-n` if your Milvus is not installed in the default K8s namespace.
 
     ```
-    ./migrate.sh -i my-release -n milvus -s 2.1.4 -t 2.4.15
+    ./migrate.sh -i my-release -n milvus -s 2.1.4 -t 2.2.0
     ```
 
 3. Specify the root path with `-r` if your Milvus is installed with the custom `rootpath`.
 
     ```
-    ./migrate.sh -i my-release -n milvus -s 2.1.4 -t 2.4.15 -r by-dev
+    ./migrate.sh -i my-release -n milvus -s 2.1.4 -t 2.2.0 -r by-dev
     ```
 
 4. Specify the image tag with `-w` if your Milvus is installed with a custom `image`.
 
     ```
-    ./migrate.sh -i my-release -n milvus -s 2.1.4 -t 2.4.15 -r by-dev -w milvusdb/milvus:v2.4.15
+    ./migrate.sh -i my-release -n milvus -s 2.1.4 -t 2.2.0 -r by-dev -w milvusdb/milvus:v2.2.0
     ```
 
 5. Set `-d true` if you want to automatically remove the migration pod after the migration is completed.
 
     ```
-    ./migrate.sh -i my-release -n milvus -s 2.1.4 -t 2.4.15 -w milvusdb/milvus:v2.4.15 -d true
+    ./migrate.sh -i my-release -n milvus -s 2.1.4 -t 2.2.0 -w milvusdb/milvus:v2.2.0 -d true
     ```
 
 6. Rollback and migrate again if the migration fails.
 
     ```
-    ./migrate.sh -i my-release -n milvus -s 2.1.4 -t 2.4.15 -r by-dev -o rollback -w milvusdb/milvus:v2.1.1
-    ./migrate.sh -i my-release -n milvus -s 2.1.4 -t 2.4.15 -r by-dev -o migrate -w milvusdb/milvus:v2.4.15
+    ./migrate.sh -i my-release -n milvus -s 2.1.4 -t 2.2.0 -r by-dev -o rollback -w milvusdb/milvus:v2.1.4
+    ./migrate.sh -i my-release -n milvus -s 2.1.4 -t 2.2.0 -r by-dev -o migrate -w milvusdb/milvus:v2.2.0
     ```
