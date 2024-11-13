@@ -1768,7 +1768,7 @@ Upon receiving your load request, Milvus loads all vector field indexes and all 
 # 7. Load the collection
 client.load_collection(
     collection_name="customized_setup_2",
-    load_fields=["my_id", "my_vector"] # Load only the specified fields
+    load_fields=["my_id", "my_vector"], # Load only the specified fields
     skip_load_dynamic_field=True # Skip loading the dynamic field
 )
 
