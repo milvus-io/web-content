@@ -49,7 +49,7 @@ client = MilvusClient(
     uri="http://localhost:19530"
 )
 
-index_params = client.create_index_params() # Prepare an empty IndexParams object, without having to specify any index parameters
+index_params = MilvusClient.prepare_index_params() # Prepare an empty IndexParams object, without having to specify any index parameters
 
 index_params.add_index(
     field_name="scalar_1", # Name of the scalar field to be indexed
@@ -122,7 +122,7 @@ The example below creates an inverted index for the scalar field `scalar_2`.
 </div>
 
 ```python
-index_params = client.create_index_params() #  Prepare an IndexParams object
+index_params = MilvusClient.prepare_index_params() #  Prepare an IndexParams object
 
 index_params.add_index(
     field_name="scalar_2", # Name of the scalar field to be indexed
@@ -170,7 +170,7 @@ await client.createIndex({
 
 __Methods and Parameters__
 
-- __create_index_params()__
+- __prepare_index_params()__
 
     Prepares an __IndexParams__ object.
 

@@ -719,7 +719,7 @@ client.load_partitions(
     partition_names=["partitionA", "partitionB"]
 )
 
-res = client.get_load_status(
+res = client.get_load_state(
     collection_name="quick_setup",
     partition_name="partitionA"
 )
@@ -730,7 +730,7 @@ res = client.get_load_status(
 #     "state": "<LoadState: Loaded>"
 # }
 
-res = client.get_load_status(
+res = client.get_load_state(
     collection_name="quick_setup",
     partition_name="partitionB"
 )
@@ -921,7 +921,7 @@ client.release_partitions(
     partition_names=["_default", "partitionA", "partitionB"]
 )
 
-res = client.get_load_status(
+res = client.get_load_state(
     collection_name="quick_setup",
 )
 
