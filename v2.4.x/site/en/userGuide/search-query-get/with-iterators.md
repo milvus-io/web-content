@@ -249,7 +249,7 @@ To search with an iterator, call the [searchIterator()](https://milvus.io/api-re
 </div>
 
 ```python
-from pymilvus import Collection
+from pymilvus import Collection,connections
 
 # 4. Search with iterator
 connections.connect(host="127.0.0.1", port=19530)

@@ -37,7 +37,7 @@ import random
 
 # Connect to Milvus
 connections.connect(
-    host="10.102.7.3", # Replace with your Milvus server IP
+    host="127.0.0.1", # Replace with your Milvus server IP
     port="19530"
 )
 

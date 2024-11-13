@@ -39,10 +39,12 @@ The code snippet below repurposes the existing code to establish a connection to
 </div>
 
 ```python
+from pymilvus import MilvusClient
+import random
+
 # 1. Set up a Milvus client
 client = MilvusClient(
-    uri=CLUSTER_ENDPOINT,
-    token=TOKEN 
+    uri="http://localhost:19530"
 )
 
 # 2. Create a collection
@@ -424,7 +426,7 @@ Here is an example of searching for the top 5 entities that are most similar to 
 ```python
 # Single vector search
 res = client.search(
-    collection_name="test_collection", # Replace with the actual name of your collection
+    collection_name="quick_setup", # Replace with the actual name of your collection
     # Replace with your query vector
     data=[[0.3580376395471989, -0.6023495712049978, 0.18414012509913835, -0.26286205330961354, 0.9029438446296592]],
     limit=5, # Max. number of search results to return
@@ -648,7 +650,7 @@ Here is an example of searching for two distinct sets of the most similar entiti
 ```python
 # Bulk-vector search
 res = client.search(
-    collection_name="test_collection", # Replace with the actual name of your collection
+    collection_name="quick_setup", # Replace with the actual name of your collection
     data=[
         [0.19886812562848388, 0.06023560599112088, 0.6976963061752597, 0.2614474506242501, 0.838729485096104],
         [0.3172005263489739, 0.9719044792798428, -0.36981146090600725, -0.4860894583077995, 0.95791889146345]
@@ -1309,7 +1311,7 @@ Here is an example of returning results with `color` attribute values:
 ```python
 # Search with output fields
 res = client.search(
-    collection_name="test_collection", # Replace with the actual name of your collection
+    collection_name="quick_setup", # Replace with the actual name of your collection
     data=[[0.3580376395471989, -0.6023495712049978, 0.18414012509913835, -0.26286205330961354, 0.9029438446296592]],
     limit=5, # Max. number of search results to return
     search_params={"metric_type": "IP", "params": {}}, # Search parameters
@@ -1474,7 +1476,7 @@ Filter results whose __color__ is prefixed with __red__:
 ```python
 # Search with filter
 res = client.search(
-    collection_name="test_collection", # Replace with the actual name of your collection
+    collection_name="quick_setup", # Replace with the actual name of your collection
     data=[[0.3580376395471989, -0.6023495712049978, 0.18414012509913835, -0.26286205330961354, 0.9029438446296592]],
     limit=5, # Max. number of search results to return
     search_params={"metric_type": "IP", "params": {}}, # Search parameters
@@ -1603,7 +1605,7 @@ Filter results whose __color__ contains the letters __ll__ anywhere within the s
 ```python
 # Infix match on color field
 res = client.search(
-    collection_name="test_collection", # Replace with the actual name of your collection
+    collection_name="quick_setup", # Replace with the actual name of your collection
     data=[[0.3580376395471989, -0.6023495712049978, 0.18414012509913835, -0.26286205330961354, 0.9029438446296592]],
     limit=5, # Max. number of search results to return
     search_params={"metric_type": "IP", "params": {}}, # Search parameters
@@ -1714,7 +1716,7 @@ search_params = {
 }
 
 res = client.search(
-    collection_name="test_collection", # Replace with the actual name of your collection
+    collection_name="quick_setup", # Replace with the actual name of your collection
     data=[[0.3580376395471989, -0.6023495712049978, 0.18414012509913835, -0.26286205330961354, 0.9029438446296592]],
     limit=3, # Max. number of search results to return
     search_params=search_params, # Search parameters
