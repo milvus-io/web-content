@@ -71,10 +71,12 @@ title: Single-Vector Search
     <a href="#java">Java</a>
     <a href="#javascript">Node.js</a>
 </div>
-<pre><code translate="no" class="language-python"><span class="hljs-comment"># 1. Set up a Milvus client</span>
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
+<span class="hljs-keyword">import</span> random
+
+<span class="hljs-comment"># 1. Set up a Milvus client</span>
 client = MilvusClient(
-    uri=CLUSTER_ENDPOINT,
-    token=TOKEN 
+    uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>
 )
 
 <span class="hljs-comment"># 2. Create a collection</span>
@@ -455,7 +457,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 </div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Single vector search</span>
 res = client.search(
-    collection_name=<span class="hljs-string">&quot;test_collection&quot;</span>, <span class="hljs-comment"># Replace with the actual name of your collection</span>
+    collection_name=<span class="hljs-string">&quot;quick_setup&quot;</span>, <span class="hljs-comment"># Replace with the actual name of your collection</span>
     <span class="hljs-comment"># Replace with your query vector</span>
     data=[[<span class="hljs-number">0.3580376395471989</span>, -<span class="hljs-number">0.6023495712049978</span>, <span class="hljs-number">0.18414012509913835</span>, -<span class="hljs-number">0.26286205330961354</span>, <span class="hljs-number">0.9029438446296592</span>]],
     limit=<span class="hljs-number">5</span>, <span class="hljs-comment"># Max. number of search results to return</span>
@@ -655,7 +657,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 </div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Bulk-vector search</span>
 res = client.search(
-    collection_name=<span class="hljs-string">&quot;test_collection&quot;</span>, <span class="hljs-comment"># Replace with the actual name of your collection</span>
+    collection_name=<span class="hljs-string">&quot;quick_setup&quot;</span>, <span class="hljs-comment"># Replace with the actual name of your collection</span>
     data=[
         [<span class="hljs-number">0.19886812562848388</span>, <span class="hljs-number">0.06023560599112088</span>, <span class="hljs-number">0.6976963061752597</span>, <span class="hljs-number">0.2614474506242501</span>, <span class="hljs-number">0.838729485096104</span>],
         [<span class="hljs-number">0.3172005263489739</span>, <span class="hljs-number">0.9719044792798428</span>, -<span class="hljs-number">0.36981146090600725</span>, -<span class="hljs-number">0.4860894583077995</span>, <span class="hljs-number">0.95791889146345</span>]
@@ -1258,7 +1260,7 @@ searchResp = client.<span class="hljs-title function_">search</span>(searchReq);
 </div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Search with output fields</span>
 res = client.search(
-    collection_name=<span class="hljs-string">&quot;test_collection&quot;</span>, <span class="hljs-comment"># Replace with the actual name of your collection</span>
+    collection_name=<span class="hljs-string">&quot;quick_setup&quot;</span>, <span class="hljs-comment"># Replace with the actual name of your collection</span>
     data=[[<span class="hljs-number">0.3580376395471989</span>, -<span class="hljs-number">0.6023495712049978</span>, <span class="hljs-number">0.18414012509913835</span>, -<span class="hljs-number">0.26286205330961354</span>, <span class="hljs-number">0.9029438446296592</span>]],
     limit=<span class="hljs-number">5</span>, <span class="hljs-comment"># Max. number of search results to return</span>
     search_params={<span class="hljs-string">&quot;metric_type&quot;</span>: <span class="hljs-string">&quot;IP&quot;</span>, <span class="hljs-string">&quot;params&quot;</span>: {}}, <span class="hljs-comment"># Search parameters</span>
@@ -1412,7 +1414,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 </div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Search with filter</span>
 res = client.search(
-    collection_name=<span class="hljs-string">&quot;test_collection&quot;</span>, <span class="hljs-comment"># Replace with the actual name of your collection</span>
+    collection_name=<span class="hljs-string">&quot;quick_setup&quot;</span>, <span class="hljs-comment"># Replace with the actual name of your collection</span>
     data=[[<span class="hljs-number">0.3580376395471989</span>, -<span class="hljs-number">0.6023495712049978</span>, <span class="hljs-number">0.18414012509913835</span>, -<span class="hljs-number">0.26286205330961354</span>, <span class="hljs-number">0.9029438446296592</span>]],
     limit=<span class="hljs-number">5</span>, <span class="hljs-comment"># Max. number of search results to return</span>
     search_params={<span class="hljs-string">&quot;metric_type&quot;</span>: <span class="hljs-string">&quot;IP&quot;</span>, <span class="hljs-string">&quot;params&quot;</span>: {}}, <span class="hljs-comment"># Search parameters</span>
@@ -1525,7 +1527,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 </div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Infix match on color field</span>
 res = client.search(
-    collection_name=<span class="hljs-string">&quot;test_collection&quot;</span>, <span class="hljs-comment"># Replace with the actual name of your collection</span>
+    collection_name=<span class="hljs-string">&quot;quick_setup&quot;</span>, <span class="hljs-comment"># Replace with the actual name of your collection</span>
     data=[[<span class="hljs-number">0.3580376395471989</span>, -<span class="hljs-number">0.6023495712049978</span>, <span class="hljs-number">0.18414012509913835</span>, -<span class="hljs-number">0.26286205330961354</span>, <span class="hljs-number">0.9029438446296592</span>]],
     limit=<span class="hljs-number">5</span>, <span class="hljs-comment"># Max. number of search results to return</span>
     search_params={<span class="hljs-string">&quot;metric_type&quot;</span>: <span class="hljs-string">&quot;IP&quot;</span>, <span class="hljs-string">&quot;params&quot;</span>: {}}, <span class="hljs-comment"># Search parameters</span>
@@ -1632,7 +1634,7 @@ search_params = {
 }
 
 res = client.search(
-    collection_name=<span class="hljs-string">&quot;test_collection&quot;</span>, <span class="hljs-comment"># Replace with the actual name of your collection</span>
+    collection_name=<span class="hljs-string">&quot;quick_setup&quot;</span>, <span class="hljs-comment"># Replace with the actual name of your collection</span>
     data=[[<span class="hljs-number">0.3580376395471989</span>, -<span class="hljs-number">0.6023495712049978</span>, <span class="hljs-number">0.18414012509913835</span>, -<span class="hljs-number">0.26286205330961354</span>, <span class="hljs-number">0.9029438446296592</span>]],
     limit=<span class="hljs-number">3</span>, <span class="hljs-comment"># Max. number of search results to return</span>
     search_params=search_params, <span class="hljs-comment"># Search parameters</span>

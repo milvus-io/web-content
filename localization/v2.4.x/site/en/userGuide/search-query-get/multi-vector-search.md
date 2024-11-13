@@ -54,7 +54,7 @@ title: Hybrid Search
 
 <span class="hljs-comment"># Connect to Milvus</span>
 connections.connect(
-    host=<span class="hljs-string">&quot;10.102.7.3&quot;</span>, <span class="hljs-comment"># Replace with your Milvus server IP</span>
+    host=<span class="hljs-string">&quot;127.0.0.1&quot;</span>, <span class="hljs-comment"># Replace with your Milvus server IP</span>
     port=<span class="hljs-string">&quot;19530&quot;</span>
 )
 
