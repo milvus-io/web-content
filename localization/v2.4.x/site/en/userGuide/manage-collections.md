@@ -1637,7 +1637,7 @@ $ curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># 7. Load the collection</span>
 client.load_collection(
     collection_name=<span class="hljs-string">&quot;customized_setup_2&quot;</span>,
-    load_fields=[<span class="hljs-string">&quot;my_id&quot;</span>, <span class="hljs-string">&quot;my_vector&quot;</span>] <span class="hljs-comment"># Load only the specified fields</span>
+    load_fields=[<span class="hljs-string">&quot;my_id&quot;</span>, <span class="hljs-string">&quot;my_vector&quot;</span>], <span class="hljs-comment"># Load only the specified fields</span>
     skip_load_dynamic_field=<span class="hljs-literal">True</span> <span class="hljs-comment"># Skip loading the dynamic field</span>
 )
 
