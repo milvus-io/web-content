@@ -1,0 +1,38 @@
+# Prometheus configuration for Milvus
+# Requires prometheus 2.X
+# Run with:
+# $ prometheus -config.file = prometheus.yml
+# my global config
+global:
+  scrape_interval:     2s # Set the scrape interval every 2 seconds. The default is every 1 minute.
+  evaluation_interval: 2s # Evaluate rules every 2 seconds. The default is every 1 minute.
+  # scrape_timeout is set to the global default (10s).
+
+# Alertmanager configuration
+alerting:
+  alertmanagers:
+  - static_configs:
+    - targets: ['localhost:9093']
+
+# Load rules once and periodically evaluate them according to the global 'evaluation_interval'.
+rule_files:
+   - "alert_rules.yml" # add alerting rules
+
+# A scrape configuration containing exactly one endpoint to scrape:
+# Here it's Prometheus itself.
+scrape_configs:
+  # The job name is added as a label `job=<job_name>` to any time series scraped from this config.
+  - job_name: 'prometheus'
+    static_configs:
+    - targets: ['localhost:9090']
+
+   # Allows ephemeral and batch jobs to expose their metrics to Prometheus 
+  - job_name: 'milvus-standalone'
+    honor_labels: true
+    metrics_path: /metrics
+    static_configs:
+    - targets: ['standalone:9091']
+
+
+
+
