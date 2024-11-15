@@ -83,11 +83,11 @@ NAME                  PROVISIONER                  RECLAIMPOLICY    VOLUMEBIINDI
         ></path>
       </svg>
     </button></h2><p>Before installing Milvus Helm Charts, you need to add Milvus Helm repository.</p>
-<pre><code translate="no">$ helm repo <span class="hljs-keyword">add</span> milvus https:<span class="hljs-comment">//zilliztech.github.io/milvus-helm/</span>
+<pre><code translate="no">$ helm repo <span class="hljs-keyword">add</span> milvus https:<span class="hljs-comment">//github.com/zilliztech/milvus-helm</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <p>The Milvus Helm Charts repo at <code translate="no">https://github.com/milvus-io/milvus-helm</code> has been archived and you can get further updates from <code translate="no">https://github.com/zilliztech/milvus-helm</code> as follows:</p>
-<pre><code translate="no" class="language-shell">helm repo add zilliztech https://zilliztech.github.io/milvus-helm
+<pre><code translate="no" class="language-shell">helm repo add zilliztech https://github.com/zilliztech/milvus-helm
 helm repo update
 <span class="hljs-comment"># upgrade existing helm release</span>
 helm upgrade my-release zilliztech/milvus
