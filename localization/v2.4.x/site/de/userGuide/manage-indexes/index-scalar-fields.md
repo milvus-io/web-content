@@ -4,7 +4,7 @@ order: 2
 summary: >-
   Dieser Leitfaden führt Sie durch das Erstellen und Konfigurieren von skalaren
   Indizes für Felder wie Ganzzahlen, Strings usw.
-title: Index Skalarfelder
+title: Skalare Felder indizieren
 ---
 <h1 id="Index-Scalar-Fields" class="common-anchor-header">Skalare Felder indizieren<button data-href="#Index-Scalar-Fields" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -39,7 +39,7 @@ title: Index Skalarfelder
       </svg>
     </button></h2><ul>
 <li><p><strong><a href="https://milvus.io/docs/index-scalar-fields.md#Auto-indexing">Automatische Indizierung</a></strong>: Milvus entscheidet automatisch über den Indextyp, basierend auf dem Datentyp des skalaren Feldes. Dies ist geeignet, wenn Sie den spezifischen Indextyp nicht kontrollieren müssen.</p></li>
-<li><p><strong><a href="https://milvus.io/docs/index-scalar-fields.md#Custom-indexing">Benutzerdefinierte Indizierung</a></strong>: Sie geben den genauen Indextyp an, z. B. einen invertierten Index. Damit haben Sie mehr Kontrolle über die Auswahl des Indextyps.</p></li>
+<li><p><strong><a href="https://milvus.io/docs/index-scalar-fields.md#Custom-indexing">Benutzerdefinierte Indizierung</a></strong>: Sie geben den genauen Indextyp an, z. B. einen invertierten Index. Dadurch haben Sie mehr Kontrolle über die Auswahl des Indextyps.</p></li>
 </ul>
 <h2 id="Auto-indexing" class="common-anchor-header">Automatische Indizierung<button data-href="#Auto-indexing" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -73,7 +73,7 @@ client = MilvusClient(
     uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>
 )
 
-index_params = client.create_index_params() <span class="hljs-comment"># Prepare an empty IndexParams object, without having to specify any index parameters</span>
+index_params = MilvusClient.prepare_index_params() <span class="hljs-comment"># Prepare an empty IndexParams object, without having to specify any index parameters</span>
 
 index_params.add_index(
     field_name=<span class="hljs-string">&quot;scalar_1&quot;</span>, <span class="hljs-comment"># Name of the scalar field to be indexed</span>
@@ -139,7 +139,7 @@ client.createIndex(createIndexReq);
 <p>Das folgende Beispiel erstellt einen invertierten Index für das Skalarfeld <code translate="no">scalar_2</code>.</p>
 <div class="multipleCode">
    <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a></div>
-<pre><code translate="no" class="language-python">index_params = client.create_index_params() <span class="hljs-comment">#  Prepare an IndexParams object</span>
+<pre><code translate="no" class="language-python">index_params = MilvusClient.prepare_index_params() <span class="hljs-comment">#  Prepare an IndexParams object</span>
 
 index_params.add_index(
     field_name=<span class="hljs-string">&quot;scalar_2&quot;</span>, <span class="hljs-comment"># Name of the scalar field to be indexed</span>
@@ -181,13 +181,13 @@ client.createIndex(createIndexReq);
 <div class="language-python">
 <p><strong>Methoden und Parameter</strong></p>
 <ul>
-<li><p><strong>create_index_params()</strong></p>
+<li><p><strong>prepare_index_params()</strong></p>
 <p>Bereitet ein <strong>IndexParams-Objekt</strong> vor.</p></li>
 <li><p><strong>add_index()</strong></p>
 <p>Fügt Index-Konfigurationen zum <strong>IndexParams-Objekt</strong> hinzu.</p>
 <ul>
 <li><p><strong>field_name</strong><em>(String</em>)</p>
-<p>Der Name des zu indizierenden skalaren Feldes.</p></li>
+<p>Der Name des zu indizierenden Skalarfeldes.</p></li>
 <li><p><strong>index_type</strong><em>(String</em>):</p>
 <p>Der Typ des zu erstellenden skalaren Indexes. Bei impliziter Indizierung lassen Sie diesen Parameter leer oder lassen ihn weg.</p>
 <p>Für die benutzerdefinierte Indizierung sind folgende Werte gültig:</p>

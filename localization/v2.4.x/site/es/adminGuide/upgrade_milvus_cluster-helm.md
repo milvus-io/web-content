@@ -235,25 +235,25 @@ my-release-pulsar-zookeeper<span class="hljs-number">-2</span>                  
 <li>Migre los metadatos de Milvus.</li>
 <li>Inicie los componentes de Milvus con una nueva imagen.</li>
 </ol>
-<h4 id="2-Upgrade-Milvus-from-v21x-to-2415" class="common-anchor-header">2. Actualizar Milvus de v2.1.x a 2.4.15</h4><p>Los siguientes comandos asumen que usted actualiza Milvus de v2.1.4 a 2.4.15. Cámbielos por las versiones que se ajusten a sus necesidades.</p>
+<h4 id="2-Upgrade-Milvus-from-v21x-to-220" class="common-anchor-header">2. Actualizar Milvus de v2.1.x a 2.2.0</h4><p>Los siguientes comandos asumen que usted actualiza Milvus de v2.1.4 a 2.2.0. Cámbielos por las versiones que se ajusten a sus necesidades.</p>
 <ol>
 <li><p>Especifique el nombre de la instancia de Milvus, la versión de Milvus de origen y la versión de Milvus de destino.</p>
-<pre><code translate="no">./migrate.sh -i my-release -s 2.1.4 -t 2.4.15
+<pre><code translate="no">./migrate.sh -i my-release -s 2.1.4 -t 2.2.0
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>Especifique el espacio de nombres con <code translate="no">-n</code> si su Milvus no está instalado en el espacio de nombres predeterminado de K8s.</p>
-<pre><code translate="no">./migrate.sh -i my-release -n milvus -s 2.1.4 -t 2.4.15
+<pre><code translate="no">./migrate.sh -i my-release -n milvus -s 2.1.4 -t 2.2.0
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>Especifique la ruta raíz con <code translate="no">-r</code> si su Milvus está instalado con la costumbre <code translate="no">rootpath</code>.</p>
-<pre><code translate="no">./migrate.sh -i my-release -n milvus -s 2.1.4 -t 2.4.15 -r by-dev
+<pre><code translate="no">./migrate.sh -i my-release -n milvus -s 2.1.4 -t 2.2.0 -r by-dev
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>Especifique la etiqueta de imagen con <code translate="no">-w</code> si su Milvus está instalado con la personalizada <code translate="no">image</code>.</p>
-<pre><code translate="no">./migrate.sh -i my-release -n milvus -s 2.1.4 -t 2.4.15 -r by-dev -w milvusdb/milvus:v2.4.15
+<pre><code translate="no">./migrate.sh -i my-release -n milvus -s 2.1.4 -t 2.2.0 -r by-dev -w milvusdb/milvus:v2.2.0
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>Establezca <code translate="no">-d true</code> si desea eliminar automáticamente el pod de migración una vez finalizada la migración.</p>
-<pre><code translate="no">./migrate.sh -i my-release -n milvus -s 2.1.4 -t 2.4.15 -w milvusdb/milvus:v2.4.15 -d <span class="hljs-literal">true</span>
+<pre><code translate="no">./migrate.sh -i my-release -n milvus -s 2.1.4 -t 2.2.0 -w milvusdb/milvus:v2.2.0 -d <span class="hljs-literal">true</span>
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>Retroceda y migre de nuevo si la migración falla.</p>
-<pre><code translate="no">./migrate.sh -i my-release -n milvus -s 2.1.4 -t 2.4.15 -r by-dev -o rollback -w milvusdb/milvus:v2.1.1
-./migrate.sh -i my-release -n milvus -s 2.1.4 -t 2.4.15 -r by-dev -o migrate -w milvusdb/milvus:v2.4.15
+<pre><code translate="no">./migrate.sh -i my-release -n milvus -s 2.1.4 -t 2.2.0 -r by-dev -o rollback -w milvusdb/milvus:v2.1.4
+./migrate.sh -i my-release -n milvus -s 2.1.4 -t 2.2.0 -r by-dev -o migrate -w milvusdb/milvus:v2.2.0
 <button class="copy-code-btn"></button></code></pre></li>
 </ol>

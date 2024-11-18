@@ -44,6 +44,7 @@ title: Vue d'ensemble des didacticiels
 <tr><td><a href="/docs/fr/hdbscan_clustering_with_milvus.md">HDBSCAN Clustering avec Milvus</a></td><td>Démarrage rapide</td><td>recherche vectorielle</td></tr>
 <tr><td><a href="/docs/fr/use_ColPali_with_milvus.md">Utiliser ColPali pour la recherche multimodale avec Milvus</a></td><td>Démarrage rapide</td><td>recherche vectorielle</td></tr>
 <tr><td><a href="/docs/fr/vector_visualization.md">Visualisation vectorielle</a></td><td>Démarrage rapide</td><td>recherche vectorielle</td></tr>
-<tr><td><a href="/docs/fr/movie_recommendation_with_milvus.md">Recommandation de films avec Milvus</a></td><td>Système de recommandation</td><td>recherche vectorielle</td></tr>
+<tr><td><a href="/docs/fr/movie_recommendation_with_milvus.md">Recommandation de films avec Milvus</a></td><td>Système de recommandation</td><td>Recherche vectorielle</td></tr>
+<tr><td><a href="/docs/fr/funnel_search_with_matryoshka.md">Recherche en entonnoir avec Matryoshka Embeddings</a></td><td>Démarrage rapide</td><td>recherche vectorielle</td></tr>
 </tbody>
 </table>

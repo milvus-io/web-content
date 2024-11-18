@@ -39,13 +39,16 @@ title: 스키마 관리
 <h3 id="Field-schema-properties" class="common-anchor-header">필드 스키마 속성</h3><table class="properties">
     <thead>
     <tr>
-       <th>속성</td><th>설명</th> <th>참고</th>   </tr>
+        <th>속성</th>
+        <th>설명</th>
+        <th>참고</th>
+    </tr>
     </thead>
     <tbody>
     <tr>
         <td><code translate="no">name</code></td>
         <td>생성할 컬렉션의 필드 이름</td>
-        <td>데이터 유형: 문자열<br/>필수</td>
+        <td>데이터 유형입니다: 문자열<br/>필수</td>
     </tr>
     <tr>
         <td><code translate="no">dtype</code></td>
@@ -75,7 +78,7 @@ title: 스키마 관리
     <tr>
         <td><code translate="no">dim</code></td>
         <td>벡터의 차원</td>
-            <td>데이터 유형: 정수 &isin;[1, 32768]<br/>밀집 벡터 필드의 경우 필수입니다. <a href="https://milvus.io/docs/sparse_vector.md">스파스 벡터</a> 필드의 경우 생략합니다.</td>
+            <td>데이터 유형: 정수 &isin;[1, 32768]<br/>고밀도 벡터 필드의 경우 필수입니다. <a href="https://milvus.io/docs/sparse_vector.md">스파스 벡터</a> 필드의 경우 생략합니다.</td>
     </tr>
     <tr>
         <td><code translate="no">is_partition_key</code></td>
@@ -131,7 +134,7 @@ fields = [
 <li>FLOAT_VECTOR: 과학 컴퓨팅 및 머신 러닝에서 실수를 표현하는 데 일반적으로 사용되는 32비트 부동소수점 숫자를 저장합니다.</li>
 <li>FLOAT16_VECTOR: 메모리 및 대역폭 효율성을 위해 딥러닝 및 GPU 계산에 사용되는 16비트 반정밀도 부동소수점 숫자를 저장합니다.</li>
 <li>BFLOAT16_VECTOR: 정확도는 떨어지지만 Float32와 동일한 지수 범위를 가진 16비트 부동 소수점 숫자를 저장하며, 정확도에 큰 영향을 주지 않고 메모리 및 계산 요구 사항을 줄이기 위해 딥 러닝에서 널리 사용됩니다.</li>
-<li>SPARSE_FLOAT_VECTOR: 희소 벡터를 표현하는 데 사용되는 0이 아닌 요소 목록과 해당 인덱스를 저장합니다. 자세한 내용은 <a href="/docs/ko/sparse_vector.md">스파스 벡터를</a> 참조하세요.</li>
+<li>SPARSE_FLOAT_VECTOR: 희소 벡터를 표현하는 데 사용되는 0이 아닌 요소 목록과 그에 해당하는 인덱스를 저장합니다. 자세한 내용은 <a href="/docs/ko/sparse_vector.md">스파스 벡터를</a> 참조하세요.</li>
 </ul>
 <p>Milvus는 컬렉션에서 여러 개의 벡터 필드를 지원합니다. 자세한 내용은 <a href="/docs/ko/multi-vector-search.md">하이브리드 검색을</a> 참조하세요.</p></li>
 </ul>
@@ -154,7 +157,10 @@ fields = [
 <h3 id="Collection-schema-properties" class="common-anchor-header">컬렉션 스키마 속성</h3><table class="properties">
     <thead>
     <tr>
-       <th>속성</td><th>설명</th> <th>참고</th>   </tr>
+        <th>속성</th>
+        <th>설명</th>
+        <th>참고</th>
+    </tr>
     </thead>
     <tbody>
     <tr>
@@ -193,7 +199,8 @@ position_field = FieldSchema(name=<span class="hljs-string">&quot;position&quot;
 schema = CollectionSchema(fields=[id_field, age_field, embedding_field], auto_id=<span class="hljs-literal">False</span>, enable_dynamic_field=<span class="hljs-literal">True</span>, description=<span class="hljs-string">&quot;desc of a collection&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
 <p>스키마를 지정한 컬렉션을 만듭니다:</p>
-<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> <span class="hljs-title class_">Collection</span>
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> <span class="hljs-title class_">Collection</span>,connections
+conn = connections.<span class="hljs-title function_">connect</span>(host=<span class="hljs-string">&quot;127.0.0.1&quot;</span>, port=<span class="hljs-number">19530</span>)
 collection_name1 = <span class="hljs-string">&quot;tutorial_1&quot;</span>
 collection1 = <span class="hljs-title class_">Collection</span>(name=collection_name1, schema=schema, using=<span class="hljs-string">&#x27;default&#x27;</span>, shards_num=<span class="hljs-number">2</span>)
 <button class="copy-code-btn"></button></code></pre>

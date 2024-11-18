@@ -222,11 +222,11 @@ $ curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable
 <li><p><code translate="no">auto_id</code></p>
 <p>启用该设置可确保主键自动递增。数据插入时无需手动提供主键。</p></li>
 <li><p><code translate="no">enable_dynamic_field</code></p>
-<p>启用后，待插入数据中除<code translate="no">id</code> 和<code translate="no">vector</code> 以外的所有字段都会被视为动态字段。这些附加字段以键值对的形式保存在一个名为<code translate="no">$meta</code> 的特殊字段中。此功能允许在插入数据时包含额外字段。</p></li>
+<p>启用后，待插入数据中除<code translate="no">id</code> 和<code translate="no">vector</code> 之外的所有字段都会被视为动态字段。这些附加字段以键值对的形式保存在一个名为<code translate="no">$meta</code> 的特殊字段中。此功能允许在插入数据时包含额外字段。</p></li>
 </ul>
 <p>从提供的代码中自动索引和加载的 Collections 可以立即插入数据。</p>
 <h3 id="Customized-setup" class="common-anchor-header">自定义设置</h3><p>与其让 Milvus 为你的 Collections 决定几乎一切，你可以自己决定 Collections 的<strong>Schema</strong>和<strong>索引参数</strong>。</p>
-<h4 id="Step-1-Set-up-schema" class="common-anchor-header">第一步：设置 Schema</h4><p>Schema 定义了 Collections 的结构。在 Schema 中，您可以选择启用或禁用<code translate="no">enable_dynamic_field</code> 、添加预定义字段以及为每个字段设置属性。有关概念和可用数据类型的详细解释，请参阅<a href="/docs/zh/schema.md">Schema Explained</a>。</p>
+<h4 id="Step-1-Set-up-schema" class="common-anchor-header">第 1 步：设置 Schema</h4><p>Schema 定义了 Collections 的结构。在 Schema 中，您可以选择启用或禁用<code translate="no">enable_dynamic_field</code> 、添加预定义字段以及为每个字段设置属性。有关概念和可用数据类型的详细解释，请参阅<a href="/docs/zh/schema.md">Schema Explained</a>。</p>
 <div class="language-python">
 <p>要设置模式，请使用 <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_schema.md"><code translate="no">create_schema()</code></a>创建模式对象，并使用 <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/CollectionSchema/add_field.md"><code translate="no">add_field()</code></a>为模式添加字段。</p>
 </div>
@@ -318,7 +318,7 @@ schema.addField(AddFieldReq.builder()
     </tr>
     <tr>
       <td><code translate="no">enable_dynamic_field</code></td>
-      <td>如果插入到目标 Collections 的数据包括未在 Collections 模式中定义的字段，则决定 Milvus 是否将未定义字段的值保存在动态字段中。<br/>设置为 "<strong>true</strong>"时，Milvus 将创建一个名为<strong>$meta</strong>的字段，用于保存插入数据中的任何未定义字段及其值。</td>
+      <td>决定如果插入到目标 Collections 的数据包括未在 Collections 模式中定义的字段，Milvus 是否将未定义字段的值保存在动态字段中。<br/>设置为 "<strong>true</strong>"时，Milvus 将创建一个名为<strong>$meta</strong>的字段，用于保存插入数据中的任何未定义字段及其值。</td>
     </tr>
     <tr>
       <td><code translate="no">field_name</code></td>
@@ -439,7 +439,7 @@ schema.addField(AddFieldReq.builder()
 <p>要设置索引参数，请使用 <a href="https://milvus.io/api-reference/node/v2.4.x/Management/createIndex.md"><code translate="no">createIndex()</code></a>.</p>
 </div>
 <div class="language-shell">
-<p>要设置索引参数，您需要定义一个 JSON 对象，该对象应遵循 API 端点参考页面上显示的索引参数格式。 <a href="https://milvus.io/api-reference/restful/v2.4.x/v2/Collection%20(v2)/Create.md"><code translate="no">POST /v2/vectordb/collections/create</code></a>API 端点参考页面上显示的索引参数格式定义一个 JSON 对象。</p>
+<p>要设置索引参数，需要定义一个 JSON 对象，该对象应遵循 <a href="https://milvus.io/api-reference/restful/v2.4.x/v2/Collection%20(v2)/Create.md"><code translate="no">POST /v2/vectordb/collections/create</code></a>API 端点参考页面上显示的索引参数格式定义一个 JSON 对象。</p>
 </div>
 <div class="multipleCode">
  <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#shell">cURL</a></div>
@@ -523,7 +523,7 @@ indexParams.add(indexParamForVectorField);
     </tr>
     <tr>
       <td><code translate="no">metric_type</code></td>
-      <td>用于衡量向量间相似性的算法。可能的值有<strong>IP</strong>、<strong>L2</strong>、<strong>COSINE</strong>、<strong>JACCARD</strong>、<strong>HAMMING</strong>。只有当指定字段是向量字段时才可用。更多信息，请参阅<a href="https://milvus.io/docs/index.md#Indexes-supported-in-Milvus">Milvus 支持的索引</a>。</td>
+      <td>用于衡量向量间相似性的算法。可能的值有<strong>IP</strong>、<strong>L2</strong>、<strong>COSINE</strong>、<strong>JACCARD</strong>、<strong>HAMMING</strong>。只有指定字段为向量字段时才可用。更多信息，请参阅<a href="https://milvus.io/docs/index.md#Indexes-supported-in-Milvus">Milvus 支持的索引</a>。</td>
     </tr>
     <tr>
       <td><code translate="no">params</code></td>
@@ -553,7 +553,7 @@ indexParams.add(indexParamForVectorField);
     </tr>
     <tr>
       <td><code translate="no">extraParams</code></td>
-      <td>额外的索引参数。有关详细信息，请参阅<a href="https://milvus.io/docs/index.md">内存索引</a>和<a href="https://milvus.io/docs/disk_index.md">磁盘索引</a>。</td>
+      <td>额外的索引参数。有关详情，请参阅<a href="https://milvus.io/docs/index.md">内存索引</a>和<a href="https://milvus.io/docs/disk_index.md">磁盘索引</a>。</td>
     </tr>
   </tbody>
 </table>
@@ -575,7 +575,7 @@ indexParams.add(indexParamForVectorField);
     </tr>
     <tr>
       <td><code translate="no">metric_type</code></td>
-      <td>用于衡量向量间相似性的算法。可能的值有<strong>IP</strong>、<strong>L2</strong>、<strong>COSINE</strong>、<strong>JACCARD</strong>、<strong>HAMMING</strong>。只有当指定字段是向量字段时才可用。更多信息，请参阅<a href="https://milvus.io/docs/index.md#Indexes-supported-in-Milvus">Milvus 支持的索引</a>。</td>
+      <td>用于衡量向量间相似性的算法。可能的值有<strong>IP</strong>、<strong>L2</strong>、<strong>COSINE</strong>、<strong>JACCARD</strong>、<strong>HAMMING</strong>。只有指定字段为向量字段时才可用。更多信息，请参阅<a href="https://milvus.io/docs/index.md#Indexes-supported-in-Milvus">Milvus 支持的索引</a>。</td>
     </tr>
     <tr>
       <td><code translate="no">params</code></td>
@@ -866,7 +866,7 @@ $ curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable
 <span class="hljs-comment">#     }</span>
 <span class="hljs-comment"># }</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>上面创建的 Collection 不会自动加载。您可以按如下方式为 Collections 创建索引。以单独的方式为 Collection 创建索引不会自动加载 Collection。有关详情，请参阅<a href="/docs/zh/manage-collections.md#Load--Release-Collection">加载和释放 Collections</a>。</p>
+<p>上面创建的 Collection 不会自动加载。您可以按如下方式为 Collections 创建索引。以单独的方式为 Collection 创建索引不会自动加载 Collection。有关详细信息，请参阅<a href="/docs/zh/manage-collections.md#Load--Release-Collection">加载和释放 Collections</a>。</p>
 <p><table class="language-python">
 <thead>
 <tr>
@@ -971,11 +971,11 @@ $ curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable
 </tr>
 <tr>
 <td><code translate="no">fields.isPrimary</code></td>
-<td>当前字段是否为主字段。将此设置为 True 时，当前字段就是主字段。</td>
+<td>当前字段是否为主字段。设置为 True 时，当前字段将为主字段。</td>
 </tr>
 <tr>
 <td><code translate="no">fields.elementTypeParams</code></td>
-<td>额外的字段参数。</td>
+<td>额外字段参数。</td>
 </tr>
 <tr>
 <td><code translate="no">fields.elementTypeParams.dim</code></td>
@@ -983,7 +983,7 @@ $ curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable
 </tr>
 </tbody>
 </table></p>
-<p>上面创建的 Collection 不会自动加载。你可以按以下方法为 Collections 创建索引。以单独方式为集合创建索引不会自动加载集合。有关详细信息，请参阅<a href="/docs/zh/manage-collections.md">加载和释放集合</a>。</p>
+<p>上面创建的 Collection 不会自动加载。您可以按以下方法为 Collections 创建索引。以单独方式为集合创建索引不会自动加载集合。有关详细信息，请参阅<a href="/docs/zh/manage-collections.md">加载和释放集合</a>。</p>
 <p><div class="multipleCode">
 <a href="#python">Python </a><a href="#java">Java</a><a href="#javascript">Node.js</a><a href="#shell">cURL</a></div></p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># 3.6 Create index</span>
@@ -1142,7 +1142,7 @@ $ curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable
     </tr>
     <tr>
       <td><code translate="no">metric_type</code></td>
-      <td>用于衡量向量间相似性的算法。可能的值有<strong>IP</strong>、<strong>L2</strong>、<strong>COSINE</strong>、<strong>JACCARD</strong>、<strong>HAMMING</strong>。只有当指定字段是向量字段时才可用。更多信息，请参阅<a href="https://milvus.io/docs/index.md#Indexes-supported-in-Milvus">Milvus 支持的索引</a>。</td>
+      <td>用于衡量向量间相似性的算法。可能的值有<strong>IP</strong>、<strong>L2</strong>、<strong>COSINE</strong>、<strong>JACCARD</strong>、<strong>HAMMING</strong>。只有指定字段为向量字段时才可用。更多信息，请参阅<a href="https://milvus.io/docs/index.md#Indexes-supported-in-Milvus">Milvus 支持的索引</a>。</td>
     </tr>
     <tr>
       <td><code translate="no">params</code></td>
@@ -1601,7 +1601,7 @@ $ curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># 7. Load the collection</span>
 client.load_collection(
     collection_name=<span class="hljs-string">&quot;customized_setup_2&quot;</span>,
-    load_fields=[<span class="hljs-string">&quot;my_id&quot;</span>, <span class="hljs-string">&quot;my_vector&quot;</span>] <span class="hljs-comment"># Load only the specified fields</span>
+    load_fields=[<span class="hljs-string">&quot;my_id&quot;</span>, <span class="hljs-string">&quot;my_vector&quot;</span>], <span class="hljs-comment"># Load only the specified fields</span>
     skip_load_dynamic_field=<span class="hljs-literal">True</span> <span class="hljs-comment"># Skip loading the dynamic field</span>
 )
 
@@ -1617,7 +1617,7 @@ res = client.get_load_state(
 <span class="hljs-comment">#     &quot;state&quot;: &quot;&lt;LoadState: Loaded&gt;&quot;</span>
 <span class="hljs-comment"># }</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>请注意，只有<code translate="no">load_fields</code> 中列出的字段才能用作搜索和查询的筛选条件和输出字段。在列表中应始终包含主键。不加载的字段名将不能用于筛选或输出。</p>
+<p>请注意，只有<code translate="no">load_fields</code> 中列出的字段才能用作搜索和查询的筛选条件和输出字段。列表中应始终包含主键。不加载的字段名将不能用于筛选或输出。</p>
 <p>可以使用<code translate="no">skip_load_dynamic_field=True</code> 跳过加载动态字段。Milvus 将动态字段视为单个字段，因此动态字段中的所有键将一起被包含或排除。</p>
 </div>
 <h3 id="Release-a-collection" class="common-anchor-header">释放 Collections</h3><div class="language-python">
@@ -1916,7 +1916,7 @@ $ curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable
 <p>要列出别名，请使用 <a href="https://milvus.io/api-reference/node/v2.4.x/Collections/listAliases.md"><code translate="no">listAliases()</code></a>方法，并指定 Collections 名称。</p>
 </div>
 <div class="language-shell">
-<p>要列出 Collections 的别名，可使用 <a href="https://milvus.io/api-reference/restful/v2.4.x/v2/Alias%20(v2)/List.md"><code translate="no">POST /v2/vectordb/aliases/list</code></a>API 端点。</p>
+<p>要列出某个 Collection 的别名，可使用 <a href="https://milvus.io/api-reference/restful/v2.4.x/v2/Alias%20(v2)/List.md"><code translate="no">POST /v2/vectordb/aliases/list</code></a>API 端点。</p>
 </div>
 <div class="multipleCode">
    <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#shell">cURL</a></div>

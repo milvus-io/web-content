@@ -28,7 +28,7 @@ title: 教程概览
 <tr><td><a href="/docs/zh/multimodal_rag_with_milvus.md">使用 Milvus 的多模式 RAG</a></td><td>RAG</td><td>向量搜索，动态字段</td></tr>
 <tr><td><a href="/docs/zh/image_similarity_search.md">使用 Milvus 的图像搜索</a></td><td>语义搜索</td><td>向量搜索，动态字段</td></tr>
 <tr><td><a href="/docs/zh/hybrid_search_with_milvus.md">使用 Milvus 进行混合搜索</a></td><td>混合搜索</td><td>混合搜索、多向量、密集嵌入、稀疏嵌入</td></tr>
-<tr><td><a href="/docs/zh/multimodal_rag_with_milvus.md">使用多向量的多模态搜索</a></td><td>语义搜索</td><td>多向量、混合搜索</td></tr>
+<tr><td><a href="/docs/zh/multimodal_rag_with_milvus.md">使用多向量的多模式搜索</a></td><td>语义搜索</td><td>多向量、混合搜索</td></tr>
 <tr><td><a href="/docs/zh/question_answering_system.md">问题解答系统</a></td><td>问题解答</td><td>向量搜索</td></tr>
 <tr><td><a href="/docs/zh/recommendation_system.md">推荐系统</a></td><td>推荐系统</td><td>向量搜索</td></tr>
 <tr><td><a href="/docs/zh/video_similarity_search.md">视频相似性搜索</a></td><td>语义搜索</td><td>向量搜索</td></tr>
@@ -43,5 +43,6 @@ title: 教程概览
 <tr><td><a href="/docs/zh/use_ColPali_with_milvus.md">使用 ColPali 与 Milvus 一起进行多模式检索</a></td><td>快速启动</td><td>向量搜索</td></tr>
 <tr><td><a href="/docs/zh/vector_visualization.md">向量可视化</a></td><td>快速启动</td><td>向量搜索</td></tr>
 <tr><td><a href="/docs/zh/movie_recommendation_with_milvus.md">使用 Milvus 进行电影推荐</a></td><td>推荐系统</td><td>向量搜索</td></tr>
+<tr><td><a href="/docs/zh/funnel_search_with_matryoshka.md">利用 Matryoshka Embeddings 进行漏斗搜索</a></td><td>快速启动</td><td>向量搜索</td></tr>
 </tbody>
 </table>

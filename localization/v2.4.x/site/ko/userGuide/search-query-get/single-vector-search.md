@@ -19,10 +19,10 @@ title: 단일 벡터 검색
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>데이터를 삽입하고 나면 다음 단계는 Milvus에서 컬렉션에 대한 유사도 검색을 수행하는 것입니다.</p>
+    </button></h1><p>데이터를 삽입한 다음 단계는 Milvus에서 컬렉션에 대한 유사도 검색을 수행하는 것입니다.</p>
 <p>Milvus에서는 컬렉션의 벡터 필드 수에 따라 두 가지 유형의 검색을 수행할 수 있습니다:</p>
 <ul>
-<li><strong>단일 벡터 검색</strong>: 컬렉션에 벡터 필드가 하나만 있는 경우, 가장 유사한 엔티티를 찾기 위해 <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Vector/search.md"><code translate="no">search()</code></a> 메서드를 사용하여 가장 유사한 엔티티를 찾습니다. 이 방법은 쿼리 벡터를 컬렉션의 기존 벡터와 비교하여 가장 가까운 일치 항목의 ID와 그 사이의 거리를 반환합니다. 선택적으로 결과의 벡터 값과 메타데이터도 반환할 수 있습니다.</li>
+<li><strong>단일 벡터 검색</strong>: 컬렉션에 벡터 필드가 하나만 있는 경우, 가장 유사한 엔티티를 찾기 위해 <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Vector/search.md"><code translate="no">search()</code></a> 메서드를 사용하여 가장 유사한 엔티티를 찾습니다. 이 방법은 쿼리 벡터를 컬렉션에 있는 기존 벡터와 비교하여 가장 가까운 일치 항목의 ID와 그 사이의 거리를 반환합니다. 선택적으로 결과의 벡터 값과 메타데이터도 반환할 수 있습니다.</li>
 <li><strong>하이브리드 검색</strong>: 두 개 이상의 벡터 필드가 있는 컬렉션의 경우에는 <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/ORM/Collection/hybrid_search.md"><code translate="no">hybrid_search()</code></a> 메서드를 사용합니다. 이 방법은 여러 개의 근사 이웃(ANN) 검색 요청을 수행하고 그 결과를 결합하여 순위를 다시 매긴 후 가장 관련성이 높은 일치 항목을 반환합니다.</li>
 </ul>
 <p>이 가이드는 Milvus에서 단일 벡터 검색을 수행하는 방법에 중점을 두고 있습니다. 하이브리드 검색에 대한 자세한 내용은 <a href="https://milvus.io/docs/multi-vector-search.md">하이브리드 검색을</a> 참조하세요.</p>
@@ -41,12 +41,12 @@ title: 단일 벡터 검색
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>다양한 요구 사항을 충족하는 다양한 검색 유형이 있습니다:</p>
+    </button></h2><p>다양한 요구 사항을 충족하기 위한 다양한 검색 유형이 있습니다:</p>
 <ul>
 <li><p><a href="https://milvus.io/docs/single-vector-search.md#Basic-search">기본 검색</a>: 단일 벡터 검색, 일괄 벡터 검색, 파티션 검색, 지정된 출력 필드를 사용한 검색이 포함됩니다.</p></li>
 <li><p><a href="https://milvus.io/docs/single-vector-search.md#Filtered-search">필터링된 검색</a>: 스칼라 필드를 기반으로 필터링 기준을 적용하여 검색 결과를 구체화합니다.</p></li>
 <li><p><a href="https://milvus.io/docs/single-vector-search.md#Range-search">범위 검색</a>: 쿼리 벡터로부터 특정 거리 범위 내의 벡터를 찾습니다.</p></li>
-<li><p><a href="https://milvus.io/docs/single-vector-search.md#Grouping-search">그룹 검색</a>: 특정 필드를 기준으로 검색 결과를 그룹화하여 결과의 다양성을 보장합니다.</p></li>
+<li><p><a href="https://milvus.io/docs/single-vector-search.md#Grouping-search">그룹화 검색</a>: 특정 필드를 기준으로 검색 결과를 그룹화하여 결과의 다양성을 보장합니다.</p></li>
 </ul>
 <h2 id="Preparations" class="common-anchor-header">준비 사항<button data-href="#Preparations" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -66,10 +66,12 @@ title: 단일 벡터 검색
     </button></h2><p>아래 코드 스니펫은 기존 코드를 재구성하여 Milvus에 연결하고 컬렉션을 빠르게 설정합니다.</p>
 <div class="multipleCode">
    <a href="#python">파이썬 </a> <a href="#java">자바</a> <a href="#javascript">Node.js</a></div>
-<pre><code translate="no" class="language-python"><span class="hljs-comment"># 1. Set up a Milvus client</span>
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
+<span class="hljs-keyword">import</span> random
+
+<span class="hljs-comment"># 1. Set up a Milvus client</span>
 client = MilvusClient(
-    uri=CLUSTER_ENDPOINT,
-    token=TOKEN 
+    uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>
 )
 
 <span class="hljs-comment"># 2. Create a collection</span>
@@ -447,7 +449,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
    <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Single vector search</span>
 res = client.search(
-    collection_name=<span class="hljs-string">&quot;test_collection&quot;</span>, <span class="hljs-comment"># Replace with the actual name of your collection</span>
+    collection_name=<span class="hljs-string">&quot;quick_setup&quot;</span>, <span class="hljs-comment"># Replace with the actual name of your collection</span>
     <span class="hljs-comment"># Replace with your query vector</span>
     data=[[<span class="hljs-number">0.3580376395471989</span>, -<span class="hljs-number">0.6023495712049978</span>, <span class="hljs-number">0.18414012509913835</span>, -<span class="hljs-number">0.26286205330961354</span>, <span class="hljs-number">0.9029438446296592</span>]],
     limit=<span class="hljs-number">5</span>, <span class="hljs-comment"># Max. number of search results to return</span>
@@ -544,7 +546,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
     </tr>
     <tr>
       <td><code translate="no">data</code></td>
-      <td>벡터 임베딩의 목록.<br/>Milvus는 지정된 벡터 임베딩과 가장 유사한 벡터 임베딩을 검색합니다.</td>
+      <td>벡터 임베딩 목록.<br/>Milvus는 지정된 벡터 임베딩과 가장 유사한 벡터 임베딩을 검색합니다.</td>
     </tr>
     <tr>
       <td><code translate="no">limit</code></td>
@@ -641,7 +643,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
    <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Bulk-vector search</span>
 res = client.search(
-    collection_name=<span class="hljs-string">&quot;test_collection&quot;</span>, <span class="hljs-comment"># Replace with the actual name of your collection</span>
+    collection_name=<span class="hljs-string">&quot;quick_setup&quot;</span>, <span class="hljs-comment"># Replace with the actual name of your collection</span>
     data=[
         [<span class="hljs-number">0.19886812562848388</span>, <span class="hljs-number">0.06023560599112088</span>, <span class="hljs-number">0.6976963061752597</span>, <span class="hljs-number">0.2614474506242501</span>, <span class="hljs-number">0.838729485096104</span>],
         [<span class="hljs-number">0.3172005263489739</span>, <span class="hljs-number">0.9719044792798428</span>, -<span class="hljs-number">0.36981146090600725</span>, -<span class="hljs-number">0.4860894583077995</span>, <span class="hljs-number">0.95791889146345</span>]
@@ -1226,7 +1228,7 @@ searchResp = client.<span class="hljs-title function_">search</span>(searchReq);
    <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Search with output fields</span>
 res = client.search(
-    collection_name=<span class="hljs-string">&quot;test_collection&quot;</span>, <span class="hljs-comment"># Replace with the actual name of your collection</span>
+    collection_name=<span class="hljs-string">&quot;quick_setup&quot;</span>, <span class="hljs-comment"># Replace with the actual name of your collection</span>
     data=[[<span class="hljs-number">0.3580376395471989</span>, -<span class="hljs-number">0.6023495712049978</span>, <span class="hljs-number">0.18414012509913835</span>, -<span class="hljs-number">0.26286205330961354</span>, <span class="hljs-number">0.9029438446296592</span>]],
     limit=<span class="hljs-number">5</span>, <span class="hljs-comment"># Max. number of search results to return</span>
     search_params={<span class="hljs-string">&quot;metric_type&quot;</span>: <span class="hljs-string">&quot;IP&quot;</span>, <span class="hljs-string">&quot;params&quot;</span>: {}}, <span class="hljs-comment"># Search parameters</span>
@@ -1374,7 +1376,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
    <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Search with filter</span>
 res = client.search(
-    collection_name=<span class="hljs-string">&quot;test_collection&quot;</span>, <span class="hljs-comment"># Replace with the actual name of your collection</span>
+    collection_name=<span class="hljs-string">&quot;quick_setup&quot;</span>, <span class="hljs-comment"># Replace with the actual name of your collection</span>
     data=[[<span class="hljs-number">0.3580376395471989</span>, -<span class="hljs-number">0.6023495712049978</span>, <span class="hljs-number">0.18414012509913835</span>, -<span class="hljs-number">0.26286205330961354</span>, <span class="hljs-number">0.9029438446296592</span>]],
     limit=<span class="hljs-number">5</span>, <span class="hljs-comment"># Max. number of search results to return</span>
     search_params={<span class="hljs-string">&quot;metric_type&quot;</span>: <span class="hljs-string">&quot;IP&quot;</span>, <span class="hljs-string">&quot;params&quot;</span>: {}}, <span class="hljs-comment"># Search parameters</span>
@@ -1481,7 +1483,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
    <a href="#python">파이썬 </a> <a href="#java">자바</a> <a href="#javascript">Node.js</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Infix match on color field</span>
 res = client.search(
-    collection_name=<span class="hljs-string">&quot;test_collection&quot;</span>, <span class="hljs-comment"># Replace with the actual name of your collection</span>
+    collection_name=<span class="hljs-string">&quot;quick_setup&quot;</span>, <span class="hljs-comment"># Replace with the actual name of your collection</span>
     data=[[<span class="hljs-number">0.3580376395471989</span>, -<span class="hljs-number">0.6023495712049978</span>, <span class="hljs-number">0.18414012509913835</span>, -<span class="hljs-number">0.26286205330961354</span>, <span class="hljs-number">0.9029438446296592</span>]],
     limit=<span class="hljs-number">5</span>, <span class="hljs-comment"># Max. number of search results to return</span>
     search_params={<span class="hljs-string">&quot;metric_type&quot;</span>: <span class="hljs-string">&quot;IP&quot;</span>, <span class="hljs-string">&quot;params&quot;</span>: {}}, <span class="hljs-comment"># Search parameters</span>
@@ -1582,7 +1584,7 @@ search_params = {
 }
 
 res = client.search(
-    collection_name=<span class="hljs-string">&quot;test_collection&quot;</span>, <span class="hljs-comment"># Replace with the actual name of your collection</span>
+    collection_name=<span class="hljs-string">&quot;quick_setup&quot;</span>, <span class="hljs-comment"># Replace with the actual name of your collection</span>
     data=[[<span class="hljs-number">0.3580376395471989</span>, -<span class="hljs-number">0.6023495712049978</span>, <span class="hljs-number">0.18414012509913835</span>, -<span class="hljs-number">0.26286205330961354</span>, <span class="hljs-number">0.9029438446296592</span>]],
     limit=<span class="hljs-number">3</span>, <span class="hljs-comment"># Max. number of search results to return</span>
     search_params=search_params, <span class="hljs-comment"># Search parameters</span>
@@ -1829,7 +1831,7 @@ search_parameters = {
 <tr><th><strong>매개변수 이름</strong></th><th><strong>매개변수 설명</strong></th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">metric_type</code></td><td>벡터 임베딩 간의 유사성을 측정하는 방법입니다.<br/> 사용 가능한 값은 <code translate="no">IP</code>, <code translate="no">L2</code>, <code translate="no">COSINE</code>, <code translate="no">JACCARD</code>, <code translate="no">HAMMING</code> 이며 기본값은 로드된 인덱스 파일의 값입니다.</td></tr>
+<tr><td><code translate="no">metric_type</code></td><td>벡터 임베딩 간의 유사성을 측정하는 방법입니다.<br/> 사용 가능한 값은 <code translate="no">IP</code>, <code translate="no">L2</code>, <code translate="no">COSINE</code>, <code translate="no">JACCARD</code>, <code translate="no">HAMMING</code> 이며, 기본값은 로드된 인덱스 파일의 값입니다.</td></tr>
 <tr><td><code translate="no">params.nprobe</code></td><td>검색 중에 쿼리할 단위 수입니다.<br/> 값은 [1, nlist<sub>[1]</sub>] 범위에 속합니다.</td></tr>
 <tr><td><code translate="no">params.level</code></td><td>검색 정밀도 수준.<br/> 가능한 값은 <code translate="no">1</code>, <code translate="no">2</code>, <code translate="no">3</code> 이며 기본값은 <code translate="no">1</code> 입니다. 값이 높을수록 더 정확한 결과를 얻을 수 있지만 성능이 느려집니다.</td></tr>
 <tr><td><code translate="no">params.radius</code></td><td>검색 공간의 외부 경계를 정의합니다. 쿼리 벡터로부터 이 거리 내에 있는 벡터만 잠재적 일치 항목으로 간주됩니다.<br/>값 범위는 <code translate="no">metric_type</code> 매개변수에 의해 결정됩니다. 예를 들어 <code translate="no">metric_type</code> 가 <code translate="no">L2</code> 으로 설정된 경우 유효한 값 범위는 <code translate="no">[0, ∞]</code> 입니다. <code translate="no">metric_type</code> 가 <code translate="no">COSINE</code> 로 설정된 경우 유효한 값 범위는 <code translate="no">[-1, 1]</code> 입니다. 자세한 내용은 <a href="/docs/ko/metric.md">유사성 지표를</a> 참조하세요.</td></tr>
@@ -1838,6 +1840,6 @@ search_parameters = {
 </table>
 <div class="admonition note">
 <p><strong>참고</strong></p>
-<p>[1] 인덱싱 후 클러스터 단위 수입니다. 컬렉션을 인덱싱할 때 Milvus는 벡터 데이터를 여러 클러스터 단위로 세분화하며, 그 수는 실제 인덱스 설정에 따라 달라집니다.</p>
+<p>[1] 인덱싱 후 클러스터 단위 수입니다. 컬렉션을 색인할 때 Milvus는 벡터 데이터를 여러 개의 클러스터 단위로 세분화하며, 그 수는 실제 색인 설정에 따라 달라집니다.</p>
 <p>[2] 검색에서 반환할 엔티티의 수입니다.</p>
 </div>

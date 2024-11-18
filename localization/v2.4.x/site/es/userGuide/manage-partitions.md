@@ -37,7 +37,7 @@ title: Gestionar particiones
 <p>Al crear una colección, se crea automáticamente al menos una partición por defecto denominada <strong>_default</strong>. Puede crear un máximo de 1.024 particiones dentro de una colección.</p>
 <div class="admonition note">
 <p><b>notas</b></p>
-<p>Milvus introduce una característica llamada <strong>Partition Key</strong>, que aprovecha las particiones subyacentes para almacenar entidades basadas en los valores hash de un campo específico. Esta característica facilita la implementación de multi-tenancy, mejorando el rendimiento de la búsqueda. Para más detalles, lea <a href="https://milvus.io/docs/use-partition-key.md">Utilizar clave de partición</a>.</p>
+<p>Milvus introduce una característica llamada <strong>Partition Key</strong>, que aprovecha las particiones subyacentes para almacenar entidades basadas en los valores hash de un campo específico. Esta característica facilita la implementación de multi-tenancy, mejorando el rendimiento de la búsqueda. Para más información, consulte <a href="https://milvus.io/docs/use-partition-key.md">Utilizar la clave</a> de <a href="https://milvus.io/docs/use-partition-key.md">partición</a>.</p>
 <p>Si la función <strong>Partition</strong> Key está activada en una colección, Milvus se encarga de gestionar todas las particiones, liberándole a usted de esta responsabilidad.</p>
 </div>
 <h2 id="Preparations" class="common-anchor-header">Preparativos<button data-href="#Preparations" class="anchor-icon" translate="no">
@@ -63,7 +63,7 @@ title: Gestionar particiones
 <p>Para las preparaciones, utilice <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Client/MilvusClientV2.md"><code translate="no">MilvusClientV2</code></a> para conectarse a Milvus y <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Collections/createCollection.md"><code translate="no">createCollection()</code></a> para crear una colección en modo de configuración rápida.</p>
 </div>
 <div class="language-javascript">
-<p>Para las preparaciones, utilice <a href="https://milvus.io/api-reference/node/v2.4.x/Client/MilvusClient.md"><code translate="no">MilvusClient</code></a> para conectarse a Milvus y <a href="https://milvus.io/api-reference/node/v2.4.x/Collections/createCollection.md"><code translate="no">createCollection()</code></a> para crear una colección en modo de configuración rápida.</p>
+<p>Para los preparativos, utilice <a href="https://milvus.io/api-reference/node/v2.4.x/Client/MilvusClient.md"><code translate="no">MilvusClient</code></a> para conectarse a Milvus y <a href="https://milvus.io/api-reference/node/v2.4.x/Collections/createCollection.md"><code translate="no">createCollection()</code></a> para crear una colección en modo de configuración rápida.</p>
 </div>
 <div class="multipleCode">
    <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a></div>
@@ -652,7 +652,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
     partition_names=[<span class="hljs-string">&quot;partitionA&quot;</span>, <span class="hljs-string">&quot;partitionB&quot;</span>]
 )
 
-res = client.get_load_status(
+res = client.get_load_state(
     collection_name=<span class="hljs-string">&quot;quick_setup&quot;</span>,
     partition_name=<span class="hljs-string">&quot;partitionA&quot;</span>
 )
@@ -663,7 +663,7 @@ res = client.get_load_status(
 <span class="hljs-comment">#     &quot;state&quot;: &quot;&lt;LoadState: Loaded&gt;&quot;</span>
 <span class="hljs-comment"># }</span>
 
-res = client.get_load_status(
+res = client.get_load_state(
     collection_name=<span class="hljs-string">&quot;quick_setup&quot;</span>,
     partition_name=<span class="hljs-string">&quot;partitionB&quot;</span>
 )
@@ -820,7 +820,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
     partition_names=[<span class="hljs-string">&quot;_default&quot;</span>, <span class="hljs-string">&quot;partitionA&quot;</span>, <span class="hljs-string">&quot;partitionB&quot;</span>]
 )
 
-res = client.get_load_status(
+res = client.get_load_state(
     collection_name=<span class="hljs-string">&quot;quick_setup&quot;</span>,
 )
 

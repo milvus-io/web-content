@@ -39,7 +39,10 @@ title: スキーマの管理
 <h3 id="Field-schema-properties" class="common-anchor-header">フィールドスキーマプロパティ</h3><table class="properties">
     <thead>
     <tr>
-       <th>プロパティ</td><th>説明</th> <th>Note</th>   </tr>
+        <th>プロパティ</th>
+        <th>説明</th>
+        <th>備考</th>
+    </tr>
     </thead>
     <tbody>
     <tr>
@@ -75,12 +78,12 @@ title: スキーマの管理
     <tr>
         <td><code translate="no">dim</code></td>
         <td>ベクトルの次元</td>
-            <td>データ型：<br/>密なベクトル・フィールドでは必須。<a href="https://milvus.io/docs/sparse_vector.md">疎なベクトル・</a>フィールドでは省略。</td>
+            <td>データ型：<br/>密なベクトル・フィールドでは必須。<a href="https://milvus.io/docs/sparse_vector.md">疎なベクトル</a>場では省略。</td>
     </tr>
     <tr>
         <td><code translate="no">is_partition_key</code></td>
         <td>このフィールドがパーティション・キー・フィールドであるかどうか。</td>
-        <td>データ型：データ型：Boolean (<code translate="no">true</code> または<code translate="no">false</code>)。</td>
+        <td>データ型：Boolean (<code translate="no">true</code> または<code translate="no">false</code>)。</td>
     </tr>
     </tbody>
 </table>
@@ -124,7 +127,7 @@ fields = [
 <li>JSON:<a href="/docs/ja/use-json-fields.md">JSON</a></li>
 <li>配列：<a href="/docs/ja/array_data_type.md">配列</a></li>
 </ul>
-<p>複合データ型としてのJSONが利用できます。JSONフィールドはキーと値のペアで構成される。各キーは文字列で、値は数値、文字列、ブーリアン値、配列、リストのいずれかです。詳細は<a href="/docs/ja/use-json-fields.md">JSON: a new data typeを</a>参照。</p></li>
+<p>複合データ型としてのJSONが利用できます。JSONフィールドはキーと値のペアで構成されます。各キーは文字列で、値は数値、文字列、ブーリアン値、配列、リストのいずれかです。詳細は<a href="/docs/ja/use-json-fields.md">JSON: a new data typeを</a>参照。</p></li>
 <li><p>ベクター・フィールドのサポート</p>
 <ul>
 <li>BINARY_VECTOR：バイナリ・データを0と1のシーケンスとして格納し、画像処理や情報検索でコンパクトな特徴表現に使用される。</li>
@@ -154,7 +157,10 @@ fields = [
 <h3 id="Collection-schema-properties" class="common-anchor-header">コレクションスキーマのプロパティ</h3><table class="properties">
     <thead>
     <tr>
-       <th>プロパティ</td><th>説明</th>   </tr>
+        <th>プロパティ</th>
+        <th>説明</th>
+        <th>注釈</th>
+    </tr>
     </thead>
     <tbody>
     <tr>
@@ -193,7 +199,8 @@ position_field = FieldSchema(name=<span class="hljs-string">&quot;position&quot;
 schema = CollectionSchema(fields=[id_field, age_field, embedding_field], auto_id=<span class="hljs-literal">False</span>, enable_dynamic_field=<span class="hljs-literal">True</span>, description=<span class="hljs-string">&quot;desc of a collection&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
 <p>スキーマを指定してコレクションを作成します：</p>
-<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> <span class="hljs-title class_">Collection</span>
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> <span class="hljs-title class_">Collection</span>,connections
+conn = connections.<span class="hljs-title function_">connect</span>(host=<span class="hljs-string">&quot;127.0.0.1&quot;</span>, port=<span class="hljs-number">19530</span>)
 collection_name1 = <span class="hljs-string">&quot;tutorial_1&quot;</span>
 collection1 = <span class="hljs-title class_">Collection</span>(name=collection_name1, schema=schema, using=<span class="hljs-string">&#x27;default&#x27;</span>, shards_num=<span class="hljs-number">2</span>)
 <button class="copy-code-btn"></button></code></pre>

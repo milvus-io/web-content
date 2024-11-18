@@ -67,5 +67,9 @@ title: Visão geral das integrações
 <tr><td><a href="/docs/pt/rag_with_milvus_and_unstructured.md">Construir um RAG com Milvus e fontes de dados não estruturados</a></td><td>Estruturadas</td><td>Milvus, Não estruturado</td></tr>
 <tr><td><a href="/docs/pt/RAG_with_pii_and_milvus.md">Construir um RAG com Milvus + Mascarador de PII</a></td><td>Fontes de dados</td><td>Milvus, mascarador de PII</td></tr>
 <tr><td><a href="/docs/pt/use_milvus_in_private_gpt.md">Utilizar o Milvus no PrivateGPT</a></td><td>Ochestração</td><td>pesquisa vetorial</td></tr>
+<tr><td><a href="/docs/pt/quickstart_mem0_with_milvus.md">Introdução ao Mem0 e ao Milvus</a></td><td>Agentes</td><td>Mem0, Milvus</td></tr>
+<tr><td><a href="/docs/pt/knowledge_table_with_milvus.md">Tabela de conhecimento com Milvus</a></td><td>Engenharia do conhecimento</td><td>Tabela de Conhecimentos, Milvus</td></tr>
+<tr><td><a href="/docs/pt/use_milvus_in_docsgpt.md">Utilizar o Milvus no DocsGPT</a></td><td>Ochestração</td><td>DocsGPT, Milvus</td></tr>
+<tr><td><a href="/docs/pt/use_milvus_with_sambanova.md">Utilizar o Milvus com o SambaNova</a></td><td>Orquestração</td><td>Milvus, SambaNova</td></tr>
 </tbody>
 </table>

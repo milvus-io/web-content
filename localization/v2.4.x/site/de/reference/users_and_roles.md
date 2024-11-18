@@ -4,9 +4,9 @@ related_key: 'users, roles'
 summary: >-
   Lernen Sie die Definition von Benutzern, Rollen, Objekten und Berechtigungen
   in der rollenbasierten Zugriffskontrolle (RBAC) kennen.
-title: Benutzer und Rollen
+title: 'Benutzer, Privilegien und Rollen'
 ---
-<h1 id="Users-and-Roles" class="common-anchor-header">Benutzer und Rollen<button data-href="#Users-and-Roles" class="anchor-icon" translate="no">
+<h1 id="Users-Privileges-and-Roles" class="common-anchor-header">Benutzer, Privilegien und Rollen<button data-href="#Users-Privileges-and-Roles" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -22,7 +22,7 @@ title: Benutzer und Rollen
         ></path>
       </svg>
     </button></h1><p>Dieses Thema bietet einen Überblick über die rollenbasierte Zugriffskontrolle (Role-Based Access Control, RBAC) in Milvus und beschreibt die Definitionen und Beziehungen zwischen Benutzern, Rollen, Objekten und Berechtigungen.</p>
-<p>Die folgende Abbildung illustriert die Beziehung zwischen Objekten, Privilegien, Rollen und Benutzern.</p>
+<p>Die folgende Abbildung veranschaulicht die Beziehung zwischen Objekten, Privilegien, Rollen und Benutzern.</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/users_and_roles.png" alt="users_and_roles" class="doc-image" id="users_and_roles" />
@@ -57,7 +57,7 @@ title: Benutzer und Rollen
 <li>Wenn der Objekttyp <code translate="no">User</code> ist, ist der Objektname der Name eines Datenbankbenutzers.</li>
 </ul></li>
 <li><p><strong>Benutzer</strong>: eine Person oder eine Anwendung, die mit Milvus interagiert, bestehend aus einem Benutzernamen und einem entsprechenden Passwort.</p></li>
-<li><p><strong>Privileg</strong>: definiert die Aktionen, die durchgeführt werden können und die Ressourcen, auf die zugegriffen werden kann. Privilegien werden nicht direkt an Benutzer vergeben, sondern sind Rollen zugeordnet.</p></li>
+<li><p><strong>Privileg</strong>: definiert die Aktionen, die durchgeführt werden können und die Ressourcen, auf die zugegriffen werden kann. Privilegien werden nicht direkt an Benutzer vergeben, sondern sind Rollen zugewiesen.</p></li>
 <li><p><strong>Rolle</strong>: Definiert die Berechtigungen, die ein Benutzer für bestimmte Objekte hat. Sobald eine Rolle an einen Benutzer gebunden ist, erbt der Benutzer alle Rechte, die dieser Rolle gewährt werden.</p></li>
 </ul>
 <h2 id="Example-Granting-privileges" class="common-anchor-header">Beispiel: Erteilen von Privilegien<button data-href="#Example-Granting-privileges" class="anchor-icon" translate="no">
@@ -101,7 +101,7 @@ client.grantPrivilege(grantPrivilegeReq);
  })
 <button class="copy-code-btn"></button></code></pre>
 <div class="language-python">
-<p>Weitere Informationen zu privilegierungsbezogenen APIs finden Sie unter <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Authentication/grant_privilege.md">grant_privilege</a> und <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Authentication/revoke_privileges.md">revoke_privilege</a>.</p>
+<p>Weitere Informationen über privilegierungsbezogene APIs finden Sie unter <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Authentication/grant_privilege.md">grant_privilege</a> und <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Authentication/revoke_privileges.md">revoke_privilege</a>.</p>
 </div>
 <div class="language-java">
 <p>Weitere Informationen zu privilegierungsbezogenen APIs finden Sie unter <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Authentication/grantPrivilege.md">grantPrivilege</a> und <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Authentication/revokePrivilege.md">revokePrivilege</a>.</p>

@@ -305,12 +305,6 @@
         "children": []
       },
       {
-        "label": "사용자 및 역할",
-        "id": "users_and_roles.md",
-        "order": 10,
-        "children": []
-      },
-      {
         "label": "인메모리 복제본",
         "id": "replica.md",
         "order": 11,
@@ -1058,6 +1052,12 @@
             "children": []
           },
           {
+            "label": "사용자, 권한 및 역할",
+            "id": "users_and_roles.md",
+            "order": 10,
+            "children": []
+          },
+          {
             "label": "RBAC 사용",
             "id": "rbac.md",
             "order": 1,
@@ -1421,6 +1421,18 @@
             "children": []
           },
           {
+            "label": "DocsGPT",
+            "id": "use_milvus_in_docsgpt.md",
+            "order": 9,
+            "children": []
+          },
+          {
+            "label": "삼바노바",
+            "id": "use_milvus_with_sambanova.md",
+            "order": 10,
+            "children": []
+          },
+          {
             "label": "PrivateGPT",
             "id": "use_milvus_in_private_gpt.md",
             "order": 8,
@@ -1444,6 +1456,12 @@
             "id": "integrate_with_camel.md",
             "order": 1,
             "children": []
+          },
+          {
+            "label": "Mem0",
+            "id": "quickstart_mem0_with_milvus.md",
+            "order": 2,
+            "children": []
           }
         ]
       },
@@ -1462,6 +1480,12 @@
             "label": "Vanna",
             "id": "integrate_with_vanna.md",
             "order": 1,
+            "children": []
+          },
+          {
+            "label": "지식 표",
+            "id": "knowledge_table_with_milvus.md",
+            "order": 2,
             "children": []
           }
         ]
@@ -1631,6 +1655,12 @@
         "label": "영화 추천",
         "id": "movie_recommendation_with_milvus.md",
         "order": 9,
+        "children": []
+      },
+      {
+        "label": "마트료시카 임베딩을 사용한 퍼널 검색",
+        "id": "funnel_search_with_matryoshka.md",
+        "order": 10,
         "children": []
       },
       {

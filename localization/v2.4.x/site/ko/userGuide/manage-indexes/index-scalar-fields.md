@@ -2,7 +2,7 @@
 id: index-scalar-fields.md
 order: 2
 summary: '이 가이드에서는 정수, 문자열 등과 같은 필드에 대한 스칼라 인덱스를 만들고 구성하는 방법을 안내합니다.'
-title: 인덱스 스칼라 필드
+title: 스칼라 필드 인덱스
 ---
 <h1 id="Index-Scalar-Fields" class="common-anchor-header">스칼라 필드 인덱스<button data-href="#Index-Scalar-Fields" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -55,7 +55,7 @@ title: 인덱스 스칼라 필드
         ></path>
       </svg>
     </button></h2><div class="language-python">
-<p>자동 인덱싱을 사용하려면 <strong>인덱스 유형</strong> 매개변수를 생략하세요. <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/add_index.md"><code translate="no">add_index()</code></a>에서 인덱스 유형 매개변수를 생략하면 Milvus가 스칼라 필드 유형에 따라 인덱스 유형을 유추할 수 있습니다.</p>
+<p>자동 인덱싱을 사용하려면 <strong>인덱스 유형</strong> 매개변수를 생략하세요. <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/add_index.md"><code translate="no">add_index()</code></a>에서 인덱스 유형 매개변수를 생략하면 Milvus가 스칼라 필드 유형을 기반으로 인덱스 유형을 유추할 수 있습니다.</p>
 </div>
 <div class="language-java">
 <p>자동 인덱싱을 사용하려면, 에서 <strong>indexType</strong> 매개변수를 생략하세요. <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Management/IndexParam.md"><code translate="no">IndexParam</code></a>에서 인덱스 유형 매개변수를 생략하여 Milvus가 스칼라 필드 유형을 기반으로 인덱스 유형을 유추할 수 있도록 합니다.</p>
@@ -71,7 +71,7 @@ client = MilvusClient(
     uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>
 )
 
-index_params = client.create_index_params() <span class="hljs-comment"># Prepare an empty IndexParams object, without having to specify any index parameters</span>
+index_params = MilvusClient.prepare_index_params() <span class="hljs-comment"># Prepare an empty IndexParams object, without having to specify any index parameters</span>
 
 index_params.add_index(
     field_name=<span class="hljs-string">&quot;scalar_1&quot;</span>, <span class="hljs-comment"># Name of the scalar field to be indexed</span>
@@ -137,7 +137,7 @@ client.createIndex(createIndexReq);
 <p>아래 예제는 스칼라 필드 <code translate="no">scalar_2</code> 에 대한 반전 인덱스를 생성합니다.</p>
 <div class="multipleCode">
    <a href="#python">파이썬 </a> <a href="#java">자바</a> <a href="#javascript">Node.js</a></div>
-<pre><code translate="no" class="language-python">index_params = client.create_index_params() <span class="hljs-comment">#  Prepare an IndexParams object</span>
+<pre><code translate="no" class="language-python">index_params = MilvusClient.prepare_index_params() <span class="hljs-comment">#  Prepare an IndexParams object</span>
 
 index_params.add_index(
     field_name=<span class="hljs-string">&quot;scalar_2&quot;</span>, <span class="hljs-comment"># Name of the scalar field to be indexed</span>
@@ -179,7 +179,7 @@ client.createIndex(createIndexReq);
 <div class="language-python">
 <p><strong>메서드 및 매개변수</strong></p>
 <ul>
-<li><p><strong>create_index_params()</strong></p>
+<li><p><strong>prepare_index_params()</strong></p>
 <p><strong>IndexParams</strong> 객체를 준비합니다.</p></li>
 <li><p><strong>add_index()</strong></p>
 <p><strong>IndexParams</strong> 객체에 인덱스 구성을 추가합니다.</p>

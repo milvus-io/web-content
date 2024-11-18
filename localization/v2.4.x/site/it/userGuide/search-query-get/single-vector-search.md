@@ -24,7 +24,7 @@ title: Ricerca per singolo vettore
     </button></h1><p>Una volta inseriti i dati, il passo successivo consiste nell'eseguire ricerche di similarità sulla collezione in Milvus.</p>
 <p>Milvus consente di effettuare due tipi di ricerca, a seconda del numero di campi vettoriali presenti nella collezione:</p>
 <ul>
-<li><strong>Ricerca a vettore singolo</strong>: Se la vostra collezione ha un solo campo vettoriale, utilizzate il metodo <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Vector/search.md"><code translate="no">search()</code></a> per trovare le entità più simili. Questo metodo confronta il vettore interrogato con i vettori esistenti nella collezione e restituisce gli ID delle corrispondenze più vicine insieme alle distanze tra loro. Opzionalmente, può anche restituire i valori del vettore e i metadati dei risultati.</li>
+<li><strong>Ricerca a vettore singolo</strong>: Se la vostra collezione ha un solo campo vettoriale, utilizzate il metodo <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Vector/search.md"><code translate="no">search()</code></a> per trovare le entità più simili. Questo metodo confronta il vettore dell'interrogazione con i vettori esistenti nella collezione e restituisce gli ID delle corrispondenze più vicine insieme alle distanze tra loro. Opzionalmente, può anche restituire i valori del vettore e i metadati dei risultati.</li>
 <li><strong>Ricerca ibrida</strong>: Per le raccolte con due o più campi vettoriali, utilizzare il metodo <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/ORM/Collection/hybrid_search.md"><code translate="no">hybrid_search()</code></a> . Questo metodo esegue più richieste di ricerca Approximate Nearest Neighbor (ANN) e combina i risultati per restituire le corrispondenze più rilevanti dopo una nuova classificazione.</li>
 </ul>
 <p>Questa guida si concentra su come eseguire una ricerca monovettoriale in Milvus. Per maggiori dettagli sulla ricerca ibrida, consultare la sezione <a href="https://milvus.io/docs/multi-vector-search.md">Ricerca ibrida</a>.</p>
@@ -68,10 +68,12 @@ title: Ricerca per singolo vettore
     </button></h2><p>Il frammento di codice seguente ripropone il codice esistente per stabilire una connessione a Milvus e impostare rapidamente una raccolta.</p>
 <div class="multipleCode">
    <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a></div>
-<pre><code translate="no" class="language-python"><span class="hljs-comment"># 1. Set up a Milvus client</span>
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
+<span class="hljs-keyword">import</span> random
+
+<span class="hljs-comment"># 1. Set up a Milvus client</span>
 client = MilvusClient(
-    uri=CLUSTER_ENDPOINT,
-    token=TOKEN 
+    uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>
 )
 
 <span class="hljs-comment"># 2. Create a collection</span>
@@ -449,7 +451,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
    <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Single vector search</span>
 res = client.search(
-    collection_name=<span class="hljs-string">&quot;test_collection&quot;</span>, <span class="hljs-comment"># Replace with the actual name of your collection</span>
+    collection_name=<span class="hljs-string">&quot;quick_setup&quot;</span>, <span class="hljs-comment"># Replace with the actual name of your collection</span>
     <span class="hljs-comment"># Replace with your query vector</span>
     data=[[<span class="hljs-number">0.3580376395471989</span>, -<span class="hljs-number">0.6023495712049978</span>, <span class="hljs-number">0.18414012509913835</span>, -<span class="hljs-number">0.26286205330961354</span>, <span class="hljs-number">0.9029438446296592</span>]],
     limit=<span class="hljs-number">5</span>, <span class="hljs-comment"># Max. number of search results to return</span>
@@ -643,7 +645,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
    <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Bulk-vector search</span>
 res = client.search(
-    collection_name=<span class="hljs-string">&quot;test_collection&quot;</span>, <span class="hljs-comment"># Replace with the actual name of your collection</span>
+    collection_name=<span class="hljs-string">&quot;quick_setup&quot;</span>, <span class="hljs-comment"># Replace with the actual name of your collection</span>
     data=[
         [<span class="hljs-number">0.19886812562848388</span>, <span class="hljs-number">0.06023560599112088</span>, <span class="hljs-number">0.6976963061752597</span>, <span class="hljs-number">0.2614474506242501</span>, <span class="hljs-number">0.838729485096104</span>],
         [<span class="hljs-number">0.3172005263489739</span>, <span class="hljs-number">0.9719044792798428</span>, -<span class="hljs-number">0.36981146090600725</span>, -<span class="hljs-number">0.4860894583077995</span>, <span class="hljs-number">0.95791889146345</span>]
@@ -1220,7 +1222,7 @@ searchResp = client.<span class="hljs-title function_">search</span>(searchReq);
   { score: <span class="hljs-number">2.7014894485473633</span>, <span class="hljs-built_in">id</span>: <span class="hljs-string">&#x27;1597&#x27;</span> }
 ]
 <button class="copy-code-btn"></button></code></pre>
-<p>I dati di <code translate="no">red</code> differiscono da quelli di <code translate="no">blue</code>. Pertanto, i risultati della ricerca saranno limitati alla partizione specificata, riflettendo le caratteristiche uniche e la distribuzione dei dati di quel sottoinsieme.</p>
+<p>I dati contenuti in <code translate="no">red</code> differiscono da quelli contenuti in <code translate="no">blue</code>. Pertanto, i risultati della ricerca saranno limitati alla partizione specificata, riflettendo le caratteristiche uniche e la distribuzione dei dati di quel sottoinsieme.</p>
 <h3 id="Search-with-output-fields" class="common-anchor-header">Ricerca con campi di output</h3><p>La ricerca con campi di output consente di specificare quali attributi o campi dei vettori abbinati devono essere inclusi nei risultati della ricerca.</p>
 <p>È possibile specificare <code translate="no">output_fields</code> in una richiesta per restituire risultati con campi specifici.</p>
 <p>Ecco un esempio di restituzione dei risultati con i valori dell'attributo <code translate="no">color</code>:</p>
@@ -1228,7 +1230,7 @@ searchResp = client.<span class="hljs-title function_">search</span>(searchReq);
    <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Search with output fields</span>
 res = client.search(
-    collection_name=<span class="hljs-string">&quot;test_collection&quot;</span>, <span class="hljs-comment"># Replace with the actual name of your collection</span>
+    collection_name=<span class="hljs-string">&quot;quick_setup&quot;</span>, <span class="hljs-comment"># Replace with the actual name of your collection</span>
     data=[[<span class="hljs-number">0.3580376395471989</span>, -<span class="hljs-number">0.6023495712049978</span>, <span class="hljs-number">0.18414012509913835</span>, -<span class="hljs-number">0.26286205330961354</span>, <span class="hljs-number">0.9029438446296592</span>]],
     limit=<span class="hljs-number">5</span>, <span class="hljs-comment"># Max. number of search results to return</span>
     search_params={<span class="hljs-string">&quot;metric_type&quot;</span>: <span class="hljs-string">&quot;IP&quot;</span>, <span class="hljs-string">&quot;params&quot;</span>: {}}, <span class="hljs-comment"># Search parameters</span>
@@ -1357,7 +1359,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>La ricerca filtrata applica filtri scalari alle ricerche vettoriali, consentendo di affinare i risultati della ricerca in base a criteri specifici. Maggiori informazioni sulle espressioni di filtro sono disponibili in <a href="https://milvus.io/docs/boolean.md">Regole delle espressioni booleane</a> ed esempi in <a href="https://milvus.io/docs/get-and-scalar-query.md">Ottieni e Query scalari</a>.</p>
+    </button></h2><p>La ricerca filtrata applica filtri scalari alle ricerche vettoriali, consentendo di affinare i risultati della ricerca in base a criteri specifici. Maggiori informazioni sulle espressioni di filtro sono disponibili in <a href="https://milvus.io/docs/boolean.md">Regole di espressione booleana</a> ed esempi in <a href="https://milvus.io/docs/get-and-scalar-query.md">Ottieni e Query scalari</a>.</p>
 <h3 id="Use-the-like-operator" class="common-anchor-header">Utilizzare l'operatore <code translate="no">like</code> </h3><p>L'operatore <code translate="no">like</code> migliora la ricerca di stringhe valutando modelli che includono prefissi, infissi e suffissi:</p>
 <ul>
 <li><strong>Corrispondenza dei prefissi</strong>: per trovare valori che iniziano con un prefisso specifico, utilizzare la sintassi <code translate="no">'like &quot;prefix%&quot;'</code>.</li>
@@ -1376,7 +1378,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
    <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Search with filter</span>
 res = client.search(
-    collection_name=<span class="hljs-string">&quot;test_collection&quot;</span>, <span class="hljs-comment"># Replace with the actual name of your collection</span>
+    collection_name=<span class="hljs-string">&quot;quick_setup&quot;</span>, <span class="hljs-comment"># Replace with the actual name of your collection</span>
     data=[[<span class="hljs-number">0.3580376395471989</span>, -<span class="hljs-number">0.6023495712049978</span>, <span class="hljs-number">0.18414012509913835</span>, -<span class="hljs-number">0.26286205330961354</span>, <span class="hljs-number">0.9029438446296592</span>]],
     limit=<span class="hljs-number">5</span>, <span class="hljs-comment"># Max. number of search results to return</span>
     search_params={<span class="hljs-string">&quot;metric_type&quot;</span>: <span class="hljs-string">&quot;IP&quot;</span>, <span class="hljs-string">&quot;params&quot;</span>: {}}, <span class="hljs-comment"># Search parameters</span>
@@ -1483,7 +1485,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
    <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Infix match on color field</span>
 res = client.search(
-    collection_name=<span class="hljs-string">&quot;test_collection&quot;</span>, <span class="hljs-comment"># Replace with the actual name of your collection</span>
+    collection_name=<span class="hljs-string">&quot;quick_setup&quot;</span>, <span class="hljs-comment"># Replace with the actual name of your collection</span>
     data=[[<span class="hljs-number">0.3580376395471989</span>, -<span class="hljs-number">0.6023495712049978</span>, <span class="hljs-number">0.18414012509913835</span>, -<span class="hljs-number">0.26286205330961354</span>, <span class="hljs-number">0.9029438446296592</span>]],
     limit=<span class="hljs-number">5</span>, <span class="hljs-comment"># Max. number of search results to return</span>
     search_params={<span class="hljs-string">&quot;metric_type&quot;</span>: <span class="hljs-string">&quot;IP&quot;</span>, <span class="hljs-string">&quot;params&quot;</span>: {}}, <span class="hljs-comment"># Search parameters</span>
@@ -1584,7 +1586,7 @@ search_params = {
 }
 
 res = client.search(
-    collection_name=<span class="hljs-string">&quot;test_collection&quot;</span>, <span class="hljs-comment"># Replace with the actual name of your collection</span>
+    collection_name=<span class="hljs-string">&quot;quick_setup&quot;</span>, <span class="hljs-comment"># Replace with the actual name of your collection</span>
     data=[[<span class="hljs-number">0.3580376395471989</span>, -<span class="hljs-number">0.6023495712049978</span>, <span class="hljs-number">0.18414012509913835</span>, -<span class="hljs-number">0.26286205330961354</span>, <span class="hljs-number">0.9029438446296592</span>]],
     limit=<span class="hljs-number">3</span>, <span class="hljs-comment"># Max. number of search results to return</span>
     search_params=search_params, <span class="hljs-comment"># Search parameters</span>
@@ -1787,7 +1789,7 @@ passage_ids = [result[<span class="hljs-string">&#x27;entity&#x27;</span>][<span
 <pre><code translate="no" class="language-python">[<span class="hljs-string">&quot;doc_11&quot;</span>, <span class="hljs-string">&quot;doc_11&quot;</span>, <span class="hljs-string">&quot;doc_11&quot;</span>, <span class="hljs-string">&quot;doc_11&quot;</span>, <span class="hljs-string">&quot;doc_11&quot;</span>]
 [<span class="hljs-meta">1, 10, 3, 12, 9</span>]
 <button class="copy-code-btn"></button></code></pre>
-<p>Nell'output dato, si può osservare che "doc_11" ha dominato completamente i risultati della ricerca, mettendo in ombra i paragrafi di alta qualità degli altri documenti, il che può essere un cattivo suggerimento per LLM.</p>
+<p>Nell'output dato, si può osservare che "doc_11" ha dominato completamente i risultati della ricerca, mettendo in ombra i paragrafi di alta qualità di altri documenti, il che può essere un cattivo suggerimento per LLM.</p>
 <p>Un altro punto da notare: per impostazione predefinita, grouping_search restituisce i risultati istantaneamente quando ha abbastanza gruppi, il che può far sì che il numero di risultati in ogni gruppo non sia sufficiente a soddisfare il group_size. Se vi interessa il numero di risultati per ogni gruppo, impostate group_strict_size=True come mostrato nel codice qui sopra. In questo modo Milvus si sforzerà di ottenere un numero sufficiente di risultati per ogni gruppo, con un leggero costo in termini di prestazioni.</p>
 <p><strong>Limitazioni</strong></p>
 <ul>

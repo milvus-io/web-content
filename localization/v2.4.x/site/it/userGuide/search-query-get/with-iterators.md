@@ -248,7 +248,7 @@ System.out.println(wrapper.getInsertCount());
 </ol>
 <div class="multipleCode">
    <a href="#python">Python </a> <a href="#java">Java</a></div>
-<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> Collection
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> Collection,connections
 
 <span class="hljs-comment"># 4. Search with iterator</span>
 connections.connect(host=<span class="hljs-string">&quot;127.0.0.1&quot;</span>, port=<span class="hljs-number">19530</span>)
@@ -367,7 +367,7 @@ System.out.println(results.size());
     </tr>
     <tr>
       <td><code translate="no">batch_size</code></td>
-      <td>Il numero di entità da restituire ogni volta che si chiama <code translate="no">next()</code> sull'iteratore corrente.<br/>Il valore predefinito è <strong>1000</strong>. Impostare un valore corretto per controllare il numero di entità da restituire per ogni iterazione.</td>
+      <td>Il numero di entità da restituire ogni volta che si chiama <code translate="no">next()</code> sull'iteratore corrente.<br/>Il valore è predefinito a <strong>1000</strong>. Impostare un valore corretto per controllare il numero di entità da restituire per ogni iterazione.</td>
     </tr>
     <tr>
       <td><code translate="no">param</code></td>
@@ -546,7 +546,7 @@ R&lt;<span class="hljs-title class_">QueryIterator</span>&gt; queryIteratRes = c
   <tbody>
     <tr>
       <td><code translate="no">batch_size</code></td>
-      <td>Il numero di entità da restituire ogni volta che si richiama <code translate="no">next()</code> sull'iteratore corrente.<br/>Il valore predefinito è <strong>1000</strong>. Impostare un valore appropriato per controllare il numero di entità da restituire per ogni iterazione.</td>
+      <td>Il numero di entità da restituire ogni volta che si richiama <code translate="no">next()</code> sull'iteratore corrente.<br/>Il valore predefinito è <strong>1000</strong>. Impostare un valore corretto per controllare il numero di entità da restituire per ogni iterazione.</td>
     </tr>
     <tr>
       <td><code translate="no">expr</code></td>

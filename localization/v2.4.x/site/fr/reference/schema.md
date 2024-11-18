@@ -39,12 +39,15 @@ title: Gérer les schémas
 <h3 id="Field-schema-properties" class="common-anchor-header">Propriétés du schéma de champ</h3><table class="properties">
     <thead>
     <tr>
-       <th>Propriétés</td><th>Description</th> <th>Note</th>   </tr>
+        <th>Propriétés</th>
+        <th>Description du champ</th>
+        <th>Remarque</th>
+    </tr>
     </thead>
     <tbody>
     <tr>
         <td><code translate="no">name</code></td>
-        <td>Nom du champ dans la collection à créer</td>
+        <td>Nom du champ à créer dans la collection</td>
         <td>Type de données : Chaîne.<br/>Obligatoire</td>
     </tr>
     <tr>
@@ -130,7 +133,7 @@ fields = [
 <li>BINARY_VECTOR : stocke les données binaires sous la forme d'une séquence de 0 et de 1. Il est utilisé pour la représentation compacte des caractéristiques dans le traitement des images et la recherche d'informations.</li>
 <li>FLOAT_VECTOR : stocke les nombres à virgule flottante de 32 bits, couramment utilisés dans l'informatique scientifique et l'apprentissage automatique pour représenter les nombres réels.</li>
 <li>FLOAT16_VECTOR : stocke des nombres à virgule flottante de 16 bits en demi-précision, utilisés dans l'apprentissage profond et les calculs GPU pour l'efficacité de la mémoire et de la bande passante.</li>
-<li>BFLOAT16_VECTOR : Stocke les nombres à virgule flottante de 16 bits avec une précision réduite mais la même plage d'exposants que Float32, populaire dans l'apprentissage profond pour réduire les exigences en matière de mémoire et de calcul sans avoir un impact significatif sur la précision.</li>
+<li>BFLOAT16_VECTOR : Stocke les nombres à virgule flottante de 16 bits avec une précision réduite mais la même plage d'exposants que Float32, populaire dans l'apprentissage profond pour réduire les exigences de mémoire et de calcul sans avoir un impact significatif sur la précision.</li>
 <li>SPARSE_FLOAT_VECTOR : stocke une liste d'éléments non nuls et leurs indices correspondants, utilisés pour représenter des vecteurs épars. Pour plus d'informations, voir <a href="/docs/fr/sparse_vector.md">Vecteurs épars</a>.</li>
 </ul>
 <p>Milvus prend en charge plusieurs champs de vecteurs dans une collection. Pour plus d'informations, voir <a href="/docs/fr/multi-vector-search.md">Recherche hybride</a>.</p></li>
@@ -154,7 +157,10 @@ fields = [
 <h3 id="Collection-schema-properties" class="common-anchor-header">Propriétés du schéma de collection</h3><table class="properties">
     <thead>
     <tr>
-       <th>Propriétés</td><th>Description</th> <th>Note</th>   </tr>
+        <th>Propriétés</th>
+        <th>Description de la collection</th>
+        <th>Remarque</th>
+    </tr>
     </thead>
     <tbody>
     <tr>
@@ -193,7 +199,8 @@ position_field = FieldSchema(name=<span class="hljs-string">&quot;position&quot;
 schema = CollectionSchema(fields=[id_field, age_field, embedding_field], auto_id=<span class="hljs-literal">False</span>, enable_dynamic_field=<span class="hljs-literal">True</span>, description=<span class="hljs-string">&quot;desc of a collection&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
 <p>Créez une collection avec le schéma spécifié :</p>
-<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> <span class="hljs-title class_">Collection</span>
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> <span class="hljs-title class_">Collection</span>,connections
+conn = connections.<span class="hljs-title function_">connect</span>(host=<span class="hljs-string">&quot;127.0.0.1&quot;</span>, port=<span class="hljs-number">19530</span>)
 collection_name1 = <span class="hljs-string">&quot;tutorial_1&quot;</span>
 collection1 = <span class="hljs-title class_">Collection</span>(name=collection_name1, schema=schema, using=<span class="hljs-string">&#x27;default&#x27;</span>, shards_num=<span class="hljs-number">2</span>)
 <button class="copy-code-btn"></button></code></pre>

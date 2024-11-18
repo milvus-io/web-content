@@ -68,10 +68,12 @@ title: Einzelvektor-Suche
     </button></h2><p>Das folgende Codeschnipsel verwendet den bestehenden Code weiter, um eine Verbindung zu Milvus herzustellen und eine Sammlung schnell einzurichten.</p>
 <div class="multipleCode">
    <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a></div>
-<pre><code translate="no" class="language-python"><span class="hljs-comment"># 1. Set up a Milvus client</span>
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
+<span class="hljs-keyword">import</span> random
+
+<span class="hljs-comment"># 1. Set up a Milvus client</span>
 client = MilvusClient(
-    uri=CLUSTER_ENDPOINT,
-    token=TOKEN 
+    uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>
 )
 
 <span class="hljs-comment"># 2. Create a collection</span>
@@ -449,7 +451,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
    <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Single vector search</span>
 res = client.search(
-    collection_name=<span class="hljs-string">&quot;test_collection&quot;</span>, <span class="hljs-comment"># Replace with the actual name of your collection</span>
+    collection_name=<span class="hljs-string">&quot;quick_setup&quot;</span>, <span class="hljs-comment"># Replace with the actual name of your collection</span>
     <span class="hljs-comment"># Replace with your query vector</span>
     data=[[<span class="hljs-number">0.3580376395471989</span>, -<span class="hljs-number">0.6023495712049978</span>, <span class="hljs-number">0.18414012509913835</span>, -<span class="hljs-number">0.26286205330961354</span>, <span class="hljs-number">0.9029438446296592</span>]],
     limit=<span class="hljs-number">5</span>, <span class="hljs-comment"># Max. number of search results to return</span>
@@ -643,7 +645,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
    <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Bulk-vector search</span>
 res = client.search(
-    collection_name=<span class="hljs-string">&quot;test_collection&quot;</span>, <span class="hljs-comment"># Replace with the actual name of your collection</span>
+    collection_name=<span class="hljs-string">&quot;quick_setup&quot;</span>, <span class="hljs-comment"># Replace with the actual name of your collection</span>
     data=[
         [<span class="hljs-number">0.19886812562848388</span>, <span class="hljs-number">0.06023560599112088</span>, <span class="hljs-number">0.6976963061752597</span>, <span class="hljs-number">0.2614474506242501</span>, <span class="hljs-number">0.838729485096104</span>],
         [<span class="hljs-number">0.3172005263489739</span>, <span class="hljs-number">0.9719044792798428</span>, -<span class="hljs-number">0.36981146090600725</span>, -<span class="hljs-number">0.4860894583077995</span>, <span class="hljs-number">0.95791889146345</span>]
@@ -1228,7 +1230,7 @@ searchResp = client.<span class="hljs-title function_">search</span>(searchReq);
    <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Search with output fields</span>
 res = client.search(
-    collection_name=<span class="hljs-string">&quot;test_collection&quot;</span>, <span class="hljs-comment"># Replace with the actual name of your collection</span>
+    collection_name=<span class="hljs-string">&quot;quick_setup&quot;</span>, <span class="hljs-comment"># Replace with the actual name of your collection</span>
     data=[[<span class="hljs-number">0.3580376395471989</span>, -<span class="hljs-number">0.6023495712049978</span>, <span class="hljs-number">0.18414012509913835</span>, -<span class="hljs-number">0.26286205330961354</span>, <span class="hljs-number">0.9029438446296592</span>]],
     limit=<span class="hljs-number">5</span>, <span class="hljs-comment"># Max. number of search results to return</span>
     search_params={<span class="hljs-string">&quot;metric_type&quot;</span>: <span class="hljs-string">&quot;IP&quot;</span>, <span class="hljs-string">&quot;params&quot;</span>: {}}, <span class="hljs-comment"># Search parameters</span>
@@ -1365,7 +1367,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 <li><strong>Suffix-Abgleich</strong>: Um Werte zu finden, die mit einem bestimmten Suffix enden, verwenden Sie die Syntax <code translate="no">'like &quot;%suffix&quot;'</code>.</li>
 </ul>
 <p>Bei der Suche nach einzelnen Zeichen dient der Unterstrich (<code translate="no">_</code>) als Platzhalter für ein Zeichen, z. B. <code translate="no">'like &quot;y_llow&quot;'</code>.</p>
-<h3 id="Special-characters-in-search-strings" class="common-anchor-header">Sonderzeichen in Suchzeichenfolgen</h3><p>Wenn Sie nach einer Zeichenkette suchen wollen, die Sonderzeichen wie Unterstriche (<code translate="no">_</code>) oder Prozentzeichen (<code translate="no">%</code>) enthält, die normalerweise als Platzhalter in Suchmustern verwendet werden (<code translate="no">_</code> für ein einzelnes Zeichen und <code translate="no">%</code> für eine beliebige Folge von Zeichen), müssen Sie diese Zeichen mit einem Escapezeichen versehen, um sie als literale Zeichen zu behandeln. Verwenden Sie einen Backslash (<code translate="no">\</code>), um Sonderzeichen zu entschlüsseln, und denken Sie daran, den Backslash selbst zu entschlüsseln. Ein Beispiel:</p>
+<h3 id="Special-characters-in-search-strings" class="common-anchor-header">Sonderzeichen in Suchzeichenketten</h3><p>Wenn Sie nach einer Zeichenkette suchen wollen, die Sonderzeichen wie Unterstriche (<code translate="no">_</code>) oder Prozentzeichen (<code translate="no">%</code>) enthält, die normalerweise als Platzhalter in Suchmustern verwendet werden (<code translate="no">_</code> für ein einzelnes Zeichen und <code translate="no">%</code> für eine beliebige Folge von Zeichen), müssen Sie diese Zeichen mit einem Escapezeichen versehen, um sie als literale Zeichen zu behandeln. Verwenden Sie einen Backslash (<code translate="no">\</code>), um Sonderzeichen zu entschlüsseln, und denken Sie daran, den Backslash selbst zu entschlüsseln. Ein Beispiel:</p>
 <ul>
 <li>Um nach einem buchstäblichen Unterstrich zu suchen, verwenden Sie <code translate="no">\\_</code>.</li>
 <li>Um nach einem wörtlichen Prozentzeichen zu suchen, verwenden Sie <code translate="no">\\%</code>.</li>
@@ -1376,7 +1378,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
    <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Search with filter</span>
 res = client.search(
-    collection_name=<span class="hljs-string">&quot;test_collection&quot;</span>, <span class="hljs-comment"># Replace with the actual name of your collection</span>
+    collection_name=<span class="hljs-string">&quot;quick_setup&quot;</span>, <span class="hljs-comment"># Replace with the actual name of your collection</span>
     data=[[<span class="hljs-number">0.3580376395471989</span>, -<span class="hljs-number">0.6023495712049978</span>, <span class="hljs-number">0.18414012509913835</span>, -<span class="hljs-number">0.26286205330961354</span>, <span class="hljs-number">0.9029438446296592</span>]],
     limit=<span class="hljs-number">5</span>, <span class="hljs-comment"># Max. number of search results to return</span>
     search_params={<span class="hljs-string">&quot;metric_type&quot;</span>: <span class="hljs-string">&quot;IP&quot;</span>, <span class="hljs-string">&quot;params&quot;</span>: {}}, <span class="hljs-comment"># Search parameters</span>
@@ -1483,7 +1485,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
    <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Infix match on color field</span>
 res = client.search(
-    collection_name=<span class="hljs-string">&quot;test_collection&quot;</span>, <span class="hljs-comment"># Replace with the actual name of your collection</span>
+    collection_name=<span class="hljs-string">&quot;quick_setup&quot;</span>, <span class="hljs-comment"># Replace with the actual name of your collection</span>
     data=[[<span class="hljs-number">0.3580376395471989</span>, -<span class="hljs-number">0.6023495712049978</span>, <span class="hljs-number">0.18414012509913835</span>, -<span class="hljs-number">0.26286205330961354</span>, <span class="hljs-number">0.9029438446296592</span>]],
     limit=<span class="hljs-number">5</span>, <span class="hljs-comment"># Max. number of search results to return</span>
     search_params={<span class="hljs-string">&quot;metric_type&quot;</span>: <span class="hljs-string">&quot;IP&quot;</span>, <span class="hljs-string">&quot;params&quot;</span>: {}}, <span class="hljs-comment"># Search parameters</span>
@@ -1567,7 +1569,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
         ></path>
       </svg>
     </button></h2><p>Die Bereichssuche ermöglicht es Ihnen, Vektoren zu finden, die innerhalb eines bestimmten Abstandsbereichs zu Ihrem Abfragevektor liegen.</p>
-<p>Indem Sie <code translate="no">radius</code> und optional <code translate="no">range_filter</code> einstellen, können Sie die Breite Ihrer Suche so anpassen, dass auch Vektoren einbezogen werden, die dem Abfragevektor einigermaßen ähnlich sind, und so eine umfassendere Übersicht über potenzielle Übereinstimmungen erhalten.</p>
+<p>Durch Einstellen von <code translate="no">radius</code> und optional <code translate="no">range_filter</code> können Sie die Breite Ihrer Suche so anpassen, dass auch Vektoren einbezogen werden, die dem Abfragevektor einigermaßen ähnlich sind, und so eine umfassendere Übersicht über mögliche Übereinstimmungen erhalten.</p>
 <ul>
 <li><p><code translate="no">radius</code>: Legt die äußere Grenze des Suchraums fest. Nur Vektoren, die innerhalb dieses Abstands zum Abfragevektor liegen, werden als potenzielle Übereinstimmungen betrachtet.</p></li>
 <li><p><code translate="no">range_filter</code>: Während <code translate="no">radius</code> die äußere Grenze der Suche festlegt, kann <code translate="no">range_filter</code> optional verwendet werden, um eine innere Grenze zu definieren und einen Abstandsbereich zu schaffen, in den Vektoren fallen müssen, um als Treffer zu gelten.</p></li>
@@ -1584,7 +1586,7 @@ search_params = {
 }
 
 res = client.search(
-    collection_name=<span class="hljs-string">&quot;test_collection&quot;</span>, <span class="hljs-comment"># Replace with the actual name of your collection</span>
+    collection_name=<span class="hljs-string">&quot;quick_setup&quot;</span>, <span class="hljs-comment"># Replace with the actual name of your collection</span>
     data=[[<span class="hljs-number">0.3580376395471989</span>, -<span class="hljs-number">0.6023495712049978</span>, <span class="hljs-number">0.18414012509913835</span>, -<span class="hljs-number">0.26286205330961354</span>, <span class="hljs-number">0.9029438446296592</span>]],
     limit=<span class="hljs-number">3</span>, <span class="hljs-comment"># Max. number of search results to return</span>
     search_params=search_params, <span class="hljs-comment"># Search parameters</span>
@@ -1696,7 +1698,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 <tbody>
 <tr><td><code translate="no">L2</code></td><td>Kleinere L2-Distanzen zeigen eine höhere Ähnlichkeit an.</td><td>Um die nächstgelegenen Vektoren von den Ergebnissen auszuschließen, stellen Sie sicher, dass:<br/> <code translate="no">range_filter</code> &lt;= distance &lt; <code translate="no">radius</code></td></tr>
 <tr><td><code translate="no">IP</code></td><td>Größere IP-Distanzen weisen auf eine höhere Ähnlichkeit hin.</td><td>Um die nächstgelegenen Vektoren von den Ergebnissen auszuschließen, stellen Sie sicher, dass:<br/> <code translate="no">radius</code> &lt;= distance &lt;= <code translate="no">range_filter</code></td></tr>
-<tr><td><code translate="no">COSINE</code></td><td>Ein größerer Kosinuswert deutet auf eine größere Ähnlichkeit hin.</td><td>Um die nächstgelegenen Vektoren aus den Ergebnissen auszuschließen, stellen Sie sicher, dass:<br/> <code translate="no">radius</code> &lt; Abstand &lt;= <code translate="no">range_filter</code></td></tr>
+<tr><td><code translate="no">COSINE</code></td><td>Ein größerer Kosinuswert deutet auf eine größere Ähnlichkeit hin.</td><td>Um die engsten Vektoren von den Ergebnissen auszuschließen, stellen Sie sicher, dass:<br/> <code translate="no">radius</code> &lt; Abstand &lt;= <code translate="no">range_filter</code></td></tr>
 <tr><td><code translate="no">JACCARD</code></td><td>Kleinere Jaccard-Distanzen weisen auf eine höhere Ähnlichkeit hin.</td><td>Um die nächstgelegenen Vektoren aus den Ergebnissen auszuschließen, stellen Sie sicher, dass:<br/> <code translate="no">range_filter</code> &lt;= distance &lt; <code translate="no">radius</code></td></tr>
 <tr><td><code translate="no">HAMMING</code></td><td>Kleinere Hamming-Distanzen weisen auf eine höhere Ähnlichkeit hin.</td><td>Um die nächstgelegenen Vektoren aus den Ergebnissen auszuschließen, stellen Sie sicher, dass:<br/> <code translate="no">range_filter</code> &lt;= distance &lt; <code translate="no">radius</code></td></tr>
 </tbody>
@@ -1718,7 +1720,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
         ></path>
       </svg>
     </button></h2><p>In Milvus wurde die Gruppierungssuche entwickelt, um die Vollständigkeit und Genauigkeit der Suchergebnisse zu verbessern.</p>
-<p>Stellen Sie sich ein Szenario in RAG vor, in dem eine Menge von Dokumenten in verschiedene Passagen aufgeteilt ist und jede Passage durch eine Vektoreinbettung dargestellt wird. Die Benutzer wollen die relevantesten Passagen finden, um die LLMs genau abzufragen. Die gewöhnliche Milvus-Suchfunktion kann diese Anforderung erfüllen, aber sie kann zu stark verzerrten und voreingenommenen Ergebnissen führen: Die meisten Passagen stammen aus nur wenigen Dokumenten, und die Vollständigkeit der Suchergebnisse ist sehr gering. Dies kann die Genauigkeit oder sogar die Korrektheit der vom LLM gelieferten Ergebnisse ernsthaft beeinträchtigen und die Erfahrung der LLM-Nutzer negativ beeinflussen.</p>
+<p>Stellen Sie sich ein Szenario in RAG vor, in dem eine Menge von Dokumenten in verschiedene Passagen aufgeteilt ist und jede Passage durch eine Vektoreinbettung dargestellt wird. Die Benutzer möchten die relevantesten Passagen finden, um die LLMs genau abzufragen. Die gewöhnliche Milvus-Suchfunktion kann diese Anforderung erfüllen, aber sie kann zu stark verzerrten und voreingenommenen Ergebnissen führen: Die meisten Passagen stammen aus nur wenigen Dokumenten, und die Vollständigkeit der Suchergebnisse ist sehr gering. Dies kann die Genauigkeit oder sogar die Korrektheit der vom LLM gelieferten Ergebnisse ernsthaft beeinträchtigen und die Erfahrung der LLM-Nutzer negativ beeinflussen.</p>
 <p>Die Gruppensuche kann dieses Problem wirksam lösen. Durch Übergabe eines group_by_field und group_size können Milvus-Benutzer die Suchergebnisse in mehrere Gruppen aufteilen und sicherstellen, dass die Anzahl der Entitäten aus jeder Gruppe eine bestimmte group_size nicht überschreitet. Diese Funktion kann den Umfang und die Fairness der Suchergebnisse erheblich steigern und die Qualität der LLM-Ausgabe spürbar verbessern.</p>
 <p>Hier ist der Beispielcode zum Gruppieren von Suchergebnissen nach Feld:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Connect to Milvus</span>
@@ -1834,7 +1836,7 @@ search_parameters = {
 <tr><td><code translate="no">metric_type</code></td><td>Wie wird die Ähnlichkeit zwischen Vektoreinbettungen gemessen.<br/> Mögliche Werte sind <code translate="no">IP</code>, <code translate="no">L2</code>, <code translate="no">COSINE</code>, <code translate="no">JACCARD</code> und <code translate="no">HAMMING</code>, und sind standardmäßig die der geladenen Indexdatei.</td></tr>
 <tr><td><code translate="no">params.nprobe</code></td><td>Anzahl der Einheiten, die während der Suche abgefragt werden.<br/> Der Wert fällt in den Bereich [1, nlist<sub>[1]</sub>].</td></tr>
 <tr><td><code translate="no">params.level</code></td><td>Genauigkeitsgrad der Suche.<br/> Mögliche Werte sind <code translate="no">1</code>, <code translate="no">2</code> und <code translate="no">3</code>, der Standardwert ist <code translate="no">1</code>. Höhere Werte liefern genauere Ergebnisse, aber eine langsamere Leistung.</td></tr>
-<tr><td><code translate="no">params.radius</code></td><td>Legt die äußere Begrenzung des Suchraums fest. Nur Vektoren, die innerhalb dieses Abstands zum Abfragevektor liegen, werden als potenzielle Übereinstimmungen betrachtet.<br/>Der Wertebereich wird durch den Parameter <code translate="no">metric_type</code> bestimmt. Wenn beispielsweise <code translate="no">metric_type</code> auf <code translate="no">L2</code> eingestellt ist, ist der gültige Wertebereich <code translate="no">[0, ∞]</code>. Wenn <code translate="no">metric_type</code> auf <code translate="no">COSINE</code> eingestellt ist, ist der gültige Wertebereich <code translate="no">[-1, 1]</code>. Weitere Informationen finden Sie unter <a href="/docs/de/metric.md">Ähnlichkeitsmetriken</a>.</td></tr>
+<tr><td><code translate="no">params.radius</code></td><td>Legt die äußere Begrenzung des Suchraums fest. Nur Vektoren, die innerhalb dieses Abstands zum Abfragevektor liegen, werden als potenzielle Übereinstimmungen betrachtet.<br/>Der Wertebereich wird durch den Parameter <code translate="no">metric_type</code> bestimmt. Wenn <code translate="no">metric_type</code> beispielsweise auf <code translate="no">L2</code> eingestellt ist, ist der gültige Wertebereich <code translate="no">[0, ∞]</code>. Wenn <code translate="no">metric_type</code> auf <code translate="no">COSINE</code> eingestellt ist, ist der gültige Wertebereich <code translate="no">[-1, 1]</code>. Weitere Informationen finden Sie unter <a href="/docs/de/metric.md">Ähnlichkeitsmetriken</a>.</td></tr>
 <tr><td><code translate="no">params.range_filter</code></td><td>Während <code translate="no">radius</code> die äußere Grenze der Suche festlegt, kann <code translate="no">range_filter</code> optional verwendet werden, um eine innere Grenze zu definieren und einen Abstandsbereich zu schaffen, in den Vektoren fallen müssen, um als übereinstimmend zu gelten.<br/>Der Wertebereich wird durch den Parameter <code translate="no">metric_type</code> bestimmt. Wenn beispielsweise <code translate="no">metric_type</code> auf <code translate="no">L2</code> gesetzt ist, ist der gültige Wertebereich <code translate="no">[0, ∞]</code>. Wenn <code translate="no">metric_type</code> auf <code translate="no">COSINE</code> gesetzt ist, ist der gültige Wertebereich <code translate="no">[-1, 1]</code>. Weitere Informationen finden Sie unter <a href="/docs/de/metric.md">Ähnlichkeitsmetriken</a>.</td></tr>
 </tbody>
 </table>

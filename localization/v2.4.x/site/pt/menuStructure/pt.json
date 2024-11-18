@@ -138,7 +138,7 @@
                 "children": []
               },
               {
-                "label": "Carta do leme",
+                "label": "Mapa do leme",
                 "id": "install_cluster-helm-gpu.md",
                 "order": 1,
                 "children": []
@@ -302,12 +302,6 @@
         "label": "Reranking",
         "id": "reranking.md",
         "order": 9,
-        "children": []
-      },
-      {
-        "label": "Utilizadores e funções",
-        "id": "users_and_roles.md",
-        "order": 10,
         "children": []
       },
       {
@@ -1058,6 +1052,12 @@
             "children": []
           },
           {
+            "label": "Utilizadores, privilégios e funções",
+            "id": "users_and_roles.md",
+            "order": 10,
+            "children": []
+          },
+          {
             "label": "Ativar RBAC",
             "id": "rbac.md",
             "order": 1,
@@ -1421,6 +1421,18 @@
             "children": []
           },
           {
+            "label": "DocsGPT",
+            "id": "use_milvus_in_docsgpt.md",
+            "order": 9,
+            "children": []
+          },
+          {
+            "label": "SambaNova",
+            "id": "use_milvus_with_sambanova.md",
+            "order": 10,
+            "children": []
+          },
+          {
             "label": "PrivadoGPT",
             "id": "use_milvus_in_private_gpt.md",
             "order": 8,
@@ -1444,6 +1456,12 @@
             "id": "integrate_with_camel.md",
             "order": 1,
             "children": []
+          },
+          {
+            "label": "Mem0",
+            "id": "quickstart_mem0_with_milvus.md",
+            "order": 2,
+            "children": []
           }
         ]
       },
@@ -1462,6 +1480,12 @@
             "label": "Vanna",
             "id": "integrate_with_vanna.md",
             "order": 1,
+            "children": []
+          },
+          {
+            "label": "Tabela de conhecimentos",
+            "id": "knowledge_table_with_milvus.md",
+            "order": 2,
             "children": []
           }
         ]
@@ -1631,6 +1655,12 @@
         "label": "Recomendação de filmes",
         "id": "movie_recommendation_with_milvus.md",
         "order": 9,
+        "children": []
+      },
+      {
+        "label": "Pesquisa de funil com embeddings Matryoshka",
+        "id": "funnel_search_with_matryoshka.md",
+        "order": 10,
         "children": []
       },
       {

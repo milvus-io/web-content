@@ -4,9 +4,9 @@ related_key: 'users, roles'
 summary: >-
   Découvrez la définition des utilisateurs, des rôles, des objets et des
   privilèges dans le cadre du contrôle d'accès basé sur les rôles (RBAC).
-title: Utilisateurs et rôles
+title: 'Utilisateurs, privilèges et rôles'
 ---
-<h1 id="Users-and-Roles" class="common-anchor-header">Utilisateurs et rôles<button data-href="#Users-and-Roles" class="anchor-icon" translate="no">
+<h1 id="Users-Privileges-and-Roles" class="common-anchor-header">Utilisateurs, privilèges et rôles<button data-href="#Users-Privileges-and-Roles" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -184,7 +184,7 @@ client.grantPrivilege(grantPrivilegeReq);
 <tr><td>Global</td><td>Créer un propriétaire</td><td>CreateUser CreateRole</td></tr>
 <tr><td>Global</td><td>Abandonner le propriétaire</td><td>DeleteCredential DropRole</td></tr>
 <tr><td>Global</td><td>Sélectionner un propriétaire</td><td>SelectRole/SelectGrant</td></tr>
-<tr><td>Global</td><td>ManageOwnership</td><td>OperateUserRole OperatePrivilege</td></tr>
+<tr><td>Global</td><td>ManageOwnership</td><td>Exploiter le rôle de l'utilisateur Exploiter le privilège</td></tr>
 <tr><td>Global</td><td>Créer un groupe de ressources</td><td>Créer un groupe de ressources</td></tr>
 <tr><td>Global</td><td>DropResourceGroup</td><td>DropResourceGroup</td></tr>
 <tr><td>Global</td><td>DescribeResourceGroup</td><td>DescribeResourceGroup (Décrire le groupe de ressources)</td></tr>

@@ -26,7 +26,7 @@ title: Pesquisa híbrida
 <p>Neste tutorial, você aprenderá como:</p>
 <ul>
 <li><p>Criar várias instâncias de <code translate="no">AnnSearchRequest</code> para pesquisas de similaridade em diferentes campos vetoriais;</p></li>
-<li><p>Configurar uma estratégia de classificação para combinar e classificar novamente os resultados de pesquisa de várias instâncias de <code translate="no">AnnSearchRequest</code>;</p></li>
+<li><p>Configurar uma estratégia de classificação para combinar e classificar os resultados de pesquisa de várias instâncias de <code translate="no">AnnSearchRequest</code>;</p></li>
 <li><p>Utilizar o método <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/ORM/Collection/hybrid_search.md"><code translate="no">hybrid_search()</code></a> para executar uma pesquisa híbrida.</p></li>
 </ul>
 <div class="alert note">
@@ -54,7 +54,7 @@ title: Pesquisa híbrida
 
 <span class="hljs-comment"># Connect to Milvus</span>
 connections.connect(
-    host=<span class="hljs-string">&quot;10.102.7.3&quot;</span>, <span class="hljs-comment"># Replace with your Milvus server IP</span>
+    host=<span class="hljs-string">&quot;127.0.0.1&quot;</span>, <span class="hljs-comment"># Replace with your Milvus server IP</span>
     port=<span class="hljs-string">&quot;19530&quot;</span>
 )
 
@@ -214,7 +214,7 @@ rerank = RRFRanker()
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Com as instâncias de <code translate="no">AnnSearchRequest</code> e a estratégia de reranking definidas, use o método <code translate="no">hybrid_search()</code> para executar a pesquisa híbrida.</p>
+    </button></h2><p>Com as instâncias <code translate="no">AnnSearchRequest</code> e a estratégia de reranking definidas, use o método <code translate="no">hybrid_search()</code> para executar a pesquisa híbrida.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Before conducting hybrid search, load the collection into memory.</span>
 collection.load()
 
@@ -276,7 +276,7 @@ res = collection.hybrid_search(
       </svg>
     </button></h2><ul>
 <li><p><strong>Em que cenário a pesquisa híbrida é recomendada?</strong></p>
-<p>A pesquisa híbrida é ideal para situações complexas que exigem uma elevada precisão, especialmente quando uma entidade pode ser representada por vários vectores diferentes. Isto aplica-se aos casos em que os mesmos dados, como uma frase, são processados através de diferentes modelos de incorporação ou quando a informação multimodal (como imagens, impressões digitais e impressões de voz de um indivíduo) é convertida em vários formatos vectoriais. Ao atribuir pesos a estes vectores, a sua influência combinada pode enriquecer significativamente a recuperação e melhorar a eficácia dos resultados da pesquisa.</p></li>
+<p>A pesquisa híbrida é ideal para situações complexas que exigem uma elevada precisão, especialmente quando uma entidade pode ser representada por vários vectores diferentes. Isto aplica-se a casos em que os mesmos dados, como uma frase, são processados através de diferentes modelos de incorporação ou quando a informação multimodal (como imagens, impressões digitais e impressões de voz de um indivíduo) é convertida em vários formatos vectoriais. Ao atribuir pesos a estes vectores, a sua influência combinada pode enriquecer significativamente a recuperação e melhorar a eficácia dos resultados da pesquisa.</p></li>
 <li><p><strong>Como é que um classificador ponderado normaliza as distâncias entre diferentes campos vectoriais?</strong></p>
 <p>Um classificador ponderado normaliza as distâncias entre campos vectoriais utilizando pesos atribuídos a cada campo. Calcula a importância de cada campo vetorial de acordo com o seu peso, dando prioridade aos que têm pesos mais elevados. É aconselhável utilizar o mesmo tipo de métrica nos pedidos de pesquisa ANN para garantir a consistência. Este método garante que os vectores considerados mais significativos têm uma maior influência na classificação geral.</p></li>
 <li><p><strong>É possível utilizar classificadores alternativos como o Cohere Ranker ou o BGE Ranker?</strong></p>

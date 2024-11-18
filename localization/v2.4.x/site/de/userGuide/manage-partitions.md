@@ -63,7 +63,7 @@ title: Verwalten von Partitionen
 <p>Für Vorbereitungen verwenden Sie <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Client/MilvusClientV2.md"><code translate="no">MilvusClientV2</code></a> um eine Verbindung zu Milvus herzustellen und <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Collections/createCollection.md"><code translate="no">createCollection()</code></a> um eine Sammlung im Schnelleinstellungsmodus anzulegen.</p>
 </div>
 <div class="language-javascript">
-<p>Für Vorbereitungen, verwenden Sie <a href="https://milvus.io/api-reference/node/v2.4.x/Client/MilvusClient.md"><code translate="no">MilvusClient</code></a> um eine Verbindung zu Milvus herzustellen und <a href="https://milvus.io/api-reference/node/v2.4.x/Collections/createCollection.md"><code translate="no">createCollection()</code></a> um eine Sammlung im Quick-Setup-Modus zu erstellen.</p>
+<p>Für Vorbereitungen, verwenden Sie <a href="https://milvus.io/api-reference/node/v2.4.x/Client/MilvusClient.md"><code translate="no">MilvusClient</code></a> um eine Verbindung zu Milvus herzustellen und <a href="https://milvus.io/api-reference/node/v2.4.x/Collections/createCollection.md"><code translate="no">createCollection()</code></a> um eine Sammlung im Schnelleinrichtungsmodus zu erstellen.</p>
 </div>
 <div class="multipleCode">
    <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a></div>
@@ -182,7 +182,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 <div class="admonition note">
 <p><b>Hinweise</b></p>
 <p>Wenn Sie ein Feld als Partitionsschlüssel in einer Sammlung festgelegt haben, erstellt Milvus mindestens <strong>64</strong> Partitionen zusammen mit der Sammlung. Bei der Auflistung der Partitionen können die Ergebnisse von der Ausgabe der obigen Codeschnipsel abweichen.</p>
-<p>Details dazu finden Sie unter <a href="https://milvus.io/docs/use-partition-key.md">Partitionsschlüssel verwenden</a>.</p>
+<p>Details finden Sie unter <a href="https://milvus.io/docs/use-partition-key.md">Partitionsschlüssel verwenden</a>.</p>
 </div>
 <h2 id="Create-Partitions" class="common-anchor-header">Partitionen erstellen<button data-href="#Create-Partitions" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -652,7 +652,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
     partition_names=[<span class="hljs-string">&quot;partitionA&quot;</span>, <span class="hljs-string">&quot;partitionB&quot;</span>]
 )
 
-res = client.get_load_status(
+res = client.get_load_state(
     collection_name=<span class="hljs-string">&quot;quick_setup&quot;</span>,
     partition_name=<span class="hljs-string">&quot;partitionA&quot;</span>
 )
@@ -663,7 +663,7 @@ res = client.get_load_status(
 <span class="hljs-comment">#     &quot;state&quot;: &quot;&lt;LoadState: Loaded&gt;&quot;</span>
 <span class="hljs-comment"># }</span>
 
-res = client.get_load_status(
+res = client.get_load_state(
     collection_name=<span class="hljs-string">&quot;quick_setup&quot;</span>,
     partition_name=<span class="hljs-string">&quot;partitionB&quot;</span>
 )
@@ -820,7 +820,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
     partition_names=[<span class="hljs-string">&quot;_default&quot;</span>, <span class="hljs-string">&quot;partitionA&quot;</span>, <span class="hljs-string">&quot;partitionB&quot;</span>]
 )
 
-res = client.get_load_status(
+res = client.get_load_state(
     collection_name=<span class="hljs-string">&quot;quick_setup&quot;</span>,
 )
 
@@ -939,7 +939,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 <li><p><strong>Wie viele Daten können in einer Partition gespeichert werden?</strong></p>
 <p>Es wird empfohlen, weniger als 1B an Daten in einer Partition zu speichern.</p></li>
 <li><p><strong>Wie viele Partitionen können maximal erstellt werden?</strong></p>
-<p>Standardmäßig erlaubt Milvus die Erstellung von maximal 1.024 Partitionen. Sie können die maximale Anzahl der Partitionen anpassen, indem Sie <code translate="no">rootCoord.maxPartitionNum</code> konfigurieren. Einzelheiten finden Sie unter <a href="https://milvus.io/docs/configure_rootcoord.md#rootCoordmaxPartitionNum">Systemkonfigurationen</a>.</p></li>
+<p>Standardmäßig erlaubt Milvus die Erstellung von maximal 1.024 Partitionen. Sie können die maximale Anzahl der Partitionen anpassen, indem Sie <code translate="no">rootCoord.maxPartitionNum</code> konfigurieren. Einzelheiten hierzu finden Sie unter <a href="https://milvus.io/docs/configure_rootcoord.md#rootCoordmaxPartitionNum">Systemkonfigurationen</a>.</p></li>
 <li><p><strong>Wie kann ich zwischen Partitionen und Partitionsschlüsseln unterscheiden?</strong></p>
 <p>Partitionen sind physische Speichereinheiten, während Partitionsschlüssel logische Konzepte sind, die Daten automatisch bestimmten Partitionen auf der Grundlage einer bestimmten Spalte zuweisen.</p>
 <p>Wenn Sie beispielsweise in Milvus eine Sammlung mit einem Partitionsschlüssel haben, der als Feld <code translate="no">color</code> definiert ist, ordnet das System die Daten automatisch den Partitionen zu, basierend auf den Hash-Werten des Feldes <code translate="no">color</code> für jede Entität. Dieser automatisierte Prozess entbindet den Benutzer von der Verantwortung, die Partition beim Einfügen oder Suchen von Daten manuell anzugeben.</p>

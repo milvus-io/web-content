@@ -248,7 +248,7 @@ System.out.println(wrapper.getInsertCount());
 </ol>
 <div class="multipleCode">
    <a href="#python">Python </a> <a href="#java">Java</a></div>
-<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> Collection
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> Collection,connections
 
 <span class="hljs-comment"># 4. Search with iterator</span>
 connections.connect(host=<span class="hljs-string">&quot;127.0.0.1&quot;</span>, port=<span class="hljs-number">19530</span>)
@@ -401,7 +401,7 @@ System.out.println(results.size());
     </tr>
     <tr>
       <td><code translate="no">withVectors</code></td>
-      <td>Legen Sie die Zielvektoren fest. Bis zu 16384 Vektoren sind zulässig.</td>
+      <td>Legen Sie die Zielvektoren fest. Bis zu 16384 Vektoren sind erlaubt.</td>
     </tr>
     <tr>
       <td><code translate="no">withBatchSize</code></td>

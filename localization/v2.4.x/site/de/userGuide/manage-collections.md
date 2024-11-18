@@ -394,7 +394,7 @@ schema.addField(AddFieldReq.builder()
     </tr>
     <tr>
       <td><code translate="no">dim</code></td>
-      <td>Die Dimensionalität des Sammlungsfelds, das die Vektoreinbettungen enthält.<br/>Der Wert sollte eine ganze Zahl größer als 1 sein und wird in der Regel durch das Modell bestimmt, das Sie zur Erzeugung von Vektoreinbettungen verwenden.</td>
+      <td>Die Dimensionalität des Sammlungsfeldes, das die Vektoreinbettungen enthält.<br/>Der Wert sollte eine ganze Zahl größer als 1 sein und wird in der Regel durch das Modell bestimmt, das Sie zur Erzeugung von Vektoreinbettungen verwenden.</td>
     </tr>
   </tbody>
 </table>
@@ -1210,7 +1210,7 @@ $ curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable
 <p>Um die Details einer bestehenden Sammlung zu überprüfen, verwenden Sie <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Collections/describeCollection.md">describeCollection()</a>.</p>
 </div>
 <div class="language-javascript">
-<p>Um die Details einer bestehenden Sammlung zu überprüfen, verwenden Sie <a href="https://milvus.io/api-reference/node/v2.4.x/Collections/describeCollection.md">describeCollection()</a>.</p>
+<p>Um die Details einer bestehenden Sammlung zu prüfen, verwenden Sie <a href="https://milvus.io/api-reference/node/v2.4.x/Collections/describeCollection.md">describeCollection()</a>.</p>
 </div>
 <div class="language-shell">
 <p>Um die Definition einer Sammlung zu sehen, können Sie die <a href="https://milvus.io/api-reference/restful/v2.4.x/v2/Collection%20(v2)/Describe.md"><code translate="no">POST /v2/vectordb/collections/describe</code></a> und die <a href="https://milvus.io/api-reference/restful/v2.4.x/v2/Collection%20(v2)/List.md"><code translate="no">POST /v2/vectordb/collections/list</code></a> API-Endpunkte verwenden.</p>
@@ -1601,7 +1601,7 @@ $ curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># 7. Load the collection</span>
 client.load_collection(
     collection_name=<span class="hljs-string">&quot;customized_setup_2&quot;</span>,
-    load_fields=[<span class="hljs-string">&quot;my_id&quot;</span>, <span class="hljs-string">&quot;my_vector&quot;</span>] <span class="hljs-comment"># Load only the specified fields</span>
+    load_fields=[<span class="hljs-string">&quot;my_id&quot;</span>, <span class="hljs-string">&quot;my_vector&quot;</span>], <span class="hljs-comment"># Load only the specified fields</span>
     skip_load_dynamic_field=<span class="hljs-literal">True</span> <span class="hljs-comment"># Skip loading the dynamic field</span>
 )
 

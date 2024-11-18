@@ -31,9 +31,9 @@ title: Vue d'ensemble des intégrations
 <tr><td><a href="/docs/fr/milvus_hybrid_search_retriever.md">Milvus Hybrid Search Retriever dans LangChain</a></td><td>Recherche hybride</td><td>Milvus, LangChain</td></tr>
 <tr><td><a href="/docs/fr/integrate_with_openai.md">Recherche sémantique avec Milvus et OpenAI</a></td><td>Recherche sémantique</td><td>Milvus, OpenAI</td></tr>
 <tr><td><a href="/docs/fr/integrate_with_cohere.md">Réponse aux questions avec Milvus et Cohere</a></td><td>Recherche sémantique</td><td>Milvus, Cohere</td></tr>
-<tr><td><a href="/docs/fr/integrate_with_hugging-face.md">Réponse aux questions en utilisant Milvus et HuggingFace</a></td><td>Réponse aux questions</td><td>Milvus, HuggingFace</td></tr>
+<tr><td><a href="/docs/fr/integrate_with_hugging-face.md">Réponse aux questions avec Milvus et HuggingFace</a></td><td>Réponse aux questions</td><td>Milvus, HuggingFace</td></tr>
 <tr><td><a href="/docs/fr/integrate_with_pytorch.md">Recherche d'images avec Milvus et Pytorch</a></td><td>Recherche sémantique</td><td>Milvus, Pytorch</td></tr>
-<tr><td><a href="/docs/fr/integrate_with_sentencetransformers.md">Recherche de films utilisant Milvus et SentenceTransfromers</a></td><td>Recherche sémantique</td><td>Milvus, SentenceTransformers</td></tr>
+<tr><td><a href="/docs/fr/integrate_with_sentencetransformers.md">Recherche de films avec Milvus et SentenceTransfromers</a></td><td>Recherche sémantique</td><td>Milvus, SentenceTransformers</td></tr>
 <tr><td><a href="/docs/fr/basic_usage_langchain.md">Utiliser Milvus comme magasin de vecteurs dans LangChain</a></td><td>Recherche sémantique</td><td>Milvus, LangChain</td></tr>
 <tr><td><a href="/docs/fr/integrate_with_haystack.md">RAG avec Milvus et Haystack</a></td><td>RAG</td><td>Milvus, Haystack</td></tr>
 <tr><td><a href="/docs/fr/integrate_with_voxel51.md">Recherche de vision avec Milvus et FiftyOne</a></td><td>Recherche sémantique</td><td>Milvus, FiftyOne</td></tr>
@@ -44,7 +44,7 @@ title: Vue d'ensemble des intégrations
 <tr><td><a href="/docs/fr/integrate_with_snowpark.md">Milvus sur Snowpark Container Services</a></td><td>Connexion de données</td><td>Milvus, Snowpark</td></tr>
 <tr><td><a href="/docs/fr/integrate_with_whyhow.md">Recherche basée sur des règles avec Milvus et WhyHow</a></td><td>Réponse aux questions</td><td>Milvus, WhyHow</td></tr>
 <tr><td><a href="/docs/fr/integrate_with_langfuse.md">Milvus dans Langfuse</a></td><td>Observabilité</td><td>Milvus, Langfuse</td></tr>
-<tr><td><a href="/docs/fr/integrate_with_ragas.md">Évaluation RAG avec Ragas et Milvus</a></td><td>Évaluation</td><td>Milvus, Ragas</td></tr>
+<tr><td><a href="/docs/fr/integrate_with_ragas.md">Évaluation RAG avec Ragas et Milvus</a></td><td>L'évaluation</td><td>Milvus, Ragas</td></tr>
 <tr><td><a href="/docs/fr/integrate_with_memgpt.md">Agent Chatbot avec Milvus et MemGPT</a></td><td>Agent</td><td>Milvus, MemGPT</td></tr>
 <tr><td><a href="/docs/fr/integrate_with_fastgpt.md">Comment déployer FastGPT avec Milvus</a></td><td>RAG</td><td>Milvus, FastGPT</td></tr>
 <tr><td><a href="/docs/fr/integrate_with_vanna.md">Ecrire du SQL avec Vanna et Milvus</a></td><td>RAG</td><td>Milvus, Vanna</td></tr>
@@ -67,5 +67,9 @@ title: Vue d'ensemble des intégrations
 <tr><td><a href="/docs/fr/rag_with_milvus_and_unstructured.md">Construire un RAG avec Milvus et des sources de données non structurées</a></td><td>non structurées</td><td>Milvus, non structuré</td></tr>
 <tr><td><a href="/docs/fr/RAG_with_pii_and_milvus.md">Construire un RAG avec Milvus + PII Masker</a></td><td>Sources de données</td><td>Milvus, PII Masker</td></tr>
 <tr><td><a href="/docs/fr/use_milvus_in_private_gpt.md">Utiliser Milvus dans PrivateGPT</a></td><td>Ochestration</td><td>recherche vectorielle</td></tr>
+<tr><td><a href="/docs/fr/quickstart_mem0_with_milvus.md">Premiers pas avec Mem0 et Milvus</a></td><td>Agents</td><td>Mem0, Milvus</td></tr>
+<tr><td><a href="/docs/fr/knowledge_table_with_milvus.md">Tableau des connaissances avec Milvus</a></td><td>Ingénierie des connaissances</td><td>Tableau des connaissances, Milvus</td></tr>
+<tr><td><a href="/docs/fr/use_milvus_in_docsgpt.md">Utiliser Milvus dans DocsGPT</a></td><td>Ochestration</td><td>DocsGPT, Milvus</td></tr>
+<tr><td><a href="/docs/fr/use_milvus_with_sambanova.md">Utiliser Milvus avec SambaNova</a></td><td>Orchestration</td><td>Milvus, SambaNova</td></tr>
 </tbody>
 </table>

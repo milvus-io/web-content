@@ -356,11 +356,11 @@ schema.addField(AddFieldReq.builder()
     </tr>
     <tr>
       <td><code translate="no">isPrimaryKey</code></td>
-      <td>Indique si le champ actuel est le champ primaire d'une collection.<br/>Chaque collection ne possède qu'un seul champ primaire. Un champ primaire doit être de type <strong>DataType.Int64</strong> ou <strong>DataType.VarChar</strong>.</td>
+      <td>Indique si le champ actuel est le champ primaire d'une collection.<br/>Chaque collection n'a qu'un seul champ primaire. Un champ primaire doit être de type <strong>DataType.Int64</strong> ou <strong>DataType.VarChar</strong>.</td>
     </tr>
     <tr>
       <td><code translate="no">autoID</code></td>
-      <td>Indique si le champ primaire peut s'incrémenter automatiquement.<br/>La valeur <strong>true</strong> permet au champ primaire de s'incrémenter automatiquement. Dans ce cas, le champ primaire ne doit pas être inclus dans les données à insérer pour éviter les erreurs.</td>
+      <td>Permet au champ primaire de s'incrémenter automatiquement.<br/>La valeur <strong>true</strong> permet au champ primaire de s'incrémenter automatiquement. Dans ce cas, le champ primaire ne doit pas être inclus dans les données à insérer pour éviter les erreurs.</td>
     </tr>
     <tr>
       <td><code translate="no">dimension</code></td>
@@ -571,7 +571,7 @@ indexParams.add(indexParamForVectorField);
     </tr>
     <tr>
       <td><code translate="no">index_type</code></td>
-      <td>Le nom de l'algorithme utilisé pour organiser les données dans le champ spécifique. Pour les algorithmes applicables, voir <a href="https://milvus.io/docs/index.md">Index en mémoire</a> et <a href="https://milvus.io/docs/disk_index.md">Index sur disque</a>.</td>
+      <td>Nom de l'algorithme utilisé pour organiser les données dans le champ spécifique. Pour les algorithmes applicables, voir <a href="https://milvus.io/docs/index.md">Index en mémoire</a> et <a href="https://milvus.io/docs/disk_index.md">Index sur disque</a>.</td>
     </tr>
     <tr>
       <td><code translate="no">metric_type</code></td>
@@ -1601,7 +1601,7 @@ $ curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># 7. Load the collection</span>
 client.load_collection(
     collection_name=<span class="hljs-string">&quot;customized_setup_2&quot;</span>,
-    load_fields=[<span class="hljs-string">&quot;my_id&quot;</span>, <span class="hljs-string">&quot;my_vector&quot;</span>] <span class="hljs-comment"># Load only the specified fields</span>
+    load_fields=[<span class="hljs-string">&quot;my_id&quot;</span>, <span class="hljs-string">&quot;my_vector&quot;</span>], <span class="hljs-comment"># Load only the specified fields</span>
     skip_load_dynamic_field=<span class="hljs-literal">True</span> <span class="hljs-comment"># Skip loading the dynamic field</span>
 )
 
@@ -2076,7 +2076,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 <p>Pour réaffecter des alias à d'autres collections, utilisez la méthode <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Collections/alterAlias.md"><code translate="no">alterAlias()</code></a> en spécifiant le nom de la collection et l'alias.</p>
 </div>
 <div class="language-javascript">
-<p>Pour réaffecter des alias à d'autres collections, utilisez la méthode <a href="https://milvus.io/api-reference/node/v2.4.x/Collections/alterAlias.md"><code translate="no">alterAlias()</code></a> en précisant le nom de la collection et l'alias.</p>
+<p>Pour réaffecter des alias à d'autres collections, utilisez la méthode <a href="https://milvus.io/api-reference/node/v2.4.x/Collections/alterAlias.md"><code translate="no">alterAlias()</code></a> en spécifiant le nom de la collection et l'alias.</p>
 </div>
 <div class="language-shell">
 <p>Pour réaffecter des alias à d'autres collections, vous pouvez utiliser le point de terminaison de l'API <a href="https://milvus.io/api-reference/restful/v2.4.x/v2/Alias%20(v2)/Alter.md"><code translate="no">POST /v2/vectordb/aliases/alter</code></a> pour réaffecter des alias à d'autres collections, vous pouvez utiliser le point de terminaison de l'API.</p>

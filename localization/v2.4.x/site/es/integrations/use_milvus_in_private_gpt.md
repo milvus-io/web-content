@@ -67,13 +67,15 @@ $ <span class="hljs-built_in">cd</span> private-gpt
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>PrivateGPT permite personalizar la configuración. Necesitamos especificar la configuración de algunos módulos. En este tutorial, utilizaremos los siguientes módulos:</p>
+    </button></h2><p>PrivateGPT permite personalizar la configuración de algunos módulos, por ejemplo LLM, Embeddings, Vector Stores, UI.</p>
+<p>En este tutorial, utilizaremos los siguientes módulos:</p>
 <ul>
 <li><strong>LLM</strong>: Ollama</li>
 <li><strong>Embeddings</strong>: Ollama</li>
 <li><strong>Almacenes vectoriales</strong>: Milvus</li>
 <li><strong>IU</strong>: Gradio</li>
 </ul>
+<p>Ejecute el siguiente comando para utilizar la poesía para instalar las dependencias de los módulos necesarios:</p>
 <pre><code translate="no" class="language-shell">$ poetry install --extras <span class="hljs-string">&quot;llms-ollama embeddings-ollama vector-stores-milvus ui&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Start-Ollama-service" class="common-anchor-header">Iniciar el servicio Ollama<button data-href="#Start-Ollama-service" class="anchor-icon" translate="no">
@@ -92,11 +94,11 @@ $ <span class="hljs-built_in">cd</span> private-gpt
         ></path>
       </svg>
     </button></h2><p>Vaya a <a href="https://ollama.com/">ollama.ai</a> y siga las instrucciones para instalar Ollama en su máquina.</p>
-<p>Tras la instalación, asegúrese de que la aplicación de escritorio de Ollama está cerrada.</p>
+<p>Tras la instalación, asegúrate de que la aplicación de escritorio de Ollama está cerrada.</p>
 <p>Ahora, inicie el servicio Ollama (iniciará un servidor de inferencia local, sirviendo tanto al LLM como a los Embeddings):</p>
 <pre><code translate="no" class="language-shell">$ ollama serve
 <button class="copy-code-btn"></button></code></pre>
-<p>Instale los modelos que se van a utilizar, por defecto <code translate="no">settings-ollama.yaml</code> está configurado para el usuario llama3.1 8b LLM (~4GB) y nomic-embed-text Embeddings (~275MB)</p>
+<p>Instale los modelos que se van a utilizar, por defecto <code translate="no">settings-ollama.yaml</code> está configurado para el usuario <code translate="no">llama3.1</code> 8b LLM (~4GB) y <code translate="no">nomic-embed-text</code> Embeddings (~275MB)</p>
 <p>Por defecto, PrivateGPT extraerá automáticamente los modelos según sea necesario. Este comportamiento puede cambiarse modificando la propiedad <code translate="no">ollama.autopull_models</code>.</p>
 <p>En cualquier caso, si desea extraer modelos manualmente, ejecute los siguientes comandos:</p>
 <pre><code translate="no" class="language-shell">$ ollama pull llama3.1
@@ -133,7 +135,7 @@ $ ollama pull nomic-embed-text
 <tr><th>Campo Opción</th><th>Descripción</th></tr>
 </thead>
 <tbody>
-<tr><td>uri</td><td>Por defecto se establece en "local_data/private_gpt/milvus/milvus_local.db" como un archivo local; también puede configurar un servidor Milvus de mayor rendimiento en docker o k8s, por ejemplo http://localhost:19530, como su uri; Para utilizar Zilliz Cloud, ajuste la uri y el token a Endpoint y Api key en Zilliz Cloud.</td></tr>
+<tr><td>uri</td><td>Por defecto se establece en "local_data/private_gpt/milvus/milvus_local.db" como archivo local; también puede configurar un servidor Milvus de mayor rendimiento en docker o k8s, por ejemplo http://localhost:19530, como su uri; Para utilizar <a href="https://zilliz.com/cloud">Zilliz Cloud</a>, ajuste la uri y el token a <a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#cluster-details">Public Endpoint y API key</a> en Zilliz Cloud.</td></tr>
 <tr><td>token</td><td>Emparejar con el servidor Milvus en docker o k8s o la clave api de Zilliz Cloud.</td></tr>
 <tr><td>nombre_colección</td><td>El nombre de la colección, establecido por defecto "milvus_db".</td></tr>
 <tr><td>sobrescribir</td><td>Sobrescribe los datos de la colección si ya existían, establecido por defecto como True.</td></tr>
@@ -154,10 +156,10 @@ $ ollama pull nomic-embed-text
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Una vez realizadas todas las configuraciones, puede ejecutar PrivateGPT con una gradio UI.</p>
+    </button></h2><p>Una vez realizados todos los ajustes, puede ejecutar PrivateGPT con la interfaz de Gradio.</p>
 <pre><code translate="no" class="language-shell">PGPT_PROFILES=ollama <span class="hljs-built_in">make</span> run
 <button class="copy-code-btn"></button></code></pre>
-<p>La interfaz de usuario estará disponible en<code translate="no">http://0.0.0.0:8001</code>.</p>
+<p>La interfaz de usuario estará disponible en <code translate="no">http://0.0.0.0:8001</code>.</p>
 <p>
   <span class="img-wrapper">
     <img translate="no" src="/docs/v2.4.x/assets/private_gpt_ui.png" alt="" class="doc-image" id="" />
@@ -165,3 +167,4 @@ $ ollama pull nomic-embed-text
   </span>
 </p>
 <p>Puede jugar con la interfaz y hacer preguntas sobre sus documentos.</p>
+<p>Para más información, consulte la documentación oficial <a href="https://docs.privategpt.dev/">de Private</a> GPT.</p>

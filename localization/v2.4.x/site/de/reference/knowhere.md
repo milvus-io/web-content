@@ -55,7 +55,7 @@ title: Knowhere
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/knowhere_architecture.png" alt="Knowhere" class="doc-image" id="knowhere" />
    </span> <span class="img-wrapper"> <span>Knowhere</span> </span></p>
-<p>Die unterste Schicht ist die Systemhardware. Die Indexbibliotheken von Drittanbietern befinden sich oberhalb der Hardware. Dann interagiert Knowhere mit dem Indexknoten und dem Abfrageknoten auf der Oberseite über CGO, was es Go-Paketen ermöglicht, C-Code aufzurufen.</p>
+<p>Die unterste Schicht ist die Systemhardware. Darüber befinden sich die Indexbibliotheken von Drittanbietern. Auf der obersten Schicht interagiert Knowhere mit dem Indexknoten und dem Abfrageknoten über CGO, das es Go-Paketen ermöglicht, C-Code aufzurufen.</p>
 <h2 id="Knowhere-advantages" class="common-anchor-header">Knowhere Vorteile<button data-href="#Knowhere-advantages" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -71,14 +71,14 @@ title: Knowhere
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Im Folgenden werden die Vorteile von Knowhere gegenüber Faiss beschrieben.</p>
+    </button></h2><p>Im Folgenden sind die Vorteile von Knowhere gegenüber Faiss aufgeführt.</p>
 <h4 id="Support-for-BitsetView" class="common-anchor-header">Unterstützung für BitsetView</h4><p>Milvus führt einen Bitset-Mechanismus ein, um &quot;soft deletion&quot; zu realisieren. Ein sanft gelöschter Vektor existiert noch in der Datenbank, wird aber bei einer Vektorähnlichkeitssuche oder -abfrage nicht berechnet.</p>
 <p>Jedes Bit in einem Bitset entspricht einem indizierten Vektor. Wenn ein Vektor im Bitset mit "1" markiert ist, bedeutet dies, dass dieser Vektor "soft-deleted" ist und bei einer Vektorsuche nicht berücksichtigt wird. Der Bitset-Parameter wird auf alle exponierten Faiss-Indexabfrage-APIs in Knowhere angewendet, einschließlich CPU- und GPU-Indizes.</p>
 <p>Weitere Informationen über den Bitset-Mechanismus finden Sie unter <a href="/docs/de/bitset.md">Bitset</a>.</p>
 <h4 id="Support-for-multiple-similarity-metrics-for-indexing-binary-vectors" class="common-anchor-header">Unterstützung für mehrere Ähnlichkeitsmetriken zur Indizierung binärer Vektoren</h4><p>Knowhere unterstützt <a href="/docs/de/metric.md#Hamming-distance">Hamming</a>, <a href="/docs/de/metric.md#Jaccard-distance">Jaccard</a>, <a href="/docs/de/metric.md#Tanimoto-distance">Tanimoto</a>, <a href="/docs/de/metric.md#Superstructure">Superstructure</a>, und <a href="/docs/de/metric.md#Substructure">Substructure</a>. Jaccard und Tanimoto können verwendet werden, um die Ähnlichkeit zwischen zwei Mustersätzen zu messen, während Superstructure und Substructure verwendet werden können, um die Ähnlichkeit von chemischen Strukturen zu messen.</p>
 <h4 id="Support-for-AVX512-instruction-set" class="common-anchor-header">Unterstützung für AVX512-Befehlssatz</h4><p>Neben <a href="https://en.wikipedia.org/wiki/AArch64">AArch64</a>, <a href="https://en.wikipedia.org/wiki/SSE4#SSE4.2">SSE4.2</a> und <a href="https://en.wikipedia.org/wiki/Advanced_Vector_Extensions">AVX2</a>, den bereits von Faiss unterstützten Befehlssätzen, unterstützt Knowhere auch <a href="https://en.wikipedia.org/wiki/AVX-512">AVX512</a>, was <a href="https://milvus.io/blog/milvus-performance-AVX-512-vs-AVX2.md">die Leistung der Indexerstellung und -abfrage um 20 bis 30 %</a> im Vergleich zu AVX2 <a href="https://milvus.io/blog/milvus-performance-AVX-512-vs-AVX2.md">verbessern</a> kann.</p>
 <h4 id="Automatic-SIMD-instruction-selection" class="common-anchor-header">Automatische SIMD-Befehlsauswahl</h4><p>Knowhere unterstützt den automatischen Aufruf der geeigneten SIMD-Befehle (z. B. SIMD SSE, AVX, AVX2 und AVX512) auf jedem CPU-Prozessor (sowohl vor Ort als auch auf Cloud-Plattformen), so dass die Benutzer das SIMD-Flag (z. B. "-msse4") während der Kompilierung nicht manuell angeben müssen.</p>
-<p>Knowhere wird durch Refactoring der Codebasis von Faiss erstellt. Gängige Funktionen (z. B. Ähnlichkeitsberechnungen), die auf SIMD-Beschleunigung angewiesen sind, werden ausgegliedert. Dann werden für jede Funktion vier Versionen (d.h. SSE, AVX, AVX2, AVX512) implementiert und jeweils in eine separate Quelldatei geschrieben. Anschließend werden die Quelldateien einzeln mit dem entsprechenden SIMD-Flag weiter kompiliert. Daher kann Knowhere zur Laufzeit automatisch die am besten geeigneten SIMD-Anweisungen auf der Grundlage der aktuellen CPU-Flags auswählen und dann die richtigen Funktionszeiger mit Hooking verknüpfen.</p>
+<p>Knowhere wird durch Refactoring der Codebasis von Faiss erstellt. Gängige Funktionen (z. B. Ähnlichkeitsberechnungen), die auf SIMD-Beschleunigung angewiesen sind, werden ausgegliedert. Dann werden für jede Funktion vier Versionen (d.h. SSE, AVX, AVX2, AVX512) implementiert und jede in eine separate Quelldatei gestellt. Anschließend werden die Quelldateien einzeln mit dem entsprechenden SIMD-Flag weiter kompiliert. Daher kann Knowhere zur Laufzeit automatisch die am besten geeigneten SIMD-Anweisungen auf der Grundlage der aktuellen CPU-Flags auswählen und dann die richtigen Funktionszeiger mit Hooking verknüpfen.</p>
 <h4 id="Other-performance-optimization" class="common-anchor-header">Andere Leistungsoptimierungen</h4><p>Lesen Sie <a href="https://www.cs.purdue.edu/homes/csjgwang/pubs/SIGMOD21_Milvus.pdf">Milvus: A Purpose-Built Vector Data Management System</a> für weitere Informationen über die Leistungsoptimierung von Knowhere.</p>
 <h2 id="Knowhere-code-structure" class="common-anchor-header">Knowhere-Code-Struktur<button data-href="#Knowhere-code-structure" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -115,19 +115,19 @@ title: Knowhere
    </span> <span class="img-wrapper"> <span>IDMAP</span> </span></p>
 <p>Technisch gesehen handelt es sich bei <code translate="no">IDMAP</code> nicht um einen Index, sondern um eine Brute-Force-Suche. Wenn Vektoren in die Datenbank eingefügt werden, ist weder ein Datentraining noch ein Indexaufbau erforderlich. Die Suche wird direkt auf den eingefügten Vektordaten durchgeführt.</p>
 <p>Aus Gründen der Code-Konsistenz erbt <code translate="no">IDMAP</code> jedoch auch von der Klasse <code translate="no">VecIndex</code> mit all ihren virtuellen Schnittstellen. Die Verwendung von <code translate="no">IDMAP</code> ist die gleiche wie bei den anderen Indizes.</p>
-<h4 id="IVF-indexes" class="common-anchor-header">IVF-Indizes</h4><p>
+<h4 id="IVF-indices" class="common-anchor-header">IVF-Indizes</h4><p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/IVF.png" alt="IVF" class="doc-image" id="ivf" />
    </span> <span class="img-wrapper"> <span>IVF</span> </span></p>
 <p>Die IVF-Indizes (inverted file) sind die am häufigsten verwendeten Indizes. Die Klasse <code translate="no">IVF</code> wird von <code translate="no">VecIndex</code> und <code translate="no">FaissBaseIndex</code> abgeleitet und erweitert sich zu <code translate="no">IVFSQ</code> und <code translate="no">IVFPQ</code>. <code translate="no">GPUIVF</code> wird von <code translate="no">GPUIndex</code> und <code translate="no">IVF</code> abgeleitet. Dann erweitert sich <code translate="no">GPUIVF</code> weiter zu <code translate="no">GPUIVFSQ</code> und <code translate="no">GPUIVFPQ</code>.</p>
-<p><code translate="no">IVFSQHybrid</code> ist ein selbst entwickelter hybrider Index. Der Grobquantisierer wird auf der GPU ausgeführt, während die Suche im Bucket auf der CPU stattfindet. Diese Art von Index kann das Auftreten von Speicherkopien zwischen CPU und GPU reduzieren, indem die Rechenleistung der GPU genutzt wird. <code translate="no">IVFSQHybrid</code> hat die gleiche Auffindungsrate wie <code translate="no">GPUIVFSQ</code>, bietet aber eine bessere Leistung.</p>
+<p><code translate="no">IVFSQHybrid</code> ist ein selbst entwickelter hybrider Index. Ein grober Quantisierer wird auf der GPU ausgeführt, während die Suche im Bucket auf der CPU stattfindet. Diese Art von Index kann das Auftreten von Speicherkopien zwischen CPU und GPU reduzieren, indem die Rechenleistung der GPU genutzt wird. <code translate="no">IVFSQHybrid</code> hat die gleiche Auffindungsrate wie <code translate="no">GPUIVFSQ</code>, bietet aber eine bessere Leistung.</p>
 <p>Die Basisklassenstruktur für binäre Indizes ist relativ einfach. <code translate="no">BinaryIDMAP</code> und <code translate="no">BinaryIVF</code> sind von <code translate="no">FaissBaseBinaryIndex</code> und <code translate="no">VecIndex</code> abgeleitet.</p>
-<h4 id="Third-party-indexes" class="common-anchor-header">Indizes von Drittanbietern</h4><p>
+<h4 id="Third-party-indices" class="common-anchor-header">Indizes von Drittanbietern</h4><p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/third_party_index.png" alt="third-party indexes" class="doc-image" id="third-party-indexes" />
-   </span> <span class="img-wrapper"> <span>Indizes von Drittanbietern</span> </span></p>
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/third_party_index.png" alt="third-party indices" class="doc-image" id="third-party-indices" />
+   </span> <span class="img-wrapper"> <span>Drittanbieter-Indizes</span> </span></p>
 <p>Derzeit werden neben Faiss nur zwei Arten von Indizes von Drittanbietern unterstützt: der baumbasierte Index <code translate="no">Annoy</code> und der graphbasierte Index <code translate="no">HNSW</code>. Diese beiden gebräuchlichen und häufig verwendeten Indizes von Drittanbietern sind beide von <code translate="no">VecIndex</code> abgeleitet.</p>
-<h2 id="Adding-indexes-to-Knowhere" class="common-anchor-header">Hinzufügen von Indizes zu Knowhere<button data-href="#Adding-indexes-to-Knowhere" class="anchor-icon" translate="no">
+<h2 id="Adding-indices-to-Knowhere" class="common-anchor-header">Hinzufügen von Indizes zu Knowhere<button data-href="#Adding-indices-to-Knowhere" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -148,7 +148,7 @@ title: Knowhere
 <li><p>Um graph-basierte Indizes hinzuzufügen, lesen Sie <code translate="no">HNSW</code>.</p></li>
 <li><p>Um baumbasierte Indizes hinzuzufügen, lesen Sie bitte <code translate="no">Annoy</code>.</p></li>
 </ul>
-<p>Nachdem Sie sich auf den vorhandenen Index bezogen haben, können Sie die folgenden Schritte ausführen, um einen neuen Index zu Knowhere hinzuzufügen.</p>
+<p>Nachdem Sie auf einen bestehenden Index verwiesen haben, können Sie die folgenden Schritte ausführen, um einen neuen Index zu Knowhere hinzuzufügen.</p>
 <ol>
 <li><p>Fügen Sie den Namen des neuen Indexes in <code translate="no">IndexEnum</code> ein. Der Datentyp ist String.</p></li>
 <li><p>Fügen Sie eine Datenvalidierungsprüfung für den neuen Index in der Datei <code translate="no">ConfAdapter.cpp</code> hinzu. Die Validierungsprüfung dient hauptsächlich dazu, die Parameter für das Datentraining und die Abfrage zu validieren.</p></li>

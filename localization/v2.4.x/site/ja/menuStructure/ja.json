@@ -1,6 +1,6 @@
 [
   {
-    "label": "About Milvus",
+    "label": "Milvusについて",
     "id": "about",
     "isMenu": true,
     "order": 0,
@@ -305,13 +305,7 @@
         "children": []
       },
       {
-        "label": "ユーザーと役割",
-        "id": "users_and_roles.md",
-        "order": 10,
-        "children": []
-      },
-      {
-        "label": "インメモリ・レプリカ",
+        "label": "インメモリーレプリカ",
         "id": "replica.md",
         "order": 11,
         "children": []
@@ -367,7 +361,7 @@
             "children": []
           },
           {
-            "label": "GPUによるインデックス",
+            "label": "GPU付きインデックス",
             "id": "index-with-gpu.md",
             "order": 2,
             "children": []
@@ -641,7 +635,7 @@
     ]
   },
   {
-    "label": "Milvusマイグレーション",
+    "label": "Milvus移住",
     "id": "milvus_migration",
     "isMenu": true,
     "order": 5,
@@ -1058,6 +1052,12 @@
             "children": []
           },
           {
+            "label": "ユーザー、権限、役割",
+            "id": "users_and_roles.md",
+            "order": 10,
+            "children": []
+          },
+          {
             "label": "RBACを有効にする",
             "id": "rbac.md",
             "order": 1,
@@ -1244,7 +1244,7 @@
         "children": []
       },
       {
-        "label": "埋め込みモデル",
+        "label": "モデルの埋め込み",
         "id": "integrate-embeddings-models",
         "order": 1,
         "children": [
@@ -1421,6 +1421,18 @@
             "children": []
           },
           {
+            "label": "ドックスGPT",
+            "id": "use_milvus_in_docsgpt.md",
+            "order": 9,
+            "children": []
+          },
+          {
+            "label": "サンバ・ノヴァ",
+            "id": "use_milvus_with_sambanova.md",
+            "order": 10,
+            "children": []
+          },
+          {
             "label": "プライベートGPT",
             "id": "use_milvus_in_private_gpt.md",
             "order": 8,
@@ -1444,6 +1456,12 @@
             "id": "integrate_with_camel.md",
             "order": 1,
             "children": []
+          },
+          {
+            "label": "メム0",
+            "id": "quickstart_mem0_with_milvus.md",
+            "order": 2,
+            "children": []
           }
         ]
       },
@@ -1462,6 +1480,12 @@
             "label": "バンナ",
             "id": "integrate_with_vanna.md",
             "order": 1,
+            "children": []
+          },
+          {
+            "label": "ナレッジ・テーブル",
+            "id": "knowledge_table_with_milvus.md",
+            "order": 2,
             "children": []
           }
         ]
@@ -1631,6 +1655,12 @@
         "label": "映画推薦",
         "id": "movie_recommendation_with_milvus.md",
         "order": 9,
+        "children": []
+      },
+      {
+        "label": "マトリョーシカ埋め込みによる漏斗探索",
+        "id": "funnel_search_with_matryoshka.md",
+        "order": 10,
         "children": []
       },
       {

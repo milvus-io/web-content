@@ -26,7 +26,7 @@ title: Hybride Suche
 <p>In diesem Tutorial werden Sie lernen, wie man:</p>
 <ul>
 <li><p>Mehrere <code translate="no">AnnSearchRequest</code> Instanzen für Ähnlichkeitssuchen auf verschiedenen Vektorfeldern erstellen;</p></li>
-<li><p>eine Reranking-Strategie zu konfigurieren, um Suchergebnisse von mehreren <code translate="no">AnnSearchRequest</code> Instanzen zu kombinieren und zu ranken;</p></li>
+<li><p>eine Reranking-Strategie zu konfigurieren, um Suchergebnisse aus mehreren <code translate="no">AnnSearchRequest</code> Instanzen zu kombinieren und zu ranken;</p></li>
 <li><p>Verwenden Sie die <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/ORM/Collection/hybrid_search.md"><code translate="no">hybrid_search()</code></a> Methode, um eine hybride Suche durchzuführen.</p></li>
 </ul>
 <div class="alert note">
@@ -54,7 +54,7 @@ title: Hybride Suche
 
 <span class="hljs-comment"># Connect to Milvus</span>
 connections.connect(
-    host=<span class="hljs-string">&quot;10.102.7.3&quot;</span>, <span class="hljs-comment"># Replace with your Milvus server IP</span>
+    host=<span class="hljs-string">&quot;127.0.0.1&quot;</span>, <span class="hljs-comment"># Replace with your Milvus server IP</span>
     port=<span class="hljs-string">&quot;19530&quot;</span>
 )
 
@@ -181,7 +181,7 @@ reqs = [request_1, request_2]
     </button></h2><p>Nachdem Sie <code translate="no">AnnSearchRequest</code> Instanzen erstellt haben, konfigurieren Sie eine Reranking-Strategie, um die Ergebnisse zu kombinieren und neu zu ordnen. Derzeit gibt es zwei Optionen: <code translate="no">WeightedRanker</code> und <code translate="no">RRFRanker</code>. Weitere Informationen zu Ranking-Strategien finden Sie unter <a href="/docs/de/reranking.md">Reranking</a>.</p>
 <ul>
 <li><p>Gewichtetes Scoring verwenden</p>
-<p>Die <code translate="no">WeightedRanker</code> wird verwendet, um den Ergebnissen aus jeder Vektorfeldsuche mit bestimmten Gewichtungen Bedeutung zuzuweisen. Wenn Sie einige Vektorfelder gegenüber anderen bevorzugen, kann <code translate="no">WeightedRanker(value1, value2, ..., valueN)</code> dies in den kombinierten Suchergebnissen widerspiegeln.</p>
+<p>Die <code translate="no">WeightedRanker</code> wird verwendet, um den Ergebnissen aus jeder Vektorfeldsuche mit bestimmten Gewichten eine Bedeutung zuzuweisen. Wenn Sie einige Vektorfelder gegenüber anderen bevorzugen, kann <code translate="no">WeightedRanker(value1, value2, ..., valueN)</code> dies in den kombinierten Suchergebnissen widerspiegeln.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> WeightedRanker
 <span class="hljs-comment"># Use WeightedRanker to combine results with specified weights</span>
 <span class="hljs-comment"># Assign weights of 0.8 to text search and 0.2 to image search</span>
@@ -276,11 +276,11 @@ res = collection.hybrid_search(
       </svg>
     </button></h2><ul>
 <li><p><strong>In welchem Szenario ist die hybride Suche zu empfehlen?</strong></p>
-<p>Die hybride Suche ist ideal für komplexe Situationen, die eine hohe Genauigkeit erfordern, insbesondere wenn eine Entität durch mehrere, unterschiedliche Vektoren dargestellt werden kann. Dies gilt für Fälle, in denen dieselben Daten, wie z. B. ein Satz, durch verschiedene Einbettungsmodelle verarbeitet werden oder wenn multimodale Informationen (wie Bilder, Fingerabdrücke und Stimmabdrücke einer Person) in verschiedene Vektorformate umgewandelt werden. Durch die Zuweisung von Gewichten zu diesen Vektoren kann ihr kombinierter Einfluss die Wiederauffindbarkeit deutlich erhöhen und die Effizienz der Suchergebnisse verbessern.</p></li>
+<p>Die hybride Suche ist ideal für komplexe Situationen, die eine hohe Genauigkeit erfordern, insbesondere wenn eine Entität durch mehrere, unterschiedliche Vektoren dargestellt werden kann. Dies gilt für Fälle, in denen dieselben Daten, wie z. B. ein Satz, durch verschiedene Einbettungsmodelle verarbeitet werden oder wenn multimodale Informationen (wie Bilder, Fingerabdrücke und Stimmabdrücke einer Person) in verschiedene Vektorformate umgewandelt werden. Durch die Zuweisung von Gewichtungen für diese Vektoren kann ihr kombinierter Einfluss die Wiederauffindbarkeit erheblich steigern und die Effizienz der Suchergebnisse verbessern.</p></li>
 <li><p><strong>Wie normalisiert ein gewichteter Ranker die Abstände zwischen verschiedenen Vektorfeldern?</strong></p>
 <p>Ein gewichteter Ranker normalisiert die Abstände zwischen Vektorfeldern anhand der jedem Feld zugewiesenen Gewichte. Er berechnet die Wichtigkeit jedes Vektorfeldes entsprechend seiner Gewichtung und gibt den Feldern mit höherer Gewichtung den Vorrang. Es ist ratsam, für alle ANN-Suchanfragen denselben metrischen Typ zu verwenden, um Konsistenz zu gewährleisten. Diese Methode stellt sicher, dass Vektoren, die als wichtiger eingestuft werden, einen größeren Einfluss auf das Gesamtranking haben.</p></li>
 <li><p><strong>Ist es möglich, alternative Ranker wie Cohere Ranker oder BGE Ranker zu verwenden?</strong></p>
-<p>Derzeit werden nur die angebotenen Ranker unterstützt. Es ist geplant, in zukünftigen Updates weitere Ranker einzubeziehen.</p></li>
+<p>Derzeit werden nur die angebotenen Ranker unterstützt. Für künftige Updates ist die Aufnahme weiterer Ranker geplant.</p></li>
 <li><p><strong>Ist es möglich, mehrere hybride Suchvorgänge gleichzeitig auszuführen?</strong></p>
 <p>Ja, die gleichzeitige Ausführung von mehreren hybriden Suchoperationen wird unterstützt.</p></li>
 <li><p><strong>Kann ich das gleiche Vektorfeld in mehreren AnnSearchRequest-Objekten verwenden, um hybride Suchvorgänge durchzuführen?</strong></p>

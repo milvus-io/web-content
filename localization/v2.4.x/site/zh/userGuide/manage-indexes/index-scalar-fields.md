@@ -2,7 +2,7 @@
 id: index-scalar-fields.md
 order: 2
 summary: 本指南将指导您为整数、字符串等字段创建和配置标量索引。
-title: 索引标量字段
+title: 标量字段索引
 ---
 <h1 id="Index-Scalar-Fields" class="common-anchor-header">标量字段索引<button data-href="#Index-Scalar-Fields" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -55,7 +55,7 @@ title: 索引标量字段
         ></path>
       </svg>
     </button></h2><div class="language-python">
-<p>要使用自动<strong>索引</strong>，请省略 <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/add_index.md"><code translate="no">add_index()</code></a>中省略 index_type 参数，这样 Milvus 就能根据标量字段类型推断出索引类型。</p>
+<p>要使用自动<strong>索引</strong>，请省略 <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/add_index.md"><code translate="no">add_index()</code></a>中省略 index_type 参数，以便 Milvus 根据标量字段类型推断索引类型。</p>
 </div>
 <div class="language-java">
 <p>要使用自动<strong>索引</strong>，请省略 <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Management/IndexParam.md"><code translate="no">IndexParam</code></a>中的 indexType 参数，以便 Milvus 根据标量字段类型推断索引类型。</p>
@@ -71,7 +71,7 @@ client = MilvusClient(
     uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>
 )
 
-index_params = client.create_index_params() <span class="hljs-comment"># Prepare an empty IndexParams object, without having to specify any index parameters</span>
+index_params = MilvusClient.prepare_index_params() <span class="hljs-comment"># Prepare an empty IndexParams object, without having to specify any index parameters</span>
 
 index_params.add_index(
     field_name=<span class="hljs-string">&quot;scalar_1&quot;</span>, <span class="hljs-comment"># Name of the scalar field to be indexed</span>
@@ -137,7 +137,7 @@ client.createIndex(createIndexReq);
 <p>下面的示例为标量字段<code translate="no">scalar_2</code> 创建了一个反转索引。</p>
 <div class="multipleCode">
    <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a></div>
-<pre><code translate="no" class="language-python">index_params = client.create_index_params() <span class="hljs-comment">#  Prepare an IndexParams object</span>
+<pre><code translate="no" class="language-python">index_params = MilvusClient.prepare_index_params() <span class="hljs-comment">#  Prepare an IndexParams object</span>
 
 index_params.add_index(
     field_name=<span class="hljs-string">&quot;scalar_2&quot;</span>, <span class="hljs-comment"># Name of the scalar field to be indexed</span>
@@ -179,8 +179,8 @@ client.createIndex(createIndexReq);
 <div class="language-python">
 <p><strong>方法和参数</strong></p>
 <ul>
-<li><p><strong>create_index_params()</strong></p>
-<p>创建<strong>IndexParams</strong>对象。</p></li>
+<li><p><strong>prepare_index_params()</strong></p>
+<p>准备一个<strong>IndexParams</strong>对象。</p></li>
 <li><p><strong>add_index()</strong></p>
 <p>向<strong>IndexParams</strong>对象添加索引配置。</p>
 <ul>
@@ -198,12 +198,12 @@ client.createIndex(createIndexReq);
 <p>要创建的标量索引的名称。每个标量字段支持一个索引。</p></li>
 </ul></li>
 <li><p><strong>create_index()</strong></p>
-<p>在指定的集合中创建索引。</p>
+<p>在指定的 Collection 中创建索引。</p>
 <ul>
 <li><p><strong>collection_name</strong><em>（字符串）</em></p>
-<p>创建索引的集合名称。</p></li>
+<p>创建索引的 Collection 的名称。</p></li>
 <li><p><strong>索引参数</strong></p>
-<p>包含<strong>索引</strong>配置的<strong>IndexParams</strong>对象。</p></li>
+<p>包含索引配置的<strong>IndexParams</strong>对象。</p></li>
 </ul></li>
 </ul>
 </div>
@@ -213,13 +213,13 @@ client.createIndex(createIndexReq);
 <li><strong>IndexParam</strong>准备一个 IndexParam 对象。<ul>
 <li><strong>fieldName</strong><em>（字符串</em>） 要索引的标量字段的名称。</li>
 <li><strong>indexName</strong><em>（字符串</em>） 要创建的标量索引的名称。每个标量字段支持一个索引。</li>
-<li><strong>indexType</strong><em>（字符串</em>） 要创建的标量索引的类型。对于隐式索引，请将其留空或省略此参数。 对于自定义索引，有效值为<ul>
+<li><strong>indexType</strong><em>（字符串</em>） 要创建的标量索引的类型。对于隐式索引，留空或省略此参数。 对于自定义索引，有效值为<ul>
 <li><strong>倒排</strong>：（推荐）倒排索引由术语字典组成，其中包含按字母顺序排序的所有标记词。有关详情，请参阅<a href="/docs/zh/scalar_index.md">标量索引</a>。</li>
 <li><strong>STL_SORT</strong>：使用标准模板库排序算法对标量字段进行排序。支持布尔和数值字段（如 INT8、INT16、INT32、INT64、FLOAT、DOUBLE）。</li>
 <li><strong>Trie</strong>用于快速前缀搜索和检索的树形数据结构。支持 VARCHAR 字段。</li>
 </ul></li>
 </ul></li>
-<li><strong>CreateIndexReq</strong>在指定的集合中创建索引。<ul>
+<li><strong>CreateIndexReq</strong>在指定的 Collections 中创建索引。<ul>
 <li><strong>collectionName</strong><em>（字符串</em>） 创建索引的集合名称。</li>
 <li><strong>indexParams</strong><em>(List<IndexParam></em>) 包含索引配置的 IndexParam 对象列表。</li>
 </ul></li>
@@ -229,13 +229,13 @@ client.createIndex(createIndexReq);
 <p><strong>方法和参数</strong></p>
 <ul>
 <li><p><strong>创建索引</strong></p>
-<p>在指定的集合中创建索引。</p>
+<p>在指定的 Collection 中创建索引。</p>
 <ul>
 <li><strong>collection_name</strong><em>（字符串</em>） 创建索引的集合名称。</li>
 <li><strong>field_name</strong><em>（字符串</em>） 要创建索引的标量字段的名称。</li>
 <li><strong>index_name</strong><em>（字符串</em>） 要创建的标量索引的名称。每个标量字段支持一个索引。</li>
 <li><strong>index_type</strong><em>（字符串</em>） 要创建的标量索引的类型。对于隐式索引，请将其留空或省略此参数。 对于自定义索引，有效值为<ul>
-<li><strong>倒排</strong>：（推荐）倒排索引由包含按字母顺序排列的所有标记词的术语字典组成。有关详情，请参阅<a href="/docs/zh/scalar_index.md">标量索引</a>。</li>
+<li><strong>倒排</strong>：（推荐）倒排索引由包含按字母顺序排序的所有标记词的术语字典组成。有关详情，请参阅<a href="/docs/zh/scalar_index.md">标量索引</a>。</li>
 <li><strong>STL_SORT</strong>：使用标准模板库排序算法对标量字段进行排序。支持布尔和数值字段（如 INT8、INT16、INT32、INT64、FLOAT、DOUBLE）。</li>
 <li><strong>Trie</strong>用于快速前缀搜索和检索的树形数据结构。支持 VARCHAR 字段。</li>
 </ul></li>

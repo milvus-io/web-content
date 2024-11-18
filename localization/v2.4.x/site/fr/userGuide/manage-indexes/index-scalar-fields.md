@@ -4,7 +4,7 @@ order: 2
 summary: >-
   Ce guide vous aidera à créer et à configurer des index scalaires pour des
   champs tels que des nombres entiers, des chaînes de caractères, etc.
-title: Champs scalaires indexés
+title: Index des champs scalaires
 ---
 <h1 id="Index-Scalar-Fields" class="common-anchor-header">Index des champs scalaires<button data-href="#Index-Scalar-Fields" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -73,7 +73,7 @@ client = MilvusClient(
     uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>
 )
 
-index_params = client.create_index_params() <span class="hljs-comment"># Prepare an empty IndexParams object, without having to specify any index parameters</span>
+index_params = MilvusClient.prepare_index_params() <span class="hljs-comment"># Prepare an empty IndexParams object, without having to specify any index parameters</span>
 
 index_params.add_index(
     field_name=<span class="hljs-string">&quot;scalar_1&quot;</span>, <span class="hljs-comment"># Name of the scalar field to be indexed</span>
@@ -139,7 +139,7 @@ client.createIndex(createIndexReq);
 <p>L'exemple ci-dessous crée un index inversé pour le champ scalaire <code translate="no">scalar_2</code>.</p>
 <div class="multipleCode">
    <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a></div>
-<pre><code translate="no" class="language-python">index_params = client.create_index_params() <span class="hljs-comment">#  Prepare an IndexParams object</span>
+<pre><code translate="no" class="language-python">index_params = MilvusClient.prepare_index_params() <span class="hljs-comment">#  Prepare an IndexParams object</span>
 
 index_params.add_index(
     field_name=<span class="hljs-string">&quot;scalar_2&quot;</span>, <span class="hljs-comment"># Name of the scalar field to be indexed</span>
@@ -181,7 +181,7 @@ client.createIndex(createIndexReq);
 <div class="language-python">
 <p><strong>Méthodes et paramètres</strong></p>
 <ul>
-<li><p><strong>create_index_params()</strong></p>
+<li><p><strong>prepare_index_params()</strong></p>
 <p>Prépare un objet <strong>IndexParams</strong>.</p></li>
 <li><p><strong>add_index()</strong></p>
 <p>Ajoute des configurations d'index à l'objet <strong>IndexParams</strong>.</p>
@@ -190,7 +190,7 @@ client.createIndex(createIndexReq);
 <p>Le nom du champ scalaire à indexer.</p></li>
 <li><p><strong>index_type</strong><em>(chaîne</em>) :</p>
 <p>Le type d'index scalaire à créer. Pour l'indexation implicite, laissez ce paramètre vide ou omettez-le.</p>
-<p>Pour l'indexation personnalisée, les valeurs valides sont les suivantes</p>
+<p>Pour l'indexation personnalisée, les valeurs valides sont</p>
 <ul>
 <li><p><strong>INVERTED</strong>: (Recommandé) Un index inversé consiste en un dictionnaire de termes contenant tous les mots tokenisés triés par ordre alphabétique. Pour plus de détails, voir <a href="/docs/fr/scalar_index.md">Index scalaire</a>.</p></li>
 <li><p><strong>STL_SORT</strong>: Trie les champs scalaires à l'aide de l'algorithme de tri de la bibliothèque standard. Ne prend en charge que les champs numériques (par exemple, INT8, INT16, INT32, INT64, FLOAT, DOUBLE).</p></li>

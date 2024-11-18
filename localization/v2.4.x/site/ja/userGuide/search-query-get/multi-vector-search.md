@@ -19,7 +19,7 @@ title: ハイブリッド検索
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Milvus2.4からマルチベクターサポートとハイブリッド検索フレームワークが導入された。異なる列のこれらのベクトルは、異なる埋め込みモデルに由来する、または異なる処理方法を経た、データの多様な側面を表しています。ハイブリッド検索の結果は、RRF（Reciprocal Rank Fusion）やWeighted Scoringなどのリランキング戦略を使って統合されます。再ランク付け戦略の詳細については、<a href="/docs/ja/reranking.md">再ランク付けを</a>参照してください。</p>
+    </button></h1><p>Milvus2.4からマルチベクターサポートとハイブリッド検索フレームワークが導入された。異なる列のこれらのベクトルは、異なる埋め込みモデルに由来する、あるいは異なる処理方法を経た、データの多様な側面を表しています。ハイブリッド検索の結果は、RRF（Reciprocal Rank Fusion）やWeighted Scoringなどのリランキング戦略を使って統合されます。再ランク付け戦略の詳細については、<a href="/docs/ja/reranking.md">再ランク付けを</a>参照してください。</p>
 <p>この機能は、写真、音声、指紋などの様々な属性に基づいて、ベクトル・ライブラリ内で最も類似した人物を特定するような、包括的な検索シナリオで特に役立ちます。</p>
 <p>このチュートリアルでは、以下の方法を学びます：</p>
 <ul>
@@ -28,7 +28,7 @@ title: ハイブリッド検索
 <li><p>ハイブリッド検索を実行する <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/ORM/Collection/hybrid_search.md"><code translate="no">hybrid_search()</code></a>メソッドを使用してハイブリッド検索を実行する。</p></li>
 </ul>
 <div class="alert note">
-<p>このページのコードスニペットは<a href="https://milvus.io/api-reference/pymilvus/v2.4.x/ORM/Connections/connect.md">PyMilvus ORMモジュールを使って</a>Milvusとやりとりしています。新しい<a href="https://milvus.io/api-reference/pymilvus/v2.4.x/About.md">MilvusClient SDKを</a>使ったコードスニペットは近日公開予定です。</p>
+<p>このページのコードスニペットは<a href="https://milvus.io/api-reference/pymilvus/v2.4.x/ORM/Connections/connect.md">PyMilvus ORMモジュールを使って</a>Milvusとやりとりします。新しい<a href="https://milvus.io/api-reference/pymilvus/v2.4.x/About.md">MilvusClient SDKを</a>使ったコードスニペットは近日公開予定です。</p>
 </div>
 <h2 id="Preparations" class="common-anchor-header">準備<button data-href="#Preparations" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -45,14 +45,14 @@ title: ハイブリッド検索
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>ハイブリッド検索を開始する前に、複数のベクトルフィールドを持つコレクションを持っていることを確認してください。現在、Milvusではコレクションごとにデフォルトで4つのベクターフィールドを導入していますが、<a href="https://milvus.io/docs/configure_proxy.md#proxymaxVectorFieldNum">proxy.maxVectorFieldNumの</a>設定を変更することで最大10まで拡張することができます。</p>
+    </button></h2><p>ハイブリッド検索を開始する前に、複数のベクトルフィールドを持つコレクションを持っていることを確認してください。現在、Milvusではコレクションあたりデフォルトで4つのベクターフィールドを導入していますが、<a href="https://milvus.io/docs/configure_proxy.md#proxymaxVectorFieldNum">proxy.maxVectorFieldNumの</a>設定を変更することで最大10まで拡張することができます。</p>
 <p>以下は、<code translate="no">filmVector</code> と<code translate="no">posterVector</code> の2つのベクトルフィールドを持つ<code translate="no">test_collection</code> という名前のコレクションを作成し、ランダムエンティティを挿入する例です。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> connections, Collection, FieldSchema, CollectionSchema, DataType
 <span class="hljs-keyword">import</span> random
 
 <span class="hljs-comment"># Connect to Milvus</span>
 connections.connect(
-    host=<span class="hljs-string">&quot;10.102.7.3&quot;</span>, <span class="hljs-comment"># Replace with your Milvus server IP</span>
+    host=<span class="hljs-string">&quot;127.0.0.1&quot;</span>, <span class="hljs-comment"># Replace with your Milvus server IP</span>
     port=<span class="hljs-string">&quot;19530&quot;</span>
 )
 
@@ -152,7 +152,7 @@ reqs = [request_1, request_2]
 <li><p><code translate="no">AnnSearchRequest</code> <em>(オブジェクト</em>)</p>
 <p>ANN 検索要求を表すクラス。各ハイブリッド検索は、一度に 1 から 1,024<code translate="no">ANNSearchRequest</code> オブジェクトを含むことができます。</p></li>
 <li><p><code translate="no">data</code> <em>(list</em>)</p>
-<p>単一の<code translate="no">AnnSearchRequest</code> で検索するクエリーベクター。現在、このパラメータは単一のクエリベクタのみを含むリスト、例えば<code translate="no">[[0.5791814851218929, 0.5792985702614121, 0.8480776460143558, 0.16098005945243, 0.2842979317256803]]</code> を受け付ける。 将来、このパラメータは複数のクエリベクタを受け付けるように拡張される予定である。</p></li>
+<p>単一の<code translate="no">AnnSearchRequest</code> で検索するクエリーベクター。現在のところ、このパラメータは単一のクエリ・ベクタのみを含むリスト、例えば<code translate="no">[[0.5791814851218929, 0.5792985702614121, 0.8480776460143558, 0.16098005945243, 0.2842979317256803]]</code> を受け付ける。 将来的には、このパラメータは複数のクエリ・ベクタを受け付けるように拡張される予定である。</p></li>
 <li><p><code translate="no">anns_field</code> <em>(文字列</em>)</p>
 <p>単一の<code translate="no">AnnSearchRequest</code> で使用するベクトルフィールドの名前。</p></li>
 <li><p><code translate="no">param</code> <em>(dict</em>)</p>
@@ -179,7 +179,7 @@ reqs = [request_1, request_2]
     </button></h2><p><code translate="no">AnnSearchRequest</code> 。インスタンスを作成したら、結果を結合して再ランク付けするための再ランク付け戦略を設定する。現在、<code translate="no">WeightedRanker</code> と<code translate="no">RRFRanker</code> の2つのオプションがある。再ランク付け戦略の詳細については、<a href="/docs/ja/reranking.md">再ランク付けを</a>参照のこと。</p>
 <ul>
 <li><p>重み付きスコアリングを使用する</p>
-<p><code translate="no">WeightedRanker</code> を使用して、各ベクトルフィールドの検索結果に指定した重みで重要度を割り当てます。あるベクター・フィールドを他のベクター・フィールドより優先させる場合、<code translate="no">WeightedRanker(value1, value2, ..., valueN)</code> はそのことを複合検索結果に反映させることができます。</p>
+<p><code translate="no">WeightedRanker</code> を使用して、各ベクトルフィールドの検索結果に指定した重みで重要度を割り当てます。あるベクター・フィールドを他のベクター・フィールドより優先させる場合、<code translate="no">WeightedRanker(value1, value2, ..., valueN)</code> を使用することで、検索結果の組み合わせにこれを反映させることができます。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> WeightedRanker
 <span class="hljs-comment"># Use WeightedRanker to combine results with specified weights</span>
 <span class="hljs-comment"># Assign weights of 0.8 to text search and 0.2 to image search</span>
@@ -274,8 +274,8 @@ res = collection.hybrid_search(
       </svg>
     </button></h2><ul>
 <li><p><strong>ハイブリッド検索はどのような場合に推奨されますか？</strong></p>
-<p>ハイブリッド検索は、高い精度が要求される複雑な状況、特にエンティティが複数の多様なベクトルで表現できる場合に最適です。これは、文章のような同じデータが異なる埋め込みモデルで処理される場合や、マルチモーダル情報（個人の画像、指紋、声紋など）が様々なベクトル形式に変換される場合に当てはまります。これらのベクトルに重みを割り当てることで、それらの複合的な影響力により、検索結果の再現性を大幅に高め、有効性を向上させることができる。</p></li>
-<li><p><strong>重み付きランカーはどのように異なるベクトルフィールド間の距離を正規化するのか？</strong></p>
+<p>ハイブリッド検索は、高い精度が要求される複雑な状況、特にエンティティが複数の多様なベクトルで表現できる場合に最適です。これは、文章などの同じデータが異なる埋め込みモデルで処理される場合や、マルチモーダル情報（個人の画像、指紋、声紋など）が様々なベクトル形式に変換される場合に当てはまります。これらのベクトルに重みを割り当てることで、それらの複合的な影響力により、検索結果の再現性を大幅に高め、有効性を向上させることができる。</p></li>
+<li><p><strong>重み付きランカーはどのように異なるベクトルフィールド間の距離を正規化するのですか？</strong></p>
 <p>重み付きランカーは、各フィールドに割り当てられた重みを使用して、ベクトルフィールド間の距離を正規化します。重みに従って各ベクトルフィールドの重要度を計算し、重みの大きいものを優先します。一貫性を確保するために、ANN検索リクエスト全体で同じメトリックタイプを使用することをお勧めします。この方法により、より重要であると判断されたベクトルが、全体的なランキングにより大きな影響を与えるようになります。</p></li>
 <li><p><strong>Cohere Ranker や BGE Ranker のような代替ランカーを使用することはできますか？</strong></p>
 <p>現在のところ、提供されているランカーのみがサポートされています。将来のアップデートに向けて、追加のランカーを含める計画が進行中です。</p></li>

@@ -4,9 +4,9 @@ related_key: 'users, roles'
 summary: >-
   Conoscere la definizione di utenti, ruoli, oggetti e privilegi nel controllo
   degli accessi basato sui ruoli (RBAC).
-title: Utenti e ruoli
+title: 'Utenti, privilegi e ruoli'
 ---
-<h1 id="Users-and-Roles" class="common-anchor-header">Utenti e ruoli<button data-href="#Users-and-Roles" class="anchor-icon" translate="no">
+<h1 id="Users-Privileges-and-Roles" class="common-anchor-header">Utenti, privilegi e ruoli<button data-href="#Users-Privileges-and-Roles" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -158,7 +158,7 @@ client.grantPrivilege(grantPrivilegeReq);
 <tr><td>Raccolta</td><td>Carico</td><td>LoadCollection/GetLoadingProgress/GetLoadState</td></tr>
 <tr><td>Raccolta</td><td>OttenereCaricamentoProgresso</td><td>Ottenere l'avanzamento del caricamento</td></tr>
 <tr><td>Raccolta</td><td>Stato di caricamento</td><td>Ottieni stato di carico</td></tr>
-<tr><td>Raccolta</td><td>Rilascio</td><td>Collezione Release</td></tr>
+<tr><td>Raccolta</td><td>Rilascio</td><td>RilascioCollezione</td></tr>
 <tr><td>Raccolta</td><td>Inserire</td><td>Inserire</td></tr>
 <tr><td>Raccolta</td><td>Cancellare</td><td>Cancellare</td></tr>
 <tr><td>Raccolta</td><td>Upsert</td><td>Inserisci</td></tr>

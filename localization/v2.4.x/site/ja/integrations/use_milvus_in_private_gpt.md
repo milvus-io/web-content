@@ -18,7 +18,7 @@ title: PrivateGPTでMilvusを使う
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p><a href="https://privategpt.dev/">PrivateGPTは</a>、インターネットに接続することなく、100%のプライバシーを確保しながら、大規模言語モデルを使ってユーザーが文書について質問することを可能にする、量産可能なAIプロジェクトです。PrivateGPTは高レベルと低レベルのブロックに分かれたAPIを提供します。また、Gradio UIクライアントや、モデルの一括ダウンロードスクリプトやインジェストスクリプトのような便利なツールも提供します。概念的には、PrivateGPTはRAGパイプラインをラップし、そのプリミティブを公開することで、すぐに使用でき、APIとRAGパイプラインの完全な実装を提供します。</p>
+    </button></h1><p><a href="https://privategpt.dev/">PrivateGPTは</a>、インターネットに接続することなく、100%のプライバシーを確保しながら、ユーザーが大規模言語モデルを使用して文書に関する質問をすることを可能にする、量産可能なAIプロジェクトです。PrivateGPTは高レベルと低レベルのブロックに分かれたAPIを提供します。また、Gradio UIクライアントや、モデルの一括ダウンロードスクリプトやインジェストスクリプトのような便利なツールも提供します。概念的には、PrivateGPTはRAGパイプラインをラップし、そのプリミティブを公開することで、すぐに使用でき、APIとRAGパイプラインの完全な実装を提供します。</p>
 <p>このチュートリアルでは、PrivateGPTのバックエンドベクターデータベースとしてMilvusを使用する方法を紹介します。</p>
 <div class="alert note">
 <p>このチュートリアルは主に<a href="https://docs.privategpt.dev/installation/getting-started/installation">PrivateGPT</a>公式インストールガイドを参照しています。もしこのチュートリアルに古い部分があるようでしたら、公式ガイドに従うことを優先し、私たちにissueを作成してください。</p>
@@ -65,16 +65,18 @@ $ <span class="hljs-built_in">cd</span> private-gpt
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>PrivateGPTではセットアップのカスタマイズが可能です。いくつかのモジュール設定を指定する必要があります。このチュートリアルでは、以下のモジュールを使用します：</p>
+    </button></h2><p>PrivateGPTでは、LLM、Embeddings、Vector Stores、UIなど、いくつかのモジュールのセットアップをカスタマイズすることができます。</p>
+<p>このチュートリアルでは、以下のモジュールを使用します：</p>
 <ul>
 <li><strong>LLM</strong>: Ollama</li>
-<li><strong>エンベッディング</strong>：Ollama</li>
-<li><strong>ベクトル・ストア</strong>：Milvus</li>
+<li><strong>エンベッディング</strong>Ollama</li>
+<li><strong>ベクトル・ストア</strong>Milvus</li>
 <li><strong>UI</strong>：Gradio</li>
 </ul>
+<p>必要なモジュールの依存関係をインストールするために詩を使用するには、次のコマンドを実行します：</p>
 <pre><code translate="no" class="language-shell">$ poetry install --extras <span class="hljs-string">&quot;llms-ollama embeddings-ollama vector-stores-milvus ui&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Start-Ollama-service" class="common-anchor-header">Ollamaサービスを開始する<button data-href="#Start-Ollama-service" class="anchor-icon" translate="no">
+<h2 id="Start-Ollama-service" class="common-anchor-header">Ollamaサービスを開始<button data-href="#Start-Ollama-service" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -89,13 +91,13 @@ $ <span class="hljs-built_in">cd</span> private-gpt
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><a href="https://ollama.com/">ollama.aiに</a>アクセスし、指示に従ってOllamaをあなたのマシンにインストールしてください。</p>
-<p>インストールが終わったら、Ollamaのデスクトップアプリが終了していることを確認する。</p>
+    </button></h2><p><a href="https://ollama.com/">ollama.aiに</a>アクセスし、指示に従ってあなたのマシンにOllamaをインストールしてください。</p>
+<p>インストールが終わったら、Ollamaデスクトップアプリが終了していることを確認してください。</p>
 <p>Ollamaサービスを起動します（ローカル推論サーバーが起動し、LLMとEmbeddingsの両方に対応します）：</p>
 <pre><code translate="no" class="language-shell">$ ollama serve
 <button class="copy-code-btn"></button></code></pre>
-<p>使用するモデルをインストールします。デフォルトの<code translate="no">settings-ollama.yaml</code> はユーザーllama3.1 8b LLM (~4GB)とnomic-embed-text Embeddings (~275MB)に設定されています。</p>
-<p>デフォルトでは、PrivateGPTは必要に応じて自動的にモデルをプルします。この動作は<code translate="no">ollama.autopull_models</code> プロパティを変更することで変更できます。</p>
+<p>使用するモデルをインストールします。デフォルトの<code translate="no">settings-ollama.yaml</code> はユーザー<code translate="no">llama3.1</code> 8b LLM (~4GB) と<code translate="no">nomic-embed-text</code> Embeddings (~275MB) に設定されています。</p>
+<p>デフォルトでは、PrivateGPTは必要に応じて自動的にモデルをプルします。この動作は、<code translate="no">ollama.autopull_models</code> プロパティを変更することで変更できます。</p>
 <p>いずれにせよ、手動でモデルをプルしたい場合は、以下のコマンドを実行してください：</p>
 <pre><code translate="no" class="language-shell">$ ollama pull llama3.1
 $ ollama pull nomic-embed-text
@@ -131,8 +133,8 @@ $ ollama pull nomic-embed-text
 <tr><th>フィールド オプション</th><th>説明</th></tr>
 </thead>
 <tbody>
-<tr><td>uri</td><td>デフォルトではローカルファイルとして "local_data/private_gpt/milvus/milvus_local.db "が設定されています。dockerやk8s上のよりパフォーマンスの高いMilvusサーバ（例：http://localhost:19530）をuriとして設定することもできます。Milvusクラウドを利用する場合は、uriとtokenをMilvusクラウドのEndpointとApi keyに合わせます。</td></tr>
-<tr><td>トークン</td><td>dockerやk8s上のMilvusサーバー、またはZilliz Cloudのapiキーとペア。</td></tr>
+<tr><td>uri</td><td>デフォルトではローカルファイルとして "local_data/private_gpt/milvus/milvus_local.db "が設定されています。dockerやk8s上のよりパフォーマンスの高いMilvusサーバ（例：http://localhost:19530）をuriとして設定することもできます。<a href="https://zilliz.com/cloud">Zilliz Cloudを</a>利用する場合は、uriとtokenをZilliz Cloudの<a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#cluster-details">Public EndpointとAPI keyに</a>合わせます。</td></tr>
+<tr><td>トークン</td><td>dockerやk8s上のMilvusサーバー、またはZilliz CloudのAPIキーとペア。</td></tr>
 <tr><td>コレクション名</td><td>コレクション名。デフォルトは "milvus_db"。</td></tr>
 <tr><td>上書き</td><td>コレクション内のデータが存在する場合、上書きする。</td></tr>
 </tbody>
@@ -152,7 +154,7 @@ $ ollama pull nomic-embed-text
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>すべての設定が完了したら、gradio UIでPrivateGPTを実行できます。</p>
+    </button></h2><p>すべての設定が完了したら、Gradio UIでPrivateGPTを実行できます。</p>
 <pre><code translate="no" class="language-shell">PGPT_PROFILES=ollama <span class="hljs-built_in">make</span> run
 <button class="copy-code-btn"></button></code></pre>
 <p>UIは<code translate="no">http://0.0.0.0:8001</code> 。</p>
@@ -162,4 +164,5 @@ $ ollama pull nomic-embed-text
     <span></span>
   </span>
 </p>
-<p>UIで遊んだり、ドキュメントについて質問することができます。</p>
+<p>UIで遊んだり、文書について質問したりすることができる。</p>
+<p>詳細は<a href="https://docs.privategpt.dev/">PrivateGPTの</a>公式ドキュメントを参照してください。</p>

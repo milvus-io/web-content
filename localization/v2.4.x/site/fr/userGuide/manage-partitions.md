@@ -652,7 +652,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
     partition_names=[<span class="hljs-string">&quot;partitionA&quot;</span>, <span class="hljs-string">&quot;partitionB&quot;</span>]
 )
 
-res = client.get_load_status(
+res = client.get_load_state(
     collection_name=<span class="hljs-string">&quot;quick_setup&quot;</span>,
     partition_name=<span class="hljs-string">&quot;partitionA&quot;</span>
 )
@@ -663,7 +663,7 @@ res = client.get_load_status(
 <span class="hljs-comment">#     &quot;state&quot;: &quot;&lt;LoadState: Loaded&gt;&quot;</span>
 <span class="hljs-comment"># }</span>
 
-res = client.get_load_status(
+res = client.get_load_state(
     collection_name=<span class="hljs-string">&quot;quick_setup&quot;</span>,
     partition_name=<span class="hljs-string">&quot;partitionB&quot;</span>
 )
@@ -820,7 +820,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
     partition_names=[<span class="hljs-string">&quot;_default&quot;</span>, <span class="hljs-string">&quot;partitionA&quot;</span>, <span class="hljs-string">&quot;partitionB&quot;</span>]
 )
 
-res = client.get_load_status(
+res = client.get_load_state(
     collection_name=<span class="hljs-string">&quot;quick_setup&quot;</span>,
 )
 
@@ -942,7 +942,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 <p>Par défaut, Milvus permet de créer un maximum de 1 024 partitions. Vous pouvez ajuster le nombre maximum de partitions en configurant <code translate="no">rootCoord.maxPartitionNum</code>. Pour plus de détails, voir <a href="https://milvus.io/docs/configure_rootcoord.md#rootCoordmaxPartitionNum">Configurations du système</a>.</p></li>
 <li><p><strong>Comment puis-je faire la différence entre les partitions et les clés de partition ?</strong></p>
 <p>Les partitions sont des unités de stockage physiques, tandis que les clés de partition sont des concepts logiques qui affectent automatiquement les données à des partitions spécifiques en fonction d'une colonne désignée.</p>
-<p>Par exemple, dans Milvus, si vous avez une collection dont la clé de partition est définie comme étant le champ <code translate="no">color</code>, le système affecte automatiquement les données aux partitions en fonction des valeurs hachées du champ <code translate="no">color</code> pour chaque entité. Ce processus automatisé libère l'utilisateur de la responsabilité de spécifier manuellement la partition lors de l'insertion ou de la recherche de données.</p>
+<p>Par exemple, dans Milvus, si vous avez une collection dont la clé de partition est définie comme le champ <code translate="no">color</code>, le système affecte automatiquement les données aux partitions en fonction des valeurs hachées du champ <code translate="no">color</code> pour chaque entité. Ce processus automatisé libère l'utilisateur de la responsabilité de spécifier manuellement la partition lors de l'insertion ou de la recherche de données.</p>
 <p>En revanche, lorsque vous créez manuellement des partitions, vous devez affecter des données à chaque partition en fonction des critères de la clé de partition. Si vous avez une collection avec un champ <code translate="no">color</code>, vous devez affecter manuellement les entités dont la valeur <code translate="no">color</code> est <code translate="no">red</code> à <code translate="no">partition A</code>, et les entités dont la valeur <code translate="no">color</code> est <code translate="no">blue</code> à <code translate="no">partition B</code>. Cette gestion manuelle demande plus d'efforts.</p>
 <p>En résumé, les partitions et les clés de partition sont utilisées pour optimiser le calcul des données et améliorer l'efficacité des requêtes. Il est essentiel de reconnaître que l'activation d'une clé de partition signifie l'abandon du contrôle de la gestion manuelle de l'insertion et du chargement des données de partition, car ces processus sont entièrement automatisés et gérés par Milvus.</p></li>
 </ul>

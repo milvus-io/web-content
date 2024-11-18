@@ -67,5 +67,9 @@ title: Übersicht über Integrationen
 <tr><td><a href="/docs/de/rag_with_milvus_and_unstructured.md">Erstellen einer RAG mit Milvus und unstrukturierten</a></td><td>Datenquellen</td><td>Milvus, Unstrukturiert</td></tr>
 <tr><td><a href="/docs/de/RAG_with_pii_and_milvus.md">Aufbau einer RAG mit Milvus + PII Masker</a></td><td>Datenquellen</td><td>Milvus, PII-Masker</td></tr>
 <tr><td><a href="/docs/de/use_milvus_in_private_gpt.md">Verwendung von Milvus in PrivateGPT</a></td><td>Einrichtung</td><td>Vektorsuche</td></tr>
+<tr><td><a href="/docs/de/quickstart_mem0_with_milvus.md">Erste Schritte mit Mem0 und Milvus</a></td><td>Agenten</td><td>Mem0, Milvus</td></tr>
+<tr><td><a href="/docs/de/knowledge_table_with_milvus.md">Wissenstabelle mit Milvus</a></td><td>Wissenstechnik</td><td>Wissenstabelle, Milvus</td></tr>
+<tr><td><a href="/docs/de/use_milvus_in_docsgpt.md">Milvus in DocsGPT verwenden</a></td><td>Organisation</td><td>DocsGPT, Milvus</td></tr>
+<tr><td><a href="/docs/de/use_milvus_with_sambanova.md">Verwendung von Milvus mit SambaNova</a></td><td>Orchestrierung</td><td>Milvus, SambaNova</td></tr>
 </tbody>
 </table>

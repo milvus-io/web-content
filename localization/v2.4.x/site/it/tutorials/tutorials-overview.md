@@ -27,8 +27,8 @@ title: Panoramica dei tutorial
 <tr><td><a href="/docs/it/build-rag-with-milvus.md">Costruire RAG con Milvus</a></td><td>RAG</td><td>ricerca vettoriale</td></tr>
 <tr><td><a href="/docs/it/multimodal_rag_with_milvus.md">RAG multimodale con Milvus</a></td><td>RAG</td><td>ricerca vettoriale, campo dinamico</td></tr>
 <tr><td><a href="/docs/it/image_similarity_search.md">Ricerca per immagini con Milvus</a></td><td>Ricerca semantica</td><td>ricerca vettoriale, campo dinamico</td></tr>
-<tr><td><a href="/docs/it/hybrid_search_with_milvus.md">Ricerca ibrida con Milvus</a></td><td>Ricerca ibrida</td><td>ricerca ibrida, multi vettoriale, incorporazione densa, incorporazione rada</td></tr>
-<tr><td><a href="/docs/it/multimodal_rag_with_milvus.md">Ricerca multimodale con più vettori</a></td><td>Ricerca semantica</td><td>multi vettoriale, ricerca ibrida</td></tr>
+<tr><td><a href="/docs/it/hybrid_search_with_milvus.md">Ricerca ibrida con Milvus</a></td><td>Ricerca ibrida</td><td>ricerca ibrida, multi-vettore, incorporazione densa, incorporazione rada</td></tr>
+<tr><td><a href="/docs/it/multimodal_rag_with_milvus.md">Ricerca multimodale con più vettori</a></td><td>Ricerca semantica</td><td>multi vettore, ricerca ibrida</td></tr>
 <tr><td><a href="/docs/it/question_answering_system.md">Sistema di risposta alle domande</a></td><td>Risposta alle domande</td><td>ricerca vettoriale</td></tr>
 <tr><td><a href="/docs/it/recommendation_system.md">Sistema di raccomandazione</a></td><td>Sistema di raccomandazione</td><td>ricerca vettoriale</td></tr>
 <tr><td><a href="/docs/it/video_similarity_search.md">Ricerca per similarità video</a></td><td>Ricerca semantica</td><td>ricerca vettoriale</td></tr>
@@ -43,5 +43,6 @@ title: Panoramica dei tutorial
 <tr><td><a href="/docs/it/use_ColPali_with_milvus.md">Utilizzare ColPali per il recupero multimodale con Milvus</a></td><td>Avvio rapido</td><td>ricerca vettoriale</td></tr>
 <tr><td><a href="/docs/it/vector_visualization.md">Visualizzazione vettoriale</a></td><td>Avvio rapido</td><td>ricerca vettoriale</td></tr>
 <tr><td><a href="/docs/it/movie_recommendation_with_milvus.md">Raccomandazione di film con Milvus</a></td><td>Sistema di raccomandazione</td><td>ricerca vettoriale</td></tr>
+<tr><td><a href="/docs/it/funnel_search_with_matryoshka.md">Ricerca a imbuto con Matryoshka Embeddings</a></td><td>Avvio rapido</td><td>ricerca vettoriale</td></tr>
 </tbody>
 </table>

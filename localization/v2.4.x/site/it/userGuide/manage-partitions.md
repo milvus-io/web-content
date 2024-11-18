@@ -182,7 +182,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 <div class="admonition note">
 <p><b>note</b></p>
 <p>Se si imposta un campo come chiave di partizione in una collezione, Milvus crea almeno <strong>64</strong> partizioni insieme alla collezione. Quando si elencano le partizioni, i risultati possono essere diversi da quelli ottenuti con i frammenti di codice precedenti.</p>
-<p>Per ulteriori informazioni, consultare la sezione <a href="https://milvus.io/docs/use-partition-key.md">Uso della chiave di partizione</a>.</p>
+<p>Per maggiori dettagli, consultare la sezione <a href="https://milvus.io/docs/use-partition-key.md">Uso della chiave di partizione</a>.</p>
 </div>
 <h2 id="Create-Partitions" class="common-anchor-header">Creare partizioni<button data-href="#Create-Partitions" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -306,7 +306,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
       </svg>
     </button></h2><p>È anche possibile verificare l'esistenza di una partizione specifica.</p>
 <div class="language-python">
-<p>Per verificare la presenza di una partizione specifica, utilizzare <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Partitions/has_partition.md"><code translate="no">has_partition()</code></a>.</p>
+<p>Per verificare la presenza di una partizione specifica, usare <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Partitions/has_partition.md"><code translate="no">has_partition()</code></a>.</p>
 </div>
 <div class="language-java">
 <p>Per verificare la presenza di una partizione specifica, usare <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Partitions/hasPartition.md"><code translate="no">hasPartition()</code></a>.</p>
@@ -652,7 +652,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
     partition_names=[<span class="hljs-string">&quot;partitionA&quot;</span>, <span class="hljs-string">&quot;partitionB&quot;</span>]
 )
 
-res = client.get_load_status(
+res = client.get_load_state(
     collection_name=<span class="hljs-string">&quot;quick_setup&quot;</span>,
     partition_name=<span class="hljs-string">&quot;partitionA&quot;</span>
 )
@@ -663,7 +663,7 @@ res = client.get_load_status(
 <span class="hljs-comment">#     &quot;state&quot;: &quot;&lt;LoadState: Loaded&gt;&quot;</span>
 <span class="hljs-comment"># }</span>
 
-res = client.get_load_status(
+res = client.get_load_state(
     collection_name=<span class="hljs-string">&quot;quick_setup&quot;</span>,
     partition_name=<span class="hljs-string">&quot;partitionB&quot;</span>
 )
@@ -820,7 +820,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
     partition_names=[<span class="hljs-string">&quot;_default&quot;</span>, <span class="hljs-string">&quot;partitionA&quot;</span>, <span class="hljs-string">&quot;partitionB&quot;</span>]
 )
 
-res = client.get_load_status(
+res = client.get_load_state(
     collection_name=<span class="hljs-string">&quot;quick_setup&quot;</span>,
 )
 
@@ -936,13 +936,13 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
         ></path>
       </svg>
     </button></h2><ul>
-<li><p><strong>Quanti dati possono essere memorizzati in una partizione?</strong></p>
+<li><p><strong>Quanti dati si possono memorizzare in una partizione?</strong></p>
 <p>Si raccomanda di memorizzare meno di 1B di dati in una partizione.</p></li>
 <li><p><strong>Qual è il numero massimo di partizioni che possono essere create?</strong></p>
 <p>Per impostazione predefinita, Milvus consente di creare un massimo di 1.024 partizioni. È possibile regolare il numero massimo di partizioni configurando <code translate="no">rootCoord.maxPartitionNum</code>. Per maggiori dettagli, consultare la sezione <a href="https://milvus.io/docs/configure_rootcoord.md#rootCoordmaxPartitionNum">Configurazioni di sistema</a>.</p></li>
 <li><p><strong>Come si fa a distinguere tra partizioni e chiavi di partizione?</strong></p>
 <p>Le partizioni sono unità di archiviazione fisiche, mentre le chiavi di partizione sono concetti logici che assegnano automaticamente i dati a partizioni specifiche in base a una colonna designata.</p>
-<p>Ad esempio, in Milvus, se si dispone di una raccolta con una chiave di partizione definita come campo <code translate="no">color</code>, il sistema assegna automaticamente i dati alle partizioni in base ai valori hash del campo <code translate="no">color</code> per ogni entità. Questo processo automatico solleva l'utente dalla responsabilità di specificare manualmente la partizione durante l'inserimento o la ricerca dei dati.</p>
+<p>Ad esempio, in Milvus, se si dispone di una collezione con una chiave di partizione definita come campo <code translate="no">color</code>, il sistema assegna automaticamente i dati alle partizioni in base ai valori hash del campo <code translate="no">color</code> per ogni entità. Questo processo automatico solleva l'utente dalla responsabilità di specificare manualmente la partizione durante l'inserimento o la ricerca dei dati.</p>
 <p>D'altra parte, quando si creano manualmente le partizioni, è necessario assegnare i dati a ciascuna partizione in base ai criteri della chiave di partizione. Se si dispone di una collezione con un campo <code translate="no">color</code>, si dovranno assegnare manualmente le entità con un valore <code translate="no">color</code> di <code translate="no">red</code> a <code translate="no">partition A</code>, e le entità con un valore <code translate="no">color</code> di <code translate="no">blue</code> a <code translate="no">partition B</code>. Questa gestione manuale richiede uno sforzo maggiore.</p>
 <p>In sintesi, sia le partizioni che le chiavi di partizione vengono utilizzate per ottimizzare il calcolo dei dati e migliorare l'efficienza delle query. È essenziale riconoscere che l'abilitazione di una chiave di partizione significa rinunciare al controllo sulla gestione manuale dell'inserimento e del caricamento dei dati delle partizioni, poiché questi processi sono completamente automatizzati e gestiti da Milvus.</p></li>
 </ul>

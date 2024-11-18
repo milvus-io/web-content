@@ -248,7 +248,7 @@ System.out.println(wrapper.getInsertCount());
 </ol>
 <div class="multipleCode">
    <a href="#python">Python </a> <a href="#java">Java</a></div>
-<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> Collection
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> Collection,connections
 
 <span class="hljs-comment"># 4. Search with iterator</span>
 connections.connect(host=<span class="hljs-string">&quot;127.0.0.1&quot;</span>, port=<span class="hljs-number">19530</span>)
@@ -375,7 +375,7 @@ System.out.println(results.size());
     </tr>
     <tr>
       <td><code translate="no">output_fields</code></td>
-      <td>Uma lista de nomes de campo para incluir em cada entidade em retorno.<br/>O valor padrão é <strong>None</strong>. Se não for especificado, apenas o campo primário será incluído.</td>
+      <td>Uma lista de nomes de campos para incluir em cada entidade em retorno.<br/>O valor padrão é <strong>None</strong>. Se não for especificado, apenas o campo primário será incluído.</td>
     </tr>
     <tr>
       <td><code translate="no">limit</code></td>

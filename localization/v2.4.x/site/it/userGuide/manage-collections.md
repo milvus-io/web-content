@@ -54,7 +54,7 @@ title: Gestire le raccolte
       </svg>
     </button></h2><p>In Milvus, si memorizzano le incorporazioni vettoriali in collezioni. Tutti gli embeddings vettoriali all'interno di una collezione condividono la stessa dimensionalità e la stessa metrica di distanza per misurare la somiglianza.</p>
 <p>Le collezioni di Milvus supportano campi dinamici (cioè campi non predefiniti nello schema) e l'incremento automatico delle chiavi primarie.</p>
-<p>Per soddisfare le diverse preferenze, Milvus offre due metodi per creare una raccolta. Uno fornisce una configurazione rapida, mentre l'altro consente una personalizzazione dettagliata dello schema della collezione e dei parametri degli indici.</p>
+<p>Per soddisfare le diverse preferenze, Milvus offre due metodi per creare una collezione. Uno fornisce una configurazione rapida, mentre l'altro consente una personalizzazione dettagliata dello schema della collezione e dei parametri degli indici.</p>
 <p>Inoltre, è possibile visualizzare, caricare, rilasciare e abbandonare una raccolta quando necessario.</p>
 <h2 id="Create-Collection" class="common-anchor-header">Creare una raccolta<button data-href="#Create-Collection" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -76,13 +76,13 @@ title: Gestire le raccolte
 <li><p><strong>Impostazione rapida</strong></p>
 <p>In questo modo, è possibile creare una collezione semplicemente dandole un nome e specificando il numero di dimensioni delle incorporazioni vettoriali da memorizzare in questa collezione. Per ulteriori informazioni, consultare la sezione <a href="/docs/it/manage-collections.md">Impostazione rapida</a>.</p></li>
 <li><p><strong>Configurazione personalizzata</strong></p>
-<p>Invece di lasciare che In Milvus decida quasi tutto per la vostra collezione, potete determinare da soli i <strong>parametri</strong> <strong>dello schema</strong> e dell'<strong>indice</strong> della collezione. Per i dettagli, consultare la sezione <a href="/docs/it/manage-collections.md">Impostazione personalizzata</a>.</p></li>
+<p>Invece di lasciare che In Milvus decida quasi tutto per la vostra collezione, potete determinare da soli i <strong>parametri</strong> <strong>dello schema</strong> e dell'<strong>indice</strong> della collezione. Per maggiori dettagli, consultare la sezione <a href="/docs/it/manage-collections.md">Configurazione personalizzata</a>.</p></li>
 </ul>
 <h3 id="Quick-setup" class="common-anchor-header">Configurazione rapida</h3><p>Nel contesto del grande balzo dell'industria dell'intelligenza artificiale, la maggior parte degli sviluppatori ha bisogno di una collezione semplice ma dinamica per iniziare. Milvus permette di configurare rapidamente una collezione di questo tipo con soli tre argomenti:</p>
 <ul>
 <li><p>Nome della collezione da creare,</p></li>
 <li><p>Dimensione delle incorporazioni vettoriali da inserire e</p></li>
-<li><p>Tipo di metrica utilizzata per misurare le somiglianze tra le incorporazioni vettoriali.</p></li>
+<li><p>Tipo di metrica utilizzata per misurare le somiglianze tra gli embeddings vettoriali.</p></li>
 </ul>
 <div class="language-python">
 <p>Per una rapida impostazione, utilizzare il metodo <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_collection.md"><code translate="no">create_collection()</code></a> della classe <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Client/MilvusClient.md"><code translate="no">MilvusClient</code></a> per creare un insieme con il nome e la dimensione specificati.</p>
@@ -220,7 +220,7 @@ $ curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable
 <p>L'insieme generato nel codice precedente contiene solo due campi: <code translate="no">id</code> (come chiave primaria) e <code translate="no">vector</code> (come campo vettore), con le impostazioni <code translate="no">auto_id</code> e <code translate="no">enable_dynamic_field</code> abilitate per default.</p>
 <ul>
 <li><p><code translate="no">auto_id</code></p>
-<p>L'abilitazione di questa impostazione fa sì che la chiave primaria si incrementi automaticamente. Non è necessario fornire manualmente le chiavi primarie durante l'inserimento dei dati.</p></li>
+<p>L'attivazione di questa impostazione fa sì che la chiave primaria si incrementi automaticamente. Non è necessario fornire manualmente le chiavi primarie durante l'inserimento dei dati.</p></li>
 <li><p><code translate="no">enable_dynamic_field</code></p>
 <p>Quando è abilitata, tutti i campi, esclusi <code translate="no">id</code> e <code translate="no">vector</code> nei dati da inserire, sono trattati come campi dinamici. Questi campi aggiuntivi vengono salvati come coppie chiave-valore all'interno di un campo speciale denominato <code translate="no">$meta</code>. Questa funzione consente di includere campi aggiuntivi durante l'inserimento dei dati.</p></li>
 </ul>
@@ -330,7 +330,7 @@ schema.addField(AddFieldReq.builder()
     </tr>
     <tr>
       <td><code translate="no">is_primary</code></td>
-      <td>Se il campo corrente è il campo primario di un insieme.<br/>Ogni insieme ha un solo campo primario. Un campo primario deve essere di tipo <strong>DataType.INT64</strong> o <strong>DataType.VARCHAR</strong>.</td>
+      <td>Se il campo corrente è il campo primario di un insieme.<br/>Ogni insieme ha un solo campo primario. Un campo primario deve essere del tipo <strong>DataType.INT64</strong> o del tipo <strong>DataType.VARCHAR</strong>.</td>
     </tr>
     <tr>
       <td><code translate="no">dim</code></td>
@@ -601,11 +601,11 @@ indexParams.add(indexParamForVectorField);
     </tr>
     <tr>
       <td><code translate="no">metricType</code></td>
-      <td>L'algoritmo utilizzato per misurare la somiglianza tra i vettori. I valori possibili sono <strong>IP</strong>, <strong>L2</strong>, <strong>COSINE</strong>, <strong>JACCARD</strong>, <strong>HAMMING</strong>. È disponibile solo quando il campo specificato è un campo vettoriale. Per ulteriori informazioni, consultare la sezione <a href="https://milvus.io/docs/index.md#Indexes-supported-in-Milvus">Indici supportati in Milvus</a>.</td>
+      <td>L'algoritmo utilizzato per misurare la somiglianza tra i vettori. I valori possibili sono <strong>IP</strong>, <strong>L2</strong>, <strong>COSINE</strong>, <strong>JACCARD</strong>, <strong>HAMMING</strong>. Questa opzione è disponibile solo quando il campo specificato è un campo vettoriale. Per ulteriori informazioni, consultare la sezione <a href="https://milvus.io/docs/index.md#Indexes-supported-in-Milvus">Indici supportati in Milvus</a>.</td>
     </tr>
     <tr>
       <td><code translate="no">params</code></td>
-      <td>Il tipo di indice e le relative impostazioni. Per ulteriori informazioni, vedere <a href="https://milvus.io/docs/index.md">Indice in memoria</a>.</td>
+      <td>Il tipo di indice e le relative impostazioni. Per maggiori informazioni, vedere <a href="https://milvus.io/docs/index.md">Indice in memoria</a>.</td>
     </tr>
     <tr>
       <td><code translate="no">params.index_type</code></td>
@@ -951,7 +951,7 @@ $ curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable
 </tr>
 <tr>
 <td><code translate="no">schema.autoID</code></td>
-<td>Se permette al campo primario di incrementarsi automaticamente. Impostando True, il campo primario si incrementa automaticamente. In questo caso, il campo primario non dovrebbe essere incluso nei dati da inserire per evitare errori. Impostare questo parametro nel campo con is_primary impostato a True.</td>
+<td>Se permette al campo primario di incrementarsi automaticamente. Impostando True, il campo primario si incrementa automaticamente. In questo caso, il campo primario non dovrebbe essere incluso nei dati da inserire per evitare errori. Impostare questo parametro nel campo con is_primary impostato su True.</td>
 </tr>
 <tr>
 <td><code translate="no">schema.enableDynamicField</code></td>
@@ -1601,7 +1601,7 @@ $ curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># 7. Load the collection</span>
 client.load_collection(
     collection_name=<span class="hljs-string">&quot;customized_setup_2&quot;</span>,
-    load_fields=[<span class="hljs-string">&quot;my_id&quot;</span>, <span class="hljs-string">&quot;my_vector&quot;</span>] <span class="hljs-comment"># Load only the specified fields</span>
+    load_fields=[<span class="hljs-string">&quot;my_id&quot;</span>, <span class="hljs-string">&quot;my_vector&quot;</span>], <span class="hljs-comment"># Load only the specified fields</span>
     skip_load_dynamic_field=<span class="hljs-literal">True</span> <span class="hljs-comment"># Skip loading the dynamic field</span>
 )
 
@@ -1620,7 +1620,7 @@ res = client.get_load_state(
 <p>Si noti che solo i campi elencati in <code translate="no">load_fields</code> possono essere utilizzati come condizioni di filtraggio e campi di output nelle ricerche e nelle query. È necessario includere sempre la chiave primaria nell'elenco. I nomi dei campi esclusi dal caricamento non saranno disponibili per il filtraggio o l'output.</p>
 <p>È possibile utilizzare <code translate="no">skip_load_dynamic_field=True</code> per saltare il caricamento del campo dinamico. Milvus tratta il campo dinamico come un singolo campo, quindi tutte le chiavi del campo dinamico saranno incluse o escluse insieme.</p>
 </div>
-<h3 id="Release-a-collection" class="common-anchor-header">Rilasciare una collezione</h3><div class="language-python">
+<h3 id="Release-a-collection" class="common-anchor-header">Rilasciare una raccolta</h3><div class="language-python">
 <p>Per rilasciare una collezione, utilizzare il metodo <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/release_collection.md"><code translate="no">release_collection()</code></a> specificando il nome della collezione.</p>
 </div>
 <div class="language-java">
@@ -1740,7 +1740,7 @@ $ curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable
 <p>Per creare alias, utilizzare il metodo <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_alias.md"><code translate="no">create_alias()</code></a> specificando il nome della collezione e l'alias.</p>
 </div>
 <div class="language-java">
-<p>Per creare alias, utilizzare il metodo <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Collections/createAlias.md"><code translate="no">createAlias()</code></a> specificando il nome della collezione e l'alias.</p>
+<p>Per creare alias, usare il metodo <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Collections/createAlias.md"><code translate="no">createAlias()</code></a> specificando il nome della collezione e l'alias.</p>
 </div>
 <div class="language-javascript">
 <p>Per creare alias, utilizzare il metodo <a href="https://milvus.io/api-reference/node/v2.4.x/Collections/createAlias.md"><code translate="no">createAlias()</code></a> specificando il nome della collezione e l'alias.</p>

@@ -39,12 +39,15 @@ title: Gestire gli schemi
 <h3 id="Field-schema-properties" class="common-anchor-header">Proprietà dello schema di campo</h3><table class="properties">
     <thead>
     <tr>
-       <th>Proprietà</td><th>Descrizione</th> <th>Nota</th>   </tr>
+        <th>Proprietà</th>
+        <th>Descrizione</th>
+        <th>Nota</th>
+    </tr>
     </thead>
     <tbody>
     <tr>
         <td><code translate="no">name</code></td>
-        <td>Nome del campo nella collezione da creare</td>
+        <td>Nome del campo della collezione da creare</td>
         <td>Tipo di dati: Stringa.<br/>Obbligatorio</td>
     </tr>
     <tr>
@@ -154,7 +157,10 @@ fields = [
 <h3 id="Collection-schema-properties" class="common-anchor-header">Proprietà dello schema di raccolta</h3><table class="properties">
     <thead>
     <tr>
-       <th>Proprietà</td><th>Descrizione</th> <th>Nota</th>   </tr>
+        <th>Proprietà</th>
+        <th>Descrizione</th>
+        <th>Nota</th>
+    </tr>
     </thead>
     <tbody>
     <tr>
@@ -165,7 +171,7 @@ fields = [
     <tr>
         <td><code translate="no">description</code></td>
         <td>Descrizione della collezione</td>
-        <td>Tipo di dati: Stringa.<br/>Facoltativo</td>
+        <td>Tipo di dati: Stringa.<br/>Opzionale</td>
     </tr>
     <tr>
         <td><code translate="no">partition_key_field</code></td>
@@ -175,7 +181,7 @@ fields = [
     <tr>
         <td><code translate="no">enable_dynamic_field</code></td>
         <td>Se abilitare o meno lo schema dinamico</td>
-        <td>Tipo di dati: Booleano (<code translate="no">true</code> o <code translate="no">false</code>).<br/>Opzionale, predefinito a <code translate="no">False</code>.<br/>Per i dettagli sullo schema dinamico, consultare <a herf="enable-dynamic-field.md">Schema dinamico</a> e le guide utente per la gestione delle raccolte.</td>
+        <td>Tipo di dati: Booleano (<code translate="no">true</code> o <code translate="no">false</code>).<br/>Opzionale, per impostazione predefinita <code translate="no">False</code>.<br/>Per informazioni dettagliate sullo schema dinamico, consultare <a herf="enable-dynamic-field.md">Schema dinamico</a> e le guide utente per la gestione delle raccolte.</td>
     </tr>
     </tbody>
 </table>
@@ -193,7 +199,8 @@ position_field = FieldSchema(name=<span class="hljs-string">&quot;position&quot;
 schema = CollectionSchema(fields=[id_field, age_field, embedding_field], auto_id=<span class="hljs-literal">False</span>, enable_dynamic_field=<span class="hljs-literal">True</span>, description=<span class="hljs-string">&quot;desc of a collection&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
 <p>Creare una raccolta con lo schema specificato:</p>
-<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> <span class="hljs-title class_">Collection</span>
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> <span class="hljs-title class_">Collection</span>,connections
+conn = connections.<span class="hljs-title function_">connect</span>(host=<span class="hljs-string">&quot;127.0.0.1&quot;</span>, port=<span class="hljs-number">19530</span>)
 collection_name1 = <span class="hljs-string">&quot;tutorial_1&quot;</span>
 collection1 = <span class="hljs-title class_">Collection</span>(name=collection_name1, schema=schema, using=<span class="hljs-string">&#x27;default&#x27;</span>, shards_num=<span class="hljs-number">2</span>)
 <button class="copy-code-btn"></button></code></pre>
@@ -240,5 +247,5 @@ collection, ins_res = Collection.construct_from_dataframe(
     </button></h2><ul>
 <li>Imparare a preparare lo schema quando si <a href="/docs/it/manage-collections.md">gestiscono le raccolte</a>.</li>
 <li>Per saperne di più sullo <a href="/docs/it/enable-dynamic-field.md">schema dinamico</a>.</li>
-<li>Ulteriori informazioni sulla chiave di partizione in <a href="/docs/it/multi_tenancy.md">Multi-tenancy</a>.</li>
+<li>Per saperne di più sulla chiave di partizione in <a href="/docs/it/multi_tenancy.md">Multi-tenancy</a>.</li>
 </ul>

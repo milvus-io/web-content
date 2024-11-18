@@ -305,12 +305,6 @@
         "children": []
       },
       {
-        "label": "用户和角色",
-        "id": "users_and_roles.md",
-        "order": 10,
-        "children": []
-      },
-      {
         "label": "内存复制",
         "id": "replica.md",
         "order": 11,
@@ -1058,6 +1052,12 @@
             "children": []
           },
           {
+            "label": "用户、权限和角色",
+            "id": "users_and_roles.md",
+            "order": 10,
+            "children": []
+          },
+          {
             "label": "启用 RBAC",
             "id": "rbac.md",
             "order": 1,
@@ -1421,6 +1421,18 @@
             "children": []
           },
           {
+            "label": "文件GPT",
+            "id": "use_milvus_in_docsgpt.md",
+            "order": 9,
+            "children": []
+          },
+          {
+            "label": "桑巴诺瓦",
+            "id": "use_milvus_with_sambanova.md",
+            "order": 10,
+            "children": []
+          },
+          {
             "label": "PrivateGPT",
             "id": "use_milvus_in_private_gpt.md",
             "order": 8,
@@ -1444,6 +1456,12 @@
             "id": "integrate_with_camel.md",
             "order": 1,
             "children": []
+          },
+          {
+            "label": "Mem0",
+            "id": "quickstart_mem0_with_milvus.md",
+            "order": 2,
+            "children": []
           }
         ]
       },
@@ -1462,6 +1480,12 @@
             "label": "Vanna",
             "id": "integrate_with_vanna.md",
             "order": 1,
+            "children": []
+          },
+          {
+            "label": "知识表",
+            "id": "knowledge_table_with_milvus.md",
+            "order": 2,
             "children": []
           }
         ]
@@ -1631,6 +1655,12 @@
         "label": "电影推荐",
         "id": "movie_recommendation_with_milvus.md",
         "order": 9,
+        "children": []
+      },
+      {
+        "label": "利用 Matryoshka Embeddings 进行漏斗搜索",
+        "id": "funnel_search_with_matryoshka.md",
+        "order": 10,
         "children": []
       },
       {

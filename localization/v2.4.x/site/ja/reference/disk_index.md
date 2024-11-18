@@ -130,7 +130,7 @@ DiskIndex:
 </thead>
 <tbody>
 <tr><td><code translate="no">MaxDegree</code></td><td>Vamanaグラフの最大次数。 <br/> 値を大きくすると想起率が高くなるが、インデックスのサイズと構築時間が増加する。</td><td>[1, 512]</td><td>56</td></tr>
-<tr><td><code translate="no">SearchListSize</code></td><td>候補リストのサイズ。 <br/> 値を大きくするとインデックス構築に費やす時間が長くなるが、想起率は高くなる。 <br/> インデックス構築時間を短縮する必要がない限り、<code translate="no">MaxDegree</code> より小さい値に設定する。</td><td>[1, int32_max］</td><td>100</td></tr>
+<tr><td><code translate="no">SearchListSize</code></td><td>候補リストのサイズ。 <br/> 値が大きいほどインデックス構築にかかる時間が長くなるが、高い想起率が得られる。 <br/> インデックス構築時間を短縮する必要がない限り、<code translate="no">MaxDegree</code> より小さい値に設定する。</td><td>[1, int32_max］</td><td>100</td></tr>
 <tr><td><code translate="no">PQCodeBugetGBRatio</code></td><td>PQコードのサイズ制限。 <br/> 値を大きくすると想起率が高くなるが、メモリ使用量が増加する。</td><td>(0.0, 0.25]</td><td>0.125</td></tr>
 <tr><td><code translate="no">SearchCacheBudgetGBRatio</code></td><td>生データに対するキャッシュされたノード番号の比率。 <br/> 値を大きくするとインデックス構築性能が向上するが、メモリ使用量は増加する。</td><td>[0.0, 0.3)</td><td>0.10</td></tr>
 <tr><td><code translate="no">BeamWidthRatio</code></td><td>検索反復あたりの最大 IO リクエスト数と CPU 数との比率。</td><td>[1, max(128 / CPU数, 16)] を指定する。</td><td>4.0</td></tr>
@@ -154,6 +154,6 @@ DiskIndex:
     </button></h2><ul>
 <li><p><code translate="no">io_setup() failed; returned -11, errno=11:Resource temporarily unavailable</code> エラーの対処法は？</p>
 <p>Linuxカーネルは非同期ノンブロッキングI/O（Asynchronous non-blocking I/O: AIO）機能を提供しており、プロセスが複数のI/O操作を同時に開始しても、そのいずれかが完了するのを待つ必要はありません。これは、処理とI/Oが重複するアプリケーションのパフォーマンスを向上させるのに役立ちます。</p>
-<p>この性能は、procファイルシステム内の<code translate="no">/proc/sys/fs/aio-max-nr</code> 仮想ファイルを使用して調整できる。<code translate="no">aio-max-nr</code> パラメーターは、許容される同時リクエストの最大数を決定する。</p>
+<p>この性能は、proc ファイルシステム内の<code translate="no">/proc/sys/fs/aio-max-nr</code> 仮想ファイルを使用して調整できる。<code translate="no">aio-max-nr</code> パラメーターは、許容される同時リクエストの最大数を決定する。</p>
 <p><code translate="no">aio-max-nr</code> のデフォルトは<code translate="no">65535</code> であるが、<code translate="no">10485760</code> に設定することもできる。</p></li>
 </ul>

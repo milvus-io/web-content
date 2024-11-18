@@ -62,8 +62,12 @@ title: 集成概述
 <tr><td><a href="/docs/zh/build_RAG_with_milvus_and_fireworks.md">使用 Milvus 和 Fireworks AI 构建 RAG</a></td><td>LLMs</td><td>Milvus、Fireworks AI</td></tr>
 <tr><td><a href="/docs/zh/build_RAG_with_milvus_and_lepton.md">使用 Milvus 和 Lepton AI 构建 RAG</a></td><td>LLMs</td><td>Milvus、Lepton AI</td></tr>
 <tr><td><a href="/docs/zh/build_RAG_with_milvus_and_siliconflow">使用 Milvus 和 SiliconFlow 构建 RAG</a></td><td>LLMs</td><td>Milvus、SiliconFlow</td></tr>
-<tr><td><a href="/docs/zh/rag_with_milvus_and_unstructured.md">利用 Milvus 和非结构化数据源构建 RAG</a></td><td>数据源</td><td>Milvus、非结构化</td></tr>
+<tr><td><a href="/docs/zh/rag_with_milvus_and_unstructured.md">使用 Milvus 和非结构化数据源构建 RAG</a></td><td>数据源</td><td>Milvus、非结构化</td></tr>
 <tr><td><a href="/docs/zh/RAG_with_pii_and_milvus.md">使用 Milvus + PII 屏蔽器构建 RAG</a></td><td>数据源</td><td>Milvus，PII 屏蔽器</td></tr>
 <tr><td><a href="/docs/zh/use_milvus_in_private_gpt.md">在 PrivateGPT 中使用 Milvus</a></td><td>协调</td><td>向量搜索</td></tr>
+<tr><td><a href="/docs/zh/quickstart_mem0_with_milvus.md">开始使用 Mem0 和 Milvus</a></td><td>Agents</td><td>Mem0、Milvus</td></tr>
+<tr><td><a href="/docs/zh/knowledge_table_with_milvus.md">使用 Milvus 的知识表</a></td><td>知识工程</td><td>知识表，Milvus</td></tr>
+<tr><td><a href="/docs/zh/use_milvus_in_docsgpt.md">在 DocsGPT 中使用 Milvus</a></td><td>协调</td><td>在 DocsGPT 中使用 Milvus</td></tr>
+<tr><td><a href="/docs/zh/use_milvus_with_sambanova.md">在 SambaNova 中使用 Milvus</a></td><td>协调</td><td>Milvus、SambaNova</td></tr>
 </tbody>
 </table>

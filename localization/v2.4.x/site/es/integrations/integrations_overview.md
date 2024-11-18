@@ -67,5 +67,9 @@ title: Visión general de las integraciones
 <tr><td><a href="/docs/es/rag_with_milvus_and_unstructured.md">Construir un GAR con Milvus y fuentes de datos</a></td><td>de datos no estructurados</td><td>Milvus, no estructurados</td></tr>
 <tr><td><a href="/docs/es/RAG_with_pii_and_milvus.md">Construir un GAR con Milvus + PII Masker</a></td><td>Fuentes de datos</td><td>Milvus, Enmascarador PII</td></tr>
 <tr><td><a href="/docs/es/use_milvus_in_private_gpt.md">Utilizar Milvus en PrivateGPT</a></td><td>Organización</td><td>Búsqueda vectorial</td></tr>
+<tr><td><a href="/docs/es/quickstart_mem0_with_milvus.md">Introducción a Mem0 y Milvus</a></td><td>Agentes</td><td>Mem0, Milvus</td></tr>
+<tr><td><a href="/docs/es/knowledge_table_with_milvus.md">Tabla de conocimiento con Milvus</a></td><td>Ingeniería del conocimiento</td><td>Tabla de conocimiento, Milvus</td></tr>
+<tr><td><a href="/docs/es/use_milvus_in_docsgpt.md">Utilización de Milvus en DocsGPT</a></td><td>Ochestration</td><td>DocsGPT, Milvus</td></tr>
+<tr><td><a href="/docs/es/use_milvus_with_sambanova.md">Utilización de Milvus con SambaNova</a></td><td>Orquestación</td><td>Milvus, SambaNova</td></tr>
 </tbody>
 </table>

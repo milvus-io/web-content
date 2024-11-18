@@ -43,5 +43,6 @@ title: Tutorials Overview
 <tr><td><a href="/docs/use_ColPali_with_milvus.md">Use ColPali for Multi-Modal Retrieval with Milvus</a></td><td>Quickstart</td><td>vector search</td></tr>
 <tr><td><a href="/docs/vector_visualization.md">Vector Visualization</a></td><td>Quickstart</td><td>vector search</td></tr>
 <tr><td><a href="/docs/movie_recommendation_with_milvus.md">Movie Recommendation with Milvus</a></td><td>Recommendation System</td><td>vector search</td></tr>
+<tr><td><a href="/docs/funnel_search_with_matryoshka.md">Funnel Search with Matryoshka Embeddings</a></td><td>Quickstart</td><td>vector search</td></tr>
 </tbody>
 </table>

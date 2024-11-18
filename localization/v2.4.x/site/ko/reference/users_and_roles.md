@@ -2,9 +2,9 @@
 id: users_and_roles.md
 related_key: 'users, roles'
 summary: '역할 기반 액세스 제어(RBAC)에서 사용자, 역할, 개체 및 권한의 정의에 대해 알아보세요.'
-title: 사용자 및 역할
+title: '사용자, 권한 및 역할'
 ---
-<h1 id="Users-and-Roles" class="common-anchor-header">사용자 및 역할<button data-href="#Users-and-Roles" class="anchor-icon" translate="no">
+<h1 id="Users-Privileges-and-Roles" class="common-anchor-header">사용자, 권한 및 역할<button data-href="#Users-Privileges-and-Roles" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -42,11 +42,11 @@ title: 사용자 및 역할
       </svg>
     </button></h2><p>Milvus 리소스에 대한 액세스 제어를 관리하려면 개체 유형, 개체 이름, 사용자, 역할 및 권한과 같은 RBAC의 주요 구성 요소를 이해하는 것이 중요합니다.</p>
 <ul>
-<li><p><strong>개체 유형</strong>: 권한이 할당되는 개체의 범주입니다. 개체 유형은 다음과 같습니다:</p>
+<li><p>개체<strong>유형</strong>: 권한이 할당되는 개체의 범주입니다. 개체 유형은 다음과 같습니다:</p>
 <ul>
 <li><code translate="no">Global</code>: 시스템 전체 개체로, 사용자가 모든 컬렉션, 사용자 또는 시스템 전체 설정에 영향을 주는 작업을 수행할 수 있습니다.</li>
 <li><code translate="no">Collection</code>: 컬렉션별 개체 - 사용자가 특정 컬렉션 내에서 인덱스 만들기, 데이터 로드, 데이터 삽입 또는 삭제, 데이터 쿼리 등의 작업을 수행할 수 있도록 허용하는 개체입니다.</li>
-<li><code translate="no">User</code>: 사용자 관리와 관련된 개체로, 사용자가 사용자 자격 증명 업데이트 또는 사용자 세부 정보 보기와 같이 데이터베이스 사용자의 자격 증명 및 역할을 관리할 수 있습니다.</li>
+<li><code translate="no">User</code>: 사용자 관리와 관련된 개체로, 사용자가 사용자 자격 증명 업데이트 또는 사용자 세부 정보 보기와 같은 데이터베이스 사용자의 자격 증명 및 역할을 관리할 수 있습니다.</li>
 </ul></li>
 <li><p><strong>개체 이름</strong>: 액세스를 제어할 개체의 특정 이름입니다. 예를 들어</p>
 <ul>
@@ -144,7 +144,7 @@ client.grantPrivilege(grantPrivilegeReq);
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>다음 표에는 <a href="/docs/ko/rbac.md">RBAC를 사용 설정할</a> 때 선택할 수 있는 값이 나열되어 있습니다.</p>
+    </button></h2><p>다음 표에는 <a href="/docs/ko/rbac.md">RBAC를 사용</a> 설정할 때 선택할 수 있는 값이 나열되어 있습니다.</p>
 <table>
 <thead>
 <tr><th>개체 유형</th><th>권한 이름</th><th>클라이언트 측의 관련 API 설명</th></tr>

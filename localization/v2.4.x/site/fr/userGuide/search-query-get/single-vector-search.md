@@ -68,10 +68,12 @@ title: Recherche à vecteur unique
     </button></h2><p>L'extrait de code ci-dessous reprend le code existant pour établir une connexion avec Milvus et configurer rapidement une collection.</p>
 <div class="multipleCode">
    <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a></div>
-<pre><code translate="no" class="language-python"><span class="hljs-comment"># 1. Set up a Milvus client</span>
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
+<span class="hljs-keyword">import</span> random
+
+<span class="hljs-comment"># 1. Set up a Milvus client</span>
 client = MilvusClient(
-    uri=CLUSTER_ENDPOINT,
-    token=TOKEN 
+    uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>
 )
 
 <span class="hljs-comment"># 2. Create a collection</span>
@@ -441,7 +443,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
         ></path>
       </svg>
     </button></h2><p>Lors de l'envoi d'une requête <code translate="no">search</code>, vous pouvez fournir une ou plusieurs valeurs vectorielles représentant vos enchâssements de requête et une valeur <code translate="no">limit</code> indiquant le nombre de résultats à renvoyer.</p>
-<p>En fonction de vos données et de votre vecteur d'interrogation, il se peut que vous obteniez moins de <code translate="no">limit</code> résultats. Cela se produit lorsque <code translate="no">limit</code> est plus grand que le nombre de vecteurs correspondants possibles pour votre requête.</p>
+<p>En fonction de vos données et de votre vecteur d'interrogation, il se peut que vous obteniez moins de <code translate="no">limit</code> résultats. Cela se produit lorsque <code translate="no">limit</code> est plus grand que le nombre de vecteurs correspondant à votre requête.</p>
 <h3 id="Single-vector-search" class="common-anchor-header">Recherche à vecteur unique</h3><p>La recherche à vecteur unique est la forme la plus simple des opérations <code translate="no">search</code> dans Milvus, conçue pour trouver les vecteurs les plus similaires à un vecteur d'interrogation donné.</p>
 <p>Pour effectuer une recherche à vecteur unique, indiquez le nom de la collection cible, le vecteur d'interrogation et le nombre de résultats souhaité (<code translate="no">limit</code>). Cette opération renvoie un ensemble de résultats comprenant les vecteurs les plus similaires, leurs identifiants et les distances par rapport au vecteur d'interrogation.</p>
 <p>Voici un exemple de recherche des 5 entités les plus similaires au vecteur d'interrogation :</p>
@@ -449,7 +451,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
    <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Single vector search</span>
 res = client.search(
-    collection_name=<span class="hljs-string">&quot;test_collection&quot;</span>, <span class="hljs-comment"># Replace with the actual name of your collection</span>
+    collection_name=<span class="hljs-string">&quot;quick_setup&quot;</span>, <span class="hljs-comment"># Replace with the actual name of your collection</span>
     <span class="hljs-comment"># Replace with your query vector</span>
     data=[[<span class="hljs-number">0.3580376395471989</span>, -<span class="hljs-number">0.6023495712049978</span>, <span class="hljs-number">0.18414012509913835</span>, -<span class="hljs-number">0.26286205330961354</span>, <span class="hljs-number">0.9029438446296592</span>]],
     limit=<span class="hljs-number">5</span>, <span class="hljs-comment"># Max. number of search results to return</span>
@@ -643,7 +645,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
    <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Bulk-vector search</span>
 res = client.search(
-    collection_name=<span class="hljs-string">&quot;test_collection&quot;</span>, <span class="hljs-comment"># Replace with the actual name of your collection</span>
+    collection_name=<span class="hljs-string">&quot;quick_setup&quot;</span>, <span class="hljs-comment"># Replace with the actual name of your collection</span>
     data=[
         [<span class="hljs-number">0.19886812562848388</span>, <span class="hljs-number">0.06023560599112088</span>, <span class="hljs-number">0.6976963061752597</span>, <span class="hljs-number">0.2614474506242501</span>, <span class="hljs-number">0.838729485096104</span>],
         [<span class="hljs-number">0.3172005263489739</span>, <span class="hljs-number">0.9719044792798428</span>, -<span class="hljs-number">0.36981146090600725</span>, -<span class="hljs-number">0.4860894583077995</span>, <span class="hljs-number">0.95791889146345</span>]
@@ -787,7 +789,7 @@ console.log(res.results)
 ]
 <button class="copy-code-btn"></button></code></pre>
 <p>Les résultats comprennent deux ensembles de plus proches voisins, un pour chaque vecteur d'interrogation, ce qui montre l'efficacité des recherches de vecteurs en vrac dans le traitement de plusieurs vecteurs d'interrogation à la fois.</p>
-<h3 id="Partition-search" class="common-anchor-header">Recherche par partition</h3><p>La recherche par partition réduit l'étendue de votre recherche à un sous-ensemble ou à une partition spécifique de votre collection. Elle est particulièrement utile pour les ensembles de données organisés où les données sont segmentées en divisions logiques ou catégorielles, ce qui permet d'accélérer les opérations de recherche en réduisant le volume de données à analyser.</p>
+<h3 id="Partition-search" class="common-anchor-header">Recherche par partition</h3><p>La recherche par partition réduit la portée de votre recherche à un sous-ensemble ou à une partition spécifique de votre collection. Elle est particulièrement utile pour les ensembles de données organisés où les données sont segmentées en divisions logiques ou catégorielles, ce qui permet d'accélérer les opérations de recherche en réduisant le volume de données à analyser.</p>
 <p>Pour effectuer une recherche par partition, il suffit d'inclure le nom de la partition cible dans <code translate="no">partition_names</code> de votre demande de recherche. Cela indique que l'opération <code translate="no">search</code> ne prend en compte que les vecteurs situés dans la partition spécifiée.</p>
 <p>Voici un exemple de recherche d'entités dans <code translate="no">red</code>:</p>
 <div class="multipleCode">
@@ -1228,7 +1230,7 @@ searchResp = client.<span class="hljs-title function_">search</span>(searchReq);
    <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Search with output fields</span>
 res = client.search(
-    collection_name=<span class="hljs-string">&quot;test_collection&quot;</span>, <span class="hljs-comment"># Replace with the actual name of your collection</span>
+    collection_name=<span class="hljs-string">&quot;quick_setup&quot;</span>, <span class="hljs-comment"># Replace with the actual name of your collection</span>
     data=[[<span class="hljs-number">0.3580376395471989</span>, -<span class="hljs-number">0.6023495712049978</span>, <span class="hljs-number">0.18414012509913835</span>, -<span class="hljs-number">0.26286205330961354</span>, <span class="hljs-number">0.9029438446296592</span>]],
     limit=<span class="hljs-number">5</span>, <span class="hljs-comment"># Max. number of search results to return</span>
     search_params={<span class="hljs-string">&quot;metric_type&quot;</span>: <span class="hljs-string">&quot;IP&quot;</span>, <span class="hljs-string">&quot;params&quot;</span>: {}}, <span class="hljs-comment"># Search parameters</span>
@@ -1376,7 +1378,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
    <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Search with filter</span>
 res = client.search(
-    collection_name=<span class="hljs-string">&quot;test_collection&quot;</span>, <span class="hljs-comment"># Replace with the actual name of your collection</span>
+    collection_name=<span class="hljs-string">&quot;quick_setup&quot;</span>, <span class="hljs-comment"># Replace with the actual name of your collection</span>
     data=[[<span class="hljs-number">0.3580376395471989</span>, -<span class="hljs-number">0.6023495712049978</span>, <span class="hljs-number">0.18414012509913835</span>, -<span class="hljs-number">0.26286205330961354</span>, <span class="hljs-number">0.9029438446296592</span>]],
     limit=<span class="hljs-number">5</span>, <span class="hljs-comment"># Max. number of search results to return</span>
     search_params={<span class="hljs-string">&quot;metric_type&quot;</span>: <span class="hljs-string">&quot;IP&quot;</span>, <span class="hljs-string">&quot;params&quot;</span>: {}}, <span class="hljs-comment"># Search parameters</span>
@@ -1483,7 +1485,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
    <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Infix match on color field</span>
 res = client.search(
-    collection_name=<span class="hljs-string">&quot;test_collection&quot;</span>, <span class="hljs-comment"># Replace with the actual name of your collection</span>
+    collection_name=<span class="hljs-string">&quot;quick_setup&quot;</span>, <span class="hljs-comment"># Replace with the actual name of your collection</span>
     data=[[<span class="hljs-number">0.3580376395471989</span>, -<span class="hljs-number">0.6023495712049978</span>, <span class="hljs-number">0.18414012509913835</span>, -<span class="hljs-number">0.26286205330961354</span>, <span class="hljs-number">0.9029438446296592</span>]],
     limit=<span class="hljs-number">5</span>, <span class="hljs-comment"># Max. number of search results to return</span>
     search_params={<span class="hljs-string">&quot;metric_type&quot;</span>: <span class="hljs-string">&quot;IP&quot;</span>, <span class="hljs-string">&quot;params&quot;</span>: {}}, <span class="hljs-comment"># Search parameters</span>
@@ -1584,7 +1586,7 @@ search_params = {
 }
 
 res = client.search(
-    collection_name=<span class="hljs-string">&quot;test_collection&quot;</span>, <span class="hljs-comment"># Replace with the actual name of your collection</span>
+    collection_name=<span class="hljs-string">&quot;quick_setup&quot;</span>, <span class="hljs-comment"># Replace with the actual name of your collection</span>
     data=[[<span class="hljs-number">0.3580376395471989</span>, -<span class="hljs-number">0.6023495712049978</span>, <span class="hljs-number">0.18414012509913835</span>, -<span class="hljs-number">0.26286205330961354</span>, <span class="hljs-number">0.9029438446296592</span>]],
     limit=<span class="hljs-number">3</span>, <span class="hljs-comment"># Max. number of search results to return</span>
     search_params=search_params, <span class="hljs-comment"># Search parameters</span>
@@ -1718,7 +1720,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
         ></path>
       </svg>
     </button></h2><p>Dans Milvus, la recherche par regroupement est conçue pour améliorer l'exhaustivité et la précision des résultats de recherche.</p>
-<p>Considérons un scénario dans RAG, où des charges de documents sont divisées en divers passages, et où chaque passage est représenté par un vecteur intégré. Les utilisateurs souhaitent trouver les passages les plus pertinents afin de déclencher les MLD avec précision. La fonction de recherche ordinaire de Milvus peut répondre à cette exigence, mais elle peut produire des résultats très biaisés : la plupart des passages ne proviennent que de quelques documents et l'exhaustivité des résultats de la recherche est très faible. Cela peut sérieusement nuire à la précision, voire à l'exactitude des résultats fournis par le LLM et influencer négativement l'expérience des utilisateurs du LLM.</p>
+<p>Considérons un scénario dans RAG, où des charges de documents sont divisées en divers passages, et où chaque passage est représenté par un vecteur intégré. Les utilisateurs souhaitent trouver les passages les plus pertinents afin de déclencher les MLD avec précision. La fonction de recherche ordinaire de Milvus peut répondre à cette exigence, mais elle peut produire des résultats très biaisés : la plupart des passages ne proviennent que de quelques documents, et l'exhaustivité des résultats de la recherche est très faible. Cela peut sérieusement nuire à la précision, voire à l'exactitude des résultats fournis par le LLM et influencer négativement l'expérience des utilisateurs du LLM.</p>
 <p>La recherche groupée peut résoudre efficacement ce problème. En passant un champ group_by_field et group_size, les utilisateurs de Milvus peuvent répartir les résultats de la recherche en plusieurs groupes et s'assurer que le nombre d'entités de chaque groupe ne dépasse pas un group_size spécifique. Cette fonction permet d'améliorer considérablement l'exhaustivité et l'équité des résultats de la recherche, ce qui améliore sensiblement la qualité des résultats du LLM.</p>
 <p>Voici un exemple de code pour regrouper les résultats de recherche par champ :</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Connect to Milvus</span>
@@ -1795,7 +1797,7 @@ passage_ids = [result[<span class="hljs-string">&#x27;entity&#x27;</span>][<span
 <li><p><strong>Vecteur</strong>: Actuellement, la recherche par regroupement ne prend pas en charge les champs vectoriels de type <strong>BINARY_VECTOR</strong>. Pour plus d'informations sur les types de données, voir <a href="https://milvus.io/docs/schema.md#Supported-data-types">Types de données pris en charge</a>.</p></li>
 <li><p><strong>Champ</strong>: Actuellement, la recherche par regroupement n'autorise qu'une seule colonne. Vous ne pouvez pas spécifier plusieurs noms de champs dans la configuration de <code translate="no">group_by_field</code>.  En outre, la recherche groupée est incompatible avec les types de données JSON, FLOAT, DOUBLE, ARRAY ou les champs vectoriels.</p></li>
 <li><p><strong>Impact sur les performances</strong>: Soyez conscient que les performances se dégradent avec l'augmentation du nombre de vecteurs de requête. Si l'on prend l'exemple d'un cluster doté de 2 cœurs de CPU et de 8 Go de mémoire, le temps d'exécution de la recherche par regroupement augmente proportionnellement au nombre de vecteurs de requête en entrée.</p></li>
-<li><p><strong>Fonctionnalité</strong>: Actuellement, la recherche par regroupement n'est pas prise en charge par la <a href="https://milvus.io/docs/single-vector-search.md#Range-search">recherche d'intervalle</a>, les <a href="https://milvus.io/docs/with-iterators.md#Search-with-iterator">itérateurs de recherche</a>, etc.</p></li>
+<li><p><strong>Fonctionnalité</strong>: Actuellement, la recherche par regroupement n'est pas prise en charge par la <a href="https://milvus.io/docs/single-vector-search.md#Range-search">recherche d'intervalle</a>, les <a href="https://milvus.io/docs/with-iterators.md#Search-with-iterator">itérateurs de recherche et la recherche en ligne</a>.</p></li>
 </ul>
 <h2 id="Search-parameters" class="common-anchor-header">Paramètres de recherche<button data-href="#Search-parameters" class="anchor-icon" translate="no">
       <svg translate="no"

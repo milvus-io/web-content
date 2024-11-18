@@ -54,7 +54,7 @@ title: Búsqueda híbrida
 
 <span class="hljs-comment"># Connect to Milvus</span>
 connections.connect(
-    host=<span class="hljs-string">&quot;10.102.7.3&quot;</span>, <span class="hljs-comment"># Replace with your Milvus server IP</span>
+    host=<span class="hljs-string">&quot;127.0.0.1&quot;</span>, <span class="hljs-comment"># Replace with your Milvus server IP</span>
     port=<span class="hljs-string">&quot;19530&quot;</span>
 )
 
@@ -232,7 +232,7 @@ res = collection.hybrid_search(
 <p>Una lista de peticiones de búsqueda, donde cada petición es un objeto <code translate="no">ANNSearchRequest</code>. Cada petición puede corresponder a un campo vectorial diferente y a un conjunto diferente de parámetros de búsqueda.</p></li>
 <li><p><code translate="no">rerank</code> <em>(objeto</em>)</p>
 <p>La estrategia de reordenación que se utilizará para la búsqueda híbrida. Valores posibles: <code translate="no">WeightedRanker(value1, value2, ..., valueN)</code> y <code translate="no">RRFRanker()</code>.</p>
-<p>Para más información sobre las estrategias de <a href="/docs/es/reranking.md">reordenación</a>, consulte <a href="/docs/es/reranking.md">Reordenación</a>.</p></li>
+<p>Para más información sobre las estrategias de reordenación, consulte <a href="/docs/es/reranking.md">Reordenación</a>.</p></li>
 <li><p><code translate="no">limit</code> <em>(int</em>)</p>
 <p>El número máximo de resultados finales a devolver en la búsqueda híbrida.</p></li>
 </ul>

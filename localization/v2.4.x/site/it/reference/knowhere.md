@@ -1,7 +1,7 @@
 ---
 id: knowhere.md
 summary: Scoprite Knowhere a Milvus.
-title: Da nessuna parte
+title: Knowhere
 ---
 <h1 id="Knowhere" class="common-anchor-header">Knowhere<button data-href="#Knowhere" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -34,7 +34,7 @@ title: Da nessuna parte
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Knowhere è il motore di esecuzione vettoriale principale di Milvus che incorpora diverse librerie di ricerca di similarità vettoriale, tra cui <a href="https://github.com/facebookresearch/faiss">Faiss</a>, <a href="https://github.com/nmslib/hnswlib">Hnswlib</a> e <a href="https://github.com/spotify/annoy">Annoy</a>. Knowhere è anche progettato per supportare l'elaborazione eterogenea. Controlla su quale hardware (CPU o GPU) eseguire le richieste di creazione di indici e di ricerca. È così che Knowhere prende il suo nome: sa dove eseguire le operazioni. Nelle versioni future saranno supportati altri tipi di hardware, tra cui DPU e TPU.</p>
+    </button></h2><p>Knowhere è il motore di esecuzione vettoriale principale di Milvus, che incorpora diverse librerie di ricerca di similarità vettoriale, tra cui <a href="https://github.com/facebookresearch/faiss">Faiss</a>, <a href="https://github.com/nmslib/hnswlib">Hnswlib</a> e <a href="https://github.com/spotify/annoy">Annoy</a>. Knowhere è anche progettato per supportare l'elaborazione eterogenea. Controlla su quale hardware (CPU o GPU) eseguire le richieste di creazione di indici e di ricerca. È così che Knowhere prende il suo nome: sa dove eseguire le operazioni. Nelle versioni future saranno supportati altri tipi di hardware, tra cui DPU e TPU.</p>
 <h2 id="Knowhere-in-the-Milvus-architecture" class="common-anchor-header">Knowhere nell'architettura Milvus<button data-href="#Knowhere-in-the-Milvus-architecture" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -55,7 +55,7 @@ title: Da nessuna parte
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/knowhere_architecture.png" alt="Knowhere" class="doc-image" id="knowhere" />
    </span> <span class="img-wrapper"> <span>Knowhere</span> </span></p>
-<p>Il livello più basso è l'hardware di sistema. Le librerie di indici di terze parti si trovano sopra l'hardware. Knowhere interagisce poi con il nodo indice e il nodo di interrogazione in alto tramite CGO, che consente ai pacchetti Go di richiamare codice C.</p>
+<p>Il livello più basso è l'hardware di sistema. Sopra di esso si trovano le librerie di indici di terze parti. Nel livello superiore, Knowhere interagisce con il nodo indice e il nodo di interrogazione tramite CGO, che consente ai pacchetti Go di richiamare codice C.</p>
 <h2 id="Knowhere-advantages" class="common-anchor-header">Vantaggi di Knowhere<button data-href="#Knowhere-advantages" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -76,8 +76,8 @@ title: Da nessuna parte
 <p>Ogni bit di un bitset corrisponde a un vettore indicizzato. Se un vettore è contrassegnato come "1" nel bitset, significa che questo vettore è stato eliminato in modo soft e non sarà coinvolto in una ricerca vettoriale. Il parametro bitset viene applicato a tutte le API di interrogazione dell'indice Faiss esposte in Knowhere, compresi gli indici della CPU e della GPU.</p>
 <p>Per ulteriori informazioni sul meccanismo dei bitset, consultare <a href="/docs/it/bitset.md">bitset</a>.</p>
 <h4 id="Support-for-multiple-similarity-metrics-for-indexing-binary-vectors" class="common-anchor-header">Supporto di più metriche di similarità per l'indicizzazione di vettori binari</h4><p>Knowhere supporta <a href="/docs/it/metric.md#Hamming-distance">Hamming</a>, <a href="/docs/it/metric.md#Jaccard-distance">Jaccard</a>, <a href="/docs/it/metric.md#Tanimoto-distance">Tanimoto</a>, <a href="/docs/it/metric.md#Superstructure">Superstructure</a> e <a href="/docs/it/metric.md#Substructure">Substructure</a>. Jaccard e Tanimoto possono essere utilizzati per misurare la somiglianza tra due insiemi di campioni, mentre Superstructure e Substructure possono essere utilizzate per misurare la somiglianza tra strutture chimiche.</p>
-<h4 id="Support-for-AVX512-instruction-set" class="common-anchor-header">Supporto per il set di istruzioni AVX512</h4><p>Oltre ad <a href="https://en.wikipedia.org/wiki/AArch64">AArch64</a>, <a href="https://en.wikipedia.org/wiki/SSE4#SSE4.2">SSE4.2</a> e <a href="https://en.wikipedia.org/wiki/Advanced_Vector_Extensions">AVX2</a>, i set di istruzioni già supportati da Faiss, Knowhere supporta anche <a href="https://en.wikipedia.org/wiki/AVX-512">AVX512</a>, che può <a href="https://milvus.io/blog/milvus-performance-AVX-512-vs-AVX2.md">migliorare le prestazioni della creazione di indici e delle query del 20%-30%</a> rispetto ad AVX2.</p>
-<h4 id="Automatic-SIMD-instruction-selection" class="common-anchor-header">Selezione automatica delle istruzioni SIMD</h4><p>Knowhere supporta l'invocazione automatica delle istruzioni SIMD adatte (ad esempio, SIMD SSE, AVX, AVX2 e AVX512) su qualsiasi processore di CPU (sia su piattaforme on-premises che cloud), in modo che gli utenti non debbano specificare manualmente il flag SIMD (ad esempio, "-msse4") durante la compilazione.</p>
+<h4 id="Support-for-AVX512-instruction-set" class="common-anchor-header">Supporto per il set di istruzioni AVX512</h4><p>Oltre ad <a href="https://en.wikipedia.org/wiki/AArch64">AArch64</a>, <a href="https://en.wikipedia.org/wiki/SSE4#SSE4.2">SSE4.2</a> e <a href="https://en.wikipedia.org/wiki/Advanced_Vector_Extensions">AVX2</a>, i set di istruzioni già supportati da Faiss, Knowhere supporta anche <a href="https://en.wikipedia.org/wiki/AVX-512">AVX512</a>, che può <a href="https://milvus.io/blog/milvus-performance-AVX-512-vs-AVX2.md">migliorare le prestazioni della creazione di indici e delle query del 20-30%</a> rispetto ad AVX2.</p>
+<h4 id="Automatic-SIMD-instruction-selection" class="common-anchor-header">Selezione automatica delle istruzioni SIMD</h4><p>Knowhere supporta l'invocazione automatica delle istruzioni SIMD adatte (ad esempio, SIMD SSE, AVX, AVX2 e AVX512) su qualsiasi processore della CPU (sia su piattaforme on-premises che cloud), in modo che gli utenti non debbano specificare manualmente il flag SIMD (ad esempio, "-msse4") durante la compilazione.</p>
 <p>Knowhere è stato realizzato attraverso il refactoring della base di codice di Faiss. Le funzioni comuni (ad esempio, il calcolo della somiglianza) che si basano sull'accelerazione SIMD vengono eliminate. Quindi, per ogni funzione, vengono implementate quattro versioni (SSE, AVX, AVX2, AVX512), ognuna delle quali viene inserita in un file sorgente separato. I file sorgenti vengono poi compilati singolarmente con il corrispondente flag SIMD. Pertanto, in fase di esecuzione, Knowhere è in grado di scegliere automaticamente le istruzioni SIMD più adatte in base ai flag correnti della CPU e di collegare i puntatori alle funzioni giuste utilizzando l'hooking.</p>
 <h4 id="Other-performance-optimization" class="common-anchor-header">Altre ottimizzazioni delle prestazioni</h4><p>Per ulteriori informazioni sull'ottimizzazione delle prestazioni di Knowhere, leggete <a href="https://www.cs.purdue.edu/homes/csjgwang/pubs/SIGMOD21_Milvus.pdf">Milvus: A Purpose-Built Vector Data Management System</a>.</p>
 <h2 id="Knowhere-code-structure" class="common-anchor-header">Struttura del codice di Knowhere<button data-href="#Knowhere-code-structure" class="anchor-icon" translate="no">
@@ -113,21 +113,21 @@ title: Da nessuna parte
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/IDMAP.png" alt="IDMAP" class="doc-image" id="idmap" />
    </span> <span class="img-wrapper"> <span>IDMAP</span> </span></p>
-<p>Tecnicamente parlando, <code translate="no">IDMAP</code> non è un indice, ma viene utilizzato per la ricerca a forza bruta. Quando i vettori vengono inseriti nel database, non è necessario né addestrare i dati né costruire un indice. Le ricerche saranno condotte direttamente sui dati vettoriali inseriti.</p>
+<p>Tecnicamente parlando, <code translate="no">IDMAP</code> non è un indice, ma viene utilizzato per la ricerca bruta. Quando i vettori vengono inseriti nel database, non è necessario né addestrare i dati né costruire un indice. Le ricerche saranno condotte direttamente sui dati vettoriali inseriti.</p>
 <p>Tuttavia, per coerenza di codice, <code translate="no">IDMAP</code> eredita anche dalla classe <code translate="no">VecIndex</code> con tutte le sue interfacce virtuali. L'uso di <code translate="no">IDMAP</code> è lo stesso degli altri indici.</p>
-<h4 id="IVF-indexes" class="common-anchor-header">Indici FIV</h4><p>
+<h4 id="IVF-indices" class="common-anchor-header">Indici FIV</h4><p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/IVF.png" alt="IVF" class="doc-image" id="ivf" />
    </span> <span class="img-wrapper"> <span>FIV</span> </span></p>
 <p>Gli indici IVF (inverted file) sono i più utilizzati. La classe <code translate="no">IVF</code> è derivata da <code translate="no">VecIndex</code> e <code translate="no">FaissBaseIndex</code>, e si estende ulteriormente a <code translate="no">IVFSQ</code> e <code translate="no">IVFPQ</code>. <code translate="no">GPUIVF</code> è derivata da <code translate="no">GPUIndex</code> e <code translate="no">IVF</code>. Poi <code translate="no">GPUIVF</code> si estende ulteriormente a <code translate="no">GPUIVFSQ</code> e <code translate="no">GPUIVFPQ</code>.</p>
-<p><code translate="no">IVFSQHybrid</code> è un indice ibrido sviluppato in proprio. Il quantizzatore grossolano viene eseguito sulla GPU, mentre la ricerca nel bucket sulla CPU. Questo tipo di indice può ridurre il numero di copie di memoria tra CPU e GPU, sfruttando la potenza di calcolo della GPU. <code translate="no">IVFSQHybrid</code> ha lo stesso tasso di richiamo di <code translate="no">GPUIVFSQ</code>, ma offre prestazioni migliori.</p>
-<p>La struttura della classe base per gli indici binari è relativamente più semplice. <code translate="no">BinaryIDMAP</code> e <code translate="no">BinaryIVF</code> sono derivati da <code translate="no">FaissBaseBinaryIndex</code> e <code translate="no">VecIndex</code>.</p>
-<h4 id="Third-party-indexes" class="common-anchor-header">Indici di terze parti</h4><p>
+<p><code translate="no">IVFSQHybrid</code> è un indice ibrido sviluppato in proprio. Un quantizzatore grossolano viene eseguito sulla GPU, mentre la ricerca nel bucket viene eseguita dalla CPU. Questo tipo di indice può ridurre il numero di copie di memoria tra CPU e GPU, sfruttando la potenza di calcolo della GPU. <code translate="no">IVFSQHybrid</code> ha lo stesso tasso di richiamo di <code translate="no">GPUIVFSQ</code>, ma offre prestazioni migliori.</p>
+<p>La struttura delle classi base per gli indici binari è relativamente più semplice. <code translate="no">BinaryIDMAP</code> e <code translate="no">BinaryIVF</code> sono derivati da <code translate="no">FaissBaseBinaryIndex</code> e <code translate="no">VecIndex</code>.</p>
+<h4 id="Third-party-indices" class="common-anchor-header">Indici di terze parti</h4><p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/third_party_index.png" alt="third-party indexes" class="doc-image" id="third-party-indexes" />
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/third_party_index.png" alt="third-party indices" class="doc-image" id="third-party-indices" />
    </span> <span class="img-wrapper"> <span>indici di terze parti</span> </span></p>
 <p>Attualmente sono supportati solo due tipi di indici di terze parti, oltre a Faiss: l'indice ad albero <code translate="no">Annoy</code> e l'indice a grafo <code translate="no">HNSW</code>. Questi due indici di terze parti, comuni e frequentemente utilizzati, sono entrambi derivati da <code translate="no">VecIndex</code>.</p>
-<h2 id="Adding-indexes-to-Knowhere" class="common-anchor-header">Aggiungere indici a Knowhere<button data-href="#Adding-indexes-to-Knowhere" class="anchor-icon" translate="no">
+<h2 id="Adding-indices-to-Knowhere" class="common-anchor-header">Aggiungere indici a Knowhere<button data-href="#Adding-indices-to-Knowhere" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -148,12 +148,12 @@ title: Da nessuna parte
 <li><p>Per aggiungere indici basati su grafi, fare riferimento a <code translate="no">HNSW</code>.</p></li>
 <li><p>Per aggiungere indici ad albero, fare riferimento a <code translate="no">Annoy</code>.</p></li>
 </ul>
-<p>Dopo aver fatto riferimento all'indice esistente, è possibile seguire la procedura seguente per aggiungere un nuovo indice a Knowhere.</p>
+<p>Dopo aver fatto riferimento all'indice esistente, si può seguire la procedura seguente per aggiungere un nuovo indice a Knowhere.</p>
 <ol>
 <li><p>Aggiungere il nome del nuovo indice in <code translate="no">IndexEnum</code>. Il tipo di dati è stringa.</p></li>
 <li><p>Aggiungere il controllo di convalida dei dati sul nuovo indice nel file <code translate="no">ConfAdapter.cpp</code>. Il controllo di convalida serve principalmente a convalidare i parametri per la formazione dei dati e la query.</p></li>
 <li><p>Creare un nuovo file per il nuovo indice. La classe base del nuovo indice deve includere <code translate="no">VecIndex</code> e l'interfaccia virtuale necessaria di <code translate="no">VecIndex</code>.</p></li>
-<li><p>Aggiungere la logica di costruzione del nuovo indice in <code translate="no">VecIndexFactory::CreateVecIndex()</code>.</p></li>
+<li><p>Aggiungere la logica di costruzione dell'indice per il nuovo indice in <code translate="no">VecIndexFactory::CreateVecIndex()</code>.</p></li>
 <li><p>Aggiungere il test unitario nella cartella <code translate="no">unittest</code>.</p></li>
 </ol>
 <h2 id="Whats-next" class="common-anchor-header">Il prossimo passo<button data-href="#Whats-next" class="anchor-icon" translate="no">

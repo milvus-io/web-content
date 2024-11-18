@@ -652,7 +652,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
     partition_names=[<span class="hljs-string">&quot;partitionA&quot;</span>, <span class="hljs-string">&quot;partitionB&quot;</span>]
 )
 
-res = client.get_load_status(
+res = client.get_load_state(
     collection_name=<span class="hljs-string">&quot;quick_setup&quot;</span>,
     partition_name=<span class="hljs-string">&quot;partitionA&quot;</span>
 )
@@ -663,7 +663,7 @@ res = client.get_load_status(
 <span class="hljs-comment">#     &quot;state&quot;: &quot;&lt;LoadState: Loaded&gt;&quot;</span>
 <span class="hljs-comment"># }</span>
 
-res = client.get_load_status(
+res = client.get_load_state(
     collection_name=<span class="hljs-string">&quot;quick_setup&quot;</span>,
     partition_name=<span class="hljs-string">&quot;partitionB&quot;</span>
 )
@@ -820,7 +820,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
     partition_names=[<span class="hljs-string">&quot;_default&quot;</span>, <span class="hljs-string">&quot;partitionA&quot;</span>, <span class="hljs-string">&quot;partitionB&quot;</span>]
 )
 
-res = client.get_load_status(
+res = client.get_load_state(
     collection_name=<span class="hljs-string">&quot;quick_setup&quot;</span>,
 )
 

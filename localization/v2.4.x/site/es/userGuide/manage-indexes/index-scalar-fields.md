@@ -4,7 +4,7 @@ order: 2
 summary: >-
   Esta guía le guiará a través de la creación y configuración de índices
   escalares para campos como enteros, cadenas, etc.
-title: Índice Campos escalares
+title: Índice de campos escalares
 ---
 <h1 id="Index-Scalar-Fields" class="common-anchor-header">Índice de campos escalares<button data-href="#Index-Scalar-Fields" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -73,7 +73,7 @@ client = MilvusClient(
     uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>
 )
 
-index_params = client.create_index_params() <span class="hljs-comment"># Prepare an empty IndexParams object, without having to specify any index parameters</span>
+index_params = MilvusClient.prepare_index_params() <span class="hljs-comment"># Prepare an empty IndexParams object, without having to specify any index parameters</span>
 
 index_params.add_index(
     field_name=<span class="hljs-string">&quot;scalar_1&quot;</span>, <span class="hljs-comment"># Name of the scalar field to be indexed</span>
@@ -128,7 +128,7 @@ client.createIndex(createIndexReq);
         ></path>
       </svg>
     </button></h2><div class="language-python">
-<p>Para utilizar la indexación personalizada, especifique un tipo de índice concreto mediante el parámetro <strong>index_type</strong> en el archivo <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/add_index.md"><code translate="no">add_index()</code></a>.</p>
+<p>Para utilizar la indexación personalizada, especifique un tipo de índice concreto utilizando el parámetro <strong>index_type</strong> en el archivo <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/add_index.md"><code translate="no">add_index()</code></a>.</p>
 </div>
 <div class="language-java">
 <p>Para utilizar la indexación personalizada, especifique un tipo de índice concreto utilizando el parámetro <strong>indexType</strong> en <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Management/IndexParam.md"><code translate="no">IndexParam</code></a>.</p>
@@ -139,7 +139,7 @@ client.createIndex(createIndexReq);
 <p>El siguiente ejemplo crea un índice invertido para el campo escalar <code translate="no">scalar_2</code>.</p>
 <div class="multipleCode">
    <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a></div>
-<pre><code translate="no" class="language-python">index_params = client.create_index_params() <span class="hljs-comment">#  Prepare an IndexParams object</span>
+<pre><code translate="no" class="language-python">index_params = MilvusClient.prepare_index_params() <span class="hljs-comment">#  Prepare an IndexParams object</span>
 
 index_params.add_index(
     field_name=<span class="hljs-string">&quot;scalar_2&quot;</span>, <span class="hljs-comment"># Name of the scalar field to be indexed</span>
@@ -181,7 +181,7 @@ client.createIndex(createIndexReq);
 <div class="language-python">
 <p><strong>Métodos y parámetros</strong></p>
 <ul>
-<li><p><strong>crear_parametros_de_índice()</strong></p>
+<li><p><strong>preparar_parametros_de_índice()</strong></p>
 <p>Prepara un objeto <strong>IndexParams</strong>.</p></li>
 <li><p><strong>add_index()</strong></p>
 <p>Añade configuraciones de índice al objeto <strong>IndexParams</strong>.</p>

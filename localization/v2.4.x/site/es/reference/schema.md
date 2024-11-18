@@ -39,12 +39,15 @@ title: Gestionar esquema
 <h3 id="Field-schema-properties" class="common-anchor-header">Propiedades del esquema de campo</h3><table class="properties">
     <thead>
     <tr>
-       <th>Propiedades</td><th>Descripción</th> <th>Nota</th>   </tr>
+        <th>Propiedades</th>
+        <th>Descripción</th>
+        <th>Nota</th>
+    </tr>
     </thead>
     <tbody>
     <tr>
         <td><code translate="no">name</code></td>
-        <td>Nombre del campo en la colección a crear</td>
+        <td>Nombre del campo de la colección que se va a crear</td>
         <td>Tipo de datos: Cadena.<br/>Obligatorio</td>
     </tr>
     <tr>
@@ -75,7 +78,7 @@ title: Gestionar esquema
     <tr>
         <td><code translate="no">dim</code></td>
         <td>Dimensión del vector</td>
-            <td>Tipo de datos: Integer &isin;[1, 32768].<br/>Obligatorio para un campo vectorial denso. Omitir para un campo vectorial <a href="https://milvus.io/docs/sparse_vector.md">disperso</a>.</td>
+            <td>Tipo de datos: Entero &isin;[1, 32768].<br/>Obligatorio para un campo vectorial denso. Omitir para un campo vectorial <a href="https://milvus.io/docs/sparse_vector.md">disperso</a>.</td>
     </tr>
     <tr>
         <td><code translate="no">is_partition_key</code></td>
@@ -129,7 +132,7 @@ fields = [
 <ul>
 <li>BINARY_VECTOR: Almacena datos binarios como una secuencia de 0 y 1. Se utiliza para la representación compacta de características en el procesamiento de imágenes y la recuperación de información.</li>
 <li>FLOAT_VECTOR: Almacena números de coma flotante de 32 bits, utilizados habitualmente en computación científica y aprendizaje automático para representar números reales.</li>
-<li>FLOAT16_VECTOR: Almacena números de coma flotante de 16 bits y media precisión, utilizados en el aprendizaje profundo y los cálculos de GPU para la eficiencia de la memoria y el ancho de banda.</li>
+<li>FLOAT16_VECTOR: Almacena números de coma flotante de 16 bits de media precisión, utilizados en el aprendizaje profundo y los cálculos de GPU para la eficiencia de la memoria y el ancho de banda.</li>
 <li>BFLOAT16_VECTOR: Almacena números de punto flotante de 16 bits con precisión reducida pero el mismo rango de exponentes que Float32, popular en el aprendizaje profundo para reducir los requisitos de memoria y computación sin afectar significativamente a la precisión.</li>
 <li>SPARSE_FLOAT_VECTOR: Almacena una lista de elementos distintos de cero y sus índices correspondientes, utilizados para representar vectores dispersos. Para más información, consulte <a href="/docs/es/sparse_vector.md">Vectores dispersos</a>.</li>
 </ul>
@@ -151,10 +154,13 @@ fields = [
         ></path>
       </svg>
     </button></h2><p>Un esquema de colección es la definición lógica de una colección. Normalmente es necesario definir el <a href="#Field-schema">esquema de campo</a> antes de definir un esquema de colección y <a href="/docs/es/manage-collections.md">gestionar colecciones</a>.</p>
-<h3 id="Collection-schema-properties" class="common-anchor-header">Propiedades del esquema de colección</h3><table class="properties">
+<h3 id="Collection-schema-properties" class="common-anchor-header">Propiedades del esquema de la colección</h3><table class="properties">
     <thead>
     <tr>
-       <th>Propiedades</td><th>Descripción</th> <th>Nota</th>   </tr>
+        <th>Propiedades</th>
+        <th>Descripción</th>
+        <th>Nota</th>
+    </tr>
     </thead>
     <tbody>
     <tr>
@@ -193,7 +199,8 @@ position_field = FieldSchema(name=<span class="hljs-string">&quot;position&quot;
 schema = CollectionSchema(fields=[id_field, age_field, embedding_field], auto_id=<span class="hljs-literal">False</span>, enable_dynamic_field=<span class="hljs-literal">True</span>, description=<span class="hljs-string">&quot;desc of a collection&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
 <p>Cree una colección con el esquema especificado:</p>
-<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> <span class="hljs-title class_">Collection</span>
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> <span class="hljs-title class_">Collection</span>,connections
+conn = connections.<span class="hljs-title function_">connect</span>(host=<span class="hljs-string">&quot;127.0.0.1&quot;</span>, port=<span class="hljs-number">19530</span>)
 collection_name1 = <span class="hljs-string">&quot;tutorial_1&quot;</span>
 collection1 = <span class="hljs-title class_">Collection</span>(name=collection_name1, schema=schema, using=<span class="hljs-string">&#x27;default&#x27;</span>, shards_num=<span class="hljs-number">2</span>)
 <button class="copy-code-btn"></button></code></pre>

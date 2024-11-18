@@ -23,7 +23,7 @@ title: 单向量搜索
 <p>根据 Collections 中向量场的数量，Milvus 允许您进行两种类型的搜索：</p>
 <ul>
 <li><strong>单向量搜索</strong>：如果您的 Collections 只有一个向量场，请使用 <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Vector/search.md"><code translate="no">search()</code></a>方法来查找最相似的实体。该方法会将您的查询向量与 Collections 中的现有向量进行比较，并返回最匹配的 ID 以及它们之间的距离。作为选项，它还可以返回结果的向量值和元数据。</li>
-<li><strong>混合搜索</strong>：对于有两个或更多向量字段的 Collections，可使用 <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/ORM/Collection/hybrid_search.md"><code translate="no">hybrid_search()</code></a>方法。该方法会执行多个近似近邻（ANN）搜索请求，并在重新排序后将结果组合起来，返回最相关的匹配结果。</li>
+<li><strong>混合搜索</strong>：对于有两个或更多向量字段的 Collections，可使用 <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/ORM/Collection/hybrid_search.md"><code translate="no">hybrid_search()</code></a>方法。该方法会执行多个近似近邻（ANN）搜索请求，并在重新排序后将结果合并以返回最相关的匹配结果。</li>
 </ul>
 <p>本指南主要介绍如何在 Milvus 中执行单向量搜索。有关混合搜索的详细信息，请参阅<a href="https://milvus.io/docs/multi-vector-search.md">混合搜索</a>。</p>
 <h2 id="Overview" class="common-anchor-header">搜索概述<button data-href="#Overview" class="anchor-icon" translate="no">
@@ -66,10 +66,12 @@ title: 单向量搜索
     </button></h2><p>下面的代码片段对现有代码进行了重新利用，以建立与 Milvus 的连接并快速设置 Collections。</p>
 <div class="multipleCode">
    <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a></div>
-<pre><code translate="no" class="language-python"><span class="hljs-comment"># 1. Set up a Milvus client</span>
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
+<span class="hljs-keyword">import</span> random
+
+<span class="hljs-comment"># 1. Set up a Milvus client</span>
 client = MilvusClient(
-    uri=CLUSTER_ENDPOINT,
-    token=TOKEN 
+    uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>
 )
 
 <span class="hljs-comment"># 2. Create a collection</span>
@@ -439,7 +441,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
         ></path>
       </svg>
     </button></h2><p>在发送<code translate="no">search</code> 请求时，您可以提供一个或多个代表查询嵌入的向量值，以及表示要返回结果数量的<code translate="no">limit</code> 值。</p>
-<p>根据您的数据和查询向量，您可能会得到少于<code translate="no">limit</code> 的结果。当<code translate="no">limit</code> 大于查询可能匹配的向量数时，就会出现这种情况。</p>
+<p>根据您的数据和查询向量，您可能会得到少于<code translate="no">limit</code> 的结果。当<code translate="no">limit</code> 大于您查询的可能匹配向量数时，就会出现这种情况。</p>
 <h3 id="Single-vector-search" class="common-anchor-header">单向量搜索</h3><p>在 Milvus 中，单向量搜索是最简单的<code translate="no">search</code> 操作符，用于查找与给定查询向量最相似的向量。</p>
 <p>要执行单矢量搜索，请指定目标 Collections 名称、查询向量和所需结果数 (<code translate="no">limit</code>)。该操作会返回一个结果集，其中包括最相似的向量、它们的 ID 和与查询向量的距离。</p>
 <p>下面是搜索与查询向量最相似的前 5 个实体的示例：</p>
@@ -447,7 +449,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
    <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Single vector search</span>
 res = client.search(
-    collection_name=<span class="hljs-string">&quot;test_collection&quot;</span>, <span class="hljs-comment"># Replace with the actual name of your collection</span>
+    collection_name=<span class="hljs-string">&quot;quick_setup&quot;</span>, <span class="hljs-comment"># Replace with the actual name of your collection</span>
     <span class="hljs-comment"># Replace with your query vector</span>
     data=[[<span class="hljs-number">0.3580376395471989</span>, -<span class="hljs-number">0.6023495712049978</span>, <span class="hljs-number">0.18414012509913835</span>, -<span class="hljs-number">0.26286205330961354</span>, <span class="hljs-number">0.9029438446296592</span>]],
     limit=<span class="hljs-number">5</span>, <span class="hljs-comment"># Max. number of search results to return</span>
@@ -635,13 +637,13 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 <button class="copy-code-btn"></button></code></pre>
 <p>输出结果会显示与您的查询向量最接近的前 5 个邻居，包括它们的唯一 ID 和计算出的距离。</p>
 <h3 id="Bulk-vector-search" class="common-anchor-header">批量向量搜索</h3><p>批量向量搜索扩展了<a href="https://milvus.io/docs/single-vector-search.md#Single-Vector-Search">单向量搜索</a>的概念，允许在单个请求中搜索多个查询向量。这种类型的搜索非常适合需要为一组查询向量查找相似向量的场景，大大减少了所需的时间和计算资源。</p>
-<p>在批量向量搜索中，您可以在<code translate="no">data</code> 字段中包含多个查询向量。系统会并行处理这些向量，为每个查询向量返回一个单独的结果集，每个结果集都包含在 Collections 中找到的最接近的匹配结果。</p>
+<p>在批量向量搜索中，您可以在<code translate="no">data</code> 字段中包含多个查询向量。系统会并行处理这些向量，为每个查询向量返回一个单独的结果集，每个结果集包含在 Collections 中找到的最接近的匹配结果。</p>
 <p>下面是一个从两个查询向量中搜索最相似实体的两个不同集合的示例：</p>
 <div class="multipleCode">
    <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Bulk-vector search</span>
 res = client.search(
-    collection_name=<span class="hljs-string">&quot;test_collection&quot;</span>, <span class="hljs-comment"># Replace with the actual name of your collection</span>
+    collection_name=<span class="hljs-string">&quot;quick_setup&quot;</span>, <span class="hljs-comment"># Replace with the actual name of your collection</span>
     data=[
         [<span class="hljs-number">0.19886812562848388</span>, <span class="hljs-number">0.06023560599112088</span>, <span class="hljs-number">0.6976963061752597</span>, <span class="hljs-number">0.2614474506242501</span>, <span class="hljs-number">0.838729485096104</span>],
         [<span class="hljs-number">0.3172005263489739</span>, <span class="hljs-number">0.9719044792798428</span>, -<span class="hljs-number">0.36981146090600725</span>, -<span class="hljs-number">0.4860894583077995</span>, <span class="hljs-number">0.95791889146345</span>]
@@ -1226,7 +1228,7 @@ searchResp = client.<span class="hljs-title function_">search</span>(searchReq);
    <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Search with output fields</span>
 res = client.search(
-    collection_name=<span class="hljs-string">&quot;test_collection&quot;</span>, <span class="hljs-comment"># Replace with the actual name of your collection</span>
+    collection_name=<span class="hljs-string">&quot;quick_setup&quot;</span>, <span class="hljs-comment"># Replace with the actual name of your collection</span>
     data=[[<span class="hljs-number">0.3580376395471989</span>, -<span class="hljs-number">0.6023495712049978</span>, <span class="hljs-number">0.18414012509913835</span>, -<span class="hljs-number">0.26286205330961354</span>, <span class="hljs-number">0.9029438446296592</span>]],
     limit=<span class="hljs-number">5</span>, <span class="hljs-comment"># Max. number of search results to return</span>
     search_params={<span class="hljs-string">&quot;metric_type&quot;</span>: <span class="hljs-string">&quot;IP&quot;</span>, <span class="hljs-string">&quot;params&quot;</span>: {}}, <span class="hljs-comment"># Search parameters</span>
@@ -1374,7 +1376,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
    <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Search with filter</span>
 res = client.search(
-    collection_name=<span class="hljs-string">&quot;test_collection&quot;</span>, <span class="hljs-comment"># Replace with the actual name of your collection</span>
+    collection_name=<span class="hljs-string">&quot;quick_setup&quot;</span>, <span class="hljs-comment"># Replace with the actual name of your collection</span>
     data=[[<span class="hljs-number">0.3580376395471989</span>, -<span class="hljs-number">0.6023495712049978</span>, <span class="hljs-number">0.18414012509913835</span>, -<span class="hljs-number">0.26286205330961354</span>, <span class="hljs-number">0.9029438446296592</span>]],
     limit=<span class="hljs-number">5</span>, <span class="hljs-comment"># Max. number of search results to return</span>
     search_params={<span class="hljs-string">&quot;metric_type&quot;</span>: <span class="hljs-string">&quot;IP&quot;</span>, <span class="hljs-string">&quot;params&quot;</span>: {}}, <span class="hljs-comment"># Search parameters</span>
@@ -1481,7 +1483,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
    <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Infix match on color field</span>
 res = client.search(
-    collection_name=<span class="hljs-string">&quot;test_collection&quot;</span>, <span class="hljs-comment"># Replace with the actual name of your collection</span>
+    collection_name=<span class="hljs-string">&quot;quick_setup&quot;</span>, <span class="hljs-comment"># Replace with the actual name of your collection</span>
     data=[[<span class="hljs-number">0.3580376395471989</span>, -<span class="hljs-number">0.6023495712049978</span>, <span class="hljs-number">0.18414012509913835</span>, -<span class="hljs-number">0.26286205330961354</span>, <span class="hljs-number">0.9029438446296592</span>]],
     limit=<span class="hljs-number">5</span>, <span class="hljs-comment"># Max. number of search results to return</span>
     search_params={<span class="hljs-string">&quot;metric_type&quot;</span>: <span class="hljs-string">&quot;IP&quot;</span>, <span class="hljs-string">&quot;params&quot;</span>: {}}, <span class="hljs-comment"># Search parameters</span>
@@ -1582,7 +1584,7 @@ search_params = {
 }
 
 res = client.search(
-    collection_name=<span class="hljs-string">&quot;test_collection&quot;</span>, <span class="hljs-comment"># Replace with the actual name of your collection</span>
+    collection_name=<span class="hljs-string">&quot;quick_setup&quot;</span>, <span class="hljs-comment"># Replace with the actual name of your collection</span>
     data=[[<span class="hljs-number">0.3580376395471989</span>, -<span class="hljs-number">0.6023495712049978</span>, <span class="hljs-number">0.18414012509913835</span>, -<span class="hljs-number">0.26286205330961354</span>, <span class="hljs-number">0.9029438446296592</span>]],
     limit=<span class="hljs-number">3</span>, <span class="hljs-comment"># Max. number of search results to return</span>
     search_params=search_params, <span class="hljs-comment"># Search parameters</span>
@@ -1699,7 +1701,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 <tr><td><code translate="no">HAMMING</code></td><td>汉明距离越小，相似度越高。</td><td>要从结果中排除最接近的向量，请确保：<br/> <code translate="no">range_filter</code> &lt;= distance &lt;<code translate="no">radius</code></td></tr>
 </tbody>
 </table>
-<p>要了解有关距离度量类型的更多信息，请参阅 "<a href="/docs/zh/metric.md">相似度量"</a>。</p>
+<p>要了解有关距离度量类型的更多信息，请参阅<a href="/docs/zh/metric.md">相似度量</a>。</p>
 <h2 id="Grouping-search" class="common-anchor-header">分组搜索<button data-href="#Grouping-search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -1830,7 +1832,7 @@ search_parameters = {
 </thead>
 <tbody>
 <tr><td><code translate="no">metric_type</code></td><td>如何测量向量 Embeddings 之间的相似性。<br/> 可能的值为<code translate="no">IP</code>,<code translate="no">L2</code>,<code translate="no">COSINE</code>,<code translate="no">JACCARD</code>, 和<code translate="no">HAMMING</code> ，默认值为已加载索引文件的值。</td></tr>
-<tr><td><code translate="no">params.nprobe</code></td><td>搜索时要查询的单位数量。<br/> 取值范围为 [1，nlist<sub>[1]</sub>]。</td></tr>
+<tr><td><code translate="no">params.nprobe</code></td><td>搜索时要查询的单元数。<br/> 取值范围为 [1，nlist<sub>[1]</sub>]。</td></tr>
 <tr><td><code translate="no">params.level</code></td><td>搜索精度级别。<br/> 可能的值为<code translate="no">1</code> 、<code translate="no">2</code> 和<code translate="no">3</code> ，默认值为<code translate="no">1</code> 。值越高，结果越精确，但性能越差。</td></tr>
 <tr><td><code translate="no">params.radius</code></td><td>定义搜索空间的外部边界。只有与查询向量距离在此范围内的向量才会被视为潜在匹配。<br/>值范围由<code translate="no">metric_type</code> 参数决定。例如，如果<code translate="no">metric_type</code> 设置为<code translate="no">L2</code> ，则有效值范围为<code translate="no">[0, ∞]</code> 。如果<code translate="no">metric_type</code> 设置为<code translate="no">COSINE</code> ，则有效值范围为<code translate="no">[-1, 1]</code> 。更多信息，请参阅 "<a href="/docs/zh/metric.md">相似度指标"</a>。</td></tr>
 <tr><td><code translate="no">params.range_filter</code></td><td><code translate="no">radius</code> 设置搜索的外部界限，而<code translate="no">range_filter</code> 可选择用于定义内部界限，创建一个距离范围，向量必须在该范围内才会被视为匹配。<br/>值范围由<code translate="no">metric_type</code> 参数决定。例如，如果<code translate="no">metric_type</code> 设置为<code translate="no">L2</code> ，则有效值范围为<code translate="no">[0, ∞]</code> 。如果<code translate="no">metric_type</code> 设置为<code translate="no">COSINE</code> ，则有效值范围为<code translate="no">[-1, 1]</code> 。更多信息，请参阅 "<a href="/docs/zh/metric.md">相似度指标"</a>。</td></tr>
@@ -1838,6 +1840,6 @@ search_parameters = {
 </table>
 <div class="admonition note">
 <p><strong>注释</strong></p>
-<p>[1] 索引后的群集单位数。索引 Collections 时，Milvus 会将向量数据细分为多个簇单元，其数量随实际索引设置而变化。</p>
+<p>[1] 索引后的群集单位数。索引 Collections 时，Milvus 会将向量数据细分为多个聚类单元，聚类单元的数量随实际索引设置而变化。</p>
 <p>[2] 搜索中返回的实体数量。</p>
 </div>

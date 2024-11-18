@@ -571,7 +571,7 @@ indexParams.add(indexParamForVectorField);
     </tr>
     <tr>
       <td><code translate="no">index_type</code></td>
-      <td>特定のフィールドにデータを配置するために使用されるアルゴリズムの名前。適用可能なアルゴリズムについては、<a href="https://milvus.io/docs/index.md">インメモリ・インデックスと</a> <a href="https://milvus.io/docs/disk_index.md">オンディスク・インデックスを</a>参照のこと。</td>
+      <td>特定のフィールドにデータを配置するために使用されるアルゴリズム名。適用可能なアルゴリズムについては、<a href="https://milvus.io/docs/index.md">インメモリ・インデックスと</a> <a href="https://milvus.io/docs/disk_index.md">オンディスク・インデックスを</a>参照のこと。</td>
     </tr>
     <tr>
       <td><code translate="no">metric_type</code></td>
@@ -605,7 +605,7 @@ indexParams.add(indexParamForVectorField);
     </tr>
     <tr>
       <td><code translate="no">params</code></td>
-      <td>インデックス・タイプと関連する設定。詳細は「<a href="https://milvus.io/docs/index.md">メモリ内インデックス</a>」を参照。</td>
+      <td>インデックス・タイプと関連する設定。詳細は<a href="https://milvus.io/docs/index.md">インメモリインデックスを</a>参照。</td>
     </tr>
     <tr>
       <td><code translate="no">params.index_type</code></td>
@@ -866,7 +866,7 @@ $ curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable
 <span class="hljs-comment">#     }</span>
 <span class="hljs-comment"># }</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>上記で作成したコレクションは自動的にロードされません。以下のように、コレクションのインデックスを作成できます。別の方法でコレクションのインデックスを作成しても、コレクションは自動的にロード されません。詳細は、<a href="/docs/ja/manage-collections.md#Load--Release-Collection">Load &amp; Release Collection</a> を参照してください。</p>
+<p>上記で作成したコレクションは自動的にロードされません。以下のように、コレクションにインデックスを作成できます。別の方法でコレクションのインデックスを作成しても、コレクションは自動的にロード されません。詳細は、<a href="/docs/ja/manage-collections.md#Load--Release-Collection">Load &amp; Release Collection</a> を参照してください。</p>
 <p><table class="language-python">
 <thead>
 <tr>
@@ -903,11 +903,11 @@ $ curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable
 </tr>
 <tr>
 <td><code translate="no">collectionSchema</code></td>
-<td><br/>これを空にすると、このコレクションはデフォルト設定で作成されます。カスタマイズしたスキーマでコレクションをセットアップするには、<strong>CollectionSchema</strong>オブジェクトを作成し、それをここで参照する必要があります。</td>
+<td><br/>これを空にすると、このコレクションはデフォルト設定で作成されます。カスタマイズしたスキーマでコレクションをセットアップするには、<strong>CollectionSchema</strong>オブジェクトを作成し、ここでそれを参照する必要があります。</td>
 </tr>
 <tr>
 <td><code translate="no">indexParams</code></td>
-<td>このコレクション内のベクトル・フィールドにインデックスを構築するためのパラメータ。カスタマイズされたスキーマでコレクションをセットアップし、コレクションを自動的にメモリにロードするには、<a href="https://milvus.io/api-reference/java/v2.4.x/v2/Management/IndexParam.md">IndexParam</a>オブジェクトのリストで<a href="https://milvus.io/api-reference/java/v2.4.x/v2/Management/IndexParam.md">IndexParams</a>オブジェクトを作成し、ここを参照します。</td>
+<td>このコレクション内のベクトル・フィールドにインデックスを構築するためのパラメータ。カスタマイズされたスキーマでコレクションをセットアップし、コレクションを自動的にメモリにロードするには、<a href="https://milvus.io/api-reference/java/v2.4.x/v2/Management/IndexParam.md">IndexParam</a>オブジェクトのリストで<a href="https://milvus.io/api-reference/java/v2.4.x/v2/Management/IndexParam.md">IndexParams</a>オブジェクトを作成し、ここでそれを参照します。</td>
 </tr>
 </tbody>
 </table></p>
@@ -951,7 +951,7 @@ $ curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable
 </tr>
 <tr>
 <td><code translate="no">schema.autoID</code></td>
-<td>主フィールドの自動インクリメントを許可するかどうか。これをTrueに設定すると、プライマリ・フィールドは自動的にインクリメントされます。この場合、エラーを避けるために、プライマリ・フィールドを挿入するデータに含めるべきではありません。is_primaryをTrueに設定したフィールドにこのパラメータを設定します。</td>
+<td>主フィールドの自動インクリメントを許可するかどうか。これをTrueに設定すると、プライマリ・フィールドは自動的にインクリメントされます。この場合、エラーを避けるためにプライマリ・フィールドを挿入するデータに含めるべきではありません。is_primaryをTrueに設定したフィールドにこのパラメータを設定します。</td>
 </tr>
 <tr>
 <td><code translate="no">schema.enableDynamicField</code></td>
@@ -1596,12 +1596,12 @@ $ curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable
 <h3 id="Load-a-collection-partially-Public-Preview" class="common-anchor-header">コレクションを部分的に読み込む（パブリックプレビュー）</h3><div class="alert note">
 <p>この機能は現在パブリックプレビュー中です。APIと機能は将来変更される可能性があります。</p>
 </div>
-<p>ロード要求を受け取ると、Milvusは全てのベクトルフィールドインデックスと全てのスカラーフィールドデータをメモリにロードします。検索やクエリに関与しないフィールドがある場合、それらをロードから除外してメモリ使用量を削減し、検索パフォーマンスを向上させることができます。</p>
+<p>ロード要求を受け取ると、Milvusはすべてのベクトルフィールドインデックスとすべてのスカラーフィールドデータをメモリにロードします。検索やクエリに関与しないフィールドがある場合、それらをロードから除外してメモリ使用量を削減し、検索パフォーマンスを向上させることができます。</p>
 <div class="language-python">
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># 7. Load the collection</span>
 client.load_collection(
     collection_name=<span class="hljs-string">&quot;customized_setup_2&quot;</span>,
-    load_fields=[<span class="hljs-string">&quot;my_id&quot;</span>, <span class="hljs-string">&quot;my_vector&quot;</span>] <span class="hljs-comment"># Load only the specified fields</span>
+    load_fields=[<span class="hljs-string">&quot;my_id&quot;</span>, <span class="hljs-string">&quot;my_vector&quot;</span>], <span class="hljs-comment"># Load only the specified fields</span>
     skip_load_dynamic_field=<span class="hljs-literal">True</span> <span class="hljs-comment"># Skip loading the dynamic field</span>
 )
 
@@ -1618,7 +1618,7 @@ res = client.get_load_state(
 <span class="hljs-comment"># }</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>検索やクエリでフィルタリング条件や出力フィールドとして使用できるのは、<code translate="no">load_fields</code> にリストされたフィールドだけであることに注意してください。リストには常に主キーを含める必要があります。ロードから除外されたフィールド名はフィルタリングや出力に使用できません。</p>
-<p><code translate="no">skip_load_dynamic_field=True</code> 、ダイナミック・フィールドのロードをスキップすることができます。Milvusはダイナミックフィールドを1つのフィールドとして扱うため、ダイナミックフィールド内のすべてのキーが一緒にインクルードまたは除外されます。</p>
+<p><code translate="no">skip_load_dynamic_field=True</code> 、ダイナミック・フィールドのロードをスキップすることができます。Milvusはダイナミックフィールドを1つのフィールドとして扱うため、ダイナミックフィールド内のすべてのキーが一緒に含まれたり除外されたりします。</p>
 </div>
 <h3 id="Release-a-collection" class="common-anchor-header">コレクションの解放</h3><div class="language-python">
 <p>コレクションを解放するには <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/release_collection.md"><code translate="no">release_collection()</code></a>メソッドを使用します。</p>

@@ -19,7 +19,7 @@ title: Knowhere
         ></path>
       </svg>
     </button></h1><p>Este tema presenta Knowhere, el motor central de ejecución vectorial de Milvus.</p>
-<h2 id="Overview" class="common-anchor-header">Visión General<button data-href="#Overview" class="anchor-icon" translate="no">
+<h2 id="Overview" class="common-anchor-header">Visión general<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -34,7 +34,7 @@ title: Knowhere
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Knowhere es el motor central de ejecución vectorial de Milvus que incorpora varias bibliotecas de búsqueda de similitud vectorial incluyendo <a href="https://github.com/facebookresearch/faiss">Faiss</a>, <a href="https://github.com/nmslib/hnswlib">Hnswlib</a> y <a href="https://github.com/spotify/annoy">Annoy</a>. Knowhere también está diseñado para soportar computación heterogénea. Controla en qué hardware (CPU o GPU) ejecutar la construcción de índices y las peticiones de búsqueda. Así es como Knowhere obtiene su nombre - sabiendo dónde ejecutar las operaciones. Más tipos de hardware incluyendo DPU y TPU serán soportados en futuras versiones.</p>
+    </button></h2><p>Knowhere es el motor central de ejecución vectorial de Milvus, que incorpora varias bibliotecas de búsqueda de similitud vectorial, incluyendo <a href="https://github.com/facebookresearch/faiss">Faiss</a>, <a href="https://github.com/nmslib/hnswlib">Hnswlib</a> y <a href="https://github.com/spotify/annoy">Annoy</a>. Knowhere también está diseñado para soportar computación heterogénea. Controla en qué hardware (CPU o GPU) ejecutar la creación de índices y las peticiones de búsqueda. Así es como Knowhere obtiene su nombre - sabiendo dónde ejecutar las operaciones. Más tipos de hardware incluyendo DPU y TPU serán soportados en futuras versiones.</p>
 <h2 id="Knowhere-in-the-Milvus-architecture" class="common-anchor-header">Knowhere en la arquitectura Milvus<button data-href="#Knowhere-in-the-Milvus-architecture" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -55,7 +55,7 @@ title: Knowhere
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/knowhere_architecture.png" alt="Knowhere" class="doc-image" id="knowhere" />
    </span> <span class="img-wrapper"> <span>Knowhere</span> </span></p>
-<p>La capa inferior es el hardware del sistema. Las bibliotecas de índices de terceros están sobre el hardware. Luego Knowhere interactúa con el nodo de índice y el nodo de consulta en la parte superior a través de CGO, que permite que los paquetes Go llamen al código C.</p>
+<p>La capa inferior es el hardware del sistema. Encima se encuentran las bibliotecas de índices de terceros. En la capa superior, Knowhere interactúa con el nodo de índice y el nodo de consulta a través de CGO, que permite que los paquetes Go llamen al código C.</p>
 <h2 id="Knowhere-advantages" class="common-anchor-header">Ventajas de Knowhere<button data-href="#Knowhere-advantages" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -73,7 +73,7 @@ title: Knowhere
       </svg>
     </button></h2><p>Las siguientes son las ventajas de Knowhere sobre Faiss.</p>
 <h4 id="Support-for-BitsetView" class="common-anchor-header">Soporte para BitsetView</h4><p>Milvus introduce un mecanismo de conjunto de bits para realizar el &quot;borrado suave&quot;. Un vector borrado suavemente aún existe en la base de datos pero no será computado durante una búsqueda o consulta de similitud de vectores.</p>
-<p>Cada bit de un conjunto de bits corresponde a un vector indexado. Si un vector está marcado como "1" en el conjunto de bits, significa que se ha eliminado de forma suave y que no participará en la búsqueda de vectores. El parámetro bitset se aplica a todas las API de consulta de índice Faiss expuestas en Knowhere, incluidos los índices de CPU y GPU.</p>
+<p>Cada bit de un conjunto de bits corresponde a un vector indexado. Si un vector está marcado con un "1" en el conjunto de bits, significa que se ha eliminado de forma suave y no participará en la búsqueda de vectores. El parámetro bitset se aplica a todas las API de consulta de índice Faiss expuestas en Knowhere, incluidos los índices de CPU y GPU.</p>
 <p>Para obtener más información sobre el mecanismo de bitset, consulte <a href="/docs/es/bitset.md">bitset</a>.</p>
 <h4 id="Support-for-multiple-similarity-metrics-for-indexing-binary-vectors" class="common-anchor-header">Soporte para múltiples métricas de similitud para indexar vectores binarios</h4><p>Knowhere soporta <a href="/docs/es/metric.md#Hamming-distance">Hamming</a>, <a href="/docs/es/metric.md#Jaccard-distance">Jaccard</a>, <a href="/docs/es/metric.md#Tanimoto-distance">Tanimoto</a>, <a href="/docs/es/metric.md#Superstructure">Superestructura</a> y <a href="/docs/es/metric.md#Substructure">Subestructura</a>. Jaccard y Tanimoto pueden utilizarse para medir la similitud entre dos conjuntos de muestras mientras que Superstructure y Substructure pueden utilizarse para medir la similitud de estructuras químicas.</p>
 <h4 id="Support-for-AVX512-instruction-set" class="common-anchor-header">Compatibilidad con el conjunto de instrucciones AVX512</h4><p>Además de <a href="https://en.wikipedia.org/wiki/AArch64">AArch64</a>, <a href="https://en.wikipedia.org/wiki/SSE4#SSE4.2">SSE4.2</a> y <a href="https://en.wikipedia.org/wiki/Advanced_Vector_Extensions">AVX2</a>, los conjuntos de instrucciones ya soportados por Faiss, Knowhere también soporta <a href="https://en.wikipedia.org/wiki/AVX-512">AVX512</a>, que puede <a href="https://milvus.io/blog/milvus-performance-AVX-512-vs-AVX2.md">mejorar el rendimiento de la creación de índices y consultas entre un 20% y un 30%</a> en comparación con AVX2.</p>
@@ -107,7 +107,7 @@ title: Knowhere
 <ul>
 <li><p>El índice Faiss tiene dos clases base: <code translate="no">FaissBaseIndex</code> para todos los índices sobre vectores en coma flotante, y <code translate="no">FaissBaseBinaryIndex</code> para todos los índices sobre vectores binarios.</p></li>
 <li><p><code translate="no">GPUIndex</code> es la clase base para todos los índices GPU de Faiss.</p></li>
-<li><p><code translate="no">OffsetBaseIndex</code> es la clase base para todos los índices de desarrollo propio. Dado que en un fichero de índices sólo se almacenan los ID de los vectores, el tamaño del fichero para vectores de 128 dimensiones puede reducirse en 2 órdenes de magnitud.</p></li>
+<li><p><code translate="no">OffsetBaseIndex</code> es la clase base para todos los índices de desarrollo propio. Dado que en un archivo de índice sólo se almacenan los ID de los vectores, el tamaño del archivo para vectores de 128 dimensiones puede reducirse en 2 órdenes de magnitud.</p></li>
 </ul>
 <h4 id="IDMAP-brute-force-search" class="common-anchor-header"><code translate="no">IDMAP</code>Búsqueda por fuerza bruta</h4><p>
   
@@ -115,19 +115,19 @@ title: Knowhere
    </span> <span class="img-wrapper"> <span>IDMAP</span> </span></p>
 <p>Técnicamente hablando, <code translate="no">IDMAP</code> no es un índice, sino que se utiliza para la búsqueda por fuerza bruta. Cuando se insertan vectores en la base de datos, no es necesario ni el entrenamiento de los datos ni la construcción de índices. Las búsquedas se realizarán directamente sobre los datos vectoriales insertados.</p>
 <p>Sin embargo, por coherencia del código, <code translate="no">IDMAP</code> también hereda de la clase <code translate="no">VecIndex</code> con todas sus interfaces virtuales. El uso de <code translate="no">IDMAP</code> es el mismo que el de otros índices.</p>
-<h4 id="IVF-indexes" class="common-anchor-header">Índices IVF</h4><p>
+<h4 id="IVF-indices" class="common-anchor-header">Índices IVF</h4><p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/IVF.png" alt="IVF" class="doc-image" id="ivf" />
    </span> <span class="img-wrapper"> <span>IVF</span> </span></p>
-<p>Los índices IVF (archivo invertido) son los más utilizados. La clase <code translate="no">IVF</code> deriva de <code translate="no">VecIndex</code> y <code translate="no">FaissBaseIndex</code>, y se extiende a <code translate="no">IVFSQ</code> y <code translate="no">IVFPQ</code>. <code translate="no">GPUIVF</code> deriva de <code translate="no">GPUIndex</code> y <code translate="no">IVF</code>. A continuación, <code translate="no">GPUIVF</code> se amplía a <code translate="no">GPUIVFSQ</code> y <code translate="no">GPUIVFPQ</code>.</p>
-<p><code translate="no">IVFSQHybrid</code> es un índice híbrido de desarrollo propio. El cuantificador grueso se ejecuta en la GPU mientras que la búsqueda en el cubo se realiza en la CPU. Este tipo de índice puede reducir el número de copias de memoria entre la CPU y la GPU aprovechando la potencia de cálculo de la GPU. <code translate="no">IVFSQHybrid</code> tiene la misma tasa de recuperación que <code translate="no">GPUIVFSQ</code> pero ofrece un mejor rendimiento.</p>
-<p>La estructura de la clase base de los índices binarios es relativamente más sencilla. <code translate="no">BinaryIDMAP</code> y <code translate="no">BinaryIVF</code> derivan de <code translate="no">FaissBaseBinaryIndex</code> y <code translate="no">VecIndex</code>.</p>
-<h4 id="Third-party-indexes" class="common-anchor-header">Índices de terceros</h4><p>
+<p>Los índices IVF (archivo invertido) son los más utilizados. La clase <code translate="no">IVF</code> se deriva de <code translate="no">VecIndex</code> y <code translate="no">FaissBaseIndex</code>, y se extiende a <code translate="no">IVFSQ</code> y <code translate="no">IVFPQ</code>. <code translate="no">GPUIVF</code> se deriva de <code translate="no">GPUIndex</code> y <code translate="no">IVF</code>. A continuación, <code translate="no">GPUIVF</code> se amplía a <code translate="no">GPUIVFSQ</code> y <code translate="no">GPUIVFPQ</code>.</p>
+<p><code translate="no">IVFSQHybrid</code> es un índice híbrido de desarrollo propio. Un cuantificador grueso se ejecuta en la GPU mientras que la búsqueda en el cubo se realiza en la CPU. Este tipo de índice puede reducir el número de copias de memoria entre la CPU y la GPU aprovechando la potencia de cálculo de la GPU. <code translate="no">IVFSQHybrid</code> tiene la misma tasa de recuperación que <code translate="no">GPUIVFSQ</code> pero ofrece un mejor rendimiento.</p>
+<p>La estructura de clases base de los índices binarios es relativamente más sencilla. <code translate="no">BinaryIDMAP</code> y <code translate="no">BinaryIVF</code> derivan de <code translate="no">FaissBaseBinaryIndex</code> y <code translate="no">VecIndex</code>.</p>
+<h4 id="Third-party-indices" class="common-anchor-header">Índices de terceros</h4><p>
   
-   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/third_party_index.png" alt="third-party indexes" class="doc-image" id="third-party-indexes" />
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/third_party_index.png" alt="third-party indices" class="doc-image" id="third-party-indices" />
    </span> <span class="img-wrapper"> <span>índices de terceros</span> </span></p>
-<p>Actualmente, sólo se admiten dos tipos de índices de terceros aparte de Faiss: el índice basado en árboles <code translate="no">Annoy</code>, y el índice basado en gráficos <code translate="no">HNSW</code>. Estos dos índices de terceros, comunes y de uso frecuente, derivan de <code translate="no">VecIndex</code>.</p>
-<h2 id="Adding-indexes-to-Knowhere" class="common-anchor-header">Añadir índices a Knowhere<button data-href="#Adding-indexes-to-Knowhere" class="anchor-icon" translate="no">
+<p>Actualmente, sólo se admiten dos tipos de índices de terceros aparte de Faiss: el índice basado en árboles <code translate="no">Annoy</code>, y el índice basado en gráficos <code translate="no">HNSW</code>. Estos dos índices de terceros, comunes y de uso frecuente, se derivan de <code translate="no">VecIndex</code>.</p>
+<h2 id="Adding-indices-to-Knowhere" class="common-anchor-header">Añadir índices a Knowhere<button data-href="#Adding-indices-to-Knowhere" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -148,7 +148,7 @@ title: Knowhere
 <li><p>Para añadir índices basados en gráficos, consulte <code translate="no">HNSW</code>.</p></li>
 <li><p>Para añadir índices basados en árboles, consulte <code translate="no">Annoy</code>.</p></li>
 </ul>
-<p>Después de consultar el índice existente, puede seguir los siguientes pasos para agregar un nuevo índice a Knowhere.</p>
+<p>Después de referirse al índice existente, puede seguir los siguientes pasos para agregar un nuevo índice a Knowhere.</p>
 <ol>
 <li><p>Añada el nombre del nuevo índice en <code translate="no">IndexEnum</code>. El tipo de datos es cadena.</p></li>
 <li><p>Agregue la comprobación de validación de datos en el nuevo índice en el archivo <code translate="no">ConfAdapter.cpp</code>. La comprobación de validación es principalmente para validar los parámetros para la formación de datos y consulta.</p></li>
@@ -173,7 +173,7 @@ title: Knowhere
       </svg>
     </button></h2><p>Después de aprender cómo funciona Knowhere en Milvus, es posible que también desee:</p>
 <ul>
-<li><p>Aprender sobre <a href="/docs/es/index.md">los distintos tipos de índices que soporta Milvus</a>.</p></li>
+<li><p>Aprender sobre los <a href="/docs/es/index.md">distintos tipos de índices que soporta Milvus</a>.</p></li>
 <li><p>Aprender sobre <a href="/docs/es/bitset.md">el mecanismo de conjuntos de bits</a>.</p></li>
 <li><p>Comprender <a href="/docs/es/data_processing.md">cómo se procesan los datos</a> en Milvus.</p></li>
 </ul>

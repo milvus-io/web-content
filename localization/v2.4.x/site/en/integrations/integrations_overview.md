@@ -67,5 +67,9 @@ title: Integrations Overview
 <tr><td><a href="/docs/rag_with_milvus_and_unstructured.md">Build a RAG with Milvus and Unstructured</a></td><td>Data Sources</td><td>Milvus, Unstructured</td></tr>
 <tr><td><a href="/docs/RAG_with_pii_and_milvus.md">Build RAG with Milvus + PII Masker</a></td><td>Data Sources</td><td>Milvus, PII Masker</td></tr>
 <tr><td><a href="/docs/use_milvus_in_private_gpt.md">Use Milvus in PrivateGPT</a></td><td>Ochestration</td><td>vector search</td></tr>
+<tr><td><a href="/docs/quickstart_mem0_with_milvus.md">Getting Started with Mem0 and Milvus</a></td><td>Agents</td><td>Mem0, Milvus</td></tr>
+<tr><td><a href="/docs/knowledge_table_with_milvus.md">Knowledge Table with Milvus</a></td><td>Knowledge Engineering</td><td>Knowledge Table, Milvus</td></tr>
+<tr><td><a href="/docs/use_milvus_in_docsgpt.md">Use Milvus in DocsGPT</a></td><td>Ochestration</td><td>DocsGPT, Milvus</td></tr>
+<tr><td><a href="/docs/use_milvus_with_sambanova.md">Use Milvus with SambaNova</a></td><td>Orchestration</td><td>Milvus, SambaNova</td></tr>
 </tbody>
 </table>

@@ -39,7 +39,10 @@ title: Schema verwalten
 <h3 id="Field-schema-properties" class="common-anchor-header">Eigenschaften des Feldschemas</h3><table class="properties">
     <thead>
     <tr>
-       <th>Eigenschaften</td><th>Beschreibung</th> <th>Hinweis</th>   </tr>
+        <th>Eigenschaften</th>
+        <th>Beschreibung</th>
+        <th>Hinweis</th>
+    </tr>
     </thead>
     <tbody>
     <tr>
@@ -55,7 +58,7 @@ title: Schema verwalten
     <tr>
         <td><code translate="no">description</code></td>
         <td>Beschreibung des Feldes</td>
-        <td>Datentyp: String.<br/>Optional</td>
+        <td>Datentyp: Zeichenfolge.<br/>Fakultativ</td>
     </tr>
     <tr>
         <td><code translate="no">is_primary</code></td>
@@ -130,7 +133,7 @@ fields = [
 <li>BINARY_VECTOR: Speichert binäre Daten als eine Folge von 0en und 1en, die für eine kompakte Merkmalsdarstellung in der Bildverarbeitung und beim Informationsabruf verwendet werden.</li>
 <li>FLOAT_VECTOR: Speichert 32-Bit-Gleitkommazahlen, die häufig in der wissenschaftlichen Datenverarbeitung und beim maschinellen Lernen zur Darstellung reeller Zahlen verwendet werden.</li>
 <li>FLOAT16_VECTOR: Speichert 16-Bit-Gleitkommazahlen mit halber Genauigkeit, die bei Deep Learning und GPU-Berechnungen für Speicher- und Bandbreiteneffizienz verwendet werden.</li>
-<li>BFLOAT16_VECTOR: Speichert 16-Bit-Gleitkommazahlen mit verringerter Genauigkeit, aber demselben Exponentenbereich wie Float32, die beim Deep Learning zur Verringerung der Speicher- und Berechnungsanforderungen verwendet werden, ohne die Genauigkeit wesentlich zu beeinträchtigen.</li>
+<li>BFLOAT16_VECTOR: Speichert 16-Bit-Gleitkommazahlen mit verringerter Genauigkeit, aber demselben Exponentenbereich wie Float32, die beim Deep Learning zur Verringerung der Speicher- und Berechnungsanforderungen ohne wesentliche Beeinträchtigung der Genauigkeit verwendet werden.</li>
 <li>SPARSE_FLOAT_VECTOR: Speichert eine Liste von Nicht-Null-Elementen und ihren entsprechenden Indizes, die zur Darstellung von Sparse-Vektoren verwendet werden. Weitere Informationen finden Sie unter <a href="/docs/de/sparse_vector.md">Sparse Vectors</a>.</li>
 </ul>
 <p>Milvus unterstützt mehrere Vektorfelder in einer Sammlung. Weitere Informationen finden Sie unter <a href="/docs/de/multi-vector-search.md">Hybride Suche</a>.</p></li>
@@ -154,7 +157,10 @@ fields = [
 <h3 id="Collection-schema-properties" class="common-anchor-header">Eigenschaften des Sammlungsschemas</h3><table class="properties">
     <thead>
     <tr>
-       <th>Eigenschaften</td><th>Beschreibung</th> <th>Hinweis</th>   </tr>
+        <th>Eigenschaften</th>
+        <th>Beschreibung</th>
+        <th>Hinweis</th>
+    </tr>
     </thead>
     <tbody>
     <tr>
@@ -193,7 +199,8 @@ position_field = FieldSchema(name=<span class="hljs-string">&quot;position&quot;
 schema = CollectionSchema(fields=[id_field, age_field, embedding_field], auto_id=<span class="hljs-literal">False</span>, enable_dynamic_field=<span class="hljs-literal">True</span>, description=<span class="hljs-string">&quot;desc of a collection&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
 <p>Erstellen Sie eine Sammlung mit dem angegebenen Schema:</p>
-<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> <span class="hljs-title class_">Collection</span>
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> <span class="hljs-title class_">Collection</span>,connections
+conn = connections.<span class="hljs-title function_">connect</span>(host=<span class="hljs-string">&quot;127.0.0.1&quot;</span>, port=<span class="hljs-number">19530</span>)
 collection_name1 = <span class="hljs-string">&quot;tutorial_1&quot;</span>
 collection1 = <span class="hljs-title class_">Collection</span>(name=collection_name1, schema=schema, using=<span class="hljs-string">&#x27;default&#x27;</span>, shards_num=<span class="hljs-number">2</span>)
 <button class="copy-code-btn"></button></code></pre>

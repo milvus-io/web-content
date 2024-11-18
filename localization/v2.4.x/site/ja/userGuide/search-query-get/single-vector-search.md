@@ -66,10 +66,12 @@ title: 単一ベクトル検索
     </button></h2><p>以下のコードスニペットは、Milvusへの接続を確立し、コレクションを素早くセットアップするために既存のコードを再利用しています。</p>
 <div class="multipleCode">
    <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a></div>
-<pre><code translate="no" class="language-python"><span class="hljs-comment"># 1. Set up a Milvus client</span>
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
+<span class="hljs-keyword">import</span> random
+
+<span class="hljs-comment"># 1. Set up a Milvus client</span>
 client = MilvusClient(
-    uri=CLUSTER_ENDPOINT,
-    token=TOKEN 
+    uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>
 )
 
 <span class="hljs-comment"># 2. Create a collection</span>
@@ -447,7 +449,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
    <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Single vector search</span>
 res = client.search(
-    collection_name=<span class="hljs-string">&quot;test_collection&quot;</span>, <span class="hljs-comment"># Replace with the actual name of your collection</span>
+    collection_name=<span class="hljs-string">&quot;quick_setup&quot;</span>, <span class="hljs-comment"># Replace with the actual name of your collection</span>
     <span class="hljs-comment"># Replace with your query vector</span>
     data=[[<span class="hljs-number">0.3580376395471989</span>, -<span class="hljs-number">0.6023495712049978</span>, <span class="hljs-number">0.18414012509913835</span>, -<span class="hljs-number">0.26286205330961354</span>, <span class="hljs-number">0.9029438446296592</span>]],
     limit=<span class="hljs-number">5</span>, <span class="hljs-comment"># Max. number of search results to return</span>
@@ -500,7 +502,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
     </tr>
     <tr>
       <td><code translate="no">limit</code></td>
-      <td><br/>このパラメータと<strong>paramの</strong> <strong>offsetを組み合わせて</strong>使用すると、ページ分割が可能になる。<br/>この値と<strong>paramの</strong> <strong>offsetの</strong>和は16,384未満でなければならない。</td>
+      <td><br/>このパラメータと<strong>paramの</strong> <strong>offsetを組み合わせて</strong>使用すると、ページ分割が可能になる。<br/>この値と<strong>paramの</strong> <strong>offsetの</strong>和は、16,384未満でなければならない。</td>
     </tr>
     <tr>
       <td><code translate="no">search_params</code></td>
@@ -522,7 +524,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
     </tr>
     <tr>
       <td><code translate="no">data</code></td>
-      <td><br/>Milvus は指定されたものに最も類似したベクトル埋め込みを検索する。</td>
+      <td><br/>Milvusは指定されたものに最も類似したベクトル埋め込みを検索する。</td>
     </tr>
     <tr>
       <td><code translate="no">topK</code></td>
@@ -548,7 +550,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
     </tr>
     <tr>
       <td><code translate="no">limit</code></td>
-      <td><br/>このパラメータは、<strong>paramの</strong> <strong>offsetと組み合わせて</strong>使用することで、ページ分割を有効にすることができます。<br/>この値と<strong>paramの</strong> <strong>offsetの</strong>合計は、16,384未満でなければなりません。</td>
+      <td><br/>このパラメータと<strong>paramの</strong> <strong>offsetを組み合わせて</strong>使用すると、ページ分割が可能になります。<br/>この値と<strong>paramの</strong> <strong>offsetの</strong>和は、16,384未満でなければなりません。</td>
     </tr>
   </tbody>
 </table>
@@ -635,13 +637,13 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 <button class="copy-code-btn"></button></code></pre>
 <p>出力には、クエリベクトルに最も近い上位5つの近傍ベクトルが表示され、一意のIDと計算された距離も表示されます。</p>
 <h3 id="Bulk-vector-search" class="common-anchor-header">一括ベクトル検索</h3><p>一括ベクトル検索は、<a href="https://milvus.io/docs/single-vector-search.md#Single-Vector-Search">1回の</a>リクエストで複数のクエリベクトルを検索できるようにすることで、<a href="https://milvus.io/docs/single-vector-search.md#Single-Vector-Search">単一ベクトル検索の</a>概念を拡張します。このタイプの検索は、クエリベクターのセットに対して類似したベクトルを検索する必要があるシナリオに最適で、必要な時間と計算リソースを大幅に削減します。</p>
-<p>一括ベクトル検索では、<code translate="no">data</code> フィールドに複数のクエリベクトルを含めることができます。システムはこれらのベクトルを並列に処理し、各クエリ・ベクトルに対して個別の結果セットを返し、各セットにはコレクション内で見つかった最も近い一致が含まれます。</p>
-<p>以下は、2 つのクエリ・ベクターから、最も類似したエンティティの 2 つの異なるセットを検索する例です：</p>
+<p>一括ベクトル検索では、<code translate="no">data</code> フィールドに複数のクエリベクトルを含めることができます。システムはこれらのベクトルを並列処理し、クエリ・ベクタごとに個別の結果セットを返し、各セットにはコレクション内で見つかった最も近い一致が含まれます。</p>
+<p>以下は、2 つのクエリ・ベクタから、最も類似したエンティティの 2 つの異なるセットを検索する例です：</p>
 <div class="multipleCode">
    <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Bulk-vector search</span>
 res = client.search(
-    collection_name=<span class="hljs-string">&quot;test_collection&quot;</span>, <span class="hljs-comment"># Replace with the actual name of your collection</span>
+    collection_name=<span class="hljs-string">&quot;quick_setup&quot;</span>, <span class="hljs-comment"># Replace with the actual name of your collection</span>
     data=[
         [<span class="hljs-number">0.19886812562848388</span>, <span class="hljs-number">0.06023560599112088</span>, <span class="hljs-number">0.6976963061752597</span>, <span class="hljs-number">0.2614474506242501</span>, <span class="hljs-number">0.838729485096104</span>],
         [<span class="hljs-number">0.3172005263489739</span>, <span class="hljs-number">0.9719044792798428</span>, -<span class="hljs-number">0.36981146090600725</span>, -<span class="hljs-number">0.4860894583077995</span>, <span class="hljs-number">0.95791889146345</span>]
@@ -1226,7 +1228,7 @@ searchResp = client.<span class="hljs-title function_">search</span>(searchReq);
    <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Search with output fields</span>
 res = client.search(
-    collection_name=<span class="hljs-string">&quot;test_collection&quot;</span>, <span class="hljs-comment"># Replace with the actual name of your collection</span>
+    collection_name=<span class="hljs-string">&quot;quick_setup&quot;</span>, <span class="hljs-comment"># Replace with the actual name of your collection</span>
     data=[[<span class="hljs-number">0.3580376395471989</span>, -<span class="hljs-number">0.6023495712049978</span>, <span class="hljs-number">0.18414012509913835</span>, -<span class="hljs-number">0.26286205330961354</span>, <span class="hljs-number">0.9029438446296592</span>]],
     limit=<span class="hljs-number">5</span>, <span class="hljs-comment"># Max. number of search results to return</span>
     search_params={<span class="hljs-string">&quot;metric_type&quot;</span>: <span class="hljs-string">&quot;IP&quot;</span>, <span class="hljs-string">&quot;params&quot;</span>: {}}, <span class="hljs-comment"># Search parameters</span>
@@ -1369,12 +1371,12 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 <li>パーセント記号を検索するには、<code translate="no">\\%</code> を使用します。</li>
 </ul>
 <p>したがって、<code translate="no">&quot;_version_&quot;</code> というテキストを検索する必要がある場合は、<code translate="no">'like &quot;\\_version\\_&quot;'</code> と書式を整え、アンダースコアがワイルドカードとしてではなく、検索語の一部として扱われるようにします。</p>
-<p>結果が<strong>赤で</strong>始まる<strong>色で</strong>フィルタリングされます：</p>
+<p><strong>赤で</strong>始まる<strong>色を</strong>持つ結果をフィルタリングします：</p>
 <div class="multipleCode">
    <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Search with filter</span>
 res = client.search(
-    collection_name=<span class="hljs-string">&quot;test_collection&quot;</span>, <span class="hljs-comment"># Replace with the actual name of your collection</span>
+    collection_name=<span class="hljs-string">&quot;quick_setup&quot;</span>, <span class="hljs-comment"># Replace with the actual name of your collection</span>
     data=[[<span class="hljs-number">0.3580376395471989</span>, -<span class="hljs-number">0.6023495712049978</span>, <span class="hljs-number">0.18414012509913835</span>, -<span class="hljs-number">0.26286205330961354</span>, <span class="hljs-number">0.9029438446296592</span>]],
     limit=<span class="hljs-number">5</span>, <span class="hljs-comment"># Max. number of search results to return</span>
     search_params={<span class="hljs-string">&quot;metric_type&quot;</span>: <span class="hljs-string">&quot;IP&quot;</span>, <span class="hljs-string">&quot;params&quot;</span>: {}}, <span class="hljs-comment"># Search parameters</span>
@@ -1481,7 +1483,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
    <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Infix match on color field</span>
 res = client.search(
-    collection_name=<span class="hljs-string">&quot;test_collection&quot;</span>, <span class="hljs-comment"># Replace with the actual name of your collection</span>
+    collection_name=<span class="hljs-string">&quot;quick_setup&quot;</span>, <span class="hljs-comment"># Replace with the actual name of your collection</span>
     data=[[<span class="hljs-number">0.3580376395471989</span>, -<span class="hljs-number">0.6023495712049978</span>, <span class="hljs-number">0.18414012509913835</span>, -<span class="hljs-number">0.26286205330961354</span>, <span class="hljs-number">0.9029438446296592</span>]],
     limit=<span class="hljs-number">5</span>, <span class="hljs-comment"># Max. number of search results to return</span>
     search_params={<span class="hljs-string">&quot;metric_type&quot;</span>: <span class="hljs-string">&quot;IP&quot;</span>, <span class="hljs-string">&quot;params&quot;</span>: {}}, <span class="hljs-comment"># Search parameters</span>
@@ -1582,7 +1584,7 @@ search_params = {
 }
 
 res = client.search(
-    collection_name=<span class="hljs-string">&quot;test_collection&quot;</span>, <span class="hljs-comment"># Replace with the actual name of your collection</span>
+    collection_name=<span class="hljs-string">&quot;quick_setup&quot;</span>, <span class="hljs-comment"># Replace with the actual name of your collection</span>
     data=[[<span class="hljs-number">0.3580376395471989</span>, -<span class="hljs-number">0.6023495712049978</span>, <span class="hljs-number">0.18414012509913835</span>, -<span class="hljs-number">0.26286205330961354</span>, <span class="hljs-number">0.9029438446296592</span>]],
     limit=<span class="hljs-number">3</span>, <span class="hljs-comment"># Max. number of search results to return</span>
     search_params=search_params, <span class="hljs-comment"># Search parameters</span>
@@ -1717,7 +1719,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
       </svg>
     </button></h2><p>Milvusでは、検索結果の網羅性と精度を向上させるためにグループ化検索が設計されています。</p>
 <p>RAGのシナリオを考えてみましょう。ここでは、ロードされた文書が様々なパッセージに分割され、各パッセージが1つのベクトル埋め込みで表現されています。ユーザはLLMを正確に促すために最も関連性の高い文章を見つけたい。Milvusの通常の検索機能はこの要求を満たすことができるが、検索結果が非常に偏ったものになる可能性がある：ほとんどのパッセージは数個の文書からしか得られず、検索結果の包括性は非常に低い。これは、LLMが提供する検索結果の正確さ、あるいは正しさを著しく損ない、LLM利用者の経験に悪影響を与える可能性がある。</p>
-<p>グループ化検索は、この問題を効果的に解決することができます。group_by_fieldとgroup_sizeを渡すことにより、Milvusユーザは検索結果をいくつかのグループに分け、各グループからのエンティティ数が特定のgroup_sizeを超えないようにすることができる。この機能により、検索結果の網羅性と公平性が大幅に向上し、LLM出力の品質が顕著に改善されます。</p>
+<p>グループ化検索は、この問題を効果的に解決することができます。group_by_fieldとgroup_sizeを渡すことにより、Milvusユーザーは検索結果をいくつかのグループに分け、各グループのエンティティ数が特定のgroup_sizeを超えないようにすることができる。この機能により、検索結果の網羅性と公平性が大幅に向上し、LLM出力の品質が顕著に改善されます。</p>
 <p>検索結果をフィールドごとにグループ化するコード例を以下に示す：</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Connect to Milvus</span>
 client = MilvusClient(uri=<span class="hljs-string">&#x27;http://localhost:19530&#x27;</span>) <span class="hljs-comment"># Milvus server address</span>
@@ -1786,7 +1788,7 @@ passage_ids = [result[<span class="hljs-string">&#x27;entity&#x27;</span>][<span
 [<span class="hljs-meta">1, 10, 3, 12, 9</span>]
 <button class="copy-code-btn"></button></code></pre>
 <p>与えられた出力では、"doc_11 "が検索結果を完全に支配し、他の文書からの質の高いパラグラフを覆い隠していることが観察できる。</p>
-<p>もう一つ注意すべき点があります。デフォルトでは、grouping_searchは十分なグループ数があれば即座に結果を返しますが、その結果、各グループの検索結果数がgroup_sizeを満たさない可能性があります。各グループの検索結果数を気にするのであれば、上のコードのようにgroup_strict_size=Trueを設定してください。これにより、Milvusは各グループで十分な結果を得ようと努力するようになりますが、パフォーマンスは若干低下します。</p>
+<p>もう一つ注意すべき点があります。デフォルトでは、grouping_searchは十分なグループ数があれば即座に結果を返しますが、その結果、各グループの検索結果数がgroup_sizeを満たさないことがあります。各グループの検索結果数を気にするのであれば、上のコードのようにgroup_strict_size=Trueを設定してください。これにより、Milvusは各グループで十分な結果を得ようと努力するようになりますが、パフォーマンスは若干低下します。</p>
 <p><strong>制限事項</strong></p>
 <ul>
 <li><p><strong>インデックス作成</strong>：このグループ化機能は<strong>HNSW</strong>、<strong>IVF_FLAT</strong>、または<strong>FLAT</strong>タイプでインデックスされたコレクションに対してのみ機能します。詳細については、<a href="https://milvus.io/docs/index.md#HNSW">メモリ内インデックスを</a>参照してください。</p></li>

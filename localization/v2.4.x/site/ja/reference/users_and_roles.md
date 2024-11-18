@@ -2,9 +2,9 @@
 id: users_and_roles.md
 related_key: 'users, roles'
 summary: ロール・ベース・アクセス・コントロール（RBAC）におけるユーザー、ロール、オブジェクト、権限の定義について学びます。
-title: ユーザーと役割
+title: ユーザ、権限、ロール
 ---
-<h1 id="Users-and-Roles" class="common-anchor-header">ユーザとロール<button data-href="#Users-and-Roles" class="anchor-icon" translate="no">
+<h1 id="Users-Privileges-and-Roles" class="common-anchor-header">ユーザ、権限、ロール<button data-href="#Users-Privileges-and-Roles" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -19,8 +19,8 @@ title: ユーザーと役割
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>このトピックでは、Milvusにおけるロールベースアクセスコントロール(RBAC)の概要と、ユーザ、ロール、オブジェクト、権限の定義と関係について説明します。</p>
-<p>次の図はオブジェクト、権限、ロール、ユーザの関係を示しています。</p>
+    </button></h1><p>このトピックでは、Milvusにおけるロールベースアクセスコントロール(RBAC)の概要を説明し、ユーザ、ロール、オブジェクト、権限の定義と関係について詳しく説明します。</p>
+<p>以下の図にオブジェクト、権限、ロール、ユーザの関係を示します。</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/users_and_roles.png" alt="users_and_roles" class="doc-image" id="users_and_roles" />
@@ -40,7 +40,7 @@ title: ユーザーと役割
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvusリソースへのアクセス制御を管理するためには、RBACの主要な構成要素であるオブジェクトタイプ、オブジェクト名、ユーザ、ロール、権限を理解することが重要です。</p>
+    </button></h2><p>Milvusリソースへのアクセスコントロールを管理するためには、RBACの主要な構成要素であるオブジェクトタイプ、オブジェクト名、ユーザ、ロール、権限を理解することが重要です。</p>
 <ul>
 <li><p><strong>オブジェクトタイプ</strong>: 特権が割り当てられるオブジェクトのカテゴリ。オブジェクト タイプには次のようなものがあります：</p>
 <ul>
@@ -54,7 +54,7 @@ title: ユーザーと役割
 <li>オブジェクト・タイプが<code translate="no">Collection</code> の場合、オブジェクト名はコレクション名です。</li>
 <li>オブジェクト・タイプが<code translate="no">User</code> の場合、オブジェクト名はデータベース・ユーザの名前です。</li>
 </ul></li>
-<li><p><strong>ユーザ</strong>: Milvus と相互作用する個人またはアプリケーションで、ユーザ名と対応するパスワードで構成される。</p></li>
+<li><p><strong>ユーザー(User)</strong>: Milvusと相互作用する個人またはアプリケーションで、ユーザー名と対応するパスワードから構成される。</p></li>
 <li><p><strong>特権</strong>：実行可能なアクションとアクセス可能なリソースを定義する。権限はユーザに直接付与されるのではなく、ロールに割り当てられる。</p></li>
 <li><p><strong>ロール</strong>：ユーザーが特定のオブジェクトに対して持つ権限のセットを定義します。ロールがユーザにバインドされると、ユーザはそのロールに付与されたすべての特権を継承します。</p></li>
 </ul>
@@ -123,7 +123,7 @@ client.grantPrivilege(grantPrivilegeReq);
         ></path>
       </svg>
     </button></h2><p>Milvus はデフォルトで<code translate="no">root</code> ユーザーをデフォルトパスワード<code translate="no">Milvus</code> で作成します。<code translate="no">root</code> ユーザーには<code translate="no">admin</code> 権限が付与されます。これは、この<code translate="no">root</code> ユーザーがすべてのリソースにアクセスでき、すべてのアクションを実行できることを意味します。</p>
-<p>ユーザが<code translate="no">public</code> ロールに関連している場合、そのユーザには以下の権限が与えられます：</p>
+<p>ユーザが<code translate="no">public</code> ロールと関連付けられている場合、そのユーザには以下の権限が与えられます：</p>
 <ul>
 <li><code translate="no">DescribeCollection</code></li>
 <li><code translate="no">ShowCollections</code></li>
@@ -172,7 +172,7 @@ client.grantPrivilege(grantPrivilegeReq);
 <tr><td>コレクション</td><td>ドロップパーティション</td><td>ドロップパーティション</td></tr>
 <tr><td>コレクション</td><td>パーティションの表示</td><td>パーティションを表示</td></tr>
 <tr><td>コレクション</td><td>パーティション</td><td>パーティションを持つ</td></tr>
-<tr><td>グローバル</td><td>すべて</td><td>このテーブルのすべてのAPI操作許可</td></tr>
+<tr><td>グローバル</td><td>すべて</td><td>このテーブルのすべてのAPI操作権限</td></tr>
 <tr><td>グローバル</td><td>コレクションの作成</td><td>コレクションの作成</td></tr>
 <tr><td>グローバル</td><td>ドロップコレクション</td><td>ドロップコレクション</td></tr>
 <tr><td>グローバル</td><td>DescribeCollection</td><td>DescribeCollection</td></tr>

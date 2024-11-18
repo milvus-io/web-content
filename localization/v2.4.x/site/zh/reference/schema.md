@@ -39,7 +39,10 @@ title: 管理模式
 <h3 id="Field-schema-properties" class="common-anchor-header">字段模式属性</h3><table class="properties">
     <thead>
     <tr>
-       <th>属性</td><th>说明</th> <th>备注</th>   </tr>
+        <th>属性</th>
+        <th>说明</th>
+        <th>说明</th>
+    </tr>
     </thead>
     <tbody>
     <tr>
@@ -130,7 +133,7 @@ fields = [
 <li>BINARY_VECTOR：将二进制数据存储为 0 和 1 的序列，用于图像处理和信息检索中的紧凑特征表示。</li>
 <li>FLOAT_VECTOR：存储 32 位浮点数，常用于科学计算和机器学习中的实数表示。</li>
 <li>FLOAT16_VECTOR：存储 16 位半精度浮点数，用于深度学习和 GPU 计算，以提高内存和带宽效率。</li>
-<li>BFLOAT16_VECTOR：存储精度降低但指数范围与 Float32 相同的 16 位浮点数，常用于深度学习，可在不明显影响精度的情况下降低内存和计算要求。</li>
+<li>BFLOAT16_VECTOR：存储精度降低但指数范围与 Float32 相同的 16 位浮点数，在深度学习中很受欢迎，可在不明显影响精度的情况下降低内存和计算要求。</li>
 <li>SPARSE_FLOAT_VECTOR：存储非零元素及其相应索引的列表，用于表示稀疏向量。更多信息，请参阅<a href="/docs/zh/sparse_vector.md">稀疏向量</a>。</li>
 </ul>
 <p>Milvus 支持在一个 Collections 中使用多个向量场。更多信息，请参阅<a href="/docs/zh/multi-vector-search.md">混合搜索</a>。</p></li>
@@ -154,17 +157,20 @@ fields = [
 <h3 id="Collection-schema-properties" class="common-anchor-header">集合模式属性</h3><table class="properties">
     <thead>
     <tr>
-       <th>属性</td><th>说明</th> <th>备注</th>   </tr>
+        <th>属性</th>
+        <th>说明</th>
+        <th>说明</th>
+    </tr>
     </thead>
     <tbody>
     <tr>
         <td><code translate="no">field</code></td>
-        <td>要创建的集合中的字段</td>
+        <td>要创建的 Collection 中的字段</td>
         <td>必填</td>
     </tr>
     <tr>
         <td><code translate="no">description</code></td>
-        <td>Collections 的描述</td>
+        <td>Collection 的描述</td>
         <td>数据类型：<br/>可选</td>
     </tr>
     <tr>
@@ -193,7 +199,8 @@ position_field = FieldSchema(name=<span class="hljs-string">&quot;position&quot;
 schema = CollectionSchema(fields=[id_field, age_field, embedding_field], auto_id=<span class="hljs-literal">False</span>, enable_dynamic_field=<span class="hljs-literal">True</span>, description=<span class="hljs-string">&quot;desc of a collection&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
 <p>使用指定的 Schema 创建 Collections：</p>
-<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> <span class="hljs-title class_">Collection</span>
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> <span class="hljs-title class_">Collection</span>,connections
+conn = connections.<span class="hljs-title function_">connect</span>(host=<span class="hljs-string">&quot;127.0.0.1&quot;</span>, port=<span class="hljs-number">19530</span>)
 collection_name1 = <span class="hljs-string">&quot;tutorial_1&quot;</span>
 collection1 = <span class="hljs-title class_">Collection</span>(name=collection_name1, schema=schema, using=<span class="hljs-string">&#x27;default&#x27;</span>, shards_num=<span class="hljs-number">2</span>)
 <button class="copy-code-btn"></button></code></pre>

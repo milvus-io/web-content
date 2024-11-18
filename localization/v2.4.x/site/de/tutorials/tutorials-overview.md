@@ -30,7 +30,7 @@ title: Übersicht Tutorials
 <tr><td><a href="/docs/de/multimodal_rag_with_milvus.md">Multimodale RAG mit Milvus</a></td><td>RAG</td><td>Vektorsuche, dynamisches Feld</td></tr>
 <tr><td><a href="/docs/de/image_similarity_search.md">Bildsuche mit Milvus</a></td><td>Semantische Suche</td><td>Vektorsuche, dynamisches Feld</td></tr>
 <tr><td><a href="/docs/de/hybrid_search_with_milvus.md">Hybride Suche mit Milvus</a></td><td>Hybride Suche</td><td>Hybride Suche, Multivektor, dichte Einbettung, spärliche Einbettung</td></tr>
-<tr><td><a href="/docs/de/multimodal_rag_with_milvus.md">Multimodale Suche mit mehreren Vektoren</a></td><td>Semantische Suche</td><td>Multivektor, hybride Suche</td></tr>
+<tr><td><a href="/docs/de/multimodal_rag_with_milvus.md">Multimodale Suche mit Multivektoren</a></td><td>Semantische Suche</td><td>Multivektor, hybride Suche</td></tr>
 <tr><td><a href="/docs/de/question_answering_system.md">System zur Beantwortung von Fragen</a></td><td>Beantwortung von Fragen</td><td>Vektorsuche</td></tr>
 <tr><td><a href="/docs/de/recommendation_system.md">Empfehlungs-System</a></td><td>Empfehlungssystem</td><td>Vektorsuche</td></tr>
 <tr><td><a href="/docs/de/video_similarity_search.md">Video-Ähnlichkeitssuche</a></td><td>Semantische Suche</td><td>Vektorsuche</td></tr>
@@ -45,5 +45,6 @@ title: Übersicht Tutorials
 <tr><td><a href="/docs/de/use_ColPali_with_milvus.md">ColPali für multimodales Retrieval mit Milvus verwenden</a></td><td>Schnellstart</td><td>Vektorsuche</td></tr>
 <tr><td><a href="/docs/de/vector_visualization.md">Vektor-Visualisierung</a></td><td>Schnellstart</td><td>Vektorsuche</td></tr>
 <tr><td><a href="/docs/de/movie_recommendation_with_milvus.md">Filmempfehlung mit Milvus</a></td><td>Empfehlungssystem</td><td>Vektorsuche</td></tr>
+<tr><td><a href="/docs/de/funnel_search_with_matryoshka.md">Trichtersuche mit Matryoshka-Embeddings</a></td><td>Schnellstart</td><td>Vektorsuche</td></tr>
 </tbody>
 </table>

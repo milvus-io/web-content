@@ -132,7 +132,7 @@ client = <span class="hljs-keyword">new</span> <span class="hljs-title class_">M
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>一旦集合就绪，就可以列出它的分区。</p>
+    </button></h2><p>一旦集合就绪，就可以列出其分区。</p>
 <div class="language-python">
 <p>要列出分区，请使用 <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Partitions/list_partitions.md"><code translate="no">list_partitions()</code></a>.</p>
 </div>
@@ -178,7 +178,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 <span class="hljs-comment">// [ &#x27;_default&#x27; ]</span>
 <span class="hljs-comment">// </span>
 <button class="copy-code-btn"></button></code></pre>
-<p>上述代码片段的输出包括指定 Collections 内分区的名称。</p>
+<p>上述代码片段的输出包括指定 Collection 内分区的名称。</p>
 <div class="admonition note">
 <p><b>注释</b></p>
 <p>如果在集合中设置了字段作为分区键，Milvus 会随集合创建至少<strong>64 个</strong>分区。在列出分区时，结果可能与上述代码片段的输出不同。</p>
@@ -287,7 +287,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 <div class="admonition note">
 <p><b>注释</b></p>
 <p>如果你在一个 Collection 中设置了一个字段作为分区键，Milvus 会负责管理 Collection 中的分区。因此，在尝试创建分区时可能会遇到提示错误。</p>
-<p>有关详情，请参阅<a href="https://milvus.io/docs/use-partition-key.md">使用分区密钥</a>。</p>
+<p>有关详细信息，请参阅<a href="https://milvus.io/docs/use-partition-key.md">使用分区密钥</a>。</p>
 </div>
 <h2 id="Check-for-a-Specific-Partition" class="common-anchor-header">检查特定分区<button data-href="#Check-for-a-Specific-Partition" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -577,7 +577,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 <p>可能的加载状态如下</p>
 <ul>
 <li><p><strong>已加载</strong></p>
-<p>如果一个 Collection 中至少有一个分区已加载，则标记为<code translate="no">Loaded</code> 。</p></li>
+<p>如果一个 Collection 的至少一个分区已加载，则该 Collection 会被标记为<code translate="no">Loaded</code> 。</p></li>
 <li><p><strong>未加载</strong></p>
 <p>如果一个 Collection 的任何分区都未加载，则将其标记为<code translate="no">NotLoad</code> 。</p></li>
 <li><p><strong>加载中</strong></p>
@@ -590,7 +590,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 <p>要加载 Collections 的所有分区，只需调用 <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Management/loadCollection.md"><code translate="no">loadCollection()</code></a>.要加载 Collections 的特定分区，可使用 <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Partitions/loadPartitions.md"><code translate="no">loadPartitions()</code></a>.</p>
 </div>
 <div class="language-javascript">
-<p>要加载 Collections 的所有分区，只需调用 . <a href="https://milvus.io/api-reference/node/v2.4.x/Management/loadCollection.md"><code translate="no">loadCollection()</code></a>.要加载 Collections 的特定分区，可使用 <a href="https://milvus.io/api-reference/node/v2.4.x/Partitions/loadPartitions.md"><code translate="no">loadPartitions()</code></a>.</p>
+<p>要加载 Collections 的所有分区，只需调用 <a href="https://milvus.io/api-reference/node/v2.4.x/Management/loadCollection.md"><code translate="no">loadCollection()</code></a>.要加载 Collections 的特定分区，可使用 <a href="https://milvus.io/api-reference/node/v2.4.x/Partitions/loadPartitions.md"><code translate="no">loadPartitions()</code></a>.</p>
 </div>
 <div class="multipleCode">
    <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a></div>
@@ -652,7 +652,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
     partition_names=[<span class="hljs-string">&quot;partitionA&quot;</span>, <span class="hljs-string">&quot;partitionB&quot;</span>]
 )
 
-res = client.get_load_status(
+res = client.get_load_state(
     collection_name=<span class="hljs-string">&quot;quick_setup&quot;</span>,
     partition_name=<span class="hljs-string">&quot;partitionA&quot;</span>
 )
@@ -663,7 +663,7 @@ res = client.get_load_status(
 <span class="hljs-comment">#     &quot;state&quot;: &quot;&lt;LoadState: Loaded&gt;&quot;</span>
 <span class="hljs-comment"># }</span>
 
-res = client.get_load_status(
+res = client.get_load_state(
     collection_name=<span class="hljs-string">&quot;quick_setup&quot;</span>,
     partition_name=<span class="hljs-string">&quot;partitionB&quot;</span>
 )
@@ -820,7 +820,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
     partition_names=[<span class="hljs-string">&quot;_default&quot;</span>, <span class="hljs-string">&quot;partitionA&quot;</span>, <span class="hljs-string">&quot;partitionB&quot;</span>]
 )
 
-res = client.get_load_status(
+res = client.get_load_state(
     collection_name=<span class="hljs-string">&quot;quick_setup&quot;</span>,
 )
 
@@ -845,7 +845,7 @@ res = client.get_load_status(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>释放分区后，如果不再需要该分区，可以将其丢弃。</p>
+    </button></h2><p>释放分区后，如果不再需要该分区，就可以将其丢弃。</p>
 <div class="language-python">
 <p>要丢弃分区，请使用 <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Partitions/drop_partition.md"><code translate="no">drop_partition()</code></a>.</p>
 </div>

@@ -47,14 +47,14 @@ title: Recherche hybride
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Avant de lancer une recherche hybride, assurez-vous que vous disposez d'une collection comportant plusieurs champs vectoriels. Actuellement, Milvus introduit une valeur par défaut de quatre champs vectoriels par collection, qui peut être étendue à un maximum de dix en modifiant la configuration <a href="https://milvus.io/docs/configure_proxy.md#proxymaxVectorFieldNum">proxy.maxVectorFieldNum.</a> </p>
+    </button></h2><p>Avant de lancer une recherche hybride, assurez-vous que vous disposez d'une collection comportant plusieurs champs vectoriels. Actuellement, Milvus introduit une valeur par défaut de quatre champs vectoriels par collection, qui peut être étendue à un maximum de dix en modifiant la configuration <a href="https://milvus.io/docs/configure_proxy.md#proxymaxVectorFieldNum">proxy.maxVectorFieldNum</a>.</p>
 <p>Voici un exemple de création d'une collection nommée <code translate="no">test_collection</code> avec deux champs vectoriels, <code translate="no">filmVector</code> et <code translate="no">posterVector</code>, et d'insertion d'entités aléatoires dans cette collection.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> connections, Collection, FieldSchema, CollectionSchema, DataType
 <span class="hljs-keyword">import</span> random
 
 <span class="hljs-comment"># Connect to Milvus</span>
 connections.connect(
-    host=<span class="hljs-string">&quot;10.102.7.3&quot;</span>, <span class="hljs-comment"># Replace with your Milvus server IP</span>
+    host=<span class="hljs-string">&quot;127.0.0.1&quot;</span>, <span class="hljs-comment"># Replace with your Milvus server IP</span>
     port=<span class="hljs-string">&quot;19530&quot;</span>
 )
 
@@ -234,7 +234,7 @@ res = collection.hybrid_search(
 <p>La stratégie de reclassement à utiliser pour la recherche hybride. Valeurs possibles : <code translate="no">WeightedRanker(value1, value2, ..., valueN)</code> et <code translate="no">RRFRanker()</code>.</p>
 <p>Pour plus d'informations sur les stratégies de reclassement, voir <a href="/docs/fr/reranking.md">Reranking</a>.</p></li>
 <li><p><code translate="no">limit</code> <em>(int</em>)</p>
-<p>Nombre maximal de résultats finaux à renvoyer dans la recherche hybride.</p></li>
+<p>Le nombre maximum de résultats finaux à renvoyer dans la recherche hybride.</p></li>
 </ul>
 <p>La sortie est similaire à ce qui suit :</p>
 <pre><code translate="no" class="language-python">[<span class="hljs-string">&quot;[&#x27;id: 844, distance: 0.006047376897186041, entity: {}&#x27;, &#x27;id: 876, distance: 0.006422005593776703, entity: {}&#x27;]&quot;</span>]

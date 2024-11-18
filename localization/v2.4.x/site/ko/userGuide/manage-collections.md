@@ -617,7 +617,7 @@ indexParams.add(indexParamForVectorField);
     </tr>
   </tbody>
 </table>
-<p>위의 코드 조각은 각각 벡터 필드와 스칼라 필드에 대한 인덱스 파라미터를 설정하는 방법을 보여줍니다. 벡터 필드의 경우 메트릭 유형과 인덱스 유형을 모두 설정합니다. 스칼라 필드의 경우 인덱스 유형만 설정합니다. 필터링에 자주 사용되는 벡터 필드와 스칼라 필드에 대한 인덱스를 만드는 것이 좋습니다.</p>
+<p>위의 코드 조각은 각각 벡터 필드와 스칼라 필드에 대한 인덱스 매개 변수를 설정하는 방법을 보여줍니다. 벡터 필드의 경우 메트릭 유형과 인덱스 유형을 모두 설정합니다. 스칼라 필드의 경우 인덱스 유형만 설정합니다. 필터링에 자주 사용되는 벡터 필드와 스칼라 필드에 대한 인덱스를 만드는 것이 좋습니다.</p>
 <h4 id="Step-3-Create-the-collection" class="common-anchor-header">3단계: 컬렉션 만들기</h4><p>컬렉션과 인덱스 파일을 따로 만들거나, 만들 때 인덱스가 동시에 로드된 컬렉션을 만들 수 있습니다.</p>
 <div class="language-python">
 <p><a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_collection.md">create_collection()을</a> 사용하여 지정된 스키마 및 인덱스 매개변수로 컬렉션을 생성하고 <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/get_load_state.md">get_load_state()를</a> 사용하여 컬렉션의 로드 상태를 확인합니다.</p>
@@ -881,11 +881,11 @@ $ curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable
 </tr>
 <tr>
 <td><code translate="no">schema</code></td>
-<td>이 컬렉션의 스키마입니다.<br/>이를 <strong>없음으로</strong> 설정하면 이 컬렉션이 기본 설정으로 만들어집니다.<br/>사용자 정의 스키마로 컬렉션을 설정하려면 <strong>CollectionSchema</strong> 개체를 만들어 여기에서 참조해야 합니다. 이 경우 Milvus는 요청에 포함된 다른 모든 스키마 관련 설정을 무시합니다.</td>
+<td>이 컬렉션의 스키마입니다.<br/>이를 <strong>없음으로</strong> 설정하면 이 컬렉션이 기본 설정으로 생성됩니다.<br/>사용자 정의 스키마로 컬렉션을 설정하려면 <strong>CollectionSchema</strong> 객체를 만들어 여기에서 참조해야 합니다. 이 경우 Milvus는 요청에 포함된 다른 모든 스키마 관련 설정을 무시합니다.</td>
 </tr>
 <tr>
 <td><code translate="no">index_params</code></td>
-<td>이 컬렉션의 벡터 필드에 인덱스를 구축하기 위한 매개변수입니다. 사용자 정의 스키마로 컬렉션을 설정하고 컬렉션을 메모리에 자동으로 로드하려면 IndexParams 개체를 만들고 여기에서 참조해야 합니다.<br/>이 컬렉션의 벡터 필드에 대한 인덱스를 최소한 추가해야 합니다. 나중에 인덱스 매개변수를 설정하려는 경우 이 매개변수를 건너뛸 수도 있습니다.</td>
+<td>이 컬렉션의 벡터 필드에 인덱스를 구축하기 위한 매개변수입니다. 사용자 정의 스키마로 컬렉션을 설정하고 컬렉션을 메모리에 자동으로 로드하려면 IndexParams 개체를 만들고 여기에서 참조해야 합니다.<br/>이 컬렉션의 벡터 필드에 대한 인덱스는 최소한 추가해야 합니다. 나중에 인덱스 매개변수를 설정하려는 경우 이 매개변수를 건너뛸 수도 있습니다.</td>
 </tr>
 </tbody>
 </table></p>
@@ -1482,7 +1482,7 @@ System.out.println(listCollectionsRes.getCollectionNames());
         ></path>
       </svg>
     </button></h2><p>컬렉션을 로드하는 과정에서 Milvus는 컬렉션의 인덱스 파일을 메모리에 로드합니다. 반대로 컬렉션을 해제할 때는 Milvus가 메모리에서 인덱스 파일을 언로드합니다. 컬렉션에서 검색을 수행하기 전에 컬렉션이 로드되었는지 확인하세요.</p>
-<h3 id="Load-a-collection" class="common-anchor-header">컬렉션 로드하기</h3><div class="language-python">
+<h3 id="Load-a-collection" class="common-anchor-header">컬렉션 로드</h3><div class="language-python">
 <p>컬렉션을 로드하려면 컬렉션 이름을 지정하여 <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/load_collection.md"><code translate="no">load_collection()</code></a> 메서드를 사용하여 컬렉션 이름을 지정합니다. 또한 <code translate="no">replica_number</code> 을 설정하여 컬렉션이 로드될 때 쿼리 노드에 생성할 데이터 세그먼트의 인메모리 복제본 수를 결정할 수 있습니다.</p>
 <ul>
 <li>Milvus 독립형: <code translate="no">replica_number</code> 의 최대 허용 값은 1입니다.</li>
@@ -1601,7 +1601,7 @@ $ curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># 7. Load the collection</span>
 client.load_collection(
     collection_name=<span class="hljs-string">&quot;customized_setup_2&quot;</span>,
-    load_fields=[<span class="hljs-string">&quot;my_id&quot;</span>, <span class="hljs-string">&quot;my_vector&quot;</span>] <span class="hljs-comment"># Load only the specified fields</span>
+    load_fields=[<span class="hljs-string">&quot;my_id&quot;</span>, <span class="hljs-string">&quot;my_vector&quot;</span>], <span class="hljs-comment"># Load only the specified fields</span>
     skip_load_dynamic_field=<span class="hljs-literal">True</span> <span class="hljs-comment"># Skip loading the dynamic field</span>
 )
 
@@ -1735,7 +1735,7 @@ $ curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>컬렉션에 별칭을 지정하여 컬렉션을 특정 맥락에서 더 의미 있게 만들 수 있습니다. 컬렉션에 별칭을 여러 개 지정할 수 있지만 여러 컬렉션이 별칭을 공유할 수는 없습니다.</p>
+    </button></h2><p>컬렉션에 별칭을 지정하여 컬렉션을 특정 맥락에서 더 의미 있게 만들 수 있습니다. 컬렉션에 여러 개의 별칭을 지정할 수 있지만 여러 컬렉션이 하나의 별칭을 공유할 수는 없습니다.</p>
 <h3 id="Create-aliases" class="common-anchor-header">별칭 만들기</h3><div class="language-python">
 <p>별칭을 만들려면 컬렉션 이름과 <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_alias.md"><code translate="no">create_alias()</code></a> 메서드를 사용하여 컬렉션 이름과 별칭을 지정합니다.</p>
 </div>
@@ -2240,7 +2240,7 @@ $ curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable
 <p>별칭을 삭제하려면 별칭을 지정하여 <a href="https://milvus.io/api-reference/node/v2.4.x/Collections/dropAlias.md"><code translate="no">dropAlias()</code></a> 메서드를 사용하여 별칭을 지정합니다.</p>
 </div>
 <div class="language-shell">
-<p>컬렉션에 대한 별칭을 삭제하려면 <a href="https://milvus.io/api-reference/restful/v2.4.x/v2/Alias%20(v2)/Drop.md"><code translate="no">POST /v2/vectordb/aliases/drop</code></a> API 엔드포인트를 사용하면 됩니다.</p>
+<p>컬렉션의 별칭을 삭제하려면 컬렉션의 <a href="https://milvus.io/api-reference/restful/v2.4.x/v2/Alias%20(v2)/Drop.md"><code translate="no">POST /v2/vectordb/aliases/drop</code></a> API 엔드포인트를 사용하면 됩니다.</p>
 </div>
 <div class="multipleCode">
    <a href="#python">파이썬 </a> <a href="#java">자바</a> <a href="#javascript">Node.js</a></div>
@@ -2334,7 +2334,7 @@ $ curl -X POST <span class="hljs-string">&quot;http://<span class="hljs-variable
 <div class="alert note">
 <p>이 섹션의 코드 스니펫은 <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/ORM/Connections/connect.md">PyMilvus ORM 모듈을</a> 사용하여 Milvus와 상호 작용합니다. 새로운 <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/About.md">MilvusClient SDK가</a> 포함된 코드 스니펫은 곧 제공될 예정입니다.</p>
 </div>
-<h3 id="Set-TTL" class="common-anchor-header">TTL 설정</h3><p>컬렉션의 데이터에 대한 TTL(Time-To-Live)을 설정하여 데이터가 자동으로 삭제되기 전에 유지되어야 하는 기간을 지정합니다.</p>
+<h3 id="Set-TTL" class="common-anchor-header">TTL 설정</h3><p>컬렉션에 있는 데이터의 TTL(Time-To-Live)을 설정하여 데이터가 자동으로 삭제되기 전에 유지되어야 하는 기간을 지정합니다.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> Collection, connections
 
 <span class="hljs-comment"># Connect to Milvus server</span>

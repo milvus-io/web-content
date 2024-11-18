@@ -39,7 +39,10 @@ title: Gerir o esquema
 <h3 id="Field-schema-properties" class="common-anchor-header">Propriedades do esquema de campo</h3><table class="properties">
     <thead>
     <tr>
-       <th>Propriedades</td><th>Descrição</th> <th>Nota</th>   </tr>
+        <th>Propriedades</th>
+        <th>Descrição do campo</th>
+        <th>Nota</th>
+    </tr>
     </thead>
     <tbody>
     <tr>
@@ -154,7 +157,10 @@ fields = [
 <h3 id="Collection-schema-properties" class="common-anchor-header">Propriedades do esquema de coleção</h3><table class="properties">
     <thead>
     <tr>
-       <th>Propriedades</td><th>Descrição</th> <th>Nota</th>   </tr>
+        <th>Propriedades</th>
+        <th>Descrição das propriedades</th>
+        <th>Nota</th>
+    </tr>
     </thead>
     <tbody>
     <tr>
@@ -170,7 +176,7 @@ fields = [
     <tr>
         <td><code translate="no">partition_key_field</code></td>
         <td>Nome de um campo concebido para atuar como chave de partição.</td>
-        <td>Tipo de dados: String.<br/>Facultativo</td>
+        <td>Tipo de dados String.<br/>Facultativo</td>
     </tr>
     <tr>
         <td><code translate="no">enable_dynamic_field</code></td>
@@ -193,7 +199,8 @@ position_field = FieldSchema(name=<span class="hljs-string">&quot;position&quot;
 schema = CollectionSchema(fields=[id_field, age_field, embedding_field], auto_id=<span class="hljs-literal">False</span>, enable_dynamic_field=<span class="hljs-literal">True</span>, description=<span class="hljs-string">&quot;desc of a collection&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
 <p>Crie uma coleção com o esquema especificado:</p>
-<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> <span class="hljs-title class_">Collection</span>
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> <span class="hljs-title class_">Collection</span>,connections
+conn = connections.<span class="hljs-title function_">connect</span>(host=<span class="hljs-string">&quot;127.0.0.1&quot;</span>, port=<span class="hljs-number">19530</span>)
 collection_name1 = <span class="hljs-string">&quot;tutorial_1&quot;</span>
 collection1 = <span class="hljs-title class_">Collection</span>(name=collection_name1, schema=schema, using=<span class="hljs-string">&#x27;default&#x27;</span>, shards_num=<span class="hljs-number">2</span>)
 <button class="copy-code-btn"></button></code></pre>
@@ -239,6 +246,6 @@ collection, ins_res = Collection.construct_from_dataframe(
       </svg>
     </button></h2><ul>
 <li>Saiba como preparar o esquema ao <a href="/docs/pt/manage-collections.md">gerir colecções</a>.</li>
-<li>Leia mais sobre o <a href="/docs/pt/enable-dynamic-field.md">esquema dinâmico</a>.</li>
+<li>Saiba mais sobre o <a href="/docs/pt/enable-dynamic-field.md">esquema dinâmico</a>.</li>
 <li>Leia mais sobre partition-key em <a href="/docs/pt/multi_tenancy.md">Multi-tenancy</a>.</li>
 </ul>

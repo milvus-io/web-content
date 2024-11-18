@@ -54,7 +54,7 @@ title: Ricerca ibrida
 
 <span class="hljs-comment"># Connect to Milvus</span>
 connections.connect(
-    host=<span class="hljs-string">&quot;10.102.7.3&quot;</span>, <span class="hljs-comment"># Replace with your Milvus server IP</span>
+    host=<span class="hljs-string">&quot;127.0.0.1&quot;</span>, <span class="hljs-comment"># Replace with your Milvus server IP</span>
     port=<span class="hljs-string">&quot;19530&quot;</span>
 )
 
@@ -276,9 +276,9 @@ res = collection.hybrid_search(
       </svg>
     </button></h2><ul>
 <li><p><strong>In quale scenario è consigliata la ricerca ibrida?</strong></p>
-<p>La ricerca ibrida è ideale per situazioni complesse che richiedono un'elevata precisione, soprattutto quando un'entità può essere rappresentata da più vettori diversi. Questo vale per i casi in cui gli stessi dati, come una frase, vengono elaborati attraverso diversi modelli di incorporazione o quando le informazioni multimodali (come le immagini, le impronte digitali e le impronte vocali di un individuo) vengono convertite in diversi formati vettoriali. Assegnando dei pesi a questi vettori, la loro influenza combinata può arricchire significativamente il richiamo e migliorare l'efficacia dei risultati di ricerca.</p></li>
+<p>La ricerca ibrida è ideale per situazioni complesse che richiedono un'elevata precisione, soprattutto quando un'entità può essere rappresentata da più vettori diversi. Questo vale per i casi in cui gli stessi dati, come una frase, vengono elaborati attraverso diversi modelli di incorporamento o quando le informazioni multimodali (come le immagini, le impronte digitali e le impronte vocali di un individuo) vengono convertite in diversi formati vettoriali. Assegnando dei pesi a questi vettori, la loro influenza combinata può arricchire significativamente il richiamo e migliorare l'efficacia dei risultati di ricerca.</p></li>
 <li><p><strong>Come fa un ranker ponderato a normalizzare le distanze tra diversi campi vettoriali?</strong></p>
-<p>Un ranker ponderato normalizza le distanze tra i campi vettoriali utilizzando i pesi assegnati a ciascun campo. Calcola l'importanza di ogni campo vettoriale in base al suo peso, dando priorità a quelli con pesi più elevati. Si consiglia di utilizzare lo stesso tipo di metrica per tutte le richieste di ricerca di RNA per garantire la coerenza. Questo metodo garantisce che i vettori ritenuti più significativi abbiano una maggiore influenza sulla classifica generale.</p></li>
+<p>Un ranker ponderato normalizza le distanze tra i campi vettoriali utilizzando i pesi assegnati a ciascun campo. Calcola l'importanza di ogni campo vettoriale in base al suo peso, dando priorità a quelli con pesi più elevati. Si consiglia di utilizzare lo stesso tipo di metrica per tutte le richieste di ricerca di RNA, per garantire la coerenza. Questo metodo garantisce che i vettori ritenuti più significativi abbiano una maggiore influenza sulla classifica generale.</p></li>
 <li><p><strong>È possibile utilizzare classificatori alternativi come Cohere Ranker o BGE Ranker?</strong></p>
 <p>Attualmente sono supportati solo i classificatori forniti. Per i prossimi aggiornamenti è prevista l'inclusione di altri classificatori.</p></li>
 <li><p><strong>È possibile eseguire più operazioni di ricerca ibrida contemporaneamente?</strong></p>

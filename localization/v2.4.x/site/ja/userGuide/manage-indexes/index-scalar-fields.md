@@ -2,7 +2,7 @@
 id: index-scalar-fields.md
 order: 2
 summary: このガイドでは、整数や文字列などのフィールドに対するスカラー・インデックスの作成と設定について説明します。
-title: インデックス・スカラー・フィールド
+title: スカラーフィールドのインデックス
 ---
 <h1 id="Index-Scalar-Fields" class="common-anchor-header">スカラーフィールドのインデックス<button data-href="#Index-Scalar-Fields" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -19,8 +19,8 @@ title: インデックス・スカラー・フィールド
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Milvusでは、従来のデータベースインデックスと同様に、特定の非ベクトルフィールド値によるメタフィルタリングを高速化するためにスカラインデックスを使用します。このガイドでは、整数や文字列などのフィールドに対するスカラーインデックスの作成と設定について説明します。</p>
-<h2 id="Types-of-scalar-indexing" class="common-anchor-header">スカラーインデックスの種類<button data-href="#Types-of-scalar-indexing" class="anchor-icon" translate="no">
+    </button></h1><p>Milvusでは、スカラーインデックスは、従来のデータベースインデックスと同様に、特定の非ベクトルフィールド値によるメタフィルタリングを高速化するために使用されます。このガイドでは、整数や文字列などのフィールドに対するスカラーインデックスの作成と設定について説明します。</p>
+<h2 id="Types-of-scalar-indexing" class="common-anchor-header">スカラインデックスの種類<button data-href="#Types-of-scalar-indexing" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -55,13 +55,13 @@ title: インデックス・スカラー・フィールド
         ></path>
       </svg>
     </button></h2><div class="language-python">
-<p>オートインデックスを使用するには、<strong>index_type</strong>パラメータを <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/add_index.md"><code translate="no">add_index()</code></a>で index_type パラメータを省略し、Milvus がスカラ・フィールド・タイプに基づいてインデックス・タイプを推測できるようにします。</p>
+<p>オートインデックスを使用するには、<strong>index_type</strong>パラメータを <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/add_index.md"><code translate="no">add_index()</code></a>でindex_typeパラメータを省略し、milvusがスカラーフィールドの型に基づいてインデックス型を推測できるようにします。</p>
 </div>
 <div class="language-java">
-<p>で<strong>indexType</strong>パラメータを省略します。 <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Management/IndexParam.md"><code translate="no">IndexParam</code></a>の indexType パラメータを省略する。</p>
+<p>で<strong>indexType</strong>パラメータを省略します。 <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Management/IndexParam.md"><code translate="no">IndexParam</code></a>の indexType パラメータを省略し、 Milvus がスカラーフィールドの型に基づいてインデックスタイプを推測できるようにします。</p>
 </div>
 <div class="language-javascript">
-<p>で<strong>index_type</strong>パラメータを省略する。 <a href="https://milvus.io/api-reference/node/v2.4.x/Management/createIndex.md"><code translate="no">createIndex()</code></a>で index_type パラメータを省略する。</p>
+<p>で<strong>index_type</strong>パラメータを省略する。 <a href="https://milvus.io/api-reference/node/v2.4.x/Management/createIndex.md"><code translate="no">createIndex()</code></a>の index_type パラメータを省略すると、Milvus はスカラーフィールドの型に基づいてインデックスタイプを推測することができます。</p>
 </div>
 <p>スカラーデータ型とデフォルトのインデックス作成アルゴリズムのマッピングについては、<a href="https://milvus.io/docs/scalar_index.md#Scalar-field-indexing-algorithms">スカラーフィールドのインデックス作成</a>アルゴリズムを参照してください。</p>
 <div class="multipleCode">
@@ -71,7 +71,7 @@ client = MilvusClient(
     uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>
 )
 
-index_params = client.create_index_params() <span class="hljs-comment"># Prepare an empty IndexParams object, without having to specify any index parameters</span>
+index_params = MilvusClient.prepare_index_params() <span class="hljs-comment"># Prepare an empty IndexParams object, without having to specify any index parameters</span>
 
 index_params.add_index(
     field_name=<span class="hljs-string">&quot;scalar_1&quot;</span>, <span class="hljs-comment"># Name of the scalar field to be indexed</span>
@@ -137,7 +137,7 @@ client.createIndex(createIndexReq);
 <p>以下の例では、スカラー・フィールド<code translate="no">scalar_2</code> に対して転置インデックスを作成しています。</p>
 <div class="multipleCode">
    <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a></div>
-<pre><code translate="no" class="language-python">index_params = client.create_index_params() <span class="hljs-comment">#  Prepare an IndexParams object</span>
+<pre><code translate="no" class="language-python">index_params = MilvusClient.prepare_index_params() <span class="hljs-comment">#  Prepare an IndexParams object</span>
 
 index_params.add_index(
     field_name=<span class="hljs-string">&quot;scalar_2&quot;</span>, <span class="hljs-comment"># Name of the scalar field to be indexed</span>
@@ -179,7 +179,7 @@ client.createIndex(createIndexReq);
 <div class="language-python">
 <p><strong>メソッドとパラメータ</strong></p>
 <ul>
-<li><p><strong>create_index_params()</strong></p>
+<li><p><strong>prepare_index_params()</strong></p>
 <p><strong>IndexParams</strong>オブジェクトを準備します。</p></li>
 <li><p><strong>add_index()</strong></p>
 <p><strong>IndexParams</strong>オブジェクトにインデックス設定を追加します。</p>
@@ -203,7 +203,7 @@ client.createIndex(createIndexReq);
 <li><p><strong>collection_name</strong><em>(string</em>)</p>
 <p>インデックスを作成するコレクションの名前。</p></li>
 <li><p><strong>index_params</strong></p>
-<p><strong>インデックス</strong>設定を含む<strong>IndexParams</strong>オブジェクト。</p></li>
+<p>インデックス設定を含む<strong>IndexParams</strong>オブジェクト。</p></li>
 </ul></li>
 </ul>
 </div>
@@ -237,7 +237,7 @@ client.createIndex(createIndexReq);
 <li><strong>index_type</strong><em>(string</em>) 作成するスカラー・インデックスのタイプ。暗黙的インデックスの場合は、このパラメータを空にするか省略します。 カスタムインデックスの場合は、以下の値が有効です：<ul>
 <li><strong>INVERTED</strong>: (推奨) 転置インデックスは、すべてのトークン化された単語をアルファベット順に並べた用語辞書で構成されます。詳細については、「<a href="/docs/ja/scalar_index.md">スカラー・インデックス</a>」を参照してください。</li>
 <li><strong>STL_SORT</strong>：標準テンプレート・ライブラリのソート・アルゴリズムを使用して、スカラー・フィールドをソートします。ブール値と数値フィールド（INT8、INT16、INT32、INT64、FLOAT、DOUBLEなど）をサポート。</li>
-<li><strong>トライ</strong>：高速なプレフィックス検索と取得のためのツリーデータ構造。VARCHAR フィールドをサポートしています。</li>
+<li><strong>トライ</strong>：高速なプレフィックス検索と取得のためのツリーデータ構造。VARCHAR フィールドをサポート。</li>
 </ul></li>
 </ul></li>
 </ul>
