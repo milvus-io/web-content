@@ -138,7 +138,7 @@
                 "children": []
               },
               {
-                "label": "Mapa do leme",
+                "label": "Carta do leme",
                 "id": "install_cluster-helm-gpu.md",
                 "order": 1,
                 "children": []
