@@ -1421,6 +1421,18 @@
             "children": []
           },
           {
+            "label": "DocsGPT",
+            "id": "use_milvus_in_docsgpt.md",
+            "order": 9,
+            "children": []
+          },
+          {
+            "label": "SambaNova",
+            "id": "use_milvus_with_sambanova.md",
+            "order": 10,
+            "children": []
+          },
+          {
             "label": "PrivateGPT",
             "id": "use_milvus_in_private_gpt.md",
             "order": 8,
@@ -1444,7 +1456,13 @@
             "id": "integrate_with_camel.md",
             "order": 1,
             "children": []
-          }
+          },
+          {
+            "label": "Mem0",
+            "id": "quickstart_mem0_with_milvus.md",
+            "order": 2,
+            "children": []
+          }       
         ]
       }, 
       {
@@ -1462,6 +1480,12 @@
             "label": "Vanna",
             "id": "integrate_with_vanna.md",
             "order": 1,
+            "children": []
+          },
+          {
+            "label": "Knowledge Table",
+            "id": "knowledge_table_with_milvus.md",
+            "order": 2,
             "children": []
           }
         ]
@@ -1631,6 +1655,12 @@
         "label": "Movie Recommendation",
         "id": "movie_recommendation_with_milvus.md",
         "order": 9,
+        "children": []
+      },
+      {
+        "label": "Funnel Search with Matryoshka Embeddings",
+        "id": "funnel_search_with_matryoshka.md",
+        "order": 10,
         "children": []
       },
       {

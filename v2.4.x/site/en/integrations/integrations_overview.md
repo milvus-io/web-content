@@ -51,3 +51,7 @@ This page provides a list of tutorials for you to interact with Milvus and third
 | [Build a RAG with Milvus and Unstructured](rag_with_milvus_and_unstructured.md) | Data Sources | Milvus, Unstructured |
 | [Build RAG with Milvus + PII Masker](RAG_with_pii_and_milvus.md) | Data Sources | Milvus, PII Masker |
 | [Use Milvus in PrivateGPT](use_milvus_in_private_gpt.md) | Ochestration | vector search |
+| [Getting Started with Mem0 and Milvus](quickstart_mem0_with_milvus.md) | Agents | Mem0, Milvus |
+| [Knowledge Table with Milvus](knowledge_table_with_milvus.md) | Knowledge Engineering | Knowledge Table, Milvus |
+| [Use Milvus in DocsGPT](use_milvus_in_docsgpt.md) | Ochestration | DocsGPT, Milvus |
+| [Use Milvus with SambaNova](use_milvus_with_sambanova.md) | Orchestration | Milvus, SambaNova |
