@@ -13,10 +13,13 @@ The following is the API endpoint used to list collections in a Milvus cluster.
 ```shell
 export CLUSTER_ENDPOINT="http://localhost:19530"
 
-curl --request GET \
+curl --request POST \
     --url "${CLUSTER_ENDPOINT}/v2/vectordb/collections/list" \
     --header 'accept: application/json' \
-    --header 'content-type: application/json'
+    --header 'content-type: application/json' \
+    -d '{
+        "dbName": "_default"
+    }'
 ```
 
 ## Authentication credentials
@@ -27,11 +30,14 @@ With default settings, you do not need to provide any authentication credentials
 export CLUSTER_ENDPOINT="http://localhost:19530"
 export TOKEN="root:milvus"
 
-curl --request GET \
+curl --request POST \
     --url "${CLUSTER_ENDPOINT}/v2/vectordb/collections/list" \
     --header "Authorization: Bearer ${TOKEN}" \
     --header 'accept: application/json' \
-    --header 'content-type: application/json'
+    --header 'content-type: application/json' \
+    -d '{
+        "dbName": "_default"
+    }'
 ```
 
 ## API endpoint versioning
