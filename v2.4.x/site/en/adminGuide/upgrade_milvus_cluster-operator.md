@@ -80,10 +80,10 @@ spec:
     image: milvusdb/milvus:<some-old-version>
 ```
 
-Then save your configuration as a YAML file (for example, `milvusupgrade.yml`) and apply this configuration file to your Milvus instance as follows:
+Then save your configuration as a YAML file (for example, `milvusupgrade.yml`) and patch this configuration file to your Milvus instance as follows:
 
 ```shell
-kubectl apply -f milvusupgrade.yml
+kubectl patch -f milvusupgrade.yml
 ```
 
 
@@ -107,7 +107,7 @@ spec:
 Then run the following to perform the upgrade:
 
 ```shell
-kubectl apply -f milvusupgrade.yaml
+kubectl patch -f milvusupgrade.yaml
 ```
 
 ## Migrate the metadata
@@ -142,10 +142,10 @@ spec:
 
 ### 2. Apply the new configuration
 
-Run the following command to apply the new configuration.
+Run the following command to create the new configuration.
 
 ```
-$ kubectl apply -f https://github.com/zilliztech/milvus-operator/blob/main/config/samples/beta/milvusupgrade.yaml
+$ kubectl create -f https://github.com/zilliztech/milvus-operator/blob/main/config/samples/beta/milvusupgrade.yaml
 ```
 
 

@@ -14,12 +14,22 @@ title: Upgrade Milvus Cluster with Helm Chart
 
 This guide describes how to upgrade your Milvus cluster with Milvus Helm charts. 
 
+## Prerequisites
+- Helm version >= 3.14.0
+- Kubernetes version >= 1.20.0
+
+<div class="alert note">
+
+Since Milvus-Helm chart version 4.2.21, we introduced pulsar-v3.x chart as dependency. For backward compatibility, please upgrade your helm to v3.14 or later version, and be sure to add the `--reset-then-reuse-values` option whenever you use `helm upgrade`.
+
+</div>
+
 ## Check Milvus Helm Chart
 
 Run the following commands to check new Milvus versions. 
 
 ```
-$ helm repo update
+$ helm repo update zilliztech
 $ helm search repo zilliztech/milvus --versions
 ```
 
@@ -31,7 +41,7 @@ The Milvus Helm Charts repo at `https://milvus-io.github.io/milvus-helm/` has be
 helm repo add zilliztech https://zilliztech.github.io/milvus-helm
 helm repo update
 # upgrade existing helm release
-helm upgrade my-release zilliztech/milvus
+helm upgrade my-release zilliztech/milvus --reset-then-reuse-values
 ```
 
 The archived repo is still available for the charts up to 4.0.31. For later releases, use the new repo instead.
@@ -122,8 +132,8 @@ sh rollingUpdate.sh -n default -i my-release -o update -t 2.4.15 -w 'milvusdb/mi
 To upgrade Milvus from a minor release before v2.2.3 to the latest, run the following commands:
 
 ```shell
-helm repo update
-helm upgrade my-release zilliztech/milvus --reuse-values --version=4.1.24 # use the helm chart version here
+helm repo update zilliztech
+helm upgrade my-release zilliztech/milvus --reset-then-reuse-values --version=4.1.24 # use the helm chart version here
 ```
 
 Use the Helm chart version in the preceding command. For details on how to obtain the Helm chart version, refer to [Check the Milvus version](#Check-the-Milvus-version).
