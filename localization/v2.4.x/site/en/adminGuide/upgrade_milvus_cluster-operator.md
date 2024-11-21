@@ -101,8 +101,8 @@ spec:
     imageUpdateMode: rollingDowngrade
     image: milvusdb/milvus:&lt;some-old-version&gt;
 <button class="copy-code-btn"></button></code></pre>
-<p>Then save your configuration as a YAML file (for example, <code translate="no">milvusupgrade.yml</code>) and apply this configuration file to your Milvus instance as follows:</p>
-<pre><code translate="no" class="language-shell">kubectl apply -f milvusupgrade.yml
+<p>Then save your configuration as a YAML file (for example, <code translate="no">milvusupgrade.yml</code>) and patch this configuration file to your Milvus instance as follows:</p>
+<pre><code translate="no" class="language-shell">kubectl patch -f milvusupgrade.yml
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Upgrade-Milvus-by-changing-its-image" class="common-anchor-header">Upgrade Milvus by changing its image<button data-href="#Upgrade-Milvus-by-changing-its-image" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -131,7 +131,7 @@ spec:
    image: milvusdb/milvus:v2.4.15
 <button class="copy-code-btn"></button></code></pre>
 <p>Then run the following to perform the upgrade:</p>
-<pre><code translate="no" class="language-shell">kubectl apply -f milvusupgrade.yaml
+<pre><code translate="no" class="language-shell">kubectl patch -f milvusupgrade.yaml
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Migrate-the-metadata" class="common-anchor-header">Migrate the metadata<button data-href="#Migrate-the-metadata" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -168,8 +168,8 @@ spec:
   <span class="hljs-comment"># backupPVC: &quot;&quot;</span>
   <span class="hljs-comment"># maxRetry: 3</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="2-Apply-the-new-configuration" class="common-anchor-header">2. Apply the new configuration</h3><p>Run the following command to apply the new configuration.</p>
-<pre><code translate="no">$ kubectl apply -f <span class="hljs-attr">https</span>:<span class="hljs-comment">//github.com/zilliztech/milvus-operator/blob/main/config/samples/beta/milvusupgrade.yaml</span>
+<h3 id="2-Apply-the-new-configuration" class="common-anchor-header">2. Apply the new configuration</h3><p>Run the following command to create the new configuration.</p>
+<pre><code translate="no">$ kubectl create -f <span class="hljs-attr">https</span>:<span class="hljs-comment">//github.com/zilliztech/milvus-operator/blob/main/config/samples/beta/milvusupgrade.yaml</span>
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="3-Check-the-status-of-metadata-migration" class="common-anchor-header">3. Check the status of metadata migration</h3><p>Run the following command to check the status of your metadata migration.</p>
 <pre><code translate="no">kubectl describe milvus release-name
