@@ -38,7 +38,7 @@ title: Index Vector Fields
         ></path>
       </svg>
     </button></h2><p>Leveraging the metadata stored in an index file, Milvus organizes your data in a specialized structure, facilitating rapid retrieval of requested information during searches or queries.</p>
-<p>Milvus provides several index types and metrics to sort field values for efficient similarity searches. The following table lists the supported index types and metrics for different vector field types. For details, refer to <a href="/docs/index.md">In-memory Index</a> and <a href="/docs/metric.md">Similarity Metrics</a>.</p>
+<p>Milvus provides several index types and metrics to sort field values for efficient similarity searches. The following table lists the supported index types and metrics for different vector field types. Currently, Milvus supports various types of vector data, including floating point embeddings (often known as floating point vectors or dense vectors), binary embeddings (also known as binary vectors), and sparse embeddings (also known as sparse vectors). For details, refer to <a href="/docs/index.md">In-memory Index</a> and <a href="/docs/metric.md">Similarity Metrics</a>.</p>
 <div class="filter">
   <a href="#floating">Floating point embeddings</a>
   <a href="#binary">Binary embeddings</a>
