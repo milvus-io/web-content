@@ -25,7 +25,7 @@ According to the implementation methods, the ANNS vector index can be categorize
 
 ## Indexes supported in Milvus
 
-Milvus supports various index types, which are categorized by the type of embedding they handle: **floating-point**, **binary**, and **sparse**.
+Milvus supports various index types, which are categorized by the type of vector embeddings they handle: **floating-point embeddings** (also known as floating point vectors or dense vectors), **binary embeddings** (also known as binary vectors), and **sparse embeddings** (also known as sparse vectors).
 
 <div class="filter">
   <a href="#floating">Floating-point embeddings</a>
@@ -37,7 +37,7 @@ Milvus supports various index types, which are categorized by the type of embedd
 
 ### Indexes for floating-point embeddings
 
-For 128-dimensional floating-point embeddings, the storage they take up is 128 * the size of float = 512 bytes. And the [distance metrics](metric.md) used for float-point embeddings are Euclidean distance (`L2`) and Inner product (`IP`).
+For 128-dimensional floating-point embeddings (vectors), the storage they take up is 128 * the size of float = 512 bytes. And the [distance metrics](metric.md) used for float-point embeddings are Euclidean distance (`L2`) and Inner product (`IP`).
 
 These types of indexes include `FLAT`, `IVF_FLAT`, `IVF_PQ`, `IVF_SQ8`, `HNSW`, and `SCANN` for CPU-based ANN searches.
 
@@ -45,7 +45,7 @@ These types of indexes include `FLAT`, `IVF_FLAT`, `IVF_PQ`, `IVF_SQ8`, `HNSW`, 
 
 <div class="filter-binary">
 
-### Indexes for binary embeddings
+### Indexes for binary embeddings 
 
 For 128-dimensional binary embeddings, the storage they take up is 128 / 8 = 16 bytes. And the distance metrics used for binary embeddings are `JACCARD` and `HAMMING`.
 
