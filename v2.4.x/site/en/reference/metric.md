@@ -8,7 +8,7 @@ title: Similarity Metrics
 
 In Milvus, similarity metrics are used to measure similarities among vectors. Choosing a good distance metric helps improve the classification and clustering performance significantly.
 
-The following table shows how these widely used similarity metrics fit with various input data forms and Milvus indexes.
+The following table shows how these widely used similarity metrics fit with various input data forms and Milvus indexes. Currently, Milvus supports various types of data, including floating point embeddings (often known as floating point vectors or dense vectors), binary embeddings (also known as binary vectors), and sparse embeddings (also known as sparse vectors). 
 
 
 <div class="filter">
@@ -93,7 +93,7 @@ Milvus only caculates the value before applying square root when Euclidean dista
 
 ### Inner product (IP)
 
-The IP distance between two embeddings are defined as follows: 
+The IP distance between two vector embeddings are defined as follows: 
 
 ![ip](../../../assets/IP_formula.png "Inner product.")
 
