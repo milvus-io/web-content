@@ -7,6 +7,61 @@ title: Release Notes
 
 Find out what’s new in Milvus! This page summarizes new features, improvements, known issues, and bug fixes in each release. You can find the release notes for each released version after v2.4.0 in this section. We suggest that you regularly visit this page to learn about updates.
 
+## v2.4.17
+
+Release Date: November 22, 2024
+
+| Milvus version | Python SDK version | Java SDK version | Node.js SDK version |
+|----------------|--------------------|------------------|---------------------|
+| 2.4.17         | 2.4.9              | 2.4.8            | 2.4.9               |
+
+Milvus 2.4.17 was a minor release aimed at critical stability enhancements. This version addressed various bugs and implemented performance optimizations to bolster system reliability.
+
+### Improvements
+
+- Enhanced: [2.4] Prevented the generation of "null" search parameters ([#37811](https://github.com/milvus-io/milvus/pull/37811)).
+- Enhanced: [2.4] Removed unnecessary segment clone updates in distribution ([#37797](https://github.com/milvus-io/milvus/pull/37797)) ([#37833](https://github.com/milvus-io/milvus/pull/37833)).
+- Enhanced: [2.4] Provided secondary index criteria for filtering `leaderview` ([#37777](https://github.com/milvus-io/milvus/pull/37777)) ([#37802](https://github.com/milvus-io/milvus/pull/37802)).
+- Used batch processing to speed up listing collections from meta kv ([#37752](https://github.com/milvus-io/milvus/pull/37752)).
+- Removed collection queryable checks from health checks ([#37731](https://github.com/milvus-io/milvus/pull/37731)).
+- [2.4] Removed segment-level tags from monitoring metrics ([#37737](https://github.com/milvus-io/milvus/pull/37737)).
+- [2.4] Removed unnecessary cloning in `setstate` ([#37736](https://github.com/milvus-io/milvus/pull/37736)).
+- Added search parameters to search requests in RESTful API ([#37673](https://github.com/milvus-io/milvus/pull/37673)).
+- Made Milvus images with AddressSanitizer (ASAN) available ([#37682](https://github.com/milvus-io/milvus/pull/37682)).
+- [cp24] Tidied compaction logs ([#37647](https://github.com/milvus-io/milvus/pull/37647)).
+- [2.4] Invalidated the collection cache when releasing collections ([#37628](https://github.com/milvus-io/milvus/pull/37628)).
+- [2.4] Added CGO call metrics for load/write APIs ([#37627](https://github.com/milvus-io/milvus/pull/37627)).
+- Enabled node assignment policies in resource groups ([#37588](https://github.com/milvus-io/milvus/pull/37588)).
+- Optimized `describe collection` and index operations ([#37605](https://github.com/milvus-io/milvus/pull/37605)).
+- [2.4] Handled legacy proxy load fields requests ([#37569](https://github.com/milvus-io/milvus/pull/37569)).
+- [2.4] Added context tracing for query coordination queryable checks ([#37534](https://github.com/milvus-io/milvus/pull/37534)).
+- [2.4] Improved root coordination task scheduling policies ([#37523](https://github.com/milvus-io/milvus/pull/37523)).
+- Refactored `createindex` in the RESTful API ([#37237](https://github.com/milvus-io/milvus/pull/37237)).
+- [2.4] Used cancel labels for context-canceled storage operations ([#37491](https://github.com/milvus-io/milvus/pull/37491)).
+- [2.4] Updated the template expression proto to improve transmission efficiency ([#37485](https://github.com/milvus-io/milvus/pull/37485)).
+
+### Bug fixes
+
+- Supported `upsert` with autoid=true in the RESTful API and fixed associated bugs ([#37766](https://github.com/milvus-io/milvus/pull/37766)).
+- Ensured L0 segments were loaded to workers during channel balancing ([#37758](https://github.com/milvus-io/milvus/pull/37758)).
+- Fixed delegator stuck in unserviceable status ([#37702](https://github.com/milvus-io/milvus/pull/37702)).
+- [2.4] Stored default values when `errkeynotfound` was returned ([#37705](https://github.com/milvus-io/milvus/pull/37705)).
+- [cp24] Changed memory check from write lock to read lock ([#37526](https://github.com/milvus-io/milvus/pull/37526)).
+- Ensured `getshardleaders` retried only on retriable errors ([#37687](https://github.com/milvus-io/milvus/pull/37687)).
+- [cp24] Corrected varchar primary key size calculations ([#37619](https://github.com/milvus-io/milvus/pull/37619)).
+- Fixed channel balancing that could get stuck when increasing replica numbers ([#37642](https://github.com/milvus-io/milvus/pull/37642)).
+- Addressed issues where searches returned fewer results after query node recovery ([#37610](https://github.com/milvus-io/milvus/pull/37610)).
+- [2.4] Fixed bugs retrieving data from the wrong field for L0 segments ([#37599](https://github.com/milvus-io/milvus/pull/37599)).
+- Recovered loading collection's `updateTS` after query coordination restarts ([#37580](https://github.com/milvus-io/milvus/pull/37580)).
+- [2.4] Added IP address validation to `paramtable` ([#37500](https://github.com/milvus-io/milvus/pull/37500)).
+- Fixed search/query failures caused by segments not being loaded ([#37544](https://github.com/milvus-io/milvus/pull/37544)).
+- Resolved watch channel issues due to timer reset misuse ([#37542](https://github.com/milvus-io/milvus/pull/37542)).
+- Fixed subscription leaks ([#37541](https://github.com/milvus-io/milvus/pull/37541)).
+- Resolved issues with excessively growing segments ([#37540](https://github.com/milvus-io/milvus/pull/37540)).
+- [cp24] Corrected dropped segment metrics ([#37471](https://github.com/milvus-io/milvus/pull/37471)).
+- Fixed repeated error codes in Milvus and Segcore ([#37449](https://github.com/milvus-io/milvus/pull/37449)).
+- [cp24] Separated L0 and mixed trigger intervals ([#37319](https://github.com/milvus-io/milvus/pull/37319)).
+
 ## v2.4.15
 
 Release Date: November 5, 2024
