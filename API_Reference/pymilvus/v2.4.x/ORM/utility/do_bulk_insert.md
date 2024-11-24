@@ -1,5 +1,11 @@
 # do_bulk_insert()
 
+<div class="alert warn">
+
+This function is deprecated in v2.4.x and will be removed in a future release. Please use `bulk_import()` instead.
+
+</div>
+
 This operation bulk-inserts data from specified files.
 
 ## Request Syntax

@@ -2,6 +2,12 @@
 
 This operation returns the state of a specified bulk-insert task.
 
+<div class="alert warn">
+
+This function is deprecated in v2.4.x and will be removed in a future release. Please use `get_import_progress()` instead.
+
+</div>
+
 ## Request syntax
 
 ```python
