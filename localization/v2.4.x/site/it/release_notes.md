@@ -1,9 +1,9 @@
 ---
 id: release_notes.md
 summary: Note di rilascio di Milvus
-title: Note di rilascio
+title: Release Notes
 ---
-<h1 id="Release-Notes" class="common-anchor-header">Note di rilascio<button data-href="#Release-Notes" class="anchor-icon" translate="no">
+<h1 id="Release-Notes" class="common-anchor-header">Release Notes<button data-href="#Release-Notes" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -18,7 +18,75 @@ title: Note di rilascio
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Scoprite le novità di Milvus! Questa pagina riassume le nuove funzionalità, i miglioramenti, i problemi noti e le correzioni di bug di ogni versione. In questa sezione si trovano le note di rilascio per ogni versione rilasciata dopo la v2.4.0. Si consiglia di visitare regolarmente questa pagina per conoscere gli aggiornamenti.</p>
+    </button></h1><p>Find out what’s new in Milvus! This page summarizes new features, improvements, known issues, and bug fixes in each release. You can find the release notes for each released version after v2.4.0 in this section. We suggest that you regularly visit this page to learn about updates.</p>
+<h2 id="v2417" class="common-anchor-header">v2.4.17<button data-href="#v2417" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>Release Date: November 22, 2024</p>
+<table>
+<thead>
+<tr><th>Milvus version</th><th>Python SDK version</th><th>Java SDK version</th><th>Node.js SDK version</th></tr>
+</thead>
+<tbody>
+<tr><td>2.4.17</td><td>2.4.9</td><td>2.4.8</td><td>2.4.9</td></tr>
+</tbody>
+</table>
+<p>Milvus 2.4.17 was a minor release aimed at critical stability enhancements. This version addressed various bugs and implemented performance optimizations to bolster system reliability.</p>
+<h3 id="Improvements" class="common-anchor-header">Improvements</h3><ul>
+<li>Enhanced: [2.4] Prevented the generation of “null” search parameters (<a href="https://github.com/milvus-io/milvus/pull/37811">#37811</a>).</li>
+<li>Enhanced: [2.4] Removed unnecessary segment clone updates in distribution (<a href="https://github.com/milvus-io/milvus/pull/37797">#37797</a>) (<a href="https://github.com/milvus-io/milvus/pull/37833">#37833</a>).</li>
+<li>Enhanced: [2.4] Provided secondary index criteria for filtering <code translate="no">leaderview</code> (<a href="https://github.com/milvus-io/milvus/pull/37777">#37777</a>) (<a href="https://github.com/milvus-io/milvus/pull/37802">#37802</a>).</li>
+<li>Used batch processing to speed up listing collections from meta kv (<a href="https://github.com/milvus-io/milvus/pull/37752">#37752</a>).</li>
+<li>Removed collection queryable checks from health checks (<a href="https://github.com/milvus-io/milvus/pull/37731">#37731</a>).</li>
+<li>[2.4] Removed segment-level tags from monitoring metrics (<a href="https://github.com/milvus-io/milvus/pull/37737">#37737</a>).</li>
+<li>[2.4] Removed unnecessary cloning in <code translate="no">setstate</code> (<a href="https://github.com/milvus-io/milvus/pull/37736">#37736</a>).</li>
+<li>Added search parameters to search requests in RESTful API (<a href="https://github.com/milvus-io/milvus/pull/37673">#37673</a>).</li>
+<li>Made Milvus images with AddressSanitizer (ASAN) available (<a href="https://github.com/milvus-io/milvus/pull/37682">#37682</a>).</li>
+<li>[cp24] Tidied compaction logs (<a href="https://github.com/milvus-io/milvus/pull/37647">#37647</a>).</li>
+<li>[2.4] Invalidated the collection cache when releasing collections (<a href="https://github.com/milvus-io/milvus/pull/37628">#37628</a>).</li>
+<li>[2.4] Added CGO call metrics for load/write APIs (<a href="https://github.com/milvus-io/milvus/pull/37627">#37627</a>).</li>
+<li>Enabled node assignment policies in resource groups (<a href="https://github.com/milvus-io/milvus/pull/37588">#37588</a>).</li>
+<li>Optimized <code translate="no">describe collection</code> and index operations (<a href="https://github.com/milvus-io/milvus/pull/37605">#37605</a>).</li>
+<li>[2.4] Handled legacy proxy load fields requests (<a href="https://github.com/milvus-io/milvus/pull/37569">#37569</a>).</li>
+<li>[2.4] Added context tracing for query coordination queryable checks (<a href="https://github.com/milvus-io/milvus/pull/37534">#37534</a>).</li>
+<li>[2.4] Improved root coordination task scheduling policies (<a href="https://github.com/milvus-io/milvus/pull/37523">#37523</a>).</li>
+<li>Refactored <code translate="no">createindex</code> in the RESTful API (<a href="https://github.com/milvus-io/milvus/pull/37237">#37237</a>).</li>
+<li>[2.4] Used cancel labels for context-canceled storage operations (<a href="https://github.com/milvus-io/milvus/pull/37491">#37491</a>).</li>
+<li>[2.4] Updated the template expression proto to improve transmission efficiency (<a href="https://github.com/milvus-io/milvus/pull/37485">#37485</a>).</li>
+</ul>
+<h3 id="Bug-fixes" class="common-anchor-header">Bug fixes</h3><ul>
+<li>Supported <code translate="no">upsert</code> with autoid=true in the RESTful API and fixed associated bugs (<a href="https://github.com/milvus-io/milvus/pull/37766">#37766</a>).</li>
+<li>Ensured L0 segments were loaded to workers during channel balancing (<a href="https://github.com/milvus-io/milvus/pull/37758">#37758</a>).</li>
+<li>Fixed delegator stuck in unserviceable status (<a href="https://github.com/milvus-io/milvus/pull/37702">#37702</a>).</li>
+<li>[2.4] Stored default values when <code translate="no">errkeynotfound</code> was returned (<a href="https://github.com/milvus-io/milvus/pull/37705">#37705</a>).</li>
+<li>[cp24] Changed memory check from write lock to read lock (<a href="https://github.com/milvus-io/milvus/pull/37526">#37526</a>).</li>
+<li>Ensured <code translate="no">getshardleaders</code> retried only on retriable errors (<a href="https://github.com/milvus-io/milvus/pull/37687">#37687</a>).</li>
+<li>[cp24] Corrected varchar primary key size calculations (<a href="https://github.com/milvus-io/milvus/pull/37619">#37619</a>).</li>
+<li>Fixed channel balancing that could get stuck when increasing replica numbers (<a href="https://github.com/milvus-io/milvus/pull/37642">#37642</a>).</li>
+<li>Addressed issues where searches returned fewer results after query node recovery (<a href="https://github.com/milvus-io/milvus/pull/37610">#37610</a>).</li>
+<li>[2.4] Fixed bugs retrieving data from the wrong field for L0 segments (<a href="https://github.com/milvus-io/milvus/pull/37599">#37599</a>).</li>
+<li>Recovered loading collection’s <code translate="no">updateTS</code> after query coordination restarts (<a href="https://github.com/milvus-io/milvus/pull/37580">#37580</a>).</li>
+<li>[2.4] Added IP address validation to <code translate="no">paramtable</code> (<a href="https://github.com/milvus-io/milvus/pull/37500">#37500</a>).</li>
+<li>Fixed search/query failures caused by segments not being loaded (<a href="https://github.com/milvus-io/milvus/pull/37544">#37544</a>).</li>
+<li>Resolved watch channel issues due to timer reset misuse (<a href="https://github.com/milvus-io/milvus/pull/37542">#37542</a>).</li>
+<li>Fixed subscription leaks (<a href="https://github.com/milvus-io/milvus/pull/37541">#37541</a>).</li>
+<li>Resolved issues with excessively growing segments (<a href="https://github.com/milvus-io/milvus/pull/37540">#37540</a>).</li>
+<li>[cp24] Corrected dropped segment metrics (<a href="https://github.com/milvus-io/milvus/pull/37471">#37471</a>).</li>
+<li>Fixed repeated error codes in Milvus and Segcore (<a href="https://github.com/milvus-io/milvus/pull/37449">#37449</a>).</li>
+<li>[cp24] Separated L0 and mixed trigger intervals (<a href="https://github.com/milvus-io/milvus/pull/37319">#37319</a>).</li>
+</ul>
 <h2 id="v2415" class="common-anchor-header">v2.4.15<button data-href="#v2415" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -34,32 +102,32 @@ title: Note di rilascio
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Data di rilascio: 5 novembre 2024</p>
+    </button></h2><p>Release Date: November 5, 2024</p>
 <table>
 <thead>
-<tr><th>Versione Milvus</th><th>Versione dell'SDK Python</th><th>Versione dell'SDK Java</th><th>Versione SDK Node.js</th></tr>
+<tr><th>Milvus version</th><th>Python SDK version</th><th>Java SDK version</th><th>Node.js SDK version</th></tr>
 </thead>
 <tbody>
 <tr><td>2.4.15</td><td>2.4.9</td><td>2.4.8</td><td>2.4.9</td></tr>
 </tbody>
 </table>
-<p>Milvus 2.4.15 è stata una release critica per la correzione di bug, incentrata sul miglioramento della stabilità, delle prestazioni e della compatibilità del sistema. Questa versione ha risolto un grave problema di deadlock che poteva verificarsi durante gli arresti anomali di QueryNode e ha introdotto aggiornamenti di compatibilità per lo strumento di backup con la funzione database. Inoltre, Milvus 2.4.15 ha migliorato le prestazioni e la stabilità della cancellazione grazie a significative ottimizzazioni nella gestione di L0. L <strong>'aggiornamento alla versione 2.4.15 è fortemente consigliato</strong> per beneficiare di questi miglioramenti critici.</p>
-<h3 id="Critical-bug-fixes" class="common-anchor-header">Correzioni di bug critici</h3><ul>
-<li>Risolto un problema di deadlock se il QueryNode si bloccava durante l'inizializzazione del client shard<a href="https://github.com/milvus-io/milvus/pull/37354">(#37354</a>).</li>
-<li>Ripristinato il miglioramento per il supporto dei database per l'inserimento massivo (<a href="https://github.com/milvus-io/milvus/pull/37421">#37421</a>).</li>
+<p>Milvus 2.4.15 was a critical bug-fix release focused on enhancing system stability, performance, and compatibility. This version addressed a major deadlock issue that could occur during QueryNode crashes and introduced compatibility updates for the backup tool with the database feature. Additionally, Milvus 2.4.15 improved delete performance and stability through significant optimizations in L0 handling. <strong>Upgrading to v2.4.15 was strongly recommended</strong> to benefit from these critical enhancements.</p>
+<h3 id="Critical-bug-fixes" class="common-anchor-header">Critical bug fixes</h3><ul>
+<li>Resolved a deadlock issue if the QueryNode crashed during shard client initialization (<a href="https://github.com/milvus-io/milvus/pull/37354">#37354</a>).</li>
+<li>Reverted the enhancement to support databases for bulk insert (<a href="https://github.com/milvus-io/milvus/pull/37421">#37421</a>).</li>
 </ul>
-<h3 id="Bug-fixes" class="common-anchor-header">Correzioni di bug</h3><ul>
-<li>Corretto un bug per cui alcune espressioni non analizzavano correttamente i valori<a href="https://github.com/milvus-io/milvus/pull/37342">(#37342</a>).</li>
-<li>Migliorato il Proxy per riprovare a ottenere il leader dello shard su collezioni non caricate<a href="https://github.com/milvus-io/milvus/pull/37326">(#37326</a>).</li>
-<li>Corretto un problema per cui il valore delle metriche del conteggio delle righe L0 era sempre vuoto<a href="https://github.com/milvus-io/milvus/pull/37307">(#37307</a>).</li>
-<li>Saltato il timeout della compattazione per gli scenari di compattazione mista e L0<a href="https://github.com/milvus-io/milvus/pull/37194">(#37194</a>).</li>
-<li>Rettificata la logica di contenimento di OffsetOrderedArray (<a href="https://github.com/milvus-io/milvus/pull/37309">#37309</a>).</li>
-<li>Aggiunto un controllo delle risorse durante il caricamento dei log delta (<a href="https://github.com/milvus-io/milvus/pull/37263">#37263</a>).</li>
+<h3 id="Bug-fixes" class="common-anchor-header">Bug fixes</h3><ul>
+<li>Fixed a bug where certain expressions did not correctly parse values (<a href="https://github.com/milvus-io/milvus/pull/37342">#37342</a>).</li>
+<li>Enhanced the Proxy to retry getting the shard leader on unloaded collections (<a href="https://github.com/milvus-io/milvus/pull/37326">#37326</a>).</li>
+<li>Corrected an issue where the L0 row count metrics value was always empty (<a href="https://github.com/milvus-io/milvus/pull/37307">#37307</a>).</li>
+<li>Skipped marking compaction timeout for mixed and L0 compaction scenarios (<a href="https://github.com/milvus-io/milvus/pull/37194">#37194</a>).</li>
+<li>Rectified the containment logic of OffsetOrderedArray (<a href="https://github.com/milvus-io/milvus/pull/37309">#37309</a>).</li>
+<li>Added a check for resources when loading delta logs (<a href="https://github.com/milvus-io/milvus/pull/37263">#37263</a>).</li>
 </ul>
-<h3 id="Improvements" class="common-anchor-header">Miglioramenti</h3><ul>
-<li>Spostata la logica L0 al di fuori del blocco delta per migliorare le prestazioni<a href="https://github.com/milvus-io/milvus/pull/37340">(#37340</a>).</li>
-<li>Rilasciati i segmenti in crescita compattati se presenti nell'elenco degli eliminati (<a href="https://github.com/milvus-io/milvus/pull/37266">#37266</a>).</li>
-<li>Introdotto un middleware per monitorare le statistiche RESTful V2 input/output RPC<a href="https://github.com/milvus-io/milvus/pull/37224">(#37224</a>, <a href="https://github.com/milvus-io/milvus/pull/37440">#37440</a>).</li>
+<h3 id="Improvements" class="common-anchor-header">Improvements</h3><ul>
+<li>Moved L0 logic outside of the delta lock for better performance (<a href="https://github.com/milvus-io/milvus/pull/37340">#37340</a>).</li>
+<li>Released compacted growing segments if present in the dropped list (<a href="https://github.com/milvus-io/milvus/pull/37266">#37266</a>).</li>
+<li>Introduced middleware to monitor RESTful V2 input/output RPC stats (<a href="https://github.com/milvus-io/milvus/pull/37224">#37224</a>, <a href="https://github.com/milvus-io/milvus/pull/37440">#37440</a>).</li>
 </ul>
 <h2 id="v2414" class="common-anchor-header">v2.4.14<button data-href="#v2414" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -76,71 +144,72 @@ title: Note di rilascio
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Data di rilascio: 31 ottobre 2024</p>
+    </button></h2><p>Release Date: October 31, 2024</p>
 <table>
 <thead>
-<tr><th>Versione Milvus</th><th>Versione dell'SDK Python</th><th>Versione dell'SDK Java</th><th>Versione SDK Node.js</th></tr>
+<tr><th>Milvus version</th><th>Python SDK version</th><th>Java SDK version</th><th>Node.js SDK version</th></tr>
 </thead>
 <tbody>
 <tr><td>2.4.14</td><td>2.4.9</td><td>2.4.7</td><td>2.4.9</td></tr>
 </tbody>
 </table>
-<p>Milvus 2.4.14 risolve un problema critico della versione 2.4.13 che poteva causare la perdita di informazioni sulla raccolta dopo la garbage collection di <code translate="no">snapshotKV</code>. Ha anche risolto un paio di perdite di risorse. Inoltre, questa versione include numerosi miglioramenti volti a migliorare la stabilità delle operazioni di cancellazione su larga scala e le prestazioni di compattazione.</p>
-<h3 id="Features" class="common-anchor-header">Caratteristiche</h3><ul>
-<li>Supporto della modalità di memoria chunk cache<a href="https://github.com/milvus-io/milvus/pull/35836">(#35836</a>)</li>
-<li>Supporto del db per bulkinsert<a href="https://github.com/milvus-io/milvus/pull/37017">(#37017</a>)</li>
+<p>Milvus 2.4.14 addresses a critical issue from version 2.4.13 that could cause collection information to be lost after <code translate="no">snapshotKV</code> garbage collection. It also fixed a couple of resource leaks. Additionally, this release includes numerous enhancements focused on improving stability in large-scale delete operations and compaction performance.</p>
+<h3 id="Features" class="common-anchor-header">Features</h3><ul>
+<li>Supported memory mode chunk cache (<a href="https://github.com/milvus-io/milvus/pull/35836">#35836</a>)</li>
+<li>Supported db for bulkinsert (<a href="https://github.com/milvus-io/milvus/pull/37017">#37017</a>)</li>
 </ul>
-<h3 id="Improvements" class="common-anchor-header">Miglioramenti</h3><ul>
-<li>Ottimizzazione di cancellazione/compattazione<ul>
-<li>Abilitata l'esecuzione parallela delle compattazioni l0<a href="https://github.com/milvus-io/milvus/pull/36985">(#36985</a>)</li>
-<li>Cancellazione in batch quando si usa l'inoltro diretto (<a href="https://github.com/milvus-io/milvus/pull/37107">#37107</a>)</li>
-<li>Saltato il caricamento dei dati delta nel delegatore quando si usa remoteload (<a href="https://github.com/milvus-io/milvus/pull/37112">#37112</a>)</li>
-<li>Inoltro diretto delta escludendo i segmenti l0<a href="https://github.com/milvus-io/milvus/pull/36914">(#36914</a>)</li>
-<li>Aggiunta la prioritizzazione dei compiti di compattazione in DataCoord<a href="https://github.com/milvus-io/milvus/pull/36979">(#36979</a>)</li>
-<li>Tracciato il tasso di cancellazioni complesse<a href="https://github.com/milvus-io/milvus/pull/36958">(#36958</a>)</li>
+<h3 id="Improvements" class="common-anchor-header">Improvements</h3><ul>
+<li>Delete/Compaction Optimization
+<ul>
+<li>Enabled parallel execution of l0 compactions (<a href="https://github.com/milvus-io/milvus/pull/36985">#36985</a>)</li>
+<li>Batched forward delete when using direct forward (<a href="https://github.com/milvus-io/milvus/pull/37107">#37107</a>)</li>
+<li>Skipped loading delta data in delegater when using remoteload (<a href="https://github.com/milvus-io/milvus/pull/37112">#37112</a>)</li>
+<li>Directly forwarded delta excluding l0 segments (<a href="https://github.com/milvus-io/milvus/pull/36914">#36914</a>)</li>
+<li>Added prioritization of compaction tasks in DataCoord (<a href="https://github.com/milvus-io/milvus/pull/36979">#36979</a>)</li>
+<li>Tracked complex delete rates (<a href="https://github.com/milvus-io/milvus/pull/36958">#36958</a>)</li>
 </ul></li>
-<li>Rifatto CreateCollection nell'API RESTFul<a href="https://github.com/milvus-io/milvus/pull/36885">(#36885</a>)</li>
-<li>Fusione di più operazioni 'and' e 'or' in un'unica operazione (<a href="https://github.com/milvus-io/milvus/pull/36973">#36973</a>)</li>
-<li>Fatto in modo che lo skip load funzioni per tutti i rami<a href="https://github.com/milvus-io/milvus/pull/37161">(#37161</a>)</li>
-<li>Aggiornata la dipendenza da Minio per supportare le identità EKS Pod (<a href="https://github.com/milvus-io/milvus/pull/37089">#37089</a>)</li>
-<li>Riordinate le opzioni di importazione (<a href="https://github.com/milvus-io/milvus/pull/37078">#37078</a>)</li>
-<li>Limitato il numero massimo di lavori di importazione<a href="https://github.com/milvus-io/milvus/pull/36892">(#36892</a>)</li>
-<li>Preallocata la slice dei dati per evitare di riallocare la memoria<a href="https://github.com/milvus-io/milvus/pull/37044">(#37044</a>)</li>
-<li>Impedito al DataNode di caricare il bf<a href="https://github.com/milvus-io/milvus/pull/37027">(#37027</a>)</li>
-<li>Evitato di limitare ripetutamente le operazioni ddl (<a href="https://github.com/milvus-io/milvus/pull/37011">#37011</a>)</li>
-<li>Ha reso la voce di configurazione <code translate="no">datanode.import.maxconcurrenttasknum</code> regolabile dinamicamente<a href="https://github.com/milvus-io/milvus/pull/37103">(#37103</a>)</li>
-<li>Utilizzato <code translate="no">queryNode.mmap.growingMmapEnabled</code> per controllare il comportamento dell'indice intermedio<a href="https://github.com/milvus-io/milvus/pull/36391">(#36391</a>)</li>
-<li>Popolato i campi <code translate="no">Level</code> e <code translate="no">StartPosition</code> in segmentLoadInfo del segmento in crescita<a href="https://github.com/milvus-io/milvus/pull/36911">(#36911</a>)</li>
-<li>Forzato l'arresto dei messaggi di buffer quando si riceve il messaggio di drop collection (<a href="https://github.com/milvus-io/milvus/pull/36917">#36917</a>)</li>
-<li>Aggiunte metriche per le informazioni sul buffer di cancellazione del querynode (<a href="https://github.com/milvus-io/milvus/pull/37097">#37097</a>)</li>
-<li>Aggiunta l'etichetta del nome della raccolta per alcune metriche<a href="https://github.com/milvus-io/milvus/pull/37159">(#37159</a>)</li>
-<li>Usato middleware per osservare le statistiche RESTful v2 in/out rpc (<a href="https://github.com/milvus-io/milvus/pull/37224">#37224</a>)</li>
-<li>Modificata la dimensione del pool di memoria predefinito della GPU<a href="https://github.com/milvus-io/milvus/pull/36969">(#36969</a>)</li>
-<li>Aggiornata la versione di Knowhere a 2.3.12<a href="https://github.com/milvus-io/milvus/pull/37132">(#37132</a>)</li>
-<li>Consentita la cancellazione dei dati quando la quota del disco è esaurita<a href="https://github.com/milvus-io/milvus/pull/37139">(#37139</a>)</li>
+<li>Refactored CreateCollection in RESTFul API (<a href="https://github.com/milvus-io/milvus/pull/36885">#36885</a>)</li>
+<li>Fused multiple ‘and’ and ‘or’ operations into a single op (<a href="https://github.com/milvus-io/milvus/pull/36973">#36973</a>)</li>
+<li>Made skip load work for all branches (<a href="https://github.com/milvus-io/milvus/pull/37161">#37161</a>)</li>
+<li>Upgraded Minio dependency to support EKS Pod Identities (<a href="https://github.com/milvus-io/milvus/pull/37089">#37089</a>)</li>
+<li>Tidied import options (<a href="https://github.com/milvus-io/milvus/pull/37078">#37078</a>)</li>
+<li>Limited maximum number of import jobs (<a href="https://github.com/milvus-io/milvus/pull/36892">#36892</a>)</li>
+<li>Preallocated data slice to avoid re-allocating memory (<a href="https://github.com/milvus-io/milvus/pull/37044">#37044</a>)</li>
+<li>Prevented DataNode from loading the bf (<a href="https://github.com/milvus-io/milvus/pull/37027">#37027</a>)</li>
+<li>Avoided limiting ddl operations repeatedly (<a href="https://github.com/milvus-io/milvus/pull/37011">#37011</a>)</li>
+<li>Made the configuration item <code translate="no">datanode.import.maxconcurrenttasknum</code> dynamically adjustable (<a href="https://github.com/milvus-io/milvus/pull/37103">#37103</a>)</li>
+<li>Used <code translate="no">queryNode.mmap.growingMmapEnabled</code> to control the behavior of interim index (<a href="https://github.com/milvus-io/milvus/pull/36391">#36391</a>)</li>
+<li>Populated the <code translate="no">Level</code> and <code translate="no">StartPosition</code> fields in segmentLoadInfo of growing segment (<a href="https://github.com/milvus-io/milvus/pull/36911">#36911</a>)</li>
+<li>Forced to stop buffer messages when receiving the drop collection message (<a href="https://github.com/milvus-io/milvus/pull/36917">#36917</a>)</li>
+<li>Added metrics for querynode delete buffer info (<a href="https://github.com/milvus-io/milvus/pull/37097">#37097</a>)</li>
+<li>Added collection name label for some metric (<a href="https://github.com/milvus-io/milvus/pull/37159">#37159</a>)</li>
+<li>Used middleware to observe RESTful v2 in/out rpc stats (<a href="https://github.com/milvus-io/milvus/pull/37224">#37224</a>)</li>
+<li>Changed GPU default memory pool size (<a href="https://github.com/milvus-io/milvus/pull/36969">#36969</a>)</li>
+<li>Updated Knowhere version to 2.3.12 (<a href="https://github.com/milvus-io/milvus/pull/37132">#37132</a>)</li>
+<li>Allowed deleting data when disk quota exhausted (<a href="https://github.com/milvus-io/milvus/pull/37139">#37139</a>)</li>
 </ul>
-<h3 id="Bug-fixes" class="common-anchor-header">Correzioni di bug</h3><ul>
-<li>Corrette le informazioni sulla raccolta che non potevano essere recuperate da metakv dopo il riavvio se tutte le istantanee erano state garbage collected<a href="https://github.com/milvus-io/milvus/pull/36950">(#36950</a>)</li>
-<li>Corretto il codice di errore rpc per evitare un tentativo non valido nel client<a href="https://github.com/milvus-io/milvus/pull/37025">(#37025</a>)</li>
-<li>Ignorato l'errore db not found in quota center (<a href="https://github.com/milvus-io/milvus/pull/36850">#36850</a>)</li>
-<li>Corretta la perdita di goroutine in QueryNode usando un pool di cancellazione singleton (<a href="https://github.com/milvus-io/milvus/pull/37225">#37225</a>)</li>
-<li>Corretta la perdita di raccolta in querynode<a href="https://github.com/milvus-io/milvus/pull/37079">(#37079</a>)</li>
-<li>Corretta la perdita del task di compattazione del cluster (<a href="https://github.com/milvus-io/milvus/pull/36803">#36803</a>)</li>
-<li>Vietato rinominare una collezione che aveva un alias<a href="https://github.com/milvus-io/milvus/pull/37208">(#37208</a>)</li>
-<li>Assicurato che l'alias fosse memorizzato nella cache (<a href="https://github.com/milvus-io/milvus/pull/36808">#36808</a>)</li>
-<li>La ricerca/query poteva fallire durante l'aggiornamento della cache del delegatore<a href="https://github.com/milvus-io/milvus/pull/37174">(#37174</a>)</li>
-<li>Esclusa la compattazione di l0 durante l'esecuzione del clustering (<a href="https://github.com/milvus-io/milvus/pull/37142">#37142</a>)</li>
-<li>Riferimento al meta della raccolta quando si caricava solo il meta del segmento l0<a href="https://github.com/milvus-io/milvus/pull/37179">(#37179</a>)</li>
-<li>Il delegatore potrebbe essere diventato inservibile dopo il riavvio di querycoord<a href="https://github.com/milvus-io/milvus/pull/37100">(#37100</a>)</li>
-<li>La partizione di rilascio dinamico potrebbe aver fallito la ricerca/query<a href="https://github.com/milvus-io/milvus/pull/37099">(#37099</a>)</li>
-<li>Rettificato il valore della quota del conteggio delle righe del buffer di cancellazione (<a href="https://github.com/milvus-io/milvus/pull/37068">#37068</a>)</li>
-<li>Passato l'elenco completo dei campi quando era abilitato il carico parziale (<a href="https://github.com/milvus-io/milvus/pull/37063">#37063</a>)</li>
-<li>Si verificava un panico del nodo di query durante l'invio di rpc al worker<a href="https://github.com/milvus-io/milvus/pull/36988">(#36988</a>)</li>
-<li>Datacoord si bloccava all'arresto dell'avanzamento<a href="https://github.com/milvus-io/milvus/pull/36961">(#36961</a>)</li>
-<li>Corretto l'accesso fuori limite nel segmento in crescita quando i dati grezzi erano sostituiti da un indice intermedio<a href="https://github.com/milvus-io/milvus/pull/36938">(#36938</a>)</li>
-<li>Rootcoord si bloccava all'arresto anticipato (<a href="https://github.com/milvus-io/milvus/pull/36881">#36881</a>)</li>
+<h3 id="Bug-fixes" class="common-anchor-header">Bug fixes</h3><ul>
+<li>Fixed collection info that could not be recovered from metakv after restart if all snapshots were garbage collected (<a href="https://github.com/milvus-io/milvus/pull/36950">#36950</a>)</li>
+<li>Corrected the rpc error code to avoid invalid retry in client (<a href="https://github.com/milvus-io/milvus/pull/37025">#37025</a>)</li>
+<li>Ignored db not found error in quota center (<a href="https://github.com/milvus-io/milvus/pull/36850">#36850</a>)</li>
+<li>Fixed goroutine leakage in QueryNode by using singleton delete pool (<a href="https://github.com/milvus-io/milvus/pull/37225">#37225</a>)</li>
+<li>Fixed collection leak in querynode (<a href="https://github.com/milvus-io/milvus/pull/37079">#37079</a>)</li>
+<li>Fixed leakage of clustering compaction task (<a href="https://github.com/milvus-io/milvus/pull/36803">#36803</a>)</li>
+<li>Prohibited renaming a collection that had an alias (<a href="https://github.com/milvus-io/milvus/pull/37208">#37208</a>)</li>
+<li>Made sure alias was cached (<a href="https://github.com/milvus-io/milvus/pull/36808">#36808</a>)</li>
+<li>Search/query could have failed during updating delegator cache (<a href="https://github.com/milvus-io/milvus/pull/37174">#37174</a>)</li>
+<li>Excluded l0 compaction when clustering was executing (<a href="https://github.com/milvus-io/milvus/pull/37142">#37142</a>)</li>
+<li>Referenced collection meta when loading l0 segment meta only (<a href="https://github.com/milvus-io/milvus/pull/37179">#37179</a>)</li>
+<li>Delegator might have become unserviceable after querycoord restart (<a href="https://github.com/milvus-io/milvus/pull/37100">#37100</a>)</li>
+<li>Dynamic release partition might have failed search/query (<a href="https://github.com/milvus-io/milvus/pull/37099">#37099</a>)</li>
+<li>Rectified delete buffer row count quota value (<a href="https://github.com/milvus-io/milvus/pull/37068">#37068</a>)</li>
+<li>Passed full field list when partial load enabled (<a href="https://github.com/milvus-io/milvus/pull/37063">#37063</a>)</li>
+<li>Query node panic occurred during sending rpc to worker (<a href="https://github.com/milvus-io/milvus/pull/36988">#36988</a>)</li>
+<li>Datacoord got stuck at stopping progress (<a href="https://github.com/milvus-io/milvus/pull/36961">#36961</a>)</li>
+<li>Fixed the out-of-bounds access in the growing segment when raw data was replaced by interim index (<a href="https://github.com/milvus-io/milvus/pull/36938">#36938</a>)</li>
+<li>Rootcoord got stuck at graceful stop progress (<a href="https://github.com/milvus-io/milvus/pull/36881">#36881</a>)</li>
 </ul>
-<h2 id="v2413-hotfix" class="common-anchor-header">v2.4.13-fotografia<button data-href="#v2413-hotfix" class="anchor-icon" translate="no">
+<h2 id="v2413-hotfix" class="common-anchor-header">v2.4.13-hotfix<button data-href="#v2413-hotfix" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -155,20 +224,20 @@ title: Note di rilascio
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Data di rilascio: 17 ottobre 2024</p>
+    </button></h2><p>Release Date: October 17, 2024</p>
 <table>
 <thead>
-<tr><th>Versione di Milvus</th><th>Versione dell'SDK Python</th><th>Versione dell'SDK Java</th><th>Versione SDK Node.js</th></tr>
+<tr><th>Milvus version</th><th>Python SDK version</th><th>Java SDK version</th><th>Node.js SDK version</th></tr>
 </thead>
 <tbody>
 <tr><td>2.4.13-hotfix</td><td>2.4.8</td><td>2.4.5</td><td>2.4.9</td></tr>
 </tbody>
 </table>
-<p>Milvus v2.4.13-hotfix risolve un problema critico specifico della v2.4.13, a causa del quale Milvus potrebbe non riuscire a recuperare le informazioni sulla raccolta dopo un riavvio se tutte le istantanee MetaKV sono state raccolte come spazzatura<a href="https://github.com/milvus-io/milvus/pull/36933">(#36933</a>). <strong>Si consiglia agli utenti che attualmente utilizzano la versione 2.4.13 di eseguire l'aggiornamento alla versione 2.4.13-hotfix il prima possibile per evitare potenziali interruzioni</strong>.</p>
-<h3 id="Critical-fixes" class="common-anchor-header">Correzioni critiche</h3><ul>
-<li>Carica la chiave originale se il timestamp è MaxTimestamp<a href="https://github.com/milvus-io/milvus/pull/36935">(#36935</a>)</li>
+<p>Milvus v2.4.13-hotfix addresses a critical issue specific to v2.4.13, where Milvus may fail to retrieve collection information after a restart if all MetaKV snapshots were garbage-collected (<a href="https://github.com/milvus-io/milvus/pull/36933">#36933</a>). <strong>Users currently running v2.4.13 are advised to upgrade to v2.4.13-hotfix at the earliest opportunity to avoid potential disruptions</strong>.</p>
+<h3 id="Critical-fixes" class="common-anchor-header">Critical fixes</h3><ul>
+<li>Load original key if timestamp is MaxTimestamp (<a href="https://github.com/milvus-io/milvus/pull/36935">#36935</a>)</li>
 </ul>
-<h2 id="Deprecated-v2413" class="common-anchor-header">[Deprecato] v2.4.13<button data-href="#Deprecated-v2413" class="anchor-icon" translate="no">
+<h2 id="Deprecated-v2413" class="common-anchor-header">[Deprecated] v2.4.13<button data-href="#Deprecated-v2413" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -183,65 +252,67 @@ title: Note di rilascio
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Data di rilascio: 12 ottobre 2024</p>
+    </button></h2><p>Release Date: October 12, 2024</p>
 <table>
 <thead>
-<tr><th>Versione di Milvus</th><th>Versione dell'SDK Python</th><th>Versione dell'SDK Java</th><th>Versione SDK Node.js</th></tr>
+<tr><th>Milvus version</th><th>Python SDK version</th><th>Java SDK version</th><th>Node.js SDK version</th></tr>
 </thead>
 <tbody>
 <tr><td>2.4.13</td><td>2.4.8</td><td>2.4.5</td><td>2.4.9</td></tr>
 </tbody>
 </table>
-<p>Milvus 2.4.13 introduce il carico dinamico delle repliche, consentendo agli utenti di regolare il numero di repliche della collezione senza dover rilasciare e ricaricare la collezione. Questa versione risolve anche diversi bug critici relativi all'importazione in blocco, all'analisi delle espressioni, al bilanciamento del carico e al recupero dei guasti. Inoltre, sono stati apportati miglioramenti significativi all'utilizzo delle risorse MMAP e alle prestazioni di importazione, migliorando l'efficienza complessiva del sistema. Si consiglia vivamente di passare a questa versione per migliorare le prestazioni e la stabilità.</p>
-<h3 id="Features" class="common-anchor-header">Caratteristiche</h3><ul>
-<li>Regolazione dinamica delle repliche per le collezioni caricate<a href="https://github.com/milvus-io/milvus/pull/36417">(#36417</a>)</li>
-<li>MMAP vettoriale sparse in tipi di segmento crescenti<a href="https://github.com/milvus-io/milvus/pull/36565">(#36565</a>)</li>
+<p>Milvus 2.4.13 introduces dynamic replica load, allowing users to adjust the number of collection replicas without needing to release and reload the collection. This version also addresses several critical bugs related to bulk importing, expression parsing, load balancing, and failure recovery. Additionally, significant improvements have been made to MMAP resource usage and import performance, enhancing overall system efficiency. We highly recommend upgrading to this release for better performance and stability.</p>
+<h3 id="Features" class="common-anchor-header">Features</h3><ul>
+<li>Dynamic replica adjustment for loaded collections (<a href="https://github.com/milvus-io/milvus/pull/36417">#36417</a>)</li>
+<li>Sparse vector MMAP in growing segment types (<a href="https://github.com/milvus-io/milvus/pull/36565">#36565</a>)</li>
 </ul>
-<h3 id="Bug-fixes" class="common-anchor-header">Correzioni di bug</h3><ul>
-<li>Corretto un problema di prestazioni del flush (<a href="https://github.com/milvus-io/milvus/pull/36741">#36741</a>)</li>
-<li>Corretto un bug con le espressioni JSON in &quot;[]&quot;<a href="https://github.com/milvus-io/milvus/pull/36722">(#36722</a>)</li>
-<li>Rimossi i vicini se il target compatto non è indicizzato<a href="https://github.com/milvus-io/milvus/pull/36694">(#36694</a>)</li>
-<li>Migliorate le prestazioni di Rocksmq quando il canale è pieno<a href="https://github.com/milvus-io/milvus/pull/36618">(#36618</a>)</li>
-<li>Corretto un problema per cui gli errori durante l'impacchettamento non venivano differiti (<a href="https://github.com/milvus-io/milvus/pull/36665">#36665</a>)</li>
-<li>Risolta una perdita di memoria per i segmenti importati nel gestore dei segmenti<a href="https://github.com/milvus-io/milvus/pull/36631">(#36631</a>)</li>
-<li>Saltati i controlli sanitari non necessari per i nodi di query nel proxy (<a href="https://github.com/milvus-io/milvus/pull/36553">#36553</a>)</li>
-<li>Risolto un problema di overflow con le espressioni di termine<a href="https://github.com/milvus-io/milvus/pull/36534">(#36534</a>)</li>
-<li>Registrato l'ID del nodo prima di assegnare i compiti per evitare un'errata allocazione dei compiti (<a href="https://github.com/milvus-io/milvus/pull/36493">#36493</a>)</li>
-<li>Risolti i problemi di corsa ai dati nella compattazione del clustering (<a href="https://github.com/milvus-io/milvus/pull/36499">#36499</a>)</li>
-<li>Aggiunto un controllo per la lunghezza massima dell'array di stringhe dopo la corrispondenza dei tipi (<a href="https://github.com/milvus-io/milvus/pull/36497">#36497</a>)</li>
-<li>Risolte le condizioni di gara in modalità mix o standalone (<a href="https://github.com/milvus-io/milvus/pull/36459">#36459</a>)</li>
-<li>Corretto lo sbilanciamento dei segmenti dopo ripetute operazioni di caricamento e rilascio<a href="https://github.com/milvus-io/milvus/pull/36543">(#36543</a>)</li>
-<li>Corretto un caso d'angolo in cui i segmenti non potevano essere spostati da un nodo di arresto (<a href="https://github.com/milvus-io/milvus/pull/36475">#36475</a>)</li>
-<li>Aggiornate correttamente le informazioni sui segmenti anche se alcuni segmenti erano mancanti<a href="https://github.com/milvus-io/milvus/pull/36729">(#36729</a>)</li>
-<li>Impedito che le transazioni etcd superino il limite massimo nello snapshot KV (<a href="https://github.com/milvus-io/milvus/pull/36773">#36773</a>)</li>
+<h3 id="Bug-fixes" class="common-anchor-header">Bug fixes</h3><ul>
+<li>Fixed a flush performance issue (<a href="https://github.com/milvus-io/milvus/pull/36741">#36741</a>)</li>
+<li>Fixed a bug with JSON expressions in &quot;[]&quot; (<a href="https://github.com/milvus-io/milvus/pull/36722">#36722</a>)</li>
+<li>Removed neighbors if compact target is unindexed (<a href="https://github.com/milvus-io/milvus/pull/36694">#36694</a>)</li>
+<li>Improved performance for Rocksmq when channel is full (<a href="https://github.com/milvus-io/milvus/pull/36618">#36618</a>)</li>
+<li>Fixed an issue where errors during unpinning were not deferred (<a href="https://github.com/milvus-io/milvus/pull/36665">#36665</a>)</li>
+<li>Resolved a memory leak for imported segments in the segment manager (<a href="https://github.com/milvus-io/milvus/pull/36631">#36631</a>)</li>
+<li>Skipped unnecessary health checks for query nodes in the proxy (<a href="https://github.com/milvus-io/milvus/pull/36553">#36553</a>)</li>
+<li>Fixed an overflow issue with term expressions (<a href="https://github.com/milvus-io/milvus/pull/36534">#36534</a>)</li>
+<li>Recorded node ID before assigning tasks to prevent task misallocation (<a href="https://github.com/milvus-io/milvus/pull/36493">#36493</a>)</li>
+<li>Resolved data race issues in clustering compaction (<a href="https://github.com/milvus-io/milvus/pull/36499">#36499</a>)</li>
+<li>Added a check for string array max length after type matching (<a href="https://github.com/milvus-io/milvus/pull/36497">#36497</a>)</li>
+<li>Addressed race conditions in mix or standalone mode (<a href="https://github.com/milvus-io/milvus/pull/36459">#36459</a>)</li>
+<li>Fixed segment imbalance after repeated load and release operations (<a href="https://github.com/milvus-io/milvus/pull/36543">#36543</a>)</li>
+<li>Corrected a corner case where segments couldn’t be moved from a stopping node (<a href="https://github.com/milvus-io/milvus/pull/36475">#36475</a>)</li>
+<li>Updated segment info properly even if some segments were missing (<a href="https://github.com/milvus-io/milvus/pull/36729">#36729</a>)</li>
+<li>Prevented etcd transactions from exceeding the max limit in snapshot KV (<a href="https://github.com/milvus-io/milvus/pull/36773">#36773</a>)</li>
 </ul>
-<h3 id="Improvements" class="common-anchor-header">Miglioramenti</h3><ul>
-<li>Migliorata la stima delle risorse MMAP:<ul>
-<li>Migliorato il codice relativo a MMAP in column.h<a href="https://github.com/milvus-io/milvus/pull/36521">(#36521</a>)</li>
-<li>Raffinata la stima delle risorse durante il caricamento delle raccolte<a href="https://github.com/milvus-io/milvus/pull/36728">(#36728</a>)</li>
+<h3 id="Improvements" class="common-anchor-header">Improvements</h3><ul>
+<li>Enhanced MMAP resource estimation:
+<ul>
+<li>Improved MMAP-related code in column.h (<a href="https://github.com/milvus-io/milvus/pull/36521">#36521</a>)</li>
+<li>Refined resource estimation when loading collections (<a href="https://github.com/milvus-io/milvus/pull/36728">#36728</a>)</li>
 </ul></li>
-<li>Miglioramenti delle prestazioni:<ul>
-<li>Migliorata l'efficienza dell'analisi delle espressioni convertendo Unicode in ASCII<a href="https://github.com/milvus-io/milvus/pull/36676">(#36676</a>).</li>
-<li>Abilitata la produzione parallela di messaggi per più argomenti<a href="https://github.com/milvus-io/milvus/pull/36462">(#36462</a>)</li>
-<li>Ridotto l'overhead della CPU nel calcolo della dimensione del file indice<a href="https://github.com/milvus-io/milvus/pull/36580">(#36580</a>)</li>
-<li>Recuperato il tipo di messaggio dall'intestazione per ridurre al minimo l'unmarshalling (<a href="https://github.com/milvus-io/milvus/pull/36454">#36454</a>)</li>
-<li>Ottimizzata la politica di selezione delle repliche basata sul carico di lavoro (<a href="https://github.com/milvus-io/milvus/pull/36384">#36384</a>)</li>
+<li>Performance Enhancements:
+<ul>
+<li>Improved expression parsing efficiency by converting Unicode to ASCII (<a href="https://github.com/milvus-io/milvus/pull/36676">#36676</a>)</li>
+<li>Enabled parallel production of messages for multiple topics (<a href="https://github.com/milvus-io/milvus/pull/36462">#36462</a>)</li>
+<li>Reduced CPU overhead when calculating index file size (<a href="https://github.com/milvus-io/milvus/pull/36580">#36580</a>)</li>
+<li>Retrieved message type from header to minimize unmarshalling (<a href="https://github.com/milvus-io/milvus/pull/36454">#36454</a>)</li>
+<li>Optimized workload-based replica selection policy (<a href="https://github.com/milvus-io/milvus/pull/36384">#36384</a>)</li>
 </ul></li>
-<li>Suddivisione dei messaggi delle attività di cancellazione per rientrare nei limiti di dimensione massima dei messaggi<a href="https://github.com/milvus-io/milvus/pull/36574">(#36574</a>)</li>
-<li>Aggiunto un nuovo URL RESTful per descrivere i lavori di importazione<a href="https://github.com/milvus-io/milvus/pull/36754">(#36754</a>)</li>
-<li>Ottimizzata la pianificazione delle importazioni e aggiunta una metrica del costo del tempo<a href="https://github.com/milvus-io/milvus/pull/36684">(#36684</a>)</li>
-<li>Aggiunto il log dei rapporti di bilanciamento per il bilanciatore del coordinatore delle query<a href="https://github.com/milvus-io/milvus/pull/36749">(#36749</a>)</li>
-<li>Passato all'uso di una configurazione GC comune (<a href="https://github.com/milvus-io/milvus/pull/36670">#36670</a>)</li>
-<li>Aggiunto l'interruttore della politica di streaming forward per il delegatore<a href="https://github.com/milvus-io/milvus/pull/36712">(#36712</a>)</li>
-<li>Abilitata la compattazione manuale per le raccolte senza indici<a href="https://github.com/milvus-io/milvus/pull/36581">(#36581</a>)</li>
-<li>Abilitato il bilanciamento del carico sui nodi di query con capacità di memoria variabile<a href="https://github.com/milvus-io/milvus/pull/36625">(#36625</a>)</li>
-<li>Caso unificato per le etichette in entrata usando metrics.label<a href="https://github.com/milvus-io/milvus/pull/36616">(#36616</a>)</li>
-<li>Rese idempotenti le operazioni di trasferimento di canali/segmenti (<a href="https://github.com/milvus-io/milvus/pull/36552">#36552</a>)</li>
-<li>Aggiunte metriche per monitorare il throughput delle importazioni e il conteggio delle righe importate<a href="https://github.com/milvus-io/milvus/pull/36588">(#36588</a>)</li>
-<li>Impedita la creazione di oggetti timer multipli nei target<a href="https://github.com/milvus-io/milvus/pull/36573">(#36573</a>)</li>
-<li>Aggiornata la versione delle espressioni e la formattazione della risposta HTTP per le espressioni<a href="https://github.com/milvus-io/milvus/pull/36467">(#36467</a>)</li>
-<li>Migliorata la garbage collection in KV snapshot (<a href="https://github.com/milvus-io/milvus/pull/36793">#36793</a>)</li>
-<li>Aggiunto il supporto per l'esecuzione di metodi con parametri contestuali<a href="https://github.com/milvus-io/milvus/pull/36798">(#36798</a>)</li>
+<li>Split delete task messages to fit within max message size limits (<a href="https://github.com/milvus-io/milvus/pull/36574">#36574</a>)</li>
+<li>Added new RESTful URL to describe import jobs (<a href="https://github.com/milvus-io/milvus/pull/36754">#36754</a>)</li>
+<li>Optimized import scheduling and added a time cost metric (<a href="https://github.com/milvus-io/milvus/pull/36684">#36684</a>)</li>
+<li>Added balance report log for query coordinator balancer (<a href="https://github.com/milvus-io/milvus/pull/36749">#36749</a>)</li>
+<li>Switched to using common GC configuration (<a href="https://github.com/milvus-io/milvus/pull/36670">#36670</a>)</li>
+<li>Added streaming forward policy switch for delegator (<a href="https://github.com/milvus-io/milvus/pull/36712">#36712</a>)</li>
+<li>Enabled manual compaction for collections without indexes (<a href="https://github.com/milvus-io/milvus/pull/36581">#36581</a>)</li>
+<li>Enabled load balancing on query nodes with varying memory capacities (<a href="https://github.com/milvus-io/milvus/pull/36625">#36625</a>)</li>
+<li>Unified case for inbound labels using metrics.label (<a href="https://github.com/milvus-io/milvus/pull/36616">#36616</a>)</li>
+<li>Made transfer channel/segment operations idempotent (<a href="https://github.com/milvus-io/milvus/pull/36552">#36552</a>)</li>
+<li>Added metrics to monitor import throughput and imported row count (<a href="https://github.com/milvus-io/milvus/pull/36588">#36588</a>)</li>
+<li>Prevented creation of multiple timer objects in targets (<a href="https://github.com/milvus-io/milvus/pull/36573">#36573</a>)</li>
+<li>Updated expression version and formatted HTTP response for expressions (<a href="https://github.com/milvus-io/milvus/pull/36467">#36467</a>)</li>
+<li>Enhanced garbage collection in snapshot KV (<a href="https://github.com/milvus-io/milvus/pull/36793">#36793</a>)</li>
+<li>Added support to execute methods with context parameters (<a href="https://github.com/milvus-io/milvus/pull/36798">#36798</a>)</li>
 </ul>
 <h2 id="v2412" class="common-anchor-header">v2.4.12<button data-href="#v2412" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -258,44 +329,44 @@ title: Note di rilascio
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Data di rilascio: 26 settembre 2024</p>
+    </button></h2><p>Release Date: September 26, 2024</p>
 <table>
 <thead>
-<tr><th>Versione Milvus</th><th>Versione dell'SDK Python</th><th>Versione dell'SDK Java</th><th>Versione SDK Node.js</th></tr>
+<tr><th>Milvus version</th><th>Python SDK version</th><th>Java SDK version</th><th>Node.js SDK version</th></tr>
 </thead>
 <tbody>
 <tr><td>2.4.12</td><td>2.4.7</td><td>2.4.4</td><td>2.4.9</td></tr>
 </tbody>
 </table>
-<p>Milvus 2.4.12 introduce miglioramenti significativi e correzioni di bug critici. Questa versione risolve i problemi di duplicazione dei dati e migliora la velocità di recupero dei guasti, in particolare quando si gestisce un gran numero di cancellazioni. Tuttavia, persiste un problema noto per cui il recupero dei guasti può essere lento quando si eliminano grandi quantità di dati. Stiamo lavorando attivamente per risolvere questo problema.</p>
-<h3 id="Improvements" class="common-anchor-header">Miglioramenti</h3><ul>
-<li>Implementato l'arresto graduale per il gestore del flowgraph<a href="https://github.com/milvus-io/milvus/pull/36358">(#36358</a>).</li>
-<li>Disabilitato il controllo degli indici per i campi vettoriali non caricati<a href="https://github.com/milvus-io/milvus/pull/36280">(#36280</a>)</li>
-<li>Filtrati i record di cancellazione non colpiti durante il caricamento delta (<a href="https://github.com/milvus-io/milvus/pull/36272">#36272</a>)</li>
-<li>Migliorata la gestione degli errori per le eccezioni di std::stoi<a href="https://github.com/milvus-io/milvus/pull/36296">(#36296</a>)</li>
-<li>Disconosciute le parole chiave come nomi di campo o nomi di campo dinamici<a href="https://github.com/milvus-io/milvus/pull/36108">(#36108</a>)</li>
-<li>Aggiunte metriche per la cancellazione di voci nei segmenti L0<a href="https://github.com/milvus-io/milvus/pull/36227">(#36227</a>)</li>
-<li>Implementata la politica di inoltro L0 per supportare il caricamento remoto<a href="https://github.com/milvus-io/milvus/pull/36208">(#36208</a>)</li>
-<li>Aggiunto controllo del caricamento del campo RNA nel proxy (<a href="https://github.com/milvus-io/milvus/pull/36194">#36194</a>)</li>
-<li>Abilitato il supporto per le righe vuote sparse (<a href="https://github.com/milvus-io/milvus/pull/36061">#36061</a>)</li>
-<li>Corretta una vulnerabilità di sicurezza<a href="https://github.com/milvus-io/milvus/pull/36156">(#36156</a>)</li>
-<li>Implementato un gestore di statistiche per le metriche delle dimensioni di richiesta/risposta<a href="https://github.com/milvus-io/milvus/pull/36118">(#36118</a>)</li>
-<li>Corretta la stima delle dimensioni per i dati codificati degli array (<a href="https://github.com/milvus-io/milvus/pull/36379">#36379</a>)</li>
+<p>Milvus 2.4.12 introduces significant enhancements and critical bug fixes. This release addresses data duplication issues and improves failure recovery speed, particularly when handling large numbers of deletions. However, a known issue persists where failure recovery can be slow when deleting massive amounts of data. We are actively working on resolving this issue.</p>
+<h3 id="Improvements" class="common-anchor-header">Improvements</h3><ul>
+<li>Implemented graceful stop for flowgraph manager (<a href="https://github.com/milvus-io/milvus/pull/36358">#36358</a>)</li>
+<li>Disabled index checks for non-loaded vector fields (<a href="https://github.com/milvus-io/milvus/pull/36280">#36280</a>)</li>
+<li>Filtered out non-hit delete records during delta loading (<a href="https://github.com/milvus-io/milvus/pull/36272">#36272</a>)</li>
+<li>Improved error handling for std::stoi exceptions (<a href="https://github.com/milvus-io/milvus/pull/36296">#36296</a>)</li>
+<li>Disallowed keywords as field names or dynamic field names (<a href="https://github.com/milvus-io/milvus/pull/36108">#36108</a>)</li>
+<li>Added metrics for delete entries in L0 segments (<a href="https://github.com/milvus-io/milvus/pull/36227">#36227</a>)</li>
+<li>Implemented L0 forward policy to support remote loading (<a href="https://github.com/milvus-io/milvus/pull/36208">#36208</a>)</li>
+<li>Added ANN field loading check in proxy (<a href="https://github.com/milvus-io/milvus/pull/36194">#36194</a>)</li>
+<li>Enabled empty sparse row support (<a href="https://github.com/milvus-io/milvus/pull/36061">#36061</a>)</li>
+<li>Fixed a security vulnerability (<a href="https://github.com/milvus-io/milvus/pull/36156">#36156</a>)</li>
+<li>Implemented stats handler for request/response size metrics (<a href="https://github.com/milvus-io/milvus/pull/36118">#36118</a>)</li>
+<li>Corrected size estimation for encoded array data (<a href="https://github.com/milvus-io/milvus/pull/36379">#36379</a>)</li>
 </ul>
-<h3 id="Bug-fixes" class="common-anchor-header">Correzioni di bug</h3><ul>
-<li>Risolti gli errori di tipo di metrica per le raccolte con due campi vettoriali<a href="https://github.com/milvus-io/milvus/pull/36473">(#36473</a>)</li>
-<li>Corretti i problemi di buffering lungo che causano errori di ricezione della coda di messaggi<a href="https://github.com/milvus-io/milvus/pull/36425">(#36425</a>)</li>
-<li>Implementato il corretto ritorno di compact-to-segments dopo il supporto della divisione (<a href="https://github.com/milvus-io/milvus/pull/36429">#36429</a>)</li>
-<li>Risolti i problemi di corsa ai dati con la goroutine di controllo dell'ID del nodo (<a href="https://github.com/milvus-io/milvus/pull/36377">#36377</a>)</li>
-<li>Rimosso il controllo del tipo di elemento (<a href="https://github.com/milvus-io/milvus/pull/36324">#36324</a>)</li>
-<li>Risolti i problemi di accesso concorrente per i segmenti in crescita e sigillati<a href="https://github.com/milvus-io/milvus/pull/36288">(#36288</a>)</li>
-<li>Implementato un futuro blocco statico (<a href="https://github.com/milvus-io/milvus/pull/36333">#36333</a>)</li>
-<li>Corretto l'uso degli offset in HybridSearch<a href="https://github.com/milvus-io/milvus/pull/36287">(#36287</a>, <a href="https://github.com/milvus-io/milvus/pull/36253">#36253</a>)</li>
-<li>Risolte le perdite di segmenti/canali sporchi su QueryNode<a href="https://github.com/milvus-io/milvus/pull/36259">(#36259</a>)</li>
-<li>Corretta la gestione della duplicazione delle chiavi primarie<a href="https://github.com/milvus-io/milvus/pull/36274">(#36274</a>)</li>
-<li>Applicata l'impostazione del tipo di metrica nelle richieste di ricerca<a href="https://github.com/milvus-io/milvus/pull/36279">(#36279</a>)</li>
-<li>Corretto il problema di cancellazione della metrica stored_index_files_size<a href="https://github.com/milvus-io/milvus/pull/36161">(#36161</a>)</li>
-<li>Corretto il comportamento del gruppo di privilegi di lettura per l'accesso globale all'API<a href="https://github.com/milvus-io/milvus/pull/36145">(#36145</a>)</li>
+<h3 id="Bug-fixes" class="common-anchor-header">Bug fixes</h3><ul>
+<li>Resolved metric type errors for collections with two vector fields (<a href="https://github.com/milvus-io/milvus/pull/36473">#36473</a>)</li>
+<li>Fixed long buffering issues causing message queue reception failures (<a href="https://github.com/milvus-io/milvus/pull/36425">#36425</a>)</li>
+<li>Implemented proper compact-to-segments return after split support (<a href="https://github.com/milvus-io/milvus/pull/36429">#36429</a>)</li>
+<li>Resolved data race issues with node ID check goroutine (<a href="https://github.com/milvus-io/milvus/pull/36377">#36377</a>)</li>
+<li>Removed element type check (<a href="https://github.com/milvus-io/milvus/pull/36324">#36324</a>)</li>
+<li>Fixed concurrent access issues for growing and sealed segments (<a href="https://github.com/milvus-io/milvus/pull/36288">#36288</a>)</li>
+<li>Implemented future stateful lock (<a href="https://github.com/milvus-io/milvus/pull/36333">#36333</a>)</li>
+<li>Corrected offset usage in HybridSearch (<a href="https://github.com/milvus-io/milvus/pull/36287">#36287</a>, <a href="https://github.com/milvus-io/milvus/pull/36253">#36253</a>)</li>
+<li>Resolved dirty segment/channel leaks on QueryNode (<a href="https://github.com/milvus-io/milvus/pull/36259">#36259</a>)</li>
+<li>Fixed primary key duplication handling (<a href="https://github.com/milvus-io/milvus/pull/36274">#36274</a>)</li>
+<li>Enforced metric type setting in search requests (<a href="https://github.com/milvus-io/milvus/pull/36279">#36279</a>)</li>
+<li>Fixed stored_index_files_size metric clearing issue (<a href="https://github.com/milvus-io/milvus/pull/36161">#36161</a>)</li>
+<li>Corrected readwrite privilege group behavior for global API access (<a href="https://github.com/milvus-io/milvus/pull/36145">#36145</a>)</li>
 </ul>
 <h2 id="v2411" class="common-anchor-header">v2.4.11<button data-href="#v2411" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -312,59 +383,59 @@ title: Note di rilascio
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Data di rilascio: 11 settembre 2024</p>
+    </button></h2><p>Release Date: September 11, 2024</p>
 <table>
 <thead>
-<tr><th>Versione Milvus</th><th>Versione dell'SDK Python</th><th>Versione dell'SDK Java</th><th>Versione SDK Node.js</th></tr>
+<tr><th>Milvus version</th><th>Python SDK version</th><th>Java SDK version</th><th>Node.js SDK version</th></tr>
 </thead>
 <tbody>
 <tr><td>2.4.11</td><td>2.4.6</td><td>2.4.3</td><td>2.4.8</td></tr>
 </tbody>
 </table>
-<p>Milvus 2.4.11 è una release che risolve diversi problemi critici relativi all'indice delle trie MARISA, alla compattazione e alle operazioni di caricamento. Questa release introduce nuove funzionalità per la visualizzazione delle espressioni e migliora la stabilità delle cancellazioni. Si consiglia a tutti gli utenti della serie 2.4.x di aggiornare a questa versione per beneficiare di questi miglioramenti e correzioni.</p>
-<h3 id="Features" class="common-anchor-header">Caratteristiche</h3><ul>
-<li>Aggiunta la visualizzazione statica per le espressioni in 2.4<a href="https://github.com/milvus-io/milvus/pull/35954">(#35954</a>)</li>
-<li>Implementata la logica delle quote relative al buffer di cancellazione (<a href="https://github.com/milvus-io/milvus/pull/35997">#35997</a>)</li>
+<p>Milvus 2.4.11 is a bug-fix release that addresses multiple critical issues related to the MARISA trie index, compaction, and loading operations. This release introduces new features to view expressions and improve delete stability. We recommend all users of the 2.4.x series to upgrade to this version to benefit from these improvements and fixes.</p>
+<h3 id="Features" class="common-anchor-header">Features</h3><ul>
+<li>Added static view for expressions in 2.4 (<a href="https://github.com/milvus-io/milvus/pull/35954">#35954</a>)</li>
+<li>Implemented delete buffer related quota logic (<a href="https://github.com/milvus-io/milvus/pull/35997">#35997</a>)</li>
 </ul>
-<h3 id="Bug-fixes" class="common-anchor-header">Correzioni di bug</h3><ul>
-<li>Risolto il problema del funzionamento dell'intervallo di indici Trie per i confronti GreaterThan e GreaterThanEqual (<a href="https://github.com/milvus-io/milvus/pull/36126">#36126</a>)</li>
-<li>Corretto l'uso di <code translate="no">marisa_label_order</code> nella costruzione dell'indice Trie<a href="https://github.com/milvus-io/milvus/pull/36060">(#36060</a>)</li>
-<li>Migliorato il controllo del valore per <code translate="no">trie.predictive_search</code> <a href="https://github.com/milvus-io/milvus/pull/35999">(#35999</a>)</li>
-<li>Abilitato il supporto delle espressioni aritmetiche binarie sugli indici invertiti<a href="https://github.com/milvus-io/milvus/pull/36097">(#36097</a>)</li>
-<li>Corretto l'errore di segmento causato da Skipindex<a href="https://github.com/milvus-io/milvus/pull/35908">(#35908</a>)</li>
-<li>Risolta la perdita di memoria nella meta-cache del proxy (<a href="https://github.com/milvus-io/milvus/pull/36076">#36076</a>)</li>
-<li>Rinominato il percorso del file mmap per evitare conflitti di directory<a href="https://github.com/milvus-io/milvus/pull/35975">(#35975</a>)</li>
-<li>Migliorato il logging e la pulizia dei task falliti/timeout nella compattazione mix<a href="https://github.com/milvus-io/milvus/pull/35967">(#35967</a>)</li>
-<li>Risolti i deadlock logici durante l'uso elevato di memoria da parte del delegatore<a href="https://github.com/milvus-io/milvus/pull/36066">(#36066</a>)</li>
-<li>Implementata la creazione di segmenti vuoti quando la compattazione cancella tutti gli inserti<a href="https://github.com/milvus-io/milvus/pull/36045">(#36045</a>)</li>
-<li>Corretto il popolamento dell'elenco dei campi di carico dalle informazioni di carico della vecchia versione in 2.4<a href="https://github.com/milvus-io/milvus/pull/36018">(#36018</a>)</li>
-<li>Corretta la logica di aggiornamento della configurazione di tracciamento in 2.4<a href="https://github.com/milvus-io/milvus/pull/35998">(#35998</a>)</li>
-<li>Risolti i fallimenti delle richieste di ricerca/query durante il rilascio di partizioni dinamiche (<a href="https://github.com/milvus-io/milvus/pull/36019">#36019</a>)</li>
-<li>Impedito l'override dei parametri di fallback (<a href="https://github.com/milvus-io/milvus/pull/36006">#36006</a>)</li>
-<li>Assicurata la corretta registrazione dei gruppi di privilegi per la convalida<a href="https://github.com/milvus-io/milvus/pull/35938">(#35938</a>)</li>
-<li>Impedita la pulizia errata dei nodi del limitatore di db (<a href="https://github.com/milvus-io/milvus/pull/35992">#35992</a>)</li>
-<li>Risolto il problema delle repliche che non partecipano alle query dopo il ripristino dei guasti<a href="https://github.com/milvus-io/milvus/pull/35925">(#35925</a>)</li>
-<li>Risolta la corsa ai dati nello scrittore di compattazione del clustering (<a href="https://github.com/milvus-io/milvus/pull/35958">#35958</a>)</li>
-<li>Corretto il riferimento a una variabile dopo un'operazione di spostamento (<a href="https://github.com/milvus-io/milvus/pull/35904">#35904</a>)</li>
-<li>Implementato il controllo del comportamento di caricamento del salto della chiave di clustering (<a href="https://github.com/milvus-io/milvus/pull/35899">#35899</a>)</li>
-<li>Assicurato l'avvio singolo degli osservatori querycoord in 2.4<a href="https://github.com/milvus-io/milvus/pull/35817">(#35817</a>)</li>
+<h3 id="Bug-fixes" class="common-anchor-header">Bug fixes</h3><ul>
+<li>Resolved Trie index range operation issue for GreaterThan and GreaterThanEqual comparisons (<a href="https://github.com/milvus-io/milvus/pull/36126">#36126</a>)</li>
+<li>Corrected <code translate="no">marisa_label_order</code> usage in Trie index construction (<a href="https://github.com/milvus-io/milvus/pull/36060">#36060</a>)</li>
+<li>Enhanced value checking for <code translate="no">trie.predictive_search</code> (<a href="https://github.com/milvus-io/milvus/pull/35999">#35999</a>)</li>
+<li>Enabled Binary arithmetic expression support on inverted index (<a href="https://github.com/milvus-io/milvus/pull/36097">#36097</a>)</li>
+<li>Fixed segment fault caused by Skipindex (<a href="https://github.com/milvus-io/milvus/pull/35908">#35908</a>)</li>
+<li>Resolved memory leak in proxy meta cache (<a href="https://github.com/milvus-io/milvus/pull/36076">#36076</a>)</li>
+<li>Renamed mmap file path to prevent directory conflicts (<a href="https://github.com/milvus-io/milvus/pull/35975">#35975</a>)</li>
+<li>Improved logging and cleanup for failed/timeout tasks in mix compaction (<a href="https://github.com/milvus-io/milvus/pull/35967">#35967</a>)</li>
+<li>Addressed logic deadlock during high memory usage by delegator (<a href="https://github.com/milvus-io/milvus/pull/36066">#36066</a>)</li>
+<li>Implemented empty segment creation when compaction deletes all inserts (<a href="https://github.com/milvus-io/milvus/pull/36045">#36045</a>)</li>
+<li>Corrected load field list population from old version load info in 2.4 (<a href="https://github.com/milvus-io/milvus/pull/36018">#36018</a>)</li>
+<li>Fixed tracing config update logic in 2.4 (<a href="https://github.com/milvus-io/milvus/pull/35998">#35998</a>)</li>
+<li>Resolved search/query request failures during dynamic partition release (<a href="https://github.com/milvus-io/milvus/pull/36019">#36019</a>)</li>
+<li>Prevented override of fallback parameters (<a href="https://github.com/milvus-io/milvus/pull/36006">#36006</a>)</li>
+<li>Ensured proper registration of privilege groups for validation (<a href="https://github.com/milvus-io/milvus/pull/35938">#35938</a>)</li>
+<li>Prevented mistaken cleanup of db limiter nodes (<a href="https://github.com/milvus-io/milvus/pull/35992">#35992</a>)</li>
+<li>Addressed issue with replicas not participating in queries after failure recovery (<a href="https://github.com/milvus-io/milvus/pull/35925">#35925</a>)</li>
+<li>Resolved data race in clustering compaction writer (<a href="https://github.com/milvus-io/milvus/pull/35958">#35958</a>)</li>
+<li>Fixed variable reference after move operation (<a href="https://github.com/milvus-io/milvus/pull/35904">#35904</a>)</li>
+<li>Implemented clustering key skip load behavior check (<a href="https://github.com/milvus-io/milvus/pull/35899">#35899</a>)</li>
+<li>Ensured single startup of querycoord observers in 2.4 (<a href="https://github.com/milvus-io/milvus/pull/35817">#35817</a>)</li>
 </ul>
-<h3 id="Improvements" class="common-anchor-header">Miglioramenti</h3><ul>
-<li>Aggiornata la versione di Milvus e proto a 2.4.11<a href="https://github.com/milvus-io/milvus/pull/36069">(#36069</a>)</li>
-<li>Risolta la perdita di memoria nei test unitari e abilitata l'opzione use_asan per le build unittest<a href="https://github.com/milvus-io/milvus/pull/35857">(#35857</a>)</li>
-<li>Adeguati i limiti di l0segmentsrowcount a valori più appropriati<a href="https://github.com/milvus-io/milvus/pull/36015">(#36015</a>)</li>
-<li>Modificato il fattore di stima della memoria di deltalog a uno<a href="https://github.com/milvus-io/milvus/pull/36035">(#36035</a>)</li>
-<li>Implementato slicesetequal per i confronti degli elenchi dei campi di carico (<a href="https://github.com/milvus-io/milvus/pull/36062">#36062</a>)</li>
-<li>Ridotta la frequenza dei log per le operazioni di cancellazione<a href="https://github.com/milvus-io/milvus/pull/35981">(#35981</a>)</li>
-<li>Aggiornata la versione di etcd a 3.5.14<a href="https://github.com/milvus-io/milvus/pull/35977">(#35977</a>)</li>
-<li>Ottimizzata la riduzione di mmap-rss dopo il riscaldamento<a href="https://github.com/milvus-io/milvus/pull/35965">(#35965</a>)</li>
-<li>Rimosso il periodo di raffreddamento nel limitatore di velocità per le richieste di lettura<a href="https://github.com/milvus-io/milvus/pull/35936">(#35936</a>)</li>
-<li>Migliorato il controllo dei campi di carico per le raccolte caricate in precedenza<a href="https://github.com/milvus-io/milvus/pull/35910">(#35910</a>)</li>
-<li>Aggiunto il supporto per l'eliminazione dei ruoli legati alle liste di privilegi in 2.4<a href="https://github.com/milvus-io/milvus/pull/35863">(#35863</a>)</li>
-<li>Implementate regole di depguard per proibire l'uso di librerie proto deprecate<a href="https://github.com/milvus-io/milvus/pull/35818">(#35818</a>)</li>
+<h3 id="Improvements" class="common-anchor-header">Improvements</h3><ul>
+<li>Upgraded Milvus &amp; proto version to 2.4.11 (<a href="https://github.com/milvus-io/milvus/pull/36069">#36069</a>)</li>
+<li>Addressed memory leak in unit tests and enable use_asan option for unittest builds (<a href="https://github.com/milvus-io/milvus/pull/35857">#35857</a>)</li>
+<li>Adjusted l0segmentsrowcount limits to more appropriate values (<a href="https://github.com/milvus-io/milvus/pull/36015">#36015</a>)</li>
+<li>Modified deltalog memory estimation factor to one (<a href="https://github.com/milvus-io/milvus/pull/36035">#36035</a>)</li>
+<li>Implemented slicesetequal for load field list comparisons (<a href="https://github.com/milvus-io/milvus/pull/36062">#36062</a>)</li>
+<li>Reduced log frequency for delete operations (<a href="https://github.com/milvus-io/milvus/pull/35981">#35981</a>)</li>
+<li>Upgraded etcd version to 3.5.14 (<a href="https://github.com/milvus-io/milvus/pull/35977">#35977</a>)</li>
+<li>Optimized mmap-rss reduction after warmup (<a href="https://github.com/milvus-io/milvus/pull/35965">#35965</a>)</li>
+<li>Removed cooling off period in rate limiter for read requests (<a href="https://github.com/milvus-io/milvus/pull/35936">#35936</a>)</li>
+<li>Enhanced load field checking for previously loaded collections (<a href="https://github.com/milvus-io/milvus/pull/35910">#35910</a>)</li>
+<li>Added support for dropping roles related to privilege lists in 2.4 (<a href="https://github.com/milvus-io/milvus/pull/35863">#35863</a>)</li>
+<li>Implemented depguard rules to prohibit deprecated proto library usage (<a href="https://github.com/milvus-io/milvus/pull/35818">#35818</a>)</li>
 </ul>
-<h3 id="Others" class="common-anchor-header">Altri</h3><ul>
-<li>Aggiornata la versione di Knowhere<a href="https://github.com/milvus-io/milvus/pull/36067">(#36067</a>)</li>
+<h3 id="Others" class="common-anchor-header">Others</h3><ul>
+<li>Updated Knowhere version (<a href="https://github.com/milvus-io/milvus/pull/36067">#36067</a>)</li>
 </ul>
 <h2 id="v2410" class="common-anchor-header">v2.4.10<button data-href="#v2410" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -381,58 +452,59 @@ title: Note di rilascio
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Data di rilascio: 30 agosto 2024</p>
+    </button></h2><p>Release Date: August 30, 2024</p>
 <table>
 <thead>
-<tr><th>Versione di Milvus</th><th>Versione dell'SDK Python</th><th>Versione dell'SDK Java</th><th>Versione SDK Node.js</th></tr>
+<tr><th>Milvus version</th><th>Python SDK version</th><th>Java SDK version</th><th>Node.js SDK version</th></tr>
 </thead>
 <tbody>
 <tr><td>2.4.10</td><td>2.4.6</td><td>2.4.3</td><td>2.4.6</td></tr>
 </tbody>
 </table>
-<p>Milvus 2.4.10 introduce miglioramenti significativi in termini di funzionalità e stabilità. Le caratteristiche principali includono il supporto per le operazioni di upsert su collezioni abilitate all'AutoID, capacità di caricamento parziale delle collezioni e varie configurazioni memory-mapped (MMAP) per ottimizzare l'uso della memoria. Questa versione risolve anche diversi bug che causano panico, core dump e perdite di risorse. Si consiglia di eseguire l'aggiornamento per trarre il massimo vantaggio da questi miglioramenti.</p>
-<h3 id="Features" class="common-anchor-header">Caratteristiche</h3><ul>
-<li><strong>Upsert con ID automatico</strong>: Supporto per le operazioni di upsert con generazione automatica di ID<a href="https://github.com/milvus-io/milvus/pull/34633">(#34633</a>).</li>
-<li><strong>Caricamento parziale dei campi della raccolta</strong> [Anteprima beta]: Permette di caricare campi specifici di una raccolta<a href="https://github.com/milvus-io/milvus/pull/35696">(#35696</a>)</li>
-<li><strong>Miglioramenti RBAC</strong>:<ul>
-<li>Aggiunto il supporto per i messaggi RBAC per il Change Data Capture (CDC)<a href="https://github.com/milvus-io/milvus/pull/35562">(#35562</a>).</li>
-<li>Introdotti gruppi di privilegi readonly/readwrite/admin per semplificare il processo di concessione RBAC (<a href="https://github.com/milvus-io/milvus/pull/35543">#35543</a>)</li>
-<li>Nuova API per il backup e il ripristino delle configurazioni RBAC<a href="https://github.com/milvus-io/milvus/pull/35513">(#35513</a>)</li>
-<li>Aggiornamento della cache proxy dopo il ripristino dei metadati RBAC<a href="https://github.com/milvus-io/milvus/pull/35636">(#35636</a>)</li>
+<p>Milvus 2.4.10 introduces significant improvements in functionality and stability. Key features include support for upsert operations on AutoID-enabled collections, partial collection loading capabilities, and various memory-mapped (MMAP) configurations to optimize memory usage. This release also addresses several bugs causing panics, core dumps, and resource leaks. We recommend upgrading to take full advantage of these improvements.</p>
+<h3 id="Features" class="common-anchor-header">Features</h3><ul>
+<li><strong>Upsert with Auto ID</strong>: Support for upsert operations with automatic ID generation (<a href="https://github.com/milvus-io/milvus/pull/34633">#34633</a>)</li>
+<li><strong>Field Partial Load Collection</strong> [Beta Preview]: Allows loading specific fields of a collection (<a href="https://github.com/milvus-io/milvus/pull/35696">#35696</a>)</li>
+<li><strong>RBAC Enhancements</strong>:
+<ul>
+<li>Added RBAC message support for Change Data Capture (CDC) (<a href="https://github.com/milvus-io/milvus/pull/35562">#35562</a>)</li>
+<li>Introduced readonly/readwrite/admin privilege groups to simplify RBAC grant process (<a href="https://github.com/milvus-io/milvus/pull/35543">#35543</a>)</li>
+<li>New API for backing up and restoring RBAC configurations (<a href="https://github.com/milvus-io/milvus/pull/35513">#35513</a>)</li>
+<li>Refresh proxy cache after restoring RBAC metadata (<a href="https://github.com/milvus-io/milvus/pull/35636">#35636</a>)</li>
 </ul></li>
-<li><strong>Configurazione MMAP migliorata</strong>: Più opzioni di configurazione generale per controllare il comportamento di MMAP<a href="https://github.com/milvus-io/milvus/pull/35609">(#35609</a>)</li>
-<li><strong>Restrizioni di accesso ai database</strong>: Nuove proprietà per limitare l'accesso in lettura ai database<a href="https://github.com/milvus-io/milvus/pull/35754">(#35754</a>)</li>
+<li><strong>Improved MMAP Configuration</strong>: More general configuration options to control MMAP behavior (<a href="https://github.com/milvus-io/milvus/pull/35609">#35609</a>)</li>
+<li><strong>Database Access Restrictions</strong>: New properties to restrict read access to databases (<a href="https://github.com/milvus-io/milvus/pull/35754">#35754</a>)</li>
 </ul>
-<h3 id="Bug-fixes" class="common-anchor-header">Correzioni di bug</h3><ul>
-<li>Corretto il problema del client Arrow Go che non restituisce errori<a href="https://github.com/milvus-io/milvus/pull/35820">(#35820</a>)</li>
-<li>Corretta la limitazione imprecisa della velocità (<a href="https://github.com/milvus-io/milvus/pull/35700">#35700</a>)</li>
-<li>Risolto il panico del proxy dopo i fallimenti dell'API legati all'importazione (<a href="https://github.com/milvus-io/milvus/pull/35559">#35559</a>)</li>
-<li>Corrette potenziali cancellazioni errate durante i checkpoint del canale GC (<a href="https://github.com/milvus-io/milvus/pull/35708">#35708</a>)</li>
-<li>Risolto il panico dovuto a segmenti di importazione candidati vuoti (<a href="https://github.com/milvus-io/milvus/pull/35674">#35674</a>)</li>
-<li>Corretta la deallocazione della memoria mmap (<a href="https://github.com/milvus-io/milvus/pull/35726">#35726</a>)</li>
-<li>Assicurato il corretto controllo dei canali per gli aggiornamenti da 2.2 a 2.4<a href="https://github.com/milvus-io/milvus/pull/35695">(#35695</a>)</li>
-<li>Corretta la funzione di rilascio del canale da parte del DataNode unwatching (<a href="https://github.com/milvus-io/milvus/pull/35657">#35657</a>)</li>
-<li>Corretto il conteggio delle partizioni nei metadati RootCoord (<a href="https://github.com/milvus-io/milvus/pull/35601">#35601</a>)</li>
-<li>Risolti i problemi con gli aggiornamenti dinamici della configurazione per alcuni parametri<a href="https://github.com/milvus-io/milvus/pull/35637">(#35637</a>)</li>
+<h3 id="Bug-fixes" class="common-anchor-header">Bug fixes</h3><ul>
+<li>Fixed Arrow Go client don’t return error issue (<a href="https://github.com/milvus-io/milvus/pull/35820">#35820</a>)</li>
+<li>Corrected inaccurate rate limiting (<a href="https://github.com/milvus-io/milvus/pull/35700">#35700</a>)</li>
+<li>Resolved proxy panic after import-related API failures (<a href="https://github.com/milvus-io/milvus/pull/35559">#35559</a>)</li>
+<li>Fixed potential mistaken deletions during GC channel checkpoints (<a href="https://github.com/milvus-io/milvus/pull/35708">#35708</a>)</li>
+<li>Addressed panic due to empty candidate import segments (<a href="https://github.com/milvus-io/milvus/pull/35674">#35674</a>)</li>
+<li>Corrected mmap memory deallocation (<a href="https://github.com/milvus-io/milvus/pull/35726">#35726</a>)</li>
+<li>Ensured proper channel watching for upgrades from 2.2 to 2.4 (<a href="https://github.com/milvus-io/milvus/pull/35695">#35695</a>)</li>
+<li>Fixed DataNode unwatching channel release function (<a href="https://github.com/milvus-io/milvus/pull/35657">#35657</a>)</li>
+<li>Corrected partition count in RootCoord metadata (<a href="https://github.com/milvus-io/milvus/pull/35601">#35601</a>)</li>
+<li>Resolved issues with dynamic config updates for certain parameters (<a href="https://github.com/milvus-io/milvus/pull/35637">#35637</a>)</li>
 </ul>
-<h3 id="Improvements" class="common-anchor-header">Miglioramenti</h3><h4 id="Performance" class="common-anchor-header">Prestazioni</h4><ul>
-<li>Ottimizzato il recupero dei campi dinamici<a href="https://github.com/milvus-io/milvus/pull/35602">(#35602</a>)</li>
-<li>Migliorate le prestazioni del bitset per AVX512<a href="https://github.com/milvus-io/milvus/pull/35480">(#35480</a>)</li>
-<li>Rilettura del valore dopo l'inizializzazione di <code translate="no">once</code> per una migliore efficienza<a href="https://github.com/milvus-io/milvus/pull/35643">(#35643</a>)</li>
+<h3 id="Improvements" class="common-anchor-header">Improvements</h3><h4 id="Performance" class="common-anchor-header">Performance</h4><ul>
+<li>Optimized retrieval on dynamic fields (<a href="https://github.com/milvus-io/milvus/pull/35602">#35602</a>)</li>
+<li>Improved bitset performance for AVX512 (<a href="https://github.com/milvus-io/milvus/pull/35480">#35480</a>)</li>
+<li>Re-read value after <code translate="no">once</code> initialization for better efficiency (<a href="https://github.com/milvus-io/milvus/pull/35643">#35643</a>)</li>
 </ul>
-<h4 id="Rolling-upgrade-improvements" class="common-anchor-header">Miglioramenti all'aggiornamento continuo</h4><ul>
-<li>Contrassegnato il nodo di query come di sola lettura dopo la sospensione<a href="https://github.com/milvus-io/milvus/pull/35586">(#35586</a>)</li>
-<li>Impedita la coesistenza del vecchio coordinatore con il nuovo nodo/proxy (<a href="https://github.com/milvus-io/milvus/pull/35760">#35760</a>)</li>
+<h4 id="Rolling-upgrade-improvements" class="common-anchor-header">Rolling upgrade improvements</h4><ul>
+<li>Marked query node as read-only after suspended (<a href="https://github.com/milvus-io/milvus/pull/35586">#35586</a>)</li>
+<li>Prevented coexistence of old coordinator with new node/proxy (<a href="https://github.com/milvus-io/milvus/pull/35760">#35760</a>)</li>
 </ul>
-<h4 id="Others" class="common-anchor-header">Altri</h4><ul>
-<li>Ottimizzato il processo di costruzione del nucleo di Milvus (<a href="https://github.com/milvus-io/milvus/pull/35660">#35660</a>)</li>
-<li>Aggiornato a protobuf-go v2<a href="https://github.com/milvus-io/milvus/pull/35555">(#35555</a>)</li>
-<li>Migliorato il tracciamento con la codifica di stringhe esadecimali per traceid e spanid<a href="https://github.com/milvus-io/milvus/pull/35568">(#35568</a>)</li>
-<li>Aggiunta la metrica del numero di segmenti hit per l'hook delle query (<a href="https://github.com/milvus-io/milvus/pull/35619">#35619</a>)</li>
-<li>Migliorata la compatibilità con il vecchio SDK per la funzione configure load param (<a href="https://github.com/milvus-io/milvus/pull/35573">#35573</a>)</li>
-<li>Aggiunto il supporto per il throttling HTTP v1/v2<a href="https://github.com/milvus-io/milvus/pull/35504">(#35504</a>)</li>
-<li>Corretta la stima della memoria dell'indice (<a href="https://github.com/milvus-io/milvus/pull/35670">#35670</a>)</li>
-<li>Possibilità di scrivere più segmenti nel compattatore di mix per evitare la generazione di segmenti di grandi dimensioni<a href="https://github.com/milvus-io/milvus/pull/35648">(#35648</a>)</li>
+<h4 id="Others" class="common-anchor-header">Others</h4><ul>
+<li>Optimized Milvus core building process (<a href="https://github.com/milvus-io/milvus/pull/35660">#35660</a>)</li>
+<li>Updated to protobuf-go v2 (<a href="https://github.com/milvus-io/milvus/pull/35555">#35555</a>)</li>
+<li>Enhanced tracing with hex string encoding for traceid and spanid (<a href="https://github.com/milvus-io/milvus/pull/35568">#35568</a>)</li>
+<li>Added hit segment number metrics for query hook (<a href="https://github.com/milvus-io/milvus/pull/35619">#35619</a>)</li>
+<li>Improved compatibility with old SDK for configure load param feature (<a href="https://github.com/milvus-io/milvus/pull/35573">#35573</a>)</li>
+<li>Added support for HTTP v1/v2 throttling (<a href="https://github.com/milvus-io/milvus/pull/35504">#35504</a>)</li>
+<li>Fixed index memory estimation (<a href="https://github.com/milvus-io/milvus/pull/35670">#35670</a>)</li>
+<li>Ability to write multiple segments in mix compactor to avoid large segment generation (<a href="https://github.com/milvus-io/milvus/pull/35648">#35648</a>)</li>
 </ul>
 <h2 id="v249" class="common-anchor-header">v2.4.9<button data-href="#v249" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -449,27 +521,27 @@ title: Note di rilascio
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Data di rilascio: 20 agosto 2024</p>
+    </button></h2><p>Release Date: August 20, 2024</p>
 <table>
 <thead>
-<tr><th>Versione Milvus</th><th>Versione dell'SDK Python</th><th>Versione dell'SDK Java</th><th>Versione SDK Node.js</th></tr>
+<tr><th>Milvus version</th><th>Python SDK version</th><th>Java SDK version</th><th>Node.js SDK version</th></tr>
 </thead>
 <tbody>
 <tr><td>2.4.9</td><td>2.4.5</td><td>2.4.3</td><td>2.4.4</td></tr>
 </tbody>
 </table>
-<p>Milvus v2.4.9 risolve un problema critico che poteva restituire risultati inferiori al limite (topk) in alcuni casi particolari e include diversi miglioramenti chiave per migliorare le prestazioni e l'usabilità della piattaforma.</p>
-<h3 id="Critical-fixes" class="common-anchor-header">Correzioni critiche</h3><ul>
-<li>Esclusione del segmento l0 dallo snapshot leggibile<a href="https://github.com/milvus-io/milvus/pull/35510">(#35510</a>).</li>
+<p>Milvus v2.4.9 addresses a critical issue which could return results less than limit (topk) in some corner cases and includes several key improvements to enhance the performance and usability of the platform.</p>
+<h3 id="Critical-fixes" class="common-anchor-header">Critical fixes</h3><ul>
+<li>Excluded l0 segment from readable snapshot (<a href="https://github.com/milvus-io/milvus/pull/35510">#35510</a>).</li>
 </ul>
-<h3 id="Improvements" class="common-anchor-header">Miglioramenti</h3><ul>
-<li>Eliminata la creazione di helper di schema duplicati nel proxy<a href="https://github.com/milvus-io/milvus/pull/35502">(#35502</a>).</li>
-<li>Aggiunto il supporto per la compilazione di Milvus su Ubuntu 20.04<a href="https://github.com/milvus-io/milvus/pull/35457">(#35457</a>).</li>
-<li>Ottimizzato l'uso dei lock ed evitato il doppio flush del buffer writer del clustering (<a href="https://github.com/milvus-io/milvus/pull/35490">#35490</a>).</li>
-<li>Rimosso il log non valido<a href="https://github.com/milvus-io/milvus/pull/35473">(#35473</a>).</li>
-<li>Aggiunta una guida all'uso della compattazione del clustering (<a href="https://github.com/milvus-io/milvus/pull/35428">#35428</a>).</li>
-<li>Aggiunto il supporto per i campi dinamici nello schema helper<a href="https://github.com/milvus-io/milvus/pull/35469">(#35469</a>).</li>
-<li>Aggiunta la sezione msgchannel nello YAML generato<a href="https://github.com/milvus-io/milvus/pull/35466">(#35466</a>).</li>
+<h3 id="Improvements" class="common-anchor-header">Improvements</h3><ul>
+<li>Removed duplicated schema helper creation in the proxy (<a href="https://github.com/milvus-io/milvus/pull/35502">#35502</a>).</li>
+<li>Added support for compiling Milvus on Ubuntu 20.04 (<a href="https://github.com/milvus-io/milvus/pull/35457">#35457</a>).</li>
+<li>Optimized the use of locks and avoided double flush clustering buffer writer (<a href="https://github.com/milvus-io/milvus/pull/35490">#35490</a>).</li>
+<li>Removed the invalid log (<a href="https://github.com/milvus-io/milvus/pull/35473">#35473</a>).</li>
+<li>Added a clustering compaction user guide doc (<a href="https://github.com/milvus-io/milvus/pull/35428">#35428</a>).</li>
+<li>Added support for dynamic fields in the schema helper (<a href="https://github.com/milvus-io/milvus/pull/35469">#35469</a>).</li>
+<li>Added the msgchannel section in the generated YAML (<a href="https://github.com/milvus-io/milvus/pull/35466">#35466</a>).</li>
 </ul>
 <h2 id="v248" class="common-anchor-header">v2.4.8<button data-href="#v248" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -486,114 +558,118 @@ title: Note di rilascio
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Data di rilascio: 14 agosto 2024</p>
+    </button></h2><p>Release Date: August 14, 2024</p>
 <table>
 <thead>
-<tr><th>Versione di Milvus</th><th>Versione dell'SDK Python</th><th>Versione dell'SDK Java</th><th>Versione SDK Node.js</th></tr>
+<tr><th>Milvus version</th><th>Python SDK version</th><th>Java SDK version</th><th>Node.js SDK version</th></tr>
 </thead>
 <tbody>
 <tr><td>2.4.8</td><td>2.4.5</td><td>2.4.3</td><td>2.4.4</td></tr>
 </tbody>
 </table>
-<p>Milvus 2.4.8 ha introdotto diversi miglioramenti significativi alle prestazioni e alla stabilità del sistema. La caratteristica più importante è stata l'implementazione della compattazione del clustering, un meccanismo che migliora l'efficienza della ricerca e delle interrogazioni ridistribuendo i dati in grandi collezioni in base a una chiave di clustering designata, riducendo la quantità di dati scansionati. La compattazione è stata anche disaccoppiata dallo shard DataNode, consentendo a qualsiasi DataNode di eseguire la compattazione in modo indipendente, migliorando la tolleranza agli errori, la stabilità, le prestazioni e la scalabilità. Inoltre, l'interfaccia tra i componenti Go e C++ è stata rifattorizzata per utilizzare chiamate CGO asincrone, risolvendo problemi come i timeout di sessione, mentre sono state apportate diverse altre ottimizzazioni delle prestazioni basate sulla profilazione. Le dipendenze dell'applicazione sono state aggiornate per risolvere le vulnerabilità di sicurezza note. Inoltre, questa versione include anche numerose ottimizzazioni delle prestazioni e correzioni di bug critici.</p>
-<h3 id="Features" class="common-anchor-header">Caratteristiche</h3><ul>
-<li>Implementata la compattazione del clustering, che consente di ridistribuire i dati in base a una chiave di clustering designata per migliorare l'efficienza delle query<a href="https://github.com/milvus-io/milvus/pull/34326">(#34326</a>),<a href="https://github.com/milvus-io/milvus/pull/34363">(#34363</a>).</li>
+<p>Milvus 2.4.8 introduced several significant improvements to the system’s performance and stability. The most notable feature was the implementation of clustering compaction, a mechanism that enhances search and query efficiency by redistributing data in large collections based on a designated clustering key, reducing the amount of data scanned. Compaction was also decoupled from the shard DataNode, allowing any DataNode to perform compaction independently, which improved fault tolerance, stability, performance, and scalability. Additionally, the interface between the Go and C++ components was refactored to use asynchronous CGO calls, addressing issues like session timeouts, while several other performance optimizations were made based on profiling. The application dependencies were also updated to address known security vulnerabilities. Moreover, this release also includes numerous performance optimizations and critical bug fixes.</p>
+<h3 id="Features" class="common-anchor-header">Features</h3><ul>
+<li>Implemented clustering compaction, allowing data to be redistributed based on a designated clustering key to enhance query efficiency (<a href="https://github.com/milvus-io/milvus/pull/34326">#34326</a>), (<a href="https://github.com/milvus-io/milvus/pull/34363">#34363</a>).</li>
 </ul>
-<h3 id="Improvements" class="common-anchor-header">Miglioramenti</h3><ul>
-<li>Implementate le funzionalità di ricerca e recupero asincrono in CGO.<a href="https://github.com/milvus-io/milvus/pull/34200">(#34200</a>)</li>
-<li>Separato il processo di compattazione dallo Shard DataNode per migliorare la modularità del sistema.<a href="https://github.com/milvus-io/milvus/pull/34157">(#34157</a>)</li>
-<li>Aggiunto il supporto per il pooling dei client in QueryNode all'interno del proxy/delegatore per migliorare le prestazioni.<a href="https://github.com/milvus-io/milvus/pull/35195">(#35195</a>)</li>
-<li>Integrato Sonic per minimizzare l'overhead della CPU durante il marshaling e l'unmarshaling di JSON nei gestori Gin e RestfulV1.<a href="https://github.com/milvus-io/milvus/pull/35018">(#35018</a>)</li>
-<li>Introdotta una cache in memoria per ottimizzare il recupero dei risultati dell'autenticazione.<a href="https://github.com/milvus-io/milvus/pull/35272">(#35272</a>)</li>
-<li>Modificato il tipo di metrica predefinito per l'autoindex.<a href="https://github.com/milvus-io/milvus/pull/34277">[#34277</a>, <a href="https://github.com/milvus-io/milvus/pull/34479">#34479</a>]</li>
-<li>Rifatto il formato della memoria di runtime per le colonne variabili, con conseguente riduzione dell'uso della memoria.<a href="https://github.com/milvus-io/milvus/pull/34367">[#34367</a>, <a href="https://github.com/milvus-io/milvus/pull/35012">#35012</a>, <a href="https://github.com/milvus-io/milvus/pull/35041">#35041</a>]</li>
-<li>Ritoccati i processi di compattazione per consentire la memorizzazione persistente dei dati.<a href="https://github.com/milvus-io/milvus/pull/34268">(#34268</a>)</li>
-<li>Abilitato il supporto di file mappati in memoria per segmenti crescenti, migliorando la gestione della memoria.<a href="https://github.com/milvus-io/milvus/pull/34110">(#34110</a>)</li>
-<li>Migliorati i registri di accesso aggiungendo il supporto per le API RESTful, i livelli di consistenza dei registri e la distinzione tra errori di sistema e errori dell'utente.<a href="https://github.com/milvus-io/milvus/pull/34295">[#34295</a>, <a href="https://github.com/milvus-io/milvus/pull/34352">#34352</a>, <a href="https://github.com/milvus-io/milvus/pull/34396">#34396</a>]</li>
-<li>Utilizzato il nuovo parametro <code translate="no">range_search_k</code> in Knowhere per velocizzare le ricerche di intervallo.<a href="https://github.com/milvus-io/milvus/pull/34709">(#34709</a>)</li>
-<li>Applicati i filtri Bloom bloccati per migliorare la velocità di costruzione dei filtri e di interrogazione.<a href="https://github.com/milvus-io/milvus/pull/34377">[#34377</a>, <a href="https://github.com/milvus-io/milvus/pull/34922">#34922</a>]</li>
-<li>Miglioramenti nell'uso della memoria:<ul>
-<li>Spazio preallocato per i buffer di inserimento dei DataNode.<a href="https://github.com/milvus-io/milvus/pull/34205">(#34205</a>)</li>
-<li>Preallocazione di <code translate="no">FieldData</code> per le operazioni di riduzione.<a href="https://github.com/milvus-io/milvus/pull/34254">(#34254</a>)</li>
-<li>Rilasciati i record nel codec di cancellazione per evitare perdite di memoria.<a href="https://github.com/milvus-io/milvus/pull/34506">(#34506</a>)</li>
-<li>Controllato il livello di concorrenza del file manager del disco durante il caricamento dei file.<a href="https://github.com/milvus-io/milvus/pull/35282">(#35282</a>)</li>
-<li>Ottimizzata la logica di garbage collection del runtime di Go per un rilascio tempestivo della memoria.<a href="https://github.com/milvus-io/milvus/pull/34950">(#34950</a>)</li>
-<li>Implementata una nuova politica di tenuta per i segmenti in crescita.<a href="https://github.com/milvus-io/milvus/pull/34779">(#34779</a>)</li>
-</ul></li>
-<li>Miglioramenti a DataCoord:<ul>
-<li>Riduzione dell'uso della CPU.<a href="https://github.com/milvus-io/milvus/pull/34231">[#34231</a>, <a href="https://github.com/milvus-io/milvus/pull/34309">#34309</a>]</li>
-<li>Implementata una logica di uscita dalla garbage collection più veloce.<a href="https://github.com/milvus-io/milvus/pull/35051">(#35051</a>)</li>
-<li>Migliorati gli algoritmi di pianificazione dei nodi worker.<a href="https://github.com/milvus-io/milvus/pull/34382">(#34382</a>)</li>
-<li>Migliorato l'algoritmo di controllo delle dimensioni dei segmenti, in particolare per le operazioni di importazione.<a href="https://github.com/milvus-io/milvus/pull/35149">(#35149</a>)</li>
-</ul></li>
-<li>Miglioramenti all'algoritmo di bilanciamento del carico:<ul>
-<li>Riduzione del fattore di sovraccarico della memoria sul delegatore.<a href="https://github.com/milvus-io/milvus/pull/35164">(#35164</a>)</li>
-<li>Allocazione di una dimensione di memoria fissa per il delegatore.<a href="https://github.com/milvus-io/milvus/pull/34600">(#34600</a>)</li>
-<li>Evitata l'allocazione eccessiva di segmenti e canali per i nuovi nodi di interrogazione.<a href="https://github.com/milvus-io/milvus/pull/34245">(#34245</a>)</li>
-<li>Riduzione del numero di compiti per ciclo di pianificazione da parte del Query Coordinator, pur aumentando la frequenza di pianificazione.<a href="https://github.com/milvus-io/milvus/pull/34987">(#34987</a>)</li>
-<li>Migliorato l'algoritmo di bilanciamento dei canali sul DataNode (<a href="https://github.com/milvus-io/milvus/pull/35033">#35033</a>).</li>
-</ul></li>
-<li>Espansione delle metriche di sistema: Aggiunte nuove metriche su vari componenti per monitorare aspetti specifici, tra cui:<ul>
-<li>stato di force-deny-writing.<a href="https://github.com/milvus-io/milvus/pull/34989">(#34989</a>)</li>
-<li>Latenza della coda.<a href="https://github.com/milvus-io/milvus/pull/34788">(#34788</a>)</li>
-<li>Quota disco.<a href="https://github.com/milvus-io/milvus/pull/35306">(#35306</a>)</li>
-<li>Tempo di esecuzione dei task.<a href="https://github.com/milvus-io/milvus/pull/35141">(#35141</a>)</li>
-<li>Dimensione del Binlog.<a href="https://github.com/milvus-io/milvus/pull/35235">(#35235</a>)</li>
-<li>Velocità di inserimento.<a href="https://github.com/milvus-io/milvus/pull/35188">(#35188</a>)</li>
-<li>Livello alto della memoria.<a href="https://github.com/milvus-io/milvus/pull/35188">(#35188</a>)</li>
-<li>Metriche API RESTful.<a href="https://github.com/milvus-io/milvus/pull/35083">(#35083</a>)</li>
-<li>Latenza di ricerca.<a href="https://github.com/milvus-io/milvus/pull/34783">(#34783</a>)</li>
-</ul></li>
-</ul>
-<h3 id="Changes" class="common-anchor-header">Modifiche</h3><ul>
-<li><p>Per gli utenti open-source, questa versione cambia i tipi di metrica in AutoIndex per <code translate="no">FloatVector</code> e <code translate="no">BinaryVector</code> in <code translate="no">Cosine</code> e <code translate="no">Hamming</code>, rispettivamente.</p></li>
-<li><p><strong>Versioni fisse di dipendenze di terze parti</strong>:</p>
+<h3 id="Improvements" class="common-anchor-header">Improvements</h3><ul>
+<li>Implemented asynchronous search and retrieval capabilities in CGO. (<a href="https://github.com/milvus-io/milvus/pull/34200">#34200</a>)</li>
+<li>Separated the compaction process from the Shard DataNode to improve system modularity. (<a href="https://github.com/milvus-io/milvus/pull/34157">#34157</a>)</li>
+<li>Added support for client pooling in QueryNode within the proxy/delegator to enhance performance. (<a href="https://github.com/milvus-io/milvus/pull/35195">#35195</a>)</li>
+<li>Integrated Sonic to minimize CPU overhead during JSON marshaling and unmarshaling in Gin and RestfulV1 handlers. (<a href="https://github.com/milvus-io/milvus/pull/35018">#35018</a>)</li>
+<li>Introduced an in-memory cache to optimize authentication result retrieval. (<a href="https://github.com/milvus-io/milvus/pull/35272">#35272</a>)</li>
+<li>Modified the default metric type for autoindex. [<a href="https://github.com/milvus-io/milvus/pull/34277">#34277</a>, <a href="https://github.com/milvus-io/milvus/pull/34479">#34479</a>]</li>
+<li>Refactored the runtime memory format for variable columns, leading to reduced memory usage. [<a href="https://github.com/milvus-io/milvus/pull/34367">#34367</a>, <a href="https://github.com/milvus-io/milvus/pull/35012">#35012</a>, <a href="https://github.com/milvus-io/milvus/pull/35041">#35041</a>]</li>
+<li>Refactored compaction processes to enable persistent data storage. (<a href="https://github.com/milvus-io/milvus/pull/34268">#34268</a>)</li>
+<li>Enabled memory-mapped file support for growing segments, improving memory management. (<a href="https://github.com/milvus-io/milvus/pull/34110">#34110</a>)</li>
+<li>Improved access logs by adding RESTful API support, logging consistency levels, and distinguishing between system and user errors. [<a href="https://github.com/milvus-io/milvus/pull/34295">#34295</a>, <a href="https://github.com/milvus-io/milvus/pull/34352">#34352</a>, <a href="https://github.com/milvus-io/milvus/pull/34396">#34396</a>]</li>
+<li>Utilized the new <code translate="no">range_search_k</code> parameter in Knowhere to speed up range searches. (<a href="https://github.com/milvus-io/milvus/pull/34709">#34709</a>)</li>
+<li>Applied blocked Bloom filters to enhance the speed of filter construction and querying. [<a href="https://github.com/milvus-io/milvus/pull/34377">#34377</a>, <a href="https://github.com/milvus-io/milvus/pull/34922">#34922</a>]</li>
+<li>Memory Usage Improvements:
 <ul>
-<li>Questa versione introduce versioni fisse per alcune librerie di dipendenza di terze parti, migliorando in modo significativo la gestione della catena di fornitura del software di Milvus.</li>
-<li>Isolando il progetto dalle modifiche a monte, salvaguarda le build quotidiane da potenziali interruzioni.</li>
-<li>L'aggiornamento garantisce la stabilità ospitando esclusivamente pacchetti C++ convalidati di terze parti su JFrog Cloud e utilizzando Conan Recipe Revisions (RREV).</li>
-<li>Questo approccio attenua il rischio di rottura delle modifiche derivanti dagli aggiornamenti in ConanCenter.</li>
-<li>Gli sviluppatori che utilizzano Ubuntu 22.04 beneficeranno immediatamente di queste modifiche. Tuttavia, gli sviluppatori che utilizzano altri sistemi operativi potrebbero dover aggiornare la versione di <code translate="no">glibc</code> per evitare problemi di compatibilità.</li>
+<li>Pre-allocated space for DataNode insert buffers. (<a href="https://github.com/milvus-io/milvus/pull/34205">#34205</a>)</li>
+<li>Pre-allocated <code translate="no">FieldData</code> for Reduce operations. (<a href="https://github.com/milvus-io/milvus/pull/34254">#34254</a>)</li>
+<li>Released records in delete codec to prevent memory leaks. (<a href="https://github.com/milvus-io/milvus/pull/34506">#34506</a>)</li>
+<li>Controlled concurrency level of the disk file manager during file loading. (<a href="https://github.com/milvus-io/milvus/pull/35282">#35282</a>)</li>
+<li>Optimized Go runtime garbage collection logic for timely memory release. (<a href="https://github.com/milvus-io/milvus/pull/34950">#34950</a>)</li>
+<li>Implemented a new seal policy for growing segments. (<a href="https://github.com/milvus-io/milvus/pull/34779">#34779</a>)</li>
+</ul></li>
+<li>DataCoord Enhancements:
+<ul>
+<li>Reduced CPU usage. [<a href="https://github.com/milvus-io/milvus/pull/34231">#34231</a>, <a href="https://github.com/milvus-io/milvus/pull/34309">#34309</a>]</li>
+<li>Implemented faster garbage collection exit logic. (<a href="https://github.com/milvus-io/milvus/pull/35051">#35051</a>)</li>
+<li>Improved worker node scheduling algorithms. (<a href="https://github.com/milvus-io/milvus/pull/34382">#34382</a>)</li>
+<li>Enhanced segment size control algorithm specifically for import operations. (<a href="https://github.com/milvus-io/milvus/pull/35149">#35149</a>)</li>
+</ul></li>
+<li>Load Balancing Algorithm Improvements:
+<ul>
+<li>Reduced the memory overload factor on the delegator. (<a href="https://github.com/milvus-io/milvus/pull/35164">#35164</a>)</li>
+<li>Allocated fixed memory size for the delegator. (<a href="https://github.com/milvus-io/milvus/pull/34600">#34600</a>)</li>
+<li>Avoided excessive allocation of segments and channels for new query nodes. (<a href="https://github.com/milvus-io/milvus/pull/34245">#34245</a>)</li>
+<li>Reduced the number of tasks per scheduling cycle by Query Coordinator while increasing scheduling frequency. (<a href="https://github.com/milvus-io/milvus/pull/34987">#34987</a>)</li>
+<li>Enhanced channel balancing algorithm on the DataNode. (<a href="https://github.com/milvus-io/milvus/pull/35033">#35033</a>)</li>
+</ul></li>
+<li>Expanded System Metrics: Added new metrics across various components to monitor specific aspects including:
+<ul>
+<li>Force-deny-writing state. (<a href="https://github.com/milvus-io/milvus/pull/34989">#34989</a>)</li>
+<li>Queue latency. (<a href="https://github.com/milvus-io/milvus/pull/34788">#34788</a>)</li>
+<li>Disk quota. (<a href="https://github.com/milvus-io/milvus/pull/35306">#35306</a>)</li>
+<li>Task execution time. (<a href="https://github.com/milvus-io/milvus/pull/35141">#35141</a>)</li>
+<li>Binlog size. (<a href="https://github.com/milvus-io/milvus/pull/35235">#35235</a>)</li>
+<li>Insert rate. (<a href="https://github.com/milvus-io/milvus/pull/35188">#35188</a>)</li>
+<li>Memory high water level. (<a href="https://github.com/milvus-io/milvus/pull/35188">#35188</a>)</li>
+<li>RESTful API metrics. (<a href="https://github.com/milvus-io/milvus/pull/35083">#35083</a>)</li>
+<li>Search latency. (<a href="https://github.com/milvus-io/milvus/pull/34783">#34783</a>)</li>
 </ul></li>
 </ul>
-<h3 id="Critical-bug-fixes" class="common-anchor-header">Correzioni di bug critici</h3><ul>
-<li>Corretto un problema per cui i dati di cancellazione andavano persi a causa dell'omissione di segmenti durante la compattazione L0.<a href="https://github.com/milvus-io/milvus/pull/33980">[#33980</a>, <a href="https://github.com/milvus-io/milvus/pull/34363">#34363</a>]</li>
-<li>Corretto un problema per cui i messaggi di cancellazione non venivano inoltrati a causa di una gestione errata dell'ambito dei dati.<a href="https://github.com/milvus-io/milvus/pull/35313">(#35313</a>)</li>
-<li>Risolta un'eccezione SIGBUS che si verificava a causa di un uso non corretto di <code translate="no">mmap</code>.<a href="https://github.com/milvus-io/milvus/pull/34455">[#34455</a>, <a href="https://github.com/milvus-io/milvus/pull/34530">#34530</a>]</li>
-<li>Corretti gli arresti anomali causati da espressioni di ricerca illegali.<a href="https://github.com/milvus-io/milvus/pull/35307">(#35307</a>)</li>
-<li>Corretto un problema per cui l'orologio DataNode falliva a causa di un'impostazione errata del timeout nel contesto dell'orologio.<a href="https://github.com/milvus-io/milvus/pull/35017">(#35017</a>)</li>
+<h3 id="Changes" class="common-anchor-header">Changes</h3><ul>
+<li><p>For open-source users, this version changes the metric types in AutoIndex for <code translate="no">FloatVector</code> and <code translate="no">BinaryVector</code> to <code translate="no">Cosine</code> and <code translate="no">Hamming</code>, respectively.</p></li>
+<li><p><strong>Fixed Third-Party Dependency Versions</strong>:</p>
+<ul>
+<li>This release introduces fixed versions for certain third-party dependency libraries, significantly enhancing Milvus’s software supply chain management.</li>
+<li>By isolating the project from upstream changes, it safeguards daily builds from potential disruptions.</li>
+<li>The update ensures stability by exclusively hosting validated C++ third-party packages on JFrog Cloud and utilizing Conan Recipe Revisions (RREV).</li>
+<li>This approach mitigates the risk of breaking changes from updates in ConanCenter.</li>
+<li>Developers using Ubuntu 22.04 will benefit immediately from these changes. However, developers on other operating systems may need to upgrade their <code translate="no">glibc</code> version to avoid compatibility issues.</li>
+</ul></li>
 </ul>
-<h3 id="Bug-fixes" class="common-anchor-header">Correzioni di bug</h3><ul>
-<li>Risolte le vulnerabilità di sicurezza aggiornando alcune dipendenze.<a href="https://github.com/milvus-io/milvus/pull/33927">[#33927</a>, <a href="https://github.com/milvus-io/milvus/pull/34693">#34693</a>]</li>
-<li>Corretto un errore di parsing causato da espressioni troppo lunghe.<a href="https://github.com/milvus-io/milvus/pull/34957">(#34957</a>)</li>
-<li>Risolta una perdita di memoria che si verificava durante l'analisi del piano di query.<a href="https://github.com/milvus-io/milvus/pull/34932">(#34932</a>)</li>
-<li>Corretto un problema per cui le modifiche al livello di log dinamico non avevano effetto.<a href="https://github.com/milvus-io/milvus/pull/34777">(#34777</a>)</li>
-<li>Risolto un problema per cui le query group by su dati in crescita fallivano a causa di offset di segmento non inizializzati.<a href="https://github.com/milvus-io/milvus/pull/34750">(#34750</a>)</li>
-<li>Corretta l'impostazione dei parametri di ricerca quando si usa l'iteratore Knowhere.<a href="https://github.com/milvus-io/milvus/pull/34732">(#34732</a>)</li>
-<li>Rivista la logica per il controllo dello stato del caricamento della partizione.<a href="https://github.com/milvus-io/milvus/pull/34305">(#34305</a>)</li>
-<li>Corretto un problema per cui gli aggiornamenti della cache dei privilegi non riuscivano a causa di errori di richiesta non gestiti.<a href="https://github.com/milvus-io/milvus/pull/34697">(#34697</a>)</li>
-<li>Risolto un errore nel recupero della collezione caricata dopo il riavvio di QueryCoord.<a href="https://github.com/milvus-io/milvus/pull/35211">(#35211</a>)</li>
-<li>Risolto un problema di idempotenza del carico eliminando la convalida non necessaria dei parametri dell'indice.<a href="https://github.com/milvus-io/milvus/pull/35179">(#35179</a>)</li>
-<li>Assicurata l'esecuzione di <code translate="no">compressBinlog</code> per consentire a <code translate="no">reloadFromKV</code> di riempire correttamente <code translate="no">logID</code> di binlog dopo il riavvio di DataCoord.<a href="https://github.com/milvus-io/milvus/pull/34062">(#34062</a>)</li>
-<li>Corretto un problema per cui i metadati della raccolta non venivano rimossi dopo la garbage collection in DataCoord.<a href="https://github.com/milvus-io/milvus/pull/34884">(#34884</a>)</li>
-<li>Risolta una perdita di memoria in SegmentManager all'interno di DataCoord rimuovendo i segmenti flussati generati attraverso le importazioni.<a href="https://github.com/milvus-io/milvus/pull/34651">(#34651</a>)</li>
-<li>Risolto un problema di panico quando la compattazione era disabilitata e una raccolta veniva abbandonata.<a href="https://github.com/milvus-io/milvus/pull/34206">(#34206</a>)</li>
-<li>Corretto un problema di esaurimento della memoria in DataNode migliorando l'algoritmo di stima dell'uso della memoria.<a href="https://github.com/milvus-io/milvus/pull/34203">(#34203</a>)</li>
-<li>Impedito l'utilizzo a raffica della memoria quando più richieste di recupero di vettori hanno un miss della cache, implementando il singleflight per la cache dei chunk.<a href="https://github.com/milvus-io/milvus/pull/34283">(#34283</a>)</li>
-<li>Catturato <code translate="no">ErrKeyNotFound</code> durante le operazioni CAS (Compare and Swap) nella configurazione.<a href="https://github.com/milvus-io/milvus/pull/34489">(#34489</a>)</li>
-<li>Corretto un problema per cui gli aggiornamenti della configurazione fallivano a causa dell'uso errato del valore formattato in un'operazione CAS.<a href="https://github.com/milvus-io/milvus/pull/34373">(#34373</a>)</li>
+<h3 id="Critical-bug-fixes" class="common-anchor-header">Critical bug fixes</h3><ul>
+<li>Fixed an issue where deletion data was lost due to segments being omitted during L0 compaction. [<a href="https://github.com/milvus-io/milvus/pull/33980">#33980</a>, <a href="https://github.com/milvus-io/milvus/pull/34363">#34363</a>]</li>
+<li>Rectified a problem where delete messages failed to be forwarded due to incorrect data scope handling. (<a href="https://github.com/milvus-io/milvus/pull/35313">#35313</a>)</li>
+<li>Resolved a SIGBUS exception that occurred due to incorrect usage of <code translate="no">mmap</code>. [<a href="https://github.com/milvus-io/milvus/pull/34455">#34455</a>, <a href="https://github.com/milvus-io/milvus/pull/34530">#34530</a>]</li>
+<li>Fixed crashes caused by illegal search expressions. (<a href="https://github.com/milvus-io/milvus/pull/35307">#35307</a>)</li>
+<li>Corrected an issue where DataNode watch failed due to an incorrect timeout setting in the watch context. (<a href="https://github.com/milvus-io/milvus/pull/35017">#35017</a>)</li>
 </ul>
-<h3 id="Miscellaneous" class="common-anchor-header">Varie</h3><ul>
-<li>Aggiunto il supporto per l'esportatore HTTP OTLP, migliorando le capacità di osservazione e monitoraggio.<a href="https://github.com/milvus-io/milvus/pull/35073">[#35073</a>, <a href="https://github.com/milvus-io/milvus/pull/35299">#35299</a>]</li>
-<li>Migliorata la funzionalità del database introducendo proprietà come "max collections" e "disk quota", che ora possono essere modificate dinamicamente.<a href="https://github.com/milvus-io/milvus/pull/34511">[#34511</a>, <a href="https://github.com/milvus-io/milvus/pull/34386">#34386</a>]</li>
-<li>Aggiunte funzionalità di tracciamento per i processi di compattazione L0 all'interno di DataNode per migliorare la diagnostica e il monitoraggio.<a href="https://github.com/milvus-io/milvus/pull/33898">(#33898</a>)</li>
-<li>Introdotta la configurazione della quota per il numero di voci di segmento L0 per raccolta, consentendo un migliore controllo dei tassi di cancellazione applicando una pressione all'indietro.<a href="https://github.com/milvus-io/milvus/pull/34837">(#34837</a>)</li>
-<li>Esteso il meccanismo di limitazione della velocità per le operazioni di inserimento anche alle operazioni di upsert, garantendo prestazioni costanti in condizioni di carico elevato.<a href="https://github.com/milvus-io/milvus/pull/34616">(#34616</a>)</li>
-<li>Implementato un pool CGO dinamico per le chiamate proxy CGO, ottimizzando l'uso delle risorse e le prestazioni.<a href="https://github.com/milvus-io/milvus/pull/34842">(#34842</a>)</li>
-<li>Abilitata l'opzione di compilazione DiskAnn per i sistemi operativi Ubuntu, Rocky e Amazon, migliorando la compatibilità e le prestazioni su queste piattaforme.<a href="https://github.com/milvus-io/milvus/pull/34244">(#34244</a>)</li>
-<li>Aggiornato Conan alla versione 1.64.1, per garantire la compatibilità con le funzioni e i miglioramenti più recenti.<a href="https://github.com/milvus-io/milvus/pull/35216">(#35216</a>)</li>
-<li>Aggiornato Knowhere alla versione 2.3.7, con miglioramenti delle prestazioni e nuove funzionalità.<a href="https://github.com/milvus-io/milvus/pull/34709">(#34709</a>)</li>
-<li>Corretta la revisione di specifici pacchetti di terze parti per garantire build coerenti e ridurre il rischio di modifiche inattese.<a href="https://github.com/milvus-io/milvus/pull/35316">(#35316</a>)</li>
+<h3 id="Bug-fixes" class="common-anchor-header">Bug fixes</h3><ul>
+<li>Addressed security vulnerabilities by upgrading certain dependencies. [<a href="https://github.com/milvus-io/milvus/pull/33927">#33927</a>, <a href="https://github.com/milvus-io/milvus/pull/34693">#34693</a>]</li>
+<li>Fixed a parsing error triggered by excessively long expressions. (<a href="https://github.com/milvus-io/milvus/pull/34957">#34957</a>)</li>
+<li>Resolved a memory leak that occurred during query plan parsing. (<a href="https://github.com/milvus-io/milvus/pull/34932">#34932</a>)</li>
+<li>Fixed an issue where dynamic log level modifications were not taking effect. (<a href="https://github.com/milvus-io/milvus/pull/34777">#34777</a>)</li>
+<li>Resolved an issue where group by queries on growing data failed due to uninitialized segment offsets. (<a href="https://github.com/milvus-io/milvus/pull/34750">#34750</a>)</li>
+<li>Corrected the setting of search parameters when using the Knowhere iterator. (<a href="https://github.com/milvus-io/milvus/pull/34732">#34732</a>)</li>
+<li>Revised the logic for checking the status of the partition load. (<a href="https://github.com/milvus-io/milvus/pull/34305">#34305</a>)</li>
+<li>Fixed an issue where privilege cache updates failed due to unhandled request errors. (<a href="https://github.com/milvus-io/milvus/pull/34697">#34697</a>)</li>
+<li>Resolved a failure in loaded collection recovery after QueryCoord restarted. (<a href="https://github.com/milvus-io/milvus/pull/35211">#35211</a>)</li>
+<li>Fixed an issue of load idempotence by removing unnecessary index parameter validation. (<a href="https://github.com/milvus-io/milvus/pull/35179">#35179</a>)</li>
+<li>Ensured <code translate="no">compressBinlog</code> is executed to allow <code translate="no">reloadFromKV</code> to properly fill binlog’s <code translate="no">logID</code> after DataCoord restarts. (<a href="https://github.com/milvus-io/milvus/pull/34062">#34062</a>)</li>
+<li>Fixed an issue where collection metadata was not removed after garbage collection in DataCoord. (<a href="https://github.com/milvus-io/milvus/pull/34884">#34884</a>)</li>
+<li>Resolved a memory leak in SegmentManager within DataCoord by removing flushed segments generated through imports. (<a href="https://github.com/milvus-io/milvus/pull/34651">#34651</a>)</li>
+<li>Fixed a panic issue when compaction was disabled and a collection was dropped. (<a href="https://github.com/milvus-io/milvus/pull/34206">#34206</a>)</li>
+<li>Fixed an out-of-memory issue in DataNode by enhancing the memory usage estimation algorithm. (<a href="https://github.com/milvus-io/milvus/pull/34203">#34203</a>)</li>
+<li>Prevented burst memory usage when multiple vector retrieval requests hit a cache miss by implementing singleflight for chunk cache. (<a href="https://github.com/milvus-io/milvus/pull/34283">#34283</a>)</li>
+<li>Captured <code translate="no">ErrKeyNotFound</code> during CAS (Compare and Swap) operations in the configuration. (<a href="https://github.com/milvus-io/milvus/pull/34489">#34489</a>)</li>
+<li>Fixed an issue where configuration updates failed due to mistakenly using the formatted value in a CAS operation. (<a href="https://github.com/milvus-io/milvus/pull/34373">#34373</a>)</li>
+</ul>
+<h3 id="Miscellaneous" class="common-anchor-header">Miscellaneous</h3><ul>
+<li>Added support for the OTLP HTTP exporter, enhancing observability and monitoring capabilities. [<a href="https://github.com/milvus-io/milvus/pull/35073">#35073</a>, <a href="https://github.com/milvus-io/milvus/pull/35299">#35299</a>]</li>
+<li>Enhanced database functionality by introducing properties such as “max collections” and “disk quota,” which can now be dynamically modified. [<a href="https://github.com/milvus-io/milvus/pull/34511">#34511</a>, <a href="https://github.com/milvus-io/milvus/pull/34386">#34386</a>]</li>
+<li>Added tracing capabilities for L0 compaction processes within DataNode to improve diagnostics and monitoring. (<a href="https://github.com/milvus-io/milvus/pull/33898">#33898</a>)</li>
+<li>Introduced quota configuration for the number of L0 segment entries per collection, enabling better control over deletion rates by applying backpressure. (<a href="https://github.com/milvus-io/milvus/pull/34837">#34837</a>)</li>
+<li>Extended the rate-limiting mechanism for insert operations to also cover upsert operations, ensuring consistent performance under high load. (<a href="https://github.com/milvus-io/milvus/pull/34616">#34616</a>)</li>
+<li>Implemented a dynamic CGO pool for proxy CGO calls, optimizing resource usage and performance. (<a href="https://github.com/milvus-io/milvus/pull/34842">#34842</a>)</li>
+<li>Enabled the DiskAnn compile option for Ubuntu, Rocky, and Amazon operating systems, improving compatibility and performance on these platforms. (<a href="https://github.com/milvus-io/milvus/pull/34244">#34244</a>)</li>
+<li>Upgraded Conan to version 1.64.1, ensuring compatibility with the latest features and improvements. (<a href="https://github.com/milvus-io/milvus/pull/35216">#35216</a>)</li>
+<li>Updated Knowhere to version 2.3.7, bringing in performance enhancements and new features. (<a href="https://github.com/milvus-io/milvus/pull/34709">#34709</a>)</li>
+<li>Fixed the revision of specific third-party packages to ensure consistent builds and reduce the risk of unexpected changes. (<a href="https://github.com/milvus-io/milvus/pull/35316">#35316</a>)</li>
 </ul>
 <h2 id="v246" class="common-anchor-header">v2.4.6<button data-href="#v246" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -610,42 +686,42 @@ title: Note di rilascio
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Data di rilascio: 16 luglio 2024</p>
+    </button></h2><p>Release date: July 16, 2024</p>
 <table>
 <thead>
-<tr><th>Versione Milvus</th><th>Versione dell'SDK Python</th><th>Versione dell'SDK Java</th><th>Versione SDK Node.js</th></tr>
+<tr><th>Milvus version</th><th>Python SDK version</th><th>Java SDK version</th><th>Node.js SDK version</th></tr>
 </thead>
 <tbody>
 <tr><td>2.4.6</td><td>2.4.4</td><td>2.4.2</td><td>2.4.4</td></tr>
 </tbody>
 </table>
-<p>Milvus v2.4.6 è una release di correzione di bug che risolve problemi critici come panico, perdite di memoria e perdita di dati durante le cancellazioni. Introduce inoltre diverse ottimizzazioni, tra cui miglioramenti alle metriche di monitoraggio, l'aggiornamento della versione Go alla 1.21 e il miglioramento dell'esperienza utente per le query RESTful count(*).</p>
-<h3 id="Improvements" class="common-anchor-header">Miglioramenti</h3><ul>
-<li>Migliorata la facilità d'uso delle query API RESTful<a href="https://github.com/milvus-io/milvus/pull/34444">(#34444</a>).</li>
-<li>Aggiornata la versione di Go da 1.20 a 1.21<a href="https://github.com/milvus-io/milvus/pull/33940">(#33940</a>).</li>
-<li>Ottimizzato il bucket della metrica dell'istogramma per una granularità più fine nel bucketing (<a href="https://github.com/milvus-io/milvus/pull/34592">#34592</a>).</li>
-<li>Aggiornata la versione delle dipendenze di Pulsar da 2.8.2 a 2.9.5. Si raccomanda di aggiornare Pulsar alla versione 2.9.5 da Milvus 2.4.6.</li>
+<p>Milvus v2.4.6 is a bug-fix release that addresses critical issues such as panics, memory leaks, and data loss during deletions. It also introduces several optimizations, including enhancements to monitoring metrics, upgrading the Go version to 1.21, and improving the user experience for RESTful count(*) queries.</p>
+<h3 id="Improvements" class="common-anchor-header">Improvements</h3><ul>
+<li>Enhanced the user-friendliness of RESTful API queries (<a href="https://github.com/milvus-io/milvus/pull/34444">#34444</a>).</li>
+<li>Upgraded the Go version from 1.20 to 1.21 (<a href="https://github.com/milvus-io/milvus/pull/33940">#33940</a>).</li>
+<li>Optimized the histogram metric bucket for finer granularity in bucketing (<a href="https://github.com/milvus-io/milvus/pull/34592">#34592</a>).</li>
+<li>Upgraded Pulsar dependency version from 2.8.2 to 2.9.5. It’s recommended to upgrade Pulsar to 2.9.5 since Milvus 2.4.6.</li>
 </ul>
-<h3 id="Bug-fixes" class="common-anchor-header">Correzioni di bug</h3><ul>
-<li>Corretto un problema per cui l'API GetReplicas restituiva uno stato nullo<a href="https://github.com/milvus-io/milvus/pull/34019">(#34019</a>).</li>
-<li>Corretto un problema per cui le query potevano restituire record cancellati<a href="https://github.com/milvus-io/milvus/pull/34502">(#34502</a>).</li>
-<li>Risolto un problema per cui IndexNode si bloccava durante l'arresto a causa di un controllo errato della durata (<a href="https://github.com/milvus-io/milvus/pull/34559">#34559</a>).</li>
-<li>Corretta una perdita di memoria degli oggetti oracolo a chiave primaria quando un worker è offline (<a href="https://github.com/milvus-io/milvus/pull/34020">#34020</a>).</li>
-<li>Corretto ChannelManagerImplV2 per notificare il nodo corretto, risolvendo i problemi di cattura dei parametri nella chiusura del ciclo<a href="https://github.com/milvus-io/milvus/pull/34004">(#34004</a>).</li>
-<li>Corretta una corsa di dati in lettura e scrittura in ImportTask segmentsInfo implementando una copia profonda (<a href="https://github.com/milvus-io/milvus/pull/34126">#34126</a>).</li>
-<li>Corrette le informazioni sulla versione per l'opzione di configurazione "legacyVersionWithoutRPCWatch", per evitare errori durante gli aggiornamenti periodici (<a href="https://github.com/milvus-io/milvus/pull/34185">#34185</a>).</li>
-<li>Corretta la metrica per il numero di partizioni caricate<a href="https://github.com/milvus-io/milvus/pull/34195">(#34195</a>).</li>
-<li>Passata la configurazione di <code translate="no">otlpSecure</code> quando si imposta il tracciamento di segcore<a href="https://github.com/milvus-io/milvus/pull/34210">(#34210</a>).</li>
-<li>Risolto un problema per cui le proprietà di DataCoord venivano sovrascritte per errore<a href="https://github.com/milvus-io/milvus/pull/34240">(#34240</a>).</li>
-<li>Risolto un problema di perdita di dati causato dall'unione errata di due flussi di messaggi appena creati<a href="https://github.com/milvus-io/milvus/pull/34563">(#34563</a>).</li>
-<li>Corretto un panico causato da msgstream che cercava di consumare un pchannel non valido<a href="https://github.com/milvus-io/milvus/pull/34230">(#34230</a>).</li>
-<li>Risolto un problema per cui le importazioni potevano generare file orfani (<a href="https://github.com/milvus-io/milvus/pull/34071">#34071</a>).</li>
-<li>Risolti i risultati incompleti delle query a causa di chiavi primarie duplicate in un segmento<a href="https://github.com/milvus-io/milvus/pull/34302">(#34302</a>).</li>
-<li>Risolto un problema di segmenti sigillati mancanti nella compattazione L0<a href="https://github.com/milvus-io/milvus/pull/34566">(#34566</a>).</li>
-<li>Risolto il problema dei dati sporchi nel meta canale-cp generato dopo la garbage collection<a href="https://github.com/milvus-io/milvus/pull/34609">(#34609</a>).</li>
-<li>Corretta la metrica in cui database_num era 0 dopo il riavvio di RootCoord<a href="https://github.com/milvus-io/milvus/pull/34010">(#34010</a>).</li>
-<li>Corretta una perdita di memoria in SegmentManager in DataCoord rimuovendo i segmenti generati dall'importazione (<a href="https://github.com/milvus-io/milvus/pull/34652">#34652</a>).</li>
-<li>Assicurato che compressBinlog riempia il logID dei binlog dopo il riavvio di DataCoord, garantendo il corretto ricarico da KV<a href="https://github.com/milvus-io/milvus/pull/34064">(#34064</a>).</li>
+<h3 id="Bug-fixes" class="common-anchor-header">Bug fixes</h3><ul>
+<li>Fixed an issue where the GetReplicas API returned a nil status (<a href="https://github.com/milvus-io/milvus/pull/34019">#34019</a>).</li>
+<li>Corrected a problem where queries could return deleted records (<a href="https://github.com/milvus-io/milvus/pull/34502">#34502</a>).</li>
+<li>Resolved an issue where IndexNode would get stuck during stopping due to incorrect lifetime control (<a href="https://github.com/milvus-io/milvus/pull/34559">#34559</a>).</li>
+<li>Fixed a memory leak of primary key oracle objects when a worker is offline (<a href="https://github.com/milvus-io/milvus/pull/34020">#34020</a>).</li>
+<li>Corrected ChannelManagerImplV2 to notify the correct Node, addressing parameter capture issues in loop closure (<a href="https://github.com/milvus-io/milvus/pull/34004">#34004</a>).</li>
+<li>Fixed a read-write data race in ImportTask segmentsInfo by implementing a deep copy (<a href="https://github.com/milvus-io/milvus/pull/34126">#34126</a>).</li>
+<li>Corrected version information for the “legacyVersionWithoutRPCWatch” configuration option to prevent errors during rolling upgrades (<a href="https://github.com/milvus-io/milvus/pull/34185">#34185</a>).</li>
+<li>Fixed the metric for the number of partitions loaded (<a href="https://github.com/milvus-io/milvus/pull/34195">#34195</a>).</li>
+<li>Passed the <code translate="no">otlpSecure</code> config when setting up segcore tracing (<a href="https://github.com/milvus-io/milvus/pull/34210">#34210</a>).</li>
+<li>Fixed an issue where DataCoord’s properties were overwritten by mistake (<a href="https://github.com/milvus-io/milvus/pull/34240">#34240</a>).</li>
+<li>Resolved a data loss issue caused by erroneously merging two newly created message streams (<a href="https://github.com/milvus-io/milvus/pull/34563">#34563</a>).</li>
+<li>Fixed a panic caused by msgstream trying to consume an invalid pchannel (<a href="https://github.com/milvus-io/milvus/pull/34230">#34230</a>).</li>
+<li>Addressed an issue where imports could generate orphaned files (<a href="https://github.com/milvus-io/milvus/pull/34071">#34071</a>).</li>
+<li>Fixed incomplete query results due to duplicate primary keys in a segment (<a href="https://github.com/milvus-io/milvus/pull/34302">#34302</a>).</li>
+<li>Resolved an issue of missing sealed segments in L0 compaction (<a href="https://github.com/milvus-io/milvus/pull/34566">#34566</a>).</li>
+<li>Fixed the problem of dirty data in the channel-cp meta generated after garbage collection (<a href="https://github.com/milvus-io/milvus/pull/34609">#34609</a>).</li>
+<li>Corrected the metrics where database_num was 0 after restarting RootCoord (<a href="https://github.com/milvus-io/milvus/pull/34010">#34010</a>).</li>
+<li>Fixed a memory leak in SegmentManager in DataCoord by removing flushed segments generated through import (<a href="https://github.com/milvus-io/milvus/pull/34652">#34652</a>).</li>
+<li>Ensured compressBinlog to fill binlogs’ logID after DataCoord restarts, ensuring proper reload from KV (<a href="https://github.com/milvus-io/milvus/pull/34064">#34064</a>).</li>
 </ul>
 <h2 id="v245" class="common-anchor-header">v2.4.5<button data-href="#v245" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -662,99 +738,99 @@ title: Note di rilascio
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Data di rilascio: 18 giugno 2024</p>
+    </button></h2><p>Release date: June 18, 2024</p>
 <table>
 <thead>
-<tr><th>Versione Milvus</th><th>Versione dell'SDK Python</th><th>Versione SDK Java</th><th>Versione SDK Node.js</th></tr>
+<tr><th>Milvus version</th><th>Python SDK version</th><th>Java SDK version</th><th>Node.js SDK version</th></tr>
 </thead>
 <tbody>
 <tr><td>2.4.5</td><td>2.4.4</td><td>2.4.1</td><td>2.4.3</td></tr>
 </tbody>
 </table>
-<p>Il rilascio di Milvus 2.4.5 introduce diversi miglioramenti e correzioni di bug per migliorare le prestazioni, la stabilità e la funzionalità. Milvus 2.4.5 semplifica la ricerca di vettori sparsi, float16 e bfloat16 con l'indicizzazione automatica, velocizza le ricerche, le cancellazioni e le compattazioni con le ottimizzazioni del filtro Bloom e affronta la gestione dei dati con tempi di caricamento più rapidi e il supporto dei segmenti L0 importati. Inoltre, introduce l'indice sparse HNSW per una ricerca efficiente di dati sparsi ad alta dimensione, migliora l'API RESTful con il supporto dei vettori sparse float e corregge i bug critici per una maggiore stabilità.</p>
-<h3 id="New-Features" class="common-anchor-header">Nuove funzioni</h3><ul>
-<li>Aggiunto il supporto rbac all'API describe/alter database<a href="https://github.com/milvus-io/milvus/pull/33804">(#33804</a>)</li>
-<li>Supportata la costruzione dell'indice HNSW per i vettori sparsi<a href="https://github.com/milvus-io/milvus/pull/33653">(#33653</a>, <a href="https://github.com/milvus-io/milvus/pull/33662">#33662</a>)</li>
-<li>Supportata la costruzione dell'indice Disk per i vettori binari<a href="https://github.com/milvus-io/milvus/pull/33575">(#33575</a>)</li>
-<li>Supportato il tipo di vettore sparse su RESTful v2<a href="https://github.com/milvus-io/milvus/pull/33555">(#33555</a>)</li>
-<li>Aggiunta l'API RESTful /management/stop per fermare un componente<a href="https://github.com/milvus-io/milvus/pull/33799">(#33799</a>)</li>
+<p>The release of Milvus 2.4.5 introduces several improvements and bug fixes to enhance performance, stability, and functionality. Milvus 2.4.5 simplifies sparse, float16, and bfloat16 vector search with auto-indexing, speeds up searches, deletions, and compactions with Bloom filter optimizations, and tackles data management through faster loading times and import L0 segment support. It also introduces the sparse HNSW index for efficient high-dimensional sparse data search, enhances the RESTful API with sparse float vector support, and fixes critical bugs for better stability.</p>
+<h3 id="New-Features" class="common-anchor-header">New Features</h3><ul>
+<li>Added rbac support to describe/alter database api (<a href="https://github.com/milvus-io/milvus/pull/33804">#33804</a>)</li>
+<li>Supported building the HNSW index for sparse vectors (<a href="https://github.com/milvus-io/milvus/pull/33653">#33653</a>, <a href="https://github.com/milvus-io/milvus/pull/33662">#33662</a>)</li>
+<li>Supported building the Disk index for binary vector (<a href="https://github.com/milvus-io/milvus/pull/33575">#33575</a>)</li>
+<li>Supported sparse vector type on RESTful v2 (<a href="https://github.com/milvus-io/milvus/pull/33555">#33555</a>)</li>
+<li>Add /management/stop RESTful api to stop a component (<a href="https://github.com/milvus-io/milvus/pull/33799">#33799</a>)</li>
 </ul>
-<h3 id="Improvements" class="common-anchor-header">Miglioramenti</h3><ul>
-<li>Impostare il valore predefinito di maxPartitionNum a 1024<a href="https://github.com/milvus-io/milvus/pull/33950">(#33950</a>)</li>
-<li>Abilitato il reset forzato della connessione in caso di errore di non disponibilità (<a href="https://github.com/milvus-io/milvus/pull/33910">#33910</a>)</li>
-<li>Abilitato il limitatore della velocità di lavaggio del livello di raccolta (<a href="https://github.com/milvus-io/milvus/pull/33864">#33864</a>)</li>
-<li>Eseguita l'applicazione del filtro bloom in parallelo per velocizzare la previsione dei segmenti (<a href="https://github.com/milvus-io/milvus/pull/33793">#33793</a>)</li>
-<li>Usato fastjson lib per unmarshal delete log per velocizzare json.Unmarshal<a href="https://github.com/milvus-io/milvus/pull/33802">(#33802</a>)</li>
-<li>Usato BatchPkExist per ridurre il costo delle chiamate alle funzioni del filtro bloom (<a href="https://github.com/milvus-io/milvus/pull/33752">#33752</a>)</li>
-<li>Velocizzato il caricamento di piccole raccolte<a href="https://github.com/milvus-io/milvus/pull/33746">(#33746</a>)</li>
-<li>Supportata l'importazione di dati di cancellazione nel segmento L0 (<a href="https://github.com/milvus-io/milvus/pull/33712">#33712</a>)</li>
-<li>Saltate le attività di compattazione dei marchi per evitare l'esecuzione ripetuta della stessa attività (<a href="https://github.com/milvus-io/milvus/pull/33833">#33833</a>).</li>
-<li>Gestiti i vettori float16 e bfloat16 come BinaryVector in numpy bulk insert (<a href="https://github.com/milvus-io/milvus/pull/33788">#33788</a>)</li>
-<li>Aggiunto il flag includeCurrentMsg per il metodo seek<a href="https://github.com/milvus-io/milvus/pull/33743">(#33743</a>)</li>
-<li>Aggiunti mergeInterval, targetBufSize, maxTolerantLag di msgdispatcher alle configurazioni<a href="https://github.com/milvus-io/milvus/pull/33680">(#33680</a>)</li>
-<li>Migliorato GetVectorByID del vettore sparse<a href="https://github.com/milvus-io/milvus/pull/33652">(#33652</a>)</li>
-<li>Rimossa StringPrimarykey per ridurre le copie inutili e il costo delle chiamate di funzione (<a href="https://github.com/milvus-io/milvus/pull/33649">#33649</a>)</li>
-<li>Aggiunta la mappatura dell'autoindice per i tipi di dati binari/sparsi<a href="https://github.com/milvus-io/milvus/pull/33625">(#33625</a>)</li>
-<li>Ottimizzate alcune cache per ridurre l'uso della memoria<a href="https://github.com/milvus-io/milvus/pull/33560">(#33560</a>)</li>
-<li>Astratta l'interfaccia di esecuzione per le operazioni di importazione/preimportazione (<a href="https://github.com/milvus-io/milvus/pull/33607">#33607</a>)</li>
-<li>Usato map pk per timestamp nell'inserimento del buffer per ridurre le cause di bf (<a href="https://github.com/milvus-io/milvus/pull/33582">#33582</a>)</li>
-<li>Evitate meta-operazioni ridondanti di importazione (<a href="https://github.com/milvus-io/milvus/pull/33519">#33519</a>)</li>
-<li>Migliorati i log registrando meglio le informazioni sulla quota disco, aggiungendo il flag UseDefaultConsistency, rimuovendo i log non necessari<a href="https://github.com/milvus-io/milvus/pull/33597">(#33597</a>, <a href="https://github.com/milvus-io/milvus/pull/33644">#33644</a>, <a href="https://github.com/milvus-io/milvus/pull/33670">#33670</a>)</li>
+<h3 id="Improvements" class="common-anchor-header">Improvements</h3><ul>
+<li>Set maxPartitionNum default value to 1024 (<a href="https://github.com/milvus-io/milvus/pull/33950">#33950</a>)</li>
+<li>Enabled to Force reset connection for unavailable error (<a href="https://github.com/milvus-io/milvus/pull/33910">#33910</a>)</li>
+<li>Enabled flush rate limiter of collection level (<a href="https://github.com/milvus-io/milvus/pull/33864">#33864</a>)</li>
+<li>Executed bloom filter apply in parallel to speed up segment predict (<a href="https://github.com/milvus-io/milvus/pull/33793">#33793</a>)</li>
+<li>Used fastjson lib for unmarshal delete log to speed up json.Unmarshal(<a href="https://github.com/milvus-io/milvus/pull/33802">#33802</a>)</li>
+<li>Used BatchPkExist to reduce bloom filter func call cost (<a href="https://github.com/milvus-io/milvus/pull/33752">#33752</a>)</li>
+<li>Speeded up the loading of small collections (<a href="https://github.com/milvus-io/milvus/pull/33746">#33746</a>)</li>
+<li>Supported import delete data to L0 segment  (<a href="https://github.com/milvus-io/milvus/pull/33712">#33712</a>)</li>
+<li>Skipped mark compaction tasks to be timeouted to aviod executing the same task over and over again (<a href="https://github.com/milvus-io/milvus/pull/33833">#33833</a>)</li>
+<li>Handled float16 and bfloat16 vectors as same as BinaryVector in numpy bulk insert  (<a href="https://github.com/milvus-io/milvus/pull/33788">#33788</a>)</li>
+<li>Added the includeCurrentMsg flag for the seek method (<a href="https://github.com/milvus-io/milvus/pull/33743">#33743</a>)</li>
+<li>Added mergeInterval, targetBufSize, maxTolerantLagof msgdispatcher to configs (<a href="https://github.com/milvus-io/milvus/pull/33680">#33680</a>)</li>
+<li>Improved GetVectorByID of sparse vector (<a href="https://github.com/milvus-io/milvus/pull/33652">#33652</a>)</li>
+<li>Removed StringPrimarykey to reduce unnecessary copy and function call cost  (<a href="https://github.com/milvus-io/milvus/pull/33649">#33649</a>)</li>
+<li>Added autoindex mapping for binary/sparse data type (<a href="https://github.com/milvus-io/milvus/pull/33625">#33625</a>)</li>
+<li>Optimized some cache to reduce memory usage (<a href="https://github.com/milvus-io/milvus/pull/33560">#33560</a>)</li>
+<li>Abstracted execute interface for import/preimport task  (<a href="https://github.com/milvus-io/milvus/pull/33607">#33607</a>)</li>
+<li>Used map pk to timestamp in buffer insert to reduce bf causes (<a href="https://github.com/milvus-io/milvus/pull/33582">#33582</a>)</li>
+<li>Avoided redundant meta operations of import  (<a href="https://github.com/milvus-io/milvus/pull/33519">#33519</a>)</li>
+<li>Improve logs by logging better disk quota info,  adding UseDefaultConsistency flag, removing unnecessary logs (<a href="https://github.com/milvus-io/milvus/pull/33597">#33597</a>, <a href="https://github.com/milvus-io/milvus/pull/33644">#33644</a>, <a href="https://github.com/milvus-io/milvus/pull/33670">#33670</a>)</li>
 </ul>
-<h3 id="Bug-fixes" class="common-anchor-header">Correzioni di bug</h3><ul>
-<li>Corretto un bug per cui queryHook non era in grado di riconoscere il tipo di vettore (<a href="https://github.com/milvus-io/milvus/pull/33911">#33911</a>)</li>
-<li>Impedito l'uso della variabile di iterazione catturata partitionID (<a href="https://github.com/milvus-io/milvus/pull/33970">#33970</a>)</li>
-<li>Corretto un bug che può causare l'incapacità di Milvus di creare AutoIndex su vettori binari e sparsi<a href="https://github.com/milvus-io/milvus/pull/33867">(#33867</a>)</li>
-<li>Corretto un bug che può far sì che indexnode ritenti la creazione di un indice su parametri di indice non validi di tutti i vettori (<a href="https://github.com/milvus-io/milvus/pull/33878">#33878</a>)</li>
-<li>Corretto il bug che quando i carichi e i rilasci avvengono in modo concomitante può mandare in crash il server<a href="https://github.com/milvus-io/milvus/pull/33699">(#33699</a>)</li>
-<li>Migliorata la coerenza della cache per i valori di configurazione<a href="https://github.com/milvus-io/milvus/pull/33797">(#33797</a>)</li>
-<li>Prevenuta la possibile perdita di dati durante la cancellazione<a href="https://github.com/milvus-io/milvus/pull/33821">(#33821</a>)</li>
-<li>Assicurato che il campo DroppedAt (probabile timestamp di cancellazione) sia impostato dopo l'eliminazione delle raccolte (<a href="https://github.com/milvus-io/milvus/pull/33767">#33767</a>).</li>
-<li>Corretto un problema che poteva causare una gestione non corretta delle dimensioni dei dati dei vettori binari da parte di Milvus<a href="https://github.com/milvus-io/milvus/pull/33751">(#33751</a>)</li>
-<li>Impedito che le credenziali sensibili di Kafka vengano registrate in testo normale<a href="https://github.com/milvus-io/milvus/pull/33694">(#33694</a>, <a href="https://github.com/milvus-io/milvus/pull/33747">#33747</a>).</li>
-<li>Assicurato che Milvus possa importare correttamente dati con campi vettoriali multipli.<a href="https://github.com/milvus-io/milvus/pull/33724">(#33724</a>)</li>
-<li>Migliorata l'affidabilità dell'importazione controllando l'esistenza di un lavoro di importazione prima dell'avvio.<a href="https://github.com/milvus-io/milvus/pull/33673">(#33673</a>)</li>
-<li>Migliorata la gestione dell'indice HNSW sparse (funzionalità interna)<a href="https://github.com/milvus-io/milvus/pull/33714">(#33714</a>)</li>
-<li>Pulita la memoria vettoriale per evitare perdite di memoria<a href="https://github.com/milvus-io/milvus/pull/33708">(#33708</a>)</li>
-<li>Assicurato un riscaldamento asincrono più fluido grazie alla correzione di un problema di blocco di stato.<a href="https://github.com/milvus-io/milvus/pull/33687">(#33687</a>)</li>
-<li>Risolto un bug che poteva causare risultati mancanti negli iteratori delle query.<a href="https://github.com/milvus-io/milvus/pull/33506">(#33506</a>)</li>
-<li>Corretto un bug che poteva causare una dimensione non uniforme dei segmenti di importazione (<a href="https://github.com/milvus-io/milvus/pull/33634">#33634</a>).</li>
-<li>Corretta la gestione della dimensione dei dati per i tipi bf16, fp16 e vettori binari<a href="https://github.com/milvus-io/milvus/pull/33488">(#33488</a>).</li>
-<li>Migliorata la stabilità risolvendo potenziali problemi con il compattatore L0<a href="https://github.com/milvus-io/milvus/pull/33564">(#33564</a>)</li>
-<li>Assicurato che gli aggiornamenti della configurazione dinamica siano riflessi correttamente nella cache.<a href="https://github.com/milvus-io/milvus/pull/33590">(#33590</a>)</li>
-<li>Migliorata l'accuratezza della metrica RootCoordQuotaStates (<a href="https://github.com/milvus-io/milvus/pull/33601">#33601</a>)</li>
-<li>Assicurata la segnalazione accurata del numero di entità caricate nella metrica<a href="https://github.com/milvus-io/milvus/pull/33522">(#33522</a>).</li>
-<li>Fornite informazioni più complete nei log delle eccezioni. <a href="https://github.com/milvus-io/milvus/pull/33396">(#33396</a>)</li>
-<li>Ottimizzata la pipeline di query rimuovendo il controllore di gruppo non necessario<a href="https://github.com/milvus-io/milvus/pull/33485">(#33485</a>)</li>
-<li>Utilizzato il percorso di archiviazione locale per un controllo più accurato della capacità del disco sul nodo indice.<a href="https://github.com/milvus-io/milvus/pull/33505">(#33505</a>)</li>
-<li>Corretta la possibilità che hasMoreResult restituisca false quando il numero di hit è superiore al limite<a href="https://github.com/milvus-io/milvus/pull/33642">(#33642</a>)</li>
-<li>Ritardato il caricamento dei bf nel delegatore per evitare che vengano caricati più volte quando il worker non ha più memoria<a href="https://github.com/milvus-io/milvus/pull/33650">(#33650</a>) - Corretto un bug per cui queryHook non era in grado di riconoscere il tipo di vettore<a href="https://github.com/milvus-io/milvus/pull/33911">(#33911</a>)</li>
-<li>Impedito l'uso della variabile di iterazione catturata partitionID (<a href="https://github.com/milvus-io/milvus/pull/33970">#33970</a>)</li>
-<li>Corretto un bug che poteva causare l'incapacità di Milvus di creare AutoIndex su vettori binari e sparsi<a href="https://github.com/milvus-io/milvus/pull/33867">(#33867</a>)</li>
-<li>Corretto un bug che può far sì che indexnode ritenti la creazione di un indice su parametri di indice non validi di tutti i vettori (<a href="https://github.com/milvus-io/milvus/pull/33878">#33878</a>)</li>
-<li>Corretto il bug che quando i carichi e i rilasci avvengono in modo concomitante può mandare in crash il server<a href="https://github.com/milvus-io/milvus/pull/33699">(#33699</a>)</li>
-<li>Migliorata la coerenza della cache per i valori di configurazione<a href="https://github.com/milvus-io/milvus/pull/33797">(#33797</a>)</li>
-<li>Prevenuta la possibile perdita di dati durante la cancellazione<a href="https://github.com/milvus-io/milvus/pull/33821">(#33821</a>)</li>
-<li>Assicurato che il campo DroppedAt (probabile timestamp di cancellazione) sia impostato dopo l'eliminazione delle raccolte (<a href="https://github.com/milvus-io/milvus/pull/33767">#33767</a>).</li>
-<li>Corretto un problema che poteva causare una gestione non corretta delle dimensioni dei dati dei vettori binari da parte di Milvus<a href="https://github.com/milvus-io/milvus/pull/33751">(#33751</a>)</li>
-<li>Impedito che le credenziali sensibili di Kafka vengano registrate in testo normale<a href="https://github.com/milvus-io/milvus/pull/33694">(#33694</a>, <a href="https://github.com/milvus-io/milvus/pull/33747">#33747</a>).</li>
-<li>Assicurato che Milvus possa importare correttamente dati con campi vettoriali multipli.<a href="https://github.com/milvus-io/milvus/pull/33724">(#33724</a>)</li>
-<li>Migliorata l'affidabilità dell'importazione controllando l'esistenza di un lavoro di importazione prima dell'avvio.<a href="https://github.com/milvus-io/milvus/pull/33673">(#33673</a>)</li>
-<li>Migliorata la gestione dell'indice HNSW sparse (funzionalità interna)<a href="https://github.com/milvus-io/milvus/pull/33714">(#33714</a>)</li>
-<li>Pulita la memoria vettoriale per evitare perdite di memoria<a href="https://github.com/milvus-io/milvus/pull/33708">(#33708</a>)</li>
-<li>Assicurato un riscaldamento asincrono più fluido grazie alla correzione di un problema di blocco di stato.<a href="https://github.com/milvus-io/milvus/pull/33687">(#33687</a>)</li>
-<li>Risolto un bug che poteva causare risultati mancanti negli iteratori delle query.<a href="https://github.com/milvus-io/milvus/pull/33506">(#33506</a>)</li>
-<li>Corretto un bug che poteva causare una dimensione non uniforme dei segmenti di importazione (<a href="https://github.com/milvus-io/milvus/pull/33634">#33634</a>).</li>
-<li>Corretta la gestione della dimensione dei dati per i tipi bf16, fp16 e vettori binari<a href="https://github.com/milvus-io/milvus/pull/33488">(#33488</a>).</li>
-<li>Migliorata la stabilità risolvendo potenziali problemi con il compattatore L0<a href="https://github.com/milvus-io/milvus/pull/33564">(#33564</a>)</li>
-<li>Assicurato che gli aggiornamenti della configurazione dinamica siano riflessi correttamente nella cache.<a href="https://github.com/milvus-io/milvus/pull/33590">(#33590</a>)</li>
-<li>Migliorata l'accuratezza della metrica RootCoordQuotaStates (<a href="https://github.com/milvus-io/milvus/pull/33601">#33601</a>)</li>
-<li>Assicurata la segnalazione accurata del numero di entità caricate nella metrica<a href="https://github.com/milvus-io/milvus/pull/33522">(#33522</a>).</li>
-<li>Fornite informazioni più complete nei log delle eccezioni. <a href="https://github.com/milvus-io/milvus/pull/33396">(#33396</a>)</li>
-<li>Ottimizzata la pipeline di query rimuovendo il controllore di gruppo non necessario<a href="https://github.com/milvus-io/milvus/pull/33485">(#33485</a>)</li>
-<li>Utilizzato il percorso di archiviazione locale per un controllo più accurato della capacità del disco sul nodo indice.<a href="https://github.com/milvus-io/milvus/pull/33505">(#33505</a>)</li>
-<li>Corretta la possibilità che hasMoreResult restituisca false quando il numero di hit è superiore al limite<a href="https://github.com/milvus-io/milvus/pull/33642">(#33642</a>)</li>
-<li>Ritardato il caricamento dei bf nel delegatore per evitare che vengano caricati più volte quando il worker non ha più memoria<a href="https://github.com/milvus-io/milvus/pull/33650">(#33650</a>).</li>
+<h3 id="Bug-fixes" class="common-anchor-header">Bug fixes</h3><ul>
+<li>Fixed a bug that queryHook unable to recognize vector type (<a href="https://github.com/milvus-io/milvus/pull/33911">#33911</a>)</li>
+<li>Prevented use captured iteration variable partitionID (<a href="https://github.com/milvus-io/milvus/pull/33970">#33970</a>)</li>
+<li>Fixed a bug that may cause Milvus to be unable to create AutoIndex on binary and sparse vectors (<a href="https://github.com/milvus-io/milvus/pull/33867">#33867</a>)</li>
+<li>Fixed a bug that may cause indexnode to retry creating index on invalid index params of all vectors（<a href="https://github.com/milvus-io/milvus/pull/33878">#33878</a>)</li>
+<li>Fixed the bug that when loads and releases happen concurrently may crash the Server(<a href="https://github.com/milvus-io/milvus/pull/33699">#33699</a>)</li>
+<li>Improved cache consistency for configuration values (<a href="https://github.com/milvus-io/milvus/pull/33797">#33797</a>)</li>
+<li>Prevented possible data loss during deletion (<a href="https://github.com/milvus-io/milvus/pull/33821">#33821</a>)</li>
+<li>Ensured the DroppedAt field (likely deletion timestamp) is set after dropping collections(<a href="https://github.com/milvus-io/milvus/pull/33767">#33767</a>)</li>
+<li>Fixed an issue that might have caused Milvus to handle binary vector data sizes incorrectly(<a href="https://github.com/milvus-io/milvus/pull/33751">#33751</a>)</li>
+<li>Prevented sensitive Kafka credentials from being logged in plain text.(<a href="https://github.com/milvus-io/milvus/pull/33694">#33694</a>, <a href="https://github.com/milvus-io/milvus/pull/33747">#33747</a>)</li>
+<li>Ensured Milvus can correctly import data with multiple vector fields.(<a href="https://github.com/milvus-io/milvus/pull/33724">#33724</a>)</li>
+<li>Enhanced import reliability by checking if an import job exists before starting. (<a href="https://github.com/milvus-io/milvus/pull/33673">#33673</a>)</li>
+<li>Improved handling of the sparse HNSW index (internal functionality) (<a href="https://github.com/milvus-io/milvus/pull/33714">#33714</a>)</li>
+<li>Cleaned vector memory to avoid memory leak(<a href="https://github.com/milvus-io/milvus/pull/33708">#33708</a>)</li>
+<li>Ensured smoother asynchronous warmup by fixing a state lock issue.(<a href="https://github.com/milvus-io/milvus/pull/33687">#33687</a>)</li>
+<li>Addressed a bug that might have caused missing results in query iterators. (<a href="https://github.com/milvus-io/milvus/pull/33506">#33506</a>)</li>
+<li>Fixed a bug that might cause import segment size is uneven  (<a href="https://github.com/milvus-io/milvus/pull/33634">#33634</a>)</li>
+<li>Fixed incorrect data size handling for bf16, fp16, and binary vector types (<a href="https://github.com/milvus-io/milvus/pull/33488">#33488</a>)</li>
+<li>Improved stability by addressing potential issues with the L0 compactor(<a href="https://github.com/milvus-io/milvus/pull/33564">#33564</a>)</li>
+<li>Ensured dynamic configuration updates are reflected correctly in the cache. (<a href="https://github.com/milvus-io/milvus/pull/33590">#33590</a>)</li>
+<li>Improved the accuracy of the RootCoordQuotaStates metric  (<a href="https://github.com/milvus-io/milvus/pull/33601">#33601</a>)</li>
+<li>Ensured accurate reporting of the number of loaded entities in metric(<a href="https://github.com/milvus-io/milvus/pull/33522">#33522</a>)</li>
+<li>Provided more complete information in exception logs.  (<a href="https://github.com/milvus-io/milvus/pull/33396">#33396</a>)</li>
+<li>Optimized query pipeline by removing unnecessary group checker (<a href="https://github.com/milvus-io/milvus/pull/33485">#33485</a>)</li>
+<li>Used the local storage path for a more accurate disk capacity check on the index node. (<a href="https://github.com/milvus-io/milvus/pull/33505">#33505</a>)</li>
+<li>Corrected hasMoreResult may return false when hit number larger than limit (<a href="https://github.com/milvus-io/milvus/pull/33642">#33642</a>)</li>
+<li>Delayed load bf in delegator to prevent bfs been loaded over and over again when worker has no more memory (<a href="https://github.com/milvus-io/milvus/pull/33650">#33650</a>)- Fixed a bug that queryHook unable to recognize vector type (<a href="https://github.com/milvus-io/milvus/pull/33911">#33911</a>)</li>
+<li>Prevented use captured iteration variable partitionID (<a href="https://github.com/milvus-io/milvus/pull/33970">#33970</a>)</li>
+<li>Fixed a bug that may cause Milvus to be unable to create AutoIndex on binary and sparse vectors (<a href="https://github.com/milvus-io/milvus/pull/33867">#33867</a>)</li>
+<li>Fixed a bug that may cause indexnode to retry creating index on invalid index params of all vectors（<a href="https://github.com/milvus-io/milvus/pull/33878">#33878</a>)</li>
+<li>Fixed the bug that when loads and releases happen concurrently may crash the Server(<a href="https://github.com/milvus-io/milvus/pull/33699">#33699</a>)</li>
+<li>Improved cache consistency for configuration values (<a href="https://github.com/milvus-io/milvus/pull/33797">#33797</a>)</li>
+<li>Prevented possible data loss during deletion (<a href="https://github.com/milvus-io/milvus/pull/33821">#33821</a>)</li>
+<li>Ensured the DroppedAt field (likely deletion timestamp) is set after dropping collections(<a href="https://github.com/milvus-io/milvus/pull/33767">#33767</a>)</li>
+<li>Fixed an issue that might have caused Milvus to handle binary vector data sizes incorrectly(<a href="https://github.com/milvus-io/milvus/pull/33751">#33751</a>)</li>
+<li>Prevented sensitive Kafka credentials from being logged in plain text.(<a href="https://github.com/milvus-io/milvus/pull/33694">#33694</a>, <a href="https://github.com/milvus-io/milvus/pull/33747">#33747</a>)</li>
+<li>Ensured Milvus can correctly import data with multiple vector fields.(<a href="https://github.com/milvus-io/milvus/pull/33724">#33724</a>)</li>
+<li>Enhanced import reliability by checking if an import job exists before starting. (<a href="https://github.com/milvus-io/milvus/pull/33673">#33673</a>)</li>
+<li>Improved handling of the sparse HNSW index (internal functionality) (<a href="https://github.com/milvus-io/milvus/pull/33714">#33714</a>)</li>
+<li>Cleaned vector memory to avoid memory leak(<a href="https://github.com/milvus-io/milvus/pull/33708">#33708</a>)</li>
+<li>Ensured smoother asynchronous warmup by fixing a state lock issue.(<a href="https://github.com/milvus-io/milvus/pull/33687">#33687</a>)</li>
+<li>Addressed a bug that might have caused missing results in query iterators. (<a href="https://github.com/milvus-io/milvus/pull/33506">#33506</a>)</li>
+<li>Fixed a bug that might cause import segment size is uneven  (<a href="https://github.com/milvus-io/milvus/pull/33634">#33634</a>)</li>
+<li>Fixed incorrect data size handling for bf16, fp16, and binary vector types (<a href="https://github.com/milvus-io/milvus/pull/33488">#33488</a>)</li>
+<li>Improved stability by addressing potential issues with the L0 compactor(<a href="https://github.com/milvus-io/milvus/pull/33564">#33564</a>)</li>
+<li>Ensured dynamic configuration updates are reflected correctly in the cache. (<a href="https://github.com/milvus-io/milvus/pull/33590">#33590</a>)</li>
+<li>Improved the accuracy of the RootCoordQuotaStates metric  (<a href="https://github.com/milvus-io/milvus/pull/33601">#33601</a>)</li>
+<li>Ensured accurate reporting of the number of loaded entities in metric(<a href="https://github.com/milvus-io/milvus/pull/33522">#33522</a>)</li>
+<li>Provided more complete information in exception logs.  (<a href="https://github.com/milvus-io/milvus/pull/33396">#33396</a>)</li>
+<li>Optimized query pipeline by removing unnecessary group checker (<a href="https://github.com/milvus-io/milvus/pull/33485">#33485</a>)</li>
+<li>Used the local storage path for a more accurate disk capacity check on the index node. (<a href="https://github.com/milvus-io/milvus/pull/33505">#33505</a>)</li>
+<li>Corrected hasMoreResult may return false when hit number larger than limit (<a href="https://github.com/milvus-io/milvus/pull/33642">#33642</a>)</li>
+<li>Delayed load bf in delegator to prevent bfs been loaded over and over again when worker has no more memory (<a href="https://github.com/milvus-io/milvus/pull/33650">#33650</a>)</li>
 </ul>
 <h2 id="v244" class="common-anchor-header">v2.4.4<button data-href="#v244" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -771,27 +847,27 @@ title: Note di rilascio
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Data di rilascio: 31 maggio 2024</p>
+    </button></h2><p>Release date: May 31, 2024</p>
 <table>
 <thead>
-<tr><th>Versione Milvus</th><th>Versione dell'SDK Python</th><th>Versione SDK Java</th><th>Versione SDK Node.js</th></tr>
+<tr><th>Milvus version</th><th>Python SDK version</th><th>Java SDK version</th><th>Node.js SDK version</th></tr>
 </thead>
 <tbody>
 <tr><td>2.4.4</td><td>2.4.3</td><td>2.4.1</td><td>2.4.2</td></tr>
 </tbody>
 </table>
-<p>Milvus v2.4.4 include diverse correzioni di bug critici e miglioramenti volti a migliorare le prestazioni e la stabilità. In particolare, è stato <strong>risolto un problema critico a causa del quale i registri delle statistiche degli inserti di massa non venivano raccolti in modo corretto</strong>, compromettendo potenzialmente l'integrità dei dati. <strong>Consigliamo vivamente a tutti gli utenti della versione 2.4 di effettuare l'aggiornamento a questa versione per beneficiare di queste correzioni.</strong></p>
-<p><strong>Se utilizzate bulk insert, aggiornate alla v2.4.4 il prima possibile per garantire l'integrità dei dati.</strong></p>
-<h3 id="Critical-bug-fixes" class="common-anchor-header">Correzioni di bug critici</h3><ul>
-<li>Compilazione dell'ID del log delle statistiche e convalida della sua correttezza<a href="https://github.com/milvus-io/milvus/pull/33478">(#33478</a>)</li>
+<p>Milvus v2.4.4 includes several critical bug fixes and improvements aimed at enhancing performance and stability. Notably, we’ve <strong>resolved a critical issue where bulk insert statistics logs were incorrectly garbage collected</strong>, potentially affecting data integrity. <strong>We strongly recommend all v2.4 users upgrade to this version to benefit from these fixes.</strong></p>
+<p><strong>If you are using bulk insert, upgrade to v2.4.4 at the earliest opportunity for data integrity.</strong></p>
+<h3 id="Critical-bug-fixes" class="common-anchor-header">Critical bug fixes</h3><ul>
+<li>Filled stats log ID and validated its correctness (<a href="https://github.com/milvus-io/milvus/pull/33478">#33478</a>)</li>
 </ul>
-<h3 id="Improvements" class="common-anchor-header">Miglioramenti</h3><ul>
-<li>Aggiornato il set di bit per ARM SVE<a href="https://github.com/milvus-io/milvus/pull/33440">(#33440</a>)</li>
-<li>Abilitata la compilazione di Milvus con GCC-13<a href="https://github.com/milvus-io/milvus/pull/33441">(#33441</a>)</li>
+<h3 id="Improvements" class="common-anchor-header">Improvements</h3><ul>
+<li>Upgraded bitset for ARM SVE (<a href="https://github.com/milvus-io/milvus/pull/33440">#33440</a>)</li>
+<li>Enabled Milvus compilation with GCC-13 (<a href="https://github.com/milvus-io/milvus/pull/33441">#33441</a>)</li>
 </ul>
-<h3 id="Bug-fixes" class="common-anchor-header">Correzioni di bug</h3><ul>
-<li>Visualizzazione di collezioni vuote quando tutti i privilegi sono concessi<a href="https://github.com/milvus-io/milvus/pull/33454">(#33454</a>)</li>
-<li>Assicurato il download e l'installazione di CMake per la piattaforma corrente, non solo x86_64<a href="https://github.com/milvus-io/milvus/pull/33439">(#33439</a>)</li>
+<h3 id="Bug-fixes" class="common-anchor-header">Bug fixes</h3><ul>
+<li>Displayed empty collections when all privilege is granted (<a href="https://github.com/milvus-io/milvus/pull/33454">#33454</a>)</li>
+<li>Ensured CMake downloads and installs for the current platform, not just x86_64 (<a href="https://github.com/milvus-io/milvus/pull/33439">#33439</a>)</li>
 </ul>
 <h2 id="v243" class="common-anchor-header">v2.4.3<button data-href="#v243" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -808,119 +884,119 @@ title: Note di rilascio
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Data di rilascio: 29 maggio 2024</p>
+    </button></h2><p>Release date: May 29, 2024</p>
 <table>
 <thead>
-<tr><th>Versione di Milvus</th><th>Versione dell'SDK Python</th><th>Versione dell'SDK Java</th><th>Versione SDK Node.js</th></tr>
+<tr><th>Milvus version</th><th>Python SDK version</th><th>Java SDK version</th><th>Node.js SDK version</th></tr>
 </thead>
 <tbody>
 <tr><td>2.4.3</td><td>2.4.3</td><td>2.4.1</td><td>2.4.2</td></tr>
 </tbody>
 </table>
-<p>La versione 2.4.3 di Milvus ha introdotto una serie di funzionalità, miglioramenti e correzioni di bug per aumentare le prestazioni e l'affidabilità. Tra i miglioramenti più significativi, il supporto per l'inserimento massivo di vettori float sparsi e l'accelerazione ottimizzata del filtro bloom. I miglioramenti riguardano diverse aree, dagli aggiornamenti della configurazione dinamica all'ottimizzazione dell'uso della memoria. Le correzioni di bug hanno affrontato problemi critici come gli scenari di panico e hanno garantito un funzionamento più fluido del sistema. Questa release sottolinea il costante impegno di Milvus nel migliorare le funzionalità, ottimizzare le prestazioni e offrire un'esperienza utente solida.</p>
-<h3 id="Features" class="common-anchor-header">Caratteristiche</h3><ul>
-<li>Supporto dell'inserimento massivo di vettori float sparsi per binlog/json/parquet<a href="https://github.com/milvus-io/milvus/pull/32649">(#32649</a>)</li>
+<p>Milvus version 2.4.3 introduced a host of features, improvements, and bug fixes to elevate performance and reliability. Notable enhancements included support for sparse float vector bulk insert and optimized bloom filter acceleration. Improvements covered various areas, from dynamic configuration updates to memory usage optimization. Bug fixes addressed critical issues like panic scenarios and ensured smoother system operations. This release underscored Milvus’s ongoing commitment to enhancing functionality, optimizing performance, and delivering a robust user experience.</p>
+<h3 id="Features" class="common-anchor-header">Features</h3><ul>
+<li>Supported sparse float vector bulk insert for binlog/json/parquet (<a href="https://github.com/milvus-io/milvus/pull/32649">#32649</a>)</li>
 </ul>
-<h3 id="Improvements" class="common-anchor-header">Miglioramenti</h3><ul>
-<li>Implementato il canale di sorveglianza Datacoord/nodo basato su RPC<a href="https://github.com/milvus-io/milvus/pull/32036">(#32036</a>)</li>
-<li>Ottimizzato il filtro bloom per accelerare il filtraggio delle cancellazioni<a href="https://github.com/milvus-io/milvus/pull/32642">(#32642</a>, <a href="https://github.com/milvus-io/milvus/pull/33329">#33329</a>, <a href="https://github.com/milvus-io/milvus/pull/33284">#33284</a>)</li>
-<li>Caricamento dei dati grezzi tramite mmap se l'indice scalare non ha dati grezzi<a href="https://github.com/milvus-io/milvus/pull/33317">(#33317</a>)</li>
-<li>Sincronizzata la configurazione di milvus in milvus.yaml<a href="https://github.com/milvus-io/milvus/pull/33322">(#33322</a>, <a href="https://github.com/milvus-io/milvus/pull/32920">#32920</a>, <a href="https://github.com/milvus-io/milvus/pull/32857">#32857</a>, <a href="https://github.com/milvus-io/milvus/pull/32946">#32946</a>)</li>
-<li>Aggiornata la versione di knowhere<a href="https://github.com/milvus-io/milvus/pull/33310">(#33310</a>, <a href="https://github.com/milvus-io/milvus/pull/32931">#32931</a>, <a href="https://github.com/milvus-io/milvus/pull/33043">#33043</a>)</li>
-<li>Abilitato l'aggiornamento dinamico della politica del bilanciatore in QueryCoord<a href="https://github.com/milvus-io/milvus/pull/33272">(#33272</a>)</li>
-<li>Utilizzato un logger precostituito nel buffer di scrittura per ridurre al minimo l'allocazione del logger (<a href="https://github.com/milvus-io/milvus/pull/33304">#33304</a>)</li>
-<li>Migliorato il controllo dei parametri<a href="https://github.com/milvus-io/milvus/pull/32777">(#32777</a>, <a href="https://github.com/milvus-io/milvus/pull/33271">#33271</a>, <a href="https://github.com/milvus-io/milvus/pull/33218">#33218</a>)</li>
-<li>Aggiunto un parametro per ignorare gli ID dei messaggi errati nel checkpoint<a href="https://github.com/milvus-io/milvus/pull/33249">(#33249</a>)</li>
-<li>Aggiunta una configurazione per controllare la gestione dei fallimenti di inizializzazione per i plugin<a href="https://github.com/milvus-io/milvus/pull/32680">(#32680</a>)</li>
-<li>Aggiunta la configurazione della coerenza del calcolo dei punteggi per knowhere<a href="https://github.com/milvus-io/milvus/pull/32997">(#32997</a>)</li>
-<li>Introdotta un'opzione di configurazione per controllare l'inizializzazione dei permessi dei ruoli pubblici (<a href="https://github.com/milvus-io/milvus/pull/33174">#33174</a>)</li>
-<li>Ottimizzato l'uso della memoria durante la lettura dei campi<a href="https://github.com/milvus-io/milvus/pull/33196">(#33196</a>)</li>
-<li>Raffinata l'implementazione di Channel Manager v2<a href="https://github.com/milvus-io/milvus/pull/33172">(#33172</a>, <a href="https://github.com/milvus-io/milvus/pull/33121">#33121</a>, <a href="https://github.com/milvus-io/milvus/pull/33014">#33014</a>)</li>
-<li>Aggiunta una funzione per tracciare la dimensione dei dati in memoria per binlog<a href="https://github.com/milvus-io/milvus/pull/33025">(#33025</a>)</li>
-<li>Aggiunte metriche per le dimensioni dei file indice dei segmenti<a href="https://github.com/milvus-io/milvus/pull/32979">(#32979</a>, <a href="https://github.com/milvus-io/milvus/pull/33305">#33305</a>)</li>
-<li>Sostituito Delete con DeletePartialMatch per rimuovere le metriche<a href="https://github.com/milvus-io/milvus/pull/33029">(#33029</a>)</li>
-<li>Ottenuta la dimensione dei dati relativi in base al tipo di segmento<a href="https://github.com/milvus-io/milvus/pull/33017">(#33017</a>)</li>
-<li>Pulite le informazioni sui nodi dei canali nel meta store<a href="https://github.com/milvus-io/milvus/pull/32988">(#32988</a>)</li>
-<li>Rimosso il rootcoord dal broker dei datanodi (<a href="https://github.com/milvus-io/milvus/pull/32818">#32818</a>)</li>
-<li>Abilitato il caricamento in batch (<a href="https://github.com/milvus-io/milvus/pull/32788">#32788</a>)</li>
-<li>Cambiato il numero di partizione predefinito a 16 quando si usa la chiave di partizione (<a href="https://github.com/milvus-io/milvus/pull/32950">#32950</a>)</li>
-<li>Migliorate le prestazioni di riduzione delle query top-k molto grandi (<a href="https://github.com/milvus-io/milvus/pull/32871">#32871</a>)</li>
-<li>Utilizzata la capacità di TestLocations per accelerare la scrittura e la compattazione<a href="https://github.com/milvus-io/milvus/pull/32948">(#32948</a>)</li>
-<li>Ottimizzato il pool di parser dei piani per evitare ricicli inutili (<a href="https://github.com/milvus-io/milvus/pull/32869">#32869</a>)</li>
-<li>Migliorata la velocità di caricamento (<a href="https://github.com/milvus-io/milvus/pull/32898">#32898</a>)</li>
-<li>Utilizzato il livello di consistenza predefinito della raccolta per restv2<a href="https://github.com/milvus-io/milvus/pull/32956">(#32956</a>)</li>
-<li>Aggiunta la risposta ai costi per l'API Rest (<a href="https://github.com/milvus-io/milvus/pull/32620">#32620</a>)</li>
-<li>Abilitata la politica di bilanciamento esclusivo dei canali (<a href="https://github.com/milvus-io/milvus/pull/32911">#32911</a>)</li>
-<li>Esposta l'API describedatabase nel proxy (<a href="https://github.com/milvus-io/milvus/pull/32732">#32732</a>)</li>
-<li>Utilizzata la mappatura coll2replica quando si ottiene RG per collezione<a href="https://github.com/milvus-io/milvus/pull/32892">(#32892</a>)</li>
-<li>Aggiunto un maggiore tracciamento per la ricerca e la query<a href="https://github.com/milvus-io/milvus/pull/32734">(#32734</a>)</li>
-<li>Supportata la configurazione dinamica per la traccia di opentelemetria<a href="https://github.com/milvus-io/milvus/pull/32169">(#32169</a>)</li>
-<li>Evitata l'iterazione sui risultati dei canali quando si aggiorna la leaderview<a href="https://github.com/milvus-io/milvus/pull/32887">(#32887</a>)</li>
-<li>Ottimizzata la gestione degli offset vettoriali per il parquet<a href="https://github.com/milvus-io/milvus/pull/32822">(#32822</a>)</li>
-<li>Migliorato il filtraggio dei segmenti dei datacoord con la raccolta<a href="https://github.com/milvus-io/milvus/pull/32831">(#32831</a>)</li>
-<li>Regolato il livello e la frequenza dei log (<a href="https://github.com/milvus-io/milvus/pull/33042">#33042</a>, <a href="https://github.com/milvus-io/milvus/pull/32838">#32838</a>, <a href="https://github.com/milvus-io/milvus/pull/33337">#33337</a>)</li>
-<li>Abilitato l'arresto del bilanciamento dopo che questo era stato sospeso<a href="https://github.com/milvus-io/milvus/pull/32812">(#32812</a>)</li>
-<li>Aggiornata la cache del leader dello shard quando la posizione del leader è cambiata<a href="https://github.com/milvus-io/milvus/pull/32470">(#32470</a>)</li>
-<li>Rimossi API e campi deprecati<a href="https://github.com/milvus-io/milvus/pull/32808">(#32808</a>, <a href="https://github.com/milvus-io/milvus/pull/32704">#32704</a>)</li>
-<li>Aggiunto metautil.channel per convertire i confronti tra stringhe in int<a href="https://github.com/milvus-io/milvus/pull/32749">(#32749</a>)</li>
-<li>Aggiunte informazioni sul tipo per il messaggio di errore dello scrittore di payload e il log quando querynode ha trovato una nuova raccolta<a href="https://github.com/milvus-io/milvus/pull/32522">(#32522</a>)</li>
-<li>Controllato il numero di partizione quando si crea una raccolta con una chiave di partizione<a href="https://github.com/milvus-io/milvus/pull/32670">(#32670</a>)</li>
-<li>Rimosso il segmento legacy l0 se l'orologio fallisce<a href="https://github.com/milvus-io/milvus/pull/32725">(#32725</a>)</li>
-<li>Migliorata la stampa del tipo di richiesta<a href="https://github.com/milvus-io/milvus/pull/33319">(#33319</a>)</li>
-<li>Controllato che i dati del campo dell'array fossero nulli prima di ottenere il tipo<a href="https://github.com/milvus-io/milvus/pull/33311">(#33311</a>)</li>
-<li>Restituito errore quando l'operazione di avvio Delete/AddNode del nodo non è riuscita<a href="https://github.com/milvus-io/milvus/pull/33258">(#33258</a>)</li>
-<li>Consentito l'aggiornamento dell'ID del server del datanode (<a href="https://github.com/milvus-io/milvus/pull/31597">#31597</a>)</li>
-<li>Unificata la pulizia delle metriche del querynode nella collection release<a href="https://github.com/milvus-io/milvus/pull/32805">(#32805</a>)</li>
-<li>Corretta la versione errata della configurazione dell'indice automatico scalare<a href="https://github.com/milvus-io/milvus/pull/32795">(#32795</a>)</li>
-<li>Raffinato il controllo dei parametri dell'indice per la creazione/alterazione dell'indice<a href="https://github.com/milvus-io/milvus/pull/32712">(#32712</a>)</li>
-<li>Rimosso il recupero delle repliche ridondanti<a href="https://github.com/milvus-io/milvus/pull/32985">(#32985</a>)</li>
-<li>Abilitata la meta tabella dei canali per scrivere più di 200k segmenti<a href="https://github.com/milvus-io/milvus/pull/33300">(#33300</a>)</li>
+<h3 id="Improvements" class="common-anchor-header">Improvements</h3><ul>
+<li>Implemented Datacoord/node watch channel based on RPC (<a href="https://github.com/milvus-io/milvus/pull/32036">#32036</a>)</li>
+<li>Optimized bloom filter to accelerate delete filtering (<a href="https://github.com/milvus-io/milvus/pull/32642">#32642</a>, <a href="https://github.com/milvus-io/milvus/pull/33329">#33329</a>, <a href="https://github.com/milvus-io/milvus/pull/33284">#33284</a>)</li>
+<li>Loaded raw data via mmap if scalar index did not have raw data (<a href="https://github.com/milvus-io/milvus/pull/33317">#33317</a>)</li>
+<li>Synced milvus config to milvus.yaml (<a href="https://github.com/milvus-io/milvus/pull/33322">#33322</a>, <a href="https://github.com/milvus-io/milvus/pull/32920">#32920</a>, <a href="https://github.com/milvus-io/milvus/pull/32857">#32857</a>, <a href="https://github.com/milvus-io/milvus/pull/32946">#32946</a>)</li>
+<li>Updated knowhere version (<a href="https://github.com/milvus-io/milvus/pull/33310">#33310</a>, <a href="https://github.com/milvus-io/milvus/pull/32931">#32931</a>, <a href="https://github.com/milvus-io/milvus/pull/33043">#33043</a>)</li>
+<li>Enabled dynamic updating of balancer policy in QueryCoord (<a href="https://github.com/milvus-io/milvus/pull/33272">#33272</a>)</li>
+<li>Used a pre-built logger in the write buffer to minimize logger allocation (<a href="https://github.com/milvus-io/milvus/pull/33304">#33304</a>)</li>
+<li>Improved parameter checking (<a href="https://github.com/milvus-io/milvus/pull/32777">#32777</a>, <a href="https://github.com/milvus-io/milvus/pull/33271">#33271</a>, <a href="https://github.com/milvus-io/milvus/pull/33218">#33218</a>)</li>
+<li>Added a parameter to ignore incorrect message IDs in the checkpoint (<a href="https://github.com/milvus-io/milvus/pull/33249">#33249</a>)</li>
+<li>Added config to control initialization failure handling for plugins (<a href="https://github.com/milvus-io/milvus/pull/32680">#32680</a>)</li>
+<li>Added score compute consistency config for knowhere (<a href="https://github.com/milvus-io/milvus/pull/32997">#32997</a>)</li>
+<li>Introduced a configuration option to control the initialization of public role permissions (<a href="https://github.com/milvus-io/milvus/pull/33174">#33174</a>)</li>
+<li>Optimized memory usage when reading fields (<a href="https://github.com/milvus-io/milvus/pull/33196">#33196</a>)</li>
+<li>Refined implementation of Channel Manager v2 (<a href="https://github.com/milvus-io/milvus/pull/33172">#33172</a>, <a href="https://github.com/milvus-io/milvus/pull/33121">#33121</a>, <a href="https://github.com/milvus-io/milvus/pull/33014">#33014</a>)</li>
+<li>Added feature to track the size of data in memory for binlog (<a href="https://github.com/milvus-io/milvus/pull/33025">#33025</a>)</li>
+<li>Added metrics for segment index files size (<a href="https://github.com/milvus-io/milvus/pull/32979">#32979</a>, <a href="https://github.com/milvus-io/milvus/pull/33305">#33305</a>)</li>
+<li>Replaced Delete with DeletePartialMatch to remove metrics (<a href="https://github.com/milvus-io/milvus/pull/33029">#33029</a>)</li>
+<li>Got related data size according to segment type (<a href="https://github.com/milvus-io/milvus/pull/33017">#33017</a>)</li>
+<li>Cleaned channel node info in meta store (<a href="https://github.com/milvus-io/milvus/pull/32988">#32988</a>)</li>
+<li>Removed rootcoord from datanode broker (<a href="https://github.com/milvus-io/milvus/pull/32818">#32818</a>)</li>
+<li>Enabled batch uploading (<a href="https://github.com/milvus-io/milvus/pull/32788">#32788</a>)</li>
+<li>Changed default partition number to 16 when using partition key (<a href="https://github.com/milvus-io/milvus/pull/32950">#32950</a>)</li>
+<li>Improved reduce performance on very large top-k queries (<a href="https://github.com/milvus-io/milvus/pull/32871">#32871</a>)</li>
+<li>Utilized TestLocations ability to accelerate write &amp; compaction (<a href="https://github.com/milvus-io/milvus/pull/32948">#32948</a>)</li>
+<li>Optimized plan parser pool to avoid unnecessary recycling (<a href="https://github.com/milvus-io/milvus/pull/32869">#32869</a>)</li>
+<li>Improved load speed (<a href="https://github.com/milvus-io/milvus/pull/32898">#32898</a>)</li>
+<li>Used collection default consistency level for restv2 (<a href="https://github.com/milvus-io/milvus/pull/32956">#32956</a>)</li>
+<li>Added cost response for the rest API (<a href="https://github.com/milvus-io/milvus/pull/32620">#32620</a>)</li>
+<li>Enabled channel exclusive balance policy (<a href="https://github.com/milvus-io/milvus/pull/32911">#32911</a>)</li>
+<li>Exposed describedatabase API in proxy (<a href="https://github.com/milvus-io/milvus/pull/32732">#32732</a>)</li>
+<li>Utilized coll2replica mapping when getting RG by collection (<a href="https://github.com/milvus-io/milvus/pull/32892">#32892</a>)</li>
+<li>Added more tracing for search &amp; query (<a href="https://github.com/milvus-io/milvus/pull/32734">#32734</a>)</li>
+<li>Supported dynamic config for opentelemetry trace (<a href="https://github.com/milvus-io/milvus/pull/32169">#32169</a>)</li>
+<li>Avoided iteration over channel results when updating leaderview (<a href="https://github.com/milvus-io/milvus/pull/32887">#32887</a>)</li>
+<li>Optimized vector offsets handling for parquet (<a href="https://github.com/milvus-io/milvus/pull/32822">#32822</a>)</li>
+<li>Improved datacoord segment filtering with collection (<a href="https://github.com/milvus-io/milvus/pull/32831">#32831</a>)</li>
+<li>Adjusted log level and frequency (<a href="https://github.com/milvus-io/milvus/pull/33042">#33042</a>, <a href="https://github.com/milvus-io/milvus/pull/32838">#32838</a>, <a href="https://github.com/milvus-io/milvus/pull/33337">#33337</a>)</li>
+<li>Enabled stopping balance after balance had been suspended (<a href="https://github.com/milvus-io/milvus/pull/32812">#32812</a>)</li>
+<li>Updated shard leader cache when leader location changed (<a href="https://github.com/milvus-io/milvus/pull/32470">#32470</a>)</li>
+<li>Removed deprecated API and field (<a href="https://github.com/milvus-io/milvus/pull/32808">#32808</a>, <a href="https://github.com/milvus-io/milvus/pull/32704">#32704</a>)</li>
+<li>Added metautil.channel to convert string compare to int (<a href="https://github.com/milvus-io/milvus/pull/32749">#32749</a>)</li>
+<li>Added type info for payload writer error message and log when querynode found new collection (<a href="https://github.com/milvus-io/milvus/pull/32522">#32522</a>)</li>
+<li>Checked partition number when creating collection with partition key (<a href="https://github.com/milvus-io/milvus/pull/32670">#32670</a>)</li>
+<li>Removed legacy l0 segment if watch failed (<a href="https://github.com/milvus-io/milvus/pull/32725">#32725</a>)</li>
+<li>Improved printing type of request (<a href="https://github.com/milvus-io/milvus/pull/33319">#33319</a>)</li>
+<li>Checked array field data was nil before getting the type (<a href="https://github.com/milvus-io/milvus/pull/33311">#33311</a>)</li>
+<li>Returned error when startup Delete/AddNode node operation failed (<a href="https://github.com/milvus-io/milvus/pull/33258">#33258</a>)</li>
+<li>Allowed datanode’s server ID to be updated (<a href="https://github.com/milvus-io/milvus/pull/31597">#31597</a>)</li>
+<li>Unified querynode metrics cleanup in collection release (<a href="https://github.com/milvus-io/milvus/pull/32805">#32805</a>)</li>
+<li>Fixed scalar auto index config incorrect version (<a href="https://github.com/milvus-io/milvus/pull/32795">#32795</a>)</li>
+<li>Refined index param check for create/alter index (<a href="https://github.com/milvus-io/milvus/pull/32712">#32712</a>)</li>
+<li>Removed redundant replica recovery (<a href="https://github.com/milvus-io/milvus/pull/32985">#32985</a>)</li>
+<li>Enabled channel meta table to write more than 200k segments (<a href="https://github.com/milvus-io/milvus/pull/33300">#33300</a>)</li>
 </ul>
-<h3 id="Bug-fixes" class="common-anchor-header">Correzioni di bug</h3><ul>
-<li>Corretto il panico quando il database non esisteva nell'intercettore del limite di velocità<a href="https://github.com/milvus-io/milvus/pull/33308">(#33308</a>)</li>
-<li>Corretto il fallimento della raccolta delle metriche di quotacenter a causa di parametri errati<a href="https://github.com/milvus-io/milvus/pull/33399">(#33399</a>)</li>
-<li>Corretto il panico se processactivestandby restituiva un errore<a href="https://github.com/milvus-io/milvus/pull/33372">(#33372</a>)</li>
-<li>Corretto il troncamento dei risultati della ricerca in restful v2 quando nq &gt; 1<a href="https://github.com/milvus-io/milvus/pull/33363">(#33363</a>)</li>
-<li>Aggiunto il campo del nome del database per le operazioni di ruolo in restful v2<a href="https://github.com/milvus-io/milvus/pull/33291">(#33291</a>)</li>
-<li>Corretto il limite di velocità globale che non funziona<a href="https://github.com/milvus-io/milvus/pull/33336">(#33336</a>)</li>
-<li>Corretto il panico causato dal fallimento della costruzione dell'indice<a href="https://github.com/milvus-io/milvus/pull/33314">(#33314</a>)</li>
-<li>Aggiunta la convalida per il vettore sparse in segcore per garantire la legalità<a href="https://github.com/milvus-io/milvus/pull/33312">(#33312</a>)</li>
-<li>Rimossa l'attività da syncmgr dopo il completamento dell'attività<a href="https://github.com/milvus-io/milvus/pull/33303">(#33303</a>)</li>
-<li>Corretto il fallimento del filtraggio della chiave di partizione durante l'importazione dei dati (<a href="https://github.com/milvus-io/milvus/pull/33277">#33277</a>)</li>
-<li>Corretta l'impossibilità di generare traceID quando si usa noop exporter<a href="https://github.com/milvus-io/milvus/pull/33208">(#33208</a>)</li>
-<li>Migliorato il recupero dei risultati delle query<a href="https://github.com/milvus-io/milvus/pull/33179">(#33179</a>)</li>
-<li>Segnato l'abbandono del checkpoint del canale per prevenire la perdita di metriche di ritardo del checkpoint<a href="https://github.com/milvus-io/milvus/pull/33201">(#33201</a>)</li>
-<li>Corretto il nodo di query che si blocca durante l'arresto dell'avanzamento<a href="https://github.com/milvus-io/milvus/pull/33154">(#33154</a>)</li>
-<li>Corretti i segmenti mancanti nella risposta di flush (<a href="https://github.com/milvus-io/milvus/pull/33061">#33061</a>)</li>
-<li>Rese idempotenti le operazioni di invio (<a href="https://github.com/milvus-io/milvus/pull/33053">#33053</a>)</li>
-<li>Allocata nuova slice per ogni batch nel lettore di streaming<a href="https://github.com/milvus-io/milvus/pull/33360">(#33360</a>)</li>
-<li>Pulito il nodo offline dal gruppo di risorse dopo il riavvio di QueryCoord<a href="https://github.com/milvus-io/milvus/pull/33233">(#33233</a>)</li>
-<li>Rimosso il compattatore l0 in completedCompactor<a href="https://github.com/milvus-io/milvus/pull/33216">(#33216</a>)</li>
-<li>Ripristinato il valore della quota quando si inizializza il limitatore<a href="https://github.com/milvus-io/milvus/pull/33152">(#33152</a>)</li>
-<li>Risolto il problema del superamento del limite di etcd (<a href="https://github.com/milvus-io/milvus/pull/33041">#33041</a>)</li>
-<li>Risolto il superamento del limite delle transazioni etcd a causa di troppi campi<a href="https://github.com/milvus-io/milvus/pull/33040">(#33040</a>)</li>
-<li>Rimosso il rientro di RLock in GetNumRowsOfPartition<a href="https://github.com/milvus-io/milvus/pull/33045">(#33045</a>)</li>
-<li>Avviato LeaderCacheObserver prima di SyncAll<a href="https://github.com/milvus-io/milvus/pull/33035">(#33035</a>)</li>
-<li>Abilitato il bilanciamento del canale di standby rilasciato (<a href="https://github.com/milvus-io/milvus/pull/32986">#32986</a>)</li>
-<li>Inizializzato il logger degli accessi prima dell'inizializzazione del server<a href="https://github.com/milvus-io/milvus/pull/32976">(#32976</a>)</li>
-<li>Il compattatore è in grado di cancellare i segmenti vuoti<a href="https://github.com/milvus-io/milvus/pull/32821">(#32821</a>)</li>
-<li>Riempito il numero di voce deltalog e l'intervallo di tempo nelle compattazioni l0<a href="https://github.com/milvus-io/milvus/pull/33004">(#33004</a>)</li>
-<li>Corretto l'arresto anomalo del proxy dovuto alla corsa dei dati della cache del leader dello shard<a href="https://github.com/milvus-io/milvus/pull/32971">(#32971</a>)</li>
-<li>Corretta l'unità di tempo per la metrica dell'indice di carico (<a href="https://github.com/milvus-io/milvus/pull/32935">#32935</a>)</li>
-<li>Corretto il problema per cui il segmento sul nodo di query in arresto non poteva essere rilasciato con successo<a href="https://github.com/milvus-io/milvus/pull/32929">(#32929</a>)</li>
-<li>Corretta la stima delle risorse dell'indice<a href="https://github.com/milvus-io/milvus/pull/32842">(#32842</a>)</li>
-<li>Impostazione del checkpoint del canale alla posizione delta<a href="https://github.com/milvus-io/milvus/pull/32878">(#32878</a>)</li>
-<li>Fatto in modo che syncmgr blocchi la chiave prima di restituire il futuro (<a href="https://github.com/milvus-io/milvus/pull/32865">#32865</a>)</li>
-<li>Assicurato che l'indice invertito avesse un solo segmento<a href="https://github.com/milvus-io/milvus/pull/32858">(#32858</a>)</li>
-<li>Corretto il trigger di compattazione che sceglie due segmenti identici<a href="https://github.com/milvus-io/milvus/pull/32800">(#32800</a>)</li>
-<li>Corretto il problema per cui il nome della partizione non poteva essere specificato nell'importazione di binlog<a href="https://github.com/milvus-io/milvus/pull/32730">(#32730</a>, <a href="https://github.com/milvus-io/milvus/pull/33027">#33027</a>)</li>
-<li>Rese opzionali le colonne dinamiche nell'importazione di parquet<a href="https://github.com/milvus-io/milvus/pull/32738">(#32738</a>)</li>
-<li>Saltato il controllo dell'ID automatico durante l'inserimento dei dati<a href="https://github.com/milvus-io/milvus/pull/32775">(#32775</a>)</li>
-<li>Convalidato il numero di righe per i dati del campo di inserimento con lo schema<a href="https://github.com/milvus-io/milvus/pull/32770">(#32770</a>)</li>
-<li>Aggiunti Wrapper e Keepalive per gli ID CTraceContext (<a href="https://github.com/milvus-io/milvus/pull/32746">#32746</a>)</li>
-<li>Corretto il problema per cui il nome del database non veniva trovato nel meta-oggetto datacoord<a href="https://github.com/milvus-io/milvus/pull/33412">(#33412</a>)</li>
-<li>Sincronizzato il segmento abbandonato per la partizione abbandonata (<a href="https://github.com/milvus-io/milvus/pull/33332">#33332</a>)</li>
-<li>Corretto il fallimento della raccolta delle metriche di quotaCenter a causa di parametri errati<a href="https://github.com/milvus-io/milvus/pull/33399">(#33399</a>)</li>
+<h3 id="Bug-fixes" class="common-anchor-header">Bug fixes</h3><ul>
+<li>Fixed panic when the database didn’t exist in the rate limit interceptor (<a href="https://github.com/milvus-io/milvus/pull/33308">#33308</a>)</li>
+<li>Fixed quotacenter metrics collection failure due to incorrect parameters (<a href="https://github.com/milvus-io/milvus/pull/33399">#33399</a>)</li>
+<li>Fixed panic if processactivestandby returned an error (<a href="https://github.com/milvus-io/milvus/pull/33372">#33372</a>)</li>
+<li>Fixed search result truncation in restful v2 when nq &gt; 1 (<a href="https://github.com/milvus-io/milvus/pull/33363">#33363</a>)</li>
+<li>Added database name field for role operations in restful v2 (<a href="https://github.com/milvus-io/milvus/pull/33291">#33291</a>)</li>
+<li>Fixed global rate limit not working (<a href="https://github.com/milvus-io/milvus/pull/33336">#33336</a>)</li>
+<li>Fixed panic caused by failure of building index (<a href="https://github.com/milvus-io/milvus/pull/33314">#33314</a>)</li>
+<li>Added validation for sparse vector in segcore to ensure legality (<a href="https://github.com/milvus-io/milvus/pull/33312">#33312</a>)</li>
+<li>Removed task from syncmgr after task completion (<a href="https://github.com/milvus-io/milvus/pull/33303">#33303</a>)</li>
+<li>Fixed partition key filtering failure during data import (<a href="https://github.com/milvus-io/milvus/pull/33277">#33277</a>)</li>
+<li>Fixed inability to generate traceID when using noop exporter (<a href="https://github.com/milvus-io/milvus/pull/33208">#33208</a>)</li>
+<li>Improved query results retrieval (<a href="https://github.com/milvus-io/milvus/pull/33179">#33179</a>)</li>
+<li>Marked channel checkpoint dropped to prevent checkpoint lag metrics leakage (<a href="https://github.com/milvus-io/milvus/pull/33201">#33201</a>)</li>
+<li>Fixed query node getting stuck during stopping progress (<a href="https://github.com/milvus-io/milvus/pull/33154">#33154</a>)</li>
+<li>Fixed missing segments in flush response (<a href="https://github.com/milvus-io/milvus/pull/33061">#33061</a>)</li>
+<li>Made submit operation idempotent (<a href="https://github.com/milvus-io/milvus/pull/33053">#33053</a>)</li>
+<li>Allocated new slice for each batch in streaming reader (<a href="https://github.com/milvus-io/milvus/pull/33360">#33360</a>)</li>
+<li>Cleaned offline node from resource group after QueryCoord restart (<a href="https://github.com/milvus-io/milvus/pull/33233">#33233</a>)</li>
+<li>Removed l0 compactor in completedCompactor (<a href="https://github.com/milvus-io/milvus/pull/33216">#33216</a>)</li>
+<li>Reset quota value when initializing the limiter (<a href="https://github.com/milvus-io/milvus/pull/33152">#33152</a>)</li>
+<li>Fixed issue where etcd limit was exceeded (<a href="https://github.com/milvus-io/milvus/pull/33041">#33041</a>)</li>
+<li>Resolved etcd transaction limit exceedance due to too many fields (<a href="https://github.com/milvus-io/milvus/pull/33040">#33040</a>)</li>
+<li>Removed RLock re-entry in GetNumRowsOfPartition (<a href="https://github.com/milvus-io/milvus/pull/33045">#33045</a>)</li>
+<li>Started LeaderCacheObserver before SyncAll (<a href="https://github.com/milvus-io/milvus/pull/33035">#33035</a>)</li>
+<li>Enabled balancing of released standby channel (<a href="https://github.com/milvus-io/milvus/pull/32986">#32986</a>)</li>
+<li>Initialized access logger before server initialization (<a href="https://github.com/milvus-io/milvus/pull/32976">#32976</a>)</li>
+<li>Made compactor capable of clearing empty segments (<a href="https://github.com/milvus-io/milvus/pull/32821">#32821</a>)</li>
+<li>Filled deltalog entry number and time range in l0 compactions (<a href="https://github.com/milvus-io/milvus/pull/33004">#33004</a>)</li>
+<li>Fixed proxy crash due to shard leader cache data race (<a href="https://github.com/milvus-io/milvus/pull/32971">#32971</a>)</li>
+<li>Corrected time unit for load index metric (<a href="https://github.com/milvus-io/milvus/pull/32935">#32935</a>)</li>
+<li>Fixed issue where segment on stopping query node couldn’t be released successfully (<a href="https://github.com/milvus-io/milvus/pull/32929">#32929</a>)</li>
+<li>Fixed index resource estimation (<a href="https://github.com/milvus-io/milvus/pull/32842">#32842</a>)</li>
+<li>Set channel checkpoint to delta position (<a href="https://github.com/milvus-io/milvus/pull/32878">#32878</a>)</li>
+<li>Made syncmgr lock key before returning future (<a href="https://github.com/milvus-io/milvus/pull/32865">#32865</a>)</li>
+<li>Ensured inverted index had only one segment (<a href="https://github.com/milvus-io/milvus/pull/32858">#32858</a>)</li>
+<li>Fixed compaction trigger choosing two identical segments (<a href="https://github.com/milvus-io/milvus/pull/32800">#32800</a>)</li>
+<li>Fixed issue where partition name could not be specified in binlog import (<a href="https://github.com/milvus-io/milvus/pull/32730">#32730</a>, <a href="https://github.com/milvus-io/milvus/pull/33027">#33027</a>)</li>
+<li>Made dynamic column optional in parquet import (<a href="https://github.com/milvus-io/milvus/pull/32738">#32738</a>)</li>
+<li>Skipped checking auto ID when inserting data (<a href="https://github.com/milvus-io/milvus/pull/32775">#32775</a>)</li>
+<li>Validated number of rows for insert field data with schema (<a href="https://github.com/milvus-io/milvus/pull/32770">#32770</a>)</li>
+<li>Added Wrapper and Keepalive for CTraceContext IDs (<a href="https://github.com/milvus-io/milvus/pull/32746">#32746</a>)</li>
+<li>Fixed issue where database name was not found in the datacoord meta object (<a href="https://github.com/milvus-io/milvus/pull/33412">#33412</a>)</li>
+<li>Synchronized dropped segment for dropped partition (<a href="https://github.com/milvus-io/milvus/pull/33332">#33332</a>)</li>
+<li>Fixed quotaCenter metrics collection failure due to incorrect parameters (<a href="https://github.com/milvus-io/milvus/pull/33399">#33399</a>)</li>
 </ul>
 <h2 id="v241" class="common-anchor-header">v2.4.1<button data-href="#v241" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -937,57 +1013,57 @@ title: Note di rilascio
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Data di rilascio: 6 maggio 2024</p>
+    </button></h2><p>Release date: May 6, 2024</p>
 <table>
 <thead>
-<tr><th>Versione Milvus</th><th>Versione dell'SDK Python</th><th>Versione dell'SDK Java</th><th>Versione SDK Node.js</th></tr>
+<tr><th>Milvus version</th><th>Python SDK version</th><th>Java SDK version</th><th>Node.js SDK version</th></tr>
 </thead>
 <tbody>
 <tr><td>2.4.1</td><td>2.4.1</td><td>2.4.0</td><td>2.4.2</td></tr>
 </tbody>
 </table>
-<p>La versione 2.4.1 di Milvus apporta numerosi miglioramenti e correzioni di bug che mirano a migliorare le prestazioni, l'osservabilità e la stabilità del software. Questi miglioramenti includono un'API dichiarativa per i gruppi di risorse, una funzionalità di inserimento massivo migliorata che supporta i tipi di dati vettoriali Float16/BFloat16, un meccanismo raffinato di garbage collection (GC) che riduce le operazioni di lista per la memorizzazione degli oggetti e altre modifiche relative all'ottimizzazione delle prestazioni. Inoltre, le correzioni dei bug risolvono problemi quali errori di compilazione, corrispondenze fuzzy fallite su caratteri newline, tipi di dati dei parametri errati per le interfacce RESTful e errori di BulkInsert su file numpy quando sono abilitati i campi dinamici.</p>
-<h3 id="Breaking-changes" class="common-anchor-header">Modifiche di rottura</h3><ul>
-<li>Interruzione del supporto per la cancellazione con un'espressione di filtro vuota.<a href="https://github.com/milvus-io/milvus/pull/32472">(#32472</a>)</li>
+<p>Milvus version 2.4.1 brings numerous improvements and bug fixes that aim to enhance the software’s performance, observability, and stability. These improvements include a declarative resource group API, enhanced bulk insert functionality that supports Float16/BFloat16 vector data types, a refined garbage collection (GC) mechanism that reduces list operations for object storage, and other changes related to performance optimizations. Additionally, bug fixes address issues such as compilation errors, failed fuzzy matches on newline characters, incorrect parameter datatypes for RESTful interfaces, and BulkInsert raising errors on numpy files when dynamic fields are enabled.</p>
+<h3 id="Breaking-changes" class="common-anchor-header">Breaking changes</h3><ul>
+<li>Discontinued support for delete with an empty filter expression. (<a href="https://github.com/milvus-io/milvus/pull/32472">#32472</a>)</li>
 </ul>
-<h3 id="Features" class="common-anchor-header">Caratteristiche</h3><ul>
-<li>Aggiunto il supporto per i tipi di dati vettoriali Float16/BFloat16 in BulkInert<a href="https://github.com/milvus-io/milvus/pull/32157">(#32157</a>).</li>
-<li>Miglioramento del vettore float sparse per supportare la ricerca iterativa a forza bruta e la ricerca per intervallo (<a href="https://github.com/milvus-io/milvus/pull/32635">#32635</a>)</li>
+<h3 id="Features" class="common-anchor-header">Features</h3><ul>
+<li>Added support for Float16/BFloat16 vector data types in bulk insert (<a href="https://github.com/milvus-io/milvus/pull/32157">#32157</a>)</li>
+<li>Enhanced sparse float vector to support brute force iterator search and range search (<a href="https://github.com/milvus-io/milvus/pull/32635">#32635</a>)</li>
 </ul>
-<h3 id="Improvements" class="common-anchor-header">Miglioramenti</h3><ul>
-<li>Aggiunta l'API dichiarativa per i gruppi di risorse<a href="https://github.com/milvus-io/milvus/pull/31930">(#31930</a>, <a href="https://github.com/milvus-io/milvus/pull/32297">#32297</a>, <a href="https://github.com/milvus-io/milvus/pull/32536">#32536</a>, <a href="https://github.com/milvus-io/milvus/pull/32666">#32666</a>)</li>
-<li>Riscritto l'osservatore delle collezioni in QueryCoord per renderlo guidato dai task (<a href="https://github.com/milvus-io/milvus/pull/32441">#32441</a>)</li>
-<li>Rifatto la struttura dei dati usata nel SyncManager di DataNode per ridurre l'uso della memoria e prevenire gli errori<a href="https://github.com/milvus-io/milvus/pull/32673">(#32673</a>).</li>
-<li>Rivista l'implementazione della garbage collection per minimizzare le operazioni di lista associate alla memorizzazione degli oggetti<a href="https://github.com/milvus-io/milvus/pull/31740">(#31740</a>)</li>
-<li>Ridotto l'uso della cpu quando il numero di raccolte è elevato<a href="https://github.com/milvus-io/milvus/pull/32245">(#32245</a>)</li>
-<li>Migliorata la gestione di milvus.yaml generando automaticamente le voci di configurazione rilevanti nel file milvus.yaml attraverso il codice<a href="https://github.com/milvus-io/milvus/pull/31832">(#31832</a>, <a href="https://github.com/milvus-io/milvus/pull/32357">#32357</a>)</li>
-<li>Migliorate le prestazioni della query recuperando i dati dopo aver eseguito la riduzione locale (<a href="https://github.com/milvus-io/milvus/pull/32346">#32346</a>).</li>
-<li>Aggiunta l'opzione WithBlock per la creazione del client etcd<a href="https://github.com/milvus-io/milvus/pull/32641">(#32641</a>)</li>
-<li>Utilizzato client_request_id specificato dal client come TraceID se fornito dal client<a href="https://github.com/milvus-io/milvus/pull/32264">(#32264</a>)</li>
-<li>Aggiunta l'etichetta db alle metriche per le operazioni di cancellazione e inserimento in blocco (<a href="https://github.com/milvus-io/milvus/pull/32611">#32611</a>)</li>
-<li>Aggiunta la logica per saltare la verifica attraverso la configurazione per le colonne AutoID e PartitionKey (<a href="https://github.com/milvus-io/milvus/pull/32592">#32592</a>)</li>
-<li>Raffinati gli errori relativi all'autenticazione<a href="https://github.com/milvus-io/milvus/pull/32253">(#32253</a>)</li>
-<li>Affinati i log degli errori per AllocSegmentID in DataCoord<a href="https://github.com/milvus-io/milvus/pull/32351">(#32351</a>, <a href="https://github.com/milvus-io/milvus/pull/32335">#32335</a>)</li>
-<li>Rimosse le metriche duplicate<a href="https://github.com/milvus-io/milvus/pull/32380">(#32380</a>, <a href="https://github.com/milvus-io/milvus/pull/32308">#32308</a>) e ripulite quelle inutilizzate<a href="https://github.com/milvus-io/milvus/pull/32404">(#32404</a>, <a href="https://github.com/milvus-io/milvus/pull/32515">#32515</a>).</li>
-<li>Aggiunta opzione di configurazione per controllare se imporre l'attivazione della funzione partitionKey (<a href="https://github.com/milvus-io/milvus/pull/32433">#32433</a>)</li>
-<li>Aggiunta un'opzione di configurazione per controllare la quantità massima di dati che possono essere inseriti in una singola richiesta (<a href="https://github.com/milvus-io/milvus/pull/32433">#32433</a>).</li>
-<li>Parallelizzare l'operazione applyDelete a livello di segmento per accelerare l'elaborazione dei messaggi Delete da parte del delegatore<a href="https://github.com/milvus-io/milvus/pull/32291">(#32291</a>)</li>
-<li>Usato l'indice<a href="https://github.com/milvus-io/milvus/pull/32232">(#32232</a>, <a href="https://github.com/milvus-io/milvus/pull/32505">#32505</a>, <a href="https://github.com/milvus-io/milvus/pull/32533">#32533</a>, <a href="https://github.com/milvus-io/milvus/pull/32595">#32595</a>) e l'add cache<a href="https://github.com/milvus-io/milvus/pull/32580">(#32580</a>) per accelerare le operazioni di filtraggio frequenti in QueryCoord.</li>
-<li>Riscritta la struttura dei dati<a href="https://github.com/milvus-io/milvus/pull/32273">(#32273</a>) e rifattorizzato il codice<a href="https://github.com/milvus-io/milvus/pull/32389">(#32389</a>) per accelerare le operazioni più comuni in DataCoord.</li>
-<li>Rimosso openblas da conan<a href="https://github.com/milvus-io/milvus/pull/32002">(#32002</a>).</li>
+<h3 id="Improvements" class="common-anchor-header">Improvements</h3><ul>
+<li>Added declarative resource group api (<a href="https://github.com/milvus-io/milvus/pull/31930">#31930</a>, <a href="https://github.com/milvus-io/milvus/pull/32297">#32297</a>, <a href="https://github.com/milvus-io/milvus/pull/32536">#32536</a>, <a href="https://github.com/milvus-io/milvus/pull/32666">#32666</a>)</li>
+<li>Rewrote the collection observer in QueryCoord to make it task-driven (<a href="https://github.com/milvus-io/milvus/pull/32441">#32441</a>)</li>
+<li>Refactored the data structure used in the SyncManager of DataNode to reduce memory usage and prevent errors (<a href="https://github.com/milvus-io/milvus/pull/32673">#32673</a>)</li>
+<li>Revised the implementation of garbage collection to minimize list operations associated with object storage (<a href="https://github.com/milvus-io/milvus/pull/31740">#31740</a>)</li>
+<li>Reduced the cpu usage when collection number is high (<a href="https://github.com/milvus-io/milvus/pull/32245">#32245</a>)</li>
+<li>Enhanced the management of milvus.yaml by automatically generating relevant configuration items in the milvus.yaml file through code (<a href="https://github.com/milvus-io/milvus/pull/31832">#31832</a>, <a href="https://github.com/milvus-io/milvus/pull/32357">#32357</a>)</li>
+<li>Enhanced the performance of the Query by retrieving the data after performing local reduction (<a href="https://github.com/milvus-io/milvus/pull/32346">#32346</a>)</li>
+<li>Added WithBlock option for etcd client creation (<a href="https://github.com/milvus-io/milvus/pull/32641">#32641</a>)</li>
+<li>Used client_request_id specified by the client as the TraceID if client provided (<a href="https://github.com/milvus-io/milvus/pull/32264">#32264</a>)</li>
+<li>Added db label to the metrics for the delete and bulk insert operations (<a href="https://github.com/milvus-io/milvus/pull/32611">#32611</a>)</li>
+<li>Added logic to skip the verification through configuration for AutoID and PartitionKey columns (<a href="https://github.com/milvus-io/milvus/pull/32592">#32592</a>)</li>
+<li>Refined errors related to authentication (<a href="https://github.com/milvus-io/milvus/pull/32253">#32253</a>)</li>
+<li>Refined error logs for AllocSegmentID in DataCoord (<a href="https://github.com/milvus-io/milvus/pull/32351">#32351</a>, <a href="https://github.com/milvus-io/milvus/pull/32335">#32335</a>)</li>
+<li>Removed duplicate metrics (<a href="https://github.com/milvus-io/milvus/pull/32380">#32380</a>, <a href="https://github.com/milvus-io/milvus/pull/32308">#32308</a>) and cleaned up unused metrics (<a href="https://github.com/milvus-io/milvus/pull/32404">#32404</a>, <a href="https://github.com/milvus-io/milvus/pull/32515">#32515</a>)</li>
+<li>Added configuration option to control whether to enforce the activation of the partitionKey feature (<a href="https://github.com/milvus-io/milvus/pull/32433">#32433</a>)</li>
+<li>Added configuration option to control the maximum amount of data that can be inserted in a single request (<a href="https://github.com/milvus-io/milvus/pull/32433">#32433</a>)</li>
+<li>Parallelize the applyDelete operation at the segment level to accelerate the processing of Delete messages by the Delegator (<a href="https://github.com/milvus-io/milvus/pull/32291">#32291</a>)</li>
+<li>Used index (<a href="https://github.com/milvus-io/milvus/pull/32232">#32232</a>, <a href="https://github.com/milvus-io/milvus/pull/32505">#32505</a>, <a href="https://github.com/milvus-io/milvus/pull/32533">#32533</a>, <a href="https://github.com/milvus-io/milvus/pull/32595">#32595</a>) and add cache (<a href="https://github.com/milvus-io/milvus/pull/32580">#32580</a>) to accelerate frequent filtering operations in QueryCoord.</li>
+<li>Rewrote the data structure (<a href="https://github.com/milvus-io/milvus/pull/32273">#32273</a>) and refactored code (<a href="https://github.com/milvus-io/milvus/pull/32389">#32389</a>) to accelerate common operations in DataCoord.</li>
+<li>Removed openblas from conan (<a href="https://github.com/milvus-io/milvus/pull/32002">#32002</a>)</li>
 </ul>
-<h3 id="Bug-fixes" class="common-anchor-header">Correzioni di bug</h3><ul>
-<li>Corretta la build milvus in rockylinux8<a href="https://github.com/milvus-io/milvus/pull/32619">(#32619</a>)</li>
-<li>Corretti gli errori di compilazione per SVE su ARM<a href="https://github.com/milvus-io/milvus/pull/32463">(#32463</a>, <a href="https://github.com/milvus-io/milvus/pull/32270">#32270</a>)</li>
-<li>Corretto il problema del crash su immagini GPU basate su ARM<a href="https://github.com/milvus-io/milvus/pull/31980">(#31980</a>)</li>
-<li>Corretta la query regex che non può gestire il testo con newline<a href="https://github.com/milvus-io/milvus/pull/32569">(#32569</a>)</li>
-<li>Corretta la ricerca che ottiene risultati vuoti quando GetShardLeaders restituisce un elenco di nodi vuoto<a href="https://github.com/milvus-io/milvus/pull/32685">(#32685</a>)</li>
-<li>Corretto l'errore sollevato da BulkInsert quando incontra campi dinamici in file numpy<a href="https://github.com/milvus-io/milvus/pull/32596">(#32596</a>)</li>
-<li>Corretti bug relativi all'interfaccia RESTFulV2, inclusa un'importante correzione che permette ai parametri numerici nelle richieste di accettare input numerici invece che di tipo stringa<a href="https://github.com/milvus-io/milvus/pull/32485">(#32485</a>, <a href="https://github.com/milvus-io/milvus/pull/32355">#32355</a>)</li>
-<li>Corretta la perdita di memoria nel proxy rimuovendo l'evento watching config nel limitatore di velocità<a href="https://github.com/milvus-io/milvus/pull/32313">(#32313</a>)</li>
-<li>Corretto il problema per cui il limitatore di velocità segnala erroneamente che la partizione non può essere trovata quando partitionName non è specificato<a href="https://github.com/milvus-io/milvus/pull/32647">(#32647</a>)</li>
-<li>Aggiunto il rilevamento dei casi in cui Collection si trova nello stato di recupero e non viene caricato nel tipo di errore.<a href="https://github.com/milvus-io/milvus/pull/32447">(#32447</a>)</li>
-<li>Corretta la metrica negativa del numero di entità interrogabili (<a href="https://github.com/milvus-io/milvus/pull/32361">#32361</a>).</li>
+<h3 id="Bug-fixes" class="common-anchor-header">Bug fixes</h3><ul>
+<li>Fixed build milvus in rockylinux8 (<a href="https://github.com/milvus-io/milvus/pull/32619">#32619</a>)</li>
+<li>Fixed compilation errors for SVE on ARM (<a href="https://github.com/milvus-io/milvus/pull/32463">#32463</a>, <a href="https://github.com/milvus-io/milvus/pull/32270">#32270</a>)</li>
+<li>Fixed the crash issue on ARM-based GPU images (<a href="https://github.com/milvus-io/milvus/pull/31980">#31980</a>)</li>
+<li>Fixed regex query can’t handle text with newline (<a href="https://github.com/milvus-io/milvus/pull/32569">#32569</a>)</li>
+<li>Fixed search get empty result caused by GetShardLeaders return empty node list (<a href="https://github.com/milvus-io/milvus/pull/32685">#32685</a>)</li>
+<li>Fixed BulkInsert raised error when encountering dynamic fields in numpy files (<a href="https://github.com/milvus-io/milvus/pull/32596">#32596</a>)</li>
+<li>Fixed bugs related to the RESTFulV2 interface, including an important fix that allows numeric parameters in requests to accept numerical input instead of string type (<a href="https://github.com/milvus-io/milvus/pull/32485">#32485</a>, <a href="https://github.com/milvus-io/milvus/pull/32355">#32355</a>)</li>
+<li>Fixed memory leak in proxy by removing watching config event in rate limiter (<a href="https://github.com/milvus-io/milvus/pull/32313">#32313</a>)</li>
+<li>Fixed the issue where the rate limiter incorrectly reports that the partition cannot be found when partitionName is not specified (<a href="https://github.com/milvus-io/milvus/pull/32647">#32647</a>)</li>
+<li>Added detection between the cases of Collection being in the recovery state and not being loaded in the error type. (<a href="https://github.com/milvus-io/milvus/pull/32447">#32447</a>)</li>
+<li>Corrected the negative queryable num entities metric (<a href="https://github.com/milvus-io/milvus/pull/32361">#32361</a>)</li>
 </ul>
 <h2 id="v240" class="common-anchor-header">v2.4.0<button data-href="#v240" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -1004,50 +1080,50 @@ title: Note di rilascio
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Data di rilascio: 17 aprile 2024</p>
+    </button></h2><p>Release date: April 17, 2024</p>
 <table>
 <thead>
-<tr><th>Versione Milvus</th><th>Versione dell'SDK Python</th><th>Versione SDK Node.js</th></tr>
+<tr><th>Milvus version</th><th>Python SDK version</th><th>Node.js SDK version</th></tr>
 </thead>
 <tbody>
 <tr><td>2.4.0</td><td>2.4.0</td><td>2.4.0</td></tr>
 </tbody>
 </table>
-<p>Siamo entusiasti di annunciare il lancio ufficiale di Milvus 2.4.- Basandoci sulle solide fondamenta della release 2.4.0-rc.1, ci siamo concentrati sulla risoluzione dei bug critici segnalati dai nostri utenti, preservando le funzionalità esistenti. Inoltre, Milvus 2.4.0 introduce una serie di ottimizzazioni volte a migliorare le prestazioni del sistema, a migliorare l'osservabilità attraverso l'incorporazione di varie metriche e a snellire la base di codice per una maggiore semplicità.</p>
-<h3 id="Improvements" class="common-anchor-header">Miglioramenti</h3><ul>
-<li>Supporto per le connessioni MinIO TLS<a href="https://github.com/milvus-io/milvus/pull/31396">(#31396</a>, <a href="https://github.com/milvus-io/milvus/pull/31618">#31618</a>)</li>
-<li>Supporto dell'AutoIndex per i campi scalari<a href="https://github.com/milvus-io/milvus/pull/31593">(#31593</a>)</li>
-<li>Rifattorizzazione della ricerca ibrida per percorsi di esecuzione coerenti con la ricerca regolare<a href="https://github.com/milvus-io/milvus/pull/31742">(#31742</a>, <a href="https://github.com/milvus-io/milvus/pull/32178">#32178</a>)</li>
-<li>Filtraggio accelerato grazie alla rifattorizzazione di bitset e bitset_view<a href="https://github.com/milvus-io/milvus/pull/31592">(#31592</a>, <a href="https://github.com/milvus-io/milvus/pull/31754">#31754</a>, <a href="https://github.com/milvus-io/milvus/pull/32139">#32139</a>)</li>
-<li>I task di importazione ora supportano l'attesa per il completamento dell'indice dei dati<a href="https://github.com/milvus-io/milvus/pull/31733">(#31733</a>)</li>
-<li>Migliorata la compatibilità dell'importazione<a href="https://github.com/milvus-io/milvus/pull/32121">(#32121</a>), la pianificazione dei task<a href="https://github.com/milvus-io/milvus/pull/31475">(#31475</a>) e i limiti sulla dimensione e sul numero dei file importati<a href="https://github.com/milvus-io/milvus/pull/31542">(#31542</a>).</li>
-<li>Semplificazione del codice, compresa la standardizzazione dell'interfaccia per il controllo dei tipi<a href="https://github.com/milvus-io/milvus/pull/31945">(#31945</a>, <a href="https://github.com/milvus-io/milvus/pull/31857">#31857</a>), la rimozione di codice e metriche deprecate<a href="https://github.com/milvus-io/milvus/pull/32079">(#32079</a>, <a href="https://github.com/milvus-io/milvus/pull/32134">#32134</a>, <a href="https://github.com/milvus-io/milvus/pull/31535">#31535</a>, <a href="https://github.com/milvus-io/milvus/pull/32211">#32211</a>, <a href="https://github.com/milvus-io/milvus/pull/31935">#31935</a>) e la normalizzazione dei nomi delle costanti<a href="https://github.com/milvus-io/milvus/pull/31515">(#31515</a>).</li>
-<li>Nuova metrica per la latenza del punto di controllo del canale di destinazione corrente di QueryCoord<a href="https://github.com/milvus-io/milvus/pull/31420">(#31420</a>)</li>
-<li>Nuova etichetta db per le metriche comuni<a href="https://github.com/milvus-io/milvus/pull/32024">(#32024</a>)</li>
-<li>Nuove metriche relative al conteggio delle entità cancellate, indicizzate e caricate, con l'inclusione di etichette come collectionName e dbName<a href="https://github.com/milvus-io/milvus/pull/31861">(#31861</a>)</li>
-<li>Miglioramenti nella gestione degli errori per i tipi di vettore non corrispondenti<a href="https://github.com/milvus-io/milvus/pull/31766">(#31766</a>)</li>
-<li>Supporto per il lancio di errori invece che per il crash quando l'indice non può essere costruito<a href="https://github.com/milvus-io/milvus/pull/31845">(#31845</a>)</li>
-<li>Supporto per l'invalidazione della meta-cache del database quando si eliminano i database<a href="https://github.com/milvus-io/milvus/pull/32092">(#32092</a>)</li>
-<li>Rifattorizzazione dell'interfaccia per la distribuzione dei canali<a href="https://github.com/milvus-io/milvus/pull/31814">(#31814</a>) e la gestione delle viste leader (<a href="https://github.com/milvus-io/milvus/pull/32127">#32127</a>)</li>
-<li>Rifattorizzazione dell'interfaccia del gestore della distribuzione dei canali<a href="https://github.com/milvus-io/milvus/pull/31814">(#31814</a>) e rifattorizzazione dell'interfaccia del gestore della vista leader<a href="https://github.com/milvus-io/milvus/pull/32127">(#32127</a>)</li>
-<li>Elaborazione batch<a href="https://github.com/milvus-io/milvus/pull/31632">(#31632</a>), aggiunta di informazioni di mappatura<a href="https://github.com/milvus-io/milvus/pull/32234">(#32234</a>, <a href="https://github.com/milvus-io/milvus/pull/32249">#32249</a>) ed evitamento dell'uso di lock<a href="https://github.com/milvus-io/milvus/pull/31787">(#31787</a>) per accelerare le operazioni invocate di frequente.</li>
+<p>We are excited to announce the official launch of Milvus 2.4.- Building upon the solid foundation of the 2.4.0-rc.1 release, we have focused on addressing critical bugs reported by our users, while preserving the existing functionality. In addition, Milvus 2.4.0 introduces a range of optimizations aimed at enhancing system performance, improving observability through the incorporation of various metrics, and streamlining the codebase for increased simplicity.</p>
+<h3 id="Improvements" class="common-anchor-header">Improvements</h3><ul>
+<li>Support for MinIO TLS connections (<a href="https://github.com/milvus-io/milvus/pull/31396">#31396</a>, <a href="https://github.com/milvus-io/milvus/pull/31618">#31618</a>)</li>
+<li>AutoIndex support for scalar fields (<a href="https://github.com/milvus-io/milvus/pull/31593">#31593</a>)</li>
+<li>Hybrid search refactoring for consistent execution paths with regular search (<a href="https://github.com/milvus-io/milvus/pull/31742">#31742</a>, <a href="https://github.com/milvus-io/milvus/pull/32178">#32178</a>)</li>
+<li>Accelerated filtering through bitset and bitset_view refactoring (<a href="https://github.com/milvus-io/milvus/pull/31592">#31592</a>, <a href="https://github.com/milvus-io/milvus/pull/31754">#31754</a>, <a href="https://github.com/milvus-io/milvus/pull/32139">#32139</a>)</li>
+<li>Import tasks now support waiting for data index completion (<a href="https://github.com/milvus-io/milvus/pull/31733">#31733</a>)</li>
+<li>Enhanced Import compatibility (<a href="https://github.com/milvus-io/milvus/pull/32121">#32121</a>), task scheduling (<a href="https://github.com/milvus-io/milvus/pull/31475">#31475</a>), and limits on imported file size and number (<a href="https://github.com/milvus-io/milvus/pull/31542">#31542</a>)</li>
+<li>Code simplification efforts including interface standardization for type checking (<a href="https://github.com/milvus-io/milvus/pull/31945">#31945</a>, <a href="https://github.com/milvus-io/milvus/pull/31857">#31857</a>), removal of deprecated code and metrics (<a href="https://github.com/milvus-io/milvus/pull/32079">#32079</a>, <a href="https://github.com/milvus-io/milvus/pull/32134">#32134</a>, <a href="https://github.com/milvus-io/milvus/pull/31535">#31535</a>, <a href="https://github.com/milvus-io/milvus/pull/32211">#32211</a>, <a href="https://github.com/milvus-io/milvus/pull/31935">#31935</a>), and normalization of constant names (<a href="https://github.com/milvus-io/milvus/pull/31515">#31515</a>)</li>
+<li>New metrics for QueryCoord current target channel check point lag latency (<a href="https://github.com/milvus-io/milvus/pull/31420">#31420</a>)</li>
+<li>New db label for common metrics (<a href="https://github.com/milvus-io/milvus/pull/32024">#32024</a>)</li>
+<li>New metrics regarding the count of deleted, indexed, and loaded entities, with the inclusion of labels such as collectionName and dbName (<a href="https://github.com/milvus-io/milvus/pull/31861">#31861</a>)</li>
+<li>Error handling improvements for mismatched vector types (<a href="https://github.com/milvus-io/milvus/pull/31766">#31766</a>)</li>
+<li>Support for throwing errors instead of crashing when index cannot be built (<a href="https://github.com/milvus-io/milvus/pull/31845">#31845</a>)</li>
+<li>Support for invalidating the database meta cache when dropping databases (<a href="https://github.com/milvus-io/milvus/pull/32092">#32092</a>)</li>
+<li>Interface refactoring for channel distribution (<a href="https://github.com/milvus-io/milvus/pull/31814">#31814</a>) and leader view management (<a href="https://github.com/milvus-io/milvus/pull/32127">#32127</a>)</li>
+<li>Refactor channel dist manager interface (<a href="https://github.com/milvus-io/milvus/pull/31814">#31814</a>) and Refactor leader view manager interface (<a href="https://github.com/milvus-io/milvus/pull/32127">#32127</a>)</li>
+<li>Batch processing (<a href="https://github.com/milvus-io/milvus/pull/31632">#31632</a>), adding mapping information (<a href="https://github.com/milvus-io/milvus/pull/32234">#32234</a>, <a href="https://github.com/milvus-io/milvus/pull/32249">#32249</a>), and avoiding usage of lock (<a href="https://github.com/milvus-io/milvus/pull/31787">#31787</a>) to accelerate frequently invoked operations</li>
 </ul>
-<h3 id="Breaking-Changes" class="common-anchor-header">Modifiche di rottura</h3><ul>
-<li>Interruzione della ricerca di raggruppamenti su vettori binari<a href="https://github.com/milvus-io/milvus/pull/31735">(#31735</a>)</li>
-<li>Interruzione della ricerca di raggruppamento con ricerca ibrida<a href="https://github.com/milvus-io/milvus/pull/31812">(#31812</a>)</li>
-<li>Interruzione dell'indice HNSW su vettori binari<a href="https://github.com/milvus-io/milvus/pull/31883">(#31883</a>)</li>
+<h3 id="Breaking-Changes" class="common-anchor-header">Breaking Changes</h3><ul>
+<li>Discontinued grouping search on binary vectors (<a href="https://github.com/milvus-io/milvus/pull/31735">#31735</a>)</li>
+<li>Discontinued grouping search with hybrid search (<a href="https://github.com/milvus-io/milvus/pull/31812">#31812</a>)</li>
+<li>Discontinued HNSW index on binary vectors (<a href="https://github.com/milvus-io/milvus/pull/31883">#31883</a>)</li>
 </ul>
-<h3 id="Bug-Fixes" class="common-anchor-header">Correzioni di bug</h3><ul>
-<li>Miglioramento dei controlli del tipo di dati e del valore per le query e gli inserimenti per prevenire gli arresti anomali<a href="https://github.com/milvus-io/milvus/pull/31478">(#31478</a>, <a href="https://github.com/milvus-io/milvus/pull/31653">#31653</a>, <a href="https://github.com/milvus-io/milvus/pull/31698">#31698</a>, <a href="https://github.com/milvus-io/milvus/pull/31842">#31842</a>, <a href="https://github.com/milvus-io/milvus/pull/32042">#32042</a>, <a href="https://github.com/milvus-io/milvus/pull/32251">#32251</a>, <a href="https://github.com/milvus-io/milvus/pull/32204">#32204</a>)</li>
-<li>Correzioni di bug dell'API RESTful (<a href="https://github.com/milvus-io/milvus/pull/32160">#32160</a>)</li>
-<li>Miglioramento della previsione dell'utilizzo delle risorse degli indici invertiti (<a href="https://github.com/milvus-io/milvus/pull/31641">#31641</a>)</li>
-<li>Risoluzione di problemi di connessione con etcd quando l'autorizzazione è abilitata<a href="https://github.com/milvus-io/milvus/pull/31668">(#31668</a>)</li>
-<li>Aggiornamento della sicurezza per il server nats (<a href="https://github.com/milvus-io/milvus/pull/32023">#32023</a>)</li>
-<li>Memorizzati i file degli indici invertiti in un percorso di archiviazione locale di QueryNode invece che in /tmp<a href="https://github.com/milvus-io/milvus/pull/32210">(#32210</a>)</li>
-<li>Risolte le perdite di memoria dei datacoord per collectionInfo<a href="https://github.com/milvus-io/milvus/pull/32243">(#32243</a>)</li>
-<li>Risolti bug relativi a fp16/bf16 che potevano causare panico di sistema<a href="https://github.com/milvus-io/milvus/pull/31677">(#31677</a>, <a href="https://github.com/milvus-io/milvus/pull/31841">#31841</a>, <a href="https://github.com/milvus-io/milvus/pull/32196">#32196</a>)</li>
-<li>Risolti problemi con la ricerca per raggruppamento che restituiva risultati insufficienti<a href="https://github.com/milvus-io/milvus/pull/32151">(#32151</a>)</li>
-<li>Adattamento della ricerca con iteratori per gestire in modo più efficace gli offset nella fase di riduzione e garantire risultati adeguati con "reduceStopForBest" abilitato<a href="https://github.com/milvus-io/milvus/pull/32088">(#32088</a>)</li>
+<h3 id="Bug-Fixes" class="common-anchor-header">Bug Fixes</h3><ul>
+<li>Enhanced data type and value checks for queries and insertions to prevent crashes (<a href="https://github.com/milvus-io/milvus/pull/31478">#31478</a>, <a href="https://github.com/milvus-io/milvus/pull/31653">#31653</a>, <a href="https://github.com/milvus-io/milvus/pull/31698">#31698</a>, <a href="https://github.com/milvus-io/milvus/pull/31842">#31842</a>, <a href="https://github.com/milvus-io/milvus/pull/32042">#32042</a>, <a href="https://github.com/milvus-io/milvus/pull/32251">#32251</a>, <a href="https://github.com/milvus-io/milvus/pull/32204">#32204</a>)</li>
+<li>RESTful API bug fixes (<a href="https://github.com/milvus-io/milvus/pull/32160">#32160</a>)</li>
+<li>Improved prediction of inverted index resource usage (<a href="https://github.com/milvus-io/milvus/pull/31641">#31641</a>)</li>
+<li>Resolution of connection issues with etcd when authorization is enabled (<a href="https://github.com/milvus-io/milvus/pull/31668">#31668</a>)</li>
+<li>Security update for nats server (<a href="https://github.com/milvus-io/milvus/pull/32023">#32023</a>)</li>
+<li>Stored inverted index files into a local storage path of QueryNode instead of /tmp (<a href="https://github.com/milvus-io/milvus/pull/32210">#32210</a>)</li>
+<li>Addressed datacoord memory leaks for collectionInfo (<a href="https://github.com/milvus-io/milvus/pull/32243">#32243</a>)</li>
+<li>Fixes for fp16/bf16 related bugs potentially causing system panic (<a href="https://github.com/milvus-io/milvus/pull/31677">#31677</a>, <a href="https://github.com/milvus-io/milvus/pull/31841">#31841</a>, <a href="https://github.com/milvus-io/milvus/pull/32196">#32196</a>)</li>
+<li>Resolved issues with grouping search returning insufficient results (<a href="https://github.com/milvus-io/milvus/pull/32151">#32151</a>)</li>
+<li>Adjustment of search with iterators to handle offsets in the Reduce step more effectively and ensure adequate results with “reduceStopForBest” enabled (<a href="https://github.com/milvus-io/milvus/pull/32088">#32088</a>)</li>
 </ul>
 <h2 id="v240-rc1" class="common-anchor-header">v2.4.0-rc.1<button data-href="#v240-rc1" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -1064,49 +1140,51 @@ title: Note di rilascio
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Data di rilascio: 20 marzo 2024</p>
+    </button></h2><p>Release date: March 20, 2024</p>
 <table>
 <thead>
-<tr><th>Versione Milvus</th><th>Versione dell'SDK Python</th></tr>
+<tr><th>Milvus version</th><th>Python SDK version</th></tr>
 </thead>
 <tbody>
 <tr><td>2.4.0-rc.1</td><td>2.4.0</td></tr>
 </tbody>
 </table>
-<p>Questa versione introduce diverse funzionalità basate su scenari:</p>
+<p>This release introduces several scenario-based features:</p>
 <ul>
-<li><p><strong>Nuovo indice GPU - CAGRA</strong>: grazie al contributo di NVIDIA, questo nuovo indice GPU offre un aumento delle prestazioni di 10 volte, soprattutto per le ricerche in batch. Per maggiori dettagli, consultare l'<a href="/docs/it/gpu_index.md">Indice GPU</a>.</p></li>
-<li><p><strong>Ricerca</strong><strong>multivettoriale</strong> e <strong>ibrida</strong>: Questa funzione consente di memorizzare le incorporazioni vettoriali di più modelli e di effettuare ricerche ibride. Per ulteriori informazioni, consultare la sezione <a href="/docs/it/multi-vector-search.md">Ricerca ibrida</a>.</p></li>
-<li><p><strong>Vettori sparsi</strong>: Ideali per l'interpretazione e l'analisi delle parole chiave, i vettori sparsi sono ora supportati per l'elaborazione nella vostra raccolta. Per ulteriori informazioni, consultare <a href="/docs/it/sparse_vector.md">Vettori sparsi</a>.</p></li>
-<li><p><strong>Ricerca per raggruppamento</strong>: L'aggregazione categoriale migliora il richiamo a livello di documento per le applicazioni RAG (Retrieval-Augmented Generation). Per ulteriori informazioni, consultare la sezione <a href="https://milvus.io/docs/single-vector-search.md#Grouping-search">Ricerca per gruppi</a>.</p></li>
-<li><p><strong>Indice invertito</strong> e <strong>corrispondenza fuzzy</strong>: queste funzionalità migliorano il recupero delle parole chiave per i campi scalari. Per ulteriori informazioni, consultare <a href="/docs/it/index-scalar-fields.md">Campi scalari indicizzati</a> e <a href="/docs/it/single-vector-search.md#filtered-search">ricerca filtrata</a>.</p></li>
+<li><p><strong>New GPU Index - CAGRA</strong>: Thanks to NVIDIA’s contribution, this new GPU index offers a 10x performance boost, especially for batch searches. For details, refer to <a href="/docs/it/gpu_index.md">GPU Index</a>.</p></li>
+<li><p><strong>Multi-vector</strong> and <strong>Hybrid Search</strong>: This feature enables storing vector embeddings from multiple models and conducting hybrid searches. For details, refer to <a href="/docs/it/multi-vector-search.md">Hybrid Search</a>.</p></li>
+<li><p><strong>Sparse Vectors</strong>: Ideal for keyword interpretation and analysis, sparse vectors are now supported for processing in your collection. For details, refer to <a href="/docs/it/sparse_vector.md">Sparse Vectors</a>.</p></li>
+<li><p><strong>Grouping Search</strong>: Categorical aggregation enhances document-level recall for Retrieval-Augmented Generation (RAG) applications. For details, refer to <a href="https://milvus.io/docs/single-vector-search.md#Grouping-search">Grouping Search</a>.</p></li>
+<li><p><strong>Inverted Index</strong> and <strong>Fuzzy Matching</strong>: These capabilities improve keyword retrieval for scalar fields. For details, refer to <a href="/docs/it/index-scalar-fields.md">Index Scalar Fields</a> and <a href="/docs/it/single-vector-search.md#filtered-search">Filtered Search</a>.</p></li>
 </ul>
-<h3 id="New-Features" class="common-anchor-header">Nuove funzionalità</h3><h4 id="GPU-Index---CAGRA" class="common-anchor-header">Indice GPU - CAGRA</h4><p>Desideriamo esprimere la nostra sincera gratitudine al team NVIDIA per il suo prezioso contributo a CAGRA, un indice di grafi basato su GPU allo stato dell'arte (SoTA) che può essere utilizzato online.</p>
-<p>A differenza dei precedenti indici su GPU, CAGRA dimostra una superiorità schiacciante anche nelle query di piccoli lotti, un'area in cui gli indici su CPU tradizionalmente eccellono. Inoltre, le prestazioni di CAGRA nelle query batch di grandi dimensioni e la velocità di costruzione dell'indice, ambiti in cui gli indici su GPU già primeggiano, sono davvero impareggiabili.</p>
-<p>Il codice di esempio è disponibile in <a href="https://github.com/milvus-io/pymilvus/blob/2.4/examples/example_gpu_cagra.py">example_gpu_cagra.py</a>.</p>
-<h4 id="Sparse-Vector-Beta" class="common-anchor-header">Vettore sparso (Beta)</h4><p>In questa versione è stato introdotto un nuovo tipo di campo vettoriale, chiamato sparse vector. I vettori sparsi sono diversi dalle loro controparti dense, in quanto tendono ad avere un numero di dimensioni più elevato, con solo una manciata di dimensioni non nulle. Questa caratteristica offre una migliore interpretabilità grazie alla sua natura basata sui termini e può essere più efficace in alcuni domini. I modelli sparsi appresi, come SPLADEv2/BGE-M3, si sono dimostrati molto utili per i comuni compiti di classificazione di primo livello. Il principale caso d'uso di questa nuova funzionalità di Milvus è quello di consentire un'efficiente ricerca semantica approssimata dei vicini su vettori sparsi generati da modelli neurali come SPLADEv2/BGE-M3 e da modelli statistici come l'algoritmo BM25. Milvus supporta ora la memorizzazione, l'indicizzazione e la ricerca efficace e ad alte prestazioni (MIPS, Maximum Inner Product Search) di vettori sparsi.</p>
-<p>Un esempio di codice si trova in <a href="https://github.com/milvus-io/pymilvus/blob/2.4/examples/hello_sparse.py">hello_sparse.py</a>.</p>
-<h4 id="Multi-Embedding---Hybrid-Search" class="common-anchor-header">Incorporamento multiplo e ricerca ibrida</h4><p>Il supporto multi-vettore è la pietra miliare per le applicazioni che richiedono l'elaborazione di dati multi-modello o un mix di vettori densi e radi. Con il supporto multivettoriale, ora è possibile:</p>
+<h3 id="New-Features" class="common-anchor-header">New Features</h3><h4 id="GPU-Index---CAGRA" class="common-anchor-header">GPU Index - CAGRA</h4><p>We would like to express our sincere gratitude to the NVIDIA team for their invaluable contribution to CAGRA, a state-of-the-art (SoTA) GPU-based graph index that can be used online.</p>
+<p>Unlike previous GPU indices, CAGRA demonstrates overwhelming superiority even in small batch queries, an area where CPU indices traditionally excel. In addition, CAGRA’s performance in large batch queries and index construction speed, domains where GPU indices already shine, is truly unparalleled.</p>
+<p>Example code can be found in <a href="https://github.com/milvus-io/pymilvus/blob/2.4/examples/example_gpu_cagra.py">example_gpu_cagra.py</a>.</p>
+<h4 id="Sparse-Vector-Beta" class="common-anchor-header">Sparse Vector (Beta)</h4><p>In this release, we are introducing a new type of vector field called sparse vector. Sparse vectors are different from their dense counterparts as they tend to have several magnitude higher number of dimensions with only a handful being non-zero. This feature offers better interpretability due to its term-based nature and can be more effective in certain domains. Learned sparse models such as SPLADEv2/BGE-M3 have proven to be very useful for common first-stage ranking tasks. The main use case for this new feature in Milvus is to allow efficient approximate semantic nearest neighbor search over sparse vectors generated by neural models such as SPLADEv2/BGE-M3 and statistics models such as the BM25 algorithm. Milvus now supports effective and high-performance storage, indexing, and searching (MIPS, Maximum Inner Product Search) of sparse vectors.</p>
+<p>Example code can be found in <a href="https://github.com/milvus-io/pymilvus/blob/2.4/examples/hello_sparse.py">hello_sparse.py</a>.</p>
+<h4 id="Multi-Embedding---Hybrid-Search" class="common-anchor-header">Multi Embedding &amp;  Hybrid Search</h4><p>Multi-vector support is the cornerstone for applications that require multi-model data processing or a mix of dense and sparse vectors. With multi-vector support, now you can:</p>
 <ul>
-<li>Memorizzare le incorporazioni vettoriali generate per campioni di testo, immagini o audio non strutturati da più modelli.</li>
-<li>Condurre ricerche RNA che includono più vettori di ogni entità.</li>
-<li>Personalizzare le strategie di ricerca assegnando pesi ai diversi modelli di incorporamento.</li>
-<li>Sperimentare con vari modelli di incorporamento per trovare la combinazione ottimale di modelli.</li>
+<li>Store vector embeddings generated for unstructured text, image, or audio samples from multiple models.</li>
+<li>Conduct ANN searches that include multiple vectors of each entity.</li>
+<li>Customize search strategies by assigning weights to different embedding models.</li>
+<li>Experiment with various embedding models to find the optimal model combination.</li>
 </ul>
-<p>Il supporto multivettoriale consente di memorizzare, indicizzare e applicare strategie di reranking a più campi vettoriali di tipo diverso, come FLOAT_VECTOR e SPARSE_FLOAT_VECTOR, in una collezione. Attualmente sono disponibili due strategie di reranking: <strong>Reciprocal Rank Fusion (RRF)</strong> e <strong>Average Weighted Scoring</strong>. Entrambe le strategie combinano i risultati della ricerca di diversi campi vettoriali in un insieme di risultati unificato. La prima strategia dà priorità alle entità che appaiono costantemente nei risultati di ricerca di diversi campi vettoriali, mentre l'altra strategia assegna dei pesi ai risultati di ricerca di ciascun campo vettoriale per determinare la loro importanza nel set di risultati finale.</p>
-<p>Un esempio di codice si trova in <a href="https://github.com/milvus-io/pymilvus/blob/2.4/examples/hybrid_search.py">hybrid_search.py</a>.</p>
-<h4 id="Inverted-Index-and-Fuzzy-Match" class="common-anchor-header">Indice invertito e corrispondenza fuzzy</h4><p>Nelle versioni precedenti di Milvus, per l'indicizzazione dei campi scalari venivano utilizzati indici di ricerca binaria basati sulla memoria e indici Marisa Trie. Tuttavia, questi metodi richiedevano molta memoria. L'ultima versione di Milvus impiega ora l'indice inverso basato su Tantivy, che può essere applicato a tutti i tipi di dati numerici e stringhe. Questo nuovo indice migliora notevolmente le prestazioni delle query scalari, riducendo di dieci volte la ricerca di parole chiave nelle stringhe. Inoltre, l'indice invertito consuma meno memoria, grazie a ulteriori ottimizzazioni nella compressione dei dati e al meccanismo di Memory-mapped storage (MMap) della struttura di indicizzazione interna.</p>
-<p>Questa versione supporta anche le corrispondenze sfumate nel filtraggio scalare utilizzando prefissi, infissi e suffissi.</p>
-<p>Esempi di codice si trovano in <a href="https://github.com/milvus-io/pymilvus/blob/2.4/examples/inverted_index_example.py">inverted_index_example.py</a> e <a href="https://github.com/milvus-io/pymilvus/blob/2.4/examples/fuzzy_match.py">fuzzy_match.py</a>.</p>
-<h4 id="Grouping-Search" class="common-anchor-header">Raggruppare la ricerca</h4><p>È ora possibile aggregare i risultati della ricerca in base ai valori di uno specifico campo scalare. Questo aiuta le applicazioni RAG a implementare il richiamo a livello di documento. Si consideri un insieme di documenti, ogni documento suddiviso in vari passaggi. Ogni passaggio è rappresentato da un'incorporazione vettoriale e appartiene a un documento. Per trovare i documenti più rilevanti invece di disperdere i passaggi, è possibile includere l'argomento group_by_field nell'operazione search() per raggruppare i risultati in base all'ID del documento.</p>
-<p>Un esempio di codice si trova in <a href="https://github.com/milvus-io/pymilvus/blob/2.4/examples/example_group_by.py">example_group_by.py</a>.</p>
-<h4 id="Float16-and-BFloat--Vector-DataType" class="common-anchor-header">Tipo di dati vettoriali Float16 e BFloat</h4><p>L'apprendimento automatico e le reti neurali utilizzano spesso tipi di dati a mezza precisione, come Float16 e BFloat. Sebbene questi tipi di dati possano migliorare l'efficienza delle query e ridurre l'uso della memoria, hanno come contropartita una minore precisione. Con questa versione, Milvus supporta ora questi tipi di dati per i campi vettoriali.</p>
-<p>Il codice di esempio si trova in <a href="https://github.com/milvus-io/pymilvus/blob/2.4/examples/float16_example.py">float16_example.py</a> e <a href="https://github.com/milvus-io/pymilvus/blob/2.4/examples/bfloat16_example.py">bfloat16_example.py</a>.</p>
-<h3 id="Upgraded-Architecture" class="common-anchor-header">Architettura aggiornata</h3><h4 id="L0-Segment" class="common-anchor-header">Segmento L0</h4><p>Questa versione include un nuovo segmento chiamato Segmento L0, progettato per registrare i dati cancellati. Questo segmento compatta periodicamente i record cancellati memorizzati e li divide in segmenti sigillati, riducendo il numero di flush dei dati necessari per le piccole cancellazioni e lasciando un'impronta di memoria ridotta. Con questo meccanismo, Milvus separa completamente la compattazione dei dati dal lavaggio dei dati, migliorando le prestazioni delle operazioni di cancellazione e di upsert.</p>
-<h4 id="Refactored-BulkInsert" class="common-anchor-header">BulkInsert rifatto</h4><p>Questa versione introduce anche una logica di inserimento massivo migliorata. Ciò consente di importare più file in un'unica richiesta di bulk-insert. Con la versione rifattorizzata, sia le prestazioni che la stabilità del bulk insert sono migliorate in modo significativo. Anche l'esperienza dell'utente è stata migliorata, come la limitazione della velocità e i messaggi di errore più semplici. Inoltre, è possibile accedere facilmente agli endpoint di inserimento massivo tramite l'API RESTful di Milvus.</p>
-<h4 id="Memory-mapped-Storage" class="common-anchor-header">Archiviazione con memoria</h4><p>Milvus utilizza lo storage memory-mapped (MMap) per ottimizzare l'uso della memoria. Invece di caricare il contenuto del file direttamente nella memoria, questo meccanismo mappa il contenuto del file nella memoria. Questo approccio ha come contropartita una riduzione delle prestazioni.  Abilitando MMap per una raccolta indicizzata HNSW su un host con 2 CPU e 8 GB di RAM, è possibile caricare 4 volte più dati con una riduzione delle prestazioni inferiore al 10%.</p>
-<p>Inoltre, questa versione consente anche un controllo dinamico e a grana fine su MMap senza la necessità di riavviare Milvus.</p>
-<p>Per maggiori dettagli, consultare la sezione <a href="/docs/it/mmap.md">Memorizzazione MMap</a>.</p>
-<h3 id="Others" class="common-anchor-header">Altri</h3><h4 id="Milvus-CDC" class="common-anchor-header">Milvus-CDC</h4><p>Milvus-CDC è uno strumento di facile utilizzo per acquisire e sincronizzare i dati incrementali tra le istanze di Milvus, consentendo di semplificare il backup incrementale e il disaster recovery. In questa versione, Milvus-CDC ha migliorato la stabilità e la sua funzionalità Change Data Capture (CDC) è ora generalmente disponibile.</p>
-<p>Per saperne di più su Milvus-CDC, consultate il <a href="https://github.com/zilliztech/milvus-cdc">repository GitHub</a> e la <a href="/docs/it/milvus-cdc-overview.md">panoramica di Milvus-CDC</a>.</p>
-<h4 id="Refined-MilvusClient-Interfaces" class="common-anchor-header">Interfacce perfezionate per MilvusClient</h4><p>MilvusClient è un'alternativa facile da usare al modulo ORM. Adotta un approccio puramente funzionale per semplificare le interazioni con il server. Invece di mantenere un pool di connessioni, ogni MilvusClient stabilisce una connessione gRPC al server. Il modulo MilvusClient ha implementato la maggior parte delle funzionalità del modulo ORM. Per saperne di più sul modulo MilvusClient, visitate <a href="https://github.com/milvus-io/pymilvus">pymilvus</a> e i <a href="/api-reference/pymilvus/v2.4.x/About.md">documenti di riferimento</a>.</p>
+<p>Multi-vector support allows storing, indexing, and applying reranking strategies to multiple vector fields of different types, such as FLOAT_VECTOR and SPARSE_FLOAT_VECTOR, in a collection. Currently, two reranking strategies are available: <strong>Reciprocal Rank Fusion (RRF)</strong> and <strong>Average Weighted Scoring</strong>. Both strategies combine the search results from different vector fields into a unified result set. The first strategy prioritizes the entities that consistently appear in the search results of different vector fields, while the other strategy assigns weights to the search results of each vector field to determine their importance in the final result set.</p>
+<p>Example code can be found in <a href="https://github.com/milvus-io/pymilvus/blob/2.4/examples/hybrid_search.py">hybrid_search.py</a>.</p>
+<h4 id="Inverted-Index-and-Fuzzy-Match" class="common-anchor-header">Inverted Index and Fuzzy Match</h4><p>In previous releases of Milvus, memory-based binary search indexes and Marisa Trie indexes were used for scalar field indexing. However, these methods were memory-intensive. The latest release of Milvus now employs the Tantivy-based inverted index, which can be applied to all numeric and string data types. This new index dramatically improves scalar query performance, reducing the query of keywords in strings by ten times. In addition, The inverted index consumes less memory, thanks to additional optimizations in data compression and Memory-mapped storage (MMap) mechanism of the internal indexing structure.</p>
+<p>This release also supports fuzzy matches in scalar filtering using prefixes, infixes, and suffixes.</p>
+<p>Example code can be found in <a href="https://github.com/milvus-io/pymilvus/blob/2.4/examples/inverted_index_example.py">inverted_index_example.py</a> and <a href="https://github.com/milvus-io/pymilvus/blob/2.4/examples/fuzzy_match.py">fuzzy_match.py</a>.</p>
+<h4 id="Grouping-Search" class="common-anchor-header">Grouping Search</h4><p>You can now aggregate the search results by the values in a specific scalar field. This helps RAG applications to implement document-level recall. Consider a collection of documents, each document splits into various passages. Each passage is represented by one vector embedding and belongs to one document. To find the most relevant documents instead of scattering passages, you can include the group_by_field argument in the search() operation to group results by the document ID.</p>
+<p>Example code can be found in <a href="https://github.com/milvus-io/pymilvus/blob/2.4/examples/example_group_by.py">example_group_by.py</a>.</p>
+<h4 id="Float16-and-BFloat--Vector-DataType" class="common-anchor-header">Float16 and BFloat- Vector DataType</h4><p>Machine learning and neural networks often use half-precision data types, such as Float16 and BFloat- While these data types can improve query efficiency and reduce memory usage, they come with a tradeoff of reduced accuracy. With this release, Milvus now supports these data types for vector fields.</p>
+<p>Example code can be found in <a href="https://github.com/milvus-io/pymilvus/blob/2.4/examples/float16_example.py">float16_example.py</a> and <a href="https://github.com/milvus-io/pymilvus/blob/2.4/examples/bfloat16_example.py">bfloat16_example.py</a>.</p>
+<h3 id="Upgraded-Architecture" class="common-anchor-header">Upgraded Architecture</h3><h4 id="L0-Segment" class="common-anchor-header">L0 Segment</h4><p>This release includes a new segment called L0 Segment, designed to record deleted data. This segment periodically compacts stored deleted records and splits them into sealed segments, reducing the number of data flushes required for small deletions and leaving a small storage footprint. With this mechanism, Milvus completely separates data compactions from data flushes, enhancing the performance of delete and upsert operations.</p>
+<h4 id="Refactored-BulkInsert" class="common-anchor-header">Refactored BulkInsert</h4><p>This release also introduces improved bulk-insert logic. This allows you to import multiple files in a single bulk-insert request. With the refactored version, both the performance and stability of bulk insert have seen significant improvements. The user experience has also been enhanced, such as fine-tuned rate limiting and more user-friendly error messages. In addition, you can easily access the bulk-insert endpoints through Milvus’ RESTful API.</p>
+<h4 id="Memory-mapped-Storage" class="common-anchor-header">Memory-mapped Storage</h4><p>Milvus uses memory-mapped storage (MMap) to optimize its memory usage. Instead of loading file content directly into memory, this mechanism maps the file content into memory. This approach comes with a tradeoff of performance degradation.  By enabling MMap for an HNSW-indexed collection on a host with 2 CPUs and 8 GB RAM, you can load 4x more data with less than 10% performance degradation.</p>
+<p>In addition, this release also allows dynamic and fine-grained control over MMap without the need to restart Milvus.</p>
+<p>For details, refer to <a href="/docs/it/mmap.md">MMap Storage</a>.</p>
+<h3 id="Others" class="common-anchor-header">Others</h3><h4 id="Milvus-CDC" class="common-anchor-header">Milvus-CDC</h4><p>Milvus-CDC is an easy-to-use companion tool to capture and synchronize incremental data between Milvus instances, allowing for easy incremental backup and disaster recovery. In this release, Milvus-CDC has improved stability, and its Change Data Capture (CDC) functionality now becomes generally available.</p>
+<p>To learn more about Milvus-CDC, refer to <a href="https://github.com/zilliztech/milvus-cdc">GitHub repository</a> and <a href="/docs/it/milvus-cdc-overview.md">Milvus-CDC Overview</a>.</p>
+<h4 id="Refined-MilvusClient-Interfaces" class="common-anchor-header">Refined MilvusClient Interfaces</h4><p>MilvusClient is an easy-to-use alternative to the ORM module. It adopts a purely functional approach to simplify interactions with the server. Instead of maintaining a connection pool, each MilvusClient establishes a gRPC connection to the server.
+The MilvusClient module has implemented most of the functionalities of the ORM module.
+To learn more about the MilvusClient module, visit <a href="https://github.com/milvus-io/pymilvus">pymilvus</a> and the <a href="/api-reference/pymilvus/v2.4.x/About.md">reference documents</a>.</p>

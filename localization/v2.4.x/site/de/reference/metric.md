@@ -21,9 +21,9 @@ title: Ähnlichkeitsmetriken
         ></path>
       </svg>
     </button></h1><p>In Milvus werden Ähnlichkeitsmetriken verwendet, um Ähnlichkeiten zwischen Vektoren zu messen. Die Wahl einer guten Abstandsmetrik hilft, die Klassifizierungs- und Clustering-Leistung erheblich zu verbessern.</p>
-<p>Die folgende Tabelle zeigt, wie diese weit verbreiteten Ähnlichkeitsmetriken zu verschiedenen Eingabedatenformen und Milvus-Indizes passen.</p>
+<p>Die folgende Tabelle zeigt, wie diese weit verbreiteten Ähnlichkeitsmetriken zu verschiedenen Eingabedatenformen und Milvus-Indizes passen. Derzeit unterstützt Milvus verschiedene Datentypen, darunter Fließkomma-Einbettungen (oft auch als Fließkomma-Vektoren oder dichte Vektoren bezeichnet), binäre Einbettungen (auch als binäre Vektoren bezeichnet) und spärliche Einbettungen (auch als spärliche Vektoren bezeichnet).</p>
 <div class="filter">
- <a href="#floating">Fließkomma-Einbettungen</a> <a href="#binary">Binäre Einbettungen</a> <a href="#sparse">Sparsame Einbettungen</a></div>
+ <a href="#floating">Fließkomma-Einbettungen</a> <a href="#binary">Binäre Einbettungen</a> <a href="#sparse">Dünne Einbettungen</a></div>
 <div class="filter-floating table-wrapper" markdown="block">
 <table class="tg">
 <thead>
@@ -82,14 +82,14 @@ title: Ähnlichkeitsmetriken
 <p>Es ist die am häufigsten verwendete Abstandsmetrik und ist sehr nützlich, wenn die Daten kontinuierlich sind.</p>
 <div class="alert note">
 Milvus berechnet den Wert vor der Anwendung der Quadratwurzel nur dann, wenn der euklidische Abstand als Abstandsmetrik gewählt wird.</div>
-<h3 id="Inner-product-IP" class="common-anchor-header">Inneres Produkt (IP)</h3><p>Der IP-Abstand zwischen zwei Einbettungen ist wie folgt definiert:</p>
+<h3 id="Inner-product-IP" class="common-anchor-header">Inneres Produkt (IP)</h3><p>Der IP-Abstand zwischen zwei Vektoreinbettungen ist wie folgt definiert:</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/IP_formula.png" alt="ip" class="doc-image" id="ip" />
    </span> <span class="img-wrapper"> <span>ip</span> </span></p>
-<p>IP ist nützlicher, wenn Sie nicht-normalisierte Daten vergleichen müssen oder wenn Sie sich für die Größe und den Winkel interessieren.</p>
+<p>IP ist nützlicher, wenn Sie nicht-normalisierte Daten vergleichen müssen oder wenn Sie sich für den Betrag und den Winkel interessieren.</p>
 <div class="alert note">
-<p>Wenn Sie die IP-Abstandsmetrik auf normalisierte Einbettungen anwenden, entspricht das Ergebnis der Berechnung der Kosinusähnlichkeit zwischen den Einbettungen.</p>
+<p>Wendet man die IP-Abstandsmetrik auf normalisierte Einbettungen an, entspricht das Ergebnis der Berechnung der Kosinusähnlichkeit zwischen den Einbettungen.</p>
 </div>
 <p>Angenommen, X' ist von der Einbettung X normalisiert:</p>
 <p>
@@ -101,7 +101,7 @@ Milvus berechnet den Wert vor der Anwendung der Quadratwurzel nur dann, wenn der
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/normalization_formula.png" alt="normalization" class="doc-image" id="normalization" />
    </span> <span class="img-wrapper"> <span>Normalisierung</span> </span></p>
-<h3 id="Cosine-Similarity" class="common-anchor-header">Kosinus-Ähnlichkeit</h3><p>Bei der Cosinus-Ähnlichkeit wird der Kosinus des Winkels zwischen zwei Vektorsätzen verwendet, um zu messen, wie ähnlich sie sind. Man kann sich die beiden Vektorsätze als zwei Liniensegmente vorstellen, die vom gleichen Ursprung ([0,0,...]) ausgehen, aber in unterschiedliche Richtungen zeigen.</p>
+<h3 id="Cosine-Similarity" class="common-anchor-header">Kosinus-Ähnlichkeit</h3><p>Bei der Cosinus-Ähnlichkeit wird der Kosinus des Winkels zwischen zwei Vektorsätzen verwendet, um zu messen, wie ähnlich sie sich sind. Man kann sich die beiden Vektorsätze als zwei Liniensegmente vorstellen, die vom gleichen Ursprung ([0,0,...]) ausgehen, aber in unterschiedliche Richtungen zeigen.</p>
 <p>Um die Cosinus-Ähnlichkeit zwischen zwei Mengen von Vektoren <strong>A = (<sub>a0</sub>, <sub>a1</sub>,...,<sub>an-1</sub>)</strong> und <strong>B = (<sub>b0</sub>, <sub>b1</sub>,..., <sub>bn-1</sub>)</strong> zu berechnen, verwenden Sie die folgende Formel:</p>
 <p>
   
@@ -165,7 +165,7 @@ Milvus berechnet den Wert vor der Anwendung der Quadratwurzel nur dann, wenn der
 <summary><font color="#4fc4f9">Warum ist das Top1-Ergebnis einer Vektorsuche nicht der Suchvektor selbst, wenn der Metrik-Typ das innere Produkt ist?</font></summary>Dies geschieht, wenn Sie die Vektoren nicht normalisiert haben, wenn Sie das innere Produkt als Abstandsmetrik verwenden.</details>
 <details>
 <summary><font color="#4fc4f9">Was ist Normalisierung? Warum ist eine Normalisierung erforderlich?</font></summary></p>
-<p>Normalisierung bezieht sich auf den Prozess der Konvertierung einer Einbettung (eines Vektors), so dass seine Norm gleich 1 ist. Wenn Sie das innere Produkt zur Berechnung der Ähnlichkeit von Einbettungen verwenden, müssen Sie Ihre Einbettungen normalisieren. Nach der Normalisierung ist das innere Produkt gleich der Kosinusähnlichkeit.</p>
+<p>Normalisierung bezieht sich auf den Prozess der Umwandlung einer Einbettung (eines Vektors), so dass seine Norm gleich 1 ist. Wenn Sie das innere Produkt zur Berechnung der Ähnlichkeit von Einbettungen verwenden, müssen Sie Ihre Einbettungen normalisieren. Nach der Normalisierung ist das innere Produkt gleich der Kosinusähnlichkeit.</p>
 <p>
 Siehe <a href="https://en.wikipedia.org/wiki/Unit_vector">Wikipedia</a> für weitere Informationen.</p>
 </details>
@@ -187,5 +187,5 @@ Siehe <a href="https://en.wikipedia.org/wiki/Unit_vector">Wikipedia</a> für wei
         ></path>
       </svg>
     </button></h2><ul>
-<li>Erfahren Sie mehr über die unterstützten <a href="/docs/de/index.md">Indextypen</a> in Milvus.</li>
+<li>Erfahren Sie mehr über die unterstützten <a href="/docs/de/index.md">Index-Typen</a> in Milvus.</li>
 </ul>

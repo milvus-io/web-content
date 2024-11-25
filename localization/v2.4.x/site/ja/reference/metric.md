@@ -1,7 +1,7 @@
 ---
 id: metric.md
-summary: Milvusは、ユークリッド距離、内積、ジャカードなど、様々な類似性メトリクスをサポートしています。
-title: 類似性指標
+summary: Milvusは、ユークリッド距離、内積、ジャカードなど、様々な類似性メトリクスをサポートしている。
+title: 類似性メトリクス
 ---
 <h1 id="Similarity-Metrics" class="common-anchor-header">類似性メトリクス<button data-href="#Similarity-Metrics" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -19,14 +19,14 @@ title: 類似性指標
         ></path>
       </svg>
     </button></h1><p>Milvusでは、ベクトル間の類似性を測定するために類似性メトリックが使用されます。適切な距離メトリックを選択することで、分類とクラスタリングの性能を大幅に向上させることができます。</p>
-<p>以下の表は広く使われている類似度メトリクスが様々な入力データ形式とMilvusインデックスにどのように適合するかを示しています。</p>
+<p>以下の表は広く使われている類似度メトリクスが様々な入力データ形式とMilvusインデックスにどのように適合するかを示しています。現在、Milvusは浮動小数点埋め込み（しばしば浮動小数点ベクトルや密なベクトルとして知られる）、バイナリ埋め込み（バイナリベクトルとしても知られる）、スパース埋め込み（スパースベクトルとしても知られる）を含む様々なタイプのデータをサポートしています。</p>
 <div class="filter">
- <a href="#floating">浮動小数点埋め込み</a> <a href="#binary">バイナリ埋め込み</a> <a href="#sparse">スパース埋め込み</a></div>
+ <a href="#floating">浮動小数点</a> <a href="#binary">埋め込み バイナリ埋め込み</a> <a href="#sparse">スパース埋め込み</a></div>
 <div class="filter-floating table-wrapper" markdown="block">
 <table class="tg">
 <thead>
   <tr>
-    <th class="tg-0pky" style="width: 204px;">メトリックタイプ</th>
+    <th class="tg-0pky" style="width: 204px;">メトリック型</th>
     <th class="tg-0pky">インデックスの種類</th>
   </tr>
 </thead>
@@ -79,15 +79,15 @@ title: 類似性指標
 <p>ここで<strong>a</strong>= (<sub>a0</sub>,<sub>a1</sub>,...,<sub>an-1</sub>)と<strong>b</strong>= (<sub>b0</sub>,<sub>b0</sub>,...,<sub>bn</sub>-1)はn次元ユークリッド空間の2点である。</p>
 <p>これは最もよく使われる距離尺度で、データが連続的な場合に非常に便利である。</p>
 <div class="alert note">
-Milvusはユークリッド距離が距離メトリックとして選択された場合、平方根を適用する前に値のみを計算します。</div>
-<h3 id="Inner-product-IP" class="common-anchor-header">内積 (IP)</h3><p>2つの埋め込み間のIP距離は次のように定義されます：</p>
+Milvusはユークリッド距離が距離メトリックとして選択された時のみ平方根を適用する前に値を計算します。</div>
+<h3 id="Inner-product-IP" class="common-anchor-header">内積 (IP)</h3><p>2つのベクトル埋め込み間のIP距離は次のように定義されます：</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/IP_formula.png" alt="ip" class="doc-image" id="ip" />
    </span> <span class="img-wrapper"> <span>IP</span> </span></p>
 <p>IPは、正規化されていないデータを比較する場合や、大きさや角度を気にする場合に便利です。</p>
 <div class="alert note">
-<p>正規化された埋め込みデータに対してIP距離を適用すると、埋め込みデータ間の余弦類似度を計算するのと同じ結果になります。</p>
+<p>正規化された埋込みデータにIP距離を適用すると，埋込みデータ間の余弦類似度を計算するのと同じ結果になります．</p>
 </div>
 <p>X'が埋め込みXから正規化されたとします：</p>
 <p>
@@ -99,7 +99,7 @@ Milvusはユークリッド距離が距離メトリックとして選択され�
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/normalization_formula.png" alt="normalization" class="doc-image" id="normalization" />
    </span> <span class="img-wrapper"> <span>正規化</span> </span></p>
-<h3 id="Cosine-Similarity" class="common-anchor-header">コサイン類似度</h3><p>コサイン類似度は、2組のベクトル間の角度のコサインを用いて、それらの類似度を測定します。2つのベクトル集合は、同じ原点（[0,0,...]）から始まり、異なる方向を向いている2つの線分と考えることができます。</p>
+<h3 id="Cosine-Similarity" class="common-anchor-header">コサイン類似度</h3><p>コサイン類似度は、2組のベクトル間の角度の余弦を用いて、それらの類似度を測定します。2組のベクトルは、同じ原点（[0,0,...]）から出発し、異なる方向を向いている2つの線分と考えることができます。</p>
 <p>2組のベクトル<strong>A = (<sub>a0</sub>,<sub>a1</sub>,...,<sub>an-1</sub>)</strong>と<strong>B = (<sub>b0</sub>,<sub>b1</sub>,...,<sub>bn</sub>-1)</strong>の余弦類似度を計算するには、次の式を使います：</p>
 <p>
   
@@ -112,12 +112,12 @@ Milvusはユークリッド距離が距離メトリックとして選択され�
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/jaccard_coeff.png" alt="Jaccard similarity coefficient" class="doc-image" id="jaccard-similarity-coefficient" />
    </span> <span class="img-wrapper"> <span>ジャカード類似度係数</span> </span></p>
-<p>ジャカード距離はデータ集合間の非類似度を測定し，1からジャカード類似度係数を引くことで得られる．</p>
+<p>Jaccard距離はデータ集合間の非類似度を測定し，Jaccard類似度係数を1から引くことで得られる．</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/jaccard_dist.png" alt="Jaccard distance" class="doc-image" id="jaccard-distance" />
    </span> <span class="img-wrapper"> <span>ジャカード距離</span> </span></p>
-<h3 id="Hamming-distance" class="common-anchor-header">ハミング距離</h3><p>ハミング距離はバイナリ・データの文字列を測定する。同じ長さの2つの文字列間の距離は、ビットが異なるビット位置の数である。</p>
+<h3 id="Hamming-distance" class="common-anchor-header">ハミング距離</h3><p>ハミング距離は2値データの文字列を測定する。同じ長さの2つの文字列間の距離は、ビットが異なるビット位置の数である。</p>
 <p>例えば、1101 1001 と 1001 1101 という2つの文字列があるとする。</p>
 <p>11011001 ⊕ 10011101 = 01000100.これには2つの1が含まれるため、ハミング距離d (11011001, 10011101) = 2となる。</p>
 <h3 id="Structural-Similarity" class="common-anchor-header">構造の類似性</h3><p>ある化学構造がより大きな化学構造の一部として存在する場合、前者を部分構造、後者を上部構造と呼ぶ。例えば、エタノールは酢酸の部分構造であり、酢酸はエタノールの上部構造である。</p>
@@ -130,7 +130,7 @@ Milvusはユークリッド距離が距離メトリックとして選択され�
 <p>ここで</p>
 <ul>
 <li>Aは、検索する化学式のバイナリ表現である。</li>
-<li>Bはデータベース内の化学式のバイナリ表現である。</li>
+<li>B はデータベース内の化学式のバイナリ表現である。</li>
 </ul>
 <p>この式が<code translate="no">0</code> を返すと、<strong>Aは</strong> <strong>Bの</strong>上部構造ではない。</p>
 <p>AがBの部分構造であるかどうかを判定するには、以下の式を使用する：</p>

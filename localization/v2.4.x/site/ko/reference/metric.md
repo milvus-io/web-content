@@ -19,7 +19,7 @@ title: 유사성 메트릭
         ></path>
       </svg>
     </button></h1><p>Milvus에서 유사성 메트릭은 벡터 간의 유사성을 측정하는 데 사용됩니다. 좋은 거리 메트릭을 선택하면 분류 및 클러스터링 성능을 크게 향상시키는 데 도움이 됩니다.</p>
-<p>다음 표는 널리 사용되는 이러한 유사성 메트릭이 다양한 입력 데이터 형식과 Milvus 인덱스에 어떻게 적용되는지 보여줍니다.</p>
+<p>다음 표는 널리 사용되는 유사도 메트릭이 다양한 입력 데이터 양식과 Milvus 인덱스에 어떻게 적용되는지 보여줍니다. 현재 Milvus는 부동 소수점 임베딩(부동 소수점 벡터 또는 고밀도 벡터라고도 함), 이진 임베딩(이진 벡터라고도 함), 스파스 임베딩(스파스 벡터라고도 함)을 포함한 다양한 유형의 데이터를 지원합니다.</p>
 <div class="filter">
  <a href="#floating">부동 소수점 임베딩</a> <a href="#binary">이진 임베딩</a> <a href="#sparse">스파스 임베딩</a></div>
 <div class="filter-floating table-wrapper" markdown="block">
@@ -80,7 +80,7 @@ title: 유사성 메트릭
 <p>가장 일반적으로 사용되는 거리 측정법으로 데이터가 연속적인 경우 매우 유용합니다.</p>
 <div class="alert note">
 밀버스는 유클리드 거리를 거리 측정값으로 선택한 경우 제곱근을 적용하기 전의 값만 계산합니다.</div>
-<h3 id="Inner-product-IP" class="common-anchor-header">내부 제품(IP)</h3><p>두 임베딩 사이의 IP 거리는 다음과 같이 정의됩니다:</p>
+<h3 id="Inner-product-IP" class="common-anchor-header">내부 곱(IP)</h3><p>두 벡터 임베딩 사이의 IP 거리는 다음과 같이 정의됩니다:</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/IP_formula.png" alt="ip" class="doc-image" id="ip" />
@@ -100,7 +100,7 @@ title: 유사성 메트릭
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/normalization_formula.png" alt="normalization" class="doc-image" id="normalization" />
    </span> <span class="img-wrapper"> <span>정규화</span> </span></p>
 <h3 id="Cosine-Similarity" class="common-anchor-header">코사인 유사도</h3><p>코사인 유사도는 두 벡터 세트 사이의 각도의 코사인을 사용하여 얼마나 유사한지 측정합니다. 두 벡터 세트는 같은 원점([0,0,...])에서 시작하지만 서로 다른 방향을 가리키는 두 개의 선분으로 생각할 수 있습니다.</p>
-<p>두 벡터 집합 <strong>A = (<sub>a0</sub>, <sub>a1</sub>,...,<sub>an-1</sub>)</strong> 와 <strong>B = (<sub>b0</sub>, <sub>b1</sub>,..., <sub>bn-1</sub></strong> <strong>)</strong> 사이의 코사인 유사도를 계산하려면 다음 공식을 사용합니다:</p>
+<p>두 벡터 집합 <strong>A = (<sub>a0</sub>, <sub>a1</sub>,...,<sub>an-1</sub>)</strong> 와 <strong>B = (<sub>b0</sub>, <sub>b1</sub>,..., <sub>bn-1</sub></strong>) 사이의 코사인 유사도를 계산하려면 다음 공식을 사용합니다:</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/cosine_similarity.png" alt="cosine_similarity" class="doc-image" id="cosine_similarity" />
@@ -121,7 +121,7 @@ title: 유사성 메트릭
 <p>예를 들어 1101 1001과 1001 1101이라는 두 문자열이 있다고 가정해 보겠습니다.</p>
 <p>11011001 ⊕ 10011101 = 01000100. 여기에는 두 개의 1이 포함되어 있으므로 해밍 거리는 d(11011001, 10011101) = 2입니다.</p>
 <h3 id="Structural-Similarity" class="common-anchor-header">구조적 유사성</h3><p>어떤 화학 구조가 더 큰 화학 구조의 일부로 존재하는 경우 전자를 하부 구조라고 하고 후자를 상부 구조라고 합니다. 예를 들어 에탄올은 아세트산의 하부 구조이고 아세트산은 에탄올의 상부 구조입니다.</p>
-<p>구조 유사성은 두 화학식이 서로 유사한지 여부를 판단하는 데 사용되며, 한 화학식이 다른 화학식의 상부 구조인지 또는 하부 구조인지 판단하는 데 사용됩니다.</p>
+<p>구조 유사성은 두 화학식이 서로 유사한지 여부를 판단하는 데 사용되며, 한 화학식이 다른 화학식의 상부 구조인지 하부 구조인지 판단하는 데 사용됩니다.</p>
 <p>A가 B의 상부 구조인지 확인하려면 다음 공식을 사용하세요:</p>
 <p>
   

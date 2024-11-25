@@ -21,14 +21,14 @@ title: Metriche di somiglianza
         ></path>
       </svg>
     </button></h1><p>In Milvus, le metriche di somiglianza sono utilizzate per misurare le somiglianze tra i vettori. La scelta di una buona metrica di distanza aiuta a migliorare notevolmente le prestazioni di classificazione e clusterizzazione.</p>
-<p>La tabella seguente mostra come queste metriche di somiglianza ampiamente utilizzate si adattano a varie forme di dati di input e agli indici di Milvus.</p>
+<p>La tabella seguente mostra come le metriche di somiglianza più diffuse si adattano a varie forme di dati di input e agli indici di Milvus. Attualmente Milvus supporta vari tipi di dati, tra cui embeddings in virgola mobile (spesso noti come vettori in virgola mobile o vettori densi), embeddings binari (noti anche come vettori binari) e embeddings sparsi (noti anche come vettori sparsi).</p>
 <div class="filter">
- <a href="#floating">Incorporazioni in virgola mobile</a> <a href="#binary">Incorporazioni binarie</a> <a href="#sparse">Incorporazioni sparse</a></div>
+ <a href="#floating">Incorporazioni in virgola mobile</a> <a href="#binary">Incorporazioni binarie</a> <a href="#sparse">Incorporazioni rade</a></div>
 <div class="filter-floating table-wrapper" markdown="block">
 <table class="tg">
 <thead>
   <tr>
-    <th class="tg-0pky" style="width: 204px;">Tipi di metrica</th>
+    <th class="tg-0pky" style="width: 204px;">Tipi di metriche</th>
     <th class="tg-0pky">Tipi di indice</th>
   </tr>
 </thead>
@@ -82,14 +82,14 @@ title: Metriche di somiglianza
 <p>È la metrica di distanza più utilizzata ed è molto utile quando i dati sono continui.</p>
 <div class="alert note">
 Milvus calcola il valore prima di applicare la radice quadrata solo quando la distanza euclidea è scelta come metrica di distanza.</div>
-<h3 id="Inner-product-IP" class="common-anchor-header">Prodotto interno (IP)</h3><p>La distanza IP tra due incorporazioni è definita come segue:</p>
+<h3 id="Inner-product-IP" class="common-anchor-header">Prodotto interno (IP)</h3><p>La distanza IP tra due incorporazioni vettoriali è definita come segue:</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/IP_formula.png" alt="ip" class="doc-image" id="ip" />
    </span> <span class="img-wrapper"> <span>ip</span> </span></p>
 <p>L'IP è più utile se si devono confrontare dati non normalizzati o se si tiene conto della magnitudine e dell'angolo.</p>
 <div class="alert note">
-<p>Se si applica la metrica della distanza IP a embeddings normalizzati, il risultato sarà equivalente al calcolo della somiglianza del coseno tra gli embeddings.</p>
+<p>Se si applica la metrica di distanza IP alle incorporazioni normalizzate, il risultato sarà equivalente al calcolo della somiglianza del coseno tra le incorporazioni.</p>
 </div>
 <p>Supponiamo che X' sia normalizzato dall'incorporamento X:</p>
 <p>
@@ -107,7 +107,7 @@ Milvus calcola il valore prima di applicare la radice quadrata solo quando la di
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/cosine_similarity.png" alt="cosine_similarity" class="doc-image" id="cosine_similarity" />
    </span> <span class="img-wrapper"> <span>coseno_similarità</span> </span></p>
-<p>La somiglianza del coseno è sempre nell'intervallo <strong>[-1, 1]</strong>. Ad esempio, due vettori proporzionali hanno una somiglianza di coseno pari a <strong>1</strong>, due vettori ortogonali hanno una somiglianza pari a <strong>0</strong> e due vettori opposti hanno una somiglianza pari a <strong>-1</strong>. Più grande è il coseno, più piccolo è l'angolo tra due vettori, a indicare che questi due vettori sono più simili tra loro.</p>
+<p>La somiglianza del coseno è sempre nell'intervallo <strong>[-1, 1]</strong>. Ad esempio, due vettori proporzionali hanno una somiglianza di coseno pari a <strong>1</strong>, due vettori ortogonali hanno una somiglianza pari a <strong>0</strong> e due vettori opposti hanno una somiglianza pari a <strong>-1</strong>. Più grande è il coseno, minore è l'angolo tra due vettori, il che indica che questi due vettori sono più simili tra loro.</p>
 <p>Sottraendo la somiglianza del coseno da 1, si ottiene la distanza del coseno tra due vettori.</p>
 <h3 id="Jaccard-distance" class="common-anchor-header">Distanza di Jaccard</h3><p>Il coefficiente di somiglianza di Jaccard misura la somiglianza tra due insiemi di campioni ed è definito come la cardinalità dell'intersezione degli insiemi definiti divisa per la cardinalità dell'unione degli stessi. Può essere applicato solo a insiemi di campioni finiti.</p>
 <p>
@@ -165,7 +165,7 @@ Milvus calcola il valore prima di applicare la radice quadrata solo quando la di
 <summary><font color="#4fc4f9">Perché il risultato top1 di una ricerca vettoriale non è il vettore di ricerca stesso, se il tipo di metrica è il prodotto interno?</font></summary>Questo accade se non si sono normalizzati i vettori quando si usa il prodotto interno come metrica di distanza.</details>
 <details>
 <summary><font color="#4fc4f9">Che cos'è la normalizzazione? Perché è necessaria la normalizzazione?</font></summary></p>
-<p>La normalizzazione si riferisce al processo di conversione di un incorporamento (vettore) in modo tale che la sua norma sia uguale a 1. Se si utilizza il prodotto interno per calcolare le somiglianze tra gli incorporamenti, è necessario normalizzare gli incorporamenti. Dopo la normalizzazione, il prodotto interno è uguale alla somiglianza del coseno.</p>
+<p>La normalizzazione si riferisce al processo di conversione di un incorporamento (vettore) in modo che la sua norma sia uguale a 1. Se si utilizza il prodotto interno per calcolare le somiglianze tra gli incorporamenti, è necessario normalizzare gli incorporamenti. Dopo la normalizzazione, il prodotto interno è uguale alla somiglianza del coseno.</p>
 <p>
 Per ulteriori informazioni, consultare <a href="https://en.wikipedia.org/wiki/Unit_vector">Wikipedia</a>.</p>
 </details>

@@ -20,7 +20,7 @@ title: In-Memory-Index
         ></path>
       </svg>
     </button></h1><p>Dieses Thema listet verschiedene Arten von In-Memory-Indizes auf, die von Milvus unterstützt werden, die Szenarien, für die jeder von ihnen am besten geeignet ist, und die Parameter, die Benutzer konfigurieren können, um eine bessere Suchleistung zu erzielen. Für On-Disk-Indizes, siehe <strong><a href="/docs/de/disk_index.md">On-Disk-Index</a></strong>.</p>
-<p>Indizierung ist der Prozess der effizienten Organisation von Daten und spielt eine wichtige Rolle bei der Nützlichkeit der Ähnlichkeitssuche, indem sie zeitaufwändige Abfragen auf großen Datenbeständen drastisch beschleunigt.</p>
+<p>Indizierung ist der Prozess der effizienten Organisation von Daten und spielt eine wichtige Rolle, wenn es darum geht, die Ähnlichkeitssuche nützlich zu machen, indem zeitaufwändige Abfragen auf großen Datenbeständen drastisch beschleunigt werden.</p>
 <p>Um die Abfrageleistung zu verbessern, können Sie für jedes Vektorfeld <a href="/docs/de/index-vector-fields.md">einen Indextyp angeben</a>.</p>
 <div class="alert note">
 Derzeit unterstützt ein Vektorfeld nur einen Index-Typ. Milvus löscht automatisch den alten Index, wenn der Indextyp gewechselt wird.</div>
@@ -39,7 +39,7 @@ Derzeit unterstützt ein Vektorfeld nur einen Index-Typ. Milvus löscht automati
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Die meisten der von Milvus unterstützten Vektorindex-Typen verwenden ANNS-Algorithmen (approximate nearest neighbors search). Verglichen mit der genauen Suche, die in der Regel sehr zeitaufwändig ist, beschränkt sich die Kernidee von ANNS nicht mehr darauf, das genaueste Ergebnis zu liefern, sondern sucht nur noch nach Nachbarn des Ziels. ANNS verbessert die Effizienz des Abrufs, indem es die Genauigkeit innerhalb eines akzeptablen Bereichs opfert.</p>
+    </button></h2><p>Die meisten der von Milvus unterstützten Vektorindex-Typen verwenden Algorithmen zur approximativen Suche nach den nächsten Nachbarn (ANNS). Verglichen mit der genauen Suche, die in der Regel sehr zeitaufwändig ist, beschränkt sich die Kernidee von ANNS nicht mehr darauf, das genaueste Ergebnis zu liefern, sondern sucht nur noch nach Nachbarn des Ziels. ANNS verbessert die Effizienz des Abrufs, indem es die Genauigkeit innerhalb eines akzeptablen Bereichs opfert.</p>
 <p>Je nach Implementierungsmethode kann der ANNS-Vektorindex in vier Typen eingeteilt werden: Baum-basiert, Graph-basiert, Hash-basiert und Quantisierungs-basiert.</p>
 <h2 id="Indexes-supported-in-Milvus" class="common-anchor-header">In Milvus unterstützte Indizes<button data-href="#Indexes-supported-in-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -56,11 +56,11 @@ Derzeit unterstützt ein Vektorfeld nur einen Index-Typ. Milvus löscht automati
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus unterstützt verschiedene Indextypen, die nach der Art der Einbettung, die sie verarbeiten, kategorisiert werden: <strong>Fließkomma</strong>, <strong>Binär</strong> und <strong>Sparse</strong>.</p>
+    </button></h2><p>Milvus unterstützt verschiedene Indextypen, die nach der Art der Vektoreinbettungen, die sie verarbeiten, kategorisiert werden: <strong>Fließkomma-Einbettungen</strong> (auch bekannt als Fließkomma-Vektoren oder dichte Vektoren), <strong>binäre Einbettungen</strong> (auch bekannt als binäre Vektoren) und <strong>spärliche Einbettungen</strong> (auch bekannt als spärliche Vektoren).</p>
 <div class="filter">
- <a href="#floating">Fließkomma-Einbettungen</a> <a href="#binary">Binäre Einbettungen</a> <a href="#sparse">Sparse Einbettungen</a></div>
+ <a href="#floating">Fließkomma-Einbettungen</a> <a href="#binary">Binäre Einbettungen</a> <a href="#sparse">Sparse Embeddings</a></div>
 <div class="filter-floating">
-<h3 id="Indexes-for-floating-point-embeddings" class="common-anchor-header">Indizes für Fließkomma-Einbettungen</h3><p>Bei 128-dimensionalen Fließkomma-Einbettungen beträgt der benötigte Speicherplatz 128 * die Größe von float = 512 Byte. Die für Fließkomma-Einbettungen verwendeten <a href="/docs/de/metric.md">Abstandsmetriken</a> sind der euklidische Abstand (<code translate="no">L2</code>) und das innere Produkt (<code translate="no">IP</code>).</p>
+<h3 id="Indexes-for-floating-point-embeddings" class="common-anchor-header">Indizes für Fließkomma-Einbettungen</h3><p>Für 128-dimensionale Fließkomma-Einbettungen (Vektoren) beträgt der Speicherplatzbedarf 128 * die Größe von float = 512 Byte. Die für Fließkomma-Einbettungen verwendeten <a href="/docs/de/metric.md">Abstandsmetriken</a> sind der euklidische Abstand (<code translate="no">L2</code>) und das innere Produkt (<code translate="no">IP</code>).</p>
 <p>Diese Arten von Indizes umfassen <code translate="no">FLAT</code>, <code translate="no">IVF_FLAT</code>, <code translate="no">IVF_PQ</code>, <code translate="no">IVF_SQ8</code>, <code translate="no">HNSW</code> und <code translate="no">SCANN</code> für CPU-basierte ANN-Suchen.</p>
 </div>
 <div class="filter-binary">
@@ -255,7 +255,7 @@ Derzeit unterstützt ein Vektorfeld nur einen Index-Typ. Milvus löscht automati
 <tr><th>Parameter</th><th>Beschreibung</th><th>Bereich</th><th>Standardwert</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">max_empty_result_buckets</code></td><td>Maximale Anzahl von Bereichen, die keine Suchergebnisse liefern.<br/>Dies ist ein Parameter für die Bereichssuche und beendet den Suchvorgang, wenn die Anzahl der aufeinanderfolgenden leeren Bereiche den angegebenen Wert erreicht.<br/>Eine Erhöhung dieses Wertes kann die Abrufrate auf Kosten einer längeren Suchzeit verbessern.</td><td>[1, 65535]</td><td>2</td></tr>
+<tr><td><code translate="no">max_empty_result_buckets</code></td><td>Maximale Anzahl der Buckets, die keine Suchergebnisse liefern.<br/>Dies ist ein Parameter für die Bereichssuche, der den Suchvorgang beendet, wenn die Anzahl der aufeinander folgenden leeren Buckets den angegebenen Wert erreicht.<br/>Eine Erhöhung dieses Wertes kann die Abrufrate auf Kosten einer längeren Suchzeit verbessern.</td><td>[1, 65535]</td><td>2</td></tr>
 </tbody>
 </table>
 </li>
@@ -292,7 +292,7 @@ Derzeit unterstützt ein Vektorfeld nur einen Index-Typ. Milvus löscht automati
 <tr><th>Parameter</th><th>Beschreibung</th><th>Bereich</th><th>Standardwert</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">max_empty_result_buckets</code></td><td>Maximale Anzahl von Bereichen, die keine Suchergebnisse liefern.<br/>Dies ist ein Parameter für die Bereichssuche und beendet den Suchvorgang, wenn die Anzahl der aufeinanderfolgenden leeren Bereiche den angegebenen Wert erreicht.<br/>Eine Erhöhung dieses Wertes kann die Abrufrate auf Kosten einer längeren Suchzeit verbessern.</td><td>[1, 65535]</td><td>2</td></tr>
+<tr><td><code translate="no">max_empty_result_buckets</code></td><td>Maximale Anzahl der Buckets, die keine Suchergebnisse liefern.<br/>Dies ist ein Parameter für die Bereichssuche, der den Suchvorgang beendet, wenn die Anzahl der aufeinander folgenden leeren Buckets den angegebenen Wert erreicht.<br/>Eine Erhöhung dieses Wertes kann die Abrufrate auf Kosten einer längeren Suchzeit verbessern.</td><td>[1, 65535]</td><td>2</td></tr>
 </tbody>
 </table>
 </li>
@@ -334,7 +334,7 @@ Derzeit unterstützt ein Vektorfeld nur einen Index-Typ. Milvus löscht automati
 <tr><th>Parameter</th><th>Beschreibung</th><th>Bereich</th><th>Standardwert</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">max_empty_result_buckets</code></td><td>Maximale Anzahl der Buckets, die keine Suchergebnisse liefern.<br/>Dies ist ein Parameter für die Bereichssuche, der den Suchvorgang beendet, wenn die Anzahl der aufeinander folgenden leeren Buckets den angegebenen Wert erreicht.<br/>Eine Erhöhung dieses Wertes kann die Abrufrate auf Kosten einer längeren Suchzeit verbessern.</td><td>[1, 65535]</td><td>2</td></tr>
+<tr><td><code translate="no">max_empty_result_buckets</code></td><td>Maximale Anzahl von Bereichen, die keine Suchergebnisse liefern.<br/>Dies ist ein Parameter für die Bereichssuche und beendet den Suchvorgang, wenn die Anzahl der aufeinanderfolgenden leeren Bereiche den angegebenen Wert erreicht.<br/>Eine Erhöhung dieses Wertes kann die Abrufrate auf Kosten einer längeren Suchzeit verbessern.</td><td>[1, 65535]</td><td>2</td></tr>
 </tbody>
 </table>
 </li>
@@ -375,14 +375,14 @@ Derzeit unterstützt ein Vektorfeld nur einen Index-Typ. Milvus löscht automati
 <tr><th>Parameter</th><th>Beschreibung</th><th>Bereich</th><th>Standardwert</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">max_empty_result_buckets</code></td><td>Maximale Anzahl von Bereichen, die keine Suchergebnisse liefern.<br/>Dies ist ein Parameter für die Bereichssuche und beendet den Suchvorgang, wenn die Anzahl der aufeinanderfolgenden leeren Bereiche den angegebenen Wert erreicht.<br/>Eine Erhöhung dieses Wertes kann die Abrufrate auf Kosten einer längeren Suchzeit verbessern.</td><td>[1, 65535]</td><td>2</td></tr>
+<tr><td><code translate="no">max_empty_result_buckets</code></td><td>Maximale Anzahl der Buckets, die keine Suchergebnisse liefern.<br/>Dies ist ein Parameter für die Bereichssuche, der den Suchvorgang beendet, wenn die Anzahl der aufeinander folgenden leeren Buckets den angegebenen Wert erreicht.<br/>Eine Erhöhung dieses Wertes kann die Abrufrate auf Kosten einer längeren Suchzeit verbessern.</td><td>[1, 65535]</td><td>2</td></tr>
 </tbody>
 </table>
 </li>
 </ul></li>
 </ul>
 <h3 id="HNSW" class="common-anchor-header">HNSW</h3><p>HNSW (Hierarchical Navigable Small World Graph) ist ein graphbasierter Indizierungsalgorithmus. Er baut eine mehrschichtige Navigationsstruktur für ein Bild nach bestimmten Regeln auf. In dieser Struktur sind die oberen Schichten spärlicher und die Abstände zwischen den Knoten größer; die unteren Schichten sind dichter und die Abstände zwischen den Knoten sind kleiner. Die Suche beginnt in der obersten Schicht, findet den Knoten, der dem Ziel in dieser Schicht am nächsten liegt, und begibt sich dann in die nächste Schicht, um eine weitere Suche zu beginnen. Nach mehreren Iterationen kann sie sich schnell der Zielposition nähern.</p>
-<p>Um die Leistung zu verbessern, begrenzt HNSW den maximalen Grad der Knoten auf jeder Ebene des Graphen auf <code translate="no">M</code>. Außerdem können Sie <code translate="no">efConstruction</code> (beim Indexaufbau) oder <code translate="no">ef</code> (bei der Suche nach Zielen) verwenden, um einen Suchbereich anzugeben.</p>
+<p>Um die Leistung zu verbessern, begrenzt HNSW den maximalen Grad der Knoten auf jeder Ebene des Graphen auf <code translate="no">M</code>. Darüber hinaus können Sie <code translate="no">efConstruction</code> (beim Indexaufbau) oder <code translate="no">ef</code> (bei der Suche nach Zielen) verwenden, um einen Suchbereich anzugeben.</p>
 <ul>
 <li><p>Parameter für den Indexaufbau</p>
 <table>
@@ -456,7 +456,7 @@ Derzeit unterstützt ein Vektorfeld nur einen Index-Typ. Milvus löscht automati
 <tr><th>Parameter</th><th>Beschreibung</th><th>Bereich</th><th>Standardwert</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">max_empty_result_buckets</code></td><td>Maximale Anzahl der Buckets, die keine Suchergebnisse liefern.<br/>Dies ist ein Parameter für die Bereichssuche, der den Suchvorgang beendet, wenn die Anzahl der aufeinander folgenden leeren Buckets den angegebenen Wert erreicht.<br/>Eine Erhöhung dieses Wertes kann die Abrufrate auf Kosten einer längeren Suchzeit verbessern.</td><td>[1, 65535]</td><td>2</td></tr>
+<tr><td><code translate="no">max_empty_result_buckets</code></td><td>Maximale Anzahl von Bereichen, die keine Suchergebnisse liefern.<br/>Dies ist ein Parameter für die Bereichssuche und beendet den Suchvorgang, wenn die Anzahl der aufeinanderfolgenden leeren Bereiche den angegebenen Wert erreicht.<br/>Eine Erhöhung dieses Wertes kann die Abrufrate auf Kosten einer längeren Suchzeit verbessern.</td><td>[1, 65535]</td><td>2</td></tr>
 </tbody>
 </table>
 </li>

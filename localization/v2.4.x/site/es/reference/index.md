@@ -56,11 +56,11 @@ Actualmente, un campo vectorial sólo admite un tipo de índice. Milvus elimina 
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus admite varios tipos de índices, que se clasifican por el tipo de incrustación que manejan: <strong>punto flotante</strong>, <strong>binario</strong> y <strong>disperso</strong>.</p>
+    </button></h2><p>Milvus admite varios tipos de índices, que se clasifican por el tipo de incrustaciones vectoriales que manejan: <strong>incrustaciones de coma flotante</strong> (también conocidas como vectores de coma flotante o vectores densos), <strong>incrustaciones binarias</strong> (también conocidas como vectores binarios) e <strong>incrustaciones dispersas</strong> (también conocidas como vectores dispersos).</p>
 <div class="filter">
- <a href="#sparse">Incrustaciones</a> <a href="#floating">de coma flotante</a> <a href="#binary">Incrustaciones binarias</a> <a href="#sparse">Incrustaciones dispersas</a></div>
+ <a href="#sparse">Incrustaciones</a> <a href="#floating">en coma flotante</a> <a href="#binary">Incrustaciones binarias</a> <a href="#sparse">Incrustaciones dispersas</a></div>
 <div class="filter-floating">
-<h3 id="Indexes-for-floating-point-embeddings" class="common-anchor-header">Índices para incrustaciones de coma flotante</h3><p>Para las incrustaciones de coma flotante de 128 dimensiones, el espacio que ocupan es de 128 * el tamaño de la coma flotante = 512 bytes. Las <a href="/docs/es/metric.md">métricas de distancia</a> utilizadas para las incrustaciones en coma flotante son la distancia euclidiana (<code translate="no">L2</code>) y el producto interior (<code translate="no">IP</code>).</p>
+<h3 id="Indexes-for-floating-point-embeddings" class="common-anchor-header">Índices para incrustaciones de coma flotante</h3><p>En el caso de las incrustaciones de coma flotante de 128 dimensiones (vectores), el almacenamiento que ocupan es de 128 * el tamaño de float = 512 bytes. Y las <a href="/docs/es/metric.md">métricas de distancia</a> utilizadas para las incrustaciones en coma flotante son la distancia euclidiana (<code translate="no">L2</code>) y el producto interior (<code translate="no">IP</code>).</p>
 <p>Estos tipos de índices incluyen <code translate="no">FLAT</code>, <code translate="no">IVF_FLAT</code>, <code translate="no">IVF_PQ</code>, <code translate="no">IVF_SQ8</code>, <code translate="no">HNSW</code>, y <code translate="no">SCANN</code> para búsquedas RNA basadas en CPU.</p>
 </div>
 <div class="filter-binary">
@@ -140,7 +140,7 @@ Actualmente, un campo vectorial sólo admite un tipo de índice. Milvus elimina 
     <td>
       <ul>
         <li>Consulta de muy alta velocidad</li>
-        <li>Requiere una tasa de recuperación lo más alta posible</li>
+        <li>Requiere un índice de recuperación lo más alto posible</li>
         <li>Grandes recursos de memoria</li>
       </ul>
     </td>
@@ -249,13 +249,13 @@ Actualmente, un campo vectorial sólo admite un tipo de índice. Milvus elimina 
 </tbody>
 </table>
 </li>
-<li><p>Búsqueda por rangos</p>
+<li><p>Rango de búsqueda</p>
 <table>
 <thead>
 <tr><th>Parámetro</th><th>Descripción</th><th>Gama</th><th>Valor por defecto</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">max_empty_result_buckets</code></td><td>Número máximo de cubos que no devuelven ningún resultado de búsqueda.<br/>Este es un parámetro de búsqueda por rango y termina el proceso de búsqueda cuando el número de cubos vacíos consecutivos alcanza el valor especificado.<br/>Aumentar este valor puede mejorar la tasa de recuperación a costa de aumentar el tiempo de búsqueda.</td><td>[1, 65535]</td><td>2</td></tr>
+<tr><td><code translate="no">max_empty_result_buckets</code></td><td>Número máximo de buckets que no devuelven ningún resultado de búsqueda.<br/>Este es un parámetro de búsqueda por rango y termina el proceso de búsqueda cuando el número de buckets vacíos consecutivos alcanza el valor especificado.<br/>Aumentar este valor puede mejorar la tasa de recuperación a costa de aumentar el tiempo de búsqueda.</td><td>[1, 65535]</td><td>2</td></tr>
 </tbody>
 </table>
 </li>
@@ -286,7 +286,7 @@ Actualmente, un campo vectorial sólo admite un tipo de índice. Milvus elimina 
 </tbody>
 </table>
 </li>
-<li><p>Búsqueda por rangos</p>
+<li><p>Rango de búsqueda</p>
 <table>
 <thead>
 <tr><th>Parámetro</th><th>Descripción</th><th>Gama</th><th>Valor por defecto</th></tr>
@@ -298,7 +298,7 @@ Actualmente, un campo vectorial sólo admite un tipo de índice. Milvus elimina 
 </li>
 </ul></li>
 </ul>
-<h3 id="IVFPQ" class="common-anchor-header">IVF_PQ</h3><p><code translate="no">PQ</code> (Cuantización de productos) descompone uniformemente el espacio vectorial original de alta dimensión en productos cartesianos de <code translate="no">m</code> espacios vectoriales de baja dimensión y, a continuación, cuantiza los espacios vectoriales de baja dimensión descompuestos. En lugar de calcular las distancias entre el vector objetivo y el centro de todas las unidades, la cuantización de productos permite calcular las distancias entre el vector objetivo y el centro de agrupación de cada espacio de baja dimensión y reduce en gran medida la complejidad temporal y espacial del algoritmo.</p>
+<h3 id="IVFPQ" class="common-anchor-header">IVF_PQ</h3><p><code translate="no">PQ</code> (Product Quantization) descompone uniformemente el espacio vectorial original de alta dimensión en productos cartesianos de <code translate="no">m</code> espacios vectoriales de baja dimensión y, a continuación, cuantiza los espacios vectoriales de baja dimensión descompuestos. En lugar de calcular las distancias entre el vector objetivo y el centro de todas las unidades, la cuantización de productos permite calcular las distancias entre el vector objetivo y el centro de agrupación de cada espacio de baja dimensión y reduce en gran medida la complejidad temporal y espacial del algoritmo.</p>
 <p>IVF_PQ realiza la agrupación de índices IVF antes de cuantificar el producto de vectores. Su archivo de índices es incluso más pequeño que IVF_SQ8, pero también provoca una pérdida de precisión durante la búsqueda de vectores.</p>
 <div class="alert note">
 <p>Los parámetros de construcción del índice y los parámetros de búsqueda varían según la distribución Milvus. Seleccione primero su distribución de Milvus.</p>
@@ -328,7 +328,7 @@ Actualmente, un campo vectorial sólo admite un tipo de índice. Milvus elimina 
 </tbody>
 </table>
 </li>
-<li><p>Búsqueda por rangos</p>
+<li><p>Rango de búsqueda</p>
 <table>
 <thead>
 <tr><th>Parámetro</th><th>Descripción</th><th>Gama</th><th>Valor por defecto</th></tr>
@@ -410,7 +410,7 @@ Actualmente, un campo vectorial sólo admite un tipo de índice. Milvus elimina 
 <div class="filter-binary">
 <h3 id="BINFLAT" class="common-anchor-header">BIN_FLAT</h3><p>Este índice es exactamente igual que FLAT, salvo que sólo puede utilizarse para incrustaciones binarias.</p>
 <p>Para aplicaciones de búsqueda de similitud vectorial que requieran una precisión perfecta y dependan de conjuntos de datos relativamente pequeños (a escala de millones), el índice BIN_FLAT es una buena elección. BIN_FLAT no comprime los vectores y es el único índice que puede garantizar resultados de búsqueda exactos. Los resultados de BIN_FLAT también pueden utilizarse como punto de comparación para los resultados producidos por otros índices que tienen menos del 100% de recuperación.</p>
-<p>BIN_FLAT es preciso porque adopta un enfoque exhaustivo de la búsqueda, lo que significa que para cada consulta la entrada objetivo se compara con vectores de un conjunto de datos. Esto hace que BIN_FLAT sea el índice más lento de nuestra lista y poco adecuado para consultar datos vectoriales masivos. No hay parámetros para el índice BIN_FLAT en Milvus, y su uso no requiere entrenamiento de datos ni almacenamiento adicional.</p>
+<p>BIN_FLAT es preciso porque adopta un enfoque exhaustivo de la búsqueda, lo que significa que para cada consulta la entrada objetivo se compara con vectores de un conjunto de datos. Esto hace que BIN_FLAT sea el índice más lento de nuestra lista y poco adecuado para consultar datos vectoriales masivos. No hay parámetros para el índice BIN_FLAT en Milvus y su uso no requiere entrenamiento de datos ni almacenamiento adicional.</p>
 <ul>
 <li><p>Parámetros de búsqueda</p>
 <table>
@@ -425,7 +425,7 @@ Actualmente, un campo vectorial sólo admite un tipo de índice. Milvus elimina 
 </ul>
 <h3 id="BINIVFFLAT" class="common-anchor-header">BIN_IVF_FLAT</h3><p>Este índice es exactamente igual que IVF_FLAT, salvo que sólo puede utilizarse para incrustaciones binarias.</p>
 <p>BIN_IVF_FLAT divide los datos vectoriales en unidades de clúster <code translate="no">nlist</code> y, a continuación, compara las distancias entre el vector de entrada objetivo y el centro de cada clúster. Dependiendo del número de clústeres que el sistema consulte (<code translate="no">nprobe</code>), los resultados de la búsqueda de similitud se basan en comparaciones entre la entrada de destino y los vectores del clúster o clústeres más similares, lo que reduce drásticamente el tiempo de consulta.</p>
-<p>Ajustando <code translate="no">nprobe</code>, se puede encontrar un equilibrio ideal entre precisión y velocidad para un escenario determinado. El tiempo de consulta aumenta considerablemente a medida que aumentan tanto el número de vectores de entrada objetivo (<code translate="no">nq</code>), como el número de clusters a buscar (<code translate="no">nprobe</code>).</p>
+<p>Ajustando <code translate="no">nprobe</code>, se puede encontrar un equilibrio ideal entre precisión y velocidad para un escenario determinado. El tiempo de consulta aumenta bruscamente a medida que aumentan tanto el número de vectores de entrada objetivo (<code translate="no">nq</code>), como el número de clusters a buscar (<code translate="no">nprobe</code>).</p>
 <p>BIN_IVF_FLAT es el índice BIN_IVF más básico, y los datos codificados almacenados en cada unidad son coherentes con los datos originales.</p>
 <ul>
 <li><p>Parámetros de construcción del índice</p>
@@ -450,13 +450,13 @@ Actualmente, un campo vectorial sólo admite un tipo de índice. Milvus elimina 
 </tbody>
 </table>
 </li>
-<li><p>Búsqueda por rangos</p>
+<li><p>Rango de búsqueda</p>
 <table>
 <thead>
 <tr><th>Parámetro</th><th>Descripción</th><th>Gama</th><th>Valor por defecto</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">max_empty_result_buckets</code></td><td>Número máximo de cubos que no devuelven ningún resultado de búsqueda.<br/>Este es un parámetro de búsqueda por rango y termina el proceso de búsqueda cuando el número de cubos vacíos consecutivos alcanza el valor especificado.<br/>Aumentar este valor puede mejorar la tasa de recuperación a costa de aumentar el tiempo de búsqueda.</td><td>[1, 65535]</td><td>2</td></tr>
+<tr><td><code translate="no">max_empty_result_buckets</code></td><td>Número máximo de buckets que no devuelven ningún resultado de búsqueda.<br/>Este es un parámetro de búsqueda por rango y termina el proceso de búsqueda cuando el número de buckets vacíos consecutivos alcanza el valor especificado.<br/>Aumentar este valor puede mejorar la tasa de recuperación a costa de aumentar el tiempo de búsqueda.</td><td>[1, 65535]</td><td>2</td></tr>
 </tbody>
 </table>
 </li>
@@ -482,13 +482,13 @@ Actualmente, un campo vectorial sólo admite un tipo de índice. Milvus elimina 
 <tr><th>Parámetro</th><th>Descripción</th><th>Rango</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">drop_ratio_search</code></td><td>Proporción de valores pequeños del vector que se excluyen durante el proceso de búsqueda. Esta opción permite ajustar con precisión el proceso de búsqueda especificando la proporción de los valores más pequeños del vector de consulta que deben ignorarse. Ayuda a equilibrar la precisión y el rendimiento de la búsqueda. Cuanto menor sea el valor establecido para <code translate="no">drop_ratio_search</code>, menos contribuirán estos valores pequeños a la puntuación final. Al ignorar algunos valores pequeños, se puede mejorar el rendimiento de la búsqueda con un impacto mínimo en la precisión.</td><td>[0, 1]</td></tr>
+<tr><td><code translate="no">drop_ratio_search</code></td><td>Proporción de valores pequeños del vector que se excluyen durante el proceso de búsqueda. Esta opción permite afinar el proceso de búsqueda especificando la proporción de los valores más pequeños del vector de consulta que deben ignorarse. Ayuda a equilibrar la precisión y el rendimiento de la búsqueda. Cuanto menor sea el valor establecido para <code translate="no">drop_ratio_search</code>, menos contribuirán estos valores pequeños a la puntuación final. Al ignorar algunos valores pequeños, se puede mejorar el rendimiento de la búsqueda con un impacto mínimo en la precisión.</td><td>[0, 1]</td></tr>
 </tbody>
 </table>
 </li>
 </ul>
 <h3 id="SPARSEWAND" class="common-anchor-header">VARA_ESPOSA</h3><p>Este índice comparte similitudes con <code translate="no">SPARSE_INVERTED_INDEX</code>, aunque utiliza el algoritmo <a href="https://dl.acm.org/doi/10.1145/956863.956944">Weak-AND</a> para reducir aún más el número de evaluaciones de distancia IP completa durante el proceso de búsqueda.</p>
-<p>Según nuestras pruebas, <code translate="no">SPARSE_WAND</code> suele superar a otros métodos en términos de velocidad. Sin embargo, su rendimiento puede deteriorarse rápidamente a medida que aumenta la densidad de los vectores. Para solucionar este problema, la introducción de un valor distinto de cero en <code translate="no">drop_ratio_search</code> puede mejorar significativamente el rendimiento, con una pérdida de precisión mínima. Para más información, consulte <a href="/docs/es/sparse_vector.md">Vector disperso</a>.</p>
+<p>Según nuestras pruebas, <code translate="no">SPARSE_WAND</code> suele superar a otros métodos en términos de velocidad. Sin embargo, su rendimiento puede deteriorarse rápidamente a medida que aumenta la densidad de los vectores. Para solucionar este problema, la introducción de un valor distinto de cero en <code translate="no">drop_ratio_search</code> puede mejorar significativamente el rendimiento con una pérdida mínima de precisión. Para más información, consulte <a href="/docs/es/sparse_vector.md">Vector disperso</a>.</p>
 <ul>
 <li><p>Parámetros de creación de índices</p>
 <table>

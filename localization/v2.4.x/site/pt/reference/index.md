@@ -56,15 +56,15 @@ Atualmente, um campo vetorial apenas suporta um tipo de índice. O Milvus elimin
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>O Milvus suporta vários tipos de índices, que são categorizados pelo tipo de incorporação que manipulam: <strong>ponto flutuante</strong>, <strong>binário</strong> e <strong>esparso</strong>.</p>
+    </button></h2><p>O Milvus suporta vários tipos de índices, que são categorizados pelo tipo de incorporação de vectores que tratam: <strong>incorporação</strong> de vírgula flutuante (também conhecida como vectores de vírgula flutuante ou vectores densos), <strong>incorporação binária</strong> (também conhecida como vectores binários) e <strong>incorporação esparsa</strong> (também conhecida como vectores esparsos).</p>
 <div class="filter">
- <a href="#floating">Embeddings de vírgula flutuante</a> <a href="#binary">Embeddings binários</a> <a href="#sparse">Embeddings esparsos</a></div>
+ <a href="#floating">Incorporações de vírgula flutuante</a> <a href="#binary">Incorporações binárias</a> <a href="#sparse">Incorporações esparsas</a></div>
 <div class="filter-floating">
-<h3 id="Indexes-for-floating-point-embeddings" class="common-anchor-header">Índices para embeddings de vírgula flutuante</h3><p>Para as incorporações de vírgula flutuante de 128 dimensões, o armazenamento que ocupam é 128 * o tamanho da vírgula flutuante = 512 bytes. E as <a href="/docs/pt/metric.md">métricas de distância</a> utilizadas para as incorporações de vírgula flutuante são a distância euclidiana (<code translate="no">L2</code>) e o produto interno (<code translate="no">IP</code>).</p>
+<h3 id="Indexes-for-floating-point-embeddings" class="common-anchor-header">Índices para incorporações de vírgula flutuante</h3><p>Para as incorporações de vírgula flutuante de 128 dimensões (vectores), o armazenamento que ocupam é 128 * o tamanho da vírgula flutuante = 512 bytes. E as <a href="/docs/pt/metric.md">métricas de distância</a> utilizadas para as incorporações de vírgula flutuante são a distância euclidiana (<code translate="no">L2</code>) e o produto interno (<code translate="no">IP</code>).</p>
 <p>Estes tipos de índices incluem <code translate="no">FLAT</code>, <code translate="no">IVF_FLAT</code>, <code translate="no">IVF_PQ</code>, <code translate="no">IVF_SQ8</code>, <code translate="no">HNSW</code>, e <code translate="no">SCANN</code> para pesquisas ANN baseadas em CPU.</p>
 </div>
 <div class="filter-binary">
-<h3 id="Indexes-for-binary-embeddings" class="common-anchor-header">Índices para incrustações binárias</h3><p>Para as incorporações binárias de 128 dimensões, o armazenamento que ocupam é de 128 / 8 = 16 bytes. E as métricas de distância utilizadas para as incorporações binárias são <code translate="no">JACCARD</code> e <code translate="no">HAMMING</code>.</p>
+<h3 id="Indexes-for-binary-embeddings" class="common-anchor-header">Índices para incrustações binárias</h3><p>Para as incorporações binárias de 128 dimensões, o armazenamento que ocupam é de 128 / 8 = 16 bytes. E as métricas de distância utilizadas para as incrustações binárias são <code translate="no">JACCARD</code> e <code translate="no">HAMMING</code>.</p>
 <p>Este tipo de índices inclui <code translate="no">BIN_FLAT</code> e <code translate="no">BIN_IVF_FLAT</code>.</p>
 </div>
 <div class="filter-sparse">

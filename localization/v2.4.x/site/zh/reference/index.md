@@ -56,11 +56,11 @@ title: 内存索引
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus 支持多种索引类型，按其处理的嵌入类型分为：<strong>浮点</strong>嵌入、<strong>二进制</strong>嵌入和<strong>稀疏</strong>嵌入。</p>
+    </button></h2><p>Milvus 支持多种索引类型，这些类型按其处理的向量嵌入类型分为：<strong>浮点嵌入</strong>（也称浮点向量或密集向量）、<strong>二进制嵌入</strong>（也称二进制向量）和<strong>稀疏嵌入</strong>（也称稀疏向量）。</p>
 <div class="filter">
- <a href="#floating">浮点</a> <a href="#binary">嵌入二进制嵌入</a> <a href="#sparse">稀疏嵌入</a></div>
+ <a href="#floating">浮点嵌入</a> <a href="#binary">二进制嵌入</a> <a href="#sparse">稀疏嵌入</a></div>
 <div class="filter-floating">
-<h3 id="Indexes-for-floating-point-embeddings" class="common-anchor-header">浮点嵌入索引</h3><p>对于 128 维浮点嵌入，其占用的存储空间为 128 * float 的大小 = 512 字节。而浮点内嵌使用的<a href="/docs/zh/metric.md">距离度量</a>是欧氏距离（<code translate="no">L2</code> ）和内积（<code translate="no">IP</code> ）。</p>
+<h3 id="Indexes-for-floating-point-embeddings" class="common-anchor-header">浮点嵌入的索引</h3><p>对于 128 维浮点嵌入（向量），其占用的存储空间为 128 * float 的大小 = 512 字节。而用于浮点嵌入的<a href="/docs/zh/metric.md">距离度量</a>是欧氏距离（<code translate="no">L2</code> ）和内积（<code translate="no">IP</code> ）。</p>
 <p>这些类型的索引包括<code translate="no">FLAT</code>,<code translate="no">IVF_FLAT</code>,<code translate="no">IVF_PQ</code>,<code translate="no">IVF_SQ8</code>,<code translate="no">HNSW</code> 和<code translate="no">SCANN</code> ，用于基于 CPU 的 ANN 搜索。</p>
 </div>
 <div class="filter-binary">
@@ -128,7 +128,7 @@ title: 内存索引
     <td>基于图形的索引</td>
     <td>
       <ul>
-        <li>非常高速的查询</li>
+        <li>极高速查询</li>
         <li>要求尽可能高的召回率</li>
         <li>内存资源大</li>
       </ul>
@@ -210,7 +210,7 @@ title: 内存索引
 </div>
 <div class="filter-floating">
 <h3 id="FLAT" class="common-anchor-header">平面</h3><p>对于要求完美准确性并依赖相对较小（百万量级）数据集的向量相似性搜索应用，FLAT 索引是一个不错的选择。FLAT 不压缩向量，是唯一能保证精确搜索结果的索引。FLAT 的结果还可以作为其他召回率低于 100% 的索引所产生结果的比较点。</p>
-<p>FLAT 的精确度很高，因为它采用的是穷举法搜索，这意味着每次查询都要将目标输入与数据集中的每一组向量进行比较。这使得 FLAT 成为我们列表中速度最慢的索引，而且不适合查询海量向量数据。在 Milvus 中，FLAT 索引不需要任何参数，使用它也不需要数据训练。</p>
+<p>FLAT 的精确度很高，因为它采用的是穷举搜索方法，这意味着每次查询都要将目标输入与数据集中的每一组向量进行比较。这使得 FLAT 成为我们列表中速度最慢的索引，而且不适合查询海量向量数据。在 Milvus 中，FLAT 索引不需要任何参数，使用它也不需要数据训练。</p>
 <ul>
 <li><p>搜索参数</p>
 <table>
@@ -223,8 +223,8 @@ title: 内存索引
 </table>
 </li>
 </ul>
-<h3 id="IVFFLAT" class="common-anchor-header">IVF_FLAT</h3><p>IVF_FLAT 将向量数据划分为<code translate="no">nlist</code> 个聚类单元，然后比较目标输入向量与每个聚类中心之间的距离。根据系统设置查询的簇数 (<code translate="no">nprobe</code>)，相似性搜索结果将仅根据目标输入与最相似簇中向量的比较结果返回--大大缩短了查询时间。</p>
-<p>通过调整<code translate="no">nprobe</code> ，可以在特定情况下找到准确性和速度之间的理想平衡。<a href="https://zilliz.com/blog/Accelerating-Similarity-Search-on-Really-Big-Data-with-Vector-Indexing">IVF_FLAT 性能测试</a>结果表明，随着目标输入向量数 (<code translate="no">nq</code>) 和要搜索的簇数 (<code translate="no">nprobe</code>) 的增加，查询时间也会急剧增加。</p>
+<h3 id="IVFFLAT" class="common-anchor-header">IVF_FLAT</h3><p>IVF_FLAT 将向量数据划分为<code translate="no">nlist</code> 个聚类单元，然后比较目标输入向量与每个聚类中心之间的距离。根据系统设置查询的簇数 (<code translate="no">nprobe</code>)，相似性搜索结果仅根据目标输入与最相似簇中向量的比较结果返回--大大缩短了查询时间。</p>
+<p>通过调整<code translate="no">nprobe</code> ，可以在特定情况下找到准确性和速度之间的理想平衡。<a href="https://zilliz.com/blog/Accelerating-Similarity-Search-on-Really-Big-Data-with-Vector-Indexing">IVF_FLAT 性能测试</a>的结果表明，随着目标输入向量数 (<code translate="no">nq</code>) 和搜索簇数 (<code translate="no">nprobe</code>) 的增加，查询时间也会急剧增加。</p>
 <p>IVF_FLAT 是最基本的 IVF 索引，每个单元中存储的编码数据与原始数据一致。</p>
 <ul>
 <li><p>索引构建参数</p>
@@ -255,7 +255,7 @@ title: 内存索引
 <tr><th>参数</th><th>说明</th><th>范围</th><th>默认值</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">max_empty_result_buckets</code></td><td>未返回任何搜索结果的桶的最大数量。<br/>这是一个范围搜索参数，当连续空桶的数量达到指定值时，搜索过程将终止。<br/>增加该值可以提高召回率，但代价是增加搜索时间。</td><td>[1, 65535]</td><td>2</td></tr>
+<tr><td><code translate="no">max_empty_result_buckets</code></td><td>未返回任何搜索结果的桶的最大数量。<br/>这是一个范围搜索参数，当连续空桶的数量达到指定值时，将终止搜索过程。<br/>增加该值可以提高召回率，但代价是增加搜索时间。</td><td>[1, 65535]</td><td>2</td></tr>
 </tbody>
 </table>
 </li>
@@ -310,7 +310,7 @@ title: 内存索引
 <tr><th>参数</th><th>说明</th><th>范围</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">nlist</code></td><td>集群单位数</td><td>[1, 65536]</td></tr>
+<tr><td><code translate="no">nlist</code></td><td>群组单位数</td><td>[1, 65536]</td></tr>
 <tr><td><code translate="no">m</code></td><td>乘积量化因子数</td><td><code translate="no">dim mod m == 0</code></td></tr>
 <tr><td><code translate="no">nbits</code></td><td>[可选项] 每个低维向量的存储位数。</td><td>[1，64] （默认为 8）</td></tr>
 </tbody>
@@ -381,7 +381,7 @@ title: 内存索引
 </li>
 </ul></li>
 </ul>
-<h3 id="HNSW" class="common-anchor-header">HNSW</h3><p>HNSW（分层导航小世界图）是一种基于图的索引算法。它根据一定的规则为图像建立多层导航结构。在该结构中，上层较为稀疏，节点之间的距离较远；下层较为密集，节点之间的距离较近。搜索从最上层开始，在这一层找到离目标最近的节点，然后进入下一层开始新的搜索。经过多次迭代后，就能快速接近目标位置。</p>
+<h3 id="HNSW" class="common-anchor-header">HNSW</h3><p>HNSW（分层导航小世界图）是一种基于图的索引算法。它根据一定的规则为图像建立多层导航结构。在这种结构中，上层较为稀疏，节点之间的距离较远；下层较为密集，节点之间的距离较近。搜索从最上层开始，在这一层找到离目标最近的节点，然后进入下一层开始新的搜索。经过多次迭代后，就能快速接近目标位置。</p>
 <p>为了提高性能，HNSW 将图的每一层上节点的最大度数限制为<code translate="no">M</code> 。此外，您还可以使用<code translate="no">efConstruction</code> （建立索引时）或<code translate="no">ef</code> （搜索目标时）来指定搜索范围。</p>
 <ul>
 <li><p>索引建立参数</p>
@@ -401,7 +401,7 @@ title: 内存索引
 <tr><th>参数</th><th>说明</th><th>范围</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">ef</code></td><td>控制查询时间/精确度权衡的参数。<code translate="no">ef</code> 越高，搜索越准确，但速度越慢。</td><td>[<code translate="no">top_k</code>, int_max]</td></tr>
+<tr><td><code translate="no">ef</code></td><td>控制查询时间/准确度权衡的参数。<code translate="no">ef</code> 越高，搜索越准确，但速度越慢。</td><td>[<code translate="no">top_k</code>, int_max]</td></tr>
 </tbody>
 </table>
 </li>
@@ -425,7 +425,7 @@ title: 内存索引
 </ul>
 <h3 id="BINIVFFLAT" class="common-anchor-header">BIN_IVF_FLAT</h3><p>该指标与 IVF_FLAT 完全相同，只是只能用于二进制嵌入。</p>
 <p>BIN_IVF_FLAT 将向量数据划分为<code translate="no">nlist</code> 个聚类单元，然后比较目标输入向量与每个聚类中心之间的距离。根据系统设置查询的簇数（<code translate="no">nprobe</code> ），相似性搜索结果仅根据目标输入与最相似簇中向量的比较结果返回--大大缩短了查询时间。</p>
-<p>通过调整<code translate="no">nprobe</code> ，可以在特定情况下找到准确性和速度之间的理想平衡点。随着目标输入向量数 (<code translate="no">nq</code>) 和要搜索的聚类数 (<code translate="no">nprobe</code>) 的增加，查询时间也会急剧增加。</p>
+<p>通过调整<code translate="no">nprobe</code> ，可以在特定情况下找到准确性和速度之间的理想平衡。随着目标输入向量数 (<code translate="no">nq</code>) 和要搜索的聚类数 (<code translate="no">nprobe</code>) 的增加，查询时间也会急剧增加。</p>
 <p>BIN_IVF_FLAT 是最基本的 BIN_IVF 索引，每个单元存储的编码数据与原始数据一致。</p>
 <ul>
 <li><p>索引建立参数</p>

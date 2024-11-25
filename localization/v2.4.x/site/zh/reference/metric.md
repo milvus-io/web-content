@@ -1,7 +1,7 @@
 ---
 id: metric.md
-summary: Milvus 支持多种相似度量，包括欧氏距离、内积、Jaccard 等。
-title: 相似度指标
+summary: Milvus 支持多种相似性度量，包括欧氏距离、内积、Jaccard 等。
+title: 相似度量
 ---
 <h1 id="Similarity-Metrics" class="common-anchor-header">相似度量<button data-href="#Similarity-Metrics" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -19,9 +19,9 @@ title: 相似度指标
         ></path>
       </svg>
     </button></h1><p>在 Milvus 中，相似度量用于衡量向量之间的相似性。选择一个好的距离度量有助于显著提高分类和聚类性能。</p>
-<p>下表显示了这些广泛使用的相似度量如何与各种输入数据形式和 Milvus 指数相匹配。</p>
+<p>下表显示了这些广泛使用的相似度量如何与各种输入数据形式和 Milvus 索引相匹配。目前，Milvus 支持各种类型的数据，包括浮点嵌入（通常称为浮点向量或密集向量）、二进制嵌入（也称为二进制向量）和稀疏嵌入（也称为稀疏向量）。</p>
 <div class="filter">
- <a href="#floating">浮点嵌入</a> <a href="#binary">二进制嵌入</a> <a href="#sparse">稀疏嵌入</a></div>
+ <a href="#floating">浮点</a> <a href="#binary">嵌入 二进制嵌入</a> <a href="#sparse">稀疏嵌入</a></div>
 <div class="filter-floating table-wrapper" markdown="block">
 <table class="tg">
 <thead>
@@ -76,18 +76,18 @@ title: 相似度指标
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/euclidean_metric.png" alt="euclidean" class="doc-image" id="euclidean" />
    </span> <span class="img-wrapper"> <span>欧几里得</span> </span></p>
-<p>其中<strong>a</strong>= (<sub>a0</sub>,<sub>a1</sub>,.<strong>..</strong>,<sub>an-1</sub>) 和<strong>b</strong>= (<sub>b0</sub>,<sub>b0</sub>,...,<sub>bn-1</sub>) 是 n 维欧几里得空间中的两点。</p>
+<p>其中<strong>a</strong>= (<sub>a0</sub>,<sub>a1</sub>,...,<sub>an-1</sub>) 和<strong>b</strong>= (<sub>b0</sub>,<sub>b0</sub>,...,<sub>bn-1</sub>) 是 n 维欧几里得空间中的两点。</p>
 <p>这是最常用的距离度量，在数据连续时非常有用。</p>
 <div class="alert note">
 当选择欧氏距离作为距离度量时，Milvus 只在应用平方根之前计算数值。</div>
-<h3 id="Inner-product-IP" class="common-anchor-header">内积（IP）</h3><p>两个嵌入式之间的 IP 距离定义如下：</p>
+<h3 id="Inner-product-IP" class="common-anchor-header">内积（IP）</h3><p>两个向量 Embeddings 之间的 IP 距离定义如下：</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/IP_formula.png" alt="ip" class="doc-image" id="ip" />
    </span><span class="img-wrapper"><span>IP</span> </span></p>
 <p>如果需要比较非标准化数据，或者需要考虑幅度和角度，IP 会更有用。</p>
 <div class="alert note">
-<p>如果对归一化的嵌入式应用 IP 距离度量，其结果相当于计算嵌入式之间的余弦相似度。</p>
+<p>如果将 IP 距离度量应用于归一化嵌入，结果将等同于计算嵌入之间的余弦相似度。</p>
 </div>
 <p>假设 X' 是由嵌入 X 归一化而来：</p>
 <p>
@@ -99,20 +99,20 @@ title: 相似度指标
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/normalization_formula.png" alt="normalization" class="doc-image" id="normalization" />
    </span> <span class="img-wrapper"> <span>归一化</span> </span></p>
-<h3 id="Cosine-Similarity" class="common-anchor-header">余弦相似度</h3><p>余弦相似度使用两组向量之间角度的余弦来衡量它们的相似程度。你可以把两组向量看成是从同一个原点（[0,0,...]）出发但指向不同方向的两条线段。</p>
-<p>要计算两组向量<strong>A = (<sub>a0</sub>,<sub>a1</sub>,.</strong> <strong>..</strong> <strong>,<sub>an-1</sub>)</strong>和<strong>B = (<sub>b0</sub>,<sub>b1</sub>,...,<sub>bn-1</sub>)</strong> 之间的余弦相似度，请使用下面的公式：</p>
+<h3 id="Cosine-Similarity" class="common-anchor-header">余弦相似性</h3><p>余弦相似度使用两组向量之间角度的余弦来衡量它们的相似程度。你可以把两组向量看成是从同一个原点（[0,0,...]）出发但指向不同方向的两条线段。</p>
+<p>要计算两组向量<strong>A = (<sub>a0</sub>,<sub>a1</sub>,...,<sub>an-1</sub>)</strong>和<strong>B = (<sub>b0</sub>,<sub>b1</sub>,...,<sub>bn-1</sub>)</strong> 之间的余弦相似度，请使用下面的公式：</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/cosine_similarity.png" alt="cosine_similarity" class="doc-image" id="cosine_similarity" />
    </span> <span class="img-wrapper"> <span>余弦相似度</span> </span></p>
 <p>余弦相似度始终位于区间<strong>[-1, 1]</strong>。例如，两个正比向量的余弦相似度为<strong>1</strong>，两个正交向量的余弦相似度为<strong>0</strong>，两个相反向量的余弦相似度为<strong>-1</strong>。余弦越大，两个向量之间的夹角越小，说明这两个向量之间的相似度越高。</p>
 <p>用 1 减去它们的余弦相似度，就可以得到两个向量之间的余弦距离。</p>
-<h3 id="Jaccard-distance" class="common-anchor-header">雅卡德距离</h3><p>杰卡德相似系数用于测量两个样本集之间的相似性，其定义是：定义集的交集的卡入度除以它们的结合的卡入度。它只能应用于有限样本集。</p>
+<h3 id="Jaccard-distance" class="common-anchor-header">雅卡德距离</h3><p>Jaccard 相似性系数衡量两个样本集之间的相似性，其定义为定义集的交集的卡方除以它们的联合的卡方。它只能应用于有限样本集。</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/jaccard_coeff.png" alt="Jaccard similarity coefficient" class="doc-image" id="jaccard-similarity-coefficient" />
    </span> <span class="img-wrapper"> <span>杰卡德相似系数</span> </span></p>
-<p>雅卡距离测量数据集之间的不相似性，通过从 1 减去雅卡相似系数得到。对于二进制变量，雅卡距离等同于谷本系数。</p>
+<p>雅卡距离测量数据集之间的不相似性，通过从 1 减去雅卡相似系数得出。对于二元变量，雅卡距离等同于塔尼莫托系数。</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/jaccard_dist.png" alt="Jaccard distance" class="doc-image" id="jaccard-distance" />
@@ -121,7 +121,7 @@ title: 相似度指标
 <p>例如，假设有两个字符串：1101 1001 和 1001 1101。</p>
 <p>11011001 ⊕ 10011101 = 01000100.由于其中包含两个 1，所以汉明距离 d (11011001, 10011101) = 2。</p>
 <h3 id="Structural-Similarity" class="common-anchor-header">结构相似性</h3><p>当一种化学结构作为更大化学结构的一部分出现时，前者称为子结构，后者称为上结构。例如，乙醇是乙酸的子结构，乙酸是乙醇的上结构。</p>
-<p>结构相似性用于确定两个化学式是否相似，即其中一个化学式是另一个化学式的上层 结构或下层结构。</p>
+<p>结构相似性是用来判断两个化学式是否相似，即一个化学式是另一个化学式的上结构或下结构。</p>
 <p>要确定 A 是否是 B 的上结构，请使用下式：</p>
 <p>
   
@@ -163,7 +163,7 @@ title: 相似度指标
 如果<summary><font color="#4fc4f9">度量类型是内积，为什么向量搜索的 top1 结果不是搜索向量本身？</font></summary>如果使用内积作为距离度量时没有对向量进行归一化处理，就会出现这种情况。</details>
 <details>
 <summary><font color="#4fc4f9">什么是归一化？为什么需要归一化？</font></summary></p>
-<p>归一化指的是转换嵌入（向量）使其法向量等于 1 的过程。如果使用内积计算嵌入相似度，就必须对嵌入进行归一化处理。归一化后，内积等于余弦相似度。</p>
+<p>归一化指的是转换嵌入（向量）使其法向量等于 1 的过程。如果使用内积计算嵌入式相似度，就必须对嵌入式进行归一化处理。归一化后，内积等于余弦相似度。</p>
 <p>
 更多信息，请参阅<a href="https://en.wikipedia.org/wiki/Unit_vector">维基百科</a>。</p>
 </details>

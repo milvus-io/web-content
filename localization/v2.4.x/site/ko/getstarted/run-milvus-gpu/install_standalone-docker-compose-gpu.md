@@ -59,8 +59,8 @@ title: 도커 컴포즈를 사용하여 GPU 지원으로 Milvus 실행하기
         ></path>
       </svg>
     </button></h2><p>Docker Compose를 사용하여 GPU를 지원하는 Milvus를 설치하려면 다음 단계를 따르세요.</p>
-<h3 id="1-Download-and-configure-the-YAML-file" class="common-anchor-header">1. YAML 파일 다운로드 및 구성</h3><p>다운로드 <a href="https://github.com/milvus-io/milvus/releases/download/v2.4.15/milvus-standalone-docker-compose-gpu.yml"><code translate="no">milvus-standalone-docker-compose-gpu.yml</code></a> 를 클릭하고 수동으로 또는 다음 명령을 사용하여 docker-compose.yml로 저장합니다.</p>
-<pre><code translate="no" class="language-shell">$ wget https://github.com/milvus-io/milvus/releases/download/v2.4.15/milvus-standalone-docker-compose-gpu.yml -O docker-compose.yml
+<h3 id="1-Download-and-configure-the-YAML-file" class="common-anchor-header">1. YAML 파일 다운로드 및 구성</h3><p>다운로드 <a href="https://github.com/milvus-io/milvus/releases/download/v2.4.17/milvus-standalone-docker-compose-gpu.yml"><code translate="no">milvus-standalone-docker-compose-gpu.yml</code></a> 를 클릭하고 수동으로 또는 다음 명령을 사용하여 docker-compose.yml로 저장합니다.</p>
+<pre><code translate="no" class="language-shell">$ wget https://github.com/milvus-io/milvus/releases/download/v2.4.17/milvus-standalone-docker-compose-gpu.yml -O docker-compose.yml
 <button class="copy-code-btn"></button></code></pre>
 <p>YAML 파일에서 독립형 서비스의 환경 변수를 다음과 같이 몇 가지 변경해야 합니다:</p>
 <ul>
@@ -119,7 +119,7 @@ milvus-etcd         etcd -advertise-client-url ...   Up             2379/tcp, 23
 milvus-minio        /usr/bin/docker-entrypoint ...   Up (healthy)   9000/tcp
 milvus-standalone   /tini -- milvus run standalone   Up             0.0.0.0:19530-&gt;19530/tcp, 0.0.0.0:9091-&gt;9091/tcp
 <button class="copy-code-btn"></button></code></pre>
-<p>docker-compose.yml에서 Milvus에 여러 GPU 장치를 할당했다면, 어떤 GPU 장치를 표시하거나 사용할 수 있는지 지정할 수 있습니다.</p>
+<p>docker-compose.yml에서 Milvus에 여러 GPU 장치를 할당했다면 어떤 GPU 장치를 표시하거나 사용할 수 있는지 지정할 수 있습니다.</p>
 <p>Milvus에 GPU 장치 <code translate="no">0</code> 를 표시하도록 설정합니다:</p>
 <pre><code translate="no" class="language-shell">$ CUDA_VISIBLE_DEVICES=0 ./milvus run standalone
 <button class="copy-code-btn"></button></code></pre>

@@ -1,9 +1,9 @@
 ---
 id: metric.md
 summary: >-
-  Milvus prend en charge une variété de mesures de similarité, notamment la
+  Milvus prend en charge un grand nombre de mesures de similarité, notamment la
   distance euclidienne, le produit intérieur, Jaccard, etc.
-title: Mesures de similarité
+title: Métriques de similarité
 ---
 <h1 id="Similarity-Metrics" class="common-anchor-header">Métriques de similarité<button data-href="#Similarity-Metrics" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -21,15 +21,15 @@ title: Mesures de similarité
         ></path>
       </svg>
     </button></h1><p>Dans Milvus, les métriques de similarité sont utilisées pour mesurer les similitudes entre les vecteurs. Le choix d'une bonne métrique de distance permet d'améliorer considérablement les performances de classification et de regroupement.</p>
-<p>Le tableau suivant montre comment ces métriques de similarité largement utilisées s'adaptent aux différentes formes de données d'entrée et aux index Milvus.</p>
+<p>Le tableau suivant montre comment ces métriques de similarité largement utilisées s'adaptent à diverses formes de données d'entrée et aux index Milvus. Actuellement, Milvus prend en charge différents types de données, y compris les incorporations à virgule flottante (souvent connues sous le nom de vecteurs à virgule flottante ou de vecteurs denses), les incorporations binaires (également connues sous le nom de vecteurs binaires) et les incorporations éparses (également connues sous le nom de vecteurs épars).</p>
 <div class="filter">
- <a href="#floating">Enchâssement de points flottants</a> <a href="#binary">Enchâssement binaire</a> <a href="#sparse">Enchâssement clairsemé</a></div>
+ <a href="#floating">Encastrements à virgule flottante</a> <a href="#binary">Encastrements binaires</a> <a href="#sparse">Encastrements épars</a></div>
 <div class="filter-floating table-wrapper" markdown="block">
 <table class="tg">
 <thead>
   <tr>
     <th class="tg-0pky" style="width: 204px;">Types de métriques</th>
-    <th class="tg-0pky">Types d'index</th>
+    <th class="tg-0pky">Types d'indices</th>
   </tr>
 </thead>
 <tbody>
@@ -82,14 +82,14 @@ title: Mesures de similarité
 <p>Il s'agit de la mesure de distance la plus couramment utilisée et elle est très utile lorsque les données sont continues.</p>
 <div class="alert note">
 Milvus calcule uniquement la valeur avant d'appliquer la racine carrée lorsque la distance euclidienne est choisie comme mesure de distance.</div>
-<h3 id="Inner-product-IP" class="common-anchor-header">Produit intérieur (PI)</h3><p>La distance IP entre deux embeddings est définie comme suit :</p>
+<h3 id="Inner-product-IP" class="common-anchor-header">Produit intérieur (PI)</h3><p>La distance IP entre deux intégrations vectorielles est définie comme suit :</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/IP_formula.png" alt="ip" class="doc-image" id="ip" />
    </span> <span class="img-wrapper"> <span>IP</span> </span></p>
 <p>Le produit intérieur est plus utile si vous devez comparer des données non normalisées ou si vous vous intéressez à la magnitude et à l'angle.</p>
 <div class="alert note">
-<p>Si vous appliquez la métrique de distance IP à des embeddings normalisés, le résultat sera équivalent au calcul de la similarité cosinus entre les embeddings.</p>
+<p>Si vous appliquez la distance IP à des intégrations normalisées, le résultat sera équivalent au calcul de la similarité cosinus entre les intégrations.</p>
 </div>
 <p>Supposons que X' soit normalisé à partir de l'intégration X :</p>
 <p>
@@ -119,10 +119,10 @@ Milvus calcule uniquement la valeur avant d'appliquer la racine carrée lorsque 
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/jaccard_dist.png" alt="Jaccard distance" class="doc-image" id="jaccard-distance" />
    </span> <span class="img-wrapper"> <span>Distance de Jaccard</span> </span></p>
-<h3 id="Hamming-distance" class="common-anchor-header">Distance de Hamming</h3><p>La distance de Hamming mesure les chaînes de données binaires. La distance entre deux chaînes de même longueur est le nombre de positions de bits où les bits sont différents.</p>
+<h3 id="Hamming-distance" class="common-anchor-header">Distance de Hamming</h3><p>La distance de Hamming mesure les chaînes de données binaires. La distance entre deux chaînes de même longueur est le nombre de positions de bits auxquelles les bits sont différents.</p>
 <p>Par exemple, supposons qu'il y ait deux chaînes, 1101 1001 et 1001 1101.</p>
 <p>11011001 ⊕ 10011101 = 01000100. Comme ces chaînes contiennent deux 1, la distance de Hamming, d (11011001, 10011101) = 2.</p>
-<h3 id="Structural-Similarity" class="common-anchor-header">Similitude structurelle</h3><p>Lorsqu'une structure chimique fait partie d'une structure chimique plus large, la première est appelée sous-structure et la seconde superstructure. Par exemple, l'éthanol est une sous-structure de l'acide acétique et l'acide acétique est une superstructure de l'éthanol.</p>
+<h3 id="Structural-Similarity" class="common-anchor-header">Similitude structurelle</h3><p>Lorsqu'une structure chimique fait partie d'une structure chimique plus importante, la première est appelée sous-structure et la seconde superstructure. Par exemple, l'éthanol est une sous-structure de l'acide acétique et l'acide acétique est une superstructure de l'éthanol.</p>
 <p>La similarité structurelle est utilisée pour déterminer si deux formules chimiques sont similaires en ce sens que l'une est la superstructure ou la sous-structure de l'autre.</p>
 <p>Pour déterminer si A est une superstructure de B, utilisez la formule suivante :</p>
 <p>

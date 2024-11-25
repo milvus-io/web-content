@@ -24,7 +24,29 @@ title: Milvus-Cluster mit Helm-Diagramm aufrüsten
         ></path>
       </svg>
     </button></h1><p>Diese Anleitung beschreibt, wie Sie Ihren Milvus-Cluster mit Milvus Helm-Charts aufrüsten.</p>
-<h2 id="Check-Milvus-Helm-Chart" class="common-anchor-header">Milvus Helm Chart prüfen<button data-href="#Check-Milvus-Helm-Chart" class="anchor-icon" translate="no">
+<h2 id="Prerequisites" class="common-anchor-header">Voraussetzungen<button data-href="#Prerequisites" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><ul>
+<li>Helm-Version &gt;= 3.14.0</li>
+<li>Kubernetes-Version &gt;= 1.20.0</li>
+</ul>
+<div class="alert note">
+<p>Seit Milvus-Helm Chart Version 4.2.21 haben wir pulsar-v3.x Chart als Abhängigkeit eingeführt. Um die Abwärtskompatibilität zu gewährleisten, aktualisieren Sie bitte Ihren Helm auf v3.14 oder eine neuere Version und fügen Sie die Option <code translate="no">--reset-then-reuse-values</code> hinzu, wenn Sie <code translate="no">helm upgrade</code> verwenden.</p>
+</div>
+<h2 id="Check-Milvus-Helm-Chart" class="common-anchor-header">Überprüfen der Milvus Helm-Karte<button data-href="#Check-Milvus-Helm-Chart" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -40,15 +62,15 @@ title: Milvus-Cluster mit Helm-Diagramm aufrüsten
         ></path>
       </svg>
     </button></h2><p>Führen Sie die folgenden Befehle aus, um neue Milvus-Versionen zu überprüfen.</p>
-<pre><code translate="no">$ helm repo update
+<pre><code translate="no">$ helm repo update zilliztech
 $ helm search repo zilliztech/milvus --versions
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>Das Milvus Helm Charts Repo auf <code translate="no">https://milvus-io.github.io/milvus-helm/</code> wurde archiviert und Sie können weitere Updates von <code translate="no">https://zilliztech.github.io/milvus-helm/</code> wie folgt erhalten:</p>
+<p>Das Milvus Helm Charts Repo unter <code translate="no">https://milvus-io.github.io/milvus-helm/</code> wurde archiviert und Sie können weitere Updates von <code translate="no">https://zilliztech.github.io/milvus-helm/</code> wie folgt erhalten:</p>
 <pre><code translate="no" class="language-shell">helm repo add zilliztech https://zilliztech.github.io/milvus-helm
 helm repo update
 <span class="hljs-comment"># upgrade existing helm release</span>
-helm upgrade my-release zilliztech/milvus
+helm upgrade my-release zilliztech/milvus --reset-then-reuse-values
 <button class="copy-code-btn"></button></code></pre>
 <p>Das archivierte Repo ist weiterhin für die Diagramme bis 4.0.31 verfügbar. Für spätere Versionen verwenden Sie stattdessen das neue Repo.</p>
 </div>
@@ -86,10 +108,10 @@ zilliztech/milvus       4.1.1           2.3.0                   Milvus is an ope
 zilliztech/milvus       4.1.0           2.3.0                   Milvus is an open-source vector database built ...
 <button class="copy-code-btn"></button></code></pre>
 <p>Sie können den Upgrade-Pfad für Ihren Milvus wie folgt wählen:</p>
-<div style="display: none;">- [Führen Sie ein rollendes Upgrade durch](#conduct-a-rolling-upgrade) von Milvus v2.2.3 und späteren Versionen auf v2.4.15.</div>
+<div style="display: none;">- [Führen Sie ein rollendes Upgrade durch](#conduct-a-rolling-upgrade) von Milvus v2.2.3 und späteren Versionen auf v2.4.17.</div>
 <ul>
-<li><p><a href="#Upgrade-Milvus-using-Helm">Führen Sie ein Upgrade von Milvus mit Helm</a> für ein Upgrade von einer Nebenversion vor v2.2.3 auf v2.4.15<a href="#Upgrade-Milvus-using-Helm">durch</a>.</p></li>
-<li><p><a href="#Migrate-the-metadata">Migrieren Sie die Metadaten</a> vor dem Upgrade von Milvus v2.1.x auf v2.4.15.</p></li>
+<li><p><a href="#Upgrade-Milvus-using-Helm">Führen Sie ein Upgrade von Milvus mit Helm</a> für ein Upgrade von einer Nebenversion vor v2.2.3 auf v2.4.17<a href="#Upgrade-Milvus-using-Helm">durch</a>.</p></li>
+<li><p><a href="#Migrate-the-metadata">Migrieren Sie die Metadaten</a> vor dem Upgrade von Milvus v2.1.x auf v2.4.17.</p></li>
 </ul>
 <div style="display: none;">
 <h2 id="Conduct-a-rolling-upgrade" class="common-anchor-header">Durchführen eines rollenden Upgrades<button data-href="#Conduct-a-rolling-upgrade" class="anchor-icon" translate="no">
@@ -123,8 +145,8 @@ zilliztech/milvus       4.1.0           2.3.0                   Milvus is an ope
 <tr><td><code translate="no">o</code></td><td>Vorgang</td><td><code translate="no">update</code></td><td>Falsch</td></tr>
 </tbody>
 </table>
-<p>Sobald Sie sichergestellt haben, dass sich alle Einsätze in Ihrer Milvus-Instanz in ihrem normalen Status befinden, können Sie den folgenden Befehl ausführen. Sie können den folgenden Befehl ausführen, um die Milvus-Instanz auf 2.4.15 zu aktualisieren.</p>
-<pre><code translate="no" class="language-shell">sh rollingUpdate.<span class="hljs-property">sh</span> -n <span class="hljs-keyword">default</span> -i my-release -o update -t <span class="hljs-number">2.4</span><span class="hljs-number">.15</span> -w <span class="hljs-string">&#x27;milvusdb/milvus:v2.4.15&#x27;</span>
+<p>Sobald Sie sichergestellt haben, dass sich alle Einsätze in Ihrer Milvus-Instanz in ihrem normalen Status befinden, können Sie den folgenden Befehl ausführen. Sie können den folgenden Befehl ausführen, um die Milvus-Instanz auf 2.4.17 zu aktualisieren.</p>
+<pre><code translate="no" class="language-shell">sh rollingUpdate.<span class="hljs-property">sh</span> -n <span class="hljs-keyword">default</span> -i my-release -o update -t <span class="hljs-number">2.4</span><span class="hljs-number">.17</span> -w <span class="hljs-string">&#x27;milvusdb/milvus:v2.4.17&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <ol>
@@ -150,8 +172,8 @@ zilliztech/milvus       4.1.0           2.3.0                   Milvus is an ope
         ></path>
       </svg>
     </button></h2><p>Um Milvus von einer Nebenversion vor v2.2.3 auf die neueste Version zu aktualisieren, führen Sie die folgenden Befehle aus:</p>
-<pre><code translate="no" class="language-shell">helm repo update
-helm upgrade my-release zilliztech/milvus --reuse-values --version=<span class="hljs-number">4.1</span><span class="hljs-number">.24</span> <span class="hljs-comment"># use the helm chart version here</span>
+<pre><code translate="no" class="language-shell">helm repo update zilliztech
+helm upgrade my-release zilliztech/milvus --reset-then-reuse-values --version=<span class="hljs-number">4.1</span><span class="hljs-number">.24</span> <span class="hljs-comment"># use the helm chart version here</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Verwenden Sie die Helm-Diagrammversion im vorangegangenen Befehl. Einzelheiten dazu, wie Sie die Helm-Chart-Version erhalten, finden Sie unter <a href="#Check-the-Milvus-version">Prüfen der Milvus-Version</a>.</p>
 <h2 id="Migrate-the-metadata" class="common-anchor-header">Migrieren Sie die Metadaten<button data-href="#Migrate-the-metadata" class="anchor-icon" translate="no">

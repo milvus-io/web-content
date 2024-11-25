@@ -46,79 +46,6 @@ summary: Cette page présente la procédure d'importation des données préparé
 <div class="language-java">
 <p>L'extrait de code suivant crée une collection simple avec le schéma donné. Pour plus d'informations sur les paramètres, voir <a href="https://milvus.io/api-reference/java/v2.4.x/v1/Collection/createCollection.md"><code translate="no">createCollection()</code></a> dans la référence du SDK.</p>
 </div>
-<div class="multipleCode">
- <a href="#python">Python </a> <a href="#java">Java</a></div>
-<pre><code translate="no" class="language-python">client = MilvusClient(<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)
-
-schema = MilvusClient.create_schema(
-    auto_id=<span class="hljs-literal">False</span>,
-    enable_dynamic_field=<span class="hljs-literal">True</span>
-)
-
-schema.add_field(field_name=<span class="hljs-string">&quot;id&quot;</span>, datatype=DataType.INT64, is_primary=<span class="hljs-literal">True</span>)
-schema.add_field(field_name=<span class="hljs-string">&quot;vector&quot;</span>, datatype=DataType.FLOAT_VECTOR, dim=<span class="hljs-number">768</span>)
-schema.add_field(field_name=<span class="hljs-string">&quot;scalar_1&quot;</span>, datatype=DataType.VARCHAR, max_length=<span class="hljs-number">512</span>)
-schema.add_field(field_name=<span class="hljs-string">&quot;scalar_2&quot;</span>, datatype=DataType.INT64)
-
-client.create_collection(
-    collection_name=<span class="hljs-string">&quot;quick_setup&quot;</span>,
-    schema=schema
-)
-<button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.client.MilvusServiceClient;
-<span class="hljs-keyword">import</span> io.milvus.param.ConnectParam;
-<span class="hljs-keyword">import</span> io.milvus.grpc.DataType;
-<span class="hljs-keyword">import</span> io.milvus.param.collection.CollectionSchemaParam;
-<span class="hljs-keyword">import</span> io.milvus.param.collection.CollectionSchemaParam;
-<span class="hljs-keyword">import</span> io.milvus.param.collection.FieldType;
-
-<span class="hljs-keyword">final</span> <span class="hljs-type">MilvusServiceClient</span> <span class="hljs-variable">milvusClient</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">MilvusServiceClient</span>(
-ConnectParam.newBuilder()
-    .withUri(<span class="hljs-string">&quot;localhost:19530&quot;</span>)
-    .withToken(<span class="hljs-string">&quot;root:Milvus&quot;</span>)
-    .build()
-);
-
-<span class="hljs-comment">// Define schema for the target collection</span>
-<span class="hljs-type">FieldType</span> <span class="hljs-variable">id</span> <span class="hljs-operator">=</span> FieldType.newBuilder()
-    .withName(<span class="hljs-string">&quot;id&quot;</span>)
-    .withDataType(DataType.Int64)
-    .withPrimaryKey(<span class="hljs-literal">true</span>)
-    .withAutoID(<span class="hljs-literal">false</span>)
-    .build();
-
-<span class="hljs-type">FieldType</span> <span class="hljs-variable">vector</span> <span class="hljs-operator">=</span> FieldType.newBuilder()
-    .withName(<span class="hljs-string">&quot;vector&quot;</span>)
-    .withDataType(DataType.FloatVector)
-    .withDimension(<span class="hljs-number">768</span>)
-    .build();
-
-<span class="hljs-type">FieldType</span> <span class="hljs-variable">scalar1</span> <span class="hljs-operator">=</span> FieldType.newBuilder()
-    .withName(<span class="hljs-string">&quot;scalar_1&quot;</span>)
-    .withDataType(DataType.VarChar)
-    .withMaxLength(<span class="hljs-number">512</span>)
-    .build();
-
-<span class="hljs-type">FieldType</span> <span class="hljs-variable">scalar2</span> <span class="hljs-operator">=</span> FieldType.newBuilder()
-    .withName(<span class="hljs-string">&quot;scalar_2&quot;</span>)
-    .withDataType(DataType.Int64)
-    .build();
-
-<span class="hljs-type">CollectionSchemaParam</span> <span class="hljs-variable">schema</span> <span class="hljs-operator">=</span> CollectionSchemaParam.newBuilder()
-    .withEnableDynamicField(<span class="hljs-literal">true</span>)
-    .addFieldType(id)
-    .addFieldType(vector)
-    .addFieldType(scalar1)
-    .addFieldType(scalar2)
-    .build();
-
-<span class="hljs-comment">// Create a collection with the given schema</span>
-milvusClient.createCollection(CreateCollectionParam.newBuilder()
-    .withCollectionName(<span class="hljs-string">&quot;quick_setup&quot;</span>)
-    .withSchema(schema)
-    .build()
-);
-<button class="copy-code-btn"></button></code></pre>
 <h2 id="Import-data" class="common-anchor-header">Importer des données<button data-href="#Import-data" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -135,7 +62,51 @@ milvusClient.createCollection(CreateCollectionParam.newBuilder()
         ></path>
       </svg>
     </button></h2><p>Pour importer les données préparées, vous devez créer une tâche d'importation comme suit :</p>
-<pre><code translate="no"><span class="hljs-built_in">export</span> MILVUS_URI=<span class="hljs-string">&quot;localhost:19530&quot;</span>
+<div class="multipleCode">
+ <a href="#python">Python </a> <a href="#java">Java</a> <a href="#bash">cURL</a></div>
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus.bulk_writer <span class="hljs-keyword">import</span> bulk_import
+
+url = <span class="hljs-string">f&quot;http://127.0.0.1:19530&quot;</span>
+
+<span class="hljs-comment"># Bulk-insert data from a set of JSON files already uploaded to the MinIO server</span>
+resp = bulk_import(
+    url=url,
+    collection_name=<span class="hljs-string">&quot;quick_setup&quot;</span>,
+    files=[[<span class="hljs-string">&#x27;a1e18323-a658-4d1b-95a7-9907a4391bcf/1.parquet&#x27;</span>],
+           [<span class="hljs-string">&#x27;a1e18323-a658-4d1b-95a7-9907a4391bcf/2.parquet&#x27;</span>],
+           [<span class="hljs-string">&#x27;a1e18323-a658-4d1b-95a7-9907a4391bcf/3.parquet&#x27;</span>],
+           [<span class="hljs-string">&#x27;a1e18323-a658-4d1b-95a7-9907a4391bcf/4.parquet&#x27;</span>],
+           [<span class="hljs-string">&#x27;a1e18323-a658-4d1b-95a7-9907a4391bcf/5.parquet&#x27;</span>],
+           [<span class="hljs-string">&#x27;a1e18323-a658-4d1b-95a7-9907a4391bcf/6.parquet&#x27;</span>],
+           [<span class="hljs-string">&#x27;a1e18323-a658-4d1b-95a7-9907a4391bcf/7.parquet&#x27;</span>],
+           [<span class="hljs-string">&#x27;a1e18323-a658-4d1b-95a7-9907a4391bcf/8.parquet&#x27;</span>],
+           [<span class="hljs-string">&#x27;a1e18323-a658-4d1b-95a7-9907a4391bcf/9.parquet&#x27;</span>],
+           [<span class="hljs-string">&#x27;a1e18323-a658-4d1b-95a7-9907a4391bcf/10.parquet&#x27;</span>]],
+)
+
+job_id = resp.json()[<span class="hljs-string">&#x27;data&#x27;</span>][<span class="hljs-string">&#x27;jobId&#x27;</span>]
+<span class="hljs-built_in">print</span>(job_id)
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java"><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> String <span class="hljs-title function_">bulkImport</span><span class="hljs-params">(List&lt;List&lt;String&gt;&gt; batchFiles)</span> <span class="hljs-keyword">throws</span> InterruptedException {
+    <span class="hljs-type">MilvusImportRequest</span> <span class="hljs-variable">milvusImportRequest</span> <span class="hljs-operator">=</span> MilvusImportRequest.builder()
+            .collectionName(<span class="hljs-string">&quot;quick_setup&quot;</span>)
+            .files(batchFiles)
+            .build();
+    <span class="hljs-type">String</span> <span class="hljs-variable">bulkImportResult</span> <span class="hljs-operator">=</span> BulkImport.bulkImport(<span class="hljs-string">&quot;http://localhost:19530&quot;</span>, milvusImportRequest);
+    System.out.println(bulkImportResult);
+
+    <span class="hljs-type">JsonObject</span> <span class="hljs-variable">bulkImportObject</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Gson</span>().fromJson(bulkImportResult, JsonObject.class);
+    <span class="hljs-type">String</span> <span class="hljs-variable">jobId</span> <span class="hljs-operator">=</span> bulkImportObject.getAsJsonObject(<span class="hljs-string">&quot;data&quot;</span>).get(<span class="hljs-string">&quot;jobId&quot;</span>).getAsString();
+    System.out.println(<span class="hljs-string">&quot;Create a bulkInert task, job id: &quot;</span> + jobId);
+    <span class="hljs-keyword">return</span> jobId;
+}
+
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> <span class="hljs-keyword">throws</span> Exception {
+    List&lt;List&lt;String&gt;&gt; batchFiles = uploadData();
+    <span class="hljs-type">String</span> <span class="hljs-variable">jobId</span> <span class="hljs-operator">=</span> bulkImport(batchFiles);
+}
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> MILVUS_URI=<span class="hljs-string">&quot;localhost:19530&quot;</span>
 
 curl --request POST <span class="hljs-string">&quot;http://<span class="hljs-variable">${MILVUS_URI}</span>/v2/vectordb/jobs/import/create&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
@@ -174,7 +145,7 @@ curl --request POST <span class="hljs-string">&quot;http://<span class="hljs-var
 </ul></li>
 </ul>
 <p>Les résultats possibles sont les suivants :</p>
-<pre><code translate="no">{
+<pre><code translate="no" class="language-json">{
     <span class="hljs-string">&quot;code&quot;</span>: <span class="hljs-number">200</span>,
     <span class="hljs-string">&quot;data&quot;</span>: {
         <span class="hljs-string">&quot;jobId&quot;</span>: <span class="hljs-string">&quot;448707763884413158&quot;</span>
@@ -196,10 +167,61 @@ curl --request POST <span class="hljs-string">&quot;http://<span class="hljs-var
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Une fois que vous avez obtenu l'identifiant d'une tâche d'importation, vous pouvez vérifier la progression de l'importation en procédant comme suit :</p>
-<pre><code translate="no"><span class="hljs-built_in">export</span> MILVUS_URI=<span class="hljs-string">&quot;localhost:19530&quot;</span>
+    </button></h2><p>Une fois que vous avez obtenu l'identifiant d'une tâche d'importation, vous pouvez vérifier la progression de l'importation de la manière suivante :</p>
+<div class="multipleCode">
+ <a href="#python">Python </a> <a href="#java">Java</a> <a href="#bash">cURL</a></div>
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> json
+<span class="hljs-keyword">from</span> pymilvus.bulk_writer <span class="hljs-keyword">import</span> get_import_progress
 
-curl --request POST <span class="hljs-string">&quot;http://<span class="hljs-variable">${MILVUS_URI}</span>/v2/vectordb/jobs/import/get_progress&quot;</span> \
+url = <span class="hljs-string">f&quot;http://127.0.0.1:19530&quot;</span>
+
+<span class="hljs-comment"># Get bulk-insert job progress</span>
+resp = get_import_progress(
+    url=url,
+    job_id=<span class="hljs-string">&quot;453265736269038336&quot;</span>,
+)
+
+<span class="hljs-built_in">print</span>(json.dumps(resp.json(), indent=<span class="hljs-number">4</span>))
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java"><span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">getImportProgress</span>(<span class="hljs-params">String jobId</span>)</span> {
+    <span class="hljs-keyword">while</span> (<span class="hljs-literal">true</span>) {
+        System.<span class="hljs-keyword">out</span>.println(<span class="hljs-string">&quot;Wait 5 second to check bulkInsert job state...&quot;</span>);
+        <span class="hljs-keyword">try</span> {
+            TimeUnit.SECONDS.sleep(<span class="hljs-number">5</span>);
+        } <span class="hljs-keyword">catch</span> (InterruptedException e) {
+            <span class="hljs-keyword">break</span>;
+        }
+
+        MilvusDescribeImportRequest request = MilvusDescribeImportRequest.builder()
+                .jobId(jobId)
+                .build();
+        String getImportProgressResult = BulkImport.getImportProgress(<span class="hljs-string">&quot;http://localhost:19530&quot;</span>, request);
+
+        JsonObject getImportProgressObject = <span class="hljs-keyword">new</span> Gson().fromJson(getImportProgressResult, JsonObject.<span class="hljs-keyword">class</span>);
+        String state = getImportProgressObject.getAsJsonObject(<span class="hljs-string">&quot;data&quot;</span>).<span class="hljs-keyword">get</span>(<span class="hljs-string">&quot;state&quot;</span>).getAsString();
+        String progress = getImportProgressObject.getAsJsonObject(<span class="hljs-string">&quot;data&quot;</span>).<span class="hljs-keyword">get</span>(<span class="hljs-string">&quot;progress&quot;</span>).getAsString();
+        <span class="hljs-keyword">if</span> (<span class="hljs-string">&quot;Failed&quot;</span>.<span class="hljs-keyword">equals</span>(state)) {
+            String reason = getImportProgressObject.getAsJsonObject(<span class="hljs-string">&quot;data&quot;</span>).<span class="hljs-keyword">get</span>(<span class="hljs-string">&quot;reason&quot;</span>).getAsString();
+            System.<span class="hljs-keyword">out</span>.printf(<span class="hljs-string">&quot;The job %s failed, reason: %s%n&quot;</span>, jobId, reason);
+            <span class="hljs-keyword">break</span>;
+        } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (<span class="hljs-string">&quot;Completed&quot;</span>.<span class="hljs-keyword">equals</span>(state)) {
+            System.<span class="hljs-keyword">out</span>.printf(<span class="hljs-string">&quot;The job %s completed%n&quot;</span>, jobId);
+            <span class="hljs-keyword">break</span>;
+        } <span class="hljs-keyword">else</span> {
+            System.<span class="hljs-keyword">out</span>.printf(<span class="hljs-string">&quot;The job %s is running, state:%s progress:%s%n&quot;</span>, jobId, state, progress);
+        }
+    }
+}
+
+<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span>(<span class="hljs-params">String[] args</span>) throws Exception</span> {
+    List&lt;List&lt;String&gt;&gt; batchFiles = uploadData();
+    String jobId = bulkImport(batchFiles);
+    getImportProgress(jobId);
+}
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> MILVUS_URI=<span class="hljs-string">&quot;localhost:19530&quot;</span>
+
+curl --request POST <span class="hljs-string">&quot;http://<span class="hljs-variable">${MILVUS_URI}</span>/v2/vectordb/jobs/import/describe&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
 --data-raw <span class="hljs-string">&#x27;{
     &quot;jobId&quot;: &quot;449839014328146739&quot;
@@ -240,7 +262,7 @@ curl --request POST <span class="hljs-string">&quot;http://<span class="hljs-var
     }
 }
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="List-Import-Jobs" class="common-anchor-header">Lister les travaux d'importation<button data-href="#List-Import-Jobs" class="anchor-icon" translate="no">
+<h2 id="List-Import-Jobs" class="common-anchor-header">Lister les tâches d'importation<button data-href="#List-Import-Jobs" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -256,7 +278,32 @@ curl --request POST <span class="hljs-string">&quot;http://<span class="hljs-var
         ></path>
       </svg>
     </button></h2><p>Vous pouvez dresser la liste de toutes les tâches d'importation relatives à une collection spécifique en procédant comme suit :</p>
-<pre><code translate="no"><span class="hljs-built_in">export</span> MILVUS_URI=<span class="hljs-string">&quot;localhost:19530&quot;</span>
+<div class="multipleCode">
+ <a href="#python">Python </a> <a href="#java">Java</a> <a href="#bash">cURL</a></div>
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> json
+<span class="hljs-keyword">from</span> pymilvus.bulk_writer <span class="hljs-keyword">import</span> list_import_jobs
+
+url = <span class="hljs-string">f&quot;http://127.0.0.1:19530&quot;</span>
+
+<span class="hljs-comment"># List bulk-insert jobs</span>
+resp = list_import_jobs(
+    url=url,
+    collection_name=<span class="hljs-string">&quot;quick_setup&quot;</span>,
+)
+
+<span class="hljs-built_in">print</span>(json.dumps(resp.json(), indent=<span class="hljs-number">4</span>))
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java"><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">listImportJobs</span><span class="hljs-params">()</span> {
+    <span class="hljs-type">MilvusListImportJobsRequest</span> <span class="hljs-variable">listImportJobsRequest</span> <span class="hljs-operator">=</span> MilvusListImportJobsRequest.builder().collectionName(<span class="hljs-string">&quot;quick_setup&quot;</span>).build();
+    <span class="hljs-type">String</span> <span class="hljs-variable">listImportJobsResult</span> <span class="hljs-operator">=</span> BulkImport.listImportJobs(<span class="hljs-string">&quot;http://localhost:19530&quot;</span>, listImportJobsRequest);
+    System.out.println(listImportJobsResult);
+}
+
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> <span class="hljs-keyword">throws</span> Exception {
+    listImportJobs();
+}
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> MILVUS_URI=<span class="hljs-string">&quot;localhost:19530&quot;</span>
 
 curl --request POST <span class="hljs-string">&quot;http://<span class="hljs-variable">${MILVUS_URI}</span>/v2/vectordb/jobs/import/list&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
@@ -265,7 +312,7 @@ curl --request POST <span class="hljs-string">&quot;http://<span class="hljs-var
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Les valeurs possibles sont les suivantes :</p>
-<pre><code translate="no">{
+<pre><code translate="no" class="language-json">{
     <span class="hljs-string">&quot;code&quot;</span>: <span class="hljs-number">200</span>,
     <span class="hljs-string">&quot;data&quot;</span>: {
         <span class="hljs-string">&quot;records&quot;</span>: [
@@ -279,3 +326,76 @@ curl --request POST <span class="hljs-string">&quot;http://<span class="hljs-var
     }
 }
 <button class="copy-code-btn"></button></code></pre>
+<h2 id="Limitations" class="common-anchor-header">Limitations<button data-href="#Limitations" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><ul>
+<li><p>La taille de chaque fichier d'importation ne doit pas dépasser <strong>16 Go</strong>.</p></li>
+<li><p>Le nombre maximum de demandes d'importation est limité à <strong>1024</strong>.</p></li>
+<li><p>Le nombre maximum de fichiers par demande d'importation ne doit pas dépasser <strong>1024</strong>.</p></li>
+<li><p>Un seul nom de partition peut être spécifié dans une demande d'importation. Si aucun nom de partition n'est spécifié, les données seront insérées dans la partition par défaut. En outre, vous ne pouvez pas définir un nom de partition dans la demande d'importation si vous avez défini la clé de partition dans la collection cible.</p></li>
+</ul>
+<h2 id="Constraints" class="common-anchor-header">Contraintes<button data-href="#Constraints" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>Avant d'importer des données, assurez-vous d'avoir pris connaissance des contraintes relatives aux comportements Milvus suivants :</p>
+<ul>
+<li><p>Contraintes concernant le comportement Charger :</p>
+<ul>
+<li>Si une collection a déjà été chargée avant une importation, vous pouvez utiliser la fonction <code translate="no">refresh_load</code> pour charger les données nouvellement importées une fois l'importation terminée.</li>
+</ul></li>
+<li><p>Contraintes concernant les comportements d'interrogation et de recherche :</p>
+<ul>
+<li><p>Avant que l'importation ne soit <strong>terminée</strong>, les données nouvellement importées sont invisibles pour les requêtes et les recherches.</p></li>
+<li><p>Une fois que l'importation est <strong>terminée</strong>,</p>
+<ul>
+<li><p>Si la collection n'est pas chargée, vous pouvez utiliser la fonction <code translate="no">load</code> pour charger les données nouvellement importées.</p></li>
+<li><p>Si la collection est déjà chargée, vous pouvez appeler <code translate="no">load(is_refresh=True)</code> pour charger les données importées.</p></li>
+</ul></li>
+</ul></li>
+<li><p>Contraintes concernant le comportement de suppression :</p>
+<ul>
+<li><p>Avant que le statut de la tâche d'importation ne soit <strong>Terminé</strong>, la suppression n'est pas garantie et peut réussir ou échouer.</p></li>
+<li><p>La suppression après l'état de la tâche <strong>est</strong> garantie.</p></li>
+</ul></li>
+</ul>
+<h2 id="Recommendations" class="common-anchor-header">Recommandations<button data-href="#Recommendations" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>Nous vous recommandons vivement d'utiliser la fonction d'importation de fichiers multiples, qui vous permet de télécharger plusieurs fichiers en une seule demande. Cette méthode permet non seulement de simplifier le processus d'importation, mais aussi d'améliorer considérablement les performances de l'importation. Par ailleurs, en consolidant vos téléchargements, vous pouvez réduire le temps consacré à la gestion des données et rendre votre flux de travail plus efficace.</p>

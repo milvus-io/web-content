@@ -24,6 +24,28 @@ title: 헬름 차트로 Milvus 스탠드얼론 업그레이드하기
         ></path>
       </svg>
     </button></h1><p>이 가이드는 Milvus 헬름 차트를 사용하여 Milvus 스탠드얼론을 업그레이드하는 방법을 설명합니다.</p>
+<h2 id="Prerequisites" class="common-anchor-header">전제 조건<button data-href="#Prerequisites" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><ul>
+<li>헬름 버전 &gt;= 3.14.0</li>
+<li>쿠버네티스 버전 &gt;= 1.20.0</li>
+</ul>
+<div class="alert note">
+<p>밀버스-헬름 차트 버전 4.2.21부터 pulsar-v3.x 차트를 종속 요소로 도입했습니다. 이전 버전과의 호환성을 위해 헬름을 v3.14 이상 버전으로 업그레이드하고 <code translate="no">helm upgrade</code> 을 사용할 때마다 <code translate="no">--reset-then-reuse-values</code> 옵션을 추가해야 한다.</p>
+</div>
 <h2 id="Check-the-Milvus-version" class="common-anchor-header">Milvus 버전 확인<button data-href="#Check-the-Milvus-version" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -39,16 +61,16 @@ title: 헬름 차트로 Milvus 스탠드얼론 업그레이드하기
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>다음 명령어를 실행하여 새로운 Milvus 버전을 확인합니다.</p>
+    </button></h2><p>다음 명령을 실행하여 새로운 Milvus 버전을 확인합니다.</p>
 <pre><code translate="no">$ helm repo update
 $ helm search repo zilliztech/milvus --versions
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>Milvus 헬름 차트 리포지토리( <code translate="no">https://milvus-io.github.io/milvus-helm/</code> )는 아카이브되었으며, 다음과 같이 <code translate="no">https://zilliztech.github.io/milvus-helm/</code> 에서 추가 업데이트를 받을 수 있습니다:</p>
+<p>Milvus 헬름 차트 리포지토리( <code translate="no">https://milvus-io.github.io/milvus-helm/</code> )가 아카이브되었으며, 다음과 같이 <code translate="no">https://zilliztech.github.io/milvus-helm/</code> 에서 추가 업데이트를 받을 수 있습니다:</p>
 <pre><code translate="no" class="language-shell">helm repo add zilliztech https://zilliztech.github.io/milvus-helm
-helm repo update
+helm repo update zilliztech
 <span class="hljs-comment"># upgrade existing helm release</span>
-helm upgrade my-release zilliztech/milvus
+helm upgrade my-release zilliztech/milvus --reset-then-reuse-values
 <button class="copy-code-btn"></button></code></pre>
 <p>보관된 리포지토리는 4.0.31까지의 차트에 대해 계속 사용할 수 있습니다. 이후 릴리스에서는 새 리포지토리를 사용하세요.</p>
 </div>
@@ -86,10 +108,10 @@ zilliztech/milvus       4.1.1           2.3.0                   Milvus is an ope
 zilliztech/milvus       4.1.0           2.3.0                   Milvus is an open-source vector database built ...
 <button class="copy-code-btn"></button></code></pre>
 <p>Milvus의 업그레이드 경로는 다음과 같이 선택할 수 있습니다:</p>
-<div style="display: none;">- 밀버스 v2.2.3 이상 릴리스에서 v2.4.15로 [롤링 업그레이드 수행](#conduct-a-rolling-upgrade).</div>
+<div style="display: none;">- 밀버스 v2.2.3 이상 릴리스에서 v2.4.17로 [롤링 업그레이드 수행](#conduct-a-rolling-upgrade).</div>
 <ul>
-<li><p>v2.2.3 이전 마이너 릴리스에서 v2.4.15로 업그레이드하려면<a href="#Upgrade-Milvus-using-Helm">헬름을 사용하여 Milvus를 업그레이드</a> 한다.</p></li>
-<li><p>Milvus v2.1.x에서 v2.4.15로 업그레이드하기 전에<a href="#Migrate-the-metadata">메타데이터를 마이그레이션한다</a>.</p></li>
+<li><p>v2.2.3 이전 마이너 릴리스에서 v2.4.17로 업그레이드하려면<a href="#Upgrade-Milvus-using-Helm">헬름을 사용하여 Milvus를 업그레이드</a> 한다.</p></li>
+<li><p>업그레이드 전에<a href="#Migrate-the-metadata">메타데이터를</a> Milvus v2.1.x에서 v2.4.17로<a href="#Migrate-the-metadata">마이그레이션한다</a>.</p></li>
 </ul>
 <div style="display:none;">
 <h2 id="Conduct-a-rolling-upgrade" class="common-anchor-header">롤링 업그레이드 수행<button data-href="#Conduct-a-rolling-upgrade" class="anchor-icon" translate="no">
@@ -123,8 +145,8 @@ zilliztech/milvus       4.1.0           2.3.0                   Milvus is an ope
 <tr><td><code translate="no">o</code></td><td>작업</td><td><code translate="no">update</code></td><td>False</td></tr>
 </tbody>
 </table>
-<p>Milvus 인스턴스의 모든 배포가 정상 상태에 있는지 확인했습니다. 다음 명령을 실행하여 Milvus 인스턴스를 2.4.15로 업그레이드할 수 있습니다.</p>
-<pre><code translate="no" class="language-shell">sh rollingUpdate.<span class="hljs-property">sh</span> -n <span class="hljs-keyword">default</span> -i my-release -o update -t <span class="hljs-number">2.4</span><span class="hljs-number">.15</span> -w <span class="hljs-string">&#x27;milvusdb/milvus:v2.4.15&#x27;</span>
+<p>Milvus 인스턴스의 모든 배포가 정상 상태에 있는지 확인했습니다. 다음 명령을 실행하여 Milvus 인스턴스를 2.4.17로 업그레이드할 수 있습니다.</p>
+<pre><code translate="no" class="language-shell">sh rollingUpdate.<span class="hljs-property">sh</span> -n <span class="hljs-keyword">default</span> -i my-release -o update -t <span class="hljs-number">2.4</span><span class="hljs-number">.17</span> -w <span class="hljs-string">&#x27;milvusdb/milvus:v2.4.17&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <ol>
@@ -152,7 +174,7 @@ zilliztech/milvus       4.1.0           2.3.0                   Milvus is an ope
       </svg>
     </button></h2><p>밀버스를 v2.2.3 이전의 마이너 릴리스에서 최신 버전으로 업그레이드하려면 다음 명령을 실행한다:</p>
 <pre><code translate="no" class="language-shell">helm repo update
-helm upgrade my-release milvus/milvus --reuse-values --version=<span class="hljs-number">4.1</span><span class="hljs-number">.24</span> <span class="hljs-comment"># use the helm chart version here</span>
+helm upgrade my-release milvus/milvus --reset-then-reuse-values --version=<span class="hljs-number">4.1</span><span class="hljs-number">.24</span> <span class="hljs-comment"># use the helm chart version here</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>앞의 명령에서 헬름 차트 버전을 사용한다. 헬름 차트 버전을 구하는 방법에 대한 자세한 내용은 <a href="#Check-the-Milvus-version">Milvus 버전 확인을</a> 참조한다.</p>
 <h2 id="Migrate-the-metadata" class="common-anchor-header">메타데이터 마이그레이션<button data-href="#Migrate-the-metadata" class="anchor-icon" translate="no">
@@ -213,25 +235,25 @@ my-release-minio-744dd9586f-qngzv               1/1     Running   0          84s
 <li>Milvus 메타데이터를 마이그레이션합니다.</li>
 <li>새 이미지로 Milvus 구성 요소를 시작합니다.</li>
 </ol>
-<h4 id="2-Upgrade-Milvus-from-v21x-to-2415" class="common-anchor-header">2. Milvus를 v2.1.x에서 2.4.15로 업그레이드합니다.</h4><p>다음 명령은 Milvus를 v2.1.4에서 2.4.15로 업그레이드한다고 가정합니다. 필요에 맞는 버전으로 변경하세요.</p>
+<h4 id="2-Upgrade-Milvus-from-v21x-to-2417" class="common-anchor-header">2. Milvus를 v2.1.x에서 2.4.17로 업그레이드합니다.</h4><p>다음 명령은 Milvus를 v2.1.4에서 2.4.17로 업그레이드한다고 가정합니다. 필요에 맞는 버전으로 변경하세요.</p>
 <ol>
 <li><p>Milvus 인스턴스 이름, 소스 Milvus 버전, 대상 Milvus 버전을 지정합니다.</p>
-<pre><code translate="no">./migrate.sh -i my-release -s 2.1.4 -t 2.4.15
+<pre><code translate="no">./migrate.sh -i my-release -s 2.1.4 -t 2.4.17
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>Milvus가 기본 K8s 네임스페이스에 설치되지 않은 경우 <code translate="no">-n</code> 로 네임스페이스를 지정합니다.</p>
-<pre><code translate="no">./migrate.sh -i my-release -n milvus -s 2.1.4 -t 2.4.15
+<pre><code translate="no">./migrate.sh -i my-release -n milvus -s 2.1.4 -t 2.4.17
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>Milvus가 사용자 지정 <code translate="no">rootpath</code> 과 함께 설치된 경우 <code translate="no">-r</code> 으로 루트 경로를 지정합니다.</p>
-<pre><code translate="no">./migrate.sh -i my-release -n milvus -s 2.1.4 -t 2.4.15 -r by-dev
+<pre><code translate="no">./migrate.sh -i my-release -n milvus -s 2.1.4 -t 2.4.17 -r by-dev
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>Milvus가 사용자 지정 <code translate="no">image</code> 과 함께 설치된 경우 이미지 태그를 <code translate="no">-w</code> 으로 지정합니다.</p>
-<pre><code translate="no">./migrate.sh -i my-release -n milvus -s 2.1.4 -t 2.4.15 -r by-dev -w milvusdb/milvus:v2.4.15
+<pre><code translate="no">./migrate.sh -i my-release -n milvus -s 2.1.4 -t 2.4.17 -r by-dev -w milvusdb/milvus:v2.4.17
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>마이그레이션이 완료된 후 마이그레이션 파드를 자동으로 제거하려면 <code translate="no">-d true</code> 을 설정합니다.</p>
-<pre><code translate="no">./migrate.sh -i my-release -n milvus -s 2.1.4 -t 2.4.15 -w milvusdb/milvus:v2.4.15 -d <span class="hljs-literal">true</span>
+<pre><code translate="no">./migrate.sh -i my-release -n milvus -s 2.1.4 -t 2.4.17 -w milvusdb/milvus:v2.4.17 -d <span class="hljs-literal">true</span>
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>마이그레이션이 실패하면 롤백하고 다시 마이그레이션하세요.</p>
-<pre><code translate="no">./migrate.sh -i my-release -n milvus -s 2.1.4 -t 2.4.15 -r by-dev -o rollback -w milvusdb/milvus:v2.1.1
-./migrate.sh -i my-release -n milvus -s 2.1.4 -t 2.4.15 -r by-dev -o migrate -w milvusdb/milvus:v2.4.15
+<pre><code translate="no">./migrate.sh -i my-release -n milvus -s 2.1.4 -t 2.4.17 -r by-dev -o rollback -w milvusdb/milvus:v2.1.1
+./migrate.sh -i my-release -n milvus -s 2.1.4 -t 2.4.17 -r by-dev -o migrate -w milvusdb/milvus:v2.4.17
 <button class="copy-code-btn"></button></code></pre></li>
 </ol>

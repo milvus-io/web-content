@@ -38,9 +38,9 @@ title: Indexer des champs vectoriels
         ></path>
       </svg>
     </button></h2><p>En exploitant les métadonnées stockées dans un fichier d'index, Milvus organise vos données dans une structure spécialisée, ce qui facilite la récupération rapide des informations demandées lors des recherches ou des requêtes.</p>
-<p>Milvus propose plusieurs types d'index et de métriques pour trier les valeurs des champs afin d'effectuer des recherches de similarité efficaces. Le tableau suivant répertorie les types d'index et les métriques pris en charge pour différents types de champs vectoriels. Pour plus de détails, voir <a href="/docs/fr/index.md">Index en mémoire</a> et <a href="/docs/fr/metric.md">métriques de similarité</a>.</p>
+<p>Milvus propose plusieurs types d'index et de métriques pour trier les valeurs des champs afin d'effectuer des recherches de similarité efficaces. Le tableau suivant répertorie les types d'index et les métriques pris en charge pour différents types de champs vectoriels. Actuellement, Milvus prend en charge différents types de données vectorielles, notamment les encastrements à virgule flottante (souvent appelés vecteurs à virgule flottante ou vecteurs denses), les encastrements binaires (également appelés vecteurs binaires) et les encastrements épars (également appelés vecteurs épars). Pour plus d'informations, reportez-vous à la section <a href="/docs/fr/index.md">Index en mémoire</a> et <a href="/docs/fr/metric.md">métriques de similarité</a>.</p>
 <div class="filter">
- <a href="#floating">Incrustations à virgule flottante</a> <a href="#binary">Incrustations binaires</a> <a href="#sparse">Incrustations éparses</a></div>
+ <a href="#floating">Encastrements en virgule flottante</a> <a href="#binary">Encastrements binaires</a> <a href="#sparse">Encastrements épars</a></div>
 <div class="filter-floating table-wrapper" markdown="block">
 <table class="tg">
 <thead>

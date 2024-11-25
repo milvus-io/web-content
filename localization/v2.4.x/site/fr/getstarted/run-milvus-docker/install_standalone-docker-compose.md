@@ -57,7 +57,7 @@ title: Exécuter Milvus avec Docker Compose
       </svg>
     </button></h2><p>Milvus fournit un fichier de configuration Docker Compose dans le référentiel Milvus. Pour installer Milvus à l'aide de Docker Compose, il suffit d'exécuter la commande suivante</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-comment"># Download the configuration file</span>
-$ wget https://github.com/milvus-io/milvus/releases/download/v2.4.15/milvus-standalone-docker-compose.yml -O docker-compose.yml
+$ wget https://github.com/milvus-io/milvus/releases/download/v2.4.17/milvus-standalone-docker-compose.yml -O docker-compose.yml
 
 <span class="hljs-comment"># Start Milvus</span>
 $ <span class="hljs-built_in">sudo</span> docker-compose up -d
@@ -76,7 +76,7 @@ Creating milvus-standalone ... <span class="hljs-keyword">done</span>
 <ul>
 <li>Les conteneurs <strong>milvus-standalone</strong>, <strong>milvus-minio</strong> et <strong>milvus-etcd</strong> sont en place.<ul>
 <li>Le conteneur <strong>milvus-etcd</strong> n'expose aucun port à l'hôte et mappe ses données sur les <strong>volumes/etcd</strong> dans le dossier actuel.</li>
-<li>Le conteneur <strong>milvus-minio</strong> dessert les ports <strong>9090</strong> et <strong>9091</strong> localement avec les informations d'authentification par défaut et mappe ses données sur <strong>volumes/minio</strong> dans le dossier actuel.</li>
+<li>Le conteneur <strong>milvus-minio</strong> dessert les ports <strong>9090</strong> et <strong>9091</strong> localement avec les informations d'authentification par défaut et affecte ses données aux <strong>volumes/minio</strong> dans le dossier actuel.</li>
 <li>Le conteneur <strong>milvus-standalone</strong> dessert les ports <strong>19530</strong> localement avec les paramètres par défaut et mappe ses données sur <strong>volumes/milvus</strong> dans le dossier actuel.</li>
 </ul></li>
 </ul>

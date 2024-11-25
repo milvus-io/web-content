@@ -38,14 +38,14 @@ title: Indicizzare i campi vettoriali
         ></path>
       </svg>
     </button></h2><p>Sfruttando i metadati memorizzati in un file indice, Milvus organizza i dati in una struttura specializzata, facilitando il rapido recupero delle informazioni richieste durante le ricerche o le interrogazioni.</p>
-<p>Milvus offre diversi tipi di indice e metriche per ordinare i valori dei campi per una ricerca efficiente delle somiglianze. La tabella seguente elenca i tipi di indice e le metriche supportate per i diversi tipi di campi vettoriali. Per maggiori dettagli, consultare la sezione <a href="/docs/it/index.md">Indice</a> e <a href="/docs/it/metric.md">metriche di somiglianza</a> <a href="/docs/it/index.md">in memoria</a>.</p>
+<p>Milvus offre diversi tipi di indice e metriche per ordinare i valori dei campi per una ricerca efficiente delle somiglianze. La tabella seguente elenca i tipi di indice e le metriche supportate per i diversi tipi di campi vettoriali. Attualmente Milvus supporta diversi tipi di dati vettoriali, tra cui embedding in virgola mobile (spesso noti come vettori in virgola mobile o vettori densi), embedding binari (noti anche come vettori binari) e embedding sparsi (noti anche come vettori sparsi). Per ulteriori informazioni, consultare <a href="/docs/it/index.md">Indice in-memory</a> e <a href="/docs/it/metric.md">metriche di somiglianza</a>.</p>
 <div class="filter">
- <a href="#floating">Incorporamenti in virgola mobile</a> <a href="#binary">Incorporamenti binari Incorporamenti</a> <a href="#sparse">sparsi Incorporamenti sparsi</a></div>
+ <a href="#floating">Matrici in virgola mobile</a> <a href="#binary">Matrici binarie</a> <a href="#sparse">Matrici rade Matrici rade</a></div>
 <div class="filter-floating table-wrapper" markdown="block">
 <table class="tg">
 <thead>
   <tr>
-    <th class="tg-0pky" style="width: 204px;">Tipi di metrica</th>
+    <th class="tg-0pky" style="width: 204px;">Tipi di metriche</th>
     <th class="tg-0pky">Tipi di indice</th>
   </tr>
 </thead>

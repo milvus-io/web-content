@@ -21,9 +21,9 @@ title: Métricas de similaridade
         ></path>
       </svg>
     </button></h1><p>No Milvus, as métricas de semelhança são utilizadas para medir as semelhanças entre vectores. A escolha de uma boa métrica de distância ajuda a melhorar significativamente o desempenho da classificação e do agrupamento.</p>
-<p>A tabela seguinte mostra como estas métricas de semelhança amplamente utilizadas se adaptam a vários formulários de dados de entrada e índices Milvus.</p>
+<p>A tabela seguinte mostra como estas métricas de similaridade amplamente utilizadas se adaptam a várias formas de dados de entrada e índices Milvus. Atualmente, o Milvus suporta vários tipos de dados, incluindo incrustações de vírgula flutuante (frequentemente conhecidas como vectores de vírgula flutuante ou vectores densos), incrustações binárias (também conhecidas como vectores binários) e incrustações esparsas (também conhecidas como vectores esparsos).</p>
 <div class="filter">
- <a href="#floating">Incorporações de ponto flutuante</a> <a href="#binary">Incorporações binárias</a> <a href="#sparse">Incorporações esparsas</a></div>
+ <a href="#floating">Integrações de vírgula flutuante</a> <a href="#binary">Integrações binárias</a> <a href="#sparse">Integrações esparsas</a></div>
 <div class="filter-floating table-wrapper" markdown="block">
 <table class="tg">
 <thead>
@@ -82,14 +82,14 @@ title: Métricas de similaridade
 <p>É a métrica de distância mais comummente utilizada e é muito útil quando os dados são contínuos.</p>
 <div class="alert note">
 O Milvus só calcula o valor antes de aplicar a raiz quadrada quando a distância euclidiana é escolhida como métrica de distância.</div>
-<h3 id="Inner-product-IP" class="common-anchor-header">Produto interno (IP)</h3><p>A distância IP entre dois embeddings é definida da seguinte forma</p>
+<h3 id="Inner-product-IP" class="common-anchor-header">Produto interno (IP)</h3><p>A distância IP entre duas incorporações vectoriais é definida da seguinte forma</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/IP_formula.png" alt="ip" class="doc-image" id="ip" />
    </span> <span class="img-wrapper"> <span>ip</span> </span></p>
 <p>O PI é mais útil se precisar de comparar dados não normalizados ou quando se preocupa com a magnitude e o ângulo.</p>
 <div class="alert note">
-<p>Se aplicar a métrica de distância IP a embeddings normalizados, o resultado será equivalente ao cálculo da semelhança de cosseno entre os embeddings.</p>
+<p>Se aplicar a métrica de distância IP a incorporações normalizadas, o resultado será equivalente ao cálculo da semelhança de cosseno entre as incorporações.</p>
 </div>
 <p>Suponha que X' é normalizado a partir da incorporação X:</p>
 <p>
@@ -119,7 +119,7 @@ O Milvus só calcula o valor antes de aplicar a raiz quadrada quando a distânci
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/jaccard_dist.png" alt="Jaccard distance" class="doc-image" id="jaccard-distance" />
    </span> <span class="img-wrapper"> <span>Distância de Jaccard</span> </span></p>
-<h3 id="Hamming-distance" class="common-anchor-header">Distância de Hamming</h3><p>A distância de Hamming mede cadeias de dados binárias. A distância entre duas cadeias de dados de igual comprimento é o número de posições de bits em que os bits são diferentes.</p>
+<h3 id="Hamming-distance" class="common-anchor-header">Distância de Hamming</h3><p>A distância de Hamming mede cadeias de dados binárias. A distância entre duas cadeias de igual comprimento é o número de posições de bits em que os bits são diferentes.</p>
 <p>Por exemplo, suponha que existem duas cadeias de caracteres, 1101 1001 e 1001 1101.</p>
 <p>11011001 ⊕ 10011101 = 01000100. Como isso contém dois 1s, a distância de Hamming, d (11011001, 10011101) = 2.</p>
 <h3 id="Structural-Similarity" class="common-anchor-header">Similaridade Estrutural</h3><p>Quando uma estrutura química ocorre como parte de uma estrutura química maior, a primeira é chamada de subestrutura e a segunda é chamada de superestrutura. Por exemplo, o etanol é uma subestrutura do ácido acético, e o ácido acético é uma superestrutura do etanol.</p>

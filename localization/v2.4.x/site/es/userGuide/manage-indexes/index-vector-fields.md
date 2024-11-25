@@ -38,9 +38,9 @@ title: Indexar campos vectoriales
         ></path>
       </svg>
     </button></h2><p>Aprovechando los metadatos almacenados en un archivo de índice, Milvus organiza sus datos en una estructura especializada, facilitando la rápida recuperación de la información solicitada durante las búsquedas o consultas.</p>
-<p>Milvus proporciona varios tipos de índices y métricas para ordenar los valores de campo para realizar búsquedas de similitud eficientes. La siguiente tabla enumera los tipos de índices y métricas soportados para diferentes tipos de campos vectoriales. Para más detalles, consulte <a href="/docs/es/index.md">Índice en memoria</a> y <a href="/docs/es/metric.md">métricas</a> de <a href="/docs/es/metric.md">similitud</a>.</p>
+<p>Milvus proporciona varios tipos de índices y métricas para ordenar los valores de los campos con el fin de realizar búsquedas de similitud eficientes. La siguiente tabla enumera los tipos de índices y métricas soportados para diferentes tipos de campos vectoriales. Actualmente, Milvus soporta varios tipos de datos vectoriales, incluyendo incrustaciones en coma flotante (a menudo conocidas como vectores en coma flotante o vectores densos), incrustaciones binarias (también conocidas como vectores binarios) e incrustaciones dispersas (también conocidas como vectores dispersos). Para obtener más información, consulte <a href="/docs/es/index.md">Índice en memoria</a> y <a href="/docs/es/metric.md">métricas de similitud</a>.</p>
 <div class="filter">
- <a href="#floating">Incrustaciones de coma flotante</a> <a href="#binary">Incrustaciones binarias</a> <a href="#sparse">Incrustaciones dispersas</a></div>
+ <a href="#floating">Incrustaciones</a> <a href="#sparse">en</a> <a href="#floating">coma flotante</a> <a href="#binary">Incrustaciones binarias</a> <a href="#sparse">Incrustaciones dispersas</a></div>
 <div class="filter-floating table-wrapper" markdown="block">
 <table class="tg">
 <thead>
@@ -78,7 +78,7 @@ title: Indexar campos vectoriales
 <thead>
   <tr>
     <th class="tg-0pky" style="width: 204px;">Tipos métricos</th>
-    <th class="tg-0pky">Tipos de índice</th>
+    <th class="tg-0pky">Tipos de índices</th>
   </tr>
 </thead>
 <tbody>

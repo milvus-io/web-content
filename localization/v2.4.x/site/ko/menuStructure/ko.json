@@ -285,7 +285,7 @@
             "children": []
           },
           {
-            "label": "GPU 인덱스",
+            "label": "GPU 색인",
             "id": "gpu_index.md",
             "order": 2,
             "children": []

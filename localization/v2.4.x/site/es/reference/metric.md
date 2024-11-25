@@ -21,14 +21,14 @@ title: Métricas de similitud
         ></path>
       </svg>
     </button></h1><p>En Milvus, las métricas de similitud se utilizan para medir las similitudes entre vectores. La elección de una buena métrica de distancia ayuda a mejorar significativamente el rendimiento de la clasificación y la agrupación.</p>
-<p>La siguiente tabla muestra cómo estas métricas de similitud ampliamente utilizadas se ajustan a varias formas de datos de entrada e índices Milvus.</p>
+<p>La siguiente tabla muestra cómo estas métricas de similitud ampliamente utilizadas se ajustan a varias formas de datos de entrada e índices de Milvus. Actualmente, Milvus admite varios tipos de datos, incluyendo incrustaciones de punto flotante (a menudo conocidas como vectores de punto flotante o vectores densos), incrustaciones binarias (también conocidas como vectores binarios) e incrustaciones dispersas (también conocidas como vectores dispersos).</p>
 <div class="filter">
- <a href="#floating">Incrustaciones en coma flotante</a> <a href="#binary">Incrustaciones binarias</a> <a href="#sparse">Incrustaciones dispersas</a></div>
+ <a href="#sparse">Incrustaciones</a> <a href="#binary">en</a> <a href="#floating">coma flotante</a> <a href="#binary">Incrustaciones binarias</a> <a href="#sparse">Incrustaciones dispersas</a></div>
 <div class="filter-floating table-wrapper" markdown="block">
 <table class="tg">
 <thead>
   <tr>
-    <th class="tg-0pky" style="width: 204px;">Tipos de métricas</th>
+    <th class="tg-0pky" style="width: 204px;">Tipos métricos</th>
     <th class="tg-0pky">Tipos de índices</th>
   </tr>
 </thead>
@@ -82,14 +82,14 @@ title: Métricas de similitud
 <p>Es la métrica de distancia más utilizada y resulta muy útil cuando los datos son continuos.</p>
 <div class="alert note">
 Milvus sólo cacula el valor antes de aplicar la raíz cuadrada cuando se elige la distancia euclídea como métrica de distancia.</div>
-<h3 id="Inner-product-IP" class="common-anchor-header">Producto interior (PI)</h3><p>La distancia IP entre dos incrustaciones se define de la siguiente manera:</p>
+<h3 id="Inner-product-IP" class="common-anchor-header">Producto interior (PI)</h3><p>La distancia IP entre dos incrustaciones vectoriales se definen de la siguiente manera:</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/IP_formula.png" alt="ip" class="doc-image" id="ip" />
    </span> <span class="img-wrapper"> <span>ip</span> </span></p>
-<p>IP es más útil si necesita comparar datos no normalizados o cuando se preocupa por la magnitud y el ángulo.</p>
+<p>El PI es más útil si necesita comparar datos no normalizados o cuando le importan la magnitud y el ángulo.</p>
 <div class="alert note">
-<p>Si aplica la métrica de distancia IP a incrustaciones normalizadas, el resultado será equivalente al cálculo de la similitud coseno entre las incrustaciones.</p>
+<p>Si se aplica la métrica de distancia IP a incrustaciones normalizadas, el resultado será equivalente al cálculo de la similitud coseno entre las incrustaciones.</p>
 </div>
 <p>Supongamos que X' se normaliza a partir de la incrustación X:</p>
 <p>
@@ -131,7 +131,7 @@ Milvus sólo cacula el valor antes de aplicar la raíz cuadrada cuando se elige 
    </span> <span class="img-wrapper"> <span>superestructura</span> </span></p>
 <p>Donde:</p>
 <ul>
-<li>A es la representación binaria de una fórmula química a recuperar</li>
+<li>A es la representación binaria de una fórmula química que se desea recuperar</li>
 <li>B es la representación binaria de una fórmula química en la base de datos</li>
 </ul>
 <p>Si devuelve <code translate="no">0</code>, <strong>A</strong> no es una superestructura de <strong>B</strong>. En caso contrario, el resultado es el contrario.</p>
@@ -146,7 +146,7 @@ Milvus sólo cacula el valor antes de aplicar la raíz cuadrada cuando se elige 
 <li>B es la representación binaria de una fórmula química en la base de datos</li>
 </ul>
 <p>Si devuelve <code translate="no">0</code>, <strong>A</strong> no es una subestructura de <strong>B</strong>. En caso contrario, el resultado es el contrario.</p>
-<h2 id="FAQ" class="common-anchor-header">PREGUNTAS MÁS FRECUENTES<button data-href="#FAQ" class="anchor-icon" translate="no">
+<h2 id="FAQ" class="common-anchor-header">FAQ<button data-href="#FAQ" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -162,10 +162,10 @@ Milvus sólo cacula el valor antes de aplicar la raíz cuadrada cuando se elige 
         ></path>
       </svg>
     </button></h2><p><details>
-<summary><font color="#4fc4f9">¿Por qué el resultado top1 de una búsqueda vectorial no es el propio vector buscado, si el tipo de</font></summary>métrica<summary><font color="#4fc4f9">es</font></summary>producto interior<summary><font color="#4fc4f9">?</font></summary>Esto ocurre si no se han normalizado los vectores al utilizar producto interior como métrica de distancia.</details>
+<summary><font color="#4fc4f9">¿Por qué el resultado top1 de una búsqueda vectorial no es el propio vector buscado, si el tipo de</font></summary>métrica es producto interior? Esto ocurre si no se han normalizado los vectores al utilizar producto interior como métrica de distancia.</details>
 <details>
 <summary><font color="#4fc4f9">¿Qué es la normalización? ¿Por qué es necesaria la normalización?</font></summary></p>
-<p>La normalización se refiere al proceso de convertir una incrustación (vector) para que su norma sea igual a 1. Si utiliza el producto interno para calcular las similitudes de las incrustaciones, debe normalizar sus incrustaciones. Después de la normalización, el producto interior es igual a la similitud coseno.</p>
+<p>La normalización se refiere al proceso de convertir una incrustación (vector) para que su norma sea igual a 1. Si utiliza el producto interno para calcular las similitudes entre incrustaciones, debe normalizar sus incrustaciones. Después de la normalización, el producto interior es igual a la similitud coseno.</p>
 <p>
 Para más información, consulte <a href="https://en.wikipedia.org/wiki/Unit_vector">Wikipedia</a>.</p>
 </details>
@@ -187,5 +187,5 @@ Para más información, consulte <a href="https://en.wikipedia.org/wiki/Unit_vec
         ></path>
       </svg>
     </button></h2><ul>
-<li>Aprenda más sobre los <a href="/docs/es/index.md">tipos de índices</a> soportados en Milvus.</li>
+<li>Aprenda más sobre los <a href="/docs/es/index.md">tipos de índice</a> soportados en Milvus.</li>
 </ul>

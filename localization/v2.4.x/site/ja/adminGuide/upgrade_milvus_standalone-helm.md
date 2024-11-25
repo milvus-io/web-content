@@ -23,7 +23,29 @@ title: MilvusスタンドアロンとHelmチャートのアップグレード
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>このガイドでは、Milvus HelmチャートでMilvusスタンドアロンをアップグレードする方法を説明します。</p>
+    </button></h1><p>このガイドでは、Milvus Helmチャートを使用してMilvusスタンドアロンをアップグレードする方法について説明します。</p>
+<h2 id="Prerequisites" class="common-anchor-header">前提条件<button data-href="#Prerequisites" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><ul>
+<li>Helmバージョン &gt;= 3.14.0</li>
+<li>Kubernetes バージョン &gt;= 1.20.0</li>
+</ul>
+<div class="alert note">
+<p>Milvus-Helmチャートバージョン4.2.21以降、依存関係としてpulsar-v3.xチャートを導入しました。後方互換性のため、helmをv3.14またはそれ以降のバージョンにアップグレードし、<code translate="no">helm upgrade</code> を使用する際は必ず<code translate="no">--reset-then-reuse-values</code> オプションを追加してください。</p>
+</div>
 <h2 id="Check-the-Milvus-version" class="common-anchor-header">Milvusバージョンの確認<button data-href="#Check-the-Milvus-version" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -39,16 +61,16 @@ title: MilvusスタンドアロンとHelmチャートのアップグレード
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>以下のコマンドを実行し、Milvusの新しいバージョンを確認します。</p>
+    </button></h2><p>以下のコマンドを実行して、Milvusの新しいバージョンを確認してください。</p>
 <pre><code translate="no">$ helm repo update
 $ helm search repo zilliztech/milvus --versions
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p><code translate="no">https://milvus-io.github.io/milvus-helm/</code> にある Milvus Helm Charts のレポはアーカイブされており、<code translate="no">https://zilliztech.github.io/milvus-helm/</code> から以下の手順で更なるアップデートを取得することができます：</p>
+<p><code translate="no">https://zilliztech.github.io/milvus-helm/</code> Milvus Helm Charts リポジトリ<code translate="no">https://milvus-io.github.io/milvus-helm/</code> はアーカイブされました：</p>
 <pre><code translate="no" class="language-shell">helm repo add zilliztech https://zilliztech.github.io/milvus-helm
-helm repo update
+helm repo update zilliztech
 <span class="hljs-comment"># upgrade existing helm release</span>
-helm upgrade my-release zilliztech/milvus
+helm upgrade my-release zilliztech/milvus --reset-then-reuse-values
 <button class="copy-code-btn"></button></code></pre>
 <p>アーカイブされたレポは4.0.31までのチャートで利用可能です。それ以降のリリースについては、代わりに新しいレポを使用してください。</p>
 </div>
@@ -86,10 +108,10 @@ zilliztech/milvus       4.1.1           2.3.0                   Milvus is an ope
 zilliztech/milvus       4.1.0           2.3.0                   Milvus is an open-source vector database built ...
 <button class="copy-code-btn"></button></code></pre>
 <p>Milvusのアップグレードパスは以下のように選択できます：</p>
-<div style="display: none;">- Milvus v2.2.3以降からv2.4.15への[ローリングアップグレード](#conduct-a-rolling-upgrade)。</div>
+<div style="display: none;">- Milvus v2.2.3以降からv2.4.17への[ローリングアップグレード](#conduct-a-rolling-upgrade)。</div>
 <ul>
-<li><p><a href="#Upgrade-Milvus-using-Helm">Helmを使用して</a>、v2.2.3以前のマイナーリリースからv2.4.15へ<a href="#Upgrade-Milvus-using-Helm">Milvusをアップグレードする</a>。</p></li>
-<li><p>Milvus v2.1.xからv2.4.15へのアップグレード前に<a href="#Migrate-the-metadata">メタデータを移行する</a>。</p></li>
+<li><p><a href="#Upgrade-Milvus-using-Helm">Helmを使用して</a>、v2.2.3以前のマイナーリリースからv2.4.17へ<a href="#Upgrade-Milvus-using-Helm">Milvusをアップグレードする</a>。</p></li>
+<li><p>Milvus v2.1.xからv2.4.17へのアップグレード前に<a href="#Migrate-the-metadata">メタデータを移行する</a>。</p></li>
 </ul>
 <div style="display:none;">
 <h2 id="Conduct-a-rolling-upgrade" class="common-anchor-header">ローリングアップグレードの実施<button data-href="#Conduct-a-rolling-upgrade" class="anchor-icon" translate="no">
@@ -123,8 +145,8 @@ zilliztech/milvus       4.1.0           2.3.0                   Milvus is an ope
 <tr><td><code translate="no">o</code></td><td>操作方法</td><td><code translate="no">update</code></td><td>偽</td></tr>
 </tbody>
 </table>
-<p>Milvusインスタンスのすべてのデプロイメントが正常な状態であることを確認したら、以下のコマンドを実行してMilvusインスタンスを2.4.15にアップグレードします。以下のコマンドを実行することで、Milvusインスタンスを2.4.15にアップグレードすることができます。</p>
-<pre><code translate="no" class="language-shell">sh rollingUpdate.<span class="hljs-property">sh</span> -n <span class="hljs-keyword">default</span> -i my-release -o update -t <span class="hljs-number">2.4</span><span class="hljs-number">.15</span> -w <span class="hljs-string">&#x27;milvusdb/milvus:v2.4.15&#x27;</span>
+<p>Milvusインスタンスのすべてのデプロイメントが正常な状態であることを確認したら、以下のコマンドを実行してMilvusインスタンスを2.4.17にアップグレードします。以下のコマンドを実行することで、Milvusインスタンスを2.4.17にアップグレードすることができます。</p>
+<pre><code translate="no" class="language-shell">sh rollingUpdate.<span class="hljs-property">sh</span> -n <span class="hljs-keyword">default</span> -i my-release -o update -t <span class="hljs-number">2.4</span><span class="hljs-number">.17</span> -w <span class="hljs-string">&#x27;milvusdb/milvus:v2.4.17&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <ol>
@@ -152,7 +174,7 @@ zilliztech/milvus       4.1.0           2.3.0                   Milvus is an ope
       </svg>
     </button></h2><p>Milvusをv2.2.3以前のマイナーリリースから最新のものにアップグレードするには、以下のコマンドを実行します：</p>
 <pre><code translate="no" class="language-shell">helm repo update
-helm upgrade my-release milvus/milvus --reuse-values --version=<span class="hljs-number">4.1</span><span class="hljs-number">.24</span> <span class="hljs-comment"># use the helm chart version here</span>
+helm upgrade my-release milvus/milvus --reset-then-reuse-values --version=<span class="hljs-number">4.1</span><span class="hljs-number">.24</span> <span class="hljs-comment"># use the helm chart version here</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>直前のコマンドでHelm chartのバージョンを使用してください。Helmチャートバージョンの取得方法については、「<a href="#Check-the-Milvus-version">Milvusバージョンの確認</a>」をご参照ください。</p>
 <h2 id="Migrate-the-metadata" class="common-anchor-header">メタデータの移行<button data-href="#Migrate-the-metadata" class="anchor-icon" translate="no">
@@ -213,25 +235,25 @@ my-release-minio-744dd9586f-qngzv               1/1     Running   0          84s
 <li>Milvusメタデータを移行します。</li>
 <li>新しいイメージでMilvusコンポーネントを起動する。</li>
 </ol>
-<h4 id="2-Upgrade-Milvus-from-v21x-to-2415" class="common-anchor-header">2.Milvusをv2.1.xから2.4.15にアップグレードする。</h4><p>以下のコマンドは、Milvusをv2.1.4から2.4.15にアップグレードすることを前提としています。必要なバージョンに変更してください。</p>
+<h4 id="2-Upgrade-Milvus-from-v21x-to-2417" class="common-anchor-header">2.Milvusをv2.1.xから2.4.17にアップグレードする。</h4><p>以下のコマンドは、Milvusをv2.1.4から2.4.17にアップグレードすることを前提としています。必要なバージョンに変更してください。</p>
 <ol>
 <li><p>Milvusインスタンス名、ソースMilvusバージョン、ターゲットMilvusバージョンを指定します。</p>
-<pre><code translate="no">./migrate.sh -i my-release -s 2.1.4 -t 2.4.15
+<pre><code translate="no">./migrate.sh -i my-release -s 2.1.4 -t 2.4.17
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>MilvusがデフォルトのK8s名前空間にインストールされていない場合は、<code translate="no">-n</code> で名前空間を指定します。</p>
-<pre><code translate="no">./migrate.sh -i my-release -n milvus -s 2.1.4 -t 2.4.15
+<pre><code translate="no">./migrate.sh -i my-release -n milvus -s 2.1.4 -t 2.4.17
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>Milvusがカスタム<code translate="no">rootpath</code> でインストールされている場合は、<code translate="no">-r</code> でルートパスを指定してください。</p>
-<pre><code translate="no">./migrate.sh -i my-release -n milvus -s 2.1.4 -t 2.4.15 -r by-dev
+<pre><code translate="no">./migrate.sh -i my-release -n milvus -s 2.1.4 -t 2.4.17 -r by-dev
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>Milvusがカスタム<code translate="no">image</code> でインストールされている場合は、<code translate="no">-w</code> でイメージタグを指定してください。</p>
-<pre><code translate="no">./migrate.sh -i my-release -n milvus -s 2.1.4 -t 2.4.15 -r by-dev -w milvusdb/milvus:v2.4.15
+<pre><code translate="no">./migrate.sh -i my-release -n milvus -s 2.1.4 -t 2.4.17 -r by-dev -w milvusdb/milvus:v2.4.17
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>マイグレーション完了後にマイグレーションポッドを自動的に削除する場合は、<code translate="no">-d true</code> を設定します。</p>
-<pre><code translate="no">./migrate.sh -i my-release -n milvus -s 2.1.4 -t 2.4.15 -w milvusdb/milvus:v2.4.15 -d <span class="hljs-literal">true</span>
+<pre><code translate="no">./migrate.sh -i my-release -n milvus -s 2.1.4 -t 2.4.17 -w milvusdb/milvus:v2.4.17 -d <span class="hljs-literal">true</span>
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>マイグレーションに失敗した場合は、ロールバックしてマイグレーションをやり直します。</p>
-<pre><code translate="no">./migrate.sh -i my-release -n milvus -s 2.1.4 -t 2.4.15 -r by-dev -o rollback -w milvusdb/milvus:v2.1.1
-./migrate.sh -i my-release -n milvus -s 2.1.4 -t 2.4.15 -r by-dev -o migrate -w milvusdb/milvus:v2.4.15
+<pre><code translate="no">./migrate.sh -i my-release -n milvus -s 2.1.4 -t 2.4.17 -r by-dev -o rollback -w milvusdb/milvus:v2.1.1
+./migrate.sh -i my-release -n milvus -s 2.1.4 -t 2.4.17 -r by-dev -o migrate -w milvusdb/milvus:v2.4.17
 <button class="copy-code-btn"></button></code></pre></li>
 </ol>

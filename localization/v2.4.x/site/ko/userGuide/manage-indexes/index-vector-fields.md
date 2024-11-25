@@ -36,7 +36,7 @@ title: 벡터 필드 색인 생성
         ></path>
       </svg>
     </button></h2><p>Milvus는 인덱스 파일에 저장된 메타데이터를 활용하여 데이터를 특수한 구조로 구성함으로써 검색 또는 쿼리 중에 요청된 정보를 신속하게 검색할 수 있도록 도와줍니다.</p>
-<p>Milvus는 효율적인 유사도 검색을 위해 필드 값을 정렬하는 여러 가지 인덱스 유형과 메트릭을 제공합니다. 다음 표에는 다양한 벡터 필드 유형에 대해 지원되는 인덱스 유형과 메트릭이 나와 있습니다. 자세한 내용은 <a href="/docs/ko/index.md">인메모리 인덱스</a> 및 <a href="/docs/ko/metric.md">유사성 메트릭을</a> 참조하세요.</p>
+<p>Milvus는 효율적인 유사도 검색을 위해 필드 값을 정렬하는 여러 가지 인덱스 유형과 메트릭을 제공합니다. 다음 표에는 다양한 벡터 필드 유형에 대해 지원되는 인덱스 유형과 메트릭이 나와 있습니다. 현재 Milvus는 부동 소수점 임베딩(부동 소수점 벡터 또는 고밀도 벡터라고도 함), 이진 임베딩(이진 벡터라고도 함), 스파스 임베딩(스파스 벡터라고도 함)을 포함한 다양한 유형의 벡터 데이터를 지원합니다. 자세한 내용은 <a href="/docs/ko/index.md">인메모리 인덱스</a> 및 <a href="/docs/ko/metric.md">유사성 메트릭을</a> 참조하세요.</p>
 <div class="filter">
  <a href="#floating">부동 소수점 임베딩</a> <a href="#binary">이진 임베딩</a> <a href="#sparse">스파스 임베딩</a></div>
 <div class="filter-floating table-wrapper" markdown="block">

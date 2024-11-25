@@ -56,11 +56,11 @@ Actuellement, un champ vectoriel ne prend en charge qu'un seul type d'index. Mil
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus prend en charge différents types d'index, qui sont classés en fonction du type d'intégration qu'ils gèrent : <strong>flottant</strong>, <strong>binaire</strong> et <strong>clairsemé</strong>.</p>
+    </button></h2><p>Milvus prend en charge différents types d'index, classés en fonction du type d'intégration vectorielle qu'ils traitent : <strong>intégrations à virgule flottante</strong> (également appelées vecteurs à virgule flottante ou vecteurs denses), <strong>intégrations binaires</strong> (également appelées vecteurs binaires) et <strong>intégrations clairsemées</strong> (également appelées vecteurs clairsemés).</p>
 <div class="filter">
- <a href="#floating">Incorporations en virgule flottante</a> <a href="#binary">Incorporations binaires</a> <a href="#sparse">Incorporations éparses</a></div>
+ <a href="#floating">Encastrements en virgule flottante</a> <a href="#binary">Encastrements binaires</a> <a href="#sparse">Encastrements épars</a></div>
 <div class="filter-floating">
-<h3 id="Indexes-for-floating-point-embeddings" class="common-anchor-header">Index pour les intégrations en virgule flottante</h3><p>Pour les intégrations en virgule flottante à 128 dimensions, l'espace de stockage qu'elles occupent est de 128 * la taille de la virgule flottante = 512 octets. Les <a href="/docs/fr/metric.md">mesures de distance</a> utilisées pour les enregistrements en virgule flottante sont la distance euclidienne (<code translate="no">L2</code>) et le produit intérieur (<code translate="no">IP</code>).</p>
+<h3 id="Indexes-for-floating-point-embeddings" class="common-anchor-header">Indices pour les intégrations en virgule flottante</h3><p>Pour les encastrements en virgule flottante à 128 dimensions (vecteurs), l'espace de stockage qu'ils occupent est de 128 * la taille de la virgule flottante = 512 octets. Les <a href="/docs/fr/metric.md">mesures de distance</a> utilisées pour les enregistrements en virgule flottante sont la distance euclidienne (<code translate="no">L2</code>) et le produit intérieur (<code translate="no">IP</code>).</p>
 <p>Ces types d'index comprennent <code translate="no">FLAT</code>, <code translate="no">IVF_FLAT</code>, <code translate="no">IVF_PQ</code>, <code translate="no">IVF_SQ8</code>, <code translate="no">HNSW</code>, et <code translate="no">SCANN</code> pour les recherches ANN basées sur l'unité centrale.</p>
 </div>
 <div class="filter-binary">
@@ -369,7 +369,7 @@ Actuellement, un champ vectoriel ne prend en charge qu'un seul type d'index. Mil
 </tbody>
 </table>
 </li>
-<li><p>Plage de recherche</p>
+<li><p>Recherche par plage</p>
 <table>
 <thead>
 <tr><th>Paramètre</th><th>Description</th><th>Plage</th><th>Valeur par défaut</th></tr>
@@ -506,7 +506,7 @@ Actuellement, un champ vectoriel ne prend en charge qu'un seul type d'index. Mil
 <tr><th>Paramètre</th><th>Description de la recherche</th><th>Plage de valeurs</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">drop_ratio_search</code></td><td>Proportion des petites valeurs du vecteur qui sont exclues au cours du processus de recherche. Cette option permet d'affiner le processus de recherche en spécifiant le ratio des plus petites valeurs du vecteur de la requête à ignorer. Elle permet d'équilibrer la précision de la recherche et les performances. Plus la valeur définie pour <code translate="no">drop_ratio_search</code> est petite, moins ces petites valeurs contribuent au résultat final. En ignorant certaines petites valeurs, les performances de la recherche peuvent être améliorées avec un impact minimal sur la précision.</td><td>[0, 1]</td></tr>
+<tr><td><code translate="no">drop_ratio_search</code></td><td>Proportion des petites valeurs du vecteur qui sont exclues au cours du processus de recherche. Cette option permet d'affiner le processus de recherche en spécifiant le ratio des plus petites valeurs du vecteur de la requête à ignorer. Elle permet d'équilibrer la précision de la recherche et les performances. Plus la valeur définie pour <code translate="no">drop_ratio_search</code> est petite, moins ces petites valeurs contribuent au résultat final. En ignorant certaines petites valeurs, il est possible d'améliorer les performances de la recherche avec un impact minimal sur la précision.</td><td>[0, 1]</td></tr>
 </tbody>
 </table>
 </li>

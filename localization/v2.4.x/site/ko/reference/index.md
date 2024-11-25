@@ -56,11 +56,11 @@ title: 인메모리 인덱스
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus는 처리하는 임베딩 유형에 따라 <strong>부동 소수</strong>점, <strong>이진</strong>, <strong>스파스</strong> 등 다양한 인덱스 유형을 지원합니다.</p>
+    </button></h2><p>Milvus는 처리하는 벡터 임베딩 유형에 따라 <strong>부동</strong> 소수점 임베딩(부동 소수점 벡터 또는 고밀도 벡터라고도 함), <strong>이진 임베딩</strong> (이진 벡터라고도 함), <strong>스파스 임베딩</strong> (스파스 벡터라고도 함)으로 분류되는 다양한 인덱스 유형을 지원합니다.</p>
 <div class="filter">
  <a href="#floating">부동 소수점 임베딩</a> <a href="#binary">이진 임베딩</a> <a href="#sparse">스파스 임베딩</a></div>
 <div class="filter-floating">
-<h3 id="Indexes-for-floating-point-embeddings" class="common-anchor-header">부동 소수점 임베딩용 인덱스</h3><p>128차원 부동 소수점 임베딩의 경우, 임베딩이 차지하는 저장 공간은 128 * 부동 소수점 크기 = 512바이트입니다. 그리고 부동 소수점 임베딩에 사용되는 <a href="/docs/ko/metric.md">거리 메트릭은</a> 유클리드 거리(<code translate="no">L2</code>)와 내적 곱(<code translate="no">IP</code>)입니다.</p>
+<h3 id="Indexes-for-floating-point-embeddings" class="common-anchor-header">부동 소수점 임베딩의 인덱스</h3><p>128차원 부동 소수점 임베딩(벡터)의 경우, 임베딩이 차지하는 저장 공간은 128*플로트 크기 = 512바이트입니다. 그리고 부동 소수점 임베딩에 사용되는 <a href="/docs/ko/metric.md">거리 메트릭은</a> 유클리드 거리(<code translate="no">L2</code>)와 내적 곱(<code translate="no">IP</code>)입니다.</p>
 <p>이러한 유형의 인덱스에는 <code translate="no">FLAT</code>, <code translate="no">IVF_FLAT</code>, <code translate="no">IVF_PQ</code>, <code translate="no">IVF_SQ8</code>, <code translate="no">HNSW</code>, <code translate="no">SCANN</code> 등이 있습니다.</p>
 </div>
 <div class="filter-binary">
