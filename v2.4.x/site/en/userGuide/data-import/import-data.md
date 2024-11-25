@@ -36,7 +36,7 @@ To import the prepared data, you have to create an import job as follows:
 <div class="multipleCode">
   <a href="#python">Python </a>
   <a href="#java">Java</a>
-  <a href="#bash">cURL</a>
+  <a href="#shell">cURL</a>
 </div>
 
 ```python
@@ -85,7 +85,7 @@ public static void main(String[] args) throws Exception {
 }
 ```
 
-```bash
+```shell
 export MILVUS_URI="localhost:19530"
 
 curl --request POST "http://${MILVUS_URI}/v2/vectordb/jobs/import/create" \
@@ -150,7 +150,7 @@ Once you get an import job ID, you can check the import progress as follows:
 <div class="multipleCode">
   <a href="#python">Python </a>
   <a href="#java">Java</a>
-  <a href="#bash">cURL</a>
+  <a href="#shell">cURL</a>
 </div>
 
 ```python
@@ -206,7 +206,7 @@ public static void main(String[] args) throws Exception {
 }
 ```
 
-```bash
+```shell
 export MILVUS_URI="localhost:19530"
 
 curl --request POST "http://${MILVUS_URI}/v2/vectordb/jobs/import/describe" \
@@ -261,7 +261,7 @@ You can list all import jobs relative to a specific collection as follows:
 <div class="multipleCode">
   <a href="#python">Python </a>
   <a href="#java">Java</a>
-  <a href="#bash">cURL</a>
+  <a href="#shell">cURL</a>
 </div>
 
 ```python
@@ -291,7 +291,7 @@ public static void main(String[] args) throws Exception {
 }
 ```
 
-```bash
+```shell
 export MILVUS_URI="localhost:19530"
 
 curl --request POST "http://${MILVUS_URI}/v2/vectordb/jobs/import/list" \
