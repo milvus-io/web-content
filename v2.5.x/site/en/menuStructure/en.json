@@ -237,12 +237,6 @@
         "children": []
       },
       {
-        "label": "Consistency",
-        "id": "consistency.md",
-        "order": 2,
-        "children": []
-      },
-      {
         "label": "Multi-tenancy",
         "id": "multi_tenancy.md",
         "order": 3,
@@ -252,12 +246,6 @@
         "label": "Timestamp",
         "id": "timestamp.md",
         "order": 4,
-        "children": []
-      },
-      {
-        "label": "Similarity Metrics",
-        "id": "metric.md",
-        "order": 5,
         "children": []
       },
       {
@@ -296,12 +284,6 @@
         "label": "Scalar Index",
         "id": "scalar_index.md",
         "order": 8,
-        "children": []
-      },
-      {
-        "label": "Reranking",
-        "id": "reranking.md",
-        "order": 9,
         "children": []
       },
       {

@@ -28,7 +28,7 @@ In Milvus 2.5, tokenization and sparse vector extraction are now built-in, truly
 
 For details, refer to [Full Text Search](full-text-search.md).
 
-#### Cluster Management WebUI
+#### Cluster Management WebUI (Beta)
 
 To better support massive data and rich features, Milvus's sophisticated design includes various dependencies, numerous node roles, complex data structures, and more. These aspects can pose challenges for usage and maintenance.
 
