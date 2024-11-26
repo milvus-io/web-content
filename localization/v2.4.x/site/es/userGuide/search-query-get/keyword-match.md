@@ -52,7 +52,7 @@ title: Concordancia de palabras clave
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/keyword-match.png" alt="Keyword Match" class="doc-image" id="keyword-match" />
-   </span> <span class="img-wrapper"> <span>Concordancia de palabras clave</span> </span></p>
+   </span> <span class="img-wrapper"> <span>Coincidencia de palabras clave</span> </span></p>
 <h2 id="Enable-keyword-match" class="common-anchor-header">Activar la concordancia de palabras clave<button data-href="#Enable-keyword-match" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

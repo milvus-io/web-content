@@ -49,7 +49,7 @@ summary: >-
    </span> <span class="img-wrapper"> <span>Pesquisa filtrada</span> </span></p>
 <p>Como mostrado no diagrama acima, o pedido de pesquisa traz <code translate="no">chunk like % red %</code> como condição de filtragem, indicando que o Zilliz Cloud deve realizar a pesquisa ANN em todas as entidades que tenham a palavra <code translate="no">red</code> no campo <code translate="no">chunk</code>. Especificamente, o Zilliz Cloud faz o seguinte.</p>
 <ul>
-<li><p>Filtra as entidades que correspondem às condições de filtragem apresentadas no pedido de pesquisa.</p></li>
+<li><p>Filtra as entidades que correspondem às condições de filtragem contidas no pedido de pesquisa.</p></li>
 <li><p>Realiza a pesquisa ANN dentro das entidades filtradas.</p></li>
 <li><p>Retorna as entidades top-K.</p></li>
 </ul>
@@ -256,4 +256,4 @@ curl --request POST \​
 ]​
 
 <button class="copy-code-btn"></button></code></pre>
-<p>Para obter mais informações sobre os operadores que podem ser utilizados na filtragem de metadados, consulte <a href="/docs/pt/boolean.md">Filtragem de metadados</a>.</p>
+<p>Para mais informações sobre os operadores que podem ser utilizados na filtragem de metadados, consulte <a href="/docs/pt/boolean.md">Filtragem de metadados</a>.</p>

@@ -48,7 +48,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Para utilizar campos Array no Milvus, defina o tipo de campo relevante ao criar o esquema da coleção. Este processo inclui.</p>
+    </button></h2><p>Para utilizar os campos Array no Milvus, defina o tipo de campo relevante ao criar o esquema da coleção. Este processo inclui.</p>
 <ol>
 <li><p>Definir <code translate="no">datatype</code> como o tipo de dados Array suportado, <code translate="no">ARRAY</code>.</p></li>
 <li><p>Utilizar o parâmetro <code translate="no">element_type</code> para especificar o tipo de dados dos elementos da matriz. Pode ser qualquer tipo de dados escalar suportado pelo Milvus, como <code translate="no">VARCHAR</code> ou <code translate="no">INT64</code>. Todos os elementos do mesmo Array têm de ter o mesmo tipo de dados.</p></li>

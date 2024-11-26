@@ -105,7 +105,7 @@ rerank = WeightedRanker(<span class="hljs-number">0.8</span>, <span class="hljs-
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x//assets/rrf-ranker.png" alt="rrf-ranker" class="doc-image" id="rrf-ranker" />
    </span> <span class="img-wrapper"> <span>RRF-ranker</span> </span></p>
-<p>这里，𝑁 表示不同检索路径的数量，rank𝑖(𝑑) 是第 𝑖 个检索器检索到的文档𝑑 的排名位置，𝑘 是平滑参数，通常设置为 60。</p></li>
+<p>这里，𝑁 代表不同检索路径的数量，rank𝑖(𝑑) 是第 𝑖 个检索器检索到的文档𝑑 的排名位置，𝑘 是平滑参数，通常设置为 60。</p></li>
 <li><p><strong>综合排名</strong>：根据综合得分对检索结果重新排序，得出最终结果。</p></li>
 </ul>
 <p>要使用这一策略，请应用<code translate="no">RRFRanker</code> 实例。</p>

@@ -357,7 +357,7 @@ client.<span class="hljs-title function_">insert</span>({​
 <p>In questo esempio.</p>
 <ul>
 <li><p>Ogni inserimento di dati include un campo primario (<code translate="no">pk</code>), <code translate="no">metadata</code> come campo JSON per memorizzare informazioni come la categoria del prodotto, il prezzo e la marca.</p></li>
-<li><p><code translate="no">embedding</code> è un campo vettoriale tridimensionale utilizzato per la ricerca della somiglianza vettoriale.</p></li>
+<li><p><code translate="no">embedding</code> è un campo vettoriale tridimensionale utilizzato per la ricerca della similarità vettoriale.</p></li>
 </ul>
 <h2 id="Search-and-query​" class="common-anchor-header">Ricerca e interrogazione<button data-href="#Search-and-query​" class="anchor-icon" translate="no">
       <svg translate="no"

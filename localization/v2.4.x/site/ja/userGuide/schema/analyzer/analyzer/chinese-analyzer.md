@@ -20,7 +20,7 @@ summary: chinese`アナライザーは中国語テキストを扱うために特
         ></path>
       </svg>
     </button></h1><p><code translate="no">chinese</code> アナライザーは中国語テキストを処理するために特別に設計されており、効果的なセグメンテーションとトークン化を提供します。</p>
-<h3 id="Definition​" class="common-anchor-header">定義</h3><p><code translate="no">chinese</code> アナライザーは次のように構成されています。</p>
+<h3 id="Definition​" class="common-anchor-header">定義</h3><p><code translate="no">chinese</code> アナライザーは次のように構成されます。</p>
 <ul>
 <li><p><strong>トークン化</strong>：<code translate="no">jieba</code> トークナイザを使用して、語彙と文脈に基づいて中国語テキストをトークンにセグメンテーションする。詳細は<a href="/docs/ja/jieba-tokenizer.md">Jieba</a> を参照。</p></li>
 <li><p><strong>フィルタ</strong>：<code translate="no">cnalphanumonly</code> フィルタを使用して、中国語以外の文字を含むトークンを削除します。詳細については、<a href="/docs/ja/cnalphanumonly-filter.md">Cnalphanumonlyを</a>参照してください。</p></li>

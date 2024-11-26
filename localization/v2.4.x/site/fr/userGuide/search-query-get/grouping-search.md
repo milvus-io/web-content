@@ -43,7 +43,7 @@ title: Recherche de groupes
         ></path>
       </svg>
     </button></h2><p>Lorsque des entités dans les résultats de recherche partagent la même valeur dans un champ scalaire, cela indique qu'elles sont similaires dans un attribut particulier, ce qui peut avoir un impact négatif sur les résultats de la recherche.</p>
-<p>Supposons qu'une collection stocke plusieurs documents (désignés par <strong>docId)</strong>. Pour conserver autant d'informations sémantiques que possible lors de la conversion des documents en vecteurs, chaque document est divisé en paragraphes (ou <strong>morceaux</strong>) plus petits et gérables, et stocké en tant qu'entités distinctes. Même si le document est divisé en sections plus petites, les utilisateurs sont souvent intéressés par l'identification des documents les plus pertinents pour leurs besoins.</p>
+<p>Supposons qu'une collection stocke plusieurs documents (désignés par <strong>docId)</strong>. Pour conserver autant d'informations sémantiques que possible lors de la conversion des documents en vecteurs, chaque document est divisé en paragraphes (ou <strong>morceaux</strong>) plus petits et plus faciles à gérer, puis stocké en tant qu'entités distinctes. Même si le document est divisé en sections plus petites, les utilisateurs sont souvent intéressés par l'identification des documents les plus pertinents pour leurs besoins.</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/ann-search.png" alt="ANN Search" class="doc-image" id="ann-search" />

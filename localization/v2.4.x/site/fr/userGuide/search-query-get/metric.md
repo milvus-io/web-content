@@ -78,7 +78,7 @@ title: Types métriques
 </td><td data-block-token="H3vYdaah4oWsXmxmABOcW01XnSh" colspan="1" rowspan="1"><p data-block-token="VHz5d7R91o3OGuxX39Bc76CTnGf">Une valeur plus petite indique une plus grande similarité.</p>
 </td><td data-block-token="NZnwdhAGUoO0R9x9gz6cZfCYnOd" colspan="1" rowspan="1"><p data-block-token="Xk7wdBDlko6RjFxVnATcPYTjnsb">[0, dim(vector)]</p>
 </td></tr><tr><td data-block-token="Xm5BdUTvXoPS1Xxtc26cBqAWn9e" colspan="1" rowspan="1"><p data-block-token="FoMadsBCboAKV2xofQ2c9IiKntb"><code translate="no">BM25</code></p>
-</td><td data-block-token="OHEldDxlaoejYmxXgUPcbwCYn4b" colspan="1" rowspan="1"><p data-block-token="EVzLdJPQdopf2mxZ3dfcTGSgnSc">Score de pertinence basé sur la fréquence des termes, la fréquence inversée des documents et la normalisation des documents.</p>
+</td><td data-block-token="OHEldDxlaoejYmxXgUPcbwCYn4b" colspan="1" rowspan="1"><p data-block-token="EVzLdJPQdopf2mxZ3dfcTGSgnSc">Attribue une note à la pertinence en fonction de la fréquence des termes, de la fréquence inversée des documents et de la normalisation des documents.</p>
 </td><td data-block-token="KNCEd8WTioQbwnxmHzNcpHkHnzf" colspan="1" rowspan="1"><p data-block-token="RVtVda2Ozo1N5ixO0oucju5FnWh">[0, ∞)</p>
 <p data-block-token="MQ5RdcTC1oIZC5x4d7xc2M56nId"></p>
 </td></tr></tbody></table>
@@ -106,7 +106,7 @@ title: Types métriques
 <p>où <strong>a = (<sub>a0</sub>, <sub>a1</sub>,...,<sub>an-1</sub>)</strong> et <strong>b = (<sub>b0</sub>, <sub>b1</sub>,..., <sub>bn-1</sub>)</strong> sont deux points dans un espace euclidien à n dimensions.</p>
 <p>Il s'agit de la mesure de distance la plus couramment utilisée et elle est très utile lorsque les données sont continues.</p>
 <div class="alert note">
-<p>Zilliz Cloud calcule uniquement la valeur avant d'appliquer la racine carrée lorsque la distance euclidienne est choisie comme métrique de distance.</p>
+<p>Zilliz Cloud calcule uniquement la valeur avant d'appliquer la racine carrée lorsque la distance euclidienne est choisie comme mesure de distance.</p>
 </div>
 <h2 id="Inner-product-IP​" class="common-anchor-header">Produit intérieur (PI)<button data-href="#Inner-product-IP​" class="anchor-icon" translate="no">
       <svg translate="no"

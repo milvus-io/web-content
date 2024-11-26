@@ -2,7 +2,7 @@
 id: decompounder-filter.md
 title: 減圧フィルター
 summary: >-
-  逆コンパウンダー`フィルターは、指定した辞書に基づいて複合語を個々の要素に分割し、複合語の一部を簡単に検索できるようにする。このフィルタは、ドイツ語のように複合語を頻繁に使う言語で特に有用である。
+  逆コンパウンダー（decompounder）`フィルターは、指定した辞書に基づいて複合語を個々の要素に分割し、複合語の一部を検索しやすくする。このフィルタは、ドイツ語のように複合語を頻繁に使う言語で特に有用である。
 ---
 <h1 id="Decompounder​" class="common-anchor-header">逆コンパウンダー<button data-href="#Decompounder​" class="anchor-icon" translate="no">
       <svg translate="no"

@@ -4,7 +4,7 @@ title: フィルタリング検索
 related_key: 'ann search, filtered search'
 summary: >-
   ANN検索は、指定されたベクトル埋め込みに最も近いベクトル埋め込みを見つける。しかし、検索結果が常に正しいとは限りません。検索リクエストにフィルタリング条件を含めることで、Zilliz
-  CloudがANN検索を行う前にメタデータのフィルタリングを行い、検索範囲をコレクション全体から指定されたフィルタリング条件に一致するエンティティだけに絞り込むことができます。
+  CloudがANN検索を行う前にメタデータのフィルタリングを行い、検索範囲をコレクション全体から指定されたフィルタリング条件にマッチするエンティティだけに絞り込むことができます。
 ---
 <h1 id="Filtered-Search​" class="common-anchor-header">フィルタリング検索<button data-href="#Filtered-Search​" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -37,12 +37,12 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>コレクションにベクトル埋め込みとそのメタデータの両方が含まれている場合、ANN検索の前にメタデータをフィルタリングすることで、検索結果の関連性を向上させることができます。Zilliz Cloudはフィルタリング条件を含む検索要求を受け取ると、指定されたフィルタリング条件に一致するエンティティ内に検索範囲を制限します。</p>
+    </button></h2><p>コレクションにベクトル埋め込みとそのメタデータの両方が含まれている場合、ANN検索の前にメタデータをフィルタリングすることで、検索結果の関連性を向上させることができます。Zilliz Cloudはフィルタリング条件を含む検索要求を受け取ると、指定されたフィルタリング条件にマッチするエンティティ内に検索範囲を制限します。</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/filtered-search.png" alt="Filtered search" class="doc-image" id="filtered-search" />
    </span> <span class="img-wrapper"> <span>フィルタリングされた検索</span> </span></p>
-<p>上図に示すように、検索リクエストはフィルタリング条件として<code translate="no">chunk like % red %</code> 、Zilliz Cloudが<code translate="no">chunk</code> フィールドに<code translate="no">red</code> という単語を持つすべてのエンティティ内でANN検索を行うべきであることを示している。具体的には、Zilliz Cloudは以下の処理を行う。</p>
+<p>上図に示すように、検索リクエストはフィルタリング条件として<code translate="no">chunk like % red %</code> 。これは、Zilliz Cloudが<code translate="no">chunk</code> フィールドに<code translate="no">red</code> という単語を持つすべてのエンティティ内でANN検索を行うべきであることを示している。具体的には、Zilliz Cloudは以下の処理を行う。</p>
 <ul>
 <li><p>検索要求に含まれるフィルタリング条件に一致するエンティティをフィルタリングする。</p></li>
 <li><p>フィルタリングされたエンティティ内でANN検索を行う。</p></li>

@@ -4,9 +4,9 @@ title: Spärlicher Vektor
 summary: >-
   Dünne Vektoren sind eine wichtige Methode der Datendarstellung bei der
   Informationsgewinnung und der Verarbeitung natürlicher Sprache. Während dichte
-  Vektoren wegen ihrer ausgezeichneten semantischen Verständnisfähigkeiten
+  Vektoren wegen ihrer hervorragenden semantischen Verständnisfähigkeiten
   beliebt sind, liefern spärliche Vektoren oft genauere Ergebnisse, wenn es um
-  Anwendungen geht, die einen präzisen Abgleich von Schlüsselwörtern oder
+  Anwendungen geht, die eine präzise Übereinstimmung von Schlüsselwörtern oder
   Phrasen erfordern.
 ---
 <h1 id="Sparse-Vector​" class="common-anchor-header">Sparsamer Vektor<button data-href="#Sparse-Vector​" class="anchor-icon" translate="no">
@@ -118,7 +118,7 @@ sparse_vector = [[(<span class="hljs-number">1</span>, <span class="hljs-number"
 </ul>
 <h3 id="Add-vector-field​" class="common-anchor-header">Vektorfeld hinzufügen</h3><p>Um spärliche Vektoren in Milvus zu verwenden, müssen Sie bei der Erstellung einer Sammlung ein Feld für die Speicherung spärlicher Vektoren definieren. Dieser Prozess beinhaltet.</p>
 <ol>
-<li><p>Einstellen von <code translate="no">datatype</code> auf den unterstützten Sparse-Vector-Datentyp, <code translate="no">SPARSE_FLOAT_VECTOR</code>.</p></li>
+<li><p>Einstellen von <code translate="no">datatype</code> auf den unterstützten Sparse-Vektor-Datentyp, <code translate="no">SPARSE_FLOAT_VECTOR</code>.</p></li>
 <li><p>Die Dimension muss nicht angegeben werden.</p></li>
 </ol>
 <div class="multipleCode">
@@ -264,9 +264,9 @@ indexes.<span class="hljs-title function_">add</span>(<span class="hljs-title cl
 <ul>
 <li><p>Für den Sparse-Vektor wird ein Index vom Typ <code translate="no">SPARSE_INVERTED_INDEX</code> erstellt. Für spärliche Vektoren können Sie <code translate="no">SPARSE_INVERTED_INDEX</code> oder <code translate="no">SPARSE_WAND</code> angeben. Details finden Sie unter <a href="https://milvus.io/docs/index.md?tab=sparse">Sparse Vector Indexes</a>.</p></li>
 <li><p>Für spärliche Vektoren unterstützt <code translate="no">metric_type</code> nur <code translate="no">IP</code> (Inneres Produkt), das zur Messung der Ähnlichkeit zwischen zwei spärlichen Vektoren verwendet wird. Weitere Informationen zur Ähnlichkeit finden Sie unter <a href="/docs/de/metric.md">Metrische Typen</a>.</p></li>
-<li><p><code translate="no">drop_ratio_build</code> ist ein optionaler Indexparameter speziell für spärliche Vektoren. Er steuert den Anteil der kleinen Vektorwerte, die bei der Indexerstellung ausgeschlossen werden. Bei <code translate="no">{&quot;drop_ratio_build&quot;: 0.2}</code> werden beispielsweise die kleinsten 20% der Vektorwerte bei der Indexerstellung ausgeschlossen, was den Rechenaufwand bei der Suche reduziert.</p></li>
+<li><p><code translate="no">drop_ratio_build</code> ist ein optionaler Indexparameter speziell für spärliche Vektoren. Er steuert den Anteil der kleinen Vektorwerte, die bei der Indexerstellung ausgeschlossen werden. Bei <code translate="no">{&quot;drop_ratio_build&quot;: 0.2}</code> werden beispielsweise die kleinsten 20% der Vektorwerte bei der Indexerstellung ausgeschlossen, was den Rechenaufwand bei der Suche verringert.</p></li>
 </ul>
-<h3 id="Create-collection​" class="common-anchor-header">Sammlung erstellen</h3><p>Sobald die Einstellungen für spärliche Vektoren und Indizes abgeschlossen sind, können Sie eine Sammlung erstellen, die spärliche Vektoren enthält. Das folgende Beispiel verwendet die <ins><code translate="no">create_collection</code></ins> Methode, um eine Sammlung mit dem Namen <code translate="no">my_sparse_collection</code> zu erstellen.</p>
+<h3 id="Create-collection​" class="common-anchor-header">Sammlung erstellen</h3><p>Sobald die Einstellungen für spärliche Vektoren und Indizes abgeschlossen sind, können Sie eine Sammlung erstellen, die spärliche Vektoren enthält. Das folgende Beispiel verwendet die <ins><code translate="no">create_collection</code></ins> Methode, um eine Sammlung namens <code translate="no">my_sparse_collection</code> zu erstellen.</p>
 <div class="multipleCode">
    <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python">client.<span class="hljs-title function_">create_collection</span>(​
@@ -315,7 +315,7 @@ client.createCollection(requestCreate);​
 }&quot;</span>​
 
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Insert-data​" class="common-anchor-header">Daten einfügen</h3><p>Fügen Sie nach dem Erstellen der Sammlung Daten ein, die spärliche Vektoren enthalten.</p>
+<h3 id="Insert-data​" class="common-anchor-header">Daten einfügen</h3><p>Fügen Sie nach der Erstellung der Sammlung Daten ein, die spärliche Vektoren enthalten.</p>
 <div class="multipleCode">
    <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python">sparse_vectors = [​

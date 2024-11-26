@@ -247,7 +247,7 @@ index_params.<span class="hljs-title function_">add_index</span>(​
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>在 Milvus 中创建 Collections 时，可以选择立即加载索引，也可以推迟到批量摄取一些数据后再加载。通常情况下，你不需要对此做出明确的选择，因为上述示例显示，在创建 Collections 后，会立即为任何摄取的数据自动建立索引。这样就能立即搜索到采集的数据。不过，如果在创建 Collections 后有大量批量插入，并且在某一点之前不需要搜索任何数据，那么可以通过在创建 Collections 时省略 index_params 来推迟索引构建，并在摄取所有数据后通过显式调用 load 来构建索引。这种方法对于在大型 Collections 上建立索引更有效，但在调用 load() 之前不能进行任何搜索。</p>
+    </button></h2><p>在 Milvus 中创建 Collections 时，你可以选择立即加载索引，或者推迟到批量摄取一些数据后再加载。通常情况下，你不需要对此做出明确的选择，因为上述示例显示，在创建 Collections 后，会立即为任何摄取的数据自动建立索引。这样就能立即搜索到采集的数据。不过，如果在创建 Collections 后有大量批量插入，并且在某一时刻之前不需要搜索任何数据，则可以通过在创建 Collections 时省略 index_params 来推迟索引构建，并在摄取所有数据后通过显式调用 load 来构建索引。这种方法对于在大型 Collections 上建立索引更有效，但在调用 load() 之前不能进行任何搜索。</p>
 <h2 id="How-to-Define-Data-Model-For-Multi-tenancy​" class="common-anchor-header">如何为多租户定义数据模型<button data-href="#How-to-Define-Data-Model-For-Multi-tenancy​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

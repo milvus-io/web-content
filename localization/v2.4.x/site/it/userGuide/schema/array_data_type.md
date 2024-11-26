@@ -5,7 +5,7 @@ summary: >-
   Il tipo Array viene utilizzato per memorizzare campi contenenti più valori
   dello stesso tipo di dati. Offre un modo flessibile per memorizzare attributi
   con più elementi, rendendolo particolarmente utile in scenari in cui è
-  necessario salvare una serie di dati correlati. In Milvus è possibile
+  necessario salvare una serie di dati correlati. In Milvus, è possibile
   memorizzare i campi Array insieme ai dati vettoriali, consentendo così di
   effettuare query e filtraggi più complessi.
 ---
@@ -51,10 +51,10 @@ summary: >-
     </button></h2><p>Per utilizzare i campi Array in Milvus, è necessario definire il tipo di campo corrispondente durante la creazione dello schema della collezione. Questo processo comprende.</p>
 <ol>
 <li><p>Impostare <code translate="no">datatype</code> sul tipo di dati Array supportato, <code translate="no">ARRAY</code>.</p></li>
-<li><p>Usare il parametro <code translate="no">element_type</code> per specificare il tipo di dati degli elementi dell'array. Questo può essere un qualsiasi tipo di dati scalari supportato da Milvus, come <code translate="no">VARCHAR</code> o <code translate="no">INT64</code>. Tutti gli elementi di una stessa matrice devono avere lo stesso tipo di dati.</p></li>
+<li><p>Usare il parametro <code translate="no">element_type</code> per specificare il tipo di dati degli elementi dell'array. Questo può essere qualsiasi tipo di dati scalari supportati da Milvus, come <code translate="no">VARCHAR</code> o <code translate="no">INT64</code>. Tutti gli elementi di una stessa matrice devono avere lo stesso tipo di dati.</p></li>
 <li><p>Usare il parametro <code translate="no">max_capacity</code> per definire la capacità massima dell'array, cioè il numero massimo di elementi che può contenere.</p></li>
 </ol>
-<p>Ecco come definire uno schema di collezione che includa campi Array.</p>
+<p>Ecco come definire uno schema di collezione che include campi Array.</p>
 <div class="multipleCode">
  <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#go">Go</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType​

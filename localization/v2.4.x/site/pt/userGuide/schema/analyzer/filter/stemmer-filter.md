@@ -6,7 +6,7 @@ summary: >-
   como stemming), facilitando a correspondência de palavras com significados
   semelhantes em diferentes inflexões.
 ---
-<h1 id="Stemmer​" class="common-anchor-header">Formador de caule<button data-href="#Stemmer​" class="anchor-icon" translate="no">
+<h1 id="Stemmer​" class="common-anchor-header">Stemmer<button data-href="#Stemmer​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -52,7 +52,7 @@ summary: >-
 </th></tr></thead><tbody><tr><td data-block-token="Qlg7d56pCo2leCxk3rkcZswhngb" colspan="1" rowspan="1"><p data-block-token="V7Ajd2RyToVjNTxbGEEcVHdYnxb"><code translate="no">language</code></p>
 </td><td data-block-token="NTbNd7XeuoBsfsxzQ1Kc0jKonKb" colspan="1" rowspan="1"><p data-block-token="J4nPdCcSToFTGYx6Huhc7kpqnRd">Especifica o idioma para o processo de stemming. Os idiomas suportados incluem: <code translate="no">"arabic"</code>, <code translate="no">"danish"</code>, <code translate="no">"dutch"</code>, <code translate="no">"english"</code>, <code translate="no">"finnish"</code>, <code translate="no">"french"</code>, <code translate="no">"german"</code>, <code translate="no">"greek"</code>, <code translate="no">"hungarian"</code>, <code translate="no">"italian"</code>, <code translate="no">"norwegian"</code>, <code translate="no">"portuguese"</code>, <code translate="no">"romanian"</code>, <code translate="no">"russian"</code>, <code translate="no">"spanish"</code>, <code translate="no">"swedish"</code>, <code translate="no">"tamil"</code>, <code translate="no">"turkish"</code></p>
 </td></tr></tbody></table>
-<p>O filtro <code translate="no">stemmer</code> opera nos termos gerados pelo tokenizador, por isso deve ser usado em combinação com um tokenizador.</p>
+<p>O filtro <code translate="no">stemmer</code> opera nos termos gerados pelo tokenizador, portanto, deve ser usado em combinação com um tokenizador.</p>
 <p>Depois de definir <code translate="no">analyzer_params</code>, pode aplicá-los a um campo <code translate="no">VARCHAR</code> ao definir um esquema de coleção. Isto permite que o Milvus processe o texto nesse campo utilizando o analisador especificado para uma tokenização e filtragem eficientes. Para mais pormenores, consulte <a href="/docs/pt/analyzer-overview.md#Example-use">Exemplo de utilização</a>.</p>
 <h2 id="Example-output​" class="common-anchor-header">Exemplo de saída<button data-href="#Example-output​" class="anchor-icon" translate="no">
       <svg translate="no"

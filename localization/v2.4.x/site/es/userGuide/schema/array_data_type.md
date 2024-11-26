@@ -32,7 +32,7 @@ summary: >-
 }​
 
 <button class="copy-code-btn"></button></code></pre>
-<p>En este ejemplo, <code translate="no">tags</code> y <code translate="no">ratings</code> son campos Array. El campo <code translate="no">tags</code> es una matriz de cadenas que representa géneros de canciones como pop, rock y clásica, mientras que el campo <code translate="no">ratings</code> es una matriz de enteros que representa las valoraciones de los usuarios de la canción, que van de 1 a 5. Estos campos Array proporcionan una forma flexible de almacenar datos multivalor, facilitando la realización de análisis detallados durante las consultas y el filtrado.</p>
+<p>En este ejemplo, <code translate="no">tags</code> y <code translate="no">ratings</code> son campos Array. El campo <code translate="no">tags</code> es una matriz de cadenas que representa géneros de canciones como pop, rock y clásica, mientras que el campo <code translate="no">ratings</code> es una matriz de enteros que representa las valoraciones de los usuarios sobre la canción, que van de 1 a 5. Estos campos Array proporcionan una forma flexible de almacenar datos multivalor, facilitando la realización de análisis detallados durante las consultas y el filtrado.</p>
 <h2 id="Add-Array-field​" class="common-anchor-header">Añadir un campo Array<button data-href="#Add-Array-field​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

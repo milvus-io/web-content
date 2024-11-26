@@ -21,7 +21,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>検索として知られる情報検索（IR）システムは、検索支援生成（RAG）、画像検索、商品推薦など、さまざまなAIアプリケーションに不可欠です。IRシステム開発の最初のステップはデータモデルの設計であり、これにはビジネス要件の分析、情報の整理方法の決定、データを意味的に検索可能にするためのインデックス作成が含まれます。</p>
+    </button></h1><p>検索としても知られる情報検索（IR）システムは、検索支援生成（RAG）、画像検索、商品推薦など、さまざまなAIアプリケーションに不可欠です。IRシステム開発の最初のステップはデータモデルの設計であり、これにはビジネス要件の分析、情報の整理方法の決定、データを意味的に検索可能にするためのインデックス作成が含まれます。</p>
 <p>Milvusはコレクションスキーマを通してデータモデルの定義をサポートします。コレクションは、テキストや画像のような非構造化データを、セマンティック検索に使用される様々な精度の密なベクトルや疎なベクトルを含むベクトル表現とともに整理します。さらに、Milvusは &quot;スカラー &quot;と呼ばれる非ベクトルデータ型の保存とフィルタリングをサポートしています。スカラー型にはBOOL、INT8/16/32/64、FLOAT/DOUBLE、VARCHAR、JSON、Arrayが含まれます。</p>
 <p>
   
@@ -50,7 +50,7 @@ summary: >-
 <li><p>記事の要約テキストは、テキスト埋め込みモデルによってベクトルに埋め込まれる。</p></li>
 <li><p>公開時間に基づいてフィルタリングするために、日付はスカラーフィールドとして格納され、効率的なフィルタリングのためにスカラーフィールドのインデックスが必要である。JSONのような、より複雑なデータ構造をスカラーに格納し、その内容からフィルタリング検索を実行することもできる（JSONのインデックス化は今後の機能）。</p></li>
 <li><p>画像のサムネイルバイトを取得して検索結果ページにレンダリングするために、画像のURLも格納される。同様に、要約テキストとタイトルについても同様です。(必要に応じて、生のテキストと画像ファイルのデータをスカラーフィールドとして格納することもできます)。</p></li>
-<li><p>要約テキストでの検索結果を改善するために、ハイブリッド検索アプローチを設計する。一つの検索パスに対して、OpenAIの<code translate="no">text-embedding-3-large</code> やオープンソースの<code translate="no">bge-large-en-v1.5</code> のような、テキストから密なベクトルを生成する通常の埋め込みモデルを使用する。これらのモデルはテキストの全体的な意味を表現するのに適している。もう1つの方法は、BM25やSPLADEのようなスパース埋め込みモデルを使用してスパースベクトルを生成することです。これは、テキスト内の詳細や個々の概念を把握するのが得意な全文検索に似ています。Milvusは、マルチベクトル機能により、同じデータコレクションで両方を使用することをサポートしています。複数のベクトルに対する検索は、単一の<code translate="no">hybrid_search()</code> 操作で行うことができる。</p></li>
+<li><p>要約テキストでの検索結果を改善するために、ハイブリッド検索アプローチを設計する。一つの検索パスに対して、OpenAIの<code translate="no">text-embedding-3-large</code> やオープンソースの<code translate="no">bge-large-en-v1.5</code> のような、テキストから密なベクトルを生成する通常の埋め込みモデルを使用する。これらのモデルはテキストの全体的な意味を表現するのに適している。もう1つの方法は、BM25やSPLADEのようなスパース埋め込みモデルを使用してスパースベクトルを生成することです。これは、テキスト内の詳細や個々の概念を把握するのに適した全文検索に似ています。Milvusは、マルチベクトル機能により、同じデータコレクションで両方を使用することをサポートしています。複数のベクトルに対する検索は、単一の<code translate="no">hybrid_search()</code> 操作で行うことができる。</p></li>
 <li><p>最後に、Milvusの用語では正式には「エンティティ」と呼ばれる、個々のニュースページを識別するためのIDフィールドも必要である。このフィールドは主キー（略して "pk"）として使用される。</p></li>
 </ul>
 <table data-block-token="EOxnd1GqhoODuWx4UyucOMahn0e"><thead><tr><th data-block-token="P2g0djnY5oRKT7xw7aSceiaQnRb" colspan="1" rowspan="1"><p data-block-token="TrIsdjxzooLqxUxiqkTcfN5pnHd">フィールド名</p>
@@ -141,8 +141,8 @@ schema.add_field(field_name=<span class="hljs-string">&quot;summary_sparse_vecto
 <p>Milvus サーバに接続するために<code translate="no">MilvusClient</code> の引数<code translate="no">uri</code> にお気づきでしょうか。引数は以下のように設定できます。</p>
 <ul>
 <li><p>小規模なデータやプロトタイプを作成するためにローカルのベクターデータベースが必要なだけであれば、uri をローカルファイル、例えば<code translate="no">./milvus.db</code> に設定するのが最も便利な方法です。</p></li>
-<li><p>もし、100万ベクトルを超えるような大規模なデータがある場合は、<a href="https://milvus.io/docs/quickstart.md">DockerやKubernetes</a>上に、よりパフォーマンスの高いMilvusサーバを構築することができます。このセットアップでは、サーバのアドレスとポートをURIとして使用してください（例：<code translate="no">http://localhost:19530</code> ）。Milvusで認証機能を有効にしている場合、トークンには"&lt;your_username&gt;:&lt;your_password&gt;"を使用します。</p></li>
-<li><p>Milvusのフルマネージドクラウドサービスである<a href="https://zilliz.com/cloud">Zilliz Cloudを</a>ご利用の場合は、Zilliz Cloudの<a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">Public EndpointとAPI keyに</a>対応する<code translate="no">uri</code> 、<code translate="no">token</code> 。</p></li>
+<li><p>もし、100万ベクトルを超えるような大規模なデータがある場合は、<a href="https://milvus.io/docs/quickstart.md">DockerやKubernetes</a>上に、よりパフォーマンスの高いMilvusサーバを構築することができます。このセットアップでは、サーバのアドレスとポートをURIとして使用してください（例：<code translate="no">http://localhost:19530</code> ）。Milvusの認証機能を有効にしている場合は、トークンに"&lt;your_username&gt;:&lt;your_password&gt;"を使用します。</p></li>
+<li><p>Milvusのフルマネージドクラウドサービスである<a href="https://zilliz.com/cloud">Zilliz Cloudを</a>ご利用の場合は、Zilliz Cloudの<a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">Public EndpointとAPI keyに</a>対応する<code translate="no">uri</code> と<code translate="no">token</code> を調整してください。</p></li>
 </ul>
 <p><code translate="no">MilvusClient.create_schema</code> の<code translate="no">auto_id</code> については、AutoID はプライマリフィールドの属性で、プライマリフィールドのオートインクリメントを有効にするかどうかを決定します。  フィールド<code translate="no">article_id</code> を主キーとして設定し、記事 ID を手動で追加したいので、この機能を無効にするために<code translate="no">auto_id</code> を False に設定します。</p>
 <p>スキーマオブジェクトにすべてのフィールドを追加した後、スキーマオブジェクトは上の表のエントリと一致します。</p>
@@ -263,5 +263,5 @@ index_params.<span class="hljs-title function_">add_index</span>(​
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>複数のテナントという概念は、1つのソフトウェア・アプリケーションやサービスが、それぞれ独立した環境を持つ複数のユーザーや組織にサービスを提供する必要がある場合によく使われる。これは、クラウドコンピューティング、SaaS（Software as a Service）アプリケーション、データベースシステムで頻繁に見られます。例えば、クラウドストレージサービスでは、マルチテナントを利用することで、同じインフラを共有しながら、異なる企業が別々にデータを保存・管理することができます。このアプローチは、各テナントのデータ・セキュリティとプライバシーを確保しながら、リソースの利用と効率を最大化する。</p>
+    </button></h2><p>複数のテナントという概念は、1つのソフトウェア・アプリケーションやサービスが、それぞれ独立した環境を持つ複数のユーザーや組織にサービスを提供する必要がある場合によく使われる。これは、クラウドコンピューティング、SaaS（Software as a Service）アプリケーション、データベースシステムで頻繁に見られます。例えば、クラウドストレージサービスでは、マルチテナントを利用することで、同じインフラを共有しながら、異なる企業が別々にデータを保存・管理できるようにすることができる。このアプローチは、各テナントのデータ・セキュリティとプライバシーを確保しながら、リソースの利用と効率を最大化する。</p>
 <p>テナントを区別する最も簡単な方法は、データとリソースを互いに分離することです。各テナントは特定のリソースに排他的にアクセスするか、他のテナントとリソースを共有してデータベース、コレクション、パーティションなどのMilvusエンティティを管理します。Milvusのマルチテナントを実装するには、これらのエンティティに沿った特定の方法があります。詳細は<a href="https://milvus.io/docs/multi_tenancy.md#Multi-tenancy-strategies">Milvusマルチテナンシーページを</a>ご参照ください。</p>

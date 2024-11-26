@@ -36,7 +36,7 @@ title: Upsert Entidades
     </button></h2><p>Quando for necessário atualizar uma Entidade numa Coleção ou não tiver a certeza se deve atualizar ou inserir, pode tentar utilizar a operação Upsert. Ao utilizar esta operação, é essencial garantir que a Entidade incluída no pedido Upsert contém a chave primária; caso contrário, ocorrerá um erro. Ao receber um pedido de Upsert, o Milvus executa o seguinte processo.</p>
 <ol>
 <li><p>Verificar se o campo primário da Coleção tem o AutoId ativado.</p>
-<p>a.  Se estiver, o Milvus substitui a chave primária da Entidade por uma chave primária gerada automaticamente e insere os dados.</p>
+<p>a.  Se tiver, o Milvus substitui a chave primária da Entidade por uma chave primária gerada automaticamente e insere os dados.</p>
 <p>b. Caso contrário, o Milvus utilizará a chave primária da Entidade para inserir os dados.</p></li>
 <li><p>Efetuar uma operação de eliminação com base no valor da chave primária da Entidade incluída no pedido de Upsert.</p></li>
 </ol>

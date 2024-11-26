@@ -39,9 +39,9 @@ summary: >-
     </button></h2><p><code translate="no">standard</code> 。</p>
 <ul>
 <li><p><strong>トークン化</strong>：<code translate="no">standard</code> トークン化器を使用して、文法規則に基づいてテキストを個別の単語単位に分割する。詳細は「<a href="/docs/ja/standard-tokenizer.md">標準</a>」を参照。</p></li>
-<li><p><strong>フィルタ</strong>：<code translate="no">lowercase</code> フィルタを使用して、すべてのトークンを小文字に変換し、大文字と小文字を区別しない検索を可能にする。詳細は<a href="/docs/ja/lowercase-filter.md"><code translate="no">lowercase filter</code></a>.</p></li>
+<li><p><strong>フィルタ</strong>：<code translate="no">lowercase</code> フィルタを使用して、すべてのトークンを小文字に変換し、大文字と小文字を区別しない検索を可能にする。詳細については<a href="/docs/ja/lowercase-filter.md"><code translate="no">lowercase filter</code></a>.</p></li>
 </ul>
-<p><code translate="no">standard</code> アナライザーの機能は、以下のカスタム アナライザー構成と同等です。</p>
+<p><code translate="no">standard</code> アナライザの機能は、以下のカスタム・アナライザ構成と同等です。</p>
 <pre><code translate="no" class="language-python">analyzer_params = {​
     <span class="hljs-string">&quot;tokenizer&quot;</span>: <span class="hljs-string">&quot;standard&quot;</span>,​
     <span class="hljs-string">&quot;filter&quot;</span>: [<span class="hljs-string">&quot;lowercase&quot;</span>]​

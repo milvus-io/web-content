@@ -44,7 +44,7 @@ title: 키워드 검색
 <li><p><a href="/docs/ko/analyzer-overview.md">분석기</a>: 분석기는 입력 텍스트를 개별 단어 또는 토큰으로 토큰화한 다음 필요에 따라 필터를 적용하여 처리합니다. 이를 통해 Milvus는 이러한 토큰을 기반으로 색인을 구축할 수 있습니다.</p></li>
 <li><p><a href="/docs/ko/index-scalar-fields.md">인덱싱</a>: 텍스트 분석 후, Milvus는 각 고유 토큰을 해당 토큰이 포함된 문서에 매핑하는 역 인덱스를 생성합니다.</p></li>
 </ol>
-<p>사용자가 키워드 검색을 수행하면 반전된 인덱스가 키워드가 포함된 모든 문서를 빠르게 검색하는 데 사용됩니다. 이는 각 문서를 개별적으로 스캔하는 것보다 훨씬 빠릅니다.</p>
+<p>사용자가 키워드 검색을 수행하면 반전된 색인을 사용해 해당 키워드가 포함된 모든 문서를 빠르게 검색합니다. 이는 각 문서를 개별적으로 스캔하는 것보다 훨씬 빠릅니다.</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/keyword-match.png" alt="Keyword Match" class="doc-image" id="keyword-match" />
@@ -146,7 +146,7 @@ result = MilvusClient.search(​
 )​
 
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Query-with-keyword-match​" class="common-anchor-header">키워드 일치를 사용한 쿼리</h3><p>키워드 검색은 쿼리 작업에서 스칼라 필터링에도 사용할 수 있습니다. <code translate="no">query()</code> 메서드의 <code translate="no">expr</code> 파라미터에 <code translate="no">TEXT_MATCH</code> 표현식을 지정하면 주어진 키워드와 일치하는 문서를 검색할 수 있습니다.</p>
+<h3 id="Query-with-keyword-match​" class="common-anchor-header">키워드 일치를 사용한 쿼리</h3><p>키워드 검색은 쿼리 작업에서 스칼라 필터링에도 사용할 수 있습니다. <code translate="no">query()</code> 메서드의 <code translate="no">expr</code> 매개변수에 <code translate="no">TEXT_MATCH</code> 표현식을 지정하면 주어진 키워드와 일치하는 문서를 검색할 수 있습니다.</p>
 <p>아래 예는 <code translate="no">text</code> 필드에 <code translate="no">keyword1</code> 과 <code translate="no">keyword2</code> 키워드를 모두 포함하는 문서를 검색합니다.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Match entities with both `keyword1` and `keyword2`​</span>
 <span class="hljs-built_in">filter</span> = <span class="hljs-string">&quot;TEXT_MATCH(text, &#x27;keyword1&#x27;) and TEXT_MATCH(text, &#x27;keyword2&#x27;)&quot;</span>​

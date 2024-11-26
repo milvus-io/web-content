@@ -231,7 +231,7 @@ indexes.add(IndexParam.builder()​
 
 <button class="copy-code-btn"></button></code></pre>
 <p>Para além de <code translate="no">AUTOINDEX</code>, pode especificar outros tipos de índices escalares, como <code translate="no">INVERTED</code> ou <code translate="no">BITMAP</code>. Para tipos de índice suportados, consulte <a href="https://milvus.io/docs/scalar_index.md">Índices escalares</a>.</p>
-<p>Além disso, antes de criar a coleção, tem de criar um índice para o campo vetorial. Neste exemplo, utilizamos <code translate="no">AUTOINDEX</code> para simplificar as definições do índice de vetor.</p>
+<p>Além disso, antes de criar a coleção, tem de criar um índice para o campo vetorial. Neste exemplo, usamos <code translate="no">AUTOINDEX</code> para simplificar as configurações de índice de vetor.</p>
 <div class="multipleCode">
    <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Add vector index​</span>

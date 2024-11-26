@@ -26,7 +26,7 @@ title: Schlüsselwort-Abgleich
       </svg>
     </button></h1><p>Der Schlüsselwortabgleich in Milvus ermöglicht die präzise Suche nach Dokumenten auf der Grundlage bestimmter Begriffe. Diese Funktion wird in erster Linie für eine gefilterte Suche verwendet, um bestimmte Bedingungen zu erfüllen, und kann eine skalare Filterung zur Verfeinerung der Abfrageergebnisse beinhalten, die eine Ähnlichkeitssuche innerhalb von Vektoren ermöglicht, die skalare Kriterien erfüllen.</p>
 <div class="alert note">
-<p>Die Stichwortsuche konzentriert sich auf die Suche nach exakten Vorkommen der Suchbegriffe, ohne die Relevanz der gefundenen Dokumente zu bewerten. Wenn Sie die relevantesten Dokumente auf der Grundlage der semantischen Bedeutung und Wichtigkeit der Suchbegriffe abrufen möchten, empfehlen wir Ihnen die <a href="/docs/de/full-text-search.md">Volltextsuche</a>.</p>
+<p>Der Schlüsselwortabgleich konzentriert sich auf die Suche nach exakten Vorkommen der Abfragebegriffe, ohne die Relevanz der übereinstimmenden Dokumente zu bewerten. Wenn Sie die relevantesten Dokumente auf der Grundlage der semantischen Bedeutung und Wichtigkeit der Suchbegriffe abrufen möchten, empfehlen wir Ihnen die <a href="/docs/de/full-text-search.md">Volltextsuche</a>.</p>
 </div>
 <h2 id="Overview" class="common-anchor-header">Überblick<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -52,8 +52,8 @@ title: Schlüsselwort-Abgleich
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/keyword-match.png" alt="Keyword Match" class="doc-image" id="keyword-match" />
-   </span> <span class="img-wrapper"> <span>Schlüsselwort-Abgleich</span> </span></p>
-<h2 id="Enable-keyword-match" class="common-anchor-header">Aktivieren der Stichwortsuche<button data-href="#Enable-keyword-match" class="anchor-icon" translate="no">
+   </span> <span class="img-wrapper"> <span>Schlüsselwortabgleich</span> </span></p>
+<h2 id="Enable-keyword-match" class="common-anchor-header">Aktivieren des Schlüsselwortabgleichs<button data-href="#Enable-keyword-match" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

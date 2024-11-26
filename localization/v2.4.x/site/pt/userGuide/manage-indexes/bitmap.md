@@ -23,7 +23,7 @@ summary: >-
         ></path>
       </svg>
     </button></h1><p>A indexação Bitmap é uma técnica de indexação eficiente concebida para melhorar o desempenho das consultas em campos escalares de baixa cardinalidade. A cardinalidade refere-se ao número de valores distintos num campo. Os campos com menos elementos distintos são considerados de baixa cardinalidade.</p>
-<p>Este tipo de índice ajuda a reduzir o tempo de recuperação de consultas escalares, representando os valores do campo num formato binário compacto e efectuando operações bit a bit eficientes sobre eles. Em comparação com outros tipos de índices, os índices de mapa de bits têm normalmente uma maior eficiência de espaço e velocidades de consulta mais rápidas quando se trata de campos de baixa cardinalidade.</p>
+<p>Este tipo de índice ajuda a reduzir o tempo de recuperação de consultas escalares, representando os valores do campo num formato binário compacto e efectuando operações bit a bit eficientes sobre eles. Em comparação com outros tipos de índices, os índices bitmap têm normalmente uma maior eficiência de espaço e velocidades de consulta mais rápidas quando se trata de campos de baixa cardinalidade.</p>
 <h2 id="Overview" class="common-anchor-header">Descrição geral<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -109,7 +109,7 @@ client.create_index(​
 <li><p>O tipo de dados do campo deve ser um dos seguintes.</p>
 <ul>
 <li><p><code translate="no">BOOL</code>, <code translate="no">INT8</code>, <code translate="no">INT16</code>, <code translate="no">INT32</code>, <code translate="no">INT64</code>, <code translate="no">VARCHAR</code></p></li>
-<li><p><code translate="no">ARRAY</code> (os elementos devem ser um dos seguintes: <code translate="no">BOOL</code>, <code translate="no">INT8</code>, <code translate="no">INT16</code>, <code translate="no">INT32</code>, <code translate="no">INT64</code>, <code translate="no">VARCHAR</code>)</p></li>
+<li><p><code translate="no">ARRAY</code> (os elementos têm de ser um dos seguintes: <code translate="no">BOOL</code>, <code translate="no">INT8</code>, <code translate="no">INT16</code>, <code translate="no">INT32</code>, <code translate="no">INT64</code>, <code translate="no">VARCHAR</code>)</p></li>
 </ul></li>
 <li><p>Os índices de bitmap não suportam os seguintes tipos de dados.</p>
 <ul>

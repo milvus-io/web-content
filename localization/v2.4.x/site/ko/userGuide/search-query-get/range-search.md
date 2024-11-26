@@ -44,7 +44,7 @@ title: 범위 검색
 <p>위 다이어그램은 범위 검색 요청에 두 개의 매개변수, 즉 반경과 <strong>범위_필터가</strong> 포함됨을 보여줍니다. 범위 검색 요청을 받으면 Milvus는 다음을 수행합니다.</p>
 <ul>
 <li><p>지정된 메트릭 유형<strong>(COSINE</strong>)을 사용하여 쿼리 벡터와 가장 유사한 모든 벡터 임베딩을 찾습니다.</p></li>
-<li><p>쿼리 벡터와의 <strong>거리</strong> 또는 <strong>점수가</strong> <strong>radius</strong> 및 <strong>range_filter</strong> 매개변수로 지정된 범위 내에 속하는 벡터 임베딩을 필터링합니다.</p></li>
+<li><p>쿼리 벡터와의 <strong>거리</strong> 또는 <strong>점수가</strong> <strong>radius</strong> 및 <strong>range_filter</strong> 매개변수로 지정된 범위 내에 있는 벡터 임베딩을 필터링합니다.</p></li>
 <li><p>필터링된 엔티티 중에서 <strong>상위 K개의</strong> 엔티티를 반환합니다.</p></li>
 </ul>
 <p>반경 및 <strong>범위_필터를</strong> 설정하는 방법은 검색의 메트릭 유형에 따라 다릅니다. 다음 표에는 서로 다른 메트릭 유형으로 이 두 매개변수를 설정하기 위한 요구사항이 나와 있습니다.</p>

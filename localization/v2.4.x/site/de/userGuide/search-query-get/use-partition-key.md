@@ -69,7 +69,7 @@ title: Partitionsschlüssel verwenden
 <li><p>die Anzahl der zu erstellenden Partitionen festlegen (optional), und</p></li>
 <li><p>eine Filterbedingung auf der Grundlage des Partitionsschlüssels erstellen.</p></li>
 </ul>
-<h3 id="Set-Partition-Key​" class="common-anchor-header">Partitionsschlüssel festlegen</h3><p>Um ein skalares Feld als Partitionsschlüssel festzulegen, müssen Sie sein <code translate="no">is_partition_key</code> Attribut auf <code translate="no">true</code> setzen, wenn Sie das skalare Feld hinzufügen.</p>
+<h3 id="Set-Partition-Key​" class="common-anchor-header">Partitionsschlüssel festlegen</h3><p>Um ein skalares Feld als Partitionsschlüssel zu bestimmen, müssen Sie sein <code translate="no">is_partition_key</code> Attribut auf <code translate="no">true</code> setzen, wenn Sie das skalare Feld hinzufügen.</p>
 <div class="multipleCode">
  <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#go">Go</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> (​

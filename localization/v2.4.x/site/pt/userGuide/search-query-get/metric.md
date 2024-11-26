@@ -23,7 +23,7 @@ title: Tipos métricos
       </svg>
     </button></h1><p>As métricas de semelhança são utilizadas para medir as semelhanças entre vectores. A escolha de uma métrica de distância adequada ajuda a melhorar significativamente o desempenho da classificação e do agrupamento.</p>
 <p>Atualmente, o Zilliz Cloud suporta estes tipos de métricas de semelhança: Distância euclidiana (<code translate="no">L2</code>), Produto interno (<code translate="no">IP</code>), Similaridade de cosseno (<code translate="no">COSINE</code>), <code translate="no">JACCARD</code>, <code translate="no">HAMMING</code>, e <code translate="no">BM25</code> (especificamente projetado para pesquisa de texto completo em vetores esparsos).</p>
-<p>A tabela abaixo resume o mapeamento entre os diferentes tipos de campo e os tipos de métricas correspondentes.</p>
+<p>A tabela abaixo resume o mapeamento entre os diferentes tipos de campos e os tipos de métricas correspondentes.</p>
 <table data-block-token="LHu5dKCHro3mnTx6PsmckEsinQd"><thead><tr><th data-block-token="JOJvdTK9MouhT8x7tfGc59NGnfg" colspan="1" rowspan="1"><p data-block-token="TS9tdnaJaoG4kfx96cfcqXINnnc">Tipo de campo</p>
 </th><th data-block-token="Iy8ZdPGpIo6nfwxiz4RcSuwanwf" colspan="1" rowspan="1"><p data-block-token="SKIAdxDFJo9oOyxg7iTcmfGAnz1">Intervalo de dimensão</p>
 </th><th data-block-token="LkYndBOhGotOkGxsog2ciFTSnKd" colspan="1" rowspan="1"><p data-block-token="Nzcsdqt2WoZ4R5xQMT2cD0PQnAh">Tipos de métricas suportados</p>
@@ -163,7 +163,7 @@ title: Tipos métricos
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/cosine_similarity.png" alt="Cosine similarity formula" class="doc-image" id="cosine-similarity-formula" />
    </span> <span class="img-wrapper"> <span>Fórmula de semelhança do cosseno</span> </span></p>
 <p>A semelhança do cosseno está sempre no intervalo <strong>[-1, 1]</strong>. Por exemplo, dois vectores proporcionais têm uma semelhança de cosseno de <strong>1</strong>, dois vectores ortogonais têm uma semelhança de <strong>0</strong> e dois vectores opostos têm uma semelhança de <strong>-1</strong>. Quanto maior for o cosseno, menor é o ângulo entre os dois vectores, indicando que estes dois vectores são mais semelhantes entre si.</p>
-<p>Subtraindo a semelhança de cosseno de 1, obtém-se a distância de cosseno entre dois vectores.</p>
+<p>Ao subtrair a semelhança de cosseno de 1, obtém-se a distância de cosseno entre dois vectores.</p>
 <h2 id="JACCARD-distance​" class="common-anchor-header">Distância JACCARD<button data-href="#JACCARD-distance​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -225,7 +225,7 @@ title: Tipos métricos
     </button></h2><p>O BM25 é um método de medição da relevância do texto amplamente utilizado, especificamente concebido para a <a href="/docs/pt/full-text-search.md">pesquisa de textos completos</a>. Combina os três factores-chave seguintes.</p>
 <ul>
 <li><p><strong>Frequência de termos (TF):</strong> Mede a frequência com que um termo aparece num documento. Embora frequências mais elevadas indiquem frequentemente uma maior importância, o BM25 utiliza o parâmetro de saturação k1 para evitar que termos demasiado frequentes dominem a pontuação de relevância.</p></li>
-<li><p><strong>Frequência inversa de documentos (IDF):</strong> Reflecte a importância de um termo em todo o corpus. Os termos que aparecem em menos documentos recebem um valor IDF mais alto, indicando maior contribuição para a relevância.</p></li>
+<li><p><strong>Frequência inversa do documento (IDF):</strong> Reflecte a importância de um termo em todo o corpus. Os termos que aparecem em menos documentos recebem um valor IDF mais alto, indicando uma maior contribuição para a relevância.</p></li>
 <li><p><strong> <strong>Normalização</strong> do comprimento do documento:</strong> Documentos mais longos tendem a ter uma pontuação mais alta por conterem mais termos. O BM25 atenua esse viés normalizando o comprimento dos documentos, com o parâmetro b controlando a força dessa normalização.</p></li>
 </ul>
 <p>A pontuação do BM25 é calculada da seguinte forma.</p>
@@ -243,7 +243,7 @@ title: Tipos métricos
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/idf.png" alt="IDF formula" class="doc-image" id="idf-formula" />
    </span> <span class="img-wrapper"> <span>Fórmula IDF</span> </span></p>
-<p>onde <code translate="no">​N</code> é o número total de documentos no corpus e <code translate="no">​n(qi​)</code> é o número de documentos que contêm o termo qi.</p></li>
+<p>em que <code translate="no">​N</code> é o número total de documentos no corpus e <code translate="no">​n(qi​)</code> é o número de documentos que contêm o termo qi.</p></li>
 <li><p><code translate="no">​∣D∣</code>: Comprimento do documento <code translate="no">​D</code> (número total de termos).</p></li>
 <li><p><code translate="no">​avgdl</code>: Comprimento médio de todos os documentos do corpus.</p></li>
 <li><p><code translate="no">​k1​</code>: Controla a influência da frequência do termo na pontuação. Valores mais altos aumentam a importância da frequência dos termos. O intervalo típico é [1.2, 2.0], enquanto o Milvus permite um intervalo de [0, 3].</p></li>

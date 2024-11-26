@@ -45,7 +45,7 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>MilvusでJSONフィールドを使用するには、コレクションスキーマで関連するフィールドタイプを定義し、<code translate="no">datatype</code> 、サポートされているJSONタイプ、すなわち、<code translate="no">JSON</code> 。</p>
-<p>以下は、JSONフィールドを含むコレクションスキーマを定義する方法です。</p>
+<p>JSONフィールドを含むコレクションスキーマを定義する方法を以下に示す。</p>
 <div class="multipleCode">
    <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType​
@@ -496,7 +496,7 @@ System.out.println(resp.getSearchResults());​
 
 <button class="copy-code-btn"></button></code></pre>
 <p>この例では、Milvusはクエリベクトルに最も類似した上位5つのエンティティを返し、<code translate="no">metadata</code> フィールドには<code translate="no">&quot;BrandA&quot;</code> のブランドが含まれています。</p>
-<p>さらに、Milvusは、<code translate="no">JSON_CONTAINS</code> 、<code translate="no">JSON_CONTAINS_ALL</code> 、<code translate="no">JSON_CONTAINS_ANY</code> などの高度なJSONフィルタリング演算子をサポートしており、クエリ機能をさらに強化することができます。詳細については、「<a href="/docs/ja/boolean.md">メタデータのフィルタリング</a>」を参照してください。</p>
+<p>さらに、Milvusは<code translate="no">JSON_CONTAINS</code> 、<code translate="no">JSON_CONTAINS_ALL</code> 、<code translate="no">JSON_CONTAINS_ANY</code> などの高度なJSONフィルタリング演算子をサポートしており、クエリ機能をさらに強化することができます。詳細については、「<a href="/docs/ja/boolean.md">メタデータのフィルタリング</a>」を参照してください。</p>
 <h2 id="Limits​" class="common-anchor-header">制限事項<button data-href="#Limits​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

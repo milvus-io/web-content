@@ -26,7 +26,7 @@ title: Gruppierung Suche
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Eine Gruppierungssuche ermöglicht es Milvus, die Suchergebnisse nach den Werten in einem bestimmten Feld zu gruppieren, um Daten auf einer höheren Ebene zu aggregieren. Sie können zum Beispiel eine einfache ANN-Suche verwenden, um Bücher zu finden, die dem vorliegenden Buch ähnlich sind, aber Sie können eine Gruppierungssuche verwenden, um die Buchkategorien zu finden, die möglicherweise die in diesem Buch besprochenen Themen beinhalten. In diesem Thema wird beschrieben, wie Sie die Gruppierungssuche verwenden können, und es werden wichtige Überlegungen angestellt.</p>
+    </button></h1><p>Eine Gruppierungssuche ermöglicht es Milvus, die Suchergebnisse nach den Werten in einem bestimmten Feld zu gruppieren, um Daten auf einer höheren Ebene zu aggregieren. Sie können zum Beispiel eine einfache ANN-Suche verwenden, um Bücher zu finden, die dem vorliegenden Buch ähnlich sind, aber Sie können eine Gruppierungssuche verwenden, um die Buchkategorien zu finden, die die in diesem Buch besprochenen Themen beinhalten können. In diesem Thema wird beschrieben, wie Sie die Gruppierungssuche verwenden können, und es werden wichtige Überlegungen angestellt.</p>
 <h2 id="Overview​" class="common-anchor-header">Übersicht<button data-href="#Overview​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -57,7 +57,7 @@ title: Gruppierung Suche
 <ul>
 <li><p>Eine ANN-Suche basierend auf dem angegebenen Suchvektor durchführen, um alle Entitäten zu finden, die der Suchanfrage am ähnlichsten sind.</p></li>
 <li><p>Die Suchergebnisse nach dem angegebenen <code translate="no">group_by_field</code> gruppieren, z. B. <code translate="no">docId</code>.</p></li>
-<li><p>Rückgabe der Top-Ergebnisse für jede Gruppe, wie durch den <code translate="no">limit</code> Parameter definiert, mit der ähnlichsten Entität aus jeder Gruppe.</p></li>
+<li><p>Rückgabe der Top-Ergebnisse für jede Gruppe, wie durch den Parameter <code translate="no">limit</code> definiert, mit der ähnlichsten Entität aus jeder Gruppe.</p></li>
 </ul>
 <div class="alert note">
 <p>Standardmäßig gibt die gruppierende Suche nur eine Entität pro Gruppe zurück. Wenn Sie die Anzahl der Ergebnisse, die pro Gruppe zurückgegeben werden sollen, erhöhen möchten, können Sie dies mit den Parametern <code translate="no">group_size</code> und <code translate="no">strict_group_size</code> steuern.</p>

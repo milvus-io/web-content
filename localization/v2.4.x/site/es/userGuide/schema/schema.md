@@ -214,7 +214,7 @@ schema.<span class="hljs-title function_">addField</span>(<span class="hljs-titl
 <p>El parámetro <code translate="no">dim</code> en los fragmentos de código anteriores indica la dimensionalidad de las incrustaciones vectoriales que se incluirán en el campo vectorial. El valor <code translate="no">FLOAT_VECTOR</code> indica que el campo vectorial contiene una lista de números flotantes de 32 bits, que normalmente se usan para representar antilogaritmos. Además, Zilliz Cloud también soporta los siguientes tipos de incrustaciones vectoriales.</p>
 <ul>
 <li><p><code translate="no">FLOAT16_VECTOR</code></p>
-<p>Un campo vectorial de este tipo contiene una lista de números flotantes de media precisión de 16 bits y suele aplicarse a escenarios de aprendizaje profundo con restricciones de memoria o ancho de banda o de computación basada en GPU.</p></li>
+<p>Un campo vectorial de este tipo contiene una lista de números flotantes de 16 bits de media precisión y suele aplicarse a escenarios de aprendizaje profundo o computación basada en GPU con restricciones de memoria o ancho de banda.</p></li>
 <li><p><code translate="no">BFLOAT16_VECTOR</code></p>
 <p>Un campo vectorial de este tipo contiene una lista de números en coma flotante de 16 bits que tienen una precisión reducida pero el mismo rango de exponentes que Float32. Este tipo de datos se utiliza habitualmente en escenarios de aprendizaje profundo, ya que reduce el uso de memoria sin afectar significativamente a la precisión.</p></li>
 <li><p><code translate="no">BINARY_VECTOR</code></p>

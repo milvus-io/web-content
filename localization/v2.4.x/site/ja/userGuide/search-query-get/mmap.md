@@ -64,7 +64,7 @@ queryNode:
     scalarIndex: false <span class="hljs-comment"># Enable mmap for loading scalar index</span>
 ....
 <button class="copy-code-btn"></button></code></pre>
-<p>さらに、ベクターインデックスとベクターデータのmmapのみ、コレクションに対して個別にオン/オフすることができますが、他のコレクションに対してはできません。</p>
+<p>さらに、ベクター・インデックスとベクター・データのmmapのみ、コレクションに対して個別にオン/オフを切り替えることができますが、他のコレクションに対してはできません。</p>
 <p>互換性：元の構成<code translate="no">queryNode.mmap.mmapEnabled</code> が<code translate="no">true</code> に設定されている場合、新しく追加された構成はこの時点で<code translate="no">true</code> に設定される。<code translate="no">queryNode.mmap.mmapEnabled</code> が<code translate="no">false</code> に設定されている場合、新しい構成が<code translate="no">true</code> に設定されると、最終値は<code translate="no">true</code> になります。</p>
 <h3 id="During-cluster-operation-dynamic-configuration" class="common-anchor-header">クラスタ動作中：動的構成</h3><p>クラスタ実行時に、コレクションレベルまたはインデックスレベルでメモリマッピング設定を動的に調整できます。</p>
 <p><strong>コレクションレベルでは</strong>、メモリマッピングは、プライマリキー、タイムスタンプ、および行IDを除く、コレクション内のインデックス付けされていないすべての生データに適用されます。このアプローチは、特に大規模なデータセットの包括的な管理に適している。</p>
@@ -178,7 +178,7 @@ spec:
 <li><p><strong>コレクションレベル構成とインデックスレベル構成の関係は?</strong></p>
 <p>コレクション・レベルとインデックス・レベルは包括的な関係ではなく、コレクション・レベルは元のデータがmmap有効かどうかを制御し、インデックス・レベルはベクトル・インデックスのみを制御します。</p></li>
 <li><p><strong>メモリマッピングに推奨されるインデックスタイプはありますか？</strong></p>
-<p>はい、HNSWを推奨します。以前、HNSW、IVF_FLAT、IVF_PQ/SQシリーズのインデックスをテストしたことがありますが、IVFシリーズのインデックスのパフォーマンスは著しく低下しました。</p></li>
+<p>はい、HNSWを推奨します。以前、HNSW、IVF_FLAT、IVF_PQ/SQ シリーズのインデックスをテストしたことがありますが、IVF シリーズのインデックスの性能は著しく低下しました。</p></li>
 <li><p><strong>メモリマッピングにはどのようなローカルストレージが必要ですか？</strong></p>
 <p>NVMeドライブが望ましい。</p></li>
 <li><p><strong>スカラーデータはメモリマッピングできますか？</strong></p>

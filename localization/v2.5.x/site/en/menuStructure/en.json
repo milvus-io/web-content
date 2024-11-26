@@ -1172,6 +1172,12 @@
                 "children": []
               }
             ]
+          },
+          {
+            "label": "Upgrade Pulsar",
+            "id": "upgrade-pulsar-v3.md",
+            "order": 2,
+            "children": []
           }
         ]
       },

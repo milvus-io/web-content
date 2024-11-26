@@ -18,7 +18,7 @@ title: Sammlung erstellen
         ></path>
       </svg>
     </button></h1><p>Sie können eine Sammlung erstellen, indem Sie ihr Schema, die Indexparameter und den Metrik-Typ festlegen und bestimmen, ob sie bei der Erstellung geladen werden soll. Auf dieser Seite erfahren Sie, wie Sie eine Sammlung von Grund auf erstellen können.</p>
-<h2 id="Overview​" class="common-anchor-header">Überblick<button data-href="#Overview​" class="anchor-icon" translate="no">
+<h2 id="Overview​" class="common-anchor-header">Übersicht<button data-href="#Overview​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -34,7 +34,7 @@ title: Sammlung erstellen
         ></path>
       </svg>
     </button></h2><p>Eine Sammlung ist eine zweidimensionale Tabelle mit festen Spalten und variablen Zeilen. Jede Spalte steht für ein Feld und jede Zeile für eine Entität. Um eine solche strukturelle Datenverwaltung zu implementieren, ist ein Schema erforderlich. Jede Entität, die eingefügt werden soll, muss den im Schema definierten Beschränkungen entsprechen.</p>
-<p>Sie können jeden Aspekt einer Sammlung bestimmen, einschließlich des Schemas, der Indexparameter, des Metrik-Typs und ob sie bei der Erstellung geladen werden soll, um sicherzustellen, dass die Sammlung Ihre Anforderungen vollständig erfüllt.</p>
+<p>Sie können jeden Aspekt einer Sammlung bestimmen, einschließlich des Schemas, der Indexparameter, des metrischen Typs und ob sie bei der Erstellung geladen werden soll, um sicherzustellen, dass die Sammlung Ihren Anforderungen entspricht.</p>
 <p>Um eine Sammlung zu erstellen, müssen Sie</p>
 <ul>
 <li><p><a href="#create-schema">Schema erstellen</a></p></li>
@@ -512,7 +512,7 @@ curl --request POST \​
         ></path>
       </svg>
     </button></h2><p>Sie können Eigenschaften für die zu erstellende Sammlung festlegen, damit sie in Ihren Dienst passt. Die anwendbaren Eigenschaften sind wie folgt.</p>
-<h3 id="Set-Shard-Number​" class="common-anchor-header">Shard-Nummer festlegen</h3><p>Shards sind horizontale Abschnitte einer Sammlung. Jeder Shard entspricht einem Dateneingabekanal. Jede Sammlung hat standardmäßig einen Shard. Sie können bei der Erstellung einer Sammlung die entsprechende Anzahl von Scherben auf der Grundlage des erwarteten Durchsatzes und des Volumens der in die Sammlung einzufügenden Daten festlegen.</p>
+<h3 id="Set-Shard-Number​" class="common-anchor-header">Shard-Nummer festlegen</h3><p>Shards sind horizontale Abschnitte einer Sammlung. Jeder Shard entspricht einem Dateneingangskanal. Jede Sammlung hat standardmäßig einen Shard. Sie können bei der Erstellung einer Sammlung die entsprechende Anzahl von Scherben auf der Grundlage des erwarteten Durchsatzes und des Volumens der in die Sammlung einzufügenden Daten festlegen.</p>
 <p>In allgemeinen Fällen sollten Sie die Anzahl der Shards jedes Mal um eins erhöhen, wenn der erwartete Durchsatz um 500 MB/s oder das einzufügende Datenvolumen um 100 GB steigt. Dieser Vorschlag hindert Sie nicht daran, Daten mit der Standard-Shard-Nummer in die Sammlung einzufügen.</p>
 <p>Der folgende Codeausschnitt veranschaulicht, wie Sie die Shard-Nummer beim Erstellen einer Sammlung festlegen.</p>
 <div class="multipleCode">

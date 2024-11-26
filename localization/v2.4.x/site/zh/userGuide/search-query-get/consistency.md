@@ -41,7 +41,7 @@ title: 一致性
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/batch-data-and-streaming-data.png" alt="Batch data and streaming data" class="doc-image" id="batch-data-and-streaming-data" />
    </span> <span class="img-wrapper"> <span>批数据和流数据</span> </span></p>
 <p>如上图所示，在收到搜索请求后，查询节点可以同时接收流数据和批量数据。但是，由于网络延迟，查询节点获得的流数据可能不完整。</p>
-<p>为了解决这个问题，Milvus 对数据队列中的每条记录都打上时间戳，并不断向数据队列中插入同步时间戳。每当收到同步时间戳（syncTs），QueryNodes 就会将其设置为服务时间，这意味着 QueryNodes 可以查看该服务时间之前的所有数据。基于 ServiceTime，Milvus 可以提供保证时间戳（GuaranteeTs），以满足用户对一致性和可用性的不同要求。用户可以通过在搜索请求中指定 GuaranteeTs，通知查询节点需要在搜索范围中包含指定时间点之前的数据。</p>
+<p>为了解决这个问题，Milvus 对数据队列中的每条记录都打上时间戳，并不断向数据队列中插入同步时间戳。每当收到同步时间戳（syncTs），QueryNodes 就会将其设置为服务时间，这意味着 QueryNodes 可以查看该服务时间之前的所有数据。基于 ServiceTime，Milvus 可以提供保证时间戳（GuaranteeTs），以满足用户对一致性和可用性的不同要求。用户可以通过在搜索请求中指定 GuaranteeTs，告知查询节点需要在搜索范围中包含指定时间点之前的数据。</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/service-time-and-guarantee-time.png" alt="ServiceTime and GuaranteeTs" class="doc-image" id="servicetime-and-guaranteets" />

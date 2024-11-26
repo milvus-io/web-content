@@ -50,7 +50,7 @@ summary: >-
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/clustering-compaction-2.png" alt="With Clustering Compaction" class="doc-image" id="with-clustering-compaction" />
    </span> <span class="img-wrapper"> <span>Com compactação de clustering</span> </span></p>
-<p>Usando o <strong>PartitionStats</strong> como referência, o Milvus pode eliminar dados irrelevantes ao receber uma solicitação de pesquisa/consulta que contém um valor de chave de clustering e restringir o escopo da pesquisa dentro do mapeamento de segmentos para o valor, melhorando assim o desempenho da pesquisa. Para obter detalhes sobre a melhoria do desempenho, consulte Testes de benchmark.</p>
+<p>Usando o <strong>PartitionStats</strong> como referência, o Milvus pode eliminar dados irrelevantes ao receber uma solicitação de pesquisa/consulta que contém um valor de chave de clustering e restringir o escopo da pesquisa dentro dos segmentos que mapeiam o valor, melhorando assim o desempenho da pesquisa. Para obter detalhes sobre a melhoria do desempenho, consulte Testes de benchmark.</p>
 <h2 id="Use-Clustering-Compaction" class="common-anchor-header">Usar compactação de clustering<button data-href="#Use-Clustering-Compaction" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -96,7 +96,7 @@ common:
 <tr><th>Configuração Item</th><th>Descrição</th><th>Valor por defeito</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">enable</code></td><td>Especifica se a compactação do agrupamento deve ser activada.<br>Defina esta opção para <code translate="no">true</code> se precisar de ativar esta funcionalidade para todas as colecções que tenham uma chave de agrupamento.</td><td><code translate="no">false</code></td></tr>
+<tr><td><code translate="no">enable</code></td><td>Especifica se a compactação do agrupamento deve ser activada.<br>Defina este valor para <code translate="no">true</code> se precisar de ativar esta funcionalidade para todas as colecções que tenham uma chave de agrupamento.</td><td><code translate="no">false</code></td></tr>
 <tr><td><code translate="no">autoEnable</code></td><td>Especifica se a compactação é activada automaticamente.<br>Definir isto para <code translate="no">true</code> indica que o Milvus compacta as colecções com uma chave de agrupamento nos intervalos especificados.</td><td><code translate="no">false</code></td></tr>
 <tr><td><code translate="no">triggerInterval</code></td><td>Especifica o intervalo, em milissegundos, em que o Milvus inicia a compactação do agrupamento.<br>Este parâmetro só é válido se <code translate="no">autoEnable</code> estiver definido como <code translate="no">true</code>.</td><td>-</td></tr>
 <tr><td><code translate="no">minInterval</code></td><td>Especifica o intervalo mínimo em segundos.<br>Este parâmetro é válido apenas quando <code translate="no">autoEnable</code> está definido como <code translate="no">true</code>.<br>Definir este parâmetro como um número inteiro superior a triggerInterval ajuda a evitar compactações repetidas num curto período de tempo.</td><td>-</td></tr>
@@ -133,13 +133,13 @@ common:
 <tr><th>Item de configuração</th><th>Descrição</th><th>Valor predefinido</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">usePartitionKeyAsClusteringKey</code></td><td>Especifica se a chave de partição em colecções deve ser utilizada como chave de clustering.<br>Definir isto para <code translate="no">true</code> indica que a chave de partição é utilizada como chave de agrupamento.<br>É sempre possível substituir esta definição numa coleção, definindo explicitamente uma chave de agrupamento.</td><td><code translate="no">false</code></td></tr>
+<tr><td><code translate="no">usePartitionKeyAsClusteringKey</code></td><td>Especifica se a chave de partição em colecções deve ser utilizada como chave de clustering.<br>Definir isto para <code translate="no">true</code> indica que a chave de partição é utilizada como chave de agrupamento.<br>É sempre possível substituir esta definição numa coleção definindo explicitamente uma chave de agrupamento.</td><td><code translate="no">false</code></td></tr>
 </tbody>
 </table>
 </li>
 </ul>
 <p>Para aplicar as alterações acima ao seu cluster Milvus, siga os passos em <a href="/docs/pt/configure-helm.md">Configurar Milvus com Helm</a> e <a href="/docs/pt/configure_operator.md">Configurar Milvus com Milvus Operators</a>.</p>
-<h3 id="Collection-Configuration" class="common-anchor-header">Configuração da coleção</h3><p>Para compactar o cluster numa coleção específica, deve selecionar um campo escalar da coleção como chave de cluster.</p>
+<h3 id="Collection-Configuration" class="common-anchor-header">Configuração da coleção</h3><p>Para a compactação de clusters numa coleção específica, deve selecionar um campo escalar da coleção como chave de clustering.</p>
 <pre><code translate="no" class="language-python">default_fields = [
     FieldSchema(name=<span class="hljs-string">&quot;id&quot;</span>, dtype=DataType.INT64, is_primary=<span class="hljs-literal">True</span>),
     FieldSchema(name=<span class="hljs-string">&quot;key&quot;</span>, dtype=DataType.INT64, is_clustering_key=<span class="hljs-literal">True</span>),

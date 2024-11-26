@@ -42,7 +42,7 @@ title: Pesquisa de agrupamento
         ></path>
       </svg>
     </button></h2><p>Quando as entidades nos resultados da pesquisa partilham o mesmo valor num campo escalar, isso indica que são semelhantes num determinado atributo, o que pode afetar negativamente os resultados da pesquisa.</p>
-<p>Suponha que uma coleção armazena vários documentos (denotados por <strong>docId</strong>). Para reter o máximo de informação semântica possível ao converter documentos em vectores, cada documento é dividido em parágrafos mais pequenos e geríveis (ou <strong>pedaços</strong>) e armazenado como entidades separadas. Apesar de o documento estar dividido em secções mais pequenas, os utilizadores continuam muitas vezes interessados em identificar quais os documentos mais relevantes para as suas necessidades.</p>
+<p>Suponha que uma coleção armazena vários documentos (denotados por <strong>docId</strong>). Para reter o máximo de informação semântica possível ao converter documentos em vectores, cada documento é dividido em parágrafos mais pequenos e geríveis (ou <strong>pedaços</strong>) e armazenado como entidades separadas. Apesar de o documento estar dividido em secções mais pequenas, os utilizadores continuam muitas vezes interessados em identificar os documentos mais relevantes para as suas necessidades.</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/ann-search.png" alt="ANN Search" class="doc-image" id="ann-search" />
@@ -56,7 +56,7 @@ title: Pesquisa de agrupamento
 <ul>
 <li><p>Efetuar uma pesquisa ANN com base no vetor de consulta fornecido para encontrar todas as entidades mais semelhantes à consulta.</p></li>
 <li><p>Agrupa os resultados da pesquisa pelo endereço especificado <code translate="no">group_by_field</code>, como <code translate="no">docId</code>.</p></li>
-<li><p>Retorna os principais resultados de cada grupo, conforme definido pelo parâmetro <code translate="no">limit</code>, com a entidade mais semelhante de cada grupo.</p></li>
+<li><p>Retorna os principais resultados para cada grupo, conforme definido pelo parâmetro <code translate="no">limit</code>, com a entidade mais semelhante de cada grupo.</p></li>
 </ul>
 <div class="alert note">
 <p>Por padrão, a Pesquisa de agrupamento retorna apenas uma entidade por grupo. Se você quiser aumentar o número de resultados a serem retornados por grupo, poderá controlar isso com os parâmetros <code translate="no">group_size</code> e <code translate="no">strict_group_size</code>.</p>

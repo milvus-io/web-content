@@ -17,7 +17,7 @@ title: Spiegazione delle raccolte
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>In Milvus è possibile creare più raccolte per gestire i dati e inserirli come entità nelle raccolte. Le collezioni e le entità sono simili alle tabelle e ai record dei database relazionali. Questa pagina aiuta a conoscere le raccolte e i concetti correlati.</p>
+    </button></h1><p>In Milvus è possibile creare più raccolte per gestire i dati e inserire i dati come entità nelle raccolte. Le collezioni e le entità sono simili alle tabelle e ai record dei database relazionali. Questa pagina aiuta a conoscere le raccolte e i concetti correlati.</p>
 <h2 id="Collection​" class="common-anchor-header">Raccolta<button data-href="#Collection​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -77,7 +77,7 @@ title: Spiegazione delle raccolte
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Analogamente al campo primario di un database relazionale, una collezione ha un campo primario per distinguere un'entità dalle altre. Ogni valore del campo primario è globalmente unico e corrisponde a un'entità specifica. </p>
+    </button></h2><p>Analogamente al campo primario in un database relazionale, una collezione ha un campo primario per distinguere un'entità dalle altre. Ogni valore del campo primario è globalmente unico e corrisponde a un'entità specifica. </p>
 <p>Come mostrato nel grafico precedente, il campo <strong>id</strong> funge da campo primario e il primo ID <strong>0</strong> corrisponde a un'entità intitolata <em>Il tasso di mortalità del Coronavirus non è importante</em>. Non ci sarà nessun'altra entità che abbia il campo primario 0.</p>
 <p>Un campo primario accetta solo numeri interi o stringhe. Quando si inseriscono le entità, i valori del campo primario devono essere inclusi per impostazione predefinita. Tuttavia, se si è abilitato l'<strong>AutoId</strong> alla creazione della collezione, Milvus genererà questi valori al momento dell'inserimento dei dati. In tal caso, escludere i valori del campo primario dalle entità da inserire.</p>
 <p>Per ulteriori informazioni, consultare <a href="/docs/it/primary-field.md">Campo primario e AutoID</a>.</p>
@@ -202,7 +202,7 @@ title: Spiegazione delle raccolte
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Gli shard sono fette orizzontali di una raccolta. Ogni shard corrisponde a un canale di ingresso dei dati. Ogni raccolta ha uno shard per impostazione predefinita. È possibile impostare il numero appropriato di shard durante la creazione di una raccolta, in base al throughput previsto e al volume dei dati da inserire nella raccolta.</p>
+    </button></h2><p>Gli shard sono fette orizzontali di una raccolta. Ogni shard corrisponde a un canale di ingresso dei dati. Ogni raccolta ha un frammento per impostazione predefinita. È possibile impostare il numero appropriato di shard durante la creazione di una raccolta, in base al throughput previsto e al volume dei dati da inserire nella raccolta.</p>
 <p>Per informazioni dettagliate su come impostare il numero di shard, consultare la sezione <a href="/docs/it/create-collection.md">Crea raccolta</a>.</p>
 <h2 id="Alias​" class="common-anchor-header">Alias<button data-href="#Alias​" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -236,7 +236,7 @@ title: Spiegazione delle raccolte
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>È possibile impostare funzioni per Zilliz Cloud per ricavare i campi alla creazione della raccolta. Ad esempio, la funzione di ricerca full-text utilizza la funzione definita dall'utente per derivare un campo vettoriale sparse da un campo varchar specifico. Per ulteriori informazioni sulla ricerca full-text, consultare la sezione <a href="/docs/it/full-text-search.md">Ricerca full-text</a>.</p>
+    </button></h2><p>È possibile impostare funzioni per Zilliz Cloud per ricavare i campi alla creazione della raccolta. Ad esempio, la funzione di ricerca full-text utilizza la funzione definita dall'utente per derivare un campo vettoriale sparse da un campo varchar specifico. Per ulteriori informazioni sulla ricerca full-text, consultare <a href="/docs/it/full-text-search.md">Ricerca full-text</a>.</p>
 <h2 id="Consistency-Level​" class="common-anchor-header">Livello di consistenza<button data-href="#Consistency-Level​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

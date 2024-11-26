@@ -54,7 +54,7 @@ summary: >-
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/use-sparse-vector.png" alt="Use sparse vector in Milvus" class="doc-image" id="use-sparse-vector-in-milvus" />
    </span> <span class="img-wrapper"> <span>Milvusでスパースベクトルを使用する。</span> </span></p>
 <div class="alert note">
-<p>Milvusはスパースベクトル以外にも、デンスベクトルやバイナリベクトルにも対応しています。密なベクトルは深い意味的関係を把握するのに理想的であり、バイナリベクトルは迅速な類似性比較やコンテンツの重複排除などのシナリオに優れています。詳細については、<a href="/docs/ja/dense-vector.md">密なベクトルと</a> <a href="/docs/ja/binary-vector.md">バイナリベクトルを</a>参照してください。</p>
+<p>Milvusはスパースベクトル以外にも、デンスベクトルやバイナリベクトルにも対応しています。密なベクトルは深い意味的関係を把握するのに適しており、バイナリベクトルは迅速な類似性比較やコンテンツの重複排除などのシナリオに優れています。詳細については、<a href="/docs/ja/dense-vector.md">密なベクトルと</a> <a href="/docs/ja/binary-vector.md">バイナリベクトルを</a>参照してください。</p>
 </div>
 <h2 id="Use-sparse-vectors-in-Milvus​" class="common-anchor-header">Milvusでスパースベクトルを使う<button data-href="#Use-sparse-vectors-in-Milvus​" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -473,4 +473,4 @@ sparse.<span class="hljs-title function_">put</span>(1000L, <span class="hljs-nu
 <span class="hljs-comment">## {&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:[{&quot;distance&quot;:0.63,&quot;id&quot;:&quot;453577185629572535&quot;,&quot;pk&quot;:&quot;453577185629572535&quot;},{&quot;distance&quot;:0.1,&quot;id&quot;:&quot;453577185629572534&quot;,&quot;pk&quot;:&quot;453577185629572534&quot;}]}​</span>
 
 <button class="copy-code-btn"></button></code></pre>
-<p>類似検索パラメーターの詳細については、「<a href="/docs/ja/single-vector-search.md">基本的なANN検索</a>」を参照のこと。</p>
+<p>類似検索パラメーターの詳細については、「<a href="/docs/ja/single-vector-search.md">ANN検索の基本</a>」を参照のこと。</p>

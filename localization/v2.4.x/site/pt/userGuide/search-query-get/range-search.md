@@ -38,7 +38,7 @@ title: Pesquisa de alcance
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Ao executar um pedido de Pesquisa de Intervalo, o Milvus utiliza os vectores mais semelhantes ao vetor de consulta dos resultados da Pesquisa ANN como centro, com o raio especificado no pedido de Pesquisa como o raio do círculo exterior e o <strong>filtro_de_intervalo</strong> como o raio do círculo interior para desenhar dois círculos concêntricos. Todos os vectores com pontuações de similaridade que se enquadram na região anular formada por estes dois círculos concêntricos serão devolvidos. Aqui, o <strong>filtro_de_intervalo</strong> pode ser definido como <strong>0</strong>, indicando que todas as entidades dentro da pontuação de similaridade especificada (raio) serão retornadas.</p>
+    </button></h2><p>Ao executar um pedido de Pesquisa de Intervalo, o Milvus utiliza os vectores mais semelhantes ao vetor de consulta dos resultados da Pesquisa ANN como centro, com o raio especificado no pedido de Pesquisa como o raio do círculo exterior e o <strong>filtro_de_intervalo</strong> como o raio do círculo interior para desenhar dois círculos concêntricos. Todos os vetores com pontuações de similaridade que se enquadram na região anular formada por esses dois círculos concêntricos serão retornados. Aqui, o <strong>filtro_de_intervalo</strong> pode ser definido como <strong>0</strong>, indicando que todas as entidades dentro da pontuação de similaridade especificada (raio) serão retornadas.</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/range-search.png" alt="Range search" class="doc-image" id="range-search" />
@@ -52,7 +52,7 @@ title: Pesquisa de alcance
 <p>A forma de definir o raio e <strong>o filtro_de_alcance</strong> varia com o tipo de métrica da pesquisa. A tabela a seguir lista os requisitos para definir esses dois parâmetros com diferentes tipos de métrica.</p>
 <table data-block-token="QZ8mdLSnAotxZKxSzvpcQkNNnhe"><thead><tr><th data-block-token="SpBZdGprzoEoaixW6EfcaIFqnDh" colspan="1" rowspan="1"><p data-block-token="FwxDd8logofNV2xVMdycwXUvnMg">Tipo de métrica</p>
 </th><th data-block-token="NwWNdOvpHoOQF0xDvuHcFcHQnte" colspan="1" rowspan="1"><p data-block-token="MiqddcN2voEZUSxe8hCcW3g0nXc">Denotações</p>
-</th><th data-block-token="D1eedZmCjow2Whx7vIicOx4Enrc" colspan="1" rowspan="1"><p data-block-token="K7bldgyVFo2DmDxNamFcNddNnNb">Requisitos para a definição de radius e range_filter</p>
+</th><th data-block-token="D1eedZmCjow2Whx7vIicOx4Enrc" colspan="1" rowspan="1"><p data-block-token="K7bldgyVFo2DmDxNamFcNddNnNb">Requisitos para definir radius e range_filter</p>
 </th></tr></thead><tbody><tr><td data-block-token="C3xxdZ0uHon6bWxACXkcOM0bnrf" colspan="1" rowspan="1"><p data-block-token="EoJSd1jo1oqt0pxhKElcLptwnJe"><code translate="no">L2</code></p>
 </td><td data-block-token="AcRkdW156oOcQixJbXZchC8WnEd" colspan="1" rowspan="1"><p data-block-token="ATGrduoF1ownRSxJngycJ3NYnAe">Uma distância L2 mais pequena indica uma maior semelhança.</p>
 </td><td data-block-token="Ja1hdVXtholWNfxCGKAcXzQ9nCc" colspan="1" rowspan="1"><p data-block-token="FqvMdDe6DocjQXxKHdvcp0hTnmb">Para ignorar as incorporações vetoriais mais semelhantes, certifique-se de que</p>
@@ -90,7 +90,7 @@ title: Pesquisa de alcance
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Esta secção demonstra como realizar uma pesquisa de intervalo. As solicitações de pesquisa nos trechos de código a seguir não carregam um tipo de métrica, indicando que o tipo de métrica padrão <strong>COSINE</strong> se aplica. Neste caso, certifique-se de que o valor do raio é menor do que o valor de <strong>range_filter</strong>.</p>
+    </button></h2><p>Esta secção demonstra como realizar uma pesquisa de intervalo. As solicitações de pesquisa nos trechos de código a seguir não carregam um tipo de métrica, indicando que o tipo de métrica padrão <strong>COSINE</strong> se aplica. Neste caso, certifique-se de que o valor do raio é menor do que o valor <strong>de range_filter</strong>.</p>
 <p>Nos trechos de código a seguir, defina <code translate="no">radius</code> como <code translate="no">0.4</code> e <code translate="no">range_filter</code> como <code translate="no">0.6</code> para que Milvus retorne todas as entidades cujas distâncias ou pontuações para o vetor de consulta estejam entre <strong>0,4</strong> e <strong>0,6</strong>.</p>
 <div class="multipleCode">
    <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>

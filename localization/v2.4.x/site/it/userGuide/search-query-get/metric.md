@@ -54,7 +54,7 @@ title: Tipi metrici
 <div class="alert note">
 <ul>
 <li><p>Per i campi vettoriali del tipo <code translate="no">SPARSE_FLOAT_VECTOR</code>, utilizzare il tipo di metrica <code translate="no">BM25</code> solo quando si esegue la ricerca a testo completo. Per ulteriori informazioni, consultare la sezione <a href="/docs/it/full-text-search.md">Ricerca a testo completo</a>.</p></li>
-<li><p>Per i campi vettoriali del tipo <code translate="no">BINARY_VECTOR</code>, il valore di dimensione (<code translate="no">dim</code>) deve essere un multiplo di 8. </p></li>
+<li><p>Per i campi vettoriali del tipo <code translate="no">BINARY_VECTOR</code>, il valore della dimensione (<code translate="no">dim</code>) deve essere un multiplo di 8. </p></li>
 </ul>
 </div>
 <p>La tabella seguente riassume le caratteristiche dei valori della distanza di similarità di tutti i tipi di metrica supportati e il loro intervallo di valori.</p>

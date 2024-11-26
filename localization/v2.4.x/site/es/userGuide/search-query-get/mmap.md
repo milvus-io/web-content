@@ -80,7 +80,7 @@ collection.set_properties({<span class="hljs-string">&#x27;mmap.enabled&#x27;</s
 
 schema.add_field(field_name=<span class="hljs-string">&quot;embedding&quot;</span>, datatype=DataType.FLOAT_VECTOR, dim=<span class="hljs-number">768</span>, mmap_enabled=<span class="hljs-literal">True</span>)
 <button class="copy-code-btn"></button></code></pre>
-<p>Para los ajustes <strong>a nivel de índice</strong>, la asignación de memoria puede aplicarse específicamente a los índices vectoriales sin afectar a otros tipos de datos. Esta característica es muy valiosa para las colecciones que requieren un rendimiento optimizado para las búsquedas vectoriales.</p>
+<p>Para los ajustes <strong>a nivel de índice</strong>, la asignación de memoria se puede aplicar específicamente a los índices vectoriales sin afectar a otros tipos de datos. Esta característica es muy valiosa para las colecciones que requieren un rendimiento optimizado para las búsquedas vectoriales.</p>
 <p>Para activar o desactivar la asignación de memoria para un índice dentro de una colección, llame al método <code translate="no">alter_index()</code>, especificando el nombre del índice de destino en <code translate="no">index_name</code> y estableciendo <code translate="no">mmap.enabled</code> en <code translate="no">True</code> o <code translate="no">False</code>.</p>
 <pre><code translate="no" class="language-python">collection.alter_index(
     index_name=<span class="hljs-string">&quot;vector_index&quot;</span>, <span class="hljs-comment"># Replace with your vector index name</span>

@@ -80,7 +80,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Add-vector-field​" class="common-anchor-header">Adicionar campo de vetor</h3><p>Para utilizar vectores binários no Milvus, comece por definir um campo vetorial para armazenar vectores binários ao criar uma coleção. Este processo inclui.</p>
+    </button></h2><h3 id="Add-vector-field​" class="common-anchor-header">Adicionar campo vetorial</h3><p>Para utilizar vectores binários no Milvus, comece por definir um campo vetorial para armazenar vectores binários ao criar uma coleção. Este processo inclui.</p>
 <ol>
 <li><p>Definir <code translate="no">datatype</code> como o tipo de dados de vetor binário suportado, ou seja, <code translate="no">BINARY_VECTOR</code>.</p></li>
 <li><p>Especificar as dimensões do vetor utilizando o parâmetro <code translate="no">dim</code>. Observe que <code translate="no">dim</code> deve ser um múltiplo de 8, pois os vetores binários devem ser convertidos em uma matriz de bytes ao serem inseridos. Cada 8 valores booleanos (0 ou 1) serão empacotados em 1 byte. Por exemplo, se <code translate="no">dim=128</code>, é necessária uma matriz de 16 bytes para a inserção.</p></li>
@@ -219,7 +219,7 @@ indexParams.<span class="hljs-title function_">add</span>(<span class="hljs-titl
 
 <button class="copy-code-btn"></button></code></pre>
 <p>No exemplo acima, um índice chamado <code translate="no">binary_vector_index</code> é criado para o campo <code translate="no">binary_vector</code>, usando o tipo de índice <code translate="no">BIN_IVF_FLAT</code>. O <code translate="no">metric_type</code> é definido como <code translate="no">HAMMING</code>, indicando que a distância de Hamming é utilizada para a medição da semelhança.</p>
-<p>Para além de <code translate="no">BIN_IVF_FLAT</code>, o Milvus suporta outros tipos de índices para vectores binários. Para mais detalhes, consulte <a href="https://milvus.io/docs/index.md?tab=binary">Índices de vectores binários</a>. Além disso, o Milvus suporta outras métricas de similaridade para vectores binários. Para obter mais informações, consulte <a href="/docs/pt/metric.md">Tipos de métricas</a>.</p>
+<p>Para além de <code translate="no">BIN_IVF_FLAT</code>, o Milvus suporta outros tipos de índices para vectores binários. Para mais detalhes, consulte <a href="https://milvus.io/docs/index.md?tab=binary">Índices de vectores binários</a>. Além disso, o Milvus suporta outras métricas de similaridade para vectores binários. Para mais informações, consulte <a href="/docs/pt/metric.md">Tipos de métricas</a>.</p>
 <h3 id="Create-collection​" class="common-anchor-header">Criar coleção</h3><p>Quando as definições do vetor binário e do índice estiverem concluídas, crie uma coleção que contenha vectores binários. O exemplo abaixo usa o método <code translate="no">create_collection</code> para criar uma coleção chamada <code translate="no">my_binary_collection</code>.</p>
 <div class="multipleCode">
  <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#go">Go</a> <a href="#curl">cURL</a></div>
@@ -359,7 +359,7 @@ client.<span class="hljs-title function_">insert</span>({​
 }&quot;</span>​
 
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Perform-similarity-search​" class="common-anchor-header">Efetuar pesquisa de semelhanças</h3><p>A pesquisa por similaridade é uma das principais caraterísticas do Milvus, permitindo-lhe encontrar rapidamente os dados mais semelhantes a um vetor de consulta com base na distância entre vectores. Para efetuar uma pesquisa por semelhança utilizando vectores binários, prepare o vetor de consulta e os parâmetros de pesquisa e, em seguida, chame o método <code translate="no">search</code>.</p>
+<h3 id="Perform-similarity-search​" class="common-anchor-header">Efetuar pesquisa de semelhanças</h3><p>A pesquisa por similaridade é uma das principais caraterísticas do Milvus, permitindo-lhe encontrar rapidamente dados que são mais semelhantes a um vetor de consulta com base na distância entre vectores. Para efetuar uma pesquisa por semelhança utilizando vectores binários, prepare o vetor de consulta e os parâmetros de pesquisa e, em seguida, chame o método <code translate="no">search</code>.</p>
 <p>Durante as operações de pesquisa, os vectores binários também têm de ser fornecidos sob a forma de uma matriz de bytes. Certifique-se de que a dimensionalidade do vetor de consulta corresponde à dimensão especificada ao definir <code translate="no">dim</code> e que cada 8 valores booleanos são convertidos em 1 byte.</p>
 <div class="multipleCode">
  <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#go">Go</a> <a href="#curl">cURL</a></div>

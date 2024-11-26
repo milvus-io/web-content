@@ -81,7 +81,7 @@ rerank = WeightedRanker(<span class="hljs-number">0.8</span>, <span class="hljs-
 <ul>
 <li><p>Chaque valeur de poids va de 0 (le moins important) à 1 (le plus important), ce qui influence le score agrégé final.</p></li>
 <li><p>Le nombre total de valeurs de pondération fournies dans <code translate="no">WeightedRanker</code> doit être égal au nombre d'instances <code translate="no">AnnSearchRequest</code> que vous avez créées précédemment.</p></li>
-<li><p>Il convient de noter qu'en raison des différentes mesures des différents types de métriques, nous normalisons les distances des résultats du rappel de manière à ce qu'elles se situent dans l'intervalle [0,1], où 0 signifie différent et 1 signifie similaire. Le score final sera la somme des valeurs de pondération et des distances.</p></li>
+<li><p>Il convient de noter qu'en raison des différentes mesures des différents types de métriques, nous normalisons les distances des résultats du rappel afin qu'elles se situent dans l'intervalle [0,1], où 0 signifie différent et 1 signifie similaire. Le score final sera la somme des valeurs de pondération et des distances.</p></li>
 </ul>
 <h2 id="Reciprocal-Rank-Fusion-RRFRanker" class="common-anchor-header">Fusion de rangs réciproques (RRFRanker)<button data-href="#Reciprocal-Rank-Fusion-RRFRanker" class="anchor-icon" translate="no">
       <svg translate="no"

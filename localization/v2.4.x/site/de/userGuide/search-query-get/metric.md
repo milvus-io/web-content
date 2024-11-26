@@ -184,7 +184,7 @@ title: Metrische Typen
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/jaccard_coeff.png" alt="JACCARD similarity coefficient formula" class="doc-image" id="jaccard-similarity-coefficient-formula" />
    </span> <span class="img-wrapper"> <span>Formel für den JACCARD-Ähnlichkeitskoeffizienten</span> </span></p>
-<p>Die JACCARD-Distanz misst die Unähnlichkeit zwischen Datensätzen und ergibt sich durch Subtraktion des JACCARD-Ähnlichkeitskoeffizienten von 1. Für binäre Variablen entspricht die JACCARD-Distanz dem Tanimoto-Koeffizienten.</p>
+<p>Die JACCARD-Distanz misst die Unähnlichkeit zwischen Datensätzen und wird durch Subtraktion des JACCARD-Ähnlichkeitskoeffizienten von 1 ermittelt. Bei binären Variablen entspricht die JACCARD-Distanz dem Tanimoto-Koeffizienten.</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/jaccard_dist.png" alt="JACCARD distance formula" class="doc-image" id="jaccard-distance-formula" />

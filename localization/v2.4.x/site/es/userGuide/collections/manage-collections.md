@@ -78,7 +78,7 @@ title: Explicación de las colecciones
         ></path>
       </svg>
     </button></h2><p>De forma similar al campo primario en una base de datos relacional, una colección tiene un campo primario para distinguir una entidad de otras. Cada valor del campo primario es globalmente único y corresponde a una entidad específica. </p>
-<p>Como se muestra en el gráfico anterior, el campo llamado <strong>id</strong> sirve como campo primario, y el primer ID <strong>0</strong> corresponde a una entidad titulada <em>La tasa de mortalidad del coronavirus no es importante</em>. No habrá ninguna otra entidad que tenga el campo primario 0.</p>
+<p>Como se muestra en el gráfico anterior, el campo denominado <strong>id</strong> sirve como campo primario, y el primer ID <strong>0</strong> corresponde a una entidad titulada <em>La tasa de mortalidad del coronavirus no es importante</em>. No habrá ninguna otra entidad que tenga el campo primario 0.</p>
 <p>Un campo primario sólo acepta números enteros o cadenas. Al insertar entidades, debe incluir los valores del campo primario por defecto. Sin embargo, si ha activado <strong>AutoId</strong> al crear la colección, Milvus generará esos valores al insertar los datos. En tal caso, excluya los valores del campo primario de las entidades a insertar.</p>
 <p>Para más información, consulte <a href="/docs/es/primary-field.md">Campo primario y AutoID</a>.</p>
 <h2 id="Index​" class="common-anchor-header">Índice<button data-href="#Index​" class="anchor-icon" translate="no">
@@ -184,8 +184,8 @@ title: Explicación de las colecciones
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Las particiones son subconjuntos de una colección, que comparten el mismo conjunto de campos con su colección padre, cada uno de los cuales contiene un subconjunto de entidades.</p>
-<p>Al asignar entidades a diferentes particiones, puede crear grupos de entidades. Puede realizar búsquedas y consultas en particiones específicas para que Zilliz Cloud ignore las entidades de otras particiones y mejore la eficiencia de la búsqueda.</p>
+    </button></h2><p>Las particiones son subconjuntos de una colección, que comparten el mismo conjunto de campos con su colección padre, conteniendo cada una un subconjunto de entidades.</p>
+<p>Al asignar entidades a diferentes particiones, puede crear grupos de entidades. Puede realizar búsquedas y consultas en particiones específicas para que Zilliz Cloud ignore entidades en otras particiones, y mejorar la eficiencia de la búsqueda.</p>
 <p>Para más detalles, consulte <a href="/docs/es/manage-partitions.md">Gestionar particiones</a>.</p>
 <h2 id="Shard​" class="common-anchor-header">Tablero<button data-href="#Shard​" class="anchor-icon" translate="no">
       <svg translate="no"

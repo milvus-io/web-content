@@ -3,7 +3,7 @@ id: binary-vector.md
 title: Vectores binarios
 summary: >-
   Los vectores binarios son una forma especial de representación de datos que
-  convierte los vectores tradicionales de coma flotante de alta dimensión en
+  convierte los vectores tradicionales de punto flotante de alta dimensión en
   vectores binarios que sólo contienen 0s y 1s. Esta transformación no sólo
   comprime el tamaño del vector, sino que también reduce los costes de
   almacenamiento y cálculo, al tiempo que conserva la información semántica.

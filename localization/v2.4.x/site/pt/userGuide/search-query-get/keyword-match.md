@@ -24,7 +24,7 @@ title: Correspondência de palavras-chave
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>A correspondência de palavras-chave no Milvus permite a recuperação precisa de documentos com base em termos específicos. Esta funcionalidade é utilizada principalmente para pesquisa filtrada para satisfazer condições específicas e pode incorporar filtragem escalar para refinar os resultados da consulta, permitindo pesquisas de semelhança dentro de vectores que satisfaçam critérios escalares.</p>
+    </button></h1><p>A correspondência de palavras-chave no Milvus permite a recuperação precisa de documentos com base em termos específicos. Esta funcionalidade é utilizada principalmente para pesquisa filtrada para satisfazer condições específicas e pode incorporar filtragem escalar para refinar os resultados da consulta, permitindo pesquisas por semelhança dentro de vectores que satisfaçam critérios escalares.</p>
 <div class="alert note">
 <p>A correspondência de palavras-chave centra-se na procura de ocorrências exactas dos termos de consulta, sem pontuar a relevância dos documentos correspondentes. Se pretender obter os documentos mais relevantes com base no significado semântico e na importância dos termos de consulta, recomendamos que utilize a <a href="/docs/pt/full-text-search.md">Pesquisa de texto integral</a>.</p>
 </div>
@@ -45,7 +45,7 @@ title: Correspondência de palavras-chave
       </svg>
     </button></h2><p>O Milvus integra o <a href="https://github.com/quickwit-oss/tantivy">Tantivy</a> para alimentar o seu índice invertido subjacente e a pesquisa por palavras-chave. Para cada entrada de texto, Milvus indexa-o seguindo o procedimento.</p>
 <ol>
-<li><p><a href="/docs/pt/analyzer-overview.md">Analisador</a>: O analisador processa o texto de entrada, dividindo-o em palavras individuais, ou tokens, e aplicando filtros conforme necessário. Isto permite ao Milvus construir um índice baseado nestes tokens.</p></li>
+<li><p><a href="/docs/pt/analyzer-overview.md">Analisador</a>: O analisador processa o texto de entrada, transformando-o em palavras individuais, ou tokens, e aplicando filtros conforme necessário. Isto permite ao Milvus construir um índice baseado nestes tokens.</p></li>
 <li><p><a href="/docs/pt/index-scalar-fields.md">Indexação</a>: Após a análise do texto, o Milvus cria um índice invertido que mapeia cada token único para os documentos que o contêm.</p></li>
 </ol>
 <p>Quando um utilizador efectua uma correspondência de palavras-chave, o índice invertido é utilizado para recuperar rapidamente todos os documentos que contêm as palavras-chave. Isto é muito mais rápido do que analisar cada documento individualmente.</p>
@@ -123,7 +123,7 @@ schema.add_field(​
 <button class="copy-code-btn"></button></code></pre>
 <ul>
 <li><p><code translate="no">field_name</code>: O nome do campo VARCHAR a ser pesquisado.</p></li>
-<li><p><code translate="no">text</code>: As palavras-chave a pesquisar. Várias palavras-chave podem ser separadas por espaços ou outros delimitadores apropriados com base no idioma e no analisador configurado.</p></li>
+<li><p><code translate="no">text</code>: As palavras-chave a serem pesquisadas. Várias palavras-chave podem ser separadas por espaços ou outros delimitadores apropriados com base no idioma e no analisador configurado.</p></li>
 </ul>
 <p>Por padrão, <code translate="no">TEXT_MATCH</code> usa a lógica de correspondência <strong>OR</strong>, o que significa que ele retornará documentos que contêm qualquer uma das palavras-chave especificadas. Por exemplo, para pesquisar documentos que contenham as palavras-chave <code translate="no">machine</code> ou <code translate="no">deep</code> no campo <code translate="no">text</code>, use a seguinte expressão.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&quot;TEXT_MATCH(text, &#x27;machine deep&#x27;)&quot;</span>​
@@ -150,7 +150,7 @@ result = MilvusClient.search(​
 )​
 
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Query-with-keyword-match​" class="common-anchor-header">Consulta com correspondência de palavras-chave</h3><p>A correspondência de palavras-chave também pode ser utilizada para filtragem escalar em operações de consulta. Ao especificar uma expressão <code translate="no">TEXT_MATCH</code> no parâmetro <code translate="no">expr</code> do método <code translate="no">query()</code>, pode obter documentos que correspondem às palavras-chave indicadas.</p>
+<h3 id="Query-with-keyword-match​" class="common-anchor-header">Consulta com correspondência de palavras-chave</h3><p>A correspondência de palavras-chave também pode ser utilizada para filtragem escalar em operações de consulta. Especificando uma expressão <code translate="no">TEXT_MATCH</code> no parâmetro <code translate="no">expr</code> do método <code translate="no">query()</code>, pode obter documentos que correspondem às palavras-chave fornecidas.</p>
 <p>O exemplo abaixo recupera documentos em que o campo <code translate="no">text</code> contém as palavras-chave <code translate="no">keyword1</code> e <code translate="no">keyword2</code>.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Match entities with both `keyword1` and `keyword2`​</span>
 <span class="hljs-built_in">filter</span> = <span class="hljs-string">&quot;TEXT_MATCH(text, &#x27;keyword1&#x27;) and TEXT_MATCH(text, &#x27;keyword2&#x27;)&quot;</span>​

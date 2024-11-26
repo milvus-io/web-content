@@ -43,7 +43,7 @@ summary: '''길이'' 필터는 지정된 길이 요건을 충족하지 않는 �
     }],​
 }​
 <button class="copy-code-btn"></button></code></pre>
-<p><code translate="no">length</code> 필터는 다음과 같은 구성 가능한 매개변수를 허용합니다.</p>
+<p><code translate="no">length</code> 필터는 다음과 같은 구성 가능한 매개 변수를 허용합니다.</p>
 <table data-block-token="A4b8dsBito2lFHxJ9dxck6M5nJv"><thead><tr><th data-block-token="JXZbdUMSyoJb5ZxhdLGcxGE2nEh" colspan="1" rowspan="1"><p data-block-token="Id41dwlZjoLnGCxWpKJcDg0Hnyf">파라미터</p>
 </th><th data-block-token="MvZqdxMSxowjEBxCQNzcxS8TnVd" colspan="1" rowspan="1"><p data-block-token="OsHjdVSvKodZ5Ox3U1KcXbYQnBc">설명</p>
 </th></tr></thead><tbody><tr><td data-block-token="ZuZEdNiHIotOFTx3m9QcTPnWnle" colspan="1" rowspan="1"><p data-block-token="Dszdd3IDdowj5bxJyJhcP19tnng"><code translate="no">max</code></p>

@@ -27,7 +27,7 @@ summary: >-
 }​
 
 <button class="copy-code-btn"></button></code></pre>
-<p>この例では、<code translate="no">tags</code> と<code translate="no">ratings</code> はどちらもArrayフィールドである。この例では、<code translate="no">tags</code> と はどちらも Array フィールドです。 フィールドはポップ、ロック、クラシックなどの曲のジャンルを表す文字列配列で、<code translate="no">ratings</code> フィールドは曲に対するユーザー評価を表す 1 から 5 までの整数配列です。これらのArrayフィールドは、複数値のデータを格納する柔軟な方法を提供し、クエリやフィルタリングの際に詳細な分析を行いやすくします。</p>
+<p>この例では、<code translate="no">tags</code> と<code translate="no">ratings</code> はどちらもArrayフィールドである。この例では、<code translate="no">ratings</code> と<code translate="no">tags</code> はどちらも Array フィールドです。 フィールドはポップ、ロック、クラシックなどの曲のジャンルを表す文字列配列で、 フィールドは曲に対するユーザー評価を表す 1 から 5 までの整数配列です。これらのArrayフィールドは、複数値のデータを格納する柔軟な方法を提供し、クエリやフィルタリングの際に詳細な分析を行いやすくします。</p>
 <h2 id="Add-Array-field​" class="common-anchor-header">配列フィールドの追加<button data-href="#Add-Array-field​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -210,7 +210,7 @@ schema.addField(AddFieldReq.builder()​
         ></path>
       </svg>
     </button></h2><p>Arrayフィールドにインデックスパラメータを設定することはオプションですが、検索効率を大幅に向上させることができます。</p>
-<p>以下の例では、<code translate="no">tags</code> フィールドに<code translate="no">AUTOINDEX</code> を作成しています。これは、milvus がデータ型に基づいて適切なスカラーインデックスを自動的に作成することを意味します。</p>
+<p>以下の例では、<code translate="no">tags</code> フィールドに対して<code translate="no">AUTOINDEX</code> を作成しています。これは、milvus がデータ型に基づいて適切なスカラーインデックスを自動的に作成することを意味します。</p>
 <div class="multipleCode">
  <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#go">Go</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Prepare index parameters​</span>
@@ -250,7 +250,7 @@ indexes.add(IndexParam.builder()​
     ]&#x27;</span>​
 
 <button class="copy-code-btn"></button></code></pre>
-<p><code translate="no">AUTOINDEX</code> 以外にも、<code translate="no">INVERTED</code> や<code translate="no">BITMAP</code> などのスカラー・インデックス・タイプを指定することができます。サポートされているインデックス・タイプについては、<a href="/docs/ja/index-scalar-fields.md">スカラー・インデックスを</a>参照。</p>
+<p><code translate="no">AUTOINDEX</code> 以外にも、<code translate="no">INVERTED</code> や<code translate="no">BITMAP</code> などのスカラー・インデックス・タイプを指定することができます。サポートされているインデックス・タイプについては、<a href="/docs/ja/index-scalar-fields.md">スカラー・インデックスを</a>参照してください。</p>
 <p>さらに、コレクションを作成する前に、ベクトル・フィールド用のインデックスを作成する必要があります。この例では、<code translate="no">AUTOINDEX</code> を使用して、ベクトル・インデックスのセットアップを簡素化している。</p>
 <div class="multipleCode">
  <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#go">Go</a> <a href="#curl">cURL</a></div>

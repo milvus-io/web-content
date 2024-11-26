@@ -237,7 +237,7 @@ title: Tipos métricos
 <ul>
 <li><p><code translate="no">​Q</code>: El texto de consulta proporcionado por el usuario.</p></li>
 <li><p><code translate="no">​D</code>: El documento evaluado.</p></li>
-<li><p><code translate="no">​TF(qi​,D)</code>: Frecuencia del término, que representa la frecuencia con la que aparece el término qia en el documento D.</p></li>
+<li><p><code translate="no">​TF(qi​,D)</code>: Frecuencia del término, que representa la frecuencia con la que el término q aparece en el documento D.</p></li>
 <li><p><code translate="no">​IDF(qi​)</code>: Frecuencia inversa del documento, calculada como.</p>
 <p>
   

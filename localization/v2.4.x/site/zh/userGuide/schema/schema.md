@@ -2,7 +2,7 @@
 id: schema.md
 title: Schema 解释
 summary: >-
-  Schema 定义了 Collections 的数据结构。在创建一个 Collections 之前，你需要设计好它的 Schema。本页将帮助你理解
+  Schema 定义了 Collections 的数据结构。在创建 Collections 之前，你需要设计好它的 Schema。本页将帮助你理解
   Collections Schema，并自行设计一个示例 Schema。
 ---
 <h1 id="Schema-Explained​" class="common-anchor-header">模式解释<button data-href="#Schema-Explained​" class="anchor-icon" translate="no">
@@ -20,7 +20,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Schema 定义了 Collections 的数据结构。在创建 Collections 之前，你需要设计好它的 Schema。本页将帮助你理解 Collections 模式，并自行设计一个示例模式。</p>
+    </button></h1><p>Schema 定义了 Collections 的数据结构。在创建一个 Collection 之前，你需要设计出它的 Schema。本页将帮助你理解 Collections 模式，并自行设计一个示例模式。</p>
 <h2 id="Overview​" class="common-anchor-header">概述<button data-href="#Overview​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -43,8 +43,8 @@ summary: >-
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/schema-explained.PNG" alt="Schema design" class="doc-image" id="schema-design" />
    </span> <span class="img-wrapper"> <span>Schema 设计</span> </span></p>
-<p>搜索系统的数据模型设计包括分析业务需求，并将信息抽象为模式表达的数据模型。例如，搜索一段文本必须通过 "Embedding "将字面字符串转换为向量并启用向量搜索，从而实现 "索引"。除了这一基本要求外，可能还需要存储出版时间戳和作者等其他属性。有了这些元数据，就可以通过过滤来完善语义搜索，只返回特定日期之后或特定作者发表的文本。您还可以检索这些标量与主文本，以便在应用程序中呈现搜索结果。每个标量都应分配一个唯一标识符，以整数或字符串的形式组织这些文本片段。这些元素对于实现复杂的搜索逻辑至关重要。</p>
-<p>请参考<a href="/docs/zh/schema-hands-on.md">Schema Design Hands-On</a>，了解如何制作设计良好的模式。</p>
+<p>搜索系统的数据模型设计包括分析业务需求，并将信息抽象为模式表达的数据模型。例如，搜索一段文本必须通过 "嵌入 "将字面字符串转换为向量并启用向量搜索，从而实现 "索引"。除了这一基本要求外，可能还需要存储出版时间戳和作者等其他属性。有了这些元数据，就可以通过过滤来完善语义搜索，只返回特定日期之后或特定作者发表的文本。您还可以检索这些标量与主文本，以便在应用程序中呈现搜索结果。每个标量都应分配一个唯一标识符，以整数或字符串的形式组织这些文本片段。这些元素对于实现复杂的搜索逻辑至关重要。</p>
+<p>请参考<a href="/docs/zh/schema-hands-on.md">Schema Design Hands-On</a>，了解如何制作一个精心设计的模式。</p>
 <h2 id="Create-Schema​" class="common-anchor-header">创建 Schema<button data-href="#Create-Schema​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

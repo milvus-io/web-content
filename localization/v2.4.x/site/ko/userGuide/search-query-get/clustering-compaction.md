@@ -42,13 +42,13 @@ summary: >-
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/clustering-compaction.png" alt="Without clustering Compaction" class="doc-image" id="without-clustering-compaction" />
    </span> <span class="img-wrapper"> <span>클러스터링 없이 압축</span> </span></p>
-<p>Milvus가 특정 필드의 값을 기반으로 세그먼트 간에 엔티티를 분산할 수 있다면 검색 범위를 한 세그먼트 내에서 제한할 수 있으므로 검색 성능이 향상됩니다.</p>
+<p>Milvus가 특정 필드의 값을 기반으로 세그먼트 간에 엔티티를 분산시킬 수 있다면 검색 범위를 한 세그먼트 내에서 제한할 수 있으므로 검색 성능이 향상됩니다.</p>
 <p><strong>클러스터링</strong> 압축은 스칼라 필드의 값을 기반으로 컬렉션의 세그먼트 간에 엔티티를 재분배하는 Milvus의 기능입니다. 이 기능을 사용하려면 먼저 <strong>클러스터링 키로</strong> 스칼라 필드를 선택해야 합니다. 이렇게 하면 클러스터링 키 값이 특정 범위에 속할 때 Milvus가 엔티티를 세그먼트에 재분배할 수 있습니다. 클러스터링 압축을 트리거하면 Milvus는 세그먼트와 클러스터링 키 값 간의 매핑 관계를 기록하는 <strong>PartitionStats라는</strong> 글로벌 인덱스를 생성/업데이트합니다.</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/clustering-compaction-2.png" alt="With Clustering Compaction" class="doc-image" id="with-clustering-compaction" />
    </span> <span class="img-wrapper"> <span>클러스터링 압축 사용</span> </span></p>
-<p>Milvus는 <strong>PartitionStats를</strong> 참조로 사용하여 클러스터링 키 값이 포함된 검색/쿼리 요청을 수신하면 관련 없는 데이터를 정리하고 해당 값에 매핑되는 세그먼트 내에서 검색 범위를 제한하여 검색 성능을 개선할 수 있습니다. 성능 향상에 대한 자세한 내용은 벤치마크 테스트를 참조하세요.</p>
+<p>Milvus는 <strong>PartitionStats를</strong> 참조로 사용하여 클러스터링 키 값을 포함하는 검색/쿼리 요청을 수신하면 관련 없는 데이터를 정리하고 해당 값에 매핑되는 세그먼트 내에서 검색 범위를 제한하여 검색 성능을 개선할 수 있습니다. 성능 향상에 대한 자세한 내용은 벤치마크 테스트를 참조하세요.</p>
 <h2 id="Use-Clustering-Compaction" class="common-anchor-header">클러스터링 압축 사용<button data-href="#Use-Clustering-Compaction" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -176,7 +176,7 @@ coll1.get_compaction_state(is_clustering=<span class="hljs-literal">True</span>)
 coll1.wait_for_compaction_completed(is_clustering=<span class="hljs-literal">True</span>)
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Benchmark-Test" class="common-anchor-header">벤치마크 테스트</h3><p>데이터 볼륨과 쿼리 패턴을 결합하여 클러스터링 압축이 가져올 수 있는 성능 향상을 결정합니다. 내부 벤치마크 테스트에 따르면 클러스터링 압축은 초당 쿼리 수(QPS)를 최대 25배까지 향상시키는 것으로 나타났습니다.</p>
-<p>벤치마크 테스트는 키 필드가 클러스터링 키로 지정된 2,000만 768차원 LAION 데이터 세트의 엔티티가 포함된 컬렉션에 대한 것입니다. 컬렉션에서 클러스터링 압축이 트리거된 후, CPU 사용량이 최고 수준에 도달할 때까지 동시 검색이 전송됩니다.</p>
+<p>벤치마크 테스트는 키 필드가 클러스터링 키로 지정된 2,000만 768차원 LAION 데이터 세트의 엔터티가 포함된 컬렉션에 대한 것입니다. 컬렉션에서 클러스터링 압축이 트리거된 후, CPU 사용량이 최고 수준에 도달할 때까지 동시 검색이 전송됩니다.</p>
 <table>
   <thead>
     <tr>

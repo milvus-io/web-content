@@ -354,7 +354,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
         ></path>
       </svg>
     </button></h2><ul>
-<li><p><strong>グループの数</strong>：<code translate="no">limit</code> パラメータは、各グループ内のエンティティの特定の数ではなく、検索結果を返すグループの数を制御する。適切な<code translate="no">limit</code> を設定することで、検索の多様性とクエリのパフォーマンスを制御できます。データが高密度に分散している場合やパフォーマンスが懸念される場合は、<code translate="no">limit</code> を減らすことで計算コストを削減できます。</p></li>
+<li><p><strong>グループの数</strong>：<code translate="no">limit</code> パラメータは、各グループ内のエンティティの具体的な数ではなく、検索結果が返されるグループの数を制御する。適切な<code translate="no">limit</code> を設定することで、検索の多様性とクエリのパフォーマンスを制御できます。データが高密度に分散している場合やパフォーマンスが懸念される場合は、<code translate="no">limit</code> を減らすことで計算コストを削減できます。</p></li>
 <li><p><strong>グループあたりのエンティティ</strong>数：<code translate="no">group_size</code> パラメータは、グループごとに返されるエンティティの数を制御します。ユースケースに基づいて<code translate="no">group_size</code> を調整すると、検索結果の豊かさが向上します。ただし、データが不均一に分散している場合、特にデータが限られたシナリオでは、<code translate="no">group_size</code> で指定した数よりも少ないエンティティしか返されないグループもあります。</p></li>
 <li><p><strong>厳格なグループサイズ</strong>：<code translate="no">strict_group_size=True</code> を指定すると、そのグループに十分なデータがない場合を除き、各グループで指定されたエンティティ数 (<code translate="no">group_size</code>) を返そうとします。この設定により、グループごとに一貫したエンティティ数が保証されますが、データ分散が不均一な場合やリソースが限られている場合、パフォーマンスが低下する可能性があります。厳密なエンティティ数が必要でない場合は、<code translate="no">strict_group_size=False</code> を設定するとクエリの速度が向上します。</p></li>
 </ul>

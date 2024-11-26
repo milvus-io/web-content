@@ -619,7 +619,7 @@ fmt.Println(<span class="hljs-string">&quot;collection created&quot;</span>)​
 <pre><code translate="no" class="language-curl"><span class="hljs-comment"># Currently not available for REST</span>
 
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Set-Collection-TTL​" class="common-anchor-header">Establecer TTL de colección</h3><p>Si una colección necesita ser eliminada durante un periodo específico, considere establecer su tiempo de vida (TTL) en segundos. Una vez que el TTL se agota, Milvus borra las entidades de la colección y elimina la colección. El borrado es asíncrono, lo que indica que las búsquedas y consultas siguen siendo posibles antes de que se complete el borrado.</p>
+<h3 id="Set-Collection-TTL​" class="common-anchor-header">Establecer TTL de colección</h3><p>Si una colección necesita ser eliminada durante un periodo específico, considere establecer su tiempo de vida (TTL) en segundos. Una vez que el TTL se agota, Milvus elimina las entidades de la colección y elimina la colección. El borrado es asíncrono, lo que indica que las búsquedas y consultas siguen siendo posibles antes de que se complete el borrado.</p>
 <p>El siguiente fragmento de código establece el TTL en un día (86400 segundos). Se recomienda establecer el TTL en un par de días como mínimo.</p>
 <div class="multipleCode">
  <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#go">Go</a> <a href="#curl">cURL</a></div>

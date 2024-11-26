@@ -248,7 +248,7 @@ coll1.wait_for_compaction_completed(is_clustering=<span class="hljs-literal">Tru
     </tr>
   </tbody>
 </table>
-<p>A medida que se reduce el ámbito de búsqueda en los filtros de búsqueda, aumenta el porcentaje de exclusión. Esto significa que se omiten más entidades durante el proceso de búsqueda. Si se comparan las estadísticas de la primera y la última fila, se observa que las búsquedas sin compactación por agrupación requieren escanear toda la colección. Por otro lado, las búsquedas con compactación de agrupación mediante una clave específica pueden lograr una mejora de hasta 25 veces.</p>
+<p>A medida que se reduce el rango de búsqueda en los filtros de búsqueda, aumenta el porcentaje de exclusión. Esto significa que se omiten más entidades durante el proceso de búsqueda. Si se comparan las estadísticas de la primera y la última fila, se observa que las búsquedas sin compactación por agrupación requieren escanear toda la colección. Por otro lado, las búsquedas con compactación de agrupación mediante una clave específica pueden lograr una mejora de hasta 25 veces.</p>
 <h2 id="Best-practices" class="common-anchor-header">Buenas prácticas<button data-href="#Best-practices" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

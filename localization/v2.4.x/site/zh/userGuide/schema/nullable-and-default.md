@@ -22,7 +22,7 @@ summary: >-
         ></path>
       </svg>
     </button></h1><p>Milvus 允许你为标量字段（主字段除外）设置<code translate="no">nullable</code> 属性和默认值。对于标记为<code translate="no">nullable=True</code> 的字段，您可以在插入数据时跳过该字段，或直接将其设置为空值，系统会将其视为空值而不会导致错误。当字段具有默认值时，如果在插入过程中没有为该字段指定数据，系统将自动应用该值。</p>
-<p>默认值和可归零属性允许处理带有空值的数据集并保留默认值设置，从而简化了从其他数据库系统到 Milvus 的数据迁移。创建 Collections 时，也可启用可归零或为可能不确定值的字段设置默认值。</p>
+<p>默认值和可归零属性允许处理带有空值的数据集并保留默认值设置，从而简化了从其他数据库系统到 Milvus 的数据迁移。在创建 Collections 时，也可以启用可归零属性或为可能存在不确定值的字段设置默认值。</p>
 <h2 id="Limits" class="common-anchor-header">限制<button data-href="#Limits" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -44,7 +44,7 @@ summary: >-
 <li><p>默认值或 nullable 属性只能在创建 Collections 时配置，之后不能修改。</p></li>
 <li><p>启用了可归零属性的标量字段不能在分组搜索中用作<code translate="no">group_by_field</code> 。有关分组搜索的更多信息，请参阅<a href="/docs/zh/grouping-search.md">分组搜索</a>。</p></li>
 <li><p>标记为可归零的字段不能用作分区键。有关分区键的更多信息，请参阅<a href="/docs/zh/use-partition-key.md">使用分区键</a>。</p></li>
-<li><p>在启用可归零属性的标量字段上创建索引时，索引中将排除空值。</p></li>
+<li><p>在启用了可归零属性的标量字段上创建索引时，索引将排除空值。</p></li>
 </ul>
 <h2 id="Nullable-attribute" class="common-anchor-header">可归零属性<button data-href="#Nullable-attribute" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -277,7 +277,7 @@ client.insert({​
 }&#x27;</span>​
 
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Search-and-query-with-null-values​" class="common-anchor-header">使用空值进行搜索和查询</h3><p>使用<code translate="no">search</code> 方法时，如果字段包含<code translate="no">null</code> 值，搜索结果将以空值返回该字段。</p>
+<h3 id="Search-and-query-with-null-values​" class="common-anchor-header">使用空值搜索和查询</h3><p>使用<code translate="no">search</code> 方法时，如果字段包含<code translate="no">null</code> 值，搜索结果将以空值返回该字段。</p>
 <div class="multipleCode">
  <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python">res = client.search(​

@@ -838,7 +838,7 @@
             "children": []
           },
           {
-            "label": "講師",
+            "label": "インストラクター",
             "id": "embed-with-instructor.md",
             "order": 9,
             "children": []
@@ -910,7 +910,7 @@
     ]
   },
   {
-    "label": "Milvusマイグレーション",
+    "label": "Milvus移住",
     "id": "milvus_migration",
     "isMenu": true,
     "order": 5,

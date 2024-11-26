@@ -35,14 +35,14 @@ title: 範囲検索
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvusは範囲検索のリクエストを実行する際、ANN検索の結果からクエリベクトルと最も類似したベクトルを中心として、検索リクエストで指定された半径を外側の円の半径、<strong>range_filterを</strong>内側の円の半径として、2つの同心円を描きます。この2つの同心円で形成される環状領域内に入る類似度スコアを持つすべてのベクトルが返されます。ここで<strong>range_filter</strong>を<strong>0</strong> に設定すると、指定した類似度スコア（半径）内のすべてのエンティティが返される。</p>
+    </button></h2><p>範囲検索のリクエストを実行する際、MilvusはANN検索の結果からクエリベクトルに最も類似したベクトルを中心として、検索リクエストで指定された半径を外側の円の半径、<strong>range_filterを</strong>内側の円の半径として、2つの同心円を描きます。この2つの同心円で形成される環状領域内に入る類似度スコアを持つすべてのベクトルが返されます。ここで<strong>range_filter</strong>を<strong>0</strong> に設定すると、指定した類似度スコア（半径）内のすべてのエンティティが返される。</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/range-search.png" alt="Range search" class="doc-image" id="range-search" />
    </span> <span class="img-wrapper"> <span>範囲検索</span> </span></p>
 <p>上の図は、範囲検索要求が radius と<strong>range_filter</strong> という2つのパラメータを持つことを示している。範囲検索リクエストを受け取ると、Milvusは以下の処理を行います。</p>
 <ul>
-<li><p>指定されたメトリックタイプ<strong>(COSINE</strong>)を使用して、クエリベクトルに最も類似したすべてのベクトル埋め込みを検索する。</p></li>
+<li><p>指定されたメトリックタイプ<strong>(COSINE</strong>)を使用して、クエリベクトルに最も近いすべてのベクトル埋め込みを検索する。</p></li>
 <li><p>クエリベクトルとの<strong>距離</strong>または<strong>スコアが</strong> <strong>radius</strong>および<strong>range_filter</strong>パラメータで指定された範囲内にある埋め込みベクトルをフィルタリングする。</p></li>
 <li><p>フィルタリングされたエンティティから<strong>上位K個の</strong>エンティティを返す。</p></li>
 </ul>

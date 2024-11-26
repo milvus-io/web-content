@@ -80,7 +80,7 @@ title: 一貫性
         ></path>
       </svg>
     </button></h2><p>検索やクエリを実行するときだけでなく、コレクションを作成するときにも異なる一貫性レベルを設定できます。</p>
-<h3 id="Set-Consistency-Level-upon-Creating-Collection​-set-consistency-level-upon-creating-collection​" class="common-anchor-header">コレクションの作成時に一貫性レベルを設定する{#set-consistency-level-upon-creating-collection} コレクションの作成時に一貫性レベルを設定できます。</h3><p>コレクション作成時に、コレクション内の検索とクエリの一貫性レベルを設定できます。以下のコード例では、一貫性レベルを<strong>Strongに</strong>設定しています。</p>
+<h3 id="Set-Consistency-Level-upon-Creating-Collection​-set-consistency-level-upon-creating-collection​" class="common-anchor-header">コレクション作成時の一貫性レベルの設定{#set-consistency-level-upon-creating-collection} コレクション作成時に一貫性レベルを設定できます。</h3><p>コレクション作成時に、コレクション内の検索とクエリの一貫性レベルを設定できます。以下のコード例では、一貫性レベルを<strong>Strongに</strong>設定しています。</p>
 <div class="multipleCode">
    <a href="#python">python</a> <a href="#java">java</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">client.create_collection(​
@@ -183,7 +183,7 @@ curl --request POST \​
 
 <button class="copy-code-btn"></button></code></pre>
 <p>このパラメータはハイブリッド検索と検索イテレータでも使用できます。<code translate="no">consistency_level</code> パラメータに指定できる値は<code translate="no">Strong</code>,<code translate="no">Bounded</code>,<code translate="no">Eventually</code>,<code translate="no">Session</code> です。</p>
-<h3 id="Set-Consistency-Level-in-Query​set-consistency-level-in-query​" class="common-anchor-header">クエリで一貫性レベルを設定{#set-consistency-level-in-query} クエリで一貫性レベルを設定{#set-consistency-level-in-query}する。</h3><p>特定の検索の一貫性レベルはいつでも変更できます。以下のコード例では、一貫性レベルを<strong>Eventuallyに</strong>設定しています。この設定は現在のクエリ・リクエストにのみ適用されます。</p>
+<h3 id="Set-Consistency-Level-in-Query​set-consistency-level-in-query​" class="common-anchor-header">クエリでの一貫性レベルの設定{#set-consistency-level-in-query}」。</h3><p>特定の検索の一貫性レベルはいつでも変更できます。以下のコード例では、一貫性レベルを<strong>Eventuallyに</strong>設定しています。この設定は現在のクエリ・リクエストにのみ適用されます。</p>
 <div class="multipleCode">
    <a href="#python">python</a> <a href="#java">java</a></div>
 <pre><code translate="no" class="language-python">res = client.query(​

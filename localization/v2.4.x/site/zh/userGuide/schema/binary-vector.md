@@ -2,7 +2,7 @@
 id: binary-vector.md
 title: 二进制向量
 summary: >-
-  二进制向量是一种特殊的数据表示形式，它将传统的高维浮点向量转换为只包含 0 和 1
+  二进制向量是一种特殊的数据表示形式，它将传统的高维浮点向量转换成只包含 0 和 1
   的二进制向量。这种转换不仅压缩了向量的大小，还降低了存储和计算成本，同时保留了语义信息。当对非关键特征的精度要求不高时，二进制向量可以有效保持原始浮点向量的大部分完整性和实用性。
 ---
 <h1 id="Binary-Vector​" class="common-anchor-header">二进制向量<button data-href="#Binary-Vector​" class="anchor-icon" translate="no">
@@ -22,7 +22,7 @@ summary: >-
       </svg>
     </button></h1><p>二进制向量是一种特殊的数据表示形式，它将传统的高维浮点向量转换成只包含 0 和 1 的二进制向量。这种转换不仅压缩了向量的大小，还降低了存储和计算成本，同时保留了语义信息。当对非关键特征的精度要求不高时，二进制向量可以有效保持原始浮点向量的大部分完整性和实用性。</p>
 <p>二进制向量有着广泛的应用，尤其是在计算效率和存储优化至关重要的情况下。在搜索引擎或推荐系统等大规模人工智能系统中，实时处理海量数据是关键所在。通过减小向量的大小，二进制向量有助于降低延迟和计算成本，而不会明显牺牲准确性。此外，二进制向量在移动设备和嵌入式系统等资源受限的环境中也很有用，因为在这些环境中，内存和处理能力都很有限。通过使用二进制向量，可以在这些受限环境中实现复杂的人工智能功能，同时保持高性能。</p>
-<h2 id="Overview​" class="common-anchor-header">概述<button data-href="#Overview​" class="anchor-icon" translate="no">
+<h2 id="Overview​" class="common-anchor-header">二进制矢量概述<button data-href="#Overview​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -213,7 +213,7 @@ indexParams.<span class="hljs-title function_">add</span>(<span class="hljs-titl
 
 <button class="copy-code-btn"></button></code></pre>
 <p>在上面的示例中，使用<code translate="no">BIN_IVF_FLAT</code> 索引类型为<code translate="no">binary_vector</code> 字段创建了名为<code translate="no">binary_vector_index</code> 的索引。<code translate="no">metric_type</code> 设置为<code translate="no">HAMMING</code> ，表示使用汉明距离进行相似性测量。</p>
-<p>除了<code translate="no">BIN_IVF_FLAT</code> 之外，Milvus 还支持二进制向量的其他索引类型。详情请参考<a href="https://milvus.io/docs/index.md?tab=binary">二进制向量索引</a>。此外，Milvus 还支持二进制向量的其他相似性度量。更多信息，请参阅 "<a href="/docs/zh/metric.md">度量类型</a>"。</p>
+<p>除了<code translate="no">BIN_IVF_FLAT</code> 之外，Milvus 还支持二进制向量的其他索引类型。更多详情，请参阅<a href="https://milvus.io/docs/index.md?tab=binary">二进制向量索引</a>。此外，Milvus 还支持二进制向量的其他相似性度量。更多信息，请参阅 "<a href="/docs/zh/metric.md">度量类型</a>"。</p>
 <h3 id="Create-collection​" class="common-anchor-header">创建 Collections</h3><p>二进制向量和索引设置完成后，创建一个包含二进制向量的 Collections。下面的示例使用<code translate="no">create_collection</code> 方法创建了一个名为<code translate="no">my_binary_collection</code> 的 Collection。</p>
 <div class="multipleCode">
  <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#go">Go</a> <a href="#curl">cURL</a></div>

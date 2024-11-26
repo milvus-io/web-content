@@ -8,7 +8,7 @@ summary: >-
   le dimensioni dei vettori, ma riduce anche i costi di memorizzazione e
   conserva le informazioni semantiche. Questa trasformazione non solo comprime
   le dimensioni del vettore, ma riduce anche i costi di archiviazione e di
-  calcolo, mantenendo le informazioni semantiche. Quando la precisione per le
+  calcolo, conservando le informazioni semantiche. Quando la precisione per le
   caratteristiche non critiche non è essenziale, i vettori binari possono
   effettivamente mantenere la maggior parte dell'integrità e dell'utilità dei
   vettori originali in virgola mobile.
@@ -29,7 +29,7 @@ summary: >-
         ></path>
       </svg>
     </button></h1><p>I vettori binari sono una forma speciale di rappresentazione dei dati che converte i tradizionali vettori in virgola mobile ad alta dimensione in vettori binari contenenti solo 0 e 1. Questa trasformazione non solo comprime le dimensioni del vettore, ma riduce anche i costi di archiviazione e di calcolo, mantenendo le informazioni semantiche. Questa trasformazione non solo comprime le dimensioni del vettore, ma riduce anche i costi di archiviazione e di calcolo, mantenendo le informazioni semantiche. Quando la precisione per le caratteristiche non critiche non è essenziale, i vettori binari possono effettivamente mantenere la maggior parte dell'integrità e dell'utilità dei vettori originali in virgola mobile.</p>
-<p>I vettori binari hanno un'ampia gamma di applicazioni, in particolare in situazioni in cui l'efficienza computazionale e l'ottimizzazione della memorizzazione sono fondamentali. Nei sistemi di intelligenza artificiale su larga scala, come i motori di ricerca o i sistemi di raccomandazione, l'elaborazione in tempo reale di enormi quantità di dati è fondamentale. Riducendo le dimensioni dei vettori, i vettori binari contribuiscono a ridurre la latenza e i costi di calcolo senza sacrificare significativamente la precisione. Inoltre, i vettori binari sono utili in ambienti con risorse limitate, come i dispositivi mobili e i sistemi embedded, dove la memoria e la potenza di elaborazione sono limitate. Grazie all'uso dei vettori binari, è possibile implementare complesse funzioni di intelligenza artificiale in questi ambienti limitati, mantenendo alte le prestazioni.</p>
+<p>I vettori binari hanno un'ampia gamma di applicazioni, in particolare in situazioni in cui l'efficienza computazionale e l'ottimizzazione della memorizzazione sono fondamentali. Nei sistemi di intelligenza artificiale su larga scala, come i motori di ricerca o i sistemi di raccomandazione, l'elaborazione in tempo reale di enormi quantità di dati è fondamentale. Riducendo le dimensioni dei vettori, i vettori binari aiutano a ridurre la latenza e i costi di calcolo senza sacrificare in modo significativo la precisione. Inoltre, i vettori binari sono utili in ambienti con risorse limitate, come i dispositivi mobili e i sistemi embedded, dove la memoria e la potenza di elaborazione sono limitate. Grazie all'uso dei vettori binari, è possibile implementare complesse funzioni di intelligenza artificiale in questi ambienti limitati, mantenendo alte le prestazioni.</p>
 <h2 id="Overview​" class="common-anchor-header">Panoramica<button data-href="#Overview​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

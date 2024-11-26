@@ -78,7 +78,7 @@ summary: 标准 "分析器是 Milvus 的默认分析器，如果没有指定分�
     <span class="hljs-string">&quot;stop_words&quot;</span>, [<span class="hljs-string">&quot;of&quot;</span>] <span class="hljs-comment"># Optional: List of words to exclude from tokenization​</span>
 }​
 <button class="copy-code-btn"></button></code></pre>
-<p>定义<code translate="no">analyzer_params</code> 后，可以在定义 Collections Schema 时将其应用到<code translate="no">VARCHAR</code> 字段。这样，Milvus 就能使用指定的分析器处理该字段中的文本，从而实现高效的标记化和过滤。更多信息，请参阅<a href="/docs/zh/analyzer-overview.md#">示例使用</a>。</p>
+<p>定义<code translate="no">analyzer_params</code> 后，可以在定义 Collections Schema 时将其应用到<code translate="no">VARCHAR</code> 字段。这样，Milvus 就能使用指定的分析器处理该字段中的文本，以实现高效的标记化和过滤。有关详细信息，请参阅<a href="/docs/zh/analyzer-overview.md#">示例使用</a>。</p>
 <h2 id="Example-output​" class="common-anchor-header">输出示例<button data-href="#Example-output​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
