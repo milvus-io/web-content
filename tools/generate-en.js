@@ -19,7 +19,7 @@ import {
 } from "./utils.js";
 import { remarkToHtml } from "./remark.js";
 
-const VERSIONS = ["v2.4.x"];
+const VERSIONS = ["v2.4.x", 'v2.5.x'];
 const sourceFilePath = "site/en";
 const sourceLang = "en";
 const targetLang = "en";
