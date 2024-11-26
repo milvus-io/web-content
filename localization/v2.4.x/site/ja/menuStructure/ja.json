@@ -563,7 +563,7 @@
             "children": []
           },
           {
-            "label": "インストラクター",
+            "label": "講師",
             "id": "embed-with-instructor.md",
             "order": 9,
             "children": []
@@ -1721,7 +1721,7 @@
     ]
   },
   {
-    "label": "よくある質問",
+    "label": "よくあるご質問",
     "id": "faq",
     "isMenu": true,
     "order": 9,

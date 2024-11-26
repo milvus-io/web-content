@@ -46,7 +46,7 @@ summary: >-
 <p>Das folgende Code-Snippet erstellt eine einfache Sammlung mit dem angegebenen Schema. Weitere Informationen zu Parametern finden Sie unter <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_schema.md"><code translate="no">create_schema()</code></a> und <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_collection.md"><code translate="no">create_collection()</code></a> in der SDK-Referenz.</p>
 </div>
 <div class="language-java">
-<p>Das folgende Codeschnipsel erstellt eine einfache Sammlung mit dem angegebenen Schema. Weitere Informationen zu den Parametern finden Sie unter <a href="https://milvus.io/api-reference/java/v2.4.x/v1/Collection/createCollection.md"><code translate="no">createCollection()</code></a> in der SDK-Referenz.</p>
+<p>Mit dem folgenden Codeausschnitt wird eine einfache Sammlung mit dem angegebenen Schema erstellt. Weitere Informationen zu den Parametern finden Sie unter <a href="https://milvus.io/api-reference/java/v2.4.x/v1/Collection/createCollection.md"><code translate="no">createCollection()</code></a> in der SDK-Referenz.</p>
 </div>
 <h2 id="Import-data" class="common-anchor-header">Daten importieren<button data-href="#Import-data" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -65,7 +65,7 @@ summary: >-
       </svg>
     </button></h2><p>Um die vorbereiteten Daten zu importieren, müssen Sie einen Importauftrag wie folgt erstellen:</p>
 <div class="multipleCode">
- <a href="#python">Python </a> <a href="#java">Java</a> <a href="#bash">cURL</a></div>
+ <a href="#python">Python </a> <a href="#java">Java</a> <a href="#shell">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus.bulk_writer <span class="hljs-keyword">import</span> bulk_import
 
 url = <span class="hljs-string">f&quot;http://127.0.0.1:19530&quot;</span>
@@ -108,7 +108,7 @@ job_id = resp.json()[<span class="hljs-string">&#x27;data&#x27;</span>][<span cl
     <span class="hljs-type">String</span> <span class="hljs-variable">jobId</span> <span class="hljs-operator">=</span> bulkImport(batchFiles);
 }
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> MILVUS_URI=<span class="hljs-string">&quot;localhost:19530&quot;</span>
+<pre><code translate="no" class="language-shell"><span class="hljs-built_in">export</span> MILVUS_URI=<span class="hljs-string">&quot;localhost:19530&quot;</span>
 
 curl --request POST <span class="hljs-string">&quot;http://<span class="hljs-variable">${MILVUS_URI}</span>/v2/vectordb/jobs/import/create&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
@@ -171,7 +171,7 @@ curl --request POST <span class="hljs-string">&quot;http://<span class="hljs-var
       </svg>
     </button></h2><p>Sobald Sie eine Importauftrags-ID erhalten haben, können Sie den Importfortschritt wie folgt überprüfen:</p>
 <div class="multipleCode">
- <a href="#python">Python </a> <a href="#java">Java</a> <a href="#bash">cURL</a></div>
+ <a href="#python">Python </a> <a href="#java">Java</a> <a href="#shell">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> json
 <span class="hljs-keyword">from</span> pymilvus.bulk_writer <span class="hljs-keyword">import</span> get_import_progress
 
@@ -221,7 +221,7 @@ resp = get_import_progress(
     getImportProgress(jobId);
 }
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> MILVUS_URI=<span class="hljs-string">&quot;localhost:19530&quot;</span>
+<pre><code translate="no" class="language-shell"><span class="hljs-built_in">export</span> MILVUS_URI=<span class="hljs-string">&quot;localhost:19530&quot;</span>
 
 curl --request POST <span class="hljs-string">&quot;http://<span class="hljs-variable">${MILVUS_URI}</span>/v2/vectordb/jobs/import/describe&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
@@ -281,7 +281,7 @@ curl --request POST <span class="hljs-string">&quot;http://<span class="hljs-var
       </svg>
     </button></h2><p>Sie können alle Importaufträge in Bezug auf eine bestimmte Sammlung wie folgt auflisten:</p>
 <div class="multipleCode">
- <a href="#python">Python </a> <a href="#java">Java</a> <a href="#bash">cURL</a></div>
+ <a href="#python">Python </a> <a href="#java">Java</a> <a href="#shell">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> json
 <span class="hljs-keyword">from</span> pymilvus.bulk_writer <span class="hljs-keyword">import</span> list_import_jobs
 
@@ -305,7 +305,7 @@ resp = list_import_jobs(
     listImportJobs();
 }
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> MILVUS_URI=<span class="hljs-string">&quot;localhost:19530&quot;</span>
+<pre><code translate="no" class="language-shell"><span class="hljs-built_in">export</span> MILVUS_URI=<span class="hljs-string">&quot;localhost:19530&quot;</span>
 
 curl --request POST <span class="hljs-string">&quot;http://<span class="hljs-variable">${MILVUS_URI}</span>/v2/vectordb/jobs/import/list&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
@@ -364,7 +364,7 @@ curl --request POST <span class="hljs-string">&quot;http://<span class="hljs-var
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Bevor Sie Daten importieren, vergewissern Sie sich, dass Sie die Beschränkungen in Bezug auf die folgenden Milvus-Verhaltensweisen zur Kenntnis genommen haben:</p>
+    </button></h2><p>Bevor Sie Daten importieren, vergewissern Sie sich, dass Sie die Beschränkungen in Bezug auf die folgenden Milvus-Verhaltensweisen beachtet haben:</p>
 <ul>
 <li><p>Einschränkungen bezüglich des Ladeverhaltens:</p>
 <ul>
@@ -381,8 +381,8 @@ curl --request POST <span class="hljs-string">&quot;http://<span class="hljs-var
 </ul></li>
 <li><p>Einschränkungen bezüglich des Löschverhaltens:</p>
 <ul>
-<li><p>Bevor der Status des Importauftrags " <strong>Completed"</strong> lautet, ist das Löschen nicht garantiert und kann erfolgreich sein oder nicht.</p></li>
-<li><p>Das Löschen nach <strong>Abschluss</strong> des Auftragsstatus ist garantiert erfolgreich.</p></li>
+<li><p>Bevor der Status des Importauftrags " <strong>Abgeschlossen"</strong> lautet, ist das Löschen nicht garantiert und kann erfolgreich sein oder nicht.</p></li>
+<li><p>Das Löschen nach <strong>Beendigung</strong> des Auftrags ist garantiert erfolgreich.</p></li>
 </ul></li>
 </ul>
 <h2 id="Recommendations" class="common-anchor-header">Empfehlungen<button data-href="#Recommendations" class="anchor-icon" translate="no">

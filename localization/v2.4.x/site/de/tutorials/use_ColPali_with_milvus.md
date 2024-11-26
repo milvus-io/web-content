@@ -37,7 +37,7 @@ title: ColPali für multimodales Retrieval mit Milvus verwenden
     <span></span>
   </span>
 </p>
-<p>Die MaxSim-Funktion vergleicht eine Abfrage mit einem Dokument (in dem Sie suchen), indem sie deren Token-Einbettungen betrachtet. Für jedes Wort in der Abfrage wählt sie das ähnlichste Wort aus dem Dokument aus (unter Verwendung der Cosinus-Ähnlichkeit oder der quadrierten L2-Distanz) und summiert diese maximalen Ähnlichkeiten über alle Wörter in der Abfrage</p>
+<p>Die MaxSim-Funktion vergleicht eine Abfrage mit einem Dokument (in dem Sie suchen), indem sie deren Token-Einbettungen betrachtet. Für jedes Wort in der Abfrage wählt sie das ähnlichste Wort aus dem Dokument aus (unter Verwendung der Kosinusähnlichkeit oder der quadrierten L2-Distanz) und summiert diese maximalen Ähnlichkeiten über alle Wörter in der Abfrage</p>
 <p>ColPali ist eine Methode, die die Multi-Vektor-Darstellung von ColBERT mit PaliGemma (einem multimodalen großen Sprachmodell) kombiniert, um dessen starke Verständnisfähigkeiten zu nutzen. Dieser Ansatz ermöglicht es, eine Seite, die sowohl Text als auch Bilder enthält, durch eine einheitliche Multi-Vektor-Einbettung darzustellen. Die Einbettungen innerhalb dieser Multi-Vektor-Darstellung können detaillierte Informationen erfassen und so die Leistung der Retrieval-augmented Generation (RAG) für multimodale Daten verbessern.</p>
 <p>In diesem Notizbuch bezeichnen wir diese Art von Multi-Vektor-Darstellung aus Gründen der Allgemeinheit als "ColBERT-Einbettungen". Das tatsächliche Modell, das verwendet wird, ist jedoch das <strong>ColPali-Modell</strong>. Wir werden demonstrieren, wie Milvus für die Suche nach mehreren Vektoren verwendet werden kann. Darauf aufbauend wird gezeigt, wie ColPali für das Abrufen von Seiten auf der Grundlage einer gegebenen Anfrage verwendet werden kann.</p>
 <h2 id="Preparation" class="common-anchor-header">Vorbereitung<button data-href="#Preparation" class="anchor-icon" translate="no">
@@ -94,12 +94,12 @@ client = <span class="hljs-title class_">MilvusClient</span>(uri=<span class="hl
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <ul>
-<li>Wenn Sie nur eine lokale Vektordatenbank für kleine Datenmengen oder Prototypen benötigen, ist es am bequemsten, die uri auf eine lokale Datei, z. B.<code translate="no">./milvus.db</code>, zu setzen, da <a href="https://milvus.io/docs/milvus_lite.md">Milvus Lite</a> automatisch alle Daten in dieser Datei speichert.</li>
+<li>Wenn Sie nur eine lokale Vektordatenbank für kleine Datenmengen oder Prototypen benötigen, ist die Angabe einer lokalen Datei als uri, z. B.<code translate="no">./milvus.db</code>, die bequemste Methode, da <a href="https://milvus.io/docs/milvus_lite.md">Milvus Lite</a> automatisch alle Daten in dieser Datei speichert.</li>
 <li>Wenn Sie große Datenmengen haben, z. B. mehr als eine Million Vektoren, können Sie einen leistungsfähigeren Milvus-Server auf <a href="https://milvus.io/docs/quickstart.md">Docker oder Kubernetes</a> einrichten. Bei dieser Einrichtung verwenden Sie bitte die Serveradresse und den Port als Uri, z. B.<code translate="no">http://localhost:19530</code>. Wenn Sie die Authentifizierungsfunktion auf Milvus aktivieren, verwenden Sie "&lt;Ihr_Benutzername&gt;:&lt;Ihr_Passwort&gt;" als Token, andernfalls setzen Sie das Token nicht.</li>
 <li>Wenn Sie <a href="https://zilliz.com/cloud">Zilliz Cloud</a>, den vollständig verwalteten Cloud-Service für Milvus, verwenden, passen Sie die <code translate="no">uri</code> und <code translate="no">token</code> an, die dem <a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#cluster-details">öffentlichen Endpunkt und dem API-Schlüssel</a> in Zilliz Cloud entsprechen.</li>
 </ul>
 </div>
-<p>Wir werden eine MilvusColbertRetriever-Klasse definieren, die den Milvus-Client für den Abruf von Multivektordaten umhüllt. Die Implementierung flacht ColBERT-Einbettungen ab und fügt sie in eine Sammlung ein, wobei jede Zeile eine einzelne Einbettung aus der ColBERT-Einbettungsliste darstellt. Sie zeichnet auch die doc_id und seq_id auf, um den Ursprung jeder Einbettung zu ermitteln.</p>
+<p>Wir werden eine MilvusColbertRetriever-Klasse definieren, um den Milvus-Client für den Abruf von Multivektordaten zu umhüllen. Die Implementierung flacht ColBERT-Einbettungen ab und fügt sie in eine Sammlung ein, wobei jede Zeile eine einzelne Einbettung aus der ColBERT-Einbettungsliste darstellt. Sie zeichnet auch die doc_id und seq_id auf, um den Ursprung jeder Einbettung zu ermitteln.</p>
 <p>Bei der Suche mit einer ColBERT-Einbettungsliste werden mehrere Suchen durchgeführt - eine für jede ColBERT-Einbettung. Die gefundenen doc_ids werden dann dedupliziert. Es wird ein Reranking-Prozess durchgeführt, bei dem die vollständigen Einbettungen für jede doc_id abgerufen werden und der MaxSim-Score berechnet wird, um die endgültige Rangfolge der Ergebnisse zu ermitteln.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">class</span> <span class="hljs-title class_">MilvusColbertRetriever</span>:
     <span class="hljs-keyword">def</span> <span class="hljs-title function_">__init__</span>(<span class="hljs-params">self, milvus_client, collection_name, dim=<span class="hljs-number">128</span></span>):
@@ -324,7 +324,7 @@ retriever.<span class="hljs-title function_">create_index</span>()
     }
     retriever.insert(data)
 <button class="copy-code-btn"></button></code></pre>
-<p>Nun können wir die relevanteste Seite mit Hilfe der Abfrage-Einbettungsliste suchen.</p>
+<p>Jetzt können wir die relevanteste Seite mit Hilfe der Abfrage-Einbettungsliste suchen.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">for</span> query <span class="hljs-keyword">in</span> qs:
     query = query.<span class="hljs-built_in">float</span>().numpy()
     result = retriever.search(query, topk=<span class="hljs-number">1</span>)

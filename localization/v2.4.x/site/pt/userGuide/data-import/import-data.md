@@ -37,7 +37,7 @@ summary: Esta página demonstra o procedimento para importar os dados preparados
       </svg>
     </button></h2><ul>
 <li><p>Já preparou os seus dados e colocou-os no balde do Milvus.</p>
-<p>Caso contrário, deve usar o <strong>RemoteBulkWriter</strong> para preparar os dados primeiro e garantir que os dados preparados já tenham sido transferidos para o bucket do Milvus na instância do MinIO iniciada junto com a instância do Milvus. Para obter detalhes, consulte <a href="/docs/pt/prepare-source-data.md">Preparar dados de origem</a>.</p></li>
+<p>Caso contrário, deve utilizar <strong>RemoteBulkWriter</strong> para preparar os seus dados primeiro e garantir que os dados preparados já foram transferidos para o bucket Milvus na instância MinIO iniciada juntamente com a sua instância Milvus. Para obter detalhes, consulte <a href="/docs/pt/prepare-source-data.md">Preparar dados de origem</a>.</p></li>
 <li><p>Já criou uma coleção com o esquema que utiliza para preparar os seus dados. Caso contrário, consulte <a href="/docs/pt/manage-collections.md">Gerenciar coleções</a>.</p></li>
 </ul>
 <div class="language-python">
@@ -63,7 +63,7 @@ summary: Esta página demonstra o procedimento para importar os dados preparados
       </svg>
     </button></h2><p>Para importar os dados preparados, tem de criar um trabalho de importação da seguinte forma:</p>
 <div class="multipleCode">
- <a href="#python">Python </a> <a href="#java">Java</a> <a href="#bash">cURL</a></div>
+ <a href="#python">Python </a> <a href="#java">Java</a> <a href="#shell">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus.bulk_writer <span class="hljs-keyword">import</span> bulk_import
 
 url = <span class="hljs-string">f&quot;http://127.0.0.1:19530&quot;</span>
@@ -106,7 +106,7 @@ job_id = resp.json()[<span class="hljs-string">&#x27;data&#x27;</span>][<span cl
     <span class="hljs-type">String</span> <span class="hljs-variable">jobId</span> <span class="hljs-operator">=</span> bulkImport(batchFiles);
 }
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> MILVUS_URI=<span class="hljs-string">&quot;localhost:19530&quot;</span>
+<pre><code translate="no" class="language-shell"><span class="hljs-built_in">export</span> MILVUS_URI=<span class="hljs-string">&quot;localhost:19530&quot;</span>
 
 curl --request POST <span class="hljs-string">&quot;http://<span class="hljs-variable">${MILVUS_URI}</span>/v2/vectordb/jobs/import/create&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
@@ -169,7 +169,7 @@ curl --request POST <span class="hljs-string">&quot;http://<span class="hljs-var
       </svg>
     </button></h2><p>Depois de obter um ID de tarefa de importação, pode verificar o progresso da importação da seguinte forma:</p>
 <div class="multipleCode">
- <a href="#python">Python </a> <a href="#java">Java</a> <a href="#bash">cURL</a></div>
+ <a href="#python">Python </a> <a href="#java">Java</a> <a href="#shell">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> json
 <span class="hljs-keyword">from</span> pymilvus.bulk_writer <span class="hljs-keyword">import</span> get_import_progress
 
@@ -219,7 +219,7 @@ resp = get_import_progress(
     getImportProgress(jobId);
 }
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> MILVUS_URI=<span class="hljs-string">&quot;localhost:19530&quot;</span>
+<pre><code translate="no" class="language-shell"><span class="hljs-built_in">export</span> MILVUS_URI=<span class="hljs-string">&quot;localhost:19530&quot;</span>
 
 curl --request POST <span class="hljs-string">&quot;http://<span class="hljs-variable">${MILVUS_URI}</span>/v2/vectordb/jobs/import/describe&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
@@ -279,7 +279,7 @@ curl --request POST <span class="hljs-string">&quot;http://<span class="hljs-var
       </svg>
     </button></h2><p>Pode listar todas as tarefas de importação relativas a uma coleção específica da seguinte forma:</p>
 <div class="multipleCode">
- <a href="#python">Python </a> <a href="#java">Java</a> <a href="#bash">cURL</a></div>
+ <a href="#python">Python </a> <a href="#java">Java</a> <a href="#shell">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> json
 <span class="hljs-keyword">from</span> pymilvus.bulk_writer <span class="hljs-keyword">import</span> list_import_jobs
 
@@ -303,7 +303,7 @@ resp = list_import_jobs(
     listImportJobs();
 }
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> MILVUS_URI=<span class="hljs-string">&quot;localhost:19530&quot;</span>
+<pre><code translate="no" class="language-shell"><span class="hljs-built_in">export</span> MILVUS_URI=<span class="hljs-string">&quot;localhost:19530&quot;</span>
 
 curl --request POST <span class="hljs-string">&quot;http://<span class="hljs-variable">${MILVUS_URI}</span>/v2/vectordb/jobs/import/list&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
@@ -345,7 +345,7 @@ curl --request POST <span class="hljs-string">&quot;http://<span class="hljs-var
 <li><p>O tamanho de cada ficheiro de importação não deve exceder <strong>16 GB</strong>.</p></li>
 <li><p>O número máximo de pedidos de importação está limitado a <strong>1024</strong>.</p></li>
 <li><p>O número máximo de ficheiros por pedido de importação não deve exceder <strong>1024</strong>.</p></li>
-<li><p>Só pode ser especificado um nome de partição num pedido de importação. Se não for especificado um nome de partição, os dados serão inseridos na partição predefinida. Além disso, não pode definir um nome de partição no pedido de importação se tiver definido a Chave de partição na coleção de destino.</p></li>
+<li><p>Só pode ser especificado um nome de partição num pedido de importação. Se não for especificado nenhum nome de partição, os dados serão inseridos na partição predefinida. Além disso, não pode definir um nome de partição no pedido de importação se tiver definido a Chave de partição na coleção de destino.</p></li>
 </ul>
 <h2 id="Constraints" class="common-anchor-header">Restrições<button data-href="#Constraints" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -380,7 +380,7 @@ curl --request POST <span class="hljs-string">&quot;http://<span class="hljs-var
 <li><p>Restrições relativas ao comportamento de eliminação:</p>
 <ul>
 <li><p>Antes de o estado da tarefa de importação ser <strong>Concluído</strong>, a eliminação não é garantida e pode ou não ser bem sucedida.</p></li>
-<li><p>A eliminação após o estado da tarefa ser <strong>Concluído</strong> é garantida.</p></li>
+<li><p>A eliminação depois de o estado da tarefa ser <strong>Concluído</strong> é garantida.</p></li>
 </ul></li>
 </ul>
 <h2 id="Recommendations" class="common-anchor-header">Recomendações<button data-href="#Recommendations" class="anchor-icon" translate="no">

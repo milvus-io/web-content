@@ -179,7 +179,7 @@
     "v2.4.x/site/en/tutorials/text_image_search.md": "2024-08-30T02:20:13.855Z",
     "v2.4.x/site/en/tutorials/text_search_engine.md": "2024-08-30T02:20:13.860Z",
     "v2.4.x/site/en/tutorials/video_similarity_search.md": "2024-08-30T02:20:13.864Z",
-    "v2.4.x/site/en/userGuide/data-import/import-data.md": "2024-11-25T08:33:13.863Z",
+    "v2.4.x/site/en/userGuide/data-import/import-data.md": "2024-11-26T09:55:57.104Z",
     "v2.4.x/site/en/userGuide/data-import/prepare-source-data.md": "2024-11-25T08:33:24.593Z",
     "v2.4.x/site/en/userGuide/enable-dynamic-field.md": "2024-08-30T02:20:57.639Z",
     "v2.4.x/site/en/userGuide/insert-update-delete.md": "2024-10-22T09:21:19.825Z",
@@ -213,7 +213,7 @@
     "v2.4.x/site/en/reference/array_data_type.md": "2024-09-04T05:52:37.189Z",
     "v2.4.x/site/en/userGuide/search-query-get/single-vector-search.md": "2024-11-18T03:35:05.168Z",
     "v2.4.x/site/en/userGuide/use-json-fields.md": "2024-09-04T05:53:07.135Z",
-    "v2.4.x/site/en/menuStructure/en.json": "2024-11-25T08:39:43.656Z",
+    "v2.4.x/site/en/menuStructure/en.json": "2024-11-26T10:11:12.826Z",
     "v2.4.x/site/en/userGuide/manage-collections.md": "2024-11-18T03:34:16.027Z",
     "v2.4.x/site/en/getstarted/milvus_lite.md": "2024-09-06T02:54:42.351Z",
     "v2.4.x/site/en/release_notes.md": "2024-11-25T08:33:06.376Z",
@@ -237,9 +237,7 @@
     "v2.4.x/site/en/integrations/build_RAG_with_milvus_and_lepton.md": "2024-10-23T04:58:19.829Z",
     "v2.4.x/site/en/integrations/build_RAG_with_milvus_and_siliconflow.md": "2024-10-23T04:58:26.451Z",
     "v2.4.x/site/en/tutorials/hdbscan_clustering_with_milvus.md": "2024-10-23T04:58:41.538Z",
-    "v2.4.x/site/en/tutorials/use_ColPALI_with_milvus.md": "2024-10-23T04:58:54.439Z",
     "v2.4.x/site/en/tutorials/vector_visualization.md": "2024-10-23T04:59:02.692Z",
-    "v2.4.x/site/en/tutorials/use_ColPali_with_milvus.md": "2024-10-24T10:31:39.483Z",
     "v2.4.x/site/en/integrations/RAG_with_pii_and_milvus.md": "2024-11-11T08:30:52.828Z",
     "v2.4.x/site/en/integrations/rag_with_milvus_and_unstructured.md": "2024-11-04T02:20:06.184Z",
     "v2.4.x/site/en/integrations/use_milvus_in_private_gpt.md": "2024-11-18T03:32:49.880Z",
@@ -248,7 +246,8 @@
     "v2.4.x/site/en/integrations/quickstart_mem0_with_milvus.md": "2024-11-18T03:32:30.265Z",
     "v2.4.x/site/en/integrations/use_milvus_in_docsgpt.md": "2024-11-18T03:32:38.149Z",
     "v2.4.x/site/en/integrations/use_milvus_with_sambanova.md": "2024-11-18T03:32:57.671Z",
-    "v2.4.x/site/en/tutorials/funnel_search_with_matryoshka.md": "2024-11-18T03:33:50.166Z"
+    "v2.4.x/site/en/tutorials/funnel_search_with_matryoshka.md": "2024-11-18T03:33:50.166Z",
+    "v2.4.x/site/en/tutorials/use_ColPali_with_milvus.md": "2024-11-26T09:55:44.915Z"
   },
   "v2.3.x": {
     "v2.3.x/site/en/about/limitations.md": "2024-08-28T10:40:29.333Z",

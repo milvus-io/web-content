@@ -32,7 +32,7 @@ title: Milvusでマルチモーダル検索にColPaliを使う
     <span></span>
   </span>
 </p>
-<p>MaxSim関数は、クエリとドキュメント（検索対象）のトークン埋め込みを比較します。クエリ内の各単語について、ドキュメントから最も類似した単語を選び（コサイン類似度またはL2距離の2乗を使用）、クエリ内の全単語にわたってこれらの最大類似度を合計する。</p>
+<p>MaxSim関数は、クエリとドキュメント（検索対象）のトークン埋め込みを比較します。クエリ内の各単語について、ドキュメントから最も類似した単語を選び（コサイン類似度またはL2距離の二乗を使用）、クエリ内の全単語にわたってこれらの最大類似度を合計する。</p>
 <p>ColPali は、ColBERT のマルチベクトル表現と PaliGemma（マルチモーダル大規模言語モデル）を組み合 わせ、その強力な理解能力を活用する手法である。このアプローチにより、テキストと画像の両方を含むページを、統一されたマルチベクター埋め込みを用いて表現することができる。このマルチベクトル表現内の埋め込みは詳細な情報を捉えることができ、マルチモーダルデータに対する検索支援生成（RAG）の性能を向上させる。</p>
 <p>このノートブックでは、一般性のために、この種のマルチベクトル表現を「ColBERT埋め込み」と呼ぶ。しかし、実際に使われているモデルは<strong>ColPaliモデル</strong>である。Milvusをマルチベクトル検索に利用する方法を紹介する。その上で、与えられたクエリに基づいてページを検索するためのColPaliの使い方を紹介する。</p>
 <h2 id="Preparation" class="common-anchor-header">準備<button data-href="#Preparation" class="anchor-icon" translate="no">
@@ -91,7 +91,7 @@ client = <span class="hljs-title class_">MilvusClient</span>(uri=<span class="hl
 <ul>
 <li>小規模なデータやプロトタイピングのためにローカルのベクターデータベースが必要なだけであれば、uriをローカルファイル、例えば<code translate="no">./milvus.db</code> に設定するのが最も便利な方法です。</li>
 <li>もし、100万ベクトルを超えるような大規模なデータがある場合は、<a href="https://milvus.io/docs/quickstart.md">DockerやKubernetes</a>上に、よりパフォーマンスの高いMilvusサーバを構築することができます。このセットアップでは、サーバのアドレスとポートをURIとして使用してください（例：<code translate="no">http://localhost:19530</code> ）。Milvusで認証機能を有効にしている場合、トークンには"&lt;your_username&gt;:&lt;your_password&gt;"を使用します。</li>
-<li>Milvusのフルマネージドクラウドサービスである<a href="https://zilliz.com/cloud">Milvus Cloudを</a>利用する場合は、Milvus Cloudの<a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#cluster-details">Public EndpointとAPI Keyに</a>対応する<code translate="no">uri</code> と<code translate="no">token</code> を調整してください。</li>
+<li>Milvusのフルマネージドクラウドサービスである<a href="https://zilliz.com/cloud">Milvus Cloudを</a>利用する場合は、Milvus Cloudの<a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#cluster-details">Public EndpointとAPI keyに</a>対応する<code translate="no">uri</code> と<code translate="no">token</code> を調整してください。</li>
 </ul>
 </div>
 <p>MilvusColbertRetrieverクラスを定義し、Milvusクライアントをラップしてマルチベクターデータを取得できるようにします。この実装は、ColBERT 埋め込みデータを平坦化し、コレクションに挿入する。また、各埋め込みの出所を追跡するために、doc_id と seq_id を記録する。</p>
@@ -236,7 +236,7 @@ client = <span class="hljs-title class_">MilvusClient</span>(uri=<span class="hl
             ],
         )
 <button class="copy-code-btn"></button></code></pre>
-<p><a href="https://github.com/illuin-tech/colpali">colpali_engineを</a>使用して、2つのクエリに対する埋め込みリストを抽出し、PDFページから関連情報を取得します。</p>
+<p><a href="https://github.com/illuin-tech/colpali">colpali_engineを</a>使用して、2つのクエリに対する埋め込みリストを抽出し、PDFページから関連する情報を取得します。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> colpali_engine.models <span class="hljs-keyword">import</span> ColPali
 <span class="hljs-keyword">from</span> colpali_engine.models.paligemma.colpali.processing_colpali <span class="hljs-keyword">import</span> ColPaliProcessor
 <span class="hljs-keyword">from</span> colpali_engine.utils.processing_utils <span class="hljs-keyword">import</span> BaseVisualRetrieverProcessor
