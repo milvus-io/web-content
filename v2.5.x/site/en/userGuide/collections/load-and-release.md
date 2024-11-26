@@ -9,7 +9,7 @@ Loading a collection is the prerequisite to conducting similarity searches and q
 
 ## Load Collection​
 
-When you load a collection, Zilliz Cloud loads the index files and the raw data of all fields into memory for rapid response to searches and queries. Entities inserted after a collection load are automatically indexed and loaded.​
+When you load a collection, Milvus loads the index files and the raw data of all fields into memory for rapid response to searches and queries. Entities inserted after a collection load are automatically indexed and loaded.​
 
 The following code snippets demonstrate how to load a collection.​
 
@@ -179,7 +179,7 @@ curl --request POST \​
 
 ## Load Specific Fields​
 
-Zilliz Cloud can load only the fields involved in searches and queries, reducing memory usage and improving search performance.​
+Milvus can load only the fields involved in searches and queries, reducing memory usage and improving search performance.​
 
 The following code snippet assumes that you have created a collection named **customized_setup_2**, and there are two fields named **my_id** and **my_vector** in the collection.​
 

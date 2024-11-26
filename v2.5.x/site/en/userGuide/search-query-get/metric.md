@@ -8,7 +8,7 @@ title: Metric Types
 
 Similarity metrics are used to measure similarities among vectors. Choosing an appropriate distance metric helps improve classification and clustering performance significantly.​
 
-Currently, Zilliz Cloud supports these types of similarity Metrics: Euclidean distance (`L2`), Inner Product (`IP`), Cosine Similarity (`COSINE`), `JACCARD`, `HAMMING`, and `BM25` (specifically designed for full text search on sparse vectors).​
+Currently, Milvus supports these types of similarity Metrics: Euclidean distance (`L2`), Inner Product (`IP`), Cosine Similarity (`COSINE`), `JACCARD`, `HAMMING`, and `BM25` (specifically designed for full text search on sparse vectors).​
 
 The table below summarizes the mapping between different field types and their corresponding metric types.​
 
@@ -136,7 +136,7 @@ It's the most commonly used distance metric and is very useful when the data are
 
 <div class="alert note">
 
-Zilliz Cloud only calculates the value before applying the square root when Euclidean distance is chosen as the distance metric.​
+Milvus only calculates the value before applying the square root when Euclidean distance is chosen as the distance metric.​
 
 </div>
 

@@ -9,7 +9,7 @@ A partition is a subset of a collection. Each partition shares the same data str
 
 ## Overview​
 
-When creating a collection, Zilliz Cloud also creates a partition named **_default** in the collection. If you are not going to add any other partitions, all entities inserted into the collection go into the default partition, and all searches and queries are also carried out within the default partition.​
+When creating a collection, Milvus also creates a partition named **_default** in the collection. If you are not going to add any other partitions, all entities inserted into the collection go into the default partition, and all searches and queries are also carried out within the default partition.​
 
 You can add more partitions and insert entities into them based on certain criteria. Then you can restrict your searches and queries within certain partitions, improving search performance.​
 
@@ -17,7 +17,7 @@ A collection can have a maximum of 1,024 partitions.​
 
 <div class="alert note">
 
-The **Partition Key** feature is a search optimization based on partitions and allows Zilliz Cloud to distribute entities into different partitions based on the values in a specific scalar field. This feature helps implement partition-oriented multi-tenancy and improves search performance.​
+The **Partition Key** feature is a search optimization based on partitions and allows Milvus to distribute entities into different partitions based on the values in a specific scalar field. This feature helps implement partition-oriented multi-tenancy and improves search performance.​
 
 This feature will not be discussed on this page. To find more, refer to [​Use Partition Key](use-partition-key.md).​
 
@@ -25,7 +25,7 @@ This feature will not be discussed on this page. To find more, refer to [​Use 
 
 ## List Partitions​
 
-When creating a collection, Zilliz Cloud also creates a partition named **_default** in the collection. You can list the partitions in a collection as follows.​
+When creating a collection, Milvus also creates a partition named **_default** in the collection. You can list the partitions in a collection as follows.​
 
 <div class="multipleCode">
   <a href="#python">Python </a>

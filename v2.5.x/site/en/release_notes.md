@@ -20,9 +20,9 @@ Milvus 2.5.0-beta brings significant advancements to enhance usability, scalabil
 
 ### Key Features
 
-#### Doc In Doc Out/BM25
+#### Full Text Search
 
-Keyword-based full-text search is an important complement to Milvus's strong semantic search capabilities, especially in scenarios involving rare words or technical terms. In previous versions, Milvus supported sparse vectors to assist with keyword search scenarios. These sparse vectors were generated outside of Milvus by neural models like SPLADEv2/BGE-M3 or statistical models such as the BM25 algorithm.
+Milvus2.5 supports full text search implemented with Sparse-BM25! This feature is an important complement to Milvus's strong semantic search capabilities, especially in scenarios involving rare words or technical terms. In previous versions, Milvus supported sparse vectors to assist with keyword search scenarios. These sparse vectors were generated outside of Milvus by neural models like SPLADEv2/BGE-M3 or statistical models such as the BM25 algorithm.
 
 In Milvus 2.5, tokenization and sparse vector extraction are now built-in, truly realizing "Doc-In-Doc-Out" instead of the previous "Vec-in-vec-out" approach. BM25 statistical information is updated in real time as data is inserted, enhancing usability and accuracy. Additionally, sparse vectors based on approximate nearest neighbor (ANN) algorithms offer more powerful performance than standard keyword search systems.
 
@@ -48,7 +48,7 @@ Bitmap indexes have traditionally been effective for low-cardinality columns, wh
 
 For details, refer to [Bitmap Index](bitmap.md).
 
-#### Default Value & Null
+#### Nullable & Default Value
 
 Milvus now supports setting nullable properties and default values for scalar fields other than the primary key field. For fields marked as `nullable=True`, users can omit the field when inserting data; the system will treat it as a null value or default value (if set) without throwing an error.
 

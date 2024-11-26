@@ -7,7 +7,7 @@ title: Ba​sic ANN Search
 
 # Ba​sic ANN Search
 
-Based on an index file recording the sorted order of vector embeddings, the Approximate Nearest Neighbor (ANN) search locates a subset of vector embeddings based on the query vector carried in a received search request, compares the query vector with those in the subgroup, and returns the most similar results. With ANN search, Zilliz Cloud provides an efficient search experience. This page helps you to learn how to conduct basic ANN searches.​
+Based on an index file recording the sorted order of vector embeddings, the Approximate Nearest Neighbor (ANN) search locates a subset of vector embeddings based on the query vector carried in a received search request, compares the query vector with those in the subgroup, and returns the most similar results. With ANN search, Milvus provides an efficient search experience. This page helps you to learn how to conduct basic ANN searches.​
 
 ## Overview​
 
@@ -17,7 +17,7 @@ Unlike kNN searches, an ANN search algorithm asks for an **index** file that rec
 
 ANN searches depend on pre-built indexes, and the search throughput, memory usage, and search correctness may vary with the index types you choose. You need to balance search performance and correctness. ​
 
-To reduce the learning curve, Zilliz Cloud provides **AUTOINDEX**. With **AUTOINDEX**, Zilliz Cloud can analyze the data distribution within your collection while building the index and sets the most optimized index parameters based on the analysis to strike a balance between search performance and correctness. ​
+To reduce the learning curve, Milvus provides **AUTOINDEX**. With **AUTOINDEX**, Milvus can analyze the data distribution within your collection while building the index and sets the most optimized index parameters based on the analysis to strike a balance between search performance and correctness. ​
 
 For details on AUTOINDEX and applicable metric types, refer to [​AUTOINDEX](https://milvus.io/docs/glossary.md#Auto-Index) and [​Metric Types](metric.md). In this section, you will find detailed information about the following topics:​
 
@@ -35,9 +35,9 @@ For details on AUTOINDEX and applicable metric types, refer to [​AUTOINDEX](ht
 
 ## Single-Vector Search​
 
-In ANN searches, a single-vector search refers to a search that involves only one query vector. Based on the pre-built index and the metric type carried in the search request, Zilliz Cloud will find the top-K vectors most similar to the query vector.​
+In ANN searches, a single-vector search refers to a search that involves only one query vector. Based on the pre-built index and the metric type carried in the search request, Milvus will find the top-K vectors most similar to the query vector.​
 
-In this section, you will learn how to conduct a single-vector search. The code snippet assumes you have created a collection in a [quick-setup](create-collection-instantly#Quick-Setup) manner. The search request carries a single query vector and asks Zilliz Cloud to use Inner Product (IP) to calculate the similarity between query vectors and vectors in the collection and returns the three most similar ones.​
+In this section, you will learn how to conduct a single-vector search. The code snippet assumes you have created a collection in a [quick-setup](create-collection-instantly#Quick-Setup) manner. The search request carries a single query vector and asks Milvus to use Inner Product (IP) to calculate the similarity between query vectors and vectors in the collection and returns the three most similar ones.​
 
 <div class="multipleCode">
   <a href="#python">Python </a>
@@ -286,7 +286,7 @@ The following table lists the applicable metric types and the corresponding dist
 
 ## Bulk-Vector Search​
 
-Similarly, you can include multiple query vectors in a search request. Zilliz Cloud will conduct ANN searches for the query vectors in parallel and return two sets of results.​
+Similarly, you can include multiple query vectors in a search request. Milvus will conduct ANN searches for the query vectors in parallel and return two sets of results.​
 
 <div class="multipleCode">
   <a href="#python">Python </a>
@@ -627,7 +627,7 @@ curl --request POST \​
 
 ## Use Output Fields​
 
-In a search result, Zilliz Cloud includes the primary field values and similarity distances/scores of the entities that contain the top-K vector embeddings by default. You can include the target field names in a search request as the output fields to make the search results carry the values from other fields in these entities.​
+In a search result, Milvus includes the primary field values and similarity distances/scores of the entities that contain the top-K vector embeddings by default. You can include the target field names in a search request as the output fields to make the search results carry the values from other fields in these entities.​
 
 <div class="multipleCode">
   <a href="#python">Python </a>
@@ -908,17 +908,17 @@ curl --request POST \​
 
 ## Enhancing ANN Search​
 
-AUTOINDEX considerably flattens the learning curve of ANN searches. However, the search results may not always be correct as the top-K increases. By reducing the search scope, improving search result relevancy, and diversifying the search results, Zilliz Cloud works out the following search enhancements.​
+AUTOINDEX considerably flattens the learning curve of ANN searches. However, the search results may not always be correct as the top-K increases. By reducing the search scope, improving search result relevancy, and diversifying the search results, Milvus works out the following search enhancements.​
 
 - Filtered Search​
 
-    You can include filtering conditions in a search request so that Zilliz Cloud conducts metadata filtering before conducting ANN searches, reducing the search scope from the whole collection to only the entities matching the specified filtering conditions.​
+    You can include filtering conditions in a search request so that Milvus conducts metadata filtering before conducting ANN searches, reducing the search scope from the whole collection to only the entities matching the specified filtering conditions.​
 
     For more about metadata filtering and filtering conditions, refer to [​Filtered Search](filtered-search.md) and [​Metadata Filtering](boolean.md).​
 
 - Range Search​
 
-    You can improve search result relevancy by restricting the distance or score of the returned entities within a specific range. In Zilliz Cloud, a range search involves drawing two concentric circles with the vector embedding most similar to the query vector as the center. The search request specifies the radius of both circles, and Zilliz Cloud returns all vector embeddings that fall within the outer circle but not the inner circle.​
+    You can improve search result relevancy by restricting the distance or score of the returned entities within a specific range. In Milvus, a range search involves drawing two concentric circles with the vector embedding most similar to the query vector as the center. The search request specifies the radius of both circles, and Milvus returns all vector embeddings that fall within the outer circle but not the inner circle.​
 
     For more about range search, refer to [​Range Search](range-search.md).​
 
