@@ -325,27 +325,304 @@
     "order": 3,
     "children": [
       {
-        "label": "Gerir bases de dados",
+        "label": "Base de dados",
         "id": "manage_databases.md",
         "order": 0,
         "children": []
       },
       {
-        "label": "Gerir o esquema",
-        "id": "schema.md",
+        "label": "Colecções",
+        "id": "collections",
         "order": 1,
-        "children": []
+        "children": [
+          {
+            "label": "Explicação da coleção",
+            "id": "manage-collections.md",
+            "order": 0,
+            "children": []
+          },
+          {
+            "label": "Criar coleção",
+            "id": "create-collection.md",
+            "order": 1,
+            "children": []
+          },
+          {
+            "label": "Criar coleção instantaneamente",
+            "id": "create-collection-instantly.md",
+            "order": 2,
+            "children": []
+          },
+          {
+            "label": "Ver colecções",
+            "id": "view-collections.md",
+            "order": 3,
+            "children": []
+          },
+          {
+            "label": "Modificar coleção",
+            "id": "modify-collection.md",
+            "order": 4,
+            "children": []
+          },
+          {
+            "label": "Carregar e libertar",
+            "id": "load-and-release.md",
+            "order": 5,
+            "children": []
+          },
+          {
+            "label": "Gerir partições",
+            "id": "manage-partitions.md",
+            "order": 6,
+            "children": []
+          },
+          {
+            "label": "Gerir pseudónimos",
+            "id": "manage-aliases.md",
+            "order": 7,
+            "children": []
+          },
+          {
+            "label": "Recolha de gotas",
+            "id": "drop-collection.md",
+            "order": 8,
+            "children": []
+          }
+        ]
       },
       {
-        "label": "Gerir colecções",
-        "id": "manage-collections.md",
+        "label": "Esquema e campos de dados",
+        "id": "schema",
         "order": 2,
-        "children": []
+        "children": [
+          {
+            "label": "Esquema explicado",
+            "id": "schema.md",
+            "order": 0,
+            "children": []
+          },
+          {
+            "label": "Campo primário e auto-identificação",
+            "id": "primary-field.md",
+            "order": 1,
+            "children": []
+          },
+          {
+            "label": "Vetor denso",
+            "id": "dense-vector.md",
+            "order": 2,
+            "children": []
+          },
+          {
+            "label": "Vetor binário",
+            "id": "binary-vector.md",
+            "order": 3,
+            "children": []
+          },
+          {
+            "label": "Vetor esparso",
+            "id": "sparse_vector.md",
+            "order": 4,
+            "children": []
+          },
+          {
+            "label": "Campo de cordas",
+            "id": "string.md",
+            "order": 5,
+            "children": []
+          },
+          {
+            "label": "Campo de números",
+            "id": "number.md",
+            "order": 6,
+            "children": []
+          },
+          {
+            "label": "Campo JSON",
+            "id": "use-json-fields.md",
+            "order": 7,
+            "children": []
+          },
+          {
+            "label": "Campo de matriz",
+            "id": "array.md",
+            "order": 8,
+            "children": []
+          },
+          {
+            "label": "Campo dinâmico",
+            "id": "enable-dynamic-field.md",
+            "order": 9,
+            "children": []
+          },
+          {
+            "label": "Anulável e por defeito",
+            "id": "nullable-and-default.md",
+            "order": 10,
+            "children": []
+          },
+          {
+            "label": "Analisador",
+            "id": "analyzer",
+            "order": 11,
+            "children": [
+              {
+                "label": "Visão geral do analisador",
+                "id": "analyzer-overview.md",
+                "order": 0,
+                "children": []
+              },
+              {
+                "label": "Analisadores incorporados",
+                "id": "built-in-analyzers",
+                "order": 1,
+                "children": [
+                  {
+                    "label": "Padrão",
+                    "id": "standard-analyzer.md",
+                    "order": 0,
+                    "children": []
+                  },
+                  {
+                    "label": "Inglês",
+                    "id": "english-analyzer.md",
+                    "order": 1,
+                    "children": []
+                  },
+                  {
+                    "label": "Chinês",
+                    "id": "chinese-analyzer.md",
+                    "order": 2,
+                    "children": []
+                  }
+                ]
+              },
+              {
+                "label": "Tokenizadores",
+                "id": "tokenizers",
+                "order": 2,
+                "children": [
+                  {
+                    "label": "Padrão",
+                    "id": "standard-tokenizer.md",
+                    "order": 0,
+                    "children": []
+                  },
+                  {
+                    "label": "Espaço em branco",
+                    "id": "whitespace-tokenizer.md",
+                    "order": 1,
+                    "children": []
+                  },
+                  {
+                    "label": "Jieba",
+                    "id": "jieba-tokenizer.md",
+                    "order": 1,
+                    "children": []
+                  }
+                ]
+              },
+              {
+                "label": "Filtros",
+                "id": "filters",
+                "order": 3,
+                "children": [
+                  {
+                    "label": "Minúsculas",
+                    "id": "lowercase-filter.md",
+                    "order": 0,
+                    "children": []
+                  },
+                  {
+                    "label": "Dobragem ASCII",
+                    "id": "ascii-folding-filter.md",
+                    "order": 1,
+                    "children": []
+                  },
+                  {
+                    "label": "Apenas alfanuméricos",
+                    "id": "alphanumonly-filter.md",
+                    "order": 2,
+                    "children": []
+                  },
+                  {
+                    "label": "Cnalphanumonly",
+                    "id": "cnalphanumonly-filter.md",
+                    "order": 3,
+                    "children": []
+                  },
+                  {
+                    "label": "Cncharonly",
+                    "id": "cncharonly-filter.md",
+                    "order": 4,
+                    "children": []
+                  },
+                  {
+                    "label": "Comprimento",
+                    "id": "length-filter.md",
+                    "order": 5,
+                    "children": []
+                  },
+                  {
+                    "label": "Parar",
+                    "id": "stop-filter.md",
+                    "order": 6,
+                    "children": []
+                  },
+                  {
+                    "label": "Descompactador",
+                    "id": "decompounder-filter.md",
+                    "order": 7,
+                    "children": []
+                  },
+                  {
+                    "label": "Ferrão",
+                    "id": "stemmer-filter.md",
+                    "order": 8,
+                    "children": []
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "label": "Mãos à obra",
+            "id": "schema-hands-on.md",
+            "order": 12,
+            "children": []
+          }
+        ]
+      },
+      {
+        "label": "Inserir e apagar",
+        "id": "insert-and-delete",
+        "order": 3,
+        "children": [
+          {
+            "label": "Inserir entidades",
+            "id": "insert-update-delete.md",
+            "order": 0,
+            "children": []
+          },
+          {
+            "label": "Upsert Entidades",
+            "id": "upsert-entities.md",
+            "order": 1,
+            "children": []
+          },
+          {
+            "label": "Eliminar entidades",
+            "id": "delete-entities.md",
+            "order": 2,
+            "children": []
+          }
+        ]
       },
       {
         "label": "Gerir índices",
         "id": "manage_indexes",
-        "order": 3,
+        "order": 4,
         "isMenu": true,
         "children": [
           {
@@ -369,16 +646,108 @@
         ]
       },
       {
-        "label": "Gerir partições",
-        "id": "manage-partitions.md",
-        "order": 4,
-        "children": []
-      },
-      {
-        "label": "Inserir, Upsert e Apagar",
-        "id": "insert-update-delete.md",
+        "label": "Pesquisar e reposicionar",
+        "id": "search-rerank",
         "order": 5,
-        "children": []
+        "isMenu": true,
+        "children": [
+          {
+            "label": "Pesquisa ANN básica",
+            "id": "single-vector-search.md",
+            "order": 0,
+            "children": []
+          },
+          {
+            "label": "Pesquisa filtrada",
+            "id": "filtered-search.md",
+            "order": 1,
+            "children": []
+          },
+          {
+            "label": "Pesquisa de alcance",
+            "id": "range-search.md",
+            "order": 2,
+            "children": []
+          },
+          {
+            "label": "Pesquisa de agrupamento",
+            "id": "grouping-search.md",
+            "order": 3,
+            "children": []
+          },
+          {
+            "label": "Pesquisa híbrida",
+            "id": "multi-vector-search.md",
+            "order": 4,
+            "children": []
+          },
+          {
+            "label": "Consulta",
+            "id": "get-and-scalar-query.md",
+            "order": 5,
+            "children": []
+          },
+          {
+            "label": "Pesquisa de texto integral",
+            "id": "full-text-search.md",
+            "order": 6,
+            "children": []
+          },
+          {
+            "label": "Correspondência de palavras-chave",
+            "id": "keyword-match.md",
+            "order": 7,
+            "children": []
+          },
+          {
+            "label": "Iteradores de pesquisa",
+            "id": "with-iterators.md",
+            "order": 8,
+            "children": []
+          },
+          {
+            "label": "Utilizar chave de partição",
+            "id": "use-partition-key.md",
+            "order": 9,
+            "children": []
+          },
+          {
+            "label": "Utilizar o mmap",
+            "id": "mmap.md",
+            "order": 10,
+            "children": []
+          },
+          {
+            "label": "Compactação de clusters",
+            "id": "clustering-compaction.md",
+            "order": 11,
+            "children": []
+          },
+          {
+            "label": "Nível de consistência",
+            "id": "consistency.md",
+            "order": 12,
+            "children": []
+          },
+          {
+            "label": "Tipos métricos",
+            "id": "metric.md",
+            "order": 13,
+            "children": []
+          },
+          {
+            "label": "Filtragem de metadados",
+            "id": "boolean.md",
+            "order": 14,
+            "children": []
+          },
+          {
+            "label": "Reranking",
+            "id": "reranking.md",
+            "order": 15,
+            "children": []
+          }
+        ]
       },
       {
         "label": "Importação de dados",
@@ -396,100 +765,6 @@
             "label": "Importar dados",
             "id": "import-data.md",
             "order": 1,
-            "children": []
-          }
-        ]
-      },
-      {
-        "label": "Pesquisar, consultar e obter",
-        "id": "search_query_get",
-        "order": 7,
-        "isMenu": true,
-        "children": [
-          {
-            "label": "Pesquisa de vetor único",
-            "id": "single-vector-search.md",
-            "order": 0,
-            "children": []
-          },
-          {
-            "label": "Pesquisa híbrida",
-            "id": "multi-vector-search.md",
-            "order": 1,
-            "children": []
-          },
-          {
-            "label": "Consulta Get &amp; Scalar",
-            "id": "get-and-scalar-query.md",
-            "order": 2,
-            "children": []
-          },
-          {
-            "label": "Com Iteradores",
-            "id": "with-iterators.md",
-            "order": 3,
-            "children": []
-          }
-        ]
-      },
-      {
-        "label": "Funcionalidades avançadas",
-        "id": "advanced_features",
-        "order": 8,
-        "isMenu": true,
-        "children": [
-          {
-            "label": "Campo dinâmico",
-            "id": "enable-dynamic-field.md",
-            "order": 0,
-            "children": []
-          },
-          {
-            "label": "Chave de partição",
-            "id": "use-partition-key.md",
-            "order": 1,
-            "children": []
-          },
-          {
-            "label": "Campo JSON",
-            "id": "use-json-fields.md",
-            "order": 2,
-            "children": []
-          },
-          {
-            "label": "Campo de matriz",
-            "id": "array_data_type.md",
-            "order": 3,
-            "children": []
-          },
-          {
-            "label": "Vetor esparso",
-            "id": "sparse_vector.md",
-            "order": 4,
-            "children": []
-          },
-          {
-            "label": "Regras de filtragem escalar",
-            "id": "boolean.md",
-            "order": 5,
-            "children": []
-          },
-          {
-            "label": "Armazenamento MMap",
-            "id": "mmap.md",
-            "order": 6,
-            "children": []
-          },
-          {
-            "label": "Gerir grupos de recursos",
-            "id": "resource_group.md",
-            "order": 7,
-            "children": []
-          },
-          {
-            "label": "Compactação de clusters",
-            "id": "clustering-compaction.md",
-            "order": 8,
             "children": []
           }
         ]
@@ -1040,9 +1315,22 @@
         ]
       },
       {
+        "label": "Grupos de recursos",
+        "id": "resource_groups",
+        "order": 9,
+        "children": [
+          {
+            "label": "Gerir grupos de recursos",
+            "id": "resource_group.md",
+            "order": 0,
+            "children": []
+          }
+        ]
+      },
+      {
         "label": "Segurança",
         "id": "security",
-        "order": 9,
+        "order": 10,
         "isMenu": true,
         "children": [
           {
@@ -1721,7 +2009,7 @@
     ]
   },
   {
-    "label": "Perguntas frequentes",
+    "label": "FAQs",
     "id": "faq",
     "isMenu": true,
     "order": 9,

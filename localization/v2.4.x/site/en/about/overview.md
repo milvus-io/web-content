@@ -153,7 +153,7 @@ summary: >-
 <li><a href="/docs/sparse_vector.md">Sparse Vectors</a></li>
 <li><a href="/docs/index-vector-fields.md">Binary Vectors</a></li>
 <li><a href="/docs/use-json-fields.md">JSON Support</a></li>
-<li><a href="/docs/array_data_type.md">Array Support</a></li>
+<li><a href="/docs/array.md">Array Support</a></li>
 <li><a href="/docs/metric.md">Distance Metrics</a></li>
 </ul>
 <h3 id="Acceleration" class="common-anchor-header">Acceleration</h3><ul>

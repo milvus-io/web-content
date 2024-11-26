@@ -325,27 +325,304 @@
     "order": 3,
     "children": [
       {
-        "label": "데이터베이스 관리",
+        "label": "데이터베이스",
         "id": "manage_databases.md",
         "order": 0,
         "children": []
       },
       {
-        "label": "스키마 관리",
-        "id": "schema.md",
+        "label": "컬렉션",
+        "id": "collections",
         "order": 1,
-        "children": []
+        "children": [
+          {
+            "label": "컬렉션 설명",
+            "id": "manage-collections.md",
+            "order": 0,
+            "children": []
+          },
+          {
+            "label": "컬렉션 만들기",
+            "id": "create-collection.md",
+            "order": 1,
+            "children": []
+          },
+          {
+            "label": "즉시 컬렉션 생성",
+            "id": "create-collection-instantly.md",
+            "order": 2,
+            "children": []
+          },
+          {
+            "label": "컬렉션 보기",
+            "id": "view-collections.md",
+            "order": 3,
+            "children": []
+          },
+          {
+            "label": "컬렉션 수정",
+            "id": "modify-collection.md",
+            "order": 4,
+            "children": []
+          },
+          {
+            "label": "로드 및 릴리스",
+            "id": "load-and-release.md",
+            "order": 5,
+            "children": []
+          },
+          {
+            "label": "파티션 관리",
+            "id": "manage-partitions.md",
+            "order": 6,
+            "children": []
+          },
+          {
+            "label": "별칭 관리",
+            "id": "manage-aliases.md",
+            "order": 7,
+            "children": []
+          },
+          {
+            "label": "드롭 컬렉션",
+            "id": "drop-collection.md",
+            "order": 8,
+            "children": []
+          }
+        ]
       },
       {
-        "label": "컬렉션 관리",
-        "id": "manage-collections.md",
+        "label": "스키마 및 데이터 필드",
+        "id": "schema",
         "order": 2,
-        "children": []
+        "children": [
+          {
+            "label": "스키마 설명",
+            "id": "schema.md",
+            "order": 0,
+            "children": []
+          },
+          {
+            "label": "기본 필드 및 자동 ID",
+            "id": "primary-field.md",
+            "order": 1,
+            "children": []
+          },
+          {
+            "label": "고밀도 벡터",
+            "id": "dense-vector.md",
+            "order": 2,
+            "children": []
+          },
+          {
+            "label": "바이너리 벡터",
+            "id": "binary-vector.md",
+            "order": 3,
+            "children": []
+          },
+          {
+            "label": "스파스 벡터",
+            "id": "sparse_vector.md",
+            "order": 4,
+            "children": []
+          },
+          {
+            "label": "문자열 필드",
+            "id": "string.md",
+            "order": 5,
+            "children": []
+          },
+          {
+            "label": "숫자 필드",
+            "id": "number.md",
+            "order": 6,
+            "children": []
+          },
+          {
+            "label": "JSON 필드",
+            "id": "use-json-fields.md",
+            "order": 7,
+            "children": []
+          },
+          {
+            "label": "배열 필드",
+            "id": "array.md",
+            "order": 8,
+            "children": []
+          },
+          {
+            "label": "다이내믹 필드",
+            "id": "enable-dynamic-field.md",
+            "order": 9,
+            "children": []
+          },
+          {
+            "label": "무효화 가능 및 기본값",
+            "id": "nullable-and-default.md",
+            "order": 10,
+            "children": []
+          },
+          {
+            "label": "분석기",
+            "id": "analyzer",
+            "order": 11,
+            "children": [
+              {
+                "label": "분석기 개요",
+                "id": "analyzer-overview.md",
+                "order": 0,
+                "children": []
+              },
+              {
+                "label": "내장 분석기",
+                "id": "built-in-analyzers",
+                "order": 1,
+                "children": [
+                  {
+                    "label": "표준",
+                    "id": "standard-analyzer.md",
+                    "order": 0,
+                    "children": []
+                  },
+                  {
+                    "label": "영어",
+                    "id": "english-analyzer.md",
+                    "order": 1,
+                    "children": []
+                  },
+                  {
+                    "label": "중국어",
+                    "id": "chinese-analyzer.md",
+                    "order": 2,
+                    "children": []
+                  }
+                ]
+              },
+              {
+                "label": "토큰화 도구",
+                "id": "tokenizers",
+                "order": 2,
+                "children": [
+                  {
+                    "label": "표준",
+                    "id": "standard-tokenizer.md",
+                    "order": 0,
+                    "children": []
+                  },
+                  {
+                    "label": "공백",
+                    "id": "whitespace-tokenizer.md",
+                    "order": 1,
+                    "children": []
+                  },
+                  {
+                    "label": "Jieba",
+                    "id": "jieba-tokenizer.md",
+                    "order": 1,
+                    "children": []
+                  }
+                ]
+              },
+              {
+                "label": "필터",
+                "id": "filters",
+                "order": 3,
+                "children": [
+                  {
+                    "label": "소문자",
+                    "id": "lowercase-filter.md",
+                    "order": 0,
+                    "children": []
+                  },
+                  {
+                    "label": "ASCII 접기",
+                    "id": "ascii-folding-filter.md",
+                    "order": 1,
+                    "children": []
+                  },
+                  {
+                    "label": "알파벳 전용",
+                    "id": "alphanumonly-filter.md",
+                    "order": 2,
+                    "children": []
+                  },
+                  {
+                    "label": "Cnalphanumonly",
+                    "id": "cnalphanumonly-filter.md",
+                    "order": 3,
+                    "children": []
+                  },
+                  {
+                    "label": "Cncharonly",
+                    "id": "cncharonly-filter.md",
+                    "order": 4,
+                    "children": []
+                  },
+                  {
+                    "label": "길이",
+                    "id": "length-filter.md",
+                    "order": 5,
+                    "children": []
+                  },
+                  {
+                    "label": "중지",
+                    "id": "stop-filter.md",
+                    "order": 6,
+                    "children": []
+                  },
+                  {
+                    "label": "디컴파운더",
+                    "id": "decompounder-filter.md",
+                    "order": 7,
+                    "children": []
+                  },
+                  {
+                    "label": "스템머",
+                    "id": "stemmer-filter.md",
+                    "order": 8,
+                    "children": []
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "label": "실습",
+            "id": "schema-hands-on.md",
+            "order": 12,
+            "children": []
+          }
+        ]
+      },
+      {
+        "label": "삽입 및 삭제",
+        "id": "insert-and-delete",
+        "order": 3,
+        "children": [
+          {
+            "label": "엔티티 삽입",
+            "id": "insert-update-delete.md",
+            "order": 0,
+            "children": []
+          },
+          {
+            "label": "엔티티 업서트",
+            "id": "upsert-entities.md",
+            "order": 1,
+            "children": []
+          },
+          {
+            "label": "엔티티 삭제",
+            "id": "delete-entities.md",
+            "order": 2,
+            "children": []
+          }
+        ]
       },
       {
         "label": "인덱스 관리",
         "id": "manage_indexes",
-        "order": 3,
+        "order": 4,
         "isMenu": true,
         "children": [
           {
@@ -369,16 +646,108 @@
         ]
       },
       {
-        "label": "파티션 관리",
-        "id": "manage-partitions.md",
-        "order": 4,
-        "children": []
-      },
-      {
-        "label": "삽입, 업서트 및 삭제",
-        "id": "insert-update-delete.md",
+        "label": "검색 및 순위 재조정",
+        "id": "search-rerank",
         "order": 5,
-        "children": []
+        "isMenu": true,
+        "children": [
+          {
+            "label": "기본 ANN 검색",
+            "id": "single-vector-search.md",
+            "order": 0,
+            "children": []
+          },
+          {
+            "label": "필터링된 검색",
+            "id": "filtered-search.md",
+            "order": 1,
+            "children": []
+          },
+          {
+            "label": "범위 검색",
+            "id": "range-search.md",
+            "order": 2,
+            "children": []
+          },
+          {
+            "label": "그룹 검색",
+            "id": "grouping-search.md",
+            "order": 3,
+            "children": []
+          },
+          {
+            "label": "하이브리드 검색",
+            "id": "multi-vector-search.md",
+            "order": 4,
+            "children": []
+          },
+          {
+            "label": "쿼리",
+            "id": "get-and-scalar-query.md",
+            "order": 5,
+            "children": []
+          },
+          {
+            "label": "전체 텍스트 검색",
+            "id": "full-text-search.md",
+            "order": 6,
+            "children": []
+          },
+          {
+            "label": "키워드 검색",
+            "id": "keyword-match.md",
+            "order": 7,
+            "children": []
+          },
+          {
+            "label": "검색 이터레이터",
+            "id": "with-iterators.md",
+            "order": 8,
+            "children": []
+          },
+          {
+            "label": "파티션 키 사용",
+            "id": "use-partition-key.md",
+            "order": 9,
+            "children": []
+          },
+          {
+            "label": "mmap 사용",
+            "id": "mmap.md",
+            "order": 10,
+            "children": []
+          },
+          {
+            "label": "클러스터링 압축",
+            "id": "clustering-compaction.md",
+            "order": 11,
+            "children": []
+          },
+          {
+            "label": "일관성 수준",
+            "id": "consistency.md",
+            "order": 12,
+            "children": []
+          },
+          {
+            "label": "메트릭 유형",
+            "id": "metric.md",
+            "order": 13,
+            "children": []
+          },
+          {
+            "label": "메타데이터 필터링",
+            "id": "boolean.md",
+            "order": 14,
+            "children": []
+          },
+          {
+            "label": "순위 재조정",
+            "id": "reranking.md",
+            "order": 15,
+            "children": []
+          }
+        ]
       },
       {
         "label": "데이터 가져오기",
@@ -396,100 +765,6 @@
             "label": "데이터 가져오기",
             "id": "import-data.md",
             "order": 1,
-            "children": []
-          }
-        ]
-      },
-      {
-        "label": "검색, 쿼리 및 가져오기",
-        "id": "search_query_get",
-        "order": 7,
-        "isMenu": true,
-        "children": [
-          {
-            "label": "단일 벡터 검색",
-            "id": "single-vector-search.md",
-            "order": 0,
-            "children": []
-          },
-          {
-            "label": "하이브리드 검색",
-            "id": "multi-vector-search.md",
-            "order": 1,
-            "children": []
-          },
-          {
-            "label": "가져오기 및 스칼라 쿼리",
-            "id": "get-and-scalar-query.md",
-            "order": 2,
-            "children": []
-          },
-          {
-            "label": "이터레이터 사용",
-            "id": "with-iterators.md",
-            "order": 3,
-            "children": []
-          }
-        ]
-      },
-      {
-        "label": "고급 기능",
-        "id": "advanced_features",
-        "order": 8,
-        "isMenu": true,
-        "children": [
-          {
-            "label": "다이내믹 필드",
-            "id": "enable-dynamic-field.md",
-            "order": 0,
-            "children": []
-          },
-          {
-            "label": "파티션 키",
-            "id": "use-partition-key.md",
-            "order": 1,
-            "children": []
-          },
-          {
-            "label": "JSON 필드",
-            "id": "use-json-fields.md",
-            "order": 2,
-            "children": []
-          },
-          {
-            "label": "배열 필드",
-            "id": "array_data_type.md",
-            "order": 3,
-            "children": []
-          },
-          {
-            "label": "스파스 벡터",
-            "id": "sparse_vector.md",
-            "order": 4,
-            "children": []
-          },
-          {
-            "label": "스칼라 필터링 규칙",
-            "id": "boolean.md",
-            "order": 5,
-            "children": []
-          },
-          {
-            "label": "MMap 스토리지",
-            "id": "mmap.md",
-            "order": 6,
-            "children": []
-          },
-          {
-            "label": "리소스 그룹 관리",
-            "id": "resource_group.md",
-            "order": 7,
-            "children": []
-          },
-          {
-            "label": "클러스터링 압축",
-            "id": "clustering-compaction.md",
-            "order": 8,
             "children": []
           }
         ]
@@ -1040,9 +1315,22 @@
         ]
       },
       {
+        "label": "리소스 그룹",
+        "id": "resource_groups",
+        "order": 9,
+        "children": [
+          {
+            "label": "리소스 그룹 관리",
+            "id": "resource_group.md",
+            "order": 0,
+            "children": []
+          }
+        ]
+      },
+      {
         "label": "보안",
         "id": "security",
-        "order": 9,
+        "order": 10,
         "isMenu": true,
         "children": [
           {

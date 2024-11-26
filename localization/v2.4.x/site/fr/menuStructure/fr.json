@@ -325,27 +325,304 @@
     "order": 3,
     "children": [
       {
-        "label": "Gérer les bases de données",
+        "label": "Base de données",
         "id": "manage_databases.md",
         "order": 0,
         "children": []
       },
       {
-        "label": "Gérer le schéma",
-        "id": "schema.md",
+        "label": "Collections",
+        "id": "collections",
         "order": 1,
-        "children": []
+        "children": [
+          {
+            "label": "La collecte expliquée",
+            "id": "manage-collections.md",
+            "order": 0,
+            "children": []
+          },
+          {
+            "label": "Créer une collection",
+            "id": "create-collection.md",
+            "order": 1,
+            "children": []
+          },
+          {
+            "label": "Créer une collection instantanément",
+            "id": "create-collection-instantly.md",
+            "order": 2,
+            "children": []
+          },
+          {
+            "label": "Voir les collections",
+            "id": "view-collections.md",
+            "order": 3,
+            "children": []
+          },
+          {
+            "label": "Modifier la collection",
+            "id": "modify-collection.md",
+            "order": 4,
+            "children": []
+          },
+          {
+            "label": "Chargement et libération",
+            "id": "load-and-release.md",
+            "order": 5,
+            "children": []
+          },
+          {
+            "label": "Gérer les partitions",
+            "id": "manage-partitions.md",
+            "order": 6,
+            "children": []
+          },
+          {
+            "label": "Gérer les alias",
+            "id": "manage-aliases.md",
+            "order": 7,
+            "children": []
+          },
+          {
+            "label": "Collecte des gouttes",
+            "id": "drop-collection.md",
+            "order": 8,
+            "children": []
+          }
+        ]
       },
       {
-        "label": "Gérer les collections",
-        "id": "manage-collections.md",
+        "label": "Schéma et champs de données",
+        "id": "schema",
         "order": 2,
-        "children": []
+        "children": [
+          {
+            "label": "Le schéma expliqué",
+            "id": "schema.md",
+            "order": 0,
+            "children": []
+          },
+          {
+            "label": "Champ primaire et AutoID",
+            "id": "primary-field.md",
+            "order": 1,
+            "children": []
+          },
+          {
+            "label": "Vecteur dense",
+            "id": "dense-vector.md",
+            "order": 2,
+            "children": []
+          },
+          {
+            "label": "Vecteur binaire",
+            "id": "binary-vector.md",
+            "order": 3,
+            "children": []
+          },
+          {
+            "label": "Vecteur épars",
+            "id": "sparse_vector.md",
+            "order": 4,
+            "children": []
+          },
+          {
+            "label": "Champ de la chaîne de caractères",
+            "id": "string.md",
+            "order": 5,
+            "children": []
+          },
+          {
+            "label": "Champ numérique",
+            "id": "number.md",
+            "order": 6,
+            "children": []
+          },
+          {
+            "label": "Champ JSON",
+            "id": "use-json-fields.md",
+            "order": 7,
+            "children": []
+          },
+          {
+            "label": "Champ du tableau",
+            "id": "array.md",
+            "order": 8,
+            "children": []
+          },
+          {
+            "label": "Champ dynamique",
+            "id": "enable-dynamic-field.md",
+            "order": 9,
+            "children": []
+          },
+          {
+            "label": "Nullable et par défaut",
+            "id": "nullable-and-default.md",
+            "order": 10,
+            "children": []
+          },
+          {
+            "label": "Analyseur",
+            "id": "analyzer",
+            "order": 11,
+            "children": [
+              {
+                "label": "Aperçu de l'analyseur",
+                "id": "analyzer-overview.md",
+                "order": 0,
+                "children": []
+              },
+              {
+                "label": "Analyseurs intégrés",
+                "id": "built-in-analyzers",
+                "order": 1,
+                "children": [
+                  {
+                    "label": "Standard",
+                    "id": "standard-analyzer.md",
+                    "order": 0,
+                    "children": []
+                  },
+                  {
+                    "label": "Anglais",
+                    "id": "english-analyzer.md",
+                    "order": 1,
+                    "children": []
+                  },
+                  {
+                    "label": "Chinois",
+                    "id": "chinese-analyzer.md",
+                    "order": 2,
+                    "children": []
+                  }
+                ]
+              },
+              {
+                "label": "Tokenizers",
+                "id": "tokenizers",
+                "order": 2,
+                "children": [
+                  {
+                    "label": "Standard",
+                    "id": "standard-tokenizer.md",
+                    "order": 0,
+                    "children": []
+                  },
+                  {
+                    "label": "Espace blanc",
+                    "id": "whitespace-tokenizer.md",
+                    "order": 1,
+                    "children": []
+                  },
+                  {
+                    "label": "Jieba",
+                    "id": "jieba-tokenizer.md",
+                    "order": 1,
+                    "children": []
+                  }
+                ]
+              },
+              {
+                "label": "Filtres",
+                "id": "filters",
+                "order": 3,
+                "children": [
+                  {
+                    "label": "Minuscules",
+                    "id": "lowercase-filter.md",
+                    "order": 0,
+                    "children": []
+                  },
+                  {
+                    "label": "Pliage ASCII",
+                    "id": "ascii-folding-filter.md",
+                    "order": 1,
+                    "children": []
+                  },
+                  {
+                    "label": "Alphanumonly",
+                    "id": "alphanumonly-filter.md",
+                    "order": 2,
+                    "children": []
+                  },
+                  {
+                    "label": "Cnalphanumonly",
+                    "id": "cnalphanumonly-filter.md",
+                    "order": 3,
+                    "children": []
+                  },
+                  {
+                    "label": "Cncharonly",
+                    "id": "cncharonly-filter.md",
+                    "order": 4,
+                    "children": []
+                  },
+                  {
+                    "label": "Longueur",
+                    "id": "length-filter.md",
+                    "order": 5,
+                    "children": []
+                  },
+                  {
+                    "label": "Arrêter",
+                    "id": "stop-filter.md",
+                    "order": 6,
+                    "children": []
+                  },
+                  {
+                    "label": "Décompacteur",
+                    "id": "decompounder-filter.md",
+                    "order": 7,
+                    "children": []
+                  },
+                  {
+                    "label": "Stemmer",
+                    "id": "stemmer-filter.md",
+                    "order": 8,
+                    "children": []
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "label": "Travaux pratiques",
+            "id": "schema-hands-on.md",
+            "order": 12,
+            "children": []
+          }
+        ]
+      },
+      {
+        "label": "Insérer et supprimer",
+        "id": "insert-and-delete",
+        "order": 3,
+        "children": [
+          {
+            "label": "Insérer des entités",
+            "id": "insert-update-delete.md",
+            "order": 0,
+            "children": []
+          },
+          {
+            "label": "Entités Upsert",
+            "id": "upsert-entities.md",
+            "order": 1,
+            "children": []
+          },
+          {
+            "label": "Supprimer des entités",
+            "id": "delete-entities.md",
+            "order": 2,
+            "children": []
+          }
+        ]
       },
       {
         "label": "Gérer les index",
         "id": "manage_indexes",
-        "order": 3,
+        "order": 4,
         "isMenu": true,
         "children": [
           {
@@ -369,16 +646,108 @@
         ]
       },
       {
-        "label": "Gérer les partitions",
-        "id": "manage-partitions.md",
-        "order": 4,
-        "children": []
-      },
-      {
-        "label": "Insérer, surinsérer et supprimer",
-        "id": "insert-update-delete.md",
+        "label": "Recherche et repositionnement",
+        "id": "search-rerank",
         "order": 5,
-        "children": []
+        "isMenu": true,
+        "children": [
+          {
+            "label": "Recherche de base ANN",
+            "id": "single-vector-search.md",
+            "order": 0,
+            "children": []
+          },
+          {
+            "label": "Recherche filtrée",
+            "id": "filtered-search.md",
+            "order": 1,
+            "children": []
+          },
+          {
+            "label": "Recherche de gamme",
+            "id": "range-search.md",
+            "order": 2,
+            "children": []
+          },
+          {
+            "label": "Recherche de groupes",
+            "id": "grouping-search.md",
+            "order": 3,
+            "children": []
+          },
+          {
+            "label": "Recherche hybride",
+            "id": "multi-vector-search.md",
+            "order": 4,
+            "children": []
+          },
+          {
+            "label": "Demande de renseignements",
+            "id": "get-and-scalar-query.md",
+            "order": 5,
+            "children": []
+          },
+          {
+            "label": "Recherche en texte intégral",
+            "id": "full-text-search.md",
+            "order": 6,
+            "children": []
+          },
+          {
+            "label": "Correspondance des mots-clés",
+            "id": "keyword-match.md",
+            "order": 7,
+            "children": []
+          },
+          {
+            "label": "Recherche d'itérateurs",
+            "id": "with-iterators.md",
+            "order": 8,
+            "children": []
+          },
+          {
+            "label": "Utiliser la clé de partition",
+            "id": "use-partition-key.md",
+            "order": 9,
+            "children": []
+          },
+          {
+            "label": "Utiliser mmap",
+            "id": "mmap.md",
+            "order": 10,
+            "children": []
+          },
+          {
+            "label": "Regroupement Compaction",
+            "id": "clustering-compaction.md",
+            "order": 11,
+            "children": []
+          },
+          {
+            "label": "Niveau de cohérence",
+            "id": "consistency.md",
+            "order": 12,
+            "children": []
+          },
+          {
+            "label": "Types métriques",
+            "id": "metric.md",
+            "order": 13,
+            "children": []
+          },
+          {
+            "label": "Filtrage des métadonnées",
+            "id": "boolean.md",
+            "order": 14,
+            "children": []
+          },
+          {
+            "label": "Reranking",
+            "id": "reranking.md",
+            "order": 15,
+            "children": []
+          }
+        ]
       },
       {
         "label": "Importation de données",
@@ -396,100 +765,6 @@
             "label": "Importer des données",
             "id": "import-data.md",
             "order": 1,
-            "children": []
-          }
-        ]
-      },
-      {
-        "label": "Rechercher, interroger et obtenir",
-        "id": "search_query_get",
-        "order": 7,
-        "isMenu": true,
-        "children": [
-          {
-            "label": "Recherche d'un seul vecteur",
-            "id": "single-vector-search.md",
-            "order": 0,
-            "children": []
-          },
-          {
-            "label": "Recherche hybride",
-            "id": "multi-vector-search.md",
-            "order": 1,
-            "children": []
-          },
-          {
-            "label": "Requête Get &amp; Scalar",
-            "id": "get-and-scalar-query.md",
-            "order": 2,
-            "children": []
-          },
-          {
-            "label": "Avec les itérateurs",
-            "id": "with-iterators.md",
-            "order": 3,
-            "children": []
-          }
-        ]
-      },
-      {
-        "label": "Fonctionnalités avancées",
-        "id": "advanced_features",
-        "order": 8,
-        "isMenu": true,
-        "children": [
-          {
-            "label": "Champ dynamique",
-            "id": "enable-dynamic-field.md",
-            "order": 0,
-            "children": []
-          },
-          {
-            "label": "Clé de partition",
-            "id": "use-partition-key.md",
-            "order": 1,
-            "children": []
-          },
-          {
-            "label": "Champ JSON",
-            "id": "use-json-fields.md",
-            "order": 2,
-            "children": []
-          },
-          {
-            "label": "Champ du tableau",
-            "id": "array_data_type.md",
-            "order": 3,
-            "children": []
-          },
-          {
-            "label": "Vecteur épars",
-            "id": "sparse_vector.md",
-            "order": 4,
-            "children": []
-          },
-          {
-            "label": "Règles de filtrage scalaire",
-            "id": "boolean.md",
-            "order": 5,
-            "children": []
-          },
-          {
-            "label": "Stockage MMap",
-            "id": "mmap.md",
-            "order": 6,
-            "children": []
-          },
-          {
-            "label": "Gérer les groupes de ressources",
-            "id": "resource_group.md",
-            "order": 7,
-            "children": []
-          },
-          {
-            "label": "Regroupement Compaction",
-            "id": "clustering-compaction.md",
-            "order": 8,
             "children": []
           }
         ]
@@ -1040,9 +1315,22 @@
         ]
       },
       {
+        "label": "Groupes de ressources",
+        "id": "resource_groups",
+        "order": 9,
+        "children": [
+          {
+            "label": "Gérer les groupes de ressources",
+            "id": "resource_group.md",
+            "order": 0,
+            "children": []
+          }
+        ]
+      },
+      {
         "label": "Sécurité",
         "id": "security",
-        "order": 9,
+        "order": 10,
         "isMenu": true,
         "children": [
           {
@@ -1433,7 +1721,7 @@
             "children": []
           },
           {
-            "label": "PrivateGPT",
+            "label": "PrivéGPT",
             "id": "use_milvus_in_private_gpt.md",
             "order": 8,
             "children": []

@@ -36,7 +36,7 @@ summary: このページでは、準備したデータをインポートする�
         ></path>
       </svg>
     </button></h2><ul>
-<li><p>既にデータを準備し、Milvusバケットに入れている。</p>
+<li><p>すでにデータを準備し、Milvusバケットに入れている。</p>
 <p>そうでない場合は、まず<strong>RemoteBulkWriterを</strong>使用してデータを準備し、準備したデータがMilvusインスタンスと共に起動したMinIOインスタンス上のMilvusバケットに転送済みであることを確認してください。詳細は<a href="/docs/ja/prepare-source-data.md">ソースデータの準備を</a>参照してください。</p></li>
 <li><p>データの準備に使用するスキーマでコレクションを作成済みである。そうでない場合は、「<a href="/docs/ja/manage-collections.md">コレクションの管理</a>」を参照してください。</p></li>
 </ul>
@@ -44,7 +44,7 @@ summary: このページでは、準備したデータをインポートする�
 <p>以下のコード・スニペットは、指定されたスキーマで単純なコレクションを作成します。パラメータの詳細については <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_schema.md"><code translate="no">create_schema()</code></a>および <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_collection.md"><code translate="no">create_collection()</code></a>を参照してください。</p>
 </div>
 <div class="language-java">
-<p>次のコード・スニペットは、指定されたスキーマで単純なコレクションを作成します。パラメータの詳細については、SDKリファレンスの <a href="https://milvus.io/api-reference/java/v2.4.x/v1/Collection/createCollection.md"><code translate="no">createCollection()</code></a>を参照してください。</p>
+<p>以下のコード・スニペットは、指定されたスキーマで単純なコレクションを作成します。パラメータの詳細については、SDKリファレンスの <a href="https://milvus.io/api-reference/java/v2.4.x/v1/Collection/createCollection.md"><code translate="no">createCollection()</code></a>を参照してください。</p>
 </div>
 <h2 id="Import-data" class="common-anchor-header">データのインポート<button data-href="#Import-data" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -63,7 +63,7 @@ summary: このページでは、準備したデータをインポートする�
       </svg>
     </button></h2><p>準備したデータをインポートするには、以下のようにインポートジョブを作成する必要があります：</p>
 <div class="multipleCode">
- <a href="#python">Python </a> <a href="#java">Java</a> <a href="#bash">cURL</a></div>
+ <a href="#python">Python </a> <a href="#java">Java</a> <a href="#shell">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus.bulk_writer <span class="hljs-keyword">import</span> bulk_import
 
 url = <span class="hljs-string">f&quot;http://127.0.0.1:19530&quot;</span>
@@ -106,7 +106,7 @@ job_id = resp.json()[<span class="hljs-string">&#x27;data&#x27;</span>][<span cl
     <span class="hljs-type">String</span> <span class="hljs-variable">jobId</span> <span class="hljs-operator">=</span> bulkImport(batchFiles);
 }
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> MILVUS_URI=<span class="hljs-string">&quot;localhost:19530&quot;</span>
+<pre><code translate="no" class="language-shell"><span class="hljs-built_in">export</span> MILVUS_URI=<span class="hljs-string">&quot;localhost:19530&quot;</span>
 
 curl --request POST <span class="hljs-string">&quot;http://<span class="hljs-variable">${MILVUS_URI}</span>/v2/vectordb/jobs/import/create&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
@@ -169,7 +169,7 @@ curl --request POST <span class="hljs-string">&quot;http://<span class="hljs-var
       </svg>
     </button></h2><p>インポートジョブIDを取得したら、以下のようにインポートの進捗状況を確認できます：</p>
 <div class="multipleCode">
- <a href="#python">Python </a> <a href="#java">Java</a> <a href="#bash">cURL</a></div>
+ <a href="#python">Python </a> <a href="#java">Java</a> <a href="#shell">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> json
 <span class="hljs-keyword">from</span> pymilvus.bulk_writer <span class="hljs-keyword">import</span> get_import_progress
 
@@ -219,7 +219,7 @@ resp = get_import_progress(
     getImportProgress(jobId);
 }
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> MILVUS_URI=<span class="hljs-string">&quot;localhost:19530&quot;</span>
+<pre><code translate="no" class="language-shell"><span class="hljs-built_in">export</span> MILVUS_URI=<span class="hljs-string">&quot;localhost:19530&quot;</span>
 
 curl --request POST <span class="hljs-string">&quot;http://<span class="hljs-variable">${MILVUS_URI}</span>/v2/vectordb/jobs/import/describe&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
@@ -279,7 +279,7 @@ curl --request POST <span class="hljs-string">&quot;http://<span class="hljs-var
       </svg>
     </button></h2><p>特定のコレクションに関連するすべてのインポートジョブを一覧表示するには、次のようにします：</p>
 <div class="multipleCode">
- <a href="#python">Python </a> <a href="#java">Java</a> <a href="#bash">cURL</a></div>
+ <a href="#python">Python </a> <a href="#java">Java</a> <a href="#shell">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> json
 <span class="hljs-keyword">from</span> pymilvus.bulk_writer <span class="hljs-keyword">import</span> list_import_jobs
 
@@ -303,7 +303,7 @@ resp = list_import_jobs(
     listImportJobs();
 }
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-bash"><span class="hljs-built_in">export</span> MILVUS_URI=<span class="hljs-string">&quot;localhost:19530&quot;</span>
+<pre><code translate="no" class="language-shell"><span class="hljs-built_in">export</span> MILVUS_URI=<span class="hljs-string">&quot;localhost:19530&quot;</span>
 
 curl --request POST <span class="hljs-string">&quot;http://<span class="hljs-variable">${MILVUS_URI}</span>/v2/vectordb/jobs/import/list&quot;</span> \
 --header <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> \
