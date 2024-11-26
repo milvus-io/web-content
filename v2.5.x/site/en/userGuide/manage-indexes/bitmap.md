@@ -19,7 +19,7 @@ A bitmap index consists of two main components: bitmaps and keys. Keys represent
 
 Consider a collection of documents with fields **Category** and **Public**. We want to retrieve documents that fall into the **Tech** category and are open to the **Public**. In this case, the keys for our bitmap indexes are **Tech** and **Public**.​
 
-![Bitmap indexing](../../../assets/bitmap.png)
+![Bitmap indexing](../../../../assets/bitmap.png)
 
 As shown in the figure, the bitmap indexes for **Category** and **Public** are:​
 
@@ -81,50 +81,3 @@ Once the bitmap index is created, you can use the `filter` parameter in query op
     - When the cardinality increases beyond this threshold, the performance benefits of bitmap indexes diminish, and the storage overhead becomes significant.​
 
     - For high-cardinality fields, consider using alternative indexing techniques such as inverted indexes, depending on your specific use case and query requirements.​
-
-### Structural Similarity
-
-When a chemical structure occurs as a part of a larger chemical structure, the former is called a substructure and the latter is called a superstructure. For example, ethanol is a substructure of acetic acid, and acetic acid is a superstructure of ethanol.
-
-Structural similarity is used to determine whether two chemical formulae are similar to each other in that one is the superstructure or substructure of the other.
-
-To determine whether A is a superstructure of B, use the following formula:
-
-![superstructure](../../../assets/superstructure.png "Superstructure")
-
-Where:
-
-- A is the binary representation of a chemical formula to be retrieved
-- B is the binary representation of a chemical formula in the database
-
-Once it returns `0`, **A** is not a superstructure of **B**. Otherwise, the result is the other way around.
-
-To determine whether A is a substructure of B, use the following formula:
-
-![substructure](../../../assets/substructure.png "subsctructure")
-
-Where:
-
-- A is the binary representation of a chemical formula to be retrieved
-- B is the binary representation of a chemical formula in the database
-
-Once it returns `0`, **A** is not a substructure of **B**. Otherwise, the result is the other way around.
-
-## FAQ
-
-<details>
-<summary><font color="#4fc4f9">Why is the top1 result of a vector search not the search vector itself, if the metric type is inner product?</font></summary>
-This occurs if you have not normalized the vectors when using inner product as the distance metric.
-</details>
-<details>
-<summary><font color="#4fc4f9">What is normalization? Why is normalization needed?</font></summary>
-<p>Normalization refers to the process of converting an embedding (vector) so that its norm equals 1. If you use Inner Product to calculate embeddings similarities, you must normalize your embeddings. After normalization, inner product equals cosine similarity.
-</p>
-<p>
-See <a href="https://en.wikipedia.org/wiki/Unit_vector">Wikipedia</a> for more information.
-</p>
-</details>
-<details>
-<summary><font color="#4fc4f9">Why do I get different results using Euclidean distance (L2) and inner product (IP) as the distance metric?</font></summary>
-Check if the vectors are normalized. If not, you need to normalize the vectors first. Theoretically speaking, similarities worked out by L2 are different from similarities worked out by IP, if the vectors are not normalized.
-</details>

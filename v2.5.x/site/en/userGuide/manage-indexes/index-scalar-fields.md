@@ -13,7 +13,7 @@ In Milvus, a scalar index is used to speed up metafiltering by a specific non-ve
 
 - __[Auto indexing](https://milvus.io/docs/index-scalar-fields.md#Auto-indexing)__: Milvus automatically decides the index type based on the data type of the scalar field. This is suitable when you do not need to control the specific index type.
 
-- __[Custom indexing](https://milvus.io/docs/index-scalar-fields.md#Custom-indexing)__: You specify the exact index type, such as an inverted index. This provides more control over the index type selection.
+- __[Custom indexing](https://milvus.io/docs/index-scalar-fields.md#Custom-indexing)__: You specify the exact index type, such as an inverted index or [bitmap index](bitmap.md). This provides more control over the index type selection.
 
 ## Auto indexing
 
