@@ -385,7 +385,7 @@ export schema="{​
 
 ### Add JSON fields​
 
-A JSON field usually stores half-structured JSON data. For more on the JSON fields, refer to [​JSON Field](use-json-field.md).​
+A JSON field usually stores half-structured JSON data. For more on the JSON fields, refer to [​JSON Field](use-json-fields.md).​
 
 <div class="multipleCode">
   <a href="#python">Python </a>
@@ -440,7 +440,7 @@ export schema="{​
 
 ### Add Array Fields​
 
-An array field stores a list of elements. The data types of all elements in an array field should be the same. For more on the array fields, refer to [​Array Field](array_data_field.md).​
+An array field stores a list of elements. The data types of all elements in an array field should be the same. For more on the array fields, refer to [​Array Field](array_data_type.md).​
 
 <div class="multipleCode">
   <a href="#python">Python </a>

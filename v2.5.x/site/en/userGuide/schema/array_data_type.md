@@ -1,5 +1,5 @@
 ---
-id: array.md
+id: array_data_type.md
 title: Array Field​​
 summary: The Array type is used to store fields containing multiple values of the same data type. It provides a flexible way to store attributes with multiple elements, making it especially useful in scenarios where a set of related data needs to be saved. In Milvus, you can store Array fields alongside vector data, enabling more complex query and filtering requirements.​
 ---

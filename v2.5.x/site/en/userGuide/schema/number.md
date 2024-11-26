@@ -440,7 +440,7 @@ curl --request POST \​
 
 In this example, we insert data that includes `age`, `price`, `pk` (primary field), and vector representations (`embedding`). To ensure that the inserted data matches the fields defined in the schema, it's recommended to check data types in advance to avoid errors.​
 
-If you set `enable_dynamic_fields=True` when defining the schema, Milvus allows you to insert number fields that were not defined in advance. However, keep in mind that this may increase the complexity of queries and management, potentially impacting performance. For more information, refer to [​Dynamic Field](enable_dynamic_field.md).​
+If you set `enable_dynamic_fields=True` when defining the schema, Milvus allows you to insert number fields that were not defined in advance. However, keep in mind that this may increase the complexity of queries and management, potentially impacting performance. For more information, refer to [​Dynamic Field](enable-dynamic-field.md).​
 
 ## Search and query​
 
