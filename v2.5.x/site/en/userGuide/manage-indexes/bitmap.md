@@ -56,7 +56,7 @@ client.create_index(​
 
 In this example, we create a bitmap index on the `category` field of the `my_collection` collection. The `add_index()` method is used to specify the field name, index type, and index name.​
 
-Once the bitmap index is created, you can use the `filter` parameter in query operations to perform scalar filtering based on the indexed field. This allows you to efficiently narrow down the search results using the bitmap index. For more information, refer to <ins>Filtering</ins>.​
+Once the bitmap index is created, you can use the `filter` parameter in query operations to perform scalar filtering based on the indexed field. This allows you to efficiently narrow down the search results using the bitmap index. For more information, refer to [Metadata Filtering](boolean.md).​
 
 ## Limits
 

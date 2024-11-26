@@ -22,9 +22,9 @@ Milvus 2.5.0-beta brings significant advancements to enhance usability, scalabil
 
 #### Full Text Search
 
-Milvus2.5 supports full text search implemented with Sparse-BM25! This feature is an important complement to Milvus's strong semantic search capabilities, especially in scenarios involving rare words or technical terms. In previous versions, Milvus supported sparse vectors to assist with keyword search scenarios. These sparse vectors were generated outside of Milvus by neural models like SPLADEv2/BGE-M3 or statistical models such as the BM25 algorithm.
+Milvus 2.5 supports full text search implemented with Sparse-BM25! This feature is an important complement to Milvus's strong semantic search capabilities, especially in scenarios involving rare words or technical terms. In previous versions, Milvus supported sparse vectors to assist with keyword search scenarios. These sparse vectors were generated outside of Milvus by neural models like SPLADEv2/BGE-M3 or statistical models such as the BM25 algorithm.
 
-In Milvus 2.5, tokenization and sparse vector extraction are now built-in, truly realizing "Doc-In-Doc-Out" instead of the previous "Vec-in-vec-out" approach. BM25 statistical information is updated in real time as data is inserted, enhancing usability and accuracy. Additionally, sparse vectors based on approximate nearest neighbor (ANN) algorithms offer more powerful performance than standard keyword search systems.
+Milvus 2.5 has built-in tokenization and sparse vector extraction, extending the API from only receiving vectors as input to directly accepting text. BM25 statistical information is updated in real time as data is inserted, enhancing usability and accuracy. Additionally, sparse vectors based on approximate nearest neighbor (ANN) algorithms offer more powerful performance than standard keyword search systems.
 
 For details, refer to [Full Text Search](full-text-search.md).
 
@@ -44,13 +44,13 @@ For details, refer to [Keyword Match](keyword-match.md).
 
 A new scalar data index has been added to the Milvus family. The BitMap index uses an array of bits, equal in length to the number of rows, to represent the existence of values and accelerate searches.
 
-Bitmap indexes have traditionally been effective for low-cardinality columns, which have a modest number of distinct values—for example, a column containing gender information with only two possible values: male and female.
+Bitmap indexes have traditionally been effective for low-cardinality fields, which have a modest number of distinct values—for example, a column containing gender information with only two possible values: male and female.
 
 For details, refer to [Bitmap Index](bitmap.md).
 
 #### Nullable & Default Value
 
-Milvus now supports setting nullable properties and default values for scalar fields other than the primary key field. For fields marked as `nullable=True`, users can omit the field when inserting data; the system will treat it as a null value or default value (if set) without throwing an error.
+Milvus now supports setting nullable properties and default values for scalar fields other than the primary key field. For scalar fields marked as `nullable=True`, users can omit the field when inserting data; the system will treat it as a null value or default value (if set) without throwing an error.
 
 Default values and nullable properties provide greater flexibility to Milvus. Users can utilize this feature for fields with uncertain values when creating collections. It also simplifies data migration from other database systems to Milvus, allowing for handling datasets containing null values while preserving original default value settings.
 

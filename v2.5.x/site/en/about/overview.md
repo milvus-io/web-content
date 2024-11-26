@@ -80,7 +80,7 @@ In addition to primitive data types, Milvus supports various advanced data types
 - [Sparse Vectors](sparse_vector.md)
 - [Binary Vectors](index-vector-fields.md)
 - [JSON Support](use-json-fields.md)
-- [Array Support](array.md)
+- [Array Support](array_data_type.md)
 - [Distance Metrics](metric.md)
 
 ### Acceleration
