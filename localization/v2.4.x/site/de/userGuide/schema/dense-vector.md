@@ -55,7 +55,7 @@ summary: >-
 <ul>
 <li><p><strong>Mehrdimensionale Darstellung:</strong> Jeder Punkt repräsentiert ein konzeptionelles Objekt (wie <strong>Milvus</strong>, eine <strong>Vektordatenbank</strong>, ein <strong>Retrievalsystem</strong> usw.), wobei seine Position durch die Werte seiner Dimensionen bestimmt wird.</p></li>
 <li><p><strong>Semantische Beziehungen:</strong> Die Abstände zwischen den Punkten spiegeln die semantische Ähnlichkeit zwischen den Konzepten wider. Näher beieinander liegende Punkte weisen auf Konzepte hin, die semantisch enger miteinander verwandt sind.</p></li>
-<li><p><strong>Clustering-Effekt:</strong> Verwandte Konzepte (wie <strong>Milvus</strong>, <strong>Vektordatenbank</strong> und <strong>Retrievalsystem</strong>) werden im Raum nahe beieinander positioniert und bilden einen semantischen Cluster.</p></li>
+<li><p><strong>Clustering-Effekt:</strong> Verwandte Konzepte (wie <strong>Milvus</strong>, <strong>Vektordatenbank</strong> und <strong>Retrievalsystem</strong>) liegen im Raum nahe beieinander und bilden einen semantischen Cluster.</p></li>
 </ul>
 <p>Unten sehen Sie ein Beispiel für einen echten dichten Vektor, der den Text <code translate="no">&quot;Milvus is an efficient vector database&quot;</code> darstellt.</p>
 <pre><code translate="no" class="language-JSON">[​
@@ -79,7 +79,7 @@ summary: >-
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/use-dense-vector.png" alt="Use dense vecctors in Milvus" class="doc-image" id="use-dense-vecctors-in-milvus" />
    </span> <span class="img-wrapper"> <span>Verwendung von dichten Vektoren in Milvus</span> </span></p>
 <div class="alert note">
-<p>Neben dichten Vektoren unterstützt Milvus auch spärliche Vektoren und binäre Vektoren. Dünne Vektoren eignen sich für präzise Übereinstimmungen auf der Grundlage spezifischer Begriffe, wie z. B. bei der Suche nach Schlüsselwörtern und dem Abgleich von Begriffen, während binäre Vektoren in der Regel für die effiziente Handhabung binarisierter Daten verwendet werden, wie z. B. beim Abgleich von Bildmustern und bestimmten Hash-Anwendungen. Weitere Informationen finden Sie unter <a href="/docs/de/binary-vector.md">Binäre Vektoren</a> und <a href="/docs/de/sparse_vector.md">dichte Vektoren</a>.</p>
+<p>Neben dichten Vektoren unterstützt Milvus auch spärliche Vektoren und binäre Vektoren. Dünne Vektoren eignen sich für präzise Übereinstimmungen auf der Grundlage spezifischer Begriffe, wie z. B. bei der Suche nach Schlüsselwörtern und dem Abgleich von Begriffen, während binäre Vektoren in der Regel für die effiziente Verarbeitung binarisierter Daten verwendet werden, wie z. B. beim Abgleich von Bildmustern und bestimmten Hash-Anwendungen. Weitere Informationen finden Sie unter <a href="/docs/de/binary-vector.md">Binäre Vektoren</a> und <a href="/docs/de/sparse_vector.md">dichte Vektoren</a>.</p>
 </div>
 <h2 id="Use-dense-vectors-in-Milvus​" class="common-anchor-header">Dichte Vektoren in Milvus verwenden<button data-href="#Use-dense-vectors-in-Milvus​" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -245,7 +245,7 @@ indexes.<span class="hljs-title function_">add</span>(<span class="hljs-title cl
 
 <button class="copy-code-btn"></button></code></pre>
 <p>Im obigen Beispiel wird ein Index namens <code translate="no">dense_vector_index</code> für das Feld <code translate="no">dense_vector</code> unter Verwendung des Index-Typs <code translate="no">IVF_FLAT</code> erstellt. <code translate="no">metric_type</code> wird auf <code translate="no">IP</code> gesetzt, was anzeigt, dass das innere Produkt als Abstandsmetrik verwendet wird.</p>
-<p>Milvus unterstützt auch andere Indextypen. Weitere Einzelheiten finden Sie unter <a href="https://milvus.io/docs/index.md?tab=floating">Fließende Vektorindizes</a>. Zusätzlich unterstützt Milvus auch andere metrische Typen. Weitere Informationen finden Sie unter <a href="/docs/de/metric.md">Metrische Typen</a>.</p>
+<p>Milvus unterstützt auch andere Indextypen. Weitere Details finden Sie unter <a href="https://milvus.io/docs/index.md?tab=floating">Fließende Vektorindizes</a>. Zusätzlich unterstützt Milvus auch andere metrische Typen. Weitere Informationen finden Sie unter <a href="/docs/de/metric.md">Metrische Typen</a>.</p>
 <h3 id="Create-collection​" class="common-anchor-header">Sammlung erstellen</h3><p>Sobald die Einstellungen für dichte Vektoren und Index-Parameter abgeschlossen sind, können Sie eine Sammlung erstellen, die dichte Vektoren enthält. Das folgende Beispiel verwendet die Methode <code translate="no">create_collection</code>, um eine Sammlung namens <code translate="no">my_dense_collection</code> zu erstellen.</p>
 <div class="multipleCode">
  <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#go">Go</a> <a href="#curl">cURL</a></div>
@@ -352,7 +352,7 @@ client.<span class="hljs-title function_">insert</span>({​
 <span class="hljs-comment">## {&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:{&quot;insertCount&quot;:2,&quot;insertIds&quot;:[&quot;453577185629572531&quot;,&quot;453577185629572532&quot;]}}​</span>
 
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Perform-similarity-search​" class="common-anchor-header">Ähnlichkeitssuche durchführen</h3><p>Die semantische Suche auf der Basis von dichten Vektoren ist eine der Kernfunktionen von Milvus, die es Ihnen ermöglicht, schnell Daten zu finden, die einem Abfragevektor am ähnlichsten sind, basierend auf dem Abstand zwischen den Vektoren. Um eine Ähnlichkeitssuche durchzuführen, bereiten Sie den Abfragevektor und die Suchparameter vor und rufen dann die Methode <code translate="no">search</code> auf.</p>
+<h3 id="Perform-similarity-search​" class="common-anchor-header">Ähnlichkeitssuche durchführen</h3><p>Die semantische Suche auf der Basis von dichten Vektoren ist eine der Kernfunktionen von Milvus, die es Ihnen ermöglicht, schnell Daten zu finden, die einem Abfragevektor auf der Grundlage des Abstands zwischen Vektoren am ähnlichsten sind. Um eine Ähnlichkeitssuche durchzuführen, bereiten Sie den Abfragevektor und die Suchparameter vor und rufen dann die Methode <code translate="no">search</code> auf.</p>
 <div class="multipleCode">
  <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#go">Go</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python">search_params = {​

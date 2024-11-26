@@ -28,7 +28,7 @@ summary: >-
 <li><p>フィルター：包括的なテキスト処理のための複数のフィルターを含む。</p>
 <ul>
 <li><p><a href="/docs/ja/lowercase-filter.md"><code translate="no">lowercase</code></a>:すべてのトークンを小文字に変換し、大文字小文字を区別しない検索を可能にします。</p></li>
-<li><p><a href="/docs/ja/stemmer-filter.md"><code translate="no">stemmer</code></a>:より広範なマッチングをサポートするため、単語をその語源に変換（例："running "は "run "に）。</p></li>
+<li><p><a href="/docs/ja/stemmer-filter.md"><code translate="no">stemmer</code></a>:より広範なマッチングをサポートするため、単語を語根形に変換（例："running "は "run "に）。</p></li>
 <li><p><a href="/docs/ja/stop-filter.md"><code translate="no">stop_words</code></a>:一般的な英語のストップワードを削除し、テキスト内の重要な用語に焦点を当てます。</p></li>
 </ul></li>
 </ul>

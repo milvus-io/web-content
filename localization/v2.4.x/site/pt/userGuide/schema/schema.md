@@ -40,7 +40,7 @@ summary: >-
       </svg>
     </button></h2><p>No Zilliz Cloud, um esquema de coleção reúne uma tabela numa base de dados relacional, que define a forma como o Zilliz Cloud organiza os dados na coleção. </p>
 <p>Um esquema bem concebido é essencial, uma vez que abstrai o modelo de dados e decide se é possível atingir os objectivos de negócio através de uma pesquisa. Além disso, uma vez que cada linha de dados inserida na coleção deve seguir o esquema, ajuda a manter a consistência dos dados e a qualidade a longo prazo. De uma perspetiva técnica, um esquema bem definido leva a um armazenamento de dados de coluna bem organizado e a uma estrutura de índice mais limpa, aumentando o desempenho da pesquisa.</p>
-<p>Um esquema de coleção tem uma chave primária, um máximo de quatro campos vectoriais e vários campos escalares. O diagrama a seguir ilustra como mapear um artigo para uma lista de campos de esquema.</p>
+<p>Um esquema de coleção tem uma chave primária, um máximo de quatro campos vectoriais e vários campos escalares. O diagrama seguinte ilustra como mapear um artigo para uma lista de campos de esquema.</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/schema-explained.PNG" alt="Schema design" class="doc-image" id="schema-design" />

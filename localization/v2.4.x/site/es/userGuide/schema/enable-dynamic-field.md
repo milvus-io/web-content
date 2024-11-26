@@ -2,10 +2,10 @@
 id: enable-dynamic-field.md
 title: Activar campo dinámico
 summary: >-
-  Todos los campos definidos en el esquema de una colección deben estar
-  incluidos en las entidades que se van a insertar. Si desea que algunos campos
-  sean opcionales, considere la posibilidad de habilitar el campo dinámico. Este
-  tema describe cómo habilitar y utilizar el campo dinámico.
+  Todos los campos definidos en el esquema de una colección deben incluirse en
+  las entidades que se van a insertar. Si desea que algunos campos sean
+  opcionales, considere la posibilidad de habilitar el campo dinámico. Este tema
+  describe cómo habilitar y utilizar el campo dinámico.
 ---
 <h1 id="Dynamic-Field​" class="common-anchor-header">Campo dinámico<button data-href="#Dynamic-Field​" class="anchor-icon" translate="no">
       <svg translate="no"

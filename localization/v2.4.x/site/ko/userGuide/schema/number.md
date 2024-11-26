@@ -423,7 +423,7 @@ client.<span class="hljs-title function_">insert</span>({​
 
 <button class="copy-code-btn"></button></code></pre>
 <p>이 예에서는 <code translate="no">age</code>, <code translate="no">price</code>, <code translate="no">pk</code> (기본 필드) 및 벡터 표현(<code translate="no">embedding</code>)을 포함하는 데이터를 삽입합니다. 삽입된 데이터가 스키마에 정의된 필드와 일치하는지 확인하려면 오류를 방지하기 위해 데이터 유형을 미리 확인하는 것이 좋습니다.</p>
-<p>스키마를 정의할 때 <code translate="no">enable_dynamic_fields=True</code> 을 설정하면 Milvus에서는 미리 정의되지 않은 숫자 필드를 삽입할 수 있습니다. 그러나 이렇게 하면 쿼리 및 관리의 복잡성이 증가하여 성능에 영향을 미칠 수 있습니다. 자세한 내용은 <a href="/docs/ko/enable_dynamic_field.md">동적 필드를</a> 참조하세요.</p>
+<p>스키마를 정의할 때 <code translate="no">enable_dynamic_fields=True</code> 을 설정하면 Milvus에서는 사전에 정의되지 않은 숫자 필드를 삽입할 수 있습니다. 그러나 이렇게 하면 쿼리 및 관리의 복잡성이 증가하여 성능에 영향을 미칠 수 있습니다. 자세한 내용은 <a href="/docs/ko/enable_dynamic_field.md">동적 필드를</a> 참조하세요.</p>
 <h2 id="Search-and-query​" class="common-anchor-header">검색 및 쿼리<button data-href="#Search-and-query​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

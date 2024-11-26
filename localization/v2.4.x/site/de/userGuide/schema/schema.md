@@ -3,7 +3,7 @@ id: schema.md
 title: Schema erklärt
 summary: >-
   Ein Schema definiert die Datenstruktur einer Sammlung. Bevor Sie eine Sammlung
-  erstellen, müssen Sie einen Entwurf für das Schema ausarbeiten. Diese Seite
+  erstellen, müssen Sie einen Entwurf für ihr Schema ausarbeiten. Diese Seite
   hilft Ihnen, das Schema einer Sammlung zu verstehen und selbst ein
   Beispielschema zu entwerfen.
 ---
@@ -217,7 +217,7 @@ schema.<span class="hljs-title function_">addField</span>(<span class="hljs-titl
 <li><p><code translate="no">FLOAT16_VECTOR</code></p>
 <p>Ein Vektorfeld dieses Typs enthält eine Liste von 16-Bit-Gleitkommazahlen mit halber Genauigkeit und wird in der Regel in Deep-Learning- oder GPU-basierten Szenarien mit eingeschränktem Speicher oder eingeschränkter Bandbreite verwendet.</p></li>
 <li><p><code translate="no">BFLOAT16_VECTOR</code></p>
-<p>Ein Vektorfeld dieses Typs enthält eine Liste von 16-Bit-Gleitkommazahlen, die eine geringere Genauigkeit, aber denselben Exponentenbereich wie Float32 haben. Dieser Datentyp wird häufig in Deep-Learning-Szenarien verwendet, da er die Speichernutzung reduziert, ohne die Genauigkeit wesentlich zu beeinträchtigen.</p></li>
+<p>Ein Vektorfeld dieses Typs enthält eine Liste von 16-Bit-Gleitkommazahlen, die eine geringere Genauigkeit, aber den gleichen Exponentenbereich wie Float32 haben. Dieser Datentyp wird häufig in Deep-Learning-Szenarien verwendet, da er die Speichernutzung reduziert, ohne die Genauigkeit wesentlich zu beeinträchtigen.</p></li>
 <li><p><code translate="no">BINARY_VECTOR</code></p>
 <p>Ein Vektorfeld dieses Typs enthält eine Liste von 0en und 1en. Sie dienen als kompakte Merkmale zur Darstellung von Daten in Bildverarbeitungs- und Informationsabfrageszenarien.</p></li>
 <li><p><code translate="no">SPARSE_FLOAT_VECTOR</code></p>

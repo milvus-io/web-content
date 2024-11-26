@@ -183,7 +183,7 @@ curl --request POST \​
 
 <button class="copy-code-btn"></button></code></pre>
 <p>このパラメータはハイブリッド検索と検索イテレータでも使用できます。<code translate="no">consistency_level</code> パラメータに指定できる値は<code translate="no">Strong</code>,<code translate="no">Bounded</code>,<code translate="no">Eventually</code>,<code translate="no">Session</code> です。</p>
-<h3 id="Set-Consistency-Level-in-Query​set-consistency-level-in-query​" class="common-anchor-header">クエリでの一貫性レベルの設定{#set-consistency-level-in-query}」。</h3><p>特定の検索の一貫性レベルはいつでも変更できます。以下のコード例では、一貫性レベルを<strong>Eventuallyに</strong>設定しています。この設定は現在のクエリ・リクエストにのみ適用されます。</p>
+<h3 id="Set-Consistency-Level-in-Query​set-consistency-level-in-query​" class="common-anchor-header">クエリで一貫性レベルを設定{#set-consistency-level-in-query} クエリで一貫性レベルを設定{#set-consistency-level-in-query}する。</h3><p>特定の検索の一貫性レベルはいつでも変更できます。以下のコード例では、一貫性レベルを<strong>Eventuallyに</strong>設定しています。この設定は現在のクエリ・リクエストにのみ適用されます。</p>
 <div class="multipleCode">
    <a href="#python">python</a> <a href="#java">java</a></div>
 <pre><code translate="no" class="language-python">res = client.query(​

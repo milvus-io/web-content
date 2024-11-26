@@ -42,7 +42,7 @@ title: Utilizar clave de partición
 <p>La siguiente figura ilustra cómo Milvus procesa las peticiones de búsqueda en una colección con o sin la función Partition Key activada. </p>
 <ul>
 <li><p>Si la Clave de partición está desactivada, Milvus busca las entidades más similares al vector de consulta dentro de la colección. Puede limitar el alcance de la búsqueda si sabe qué partición contiene los resultados más relevantes. </p></li>
-<li><p>Si la Clave de Partición está activada, Milvus determina el ámbito de búsqueda basándose en el valor de la Clave de Partición especificado en un filtro de búsqueda y explora sólo las entidades dentro de las particiones que coinciden. </p></li>
+<li><p>Si la clave de partición está activada, Milvus determina el ámbito de la búsqueda basándose en el valor de la clave de partición especificado en un filtro de búsqueda y explora sólo las entidades dentro de las particiones que coinciden. </p></li>
 </ul>
 <p>
   

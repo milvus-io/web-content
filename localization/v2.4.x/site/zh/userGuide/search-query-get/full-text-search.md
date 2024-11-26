@@ -90,7 +90,7 @@ schema.add_field(field_name=<span class="hljs-string">&quot;sparse&quot;</span>,
 <button class="copy-code-btn"></button></code></pre>
 <p>在此配置中</p>
 <ul>
-<li><p><code translate="no">id</code>: 作为主键，由<code translate="no">auto_id=True</code> 自动生成。</p></li>
+<li><p><code translate="no">id</code>:作为主键，由<code translate="no">auto_id=True</code> 自动生成。</p></li>
 <li><p><code translate="no">text</code>:存储原始文本数据，用于全文搜索操作。数据类型必须是<code translate="no">VARCHAR</code> ，因为<code translate="no">VARCHAR</code> 是 Milvus 用于文本存储的字符串数据类型。设置<code translate="no">enable_analyzer=True</code> 以允许 Milvus 对文本进行标记化。默认情况下，Milvus 使用<a href="/docs/zh/standard-analyzer.md">标准分析器</a>进行文本分析。要配置不同的分析器，请参阅<a href="/docs/zh/analyzer-overview.md">概述</a>。</p></li>
 <li><p><code translate="no">sparse</code>矢量字段：预留矢量字段，用于存储内部生成的稀疏嵌入，以进行全文搜索操作。数据类型必须是<code translate="no">SPARSE_FLOAT_VECTOR</code> 。</p></li>
 </ul>

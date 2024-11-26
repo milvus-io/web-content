@@ -778,7 +778,7 @@
     "order": 4,
     "children": [
       {
-        "label": "Incorporamenti",
+        "label": "Incorporazioni",
         "id": "embeddings",
         "order": 0,
         "isMenu": true,

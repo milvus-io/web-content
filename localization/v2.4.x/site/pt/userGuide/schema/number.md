@@ -496,7 +496,7 @@ System.out.println(resp.getQueryResults());​
 <span class="hljs-comment">## {&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:[{&quot;age&quot;:30,&quot;pk&quot;:2,&quot;price&quot;:149.5},{&quot;age&quot;:35,&quot;pk&quot;:3,&quot;price&quot;:199.99}]}​</span>
 
 <button class="copy-code-btn"></button></code></pre>
-<p>Esta expressão de consulta retorna todas as entidades correspondentes e produz seus campos <code translate="no">age</code> e <code translate="no">price</code>. Para obter mais informações sobre consultas de filtro, consulte <a href="/docs/pt/boolean.md">Filtragem de metadados</a>.</p>
+<p>Essa expressão de consulta retorna todas as entidades correspondentes e produz seus campos <code translate="no">age</code> e <code translate="no">price</code>. Para obter mais informações sobre consultas de filtro, consulte <a href="/docs/pt/boolean.md">Filtragem de metadados</a>.</p>
 <h3 id="Vector-search-with-number-filtering​" class="common-anchor-header">Pesquisa vetorial com filtragem de números</h3><p>Além da filtragem básica de campo numérico, é possível combinar pesquisas de similaridade de vetor com filtros de campo numérico. Por exemplo, o código a seguir mostra como adicionar um filtro de campo numérico a uma pesquisa de vetor.</p>
 <div class="multipleCode">
  <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>

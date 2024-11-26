@@ -45,7 +45,7 @@ title: Correspondência de palavras-chave
       </svg>
     </button></h2><p>O Milvus integra o <a href="https://github.com/quickwit-oss/tantivy">Tantivy</a> para alimentar o seu índice invertido subjacente e a pesquisa por palavras-chave. Para cada entrada de texto, Milvus indexa-o seguindo o procedimento.</p>
 <ol>
-<li><p><a href="/docs/pt/analyzer-overview.md">Analisador</a>: O analisador processa o texto de entrada, transformando-o em palavras individuais, ou tokens, e aplicando filtros conforme necessário. Isto permite ao Milvus construir um índice baseado nestes tokens.</p></li>
+<li><p><a href="/docs/pt/analyzer-overview.md">Analisador</a>: O analisador processa o texto de entrada, dividindo-o em palavras individuais, ou tokens, e aplicando filtros conforme necessário. Isto permite ao Milvus construir um índice baseado nestes tokens.</p></li>
 <li><p><a href="/docs/pt/index-scalar-fields.md">Indexação</a>: Após a análise do texto, o Milvus cria um índice invertido que mapeia cada token único para os documentos que o contêm.</p></li>
 </ol>
 <p>Quando um utilizador efectua uma correspondência de palavras-chave, o índice invertido é utilizado para recuperar rapidamente todos os documentos que contêm as palavras-chave. Isto é muito mais rápido do que analisar cada documento individualmente.</p>
@@ -83,7 +83,7 @@ schema.add_field(​
 )​
 
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Optional-Configure-an-analyzer​" class="common-anchor-header">Opcional: Configurar um analisador</h3><p>O desempenho e a precisão da correspondência de palavras-chave dependem do analisador selecionado. Diferentes analisadores são adaptados a várias línguas e estruturas de texto, por isso escolher o correto pode ter um impacto significativo nos resultados de pesquisa para o seu caso de utilização específico.</p>
+<h3 id="Optional-Configure-an-analyzer​" class="common-anchor-header">Opcional: Configurar um analisador</h3><p>O desempenho e a precisão da correspondência de palavras-chave dependem do analisador selecionado. Diferentes analisadores são adaptados a várias línguas e estruturas de texto, por isso escolher o correto pode ter um impacto significativo nos resultados da pesquisa para o seu caso de utilização específico.</p>
 <p>Por predefinição, o Milvus utiliza o analisador <code translate="no">standard</code>, que tokeniza o texto com base em espaços em branco e pontuação, remove tokens com mais de 40 caracteres e converte o texto para minúsculas. Não são necessários parâmetros adicionais para aplicar essa configuração padrão. Para obter mais informações, consulte <a href="/docs/pt/standard-analyzer.md">Padrão</a>.</p>
 <p>Nos casos em que um analisador diferente é necessário, você pode configurá-lo usando o parâmetro <code translate="no">analyzer_params</code>. Por exemplo, para aplicar o analisador <code translate="no">english</code> para processar texto em inglês.</p>
 <pre><code translate="no" class="language-python">analyzer_params={​
@@ -133,8 +133,8 @@ schema.add_field(​
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&quot;TEXT_MATCH(text, &#x27;machine&#x27;) and TEXT_MATCH(text, &#x27;deep&#x27;)&quot;</span>​
 
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Search-with-keyword-match​" class="common-anchor-header">Pesquisar com correspondência de palavra-chave</h3><p>A correspondência de palavras-chave pode ser utilizada em combinação com a pesquisa de semelhança de vectores para restringir o âmbito da pesquisa e melhorar o desempenho da mesma. Ao filtrar a coleção utilizando a correspondência de palavras-chave antes da pesquisa de semelhança de vectores, pode reduzir o número de documentos que precisam de ser pesquisados, resultando em tempos de consulta mais rápidos.</p>
-<p>Neste exemplo, a expressão <code translate="no">filter</code> filtra os resultados da pesquisa para incluir apenas documentos que correspondam às palavras-chave especificadas <code translate="no">keyword1</code> ou <code translate="no">keyword2</code>. A pesquisa de similaridade de vetor é então executada neste subconjunto filtrado de documentos.</p>
+<h3 id="Search-with-keyword-match​" class="common-anchor-header">Pesquisar com correspondência de palavras-chave</h3><p>A correspondência de palavras-chave pode ser utilizada em combinação com a pesquisa de semelhança de vectores para limitar o âmbito da pesquisa e melhorar o desempenho da mesma. Ao filtrar a coleção utilizando a correspondência de palavras-chave antes da pesquisa de semelhança de vectores, pode reduzir o número de documentos que precisam de ser pesquisados, resultando em tempos de consulta mais rápidos.</p>
+<p>Neste exemplo, a expressão <code translate="no">filter</code> filtra os resultados da pesquisa para incluir apenas documentos que correspondam às palavras-chave especificadas <code translate="no">keyword1</code> ou <code translate="no">keyword2</code>. A pesquisa de similaridade de vectores é então executada neste subconjunto filtrado de documentos.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Match entities with `keyword1` or `keyword2`​</span>
 <span class="hljs-built_in">filter</span> = <span class="hljs-string">&quot;TEXT_MATCH(text, &#x27;keyword1 keyword2&#x27;)&quot;</span>​
 ​

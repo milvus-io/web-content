@@ -143,7 +143,7 @@ curl --request POST \​
         ></path>
       </svg>
     </button></h2><p>Wenn eine Sammlung für einen bestimmten Zeitraum gelöscht werden soll, können Sie ihre Time-To-Live (TTL) in Sekunden festlegen. Sobald die TTL abgelaufen ist, löscht Zilliz Cloud die Entitäten in der Sammlung und löscht die Sammlung. Die Löschung erfolgt asynchron, was bedeutet, dass Suchen und Abfragen noch möglich sind, bevor die Löschung abgeschlossen ist.</p>
-<p>Der folgende Codeschnipsel zeigt, wie man die TTL einer Sammlung ändert.</p>
+<p>Der folgende Codeschnipsel zeigt, wie die TTL einer Sammlung geändert werden kann.</p>
 <div class="multipleCode">
  <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#go">Go</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Currently not available for Python</span>

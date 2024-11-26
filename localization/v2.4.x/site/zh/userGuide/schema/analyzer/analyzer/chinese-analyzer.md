@@ -25,7 +25,7 @@ summary: 中文 "分析器专为处理中文文本而设计，可提供有效的
 <li><p><strong>标记化器</strong>：使用<code translate="no">jieba</code> 标记化器，根据词汇和上下文将中文文本分割成标记。更多信息，请参阅<a href="/docs/zh/jieba-tokenizer.md">Jieba</a>。</p></li>
 <li><p><strong>过滤器</strong>：使用<code translate="no">cnalphanumonly</code> 过滤器删除包含任何非汉字的标记。更多信息，请参阅<a href="/docs/zh/cnalphanumonly-filter.md">Cnalphanumonly</a>。</p></li>
 </ul>
-<p><code translate="no">chinese</code> 分析器的功能相当于以下自定义分析器配置。</p>
+<p><code translate="no">chinese</code> 分析器的功能等同于以下自定义分析器配置。</p>
 <pre><code translate="no" class="language-python">analyzer_params = {​
     <span class="hljs-string">&quot;tokenizer&quot;</span>: <span class="hljs-string">&quot;jieba&quot;</span>,​
     <span class="hljs-string">&quot;filter&quot;</span>: [<span class="hljs-string">&quot;cnalphanumonly&quot;</span>]​

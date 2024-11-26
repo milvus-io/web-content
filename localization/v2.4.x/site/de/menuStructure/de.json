@@ -331,7 +331,7 @@
         "children": []
       },
       {
-        "label": "Sammlungen",
+        "label": "Collections",
         "id": "collections",
         "order": 1,
         "children": [
@@ -457,7 +457,7 @@
             "children": []
           },
           {
-            "label": "Nullbar &amp; Standard",
+            "label": "Nullable & Default",
             "id": "nullable-and-default.md",
             "order": 10,
             "children": []

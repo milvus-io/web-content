@@ -623,7 +623,7 @@ curl --request POST \​
 </ul>
 <h3 id="Search-and-Query​" class="common-anchor-header">Ricerca e interrogazione</h3><p>È possibile effettuare ricerche e query all'interno di partizioni specifiche. Per ulteriori informazioni, consultare</p>
 <ul>
-<li><p>Eseguire ricerche di RNA all'interno di partizioni</p></li>
+<li><p>Eseguire ricerche di RNA all'interno delle partizioni</p></li>
 <li><p>Eseguire il filtraggio dei metadati all'interno delle partizioni</p></li>
 </ul>
 <h2 id="Drop-Partition​" class="common-anchor-header">Eliminazione di partizioni<button data-href="#Drop-Partition​" class="anchor-icon" translate="no">

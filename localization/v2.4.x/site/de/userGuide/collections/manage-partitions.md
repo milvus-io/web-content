@@ -33,12 +33,12 @@ title: Partitionen verwalten
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Wenn Sie eine Sammlung erstellen, erstellt Zilliz Cloud auch eine Partition mit dem Namen <strong>_default</strong> in der Sammlung. Wenn Sie keine weiteren Partitionen hinzufügen, werden alle Entitäten, die in die Sammlung eingefügt werden, in die Standardpartition eingefügt, und alle Suchen und Abfragen werden ebenfalls in der Standardpartition ausgeführt.</p>
+    </button></h2><p>Wenn Sie eine Sammlung erstellen, erstellt Zilliz Cloud auch eine Partition namens <strong>_default</strong> in der Sammlung. Wenn Sie keine weiteren Partitionen hinzufügen, werden alle Entitäten, die in die Sammlung eingefügt werden, in die Standardpartition eingefügt, und alle Suchen und Abfragen werden ebenfalls in der Standardpartition ausgeführt.</p>
 <p>Sie können weitere Partitionen hinzufügen und Entitäten nach bestimmten Kriterien in diese einfügen. Dann können Sie Ihre Suchen und Abfragen auf bestimmte Partitionen beschränken und so die Suchleistung verbessern.</p>
 <p>Eine Sammlung kann bis zu 1.024 Partitionen haben.</p>
 <div class="alert note">
-<p>Das <strong>Partitionsschlüssel-Feature</strong> ist eine Suchoptimierung, die auf Partitionen basiert und es Zilliz Cloud ermöglicht, Entitäten in verschiedene Partitionen zu verteilen, basierend auf den Werten in einem bestimmten skalaren Feld. Diese Funktion hilft bei der Implementierung von partitionsorientierter Multi-Tenancy und verbessert die Suchleistung.</p>
-<p>Diese Funktion wird auf dieser Seite nicht behandelt. Um mehr zu erfahren, siehe <a href="/docs/de/use-partition-key.md">Partitionsschlüssel verwenden</a>.</p>
+<p>Das <strong>Partitionsschlüssel-Feature</strong> ist eine Suchoptimierung, die auf Partitionen basiert und es Zilliz Cloud ermöglicht, Entitäten in verschiedene Partitionen zu verteilen, basierend auf den Werten in einem bestimmten skalaren Feld. Diese Funktion hilft bei der Implementierung einer partitionierten Multi-Tenancy und verbessert die Suchleistung.</p>
+<p>Diese Funktion wird auf dieser Seite nicht behandelt. Um mehr zu erfahren, lesen Sie bitte <a href="/docs/de/use-partition-key.md">Partitionsschlüssel verwenden</a>.</p>
 </div>
 <h2 id="List-Partitions​" class="common-anchor-header">Partitionen auflisten<button data-href="#List-Partitions​" class="anchor-icon" translate="no">
       <svg translate="no"

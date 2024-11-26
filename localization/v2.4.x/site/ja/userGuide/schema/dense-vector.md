@@ -20,7 +20,7 @@ summary: >-
         ></path>
       </svg>
     </button></h1><p>密なベクトルは、機械学習やデータ分析で広く使われている数値データ表現である。実数の配列で構成され、要素のほとんどまたはすべてが0でない。密なベクトルは疎なベクトルと比較して、各次元が意味のある値を保持しているため、同じ次元レベルでより多くの情報を含んでいます。この表現は、複雑なパターンや関係を効果的に捉えることができ、高次元空間でのデータの分析や処理を容易にします。密なベクトルは通常、特定のアプリケーションや要件に応じて、数十から数百、あるいは数千の固定された次元数を持つ。</p>
-<p>密なベクトルは主に、セマンティック検索や推薦システムなど、データのセマンティクスを理解する必要があるシナリオで使用される。セマンティック検索では、密なベクトルはクエリとドキュメント間の根本的なつながりを把握するのに役立ち、検索結果の関連性を向上させます。推薦システムでは、ユーザとアイテムの類似性を識別するのに役立ち、よりパーソナライズされた提案を提供します。</p>
+<p>密なベクトルは主に、セマンティック検索や推薦システムなど、データのセマンティクスを理解する必要があるシナリオで使用される。セマンティック検索では、密なベクトルはクエリとドキュメント間の根本的なつながりを捕捉するのに役立ち、検索結果の関連性を向上させます。推薦システムでは、ユーザとアイテムの類似性を識別するのに役立ち、よりパーソナライズされた提案を提供します。</p>
 <h2 id="Overview​" class="common-anchor-header">概要<button data-href="#Overview​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -69,7 +69,7 @@ summary: >-
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/use-dense-vector.png" alt="Use dense vecctors in Milvus" class="doc-image" id="use-dense-vecctors-in-milvus" />
    </span> <span class="img-wrapper"> <span>Milvusで密なベクトルを使う</span> </span></p>
 <div class="alert note">
-<p>Milvusは密なベクトル以外にも、疎なベクトルやバイナリベクトルにも対応しています。スパースベクトルはキーワード検索やタームマッチのような特定の用語に基づく正確なマッチングに適しており、バイナリベクトルは画像パターンマッチングや特定のハッシュアプリケーションのような2値化されたデータを効率的に処理するために一般的に使用されます。詳細は<a href="/docs/ja/binary-vector.md">バイナリベクトルと</a> <a href="/docs/ja/sparse_vector.md">スパースベクトルを</a>参照してください。</p>
+<p>Milvusは密なベクトル以外にも、疎なベクトルやバイナリベクトルにも対応しています。スパースベクトルはキーワード検索やタームマッチのような特定の用語に基づく正確なマッチングに適しており、バイナリベクトルは画像パターンマッチングや特定のハッシュアプリケーションのような2値化されたデータを効率的に扱うために一般的に使用されます。詳細は<a href="/docs/ja/binary-vector.md">バイナリベクトルと</a> <a href="/docs/ja/sparse_vector.md">スパースベクトルを</a>参照してください。</p>
 </div>
 <h2 id="Use-dense-vectors-in-Milvus​" class="common-anchor-header">Milvusで密なベクトルを使う<button data-href="#Use-dense-vectors-in-Milvus​" class="anchor-icon" translate="no">
       <svg translate="no"

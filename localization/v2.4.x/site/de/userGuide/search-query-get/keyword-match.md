@@ -26,7 +26,7 @@ title: Schlüsselwort-Abgleich
       </svg>
     </button></h1><p>Der Schlüsselwortabgleich in Milvus ermöglicht die präzise Suche nach Dokumenten auf der Grundlage bestimmter Begriffe. Diese Funktion wird in erster Linie für eine gefilterte Suche verwendet, um bestimmte Bedingungen zu erfüllen, und kann eine skalare Filterung zur Verfeinerung der Abfrageergebnisse beinhalten, die eine Ähnlichkeitssuche innerhalb von Vektoren ermöglicht, die skalare Kriterien erfüllen.</p>
 <div class="alert note">
-<p>Der Schlüsselwortabgleich konzentriert sich auf die Suche nach exakten Vorkommen der Abfragebegriffe, ohne die Relevanz der übereinstimmenden Dokumente zu bewerten. Wenn Sie die relevantesten Dokumente auf der Grundlage der semantischen Bedeutung und Wichtigkeit der Suchbegriffe abrufen möchten, empfehlen wir Ihnen die <a href="/docs/de/full-text-search.md">Volltextsuche</a>.</p>
+<p>Die Stichwortsuche konzentriert sich auf die Suche nach exakten Vorkommen der Suchbegriffe, ohne die Relevanz der gefundenen Dokumente zu bewerten. Wenn Sie die relevantesten Dokumente auf der Grundlage der semantischen Bedeutung und Wichtigkeit der Suchbegriffe abrufen möchten, empfehlen wir Ihnen die <a href="/docs/de/full-text-search.md">Volltextsuche</a>.</p>
 </div>
 <h2 id="Overview" class="common-anchor-header">Überblick<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"

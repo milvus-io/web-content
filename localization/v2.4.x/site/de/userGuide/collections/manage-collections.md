@@ -78,7 +78,7 @@ title: Sammlung erklärt
         ></path>
       </svg>
     </button></h2><p>Ähnlich wie das Primärfeld in einer relationalen Datenbank hat eine Sammlung ein Primärfeld, um eine Entität von anderen zu unterscheiden. Jeder Wert im Primärfeld ist global eindeutig und entspricht einer bestimmten Entität. </p>
-<p>Wie im obigen Diagramm dargestellt, dient das Feld mit der Bezeichnung <strong>id</strong> als Primärfeld, und die erste ID <strong>0</strong> entspricht einer Entität mit dem Titel <em>Die Sterblichkeitsrate des Coronavirus ist nicht wichtig</em>. Es wird keine andere Entität geben, die das Primärfeld 0 hat.</p>
+<p>Wie im obigen Diagramm dargestellt, dient das Feld mit dem Namen <strong>id</strong> als Primärfeld, und die erste ID <strong>0</strong> entspricht einer Entität mit dem Titel <em>Die Sterblichkeitsrate des Coronavirus ist nicht wichtig</em>. Es wird keine andere Entität geben, die das Primärfeld 0 hat.</p>
 <p>Ein Primärfeld kann nur ganze Zahlen oder Zeichenketten enthalten. Beim Einfügen von Entitäten sollten Sie die Werte des Primärfelds standardmäßig einschließen. Wenn Sie jedoch <strong>AutoId</strong> bei der Erstellung der Sammlung aktiviert haben, wird Milvus diese Werte beim Einfügen der Daten generieren. In einem solchen Fall sollten Sie die Werte des Primärfeldes aus den einzufügenden Entitäten ausschließen.</p>
 <p>Weitere Informationen finden Sie unter <a href="/docs/de/primary-field.md">Primärfeld &amp; AutoID</a>.</p>
 <h2 id="Index​" class="common-anchor-header">Index<button data-href="#Index​" class="anchor-icon" translate="no">

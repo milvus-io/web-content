@@ -36,7 +36,7 @@ title: MMap対応データストレージ
       </svg>
     </button></h2><p>Milvus 2.4より、デプロイ前に静的設定ファイルを調整し、クラスタ全体のデフォルトメモリマッピング設定を柔軟に設定できるようになりました。さらに、パラメータを動的に変更してクラスタとインデックスの両方のレベルでメモリマッピング設定を微調整するオプションもあります。将来のアップデートでは、メモリマッピング機能を拡張し、フィールドレベルの設定を含める予定です。</p>
 <h3 id="Before-cluster-deployment-global-configuration" class="common-anchor-header">クラスタ展開前：グローバル設定</h3><p>クラスタをデプロイする前に、<strong>クラスタレベルの</strong>設定でクラスタ全体にメモリマッピングを適用します。これにより、すべての新しいオブジェクトが自動的にこれらの設定に準拠するようになります。これらの設定を変更すると、有効にするにはクラスタを再起動する必要があることに注意してください。</p>
-<p>クラスタのメモリマッピング設定を調整するには、<code translate="no">configs/milvus.yaml</code> ファイルを編集します。このファイルでは、デフォルトでメモリ・マッピングを有効にするかどうかを指定し、メモリ・マッピングされたファイルを格納するディレクトリ・パスを決定します。パス(<code translate="no">mmapDirPath</code>)を指定しないままにしておくと、システムのデフォルトでは、メモリ・マップされたファイルは<code translate="no">{localStorage.path}/mmap</code> に格納されます。詳細については、<a href="https://milvus.io/docs/configure_localstorage.md#localStoragepath">ローカル・スト レージ関連の構成を</a>参照してください。</p>
+<p>クラスタのメモリマッピング設定を調整するには、<code translate="no">configs/milvus.yaml</code> ファイルを編集します。このファイルでは、デフォルトでメモリ・マッピングを有効にするかどうかを指定し、メモリ・マッピングされたファイルを格納するディレクトリ・パスを決定します。パス(<code translate="no">mmapDirPath</code>)を指定しないままにしておくと、システムはデフォルトでメモリ・マップされたファイルを<code translate="no">{localStorage.path}/mmap</code> に格納します。詳細については、<a href="https://milvus.io/docs/configure_localstorage.md#localStoragepath">ローカル・スト レージ関連の構成を</a>参照してください。</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># This parameter was set in configs/milvus.yaml</span>
 ...
 queryNode:
@@ -64,7 +64,7 @@ queryNode:
     scalarIndex: false <span class="hljs-comment"># Enable mmap for loading scalar index</span>
 ....
 <button class="copy-code-btn"></button></code></pre>
-<p>さらに、ベクター・インデックスとベクター・データのmmapのみ、コレクションに対して個別にオン/オフを切り替えることができますが、他のコレクションに対してはできません。</p>
+<p>さらに、ベクターインデックスとベクターデータのmmapのみ、コレクションに対して個別にオン/オフすることができますが、他のコレクションに対してはできません。</p>
 <p>互換性：元の構成<code translate="no">queryNode.mmap.mmapEnabled</code> が<code translate="no">true</code> に設定されている場合、新しく追加された構成はこの時点で<code translate="no">true</code> に設定される。<code translate="no">queryNode.mmap.mmapEnabled</code> が<code translate="no">false</code> に設定されている場合、新しい構成が<code translate="no">true</code> に設定されると、最終値は<code translate="no">true</code> になります。</p>
 <h3 id="During-cluster-operation-dynamic-configuration" class="common-anchor-header">クラスタ動作中：動的構成</h3><p>クラスタ実行時に、コレクションレベルまたはインデックスレベルでメモリマッピング設定を動的に調整できます。</p>
 <p><strong>コレクションレベルでは</strong>、メモリマッピングは、プライマリキー、タイムスタンプ、および行IDを除く、コレクション内のインデックス付けされていないすべての生データに適用されます。このアプローチは、特に大規模なデータセットの包括的な管理に適している。</p>
@@ -178,7 +178,7 @@ spec:
 <li><p><strong>コレクションレベル構成とインデックスレベル構成の関係は?</strong></p>
 <p>コレクション・レベルとインデックス・レベルは包括的な関係ではなく、コレクション・レベルは元のデータがmmap有効かどうかを制御し、インデックス・レベルはベクトル・インデックスのみを制御します。</p></li>
 <li><p><strong>メモリマッピングに推奨されるインデックスタイプはありますか？</strong></p>
-<p>はい、HNSWを推奨します。以前、HNSW、IVF_FLAT、IVF_PQ/SQ シリーズのインデックスをテストしたことがありますが、IVF シリーズのインデックスの性能は著しく低下しました。</p></li>
+<p>はい、HNSWを推奨します。以前、HNSW、IVF_FLAT、IVF_PQ/SQシリーズのインデックスをテストしたことがありますが、IVFシリーズのインデックスのパフォーマンスは著しく低下しました。</p></li>
 <li><p><strong>メモリマッピングにはどのようなローカルストレージが必要ですか？</strong></p>
 <p>NVMeドライブが望ましい。</p></li>
 <li><p><strong>スカラーデータはメモリマッピングできますか？</strong></p>

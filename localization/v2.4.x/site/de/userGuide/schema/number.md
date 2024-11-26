@@ -442,7 +442,7 @@ client.<span class="hljs-title function_">insert</span>({​
         ></path>
       </svg>
     </button></h2><p>Nachdem Sie Zahlenfelder hinzugefügt haben, können Sie diese zum Filtern in Such- und Abfrageoperationen verwenden, um präzisere Suchergebnisse zu erzielen.</p>
-<h3 id="Filter-queries​" class="common-anchor-header">Filterabfragen</h3><p>Nachdem Sie Zahlenfelder hinzugefügt haben, können Sie diese zum Filtern in Abfragen verwenden. Zum Beispiel können Sie alle Entitäten abfragen, bei denen <code translate="no">age</code> zwischen 30 und 40 liegt.</p>
+<h3 id="Filter-queries​" class="common-anchor-header">Filterabfragen</h3><p>Nachdem Sie Zahlenfelder hinzugefügt haben, können Sie diese zum Filtern in Abfragen verwenden. Sie können zum Beispiel alle Entitäten abfragen, bei denen <code translate="no">age</code> zwischen 30 und 40 liegt.</p>
 <div class="multipleCode">
  <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&quot;30 &lt;= age &lt;= 40&quot;</span>​

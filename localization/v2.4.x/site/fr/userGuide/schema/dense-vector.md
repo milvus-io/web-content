@@ -46,7 +46,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Les vecteurs denses sont généralement représentés sous la forme de tableaux de nombres à virgule flottante d'une longueur fixe, tels que <code translate="no">[0.2, 0.7, 0.1, 0.8, 0.3, ..., 0.5]</code>. La dimensionnalité de ces vecteurs varie généralement entre des centaines et des milliers, comme 128, 256, 768 ou 1024. Chaque dimension capture les caractéristiques sémantiques spécifiques d'un objet, ce qui permet de l'appliquer à divers scénarios par le biais de calculs de similarité.</p>
+    </button></h2><p>Les vecteurs denses sont généralement représentés sous forme de tableaux de nombres à virgule flottante d'une longueur fixe, tels que <code translate="no">[0.2, 0.7, 0.1, 0.8, 0.3, ..., 0.5]</code>. La dimensionnalité de ces vecteurs varie généralement entre des centaines et des milliers, comme 128, 256, 768 ou 1024. Chaque dimension capture les caractéristiques sémantiques spécifiques d'un objet, ce qui permet de l'appliquer à divers scénarios par le biais de calculs de similarité.</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/dense-vector.png" alt="Dense vectors in 2D space" class="doc-image" id="dense-vectors-in-2d-space" />
@@ -189,7 +189,7 @@ schema.<span class="hljs-title function_">push</span>({​
 <tbody>
 <tr><td><code translate="no">FLOAT_VECTOR</code></td><td>Stocke des nombres à virgule flottante 32 bits, couramment utilisés pour représenter des nombres réels dans les calculs scientifiques et l'apprentissage automatique. Idéal pour les scénarios nécessitant une grande précision, comme la distinction de vecteurs similaires.</td></tr>
 <tr><td><code translate="no">FLOAT16_VECTOR</code></td><td>Stocke les nombres à virgule flottante de demi-précision sur 16 bits, utilisés pour l'apprentissage profond et les calculs du GPU. Il permet d'économiser de l'espace de stockage dans les scénarios où la précision est moins critique, comme dans la phase de rappel à faible précision des systèmes de recommandation.</td></tr>
-<tr><td><code translate="no">BFLOAT16_VECTOR</code></td><td>Stocke les nombres à virgule flottante Brain 16 bits (bfloat16), offrant la même gamme d'exposants que Float32 mais avec une précision réduite. Convient aux scénarios nécessitant le traitement rapide de grands volumes de vecteurs, tels que la recherche d'images à grande échelle.</td></tr>
+<tr><td><code translate="no">BFLOAT16_VECTOR</code></td><td>Stocke des nombres à virgule flottante Brain 16 bits (bfloat16), offrant la même gamme d'exposants que Float32 mais avec une précision réduite. Convient aux scénarios qui nécessitent le traitement rapide de grands volumes de vecteurs, tels que la recherche d'images à grande échelle.</td></tr>
 </tbody>
 </table>
 <h3 id="Set-index-params-for-vector-field​" class="common-anchor-header">Définir les paramètres d'index pour le champ vectoriel</h3><p>Pour accélérer les recherches sémantiques, un index doit être créé pour le champ vectoriel. L'indexation peut améliorer de manière significative l'efficacité de la recherche de données vectorielles à grande échelle.</p>

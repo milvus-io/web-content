@@ -41,7 +41,7 @@ title: Reordenación
 <p>La reordenación en la búsqueda híbrida es un paso crucial que consolida los resultados de varios campos vectoriales, garantizando que el resultado final sea relevante y esté correctamente priorizado. Actualmente, Milvus ofrece estas estrategias de reordenación:</p>
 <ul>
 <li><p><code translate="no">WeightedRanker</code>: Este enfoque fusiona resultados calculando una media ponderada de puntuaciones (o distancias vectoriales) de diferentes búsquedas vectoriales. Asigna pesos en función de la importancia de cada campo vectorial.</p></li>
-<li><p><code translate="no">RRFRanker</code>: Esta estrategia combina los resultados en función de sus clasificaciones en diferentes columnas de vectores.</p></li>
+<li><p><code translate="no">RRFRanker</code>: Esta estrategia combina los resultados en función de sus rangos en diferentes columnas de vectores.</p></li>
 </ul>
 <h2 id="Weighted-Scoring-WeightedRanker" class="common-anchor-header">Puntuación ponderada (WeightedRanker)<button data-href="#Weighted-Scoring-WeightedRanker" class="anchor-icon" translate="no">
       <svg translate="no"

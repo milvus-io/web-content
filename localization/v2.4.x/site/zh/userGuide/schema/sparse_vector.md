@@ -35,13 +35,13 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>稀疏向量是高维向量的一种特殊表示形式，其中大部分元素为零，只有少数维度具有非零值。这一特性使得稀疏向量在处理大规模、高维但稀疏的数据时特别有效。常见的应用包括</p>
+    </button></h2><p>稀疏向量是高维向量的一种特殊表示形式，其中大部分元素为零，只有少数维度的值不为零。这一特性使得稀疏向量在处理大规模、高维但稀疏的数据时特别有效。常见的应用包括</p>
 <ul>
 <li><p><strong>文本分析：</strong>将文档表示为词袋向量，其中每个维度对应一个单词，只有在文档中出现的单词才有非零值。</p></li>
 <li><p><strong>推荐系统：</strong>用户-物品交互矩阵，其中每个维度代表用户对特定物品的评分，大多数用户只与少数物品交互。</p></li>
 <li><p><strong>图像处理：</strong>局部特征表示，只关注图像中的关键点，从而产生高维稀疏向量。</p></li>
 </ul>
-<p>如下图所示，密集向量通常表示为连续数组，其中每个位置都有一个值（如<code translate="no">[0.3, 0.8, 0.2, 0.3, 0.1]</code> ）。相比之下，稀疏向量只存储非零元素及其索引，通常表示为键值对（如<code translate="no">[{2: 0.2}, ..., {9997: 0.5}, {9999: 0.7}]</code> ）。这种表示方法大大减少了存储空间，提高了计算效率，尤其是在处理极高维数据（如 10,000 维数据）时。</p>
+<p>如下图所示，密集向量通常表示为连续数组，其中每个位置都有一个值（如<code translate="no">[0.3, 0.8, 0.2, 0.3, 0.1]</code> ）。相比之下，稀疏向量只存储非零元素及其索引，通常表示为键值对（如<code translate="no">[{2: 0.2}, ..., {9997: 0.5}, {9999: 0.7}]</code> ）。这种表示方法大大减少了存储空间，提高了计算效率，尤其是在处理极高维数据（如 10,000 维）时。</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/sparse-vector.png" alt="Spare vector representation" class="doc-image" id="spare-vector-representation" />
@@ -382,7 +382,7 @@ client.<span class="hljs-title function_">insert</span>({​
 <span class="hljs-comment">## {&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:{&quot;insertCount&quot;:2,&quot;insertIds&quot;:[&quot;453577185629572534&quot;,&quot;453577185629572535&quot;]}}​</span>
 
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Perform-similarity-search​" class="common-anchor-header">执行相似性搜索</h3><p>要使用稀疏向量执行相似性搜索，请准备好查询向量和搜索参数。</p>
+<h3 id="Perform-similarity-search​" class="common-anchor-header">执行相似性搜索</h3><p>要使用稀疏向量执行相似性搜索，请准备查询向量和搜索参数。</p>
 <div class="multipleCode">
    <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Prepare search parameters​</span>

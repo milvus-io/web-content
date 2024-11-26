@@ -21,7 +21,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>検索としても知られる情報検索（IR）システムは、検索支援生成（RAG）、画像検索、商品推薦など、さまざまなAIアプリケーションに不可欠です。IRシステム開発の最初のステップはデータモデルの設計であり、これにはビジネス要件の分析、情報の整理方法の決定、データを意味的に検索可能にするためのインデックス作成が含まれます。</p>
+    </button></h1><p>検索として知られる情報検索（IR）システムは、検索支援生成（RAG）、画像検索、商品推薦など、さまざまなAIアプリケーションに不可欠です。IRシステム開発の最初のステップはデータモデルの設計であり、これにはビジネス要件の分析、情報の整理方法の決定、データを意味的に検索可能にするためのインデックス作成が含まれます。</p>
 <p>Milvusはコレクションスキーマを通してデータモデルの定義をサポートします。コレクションは、テキストや画像のような非構造化データを、セマンティック検索に使用される様々な精度の密なベクトルや疎なベクトルを含むベクトル表現とともに整理します。さらに、Milvusは &quot;スカラー &quot;と呼ばれる非ベクトルデータ型の保存とフィルタリングをサポートしています。スカラー型にはBOOL、INT8/16/32/64、FLOAT/DOUBLE、VARCHAR、JSON、Arrayが含まれます。</p>
 <p>
   
@@ -44,7 +44,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>例えば、あるニュースサイトの検索を構築し、テキスト、サムネイル画像、その他のメタデータを含むニュースのコーパスがあるとしよう。まず、検索というビジネス要件をサポートするために、データをどのように活用したいかを分析する必要がある。例えば、サムネイル画像とコンテンツの要約に基づいてニュースを検索し、著者情報や公開時間などのメタデータを条件として検索結果をフィルタリングする、というような要件があるとします。これらの要件は、さらに次のように分解できる。</p>
+    </button></h1><p>例えば、あるニュースサイトの検索を構築し、テキスト、サムネイル画像、その他のメタデータを含むニュースのコーパスがあるとしよう。まず、検索というビジネス要件をサポートするために、データをどのように活用したいかを分析する必要がある。例えば、サムネイル画像と内容の要約に基づいてニュースを検索し、著者情報や公開時間などのメタデータを条件として検索結果をフィルタリングする、というような要件があるとします。これらの要件は、さらに次のように分解できる。</p>
 <ul>
 <li><p>テキストから画像を検索するために、テキストと画像データを同じ潜在空間にマッピングできるマルチモーダル埋め込みモデルによって、画像をベクトルに埋め込むことができる。</p></li>
 <li><p>記事の要約テキストは、テキスト埋め込みモデルによってベクトルに埋め込まれる。</p></li>
@@ -141,8 +141,8 @@ schema.add_field(field_name=<span class="hljs-string">&quot;summary_sparse_vecto
 <p>Milvus サーバに接続するために<code translate="no">MilvusClient</code> の引数<code translate="no">uri</code> にお気づきでしょうか。引数は以下のように設定できます。</p>
 <ul>
 <li><p>小規模なデータやプロトタイプを作成するためにローカルのベクターデータベースが必要なだけであれば、uri をローカルファイル、例えば<code translate="no">./milvus.db</code> に設定するのが最も便利な方法です。</p></li>
-<li><p>もし、100万ベクトルを超えるような大規模なデータがある場合は、<a href="https://milvus.io/docs/quickstart.md">DockerやKubernetes</a>上に、よりパフォーマンスの高いMilvusサーバを構築することができます。このセットアップでは、サーバのアドレスとポートをURIとして使用してください（例：<code translate="no">http://localhost:19530</code> ）。Milvusの認証機能を有効にしている場合は、トークンに"&lt;your_username&gt;:&lt;your_password&gt;"を使用します。</p></li>
-<li><p>Milvusのフルマネージドクラウドサービスである<a href="https://zilliz.com/cloud">Zilliz Cloudを</a>ご利用の場合は、Zilliz Cloudの<a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">Public EndpointとAPI keyに</a>対応する<code translate="no">uri</code> と<code translate="no">token</code> を調整してください。</p></li>
+<li><p>もし、100万ベクトルを超えるような大規模なデータがある場合は、<a href="https://milvus.io/docs/quickstart.md">DockerやKubernetes</a>上に、よりパフォーマンスの高いMilvusサーバを構築することができます。このセットアップでは、サーバのアドレスとポートをURIとして使用してください（例：<code translate="no">http://localhost:19530</code> ）。Milvusで認証機能を有効にしている場合、トークンには"&lt;your_username&gt;:&lt;your_password&gt;"を使用します。</p></li>
+<li><p>Milvusのフルマネージドクラウドサービスである<a href="https://zilliz.com/cloud">Zilliz Cloudを</a>ご利用の場合は、Zilliz Cloudの<a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">Public EndpointとAPI keyに</a>対応する<code translate="no">uri</code> 、<code translate="no">token</code> 。</p></li>
 </ul>
 <p><code translate="no">MilvusClient.create_schema</code> の<code translate="no">auto_id</code> については、AutoID はプライマリフィールドの属性で、プライマリフィールドのオートインクリメントを有効にするかどうかを決定します。  フィールド<code translate="no">article_id</code> を主キーとして設定し、記事 ID を手動で追加したいので、この機能を無効にするために<code translate="no">auto_id</code> を False に設定します。</p>
 <p>スキーマオブジェクトにすべてのフィールドを追加した後、スキーマオブジェクトは上の表のエントリと一致します。</p>

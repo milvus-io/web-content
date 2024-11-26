@@ -206,7 +206,7 @@ schema := entity.NewSchema().WithDynamicFieldEnabled(<span class="hljs-literal">
       </svg>
     </button></h2><p>A criação de um índice em um campo específico acelera a pesquisa nesse campo. Um índice regista a ordem das entidades dentro de uma coleção. Como mostrado nos trechos de código a seguir, você pode usar <code translate="no">metric_type</code> e <code translate="no">index_type</code> para selecionar maneiras apropriadas para Milvus indexar um campo e medir semelhanças entre embeddings vetoriais.</p>
 <p>No Milvus, pode utilizar <code translate="no">AUTOINDEX</code> como o tipo de índice para todos os campos vectoriais e um de <code translate="no">COSINE</code>, <code translate="no">L2</code> e <code translate="no">IP</code> como o tipo de métrica com base nas suas necessidades.</p>
-<p>Como demonstrado no fragmento de código acima, é necessário definir o tipo de índice e o tipo métrico para os campos vectoriais e apenas o tipo de índice para os campos escalares. Os índices são obrigatórios para campos vectoriais e é aconselhável criar índices em campos escalares frequentemente utilizados em condições de filtragem.</p>
+<p>Como demonstrado no excerto de código acima, é necessário definir o tipo de índice e o tipo métrico para os campos vectoriais e apenas o tipo de índice para os campos escalares. Os índices são obrigatórios para campos vectoriais e é aconselhável criar índices em campos escalares frequentemente utilizados em condições de filtragem.</p>
 <p>Para obter detalhes, consulte <a href="/docs/pt/index-vector-fields.md">Índices</a>.</p>
 <div class="multipleCode">
  <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#go">Go</a> <a href="#curl">cURL</a></div>
@@ -571,7 +571,7 @@ curl --request POST \​
 }&quot;</span>​
 
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Enable-mmap​" class="common-anchor-header">Ativar o mmap</h3><p>O Milvus ativa o mmap em todas as colecções por defeito, permitindo ao Milvus mapear os dados brutos dos campos para a memória em vez de os carregar completamente. Isso reduz a pegada de memória e aumenta a capacidade da coleção. Para obter detalhes sobre o mmap, consulte <a href="/docs/pt/mmap.md">Usar mmap</a>.</p>
+<h3 id="Enable-mmap​" class="common-anchor-header">Ativar o mmap</h3><p>O Milvus ativa o mmap em todas as colecções por defeito, permitindo ao Milvus mapear os dados brutos dos campos para a memória em vez de os carregar completamente. Isso reduz o consumo de memória e aumenta a capacidade da coleção. Para obter detalhes sobre o mmap, consulte <a href="/docs/pt/mmap.md">Usar mmap</a>.</p>
 <div class="multipleCode">
  <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#go">Go</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># With mmap​</span>

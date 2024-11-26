@@ -156,13 +156,13 @@ title: Metrische Typen
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Die Cosinus-Ähnlichkeit verwendet den Cosinus des Winkels zwischen zwei Vektorsätzen, um zu messen, wie ähnlich sie sich sind. Man kann sich die beiden Vektorsätze als Liniensegmente vorstellen, die vom gleichen Punkt ausgehen, z. B. [0,0,...], aber in unterschiedliche Richtungen zeigen.</p>
+    </button></h2><p>Bei der Cosinus-Ähnlichkeit wird der Cosinus des Winkels zwischen zwei Vektorsätzen verwendet, um zu messen, wie ähnlich sie sich sind. Man kann sich die beiden Vektorsätze als Liniensegmente vorstellen, die vom gleichen Punkt ausgehen, z. B. [0,0,...], aber in unterschiedliche Richtungen zeigen.</p>
 <p>Um die Cosinus-Ähnlichkeit zwischen zwei Gruppen von Vektoren <strong>A = (<sub>a0</sub>, <sub>a1</sub>,...,<sub>an-1</sub>)</strong> und <strong>B = (<sub>b0</sub>, <sub>b1</sub>,..., <sub>bn-1</sub>)</strong> zu berechnen, verwenden Sie die folgende Formel.</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/cosine_similarity.png" alt="Cosine similarity formula" class="doc-image" id="cosine-similarity-formula" />
    </span> <span class="img-wrapper"> <span>Kosinus-Ähnlichkeitsformel</span> </span></p>
-<p>Die Kosinusähnlichkeit liegt immer im Intervall <strong>[-1, 1]</strong>. Zwei proportionale Vektoren haben beispielsweise eine Cosinus-Ähnlichkeit von <strong>1</strong>, zwei orthogonale Vektoren haben eine Ähnlichkeit von <strong>0</strong> und zwei entgegengesetzte Vektoren haben eine Ähnlichkeit von <strong>-1</strong>. Je größer der Cosinus, desto kleiner der Winkel zwischen den beiden Vektoren, was bedeutet, dass diese beiden Vektoren einander ähnlicher sind.</p>
+<p>Die Kosinusähnlichkeit liegt immer im Intervall <strong>[-1, 1]</strong>. Zwei proportionale Vektoren haben beispielsweise eine Cosinus-Ähnlichkeit von <strong>1</strong>, zwei orthogonale Vektoren haben eine Ähnlichkeit von <strong>0</strong> und zwei entgegengesetzte Vektoren haben eine Ähnlichkeit von <strong>-1</strong>. Je größer der Cosinus, desto kleiner ist der Winkel zwischen den beiden Vektoren, was bedeutet, dass diese beiden Vektoren einander ähnlicher sind.</p>
 <p>Wenn man die Kosinusähnlichkeit von 1 subtrahiert, erhält man den Kosinusabstand zwischen zwei Vektoren.</p>
 <h2 id="JACCARD-distance​" class="common-anchor-header">JACCARD-Abstand<button data-href="#JACCARD-distance​" class="anchor-icon" translate="no">
       <svg translate="no"

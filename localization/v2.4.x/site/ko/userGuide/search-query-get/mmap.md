@@ -184,7 +184,7 @@ spec:
 <li><p><strong>스칼라 데이터를 메모리 매핑할 수 있나요?</strong></p>
 <p>메모리 매핑은 스칼라 데이터에 적용할 수 있지만, 스칼라 필드에 구축된 인덱스에는 적용되지 않습니다.</p></li>
 <li><p><strong>여러 수준에서 메모리 매핑 구성의 우선 순위는 어떻게 결정되나요?</strong></p>
-<p>Milvus에서 메모리 매핑 구성이 여러 수준에 걸쳐 명시적으로 정의된 경우, 인덱스 수준과 컬렉션 수준 구성이 가장 높은 우선순위를 공유하고, 그 다음이 클러스터 수준 구성입니다.</p></li>
+<p>Milvus에서 메모리 매핑 구성이 여러 수준에 걸쳐 명시적으로 정의된 경우, 인덱스 수준과 컬렉션 수준 구성이 가장 높은 우선순위를 공유하고 그 다음으로는 클러스터 수준 구성이 그 뒤를 따릅니다.</p></li>
 <li><p><strong>Milvus 2.3에서 업그레이드하면서 메모리 매핑 디렉터리 경로를 구성한 경우 어떻게 되나요?</strong></p>
 <p>Milvus 2.3에서 업그레이드하면서 메모리 매핑 디렉터리 경로(<code translate="no">mmapDirPath</code>)를 구성한 경우 해당 구성이 유지되며 메모리 매핑 활성화 기본 설정(<code translate="no">mmapEnabled</code>)은 <code translate="no">true</code> 이 됩니다. 메타데이터를 마이그레이션하여 기존 메모리 매핑 파일의 구성을 동기화하는 것이 중요합니다. 자세한 내용은 <a href="https://milvus.io/docs/upgrade_milvus_standalone-docker.md#Migrate-the-metadata">메타데이터 마이그레이션을</a> 참조하세요.</p></li>
 </ul>

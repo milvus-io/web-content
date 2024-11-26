@@ -56,7 +56,7 @@ title: Pesquisa de agrupamento
 <ul>
 <li><p>Efetuar uma pesquisa ANN com base no vetor de consulta fornecido para encontrar todas as entidades mais semelhantes à consulta.</p></li>
 <li><p>Agrupa os resultados da pesquisa pelo endereço especificado <code translate="no">group_by_field</code>, como <code translate="no">docId</code>.</p></li>
-<li><p>Retorna os principais resultados para cada grupo, conforme definido pelo parâmetro <code translate="no">limit</code>, com a entidade mais semelhante de cada grupo.</p></li>
+<li><p>Retorna os principais resultados de cada grupo, conforme definido pelo parâmetro <code translate="no">limit</code>, com a entidade mais semelhante de cada grupo.</p></li>
 </ul>
 <div class="alert note">
 <p>Por padrão, a Pesquisa de agrupamento retorna apenas uma entidade por grupo. Se você quiser aumentar o número de resultados a serem retornados por grupo, poderá controlar isso com os parâmetros <code translate="no">group_size</code> e <code translate="no">strict_group_size</code>.</p>

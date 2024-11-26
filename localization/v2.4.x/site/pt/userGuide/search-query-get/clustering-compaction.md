@@ -50,7 +50,7 @@ summary: >-
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/clustering-compaction-2.png" alt="With Clustering Compaction" class="doc-image" id="with-clustering-compaction" />
    </span> <span class="img-wrapper"> <span>Com compactação de clustering</span> </span></p>
-<p>Usando o <strong>PartitionStats</strong> como referência, o Milvus pode eliminar dados irrelevantes ao receber uma solicitação de pesquisa/consulta que contém um valor de chave de clustering e restringir o escopo da pesquisa dentro dos segmentos que mapeiam o valor, melhorando assim o desempenho da pesquisa. Para obter detalhes sobre a melhoria do desempenho, consulte Testes de benchmark.</p>
+<p>Usando o <strong>PartitionStats</strong> como referência, o Milvus pode eliminar dados irrelevantes ao receber uma solicitação de pesquisa/consulta que contém um valor de chave de clustering e restringir o escopo da pesquisa dentro do mapeamento de segmentos para o valor, melhorando assim o desempenho da pesquisa. Para obter detalhes sobre a melhoria do desempenho, consulte Testes de benchmark.</p>
 <h2 id="Use-Clustering-Compaction" class="common-anchor-header">Usar compactação de clustering<button data-href="#Use-Clustering-Compaction" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -102,7 +102,7 @@ common:
 <tr><td><code translate="no">minInterval</code></td><td>Especifica o intervalo mínimo em segundos.<br>Este parâmetro é válido apenas quando <code translate="no">autoEnable</code> está definido como <code translate="no">true</code>.<br>Definir este parâmetro como um número inteiro superior a triggerInterval ajuda a evitar compactações repetidas num curto período de tempo.</td><td>-</td></tr>
 <tr><td><code translate="no">maxInterval</code></td><td>Especifica o intervalo máximo em segundos.<br>Este parâmetro só é válido se <code translate="no">autoEnable</code> estiver definido como <code translate="no">true</code>.<br>Quando o Milvus detecta que uma coleção não foi compactada por um período superior a este valor, força uma compactação por clustering.</td><td>-</td></tr>
 <tr><td><code translate="no">newDataSizeThreshold</code></td><td>Especifica o limite superior para desencadear uma compactação de agrupamento.<br>Este parâmetro só é válido quando <code translate="no">autoEnable</code> está definido como <code translate="no">true</code>.<br>Quando o Milvus detecta que o volume de dados de uma coleção excede este valor, inicia um processo de compactação em cluster.</td><td>-</td></tr>
-<tr><td><code translate="no">timeout</code></td><td>Especifica a duração do timeout para uma compactação de clustering.<br>Uma compactação de clustering falha se o tempo de execução exceder esse valor.</td><td>-</td></tr>
+<tr><td><code translate="no">timeout</code></td><td>Especifica a duração do timeout para uma compactação de clustering.<br>Uma compactação de agrupamento falha se o tempo de execução exceder esse valor.</td><td>-</td></tr>
 </tbody>
 </table>
 </li>
@@ -112,7 +112,7 @@ common:
 <tr><th>Item de configuração</th><th>Descrição</th><th>Valor padrão</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">enableSegmentPrune</code></td><td>Especifica se o Milvus remove os dados consultando o PartitionStats ao receber solicitações de pesquisa/consulta.<br>Definir esta opção como <code translate="no">true</code> permite que o Milvus remova dados irrelevantes dos segmentos durante uma solicitação de pesquisa/consulta.</td><td><code translate="no">false</code></td></tr>
+<tr><td><code translate="no">enableSegmentPrune</code></td><td>Especifica se o Milvus remove os dados consultando o PartitionStats ao receber solicitações de pesquisa/consulta.<br>Definir esta opção como <code translate="no">true</code> permite que o Milvus remova dados irrelevantes de segmentos durante uma solicitação de pesquisa/consulta.</td><td><code translate="no">false</code></td></tr>
 </tbody>
 </table>
 </li>
@@ -133,7 +133,7 @@ common:
 <tr><th>Item de configuração</th><th>Descrição</th><th>Valor predefinido</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">usePartitionKeyAsClusteringKey</code></td><td>Especifica se a chave de partição em colecções deve ser utilizada como chave de clustering.<br>Definir isto para <code translate="no">true</code> indica que a chave de partição é utilizada como chave de agrupamento.<br>É sempre possível substituir esta definição numa coleção definindo explicitamente uma chave de agrupamento.</td><td><code translate="no">false</code></td></tr>
+<tr><td><code translate="no">usePartitionKeyAsClusteringKey</code></td><td>Especifica se a chave de partição em colecções deve ser utilizada como chave de clustering.<br>Definir isto para <code translate="no">true</code> indica que a chave de partição é utilizada como chave de agrupamento.<br>É sempre possível substituir esta definição numa coleção, definindo explicitamente uma chave de agrupamento.</td><td><code translate="no">false</code></td></tr>
 </tbody>
 </table>
 </li>

@@ -53,7 +53,7 @@ summary: >-
 </th></tr></thead><tbody><tr><td data-block-token="CDQldJSkAonYPIxTkiWcWpqPnOd" colspan="1" rowspan="1"><p data-block-token="TX4ndGkwkogWybxIfZocILJOnbd"><code translate="no">word_list</code></p>
 </td><td data-block-token="VrxtdsWnZon6oPxMmbQcCgclnUg" colspan="1" rowspan="1"><p data-block-token="BXP4dHimoocoozxbHAecJOA6nTe">Uma lista de componentes de palavras utilizadas para dividir termos compostos. Este dicionário determina como as palavras compostas são decompostas em termos individuais.</p>
 </td></tr></tbody></table>
-<p>O filtro <code translate="no">decompounder</code> funciona nos termos gerados pelo tokenizador, pelo que deve ser utilizado em combinação com um tokenizador.</p>
+<p>O filtro <code translate="no">decompounder</code> opera nos termos gerados pelo tokenizador, pelo que deve ser utilizado em combinação com um tokenizador.</p>
 <p>Depois de definir <code translate="no">analyzer_params</code>, pode aplicá-los a um campo <code translate="no">VARCHAR</code> ao definir um esquema de coleção. Isto permite que o Milvus processe o texto nesse campo utilizando o analisador especificado para uma tokenização e filtragem eficientes. Para mais pormenores, consulte <a href="/docs/pt/analyzer-overview.md#Example-use">Exemplo de utilização</a>.</p>
 <h2 id="Example-output​" class="common-anchor-header">Exemplo de saída<button data-href="#Example-output​" class="anchor-icon" translate="no">
       <svg translate="no"

@@ -45,7 +45,7 @@ summary: >-
 <li><p>Solo i campi scalari, escluso il campo primario, supportano i valori predefiniti e l'attributo nullable.</p></li>
 <li><p>I campi JSON e Array non supportano i valori predefiniti.</p></li>
 <li><p>I valori predefiniti o l'attributo nullable possono essere configurati solo durante la creazione della collezione e non possono essere modificati in seguito.</p></li>
-<li><p>I campi scalari con l'attributo nullable abilitato non possono essere utilizzati come <code translate="no">group_by_field</code> nella ricerca per raggruppamento. Per ulteriori informazioni sulla ricerca per raggruppamento, consultare <a href="/docs/it/grouping-search.md">Ricerca per raggruppamento</a>.</p></li>
+<li><p>I campi scalari con l'attributo nullable abilitato non possono essere utilizzati come <code translate="no">group_by_field</code> nella ricerca per raggruppamento. Per ulteriori informazioni sulla ricerca per raggruppamento, consultare la sezione <a href="/docs/it/grouping-search.md">Ricerca per raggruppamento</a>.</p></li>
 <li><p>I campi contrassegnati come nullable non possono essere usati come chiavi di partizione. Per ulteriori informazioni sulle chiavi di partizione, vedere <a href="/docs/it/use-partition-key.md">Uso della chiave di partizione</a>.</p></li>
 <li><p>Quando si crea un indice su un campo scalare con l'attributo nullable abilitato, i valori nulli saranno esclusi dall'indice.</p></li>
 </ul>
@@ -65,7 +65,7 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>L'attributo <code translate="no">nullable</code> consente di memorizzare valori nulli in una collezione, fornendo flessibilità nella gestione di dati sconosciuti.</p>
-<h3 id="Set-the-nullable-attribute​" class="common-anchor-header">Impostare l'attributo nullable</h3><p>Quando si crea una collezione, utilizzare <code translate="no">nullable=True</code> per definire i campi nullable (per impostazione predefinita <code translate="no">False</code>). L'esempio seguente crea un insieme chiamato <code translate="no">user_profiles_null</code> e imposta il campo <code translate="no">age</code> come nullable.</p>
+<h3 id="Set-the-nullable-attribute​" class="common-anchor-header">Impostare l'attributo nullable</h3><p>Quando si crea una collezione, usare <code translate="no">nullable=True</code> per definire i campi nullable (per impostazione predefinita <code translate="no">False</code>). L'esempio seguente crea un insieme chiamato <code translate="no">user_profiles_null</code> e imposta il campo <code translate="no">age</code> come nullable.</p>
 <div class="multipleCode">
  <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType​
@@ -690,7 +690,7 @@ client.<span class="hljs-title function_">insert</span>({​
 <div class="alert note">
 <p>Per ulteriori informazioni sull'efficacia delle impostazioni dei valori nullable e predefiniti, consultare le <a href="#applicable-rules">Regole applicabili</a>.</p>
 </div>
-<h3 id="Search-and-query-with-default-values" class="common-anchor-header">Ricerca e interrogazione con valori predefiniti</h3><p>Le entità che contengono valori predefiniti vengono trattate come tutte le altre entità durante le ricerche vettoriali e i filtri scalari. È possibile includere valori predefiniti come parte delle operazioni <code translate="no">search</code> e <code translate="no">query</code>.</p>
+<h3 id="Search-and-query-with-default-values" class="common-anchor-header">Ricerca e interrogazione con valori predefiniti</h3><p>Le entità che contengono valori predefiniti vengono trattate come tutte le altre entità durante le ricerche vettoriali e i filtri scalari. È possibile includere i valori predefiniti come parte delle operazioni <code translate="no">search</code> e <code translate="no">query</code>.</p>
 <p>Ad esempio, in un'operazione <code translate="no">search</code>, le entità con <code translate="no">age</code> impostato sul valore predefinito di <code translate="no">18</code> saranno incluse nei risultati.</p>
 <div class="multipleCode">
  <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>

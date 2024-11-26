@@ -129,7 +129,7 @@ client.createCollection(createCollectionReq);​
         ></path>
       </svg>
     </button></h2><p>Quando il campo dinamico è abilitato nella raccolta, tutti i campi e i loro valori non definiti nello schema saranno memorizzati come coppie chiave-valore nel campo dinamico.</p>
-<p>Ad esempio, si supponga che lo schema della raccolta definisca solo due campi, denominati <code translate="no">id</code> e <code translate="no">vector</code>, con il campo dinamico abilitato. Ora, si inserisce il seguente set di dati in questa raccolta.</p>
+<p>Ad esempio, si supponga che lo schema della raccolta definisca solo due campi, denominati <code translate="no">id</code> e <code translate="no">vector</code>, con il campo dinamico abilitato. Ora si inserisce il seguente set di dati in questa raccolta.</p>
 <pre><code translate="no" class="language-JSON">[​
     {<span class="hljs-built_in">id</span>: <span class="hljs-number">0</span>, vector: [<span class="hljs-number">0.3580376395471989</span>, -<span class="hljs-number">0.6023495712049978</span>, <span class="hljs-number">0.18414012509913835</span>, -<span class="hljs-number">0.26286205330961354</span>, <span class="hljs-number">0.9029438446296592</span>], color: <span class="hljs-string">&quot;pink_8682&quot;</span>},​
     {<span class="hljs-built_in">id</span>: <span class="hljs-number">1</span>, vector: [<span class="hljs-number">0.19886812562848388</span>, <span class="hljs-number">0.06023560599112088</span>, <span class="hljs-number">0.6976963061752597</span>, <span class="hljs-number">0.2614474506242501</span>, <span class="hljs-number">0.838729485096104</span>], color: <span class="hljs-string">&quot;red_7025&quot;</span>},​

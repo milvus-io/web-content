@@ -19,7 +19,7 @@ title: キーワードマッチ
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Milvusのキーワードマッチは、特定の用語に基づいた正確な文書検索を可能にします。この機能は主に特定の条件を満たすためのフィルタリング検索に使用され、クエリ結果を絞り込むためにスカラーフィルタリングを組み込むことができ、スカラー条件を満たすベクトル内の類似検索を可能にします。</p>
+    </button></h1><p>Milvusのキーワードマッチは、特定の用語に基づいた正確な文書検索を可能にします。この機能は主に特定の条件を満たすためのフィルタリング検索に使用され、クエリー結果を絞り込むためにスカラーフィルタリングを組み込むことができ、スカラー条件を満たすベクトル内の類似検索を可能にします。</p>
 <div class="alert note">
 <p>キーワードマッチは、マッチした文書の関連性をスコアリングすることなく、クエリー用語の正確な出現箇所を見つけることに重点を置いています。クエリー用語の意味や重要性に基づいて最も関連性の高い文書を検索したい場合は、<a href="/docs/ja/full-text-search.md">Full Text Searchを</a>使用することをお勧めします。</p>
 </div>
@@ -118,7 +118,7 @@ schema.add_field(​
 <button class="copy-code-btn"></button></code></pre>
 <ul>
 <li><p><code translate="no">field_name</code>:検索するVARCHARフィールドの名前。</p></li>
-<li><p><code translate="no">text</code>:検索するキーワード。複数のキーワードは、言語や設定されている解析器に応じて、スペースや他の適切な区切り文字で区切ることができます。</p></li>
+<li><p><code translate="no">text</code>:検索するキーワード。複数のキーワードは、言語や設定されている解析器に応じて、スペースやその他の適切な区切り文字で区切ることができます。</p></li>
 </ul>
 <p>デフォルトでは、<code translate="no">TEXT_MATCH</code> 、<strong>OR</strong>マッチング・ロジックを使用します。つまり、指定したキーワードのいずれかを含む文書を返します。たとえば、<code translate="no">text</code> フィールドに<code translate="no">machine</code> または<code translate="no">deep</code> というキーワードを含む文書を検索するには、次の式を使用します。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&quot;TEXT_MATCH(text, &#x27;machine deep&#x27;)&quot;</span>​

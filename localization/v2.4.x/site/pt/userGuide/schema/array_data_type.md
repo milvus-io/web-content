@@ -32,7 +32,7 @@ summary: >-
 }​
 
 <button class="copy-code-btn"></button></code></pre>
-<p>Neste exemplo, <code translate="no">tags</code> e <code translate="no">ratings</code> são ambos campos de matriz. O campo <code translate="no">tags</code> é uma matriz de cadeias de caracteres que representa géneros de música como pop, rock e clássico, enquanto o campo <code translate="no">ratings</code> é uma matriz de números inteiros que representa as classificações dos utilizadores para a música, variando de 1 a 5. Estes campos de matriz proporcionam uma forma flexível de armazenar dados com vários valores, facilitando a realização de análises detalhadas durante as consultas e a filtragem.</p>
+<p>Neste exemplo, <code translate="no">tags</code> e <code translate="no">ratings</code> são ambos campos de matriz. O campo <code translate="no">tags</code> é uma matriz de cadeias de caracteres que representa géneros de música como pop, rock e clássico, enquanto o campo <code translate="no">ratings</code> é uma matriz de números inteiros que representa as classificações dos utilizadores para a música, variando de 1 a 5. Estes campos de matriz fornecem uma forma flexível de armazenar dados com vários valores, facilitando a realização de análises detalhadas durante as consultas e a filtragem.</p>
 <h2 id="Add-Array-field​" class="common-anchor-header">Adicionar um campo Array<button data-href="#Add-Array-field​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -607,7 +607,7 @@ System.out.println(resp.getSearchResults());​
 <span class="hljs-comment"># {&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:[{&quot;distance&quot;:-0.24793813,&quot;embedding&quot;:[0.12,0.34,0.56],&quot;id&quot;:1,&quot;ratings&quot;:{&quot;Data&quot;:{&quot;LongData&quot;:{&quot;data&quot;:[5,4,3]}}},&quot;tags&quot;:{&quot;Data&quot;:{&quot;StringData&quot;:{&quot;data&quot;:[&quot;pop&quot;,&quot;rock&quot;,&quot;classic&quot;]}}}}]}​</span>
 
 <button class="copy-code-btn"></button></code></pre>
-<p>Neste exemplo, o Milvus devolve as 5 principais entidades mais semelhantes ao vetor de consulta, sendo o primeiro elemento da matriz <code translate="no">tags</code> <code translate="no">&quot;pop&quot;</code> .</p>
+<p>Neste exemplo, o Milvus devolve as 5 principais entidades mais semelhantes ao vetor de consulta, com o primeiro elemento da matriz <code translate="no">tags</code> a ser <code translate="no">&quot;pop&quot;</code>.</p>
 <p>Além disso, o Milvus suporta operadores avançados de filtragem de matrizes como <code translate="no">ARRAY_CONTAINS</code>, <code translate="no">ARRAY_CONTAINS_ALL</code>, <code translate="no">ARRAY_CONTAINS_ANY</code> e <code translate="no">ARRAY_LENGTH</code> para melhorar ainda mais as capacidades de consulta. Para obter mais detalhes, consulte <a href="/docs/pt/boolean.md">Filtragem de metadados</a>.</p>
 <h2 id="Limits​" class="common-anchor-header">Limites<button data-href="#Limits​" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -627,5 +627,5 @@ System.out.println(resp.getSearchResults());​
     </button></h2><ul>
 <li><p><strong>Tipo de dados</strong>: Todos os elementos de um campo Array devem ter o mesmo tipo de dados, conforme especificado pelo <code translate="no">element_type</code>.</p></li>
 <li><p><strong>Capacidade da matriz</strong>: O número de elementos num campo Matriz tem de ser inferior ou igual à capacidade máxima definida quando a Matriz foi criada, conforme especificado em <code translate="no">max_capacity</code>.</p></li>
-<li><p><strong>Tratamento de cadeias de caracteres</strong>: Os valores de cadeia de caracteres em campos de matriz são armazenados como estão, sem escape semântico ou conversão. Por exemplo, <code translate="no">'a&quot;b'</code>, <code translate="no">&quot;a'b&quot;</code>, <code translate="no">'a\'b'</code> e <code translate="no">&quot;a\&quot;b&quot;</code> são armazenados como introduzidos, enquanto <code translate="no">'a'b'</code> e <code translate="no">&quot;a&quot;b&quot;</code> são considerados valores inválidos.</p></li>
+<li><p><strong>Tratamento de cadeias de caracteres</strong>: Os valores de cadeia de caracteres em campos de matriz são armazenados como estão, sem escape semântico ou conversão. Por exemplo, <code translate="no">'a&quot;b'</code>, <code translate="no">&quot;a'b&quot;</code>, <code translate="no">'a\'b'</code>, e <code translate="no">&quot;a\&quot;b&quot;</code> são armazenados como introduzidos, enquanto <code translate="no">'a'b'</code> e <code translate="no">&quot;a&quot;b&quot;</code> são considerados valores inválidos.</p></li>
 </ul>

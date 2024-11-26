@@ -25,7 +25,7 @@ summary: >-
 <p>使用分析器可能会影响性能。</p>
 <ul>
 <li><p><strong>全文搜索：</strong>对于全文搜索，数据节点和<strong>查询节点</strong>通道消耗数据的速度更慢，因为它们必须等待标记化完成。因此，新输入的数据需要更长的时间才能用于搜索。</p></li>
-<li><p><strong>关键词匹配：</strong>对于关键字匹配，索引创建速度也较慢，因为标记化需要在索引建立之前完成。</p></li>
+<li><p><strong>关键词匹配：</strong>对于关键字匹配，索引创建速度也较慢，因为标记化需要在建立索引之前完成。</p></li>
 </ul>
 </div>
 <h2 id="Anatomy-of-an-analyzer​" class="common-anchor-header">分析器剖析<button data-href="#Anatomy-of-an-analyzer​" class="anchor-icon" translate="no">
@@ -67,7 +67,7 @@ summary: >-
       </svg>
     </button></h2><p>Milvus 提供两种类型的分析器，以满足不同的文本处理需求。</p>
 <ul>
-<li><p><strong>内置分析器</strong>：这些是预定义配置，只需最少的设置即可完成常见的文本处理任务。内置分析器不需要复杂的配置，是通用搜索的理想选择。</p></li>
+<li><p><strong>内置分析器</strong>：这些是预定义的配置，只需最少的设置即可完成常见的文本处理任务。内置分析器不需要复杂的配置，是通用搜索的理想选择。</p></li>
 <li><p><strong>自定义分析器</strong>：对于更高级的需求，自定义分析器允许你通过指定标记器和零个或多个过滤器来定义自己的配置。这种自定义级别对于需要精确控制文本处理的特殊用例尤其有用。</p></li>
 </ul>
 <div class="alert note">
@@ -81,7 +81,7 @@ summary: >-
 }​
 
 <button class="copy-code-btn"></button></code></pre>
-<p>上述<code translate="no">standard</code> 内置分析仪的配置等同于使用以下参数设置自定义分析仪，其中<code translate="no">tokenizer</code> 和<code translate="no">filter</code> 选项是为实现相同功能而明确定义的：</p>
+<p>上述<code translate="no">standard</code> 内置分析仪的配置等同于使用以下参数设置自定义分析仪，其中明确定义了<code translate="no">tokenizer</code> 和<code translate="no">filter</code> 选项，以实现相同的功能：</p>
 <pre><code translate="no" class="language-python">analyzer_params = {​
     <span class="hljs-string">&quot;tokenizer&quot;</span>: <span class="hljs-string">&quot;standard&quot;</span>,​
     <span class="hljs-string">&quot;filter&quot;</span>: [​

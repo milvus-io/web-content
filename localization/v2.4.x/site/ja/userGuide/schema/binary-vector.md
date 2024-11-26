@@ -76,7 +76,7 @@ summary: >-
     </button></h2><h3 id="Add-vector-field​" class="common-anchor-header">ベクトルフィールドの追加</h3><p>Milvusでバイナリベクタを使用するには、まずコレクションを作成する際にバイナリベクタを格納するためのベクタフィールドを定義します。このプロセスには以下が含まれます。</p>
 <ol>
 <li><p><code translate="no">datatype</code> をサポートされるバイナリベクタデータ型、すなわち<code translate="no">BINARY_VECTOR</code> に設定する。</p></li>
-<li><p><code translate="no">dim</code> パラメータを使用して、ベクトルの次元を指定する。バイナリベクタは挿入時にバイト配列に変換する必要があるため、<code translate="no">dim</code> は 8 の倍数でなければならないことに注意。8個のブーリアン値（0または1）は、1バイトにパックされる。例えば、<code translate="no">dim=128</code> の場合、挿入には16バイトの配列が必要となる。</p></li>
+<li><p><code translate="no">dim</code> パラメータを使用して、ベクトルの次元を指定する。バイナリベクタは挿入時にバイト配列に変換する必要があるため、<code translate="no">dim</code> は 8 の倍数でなければならないことに注意。8個のブーリアン値（0または1）はすべて1バイトにパックされる。例えば、<code translate="no">dim=128</code> の場合、挿入には16バイトの配列が必要となる。</p></li>
 </ol>
 <div class="multipleCode">
  <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#go">Go</a> <a href="#curl">cURL</a></div>
@@ -353,7 +353,7 @@ client.<span class="hljs-title function_">insert</span>({​
 
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Perform-similarity-search​" class="common-anchor-header">類似検索の実行</h3><p>類似性検索はMilvusのコア機能の一つで、ベクトル間の距離に基づいてクエリベクトルに最も類似したデータを素早く見つけることができます。バイナリベクトルを使って類似検索を行うには、クエリベクトルと検索パラメータを用意し、<code translate="no">search</code> メソッドを呼び出します。</p>
-<p>検索操作では、バイナリ・ベクトルもバイト配列の形式で提供する必要がある。クエリ・ベクタの次元数が<code translate="no">dim</code> を定義する際に指定した次元数と一致すること、および 8 個のブール値がすべて 1 バイトに変換されることを確認してください。</p>
+<p>検索操作では、バイナリ・ベクトルもバイト配列の形式で提供する必要がある。クエリ・ベクタの次元数が<code translate="no">dim</code> を定義するときに指定した次元数と一致していること、および 8 個のブール値がすべて 1 バイトに変換されることを確認してください。</p>
 <div class="multipleCode">
  <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#go">Go</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python">search_params = {​

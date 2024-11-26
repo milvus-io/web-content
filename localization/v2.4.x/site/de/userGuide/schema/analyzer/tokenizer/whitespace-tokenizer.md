@@ -41,7 +41,7 @@ summary: >-
     <span class="hljs-string">&quot;tokenizer&quot;</span>: <span class="hljs-string">&quot;whitespace&quot;</span>,​
 }​
 <button class="copy-code-btn"></button></code></pre>
-<p>Der Whitespace-Tokenizer kann in Verbindung mit einem oder mehreren Filtern arbeiten. Der folgende Code definiert zum Beispiel einen Analyzer, der den <code translate="no">whitespace</code> tokenizer und <a href="/docs/de/lowercase-filter.md"><code translate="no">lowercase filter</code></a>:</p>
+<p>Der Whitespace-Tokenizer kann in Verbindung mit einem oder mehreren Filtern verwendet werden. Der folgende Code definiert zum Beispiel einen Analyzer, der den <code translate="no">whitespace</code> tokenizer und <a href="/docs/de/lowercase-filter.md"><code translate="no">lowercase filter</code></a>:</p>
 <pre><code translate="no" class="language-python">analyzer_params = {​
     <span class="hljs-string">&quot;tokenizer&quot;</span>: <span class="hljs-string">&quot;whitespace&quot;</span>,​
     <span class="hljs-string">&quot;filter&quot;</span>: [<span class="hljs-string">&quot;lowercase&quot;</span>]​

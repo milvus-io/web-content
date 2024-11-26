@@ -78,7 +78,7 @@ summary: >-
 ]​
 
 <button class="copy-code-btn"></button></code></pre>
-<p>以下代码片段中的搜索请求包含一个过滤条件和多个输出字段。</p>
+<p>下面代码片段中的搜索请求包含一个过滤条件和多个输出字段。</p>
 <div class="multipleCode">
    <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient​

@@ -2,7 +2,7 @@
 id: binary-vector.md
 title: 二进制向量
 summary: >-
-  二进制向量是一种特殊的数据表示形式，它将传统的高维浮点向量转换成只包含 0 和 1
+  二进制向量是一种特殊的数据表示形式，它将传统的高维浮点向量转换为只包含 0 和 1
   的二进制向量。这种转换不仅压缩了向量的大小，还降低了存储和计算成本，同时保留了语义信息。当对非关键特征的精度要求不高时，二进制向量可以有效保持原始浮点向量的大部分完整性和实用性。
 ---
 <h1 id="Binary-Vector​" class="common-anchor-header">二进制向量<button data-href="#Binary-Vector​" class="anchor-icon" translate="no">

@@ -2,7 +2,7 @@
 id: decompounder-filter.md
 title: 減圧フィルター
 summary: >-
-  逆コンパウンダー（decompounder）`フィルターは、指定した辞書に基づいて複合語を個々の要素に分割し、複合語の一部を検索しやすくする。このフィルタは、ドイツ語のように複合語を頻繁に使う言語で特に有用である。
+  逆コンパウンダー`フィルターは、指定した辞書に基づいて複合語を個々の要素に分割し、複合語の一部を簡単に検索できるようにする。このフィルタは、ドイツ語のように複合語を頻繁に使う言語で特に有用である。
 ---
 <h1 id="Decompounder​" class="common-anchor-header">逆コンパウンダー<button data-href="#Decompounder​" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -44,7 +44,7 @@ summary: >-
     }],​
 }​
 <button class="copy-code-btn"></button></code></pre>
-<p><code translate="no">decompounder</code> フィルタでは以下のパラメータが設定可能です。</p>
+<p><code translate="no">decompounder</code> フィルタでは以下のパラメータを設定できます。</p>
 <table data-block-token="O4ZcdyoEToqP22xm5ELcYyIhnEh"><thead><tr><th data-block-token="MW4TdhfD2oe0KTx9qwGcP5XEnIh" colspan="1" rowspan="1"><p data-block-token="Y5tddmngjoAyd1xtaDzc7It5nRf">パラメータ</p>
 </th><th data-block-token="Vk8Id7BMRoJMIkxN0YPc4lJgn2f" colspan="1" rowspan="1"><p data-block-token="D4v9dtQ53oCx6ExVKhxcPj1EnWg">説明</p>
 </th></tr></thead><tbody><tr><td data-block-token="CDQldJSkAonYPIxTkiWcWpqPnOd" colspan="1" rowspan="1"><p data-block-token="TX4ndGkwkogWybxIfZocILJOnbd"><code translate="no">word_list</code></p>

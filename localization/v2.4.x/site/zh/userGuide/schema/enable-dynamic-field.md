@@ -36,7 +36,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>在 Milvus 中，可以通过设置 Collections 中每个字段的名称和数据类型来创建 Collections Schema。向 Schema 中添加字段时，请确保该字段包含在要插入的实体中。如果希望某些字段是可选的，启用动态字段是一种选择。</p>
+    </button></h2><p>在 Milvus 中，您可以通过设置 Collections 中每个字段的名称和数据类型来创建 Collections Schema。向 Schema 中添加字段时，请确保该字段包含在要插入的实体中。如果希望某些字段是可选的，启用动态字段是一种选择。</p>
 <p>动态字段是一个保留字段，名为<code translate="no">$meta</code> ，属于 JavaScript Object Notation（JSON）类型。实体中任何未在 Schema 中定义的字段都将以键值对的形式存储在这个保留的 JSON 字段中。</p>
 <p>对于启用了动态字段的 Collections，可以使用动态字段中的键进行标量过滤，就像使用模式中明确定义的字段一样。</p>
 <h2 id="Enable-dynamic-field​" class="common-anchor-header">启用动态字段<button data-href="#Enable-dynamic-field​" class="anchor-icon" translate="no">

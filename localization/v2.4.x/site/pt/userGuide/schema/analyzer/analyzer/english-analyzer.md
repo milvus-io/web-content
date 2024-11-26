@@ -32,7 +32,7 @@ summary: >-
 <li><p><a href="/docs/pt/stop-filter.md"><code translate="no">stop_words</code></a>: Remove palavras de paragem comuns em inglês para se concentrar em termos-chave no texto.</p></li>
 </ul></li>
 </ul>
-<p>A funcionalidade do analisador <code translate="no">english</code> é equivalente à seguinte configuração de analisador personalizado.</p>
+<p>A funcionalidade do analisador <code translate="no">english</code> é equivalente à seguinte configuração do analisador personalizado.</p>
 <pre><code translate="no" class="language-python">analyzer_params = {​
     <span class="hljs-string">&quot;tokenizer&quot;</span>: <span class="hljs-string">&quot;standard&quot;</span>,​
     <span class="hljs-string">&quot;filter&quot;</span>: [​

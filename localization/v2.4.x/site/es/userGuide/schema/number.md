@@ -442,7 +442,7 @@ client.<span class="hljs-title function_">insert</span>({​
         ></path>
       </svg>
     </button></h2><p>Después de añadir campos numéricos, puede utilizarlos para filtrar en las operaciones de búsqueda y consulta para obtener resultados de búsqueda más precisos.</p>
-<h3 id="Filter-queries​" class="common-anchor-header">Filtrar consultas</h3><p>Tras añadir campos numéricos, puede utilizarlos para filtrar consultas. Por ejemplo, puede consultar todas las entidades en las que <code translate="no">age</code> esté entre 30 y 40.</p>
+<h3 id="Filter-queries​" class="common-anchor-header">Filtrar consultas</h3><p>Después de añadir campos numéricos, puede utilizarlos para filtrar consultas. Por ejemplo, puede consultar todas las entidades en las que <code translate="no">age</code> esté entre 30 y 40.</p>
 <div class="multipleCode">
  <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&quot;30 &lt;= age &lt;= 40&quot;</span>​
@@ -565,4 +565,4 @@ System.out.println(resp.getSearchResults());​
 <span class="hljs-comment">## {&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:[{&quot;age&quot;:35,&quot;distance&quot;:-0.19054288,&quot;id&quot;:3,&quot;price&quot;:199.99},{&quot;age&quot;:30,&quot;distance&quot;:-0.20163085,&quot;id&quot;:2,&quot;price&quot;:149.5},{&quot;age&quot;:25,&quot;distance&quot;:-0.2364331,&quot;id&quot;:1,&quot;price&quot;:99.99}]}​</span>
 
 <button class="copy-code-btn"></button></code></pre>
-<p>En este ejemplo, primero definimos un vector de consulta y añadimos una condición de filtro <code translate="no">25 &lt;= age &lt;= 35</code> durante la búsqueda. Esto garantiza que los resultados de la búsqueda no sólo sean similares al vector de consulta, sino que también cumplan el rango de edad especificado. Para obtener más información, consulte <a href="/docs/es/boolean.md">Filtrado de metadatos</a>.</p>
+<p>En este ejemplo, primero definimos un vector de consulta y añadimos una condición de filtro <code translate="no">25 &lt;= age &lt;= 35</code> durante la búsqueda. Esto garantiza que los resultados de la búsqueda no sólo sean similares al vector de consulta, sino que también cumplan el intervalo de edad especificado. Para obtener más información, consulte <a href="/docs/es/boolean.md">Filtrado de metadatos</a>.</p>

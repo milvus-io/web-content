@@ -79,7 +79,7 @@ rerank = WeightedRanker(<span class="hljs-number">0.8</span>, <span class="hljs-
 <ul>
 <li><p>각 가중치 값의 범위는 0(가장 중요하지 않음)에서 1(가장 중요함)까지이며 최종 집계 점수에 영향을 미칩니다.</p></li>
 <li><p><code translate="no">WeightedRanker</code> 에 제공된 가중치 값의 총 개수는 앞서 생성한 <code translate="no">AnnSearchRequest</code> 인스턴스 수와 같아야 합니다.</p></li>
-<li><p>서로 다른 메트릭 유형의 측정값이 다르기 때문에 리콜 결과의 거리가 [0,1] 간격에 위치하도록 정규화하며, 여기서 0은 다르다는 의미이고 1은 비슷하다는 의미입니다. 최종 점수는 가중치 값과 거리의 합이 됩니다.</p></li>
+<li><p>서로 다른 메트릭 유형의 측정값이 다르기 때문에 리콜 결과의 거리가 [0,1] 간격에 놓이도록 정규화하며, 여기서 0은 다르다는 의미이고 1은 비슷하다는 의미입니다. 최종 점수는 가중치 값과 거리의 합이 됩니다.</p></li>
 </ul>
 <h2 id="Reciprocal-Rank-Fusion-RRFRanker" class="common-anchor-header">상호 순위 융합(RRFRanker)<button data-href="#Reciprocal-Rank-Fusion-RRFRanker" class="anchor-icon" translate="no">
       <svg translate="no"

@@ -45,7 +45,7 @@ summary: Milvus의 '영어' 분석기는 영어 텍스트를 처리하도록 설
     ]​
 }​
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Configuration​" class="common-anchor-header">구성</h3><p><code translate="no">english</code> 분석기를 필드에 적용하려면 <code translate="no">analyzer_params</code> 에서 <code translate="no">type</code> 을 <code translate="no">english</code> 으로 설정하고 필요에 따라 선택적 매개 변수를 포함하면 됩니다.</p>
+<h3 id="Configuration​" class="common-anchor-header">구성</h3><p><code translate="no">english</code> 분석기를 필드에 적용하려면 <code translate="no">analyzer_params</code> 에서 <code translate="no">type</code> 을 <code translate="no">english</code> 으로 설정하고 필요에 따라 선택적 매개변수를 포함하면 됩니다.</p>
 <pre><code translate="no" class="language-python">analyzer_params = {​
     <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;english&quot;</span>,​
 }​

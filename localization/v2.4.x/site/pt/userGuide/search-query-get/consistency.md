@@ -52,13 +52,13 @@ title: Consistência
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/consistency-level-illustrated.png" alt="Consistency Levels Illustrated" class="doc-image" id="consistency-levels-illustrated" />
    </span> <span class="img-wrapper"> <span>Níveis de consistência ilustrados</span> </span></p>
-<p>O Milvus oferece quatro tipos de níveis de consistência com diferentes GuaranteeTs.</p>
+<p>O Milvus fornece quatro tipos de níveis de consistência com diferentes GuaranteeTs.</p>
 <ul>
 <li><p><strong>Forte</strong></p>
 <p>O carimbo de data/hora mais recente é utilizado como GuaranteeTs e os QueryNodes têm de esperar até que o ServiceTime cumpra os GuaranteeTs antes de executarem os pedidos de pesquisa.</p></li>
 <li><p><strong>Eventual</strong></p>
 <p>O GuaranteeTs é definido para um valor extremamente pequeno, como 1, para evitar verificações de consistência, de modo a que os QueryNodes possam executar imediatamente pedidos de Pesquisa em todos os dados do lote.</p></li>
-<li><p><strong>Estabilidade limitada</strong></p>
+<li><p><strong>Staleness limitado</strong></p>
 <p>O GuranteeTs é definido para um ponto de tempo anterior ao último carimbo de data/hora para que os QueryNodes executem pesquisas com uma tolerância de determinada perda de dados.</p></li>
 <li><p><strong>Sessão</strong></p>
 <p>O último ponto temporal em que o cliente insere dados é utilizado como GuaranteeTs para que os QueryNodes possam efetuar pesquisas em todos os dados inseridos pelo cliente.</p></li>
