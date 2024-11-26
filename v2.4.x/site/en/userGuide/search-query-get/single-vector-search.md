@@ -2,1991 +2,971 @@
 id: single-vector-search.md
 order: 1
 summary: This article describes how to search for vectors in a Milvus collection using a single query vector.
-title: Single-Vector Search
+title: Ba​sic ANN Search
 ---
 
-# Single-Vector Search
+# Ba​sic ANN Search
 
-Once you have inserted your data, the next step is to perform similarity searches on your collection in Milvus.
+Based on an index file recording the sorted order of vector embeddings, the Approximate Nearest Neighbor (ANN) search locates a subset of vector embeddings based on the query vector carried in a received search request, compares the query vector with those in the subgroup, and returns the most similar results. With ANN search, Zilliz Cloud provides an efficient search experience. This page helps you to learn how to conduct basic ANN searches.​
 
-Milvus allows you to conduct two types of searches, depending on the number of vector fields in your collection:
+## Overview​
 
-- **Single-vector search**: If your collection has only one vector field, use the [`search()`](https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Vector/search.md) method to find the most similar entities. This method compares your query vector with the existing vectors in your collection and returns the IDs of the closest matches along with the distances between them. Optionally, it can also return the vector values and metadata of the results.
-- **Hybrid search**: For collections with two or more vector fields, use the [`hybrid_search()`](https://milvus.io/api-reference/pymilvus/v2.4.x/ORM/Collection/hybrid_search.md) method. This method performs multiple Approximate Nearest Neighbor (ANN) search requests and combines the results to return the most relevant matches after reranking.
+The ANN and the k-Nearest Neighbors (kNN) search are the usual methods in vector similarity searches. In a kNN search, you must compare all vectors in a vector space with the query vector carried in the search request before figuring out the most similar ones, which is time-consuming and resource-intensive.​
 
-This guide focuses on how to perform a single-vector search in Milvus. For details on hybrid search, refer to [Hybrid search](https://milvus.io/docs/multi-vector-search.md).
+Unlike kNN searches, an ANN search algorithm asks for an **index** file that records the sorted order of vector embeddings. When a search request comes in, you can use the index file as a reference to quickly locate a subgroup probably containing vector embeddings most similar to the query vector. Then, you can use the specified **metric type** to measure the similarity between the query vector and those in the subgroup, sort the group members based on similarity to the query vector, and figure out the **top-K** group members.​
 
-## Overview
+ANN searches depend on pre-built indexes, and the search throughput, memory usage, and search correctness may vary with the index types you choose. You need to balance search performance and correctness. ​
 
-There are a variety of search types to meet different requirements:
+To reduce the learning curve, Zilliz Cloud provides **AUTOINDEX**. With **AUTOINDEX**, Zilliz Cloud can analyze the data distribution within your collection while building the index and sets the most optimized index parameters based on the analysis to strike a balance between search performance and correctness. ​
 
-- [Basic search](https://milvus.io/docs/single-vector-search.md#Basic-search): Includes single-vector search, bulk-vector search, partition search, and search with specified output fields.
+For details on AUTOINDEX and applicable metric types, refer to [​AUTOINDEX](https://milvus.io/docs/glossary.md#Auto-Index) and [​Metric Types](metric.md). In this section, you will find detailed information about the following topics:​
 
-- [Filtered search](https://milvus.io/docs/single-vector-search.md#Filtered-search): Applies filtering criteria based on scalar fields to refine search results.
+- [Single-vector search](#Single-Vector-Search)​
 
-- [Range search](https://milvus.io/docs/single-vector-search.md#Range-search): Finds vectors within a specific distance range from the query vector.
+- [Bulk-vector search](#Bulk-Vector-Search)​
 
-- [Grouping search](https://milvus.io/docs/single-vector-search.md#Grouping-search): Groups search results based on a specific field to ensure diversity in the results.
+- [ANN search in partition](#ANN-Search-in-Partition)​
 
-## Preparations
+- [Use output fields](#Use-Output-Fields)​
 
-The code snippet below repurposes the existing code to establish a connection to Milvus and quickly set up a collection.
+- [Use limit and offset](#Use-Limit-and-Offset)​
+
+- [Enhancing ANN search](#Enhance-ANN-Search)​
+
+## Single-Vector Search​
+
+In ANN searches, a single-vector search refers to a search that involves only one query vector. Based on the pre-built index and the metric type carried in the search request, Zilliz Cloud will find the top-K vectors most similar to the query vector.​
+
+In this section, you will learn how to conduct a single-vector search. The code snippet assumes you have created a collection in a [quick-setup](create-collection-instantly#Quick-Setup) manner. The search request carries a single query vector and asks Zilliz Cloud to use Inner Product (IP) to calculate the similarity between query vectors and vectors in the collection and returns the three most similar ones.​
 
 <div class="multipleCode">
-    <a href="#python">Python </a>
-    <a href="#java">Java</a>
-    <a href="#javascript">Node.js</a>
+  <a href="#python">Python </a>
+  <a href="#java">Java</a>
+  <a href="#javascript">Node.js</a>
+  <a href="#go">Go</a>
+  <a href="#curl">cURL</a>
 </div>
 
 ```python
-from pymilvus import MilvusClient
-import random
+from pymilvus import MilvusClient​
+​
+client = MilvusClient(​
+    uri="http://localhost:19530",​
+    token="root:Milvus"​
+)​
+​
+# 4. Single vector search​
+query_vector = [0.3580376395471989, -0.6023495712049978, 0.18414012509913835, -0.26286205330961354, 0.9029438446296592]​
+res = client.search(​
+    collection_name="my_collection",​
+    anns_field="vector",​
+    data=[query_vector],​
+    limit=3,​
+    search_params={"metric_type": "IP"}​
+)​
+​
+for hits in res:​
+    for hit in hits:​
+        print(hit)​
+​
+# [​
+#     [​
+#         {​
+#             "id": 551,​
+#             "distance": 0.08821295201778412,​
+#             "entity": {}​
+#         },​
+#         {​
+#             "id": 296,​
+#             "distance": 0.0800950899720192,​
+#             "entity": {}​
+#         },​
+#         {​
+#             "id": 43,​
+#             "distance": 0.07794742286205292,​
+#             "entity": {}​
+#         }​
+#     ]​
+# ]​
 
-# 1. Set up a Milvus client
-client = MilvusClient(
-    uri="http://localhost:19530"
-)
-
-# 2. Create a collection
-client.create_collection(
-    collection_name="quick_setup",
-    dimension=5,
-    metric_type="IP"
-)
-
-# 3. Insert randomly generated vectors 
-colors = ["green", "blue", "yellow", "red", "black", "white", "purple", "pink", "orange", "brown", "grey"]
-data = []
-
-for i in range(1000):
-    current_color = random.choice(colors)
-    data.append({
-        "id": i,
-        "vector": [ random.uniform(-1, 1) for _ in range(5) ],
-        "color": current_color,
-        "color_tag": f"{current_color}_{str(random.randint(1000, 9999))}"
-    })
-
-res = client.insert(
-    collection_name="quick_setup",
-    data=data
-)
-
-print(res)
-
-# Output
-#
-# {
-#     "insert_count": 1000,
-#     "ids": [
-#         0,
-#         1,
-#         2,
-#         3,
-#         4,
-#         5,
-#         6,
-#         7,
-#         8,
-#         9,
-#         "(990 more items hidden)"
-#     ]
-# }
-
-# 6.1 Create partitions 
-client.create_partition(
-    collection_name="quick_setup",
-    partition_name="red"
-)
-
-client.create_partition(
-    collection_name="quick_setup",
-    partition_name="blue"
-)
-
-# 6.1 Insert data into partitions
-red_data = [ {"id": i, "vector": [ random.uniform(-1, 1) for _ in range(5) ], "color": "red", "color_tag": f"red_{str(random.randint(1000, 9999))}" } for i in range(500) ]
-blue_data = [ {"id": i, "vector": [ random.uniform(-1, 1) for _ in range(5) ], "color": "blue", "color_tag": f"blue_{str(random.randint(1000, 9999))}" } for i in range(500) ]
-
-res = client.insert(
-    collection_name="quick_setup",
-    data=red_data,
-    partition_name="red"
-)
-
-print(res)
-
-# Output
-#
-# {
-#     "insert_count": 500,
-#     "ids": [
-#         0,
-#         1,
-#         2,
-#         3,
-#         4,
-#         5,
-#         6,
-#         7,
-#         8,
-#         9,
-#         "(490 more items hidden)"
-#     ]
-# }
-
-res = client.insert(
-    collection_name="quick_setup",
-    data=blue_data,
-    partition_name="blue"
-)
-
-print(res)
-
-# Output
-#
-# {
-#     "insert_count": 500,
-#     "ids": [
-#         0,
-#         1,
-#         2,
-#         3,
-#         4,
-#         5,
-#         6,
-#         7,
-#         8,
-#         9,
-#         "(490 more items hidden)"
-#     ]
-# }
 ```
 
 ```java
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
-import java.util.Random;
+import io.milvus.v2.client.ConnectConfig;​
+import io.milvus.v2.client.MilvusClientV2;​
+import io.milvus.v2.service.vector.request.SearchReq;​
+import io.milvus.v2.service.vector.request.data.FloatVec;​
+import io.milvus.v2.service.vector.response.SearchResp;​
+​
+import java.util.*;​
+​
+MilvusClientV2 client = new MilvusClientV2(ConnectConfig.builder()​
+        .uri("http://localhost:19530")​
+        .token("root:Milvus")​
+        .build());​
+    ​
+FloatVec queryVector = new FloatVec(new float[]{0.3580376395471989f, -0.6023495712049978f, 0.18414012509913835f, -0.26286205330961354f, 0.9029438446296592f});​
+SearchReq searchReq = SearchReq.builder()​
+        .collectionName("my_collection")​
+        .data(Collections.singletonList(queryVector))​
+        .topK(3)​
+        .build();​
+​
+SearchResp searchResp = client.search(searchReq);​
+​
+List<List<SearchResp.SearchResult>> searchResults = searchResp.getSearchResults();​
+for (List<SearchResp.SearchResult> results : searchResults) {​
+    System.out.println("TopK results:");​
+    for (SearchResp.SearchResult result : results) {​
+        System.out.println(result);​
+    }​
+}​
+​
+// Output​
+// TopK results:​
+// SearchResp.SearchResult(entity={}, score=0.95944905, id=5)​
+// SearchResp.SearchResult(entity={}, score=0.8689616, id=1)​
+// SearchResp.SearchResult(entity={}, score=0.866088, id=7)​
 
-import com.alibaba.fastjson.JSONObject;
+```
 
-import io.milvus.v2.client.ConnectConfig;
-import io.milvus.v2.client.MilvusClientV2;
-import io.milvus.v2.service.collection.request.CreateCollectionReq;
-import io.milvus.v2.service.collection.request.GetLoadStateReq;
-import io.milvus.v2.service.vector.request.InsertReq;
-import io.milvus.v2.service.vector.response.InsertResp; 
+```go
+import (​
+    "context"​
+    "fmt"​
+    "log"​
+​
+    "github.com/milvus-io/milvus/client/v2"​
+    "github.com/milvus-io/milvus/client/v2/entity"​
+)​
+​
+func ExampleClient_Search_basic() {​
+    ctx, cancel := context.WithCancel(context.Background())​
+    defer cancel()​
+​
+    milvusAddr := "127.0.0.1:19530"​
+    token := "root:Milvus"​
+​
+    cli, err := client.New(ctx, &client.ClientConfig{​
+        Address: milvusAddr,​
+        APIKey:  token,​
+    })​
+    if err != nil {​
+        log.Fatal("failed to connect to milvus server: ", err.Error())​
+    }​
+​
+    defer cli.Close(ctx)​
+​
+    queryVector := []float32{0.3580376395471989, -0.6023495712049978, 0.18414012509913835, -0.26286205330961354, 0.9029438446296592}​
+​
+    resultSets, err := cli.Search(ctx, client.NewSearchOption(​
+        "my_collection", // collectionName​
+        3,             // limit​
+        []entity.Vector{entity.FloatVector(queryVector)},​
+    ))​
+    if err != nil {​
+        log.Fatal("failed to perform basic ANN search collection: ", err.Error())​
+    }​
+​
+    for _, resultSet := range resultSets {​
+        log.Println("IDs: ", resultSet.IDs)​
+        log.Println("Scores: ", resultSet.Scores)​
+    }​
+    // Output:​
+    // IDs:​
+    // Scores:​
+}​
 
-String CLUSTER_ENDPOINT = "http://localhost:19530";
-
-// 1. Connect to Milvus server
-ConnectConfig connectConfig = ConnectConfig.builder()
-    .uri(CLUSTER_ENDPOINT)
-    .build();
-
-MilvusClientV2 client = new MilvusClientV2(connectConfig);  
-
-// 2. Create a collection in quick setup mode
-CreateCollectionReq quickSetupReq = CreateCollectionReq.builder()
-    .collectionName("quick_setup")
-    .dimension(5)
-    .metricType("IP")
-    .build();
-
-client.createCollection(quickSetupReq);
-
-GetLoadStateReq loadStateReq = GetLoadStateReq.builder()
-    .collectionName("quick_setup")
-    .build();
-
-boolean state = client.getLoadState(loadStateReq);
-
-System.out.println(state);
-
-// Output:
-// true
-
-// 3. Insert randomly generated vectors into the collection
-List<String> colors = Arrays.asList("green", "blue", "yellow", "red", "black", "white", "purple", "pink", "orange", "brown", "grey");
-List<JSONObject> data = new ArrayList<>();
-
-for (int i=0; i<1000; i++) {
-    Random rand = new Random();
-    String current_color = colors.get(rand.nextInt(colors.size()-1));
-    JSONObject row = new JSONObject();
-    row.put("id", Long.valueOf(i));
-    row.put("vector", Arrays.asList(rand.nextFloat(), rand.nextFloat(), rand.nextFloat(), rand.nextFloat(), rand.nextFloat()));
-    row.put("color_tag", current_color + "_" + String.valueOf(rand.nextInt(8999) + 1000));
-    data.add(row);
-}
-
-InsertReq insertReq = InsertReq.builder()
-    .collectionName("quick_setup")
-    .data(data)
-    .build();
-
-InsertResp insertResp = client.insert(insertReq);
-
-System.out.println(JSONObject.toJSON(insertResp));
-
-// Output:
-// {"insertCnt": 1000}
-
-// 6.1. Create a partition
-CreatePartitionReq partitionReq = CreatePartitionReq.builder()
-    .collectionName("quick_setup")
-    .partitionName("red")
-    .build();
-
-client.createPartition(partitionReq);
-
-partitionReq = CreatePartitionReq.builder()
-    .collectionName("quick_setup")
-    .partitionName("blue")
-    .build();
-
-client.createPartition(partitionReq);
-
-// 6.2 Insert data into the partition
-data = new ArrayList<>();
-
-for (int i=1000; i<1500; i++) {
-    Random rand = new Random();
-    String current_color = "red";
-    JSONObject row = new JSONObject();
-    row.put("id", Long.valueOf(i));
-    row.put("vector", Arrays.asList(rand.nextFloat(), rand.nextFloat(), rand.nextFloat(), rand.nextFloat(), rand.nextFloat()));
-    row.put("color", current_color);
-    row.put("color_tag", current_color + "_" + String.valueOf(rand.nextInt(8999) + 1000));
-    data.add(row);
-}     
-
-insertReq = InsertReq.builder()
-    .collectionName("quick_setup")
-    .data(data)
-    .partitionName("red")
-    .build();
-
-insertResp = client.insert(insertReq);
-
-System.out.println(JSONObject.toJSON(insertResp));
-
-// Output:
-// {"insertCnt": 500}
-
-data = new ArrayList<>();
-
-for (int i=1500; i<2000; i++) {
-    Random rand = new Random();
-    String current_color = "blue";
-    JSONObject row = new JSONObject();
-    row.put("id", Long.valueOf(i));
-    row.put("vector", Arrays.asList(rand.nextFloat(), rand.nextFloat(), rand.nextFloat(), rand.nextFloat(), rand.nextFloat()));
-    row.put("color", current_color);
-    row.put("color_tag", current_color + "_" + String.valueOf(rand.nextInt(8999) + 1000));
-    data.add(row);
-}
-
-insertReq = InsertReq.builder()
-    .collectionName("quick_setup")
-    .data(data)
-    .partitionName("blue")
-    .build();
-
-insertResp = client.insert(insertReq);
-
-System.out.println(JSONObject.toJSON(insertResp));
-
-// Output:
-// {"insertCnt": 500}
 ```
 
 ```javascript
-const { MilvusClient, DataType, sleep } = require("@zilliz/milvus2-sdk-node")
+import { MilvusClient, DataType } from "@zilliz/milvus2-sdk-node";​
+​
+const address = "http://localhost:19530";​
+const token = "root:Milvus";​
+const client = new MilvusClient({address, token});​
+​
+// 4. Single vector search​
+var query_vector = [0.3580376395471989, -0.6023495712049978, 0.18414012509913835, -0.26286205330961354, 0.9029438446296592],​
+​
+res = await client.search({​
+    collection_name: "my_collection",​
+    data: query_vector,​
+    limit: 3, // The number of results to return​
+})​
+​
+console.log(res.results)​
+​
+// [​
+//   { score: 0.08821295201778412, id: '551' },​
+//   { score: 0.0800950899720192, id: '296' },​
+//   { score: 0.07794742286205292, id: '43' }​
+// ]​
 
-const address = "http://localhost:19530"
-
-// 1. Set up a Milvus Client
-client = new MilvusClient({address});
-
-// 2. Create a collection in quick setup mode
-await client.createCollection({
-    collection_name: "quick_setup",
-    dimension: 5,
-    metric_type: "IP"
-});  
-
-// 3. Insert randomly generated vectors
-const colors = ["green", "blue", "yellow", "red", "black", "white", "purple", "pink", "orange", "brown", "grey"]
-data = []
-
-for (let i = 0; i < 1000; i++) {
-    current_color = colors[Math.floor(Math.random() * colors.length)]
-    data.push({
-        id: i,
-        vector: [Math.random(), Math.random(), Math.random(), Math.random(), Math.random()],
-        color: current_color,
-        color_tag: `${current_color}_${Math.floor(Math.random() * 8999) + 1000}`
-    })
-}
-
-var res = await client.insert({
-    collection_name: "quick_setup",
-    data: data
-})
-
-console.log(res.insert_cnt)
-
-// Output
-// 
-// 1000
-// 
-
-await client.createPartition({
-    collection_name: "quick_setup",
-    partition_name: "red"
-})
-
-await client.createPartition({
-    collection_name: "quick_setup",
-    partition_name: "blue"
-})
-
-// 6.1 Insert data into partitions
-var red_data = []
-var blue_data = []
-
-for (let i = 1000; i < 1500; i++) {
-    red_data.push({
-        id: i,
-        vector: [Math.random(), Math.random(), Math.random(), Math.random(), Math.random()],
-        color: "red",
-        color_tag: `red_${Math.floor(Math.random() * 8999) + 1000}`
-    })
-}
-
-for (let i = 1500; i < 2000; i++) {
-    blue_data.push({
-        id: i,
-        vector: [Math.random(), Math.random(), Math.random(), Math.random(), Math.random()],
-        color: "blue",
-        color_tag: `blue_${Math.floor(Math.random() * 8999) + 1000}`
-    })
-}
-
-res = await client.insert({
-    collection_name: "quick_setup",
-    data: red_data,
-    partition_name: "red"
-})
-
-console.log(res.insert_cnt)
-
-// Output
-// 
-// 500
-// 
-
-res = await client.insert({
-    collection_name: "quick_setup",
-    data: blue_data,
-    partition_name: "blue"
-})
-
-console.log(res.insert_cnt)
-
-// Output
-// 
-// 500
-// 
 ```
 
-## Basic search
+```curl
+export CLUSTER_ENDPOINT="http://localhost:19530"​
+export TOKEN="root:Milvus"​
+​
+curl --request POST \​
+--url "${CLUSTER_ENDPOINT}/v2/vectordb/entities/search" \​
+--header "Authorization: Bearer ${TOKEN}" \​
+--header "Content-Type: application/json" \​
+-d '{​
+    "collectionName": "quick_setup",​
+    "data": [​
+        [0.3580376395471989, -0.6023495712049978, 0.18414012509913835, -0.26286205330961354, 0.9029438446296592]​
+    ],​
+    "annsField": "vector",​
+    "limit": 3​
+}'​
+​
+# {​
+#     "code": 0,​
+#     "data": [​
+#         {​
+#             "distance": 0.08821295201778412,​
+#             "id": 551​
+#         },​
+#         {​
+#             "distance": 0.0800950899720192,​
+#             "id": 296​
+#         },​
+#         {​
+#             "distance": 0.07794742286205292,​
+#             "id": 43​
+#         }​
+#     ]​
+# }​
 
-When sending a `search` request, you can provide one or more vector values representing your query embeddings and a `limit` value indicating the number of results to return.
+```
 
-Depending on your data and your query vector, you may get fewer than `limit` results. This happens when `limit` is larger than the number of possible matching vectors for your query.
+Milvus ranks the search results by their similarity scores to the query vector in descending order. The similarity score is also termed the distance to the query vector, and its value ranges vary with the metric types in use.​
 
-### Single-vector search
+The following table lists the applicable metric types and the corresponding distance ranges.​
 
-Single-vector search is the simplest form of `search` operations in Milvus, designed to find the most similar vectors to a given query vector.
+<table data-block-token="CTYBd8RSbogpjGxSmRCc937Qnud"><thead><tr><th data-block-token="Mk6idXTyjokI5FxIHgzc1FmhnLf" colspan="1" rowspan="1"><p data-block-token="DT2rdNtuYoJZPwxsZMCc9zTDnZf">Metric Type​</p>
 
-To perform a single-vector search, specify the target collection name, the query vector, and the desired number of results (`limit`). This operation returns a result set comprising the most similar vectors, their IDs, and distances from the query vector.
+</th><th data-block-token="DlbbdGOQ8oy3DJxe57tcR4f9nee" colspan="1" rowspan="1"><p data-block-token="CnVsdS8KboXGUGx9rQFcB0G5nXb">Characteristics​</p>
 
-Here is an example of searching for the top 5 entities that are most similar to the query vector:
+</th><th data-block-token="QhwVdn1JvoCPd5x8Pxrck2QOnEf" colspan="1" rowspan="1"><p data-block-token="GQ4cdd3n4oNnjOxD9uhc5SCpnyh">Distance Range​</p>
+
+</th></tr></thead><tbody><tr><td data-block-token="SDGPdrT6ioYrZtx0jn6chigDnRe" colspan="1" rowspan="1"><p data-block-token="BF8Wd7b57oSJxHxeMUvchxNtntg"><code>L2</code>​</p>
+
+</td><td data-block-token="R8zodDVyco81tkxgY3Lc3eNpnDe" colspan="1" rowspan="1"><p data-block-token="WOYAdjefpojiUMxhvFxcFzYun5d">A smaller value indicates a higher similarity.​</p>
+
+</td><td data-block-token="FDRXdODH5oFZzixRMtXcJTBbnLe" colspan="1" rowspan="1"><p data-block-token="HKPedGZntoh3hDxY587ch8F9nzg">[0, ∞)​</p>
+
+</td></tr><tr><td data-block-token="QqHidyCE9ozC6Gxyx28cunhcnvg" colspan="1" rowspan="1"><p data-block-token="FVgcdXpbMolSpdx1ZRSc7sO1nGD"><code>IP</code>​</p>
+
+</td><td data-block-token="Rfa8dK5VHowbyQxk1iEcZUrUn5f" colspan="1" rowspan="1"><p data-block-token="L7NTdDhmkozbcwx3ek1cWU8WnCh">A greater value indicates a higher similarity.​</p>
+
+</td><td data-block-token="NhQ5d5F7Bo08Ocxeugicxqh2nrb" colspan="1" rowspan="1"><p data-block-token="E3Etd3rT1o2pwMxeZSdcB0Lpnlf">[-1, 1]​</p>
+
+</td></tr><tr><td data-block-token="QasQdmuapouIonxvyNJcBp89nNU" colspan="1" rowspan="1"><p data-block-token="MqFDdgMTgo5weSxNIRJc6XLBn8S"><code>COSINE</code>​</p>
+
+</td><td data-block-token="O7hJdRazyo2YpYxBP9AcD1h8nqe" colspan="1" rowspan="1"><p data-block-token="CbhXdgXP3o8lAhxxwchcIvp3nze">A greater value indicates a higher similarity.​</p>
+
+</td><td data-block-token="KrMvdljV3o6KoNxghnZcBBLDnNK" colspan="1" rowspan="1"><p data-block-token="KGZVdGhL9oqfSHxOVF7cg3b4nEh">[-1, 1]​</p>
+
+</td></tr><tr><td data-block-token="OSJAd3zrsoPBBMxvmRtc5vpunnh" colspan="1" rowspan="1"><p data-block-token="W8thd8nk3oRpLyxAKrGciKANnJe"><code>JACCARD</code> ​</p>
+
+</td><td data-block-token="PfMKdBztaoD5e1xKowmc8bUPnOe" colspan="1" rowspan="1"><p data-block-token="ZHAPdWjEsowodbxCnVGc38Qln9f">A smaller value indicates a higher similarity.​</p>
+
+</td><td data-block-token="FtMsd7sd4otaEQxF4d3ctRR9nFb" colspan="1" rowspan="1"><p data-block-token="ThTkdBR5roENdsxTVk4cLlTvniy">[0, 1]​</p>
+
+</td></tr><tr><td data-block-token="BQcBdYGZWolZuTxijxmchefJnme" colspan="1" rowspan="1"><p data-block-token="Kowbdw3mRot9cAxg9yScuHlandh"><code>HAMMING</code> ​</p>
+
+</td><td data-block-token="BNYxdVEuVoqd4jxves5cQCXdnoe" colspan="1" rowspan="1"><p data-block-token="Tvghdcmo2omlhUx39tucVUPZnEh">A smaller value indicates a higher similarity.​</p>
+
+</td><td data-block-token="YKW8dTla0oe7xdx4Hfjc0i9tned" colspan="1" rowspan="1"><p data-block-token="CzHkdNE2yoWu5ExHtXfcY0G9n2x">[0, dim(vector)]​</p>
+
+</td></tr></tbody></table>
+
+## Bulk-Vector Search​
+
+Similarly, you can include multiple query vectors in a search request. Zilliz Cloud will conduct ANN searches for the query vectors in parallel and return two sets of results.​
 
 <div class="multipleCode">
-    <a href="#python">Python </a>
-    <a href="#java">Java</a>
-    <a href="#javascript">Node.js</a>
+  <a href="#python">Python </a>
+  <a href="#java">Java</a>
+  <a href="#javascript">Node.js</a>
+  <a href="#go">Go</a>
+  <a href="#curl">cURL</a>
 </div>
 
 ```python
-# Single vector search
-res = client.search(
-    collection_name="quick_setup", # Replace with the actual name of your collection
-    # Replace with your query vector
-    data=[[0.3580376395471989, -0.6023495712049978, 0.18414012509913835, -0.26286205330961354, 0.9029438446296592]],
-    limit=5, # Max. number of search results to return
-    search_params={"metric_type": "IP", "params": {}} # Search parameters
-)
+# 7. Search with multiple vectors​
+# 7.1. Prepare query vectors​
+query_vectors = [​
+    [0.041732933, 0.013779674, -0.027564144, -0.013061441, 0.009748648],​
+    [0.0039737443, 0.003020432, -0.0006188639, 0.03913546, -0.00089768134]​
+]​
+​
+# 7.2. Start search​
+res = client.search(​
+    collection_name="my_collection",​
+    data=query_vectors,​
+    limit=3,​
+)​
+​
+for hits in res:​
+    print("TopK results:")​
+    for hit in hits:​
+        print(hit)​
+​
+# Output​
+#​
+# [​
+#     [​
+#         {​
+#             "id": 551,​
+#             "distance": 0.08821295201778412,​
+#             "entity": {}​
+#         },​
+#         {​
+#             "id": 296,​
+#             "distance": 0.0800950899720192,​
+#             "entity": {}​
+#         },​
+#         {​
+#             "id": 43,​
+#             "distance": 0.07794742286205292,​
+#             "entity": {}​
+#         }​
+#     ],​
+#     [​
+#         {​
+#             "id": 730,​
+#             "distance": 0.04431751370429993,​
+#             "entity": {}​
+#         },​
+#         {​
+#             "id": 333,​
+#             "distance": 0.04231833666563034,​
+#             "entity": {}​
+#         },​
+#         {​
+#             "id": 232,​
+#             "distance": 0.04221535101532936,​
+#             "entity": {}​
+#         }​
+#     ]​
+# ]​
+​
 
-# Convert the output to a formatted JSON string
-result = json.dumps(res, indent=4)
-print(result)
 ```
 
 ```java
-// 4. Single vector search
-List<List<Float>> query_vectors = Arrays.asList(Arrays.asList(0.3580376395471989f, -0.6023495712049978f, 0.18414012509913835f, -0.26286205330961354f, 0.9029438446296592f));
+import io.milvus.v2.service.vector.request.SearchReq​
+import io.milvus.v2.service.vector.request.data.BaseVector;​
+import io.milvus.v2.service.vector.request.data.FloatVec;​
+import io.milvus.v2.service.vector.response.SearchResp​
+​
+List<BaseVector> queryVectors = Arrays.asList(​
+        new FloatVec(new float[]{0.041732933f, 0.013779674f, -0.027564144f, -0.013061441f, 0.009748648f}),​
+        new FloatVec(new float[]{0.0039737443f, 0.003020432f, -0.0006188639f, 0.03913546f, -0.00089768134f})​
+);​
+SearchReq searchReq = SearchReq.builder()​
+        .collectionName("quick_setup")​
+        .data(queryVectors)​
+        .topK(3)​
+        .build();​
+​
+SearchResp searchResp = client.search(searchReq);​
+​
+List<List<SearchResp.SearchResult>> searchResults = searchResp.getSearchResults();​
+for (List<SearchResp.SearchResult> results : searchResults) {​
+    System.out.println("TopK results:");​
+    for (SearchResp.SearchResult result : results) {​
+        System.out.println(result);​
+    }​
+}​
+​
+// Output​
+// TopK results:​
+// SearchResp.SearchResult(entity={}, score=0.49548206, id=1)​
+// SearchResp.SearchResult(entity={}, score=0.320147, id=3)​
+// SearchResp.SearchResult(entity={}, score=0.107413776, id=6)​
+// TopK results:​
+// SearchResp.SearchResult(entity={}, score=0.5678123, id=6)​
+// SearchResp.SearchResult(entity={}, score=0.32368967, id=2)​
+// SearchResp.SearchResult(entity={}, score=0.24108477, id=3)​
 
-SearchReq searchReq = SearchReq.builder()
-    .collectionName("quick_setup")
-    .data(query_vectors)
-    .topK(3) // The number of results to return
-    .build();
-
-SearchResp searchResp = client.search(searchReq);
-
-System.out.println(JSONObject.toJSON(searchResp));
 ```
 
 ```javascript
-// 4. Single vector search
-var query_vector = [0.3580376395471989, -0.6023495712049978, 0.18414012509913835, -0.26286205330961354, 0.9029438446296592],
+// 7. Search with multiple vectors​
+const query_vectors = [​
+    [0.3580376395471989, -0.6023495712049978, 0.18414012509913835, -0.26286205330961354, 0.9029438446296592], ​
+    [0.19886812562848388, 0.06023560599112088, 0.6976963061752597, 0.2614474506242501, 0.838729485096104]​
+]​
+​
+res = await client.search({​
+    collection_name: "quick_setup",​
+    vectors: query_vectors,​
+    limit: 5,​
+})​
+​
+console.log(res.results)​
+​
+// Output​
+// ​
+// [​
+//   [​
+//     { score: 0.08821295201778412, id: '551' },​
+//     { score: 0.0800950899720192, id: '296' },​
+//     { score: 0.07794742286205292, id: '43' }​
+//   ],​
+//   [​
+//     { score: 0.04431751370429993, id: '730' },​
+//     { score: 0.04231833666563034, id: '333' },​
+//     { score: 0.04221535101532936, id: '232' },​
+//   ]​
+// ]​
 
-res = await client.search({
-    collection_name: "quick_setup",
-    data: [query_vector],
-    limit: 3, // The number of results to return
-})
-
-console.log(res.results)
 ```
 
-<table class="language-python">
-  <thead>
-    <tr>
-      <th>Parameter</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code>collection_name</code></td>
-      <td>The name of an existing collection.</td>
-    </tr>
-    <tr>
-      <td><code>data</code></td>
-      <td>A list of vector embeddings.<br/>Milvus searches for the most similar vector embeddings to the specified ones.</td>
-    </tr>
-    <tr>
-      <td><code>limit</code></td>
-      <td>The total number of entities to return.<br/>You can use this parameter in combination with <strong>offset</strong> in <strong>param</strong> to enable pagination.<br/>The sum of this value and <strong>offset</strong> in <strong>param</strong> should be less than 16,384.</td>
-    </tr>
-    <tr>
-      <td><code>search_params</code></td>
-      <td>The parameter settings specific to this operation.<br/><ul><li><code>metric_type</code>: The metric type applied to this operation. This should be the same as the one used when you index the vector field specified above. Possible values are <strong>L2</strong>, <strong>IP</strong>, <strong>COSINE</strong>, <strong>JACCARD</strong>, <strong>HAMMING</strong>.</li><li><code>params</code>: Additional parameters. For details, refer to <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Vector/search.md">search()</a>.</li></ul></td>
-    </tr>
-  </tbody>
-</table>
+```curl
+export CLUSTER_ENDPOINT="http://localhost:19530"​
+export TOKEN="root:Milvus"​
+​
+curl --request POST \​
+--url "${CLUSTER_ENDPOINT}/v2/vectordb/entities/search" \​
+--header "Authorization: Bearer ${TOKEN}" \​
+--header "Content-Type: application/json" \​
+-d '{​
+    "collectionName": "quick_setup",​
+    "data": [​
+        [0.3580376395471989, -0.6023495712049978, 0.18414012509913835, -0.26286205330961354, 0.9029438446296592],​
+        [0.19886812562848388, 0.06023560599112088, 0.6976963061752597, 0.2614474506242501, 0.838729485096104]​
+    ],​
+    "annsField": "vector",​
+    "limit": 3​
+}'​
+​
+# {​
+#     "code": 0,​
+#     "data": [​
+#         [​
+#           {​
+#               "distance": 0.08821295201778412,​
+#               "id": 551​
+#           },​
+#           {​
+#               "distance": 0.0800950899720192,​
+#               "id": 296​
+#           },​
+#           {​
+#               "distance": 0.07794742286205292,​
+#               "id": 43​
+#           }​
+#         ],​
+#         [​
+#           {​
+#               "distance": 0.04431751370429993,​
+#               "id": 730​
+#           },​
+#           {​
+#               "distance": 0.04231833666563034,​
+#               "id": 333​
+#           },​
+#           {​
+#               "distance": 0.04221535101532936,​
+#               "id": 232​
+#           }​
+#        ]​
+#     ]​
+# }​
 
-<table class="language-java">
-  <thead>
-    <tr>
-      <th>Parameter</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code>collectionName</code></td>
-      <td>The name of an existing collection.</td>
-    </tr>
-    <tr>
-      <td><code>data</code></td>
-      <td>A list of vector embeddings.<br/>Milvus searches for the most similar vector embeddings to the specified ones.</td>
-    </tr>
-    <tr>
-      <td><code>topK</code></td>
-      <td>The number of records to return in the search result. This parameter uses the same syntax as the <strong>limit</strong> parameter, so you should only set one of them.<br/>You can use this parameter in combination with <strong>offset</strong> in <strong>param</strong> to enable pagination.<br/>The sum of this value and <strong>offset</strong> in <strong>param</strong> should be less than 16,384.</td>
-    </tr>
-  </tbody>
-</table>
+```
 
-<table class="language-javascript">
-  <thead>
-    <tr>
-      <th>Parameter</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code>collection_name</code></td>
-      <td>The name of an existing collection.</td>
-    </tr>
-    <tr>
-      <td><code>data</code></td>
-      <td>A list of vector embeddings.<br/>Milvus searches for the most similar vector embeddings to the specified ones.</td>
-    </tr>
-    <tr>
-      <td><code>limit</code></td>
-      <td>The total number of entities to return.<br/>You can use this parameter in combination with <strong>offset</strong> in <strong>param</strong> to enable pagination.<br/>The sum of this value and <strong>offset</strong> in <strong>param</strong> should be less than 16,384.</td>
-    </tr>
-  </tbody>
-</table>
+## ANN Search in Partition​
 
-The output is similar to the following:
+Suppose you have created multiple partitions in a collection, and you can narrow the search scope to a specific number of partitions. In that case, you can include the target partition names in the search request to restrict the search scope within the specified partitions. Reducing the number of partitions involved in the search improves search performance.​
+
+The following code snippet assumes a partition named **PartitionA** in your collection.​
 
 <div class="multipleCode">
-    <a href="#python">Python </a>
-    <a href="#java">Java</a>
-    <a href="#javascript">Node.js</a>
+  <a href="#python">Python </a>
+  <a href="#java">Java</a>
+  <a href="#javascript">Node.js</a>
+  <a href="#go">Go</a>
+  <a href="#curl">cURL</a>
 </div>
 
 ```python
-[
-    [
-        {
-            "id": 0,
-            "distance": 1.4093276262283325,
-            "entity": {}
-        },
-        {
-            "id": 4,
-            "distance": 0.9902134537696838,
-            "entity": {}
-        },
-        {
-            "id": 1,
-            "distance": 0.8519943356513977,
-            "entity": {}
-        },
-        {
-            "id": 5,
-            "distance": 0.7972343564033508,
-            "entity": {}
-        },
-        {
-            "id": 2,
-            "distance": 0.5928734540939331,
-            "entity": {}
-        }
-    ]
-]
+# 4. Single vector search​
+query_vector = [0.3580376395471989, -0.6023495712049978, 0.18414012509913835, -0.26286205330961354, 0.9029438446296592]​
+res = client.search(​
+    collection_name="my_collection",​
+    # highlight-next-line​
+    partition_names=["partitionA"],​
+    data=[query_vector],​
+    limit=3,​
+)​
+​
+for hits in res:​
+    print("TopK results:")​
+    for hit in hits:​
+        print(hit)​
+​
+# [​
+#     [​
+#         {​
+#             "id": 551,​
+#             "distance": 0.08821295201778412,​
+#             "entity": {}​
+#         },​
+#         {​
+#             "id": 296,​
+#             "distance": 0.0800950899720192,​
+#             "entity": {}​
+#         },​
+#         {​
+#             "id": 43,​
+#             "distance": 0.07794742286205292,​
+#             "entity": {}​
+#         }​
+#     ]​
+# ]​
+
 ```
 
 ```java
-{"searchResults": [[
-    {
-        "score": 1.263043,
-        "fields": {
-            "vector": [
-                0.9533119,
-                0.02538395,
-                0.76714665,
-                0.35481733,
-                0.9845762
-            ],
-            "id": 740
-        }
-    },
-    {
-        "score": 1.2377806,
-        "fields": {
-            "vector": [
-                0.7411156,
-                0.08687937,
-                0.8254139,
-                0.08370924,
-                0.99095553
-            ],
-            "id": 640
-        }
-    },
-    {
-        "score": 1.1869997,
-        "fields": {
-            "vector": [
-                0.87928146,
-                0.05324632,
-                0.6312755,
-                0.28005534,
-                0.9542448
-            ],
-            "id": 455
-        }
-    }
-]]}
+import io.milvus.v2.service.vector.request.SearchReq​
+import io.milvus.v2.service.vector.request.data.FloatVec;​
+import io.milvus.v2.service.vector.response.SearchResp​
+​
+FloatVec queryVector = new FloatVec(new float[]{0.3580376395471989f, -0.6023495712049978f, 0.18414012509913835f, -0.26286205330961354f, 0.9029438446296592f});​
+SearchReq searchReq = SearchReq.builder()​
+        .collectionName("quick_setup")​
+        .partitionNames(Collections.singletonList("partitionA"))​
+        .data(Collections.singletonList(queryVector))​
+        .topK(3)​
+        .build();​
+​
+SearchResp searchResp = client.search(searchReq);​
+​
+List<List<SearchResp.SearchResult>> searchResults = searchResp.getSearchResults();​
+for (List<SearchResp.SearchResult> results : searchResults) {​
+    System.out.println("TopK results:");​
+    for (SearchResp.SearchResult result : results) {​
+        System.out.println(result);​
+    }​
+}​
+​
+// Output​
+// TopK results:​
+// SearchResp.SearchResult(entity={}, score=0.6395302, id=13)​
+// SearchResp.SearchResult(entity={}, score=0.5408028, id=12)​
+// SearchResp.SearchResult(entity={}, score=0.49696884, id=17)​
+
 ```
 
 ```javascript
-[
-  { score: 1.7463608980178833, id: '854' },
-  { score: 1.744946002960205, id: '425' },
-  { score: 1.7258622646331787, id: '718' }
-]
+// 4. Single vector search​
+var query_vector = [0.3580376395471989, -0.6023495712049978, 0.18414012509913835, -0.26286205330961354, 0.9029438446296592],​
+​
+res = await client.search({​
+    collection_name: "quick_setup",​
+    // highlight-next-line​
+    partition_names: ["partitionA"],​
+    data: query_vector,​
+    limit: 3, // The number of results to return​
+})​
+​
+console.log(res.results)​
+​
+// [​
+//   { score: 0.08821295201778412, id: '551' },​
+//   { score: 0.0800950899720192, id: '296' },​
+//   { score: 0.07794742286205292, id: '43' }​
+// ]​
+
 ```
 
-The output showcases the top 5 neighbors nearest to your query vector, including their unique IDs and the calculated distances.
+```curl
+export CLUSTER_ENDPOINT="http://localhost:19530"​
+export TOKEN="root:Milvus"​
+​
+curl --request POST \​
+--url "${CLUSTER_ENDPOINT}/v2/vectordb/entities/search" \​
+--header "Authorization: Bearer ${TOKEN}" \​
+--header "Content-Type: application/json" \​
+-d '{​
+    "collectionName": "quick_setup",​
+    "partitionNames": ["partitionA"],​
+    "data": [​
+        [0.3580376395471989, -0.6023495712049978, 0.18414012509913835, -0.26286205330961354, 0.9029438446296592]​
+    ],​
+    "annsField": "vector",​
+    "limit": 3​
+}'​
+​
+# {​
+#     "code": 0,​
+#     "data": [​
+#         {​
+#             "distance": 0.08821295201778412,​
+#             "id": 551​
+#         },​
+#         {​
+#             "distance": 0.0800950899720192,​
+#             "id": 296​
+#         },​
+#         {​
+#             "distance": 0.07794742286205292,​
+#             "id": 43​
+#         }​
+#     ]​
+# }​
 
-### Bulk-vector search
+```
 
-A bulk-vector search extends the [single-vector search](https://milvus.io/docs/single-vector-search.md#Single-Vector-Search) concept by allowing multiple query vectors to be searched in a single request. This type of search is ideal for scenarios where you need to find similar vectors for a set of query vectors, significantly reducing the time and computational resources required.
+## Use Output Fields​
 
-In a bulk-vector search, you can include several query vectors in the `data` field. The system processes these vectors in parallel, returning a separate result set for each query vector, each set containing the closest matches found within the collection.
-
-Here is an example of searching for two distinct sets of the most similar entities from two query vectors:
+In a search result, Zilliz Cloud includes the primary field values and similarity distances/scores of the entities that contain the top-K vector embeddings by default. You can include the target field names in a search request as the output fields to make the search results carry the values from other fields in these entities.​
 
 <div class="multipleCode">
-    <a href="#python">Python </a>
-    <a href="#java">Java</a>
-    <a href="#javascript">Node.js</a>
+  <a href="#python">Python </a>
+  <a href="#java">Java</a>
+  <a href="#javascript">Node.js</a>
+  <a href="#go">Go</a>
+  <a href="#curl">cURL</a>
 </div>
 
 ```python
-# Bulk-vector search
-res = client.search(
-    collection_name="quick_setup", # Replace with the actual name of your collection
-    data=[
-        [0.19886812562848388, 0.06023560599112088, 0.6976963061752597, 0.2614474506242501, 0.838729485096104],
-        [0.3172005263489739, 0.9719044792798428, -0.36981146090600725, -0.4860894583077995, 0.95791889146345]
-    ], # Replace with your query vectors
-    limit=2, # Max. number of search results to return
-    search_params={"metric_type": "IP", "params": {}} # Search parameters
-)
+# 4. Single vector search​
+query_vector = [0.3580376395471989, -0.6023495712049978, 0.18414012509913835, -0.26286205330961354, 0.9029438446296592],​
+​
+res = client.search(​
+    collection_name="quick_setup",​
+    data=[query_vector],​
+    limit=3, # The number of results to return​
+    search_params={"metric_type": "IP"}，​
+    # highlight-next-line​
+    output_fields=["color"]​
+)​
+​
+print(res)​
+​
+# [​
+#     [​
+#         {​
+#             "id": 551,​
+#             "distance": 0.08821295201778412,​
+#             "entity": {​
+#                 "color": "orange_6781"​
+#             }​
+#         },​
+#         {​
+#             "id": 296,​
+#             "distance": 0.0800950899720192,​
+#             "entity": {​
+#                 "color": "red_4794"​
+#             }​
+#         },​
+#         {​
+#             "id": 43,​
+#             "distance": 0.07794742286205292,​
+#             "entity": {​
+#                 "color": "grey_8510"​
+#             }​
+#         }​
+#     ]​
+# ]​
 
-result = json.dumps(res, indent=4)
-print(result)
 ```
 
 ```java
-// 5. Batch vector search
-query_vectors = Arrays.asList(
-    Arrays.asList(0.3580376395471989f, -0.6023495712049978f, 0.18414012509913835f, -0.26286205330961354f, 0.9029438446296592f),
-    Arrays.asList(0.19886812562848388f, 0.06023560599112088f, 0.6976963061752597f, 0.2614474506242501f, 0.838729485096104f)
-);
+import io.milvus.v2.service.vector.request.SearchReq​
+import io.milvus.v2.service.vector.request.data.FloatVec;​
+import io.milvus.v2.service.vector.response.SearchResp​
+​
+FloatVec queryVector = new FloatVec(new float[]{0.3580376395471989f, -0.6023495712049978f, 0.18414012509913835f, -0.26286205330961354f, 0.9029438446296592f});​
+SearchReq searchReq = SearchReq.builder()​
+        .collectionName("quick_setup")​
+        .data(Collections.singletonList(queryVector))​
+        .topK(3)​
+        .outputFields(Collections.singletonList("color"))​
+        .build();​
+​
+SearchResp searchResp = client.search(searchReq);​
+​
+List<List<SearchResp.SearchResult>> searchResults = searchResp.getSearchResults();​
+for (List<SearchResp.SearchResult> results : searchResults) {​
+    System.out.println("TopK results:");​
+    for (SearchResp.SearchResult result : results) {​
+        System.out.println(result);​
+    }​
+}​
+​
+// Output​
+// TopK results:​
+// SearchResp.SearchResult(entity={color=black_9955}, score=0.95944905, id=5)​
+// SearchResp.SearchResult(entity={color=red_7319}, score=0.8689616, id=1)​
+// SearchResp.SearchResult(entity={color=white_5015}, score=0.866088, id=7)​
 
-searchReq = SearchReq.builder()
-    .collectionName("quick_setup")
-    .data(query_vectors)
-    .topK(2)
-    .build();
-
-searchResp = client.search(searchReq);
-
-System.out.println(JSONObject.toJSON(searchResp));
 ```
 
 ```javascript
-// 5. Batch vector search
-var query_vectors = [
-    [0.3580376395471989, -0.6023495712049978, 0.18414012509913835, -0.26286205330961354, 0.9029438446296592],
-    [0.19886812562848388, 0.06023560599112088, 0.6976963061752597, 0.2614474506242501, 0.838729485096104]
-]
+// 4. Single vector search​
+var query_vector = [0.3580376395471989, -0.6023495712049978, 0.18414012509913835, -0.26286205330961354, 0.9029438446296592],​
+​
+res = await client.search({​
+    collection_name: "quick_setup",​
+    data: query_vector,​
+    limit: 3, // The number of results to return​
+    // highlight-next-line​
+    output_fields: ["color"]​
+})​
+​
+console.log(res.results)​
+​
+// [​
+//   { score: 0.08821295201778412, id: '551', entity: {"color": "orange_6781"}},​
+//   { score: 0.0800950899720192, id: '296' entity: {"color": "red_4794"}},​
+//   { score: 0.07794742286205292, id: '43' entity: {"color": "grey_8510"}}​
+// ]​
 
-res = await client.search({
-    collection_name: "quick_setup",
-    data: query_vectors,
-    limit: 2,
-})
-
-console.log(res.results)
 ```
 
-The output is similar to the following:
+```curl
+export CLUSTER_ENDPOINT="http://localhost:19530"​
+export TOKEN="root:Milvus"​
+​
+curl --request POST \​
+--url "${CLUSTER_ENDPOINT}/v2/vectordb/entities/search" \​
+--header "Authorization: Bearer ${TOKEN}" \​
+--header "Content-Type: application/json" \​
+-d '{​
+    "collectionName": "quick_setup",​
+    "data": [​
+        [0.3580376395471989, -0.6023495712049978, 0.18414012509913835, -0.26286205330961354, 0.9029438446296592]​
+    ],​
+    "annsField": "vector",​
+    "limit": 3,​
+    "outputFields": ["color"]​
+}'​
+​
+# {​
+#     "code": 0,​
+#     "data": [​
+#         {​
+#             "distance": 0.08821295201778412,​
+#             "id": 551,​
+#             "color": "orange_6781"​
+#         },​
+#         {​
+#             "distance": 0.0800950899720192,​
+#             "id": 296,​
+#             "color": "red_4794"​
+#         },​
+#         {​
+#             "distance": 0.07794742286205292,​
+#             "id": 43​
+#             "color": "grey_8510"​
+#         }​
+#     ]​
+# }​
+
+```
+
+## Use Limit and Offset​
+
+You may notice that the parameter `limit` carried in the search requests determines the number of entities to include in the search results. This parameter specifies the maximum number of entities to return in a single search, and it is usually termed **top-K**.​
+
+If you wish to perform paginated queries, you can use a loop to send multiple Search requests, with the **Limit** and **Offset** parameters carried in each query request. Specifically, you can set the **Limit** parameter to the number of Entities you want to include in the current query results, and set the **Offset** to the total number of Entities that have already been returned.​
+
+The table below outlines how to set the **Limit** and **Offset** parameters for paginated queries when returning 100 Entities at a time.​
+
+<table data-block-token="WHdZdkFtYol0QWxfjYzcMsyrnHd"><thead><tr><th data-block-token="YRpAdF69noO2EwxQJKkcRoB4nGp" colspan="1" rowspan="1"><p data-block-token="EhjLdXqY7op6anxCtOtc8KeKnkh">Queries​</p>
+
+</th><th data-block-token="D6tSdFQQAouKA3xol6RcGFUCn4c" colspan="1" rowspan="1"><p data-block-token="KjGadCmVxoLmmIxjI3McBr18nFg">Entities to return per query​</p>
+
+</th><th data-block-token="IDzvd2OCho3Qp0xMwXWcMZLlnWg" colspan="1" rowspan="1"><p data-block-token="RP69d4efqoAHXkxkY8OcBwPXn9e">Entities already been returned in total​</p>
+
+</th></tr></thead><tbody><tr><td data-block-token="QkqCdnVafo68dGxGRmicOHEQnxe" colspan="1" rowspan="1"><p data-block-token="QyEBdwnZiolkYZxWLYPc59j6nL0">The <strong>**1st**</strong> query​</p>
+
+</td><td data-block-token="E4vsdiNZQowy6rxIy0ecRQC4nEc" colspan="1" rowspan="1"><p data-block-token="QYfudUm7uokKlIxw2n9cxKGKnyg">100​</p>
+
+</td><td data-block-token="KpaFdQx6qow5zcxElk4clK8dnEp" colspan="1" rowspan="1"><p data-block-token="ZwAAd3eu8oYltYxeyCzcvmkLnbh">0​</p>
+
+</td></tr><tr><td data-block-token="D8teddAAZoM2duxDniIc2njyn6C" colspan="1" rowspan="1"><p data-block-token="CdySdMxJ2oZ0uSxNddQcByijnhb">The <strong>**2nd**</strong> query​</p>
+
+</td><td data-block-token="EhRzdF75hoPXIsxmi4Iczj87nIc" colspan="1" rowspan="1"><p data-block-token="VAPzdkDTHogP5axuOI8c101tnAh">100​</p>
+
+</td><td data-block-token="WZQ1dHMMPooABtxi0OfcEOC7nQe" colspan="1" rowspan="1"><p data-block-token="LQ59denn6obaw0xiNGec9uVEn7f">100​</p>
+
+</td></tr><tr><td data-block-token="LqQcdHDM5ozahHxEiKzcOtrxn2g" colspan="1" rowspan="1"><p data-block-token="KfKjdUdK3oAt7Fx2w7icUIapnbd">The <strong>**3rd**</strong> query​</p>
+
+</td><td data-block-token="W1TfddD7poKCKzxX83wcjvoXnXb" colspan="1" rowspan="1"><p data-block-token="ELT7dJe2Ao8L6LxZODccTjAcnKb">100​</p>
+
+</td><td data-block-token="SDYedyTVDoSt9Pxwf2xcQtrInBb" colspan="1" rowspan="1"><p data-block-token="DmAId1cA0oOaUNxg6bzc1iIEn2I">200​</p>
+
+</td></tr><tr><td data-block-token="EV1Sddbj4og1YnxN3pVcI4PenWe" colspan="1" rowspan="1"><p data-block-token="J1zAdtY1MosjA0xrNuycUTLln7b">The <strong>**nth**</strong> query ​</p>
+
+</td><td data-block-token="M9EPdp9haoP5HqxfNvTcP9Non3e" colspan="1" rowspan="1"><p data-block-token="KNJfdZ7bFo9Jooxy2d2ckuf7n3c">100​</p>
+
+</td><td data-block-token="NobhdOnAgo2DFixUrNTcmBOVnje" colspan="1" rowspan="1"><p data-block-token="DxU4dV3WpoqEDbxMIWYcumjenUb">100 x (n-1)​</p>
+
+</td></tr></tbody></table>
+
+Note that, the sum of `limit` and `offset` in a single ANN search should be less than 16,384.​
 
 <div class="multipleCode">
-    <a href="#python">Python </a>
-    <a href="#java">Java</a>
-    <a href="#javascript">Node.js</a>
+  <a href="#python">Python </a>
+  <a href="#java">Java</a>
+  <a href="#javascript">Node.js</a>
+  <a href="#go">Go</a>
+  <a href="#curl">cURL</a>
 </div>
 
 ```python
-[
-    [
-        {
-            "id": 1,
-            "distance": 1.3017789125442505,
-            "entity": {}
-        },
-        {
-            "id": 7,
-            "distance": 1.2419954538345337,
-            "entity": {}
-        }
-    ], # Result set 1
-    [
-        {
-            "id": 3,
-            "distance": 2.3358664512634277,
-            "entity": {}
-        },
-        {
-            "id": 8,
-            "distance": 0.5642921924591064,
-            "entity": {}
-        }
-    ] # Result set 2
-]
+# 4. Single vector search​
+query_vector = [0.3580376395471989, -0.6023495712049978, 0.18414012509913835, -0.26286205330961354, 0.9029438446296592],​
+​
+res = client.search(​
+    collection_name="quick_setup",​
+    data=[query_vector],​
+    limit=3, # The number of results to return​
+    search_params={​
+        "metric_type": "IP", ​
+        # highlight-next-line​
+        "offset": 10 # The records to skip​
+    }​
+)​
+
 ```
 
 ```java
-// Two sets of vectors are returned as expected
+import io.milvus.v2.service.vector.request.SearchReq​
+import io.milvus.v2.service.vector.request.data.FloatVec;​
+import io.milvus.v2.service.vector.response.SearchResp​
+​
+FloatVec queryVector = new FloatVec(new float[]{0.3580376395471989f, -0.6023495712049978f, 0.18414012509913835f, -0.26286205330961354f, 0.9029438446296592f});​
+SearchReq searchReq = SearchReq.builder()​
+        .collectionName("quick_setup")​
+        .data(Collections.singletonList(queryVector))​
+        .topK(3)​
+        .offset(10)​
+        .build();​
+​
+SearchResp searchResp = client.search(searchReq);​
+​
+List<List<SearchResp.SearchResult>> searchResults = searchResp.getSearchResults();​
+for (List<SearchResp.SearchResult> results : searchResults) {​
+    System.out.println("TopK results:");​
+    for (SearchResp.SearchResult result : results) {​
+        System.out.println(result);​
+    }​
+}​
+​
+// Output​
+// TopK results:​
+// SearchResp.SearchResult(entity={}, score=0.24120237, id=16)​
+// SearchResp.SearchResult(entity={}, score=0.22559784, id=9)​
+// SearchResp.SearchResult(entity={}, score=-0.09906838, id=2)​
 
-{"searchResults": [
-    [
-        {
-            "score": 1.263043,
-            "fields": {
-                "vector": [
-                    0.9533119,
-                    0.02538395,
-                    0.76714665,
-                    0.35481733,
-                    0.9845762
-                ],
-                "id": 740
-            }
-        },
-        {
-            "score": 1.2377806,
-            "fields": {
-                "vector": [
-                    0.7411156,
-                    0.08687937,
-                    0.8254139,
-                    0.08370924,
-                    0.99095553
-                ],
-                "id": 640
-            }
-        }
-    ],
-    [
-        {
-            "score": 1.8654699,
-            "fields": {
-                "vector": [
-                    0.4671427,
-                    0.8378432,
-                    0.98844475,
-                    0.82763994,
-                    0.9729997
-                ],
-                "id": 638
-            }
-        },
-        {
-            "score": 1.8581753,
-            "fields": {
-                "vector": [
-                    0.735541,
-                    0.60140246,
-                    0.86730254,
-                    0.93152493,
-                    0.98603314
-                ],
-                "id": 855
-            }
-        }
-    ]
-]}
 ```
 
 ```javascript
-[
-  [
-    { score: 2.3590476512908936, id: '854' },
-    { score: 2.2896690368652344, id: '59' }
-  [
-    { score: 2.664059638977051, id: '59' },
-    { score: 2.59483003616333, id: '854' }
-  ]
-]
+// 4. Single vector search​
+var query_vector = [0.3580376395471989, -0.6023495712049978, 0.18414012509913835, -0.26286205330961354, 0.9029438446296592],​
+​
+res = await client.search({​
+    collection_name: "quick_setup",​
+    data: query_vector,​
+    limit: 3, // The number of results to return,​
+    // highlight-next-line​
+    offset: 10 // The record to skip.​
+})​
+
 ```
 
-The results include two sets of nearest neighbors, one for each query vector, showcasing the efficiency of bulk-vector searches in handling multiple query vectors at once.
+```curl
+export CLUSTER_ENDPOINT="http://localhost:19530"​
+export TOKEN="root:Milvus"​
+​
+curl --request POST \​
+--url "${CLUSTER_ENDPOINT}/v2/vectordb/entities/search" \​
+--header "Authorization: Bearer ${TOKEN}" \​
+--header "Content-Type: application/json" \​
+-d '{​
+    "collectionName": "quick_setup",​
+    "data": [​
+        [0.3580376395471989, -0.6023495712049978, 0.18414012509913835, -0.26286205330961354, 0.9029438446296592]​
+    ],​
+    "annsField": "vector",​
+    "limit": 3,​
+    "offset": 10​
+}'​
 
-### Partition search
-
-Partition search narrows the scope of your search to a specific subset or partition of your collection. This is particularly useful for organized datasets where data is segmented into logical or categorical divisions, allowing for faster search operations by reducing the volume of data to scan.
-
-To conduct a partition search, simply include the name of the target partition in `partition_names` of your search request. This specifies that the `search` operation only considers vectors within the specified partition.
-
-Here is an example of searching for entities in `red`:
-
-<div class="multipleCode">
-    <a href="#python">Python </a>
-    <a href="#java">Java</a>
-    <a href="#javascript">Node.js</a>
-</div>
-
-```python
-# 6.2 Search within a partition
-query_vector = [0.3580376395471989, -0.6023495712049978, 0.18414012509913835, -0.26286205330961354, 0.9029438446296592]
-
-res = client.search(
-    collection_name="quick_setup",
-    data=[query_vector],
-    limit=5,
-    search_params={"metric_type": "IP", "params": {"level": 1}},
-    partition_names=["red"]
-)
-
-print(res)
 ```
 
-```java
-// 6.3 Search within partitions
-query_vectors = Arrays.asList(Arrays.asList(0.3580376395471989f, -0.6023495712049978f, 0.18414012509913835f, -0.26286205330961354f, 0.9029438446296592f));
+## Enhancing ANN Search​
 
-searchReq = SearchReq.builder()
-    .collectionName("quick_setup")
-    .data(query_vectors)
-    .partitionNames(Arrays.asList("red"))
-    .topK(5)
-    .build();
+AUTOINDEX considerably flattens the learning curve of ANN searches. However, the search results may not always be correct as the top-K increases. By reducing the search scope, improving search result relevancy, and diversifying the search results, Zilliz Cloud works out the following search enhancements.​
 
-searchResp = client.search(searchReq);
+- Filtered Search​
 
-System.out.println(JSONObject.toJSON(searchResp));
-```
+    You can include filtering conditions in a search request so that Zilliz Cloud conducts metadata filtering before conducting ANN searches, reducing the search scope from the whole collection to only the entities matching the specified filtering conditions.​
 
-```javascript
-// 6.2 Search within partitions
-query_vector = [0.3580376395471989, -0.6023495712049978, 0.18414012509913835, -0.26286205330961354, 0.9029438446296592]
+    For more about metadata filtering and filtering conditions, refer to [​Filtered Search](filtered-search.md) and [​Metadata Filtering](boolean.md).​
 
-res = await client.search({
-    collection_name: "quick_setup",
-    data: [query_vector],
-    partition_names: ["red"],
-    limit: 5,
-})
+- Range Search​
 
-console.log(res.results)
-```
+    You can improve search result relevancy by restricting the distance or score of the returned entities within a specific range. In Zilliz Cloud, a range search involves drawing two concentric circles with the vector embedding most similar to the query vector as the center. The search request specifies the radius of both circles, and Zilliz Cloud returns all vector embeddings that fall within the outer circle but not the inner circle.​
 
-The output is similar to the following:
+    For more about range search, refer to [​Range Search](range-search.md).​
 
-<div class="multipleCode">
-    <a href="#python">Python </a>
-    <a href="#java">Java</a>
-    <a href="#javascript">Node.js</a>
-</div>
+- Grouping Search​
 
-```python
-[
-    [
-        {
-            "id": 16,
-            "distance": 0.9200337529182434,
-            "entity": {}
-        },
-        {
-            "id": 14,
-            "distance": 0.4505271911621094,
-            "entity": {}
-        },
-        {
-            "id": 15,
-            "distance": 0.19924677908420563,
-            "entity": {}
-        },
-        {
-            "id": 17,
-            "distance": 0.0075093843042850494,
-            "entity": {}
-        },
-        {
-            "id": 13,
-            "distance": -0.14609718322753906,
-            "entity": {}
-        }
-    ]
-]
-```
+    If the returned entities hold the same value in a specific field, the search results may not represent the distribution of all vector embeddings in the vector space. To diversify the search results, consider using the grouping search.​
 
-```java
-{"searchResults": [
-    [
-        {
-            "score": 1.1677284,
-            "fields": {
-                "vector": [
-                    0.9986977,
-                    0.17964739,
-                    0.49086612,
-                    0.23155272,
-                    0.98438674
-                ],
-                "id": 1435
-            }
-        },
-        {
-            "score": 1.1476475,
-            "fields": {
-                "vector": [
-                    0.6952647,
-                    0.13417172,
-                    0.91045254,
-                    0.119336545,
-                    0.9338931
-                ],
-                "id": 1291
-            }
-        },
-        {
-            "score": 1.0969629,
-            "fields": {
-                "vector": [
-                    0.3363194,
-                    0.028906643,
-                    0.6675426,
-                    0.030419827,
-                    0.9735209
-                ],
-                "id": 1168
-            }
-        },
-        {
-            "score": 1.0741848,
-            "fields": {
-                "vector": [
-                    0.9980543,
-                    0.36063594,
-                    0.66427994,
-                    0.17359233,
-                    0.94954175
-                ],
-                "id": 1164
-            }
-        },
-        {
-            "score": 1.0584627,
-            "fields": {
-                "vector": [
-                    0.7187005,
-                    0.12674773,
-                    0.987718,
-                    0.3110777,
-                    0.86093885
-                ],
-                "id": 1085
-            }
-        }
-    ],
-    [
-        {
-            "score": 1.8030131,
-            "fields": {
-                "vector": [
-                    0.59726167,
-                    0.7054632,
-                    0.9573117,
-                    0.94529945,
-                    0.8664103
-                ],
-                "id": 1203
-            }
-        },
-        {
-            "score": 1.7728865,
-            "fields": {
-                "vector": [
-                    0.6672442,
-                    0.60448086,
-                    0.9325822,
-                    0.80272985,
-                    0.8861626
-                ],
-                "id": 1448
-            }
-        },
-        {
-            "score": 1.7536311,
-            "fields": {
-                "vector": [
-                    0.59663296,
-                    0.77831805,
-                    0.8578314,
-                    0.88818026,
-                    0.9030075
-                ],
-                "id": 1010
-            }
-        },
-        {
-            "score": 1.7520742,
-            "fields": {
-                "vector": [
-                    0.854198,
-                    0.72294194,
-                    0.9245805,
-                    0.86126596,
-                    0.7969224
-                ],
-                "id": 1219
-            }
-        },
-        {
-            "score": 1.7452049,
-            "fields": {
-                "vector": [
-                    0.96419,
-                    0.943535,
-                    0.87611496,
-                    0.8268136,
-                    0.79786557
-                ],
-                "id": 1149
-            }
-        }
-    ]
-]}
-```
+    For more about grouping search, refer to [​Grouping Search](grouping-search.md),​
 
-```javascript
-[
-  { score: 3.0258803367614746, id: '1201' },
-  { score: 3.004319190979004, id: '1458' },
-  { score: 2.880324363708496, id: '1187' },
-  { score: 2.8246407508850098, id: '1347' },
-  { score: 2.797295093536377, id: '1406' }
-]
-```
+- Hybrid Search​
 
-Then, search for entities in `blue`:
+    A collection can include up to four vector fields to save the vector embeddings generated using different embedding models. By doing so, you can use a hybrid search to rerank the search results from these vector fields, improving the recall rate.​
 
-<div class="multipleCode">
-    <a href="#python">Python </a>
-    <a href="#java">Java</a>
-    <a href="#javascript">Node.js</a>
-</div>
+    For more about hybrid search, refer to [​Hybrid Search](multi-vector-search.md).​
 
-```python
-res = client.search(
-    collection_name="quick_setup",
-    data=[query_vector],
-    limit=5,
-    search_params={"metric_type": "IP", "params": {"level": 1}},
-    partition_names=["blue"]
-)
+- Search Iterator​
 
-print(res)
-```
+    A single ANN search returns a maximum of 16,384 entities. Consider using search iterators if you need more entities to return in a single search.​
 
-```java
-searchReq = SearchReq.builder()
-    .collectionName("quick_setup")
-    .data(query_vectors)
-    .partitionNames(Arrays.asList("blue"))
-    .topK(5)
-    .build();
+    For details on search iterators, refer to [​Search Iterator](with-iterators.md).​
 
-searchResp = client.search(searchReq);
+- Full-Text Search​
 
-System.out.println(JSONObject.toJSON(searchResp));
-```
+    Full text search is a feature that retrieves documents containing specific terms or phrases in text datasets, then ranking the results based on relevance. This feature overcomes semantic search limitations, which might overlook precise terms, ensuring you receive the most accurate and contextually relevant results. Additionally, it simplifies vector searches by accepting raw text input, automatically converting your text data into sparse embeddings without the need to manually generate vector embeddings.​
 
-```javascript
-res = await client.search({
-    collection_name: "quick_setup",
-    data: [query_vector],
-    partition_names: ["blue"],
-    limit: 5,
-})
+    For details on full-text search, refer to [​Full Text Search](full-text-search.md).​
 
-console.log(res.results)
-```
+- Keyword Match​
 
-The output is similar to the following:
+    Keyword match in Milvus enables precise document retrieval based on specific terms. This feature is primarily used for filtered search to satisfy specific conditions and can incorporate scalar filtering to refine query results, allowing similarity searches within vectors that meet scalar criteria.​
 
-<div class="multipleCode">
-    <a href="#python">Python </a>
-    <a href="#java">Java</a>
-    <a href="#javascript">Node.js</a>
-</div>
+    For details on keyword match, refer to [​Keyword Match](keyword-match.md).​
 
-```python
-[
-    [
-        {
-            "id": 20,
-            "distance": 2.363696813583374,
-            "entity": {}
-        },
-        {
-            "id": 26,
-            "distance": 1.0665391683578491,
-            "entity": {}
-        },
-        {
-            "id": 23,
-            "distance": 1.066049575805664,
-            "entity": {}
-        },
-        {
-            "id": 29,
-            "distance": 0.8353596925735474,
-            "entity": {}
-        },
-        {
-            "id": 28,
-            "distance": 0.7484277486801147,
-            "entity": {}
-        }
-    ]
-]
-```
+- Use Partition Key​
 
-```java
-{"searchResults": [
-    [
-        {
-            "score": 1.1628494,
-            "fields": {
-                "vector": [
-                    0.7442872,
-                    0.046407282,
-                    0.71031404,
-                    0.3544345,
-                    0.9819991
-                ],
-                "id": 1992
-            }
-        },
-        {
-            "score": 1.1470042,
-            "fields": {
-                "vector": [
-                    0.5505825,
-                    0.04367262,
-                    0.9985836,
-                    0.18922359,
-                    0.93255126
-                ],
-                "id": 1977
-            }
-        },
-        {
-            "score": 1.1450152,
-            "fields": {
-                "vector": [
-                    0.89994013,
-                    0.052991092,
-                    0.8645576,
-                    0.6406729,
-                    0.95679337
-                ],
-                "id": 1573
-            }
-        },
-        {
-            "score": 1.1439825,
-            "fields": {
-                "vector": [
-                    0.9253267,
-                    0.15890503,
-                    0.7999555,
-                    0.19126713,
-                    0.898583
-                ],
-                "id": 1552
-            }
-        },
-        {
-            "score": 1.1029172,
-            "fields": {
-                "vector": [
-                    0.95661926,
-                    0.18777144,
-                    0.38115507,
-                    0.14323527,
-                    0.93137646
-                ],
-                "id": 1823
-            }
-        }
-    ],
-    [
-        {
-            "score": 1.8005109,
-            "fields": {
-                "vector": [
-                    0.5953582,
-                    0.7794224,
-                    0.9388869,
-                    0.79825854,
-                    0.9197286
-                ],
-                "id": 1888
-            }
-        },
-        {
-            "score": 1.7714822,
-            "fields": {
-                "vector": [
-                    0.56805456,
-                    0.89422905,
-                    0.88187534,
-                    0.914824,
-                    0.8944365
-                ],
-                "id": 1648
-            }
-        },
-        {
-            "score": 1.7561421,
-            "fields": {
-                "vector": [
-                    0.83421993,
-                    0.39865613,
-                    0.92319834,
-                    0.42695504,
-                    0.96633124
-                ],
-                "id": 1688
-            }
-        },
-        {
-            "score": 1.7553532,
-            "fields": {
-                "vector": [
-                    0.89994013,
-                    0.052991092,
-                    0.8645576,
-                    0.6406729,
-                    0.95679337
-                ],
-                "id": 1573
-            }
-        },
-        {
-            "score": 1.7543385,
-            "fields": {
-                "vector": [
-                    0.16542226,
-                    0.38248396,
-                    0.9888778,
-                    0.80913955,
-                    0.9501492
-                ],
-                "id": 1544
-            }
-        }
-    ]
-]}
-```
+    Involving multiple scalar fields in metadata filtering and using a rather complicated filtering condition may affect search efficiency. Once you set a scalar field as the partition key and use a filtering condition involving the partition key in the search request, it can help restrict the search scope within the partitions corresponding to the specified partition key values. ​
 
-```javascript
-[
-  { score: 2.8421106338500977, id: '1745' },
-  { score: 2.838560104370117, id: '1782' },
-  { score: 2.8134000301361084, id: '1511' },
-  { score: 2.718268871307373, id: '1679' },
-  { score: 2.7014894485473633, id: '1597' }
-]
-```
+    For details on the partition key, refer to [​Use Partition Key](use-partition-key.md).​
 
-The data in `red` differs from that in `blue`. Therefore, the search results will be constrained to the specified partition, reflecting the unique characteristics and data distribution of that subset.
+- Use mmap​
 
-### Search with output fields
+    In Milvus, memory-mapped files allow for direct mapping of file contents into memory. This feature enhances memory efficiency, particularly in situations where available memory is scarce but complete data loading is infeasible. This optimization mechanism can increase data capacity while ensuring performance up to a certain limit; however, when the amount of data exceeds memory by too much, search and query performance may suffer serious degradation, so please choose to turn this feature on or off as appropriate.
 
-Search with output fields allows you to specify which attributes or fields of the matched vectors should be included in the search results.
+    For details on mmap-settings, refer to [​Use mmap](mmap.md).​
 
-You can specify `output_fields` in a request to return results with specific fields.
+- Clustering Compaction​
 
-Here is an example of returning results with `color` attribute values:
+    Clustering compaction is designed to improve search performance and reduce costs in large collections. This guide will help you understand clustering compaction and how this feature can improve search performance.
 
-<div class="multipleCode">
-    <a href="#python">Python </a>
-    <a href="#java">Java</a>
-    <a href="#javascript">Node.js</a>
-</div>
-
-```python
-# Search with output fields
-res = client.search(
-    collection_name="quick_setup", # Replace with the actual name of your collection
-    data=[[0.3580376395471989, -0.6023495712049978, 0.18414012509913835, -0.26286205330961354, 0.9029438446296592]],
-    limit=5, # Max. number of search results to return
-    search_params={"metric_type": "IP", "params": {}}, # Search parameters
-    output_fields=["color"] # Output fields to return
-)
-
-result = json.dumps(res, indent=4)
-print(result)
-```
-
-```java
-// 7. Search with output fields
-query_vectors = Arrays.asList(Arrays.asList(0.3580376395471989f, -0.6023495712049978f, 0.18414012509913835f, -0.26286205330961354f, 0.9029438446296592f));
-
-searchReq = SearchReq.builder()
-    .collectionName("quick_setup")
-    .data(query_vectors)
-    .outputFields(Arrays.asList("color"))
-    .topK(5)
-    .build();
-
-searchResp = client.search(searchReq);
-
-System.out.println(JSONObject.toJSON(searchResp));
-```
-
-```javascript
-// 7. Search with output fields
-query_vector = [0.3580376395471989, -0.6023495712049978, 0.18414012509913835, -0.26286205330961354, 0.9029438446296592]
-
-res = await client.search({
-    collection_name: "quick_setup",
-    data: [query_vector],
-    limit: 5,
-    output_fields: ["color"],
-})
-
-console.log(res.results)
-```
-
-The output is similar to the following:
-
-<div class="multipleCode">
-    <a href="#python">Python </a>
-    <a href="#java">Java</a>
-    <a href="#javascript">Node.js</a>
-</div>
-
-```python
-[
-    [
-        {
-            "id": 0,
-            "distance": 1.4093276262283325,
-            "entity": {
-                "color": "pink_8682"
-            }
-        },
-        {
-            "id": 16,
-            "distance": 1.0159327983856201,
-            "entity": {
-                "color": "yellow_1496"
-            }
-        },
-        {
-            "id": 4,
-            "distance": 0.9902134537696838,
-            "entity": {
-                "color": "red_4794"
-            }
-        },
-        {
-            "id": 14,
-            "distance": 0.9803846478462219,
-            "entity": {
-                "color": "green_2899"
-            }
-        },
-        {
-            "id": 1,
-            "distance": 0.8519943356513977,
-            "entity": {
-                "color": "red_7025"
-            }
-        }
-    ]
-]
-```
-
-```java
-{"searchResults": [
-    [
-        {
-            "score": 1.263043,
-            "fields": {}
-        },
-        {
-            "score": 1.2377806,
-            "fields": {}
-        },
-        {
-            "score": 1.1869997,
-            "fields": {}
-        },
-        {
-            "score": 1.1748955,
-            "fields": {}
-        },
-        {
-            "score": 1.1720343,
-            "fields": {}
-        }
-    ]
-]}
-```
-
-```javascript
-
-[
-  { score: 3.036271572113037, id: '59', color: 'orange' },
-  { score: 3.0267879962921143, id: '1745', color: 'blue' },
-  { score: 3.0069446563720703, id: '854', color: 'black' },
-  { score: 2.984386682510376, id: '718', color: 'black' },
-  { score: 2.916019916534424, id: '425', color: 'purple' }
-]
-```
-
-Alongside the nearest neighbors, the search results will include the specified field `color`, providing a richer set of information for each matching vector.
-
-## Filtered search
-
-Filtered search applies scalar filters to vector searches, allowing you to refine the search results based on specific criteria. You can find more about filter expressions in [Boolean Expression Rules](https://milvus.io/docs/boolean.md) and examples in [Get & Scalar Query](https://milvus.io/docs/get-and-scalar-query.md).
-
-### Use the `like` operator
-
-The `like` operator enhances string searches by evaluating patterns including prefixes, infixes, and suffixes:
-
-- __Prefix matching__: To find values starting with a specific prefix, use the syntax `'like "prefix%"'`.
-- __Infix matching__: To find values containing a specific sequence of characters anywhere within the string, use the syntax `'like "%infix%"'`.
-- __Suffix matching__: To find values ending with a specific suffix, use the syntax `'like "%suffix"'`.
-
-For single-character matching, underscore (`_`) acts as a wildcard for one character, e.g., `'like "y_llow"'`.
-
-### Special characters in search strings
-
-If you want to search for a string that contains special characters like underscores (`_`) or percent signs (`%`), which are normally used as wildcards in search patterns (`_` for any single character and `%` for any sequence of characters), you must escape these characters to treat them as literal characters. Use a backslash (`\`) to escape special characters, and remember to escape the backslash itself. For instance:
-
-- To search for a literal underscore, use `\\_`.
-- To search for a literal percent sign, use `\\%`.
-
-So, if you need to search for the text `"_version_"`, your query should be formatted as `'like "\\_version\\_"'` to ensure the underscores are treated as part of the search term and not as wildcards.
-
-Filter results whose __color__ is prefixed with __red__:
-
-<div class="multipleCode">
-    <a href="#python">Python </a>
-    <a href="#java">Java</a>
-    <a href="#javascript">Node.js</a>
-</div>
-
-```python
-# Search with filter
-res = client.search(
-    collection_name="quick_setup", # Replace with the actual name of your collection
-    data=[[0.3580376395471989, -0.6023495712049978, 0.18414012509913835, -0.26286205330961354, 0.9029438446296592]],
-    limit=5, # Max. number of search results to return
-    search_params={"metric_type": "IP", "params": {}}, # Search parameters
-    output_fields=["color"], # Output fields to return
-    filter='color like "red%"'
-)
-
-result = json.dumps(res, indent=4)
-print(result)
-```
-
-```java
-// 8. Filtered search
-query_vectors = Arrays.asList(Arrays.asList(0.3580376395471989f, -0.6023495712049978f, 0.18414012509913835f, -0.26286205330961354f, 0.9029438446296592f));
-
-searchReq = SearchReq.builder()
-    .collectionName("quick_setup")
-    .data(query_vectors)
-    .outputFields(Arrays.asList("color_tag"))
-    .filter("color_tag like \"red%\"")
-    .topK(5)
-    .build();
-
-searchResp = client.search(searchReq);
-
-System.out.println(JSONObject.toJSON(searchResp));
-```
-
-```javascript
-// 8. Filtered search
-// 8.1 Filter with "like" operator and prefix wildcard
-query_vector = [0.3580376395471989, -0.6023495712049978, 0.18414012509913835, -0.26286205330961354, 0.9029438446296592]
-
-res = await client.search({
-    collection_name: "quick_setup",
-    data: [query_vector],
-    limit: 5,
-    filters: "color_tag like \"red%\"",
-    output_fields: ["color_tag"]
-})
-
-console.log(res.results)
-```
-
-The output is similar to the following:
-
-<div class="multipleCode">
-    <a href="#python">Python </a>
-    <a href="#java">Java</a>
-    <a href="#javascript">Node.js</a>
-</div>
-
-```python
-[
-    [
-        {
-            "id": 4,
-            "distance": 0.9902134537696838,
-            "entity": {
-                "color": "red_4794"
-            }
-        },
-        {
-            "id": 1,
-            "distance": 0.8519943356513977,
-            "entity": {
-                "color": "red_7025"
-            }
-        },
-        {
-            "id": 6,
-            "distance": -0.4113418459892273,
-            "entity": {
-                "color": "red_9392"
-            }
-        }
-    ]
-]
-```
-
-```java
-{"searchResults": [
-    [
-        {
-            "score": 1.1869997,
-            "fields": {"color_tag": "red_3026"}
-        },
-        {
-            "score": 1.1677284,
-            "fields": {"color_tag": "red_9030"}
-        },
-        {
-            "score": 1.1476475,
-            "fields": {"color_tag": "red_3744"}
-        },
-        {
-            "score": 1.0969629,
-            "fields": {"color_tag": "red_4168"}
-        },
-        {
-            "score": 1.0741848,
-            "fields": {"color_tag": "red_9678"}
-        }
-    ]
-]}
-```
-
-```javascript
-[
-  { score: 2.5080761909484863, id: '1201', color_tag: 'red_8904' },
-  { score: 2.491129159927368, id: '425', color_tag: 'purple_8212' },
-  { score: 2.4889798164367676, id: '1458', color_tag: 'red_6891' },
-  { score: 2.42964243888855, id: '724', color_tag: 'black_9885' },
-  { score: 2.4004223346710205, id: '854', color_tag: 'black_5990' }
-]
-```
-
-Filter results whose __color__ contains the letters __ll__ anywhere within the string:
-
-<div class="multipleCode">
-    <a href="#python">Python </a>
-    <a href="#java">Java</a>
-    <a href="#javascript">Node.js</a>
-</div>
-
-```python
-# Infix match on color field
-res = client.search(
-    collection_name="quick_setup", # Replace with the actual name of your collection
-    data=[[0.3580376395471989, -0.6023495712049978, 0.18414012509913835, -0.26286205330961354, 0.9029438446296592]],
-    limit=5, # Max. number of search results to return
-    search_params={"metric_type": "IP", "params": {}}, # Search parameters
-    output_fields=["color"], # Output fields to return
-    filter='color like "%ll%"' # Filter on color field, infix match on "ll"
-)
-
-result = json.dumps(res, indent=4)
-print(result)
-```
-
-```java
-// 8. Filtered search
-query_vectors = Arrays.asList(Arrays.asList(0.3580376395471989f, -0.6023495712049978f, 0.18414012509913835f, -0.26286205330961354f, 0.9029438446296592f));
-
-searchReq = SearchReq.builder()
-    .collectionName("quick_setup")
-    .data(query_vectors)
-    .outputFields(Arrays.asList("color_tag"))
-    .filter("color like \"%ll%\"")
-    .topK(5)
-    .build();
-
-searchResp = client.search(searchReq);
-
-System.out.println(JSONObject.toJSON(searchResp));
-```
-
-```javascript
-// 8. Filtered search
-// 8.1 Filter with "like" operator and prefix wildcard
-query_vector = [0.3580376395471989, -0.6023495712049978, 0.18414012509913835, -0.26286205330961354, 0.9029438446296592]
-
-res = await client.search({
-    collection_name: "quick_setup",
-    data: [query_vector],
-    limit: 5,
-    filters: "color_tag like \"%ll%\"",
-    output_fields: ["color_tag"]
-})
-
-console.log(res.results)
-```
-
-The output is similar to the following:
-
-<div class="multipleCode">
-    <a href="#python">Python </a>
-    <a href="#java">Java</a>
-    <a href="#javascript">Node.js</a>
-</div>
-
-```python
-[
-    [
-        {
-            "id": 5,
-            "distance": 0.7972343564033508,
-            "entity": {
-                "color": "yellow_4222"
-            }
-        }
-    ]
-]
-```
-
-```java
-{"searchResults": [
-    [
-        {
-            "score": 1.1869997,
-            "fields": {"color_tag": "yellow_4222"}
-        }
-    ]
-]}
-```
-
-```javascript
-[
-  { score: 2.5080761909484863, id: '1201', color_tag: 'yellow_4222' }
-]
-```
-
-## Range search
-
-Range search allows you to find vectors that lie within a specified distance range from your query vector.
-
-By setting `radius` and optionally `range_filter`, you can adjust the breadth of your search to include vectors that are somewhat similar to the query vector, providing a more comprehensive view of potential matches.
-
-- `radius`: Defines the outer boundary of your search space. Only vectors that are within this distance from the query vector are considered potential matches.
-
-- `range_filter`: While `radius` sets the outer limit of the search, `range_filter` can be optionally used to define an inner boundary, creating a distance range within which vectors must fall to be considered matches.
-
-<div class="multipleCode">
-    <a href="#python">Python </a>
-    <a href="#java">Java</a>
-    <a href="#javascript">Node.js</a>
-</div>
-
-```python
-# Conduct a range search
-search_params = {
-    "metric_type": "IP",
-    "params": {
-        "radius": 0.8, # Radius of the search circle
-        "range_filter": 1.0 # Range filter to filter out vectors that are not within the search circle
-    }
-}
-
-res = client.search(
-    collection_name="quick_setup", # Replace with the actual name of your collection
-    data=[[0.3580376395471989, -0.6023495712049978, 0.18414012509913835, -0.26286205330961354, 0.9029438446296592]],
-    limit=3, # Max. number of search results to return
-    search_params=search_params, # Search parameters
-    output_fields=["color"], # Output fields to return
-)
-
-result = json.dumps(res, indent=4)
-print(result)
-```
-
-```java
-// 9. Range search
-query_vectors = Arrays.asList(Arrays.asList(0.3580376395471989f, -0.6023495712049978f, 0.18414012509913835f, -0.26286205330961354f, 0.9029438446296592f));
-
-searchReq = SearchReq.builder()
-    .collectionName("quick_setup")
-    .data(query_vectors)
-    .outputFields(Arrays.asList("color_tag"))
-    .searchParams(Map.of("radius", 0.1, "range", 1.0))
-    .topK(5)
-    .build();
-
-searchResp = client.search(searchReq);
-
-System.out.println(JSONObject.toJSON(searchResp));
-```
-
-```javascript
-// 9. Range search
-query_vector = [0.3580376395471989, -0.6023495712049978, 0.18414012509913835, -0.26286205330961354, 0.9029438446296592]
-
-res = await client.search({
-    collection_name: "quick_setup",
-    data: [query_vector],
-    limit: 5,
-    params: {
-        radius: 0.1,
-        range: 1.0
-    },
-    output_fields: ["color_tag"]
-})
-
-console.log(res.results)
-```
-
-The output is similar to the following:
-
-<div class="multipleCode">
-    <a href="#python">Python </a>
-    <a href="#java">Java</a>
-    <a href="#javascript">Node.js</a>
-</div>
-
-```python
-[
-    [
-        {
-            "id": 4,
-            "distance": 0.9902134537696838,
-            "entity": {
-                "color": "red_4794"
-            }
-        },
-        {
-            "id": 14,
-            "distance": 0.9803846478462219,
-            "entity": {
-                "color": "green_2899"
-            }
-        },
-        {
-            "id": 1,
-            "distance": 0.8519943356513977,
-            "entity": {
-                "color": "red_7025"
-            }
-        }
-    ]
-]
-```
-
-```java
-{"searchResults": [
-    [
-        {
-            "score": 1.263043,
-            "fields": {"color_tag": "green_2052"}
-        },
-        {
-            "score": 1.2377806,
-            "fields": {"color_tag": "purple_3709"}
-        },
-        {
-            "score": 1.1869997,
-            "fields": {"color_tag": "red_3026"}
-        },
-        {
-            "score": 1.1748955,
-            "fields": {"color_tag": "black_1646"}
-        },
-        {
-            "score": 1.1720343,
-            "fields": {"color_tag": "green_4853"}
-        }
-    ]
-]}
-```
-
-```javascript
-[
-  { score: 2.3387961387634277, id: '718', color_tag: 'black_7154' },
-  { score: 2.3352415561676025, id: '1745', color_tag: 'blue_8741' },
-  { score: 2.290485382080078, id: '1408', color_tag: 'red_2324' },
-  { score: 2.285870313644409, id: '854', color_tag: 'black_5990' },
-  { score: 2.2593345642089844, id: '1309', color_tag: 'red_8458' }
-]
-```
-
-You will observe that all the entities returned have a distance that falls within the range of 0.8 to 1.0 from the query vector.
-
-The parameter settings for `radius` and `range_filter` vary with the metric type in use.
-
-|  __Metric Type__ |  __Charactericstics__                             |  __Range Search Settings__                                                                               |
-| ---------------- | ------------------------------------------------- | -------------------------------------------------------------------------------------------------------- |
-|  `L2`            |  Smaller L2 distances indicate higher similarity. |  To exclude the closest vectors from results, ensure that:<br/> `range_filter` <= distance < `radius` |
-|  `IP`            |  Larger IP distances indicate higher similarity.  |  To exclude the closest vectors from results, ensure that:<br/> `radius` < distance <= `range_filter` |
-|  `COSINE`            |  Larger cosine value indicates higher similarity.  |  To exclude the closest vectors from results, ensure that:<br/> `radius` < distance <= `range_filter` |
-|  `JACCARD`            |  Smaller Jaccard distances indicate higher similarity. |  To exclude the closest vectors from results, ensure that:<br/> `range_filter` <= distance < `radius` |
-|  `HAMMING`            |  Smaller Hamming distances indicate higher similarity. |  To exclude the closest vectors from results, ensure that:<br/> `range_filter` <= distance < `radius` |
-
-To learn more about distance metric types, refer to [Similarity Metrics](metric.md).
-
-## Grouping search
-
-In Milvus, grouping search is designed to improve comprehensiveness and accuracy for search results.
-
-Consider a scenario in RAG, where loads of documents are split into various passages, and each passage is represented by one vector embedding. Users want to find the most relevant passages to prompt the LLMs accurately. The ordinary Milvus search function can meet this requirement, but it may result in highly skewed and biased results: most of the passages come from only a few documents, and the comprehensiveness of the search results is very poor. This can seriously impair the accuracy or even correctness of the results given by the LLM and influence the LLM users' experience negatively.
-
-Grouping search can effectively solve this problem. By passing a group_by_field and group_size, Milvus users can bucket the search results into several groups and ensure that the number of entities from each group does not exceed a specific group_size. This feature can significantly enhance the comprehensiveness and fairness of search results, noticeably improving the quality of LLM output.
-
-Here is the example code to group search results by field:
-
-```python
-# Connect to Milvus
-client = MilvusClient(uri='http://localhost:19530') # Milvus server address
-
-# Load data into collection
-client.load_collection("group_search") # Collection name
-
-# Group search results
-res = client.search(
-    collection_name="group_search", # Collection name
-    data=[[0.14529211512077012, 0.9147257273453546, 0.7965055218724449, 0.7009258593102812, 0.5605206522382088]], # Query vector
-    search_params={
-    "metric_type": "L2",
-    "params": {"nprobe": 10},
-    }, # Search parameters
-    limit=5, # Max. number of groups to return
-    group_by_field="doc_id", # Group results by document ID
-    group_size=2, # returned at most 2 passages per document, the default value is 1
-    group_strict_size=True, # ensure every group contains exactly 3 passages
-    output_fields=["doc_id", "passage_id"]
-)
-
-# Retrieve the values in the `doc_id` column
-doc_ids = [result['entity']['doc_id'] for result in res[0]]
-passage_ids = [result['entity']['passage_id'] for result in res[0]]
-
-print(doc_ids)
-print(passage_ids)
-```
-
-The output is similar to the following:
-
-```python
-["doc_11", "doc_11", "doc_7", "doc_7", "doc_3", "doc_3", "doc_2", "doc_2", "doc_8", "doc_8"]
-[5, 10, 11, 10, 9, 6, 5, 4, 9, 2]
-```
-
-In the given output, it can be observed that for each document, exactly two passages are retrieved and a total of 5 documents collectively make up the results.
-
-For comparison, let's comment out the group-related parameters and conduct a regular search:
-
-```python
-# Connect to Milvus
-client = MilvusClient(uri='http://localhost:19530') # Milvus server address
-
-# Load data into collection
-client.load_collection("group_search") # Collection name
-
-# Search without `group_by_field`
-res = client.search(
-    collection_name="group_search", # Collection name
-    data=query_passage_vector, # Replace with your query vector
-    search_params={
-    "metric_type": "L2",
-    "params": {"nprobe": 10},
-    }, # Search parameters
-    limit=5, # Max. number of search results to return
-    # group_by_field="doc_id", # Group results by document ID
-    # group_size=2, 
-    # group_strict_size=True,
-    output_fields=["doc_id", "passage_id"]
-)
-
-# Retrieve the values in the `doc_id` column
-doc_ids = [result['entity']['doc_id'] for result in res[0]]
-passage_ids = [result['entity']['passage_id'] for result in res[0]]
-
-print(doc_ids)
-print(passage_ids)
-```
-
-The output is similar to the following:
-
-```python
-["doc_11", "doc_11", "doc_11", "doc_11", "doc_11"]
-[1, 10, 3, 12, 9]
-```
-
-In the given output, it can be observed that "doc_11" completely dominated the search results, overshadowing the high-quality paragraphs from other documents, which can be a poor prompt to LLM.
-
-One more point to note: by default, grouping_search will return results instantly when it has enough groups, which may lead to the number of results in each group not being sufficient to meet the group_size. If you care about the number of results for each group, set group_strict_size=True as shown in the code above. This will make Milvus strive to obtain enough results for each group, at a slight cost to performance.
-
-__Limitations__
-
-- __Indexing__: This grouping feature works only for collections that are indexed with the __HNSW__, __IVF_FLAT__, or __FLAT__ type. For more information, refer to [In-memory Index](https://milvus.io/docs/index.md#HNSW).
-
-- __Vector__: Currently, grouping search does not support a vector field of the __BINARY_VECTOR__ type. For more information on data types, refer to [Supported data types](https://milvus.io/docs/schema.md#Supported-data-types).
-
-- __Field__: Currently, grouping search allows only for a single column. You cannot specify multiple field names in the `group_by_field` config.  Additionally, grouping search is incompatible with data types of JSON, FLOAT, DOUBLE, ARRAY, or vector fields.
-
-- __Performance Impact__: Be mindful that performance degrades with increasing query vector counts. Using a cluster with 2 CPU cores and 8 GB of memory as an example, the execution time for grouping search increases proportionally with the number of input query vectors.
-
-- __Functionality__: Currently, grouping search is not supported by [range search](https://milvus.io/docs/single-vector-search.md#Range-search), [search iterators](https://milvus.io/docs/with-iterators.md#Search-with-iterator)
-
-## Search parameters
-
-In the above searches except the range search, the default search parameters apply. In normal cases, you do not need to manually set search parameters. 
-
-```python
-# In normal cases, you do not need to set search parameters manually
-# Except for range searches.
-search_parameters = {
-    'metric_type': 'L2',
-    'params': {
-        'nprobe': 10,
-        'level': 1，
-        'radius': 1.0
-        'range_filter': 0.8
-    }
-}
-```
-
-The following table lists all possible settings in the search parameters.
-
-|  __Parameter Name__    |  __Parameter Description__                                                                                                                                      |
-| ---------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-|  `metric_type`         |  How to measure similarity between vector embeddings.<br/> Possible values are `IP`, `L2`, `COSINE`, `JACCARD`, and `HAMMING`, and defaults to that of the loaded index file.      |
-|  `params.nprobe`       |  Number of units to query during the search.<br/> The value falls in the range [1, nlist<sub>[1]</sub>].                                                     |
-|  `params.level`        |  Search precision level.<br/> Possible values are `1`, `2`, and `3`, and defaults to `1`. Higher values yield more accurate results but slower performance.  |
-|  `params.radius`       |  Defines the outer boundary of your search space. Only vectors that are within this distance from the query vector are considered potential matches.<br/>The value range is determined by the `metric_type` parameter. For instance, if `metric_type` is set to `L2`, the valid value range is `[0, ∞]`. If `metric_type` is set to `COSINE`, the valid value range is `[-1, 1]`. For more information, refer to [Similarity Metrics](metric.md).                              |
-|  `params.range_filter` |  While `radius` sets the outer limit of the search, `range_filter` can be optionally used to define an inner boundary, creating a distance range within which vectors must fall to be considered matches.<br/>The value range is determined by the `metric_type` parameter. For instance, if `metric_type` is set to `L2`, the valid value range is `[0, ∞]`. If `metric_type` is set to `COSINE`, the valid value range is `[-1, 1]`. For more information, refer to [Similarity Metrics](metric.md).          |
-
-<div class="admonition note">
-
-<p><strong>notes</strong></p>
-
-<p>[1] Number of cluster units after indexing. When indexing a collection, Milvus sub-divides the vector data into multiple cluster units, the number of which varies with the actual index settings.</p>
-<p>[2] Number of entities to return in a search.</p>
-
-</div>
+    For details on clustering compactions, refer to [​Clustering Compaction](clustering-compaction.md).​
 

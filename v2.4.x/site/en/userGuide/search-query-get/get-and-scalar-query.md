@@ -1,1591 +1,608 @@
 ---
 id: get-and-scalar-query.md
-order: 3
-summary: This guide demonstrates how to get entities by ID and conduct scalar filtering.
-title: Get & Scalar Query
+summary: In addition to ANN searches, Milvus also supports metadata filtering through queries. This page introduces how to use Query, Get, and QueryIterators to perform metadata filtering.​
+title: Query
 ---
 
-# Get & Scalar Query
+# Query​
 
-This guide demonstrates how to get entities by ID and conduct scalar filtering. A scalar filtering retrieves entities that match the specified filtering conditions.
+In addition to ANN searches, Milvus also supports metadata filtering through queries. This page introduces how to use Query, Get, and QueryIterators to perform metadata filtering.​
 
-## Overview
+## Overview​
 
-A scalar query filters entities in a collection based on a defined condition using boolean expressions. The query result is a set of entities that match the defined condition. Unlike a vector search, which identifies the closest vector to a given vector in a collection, queries filter entities based on specific criteria.
+A Collection can store various types of scalar fields. You can have Milvus filter Entities based on one or more scalar fields. Milvus offers three types of queries: Query, Get, and QueryIterator. The table below compares these three query types.​
 
-In Milvus, __a filter is always a string compising field names joined by operators__. In this guide, you will find various filter examples. To learn more about the operator details, go to the [Reference](https://milvus.io/docs/get-and-scalar-query.md#Reference-on-scalar-filters) section.
+<table data-block-token="DGeudDgTNo94IUxh4JpcSQuinMe"><thead><tr><th data-block-token="JomTdgqcwoeufXx8zBDcRGJwnXg" colspan="1" rowspan="1"><p data-block-token="QwjYdtBzUoPD7txs3IEc3xTWnIg">​</p>
 
-## Preparations
+</th><th data-block-token="XjpqdFHvfo4iWOxpBYrcKshZnse" colspan="1" rowspan="1"><p data-block-token="IeTFdFRa4ogyd8x99i4c1fRAnWf">Get​</p>
 
-The following steps repurpose the code to connect to Milvus, quickly set up a collection, and insert over 1,000 randomly generated entities into the collection.
+</th><th data-block-token="FTqrdhAPXowYTFxQusCcHMConse" colspan="1" rowspan="1"><p data-block-token="HstgdVh8eoLS4yxt6FWcVObCnte">Query​</p>
 
-### Step 1: Create a collection
+</th><th data-block-token="GKPBdkPuSowroJxhQUXcjWzpnyf" colspan="1" rowspan="1"><p data-block-token="K5Ztdh0YfobsHqxIumLcNe6qnkh">QueryIterator​</p>
 
-<div class="language-python">
+</th></tr></thead><tbody><tr><td data-block-token="LgpCd46wWoj17kxyWWJc7re6nif" colspan="1" rowspan="1"><p data-block-token="X0yldaUHEoYWCBxVX2dcqVCon8c">Applicable scenarios​</p>
 
-Use [`MilvusClient`](https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Client/MilvusClient.md) to connect to the Milvus server and [`create_collection()`](https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_collection.md) to create a collection.
+</td><td data-block-token="Hg3kdotuJoHIEJxAt7ecZULbnhd" colspan="1" rowspan="1"><p data-block-token="U3xtdrQBqoemt6xtM27cXwoEnUc">To find entities that hold the specified primary keys.​</p>
 
-</div>
+<p data-block-token="NEZkdIH0ponBzHxIX2fclJsNnQW">​</p>
 
-<div class="language-java">
+</td><td data-block-token="ItBjdFLS3o4dtVxelAqc5kycnx7" colspan="1" rowspan="1"><p data-block-token="RNdudJ6wNo4RexxBfSjct1kCnHb">To find all or a specified number of entities that meet the custom filtering conditions​</p>
 
-Use [`MilvusClientV2`](https://milvus.io/api-reference/java/v2.4.x/v2/Client/MilvusClientV2.md) to connect to the Milvus server and [`createCollection()`](https://milvus.io/api-reference/java/v2.4.x/v2/Collections/createCollection.md) to create a collection.
+</td><td data-block-token="KWVzd15x5oJsO8xcEUechuM1n5d" colspan="1" rowspan="1"><p data-block-token="IEmzdCnYEoQeH5xnfafcPeITnkh">To find all entities that meet the custom filtering conditions in paginated queries.​</p>
 
-</div>
+</td></tr><tr><td data-block-token="McafdUcFUoyIlrxw147cL3BQnxf" colspan="1" rowspan="1"><p data-block-token="XajHdq8XToVoaAxsgXxcU1LInmh">Filtering method​</p>
 
-<div class="language-javascript">
+</td><td data-block-token="JNWQd10C8ohTKox2cYUcGdalnrv" colspan="1" rowspan="1"><p data-block-token="XxVhdDCmVogQmXx3zshcy13enQe">By primary keys​</p>
 
-Use [`MilvusClient`](https://milvus.io/api-reference/node/v2.4.x/Client/MilvusClient.md) to connect to the Milvus server and [`createCollection()`](https://milvus.io/api-reference/node/v2.4.x/Collections/createCollection.md) to create a collection.
+</td><td data-block-token="PaMId2WSxoiTW8xJ6bAcPJbsntd" colspan="1" rowspan="1"><p data-block-token="Rl3GdtB08oiqFZxhm00cK9l4nh0">By filtering expressions.​</p>
 
-</div>
+</td><td data-block-token="JktodwnRbo1H9vxZehkcMMf6nMg" colspan="1" rowspan="1"><p data-block-token="R7rrdcMuQo4xKcxm3rMc8jT6nS4">By filtering expressions.​</p>
+
+</td></tr><tr><td data-block-token="XHXndNykJo9T24xWY0mcg7Lsn5c" colspan="1" rowspan="1"><p data-block-token="HZGEdb7asoynmWxmHgGcUEiSnSe">Mandatory parameters​</p>
+
+</td><td data-block-token="RnXDdSiWRoVMLsxKp7ycelbanrc" colspan="1" rowspan="1"><ul data-block-token="VTBwdCwDsoI99TxJDRtcu33YnH0"><li><p>Collection name​</p></li>
+
+<li><p>Primary keys​</p></li></ul>
+
+<p data-block-token="B11AdDUZXozgKtx99r5cVG6snOg">​</p>
+
+</td><td data-block-token="Xl9zdzNlUodUr1xtimTcMktln4e" colspan="1" rowspan="1"><ul data-block-token="TKZvdWyOuofnedxNWjdcw81Angf"><li><p>Collection name​</p></li>
+
+<li><p>Filtering expressions​</p></li></ul>
+
+</td><td data-block-token="SqwLddWV7oi5mjxR4Xuc0BsGn6f" colspan="1" rowspan="1"><ul data-block-token="YHfLdqkKLo1MAjxAPpFc1NtvnVh"><li><p>Collection name​</p></li>
+
+<li><p>Filtering expressions​</p></li>
+
+<li><p>Number of entities to return per query​</p></li></ul>
+
+</td></tr><tr><td data-block-token="M7LQdU83DoDar3xjRIBcYRktncb" colspan="1" rowspan="1"><p data-block-token="RegYdilQZojQ9Fxkk0McxoM9nld">Optional parameters​</p>
+
+</td><td data-block-token="LGpddK4o2oKYYuxBVdKcyZZanQf" colspan="1" rowspan="1"><ul data-block-token="C9AFdJXuro04F0xoRj4cx4UenXb"><li><p>Partition name​</p></li>
+
+<li><p>Output fields​</p></li></ul>
+
+</td><td data-block-token="GkCydoTh8o5eRBxfnGQc7niInhe" colspan="1" rowspan="1"><ul data-block-token="XD71d6CwJof3LKxtlR2c9ATZnWh"><li><p>Partition name​</p></li>
+
+<li><p>Number of entities to return​</p></li>
+
+<li><p>Output fields​</p></li></ul>
+
+</td><td data-block-token="RPnPd40mqoFTRzxapogc2BmunOu" colspan="1" rowspan="1"><ul data-block-token="Lf8fdvZWiot1xhxg6X7cuecmn1c"><li><p>Partition name​</p></li>
+
+<li><p>Number of entities to return in total​</p></li>
+
+<li><p>Output fields​</p></li></ul>
+
+</td></tr><tr><td data-block-token="H3ohd3dh5oJNWYx0uOHcQ3DDnmh" colspan="1" rowspan="1"><p data-block-token="VvYJd824VozDaGxi6azcsLQCnre">Returns​</p>
+
+</td><td data-block-token="HeoXdfD0Voa4U3xXRNFcaxHDnFe" colspan="1" rowspan="1"><p data-block-token="UU4GdhaPEo11xOxHmvJcbaaFnPb">Returns entities that hold the specified primary keys in the specified collection or partition.​</p>
+
+</td><td data-block-token="UtcOd7eiToNUsMxRR3hcwzCFnNe" colspan="1" rowspan="1"><p data-block-token="CWukdkCxfo5P9WxTLkecEETpnAe">Returns all or a specified number of entities that meet the custom filtering conditions in the specified collection or partition.​</p>
+
+</td><td data-block-token="VNI6denKyobe8JxUNbRcEL96ncb" colspan="1" rowspan="1"><p data-block-token="GsmPdjuddoZACcxnLPicOyYdnac">Returns all entities that meet the custom filtering conditions in the specified collection or partition through paginated queries.​</p>
+
+</td></tr></tbody></table>
+
+For more on metadata filtering, refer to [​Metadata Filtering](boolean.md).​
+
+## Use Get​
+
+When you need to find entities by their primary keys, you can use the **Get** method. The following code examples assume that there are three fields named `id`, `vector`, and `color` in your collection and return the entities with primary keys `1`, `2`, and `3`.​
+
+```json
+[​
+        {"id": 0, "vector": [0.3580376395471989, -0.6023495712049978, 0.18414012509913835, -0.26286205330961354, 0.9029438446296592], "color": "pink_8682"},​
+        {"id": 1, "vector": [0.19886812562848388, 0.06023560599112088, 0.6976963061752597, 0.2614474506242501, 0.838729485096104], "color": "red_7025"},​
+        {"id": 2, "vector": [0.43742130801983836, -0.5597502546264526, 0.6457887650909682, 0.7894058910881185, 0.20785793220625592], "color": "orange_6781"},​
+        {"id": 3, "vector": [0.3172005263489739, 0.9719044792798428, -0.36981146090600725, -0.4860894583077995, 0.95791889146345], "color": "pink_9298"},​
+        {"id": 4, "vector": [0.4452349528804562, -0.8757026943054742, 0.8220779437047674, 0.46406290649483184, 0.30337481143159106], "color": "red_4794"},​
+        {"id": 5, "vector": [0.985825131989184, -0.8144651566660419, 0.6299267002202009, 0.1206906911183383, -0.1446277761879955], "color": "yellow_4222"},​
+        {"id": 6, "vector": [0.8371977790571115, -0.015764369584852833, -0.31062937026679327, -0.562666951622192, -0.8984947637863987], "color": "red_9392"},​
+        {"id": 7, "vector": [-0.33445148015177995, -0.2567135004164067, 0.8987539745369246, 0.9402995886420709, 0.5378064918413052], "color": "grey_8510"},​
+        {"id": 8, "vector": [0.39524717779832685, 0.4000257286739164, -0.5890507376891594, -0.8650502298996872, -0.6140360785406336], "color": "white_9381"},​
+        {"id": 9, "vector": [0.5718280481994695, 0.24070317428066512, -0.3737913482606834, -0.06726932177492717, -0.6980531615588608], "color": "purple_4976"},​
+]​
+
+```
 
 <div class="multipleCode">
     <a href="#python">Python </a>
     <a href="#java">Java</a>
     <a href="#javascript">Node.js</a>
+    <a href="#curl">cURL</a>
 </div>
 
 ```python
-from pymilvus import MilvusClient
+from pymilvus import MilvusClient​
+​
+client = MilvusClient(​
+    uri="http://localhost:19530",​
+    token="root:Milvus"​
+)​
+​
+res = client.get(​
+    collection_name="query_collection",​
+    ids=[0, 1, 2],​
+    output_fields=["vector", "color"]​
+)​
+​
+print(res)​
 
-# 1. Set up a Milvus client
-client = MilvusClient(
-    uri="http://localhost:19530"
-)
-
-# 2. Create a collection
-client.create_collection(
-    collection_name="quick_setup",
-    dimension=5,
-)
 ```
 
 ```java
-String CLUSTER_ENDPOINT = "http://localhost:19530";
+import io.milvus.v2.client.ConnectConfig;​
+import io.milvus.v2.client.MilvusClientV2;​
+import io.milvus.v2.service.vector.request.GetReq​
+import io.milvus.v2.service.vector.request.GetResp​
+import java.util.*;​
+​
+MilvusClientV2 client = new MilvusClientV2(ConnectConfig.builder()​
+        .uri("http://localhost:19530")​
+        .token("root:Milvus")​
+        .build());​
+        ​
+GetReq getReq = GetReq.builder()​
+        .collectionName("query_collection")​
+        .ids(Arrays.asList(0, 1, 2))​
+        .outputFields(Arrays.asList("vector", "color"))​
+        .build();​
+​
+GetResp getResp = client.get(getReq);​
+​
+List<QueryResp.QueryResult> results = getResp.getGetResults();​
+for (QueryResp.QueryResult result : results) {​
+    System.out.println(result.getEntity());​
+}​
+​
+// Output​
+// {color=pink_8682, vector=[0.35803765, -0.6023496, 0.18414013, -0.26286206, 0.90294385], id=0}​
+// {color=red_7025, vector=[0.19886813, 0.060235605, 0.6976963, 0.26144746, 0.8387295], id=1}​
+// {color=orange_6781, vector=[0.43742132, -0.55975026, 0.6457888, 0.7894059, 0.20785794], id=2}​
 
-// 1. Connect to Milvus server
-ConnectConfig connectConfig = ConnectConfig.builder()
-    .uri(CLUSTER_ENDPOINT)
-    .build();
-
-MilvusClientV2 client = new MilvusClientV2(connectConfig);  
-
-// 2. Create a collection in quick setup mode
-CreateCollectionReq quickSetupReq = CreateCollectionReq.builder()
-    .collectionName("quick_setup")
-    .dimension(5)
-    .metricType("IP")
-    .build();
-
-client.createCollection(quickSetupReq);
 ```
 
 ```javascript
-const { MilvusClient, DataType, sleep } = require("@zilliz/milvus2-sdk-node")
+import { MilvusClient, DataType } from "@zilliz/milvus2-sdk-node";​
+​
+const address = "http://localhost:19530";​
+const token = "root:Milvus";​
+const client = new MilvusClient({address, token});​
+​
+const res = client.get({​
+    collection_name="query_collection",​
+    ids=[0,1,2],​
+    output_fields=["vector", "color"]​
+})​
 
-const address = "http://localhost:19530"
-
-// 1. Set up a Milvus Client
-client = new MilvusClient({address}); 
-
-// 2. Create a collection in quick setup mode
-await client.createCollection({
-    collection_name: "quick_setup",
-    dimension: 5,
-}); 
 ```
 
-### Step 2: Insert randomly generated entities
+```curl
+export CLUSTER_ENDPOINT="http://localhost:19530"​
+export TOKEN="root:Milvus"​
+​
+curl --request POST \​
+--url "${CLUSTER_ENDPOINT}/v2/vectordb/entities/get" \​
+--header "Authorization: Bearer ${TOKEN}" \​
+--header "Content-Type: application/json" \​
+-d '{​
+    "collectionName": "quick_setup",​
+    "id": [0, 1, 2],​
+    "outputFields": ["vector", "color"]​
+}'​
+​
+# {"code":0,"cost":0,"data":[{"color":"pink_8682","id":0,"vector":[0.35803765,-0.6023496,0.18414013,-0.26286206,0.90294385]},{"color":"red_7025","id":1,"vector":[0.19886813,0.060235605,0.6976963,0.26144746,0.8387295]},{"color":"orange_6781","id":2,"vector":[0.43742132,-0.55975026,0.6457888,0.7894059,0.20785794]}]}​
 
-<div class="language-python">
+```
 
-Use [`insert()`](https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Vector/insert.md) to insert entities into the collection.
+## Use Query​
 
-</div>
-
-<div class="language-java">
-
-Use [`insert()`](https://milvus.io/api-reference/java/v2.4.x/v2/Vector/insert.md) to insert entities into the collection.
-
-</div>
-
-<div class="language-javascript">
-
-Use [`insert()`](https://milvus.io/api-reference/node/v2.4.x/Vector/insert.md) to insert entities into the collection.
-
-</div>
+When you need to find entities by custom filtering conditions, use the Query method. The following code examples assume there are three fields named `id`, `vector`, and `color` and return the specified number of entities that hold a `color` value starting with `red`.​
 
 <div class="multipleCode">
     <a href="#python">Python </a>
     <a href="#java">Java</a>
     <a href="#javascript">Node.js</a>
+    <a href="#curl">cURL</a>
 </div>
 
 ```python
-# 3. Insert randomly generated vectors 
-colors = ["green", "blue", "yellow", "red", "black", "white", "purple", "pink", "orange", "brown", "grey"]
-data = []
+from pymilvus import MilvusClient​
+​
+client = MilvusClient(​
+    uri="http://localhost:19530",​
+    token="root:Milvus"​
+)​
+​
+res = client.query(​
+    collection_name="query_collection",​
+    filter="color like \"red%\"",​
+    output_fields=["vector", "color"],​
+    limit=3​
+)​
 
-for i in range(1000):
-    current_color = random.choice(colors)
-    current_tag = random.randint(1000, 9999)
-    data.append({
-        "id": i,
-        "vector": [ random.uniform(-1, 1) for _ in range(5) ],
-        "color": current_color,
-        "tag": current_tag,
-        "color_tag": f"{current_color}_{str(current_tag)}"
-    })
-
-print(data[0])
-
-# Output
-#
-# {
-#     "id": 0,
-#     "vector": [
-#         0.7371107800002366,
-#         -0.7290389773227746,
-#         0.38367002049157417,
-#         0.36996000494220627,
-#         -0.3641898951462792
-#     ],
-#     "color": "yellow",
-#     "tag": 6781,
-#     "color_tag": "yellow_6781"
-# }
-
-res = client.insert(
-    collection_name="quick_setup",
-    data=data
-)
-
-print(res)
-
-# Output
-#
-# {
-#     "insert_count": 1000,
-#     "ids": [
-#         0,
-#         1,
-#         2,
-#         3,
-#         4,
-#         5,
-#         6,
-#         7,
-#         8,
-#         9,
-#         "(990 more items hidden)"
-#     ]
-# }
 ```
 
 ```java
-// 3. Insert randomly generated vectors into the collection
-List<String> colors = Arrays.asList("green", "blue", "yellow", "red", "black", "white", "purple", "pink", "orange", "brown", "grey");
-List<JSONObject> data = new ArrayList<>();
+​
+import io.milvus.v2.service.vector.request.QueryReq​
+import io.milvus.v2.service.vector.request.QueryResp​
+​
+​
+QueryReq queryReq = QueryReq.builder()​
+        .collectionName("query_collection")​
+        .filter("color like \"red%\"")​
+        .outputFields(Arrays.asList("vector", "color"))​
+        .limit(3)​
+        .build();​
+​
+QueryResp getResp = client.query(queryReq);​
+​
+List<QueryResp.QueryResult> results = getResp.getQueryResults();​
+for (QueryResp.QueryResult result : results) {​
+    System.out.println(result.getEntity());​
+}​
+​
+// Output​
+// {color=red_7025, vector=[0.19886813, 0.060235605, 0.6976963, 0.26144746, 0.8387295], id=1}​
+// {color=red_4794, vector=[0.44523495, -0.8757027, 0.82207793, 0.4640629, 0.3033748], id=4}​
+// {color=red_9392, vector=[0.8371978, -0.015764369, -0.31062937, -0.56266695, -0.8984948], id=6}​
 
-for (int i=0; i<1000; i++) {
-    Random rand = new Random();
-    String current_color = colors.get(rand.nextInt(colors.size()-1));
-    int current_tag = rand.nextInt(8999) + 1000;
-    JSONObject row = new JSONObject();
-    row.put("id", Long.valueOf(i));
-    row.put("vector", Arrays.asList(rand.nextFloat(), rand.nextFloat(), rand.nextFloat(), rand.nextFloat(), rand.nextFloat()));
-    row.put("color", current_color);
-    row.put("tag", current_tag);
-    row.put("color_tag", current_color + '_' + String.valueOf(rand.nextInt(8999) + 1000));
-    data.add(row);
-}
+```
 
-InsertReq insertReq = InsertReq.builder()
-    .collectionName("quick_setup")
-    .data(data)
-    .build();
+```go
+import (​
+    "context"​
+    "fmt"​
+    "log"​
+​
+    "github.com/milvus-io/milvus/client/v2"​
+)​
+​
+func ExampleClient_Query_basic() {​
+    ctx, cancel := context.WithCancel(context.Background())​
+    defer cancel()​
+​
+    milvusAddr := "127.0.0.1:19530"​
+    token := "root:Milvus"​
+​
+    cli, err := client.New(ctx, &client.ClientConfig{​
+        Address: milvusAddr,​
+        APIKey:  token,​
+    })​
+    if err != nil {​
+        log.Fatal("failed to connect to milvus server: ", err.Error())​
+    }​
+​
+    defer cli.Close(ctx)​
+​
+    resultSet, err := cli.Query(ctx, client.NewQueryOption("query_collection").​
+        WithFilter(`color like "red%"`).​
+        WithOutputFields("vector", "color").​
+        WithLimit(3))​
+​
+    fmt.Println(resultSet.GetColumn("color"))​
+}​
+​
 
-InsertResp insertResp = client.insert(insertReq);
-
-System.out.println(JSONObject.toJSON(insertResp));
-
-// Output:
-// {"insertCnt": 1000}
 ```
 
 ```javascript
-// 3. Insert randomly generated vectors
-const colors = ["green", "blue", "yellow", "red", "black", "white", "purple", "pink", "orange", "brown", "grey"]
-var data = []
+import { MilvusClient, DataType } from "@zilliz/milvus2-sdk-node";​
+​
+const address = "http://localhost:19530";​
+const token = "root:Milvus";​
+const client = new MilvusClient({address, token});​
+​
+const res = client.query({​
+    collection_name="quick_setup",​
+    filter='color like "red%"',​
+    output_fields=["vector", "color"],​
+    limit(3)​
+})​
 
-for (let i = 0; i < 1000; i++) {
-    current_color = colors[Math.floor(Math.random() * colors.length)]
-    current_tag = Math.floor(Math.random() * 8999 + 1000)
-    data.push({
-        "id": i,
-        "vector": [Math.random(), Math.random(), Math.random(), Math.random(), Math.random()],
-        "color": current_color,
-        "tag": current_tag,
-        "color_tag": `${current_color}_${current_tag}`
-    })
-}
-
-console.log(data[0])
-
-// Output
-// 
-// {
-//   id: 0,
-//   vector: [
-//     0.16022394821966035,
-//     0.6514875214491056,
-//     0.18294484964044666,
-//     0.30227694168725394,
-//     0.47553087493572255
-//   ],
-//   color: 'blue',
-//   tag: 8907,
-//   color_tag: 'blue_8907'
-// }
-// 
-
-res = await client.insert({
-    collection_name: "quick_setup",
-    data: data
-})
-
-console.log(res.insert_cnt)
-
-// Output
-// 
-// 1000
-// 
 ```
 
-### Step 3: Create partitions and insert more entities
+```curl
+export CLUSTER_ENDPOINT="http://localhost:19530"​
+export TOKEN="root:Milvus"​
+​
+curl --request POST \​
+--url "${CLUSTER_ENDPOINT}/v2/vectordb/entities/query" \​
+--header "Authorization: Bearer ${TOKEN}" \​
+--header "Content-Type: application/json" \​
+-d '{​
+    "collectionName": "quick_setup",​
+    "filter": "color like \"red%\"",​
+    "limit": 3,​
+    "outputFields": ["vector", "color"]​
+}'​
+#{"code":0,"cost":0,"data":[{"color":"red_7025","id":1,"vector":[0.19886813,0.060235605,0.6976963,0.26144746,0.8387295]},{"color":"red_4794","id":4,"vector":[0.44523495,-0.8757027,0.82207793,0.4640629,0.3033748]},{"color":"red_9392","id":6,"vector":[0.8371978,-0.015764369,-0.31062937,-0.56266695,-0.8984948]}]}​
 
-<div class="language-python">
+```
 
-Use [`create_partition()`](https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Partitions/create_partition.md) to create partitions and [`insert()`](https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Vector/insert.md) to insert more entities into the collection.
+## Use QueryIterator​
 
-</div>
-
-<div class="language-java">
-
-Use [`createPartition()`](https://milvus.io/api-reference/java/v2.4.x/v2/Partitions/createPartition.md) to create partitions and [`insert()`](https://milvus.io/api-reference/java/v2.4.x/v2/Vector/insert.md) to insert more entities into the collection.
-
-</div>
-
-<div class="language-javascript">
-
-Use [`createPartition()`](https://milvus.io/api-reference/node/v2.4.x/Partitions/createPartition.md) to create partitions and [`insert()`](https://milvus.io/api-reference/node/v2.4.x/Vector/insert.md) to insert more entities into the collection.
-
-</div>
+When you need to find entities by custom filtering conditions through paginated queries, create a **QueryIterator** and use its **next()** method to iterate over all entities to find those meeting the filtering conditions. The following code examples assume that there are three fields named `id`, `vector`, and `color` and return all entities that hold a `color` value starting with `red`.​
 
 <div class="multipleCode">
     <a href="#python">Python </a>
     <a href="#java">Java</a>
     <a href="#javascript">Node.js</a>
+    <a href="#curl">cURL</a>
 </div>
 
 ```python
-# 4. Create partitions and insert more entities
-client.create_partition(
-    collection_name="quick_setup",
-    partition_name="partitionA"
-)
+from pymilvus import connections, Collection​
+​
+connections.connect(​
+    uri="http://localhost:19530",​
+    token="root:Milvus"​
+)​
+​
+collection = Collection("query_collection")​
+​
+iterator = collection.query_iterator(​
+    batch_size=10,​
+    expr="color like \"red%\"",​
+    output_fields=["color"]​
+)​
+​
+results = []​
+​
+while True:​
+    result = iterator.next()​
+    if not result:​
+        iterator.close()​
+        break​
+​
+    print(result)​
+    results += result​
 
-client.create_partition(
-    collection_name="quick_setup",
-    partition_name="partitionB"
-)
-
-data = []
-
-for i in range(1000, 1500):
-    current_color = random.choice(colors)
-    data.append({
-        "id": i,
-        "vector": [ random.uniform(-1, 1) for _ in range(5) ],
-        "color": current_color,
-        "tag": current_tag,
-        "color_tag": f"{current_color}_{str(current_tag)}"
-    })
-
-res = client.insert(
-    collection_name="quick_setup",
-    data=data,
-    partition_name="partitionA"
-)
-
-print(res)
-
-# Output
-#
-# {
-#     "insert_count": 500,
-#     "ids": [
-#         1000,
-#         1001,
-#         1002,
-#         1003,
-#         1004,
-#         1005,
-#         1006,
-#         1007,
-#         1008,
-#         1009,
-#         "(490 more items hidden)"
-#     ]
-# }
-
-data = []
-
-for i in range(1500, 2000):
-    current_color = random.choice(colors)
-    data.append({
-        "id": i,
-        "vector": [ random.uniform(-1, 1) for _ in range(5) ],
-        "color": current_color,
-        "tag": current_tag,
-        "color_tag": f"{current_color}_{str(current_tag)}"
-    })
-
-res = client.insert(
-    collection_name="quick_setup",
-    data=data,
-    partition_name="partitionB"
-)
-
-print(res)
-
-# Output
-#
-# {
-#     "insert_count": 500,
-#     "ids": [
-#         1500,
-#         1501,
-#         1502,
-#         1503,
-#         1504,
-#         1505,
-#         1506,
-#         1507,
-#         1508,
-#         1509,
-#         "(490 more items hidden)"
-#     ]
-# }
 ```
 
 ```java
-// 4. Create partitions and insert some more data
-CreatePartitionReq createPartitionReq = CreatePartitionReq.builder()
-    .collectionName("quick_setup")
-    .partitionName("partitionA")
-    .build();
+import io.milvus.orm.iterator.QueryIterator;​
+import io.milvus.response.QueryResultsWrapper;​
+import io.milvus.v2.common.ConsistencyLevel;​
+import io.milvus.v2.service.vector.request.QueryIteratorReq;​
+​
+​
+QueryIteratorReq req = QueryIteratorReq.builder()​
+        .collectionName("query_collection")​
+        .expr("color like \"red%\"")​
+        .batchSize(50L)​
+        .outputFields(Collections.singletonList("color"))​
+        .consistencyLevel(ConsistencyLevel.BOUNDED)​
+        .build();​
+QueryIterator queryIterator = client.queryIterator(req);​
+​
+while (true) {​
+    List<QueryResultsWrapper.RowRecord> res = queryIterator.next();​
+    if (res.isEmpty()) {​
+        queryIterator.close();​
+        break;​
+    }​
+​
+    for (QueryResultsWrapper.RowRecord record : res) {​
+        System.out.println(record);​
+    }​
+}​
+​
+// Output​
+// [color:red_7025, id:1]​
+// [color:red_4794, id:4]​
+// [color:red_9392, id:6]​
 
-client.createPartition(createPartitionReq);
-
-createPartitionReq = CreatePartitionReq.builder()
-    .collectionName("quick_setup")
-    .partitionName("partitionB")
-    .build();
-
-client.createPartition(createPartitionReq);
-
-data.clear();
-
-for (int i=1000; i<1500; i++) {
-    Random rand = new Random();
-    String current_color = colors.get(rand.nextInt(colors.size()-1));
-    int current_tag = rand.nextInt(8999) + 1000;
-    JSONObject row = new JSONObject();
-    row.put("id", Long.valueOf(i));
-    row.put("vector", Arrays.asList(rand.nextFloat(), rand.nextFloat(), rand.nextFloat(), rand.nextFloat(), rand.nextFloat()));
-    row.put("color", current_color);
-    row.put("tag", current_tag);
-    data.add(row);
-}
-
-insertReq = InsertReq.builder()
-    .collectionName("quick_setup")
-    .data(data)
-    .partitionName("partitionA")
-    .build();
-
-insertResp = client.insert(insertReq);
-
-System.out.println(JSONObject.toJSON(insertResp));
-
-// Output:
-// {"insertCnt": 500}
-
-data.clear();
-
-for (int i=1500; i<2000; i++) {
-    Random rand = new Random();
-    String current_color = colors.get(rand.nextInt(colors.size()-1));
-    int current_tag = rand.nextInt(8999) + 1000;
-    JSONObject row = new JSONObject();
-    row.put("id", Long.valueOf(i));
-    row.put("vector", Arrays.asList(rand.nextFloat(), rand.nextFloat(), rand.nextFloat(), rand.nextFloat(), rand.nextFloat()));
-    row.put("color", current_color);
-    row.put("tag", current_tag);
-    data.add(row);
-}
-
-insertReq = InsertReq.builder()
-    .collectionName("quick_setup")
-    .data(data)
-    .partitionName("partitionB")
-    .build();
-
-insertResp = client.insert(insertReq);
-
-System.out.println(JSONObject.toJSON(insertResp));
-
-// Output:
-// {"insertCnt": 500}
 ```
 
 ```javascript
-// 4. Create partitions and insert more entities
-await client.createPartition({
-    collection_name: "quick_setup",
-    partition_name: "partitionA"
-})
+import { MilvusClient, DataType } from "@zilliz/milvus2-sdk-node";​
+​
+const iterator = await milvusClient.queryIterator({​
+  collection_name: 'query_collection',​
+  batchSize: 10,​
+  expr: 'color like "red%"',​
+  output_fields: ['color'],​
+});​
+​
+const results = [];​
+for await (const value of iterator) {​
+  results.push(...value);​
+  page += 1;​
+}​
 
-await client.createPartition({
-    collection_name: "quick_setup",
-    partition_name: "partitionB"
-})
-
-data = []
-
-for (let i = 1000; i < 1500; i++) {
-    current_color = colors[Math.floor(Math.random() * colors.length)]
-    current_tag = Math.floor(Math.random() * 8999 + 1000)
-    data.push({
-        "id": i,
-        "vector": [Math.random(), Math.random(), Math.random(), Math.random(), Math.random()],
-        "color": current_color,
-        "tag": current_tag,
-        "color_tag": `${current_color}_${current_tag}`
-    })
-}
-
-res = await client.insert({
-    collection_name: "quick_setup",
-    data: data,
-    partition_name: "partitionA"
-})
-
-console.log(res.insert_cnt)
-
-// Output
-// 
-// 500
-// 
-
-await sleep(5000)
-
-data = []
-
-for (let i = 1500; i < 2000; i++) {
-    current_color = colors[Math.floor(Math.random() * colors.length)]
-    current_tag = Math.floor(Math.random() * 8999 + 1000)
-    data.push({
-        "id": i,
-        "vector": [Math.random(), Math.random(), Math.random(), Math.random(), Math.random()],
-        "color": current_color,
-        "tag": current_tag,
-        "color_tag": `${current_color}_${current_tag}`
-    })
-}
-
-res = await client.insert({
-    collection_name: "quick_setup",
-    data: data,
-    partition_name: "partitionB"
-})
-
-console.log(res.insert_cnt)
-
-// Output
-// 
-// 500
-// 
 ```
 
-## Get Entities by ID
+```curl
+# Currently not available
 
-<div class="language-python">
+```
 
-If you know the IDs of the entities of your interests, you can use the [`get()`](https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Vector/get.md) method.
+## Queries in Partitions​
 
-</div>
-
-<div class="language-java">
-
-If you know the IDs of the entities of your interests, you can use the [`get()`](https://milvus.io/api-reference/java/v2.4.x/v2/Vector/get.md) method.
-
-</div>
-
-<div class="language-javascript">
-
-If you know the IDs of the entities of your interests, you can use the [`get()`](https://milvus.io/api-reference/node/v2.4.x/Vector/get.md) method.
-
-</div>
+You can also perform queries within one or multiple partitions by including the partition names in the Get, Query, or QueryIterator request. The following code examples assume that there is a partition named **PartitionA** in the collection.​
 
 <div class="multipleCode">
     <a href="#python">Python </a>
     <a href="#java">Java</a>
     <a href="#javascript">Node.js</a>
+    <a href="#curl">cURL</a>
 </div>
 
 ```python
-# 4. Get entities by ID
-res = client.get(
-    collection_name="quick_setup",
-    ids=[0, 1, 2]
-)
+from pymilvus import MilvusClient​
+client = MilvusClient(​
+    uri="http://localhost:19530",​
+    token="root:Milvus"​
+)​
+​
+res = client.get(​
+    collection_name="query_collection",​
+    # highlight-next-line​
+    partitionNames=["partitionA"],​
+    ids=[0, 1, 2],​
+    output_fields=["vector", "color"]​
+)​
+​
+from pymilvus import MilvusClient​
+​
+client = MilvusClient(​
+    uri="http://localhost:19530",​
+    token="root:Milvus"​
+)​
+​
+res = client.query(​
+    collection_name="query_collection",​
+    # highlight-next-line​
+    partitionNames=["partitionA"],​
+    filter="color like \"red%\"",​
+    output_fields=["vector", "color"],​
+    limit=3​
+)​
+​
+# 使用 QueryIterator​
+from pymilvus import connections, Collection​
+​
+connections.connect(​
+    uri="http://localhost:19530",​
+    token="root:Milvus"​
+)​
+​
+collection = Collection("query_collection")​
+​
+iterator = collection.query_iterator(​
+    # highlight-next-line​
+    partition_names=["partitionA"],​
+    batch_size=10,​
+    expr="color like \"red%\"",​
+    output_fields=["color"]​
+)​
+​
+results = []​
+​
+while True:​
+    result = iterator.next()​
+    if not result:​
+        iterator.close()​
+        break​
+​
+    print(result)​
+    results += result​
 
-print(res)
-
-# Output
-#
-# [
-#     {
-#         "id": 0,
-#         "vector": [
-#             0.68824464,
-#             0.6552274,
-#             0.33593303,
-#             -0.7099536,
-#             -0.07070546
-#         ],
-#         "color_tag": "green_2006",
-#         "color": "green"
-#     },
-#     {
-#         "id": 1,
-#         "vector": [
-#             -0.98531723,
-#             0.33456197,
-#             0.2844234,
-#             0.42886782,
-#             0.32753858
-#         ],
-#         "color_tag": "white_9298",
-#         "color": "white"
-#     },
-#     {
-#         "id": 2,
-#         "vector": [
-#             -0.9886812,
-#             -0.44129863,
-#             -0.29859528,
-#             0.06059075,
-#             -0.43817034
-#         ],
-#         "color_tag": "grey_5312",
-#         "color": "grey"
-#     }
-# ]
 ```
 
 ```java
-// 5. Get entities by ID
-GetReq getReq = GetReq.builder()
-    .collectionName("quick_setup")
-    .ids(Arrays.asList(0L, 1L, 2L))
-    .build();
+GetReq getReq = GetReq.builder()​
+        .collectionName("query_collection")​
+        .partitionName("partitionA")​
+        .ids(Arrays.asList(10, 11, 12))​
+        .outputFields(Collections.singletonList("color"))​
+        .build();​
+​
+GetResp getResp = client.get(getReq);​
+​
+​
+QueryReq queryReq = QueryReq.builder()​
+        .collectionName("query_collection")​
+        .partitionNames(Collections.singletonList("partitionA"))​
+        .filter("color like \"red%\"")​
+        .outputFields(Collections.singletonList("color"))​
+        .limit(3)​
+        .build();​
+​
+QueryResp getResp = client.query(queryReq);​
+​
+​
+QueryIteratorReq req = QueryIteratorReq.builder()​
+        .collectionName("query_collection")​
+        .partitionNames(Collections.singletonList("partitionA"))​
+        .expr("color like \"red%\"")​
+        .batchSize(50L)​
+        .outputFields(Collections.singletonList("color"))​
+        .consistencyLevel(ConsistencyLevel.BOUNDED)​
+        .build();​
+QueryIterator queryIterator = client.queryIterator(req);​
 
-GetResp entities = client.get(getReq);
-
-System.out.println(JSONObject.toJSON(entities));
-
-// Output:
-// {"getResults": [
-//     {"entity": {
-//         "color": "white",
-//         "color_tag": "white_4597",
-//         "vector": [
-//             0.09665024,
-//             0.1163497,
-//             0.0701347,
-//             0.32577968,
-//             0.40943468
-//         ],
-//         "tag": 8946,
-//         "id": 0
-//     }},
-//     {"entity": {
-//         "color": "green",
-//         "color_tag": "green_3039",
-//         "vector": [
-//             0.90689456,
-//             0.4377399,
-//             0.75387514,
-//             0.36454988,
-//             0.8702918
-//         ],
-//         "tag": 2341,
-//         "id": 1
-//     }},
-//     {"entity": {
-//         "color": "white",
-//         "color_tag": "white_8708",
-//         "vector": [
-//             0.9757728,
-//             0.13974023,
-//             0.8023141,
-//             0.61947155,
-//             0.8290197
-//         ],
-//         "tag": 9913,
-//         "id": 2
-//     }}
-// ]}
 ```
 
 ```javascript
-// 5. Get entities by id
-res = await client.get({
-    collection_name: "quick_setup",
-    ids: [0, 1, 2],
-    output_fields: ["vector", "color_tag"]
-})
+import { MilvusClient, DataType } from "@zilliz/milvus2-sdk-node";​
+​
+const address = "http://localhost:19530";​
+const token = "root:Milvus";​
+const client = new MilvusClient({address, token});​
+​
+// 使用 Get 方法​
+var res = client.query({​
+    collection_name="query_collection",​
+    // highlight-next-line​
+    partition_names=["partitionA"],​
+    filter='color like "red%"',​
+    output_fields=["vector", "color"],​
+    limit(3)​
+})​
+​
+// 使用 Query 方法​
+res = client.query({​
+    collection_name="query_collection",​
+    // highlight-next-line​
+    partition_names=["partitionA"],​
+    filter="color like \"red%\"",​
+    output_fields=["vector", "color"],​
+    limit(3)​
+})​
+​
+// 暂不支持使用 QueryIterator​
+const iterator = await milvusClient.queryIterator({​
+  collection_name: 'query_collection',​
+  partition_names: ['partitionA'],​
+  batchSize: 10,​
+  expr: 'color like "red%"',​
+  output_fields: ['vector', 'color'],​
+});​
+​
+const results = [];​
+for await (const value of iterator) {​
+  results.push(...value);​
+  page += 1;​
+}​
 
-console.log(res.data)
-
-// Output
-// 
-// [
-//   {
-//     vector: [
-//       0.16022394597530365,
-//       0.6514875292778015,
-//       0.18294484913349152,
-//       0.30227693915367126,
-//       0.47553086280822754
-//     ],
-//     '$meta': { color: 'blue', tag: 8907, color_tag: 'blue_8907' },
-//     id: '0'
-//   },
-//   {
-//     vector: [
-//       0.2459285855293274,
-//       0.4974019527435303,
-//       0.2154673933982849,
-//       0.03719571232795715,
-//       0.8348019123077393
-//     ],
-//     '$meta': { color: 'grey', tag: 3710, color_tag: 'grey_3710' },
-//     id: '1'
-//   },
-//   {
-//     vector: [
-//       0.9404329061508179,
-//       0.49662265181541443,
-//       0.8088793158531189,
-//       0.9337621331214905,
-//       0.8269071578979492
-//     ],
-//     '$meta': { color: 'blue', tag: 2993, color_tag: 'blue_2993' },
-//     id: '2'
-//   }
-// ]
-// 
 ```
 
-### Get entities from partitions
+```curl
+export CLUSTER_ENDPOINT="http://localhost:19530"​
+export TOKEN="root:Milvus"​
+​
+# 使用 Get 方法​
+curl --request POST \​
+--url "${CLUSTER_ENDPOINT}/v2/vectordb/entities/get" \​
+--header "Authorization: Bearer ${TOKEN}" \​
+--header "Content-Type: application/json" \​
+-d '{​
+    "collectionName": "query_collection",​
+    "partitionNames": ["partitionA"],​
+    "id": [0, 1, 2],​
+    "outputFields": ["vector", "color"]​
+}'​
+​
+# 使用 Query 方法​
+curl --request POST \​
+--url "${CLUSTER_ENDPOINT}/v2/vectordb/entities/get" \​
+--header "Authorization: Bearer ${TOKEN}" \​
+--header "Content-Type: application/json" \​
+-d '{​
+    "collectionName": "query_collection",​
+    "partitionNames": ["partitionA"],​
+    "filter": "color like \"red%\"",​
+    "limit": 3,​
+    "outputFields": ["vector", "color"],​
+    "id": [0, 1, 2]​
+}'​
 
-You can also get entities from specific partitions.
-
-<div class="multipleCode">
-    <a href="#python">Python </a>
-    <a href="#java">Java</a>
-    <a href="#javascript">Node.js</a>
-</div>
-
-```python
-# 5. Get entities from partitions
-res = client.get(
-    collection_name="quick_setup",
-    ids=[1000, 1001, 1002],
-    partition_names=["partitionA"]
-)
-
-print(res)
-
-# Output
-#
-# [
-#     {
-#         "color": "green",
-#         "tag": 1995,
-#         "color_tag": "green_1995",
-#         "id": 1000,
-#         "vector": [
-#             0.7807706,
-#             0.8083741,
-#             0.17276904,
-#             -0.8580777,
-#             0.024156934
-#         ]
-#     },
-#     {
-#         "color": "red",
-#         "tag": 1995,
-#         "color_tag": "red_1995",
-#         "id": 1001,
-#         "vector": [
-#             0.065074645,
-#             -0.44882354,
-#             -0.29479212,
-#             -0.19798489,
-#             -0.77542555
-#         ]
-#     },
-#     {
-#         "color": "green",
-#         "tag": 1995,
-#         "color_tag": "green_1995",
-#         "id": 1002,
-#         "vector": [
-#             0.027934508,
-#             -0.44199976,
-#             -0.40262738,
-#             -0.041511405,
-#             0.024782438
-#         ]
-#     }
-# ]
 ```
 
-```java
-// 5. Get entities by ID in a partition
-getReq = GetReq.builder()
-    .collectionName("quick_setup")
-    .ids(Arrays.asList(1001L, 1002L, 1003L))
-    .partitionName("partitionA")
-    .build();
-
-entities = client.get(getReq);
-
-System.out.println(JSONObject.toJSON(entities));
-
-// Output:
-// {"getResults": [
-//     {"entity": {
-//         "color": "yellow",
-//         "vector": [
-//             0.4300114,
-//             0.599917,
-//             0.799163,
-//             0.75395125,
-//             0.89947814
-//         ],
-//         "id": 1001,
-//         "tag": 5803
-//     }},
-//     {"entity": {
-//         "color": "blue",
-//         "vector": [
-//             0.009218454,
-//             0.64637834,
-//             0.19815737,
-//             0.30519038,
-//             0.8218663
-//         ],
-//         "id": 1002,
-//         "tag": 7212
-//     }},
-//     {"entity": {
-//         "color": "black",
-//         "vector": [
-//             0.76521933,
-//             0.7818409,
-//             0.16976339,
-//             0.8719652,
-//             0.1434964
-//         ],
-//         "id": 1003,
-//         "tag": 1710
-//     }}
-// ]}
-```
-
-```javascript
-// 5.1 Get entities by id in a partition
-res = await client.get({
-    collection_name: "quick_setup",
-    ids: [1000, 1001, 1002],
-    partition_names: ["partitionA"],
-    output_fields: ["vector", "color_tag"]
-})
-
-console.log(res.data)
-
-// Output
-// 
-// [
-//   {
-//     id: '1000',
-//     vector: [
-//       0.014254206791520119,
-//       0.5817716121673584,
-//       0.19793470203876495,
-//       0.8064294457435608,
-//       0.7745839357376099
-//     ],
-//     '$meta': { color: 'white', tag: 5996, color_tag: 'white_5996' }
-//   },
-//   {
-//     id: '1001',
-//     vector: [
-//       0.6073881983757019,
-//       0.05214758217334747,
-//       0.730999231338501,
-//       0.20900958776474,
-//       0.03665429726243019
-//     ],
-//     '$meta': { color: 'grey', tag: 2834, color_tag: 'grey_2834' }
-//   },
-//   {
-//     id: '1002',
-//     vector: [
-//       0.48877206444740295,
-//       0.34028753638267517,
-//       0.6527213454246521,
-//       0.9763909578323364,
-//       0.8031482100486755
-//     ],
-//     '$meta': { color: 'pink', tag: 9107, color_tag: 'pink_9107' }
-//   }
-// ]
-// 
-```
-
-
-## Use Basic Operators
-
-In this section, you will find examples of how to use basic operators in scalar filtering. You can apply these filters to [vector searches](https://milvus.io/docs/single-vector-search.md#Filtered-search) and [data deletions](https://milvus.io/docs/insert-update-delete.md#Delete-entities) too.
-
-<div class="language-python">
-
-For more information, refer to [`query()`](https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Vector/query.md) in the SDK reference.
-
-</div>
-
-<div class="language-java">
-
-For more information, refer to [`query()`](https://milvus.io/api-reference/java/v2.4.x/v2/Vector/query.md) in the SDK reference.
-
-</div>
-
-<div class="language-javascript">
-
-For more information, refer to [`query()`](https://milvus.io/api-reference/node/v2.4.x/Vector/query.md) in the SDK reference.
-
-</div>
-
-- Filter entities with their tag values falling between 1,000 to 1,500.
-
-    <div class="multipleCode">
-       <a href="#python">Python </a>
-       <a href="#java">Java</a>
-       <a href="#javascript">Node.js</a>
-    </div>
-
-    ```python
-    # 6. Use basic operators
-
-    res = client.query(
-        collection_name="quick_setup",
-        filter="1000 < tag < 1500",
-        output_fields=["color_tag"],
-        limit=3
-    )
-
-    print(res)
-
-    # Output
-    #
-    # [
-    #     {
-    #         "id": 1,
-    #         "color_tag": "pink_1023"
-    #     },
-    #     {
-    #         "id": 41,
-    #         "color_tag": "red_1483"
-    #     },
-    #     {
-    #         "id": 44,
-    #         "color_tag": "grey_1146"
-    #     }
-    # ]
-    ```
-
-    ```java
-    // 6. Use basic operators
-
-    QueryReq queryReq = QueryReq.builder()
-        .collectionName("quick_setup")
-        .filter("1000 < tag < 1500")
-        .outputFields(Arrays.asList("color_tag"))
-        .limit(3)
-        .build();
-
-    QueryResp queryResp = client.query(queryReq);
-
-    System.out.println(JSONObject.toJSON(queryResp));
-
-    // Output:
-    // {"queryResults": [
-    //     {"entity": {
-    //         "color_tag": "white_7588",
-    //         "id": 34
-    //     }},
-    //     {"entity": {
-    //         "color_tag": "orange_4989",
-    //         "id": 64
-    //     }},
-    //     {"entity": {
-    //         "color_tag": "white_3415",
-    //         "id": 73
-    //     }}
-    // ]}
-    ```
-
-    ```javascript
-    // 6. Use basic operators
-    res = await client.query({
-        collection_name: "quick_setup",
-        filter: "1000 < tag < 1500",
-        output_fields: ["color_tag"],
-        limit: 3
-    })
-
-    console.log(res.data)
-
-    // Output
-    // 
-    // [
-    //   {
-    //     '$meta': { color: 'pink', tag: 1050, color_tag: 'pink_1050' },
-    //     id: '6'
-    //   },
-    //   {
-    //     '$meta': { color: 'purple', tag: 1174, color_tag: 'purple_1174' },
-    //     id: '24'
-    //   },
-    //   {
-    //     '$meta': { color: 'orange', tag: 1023, color_tag: 'orange_1023' },
-    //     id: '40'
-    //   }
-    // ]
-    // 
-    ```
-
-- Filter entities with their __color__ values set to __brown__.
-
-    <div class="multipleCode">
-       <a href="#python">Python </a>
-       <a href="#java">Java</a>
-       <a href="#javascript">Node.js</a>
-    </div>
-
-    ```python
-    res = client.query(
-        collection_name="quick_setup",
-        filter='color == "brown"',
-        output_fields=["color_tag"],
-        limit=3
-    )
-
-    print(res)
-
-    # Output
-    #
-    # [
-    #     {
-    #         "color_tag": "brown_5343",
-    #         "id": 15
-    #     },
-    #     {
-    #         "color_tag": "brown_3167",
-    #         "id": 27
-    #     },
-    #     {
-    #         "color_tag": "brown_3100",
-    #         "id": 30
-    #     }
-    # ]
-    ```
-
-    ```java
-    queryReq = QueryReq.builder()
-        .collectionName("quick_setup")
-        .filter("color == \"brown\"")
-        .outputFields(Arrays.asList("color_tag"))
-        .limit(3)
-        .build();
-
-    queryResp = client.query(queryReq);
-
-    System.out.println(JSONObject.toJSON(queryResp));
-
-    // Output:
-    // {"queryResults": [
-    //     {"entity": {
-    //         "color_tag": "brown_7792",
-    //         "id": 3
-    //     }},
-    //     {"entity": {
-    //         "color_tag": "brown_9695",
-    //         "id": 7
-    //     }},
-    //     {"entity": {
-    //         "color_tag": "brown_2551",
-    //         "id": 15
-    //     }}
-    // ]}
-    ```
-
-    ```javascript
-    res = await client.query({
-        collection_name: "quick_setup",
-        filter: 'color == "brown"',
-        output_fields: ["color_tag"],
-        limit: 3
-    })
-
-    console.log(res.data)
-
-    // Output
-    // 
-    // [
-    //   {
-    //     '$meta': { color: 'brown', tag: 6839, color_tag: 'brown_6839' },
-    //     id: '22'
-    //   },
-    //   {
-    //     '$meta': { color: 'brown', tag: 7849, color_tag: 'brown_7849' },
-    //     id: '32'
-    //   },
-    //   {
-    //     '$meta': { color: 'brown', tag: 7855, color_tag: 'brown_7855' },
-    //     id: '33'
-    //   }
-    // ]
-    // 
-    ```
-
-- Filter entities with their __color__ values not set to __green__ and __purple__.
-
-    <div class="multipleCode">
-       <a href="#python">Python </a>
-       <a href="#java">Java</a>
-       <a href="#javascript">Node.js</a>
-    </div>
-
-    ```python
-    res = client.query(
-        collection_name="quick_setup",
-        filter='color not in ["green", "purple"]',
-        output_fields=["color_tag"],
-        limit=3
-    )
-
-    print(res)
-
-    # Output
-    #
-    # [
-    #     {
-    #         "color_tag": "yellow_6781",
-    #         "id": 0
-    #     },
-    #     {
-    #         "color_tag": "pink_1023",
-    #         "id": 1
-    #     },
-    #     {
-    #         "color_tag": "blue_3972",
-    #         "id": 2
-    #     }
-    # ]
-    ```
-
-    ```java
-    queryReq = QueryReq.builder()
-        .collectionName("quick_setup")
-        .filter("color not in [\"green\", \"purple\"]")
-        .outputFields(Arrays.asList("color_tag"))
-        .limit(3)
-        .build();
-
-    queryResp = client.query(queryReq);
-
-    System.out.println(JSONObject.toJSON(queryResp));   
-
-    // Output:
-    // {"queryResults": [
-    //     {"entity": {
-    //         "color_tag": "white_4597",
-    //         "id": 0
-    //     }},
-    //     {"entity": {
-    //         "color_tag": "white_8708",
-    //         "id": 2
-    //     }},
-    //     {"entity": {
-    //         "color_tag": "brown_7792",
-    //         "id": 3
-    //     }}
-    // ]}
-    ```
-
-    ```javascript
-    res = await client.query({
-        collection_name: "quick_setup",
-        filter: 'color not in ["green", "purple"]',
-        output_fields: ["color_tag"],
-        limit: 3
-    })
-
-    console.log(res.data)
-
-    // Output
-    // 
-    // [
-    //   {
-    //     '$meta': { color: 'blue', tag: 8907, color_tag: 'blue_8907' },
-    //     id: '0'
-    //   },
-    //   {
-    //     '$meta': { color: 'grey', tag: 3710, color_tag: 'grey_3710' },
-    //     id: '1'
-    //   },
-    //   {
-    //     '$meta': { color: 'blue', tag: 2993, color_tag: 'blue_2993' },
-    //     id: '2'
-    //   }
-    // ]
-    // 
-    ```    
-
-- Filter articles whose color tags start with __red__.
-
-    <div class="multipleCode">
-       <a href="#python">Python </a>
-       <a href="#java">Java</a>
-       <a href="#javascript">Node.js</a>
-    </div>
-
-    ```python
-    res = client.query(
-        collection_name="quick_setup",
-        filter='color_tag like "red%"',
-        output_fields=["color_tag"],
-        limit=3
-    )
-
-    print(res)
-
-    # Output
-    #
-    # [
-    #     {
-    #         "color_tag": "red_6443",
-    #         "id": 17
-    #     },
-    #     {
-    #         "color_tag": "red_1483",
-    #         "id": 41
-    #     },
-    #     {
-    #         "color_tag": "red_4348",
-    #         "id": 47
-    #     }
-    # ]
-    ```
-
-    ```java
-    queryReq = QueryReq.builder()
-        .collectionName("quick_setup")
-        .filter("color_tag like \"red%\"")
-        .outputFields(Arrays.asList("color_tag"))
-        .limit(3)
-        .build();
-
-    queryResp = client.query(queryReq);
-
-    System.out.println(JSONObject.toJSON(queryResp));  
-
-    // Output:
-    // {"queryResults": [
-    //     {"entity": {
-    //         "color_tag": "red_4929",
-    //         "id": 9
-    //     }},
-    //     {"entity": {
-    //         "color_tag": "red_8284",
-    //         "id": 13
-    //     }},
-    //     {"entity": {
-    //         "color_tag": "red_3021",
-    //         "id": 44
-    //     }}
-    // ]}
-    ```    
-
-    ```javascript
-    res = await client.query({
-        collection_name: "quick_setup",
-        filter: 'color_tag like "red%"',
-        output_fields: ["color_tag"],
-        limit: 3
-    })
-
-    console.log(res.data)
-
-    // Output
-    // 
-    // [
-    //   {
-    //     '$meta': { color: 'red', tag: 8773, color_tag: 'red_8773' },
-    //     id: '17'
-    //   },
-    //   {
-    //     '$meta': { color: 'red', tag: 9197, color_tag: 'red_9197' },
-    //     id: '34'
-    //   },
-    //   {
-    //     '$meta': { color: 'red', tag: 7914, color_tag: 'red_7914' },
-    //     id: '46'
-    //   }
-    // ]
-    // 
-    ```    
-
-- Filter entities with their colors set to red and tag values within the range from 1,000 to 1,500.
-
-    <div class="multipleCode">
-       <a href="#python">Python </a>
-       <a href="#java">Java</a>
-       <a href="#javascript">Node.js</a>
-    </div>
-
-    ```python
-    res = client.query(
-        collection_name="quick_setup",
-        filter='(color == "red") and (1000 < tag < 1500)',
-        output_fields=["color_tag"],
-        limit=3
-    )
-
-    print(res)
-
-    # Output
-    #
-    # [
-    #     {
-    #         "color_tag": "red_1483",
-    #         "id": 41
-    #     },
-    #     {
-    #         "color_tag": "red_1100",
-    #         "id": 94
-    #     },
-    #     {
-    #         "color_tag": "red_1343",
-    #         "id": 526
-    #     }
-    # ]
-    ```
-
-    ```java
-    queryReq = QueryReq.builder()
-        .collectionName("quick_setup")
-        .filter("(color == \"red\") and (1000 < tag < 1500)")
-        .outputFields(Arrays.asList("color_tag"))
-        .limit(3)
-        .build();
-
-    queryResp = client.query(queryReq);
-
-    System.out.println(JSONObject.toJSON(queryResp));  
-
-    // Output:
-    // {"queryResults": [
-    //     {"entity": {
-    //         "color_tag": "red_8124",
-    //         "id": 83
-    //     }},
-    //     {"entity": {
-    //         "color_tag": "red_5358",
-    //         "id": 501
-    //     }},
-    //     {"entity": {
-    //         "color_tag": "red_3564",
-    //         "id": 638
-    //     }}
-    // ]}
-    ```
-
-    ```javascript
-    res = await client.query({
-        collection_name: "quick_setup",
-        filter: '(color == "red") and (1000 < tag < 1500)',
-        output_fields: ["color_tag"],
-        limit: 3
-    })
-
-    console.log(res.data)
-
-    // Output
-    // 
-    // [
-    //   {
-    //     '$meta': { color: 'red', tag: 1436, color_tag: 'red_1436' },
-    //     id: '67'
-    //   },
-    //   {
-    //     '$meta': { color: 'red', tag: 1463, color_tag: 'red_1463' },
-    //     id: '160'
-    //   },
-    //   {
-    //     '$meta': { color: 'red', tag: 1073, color_tag: 'red_1073' },
-    //     id: '291'
-    //   }
-    // ]
-    // 
-    ```    
-
-## Use Advanced Operators
-
-In this section, you will find examples of how to use advanced operators in scalar filtering. You can apply these filters to [vector searches](https://milvus.io/docs/single-vector-search.md#Filtered-search) and [data deletions](https://milvus.io/docs/insert-update-delete.md#Delete-entities) too.
-
-### Count entities
-
-- Counts the total number of entities in a collection.
-
-    <div class="multipleCode">
-       <a href="#python">Python </a>
-       <a href="#java">Java</a>
-       <a href="#javascript">Node.js</a>
-    </div>
-
-    ```python
-    # 7. Use advanced operators
-
-    # Count the total number of entities in a collection
-    res = client.query(
-        collection_name="quick_setup",
-        output_fields=["count(*)"]
-    )
-
-    print(res)
-
-    # Output
-    #
-    # [
-    #     {
-    #         "count(*)": 2000
-    #     }
-    # ]
-    ```
-
-    ```java
-    // 7. Use advanced operators
-    // Count the total number of entities in the collection
-    queryReq = QueryReq.builder()
-        .collectionName("quick_setup")
-        .filter("")
-        .outputFields(Arrays.asList("count(*)"))
-        .build();
-
-    queryResp = client.query(queryReq);
-
-    System.out.println(JSONObject.toJSON(queryResp));
-
-    // Output:
-    // {"queryResults": [{"entity": {"count(*)": 2000}}]}
-    ```    
-
-    ```javascript
-    // 7. Use advanced operators
-    // Count the total number of entities in a collection
-    res = await client.query({
-        collection_name: "quick_setup",
-        output_fields: ["count(*)"]
-    })
-
-    console.log(res.data)   
-
-    // Output
-    // 
-    // [ { 'count(*)': '2000' } ]
-    // 
-    ```
-
-- Counts the total number of entities in specific partitions.
-
-    <div class="multipleCode">
-       <a href="#python">Python </a>
-       <a href="#java">Java</a>
-       <a href="#javascript">Node.js</a>
-    </div>
-
-    ```python
-    # Count the number of entities in a partition
-    res = client.query(
-        collection_name="quick_setup",
-        output_fields=["count(*)"],
-        partition_names=["partitionA"]
-    )
-
-    print(res)
-
-    # Output
-    #
-    # [
-    #     {
-    #         "count(*)": 500
-    #     }
-    # ]
-    ```
-
-    ```java
-    // Count the number of entities in a partition
-    queryReq = QueryReq.builder()
-        .collectionName("quick_setup")
-        .partitionNames(Arrays.asList("partitionA"))
-        .filter("")
-        .outputFields(Arrays.asList("count(*)"))
-        .build();
-
-    queryResp = client.query(queryReq);
-
-    System.out.println(JSONObject.toJSON(queryResp));
-
-    // Output:
-    // {"queryResults": [{"entity": {"count(*)": 500}}]}
-    ```    
-
-    ```javascript
-    // Count the number of entities in a partition
-    res = await client.query({
-        collection_name: "quick_setup",
-        output_fields: ["count(*)"],
-        partition_names: ["partitionA"]
-    })
-
-    console.log(res.data)     
-
-    // Output
-    // 
-    // [ { 'count(*)': '500' } ]
-    // 
-    ```
-
-- Counts the number of entities that match a filtering condition
-
-    <div class="multipleCode">
-       <a href="#python">Python </a>
-       <a href="#java">Java</a>
-       <a href="#javascript">Node.js</a>
-    </div>
-
-    ```python
-    # Count the number of entities that match a specific filter
-    res = client.query(
-        collection_name="quick_setup",
-        filter='(color == "red") and (1000 < tag < 1500)',
-        output_fields=["count(*)"],
-    )
-
-    print(res)
-
-    # Output
-    #
-    # [
-    #     {
-    #         "count(*)": 3
-    #     }
-    # ]
-    ```
-
-    ```java
-    // Count the number of entities that match a specific filter
-    queryReq = QueryReq.builder()
-        .collectionName("quick_setup")
-        .filter("(color == \"red\") and (1000 < tag < 1500)")
-        .outputFields(Arrays.asList("count(*)"))
-        .build();
-
-    queryResp = client.query(queryReq);
-
-    System.out.println(JSONObject.toJSON(queryResp));
-
-    // Output:
-    // {"queryResults": [{"entity": {"count(*)": 7}}]}
-    ```    
-
-    ```javascript
-    // Count the number of entities that match a specific filter
-    res = await client.query({
-        collection_name: "quick_setup",
-        filter: '(color == "red") and (1000 < tag < 1500)',
-        output_fields: ["count(*)"]
-    })
-
-    console.log(res.data)   
-
-    // Output
-    // 
-    // [ { 'count(*)': '10' } ]
-    // 
-    ```
-
-## Reference on scalar filters
-
-### Basic Operators
-
-A __boolean expression__ is always __a string comprising field names joined by operators__. In this section, you will learn more about basic operators.
-
-|  __Operator__   |  __Description__                                                                                                                            |
-| --------------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
-|  __and (&&)__   |  True if both operands are true                                                                                                             |
-|  __or (&#124;&#124;)__  |  True if either operand is true                                                                                                             |
-|  __+, -, *, /__ |  Addition, subtraction, multiplication, and division                                                                                        |
-|  __**__         |  Exponent                                                                                                                                   |
-|  __%__          |  Modulus                                                                                                                                    |
-|  __<, >__       |  Less than, greater than                                                                                                                    |
-|  __==, !=__     |  Equal to, not equal to                                                                                                                     |
-|  __<=, >=__     |  Less than or equal to, greater than or equal to                                                                                            |
-|  __not__        |  Reverses the result of a given condition.                                                                                                  |
-|  __like__       |  Compares a value to similar values using wildcard operators.<br/> For example, like "prefix%" matches strings that begin with "prefix". |
-|  __in__         |  Tests if an expression matches any value in a list of values.                                                                              |
-
-### Advanced operators
-
-- `count(*)`
-
-    Counts the exact number of entities in the collection. Use this as an output field to get the exact number of entities in a collection or partition.
-
-    <div class="admonition note">
-
-    <p><b>notes</b></p>
-
-    <p>This applies to loaded collections. You should use it as the only output field.</p>
-
-    </div>
+​
 
     

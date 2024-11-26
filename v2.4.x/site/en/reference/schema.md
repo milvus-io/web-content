@@ -116,7 +116,7 @@ fields = [
   - DOUBLE: numpy.double
   - VARCHAR: VARCHAR
   - JSON: [JSON](use-json-fields.md)
-  - Array: [Array](array_data_type.md)
+  - Array: [Array](array.md)
 
   JSON as a composite data type is available. A JSON field comprises key-value pairs. Each key is a string, and a value can be a number, string, boolean value, array, or list. For details, refer to [JSON: a new data type](use-json-fields.md).
   

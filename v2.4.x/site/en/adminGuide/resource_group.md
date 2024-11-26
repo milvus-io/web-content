@@ -56,7 +56,7 @@ All code samples on this page are in PyMilvus 2.4.9. Upgrade your PyMilvus insta
 
     To create a resource group, run the following after you connect to a Milvus instance. The following snippet assumes that `default` is the alias of your Milvus connection.
 
-    ```Python
+    ```python
     import pymilvus
     
     # A resource group name should be a string of 1 to 255 characters, starting with a letter or an underscore (_) and containing only numbers, letters, and underscores (_).
@@ -80,7 +80,7 @@ All code samples on this page are in PyMilvus 2.4.9. Upgrade your PyMilvus insta
 
     To view the list of resource groups in a Milvus instance, do as follows:
 
-    ```Python
+    ```python
     rgs = utility.list_resource_groups(using='default')
     print(f"Resource group list: {rgs}")
 
@@ -91,7 +91,7 @@ All code samples on this page are in PyMilvus 2.4.9. Upgrade your PyMilvus insta
 
     You can have Milvus describe a resource group in concern as follows:
 
-    ```Python
+    ```python
     info = utility.describe_resource_group(name, using="default")
     print(f"Resource group description: {info}")
 
@@ -110,7 +110,7 @@ All code samples on this page are in PyMilvus 2.4.9. Upgrade your PyMilvus insta
     Assuming there are currently 1 QueryNodes in the **__default_resource_group** of the cluster, and we want to transfer one node into created **rg**.
     `update_resource_groups` ensures atomicity for multiple configuration changes, so no intermediate states will be visible to Milvus. 
 
-    ```Python
+    ```python
     source = '__default_resource_group'
     target = 'rg'
     expected_num_nodes_in_default = 0
@@ -138,7 +138,7 @@ All code samples on this page are in PyMilvus 2.4.9. Upgrade your PyMilvus insta
 
     Once there are query nodes in a resource group, you can load collections to this resource group. The following snippet assumes that a collection named `demo` already exists.
 
-    ```Python
+    ```python
     from pymilvus import Collection
 
     collection = Collection('demo')
@@ -154,7 +154,7 @@ All code samples on this page are in PyMilvus 2.4.9. Upgrade your PyMilvus insta
 
     Also, you can just load a partition into a resource group and have its replicas distributed among several resource groups. The following assumes that a collection named `Books` already exists and it has a partition named `Novels`.
 
-    ```Python
+    ```python
     collection = Collection("Books")
 
     # Use the load method of a collection to load one of its partition
@@ -173,7 +173,7 @@ All code samples on this page are in PyMilvus 2.4.9. Upgrade your PyMilvus insta
 
     Milvus uses [replicas](replica.md) to achieve load-balancing among [segments](glossary.md#Segment) distributed across several query nodes. You can move certain replicas of a collection from one resource group to another as follows:
 
-    ```Python
+    ```python
     source = '__default_resource_group'
     target = 'rg'
     collection_name = 'c'
@@ -192,7 +192,7 @@ All code samples on this page are in PyMilvus 2.4.9. Upgrade your PyMilvus insta
 
     You can drop a resource group that hold no query node (`limits.node_num = 0`) at any time. In this guide, resource group `rg` now has one query node. You need to change the configuration `limits.node_num` of resource group into zero first.
 
-    ```Python
+    ```python
     try:
         utility.update_resource_groups({
             "rg": utility.ResourceGroupConfig(
@@ -218,7 +218,7 @@ Here is a good practice for managing QueryNodes in a cloud environment:
     Additionally, if we strictly enforce the constraint `sum(.requests.nodeNum) <= queryNodeNum`, we can precisely control the assignment of QueryNodes in the cluster. Let's assume there is currently only one QueryNode in the cluster and initialize the cluster.
     Here is an example setup:
 
-    ```Python
+    ```python
     from pymilvus import utility
     from pymilvus.client.types import ResourceGroupConfig
 
@@ -261,7 +261,7 @@ Here is a good practice for managing QueryNodes in a cloud environment:
 2. Cluster scale out
 
     Assuming we have the following scaling function:
-    ```Python
+    ```python
 
     def scale_to(node_num: int):
         # scale the querynode number in Milvus into node_num.
@@ -269,7 +269,7 @@ Here is a good practice for managing QueryNodes in a cloud environment:
     ```
 
     We can use the API to scale a specific resource group to a designated number of QueryNodes without affecting any other resource groups.
-    ```Python
+    ```python
     # scale rg1 into 3 nodes, rg2 into 1 nodes
     utility.update_resource_groups({
         "rg1": ResourceGroupConfig(
@@ -293,7 +293,7 @@ Here is a good practice for managing QueryNodes in a cloud environment:
 
     Similarly, we can establish scaling-in rules that prioritize selecting QueryNodes from **__pending_nodes** resource group. This information can be obtained through the `describe_resource_group` API. Achieving the goal of scaling-in specified resource group.
 
-    ```Python
+    ```python
     # scale rg1 from 3 nodes into 2 nodes
     utility.update_resource_groups({
         "rg1": ResourceGroupConfig(

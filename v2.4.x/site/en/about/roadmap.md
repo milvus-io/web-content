@@ -15,35 +15,35 @@ Welcome to the Milvus Roadmap! Join us on our continuous journey to enhance and 
     <thead>
         <tr>
             <th>Category</th>
-            <th>Milvus 2.4.0 (Recently Achieved)</th>
-            <th>Milvus 2.5.0 (Upcoming in Mid-CY24)</th>
-            <th>Future Roadmap (Milvus 3.0 Expected within CY24)</th>
+            <th>Milvus 2.5.0 (Achieved in recent releases)</th>
+            <th>Next Release (Middle of CY25)</th>
+            <th>Future Roadmap (Within 1 year)</th>
         </tr>
     </thead>
     <tbody>
         <tr>
-            <td><strong>AI-developer Friendly</strong><br/><i>A developer-friendly technology stack, enhanced with the latest AI innovations</i></td>
-            <td><strong>Multi-Vectors & Hybrid Search</strong><br/><i>Framework for multiplex recall and fusion</i><br/><br/><strong>GPU Index Acceleration</strong><br/><i>Support for higher QPS and faster index creation</i><br/><br/><strong>Model Library in PyMilvus</strong><br/><i>Integrated embedding models for Milvus</i></td>
-            <td><strong>Sparse Vector (GA)</strong><br/><i>Local feature extraction and keyword search</i><br/><br/><strong>Milvus Lite (GA)</strong><br/><i>A lightweight, in-memory version of Milvus</i><br/><br/><strong>Embedding Models Gallery</strong><br/><i>Support for image and multi-modal embeddings and reranker models in model libraries</i></td>
-            <td><strong>Original Data-In and Data-Out</strong><br/><i>Support for Blob data types</i><br/><br/><strong>Data Clustering</strong><br/><i>Data co-locality</i><br/><br/><strong>Scenario-oriented Vector Search</strong><br/><i>e.g. Multi-target search & NN filtering</i><br/><br/><strong>Support Embedding & Reranker Endpoint</strong></td>
+            <td><strong>AI-Driven Unstructured Data Processing</strong><br/><i>Strengthening the ability to process and analyze unstructured data using AI models and advanced technologies.</i></td>
+            <td><strong>Full Text Search</strong><br/><i>Support full text search with Sparse-BM25. The new API accepts text as input and automatically generates sparse vector inside Milvus</i><br/><br/><strong>Sparse Vector(GA)</strong><br/><i>Support efficient storage and indexing method for sparse vector</i><br/></td>
+            <td><strong>Data-In and Data-Out</strong><br/><i>Support major model services to ingest original data</i><br/><br/><strong>Advanced Reranker</strong><br/><i>Support model-based rerankers and user-defined scoring function</i><br/><br/><strong>JSON Enhancement</strong><br/><i>JSON indexing and parsing to accelerate processing</i></td>
+            <td><strong>Original Data-In and Data-Out</strong><br/><i>Support Blob and url reference to process original data</i><br/><br/><strong>Support More Data Types</strong><br/><i>e.g. Datetime, Map, GIS</i><br/><br/><strong>Support Tensors</strong><br/><i>Support list of vectors, typical usage like Colbert, Copali etc.</i></td>
         </tr>
         <tr>
-            <td><strong>Rich Functionality</strong><br/><i>Enhanced retrieval and data management features</i></td>
-            <td><strong>Support for FP16, BF16 Datatypes</strong><br/><i>These ML datatypes can help reduce memory usage</i><br/><br/><strong>Grouping Search</strong><br/><i>Aggregate split embeddings</i><br/><br/><strong>Fuzzy Match and Inverted Index</strong><br/><i>Support for fuzzy matching and inverted indexing for scalar types like varchar and int</i></td>
-            <td><strong>Inverted Index for Array & JSON</strong><br/><i>Indexing for array and partial support JSON</i><br/><br/><strong>Bitset Index</strong><br/><i>Improved execution speed and future data aggregation</i><br/><br/><strong>Truncate Collection</strong><br/><i>Allows data clearance while preserving metadata</i><br/><br/><strong>Support for NULL and Default Values</strong></td>
-            <td><strong>Support for More Datatypes</strong><br/><i>e.g. Datetime, GIS</i><br/><br/><strong>Advanced Text Filtering</strong><br/><i>e.g. Match Phrase</i><br/><br/><strong>Primary Key Deduplication</strong></td>
+            <td><strong>Search Quality & Performance</strong><br/><i>Deliver accurate, relevant, and fast results by optimizing architecture, algorithms and APIs</i></td>
+            <td><strong>Text Match Function</strong><br/><i>Quickly filter keywords/tokens in text/varchar</i><br/><br/><strong>Grouping Search Enhancement</strong><br/><i>Introduce group_size and add group by support in hybrid search</i><br/><br/><strong>Bitmap Index & Inverted Index</strong><br/><i>Accelerate filtering on tags</i></td>
+            <td><strong>Advanced Match</strong><br/><i>e.g. Match Phrase, Fuzzy Match, and more tokenizers</i><br/><br/><strong>Aggregations</strong><br/><i>Scalar field aggregations, e.g. min, max, count, distinct.</i><br/></td>
+            <td><strong>Partial Update</strong><br/><i>Support updates to a specific field's value</i><br/><br/><strong>Sorting Capability</strong><br/><i>Sort by scalar fields during execution</i><br/><br/><strong>Support Data Clustering</strong><br/><i>Data co-locality</i></td>
         </tr>
         <tr>
-            <td><strong>Cost Efficiency & Architecture</strong><br/><i>Advanced systems emphasizing stability, cost efficiency, scalability, and performance</i></td>
-            <td><strong>Support for More Collections/Partitions</strong><br/><i>Handles over 10,000 collections in smaller clusters</i><br/><br/><strong>Mmap Optimization</strong><br/><i>Balances reduced memory consumption with latency</i><br/><br/><strong>Bulk Insert Optimazation</strong><br/><i>Simplifies importing large datasets</i></td>
-            <td><strong>Lazy Load</strong><br/><i>Data is loaded on-demand through read operations</i><br/><br/><strong>Major Compaction</strong><br/><i>Re-distributes data based on configuration to enhance read performance</i><br/><br/><strong>Mmap for Growing Data</strong><br/><i>Mmap files for expanding data segments</i></td>
-            <td><strong>Memory Control</strong><br/><i>Reduces out-of-memory issues and provides global memory management</i><br/><br/><strong>LogNode Introduction</strong><br/><i>Ensures global consistency and addresses the single-point bottleneck in root coordination</i><br/><br/><strong>Storage Format V2</strong><br/><i>Universal format design lays the groundwork for disk-based data access</i></td>
+            <td><strong>Rich Functionality & Management</strong><br/><i>Developer-friendly and robust data management features</i></td>
+            <td><strong>Support CSV files in data import</strong><br/><i>Bulkinsert supports CSV format</i><br/><br/><strong>Support Null and Default Value</strong><br/><i>Null and Default types make importing data from other DBMS easier</i><br/><br/><strong>Milvus WebUI (Beta)</strong><br/><i>Visual management tools for DBAs</i></td>
+            <td><strong>Primary Key Deduplication</strong><br/><i>By using the global pk index</i><br/><br/><strong>Online Schema Change</strong><br/><i>e.g. Add/delete field, modify varchar length</i><br/><br/><strong>Data Versioning & Restore</strong><br/><i>Support data versioning by snapshot</i></td>
+            <td><strong>Rust and C++ SDK</strong><br/><i>Support more clients</i><br/><br/><strong>Support UDF </strong><br/><i>User-defined function</i></td>
         </tr>
         <tr>
-            <td><strong>Enterprise Ready</strong><br/><i>Designed to meet the needs of enterprise production environments</i></td>
-            <td><strong>Milvus CDC</strong><br/><i>Capability for data replication</i><br/><br/><strong>Accesslog Enhancement</strong><br/><i>Detailed recording for audit and tracing</i></td>
-            <td><strong>New Resource Group</strong><br/><i>Enhanced resource management</i><br/><br/><strong>Storage Hook</strong><br/><i>Support for Bring Your Own Key (BYOK) encryption</i></td>
-            <td><strong>Dynamic Replica Number Adjustment</strong><br/><i>Facilitates dynamic changes to the number of replicas</i><br/><br/><strong>Dynamic Schema Modification</strong><br/><i>e.g., Add/delete fields, modify varchar lengths</i><br/><br/><strong>Rust and C# SDKs</strong></td>
+            <td><strong>Cost Efficiency & Achitecture</strong><br/><i>State-of-the-art systems, prioritizing stability, cost-efficiency and scalability </i></td>
+            <td><strong>Load by Field</strong><br/><i>Choose part of collection to load</i><br/><br/><strong>Memory Optimization</strong><br/><i>Reduce OOM and load enhancement</i><br/><br/><strong>Streaming Node (Beta)</strong><br/><i>Provide global consistency and solve performance bottleneck on root coordinator</i><br/><br/><strong>Storage Format V2 (Beta)</strong><br/><i>Universal formats design and foundation for disk-based data access</i><br/><br/><strong>Clustering Compaction</strong><br/><i>Data re-distribution based on configuration to accelerate read performance</i></td>
+            <td><strong>Lazy Load</strong><br/><i>Load can be initiated by the first read operation without explicitly calling load()</i><br/><br/><strong>Tiered Storage</strong><br/><i>Support hot and cold storage for cost optimization</i><br/><br/><strong>Release by Field</strong><br/><i>Release part of collection to reduce memory usage</i><br/><br/><strong>Streaming Node (GA)</strong><br/><i>Process streaming data and simplify the architecture</i></td>
+            <td><strong>Remove dependencies</strong><br/><i>Reduce or eliminate dependencies on external components like pulsar, etcd</i><br/><br/><strong>Merge coord logic into MixCoord</strong><br/><i>Simplify the architecture</i></td>
         </tr>
     </tbody>
 </table>
