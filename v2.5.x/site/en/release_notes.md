@@ -86,7 +86,7 @@ In addition to JSON and Parquet formats, Milvus now supports direct bulk import 
 
 #### Expression Templates for Query Acceleration
 
-Milvus now supports expression eemplates, improving expression parsing efficiency, particularly in scenarios with complex expressions.
+Milvus now supports expression templates, improving expression parsing efficiency, particularly in scenarios with complex expressions.
 
 #### GroupBy Enhancements
 
