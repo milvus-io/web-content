@@ -10,7 +10,7 @@ title: Upgrade Milvus Cluster with Docker Compose
 
 This topic describes how to upgrade your Milvus using Docker Compose. 
 
-In normal cases, you can [upgrade Milvus by changing its image](#Upgrade-Milvus-by-changing-its-image). However, you need to [migrate the metadata](#Migrate-the-metadata) before any upgrade from v2.1.x to v2.4.17.
+In normal cases, you can [upgrade Milvus by changing its image](#Upgrade-Milvus-by-changing-its-image). However, you need to [migrate the metadata](#Migrate-the-metadata) before any upgrade from v2.1.x to v2.5.x.
 
 ## Upgrade Milvus by changing its image
 
@@ -24,35 +24,35 @@ In normal cases, you can upgrade Milvus as follows:
     ...
     rootcoord:
       container_name: milvus-rootcoord
-      image: milvusdb/milvus:v2.4.17
+      image: milvusdb/milvus:v2.5.x
     ...
     proxy:
       container_name: milvus-proxy
-      image: milvusdb/milvus:v2.4.17
+      image: milvusdb/milvus:v2.5.x
     ...
     querycoord:
       container_name: milvus-querycoord
-      image: milvusdb/milvus:v2.4.17  
+      image: milvusdb/milvus:v2.5.x  
     ...
     querynode:
       container_name: milvus-querynode
-      image: milvusdb/milvus:v2.4.17
+      image: milvusdb/milvus:v2.5.x
     ...
     indexcoord:
       container_name: milvus-indexcoord
-      image: milvusdb/milvus:v2.4.17
+      image: milvusdb/milvus:v2.5.x
     ...
     indexnode:
       container_name: milvus-indexnode
-      image: milvusdb/milvus:v2.4.17 
+      image: milvusdb/milvus:v2.5.x 
     ...
     datacoord:
       container_name: milvus-datacoord
-      image: milvusdb/milvus:v2.4.17   
+      image: milvusdb/milvus:v2.5.x   
     ...
     datanode:
       container_name: milvus-datanode
-      image: milvusdb/milvus:v2.4.17
+      image: milvusdb/milvus:v2.5.x
     ```
 
 2. Run the following commands to perform the upgrade.
@@ -80,7 +80,7 @@ In normal cases, you can upgrade Milvus as follows:
       runWithBackup: true
     config:
       sourceVersion: 2.1.4   # Specify your milvus version
-      targetVersion: 2.4.17
+      targetVersion: 2.5.x
       backupFilePath: /tmp/migration.bak
     metastore:
       type: etcd
