@@ -54,7 +54,7 @@ Milvus now supports setting nullable properties and default values for scalar fi
 
 Default values and nullable properties provide greater flexibility to Milvus. Users can utilize this feature for fields with uncertain values when creating collections. It also simplifies data migration from other database systems to Milvus, allowing for handling datasets containing null values while preserving original default value settings.
 
-For details, refer to [Default Value & Null](nullable-and-default.md).
+For details, refer to [Nullable & Default Value](nullable-and-default.md).
 
 #### Faiss-based HNSW SQ/PQ/PRQ
 
