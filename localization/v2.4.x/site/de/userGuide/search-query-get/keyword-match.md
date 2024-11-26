@@ -52,8 +52,8 @@ title: Schlüsselwort-Abgleich
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/keyword-match.png" alt="Keyword Match" class="doc-image" id="keyword-match" />
-   </span> <span class="img-wrapper"> <span>Schlüsselwort-Abgleich</span> </span></p>
-<h2 id="Enable-keyword-match" class="common-anchor-header">Aktivieren der Stichwortsuche<button data-href="#Enable-keyword-match" class="anchor-icon" translate="no">
+   </span> <span class="img-wrapper"> <span>Schlüsselwortabgleich</span> </span></p>
+<h2 id="Enable-keyword-match" class="common-anchor-header">Aktivieren des Schlüsselwortabgleichs<button data-href="#Enable-keyword-match" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -133,7 +133,7 @@ schema.add_field(​
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&quot;TEXT_MATCH(text, &#x27;machine&#x27;) and TEXT_MATCH(text, &#x27;deep&#x27;)&quot;</span>​
 
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Search-with-keyword-match​" class="common-anchor-header">Suche mit Schlüsselwortübereinstimmung</h3><p>Die Schlüsselwortübereinstimmung kann in Kombination mit der Vektorähnlichkeitssuche verwendet werden, um den Suchbereich einzugrenzen und die Suchleistung zu verbessern. Indem Sie die Sammlung vor der vektoriellen Ähnlichkeitssuche mit Hilfe von Schlüsselwortübereinstimmung filtern, können Sie die Anzahl der zu durchsuchenden Dokumente reduzieren, was zu schnelleren Abfragezeiten führt.</p>
+<h3 id="Search-with-keyword-match​" class="common-anchor-header">Suche mit Schlüsselwortübereinstimmung</h3><p>Schlüsselwortabgleich kann in Kombination mit der Vektorähnlichkeitssuche verwendet werden, um den Suchbereich einzugrenzen und die Suchleistung zu verbessern. Indem Sie die Sammlung vor der vektoriellen Ähnlichkeitssuche mit einem Schlüsselwortabgleich filtern, können Sie die Anzahl der zu durchsuchenden Dokumente reduzieren, was zu schnelleren Abfragezeiten führt.</p>
 <p>In diesem Beispiel filtert der Ausdruck <code translate="no">filter</code> die Suchergebnisse so, dass nur Dokumente enthalten sind, die mit den angegebenen Schlüsselwörtern <code translate="no">keyword1</code> oder <code translate="no">keyword2</code> übereinstimmen. Die Vektorähnlichkeitssuche wird dann mit dieser gefilterten Teilmenge von Dokumenten durchgeführt.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Match entities with `keyword1` or `keyword2`​</span>
 <span class="hljs-built_in">filter</span> = <span class="hljs-string">&quot;TEXT_MATCH(text, &#x27;keyword1 keyword2&#x27;)&quot;</span>​

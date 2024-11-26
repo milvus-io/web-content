@@ -4,7 +4,7 @@ summary: >-
   類似度メトリクスは、ベクトル間の類似度を測定するために使用される。適切な距離メトリックを選択することで、分類やクラスタリングの性能を大幅に向上させることができる。
 title: メートル法
 ---
-<h1 id="Metric-Types​" class="common-anchor-header">メトリクスの種類<button data-href="#Metric-Types​" class="anchor-icon" translate="no">
+<h1 id="Metric-Types​" class="common-anchor-header">メトリックの種類<button data-href="#Metric-Types​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -72,10 +72,10 @@ title: メートル法
 </td><td data-block-token="Aq8Cd7Awao5IhExSnUjcUzRxndh" colspan="1" rowspan="1"><p data-block-token="AMbXd3nwLoHalMx3h0pc63i9nNg">値が小さいほど類似性が高いことを示す。</p>
 </td><td data-block-token="ULaFdvx0WoKy4rxBgPzciLZMnFg" colspan="1" rowspan="1"><p data-block-token="Je5xdsfnvoQli3xdODDchYMkn2e">[0, 1]</p>
 </td></tr><tr><td data-block-token="L5l6dqaAVoVpSJxFW5TcZlXLnAc" colspan="1" rowspan="1"><p data-block-token="JOcmdIWTUoZuoGxoToYcMLpLnMg"><code translate="no">HAMMING</code></p>
-</td><td data-block-token="H3vYdaah4oWsXmxmABOcW01XnSh" colspan="1" rowspan="1"><p data-block-token="VHz5d7R91o3OGuxX39Bc76CTnGf">値が小さいほど類似性が高いことを示す。</p>
+</td><td data-block-token="H3vYdaah4oWsXmxmABOcW01XnSh" colspan="1" rowspan="1"><p data-block-token="VHz5d7R91o3OGuxX39Bc76CTnGf">値が小さいほど類似度が高いことを示す。</p>
 </td><td data-block-token="NZnwdhAGUoO0R9x9gz6cZfCYnOd" colspan="1" rowspan="1"><p data-block-token="Xk7wdBDlko6RjFxVnATcPYTjnsb">[0, dim(ベクトル)</p>
 </td></tr><tr><td data-block-token="Xm5BdUTvXoPS1Xxtc26cBqAWn9e" colspan="1" rowspan="1"><p data-block-token="FoMadsBCboAKV2xofQ2c9IiKntb"><code translate="no">BM25</code></p>
-</td><td data-block-token="OHEldDxlaoejYmxXgUPcbwCYn4b" colspan="1" rowspan="1"><p data-block-token="EVzLdJPQdopf2mxZ3dfcTGSgnSc">用語頻度、逆文書頻度、文書正規化に基づいて関連性をスコア化する。</p>
+</td><td data-block-token="OHEldDxlaoejYmxXgUPcbwCYn4b" colspan="1" rowspan="1"><p data-block-token="EVzLdJPQdopf2mxZ3dfcTGSgnSc">項頻度、逆文書頻度、文書正規化に基づいて関連性をスコア化する。</p>
 </td><td data-block-token="KNCEd8WTioQbwnxmHzNcpHkHnzf" colspan="1" rowspan="1"><p data-block-token="RVtVda2Ozo1N5ixO0oucju5FnWh">[0, ∞)</p>
 <p data-block-token="MQ5RdcTC1oIZC5x4d7xc2M56nId"></p>
 </td></tr></tbody></table>
@@ -94,7 +94,7 @@ title: メートル法
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>基本的に、ユークリッド距離は2点を結ぶセグメントの長さを測定する。</p>
+    </button></h2><p>基本的にユークリッド距離は2点を結ぶセグメントの長さを測定する。</p>
 <p>ユークリッド距離の公式は以下の通り。</p>
 <p>
   

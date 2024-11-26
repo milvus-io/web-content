@@ -24,7 +24,7 @@ summary: >-
     </button></h1><p>O analisador <code translate="no">chinese</code> foi concebido especificamente para lidar com texto chinês, fornecendo segmentação e tokenização eficazes.</p>
 <h3 id="Definition​" class="common-anchor-header">Definição</h3><p>O analisador <code translate="no">chinese</code> é composto por.</p>
 <ul>
-<li><p><strong>Tokenizador</strong>: Utiliza o tokenizador <code translate="no">jieba</code> para segmentar o texto chinês em tokens com base no vocabulário e no contexto. Para obter mais informações, consulte <a href="/docs/pt/jieba-tokenizer.md">Jieba</a>.</p></li>
+<li><p><strong>Tokenizador</strong>: Usa o tokenizador <code translate="no">jieba</code> para segmentar o texto chinês em tokens com base no vocabulário e no contexto. Para obter mais informações, consulte <a href="/docs/pt/jieba-tokenizer.md">Jieba</a>.</p></li>
 <li><p><strong>Filtro</strong>: Utiliza o filtro <code translate="no">cnalphanumonly</code> para remover tokens que contenham caracteres não chineses. Para obter mais informações, consulte <a href="/docs/pt/cnalphanumonly-filter.md">Cnalphanumonly</a>.</p></li>
 </ul>
 <p>A funcionalidade do analisador <code translate="no">chinese</code> é equivalente à seguinte configuração de analisador personalizado.</p>

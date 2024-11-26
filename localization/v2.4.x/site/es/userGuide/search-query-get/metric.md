@@ -23,7 +23,7 @@ title: Tipos métricos
       </svg>
     </button></h1><p>Las métricas de similitud se utilizan para medir las similitudes entre vectores. La elección de una métrica de distancia adecuada ayuda a mejorar significativamente la clasificación y el rendimiento de la agrupación.</p>
 <p>Actualmente, Zilliz Cloud soporta estos tipos de Métricas de similitud: Distancia euclidiana (<code translate="no">L2</code>), Producto interior (<code translate="no">IP</code>), Similitud coseno (<code translate="no">COSINE</code>), <code translate="no">JACCARD</code>, <code translate="no">HAMMING</code>, y <code translate="no">BM25</code> (específicamente diseñada para la búsqueda de texto completo en vectores dispersos).</p>
-<p>La siguiente tabla resume la correspondencia entre los distintos tipos de campo y sus correspondientes tipos de métrica.</p>
+<p>La siguiente tabla resume la correspondencia entre los distintos tipos de campo y sus correspondientes tipos métricos.</p>
 <table data-block-token="LHu5dKCHro3mnTx6PsmckEsinQd"><thead><tr><th data-block-token="JOJvdTK9MouhT8x7tfGc59NGnfg" colspan="1" rowspan="1"><p data-block-token="TS9tdnaJaoG4kfx96cfcqXINnnc">Tipo de campo</p>
 </th><th data-block-token="Iy8ZdPGpIo6nfwxiz4RcSuwanwf" colspan="1" rowspan="1"><p data-block-token="SKIAdxDFJo9oOyxg7iTcmfGAnz1">Rango de dimensión</p>
 </th><th data-block-token="LkYndBOhGotOkGxsog2ciFTSnKd" colspan="1" rowspan="1"><p data-block-token="Nzcsdqt2WoZ4R5xQMT2cD0PQnAh">Tipos métricos admitidos</p>

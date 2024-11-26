@@ -40,7 +40,7 @@ title: Consistência
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/batch-data-and-streaming-data.png" alt="Batch data and streaming data" class="doc-image" id="batch-data-and-streaming-data" />
    </span> <span class="img-wrapper"> <span>Dados em lote e dados de fluxo contínuo</span> </span></p>
-<p>Como mostra a figura acima, os QueryNodes podem receber simultaneamente dados de fluxo contínuo e dados em lote após receberem um pedido de Pesquisa. No entanto, devido à latência da rede, os dados em fluxo contínuo obtidos pelos QueryNodes podem estar incompletos.</p>
+<p>Como mostra a figura acima, os QueryNodes podem receber simultaneamente dados de fluxo contínuo e dados em lote depois de receberem um pedido de Pesquisa. No entanto, devido à latência da rede, os dados em fluxo contínuo obtidos pelos QueryNodes podem estar incompletos.</p>
 <p>Para resolver este problema, o Milvus marca o tempo de cada registo na fila de dados e insere continuamente marcas de tempo de sincronização na fila de dados. Sempre que um carimbo de data/hora de sincronização (syncTs) é recebido, os QueryNodes definem-no como ServiceTime, o que significa que os QueryNodes podem ver todos os dados anteriores a esse ServiceTime. Com base no ServiceTime, o Milvus pode fornecer carimbos de data/hora de garantia (GuaranteeTs) para satisfazer os diferentes requisitos dos utilizadores em termos de consistência e disponibilidade. Os utilizadores podem informar os QueryNodes da necessidade de incluir dados anteriores a um determinado momento no âmbito da pesquisa, especificando GuaranteeTs nos seus pedidos de pesquisa.</p>
 <p>
   
@@ -58,7 +58,7 @@ title: Consistência
 <p>O carimbo de data/hora mais recente é utilizado como GuaranteeTs e os QueryNodes têm de esperar até que o ServiceTime cumpra os GuaranteeTs antes de executarem os pedidos de pesquisa.</p></li>
 <li><p><strong>Eventual</strong></p>
 <p>O GuaranteeTs é definido para um valor extremamente pequeno, como 1, para evitar verificações de consistência, de modo a que os QueryNodes possam executar imediatamente pedidos de Pesquisa em todos os dados do lote.</p></li>
-<li><p><strong>Estabilidade limitada</strong></p>
+<li><p><strong>Staleness limitado</strong></p>
 <p>O GuranteeTs é definido para um ponto de tempo anterior ao último carimbo de data/hora para que os QueryNodes executem pesquisas com uma tolerância de determinada perda de dados.</p></li>
 <li><p><strong>Sessão</strong></p>
 <p>O último ponto temporal em que o cliente insere dados é utilizado como GuaranteeTs para que os QueryNodes possam efetuar pesquisas em todos os dados inseridos pelo cliente.</p></li>

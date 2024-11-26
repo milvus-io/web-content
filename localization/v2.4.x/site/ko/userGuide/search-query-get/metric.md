@@ -236,7 +236,7 @@ title: 메트릭 유형
 <ul>
 <li><p><code translate="no">​Q</code>: 사용자가 제공한 쿼리 텍스트입니다.</p></li>
 <li><p><code translate="no">​D</code>: 평가 중인 문서입니다.</p></li>
-<li><p><code translate="no">​TF(qi​,D)</code>: 용어 빈도, 문서 D에서 용어 q가 얼마나 자주 나타나는지 나타냅니다.</p></li>
+<li><p><code translate="no">​TF(qi​,D)</code>: 용어 빈도, 문서 D에서 용어 qi가 얼마나 자주 나타나는지 나타냅니다.</p></li>
 <li><p><code translate="no">​IDF(qi​)</code>: 역 문서 빈도, 다음과 같이 계산됩니다.</p>
 <p>
   

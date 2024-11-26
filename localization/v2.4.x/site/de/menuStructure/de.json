@@ -18,7 +18,7 @@
         "children": []
       },
       {
-        "label": "Milvus-Fahrplan",
+        "label": "Milvus Straßenkarte",
         "id": "roadmap.md",
         "order": 2,
         "children": []
@@ -1271,7 +1271,7 @@
             "isMenu": true,
             "children": [
               {
-                "label": "Einen Alert erstellen",
+                "label": "Create an Alert",
                 "id": "alert.md",
                 "order": 0,
                 "children": []

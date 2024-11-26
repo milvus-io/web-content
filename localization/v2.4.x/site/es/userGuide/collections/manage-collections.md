@@ -185,7 +185,7 @@ title: Explicación de las colecciones
         ></path>
       </svg>
     </button></h2><p>Las particiones son subconjuntos de una colección, que comparten el mismo conjunto de campos con su colección padre, conteniendo cada una un subconjunto de entidades.</p>
-<p>Al asignar entidades a diferentes particiones, puede crear grupos de entidades. Puede realizar búsquedas y consultas en particiones específicas para que Zilliz Cloud ignore las entidades de otras particiones y mejore la eficiencia de la búsqueda.</p>
+<p>Al asignar entidades a diferentes particiones, puede crear grupos de entidades. Puede realizar búsquedas y consultas en particiones específicas para que Zilliz Cloud ignore entidades en otras particiones, y mejorar la eficiencia de la búsqueda.</p>
 <p>Para más detalles, consulte <a href="/docs/es/manage-partitions.md">Gestionar particiones</a>.</p>
 <h2 id="Shard​" class="common-anchor-header">Tablero<button data-href="#Shard​" class="anchor-icon" translate="no">
       <svg translate="no"

@@ -40,7 +40,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Un vecteur peu dense est une représentation spéciale de vecteurs à haute dimension dans laquelle la plupart des éléments sont nuls et seules quelques dimensions ont des valeurs non nulles. Cette caractéristique rend les vecteurs épars particulièrement efficaces pour traiter des données à grande échelle, à haute dimension, mais éparses. Parmi les applications courantes, on peut citer</p>
+    </button></h2><p>Un vecteur peu dense est une représentation spéciale de vecteurs à haute dimension dans laquelle la plupart des éléments sont nuls et seules quelques dimensions ont des valeurs non nulles. Cette caractéristique rend les vecteurs épars particulièrement efficaces pour traiter des données à grande échelle, à haute dimension, mais éparses. Les applications les plus courantes sont les suivantes</p>
 <ul>
 <li><p><strong>Analyse de texte :</strong> Représentation de documents sous forme de vecteurs de sacs de mots, où chaque dimension correspond à un mot et où seuls les mots apparaissant dans le document ont des valeurs non nulles.</p></li>
 <li><p><strong>Systèmes de recommandation :</strong> Matrices d'interaction utilisateur-élément, où chaque dimension représente l'évaluation d'un utilisateur pour un élément particulier, la plupart des utilisateurs n'interagissant qu'avec quelques éléments.</p></li>
@@ -400,7 +400,7 @@ query_vector = [{<span class="hljs-number">1</span>: <span class="hljs-number">0
 
 <button class="copy-code-btn"></button></code></pre>
 <p>Dans cet exemple, <code translate="no">drop_ratio_search</code> est un paramètre facultatif spécifique aux vecteurs épars, qui permet d'affiner les petites valeurs du vecteur de requête au cours de la recherche. Par exemple, avec <code translate="no">{&quot;drop_ratio_search&quot;: 0.2}</code>, les 20 % de valeurs les plus petites du vecteur de requête seront ignorées lors de la recherche.</p>
-<p>Ensuite, exécutez la recherche de similarité à l'aide de la méthode <code translate="no">search</code>.</p>
+<p>Exécutez ensuite la recherche de similarité à l'aide de la méthode <code translate="no">search</code>.</p>
 <div class="multipleCode">
  <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python">res = client.search(​

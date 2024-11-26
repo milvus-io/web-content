@@ -49,7 +49,7 @@ summary: 长度 "过滤器会删除不符合指定长度要求的标记符，让
 </th></tr></thead><tbody><tr><td data-block-token="ZuZEdNiHIotOFTx3m9QcTPnWnle" colspan="1" rowspan="1"><p data-block-token="Dszdd3IDdowj5bxJyJhcP19tnng"><code translate="no">max</code></p>
 </td><td data-block-token="Fx30ddBWYoyRhmxK34Kcgn1Ynjb" colspan="1" rowspan="1"><p data-block-token="MizvdmrQ2oycDjxNYrXcWqFtnXb">设置最大标记长度。超过此长度的标记将被删除。</p>
 </td></tr></tbody></table>
-<p><code translate="no">length</code> 过滤器对标记符生成器生成的术语进行操作，因此必须与标记符结合使用。</p>
+<p><code translate="no">length</code> 过滤器对标记化器生成的术语进行操作，因此必须与标记化器结合使用。</p>
 <p>定义<code translate="no">analyzer_params</code> 后，可以在定义 Collections Schema 时将其应用到<code translate="no">VARCHAR</code> 字段。这样，Milvus 就可以使用指定的分析器对该字段中的文本进行处理，从而实现高效的标记化和过滤。有关详情，请参阅<a href="/docs/zh/analyzer-overview.md#Example-use">示例使用</a>。</p>
 <h2 id="Example-output" class="common-anchor-header">输出示例<button data-href="#Example-output" class="anchor-icon" translate="no">
       <svg translate="no"

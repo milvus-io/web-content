@@ -165,7 +165,7 @@ schema.addField(AddFieldReq.builder()​
 
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Set-Partition-Numbers​" class="common-anchor-header">设置分区编号</h3><p>当你指定一个 Collections 中的标量字段作为 Partition Key 时，Milvus 会自动在 Collections 中创建 16 个分区。当接收到一个实体时，Milvus 会根据这个实体的 Partition Key 值选择一个分区，并将实体存储在分区中，从而导致部分或所有分区持有不同 Partition Key 值的实体。</p>
-<p>您还可以确定与 Collections 一起创建的分区数量。只有将标量字段指定为 Partition Key 时，这种方法才有效。</p>
+<p>您还可以确定与 Collections 一起创建的分区数量。这只有在将标量字段指定为 Partition Key 时才有效。</p>
 <div class="multipleCode">
  <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#go">Go</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python">client.create_collection(​

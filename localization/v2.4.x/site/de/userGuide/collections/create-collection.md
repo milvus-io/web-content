@@ -512,7 +512,7 @@ curl --request POST \​
         ></path>
       </svg>
     </button></h2><p>Sie können Eigenschaften für die zu erstellende Sammlung festlegen, damit sie in Ihren Dienst passt. Die anwendbaren Eigenschaften sind wie folgt.</p>
-<h3 id="Set-Shard-Number​" class="common-anchor-header">Shard-Nummer festlegen</h3><p>Shards sind horizontale Abschnitte einer Sammlung. Jeder Shard entspricht einem Dateneingangskanal. Jede Sammlung hat standardmäßig einen Shard. Sie können bei der Erstellung einer Sammlung die entsprechende Anzahl von Scherben auf der Grundlage des erwarteten Durchsatzes und des Volumens der in die Sammlung einzufügenden Daten festlegen.</p>
+<h3 id="Set-Shard-Number​" class="common-anchor-header">Shard-Nummer festlegen</h3><p>Shards sind horizontale Abschnitte einer Sammlung. Jeder Shard entspricht einem Dateneingangskanal. Jede Sammlung hat standardmäßig einen Shard. Sie können bei der Erstellung einer Sammlung die entsprechende Anzahl von Scherben auf der Grundlage des erwarteten Durchsatzes und des Datenvolumens, das in die Sammlung eingefügt werden soll, festlegen.</p>
 <p>In allgemeinen Fällen sollten Sie die Anzahl der Shards jedes Mal um eins erhöhen, wenn der erwartete Durchsatz um 500 MB/s oder das einzufügende Datenvolumen um 100 GB steigt. Dieser Vorschlag hindert Sie nicht daran, Daten mit der Standard-Shard-Nummer in die Sammlung einzufügen.</p>
 <p>Der folgende Codeausschnitt veranschaulicht, wie Sie die Shard-Nummer beim Erstellen einer Sammlung festlegen.</p>
 <div class="multipleCode">

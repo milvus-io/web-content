@@ -43,7 +43,7 @@ summary: >-
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/filtered-search.png" alt="Filtered search" class="doc-image" id="filtered-search" />
    </span> <span class="img-wrapper"> <span>필터링 검색</span> </span></p>
-<p>위 다이어그램과 같이 검색 요청에 필터링 조건으로 <code translate="no">chunk like % red %</code> 을 지정하면, 질리즈 클라우드가 <code translate="no">chunk</code> 필드에 <code translate="no">red</code> 이라는 단어가 포함된 모든 엔티티 내에서 ANN 검색을 수행해야 함을 나타냅니다. 구체적으로 질리즈 클라우드는 다음을 수행합니다.</p>
+<p>위 다이어그램과 같이 검색 요청에 필터링 조건으로 <code translate="no">chunk like % red %</code> 을 지정하면, 질리즈 클라우드가 <code translate="no">chunk</code> 필드에 <code translate="no">red</code> 이라는 단어가 포함된 모든 엔티티 내에서 ANN 검색을 수행해야 한다는 것을 나타냅니다. 구체적으로 질리즈 클라우드는 다음을 수행합니다.</p>
 <ul>
 <li><p>검색 요청에 포함된 필터링 조건과 일치하는 엔티티를 필터링합니다.</p></li>
 <li><p>필터링된 엔티티 내에서 ANN 검색을 수행합니다.</p></li>

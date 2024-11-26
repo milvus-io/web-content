@@ -35,7 +35,7 @@ title: Coerenza
         ></path>
       </svg>
     </button></h2><p>Milvus è un sistema che separa l'archiviazione dal calcolo. In questo sistema, i <strong>DataNode</strong> sono responsabili della persistenza dei dati e, in ultima analisi, li memorizzano in uno storage distribuito di oggetti, come MinIO/S3. I <strong>QueryNode</strong> gestiscono attività di calcolo come la ricerca. Queste attività comportano l'elaborazione di <strong>dati batch</strong> e di <strong>dati in streaming</strong>. In parole povere, i dati batch possono essere intesi come dati che sono già stati memorizzati nello storage a oggetti, mentre i dati in streaming si riferiscono a dati che non sono ancora stati memorizzati nello storage a oggetti. A causa della latenza di rete, i QueryNode spesso non dispongono dei dati di streaming più recenti. Senza ulteriori salvaguardie, l'esecuzione della ricerca direttamente sui dati in streaming può comportare la perdita di molti punti di dati non impegnati, compromettendo l'accuratezza dei risultati della ricerca.</p>
-<p>Milvus Commercial Edition è un sistema che separa l'archiviazione dal calcolo. In questo sistema, i DataNode sono responsabili della persistenza dei dati e li memorizzano in uno storage a oggetti distribuito, come MinIO/S3. I QueryNode gestiscono attività di calcolo come la ricerca. Queste attività comportano l'elaborazione di dati batch e di dati in streaming. In parole povere, i dati batch possono essere intesi come dati che sono già stati memorizzati nello storage a oggetti, mentre i dati in streaming si riferiscono a dati che non sono ancora stati memorizzati nello storage a oggetti. A causa della latenza di rete, i QueryNode spesso non dispongono dei dati di streaming più recenti. Senza ulteriori salvaguardie, l'esecuzione della ricerca direttamente sui dati in streaming può comportare la perdita di molti punti di dati non impegnati, compromettendo l'accuratezza dei risultati della ricerca.</p>
+<p>Milvus Commercial Edition è un sistema che separa l'archiviazione dal calcolo. In questo sistema, i DataNodes sono responsabili della persistenza dei dati e li memorizzano in uno storage a oggetti distribuito, come MinIO/S3. I QueryNode gestiscono attività di calcolo come la ricerca. Queste attività comportano l'elaborazione di dati batch e di dati in streaming. In parole povere, i dati batch possono essere intesi come dati che sono già stati memorizzati nello storage a oggetti, mentre i dati in streaming si riferiscono a dati che non sono ancora stati memorizzati nello storage a oggetti. A causa della latenza di rete, i QueryNode spesso non dispongono dei dati di streaming più recenti. Senza ulteriori salvaguardie, l'esecuzione della ricerca direttamente sui dati in streaming può comportare la perdita di molti punti di dati non impegnati, compromettendo l'accuratezza dei risultati della ricerca.</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/batch-data-and-streaming-data.png" alt="Batch data and streaming data" class="doc-image" id="batch-data-and-streaming-data" />
@@ -55,7 +55,7 @@ title: Coerenza
 <p>Milvus offre quattro tipi di livelli di consistenza con diverse GaranzieT.</p>
 <ul>
 <li><p><strong>Forte</strong></p>
-<p>L'ultimo timestamp viene utilizzato come GuaranteeTs e i QueryNodes devono attendere che il ServiceTime soddisfi il GuaranteeTs prima di eseguire le richieste di ricerca.</p></li>
+<p>L'ultimo timestamp viene utilizzato come GuaranteeTs e i QueryNode devono attendere che il ServiceTime soddisfi il GuaranteeTs prima di eseguire le richieste di ricerca.</p></li>
 <li><p><strong>Eventuale</strong></p>
 <p>Il GuaranteeTs è impostato su un valore estremamente basso, ad esempio 1, per evitare i controlli di coerenza, in modo che i QueryNode possano eseguire immediatamente le richieste di ricerca su tutti i dati del batch.</p></li>
 <li><p><strong>Stallo limitato</strong></p>
@@ -143,7 +143,7 @@ curl --request POST \​
 
 <button class="copy-code-btn"></button></code></pre>
 <p>I valori possibili per il parametro <code translate="no">consistency_level</code> sono <code translate="no">Strong</code>, <code translate="no">Bounded</code>, <code translate="no">Eventually</code> e <code translate="no">Session</code>.</p>
-<h3 id="Set-Consistency-Level-in-Search​set-consistency-level-in-search​" class="common-anchor-header">Impostare il livello di consistenza nella ricerca{#set-consistency-level-in-search}</h3><p>È sempre possibile modificare il livello di coerenza per una ricerca specifica. L'esempio di codice seguente riporta il livello di coerenza a Bounded. La modifica si applica solo alla richiesta di ricerca corrente.</p>
+<h3 id="Set-Consistency-Level-in-Search​set-consistency-level-in-search​" class="common-anchor-header">Impostare il livello di consistenza nella ricerca{#set-consistency-level-in-search}</h3><p>È sempre possibile modificare il livello di coerenza per una ricerca specifica. L'esempio di codice seguente riporta il livello di consistenza a Bounded. La modifica si applica solo alla richiesta di ricerca corrente.</p>
 <div class="multipleCode">
    <a href="#python">python</a> <a href="#java">java</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">res = client.search(​

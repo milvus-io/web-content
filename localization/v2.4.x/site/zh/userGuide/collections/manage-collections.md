@@ -149,7 +149,7 @@ title: 集合说明
         ></path>
       </svg>
     </button></h2><p>创建索引并加载 Collections 后，就可以通过输入一个或多个查询向量开始相似性搜索。例如，当接收到搜索请求中携带的查询向量表示时，Zilliz Cloud 会使用指定的度量类型来衡量查询向量与目标 Collections 中的向量之间的相似性，然后再返回与查询语义相似的向量。</p>
-<p>您还可以在搜索和查询中包含元数据过滤，以提高结果的相关性。请注意，元数据过滤条件在查询中是必须的，但在搜索中是可选的。</p>
+<p>您还可以在搜索和查询中包含元数据过滤，以提高结果的相关性。请注意，元数据过滤条件在查询中是强制性的，但在搜索中是可选的。</p>
 <p>有关适用度量类型的详细信息，请参阅<a href="/docs/zh/metric.md">度量类型</a>。</p>
 <p>有关搜索和查询的更多信息，请参阅<a href="/docs/zh/single-vector-search.md">搜索和 Rerankers</a>章节中的文章，其中包括基本功能。</p>
 <ul>
@@ -163,7 +163,7 @@ title: 集合说明
 <li><p><a href="/docs/zh/full-text-search.md">全文搜索</a></p></li>
 <li><p><a href="/docs/zh/keyword-match.md">关键词匹配</a></p></li>
 </ul>
-<p>此外，Zilliz Cloud 还提供了增强功能，以提高搜索性能和效率。这些增强功能默认为禁用，您可以根据自己的服务要求启用和使用它们。它们是</p>
+<p>此外，Zilliz Cloud 还提供了提高搜索性能和效率的增强功能。这些增强功能默认为禁用，您可以根据自己的服务要求启用和使用它们。它们是</p>
 <ul>
 <li><p><a href="/docs/zh/use-partition-key.md">使用 Partition Key</a></p></li>
 <li><p><a href="/docs/zh/mmap.md">使用 mmap</a></p></li>

@@ -25,7 +25,7 @@ summary: >-
         ></path>
       </svg>
     </button></h1><p>Der Typ Array wird verwendet, um Felder zu speichern, die mehrere Werte desselben Datentyps enthalten. Er bietet eine flexible Möglichkeit, Attribute mit mehreren Elementen zu speichern, was ihn besonders in Szenarien nützlich macht, in denen eine Reihe von zusammenhängenden Daten gespeichert werden muss. In Milvus können Sie Array-Felder neben Vektordaten speichern, was komplexere Abfrage- und Filteranforderungen ermöglicht.</p>
-<p>In einem Musikempfehlungssystem kann ein Array-Feld zum Beispiel eine Liste von Tags für einen Song speichern; in der Analyse des Benutzerverhaltens kann es Benutzerbewertungen für Songs speichern. Nachfolgend finden Sie ein Beispiel für ein typisches Array-Feld.</p>
+<p>In einem Musikempfehlungssystem kann ein Array-Feld beispielsweise eine Liste von Tags für einen Song speichern; in der Analyse des Benutzerverhaltens kann es Benutzerbewertungen für Songs speichern. Unten sehen Sie ein Beispiel für ein typisches Array-Feld.</p>
 <pre><code translate="no" class="language-JSON">{​
   <span class="hljs-string">&quot;tags&quot;</span>: [<span class="hljs-string">&quot;pop&quot;</span>, <span class="hljs-string">&quot;rock&quot;</span>, <span class="hljs-string">&quot;classic&quot;</span>],​
   <span class="hljs-string">&quot;ratings&quot;</span>: [<span class="hljs-number">5</span>, <span class="hljs-number">4</span>, <span class="hljs-number">3</span>]​
@@ -192,7 +192,7 @@ schema.addField(AddFieldReq.builder()​
 <button class="copy-code-btn"></button></code></pre>
 <p>In diesem Beispiel.</p>
 <ul>
-<li><p><code translate="no">tags</code> ist ein String-Array, wobei <code translate="no">element_type</code> auf <code translate="no">VARCHAR</code> gesetzt ist, was bedeutet, dass die Elemente im Array Strings sein müssen. <code translate="no">max_capacity</code> ist auf 10 gesetzt, was bedeutet, dass das Array bis zu 10 Elemente enthalten kann.</p></li>
+<li><p><code translate="no">tags</code> ist ein String-Array mit <code translate="no">element_type</code> auf <code translate="no">VARCHAR</code> gesetzt, was bedeutet, dass die Elemente im Array Strings sein müssen. <code translate="no">max_capacity</code> ist auf 10 gesetzt, was bedeutet, dass das Array bis zu 10 Elemente enthalten kann.</p></li>
 <li><p><code translate="no">ratings</code> ist ein Integer-Array, bei dem <code translate="no">element_type</code> auf <code translate="no">INT64</code> gesetzt ist, was bedeutet, dass die Elemente Integer sein müssen. <code translate="no">max_capacity</code> ist auf 5 gesetzt, was bedeutet, dass bis zu 5 Bewertungen möglich sind.</p></li>
 <li><p>Wir fügen auch ein Primärschlüsselfeld <code translate="no">pk</code> und ein Vektorfeld <code translate="no">embedding</code> hinzu.</p></li>
 </ul>

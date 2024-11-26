@@ -50,7 +50,7 @@ queryNode:
 <p>Après <code translate="no">2.4.10</code>, la configuration <code translate="no">queryNode.mmap.mmapEnabled</code> se divise en quatre champs distincts, et toutes les valeurs par défaut sont <code translate="no">false</code>:</p>
 <ul>
 <li><code translate="no">queryNode.mmap.vectorField</code>, contrôle si les données vectorielles sont mmap ;</li>
-<li><code translate="no">queryNode.mmap.vectorIndex</code>contrôle si l'index du vecteur est mmap ; , contrôle si les données scalaires sont mmap ; , contrôle si les données scalaires sont mmap ;</li>
+<li><code translate="no">queryNode.mmap.vectorIndex</code>, contrôle si l'index du vecteur est mmap ;</li>
 <li><code translate="no">queryNode.mmap.scalarField</code>, contrôle si les données scalaires sont mmap ;</li>
 <li><code translate="no">queryNode.mmap.scalarIndex</code>, contrôle si l'index scalaire est mmap ;</li>
 </ul>
@@ -185,6 +185,6 @@ spec:
 <p>Le mappage de mémoire peut être appliqué aux données scalaires, mais il n'est pas applicable aux index construits sur des champs scalaires.</p></li>
 <li><p><strong>Comment la priorité est-elle déterminée pour les configurations de mappage de mémoire à différents niveaux ?</strong></p>
 <p>Dans Milvus, lorsque des configurations de mappage de mémoire sont explicitement définies sur plusieurs niveaux, les configurations au niveau de l'index et de la collection ont la priorité la plus élevée, suivie par les configurations au niveau du cluster.</p></li>
-<li><p><strong>Si je mets à niveau Milvus 2.3 et que j'ai configuré le chemin d'accès au répertoire de mappage de mémoire, que se passera-t-il ?</strong></p>
+<li><p><strong>Si je mets à niveau Milvus 2.3 et que j'ai configuré le chemin d'accès au répertoire de mappage de mémoire, que se passe-t-il ?</strong></p>
 <p>Si vous mettez à niveau Milvus 2.3 et que vous avez configuré le chemin du répertoire de mappage de la mémoire (<code translate="no">mmapDirPath</code>), votre configuration sera conservée et le paramètre par défaut pour le mappage de la mémoire activé (<code translate="no">mmapEnabled</code>) sera <code translate="no">true</code>. Il est important de migrer les métadonnées pour synchroniser la configuration de vos fichiers mappés en mémoire existants. Pour plus de détails, voir <a href="https://milvus.io/docs/upgrade_milvus_standalone-docker.md#Migrate-the-metadata">Migrer les métadonnées</a>.</p></li>
 </ul>

@@ -3,9 +3,9 @@ id: full-text-search.md
 title: Volltextsuche
 related_key: 'full, text, search'
 summary: >-
-  Die Volltextsuche ist eine Funktion, die Dokumente abruft, die bestimmte
-  Begriffe oder Phrasen in Textdatensätzen enthalten, und dann die Ergebnisse
-  nach Relevanz einstuft.
+  Die Volltextsuche ist eine Funktion, die Dokumente mit bestimmten Begriffen
+  oder Phrasen in Textdatensätzen abruft und die Ergebnisse dann nach Relevanz
+  einstuft.
 ---
 <h1 id="Full-Text-Search​" class="common-anchor-header">Volltextsuche<button data-href="#Full-Text-Search​" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -47,7 +47,7 @@ summary: >-
 <li><p><strong>Texteingabe</strong>: Sie fügen Rohtextdokumente ein oder stellen Abfragetext bereit, ohne dass eine manuelle Einbettung erforderlich ist.</p></li>
 <li><p><strong>Text-Analyse</strong>: Milvus verwendet einen Analysator, um den eingegebenen Text in einzelne, durchsuchbare Begriffe zu zerlegen.</p></li>
 <li><p><strong>Funktions-Verarbeitung</strong>: Die eingebaute Funktion empfängt tokenisierte Begriffe und wandelt sie in spärliche Vektordarstellungen um.</p></li>
-<li><p><strong>Sammlungsspeicher</strong>: Milvus speichert diese spärlichen Einbettungen in einer Sammlung, um sie effizient abrufen zu können.</p></li>
+<li><p><strong>Sammlungsspeicher</strong>: Milvus speichert diese spärlichen Einbettungen in einer Sammlung zum effizienten Abruf.</p></li>
 <li><p><strong>BM25-Bewertung</strong>: Während einer Suche wendet Milvus den BM25-Algorithmus an, um die Punktzahlen für die gespeicherten Dokumente zu berechnen und die übereinstimmenden Ergebnisse nach ihrer Relevanz für den Abfragetext zu ordnen.</p></li>
 </ol>
 <p>
@@ -121,7 +121,7 @@ schema.add_function(bm25_function)​
 </td><td data-block-token="VdcmdmiiWoy0nex8a29clnslnQg" colspan="1" rowspan="1"><p data-block-token="Q2eSdvOqeoNa6dxcGjcc2LKinDg">Der Typ der zu verwendenden Funktion. Setzen Sie den Wert auf <code translate="no">FunctionType.BM25</code>.</p>
 </td></tr></tbody></table>
 <div class="alert note">
-<p>Für Sammlungen mit mehreren <code translate="no">VARCHAR</code> Feldern, die eine Konvertierung von Text in Sparse Vectors erfordern, fügen Sie separate Funktionen zum Sammlungsschema hinzu und stellen sicher, dass jede Funktion einen eindeutigen Namen und <code translate="no">output_field_names</code> Wert hat.</p>
+<p>Für Sammlungen mit mehreren <code translate="no">VARCHAR</code> Feldern, die eine Konvertierung von Text in Sparse Vectors erfordern, fügen Sie dem Sammlungsschema separate Funktionen hinzu und stellen sicher, dass jede Funktion einen eindeutigen Namen und <code translate="no">output_field_names</code> Wert hat.</p>
 </div>
 <h3 id="Configure-the-index" class="common-anchor-header">Konfigurieren Sie den Index</h3><p>Nachdem Sie das Schema mit den erforderlichen Feldern und der integrierten Funktion definiert haben, richten Sie den Index für Ihre Sammlung ein. Um diesen Prozess zu vereinfachen, verwenden Sie <code translate="no">AUTOINDEX</code> als <code translate="no">index_type</code>, eine Option, die es Milvus ermöglicht, den am besten geeigneten Indextyp auf der Grundlage der Struktur Ihrer Daten auszuwählen und zu konfigurieren.</p>
 <pre><code translate="no" class="language-python">index_params = <span class="hljs-title class_">MilvusClient</span>.<span class="hljs-title function_">prepare_index_params</span>()​

@@ -24,7 +24,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Il tipo Array viene utilizzato per memorizzare campi contenenti più valori dello stesso tipo di dati. Offre un modo flessibile per memorizzare attributi con più elementi, rendendolo particolarmente utile in scenari in cui è necessario salvare un insieme di dati correlati. In Milvus è possibile memorizzare campi Array insieme a dati vettoriali, consentendo così di effettuare query e filtraggi più complessi.</p>
+    </button></h1><p>Il tipo Array viene utilizzato per memorizzare campi contenenti più valori dello stesso tipo di dati. Offre un modo flessibile per memorizzare attributi con più elementi, rendendolo particolarmente utile in scenari in cui è necessario salvare una serie di dati correlati. In Milvus è possibile memorizzare campi Array insieme a dati vettoriali, consentendo così di effettuare query e filtraggi più complessi.</p>
 <p>Ad esempio, in un sistema di raccomandazione musicale, un campo Array può memorizzare un elenco di tag per una canzone; nell'analisi del comportamento degli utenti, può memorizzare le valutazioni degli utenti per le canzoni. Di seguito è riportato un esempio di un tipico campo Array.</p>
 <pre><code translate="no" class="language-JSON">{​
   <span class="hljs-string">&quot;tags&quot;</span>: [<span class="hljs-string">&quot;pop&quot;</span>, <span class="hljs-string">&quot;rock&quot;</span>, <span class="hljs-string">&quot;classic&quot;</span>],​
@@ -51,7 +51,7 @@ summary: >-
     </button></h2><p>Per utilizzare i campi Array in Milvus, è necessario definire il tipo di campo corrispondente durante la creazione dello schema della collezione. Questo processo comprende.</p>
 <ol>
 <li><p>Impostare <code translate="no">datatype</code> sul tipo di dati Array supportato, <code translate="no">ARRAY</code>.</p></li>
-<li><p>Usare il parametro <code translate="no">element_type</code> per specificare il tipo di dati degli elementi dell'array. Questo può essere qualsiasi tipo di dati scalari supportati da Milvus, come <code translate="no">VARCHAR</code> o <code translate="no">INT64</code>. Tutti gli elementi di una stessa matrice devono avere lo stesso tipo di dati.</p></li>
+<li><p>Usare il parametro <code translate="no">element_type</code> per specificare il tipo di dati degli elementi dell'array. Questo può essere un qualsiasi tipo di dati scalari supportato da Milvus, come <code translate="no">VARCHAR</code> o <code translate="no">INT64</code>. Tutti gli elementi di una stessa matrice devono avere lo stesso tipo di dati.</p></li>
 <li><p>Usare il parametro <code translate="no">max_capacity</code> per definire la capacità massima dell'array, cioè il numero massimo di elementi che può contenere.</p></li>
 </ol>
 <p>Ecco come definire uno schema di collezione che include campi Array.</p>

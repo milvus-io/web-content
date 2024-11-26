@@ -8,7 +8,7 @@ summary: >-
   le dimensioni dei vettori, ma riduce anche i costi di memorizzazione e
   conserva le informazioni semantiche. Questa trasformazione non solo comprime
   le dimensioni del vettore, ma riduce anche i costi di archiviazione e di
-  calcolo, conservando le informazioni semantiche. Quando la precisione per le
+  calcolo, mantenendo le informazioni semantiche. Quando la precisione per le
   caratteristiche non critiche non è essenziale, i vettori binari possono
   effettivamente mantenere la maggior parte dell'integrità e dell'utilità dei
   vettori originali in virgola mobile.
@@ -56,7 +56,7 @@ summary: >-
 <li><p><strong>Memorizzazione efficiente:</strong> Ogni dimensione richiede solo 1 bit di memoria, riducendo in modo significativo lo spazio di archiviazione.</p></li>
 <li><p><strong>Rapidità di calcolo:</strong> La somiglianza tra i vettori può essere calcolata rapidamente utilizzando operazioni bitwise come XOR.</p></li>
 <li><p><strong>Lunghezza fissa:</strong> La lunghezza del vettore rimane costante indipendentemente dalla lunghezza del testo originale, facilitando l'indicizzazione e il recupero.</p></li>
-<li><p><strong>Semplice e intuitivo:</strong> Riflette direttamente la presenza di parole chiave, il che lo rende adatto ad alcuni compiti di ricerca specializzati.</p></li>
+<li><p><strong>Semplice e intuitivo:</strong> Riflette direttamente la presenza di parole chiave, rendendolo adatto ad alcuni compiti di ricerca specializzati.</p></li>
 </ul>
 <p>I vettori binari possono essere generati con diversi metodi. Nell'elaborazione del testo, si possono utilizzare vocabolari predefiniti per impostare i bit corrispondenti in base alla presenza delle parole. Per l'elaborazione delle immagini, gli algoritmi di hashing percettivo (come <a href="https://en.wikipedia.org/wiki/Perceptual_hashing">pHash</a>) possono generare caratteristiche binarie delle immagini. Nelle applicazioni di apprendimento automatico, i risultati dei modelli possono essere binarizzati per ottenere rappresentazioni vettoriali binarie.</p>
 <p>Dopo la vettorizzazione binaria, i dati possono essere archiviati in Milvus per la gestione e il recupero dei vettori. Il diagramma seguente mostra il processo di base.</p>
@@ -444,5 +444,5 @@ curl --request POST \​
 }&quot;</span>​
 
 <button class="copy-code-btn"></button></code></pre>
-<p>Per ulteriori informazioni sui parametri di ricerca della somiglianza, consultare la sezione <a href="/docs/it/single-vector-search.md">Ricerca di base di RNA</a>.</p>
+<p>Per ulteriori informazioni sui parametri di ricerca della similarità, consultare la sezione <a href="/docs/it/single-vector-search.md">Ricerca di base di RNA</a>.</p>
 <p></p>

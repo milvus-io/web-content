@@ -102,7 +102,7 @@ rerank = WeightedRanker(<span class="hljs-number">0.8</span>, <span class="hljs-
 <p>Il processo di base della RRF è il seguente:</p>
 <ul>
 <li><p><strong>Raccogliere le classifiche durante il recupero</strong>: I recuperatori di più campi vettoriali recuperano e ordinano i risultati.</p></li>
-<li><p><strong>Fusione delle classifiche</strong>: L'algoritmo RRF pesa e combina le classifiche di ciascun recuperatore. La formula è la seguente:</p>
+<li><p><strong>Fusione delle classifiche</strong>: L'algoritmo RRF pondera e combina le classifiche di ciascun retriever. La formula è la seguente:</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x//assets/rrf-ranker.png" alt="rrf-ranker" class="doc-image" id="rrf-ranker" />

@@ -278,7 +278,7 @@ curl --request POST \​
 <span class="hljs-comment"># }​</span>
 
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Query-and-search-with-dynamic-field​" class="common-anchor-header">Consulta e pesquisa com campo dinâmico</h3><p>O Milvus suporta a utilização de expressões de filtro durante as consultas e pesquisas, permitindo-lhe especificar quais os campos a incluir nos resultados. O exemplo seguinte demonstra como efetuar consultas e pesquisas com o campo <code translate="no">color</code>, que não está definido no esquema, utilizando o campo dinâmico.</p>
+<h3 id="Query-and-search-with-dynamic-field​" class="common-anchor-header">Consulta e pesquisa com campo dinâmico</h3><p>O Milvus suporta a utilização de expressões de filtro durante as consultas e pesquisas, permitindo-lhe especificar os campos a incluir nos resultados. O exemplo seguinte demonstra como efetuar consultas e pesquisas utilizando o campo <code translate="no">color</code>, que não está definido no esquema, através da utilização do campo dinâmico.</p>
 <div class="multipleCode">
  <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#go">Go</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python">query_vector = [<span class="hljs-number">0.3580376395471989</span>, -<span class="hljs-number">0.6023495712049978</span>, <span class="hljs-number">0.18414012509913835</span>, -<span class="hljs-number">0.26286205330961354</span>, <span class="hljs-number">0.9029438446296592</span>]​

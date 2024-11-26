@@ -255,7 +255,7 @@ indexes.add(IndexParam.builder()​
     ]&#x27;</span>​
 
 <button class="copy-code-btn"></button></code></pre>
-<p>Para além de <code translate="no">AUTOINDEX</code>, pode especificar outros tipos de índices escalares como <code translate="no">INVERTED</code> ou <code translate="no">BITMAP</code>. Para saber os tipos de índice suportados, consulte <a href="/docs/pt/index-scalar-fields.md">Índices escalares</a>.</p>
+<p>Para além de <code translate="no">AUTOINDEX</code>, pode especificar outros tipos de índices escalares como <code translate="no">INVERTED</code> ou <code translate="no">BITMAP</code>. Para tipos de índice suportados, consulte <a href="/docs/pt/index-scalar-fields.md">Índices escalares</a>.</p>
 <p>Além disso, você deve criar um índice para o campo de vetor antes de criar a coleção. Neste exemplo, usamos <code translate="no">AUTOINDEX</code> para simplificar a configuração do índice de vetor.</p>
 <div class="multipleCode">
  <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#go">Go</a> <a href="#curl">cURL</a></div>

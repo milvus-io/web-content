@@ -79,7 +79,7 @@ title: Spiegazione delle raccolte
       </svg>
     </button></h2><p>Analogamente al campo primario di un database relazionale, una collezione ha un campo primario per distinguere un'entità dalle altre. Ogni valore del campo primario è globalmente unico e corrisponde a un'entità specifica. </p>
 <p>Come mostrato nel grafico precedente, il campo <strong>id</strong> funge da campo primario e il primo ID <strong>0</strong> corrisponde a un'entità intitolata <em>Il tasso di mortalità del Coronavirus non è importante</em>. Non ci sarà nessun'altra entità che abbia il campo primario 0.</p>
-<p>Un campo primario accetta solo numeri interi o stringhe. Quando si inseriscono le entità, i valori del campo primario devono essere inclusi per impostazione predefinita. Tuttavia, se si è abilitato l'<strong>AutoId</strong> alla creazione della collezione, Milvus genererà questi valori al momento dell'inserimento dei dati. In tal caso, escludere i valori del campo primario dalle entità da inserire.</p>
+<p>Un campo primario accetta solo numeri interi o stringhe. Quando si inseriscono le entità, i valori del campo primario devono essere inclusi per impostazione predefinita. Tuttavia, se si è abilitato l'<strong>AutoId</strong> alla creazione della collezione, Milvus genererà questi valori al momento dell'inserimento dei dati. In questo caso, escludere i valori del campo primario dalle entità da inserire.</p>
 <p>Per ulteriori informazioni, consultare <a href="/docs/it/primary-field.md">Campo primario e AutoID</a>.</p>
 <h2 id="Index​" class="common-anchor-header">Indice<button data-href="#Index​" class="anchor-icon" translate="no">
       <svg translate="no"

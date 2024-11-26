@@ -149,7 +149,7 @@ title: Sammlung erklärt
         ></path>
       </svg>
     </button></h2><p>Sobald Sie Indizes erstellt und die Sammlung geladen haben, können Sie eine Ähnlichkeitssuche starten, indem Sie einen oder mehrere Abfragevektoren eingeben. Wenn Sie zum Beispiel die Vektordarstellung Ihrer Abfrage in einer Suchanfrage erhalten, verwendet Zilliz Cloud den angegebenen Metrik-Typ, um die Ähnlichkeit zwischen dem Abfragevektor und den Vektoren in der Zielsammlung zu messen, bevor diejenigen zurückgegeben werden, die der Abfrage semantisch ähnlich sind.</p>
-<p>Sie können auch Metadatenfilterung in Suchanfragen und Abfragen integrieren, um die Relevanz der Ergebnisse zu verbessern. Beachten Sie, dass die Bedingungen für die Metadatenfilterung in Abfragen obligatorisch, in Suchen jedoch optional sind.</p>
+<p>Sie können auch Metadatenfilterung in Suchanfragen und Abfragen integrieren, um die Relevanz der Ergebnisse zu verbessern. Beachten Sie, dass die Bedingungen für die Filterung von Metadaten in Abfragen obligatorisch, in Suchen jedoch optional sind.</p>
 <p>Einzelheiten zu den anwendbaren Metrik-Typen finden Sie unter <a href="/docs/de/metric.md">Metrik-Typen</a>.</p>
 <p>Weitere Informationen über Suchen und Abfragen finden Sie in den Artikeln des Kapitels <a href="/docs/de/single-vector-search.md">Suchen &amp; Reranken</a>, darunter die grundlegenden Funktionen.</p>
 <ul>
@@ -219,7 +219,7 @@ title: Sammlung erklärt
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Sie können Aliasnamen für Ihre Sammlungen erstellen. Eine Sammlung kann mehrere Aliasnamen haben, aber Sammlungen können keinen Alias gemeinsam nutzen. Wenn eine Anfrage für eine Sammlung eingeht, sucht Zilliz Cloud die Sammlung anhand des angegebenen Namens. Wenn die Sammlung mit dem angegebenen Namen nicht existiert, fährt Zilliz Cloud mit der Suche nach dem angegebenen Namen als Alias fort. Sie können Sammlungs-Aliase verwenden, um Ihren Code an verschiedene Szenarien anzupassen.</p>
+    </button></h2><p>Sie können Aliasnamen für Ihre Sammlungen erstellen. Eine Sammlung kann mehrere Aliasnamen haben, aber Sammlungen können keinen Alias gemeinsam nutzen. Wenn eine Anfrage für eine Sammlung eingeht, findet Zilliz Cloud die Sammlung anhand des angegebenen Namens. Wenn die Sammlung mit dem angegebenen Namen nicht existiert, fährt Zilliz Cloud mit der Suche nach dem angegebenen Namen als Alias fort. Sie können Sammlungs-Aliase verwenden, um Ihren Code an verschiedene Szenarien anzupassen.</p>
 <p>Weitere Details finden Sie unter <a href="/docs/de/manage-aliases.md">Aliase verwalten</a>.</p>
 <h2 id="Function​" class="common-anchor-header">Funktion<button data-href="#Function​" class="anchor-icon" translate="no">
       <svg translate="no"

@@ -54,7 +54,7 @@ title: Tipi metrici
 <div class="alert note">
 <ul>
 <li><p>Per i campi vettoriali del tipo <code translate="no">SPARSE_FLOAT_VECTOR</code>, utilizzare il tipo di metrica <code translate="no">BM25</code> solo quando si esegue la ricerca a testo completo. Per ulteriori informazioni, consultare la sezione <a href="/docs/it/full-text-search.md">Ricerca a testo completo</a>.</p></li>
-<li><p>Per i campi vettoriali del tipo <code translate="no">BINARY_VECTOR</code>, il valore di dimensione (<code translate="no">dim</code>) deve essere un multiplo di 8. </p></li>
+<li><p>Per i campi vettoriali di tipo <code translate="no">BINARY_VECTOR</code>, il valore della dimensione (<code translate="no">dim</code>) deve essere un multiplo di 8. </p></li>
 </ul>
 </div>
 <p>La tabella seguente riassume le caratteristiche dei valori della distanza di similarità di tutti i tipi di metrica supportati e il loro intervallo di valori.</p>
@@ -129,7 +129,7 @@ title: Tipi metrici
    </span> <span class="img-wrapper"> <span>Formula del prodotto interno</span> </span></p>
 <p>L'IP è più utile se si devono confrontare dati non normalizzati o se si tiene conto della grandezza e dell'angolo.</p>
 <div class="alert note">
-<p>Se si utilizza l'IP per calcolare le somiglianze tra embedding, è necessario normalizzare gli embedding. Dopo la normalizzazione, il prodotto interno equivale alla somiglianza del coseno.</p>
+<p>Se si utilizza l'IP per calcolare le somiglianze tra embeddings, è necessario normalizzare le embeddings. Dopo la normalizzazione, il prodotto interno equivale alla somiglianza del coseno.</p>
 </div>
 <p>Supponiamo che X' sia normalizzato dall'incorporamento X.</p>
 <p>
@@ -206,7 +206,7 @@ title: Tipi metrici
       </svg>
     </button></h2><p>La distanza HAMMING misura stringhe di dati binari. La distanza tra due stringhe di uguale lunghezza è il numero di posizioni di bit in cui i bit sono diversi.</p>
 <p>Ad esempio, supponiamo che esistano due stringhe, 1101 1001 e 1001 1101.</p>
-<p>11011001 ⊕ 10011101 = 01000100. Dato che contiene due 1, la distanza HAMMING, d (11011001, 10011101) = 2.</p>
+<p>11011001 ⊕ 10011101 = 01000100. Poiché contiene due 1, la distanza di HAMMING, d (11011001, 10011101) = 2.</p>
 <h2 id="BM25-similarity​" class="common-anchor-header">Similitudine BM25<button data-href="#BM25-similarity​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -222,7 +222,7 @@ title: Tipi metrici
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>BM25 è un metodo di misurazione della rilevanza del testo ampiamente utilizzato, progettato specificamente per la <a href="/docs/it/full-text-search.md">ricerca di testi completi</a>. Combina i seguenti tre fattori chiave.</p>
+    </button></h2><p>Il BM25 è un metodo di misurazione della rilevanza del testo ampiamente utilizzato, progettato specificamente per la <a href="/docs/it/full-text-search.md">ricerca di testi completi</a>. Combina i seguenti tre fattori chiave.</p>
 <ul>
 <li><p><strong>Frequenza dei termini (TF):</strong> Misura la frequenza con cui un termine appare in un documento. Sebbene frequenze più elevate indichino spesso una maggiore importanza, BM25 utilizza il parametro di saturazione k1 per evitare che termini troppo frequenti dominino il punteggio di rilevanza.</p></li>
 <li><p><strong>Frequenza inversa del documento (IDF):</strong> Riflette l'importanza di un termine nell'intero corpus. I termini che compaiono in un minor numero di documenti ricevono un valore IDF più alto, indicando un maggiore contributo alla rilevanza.</p></li>

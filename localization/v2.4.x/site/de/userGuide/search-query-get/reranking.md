@@ -80,7 +80,7 @@ rerank = WeightedRanker(<span class="hljs-number">0.8</span>, <span class="hljs-
 <p>Beachten Sie dies:</p>
 <ul>
 <li><p>Jeder Gewichtungswert reicht von 0 (am wenigsten wichtig) bis 1 (am wichtigsten) und beeinflusst die endgültige aggregierte Punktzahl.</p></li>
-<li><p>Die Gesamtzahl der in <code translate="no">WeightedRanker</code> angegebenen Gewichtungswerte sollte der Anzahl der <code translate="no">AnnSearchRequest</code> Instanzen entsprechen, die Sie zuvor erstellt haben.</p></li>
+<li><p>Die Gesamtzahl der Gewichtungswerte, die in <code translate="no">WeightedRanker</code> angegeben werden, sollte der Anzahl der <code translate="no">AnnSearchRequest</code> Instanzen entsprechen, die Sie zuvor erstellt haben.</p></li>
 <li><p>Es ist erwähnenswert, dass wir aufgrund der unterschiedlichen Messungen der verschiedenen Metrik-Typen die Abstände der Recall-Ergebnisse so normalisieren, dass sie im Intervall [0,1] liegen, wobei 0 für unterschiedlich und 1 für ähnlich steht. Die endgültige Punktzahl ergibt sich aus der Summe der Gewichtungswerte und Abstände.</p></li>
 </ul>
 <h2 id="Reciprocal-Rank-Fusion-RRFRanker" class="common-anchor-header">Reciprocal Rank Fusion (RRFRanker)<button data-href="#Reciprocal-Rank-Fusion-RRFRanker" class="anchor-icon" translate="no">

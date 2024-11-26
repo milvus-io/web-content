@@ -18,7 +18,7 @@ title: 支持 MMap 的数据存储
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>在 Milvus 中，内存映射文件允许将文件内容直接映射到内存中。这一功能提高了内存效率，特别是在可用内存稀缺但完全加载数据不可行的情况下。这种优化机制可以增加数据容量，同时在一定限度内确保性能；但当数据量超出内存太多时，搜索和查询性能可能会严重下降，因此请根据情况选择打开或关闭此功能。</p>
+    </button></h1><p>在 Milvus 中，内存映射文件允许将文件内容直接映射到内存中。这一功能提高了内存效率，尤其是在可用内存稀缺但完全加载数据不可行的情况下。这种优化机制可以增加数据容量，同时在一定限度内确保性能；但当数据量超出内存太多时，搜索和查询性能可能会严重下降，因此请根据情况选择打开或关闭此功能。</p>
 <h2 id="Configure-memory-mapping" class="common-anchor-header">配置内存映射<button data-href="#Configure-memory-mapping" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -36,7 +36,7 @@ title: 支持 MMap 的数据存储
       </svg>
     </button></h2><p>从 Milvus 2.4 开始，您可以灵活调整静态配置文件，在部署前为整个集群配置默认内存映射设置。此外，您还可以动态更改参数，以微调群集和索引级别的内存映射设置。展望未来，未来的更新将把内存映射功能扩展到字段级配置。</p>
 <h3 id="Before-cluster-deployment-global-configuration" class="common-anchor-header">群集部署前：全局配置</h3><p>在部署群集之前，<strong>群集级</strong>设置会在整个群集中应用内存映射。这将确保所有新对象自动遵循这些配置。需要注意的是，修改这些设置需要重新启动群集才能生效。</p>
-<p>要调整群集的内存映射设置，请编辑<code translate="no">configs/milvus.yaml</code> 文件。在该文件中，你可以指定是否默认启用内存映射，并确定存储内存映射文件的目录路径。如果未指定路径（<code translate="no">mmapDirPath</code> ），系统默认将内存映射文件存储在<code translate="no">{localStorage.path}/mmap</code> 中。更多信息，请参阅<a href="https://milvus.io/docs/configure_localstorage.md#localStoragepath">本地存储相关配置</a>。</p>
+<p>要调整群集的内存映射设置，请编辑<code translate="no">configs/milvus.yaml</code> 文件。在该文件中，您可以指定是否默认启用内存映射，并确定存储内存映射文件的目录路径。如果未指定路径（<code translate="no">mmapDirPath</code> ），系统默认将内存映射文件存储在<code translate="no">{localStorage.path}/mmap</code> 中。有关详细信息，请参阅<a href="https://milvus.io/docs/configure_localstorage.md#localStoragepath">本地存储相关配置</a>。</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># This parameter was set in configs/milvus.yaml</span>
 ...
 queryNode:
@@ -47,7 +47,7 @@ queryNode:
     mmapDirPath: <span class="hljs-built_in">any</span>/valid/path 
 ....
 <button class="copy-code-btn"></button></code></pre>
-<p><code translate="no">2.4.10</code> 之后，配置<code translate="no">queryNode.mmap.mmapEnabled</code> 分成以下四个独立字段，所有默认值均为<code translate="no">false</code> ：</p>
+<p>在<code translate="no">2.4.10</code> 之后，配置<code translate="no">queryNode.mmap.mmapEnabled</code> 分成以下四个独立字段，所有默认值均为<code translate="no">false</code> ：</p>
 <ul>
 <li><code translate="no">queryNode.mmap.vectorField</code>, 控制向量数据是否为 mmap；</li>
 <li><code translate="no">queryNode.mmap.vectorIndex</code>控制向量索引是否为 mmap；</li>
@@ -68,14 +68,14 @@ queryNode:
 <p>兼容性：如果原始配置<code translate="no">queryNode.mmap.mmapEnabled</code> 设置为<code translate="no">true</code> ，则此时新添加的配置将设置为<code translate="no">true</code> 。如果<code translate="no">queryNode.mmap.mmapEnabled</code> 设置为<code translate="no">false</code> ，如果新配置设置为<code translate="no">true</code> ，则最终值将为<code translate="no">true</code> 。</p>
 <h3 id="During-cluster-operation-dynamic-configuration" class="common-anchor-header">群集操作符期间：动态配置</h3><p>在群集运行期间，可以在 Collections 或索引级别动态调整内存映射设置。</p>
 <p>在<strong>Collections 层级</strong>，内存映射会应用到集合内所有未索引的原始数据，不包括主键、时间戳和行 ID。这种方法特别适用于大型数据集的综合管理。</p>
-<p>若要动态调整 Collections 中的内存映射设置，请使用<code translate="no">set_properties()</code> 方法。在这里，可以根据需要在<code translate="no">True</code> 或<code translate="no">False</code> 之间切换<code translate="no">mmap.enabled</code> 。</p>
+<p>若要动态调整 Collections 中的内存映射设置，可使用<code translate="no">set_properties()</code> 方法。在这里，可以根据需要在<code translate="no">True</code> 或<code translate="no">False</code> 之间切换<code translate="no">mmap.enabled</code> 。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Get existing collection</span>
 collection = Collection(<span class="hljs-string">&quot;test_collection&quot;</span>) <span class="hljs-comment"># Replace with your collection name</span>
 
 <span class="hljs-comment"># Set memory mapping property to True or Flase</span>
 collection.set_properties({<span class="hljs-string">&#x27;mmap.enabled&#x27;</span>: <span class="hljs-literal">True</span>})
 <button class="copy-code-btn"></button></code></pre>
-<p>在<code translate="no">2.4.10</code> 之后，利用<code translate="no">add_field</code> 方法调整 Collections 内的内存映射设置。在这里，可以根据需要在<code translate="no">True</code> 或<code translate="no">False</code> 之间切换<code translate="no">mmap_enabled</code> 。</p>
+<p>在<code translate="no">2.4.10</code> 之后，可以使用<code translate="no">add_field</code> 方法调整 Collections 中的内存映射设置。在这里，可以根据需要在<code translate="no">True</code> 或<code translate="no">False</code> 之间切换<code translate="no">mmap_enabled</code> 。</p>
 <pre><code translate="no" class="language-python">schema = MilvusClient.create_schema()
 
 schema.add_field(field_name=<span class="hljs-string">&quot;embedding&quot;</span>, datatype=DataType.FLOAT_VECTOR, dim=<span class="hljs-number">768</span>, mmap_enabled=<span class="hljs-literal">True</span>)
@@ -170,7 +170,7 @@ spec:
       </svg>
     </button></h2><ul>
 <li><p><strong>建议在哪些情况下启用内存映射？启用此功能后有哪些权衡？</strong></p>
-<p>内存有限或性能要求适中时，建议使用内存映射。启用此功能可提高数据加载能力。例如，在 2 个 CPU 和 8 GB 内存的配置下，启用内存映射比不启用内存映射加载的数据多 4 倍。对性能的影响各不相同：</p>
+<p>内存有限或性能要求适中时，建议使用内存映射。启用此功能可提高数据加载能力。例如，在配置 2 个 CPU 和 8 GB 内存的情况下，启用内存映射可使加载的数据量比不启用内存映射多 4 倍。对性能的影响各不相同：</p>
 <ul>
 <li><p>在内存充足的情况下，预期性能与只使用内存的情况类似。</p></li>
 <li><p>如果内存不足，预期性能可能会下降。</p></li>

@@ -25,7 +25,7 @@ summary: >-
         ></path>
       </svg>
     </button></h1><p>Zahlenfelder werden verwendet, um nicht-vektorielle numerische Daten in Milvus zu speichern. Diese Felder werden in der Regel verwendet, um zusätzliche Informationen in Bezug auf Vektordaten zu beschreiben, z. B. Alter, Preis usw. Durch die Verwendung dieser Daten können Sie Vektoren besser beschreiben und die Effizienz der Datenfilterung und bedingter Abfragen verbessern.</p>
-<p>Zahlenfelder sind in vielen Szenarien besonders nützlich. So kann beispielsweise bei E-Commerce-Empfehlungen ein Preisfeld zur Filterung verwendet werden; bei der Analyse von Benutzerprofilen können Altersbereiche zur Verfeinerung der Ergebnisse beitragen. In Kombination mit Vektordaten können Zahlenfelder dem System helfen, ähnliche Suchanfragen zu stellen und gleichzeitig die Bedürfnisse der Benutzer genauer zu erfüllen.</p>
+<p>Zahlenfelder sind in vielen Szenarien besonders nützlich. So kann beispielsweise bei E-Commerce-Empfehlungen ein Preisfeld zur Filterung verwendet werden; bei der Analyse von Benutzerprofilen können Altersbereiche zur Verfeinerung der Ergebnisse beitragen. In Kombination mit Vektordaten können Zahlenfelder dazu beitragen, dass das System Ähnlichkeitssuchen anbietet und gleichzeitig die Bedürfnisse der Benutzer genauer erfüllt.</p>
 <h2 id="Supported-number-field-types​" class="common-anchor-header">Unterstützte Zahlenfeldtypen<button data-href="#Supported-number-field-types​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -248,7 +248,7 @@ indexes.add(IndexParam.builder()​
     ]&#x27;</span>​
 
 <button class="copy-code-btn"></button></code></pre>
-<p>Zusätzlich zu <code translate="no">AUTOINDEX</code> können Sie andere Index-Typen für Zahlenfelder angeben. Die unterstützten Indextypen finden Sie unter <a href="/docs/de/scalar_index.md">Skalare Indizes</a>.</p>
+<p>Zusätzlich zu <code translate="no">AUTOINDEX</code> können Sie andere Index-Typen für Zahlenfelder angeben. Informationen zu unterstützten Indextypen finden Sie unter <a href="/docs/de/scalar_index.md">Skalare Indizes</a>.</p>
 <p>Außerdem müssen Sie vor der Erstellung der Sammlung einen Index für das Vektorfeld erstellen. In diesem Beispiel verwenden wir <code translate="no">AUTOINDEX</code>, um die Einstellungen für den Vektorindex zu vereinfachen.</p>
 <div class="multipleCode">
  <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
@@ -425,7 +425,7 @@ client.<span class="hljs-title function_">insert</span>({​
 
 <button class="copy-code-btn"></button></code></pre>
 <p>In diesem Beispiel fügen wir Daten ein, die <code translate="no">age</code>, <code translate="no">price</code>, <code translate="no">pk</code> (Primärfeld) und Vektordarstellungen (<code translate="no">embedding</code>) enthalten. Um sicherzustellen, dass die eingefügten Daten mit den im Schema definierten Feldern übereinstimmen, empfiehlt es sich, die Datentypen im Voraus zu überprüfen, um Fehler zu vermeiden.</p>
-<p>Wenn Sie bei der Definition des Schemas <code translate="no">enable_dynamic_fields=True</code> einstellen, können Sie mit Milvus auch Zahlenfelder einfügen, die nicht im Voraus definiert wurden. Beachten Sie jedoch, dass dies die Komplexität von Abfragen und Verwaltung erhöhen und die Leistung beeinträchtigen kann. Weitere Informationen finden Sie unter <a href="/docs/de/enable_dynamic_field.md">Dynamisches Feld</a>.</p>
+<p>Wenn Sie bei der Definition des Schemas <code translate="no">enable_dynamic_fields=True</code> einstellen, können Sie mit Milvus auch Zahlenfelder einfügen, die nicht im Voraus definiert wurden. Beachten Sie jedoch, dass dies die Komplexität von Abfragen und Verwaltung erhöhen kann, was sich möglicherweise auf die Leistung auswirkt. Weitere Informationen finden Sie unter <a href="/docs/de/enable_dynamic_field.md">Dynamisches Feld</a>.</p>
 <h2 id="Search-and-query​" class="common-anchor-header">Suche und Abfrage<button data-href="#Search-and-query​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

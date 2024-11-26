@@ -42,7 +42,7 @@ summary: >-
     <span class="hljs-string">&quot;filter&quot;</span>: [<span class="hljs-string">&quot;cncharonly&quot;</span>],​
 }​
 <button class="copy-code-btn"></button></code></pre>
-<p>Der Filter <code translate="no">cncharonly</code> arbeitet mit den vom Tokenizer erzeugten Begriffen, muss also in Kombination mit einem Tokenizer verwendet werden.</p>
+<p>Der Filter <code translate="no">cncharonly</code> arbeitet mit den Begriffen, die vom Tokenizer erzeugt wurden, und muss daher in Kombination mit einem Tokenizer verwendet werden.</p>
 <p>Nachdem Sie <code translate="no">analyzer_params</code> definiert haben, können Sie sie bei der Definition eines Sammelschemas auf ein <code translate="no">VARCHAR</code> Feld anwenden. Dadurch kann Milvus den Text in diesem Feld unter Verwendung des angegebenen Analysators für eine effiziente Tokenisierung und Filterung verarbeiten. Einzelheiten finden Sie unter <a href="/docs/de/analyzer-overview.md#Example-use">Beispielanwendung</a>.</p>
 <h2 id="Example-output​" class="common-anchor-header">Beispiel-Ausgabe<button data-href="#Example-output​" class="anchor-icon" translate="no">
       <svg translate="no"

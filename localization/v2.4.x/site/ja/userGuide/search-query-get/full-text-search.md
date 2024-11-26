@@ -19,7 +19,7 @@ summary: 全文検索とは、テキストデータセット中の特定の語�
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>全文検索は、テキストデータセット内の特定の語句を含む文書を検索し、関連性に基づいて結果をランク付けする機能です。この機能は、正確な用語を見落とす可能性のあるセマンティック検索の制限を克服し、最も正確で文脈に関連した結果を確実に受け取れるようにします。さらに、生のテキスト入力を受け付けることでベクトル検索を簡素化し、ベクトル埋め込みを手動で生成することなく、テキストデータをスパース埋め込みに自動的に変換します。</p>
+    </button></h1><p>全文検索は、テキストデータセット内の特定の語句を含む文書を検索し、関連性に基づいて結果をランク付けする機能です。この機能は、正確な用語を見落とす可能性のあるセマンティック検索の制限を克服し、最も正確で文脈に関連した結果を確実に受け取ることができます。さらに、生のテキスト入力を受け付けることでベクトル検索を簡素化し、ベクトル埋め込みを手動で生成することなく、テキストデータをスパース埋め込みに自動的に変換します。</p>
 <p>関連性のスコアリングにBM25アルゴリズムを使用するこの機能は、特定の検索用語に密接に一致する文書を優先的に検索する、検索拡張世代（RAG）シナリオで特に有用です。</p>
 <div class="alert note">
 <p>全文検索とセマンティックベースの密なベクトル検索を統合することで、検索結果の精度と関連性を高めることができます。詳細については、<a href="/docs/ja/multi-vector-search.md">ハイブリッド検索を</a>参照してください。</p>
@@ -91,7 +91,7 @@ schema.add_field(field_name=<span class="hljs-string">&quot;sparse&quot;</span>,
 <p>この構成では</p>
 <ul>
 <li><p><code translate="no">id</code>: は主キーとして機能し、<code translate="no">auto_id=True</code> で自動的に生成される。</p></li>
-<li><p><code translate="no">text</code>この構成では、 : が主キーとなり、 で自動的に生成されます。 : には、全文検索操作のための生のテキストデータが格納されます。データ型は<code translate="no">VARCHAR</code> 、<code translate="no">VARCHAR</code> はMilvusのテキスト保存用の文字列データ型です。Milvusがテキストをトークン化できるようにするには、<code translate="no">enable_analyzer=True</code> を設定します。デフォルトでは、Milvusはテキスト分析に<a href="/docs/ja/standard-analyzer.md">標準アナライザを</a>使用します。別の解析器を設定するには、<a href="/docs/ja/analyzer-overview.md">概要を</a>参照してください。</p></li>
+<li><p><code translate="no">text</code>この構成では、 : が主キーとなり、 で自動的に生成されます。 : には、全文検索操作のための生のテキストデータが格納されます。データ型は<code translate="no">VARCHAR</code> 、<code translate="no">VARCHAR</code> はMilvusのテキスト保存用の文字列データ型です。Milvus がテキストをトークン化できるようにするには<code translate="no">enable_analyzer=True</code> を設定します。デフォルトでは、Milvusはテキスト分析に<a href="/docs/ja/standard-analyzer.md">標準アナライザを</a>使用します。別の解析器を設定するには、<a href="/docs/ja/analyzer-overview.md">概要を</a>参照してください。</p></li>
 <li><p><code translate="no">sparse</code>全文検索操作のために内部で生成されたスパース埋め込みを格納するために予約されたベクトルフィールド。データ型は<code translate="no">SPARSE_FLOAT_VECTOR</code> でなければなりません。</p></li>
 </ul>
 <p>次に、テキストをスパース・ベクトル表現に変換する関数を定義し、スキーマに追加します。</p>
@@ -109,7 +109,7 @@ schema.add_function(bm25_function)​
 </th><th data-block-token="SMGGduN8zo3cgXxVnwZcW0UAnbA" colspan="1" rowspan="1"><p data-block-token="LY39dA2eOoyVUUxvKwlcyyjdn3e">説明</p>
 </th></tr></thead><tbody><tr><td data-block-token="Pbj3dPvuno3x6kxnCsWcTb3knag" colspan="1" rowspan="1"><p data-block-token="EeHOdxCjloFUAGxuY1CcScCTnDe"><code translate="no">name</code></p>
 <p data-block-token="FzAJdVbrzozmTdxwy4fcJQkQnlh"></p>
-</td><td data-block-token="VJWydnWHJoV66jx6oEPcH9lGnvh" colspan="1" rowspan="1"><p data-block-token="Clg3dWrJpo39lfxSWjVcbE7GnYm">関数の名前。この関数は、<code translate="no">text</code> フィールドの生テキストを、<code translate="no">sparse</code> フィールドに格納される検索可能なベクトルに変換します。</p>
+</td><td data-block-token="VJWydnWHJoV66jx6oEPcH9lGnvh" colspan="1" rowspan="1"><p data-block-token="Clg3dWrJpo39lfxSWjVcbE7GnYm">関数の名前。この関数は、<code translate="no">text</code> フィールドの生のテキストを、<code translate="no">sparse</code> フィールドに格納される検索可能なベクトルに変換します。</p>
 </td></tr><tr><td data-block-token="ShPJdlvMQoXnSHxIQ1GcoyegnEb" colspan="1" rowspan="1"><p data-block-token="HFT1dYVCioUj4PxnNSVcYIBInNh"><code translate="no">input_field_names</code></p>
 </td><td data-block-token="YiZCdrUaaovWnrxef29cmpQFn9c" colspan="1" rowspan="1"><p data-block-token="YFVOd29cUovDpXx7L2zcJK37n1g">テキストからスパース・ベクトルへの変換を必要とする<code translate="no">VARCHAR</code> フィールドの名前。<code translate="no">FunctionType.BM25</code> の場合、このパラメータは1つのフィールド名のみを受け付けます。</p>
 </td></tr><tr><td data-block-token="QpcMdDoXfo62aNxQfoyc2E6lneg" colspan="1" rowspan="1"><p data-block-token="D1LkdH1KIojwKDx14HUcHdDJnPh"><code translate="no">output_field_names</code></p>
@@ -185,7 +185,7 @@ index_params.<span class="hljs-title function_">add_index</span>(​
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>データをコレクションに挿入したら、生テキストクエリを使用して全文検索を実行できます。milvusは自動的にクエリをスパースベクトルに変換し、マッチした検索結果をBM25アルゴリズムを使ってランク付けし、topK (<code translate="no">limit</code>) の結果を返します。</p>
+    </button></h2><p>データをコレクションに挿入したら、生テキストクエリを使用して全文検索を実行できます。Milvusは自動的にクエリをスパースベクトルに変換し、マッチした検索結果をBM25アルゴリズムを使ってランク付けし、topK(<code translate="no">limit</code>)の結果を返します。</p>
 <pre><code translate="no" class="language-python">search_params = {​
     <span class="hljs-string">&#x27;params&#x27;</span>: {<span class="hljs-string">&#x27;drop_ratio_search&#x27;</span>: 0.6},​
 }​

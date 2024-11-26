@@ -118,7 +118,7 @@ sparse_vector = [[(<span class="hljs-number">1</span>, <span class="hljs-number"
 </ul>
 <h3 id="Add-vector-field​" class="common-anchor-header">Vektorfeld hinzufügen</h3><p>Um spärliche Vektoren in Milvus zu verwenden, müssen Sie bei der Erstellung einer Sammlung ein Feld für die Speicherung spärlicher Vektoren definieren. Dieser Prozess beinhaltet.</p>
 <ol>
-<li><p>Einstellen von <code translate="no">datatype</code> auf den unterstützten Sparse-Vektor-Datentyp, <code translate="no">SPARSE_FLOAT_VECTOR</code>.</p></li>
+<li><p>Einstellen von <code translate="no">datatype</code> auf den unterstützten Sparse-Vector-Datentyp, <code translate="no">SPARSE_FLOAT_VECTOR</code>.</p></li>
 <li><p>Die Dimension muss nicht angegeben werden.</p></li>
 </ol>
 <div class="multipleCode">

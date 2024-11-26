@@ -71,13 +71,13 @@ summary: >-
       </svg>
     </button></h2><p>Milvus offre due tipi di analizzatori per soddisfare le diverse esigenze di elaborazione del testo.</p>
 <ul>
-<li><p><strong>Analizzatore integrato</strong>: Si tratta di configurazioni predefinite che coprono le attività comuni di elaborazione del testo con una configurazione minima. Gli analizzatori integrati sono ideali per le ricerche generiche, in quanto non richiedono una configurazione complessa.</p></li>
+<li><p><strong>Analizzatore integrato</strong>: Si tratta di configurazioni predefinite che coprono le attività comuni di elaborazione del testo con una configurazione minima. Gli analizzatori integrati sono ideali per le ricerche generiche, poiché non richiedono una configurazione complessa.</p></li>
 <li><p><strong>Analizzatore personalizzato</strong>: Per i requisiti più avanzati, gli analizzatori personalizzati consentono di definire la propria configurazione specificando sia il tokenizer che zero o più filtri. Questo livello di personalizzazione è particolarmente utile per casi d'uso specializzati in cui è necessario un controllo preciso sull'elaborazione del testo.</p></li>
 </ul>
 <div class="alert note">
 <p>Se si omettono le configurazioni dell'analizzatore durante la creazione della raccolta, Milvus utilizza l'analizzatore <code translate="no">standard</code> per l'elaborazione del testo. Per maggiori dettagli, consultare <a href="/docs/it/standard-analyzer.md">Standard</a>.</p>
 </div>
-<h3 id="Built-in-analyzer​" class="common-anchor-header">Analizzatore integrato</h3><p>Gli analizzatori integrati in Milvus sono preconfigurati con tokenizer e filtri specifici, il che consente di utilizzarli immediatamente senza doverli definire personalmente. Ogni analizzatore integrato è un modello che include un tokenizer e dei filtri preimpostati, con parametri opzionali per la personalizzazione.</p>
+<h3 id="Built-in-analyzer​" class="common-anchor-header">Analizzatore integrato</h3><p>Gli analizzatori integrati in Milvus sono preconfigurati con tokenizer e filtri specifici, consentendo di utilizzarli immediatamente senza doverli definire personalmente. Ogni analizzatore integrato è un modello che include un tokenizer e dei filtri preimpostati, con parametri opzionali per la personalizzazione.</p>
 <p>Per esempio, per usare l'analizzatore incorporato <code translate="no">standard</code>, basta specificare il nome <code translate="no">standard</code> come <code translate="no">type</code> e includere configurazioni aggiuntive specifiche per questo tipo di analizzatore, come <code translate="no">stop_words</code>.</p>
 <pre><code translate="no" class="language-python">analyzer_params = {​
     <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;standard&quot;</span>, <span class="hljs-comment"># Uses the standard built-in analyzer​</span>

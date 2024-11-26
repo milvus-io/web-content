@@ -35,7 +35,7 @@ title: 일관성
         ></path>
       </svg>
     </button></h2><p>Milvus는 저장과 계산을 분리하는 시스템입니다. 이 시스템에서 <strong>데이터 노드는</strong> 데이터의 지속성을 담당하며 궁극적으로 MinIO/S3와 같은 분산형 객체 스토리지에 데이터를 저장합니다. <strong>쿼리 노드는</strong> 검색과 같은 계산 작업을 처리합니다. 이러한 작업에는 <strong>배치 데이터와</strong> <strong>스트리밍 데이터</strong> 처리가 모두 포함됩니다. 간단히 말해, 배치 데이터는 이미 객체 스토리지에 저장된 데이터로 이해할 수 있으며, 스트리밍 데이터는 아직 객체 스토리지에 저장되지 않은 데이터를 말합니다. 네트워크 지연 시간으로 인해 쿼리 노드는 종종 가장 최근의 스트리밍 데이터를 보유하지 않습니다. 추가적인 안전장치 없이 스트리밍 데이터에서 직접 검색을 수행하면 커밋되지 않은 많은 데이터 포인트가 손실되어 검색 결과의 정확도에 영향을 미칠 수 있습니다.</p>
-<p>밀버스 커머셜 에디션은 저장과 계산을 분리한 시스템입니다. 이 시스템에서 데이터 노드는 데이터의 지속성을 담당하며 궁극적으로 MinIO/S3와 같은 분산형 객체 스토리지에 데이터를 저장합니다. 쿼리 노드는 검색과 같은 계산 작업을 처리합니다. 이러한 작업에는 배치 데이터와 스트리밍 데이터 처리가 모두 포함됩니다. 간단히 말해, 배치 데이터는 이미 객체 스토리지에 저장된 데이터로 이해할 수 있으며, 스트리밍 데이터는 아직 객체 스토리지에 저장되지 않은 데이터를 의미합니다. 네트워크 지연 시간으로 인해 쿼리 노드는 종종 가장 최근의 스트리밍 데이터를 보유하지 않습니다. 추가적인 안전장치 없이 스트리밍 데이터에서 직접 검색을 수행하면 커밋되지 않은 많은 데이터 포인트가 손실되어 검색 결과의 정확도에 영향을 미칠 수 있습니다.</p>
+<p>밀버스 커머셜 에디션은 저장과 계산을 분리한 시스템입니다. 이 시스템에서 데이터 노드는 데이터의 지속성을 담당하며 궁극적으로 MinIO/S3와 같은 분산형 객체 스토리지에 데이터를 저장합니다. 쿼리 노드는 검색과 같은 계산 작업을 처리합니다. 이러한 작업에는 배치 데이터와 스트리밍 데이터 처리가 모두 포함됩니다. 간단히 말해, 배치 데이터는 이미 객체 스토리지에 저장된 데이터로 이해할 수 있으며, 스트리밍 데이터는 아직 객체 스토리지에 저장되지 않은 데이터를 말합니다. 네트워크 지연 시간으로 인해 쿼리 노드는 종종 가장 최근의 스트리밍 데이터를 보유하지 않습니다. 추가적인 안전장치 없이 스트리밍 데이터에서 직접 검색을 수행하면 커밋되지 않은 많은 데이터 포인트가 손실되어 검색 결과의 정확도에 영향을 미칠 수 있습니다.</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/batch-data-and-streaming-data.png" alt="Batch data and streaming data" class="doc-image" id="batch-data-and-streaming-data" />
@@ -208,4 +208,4 @@ curl --request POST \​
  <span class="hljs-type">QueryResp</span> <span class="hljs-variable">getResp</span> <span class="hljs-operator">=</span> client.query(queryReq);​
 
 <button class="copy-code-btn"></button></code></pre>
-<p>이 매개변수는 쿼리 반복기에서도 사용할 수 있습니다. <code translate="no">consistency_level</code> 매개변수에 사용할 수 있는 값은 <code translate="no">Strong</code>, <code translate="no">Bounded</code>, <code translate="no">Eventually</code>, <code translate="no">Session</code> 입니다.</p>
+<p>이 매개 변수는 쿼리 반복기에서도 사용할 수 있습니다. <code translate="no">consistency_level</code> 매개변수에 사용할 수 있는 값은 <code translate="no">Strong</code>, <code translate="no">Bounded</code>, <code translate="no">Eventually</code>, <code translate="no">Session</code> 입니다.</p>

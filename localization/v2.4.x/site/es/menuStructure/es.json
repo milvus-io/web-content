@@ -595,7 +595,7 @@
         ]
       },
       {
-        "label": "Insertar y eliminar",
+        "label": "Insertar y suprimir",
         "id": "insert-and-delete",
         "order": 3,
         "children": [
@@ -646,7 +646,7 @@
         ]
       },
       {
-        "label": "Búsqueda y Rerank",
+        "label": "Búsqueda y renombre",
         "id": "search-rerank",
         "order": 5,
         "isMenu": true,
@@ -1305,7 +1305,7 @@
             "isMenu": true,
             "children": [
               {
-                "label": "Seguimiento de Jaeger",
+                "label": "Rastreo de Jaeger",
                 "id": "config_jaeger_tracing.md",
                 "order": 0,
                 "children": []

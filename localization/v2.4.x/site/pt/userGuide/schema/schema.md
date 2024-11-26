@@ -22,7 +22,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Um esquema define a estrutura de dados de uma coleção. Antes de criar uma coleção, é necessário conceber o respetivo esquema. Esta página ajuda-o a compreender o esquema de coleção e a conceber um exemplo de esquema por si próprio.</p>
+    </button></h1><p>Um esquema define a estrutura de dados de uma coleção. Antes de criar uma coleção, é necessário conceber o respetivo esquema. Esta página ajuda-o a compreender o esquema da coleção e a conceber um exemplo de esquema por si próprio.</p>
 <h2 id="Overview​" class="common-anchor-header">Visão geral<button data-href="#Overview​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -40,7 +40,7 @@ summary: >-
       </svg>
     </button></h2><p>No Zilliz Cloud, um esquema de coleção reúne uma tabela numa base de dados relacional, que define a forma como o Zilliz Cloud organiza os dados na coleção. </p>
 <p>Um esquema bem concebido é essencial, uma vez que abstrai o modelo de dados e decide se é possível atingir os objectivos de negócio através de uma pesquisa. Além disso, uma vez que cada linha de dados inserida na coleção deve seguir o esquema, ajuda a manter a consistência dos dados e a qualidade a longo prazo. De uma perspetiva técnica, um esquema bem definido leva a um armazenamento de dados de coluna bem organizado e a uma estrutura de índice mais limpa, aumentando o desempenho da pesquisa.</p>
-<p>Um esquema de coleção tem uma chave primária, um máximo de quatro campos vectoriais e vários campos escalares. O diagrama seguinte ilustra como mapear um artigo para uma lista de campos de esquema.</p>
+<p>Um esquema de coleção tem uma chave primária, um máximo de quatro campos vectoriais e vários campos escalares. O diagrama a seguir ilustra como mapear um artigo para uma lista de campos de esquema.</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/schema-explained.PNG" alt="Schema design" class="doc-image" id="schema-design" />
@@ -100,7 +100,7 @@ CreateCollectionReq.<span class="hljs-type">CollectionSchema</span> <span class=
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>O campo primário numa coleção identifica de forma única uma entidade. Só aceita valores <strong>Int64</strong> ou <strong>VarChar</strong>. Os seguintes trechos de código demonstram como adicionar o campo primário.</p>
+    </button></h2><p>O campo primário numa coleção identifica de forma única uma entidade. Só aceita valores <strong>Int64</strong> ou <strong>VarChar</strong>. Os seguintes excertos de código demonstram como adicionar o campo primário.</p>
 <div class="multipleCode">
  <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python">schema.add_field(​
@@ -238,7 +238,7 @@ schema.<span class="hljs-title function_">addField</span>(<span class="hljs-titl
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Em casos comuns, pode utilizar campos escalares para armazenar os metadados dos embeddings vectoriais armazenados no Milvus e realizar pesquisas ANN com filtragem de metadados para melhorar a correção dos resultados da pesquisa. O Zilliz Cloud suporta múltiplos tipos de campos escalares, incluindo <strong>VarChar</strong>, <strong>Boolean</strong>, <strong>Int</strong>, Float, <strong>Double</strong>, <strong>Array</strong> e JSON.</p>
+    </button></h2><p>Em casos comuns, é possível utilizar campos escalares para armazenar os metadados dos embeddings vectoriais armazenados no Milvus e realizar pesquisas ANN com filtragem de metadados para melhorar a correção dos resultados da pesquisa. O Zilliz Cloud suporta múltiplos tipos de campos escalares, incluindo <strong>VarChar</strong>, <strong>Boolean</strong>, <strong>Int</strong>, Float, <strong>Double</strong>, <strong>Array</strong> e JSON.</p>
 <h3 id="Add-String-Fields​" class="common-anchor-header">Adicionar campos String</h3><p>No Milvus, é possível usar campos VarChar para armazenar strings. Para saber mais sobre o campo VarChar, consulte <a href="/docs/pt/string.md">Campo String</a>.</p>
 <div class="multipleCode">
  <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>

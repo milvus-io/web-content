@@ -178,7 +178,7 @@ spec:
 <li><p><strong>¿Cuál es la relación entre las configuraciones a nivel de colección y a nivel de índice?</strong></p>
 <p>El nivel de colección y el nivel de índice no son relaciones inclusivas, el nivel de colección controla si los datos originales están habilitados para mmap o no, mientras que el nivel de índice es sólo para índices vectoriales.</p></li>
 <li><p><strong>¿Hay algún tipo de índice recomendado para la asignación de memoria?</strong></p>
-<p>Sí, se recomienda HNSW para habilitar mmap. Hemos probado anteriormente índices de las series HNSW, IVF_FLAT, IVF_PQ/SQ, y el rendimiento de los índices de la serie IVF se redujo considerablemente, mientras que la reducción del rendimiento al activar mmap para los índices HNSW sigue estando dentro de lo esperado.</p></li>
+<p>Sí, se recomienda HNSW para habilitar mmap. Hemos probado anteriormente índices de las series HNSW, IVF_FLAT, IVF_PQ/SQ, el rendimiento de los índices de la serie IVF se redujo seriamente, mientras que la reducción del rendimiento al activar mmap para los índices HNSW sigue estando dentro de lo esperado.</p></li>
 <li><p><strong>¿Qué tipo de almacenamiento local se necesita para la asignación de memoria?</strong></p>
 <p>Un disco de alta calidad mejora el rendimiento, siendo las unidades NVMe la opción preferida.</p></li>
 <li><p><strong>¿Se pueden mapear en memoria los datos escalares?</strong></p>

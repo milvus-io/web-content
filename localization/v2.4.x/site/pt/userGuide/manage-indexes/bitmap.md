@@ -23,7 +23,7 @@ summary: >-
         ></path>
       </svg>
     </button></h1><p>A indexação Bitmap é uma técnica de indexação eficiente concebida para melhorar o desempenho das consultas em campos escalares de baixa cardinalidade. A cardinalidade refere-se ao número de valores distintos num campo. Os campos com menos elementos distintos são considerados de baixa cardinalidade.</p>
-<p>Este tipo de índice ajuda a reduzir o tempo de recuperação de consultas escalares, representando os valores do campo num formato binário compacto e efectuando operações bit a bit eficientes sobre eles. Em comparação com outros tipos de índices, os índices de mapa de bits têm normalmente uma maior eficiência de espaço e velocidades de consulta mais rápidas quando se trata de campos de baixa cardinalidade.</p>
+<p>Este tipo de índice ajuda a reduzir o tempo de recuperação de consultas escalares, representando os valores do campo num formato binário compacto e efectuando operações bit a bit eficientes sobre eles. Em comparação com outros tipos de índices, os índices bitmap têm normalmente uma maior eficiência de espaço e velocidades de consulta mais rápidas quando se trata de campos de baixa cardinalidade.</p>
 <h2 id="Overview" class="common-anchor-header">Descrição geral<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

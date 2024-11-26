@@ -48,8 +48,8 @@ summary: >-
    </span> <span class="img-wrapper"> <span>Ricerca filtrata</span> </span></p>
 <p>Come mostrato nel diagramma precedente, la richiesta di ricerca riporta <code translate="no">chunk like % red %</code> come condizione di filtraggio, indicando che Zilliz Cloud deve condurre la ricerca RNA all'interno di tutte le entità che hanno la parola <code translate="no">red</code> nel campo <code translate="no">chunk</code>. Nello specifico, Zilliz Cloud esegue le seguenti operazioni.</p>
 <ul>
-<li><p>Filtra le entità che corrispondono alle condizioni di filtraggio riportate nella richiesta di ricerca.</p></li>
-<li><p>Esegue la ricerca ANN all'interno delle entità filtrate.</p></li>
+<li><p>Filtra le entità che corrispondono alle condizioni di filtraggio contenute nella richiesta di ricerca.</p></li>
+<li><p>Effettua la ricerca ANN all'interno delle entità filtrate.</p></li>
 <li><p>Restituisce le entità top-K.</p></li>
 </ul>
 <h2 id="Examples" class="common-anchor-header">Esempi<button data-href="#Examples" class="anchor-icon" translate="no">
@@ -232,7 +232,7 @@ curl --request POST \​
 <span class="hljs-comment"># {&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:[]}​</span>
 
 <button class="copy-code-btn"></button></code></pre>
-<p>La condizione di filtraggio contenuta nella richiesta di ricerca legge <code translate="no">color like &quot;red%&quot; and likes &gt; 50</code>. Utilizza l'operatore and per includere due condizioni: la prima chiede di trovare le entità che hanno un valore che inizia con <code translate="no">red</code> nel campo <code translate="no">color</code> e l'altra chiede di trovare le entità con un valore maggiore di <code translate="no">50</code> nel campo <code translate="no">likes</code>. Ci sono solo due entità che soddisfano questi requisiti. Con il top-K impostato su <code translate="no">3</code>, Zilliz Cloud calcolerà la distanza tra queste due entità e il vettore della query e le restituirà come risultati della ricerca.</p>
+<p>La condizione di filtraggio contenuta nella richiesta di ricerca legge <code translate="no">color like &quot;red%&quot; and likes &gt; 50</code>. Utilizza l'operatore and per includere due condizioni: la prima chiede le entità che hanno un valore che inizia con <code translate="no">red</code> nel campo <code translate="no">color</code> e l'altra chiede le entità che hanno un valore maggiore di <code translate="no">50</code> nel campo <code translate="no">likes</code>. Ci sono solo due entità che soddisfano questi requisiti. Con il top-K impostato su <code translate="no">3</code>, Zilliz Cloud calcolerà la distanza tra queste due entità e il vettore della query e le restituirà come risultati della ricerca.</p>
 <pre><code translate="no" class="language-JSON">[​
     {​
         <span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">4</span>, ​

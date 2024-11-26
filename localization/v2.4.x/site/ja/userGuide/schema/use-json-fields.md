@@ -3,7 +3,7 @@ id: use-json-fields.md
 title: JSONフィールドの使用
 summary: >-
   JSON（JavaScript Object
-  Notation）は、複雑なデータ構造を柔軟に保存・照会できる軽量なデータ交換フォーマットです。Milvusでは、JSONフィールドを使用してベクトルデータと一緒に構造化された追加情報を保存することができ、ベクトルの類似性と構造化されたフィルタリングを組み合わせた高度な検索やクエリを可能にします。
+  Notation）は、複雑なデータ構造を柔軟に保存・照会できる軽量なデータ交換フォーマットです。Milvusでは、JSONフィールドを使用してベクトルデータと共に構造化された追加情報を保存することができ、ベクトルの類似性と構造化されたフィルタリングを組み合わせた高度な検索やクエリを可能にします。
 ---
 <h1 id="JSON-Field​" class="common-anchor-header">JSONフィールド<button data-href="#JSON-Field​" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -45,7 +45,7 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>MilvusでJSONフィールドを使用するには、コレクションスキーマで関連するフィールドタイプを定義し、<code translate="no">datatype</code> 、サポートされているJSONタイプ、すなわち、<code translate="no">JSON</code> 。</p>
-<p>以下は、JSONフィールドを含むコレクションスキーマを定義する方法です。</p>
+<p>JSONフィールドを含むコレクションスキーマを定義する方法を以下に示す。</p>
 <div class="multipleCode">
    <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType​

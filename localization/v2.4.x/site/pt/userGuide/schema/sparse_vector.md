@@ -40,7 +40,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Um vetor esparso é uma representação especial de vectores de elevada dimensão em que a maioria dos elementos é zero e apenas algumas dimensões têm valores diferentes de zero. Esta caraterística torna os vectores esparsos particularmente eficazes no tratamento de dados de grande escala, de elevada dimensão, mas esparsos. As aplicações mais comuns incluem.</p>
+    </button></h2><p>Um vetor esparso é uma representação especial de vectores de dimensão elevada em que a maioria dos elementos é zero e apenas algumas dimensões têm valores diferentes de zero. Esta caraterística torna os vectores esparsos particularmente eficazes no tratamento de dados de grande escala, de elevada dimensão, mas esparsos. As aplicações mais comuns incluem.</p>
 <ul>
 <li><p><strong>Análise de texto:</strong> Representação de documentos como vectores de saco de palavras, em que cada dimensão corresponde a uma palavra e apenas as palavras que aparecem no documento têm valores diferentes de zero.</p></li>
 <li><p><strong>Sistemas de recomendação:</strong> Matrizes de interação utilizador-item, em que cada dimensão representa a classificação de um utilizador para um determinado item, com a maioria dos utilizadores a interagir apenas com alguns itens.</p></li>
@@ -51,7 +51,7 @@ summary: >-
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/sparse-vector.png" alt="Spare vector representation" class="doc-image" id="spare-vector-representation" />
    </span> <span class="img-wrapper"> <span>Representação de vectores esparsos</span> </span></p>
-<p>Os vectores esparsos podem ser gerados utilizando vários métodos, como o <a href="https://en.wikipedia.org/wiki/Tf%E2%80%93idf">TF-IDF</a> (Term Frequency-Inverse Document Frequency) e o <a href="https://en.wikipedia.org/wiki/Okapi_BM25">BM25</a> no processamento de texto. Além disso, o Milvus oferece métodos convenientes para ajudar a gerar e processar vectores esparsos. Para mais detalhes, consulte <a href="/docs/pt/embeddings.md">Embeddings</a>.</p>
+<p>Os vectores esparsos podem ser gerados utilizando vários métodos, como o <a href="https://en.wikipedia.org/wiki/Tf%E2%80%93idf">TF-IDF</a> (Term Frequency-Inverse Document Frequency) e o <a href="https://en.wikipedia.org/wiki/Okapi_BM25">BM25</a> no processamento de texto. Além disso, o Milvus oferece métodos convenientes para ajudar a gerar e processar vectores esparsos. Para mais pormenores, consulte <a href="/docs/pt/embeddings.md">Embeddings</a>.</p>
 <p>Para dados de texto, Milvus também fornece capacidades de pesquisa de texto completo, permitindo-lhe realizar pesquisas vectoriais diretamente em dados de texto em bruto sem utilizar modelos de incorporação externos para gerar vectores esparsos. Para obter mais informações, consulte <a href="/docs/pt/full-text-search.md">Pesquisa de texto completo</a>.</p>
 <p>Após a vectorização, os dados podem ser armazenados no Milvus para gestão e recuperação de vectores. O diagrama abaixo ilustra o processo básico.</p>
 <p>
@@ -116,7 +116,7 @@ sparse_vector = [[(<span class="hljs-number">1</span>, <span class="hljs-number"
 
 <button class="copy-code-btn"></button></code></pre></li>
 </ul>
-<h3 id="Add-vector-field​" class="common-anchor-header">Adicionar campo vetorial</h3><p>Para utilizar vectores esparsos no Milvus, defina um campo para armazenar vectores esparsos ao criar uma coleção. Este processo inclui.</p>
+<h3 id="Add-vector-field​" class="common-anchor-header">Adicionar campo vetorial</h3><p>Para utilizar vectores esparsos em Milvus, defina um campo para armazenar vectores esparsos ao criar uma coleção. Este processo inclui.</p>
 <ol>
 <li><p>Definir <code translate="no">datatype</code> como o tipo de dados de vetor esparso suportado, <code translate="no">SPARSE_FLOAT_VECTOR</code>.</p></li>
 <li><p>Não é necessário especificar a dimensão.</p></li>
@@ -208,7 +208,7 @@ schema.addField(AddFieldReq.builder()​
 }&quot;</span>​
 
 <button class="copy-code-btn"></button></code></pre>
-<p>Neste exemplo, um campo de vetor chamado <code translate="no">sparse_vector</code> é adicionado para armazenar vectores esparsos. O tipo de dados deste campo é <code translate="no">SPARSE_FLOAT_VECTOR</code>.</p>
+<p>Neste exemplo, é adicionado um campo de vetor chamado <code translate="no">sparse_vector</code> para armazenar vectores esparsos. O tipo de dados deste campo é <code translate="no">SPARSE_FLOAT_VECTOR</code>.</p>
 <h3 id="Set-index-params-for-vector-field​" class="common-anchor-header">Definir parâmetros de índice para o campo de vetor</h3><p>O processo de criação de um índice para vectores esparsos é semelhante ao dos <a href="/docs/pt/dense-vector.md">vectores densos</a>, mas com diferenças no tipo de índice especificado (<code translate="no">index_type</code>), na métrica de distância (<code translate="no">metric_type</code>) e nos parâmetros de índice (<code translate="no">params</code>).</p>
 <div class="multipleCode">
    <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
@@ -262,9 +262,9 @@ indexes.<span class="hljs-title function_">add</span>(<span class="hljs-title cl
 <button class="copy-code-btn"></button></code></pre>
 <p>No exemplo acima.</p>
 <ul>
-<li><p>Um índice do tipo <code translate="no">SPARSE_INVERTED_INDEX</code> é criado para o vetor esparso. Para vectores esparsos, pode especificar <code translate="no">SPARSE_INVERTED_INDEX</code> ou <code translate="no">SPARSE_WAND</code>. Para obter detalhes, consulte <a href="https://milvus.io/docs/index.md?tab=sparse">Índices de vetor</a> esparso.</p></li>
+<li><p>Um índice do tipo <code translate="no">SPARSE_INVERTED_INDEX</code> é criado para o vetor esparso. Para vectores esparsos, pode especificar <code translate="no">SPARSE_INVERTED_INDEX</code> ou <code translate="no">SPARSE_WAND</code>. Para obter detalhes, consulte <a href="https://milvus.io/docs/index.md?tab=sparse">Índices de vetor esparso</a>.</p></li>
 <li><p>Para vectores esparsos, <code translate="no">metric_type</code> suporta apenas <code translate="no">IP</code> (Inner Product), utilizado para medir a semelhança entre dois vectores esparsos. Para obter mais informações sobre similaridade, consulte <a href="/docs/pt/metric.md">Tipos de métrica</a>.</p></li>
-<li><p><code translate="no">drop_ratio_build</code> é um parâmetro de índice opcional especificamente para vectores esparsos. Controla a proporção de pequenos valores de vetor excluídos durante a construção do índice. Por exemplo, com <code translate="no">{&quot;drop_ratio_build&quot;: 0.2}</code>, os 20% mais pequenos dos valores de vetor serão excluídos durante a criação do índice, reduzindo o esforço computacional durante as pesquisas.</p></li>
+<li><p><code translate="no">drop_ratio_build</code> é um parâmetro de índice opcional específico para vectores esparsos. Controla a proporção de valores de vectores pequenos excluídos durante a construção do índice. Por exemplo, com <code translate="no">{&quot;drop_ratio_build&quot;: 0.2}</code>, os 20% mais pequenos dos valores de vetor serão excluídos durante a criação do índice, reduzindo o esforço computacional durante as pesquisas.</p></li>
 </ul>
 <h3 id="Create-collection​" class="common-anchor-header">Criar coleção</h3><p>Quando as definições do vetor esparso e do índice estiverem concluídas, pode criar uma coleção que contenha vectores esparsos. O exemplo abaixo utiliza o método <ins><code translate="no">create_collection</code></ins> para criar uma coleção denominada <code translate="no">my_sparse_collection</code>.</p>
 <div class="multipleCode">

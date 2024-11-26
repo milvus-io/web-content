@@ -356,7 +356,7 @@ curl --request POST \​
 <span class="hljs-comment"># {&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:[{&quot;color&quot;:&quot;red_7025&quot;,&quot;distance&quot;:0.6290165,&quot;id&quot;:1},{&quot;color&quot;:&quot;red_4794&quot;,&quot;distance&quot;:0.5975797,&quot;id&quot;:4},{&quot;color&quot;:&quot;red_9392&quot;,&quot;distance&quot;:-0.24996185,&quot;id&quot;:6}]}​</span>
 
 <button class="copy-code-btn"></button></code></pre>
-<p>In dem im obigen Codebeispiel verwendeten Filterausdruck <code translate="no">color like &quot;red%&quot; and likes &gt; 50</code> geben die Bedingungen an, dass der Wert des Feldes <code translate="no">color</code> mit <strong>"rot"</strong> beginnen muss <strong>.</strong> In den Beispieldaten erfüllen nur zwei Entitäten diese Bedingung. Wenn also <code translate="no">limit</code> (topK) auf <code translate="no">3</code> oder weniger gesetzt wird, werden diese beiden Entitäten zurückgegeben.</p>
+<p>In dem im obigen Codebeispiel verwendeten Filterausdruck <code translate="no">color like &quot;red%&quot; and likes &gt; 50</code> legen die Bedingungen fest, dass der Wert des Feldes <code translate="no">color</code> mit <strong>"rot"</strong> beginnen muss <strong>.</strong> In den Beispieldaten erfüllen nur zwei Entitäten diese Bedingung. Wenn also <code translate="no">limit</code> (topK) auf <code translate="no">3</code> oder weniger gesetzt wird, werden diese beiden Entitäten zurückgegeben.</p>
 <pre><code translate="no" class="language-JSON">[​
     {​
         <span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">4</span>, ​

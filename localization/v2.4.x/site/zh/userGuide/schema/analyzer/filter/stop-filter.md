@@ -1,7 +1,7 @@
 ---
 id: stop-filter.md
 title: 停止过滤器
-summary: stop "过滤器会从标记化文本中删除指定的停止词，从而帮助消除常见的、意义不大的词语。你可以使用 `stop_words` 参数配置停用词列表。
+summary: stop "过滤器会从标记化文本中删除指定的停止词，从而帮助删除常见的、意义不大的词。你可以使用 `stop_words` 参数配置停用词列表。
 ---
 <h1 id="Stop​" class="common-anchor-header">停止词<button data-href="#Stop​" class="anchor-icon" translate="no">
       <svg translate="no"

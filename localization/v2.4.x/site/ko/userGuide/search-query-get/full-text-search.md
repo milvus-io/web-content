@@ -54,7 +54,7 @@ summary: 전체 텍스트 검색은 텍스트 데이터 세트에서 특정 용�
 <p>전체 텍스트 검색을 사용하려면 다음 주요 단계를 따르세요.</p>
 <ol>
 <li><p><a href="#Create-a-collection-for-full-text-search">컬렉션을 만듭니다</a>: 필요한 필드로 컬렉션을 설정하고 원시 텍스트를 스파스 임베딩으로 변환하는 함수를 정의합니다.</p></li>
-<li><p><a href="#Insert-text-data">데이터 삽입</a>: 원시 텍스트 문서를 컬렉션에 수집합니다.</p></li>
+<li><p><a href="#Insert-text-data">데이터 삽입하기</a>: 원시 텍스트 문서를 컬렉션에 수집합니다.</p></li>
 <li><p><a href="#Perform-full-text-search">검색 수행하기</a>: 쿼리 텍스트를 사용하여 컬렉션을 검색하고 관련 결과를 검색합니다.</p></li>
 </ol>
 <h2 id="Create-a-collection-for-full-text-search​" class="common-anchor-header">전체 텍스트 검색을 위한 컬렉션 만들기<button data-href="#Create-a-collection-for-full-text-search​" class="anchor-icon" translate="no">

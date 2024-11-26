@@ -21,7 +21,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p><a href="https://en.wikipedia.org/wiki/JSON">JSON</a>（JavaScript Object Notation，JavaScript 对象符号）是一种轻量级数据交换格式，为复杂数据结构的存储和查询提供了灵活的方式。在 Milvus 中，您可以使用 JSON 字段在存储向量数据的同时存储额外的结构化信息，从而实现将向量相似性与结构化过滤相结合的高级搜索和查询。</p>
+    </button></h1><p><a href="https://en.wikipedia.org/wiki/JSON">JSON</a>（JavaScript Object Notation，JavaScript 对象符号）是一种轻量级数据交换格式，为复杂数据结构的存储和查询提供了一种灵活的方式。在 Milvus 中，您可以使用 JSON 字段在存储向量数据的同时存储额外的结构化信息，从而实现将向量相似性与结构化过滤相结合的高级搜索和查询。</p>
 <p>JSON 字段非常适合需要元数据来优化检索结果的应用。例如，在电子商务中，可以通过类别、价格和品牌等属性来增强产品向量。在推荐系统中，用户向量可以与偏好和人口统计信息相结合。下面是一个典型的 JSON 字段示例。</p>
 <pre><code translate="no" class="language-json">{​
   <span class="hljs-string">&quot;category&quot;</span>: <span class="hljs-string">&quot;electronics&quot;</span>,​
