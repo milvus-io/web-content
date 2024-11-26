@@ -27,7 +27,7 @@ jobs:
         with:
           cmd: install
 
-      - name: Generate EN Docs
+      - name: Generate EN Preview Docs
         run: |
           git config --global user.email "Milvus-doc-bot@zilliz.com"
           git config --global user.name "Milvus-doc-bot"
@@ -39,8 +39,8 @@ jobs:
       - name: Commit and push
         run: |
           git add .
-          git commit -m "Generate en docs"
-          git push -f origin master
+          git commit -m "Generate en preview docs"
+          git push -f origin preview  
         continue-on-error: true
 
       - name: Trigger milvus.io
