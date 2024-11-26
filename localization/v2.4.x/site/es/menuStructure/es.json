@@ -646,7 +646,7 @@
         ]
       },
       {
-        "label": "Búsqueda y renombre",
+        "label": "Búsqueda y Rerank",
         "id": "search-rerank",
         "order": 5,
         "isMenu": true,
@@ -1305,7 +1305,7 @@
             "isMenu": true,
             "children": [
               {
-                "label": "Rastreo de Jaeger",
+                "label": "Seguimiento de Jaeger",
                 "id": "config_jaeger_tracing.md",
                 "order": 0,
                 "children": []

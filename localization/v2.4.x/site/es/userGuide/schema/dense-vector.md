@@ -51,7 +51,7 @@ summary: >-
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/dense-vector.png" alt="Dense vectors in 2D space" class="doc-image" id="dense-vectors-in-2d-space" />
    </span> <span class="img-wrapper"> <span>Vectores densos en un espacio 2D</span> </span></p>
-<p>La imagen anterior ilustra la representación de vectores densos en un espacio 2D. Aunque los vectores densos en aplicaciones reales suelen tener dimensiones mucho mayores, esta ilustración en 2D transmite con eficacia varios conceptos clave.</p>
+<p>La imagen anterior ilustra la representación de vectores densos en un espacio 2D. Aunque los vectores densos en aplicaciones reales suelen tener dimensiones mucho mayores, esta ilustración 2D transmite con eficacia varios conceptos clave.</p>
 <ul>
 <li><p><strong>Representación multidimensional:</strong> Cada punto representa un objeto conceptual (como <strong>Milvus</strong>, <strong>base de datos vectorial</strong>, <strong>sistema de recuperación</strong>, etc.), cuya posición viene determinada por los valores de sus dimensiones.</p></li>
 <li><p><strong>Relaciones semánticas:</strong> Las distancias entre puntos reflejan la similitud semántica entre conceptos. Los puntos más cercanos indican conceptos más relacionados semánticamente.</p></li>

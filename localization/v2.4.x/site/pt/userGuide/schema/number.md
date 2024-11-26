@@ -25,7 +25,7 @@ summary: >-
         ></path>
       </svg>
     </button></h1><p>Os campos numéricos são utilizados para armazenar dados numéricos não vectoriais em Milvus. Estes campos são normalmente utilizados para descrever informações adicionais relacionadas com dados vectoriais, como a idade, o preço, etc. Ao utilizar estes dados, é possível descrever melhor os vectores e melhorar a eficiência da filtragem de dados e das consultas condicionais.</p>
-<p>Os campos numéricos são particularmente úteis em muitos cenários. Por exemplo, nas recomendações de comércio eletrónico, um campo de preço pode ser utilizado para filtragem; na análise do perfil do utilizador, os intervalos de idade podem ajudar a refinar os resultados. Combinados com dados vectoriais, os campos numéricos podem ajudar o sistema a fornecer pesquisas semelhantes, satisfazendo com maior precisão as necessidades personalizadas dos utilizadores.</p>
+<p>Os campos numéricos são particularmente úteis em muitos cenários. Por exemplo, nas recomendações de comércio eletrónico, um campo de preço pode ser utilizado para filtragem; na análise do perfil do utilizador, os intervalos de idade podem ajudar a refinar os resultados. Combinados com dados vectoriais, os campos numéricos podem ajudar o sistema a fornecer pesquisas semelhantes, satisfazendo com maior precisão as necessidades personalizadas do utilizador.</p>
 <h2 id="Supported-number-field-types​" class="common-anchor-header">Tipos de campos numéricos suportados<button data-href="#Supported-number-field-types​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -425,7 +425,7 @@ client.<span class="hljs-title function_">insert</span>({​
 
 <button class="copy-code-btn"></button></code></pre>
 <p>Neste exemplo, inserimos dados que incluem <code translate="no">age</code>, <code translate="no">price</code>, <code translate="no">pk</code> (campo primário) e representações vectoriais (<code translate="no">embedding</code>). Para garantir que os dados inseridos correspondem aos campos definidos no esquema, recomenda-se a verificação prévia dos tipos de dados para evitar erros.</p>
-<p>Se definir <code translate="no">enable_dynamic_fields=True</code> aquando da definição do esquema, o Milvus permite-lhe inserir campos numéricos que não foram previamente definidos. No entanto, tenha em conta que isto pode aumentar a complexidade das consultas e da gestão, afectando potencialmente o desempenho. Para mais informações, consulte <a href="/docs/pt/enable_dynamic_field.md">Campo dinâmico</a>.</p>
+<p>Se definir <code translate="no">enable_dynamic_fields=True</code> ao definir o esquema, o Milvus permite-lhe inserir campos numéricos que não foram previamente definidos. No entanto, tenha em conta que isto pode aumentar a complexidade das consultas e da gestão, afectando potencialmente o desempenho. Para mais informações, consulte <a href="/docs/pt/enable_dynamic_field.md">Campo dinâmico</a>.</p>
 <h2 id="Search-and-query​" class="common-anchor-header">Pesquisa e consulta<button data-href="#Search-and-query​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -496,7 +496,7 @@ System.out.println(resp.getQueryResults());​
 <span class="hljs-comment">## {&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:[{&quot;age&quot;:30,&quot;pk&quot;:2,&quot;price&quot;:149.5},{&quot;age&quot;:35,&quot;pk&quot;:3,&quot;price&quot;:199.99}]}​</span>
 
 <button class="copy-code-btn"></button></code></pre>
-<p>Esta expressão de consulta retorna todas as entidades correspondentes e produz seus campos <code translate="no">age</code> e <code translate="no">price</code>. Para obter mais informações sobre consultas de filtro, consulte <a href="/docs/pt/boolean.md">Filtragem de metadados</a>.</p>
+<p>Essa expressão de consulta retorna todas as entidades correspondentes e produz seus campos <code translate="no">age</code> e <code translate="no">price</code>. Para obter mais informações sobre consultas de filtro, consulte <a href="/docs/pt/boolean.md">Filtragem de metadados</a>.</p>
 <h3 id="Vector-search-with-number-filtering​" class="common-anchor-header">Pesquisa vetorial com filtragem de números</h3><p>Além da filtragem básica de campo numérico, é possível combinar pesquisas de similaridade de vetor com filtros de campo numérico. Por exemplo, o código a seguir mostra como adicionar um filtro de campo numérico a uma pesquisa de vetor.</p>
 <div class="multipleCode">
  <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>

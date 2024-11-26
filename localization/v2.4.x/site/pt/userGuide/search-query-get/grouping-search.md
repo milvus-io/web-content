@@ -41,8 +41,8 @@ title: Pesquisa de agrupamento
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Quando as entidades nos resultados da pesquisa partilham o mesmo valor num campo escalar, isso indica que são semelhantes num determinado atributo, o que pode afetar negativamente os resultados da pesquisa.</p>
-<p>Suponha que uma coleção armazena vários documentos (denotados por <strong>docId</strong>). Para reter o máximo de informação semântica possível ao converter documentos em vectores, cada documento é dividido em parágrafos mais pequenos e geríveis (ou <strong>pedaços</strong>) e armazenado como entidades separadas. Apesar de o documento estar dividido em secções mais pequenas, os utilizadores continuam muitas vezes interessados em identificar os documentos mais relevantes para as suas necessidades.</p>
+    </button></h2><p>Quando as entidades nos resultados da pesquisa compartilham o mesmo valor em um campo escalar, isso indica que elas são semelhantes em um atributo específico, o que pode afetar negativamente os resultados da pesquisa.</p>
+<p>Suponha que uma coleção armazena vários documentos (denotados por <strong>docId</strong>). Para reter o máximo de informação semântica possível ao converter documentos em vectores, cada documento é dividido em parágrafos mais pequenos e geríveis (ou <strong>pedaços</strong>) e armazenado como entidades separadas. Apesar de o documento estar dividido em secções mais pequenas, os utilizadores continuam muitas vezes interessados em identificar quais os documentos mais relevantes para as suas necessidades.</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/ann-search.png" alt="ANN Search" class="doc-image" id="ann-search" />
@@ -56,7 +56,7 @@ title: Pesquisa de agrupamento
 <ul>
 <li><p>Efetuar uma pesquisa ANN com base no vetor de consulta fornecido para encontrar todas as entidades mais semelhantes à consulta.</p></li>
 <li><p>Agrupa os resultados da pesquisa pelo endereço especificado <code translate="no">group_by_field</code>, como <code translate="no">docId</code>.</p></li>
-<li><p>Retorna os principais resultados de cada grupo, conforme definido pelo parâmetro <code translate="no">limit</code>, com a entidade mais semelhante de cada grupo.</p></li>
+<li><p>Retorna os principais resultados para cada grupo, conforme definido pelo parâmetro <code translate="no">limit</code>, com a entidade mais semelhante de cada grupo.</p></li>
 </ul>
 <div class="alert note">
 <p>Por padrão, a Pesquisa de agrupamento retorna apenas uma entidade por grupo. Se você quiser aumentar o número de resultados a serem retornados por grupo, poderá controlar isso com os parâmetros <code translate="no">group_size</code> e <code translate="no">strict_group_size</code>.</p>
@@ -341,7 +341,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 <p>No exemplo acima.</p>
 <ul>
 <li><p><code translate="no">group_size</code>: Especifica o número desejado de entidades a serem retornadas por grupo. Por exemplo, definir <code translate="no">group_size=2</code> significa que cada grupo (ou cada <code translate="no">docId</code>) deve idealmente retornar dois dos parágrafos (ou <strong>pedaços</strong>) mais semelhantes. Se <code translate="no">group_size</code> não for definido, o sistema retorna por padrão um resultado por grupo.</p></li>
-<li><p><code translate="no">strict_group_size</code>: Este parâmetro booleano controla se o sistema deve aplicar estritamente a contagem definida por <code translate="no">group_size</code>. Quando <code translate="no">strict_group_size=True</code>, o sistema tentará incluir o número exato de entidades especificadas por <code translate="no">group_size</code> em cada grupo (por exemplo, dois parágrafos), a menos que não haja dados suficientes nesse grupo. Por defeito (<code translate="no">strict_group_size=False</code>), o sistema dá prioridade ao número de grupos especificado pelo parâmetro <code translate="no">limit</code>, em vez de garantir que cada grupo contém entidades <code translate="no">group_size</code>. Esta abordagem é geralmente mais eficiente nos casos em que a distribuição de dados é desigual.</p></li>
+<li><p><code translate="no">strict_group_size</code>: Este parâmetro booleano controla se o sistema deve aplicar estritamente a contagem definida por <code translate="no">group_size</code>. Quando <code translate="no">strict_group_size=True</code>, o sistema tentará incluir o número exato de entidades especificadas por <code translate="no">group_size</code> em cada grupo (por exemplo, dois parágrafos), a menos que não haja dados suficientes nesse grupo. Por predefinição (<code translate="no">strict_group_size=False</code>), o sistema dá prioridade ao número de grupos especificado pelo parâmetro <code translate="no">limit</code>, em vez de garantir que cada grupo contém entidades <code translate="no">group_size</code>. Esta abordagem é geralmente mais eficiente nos casos em que a distribuição de dados é desigual.</p></li>
 </ul>
 <p>Para obter detalhes adicionais sobre os parâmetros, consulte <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Vector/search.md">search()</a>.</p>
 <h2 id="Considerations​" class="common-anchor-header">Considerações<button data-href="#Considerations​" class="anchor-icon" translate="no">

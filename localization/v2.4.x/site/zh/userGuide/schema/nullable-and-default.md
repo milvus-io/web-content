@@ -277,7 +277,7 @@ client.insert({​
 }&#x27;</span>​
 
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Search-and-query-with-null-values​" class="common-anchor-header">使用空值搜索和查询</h3><p>使用<code translate="no">search</code> 方法时，如果字段包含<code translate="no">null</code> 值，搜索结果将以空值返回该字段。</p>
+<h3 id="Search-and-query-with-null-values​" class="common-anchor-header">使用空值进行搜索和查询</h3><p>使用<code translate="no">search</code> 方法时，如果字段包含<code translate="no">null</code> 值，搜索结果将以空值返回该字段。</p>
 <div class="multipleCode">
  <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python">res = client.search(​
@@ -345,7 +345,7 @@ params.<span class="hljs-title function_">put</span>(<span class="hljs-string">&
 <span class="hljs-comment">#{&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:[{&quot;age&quot;:30,&quot;distance&quot;:0.16000001,&quot;id&quot;:1},{&quot;age&quot;:null,&quot;distance&quot;:0.28999996,&quot;id&quot;:2},{&quot;age&quot;:null,&quot;distance&quot;:0.52000004,&quot;id&quot;:3}]}​</span>
 
 <button class="copy-code-btn"></button></code></pre>
-<p>当您使用<code translate="no">query</code> 方法进行标量过滤时，空值的过滤结果都是 false，表明它们不会被选中。</p>
+<p>使用<code translate="no">query</code> 方法进行标量过滤时，空值的过滤结果都是 false，表示不会选择这些值。</p>
 <div class="multipleCode">
  <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Reviewing previously inserted data:​</span>
@@ -860,7 +860,7 @@ curl --request POST \​
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>下表总结了可归零列和默认值在不同配置组合下的行为。这些规则决定了在尝试插入空值或未提供字段值时，Milvus 如何处理数据。</p>
+    </button></h2><p>下表总结了可归零列和默认值在不同配置组合下的行为。这些规则决定了 Milvus 在尝试插入空值或未提供字段值时如何处理数据。</p>
 <table>
 <thead>
 <tr><th>可归零</th><th>默认值</th><th>默认值类型</th><th>用户输入</th><th>结果</th><th>示例</th></tr>

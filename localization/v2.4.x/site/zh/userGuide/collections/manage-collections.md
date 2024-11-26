@@ -78,7 +78,7 @@ title: 集合说明
         ></path>
       </svg>
     </button></h2><p>与关系数据库中的主字段类似，Collection 也有一个主字段，用于将实体与其他实体区分开来。主字段中的每个值都是全局唯一的，并与一个特定实体相对应。</p>
-<p>如上图所示，名为<strong>id</strong>的字段是主字段，第一个 ID<strong>0</strong>对应一个名为 "<em>冠状病毒的死亡率并不重要</em>"的实体。不会有其他实体的主字段为 0。</p>
+<p>如上图所示，名为<strong>id</strong>的字段是主字段，第一个 ID<strong>0</strong>对应一个名为 "<em>冠状病毒的死亡率并不重要</em>"的实体。不会有其他实体的主字段是 0。</p>
 <p>主字段只接受整数或字符串。插入实体时，默认情况下应包含主字段值。但是，如果在创建 Collections 时启用了<strong>AutoId</strong>，Milvus 将在插入数据时生成这些值。在这种情况下，请从要插入的实体中排除主字段值。</p>
 <p>有关详细信息，请参阅 "<a href="/docs/zh/primary-field.md">主字段和自动 ID</a>"。</p>
 <h2 id="Index​" class="common-anchor-header">索引<button data-href="#Index​" class="anchor-icon" translate="no">
@@ -96,7 +96,7 @@ title: 集合说明
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>为特定字段创建索引可提高搜索效率。建议您为服务所依赖的所有字段创建索引，其中必须为向量字段创建索引。</p>
+    </button></h2><p>为特定字段创建索引可提高搜索效率。建议您为服务所依赖的所有字段创建索引，其中向量字段的索引是强制性的。</p>
 <h2 id="Entity​" class="common-anchor-header">实体<button data-href="#Entity​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -149,7 +149,7 @@ title: 集合说明
         ></path>
       </svg>
     </button></h2><p>创建索引并加载 Collections 后，就可以通过输入一个或多个查询向量开始相似性搜索。例如，当接收到搜索请求中携带的查询向量表示时，Zilliz Cloud 会使用指定的度量类型来衡量查询向量与目标 Collections 中的向量之间的相似性，然后再返回与查询语义相似的向量。</p>
-<p>您还可以在搜索和查询中包含元数据过滤，以提高结果的相关性。请注意，元数据过滤条件在查询中是强制性的，但在搜索中是可选的。</p>
+<p>您还可以在搜索和查询中包含元数据过滤，以提高结果的相关性。请注意，元数据过滤条件在查询中是必须的，但在搜索中是可选的。</p>
 <p>有关适用度量类型的详细信息，请参阅<a href="/docs/zh/metric.md">度量类型</a>。</p>
 <p>有关搜索和查询的更多信息，请参阅<a href="/docs/zh/single-vector-search.md">搜索和 Rerankers</a>章节中的文章，其中包括基本功能。</p>
 <ul>
@@ -163,7 +163,7 @@ title: 集合说明
 <li><p><a href="/docs/zh/full-text-search.md">全文搜索</a></p></li>
 <li><p><a href="/docs/zh/keyword-match.md">关键词匹配</a></p></li>
 </ul>
-<p>此外，Zilliz Cloud 还提供增强功能，以提高搜索性能和效率。这些增强功能默认为禁用，您可以根据自己的服务要求启用和使用它们。它们是</p>
+<p>此外，Zilliz Cloud 还提供了增强功能，以提高搜索性能和效率。这些增强功能默认为禁用，您可以根据自己的服务要求启用和使用它们。它们是</p>
 <ul>
 <li><p><a href="/docs/zh/use-partition-key.md">使用 Partition Key</a></p></li>
 <li><p><a href="/docs/zh/mmap.md">使用 mmap</a></p></li>
@@ -252,7 +252,7 @@ title: 集合说明
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>分布式数据库系统通常使用一致性级别来定义跨数据节点和副本的数据相同性。在创建 Collections 或在 Collections 中进行相似性搜索时，可以分别设置不同的一致性级别。适用的一致性级别包括<strong>强</strong>、<strong>有限制的不稳定性</strong>、<strong>会话</strong>和<strong>最终</strong>。</p>
+    </button></h2><p>分布式数据库系统通常使用一致性级别来定义跨数据节点和副本的数据相同性。在创建 Collections 或在 Collections 中进行相似性搜索时，可以分别设置不同的一致性级别。适用的一致性级别<strong>有强</strong>、<strong>有限制的不稳定性</strong>、<strong>会话</strong>和<strong>最终</strong>。</p>
 <p>有关这些一致性级别的详细信息，请参阅<a href="/docs/zh/consistency.md">一致性</a>级别。</p>
 <h2 id="Limits​" class="common-anchor-header">限制<button data-href="#Limits​" class="anchor-icon" translate="no">
       <svg translate="no"

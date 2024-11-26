@@ -78,7 +78,7 @@ summary: >-
 <p>Se si omettono le configurazioni dell'analizzatore durante la creazione della raccolta, Milvus utilizza l'analizzatore <code translate="no">standard</code> per l'elaborazione del testo. Per maggiori dettagli, consultare <a href="/docs/it/standard-analyzer.md">Standard</a>.</p>
 </div>
 <h3 id="Built-in-analyzer​" class="common-anchor-header">Analizzatore integrato</h3><p>Gli analizzatori integrati in Milvus sono preconfigurati con tokenizer e filtri specifici, il che consente di utilizzarli immediatamente senza doverli definire personalmente. Ogni analizzatore integrato è un modello che include un tokenizer e dei filtri preimpostati, con parametri opzionali per la personalizzazione.</p>
-<p>Per esempio, per usare l'analizzatore incorporato <code translate="no">standard</code>, basta specificare il nome <code translate="no">standard</code> come <code translate="no">type</code> e includere configurazioni aggiuntive specifiche per questo tipo di analizzatore, come <code translate="no">stop_words</code>.</p>
+<p>Ad esempio, per usare l'analizzatore incorporato <code translate="no">standard</code>, è sufficiente specificare il nome <code translate="no">standard</code> come <code translate="no">type</code> e includere configurazioni aggiuntive specifiche per questo tipo di analizzatore, come <code translate="no">stop_words</code>.</p>
 <pre><code translate="no" class="language-python">analyzer_params = {​
     <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;standard&quot;</span>, <span class="hljs-comment"># Uses the standard built-in analyzer​</span>
     <span class="hljs-string">&quot;stop_words&quot;</span>: [<span class="hljs-string">&quot;a&quot;</span>, <span class="hljs-string">&quot;an&quot;</span>, <span class="hljs-string">&quot;for&quot;</span>] <span class="hljs-comment"># Defines a list of common words (stop words) to exclude from tokenization​</span>
@@ -100,7 +100,7 @@ summary: >-
 <button class="copy-code-btn"></button></code></pre>
 <p>Milvus offre i seguenti analizzatori integrati, ognuno dei quali può essere usato direttamente specificando il loro nome come parametro <code translate="no">type</code>.</p>
 <ul>
-<li><p><code translate="no">standard</code>: Adatto per l'elaborazione di testi generici, applicando la tokenizzazione standard e il filtraggio delle minuscole.</p></li>
+<li><p><code translate="no">standard</code>: Adatto per l'elaborazione di testi generici, applicando la tokenizzazione standard e il filtro delle minuscole.</p></li>
 <li><p><code translate="no">english</code>: Ottimizzato per i testi in lingua inglese, con supporto per le stop words inglesi.</p></li>
 <li><p><code translate="no">chinese</code>: Specializzato per l'elaborazione del testo cinese, con tokenizzazione adattata alle strutture della lingua cinese.</p></li>
 </ul>
@@ -167,7 +167,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>In questo esempio, si definisce uno schema di raccolta con un campo vettoriale per le incorporazioni e due campi <code translate="no">VARCHAR</code> per le capacità di elaborazione del testo. Ogni campo <code translate="no">VARCHAR</code> è configurato con le proprie impostazioni dell'analizzatore per gestire le diverse esigenze di elaborazione.</p>
+    </button></h2><p>In questo esempio, definiamo uno schema di raccolta con un campo vettoriale per le incorporazioni e due campi <code translate="no">VARCHAR</code> per le capacità di elaborazione del testo. Ogni campo <code translate="no">VARCHAR</code> è configurato con le proprie impostazioni di analizzatore per gestire le diverse esigenze di elaborazione.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType​
 ​
 <span class="hljs-comment"># Set up a Milvus client​</span>

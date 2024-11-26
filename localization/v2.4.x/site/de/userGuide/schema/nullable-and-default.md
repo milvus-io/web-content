@@ -4,7 +4,7 @@ title: Nullbar & Standard
 related_key: 'nullable, default'
 summary: >-
   Milvus ermöglicht es Ihnen, das Attribut "nullable" und Standardwerte für
-  skalare Felder mit Ausnahme des Primärfelds festzulegen. Bei Feldern, die als
+  skalare Felder mit Ausnahme des Primärfeldes festzulegen. Bei Feldern, die als
   nullable=True markiert sind, können Sie das Feld beim Einfügen von Daten
   überspringen oder es direkt auf einen Nullwert setzen, und das System wird es
   als Null behandeln, ohne einen Fehler zu verursachen.

@@ -398,7 +398,7 @@ curl --request POST \​
 }&quot;</span>​
 
 <button class="copy-code-btn"></button></code></pre>
-<p>Sie können auch eine Sammlung ohne Index-Parameter erstellen und diese nachträglich hinzufügen. In diesem Fall lädt Milvus die Sammlung bei deren Erstellung nicht. Details zur Erstellung von Indizes für eine bestehende Sammlung finden Sie unter <a href="/docs/de/index-vector-fields.md">Index Explained</a>.</p>
+<p>Sie können auch eine Sammlung ohne Index-Parameter erstellen und diese nachträglich hinzufügen. In diesem Fall lädt Milvus die Sammlung bei deren Erstellung nicht. Details zum Erstellen von Indizes für eine bestehende Sammlung finden Sie unter <a href="/docs/de/index-vector-fields.md">Index Explained</a>.</p>
 <p>Der folgende Codeschnipsel demonstriert, wie man eine Sammlung ohne Sammlung erstellt, wobei der Ladestatus der Sammlung bei der Erstellung ungeladen bleibt.</p>
 <div class="multipleCode">
  <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#go">Go</a> <a href="#curl">cURL</a></div>
@@ -512,7 +512,7 @@ curl --request POST \​
         ></path>
       </svg>
     </button></h2><p>Sie können Eigenschaften für die zu erstellende Sammlung festlegen, damit sie in Ihren Dienst passt. Die anwendbaren Eigenschaften sind wie folgt.</p>
-<h3 id="Set-Shard-Number​" class="common-anchor-header">Shard-Nummer festlegen</h3><p>Shards sind horizontale Abschnitte einer Sammlung. Jeder Shard entspricht einem Dateneingangskanal. Jede Sammlung hat standardmäßig einen Shard. Sie können bei der Erstellung einer Sammlung die entsprechende Anzahl von Scherben auf der Grundlage des erwarteten Durchsatzes und des Datenvolumens, das in die Sammlung eingefügt werden soll, festlegen.</p>
+<h3 id="Set-Shard-Number​" class="common-anchor-header">Shard-Nummer festlegen</h3><p>Shards sind horizontale Abschnitte einer Sammlung. Jeder Shard entspricht einem Dateneingangskanal. Jede Sammlung hat standardmäßig einen Shard. Sie können bei der Erstellung einer Sammlung die entsprechende Anzahl von Scherben auf der Grundlage des erwarteten Durchsatzes und des Volumens der in die Sammlung einzufügenden Daten festlegen.</p>
 <p>In allgemeinen Fällen sollten Sie die Anzahl der Shards jedes Mal um eins erhöhen, wenn der erwartete Durchsatz um 500 MB/s oder das einzufügende Datenvolumen um 100 GB steigt. Dieser Vorschlag hindert Sie nicht daran, Daten mit der Standard-Shard-Nummer in die Sammlung einzufügen.</p>
 <p>Der folgende Codeausschnitt veranschaulicht, wie Sie die Shard-Nummer beim Erstellen einer Sammlung festlegen.</p>
 <div class="multipleCode">

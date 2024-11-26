@@ -39,7 +39,7 @@ title: Index Scalar Fields
       </svg>
     </button></h2><ul>
 <li><p><strong><a href="https://milvus.io/docs/index-scalar-fields.md#Auto-indexing">Auto indexing</a></strong>: Milvus automatically decides the index type based on the data type of the scalar field. This is suitable when you do not need to control the specific index type.</p></li>
-<li><p><strong><a href="https://milvus.io/docs/index-scalar-fields.md#Custom-indexing">Custom indexing</a></strong>: You specify the exact index type, such as an inverted index. This provides more control over the index type selection.</p></li>
+<li><p><strong><a href="https://milvus.io/docs/index-scalar-fields.md#Custom-indexing">Custom indexing</a></strong>: You specify the exact index type, such as an inverted index or <a href="/docs/bitmap.md">bitmap index</a>. This provides more control over the index type selection.</p></li>
 </ul>
 <h2 id="Auto-indexing" class="common-anchor-header">Auto indexing<button data-href="#Auto-indexing" class="anchor-icon" translate="no">
       <svg translate="no"

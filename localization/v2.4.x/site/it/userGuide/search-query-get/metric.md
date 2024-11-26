@@ -22,7 +22,7 @@ title: Tipi metrici
         ></path>
       </svg>
     </button></h1><p>Le metriche di somiglianza sono utilizzate per misurare le somiglianze tra vettori. La scelta di una metrica di distanza appropriata aiuta a migliorare significativamente le prestazioni di classificazione e clustering.</p>
-<p>Attualmente, Zilliz Cloud supporta questi tipi di metriche di somiglianza: Distanza euclidea (<code translate="no">L2</code>), Prodotto interno (<code translate="no">IP</code>), Somiglianza coseno (<code translate="no">COSINE</code>), <code translate="no">JACCARD</code>, <code translate="no">HAMMING</code> e <code translate="no">BM25</code> (specificamente progettato per la ricerca full text su vettori sparsi).</p>
+<p>Attualmente, Zilliz Cloud supporta questi tipi di metriche di somiglianza: Distanza euclidea (<code translate="no">L2</code>), Prodotto interno (<code translate="no">IP</code>), Somiglianza coseno (<code translate="no">COSINE</code>), <code translate="no">JACCARD</code>, <code translate="no">HAMMING</code> e <code translate="no">BM25</code> (specificamente progettata per la ricerca full text su vettori sparsi).</p>
 <p>La tabella seguente riassume la mappatura tra i diversi tipi di campo e i corrispondenti tipi di metrica.</p>
 <table data-block-token="LHu5dKCHro3mnTx6PsmckEsinQd"><thead><tr><th data-block-token="JOJvdTK9MouhT8x7tfGc59NGnfg" colspan="1" rowspan="1"><p data-block-token="TS9tdnaJaoG4kfx96cfcqXINnnc">Tipo di campo</p>
 </th><th data-block-token="Iy8ZdPGpIo6nfwxiz4RcSuwanwf" colspan="1" rowspan="1"><p data-block-token="SKIAdxDFJo9oOyxg7iTcmfGAnz1">Intervallo di dimensione</p>
@@ -54,7 +54,7 @@ title: Tipi metrici
 <div class="alert note">
 <ul>
 <li><p>Per i campi vettoriali del tipo <code translate="no">SPARSE_FLOAT_VECTOR</code>, utilizzare il tipo di metrica <code translate="no">BM25</code> solo quando si esegue la ricerca a testo completo. Per ulteriori informazioni, consultare la sezione <a href="/docs/it/full-text-search.md">Ricerca a testo completo</a>.</p></li>
-<li><p>Per i campi vettoriali di tipo <code translate="no">BINARY_VECTOR</code>, il valore della dimensione (<code translate="no">dim</code>) deve essere un multiplo di 8. </p></li>
+<li><p>Per i campi vettoriali del tipo <code translate="no">BINARY_VECTOR</code>, il valore di dimensione (<code translate="no">dim</code>) deve essere un multiplo di 8. </p></li>
 </ul>
 </div>
 <p>La tabella seguente riassume le caratteristiche dei valori della distanza di similarità di tutti i tipi di metrica supportati e il loro intervallo di valori.</p>
@@ -129,7 +129,7 @@ title: Tipi metrici
    </span> <span class="img-wrapper"> <span>Formula del prodotto interno</span> </span></p>
 <p>L'IP è più utile se si devono confrontare dati non normalizzati o se si tiene conto della grandezza e dell'angolo.</p>
 <div class="alert note">
-<p>Se si usa l'IP per calcolare le somiglianze tra embeddings, è necessario normalizzare le embeddings. Dopo la normalizzazione, il prodotto interno equivale alla somiglianza del coseno.</p>
+<p>Se si utilizza l'IP per calcolare le somiglianze tra embedding, è necessario normalizzare gli embedding. Dopo la normalizzazione, il prodotto interno equivale alla somiglianza del coseno.</p>
 </div>
 <p>Supponiamo che X' sia normalizzato dall'incorporamento X.</p>
 <p>
@@ -161,7 +161,7 @@ title: Tipi metrici
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/cosine_similarity.png" alt="Cosine similarity formula" class="doc-image" id="cosine-similarity-formula" />
-   </span> <span class="img-wrapper"> <span>Formula della somiglianza del coseno</span> </span></p>
+   </span> <span class="img-wrapper"> <span>Formula di somiglianza del coseno</span> </span></p>
 <p>La somiglianza del coseno è sempre nell'intervallo <strong>[-1, 1]</strong>. Ad esempio, due vettori proporzionali hanno una somiglianza di coseno pari a <strong>1</strong>, due vettori ortogonali hanno una somiglianza pari a <strong>0</strong> e due vettori opposti hanno una somiglianza pari a <strong>-1</strong>. Più grande è il coseno, più piccolo è l'angolo tra i due vettori, il che indica che questi due vettori sono più simili tra loro.</p>
 <p>Sottraendo la somiglianza del coseno da 1, si ottiene la distanza del coseno tra due vettori.</p>
 <h2 id="JACCARD-distance​" class="common-anchor-header">Distanza JACCARD<button data-href="#JACCARD-distance​" class="anchor-icon" translate="no">
@@ -206,7 +206,7 @@ title: Tipi metrici
       </svg>
     </button></h2><p>La distanza HAMMING misura stringhe di dati binari. La distanza tra due stringhe di uguale lunghezza è il numero di posizioni di bit in cui i bit sono diversi.</p>
 <p>Ad esempio, supponiamo che esistano due stringhe, 1101 1001 e 1001 1101.</p>
-<p>11011001 ⊕ 10011101 = 01000100. Dato che contiene due 1, la distanza HAMMING, d (11011001, 10011101) = 2.</p>
+<p>11011001 ⊕ 10011101 = 01000100. Poiché contiene due 1, la distanza di HAMMING, d (11011001, 10011101) = 2.</p>
 <h2 id="BM25-similarity​" class="common-anchor-header">Similitudine BM25<button data-href="#BM25-similarity​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -243,7 +243,7 @@ title: Tipi metrici
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/idf.png" alt="IDF formula" class="doc-image" id="idf-formula" />
    </span> <span class="img-wrapper"> <span>Formula IDF</span> </span></p>
-<p>dove <code translate="no">​N</code> è il numero totale di documenti nel corpus e <code translate="no">​n(qi​)</code> è il numero di documenti contenenti il termine qi.</p></li>
+<p>dove <code translate="no">​N</code> è il numero totale di documenti del corpus e <code translate="no">​n(qi​)</code> è il numero di documenti contenenti il termine qi.</p></li>
 <li><p><code translate="no">​∣D∣</code>: Lunghezza del documento <code translate="no">​D</code> (numero totale di termini).</p></li>
 <li><p><code translate="no">​avgdl</code>: Lunghezza media di tutti i documenti del corpus.</p></li>
 <li><p><code translate="no">​k1​</code>: Controlla l'influenza della frequenza dei termini sul punteggio. Valori più alti aumentano l'importanza della frequenza dei termini. L'intervallo tipico è [1,2, 2,0], mentre Milvus consente un intervallo di [0, 3].</p></li>

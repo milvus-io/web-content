@@ -46,7 +46,7 @@ title: Criar coleção instantaneamente
 <li><p>A coleção é carregada automaticamente aquando da criação.</p></li>
 </ul>
 <p>Para obter detalhes sobre as terminologias acima, consulte <a href="/docs/pt/manage-collections.md">Coleção explicada</a>. </p>
-<p>É importante notar que a criação instantânea de uma coleção com as predefinições não se adequa a todos os cenários. Aconselha-se a familiarizar-se com o <a href="/docs/pt/create-collection.md">procedimento comum de criação de colecções</a> para que possa compreender melhor as capacidades do Milvus.</p>
+<p>É importante notar que criar uma coleção instantaneamente com as predefinições não se adequa a todos os cenários. Aconselha-se a familiarizar-se com o <a href="/docs/pt/create-collection.md">procedimento comum de criação de colecções</a> para que possa compreender melhor as capacidades do Milvus.</p>
 <h2 id="Quick-Setup​" class="common-anchor-header">Configuração rápida<button data-href="#Quick-Setup​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

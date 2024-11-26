@@ -65,7 +65,7 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>L'attributo <code translate="no">nullable</code> consente di memorizzare valori nulli in una collezione, fornendo flessibilità nella gestione di dati sconosciuti.</p>
-<h3 id="Set-the-nullable-attribute​" class="common-anchor-header">Impostare l'attributo nullable</h3><p>Quando si crea una collezione, usare <code translate="no">nullable=True</code> per definire i campi nullable (per impostazione predefinita <code translate="no">False</code>). L'esempio seguente crea un insieme chiamato <code translate="no">user_profiles_null</code> e imposta il campo <code translate="no">age</code> come nullable.</p>
+<h3 id="Set-the-nullable-attribute​" class="common-anchor-header">Impostare l'attributo nullable</h3><p>Quando si crea una collezione, utilizzare <code translate="no">nullable=True</code> per definire i campi nullable (per impostazione predefinita <code translate="no">False</code>). L'esempio seguente crea un insieme chiamato <code translate="no">user_profiles_null</code> e imposta il campo <code translate="no">age</code> come nullable.</p>
 <div class="multipleCode">
  <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType​
@@ -870,7 +870,7 @@ curl --request POST \​
 </thead>
 <tbody>
 <tr><td>✅</td><td>✅</td><td>Non-nullo</td><td>Nessuno/nullo</td><td>Utilizza il valore predefinito</td><td><ul><li>Campo: <code translate="no">age</code></li><li>Valore predefinito: <code translate="no">18</code></li><li>Input dell'utente: nullo</li><li>Risultato: memorizzato come <code translate="no">18</code></li></ul></td></tr>
-<tr><td>✅</td><td>❌</td><td>-</td><td>Nessuno/nullo</td><td>Memorizzato come nullo</td><td><ul><li>Campo:</li><li> <code translate="no">middle_name</code></li><li>Valore predefinito:</li><li>-Ingresso</li><li>dell'utente</li><li>: null</li><li>Risultato: memorizzato come null</td></tr>
+<tr><td>✅</td><td>❌</td><td>-</td><td>Nessuno/nullo</td><td>Memorizzato come nullo</td><td><ul><li>Campo:</li><li> <code translate="no">middle_name</code></li><li>Valore predefinito:</li><li>-Ingresso</li><li>dell'utente</li><li>: nullo</li><li>Risultato: memorizzato come nullo</td></tr>
 <tr><td>❌</td><td>✅</td><td>Non-nullo</td><td>Nessuno/nullo</td><td>Utilizza il valore predefinito</td><td><ul><li>Campo:</li><li> <code translate="no">status</code></li><li>Valore predefinito:</li><li> <code translate="no">&quot;active&quot;</code></li><li>Input dell'utente: null</li><li>Risultato: memorizzato come <code translate="no">&quot;active&quot;</code></td></tr>
 <tr><td>❌</td><td>❌</td><td>-</td><td>Nessuno/null</td><td>Lancia un errore</td><td><ul><li>Campo:</li><li> <code translate="no">email</code></li><li>Valore predefinito:</li><li>-Ingresso</li><li>dell'utente</li><li>: null</li><li>Risultato: Operazione rifiutata, il sistema lancia un errore</td></tr>
 <tr><td>❌</td><td>✅</td><td>Nullo</td><td>Nessuno/null</td><td>Lancia un errore</td><td><ul><li>Campo:</li><li> <code translate="no">username</code></li><li>Valore predefinito:</li><li>nullIngresso</li><li>utente</li><li>: null</li><li>Risultato: Operazione rifiutata, il sistema lancia un errore</td></tr>

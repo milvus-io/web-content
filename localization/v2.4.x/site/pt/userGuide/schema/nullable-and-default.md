@@ -866,7 +866,7 @@ curl --request POST \​
     </button></h2><p>A tabela seguinte resume o comportamento das colunas anuláveis e dos valores por defeito em diferentes combinações de configuração. Essas regras determinam como o Milvus trata os dados ao tentar inserir valores nulos ou se os valores de campo não são fornecidos.</p>
 <table>
 <thead>
-<tr><th>Nulável</th><th>Valor por defeito</th><th>Tipo de valor predefinido</th><th>Entrada do utilizador</th><th>Resultado</th><th>Exemplo</th></tr>
+<tr><th>Nulável</th><th>Valor por defeito</th><th>Tipo de valor por defeito</th><th>Entrada do utilizador</th><th>Resultado</th><th>Exemplo</th></tr>
 </thead>
 <tbody>
 <tr><td>✅</td><td>✅</td><td>Não-nulo</td><td>Nenhum/nulo</td><td>Utiliza o valor por defeito</td><td><ul><li>Campo: <code translate="no">age</code></li><li>Valor por defeito: <code translate="no">18</code></li><li>Entrada do utilizador: nulo</li><li>Resultado: armazenado como <code translate="no">18</code></li></ul></td></tr>

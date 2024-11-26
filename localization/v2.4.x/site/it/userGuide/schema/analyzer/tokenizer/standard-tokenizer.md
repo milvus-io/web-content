@@ -2,7 +2,7 @@
 id: standard-tokenizer.md
 title: Tokenizzatore standard
 summary: >-
-  Il tokenizer `standard` di Milvus divide il testo in base agli spazi e ai
+  Il tokenizzatore `standard` di Milvus divide il testo in base agli spazi e ai
   segni di punteggiatura, rendendolo adatto alla maggior parte delle lingue.
 ---
 <h1 id="Standard​" class="common-anchor-header">Standard<button data-href="#Standard​" class="anchor-icon" translate="no">
@@ -42,7 +42,7 @@ summary: >-
 }​
 
 <button class="copy-code-btn"></button></code></pre>
-<p>Il tokenizer <code translate="no">standard</code> può funzionare insieme a uno o più filtri. Per esempio, il codice seguente definisce un analizzatore che utilizza il tokenizer <code translate="no">standard</code> e il filtro <code translate="no">lowercase</code>.</p>
+<p>Il tokenizer <code translate="no">standard</code> può funzionare insieme a uno o più filtri. Ad esempio, il codice seguente definisce un analizzatore che utilizza il tokenizer <code translate="no">standard</code> e il filtro <code translate="no">lowercase</code>.</p>
 <pre><code translate="no" class="language-python">analyzer_params = {​
     <span class="hljs-string">&quot;tokenizer&quot;</span>: <span class="hljs-string">&quot;standard&quot;</span>,​
     <span class="hljs-string">&quot;filter&quot;</span>: [<span class="hljs-string">&quot;lowercase&quot;</span>]​

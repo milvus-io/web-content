@@ -80,7 +80,7 @@ title: Konsistenz
         ></path>
       </svg>
     </button></h2><p>Sie können verschiedene Konsistenzniveaus festlegen, wenn Sie eine Sammlung erstellen sowie Suchen und Abfragen durchführen.</p>
-<h3 id="Set-Consistency-Level-upon-Creating-Collection​-set-consistency-level-upon-creating-collection​" class="common-anchor-header">Konsistenzstufe bei der Erstellung einer Sammlung festlegen{#-set-consistency-level-upon-creating-collection}</h3><p>Bei der Erstellung einer Sammlung können Sie die Konsistenzstufe für die Suchen und Abfragen innerhalb der Sammlung festlegen. Das folgende Codebeispiel setzt die Konsistenzstufe auf <strong>Stark</strong>.</p>
+<h3 id="Set-Consistency-Level-upon-Creating-Collection​-set-consistency-level-upon-creating-collection​" class="common-anchor-header">Konsistenzstufe beim Erstellen einer Sammlung festlegen{#-set-consistency-level-upon-creating-collection}</h3><p>Bei der Erstellung einer Sammlung können Sie die Konsistenzstufe für die Suchen und Abfragen innerhalb der Sammlung festlegen. Das folgende Codebeispiel setzt die Konsistenzstufe auf <strong>Stark</strong>.</p>
 <div class="multipleCode">
    <a href="#python">python</a> <a href="#java">java</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">client.create_collection(​

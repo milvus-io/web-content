@@ -81,7 +81,7 @@ summary: >-
 }​
 
 <button class="copy-code-btn"></button></code></pre>
-<p>上述<code translate="no">standard</code> 内置分析仪的配置等同于使用以下参数设置自定义分析仪，其中明确定义了<code translate="no">tokenizer</code> 和<code translate="no">filter</code> 选项，以实现相同的功能：</p>
+<p>上述<code translate="no">standard</code> 内置分析仪的配置等同于使用以下参数设置自定义分析仪，其中<code translate="no">tokenizer</code> 和<code translate="no">filter</code> 选项是为实现相同功能而明确定义的：</p>
 <pre><code translate="no" class="language-python">analyzer_params = {​
     <span class="hljs-string">&quot;tokenizer&quot;</span>: <span class="hljs-string">&quot;standard&quot;</span>,​
     <span class="hljs-string">&quot;filter&quot;</span>: [​

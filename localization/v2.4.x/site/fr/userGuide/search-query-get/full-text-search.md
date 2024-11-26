@@ -57,7 +57,7 @@ summary: >-
    </span> <span class="img-wrapper"> <span>Recherche en texte intégral</span> </span></p>
 <p>Pour utiliser la recherche en texte intégral, suivez les étapes suivantes.</p>
 <ol>
-<li><p><a href="#Create-a-collection-for-full-text-search">Créez une collection</a>: Créez une collection avec les champs nécessaires et définissez une fonction pour convertir le texte brut en encastrements épars.</p></li>
+<li><p><a href="#Create-a-collection-for-full-text-search">Créer une collection</a>: Créez une collection avec les champs nécessaires et définissez une fonction pour convertir le texte brut en encastrements épars.</p></li>
 <li><p><a href="#Insert-text-data">Insérer des données</a>: Insérez vos documents de texte brut dans la collection.</p></li>
 <li><p><a href="#Perform-full-text-search">Effectuer des recherches</a>: Utilisez des textes d'interrogation pour effectuer des recherches dans votre collection et récupérer des résultats pertinents.</p></li>
 </ol>
@@ -96,7 +96,7 @@ schema.add_field(field_name=<span class="hljs-string">&quot;sparse&quot;</span>,
 <ul>
 <li><p><code translate="no">id</code>: sert de clé primaire et est automatiquement généré avec <code translate="no">auto_id=True</code>.</p></li>
 <li><p><code translate="no">text</code>Le champ : stocke vos données textuelles brutes pour les opérations de recherche en texte intégral. Le type de données doit être <code translate="no">VARCHAR</code>, car <code translate="no">VARCHAR</code> est le type de données de chaîne de Milvus pour le stockage de texte. Définissez <code translate="no">enable_analyzer=True</code> pour permettre à Milvus de symboliser le texte. Par défaut, Milvus utilise l'<a href="/docs/fr/standard-analyzer.md">analyseur standard</a> pour l'analyse de texte. Pour configurer un autre analyseur, reportez-vous à la section <a href="/docs/fr/analyzer-overview.md">Vue d'ensemble</a>.</p></li>
-<li><p><code translate="no">sparse</code>: un champ vectoriel réservé au stockage des enchâssements épars générés en interne pour les opérations de recherche en texte intégral. Le type de données doit être <code translate="no">SPARSE_FLOAT_VECTOR</code>.</p></li>
+<li><p><code translate="no">sparse</code>: un champ vectoriel réservé au stockage des enchâssements épars générés en interne pour les opérations de recherche plein texte. Le type de données doit être <code translate="no">SPARSE_FLOAT_VECTOR</code>.</p></li>
 </ul>
 <p>Définissez maintenant une fonction qui convertira votre texte en représentations vectorielles éparses, puis ajoutez-la au schéma.</p>
 <pre><code translate="no" class="language-python">bm25_function = Function(​

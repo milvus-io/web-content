@@ -24,7 +24,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Sparse Vectors sind eine wichtige Methode der Datendarstellung im Information Retrieval und der Verarbeitung natürlicher Sprache. Während dichte Vektoren wegen ihrer ausgezeichneten semantischen Verständnisfähigkeiten beliebt sind, liefern spärliche Vektoren oft genauere Ergebnisse, wenn es um Anwendungen geht, die eine präzise Übereinstimmung von Schlüsselwörtern oder Phrasen erfordern.</p>
+    </button></h1><p>Sparse Vectors sind eine wichtige Methode der Datendarstellung im Information Retrieval und der Verarbeitung natürlicher Sprache. Während dichte Vektoren wegen ihrer ausgezeichneten semantischen Verständnisfähigkeiten beliebt sind, liefern spärliche Vektoren oft genauere Ergebnisse, wenn es um Anwendungen geht, die eine präzise Zuordnung von Schlüsselwörtern oder Phrasen erfordern.</p>
 <h2 id="Overview​" class="common-anchor-header">Überblick<button data-href="#Overview​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -59,7 +59,7 @@ summary: >-
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/use-sparse-vector.png" alt="Use sparse vector in Milvus" class="doc-image" id="use-sparse-vector-in-milvus" />
    </span> <span class="img-wrapper"> <span>Verwendung von Sparse-Vektoren in Milvus</span> </span></p>
 <div class="alert note">
-<p>Neben spärlichen Vektoren unterstützt Milvus auch dichte Vektoren und binäre Vektoren. Dichte Vektoren sind ideal für die Erfassung tiefer semantischer Beziehungen, während binäre Vektoren sich in Szenarien wie schnellen Ähnlichkeitsvergleichen und der Deduplizierung von Inhalten auszeichnen. Weitere Informationen finden Sie unter <a href="/docs/de/dense-vector.md">Dense-Vektoren</a> und <a href="/docs/de/binary-vector.md">binäre Vektoren</a>.</p>
+<p>Zusätzlich zu spärlichen Vektoren unterstützt Milvus auch dichte Vektoren und binäre Vektoren. Dichte Vektoren sind ideal für die Erfassung tiefer semantischer Beziehungen, während binäre Vektoren sich in Szenarien wie schnellen Ähnlichkeitsvergleichen und der Deduplizierung von Inhalten auszeichnen. Weitere Informationen finden Sie unter <a href="/docs/de/dense-vector.md">Dense-Vektoren</a> und <a href="/docs/de/binary-vector.md">binäre Vektoren</a>.</p>
 </div>
 <h2 id="Use-sparse-vectors-in-Milvus​" class="common-anchor-header">Spärliche Vektoren in Milvus verwenden<button data-href="#Use-sparse-vectors-in-Milvus​" class="anchor-icon" translate="no">
       <svg translate="no"

@@ -3,7 +3,7 @@ id: use-json-fields.md
 title: JSONフィールドの使用
 summary: >-
   JSON（JavaScript Object
-  Notation）は、複雑なデータ構造を柔軟に保存・照会できる軽量なデータ交換フォーマットです。Milvusでは、JSONフィールドを使用してベクトルデータと共に構造化された追加情報を保存することができ、ベクトルの類似性と構造化されたフィルタリングを組み合わせた高度な検索やクエリを可能にします。
+  Notation）は、複雑なデータ構造を柔軟に保存・照会できる軽量なデータ交換フォーマットです。Milvusでは、JSONフィールドを使用してベクトルデータと一緒に構造化された追加情報を保存することができ、ベクトルの類似性と構造化されたフィルタリングを組み合わせた高度な検索やクエリを可能にします。
 ---
 <h1 id="JSON-Field​" class="common-anchor-header">JSONフィールド<button data-href="#JSON-Field​" class="anchor-icon" translate="no">
       <svg translate="no"

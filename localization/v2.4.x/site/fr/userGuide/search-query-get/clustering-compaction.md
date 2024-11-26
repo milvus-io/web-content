@@ -130,10 +130,10 @@ common:
 <li><p><code translate="no">common</code></p>
 <table>
 <thead>
-<tr><th>Configuration Elément</th><th>Description de l'élément de configuration</th><th>Valeur par défaut</th></tr>
+<tr><th>Élément de configuration</th><th>Description de l'élément de configuration</th><th>Valeur par défaut</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">usePartitionKeyAsClusteringKey</code></td><td>Spécifie s'il faut utiliser la clé de partition dans les collections comme clé de regroupement.<br>La valeur <code translate="no">true</code> indique que la clé de partition est utilisée comme clé de regroupement.<br>Vous pouvez toujours remplacer ce paramètre dans une collection en définissant explicitement une clé de regroupement.</td><td><code translate="no">false</code></td></tr>
+<tr><td><code translate="no">usePartitionKeyAsClusteringKey</code></td><td>Spécifie s'il faut utiliser la clé de partition dans les collections comme clé de regroupement.<br>La valeur <code translate="no">true</code> indique que la clé de partition est utilisée comme clé de regroupement.<br>Vous pouvez toujours remplacer ce paramètre dans une collection en définissant explicitement une clé de clustering.</td><td><code translate="no">false</code></td></tr>
 </tbody>
 </table>
 </li>
@@ -268,6 +268,6 @@ coll1.wait_for_compaction_completed(is_clustering=<span class="hljs-literal">Tru
 <ul>
 <li><p>Activez cette option pour les collections contenant de gros volumes de données : les performances de recherche s'améliorent lorsque les volumes de données d'une collection sont plus importants. Il est conseillé d'activer cette fonctionnalité pour les collections comportant plus d'un million d'entités.</p></li>
 <li><p>Choisissez une clé de clustering appropriée : vous pouvez utiliser des champs scalaires couramment employés comme conditions de filtrage en tant que clé de clustering. Pour une collection contenant des données provenant de plusieurs locataires, vous pouvez utiliser le champ qui distingue un locataire d'un autre comme clé de regroupement.</p></li>
-<li><p>Utiliser la clé de partition comme clé de regroupement Vous pouvez définir <code translate="no">common.usePartitionKeyAsClusteringKey</code> sur true si vous souhaitez activer cette fonctionnalité pour toutes les collections de votre instance Milvus ou si vous rencontrez toujours des problèmes de performances dans une grande collection avec une clé de partition. Ainsi, vous disposerez d'une clé de regroupement et d'une clé de partition lorsque vous choisirez un champ scalaire dans une collection comme clé de partition.</p>
+<li><p>Utiliser la clé de partition comme clé de regroupement Vous pouvez définir <code translate="no">common.usePartitionKeyAsClusteringKey</code> sur true si vous souhaitez activer cette fonctionnalité pour toutes les collections de votre instance Milvus ou si vous rencontrez toujours des problèmes de performance dans une grande collection avec une clé de partition. Ainsi, vous disposerez d'une clé de regroupement et d'une clé de partition lorsque vous choisirez un champ scalaire dans une collection comme clé de partition.</p>
 <p>Notez que ce paramètre ne vous empêche pas de choisir un autre champ scalaire comme clé de clustering. La clé de regroupement explicitement désignée est toujours prioritaire.</p></li>
 </ul>

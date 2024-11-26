@@ -87,7 +87,7 @@ title: 范围搜索
         ></path>
       </svg>
     </button></h2><p>本节演示如何进行范围搜索。以下代码片段中的搜索请求不带度量类型，表示默认度量类型为<strong>COSINE</strong>。在这种情况下，请确保半径值小于<strong>range_filter</strong>值。</p>
-<p>在以下代码片段中，将<code translate="no">radius</code> 设置为<code translate="no">0.4</code> ，将<code translate="no">range_filter</code> 设置为<code translate="no">0.6</code> ，这样 Milvus 就会返回与查询向量的距离或分数在<strong>0.4</strong>至<strong>0.6</strong> 范围内的所有实体。</p>
+<p>在以下代码片段中，将<code translate="no">radius</code> 设为<code translate="no">0.4</code> ，将<code translate="no">range_filter</code> 设为<code translate="no">0.6</code> ，这样 Milvus 就会返回与查询向量的距离或分数在<strong>0.4</strong>至<strong>0.6</strong> 范围内的所有实体。</p>
 <div class="multipleCode">
    <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient​

@@ -50,7 +50,7 @@ title: 범위 검색
 <p>반경 및 <strong>범위_필터를</strong> 설정하는 방법은 검색의 메트릭 유형에 따라 다릅니다. 다음 표에는 서로 다른 메트릭 유형으로 이 두 매개변수를 설정하기 위한 요구사항이 나와 있습니다.</p>
 <table data-block-token="QZ8mdLSnAotxZKxSzvpcQkNNnhe"><thead><tr><th data-block-token="SpBZdGprzoEoaixW6EfcaIFqnDh" colspan="1" rowspan="1"><p data-block-token="FwxDd8logofNV2xVMdycwXUvnMg">메트릭 유형</p>
 </th><th data-block-token="NwWNdOvpHoOQF0xDvuHcFcHQnte" colspan="1" rowspan="1"><p data-block-token="MiqddcN2voEZUSxe8hCcW3g0nXc">표시</p>
-</th><th data-block-token="D1eedZmCjow2Whx7vIicOx4Enrc" colspan="1" rowspan="1"><p data-block-token="K7bldgyVFo2DmDxNamFcNddNnNb">반경 및 범위_필터 설정 요구사항</p>
+</th><th data-block-token="D1eedZmCjow2Whx7vIicOx4Enrc" colspan="1" rowspan="1"><p data-block-token="K7bldgyVFo2DmDxNamFcNddNnNb">반경 및 범위_필터 설정 요구 사항</p>
 </th></tr></thead><tbody><tr><td data-block-token="C3xxdZ0uHon6bWxACXkcOM0bnrf" colspan="1" rowspan="1"><p data-block-token="EoJSd1jo1oqt0pxhKElcLptwnJe"><code translate="no">L2</code></p>
 </td><td data-block-token="AcRkdW156oOcQixJbXZchC8WnEd" colspan="1" rowspan="1"><p data-block-token="ATGrduoF1ownRSxJngycJ3NYnAe">L2 거리가 작을수록 유사성이 높음을 나타냅니다.</p>
 </td><td data-block-token="Ja1hdVXtholWNfxCGKAcXzQ9nCc" colspan="1" rowspan="1"><p data-block-token="FqvMdDe6DocjQXxKHdvcp0hTnmb">가장 유사한 벡터 임베딩을 무시하려면 다음을 확인합니다.</p>

@@ -75,7 +75,7 @@ title: メートル法
 </td><td data-block-token="H3vYdaah4oWsXmxmABOcW01XnSh" colspan="1" rowspan="1"><p data-block-token="VHz5d7R91o3OGuxX39Bc76CTnGf">値が小さいほど類似度が高いことを示す。</p>
 </td><td data-block-token="NZnwdhAGUoO0R9x9gz6cZfCYnOd" colspan="1" rowspan="1"><p data-block-token="Xk7wdBDlko6RjFxVnATcPYTjnsb">[0, dim(ベクトル)</p>
 </td></tr><tr><td data-block-token="Xm5BdUTvXoPS1Xxtc26cBqAWn9e" colspan="1" rowspan="1"><p data-block-token="FoMadsBCboAKV2xofQ2c9IiKntb"><code translate="no">BM25</code></p>
-</td><td data-block-token="OHEldDxlaoejYmxXgUPcbwCYn4b" colspan="1" rowspan="1"><p data-block-token="EVzLdJPQdopf2mxZ3dfcTGSgnSc">項頻度、逆文書頻度、文書正規化に基づいて関連性をスコア化する。</p>
+</td><td data-block-token="OHEldDxlaoejYmxXgUPcbwCYn4b" colspan="1" rowspan="1"><p data-block-token="EVzLdJPQdopf2mxZ3dfcTGSgnSc">用語頻度、逆文書頻度、文書正規化に基づいて関連性をスコア化する。</p>
 </td><td data-block-token="KNCEd8WTioQbwnxmHzNcpHkHnzf" colspan="1" rowspan="1"><p data-block-token="RVtVda2Ozo1N5ixO0oucju5FnWh">[0, ∞)</p>
 <p data-block-token="MQ5RdcTC1oIZC5x4d7xc2M56nId"></p>
 </td></tr></tbody></table>
@@ -222,7 +222,7 @@ title: メートル法
       </svg>
     </button></h2><p>BM25は広く使われているテキスト関連性測定法で、特に<a href="/docs/ja/full-text-search.md">全文検索</a>用に設計されている。以下の3つの重要な要素を組み合わせている。</p>
 <ul>
-<li><p><strong>用語頻度（TF）：</strong>ある用語が文書に出現する頻度を測定する。頻度が高いほど重要度が高いことを示すことが多いが、BM25では飽和パラメータk1を使用して、頻度が高すぎる用語が関連性スコアを支配するのを防ぐ。</p></li>
+<li><p><strong>用語頻度（TF）：</strong>用語の文書内での出現頻度を測定する。頻度が高いほど重要度が高いことを示すことが多いが、BM25では飽和パラメータk1を使用して、頻度が高すぎる用語が関連性スコアを支配するのを防ぐ。</p></li>
 <li><p><strong>逆ドキュメント頻度（IDF）：</strong>コーパス全体における用語の重要度を反映する。より少ない文書に出現する用語ほどIDF値が高くなり、関連性に大きく寄与していることを示す。</p></li>
 <li><p><strong>文書の長さの<strong>正規化</strong>：</strong>長い文書は、より多くの用語を含むため、スコアが高くなる傾向があります。BM25は文書の長さを正規化することでこのバイアスを軽減し、パラメータbはこの正規化の強さを制御する。</p></li>
 </ul>

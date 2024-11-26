@@ -77,7 +77,7 @@ rerank = WeightedRanker(<span class="hljs-number">0.8</span>, <span class="hljs-
 <button class="copy-code-btn"></button></code></pre>
 <p>以下の点に注意：</p>
 <ul>
-<li><p>各重み値は0（最も重要でない）から1（最も重要）まであり、最終的な集計スコアに影響を与える。</p></li>
+<li><p>各重み値は0（最も重要でない）から1（最も重要）まであり、最終的な集計スコアに影響する。</p></li>
 <li><p><code translate="no">WeightedRanker</code> で指定する重み値の総数は、先に作成した<code translate="no">AnnSearchRequest</code> インスタンスの数と同じでなければならない。</p></li>
 <li><p>異なるメトリックタイプの異なる測定値のため、我々は想起結果の距離を正規化し、区間[0,1]に入るようにする。最終的なスコアは重み値と距離の合計となる。</p></li>
 </ul>

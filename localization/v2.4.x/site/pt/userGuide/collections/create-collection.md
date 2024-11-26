@@ -206,7 +206,7 @@ schema := entity.NewSchema().WithDynamicFieldEnabled(<span class="hljs-literal">
       </svg>
     </button></h2><p>A criação de um índice em um campo específico acelera a pesquisa nesse campo. Um índice regista a ordem das entidades dentro de uma coleção. Como mostrado nos trechos de código a seguir, você pode usar <code translate="no">metric_type</code> e <code translate="no">index_type</code> para selecionar maneiras apropriadas para Milvus indexar um campo e medir semelhanças entre embeddings vetoriais.</p>
 <p>No Milvus, pode utilizar <code translate="no">AUTOINDEX</code> como o tipo de índice para todos os campos vectoriais e um de <code translate="no">COSINE</code>, <code translate="no">L2</code> e <code translate="no">IP</code> como o tipo de métrica com base nas suas necessidades.</p>
-<p>Como demonstrado no excerto de código acima, é necessário definir o tipo de índice e o tipo métrico para os campos vectoriais e apenas o tipo de índice para os campos escalares. Os índices são obrigatórios para campos vectoriais e é aconselhável criar índices em campos escalares frequentemente utilizados em condições de filtragem.</p>
+<p>Como demonstrado no fragmento de código acima, é necessário definir o tipo de índice e o tipo métrico para os campos vectoriais e apenas o tipo de índice para os campos escalares. Os índices são obrigatórios para campos vectoriais e é aconselhável criar índices em campos escalares frequentemente utilizados em condições de filtragem.</p>
 <p>Para obter detalhes, consulte <a href="/docs/pt/index-vector-fields.md">Índices</a>.</p>
 <div class="multipleCode">
  <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#go">Go</a> <a href="#curl">cURL</a></div>
@@ -512,7 +512,7 @@ curl --request POST \​
         ></path>
       </svg>
     </button></h2><p>Pode definir propriedades para a coleção a criar para que esta se adapte ao seu serviço. As propriedades aplicáveis são as seguintes.</p>
-<h3 id="Set-Shard-Number​" class="common-anchor-header">Definir número do fragmento</h3><p>Os fragmentos são fatias horizontais de uma coleção. Cada fragmento corresponde a um canal de entrada de dados. Por predefinição, cada coleção tem um fragmento. Pode definir o número apropriado de fragmentos ao criar uma coleção com base na taxa de transferência esperada e no volume de dados a inserir na coleção.</p>
+<h3 id="Set-Shard-Number​" class="common-anchor-header">Definir número de fragmentos</h3><p>Os fragmentos são fatias horizontais de uma coleção. Cada fragmento corresponde a um canal de entrada de dados. Por predefinição, cada coleção tem um fragmento. Pode definir o número apropriado de fragmentos ao criar uma coleção com base na taxa de transferência esperada e no volume de dados a inserir na coleção.</p>
 <p>Em casos comuns, considere aumentar o número de fragmentos em um sempre que a taxa de transferência esperada aumentar em 500 MB/s ou o volume de dados a serem inseridos aumentar em 100 GB. Esta sugestão não o impede de inserir dados na coleção utilizando o número de fragmentos predefinido.</p>
 <p>O trecho de código a seguir demonstra como definir o número do fragmento ao criar uma coleção.</p>
 <div class="multipleCode">
@@ -571,7 +571,7 @@ curl --request POST \​
 }&quot;</span>​
 
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Enable-mmap​" class="common-anchor-header">Ativar o mmap</h3><p>O Milvus ativa o mmap em todas as colecções por defeito, permitindo ao Milvus mapear os dados brutos dos campos para a memória em vez de os carregar completamente. Isso reduz o consumo de memória e aumenta a capacidade da coleção. Para obter detalhes sobre o mmap, consulte <a href="/docs/pt/mmap.md">Usar mmap</a>.</p>
+<h3 id="Enable-mmap​" class="common-anchor-header">Ativar o mmap</h3><p>O Milvus ativa o mmap em todas as colecções por defeito, permitindo ao Milvus mapear os dados brutos dos campos para a memória em vez de os carregar completamente. Isso reduz a pegada de memória e aumenta a capacidade da coleção. Para obter detalhes sobre o mmap, consulte <a href="/docs/pt/mmap.md">Usar mmap</a>.</p>
 <div class="multipleCode">
  <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#go">Go</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># With mmap​</span>

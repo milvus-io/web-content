@@ -69,7 +69,7 @@ title: 重新排名
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x//assets/weighted-reranker.png" alt="weighted-reranker" class="doc-image" id="weighted-reranker" />
    </span> <span class="img-wrapper"> <span>加权 Reranker</span> </span></p>
-<p>要使用该策略，请应用<code translate="no">WeightedRanker</code> 实例，并通过传递可变数量的数字参数来设置权重值。</p>
+<p>要使用此策略，请应用<code translate="no">WeightedRanker</code> 实例，并通过传递可变数量的数字参数来设置权重值。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> WeightedRanker
 
 <span class="hljs-comment"># Use WeightedRanker to combine results with specified weights</span>
@@ -96,7 +96,7 @@ rerank = WeightedRanker(<span class="hljs-number">0.8</span>, <span class="hljs-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>RRF 是一种数据融合方法，它根据排名的倒数来组合排名列表。它是平衡各向量场影响的有效方法，尤其是在没有明确的重要性优先顺序时。这种策略通常用于想要对所有向量场给予同等考虑，或对每个场的相对重要性存在不确定性时。</p>
+    </button></h2><p>RRF 是一种数据融合方法，它根据排名的倒数来组合排名列表。它是平衡各向量场影响的有效方法，尤其是在没有明确的重要性优先顺序时。这种策略通常用于想要对所有向量场给予同等考虑，或者每个向量场的相对重要性不确定时。</p>
 <p>RRF 的基本流程如下：</p>
 <ul>
 <li><p><strong>在检索过程中收集排名</strong>：检索器跨多个向量字段检索并对结果进行排序。</p></li>
@@ -105,7 +105,7 @@ rerank = WeightedRanker(<span class="hljs-number">0.8</span>, <span class="hljs-
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x//assets/rrf-ranker.png" alt="rrf-ranker" class="doc-image" id="rrf-ranker" />
    </span> <span class="img-wrapper"> <span>RRF-ranker</span> </span></p>
-<p>这里，𝑁 代表不同检索路径的数量，rank𝑖(𝑑) 是第 𝑖 个检索器检索到的文档𝑑 的排名位置，𝑘 是平滑参数，通常设置为 60。</p></li>
+<p>这里，𝑁 表示不同检索路径的数量，rank𝑖(𝑑) 是第 𝑖 个检索器检索到的文档𝑑 的排名位置，𝑘 是平滑参数，通常设置为 60。</p></li>
 <li><p><strong>综合排名</strong>：根据综合得分对检索结果重新排序，得出最终结果。</p></li>
 </ul>
 <p>要使用这一策略，请应用<code translate="no">RRFRanker</code> 实例。</p>

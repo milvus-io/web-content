@@ -78,7 +78,7 @@ title: 컬렉션 설명
         ></path>
       </svg>
     </button></h2><p>관계형 데이터베이스의 기본 필드와 유사하게 컬렉션에는 엔티티를 다른 엔티티와 구별하는 기본 필드가 있습니다. 기본 필드의 각 값은 전 세계적으로 고유하며 하나의 특정 엔티티에 해당합니다. </p>
-<p>위 차트에서 <strong>ID라는</strong> 필드가 기본 필드로 사용되며, 첫 번째 ID <strong>0은</strong> 제목이 <em>코로나바이러스의 사망률은 중요하지 않다는</em> 엔티티에 해당합니다. 기본 필드가 0인 다른 엔티티는 없습니다.</p>
+<p>위 차트에서 <strong>ID라는</strong> 필드가 기본 필드로 사용되며, 첫 번째 ID <strong>0은</strong> 제목이 ' <em>코로나바이러스의 사망률은 중요하지 않음</em>'인 엔티티에 해당합니다. 기본 필드가 0인 다른 엔티티는 없습니다.</p>
 <p>기본 필드는 정수 또는 문자열만 허용합니다. 엔티티를 삽입할 때는 기본적으로 기본 필드 값을 포함해야 합니다. 그러나 컬렉션 생성 시 <strong>자동 ID를</strong> 활성화한 경우, 데이터 삽입 시 Milvus가 해당 값을 생성합니다. 이 경우 삽입할 엔티티에서 기본 필드 값을 제외하세요.</p>
 <p>자세한 내용은 <a href="/docs/ko/primary-field.md">기본 필드 및 자동 ID를</a> 참조하세요.</p>
 <h2 id="Index​" class="common-anchor-header">인덱스<button data-href="#Index​" class="anchor-icon" translate="no">

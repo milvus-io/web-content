@@ -22,7 +22,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Die Bitmap-Indizierung ist eine effiziente Indizierungstechnik zur Verbesserung der Abfrageleistung bei skalaren Feldern mit geringer Kardinalität. Kardinalität bezieht sich auf die Anzahl der eindeutigen Werte in einem Feld. Felder mit weniger eindeutigen Elementen werden als Felder mit geringer Kardinalität betrachtet.</p>
+    </button></h1><p>Die Bitmap-Indizierung ist eine effiziente Indizierungstechnik, die zur Verbesserung der Abfrageleistung bei skalaren Feldern mit geringer Kardinalität entwickelt wurde. Kardinalität bezieht sich auf die Anzahl der eindeutigen Werte in einem Feld. Felder mit weniger eindeutigen Elementen werden als Felder mit geringer Kardinalität betrachtet.</p>
 <p>Dieser Indextyp trägt dazu bei, die Abrufzeit skalarer Abfragen zu verringern, indem er Feldwerte in einem kompakten Binärformat darstellt und effiziente bitweise Operationen mit ihnen durchführt. Im Vergleich zu anderen Indextypen haben Bitmap-Indizes in der Regel eine höhere Speichereffizienz und schnellere Abfragegeschwindigkeiten, wenn es sich um Felder mit geringer Kardinalität handelt.</p>
 <h2 id="Overview" class="common-anchor-header">Überblick<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -119,7 +119,7 @@ client.create_index(​
 <li><p>Bitmap-Indizes eignen sich nicht für Felder mit hoher Kardinalität (d. h. Felder mit einer großen Anzahl unterschiedlicher Werte).</p>
 <ul>
 <li><p>Als allgemeine Richtlinie gilt, dass Bitmap-Indizes am effektivsten sind, wenn die Kardinalität eines Feldes weniger als 500 beträgt.</p></li>
-<li><p>Wenn die Kardinalität über diesen Schwellenwert hinaus ansteigt, nehmen die Leistungsvorteile von Bitmap-Indizes ab, und der Speicher-Overhead wird erheblich.</p></li>
+<li><p>Wenn die Kardinalität über diesen Schwellenwert hinausgeht, nehmen die Leistungsvorteile von Bitmap-Indizes ab, und der Speicher-Overhead wird erheblich.</p></li>
 <li><p>Für Felder mit hoher Kardinalität sollten Sie je nach Anwendungsfall und Abfrageanforderungen alternative Indizierungstechniken wie z. B. invertierte Indizes in Betracht ziehen.</p></li>
 </ul></li>
 </ul>

@@ -25,7 +25,7 @@ summary: >-
         ></path>
       </svg>
     </button></h1><p>Zahlenfelder werden verwendet, um nicht-vektorielle numerische Daten in Milvus zu speichern. Diese Felder werden in der Regel verwendet, um zusätzliche Informationen in Bezug auf Vektordaten zu beschreiben, z. B. Alter, Preis usw. Durch die Verwendung dieser Daten können Sie Vektoren besser beschreiben und die Effizienz der Datenfilterung und bedingter Abfragen verbessern.</p>
-<p>Zahlenfelder sind in vielen Szenarien besonders nützlich. So kann beispielsweise bei E-Commerce-Empfehlungen ein Preisfeld zur Filterung verwendet werden; bei der Analyse von Benutzerprofilen können Altersbereiche zur Verfeinerung der Ergebnisse beitragen. In Kombination mit Vektordaten können Zahlenfelder dazu beitragen, dass das System Ähnlichkeitssuchen anbietet und gleichzeitig die Bedürfnisse der Benutzer genauer erfüllt.</p>
+<p>Zahlenfelder sind in vielen Szenarien besonders nützlich. So kann beispielsweise bei E-Commerce-Empfehlungen ein Preisfeld zur Filterung verwendet werden; bei der Analyse von Benutzerprofilen können Altersbereiche zur Verfeinerung der Ergebnisse beitragen. In Kombination mit Vektordaten können Zahlenfelder dem System helfen, ähnliche Suchanfragen zu stellen und gleichzeitig die Bedürfnisse der Benutzer genauer zu erfüllen.</p>
 <h2 id="Supported-number-field-types​" class="common-anchor-header">Unterstützte Zahlenfeldtypen<button data-href="#Supported-number-field-types​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

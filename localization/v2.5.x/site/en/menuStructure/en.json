@@ -638,9 +638,15 @@
             "children": []
           },
           {
+            "label": "BITMAP Index",
+            "id": "bitmap.md",
+            "order": 2,
+            "children": []
+          },
+          {
             "label": "Index with GPU",
             "id": "index-with-gpu.md",
-            "order": 2,
+            "order": 3,
             "children": []
           }
         ]

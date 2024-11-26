@@ -54,7 +54,7 @@ title: エンティティの挿入
         ></path>
       </svg>
     </button></h2><p>データを挿入する前に、データをスキーマに従ってディクショナリのリストに整理する必要があります。各ディクショナリ はエンティティを表し、スキーマで定義されたすべてのフィールドを含みます。コレクションでダイナミック・フィールドが有効になっている場合、各ディクショナリには、スキーマで定義されて いないフィールドも含めることができます。</p>
-<p>このセクションでは、<a href="/docs/ja/create-collection-instantly.md#Quick-Setup">クイック・セットアップの方法で</a>作成されたコレクションにエンティティを挿入します。この方法で作成された Collection には、<strong>id</strong>と<strong>vector</strong> という 2 つのフィールドしかありません。さらに、この Collection では動的フィールドが有効になっているため、サンプルコードの Entities にはスキーマで定義されていない **color ** というフィールドが含まれます。</p>
+<p>このセクションでは、<a href="/docs/ja/create-collection-instantly.md#Quick-Setup">クイック・セットアップの方法で</a>作成されたコレクションにエンティティを挿入します。この方法で作成された Collection には、<strong>id</strong>と<strong>vector</strong> という 2 つのフィールドしかありません。さらに、この Collection では動的フィールドが有効になっているため、サンプルコードの Entities には、スキーマで定義されていない **color ** というフィールドが含まれます。</p>
 <div class="multipleCode">
  <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#go">Go</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient​

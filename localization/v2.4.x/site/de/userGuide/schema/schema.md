@@ -39,7 +39,7 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>In Zilliz Cloud stellt ein Sammelschema eine Tabelle in einer relationalen Datenbank dar, die definiert, wie Zilliz Cloud die Daten in der Sammlung organisiert. </p>
-<p>Ein gut entworfenes Schema ist essentiell, da es das Datenmodell abstrahiert und entscheidet, ob Sie die Geschäftsziele durch eine Suche erreichen können. Da außerdem jede in die Sammlung eingefügte Datenzeile dem Schema entsprechen muss, trägt es dazu bei, die Datenkonsistenz und die langfristige Qualität zu erhalten. Aus technischer Sicht führt ein gut definiertes Schema zu einer gut organisierten Speicherung von Spaltendaten und einer sauberen Indexstruktur, was die Suchleistung erhöht.</p>
+<p>Ein gut entworfenes Schema ist essentiell, da es das Datenmodell abstrahiert und entscheidet, ob Sie die Geschäftsziele durch eine Suche erreichen können. Da außerdem jede in die Sammlung eingefügte Datenzeile dem Schema entsprechen muss, trägt es dazu bei, die Datenkonsistenz und langfristige Qualität zu erhalten. Aus technischer Sicht führt ein gut definiertes Schema zu einer gut organisierten Speicherung von Spaltendaten und einer sauberen Indexstruktur, was die Suchleistung erhöht.</p>
 <p>Ein Sammlungsschema hat einen Primärschlüssel, maximal vier Vektorfelder und mehrere skalare Felder. Das folgende Diagramm veranschaulicht, wie ein Artikel einer Liste von Schemafeldern zugeordnet werden kann.</p>
 <p>
   

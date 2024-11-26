@@ -46,7 +46,7 @@ title: 範囲検索
 <li><p>クエリベクトルとの<strong>距離</strong>または<strong>スコアが</strong> <strong>radius</strong>および<strong>range_filter</strong>パラメータで指定された範囲内にある埋め込みベクトルをフィルタリングする。</p></li>
 <li><p>フィルタリングされたエンティティから<strong>上位K個の</strong>エンティティを返す。</p></li>
 </ul>
-<p>radiusと<strong>range_filterの</strong>設定方法は、検索のメトリックタイプによって異なる。次の表は、メトリック・タイプの違いによるこれら2つのパラメータの設定条件を示している。</p>
+<p>radiusと<strong>range_filterの</strong>設定方法は、検索のメトリックタイプによって異なる。次の表に、メトリックの種類別にこれら2つのパラメータの設定条件を示す。</p>
 <table data-block-token="QZ8mdLSnAotxZKxSzvpcQkNNnhe"><thead><tr><th data-block-token="SpBZdGprzoEoaixW6EfcaIFqnDh" colspan="1" rowspan="1"><p data-block-token="FwxDd8logofNV2xVMdycwXUvnMg">メトリックタイプ</p>
 </th><th data-block-token="NwWNdOvpHoOQF0xDvuHcFcHQnte" colspan="1" rowspan="1"><p data-block-token="MiqddcN2voEZUSxe8hCcW3g0nXc">表記</p>
 </th><th data-block-token="D1eedZmCjow2Whx7vIicOx4Enrc" colspan="1" rowspan="1"><p data-block-token="K7bldgyVFo2DmDxNamFcNddNnNb">radiusとrange_filterの設定条件</p>
@@ -63,7 +63,7 @@ title: 範囲検索
 </td><td data-block-token="JHc5dyljBogsOKxsPSfcb9qrnHh" colspan="1" rowspan="1"><p data-block-token="CLWEd89pQoUTeZxYOJFczlu2nwh">最も類似したベクトル埋め込みを無視するには</p>
 <p data-block-token="Zx9TdYxu5ouObNxhZjvcS95wnMd"><code translate="no">radius</code> &lt; 距離 &lt;=<code translate="no">range_filter</code></p>
 </td></tr><tr><td data-block-token="WsI8dAHxxobNtBxkYCmcFFtFn4c" colspan="1" rowspan="1"><p data-block-token="XvsMdyuLEoLR2wx0KdXcUmOcnlf"><code translate="no">JACCARD</code></p>
-</td><td data-block-token="YC1MdSNIwoYPg2xUXAZcL74AnZd" colspan="1" rowspan="1"><p data-block-token="JaCGdLjCKonfQsxe5pecj5uQn7g">Jaccard 距離が小さいほど，類似度が高いことを示します．</p>
+</td><td data-block-token="YC1MdSNIwoYPg2xUXAZcL74AnZd" colspan="1" rowspan="1"><p data-block-token="JaCGdLjCKonfQsxe5pecj5uQn7g">Jaccard距離が小さいほど，類似度が高いことを示します．</p>
 <p data-block-token="QAFVdSmNEonNSxxb65Xc4zAYnYc"></p>
 </td><td data-block-token="JOfSdPDQmopx3exh68zctrUCnJc" colspan="1" rowspan="1"><p data-block-token="YoZzdQw3CoUKcfx60roc0DuKnze">最も類似したベクトル埋め込みを無視するには</p>
 <p data-block-token="AURId9AadouFaLxI8esczMpgnrf"><code translate="no">range_filter</code> &lt;= 距離 &lt;<code translate="no">radius</code></p>
@@ -88,7 +88,7 @@ title: 範囲検索
         ></path>
       </svg>
     </button></h2><p>このセクションでは、範囲検索の方法を示します。以下のコードスニペットの検索リクエストはメトリックタイプを持たないので、デフォルトのメトリックタイプ<strong>COSINEが</strong>適用されます。この場合、radius値が<strong>range_filter</strong>値よりも小さいことを確認してください。</p>
-<p>以下のコードスニペットでは、milvusがクエリベクトルとの距離またはスコアが<strong>0.4から</strong> <strong>0.6の</strong>範囲内にあるすべてのエンティティを返すように、<code translate="no">radius</code> を<code translate="no">0.4</code> に、<code translate="no">range_filter</code> を<code translate="no">0.6</code> に設定します。</p>
+<p>以下のコードスニペットでは、Milvusがクエリベクトルとの距離またはスコアが<strong>0.4から</strong> <strong>0.6の</strong>範囲内にあるすべてのエンティティを返すように、<code translate="no">radius</code> を<code translate="no">0.4</code> に、<code translate="no">range_filter</code> を<code translate="no">0.6</code> に設定します。</p>
 <div class="multipleCode">
    <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient​

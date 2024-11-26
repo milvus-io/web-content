@@ -59,7 +59,7 @@ title: 컬렉션 만들기
     </button></h2><p>스키마는 컬렉션의 데이터 구조를 정의합니다. 컬렉션을 만들 때는 요구 사항에 따라 스키마를 설계해야 합니다. 자세한 내용은 <a href="/docs/ko/manage-collections.md">스키마 설명을</a> 참조하세요.</p>
 <p>다음 코드 스니펫은 활성화된 동적 필드와 <code translate="no">my_id</code>, <code translate="no">my_vector</code>, <code translate="no">my_varchar</code> 이라는 세 개의 필수 필드를 사용하여 스키마를 만듭니다.</p>
 <div class="alert note">
-<p>스칼라 필드에 기본값을 설정하고 해당 필드를 null 가능하게 만들 수 있습니다. 자세한 내용은 <a href="/docs/ko/nullable-and-default.md">Null 가능 및 기본값을</a> 참조하세요.</p>
+<p>모든 스칼라 필드에 기본값을 설정하고 null 가능으로 만들 수 있습니다. 자세한 내용은 <a href="/docs/ko/nullable-and-default.md">Null 가능 및 기본값을</a> 참조하세요.</p>
 </div>
 <div class="multipleCode">
  <a href="#python">파이썬 </a> <a href="#java">자바</a> <a href="#javascript">Node.js</a> <a href="#go">Go</a> <a href="#curl">cURL</a></div>
@@ -757,4 +757,4 @@ curl --request POST \​
 <button class="copy-code-btn"></button></code></pre>
 <p>일관성 수준에 대한 자세한 내용은 <a href="/docs/ko/consistency.md">일관성 수준을</a> 참조하세요.</p>
 <h3 id="Enable-Dynamic-Field​" class="common-anchor-header">동적 필드 사용</h3><p>컬렉션의 동적 필드는 <strong>$meta라는</strong> 예약된 JSON(JavaScript 객체 표기법) 필드입니다. 이 필드를 활성화하면 Milvus는 각 엔티티에 포함된 스키마 정의되지 않은 모든 필드와 해당 값을 예약된 필드에 키-값 쌍으로 저장합니다.</p>
-<p>동적 필드 사용 방법에 대한 자세한 내용은 <a href="/docs/ko/enable-dynamic-field.md">동적 필</a>드를 참조하세요.</p>
+<p>동적 필드 사용 방법에 대한 자세한 내용은 <a href="/docs/ko/enable-dynamic-field.md">동적 필드를</a> 참조하세요.</p>

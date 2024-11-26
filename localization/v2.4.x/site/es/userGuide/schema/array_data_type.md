@@ -32,7 +32,7 @@ summary: >-
 }​
 
 <button class="copy-code-btn"></button></code></pre>
-<p>En este ejemplo, <code translate="no">tags</code> y <code translate="no">ratings</code> son campos Array. El campo <code translate="no">tags</code> es una matriz de cadenas que representa géneros de canciones como pop, rock y clásica, mientras que el campo <code translate="no">ratings</code> es una matriz de enteros que representa las valoraciones de los usuarios de la canción, que van de 1 a 5. Estos campos Array proporcionan una forma flexible de almacenar datos multivalor, facilitando la realización de análisis detallados durante las consultas y el filtrado.</p>
+<p>En este ejemplo, <code translate="no">tags</code> y <code translate="no">ratings</code> son campos Array. El campo <code translate="no">tags</code> es una matriz de cadenas que representa géneros de canciones como pop, rock y clásica, mientras que el campo <code translate="no">ratings</code> es una matriz de enteros que representa las valoraciones de los usuarios sobre la canción, que van de 1 a 5. Estos campos Array proporcionan una forma flexible de almacenar datos multivalor, facilitando la realización de análisis detallados durante las consultas y el filtrado.</p>
 <h2 id="Add-Array-field​" class="common-anchor-header">Añadir un campo Array<button data-href="#Add-Array-field​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -48,10 +48,10 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Para utilizar campos Array en Milvus, defina el tipo de campo relevante al crear el esquema de la colección. Este proceso incluye.</p>
+    </button></h2><p>Para utilizar campos Array en Milvus, defina el tipo de campo pertinente al crear el esquema de la colección. Este proceso incluye.</p>
 <ol>
 <li><p>Establecer <code translate="no">datatype</code> en el tipo de datos Array soportado, <code translate="no">ARRAY</code>.</p></li>
-<li><p>Utilizar el parámetro <code translate="no">element_type</code> para especificar el tipo de datos de los elementos del array. Este puede ser cualquier tipo de dato escalar soportado por Milvus, como <code translate="no">VARCHAR</code> o <code translate="no">INT64</code>. Todos los elementos en el mismo Array deben ser del mismo tipo de dato.</p></li>
+<li><p>Utilizar el parámetro <code translate="no">element_type</code> para especificar el tipo de datos de los elementos del array. Este puede ser cualquier tipo de datos escalar soportado por Milvus, como <code translate="no">VARCHAR</code> o <code translate="no">INT64</code>. Todos los elementos en el mismo Array deben ser del mismo tipo de datos.</p></li>
 <li><p>Utilizando el parámetro <code translate="no">max_capacity</code> para definir la capacidad máxima del array, es decir, el número máximo de elementos que puede contener.</p></li>
 </ol>
 <p>A continuación se muestra cómo definir un esquema de colección que incluya campos Array.</p>

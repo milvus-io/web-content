@@ -192,7 +192,7 @@ schema.addField(AddFieldReq.builder()​
 <button class="copy-code-btn"></button></code></pre>
 <p>In diesem Beispiel.</p>
 <ul>
-<li><p><code translate="no">tags</code> ist ein String-Array mit <code translate="no">element_type</code> auf <code translate="no">VARCHAR</code> gesetzt, was bedeutet, dass die Elemente im Array Strings sein müssen. <code translate="no">max_capacity</code> ist auf 10 gesetzt, was bedeutet, dass das Array bis zu 10 Elemente enthalten kann.</p></li>
+<li><p><code translate="no">tags</code> ist ein String-Array, wobei <code translate="no">element_type</code> auf <code translate="no">VARCHAR</code> gesetzt ist, was bedeutet, dass die Elemente im Array Strings sein müssen. <code translate="no">max_capacity</code> ist auf 10 gesetzt, was bedeutet, dass das Array bis zu 10 Elemente enthalten kann.</p></li>
 <li><p><code translate="no">ratings</code> ist ein Integer-Array, bei dem <code translate="no">element_type</code> auf <code translate="no">INT64</code> gesetzt ist, was bedeutet, dass die Elemente Integer sein müssen. <code translate="no">max_capacity</code> ist auf 5 gesetzt, was bedeutet, dass bis zu 5 Bewertungen möglich sind.</p></li>
 <li><p>Wir fügen auch ein Primärschlüsselfeld <code translate="no">pk</code> und ein Vektorfeld <code translate="no">embedding</code> hinzu.</p></li>
 </ul>

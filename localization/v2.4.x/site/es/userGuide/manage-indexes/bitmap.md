@@ -166,9 +166,9 @@ client.create_index(​
 <summary><font color="#4fc4f9">¿Por qué el resultado top1 de una búsqueda vectorial no es el propio vector buscado, si el tipo de</font></summary>métrica es producto interior? Esto ocurre si no se han normalizado los vectores al utilizar producto interior como métrica de distancia.</details>
 <details>
 <summary><font color="#4fc4f9">¿Qué es la normalización? ¿Por qué es necesaria la normalización?</font></summary></p>
-<p>La normalización se refiere al proceso de convertir una incrustación (vector) para que su norma sea igual a 1. Si utiliza el producto interno para calcular las similitudes de las incrustaciones, debe normalizar sus incrustaciones. Después de la normalización, el producto interior es igual a la similitud coseno.</p>
+<p>La normalización se refiere al proceso de convertir una incrustación (vector) para que su norma sea igual a 1. Si utiliza el producto interno para calcular las similitudes entre incrustaciones, debe normalizar sus incrustaciones. Después de la normalización, el producto interior es igual a la similitud coseno.</p>
 <p>
-Para más información, consulte <a href="https://en.wikipedia.org/wiki/Unit_vector">Wikipedia</a>.</p>
+Consulte <a href="https://en.wikipedia.org/wiki/Unit_vector">Wikipedia</a> para obtener más información.</p>
 </details>
 <details>
 <summary><font color="#4fc4f9">¿Por qué obtengo resultados diferentes utilizando la distancia euclídea (L2) y el producto interior (PI) como métrica de distancia?</font></summary>Compruebe si los vectores están normalizados. Si no es así, primero debe normalizar los vectores. En teoría, las similitudes calculadas mediante L2 son diferentes de las calculadas mediante IP si los vectores no están normalizados.</details>

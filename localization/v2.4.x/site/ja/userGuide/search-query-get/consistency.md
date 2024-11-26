@@ -41,7 +41,7 @@ title: 一貫性
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/batch-data-and-streaming-data.png" alt="Batch data and streaming data" class="doc-image" id="batch-data-and-streaming-data" />
    </span> <span class="img-wrapper"> <span>バッチ・データとストリーミング・データ</span> </span></p>
 <p>上図に示すように、QueryNode は Search リクエストを受信した後、ストリーミング・データとバッチ・データの両方を同時に受信することができる。しかし、ネットワークの遅延により、QueryNodeが取得したストリーミングデータは不完全な場合がある。</p>
-<p>この問題に対処するため、Milvusはデータキュー内の各レコードにタイムスタンプを付与し、データキューに同期タイムスタンプを継続的に挿入します。同期タイムスタンプ(syncTs)を受信するたびに、QueryNodesはそれをServiceTimeとして設定し、QueryNodesはそのServiceTime以前のすべてのデータを見ることができるようになります。ServiceTimeに基づき、Milvusは保証タイムスタンプ（GuaranteeTs）を提供し、一貫性と可用性に関する様々なユーザー要件を満たすことができます。ユーザは検索リクエストにGuaranteeTsを指定することで、指定した時点より前のデータを検索スコープに含める必要性をQueryNodeに通知することができます。</p>
+<p>この問題に対処するため、Milvusはデータキュー内の各レコードにタイムスタンプを付与し、データキューに同期タイムスタンプを継続的に挿入します。同期タイムスタンプ(syncTs)を受信するたびに、QueryNodesはそれをServiceTimeとして設定し、QueryNodesはそのServiceTimeより前のすべてのデータを見ることができるようになります。ServiceTimeに基づき、Milvusは保証タイムスタンプ（GuaranteeTs）を提供し、一貫性と可用性に関する様々なユーザー要件を満たすことができます。ユーザは検索リクエストにGuaranteeTsを指定することで、指定した時点より前のデータを検索スコープに含める必要性をQueryNodeに通知することができます。</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/service-time-and-guarantee-time.png" alt="ServiceTime and GuaranteeTs" class="doc-image" id="servicetime-and-guaranteets" />
@@ -183,7 +183,7 @@ curl --request POST \​
 
 <button class="copy-code-btn"></button></code></pre>
 <p>このパラメータはハイブリッド検索と検索イテレータでも使用できます。<code translate="no">consistency_level</code> パラメータに指定できる値は<code translate="no">Strong</code>,<code translate="no">Bounded</code>,<code translate="no">Eventually</code>,<code translate="no">Session</code> です。</p>
-<h3 id="Set-Consistency-Level-in-Query​set-consistency-level-in-query​" class="common-anchor-header">クエリでの一貫性レベルの設定{#set-consistency-level-in-query}」。</h3><p>特定の検索の一貫性レベルはいつでも変更できます。以下のコード例では、一貫性レベルを<strong>Eventuallyに</strong>設定しています。この設定は現在のクエリ・リクエストにのみ適用されます。</p>
+<h3 id="Set-Consistency-Level-in-Query​set-consistency-level-in-query​" class="common-anchor-header">クエリで一貫性レベルを設定{#set-consistency-level-in-query} クエリで一貫性レベルを設定{#set-consistency-level-in-query}する。</h3><p>特定の検索の一貫性レベルはいつでも変更できます。以下のコード例では、一貫性レベルを<strong>Eventuallyに</strong>設定しています。この設定は現在のクエリ・リクエストにのみ適用されます。</p>
 <div class="multipleCode">
    <a href="#python">python</a> <a href="#java">java</a></div>
 <pre><code translate="no" class="language-python">res = client.query(​

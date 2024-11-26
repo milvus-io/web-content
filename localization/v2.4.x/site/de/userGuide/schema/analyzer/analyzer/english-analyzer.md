@@ -29,7 +29,7 @@ summary: >-
 <li><p>Filter: Enthält mehrere Filter für eine umfassende Textverarbeitung.</p>
 <ul>
 <li><p><a href="/docs/de/lowercase-filter.md"><code translate="no">lowercase</code></a>: Konvertiert alle Token in Kleinbuchstaben und ermöglicht so eine Suche ohne Berücksichtigung der Groß-/Kleinschreibung.</p></li>
-<li><p><a href="/docs/de/stemmer-filter.md"><code translate="no">stemmer</code></a>: Reduziert Wörter auf ihren Wortstamm, um einen breiteren Abgleich zu ermöglichen (z. B. wird "running" zu "run").</p></li>
+<li><p><a href="/docs/de/stemmer-filter.md"><code translate="no">stemmer</code></a>: Reduziert Wörter auf ihren Wortstamm, um einen breiteren Abgleich zu ermöglichen (z. B. wird "laufen" zu "run").</p></li>
 <li><p><a href="/docs/de/stop-filter.md"><code translate="no">stop_words</code></a>: Entfernt gängige englische Stoppwörter, um sich auf die Schlüsselbegriffe im Text zu konzentrieren.</p></li>
 </ul></li>
 </ul>

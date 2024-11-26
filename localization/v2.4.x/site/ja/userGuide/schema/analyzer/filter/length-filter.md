@@ -50,7 +50,7 @@ summary: length` フィルタは、指定された長さの条件を満たさな
 </td><td data-block-token="Fx30ddBWYoyRhmxK34Kcgn1Ynjb" colspan="1" rowspan="1"><p data-block-token="MizvdmrQ2oycDjxNYrXcWqFtnXb">トークンの最大長を設定します。この長さより長いトークンは削除されます。</p>
 </td></tr></tbody></table>
 <p><code translate="no">length</code> フィルタは、トークナイザによって生成された語で動作するため、トークナイザと組み合わせて使用する必要があります。</p>
-<p><code translate="no">analyzer_params</code> を定義した後、コレクション・スキーマを定義するときに、それらを<code translate="no">VARCHAR</code> フィールドに適用できます。これにより、Milvusは指定されたアナライザを使用してそのフィールドのテキストを処理し、効率的なトークン化とフィルタリングを行うことができます。詳細については、<a href="/docs/ja/analyzer-overview.md#Example-use">使用例を</a>参照してください。</p>
+<p><code translate="no">analyzer_params</code> を定義した後、コレクション・スキーマを定義するときに<code translate="no">VARCHAR</code> フィールドに適用できます。これにより、Milvusは指定されたアナライザを使用してそのフィールドのテキストを処理し、効率的なトークン化とフィルタリングを行うことができます。詳細については、<a href="/docs/ja/analyzer-overview.md#Example-use">使用例を</a>参照してください。</p>
 <h2 id="Example-output" class="common-anchor-header">出力例<button data-href="#Example-output" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

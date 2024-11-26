@@ -2,7 +2,7 @@
 id: string.md
 title: 文字列フィールド
 summary: >-
-  Milvusでは、VARCHARは文字列型データを格納するためのデータ型で、可変長の文字列を格納するのに適しています。シングルバイト文字とマルチバイト文字の両方の文字列を格納することができ、最大長は60,535文字までです。VARCHARフィールドを定義する際には、最大長パラメータmax_lengthも指定する必要があります。VARCHAR文字列型は、テキスト・データの格納と管理に効率的で柔軟な方法を提供し、さまざまな長さの文字列を扱うアプリケーションに最適です。
+  Milvusでは、VARCHARは文字列型データの格納に使用されるデータ型で、可変長の文字列の格納に適しています。シングルバイト文字とマルチバイト文字の両方の文字列を格納することができ、最大長は60,535文字までです。VARCHARフィールドを定義する際には、最大長パラメータmax_lengthも指定する必要があります。VARCHAR文字列型は、テキスト・データの格納と管理に効率的で柔軟な方法を提供し、さまざまな長さの文字列を扱うアプリケーションに最適です。
 ---
 <h1 id="String-Field​" class="common-anchor-header">文字列フィールド<button data-href="#String-Field​" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -163,7 +163,7 @@ schema.addField(AddFieldReq.builder()​
 }&quot;</span>​
 
 <button class="copy-code-btn"></button></code></pre>
-<p>この例では、<code translate="no">varchar_field1</code> と<code translate="no">varchar_field2</code> という2つの<code translate="no">VARCHAR</code> フィールドを追加し、それぞれ最大長を100文字と200文字に設定しています。<code translate="no">max_length</code> 、過剰なスペース割り当てを避けつつ最長データに対応できるよう、データの特性に基づいて設定することを推奨します。さらに、プライマリ・フィールド<code translate="no">pk</code> とベクトル・フィールド<code translate="no">embedding</code> を追加した。</p>
+<p>この例では、<code translate="no">varchar_field1</code> と<code translate="no">varchar_field2</code> という2つの<code translate="no">VARCHAR</code> フィールドを追加し、それぞれ最大長を100文字と200文字に設定しています。<code translate="no">max_length</code> 、過剰なスペース割り当てを避けながら最長データに対応できるように、データの特性に基づいて設定することを推奨します。さらに、プライマリ・フィールド<code translate="no">pk</code> とベクトル・フィールド<code translate="no">embedding</code> を追加した。</p>
 <div class="alert note">
 <p>プライマリフィールドとベクトルフィールドは、コレクションを作成するときに必須です。プライマリフィールドは各エンティティを一意に識別し、ベクトルフィールドは類似性検索に重要である。詳細は<a href="/docs/ja/primary-field.md">Primary Field &amp; AutoID</a>,<a href="/docs/ja/dense-vector.md">Dense Vector</a>,<a href="/docs/ja/binary-vector.md">Binary Vector</a>,<a href="/docs/ja/sparse_vector.md">Sparse Vector</a> を参照。</p>
 </div>
@@ -408,7 +408,7 @@ client.<span class="hljs-title function_">insert</span>({​
 
 <button class="copy-code-btn"></button></code></pre>
 <p>この例では、<code translate="no">VARCHAR</code> フィールド（<code translate="no">varchar_field1</code> と<code translate="no">varchar_field2</code> ）、主フィールド（<code translate="no">pk</code> ）、ベクトル表現（<code translate="no">embedding</code> ）を含むデータを挿入します。挿入されたデータがスキーマで定義されたフィールドと一致していることを確認するために、挿入エラーを避けるために事前にデータ型をチェックすることをお勧めします。</p>
-<p>スキーマ定義時に<code translate="no">enable_dynamic_fields=True</code> を設定すると、milvusは事前に定義されていない文字列フィールドを挿入することができます。ただし、この場合、クエリや管理が複雑になり、パフォーマンスに影響を与える可能性があることに留意してください。詳細は<a href="/docs/ja/enable-dynammic-field.md">Dynamic Fieldを</a>参照してください。</p>
+<p>スキーマ定義時に<code translate="no">enable_dynamic_fields=True</code> を設定すると、milvusでは事前に定義されていない文字列フィールドを挿入することができます。ただし、この場合、クエリや管理の複雑さが増し、パフォーマンスに影響を与える可能性があることに留意してください。詳細は<a href="/docs/ja/enable-dynammic-field.md">Dynamic Fieldを</a>参照してください。</p>
 <h2 id="Search-and-query​" class="common-anchor-header">検索とクエリ<button data-href="#Search-and-query​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

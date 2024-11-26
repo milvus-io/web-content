@@ -71,7 +71,7 @@ summary: >-
 <table data-block-token="RYdmdh6LRoVtrVxY4RHcvUTxned"><thead><tr><th data-block-token="IbXLd0A89oY8rjxRXsccdHxmn6d" colspan="1" rowspan="1"><p data-block-token="Afe5dOJUIoIEhOxAPyqcUlqdnih">パラメータ</p>
 </th><th data-block-token="LpTFdYXm6ox6Rgx5wAWciQjfnjn" colspan="1" rowspan="1"><p data-block-token="LR2QdjlzVoMv8ixoLDScpuhsnxb">パラメータ 説明</p>
 </th></tr></thead><tbody><tr><td data-block-token="AJKvdnlG8oAp8exzFbocIvf9nGf" colspan="1" rowspan="1"><p data-block-token="EXV8djjJtoYolLxllxRcIivYnre"><code translate="no">stop_words</code></p>
-</td><td data-block-token="KWkqdOBuRoPg39xtTqWcf5RQnbb" colspan="1" rowspan="1"><p data-block-token="R8HedE6qTo4UmlxpQaLcE8oNn0b">トークン化から除去されるストップワードのリストを含む配列。デフォルトは<code translate="no">_english_</code> で、一般的な英語のストップワードの組み込みセット。<code translate="no">_english_</code> の詳細は<a href="https://github.com/milvus-io/milvus/blob/master/internal/core/thirdparty/tantivy/tantivy-binding/src/stop_words.rs">こちら</a>。</p>
+</td><td data-block-token="KWkqdOBuRoPg39xtTqWcf5RQnbb" colspan="1" rowspan="1"><p data-block-token="R8HedE6qTo4UmlxpQaLcE8oNn0b">トークン化から除去されるストップワードのリストを含む配列。デフォルトは<code translate="no">_english_</code> で、一般的な英語のストップワードの組み込みセットです。<code translate="no">_english_</code> の詳細は<a href="https://github.com/milvus-io/milvus/blob/master/internal/core/thirdparty/tantivy/tantivy-binding/src/stop_words.rs">こちら</a>。</p>
 </td></tr></tbody></table>
 <p>カスタム・ストップワードの設定例。</p>
 <pre><code translate="no" class="language-python">analyzer_params = {​

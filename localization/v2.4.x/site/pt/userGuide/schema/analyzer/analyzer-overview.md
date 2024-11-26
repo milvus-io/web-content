@@ -49,7 +49,7 @@ summary: >-
       </svg>
     </button></h2><p>Um analisador no Milvus consiste exatamente num <strong>tokenizador</strong> e em <strong>zero ou mais</strong> filtros.</p>
 <ul>
-<li><p><strong>Tokenizador</strong>: O tokenizador divide o texto de entrada em unidades discretas chamadas tokens. Esses tokens podem ser palavras ou frases, dependendo do tipo de tokenizador.</p></li>
+<li><p><strong>Tokenizador</strong>: O tokenizador divide o texto de entrada em unidades discretas chamadas tokens. Estes tokens podem ser palavras ou frases, dependendo do tipo de tokenizador.</p></li>
 <li><p><strong>Filtros</strong>: Os filtros podem ser aplicados aos tokens para refiná-los ainda mais, por exemplo, tornando-os minúsculos ou removendo palavras comuns.</p></li>
 </ul>
 <p>O fluxo de trabalho abaixo mostra como um analisador processa o texto.</p>
@@ -101,7 +101,7 @@ summary: >-
 <p>O Milvus oferece os seguintes analisadores incorporados, cada um dos quais pode ser utilizado diretamente especificando o seu nome como parâmetro <code translate="no">type</code>.</p>
 <ul>
 <li><p><code translate="no">standard</code>: Adequado para processamento de texto de uso geral, aplicando tokenização padrão e filtragem de letras minúsculas.</p></li>
-<li><p><code translate="no">english</code>: Optimizado para texto em língua inglesa, com suporte para palavras de paragem em inglês.</p></li>
+<li><p><code translate="no">english</code>: Optimizado para texto em inglês, com suporte para stop words em inglês.</p></li>
 <li><p><code translate="no">chinese</code>: Especializado para o processamento de texto chinês, incluindo tokenização adaptada às estruturas da língua chinesa.</p></li>
 </ul>
 <h3 id="Custom-analyzer​" class="common-anchor-header">Analisador personalizado</h3><p>Para um processamento de texto mais avançado, os analisadores personalizados no Milvus permitem-lhe construir um pipeline de tratamento de texto personalizado, especificando tanto um <strong>tokenizador</strong> como filtros. Esta configuração é ideal para casos de utilização especializados em que é necessário um controlo preciso.</p>

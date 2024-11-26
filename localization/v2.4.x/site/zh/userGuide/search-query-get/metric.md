@@ -94,7 +94,7 @@ title: 公制类型
         ></path>
       </svg>
     </button></h2><p>从本质上讲，欧氏距离测量的是连接两点的线段的长度。</p>
-<p>欧氏距离公式如下。</p>
+<p>欧氏距离的计算公式如下。</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/euclidean_metric.png" alt="Euclidean distance formula" class="doc-image" id="euclidean-distance-formula" />

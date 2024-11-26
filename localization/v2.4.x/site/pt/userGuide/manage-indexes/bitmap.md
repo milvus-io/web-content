@@ -109,7 +109,7 @@ client.create_index(​
 <li><p>O tipo de dados do campo deve ser um dos seguintes.</p>
 <ul>
 <li><p><code translate="no">BOOL</code>, <code translate="no">INT8</code>, <code translate="no">INT16</code>, <code translate="no">INT32</code>, <code translate="no">INT64</code>, <code translate="no">VARCHAR</code></p></li>
-<li><p><code translate="no">ARRAY</code> (os elementos devem ser um dos seguintes: <code translate="no">BOOL</code>, <code translate="no">INT8</code>, <code translate="no">INT16</code>, <code translate="no">INT32</code>, <code translate="no">INT64</code>, <code translate="no">VARCHAR</code>)</p></li>
+<li><p><code translate="no">ARRAY</code> (os elementos têm de ser um dos seguintes: <code translate="no">BOOL</code>, <code translate="no">INT8</code>, <code translate="no">INT16</code>, <code translate="no">INT32</code>, <code translate="no">INT64</code>, <code translate="no">VARCHAR</code>)</p></li>
 </ul></li>
 <li><p>Os índices de bitmap não suportam os seguintes tipos de dados.</p>
 <ul>

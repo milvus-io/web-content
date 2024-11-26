@@ -47,7 +47,7 @@ summary: >-
 </th></tr></thead><tbody><tr><td data-block-token="FQ0rdk7NKoAmtUxD5n7cHWBfnKd" colspan="1" rowspan="1"><p data-block-token="J4YBdReSPol6jvxIPyxcs7lRnGQ"><code translate="no">BOOL</code></p>
 </td><td data-block-token="XfVYdowyvoY7iwxNCIBcRbE4nFf" colspan="1" rowspan="1"><p data-block-token="WYGTdKI4RoBTXbxR2YbcxC2InOb">Tipo booleano per memorizzare <code translate="no">true</code> o <code translate="no">false</code>, adatto per descrivere stati binari.</p>
 </td></tr><tr><td data-block-token="G6JBdjvguofEOnx6lmQcXkJdn6o" colspan="1" rowspan="1"><p data-block-token="PGcDd6i5Ao3jioxzrLkcV5lanUq"><code translate="no">INT8</code></p>
-</td><td data-block-token="TEVDdqVe0ooqTbxqkW7cdu8OnMe" colspan="1" rowspan="1"><p data-block-token="G5AOdYaoEom6X0x3NUKc9YL1nRh">Numero intero a 8 bit, adatto alla memorizzazione di dati interi di piccole dimensioni.</p>
+</td><td data-block-token="TEVDdqVe0ooqTbxqkW7cdu8OnMe" colspan="1" rowspan="1"><p data-block-token="G5AOdYaoEom6X0x3NUKc9YL1nRh">Numero intero a 8 bit, adatto per la memorizzazione di dati interi di piccole dimensioni.</p>
 </td></tr><tr><td data-block-token="Zc6cdGRmVoEOzdxaT8Pc4jdmnxg" colspan="1" rowspan="1"><p data-block-token="SaIUd6XDYoo2msxLCSXcNJk5nre"><code translate="no">INT16</code></p>
 </td><td data-block-token="EamldyccGovIeKxaLQ4cxmjMng2" colspan="1" rowspan="1"><p data-block-token="Lx9FdawAgoIlZXxGomRcaglPnyc">Intero a 16 bit, per dati interi a medio raggio.</p>
 </td></tr><tr><td data-block-token="SPeCdRoc4owdXXxWSDVcNXwVnVf" colspan="1" rowspan="1"><p data-block-token="AL4sd4HrJokAj2xwglOcxIAcnNc"><code translate="no">INT32</code></p>
@@ -249,7 +249,7 @@ indexes.add(IndexParam.builder()​
 
 <button class="copy-code-btn"></button></code></pre>
 <p>Oltre a <code translate="no">AUTOINDEX</code>, è possibile specificare altri tipi di indice per i campi numerici. Per i tipi di indice supportati, fare riferimento a <a href="/docs/it/scalar_index.md">Indici scalari</a>.</p>
-<p>Inoltre, prima di creare la collezione, è necessario creare un indice per il campo vettoriale. In questo esempio, si usa <code translate="no">AUTOINDEX</code> per semplificare le impostazioni dell'indice vettoriale.</p>
+<p>Inoltre, prima di creare la collezione, è necessario creare un indice per il campo vettoriale. In questo esempio, si utilizza <code translate="no">AUTOINDEX</code> per semplificare le impostazioni dell'indice vettoriale.</p>
 <div class="multipleCode">
  <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Add vector index​</span>
@@ -442,7 +442,7 @@ client.<span class="hljs-title function_">insert</span>({​
         ></path>
       </svg>
     </button></h2><p>Dopo aver aggiunto i campi numerici, è possibile utilizzarli per il filtraggio nelle operazioni di ricerca e di interrogazione per ottenere risultati di ricerca più precisi.</p>
-<h3 id="Filter-queries​" class="common-anchor-header">Filtro delle query</h3><p>Dopo aver aggiunto i campi numerici, è possibile utilizzarli per filtrare le query. Per esempio, si possono interrogare tutte le entità in cui <code translate="no">age</code> è compreso tra 30 e 40.</p>
+<h3 id="Filter-queries​" class="common-anchor-header">Filtro delle query</h3><p>Dopo aver aggiunto i campi numerici, è possibile utilizzarli per filtrare le query. Ad esempio, si possono interrogare tutte le entità in cui <code translate="no">age</code> è compreso tra 30 e 40.</p>
 <div class="multipleCode">
  <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&quot;30 &lt;= age &lt;= 40&quot;</span>​
