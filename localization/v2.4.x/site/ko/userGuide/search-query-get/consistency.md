@@ -41,7 +41,7 @@ title: 일관성
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/batch-data-and-streaming-data.png" alt="Batch data and streaming data" class="doc-image" id="batch-data-and-streaming-data" />
    </span> <span class="img-wrapper"> <span>배치 데이터와 스트리밍 데이터</span> </span></p>
 <p>위 그림에서 보듯이, 쿼리 노드는 검색 요청을 받은 후 스트리밍 데이터와 배치 데이터를 동시에 수신할 수 있습니다. 하지만 네트워크 지연 시간으로 인해 쿼리 노드가 얻은 스트리밍 데이터는 불완전할 수 있습니다.</p>
-<p>이 문제를 해결하기 위해 Milvus는 데이터 대기열의 각 레코드에 타임스탬프를 찍고 데이터 대기열에 동기화 타임스탬프를 지속적으로 삽입합니다. 동기화 타임스탬프(syncT)가 수신될 때마다 쿼리 노드는 이를 서비스 시간으로 설정하며, 이는 쿼리 노드가 해당 서비스 시간 이전의 모든 데이터를 볼 수 있다는 것을 의미합니다. 밀버스는 서비스 타임을 기반으로 일관성과 가용성에 대한 다양한 사용자 요구 사항을 충족하기 위해 보증 타임스탬프(GuaranteeT)를 제공할 수 있습니다. 사용자는 검색 요청에 GuaranteeT를 지정하여 검색 범위에 특정 시점 이전의 데이터를 포함해야 할 필요성을 쿼리 노드에 알릴 수 있습니다.</p>
+<p>이 문제를 해결하기 위해 Milvus는 데이터 대기열의 각 레코드에 타임스탬프를 찍고 데이터 대기열에 동기화 타임스탬프를 지속적으로 삽입합니다. 동기화 타임스탬프(syncT)가 수신될 때마다 쿼리 노드는 이를 서비스 시간으로 설정하여 쿼리 노드가 해당 서비스 시간 이전의 모든 데이터를 볼 수 있도록 합니다. 밀버스는 서비스 타임을 기반으로 일관성과 가용성에 대한 다양한 사용자 요구 사항을 충족하기 위해 보증 타임스탬프(GuaranteeT)를 제공할 수 있습니다. 사용자는 검색 요청에 GuaranteeT를 지정하여 검색 범위에 특정 시점 이전의 데이터를 포함해야 할 필요성을 쿼리 노드에 알릴 수 있습니다.</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/service-time-and-guarantee-time.png" alt="ServiceTime and GuaranteeTs" class="doc-image" id="servicetime-and-guaranteets" />
@@ -208,4 +208,4 @@ curl --request POST \​
  <span class="hljs-type">QueryResp</span> <span class="hljs-variable">getResp</span> <span class="hljs-operator">=</span> client.query(queryReq);​
 
 <button class="copy-code-btn"></button></code></pre>
-<p>이 매개 변수는 쿼리 반복기에서도 사용할 수 있습니다. <code translate="no">consistency_level</code> 매개변수에 사용할 수 있는 값은 <code translate="no">Strong</code>, <code translate="no">Bounded</code>, <code translate="no">Eventually</code>, <code translate="no">Session</code> 입니다.</p>
+<p>이 매개변수는 쿼리 반복기에서도 사용할 수 있습니다. <code translate="no">consistency_level</code> 매개변수에 사용할 수 있는 값은 <code translate="no">Strong</code>, <code translate="no">Bounded</code>, <code translate="no">Eventually</code>, <code translate="no">Session</code> 입니다.</p>

@@ -46,14 +46,14 @@ title: 範囲検索
 <li><p>クエリベクトルとの<strong>距離</strong>または<strong>スコアが</strong> <strong>radius</strong>および<strong>range_filter</strong>パラメータで指定された範囲内にある埋め込みベクトルをフィルタリングする。</p></li>
 <li><p>フィルタリングされたエンティティから<strong>上位K個の</strong>エンティティを返す。</p></li>
 </ul>
-<p>radiusと<strong>range_filterの</strong>設定方法は、検索のメトリックタイプによって異なる。次の表に、メトリックの種類別にこれら2つのパラメータの設定条件を示す。</p>
+<p>radiusと<strong>range_filterの</strong>設定方法は、検索のメトリックタイプによって異なる。次の表は、メトリック・タイプの違いによるこれら2つのパラメータの設定条件を示している。</p>
 <table data-block-token="QZ8mdLSnAotxZKxSzvpcQkNNnhe"><thead><tr><th data-block-token="SpBZdGprzoEoaixW6EfcaIFqnDh" colspan="1" rowspan="1"><p data-block-token="FwxDd8logofNV2xVMdycwXUvnMg">メトリックタイプ</p>
 </th><th data-block-token="NwWNdOvpHoOQF0xDvuHcFcHQnte" colspan="1" rowspan="1"><p data-block-token="MiqddcN2voEZUSxe8hCcW3g0nXc">表記</p>
 </th><th data-block-token="D1eedZmCjow2Whx7vIicOx4Enrc" colspan="1" rowspan="1"><p data-block-token="K7bldgyVFo2DmDxNamFcNddNnNb">radiusとrange_filterの設定条件</p>
 </th></tr></thead><tbody><tr><td data-block-token="C3xxdZ0uHon6bWxACXkcOM0bnrf" colspan="1" rowspan="1"><p data-block-token="EoJSd1jo1oqt0pxhKElcLptwnJe"><code translate="no">L2</code></p>
 </td><td data-block-token="AcRkdW156oOcQixJbXZchC8WnEd" colspan="1" rowspan="1"><p data-block-token="ATGrduoF1ownRSxJngycJ3NYnAe">L2距離が小さいほど類似度が高いことを示す。</p>
 </td><td data-block-token="Ja1hdVXtholWNfxCGKAcXzQ9nCc" colspan="1" rowspan="1"><p data-block-token="FqvMdDe6DocjQXxKHdvcp0hTnmb">最も類似したベクトル埋め込みを無視するには</p>
-<p data-block-token="Ctzxdq1bjoIqKOx5WOScosN3nUf"><code translate="no">range_filter</code> &lt;= distance &lt;<code translate="no">radius</code></p>
+<p data-block-token="Ctzxdq1bjoIqKOx5WOScosN3nUf"><code translate="no">range_filter</code> &lt;= 距離 &lt;<code translate="no">radius</code></p>
 </td></tr><tr><td data-block-token="UIkGdxueEo9hNox7TMFcUTTUn6d" colspan="1" rowspan="1"><p data-block-token="IpGVd1lBrojv3uxxcv1c5ZcZnBh"><code translate="no">IP</code></p>
 </td><td data-block-token="VcGrdY9X5o2I8Zxv1EYcgSiwngc" colspan="1" rowspan="1"><p data-block-token="WQs5dm4BrotLVhxSRpecH6wInUc">IP距離が大きいほど，類似度が高いことを示す．</p>
 </td><td data-block-token="DETWdE7fWo21TzxH2FxcRoQZnwd" colspan="1" rowspan="1"><p data-block-token="Wy8jdWzhsoZUJhx98jLcNIKjnSb">最も類似したベクトル埋め込みを無視するには</p>

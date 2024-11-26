@@ -5,7 +5,7 @@ related_key: 'nullable, default'
 summary: >-
   O Milvus permite-lhe definir o atributo `nullable` e os valores por defeito
   para os campos escalares, exceto o campo primário. Para os campos marcados
-  como nullable=True, pode ignorar o campo quando insere dados, ou defini-lo
+  como nullable=True, pode ignorar o campo ao inserir dados, ou defini-lo
   diretamente como um valor nulo, e o sistema tratá-lo-á como nulo sem causar um
   erro.
 ---

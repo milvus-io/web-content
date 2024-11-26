@@ -233,7 +233,7 @@ curl --request POST \​
 <span class="hljs-comment"># {&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:[]}​</span>
 
 <button class="copy-code-btn"></button></code></pre>
-<p>A condição de filtragem contida no pedido de pesquisa lê <code translate="no">color like &quot;red%&quot; and likes &gt; 50</code>. Ela usa o operador and para incluir duas condições: a primeira pede entidades que tenham um valor começando com <code translate="no">red</code> no campo <code translate="no">color</code>, e a outra pede entidades com um valor maior que <code translate="no">50</code> no campo <code translate="no">likes</code>. Existem apenas duas entidades que cumprem estes requisitos. Com o top-K definido para <code translate="no">3</code>, o Zilliz Cloud calcula a distância entre estas duas entidades e o vetor de consulta e devolve-as como resultados da pesquisa.</p>
+<p>A condição de filtragem contida no pedido de pesquisa é <code translate="no">color like &quot;red%&quot; and likes &gt; 50</code>. Ela usa o operador and para incluir duas condições: a primeira pede entidades que tenham um valor começando com <code translate="no">red</code> no campo <code translate="no">color</code>, e a outra pede entidades com um valor maior que <code translate="no">50</code> no campo <code translate="no">likes</code>. Existem apenas duas entidades que cumprem estes requisitos. Com o top-K definido para <code translate="no">3</code>, o Zilliz Cloud calcula a distância entre estas duas entidades e o vetor de consulta e devolve-as como resultados da pesquisa.</p>
 <pre><code translate="no" class="language-JSON">[​
     {​
         <span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">4</span>, ​
@@ -256,4 +256,4 @@ curl --request POST \​
 ]​
 
 <button class="copy-code-btn"></button></code></pre>
-<p>Para mais informações sobre os operadores que podem ser utilizados na filtragem de metadados, consulte <a href="/docs/pt/boolean.md">Filtragem de metadados</a>.</p>
+<p>Para obter mais informações sobre os operadores que podem ser utilizados na filtragem de metadados, consulte <a href="/docs/pt/boolean.md">Filtragem de metadados</a>.</p>

@@ -3,8 +3,8 @@ id: stemmer-filter.md
 title: Filtro a stelo
 summary: >-
   Il filtro `stemmer` riduce le parole alla loro forma di base o radice (nota
-  come stemming), facilitando l'abbinamento di parole con significati simili in
-  diverse inflessioni.
+  come stemming), facilitando la corrispondenza tra parole con significati
+  simili e inflessioni diverse.
 ---
 <h1 id="Stemmer​" class="common-anchor-header">Stemmer<button data-href="#Stemmer​" class="anchor-icon" translate="no">
       <svg translate="no"

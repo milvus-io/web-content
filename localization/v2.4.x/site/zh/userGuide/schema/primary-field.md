@@ -35,7 +35,7 @@ summary: 主字段唯一标识一个实体。本页介绍如何添加两种不�
         ></path>
       </svg>
     </button></h2><p>在 Collections 中，每个实体的主键都应该是全局唯一的。添加主字段时，需要显式地将其数据类型设置为<strong>VARCHAR</strong>或<strong>INT64</strong>。将其数据类型设置为<strong>INT64</strong>表示主键应为整数，类似于<code translate="no">12345</code> ；将其数据类型设置为<strong>VARCHAR</strong>表示主键应为字符串，类似于<code translate="no">my_entity_1234</code> 。</p>
-<p>你也可以启用<strong>AutoID</strong>，让 Milvus 自动为进入的实体分配主键。一旦在 Collections 中启用了<strong>AutoID</strong>，插入实体时就不要包含主键了。</p>
+<p>你也可以启用<strong>AutoID</strong>，让 Milvus 自动为进入的实体分配主键。在集合中启用<strong>AutoID</strong>后，插入实体时不要包含主键。</p>
 <p>Collections 中的主字段没有默认值，也不能为空。</p>
 <h2 id="Use-Int64-Primary-Keys​" class="common-anchor-header">使用 Int64 主键<button data-href="#Use-Int64-Primary-Keys​" class="anchor-icon" translate="no">
       <svg translate="no"

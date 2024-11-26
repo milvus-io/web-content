@@ -2,7 +2,7 @@
 id: schema.md
 title: スキーマの説明
 summary: >-
-  スキーマはコレクションのデータ構造を定義する。コレクションを作成する前に、スキーマの設計を行う必要があります。このページは、コレクションのスキーマを理解し、自分でスキーマの例を設計するのに役立ちます。
+  スキーマはコレクションのデータ構造を定義する。コレクションを作成する前に、スキーマの設計を行う必要があります。このページでは、コレクションのスキーマを理解し、自分でスキーマの例を設計するのに役立ちます。
 ---
 <h1 id="Schema-Explained​" class="common-anchor-header">スキーマの説明<button data-href="#Schema-Explained​" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -148,7 +148,7 @@ schema.<span class="hljs-title function_">addField</span>(<span class="hljs-titl
 
 <button class="copy-code-btn"></button></code></pre>
 <p>フィールドを追加するとき、その<code translate="no">is_primary</code> プロパティを<code translate="no">True</code> に設定することで、フィールドを明示的にプライマリ・フィールドとして明確にすることができる。プライマリ・フィールドはデフォルトで<strong>Int64</strong>値を受け入れる。この場合、プライマリ・フィールドの値は<code translate="no">12345</code> と同様の整数でなければなりません。プライマリ・フィールドに<strong>VarChar</strong>値を使用する場合は、<code translate="no">my_entity_1234</code> と同様の文字列でなければなりません。</p>
-<p>また、<code translate="no">autoId</code> プロパティを<code translate="no">True</code> に設定すると、データ挿入時に Zilliz Cloud が自動的にプライマリフィールドの値を割り当てるようになります。</p>
+<p>また、<code translate="no">autoId</code> プロパティを<code translate="no">True</code> に設定すると、データ挿入時に Zilliz Cloud が自動的にプライマリフィールド値を割り当てるようになります。</p>
 <p>詳しくは、<a href="/docs/ja/primary-field.md">プライマリフィールドとAutoIDを</a>参照してください。</p>
 <h2 id="Add-Vector-Fields​" class="common-anchor-header">ベクターフィールドの追加<button data-href="#Add-Vector-Fields​" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -218,7 +218,7 @@ schema.<span class="hljs-title function_">addField</span>(<span class="hljs-titl
 <li><p><code translate="no">BINARY_VECTOR</code></p>
 <p>このタイプのベクトル・フィールドは、0と1のリストを保持する。画像処理や情報検索シナリオでデータを表現するためのコンパクトな特徴として機能する。</p></li>
 <li><p><code translate="no">SPARSE_FLOAT_VECTOR</code></p>
-<p>この型のベクトル・フィールドは、非ゼロ数のリストとそのシーケンス番号を保持し、スパースなベクトル埋め込みを表現する。</p></li>
+<p>このタイプのベクトル・フィールドは、非ゼロ数のリストとそのシーケンス番号を保持し、スパースなベクトル埋め込みを表現する。</p></li>
 </ul>
 <h2 id="Add-Scalar-Fields​" class="common-anchor-header">スカラーフィールドの追加<button data-href="#Add-Scalar-Fields​" class="anchor-icon" translate="no">
       <svg translate="no"

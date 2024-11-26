@@ -35,13 +35,13 @@ title: 一致性
         ></path>
       </svg>
     </button></h2><p>Milvus 是一个将存储和计算分离开来的系统。在该系统中，<strong>数据节点</strong>负责数据的持久性，并最终将其存储到 MinIO/S3 等分布式对象存储中。<strong>查询节点</strong>负责处理搜索等计算任务。这些任务涉及<strong>批量数据</strong>和<strong>流数据的</strong>处理。简单地说，批量数据可以理解为已经存储在对象存储中的数据，而流式数据指的是尚未存储在对象存储中的数据。由于网络延迟，查询节点通常无法保存最新的流数据。如果没有额外的保障措施，直接在流数据上执行搜索可能会导致丢失许多未提交的数据点，从而影响搜索结果的准确性。</p>
-<p>Milvus 商业版是一个将存储和计算分离的系统。在这个系统中，数据节点负责数据的持久化，并最终将数据存储在 MinIO/S3 等分布式对象存储中。查询节点负责处理搜索等计算任务。这些任务涉及批量数据和流数据的处理。简单地说，批量数据可以理解为已经存储在对象存储中的数据，而流式数据指的是尚未存储在对象存储中的数据。由于网络延迟，查询节点通常无法保存最新的流数据。如果没有额外的保障措施，直接在流数据上执行搜索可能会导致丢失许多未提交的数据点，从而影响搜索结果的准确性。</p>
+<p>Milvus 商业版是一个将存储和计算分离的系统。在这个系统中，数据节点负责数据的持久化，并最终将数据存储在 MinIO/S3 等分布式对象存储中。查询节点负责处理搜索等计算任务。这些任务涉及批量数据和流数据的处理。简单地说，批量数据可以理解为已经存储在对象存储中的数据，而流式数据指的是尚未存储在对象存储中的数据。由于网络延迟，查询节点通常无法保存最新的流数据。如果没有额外的保障措施，直接对流数据执行搜索可能会导致丢失许多未提交的数据点，从而影响搜索结果的准确性。</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/batch-data-and-streaming-data.png" alt="Batch data and streaming data" class="doc-image" id="batch-data-and-streaming-data" />
    </span> <span class="img-wrapper"> <span>批数据和流数据</span> </span></p>
 <p>如上图所示，在收到搜索请求后，查询节点可以同时接收流数据和批量数据。但是，由于网络延迟，查询节点获得的流数据可能不完整。</p>
-<p>为了解决这个问题，Milvus 对数据队列中的每条记录都打上时间戳，并不断向数据队列中插入同步时间戳。每当收到同步时间戳（syncTs），QueryNodes 就会将其设置为服务时间，这意味着 QueryNodes 可以查看该服务时间之前的所有数据。基于 ServiceTime，Milvus 可以提供保证时间戳（GuaranteeTs），以满足用户对一致性和可用性的不同要求。用户可以通过在搜索请求中指定 GuaranteeTs，通知查询节点需要在搜索范围中包含指定时间点之前的数据。</p>
+<p>为了解决这个问题，Milvus 对数据队列中的每条记录都打上时间戳，并不断向数据队列中插入同步时间戳。每当收到同步时间戳（syncTs），QueryNodes 就会将其设置为服务时间，这意味着 QueryNodes 可以查看该服务时间之前的所有数据。基于 ServiceTime，Milvus 可以提供保证时间戳（GuaranteeTs），以满足用户对一致性和可用性的不同要求。用户可以通过在搜索请求中指定 GuaranteeTs，告知查询节点需要在搜索范围中包含指定时间点之前的数据。</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/service-time-and-guarantee-time.png" alt="ServiceTime and GuaranteeTs" class="doc-image" id="servicetime-and-guaranteets" />
@@ -143,7 +143,7 @@ curl --request POST \​
 
 <button class="copy-code-btn"></button></code></pre>
 <p><code translate="no">consistency_level</code> 参数的可能值是<code translate="no">Strong</code> 、<code translate="no">Bounded</code> 、<code translate="no">Eventually</code> 和<code translate="no">Session</code> 。</p>
-<h3 id="Set-Consistency-Level-in-Search​set-consistency-level-in-search​" class="common-anchor-header">设置搜索中的一致性级别{#set-consistency-level-in-search}（设置搜索中的一致性级别</h3><p>您可以随时更改特定搜索的一致性级别。下面的代码示例将一致性级别设置为 "有界"。该更改仅适用于当前搜索请求。</p>
+<h3 id="Set-Consistency-Level-in-Search​set-consistency-level-in-search​" class="common-anchor-header">在搜索中设置一致性级别{#set-consistency-level-in-search}。</h3><p>您可以随时更改特定搜索的一致性级别。下面的代码示例将一致性级别设置为 "有界"。该更改仅适用于当前搜索请求。</p>
 <div class="multipleCode">
    <a href="#python">python</a> <a href="#java">java</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">res = client.search(​

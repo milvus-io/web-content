@@ -384,7 +384,7 @@ schema.<span class="hljs-title function_">addField</span>(<span class="hljs-titl
 }&quot;</span>​
 
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Add-JSON-fields​" class="common-anchor-header">Add JSON fields​</h3><p>A JSON field usually stores half-structured JSON data. For more on the JSON fields, refer to <a href="/docs/use-json-field.md">​JSON Field</a>.​</p>
+<h3 id="Add-JSON-fields​" class="common-anchor-header">Add JSON fields​</h3><p>A JSON field usually stores half-structured JSON data. For more on the JSON fields, refer to <a href="/docs/use-json-fields.md">​JSON Field</a>.​</p>
 <div class="multipleCode">
   <a href="#python">Python </a>
   <a href="#java">Java</a>
@@ -427,7 +427,7 @@ schema.<span class="hljs-title function_">addField</span>(<span class="hljs-titl
 }&quot;</span>​
 
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Add-Array-Fields​" class="common-anchor-header">Add Array Fields​</h3><p>An array field stores a list of elements. The data types of all elements in an array field should be the same. For more on the array fields, refer to <a href="/docs/array_data_field.md">​Array Field</a>.​</p>
+<h3 id="Add-Array-Fields​" class="common-anchor-header">Add Array Fields​</h3><p>An array field stores a list of elements. The data types of all elements in an array field should be the same. For more on the array fields, refer to <a href="/docs/array_data_type.md">​Array Field</a>.​</p>
 <div class="multipleCode">
   <a href="#python">Python </a>
   <a href="#java">Java</a>

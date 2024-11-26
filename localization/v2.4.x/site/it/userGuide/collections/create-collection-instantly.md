@@ -1,6 +1,6 @@
 ---
 id: create-collection-instantly.md
-title: Creare istantaneamente una collezione
+title: Creare una collezione istantanea
 ---
 <h1 id="Create-Collection-Instantly​" class="common-anchor-header">Creare immediatamente una collezione<button data-href="#Create-Collection-Instantly​" class="anchor-icon" translate="no">
       <svg translate="no"

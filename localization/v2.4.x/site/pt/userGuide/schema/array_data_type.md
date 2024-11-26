@@ -32,7 +32,7 @@ summary: >-
 }​
 
 <button class="copy-code-btn"></button></code></pre>
-<p>Neste exemplo, <code translate="no">tags</code> e <code translate="no">ratings</code> são ambos campos de matriz. O campo <code translate="no">tags</code> é uma matriz de cadeias de caracteres que representa géneros de música como pop, rock e clássico, enquanto o campo <code translate="no">ratings</code> é uma matriz de números inteiros que representa as classificações dos utilizadores para a música, variando de 1 a 5. Estes campos de matriz fornecem uma forma flexível de armazenar dados com vários valores, facilitando a realização de análises detalhadas durante as consultas e a filtragem.</p>
+<p>Neste exemplo, <code translate="no">tags</code> e <code translate="no">ratings</code> são ambos campos de matriz. O campo <code translate="no">tags</code> é uma matriz de cadeias de caracteres que representa géneros de música como pop, rock e clássico, enquanto o campo <code translate="no">ratings</code> é uma matriz de números inteiros que representa as classificações dos utilizadores para a música, variando de 1 a 5. Estes campos de matriz proporcionam uma forma flexível de armazenar dados com vários valores, facilitando a realização de análises detalhadas durante as consultas e a filtragem.</p>
 <h2 id="Add-Array-field​" class="common-anchor-header">Adicionar um campo Array<button data-href="#Add-Array-field​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -255,7 +255,7 @@ indexes.add(IndexParam.builder()​
     ]&#x27;</span>​
 
 <button class="copy-code-btn"></button></code></pre>
-<p>Para além de <code translate="no">AUTOINDEX</code>, pode especificar outros tipos de índices escalares como <code translate="no">INVERTED</code> ou <code translate="no">BITMAP</code>. Para tipos de índice suportados, consulte <a href="/docs/pt/index-scalar-fields.md">Índices escalares</a>.</p>
+<p>Para além de <code translate="no">AUTOINDEX</code>, pode especificar outros tipos de índices escalares como <code translate="no">INVERTED</code> ou <code translate="no">BITMAP</code>. Para saber os tipos de índice suportados, consulte <a href="/docs/pt/index-scalar-fields.md">Índices escalares</a>.</p>
 <p>Além disso, você deve criar um índice para o campo de vetor antes de criar a coleção. Neste exemplo, usamos <code translate="no">AUTOINDEX</code> para simplificar a configuração do índice de vetor.</p>
 <div class="multipleCode">
  <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#go">Go</a> <a href="#curl">cURL</a></div>
@@ -627,5 +627,5 @@ System.out.println(resp.getSearchResults());​
     </button></h2><ul>
 <li><p><strong>Tipo de dados</strong>: Todos os elementos de um campo Array devem ter o mesmo tipo de dados, conforme especificado pelo <code translate="no">element_type</code>.</p></li>
 <li><p><strong>Capacidade da matriz</strong>: O número de elementos num campo Matriz tem de ser inferior ou igual à capacidade máxima definida quando a Matriz foi criada, conforme especificado em <code translate="no">max_capacity</code>.</p></li>
-<li><p><strong>Tratamento de cadeias de caracteres</strong>: Os valores de cadeia de caracteres em campos de matriz são armazenados como estão, sem escape semântico ou conversão. Por exemplo, <code translate="no">'a&quot;b'</code>, <code translate="no">&quot;a'b&quot;</code>, <code translate="no">'a\'b'</code>, e <code translate="no">&quot;a\&quot;b&quot;</code> são armazenados como introduzidos, enquanto <code translate="no">'a'b'</code> e <code translate="no">&quot;a&quot;b&quot;</code> são considerados valores inválidos.</p></li>
+<li><p><strong>Tratamento de cadeias de caracteres</strong>: Os valores de cadeia de caracteres em campos de matriz são armazenados como estão, sem escape semântico ou conversão. Por exemplo, <code translate="no">'a&quot;b'</code>, <code translate="no">&quot;a'b&quot;</code>, <code translate="no">'a\'b'</code> e <code translate="no">&quot;a\&quot;b&quot;</code> são armazenados como introduzidos, enquanto <code translate="no">'a'b'</code> e <code translate="no">&quot;a&quot;b&quot;</code> são considerados valores inválidos.</p></li>
 </ul>

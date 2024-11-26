@@ -45,7 +45,7 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>Les vecteurs binaires sont une méthode de codage d'objets complexes (tels que des images, du texte ou de l'audio) en valeurs binaires de longueur fixe. Dans Milvus, les vecteurs binaires sont généralement représentés sous forme de tableaux de bits ou de tableaux d'octets. Par exemple, un vecteur binaire à 8 dimensions peut être représenté sous la forme <code translate="no">[1, 0, 1, 1, 0, 0, 1, 0]</code>.</p>
-<p>Le diagramme ci-dessous montre comment les vecteurs binaires représentent la présence de mots-clés dans le contenu d'un texte. Dans cet exemple, un vecteur binaire à 10 dimensions est utilisé pour représenter deux textes différents<strong>(Texte 1</strong> et <strong>Texte 2</strong>), où chaque dimension correspond à un mot du vocabulaire : 1 indique la présence du mot dans le texte, tandis que 0 indique son absence.</p>
+<p>Le diagramme ci-dessous montre comment les vecteurs binaires représentent la présence de mots clés dans le contenu d'un texte. Dans cet exemple, un vecteur binaire à 10 dimensions est utilisé pour représenter deux textes différents<strong>(Texte 1</strong> et <strong>Texte 2</strong>), où chaque dimension correspond à un mot du vocabulaire : 1 indique la présence du mot dans le texte, tandis que 0 indique son absence.</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/binary-vector.png" alt="Binary vector representation of text content" class="doc-image" id="binary-vector-representation-of-text-content" />

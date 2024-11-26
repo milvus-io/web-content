@@ -2,8 +2,8 @@
 id: string.md
 title: String-Feld
 summary: >-
-  In Milvus ist VARCHAR der Datentyp, der für die Speicherung von Daten vom Typ
-  String verwendet wird und für die Speicherung von Strings mit variabler Länge
+  In Milvus ist VARCHAR der Datentyp, der für die Speicherung von stringartigen
+  Daten verwendet wird und für die Speicherung von Strings mit variabler Länge
   geeignet ist. Er kann Zeichenketten mit Einzel- und Multi-Byte-Zeichen
   speichern, mit einer maximalen Länge von bis zu 60.535 Zeichen. Wenn Sie ein
   VARCHAR-Feld definieren, müssen Sie auch den Parameter max_length für die

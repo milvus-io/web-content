@@ -33,7 +33,7 @@ summary: >-
 <li><p><a href="/docs/fr/stop-filter.md"><code translate="no">stop_words</code></a>: Supprime les mots d'arrêt courants en anglais pour se concentrer sur les termes clés du texte.</p></li>
 </ul></li>
 </ul>
-<p>La fonctionnalité de l'analyseur <code translate="no">english</code> est équivalente à la configuration de l'analyseur personnalisé suivant.</p>
+<p>La fonctionnalité de l'analyseur <code translate="no">english</code> est équivalente à la configuration suivante de l'analyseur personnalisé.</p>
 <pre><code translate="no" class="language-python">analyzer_params = {​
     <span class="hljs-string">&quot;tokenizer&quot;</span>: <span class="hljs-string">&quot;standard&quot;</span>,​
     <span class="hljs-string">&quot;filter&quot;</span>: [​

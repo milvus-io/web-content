@@ -64,7 +64,7 @@ title: 키워드 검색
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>키워드 검색은 기본적으로 Milvus의 문자열 데이터 유형인 <code translate="no">VARCHAR</code> 필드 유형에서 작동합니다. 키워드 검색을 활성화하려면 <code translate="no">enable_analyzer</code> 및 <code translate="no">enable_match</code> 을 <code translate="no">True</code> 으로 설정한 다음 수집 스키마를 정의할 때 텍스트 분석을 위한 분석기를 선택적으로 구성하세요.</p>
+    </button></h2><p>키워드 검색은 기본적으로 Milvus의 문자열 데이터 유형인 <code translate="no">VARCHAR</code> 필드 유형에서 작동합니다. 키워드 검색을 활성화하려면 <code translate="no">enable_analyzer</code> 및 <code translate="no">enable_match</code> 을 모두 <code translate="no">True</code> 로 설정한 다음 수집 스키마를 정의할 때 텍스트 분석을 위한 분석기를 선택적으로 구성하세요.</p>
 <h3 id="Set-enableanalyzer-and-enablematch​" class="common-anchor-header"><code translate="no">enable_analyzer</code> 및 <code translate="no">enable_match</code>설정</h3><p>특정 <code translate="no">VARCHAR</code> 필드에 대해 키워드 검색을 사용하려면 필드 스키마를 정의할 때 <code translate="no">enable_analyzer</code> 및 <code translate="no">enable_match</code> 매개 변수를 모두 <code translate="no">True</code> 으로 설정합니다. 이렇게 하면 Milvus가 텍스트를 토큰화하고 지정된 필드에 대한 반전 인덱스를 생성하도록 지시하여 빠르고 효율적인 키워드 매칭을 가능하게 합니다.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType​
 ​
@@ -129,7 +129,7 @@ schema.add_field(​
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&quot;TEXT_MATCH(text, &#x27;machine&#x27;) and TEXT_MATCH(text, &#x27;deep&#x27;)&quot;</span>​
 
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Search-with-keyword-match​" class="common-anchor-header">키워드 일치로 검색</h3><p>키워드 일치를 벡터 유사도 검색과 함께 사용하면 검색 범위를 좁히고 검색 성능을 향상시킬 수 있습니다. 벡터 유사도 검색 전에 키워드 일치를 사용하여 컬렉션을 필터링하면 검색해야 하는 문서 수를 줄여 쿼리 시간을 단축할 수 있습니다.</p>
+<h3 id="Search-with-keyword-match​" class="common-anchor-header">키워드 검색으로 검색</h3><p>키워드 일치를 벡터 유사도 검색과 함께 사용하면 검색 범위를 좁히고 검색 성능을 향상시킬 수 있습니다. 벡터 유사도 검색 전에 키워드 일치를 사용하여 컬렉션을 필터링하면 검색해야 하는 문서 수를 줄여 쿼리 시간을 단축할 수 있습니다.</p>
 <p>이 예에서 <code translate="no">filter</code> 표현식은 지정된 키워드 <code translate="no">keyword1</code> 또는 <code translate="no">keyword2</code> 와 일치하는 문서만 포함하도록 검색 결과를 필터링합니다. 그런 다음 이 필터링된 문서 하위 집합에 대해 벡터 유사도 검색이 수행됩니다.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Match entities with `keyword1` or `keyword2`​</span>
 <span class="hljs-built_in">filter</span> = <span class="hljs-string">&quot;TEXT_MATCH(text, &#x27;keyword1 keyword2&#x27;)&quot;</span>​

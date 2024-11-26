@@ -21,7 +21,7 @@ summary: >-
       </svg>
     </button></h1><p>密集向量是广泛应用于机器学习和数据分析的数值数据表示法。它们由包含实数的数组组成，其中大部分或所有元素都不为零。与稀疏向量相比，密集向量在同一维度上包含更多信息，因为每个维度都持有有意义的值。这种表示方法能有效捕捉复杂的模式和关系，使数据在高维空间中更容易分析和处理。密集向量通常有固定的维数，从几十到几百甚至上千不等，具体取决于具体的应用和要求。</p>
 <p>密集向量主要用于需要理解数据语义的场景，如语义搜索和推荐系统。在语义搜索中，密集向量有助于捕捉查询和文档之间的潜在联系，提高搜索结果的相关性。在推荐系统中，密集矢量有助于识别用户和项目之间的相似性，从而提供更加个性化的建议。</p>
-<h2 id="Overview​" class="common-anchor-header">相关概述<button data-href="#Overview​" class="anchor-icon" translate="no">
+<h2 id="Overview​" class="common-anchor-header">概述<button data-href="#Overview​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -41,7 +41,7 @@ summary: >-
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/dense-vector.png" alt="Dense vectors in 2D space" class="doc-image" id="dense-vectors-in-2d-space" />
    </span> <span class="img-wrapper"> <span>二维空间中的密集向量</span> </span></p>
-<p>上图展示了二维空间中密集向量的表示方法。虽然实际应用中的稠密向量通常具有更高的维度，但这幅二维图解还是有效地传达了几个关键概念。</p>
+<p>上图展示了二维空间中密集向量的表示方法。虽然实际应用中的稠密向量通常具有更高的维度，但这种二维插图有效地传达了几个关键概念。</p>
 <ul>
 <li><p><strong>多维表示：</strong>每个点代表一个概念对象（如<strong>Milvus</strong>、<strong>向量数据库</strong>、<strong>检索系统</strong>等），其位置由其维度值决定。</p></li>
 <li><p><strong>语义关系：</strong>点之间的距离反映了概念之间的语义相似性。距离较近的点表示语义关联度较高的概念。</p></li>
@@ -69,7 +69,7 @@ summary: >-
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/use-dense-vector.png" alt="Use dense vecctors in Milvus" class="doc-image" id="use-dense-vecctors-in-milvus" />
    </span> <span class="img-wrapper"> <span>在 Milvus 中使用密集向量</span> </span></p>
 <div class="alert note">
-<p>除了密集向量，Milvus 还支持稀疏向量和二进制向量。稀疏向量适用于基于特定术语的精确匹配，如关键词搜索和术语匹配，而二进制向量常用于有效处理二进制化数据，如图像模式匹配和某些散列应用。更多信息，请参阅<a href="/docs/zh/binary-vector.md">二进制向量</a>和<a href="/docs/zh/sparse_vector.md">稀疏向量</a>。</p>
+<p>除了密集向量，Milvus 还支持稀疏向量和二进制向量。稀疏向量适用于基于特定术语的精确匹配，如关键词搜索和术语匹配，而二进制向量通常用于有效处理二进制化数据，如图像模式匹配和某些散列应用。更多信息，请参阅<a href="/docs/zh/binary-vector.md">二进制向量</a>和<a href="/docs/zh/sparse_vector.md">稀疏向量</a>。</p>
 </div>
 <h2 id="Use-dense-vectors-in-Milvus​" class="common-anchor-header">在 Milvus 中使用密集向量<button data-href="#Use-dense-vectors-in-Milvus​" class="anchor-icon" translate="no">
       <svg translate="no"

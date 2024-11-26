@@ -18,7 +18,7 @@ title: Stockage de données avec mappage en mémoire
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Dans Milvus, les fichiers mappés en mémoire permettent de mapper directement le contenu des fichiers dans la mémoire. Cette fonction améliore l'efficacité de la mémoire, en particulier dans les situations où la mémoire disponible est rare mais où le chargement complet des données est impossible. Ce mécanisme d'optimisation peut augmenter la capacité des données tout en garantissant les performances jusqu'à une certaine limite ; toutefois, lorsque la quantité de données dépasse trop la mémoire, les performances de recherche et d'interrogation risquent de se dégrader sérieusement.</p>
+    </button></h1><p>Dans Milvus, les fichiers mappés en mémoire permettent de mapper directement le contenu des fichiers dans la mémoire. Cette fonction améliore l'efficacité de la mémoire, en particulier dans les situations où la mémoire disponible est rare mais où le chargement complet des données est impossible. Ce mécanisme d'optimisation peut augmenter la capacité des données tout en garantissant les performances jusqu'à une certaine limite ; toutefois, lorsque la quantité de données dépasse trop la mémoire, les performances de recherche et d'interrogation peuvent subir une grave dégradation, c'est pourquoi il convient d'activer ou de désactiver cette fonction selon le cas.</p>
 <h2 id="Configure-memory-mapping" class="common-anchor-header">Configurer le mappage de la mémoire<button data-href="#Configure-memory-mapping" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -50,7 +50,7 @@ queryNode:
 <p>Après <code translate="no">2.4.10</code>, la configuration <code translate="no">queryNode.mmap.mmapEnabled</code> se divise en quatre champs distincts, et toutes les valeurs par défaut sont <code translate="no">false</code>:</p>
 <ul>
 <li><code translate="no">queryNode.mmap.vectorField</code>, contrôle si les données vectorielles sont mmap ;</li>
-<li><code translate="no">queryNode.mmap.vectorIndex</code>, contrôle si l'index du vecteur est mmap ;</li>
+<li><code translate="no">queryNode.mmap.vectorIndex</code>contrôle si l'index du vecteur est mmap ; , contrôle si les données scalaires sont mmap ; , contrôle si les données scalaires sont mmap ;</li>
 <li><code translate="no">queryNode.mmap.scalarField</code>, contrôle si les données scalaires sont mmap ;</li>
 <li><code translate="no">queryNode.mmap.scalarIndex</code>, contrôle si l'index scalaire est mmap ;</li>
 </ul>

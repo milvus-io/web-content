@@ -53,7 +53,7 @@ title: Gruppierung Suche
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/grouping-search.png" alt="Grouping Search" class="doc-image" id="grouping-search" />
    </span> <span class="img-wrapper"> <span>Gruppierte Suche</span> </span></p>
-<p>Um die Vielfalt der Suchergebnisse zu verbessern, können Sie den Parameter <code translate="no">group_by_field</code> in der Suchanfrage hinzufügen, um die gruppierende Suche zu aktivieren. Wie im Diagramm gezeigt, können Sie <code translate="no">group_by_field</code> auf <code translate="no">docId</code> setzen. Nach Erhalt dieser Anfrage wird Milvus.</p>
+<p>Um die Vielfalt der Suchergebnisse zu verbessern, können Sie den Parameter <code translate="no">group_by_field</code> in der Suchanfrage hinzufügen, um die gruppierende Suche zu aktivieren. Wie im Diagramm dargestellt, können Sie <code translate="no">group_by_field</code> auf <code translate="no">docId</code> setzen. Nach Erhalt dieser Anfrage wird Milvus.</p>
 <ul>
 <li><p>Eine ANN-Suche basierend auf dem angegebenen Suchvektor durchführen, um alle Entitäten zu finden, die der Suchanfrage am ähnlichsten sind.</p></li>
 <li><p>Die Suchergebnisse nach dem angegebenen <code translate="no">group_by_field</code> gruppieren, z. B. <code translate="no">docId</code>.</p></li>

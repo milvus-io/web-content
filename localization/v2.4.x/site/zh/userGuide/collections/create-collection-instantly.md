@@ -34,7 +34,7 @@ title: 即时创建 Collections
         ></path>
       </svg>
     </button></h2><p>Collection 是一个二维表，有固定的列和变化的行。每列代表一个字段，每行代表一个实体。实现这种结构化数据管理需要一个 Schema。每个要插入的实体都必须符合 Schema 中定义的约束条件。</p>
-<p>AIGC 应用程序通常使用向量数据库作为知识库，管理用户与大型语言模型（LLMs）交互过程中产生的数据。这种知识库几乎是相似的。为了加快 Milvus Collections 在此类场景中的使用，我们提供了一种即时方法，只需两个参数，即 Collections 名称和向量场维度，即可创建一个 Collection。</p>
+<p>AIGC 应用程序通常使用向量数据库作为知识库，管理用户与大型语言模型（LLMs）交互过程中产生的数据。这些知识库几乎是相似的。为了加快 Milvus Collections 在此类场景中的使用，我们提供了一种即时方法，只需两个参数，即 Collections 名称和向量场维度，即可创建一个 Collection。</p>
 <p>使用默认设置即时创建 Collections 时，以下设置适用。</p>
 <ul>
 <li><p>主字段和向量字段被添加到 Schema 中<strong>（id</strong>和<strong>向量</strong>）。</p></li>

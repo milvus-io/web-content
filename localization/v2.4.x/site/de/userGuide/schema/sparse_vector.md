@@ -24,7 +24,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Sparse Vectors sind eine wichtige Methode der Datendarstellung im Information Retrieval und der Verarbeitung natürlicher Sprache. Während dichte Vektoren wegen ihrer ausgezeichneten semantischen Verständnisfähigkeiten beliebt sind, liefern spärliche Vektoren oft genauere Ergebnisse, wenn es um Anwendungen geht, die eine präzise Zuordnung von Schlüsselwörtern oder Phrasen erfordern.</p>
+    </button></h1><p>Sparse Vectors sind eine wichtige Methode der Datendarstellung im Information Retrieval und der Verarbeitung natürlicher Sprache. Während dichte Vektoren wegen ihrer ausgezeichneten semantischen Verständnisfähigkeiten beliebt sind, liefern spärliche Vektoren oft genauere Ergebnisse, wenn es um Anwendungen geht, die eine präzise Übereinstimmung von Schlüsselwörtern oder Phrasen erfordern.</p>
 <h2 id="Overview​" class="common-anchor-header">Überblick<button data-href="#Overview​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -40,7 +40,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Ein spärlicher Vektor ist eine spezielle Darstellung hochdimensionaler Vektoren, bei der die meisten Elemente Null sind und nur einige wenige Dimensionen Werte ungleich Null haben. Diese Eigenschaft macht Sparse-Vektoren besonders effektiv bei der Verarbeitung großer, hochdimensionaler, aber spärlicher Daten. Zu den üblichen Anwendungen gehören.</p>
+    </button></h2><p>Ein spärlicher Vektor ist eine spezielle Darstellung hochdimensionaler Vektoren, bei der die meisten Elemente Null sind und nur einige wenige Dimensionen Nicht-Null-Werte haben. Diese Eigenschaft macht Sparse-Vektoren besonders effektiv bei der Verarbeitung großer, hochdimensionaler, aber spärlicher Daten. Zu den üblichen Anwendungen gehören.</p>
 <ul>
 <li><p><strong>Textanalyse:</strong> Darstellung von Dokumenten als Bag-of-Words-Vektoren, bei denen jede Dimension einem Wort entspricht und nur Wörter, die im Dokument vorkommen, Werte ungleich Null haben.</p></li>
 <li><p><strong>Empfehlungssysteme:</strong> Benutzer-Element-Interaktionsmatrizen, bei denen jede Dimension die Bewertung eines Benutzers für ein bestimmtes Element darstellt, wobei die meisten Benutzer nur mit einigen wenigen Elementen interagieren.</p></li>
@@ -59,7 +59,7 @@ summary: >-
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/use-sparse-vector.png" alt="Use sparse vector in Milvus" class="doc-image" id="use-sparse-vector-in-milvus" />
    </span> <span class="img-wrapper"> <span>Verwendung von Sparse-Vektoren in Milvus</span> </span></p>
 <div class="alert note">
-<p>Zusätzlich zu spärlichen Vektoren unterstützt Milvus auch dichte Vektoren und binäre Vektoren. Dichte Vektoren sind ideal für die Erfassung tiefer semantischer Beziehungen, während binäre Vektoren sich in Szenarien wie schnellen Ähnlichkeitsvergleichen und der Deduplizierung von Inhalten auszeichnen. Weitere Informationen finden Sie unter <a href="/docs/de/dense-vector.md">Dense-Vektoren</a> und <a href="/docs/de/binary-vector.md">binäre Vektoren</a>.</p>
+<p>Neben spärlichen Vektoren unterstützt Milvus auch dichte Vektoren und binäre Vektoren. Dichte Vektoren sind ideal für die Erfassung tiefer semantischer Beziehungen, während binäre Vektoren sich in Szenarien wie schnellen Ähnlichkeitsvergleichen und der Deduplizierung von Inhalten auszeichnen. Weitere Informationen finden Sie unter <a href="/docs/de/dense-vector.md">Dense-Vektoren</a> und <a href="/docs/de/binary-vector.md">binäre Vektoren</a>.</p>
 </div>
 <h2 id="Use-sparse-vectors-in-Milvus​" class="common-anchor-header">Spärliche Vektoren in Milvus verwenden<button data-href="#Use-sparse-vectors-in-Milvus​" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -116,7 +116,7 @@ sparse_vector = [[(<span class="hljs-number">1</span>, <span class="hljs-number"
 
 <button class="copy-code-btn"></button></code></pre></li>
 </ul>
-<h3 id="Add-vector-field​" class="common-anchor-header">Vektorfeld hinzufügen</h3><p>Um spärliche Vektoren in Milvus zu verwenden, müssen Sie bei der Erstellung einer Sammlung ein Feld für die Speicherung spärlicher Vektoren definieren. Dieser Prozess beinhaltet.</p>
+<h3 id="Add-vector-field​" class="common-anchor-header">Vektorfeld hinzufügen</h3><p>Um spärliche Vektoren in Milvus zu verwenden, muss bei der Erstellung einer Sammlung ein Feld zum Speichern von spärlichen Vektoren definiert werden. Dieser Prozess beinhaltet.</p>
 <ol>
 <li><p>Einstellen von <code translate="no">datatype</code> auf den unterstützten Sparse-Vector-Datentyp, <code translate="no">SPARSE_FLOAT_VECTOR</code>.</p></li>
 <li><p>Die Dimension muss nicht angegeben werden.</p></li>

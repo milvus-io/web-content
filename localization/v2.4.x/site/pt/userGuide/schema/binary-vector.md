@@ -359,7 +359,7 @@ client.<span class="hljs-title function_">insert</span>({​
 }&quot;</span>​
 
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Perform-similarity-search​" class="common-anchor-header">Efetuar pesquisa de semelhanças</h3><p>A pesquisa por similaridade é uma das principais caraterísticas do Milvus, permitindo-lhe encontrar rapidamente os dados que são mais semelhantes a um vetor de consulta com base na distância entre vectores. Para efetuar uma pesquisa por semelhança utilizando vectores binários, prepare o vetor de consulta e os parâmetros de pesquisa e, em seguida, chame o método <code translate="no">search</code>.</p>
+<h3 id="Perform-similarity-search​" class="common-anchor-header">Efetuar pesquisa de semelhanças</h3><p>A pesquisa por similaridade é uma das principais caraterísticas do Milvus, permitindo-lhe encontrar rapidamente os dados mais semelhantes a um vetor de consulta com base na distância entre vectores. Para efetuar uma pesquisa por semelhança utilizando vectores binários, prepare o vetor de consulta e os parâmetros de pesquisa e, em seguida, chame o método <code translate="no">search</code>.</p>
 <p>Durante as operações de pesquisa, os vectores binários também têm de ser fornecidos sob a forma de uma matriz de bytes. Certifique-se de que a dimensionalidade do vetor de consulta corresponde à dimensão especificada ao definir <code translate="no">dim</code> e que cada 8 valores booleanos são convertidos em 1 byte.</p>
 <div class="multipleCode">
  <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#go">Go</a> <a href="#curl">cURL</a></div>

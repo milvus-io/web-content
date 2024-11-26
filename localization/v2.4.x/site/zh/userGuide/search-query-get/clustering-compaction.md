@@ -98,7 +98,7 @@ common:
 <tr><td><code translate="no">minInterval</code></td><td>以秒为单位指定最小间隔。<br>此参数仅在<code translate="no">autoEnable</code> 设置为<code translate="no">true</code> 时有效。<br>将其设置为大于 triggerInterval 的整数有助于避免在短时间内重复压缩。</td><td>-</td></tr>
 <tr><td><code translate="no">maxInterval</code></td><td>指定最大间隔（以秒为单位）。<br>该参数仅在<code translate="no">autoEnable</code> 设置为<code translate="no">true</code> 时有效。<br>一旦 Milvus 检测到某个 Collections 未进行聚类压缩的时间超过此值，它就会强制进行聚类压缩。</td><td>-</td></tr>
 <tr><td><code translate="no">newDataSizeThreshold</code></td><td>指定触发聚类压缩的上阈值。<br>该参数仅在<code translate="no">autoEnable</code> 设置为<code translate="no">true</code> 时有效。<br>一旦 Milvus 检测到 Collections 中的数据量超过此值，就会启动聚类压缩进程。</td><td>-</td></tr>
-<tr><td><code translate="no">timeout</code></td><td>指定聚类压缩的超时持续时间。<br>如果执行时间超过此值，则聚类压缩失败。</td><td>-</td></tr>
+<tr><td><code translate="no">timeout</code></td><td>指定聚类压缩的超时时间。<br>如果执行时间超过此值，则聚类压缩失败。</td><td>-</td></tr>
 </tbody>
 </table>
 </li>

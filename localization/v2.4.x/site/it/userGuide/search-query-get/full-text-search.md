@@ -46,7 +46,7 @@ summary: >-
 <ol>
 <li><p><strong>Inserimento del testo</strong>: L'utente inserisce documenti di testo grezzi o fornisce un testo di query senza necessità di incorporazione manuale.</p></li>
 <li><p><strong>Analisi del testo</strong>: Milvus utilizza un analizzatore per tokenizzare il testo in ingresso in singoli termini ricercabili.</p></li>
-<li><p><strong>Elaborazione della funzione</strong>: La funzione integrata riceve i termini tokenizzati e li converte in rappresentazioni vettoriali rade.</p></li>
+<li><p><strong>Elaborazione della funzione</strong>: La funzione incorporata riceve i termini tokenizzati e li converte in rappresentazioni vettoriali rade.</p></li>
 <li><p><strong>Memorizzazione delle collezioni</strong>: Milvus memorizza queste rappresentazioni rade in una raccolta per un recupero efficiente.</p></li>
 <li><p><strong>Punteggio BM25</strong>: Durante la ricerca, Milvus applica l'algoritmo BM25 per calcolare i punteggi dei documenti memorizzati e classifica i risultati corrispondenti in base alla pertinenza con il testo dell'interrogazione.</p></li>
 </ol>
@@ -165,7 +165,7 @@ index_params.<span class="hljs-title function_">add_index</span>(​
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Dopo aver impostato la raccolta e l'indice, si è pronti per inserire i dati di testo. In questo processo, è sufficiente fornire il testo grezzo. La funzione integrata definita in precedenza genera automaticamente il vettore sparse corrispondente per ogni voce di testo.</p>
+    </button></h2><p>Dopo aver impostato la raccolta e l'indice, si è pronti a inserire i dati di testo. In questo processo, è sufficiente fornire il testo grezzo. La funzione integrata definita in precedenza genera automaticamente il vettore sparse corrispondente per ogni voce di testo.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-title class_">MilvusClient</span>.<span class="hljs-title function_">insert</span>(<span class="hljs-string">&#x27;demo&#x27;</span>, [​
     {<span class="hljs-string">&#x27;text&#x27;</span>: <span class="hljs-string">&#x27;Artificial intelligence was founded as an academic discipline in 1956.&#x27;</span>},​
     {<span class="hljs-string">&#x27;text&#x27;</span>: <span class="hljs-string">&#x27;Alan Turing was the first person to conduct substantial research in AI.&#x27;</span>},​

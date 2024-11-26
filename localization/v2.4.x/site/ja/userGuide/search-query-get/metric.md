@@ -4,7 +4,7 @@ summary: >-
   類似度メトリクスは、ベクトル間の類似度を測定するために使用される。適切な距離メトリックを選択することで、分類やクラスタリングの性能を大幅に向上させることができる。
 title: メートル法
 ---
-<h1 id="Metric-Types​" class="common-anchor-header">メトリックの種類<button data-href="#Metric-Types​" class="anchor-icon" translate="no">
+<h1 id="Metric-Types​" class="common-anchor-header">メトリクスの種類<button data-href="#Metric-Types​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -20,7 +20,7 @@ title: メートル法
         ></path>
       </svg>
     </button></h1><p>類似度メトリクスは、ベクトル間の類似度を測定するために使用されます。適切な距離メトリックを選択することで、分類やクラスタリングのパフォーマンスを大幅に向上させることができます。</p>
-<p>現在、Zilliz Cloudは以下の類似度メトリックをサポートしています：ユークリッド距離(<code translate="no">L2</code>)、内積(<code translate="no">IP</code>)、コサイン類似度(<code translate="no">COSINE</code>)、<code translate="no">JACCARD</code> 、<code translate="no">HAMMING</code> 、<code translate="no">BM25</code> (特にスパースベクトルの全文検索用に設計)。</p>
+<p>現在、Zilliz Cloudは以下の類似度メトリックをサポートしています：ユークリッド距離 (<code translate="no">L2</code>)、内積 (<code translate="no">IP</code>)、コサイン類似度 (<code translate="no">COSINE</code>)、<code translate="no">JACCARD</code> 、<code translate="no">HAMMING</code> 、<code translate="no">BM25</code> (特にスパースベクトルの全文検索用に設計)。</p>
 <p>以下の表は、さまざまなフィールド・タイプと、それらに対応するメトリック・タイプとの対応をまとめたものです。</p>
 <table data-block-token="LHu5dKCHro3mnTx6PsmckEsinQd"><thead><tr><th data-block-token="JOJvdTK9MouhT8x7tfGc59NGnfg" colspan="1" rowspan="1"><p data-block-token="TS9tdnaJaoG4kfx96cfcqXINnnc">フィールド・タイプ</p>
 </th><th data-block-token="Iy8ZdPGpIo6nfwxiz4RcSuwanwf" colspan="1" rowspan="1"><p data-block-token="SKIAdxDFJo9oOyxg7iTcmfGAnz1">次元範囲</p>
@@ -72,10 +72,10 @@ title: メートル法
 </td><td data-block-token="Aq8Cd7Awao5IhExSnUjcUzRxndh" colspan="1" rowspan="1"><p data-block-token="AMbXd3nwLoHalMx3h0pc63i9nNg">値が小さいほど類似性が高いことを示す。</p>
 </td><td data-block-token="ULaFdvx0WoKy4rxBgPzciLZMnFg" colspan="1" rowspan="1"><p data-block-token="Je5xdsfnvoQli3xdODDchYMkn2e">[0, 1]</p>
 </td></tr><tr><td data-block-token="L5l6dqaAVoVpSJxFW5TcZlXLnAc" colspan="1" rowspan="1"><p data-block-token="JOcmdIWTUoZuoGxoToYcMLpLnMg"><code translate="no">HAMMING</code></p>
-</td><td data-block-token="H3vYdaah4oWsXmxmABOcW01XnSh" colspan="1" rowspan="1"><p data-block-token="VHz5d7R91o3OGuxX39Bc76CTnGf">値が小さいほど類似度が高いことを示す。</p>
+</td><td data-block-token="H3vYdaah4oWsXmxmABOcW01XnSh" colspan="1" rowspan="1"><p data-block-token="VHz5d7R91o3OGuxX39Bc76CTnGf">値が小さいほど類似性が高いことを示す。</p>
 </td><td data-block-token="NZnwdhAGUoO0R9x9gz6cZfCYnOd" colspan="1" rowspan="1"><p data-block-token="Xk7wdBDlko6RjFxVnATcPYTjnsb">[0, dim(ベクトル)</p>
 </td></tr><tr><td data-block-token="Xm5BdUTvXoPS1Xxtc26cBqAWn9e" colspan="1" rowspan="1"><p data-block-token="FoMadsBCboAKV2xofQ2c9IiKntb"><code translate="no">BM25</code></p>
-</td><td data-block-token="OHEldDxlaoejYmxXgUPcbwCYn4b" colspan="1" rowspan="1"><p data-block-token="EVzLdJPQdopf2mxZ3dfcTGSgnSc">項頻度、逆文書頻度、文書正規化に基づいて関連性をスコア化する。</p>
+</td><td data-block-token="OHEldDxlaoejYmxXgUPcbwCYn4b" colspan="1" rowspan="1"><p data-block-token="EVzLdJPQdopf2mxZ3dfcTGSgnSc">用語頻度、逆文書頻度、文書正規化に基づいて関連性をスコア化する。</p>
 </td><td data-block-token="KNCEd8WTioQbwnxmHzNcpHkHnzf" colspan="1" rowspan="1"><p data-block-token="RVtVda2Ozo1N5ixO0oucju5FnWh">[0, ∞)</p>
 <p data-block-token="MQ5RdcTC1oIZC5x4d7xc2M56nId"></p>
 </td></tr></tbody></table>

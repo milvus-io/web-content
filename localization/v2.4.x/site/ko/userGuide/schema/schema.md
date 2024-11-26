@@ -215,7 +215,7 @@ schema.<span class="hljs-title function_">addField</span>(<span class="hljs-titl
 <li><p><code translate="no">FLOAT16_VECTOR</code></p>
 <p>이 유형의 벡터 필드는 16비트 반정밀도 부동 소수점 목록을 보유하며 일반적으로 메모리 또는 대역폭이 제한된 딥 러닝 또는 GPU 기반 컴퓨팅 시나리오에 적용됩니다.</p></li>
 <li><p><code translate="no">BFLOAT16_VECTOR</code></p>
-<p>이 유형의 벡터 필드에는 정밀도는 떨어지지만 지수 범위는 Float32와 동일한 16비트 부동 소수점 숫자 목록이 포함됩니다. 이러한 유형의 데이터는 정확도에 큰 영향을 주지 않으면서 메모리 사용량을 줄여주기 때문에 딥 러닝 시나리오에서 일반적으로 사용됩니다.</p></li>
+<p>이 유형의 벡터 필드에는 정밀도는 떨어지지만 지수 범위는 Float32와 동일한 16비트 부동 소수점 숫자 목록이 들어 있습니다. 이러한 유형의 데이터는 정확도에 큰 영향을 주지 않으면서 메모리 사용량을 줄여주기 때문에 딥 러닝 시나리오에서 일반적으로 사용됩니다.</p></li>
 <li><p><code translate="no">BINARY_VECTOR</code></p>
 <p>이 유형의 벡터 필드에는 0과 1의 목록이 들어 있습니다. 이미지 처리 및 정보 검색 시나리오에서 데이터를 표현하기 위한 간결한 기능으로 사용됩니다.</p></li>
 <li><p><code translate="no">SPARSE_FLOAT_VECTOR</code></p>

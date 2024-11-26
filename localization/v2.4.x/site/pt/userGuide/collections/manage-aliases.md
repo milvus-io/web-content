@@ -1,8 +1,8 @@
 ---
 id: manage-aliases.md
-title: Gerir aliases
+title: Gerir os pseudónimos
 ---
-<h1 id="Manage-Aliases​" class="common-anchor-header">Gerir aliases<button data-href="#Manage-Aliases​" class="anchor-icon" translate="no">
+<h1 id="Manage-Aliases​" class="common-anchor-header">Gerir os pseudónimos<button data-href="#Manage-Aliases​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

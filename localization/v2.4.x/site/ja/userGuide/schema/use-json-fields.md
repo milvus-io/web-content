@@ -45,7 +45,7 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>MilvusでJSONフィールドを使用するには、コレクションスキーマで関連するフィールドタイプを定義し、<code translate="no">datatype</code> 、サポートされているJSONタイプ、すなわち、<code translate="no">JSON</code> 。</p>
-<p>JSONフィールドを含むコレクションスキーマを定義する方法を以下に示す。</p>
+<p>以下は、JSONフィールドを含むコレクションスキーマを定義する方法です。</p>
 <div class="multipleCode">
    <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType​

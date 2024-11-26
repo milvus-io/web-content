@@ -125,7 +125,7 @@ fields = [
 <li>DOUBLE: numpy.double</li>
 <li>VARCHAR: VARCHAR</li>
 <li>JSON: <a href="/docs/use-json-fields.md">JSON</a></li>
-<li>Array: <a href="/docs/array.md">Array</a></li>
+<li>Array: <a href="/docs/array_data_type.md">Array</a></li>
 </ul>
 <p>JSON as a composite data type is available. A JSON field comprises key-value pairs. Each key is a string, and a value can be a number, string, boolean value, array, or list. For details, refer to <a href="/docs/use-json-fields.md">JSON: a new data type</a>.</p></li>
 <li><p>Vector field supports:</p>

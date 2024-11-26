@@ -204,9 +204,9 @@ schema := entity.NewSchema().WithDynamicFieldEnabled(<span class="hljs-literal">
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>在特定字段上创建索引可加快对该字段的搜索。索引记录了 Collections 中实体的顺序。如下面的代码片段所示，你可以使用<code translate="no">metric_type</code> 和<code translate="no">index_type</code> 为 Milvus 选择适当的方式来为字段建立索引，并测量向量嵌入之间的相似性。</p>
+    </button></h2><p>在特定字段上创建索引可加快对该字段的搜索。索引记录了 Collections 中实体的顺序。如下面的代码片段所示，你可以使用<code translate="no">metric_type</code> 和<code translate="no">index_type</code> 来为 Milvus 选择适当的方式为字段建立索引，并测量向量嵌入之间的相似性。</p>
 <p>在 Milvus 中，您可以使用<code translate="no">AUTOINDEX</code> 作为所有向量场的索引类型，并根据需要使用<code translate="no">COSINE</code> 、<code translate="no">L2</code> 和<code translate="no">IP</code> 中的一种作为度量类型。</p>
-<p>如上述代码片段所示，您需要为向量场同时设置索引类型和度量类型，而只需为标量场设置索引类型。向量字段必须设置索引，建议在筛选条件中经常使用的标量字段上创建索引。</p>
+<p>如上述代码片段所示，您需要为向量场同时设置索引类型和度量类型，而标量场只需设置索引类型。向量字段必须设置索引，建议在筛选条件中经常使用的标量字段上创建索引。</p>
 <p>有关详情，请参阅<a href="/docs/zh/index-vector-fields.md">索引</a>。</p>
 <div class="multipleCode">
  <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#go">Go</a> <a href="#curl">cURL</a></div>

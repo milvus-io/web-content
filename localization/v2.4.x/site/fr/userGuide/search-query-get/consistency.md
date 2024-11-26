@@ -47,7 +47,7 @@ title: Cohérence
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/service-time-and-guarantee-time.png" alt="ServiceTime and GuaranteeTs" class="doc-image" id="servicetime-and-guaranteets" />
    </span> <span class="img-wrapper"> <span>ServiceTime et GuaranteeTs</span> </span></p>
 <p>Comme le montre la figure ci-dessus, si GuaranteeTs est inférieur à ServiceTime, cela signifie que toutes les données antérieures au moment spécifié ont été entièrement écrites sur le disque, ce qui permet aux QueryNodes d'effectuer immédiatement l'opération de recherche. Lorsque GuaranteeTs est supérieur à ServiceTime, les QueryNodes doivent attendre que ServiceTime dépasse GuaranteeTs avant de pouvoir exécuter l'opération Search.</p>
-<p>Les utilisateurs doivent trouver un compromis entre la précision et la latence des requêtes. Si les utilisateurs ont des exigences élevées en matière de cohérence et ne sont pas sensibles à la latence des requêtes, ils peuvent fixer GuaranteeTs à une valeur aussi grande que possible ; si les utilisateurs souhaitent recevoir des résultats de recherche rapidement et sont plus tolérants en matière de précision des requêtes, alors GuaranteeTs peut être fixé à une valeur plus petite.</p>
+<p>Les utilisateurs doivent trouver un compromis entre la précision et la latence des requêtes. Si les utilisateurs ont des exigences élevées en matière de cohérence et ne sont pas sensibles à la latence des requêtes, ils peuvent fixer GuaranteeTs à une valeur aussi grande que possible ; si les utilisateurs souhaitent recevoir des résultats de recherche rapidement et sont plus tolérants à l'égard de la précision des requêtes, alors GuaranteeTs peut être fixé à une valeur plus petite.</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/consistency-level-illustrated.png" alt="Consistency Levels Illustrated" class="doc-image" id="consistency-levels-illustrated" />
@@ -59,7 +59,7 @@ title: Cohérence
 <li><p><strong>Eventuel</strong></p>
 <p>La GarantieTs est fixée à une valeur extrêmement faible, telle que 1, afin d'éviter les contrôles de cohérence et de permettre aux nœuds de requête d'exécuter immédiatement des requêtes de recherche sur toutes les données du lot.</p></li>
 <li><p><strong>Stabilité limitée</strong></p>
-<p>La valeur de GuaranteeTs est fixée à un moment antérieur au dernier horodatage pour permettre aux QueryNodes d'effectuer des recherches en tolérant une certaine perte de données.</p></li>
+<p>La valeur de GuaranteeTs est fixée à un moment antérieur au dernier horodatage pour permettre aux QueryNodes d'effectuer des recherches en tolérant certaines pertes de données.</p></li>
 <li><p><strong>Session</strong></p>
 <p>Le dernier point temporel auquel le client insère des données est utilisé comme GuaranteeTs afin que les QueryNodes puissent effectuer des recherches sur toutes les données insérées par le client.</p></li>
 </ul>

@@ -1,5 +1,5 @@
 ---
-id: array.md
+id: array_data_type.md
 title: Array Field​​
 summary: >-
   The Array type is used to store fields containing multiple values of the same

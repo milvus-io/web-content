@@ -1271,7 +1271,7 @@
             "isMenu": true,
             "children": [
               {
-                "label": "Create an Alert",
+                "label": "Einen Alert erstellen",
                 "id": "alert.md",
                 "order": 0,
                 "children": []

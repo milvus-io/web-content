@@ -4,7 +4,7 @@ title: Länge Filter
 summary: >-
   Der Filter `Länge` entfernt Token, die nicht den angegebenen
   Längenanforderungen entsprechen, so dass Sie die Länge der Token, die während
-  der Textverarbeitung beibehalten werden, steuern können.
+  der Textverarbeitung beibehalten werden, kontrollieren können.
 ---
 <h1 id="Length​" class="common-anchor-header">Länge<button data-href="#Length​" class="anchor-icon" translate="no">
       <svg translate="no"

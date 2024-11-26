@@ -20,7 +20,7 @@ title: Reranking
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Milvus ermöglicht hybride Suchfunktionen unter Verwendung der <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/ORM/Collection/hybrid_search.md">hybrid_search()-API</a>, die ausgeklügelte Reranking-Strategien zur Verfeinerung von Suchergebnissen aus mehreren <code translate="no">AnnSearchRequest</code> -Instanzen beinhaltet. Dieses Thema behandelt den Reranking-Prozess, erklärt seine Bedeutung und die Implementierung verschiedener Reranking-Strategien in Milvus.</p>
+    </button></h1><p>Milvus ermöglicht hybride Suchfunktionen unter Verwendung der <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/ORM/Collection/hybrid_search.md">hybrid_search()-API</a>, die ausgeklügelte Reranking-Strategien zur Verfeinerung der Suchergebnisse aus mehreren <code translate="no">AnnSearchRequest</code> -Instanzen beinhaltet. Dieses Thema behandelt den Reranking-Prozess, erklärt seine Bedeutung und die Implementierung verschiedener Reranking-Strategien in Milvus.</p>
 <h2 id="Overview" class="common-anchor-header">Überblick<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -98,7 +98,7 @@ rerank = WeightedRanker(<span class="hljs-number">0.8</span>, <span class="hljs-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>RRF ist eine Datenfusionsmethode, die Ranglisten auf der Grundlage des Kehrwerts ihrer Ränge kombiniert. Es ist eine wirksame Methode, um den Einfluss der einzelnen Vektorfelder auszugleichen, insbesondere dann, wenn es keine eindeutige Rangfolge der Bedeutung gibt. Diese Strategie wird in der Regel angewandt, wenn alle Vektorfelder gleichwertig berücksichtigt werden sollen oder wenn Unsicherheit über die relative Bedeutung der einzelnen Felder besteht.</p>
+    </button></h2><p>RRF ist eine Datenfusionsmethode, die Ranglisten auf der Grundlage des Kehrwerts ihrer Ränge kombiniert. Es ist eine wirksame Methode, um den Einfluss der einzelnen Vektorfelder auszugleichen, insbesondere wenn es keine eindeutige Rangfolge der Wichtigkeit gibt. Diese Strategie wird in der Regel angewandt, wenn alle Vektorfelder gleichwertig berücksichtigt werden sollen oder wenn Unsicherheit über die relative Bedeutung der einzelnen Felder besteht.</p>
 <p>Der grundlegende Prozess der RRF ist wie folgt:</p>
 <ul>
 <li><p><strong>Sammeln von Rankings während des Retrievals</strong>: Abrufer über mehrere Vektorfelder hinweg rufen die Ergebnisse ab und sortieren sie.</p></li>

@@ -433,7 +433,7 @@
             "children": []
           },
           {
-            "label": "数字フィールド",
+            "label": "番号フィールド",
             "id": "number.md",
             "order": 6,
             "children": []
@@ -1963,7 +1963,7 @@
             "children": []
           },
           {
-            "label": "推薦システム",
+            "label": "レコメンダー・システム",
             "id": "recommendation_system.md",
             "order": 6,
             "children": []

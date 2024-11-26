@@ -41,14 +41,14 @@ summary: >-
 <li><p><strong>推荐系统：</strong>用户-物品交互矩阵，其中每个维度代表用户对特定物品的评分，大多数用户只与少数物品交互。</p></li>
 <li><p><strong>图像处理：</strong>局部特征表示，只关注图像中的关键点，从而产生高维稀疏向量。</p></li>
 </ul>
-<p>如下图所示，密集向量通常表示为连续数组，其中每个位置都有一个值（如<code translate="no">[0.3, 0.8, 0.2, 0.3, 0.1]</code> ）。相比之下，稀疏向量只存储非零元素及其索引，通常表示为键值对（如<code translate="no">[{2: 0.2}, ..., {9997: 0.5}, {9999: 0.7}]</code> ）。这种表示方法大大减少了存储空间，提高了计算效率，尤其是在处理极高维数据（如 10,000 维）时。</p>
+<p>如下图所示，密集向量通常表示为连续数组，其中每个位置都有一个值（如<code translate="no">[0.3, 0.8, 0.2, 0.3, 0.1]</code> ）。相比之下，稀疏向量只存储非零元素及其索引，通常表示为键值对（如<code translate="no">[{2: 0.2}, ..., {9997: 0.5}, {9999: 0.7}]</code> ）。这种表示方法大大减少了存储空间，提高了计算效率，尤其是在处理极高维数据（如 10,000 维数据）时。</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/sparse-vector.png" alt="Spare vector representation" class="doc-image" id="spare-vector-representation" />
    </span> <span class="img-wrapper"> <span>稀疏向量表示法</span> </span></p>
 <p>稀疏向量可以使用多种方法生成，例如文本处理中的<a href="https://en.wikipedia.org/wiki/Tf%E2%80%93idf">TF-IDF</a>（词频-反向文档频率）和<a href="https://en.wikipedia.org/wiki/Okapi_BM25">BM25</a>。此外，Milvus 还提供了帮助生成和处理稀疏向量的便捷方法。详情请参阅<a href="/docs/zh/embeddings.md">Embeddings</a>。</p>
 <p>对于文本数据，Milvus 还提供全文搜索功能，让您可以直接在原始文本数据上执行向量搜索，而无需使用外部嵌入模型来生成稀疏向量。更多信息，请参阅<a href="/docs/zh/full-text-search.md">全文搜索</a>。</p>
-<p>矢量化后，数据可存储在 Milvus 中进行管理和矢量检索。下图说明了基本流程。</p>
+<p>矢量化后，数据可存储在 Milvus 中，以便进行管理和矢量检索。下图说明了基本流程。</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/use-sparse-vector.png" alt="Use sparse vector in Milvus" class="doc-image" id="use-sparse-vector-in-milvus" />
@@ -259,7 +259,7 @@ indexes.<span class="hljs-title function_">add</span>(<span class="hljs-title cl
 <ul>
 <li><p>为稀疏向量创建了一个<code translate="no">SPARSE_INVERTED_INDEX</code> 类型的索引。对于稀疏向量，可以指定<code translate="no">SPARSE_INVERTED_INDEX</code> 或<code translate="no">SPARSE_WAND</code> 。有关详情，请参阅<a href="https://milvus.io/docs/index.md?tab=sparse">稀疏向量索引</a>。</p></li>
 <li><p>对于稀疏向量，<code translate="no">metric_type</code> 只支持<code translate="no">IP</code> （内积），用于衡量两个稀疏向量之间的相似性。有关相似性的更多信息，请参阅 "<a href="/docs/zh/metric.md">度量类型</a>"。</p></li>
-<li><p><code translate="no">drop_ratio_build</code> 是一个可选的索引参数，专门用于稀疏向量。它可以控制索引建立过程中排除小向量值的比例。例如，使用 时，最小的 20% 向量值将在索引创建过程中被排除，从而减少搜索过程中的计算量。<code translate="no">{&quot;drop_ratio_build&quot;: 0.2}</code></p></li>
+<li><p><code translate="no">drop_ratio_build</code> 是一个可选的索引参数，专门用于稀疏向量。它可以控制在建立索引时排除小向量值的比例。例如，使用 时，最小的 20% 向量值将在索引创建过程中被排除，从而减少搜索过程中的计算量。<code translate="no">{&quot;drop_ratio_build&quot;: 0.2}</code></p></li>
 </ul>
 <h3 id="Create-collection​" class="common-anchor-header">创建 Collections</h3><p>完成稀疏向量和索引设置后，就可以创建包含稀疏向量的 Collections。下面的示例使用 <ins><code translate="no">create_collection</code></ins>方法创建一个名为<code translate="no">my_sparse_collection</code> 的 Collection。</p>
 <div class="multipleCode">

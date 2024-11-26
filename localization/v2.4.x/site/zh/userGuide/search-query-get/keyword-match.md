@@ -79,7 +79,7 @@ schema.add_field(​
 )​
 
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Optional-Configure-an-analyzer​" class="common-anchor-header">可选：配置分析器</h3><p>关键词匹配的性能和准确性取决于所选的分析器。不同的分析器适用于不同的语言和文本结构，因此选择正确的分析器会对特定用例的搜索结果产生重大影响。</p>
+<h3 id="Optional-Configure-an-analyzer​" class="common-anchor-header">可选：配置分析器</h3><p>关键词匹配的性能和准确性取决于所选的分析器。不同的分析器适用于不同的语言和文本结构，因此选择正确的分析器会极大地影响特定用例的搜索结果。</p>
 <p>默认情况下，Milvus 使用<code translate="no">standard</code> 分析器，该分析器根据空白和标点符号对文本进行标记，删除长度超过 40 个字符的标记，并将文本转换为小写。应用此默认设置无需额外参数。更多信息，请参阅<a href="/docs/zh/standard-analyzer.md">标准</a>。</p>
 <p>如果需要不同的分析器，可以使用<code translate="no">analyzer_params</code> 参数进行配置。例如，应用<code translate="no">english</code> 分析器处理英文文本。</p>
 <pre><code translate="no" class="language-python">analyzer_params={​

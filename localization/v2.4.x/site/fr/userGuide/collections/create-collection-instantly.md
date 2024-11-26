@@ -338,4 +338,4 @@ curl --request POST \​
 }&#x27;</span>​
 
 <button class="copy-code-btn"></button></code></pre>
-<p>Si les collections créées à l'aide des deux méthodes ci-dessus ne répondent toujours pas à vos besoins, envisagez de suivre la procédure de <a href="/docs/fr/create-collection.md">création d'une collection</a>.</p>
+<p>Si les collections créées à l'aide des deux méthodes ci-dessus ne répondent toujours pas à vos besoins, envisagez de suivre la procédure de <a href="/docs/fr/create-collection.md">création de collection</a>.</p>

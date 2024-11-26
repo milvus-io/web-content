@@ -118,7 +118,7 @@ schema.add_field(​
 <button class="copy-code-btn"></button></code></pre>
 <ul>
 <li><p><code translate="no">field_name</code>:検索するVARCHARフィールドの名前。</p></li>
-<li><p><code translate="no">text</code>:検索するキーワード。複数のキーワードは、言語や設定されている解析器に応じて、スペースやその他の適切な区切り文字で区切ることができます。</p></li>
+<li><p><code translate="no">text</code>:検索するキーワード。複数のキーワードは、言語や設定されている解析器に応じて、スペースや他の適切な区切り文字で区切ることができます。</p></li>
 </ul>
 <p>デフォルトでは、<code translate="no">TEXT_MATCH</code> 、<strong>OR</strong>マッチング・ロジックを使用します。つまり、指定したキーワードのいずれかを含む文書を返します。たとえば、<code translate="no">text</code> フィールドに<code translate="no">machine</code> または<code translate="no">deep</code> というキーワードを含む文書を検索するには、次の式を使用します。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&quot;TEXT_MATCH(text, &#x27;machine deep&#x27;)&quot;</span>​
@@ -174,5 +174,5 @@ result = MilvusClient.query(​
       </svg>
     </button></h2><ul>
 <li><p>フィールドのキーワード・マッチを有効にすると、転置インデックスが作成され、 ストレージ・リソースが消費されます。この機能を有効にするかどうかは、テキスト・サイズ、一意のトークン、使用する解析器によって異なるため、ストレージへの影響を考慮してください。</p></li>
-<li><p>一度スキーマでアナライザを定義すると、その設定はそのコレクションに対して永続的になります。別のアナライザの方がニーズに合っていると判断した場合は、既存のコレクションを削除して、希望するアナライザ設定で新しいコレクションを作成することを検討できます。</p></li>
+<li><p>スキーマでアナライザを定義すると、その設定はそのコレクションに対して永続的になります。別のアナライザの方がニーズに合っていると判断した場合は、既存のコレクションを削除して、希望するアナライザ設定で新しいコレクションを作成することを検討できます。</p></li>
 </ul>

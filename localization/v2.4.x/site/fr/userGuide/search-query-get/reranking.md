@@ -38,7 +38,7 @@ title: Reclassement
       </svg>
     </button></h2><p>La figure suivante illustre l'exécution d'une recherche hybride dans Milvus et met en évidence le rôle du reclassement dans le processus.</p>
 <p><img translate="no" src="/docs/v2.4.x/assets/multi-vector-rerank.png" alt="reranking_process" width="300"/></p>
-<p>Le reclassement dans la recherche hybride est une étape cruciale qui consolide les résultats provenant de plusieurs champs vectoriels, garantissant que le résultat final est pertinent et correctement hiérarchisé. Actuellement, Milvus propose les stratégies de reclassement suivantes :</p>
+<p>Le reclassement dans la recherche hybride est une étape cruciale qui consolide les résultats provenant de plusieurs champs vectoriels, garantissant que le résultat final est pertinent et hiérarchisé avec précision. Actuellement, Milvus propose les stratégies de reclassement suivantes :</p>
 <ul>
 <li><p><code translate="no">WeightedRanker</code>: Cette approche fusionne les résultats en calculant une moyenne pondérée des scores (ou distances vectorielles) de différentes recherches vectorielles. Elle attribue des poids en fonction de l'importance de chaque champ vectoriel.</p></li>
 <li><p><code translate="no">RRFRanker</code>: Cette stratégie combine les résultats en fonction de leur classement dans différentes colonnes vectorielles.</p></li>

@@ -565,7 +565,7 @@
                     "children": []
                   },
                   {
-                    "label": "Fermarsi",
+                    "label": "Stop",
                     "id": "stop-filter.md",
                     "order": 6,
                     "children": []
@@ -718,7 +718,7 @@
             "children": []
           },
           {
-            "label": "Compattazione dei cluster",
+            "label": "Compattazione del clustering",
             "id": "clustering-compaction.md",
             "order": 11,
             "children": []
@@ -778,7 +778,7 @@
     "order": 4,
     "children": [
       {
-        "label": "Incorporazioni",
+        "label": "Incorporamenti",
         "id": "embeddings",
         "order": 0,
         "isMenu": true,
@@ -1975,7 +1975,7 @@
             "children": []
           },
           {
-            "label": "Ricerca della somiglianza audio",
+            "label": "Ricerca di somiglianza audio",
             "id": "audio_similarity_search.md",
             "order": 8,
             "children": []

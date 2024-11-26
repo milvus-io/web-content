@@ -75,7 +75,7 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>Per utilizzare i campi numerici in Milvus, definire i campi pertinenti nello schema della collezione, impostando <code translate="no">datatype</code> su un tipo supportato come <code translate="no">BOOL</code> o <code translate="no">INT8</code>. Per un elenco completo dei tipi di campi numerici supportati, consultare la sezione <a href="#Supported-number-field-types">Tipi di campi numerici supportati</a>.</p>
-<p>L'esempio seguente mostra come definire uno schema che includa i campi numerici <code translate="no">age</code> e <code translate="no">price</code>.</p>
+<p>L'esempio seguente mostra come definire uno schema che include i campi numerici <code translate="no">age</code> e <code translate="no">price</code>.</p>
 <div class="multipleCode">
  <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType​
@@ -442,7 +442,7 @@ client.<span class="hljs-title function_">insert</span>({​
         ></path>
       </svg>
     </button></h2><p>Dopo aver aggiunto i campi numerici, è possibile utilizzarli per il filtraggio nelle operazioni di ricerca e di interrogazione per ottenere risultati di ricerca più precisi.</p>
-<h3 id="Filter-queries​" class="common-anchor-header">Filtro delle query</h3><p>Dopo aver aggiunto i campi numerici, è possibile utilizzarli per filtrare le query. Ad esempio, è possibile interrogare tutte le entità in cui <code translate="no">age</code> è compreso tra 30 e 40.</p>
+<h3 id="Filter-queries​" class="common-anchor-header">Filtro delle query</h3><p>Dopo aver aggiunto i campi numerici, è possibile utilizzarli per filtrare le query. Per esempio, si possono interrogare tutte le entità in cui <code translate="no">age</code> è compreso tra 30 e 40.</p>
 <div class="multipleCode">
  <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&quot;30 &lt;= age &lt;= 40&quot;</span>​

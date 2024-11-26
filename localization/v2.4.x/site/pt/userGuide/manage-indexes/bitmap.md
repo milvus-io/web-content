@@ -114,7 +114,7 @@ client.create_index(​
 <li><p>Os índices de bitmap não suportam os seguintes tipos de dados.</p>
 <ul>
 <li><p><code translate="no">FLOAT</code>, <code translate="no">DOUBLE</code>: Os tipos de vírgula flutuante não são compatíveis com a natureza binária dos índices de bitmap.</p></li>
-<li><p><code translate="no">JSON</code>: Os tipos de dados JSON têm uma estrutura complexa que não pode ser representada de forma eficiente utilizando índices bitmap.</p></li>
+<li><p><code translate="no">JSON</code>: Os tipos de dados JSON têm uma estrutura complexa que não pode ser representada de forma eficiente utilizando índices de bitmap.</p></li>
 </ul></li>
 <li><p>Os índices bitmap não são adequados para campos com elevada cardinalidade (ou seja, campos com um grande número de valores distintos).</p>
 <ul>

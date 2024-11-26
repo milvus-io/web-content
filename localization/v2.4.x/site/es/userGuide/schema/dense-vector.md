@@ -8,8 +8,8 @@ summary: >-
   En comparación con los vectores dispersos, los vectores densos contienen más
   información en el mismo nivel dimensional, ya que cada dimensión contiene
   valores significativos. Esta representación puede capturar eficazmente
-  patrones y relaciones complejas, facilitando el análisis y procesamiento de
-  datos en espacios de alta dimensión. Los vectores densos suelen tener un
+  patrones y relaciones complejas, facilitando el análisis y el procesamiento de
+  datos en espacios de altas dimensiones. Los vectores densos suelen tener un
   número fijo de dimensiones, que oscila entre unas pocas docenas y varios
   cientos o incluso miles, en función de la aplicación y los requisitos
   específicos.
@@ -29,7 +29,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Los vectores densos son representaciones numéricas de datos muy utilizadas en el aprendizaje automático y el análisis de datos. Consisten en matrices con números reales, donde la mayoría o todos los elementos son distintos de cero. En comparación con los vectores dispersos, los vectores densos contienen más información en el mismo nivel dimensional, ya que cada dimensión contiene valores significativos. Esta representación puede capturar eficazmente patrones y relaciones complejas, facilitando el análisis y procesamiento de datos en espacios de alta dimensión. Los vectores densos suelen tener un número fijo de dimensiones, que oscila entre unas pocas docenas y varios cientos o incluso miles, en función de la aplicación y los requisitos específicos.</p>
+    </button></h1><p>Los vectores densos son representaciones numéricas de datos muy utilizadas en el aprendizaje automático y el análisis de datos. Consisten en matrices con números reales, donde la mayoría o todos los elementos son distintos de cero. En comparación con los vectores dispersos, los vectores densos contienen más información en el mismo nivel dimensional, ya que cada dimensión contiene valores significativos. Esta representación puede capturar eficazmente patrones y relaciones complejas, facilitando el análisis y el procesamiento de datos en espacios de altas dimensiones. Los vectores densos suelen tener un número fijo de dimensiones, que oscila entre unas pocas docenas y varios cientos o incluso miles, en función de la aplicación y los requisitos específicos.</p>
 <p>Los vectores densos se utilizan principalmente en escenarios que requieren comprender la semántica de los datos, como la búsqueda semántica y los sistemas de recomendación. En la búsqueda semántica, los vectores densos ayudan a capturar las conexiones subyacentes entre consultas y documentos, mejorando la relevancia de los resultados de búsqueda. En los sistemas de recomendación, ayudan a identificar similitudes entre usuarios y elementos, ofreciendo sugerencias más personalizadas.</p>
 <h2 id="Overview​" class="common-anchor-header">Resumen<button data-href="#Overview​" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -51,9 +51,9 @@ summary: >-
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/dense-vector.png" alt="Dense vectors in 2D space" class="doc-image" id="dense-vectors-in-2d-space" />
    </span> <span class="img-wrapper"> <span>Vectores densos en un espacio 2D</span> </span></p>
-<p>La imagen anterior ilustra la representación de vectores densos en un espacio 2D. Aunque los vectores densos en aplicaciones reales suelen tener dimensiones mucho mayores, esta ilustración en 2D transmite con eficacia varios conceptos clave.</p>
+<p>La imagen anterior ilustra la representación de vectores densos en un espacio 2D. Aunque los vectores densos en aplicaciones reales suelen tener dimensiones mucho mayores, esta ilustración 2D transmite con eficacia varios conceptos clave.</p>
 <ul>
-<li><p><strong>Representación multidimensional:</strong> Cada punto representa un objeto conceptual (como <strong>Milvus</strong>, <strong>base de datos vectorial</strong>, <strong>sistema de recuperación</strong>, etc.), cuya posición viene determinada por los valores de sus dimensiones.</p></li>
+<li><p><strong>Representación multidimensional:</strong> Cada punto representa un objeto conceptual (como <strong>Milvus</strong>, una <strong>base de datos vectorial</strong>, <strong>un sistema de recuperación</strong>, etc.), cuya posición viene determinada por los valores de sus dimensiones.</p></li>
 <li><p><strong>Relaciones semánticas:</strong> Las distancias entre puntos reflejan la similitud semántica entre conceptos. Los puntos más cercanos indican conceptos más relacionados semánticamente.</p></li>
 <li><p><strong>Efecto de agrupamiento:</strong> Los conceptos relacionados (como <strong>Milvus</strong>, <strong>base de datos vectorial</strong> y <strong>sistema de recuperación</strong>) se sitúan cerca unos de otros en el espacio, formando un cluster semántico.</p></li>
 </ul>

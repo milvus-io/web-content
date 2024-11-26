@@ -595,7 +595,7 @@
         ]
       },
       {
-        "label": "Insertar y suprimir",
+        "label": "Insertar y eliminar",
         "id": "insert-and-delete",
         "order": 3,
         "children": [

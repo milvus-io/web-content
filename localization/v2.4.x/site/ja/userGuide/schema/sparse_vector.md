@@ -54,7 +54,7 @@ summary: >-
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/use-sparse-vector.png" alt="Use sparse vector in Milvus" class="doc-image" id="use-sparse-vector-in-milvus" />
    </span> <span class="img-wrapper"> <span>Milvusでスパースベクトルを使用する。</span> </span></p>
 <div class="alert note">
-<p>Milvusはスパースベクトル以外にも、デンスベクトルやバイナリベクトルにも対応しています。密なベクトルは深い意味的関係を把握するのに理想的であり、バイナリベクトルは迅速な類似性比較やコンテンツの重複排除などのシナリオに優れています。詳細については、<a href="/docs/ja/dense-vector.md">密なベクトルと</a> <a href="/docs/ja/binary-vector.md">バイナリベクトルを</a>参照してください。</p>
+<p>Milvusはスパースベクトル以外にも、デンスベクトルやバイナリベクトルにも対応しています。密なベクトルは深い意味的関係を把握するのに適しており、バイナリベクトルは迅速な類似性比較やコンテンツの重複排除などのシナリオに優れています。詳細については、<a href="/docs/ja/dense-vector.md">密なベクトルと</a> <a href="/docs/ja/binary-vector.md">バイナリベクトルを</a>参照してください。</p>
 </div>
 <h2 id="Use-sparse-vectors-in-Milvus​" class="common-anchor-header">Milvusでスパースベクトルを使う<button data-href="#Use-sparse-vectors-in-Milvus​" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -394,7 +394,7 @@ search_params = {​
 query_vector = [{<span class="hljs-number">1</span>: <span class="hljs-number">0.2</span>, <span class="hljs-number">50</span>: <span class="hljs-number">0.4</span>, <span class="hljs-number">1000</span>: <span class="hljs-number">0.7</span>}]​
 
 <button class="copy-code-btn"></button></code></pre>
-<p>この例では、<code translate="no">drop_ratio_search</code> はスパース・ベクトル専用のオプション・パラメータで、検索中にクエリ・ベクトル内の小さな値を微調整できるようにします。例えば、<code translate="no">{&quot;drop_ratio_search&quot;: 0.2}</code> を指定すると、クエリベクトル内の最小20%の値は検索時に無視されます。</p>
+<p>この例では、<code translate="no">drop_ratio_search</code> はスパース・ベクトル専用のオプション・パラメータで、検索中にクエリ・ベクトル内の小さな値を微調整できるようにします。例えば、<code translate="no">{&quot;drop_ratio_search&quot;: 0.2}</code> を指定すると、クエリ・ベクトル中の最小20%の値は検索中に無視されます。</p>
 <p>次に、<code translate="no">search</code> メソッドを使って類似検索を実行する。</p>
 <div class="multipleCode">
  <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>

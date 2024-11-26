@@ -25,7 +25,7 @@ summary: >-
 <h3 id="Definition​" class="common-anchor-header">Definición</h3><p>El analizador <code translate="no">english</code> utiliza los siguientes componentes.</p>
 <ul>
 <li><p><strong>Tokenizador</strong>: Utiliza el <a href="/docs/es/standard-tokenizer.md"><code translate="no">standard tokenizer</code></a> para dividir el texto en unidades discretas de palabras.</p></li>
-<li><p>Filtros: Incluye varios filtros para el tratamiento exhaustivo del texto.</p>
+<li><p>Filtros: Incluye múltiples filtros para un procesamiento exhaustivo del texto.</p>
 <ul>
 <li><p><a href="/docs/es/lowercase-filter.md"><code translate="no">lowercase</code></a>: Convierte todos los tokens a minúsculas, lo que permite realizar búsquedas sin distinguir mayúsculas de minúsculas.</p></li>
 <li><p><a href="/docs/es/stemmer-filter.md"><code translate="no">stemmer</code></a>: Reduce las palabras a su raíz para permitir una búsqueda más amplia (por ejemplo, "correr" se convierte en "correr").</p></li>

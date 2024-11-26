@@ -5,8 +5,8 @@ summary: >-
   En el tratamiento de textos, un analizador es un componente crucial que
   convierte el texto en bruto en un formato estructurado que permite realizar
   búsquedas. Cada analizador suele constar de dos elementos básicos: un
-  tokenizador y un filtro. Juntos, transforman el texto de entrada en tokens,
-  los refinan y los preparan para una indexación y recuperación eficaces.
+  tokenizador y un filtro. Juntos transforman el texto de entrada en tokens, los
+  refinan y los preparan para una indexación y recuperación eficaces.
 ---
 <h1 id="Analyzer-Overview​" class="common-anchor-header">Visión general del analizador<button data-href="#Analyzer-Overview​" class="anchor-icon" translate="no">
       <svg translate="no"

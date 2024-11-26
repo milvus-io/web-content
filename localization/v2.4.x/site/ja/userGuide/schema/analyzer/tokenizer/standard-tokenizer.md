@@ -50,7 +50,7 @@ summary: Milvusの`標準`トークナイザーは、スペースと句読点に
 <div class="alert note">
 <p>セットアップをより簡単にするには <a href="/docs/ja/standard-analyzer.md"><code translate="no">standard analyzer</code></a>これは、<code translate="no">standard</code> トークナイザーと <a href="/docs/ja/lowercase-filter.md"><code translate="no">lowercase filter</code></a>.</p>
 </div>
-<p><code translate="no">analyzer_params</code> を定義した後、コレクションスキーマを定義するときに、<code translate="no">VARCHAR</code> フィールドに適用できます。これにより、Milvusは指定されたアナライザを使用してフィールド内のテキストを処理し、効率的なトークン化とフィルタリングを行うことができます。詳細については、<a href="/docs/ja/analyzer-overview.md#Example-use">使用例を</a>参照してください。</p>
+<p><code translate="no">analyzer_params</code> を定義した後、コレクションスキーマを定義するときに、<code translate="no">VARCHAR</code> フィールドに適用できます。これにより、Milvusは指定された解析器を使用してそのフィールドのテキストを処理し、効率的なトークン化とフィルタリングを行うことができます。詳細については、<a href="/docs/ja/analyzer-overview.md#Example-use">使用例を</a>参照してください。</p>
 <h2 id="Example-output​" class="common-anchor-header">出力例<button data-href="#Example-output​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
