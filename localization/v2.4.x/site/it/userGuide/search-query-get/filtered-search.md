@@ -48,7 +48,7 @@ summary: >-
    </span> <span class="img-wrapper"> <span>Ricerca filtrata</span> </span></p>
 <p>Come mostrato nel diagramma precedente, la richiesta di ricerca riporta <code translate="no">chunk like % red %</code> come condizione di filtraggio, indicando che Zilliz Cloud deve condurre la ricerca RNA all'interno di tutte le entità che hanno la parola <code translate="no">red</code> nel campo <code translate="no">chunk</code>. Nello specifico, Zilliz Cloud esegue le seguenti operazioni.</p>
 <ul>
-<li><p>Filtra le entità che corrispondono alle condizioni di filtraggio contenute nella richiesta di ricerca.</p></li>
+<li><p>Filtra le entità che corrispondono alle condizioni di filtraggio riportate nella richiesta di ricerca.</p></li>
 <li><p>Esegue la ricerca ANN all'interno delle entità filtrate.</p></li>
 <li><p>Restituisce le entità top-K.</p></li>
 </ul>

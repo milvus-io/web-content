@@ -1,7 +1,7 @@
 ---
 id: insert-update-delete.md
 summary: >-
-  Entitäten in einer Sammlung sind Datensätze, die denselben Satz von Feldern
+  Entitäten in einer Sammlung sind Datensätze, die den gleichen Satz von Feldern
   haben. Die Feldwerte in jedem Datensatz bilden eine Entität. Auf dieser Seite
   wird erläutert, wie man Entitäten in eine Sammlung einfügt.
 title: Entitäten einfügen

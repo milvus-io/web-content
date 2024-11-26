@@ -41,7 +41,7 @@ summary: >-
     <span class="hljs-string">&quot;tokenizer&quot;</span>: <span class="hljs-string">&quot;whitespace&quot;</span>,​
 }​
 <button class="copy-code-btn"></button></code></pre>
-<p>Il tokenizer degli spazi bianchi può funzionare insieme a uno o più filtri. Ad esempio, il codice seguente definisce un analizzatore che utilizza il tokenizer <code translate="no">whitespace</code> e il filtro <a href="/docs/it/lowercase-filter.md"><code translate="no">lowercase filter</code></a>:</p>
+<p>Il tokenizer degli spazi bianchi può funzionare insieme a uno o più filtri. Ad esempio, il codice seguente definisce un analizzatore che usa il tokenizer <code translate="no">whitespace</code> e il filtro <a href="/docs/it/lowercase-filter.md"><code translate="no">lowercase filter</code></a>:</p>
 <pre><code translate="no" class="language-python">analyzer_params = {​
     <span class="hljs-string">&quot;tokenizer&quot;</span>: <span class="hljs-string">&quot;whitespace&quot;</span>,​
     <span class="hljs-string">&quot;filter&quot;</span>: [<span class="hljs-string">&quot;lowercase&quot;</span>]​

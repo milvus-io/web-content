@@ -1,8 +1,8 @@
 ---
 id: metric.md
 summary: >-
-  Le metriche di somiglianza sono utilizzate per misurare le somiglianze tra i
-  vettori. La scelta di una metrica di distanza appropriata aiuta a migliorare
+  Le metriche di somiglianza vengono utilizzate per misurare le somiglianze tra
+  i vettori. La scelta di una metrica di distanza appropriata aiuta a migliorare
   significativamente le prestazioni di classificazione e clustering.
 title: Tipi metrici
 ---
@@ -22,7 +22,7 @@ title: Tipi metrici
         ></path>
       </svg>
     </button></h1><p>Le metriche di somiglianza sono utilizzate per misurare le somiglianze tra vettori. La scelta di una metrica di distanza appropriata aiuta a migliorare significativamente le prestazioni di classificazione e clustering.</p>
-<p>Attualmente, Zilliz Cloud supporta questi tipi di metriche di somiglianza: Distanza euclidea (<code translate="no">L2</code>), Prodotto interno (<code translate="no">IP</code>), Somiglianza coseno (<code translate="no">COSINE</code>), <code translate="no">JACCARD</code>, <code translate="no">HAMMING</code> e <code translate="no">BM25</code> (specificamente progettata per la ricerca full text su vettori sparsi).</p>
+<p>Attualmente, Zilliz Cloud supporta questi tipi di metriche di somiglianza: Distanza euclidea (<code translate="no">L2</code>), Prodotto interno (<code translate="no">IP</code>), Somiglianza coseno (<code translate="no">COSINE</code>), <code translate="no">JACCARD</code>, <code translate="no">HAMMING</code> e <code translate="no">BM25</code> (specificamente progettato per la ricerca full text su vettori sparsi).</p>
 <p>La tabella seguente riassume la mappatura tra i diversi tipi di campo e i corrispondenti tipi di metrica.</p>
 <table data-block-token="LHu5dKCHro3mnTx6PsmckEsinQd"><thead><tr><th data-block-token="JOJvdTK9MouhT8x7tfGc59NGnfg" colspan="1" rowspan="1"><p data-block-token="TS9tdnaJaoG4kfx96cfcqXINnnc">Tipo di campo</p>
 </th><th data-block-token="Iy8ZdPGpIo6nfwxiz4RcSuwanwf" colspan="1" rowspan="1"><p data-block-token="SKIAdxDFJo9oOyxg7iTcmfGAnz1">Intervallo di dimensione</p>
@@ -206,7 +206,7 @@ title: Tipi metrici
       </svg>
     </button></h2><p>La distanza HAMMING misura stringhe di dati binari. La distanza tra due stringhe di uguale lunghezza è il numero di posizioni di bit in cui i bit sono diversi.</p>
 <p>Ad esempio, supponiamo che esistano due stringhe, 1101 1001 e 1001 1101.</p>
-<p>11011001 ⊕ 10011101 = 01000100. Poiché contiene due 1, la distanza di HAMMING, d (11011001, 10011101) = 2.</p>
+<p>11011001 ⊕ 10011101 = 01000100. Dato che contiene due 1, la distanza HAMMING, d (11011001, 10011101) = 2.</p>
 <h2 id="BM25-similarity​" class="common-anchor-header">Similitudine BM25<button data-href="#BM25-similarity​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -222,7 +222,7 @@ title: Tipi metrici
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Il BM25 è un metodo di misurazione della rilevanza del testo ampiamente utilizzato, progettato specificamente per la <a href="/docs/it/full-text-search.md">ricerca di testi completi</a>. Combina i seguenti tre fattori chiave.</p>
+    </button></h2><p>BM25 è un metodo di misurazione della rilevanza del testo ampiamente utilizzato, progettato specificamente per la <a href="/docs/it/full-text-search.md">ricerca di testi completi</a>. Combina i seguenti tre fattori chiave.</p>
 <ul>
 <li><p><strong>Frequenza dei termini (TF):</strong> Misura la frequenza con cui un termine appare in un documento. Sebbene frequenze più elevate indichino spesso una maggiore importanza, BM25 utilizza il parametro di saturazione k1 per evitare che termini troppo frequenti dominino il punteggio di rilevanza.</p></li>
 <li><p><strong>Frequenza inversa del documento (IDF):</strong> Riflette l'importanza di un termine nell'intero corpus. I termini che compaiono in un minor numero di documenti ricevono un valore IDF più alto, indicando un maggiore contributo alla rilevanza.</p></li>

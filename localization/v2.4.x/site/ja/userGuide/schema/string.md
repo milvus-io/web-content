@@ -163,7 +163,7 @@ schema.addField(AddFieldReq.builder()​
 }&quot;</span>​
 
 <button class="copy-code-btn"></button></code></pre>
-<p>この例では、<code translate="no">varchar_field1</code> と<code translate="no">varchar_field2</code> という2つの<code translate="no">VARCHAR</code> フィールドを追加し、それぞれ最大長を100文字と200文字に設定しています。<code translate="no">max_length</code> 、過剰なスペース割り当てを避けながら最長データに対応できるように、データの特性に基づいて設定することを推奨します。さらに、プライマリ・フィールド<code translate="no">pk</code> とベクトル・フィールド<code translate="no">embedding</code> を追加した。</p>
+<p>この例では、<code translate="no">varchar_field1</code> と<code translate="no">varchar_field2</code> という2つの<code translate="no">VARCHAR</code> フィールドを追加し、それぞれ最大長を100文字と200文字に設定しています。<code translate="no">max_length</code> 、過剰なスペース割り当てを避けつつ最長データに対応できるよう、データの特性に基づいて設定することを推奨します。さらに、プライマリ・フィールド<code translate="no">pk</code> とベクトル・フィールド<code translate="no">embedding</code> を追加した。</p>
 <div class="alert note">
 <p>プライマリフィールドとベクトルフィールドは、コレクションを作成するときに必須です。プライマリフィールドは各エンティティを一意に識別し、ベクトルフィールドは類似性検索に重要である。詳細は<a href="/docs/ja/primary-field.md">Primary Field &amp; AutoID</a>,<a href="/docs/ja/dense-vector.md">Dense Vector</a>,<a href="/docs/ja/binary-vector.md">Binary Vector</a>,<a href="/docs/ja/sparse_vector.md">Sparse Vector</a> を参照。</p>
 </div>

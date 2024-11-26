@@ -59,7 +59,7 @@ title: 範囲検索
 </td><td data-block-token="DETWdE7fWo21TzxH2FxcRoQZnwd" colspan="1" rowspan="1"><p data-block-token="Wy8jdWzhsoZUJhx98jLcNIKjnSb">最も類似したベクトル埋め込みを無視するには</p>
 <p data-block-token="TqYLdOaBzoVv2ZxXlwkc2UHln0d"><code translate="no">radius</code> &lt; 距離 &lt;=<code translate="no">range_filter</code></p>
 </td></tr><tr><td data-block-token="NVeUd1byionhILxsXLRcTx32nbc" colspan="1" rowspan="1"><p data-block-token="ZvAcdO3b4oYibFxohwqcEIObnoh"><code translate="no">COSINE</code></p>
-</td><td data-block-token="IdUKdAUIdoNllqxLiKncqQE0nbc" colspan="1" rowspan="1"><p data-block-token="UBiudQZVbopMjcx9mg6cSLQpnVh">COSINE 距離が大きいほど，類似度が高いことを示す．</p>
+</td><td data-block-token="IdUKdAUIdoNllqxLiKncqQE0nbc" colspan="1" rowspan="1"><p data-block-token="UBiudQZVbopMjcx9mg6cSLQpnVh">COSINE距離が大きいほど類似度が高いことを示します。</p>
 </td><td data-block-token="JHc5dyljBogsOKxsPSfcb9qrnHh" colspan="1" rowspan="1"><p data-block-token="CLWEd89pQoUTeZxYOJFczlu2nwh">最も類似したベクトル埋め込みを無視するには</p>
 <p data-block-token="Zx9TdYxu5ouObNxhZjvcS95wnMd"><code translate="no">radius</code> &lt; 距離 &lt;=<code translate="no">range_filter</code></p>
 </td></tr><tr><td data-block-token="WsI8dAHxxobNtBxkYCmcFFtFn4c" colspan="1" rowspan="1"><p data-block-token="XvsMdyuLEoLR2wx0KdXcUmOcnlf"><code translate="no">JACCARD</code></p>
@@ -88,7 +88,7 @@ title: 範囲検索
         ></path>
       </svg>
     </button></h2><p>このセクションでは、範囲検索の方法を示します。以下のコードスニペットの検索リクエストはメトリックタイプを持たないので、デフォルトのメトリックタイプ<strong>COSINEが</strong>適用されます。この場合、radius値が<strong>range_filter</strong>値よりも小さいことを確認してください。</p>
-<p>以下のコードスニペットでは、Milvusがクエリベクトルとの距離またはスコアが<strong>0.4から</strong> <strong>0.6の</strong>範囲内にあるすべてのエンティティを返すように、<code translate="no">radius</code> を<code translate="no">0.4</code> に、<code translate="no">range_filter</code> を<code translate="no">0.6</code> に設定します。</p>
+<p>以下のコードスニペットでは、milvusがクエリベクトルとの距離またはスコアが<strong>0.4から</strong> <strong>0.6の</strong>範囲内にあるすべてのエンティティを返すように、<code translate="no">radius</code> を<code translate="no">0.4</code> に、<code translate="no">range_filter</code> を<code translate="no">0.6</code> に設定します。</p>
 <div class="multipleCode">
    <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient​

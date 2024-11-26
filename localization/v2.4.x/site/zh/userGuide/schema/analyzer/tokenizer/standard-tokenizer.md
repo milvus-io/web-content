@@ -40,7 +40,7 @@ summary: Milvus 中的 "标准 "标记符根据空格和标点符号分割文本
 }​
 
 <button class="copy-code-btn"></button></code></pre>
-<p><code translate="no">standard</code> 令牌分析器可与一个或多个过滤器配合使用。例如，以下代码定义了一个使用<code translate="no">standard</code> 标记符号和<code translate="no">lowercase</code> 过滤器的分析器。</p>
+<p><code translate="no">standard</code> 令牌分析器可与一个或多个过滤器配合使用。例如，下面的代码定义了一个使用<code translate="no">standard</code> 标记符号和<code translate="no">lowercase</code> 过滤器的分析器。</p>
 <pre><code translate="no" class="language-python">analyzer_params = {​
     <span class="hljs-string">&quot;tokenizer&quot;</span>: <span class="hljs-string">&quot;standard&quot;</span>,​
     <span class="hljs-string">&quot;filter&quot;</span>: [<span class="hljs-string">&quot;lowercase&quot;</span>]​
@@ -48,7 +48,7 @@ summary: Milvus 中的 "标准 "标记符根据空格和标点符号分割文本
 
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>为了简化设置，您可以选择使用 <a href="/docs/zh/standard-analyzer.md"><code translate="no">standard analyzer</code></a>，它将<code translate="no">standard</code> 标记符号转换器与 <a href="/docs/zh/lowercase-filter.md"><code translate="no">lowercase filter</code></a>.</p>
+<p>为简化设置，您可以选择使用 <a href="/docs/zh/standard-analyzer.md"><code translate="no">standard analyzer</code></a>，它将<code translate="no">standard</code> 标记符号转换器与 <a href="/docs/zh/lowercase-filter.md"><code translate="no">lowercase filter</code></a>.</p>
 </div>
 <p>在定义<code translate="no">analyzer_params</code> 之后，可以在定义 Collections Schema 时将它们应用到<code translate="no">VARCHAR</code> 字段。这样，Milvus 就能使用指定的分析器处理该字段中的文本，从而实现高效的标记化和过滤。有关详情，请参阅<a href="/docs/zh/analyzer-overview.md#Example-use">示例使用</a>。</p>
 <h2 id="Example-output​" class="common-anchor-header">输出示例<button data-href="#Example-output​" class="anchor-icon" translate="no">

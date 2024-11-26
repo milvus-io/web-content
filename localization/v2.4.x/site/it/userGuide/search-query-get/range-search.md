@@ -63,7 +63,7 @@ title: Ricerca per gamma
 <p data-block-token="TqYLdOaBzoVv2ZxXlwkc2UHln0d"><code translate="no">radius</code> &lt; distanza &lt;= <code translate="no">range_filter</code></p>
 </td></tr><tr><td data-block-token="NVeUd1byionhILxsXLRcTx32nbc" colspan="1" rowspan="1"><p data-block-token="ZvAcdO3b4oYibFxohwqcEIObnoh"><code translate="no">COSINE</code></p>
 </td><td data-block-token="IdUKdAUIdoNllqxLiKncqQE0nbc" colspan="1" rowspan="1"><p data-block-token="UBiudQZVbopMjcx9mg6cSLQpnVh">Una distanza COSINE maggiore indica una maggiore somiglianza.</p>
-</td><td data-block-token="JHc5dyljBogsOKxsPSfcb9qrnHh" colspan="1" rowspan="1"><p data-block-token="CLWEd89pQoUTeZxYOJFczlu2nwh">Per ignorare le incorporazioni vettoriali più simili, assicurarsi che</p>
+</td><td data-block-token="JHc5dyljBogsOKxsPSfcb9qrnHh" colspan="1" rowspan="1"><p data-block-token="CLWEd89pQoUTeZxYOJFczlu2nwh">Per ignorare le incorporazioni vettoriali più simili, accertarsi che</p>
 <p data-block-token="Zx9TdYxu5ouObNxhZjvcS95wnMd"><code translate="no">radius</code> &lt; distanza &lt;= <code translate="no">range_filter</code></p>
 </td></tr><tr><td data-block-token="WsI8dAHxxobNtBxkYCmcFFtFn4c" colspan="1" rowspan="1"><p data-block-token="XvsMdyuLEoLR2wx0KdXcUmOcnlf"><code translate="no">JACCARD</code></p>
 </td><td data-block-token="YC1MdSNIwoYPg2xUXAZcL74AnZd" colspan="1" rowspan="1"><p data-block-token="JaCGdLjCKonfQsxe5pecj5uQn7g">Una distanza di Jaccard minore indica una maggiore somiglianza.</p>
@@ -72,7 +72,7 @@ title: Ricerca per gamma
 <p data-block-token="AURId9AadouFaLxI8esczMpgnrf"><code translate="no">range_filter</code> &lt;= distanza &lt; <code translate="no">radius</code></p>
 </td></tr><tr><td data-block-token="BVuOdQPiKoJBYoxwBgQcqugqnmh" colspan="1" rowspan="1"><p data-block-token="R96ldn7iHoUj2Gxrf65c2TmAnmf"><code translate="no">HAMMING</code></p>
 </td><td data-block-token="OnAOdCFC8oyQwrx4XTRcMik1nbg" colspan="1" rowspan="1"><p data-block-token="LDT4dk5ygoAFKtxF12WctkFRnfb">Una distanza di Hamming più piccola indica una maggiore somiglianza.</p>
-</td><td data-block-token="VBaIdrQOOokaBvxlegWcTKDvnkc" colspan="1" rowspan="1"><p data-block-token="Z2ridFRhBoS64vxBiTrcfOagnIh">Per ignorare le incorporazioni vettoriali più simili, assicurarsi che</p>
+</td><td data-block-token="VBaIdrQOOokaBvxlegWcTKDvnkc" colspan="1" rowspan="1"><p data-block-token="Z2ridFRhBoS64vxBiTrcfOagnIh">Per ignorare le incorporazioni vettoriali più simili, accertarsi che</p>
 <p data-block-token="UOf2do2U8oGdDNxMzqlcYdMVnie"><code translate="no">range_filter</code> &lt;= distanza &lt; <code translate="no">radius</code></p>
 </td></tr></tbody></table>
 <h2 id="Examples​" class="common-anchor-header">Esempi<button data-href="#Examples​" class="anchor-icon" translate="no">
@@ -91,7 +91,7 @@ title: Ricerca per gamma
         ></path>
       </svg>
     </button></h2><p>Questa sezione mostra come effettuare una ricerca per intervallo. Le richieste di ricerca nei seguenti frammenti di codice non riportano un tipo di metrica, indicando che si applica il tipo di metrica predefinito <strong>COSINE</strong>. In questo caso, assicurarsi che il valore del raggio sia inferiore al valore di <strong>range_filter</strong>.</p>
-<p>Nei seguenti frammenti di codice, impostare <code translate="no">radius</code> su <code translate="no">0.4</code> e <code translate="no">range_filter</code> su <code translate="no">0.6</code> in modo che Milvus restituisca tutte le entità le cui distanze o i cui punteggi dal vettore di interrogazione siano compresi tra <strong>0,4</strong> e <strong>0,6</strong>.</p>
+<p>Nei seguenti frammenti di codice, impostare <code translate="no">radius</code> su <code translate="no">0.4</code> e <code translate="no">range_filter</code> su <code translate="no">0.6</code> in modo che Milvus restituisca tutte le entità le cui distanze o punteggi rispetto al vettore di interrogazione siano compresi tra <strong>0,4</strong> e <strong>0,6</strong>.</p>
 <div class="multipleCode">
    <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient​

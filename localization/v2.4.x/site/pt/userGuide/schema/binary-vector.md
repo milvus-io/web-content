@@ -26,9 +26,9 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Os vectores binários são uma forma especial de representação de dados que convertem os vectores tradicionais de vírgula flutuante de elevada dimensão em vectores binários que contêm apenas 0s e 1s. Esta transformação não só comprime o tamanho do vetor, como também reduz os custos de armazenamento e computacionais, mantendo a informação semântica. Quando a precisão para caraterísticas não críticas não é essencial, os vectores binários podem efetivamente manter a maior parte da integridade e utilidade dos vectores de vírgula flutuante originais.</p>
+    </button></h1><p>Os vectores binários são uma forma especial de representação de dados que convertem os vectores tradicionais de vírgula flutuante de elevada dimensão em vectores binários que contêm apenas 0s e 1s. Esta transformação não só comprime o tamanho do vetor como também reduz os custos de armazenamento e computacionais, mantendo a informação semântica. Quando a precisão para caraterísticas não críticas não é essencial, os vectores binários podem efetivamente manter a maior parte da integridade e utilidade dos vectores de vírgula flutuante originais.</p>
 <p>Os vectores binários têm uma vasta gama de aplicações, especialmente em situações em que a eficiência computacional e a otimização do armazenamento são cruciais. Em sistemas de IA de grande escala, como motores de pesquisa ou sistemas de recomendação, o processamento em tempo real de grandes quantidades de dados é fundamental. Ao reduzir o tamanho dos vectores, os vectores binários ajudam a diminuir a latência e os custos computacionais sem sacrificar significativamente a precisão. Além disso, os vectores binários são úteis em ambientes com recursos limitados, como dispositivos móveis e sistemas incorporados, onde a memória e a capacidade de processamento são limitadas. Através da utilização de vectores binários, podem ser implementadas funções de IA complexas nestes ambientes restritos, mantendo um elevado desempenho.</p>
-<h2 id="Overview​" class="common-anchor-header">Panorama geral<button data-href="#Overview​" class="anchor-icon" translate="no">
+<h2 id="Overview​" class="common-anchor-header">Panorâmica geral<button data-href="#Overview​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -80,7 +80,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Add-vector-field​" class="common-anchor-header">Adicionar campo de vetor</h3><p>Para utilizar vectores binários no Milvus, comece por definir um campo vetorial para armazenar vectores binários ao criar uma coleção. Este processo inclui.</p>
+    </button></h2><h3 id="Add-vector-field​" class="common-anchor-header">Adicionar campo vetorial</h3><p>Para utilizar vectores binários no Milvus, comece por definir um campo vetorial para armazenar vectores binários ao criar uma coleção. Este processo inclui.</p>
 <ol>
 <li><p>Definir <code translate="no">datatype</code> como o tipo de dados de vetor binário suportado, ou seja, <code translate="no">BINARY_VECTOR</code>.</p></li>
 <li><p>Especificar as dimensões do vetor utilizando o parâmetro <code translate="no">dim</code>. Observe que <code translate="no">dim</code> deve ser um múltiplo de 8, pois os vetores binários devem ser convertidos em uma matriz de bytes ao serem inseridos. Cada 8 valores booleanos (0 ou 1) serão empacotados em 1 byte. Por exemplo, se <code translate="no">dim=128</code>, é necessária uma matriz de 16 bytes para a inserção.</p></li>
@@ -359,7 +359,7 @@ client.<span class="hljs-title function_">insert</span>({​
 }&quot;</span>​
 
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Perform-similarity-search​" class="common-anchor-header">Efetuar pesquisa de semelhanças</h3><p>A pesquisa por similaridade é uma das principais caraterísticas do Milvus, permitindo-lhe encontrar rapidamente os dados que são mais semelhantes a um vetor de consulta com base na distância entre vectores. Para efetuar uma pesquisa por semelhança utilizando vectores binários, prepare o vetor de consulta e os parâmetros de pesquisa e, em seguida, chame o método <code translate="no">search</code>.</p>
+<h3 id="Perform-similarity-search​" class="common-anchor-header">Efetuar pesquisa de semelhanças</h3><p>A pesquisa por similaridade é uma das principais caraterísticas do Milvus, permitindo-lhe encontrar rapidamente os dados mais semelhantes a um vetor de consulta com base na distância entre vectores. Para efetuar uma pesquisa por semelhança utilizando vectores binários, prepare o vetor de consulta e os parâmetros de pesquisa e, em seguida, chame o método <code translate="no">search</code>.</p>
 <p>Durante as operações de pesquisa, os vectores binários também têm de ser fornecidos sob a forma de uma matriz de bytes. Certifique-se de que a dimensionalidade do vetor de consulta corresponde à dimensão especificada ao definir <code translate="no">dim</code> e que cada 8 valores booleanos são convertidos em 1 byte.</p>
 <div class="multipleCode">
  <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#go">Go</a> <a href="#curl">cURL</a></div>

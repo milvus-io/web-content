@@ -23,7 +23,7 @@ summary: >-
         ></path>
       </svg>
     </button></h1><p>A indexação Bitmap é uma técnica de indexação eficiente concebida para melhorar o desempenho das consultas em campos escalares de baixa cardinalidade. A cardinalidade refere-se ao número de valores distintos num campo. Os campos com menos elementos distintos são considerados de baixa cardinalidade.</p>
-<p>Este tipo de índice ajuda a reduzir o tempo de recuperação de consultas escalares, representando os valores do campo num formato binário compacto e efectuando operações bit a bit eficientes sobre eles. Em comparação com outros tipos de índices, os índices bitmap têm normalmente uma maior eficiência de espaço e velocidades de consulta mais rápidas quando se trata de campos de baixa cardinalidade.</p>
+<p>Este tipo de índice ajuda a reduzir o tempo de recuperação de consultas escalares, representando os valores do campo num formato binário compacto e efectuando operações bit a bit eficientes sobre eles. Em comparação com outros tipos de índices, os índices de mapa de bits têm normalmente uma maior eficiência de espaço e velocidades de consulta mais rápidas quando se trata de campos de baixa cardinalidade.</p>
 <h2 id="Overview" class="common-anchor-header">Descrição geral<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -41,7 +41,7 @@ summary: >-
       </svg>
     </button></h2><p>O termo Bitmap combina duas palavras: <strong>Bit</strong> e <strong>Mapa</strong>. Um bit representa a unidade de dados mais pequena num computador, que só pode conter um valor de <strong>0</strong> ou <strong>1</strong>. Um mapa, neste contexto, refere-se ao processo de transformação e organização de dados de acordo com o valor que deve ser atribuído a 0 e 1.</p>
 <p>Um índice bitmap é constituído por dois componentes principais: bitmaps e chaves. As chaves representam os valores únicos no campo indexado. Para cada valor único, existe um mapa de bits correspondente. O comprimento destes mapas de bits é igual ao número de registos na coleção. Cada bit no mapa de bits corresponde a um registo na coleção. Se o valor do campo indexado num registo corresponder à chave, o bit correspondente é definido como <strong>1</strong>; caso contrário, é definido como <strong>0</strong>.</p>
-<p>Considere uma coleção de documentos com os campos <strong>Categoria</strong> e <strong>Público</strong>. Queremos obter documentos que se enquadrem na categoria <strong>Técnico</strong> e que estejam abertos ao <strong>Público</strong>. Neste caso, as chaves para os nossos índices de bitmap são <strong>Tech</strong> e <strong>Public</strong>.</p>
+<p>Considere uma coleção de documentos com os campos <strong>Categoria</strong> e <strong>Público</strong>. Queremos obter documentos que se enquadrem na categoria <strong>Técnico</strong> e que estejam abertos ao <strong>Público</strong>. Neste caso, as chaves para os nossos índices de mapa de bits são <strong>Técnico</strong> e <strong>Público</strong>.</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/bitmap.png" alt="Bitmap indexing" class="doc-image" id="bitmap-indexing" />
@@ -109,7 +109,7 @@ client.create_index(​
 <li><p>O tipo de dados do campo deve ser um dos seguintes.</p>
 <ul>
 <li><p><code translate="no">BOOL</code>, <code translate="no">INT8</code>, <code translate="no">INT16</code>, <code translate="no">INT32</code>, <code translate="no">INT64</code>, <code translate="no">VARCHAR</code></p></li>
-<li><p><code translate="no">ARRAY</code> (os elementos têm de ser um dos seguintes: <code translate="no">BOOL</code>, <code translate="no">INT8</code>, <code translate="no">INT16</code>, <code translate="no">INT32</code>, <code translate="no">INT64</code>, <code translate="no">VARCHAR</code>)</p></li>
+<li><p><code translate="no">ARRAY</code> (os elementos devem ser um dos seguintes: <code translate="no">BOOL</code>, <code translate="no">INT8</code>, <code translate="no">INT16</code>, <code translate="no">INT32</code>, <code translate="no">INT64</code>, <code translate="no">VARCHAR</code>)</p></li>
 </ul></li>
 <li><p>Os índices de bitmap não suportam os seguintes tipos de dados.</p>
 <ul>

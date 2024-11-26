@@ -22,7 +22,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Die Bitmap-Indizierung ist eine effiziente Indizierungstechnik, die zur Verbesserung der Abfrageleistung bei skalaren Feldern mit geringer Kardinalität entwickelt wurde. Kardinalität bezieht sich auf die Anzahl der eindeutigen Werte in einem Feld. Felder mit weniger eindeutigen Elementen werden als Felder mit geringer Kardinalität betrachtet.</p>
+    </button></h1><p>Die Bitmap-Indizierung ist eine effiziente Indizierungstechnik zur Verbesserung der Abfrageleistung bei skalaren Feldern mit geringer Kardinalität. Kardinalität bezieht sich auf die Anzahl der eindeutigen Werte in einem Feld. Felder mit weniger eindeutigen Elementen werden als Felder mit geringer Kardinalität betrachtet.</p>
 <p>Dieser Indextyp trägt dazu bei, die Abrufzeit skalarer Abfragen zu verringern, indem er Feldwerte in einem kompakten Binärformat darstellt und effiziente bitweise Operationen mit ihnen durchführt. Im Vergleich zu anderen Indextypen haben Bitmap-Indizes in der Regel eine höhere Speichereffizienz und schnellere Abfragegeschwindigkeiten, wenn es sich um Felder mit geringer Kardinalität handelt.</p>
 <h2 id="Overview" class="common-anchor-header">Überblick<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -41,7 +41,7 @@ summary: >-
       </svg>
     </button></h2><p>Der Begriff Bitmap setzt sich aus zwei Wörtern zusammen: <strong>Bit</strong> und <strong>Map</strong>. Ein Bit stellt die kleinste Dateneinheit in einem Computer dar, die nur einen Wert von <strong>0</strong> oder <strong>1</strong> annehmen kann. Eine Map bezieht sich in diesem Zusammenhang auf den Prozess der Umwandlung und Organisation von Daten entsprechend dem Wert, der 0 und 1 zugewiesen werden soll.</p>
 <p>Ein Bitmap-Index besteht aus zwei Hauptkomponenten: Bitmaps und Schlüssel. Die Schlüssel stellen die eindeutigen Werte im indizierten Feld dar. Für jeden eindeutigen Wert gibt es eine entsprechende Bitmap. Die Länge dieser Bitmaps ist gleich der Anzahl der Datensätze in der Sammlung. Jedes Bit in der Bitmap entspricht einem Datensatz in der Sammlung. Wenn der Wert des indizierten Feldes in einem Datensatz mit dem Schlüssel übereinstimmt, wird das entsprechende Bit auf <strong>1</strong> gesetzt; andernfalls wird es auf <strong>0</strong> gesetzt.</p>
-<p>Betrachten wir eine Sammlung von Dokumenten mit den Feldern <strong>Kategorie</strong> und <strong>Öffentlich</strong>. Wir möchten Dokumente abrufen, die in die Kategorie <strong>"Technik"</strong> fallen und für die <strong>Öffentlichkeit</strong> zugänglich sind. In diesem Fall sind die Schlüssel für unsere Bitmap-Indizes <strong>Tech</strong> und <strong>Public</strong>.</p>
+<p>Betrachten wir eine Sammlung von Dokumenten mit den Feldern <strong>Kategorie</strong> und <strong>Öffentlich</strong>. Wir möchten Dokumente abrufen, die in die Kategorie <strong>Technik</strong> fallen und für die <strong>Öffentlichkeit</strong> zugänglich sind. In diesem Fall sind die Schlüssel für unsere Bitmap-Indizes <strong>Tech</strong> und <strong>Public</strong>.</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/bitmap.png" alt="Bitmap indexing" class="doc-image" id="bitmap-indexing" />
@@ -116,14 +116,14 @@ client.create_index(​
 <li><p><code translate="no">FLOAT</code> <code translate="no">DOUBLE</code>: Fließkomma-Typen sind nicht mit der binären Natur von Bitmap-Indizes kompatibel.</p></li>
 <li><p><code translate="no">JSON</code>: JSON-Datentypen haben eine komplexe Struktur, die mit Bitmap-Indizes nicht effizient dargestellt werden kann.</p></li>
 </ul></li>
-<li><p>Bitmap-Indizes eignen sich nicht für Felder mit hoher Kardinalität (d. h. Felder mit einer großen Anzahl unterschiedlicher Werte).</p>
+<li><p>Bitmap-Indizes sind nicht für Felder mit hoher Kardinalität geeignet (d. h. Felder mit einer großen Anzahl unterschiedlicher Werte).</p>
 <ul>
 <li><p>Als allgemeine Richtlinie gilt, dass Bitmap-Indizes am effektivsten sind, wenn die Kardinalität eines Feldes weniger als 500 beträgt.</p></li>
 <li><p>Wenn die Kardinalität über diesen Schwellenwert hinausgeht, nehmen die Leistungsvorteile von Bitmap-Indizes ab, und der Speicher-Overhead wird erheblich.</p></li>
 <li><p>Für Felder mit hoher Kardinalität sollten Sie je nach Anwendungsfall und Abfrageanforderungen alternative Indizierungstechniken wie z. B. invertierte Indizes in Betracht ziehen.</p></li>
 </ul></li>
 </ul>
-<h3 id="Structural-Similarity" class="common-anchor-header">Strukturelle Ähnlichkeit</h3><p>Wenn eine chemische Struktur als Teil einer größeren chemischen Struktur auftritt, wird die erstere als Unterstruktur und die letztere als Überstruktur bezeichnet. Zum Beispiel ist Ethanol eine Unterstruktur von Essigsäure und Essigsäure ist eine Überstruktur von Ethanol.</p>
+<h3 id="Structural-Similarity" class="common-anchor-header">Strukturelle Ähnlichkeit</h3><p>Wenn eine chemische Struktur als Teil einer größeren chemischen Struktur auftritt, wird die erste als Unterstruktur und die zweite als Überstruktur bezeichnet. Zum Beispiel ist Ethanol eine Unterstruktur von Essigsäure und Essigsäure ist eine Überstruktur von Ethanol.</p>
 <p>Die strukturelle Ähnlichkeit wird verwendet, um festzustellen, ob zwei chemische Formeln einander insofern ähnlich sind, als die eine die Über- oder Unterstruktur der anderen ist.</p>
 <p>Um festzustellen, ob A ein Überbau von B ist, verwendet man die folgende Formel:</p>
 <p>

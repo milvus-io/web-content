@@ -562,4 +562,4 @@ System.out.println(resp.getSearchResults());​
 <span class="hljs-comment">## {&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:[{&quot;age&quot;:35,&quot;distance&quot;:-0.19054288,&quot;id&quot;:3,&quot;price&quot;:199.99},{&quot;age&quot;:30,&quot;distance&quot;:-0.20163085,&quot;id&quot;:2,&quot;price&quot;:149.5},{&quot;age&quot;:25,&quot;distance&quot;:-0.2364331,&quot;id&quot;:1,&quot;price&quot;:99.99}]}​</span>
 
 <button class="copy-code-btn"></button></code></pre>
-<p>在这个示例中，我们首先定义了一个查询向量，并在搜索过程中添加了一个过滤条件<code translate="no">25 &lt;= age &lt;= 35</code> 。这样不仅能确保搜索结果与查询向量相似，还能满足指定的年龄范围。更多信息，请参阅<a href="/docs/zh/boolean.md">元数据过滤</a>。</p>
+<p>在这个示例中，我们首先定义了一个查询向量，并在搜索过程中添加了一个过滤条件<code translate="no">25 &lt;= age &lt;= 35</code> 。这不仅能确保搜索结果与查询向量相似，还能满足指定的年龄范围。更多信息，请参阅<a href="/docs/zh/boolean.md">元数据过滤</a>。</p>

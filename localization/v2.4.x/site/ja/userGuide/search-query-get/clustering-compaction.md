@@ -36,7 +36,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvusは入力されたエンティティをコレクション内のセグメントに格納し、セグメントが一杯になるとそのセグメントを封印します。この場合、追加のエンティティを収容するために新しいセグメントが作成されます。その結果、エンティティはセグメント間で任意に分散される。この分散によって、Milvus は複数のセグメントを検索して、与えられたクエリベクトルに最も近いものを見つける必要がある。</p>
+    </button></h2><p>Milvusは入力されたエンティティをコレクション内のセグメントに保存し、セグメントが一杯になるとそのセグメントを封印します。この場合、追加のエンティティを格納するために新しいセグメントが作成されます。その結果、エンティティはセグメント間で任意に分散される。この分散により、Milvus は複数のセグメントを検索して、与えられたクエリベクトルに最も近いものを見つける必要がある。</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/clustering-compaction.png" alt="Without clustering Compaction" class="doc-image" id="without-clustering-compaction" />
@@ -97,7 +97,7 @@ common:
 <tr><td><code translate="no">autoEnable</code></td><td>自動的にトリガーされるコンパクションを有効にするかどうかを指定します。<br>これを<code translate="no">true</code> に設定すると、Milvusは指定された間隔でクラスタリングキーを持つコレクションを圧縮します。</td><td><code translate="no">false</code></td></tr>
 <tr><td><code translate="no">triggerInterval</code></td><td>Milvusがクラスタリング圧縮を開始する間隔をミリ秒単位で指定します。<br>このパラメータは<code translate="no">autoEnable</code> が<code translate="no">true</code> に設定されている場合のみ有効です。</td><td>-</td></tr>
 <tr><td><code translate="no">minInterval</code></td><td>最小間隔を秒単位で指定します。<br>このパラメータは<code translate="no">autoEnable</code> が<code translate="no">true</code> に設定されている場合のみ有効です。<br>triggerIntervalより大きい整数に設定することで、短時間に繰り返しコンパクションが行われるのを防ぐことができます。</td><td>-</td></tr>
-<tr><td><code translate="no">maxInterval</code></td><td>最大間隔を秒単位で指定する。<br>このパラメータは、<code translate="no">autoEnable</code> が<code translate="no">true</code> に設定されている場合のみ有効です。<br>Milvusは、コレクションがこの値より長い期間クラスタリング圧縮されていないことを検出すると、強制的にクラスタリング圧縮を行います。</td><td>-</td></tr>
+<tr><td><code translate="no">maxInterval</code></td><td>最大間隔を秒単位で指定する。<br>このパラメータは、<code translate="no">autoEnable</code> が<code translate="no">true</code> に設定されている場合のみ有効です。<br>Milvusは、コレクションがこの値よりも長い期間クラスタリング圧縮されていないことを検出すると、強制的にクラスタリング圧縮を行います。</td><td>-</td></tr>
 <tr><td><code translate="no">newDataSizeThreshold</code></td><td>クラスタリング圧縮をトリガする上限しきい値を指定します。<br>このパラメータは、<code translate="no">autoEnable</code> が<code translate="no">true</code> に設定されている場合にのみ有効です。<br>Milvusはコレクションのデータ量がこの値を超えたことを検出すると、クラスタリングコンパクションプロセスを開始します。</td><td>-</td></tr>
 <tr><td><code translate="no">timeout</code></td><td>クラスタリングコンパクションのタイムアウト時間を指定します。<br>実行時間がこの値を超えると、クラスタリングコンパクションは失敗します。</td><td>-</td></tr>
 </tbody>

@@ -57,7 +57,7 @@ summary: >-
    </span> <span class="img-wrapper"> <span>Recherche en texte intégral</span> </span></p>
 <p>Pour utiliser la recherche en texte intégral, suivez les étapes suivantes.</p>
 <ol>
-<li><p><a href="#Create-a-collection-for-full-text-search">Créer une collection</a>: Créez une collection avec les champs nécessaires et définissez une fonction pour convertir le texte brut en encastrements épars.</p></li>
+<li><p><a href="#Create-a-collection-for-full-text-search">Créez une collection</a>: Créez une collection avec les champs nécessaires et définissez une fonction pour convertir le texte brut en encastrements épars.</p></li>
 <li><p><a href="#Insert-text-data">Insérer des données</a>: Insérez vos documents de texte brut dans la collection.</p></li>
 <li><p><a href="#Perform-full-text-search">Effectuer des recherches</a>: Utilisez des textes d'interrogation pour effectuer des recherches dans votre collection et récupérer des résultats pertinents.</p></li>
 </ol>

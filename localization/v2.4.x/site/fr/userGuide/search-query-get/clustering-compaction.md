@@ -130,10 +130,10 @@ common:
 <li><p><code translate="no">common</code></p>
 <table>
 <thead>
-<tr><th>Élément de configuration</th><th>Description de l'élément de configuration</th><th>Valeur par défaut</th></tr>
+<tr><th>Configuration Elément</th><th>Description de l'élément de configuration</th><th>Valeur par défaut</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">usePartitionKeyAsClusteringKey</code></td><td>Spécifie s'il faut utiliser la clé de partition dans les collections comme clé de regroupement.<br>La valeur <code translate="no">true</code> indique que la clé de partition est utilisée comme clé de regroupement.<br>Vous pouvez toujours remplacer ce paramètre dans une collection en définissant explicitement une clé de clustering.</td><td><code translate="no">false</code></td></tr>
+<tr><td><code translate="no">usePartitionKeyAsClusteringKey</code></td><td>Spécifie s'il faut utiliser la clé de partition dans les collections comme clé de regroupement.<br>La valeur <code translate="no">true</code> indique que la clé de partition est utilisée comme clé de regroupement.<br>Vous pouvez toujours remplacer ce paramètre dans une collection en définissant explicitement une clé de regroupement.</td><td><code translate="no">false</code></td></tr>
 </tbody>
 </table>
 </li>

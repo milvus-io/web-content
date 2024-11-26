@@ -426,7 +426,7 @@ System.out.println(resp.getQueryResults());​
 
 <button class="copy-code-btn"></button></code></pre>
 <p>위의 쿼리에서 Milvus는 <code translate="no">metadata</code> 필드의 카테고리가 <code translate="no">&quot;electronics&quot;</code>, 가격이 150 미만인 엔티티를 필터링하여 이 조건과 일치하는 엔티티를 반환합니다.</p>
-<h3 id="Vector-search-with-JSON-filtering​" class="common-anchor-header">JSON 필터링을 사용한 벡터 검색</h3><p>벡터 유사성과 JSON 필터링을 결합하면 검색된 데이터가 의미론적으로 일치할 뿐만 아니라 특정 비즈니스 조건을 충족하는지 확인하여 검색 결과를 보다 정확하고 사용자 요구에 맞게 조정할 수 있습니다.</p>
+<h3 id="Vector-search-with-JSON-filtering​" class="common-anchor-header">JSON 필터링을 사용한 벡터 검색</h3><p>벡터 유사성과 JSON 필터링을 결합하면 검색된 데이터가 의미론적으로 일치할 뿐만 아니라 특정 비즈니스 조건에도 부합하는지 확인하여 검색 결과를 보다 정확하고 사용자 요구에 맞게 조정할 수 있습니다.</p>
 <div class="multipleCode">
    <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;metadata[&quot;brand&quot;] == &quot;BrandA&quot;&#x27;</span>​

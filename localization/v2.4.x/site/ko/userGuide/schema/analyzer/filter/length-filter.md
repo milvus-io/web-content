@@ -49,7 +49,7 @@ summary: '''길이'' 필터는 지정된 길이 요건을 충족하지 않는 �
 </th></tr></thead><tbody><tr><td data-block-token="ZuZEdNiHIotOFTx3m9QcTPnWnle" colspan="1" rowspan="1"><p data-block-token="Dszdd3IDdowj5bxJyJhcP19tnng"><code translate="no">max</code></p>
 </td><td data-block-token="Fx30ddBWYoyRhmxK34Kcgn1Ynjb" colspan="1" rowspan="1"><p data-block-token="MizvdmrQ2oycDjxNYrXcWqFtnXb">최대 토큰 길이를 설정합니다. 이 길이보다 긴 토큰은 제거됩니다.</p>
 </td></tr></tbody></table>
-<p><code translate="no">length</code> 필터는 토큰 생성기에 의해 생성된 용어에 대해 작동하므로 토큰 생성기와 함께 사용해야 합니다.</p>
+<p><code translate="no">length</code> 필터는 토큰화 도구에서 생성된 용어에 대해 작동하므로 토큰화 도구와 함께 사용해야 합니다.</p>
 <p><code translate="no">analyzer_params</code> 을 정의한 후 컬렉션 스키마를 정의할 때 <code translate="no">VARCHAR</code> 필드에 적용할 수 있습니다. 이렇게 하면 Milvus가 지정된 분석기를 사용하여 해당 필드의 텍스트를 처리하여 효율적인 토큰화 및 필터링을 수행할 수 있습니다. 자세한 내용은 <a href="/docs/ko/analyzer-overview.md#Example-use">사용 예시를</a> 참조하세요.</p>
 <h2 id="Example-output" class="common-anchor-header">예제 출력<button data-href="#Example-output" class="anchor-icon" translate="no">
       <svg translate="no"

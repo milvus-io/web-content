@@ -132,7 +132,7 @@ client.create_index(​
 <li>A는 검색하려는 화학식의 이진 표현입니다.</li>
 <li>B는 데이터베이스에 있는 화학식의 이진 표현입니다.</li>
 </ul>
-<p><code translate="no">0</code> 이 반환되면 <strong>A는</strong> <strong>B의</strong> 상부구조가 아닙니다. 그렇지 않으면 결과는 그 반대입니다.</p>
+<p><code translate="no">0</code> 이 반환되면 <strong>A는</strong> <strong>B의</strong> 상부 구조가 아닙니다. 그렇지 않으면 결과는 그 반대입니다.</p>
 <p>A가 B의 하부 구조인지 확인하려면 다음 공식을 사용합니다:</p>
 <p>
   

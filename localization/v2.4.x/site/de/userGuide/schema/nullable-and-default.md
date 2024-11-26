@@ -4,7 +4,7 @@ title: Nullbar & Standard
 related_key: 'nullable, default'
 summary: >-
   Milvus ermöglicht es Ihnen, das Attribut "nullable" und Standardwerte für
-  skalare Felder mit Ausnahme des Primärfeldes festzulegen. Bei Feldern, die als
+  skalare Felder mit Ausnahme des Primärfelds festzulegen. Bei Feldern, die als
   nullable=True markiert sind, können Sie das Feld beim Einfügen von Daten
   überspringen oder es direkt auf einen Nullwert setzen, und das System wird es
   als Null behandeln, ohne einen Fehler zu verursachen.
@@ -24,7 +24,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Mit Milvus können Sie das Attribut <code translate="no">nullable</code> und Standardwerte für skalare Felder mit Ausnahme des Primärfeldes festlegen. Für Felder, die als <code translate="no">nullable=True</code> markiert sind, können Sie das Feld beim Einfügen von Daten überspringen oder es direkt auf einen Nullwert setzen, und das System wird es als Null behandeln, ohne einen Fehler zu verursachen. Wenn ein Feld einen Standardwert hat, wendet das System diesen Wert automatisch an, wenn beim Einfügen keine Daten für das Feld angegeben werden.</p>
+    </button></h1><p>In Milvus können Sie das Attribut <code translate="no">nullable</code> und Standardwerte für skalare Felder mit Ausnahme des Primärfelds festlegen. Für Felder, die als <code translate="no">nullable=True</code> markiert sind, können Sie das Feld beim Einfügen von Daten überspringen oder es direkt auf einen Nullwert setzen, und das System wird es als Null behandeln, ohne einen Fehler zu verursachen. Wenn ein Feld einen Standardwert hat, wendet das System diesen Wert automatisch an, wenn beim Einfügen keine Daten für das Feld angegeben werden.</p>
 <p>Die Attribute "Standardwert" und "löschbar" rationalisieren die Datenmigration von anderen Datenbanksystemen zu Milvus, indem sie die Handhabung von Datensätzen mit Nullwerten und die Beibehaltung von Standardwerteinstellungen ermöglichen. Bei der Erstellung einer Sammlung können Sie auch löschbare Werte aktivieren oder Standardwerte für Felder festlegen, deren Werte unsicher sein könnten.</p>
 <h2 id="Limits" class="common-anchor-header">Begrenzt<button data-href="#Limits" class="anchor-icon" translate="no">
       <svg translate="no"

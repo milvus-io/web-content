@@ -43,7 +43,7 @@ title: 그룹 검색
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/ann-search.png" alt="ANN Search" class="doc-image" id="ann-search" />
    </span> <span class="img-wrapper"> <span>ANN 검색</span> </span></p>
-<p>이러한 컬렉션에서 근사 이웃(ANN) 검색을 수행할 때, 검색 결과에 동일한 문서의 여러 단락이 포함될 수 있으며, 이로 인해 의도한 사용 사례와 맞지 않는 다른 문서가 간과될 수 있습니다.</p>
+<p>이러한 컬렉션에서 근사 이웃(ANN) 검색을 수행할 때, 검색 결과에 동일한 문서의 여러 단락이 포함될 수 있어 의도한 사용 사례와 맞지 않을 수 있는 다른 문서가 간과될 가능성이 있습니다.</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/grouping-search.png" alt="Grouping Search" class="doc-image" id="grouping-search" />
@@ -88,7 +88,7 @@ title: 그룹 검색
 ​
 
 <button class="copy-code-btn"></button></code></pre>
-<p>검색 요청에서 <code translate="no">group_by_field</code> 와 <code translate="no">output_fields</code> 을 모두 <code translate="no">docId</code> 로 설정합니다. Milvus는 지정된 필드에 따라 결과를 그룹화하고 각 그룹에서 가장 유사한 엔티티를 반환하며, 반환된 각 엔티티에 대해 <code translate="no">docId</code> 값을 포함합니다.</p>
+<p>검색 요청에서 <code translate="no">group_by_field</code> 와 <code translate="no">output_fields</code> 을 모두 <code translate="no">docId</code> 로 설정합니다. Milvus는 지정된 필드별로 결과를 그룹화하고 반환된 각 엔티티에 대해 <code translate="no">docId</code> 값을 포함하여 각 그룹에서 가장 유사한 엔티티를 반환합니다.</p>
 <div class="multipleCode">
    <a href="#python">파이썬 </a> <a href="#java">자바</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient​

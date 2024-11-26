@@ -27,7 +27,7 @@ summary: >-
         ></path>
       </svg>
     </button></h1><p>Binäre Vektoren sind eine besondere Form der Datendarstellung, bei der herkömmliche hochdimensionale Fließkomma-Vektoren in binäre Vektoren umgewandelt werden, die nur 0en und 1en enthalten. Durch diese Umwandlung wird nicht nur die Größe des Vektors komprimiert, sondern es werden auch die Speicher- und Rechenkosten reduziert, während die semantischen Informationen erhalten bleiben. Wenn die Genauigkeit für unkritische Merkmale nicht entscheidend ist, können binäre Vektoren die Integrität und den Nutzen der ursprünglichen Fließkomma-Vektoren weitgehend erhalten.</p>
-<p>Binäre Vektoren haben ein breites Anwendungsspektrum, insbesondere in Situationen, in denen Berechnungseffizienz und Speicheroptimierung entscheidend sind. In groß angelegten KI-Systemen wie Suchmaschinen oder Empfehlungssystemen ist die Echtzeitverarbeitung großer Datenmengen von entscheidender Bedeutung. Durch die Verkleinerung der Vektoren tragen binäre Vektoren zur Senkung der Latenzzeit und der Rechenkosten bei, ohne die Genauigkeit wesentlich zu beeinträchtigen. Darüber hinaus sind binäre Vektoren in ressourcenbeschränkten Umgebungen nützlich, wie z. B. bei mobilen Geräten und eingebetteten Systemen, wo Speicher und Verarbeitungsleistung begrenzt sind. Durch die Verwendung binärer Vektoren können komplexe KI-Funktionen in diesen eingeschränkten Umgebungen bei gleichbleibend hoher Leistung implementiert werden.</p>
+<p>Binäre Vektoren haben ein breites Anwendungsspektrum, insbesondere in Situationen, in denen Berechnungseffizienz und Speicheroptimierung entscheidend sind. In groß angelegten KI-Systemen wie Suchmaschinen oder Empfehlungssystemen ist die Echtzeitverarbeitung großer Datenmengen von entscheidender Bedeutung. Durch die Verkleinerung der Vektoren tragen binäre Vektoren zur Senkung der Latenzzeit und der Rechenkosten bei, ohne die Genauigkeit wesentlich zu beeinträchtigen. Darüber hinaus sind Binärvektoren in ressourcenbeschränkten Umgebungen nützlich, wie z. B. bei mobilen Geräten und eingebetteten Systemen, wo Speicher und Verarbeitungsleistung begrenzt sind. Durch die Verwendung binärer Vektoren können komplexe KI-Funktionen in diesen eingeschränkten Umgebungen bei gleichbleibend hoher Leistung implementiert werden.</p>
 <h2 id="Overview​" class="common-anchor-header">Überblick<button data-href="#Overview​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -56,7 +56,7 @@ summary: >-
 <li><p><strong>Feste Länge:</strong> Die Länge des Vektors bleibt unabhängig von der ursprünglichen Textlänge konstant, was die Indizierung und das Auffinden erleichtert.</p></li>
 <li><p><strong>Einfach und intuitiv:</strong> Spiegelt direkt das Vorhandensein von Schlüsselwörtern wider und eignet sich daher für bestimmte spezialisierte Suchaufgaben.</p></li>
 </ul>
-<p>Binäre Vektoren können mit verschiedenen Methoden erzeugt werden. Bei der Textverarbeitung können vordefinierte Vokabulare verwendet werden, um entsprechende Bits auf der Grundlage des Vorhandenseins von Wörtern zu setzen. Bei der Bildverarbeitung können Wahrnehmungs-Hashing-Algorithmen (wie <a href="https://en.wikipedia.org/wiki/Perceptual_hashing">pHash</a>) binäre Merkmale von Bildern erzeugen. Bei Anwendungen des maschinellen Lernens können die Modellausgaben binarisiert werden, um binäre Vektordarstellungen zu erhalten.</p>
+<p>Binäre Vektoren können durch verschiedene Methoden erzeugt werden. Bei der Textverarbeitung können vordefinierte Vokabulare verwendet werden, um entsprechende Bits auf der Grundlage des Vorhandenseins von Wörtern zu setzen. Bei der Bildverarbeitung können Wahrnehmungs-Hashing-Algorithmen (wie <a href="https://en.wikipedia.org/wiki/Perceptual_hashing">pHash</a>) binäre Merkmale von Bildern erzeugen. Bei Anwendungen des maschinellen Lernens können die Modellausgaben binarisiert werden, um binäre Vektordarstellungen zu erhalten.</p>
 <p>Nach der binären Vektorisierung können die Daten in Milvus zur Verwaltung und zum Abruf der Vektoren gespeichert werden. Das folgende Diagramm zeigt den grundlegenden Prozess.</p>
 <p>
   
@@ -83,7 +83,7 @@ summary: >-
     </button></h2><h3 id="Add-vector-field​" class="common-anchor-header">Vektorfeld hinzufügen</h3><p>Um binäre Vektoren in Milvus zu verwenden, definieren Sie zunächst ein Vektorfeld zum Speichern von binären Vektoren, wenn Sie eine Sammlung erstellen. Dieser Prozess beinhaltet.</p>
 <ol>
 <li><p>Einstellen von <code translate="no">datatype</code> auf den unterstützten binären Vektordatentyp, d.h. <code translate="no">BINARY_VECTOR</code>.</p></li>
-<li><p>Angeben der Dimensionen des Vektors mit dem Parameter <code translate="no">dim</code>. Beachten Sie, dass <code translate="no">dim</code> ein Vielfaches von 8 sein muss, da binäre Vektoren beim Einfügen in ein Byte-Array konvertiert werden müssen. Alle 8 booleschen Werte (0 oder 1) werden in 1 Byte gepackt. Wenn zum Beispiel <code translate="no">dim=128</code> verwendet wird, ist ein 16-Byte-Array für das Einfügen erforderlich.</p></li>
+<li><p>Angeben der Dimensionen des Vektors mit dem Parameter <code translate="no">dim</code>. Beachten Sie, dass <code translate="no">dim</code> ein Vielfaches von 8 sein muss, da binäre Vektoren beim Einfügen in ein Byte-Array umgewandelt werden müssen. Alle 8 booleschen Werte (0 oder 1) werden in 1 Byte gepackt. Wenn zum Beispiel <code translate="no">dim=128</code> verwendet wird, ist ein 16-Byte-Array für das Einfügen erforderlich.</p></li>
 </ol>
 <div class="multipleCode">
  <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#go">Go</a> <a href="#curl">cURL</a></div>
@@ -166,7 +166,7 @@ schema.<span class="hljs-title function_">push</span>({​
 
 <button class="copy-code-btn"></button></code></pre>
 <p>In diesem Beispiel wird ein Vektorfeld mit dem Namen <code translate="no">binary_vector</code> zum Speichern von binären Vektoren hinzugefügt. Der Datentyp dieses Feldes ist <code translate="no">BINARY_VECTOR</code>, mit einer Dimension von 128.</p>
-<h3 id="Set-index-params-for-vector-field​" class="common-anchor-header">Index-Parameter für das Vektorfeld festlegen</h3><p>Um die Suche zu beschleunigen, muss ein Index für das binäre Vektorfeld erstellt werden. Die Indexierung kann die Abfrageeffizienz von großen Vektordaten erheblich verbessern.</p>
+<h3 id="Set-index-params-for-vector-field​" class="common-anchor-header">Index-Parameter für das Vektorfeld festlegen</h3><p>Um die Suche zu beschleunigen, muss ein Index für das binäre Vektorfeld erstellt werden. Die Indizierung kann die Abfrageeffizienz von großen Vektordaten erheblich verbessern.</p>
 <div class="multipleCode">
  <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#go">Go</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python">index_params = client.prepare_index_params()​
@@ -269,7 +269,7 @@ client.createCollection(requestCreate);​
 }&quot;</span>​
 
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Insert-data​" class="common-anchor-header">Daten einfügen</h3><p>Verwenden Sie nach dem Erstellen der Sammlung die Methode <code translate="no">insert</code>, um Daten mit binären Vektoren hinzuzufügen. Beachten Sie, dass binäre Vektoren in Form eines Byte-Arrays bereitgestellt werden sollten, wobei jedes Byte für 8 boolesche Werte steht.</p>
+<h3 id="Insert-data​" class="common-anchor-header">Daten einfügen</h3><p>Nachdem Sie die Sammlung erstellt haben, fügen Sie mit der Methode <code translate="no">insert</code> Daten mit binären Vektoren hinzu. Beachten Sie, dass binäre Vektoren in Form eines Byte-Arrays bereitgestellt werden sollten, wobei jedes Byte für 8 boolesche Werte steht.</p>
 <p>Für einen 128-dimensionalen Binärvektor ist beispielsweise ein 16-Byte-Array erforderlich (da 128 Bits ÷ 8 Bits/Byte = 16 Bytes). Im Folgenden finden Sie einen Beispielcode zum Einfügen von Daten.</p>
 <div class="multipleCode">
  <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#go">Go</a> <a href="#curl">cURL</a></div>
@@ -359,7 +359,7 @@ client.<span class="hljs-title function_">insert</span>({​
 }&quot;</span>​
 
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Perform-similarity-search​" class="common-anchor-header">Ähnlichkeitssuche durchführen</h3><p>Die Ähnlichkeitssuche ist eine der Hauptfunktionen von Milvus, die es Ihnen ermöglicht, schnell Daten zu finden, die einem Abfragevektor am ähnlichsten sind, basierend auf dem Abstand zwischen den Vektoren. Um eine Ähnlichkeitssuche mit binären Vektoren durchzuführen, bereiten Sie den Abfragevektor und die Suchparameter vor und rufen dann die Methode <code translate="no">search</code> auf.</p>
+<h3 id="Perform-similarity-search​" class="common-anchor-header">Ähnlichkeitssuche durchführen</h3><p>Die Ähnlichkeitssuche ist eine der Kernfunktionen von Milvus, die es Ihnen ermöglicht, schnell die Daten zu finden, die einem Abfragevektor am ähnlichsten sind, basierend auf dem Abstand zwischen den Vektoren. Um eine Ähnlichkeitssuche mit binären Vektoren durchzuführen, bereiten Sie den Abfragevektor und die Suchparameter vor und rufen dann die Methode <code translate="no">search</code> auf.</p>
 <p>Während der Suchoperationen müssen die binären Vektoren auch in Form eines Byte-Arrays bereitgestellt werden. Stellen Sie sicher, dass die Dimensionalität des Abfragevektors mit der bei der Definition von <code translate="no">dim</code> angegebenen Dimension übereinstimmt und dass alle 8 booleschen Werte in 1 Byte umgewandelt werden.</p>
 <div class="multipleCode">
  <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#go">Go</a> <a href="#curl">cURL</a></div>

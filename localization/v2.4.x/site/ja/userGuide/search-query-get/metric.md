@@ -72,7 +72,7 @@ title: メートル法
 </td><td data-block-token="Aq8Cd7Awao5IhExSnUjcUzRxndh" colspan="1" rowspan="1"><p data-block-token="AMbXd3nwLoHalMx3h0pc63i9nNg">値が小さいほど類似性が高いことを示す。</p>
 </td><td data-block-token="ULaFdvx0WoKy4rxBgPzciLZMnFg" colspan="1" rowspan="1"><p data-block-token="Je5xdsfnvoQli3xdODDchYMkn2e">[0, 1]</p>
 </td></tr><tr><td data-block-token="L5l6dqaAVoVpSJxFW5TcZlXLnAc" colspan="1" rowspan="1"><p data-block-token="JOcmdIWTUoZuoGxoToYcMLpLnMg"><code translate="no">HAMMING</code></p>
-</td><td data-block-token="H3vYdaah4oWsXmxmABOcW01XnSh" colspan="1" rowspan="1"><p data-block-token="VHz5d7R91o3OGuxX39Bc76CTnGf">値が小さいほど類似度が高いことを示す。</p>
+</td><td data-block-token="H3vYdaah4oWsXmxmABOcW01XnSh" colspan="1" rowspan="1"><p data-block-token="VHz5d7R91o3OGuxX39Bc76CTnGf">値が小さいほど類似性が高いことを示す。</p>
 </td><td data-block-token="NZnwdhAGUoO0R9x9gz6cZfCYnOd" colspan="1" rowspan="1"><p data-block-token="Xk7wdBDlko6RjFxVnATcPYTjnsb">[0, dim(ベクトル)</p>
 </td></tr><tr><td data-block-token="Xm5BdUTvXoPS1Xxtc26cBqAWn9e" colspan="1" rowspan="1"><p data-block-token="FoMadsBCboAKV2xofQ2c9IiKntb"><code translate="no">BM25</code></p>
 </td><td data-block-token="OHEldDxlaoejYmxXgUPcbwCYn4b" colspan="1" rowspan="1"><p data-block-token="EVzLdJPQdopf2mxZ3dfcTGSgnSc">用語頻度、逆文書頻度、文書正規化に基づいて関連性をスコア化する。</p>
@@ -94,7 +94,7 @@ title: メートル法
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>基本的にユークリッド距離は2点を結ぶセグメントの長さを測定する。</p>
+    </button></h2><p>基本的に、ユークリッド距離は2点を結ぶセグメントの長さを測定する。</p>
 <p>ユークリッド距離の公式は以下の通り。</p>
 <p>
   
@@ -222,7 +222,7 @@ title: メートル法
       </svg>
     </button></h2><p>BM25は広く使われているテキスト関連性測定法で、特に<a href="/docs/ja/full-text-search.md">全文検索</a>用に設計されている。以下の3つの重要な要素を組み合わせている。</p>
 <ul>
-<li><p><strong>用語頻度（TF）：</strong>用語の文書内での出現頻度を測定する。頻度が高いほど重要度が高いことを示すことが多いが、BM25では飽和パラメータk1を使用して、頻度が高すぎる用語が関連性スコアを支配するのを防ぐ。</p></li>
+<li><p><strong>用語頻度（TF）：</strong>ある用語が文書に出現する頻度を測定する。頻度が高いほど重要度が高いことを示すことが多いが、BM25では飽和パラメータk1を使用して、頻度が高すぎる用語が関連性スコアを支配するのを防ぐ。</p></li>
 <li><p><strong>逆ドキュメント頻度（IDF）：</strong>コーパス全体における用語の重要度を反映する。より少ない文書に出現する用語ほどIDF値が高くなり、関連性に大きく寄与していることを示す。</p></li>
 <li><p><strong>文書の長さの<strong>正規化</strong>：</strong>長い文書は、より多くの用語を含むため、スコアが高くなる傾向があります。BM25は文書の長さを正規化することでこのバイアスを軽減し、パラメータbはこの正規化の強さを制御する。</p></li>
 </ul>

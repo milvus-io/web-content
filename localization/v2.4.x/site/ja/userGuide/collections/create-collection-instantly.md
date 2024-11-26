@@ -338,4 +338,4 @@ curl --request POST \​
 }&#x27;</span>​
 
 <button class="copy-code-btn"></button></code></pre>
-<p>上記の2つの方法で作成したコレクションがまだニーズを満たせない場合は、<a href="/docs/ja/create-collection.md">Create Collectionの</a>手順に従ってください。</p>
+<p>上記の2つの方法で作成したコレクションがまだニーズを満たさない場合は、<a href="/docs/ja/create-collection.md">Create Collectionの</a>手順に従ってください。</p>

@@ -132,7 +132,7 @@ title: Collection Explained​
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Loading a collection is the prerequisite to conducting similarity searches and queries in collections. When you load a collection, Zilliz Cloud loads all index files and the raw data in each field into memory for fast response to searches and queries.​</p>
+    </button></h2><p>Loading a collection is the prerequisite to conducting similarity searches and queries in collections. When you load a collection, Milvus loads all index files and the raw data in each field into memory for fast response to searches and queries.​</p>
 <p>Searches and queries are memory-intensive operations. To save the cost, you are advised to release the collections that are currently not in use.​</p>
 <p>For more details, refer to <a href="/docs/load-and-release.md">​Load &amp; Release</a>.​</p>
 <h2 id="Search-and-Query​" class="common-anchor-header">Search and Query​<button data-href="#Search-and-Query​" class="anchor-icon" translate="no">
@@ -150,7 +150,7 @@ title: Collection Explained​
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Once you create indexes and load the collection, you can start a similarity search by feeding one or several query vectors. For example, when receiving the vector representation of your query carried in a search request, Zilliz Cloud uses the specified metric type to measure the similarity between the query vector and those in the target collection before returning those that are semantically similar to the query.​</p>
+    </button></h2><p>Once you create indexes and load the collection, you can start a similarity search by feeding one or several query vectors. For example, when receiving the vector representation of your query carried in a search request, Milvus uses the specified metric type to measure the similarity between the query vector and those in the target collection before returning those that are semantically similar to the query.​</p>
 <p>You can also include metadata filtering within searches and queries to improve the relevancy of the results. Note that, metadata filtering conditions are mandatory in queries but optional in searches.​</p>
 <p>For details on applicable metric types, refer to <a href="/docs/metric.md">​Metric Types</a>.​</p>
 <p>For more information about searches and queries, refer to the articles in the <a href="/docs/single-vector-search.md">​Search &amp; Rerank</a> chapter, among which, basic features are:​</p>
@@ -165,7 +165,7 @@ title: Collection Explained​
 <li><p><a href="/docs/full-text-search.md">​Full-Text Search</a>​</p></li>
 <li><p><a href="/docs/keyword-match.md">Keyword Match</a>​</p></li>
 </ul>
-<p>In addition, Zilliz Cloud also provides enhancements to improve search performance and efficiency. They are disabled by default, and you can enable and use them according to your service requirements. They are​</p>
+<p>In addition, Milvus also provides enhancements to improve search performance and efficiency. They are disabled by default, and you can enable and use them according to your service requirements. They are​</p>
 <ul>
 <li><p><a href="/docs/use-partition-key.md">​Use Partition Key</a>​</p></li>
 <li><p><a href="/docs/mmap.md">​Use mmap</a>​</p></li>
@@ -187,7 +187,7 @@ title: Collection Explained​
         ></path>
       </svg>
     </button></h2><p>Partitions are subsets of a collection, which share the same field set with its parent collection, each containing a subset of entities.​</p>
-<p>By allocating entities into different partitions, you can create entity groups. You can conduct searches and queries in specific partitions to have Zilliz Cloud ignore entities in other partitions, and improve search efficiency.​</p>
+<p>By allocating entities into different partitions, you can create entity groups. You can conduct searches and queries in specific partitions to have Milvus ignore entities in other partitions, and improve search efficiency.​</p>
 <p>For details, refer to <a href="/docs/manage-partitions.md">​Manage Partitions</a>.​</p>
 <h2 id="Shard​" class="common-anchor-header">Shard​<button data-href="#Shard​" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -221,7 +221,7 @@ title: Collection Explained​
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>You can create aliases for your collections. A collection can have several aliases, but collections cannot share an alias. Upon receiving a request against a collection, Zilliz Cloud locates the collection based on the provided name. If the collection by the provided name does not exist, Zilliz Cloud continues locating the provided name as an alias. You can use collection aliases to adapt your code to different scenarios.​</p>
+    </button></h2><p>You can create aliases for your collections. A collection can have several aliases, but collections cannot share an alias. Upon receiving a request against a collection, Milvus locates the collection based on the provided name. If the collection by the provided name does not exist, Milvus continues locating the provided name as an alias. You can use collection aliases to adapt your code to different scenarios.​</p>
 <p>For more details, refer to <a href="/docs/manage-aliases.md">​Manage Aliases</a>.​</p>
 <h2 id="Function​" class="common-anchor-header">Function​<button data-href="#Function​" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -238,7 +238,7 @@ title: Collection Explained​
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>You can set functions for Zilliz Cloud to derive fields upon collection creation. For example, the full-text search function uses the user-defined function to derive a sparse vector field from a specific varchar field. For more information on full-text search, refer to <a href="/docs/full-text-search.md">​Full-Text Search</a>.​</p>
+    </button></h2><p>You can set functions for Milvus to derive fields upon collection creation. For example, the full-text search function uses the user-defined function to derive a sparse vector field from a specific varchar field. For more information on full-text search, refer to <a href="/docs/full-text-search.md">​Full-Text Search</a>.​</p>
 <h2 id="Consistency-Level​" class="common-anchor-header">Consistency Level​<button data-href="#Consistency-Level​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

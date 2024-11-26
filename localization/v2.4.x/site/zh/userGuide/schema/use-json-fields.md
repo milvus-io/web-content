@@ -497,7 +497,7 @@ System.out.println(resp.getSearchResults());​
 
 <button class="copy-code-btn"></button></code></pre>
 <p>在这个例子中，Milvus 返回了与查询向量最相似的前 5 个实体，其中<code translate="no">metadata</code> 字段包含一个品牌<code translate="no">&quot;BrandA&quot;</code> 。</p>
-<p>此外，Milvus 还支持高级 JSON 过滤操作符，如<code translate="no">JSON_CONTAINS</code> 、<code translate="no">JSON_CONTAINS_ALL</code> 和<code translate="no">JSON_CONTAINS_ANY</code> ，这可以进一步增强查询功能。更多详情，请参阅<a href="/docs/zh/boolean.md">元数据过滤</a>。</p>
+<p>此外，Milvus 还支持高级 JSON 过滤操作符，如<code translate="no">JSON_CONTAINS</code> 、<code translate="no">JSON_CONTAINS_ALL</code> 和<code translate="no">JSON_CONTAINS_ANY</code> ，可进一步增强查询功能。更多详情，请参阅<a href="/docs/zh/boolean.md">元数据过滤</a>。</p>
 <h2 id="Limits​" class="common-anchor-header">限制<button data-href="#Limits​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

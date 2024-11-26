@@ -298,7 +298,7 @@ err = loadTask.Await(ctx)​
         ></path>
       </svg>
     </button></h2><p>검색 및 쿼리는 메모리를 많이 사용하는 작업입니다. 비용을 절약하려면 현재 사용하지 않는 컬렉션을 해제하는 것이 좋습니다.</p>
-<p>다음 코드 조각은 컬렉션을 해제하는 방법을 보여줍니다.</p>
+<p>다음 코드 스니펫은 컬렉션을 해제하는 방법을 보여줍니다.</p>
 <div class="multipleCode">
  <a href="#python">파이썬 </a> <a href="#java">자바</a> <a href="#javascript">Node.js</a> <a href="#go">Go</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># 8. Release the collection​</span>

@@ -56,7 +56,7 @@ summary: >-
 <table data-block-token="YMmUdQtabozHZnxC09QcajU0nvd"><thead><tr><th data-block-token="N1Qfdbd9Vok7mkx0OGpcx49cnUM" colspan="1" rowspan="1"><p data-block-token="PxYUdGyrMoa4x5x3sCpcF7JLn1e">Parâmetro</p>
 </th><th data-block-token="WIQKdcE3coxEirxwmpucXGuin7f" colspan="1" rowspan="1"><p data-block-token="VAHCdZFTkoeSJNxgPmicGnOZnWh">Descrição</p>
 </th></tr></thead><tbody><tr><td data-block-token="NzThd1pxQoektPxhqrQc7Oxcnhl" colspan="1" rowspan="1"><p data-block-token="SW6SdE2iyohhGaxQIfpcjZfCnBx"><code translate="no">stop_words</code></p>
-</td><td data-block-token="KSAbdmKPCowsR7x7UO8c8ngFnnh" colspan="1" rowspan="1"><p data-block-token="F3E1dFjL3oUrl5xWq3ucpVPon7c">Uma matriz contendo uma lista de palavras de paragem, que serão removidas da tokenização. A predefinição é <code translate="no">_english_</code>, um conjunto incorporado de palavras de paragem comuns em inglês.</p>
+</td><td data-block-token="KSAbdmKPCowsR7x7UO8c8ngFnnh" colspan="1" rowspan="1"><p data-block-token="F3E1dFjL3oUrl5xWq3ucpVPon7c">Uma matriz que contém uma lista de palavras de paragem, que serão removidas da tokenização. A predefinição é <code translate="no">_english_</code>, um conjunto incorporado de palavras de paragem comuns em inglês.</p>
 </td></tr></tbody></table>
 <p>Exemplo de configuração com palavras de paragem personalizadas.</p>
 <pre><code translate="no" class="language-python">analyzer_params = {​

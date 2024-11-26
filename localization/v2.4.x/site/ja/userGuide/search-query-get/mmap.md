@@ -75,7 +75,7 @@ collection = Collection(<span class="hljs-string">&quot;test_collection&quot;</s
 <span class="hljs-comment"># Set memory mapping property to True or Flase</span>
 collection.set_properties({<span class="hljs-string">&#x27;mmap.enabled&#x27;</span>: <span class="hljs-literal">True</span>})
 <button class="copy-code-btn"></button></code></pre>
-<p><code translate="no">2.4.10</code> 、コレクション内のメモリマッピング設定の後、<code translate="no">add_field</code> メソッドを使用する。ここでは、必要に応じて<code translate="no">mmap_enabled</code> を<code translate="no">True</code> または<code translate="no">False</code> の間で切り替えることができる。</p>
+<p><code translate="no">2.4.10</code> 、コレクション内のメモリマッピング設定の後は、<code translate="no">add_field</code> メソッドを使用する。ここでは、必要に応じて<code translate="no">mmap_enabled</code> を<code translate="no">True</code> または<code translate="no">False</code> の間で切り替えることができる。</p>
 <pre><code translate="no" class="language-python">schema = MilvusClient.create_schema()
 
 schema.add_field(field_name=<span class="hljs-string">&quot;embedding&quot;</span>, datatype=DataType.FLOAT_VECTOR, dim=<span class="hljs-number">768</span>, mmap_enabled=<span class="hljs-literal">True</span>)

@@ -163,7 +163,7 @@ title: Tipos métricos
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/cosine_similarity.png" alt="Cosine similarity formula" class="doc-image" id="cosine-similarity-formula" />
    </span> <span class="img-wrapper"> <span>Fórmula de semelhança do cosseno</span> </span></p>
 <p>A semelhança do cosseno está sempre no intervalo <strong>[-1, 1]</strong>. Por exemplo, dois vectores proporcionais têm uma semelhança de cosseno de <strong>1</strong>, dois vectores ortogonais têm uma semelhança de <strong>0</strong> e dois vectores opostos têm uma semelhança de <strong>-1</strong>. Quanto maior for o cosseno, menor é o ângulo entre os dois vectores, indicando que estes dois vectores são mais semelhantes entre si.</p>
-<p>Subtraindo a semelhança de cosseno de 1, obtém-se a distância de cosseno entre dois vectores.</p>
+<p>Subtraindo a sua semelhança de cosseno de 1, obtém-se a distância de cosseno entre dois vectores.</p>
 <h2 id="JACCARD-distance​" class="common-anchor-header">Distância JACCARD<button data-href="#JACCARD-distance​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -205,7 +205,7 @@ title: Tipos métricos
         ></path>
       </svg>
     </button></h2><p>A distância HAMMING mede cadeias de dados binárias. A distância entre duas cadeias de dados de igual comprimento é o número de posições de bits em que os bits são diferentes.</p>
-<p>Por exemplo, suponhamos que existem duas cadeias de caracteres, 1101 1001 e 1001 1101.</p>
+<p>Por exemplo, suponha que existem duas cadeias de caracteres, 1101 1001 e 1001 1101.</p>
 <p>11011001 ⊕ 10011101 = 01000100. Uma vez que isto contém dois 1s, a distância HAMMING, d (11011001, 10011101) = 2.</p>
 <h2 id="BM25-similarity​" class="common-anchor-header">Similaridade BM25<button data-href="#BM25-similarity​" class="anchor-icon" translate="no">
       <svg translate="no"

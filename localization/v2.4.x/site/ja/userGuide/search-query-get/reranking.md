@@ -105,7 +105,7 @@ rerank = WeightedRanker(<span class="hljs-number">0.8</span>, <span class="hljs-
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x//assets/rrf-ranker.png" alt="rrf-ranker" class="doc-image" id="rrf-ranker" />
    </span> <span class="img-wrapper"> <span>RRF-RANKER</span> </span></p>
-<p>ここで、↪Lu_1 は異なる検索ルートの数を表し、rank𝑖(↪Ll_1D451) は𝑖番目の検索者による文書𝑑のランク位置、↪Ll_1D458 は平滑化パラメータで、通常は60に設定される。</p></li>
+<p>ここで、↪Lu_1 は異なる検索ルートの数を表し、rank𝑖(↪Ll_1D451) は𝑖番目の検索エンジンによって検索されたドキュメント𝑑のランク位置、↪Ll_1D458 は平滑化パラメータで、通常は60に設定される。</p></li>
 <li><p><strong>総合ランキング</strong>：最終的な結果を生成するために、検索された結果を総合スコアに基づいて再ランク付けする。</p></li>
 </ul>
 <p>この戦略を使用するには、<code translate="no">RRFRanker</code> インスタンスを適用する。</p>

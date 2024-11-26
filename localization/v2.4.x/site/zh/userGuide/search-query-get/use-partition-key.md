@@ -41,7 +41,7 @@ title: 使用 Partition Key
    </span> <span class="img-wrapper"> <span>分区对分区密钥</span> </span></p>
 <p>下图说明了 Milvus 如何在启用或未启用分区键功能的情况下处理 Collections 中的搜索请求。</p>
 <ul>
-<li><p>如果禁用了 Partition Key，Milvus 会在 Collections 中搜索与查询向量最相似的实体。如果知道哪个分区包含最相关的结果，就可以缩小搜索范围。</p></li>
+<li><p>如果禁用 Partition Key，Milvus 会在 Collections 中搜索与查询向量最相似的实体。如果知道哪个分区包含最相关的结果，就可以缩小搜索范围。</p></li>
 <li><p>如果启用了分区关键字，Milvus 会根据搜索过滤器中指定的分区关键字值确定搜索范围，并只扫描分区内匹配的实体。</p></li>
 </ul>
 <p>
@@ -165,7 +165,7 @@ schema.addField(AddFieldReq.builder()​
 
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Set-Partition-Numbers​" class="common-anchor-header">设置分区编号</h3><p>当你指定一个 Collections 中的标量字段作为 Partition Key 时，Milvus 会自动在 Collections 中创建 16 个分区。当接收到一个实体时，Milvus 会根据这个实体的 Partition Key 值选择一个分区，并将实体存储在分区中，从而导致部分或所有分区持有不同 Partition Key 值的实体。</p>
-<p>您还可以确定与 Collections 一起创建的分区数量。这只有在将标量字段指定为 Partition Key 时才有效。</p>
+<p>您还可以确定与 Collections 一起创建的分区数量。只有将标量字段指定为 Partition Key 时，这种方法才有效。</p>
 <div class="multipleCode">
  <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#go">Go</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python">client.create_collection(​

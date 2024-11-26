@@ -37,7 +37,7 @@ title: 分组搜索
         ></path>
       </svg>
     </button></h2><p>当搜索结果中的实体在标量字段中共享相同值时，这表明它们在特定属性上相似，这可能会对搜索结果产生负面影响。</p>
-<p>假设一个 Collections 存储了多个文档（用<strong>docId</strong> 表示）。在将文档转换成向量时，为了尽可能多地保留语义信息，每份文档都会被分割成更小的、易于管理的段落（或<strong>块</strong>），并作为单独的实体存储。即使文档被分割成较小的段落，用户通常仍有兴趣识别哪些文档与他们的需求最相关。</p>
+<p>假设一个 Collections 存储了多个文档（用<strong>docId</strong> 表示）。在将文档转换成向量时，为了尽可能多地保留语义信息，每份文档都会被分割成较小的、易于管理的段落（或<strong>块</strong>），并作为单独的实体存储。即使文档被分割成较小的段落，用户通常仍有兴趣识别哪些文档与他们的需求最相关。</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/ann-search.png" alt="ANN Search" class="doc-image" id="ann-search" />

@@ -22,7 +22,7 @@ title: Metric Types
         ></path>
       </svg>
     </button></h1><p>Similarity metrics are used to measure similarities among vectors. Choosing an appropriate distance metric helps improve classification and clustering performance significantly.​</p>
-<p>Currently, Zilliz Cloud supports these types of similarity Metrics: Euclidean distance (<code translate="no">L2</code>), Inner Product (<code translate="no">IP</code>), Cosine Similarity (<code translate="no">COSINE</code>), <code translate="no">JACCARD</code>, <code translate="no">HAMMING</code>, and <code translate="no">BM25</code> (specifically designed for full text search on sparse vectors).​</p>
+<p>Currently, Milvus supports these types of similarity Metrics: Euclidean distance (<code translate="no">L2</code>), Inner Product (<code translate="no">IP</code>), Cosine Similarity (<code translate="no">COSINE</code>), <code translate="no">JACCARD</code>, <code translate="no">HAMMING</code>, and <code translate="no">BM25</code> (specifically designed for full text search on sparse vectors).​</p>
 <p>The table below summarizes the mapping between different field types and their corresponding metric types.​</p>
 <table data-block-token="LHu5dKCHro3mnTx6PsmckEsinQd"><thead><tr><th data-block-token="JOJvdTK9MouhT8x7tfGc59NGnfg" colspan="1" rowspan="1"><p data-block-token="TS9tdnaJaoG4kfx96cfcqXINnnc">Field Type​</p>
 </th><th data-block-token="Iy8ZdPGpIo6nfwxiz4RcSuwanwf" colspan="1" rowspan="1"><p data-block-token="SKIAdxDFJo9oOyxg7iTcmfGAnz1">Dimension Range​</p>
@@ -107,7 +107,7 @@ title: Metric Types
 <p>where <strong>a = (a<sub>0</sub>, a<sub>1</sub>,…, a<sub>n-1</sub>)</strong> and <strong>b = (b<sub>0</sub>, b<sub>1</sub>,…, b<sub>n-1</sub>)</strong> are two points in n-dimensional Euclidean space.​</p>
 <p>It’s the most commonly used distance metric and is very useful when the data are continuous.​</p>
 <div class="alert note">
-<p>Zilliz Cloud only calculates the value before applying the square root when Euclidean distance is chosen as the distance metric.​</p>
+<p>Milvus only calculates the value before applying the square root when Euclidean distance is chosen as the distance metric.​</p>
 </div>
 <h2 id="Inner-product-IP​" class="common-anchor-header">Inner product (IP)​<button data-href="#Inner-product-IP​" class="anchor-icon" translate="no">
       <svg translate="no"

@@ -18,7 +18,7 @@ title: Sammlung erstellen
         ></path>
       </svg>
     </button></h1><p>Sie können eine Sammlung erstellen, indem Sie ihr Schema, die Indexparameter und den Metrik-Typ festlegen und bestimmen, ob sie bei der Erstellung geladen werden soll. Auf dieser Seite erfahren Sie, wie Sie eine Sammlung von Grund auf erstellen können.</p>
-<h2 id="Overview​" class="common-anchor-header">Übersicht<button data-href="#Overview​" class="anchor-icon" translate="no">
+<h2 id="Overview​" class="common-anchor-header">Überblick<button data-href="#Overview​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

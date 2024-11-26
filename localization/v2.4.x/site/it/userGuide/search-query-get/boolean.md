@@ -1,8 +1,8 @@
 ---
 id: boolean.md
 summary: >-
-  Un'espressione di filtro può essere utilizzata per filtrare un campo scalare
-  specifico durante una ricerca o un'interrogazione per ottenere risultati
+  Un'espressione di filtro può essere utilizzata per filtrare uno specifico
+  campo scalare durante una ricerca o un'interrogazione per ottenere risultati
   esattamente corrispondenti. Questa guida introduce l'uso delle espressioni di
   filtro in Zilliz attraverso un set di dati di esempio. A scopo dimostrativo,
   questa guida fornirà solo esempi di operazioni di query.

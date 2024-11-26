@@ -305,7 +305,7 @@
         "children": []
       },
       {
-        "label": "インメモリーレプリカ",
+        "label": "インメモリ・レプリカ",
         "id": "replica.md",
         "order": 11,
         "children": []
@@ -910,7 +910,7 @@
     ]
   },
   {
-    "label": "Milvus移住",
+    "label": "Milvusマイグレーション",
     "id": "milvus_migration",
     "isMenu": true,
     "order": 5,

@@ -38,7 +38,7 @@ title: Upsert Entitäten
 <li><p>Prüfen Sie, ob das Primärfeld der Sammlung AutoId aktiviert hat.</p>
 <p>a.  Ist dies der Fall, ersetzt Milvus den Primärschlüssel in der Entität durch einen automatisch generierten Primärschlüssel und fügt die Daten ein.</p>
 <p>b. Wenn nicht, wird Milvus den Primärschlüssel der Entität verwenden, um die Daten einzufügen.</p></li>
-<li><p>Führen Sie einen Löschvorgang auf der Grundlage des Primärschlüsselwerts der Entität durch, die in der Upsert-Anforderung enthalten ist.</p></li>
+<li><p>Führen Sie einen Löschvorgang auf der Grundlage des Primärschlüsselwerts der Entität durch, die in der Upsert-Anfrage enthalten ist.</p></li>
 </ol>
 <p>
   

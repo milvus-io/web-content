@@ -41,7 +41,7 @@ summary: >-
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/dense-vector.png" alt="Dense vectors in 2D space" class="doc-image" id="dense-vectors-in-2d-space" />
    </span> <span class="img-wrapper"> <span>二维空间中的密集向量</span> </span></p>
-<p>上图展示了二维空间中密集向量的表示方法。虽然实际应用中的稠密向量通常具有更高的维度，但这幅二维插图还是有效地传达了几个关键概念。</p>
+<p>上图展示了二维空间中密集向量的表示方法。虽然实际应用中的稠密向量通常具有更高的维度，但这种二维插图有效地传达了几个关键概念。</p>
 <ul>
 <li><p><strong>多维表示：</strong>每个点代表一个概念对象（如<strong>Milvus</strong>、<strong>向量数据库</strong>、<strong>检索系统</strong>等），其位置由其维度值决定。</p></li>
 <li><p><strong>语义关系：</strong>点之间的距离反映了概念之间的语义相似性。距离较近的点表示语义关联度较高的概念。</p></li>

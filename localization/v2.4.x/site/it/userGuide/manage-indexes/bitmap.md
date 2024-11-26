@@ -40,8 +40,8 @@ summary: >-
         ></path>
       </svg>
     </button></h2><p>Il termine Bitmap combina due parole: <strong>Bit</strong> e <strong>Map</strong>. Un bit rappresenta la più piccola unità di dati in un computer, che può contenere solo il valore <strong>0</strong> o <strong>1</strong>. Una mappa, in questo contesto, si riferisce a un'unità di dati che non può essere utilizzata. Una mappa, in questo contesto, si riferisce al processo di trasformazione e organizzazione dei dati in base al valore da assegnare a 0 e a 1.</p>
-<p>Un indice bitmap è costituito da due componenti principali: le bitmap e le chiavi. Le chiavi rappresentano i valori unici del campo indicizzato. Per ogni valore univoco, esiste una bitmap corrispondente. La lunghezza di queste bitmap è pari al numero di record della collezione. Ogni bit della bitmap corrisponde a un record della collezione. Se il valore del campo indicizzato in un record corrisponde alla chiave, il bit corrispondente viene impostato a <strong>1</strong>; altrimenti, viene impostato a <strong>0</strong>.</p>
-<p>Si consideri una raccolta di documenti con i campi <strong>Categoria</strong> e <strong>Pubblico</strong>. Vogliamo recuperare i documenti che rientrano nella categoria <strong>Tech</strong> e che sono aperti al <strong>pubblico</strong>. In questo caso, le chiavi per gli indici bitmap sono <strong>Tech</strong> e <strong>Public</strong>.</p>
+<p>Un indice bitmap è costituito da due componenti principali: le bitmap e le chiavi. Le chiavi rappresentano i valori unici del campo indicizzato. Per ogni valore univoco, esiste una bitmap corrispondente. La lunghezza di queste bitmap è pari al numero di record della collezione. Ogni bit della bitmap corrisponde a un record della collezione. Se il valore del campo indicizzato in un record corrisponde alla chiave, il bit corrispondente viene impostato a <strong>1</strong>; altrimenti viene impostato a <strong>0</strong>.</p>
+<p>Si consideri una raccolta di documenti con i campi <strong>Categoria</strong> e <strong>Pubblico</strong>. Vogliamo recuperare i documenti che rientrano nella categoria <strong>Tech</strong> e sono aperti al <strong>pubblico</strong>. In questo caso, le chiavi per gli indici bitmap sono <strong>Tech</strong> e <strong>Public</strong>.</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/bitmap.png" alt="Bitmap indexing" class="doc-image" id="bitmap-indexing" />
@@ -120,11 +120,11 @@ client.create_index(​
 <ul>
 <li><p>Come linea guida generale, gli indici bitmap sono più efficaci quando la cardinalità di un campo è inferiore a 500. Quando la cardinalità aumenta oltre questa soglia, gli indici bitmap sono più efficaci.</p></li>
 <li><p>Quando la cardinalità aumenta oltre questa soglia, i vantaggi in termini di prestazioni degli indici bitmap diminuiscono e l'overhead di memorizzazione diventa significativo.</p></li>
-<li><p>Per i campi con cardinalità elevata, è opportuno considerare l'uso di tecniche di indicizzazione alternative, come gli indici invertiti, a seconda del caso d'uso specifico e dei requisiti delle query.</p></li>
+<li><p>Per i campi ad alta cardinalità, è opportuno considerare l'uso di tecniche di indicizzazione alternative, come gli indici invertiti, a seconda del caso d'uso specifico e dei requisiti delle query.</p></li>
 </ul></li>
 </ul>
 <h3 id="Structural-Similarity" class="common-anchor-header">Similitudine strutturale</h3><p>Quando una struttura chimica è parte di una struttura chimica più grande, la prima viene chiamata sottostruttura e la seconda sovrastruttura. Ad esempio, l'etanolo è una sottostruttura dell'acido acetico e l'acido acetico è una sovrastruttura dell'etanolo.</p>
-<p>La somiglianza strutturale viene utilizzata per determinare se due formule chimiche sono simili tra loro nel senso che una è la sovrastruttura o la sottostruttura dell'altra.</p>
+<p>La somiglianza strutturale viene utilizzata per determinare se due formule chimiche sono simili tra loro in quanto una è la sovrastruttura o la sottostruttura dell'altra.</p>
 <p>Per determinare se A è una sovrastruttura di B, utilizzare la seguente formula:</p>
 <p>
   
@@ -163,7 +163,7 @@ client.create_index(​
         ></path>
       </svg>
     </button></h2><p><details>
-<summary><font color="#4fc4f9">Perché il risultato top1 di una ricerca vettoriale non è il vettore di ricerca stesso, se il tipo di metrica è il prodotto interno?</font></summary>Ciò accade se non si sono normalizzati i vettori quando si usa il prodotto interno come metrica di distanza.</details>
+<summary><font color="#4fc4f9">Perché il risultato top1 di una ricerca vettoriale non è il vettore di ricerca stesso, se il tipo di metrica è il prodotto interno?</font></summary>Questo accade se non si sono normalizzati i vettori quando si usa il prodotto interno come metrica di distanza.</details>
 <details>
 <summary><font color="#4fc4f9">Che cos'è la normalizzazione? Perché è necessaria la normalizzazione?</font></summary></p>
 <p>La normalizzazione si riferisce al processo di conversione di un incorporamento (vettore) in modo che la sua norma sia uguale a 1. Se si utilizza il prodotto interno per calcolare le somiglianze tra gli incorporamenti, è necessario normalizzare gli incorporamenti. Dopo la normalizzazione, il prodotto interno è uguale alla somiglianza del coseno.</p>

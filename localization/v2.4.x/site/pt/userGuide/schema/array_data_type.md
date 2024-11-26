@@ -32,7 +32,7 @@ summary: >-
 }​
 
 <button class="copy-code-btn"></button></code></pre>
-<p>Neste exemplo, <code translate="no">tags</code> e <code translate="no">ratings</code> são ambos campos de matriz. O campo <code translate="no">tags</code> é uma matriz de cadeias de caracteres que representa géneros de música como pop, rock e clássico, enquanto o campo <code translate="no">ratings</code> é uma matriz de números inteiros que representa as classificações dos utilizadores para a música, variando de 1 a 5. Estes campos de matriz proporcionam uma forma flexível de armazenar dados com vários valores, facilitando a realização de análises detalhadas durante as consultas e a filtragem.</p>
+<p>Neste exemplo, <code translate="no">tags</code> e <code translate="no">ratings</code> são ambos campos de matriz. O campo <code translate="no">tags</code> é uma matriz de cadeias de caracteres que representa géneros de música como pop, rock e clássico, enquanto o campo <code translate="no">ratings</code> é uma matriz de números inteiros que representa as classificações dos utilizadores para a música, variando de 1 a 5. Estes campos de matriz fornecem uma forma flexível de armazenar dados com vários valores, facilitando a realização de análises detalhadas durante as consultas e a filtragem.</p>
 <h2 id="Add-Array-field​" class="common-anchor-header">Adicionar um campo Array<button data-href="#Add-Array-field​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

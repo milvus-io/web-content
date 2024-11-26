@@ -382,7 +382,7 @@ client.<span class="hljs-title function_">insert</span>({​
 <span class="hljs-comment">## {&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:{&quot;insertCount&quot;:2,&quot;insertIds&quot;:[&quot;453577185629572534&quot;,&quot;453577185629572535&quot;]}}​</span>
 
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Perform-similarity-search​" class="common-anchor-header">执行相似性搜索</h3><p>要使用稀疏向量执行相似性搜索，请准备好查询向量和搜索参数。</p>
+<h3 id="Perform-similarity-search​" class="common-anchor-header">执行相似性搜索</h3><p>要使用稀疏向量执行相似性搜索，请准备查询向量和搜索参数。</p>
 <div class="multipleCode">
    <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Prepare search parameters​</span>

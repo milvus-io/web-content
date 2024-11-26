@@ -39,7 +39,7 @@ title: Utilizar chave de partição
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/partition-vs-partition-key.png" alt="Partition v.s. Partition Key" class="doc-image" id="partition-v.s.-partition-key" />
    </span> <span class="img-wrapper"> <span>Partição v.s. Chave de partição</span> </span></p>
-<p>A figura seguinte ilustra como o Milvus processa os pedidos de pesquisa numa coleção com ou sem a função Partition Key activada. </p>
+<p>A figura seguinte ilustra a forma como o Milvus processa os pedidos de pesquisa numa coleção com ou sem a funcionalidade Partition Key activada. </p>
 <ul>
 <li><p>Se a Chave de Partição estiver desactivada, o Milvus procura as entidades que são mais semelhantes ao vetor de consulta dentro da coleção. Pode limitar o âmbito da pesquisa se souber qual a partição que contém os resultados mais relevantes. </p></li>
 <li><p>Se a Chave de partição estiver activada, o Milvus determina o âmbito da pesquisa com base no valor da Chave de partição especificado num filtro de pesquisa e analisa apenas as entidades dentro das partições que correspondem. </p></li>
@@ -165,7 +165,7 @@ schema.addField(AddFieldReq.builder()​
 
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Set-Partition-Numbers​" class="common-anchor-header">Definir números de partição</h3><p>Quando designa um campo escalar numa coleção como chave de partição, o Milvus cria automaticamente 16 partições na coleção. Ao receber uma entidade, Milvus escolhe uma partição com base no valor da Chave de Partição desta entidade e armazena a entidade na partição, resultando em algumas ou todas as partições contendo entidades com diferentes valores de Chave de Partição. </p>
-<p>Também é possível determinar o número de partições a criar juntamente com a coleção. Isso é válido apenas se você tiver um campo escalar designado como a Chave de partição.</p>
+<p>Também é possível determinar o número de partições a criar juntamente com a coleção. Isso é válido apenas se você tiver um campo escalar designado como a chave de partição.</p>
 <div class="multipleCode">
  <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#go">Go</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python">client.create_collection(​

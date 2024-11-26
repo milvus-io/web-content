@@ -1,6 +1,6 @@
 ---
 id: analyzer-overview.md
-title: Analyzer Überblick
+title: Analyzer Übersicht
 summary: >-
   In der Textverarbeitung ist ein Analysator eine entscheidende Komponente, die
   Rohtext in ein strukturiertes, durchsuchbares Format umwandelt. Jeder Analyzer
@@ -8,7 +8,7 @@ summary: >-
   wandeln sie den Eingabetext in Token um, verfeinern diese Token und bereiten
   sie für eine effiziente Indizierung und Abfrage vor.
 ---
-<h1 id="Analyzer-Overview​" class="common-anchor-header">Analyzer Überblick<button data-href="#Analyzer-Overview​" class="anchor-icon" translate="no">
+<h1 id="Analyzer-Overview​" class="common-anchor-header">Analyzer Übersicht<button data-href="#Analyzer-Overview​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -85,7 +85,7 @@ summary: >-
 }​
 
 <button class="copy-code-btn"></button></code></pre>
-<p>Die obige Konfiguration des eingebauten Analysators <code translate="no">standard</code> entspricht der Einrichtung eines benutzerdefinierten Analysators mit den folgenden Parametern, wobei die Optionen <code translate="no">tokenizer</code> und <code translate="no">filter</code> explizit definiert werden, um die gleiche Funktionalität zu erreichen:</p>
+<p>Die obige Konfiguration des eingebauten Analysators <code translate="no">standard</code> entspricht der Einrichtung eines benutzerdefinierten Analysators mit den folgenden Parametern, wobei die Optionen <code translate="no">tokenizer</code> und <code translate="no">filter</code> explizit definiert sind, um die gleiche Funktionalität zu erreichen:</p>
 <pre><code translate="no" class="language-python">analyzer_params = {​
     <span class="hljs-string">&quot;tokenizer&quot;</span>: <span class="hljs-string">&quot;standard&quot;</span>,​
     <span class="hljs-string">&quot;filter&quot;</span>: [​

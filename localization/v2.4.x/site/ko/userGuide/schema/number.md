@@ -4,8 +4,8 @@ title: 숫자 필드
 related_key: 'number, integer, float, double'
 summary: >-
   숫자 필드는 밀버스에서 벡터가 아닌 숫자 데이터를 저장하는 데 사용됩니다. 이러한 필드는 일반적으로 연령, 가격 등과 같은 벡터 데이터와
-  관련된 추가 정보를 설명하는 데 사용됩니다. 이 데이터를 사용하면 벡터를 더 잘 설명하고 데이터 필터링 및 조건부 쿼리의 효율성을 향상시킬
-  수 있습니다.
+  관련된 추가 정보를 설명하는 데 사용됩니다. 이 데이터를 사용하면 벡터를 더 잘 설명하고 데이터 필터링 및 조건부 쿼리의 효율성을 개선할 수
+  있습니다.
 ---
 <h1 id="Number-Field​" class="common-anchor-header">숫자 필드<button data-href="#Number-Field​" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -43,7 +43,7 @@ summary: >-
 <table><thead><th data-block-token="AGYrd69etohgaUxzUyGcXFw8npI" colspan="1" rowspan="1"><p data-block-token="Qbx1dsbirortMixjxXJcukoLnjR">유형</p>
 </th><th data-block-token="AGYrd69etohgaUxzUyGcXFw8npI" colspan="1" rowspan="1"><p data-block-token="Qbx1dsbirortMixjxXJcukoLnjR">설명</p>
 </th></tr></thead><tbody><tr><td data-block-token="FQ0rdk7NKoAmtUxD5n7cHWBfnKd" colspan="1" rowspan="1"><p data-block-token="J4YBdReSPol6jvxIPyxcs7lRnGQ"><code translate="no">BOOL</code></p>
-</td><td data-block-token="XfVYdowyvoY7iwxNCIBcRbE4nFf" colspan="1" rowspan="1"><p data-block-token="WYGTdKI4RoBTXbxR2YbcxC2InOb"><code translate="no">true</code> 또는 <code translate="no">false</code> 을 저장하기 위한 부울 타입으로 이진 상태를 설명하는 데 적합합니다.</p>
+</td><td data-block-token="XfVYdowyvoY7iwxNCIBcRbE4nFf" colspan="1" rowspan="1"><p data-block-token="WYGTdKI4RoBTXbxR2YbcxC2InOb">이진 상태를 설명하는 데 적합한 <code translate="no">true</code> 또는 <code translate="no">false</code> 저장용 부울 유형입니다.</p>
 </td></tr><tr><td data-block-token="G6JBdjvguofEOnx6lmQcXkJdn6o" colspan="1" rowspan="1"><p data-block-token="PGcDd6i5Ao3jioxzrLkcV5lanUq"><code translate="no">INT8</code></p>
 </td><td data-block-token="TEVDdqVe0ooqTbxqkW7cdu8OnMe" colspan="1" rowspan="1"><p data-block-token="G5AOdYaoEom6X0x3NUKc9YL1nRh">8비트 정수로, 작은 범위의 정수 데이터를 저장하는 데 적합합니다.</p>
 </td></tr><tr><td data-block-token="Zc6cdGRmVoEOzdxaT8Pc4jdmnxg" colspan="1" rowspan="1"><p data-block-token="SaIUd6XDYoo2msxLCSXcNJk5nre"><code translate="no">INT16</code></p>

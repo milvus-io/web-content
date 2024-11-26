@@ -690,7 +690,7 @@ client.<span class="hljs-title function_">insert</span>({​
 <div class="alert note">
 <p>Per ulteriori informazioni sull'efficacia delle impostazioni dei valori nullable e predefiniti, consultare le <a href="#applicable-rules">Regole applicabili</a>.</p>
 </div>
-<h3 id="Search-and-query-with-default-values" class="common-anchor-header">Ricerca e interrogazione con valori predefiniti</h3><p>Le entità che contengono valori predefiniti vengono trattate come tutte le altre entità durante le ricerche vettoriali e i filtri scalari. È possibile includere valori predefiniti come parte delle operazioni <code translate="no">search</code> e <code translate="no">query</code>.</p>
+<h3 id="Search-and-query-with-default-values" class="common-anchor-header">Ricerca e interrogazione con valori predefiniti</h3><p>Le entità che contengono valori predefiniti vengono trattate come tutte le altre entità durante le ricerche vettoriali e i filtri scalari. È possibile includere i valori predefiniti come parte delle operazioni <code translate="no">search</code> e <code translate="no">query</code>.</p>
 <p>Ad esempio, in un'operazione <code translate="no">search</code>, le entità con <code translate="no">age</code> impostato sul valore predefinito di <code translate="no">18</code> saranno incluse nei risultati.</p>
 <div class="multipleCode">
  <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>

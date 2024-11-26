@@ -3,7 +3,7 @@ id: sparse_vector.md
 title: 스파스 벡터
 summary: >-
   스파스 벡터는 정보 검색과 자연어 처리에서 데이터를 표현하는 중요한 방법입니다. 고밀도 벡터는 뛰어난 의미 이해 기능으로 인기가 있지만,
-  키워드나 구문을 정확하게 일치시켜야 하는 애플리케이션에서는 스파스 벡터가 더 정확한 결과를 제공하는 경우가 많습니다.
+  키워드나 구문을 정확하게 일치시켜야 하는 애플리케이션의 경우 희소 벡터가 더 정확한 결과를 제공하는 경우가 많습니다.
 ---
 <h1 id="Sparse-Vector​" class="common-anchor-header">스파스 벡터<button data-href="#Sparse-Vector​" class="anchor-icon" translate="no">
       <svg translate="no"

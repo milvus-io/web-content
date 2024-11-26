@@ -106,7 +106,7 @@ title: Types métriques
 <p>où <strong>a = (<sub>a0</sub>, <sub>a1</sub>,...,<sub>an-1</sub>)</strong> et <strong>b = (<sub>b0</sub>, <sub>b1</sub>,..., <sub>bn-1</sub>)</strong> sont deux points dans un espace euclidien à n dimensions.</p>
 <p>Il s'agit de la mesure de distance la plus couramment utilisée et elle est très utile lorsque les données sont continues.</p>
 <div class="alert note">
-<p>Zilliz Cloud calcule uniquement la valeur avant d'appliquer la racine carrée lorsque la distance euclidienne est choisie comme métrique de distance.</p>
+<p>Zilliz Cloud calcule uniquement la valeur avant d'appliquer la racine carrée lorsque la distance euclidienne est choisie comme mesure de distance.</p>
 </div>
 <h2 id="Inner-product-IP​" class="common-anchor-header">Produit intérieur (PI)<button data-href="#Inner-product-IP​" class="anchor-icon" translate="no">
       <svg translate="no"

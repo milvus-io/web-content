@@ -47,7 +47,7 @@ title: Coerenza
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/service-time-and-guarantee-time.png" alt="ServiceTime and GuaranteeTs" class="doc-image" id="servicetime-and-guaranteets" />
    </span> <span class="img-wrapper"> <span>ServiceTime e GuaranteeTs</span> </span></p>
 <p>Come mostrato nella figura precedente, se GuaranteeTs è inferiore a ServiceTime, significa che tutti i dati precedenti al momento specificato sono stati completamente scritti su disco, consentendo ai QueryNodes di eseguire immediatamente l'operazione di ricerca. Quando GuaranteeTs è maggiore di ServiceTime, i QueryNodes devono aspettare che ServiceTime superi GuaranteeTs prima di poter eseguire l'operazione di ricerca.</p>
-<p>Gli utenti devono trovare un compromesso tra l'accuratezza della query e la sua latenza. Se gli utenti hanno elevati requisiti di coerenza e non sono sensibili alla latenza delle query, possono impostare GuaranteeTs su un valore il più grande possibile; se gli utenti desiderano ricevere rapidamente i risultati della ricerca e sono più tolleranti nei confronti dell'accuratezza delle query, allora GuaranteeTs può essere impostato su un valore inferiore.</p>
+<p>Gli utenti devono trovare un compromesso tra l'accuratezza della query e la sua latenza. Se gli utenti hanno requisiti di coerenza elevati e non sono sensibili alla latenza delle query, possono impostare GuaranteeTs su un valore il più grande possibile; se gli utenti desiderano ricevere rapidamente i risultati della ricerca e sono più tolleranti nei confronti dell'accuratezza delle query, allora GuaranteeTs può essere impostato su un valore inferiore.</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/consistency-level-illustrated.png" alt="Consistency Levels Illustrated" class="doc-image" id="consistency-levels-illustrated" />
@@ -55,9 +55,9 @@ title: Coerenza
 <p>Milvus offre quattro tipi di livelli di consistenza con diverse GaranzieT.</p>
 <ul>
 <li><p><strong>Forte</strong></p>
-<p>L'ultimo timestamp viene utilizzato come GuaranteeTs e i QueryNode devono attendere che il ServiceTime soddisfi il GuaranteeTs prima di eseguire le richieste di ricerca.</p></li>
+<p>L'ultimo timestamp viene utilizzato come GuaranteeTs e i QueryNodes devono attendere che il ServiceTime soddisfi il GuaranteeTs prima di eseguire le richieste di ricerca.</p></li>
 <li><p><strong>Eventuale</strong></p>
-<p>Il GuaranteeTs è impostato su un valore estremamente basso, ad esempio 1, per evitare i controlli di consistenza, in modo che i QueryNode possano eseguire immediatamente le richieste di ricerca su tutti i dati del batch.</p></li>
+<p>Il GuaranteeTs è impostato su un valore estremamente basso, ad esempio 1, per evitare i controlli di coerenza, in modo che i QueryNode possano eseguire immediatamente le richieste di ricerca su tutti i dati del batch.</p></li>
 <li><p><strong>Stallo limitato</strong></p>
 <p>GuranteeTs è impostato su un punto precedente all'ultimo timestamp per far sì che i QueryNodes eseguano ricerche con una certa tolleranza di perdita di dati.</p></li>
 <li><p><strong>Sessione</strong></p>
@@ -143,7 +143,7 @@ curl --request POST \​
 
 <button class="copy-code-btn"></button></code></pre>
 <p>I valori possibili per il parametro <code translate="no">consistency_level</code> sono <code translate="no">Strong</code>, <code translate="no">Bounded</code>, <code translate="no">Eventually</code> e <code translate="no">Session</code>.</p>
-<h3 id="Set-Consistency-Level-in-Search​set-consistency-level-in-search​" class="common-anchor-header">Impostazione del livello di consistenza nella ricerca{#set-consistency-level-in-search}</h3><p>È sempre possibile modificare il livello di coerenza per una ricerca specifica. L'esempio di codice seguente riporta il livello di consistenza a Bounded. La modifica si applica solo alla richiesta di ricerca corrente.</p>
+<h3 id="Set-Consistency-Level-in-Search​set-consistency-level-in-search​" class="common-anchor-header">Impostare il livello di consistenza nella ricerca{#set-consistency-level-in-search}</h3><p>È sempre possibile modificare il livello di coerenza per una ricerca specifica. L'esempio di codice seguente riporta il livello di coerenza a Bounded. La modifica si applica solo alla richiesta di ricerca corrente.</p>
 <div class="multipleCode">
    <a href="#python">python</a> <a href="#java">java</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">res = client.search(​

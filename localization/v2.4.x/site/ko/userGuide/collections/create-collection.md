@@ -757,4 +757,4 @@ curl --request POST \​
 <button class="copy-code-btn"></button></code></pre>
 <p>일관성 수준에 대한 자세한 내용은 <a href="/docs/ko/consistency.md">일관성 수준을</a> 참조하세요.</p>
 <h3 id="Enable-Dynamic-Field​" class="common-anchor-header">동적 필드 사용</h3><p>컬렉션의 동적 필드는 <strong>$meta라는</strong> 예약된 JSON(JavaScript 객체 표기법) 필드입니다. 이 필드를 활성화하면 Milvus는 각 엔티티에 포함된 스키마 정의되지 않은 모든 필드와 해당 값을 예약된 필드에 키-값 쌍으로 저장합니다.</p>
-<p>동적 필드 사용 방법에 대한 자세한 내용은 <a href="/docs/ko/enable-dynamic-field.md">동적 필드를</a> 참조하세요.</p>
+<p>동적 필드 사용 방법에 대한 자세한 내용은 <a href="/docs/ko/enable-dynamic-field.md">동적 필</a>드를 참조하세요.</p>

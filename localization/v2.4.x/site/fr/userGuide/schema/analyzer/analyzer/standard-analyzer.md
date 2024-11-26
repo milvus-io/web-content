@@ -41,7 +41,7 @@ summary: >-
       </svg>
     </button></h2><p>L'analyseur <code translate="no">standard</code> se compose de</p>
 <ul>
-<li><p>Un<strong>tokenizer</strong>: Utilise le tokenizer <code translate="no">standard</code> pour diviser le texte en unités de mots discrètes basées sur des règles de grammaire. Pour plus d'informations, voir <a href="/docs/fr/standard-tokenizer.md">Standard</a>.</p></li>
+<li><p>Un<strong>tokenizer</strong>: Il utilise le tokenizer <code translate="no">standard</code> pour diviser le texte en unités de mots discrètes basées sur des règles de grammaire. Pour plus d'informations, voir <a href="/docs/fr/standard-tokenizer.md">Standard</a>.</p></li>
 <li><p><strong>Filtre</strong>: Utilise le filtre <code translate="no">lowercase</code> pour convertir tous les tokens en minuscules, ce qui permet d'effectuer des recherches insensibles à la casse. Pour plus d'informations, voir<a href="/docs/fr/lowercase-filter.md"><code translate="no">lowercase filter</code></a>.</p></li>
 </ul>
 <p>Les fonctionnalités de l'analyseur <code translate="no">standard</code> sont équivalentes à la configuration personnalisée suivante de l'analyseur.</p>

@@ -2,8 +2,8 @@
 id: standard-tokenizer.md
 title: Standard Tokenizer
 summary: >-
-  Der `Standard`-Tokenizer in Milvus zerlegt Text auf der Basis von Leerzeichen
-  und Satzzeichen und ist damit für die meisten Sprachen geeignet.
+  Der `Standard`-Tokenizer in Milvus zerlegt Text auf der Grundlage von
+  Leerzeichen und Satzzeichen und ist daher für die meisten Sprachen geeignet.
 ---
 <h1 id="Standard​" class="common-anchor-header">Standard<button data-href="#Standard​" class="anchor-icon" translate="no">
       <svg translate="no"

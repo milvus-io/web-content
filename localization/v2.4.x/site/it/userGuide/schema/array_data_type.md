@@ -5,7 +5,7 @@ summary: >-
   Il tipo Array viene utilizzato per memorizzare campi contenenti più valori
   dello stesso tipo di dati. Offre un modo flessibile per memorizzare attributi
   con più elementi, rendendolo particolarmente utile in scenari in cui è
-  necessario salvare una serie di dati correlati. In Milvus, è possibile
+  necessario salvare una serie di dati correlati. In Milvus è possibile
   memorizzare i campi Array insieme ai dati vettoriali, consentendo così di
   effettuare query e filtraggi più complessi.
 ---

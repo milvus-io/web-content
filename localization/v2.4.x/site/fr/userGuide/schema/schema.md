@@ -150,7 +150,7 @@ schema.<span class="hljs-title function_">addField</span>(<span class="hljs-titl
 }&#x27;</span>​
 
 <button class="copy-code-btn"></button></code></pre>
-<p>Lors de l'ajout d'un champ, vous pouvez explicitement préciser qu'il s'agit du champ primaire en définissant sa propriété <code translate="no">is_primary</code> sur <code translate="no">True</code>. Un champ primaire accepte par défaut les valeurs <strong>Int64</strong>. Dans ce cas, la valeur du champ primaire doit être un nombre entier, comme dans <code translate="no">12345</code>. Si vous choisissez d'utiliser des valeurs <strong>VarChar</strong> dans le champ primaire, la valeur doit être une chaîne de caractères, comme dans <code translate="no">my_entity_1234</code>.</p>
+<p>Lors de l'ajout d'un champ, vous pouvez explicitement préciser qu'il s'agit du champ primaire en définissant sa propriété <code translate="no">is_primary</code> sur <code translate="no">True</code>. Un champ primaire accepte par défaut les valeurs <strong>Int64</strong>. Dans ce cas, la valeur du champ primaire doit être un entier, comme dans <code translate="no">12345</code>. Si vous choisissez d'utiliser des valeurs <strong>VarChar</strong> dans le champ primaire, la valeur doit être une chaîne de caractères, comme dans <code translate="no">my_entity_1234</code>.</p>
 <p>Vous pouvez également définir les propriétés <code translate="no">autoId</code> sur <code translate="no">True</code> pour que Zilliz Cloud alloue automatiquement des valeurs de champ primaire lors des insertions de données.</p>
 <p>Pour plus de détails, reportez-vous à <a href="/docs/fr/primary-field.md">Champ primaire et AutoID</a>.</p>
 <h2 id="Add-Vector-Fields​" class="common-anchor-header">Ajouter des champs vectoriels<button data-href="#Add-Vector-Fields​" class="anchor-icon" translate="no">
@@ -168,7 +168,7 @@ schema.<span class="hljs-title function_">addField</span>(<span class="hljs-titl
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Les champs vectoriels acceptent différents types d'intégration de vecteurs denses et épars. Sur Zilliz Cloud, vous pouvez ajouter quatre champs vectoriels à une collection. Les extraits de code suivants montrent comment ajouter un champ vectoriel.</p>
+    </button></h2><p>Les champs vectoriels acceptent diverses intégrations de vecteurs denses et éparses. Sur Zilliz Cloud, vous pouvez ajouter quatre champs vectoriels à une collection. Les extraits de code suivants montrent comment ajouter un champ vectoriel.</p>
 <div class="multipleCode">
  <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python">schema.add_field(​

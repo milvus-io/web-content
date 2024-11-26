@@ -4,7 +4,7 @@ title: フィルタリング検索
 related_key: 'ann search, filtered search'
 summary: >-
   ANN検索は、指定されたベクトル埋め込みに最も近いベクトル埋め込みを見つける。しかし、検索結果が常に正しいとは限りません。検索リクエストにフィルタリング条件を含めることで、Zilliz
-  CloudがANN検索を行う前にメタデータのフィルタリングを行い、検索範囲をコレクション全体から指定されたフィルタリング条件に一致するエンティティだけに絞り込むことができます。
+  CloudがANN検索を行う前にメタデータのフィルタリングを行い、検索範囲をコレクション全体から指定されたフィルタリング条件にマッチするエンティティだけに絞り込むことができます。
 ---
 <h1 id="Filtered-Search​" class="common-anchor-header">フィルタリング検索<button data-href="#Filtered-Search​" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -228,7 +228,7 @@ curl --request POST \​
 <span class="hljs-comment"># {&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:[]}​</span>
 
 <button class="copy-code-btn"></button></code></pre>
-<p>検索リクエストに含まれるフィルタリング条件は<code translate="no">color like &quot;red%&quot; and likes &gt; 50</code> を読み取る。最初の条件は、<code translate="no">color</code> フィールドに<code translate="no">red</code> で始まる値を持つエンティティを求めるもので、もう1つは、<code translate="no">likes</code> フィールドに<code translate="no">50</code> より大きい値を持つエンティティを求めるものである。これらの条件を満たすエンティティは2つしかない。top-K を<code translate="no">3</code> に設定すると、Zilliz Cloud はこれら2つのエンティティのクエリベクトルとの距離を計算し、検索結果として返します。</p>
+<p>検索リクエストに含まれるフィルタリング条件は<code translate="no">color like &quot;red%&quot; and likes &gt; 50</code> を読み取る。最初の条件は<code translate="no">color</code> フィールドに<code translate="no">red</code> で始まる値を持つエンティティを求めるもので、もう1つは<code translate="no">likes</code> フィールドに<code translate="no">50</code> より大きい値を持つエンティティを求めるものである。これらの条件を満たすエンティティは2つしかない。top-K を<code translate="no">3</code> に設定すると、Zilliz Cloud はこれら2つのエンティティのクエリベクトルとの距離を計算し、検索結果として返します。</p>
 <pre><code translate="no" class="language-JSON">[​
     {​
         <span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">4</span>, ​

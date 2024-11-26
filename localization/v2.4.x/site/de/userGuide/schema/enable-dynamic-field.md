@@ -278,7 +278,7 @@ curl --request POST \​
 <span class="hljs-comment"># }​</span>
 
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Query-and-search-with-dynamic-field​" class="common-anchor-header">Abfrage und Suche mit dynamischem Feld</h3><p>Milvus unterstützt die Verwendung von Filterausdrücken bei Abfragen und Suchen, mit denen Sie angeben können, welche Felder in die Ergebnisse aufgenommen werden sollen. Das folgende Beispiel zeigt, wie Abfragen und Suchen mit dem Feld <code translate="no">color</code>, das nicht im Schema definiert ist, unter Verwendung des dynamischen Feldes durchgeführt werden können.</p>
+<h3 id="Query-and-search-with-dynamic-field​" class="common-anchor-header">Abfrage und Suche mit dynamischem Feld</h3><p>Milvus unterstützt die Verwendung von Filterausdrücken bei Abfragen und Suchen, so dass Sie angeben können, welche Felder in die Ergebnisse aufgenommen werden sollen. Das folgende Beispiel zeigt, wie Abfragen und Suchen mit dem Feld <code translate="no">color</code>, das nicht im Schema definiert ist, unter Verwendung des dynamischen Feldes durchgeführt werden können.</p>
 <div class="multipleCode">
  <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#go">Go</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python">query_vector = [<span class="hljs-number">0.3580376395471989</span>, -<span class="hljs-number">0.6023495712049978</span>, <span class="hljs-number">0.18414012509913835</span>, -<span class="hljs-number">0.26286205330961354</span>, <span class="hljs-number">0.9029438446296592</span>]​
@@ -356,7 +356,7 @@ curl --request POST \​
 <span class="hljs-comment"># {&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:[{&quot;color&quot;:&quot;red_7025&quot;,&quot;distance&quot;:0.6290165,&quot;id&quot;:1},{&quot;color&quot;:&quot;red_4794&quot;,&quot;distance&quot;:0.5975797,&quot;id&quot;:4},{&quot;color&quot;:&quot;red_9392&quot;,&quot;distance&quot;:-0.24996185,&quot;id&quot;:6}]}​</span>
 
 <button class="copy-code-btn"></button></code></pre>
-<p>In dem im obigen Codebeispiel verwendeten Filterausdruck <code translate="no">color like &quot;red%&quot; and likes &gt; 50</code> legen die Bedingungen fest, dass der Wert des Feldes <code translate="no">color</code> mit <strong>"rot"</strong> beginnen muss <strong>.</strong> In den Beispieldaten erfüllen nur zwei Entitäten diese Bedingung. Wenn also <code translate="no">limit</code> (topK) auf <code translate="no">3</code> oder weniger gesetzt wird, werden diese beiden Entitäten zurückgegeben.</p>
+<p>In dem im obigen Codebeispiel verwendeten Filterausdruck <code translate="no">color like &quot;red%&quot; and likes &gt; 50</code> geben die Bedingungen an, dass der Wert des Feldes <code translate="no">color</code> mit <strong>"rot"</strong> beginnen muss <strong>.</strong> In den Beispieldaten erfüllen nur zwei Entitäten diese Bedingung. Wenn also <code translate="no">limit</code> (topK) auf <code translate="no">3</code> oder weniger gesetzt wird, werden diese beiden Entitäten zurückgegeben.</p>
 <pre><code translate="no" class="language-JSON">[​
     {​
         <span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">4</span>, ​

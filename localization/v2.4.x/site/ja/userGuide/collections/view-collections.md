@@ -118,7 +118,7 @@ fmt.Println(collectionNames)​
 <pre><code translate="no" class="language-JSON">[<span class="hljs-string">&quot;quick_setup&quot;</span>]​
 
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Describe-Collection​" class="common-anchor-header">コレクションの説明<button data-href="#Describe-Collection​" class="anchor-icon" translate="no">
+<h2 id="Describe-Collection​" class="common-anchor-header">コレクションの記述<button data-href="#Describe-Collection​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

@@ -425,7 +425,7 @@ client.<span class="hljs-title function_">insert</span>({​
 
 <button class="copy-code-btn"></button></code></pre>
 <p>In diesem Beispiel fügen wir Daten ein, die <code translate="no">age</code>, <code translate="no">price</code>, <code translate="no">pk</code> (Primärfeld) und Vektordarstellungen (<code translate="no">embedding</code>) enthalten. Um sicherzustellen, dass die eingefügten Daten mit den im Schema definierten Feldern übereinstimmen, empfiehlt es sich, die Datentypen im Voraus zu überprüfen, um Fehler zu vermeiden.</p>
-<p>Wenn Sie bei der Definition des Schemas <code translate="no">enable_dynamic_fields=True</code> einstellen, können Sie mit Milvus auch Zahlenfelder einfügen, die nicht im Voraus definiert wurden. Beachten Sie jedoch, dass dies die Komplexität von Abfragen und Verwaltung erhöhen kann, was sich möglicherweise auf die Leistung auswirkt. Weitere Informationen finden Sie unter <a href="/docs/de/enable_dynamic_field.md">Dynamisches Feld</a>.</p>
+<p>Wenn Sie bei der Definition des Schemas <code translate="no">enable_dynamic_fields=True</code> einstellen, können Sie mit Milvus auch Zahlenfelder einfügen, die nicht im Voraus definiert wurden. Beachten Sie jedoch, dass dies die Komplexität von Abfragen und Verwaltung erhöhen und die Leistung beeinträchtigen kann. Weitere Informationen finden Sie unter <a href="/docs/de/enable_dynamic_field.md">Dynamisches Feld</a>.</p>
 <h2 id="Search-and-query​" class="common-anchor-header">Suche und Abfrage<button data-href="#Search-and-query​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -442,7 +442,7 @@ client.<span class="hljs-title function_">insert</span>({​
         ></path>
       </svg>
     </button></h2><p>Nachdem Sie Zahlenfelder hinzugefügt haben, können Sie diese zum Filtern in Such- und Abfrageoperationen verwenden, um präzisere Suchergebnisse zu erzielen.</p>
-<h3 id="Filter-queries​" class="common-anchor-header">Filterabfragen</h3><p>Nachdem Sie Zahlenfelder hinzugefügt haben, können Sie diese zum Filtern in Abfragen verwenden. Sie können zum Beispiel alle Entitäten abfragen, bei denen <code translate="no">age</code> zwischen 30 und 40 liegt.</p>
+<h3 id="Filter-queries​" class="common-anchor-header">Filterabfragen</h3><p>Nachdem Sie Zahlenfelder hinzugefügt haben, können Sie diese zum Filtern in Abfragen verwenden. Zum Beispiel können Sie alle Entitäten abfragen, bei denen <code translate="no">age</code> zwischen 30 und 40 liegt.</p>
 <div class="multipleCode">
  <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&quot;30 &lt;= age &lt;= 40&quot;</span>​

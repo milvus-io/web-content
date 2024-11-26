@@ -8,7 +8,7 @@ summary: >-
   le dimensioni dei vettori, ma riduce anche i costi di memorizzazione e
   conserva le informazioni semantiche. Questa trasformazione non solo comprime
   le dimensioni del vettore, ma riduce anche i costi di archiviazione e di
-  calcolo, mantenendo le informazioni semantiche. Quando la precisione per le
+  calcolo, conservando le informazioni semantiche. Quando la precisione per le
   caratteristiche non critiche non è essenziale, i vettori binari possono
   effettivamente mantenere la maggior parte dell'integrità e dell'utilità dei
   vettori originali in virgola mobile.
@@ -272,7 +272,7 @@ client.createCollection(requestCreate);​
 
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Insert-data​" class="common-anchor-header">Inserire i dati</h3><p>Dopo aver creato la collezione, utilizzare il metodo <code translate="no">insert</code> per aggiungere dati contenenti vettori binari. Si noti che i vettori binari devono essere forniti sotto forma di array di byte, dove ogni byte rappresenta 8 valori booleani.</p>
-<p>Ad esempio, per un vettore binario a 128 dimensioni, è necessario un array di 16 byte (poiché 128 bit ÷ 8 bit/byte = 16 byte). Di seguito è riportato un esempio di codice per l'inserimento di dati.</p>
+<p>Ad esempio, per un vettore binario di 128 dimensioni, è necessario un array di 16 byte (poiché 128 bit ÷ 8 bit/byte = 16 byte). Di seguito è riportato un esempio di codice per l'inserimento di dati.</p>
 <div class="multipleCode">
  <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#go">Go</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">convert_bool_list_to_bytes</span>(<span class="hljs-params">bool_list</span>):​
@@ -444,5 +444,5 @@ curl --request POST \​
 }&quot;</span>​
 
 <button class="copy-code-btn"></button></code></pre>
-<p>Per ulteriori informazioni sui parametri di ricerca della similarità, consultare la sezione <a href="/docs/it/single-vector-search.md">Ricerca di base di RNA</a>.</p>
+<p>Per ulteriori informazioni sui parametri di ricerca della somiglianza, consultare la sezione <a href="/docs/it/single-vector-search.md">Ricerca di base di RNA</a>.</p>
 <p></p>
