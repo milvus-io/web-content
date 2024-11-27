@@ -2,9 +2,9 @@
 id: configure_common.md
 related_key: configure
 group: system_configuration.md
-summary: Learn how to configure common for Milvus.
+summary: Imparare a configurare i comuni per Milvus.
 ---
-<h1 id="common-related-Configurations" class="common-anchor-header">common-related Configurations<button data-href="#common-related-Configurations" class="anchor-icon" translate="no">
+<h1 id="common-related-Configurations" class="common-anchor-header">Configurazioni correlate comuni<button data-href="#common-related-Configurations" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -37,13 +37,13 @@ summary: Learn how to configure common for Milvus.
     </button></h2><table id="common.defaultPartitionName">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Descrizione</th>
+      <th class="width20">Valore predefinito</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        Name of the default partition when a collection is created      </td>
+      <td>        Nome della partizione predefinita quando viene creata una raccolta      </td>
       <td>_default</td>
     </tr>
   </tbody>
@@ -66,13 +66,13 @@ summary: Learn how to configure common for Milvus.
     </button></h2><table id="common.defaultIndexName">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Descrizione</th>
+      <th class="width20">Valore predefinito</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        Name of the index when it is created with name unspecified      </td>
+      <td>        Nome dell'indice quando viene creato con nome non specificato      </td>
       <td>_default_idx</td>
     </tr>
   </tbody>
@@ -95,13 +95,13 @@ summary: Learn how to configure common for Milvus.
     </button></h2><table id="common.entityExpiration">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Descrizione</th>
+      <th class="width20">Valore predefinito</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        Entity expiration in seconds, CAUTION -1 means never expire      </td>
+      <td>        Scadenza dell'entità in secondi, ATTENZIONE -1 significa che non scade mai   </td>
       <td>-1</td>
     </tr>
   </tbody>
@@ -124,13 +124,13 @@ summary: Learn how to configure common for Milvus.
     </button></h2><table id="common.indexSliceSize">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Descrizione</th>
+      <th class="width20">Valore predefinito</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        Index slice size in MB      </td>
+      <td>        Dimensione della fetta di indice in MB  </td>
       <td>16</td>
     </tr>
   </tbody>
@@ -153,13 +153,13 @@ summary: Learn how to configure common for Milvus.
     </button></h2><table id="common.threadCoreCoefficient.highPriority">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Descrizione</th>
+      <th class="width20">Valore predefinito</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        This parameter specify how many times the number of threads is the number of cores in high priority pool      </td>
+      <td>        Questo parametro specifica quante volte il numero di thread è il numero di core nel pool ad alta priorità      </td>
       <td>10</td>
     </tr>
   </tbody>
@@ -182,13 +182,13 @@ summary: Learn how to configure common for Milvus.
     </button></h2><table id="common.threadCoreCoefficient.middlePriority">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Descrizione</th>
+      <th class="width20">Valore predefinito</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        This parameter specify how many times the number of threads is the number of cores in middle priority pool      </td>
+      <td>        Questo parametro specifica quante volte il numero di thread è il numero di core nel pool a priorità media     </td>
       <td>5</td>
     </tr>
   </tbody>
@@ -211,13 +211,13 @@ summary: Learn how to configure common for Milvus.
     </button></h2><table id="common.threadCoreCoefficient.lowPriority">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Descrizione</th>
+      <th class="width20">Valore predefinito</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        This parameter specify how many times the number of threads is the number of cores in low priority pool      </td>
+      <td>        Questo parametro specifica quante volte il numero di thread è il numero di core nel pool a bassa priorità      </td>
       <td>1</td>
     </tr>
   </tbody>
@@ -240,13 +240,13 @@ summary: Learn how to configure common for Milvus.
     </button></h2><table id="common.gracefulTime">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Descrizione</th>
+      <th class="width20">Valore predefinito</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        milliseconds. it represents the interval (in ms) by which the request arrival time needs to be subtracted in the case of Bounded Consistency.      </td>
+      <td>        millisecondi. rappresenta l'intervallo (in ms) per il quale il tempo di arrivo della richiesta deve essere sottratto nel caso di Bounded Consistency.      </td>
       <td>5000</td>
     </tr>
   </tbody>
@@ -269,13 +269,13 @@ summary: Learn how to configure common for Milvus.
     </button></h2><table id="common.gracefulStopTimeout">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Descrizione</th>
+      <th class="width20">Valore predefinito</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        seconds. it will force quit the server if the graceful stop process is not completed during this time.      </td>
+      <td>        secondi. Se il processo di graceful stop non viene completato entro questo tempo, il server viene chiuso forzatamente.      </td>
       <td>1800</td>
     </tr>
   </tbody>
@@ -298,14 +298,14 @@ summary: Learn how to configure common for Milvus.
     </button></h2><table id="common.storageType">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Descrizione</th>
+      <th class="width20">Valore predefinito</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        please adjust in embedded Milvus: local, available values are [local, remote, opendal], value minio is deprecated, use remote instead      </td>
-      <td>remote</td>
+      <td>        regolare in Milvus incorporato: local, i valori disponibili sono [local, remote, opendal], il valore minio è deprecato, usare invece remote      </td>
+      <td>remoto</td>
     </tr>
   </tbody>
 </table>
@@ -327,16 +327,16 @@ summary: Learn how to configure common for Milvus.
     </button></h2><table id="common.simdType">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Descrizione</th>
+      <th class="width20">Valore predefinito</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>
-        <li>Default value: auto</li>      
-        <li>Valid values: [auto, avx512, avx2, avx, sse4_2]</li>      
-        <li>This configuration is only used by querynode and indexnode, it selects CPU instruction set for Searching and Index-building.</li>      </td>
+        <li>Valore predefinito: auto</li>      
+        <li>Valori validi: [auto, avx512, avx2, avx, sse4_2]</li>      
+        <li>Questa configurazione è usata solo da querynode e indexnode e seleziona il set di istruzioni della CPU per la ricerca e la costruzione di indici.</li>      </td>
       <td>auto</td>
     </tr>
   </tbody>
@@ -359,15 +359,15 @@ summary: Learn how to configure common for Milvus.
     </button></h2><table id="common.security.superUsers">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Descrizione</th>
+      <th class="width20">Valore predefinito</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>
-        <li>The superusers will ignore some system check processes,</li>      
-        <li>like the old password verification when updating the credential</li>      </td>
+        <li>I superutenti ignoreranno alcuni processi di controllo del sistema,</li>      
+        <li>come la verifica della vecchia password durante l'aggiornamento delle credenziali.</li>      </td>
       <td></td>
     </tr>
   </tbody>
@@ -390,13 +390,13 @@ summary: Learn how to configure common for Milvus.
     </button></h2><table id="common.security.defaultRootPassword">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Descrizione</th>
+      <th class="width20">Valore predefinito</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        default password for root user      </td>
+      <td>        password predefinita per l'utente root    </td>
       <td>Milvus</td>
     </tr>
   </tbody>
@@ -419,13 +419,13 @@ summary: Learn how to configure common for Milvus.
     </button></h2><table id="common.session.ttl">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Descrizione</th>
+      <th class="width20">Valore predefinito</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        ttl value when session granting a lease to register service      </td>
+      <td>        valore di ttl quando la sessione concede un lease al servizio di registrazione      </td>
       <td>30</td>
     </tr>
   </tbody>
@@ -448,13 +448,13 @@ summary: Learn how to configure common for Milvus.
     </button></h2><table id="common.session.retryTimes">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Descrizione</th>
+      <th class="width20">Valore predefinito</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        retry times when session sending etcd requests      </td>
+      <td>        tempi di riprova quando la sessione invia richieste etcd    </td>
       <td>30</td>
     </tr>
   </tbody>
@@ -477,14 +477,14 @@ summary: Learn how to configure common for Milvus.
     </button></h2><table id="common.locks.metrics.enable">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Descrizione</th>
+      <th class="width20">Valore predefinito</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        whether gather statistics for metrics locks      </td>
-      <td>false</td>
+      <td>        se raccogliere le statistiche per i blocchi delle metriche      </td>
+      <td>falso</td>
     </tr>
   </tbody>
 </table>
@@ -506,13 +506,13 @@ summary: Learn how to configure common for Milvus.
     </button></h2><table id="common.locks.threshold.info">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Descrizione</th>
+      <th class="width20">Valore predefinito</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        minimum milliseconds for printing durations in info level      </td>
+      <td>        millisecondi minimi per la durata della stampa nel livello info    </td>
       <td>500</td>
     </tr>
   </tbody>
@@ -535,13 +535,13 @@ summary: Learn how to configure common for Milvus.
     </button></h2><table id="common.locks.threshold.warn">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Descrizione</th>
+      <th class="width20">Valore predefinito</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        minimum milliseconds for printing durations in warn level      </td>
+      <td>        millisecondi minimi per la durata della stampa nel livello di avviso      </td>
       <td>1000</td>
     </tr>
   </tbody>
@@ -564,17 +564,17 @@ summary: Learn how to configure common for Milvus.
     </button></h2><table id="common.ttMsgEnabled">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Descrizione</th>
+      <th class="width20">Valore predefinito</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>
-        <li>Whether to disable the internal time messaging mechanism for the system. </li>      
-        <li>If disabled (set to false), the system will not allow DML operations, including insertion, deletion, queries, and searches. </li>      
-        <li>This helps Milvus-CDC synchronize incremental data</li>      </td>
-      <td>true</td>
+        <li>Disabilita il meccanismo di messaggistica temporale interno al sistema. </li>      
+        <li>Se disattivato (impostato su false), il sistema non consentirà le operazioni DML, compresi l'inserimento, la cancellazione, le interrogazioni e le ricerche. </li>      
+        <li>Questo aiuta Milvus-CDC a sincronizzare i dati incrementali.</li>      </td>
+      <td>vero</td>
     </tr>
   </tbody>
 </table>
@@ -596,13 +596,13 @@ summary: Learn how to configure common for Milvus.
     </button></h2><table id="common.traceLogMode">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Descrizione</th>
+      <th class="width20">Valore predefinito</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        trace request info      </td>
+      <td>        traccia richiesta info    </td>
       <td>0</td>
     </tr>
   </tbody>
@@ -625,13 +625,13 @@ summary: Learn how to configure common for Milvus.
     </button></h2><table id="common.bloomFilterSize">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Descrizione</th>
+      <th class="width20">Valore predefinito</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        bloom filter initial size      </td>
+      <td>        dimensione iniziale del filtro bloom     </td>
       <td>100000</td>
     </tr>
   </tbody>
@@ -654,13 +654,13 @@ summary: Learn how to configure common for Milvus.
     </button></h2><table id="common.maxBloomFalsePositive">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Descrizione</th>
+      <th class="width20">Valore predefinito</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        max false positive rate for bloom filter      </td>
+      <td>        tasso massimo di falsi positivi per il filtro bloom     </td>
       <td>0.001</td>
     </tr>
   </tbody>
@@ -683,14 +683,14 @@ summary: Learn how to configure common for Milvus.
     </button></h2><table id="common.bloomFilterType">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Descrizione</th>
+      <th class="width20">Valore predefinito</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        bloom filter type, support BasicBloomFilter and BlockedBloomFilter      </td>
-      <td>BasicBloomFilter</td>
+      <td>        tipo di filtro bloom, supporta BasicBloomFilter e BlockedBloomFilter      </td>
+      <td>Filtro BasicBloom</td>
     </tr>
   </tbody>
 </table>
@@ -712,13 +712,13 @@ summary: Learn how to configure common for Milvus.
     </button></h2><table id="common.bloomFilterApplyBatchSize">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Descrizione</th>
+      <th class="width20">Valore predefinito</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        batch size when to apply pk to bloom filter      </td>
+      <td>        dimensione del batch quando applicare il pk al filtro bloom     </td>
       <td>1000</td>
     </tr>
   </tbody>
@@ -741,14 +741,14 @@ summary: Learn how to configure common for Milvus.
     </button></h2><table id="common.usePartitionKeyAsClusteringKey">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Descrizione</th>
+      <th class="width20">Valore predefinito</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        if true, do clustering compaction and segment prune on partition key field      </td>
-      <td>false</td>
+      <td>        se true, esegue la compattazione del clustering e il prune dei segmenti sul campo della chiave di partizione      </td>
+      <td>falso</td>
     </tr>
   </tbody>
 </table>
@@ -770,14 +770,14 @@ summary: Learn how to configure common for Milvus.
     </button></h2><table id="common.useVectorAsClusteringKey">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Descrizione</th>
+      <th class="width20">Valore predefinito</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        if true, do clustering compaction and segment prune on vector field      </td>
-      <td>false</td>
+      <td>        se vero, esegue la compattazione del clustering e il prune dei segmenti sul campo vettore      </td>
+      <td>falso</td>
     </tr>
   </tbody>
 </table>
@@ -799,14 +799,14 @@ summary: Learn how to configure common for Milvus.
     </button></h2><table id="common.enableVectorClusteringKey">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Descrizione</th>
+      <th class="width20">Valore predefinito</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        if true, enable vector clustering key and vector clustering compaction      </td>
-      <td>false</td>
+      <td>        se true, abilita la chiave di clustering vettoriale e la compattazione del clustering vettoriale      </td>
+      <td>falso</td>
     </tr>
   </tbody>
 </table>

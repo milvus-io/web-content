@@ -1,11 +1,11 @@
 ---
 id: m2m.md
 summary: >-
-  This guide provides a comprehensive, step-by-step process for migrating data
-  from Milvus 1.x (including 0.9.x and above) to Milvus 2.x.
-title: From Milvus 1.x
+  Questa guida fornisce un processo completo, passo dopo passo, per la
+  migrazione dei dati da Milvus 1.x (incluso 0.9.x e precedenti) a Milvus 2.x.
+title: Da Milvus 1.x
 ---
-<h1 id="From-Milvus-1x" class="common-anchor-header">From Milvus 1.x<button data-href="#From-Milvus-1x" class="anchor-icon" translate="no">
+<h1 id="From-Milvus-1x" class="common-anchor-header">Da Milvus 1.x<button data-href="#From-Milvus-1x" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -20,8 +20,8 @@ title: From Milvus 1.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>This guide provides a comprehensive, step-by-step process for migrating data from Milvus 1.x (including 0.9.x and above) to Milvus 2.x. By following this guide, you will be able to efficiently transfer your data, leveraging Milvus 2.x advanced features and improved performance.</p>
-<h2 id="Prerequisites" class="common-anchor-header">Prerequisites<button data-href="#Prerequisites" class="anchor-icon" translate="no">
+    </button></h1><p>Questa guida fornisce un processo completo, passo dopo passo, per la migrazione dei dati da Milvus 1.x (incluso 0.9.x e precedenti) a Milvus 2.x. Seguendo questa guida, sarete in grado di trasferire in modo efficiente i vostri dati, sfruttando le funzionalità avanzate e le prestazioni migliorate di Milvus 2.x.</p>
+<h2 id="Prerequisites" class="common-anchor-header">Prerequisiti<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -37,17 +37,15 @@ title: From Milvus 1.x
         ></path>
       </svg>
     </button></h2><ul>
-<li><strong>Software versions</strong>:
-<ul>
-<li>Source Milvus: 0.9.x to 1.x</li>
-<li>Target Milvus: 2.x</li>
+<li><strong>Versioni software</strong>:<ul>
+<li>Milvus di origine: da 0.9.x a 1.x</li>
+<li>Milvus di destinazione: 2.x</li>
 </ul></li>
-<li><strong>Required tools</strong>:
-<ul>
-<li><a href="https://github.com/zilliztech/milvus-migration">Milvus-migration</a> tool. For installation details, refer to <a href="/docs/milvusdm_install.md">Install Migration Tool</a>.</li>
+<li><strong>Strumenti necessari</strong>:<ul>
+<li>Strumento di<a href="https://github.com/zilliztech/milvus-migration">migrazione Milvus</a>. Per i dettagli sull'installazione, fate riferimento a <a href="/docs/it/milvusdm_install.md">Installare lo strumento di migrazione</a>.</li>
 </ul></li>
 </ul>
-<h2 id="Export-metadata-of-the-source-Milvus-installation" class="common-anchor-header">Export metadata of the source Milvus installation<button data-href="#Export-metadata-of-the-source-Milvus-installation" class="anchor-icon" translate="no">
+<h2 id="Export-metadata-of-the-source-Milvus-installation" class="common-anchor-header">Esportare i metadati dell'installazione Milvus di partenza<button data-href="#Export-metadata-of-the-source-Milvus-installation" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -62,28 +60,28 @@ title: From Milvus 1.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>To prepare migration data for Milvus 0.9.x through 1.x, stop the source Milvus or at least stop performing any DML operations in it.</p>
+    </button></h2><p>Per preparare i dati di migrazione per Milvus 0.9.x fino a 1.x, interrompere il Milvus di origine o almeno interrompere l'esecuzione di operazioni DML in esso.</p>
 <ol>
-<li><p>Export metadata of the source Milvus installation to <code translate="no">meta.json</code>.</p>
+<li><p>Esportare i metadati dell'installazione Milvus di origine in <code translate="no">meta.json</code>.</p>
 <ul>
-<li>For those installations using MySQL as the backend, run</li>
+<li>Per le installazioni che utilizzano MySQL come backend, eseguire</li>
 </ul>
 <pre><code translate="no" class="language-bash">./milvus-migration <span class="hljs-built_in">export</span> -m <span class="hljs-string">&quot;user:password@tcp(adderss)/milvus?charset=utf8mb4&amp;parseTime=True&amp;loc=Local&quot;</span> -o outputDir
 <button class="copy-code-btn"></button></code></pre>
 <ul>
-<li>For those installations using SQLite as the backend, run</li>
+<li>Per le installazioni che usano SQLite come backend, eseguire</li>
 </ul>
 <pre><code translate="no" class="language-bash">./milvus-migration <span class="hljs-built_in">export</span> -s /milvus/db/meta.sqlite -o outputDir
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p>Copy the <code translate="no">tables</code> folder of your Milvus installation, then move both <code translate="no">meta.json</code> and the <code translate="no">tables</code> folder to an empty folder.</p>
-<p>Once this step is done, the structure of the empty folder should look like this:</p>
+<li><p>Copiare la cartella <code translate="no">tables</code> dell'installazione Milvus, quindi spostare sia la cartella <code translate="no">meta.json</code> che la cartella <code translate="no">tables</code> in una cartella vuota.</p>
+<p>Una volta eseguito questo passaggio, la struttura della cartella vuota dovrebbe apparire come segue:</p>
 <pre><code translate="no">migration_data
 ├── meta.json
 └── tables
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p>Upload the folder prepared in the preceding step to an S3 block storage bucket or directly use this local folder in the next section.</p></li>
+<li><p>Caricare la cartella preparata nel passaggio precedente su un bucket di archiviazione a blocchi S3 o utilizzare direttamente questa cartella locale nella sezione successiva.</p></li>
 </ol>
-<h2 id="Configure-the-migration-file" class="common-anchor-header">Configure the migration file<button data-href="#Configure-the-migration-file" class="anchor-icon" translate="no">
+<h2 id="Configure-the-migration-file" class="common-anchor-header">Configurare il file di migrazione<button data-href="#Configure-the-migration-file" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -98,7 +96,7 @@ title: From Milvus 1.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Save the example migration config file as <code translate="no">migration.yaml</code> and modify the configs based on your actual conditions. You are free to put the config file in any local directory.</p>
+    </button></h2><p>Salvare il file di configurazione della migrazione di esempio come <code translate="no">migration.yaml</code> e modificare le configurazioni in base alle condizioni reali. Il file di configurazione può essere collocato in qualsiasi directory locale.</p>
 <pre><code translate="no" class="language-yaml">dumper:
   worker:
     <span class="hljs-built_in">limit</span>: 2
@@ -133,76 +131,76 @@ target:
     username: xxxx
     password: xxxx
 <button class="copy-code-btn"></button></code></pre>
-<p>The following table describes the parameters in the example config file. For a full list of configs, refer to <a href="https://github.com/zilliztech/milvus-migration/blob/main/README_1X.md#migrationyaml-reference">Milvus Migration: Milvus1.x to Milvus 2.x</a>.</p>
+<p>La tabella seguente descrive i parametri del file di configurazione di esempio. Per un elenco completo delle configurazioni, consultare <a href="https://github.com/zilliztech/milvus-migration/blob/main/README_1X.md#migrationyaml-reference">Milvus Migration: Milvus1.x a Milvus 2.x</a>.</p>
 <ul>
 <li><p><code translate="no">dumper</code></p>
 <table>
 <thead>
-<tr><th>Parameter</th><th>Description</th></tr>
+<tr><th>Parametro</th><th>Descrizione</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">dumper.worker.limit</code></td><td>The concurrency of dumper threads.</td></tr>
-<tr><td><code translate="no">dumper.worker.workMode</code></td><td>The operational mode of the migration job. Set to <code translate="no">milvus1x</code> when migrating from Milvus 1.x.</td></tr>
-<tr><td><code translate="no">dumper.worker.reader.bufferSize</code></td><td>Buffer size to read from Milvus 1.x in each batch. Unit: KB.</td></tr>
-<tr><td><code translate="no">dumper.worker.writer.bufferSize</code></td><td>Buffer size to write to Milvus 2.x in each batch. Unit: KB.</td></tr>
+<tr><td><code translate="no">dumper.worker.limit</code></td><td>La concurrency dei thread del dumper.</td></tr>
+<tr><td><code translate="no">dumper.worker.workMode</code></td><td>La modalità operativa del lavoro di migrazione. Impostato su <code translate="no">milvus1x</code> quando si migra da Milvus 1.x.</td></tr>
+<tr><td><code translate="no">dumper.worker.reader.bufferSize</code></td><td>Dimensione del buffer da leggere da Milvus 1.x in ogni batch. Unità: KB.</td></tr>
+<tr><td><code translate="no">dumper.worker.writer.bufferSize</code></td><td>Dimensione del buffer da scrivere su Milvus 2.x in ogni batch. Unità: KB.</td></tr>
 </tbody>
 </table>
 </li>
 <li><p><code translate="no">loader</code></p>
 <table>
 <thead>
-<tr><th>Parameter</th><th>Description</th></tr>
+<tr><th>Parametro</th><th>Descrizione</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">loader.worker.limit</code></td><td>The concurrency of loader threads.</td></tr>
+<tr><td><code translate="no">loader.worker.limit</code></td><td>La concurrency dei thread del caricatore.</td></tr>
 </tbody>
 </table>
 </li>
 <li><p><code translate="no">meta</code></p>
 <table>
 <thead>
-<tr><th>Parameter</th><th>Description</th></tr>
+<tr><th>Parametro</th><th>Descrizione</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">meta.mode</code></td><td>Specifies where the meta file meta.json is read from. Valid values: <code translate="no">local</code>, <code translate="no">remote</code>, <code translate="no">mysql</code>, <code translate="no">sqlite</code>.</td></tr>
-<tr><td><code translate="no">meta.localFile</code></td><td>Local directory path where the <code translate="no">meta.json</code> file resides. This config is used only when <code translate="no">meta.mode</code> is set to <code translate="no">local</code>. For other meta configs, refer to <a href="https://github.com/zilliztech/milvus-migration/blob/main/README_1X.md#meta">README_1X</a>.</td></tr>
+<tr><td><code translate="no">meta.mode</code></td><td>Specifica da dove viene letto il file meta.json. Valori validi: <code translate="no">local</code>, <code translate="no">remote</code>, <code translate="no">mysql</code>, <code translate="no">sqlite</code>.</td></tr>
+<tr><td><code translate="no">meta.localFile</code></td><td>Percorso della directory locale in cui risiede il file <code translate="no">meta.json</code>. Questa configurazione è usata solo quando <code translate="no">meta.mode</code> è impostato su <code translate="no">local</code>. Per le altre configurazioni dei meta, fare riferimento a <a href="https://github.com/zilliztech/milvus-migration/blob/main/README_1X.md#meta">README_1X</a>.</td></tr>
 </tbody>
 </table>
 </li>
 <li><p><code translate="no">source</code></p>
 <table>
 <thead>
-<tr><th>Parameter</th><th>Description</th></tr>
+<tr><th>Parametro</th><th>Descrizione</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">source.mode</code></td><td>Specifies where the source files are read from. Valid values:<br/>- <code translate="no">local</code>: reads files from a local disk.<br/>- <code translate="no">remote</code>: reads files from remote storage.</td></tr>
-<tr><td><code translate="no">source.local.tablesDir</code></td><td>The directory path where the source files are located. For example, <code translate="no">/db/tables/</code>.</td></tr>
+<tr><td><code translate="no">source.mode</code></td><td>Specifica da dove vengono letti i file sorgente. Valori validi:<br/>- <code translate="no">local</code>: legge i file da un disco locale.<br/>- <code translate="no">remote</code>: legge i file da un archivio remoto.</td></tr>
+<tr><td><code translate="no">source.local.tablesDir</code></td><td>Il percorso della directory in cui si trovano i file di origine. Ad esempio, <code translate="no">/db/tables/</code>.</td></tr>
 </tbody>
 </table>
 </li>
 <li><p><code translate="no">target</code></p>
 <table>
 <thead>
-<tr><th>Parameter</th><th>Description</th></tr>
+<tr><th>Parametro</th><th>Descrizione</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">target.mode</code></td><td>Storage location for dumped files. Valid values:<br/>- <code translate="no">local</code>: Store dumped files on local disks.<br/>- <code translate="no">remote</code>: Store dumped files on object storage.</td></tr>
-<tr><td><code translate="no">target.remote.outputDir</code></td><td>Output directory path in the cloud storage bucket.</td></tr>
-<tr><td><code translate="no">target.remote.ak</code></td><td>Access key for Milvus 2.x storage.</td></tr>
-<tr><td><code translate="no">target.remote.sk</code></td><td>Secret key for Milvus 2.x storage.</td></tr>
-<tr><td><code translate="no">target.remote.cloud</code></td><td>Cloud storage service provider. Example values: <code translate="no">aws</code>, <code translate="no">gcp</code>, <code translate="no">azure</code>.</td></tr>
-<tr><td><code translate="no">target.remote.region</code></td><td>Cloud storage region. It can be any value if you use local MinIO.</td></tr>
-<tr><td><code translate="no">target.remote.bucket</code></td><td>Bucket name for storing data. The value must be the same as the config in Milvus 2.x. For more information, refer to <a href="https://milvus.io/docs/configure_minio.md#miniobucketName">System Configurations</a>.</td></tr>
-<tr><td><code translate="no">target.remote.useIAM</code></td><td>Whether to use an IAM Role for connection.</td></tr>
-<tr><td><code translate="no">target.remote.checkBucket</code></td><td>Whether to check if the specified bucket exists in object storage.</td></tr>
-<tr><td><code translate="no">target.milvus2x.endpoint</code></td><td>Address of the target Milvus server.</td></tr>
-<tr><td><code translate="no">target.milvus2x.username</code></td><td>Username for the Milvus 2.x server. This parameter is required if user authentication is enabled for your Milvus server. For more information, refer to <a href="https://milvus.io/docs/authenticate.md">Enable Authentication</a>.</td></tr>
-<tr><td><code translate="no">target.milvus2x.password</code></td><td>Password for the Milvus 2.x server. This parameter is required if user authentication is enabled for your Milvus server. For more information, refer to <a href="https://milvus.io/docs/authenticate.md">Enable Authentication</a>.</td></tr>
+<tr><td><code translate="no">target.mode</code></td><td>Percorso di memorizzazione dei file scaricati. Valori validi:<br/>- <code translate="no">local</code>: memorizzazione dei file di dump su dischi locali.<br/>- <code translate="no">remote</code>: memorizzazione dei file di dump su object storage.</td></tr>
+<tr><td><code translate="no">target.remote.outputDir</code></td><td>Percorso della directory di output nel bucket del cloud storage.</td></tr>
+<tr><td><code translate="no">target.remote.ak</code></td><td>Chiave di accesso per lo storage Milvus 2.x.</td></tr>
+<tr><td><code translate="no">target.remote.sk</code></td><td>Chiave segreta per lo storage Milvus 2.x.</td></tr>
+<tr><td><code translate="no">target.remote.cloud</code></td><td>Fornitore del servizio di cloud storage. Valori di esempio: <code translate="no">aws</code>, <code translate="no">gcp</code>, <code translate="no">azure</code>.</td></tr>
+<tr><td><code translate="no">target.remote.region</code></td><td>Regione di archiviazione cloud. Può essere un valore qualsiasi se si usa MinIO locale.</td></tr>
+<tr><td><code translate="no">target.remote.bucket</code></td><td>Nome del bucket per la memorizzazione dei dati. Il valore deve essere lo stesso della configurazione in Milvus 2.x. Per ulteriori informazioni, consultare <a href="https://milvus.io/docs/configure_minio.md#miniobucketName">Configurazioni di sistema</a>.</td></tr>
+<tr><td><code translate="no">target.remote.useIAM</code></td><td>Se utilizzare un ruolo IAM per la connessione.</td></tr>
+<tr><td><code translate="no">target.remote.checkBucket</code></td><td>Se verificare se il bucket specificato esiste nell'archivio oggetti.</td></tr>
+<tr><td><code translate="no">target.milvus2x.endpoint</code></td><td>Indirizzo del server Milvus di destinazione.</td></tr>
+<tr><td><code translate="no">target.milvus2x.username</code></td><td>Nome utente per il server Milvus 2.x. Questo parametro è necessario se l'autenticazione utente è abilitata per il server Milvus. Per ulteriori informazioni, consultare <a href="https://milvus.io/docs/authenticate.md">Abilita l'autenticazione</a>.</td></tr>
+<tr><td><code translate="no">target.milvus2x.password</code></td><td>Password per il server Milvus 2.x. Questo parametro è necessario se l'autenticazione dell'utente è abilitata per il vostro server Milvus. Per ulteriori informazioni, consultare <a href="https://milvus.io/docs/authenticate.md">Abilita autenticazione</a>.</td></tr>
 </tbody>
 </table>
 </li>
 </ul>
-<h2 id="Start-the-migration-task" class="common-anchor-header">Start the migration task<button data-href="#Start-the-migration-task" class="anchor-icon" translate="no">
+<h2 id="Start-the-migration-task" class="common-anchor-header">Avviare l'attività di migrazione<button data-href="#Start-the-migration-task" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -218,15 +216,15 @@ target:
         ></path>
       </svg>
     </button></h2><ol>
-<li><p>Start the migration task with the following command. Replace <code translate="no">{YourConfigFilePath}</code> with the local directory where the config file <code translate="no">migration.yaml</code> resides.</p>
+<li><p>Avviare l'attività di migrazione con il seguente comando. Sostituire <code translate="no">{YourConfigFilePath}</code> con la directory locale in cui risiede il file di configurazione <code translate="no">migration.yaml</code>.</p>
 <pre><code translate="no" class="language-bash">./milvus-migration  dump  --config=/{YourConfigFilePath}/migration.yaml
 <button class="copy-code-btn"></button></code></pre>
-<p>The command above converts the source data in Milvus 1.x into NumPy files, and then uses the <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/ORM/utility/do_bulk_insert.md">bulkInsert</a> operation to write the data to the target bucket.</p></li>
-<li><p>Once NumPy files are generated, import these files into Milvus 2.x with the following command. Replace <code translate="no">{YourConfigFilePath}</code> with the local directory where the config file <code translate="no">migration.yaml</code> resides.</p>
+<p>Il comando precedente converte i dati di origine di Milvus 1.x in file NumPy, quindi utilizza l'operazione <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/ORM/utility/do_bulk_insert.md">bulkInsert</a> per scrivere i dati nel bucket di destinazione.</p></li>
+<li><p>Una volta generati i file NumPy, importarli in Milvus 2.x con il seguente comando. Sostituire <code translate="no">{YourConfigFilePath}</code> con la directory locale in cui risiede il file di configurazione <code translate="no">migration.yaml</code>.</p>
 <pre><code translate="no" class="language-bash">./milvus-migration  load  --config=/{YourConfigFilePath}/migration.yaml
 <button class="copy-code-btn"></button></code></pre></li>
 </ol>
-<h2 id="Verify-the-result" class="common-anchor-header">Verify the result<button data-href="#Verify-the-result" class="anchor-icon" translate="no">
+<h2 id="Verify-the-result" class="common-anchor-header">Verifica del risultato<button data-href="#Verify-the-result" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -241,4 +239,4 @@ target:
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Once the migration task is executed, you can make API calls or use Attu to view the number of entities migrated. For more information, refer to <a href="https://github.com/zilliztech/attu">Attu</a> and <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/get_collection_stats.md">get_collection_stats()</a>.</p>
+    </button></h2><p>Una volta eseguita l'attività di migrazione, è possibile effettuare chiamate API o utilizzare Attu per visualizzare il numero di entità migrate. Per ulteriori informazioni, consultare <a href="https://github.com/zilliztech/attu">Attu</a> e <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/get_collection_stats.md">get_collection_stats()</a>.</p>

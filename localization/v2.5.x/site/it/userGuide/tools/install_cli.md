@@ -1,9 +1,9 @@
 ---
 id: install_cli.md
-summary: Learn how to install Milvus_CLI.
-title: Install Milvus_CLI
+summary: Imparare a installare Milvus_CLI.
+title: Installare Milvus_CLI
 ---
-<h1 id="Install-MilvusCLI" class="common-anchor-header">Install Milvus_CLI<button data-href="#Install-MilvusCLI" class="anchor-icon" translate="no">
+<h1 id="Install-MilvusCLI" class="common-anchor-header">Installare Milvus_CLI<button data-href="#Install-MilvusCLI" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -18,8 +18,8 @@ title: Install Milvus_CLI
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>This topic describes how to install Milvus_CLI.</p>
-<h2 id="Install-from-PyPI" class="common-anchor-header">Install from PyPI<button data-href="#Install-from-PyPI" class="anchor-icon" translate="no">
+    </button></h1><p>Questo argomento descrive come installare Milvus_CLI.</p>
+<h2 id="Install-from-PyPI" class="common-anchor-header">Installazione da PyPI<button data-href="#Install-from-PyPI" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -34,15 +34,15 @@ title: Install Milvus_CLI
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>You can install Milvus_CLI from <a href="https://pypi.org/project/milvus-cli/">PyPI</a>.</p>
-<h3 id="Prerequisites" class="common-anchor-header">Prerequisites</h3><ul>
-<li>Install <a href="https://www.python.org/downloads/release/python-385/">Python 3.8.5</a> or later</li>
-<li>Install <a href="https://pip.pypa.io/en/stable/installation/">pip</a></li>
+    </button></h2><p>È possibile installare Milvus_CLI da <a href="https://pypi.org/project/milvus-cli/">PyPI</a>.</p>
+<h3 id="Prerequisites" class="common-anchor-header">Prerequisiti</h3><ul>
+<li>Installare <a href="https://www.python.org/downloads/release/python-385/">Python 3.8.5</a> o successivo</li>
+<li>Installare <a href="https://pip.pypa.io/en/stable/installation/">pip</a></li>
 </ul>
-<h3 id="Install-via-pip" class="common-anchor-header">Install via pip</h3><p>Run the following command to install Milvus_CLI.</p>
+<h3 id="Install-via-pip" class="common-anchor-header">Installazione tramite pip</h3><p>Eseguire il seguente comando per installare Milvus_CLI.</p>
 <pre><code translate="no" class="language-shell">pip install milvus-cli
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Install-with-Docker" class="common-anchor-header">Install with Docker<button data-href="#Install-with-Docker" class="anchor-icon" translate="no">
+<h2 id="Install-with-Docker" class="common-anchor-header">Installazione con Docker<button data-href="#Install-with-Docker" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -57,11 +57,11 @@ title: Install Milvus_CLI
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>You can instal Milvus_CLI with docker.</p>
-<h3 id="Prerequisites" class="common-anchor-header">Prerequisites</h3><p>Docker 19.03 or later is required.</p>
-<h3 id="Install-based-on-Docker-image" class="common-anchor-header">Install based on Docker image</h3><pre><code translate="no" class="language-shell">$ docker run -it zilliz/milvus_cli:latest
+    </button></h2><p>È possibile installare Milvus_CLI con docker.</p>
+<h3 id="Prerequisites" class="common-anchor-header">Prerequisiti</h3><p>È necessario Docker 19.03 o successivo.</p>
+<h3 id="Install-based-on-Docker-image" class="common-anchor-header">Installazione basata sull'immagine Docker</h3><pre><code translate="no" class="language-shell">$ docker run -it zilliz/milvus_cli:latest
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Install-from-source-code" class="common-anchor-header">Install from source code<button data-href="#Install-from-source-code" class="anchor-icon" translate="no">
+<h2 id="Install-from-source-code" class="common-anchor-header">Installazione dal codice sorgente<button data-href="#Install-from-source-code" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -77,27 +77,24 @@ title: Install Milvus_CLI
         ></path>
       </svg>
     </button></h2><ol>
-<li>Run the following command to download a <code translate="no">milvus_cli</code> repository.</li>
+<li>Eseguire il seguente comando per scaricare un repository <code translate="no">milvus_cli</code>.</li>
 </ol>
 <pre><code translate="no" class="language-shell">git <span class="hljs-built_in">clone</span> https://github.com/zilliztech/milvus_cli.git
 <button class="copy-code-btn"></button></code></pre>
 <ol start="2">
-<li>Run the following command to enter the <code translate="no">milvus_cli</code> folder.</li>
+<li>Eseguire il comando seguente per entrare nella cartella <code translate="no">milvus_cli</code>.</li>
 </ol>
 <pre><code translate="no" class="language-shell"><span class="hljs-built_in">cd</span> milvus_cli
 <button class="copy-code-btn"></button></code></pre>
 <ol start="3">
-<li>Run the following command to install Milvus_CLI.</li>
+<li>Eseguire il seguente comando per installare Milvus_CLI.</li>
 </ol>
 <pre><code translate="no" class="language-shell">python -m pip install --editable .
 <button class="copy-code-btn"></button></code></pre>
-<p>Alternatively, you can install Milvus_CLI from a compressed tarball (<code translate="no">.tar.gz</code> file). Download a <a href="https://github.com/zilliztech/milvus_cli/releases">tarball</a> and run <code translate="no">python -m pip install milvus_cli-&lt;version&gt;.tar.gz</code>.</p>
-<h3 id="Install-from-an-exe-file" class="common-anchor-header">Install from an .exe file</h3><div class="alert note"> This installation method only applies to Windows. </div>
-<p>Download an .exe file from <a href="https://github.com/zilliztech/milvus_cli/releases">GitHub</a> and run it to install Milvus_CLI.
-If successful, <code translate="no">milvus_cli-&lt;version&gt;.exe</code> pops up as shown in the following figure.</p>
+<p>In alternativa, è possibile installare Milvus_CLI da un tarball compresso (file<code translate="no">.tar.gz</code> ). Scaricare un <a href="https://github.com/zilliztech/milvus_cli/releases">tarball</a> ed eseguire <code translate="no">python -m pip install milvus_cli-&lt;version&gt;.tar.gz</code>.</p>
+<h3 id="Install-from-an-exe-file" class="common-anchor-header">Installazione da un file .exe</h3><div class="alert note"> Questo metodo di installazione si applica solo a Windows. </div>
+<p>Scaricate un file .exe da <a href="https://github.com/zilliztech/milvus_cli/releases">GitHub</a> ed eseguitelo per installare Milvus_CLI. Se l'installazione ha successo, appare <code translate="no">milvus_cli-&lt;version&gt;.exe</code> come mostrato nella figura seguente.</p>
 <p>
-  <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.5.x/assets/milvus_cli_exe.png" alt="Milvus_CLI" class="doc-image" id="milvus_cli" />
-    <span>Milvus_CLI</span>
-  </span>
-</p>
+  
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/milvus_cli_exe.png" alt="Milvus_CLI" class="doc-image" id="milvus_cli" />
+   </span> <span class="img-wrapper"> <span>Milvus_CLI</span> </span></p>

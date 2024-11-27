@@ -1,11 +1,11 @@
 ---
 id: troubleshooting.md
 summary: >-
-  Learn about common issues you may encounter with Milvus and how to overcome
-  them.
-title: Troubleshooting
+  Scoprite i problemi più comuni che si possono incontrare con Milvus e come
+  superarli.
+title: Risoluzione dei problemi
 ---
-<h1 id="Troubleshooting" class="common-anchor-header">Troubleshooting<button data-href="#Troubleshooting" class="anchor-icon" translate="no">
+<h1 id="Troubleshooting" class="common-anchor-header">Risoluzione dei problemi<button data-href="#Troubleshooting" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -20,14 +20,14 @@ title: Troubleshooting
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>This page lists common issues that may occur when running Milvus, as well as possible troubleshooting tips. Issues on this page fall into the following categories:</p>
+    </button></h1><p>In questa pagina sono elencati i problemi più comuni che possono verificarsi durante l'utilizzo di Milvus, nonché i possibili suggerimenti per la risoluzione dei problemi. I problemi riportati in questa pagina rientrano nelle seguenti categorie:</p>
 <ul>
-<li><a href="#boot_issues">Boot issues</a></li>
-<li><a href="#runtime_issues">Runtime issues</a></li>
-<li><a href="#api_issues">API issues</a></li>
-<li><a href="#etcd_crash_issues">etcd crash issues</a></li>
+<li><a href="#boot_issues">Problemi di avvio</a></li>
+<li><a href="#runtime_issues">Problemi di runtime</a></li>
+<li><a href="#api_issues">Problemi di API</a></li>
+<li><a href="#etcd_crash_issues">Problemi di crash di etcd</a></li>
 </ul>
-<h2 id="Boot-issues" class="common-anchor-header">Boot issues<button data-href="#Boot-issues" class="anchor-icon" translate="no">
+<h2 id="Boot-issues" class="common-anchor-header">Problemi di avvio<button data-href="#Boot-issues" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -42,10 +42,10 @@ title: Troubleshooting
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Boot errors are usually fatal. Run the following command to view error details:</p>
+    </button></h2><p>Gli errori di avvio sono solitamente fatali. Eseguire il seguente comando per visualizzare i dettagli dell'errore:</p>
 <pre><code translate="no">$ docker logs &lt;your milvus container <span class="hljs-built_in">id</span>&gt;
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Runtime-issues" class="common-anchor-header">Runtime issues<button data-href="#Runtime-issues" class="anchor-icon" translate="no">
+<h2 id="Runtime-issues" class="common-anchor-header">Problemi di runtime<button data-href="#Runtime-issues" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -60,8 +60,8 @@ title: Troubleshooting
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Errors that occur during runtime may cause service breakdown. To troubleshoot this issue, check compatibility between the server and your client before moving forward.</p>
-<h2 id="API-issues" class="common-anchor-header">API issues<button data-href="#API-issues" class="anchor-icon" translate="no">
+    </button></h2><p>Gli errori che si verificano durante l'esecuzione possono causare l'interruzione del servizio. Per risolvere questo problema, verificare la compatibilità tra il server e il client prima di procedere.</p>
+<h2 id="API-issues" class="common-anchor-header">Problemi API<button data-href="#API-issues" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -76,8 +76,8 @@ title: Troubleshooting
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>These issues occur during API method calls between the Milvus server and your client. They will be returned to the client synchronously or asynchronously.</p>
-<h2 id="etcd-crash-issues" class="common-anchor-header">etcd crash issues<button data-href="#etcd-crash-issues" class="anchor-icon" translate="no">
+    </button></h2><p>Questi problemi si verificano durante le chiamate ai metodi API tra il server Milvus e il client. Vengono restituiti al client in modo sincrono o asincrono.</p>
+<h2 id="etcd-crash-issues" class="common-anchor-header">Problemi di crash di etcd<button data-href="#etcd-crash-issues" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -92,23 +92,23 @@ title: Troubleshooting
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="1-etcd-pod-pending" class="common-anchor-header">1. etcd pod pending</h3><p>The etcd cluster uses pvc by default. StorageClass needs to be preconfigured for the Kubernetes cluster.</p>
-<h3 id="2-etcd-pod-crash" class="common-anchor-header">2. etcd pod crash</h3><p>When an etcd pod crashes with <code translate="no">Error: bad member ID arg (strconv.ParseUint: parsing &quot;&quot;: invalid syntax), expecting ID in Hex</code>, you can log into this pod and delete the <code translate="no">/bitnami/etcd/data/member_id</code> file.</p>
-<h3 id="3-Multiple-pods-keep-crashing-while-etcd-0-is-still-running" class="common-anchor-header">3. Multiple pods keep crashing while <code translate="no">etcd-0</code> is still running</h3><p>You can run the following code if multiple pods keeps crashing while <code translate="no">etcd-0</code> is still running.</p>
+    </button></h2><h3 id="1-etcd-pod-pending" class="common-anchor-header">1. pod etcd in attesa</h3><p>Il cluster etcd utilizza pvc per impostazione predefinita. StorageClass deve essere preconfigurato per il cluster Kubernetes.</p>
+<h3 id="2-etcd-pod-crash" class="common-anchor-header">2. Arresto del pod etcd</h3><p>Quando un pod etcd si blocca con <code translate="no">Error: bad member ID arg (strconv.ParseUint: parsing &quot;&quot;: invalid syntax), expecting ID in Hex</code>, è possibile accedere al pod ed eliminare il file <code translate="no">/bitnami/etcd/data/member_id</code>.</p>
+<h3 id="3-Multiple-pods-keep-crashing-while-etcd-0-is-still-running" class="common-anchor-header">3. Più pod continuano ad andare in crash mentre <code translate="no">etcd-0</code> è ancora in esecuzione</h3><p>È possibile eseguire il codice seguente se più pod continuano ad andare in crash mentre <code translate="no">etcd-0</code> è ancora in esecuzione.</p>
 <pre><code translate="no">kubectl scale sts &lt;etcd-sts&gt; --replicas=<span class="hljs-number">1</span>
 <span class="hljs-comment"># delete the pvc for etcd-1 and etcd-2</span>
 kubectl scale sts &lt;etcd-sts&gt; --replicas=<span class="hljs-number">3</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="4-All-pods-crash" class="common-anchor-header">4. All pods crash</h3><p>When all pods crash, try copying the <code translate="no">/bitnami/etcd/data/member/snap/db</code> file. Use <code translate="no">https://github.com/etcd-io/bbolt</code> to modify database data.</p>
-<p>All Milvus metadata are kept in the <code translate="no">key</code> bucket. Back up the data in this bucket and run the following commands. Note that the prefix data in the <code translate="no">by-dev/meta/session</code> file does not require a backup.</p>
+<h3 id="4-All-pods-crash" class="common-anchor-header">4. Tutti i pod si bloccano</h3><p>Quando tutti i pod si bloccano, provate a copiare il file <code translate="no">/bitnami/etcd/data/member/snap/db</code>. Utilizzate <code translate="no">https://github.com/etcd-io/bbolt</code> per modificare i dati del database.</p>
+<p>Tutti i metadati di Milvus sono conservati nel bucket <code translate="no">key</code>. Eseguire il backup dei dati in questo bucket ed eseguire i seguenti comandi. Si noti che i dati del prefisso nel file <code translate="no">by-dev/meta/session</code> non richiedono un backup.</p>
 <pre><code translate="no">kubectl kubectl scale sts &lt;etcd-sts&gt; --replicas=<span class="hljs-number">0</span>
 <span class="hljs-comment"># delete the pvc for etcd-0, etcd-1, etcd-2</span>
 kubectl kubectl scale sts &lt;etcd-sts&gt; --replicas=<span class="hljs-number">1</span>
 <span class="hljs-comment"># restore the backup data</span>
 <button class="copy-code-btn"></button></code></pre>
 <p><br/></p>
-<p>If you need help solving a problem, feel free to:</p>
+<p>Se avete bisogno di aiuto per risolvere un problema, non esitate a farlo:</p>
 <ul>
-<li>Join our <a href="https://join.slack.com/t/milvusio/shared_invite/enQtNzY1OTQ0NDI3NjMzLWNmYmM1NmNjOTQ5MGI5NDhhYmRhMGU5M2NhNzhhMDMzY2MzNDdlYjM5ODQ5MmE3ODFlYzU3YjJkNmVlNDQ2ZTk">Slack channel</a> and reach out for support from the Milvus team.</li>
-<li><a href="https://github.com/milvus-io/milvus/issues/new/choose">File an Issue</a> on GitHub that includes details about your problem.</li>
+<li>Iscriversi al nostro <a href="https://join.slack.com/t/milvusio/shared_invite/enQtNzY1OTQ0NDI3NjMzLWNmYmM1NmNjOTQ5MGI5NDhhYmRhMGU5M2NhNzhhMDMzY2MzNDdlYjM5ODQ5MmE3ODFlYzU3YjJkNmVlNDQ2ZTk">canale Slack</a> e richiedere il supporto del team Milvus.</li>
+<li><a href="https://github.com/milvus-io/milvus/issues/new/choose">Presentare un problema</a> su GitHub che includa i dettagli del problema.</li>
 </ul>

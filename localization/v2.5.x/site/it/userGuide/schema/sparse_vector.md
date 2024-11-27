@@ -1,14 +1,15 @@
 ---
 id: sparse_vector.md
-title: Sparse Vector
+title: Vettore sparso
 summary: >-
-  Sparse vectors are an important method of data representation in information
-  retrieval and natural language processing. While dense vectors are popular for
-  their excellent semantic understanding capabilities, sparse vectors often
-  provide more accurate results when it comes to applications that require
-  precise matching of keywords or phrases.​
+  I vettori sparsi sono un metodo importante di rappresentazione dei dati nel
+  reperimento delle informazioni e nell'elaborazione del linguaggio naturale.
+  Mentre i vettori densi sono popolari per le loro eccellenti capacità di
+  comprensione semantica, i vettori sparsi spesso forniscono risultati più
+  accurati quando si tratta di applicazioni che richiedono una corrispondenza
+  precisa di parole o frasi chiave.
 ---
-<h1 id="Sparse-Vector​" class="common-anchor-header">Sparse Vector​<button data-href="#Sparse-Vector​" class="anchor-icon" translate="no">
+<h1 id="Sparse-Vector​" class="common-anchor-header">Vettore sparso<button data-href="#Sparse-Vector​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -23,8 +24,8 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Sparse vectors are an important method of data representation in information retrieval and natural language processing. While dense vectors are popular for their excellent semantic understanding capabilities, sparse vectors often provide more accurate results when it comes to applications that require precise matching of keywords or phrases.​</p>
-<h2 id="Overview​" class="common-anchor-header">Overview​<button data-href="#Overview​" class="anchor-icon" translate="no">
+    </button></h1><p>I vettori sparsi sono un metodo importante di rappresentazione dei dati nell'information retrieval e nell'elaborazione del linguaggio naturale. Mentre i vettori densi sono popolari per le loro eccellenti capacità di comprensione semantica, i vettori sparsi spesso forniscono risultati più accurati quando si tratta di applicazioni che richiedono una corrispondenza precisa di parole o frasi chiave.</p>
+<h2 id="Overview​" class="common-anchor-header">Panoramica<button data-href="#Overview​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -39,32 +40,28 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>A sparse vector is a special representation of high-dimensional vectors where most elements are zero, and only a few dimensions have non-zero values. This characteristic makes sparse vectors particularly effective in handling large-scale, high-dimensional, but sparse data. Common applications include:​</p>
+    </button></h2><p>Un vettore rado è una rappresentazione speciale di vettori ad alta dimensione in cui la maggior parte degli elementi è pari a zero e solo alcune dimensioni hanno valori non nulli. Questa caratteristica rende i vettori sparsi particolarmente efficaci nella gestione di dati su larga scala, altamente dimensionali ma scarsi. Le applicazioni più comuni includono.</p>
 <ul>
-<li><p><strong>Text Analysis:</strong> Representing documents as bag-of-words vectors, where each dimension corresponds to a word, and only words that appear in the document have non-zero values.​</p></li>
-<li><p><strong>Recommendation Systems:</strong> User-item interaction matrices, where each dimension represents a user’s rating for a particular item, with most users interacting with only a few items.​</p></li>
-<li><p><strong>Image Processing:</strong> Local feature representation, focusing only on key points in the image, resulting in high-dimensional sparse vectors.​</p></li>
+<li><p><strong>Analisi del testo:</strong> Rappresentazione di documenti come vettori bag-of-words, dove ogni dimensione corrisponde a una parola e solo le parole che compaiono nel documento hanno valori non nulli.</p></li>
+<li><p><strong>Sistemi di raccomandazione:</strong> Matrici di interazione utente-elemento, in cui ogni dimensione rappresenta la valutazione di un utente per un particolare elemento, con la maggior parte degli utenti che interagiscono solo con alcuni elementi.</p></li>
+<li><p><strong>Elaborazione di immagini:</strong> Rappresentazione locale delle caratteristiche, che si concentra solo sui punti chiave dell'immagine, dando luogo a vettori sparsi ad alta dimensione.</p></li>
 </ul>
-<p>As shown in the diagram below, dense vectors are typically represented as continuous arrays where each position has a value (e.g., <code translate="no">[0.3, 0.8, 0.2, 0.3, 0.1]</code>). In contrast, sparse vectors store only non-zero elements and their indices, often represented as key-value pairs (e.g., <code translate="no">[{2: 0.2}, ..., {9997: 0.5}, {9999: 0.7}]</code>). This representation significantly reduces storage space and increases computational efficiency, especially when dealing with extremely high-dimensional data (e.g., 10,000 dimensions).​</p>
+<p>Come mostrato nel diagramma seguente, i vettori densi sono tipicamente rappresentati come array continui in cui ogni posizione ha un valore (ad esempio, <code translate="no">[0.3, 0.8, 0.2, 0.3, 0.1]</code>). Al contrario, i vettori sparsi memorizzano solo gli elementi non nulli e i loro indici, spesso rappresentati come coppie chiave-valore (ad esempio, <code translate="no">[{2: 0.2}, ..., {9997: 0.5}, {9999: 0.7}]</code>). Questa rappresentazione riduce significativamente lo spazio di archiviazione e aumenta l'efficienza computazionale, soprattutto quando si tratta di dati ad altissima dimensionalità (ad esempio, 10.000 dimensioni).</p>
 <p>
-  <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.5.x/assets/sparse-vector.png" alt="Spare vector representation" class="doc-image" id="spare-vector-representation" />
-    <span>Spare vector representation</span>
-  </span>
-</p>
-<p>Sparse vectors can be generated using various methods, such as <a href="https://en.wikipedia.org/wiki/Tf%E2%80%93idf">TF-IDF</a> (Term Frequency-Inverse Document Frequency) and <a href="https://en.wikipedia.org/wiki/Okapi_BM25">BM25</a> in text processing. Additionally, Milvus offers convenient methods to help generate and process sparse vectors. For details, refer to <a href="/docs/embeddings.md">Embeddings</a>.​</p>
-<p>For text data, Milvus also provides full-text search capabilities, allowing you to perform vector searches directly on raw text data without using external embedding models to generate sparse vectors. For more information, refer to <a href="/docs/full-text-search.md">​Full Text Search</a>.​</p>
-<p>After vectorization, the data can be stored in Milvus for management and vector retrieval. The diagram below illustrates the basic process.​</p>
+  
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/sparse-vector.png" alt="Spare vector representation" class="doc-image" id="spare-vector-representation" />
+   </span> <span class="img-wrapper"> <span>Rappresentazione vettoriale sparsa</span> </span></p>
+<p>I vettori sparsi possono essere generati utilizzando vari metodi, come <a href="https://en.wikipedia.org/wiki/Tf%E2%80%93idf">TF-IDF</a> (Term Frequency-Inverse Document Frequency) e <a href="https://en.wikipedia.org/wiki/Okapi_BM25">BM25</a> nell'elaborazione dei testi. Inoltre, Milvus offre metodi pratici per aiutare a generare ed elaborare vettori sparsi. Per maggiori dettagli, consultare <a href="/docs/it/embeddings.md">Embeddings</a>.</p>
+<p>Per i dati di testo, Milvus offre anche funzionalità di ricerca full-text, che consentono di eseguire ricerche vettoriali direttamente sui dati di testo grezzi senza utilizzare modelli di incorporamento esterni per generare vettori sparsi. Per ulteriori informazioni, consultare la sezione <a href="/docs/it/full-text-search.md">Ricerca a testo completo</a>.</p>
+<p>Dopo la vettorizzazione, i dati possono essere archiviati in Milvus per la gestione e il recupero dei vettori. Il diagramma seguente illustra il processo di base.</p>
 <p>
-  <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.5.x/assets/use-sparse-vector.png" alt="Use sparse vector in Milvus" class="doc-image" id="use-sparse-vector-in-milvus" />
-    <span>Use sparse vector in Milvus</span>
-  </span>
-</p>
+  
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/use-sparse-vector.png" alt="Use sparse vector in Milvus" class="doc-image" id="use-sparse-vector-in-milvus" />
+   </span> <span class="img-wrapper"> <span>Utilizzo di vettori sparsi in Milvus</span> </span></p>
 <div class="alert note">
-<p>In addition to sparse vectors, Milvus also supports dense vectors and binary vectors. Dense vectors are ideal for capturing deep semantic relationships, while binary vectors excel in scenarios like quick similarity comparisons and content deduplication. For more information, refer to <a href="/docs/dense-vector.md">​Dense Vector</a> and <a href="/docs/binary-vector.md">​Binary Vector</a>.​</p>
+<p>Oltre ai vettori sparsi, Milvus supporta anche vettori densi e vettori binari. I vettori densi sono ideali per catturare relazioni semantiche profonde, mentre i vettori binari eccellono in scenari come il confronto rapido delle somiglianze e la deduplicazione dei contenuti. Per ulteriori informazioni, consultare <a href="/docs/it/dense-vector.md">Vettori densi</a> e <a href="/docs/it/binary-vector.md">vettori binari</a>.</p>
 </div>
-<h2 id="Use-sparse-vectors-in-Milvus​" class="common-anchor-header">Use sparse vectors in Milvus​<button data-href="#Use-sparse-vectors-in-Milvus​" class="anchor-icon" translate="no">
+<h2 id="Use-sparse-vectors-in-Milvus​" class="common-anchor-header">Utilizzare vettori sparsi in Milvus<button data-href="#Use-sparse-vectors-in-Milvus​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -79,15 +76,11 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus supports representing sparse vectors in any of the following formats:​</p>
+    </button></h2><p>Milvus supporta la rappresentazione di vettori sparsi in uno dei seguenti formati.</p>
 <ul>
-<li><p>Sparse Matrix (using the <code translate="no">scipy.sparse</code> class)</p>
+<li><p>Matrice sparsa (usando la classe <code translate="no">scipy.sparse</code> )</p>
 <p><div class="multipleCode">
-<a href="#python">Python </a>
-<a href="#java">Java</a>
-<a href="#javascript">Node.js</a>
-<a href="#curl">cURL</a>
-</div></p>
+<a href="#python">Python </a><a href="#java">Java</a><a href="#javascript">Node.js</a><a href="#curl">cURL</a></div></p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> scipy.sparse <span class="hljs-keyword">import</span> csr_matrix​
 ​
 <span class="hljs-comment"># Create a sparse matrix​</span>
@@ -100,13 +93,9 @@ sparse_matrix = csr_matrix((data, (row, col)), shape=(<span class="hljs-number">
 sparse_vector = sparse_matrix.getrow(<span class="hljs-number">0</span>)​
 
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p>List of Dictionaries (formatted as <code translate="no">{dimension_index: value, ...}</code>)</p>
+<li><p>Elenco di dizionari (formattato come <code translate="no">{dimension_index: value, ...}</code>)</p>
 <p><div class="multipleCode">
-<a href="#python">Python </a>
-<a href="#java">Java</a>
-<a href="#javascript">Node.js</a>
-<a href="#curl">cURL</a>
-</div></p>
+<a href="#python">Python </a><a href="#java">Java</a><a href="#javascript">Node.js</a><a href="#curl">cURL</a></div></p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Represent sparse vector using a dictionary​</span>
 sparse_vector = [{<span class="hljs-number">1</span>: <span class="hljs-number">0.5</span>, <span class="hljs-number">100</span>: <span class="hljs-number">0.3</span>, <span class="hljs-number">500</span>: <span class="hljs-number">0.8</span>, <span class="hljs-number">1024</span>: <span class="hljs-number">0.2</span>, <span class="hljs-number">5000</span>: <span class="hljs-number">0.6</span>}]​
 
@@ -119,29 +108,21 @@ sparseVector.<span class="hljs-title function_">put</span>(1024L, <span class="h
 sparseVector.<span class="hljs-title function_">put</span>(5000L, <span class="hljs-number">0.</span>6f);​
 
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p>List of Tuple Iterators (formatted as <code translate="no">[(dimension_index, value)]</code>)</p>
+<li><p>Elenco di iteratori di tuple (formattato come <code translate="no">[(dimension_index, value)]</code>)</p>
 <p><div class="multipleCode">
-<a href="#python">Python </a>
-<a href="#java">Java</a>
-<a href="#javascript">Node.js</a>
-<a href="#curl">cURL</a>
-</div></p>
+<a href="#python">Python </a><a href="#java">Java</a><a href="#javascript">Node.js</a><a href="#curl">cURL</a></div></p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Represent sparse vector using a list of tuples​</span>
 sparse_vector = [[(<span class="hljs-number">1</span>, <span class="hljs-number">0.5</span>), (<span class="hljs-number">100</span>, <span class="hljs-number">0.3</span>), (<span class="hljs-number">500</span>, <span class="hljs-number">0.8</span>), (<span class="hljs-number">1024</span>, <span class="hljs-number">0.2</span>), (<span class="hljs-number">5000</span>, <span class="hljs-number">0.6</span>)]]​
 
 <button class="copy-code-btn"></button></code></pre></li>
 </ul>
-<h3 id="Add-vector-field​" class="common-anchor-header">Add vector field​</h3><p>To use sparse vectors in Milvus, define a field for storing sparse vectors when creating a collection. This process includes:​</p>
+<h3 id="Add-vector-field​" class="common-anchor-header">Aggiungere un campo vettoriale</h3><p>Per utilizzare i vettori sparsi in Milvus, definire un campo per la memorizzazione dei vettori sparsi quando si crea una collezione. Questo processo comprende.</p>
 <ol>
-<li><p>Setting <code translate="no">datatype</code> to the supported sparse vector data type, <code translate="no">SPARSE_FLOAT_VECTOR</code>.​</p></li>
-<li><p>No need to specify the dimension.​</p></li>
+<li><p>Impostare <code translate="no">datatype</code> sul tipo di dati vettoriale sparse supportato, <code translate="no">SPARSE_FLOAT_VECTOR</code>.</p></li>
+<li><p>Non è necessario specificare la dimensione.</p></li>
 </ol>
 <div class="multipleCode">
-    <a href="#python">Python </a>
-    <a href="#java">Java</a>
-    <a href="#javascript">Node.js</a>
-    <a href="#curl">cURL</a>
-</div>
+   <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType​
 ​
 client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)​
@@ -227,14 +208,10 @@ schema.addField(AddFieldReq.builder()​
 }&quot;</span>​
 
 <button class="copy-code-btn"></button></code></pre>
-<p>In this example, a vector field named <code translate="no">sparse_vector</code> is added for storing sparse vectors. The data type of this field is <code translate="no">SPARSE_FLOAT_VECTOR</code>.​</p>
-<h3 id="Set-index-params-for-vector-field​" class="common-anchor-header">Set index params for vector field​</h3><p>The process of creating an index for sparse vectors is similar to that for <a href="/docs/dense-vector.md">dense vectors</a>, but with differences in the specified index type (<code translate="no">index_type</code>), distance metric (<code translate="no">metric_type</code>), and index parameters (<code translate="no">params</code>).​</p>
+<p>In questo esempio, viene aggiunto un campo vettoriale chiamato <code translate="no">sparse_vector</code> per memorizzare vettori sparsi. Il tipo di dati di questo campo è <code translate="no">SPARSE_FLOAT_VECTOR</code>.</p>
+<h3 id="Set-index-params-for-vector-field​" class="common-anchor-header">Impostare i parametri dell'indice per il campo vettoriale</h3><p>Il processo di creazione di un indice per i vettori sparsi è simile a quello dei <a href="/docs/it/dense-vector.md">vettori densi</a>, ma con differenze nel tipo di indice specificato (<code translate="no">index_type</code>), nella metrica della distanza (<code translate="no">metric_type</code>) e nei parametri dell'indice (<code translate="no">params</code>).</p>
 <div class="multipleCode">
-    <a href="#python">Python </a>
-    <a href="#java">Java</a>
-    <a href="#javascript">Node.js</a>
-    <a href="#curl">cURL</a>
-</div>
+   <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python">index_params = client.prepare_index_params()​
 ​
 index_params.add_index(​
@@ -283,19 +260,15 @@ indexes.<span class="hljs-title function_">add</span>(<span class="hljs-title cl
     ]&#x27;</span>​
 
 <button class="copy-code-btn"></button></code></pre>
-<p>In the example above:​</p>
+<p>Nell'esempio precedente.</p>
 <ul>
-<li><p>An index of type <code translate="no">SPARSE_INVERTED_INDEX</code> is created for the sparse vector. For sparse vectors, you can specify <code translate="no">SPARSE_INVERTED_INDEX</code> or <code translate="no">SPARSE_WAND</code>. For details, refer to <a href="https://milvus.io/docs/index.md?tab=sparse">​Sparse Vector Indexes</a>.​</p></li>
-<li><p>For sparse vectors, <code translate="no">metric_type</code> only supports <code translate="no">IP</code> (Inner Product), used to measure the similarity between two sparse vectors. For more information on similarity, refer to <a href="/docs/metric.md">​Metric Types</a>.​</p></li>
-<li><p><code translate="no">drop_ratio_build</code> is an optional index parameter specifically for sparse vectors. It controls the proportion of small vector values excluded during index building. For example, with <code translate="no">{&quot;drop_ratio_build&quot;: 0.2}</code>, the smallest 20% of vector values will be excluded during index creation, reducing computational effort during searches.​</p></li>
+<li><p>Per il vettore sparse viene creato un indice di tipo <code translate="no">SPARSE_INVERTED_INDEX</code>. Per i vettori sparsi, è possibile specificare <code translate="no">SPARSE_INVERTED_INDEX</code> o <code translate="no">SPARSE_WAND</code>. Per maggiori dettagli, consultare la sezione <a href="https://milvus.io/docs/index.md?tab=sparse">Indici di vettori sparsi</a>.</p></li>
+<li><p>Per i vettori sparsi, <code translate="no">metric_type</code> supporta solo <code translate="no">IP</code> (Prodotto interno), usato per misurare la somiglianza tra due vettori sparsi. Per ulteriori informazioni sulla somiglianza, fare riferimento a <a href="/docs/it/metric.md">Tipi di metriche</a>.</p></li>
+<li><p><code translate="no">drop_ratio_build</code> è un parametro indice opzionale specifico per i vettori sparsi. Controlla la percentuale di valori piccoli del vettore esclusi durante la costruzione dell'indice. Ad esempio, con <code translate="no">{&quot;drop_ratio_build&quot;: 0.2}</code>, il 20% più piccolo dei valori vettoriali sarà escluso durante la creazione dell'indice, riducendo lo sforzo computazionale durante le ricerche.</p></li>
 </ul>
-<h3 id="Create-collection​" class="common-anchor-header">Create collection​</h3><p>Once the sparse vector and index settings are complete, you can create a collection that contains sparse vectors. The example below uses the <ins><code translate="no">create_collection</code></ins> method to create a collection named <code translate="no">my_sparse_collection</code>.​</p>
+<h3 id="Create-collection​" class="common-anchor-header">Creare la collezione</h3><p>Una volta completate le impostazioni dei vettori sparsi e dell'indice, è possibile creare una raccolta che contenga vettori sparsi. L'esempio seguente utilizza il metodo <ins><code translate="no">create_collection</code></ins> per creare un insieme chiamato <code translate="no">my_sparse_collection</code>.</p>
 <div class="multipleCode">
-    <a href="#python">Python </a>
-    <a href="#java">Java</a>
-    <a href="#javascript">Node.js</a>
-    <a href="#curl">cURL</a>
-</div>
+   <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python">client.<span class="hljs-title function_">create_collection</span>(​
     collection_name=<span class="hljs-string">&quot;my_sparse_collection&quot;</span>,​
     schema=schema,​
@@ -342,13 +315,9 @@ client.createCollection(requestCreate);​
 }&quot;</span>​
 
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Insert-data​" class="common-anchor-header">Insert data​</h3><p>After creating the collection, insert data containing sparse vectors.​</p>
+<h3 id="Insert-data​" class="common-anchor-header">Inserire i dati</h3><p>Dopo aver creato la collezione, inserire i dati contenenti vettori sparsi.</p>
 <div class="multipleCode">
-    <a href="#python">Python </a>
-    <a href="#java">Java</a>
-    <a href="#javascript">Node.js</a>
-    <a href="#curl">cURL</a>
-</div>
+   <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python">sparse_vectors = [​
     {<span class="hljs-string">&quot;sparse_vector&quot;</span>: {<span class="hljs-number">1</span>: <span class="hljs-number">0.5</span>, <span class="hljs-number">100</span>: <span class="hljs-number">0.3</span>, <span class="hljs-number">500</span>: <span class="hljs-number">0.8</span>}},​
     {<span class="hljs-string">&quot;sparse_vector&quot;</span>: {<span class="hljs-number">10</span>: <span class="hljs-number">0.1</span>, <span class="hljs-number">200</span>: <span class="hljs-number">0.7</span>, <span class="hljs-number">1000</span>: <span class="hljs-number">0.9</span>}},​
@@ -418,13 +387,9 @@ client.<span class="hljs-title function_">insert</span>({​
 <span class="hljs-comment">## {&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:{&quot;insertCount&quot;:2,&quot;insertIds&quot;:[&quot;453577185629572534&quot;,&quot;453577185629572535&quot;]}}​</span>
 
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Perform-similarity-search​" class="common-anchor-header">Perform similarity search​</h3><p>To perform similarity search using sparse vectors, prepare the query vector and search parameters.​</p>
+<h3 id="Perform-similarity-search​" class="common-anchor-header">Eseguire la ricerca di similarità</h3><p>Per eseguire una ricerca di similarità utilizzando vettori sparsi, preparare il vettore di interrogazione e i parametri di ricerca.</p>
 <div class="multipleCode">
-    <a href="#python">Python </a>
-    <a href="#java">Java</a>
-    <a href="#javascript">Node.js</a>
-    <a href="#curl">cURL</a>
-</div>
+   <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Prepare search parameters​</span>
 search_params = {​
     <span class="hljs-string">&quot;params&quot;</span>: {<span class="hljs-string">&quot;drop_ratio_search&quot;</span>: <span class="hljs-number">0.2</span>},  <span class="hljs-comment"># Additional optional search parameters​</span>
@@ -434,14 +399,10 @@ search_params = {​
 query_vector = [{<span class="hljs-number">1</span>: <span class="hljs-number">0.2</span>, <span class="hljs-number">50</span>: <span class="hljs-number">0.4</span>, <span class="hljs-number">1000</span>: <span class="hljs-number">0.7</span>}]​
 
 <button class="copy-code-btn"></button></code></pre>
-<p>In this example, <code translate="no">drop_ratio_search</code> is an optional parameter specifically for sparse vectors, allowing fine-tuning of small values in the query vector during the search. For example, with <code translate="no">{&quot;drop_ratio_search&quot;: 0.2}</code>, the smallest 20% of values in the query vector will be ignored during the search.​</p>
-<p>Then, execute the similarity search using the <code translate="no">search</code> method:​</p>
+<p>In questo esempio, <code translate="no">drop_ratio_search</code> è un parametro opzionale specifico per i vettori sparsi, che consente di regolare con precisione i piccoli valori del vettore di interrogazione durante la ricerca. Ad esempio, con <code translate="no">{&quot;drop_ratio_search&quot;: 0.2}</code>, il 20% più piccolo dei valori nel vettore di interrogazione sarà ignorato durante la ricerca.</p>
+<p>Quindi, eseguire la ricerca di similarità con il metodo <code translate="no">search</code>.</p>
 <div class="multipleCode">
-  <a href="#python">Python </a>
-  <a href="#java">Java</a>
-  <a href="#javascript">Node.js</a>
-  <a href="#curl">cURL</a>
-</div>
+ <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python">res = client.search(​
     collection_name=<span class="hljs-string">&quot;my_sparse_collection&quot;</span>,​
     data=query_vector,​
@@ -517,4 +478,4 @@ sparse.<span class="hljs-title function_">put</span>(1000L, <span class="hljs-nu
 <span class="hljs-comment">## {&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:[{&quot;distance&quot;:0.63,&quot;id&quot;:&quot;453577185629572535&quot;,&quot;pk&quot;:&quot;453577185629572535&quot;},{&quot;distance&quot;:0.1,&quot;id&quot;:&quot;453577185629572534&quot;,&quot;pk&quot;:&quot;453577185629572534&quot;}]}​</span>
 
 <button class="copy-code-btn"></button></code></pre>
-<p>For more information on similarity search parameters, refer to <a href="/docs/single-vector-search.md">​Basic ANN Search</a>.​</p>
+<p>Per ulteriori informazioni sui parametri di ricerca per similarità, consultare la sezione <a href="/docs/it/single-vector-search.md">Ricerca di base di RNA</a>.</p>
