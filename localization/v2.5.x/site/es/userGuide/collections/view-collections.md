@@ -1,8 +1,8 @@
 ---
 id: view-collections.md
-title: View Collections​
+title: Ver colecciones
 ---
-<h1 id="View-Collections​" class="common-anchor-header">View Collections​<button data-href="#View-Collections​" class="anchor-icon" translate="no">
+<h1 id="View-Collections​" class="common-anchor-header">Ver colecciones<button data-href="#View-Collections​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -17,8 +17,8 @@ title: View Collections​
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>You can obtain the name list of all the collections in the currently connected database, and check the details of a specific collection.​</p>
-<h2 id="List-Collections​" class="common-anchor-header">List Collections​<button data-href="#List-Collections​" class="anchor-icon" translate="no">
+    </button></h1><p>Puede obtener la lista de nombres de todas las colecciones de la base de datos conectada en ese momento y comprobar los detalles de una colección concreta.</p>
+<h2 id="List-Collections​" class="common-anchor-header">Lista de colecciones<button data-href="#List-Collections​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -33,14 +33,9 @@ title: View Collections​
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>The following example demonstrates how to obtain the name list of all collections in the currently connected database.​</p>
+    </button></h2><p>El siguiente ejemplo muestra cómo obtener la lista de nombres de todas las colecciones de la base de datos conectada en ese momento.</p>
 <div class="multipleCode">
-  <a href="#python">Python </a>
-  <a href="#java">Java</a>
-  <a href="#javascript">Node.js</a>
-  <a href="#go">Go</a>
-  <a href="#curl">cURL</a>
-</div>
+ <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#go">Go</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType​
 ​
 client = MilvusClient(​
@@ -119,11 +114,11 @@ fmt.Println(collectionNames)​
 }&#x27;</span>​
 
 <button class="copy-code-btn"></button></code></pre>
-<p>If you have already created a collection named <code translate="no">quick_setup</code>, the result of the above example should be similar to the following.​</p>
+<p>Si ya ha creado una colección llamada <code translate="no">quick_setup</code>, el resultado del ejemplo anterior debería ser similar al siguiente.</p>
 <pre><code translate="no" class="language-JSON">[<span class="hljs-string">&quot;quick_setup&quot;</span>]​
 
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Describe-Collection​" class="common-anchor-header">Describe Collection​<button data-href="#Describe-Collection​" class="anchor-icon" translate="no">
+<h2 id="Describe-Collection​" class="common-anchor-header">Describir colección<button data-href="#Describe-Collection​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -138,14 +133,9 @@ fmt.Println(collectionNames)​
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>You can also obtain the details of a specific collection. The following example assumes that you have already created a collection named quick_setup.​</p>
+    </button></h2><p>También puede obtener los detalles de una colección específica. El siguiente ejemplo asume que ya has creado una colección llamada quick_setup.</p>
 <div class="multipleCode">
-  <a href="#python">Python </a>
-  <a href="#java">Java</a>
-  <a href="#javascript">Node.js</a>
-  <a href="#go">Go</a>
-  <a href="#curl">cURL</a>
-</div>
+ <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#go">Go</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python">res = client.describe_collection(​
     collection_name=<span class="hljs-string">&quot;quick_setup&quot;</span>​
 )​

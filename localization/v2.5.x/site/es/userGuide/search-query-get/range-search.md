@@ -1,12 +1,13 @@
 ---
 id: range-search.md
 summary: >-
-  A range search improves search result relevancy by restricting the distance or
-  score of the returned entities within a specific range. This page helps you
-  understand what range search is and the procedures to conduct a range search.​
-title: Range Search
+  Una búsqueda por rango mejora la relevancia de los resultados de búsqueda
+  restringiendo la distancia o puntuación de las entidades devueltas dentro de
+  un rango específico. Esta página le ayuda a entender qué es la búsqueda por
+  rango y los procedimientos para realizar una búsqueda por rango.
+title: Búsqueda por rangos
 ---
-<h1 id="Range-Search​" class="common-anchor-header">Range Search​<button data-href="#Range-Search​" class="anchor-icon" translate="no">
+<h1 id="Range-Search​" class="common-anchor-header">Búsqueda por rango<button data-href="#Range-Search​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -21,8 +22,8 @@ title: Range Search
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>A range search improves search result relevancy by restricting the distance or score of the returned entities within a specific range. This page helps you understand what range search is and the procedures to conduct a range search.​</p>
-<h2 id="Overview​" class="common-anchor-header">Overview​<button data-href="#Overview​" class="anchor-icon" translate="no">
+    </button></h1><p>Una búsqueda por rango mejora la relevancia de los resultados de búsqueda restringiendo la distancia o puntuación de las entidades devueltas dentro de un rango específico. Esta página le ayuda a entender qué es la búsqueda por rango y los procedimientos para realizar una búsqueda por rango.</p>
+<h2 id="Overview​" class="common-anchor-header">Visión general<button data-href="#Overview​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -37,46 +38,44 @@ title: Range Search
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>When executing a Range Search request, Milvus uses the most similar vectors to the query vector from the ANN Search results as the center, with the radius specified in the Search request as the outer circle’s radius, and the <strong>range_filter</strong> as the inner circle’s radius to draw two concentric circles. All vectors with similarity scores that fall within the annular region formed by these two concentric circles will be returned. Here, the <strong>range_filter</strong> can be set to <strong>0</strong>, indicating that all entities within the specified similarity score (radius) will be returned.​</p>
+    </button></h2><p>Cuando se ejecuta una solicitud de Búsqueda por rango, Milvus utiliza los vectores más similares al vector de consulta de los resultados de la Búsqueda RNA como centro, con el radio especificado en la solicitud de Búsqueda como radio del círculo exterior, y el <strong>filtro_rango</strong> como radio del círculo interior para dibujar dos círculos concéntricos. Se devolverán todos los vectores con puntuaciones de similitud que se encuentren dentro de la región anular formada por estos dos círculos concéntricos. Aquí, el <strong>filtro_rango</strong> puede fijarse en <strong>0</strong>, lo que indica que se devolverán todas las entidades dentro de la puntuación de similitud especificada (radio).</p>
 <p>
-  <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.5.x/assets/range-search.png" alt="Range search" class="doc-image" id="range-search" />
-    <span>Range search</span>
-  </span>
-</p>
-<p>The above diagram shows that a range search request carries two parameters: radius and <strong>range_filter</strong>. Upon receiving a range search request, Milvus does the following:​</p>
+  
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/range-search.png" alt="Range search" class="doc-image" id="range-search" />
+   </span> <span class="img-wrapper"> <span>Búsqueda por rango</span> </span></p>
+<p>El diagrama anterior muestra que una solicitud de búsqueda por rango contiene dos parámetros: radio y <strong>filtro_rango</strong>. Al recibir una solicitud de búsqueda por rango, Milvus hace lo siguiente.</p>
 <ul>
-<li><p>Use the specified metric type (<strong>COSINE</strong>) to find all vector embeddings most similar to the query vector.​</p></li>
-<li><p>Filter the vector embeddings whose <strong>distances</strong> or <strong>scores</strong> to the query vector fall within the range specified by the <strong>radius</strong> and <strong>range_filter</strong> parameters.​</p></li>
-<li><p>Return the <strong>top-K</strong> entities from the filtered ones.​</p></li>
+<li><p>Utiliza el tipo de métrica especificado<strong>(COSINE</strong>) para encontrar todas las incrustaciones vectoriales más similares al vector de consulta.</p></li>
+<li><p>Filtra las incrustaciones vectoriales cuyas <strong>distancias</strong> o <strong>puntuaciones</strong> al vector de consulta se encuentran dentro del rango especificado por los parámetros <strong>radio</strong> y <strong>rango_filtro</strong>.</p></li>
+<li><p>Devolver las entidades <strong>top-K</strong> a partir de las filtradas.</p></li>
 </ul>
-<p>The way to set radius and <strong>range_filter</strong> varies with the metric type of the search. The following table lists the requirements for setting these two parameters with different metric types.​</p>
-<table data-block-token="QZ8mdLSnAotxZKxSzvpcQkNNnhe"><thead><tr><th data-block-token="SpBZdGprzoEoaixW6EfcaIFqnDh" colspan="1" rowspan="1"><p data-block-token="FwxDd8logofNV2xVMdycwXUvnMg">Metric Type​</p>
-</th><th data-block-token="NwWNdOvpHoOQF0xDvuHcFcHQnte" colspan="1" rowspan="1"><p data-block-token="MiqddcN2voEZUSxe8hCcW3g0nXc">Denotations​</p>
-</th><th data-block-token="D1eedZmCjow2Whx7vIicOx4Enrc" colspan="1" rowspan="1"><p data-block-token="K7bldgyVFo2DmDxNamFcNddNnNb">Requirements for Setting radius and range_filter​</p>
-</th></tr></thead><tbody><tr><td data-block-token="C3xxdZ0uHon6bWxACXkcOM0bnrf" colspan="1" rowspan="1"><p data-block-token="EoJSd1jo1oqt0pxhKElcLptwnJe"><code translate="no">L2</code>​</p>
-</td><td data-block-token="AcRkdW156oOcQixJbXZchC8WnEd" colspan="1" rowspan="1"><p data-block-token="ATGrduoF1ownRSxJngycJ3NYnAe">A smaller L2 distance indicates a higher similarity.​</p>
-</td><td data-block-token="Ja1hdVXtholWNfxCGKAcXzQ9nCc" colspan="1" rowspan="1"><p data-block-token="FqvMdDe6DocjQXxKHdvcp0hTnmb">To ignore the most similar vector embeddings, ensure that​</p>
-<p data-block-token="Ctzxdq1bjoIqKOx5WOScosN3nUf"><code translate="no">range_filter</code> <= distance < <code translate="no">radius</code>​</p>
-</td></tr><tr><td data-block-token="UIkGdxueEo9hNox7TMFcUTTUn6d" colspan="1" rowspan="1"><p data-block-token="IpGVd1lBrojv3uxxcv1c5ZcZnBh"><code translate="no">IP</code>​</p>
-</td><td data-block-token="VcGrdY9X5o2I8Zxv1EYcgSiwngc" colspan="1" rowspan="1"><p data-block-token="WQs5dm4BrotLVhxSRpecH6wInUc">A greater IP distance indicates a higher similarity.​</p>
-</td><td data-block-token="DETWdE7fWo21TzxH2FxcRoQZnwd" colspan="1" rowspan="1"><p data-block-token="Wy8jdWzhsoZUJhx98jLcNIKjnSb">To ignore the most similar vector embeddings, ensure that​</p>
-<p data-block-token="TqYLdOaBzoVv2ZxXlwkc2UHln0d"><code translate="no">radius</code> < distance <= <code translate="no">range_filter</code>​</p>
-</td></tr><tr><td data-block-token="NVeUd1byionhILxsXLRcTx32nbc" colspan="1" rowspan="1"><p data-block-token="ZvAcdO3b4oYibFxohwqcEIObnoh"><code translate="no">COSINE</code>​</p>
-</td><td data-block-token="IdUKdAUIdoNllqxLiKncqQE0nbc" colspan="1" rowspan="1"><p data-block-token="UBiudQZVbopMjcx9mg6cSLQpnVh">A greater COSINE distance indicates a higher similarity.​</p>
-</td><td data-block-token="JHc5dyljBogsOKxsPSfcb9qrnHh" colspan="1" rowspan="1"><p data-block-token="CLWEd89pQoUTeZxYOJFczlu2nwh">To ignore the most similar vector embeddings, ensure that​</p>
-<p data-block-token="Zx9TdYxu5ouObNxhZjvcS95wnMd"><code translate="no">radius</code> < distance <= <code translate="no">range_filter</code>​</p>
-</td></tr><tr><td data-block-token="WsI8dAHxxobNtBxkYCmcFFtFn4c" colspan="1" rowspan="1"><p data-block-token="XvsMdyuLEoLR2wx0KdXcUmOcnlf"><code translate="no">JACCARD</code> ​</p>
-</td><td data-block-token="YC1MdSNIwoYPg2xUXAZcL74AnZd" colspan="1" rowspan="1"><p data-block-token="JaCGdLjCKonfQsxe5pecj5uQn7g">A smaller Jaccard distance indicates a higher similarity.​</p>
-<p data-block-token="QAFVdSmNEonNSxxb65Xc4zAYnYc">​</p>
-</td><td data-block-token="JOfSdPDQmopx3exh68zctrUCnJc" colspan="1" rowspan="1"><p data-block-token="YoZzdQw3CoUKcfx60roc0DuKnze">To ignore the most similar vector embeddings, ensure that​</p>
-<p data-block-token="AURId9AadouFaLxI8esczMpgnrf"><code translate="no">range_filter</code> <= distance < <code translate="no">radius</code>​</p>
-</td></tr><tr><td data-block-token="BVuOdQPiKoJBYoxwBgQcqugqnmh" colspan="1" rowspan="1"><p data-block-token="R96ldn7iHoUj2Gxrf65c2TmAnmf"><code translate="no">HAMMING</code> ​</p>
-</td><td data-block-token="OnAOdCFC8oyQwrx4XTRcMik1nbg" colspan="1" rowspan="1"><p data-block-token="LDT4dk5ygoAFKtxF12WctkFRnfb">A smaller Hamming distance indicates a higher similarity.​</p>
-</td><td data-block-token="VBaIdrQOOokaBvxlegWcTKDvnkc" colspan="1" rowspan="1"><p data-block-token="Z2ridFRhBoS64vxBiTrcfOagnIh">To ignore the most similar vector embeddings, ensure that​</p>
-<p data-block-token="UOf2do2U8oGdDNxMzqlcYdMVnie"><code translate="no">range_filter</code> <= distance < <code translate="no">radius</code>​</p>
+<p>La forma de establecer radio y <strong>rango_filtro</strong> varía según el tipo de métrica de la búsqueda. La siguiente tabla enumera los requisitos para establecer estos dos parámetros con distintos tipos de métrica.</p>
+<table data-block-token="QZ8mdLSnAotxZKxSzvpcQkNNnhe"><thead><tr><th data-block-token="SpBZdGprzoEoaixW6EfcaIFqnDh" colspan="1" rowspan="1"><p data-block-token="FwxDd8logofNV2xVMdycwXUvnMg">Tipo de métrica</p>
+</th><th data-block-token="NwWNdOvpHoOQF0xDvuHcFcHQnte" colspan="1" rowspan="1"><p data-block-token="MiqddcN2voEZUSxe8hCcW3g0nXc">Denotaciones</p>
+</th><th data-block-token="D1eedZmCjow2Whx7vIicOx4Enrc" colspan="1" rowspan="1"><p data-block-token="K7bldgyVFo2DmDxNamFcNddNnNb">Requisitos para configurar radius y range_filter</p>
+</th></tr></thead><tbody><tr><td data-block-token="C3xxdZ0uHon6bWxACXkcOM0bnrf" colspan="1" rowspan="1"><p data-block-token="EoJSd1jo1oqt0pxhKElcLptwnJe"><code translate="no">L2</code></p>
+</td><td data-block-token="AcRkdW156oOcQixJbXZchC8WnEd" colspan="1" rowspan="1"><p data-block-token="ATGrduoF1ownRSxJngycJ3NYnAe">Una distancia L2 menor indica una mayor similitud.</p>
+</td><td data-block-token="Ja1hdVXtholWNfxCGKAcXzQ9nCc" colspan="1" rowspan="1"><p data-block-token="FqvMdDe6DocjQXxKHdvcp0hTnmb">Para ignorar las incrustaciones vectoriales más similares, asegúrese de que</p>
+<p data-block-token="Ctzxdq1bjoIqKOx5WOScosN3nUf"><code translate="no">range_filter</code> &lt;= distancia &lt; <code translate="no">radius</code></p>
+</td></tr><tr><td data-block-token="UIkGdxueEo9hNox7TMFcUTTUn6d" colspan="1" rowspan="1"><p data-block-token="IpGVd1lBrojv3uxxcv1c5ZcZnBh"><code translate="no">IP</code></p>
+</td><td data-block-token="VcGrdY9X5o2I8Zxv1EYcgSiwngc" colspan="1" rowspan="1"><p data-block-token="WQs5dm4BrotLVhxSRpecH6wInUc">Una distancia IP mayor indica una mayor similitud.</p>
+</td><td data-block-token="DETWdE7fWo21TzxH2FxcRoQZnwd" colspan="1" rowspan="1"><p data-block-token="Wy8jdWzhsoZUJhx98jLcNIKjnSb">Para ignorar las incrustaciones vectoriales más similares, asegúrese de que</p>
+<p data-block-token="TqYLdOaBzoVv2ZxXlwkc2UHln0d"><code translate="no">radius</code> &lt; distancia &lt;= <code translate="no">range_filter</code></p>
+</td></tr><tr><td data-block-token="NVeUd1byionhILxsXLRcTx32nbc" colspan="1" rowspan="1"><p data-block-token="ZvAcdO3b4oYibFxohwqcEIObnoh"><code translate="no">COSINE</code></p>
+</td><td data-block-token="IdUKdAUIdoNllqxLiKncqQE0nbc" colspan="1" rowspan="1"><p data-block-token="UBiudQZVbopMjcx9mg6cSLQpnVh">Una distancia COSINE mayor indica una mayor similitud.</p>
+</td><td data-block-token="JHc5dyljBogsOKxsPSfcb9qrnHh" colspan="1" rowspan="1"><p data-block-token="CLWEd89pQoUTeZxYOJFczlu2nwh">Para ignorar las incrustaciones vectoriales más similares, asegúrese de que</p>
+<p data-block-token="Zx9TdYxu5ouObNxhZjvcS95wnMd"><code translate="no">radius</code> &lt; distancia &lt;= <code translate="no">range_filter</code></p>
+</td></tr><tr><td data-block-token="WsI8dAHxxobNtBxkYCmcFFtFn4c" colspan="1" rowspan="1"><p data-block-token="XvsMdyuLEoLR2wx0KdXcUmOcnlf"><code translate="no">JACCARD</code></p>
+</td><td data-block-token="YC1MdSNIwoYPg2xUXAZcL74AnZd" colspan="1" rowspan="1"><p data-block-token="JaCGdLjCKonfQsxe5pecj5uQn7g">Una distancia Jaccard menor indica una mayor similitud.</p>
+<p data-block-token="QAFVdSmNEonNSxxb65Xc4zAYnYc"></p>
+</td><td data-block-token="JOfSdPDQmopx3exh68zctrUCnJc" colspan="1" rowspan="1"><p data-block-token="YoZzdQw3CoUKcfx60roc0DuKnze">Para ignorar las incrustaciones vectoriales más similares, asegúrese de que</p>
+<p data-block-token="AURId9AadouFaLxI8esczMpgnrf"><code translate="no">range_filter</code> &lt;= distancia &lt; <code translate="no">radius</code></p>
+</td></tr><tr><td data-block-token="BVuOdQPiKoJBYoxwBgQcqugqnmh" colspan="1" rowspan="1"><p data-block-token="R96ldn7iHoUj2Gxrf65c2TmAnmf"><code translate="no">HAMMING</code></p>
+</td><td data-block-token="OnAOdCFC8oyQwrx4XTRcMik1nbg" colspan="1" rowspan="1"><p data-block-token="LDT4dk5ygoAFKtxF12WctkFRnfb">Una distancia Hamming menor indica una mayor similitud.</p>
+</td><td data-block-token="VBaIdrQOOokaBvxlegWcTKDvnkc" colspan="1" rowspan="1"><p data-block-token="Z2ridFRhBoS64vxBiTrcfOagnIh">Para ignorar las incrustaciones vectoriales más similares, asegúrese de que</p>
+<p data-block-token="UOf2do2U8oGdDNxMzqlcYdMVnie"><code translate="no">range_filter</code> &lt;= distancia &lt; <code translate="no">radius</code></p>
 </td></tr></tbody></table>
-<h2 id="Examples​" class="common-anchor-header">Examples​<button data-href="#Examples​" class="anchor-icon" translate="no">
+<h2 id="Examples​" class="common-anchor-header">Ejemplos<button data-href="#Examples​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -91,14 +90,10 @@ title: Range Search
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>This section demonstrates how to conduct a range search. The search requests in the following code snippets do not carry a metric type, indicating the default metric type <strong>COSINE</strong> applies. In this case, ensure that the radius value is smaller than the <strong>range_filter</strong> value.​</p>
-<p>In the following code snippets, set <code translate="no">radius</code> to <code translate="no">0.4</code> and <code translate="no">range_filter</code> to <code translate="no">0.6</code> so that Milvus returns all entities whose distances or scores to the query vector fall within <strong>0.4</strong> to <strong>0.6</strong>.​</p>
+    </button></h2><p>Esta sección muestra cómo realizar una búsqueda de rango. Las solicitudes de búsqueda en los siguientes fragmentos de código no llevan un tipo métrico, lo que indica que se aplica el tipo métrico predeterminado <strong>COSINE</strong>. En este caso, asegúrese de que el valor de radio es menor que el valor de <strong>range_filter</strong>.</p>
+<p>En los siguientes fragmentos de código, establezca <code translate="no">radius</code> en <code translate="no">0.4</code> y <code translate="no">range_filter</code> en <code translate="no">0.6</code> para que Milvus devuelva todas las entidades cuyas distancias o puntuaciones al vector de consulta estén comprendidas entre <strong>0,4</strong> y <strong>0,6</strong>.</p>
 <div class="multipleCode">
-    <a href="#python">Python </a>
-    <a href="#java">Java</a>
-    <a href="#javascript">Node.js</a>
-    <a href="#curl">cURL</a>
-</div>
+   <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient​
 ​
 client = MilvusClient(​

@@ -2,9 +2,9 @@
 id: configure_pulsar.md
 related_key: configure
 group: system_configuration.md
-summary: Learn how to configure pulsar for Milvus.
+summary: Aprende a configurar pulsar para Milvus.
 ---
-<h1 id="pulsar-related-Configurations" class="common-anchor-header">pulsar-related Configurations<button data-href="#pulsar-related-Configurations" class="anchor-icon" translate="no">
+<h1 id="pulsar-related-Configurations" class="common-anchor-header">Configuraciones relacionadas con pulsar<button data-href="#pulsar-related-Configurations" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -19,7 +19,7 @@ summary: Learn how to configure pulsar for Milvus.
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Related configuration of pulsar, used to manage Milvus logs of recent mutation operations, output streaming log, and provide log publish-subscribe services.</p>
+    </button></h1><p>Configuración relacionada con pulsar, utilizada para gestionar los registros de Milvus de las operaciones de mutación recientes, el registro de flujo de salida y proporcionar servicios de publicación-suscripción de registros.</p>
 <h2 id="pulsaraddress" class="common-anchor-header"><code translate="no">pulsar.address</code><button data-href="#pulsaraddress" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -38,18 +38,18 @@ summary: Learn how to configure pulsar for Milvus.
     </button></h2><table id="pulsar.address">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Descripción</th>
+      <th class="width20">Valor por defecto</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>
-        <li>IP address of Pulsar service.</li>      
-        <li>Environment variable: PULSAR_ADDRESS</li>      
-        <li>pulsar.address and pulsar.port together generate the valid access to Pulsar.</li>      
-        <li>Pulsar preferentially acquires the valid IP address from the environment variable PULSAR_ADDRESS when Milvus is started.</li>      
-        <li>Default value applies when Pulsar is running on the same network with Milvus.</li>      </td>
+        <li>Dirección IP del servicio Pulsar.</li>      
+        <li>Variable de entorno: PULSAR_ADDRESS</li>      
+        <li>pulsar.address y pulsar.port generan conjuntamente el acceso válido a Pulsar.</li>      
+        <li>Pulsar adquiere preferentemente la dirección IP válida de la variable de entorno PULSAR_ADDRESS cuando se inicia Milvus.</li>      
+        <li>El valor por defecto se aplica cuando Pulsar se ejecuta en la misma red que Milvus.</li>      </td>
       <td>localhost</td>
     </tr>
   </tbody>
@@ -72,13 +72,13 @@ summary: Learn how to configure pulsar for Milvus.
     </button></h2><table id="pulsar.port">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Descripción</th>
+      <th class="width20">Valor por defecto</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        Port of Pulsar service.      </td>
+      <td>        Puerto del servicio Pulsar.      </td>
       <td>6650</td>
     </tr>
   </tbody>
@@ -101,13 +101,13 @@ summary: Learn how to configure pulsar for Milvus.
     </button></h2><table id="pulsar.webport">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Descripción</th>
+      <th class="width20">Valor por defecto</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        Web port of of Pulsar service. If you connect direcly without proxy, should use 8080.      </td>
+      <td>        Puerto web del servicio Pulsar. Si se conecta directamente sin proxy, debe usar 8080.      </td>
       <td>80</td>
     </tr>
   </tbody>
@@ -130,16 +130,16 @@ summary: Learn how to configure pulsar for Milvus.
     </button></h2><table id="pulsar.maxMessageSize">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Descripción</th>
+      <th class="width20">Valor por defecto</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>
-        <li>The maximum size of each message in Pulsar. Unit: Byte.</li>      
-        <li>By default, Pulsar can transmit at most 5 MB of data in a single message. When the size of inserted data is greater than this value, proxy fragments the data into multiple messages to ensure that they can be transmitted correctly.</li>      
-        <li>If the corresponding parameter in Pulsar remains unchanged, increasing this configuration will cause Milvus to fail, and reducing it produces no advantage.</li>      </td>
+        <li>El tamaño máximo de cada mensaje en Pulsar. Unidad: Byte.</li>      
+        <li>Por defecto, Pulsar puede transmitir como máximo 5 MB de datos en un único mensaje. Cuando el tamaño de los datos insertados es mayor que este valor, el proxy fragmenta los datos en múltiples mensajes para asegurar que pueden ser transmitidos correctamente.</li>      
+        <li>Si el parámetro correspondiente en Pulsar permanece inalterado, aumentar esta configuración hará que Milvus falle, y reducirla no produce ninguna ventaja.</li>      </td>
       <td>5242880</td>
     </tr>
   </tbody>
@@ -162,15 +162,15 @@ summary: Learn how to configure pulsar for Milvus.
     </button></h2><table id="pulsar.tenant">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Descripción</th>
+      <th class="width20">Valor por defecto</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>
-        <li>Pulsar can be provisioned for specific tenants with appropriate capacity allocated to the tenant.</li>      
-        <li>To share a Pulsar instance among multiple Milvus instances, you can change this to an Pulsar tenant rather than the default one for each Milvus instance before you start them. However, if you do not want Pulsar multi-tenancy, you are advised to change msgChannel.chanNamePrefix.cluster to the different value.</li>      </td>
+        <li>Pulsar puede aprovisionarse para inquilinos específicos con la capacidad apropiada asignada al inquilino.</li>      
+        <li>Para compartir una instancia Pulsar entre múltiples instancias Milvus, puede cambiar esto a un inquilino Pulsar en lugar del predeterminado para cada instancia Milvus antes de iniciarlas. Sin embargo, si no desea el multiarrendamiento Pulsar, se le aconseja cambiar msgChannel.chanNamePrefix.cluster al valor diferente.</li>      </td>
       <td>public</td>
     </tr>
   </tbody>
@@ -193,14 +193,14 @@ summary: Learn how to configure pulsar for Milvus.
     </button></h2><table id="pulsar.namespace">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Descripción</th>
+      <th class="width20">Valor por defecto</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        A Pulsar namespace is the administrative unit nomenclature within a tenant.      </td>
-      <td>default</td>
+      <td>        Un namespace Pulsar es la nomenclatura de la unidad administrativa dentro de un tenant.      </td>
+      <td>por defecto</td>
     </tr>
   </tbody>
 </table>
@@ -222,13 +222,13 @@ summary: Learn how to configure pulsar for Milvus.
     </button></h2><table id="pulsar.requestTimeout">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Descripción</th>
+      <th class="width20">Valor por defecto</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        pulsar client global request timeout in seconds      </td>
+      <td>        tiempo de espera de solicitud global del cliente pulsar en segundos      </td>
       <td>60</td>
     </tr>
   </tbody>
@@ -251,14 +251,14 @@ summary: Learn how to configure pulsar for Milvus.
     </button></h2><table id="pulsar.enableClientMetrics">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Descripción</th>
+      <th class="width20">Valor por defecto</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        Whether to register pulsar client metrics into milvus metrics path.      </td>
-      <td>false</td>
+      <td>        Si se registran las métricas del cliente pulsar en la ruta de métricas de milvus.      </td>
+      <td>falso</td>
     </tr>
   </tbody>
 </table>

@@ -2,9 +2,9 @@
 id: configure_etcd.md
 related_key: configure
 group: system_configuration.md
-summary: Learn how to configure etcd for Milvus.
+summary: Aprenda a configurar etcd para Milvus.
 ---
-<h1 id="etcd-related-Configurations" class="common-anchor-header">etcd-related Configurations<button data-href="#etcd-related-Configurations" class="anchor-icon" translate="no">
+<h1 id="etcd-related-Configurations" class="common-anchor-header">Configuraciones relacionadas con etcd<button data-href="#etcd-related-Configurations" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -19,7 +19,7 @@ summary: Learn how to configure etcd for Milvus.
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Related configuration of etcd, used to store Milvus metadata &amp; service discovery.</p>
+    </button></h1><p>Configuraciones relacionadas con etcd, utilizadas para almacenar los metadatos de Milvus y el descubrimiento de servicios.</p>
 <h2 id="etcdendpoints" class="common-anchor-header"><code translate="no">etcd.endpoints</code><button data-href="#etcdendpoints" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -38,16 +38,16 @@ summary: Learn how to configure etcd for Milvus.
     </button></h2><table id="etcd.endpoints">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Descripción</th>
+      <th class="width20">Valor por defecto</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>
-        <li>Endpoints used to access etcd service. You can change this parameter as the endpoints of your own etcd cluster.</li>      
-        <li>Environment variable: ETCD_ENDPOINTS</li>      
-        <li>etcd preferentially acquires valid address from environment variable ETCD_ENDPOINTS when Milvus is started.</li>      </td>
+        <li>Endpoints utilizados para acceder al servicio etcd. Puede cambiar este parámetro como los puntos finales de su propio clúster etcd.</li>      
+        <li>Variable de entorno: ETCD_ENDPOINTS</li>      
+        <li>etcd adquiere preferentemente la dirección válida de la variable de entorno ETCD_ENDPOINTS cuando se inicia Milvus.</li>      </td>
       <td>localhost:2379</td>
     </tr>
   </tbody>
@@ -70,18 +70,18 @@ summary: Learn how to configure etcd for Milvus.
     </button></h2><table id="etcd.rootPath">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Descripción</th>
+      <th class="width20">Valor por defecto</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>
-        <li>Root prefix of the key to where Milvus stores data in etcd.</li>      
-        <li>It is recommended to change this parameter before starting Milvus for the first time.</li>      
-        <li>To share an etcd instance among multiple Milvus instances, consider changing this to a different value for each Milvus instance before you start them.</li>      
-        <li>Set an easy-to-identify root path for Milvus if etcd service already exists.</li>      
-        <li>Changing this for an already running Milvus instance may result in failures to read legacy data.</li>      </td>
+        <li>Prefijo raíz de la clave donde Milvus almacena los datos en etcd.</li>      
+        <li>Se recomienda cambiar este parámetro antes de iniciar Milvus por primera vez.</li>      
+        <li>Para compartir una instancia etcd entre múltiples instancias Milvus, considere cambiar esto a un valor diferente para cada instancia Milvus antes de iniciarlas.</li>      
+        <li>Establezca una ruta raíz fácil de identificar para Milvus si el servicio etcd ya existe.</li>      
+        <li>Cambiar esto para una instancia Milvus ya en ejecución puede dar lugar a fallos en la lectura de datos heredados.</li>      </td>
       <td>by-dev</td>
     </tr>
   </tbody>
@@ -104,16 +104,16 @@ summary: Learn how to configure etcd for Milvus.
     </button></h2><table id="etcd.metaSubPath">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Descripción</th>
+      <th class="width20">Valor por defecto</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>
-        <li>Sub-prefix of the key to where Milvus stores metadata-related information in etcd.</li>      
-        <li>Caution: Changing this parameter after using Milvus for a period of time will affect your access to old data.</li>      
-        <li>It is recommended to change this parameter before starting Milvus for the first time.</li>      </td>
+        <li>Sub-prefijo de la clave donde Milvus almacena la información relacionada con metadatos en etcd.</li>      
+        <li>Precaución: Cambiar este parámetro después de utilizar Milvus durante un periodo de tiempo afectará a su acceso a datos antiguos.</li>      
+        <li>Se recomienda cambiar este parámetro antes de iniciar Milvus por primera vez.</li>      </td>
       <td>meta</td>
     </tr>
   </tbody>
@@ -136,16 +136,16 @@ summary: Learn how to configure etcd for Milvus.
     </button></h2><table id="etcd.kvSubPath">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Descripción</th>
+      <th class="width20">Valor por defecto</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>
-        <li>Sub-prefix of the key to where Milvus stores timestamps in etcd.</li>      
-        <li>Caution: Changing this parameter after using Milvus for a period of time will affect your access to old data.</li>      
-        <li>It is recommended not to change this parameter if there is no specific reason.</li>      </td>
+        <li>Sub-prefijo de la clave donde Milvus almacena las marcas de tiempo en etcd.</li>      
+        <li>Precaución: Cambiar este parámetro después de usar Milvus por un período de tiempo afectará su acceso a datos antiguos.</li>      
+        <li>Se recomienda no cambiar este parámetro si no hay una razón específica.</li>      </td>
       <td>kv</td>
     </tr>
   </tbody>
@@ -168,13 +168,13 @@ summary: Learn how to configure etcd for Milvus.
     </button></h2><table id="etcd.log.level">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Descripción</th>
+      <th class="width20">Valor por defecto</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        Only supports debug, info, warn, error, panic, or fatal. Default 'info'.      </td>
+      <td>        Sólo admite debug, info, warn, error, panic o fatal. Por defecto 'info'.      </td>
       <td>info</td>
     </tr>
   </tbody>
@@ -197,19 +197,19 @@ summary: Learn how to configure etcd for Milvus.
     </button></h2><table id="etcd.log.path">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Descripción</th>
+      <th class="width20">Valor por defecto</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>
-        <li>path is one of:</li>      
-        <li> - "default" as os.Stderr,</li>      
-        <li> - "stderr" as os.Stderr,</li>      
-        <li> - "stdout" as os.Stdout,</li>      
-        <li> - file path to append server logs to.</li>      
-        <li>please adjust in embedded Milvus: /tmp/milvus/logs/etcd.log</li>      </td>
+        <li>path es uno de:</li>      
+        <li> - "default" como os.Stderr,</li>      
+        <li> - "stderr" como os.Stderr,</li>      
+        <li> - "stdout" como os.Stdout,</li>      
+        <li> - ruta del archivo al que añadir los registros del servidor.</li>      
+        <li>por favor ajuste en Milvus incrustado: /tmp/milvus/logs/etcd.log</li>      </td>
       <td>stdout</td>
     </tr>
   </tbody>
@@ -232,14 +232,14 @@ summary: Learn how to configure etcd for Milvus.
     </button></h2><table id="etcd.ssl.enabled">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Descripción</th>
+      <th class="width20">Valor por defecto</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        Whether to support ETCD secure connection mode      </td>
-      <td>false</td>
+      <td>        Si se admite el modo de conexión segura ETCD    </td>
+      <td>falso</td>
     </tr>
   </tbody>
 </table>
@@ -261,14 +261,14 @@ summary: Learn how to configure etcd for Milvus.
     </button></h2><table id="etcd.ssl.tlsCert">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Descripción</th>
+      <th class="width20">Valor por defecto</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        path to your cert file      </td>
-      <td>/path/to/etcd-client.pem</td>
+      <td>        ruta a su archivo cert    </td>
+      <td>/ruta/para/etcd-cliente.pem</td>
     </tr>
   </tbody>
 </table>
@@ -290,14 +290,14 @@ summary: Learn how to configure etcd for Milvus.
     </button></h2><table id="etcd.ssl.tlsKey">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Descripción</th>
+      <th class="width20">Valor por defecto</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        path to your key file      </td>
-      <td>/path/to/etcd-client-key.pem</td>
+      <td>        ruta al archivo de claves      </td>
+      <td>/ruta/para/etcd-client-key.pem</td>
     </tr>
   </tbody>
 </table>
@@ -319,14 +319,14 @@ summary: Learn how to configure etcd for Milvus.
     </button></h2><table id="etcd.ssl.tlsCACert">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Descripción</th>
+      <th class="width20">Valor por defecto</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        path to your CACert file      </td>
-      <td>/path/to/ca.pem</td>
+      <td>        ruta a su archivo CACert      </td>
+      <td>/ruta/a/ca.pem</td>
     </tr>
   </tbody>
 </table>
@@ -348,16 +348,16 @@ summary: Learn how to configure etcd for Milvus.
     </button></h2><table id="etcd.ssl.tlsMinVersion">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Descripción</th>
+      <th class="width20">Valor por defecto</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>
-        <li>TLS min version</li>      
-        <li>Optional values: 1.0, 1.1, 1.2, 1.3。</li>      
-        <li>We recommend using version 1.2 and above.</li>      </td>
+        <li>Versión mínima de TLS</li>      
+        <li>Valores opcionales: 1.0, 1.1, 1.2, 1.3。</li>      
+        <li>Se recomienda utilizar la versión 1.2 y superiores.</li>      </td>
       <td>1.3</td>
     </tr>
   </tbody>
@@ -380,13 +380,13 @@ summary: Learn how to configure etcd for Milvus.
     </button></h2><table id="etcd.requestTimeout">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Descripción</th>
+      <th class="width20">Valor por defecto</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        Etcd operation timeout in milliseconds      </td>
+      <td>        Tiempo de espera de la operación Etcd en milisegundos      </td>
       <td>10000</td>
     </tr>
   </tbody>
@@ -409,14 +409,14 @@ summary: Learn how to configure etcd for Milvus.
     </button></h2><table id="etcd.use.embed">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Descripción</th>
+      <th class="width20">Valor por defecto</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        Whether to enable embedded Etcd (an in-process EtcdServer).      </td>
-      <td>false</td>
+      <td>        Si se habilita Etcd incrustado (un EtcdServer en proceso).      </td>
+      <td>falso</td>
     </tr>
   </tbody>
 </table>
@@ -438,13 +438,13 @@ summary: Learn how to configure etcd for Milvus.
     </button></h2><table id="etcd.data.dir">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Descripción</th>
+      <th class="width20">Valor por defecto</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        Embedded Etcd only. please adjust in embedded Milvus: /tmp/milvus/etcdData/      </td>
+      <td>        Sólo Etcd incrustado. por favor ajuste en Milvus incrustado: /tmp/milvus/etcdData/      </td>
       <td>default.etcd</td>
     </tr>
   </tbody>
@@ -467,14 +467,14 @@ summary: Learn how to configure etcd for Milvus.
     </button></h2><table id="etcd.auth.enabled">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Descripción</th>
+      <th class="width20">Valor por defecto</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        Whether to enable authentication      </td>
-      <td>false</td>
+      <td>        Si habilitar la autenticación      </td>
+      <td>falso</td>
     </tr>
   </tbody>
 </table>
@@ -496,13 +496,13 @@ summary: Learn how to configure etcd for Milvus.
     </button></h2><table id="etcd.auth.userName">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Descripción</th>
+      <th class="width20">Valor por defecto</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        username for etcd authentication      </td>
+      <td>        Nombre de usuario para la autenticación etcd    </td>
       <td></td>
     </tr>
   </tbody>
@@ -525,13 +525,13 @@ summary: Learn how to configure etcd for Milvus.
     </button></h2><table id="etcd.auth.password">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Descripción</th>
+      <th class="width20">Valor por defecto</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        password for etcd authentication      </td>
+      <td>        contraseña para autenticación etcd    </td>
       <td></td>
     </tr>
   </tbody>

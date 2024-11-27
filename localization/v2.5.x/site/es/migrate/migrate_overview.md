@@ -1,11 +1,12 @@
 ---
 id: migrate_overview.md
 summary: >-
-  This article provides an overview of the Milvus-migration tool, including
-  supported migrations, features, and architecture.
-title: Milvus Migration Overview
+  Este artículo proporciona una visión general de la herramienta
+  Milvus-migration, incluyendo las migraciones soportadas, características y
+  arquitectura.
+title: Visión general de la migración de Milvus
 ---
-<h1 id="Milvus-Migration-Overview" class="common-anchor-header">Milvus Migration Overview<button data-href="#Milvus-Migration-Overview" class="anchor-icon" translate="no">
+<h1 id="Milvus-Migration-Overview" class="common-anchor-header">Visión general de la migración de Milvus<button data-href="#Milvus-Migration-Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -20,8 +21,8 @@ title: Milvus Migration Overview
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Recognizing the diverse needs of user base, Milvus has expanded its migration tools to not only facilitate upgrades from earlier Milvus 1.x versions but also to enable seamless integration of data from other systems like <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/elasticsearch-intro.html">Elasticsearch</a> and <a href="https://github.com/facebookresearch/faiss">Faiss</a>. The <a href="https://github.com/zilliztech/milvus-migration">Milvus-migration</a> project is designed to bridge the gap between these varied data environments and the latest advancements in Milvus technology, ensuring you can harness improved features and performance seamlessly.</p>
-<h2 id="Supported-migrations" class="common-anchor-header">Supported migrations<button data-href="#Supported-migrations" class="anchor-icon" translate="no">
+    </button></h1><p>Reconociendo las diversas necesidades de la base de usuarios, Milvus ha ampliado sus herramientas de migración no sólo para facilitar las actualizaciones desde versiones anteriores de Milvus 1.x, sino también para permitir la integración perfecta de datos de otros sistemas como <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/elasticsearch-intro.html">Elasticsearch</a> y <a href="https://github.com/facebookresearch/faiss">Faiss</a>. El proyecto <a href="https://github.com/zilliztech/milvus-migration">Milvus-migration</a> está diseñado para salvar las distancias entre estos variados entornos de datos y los últimos avances de la tecnología Milvus, garantizando que pueda aprovechar las funciones mejoradas y el rendimiento sin problemas.</p>
+<h2 id="Supported-migrations" class="common-anchor-header">Migraciones compatibles<button data-href="#Supported-migrations" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -36,14 +37,14 @@ title: Milvus Migration Overview
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>The <a href="https://github.com/zilliztech/milvus-migration">Milvus-migration</a> tool supports a variety of migration paths to accommodate different user needs:</p>
+    </button></h2><p>La herramienta <a href="https://github.com/zilliztech/milvus-migration">Milvus-migration</a> admite una variedad de rutas de migración para adaptarse a las diferentes necesidades de los usuarios:</p>
 <ul>
-<li><a href="/docs/es2m.md">Elasticsearch to Milvus 2.x</a>: Enabling users to migrate data from Elasticsearch environments to take advantage of Milvus’s optimized vector search capabilities.</li>
-<li><a href="/docs/f2m.md">Faiss to Milvus 2.x</a>: Providing experimental support for transferring data from Faiss, a popular library for efficient similarity search.</li>
-<li><a href="/docs/m2m.md">Milvus 1.x to Milvus 2.x</a>: Ensuring data from earlier versions is transitioned smoothly to the latest framework.</li>
-<li><a href="/docs/from-m2x.md">Milvus 2.3.x to Milvus 2.3.x or above</a>: Providing a one-time migration path for users who have already migrated to 2.3.x.</li>
+<li><a href="/docs/es/es2m.md">Elasticsearch a Milvus 2.x</a>: Permite a los usuarios migrar datos desde entornos Elasticsearch para aprovechar las capacidades de búsqueda vectorial optimizada de Milvus.</li>
+<li><a href="/docs/es/f2m.md">Faiss a Milvus 2.x</a>: Proporcionando soporte experimental para transferir datos desde Faiss, una biblioteca popular para la búsqueda eficiente de similitudes.</li>
+<li><a href="/docs/es/m2m.md">Milvus 1.x a Milvus 2.x</a>: Garantizar que los datos de las versiones anteriores se transfieran sin problemas al marco más reciente.</li>
+<li><a href="/docs/es/from-m2x.md">Milvus 2.3.x a Milvus 2.3.x o superior</a>: Proporcionar una ruta de migración única para los usuarios que ya han migrado a 2.3.x.</li>
 </ul>
-<h2 id="Features" class="common-anchor-header">Features<button data-href="#Features" class="anchor-icon" translate="no">
+<h2 id="Features" class="common-anchor-header">Características<button data-href="#Features" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -58,13 +59,13 @@ title: Milvus Migration Overview
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus-migration is designed with robust features to handle diverse migration scenarios:</p>
+    </button></h2><p>Milvus-migration está diseñado con características robustas para manejar diversos escenarios de migración:</p>
 <ul>
-<li>Multiple interaction methods: You can perform migrations via a command line interface or through a Restful API, with flexibility in how migrations are executed.</li>
-<li>Support for various file formats and cloud storage: The <a href="https://github.com/zilliztech/milvus-migration">Milvus-migration</a> tool can handle data stored in local files as well as in cloud storage solutions such as S3, OSS, and GCP, ensuring broad compatibility.</li>
-<li>Data type handling: <a href="https://github.com/zilliztech/milvus-migration">Milvus-migration</a> is capable of dealing with both vector data and scalar fields, making it a versatile choice for different data migration needs.</li>
+<li>Múltiples métodos de interacción: Puede realizar migraciones a través de una interfaz de línea de comandos o a través de una API Restful, con flexibilidad en la forma en que se ejecutan las migraciones.</li>
+<li>Compatibilidad con varios formatos de archivo y almacenamiento en la nube: La herramienta <a href="https://github.com/zilliztech/milvus-migration">Milvus-migration</a> puede manejar datos almacenados en archivos locales, así como en soluciones de almacenamiento en la nube como S3, OSS y GCP, garantizando una amplia compatibilidad.</li>
+<li>Manejo de tipos de datos: <a href="https://github.com/zilliztech/milvus-migration">Milvus-migration</a> es capaz de tratar tanto datos vectoriales como campos escalares, lo que la convierte en una opción versátil para diferentes necesidades de migración de datos.</li>
 </ul>
-<h2 id="Architecture" class="common-anchor-header">Architecture<button data-href="#Architecture" class="anchor-icon" translate="no">
+<h2 id="Architecture" class="common-anchor-header">Arquitectura<button data-href="#Architecture" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -79,28 +80,24 @@ title: Milvus Migration Overview
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>The architecture of <a href="https://github.com/zilliztech/milvus-migration">Milvus-migration</a> is strategically designed to facilitate efficient data streaming, parsing, and writing processes, enabling robust migration capabilities across various data sources.</p>
+    </button></h2><p>La arquitectura de <a href="https://github.com/zilliztech/milvus-migration">Milvus-migration</a> está estratégicamente diseñada para facilitar procesos eficientes de flujo, análisis sintáctico y escritura de datos, permitiendo una sólida capacidad de migración a través de diversas fuentes de datos.</p>
 <p>
-  <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.5.x/assets/milvus-migration-architecture.jpeg" alt="Milvus-migration architecture" class="doc-image" id="milvus-migration-architecture" />
-    <span>Milvus-migration architecture</span>
-  </span>
-</p>
-<p>In the preceding figure:</p>
+  
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/milvus-migration-architecture.jpeg" alt="Milvus-migration architecture" class="doc-image" id="milvus-migration-architecture" />
+   </span> <span class="img-wrapper"> <span>Arquitectura de Milvus-migration</span> </span></p>
+<p>En la figura anterior</p>
 <ul>
-<li><strong>Data source</strong>: <a href="https://github.com/zilliztech/milvus-migration">Milvus-migration</a> supports multiple data sources including Elasticsearch via the <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/scroll-api.html">scroll API</a>, local or cloud storage data files, and Milvus 1.x databases. These are accessed and read in a streamlined manner to initiate the migration process.</li>
-<li><strong>Stream pipeline</strong>:
-<ul>
-<li><strong>Parse process</strong>: Data from the sources is parsed according to its format. For example, for a data source from Elasticsearch, an Elasticsearch format parser is employed, while other formats use respective parsers. This step is crucial for transforming raw data into a structured format that can be further processed.</li>
-<li><strong>Convert process</strong>: Following parsing, data undergoes conversion where fields are filtered, data types are converted, and table names are adjusted according to the target Milvus 2.x schema. This ensures that the data conforms to the expected structure and types in Milvus.</li>
+<li><strong>Fuente de datos</strong>: <a href="https://github.com/zilliztech/milvus-migration">Milvus-migration</a> admite múltiples fuentes de datos, incluyendo Elasticsearch a través de la <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/scroll-api.html">API de desplazamiento</a>, archivos de datos de almacenamiento local o en la nube, y bases de datos Milvus 1.x. Se accede a ellas y se leen de forma racionalizada para iniciar el proceso de migración.</li>
+<li><strong>Canalización de flujos</strong>:<ul>
+<li><strong>Proceso de análisis sintáctico</strong>: Los datos de las fuentes se analizan según su formato. Por ejemplo, para una fuente de datos de Elasticsearch, se emplea un analizador de formato de Elasticsearch, mientras que otros formatos utilizan los analizadores respectivos. Este paso es crucial para transformar los datos sin procesar en un formato estructurado que pueda ser procesado posteriormente.</li>
+<li><strong>Proceso de conversión</strong>: Tras el análisis sintáctico, los datos se someten a un proceso de conversión en el que se filtran los campos, se convierten los tipos de datos y se ajustan los nombres de las tablas de acuerdo con el esquema Milvus 2.x de destino. Esto garantiza que los datos se ajustan a la estructura y los tipos esperados en Milvus.</li>
 </ul></li>
-<li><strong>Data writing and loading</strong>:
-<ul>
-<li><strong>Write data</strong>: The processed data is written into intermediate JSON or NumPy files, ready to be loaded into Milvus 2.x.</li>
-<li><strong>Load data</strong>: Data is finally loaded into Milvus 2.x using the <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/ORM/utility/do_bulk_insert.md">BulkInsert</a> operation, which efficiently writes large volumes of data into Milvus storage systems, either cloud-based or filestore.</li>
+<li><strong>Escritura y carga de datos</strong>:<ul>
+<li><strong>Escritura de datos</strong>: Los datos procesados se escriben en archivos intermedios JSON o NumPy, listos para ser cargados en Milvus 2.x.</li>
+<li><strong>Cargar datos</strong>: Los datos se cargan finalmente en Milvus 2.x utilizando la operación <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/ORM/utility/do_bulk_insert.md">BulkInsert</a>, que escribe de forma eficiente grandes volúmenes de datos en los sistemas de almacenamiento de Milvus, ya sean basados en la nube o en almacenes de archivos.</li>
 </ul></li>
 </ul>
-<h2 id="Future-plans" class="common-anchor-header">Future plans<button data-href="#Future-plans" class="anchor-icon" translate="no">
+<h2 id="Future-plans" class="common-anchor-header">Planes de futuro<button data-href="#Future-plans" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -115,10 +112,10 @@ title: Milvus Migration Overview
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>The development team is committed to enhancing <a href="https://github.com/zilliztech/milvus-migration">Milvus-migration</a> with features such as:</p>
+    </button></h2><p>El equipo de desarrollo se ha comprometido a mejorar <a href="https://github.com/zilliztech/milvus-migration">Milvus-migration</a> con características como las siguientes:</p>
 <ul>
-<li><strong>Support for more data sources</strong>: Plans to extend support to additional databases and file systems, such as Pinecone, Chroma, Qdrant. If you need support for a specific data source, please submit your request through this <a href="https://github.com/zilliztech/milvus-migration/issues">GitHub issue link</a>.</li>
-<li><strong>Command simplification</strong>: Efforts to streamline the command process for easier execution.</li>
-<li><strong>SPI parser</strong> / <strong>convert</strong>: The architecture expects to include Service Provider Interface (SPI) tools for both parsing and converting. These tools allow for custom implementations that users can plug into the migration process to handle specific data formats or conversion rules.</li>
-<li><strong>Checkpoint resumption</strong>: Enabling migrations to resume from the last checkpoint to enhance reliability and efficiency in case of interruptions. Save points will be created to ensure data integrity and are stored in databases such as SQLite or MySQL to track the progress of the migration process.</li>
+<li><strong>Soporte para más fuentes de datos</strong>: Planes para ampliar el soporte a bases de datos y sistemas de archivos adicionales, como Pinecone, Chroma, Qdrant. Si necesita soporte para una fuente de datos específica, envíe su solicitud a través de este <a href="https://github.com/zilliztech/milvus-migration/issues">enlace de incidencia de GitHub</a>.</li>
+<li><strong>Simplificación</strong> de<strong>comandos</strong>: Esfuerzos para simplificar el proceso de comandos para una ejecución más fácil.</li>
+<li><strong>SPI parser</strong> / <strong>convertir</strong>: La arquitectura espera incluir herramientas de interfaz de proveedor de servicios (SPI) tanto para el análisis sintáctico como para la conversión. Estas herramientas permiten implementaciones personalizadas que los usuarios pueden conectar al proceso de migración para gestionar formatos de datos específicos o reglas de conversión.</li>
+<li><strong>Reanudación del punto de control</strong>: Permite que las migraciones se reanuden desde el último punto de control para mejorar la fiabilidad y la eficacia en caso de interrupciones. Se crearán puntos de guardado para garantizar la integridad de los datos y se almacenarán en bases de datos como SQLite o MySQL para seguir el progreso del proceso de migración.</li>
 </ul>

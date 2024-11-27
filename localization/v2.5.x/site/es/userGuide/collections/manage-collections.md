@@ -1,8 +1,8 @@
 ---
 id: manage-collections.md
-title: Collection Explained​
+title: Explicación de las colecciones
 ---
-<h1 id="Collection-Explained​" class="common-anchor-header">Collection Explained​<button data-href="#Collection-Explained​" class="anchor-icon" translate="no">
+<h1 id="Collection-Explained​" class="common-anchor-header">Explicación de las colecciones<button data-href="#Collection-Explained​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -17,8 +17,8 @@ title: Collection Explained​
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>In Milvus, you can create multiple collections to manage your data, and insert your data as entities into the collections. Collection and entity are similar to tables and records in relational databases. This page helps you to learn about the collection and related concepts.​</p>
-<h2 id="Collection​" class="common-anchor-header">Collection​<button data-href="#Collection​" class="anchor-icon" translate="no">
+    </button></h1><p>En Milvus, puede crear múltiples colecciones para gestionar sus datos, e insertar sus datos como entidades en las colecciones. Colección y entidad son similares a tablas y registros en bases de datos relacionales. Esta página le ayudará a conocer la colección y los conceptos relacionados.</p>
+<h2 id="Collection​" class="common-anchor-header">Colección<button data-href="#Collection​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -33,15 +33,13 @@ title: Collection Explained​
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>A collection is a two-dimensional table with fixed columns and variant rows. Each column represents a field, and each row represents an entity. ​</p>
-<p>The following chart shows a collection with eight columns and six entities.​</p>
+    </button></h2><p>Una colección es una tabla bidimensional con columnas fijas y filas variantes. Cada columna representa un campo y cada fila representa una entidad. </p>
+<p>La siguiente tabla muestra una colección con ocho columnas y seis entidades.</p>
 <p>
-  <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.5.x/assets/collection-explained.png" alt="Collection explained" class="doc-image" id="collection-explained" />
-    <span>Collection explained</span>
-  </span>
-</p>
-<h2 id="Schema-and-Fields​" class="common-anchor-header">Schema and Fields​<button data-href="#Schema-and-Fields​" class="anchor-icon" translate="no">
+  
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/collection-explained.png" alt="Collection explained" class="doc-image" id="collection-explained" />
+   </span> <span class="img-wrapper"> <span>Explicación de la colección</span> </span></p>
+<h2 id="Schema-and-Fields​" class="common-anchor-header">Esquema y campos<button data-href="#Schema-and-Fields​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -56,15 +54,15 @@ title: Collection Explained​
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>When describing an object, we usually mention its attributes, such as size, weight, and position. You can use these attributes as fields in a collection. Each field has various constraining properties, such as the data type and the dimensionality of a vector field. You can form a collection schema by creating the fields and defining their order. For possible applicable data types, refer to <a href="/docs/schema.md">​Schema Explained</a>.​</p>
-<p>You should include all schema-defined fields in the entities to insert. To make some of them optional, consider​</p>
+    </button></h2><p>Al describir un objeto, solemos mencionar sus atributos, como el tamaño, el peso y la posición. Puede utilizar estos atributos como campos en una colección. Cada campo tiene varias propiedades restrictivas, como el tipo de datos y la dimensionalidad de un campo vectorial. Puede formar un esquema de colección creando los campos y definiendo su orden. Para conocer los posibles tipos de datos aplicables, consulte <a href="/docs/es/schema.md">Explicación del esquema</a>.</p>
+<p>Debe incluir todos los campos definidos por el esquema en las entidades a insertar. Para que algunos de ellos sean opcionales, considere</p>
 <ul>
-<li><p><strong>Making them nullable or setting default values</strong>​</p>
-<p>For details on how to make a field nullable or set the default value, refer to <a href="/docs/nullable-and-default.md">​Nullable &amp; Default</a>.​</p></li>
-<li><p><strong>Enabling dynamic field</strong>​</p>
-<p>For details on how to enable and use the dynamic field, refer to <a href="/docs/enable-dynamic-field.md">​Dynamic Field</a>.​</p></li>
+<li><p><strong>Hacerlos anulables o establecer valores por defecto</strong></p>
+<p>Para obtener más información sobre cómo hacer que un campo sea anulable o establecer el valor por defecto, consulte <a href="/docs/es/nullable-and-default.md">Anulable y por defecto</a>.</p></li>
+<li><p><strong>Activación de campos dinámicos</strong></p>
+<p>Para más detalles sobre cómo habilitar y utilizar el campo dinámico, consulte <a href="/docs/es/enable-dynamic-field.md">Campo dinámico</a>.</p></li>
 </ul>
-<h2 id="Primary-key-and-AutoId​" class="common-anchor-header">Primary key and AutoId​<button data-href="#Primary-key-and-AutoId​" class="anchor-icon" translate="no">
+<h2 id="Primary-key-and-AutoId​" class="common-anchor-header">Clave primaria y AutoId<button data-href="#Primary-key-and-AutoId​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -79,11 +77,11 @@ title: Collection Explained​
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Similar to the primary field in a relational database, a collection has a primary field to distinguish an entity from others. Each value in the primary field is globally unique and corresponds to one specific entity. ​</p>
-<p>As shown in the above chart, the field named <strong>id</strong> serves as the primary field, and the first ID <strong>0</strong> corresponds to an entity titled <em>The Mortality Rate of Coronavirus is Not Important</em>. There will not be any other entity that has the primary field of 0. ​</p>
-<p>A primary field accepts only integers or strings. When inserting entities, you should include the primary field values by default. However, if you have enabled <strong>AutoId</strong> upon collection creation, Milvus will generate those values upon data insertion. In such a case, exclude the primary field values from the entities to be inserted.​</p>
-<p>For more information, please refer to <a href="/docs/primary-field.md">​Primary Field &amp; AutoID</a>.​</p>
-<h2 id="Index​" class="common-anchor-header">Index​<button data-href="#Index​" class="anchor-icon" translate="no">
+    </button></h2><p>De forma similar al campo primario en una base de datos relacional, una colección tiene un campo primario para distinguir una entidad de otras. Cada valor del campo primario es globalmente único y corresponde a una entidad específica. </p>
+<p>Como se muestra en el gráfico anterior, el campo denominado <strong>id</strong> sirve como campo primario, y el primer ID <strong>0</strong> corresponde a una entidad titulada <em>La tasa de mortalidad del coronavirus no es importante</em>. No habrá ninguna otra entidad que tenga el campo primario 0.</p>
+<p>Un campo primario sólo acepta números enteros o cadenas. Al insertar entidades, debe incluir los valores del campo primario por defecto. Sin embargo, si ha activado <strong>AutoId</strong> al crear la colección, Milvus generará esos valores al insertar los datos. En tal caso, excluya los valores del campo primario de las entidades a insertar.</p>
+<p>Para más información, consulte <a href="/docs/es/primary-field.md">Campo primario y AutoID</a>.</p>
+<h2 id="Index​" class="common-anchor-header">Índice<button data-href="#Index​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -98,8 +96,8 @@ title: Collection Explained​
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Creating indexes on specific fields improves search efficiency. You are advised to create indexes for all the fields your service relies on, among which indexes on vector fields are mandatory.</p>
-<h2 id="Entity​" class="common-anchor-header">Entity​<button data-href="#Entity​" class="anchor-icon" translate="no">
+    </button></h2><p>La creación de índices en campos específicos mejora la eficacia de la búsqueda. Se aconseja crear índices para todos los campos en los que se basa su servicio, entre los cuales los índices sobre campos vectoriales son obligatorios.</p>
+<h2 id="Entity​" class="common-anchor-header">Entidad<button data-href="#Entity​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -114,10 +112,10 @@ title: Collection Explained​
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Entities are data records that share the same set of fields in a collection. The values in all fields of the same row comprise an entity.​</p>
-<p>You can insert as many entities as you need into a collection. However, as the number of entities mounts, the memory size it takes also increases, affecting search performance.​</p>
-<p>For more information, refer to <a href="/docs/schema.md">​Schema Explained</a>.​</p>
-<h2 id="Load-and-Release​" class="common-anchor-header">Load and Release​<button data-href="#Load-and-Release​" class="anchor-icon" translate="no">
+    </button></h2><p>Las entidades son registros de datos que comparten el mismo conjunto de campos en una colección. Los valores de todos los campos de una misma fila constituyen una entidad.</p>
+<p>Puede insertar tantas entidades como necesite en una colección. Sin embargo, a medida que aumenta el número de entidades, también aumenta el tamaño de memoria que ocupa, lo que afecta al rendimiento de la búsqueda.</p>
+<p>Para más información, consulte <a href="/docs/es/schema.md">Explicación del esquema</a>.</p>
+<h2 id="Load-and-Release​" class="common-anchor-header">Cargar y liberar<button data-href="#Load-and-Release​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -132,10 +130,10 @@ title: Collection Explained​
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Loading a collection is the prerequisite to conducting similarity searches and queries in collections. When you load a collection, Milvus loads all index files and the raw data in each field into memory for fast response to searches and queries.​</p>
-<p>Searches and queries are memory-intensive operations. To save the cost, you are advised to release the collections that are currently not in use.​</p>
-<p>For more details, refer to <a href="/docs/load-and-release.md">​Load &amp; Release</a>.​</p>
-<h2 id="Search-and-Query​" class="common-anchor-header">Search and Query​<button data-href="#Search-and-Query​" class="anchor-icon" translate="no">
+    </button></h2><p>Cargar una colección es el requisito previo para realizar búsquedas y consultas de similitud en colecciones. Cuando carga una colección, Milvus carga todos los archivos de índice y los datos sin procesar de cada campo en la memoria para responder rápidamente a las búsquedas y consultas.</p>
+<p>Las búsquedas y consultas son operaciones que consumen mucha memoria. Para ahorrar costes, se recomienda liberar las colecciones que no se estén utilizando en ese momento.</p>
+<p>Para más detalles, consulte <a href="/docs/es/load-and-release.md">Cargar y liberar</a>.</p>
+<h2 id="Search-and-Query​" class="common-anchor-header">Búsquedas y consultas<button data-href="#Search-and-Query​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -150,28 +148,28 @@ title: Collection Explained​
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Once you create indexes and load the collection, you can start a similarity search by feeding one or several query vectors. For example, when receiving the vector representation of your query carried in a search request, Milvus uses the specified metric type to measure the similarity between the query vector and those in the target collection before returning those that are semantically similar to the query.​</p>
-<p>You can also include metadata filtering within searches and queries to improve the relevancy of the results. Note that, metadata filtering conditions are mandatory in queries but optional in searches.​</p>
-<p>For details on applicable metric types, refer to <a href="/docs/metric.md">​Metric Types</a>.​</p>
-<p>For more information about searches and queries, refer to the articles in the <a href="/docs/single-vector-search.md">​Search &amp; Rerank</a> chapter, among which, basic features are:​</p>
+    </button></h2><p>Una vez creados los índices y cargada la colección, puede iniciar una búsqueda de similitud introduciendo uno o varios vectores de consulta. Por ejemplo, al recibir la representación vectorial de su consulta transportada en una solicitud de búsqueda, Milvus utiliza el tipo de métrica especificado para medir la similitud entre el vector de consulta y los de la colección de destino antes de devolver los que son semánticamente similares a la consulta.</p>
+<p>También puede incluir el filtrado de metadatos en las búsquedas y consultas para mejorar la relevancia de los resultados. Tenga en cuenta que las condiciones de filtrado de metadatos son obligatorias en las consultas, pero opcionales en las búsquedas.</p>
+<p>Para obtener más información sobre los tipos de métricas aplicables, consulte <a href="/docs/es/metric.md">Tipos de métricas</a>.</p>
+<p>Para obtener más información sobre búsquedas y consultas, consulte los artículos del capítulo <a href="/docs/es/single-vector-search.md">Búsqueda y renumeración</a>, entre los que se encuentran las funciones básicas.</p>
 <ul>
-<li><p><a href="/docs/single-vector-search.md">​Basic ANN Search</a>​</p></li>
-<li><p><a href="/docs/filtered-search.md">​Filtered Search</a>​</p></li>
-<li><p><a href="/docs/range-search.md">​Range Search</a>​</p></li>
-<li><p><a href="/docs/grouping-search.md">​Grouping Search</a>​</p></li>
-<li><p><a href="/docs/multi-vector-search.md">​Hybrid Search</a>​</p></li>
-<li><p><a href="/docs/with-iterators.md">​Search Iterator</a>​</p></li>
-<li><p><a href="/docs/get-and-scalar-query.md">​Query</a>​</p></li>
-<li><p><a href="/docs/full-text-search.md">​Full-Text Search</a>​</p></li>
-<li><p><a href="/docs/keyword-match.md">Keyword Match</a>​</p></li>
+<li><p><a href="/docs/es/single-vector-search.md">Búsqueda básica de RNA</a></p></li>
+<li><p><a href="/docs/es/filtered-search.md">Búsqueda filtrada</a></p></li>
+<li><p><a href="/docs/es/range-search.md">Búsqueda por rango</a></p></li>
+<li><p><a href="/docs/es/grouping-search.md">Búsqueda por agrupación</a></p></li>
+<li><p><a href="/docs/es/multi-vector-search.md">Búsqueda híbrida</a></p></li>
+<li><p><a href="/docs/es/with-iterators.md">Iterador de búsqueda</a></p></li>
+<li><p><a href="/docs/es/get-and-scalar-query.md">Consulta</a></p></li>
+<li><p><a href="/docs/es/full-text-search.md">Búsqueda de texto completo</a></p></li>
+<li><p><a href="/docs/es/keyword-match.md">Coincidencia de palabras clave</a></p></li>
 </ul>
-<p>In addition, Milvus also provides enhancements to improve search performance and efficiency. They are disabled by default, and you can enable and use them according to your service requirements. They are​</p>
+<p>Además, Milvus también proporciona mejoras para aumentar el rendimiento y la eficacia de la búsqueda. Están desactivadas por defecto, y usted puede activarlas y utilizarlas según sus necesidades de servicio. Son las siguientes</p>
 <ul>
-<li><p><a href="/docs/use-partition-key.md">​Use Partition Key</a>​</p></li>
-<li><p><a href="/docs/mmap.md">​Use mmap</a>​</p></li>
-<li><p><a href="/docs/clustering-compaction.md">​Clustering Compaction</a>​</p></li>
+<li><p><a href="/docs/es/use-partition-key.md">Utilizar clave de partición</a></p></li>
+<li><p><a href="/docs/es/mmap.md">Utilizar mmap</a></p></li>
+<li><p><a href="/docs/es/clustering-compaction.md">Agrupación Compactación</a></p></li>
 </ul>
-<h2 id="Partition​" class="common-anchor-header">Partition​<button data-href="#Partition​" class="anchor-icon" translate="no">
+<h2 id="Partition​" class="common-anchor-header">Partición<button data-href="#Partition​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -186,10 +184,10 @@ title: Collection Explained​
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Partitions are subsets of a collection, which share the same field set with its parent collection, each containing a subset of entities.​</p>
-<p>By allocating entities into different partitions, you can create entity groups. You can conduct searches and queries in specific partitions to have Milvus ignore entities in other partitions, and improve search efficiency.​</p>
-<p>For details, refer to <a href="/docs/manage-partitions.md">​Manage Partitions</a>.​</p>
-<h2 id="Shard​" class="common-anchor-header">Shard​<button data-href="#Shard​" class="anchor-icon" translate="no">
+    </button></h2><p>Las particiones son subconjuntos de una colección, que comparten el mismo conjunto de campos con su colección padre, conteniendo cada una un subconjunto de entidades.</p>
+<p>Al asignar entidades a diferentes particiones, puede crear grupos de entidades. Puede realizar búsquedas y consultas en particiones específicas para que Milvus ignore entidades en otras particiones, y mejorar la eficiencia de la búsqueda.</p>
+<p>Para más detalles, consulte <a href="/docs/es/manage-partitions.md">Gestionar Particiones</a>.</p>
+<h2 id="Shard​" class="common-anchor-header">Tablero<button data-href="#Shard​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -204,9 +202,9 @@ title: Collection Explained​
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Shards are horizontal slices of a collection. Each shard corresponds to a data input channel. Every collection has a shard by default. You can set the appropriate number of shards when creating a collection based on the expected throughput and the volume of the data to insert into the collection.​</p>
-<p>For details on how to set the shard number, refer to <a href="/docs/create-collection.md">​Create Collection</a>.​</p>
-<h2 id="Alias​" class="common-anchor-header">Alias​<button data-href="#Alias​" class="anchor-icon" translate="no">
+    </button></h2><p>Los fragmentos son partes horizontales de una colección. Cada fragmento corresponde a un canal de entrada de datos. Por defecto, cada colección tiene un fragmento. Puede establecer el número apropiado de fragmentos al crear una colección basándose en el rendimiento esperado y el volumen de los datos que se insertarán en la colección.</p>
+<p>Para obtener más información sobre cómo establecer el número de fragmentos, consulte <a href="/docs/es/create-collection.md">Crear colección</a>.</p>
+<h2 id="Alias​" class="common-anchor-header">Alias<button data-href="#Alias​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -221,9 +219,9 @@ title: Collection Explained​
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>You can create aliases for your collections. A collection can have several aliases, but collections cannot share an alias. Upon receiving a request against a collection, Milvus locates the collection based on the provided name. If the collection by the provided name does not exist, Milvus continues locating the provided name as an alias. You can use collection aliases to adapt your code to different scenarios.​</p>
-<p>For more details, refer to <a href="/docs/manage-aliases.md">​Manage Aliases</a>.​</p>
-<h2 id="Function​" class="common-anchor-header">Function​<button data-href="#Function​" class="anchor-icon" translate="no">
+    </button></h2><p>Puede crear alias para sus colecciones. Una colección puede tener varios alias, pero las colecciones no pueden compartir un alias. Al recibir una solicitud para una colección, Milvus localiza la colección basándose en el nombre proporcionado. Si la colección con el nombre proporcionado no existe, Milvus continúa localizando el nombre proporcionado como alias. Puede utilizar alias de colecciones para adaptar su código a diferentes escenarios.</p>
+<p>Para más detalles, consulte <a href="/docs/es/manage-aliases.md">Gestionar alias</a>.</p>
+<h2 id="Function​" class="common-anchor-header">Función<button data-href="#Function​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -238,8 +236,8 @@ title: Collection Explained​
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>You can set functions for Milvus to derive fields upon collection creation. For example, the full-text search function uses the user-defined function to derive a sparse vector field from a specific varchar field. For more information on full-text search, refer to <a href="/docs/full-text-search.md">​Full-Text Search</a>.​</p>
-<h2 id="Consistency-Level​" class="common-anchor-header">Consistency Level​<button data-href="#Consistency-Level​" class="anchor-icon" translate="no">
+    </button></h2><p>Puede establecer funciones para que Milvus derive campos al crear una colección. Por ejemplo, la función de búsqueda de texto completo utiliza la función definida por el usuario para derivar un campo vectorial disperso de un campo varchar específico. Para obtener más información sobre la búsqueda de texto completo, consulte <a href="/docs/es/full-text-search.md">Búsqueda de texto completo</a>.</p>
+<h2 id="Consistency-Level​" class="common-anchor-header">Nivel de consistencia<button data-href="#Consistency-Level​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -254,9 +252,9 @@ title: Collection Explained​
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Distributed database systems usually use the consistency level to define the data sameness across data nodes and replicas. You can set separate consistency levels when you create a collection or conduct similarity searches within the collection. The applicable consistency levels are <strong>Strong</strong>, <strong>Bounded Staleness</strong>, <strong>Session</strong>, and <strong>Eventually</strong>.​</p>
-<p>For details on these consistency levels, refer to <a href="/docs/consistency.md">​Consistency Level</a>.​</p>
-<h2 id="Limits​" class="common-anchor-header">Limits​<button data-href="#Limits​" class="anchor-icon" translate="no">
+    </button></h2><p>Los sistemas de bases de datos distribuidas suelen utilizar el nivel de consistencia para definir la homogeneidad de los datos entre nodos de datos y réplicas. Puede establecer distintos niveles de coherencia al crear una colección o realizar búsquedas de similitud dentro de la colección. Los niveles de consistencia aplicables son <strong>Strong</strong>, <strong>Bounded Staleness</strong>, <strong>Session</strong> y <strong>Eventually</strong>.</p>
+<p>Para obtener más información sobre estos niveles de coherencia, consulte <a href="/docs/es/consistency.md">Nivel de coherencia</a>.</p>
+<h2 id="Limits​" class="common-anchor-header">Límites<button data-href="#Limits​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -271,4 +269,4 @@ title: Collection Explained​
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>For limits and restrictions on collections, refer to <a href="/docs/limitations.md">​Limits &amp; Restrictions</a>.​</p>
+    </button></h2><p>Para conocer los límites y restricciones de las colecciones, consulte <a href="/docs/es/limitations.md">Límites y restricciones</a>.</p>

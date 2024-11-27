@@ -1,12 +1,13 @@
 ---
 id: integrate_with_bentoml.md
 summary: >-
-  This guide demonstrates how to use an open-source embedding model and
-  large-language model on BentoCloud with Milvus vector database to build a
-  Retrieval Augmented Generation (RAG) application.
-title: Retrieval-Augmented Generation (RAG) with Milvus and BentoML
+  Esta guía demuestra cómo utilizar un modelo de incrustación de código abierto
+  y un modelo de gran lenguaje en BentoCloud con la base de datos vectorial
+  Milvus para construir una aplicación de Generación Aumentada de Recuperación
+  (RAG).
+title: Generación mejorada por recuperación (RAG) con Milvus y BentoML
 ---
-<h1 id="Retrieval-Augmented-Generation-RAG-with-Milvus-and-BentoML" class="common-anchor-header">Retrieval-Augmented Generation (RAG) with Milvus and BentoML<button data-href="#Retrieval-Augmented-Generation-RAG-with-Milvus-and-BentoML" class="anchor-icon" translate="no">
+<h1 id="Retrieval-Augmented-Generation-RAG-with-Milvus-and-BentoML" class="common-anchor-header">Generación mejorada por recuperación (RAG) con Milvus y BentoML<button data-href="#Retrieval-Augmented-Generation-RAG-with-Milvus-and-BentoML" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -23,7 +24,7 @@ title: Retrieval-Augmented Generation (RAG) with Milvus and BentoML
       </svg>
     </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/rag_with_milvus_and_bentoml.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
 <a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/rag_with_milvus_and_bentoml.ipynb" target="_blank"><img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/></a></p>
-<h2 id="Introduction" class="common-anchor-header">Introduction<button data-href="#Introduction" class="anchor-icon" translate="no">
+<h2 id="Introduction" class="common-anchor-header">Introducción<button data-href="#Introduction" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -38,9 +39,8 @@ title: Retrieval-Augmented Generation (RAG) with Milvus and BentoML
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>This guide demonstrates how to use an open-source embedding model and large-language model on BentoCloud with Milvus vector database to build a RAG (Retrieval Augmented Generation) application.
-BentoCloud is an AI Inference Platform for fast-moving AI teams, offering fully-managed infrastructure tailored for model inference. It works in conjunction with BentoML, an open-source model serving framework, to facilitate the easy creation and deployment of high-performance model services. In this demo, we use Milvus Lite as vector database, which is the lightweight version of Milvus that can be embedded into your Python application.</p>
-<h2 id="Before-you-begin" class="common-anchor-header">Before you begin<button data-href="#Before-you-begin" class="anchor-icon" translate="no">
+    </button></h2><p>Esta guía demuestra cómo utilizar un modelo de incrustación de código abierto y un modelo de lenguaje grande en BentoCloud con la base de datos vectorial Milvus para construir una aplicación RAG (Retrieval Augmented Generation). BentoCloud es una plataforma de inferencia de IA para equipos de IA de rápido movimiento, que ofrece una infraestructura totalmente gestionada y adaptada para la inferencia de modelos. Funciona conjuntamente con BentoML, un marco de trabajo de código abierto para el servicio de modelos, para facilitar la creación y el despliegue de servicios de modelos de alto rendimiento. En esta demostración, utilizamos Milvus Lite como base de datos vectorial, que es la versión ligera de Milvus que puede incrustarse en su aplicación Python.</p>
+<h2 id="Before-you-begin" class="common-anchor-header">Antes de empezar<button data-href="#Before-you-begin" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -55,15 +55,14 @@ BentoCloud is an AI Inference Platform for fast-moving AI teams, offering fully-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus Lite is available on PyPI. You can install it via pip for Python 3.8+:</p>
+    </button></h2><p>Milvus Lite está disponible en PyPI. Puede instalarlo a través de pip para Python 3.8+:</p>
 <pre><code translate="no" class="language-python">$ pip install -U pymilvus bentoml
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>If you are using Google Colab, to enable dependencies just installed, you may need to <strong>restart the runtime</strong> (Click on the “Runtime” menu at the top of the screen, and select “Restart session” from the dropdown menu).</p>
+<p>Si estás utilizando Google Colab, para habilitar las dependencias que acabas de instalar, puede que necesites <strong>reiniciar el runtime</strong> (Haz clic en el menú "Runtime" en la parte superior de la pantalla, y selecciona "Restart session" en el menú desplegable).</p>
 </div>
-<p>After sign in the BentoCloud, we can interact with deployed BentoCloud Services in Deployments, and the corresponding END_POINT and API are located in Playground -&gt; Python.
-You can download the city data <a href="https://github.com/ytang07/bento_octo_milvus_RAG/tree/main/data">here</a>.</p>
-<h2 id="Serving-Embeddings-with-BentoMLBentoCloud" class="common-anchor-header">Serving Embeddings with BentoML/BentoCloud<button data-href="#Serving-Embeddings-with-BentoMLBentoCloud" class="anchor-icon" translate="no">
+<p>Después de iniciar sesión en BentoCloud, podemos interactuar con los Servicios BentoCloud desplegados en Deployments, y el correspondiente END_POINT y API se encuentran en Playground -&gt; Python. Puede descargar los datos de la ciudad <a href="https://github.com/ytang07/bento_octo_milvus_RAG/tree/main/data">aquí</a>.</p>
+<h2 id="Serving-Embeddings-with-BentoMLBentoCloud" class="common-anchor-header">Sirviendo Embeddings con BentoML/BentoCloud<button data-href="#Serving-Embeddings-with-BentoMLBentoCloud" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -78,7 +77,7 @@ You can download the city data <a href="https://github.com/ytang07/bento_octo_mi
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>To use this endpoint, import <code translate="no">bentoml</code> and set up an HTTP client using the <code translate="no">SyncHTTPClient</code> by specifying the endpoint and optionally the token (if you turn on <code translate="no">Endpoint Authorization</code> on BentoCloud). Alternatively, you can use the same model served through BentoML using its <a href="https://github.com/bentoml/BentoSentenceTransformers">Sentence Transformers Embeddings</a> repository.</p>
+    </button></h2><p>Para utilizar este endpoint, importe <code translate="no">bentoml</code> y configure un cliente HTTP utilizando <code translate="no">SyncHTTPClient</code> especificando el endpoint y opcionalmente el token (si activa <code translate="no">Endpoint Authorization</code> en BentoCloud). Alternativamente, puede utilizar el mismo modelo servido a través de BentoML utilizando su repositorio <a href="https://github.com/bentoml/BentoSentenceTransformers">Sentence Transformers Embeddings</a>.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> <span class="hljs-type">bentoml</span>
 
 <span class="hljs-variable">BENTO_EMBEDDING_MODEL_END_POINT</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;BENTO_EMBEDDING_MODEL_END_POINT&quot;</span>
@@ -88,8 +87,8 @@ embedding_client = bentoml.SyncHTTPClient(
     BENTO_EMBEDDING_MODEL_END_POINT, token=BENTO_API_TOKEN
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>Once we connect to the embedding_client, we need to process our data. We provided several functions to perform data splitting and embedding.</p>
-<p>Read files and preprocess the text into a list of strings.</p>
+<p>Una vez que nos conectamos al embedding_client, necesitamos procesar nuestros datos. Proporcionamos varias funciones para realizar la división e incrustación de datos.</p>
+<p>Leer archivos y preprocesar el texto en una lista de cadenas.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># naively chunk on newlines</span>
 <span class="hljs-keyword">def</span> <span class="hljs-title function_">chunk_text</span>(<span class="hljs-params">filename: <span class="hljs-built_in">str</span></span>) -&gt; <span class="hljs-built_in">list</span>:
     <span class="hljs-keyword">with</span> <span class="hljs-built_in">open</span>(filename, <span class="hljs-string">&quot;r&quot;</span>) <span class="hljs-keyword">as</span> f:
@@ -97,7 +96,7 @@ embedding_client = bentoml.SyncHTTPClient(
     sentences = text.split(<span class="hljs-string">&quot;\n&quot;</span>)
     <span class="hljs-keyword">return</span> sentences
 <button class="copy-code-btn"></button></code></pre>
-<p>First we need to download the city data.</p>
+<p>Primero tenemos que descargar los datos de la ciudad.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> os
 <span class="hljs-keyword">import</span> requests
 <span class="hljs-keyword">import</span> urllib.request
@@ -121,7 +120,7 @@ data = response.json()
         file_path = os.path.join(save_dir, item[<span class="hljs-string">&quot;name&quot;</span>])
         urllib.request.urlretrieve(file_url, file_path)
 <button class="copy-code-btn"></button></code></pre>
-<p>Next, we process each of the files we have.</p>
+<p>A continuación, procesamos cada uno de los archivos que tenemos.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># please upload your data directory under this file&#x27;s folder</span>
 cities = os.listdir(<span class="hljs-string">&quot;city_data&quot;</span>)
 <span class="hljs-comment"># store chunked text for each of the cities in a list of dicts</span>
@@ -135,7 +134,7 @@ city_chunks = []
     mapped = {<span class="hljs-string">&quot;city_name&quot;</span>: city.split(<span class="hljs-string">&quot;.&quot;</span>)[<span class="hljs-number">0</span>], <span class="hljs-string">&quot;chunks&quot;</span>: cleaned}
     city_chunks.append(mapped)
 <button class="copy-code-btn"></button></code></pre>
-<p>Splits a list of strings into a list of embeddings, each grouped 25 text strings.</p>
+<p>Divide una lista de cadenas en una lista de incrustaciones, cada una agrupa 25 cadenas de texto.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">get_embeddings</span>(<span class="hljs-params">texts: <span class="hljs-built_in">list</span></span>) -&gt; <span class="hljs-built_in">list</span>:
     <span class="hljs-keyword">if</span> <span class="hljs-built_in">len</span>(texts) &gt; <span class="hljs-number">25</span>:
         splits = [texts[x : x + <span class="hljs-number">25</span>] <span class="hljs-keyword">for</span> x <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">0</span>, <span class="hljs-built_in">len</span>(texts), <span class="hljs-number">25</span>)]
@@ -148,7 +147,7 @@ city_chunks = []
         sentences=texts,
     )
 <button class="copy-code-btn"></button></code></pre>
-<p>Now, we need to match up embeddings and text chunks. Since the list embeddings and the list of sentences should match by index, we can <code translate="no">enumerate</code> through either list to match them up.</p>
+<p>Ahora, tenemos que emparejar los embeddings y los trozos de texto. Como la lista de incrustaciones y la lista de frases deben coincidir por índice, podemos <code translate="no">enumerate</code> a través de cualquiera de las listas para emparejarlas.</p>
 <pre><code translate="no" class="language-python">entries = []
 <span class="hljs-keyword">for</span> city_dict <span class="hljs-keyword">in</span> city_chunks:
     <span class="hljs-comment"># No need for the embeddings list if get_embeddings already returns a list of lists</span>
@@ -165,7 +164,7 @@ city_chunks = []
         entries.append(entry)
     <span class="hljs-built_in">print</span>(entries)
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Inserting-Data-into-a-Vector-Database-for-Retrieval" class="common-anchor-header">Inserting Data into a Vector Database for Retrieval<button data-href="#Inserting-Data-into-a-Vector-Database-for-Retrieval" class="anchor-icon" translate="no">
+<h2 id="Inserting-Data-into-a-Vector-Database-for-Retrieval" class="common-anchor-header">Inserción de datos en una base de datos vectorial para su recuperación<button data-href="#Inserting-Data-into-a-Vector-Database-for-Retrieval" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -180,8 +179,7 @@ city_chunks = []
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>With our embeddings and data prepared, we can insert the vectors together with metadata into Milvus Lite for vector search later. The first step in this section is to start a client by connecting to Milvus Lite.
-We simply import the <code translate="no">MilvusClient</code> module and initialize a Milvus Lite client that connects to your Milvus Lite vector database. The dimension size comes from the size of the embedding model, e.g. the Sentence Transformer model <code translate="no">all-MiniLM-L6-v2</code> produces vectors of 384 dimension.</p>
+    </button></h2><p>Con nuestras incrustaciones y datos preparados, podemos insertar los vectores junto con los metadatos en Milvus Lite para la búsqueda de vectores más adelante. El primer paso en esta sección es iniciar un cliente conectándose a Milvus Lite. Simplemente importamos el módulo <code translate="no">MilvusClient</code> e inicializamos un cliente Milvus Lite que se conecta a su base de datos de vectores Milvus Lite. El tamaño de la dimensión proviene del tamaño del modelo de incrustación, por ejemplo, el modelo del transformador de frases <code translate="no">all-MiniLM-L6-v2</code> produce vectores de 384 dimensiones.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 COLLECTION_NAME = <span class="hljs-string">&quot;Bento_Milvus_RAG&quot;</span>  <span class="hljs-comment"># random name for your collection</span>
@@ -191,19 +189,19 @@ DIMENSION = <span class="hljs-number">384</span>
 milvus_client = MilvusClient(<span class="hljs-string">&quot;milvus_demo.db&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>As for the argument of <code translate="no">MilvusClient</code>:</p>
+<p>En cuanto al argumento de <code translate="no">MilvusClient</code>:</p>
 <ul>
-<li>Setting the <code translate="no">uri</code> as a local file, e.g.<code translate="no">./milvus.db</code>, is the most convenient method, as it automatically utilizes <a href="https://milvus.io/docs/milvus_lite.md">Milvus Lite</a> to store all data in this file.</li>
-<li>If you have large scale of data, you can set up a more performant Milvus server on <a href="https://milvus.io/docs/quickstart.md">docker or kubernetes</a>. In this setup, please use the server uri, e.g.<code translate="no">http://localhost:19530</code>, as your <code translate="no">uri</code>.</li>
-<li>If you want to use <a href="https://zilliz.com/cloud">Zilliz Cloud</a>, the fully managed cloud service for Milvus, adjust the <code translate="no">uri</code> and <code translate="no">token</code>, which correspond to the <a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">Public Endpoint and Api key</a> in Zilliz Cloud.</li>
+<li>Establecer el <code translate="no">uri</code> como un archivo local, por ejemplo<code translate="no">./milvus.db</code>, es el método más conveniente, ya que utiliza automáticamente <a href="https://milvus.io/docs/milvus_lite.md">Milvus Lite</a> para almacenar todos los datos en este archivo.</li>
+<li>Si tiene una gran escala de datos, puede configurar un servidor Milvus más eficiente en <a href="https://milvus.io/docs/quickstart.md">docker o kubernetes</a>. En esta configuración, por favor utilice la uri del servidor, por ejemplo<code translate="no">http://localhost:19530</code>, como su <code translate="no">uri</code>.</li>
+<li>Si desea utilizar <a href="https://zilliz.com/cloud">Zilliz Cloud</a>, el servicio en la nube totalmente gestionado para Milvus, ajuste el <code translate="no">uri</code> y <code translate="no">token</code>, que corresponden al <a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">punto final público y la clave Api</a> en Zilliz Cloud.</li>
 </ul>
 </div>
-<p>Or with old connections.connect API (not recommended):</p>
+<p>O con la antigua API connections.connect (no recomendado):</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> connections
 
 connections.<span class="hljs-title function_">connect</span>(uri=<span class="hljs-string">&quot;milvus_demo.db&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Creating-Your-Milvus-Lite-Collection" class="common-anchor-header">Creating Your Milvus Lite Collection<button data-href="#Creating-Your-Milvus-Lite-Collection" class="anchor-icon" translate="no">
+<h2 id="Creating-Your-Milvus-Lite-Collection" class="common-anchor-header">Creación de su colección Milvus Lite<button data-href="#Creating-Your-Milvus-Lite-Collection" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -218,7 +216,7 @@ connections.<span class="hljs-title function_">connect</span>(uri=<span class="h
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Creating a collection using Milvus Lite involves two steps: first, defining the schema, and second, defining the index. For this section, we need one module: DataType tells us what type of data will be in a field. We also need to use two functions to create schema and add fields. create_schema():  creates a collection schema, add_field(): adds a field to the schema of a collection.</p>
+    </button></h2><p>Crear una colección usando Milvus Lite implica dos pasos: primero, definir el esquema, y segundo, definir el índice. Para esta sección, necesitamos un módulo: DataType nos dice qué tipo de datos habrá en un campo. También necesitamos utilizar dos funciones para crear el esquema y añadir campos. create_schema(): crea el esquema de una colección, add_field(): añade un campo al esquema de una colección.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType, Collection
 
 <span class="hljs-comment"># Create schema</span>
@@ -231,8 +229,8 @@ schema = MilvusClient.create_schema(
 schema.add_field(field_name=<span class="hljs-string">&quot;id&quot;</span>, datatype=DataType.INT64, is_primary=<span class="hljs-literal">True</span>)
 schema.add_field(field_name=<span class="hljs-string">&quot;embedding&quot;</span>, datatype=DataType.FLOAT_VECTOR, dim=DIMENSION)
 <button class="copy-code-btn"></button></code></pre>
-<p>Now that we have created our schema and successfully defined data field, we need to define the index. In terms of search, an “index” defines how we are going to map our data out for retrieval. We use the default choice <a href="https://docs.zilliz.com/docs/autoindex-explained">AUTOINDEX</a> to index our data for this project.</p>
-<p>Next, we create the collection with the previously given name, schema and index. Finally, we insert the previously processed data.</p>
+<p>Ahora que hemos creado nuestro esquema y definido correctamente el campo de datos, necesitamos definir el índice. En términos de búsqueda, un "índice" define cómo vamos a mapear nuestros datos para su recuperación. En este proyecto utilizaremos la opción <a href="https://docs.zilliz.com/docs/autoindex-explained">AUTOINDEX</a> por defecto para indexar nuestros datos.</p>
+<p>A continuación, creamos la colección con el nombre, esquema e índice dados anteriormente. Finalmente, insertamos los datos previamente procesados.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># prepare index parameters</span>
 index_params = milvus_client.prepare_index_params()
 
@@ -253,7 +251,7 @@ milvus_client.create_collection(
 <span class="hljs-comment"># Outside the loop, now you upsert all the entries at once</span>
 milvus_client.insert(collection_name=COLLECTION_NAME, data=entries)
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Set-up-Your-LLM-for-RAG" class="common-anchor-header">Set up Your LLM for RAG<button data-href="#Set-up-Your-LLM-for-RAG" class="anchor-icon" translate="no">
+<h2 id="Set-up-Your-LLM-for-RAG" class="common-anchor-header">Configura tu LLM para RAG<button data-href="#Set-up-Your-LLM-for-RAG" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -268,12 +266,12 @@ milvus_client.insert(collection_name=COLLECTION_NAME, data=entries)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>To build a RAG app, we need to deploy an LLM on BentoCloud. Let’s use the latest Llama3 LLM. Once it is up and running, simply copy the endpoint and token of this model service and set up a client for it.</p>
+    </button></h2><p>Para construir una aplicación RAG, necesitamos desplegar un LLM en BentoCloud. Vamos a utilizar el último LLM Llama3. Una vez que esté funcionando, simplemente copie el endpoint y el token de este servicio modelo y configure un cliente para él.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-variable constant_">BENTO_LLM_END_POINT</span> = <span class="hljs-string">&quot;BENTO_LLM_END_POINT&quot;</span>
 
 llm_client = bentoml.<span class="hljs-title class_">SyncHTTPClient</span>(<span class="hljs-variable constant_">BENTO_LLM_END_POINT</span>, token=<span class="hljs-variable constant_">BENTO_API_TOKEN</span>)
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="LLM-Instructions" class="common-anchor-header">LLM Instructions<button data-href="#LLM-Instructions" class="anchor-icon" translate="no">
+<h2 id="LLM-Instructions" class="common-anchor-header">Instrucciones LLM<button data-href="#LLM-Instructions" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -288,7 +286,7 @@ llm_client = bentoml.<span class="hljs-title class_">SyncHTTPClient</span>(<span
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Now, we set up the LLM instructions with the prompt, context, and the question. Here is the function that behaves as an LLM and it then returns the output from the client in a string format.</p>
+    </button></h2><p>Ahora, configuramos las instrucciones LLM con el prompt, el contexto y la pregunta. Aquí está la función que se comporta como un LLM y luego devuelve la salida del cliente en un formato de cadena.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">dorag</span>(<span class="hljs-params">question: <span class="hljs-built_in">str</span>, context: <span class="hljs-built_in">str</span></span>):
 
     prompt = (
@@ -307,7 +305,7 @@ llm_client = bentoml.<span class="hljs-title class_">SyncHTTPClient</span>(<span
 
     <span class="hljs-keyword">return</span> res
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="A-RAG-Example" class="common-anchor-header">A RAG Example<button data-href="#A-RAG-Example" class="anchor-icon" translate="no">
+<h2 id="A-RAG-Example" class="common-anchor-header">Un ejemplo RAG<button data-href="#A-RAG-Example" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -322,7 +320,7 @@ llm_client = bentoml.<span class="hljs-title class_">SyncHTTPClient</span>(<span
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Now we’re ready to ask a question. This function simply takes a question and then does RAG to generate the relevant context from the background information. Then, we pass the context and the question to dorag() and get the result.</p>
+    </button></h2><p>Ahora estamos listos para hacer una pregunta. Esta función simplemente toma una pregunta y luego hace RAG para generar el contexto relevante a partir de la información de fondo. A continuación, pasamos el contexto y la pregunta a dorag() y obtenemos el resultado.</p>
 <pre><code translate="no" class="language-python">question = <span class="hljs-string">&quot;What state is Cambridge in?&quot;</span>
 
 
@@ -348,7 +346,7 @@ llm_client = bentoml.<span class="hljs-title class_">SyncHTTPClient</span>(<span
 context = ask_a_question(question=question)
 <span class="hljs-built_in">print</span>(context)
 <button class="copy-code-btn"></button></code></pre>
-<p>Implement RAG</p>
+<p>Implementación de RAG</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">print</span>(dorag(question=question, context=context))
 <button class="copy-code-btn"></button></code></pre>
-<p>For the example question asking which state Cambridge is in, we can print the entire response from BentoML. However, if we take the time to parse through it, it just looks nicer, and it should tell us that Cambridge is located in Massachusetts.</p>
+<p>Para la pregunta de ejemplo que pregunta en qué estado se encuentra Cambridge, podemos imprimir toda la respuesta desde BentoML. Sin embargo, si nos tomamos la molestia de analizarla, tendrá un aspecto más agradable y nos dirá que Cambridge se encuentra en Massachusetts.</p>

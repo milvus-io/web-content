@@ -1,13 +1,14 @@
 ---
 id: clustering-compaction.md
-title: Clustering Compaction
+title: Compactación en clústeres
 related_key: 'clustering, compaction'
 summary: >-
-  Clustering compaction is designed to improve search performance and reduce
-  costs in large collections. This guide will help you understand clustering
-  compaction and how this feature can improve search performance.
+  La compactación en clústeres está diseñada para mejorar el rendimiento de la
+  búsqueda y reducir los costes en grandes colecciones. Esta guía le ayudará a
+  comprender la compactación por clústeres y cómo esta función puede mejorar el
+  rendimiento de la búsqueda.
 ---
-<h1 id="Clustering-Compaction" class="common-anchor-header">Clustering Compaction<button data-href="#Clustering-Compaction" class="anchor-icon" translate="no">
+<h1 id="Clustering-Compaction" class="common-anchor-header">Compactación en clústeres<button data-href="#Clustering-Compaction" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -22,8 +23,8 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Clustering compaction is designed to improve search performance and reduce costs in large collections. This guide will help you understand clustering compaction and how this feature can improve search performance.</p>
-<h2 id="Overview" class="common-anchor-header">Overview<button data-href="#Overview" class="anchor-icon" translate="no">
+    </button></h1><p>La compactación en clústeres está diseñada para mejorar el rendimiento de la búsqueda y reducir los costes en grandes colecciones. Esta guía le ayudará a comprender la compactación en clústeres y cómo esta función puede mejorar el rendimiento de la búsqueda.</p>
+<h2 id="Overview" class="common-anchor-header">Visión general<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -38,23 +39,19 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus stores incoming entities in segments within a collection and seals a segment when it is full. If this happens, a new segment is created to accommodate additional entities. As a result, entities are arbitrarily distributed across segments. This distribution requires Milvus to search multiple segments to find the nearest neighbors to a given query vector.</p>
+    </button></h2><p>Milvus almacena las entidades entrantes en segmentos dentro de una colección y sella un segmento cuando está lleno. Si esto ocurre, se crea un nuevo segmento para acomodar entidades adicionales. Como resultado, las entidades se distribuyen arbitrariamente entre los segmentos. Esta distribución requiere que Milvus busque en múltiples segmentos para encontrar los vecinos más cercanos a un vector de consulta dado.</p>
 <p>
-  <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.5.x/assets/clustering-compaction.png" alt="Without clustering Compaction" class="doc-image" id="without-clustering-compaction" />
-    <span>Without clustering Compaction</span>
-  </span>
-</p>
-<p>If Milvus can distribute entities among segments based on the values in a specific field, the search scope can be restricted within one segment, thus improving search performance.</p>
-<p><strong>Clustering Compaction</strong> is a feature in Milvus that redistributes entities among segments in a collection based on the values in a scalar field. To enable this feature, you first need to select a scalar field as the <strong>clustering key</strong>. This allows Milvus to redistribute entities into a segment when their clustering key values fall within a specific range. When you trigger a clustering compaction, Milvus generates/updates a global index called <strong>PartitionStats</strong>, which records the mapping relationship between segments and clustering key values.</p>
+  
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/clustering-compaction.png" alt="Without clustering Compaction" class="doc-image" id="without-clustering-compaction" />
+   </span> <span class="img-wrapper"> <span>Compactación sin agrupación</span> </span></p>
+<p>Si Milvus puede distribuir entidades entre segmentos basándose en los valores de un campo específico, el alcance de la búsqueda puede restringirse dentro de un segmento, mejorando así el rendimiento de la búsqueda.</p>
+<p>La<strong>compactación por agrupamiento</strong> es una función de Milvus que redistribuye las entidades entre los segmentos de una colección basándose en los valores de un campo escalar. Para activar esta función, primero debe seleccionar un campo escalar como <strong>clave de agrupación</strong>. Esto permite a Milvus redistribuir entidades en un segmento cuando sus valores de clave de agrupación caen dentro de un rango específico. Cuando usted activa una compactación de clustering, Milvus genera/actualiza un índice global llamado <strong>PartitionStats</strong>, que registra la relación de mapeo entre segmentos y valores de clave de clustering.</p>
 <p>
-  <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.5.x/assets/clustering-compaction-2.png" alt="With Clustering Compaction" class="doc-image" id="with-clustering-compaction" />
-    <span>With Clustering Compaction</span>
-  </span>
-</p>
-<p>Using <strong>PartitionStats</strong> as a reference, Milvus can prune irrelevant data upon receiving a search/query request that carries a clustering key value and restricting the search scope within the segments mapping to the value, thus improving search performance. For details on performance improvement, refer to Benchmark tests.</p>
-<h2 id="Use-Clustering-Compaction" class="common-anchor-header">Use Clustering Compaction<button data-href="#Use-Clustering-Compaction" class="anchor-icon" translate="no">
+  
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/clustering-compaction-2.png" alt="With Clustering Compaction" class="doc-image" id="with-clustering-compaction" />
+   </span> <span class="img-wrapper"> <span>Con la compactación de clustering</span> </span></p>
+<p>Utilizando <strong>PartitionStats</strong> como referencia, Milvus puede eliminar datos irrelevantes al recibir una solicitud de búsqueda/consulta que contenga un valor de clave de agrupación y restringir el ámbito de búsqueda dentro de los segmentos que corresponden al valor, mejorando así el rendimiento de la búsqueda. Para obtener más información sobre la mejora del rendimiento, consulte Pruebas comparativas.</p>
+<h2 id="Use-Clustering-Compaction" class="common-anchor-header">Utilizar la compactación de clústeres<button data-href="#Use-Clustering-Compaction" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -69,8 +66,8 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>The Clustering Compaction feature in Milvus is highly configurable. You can choose to trigger it manually or set it to be triggered automatically at intervals by Milvus. To enable clustering compaction, do as follows:</p>
-<h3 id="Global-Configuration" class="common-anchor-header">Global Configuration</h3><p>You need to modify your Milvus configuration file as shown below.</p>
+    </button></h2><p>La función de compactación de agrupaciones de Milvus es altamente configurable. Puede elegir activarla manualmente o configurarla para que Milvus la active automáticamente a intervalos. Para activar la compactación en cluster, haga lo siguiente:</p>
+<h3 id="Global-Configuration" class="common-anchor-header">Configuración global</h3><p>Debe modificar su archivo de configuración de Milvus como se muestra a continuación.</p>
 <pre><code translate="no" class="language-yaml">dataCoord:
   compaction:
     clustering:
@@ -96,53 +93,53 @@ common:
 <li><p><code translate="no">dataCoord.compaction.clustering</code></p>
 <table>
 <thead>
-<tr><th>Configuration Item</th><th>Description</th><th>Default Value</th></tr>
+<tr><th>Elemento de configuración</th><th>Descripción</th><th>Valor por defecto</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">enable</code></td><td>Specifies whether to enable clustering compaction.<br>Setting this to <code translate="no">true</code> if you need to enable this feature for every collection having a clustering key.</td><td><code translate="no">false</code></td></tr>
-<tr><td><code translate="no">autoEnable</code></td><td>Specifies whether to enable automatically triggered compaction.<br>Setting this to <code translate="no">true</code> indicates that Milvus compacts the collections having a clustering key at the specified intervals.</td><td><code translate="no">false</code></td></tr>
-<tr><td><code translate="no">triggerInterval</code></td><td>Specifies the interval in milliseconds at which Milvus starts clustering compaction.<br>This parameter is valid only when <code translate="no">autoEnable</code> is set to <code translate="no">true</code>.</td><td>-</td></tr>
-<tr><td><code translate="no">minInterval</code></td><td>Specifies the minimum interval in seconds.<br>This parameter is valid only when <code translate="no">autoEnable</code> is set to <code translate="no">true</code>.<br>Setting this to an integer greater than triggerInterval helps avoid repeated compactions within a short period.</td><td>-</td></tr>
-<tr><td><code translate="no">maxInterval</code></td><td>Specifies the maximum interval in seconds.<br>This parameter is valid only when <code translate="no">autoEnable</code> is set to <code translate="no">true</code>.<br>Once Milvus detects that a collection has not been clustering-compacted for a duration longer than this value, it forces a clustering compaction.</td><td>-</td></tr>
-<tr><td><code translate="no">newDataSizeThreshold</code></td><td>Specifies the upper threshold to trigger a clustering compaction.<br>This parameter is valid only when <code translate="no">autoEnable</code> is set to <code translate="no">true</code>.<br>Once Milvus detects that the data volume in a collection exceeds this value, it initiates a clustering compaction process.</td><td>-</td></tr>
-<tr><td><code translate="no">timeout</code></td><td>Specifies the timeout duration for a clustering compaction.<br>A clustering compaction fails if its execution time exceeds this value.</td><td>-</td></tr>
+<tr><td><code translate="no">enable</code></td><td>Especifica si se habilita la compactación en clúster.<br>Configure esta opción en <code translate="no">true</code> si necesita habilitar esta función para cada colección que tenga una clave de agrupación.</td><td><code translate="no">false</code></td></tr>
+<tr><td><code translate="no">autoEnable</code></td><td>Especifica si se activa la compactación automática.<br>Si se establece en <code translate="no">true</code>, Milvus compactará las colecciones que tengan una clave de agrupación en los intervalos especificados.</td><td><code translate="no">false</code></td></tr>
+<tr><td><code translate="no">triggerInterval</code></td><td>Especifica el intervalo en milisegundos en el que Milvus inicia la compactación de agrupaciones.<br>Este parámetro sólo es válido cuando <code translate="no">autoEnable</code> se establece en <code translate="no">true</code>.</td><td>-</td></tr>
+<tr><td><code translate="no">minInterval</code></td><td>Especifica el intervalo mínimo en segundos.<br>Este parámetro sólo es válido cuando <code translate="no">autoEnable</code> está configurado como <code translate="no">true</code>.<br>Establecerlo en un número entero mayor que triggerInterval ayuda a evitar compactaciones repetidas en un período corto.</td><td>-</td></tr>
+<tr><td><code translate="no">maxInterval</code></td><td>Especifica el intervalo máximo en segundos.<br>Este parámetro sólo es válido cuando <code translate="no">autoEnable</code> está configurado como <code translate="no">true</code>.<br>Una vez que Milvus detecta que una colección no ha sido compactada en clúster durante un periodo superior a este valor, fuerza una compactación en clúster.</td><td>-</td></tr>
+<tr><td><code translate="no">newDataSizeThreshold</code></td><td>Especifica el umbral superior para activar una compactación en clúster.<br>Este parámetro sólo es válido cuando <code translate="no">autoEnable</code> está configurado como <code translate="no">true</code>.<br>Una vez que Milvus detecta que el volumen de datos de una colección supera este valor, inicia un proceso de compactación en clúster.</td><td>-</td></tr>
+<tr><td><code translate="no">timeout</code></td><td>Especifica la duración del tiempo de espera para una compactación en clúster.<br>Una compactación en clúster falla si su tiempo de ejecución supera este valor.</td><td>-</td></tr>
 </tbody>
 </table>
 </li>
 <li><p><code translate="no">queryNode</code></p>
 <table>
 <thead>
-<tr><th>Configuration Item</th><th>Description</th><th>Default Value</th></tr>
+<tr><th>Configuración Elemento</th><th>Descripción</th><th>Valor predeterminado</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">enableSegmentPrune</code></td><td>Specifies whether Milvus prunes data by referring to PartitionStats upon receiving search/query requests.<br>Setting this to <code translate="no">true</code> enables Milvus to prune irrelevant data from segments during a search/query request.</td><td><code translate="no">false</code></td></tr>
+<tr><td><code translate="no">enableSegmentPrune</code></td><td>Especifica si Milvus poda los datos consultando PartitionStats al recibir peticiones de búsqueda/consulta.<br>Si se establece en <code translate="no">true</code>, Milvus puede eliminar los datos irrelevantes de los segmentos durante una solicitud de búsqueda/consulta.</td><td><code translate="no">false</code></td></tr>
 </tbody>
 </table>
 </li>
 <li><p><code translate="no">dataNode.clusteringCompaction</code></p>
 <table>
 <thead>
-<tr><th>Configuration Item</th><th>Description</th><th>Default Value</th></tr>
+<tr><th>Configuración Elemento</th><th>Descripción</th><th>Valor por defecto</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">memoryBufferRatio</code></td><td>Specifies the memory buffer ratio for clustering compaction tasks. <br>Milvus flushes data when the data size exceeds the allocated buffer size calculated using this ratio.</td><td>-</td></tr>
-<tr><td><code translate="no">workPoolSize</code></td><td>Specifies the worker pool size for a clustering compaction task.</td><td>-</td></tr>
+<tr><td><code translate="no">memoryBufferRatio</code></td><td>Especifica la proporción de memoria intermedia para las tareas de compactación en clúster. <br>Milvus vacía los datos cuando el tamaño de los datos excede el tamaño del búfer asignado calculado utilizando este ratio.</td><td>-</td></tr>
+<tr><td><code translate="no">workPoolSize</code></td><td>Especifica el tamaño del grupo de trabajadores para una tarea de compactación en clúster.</td><td>-</td></tr>
 </tbody>
 </table>
 </li>
 <li><p><code translate="no">common</code></p>
 <table>
 <thead>
-<tr><th>Configuration Item</th><th>Description</th><th>Default Value</th></tr>
+<tr><th>Configuración Elemento</th><th>Descripción</th><th>Valor predeterminado</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">usePartitionKeyAsClusteringKey</code></td><td>Specifies whether to use the partition key in collections as the clustering key.<br>Setting this to <code translate="no">true</code> indicates that the partition key is used as the clustering key.<br>You can always override this setting in a collection by explicitly setting a clustering key.</td><td><code translate="no">false</code></td></tr>
+<tr><td><code translate="no">usePartitionKeyAsClusteringKey</code></td><td>Especifica si se utiliza la clave de partición en las colecciones como clave de agrupación.<br>El valor <code translate="no">true</code> indica que la clave de partición se utiliza como clave de agrupación.<br>Siempre puede anular esta configuración en una colección configurando explícitamente una clave de agrupación.</td><td><code translate="no">false</code></td></tr>
 </tbody>
 </table>
 </li>
 </ul>
-<p>To apply the above changes to your Milvus cluster, please follow the steps in <a href="/docs/configure-helm.md">Configure Milvus with Helm</a> and <a href="/docs/configure_operator.md">Configure Milvus with Milvus Operators</a>.</p>
-<h3 id="Collection-Configuration" class="common-anchor-header">Collection Configuration</h3><p>For clustering compacting in a specific collection, you should select a scalar field from the collection as the clustering key.</p>
+<p>Para aplicar los cambios anteriores a su cluster Milvus, por favor siga los pasos en <a href="/docs/es/configure-helm.md">Configurar Milvus con Helm</a> y <a href="/docs/es/configure_operator.md">Configurar Milvus con Milvus Operators</a>.</p>
+<h3 id="Collection-Configuration" class="common-anchor-header">Configuración de la colección</h3><p>Para la compactación en cluster en una colección específica, debe seleccionar un campo escalar de la colección como clave de cluster.</p>
 <pre><code translate="no" class="language-python">default_fields = [
     FieldSchema(name=<span class="hljs-string">&quot;id&quot;</span>, dtype=DataType.INT64, is_primary=<span class="hljs-literal">True</span>),
     FieldSchema(name=<span class="hljs-string">&quot;key&quot;</span>, dtype=DataType.INT64, is_clustering_key=<span class="hljs-literal">True</span>),
@@ -158,9 +155,9 @@ default_schema = CollectionSchema(
 coll1 = Collection(name=<span class="hljs-string">&quot;clustering_test&quot;</span>, schema=default_schema)
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>You can use the scalar fields of the following data types as the clustering key: <code translate="no">Int8</code>, <code translate="no">Int16</code>, <code translate="no">Int32</code>, <code translate="no">Int64</code>, <code translate="no">Float</code>, <code translate="no">Double</code>, and <code translate="no">VarChar</code>.</p>
+<p>Puede utilizar los campos escalares de los siguientes tipos de datos como clave de agrupación: <code translate="no">Int8</code>, <code translate="no">Int16</code>, <code translate="no">Int32</code>, <code translate="no">Int64</code>, <code translate="no">Float</code>, <code translate="no">Double</code> y <code translate="no">VarChar</code>.</p>
 </div>
-<h2 id="Trigger-Clustering-Compaction" class="common-anchor-header">Trigger Clustering Compaction<button data-href="#Trigger-Clustering-Compaction" class="anchor-icon" translate="no">
+<h2 id="Trigger-Clustering-Compaction" class="common-anchor-header">Activar la compactación en clúster<button data-href="#Trigger-Clustering-Compaction" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -175,32 +172,32 @@ coll1 = Collection(name=<span class="hljs-string">&quot;clustering_test&quot;</s
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>If you have enabled automatic clustering compaction, Milvus automatically triggers the compaction at the specified interval. Alternatively, you can manually trigger the compaction as follows:</p>
+    </button></h2><p>Si ha activado la compactación automática de clustering, Milvus activa automáticamente la compactación en el intervalo especificado. Alternativamente, puede activar manualmente la compactación como se indica a continuación:</p>
 <pre><code translate="no" class="language-python">coll1.compact(is_clustering=<span class="hljs-literal">True</span>)
 coll1.get_compaction_state(is_clustering=<span class="hljs-literal">True</span>)
 coll1.wait_for_compaction_completed(is_clustering=<span class="hljs-literal">True</span>)
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Benchmark-Test" class="common-anchor-header">Benchmark Test</h3><p>Data volume and query patterns combined determine the performance improvement clustering compaction can bring. An internal benchmark test demonstrates that clustering compaction yields up to a 25-fold improvement in queries per second (QPS).</p>
-<p>The benchmark test is on a collection containing entities from a 20-million, 768-dimensional LAION dataset with the key field designated as the clustering key. After clustering compaction is triggered in the collection, concurrent searches are sent until the CPU usage reaches a high water level.</p>
+<h3 id="Benchmark-Test" class="common-anchor-header">Prueba comparativa</h3><p>El volumen de datos y los patrones de consulta combinados determinan la mejora del rendimiento que puede aportar la compactación en clúster. Una prueba comparativa interna demuestra que la compactación en clústeres mejora hasta 25 veces las consultas por segundo (QPS).</p>
+<p>La prueba de referencia se realiza en una colección que contiene entidades de un conjunto de datos LAION de 20 millones y 768 dimensiones, con el campo clave designado como clave de agrupación. Una vez activada la compactación por clustering en la colección, se envían búsquedas concurrentes hasta que el uso de la CPU alcanza un nivel alto de agua.</p>
 <table>
   <thead>
     <tr>
-      <th rowspan="2">Search Filter</th>
-      <th rowspan="2">Prune Ratio</th>
-      <th colspan="5">Latency (ms)</th>
+      <th rowspan="2">Filtro de búsqueda</th>
+      <th rowspan="2">Ratio de poda</th>
+      <th colspan="5">Latencia (ms)</th>
       <th rowspan="2">QPS (reqs/s)</th>
     </tr>
     <tr>
       <th>Avg</th>
-      <th>Min</th>
+      <th>Mín</th>
       <th>Max</th>
-      <th>Median</th>
+      <th>Mediana</th>
       <th>TP99</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>None</td>
+      <td>Ninguno</td>
       <td>0%</td>
       <td>1685</td>
       <td>672</td>
@@ -210,7 +207,7 @@ coll1.wait_for_compaction_completed(is_clustering=<span class="hljs-literal">Tru
       <td>17.75</td>
     </tr>
     <tr>
-      <td>key > 200 and key < 800</td>
+      <td>clave &gt; 200 y clave &lt; 800</td>
       <td>40.2%</td>
       <td>1045</td>
       <td>47</td>
@@ -220,7 +217,7 @@ coll1.wait_for_compaction_completed(is_clustering=<span class="hljs-literal">Tru
       <td>28.38</td>
     </tr>
     <tr>
-      <td>key > 200 and key < 600</td>
+      <td>clave &gt; 200 y clave &lt; 600</td>
       <td>59.8%</td>
       <td>829</td>
       <td>45</td>
@@ -230,7 +227,7 @@ coll1.wait_for_compaction_completed(is_clustering=<span class="hljs-literal">Tru
       <td>35.78</td>
     </tr>
     <tr>
-      <td>key > 200 and key < 400</td>
+      <td>clave &gt; 200 y clave &lt; 400</td>
       <td>79.5%</td>
       <td>550</td>
       <td>100</td>
@@ -240,7 +237,7 @@ coll1.wait_for_compaction_completed(is_clustering=<span class="hljs-literal">Tru
       <td>54.00</td>
     </tr>
     <tr>
-      <td>key == 1000</td>
+      <td>clave == 1000</td>
       <td>99%</td>
       <td>68</td>
       <td>24</td>
@@ -251,8 +248,8 @@ coll1.wait_for_compaction_completed(is_clustering=<span class="hljs-literal">Tru
     </tr>
   </tbody>
 </table>
-<p>As the search range narrows in the search filters, the prune ratio increases. This means that more entities are skipped during the search process. When comparing the statistics in the first and last rows, you can see that searches without clustering compaction require scanning the entire collection. On the other hand, searches with clustering compaction using a specific key can achieve up to a 25-fold improvement.</p>
-<h2 id="Best-practices" class="common-anchor-header">Best practices<button data-href="#Best-practices" class="anchor-icon" translate="no">
+<p>A medida que se reduce el ámbito de búsqueda en los filtros de búsqueda, aumenta el porcentaje de exclusión. Esto significa que se omiten más entidades durante el proceso de búsqueda. Si se comparan las estadísticas de la primera y la última fila, se observa que las búsquedas sin compactación por agrupación requieren escanear toda la colección. Por otro lado, las búsquedas con compactación de agrupación mediante una clave específica pueden lograr una mejora de hasta 25 veces.</p>
+<h2 id="Best-practices" class="common-anchor-header">Buenas prácticas<button data-href="#Best-practices" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -267,13 +264,10 @@ coll1.wait_for_compaction_completed(is_clustering=<span class="hljs-literal">Tru
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Here are some tips for you to use clustering compaction efficiently:</p>
+    </button></h2><p>A continuación le ofrecemos algunos consejos para que utilice la compactación en clústeres de forma eficiente:</p>
 <ul>
-<li><p>Enable this for collections with large data volumes.
-Search performance improves with larger data volumes in a collection. It is a good choice to enable this feature for collections with over 1 million entities.</p></li>
-<li><p>Choose a proper clustering key.
-You can use scalar fields commonly employed as filtering conditions as the clustering key. For a collection that holds data from multiple tenants, you can utilize the field that distinguishes one tenant from another as the clustering key.</p></li>
-<li><p>Use the partition key as the clustering key.
-You can set <code translate="no">common.usePartitionKeyAsClusteringKey</code> to true if you want to enable this feature for all collections in your Milvus instance or if you still face performance issues in a large collection with a partition key. By doing so, you will have a clustering key and a partition key when you choose a scalar field in a collection as the partition key.</p>
-<p>Note that this setting does not prevent you from choosing another scalar field as the clustering key. The explicitly designated clustering key always takes precedence.</p></li>
+<li><p>Habilítela para colecciones con grandes volúmenes de datos. El rendimiento de la búsqueda mejora con mayores volúmenes de datos en una colección. Es una buena opción activar esta función para colecciones con más de 1 millón de entidades.</p></li>
+<li><p>Elija una clave de agrupación adecuada: puede utilizar campos escalares empleados habitualmente como condiciones de filtrado como clave de agrupación. Para una colección que contiene datos de varios inquilinos, puede utilizar el campo que distingue a un inquilino de otro como clave de agrupación.</p></li>
+<li><p>Utilice la clave de partición como clave de agrupación. Puede establecer <code translate="no">common.usePartitionKeyAsClusteringKey</code> en true si desea habilitar esta función para todas las colecciones de su instancia de Milvus o si todavía tiene problemas de rendimiento en una colección grande con una clave de partición. Al hacerlo, tendrá una clave de agrupación y una clave de partición cuando elija un campo escalar en una colección como clave de partición.</p>
+<p>Tenga en cuenta que esta configuración no le impide elegir otro campo escalar como clave de agrupación. La clave de agrupación designada explícitamente siempre tiene prioridad.</p></li>
 </ul>

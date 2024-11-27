@@ -1,17 +1,17 @@
 ---
 id: video_search_with_twelvelabs_and_milvus.md
 summary: >-
-  Learn how to create a semantic video search application by integrating Twelve
-  Labs' Embed API for generating multimodal embeddings with Milvus. It covers
-  the entire process from setting up the development environment to implementing
-  advanced features like hybrid search and temporal video analysis, providing a
-  comprehensive foundation for building sophisticated video content analysis and
-  retrieval systems.
+  Aprenda a crear una aplicación de búsqueda semántica de vídeo integrando la
+  Embed API de Twelve Labs para generar incrustaciones multimodales con Milvus.
+  Abarca todo el proceso, desde la configuración del entorno de desarrollo hasta
+  la implementación de funciones avanzadas como la búsqueda híbrida y el
+  análisis temporal de vídeo, proporcionando una base completa para crear
+  sofisticados sistemas de análisis y recuperación de contenidos de vídeo.
 title: >-
-  Advanced Video Search: Leveraging Twelve Labs and Milvus for Semantic
-  Retrieval
+  Búsqueda avanzada de vídeos: Aprovechamiento de Twelve Labs y Milvus para la
+  recuperación semántica
 ---
-<h1 id="Advanced-Video-Search-Leveraging-Twelve-Labs-and-Milvus-for-Semantic-Retrieval" class="common-anchor-header">Advanced Video Search: Leveraging Twelve Labs and Milvus for Semantic Retrieval<button data-href="#Advanced-Video-Search-Leveraging-Twelve-Labs-and-Milvus-for-Semantic-Retrieval" class="anchor-icon" translate="no">
+<h1 id="Advanced-Video-Search-Leveraging-Twelve-Labs-and-Milvus-for-Semantic-Retrieval" class="common-anchor-header">Búsqueda avanzada de vídeos: Aprovechamiento de Twelve Labs y Milvus para la recuperación semántica<button data-href="#Advanced-Video-Search-Leveraging-Twelve-Labs-and-Milvus-for-Semantic-Retrieval" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -26,7 +26,7 @@ title: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><h2 id="Introduction" class="common-anchor-header">Introduction<button data-href="#Introduction" class="anchor-icon" translate="no">
+    </button></h1><h2 id="Introduction" class="common-anchor-header">Introducción<button data-href="#Introduction" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -41,9 +41,9 @@ title: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Welcome to this comprehensive tutorial on implementing semantic video search using <a href="https://docs.twelvelabs.io/docs/create-embeddings">Twelve Labs Embed API</a> and Milvus. In this guide, we’ll explore how to harness the power of <a href="https://www.twelvelabs.io/blog/multimodal-embeddings">Twelve Labs’ advanced multimodal embeddings</a> and <a href="https://milvus.io/intro">Milvus’ efficient vector database</a> to create a robust video search solution. By integrating these technologies, developers can unlock new possibilities in video content analysis, enabling applications such as content-based video retrieval, recommendation systems, and sophisticated search engines that understand the nuances of video data.</p>
-<p>This tutorial will walk you through the entire process, from setting up your development environment to implementing a functional semantic video search application. We’ll cover key concepts such as generating multimodal embeddings from videos, storing them efficiently in Milvus, and performing similarity searches to retrieve relevant content. Whether you’re building a video analytics platform, a content discovery tool, or enhancing your existing applications with video search capabilities, this guide will provide you with the knowledge and practical steps to leverage the combined strengths of Twelve Labs and Milvus in your projects.</p>
-<h2 id="Prerequisites" class="common-anchor-header">Prerequisites<button data-href="#Prerequisites" class="anchor-icon" translate="no">
+    </button></h2><p>Bienvenido a este completo tutorial sobre la implementación de la búsqueda semántica de vídeos mediante <a href="https://docs.twelvelabs.io/docs/create-embeddings">la API de incrustación de Twelve Labs</a> y Milvus. En esta guía, exploraremos cómo aprovechar el poder <a href="https://www.twelvelabs.io/blog/multimodal-embeddings">de las incrustaciones multimodales avanzadas de Twelve Labs</a> y <a href="https://milvus.io/intro">la eficiente base de datos vectorial de Milvus</a> para crear una solución robusta de búsqueda de vídeo. Mediante la integración de estas tecnologías, los desarrolladores pueden desbloquear nuevas posibilidades en el análisis de contenido de vídeo, permitiendo aplicaciones como la recuperación de vídeo basada en contenido, sistemas de recomendación y sofisticados motores de búsqueda que entienden los matices de los datos de vídeo.</p>
+<p>Este tutorial le guiará a través de todo el proceso, desde la configuración de su entorno de desarrollo hasta la implementación de una aplicación funcional de búsqueda semántica de vídeo. Cubriremos conceptos clave como la generación de incrustaciones multimodales a partir de vídeos, su almacenamiento eficiente en Milvus y la realización de búsquedas por similitud para recuperar contenido relevante. Tanto si está creando una plataforma de análisis de vídeo, una herramienta de descubrimiento de contenidos o mejorando sus aplicaciones existentes con capacidades de búsqueda de vídeo, esta guía le proporcionará los conocimientos y pasos prácticos para aprovechar las ventajas combinadas de Twelve Labs y Milvus en sus proyectos.</p>
+<h2 id="Prerequisites" class="common-anchor-header">Requisitos previos<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -58,10 +58,9 @@ title: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Before we begin, ensure you have the following:</p>
-<p>A Twelve Labs API key (sign up at https://api.twelvelabs.io if you don’t have one)
-Python 3.7 or later installed on your system</p>
-<h2 id="Setting-Up-the-Development-Environment" class="common-anchor-header">Setting Up the Development Environment<button data-href="#Setting-Up-the-Development-Environment" class="anchor-icon" translate="no">
+    </button></h2><p>Antes de empezar, asegúrese de que dispone de lo siguiente</p>
+<p>Una clave API de Twelve Labs (regístrese en https://api.twelvelabs.io si no tiene una) Python 3.7 o posterior instalado en su sistema</p>
+<h2 id="Setting-Up-the-Development-Environment" class="common-anchor-header">Configuración del entorno de desarrollo<button data-href="#Setting-Up-the-Development-Environment" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -76,24 +75,24 @@ Python 3.7 or later installed on your system</p>
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Create a new directory for your project and navigate to it:</p>
+    </button></h2><p>Cree un nuevo directorio para su proyecto y navegue hasta él:</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-built_in">mkdir</span> video-search-tutorial
 <span class="hljs-built_in">cd</span> video-search-tutorial
 <button class="copy-code-btn"></button></code></pre>
-<p>Set up a virtual environment (optional but recommended):</p>
+<p>Configura un entorno virtual (opcional pero recomendado):</p>
 <pre><code translate="no" class="language-shell">python -m venv venv
 <span class="hljs-built_in">source</span> venv/bin/activate  <span class="hljs-comment"># On Windows, use `venv\Scripts\activate`</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Install the required Python libraries:</p>
+<p>Instala las librerías Python necesarias:</p>
 <pre><code translate="no" class="language-shell">pip install twelvelabs pymilvus
 <button class="copy-code-btn"></button></code></pre>
-<p>Create a new Python file for your project:</p>
+<p>Crea un nuevo archivo Python para tu proyecto:</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-built_in">touch</span> video_search.py
 <button class="copy-code-btn"></button></code></pre>
-<p>This video_search.py file will be the main script we use for the tutorial. Next, set up your Twelve Labs API key as an environment variable for security:</p>
+<p>Este archivo video_search.py será el script principal que utilizaremos para el tutorial. A continuación, configure su clave de API de Twelve Labs como variable de entorno por motivos de seguridad:</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-keyword">export</span> <span class="hljs-variable constant_">TWELVE_LABS_API_KEY</span>=<span class="hljs-string">&#x27;your_api_key_here&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Connecting-to-Milvus" class="common-anchor-header">Connecting to Milvus<button data-href="#Connecting-to-Milvus" class="anchor-icon" translate="no">
+<h2 id="Connecting-to-Milvus" class="common-anchor-header">Conexión a Milvus<button data-href="#Connecting-to-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -108,7 +107,7 @@ Python 3.7 or later installed on your system</p>
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>To establish a connection with Milvus, we’ll use the MilvusClient class. This approach simplifies the connection process and allows us to work with a local file-based Milvus instance, which is perfect for our tutorial.</p>
+    </button></h2><p>Para establecer una conexión con Milvus, utilizaremos la clase MilvusClient. Este enfoque simplifica el proceso de conexión y nos permite trabajar con una instancia de Milvus basada en un archivo local, lo que es perfecto para nuestro tutorial.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 <span class="hljs-comment"># Initialize the Milvus client</span>
@@ -116,8 +115,8 @@ milvus_client = MilvusClient(<span class="hljs-string">&quot;milvus_twelvelabs_d
 
 <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Successfully connected to Milvus&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
-<p>This code creates a new Milvus client instance that will store all data in a file named milvus_twelvelabs_demo.db. This file-based approach is ideal for development and testing purposes.</p>
-<h2 id="Creating-a-Milvus-Collection-for-Video-Embeddings" class="common-anchor-header">Creating a Milvus Collection for Video Embeddings<button data-href="#Creating-a-Milvus-Collection-for-Video-Embeddings" class="anchor-icon" translate="no">
+<p>Este código crea una nueva instancia de cliente Milvus que almacenará todos los datos en un archivo llamado milvus_twelvelabs_demo.db. Este enfoque basado en archivos es ideal para fines de desarrollo y pruebas.</p>
+<h2 id="Creating-a-Milvus-Collection-for-Video-Embeddings" class="common-anchor-header">Creación de una colección Milvus para incrustaciones de vídeo<button data-href="#Creating-a-Milvus-Collection-for-Video-Embeddings" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -132,7 +131,7 @@ milvus_client = MilvusClient(<span class="hljs-string">&quot;milvus_twelvelabs_d
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Now that we’re connected to Milvus, let’s create a collection to store our video embeddings and associated metadata. We’ll define the collection schema and create the collection if it doesn’t already exist.</p>
+    </button></h2><p>Ahora que estamos conectados a Milvus, vamos a crear una colección para almacenar nuestras incrustaciones de vídeo y los metadatos asociados. Definiremos el esquema de la colección y crearemos la colección si aún no existe.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Initialize the collection name</span>
 collection_name = <span class="hljs-string">&quot;twelvelabs_demo_collection&quot;</span>
 
@@ -148,8 +147,8 @@ milvus_client.create_collection(
 
 <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;Collection &#x27;<span class="hljs-subst">{collection_name}</span>&#x27; created successfully&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
-<p>In this code, we first check if the collection already exists and drop it if it does. This ensures we start with a clean slate. We create the collection with a dimension of 1024, which matches the output dimension of Twelve Labs’ embeddings.</p>
-<h2 id="Generating-Embeddings-with-Twelve-Labs-Embed-API" class="common-anchor-header">Generating Embeddings with Twelve Labs Embed API<button data-href="#Generating-Embeddings-with-Twelve-Labs-Embed-API" class="anchor-icon" translate="no">
+<p>En este código, primero comprobamos si la colección ya existe y la eliminamos en caso afirmativo. Así nos aseguramos de empezar de cero. Creamos la colección con una dimensión de 1024, que coincide con la dimensión de salida de las incrustaciones de Twelve Labs.</p>
+<h2 id="Generating-Embeddings-with-Twelve-Labs-Embed-API" class="common-anchor-header">Generación de incrustaciones con la API de incrustación de Twelve Labs<button data-href="#Generating-Embeddings-with-Twelve-Labs-Embed-API" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -164,8 +163,8 @@ milvus_client.create_collection(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>To generate embeddings for our videos using the Twelve Labs Embed API, we’ll use the Twelve Labs Python SDK. This process involves creating an embedding task, waiting for its completion, and retrieving the results. Here’s how to implement this:</p>
-<p>First, ensure you have the Twelve Labs SDK installed and import the necessary modules:</p>
+    </button></h2><p>Para generar incrustaciones para nuestros vídeos mediante la API de incrustación de Twelve Labs, utilizaremos el SDK de Python de Twelve Labs. Este proceso implica crear una tarea de incrustación, esperar a que se complete y recuperar los resultados. A continuación te explicamos cómo hacerlo:</p>
+<p>En primer lugar, asegúrese de que tiene instalado el SDK de Twelve Labs e importe los módulos necesarios:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> twelvelabs <span class="hljs-keyword">import</span> TwelveLabs
 <span class="hljs-keyword">from</span> twelvelabs.models.embed <span class="hljs-keyword">import</span> EmbeddingsTask
 <span class="hljs-keyword">import</span> os
@@ -173,7 +172,7 @@ milvus_client.create_collection(
 <span class="hljs-comment"># Retrieve the API key from environment variables</span>
 TWELVE_LABS_API_KEY = os.getenv(<span class="hljs-string">&#x27;TWELVE_LABS_API_KEY&#x27;</span>)
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Initialize-the-Twelve-Labs-client" class="common-anchor-header">Initialize the Twelve Labs client:<button data-href="#Initialize-the-Twelve-Labs-client" class="anchor-icon" translate="no">
+<h2 id="Initialize-the-Twelve-Labs-client" class="common-anchor-header">Inicialice el cliente de Twelve Labs:<button data-href="#Initialize-the-Twelve-Labs-client" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -190,7 +189,7 @@ TWELVE_LABS_API_KEY = os.getenv(<span class="hljs-string">&#x27;TWELVE_LABS_API_
       </svg>
     </button></h2><pre><code translate="no" class="language-python">twelvelabs_client = TwelveLabs(api_key=TWELVE_LABS_API_KEY)
 <button class="copy-code-btn"></button></code></pre>
-<p>Create a function to generate embeddings for a given video URL:</p>
+<p>Cree una función para generar incrustaciones para una URL de vídeo dada:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">generate_embedding</span>(<span class="hljs-params">video_url</span>):
     <span class="hljs-string">&quot;&quot;&quot;
     Generate embeddings for a given video URL using the Twelve Labs API.
@@ -250,7 +249,7 @@ TWELVE_LABS_API_KEY = os.getenv(<span class="hljs-string">&#x27;TWELVE_LABS_API_
     
     <span class="hljs-keyword">return</span> embeddings, task_result
 <button class="copy-code-btn"></button></code></pre>
-<p>Use the function to generate embeddings for your videos:</p>
+<p>Utilice la función para generar incrustaciones para sus vídeos:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Example usage</span>
 video_url = <span class="hljs-string">&quot;https://example.com/your-video.mp4&quot;</span>
 
@@ -265,8 +264,8 @@ embeddings, task_result = generate_embedding(video_url)
     <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;  Embedding vector (first 5 values): <span class="hljs-subst">{emb[<span class="hljs-string">&#x27;embedding&#x27;</span>][:<span class="hljs-number">5</span>]}</span>&quot;</span>)
     <span class="hljs-built_in">print</span>()
 <button class="copy-code-btn"></button></code></pre>
-<p>This implementation allows you to generate embeddings for any video URL using the Twelve Labs Embed API. The generate_embedding function handles the entire process, from creating the task to retrieving the results. It returns a list of dictionaries, each containing an embedding vector along with its metadata (time range and scope).Remember to handle potential errors, such as network issues or API limits, in a production environment. You might also want to implement retries or more robust error handling depending on your specific use case.</p>
-<h2 id="Inserting-Embeddings-into-Milvus" class="common-anchor-header">Inserting Embeddings into Milvus<button data-href="#Inserting-Embeddings-into-Milvus" class="anchor-icon" translate="no">
+<p>Esta implementación permite generar incrustaciones para cualquier URL de vídeo utilizando la API de incrustación de Twelve Labs. La función generate_embedding se encarga de todo el proceso, desde la creación de la tarea hasta la recuperación de los resultados. Devuelve una lista de diccionarios, cada uno de los cuales contiene un vector de incrustación junto con sus metadatos (intervalo de tiempo y alcance). También es posible que desee implementar reintentos o una gestión de errores más robusta en función de su caso de uso específico.</p>
+<h2 id="Inserting-Embeddings-into-Milvus" class="common-anchor-header">Insertar incrustaciones en Milvus<button data-href="#Inserting-Embeddings-into-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -281,8 +280,8 @@ embeddings, task_result = generate_embedding(video_url)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>After generating embeddings using the Twelve Labs Embed API, the next step is to insert these embeddings along with their metadata into our Milvus collection. This process allows us to store and index our video embeddings for efficient similarity search later.</p>
-<p>Here’s how to insert the embeddings into Milvus:</p>
+    </button></h2><p>Después de generar incrustaciones utilizando la API Embed de Twelve Labs, el siguiente paso es insertar estas incrustaciones junto con sus metadatos en nuestra colección Milvus. Este proceso nos permite almacenar e indexar nuestras incrustaciones de vídeo para una búsqueda eficiente de similitudes más adelante.</p>
+<p>He aquí cómo insertar las incrustaciones en Milvus:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">insert_embeddings</span>(<span class="hljs-params">milvus_client, collection_name, task_result, video_url</span>):
     <span class="hljs-string">&quot;&quot;&quot;
     Insert embeddings into the Milvus collection.
@@ -326,8 +325,8 @@ embeddings, task_result = generate_embedding(video_url)
 insert_result = insert_embeddings(milvus_client, collection_name, task_result, video_url)
 <span class="hljs-built_in">print</span>(insert_result)
 <button class="copy-code-btn"></button></code></pre>
-<p>This function prepares the data for insertion, including all relevant metadata such as the embedding vector, time range, and the source video URL. It then uses the Milvus client to insert this data into the specified collection.</p>
-<h2 id="Performing-Similarity-Search" class="common-anchor-header">Performing Similarity Search<button data-href="#Performing-Similarity-Search" class="anchor-icon" translate="no">
+<p>Esta función prepara los datos para su inserción, incluyendo todos los metadatos relevantes como el vector de incrustación, el intervalo de tiempo y la URL del vídeo de origen. A continuación, utiliza el cliente Milvus para insertar estos datos en la colección especificada.</p>
+<h2 id="Performing-Similarity-Search" class="common-anchor-header">Búsqueda de similitudes<button data-href="#Performing-Similarity-Search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -342,7 +341,7 @@ insert_result = insert_embeddings(milvus_client, collection_name, task_result, v
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Once we have our embeddings stored in Milvus, we can perform similarity searches to find the most relevant video segments based on a query vector. Here’s how to implement this functionality:</p>
+    </button></h2><p>Una vez que tenemos nuestras incrustaciones almacenadas en Milvus, podemos realizar búsquedas por similitud para encontrar los segmentos de vídeo más relevantes basándonos en un vector de consulta. He aquí cómo implementar esta funcionalidad:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">perform_similarity_search</span>(<span class="hljs-params">milvus_client, collection_name, query_vector, limit=<span class="hljs-number">5</span></span>):
     <span class="hljs-string">&quot;&quot;&quot;
     Perform a similarity search on the Milvus collection.
@@ -385,16 +384,16 @@ search_results = perform_similarity_search(milvus_client, collection_name, query
     <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;  Similarity Score: <span class="hljs-subst">{result[<span class="hljs-string">&#x27;distance&#x27;</span>]}</span>&quot;</span>)
     <span class="hljs-built_in">print</span>()
 <button class="copy-code-btn"></button></code></pre>
-<p>This implementation does the following:</p>
+<p>Esta implementación hace lo siguiente</p>
 <ol>
-<li>Defines a function perform_similarity_search that takes a query vector and searches for similar embeddings in the Milvus collection.</li>
-<li>Uses the Milvus client’s search method to find the most similar vectors.</li>
-<li>Specifies the output fields we want to retrieve, including metadata about the matching video segments.</li>
-<li>Provides an example of how to use this function with a query video, first generating its embedding and then using it to search.</li>
-<li>Prints the search results, including relevant metadata and similarity scores.</li>
+<li>Define una función perform_similarity_search que toma un vector de consulta y busca incrustaciones similares en la colección Milvus.</li>
+<li>Utiliza el método de búsqueda del cliente Milvus para encontrar los vectores más similares.</li>
+<li>Especifica los campos de salida que queremos recuperar, incluyendo metadatos sobre los segmentos de vídeo coincidentes.</li>
+<li>Proporciona un ejemplo de cómo utilizar esta función con un vídeo de consulta, generando primero su incrustación y utilizándola después para buscar.</li>
+<li>Imprime los resultados de la búsqueda, incluidos los metadatos relevantes y las puntuaciones de similitud.</li>
 </ol>
-<p>By implementing these functions, you’ve created a complete workflow for storing video embeddings in Milvus and performing similarity searches. This setup allows for efficient retrieval of similar video content based on the multimodal embeddings generated by Twelve Labs’ Embed API.</p>
-<h2 id="Optimizing-Performance" class="common-anchor-header">Optimizing Performance<button data-href="#Optimizing-Performance" class="anchor-icon" translate="no">
+<p>Al implementar estas funciones, ha creado un flujo de trabajo completo para almacenar incrustaciones de vídeo en Milvus y realizar búsquedas de similitud. Esta configuración permite una recuperación eficiente de contenidos de vídeo similares basados en las incrustaciones multimodales generadas por la Embed API de Twelve Labs.</p>
+<h2 id="Optimizing-Performance" class="common-anchor-header">Optimización del rendimiento<button data-href="#Optimizing-Performance" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -409,9 +408,9 @@ search_results = perform_similarity_search(milvus_client, collection_name, query
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Alright, let’s take this app to the next level! When dealing with large-scale video collections, <strong>performance is key</strong>. To optimize, we should implement <a href="https://milvus.io/docs/v2.3.x/bulk_insert.md">batch processing for embedding generation and insertion into Milvus</a>. This way, we can handle multiple videos simultaneously, significantly reducing overall processing time. Additionally, we could leverage <a href="https://milvus.io/docs/v2.2.x/partition_key.md">Milvus’ partitioning feature</a> to organize our data more efficiently, perhaps by video categories or time periods. This would speed up queries by allowing us to search only relevant partitions.</p>
-<p>Another optimization trick is to <strong>use caching mechanisms for frequently accessed embeddings or search results</strong>. This could dramatically improve response times for popular queries. Don’t forget to <a href="https://milvus.io/docs/index-vector-fields.md?tab=floating">fine-tune Milvus’ index parameters</a> based on your specific dataset and query patterns - a little tweaking here can go a long way in boosting search performance.</p>
-<h2 id="Advanced-Features" class="common-anchor-header">Advanced Features<button data-href="#Advanced-Features" class="anchor-icon" translate="no">
+    </button></h2><p>Muy bien, ¡vamos a llevar esta aplicación al siguiente nivel! Cuando se trata de colecciones de vídeos a gran escala, <strong>el rendimiento es clave</strong>. Para optimizarlo, deberíamos implementar <a href="https://milvus.io/docs/v2.3.x/bulk_insert.md">el procesamiento por lotes para la generación de incrustaciones y su inserción en Milvus</a>. De esta forma, podemos manejar múltiples vídeos simultáneamente, reduciendo significativamente el tiempo total de procesamiento. Además, podríamos aprovechar <a href="https://milvus.io/docs/v2.2.x/partition_key.md">la función de partición</a> de <a href="https://milvus.io/docs/v2.2.x/partition_key.md">Milvus</a> para organizar nuestros datos de forma más eficiente, quizás por categorías de vídeo o periodos de tiempo. Esto aceleraría las consultas al permitirnos buscar sólo en las particiones relevantes.</p>
+<p>Otro truco de optimización consiste en <strong>utilizar mecanismos de caché para las incrustaciones o los resultados de búsqueda a los que se accede con frecuencia</strong>. Esto podría mejorar drásticamente los tiempos de respuesta de las consultas más frecuentes. No olvide <a href="https://milvus.io/docs/index-vector-fields.md?tab=floating">ajustar los parámetros de índice de Milvus</a> en función de su conjunto de datos específico y de sus patrones de consulta: un pequeño ajuste puede contribuir en gran medida a mejorar el rendimiento de la búsqueda.</p>
+<h2 id="Advanced-Features" class="common-anchor-header">Funciones avanzadas<button data-href="#Advanced-Features" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -426,9 +425,9 @@ search_results = perform_similarity_search(milvus_client, collection_name, query
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Now, let’s add some cool features to make our app stand out! We could implement <strong>a hybrid search that combines text and video queries</strong>. As a matter of fact, <a href="https://docs.twelvelabs.io/docs/create-text-embeddings">Twelve Labs Embed API can also generate text embeddings for your text queries</a>. Imagine allowing users to input both a text description and a sample video clip - we’d generate embeddings for both and perform a weighted search in Milvus. This would give us super precise results.</p>
-<p>Another awesome addition would be <strong>temporal search within videos</strong>. <a href="https://docs.twelvelabs.io/docs/create-video-embeddings#customize-your-embeddings">We could break down long videos into smaller segments, each with its own embedding</a>. This way, users could find specific moments within videos, not just entire clips. And hey, why not throw in some basic video analytics? We could use the embeddings to cluster similar video segments, detect trends, or even identify outliers in large video collections.</p>
-<h2 id="Error-Handling-and-Logging" class="common-anchor-header">Error Handling and Logging<button data-href="#Error-Handling-and-Logging" class="anchor-icon" translate="no">
+    </button></h2><p>Ahora vamos a añadir algunas funciones interesantes para que nuestra aplicación destaque. Podríamos implementar <strong>una búsqueda híbrida que combine consultas de texto y vídeo</strong>. De hecho, <a href="https://docs.twelvelabs.io/docs/create-text-embeddings">Twelve Labs Embed API también puede generar incrustaciones de texto para sus consultas de texto</a>. Imagine que permite a los usuarios introducir tanto una descripción de texto como un clip de vídeo de muestra: generaríamos incrustaciones para ambos y realizaríamos una búsqueda ponderada en Milvus. Esto nos daría resultados muy precisos.</p>
+<p>Otro añadido impresionante sería la <strong>búsqueda temporal dentro de los vídeos</strong>. <a href="https://docs.twelvelabs.io/docs/create-video-embeddings#customize-your-embeddings">Podríamos dividir los vídeos largos en segmentos más pequeños, cada uno con su propia incrustación</a>. De esta manera, los usuarios podrían encontrar momentos específicos dentro de los vídeos, no sólo clips enteros. ¿Y por qué no añadir un poco de análisis de vídeo básico? Podríamos utilizar las incrustaciones para agrupar segmentos de vídeo similares, detectar tendencias o incluso identificar valores atípicos en grandes colecciones de vídeos.</p>
+<h2 id="Error-Handling-and-Logging" class="common-anchor-header">Gestión y registro de errores<button data-href="#Error-Handling-and-Logging" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -443,9 +442,9 @@ search_results = perform_similarity_search(milvus_client, collection_name, query
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Let’s face it, things can go wrong, and when they do, we need to be prepared. <strong>Implementing robust error handling is crucial</strong>. We should <a href="https://softwareengineering.stackexchange.com/questions/64180/good-use-of-try-catch-blocks">wrap our API calls and database operations in try-except blocks</a>, providing informative error messages to users when something fails. For network-related issues, <a href="https://learn.microsoft.com/en-us/dotnet/architecture/microservices/implement-resilient-applications/implement-retries-exponential-backoff">implementing retries with exponential backoff</a> can help handle temporary glitches gracefully.</p>
-<p><strong>As for logging, it’s our best friend for debugging and monitoring</strong>. We should use <a href="https://blog.sentry.io/logging-in-python-a-developers-guide/">Python’s logging module</a> to track important events, errors, and performance metrics throughout our application. Let’s set up different log levels - DEBUG for development, INFO for general operation, and ERROR for critical issues. And don’t forget to implement log rotation to manage file sizes. With proper logging in place, we’ll be able to quickly identify and resolve issues, ensuring our video search app runs smoothly even as it scales up.</p>
-<h2 id="Conclusion" class="common-anchor-header">Conclusion<button data-href="#Conclusion" class="anchor-icon" translate="no">
+    </button></h2><p>Admitámoslo, las cosas pueden salir mal, y cuando lo hacen, tenemos que estar preparados. <strong>Implementar una gestión de errores sólida es crucial</strong>. Debemos <a href="https://softwareengineering.stackexchange.com/questions/64180/good-use-of-try-catch-blocks">envolver las llamadas a la API y las operaciones de base de datos en bloques try-except</a>, proporcionando mensajes de error informativos a los usuarios cuando algo falla. Para los problemas relacionados con la red, la <a href="https://learn.microsoft.com/en-us/dotnet/architecture/microservices/implement-resilient-applications/implement-retries-exponential-backoff">implementación de reintentos con retroceso exponencial</a> puede ayudar a gestionar los fallos temporales con elegancia.</p>
+<p><strong>En cuanto al registro, es nuestro mejor amigo para la depuración y la monitorización</strong>. Deberíamos usar <a href="https://blog.sentry.io/logging-in-python-a-developers-guide/">el módulo de registro de Python</a> para rastrear eventos importantes, errores y métricas de rendimiento a lo largo de nuestra aplicación. Vamos a establecer diferentes niveles de registro - DEBUG para el desarrollo, INFO para el funcionamiento general, y ERROR para los problemas críticos. Y no olvides aplicar la rotación de registros para gestionar el tamaño de los archivos. Con un registro adecuado, seremos capaces de identificar y resolver rápidamente los problemas, asegurando que nuestra aplicación de búsqueda de vídeo se ejecuta sin problemas, incluso a medida que se escala.</p>
+<h2 id="Conclusion" class="common-anchor-header">Conclusión<button data-href="#Conclusion" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -460,5 +459,5 @@ search_results = perform_similarity_search(milvus_client, collection_name, query
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Congratulations! You’ve now built a powerful semantic video search application using Twelve Labs’ Embed API and Milvus. This integration allows you to process, store, and retrieve video content with unprecedented accuracy and efficiency. By leveraging multimodal embeddings, you’ve created a system that understands the nuances of video data, opening up exciting possibilities for content discovery, recommendation systems, and advanced video analytics.</p>
-<p>As you continue to develop and refine your application, remember that the combination of Twelve Labs’ advanced embedding generation and Milvus’ scalable vector storage provides a robust foundation for tackling even more complex video understanding challenges. We encourage you to experiment with the advanced features discussed and push the boundaries of what’s possible in video search and analysis.</p>
+    </button></h2><p>Enhorabuena. Ya ha creado una potente aplicación de búsqueda semántica de vídeo utilizando la API de incrustación de Twelve Labs y Milvus. Esta integración le permite procesar, almacenar y recuperar contenido de vídeo con una precisión y eficacia sin precedentes. Al aprovechar las incrustaciones multimodales, ha creado un sistema que comprende los matices de los datos de vídeo, abriendo interesantes posibilidades para el descubrimiento de contenidos, los sistemas de recomendación y el análisis avanzado de vídeo.</p>
+<p>A medida que continúe desarrollando y perfeccionando su aplicación, recuerde que la combinación de la generación de incrustación avanzada de Twelve Labs y el almacenamiento vectorial escalable de Milvus proporciona una base sólida para abordar retos de comprensión de vídeo aún más complejos. Le animamos a experimentar con las funciones avanzadas comentadas y a ampliar los límites de lo que es posible en la búsqueda y el análisis de vídeo.</p>

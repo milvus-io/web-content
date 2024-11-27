@@ -1,16 +1,17 @@
 ---
 id: filtered-search.md
-title: Filtered Search​
+title: Búsqueda filtrada
 related_key: 'ann search, filtered search'
 summary: >-
-  An ANN search finds vector embeddings most similar to specified vector
-  embeddings. However, the search results may not always be correct. You can
-  include filtering conditions in a search request so that Milvus conducts
-  metadata filtering before conducting ANN searches, reducing the search scope
-  from the whole collection to only the entities matching the specified
-  filtering conditions.​
+  Una búsqueda RNA encuentra las incrustaciones vectoriales más similares a las
+  incrustaciones vectoriales especificadas. Sin embargo, los resultados de la
+  búsqueda pueden no ser siempre correctos. Puede incluir condiciones de
+  filtrado en una solicitud de búsqueda para que Milvus realice un filtrado de
+  metadatos antes de realizar búsquedas RNA, reduciendo el ámbito de búsqueda de
+  toda la colección a sólo las entidades que coincidan con las condiciones de
+  filtrado especificadas.
 ---
-<h1 id="Filtered-Search​" class="common-anchor-header">Filtered Search​<button data-href="#Filtered-Search​" class="anchor-icon" translate="no">
+<h1 id="Filtered-Search​" class="common-anchor-header">Búsqueda filtrada<button data-href="#Filtered-Search​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -25,8 +26,8 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>An ANN search finds vector embeddings most similar to specified vector embeddings. However, the search results may not always be correct. You can include filtering conditions in a search request so that Milvus conducts metadata filtering before conducting ANN searches, reducing the search scope from the whole collection to only the entities matching the specified filtering conditions.​</p>
-<h2 id="Overview" class="common-anchor-header">Overview<button data-href="#Overview" class="anchor-icon" translate="no">
+    </button></h1><p>Una búsqueda RNA encuentra las incrustaciones vectoriales más similares a las incrustaciones vectoriales especificadas. Sin embargo, los resultados de la búsqueda pueden no ser siempre correctos. Puede incluir condiciones de filtrado en una solicitud de búsqueda para que Milvus realice un filtrado de metadatos antes de realizar búsquedas RNA, reduciendo el ámbito de búsqueda de toda la colección a sólo las entidades que coincidan con las condiciones de filtrado especificadas.</p>
+<h2 id="Overview" class="common-anchor-header">Resumen<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -41,20 +42,18 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>If a collection contains both vector embeddings and their metadata, you can filter metadata before ANN search to improve the relevancy of the search result. Once Milvus receives a search request carrying a filtering condition, it restricts the search scope within the entities matching the specified filtering condition.​</p>
+    </button></h2><p>Si una colección contiene tanto incrustaciones vectoriales como sus metadatos, puede filtrar los metadatos antes de la búsqueda RNA para mejorar la relevancia del resultado de la búsqueda. Una vez que Milvus recibe una solicitud de búsqueda con una condición de filtrado, restringe el ámbito de la búsqueda dentro de las entidades que coinciden con la condición de filtrado especificada.</p>
 <p>
-  <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.5.x/assets/filtered-search.png" alt="Filtered search" class="doc-image" id="filtered-search" />
-    <span>Filtered search</span>
-  </span>
-</p>
-<p>As shown in the above diagram, the search request carries <code translate="no">chunk like % red %</code> as the filtering condition, indicating that Milvus should conduct the ANN search within all the entities that have the word <code translate="no">red</code> in the <code translate="no">chunk</code> field. Specifically, Milvus does the following:​</p>
+  
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/filtered-search.png" alt="Filtered search" class="doc-image" id="filtered-search" />
+   </span> <span class="img-wrapper"> <span>Búsqueda filtrada</span> </span></p>
+<p>Como se muestra en el diagrama anterior, la petición de búsqueda lleva <code translate="no">chunk like % red %</code> como condición de filtrado, lo que indica que Milvus debe realizar la búsqueda RNA dentro de todas las entidades que tengan la palabra <code translate="no">red</code> en el campo <code translate="no">chunk</code>. En concreto, Milvus hace lo siguiente</p>
 <ul>
-<li><p>Filter entities that match the filtering conditions carried in the search request.​</p></li>
-<li><p>Conduct the ANN search within the filtered entities.​</p></li>
-<li><p>Returns top-K entities.​</p></li>
+<li><p>Filtra las entidades que coinciden con las condiciones de filtrado incluidas en la solicitud de búsqueda.</p></li>
+<li><p>Realiza la búsqueda RNA en las entidades filtradas.</p></li>
+<li><p>Devuelve las entidades top-K.</p></li>
 </ul>
-<h2 id="Examples" class="common-anchor-header">Examples<button data-href="#Examples" class="anchor-icon" translate="no">
+<h2 id="Examples" class="common-anchor-header">Ejemplos<button data-href="#Examples" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -69,7 +68,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>This section demonstrates how to conduct a filtered search. Code snippets in this section assume  you already have the following entities in your collection. Each entity has four fields, namely <strong>id</strong>, <strong>vector</strong>, <strong>color</strong>, and <strong>likes</strong>.​</p>
+    </button></h2><p>Esta sección muestra cómo realizar una búsqueda filtrada. Los fragmentos de código de esta sección suponen que ya tiene las siguientes entidades en su colección. Cada entidad tiene cuatro campos: <strong>id</strong>, <strong>vector</strong>, <strong>color</strong> y <strong>gustos</strong>.</p>
 <pre><code translate="no" class="language-JSON">[​
     {<span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">0</span>, <span class="hljs-string">&quot;vector&quot;</span>: [<span class="hljs-number">0.3580376395471989</span>, -<span class="hljs-number">0.6023495712049978</span>, <span class="hljs-number">0.18414012509913835</span>, -<span class="hljs-number">0.26286205330961354</span>, <span class="hljs-number">0.9029438446296592</span>], <span class="hljs-string">&quot;color&quot;</span>: <span class="hljs-string">&quot;pink_8682&quot;</span>, <span class="hljs-string">&quot;likes&quot;</span>: <span class="hljs-number">165</span>},​
     {<span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">1</span>, <span class="hljs-string">&quot;vector&quot;</span>: [<span class="hljs-number">0.19886812562848388</span>, <span class="hljs-number">0.06023560599112088</span>, <span class="hljs-number">0.6976963061752597</span>, <span class="hljs-number">0.2614474506242501</span>, <span class="hljs-number">0.838729485096104</span>], <span class="hljs-string">&quot;color&quot;</span>: <span class="hljs-string">&quot;red_7025&quot;</span>, <span class="hljs-string">&quot;likes&quot;</span>: <span class="hljs-number">25</span>},​
@@ -84,13 +83,9 @@ summary: >-
 ]​
 
 <button class="copy-code-btn"></button></code></pre>
-<p>The search request in the following code snippet carries a filtering condition and several output fields.​</p>
+<p>La solicitud de búsqueda del siguiente fragmento de código contiene una condición de filtrado y varios campos de salida.</p>
 <div class="multipleCode">
-    <a href="#python">Python </a>
-    <a href="#java">Java</a>
-    <a href="#javascript">Node.js</a>
-    <a href="#curl">cURL</a>
-</div>
+   <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient​
 ​
 client = MilvusClient(​
@@ -238,7 +233,7 @@ curl --request POST \​
 <span class="hljs-comment"># {&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:[]}​</span>
 
 <button class="copy-code-btn"></button></code></pre>
-<p>The filtering condition carried in the search request reads <code translate="no">color like &quot;red%&quot; and likes &gt; 50</code>. It uses the and operator to include two conditions: the first one asks for entities that have a value starting with <code translate="no">red</code> in the <code translate="no">color</code> field, and the other asks for entities with a value greater than <code translate="no">50</code> in the <code translate="no">likes</code> field. There are only two entities meeting these requirements. With the top-K set to <code translate="no">3</code>, Milvus will calculate the distance between these two entities to the query vector and return them as the search results.​</p>
+<p>La condición de filtrado de la petición de búsqueda es <code translate="no">color like &quot;red%&quot; and likes &gt; 50</code>. Utiliza el operador and para incluir dos condiciones: la primera pide entidades que tengan un valor que empiece por <code translate="no">red</code> en el campo <code translate="no">color</code>, y la otra pide entidades con un valor mayor que <code translate="no">50</code> en el campo <code translate="no">likes</code>. Sólo hay dos entidades que cumplan estos requisitos. Con el top-K fijado en <code translate="no">3</code>, Milvus calculará la distancia entre estas dos entidades al vector de consulta y las devolverá como resultados de la búsqueda.</p>
 <pre><code translate="no" class="language-JSON">[​
     {​
         <span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">4</span>, ​
@@ -261,4 +256,4 @@ curl --request POST \​
 ]​
 
 <button class="copy-code-btn"></button></code></pre>
-<p>For more information on the operators that you can use in metadata filtering, refer to <a href="/docs/boolean.md">​Metadata Filtering</a>.​</p>
+<p>Para más información sobre los operadores que puede utilizar en el filtrado de <a href="/docs/es/boolean.md">metadatos</a>, consulte <a href="/docs/es/boolean.md">Filtrado de metadatos</a>.</p>

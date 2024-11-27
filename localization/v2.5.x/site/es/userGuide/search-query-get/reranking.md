@@ -1,11 +1,11 @@
 ---
 id: reranking.md
 summary: >-
-  This topic covers the reranking process, explaining its significance and
-  implementation of two reranking methods.
-title: Reranking
+  Este tema aborda el proceso de reordenación, explicando su importancia y la
+  aplicación de dos métodos de reordenación.
+title: Reordenación
 ---
-<h1 id="Reranking" class="common-anchor-header">Reranking<button data-href="#Reranking" class="anchor-icon" translate="no">
+<h1 id="Reranking" class="common-anchor-header">Reordenación<button data-href="#Reranking" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -20,8 +20,8 @@ title: Reranking
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Milvus enables hybrid search capabilities using the <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/ORM/Collection/hybrid_search.md">hybrid_search()</a> API, incorporating sophisticated reranking strategies to refine search results from multiple <code translate="no">AnnSearchRequest</code> instances. This topic covers the reranking process, explaining its significance and implementation of different reranking strategies in Milvus.</p>
-<h2 id="Overview" class="common-anchor-header">Overview<button data-href="#Overview" class="anchor-icon" translate="no">
+    </button></h1><p>Milvus permite capacidades de búsqueda híbrida utilizando la API <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/ORM/Collection/hybrid_search.md">hybrid_search()</a>, incorporando sofisticadas estrategias de reordenación para refinar los resultados de búsqueda de múltiples instancias de <code translate="no">AnnSearchRequest</code>. Este tema cubre el proceso de reordenación, explicando su significado y la implementación de diferentes estrategias de reordenación en Milvus.</p>
+<h2 id="Overview" class="common-anchor-header">Visión general<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -36,14 +36,14 @@ title: Reranking
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>The following figure illustrates the execution of a hybrid search in Milvus and highlights the role of reranking in the process.</p>
+    </button></h2><p>La siguiente figura ilustra la ejecución de una búsqueda híbrida en Milvus y destaca el papel de la reordenación en el proceso.</p>
 <p><img translate="no" src="/docs/v2.5.x/assets/multi-vector-rerank.png" alt="reranking_process" width="300"/></p>
-<p>Reranking in hybrid search is a crucial step that consolidates results from several vector fields, ensuring the final output is relevant and accurately prioritized. Currently, Milvus offers these reranking strategies:</p>
+<p>La reordenación en la búsqueda híbrida es un paso crucial que consolida los resultados de varios campos vectoriales, garantizando que el resultado final sea relevante y esté correctamente priorizado. Actualmente, Milvus ofrece estas estrategias de reordenación:</p>
 <ul>
-<li><p><code translate="no">WeightedRanker</code>: This approach merges results by calculating a weighted average of scores (or vector distances) from different vector searches. It assigns weights based on the significance of each vector field.</p></li>
-<li><p><code translate="no">RRFRanker</code>: This strategy combines results based on their ranks across different vector columns.</p></li>
+<li><p><code translate="no">WeightedRanker</code>: Este enfoque fusiona resultados calculando una media ponderada de puntuaciones (o distancias vectoriales) de diferentes búsquedas vectoriales. Asigna pesos en función de la importancia de cada campo vectorial.</p></li>
+<li><p><code translate="no">RRFRanker</code>: Esta estrategia combina los resultados en función de sus clasificaciones en diferentes columnas de vectores.</p></li>
 </ul>
-<h2 id="Weighted-Scoring-WeightedRanker" class="common-anchor-header">Weighted Scoring (WeightedRanker)<button data-href="#Weighted-Scoring-WeightedRanker" class="anchor-icon" translate="no">
+<h2 id="Weighted-Scoring-WeightedRanker" class="common-anchor-header">Puntuación ponderada (WeightedRanker)<button data-href="#Weighted-Scoring-WeightedRanker" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -58,34 +58,32 @@ title: Reranking
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>The <code translate="no">WeightedRanker</code> strategy assigns different weights to results from each vector retrieval route based on the significance of each vector field. This reranking strategy is applied when the significance of each vector field varies, allowing you to emphasize certain vector fields over others by assigning them higher weights. For example, in a multimodal search, the text description might be considered more important than the color distribution in images.</p>
-<p>WeightedRanker’s basic process is as follows:</p>
+    </button></h2><p>La estrategia <code translate="no">WeightedRanker</code> asigna diferentes pesos a los resultados de cada ruta de recuperación de vectores en función de la importancia de cada campo vectorial. Esta estrategia de reordenación se aplica cuando la importancia de cada campo vectorial varía, lo que permite destacar ciertos campos vectoriales sobre otros asignándoles pesos más altos. Por ejemplo, en una búsqueda multimodal, la descripción del texto podría considerarse más importante que la distribución del color en las imágenes.</p>
+<p>El proceso básico de WeightedRanker es el siguiente:</p>
 <ul>
-<li><p><strong>Collect Scores During Retrieval</strong>: Gather results and their scores from different vector retrieval routes.</p></li>
-<li><p><strong>Score Normalization</strong>: Normalize the scores from each route to a [0,1] range, where values closer to 1 indicate higher relevance. This normalization is crucial due to score distributions varying with different metric types. For instance, the distance for IP ranges from [-∞,+∞], while the distance for L2 ranges from [0,+∞]. Milvus employs the <code translate="no">arctan</code> function, transforming values to the [0,1] range to provide a standardized basis for different metric types.</p>
+<li><p><strong>Recopilar puntuaciones durante la recuperación</strong>: Recoge los resultados y sus puntuaciones de diferentes rutas de recuperación de vectores.</p></li>
+<li><p><strong>Normalización de puntuaciones</strong>: Normalizar las puntuaciones de cada ruta a un rango [0,1], donde los valores más cercanos a 1 indican mayor relevancia. Esta normalización es crucial debido a que las distribuciones de las puntuaciones varían según los distintos tipos de métricas. Por ejemplo, la distancia para IP oscila entre [-∞,+∞], mientras que la distancia para L2 oscila entre [0,+∞]. Milvus emplea la función <code translate="no">arctan</code>, transformando los valores al rango [0,1] para proporcionar una base estandarizada para los diferentes tipos de métrica.</p>
 <p><img translate="no" src="/docs/v2.5.x/assets/arctan.png" alt="arctan-function" width="300"/></p></li>
-<li><p><strong>Weight Allocation</strong>: Assign a weight <code translate="no">w𝑖</code> to each vector retrieval route. Users specify the weights, which reflect the data source’s reliability, accuracy, or other pertinent metrics. Each weight ranges from [0,1].</p></li>
-<li><p><strong>Score Fusion</strong>: Calculate a weighted average of the normalized scores to derive the final score. The results are then ranked based on these highest to lowest scores to generate the final sorted results.</p></li>
+<li><p><strong>Asignación de pesos</strong>: Asigna un peso <code translate="no">w𝑖</code> a cada ruta de recuperación de vectores. Los usuarios especifican las ponderaciones, que reflejan la fiabilidad, precisión u otras métricas pertinentes de la fuente de datos. Cada peso oscila entre [0,1].</p></li>
+<li><p><strong>Fusión de puntuaciones</strong>: Calcula una media ponderada de las puntuaciones normalizadas para obtener la puntuación final. A continuación, se ordenan los resultados en función de estas puntuaciones de mayor a menor para generar los resultados finales ordenados.</p></li>
 </ul>
 <p>
-  <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.5.x//assets/weighted-reranker.png" alt="weighted-reranker" class="doc-image" id="weighted-reranker" />
-    <span>weighted-reranker</span>
-  </span>
-</p>
-<p>To use this strategy, apply a <code translate="no">WeightedRanker</code> instance and set weight values by passing in a variable number of numeric arguments.</p>
+  
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x//assets/weighted-reranker.png" alt="weighted-reranker" class="doc-image" id="weighted-reranker" />
+   </span> <span class="img-wrapper"> <span>weighted-reranker</span> </span></p>
+<p>Para utilizar esta estrategia, aplique una instancia de <code translate="no">WeightedRanker</code> y establezca los valores de ponderación pasando un número variable de argumentos numéricos.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> WeightedRanker
 
 <span class="hljs-comment"># Use WeightedRanker to combine results with specified weights</span>
 rerank = WeightedRanker(<span class="hljs-number">0.8</span>, <span class="hljs-number">0.8</span>, <span class="hljs-number">0.7</span>) 
 <button class="copy-code-btn"></button></code></pre>
-<p>Note that:</p>
+<p>Tenga en cuenta que:</p>
 <ul>
-<li><p>Each weight value ranges from 0 (least important) to 1 (most important), influencing the final aggregated score.</p></li>
-<li><p>The total number of weight values provided in <code translate="no">WeightedRanker</code> should equal the number of <code translate="no">AnnSearchRequest</code> instances you have created earlier.</p></li>
-<li><p>It is worth noting that due to the different measurements of the different metric types, we normalize the distances of the recall results so that they lie in the interval [0,1], where 0 means different and 1 means similar. The final score will be the sum of the weight values and distances.</p></li>
+<li><p>Cada valor de peso va de 0 (menos importante) a 1 (más importante), influyendo en la puntuación final agregada.</p></li>
+<li><p>El número total de valores de peso proporcionados en <code translate="no">WeightedRanker</code> debe ser igual al número de instancias de <code translate="no">AnnSearchRequest</code> que haya creado anteriormente.</p></li>
+<li><p>Cabe señalar que, debido a las diferentes medidas de los distintos tipos de métricas, normalizamos las distancias de los resultados de recall para que se sitúen en el intervalo [0,1], donde 0 significa diferente y 1 similar. La puntuación final será la suma de los valores de ponderación y las distancias.</p></li>
 </ul>
-<h2 id="Reciprocal-Rank-Fusion-RRFRanker" class="common-anchor-header">Reciprocal Rank Fusion (RRFRanker)<button data-href="#Reciprocal-Rank-Fusion-RRFRanker" class="anchor-icon" translate="no">
+<h2 id="Reciprocal-Rank-Fusion-RRFRanker" class="common-anchor-header">Fusión por rango recíproco (RRFRanker)<button data-href="#Reciprocal-Rank-Fusion-RRFRanker" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -100,21 +98,19 @@ rerank = WeightedRanker(<span class="hljs-number">0.8</span>, <span class="hljs-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>RRF is a data fusion method that combines ranking lists based on the reciprocal of their ranks. It is an effective way to balance the influence of each vector field, especially when there is no clear precedence of importance. This strategy is typically used when you want to give equal consideration to all vector fields or when there is uncertainty about the relative importance of each field.</p>
-<p>RRF’s basic process is as follows:</p>
+    </button></h2><p>RRF es un método de fusión de datos que combina listas de clasificación basadas en la recíproca de sus rangos. Es una forma eficaz de equilibrar la influencia de cada campo vectorial, especialmente cuando no existe una clara precedencia de importancia. Esta estrategia se suele utilizar cuando se quiere dar la misma consideración a todos los campos vectoriales o cuando hay incertidumbre sobre la importancia relativa de cada campo.</p>
+<p>El proceso básico de la RRF es el siguiente:</p>
 <ul>
-<li><p><strong>Collect Rankings During Retrieval</strong>: Retrievers across multiple vector fields retrieve and sort results.</p></li>
-<li><p><strong>Rank Fusion</strong>: The RRF algorithm weighs and combines the ranks from each retriever. The formula is as follows:</p>
+<li><p><strong>Recopilación de clasificaciones durante la recuperación</strong>: Los recuperadores de múltiples campos vectoriales recuperan y ordenan los resultados.</p></li>
+<li><p><strong>Fusión de rankings</strong>: El algoritmo RRF pondera y combina las clasificaciones de cada recuperador. La fórmula es la siguiente</p>
 <p>
-  <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.5.x//assets/rrf-ranker.png" alt="rrf-ranker" class="doc-image" id="rrf-ranker" />
-    <span>rrf-ranker</span>
-  </span>
-</p>
-<p>Here, 𝑁 represents the number of different retrieval routes, rank𝑖(𝑑) is the rank position of retrieved document 𝑑 by the 𝑖th retriever, and 𝑘 is a smoothing parameter, typically set to 60.</p></li>
-<li><p><strong>Comprehensive Ranking</strong>: Re-rank the retrieved results based on the combined scores to produce the final results.</p></li>
+  
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x//assets/rrf-ranker.png" alt="rrf-ranker" class="doc-image" id="rrf-ranker" />
+   </span> <span class="img-wrapper"> <span>rrf-ranker</span> </span></p>
+<p>Aquí, 𝑁 representa el número de rutas de recuperación diferentes, rank𝑖(𝑑) es la posición en el ranking del documento recuperado 𝑑 por el 𝑖º recuperador, y 𝑘 es un parámetro de suavizado, normalmente fijado en 60.</p></li>
+<li><p><strong>Clasificación exhaustiva</strong>: Reordena los resultados recuperados basándose en las puntuaciones combinadas para producir los resultados finales.</p></li>
 </ul>
-<p>To use this strategy, apply an <code translate="no">RRFRanker</code> instance.</p>
+<p>Para utilizar esta estrategia, aplique una instancia de <code translate="no">RRFRanker</code>.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> RRFRanker
 
 <span class="hljs-comment"># Default k value is 60</span>
@@ -123,4 +119,4 @@ ranker = RRFRanker()
 <span class="hljs-comment"># Or specify k value</span>
 ranker = RRFRanker(k=<span class="hljs-number">100</span>)
 <button class="copy-code-btn"></button></code></pre>
-<p>RRF allows balancing influence across fields without specifying explicit weights. The top matches agreed upon by multiple fields will be prioritized in the final ranking.</p>
+<p>RRF permite equilibrar la influencia entre campos sin especificar pesos explícitos. Las mejores coincidencias acordadas por varios campos tendrán prioridad en la clasificación final.</p>

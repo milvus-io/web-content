@@ -2,9 +2,9 @@
 id: configure_querynode.md
 related_key: configure
 group: system_configuration.md
-summary: Learn how to configure queryNode for Milvus.
+summary: Aprenda a configurar queryNode para Milvus.
 ---
-<h1 id="queryNode-related-Configurations" class="common-anchor-header">queryNode-related Configurations<button data-href="#queryNode-related-Configurations" class="anchor-icon" translate="no">
+<h1 id="queryNode-related-Configurations" class="common-anchor-header">Configuraciones relacionadas con queryNode<button data-href="#queryNode-related-Configurations" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -19,7 +19,7 @@ summary: Learn how to configure queryNode for Milvus.
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Related configuration of queryNode, used to run hybrid search between vector and scalar data.</p>
+    </button></h1><p>Configuración relacionada de queryNode, utilizada para ejecutar búsquedas híbridas entre datos vectoriales y escalares.</p>
 <h2 id="queryNodestatspublishInterval" class="common-anchor-header"><code translate="no">queryNode.stats.publishInterval</code><button data-href="#queryNodestatspublishInterval" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -38,13 +38,13 @@ summary: Learn how to configure queryNode for Milvus.
     </button></h2><table id="queryNode.stats.publishInterval">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Descripción</th>
+      <th class="width20">Valor por defecto</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        The interval that query node publishes the node statistics information, including segment status, cpu usage, memory usage, health status, etc. Unit: ms.      </td>
+      <td>        El intervalo en el que el nodo de consulta publica la información estadística del nodo, incluyendo el estado del segmento, uso de cpu, uso de memoria, estado de salud, etc. Unidad: ms.      </td>
       <td>1000</td>
     </tr>
   </tbody>
@@ -67,13 +67,13 @@ summary: Learn how to configure queryNode for Milvus.
     </button></h2><table id="queryNode.segcore.knowhereThreadPoolNumRatio">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Descripción</th>
+      <th class="width20">Valor por Defecto</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        The number of threads in knowhere's thread pool. If disk is enabled, the pool size will multiply with knowhereThreadPoolNumRatio([1, 32]).      </td>
+      <td>        El número de hilos en el pool de hilos de knowhere. Si el disco está habilitado, el tamaño del pool se multiplicará por knowhereThreadPoolNumRatio([1, 32]).      </td>
       <td>4</td>
     </tr>
   </tbody>
@@ -96,13 +96,13 @@ summary: Learn how to configure queryNode for Milvus.
     </button></h2><table id="queryNode.segcore.chunkRows">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Descripción</th>
+      <th class="width20">Valor por Defecto</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        Row count by which Segcore divides a segment into chunks.      </td>
+      <td>        Recuento de filas por el que Segcore divide un segmento en trozos.      </td>
       <td>128</td>
     </tr>
   </tbody>
@@ -125,17 +125,17 @@ summary: Learn how to configure queryNode for Milvus.
     </button></h2><table id="queryNode.segcore.interimIndex.enableIndex">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Descripción</th>
+      <th class="width20">Valor por defecto</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>
-        <li>Whether to create a temporary index for growing segments and sealed segments not yet indexed, improving search performance.</li>      
-        <li>Milvus will eventually seals and indexes all segments, but enabling this optimizes search performance for immediate queries following data insertion.</li>      
-        <li>This defaults to true, indicating that Milvus creates temporary index for growing segments and the sealed segments that are not indexed upon searches.</li>      </td>
-      <td>true</td>
+        <li>Si crear un índice temporal para segmentos crecientes y segmentos sellados aún no indexados, mejorando el rendimiento de la búsqueda.</li>      
+        <li>Milvus eventualmente sellará e indexará todos los segmentos, pero habilitar esto optimiza el rendimiento de búsqueda para consultas inmediatas después de la inserción de datos.</li>      
+        <li>El valor predeterminado es true, lo que indica que Milvus crea un índice temporal para los segmentos en crecimiento y los segmentos sellados que no se indexan en las búsquedas.</li>      </td>
+      <td>verdadero</td>
     </tr>
   </tbody>
 </table>
@@ -157,13 +157,13 @@ summary: Learn how to configure queryNode for Milvus.
     </button></h2><table id="queryNode.segcore.interimIndex.nlist">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Descripción</th>
+      <th class="width20">Valor por defecto</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        temp index nlist, recommend to set sqrt(chunkRows), must smaller than chunkRows/8      </td>
+      <td>        índice temporal nlist, se recomienda establecer sqrt(chunkRows), debe ser menor que chunkRows/8      </td>
       <td>128</td>
     </tr>
   </tbody>
@@ -186,13 +186,13 @@ summary: Learn how to configure queryNode for Milvus.
     </button></h2><table id="queryNode.segcore.interimIndex.nprobe">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Descripción</th>
+      <th class="width20">Valor por defecto</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        nprobe to search small index, based on your accuracy requirement, must smaller than nlist      </td>
+      <td>        nprobe para buscar un índice pequeño, basado en sus requerimientos de precisión, debe ser menor que nlist     </td>
       <td>16</td>
     </tr>
   </tbody>
@@ -215,13 +215,13 @@ summary: Learn how to configure queryNode for Milvus.
     </button></h2><table id="queryNode.segcore.interimIndex.memExpansionRate">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Descripción</th>
+      <th class="width20">Valor por defecto</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        extra memory needed by building interim index      </td>
+      <td>        memoria extra necesaria para construir el índice intermedio      </td>
       <td>1.15</td>
     </tr>
   </tbody>
@@ -244,13 +244,13 @@ summary: Learn how to configure queryNode for Milvus.
     </button></h2><table id="queryNode.segcore.interimIndex.buildParallelRate">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Descripción</th>
+      <th class="width20">Valor por defecto</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        the ratio of building interim index parallel matched with cpu num      </td>
+      <td>        ratio de construcción de índice intermedio en paralelo con el número de cpu   </td>
       <td>0.5</td>
     </tr>
   </tbody>
@@ -273,14 +273,14 @@ summary: Learn how to configure queryNode for Milvus.
     </button></h2><table id="queryNode.segcore.knowhereScoreConsistency">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Descripción</th>
+      <th class="width20">Valor por defecto</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        Enable knowhere strong consistency score computation logic      </td>
-      <td>false</td>
+      <td>        Habilitar la lógica de cálculo de la puntuación de consistencia fuerte de knowhere      </td>
+      <td>falso</td>
     </tr>
   </tbody>
 </table>
@@ -302,13 +302,13 @@ summary: Learn how to configure queryNode for Milvus.
     </button></h2><table id="queryNode.loadMemoryUsageFactor">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Descripción</th>
+      <th class="width20">Valor por defecto</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        The multiply factor of calculating the memory usage while loading segments      </td>
+      <td>        El factor multiplicador del cálculo del uso de memoria mientras se cargan segmentos      </td>
       <td>1</td>
     </tr>
   </tbody>
@@ -331,14 +331,14 @@ summary: Learn how to configure queryNode for Milvus.
     </button></h2><table id="queryNode.enableDisk">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Descripción</th>
+      <th class="width20">Valor por defecto</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        enable querynode load disk index, and search on disk index      </td>
-      <td>false</td>
+      <td>        habilitar querynode cargar índice de disco, y la búsqueda en el índice de disco     </td>
+      <td>falso</td>
     </tr>
   </tbody>
 </table>
@@ -360,13 +360,13 @@ summary: Learn how to configure queryNode for Milvus.
     </button></h2><table id="queryNode.cache.memoryLimit">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Descripción</th>
+      <th class="width20">Valor por defecto</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        2 GB, 2 * 1024 *1024 *1024      </td>
+      <td>        2 GB, 2 * 1024 *1024 *1024     </td>
       <td>2147483648</td>
     </tr>
   </tbody>
@@ -389,13 +389,13 @@ summary: Learn how to configure queryNode for Milvus.
     </button></h2><table id="queryNode.cache.readAheadPolicy">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Descripción</th>
+      <th class="width20">Valor por defecto</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        The read ahead policy of chunk cache, options: `normal, random, sequential, willneed, dontneed`      </td>
+      <td>        La política de lectura anticipada de la caché de trozos, opciones: `normal, random, sequential, willneed, dontneed`.      </td>
       <td>willneed</td>
     </tr>
   </tbody>
@@ -418,20 +418,20 @@ summary: Learn how to configure queryNode for Milvus.
     </button></h2><table id="queryNode.cache.warmup">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Descripción</th>
+      <th class="width20">Valor por defecto</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>
-        <li>options: async, sync, disable. </li>      
-        <li>Specifies the necessity for warming up the chunk cache. </li>      
-        <li>1. If set to "sync" or "async" the original vector data will be synchronously/asynchronously loaded into the </li>      
-        <li>chunk cache during the load process. This approach has the potential to substantially reduce query/search latency</li>      
-        <li>for a specific duration post-load, albeit accompanied by a concurrent increase in disk usage;</li>      
-        <li>2. If set to "disable" original vector data will only be loaded into the chunk cache during search/query.</li>      </td>
-      <td>disable</td>
+        <li>opciones: async, sync, disable. </li>      
+        <li>Especifica la necesidad de calentar la caché de trozos. </li>      
+        <li>1. Si se establece en "sync" o "async", los datos vectoriales originales se cargarán de forma síncrona/asíncrona en la caché de trozos durante el proceso de carga. </li>      
+        <li>caché de trozos durante el proceso de carga. Este enfoque tiene el potencial de reducir sustancialmente la latencia de consulta/búsqueda</li>      
+        <li>durante un tiempo específico tras la carga, aunque acompañado de un aumento simultáneo del uso del disco;</li>      
+        <li>2. Si se establece en "disable" (desactivar), los datos vectoriales originales sólo se cargarán en la caché de trozos durante la búsqueda/consulta.</li>      </td>
+      <td>desactivar</td>
     </tr>
   </tbody>
 </table>
@@ -453,13 +453,13 @@ summary: Learn how to configure queryNode for Milvus.
     </button></h2><table id="queryNode.mmap.mmapEnabled">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Descripción</th>
+      <th class="width20">Valor por defecto</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        Enable mmap for loading data      </td>
+      <td>        Habilitar mmap para cargar datos     </td>
       <td>false</td>
     </tr>
   </tbody>
@@ -482,14 +482,14 @@ summary: Learn how to configure queryNode for Milvus.
     </button></h2><table id="queryNode.mmap.growingMmapEnabled">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Descripción</th>
+      <th class="width20">Valor por defecto</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        Enable mmap for using in growing raw data      </td>
-      <td>false</td>
+      <td>        Habilitar mmap para utilizar en el crecimiento de datos en bruto     </td>
+      <td>falso</td>
     </tr>
   </tbody>
 </table>
@@ -511,13 +511,13 @@ summary: Learn how to configure queryNode for Milvus.
     </button></h2><table id="queryNode.mmap.fixedFileSizeForMmapAlloc">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Descripción</th>
+      <th class="width20">Valor por defecto</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        tmp file size for mmap chunk manager      </td>
+      <td>        Tamaño del fichero tmp para el gestor de chunk mmap    </td>
       <td>1</td>
     </tr>
   </tbody>
@@ -540,13 +540,13 @@ summary: Learn how to configure queryNode for Milvus.
     </button></h2><table id="queryNode.mmap.maxDiskUsagePercentageForMmapAlloc">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Descripción</th>
+      <th class="width20">Valor por defecto</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        disk percentage used in mmap chunk manager      </td>
+      <td>        porcentaje de disco usado en mmap chunk manager      </td>
       <td>50</td>
     </tr>
   </tbody>
@@ -569,14 +569,14 @@ summary: Learn how to configure queryNode for Milvus.
     </button></h2><table id="queryNode.lazyload.enabled">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Descripción</th>
+      <th class="width20">Valor por defecto</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        Enable lazyload for loading data      </td>
-      <td>false</td>
+      <td>        Habilitar lazyload para cargar datos     </td>
+      <td>falso</td>
     </tr>
   </tbody>
 </table>
@@ -598,13 +598,13 @@ summary: Learn how to configure queryNode for Milvus.
     </button></h2><table id="queryNode.lazyload.waitTimeout">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Descripción</th>
+      <th class="width20">Valor por defecto</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        max wait timeout duration in milliseconds before start to do lazyload search and retrieve      </td>
+      <td>        max wait timeout duración en milisegundos antes de empezar a hacer la búsqueda y recuperación lazyload      </td>
       <td>30000</td>
     </tr>
   </tbody>
@@ -627,13 +627,13 @@ summary: Learn how to configure queryNode for Milvus.
     </button></h2><table id="queryNode.lazyload.requestResourceTimeout">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Descripción</th>
+      <th class="width20">Valor por defecto</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        max timeout in milliseconds for waiting request resource for lazy load, 5s by default      </td>
+      <td>        tiempo máximo de espera en milisegundos para la solicitud de recursos para lazy load, 5s por defecto      </td>
       <td>5000</td>
     </tr>
   </tbody>
@@ -656,13 +656,13 @@ summary: Learn how to configure queryNode for Milvus.
     </button></h2><table id="queryNode.lazyload.requestResourceRetryInterval">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Descripción</th>
+      <th class="width20">Valor por defecto</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        retry interval in milliseconds for waiting request resource for lazy load, 2s by default      </td>
+      <td>        intervalo de reintento en milisegundos para el recurso de solicitud en espera para carga lenta, 2 s por defecto      </td>
       <td>2000</td>
     </tr>
   </tbody>
@@ -685,13 +685,13 @@ summary: Learn how to configure queryNode for Milvus.
     </button></h2><table id="queryNode.lazyload.maxRetryTimes">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Descripción</th>
+      <th class="width20">Valor por defecto</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        max retry times for lazy load, 1 by default      </td>
+      <td>        tiempos máximos de reintento para carga lenta, 1 por defecto      </td>
       <td>1</td>
     </tr>
   </tbody>
@@ -714,13 +714,13 @@ summary: Learn how to configure queryNode for Milvus.
     </button></h2><table id="queryNode.lazyload.maxEvictPerRetry">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Descripción</th>
+      <th class="width20">Valor por defecto</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        max evict count for lazy load, 1 by default      </td>
+      <td>        max evict count for lazy load, 1 por defecto      </td>
       <td>1</td>
     </tr>
   </tbody>
@@ -743,17 +743,17 @@ summary: Learn how to configure queryNode for Milvus.
     </button></h2><table id="queryNode.scheduler.maxReadConcurrentRatio">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Descripción</th>
+      <th class="width20">Valor por defecto</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>
-        <li>maxReadConcurrentRatio is the concurrency ratio of read task (search task and query task).</li>      
-        <li>Max read concurrency would be the value of hardware.GetCPUNum * maxReadConcurrentRatio.</li>      
-        <li>It defaults to 2.0, which means max read concurrency would be the value of hardware.GetCPUNum * 2.</li>      
-        <li>Max read concurrency must greater than or equal to 1, and less than or equal to hardware.GetCPUNum * 100.</li>      
+        <li>maxReadConcurrentRatio es el ratio de concurrencia de la tarea de lectura (tarea de búsqueda y tarea de consulta).</li>      
+        <li>La concurrencia de lectura máxima sería el valor de hardware.GetCPUNum * maxReadConcurrentRatio.</li>      
+        <li>Por defecto es 2.0, lo que significa que la concurrencia de lectura máxima sería el valor de hardware.GetCPUNum * 2.</li>      
+        <li>La concurrencia máxima de lectura debe ser mayor o igual que 1, y menor o igual que hardware.GetCPUNum * 100.</li>      
         <li>(0, 100]</li>      </td>
       <td>1</td>
     </tr>
@@ -777,13 +777,13 @@ summary: Learn how to configure queryNode for Milvus.
     </button></h2><table id="queryNode.scheduler.cpuRatio">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Descripción</th>
+      <th class="width20">Valor por defecto</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        ratio used to estimate read task cpu usage.      </td>
+      <td>        Proporción utilizada para estimar el uso de cpu de la tarea de lectura.      </td>
       <td>10</td>
     </tr>
   </tbody>
@@ -806,20 +806,20 @@ summary: Learn how to configure queryNode for Milvus.
     </button></h2><table id="queryNode.scheduler.scheduleReadPolicy.name">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Descripción</th>
+      <th class="width20">Valor por defecto</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>
-        <li>fifo: A FIFO queue support the schedule.</li>      
+        <li>fifo: Una cola FIFO soporta la programación.</li>      
         <li>user-task-polling:</li>      
-        <li>    The user's tasks will be polled one by one and scheduled.</li>      
-        <li>    Scheduling is fair on task granularity.</li>      
-        <li>    The policy is based on the username for authentication.</li>      
-        <li>    And an empty username is considered the same user.</li>      
-        <li>    When there are no multi-users, the policy decay into FIFO"</li>      </td>
+        <li>    Las tareas del usuario serán sondeadas una a una y programadas.</li>      
+        <li>    La programación se basa en la granularidad de las tareas.</li>      
+        <li>    La política se basa en el nombre de usuario para la autenticación.</li>      
+        <li>    Un nombre de usuario vacío se considera el mismo usuario.</li>      
+        <li>    Cuando no hay multiusuarios, la política decae en FIFO".</li>      </td>
       <td>fifo</td>
     </tr>
   </tbody>
@@ -842,13 +842,13 @@ summary: Learn how to configure queryNode for Milvus.
     </button></h2><table id="queryNode.scheduler.scheduleReadPolicy.taskQueueExpire">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Descripción</th>
+      <th class="width20">Valor por defecto</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        Control how long (many seconds) that queue retains since queue is empty      </td>
+      <td>        Controla cuánto tiempo (muchos segundos) retiene la cola desde que se vacía      </td>
       <td>60</td>
     </tr>
   </tbody>
@@ -871,14 +871,14 @@ summary: Learn how to configure queryNode for Milvus.
     </button></h2><table id="queryNode.scheduler.scheduleReadPolicy.enableCrossUserGrouping">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Descripción</th>
+      <th class="width20">Valor por defecto</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        Enable Cross user grouping when using user-task-polling policy. (Disable it if user's task can not merge each other)      </td>
-      <td>false</td>
+      <td>        Habilita la agrupación cruzada de usuarios cuando se utiliza la política user-task-polling. (Desactívelo si las tareas de usuario no pueden fusionarse entre sí)    </td>
+      <td>falso</td>
     </tr>
   </tbody>
 </table>
@@ -900,13 +900,13 @@ summary: Learn how to configure queryNode for Milvus.
     </button></h2><table id="queryNode.scheduler.scheduleReadPolicy.maxPendingTaskPerUser">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Descripción</th>
+      <th class="width20">Valor por defecto</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        Max pending task per user in scheduler      </td>
+      <td>        Máximo de tareas pendientes por usuario en el planificador      </td>
       <td>1024</td>
     </tr>
   </tbody>
@@ -929,13 +929,13 @@ summary: Learn how to configure queryNode for Milvus.
     </button></h2><table id="queryNode.dataSync.flowGraph.maxQueueLength">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Descripción</th>
+      <th class="width20">Valor por defecto</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        The maximum size of task queue cache in flow graph in query node.      </td>
+      <td>        Tamaño máximo de la caché de la cola de tareas en el gráfico de flujo en el nodo de consulta.      </td>
       <td>16</td>
     </tr>
   </tbody>
@@ -958,13 +958,13 @@ summary: Learn how to configure queryNode for Milvus.
     </button></h2><table id="queryNode.dataSync.flowGraph.maxParallelism">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Descripción</th>
+      <th class="width20">Valor por defecto</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        Maximum number of tasks executed in parallel in the flowgraph      </td>
+      <td>        Número máximo de tareas ejecutadas en paralelo en el grafo de flujo     </td>
       <td>1024</td>
     </tr>
   </tbody>
@@ -987,14 +987,14 @@ summary: Learn how to configure queryNode for Milvus.
     </button></h2><table id="queryNode.enableSegmentPrune">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Descripción</th>
+      <th class="width20">Valor por defecto</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        use partition stats to prune data in search/query on shard delegator      </td>
-      <td>false</td>
+      <td>        usar estadísticas de partición para podar datos en búsqueda/consulta en delegador de fragmentos      </td>
+      <td>falso</td>
     </tr>
   </tbody>
 </table>
@@ -1016,13 +1016,13 @@ summary: Learn how to configure queryNode for Milvus.
     </button></h2><table id="queryNode.bloomFilterApplyParallelFactor">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Descripción</th>
+      <th class="width20">Valor por defecto</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        parallel factor when to apply pk to bloom filter, default to 4*CPU_CORE_NUM      </td>
+      <td>        factor paralelo cuando aplicar pk a bloom filter, por defecto 4*CPU_CORE_NUM      </td>
       <td>4</td>
     </tr>
   </tbody>
@@ -1045,13 +1045,13 @@ summary: Learn how to configure queryNode for Milvus.
     </button></h2><table id="queryNode.queryStreamBatchSize">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Descripción</th>
+      <th class="width20">Valor por defecto</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        return batch size of stream query      </td>
+      <td>        tamaño del lote de retorno de la consulta de flujo     </td>
       <td>4194304</td>
     </tr>
   </tbody>
@@ -1074,13 +1074,13 @@ summary: Learn how to configure queryNode for Milvus.
     </button></h2><table id="queryNode.workerPooling.size">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Descripción</th>
+      <th class="width20">Valor por defecto</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        the size for worker querynode client pool      </td>
+      <td>        el tamaño para el pool de clientes querynode worker      </td>
       <td>10</td>
     </tr>
   </tbody>
@@ -1103,13 +1103,13 @@ summary: Learn how to configure queryNode for Milvus.
     </button></h2><table id="queryNode.ip">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Descripción</th>
+      <th class="width20">Valor por defecto</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        TCP/IP address of queryNode. If not specified, use the first unicastable address      </td>
+      <td>        Dirección TCP/IP del queryNode. Si no se especifica, utiliza la primera dirección unicastable      </td>
       <td></td>
     </tr>
   </tbody>
@@ -1132,13 +1132,13 @@ summary: Learn how to configure queryNode for Milvus.
     </button></h2><table id="queryNode.port">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Descripción</th>
+      <th class="width20">Valor por defecto</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        TCP port of queryNode      </td>
+      <td>        Puerto TCP del queryNode      </td>
       <td>21123</td>
     </tr>
   </tbody>
@@ -1161,13 +1161,13 @@ summary: Learn how to configure queryNode for Milvus.
     </button></h2><table id="queryNode.grpc.serverMaxSendSize">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Descripción</th>
+      <th class="width20">Valor por defecto</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        The maximum size of each RPC request that the queryNode can send, unit: byte      </td>
+      <td>        El tamaño máximo de cada petición RPC que el queryNode puede enviar, unidad: byte    </td>
       <td>536870912</td>
     </tr>
   </tbody>
@@ -1190,13 +1190,13 @@ summary: Learn how to configure queryNode for Milvus.
     </button></h2><table id="queryNode.grpc.serverMaxRecvSize">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Descripción</th>
+      <th class="width20">Valor por defecto</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        The maximum size of each RPC request that the queryNode can receive, unit: byte      </td>
+      <td>        El tamaño máximo de cada petición RPC que el queryNode puede recibir, unidad: byte    </td>
       <td>268435456</td>
     </tr>
   </tbody>
@@ -1219,13 +1219,13 @@ summary: Learn how to configure queryNode for Milvus.
     </button></h2><table id="queryNode.grpc.clientMaxSendSize">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Descripción</th>
+      <th class="width20">Valor por defecto</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        The maximum size of each RPC request that the clients on queryNode can send, unit: byte      </td>
+      <td>        El tamaño máximo de cada petición RPC que los clientes en queryNode pueden enviar, unidad: byte    </td>
       <td>268435456</td>
     </tr>
   </tbody>
@@ -1248,13 +1248,13 @@ summary: Learn how to configure queryNode for Milvus.
     </button></h2><table id="queryNode.grpc.clientMaxRecvSize">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Descripción</th>
+      <th class="width20">Valor por defecto</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        The maximum size of each RPC request that the clients on queryNode can receive, unit: byte      </td>
+      <td>        El tamaño máximo de cada petición RPC que los clientes en queryNode pueden recibir, unidad: byte    </td>
       <td>536870912</td>
     </tr>
   </tbody>

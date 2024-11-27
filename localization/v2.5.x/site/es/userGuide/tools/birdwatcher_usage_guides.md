@@ -1,9 +1,9 @@
 ---
 id: birdwatcher_usage_guides.md
-summary: Learn how to use Birdwatch to debug Milvus.
-title: Use Birdwatcher
+summary: Aprenda a utilizar Birdwatch para depurar Milvus.
+title: Utilizar Birdwatcher
 ---
-<h1 id="Use-Birdwatcher" class="common-anchor-header">Use Birdwatcher<button data-href="#Use-Birdwatcher" class="anchor-icon" translate="no">
+<h1 id="Use-Birdwatcher" class="common-anchor-header">Utilizar Birdwatcher<button data-href="#Use-Birdwatcher" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -18,8 +18,8 @@ title: Use Birdwatcher
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>This guide walks you through how to use Birdwatcher to check the state of your Milvus and configure it on the fly.</p>
-<h2 id="Start-Birdwatcher" class="common-anchor-header">Start Birdwatcher<button data-href="#Start-Birdwatcher" class="anchor-icon" translate="no">
+    </button></h1><p>Esta guía le explica cómo utilizar Birdwatcher para comprobar el estado de su Milvus y configurarlo sobre la marcha.</p>
+<h2 id="Start-Birdwatcher" class="common-anchor-header">Iniciar Birdwatcher<button data-href="#Start-Birdwatcher" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -34,13 +34,13 @@ title: Use Birdwatcher
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Birdwatcher is a command-line tool, you can start it as follows:</p>
+    </button></h2><p>Birdwatcher es una herramienta de línea de comandos, puede iniciarla de la siguiente manera:</p>
 <pre><code translate="no" class="language-shell">./birdwatcher
 <button class="copy-code-btn"></button></code></pre>
-<p>Then you will be greeted with the following prompt:</p>
+<p>Entonces aparecerá el siguiente mensaje:</p>
 <pre><code translate="no" class="language-shell">Offline &gt;
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Connect-to-etcd" class="common-anchor-header">Connect to etcd<button data-href="#Connect-to-etcd" class="anchor-icon" translate="no">
+<h2 id="Connect-to-etcd" class="common-anchor-header">Conectarse a etcd<button data-href="#Connect-to-etcd" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -55,29 +55,29 @@ title: Use Birdwatcher
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>You need to use Birdwatcher to connect to etcd before any other operations.</p>
+    </button></h2><p>Necesita usar Birdwatcher para conectarse a etcd antes de cualquier otra operación.</p>
 <ul>
-<li><p>Connect with default settings</p>
+<li><p>Conectar con la configuración por defecto</p>
 <pre><code translate="no" class="language-shell">Offline &gt; connect
 <span class="hljs-title function_">Milvus</span><span class="hljs-params">(by-dev)</span> &gt;
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p>Connect from Birdwatcher in a pod</p>
-<p>If you choose to run Birdwatcher in a Kubernetes pod, you need first obtain the IP address of etcd as follows:</p>
+<li><p>Conectar desde Birdwatcher en un pod</p>
+<p>Si elige ejecutar Birdwatcher en un pod de Kubernetes, primero necesita obtener la dirección IP de etcd como se indica a continuación:</p>
 <pre><code translate="no" class="language-shell">kubectl <span class="hljs-keyword">get</span> pod my-release-etcd<span class="hljs-number">-0</span> -o <span class="hljs-string">&#x27;jsonpath={.status.podIP}&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Then access the shell of the pod.</p>
+<p>A continuación, acceda al shell del pod.</p>
 <pre><code translate="no" class="language-shell">kubectl <span class="hljs-built_in">exec</span> --stdin --<span class="hljs-built_in">tty</span> birdwatcher-7f48547ddc-zcbxj -- /bin/sh
 <button class="copy-code-btn"></button></code></pre>
-<p>Finally, use the returned IP address to connect to etcd as follows:</p>
+<p>Por último, utilice la dirección IP devuelta para conectarse a etcd de la siguiente manera:</p>
 <pre><code translate="no" class="language-shell">Offline &gt; connect --etcd <span class="hljs-variable">${ETCD_IP_ADDR}</span>:2379
 Milvus(by-dev)
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p>Connect with a different root path</p>
-<p>If the root path of your Milvus is different from <code translate="no">by-dev</code> and you are prompted with an error reporting about an incorrect root path, you can connect to etcd as follows:</p>
+<li><p>Conectar con una ruta raíz diferente</p>
+<p>Si la ruta raíz de su Milvus es diferente de <code translate="no">by-dev</code> y aparece un error informando de una ruta raíz incorrecta, puede conectarse a etcd de la siguiente manera:</p>
 <pre><code translate="no" class="language-shell">Offline &gt; connect --rootPath my-release
 <span class="hljs-title function_">Milvus</span><span class="hljs-params">(my-release)</span> &gt;
 <button class="copy-code-btn"></button></code></pre>
-<p>If you do not know the root path of your Milvus, connect to etcd as follows:</p>
+<p>Si no conoce la ruta raíz de su Milvus, conéctese a etcd de la siguiente manera:</p>
 <pre><code translate="no" class="language-shell">Offline &gt; connect --dry
 using dry mode, ignore rootPath and metaPath
 <span class="hljs-title function_">Etcd</span><span class="hljs-params">(<span class="hljs-number">127.0</span><span class="hljs-number">.0</span><span class="hljs-number">.1</span>:<span class="hljs-number">2379</span>)</span> &gt; find-milvus
@@ -87,7 +87,7 @@ my-release
 <span class="hljs-title function_">Milvus</span><span class="hljs-params">(my-release)</span> &gt;
 <button class="copy-code-btn"></button></code></pre></li>
 </ul>
-<h2 id="Check-Milvus-status" class="common-anchor-header">Check Milvus status<button data-href="#Check-Milvus-status" class="anchor-icon" translate="no">
+<h2 id="Check-Milvus-status" class="common-anchor-header">Comprobar el estado de Milvus<button data-href="#Check-Milvus-status" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -102,7 +102,7 @@ my-release
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>You can use the <code translate="no">show</code> commands to check Milvus status.</p>
+    </button></h2><p>Puede utilizar los comandos <code translate="no">show</code> para comprobar el estado de Milvus.</p>
 <pre><code translate="no" class="language-shell">Milvus(my-release) &gt; show -h
 Usage:
    show [command]
@@ -135,7 +135,7 @@ Flags:
 
 Use <span class="hljs-string">&quot; show [command] --help&quot;</span> <span class="hljs-keyword">for</span> more information about a command.
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="List-sessions" class="common-anchor-header">List sessions</h3><p>To list sessions associated with different components in Milvus:</p>
+<h3 id="List-sessions" class="common-anchor-header">Listar sesiones</h3><p>Para listar sesiones asociadas con diferentes componentes en Milvus:</p>
 <pre><code translate="no" class="language-shell">Milvus(<span class="hljs-keyword">by</span>-dev) &gt; show session
 Session:datacoord, ServerID: <span class="hljs-number">3</span>, Version: <span class="hljs-number">2.2</span><span class="hljs-number">.11</span>, Address: <span class="hljs-number">10.244</span><span class="hljs-number">.0</span><span class="hljs-number">.8</span>:<span class="hljs-number">13333</span>
 Session:datanode, ServerID: <span class="hljs-number">6</span>, Version: <span class="hljs-number">2.2</span><span class="hljs-number">.11</span>, Address: <span class="hljs-number">10.244</span><span class="hljs-number">.0</span><span class="hljs-number">.8</span>:<span class="hljs-number">21124</span>
@@ -146,19 +146,19 @@ Session:querycoord, ServerID: <span class="hljs-number">7</span>, Version: <span
 Session:querynode, ServerID: <span class="hljs-number">2</span>, Version: <span class="hljs-number">2.2</span><span class="hljs-number">.11</span>, Address: <span class="hljs-number">10.244</span><span class="hljs-number">.0</span><span class="hljs-number">.8</span>:<span class="hljs-number">21123</span>
 Session:rootcoord, ServerID: <span class="hljs-number">1</span>, Version: <span class="hljs-number">2.2</span><span class="hljs-number">.11</span>, Address: <span class="hljs-number">10.244</span><span class="hljs-number">.0</span><span class="hljs-number">.8</span>:<span class="hljs-number">53100</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>In the command output, each session entry listed by <code translate="no">show session</code> corresponds to a node or service that is currently active and registered in <strong>etcd</strong>.</p>
-<h3 id="Check-databases-and-collections" class="common-anchor-header">Check databases and collections</h3><p>You can list all databases and collections.</p>
+<p>En la salida del comando, cada entrada de sesión listada por <code translate="no">show session</code> corresponde a un nodo o servicio que está actualmente activo y registrado en <strong>etcd</strong>.</p>
+<h3 id="Check-databases-and-collections" class="common-anchor-header">Comprobar bases de datos y colecciones</h3><p>Puede listar todas las bases de datos y colecciones.</p>
 <ul>
-<li><p>List databases</p>
-<p>In the command output, you can find information about every database.</p>
+<li><p>Lista de bases de datos</p>
+<p>En la salida del comando, puede encontrar información sobre cada base de datos.</p>
 <pre><code translate="no" class="language-shell">Milvus(by-dev) &gt; show database
 =============================
 ID: <span class="hljs-number">1</span>   Name: <span class="hljs-keyword">default</span>
 TenantID:        State: DatabaseCreated
 --- Total <span class="hljs-title function_">Database</span><span class="hljs-params">(s)</span>: <span class="hljs-number">1</span>
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p>List collections</p>
-<p>In the command output, you can find detailed information about every collection.</p>
+<li><p>Listar colecciones</p>
+<p>En la salida del comando, puede encontrar información detallada sobre cada colección.</p>
 <pre><code translate="no" class="language-shell">Milvus(by-dev) &gt; show collections
 ================================================================================
 DBID: <span class="hljs-number">1</span>
@@ -187,8 +187,8 @@ Start position <span class="hljs-keyword">for</span> channel by-dev-rootcoord-dm
 --- Total channel: <span class="hljs-number">1</span>     Healthy collections: <span class="hljs-number">1</span>
 ================================================================================
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p>View a specific collection</p>
-<p>You can view a specific collection by specifying its ID.</p>
+<li><p>Ver una colección concreta</p>
+<p>Puede ver una colección específica especificando su ID.</p>
 <pre><code translate="no" class="language-shell">Milvus(by-dev) &gt; show collection-history --<span class="hljs-built_in">id</span> <span class="hljs-number">443407225551410746</span>
 ================================================================================
 DBID: <span class="hljs-number">1</span>
@@ -214,20 +214,20 @@ Enable Dynamic Schema: false
 Consistency Level: Bounded
 Start position <span class="hljs-keyword">for</span> channel by-dev-rootcoord-dml_0(by-dev-rootcoord-dml_0_443407225551410746v0): [<span class="hljs-number">1</span> <span class="hljs-number">0</span> <span class="hljs-number">28</span> <span class="hljs-number">175</span> <span class="hljs-number">133</span> <span class="hljs-number">76</span> <span class="hljs-number">39</span> <span class="hljs-number">6</span>]
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p>View all loaded collections</p>
-<p>You can have Birdwatcher filter all loaded collections.</p>
+<li><p>Ver todas las colecciones cargadas</p>
+<p>Puede hacer que Birdwatcher filtre todas las colecciones cargadas.</p>
 <pre><code translate="no" class="language-shell">Milvus(<span class="hljs-keyword">by</span>-dev) &gt; show collection-loaded
 Version: [&gt;= <span class="hljs-number">2.2</span><span class="hljs-number">.0</span>]     CollectionID: <span class="hljs-number">443407225551410746</span>
 ReplicaNumber: <span class="hljs-number">1</span>        LoadStatus: Loaded
 --- Collections Loaded: <span class="hljs-number">1</span>
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p>List all channel checkpoints of a collection</p>
-<p>You can have Birdwatcher list all checkpoints of a specific collection.</p>
+<li><p>Listar todos los puntos de control de canal de una colección</p>
+<p>Puede hacer que Birdwatcher liste todos los puntos de control de una colección específica.</p>
 <pre><code translate="no" class="language-shell">Milvus(<span class="hljs-keyword">by</span>-dev) &gt; show checkpoint --collection <span class="hljs-number">443407225551410746</span>
 vchannel <span class="hljs-keyword">by</span>-dev-rootcoord-dml_0_443407225551410746v0 seek to <span class="hljs-number">2023</span><span class="hljs-number">-08</span><span class="hljs-number">-08</span> <span class="hljs-number">09</span>:<span class="hljs-number">36</span>:<span class="hljs-number">09.54</span> +<span class="hljs-number">0000</span> UTC, cp channel: <span class="hljs-keyword">by</span>-dev-rootcoord-dml_0_443407225551410746v0, Source: Channel Checkpoint
 <button class="copy-code-btn"></button></code></pre></li>
 </ul>
-<h3 id="Check-index-details" class="common-anchor-header">Check index details</h3><p>Run the following command to list all index files in detail.</p>
+<h3 id="Check-index-details" class="common-anchor-header">Comprobar detalles de índice</h3><p>Ejecute el siguiente comando para listar todos los archivos de índice en detalle.</p>
 <pre><code translate="no" class="language-shell">Milvus(by-dev) &gt; show index
 *************<span class="hljs-number">2.1</span>.x***************
 *************<span class="hljs-number">2.2</span>.x***************
@@ -238,12 +238,12 @@ Index <span class="hljs-type">Type</span>: HNSW        Metric <span class="hljs-
 Index Params: 
 ==================================================================
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="List-partitions" class="common-anchor-header">List partitions</h3><p>Run the following command to list all partitions in a specific collection.</p>
+<h3 id="List-partitions" class="common-anchor-header">Listar particiones</h3><p>Ejecute el siguiente comando para listar todas las particiones de una colección específica.</p>
 <pre><code translate="no" class="language-shell">Milvus(by-dev) &gt; show partition --collection <span class="hljs-number">443407225551410746</span>
 Parition ID: <span class="hljs-number">443407225551410747</span> Name: _default  State: PartitionCreated
 --- Total <span class="hljs-title function_">Database</span><span class="hljs-params">(s)</span>: <span class="hljs-number">1</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Check-channel-status" class="common-anchor-header">Check channel status</h3><p>Run the following command to view channel status</p>
+<h3 id="Check-channel-status" class="common-anchor-header">Comprobar el estado del canal</h3><p>Ejecute el siguiente comando para ver el estado del canal</p>
 <pre><code translate="no" class="language-shell">Milvus(<span class="hljs-keyword">by</span>-dev) &gt; show channel-watch
 =============================
 key: <span class="hljs-keyword">by</span>-dev/meta/channelwatch/<span class="hljs-number">6</span>/<span class="hljs-keyword">by</span>-dev-rootcoord-dml_0_443407225551410746v0
@@ -255,21 +255,21 @@ Flushed segments: []
 Dropped segments: []
 --- Total Channels: <span class="hljs-number">1</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="List-all-replicas-and-segments" class="common-anchor-header">List all replicas and segments</h3><ul>
-<li><p>List all replicas</p>
-<p>Run the following command to list all replicas and their corresponding collections.</p>
+<h3 id="List-all-replicas-and-segments" class="common-anchor-header">Listar todas las réplicas y segmentos</h3><ul>
+<li><p>Listar todas las réplicas</p>
+<p>Ejecute el siguiente comando para listar todas las réplicas y sus correspondientes colecciones.</p>
 <pre><code translate="no" class="language-shell">Milvus(<span class="hljs-keyword">by</span>-dev) &gt; show replica
 ================================================================================
 ReplicaID: <span class="hljs-number">443407225685278721</span> CollectionID: <span class="hljs-number">443407225551410746</span> version:&gt;=<span class="hljs-number">2.2</span><span class="hljs-number">.0</span>
 All Nodes:[<span class="hljs-number">2</span>]
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p>List all segments</p>
-<p>Run the following command to list all segments and their status</p>
+<li><p>Listar todos los segmentos</p>
+<p>Ejecute el siguiente comando para listar todos los segmentos y su estado</p>
 <pre><code translate="no" class="language-shell">SegmentID: 443407225551610865 State: Flushed, Row Count:5979
 --- Growing: 0, Sealed: 0, Flushed: 1
 --- Total Segments: 1, row count: 5979
 <button class="copy-code-btn"></button></code></pre>
-<p>Run the following command to list all loaded segments in detail. For Milvus 2.1.x, use <code translate="no">show segment-loaded</code> instead.</p>
+<p>Ejecute el siguiente comando para listar todos los segmentos cargados en detalle. Para Milvus 2.1.x, utilice <code translate="no">show segment-loaded</code> en su lugar.</p>
 <pre><code translate="no" class="language-shell">Milvus(<span class="hljs-keyword">by</span>-dev) &gt; show segment-loaded-grpc
 ===========
 ServerID <span class="hljs-number">2</span>
@@ -280,7 +280,7 @@ SegmentID: <span class="hljs-number">443407225551610865</span> CollectionID: <sp
 Sealed segments number: <span class="hljs-number">1</span>    
 <button class="copy-code-btn"></button></code></pre></li>
 </ul>
-<h3 id="List-configurations" class="common-anchor-header">List configurations</h3><p>You can have Birdwatcher list the current configurations of each Milvus component.</p>
+<h3 id="List-configurations" class="common-anchor-header">Listar configuraciones</h3><p>Puede hacer que Birdwatcher liste las configuraciones actuales de cada componente Milvus.</p>
 <pre><code translate="no" class="language-shell">Milvus(by-dev) &gt; show configurations
 client <span class="hljs-literal">nil</span> Session:proxy, ServerID: <span class="hljs-number">8</span>, Version: <span class="hljs-number">2.2</span><span class="hljs-number">.11</span>, Address: <span class="hljs-number">10.244</span><span class="hljs-number">.0</span><span class="hljs-number">.8</span>:<span class="hljs-number">19529</span>
 Component rootcoord<span class="hljs-number">-1</span>
@@ -300,7 +300,7 @@ querynode.cache.enabled: <span class="hljs-literal">true</span>
 querynode.cache.memorylimit: <span class="hljs-number">2147483648</span>
 querynode.scheduler.maxreadconcurrentratio: <span class="hljs-number">2</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>As an alternative, you can visit each Milvus component to find its configuration. The following demonstrates how to list the configuration of the QueryCoord with ID 7.</p>
+<p>Como alternativa, puede visitar cada componente Milvus para encontrar su configuración. A continuación se muestra cómo listar la configuración del QueryCoord con ID 7.</p>
 <pre><code translate="no" class="language-shell">Milvus(<span class="hljs-keyword">by</span>-dev) &gt; show session
 Session:datacoord, ServerID: <span class="hljs-number">3</span>, Version: <span class="hljs-number">2.2</span><span class="hljs-number">.11</span>, Address: <span class="hljs-number">10.244</span><span class="hljs-number">.0</span><span class="hljs-number">.8</span>:<span class="hljs-number">13333</span>
 Session:datanode, ServerID: <span class="hljs-number">6</span>, Version: <span class="hljs-number">2.2</span><span class="hljs-number">.11</span>, Address: <span class="hljs-number">10.244</span><span class="hljs-number">.0</span><span class="hljs-number">.8</span>:<span class="hljs-number">21124</span>
@@ -335,7 +335,7 @@ Key: querycoord.balancer, Value: ScoreBasedBalancer
 Key: querycoord.autobalance, Value: <span class="hljs-literal">true</span>
 Key: querycoord.segmenttasktimeout, Value: <span class="hljs-number">120000</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Backup-metrics" class="common-anchor-header">Backup metrics<button data-href="#Backup-metrics" class="anchor-icon" translate="no">
+<h2 id="Backup-metrics" class="common-anchor-header">Copia de seguridad de métricas<button data-href="#Backup-metrics" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -350,7 +350,7 @@ Key: querycoord.segmenttasktimeout, Value: <span class="hljs-number">120000</spa
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>You can have Birdwatcher back up metrics of all components</p>
+    </button></h2><p>Puede hacer que Birdwatcher haga una copia de seguridad de las métricas de todos los componentes</p>
 <pre><code translate="no" class="language-shell">Milvus(my-release) &gt; backup
 Backing up ... 100%(2452/2451)
 backup etcd <span class="hljs-keyword">for</span> prefix  <span class="hljs-keyword">done</span>
@@ -364,8 +364,8 @@ http://10.244.0.10:9091/metrics
 http://10.244.0.10:9091/metrics
 backup <span class="hljs-keyword">for</span> prefix <span class="hljs-keyword">done</span>, stored <span class="hljs-keyword">in</span> file: bw_etcd_ALL.230810-075211.bak.gz
 <button class="copy-code-btn"></button></code></pre>
-<p>Then you can check the file in the directory where you start Birdwatcher.</p>
-<h2 id="Probe-collections" class="common-anchor-header">Probe collections<button data-href="#Probe-collections" class="anchor-icon" translate="no">
+<p>A continuación, puede comprobar el archivo en el directorio donde se inicia Birdwatcher.</p>
+<h2 id="Probe-collections" class="common-anchor-header">Probar colecciones<button data-href="#Probe-collections" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -380,8 +380,8 @@ backup <span class="hljs-keyword">for</span> prefix <span class="hljs-keyword">d
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>You can have Birdwatcher probe the status of loaded collections with specified primary keys or mock queries.</p>
-<h3 id="Probe-collection-with-known-primary-key" class="common-anchor-header">Probe collection with known primary key</h3><p>In the <code translate="no">probe</code> command, you should specify the primary key using the <code translate="no">pk</code> flag, and the collection ID using the <code translate="no">collection</code> flag.</p>
+    </button></h2><p>Puede hacer que Birdwatcher sondee el estado de las colecciones cargadas con claves primarias especificadas o consultas simuladas.</p>
+<h3 id="Probe-collection-with-known-primary-key" class="common-anchor-header">Sondear colecciones con clave primaria conocida</h3><p>En el comando <code translate="no">probe</code>, debe especificar la clave primaria utilizando la bandera <code translate="no">pk</code>, y el ID de la colección utilizando la bandera <code translate="no">collection</code>.</p>
 <pre><code translate="no" class="language-shell">Milvus(<span class="hljs-keyword">by</span>-dev) &gt; probe pk --pk <span class="hljs-number">110</span> --collection <span class="hljs-number">442844725212299747</span>
 PK <span class="hljs-number">110</span> found <span class="hljs-keyword">on</span> segment <span class="hljs-number">442844725212299830</span>
 Field id, <span class="hljs-keyword">value</span>: &amp;{long_data:&lt;data:<span class="hljs-number">110</span> &gt; }
@@ -389,7 +389,7 @@ Field title, <span class="hljs-keyword">value</span>: &amp;{string_data:&lt;data
 Field title_vector, <span class="hljs-keyword">value</span>: &amp;{dim:<span class="hljs-number">768</span> float_vector:&lt;data:<span class="hljs-number">0.022454707</span> data:<span class="hljs-number">0.007861045</span> data:<span class="hljs-number">0.0063843643</span> data:<span class="hljs-number">0.024065714</span> data:<span class="hljs-number">0.013782166</span> data:<span class="hljs-number">0.018483251</span> data:<span class="hljs-number">-0.026526336</span> ... data:<span class="hljs-number">-0.06579628</span> data:<span class="hljs-number">0.00033906146</span> data:<span class="hljs-number">0.030992996</span> data:<span class="hljs-number">-0.028134001</span> data:<span class="hljs-number">-0.01311325</span> data:<span class="hljs-number">0.012471594</span> &gt; }
 Field article_meta, <span class="hljs-keyword">value</span>: &amp;{json_data:&lt;data:<span class="hljs-string">&quot;{\&quot;link\&quot;:\&quot;https:\\/\\/towardsdatascience.com\\/human-resources-datafication-d44c8f7cb365\&quot;,\&quot;reading_time\&quot;:6,\&quot;publication\&quot;:\&quot;Towards Data Science\&quot;,\&quot;claps\&quot;:256,\&quot;responses\&quot;:0}&quot;</span> &gt; }
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Probe-all-collections-with-mock-queries" class="common-anchor-header">Probe all collections with mock queries</h3><p>You can also have Birdwatcher probe all collections with mock queries.</p>
+<h3 id="Probe-all-collections-with-mock-queries" class="common-anchor-header">Examinar todas las colecciones con consultas simuladas</h3><p>También puede hacer que Birdwatcher sondee todas las colecciones con consultas simuladas.</p>
 <pre><code translate="no" class="language-shell">Milvus(by-dev) &gt; probe query
 probing collection <span class="hljs-number">442682158191982314</span>
 Found vector field vector(<span class="hljs-number">103</span>) <span class="hljs-keyword">with</span> dim[<span class="hljs-number">384</span>], indexID: <span class="hljs-number">442682158191990455</span>
