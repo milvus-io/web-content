@@ -1,14 +1,10 @@
 ---
 id: analyzer-overview.md
-title: Analyzer Overview​
+title: アナライザーの概要
 summary: >-
-  In text processing, an analyzer is a crucial component that converts raw text
-  into a structured, searchable format. Each analyzer typically consists of two
-  core elements: tokenizer and filter. Together, they transform input text into
-  tokens, refine these tokens, and prepare them for efficient indexing and
-  retrieval.​
+  テキスト処理において、アナライザーは生テキストを構造化された検索可能な形式に変換する重要なコンポーネントである。各分析器は通常、トークナイザーとフィルターという2つのコア要素で構成される。これらは共に、入力テキストをトークンに変換し、これらのトークンを洗練させ、効率的な索引付けと検索に備える。
 ---
-<h1 id="Analyzer-Overview​" class="common-anchor-header">Analyzer Overview​<button data-href="#Analyzer-Overview​" class="anchor-icon" translate="no">
+<h1 id="Analyzer-Overview​" class="common-anchor-header">アナライザーの概要<button data-href="#Analyzer-Overview​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -23,16 +19,16 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>In text processing, an <strong>analyzer</strong> is a crucial component that converts raw text into a structured, searchable format. Each analyzer typically consists of two core elements: <strong>tokenizer</strong> and <strong>filter</strong>. Together, they transform input text into tokens, refine these tokens, and prepare them for efficient indexing and retrieval.​</p>
-<p>In Milvus, analyzers are configured during collection creation when you add <code translate="no">VARCHAR</code> fields to the collection schema. Tokens produced by an analyzer can be used to build an index for keyword matching or converted into sparse embeddings for full text search. For more information, refer to <a href="/docs/keyword-match.md">​Keyword Match</a> or <a href="/docs/full-text-search.md">​Full Text Search</a>.​</p>
+    </button></h1><p>テキスト処理において、<strong>アナライザーは</strong>生テキストを構造化された検索可能な形式に変換する重要なコンポーネントである。アナライザーは通常、<strong>トークナイザーと</strong> <strong>フィルターという</strong>2つのコア要素で構成される。これらは共に入力テキストをトークンに変換し、トークンを洗練させ、効率的なインデックス作成と検索に備えます。</p>
+<p>Milvusでは、アナライザはコレクション作成時に<code translate="no">VARCHAR</code> フィールドをコレクションスキーマに追加する際に設定されます。アナライザによって生成されたトークンは、キーワードマッチングのためのインデックスを構築するために使用したり、全文検索のためにスパース埋め込みに変換したりすることができます。詳細については、<a href="/docs/ja/keyword-match.md">キーワード・マッチ</a>または<a href="/docs/ja/full-text-search.md">全文検索を</a>参照してください。</p>
 <div class="alert note">
-<p>The use of analyzers may impact performance:​</p>
+<p>アナライザの使用は、パフォーマンスに影響を与える場合があります。</p>
 <ul>
-<li><p><strong>Full text search:</strong> For full text search, DataNode and <strong>QueryNode</strong> channels consume data more slowly because they must wait for tokenization to complete. As a result, newly ingested data takes longer to become available for search.​</p></li>
-<li><p><strong>Keyword match:</strong> For keyword matching, index creation is also slower since tokenization needs to finish before an index can be built.​</p></li>
+<li><p><strong>全文検索：</strong>全文検索：全文検索の場合、DataNodeと<strong>QueryNode</strong>チャネルはトークン化の完了を待つ必要があるため、データの消費が遅くなります。その結果、新しく取り込まれたデータが検索に利用できるようになるまでに時間がかかる。</p></li>
+<li><p><strong>キーワードマッチ：</strong>キーワードマッチの場合、インデックスを構築する前にトークン化が完了する必要があるため、インデックス作成も遅くなります。</p></li>
 </ul>
 </div>
-<h2 id="Anatomy-of-an-analyzer​" class="common-anchor-header">Anatomy of an analyzer​<button data-href="#Anatomy-of-an-analyzer​" class="anchor-icon" translate="no">
+<h2 id="Anatomy-of-an-analyzer​" class="common-anchor-header">アナライザーの構造<button data-href="#Anatomy-of-an-analyzer​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -47,14 +43,14 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>An analyzer in Milvus consists of exactly one <strong>tokenizer</strong> and <strong>zero or more</strong> filters.​</p>
+    </button></h2><p>Milvusのアナライザーは、1つの<strong>トークナイザーと</strong> <strong>0つ以上の</strong>フィルターから構成されます。</p>
 <ul>
-<li><p><strong>Tokenizer</strong>: The tokenizer breaks input text into discrete units called tokens. These tokens could be words or phrases, depending on the tokenizer type.​</p></li>
-<li><p><strong>Filters</strong>: Filters can be applied to tokens to further refine them, for example, by making them lowercase or removing common words.​</p></li>
+<li><p><strong>トークナイザー</strong>：トークナイザーは入力テキストをトークンと呼ばれる個別の単位に分割します。トークンはトークン化の種類によって、単語であったりフレーズであったりします。</p></li>
+<li><p><strong>フィルター</strong>：たとえば、小文字にしたり、一般的な単語を削除したりします。</p></li>
 </ul>
-<p>The workflow below shows how an analyzer processes text.​</p>
+<p>以下のワークフローは、アナライザーがテキストをどのように処理するかを示しています。</p>
 <p><img translate="no" src="/docs/v2.5.x/assets/analyzer-overview.png" alt="analyzer-overview" width="400"/></p>
-<h2 id="Analyzer-types​" class="common-anchor-header">Analyzer types​<button data-href="#Analyzer-types​" class="anchor-icon" translate="no">
+<h2 id="Analyzer-types​" class="common-anchor-header">分析器のタイプ<button data-href="#Analyzer-types​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -69,23 +65,23 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus provides two types of analyzers to meet different text processing needs:​</p>
+    </button></h2><p>Milvusでは、様々なテキスト処理のニーズに対応するため、2種類のアナライザを提供しています。</p>
 <ul>
-<li><p><strong>Built-in analyzer</strong>: These are predefined configurations that cover common text processing tasks with minimal setup. Built-in analyzers are ideal for general-purpose searches, as they require no complex configuration.​</p></li>
-<li><p><strong>Custom analyzer</strong>: For more advanced requirements, custom analyzers allow you to define your own configuration by specifying both the tokenizer and zero or more filters. This level of customization is especially useful for specialized use cases where precise control over text processing is needed.​</p></li>
+<li><p><strong>内蔵アナライザ</strong>：ビルトイン アナライザ: 最小限のセットアップで一般的なテキスト処理タスクをカバーする、定義済みのコンフィギュレーションです。複雑な設定が不要なため、汎用的な検索に最適です。</p></li>
+<li><p><strong>カスタムアナライザー</strong>：より高度な要件に対応するカスタム・アナライザでは、トークナイザとゼロ個以上のフィルタの両方を指定することで、独自の設定を定義できます。このレベルのカスタマイズは、テキスト処理を正確に制御する必要がある特殊なユースケースで特に役立ちます。</p></li>
 </ul>
 <div class="alert note">
-<p>If you omit analyzer configurations during collection creation, Milvus uses the <code translate="no">standard</code> analyzer for all text processing by default. For details, refer to <a href="/docs/standard-analyzer.md">​Standard</a>.​</p>
+<p>コレクション作成時にアナライザ設定を省略した場合、Milvusはデフォルトですべてのテキスト処理に<code translate="no">standard</code> アナライザを使用します。詳細については、「<a href="/docs/ja/standard-analyzer.md">標準</a>」を参照してください。</p>
 </div>
-<h3 id="Built-in-analyzer​" class="common-anchor-header">Built-in analyzer​</h3><p>Built-in analyzers in Milvus are pre-configured with specific tokenizers and filters, allowing you to use them immediately without needing to define these components yourself. Each built-in analyzer serves as a template that includes a preset tokenizer and filters, with optional parameters for customization.​</p>
-<p>For example, to use the <code translate="no">standard</code> built-in analyzer, simply specify its name <code translate="no">standard</code> as the <code translate="no">type</code> and optionally include extra configurations specific to this analyzer type, such as <code translate="no">stop_words</code>:​</p>
+<h3 id="Built-in-analyzer​" class="common-anchor-header">内蔵アナライザ</h3><p>Milvusのビルトインアナライザは、特定のトークナイザやフィルタがあらかじめ設定されており、これらのコンポーネントを自分で定義することなく、すぐに使用することができます。各ビルトインアナライザは、予め設定されたトークナイザーとフィルタを含むテンプレートとして機能し、カスタマイズのためのオプションパラメータが用意されています。</p>
+<p>たとえば、<code translate="no">standard</code> 組み込み解析器を使用するには、<code translate="no">standard</code> という名前を<code translate="no">type</code> と指定し、オプションで<code translate="no">stop_words</code> など、この解析器タイプに固有の追加設定を含めるだけです。</p>
 <pre><code translate="no" class="language-python">analyzer_params = {​
     <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;standard&quot;</span>, <span class="hljs-comment"># Uses the standard built-in analyzer​</span>
     <span class="hljs-string">&quot;stop_words&quot;</span>: [<span class="hljs-string">&quot;a&quot;</span>, <span class="hljs-string">&quot;an&quot;</span>, <span class="hljs-string">&quot;for&quot;</span>] <span class="hljs-comment"># Defines a list of common words (stop words) to exclude from tokenization​</span>
 }​
 
 <button class="copy-code-btn"></button></code></pre>
-<p>The configuration of the <code translate="no">standard</code> built-in analyzer above is equivalent to setting up a custom analyzer with the following parameters, where <code translate="no">tokenizer</code> and <code translate="no">filter</code> options are explicitly defined to achieve the same functionality:</p>
+<p>上記の<code translate="no">standard</code> ビルトインアナライザーの設定は、<code translate="no">tokenizer</code> と<code translate="no">filter</code> オプションを明示的に定義して同じ機能を実現する、以下のパラメータを持つカスタムアナライザーを設定することと同じです：</p>
 <pre><code translate="no" class="language-python">analyzer_params = {​
     <span class="hljs-string">&quot;tokenizer&quot;</span>: <span class="hljs-string">&quot;standard&quot;</span>,​
     <span class="hljs-string">&quot;filter&quot;</span>: [​
@@ -98,48 +94,48 @@ summary: >-
 }​
 
 <button class="copy-code-btn"></button></code></pre>
-<p>Milvus offers the following built-in analyzers, each of which can be used directly by specifying their name as the <code translate="no">type</code> parameter:​</p>
+<p>Milvusは以下のビルトインアナライザを提供しており、それぞれ<code translate="no">type</code> パラメータに名前を指定することで直接使用することができます。</p>
 <ul>
-<li><p><code translate="no">standard</code>: Suitable for general-purpose text processing, applying standard tokenization and lowercase filtering.​</p></li>
-<li><p><code translate="no">english</code>: Optimized for English-language text, with support for English stop words.​</p></li>
-<li><p><code translate="no">chinese</code>: Specialized for processing Chinese text, including tokenization adapted for Chinese language structures.​</p></li>
+<li><p><code translate="no">standard</code>:標準的なトークン化と小文字フィルタリングを適用した、汎用的なテキスト処理に適しています。</p></li>
+<li><p><code translate="no">english</code>:英語のストップワードに対応し、英語テキストに最適化されています。</p></li>
+<li><p><code translate="no">chinese</code>:中国語のテキスト処理に特化し、中国語の言語構造に適応したトークン化を含む。</p></li>
 </ul>
-<h3 id="Custom-analyzer​" class="common-anchor-header">Custom analyzer​</h3><p>For more advanced text processing, custom analyzers in Milvus allow you to build a tailored text-handling pipeline by specifying both a <strong>tokenizer</strong> and filters. This setup is ideal for specialized use cases where precise control is required.​</p>
-<h4 id="Tokenizer​" class="common-anchor-header">Tokenizer​</h4><p>The <strong>tokenizer</strong> is a <strong>mandatory</strong> component for a custom analyzer, which initiates the analyzer pipeline by breaking down input text into discrete units or <strong>tokens</strong>. Tokenization follows specific rules, such as splitting by whitespace or punctuation, depending on the tokenizer type. This process allows for more precise and independent handling of each word or phrase.​</p>
-<p>For example, a tokenizer would convert text <code translate="no">&quot;Vector Database Built for Scale&quot;</code> into separate tokens:​</p>
+<h3 id="Custom-analyzer​" class="common-anchor-header">カスタムアナライザー</h3><p>より高度なテキスト処理のために、Milvusのカスタムアナライザーでは、<strong>トークナイザーと</strong>フィルターの両方を指定することで、独自のテキスト処理パイプラインを構築することができます。この設定は、精密な制御が必要な特殊なユースケースに最適です。</p>
+<h4 id="Tokenizer​" class="common-anchor-header">トークナイザー</h4><p><strong>トークナイザーは</strong>カスタムアナライザーに<strong>必須の</strong>コンポーネントで、入力テキストを個別の単位（<strong>トークン</strong>）に分解することでアナライザーパイプラインを開始します。トークン化は、トークナイザーのタイプに応じて、空白や句読点による分割など、特定のルールに従います。この処理により、各単語や語句をより正確かつ独立して処理できるようになります。</p>
+<p>たとえば、トークナイザーはテキスト<code translate="no">&quot;Vector Database Built for Scale&quot;</code> を個別のトークンに変換します。</p>
 <pre><code translate="no" class="language-Plain Text">[<span class="hljs-string">&quot;Vector&quot;</span>, <span class="hljs-string">&quot;Database&quot;</span>, <span class="hljs-string">&quot;Built&quot;</span>, <span class="hljs-string">&quot;for&quot;</span>, <span class="hljs-string">&quot;Scale&quot;</span>]​
 <button class="copy-code-btn"></button></code></pre>
-<p><strong>Example of specifying a tokenizer</strong>:​</p>
+<p><strong>トークナイザーの指定例</strong>。</p>
 <pre><code translate="no" class="language-python">analyzer_params = {​
     <span class="hljs-string">&quot;tokenizer&quot;</span>: <span class="hljs-string">&quot;whitespace&quot;</span>,​
 }​
 <button class="copy-code-btn"></button></code></pre>
-<h4 id="Filter​" class="common-anchor-header">Filter​</h4><p><strong>Filters</strong> are <strong>optional</strong> components working on the tokens produced by the tokenizer, transforming or refining them as needed. For example, after applying a <code translate="no">lowercase</code> filter to the tokenized terms <code translate="no">[&quot;Vector&quot;, &quot;Database&quot;, &quot;Built&quot;, &quot;for&quot;, &quot;Scale&quot;]</code>, the result might be:​</p>
+<h4 id="Filter​" class="common-anchor-header">フィルター</h4><p><strong>フィルタは</strong>、トークナイザが生成したトークンに作用する<strong>オプションの</strong>コンポーネントで、必要に応じてトークンを変換または改良します。たとえば、トークン化された用語<code translate="no">[&quot;Vector&quot;, &quot;Database&quot;, &quot;Built&quot;, &quot;for&quot;, &quot;Scale&quot;]</code> に<code translate="no">lowercase</code> フィルタを適用すると、次のようになります。</p>
 <pre><code translate="no" class="language-SQL">[<span class="hljs-string">&quot;vector&quot;</span>, <span class="hljs-string">&quot;database&quot;</span>, <span class="hljs-string">&quot;built&quot;</span>, <span class="hljs-string">&quot;for&quot;</span>, <span class="hljs-string">&quot;scale&quot;</span>]​
 <button class="copy-code-btn"></button></code></pre>
-<p>Filters in a custom analyzer can be either <strong>built-in</strong> or <strong>custom</strong>, depending on configuration needs.​</p>
+<p>カスタム・アナライザーのフィルターは、構成のニーズに応じて、<strong>組み込み</strong>または<strong>カスタムの</strong>いずれかになります。</p>
 <ul>
-<li><p><strong>Built-in filters</strong>: Pre-configured by Milvus, requiring minimal setup. You can use these filters out-of-the-box by specifying their names. The filters below are built-in for direct use:​</p>
+<li><p><strong>組み込みフィルター</strong>：Milvusによって事前に設定されており、最小限のセットアップで済みます。これらのフィルタは、名前を指定することですぐに使用することができます。以下のフィルタは直接使用できるように組み込まれています。</p>
 <ul>
-<li><p><code translate="no">lowercase</code>: Converts text to lowercase, ensuring case-insensitive matching. For details, refer to <a href="/docs/lowercase-filter.md">​Lowercase</a>.​</p></li>
-<li><p><code translate="no">asciifolding</code>: Converts non-ASCII characters to ASCII equivalents, simplifying multilingual text handling. For details, refer to <a href="/docs/ascii-folding-filter.md">​ASCII folding</a>.​</p></li>
-<li><p><code translate="no">alphanumonly</code>: Retains only alphanumeric characters by removing others. For details, refer to <a href="/docs/alphanumonly-filter.md">​Alphanumonly</a>.​</p></li>
-<li><p><code translate="no">cnalphanumonly</code>: Removes tokens that contain any characters other than Chinese characters, English letters, or digits. For details, refer to <a href="/docs/cnalphanumonly-filter.md">​Cnalphanumonly</a>.​</p></li>
-<li><p><code translate="no">cncharonly</code>: Removes tokens that contain any non-Chinese characters. For details, refer to <a href="/docs/cncharonly-filter.md">​Cncharonly</a>.​</p></li>
+<li><p><code translate="no">lowercase</code>:テキストを小文字に変換し、大文字小文字を区別せずにマッチングします。詳細は<a href="/docs/ja/lowercase-filter.md">小文字を</a>参照してください。</p></li>
+<li><p><code translate="no">asciifolding</code>:非ASCII文字をASCII等価文字に変換し、多言語テキスト処理を簡素化します。詳細については、<a href="/docs/ja/ascii-folding-filter.md">ASCII 字形統合を</a>参照してください。</p></li>
+<li><p><code translate="no">alphanumonly</code>:英数字だけを残し、他の文字を削除します。詳しくは<a href="/docs/ja/alphanumonly-filter.md">英数字のみ</a> を参照。</p></li>
+<li><p><code translate="no">cnalphanumonly</code>:漢字、英字、数字以外の文字を含むトークンを削除する。詳細は<a href="/docs/ja/cnalphanumonly-filter.md">Cnalphanumonly</a> を参照。</p></li>
+<li><p><code translate="no">cncharonly</code>:中国語以外の文字を含むトークンを削除します。詳細は<a href="/docs/ja/cncharonly-filter.md">Cncharonlyを</a>参照。</p></li>
 </ul>
-<p><strong>Example of using a built-in filter:</strong>​</p>
+<p><strong>組み込みフィルタの使用例</strong></p>
 <pre><code translate="no" class="language-python">analyzer_params = {​
     <span class="hljs-string">&quot;tokenizer&quot;</span>: <span class="hljs-string">&quot;standard&quot;</span>, <span class="hljs-comment"># Mandatory: Specifies tokenizer​</span>
     <span class="hljs-string">&quot;filter&quot;</span>: [<span class="hljs-string">&quot;lowercase&quot;</span>], <span class="hljs-comment"># Optional: Built-in filter that converts text to lowercase​</span>
 }​
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p><strong>Custom filters</strong>: Custom filters allow for specialized configurations. You can define a custom filter by choosing a valid filter type (<code translate="no">filter.type</code>) and adding specific settings for each filter type. Examples of filter types that support customization:​</p>
+<li><p><strong>カスタムフィルタ</strong>：カスタムフィルタ：カスタムフィルタを使用すると、特殊な設定を行うことができます。有効なフィルタタイプ (<code translate="no">filter.type</code>) を選択し、各フィルタタイプに固有の設定を追加することで、カスタムフィルタを定義できます。カスタマイズをサポートするフィルタータイプの例。</p>
 <ul>
-<li><p><code translate="no">stop</code>: Removes specified common words by setting a list of stop words (e.g., <code translate="no">&quot;stop_words&quot;: [&quot;of&quot;, &quot;to&quot;]</code>). For details, refer to <a href="/docs/stop-filter.md">​Stop</a>.​</p></li>
-<li><p><code translate="no">length</code>: Excludes tokens based on length criteria, such as setting a maximum token length. For details, refer to <a href="/docs/length-filter.md">​Length</a>.​</p></li>
-<li><p><code translate="no">stemmer</code>: Reduces words to their root forms for more flexible matching. For details, refer to <a href="/docs/stemmer-filter.md">​Stemmer</a>.​</p></li>
+<li><p><code translate="no">stop</code>:ストップワードのリストを設定することで、指定された一般的な単語を削除します (例:<code translate="no">&quot;stop_words&quot;: [&quot;of&quot;, &quot;to&quot;]</code>)。詳細については、「<a href="/docs/ja/stop-filter.md">ストップ</a>」を参照してください。</p></li>
+<li><p><code translate="no">length</code>:トークンの最大長を設定するなど、長さの基準に基づいてトークンを除外する。詳細は「<a href="/docs/ja/length-filter.md">長さ</a>」を参照。</p></li>
+<li><p><code translate="no">stemmer</code>:より柔軟なマッチングのために、単語を語根の形に変換します。詳細については、「<a href="/docs/ja/stemmer-filter.md">ステマー</a>」を参照してください。</p></li>
 </ul>
-<p><strong>Example of configuring a custom filter:</strong>​</p>
+<p><strong>カスタムフィルタの設定例</strong></p>
 <pre><code translate="no" class="language-python">analyzer_params = {​
     <span class="hljs-string">&quot;tokenizer&quot;</span>: <span class="hljs-string">&quot;standard&quot;</span>, <span class="hljs-comment"># Mandatory: Specifies tokenizer​</span>
     <span class="hljs-string">&quot;filter&quot;</span>: [​
@@ -152,7 +148,7 @@ summary: >-
 
 <button class="copy-code-btn"></button></code></pre></li>
 </ul>
-<h2 id="Example-use​" class="common-anchor-header">Example use​<button data-href="#Example-use​" class="anchor-icon" translate="no">
+<h2 id="Example-use​" class="common-anchor-header">使用例<button data-href="#Example-use​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -167,7 +163,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>In this example, we define a collection schema with a vector field for embeddings and two <code translate="no">VARCHAR</code> fields for text processing capabilities. Each <code translate="no">VARCHAR</code> field is configured with its own analyzer settings to handle different processing needs.​</p>
+    </button></h2><p>この例では、埋め込み用のベクトルフィールドと、テキスト処理機能用の 2 つの<code translate="no">VARCHAR</code> フィールドを持つコレクションスキーマを定義します。各<code translate="no">VARCHAR</code> フィールドは、異なる処理ニーズに対応するために、独自のアナライザ設定で構成されます。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType​
 ​
 <span class="hljs-comment"># Set up a Milvus client​</span>
@@ -237,4 +233,4 @@ client.create_collection(​
     index_params=index_params​
 )​
 <button class="copy-code-btn"></button></code></pre>
-<p>​</p>
+<p></p>

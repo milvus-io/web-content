@@ -1,11 +1,9 @@
 ---
 id: es2m.md
-summary: >-
-  This guide provides a comprehensive, step-by-step process for migrating data
-  from Elasticsearch to Milvus 2.x.
-title: From Elasticsearch
+summary: 本ガイドでは、ElasticsearchからMilvus 2.xへのデータ移行について、包括的なステップバイステップのプロセスを提供します。
+title: Elasticsearch から
 ---
-<h1 id="From-Elasticsearch" class="common-anchor-header">From Elasticsearch<button data-href="#From-Elasticsearch" class="anchor-icon" translate="no">
+<h1 id="From-Elasticsearch" class="common-anchor-header">Elasticsearch から<button data-href="#From-Elasticsearch" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -20,8 +18,8 @@ title: From Elasticsearch
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>This guide provides a comprehensive, step-by-step process for migrating data from Elasticsearch to Milvus 2.x. By following this guide, you will be able to efficiently transfer your data, leveraging Milvus 2.x advanced features and improved performance.</p>
-<h2 id="Prerequisites" class="common-anchor-header">Prerequisites<button data-href="#Prerequisites" class="anchor-icon" translate="no">
+    </button></h1><p>本ガイドでは、ElasticsearchからMilvus 2.xへデータを移行するための包括的なステップバイステップのプロセスを提供します。本ガイドに従うことで、Milvus 2.xの高度な機能と改善されたパフォーマンスを活用しながら、効率的にデータを移行することができます。</p>
+<h2 id="Prerequisites" class="common-anchor-header">前提条件<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -37,23 +35,20 @@ title: From Elasticsearch
         ></path>
       </svg>
     </button></h2><ul>
-<li><strong>Software versions</strong>:
-<ul>
-<li>Source Elasticsearch: 7.x or 8.x</li>
-<li>Target Milvus: 2.x</li>
-<li>For installation details, refer to <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/install-elasticsearch.html">Installing Elasticsearch</a> and <a href="https://milvus.io/docs/install_standalone-docker.md">Install Milvus</a>.</li>
+<li><strong>ソフトウェアのバージョン</strong><ul>
+<li>ソース Elasticsearch：7.xまたは8.x</li>
+<li>ターゲットMilvus: 2.x</li>
+<li>インストールの詳細については、<a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/install-elasticsearch.html">Elasticsearchのインストールと</a> <a href="https://milvus.io/docs/install_standalone-docker.md">Milvusのインストールを</a>ご参照ください。</li>
 </ul></li>
-<li><strong>Required tools</strong>:
-<ul>
-<li><a href="https://github.com/zilliztech/milvus-migration">Milvus-migration</a> tool. For installation details, refer to <a href="/docs/milvusdm_install.md">Install Migration Tool</a>.</li>
+<li><strong>必要なツール</strong><ul>
+<li><a href="https://github.com/zilliztech/milvus-migration">Milvusマイグレーションツール</a>。インストールの詳細については、<a href="/docs/ja/milvusdm_install.md">マイグレーションツールのインストールを</a>参照してください。</li>
 </ul></li>
-<li><strong>Supported data types for migration</strong>: The fields to migrate from the source Elasticsearch index are of the following types - <a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/dense-vector.html#dense-vector">dense_vector</a>, <a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/keyword.html#keyword-field-type">keyword</a>, <a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/text.html#text-field-type">text</a>, <a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/number.html">long</a>, <a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/number.html">integer</a>, <a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/number.html">double</a>, <a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/number.html">float</a>, <a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/boolean.html">boolean</a>, <a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/object.html">object</a>. Data types not listed here are currently not supported for migration. Refer to <a href="#field-mapping-reference">Field mapping reference</a> for detailed information on data mappings between Milvus collections and Elasticsearch indexes.</li>
-<li><strong>Elasticsearch index requirements</strong>:
-<ul>
-<li>The source Elasticsearch index must contain a vector field of the <code translate="no">dense_vector</code> type. Migration cannot start without a vector field.</li>
+<li><strong>マイグレーションでサポートされるデータタイプ</strong>移行元の Elasticsearch インデックスから移行するフィールドのデータ型は以下の通りです -<a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/dense-vector.html#dense-vector">dense_vector</a>、<a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/keyword.html#keyword-field-type">keyword</a>、<a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/text.html#text-field-type">text</a>、<a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/number.html">long</a>、<a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/number.html">integer</a>、<a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/number.html">double</a>、<a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/number.html">float</a>、<a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/boolean.html">boolean</a>、<a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/object.html">object</a>。ここに記載されていないデータ型は、現在マイグレーションに対応していません。MilvusコレクションとElasticsearchインデックス間のデータマッピングの詳細については、<a href="#field-mapping-reference">フィールドマッピングリファレンスを</a>参照してください。</li>
+<li><strong>Elasticsearch インデックスの要件</strong><ul>
+<li>移行元の Elasticsearch インデックスには<code translate="no">dense_vector</code> 型のベクトルフィールドが含まれている必要があります。ベクトルフィールドがないとマイグレーションを開始できません。</li>
 </ul></li>
 </ul>
-<h2 id="Configure-the-migration-file" class="common-anchor-header">Configure the migration file<button data-href="#Configure-the-migration-file" class="anchor-icon" translate="no">
+<h2 id="Configure-the-migration-file" class="common-anchor-header">マイグレーションファイルの設定<button data-href="#Configure-the-migration-file" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -68,7 +63,7 @@ title: From Elasticsearch
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Save the example migration config file as <code translate="no">migration.yaml</code> and modify the configs based on your actual conditions. You are free to put the config file in any local directory.</p>
+    </button></h2><p>サンプルのマイグレーション設定ファイルを<code translate="no">migration.yaml</code> として保存し、実際の条件に基づいて設定を変更します。コンフィグファイルは任意のローカルディレクトリに自由に置くことができます。</p>
 <pre><code translate="no" class="language-yaml">dumper: <span class="hljs-comment"># configs for the migration job.</span>
   worker:
     workMode: <span class="hljs-string">&quot;elasticsearch&quot;</span> <span class="hljs-comment"># operational mode of the migration job.</span>
@@ -121,76 +116,76 @@ target:
     username: <span class="hljs-string">&quot;****&quot;</span> <span class="hljs-comment"># username for the Milvus 2.x server.</span>
     password: <span class="hljs-string">&quot;******&quot;</span> <span class="hljs-comment"># password for the Milvus 2.x server.</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>The following table describes the parameters in the example config file. For a full list of configs, refer to <a href="https://github.com/zilliztech/milvus-migration/blob/main/README_ES.md#migrationyaml-reference">Milvus Migration: Elasticsearch to Milvus 2.x</a>.</p>
+<p>次の表は、コンフィグファイル例のパラメータを説明したものです。コンフィグファイルの全リストは<a href="https://github.com/zilliztech/milvus-migration/blob/main/README_ES.md#migrationyaml-reference">Milvus Migration</a> をご参照ください<a href="https://github.com/zilliztech/milvus-migration/blob/main/README_ES.md#migrationyaml-reference">：Elasticsearch から Milvus 2.x への移行を</a>ご参照ください。</p>
 <ul>
 <li><p><code translate="no">dumper</code></p>
 <table>
 <thead>
-<tr><th>Parameter</th><th>Description</th></tr>
+<tr><th>パラメータ</th><th>説明</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">dumper.worker.workMode</code></td><td>The operational mode of the migration job. Set to <code translate="no">elasticsearch</code> when migrating from Elasticsearch indexes.</td></tr>
-<tr><td><code translate="no">dumper.worker.reader.bufferSize</code></td><td>Buffer size to read from Elasticsearch in each batch. Unit: KB.</td></tr>
+<tr><td><code translate="no">dumper.worker.workMode</code></td><td>移行ジョブの動作モード。Elasticsearch のインデックスから移行する場合は<code translate="no">elasticsearch</code> に設定します。</td></tr>
+<tr><td><code translate="no">dumper.worker.reader.bufferSize</code></td><td>各バッチでElasticsearchから読み込むバッファサイズ。単位：KB。</td></tr>
 </tbody>
 </table>
 </li>
 <li><p><code translate="no">meta</code></p>
 <table>
 <thead>
-<tr><th>Parameter</th><th>Description</th></tr>
+<tr><th>パラメータ</th><th>説明</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">meta.mode</code></td><td>Specifies the source for meta configs. Currently, only <code translate="no">config</code> is supported.</td></tr>
-<tr><td><code translate="no">meta.index</code></td><td>Identifies the Elasticsearch index to migrate data from.</td></tr>
-<tr><td><code translate="no">meta.fields</code></td><td>Fields within the Elasticsearch index to be migrated.</td></tr>
-<tr><td><code translate="no">meta.fields.name</code></td><td>Name of the Elasticsearch field.</td></tr>
-<tr><td><code translate="no">meta.fields.maxLen</code></td><td>Maximum length of the field. This parameter is required only when <code translate="no">meta.fields.type</code> is <code translate="no">keyword</code> or <code translate="no">text</code>.</td></tr>
-<tr><td><code translate="no">meta.fields.pk</code></td><td>Specifies if the field serves as the primary key.</td></tr>
-<tr><td><code translate="no">meta.fields.type</code></td><td>Data type of the Elasticsearch field. Currently, the following data types in Elasticsearch are supported: <a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/dense-vector.html#dense-vector">dense_vector</a>, <a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/keyword.html#keyword-field-type">keyword</a>, <a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/text.html#text-field-type">text</a>, <a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/number.html">long</a>, <a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/number.html">integer</a>, <a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/number.html">double</a>, <a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/number.html">float</a>, <a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/boolean.html">boolean</a>, <a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/object.html">object</a>.</td></tr>
-<tr><td><code translate="no">meta.fields.dims</code></td><td>Dimension of the vector field. This parameter is required only when <code translate="no">meta.fields.type</code> is <code translate="no">dense_vector</code>.</td></tr>
-<tr><td><code translate="no">meta.milvus</code></td><td>Configs specific to creating the collection in Milvus 2.x.</td></tr>
-<tr><td><code translate="no">meta.milvus.collection</code></td><td>Name of the Milvus collection. Defaults to the Elasticsearch index name if not specified.</td></tr>
-<tr><td><code translate="no">meta.milvus.closeDynamicField</code></td><td>Specifies whether to disable the dynamic field in the collection. Defaults to <code translate="no">false</code>. For more information on dynamic fields, refer to <a href="https://milvus.io/docs/enable-dynamic-field.md#Enable-Dynamic-Field">Enable Dynamic Field</a>.</td></tr>
-<tr><td><code translate="no">meta.milvus.shardNum</code></td><td>Number of shards to be created in the collection. For more information on shards, refer to <a href="https://milvus.io/docs/glossary.md#Shard">Terminology</a>.</td></tr>
-<tr><td><code translate="no">meta.milvus.consistencyLevel</code></td><td>Consistency level for the collection in Milvus. For more information, refer to <a href="https://milvus.io/docs/consistency.md">Consistency</a>.</td></tr>
+<tr><td><code translate="no">meta.mode</code></td><td>meta configs のソースを指定します。現在のところ、<code translate="no">config</code> のみがサポートされています。</td></tr>
+<tr><td><code translate="no">meta.index</code></td><td>データを移行する Elasticsearch インデックスを指定します。</td></tr>
+<tr><td><code translate="no">meta.fields</code></td><td>移行する Elasticsearch インデックス内のフィールド。</td></tr>
+<tr><td><code translate="no">meta.fields.name</code></td><td>Elasticsearch フィールドの名前。</td></tr>
+<tr><td><code translate="no">meta.fields.maxLen</code></td><td>フィールドの最大長。このパラメータは<code translate="no">meta.fields.type</code> が<code translate="no">keyword</code> または<code translate="no">text</code> の場合のみ必要です。</td></tr>
+<tr><td><code translate="no">meta.fields.pk</code></td><td>フィールドが主キーの役割を果たすかどうかを指定します。</td></tr>
+<tr><td><code translate="no">meta.fields.type</code></td><td>Elasticsearch フィールドのデータ型。現在 Elasticsearch でサポートされているデータ型は以下の通りです:<a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/dense-vector.html#dense-vector">dense_vector</a>、<a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/keyword.html#keyword-field-type">keyword</a>、<a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/text.html#text-field-type">text</a>、<a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/number.html">long</a>、<a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/number.html">integer</a>、<a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/number.html">double</a>、<a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/number.html">float</a>、<a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/boolean.html">boolean</a>、<a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/object.html">object</a>。</td></tr>
+<tr><td><code translate="no">meta.fields.dims</code></td><td>ベクトルフィールドの次元。このパラメータは<code translate="no">meta.fields.type</code> が<code translate="no">dense_vector</code> の場合のみ必要です。</td></tr>
+<tr><td><code translate="no">meta.milvus</code></td><td>Milvus 2.xでコレクションを作成するための設定。</td></tr>
+<tr><td><code translate="no">meta.milvus.collection</code></td><td>Milvusコレクションの名前。指定しない場合、Elasticsearchインデックス名がデフォルトです。</td></tr>
+<tr><td><code translate="no">meta.milvus.closeDynamicField</code></td><td>コレクションのダイナミックフィールドを無効にするかどうかを指定します。デフォルトは<code translate="no">false</code> です。動的フィールドの詳細については、<a href="https://milvus.io/docs/enable-dynamic-field.md#Enable-Dynamic-Field">動的フィールドの有効</a>化を参照してください。</td></tr>
+<tr><td><code translate="no">meta.milvus.shardNum</code></td><td>コレクションに作成するシャードの数。シャードの詳細は、"<a href="https://milvus.io/docs/glossary.md#Shard">用語</a>" を参照してください。</td></tr>
+<tr><td><code translate="no">meta.milvus.consistencyLevel</code></td><td>Milvusのコレクションの一貫性レベル。詳細は、"<a href="https://milvus.io/docs/consistency.md">一貫性</a>" を参照してください。</td></tr>
 </tbody>
 </table>
 </li>
 <li><p><code translate="no">source</code></p>
 <table>
 <thead>
-<tr><th>Parameter</th><th>Description</th></tr>
+<tr><th>パラメータ</th><th>説明</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">source.es</code></td><td>Connection configs for the source Elasticsearch server.</td></tr>
-<tr><td><code translate="no">source.es.urls</code></td><td>Address of the source Elasticsearch server.</td></tr>
-<tr><td><code translate="no">source.es.username</code></td><td>Username for the Elasticsearch server.</td></tr>
-<tr><td><code translate="no">source.es.password</code></td><td>Password for the Elasticsearch server.</td></tr>
+<tr><td><code translate="no">source.es</code></td><td>接続元 Elasticsearch サーバの接続設定。</td></tr>
+<tr><td><code translate="no">source.es.urls</code></td><td>接続元 Elasticsearch サーバのアドレス。</td></tr>
+<tr><td><code translate="no">source.es.username</code></td><td>Elasticsearch サーバのユーザ名。</td></tr>
+<tr><td><code translate="no">source.es.password</code></td><td>Elasticsearch サーバのパスワード</td></tr>
 </tbody>
 </table>
 </li>
 <li><p><code translate="no">target</code></p>
 <table>
 <thead>
-<tr><th>Parameter</th><th>Description</th></tr>
+<tr><th>パラメータ</th><th>説明</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">target.mode</code></td><td>Storage location for dumped files. Valid values:<br/>- <code translate="no">local</code>: Store dumped files on local disks.<br/>- <code translate="no">remote</code>: Store dumped files on object storage.</td></tr>
-<tr><td><code translate="no">target.remote.outputDir</code></td><td>Output directory path in the cloud storage bucket.</td></tr>
-<tr><td><code translate="no">target.remote.cloud</code></td><td>Cloud storage service provider. Example values: <code translate="no">aws</code>, <code translate="no">gcp</code>, <code translate="no">azure</code>.</td></tr>
-<tr><td><code translate="no">target.remote.region</code></td><td>Cloud storage region. It can be any value if you use local MinIO.</td></tr>
-<tr><td><code translate="no">target.remote.bucket</code></td><td>Bucket name for storing data. The value must be the same as the config in Milvus 2.x. For more information, refer to <a href="https://milvus.io/docs/configure_minio.md#miniobucketName">System Configurations</a>.</td></tr>
-<tr><td><code translate="no">target.remote.useIAM</code></td><td>Whether to use an IAM Role for connection.</td></tr>
-<tr><td><code translate="no">target.remote.checkBucket</code></td><td>Whether to check if the specified bucket exists in object storage.</td></tr>
-<tr><td><code translate="no">target.milvus2x</code></td><td>Connection configs for the target Milvus 2.x server.</td></tr>
-<tr><td><code translate="no">target.milvus2x.endpoint</code></td><td>Address of the target Milvus server.</td></tr>
-<tr><td><code translate="no">target.milvus2x.username</code></td><td>Username for the Milvus 2.x server. This parameter is required if user authentication is enabled for your Milvus server. For more information, refer to <a href="https://milvus.io/docs/authenticate.md">Enable Authentication</a>.</td></tr>
-<tr><td><code translate="no">target.milvus2x.password</code></td><td>Password for the Milvus 2.x server. This parameter is required if user authentication is enabled for your Milvus server. For more information, refer to <a href="https://milvus.io/docs/authenticate.md">Enable Authentication</a>.</td></tr>
+<tr><td><code translate="no">target.mode</code></td><td>ダンプされたファイルの保存場所。有効な値:<br/>-<code translate="no">local</code>: ダンプしたファイルをローカルディスクに保存します。<br/>-<code translate="no">remote</code>: ダンプしたファイルをオブジェクトストレージに保存します。</td></tr>
+<tr><td><code translate="no">target.remote.outputDir</code></td><td>クラウドストレージバケット内の出力ディレクトリパス。</td></tr>
+<tr><td><code translate="no">target.remote.cloud</code></td><td>クラウドストレージサービスプロバイダ。値の例：<code translate="no">aws</code> <code translate="no">gcp</code>,<code translate="no">azure</code>.</td></tr>
+<tr><td><code translate="no">target.remote.region</code></td><td>クラウドストレージのリージョン。ローカルのMinIOを使用する場合は、任意の値を指定できます。</td></tr>
+<tr><td><code translate="no">target.remote.bucket</code></td><td>データを保存するバケット名。milvus2.xの設定と同じ値でなければなりません。詳細は<a href="https://milvus.io/docs/configure_minio.md#miniobucketName">システム設定を</a>参照してください。</td></tr>
+<tr><td><code translate="no">target.remote.useIAM</code></td><td>接続にIAM Roleを使用するかどうか。</td></tr>
+<tr><td><code translate="no">target.remote.checkBucket</code></td><td>指定したバケットがオブジェクトストレージに存在するかどうかを確認するかどうか。</td></tr>
+<tr><td><code translate="no">target.milvus2x</code></td><td>接続先Milvus 2.xサーバの接続設定。</td></tr>
+<tr><td><code translate="no">target.milvus2x.endpoint</code></td><td>接続先Milvusサーバのアドレス。</td></tr>
+<tr><td><code translate="no">target.milvus2x.username</code></td><td>Milvus2.xサーバのユーザ名。このパラメータはMilvusサーバでユーザ認証が有効になっている場合に必要です。詳細については、<a href="https://milvus.io/docs/authenticate.md">認証の有効</a>化を参照してください。</td></tr>
+<tr><td><code translate="no">target.milvus2x.password</code></td><td>Milvus2.xサーバのパスワード。Milvusサーバーでユーザー認証が有効になっている場合、このパラメータは必須です。詳細については、「<a href="https://milvus.io/docs/authenticate.md">認証の有効化</a>」を参照してください。</td></tr>
 </tbody>
 </table>
 </li>
 </ul>
-<h2 id="Start-the-migration-task" class="common-anchor-header">Start the migration task<button data-href="#Start-the-migration-task" class="anchor-icon" translate="no">
+<h2 id="Start-the-migration-task" class="common-anchor-header">移行タスクの開始<button data-href="#Start-the-migration-task" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -205,10 +200,10 @@ target:
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Start the migration task with the following command. Replace <code translate="no">{YourConfigFilePath}</code> with the local directory where the config file <code translate="no">migration.yaml</code> resides.</p>
+    </button></h2><p>以下のコマンドで移行タスクを開始します。<code translate="no">{YourConfigFilePath}</code> は設定ファイル<code translate="no">migration.yaml</code> が存在するローカルディレクトリに置き換えてください。</p>
 <pre><code translate="no" class="language-bash">./milvus-migration start --config=/{YourConfigFilePath}/migration.yaml
 <button class="copy-code-btn"></button></code></pre>
-<p>The following is an example of a successful migration log output:</p>
+<p>以下はマイグレーションが成功した場合のログ出力例です：</p>
 <pre><code translate="no" class="language-bash">[task/load_base_task.go:94] [<span class="hljs-string">&quot;[LoadTasker] Dec Task Processing--------------&gt;&quot;</span>] [Count=0] [fileName=testfiles/output/zwh/migration/test_mul_field4/data_1_1.json] [taskId=442665677354739304]
 [task/load_base_task.go:76] [<span class="hljs-string">&quot;[LoadTasker] Progress Task ---------------&gt;&quot;</span>] [fileName=testfiles/output/zwh/migration/test_mul_field4/data_1_1.json] [taskId=442665677354739304]
 [dbclient/cus_field_milvus2x.go:86] [<span class="hljs-string">&quot;[Milvus2x] begin to ShowCollectionRows&quot;</span>]
@@ -219,7 +214,7 @@ target:
 [cleaner/remote_cleaner.go:27] [<span class="hljs-string">&quot;[Remote Cleaner] Begin to clean files&quot;</span>] [bucket=a-bucket] [rootPath=testfiles/output/zwh/migration]
 [cmd/start.go:32] [<span class="hljs-string">&quot;[Cleaner] clean file success!&quot;</span>]
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Verify-the-result" class="common-anchor-header">Verify the result<button data-href="#Verify-the-result" class="anchor-icon" translate="no">
+<h2 id="Verify-the-result" class="common-anchor-header">結果の確認<button data-href="#Verify-the-result" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -234,8 +229,8 @@ target:
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Once the migration task is executed, you can make API calls or use Attu to view the number of entities migrated. For more information, refer to <a href="https://github.com/zilliztech/attu">Attu</a> and <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/get_collection_stats.md">get_collection_stats()</a>.</p>
-<h2 id="Field-mapping-reference" class="common-anchor-header">Field mapping reference<button data-href="#Field-mapping-reference" class="anchor-icon" translate="no">
+    </button></h2><p>移行タスクが実行されると、APIコールを実行したり、Attuを使用して移行されたエンティティの数を表示できます。詳細については、<a href="https://github.com/zilliztech/attu">Attu</a>および<a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/get_collection_stats.md">get_collection_stats()</a> を参照してください。</p>
+<h2 id="Field-mapping-reference" class="common-anchor-header">フィールドマッピングの参照<button data-href="#Field-mapping-reference" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -250,21 +245,21 @@ target:
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Review the table below to understand how field types in Elasticsearch indexes are mapped to field types in Milvus collections.</p>
-<p>For more information on supported data types in Milvus, refer to <a href="https://milvus.io/docs/schema.md#Supported-data-types">Supported data types</a>.</p>
+    </button></h2><p>Elasticsearch インデックスのフィールドタイプと Milvus コレクションのフィールドタイプがどのようにマッピングされるかは以下の表を参照してください。</p>
+<p>Milvus でサポートされているデータ型の詳細については、<a href="https://milvus.io/docs/schema.md#Supported-data-types">サポートされているデータ</a>型を参照してください。</p>
 <table>
 <thead>
-<tr><th>Elasticsearch Field Type</th><th>Milvus Field Type</th><th>Description</th></tr>
+<tr><th>Elasticsearch フィールドタイプ</th><th>Milvus フィールドタイプ</th><th>説明</th></tr>
 </thead>
 <tbody>
-<tr><td>dense_vector</td><td>FloatVector</td><td>Vector dimensions remain unchanged during migration.</td></tr>
-<tr><td>keyword</td><td>VarChar</td><td>Set Max Length (1 to 65,535). Strings exceeding the limit can trigger migration errors.</td></tr>
-<tr><td>text</td><td>VarChar</td><td>Set Max Length (1 to 65,535). Strings exceeding the limit can trigger migration errors.</td></tr>
+<tr><td>dense_vector</td><td>FloatVector</td><td>ベクタの次元はマイグレーション中も変更されません。</td></tr>
+<tr><td>キーワード</td><td>VarChar</td><td>最大長を設定します (1 から 65,535)。制限を超える文字列はマイグレーションエラーを引き起こす可能性があります。</td></tr>
+<tr><td>テキスト</td><td>VarChar</td><td>最大長（1～65,535）を設定します。制限を超える文字列はマイグレーションエラーを引き起こす可能性があります。</td></tr>
 <tr><td>long</td><td>Int64</td><td>-</td></tr>
-<tr><td>integer</td><td>Int32</td><td>-</td></tr>
+<tr><td>整数</td><td>Int32</td><td>-</td></tr>
 <tr><td>double</td><td>Double</td><td>-</td></tr>
-<tr><td>float</td><td>Float</td><td>-</td></tr>
-<tr><td>boolean</td><td>Bool</td><td>-</td></tr>
-<tr><td>object</td><td>JSON</td><td>-</td></tr>
+<tr><td>float</td><td>フロート</td><td>-</td></tr>
+<tr><td>boolean</td><td>ブール</td><td>-</td></tr>
+<tr><td>オブジェクト</td><td>JSON</td><td>-</td></tr>
 </tbody>
 </table>

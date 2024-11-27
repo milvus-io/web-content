@@ -1,12 +1,8 @@
 ---
 id: boolean.md
 summary: >-
-  A filter expression can be used to filter a specific scalar field during a
-  search or query to obtain precisely matched results. This guide will introduce
-  how to use filter expressions in Zilliz through an example dataset. For
-  demonstration purposes, this guide will only provide examples of query
-  operations.​
-title: Metadata Filtering
+  フィルタ式は、検索やクエリの際に特定のスカラーフィールドをフィルタリングし、正確にマッチした結果を得るために使用することができます。このガイドでは、データセットの例を通して、Zillizでのフィルター式の使い方を紹介します。デモンストレーションのため、このガイドではクエリー操作の例のみを提供します。
+title: メタデータのフィルタリング
 ---
 <h1 id="Metadata-Filtering​" class="common-anchor-header">Metadata Filtering​<button data-href="#Metadata-Filtering​" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -702,7 +698,7 @@ curl --request POST \​
 <li><p><code translate="no">like</code>: Match constants or prefixes (prefix%), infixes (%infix%), and suffixes (%suffix) within constants. It relies on a brute-force search mechanism using wildcards and does not involve text tokenization. While it can achieve exact matches, its query efficiency is relatively low, making it suitable for simple matching tasks or queries on smaller datasets.​</p></li>
 <li><p><code translate="no">TEXT_MATCH</code>: Match specific terms or keywords on VARCHAR fields, using tokenization and inverted index to enable efficient text search. Compared to <code translate="no">like</code>, <code translate="no">TEXT_MATCH</code> offers more advanced text tokenization and filtering capabilities. It is suited for large-scale datasets where higher query performance is required for complex text search scenarios.​
 <div class="alert note"></p>
-<p>To use the <code translate="no">TEXT_MATCH</code> filter expression, you must enable text matching for the target <code translate="no">VARCHAR</code> field when creating the collection. For details, refer to <a href="/docs/keyword-match.md">​Keyword Match</a>.​</p>
+<p>To use the <code translate="no">TEXT_MATCH</code> filter expression, you must enable text matching for the target <code translate="no">VARCHAR</code> field when creating the collection. For details, refer to <a href="/docs/ja/keyword-match.md">​Keyword Match</a>.​</p>
 <p></div></p></li>
 </ul>
 <h4 id="Example-1-Apply-filter-on-scalar-field​" class="common-anchor-header">Example 1: Apply filter on scalar field​</h4><p>The following example demonstrates how to filter products whose color is red. In this case, you can quickly filter all red products by matching the prefix 'red%’. Similarly, you can use the expression color in ['red_7025’, 'red_4794’, ‘red_9392’] to filter all red products. However, when the data is more complex, we recommend using the like operator for more efficient filtering.​</p>
@@ -857,7 +853,7 @@ curl --request POST \​
 ]​
 
 <button class="copy-code-btn"></button></code></pre>
-<h4 id="Example-3-Keyword-match-on-VARCHAR-fields​" class="common-anchor-header">Example 3: Keyword match on VARCHAR fields​</h4><p>The <code translate="no">TEXT_MATCH</code> expression is used for keyword match on <code translate="no">VARCHAR</code> fields. By default, it applies an <strong>OR</strong> logic, but you can combine it with other logical operators to create more complex query conditions. For details, refer to <a href="/docs/keyword-match.md">​Keyword Match</a>.​</p>
+<h4 id="Example-3-Keyword-match-on-VARCHAR-fields​" class="common-anchor-header">Example 3: Keyword match on VARCHAR fields​</h4><p>The <code translate="no">TEXT_MATCH</code> expression is used for keyword match on <code translate="no">VARCHAR</code> fields. By default, it applies an <strong>OR</strong> logic, but you can combine it with other logical operators to create more complex query conditions. For details, refer to <a href="/docs/ja/keyword-match.md">​Keyword Match</a>.​</p>
 <p>The following example demonstrates how to use the <code translate="no">TEXT_MATCH</code> expression to filter products where the <code translate="no">description</code> field contains either the keyword <code translate="no">&quot;Apple&quot;</code> or <code translate="no">&quot;iPhone&quot;</code>:​</p>
 <div class="multipleCode">
   <a href="#python">Python </a>

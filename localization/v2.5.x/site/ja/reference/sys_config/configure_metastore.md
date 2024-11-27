@@ -2,9 +2,9 @@
 id: configure_metastore.md
 related_key: configure
 group: system_configuration.md
-summary: Learn how to configure metastore for Milvus.
+summary: Milvusのメタストアの設定方法について説明します。
 ---
-<h1 id="metastore-related-Configurations" class="common-anchor-header">metastore-related Configurations<button data-href="#metastore-related-Configurations" class="anchor-icon" translate="no">
+<h1 id="metastore-related-Configurations" class="common-anchor-header">メタストア関連設定<button data-href="#metastore-related-Configurations" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -37,13 +37,13 @@ summary: Learn how to configure metastore for Milvus.
     </button></h2><table id="metastore.type">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">説明</th>
+      <th class="width20">デフォルト値</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        Default value: etcd, Valid values: [etcd, tikv]       </td>
+      <td>        デフォルト値：etcd、有効な値：[etcd, tikv］       </td>
       <td>etcd</td>
     </tr>
   </tbody>

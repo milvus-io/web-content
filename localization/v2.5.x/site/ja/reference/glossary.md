@@ -1,8 +1,8 @@
 ---
 id: glossary.md
-title: Terminology
+title: 用語解説
 ---
-<h1 id="Terminology" class="common-anchor-header">Terminology<button data-href="#Terminology" class="anchor-icon" translate="no">
+<h1 id="Terminology" class="common-anchor-header">用語解説<button data-href="#Terminology" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -17,7 +17,7 @@ title: Terminology
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><h2 id="AutoID" class="common-anchor-header">AutoID<button data-href="#AutoID" class="anchor-icon" translate="no">
+    </button></h1><h2 id="AutoID" class="common-anchor-header">オートID<button data-href="#AutoID" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -32,8 +32,8 @@ title: Terminology
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>AutoID is an attribute of the primary field that determines whether to enable AutoIncrement for the primary field. The value of AutoID is defined based on a timestamp. For more information, refer to <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_schema.md">create_schema</a>.</p>
-<h2 id="Auto-Index" class="common-anchor-header">Auto Index<button data-href="#Auto-Index" class="anchor-icon" translate="no">
+    </button></h2><p>AutoIDは主フィールドの属性で、主フィールドのオートインクリメントを有効にするかどうかを決定する。AutoIDの値はタイムスタンプに基づいて定義される。詳細は<a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_schema.md">create_schema</a> を参照してください。</p>
+<h2 id="Auto-Index" class="common-anchor-header">自動インデックス<button data-href="#Auto-Index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -48,7 +48,7 @@ title: Terminology
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus automatically decides the most appropriate index type and params for a specific field based on empirical data. This is ideal for situations when you do not need to control the specific index params. For more information, refer to <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/add_index.md">add_index</a>.</p>
+    </button></h2><p>Milvusは経験的なデータに基づいて、特定のフィールドに最適なインデックスタイプとパラメータを自動的に決定します。これは特定のインデックスパラメータを制御する必要がない場合に理想的です。詳細は<a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/add_index.md">add_indexを</a>参照してください。</p>
 <h2 id="Attu" class="common-anchor-header">Attu<button data-href="#Attu" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -64,8 +64,8 @@ title: Terminology
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><a href="https://github.com/zilliztech/attu">Attu</a> is an all-in-one administration tool for Milvus that significantly reduces the complexity and cost of managing the system.</p>
-<h2 id="Birdwatcher" class="common-anchor-header">Birdwatcher<button data-href="#Birdwatcher" class="anchor-icon" translate="no">
+    </button></h2><p><a href="https://github.com/zilliztech/attu">Attuは</a>Milvus用のオールインワン管理ツールで、システム管理の複雑さとコストを大幅に削減します。</p>
+<h2 id="Birdwatcher" class="common-anchor-header">バードウォッチャー<button data-href="#Birdwatcher" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -80,8 +80,8 @@ title: Terminology
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><a href="/docs/birdwatcher_overview.md">Birdwatcher</a> is a debugging tool for Milvus that connects to etcd, allowing you to monitor the status of the Milvus server and make adjustments in real-time. It also supports etcd file backups, aiding developers in troubleshooting.</p>
-<h2 id="Bulk-Writer" class="common-anchor-header">Bulk Writer<button data-href="#Bulk-Writer" class="anchor-icon" translate="no">
+    </button></h2><p><a href="/docs/ja/birdwatcher_overview.md">Birdwatcherは</a>etcdに接続するMilvus用のデバッグツールで、Milvusサーバの状態を監視し、リアルタイムに調整を行うことができます。また、etcdファイルのバックアップにも対応しており、開発者のトラブルシューティングを支援します。</p>
+<h2 id="Bulk-Writer" class="common-anchor-header">バルクライター<button data-href="#Bulk-Writer" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -96,8 +96,8 @@ title: Terminology
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><a href="https://milvus.io/api-reference/pymilvus/v2.4.x/DataImport/LocalBulkWriter/LocalBulkWriter.md">Bulk Writer</a> is a data processing tool provided by Milvus SDKs (e.g. PyMilvus, Java SDK) , designed to convert raw datasets into a format compatible with Milvus for efficient importing.</p>
-<h2 id="Bulk-Insert" class="common-anchor-header">Bulk Insert<button data-href="#Bulk-Insert" class="anchor-icon" translate="no">
+    </button></h2><p><a href="https://milvus.io/api-reference/pymilvus/v2.4.x/DataImport/LocalBulkWriter/LocalBulkWriter.md">Milvusの</a>SDK（PyMilvusやJava SDKなど）で提供されているデータ処理ツールで、生のデータセットをMilvusと互換性のある形式に変換し、効率的にインポートできるように設計されています。</p>
+<h2 id="Bulk-Insert" class="common-anchor-header">一括挿入<button data-href="#Bulk-Insert" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -112,8 +112,8 @@ title: Terminology
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><a href="https://milvus.io/api-reference/pymilvus/v2.4.x/ORM/utility/do_bulk_insert.md">Bulk Insert</a> is an API that enhances writing performance by allowing multiple files to be imported in a single request, optimizing operations with large datasets.</p>
-<h2 id="Cardinal" class="common-anchor-header">Cardinal<button data-href="#Cardinal" class="anchor-icon" translate="no">
+    </button></h2><p><a href="https://milvus.io/api-reference/pymilvus/v2.4.x/ORM/utility/do_bulk_insert.md">Bulk Insertは</a>、1回のリクエストで複数のファイルをインポートできるようにすることで、書き込みのパフォーマンスを向上させ、大規模なデータセットの操作を最適化するAPIです。</p>
+<h2 id="Cardinal" class="common-anchor-header">カーディナル<button data-href="#Cardinal" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -128,8 +128,8 @@ title: Terminology
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Cardinal, developed by Zilliz Cloud, is a cutter-edge vector search algorithm that delivers unparalleled search quality and performance. With its innovative design and extensive optimizations, Cardinal outperforms Knowhere by several times to an order of magnitude while adaptively handling diverse production scenarios, such as varying K sizes, high filtering, different data distributions, and so on.</p>
-<h2 id="Channel" class="common-anchor-header">Channel<button data-href="#Channel" class="anchor-icon" translate="no">
+    </button></h2><p>Zilliz Cloudが開発したCardinalは、比類のない検索品質とパフォーマンスを実現する最先端のベクトル検索アルゴリズムです。革新的な設計と広範な最適化により、CardinalはKサイズの変化、高度なフィルタリング、異なるデータ分布など、多様な生産シナリオに適応的に対応しながら、Knowhereを数倍から1桁上回るパフォーマンスを発揮します。</p>
+<h2 id="Channel" class="common-anchor-header">チャネル<button data-href="#Channel" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -144,8 +144,8 @@ title: Terminology
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus utilizes two types of channels, <a href="https://milvus.io/docs/glossary.md#PChannel">PChannel</a> and <a href="https://milvus.io/docs/glossary.md#VChannel">VChannel</a>. Each PChannel corresponds to a topic for log storage, while each VChannel corresponds to a shard in a collection.</p>
-<h2 id="Collection" class="common-anchor-header">Collection<button data-href="#Collection" class="anchor-icon" translate="no">
+    </button></h2><p>Milvusは<a href="https://milvus.io/docs/glossary.md#PChannel">PCチャネルと</a> <a href="https://milvus.io/docs/glossary.md#VChannel">Vチャネルの</a>2種類のチャネルを利用している。各PCチャネルはログストレージのトピックに対応し、各Vチャネルはコレクション内のシャードに対応する。</p>
+<h2 id="Collection" class="common-anchor-header">コレクション<button data-href="#Collection" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -160,8 +160,8 @@ title: Terminology
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>In Milvus, a collection is equivalent to a table in a relational database management system (RDBMS). Collections are major logical objects used to store and manage entities. For more information, refer to <a href="/docs/manage-collections.md">Manage Collections</a>.</p>
-<h2 id="Dependency" class="common-anchor-header">Dependency<button data-href="#Dependency" class="anchor-icon" translate="no">
+    </button></h2><p>Milvusでは、コレクションはリレーショナルデータベース管理システム（RDBMS）におけるテーブルに相当します。コレクションはエンティティの保存と管理に使用される主要な論理オブジェクトです。詳細については、「<a href="/docs/ja/manage-collections.md">コレクションの管理</a>」を参照してください。</p>
+<h2 id="Dependency" class="common-anchor-header">依存関係<button data-href="#Dependency" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -176,8 +176,8 @@ title: Terminology
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>A dependency is a program that another program relies on to work. Milvus’ dependencies include etcd (stores meta data), MinIO or S3 (object storage), and Pulsar (manages snapshot logs). For more information, refer to <a href="https://milvus.io/docs/manage_dependencies.md#Manage-Dependencies">Manage Dependencies</a>.</p>
-<h2 id="Dynamic-schema" class="common-anchor-header">Dynamic schema<button data-href="#Dynamic-schema" class="anchor-icon" translate="no">
+    </button></h2><p>依存関係とは、他のプログラムが動作するために依存するプログラムのことです。Milvusの依存関係には、etcd（メタデータの保存）、MinIOまたはS3（オブジェクトストレージ）、Pulsar（スナップショットログの管理）などがあります。詳細については、「<a href="https://milvus.io/docs/manage_dependencies.md#Manage-Dependencies">依存関係の管理</a>」を参照してください。</p>
+<h2 id="Dynamic-schema" class="common-anchor-header">動的スキーマ<button data-href="#Dynamic-schema" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -192,8 +192,8 @@ title: Terminology
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Dynamic schema allows you to insert entities with new fields into a collection without modifying the existing schema. This means that you can insert data without knowing the full schema of a collection and can include fields that are not yet defined. You can enable this schema-free capability by enableing the dynamic field when creating a collection. For more information, refer to <a href="/docs/enable-dynamic-field.md">Enable Dynamic Field</a>.</p>
-<h2 id="Embeddings" class="common-anchor-header">Embeddings<button data-href="#Embeddings" class="anchor-icon" translate="no">
+    </button></h2><p>動的スキーマを使用すると、既存のスキーマを変更することなく、新しいフィールドを持つエンティティをコレクションに挿入できます。これは、コレクションの完全なスキーマを知らなくてもデータを挿入でき、まだ定義されていないフィールドを含めることができることを意味します。コレクションを作成するときにダイナミック・フィールドを有効にすることで、このスキーマ・フリー機能を有効にできます。詳細は、<a href="/docs/ja/enable-dynamic-field.md">Enable Dynamic Fieldを</a>参照してください。</p>
+<h2 id="Embeddings" class="common-anchor-header">埋め込み<button data-href="#Embeddings" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -208,8 +208,8 @@ title: Terminology
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus offers built-in embedding functions that work with popular embedding providers. Before creating a collection in Milvus, you can use these functions to generate embeddings for your datasets, streamlining the process of preparing data and vector searches. To create embeddings in action, refer to <a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/model/embedding_functions.ipynb">Using PyMilvus’s Model To Generate Text Embeddings</a>.</p>
-<h2 id="Entity" class="common-anchor-header">Entity<button data-href="#Entity" class="anchor-icon" translate="no">
+    </button></h2><p>Milvusは一般的な埋め込みプロバイダと連携する埋め込み機能を内蔵しています。Milvusでコレクションを作成する前に、これらの関数を使用してデータセットのエンベッディングを生成し、データやベクトル検索の準備プロセスを合理化することができます。エンベッディングを実際に生成するには、<a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/model/embedding_functions.ipynb">Using PyMilvus's Model To Generate Text Embeddingsを</a>参照してください。</p>
+<h2 id="Entity" class="common-anchor-header">エンティティ<button data-href="#Entity" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -224,9 +224,9 @@ title: Terminology
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>An entity consists of a group of fields that represent real-world objects. Each entity in Milvus is represented by a unique primary key.</p>
-<p>You can customize primary keys. If you do not configure manually, Milvus automatically assigns the primary key to entities. If you choose to customize the primary key, note that Milvus does not support primary key de-duplication for now. Therefore, there can be duplicate primary keys in the same collection. For more information, refer to <a href="/docs/insert-update-delete.md#Insert-entities">Insert Entities</a>.</p>
-<h2 id="Field" class="common-anchor-header">Field<button data-href="#Field" class="anchor-icon" translate="no">
+    </button></h2><p>エンティティは実世界のオブジェクトを表すフィールド群で構成されます。Milvusの各エンティティは一意な主キーで表されます。</p>
+<p>主キーはカスタマイズできます。手動で設定しない場合、Milvus は自動的に主キーをエンティティに割り当てます。主キーをカスタマイズする場合、Milvusは今のところ主キーの重複排除をサポートしていないことに注意してください。そのため、同じコレクション内に重複した主キーが存在する可能性があります。詳細については、<a href="/docs/ja/insert-update-delete.md#Insert-entities">エンティティの挿入を</a>参照してください。</p>
+<h2 id="Field" class="common-anchor-header">フィールド<button data-href="#Field" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -241,8 +241,8 @@ title: Terminology
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>A field in a Milvus collection is equivalent to a column of table in a RDBMS. Fields can be either scalar fields for structured data (e.g., numbers, strings), or vector fields for embedding vectors.</p>
-<h2 id="Filter" class="common-anchor-header">Filter<button data-href="#Filter" class="anchor-icon" translate="no">
+    </button></h2><p>MilvusコレクションのフィールドはRDBMSのテーブルのカラムに相当します。フィールドには、構造化データ（数値、文字列など）用のスカラーフィールドと、埋め込みベクトル用のベクトルフィールドがあります。</p>
+<h2 id="Filter" class="common-anchor-header">フィルタ<button data-href="#Filter" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -257,8 +257,8 @@ title: Terminology
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus supports scalar filtering by searching with predicates, allowing you to define <a href="https://milvus.io/docs/boolean.md">filter conditions</a> within queries and searches to refine results.</p>
-<h2 id="Filtered-search" class="common-anchor-header">Filtered search<button data-href="#Filtered-search" class="anchor-icon" translate="no">
+    </button></h2><p>Milvusは述語検索によるスカラーフィルタリングをサポートしており、クエリや検索内で<a href="https://milvus.io/docs/boolean.md">フィルタ条件を</a>定義して結果を絞り込むことができます。</p>
+<h2 id="Filtered-search" class="common-anchor-header">フィルタ検索<button data-href="#Filtered-search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -273,8 +273,8 @@ title: Terminology
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Filtered search applies scalar filters to vector searches, allowing you to refine the search results based on specific criteria. For more information, refer to <a href="/docs/single-vector-search.md#Filtered-search">Filtered search</a>.</p>
-<h2 id="Hybrid-search" class="common-anchor-header">Hybrid search<button data-href="#Hybrid-search" class="anchor-icon" translate="no">
+    </button></h2><p>フィルタリング検索はスカラーフィルタをベクトル検索に適用し、特定の条件に基づいて検索結果を絞り込むことができます。詳細については、<a href="/docs/ja/single-vector-search.md#Filtered-search">フィルタリング検索</a>を参照してください。</p>
+<h2 id="Hybrid-search" class="common-anchor-header">ハイブリッド検索<button data-href="#Hybrid-search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -289,8 +289,8 @@ title: Terminology
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><a href="https://milvus.io/api-reference/pymilvus/v2.4.x/ORM/Collection/hybrid_search.md">Hybrid Search</a> is an API for hybrid search since Milvus 2.4.0. You can search multiple vector fields and fusion them. For a vector search combined with scalar field filtering, it is referred to as &quot;filtered search&quot;. For more information, refer to <a href="/docs/multi-vector-search.md">Hybrid Search</a>.</p>
-<h2 id="Index" class="common-anchor-header">Index<button data-href="#Index" class="anchor-icon" translate="no">
+    </button></h2><p><a href="https://milvus.io/api-reference/pymilvus/v2.4.x/ORM/Collection/hybrid_search.md">ハイブリッド検索は</a>Milvus 2.4.0から搭載されたAPIです。複数のベクトルフィールドを検索し、融合させることができます。ベクトル検索とスカラーフィールドのフィルタリングを組み合わせた検索を「フィルタリング検索」と呼びます。詳細は<a href="/docs/ja/multi-vector-search.md">ハイブリッド検索を</a>参照。</p>
+<h2 id="Index" class="common-anchor-header">インデックス<button data-href="#Index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -305,8 +305,8 @@ title: Terminology
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>A vector index is a reorganized data structure derived from raw data that can greatly accelerate the process of vector similarity search. Milvus supports a wide range of index types for both vector fields and scalar fields. For more information, refer to <a href="https://milvus.io/docs/index.md">Vector index types</a>.</p>
-<h2 id="Kafka-Milvus-Connector" class="common-anchor-header">Kafka-Milvus Connector<button data-href="#Kafka-Milvus-Connector" class="anchor-icon" translate="no">
+    </button></h2><p>ベクトルインデックスは生データから導き出された再編成されたデータ構造であり、ベクトル類似検索のプロセスを大幅に加速することができます。Milvusはベクトルフィールドとスカラーフィールドの両方に対して幅広いインデックスタイプをサポートしています。詳細については、<a href="https://milvus.io/docs/index.md">ベクトルインデックス</a>タイプを参照してください。</p>
+<h2 id="Kafka-Milvus-Connector" class="common-anchor-header">Kafka-Milvusコネクタ<button data-href="#Kafka-Milvus-Connector" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -321,7 +321,7 @@ title: Terminology
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><a href="https://github.com/zilliztech/kafka-connect-milvus">Kafka-Milvus Connector</a> refers to a Kafka sink connector for Milvus. It allows you to stream vector data from Kafka to Milvus.</p>
+    </button></h2><p><a href="https://github.com/zilliztech/kafka-connect-milvus">Kafka-Milvusコネクタとは</a>、Milvus用のKafkaシンクコネクタのことです。KafkaからMilvusへベクトルデータをストリーミングすることができます。</p>
 <h2 id="Knowhere" class="common-anchor-header">Knowhere<button data-href="#Knowhere" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -337,8 +337,8 @@ title: Terminology
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><a href="https://milvus.io/docs/knowhere.md#Knowhere">Knowhere</a> is the core vector execution engine of Milvus which incorporates several vector similarity search libraries including Faiss, Hnswlib, and Annoy. Knowhere is also designed to support heterogeneous computing. It controls on which hardware (CPU or GPU) to execute index building and search requests. This is how Knowhere gets its name - knowing where to execute the operations.</p>
-<h2 id="Log-broker" class="common-anchor-header">Log broker<button data-href="#Log-broker" class="anchor-icon" translate="no">
+    </button></h2><p><a href="https://milvus.io/docs/knowhere.md#Knowhere">Knowhereは</a>Milvusのコアとなるベクトル実行エンジンであり、Faiss、Hnswlib、Annoyを含む複数のベクトル類似性検索ライブラリが組み込まれています。また、Knowhereはヘテロジニアスコンピューティングをサポートするように設計されている。インデックス構築と検索要求をどのハードウェア（CPUまたはGPU）で実行するかを制御する。これがKnowhereの名前の由来であり、どこで処理を実行するかを知っている。</p>
+<h2 id="Log-broker" class="common-anchor-header">ログブローカー<button data-href="#Log-broker" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -353,8 +353,8 @@ title: Terminology
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>The <a href="https://milvus.io/docs/four_layers.md#Log-broker">log broker</a> is a publish-subscribe system that supports playback. It is responsible for streaming data persistence, execution of reliable asynchronous queries, event notification, and return of query results. It also ensures integrity of the incremental data when the worker nodes recover from system breakdown.</p>
-<h2 id="Log-snapshot" class="common-anchor-header">Log snapshot<button data-href="#Log-snapshot" class="anchor-icon" translate="no">
+    </button></h2><p><a href="https://milvus.io/docs/four_layers.md#Log-broker">ログ・ブローカーは</a>、再生をサポートするパブリッシュ・サブスクライブ・システムである。ストリーミングデータの永続化、信頼性の高い非同期クエリの実行、イベント通知、クエリ結果の返送を担当する。また、ワーカーノードがシステムダウンから回復する際に、増分データの整合性を保証します。</p>
+<h2 id="Log-snapshot" class="common-anchor-header">ログスナップショット<button data-href="#Log-snapshot" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -369,8 +369,8 @@ title: Terminology
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>A log snapshot is a binary log, a smaller unit in segment that records and handles the updates and changes made to data in Milvus. Data from a segment is persisted in multiple binlogs. There are three types of binlogs in Milvus: InsertBinlog, DeleteBinlog, and DDLBinlog. For more information, refer to <a href="https://milvus.io/docs/four_layers.md#Meta-storage">Meta storage</a>.</p>
-<h2 id="Log-subscriber" class="common-anchor-header">Log subscriber<button data-href="#Log-subscriber" class="anchor-icon" translate="no">
+    </button></h2><p>ログスナップショットはバイナリログであり、milvusのデータに対する更新や変更を記録し、処理するセグメントの小さな単位です。セグメントのデータは複数のバイナリログに永続化されます。MilvusのバイナリログにはInsertBinlog、DeleteBinlog、DDLBinlogの3種類があります。詳細については、<a href="https://milvus.io/docs/four_layers.md#Meta-storage">メタストレージを</a>参照してください。</p>
+<h2 id="Log-subscriber" class="common-anchor-header">ログ購読者<button data-href="#Log-subscriber" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -385,8 +385,8 @@ title: Terminology
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Log subscribers subscribe to the log sequence to update the local data and provide services in the form of read-only copies.</p>
-<h2 id="Message-storage" class="common-anchor-header">Message storage<button data-href="#Message-storage" class="anchor-icon" translate="no">
+    </button></h2><p>ログサブスクライバは、ローカルデータを更新し、読み取り専用コピーの形でサービスを提供するために、ログシーケンスをサブスクライブします。</p>
+<h2 id="Message-storage" class="common-anchor-header">メッセージストレージ<button data-href="#Message-storage" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -401,8 +401,8 @@ title: Terminology
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Message storage is the log storage engine of Milvus. Milvus supports Kafka or Pulsa as message storage. For more information, refer to <a href="https://milvus.io/docs/message_storage_operator.md#Configure-Message-Storage-with-Milvus-Operator">Configure Message Storage</a>.</p>
-<h2 id="Metric-type" class="common-anchor-header">Metric type<button data-href="#Metric-type" class="anchor-icon" translate="no">
+    </button></h2><p>メッセージストレージはMilvusのログストレージエンジンです。MilvusはメッセージストレージとしてKafkaまたはPulsaをサポートしています。詳細については、「<a href="https://milvus.io/docs/message_storage_operator.md#Configure-Message-Storage-with-Milvus-Operator">メッセージストレージの設定</a>」を参照してください。</p>
+<h2 id="Metric-type" class="common-anchor-header">メトリックタイプ<button data-href="#Metric-type" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -417,8 +417,8 @@ title: Terminology
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Similarity metric types are used to measure similarities between vectors. Currently, Milvus supports Euclidean distance (L2), Inner product (IP), Cosine similarity (COSINE), and binary metric types. You can choose the most appropriate metric type based on your scenario. For more information, refer to <a href="https://milvus.io/docs/metric.md">Similarity Metrics</a>.</p>
-<h2 id="Mmap" class="common-anchor-header">Mmap<button data-href="#Mmap" class="anchor-icon" translate="no">
+    </button></h2><p>類似度メトリックタイプはベクトル間の類似度を測定するために使用されます。現在、Milvusはユークリッド距離(L2)、内積(IP)、コサイン類似度(COSINE)、バイナリメトリックタイプをサポートしています。シナリオに応じて最適なメトリックタイプを選択することができます。詳細については、<a href="https://milvus.io/docs/metric.md">類似度メトリックを</a>参照してください。</p>
+<h2 id="Mmap" class="common-anchor-header">マップ<button data-href="#Mmap" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -433,8 +433,8 @@ title: Terminology
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Memory-mapped files enable efficient data handling by mapping file contents directly into memory. This is especially useful when memory is limited and loading all data is not possible. This technique can boost data capacity and maintain performance to a point. However, if the data greatly exceeds memory capacity, search and query speeds could significantly decrease. For more information, refer to <a href="https://milvus.io/docs/mmap.md">MMap-enabled Data Storage</a>.</p>
-<h2 id="Milvus-Backup" class="common-anchor-header">Milvus Backup<button data-href="#Milvus-Backup" class="anchor-icon" translate="no">
+    </button></h2><p>メモリマップされたファイルは、ファイルの内容を直接メモリにマッピングすることで、効率的なデータ処理を可能にします。これは、メモリが限られており、すべてのデータをロードできない場合に特に有効です。このテクニックは、データ容量を増加させ、パフォーマンスをある程度維持することができる。しかし、データがメモリ容量を大幅に超える場合、検索やクエリの速度が大幅に低下する可能性があります。詳細については、<a href="https://milvus.io/docs/mmap.md">MMap-enabled Data Storageを</a>参照してください。</p>
+<h2 id="Milvus-Backup" class="common-anchor-header">Milvusバックアップ<button data-href="#Milvus-Backup" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -449,7 +449,7 @@ title: Terminology
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><a href="https://milvus.io/docs/milvus_backup_overview.md#Milvus-Backup">Milvus Backup</a> is a tool for creating copies of data, which can be used to restore the original after a data loss event.</p>
+    </button></h2><p><a href="https://milvus.io/docs/milvus_backup_overview.md#Milvus-Backup">Milvus Backupは</a>データのコピーを作成するためのツールであり、データ喪失後にオリジナルを復元するために使用することができます。</p>
 <h2 id="Milvus-CDC" class="common-anchor-header">Milvus CDC<button data-href="#Milvus-CDC" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -465,7 +465,7 @@ title: Terminology
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><a href="https://milvus.io/docs/milvus-cdc-overview.md">Milvus CDC</a> (Change data capture) is a user-friendly tool that can capture and synchronize incremental data in Milvus instances. It ensures the reliability of business data by seamlessly transferring it between source and target instances, allowing for easy incremental backup and disaster recovery.</p>
+    </button></h2><p><a href="https://milvus.io/docs/milvus-cdc-overview.md">Milvus CDC</a>(Change data capture)は、Milvusインスタンスの増分データをキャプチャし、同期することができるユーザーフレンドリーなツールです。ソースインスタンスとターゲットインスタンス間でシームレスにデータを転送することで、ビジネスデータの信頼性を確保し、増分バックアップとディザスタリカバリを容易に行うことができます。</p>
 <h2 id="Milvus-CLI" class="common-anchor-header">Milvus CLI<button data-href="#Milvus-CLI" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -481,8 +481,8 @@ title: Terminology
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><a href="https://milvus.io/docs/cli_overview.md">Milvus Command-Line Interface</a> (CLI) is a command-line tool that supports database connection, data operations, and import and export of data. Based on <a href="https://github.com/milvus-io/pymilvus">Milvus Python SDK</a>, it allows the execution of commands through a terminal using interactive command-line prompts.</p>
-<h2 id="Milvus-Migration" class="common-anchor-header">Milvus Migration<button data-href="#Milvus-Migration" class="anchor-icon" translate="no">
+    </button></h2><p><a href="https://milvus.io/docs/cli_overview.md">Milvusコマンドラインインタフェース</a>(CLI)は、データベース接続、データ操作、データのインポート・エクスポートをサポートするコマンドラインツールです。<a href="https://github.com/milvus-io/pymilvus">Milvus Python SDKを</a>ベースとしており、対話型のコマンドラインプロンプトを使用してターミナルからコマンドを実行することができます。</p>
+<h2 id="Milvus-Migration" class="common-anchor-header">Milvusマイグレーション<button data-href="#Milvus-Migration" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -497,8 +497,8 @@ title: Terminology
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><a href="https://github.com/zilliztech/milvus-migration/">Milvus Migration</a> is an open-source tool designed to facilitate the easy migration of data from various data sources into Milvus 2.x.</p>
-<h2 id="Milvus-cluster" class="common-anchor-header">Milvus cluster<button data-href="#Milvus-cluster" class="anchor-icon" translate="no">
+    </button></h2><p><a href="https://github.com/zilliztech/milvus-migration/">Milvusマイグレーションは</a>、様々なデータソースからMilvus 2.xへのデータ移行を容易にするために設計されたオープンソースツールです。</p>
+<h2 id="Milvus-cluster" class="common-anchor-header">Milvusクラスタ<button data-href="#Milvus-cluster" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -513,8 +513,8 @@ title: Terminology
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>In <a href="https://milvus.io/docs/install_cluster-milvusoperator.md">cluster deployment</a> of Milvus, services are provided by a group of nodes to achieve high availability and easy scalability.</p>
-<h2 id="Milvus-standalone" class="common-anchor-header">Milvus standalone<button data-href="#Milvus-standalone" class="anchor-icon" translate="no">
+    </button></h2><p>Milvusの<a href="https://milvus.io/docs/install_cluster-milvusoperator.md">クラスタ展開では</a>、高可用性と容易なスケーラビリティを実現するために、ノードグループによってサービスが提供されます。</p>
+<h2 id="Milvus-standalone" class="common-anchor-header">Milvusスタンドアロン<button data-href="#Milvus-standalone" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -529,8 +529,8 @@ title: Terminology
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>In <a href="https://milvus.io/docs/install_standalone-docker.md">standalone deployment</a> of Milvus, all operations including data insertion, index building, and vector similarity search are completed in one single process.</p>
-<h2 id="Multi-Vector" class="common-anchor-header">Multi-Vector<button data-href="#Multi-Vector" class="anchor-icon" translate="no">
+    </button></h2><p>Milvusの<a href="https://milvus.io/docs/install_standalone-docker.md">スタンドアロン展開では</a>、データ挿入、インデックス構築、ベクトル類似度検索を含むすべての操作は1つのプロセスで完了します。</p>
+<h2 id="Multi-Vector" class="common-anchor-header">マルチベクトル<button data-href="#Multi-Vector" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -545,8 +545,8 @@ title: Terminology
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus supports multiple vector fields in one collection since 2.4.0. For more information, refer to <a href="/docs/multi-vector-search.md">Hybrid Search</a>.</p>
-<h2 id="Partition" class="common-anchor-header">Partition<button data-href="#Partition" class="anchor-icon" translate="no">
+    </button></h2><p>Milvusは2.4.0以降、1つのコレクションで複数のベクトルフィールドをサポートしています。詳細は<a href="/docs/ja/multi-vector-search.md">ハイブリッド検索を</a>ご参照ください。</p>
+<h2 id="Partition" class="common-anchor-header">パーティション<button data-href="#Partition" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -561,8 +561,8 @@ title: Terminology
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>A partition is a division of a collection. Milvus supports dividing collection data into multiple parts on physical storage. This process is called partitioning, and each partition can contain multiple segments. For more information, refer to <a href="https://milvus.io/docs/manage-partitions.md#Manage-Partitions">Manage Partitions</a>.</p>
-<h2 id="Partition-key" class="common-anchor-header">Partition key<button data-href="#Partition-key" class="anchor-icon" translate="no">
+    </button></h2><p>パーティションはコレクションの分割です。Milvusはコレクションデータを物理ストレージ上で複数のパートに分割することをサポートしています。このプロセスはパーティショニングと呼ばれ、各パーティションは複数のセグメントを含むことができます。詳細については、<a href="https://milvus.io/docs/manage-partitions.md#Manage-Partitions">パーティションの</a>管理を参照してください。</p>
+<h2 id="Partition-key" class="common-anchor-header">パーティション・キー<button data-href="#Partition-key" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -577,8 +577,8 @@ title: Terminology
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>The partition key attribute of a field enables the segregation of entities into distinct partitions based on their partition key values. This grouping ensures that entities sharing the same key value are stored together, which can speed up search operations by allowing the system to bypass irrelevant partitions during queries filtered by the partition key field. For more information, refer to <a href="https://milvus.io/docs/use-partition-key.md#Use-Partition-Key">Use Partition Key</a>.</p>
-<h2 id="PChannel" class="common-anchor-header">PChannel<button data-href="#PChannel" class="anchor-icon" translate="no">
+    </button></h2><p>フィールドのパーティション・キー属性は、パーティション・キー値に基づいて、エンティティを個別のパーティションに分離することを可能にします。このグループ化によって、同じキー値を共有するエンティティが一緒に保存されるようになり、パーティション・キー・フィールドでフィルタリングされたクエリ中にシステムが無関係なパーティションをバイパスできるようになるため、検索操作が高速化されます。詳細については、「<a href="https://milvus.io/docs/use-partition-key.md#Use-Partition-Key">パーティション・キーの使用</a>」を参照してください。</p>
+<h2 id="PChannel" class="common-anchor-header">PCチャンネル<button data-href="#PChannel" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -593,7 +593,7 @@ title: Terminology
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>PChannel stands for physical channel. Each PChannel corresponds to a topic for log storage. By default, a group of 16 PChannels will be assigned to store logs that record data insertion, deletion, and update when the Milvus cluster is started. For more information, refer to <a href="https://milvus.io/docs/configure_messagechannel.md#Message-Channel-related-Configurations">Message Channel-related Configurations</a>.</p>
+    </button></h2><p>PChannelは物理チャンネルを意味します。各PCチャンネルは、ログ・ストレージのトピックに対応します。デフォルトでは、Milvusクラスタの起動時にデータの挿入、削除、更新を記録するログを格納するために16のPCチャネルが割り当てられます。詳細については、<a href="https://milvus.io/docs/configure_messagechannel.md#Message-Channel-related-Configurations">メッセージチャネル関連の設定を</a>参照してください。</p>
 <h2 id="PyMilvus" class="common-anchor-header">PyMilvus<button data-href="#PyMilvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -609,8 +609,8 @@ title: Terminology
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>PyMilvus is a Python SDK of Milvus. Its source code is open-sourced and hosted on <a href="https://github.com/milvus-io/pymilvus">GitHub</a>. You have the flexibility to choose MilvusClient (new version Python SDK) or the original ORM module to talk with Milvus.</p>
-<h2 id="Query" class="common-anchor-header">Query<button data-href="#Query" class="anchor-icon" translate="no">
+    </button></h2><p>PyMilvusはMilvusのPython SDKです。ソースコードはオープンソース化されており、<a href="https://github.com/milvus-io/pymilvus">GitHubで</a>ホストされています。MilvusClient（新バージョンのPython SDK）またはオリジナルのORMモジュールを選択し、Milvusと対話することができます。</p>
+<h2 id="Query" class="common-anchor-header">クエリ<button data-href="#Query" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -625,8 +625,8 @@ title: Terminology
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Vector/query.md">Query</a> is an API that conducts scalar filtering with a specified boolean expression as filter. For more information, refer to <a href="https://milvus.io/docs/get-and-scalar-query.md#Use-Basic-Operators">Get &amp; Scalar Query</a>.</p>
-<h2 id="Range-search" class="common-anchor-header">Range search<button data-href="#Range-search" class="anchor-icon" translate="no">
+    </button></h2><p><a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Vector/query.md">Queryは</a>、指定されたブール式をフィルタとしてスカラーフィルタリングを行うAPIです。詳細は<a href="https://milvus.io/docs/get-and-scalar-query.md#Use-Basic-Operators">Get &amp; Scalar Query</a> を参照してください。</p>
+<h2 id="Range-search" class="common-anchor-header">範囲検索<button data-href="#Range-search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -641,8 +641,8 @@ title: Terminology
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Range search allows you to find vectors that lie within a specified distance from your search vector. For more information, refer to <a href="https://milvus.io/docs/single-vector-search.md#Range-search">Range search</a>.</p>
-<h2 id="Schema" class="common-anchor-header">Schema<button data-href="#Schema" class="anchor-icon" translate="no">
+    </button></h2><p>範囲検索では、検索ベクトルから指定した距離内にあるベクトルを見つけることができます。詳細については、<a href="https://milvus.io/docs/single-vector-search.md#Range-search">範囲検索を</a>参照してください。</p>
+<h2 id="Schema" class="common-anchor-header">スキーマ<button data-href="#Schema" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -657,8 +657,8 @@ title: Terminology
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Schema is the meta information that defines the data type and data property. Each collection has its own collection schema that defines all the fields of a collection, automatic ID (primary key) allocation enablement, and collection description. Field schemas are also included in collection schemas, which defines the name, data type, and other properties of a field. For more information, refer to <a href="https://milvus.io/docs/schema.md#Manage-Schema">Manage Schema</a>.</p>
-<h2 id="Search" class="common-anchor-header">Search<button data-href="#Search" class="anchor-icon" translate="no">
+    </button></h2><p>スキーマは、データ型とデータプロパティを定義するメタ情報です。各コレクションは、コレクションのすべてのフィールド、自動ID（プライマリキー）割当て有効性、およびコレクションの説明を定義する独自のコレクションスキーマを持っています。フィールドスキーマもコレクションスキーマに含まれ、フィールドの名前、データ型、その他のプロパティを定義します。詳細については、<a href="https://milvus.io/docs/schema.md#Manage-Schema">Manage Schemaを</a>参照してください。</p>
+<h2 id="Search" class="common-anchor-header">検索<button data-href="#Search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -673,8 +673,8 @@ title: Terminology
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Vector/search.md">Search</a> is an API that performs an operation to conduct a vector similarity search, requiring vector data for its execution. For more information, refer to <a href="https://milvus.io/docs/single-vector-search.md">Single-Vector Search</a>.</p>
-<h2 id="Segment" class="common-anchor-header">Segment<button data-href="#Segment" class="anchor-icon" translate="no">
+    </button></h2><p><a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Vector/search.md">Searchは</a>ベクトル類似検索を実行するAPIで、その実行にはベクトルデータが必要である。詳細は「<a href="https://milvus.io/docs/single-vector-search.md">Single-Vector Search</a>」を参照。</p>
+<h2 id="Segment" class="common-anchor-header">セグメント<button data-href="#Segment" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -689,9 +689,9 @@ title: Terminology
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>A segment is an automatically created data file that stores inserted data. A collection may contain multiple segments, and each segment can hold numerous entities. During a vector similarity search, Milvus examines each segment to compile search results.</p>
-<p>There are two types of segments: growing and sealed. A growing segment continues to collect new data until it hits a specific threshold or time limit, after which it becomes sealed. Once sealed, a segment no longer accepts new data and is transferred to object storage. Meanwhile, incoming data is routed to a new growing segment. The transition from a growing to a sealed segment is triggered either by reaching the predefined entity limit or by exceeding the maximum allowed duration in the growing state. For more information, refer to <a href="https://milvus.io/docs/replica.md#Design-Details">Design Details</a>.</p>
-<h2 id="Spark-Milvus-Connector" class="common-anchor-header">Spark-Milvus Connector<button data-href="#Spark-Milvus-Connector" class="anchor-icon" translate="no">
+    </button></h2><p>セグメントとは、挿入されたデータを保存するために自動的に作成されるデータファイルである。コレクションは複数のセグメントを含むことができ、各セグメントは多数のエンティティを保持することができる。ベクトル類似検索の間、Milvusは各セグメントを調べ、検索結果をまとめます。</p>
+<p>セグメントには、成長するセグメントと密封されたセグメントの2種類がある。成長中のセグメントは、特定のしきい値または時間制限に達するまで新しいデータを収集し続け、その後封印される。一旦封印されると、セグメントは新しいデータを受け付けなくなり、オブジェクトストレージに転送される。一方、受信データは新しい成長中のセグメントに転送される。成長中のセグメントから封印されたセグメントへの移行は、事前に定義されたエンティティの制限に達するか、成長中の状態で許容される最大期間を超えるかのどちらかでトリガーされる。詳細については、<a href="https://milvus.io/docs/replica.md#Design-Details">設計の詳細を</a>参照してください。</p>
+<h2 id="Spark-Milvus-Connector" class="common-anchor-header">Spark-Milvusコネクタ<button data-href="#Spark-Milvus-Connector" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -706,8 +706,8 @@ title: Terminology
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><a href="https://github.com/zilliztech/spark-milvus">Spark-Milvus Connector</a> provides seamless integration between Apache Spark and Milvus, combining the data processing and machine learning (ML) features of Apache Spark with the vector data storage and search capabilities of Milvus.</p>
-<h2 id="Shard" class="common-anchor-header">Shard<button data-href="#Shard" class="anchor-icon" translate="no">
+    </button></h2><p><a href="https://github.com/zilliztech/spark-milvus">Spark-Milvus Connectorは</a>、Apache SparkとMilvus間のシームレスな統合を提供し、Apache Sparkのデータ処理および機械学習（ML）機能とMilvusのベクトルデータストレージおよび検索機能を組み合わせます。</p>
+<h2 id="Shard" class="common-anchor-header">シャード<button data-href="#Shard" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -722,9 +722,9 @@ title: Terminology
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus enhances data write performance by distributing write operations across multiple nodes using shards, which are organized based on the hashing of primary keys. This leverages the cluster’s parallel computing capabilities.</p>
-<p><em>Partitioning works to reduce read load by specifying a partition name, while sharding spreads write load among multiple servers.</em></p>
-<h2 id="Sparse-vector" class="common-anchor-header">Sparse vector<button data-href="#Sparse-vector" class="anchor-icon" translate="no">
+    </button></h2><p>Milvusは、プライマリキーのハッシュに基づいて編成されたシャードを使用して、書き込み操作を複数のノードに分散させることで、データの書き込みパフォーマンスを向上させます。これはクラスタの並列コンピューティング能力を活用する。</p>
+<p><em>パーティショニングはパーティション名を指定することで読み込み負荷を軽減し、シャーディングは書き込み負荷を複数のサーバーに分散します。</em></p>
+<h2 id="Sparse-vector" class="common-anchor-header">スパース・ベクター<button data-href="#Sparse-vector" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -739,8 +739,8 @@ title: Terminology
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Sparse vectors represent words or phrases using vector embeddings where most elements are zero, with only one non-zero element indicating the presence of a specific word. Sparse vector models, such as SPLADEv2, outperform dense models in out-of-domain knowledge search, keyword-awareness, and interpretability. For more information, refer to <a href="https://milvus.io/docs/sparse_vector.md#Sparse-Vector">Sparse Vectors</a>.</p>
-<h2 id="Unstructured-data" class="common-anchor-header">Unstructured data<button data-href="#Unstructured-data" class="anchor-icon" translate="no">
+    </button></h2><p>スパース・ベクトルは、ほとんどの要素がゼロであり、ゼロでない要素が1つだけあれば特定の単語が存在することを示すベクトル埋め込みを用いて単語やフレーズを表現する。SPLADEv2のようなスパース・ベクター・モデルは、領域外の知識検索、キーワード認識、解釈可能性において、密なモデルよりも優れている。詳細については、「<a href="https://milvus.io/docs/sparse_vector.md#Sparse-Vector">スパース・ベクトル</a>」を参照してください。</p>
+<h2 id="Unstructured-data" class="common-anchor-header">非構造化データ<button data-href="#Unstructured-data" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -755,8 +755,8 @@ title: Terminology
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Unstructured data, including images, video, audio, and natural language, is information that does not follow a predefined model or manner of organization. This data type accounts for around 80% of the world’s data, and can be converted into vectors using various artificial intelligence (AI) and ML models.</p>
-<h2 id="VChannel" class="common-anchor-header">VChannel<button data-href="#VChannel" class="anchor-icon" translate="no">
+    </button></h2><p>画像、ビデオ、オーディオ、自然言語などの非構造化データは、事前に定義されたモデルや構成方法に従わない情報です。このデータタイプは世界のデータの約80%を占めており、様々な人工知能（AI）やMLモデルを使用してベクトルに変換することができます。</p>
+<h2 id="VChannel" class="common-anchor-header">Vチャネル<button data-href="#VChannel" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -771,8 +771,8 @@ title: Terminology
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><a href="https://milvus.io/docs/data_processing.md#Data-insertion">VChannel</a> stands for logical channel. Each VChannel represents a shard in a collection. Each collection will be assigned a group of VChannels for recording data insertion, deletion, and update. VChannels are logically separated but physically share resources.</p>
-<h2 id="Vector" class="common-anchor-header">Vector<button data-href="#Vector" class="anchor-icon" translate="no">
+    </button></h2><p><a href="https://milvus.io/docs/data_processing.md#Data-insertion">VChannelは</a>論理チャネルの略。各VChannelはコレクション内のシャードを表す。各コレクションには、データの挿入、削除、更新を記録するためのVChannelのグループが割り当てられる。VChannelは論理的には分離されているが、物理的にはリソースを共有している。</p>
+<h2 id="Vector" class="common-anchor-header">ベクトル<button data-href="#Vector" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -787,8 +787,8 @@ title: Terminology
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>An embedding vector is a feature abstraction of unstructured data, such as emails, IoT sensor data, Instagram photos, protein structures, and more. Mathematically speaking, an embedding vector is an array of floating-point numbers or binaries. Modern embedding techniques are used to convert unstructured data to embedding vectors. Milvus support both dense and sparse vector since 2.4.0.</p>
-<h2 id="Zilliz-Cloud" class="common-anchor-header">Zilliz Cloud<button data-href="#Zilliz-Cloud" class="anchor-icon" translate="no">
+    </button></h2><p>埋め込みベクトルは、電子メール、IoTセンサーデータ、Instagramの写真、タンパク質構造などの非構造化データの特徴を抽象化したものです。数学的に言えば、エンベッディング・ベクターは浮動小数点数またはバイナリの配列です。最新の埋め込み技術は、非構造化データを埋め込みベクトルに変換するために使用されます。Milvusは2.4.0から密なベクトルと疎なベクトルの両方をサポートしています。</p>
+<h2 id="Zilliz-Cloud" class="common-anchor-header">Zillizクラウド<button data-href="#Zilliz-Cloud" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -803,4 +803,4 @@ title: Terminology
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Fully-managed Milvus on <a href="https://zilliz.com/">Zilliz Cloud</a>, with more enterprise features and highly optimized performance.</p>
+    </button></h2><p><a href="https://zilliz.com/">Zilliz Cloud</a>上のフルマネージドMilvusは、より多くのエンタープライズ機能と高度に最適化されたパフォーマンスを備えています。</p>

@@ -1,9 +1,9 @@
 ---
 id: integrate_with_voyageai.md
-title: Semantic Search with Milvus and VoyageAI
-summary: This page discusses vector database integration with VoyageAI's embedding API.
+title: MilvusとVoyageAIによるセマンティック検索
+summary: このページでは、VoyageAIのエンベッディングAPIを使ったベクターデータベースの統合について説明します。
 ---
-<h1 id="Semantic-Search-with-Milvus-and-VoyageAI" class="common-anchor-header">Semantic Search with Milvus and VoyageAI<button data-href="#Semantic-Search-with-Milvus-and-VoyageAI" class="anchor-icon" translate="no">
+<h1 id="Semantic-Search-with-Milvus-and-VoyageAI" class="common-anchor-header">MilvusとVoyageAIによるセマンティック検索<button data-href="#Semantic-Search-with-Milvus-and-VoyageAI" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -20,8 +20,8 @@ summary: This page discusses vector database integration with VoyageAI's embeddi
       </svg>
     </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/semantic_search_with_milvus_and_voyageai.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
 <a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/semantic_search_with_milvus_and_voyageai.ipynb" target="_blank"><img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/></a></p>
-<p>This guide showcases how <a href="https://docs.voyageai.com/docs/embeddings">VoyageAI’s Embedding API</a> can be used with Milvus vector database to conduct semantic search on text.</p>
-<h2 id="Getting-started" class="common-anchor-header">Getting started<button data-href="#Getting-started" class="anchor-icon" translate="no">
+<p>このガイドでは、Milvusベクトルデータベースと<a href="https://docs.voyageai.com/docs/embeddings">VoyageAIのEmbedding APIを</a>使用して、テキストをセマンティック検索する方法を紹介します。</p>
+<h2 id="Getting-started" class="common-anchor-header">はじめに<button data-href="#Getting-started" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -36,16 +36,16 @@ summary: This page discusses vector database integration with VoyageAI's embeddi
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Before you start, make sure you have the Voyage API key ready, or you get one from the <a href="https://dash.voyageai.com/api-keys">VoyageAI website</a>.</p>
-<p>The data used in this example are book titles. You can download the dataset <a href="https://www.kaggle.com/datasets/jealousleopard/goodreadsbooks">here</a> and put it in the same directory where you run the following code.</p>
-<p>First, install the package for Milvus and Voyage AI:</p>
+    </button></h2><p>始める前に、Voyage APIキーが用意されているか、<a href="https://dash.voyageai.com/api-keys">VoyageAIのウェブサイトから</a>取得できることを確認してください。</p>
+<p>この例で使用するデータは本のタイトルである。データセットは<a href="https://www.kaggle.com/datasets/jealousleopard/goodreadsbooks">こちらから</a>ダウンロードでき、以下のコードを実行するのと同じディレクトリに置くことができる。</p>
+<p>まず、MilvusとVoyage AI用のパッケージをインストールする：</p>
 <pre><code translate="no" class="language-python">$ pip install --upgrade voyageai pymilvus
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>If you are using Google Colab, to enable dependencies just installed, you may need to <strong>restart the runtime</strong>. (Click on the “Runtime” menu at the top of the screen, and select “Restart session” from the dropdown menu).</p>
+<p>Google Colabを使用している場合、インストールした依存関係を有効にするために、<strong>ランタイムを再起動する</strong>必要があるかもしれません。(画面上部の "Runtime "メニューをクリックし、ドロップダウンメニューから "Restart session "を選択する）。</p>
 </div>
-<p>With this, we’re ready to generate embeddings and use vector database to conduct semantic search.</p>
-<h2 id="Searching-book-titles-with-VoyageAI--Milvus" class="common-anchor-header">Searching book titles with VoyageAI &amp; Milvus<button data-href="#Searching-book-titles-with-VoyageAI--Milvus" class="anchor-icon" translate="no">
+<p>これで、埋め込みデータを生成し、ベクターデータベースを使ってセマンティック検索を行う準備が整いました。</p>
+<h2 id="Searching-book-titles-with-VoyageAI--Milvus" class="common-anchor-header">VoyageAI &amp; Milvusによる書籍タイトルの検索<button data-href="#Searching-book-titles-with-VoyageAI--Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -60,7 +60,7 @@ summary: This page discusses vector database integration with VoyageAI's embeddi
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>In the following example, we load book title data from the downloaded CSV file, use Voyage AI embedding model to generate vector representations, and store them in Milvus vector database for semantic search.</p>
+    </button></h2><p>以下の例では、ダウンロードしたCSVファイルから書籍のタイトルデータを読み込み、VoyageAIの埋め込みモデルを使ってベクトル表現を生成し、Milvusのベクトルデータベースに格納して意味検索を行います。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> voyageai
 <span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
@@ -102,14 +102,14 @@ res = milvus_client.insert(collection_name=<span class="hljs-string">&quot;demo_
 <span class="hljs-built_in">print</span>(res[<span class="hljs-string">&quot;insert_count&quot;</span>])
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>As for the argument of <code translate="no">MilvusClient</code>:</p>
+<p>引数として<code translate="no">MilvusClient</code> を指定する：</p>
 <ul>
-<li>Setting the <code translate="no">uri</code> as a local file, e.g.<code translate="no">./milvus.db</code>, is the most convenient method, as it automatically utilizes <a href="https://milvus.io/docs/milvus_lite.md">Milvus Lite</a> to store all data in this file.</li>
-<li>If you have large scale of data, you can set up a more performant Milvus server on <a href="https://milvus.io/docs/quickstart.md">docker or kubernetes</a>. In this setup, please use the server uri, e.g.<code translate="no">http://localhost:19530</code>, as your <code translate="no">uri</code>.</li>
-<li>If you want to use <a href="https://zilliz.com/cloud">Zilliz Cloud</a>, the fully managed cloud service for Milvus, adjust the <code translate="no">uri</code> and <code translate="no">token</code>, which correspond to the <a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">Public Endpoint and Api key</a> in Zilliz Cloud.</li>
+<li><code translate="no">./milvus.db</code> のように<code translate="no">uri</code> をローカルファイルとして設定する方法が最も便利である。</li>
+<li>データ規模が大きい場合は、<a href="https://milvus.io/docs/quickstart.md">dockerやkubernetes</a>上に、よりパフォーマンスの高いMilvusサーバを構築することができます。このセットアップでは、サーバの uri、例えば<code translate="no">http://localhost:19530</code> を<code translate="no">uri</code> として使用してください。</li>
+<li>Milvusのフルマネージドクラウドサービスである<a href="https://zilliz.com/cloud">Zilliz Cloudを</a>使用する場合は、Zilliz Cloudの<a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">Public EndpointとApi keyに</a>対応する<code translate="no">uri</code> と<code translate="no">token</code> を調整してください。</li>
 </ul>
 </div>
-<p>With all data in Milvus vector database, we can now perform semantic search by generating vector embedding for the query and conduct vector search.</p>
+<p>Milvusのベクトルデータベースに全てのデータが登録されたので、クエリに対するベクトル埋め込みを生成してベクトル検索を行うことで、セマンティック検索を行うことができる。</p>
 <pre><code translate="no" class="language-python">queries = [<span class="hljs-string">&quot;When was artificial intelligence founded?&quot;</span>]
 
 query_vectors = voyage_client.embed(

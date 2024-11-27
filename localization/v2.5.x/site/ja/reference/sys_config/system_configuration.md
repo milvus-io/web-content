@@ -2,9 +2,9 @@
 id: system_configuration.md
 related_key: configure
 group: system_configuration.md
-summary: Learn about the system configuration of Milvus.
+summary: Milvusのシステム構成についてご紹介します。
 ---
-<h1 id="Milvus-System-Configurations-Checklist" class="common-anchor-header">Milvus System Configurations Checklist<button data-href="#Milvus-System-Configurations-Checklist" class="anchor-icon" translate="no">
+<h1 id="Milvus-System-Configurations-Checklist" class="common-anchor-header">Milvusシステム構成チェックリスト<button data-href="#Milvus-System-Configurations-Checklist" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -19,12 +19,11 @@ summary: Learn about the system configuration of Milvus.
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>This topic introduces the general sections of the system configurations in Milvus.</p>
-<p>Milvus maintains a considerable number of parameters that configure the system. Each configuration has a default value, which can be used directly. You can modify these parameters flexibly so that Milvus can better serve your application. See <a href="/docs/configure-docker.md">Configure Milvus</a> for more information.</p>
+    </button></h1><p>このトピックでは、Milvusのシステムコンフィギュレーションの一般的なセクションを紹介します。</p>
+<p>Milvusにはシステムを構成するためのパラメータが多数用意されています。各設定にはデフォルト値があり、そのまま使用することができます。これらのパラメータを柔軟に変更することで、Milvusがお客様のアプリケーションにより良く対応できるようになります。詳しくは<a href="/docs/ja/configure-docker.md">Milvusの設定を</a>参照してください。</p>
 <div class="alert note">
-In current release, all parameters take effect only after being configured at the startup of Milvus.
-</div>
-<h2 id="Sections" class="common-anchor-header">Sections<button data-href="#Sections" class="anchor-icon" translate="no">
+現在のリリースでは、すべてのパラメータはMilvusの起動時に設定された後に有効になります。</div>
+<h2 id="Sections" class="common-anchor-header">セクション<button data-href="#Sections" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -39,36 +38,36 @@ In current release, all parameters take effect only after being configured at th
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>For the convenience of maintenance, Milvus classifies its configurations into %s sections based on its components, dependencies, and general usage.</p>
-<h3 id="etcd" class="common-anchor-header"><code translate="no">etcd</code></h3><p>Related configuration of etcd, used to store Milvus metadata &amp; service discovery.</p>
-<p>See <a href="/docs/configure_etcd.md">etcd-related Configurations</a> for detailed description for each parameter under this section.</p>
-<h3 id="metastore" class="common-anchor-header"><code translate="no">metastore</code></h3><p>See <a href="/docs/configure_metastore.md">metastore-related Configurations</a> for detailed description for each parameter under this section.</p>
-<h3 id="tikv" class="common-anchor-header"><code translate="no">tikv</code></h3><p>Related configuration of tikv, used to store Milvus metadata.</p>
-<p>Notice that when TiKV is enabled for metastore, you still need to have etcd for service discovery.</p>
-<p>TiKV is a good option when the metadata size requires better horizontal scalability.</p>
-<p>See <a href="/docs/configure_tikv.md">tikv-related Configurations</a> for detailed description for each parameter under this section.</p>
-<h3 id="localStorage" class="common-anchor-header"><code translate="no">localStorage</code></h3><p>See <a href="/docs/configure_localstorage.md">localStorage-related Configurations</a> for detailed description for each parameter under this section.</p>
-<h3 id="minio" class="common-anchor-header"><code translate="no">minio</code></h3><p>Related configuration of MinIO/S3/GCS or any other service supports S3 API, which is responsible for data persistence for Milvus.</p>
-<p>We refer to the storage service as MinIO/S3 in the following description for simplicity.</p>
-<p>See <a href="/docs/configure_minio.md">minio-related Configurations</a> for detailed description for each parameter under this section.</p>
-<h3 id="mq" class="common-anchor-header"><code translate="no">mq</code></h3><p>Milvus supports four MQ: rocksmq(based on RockDB), natsmq(embedded nats-server), Pulsar and Kafka.</p>
-<p>You can change your mq by setting mq.type field.</p>
-<p>If you don’t set mq.type field as default, there is a note about enabling priority if we config multiple mq in this file.</p>
+    </button></h2><p>メンテナンスの便宜のため、Milvusはコンポーネント、依存関係、および一般的な使用方法に基づいて設定を%sセクションに分類しています。</p>
+<h3 id="etcd" class="common-anchor-header"><code translate="no">etcd</code></h3><p>Milvusのメタデータとサービスディスカバリの保存に使用されるetcdの関連設定。</p>
+<p>このセクションの各パラメータの詳細については、「<a href="/docs/ja/configure_etcd.md">etcd関連設定</a>」を参照してください。</p>
+<h3 id="metastore" class="common-anchor-header"><code translate="no">metastore</code></h3><p>このセクションの各パラメータの詳細については、<a href="/docs/ja/configure_metastore.md">メタストア関連設定を</a>参照してください。</p>
+<h3 id="tikv" class="common-anchor-header"><code translate="no">tikv</code></h3><p>Milvusメタデータの保存に使用されるtikvの関連設定。</p>
+<p>メタストアとしてTiKVを有効にした場合でも、サービスディスカバリのためにetcdが必要であることに注意してください。</p>
+<p>TiKVはメタデータのサイズが水平方向のスケーラビリティを必要とする場合に有効なオプションである。</p>
+<p>このセクションの各パラメータの詳細については、<a href="/docs/ja/configure_tikv.md">tikv関連の設定を</a>参照してください。</p>
+<h3 id="localStorage" class="common-anchor-header"><code translate="no">localStorage</code></h3><p>このセクションの各パラメータの詳細については、<a href="/docs/ja/configure_localstorage.md">localStorage関連の設定を</a>参照。</p>
+<h3 id="minio" class="common-anchor-header"><code translate="no">minio</code></h3><p>MinIO/S3/GCSまたはその他のサービスの関連設定は、Milvusのデータ永続化を担うS3 APIをサポートする。</p>
+<p>以下の説明では簡単のため、ストレージサービスを MinIO/S3 と呼ぶ。</p>
+<p>このセクションの各パラメータの詳細については、「<a href="/docs/ja/configure_minio.md">Minio関連設定」を</a>参照してください。</p>
+<h3 id="mq" class="common-anchor-header"><code translate="no">mq</code></h3><p>Milvusはrocksmq(RockDBベース)、natsmq(組み込みnats-server)、Pulsar、Kafkaの4つのMQをサポートしています。</p>
+<p>mq.typeフィールドを設定することでMQを変更することができます。</p>
+<p>mq.typeフィールドをデフォルトに設定しない場合は、このファイルに複数のmqを設定する場合の優先順位の有効化に関する注意書きがあります。</p>
 <ol>
-<li><p>standalone(local) mode: rocksmq(default) &gt; natsmq &gt; Pulsar &gt; Kafka</p></li>
-<li><p>cluster mode:  Pulsar(default) &gt; Kafka (rocksmq and natsmq is unsupported in cluster mode)</p></li>
+<li><p>スタンドアロン(ローカル)モード: rocksmq(デフォルト) &gt; natsmq &gt; Pulsar &gt; Kafka</p></li>
+<li><p>クラスタモード：  Pulsar(デフォルト) &gt; Kafka (rocksmqとnatsmqはクラスタ・モードではサポートされていません)</p></li>
 </ol>
-<p>See <a href="/docs/configure_mq.md">mq-related Configurations</a> for detailed description for each parameter under this section.</p>
-<h3 id="pulsar" class="common-anchor-header"><code translate="no">pulsar</code></h3><p>Related configuration of pulsar, used to manage Milvus logs of recent mutation operations, output streaming log, and provide log publish-subscribe services.</p>
-<p>See <a href="/docs/configure_pulsar.md">pulsar-related Configurations</a> for detailed description for each parameter under this section.</p>
-<h3 id="rocksmq" class="common-anchor-header"><code translate="no">rocksmq</code></h3><p>If you want to enable kafka, needs to comment the pulsar configs</p>
-<p>kafka:</p>
-<p>brokerList:</p>
-<p>saslUsername:</p>
-<p>saslPassword:</p>
-<p>saslMechanisms:</p>
-<p>securityProtocol:</p>
-<p>ssl:</p>
+<p>このセクションの各パラメータの詳細については、<a href="/docs/ja/configure_mq.md">mq関連設定を</a>参照してください。</p>
+<h3 id="pulsar" class="common-anchor-header"><code translate="no">pulsar</code></h3><p>最近の突然変異操作のMilvusログを管理し、ストリーミング・ログを出力し、ログ・パブリッシュ・サブスクライブ・サービスを提供するために使用されるpulsarの関連設定。</p>
+<p>このセクションの各パラメータの詳細については、<a href="/docs/ja/configure_pulsar.md">pulsar関連設定を</a>参照してください。</p>
+<h3 id="rocksmq" class="common-anchor-header"><code translate="no">rocksmq</code></h3><p>kafkaを有効にしたい場合は、pulsarコンフィギュレーションにコメントを付ける必要があります。</p>
+<p>kafka：</p>
+<p>brokerList：</p>
+<p>saslUsername：</p>
+<p>saslPassword：</p>
+<p>saslMechanisms</p>
+<p>securityProtocol：</p>
+<p>ssl：</p>
 <pre><code translate="no">enabled: false # whether to enable ssl mode
 
 tlsCert:  # path to client's public key (PEM) used for authentication
@@ -79,52 +78,52 @@ tlsCaCert:  # file or directory path to CA certificate(s) for verifying the brok
 
 tlsKeyPassword:  # private key passphrase for use with ssl.key.location and set_ssl_cert(), if any
 </code></pre>
-<p>readTimeout: 10</p>
-<p>See <a href="/docs/configure_rocksmq.md">rocksmq-related Configurations</a> for detailed description for each parameter under this section.</p>
-<h3 id="natsmq" class="common-anchor-header"><code translate="no">natsmq</code></h3><p>natsmq configuration.</p>
-<p>more detail: https://docs.nats.io/running-a-nats-service/configuration</p>
-<p>See <a href="/docs/configure_natsmq.md">natsmq-related Configurations</a> for detailed description for each parameter under this section.</p>
-<h3 id="rootCoord" class="common-anchor-header"><code translate="no">rootCoord</code></h3><p>Related configuration of rootCoord, used to handle data definition language (DDL) and data control language (DCL) requests</p>
-<p>See <a href="/docs/configure_rootcoord.md">rootCoord-related Configurations</a> for detailed description for each parameter under this section.</p>
-<h3 id="proxy" class="common-anchor-header"><code translate="no">proxy</code></h3><p>Related configuration of proxy, used to validate client requests and reduce the returned results.</p>
-<p>See <a href="/docs/configure_proxy.md">proxy-related Configurations</a> for detailed description for each parameter under this section.</p>
-<h3 id="queryCoord" class="common-anchor-header"><code translate="no">queryCoord</code></h3><p>Related configuration of queryCoord, used to manage topology and load balancing for the query nodes, and handoff from growing segments to sealed segments.</p>
-<p>See <a href="/docs/configure_querycoord.md">queryCoord-related Configurations</a> for detailed description for each parameter under this section.</p>
-<h3 id="queryNode" class="common-anchor-header"><code translate="no">queryNode</code></h3><p>Related configuration of queryNode, used to run hybrid search between vector and scalar data.</p>
-<p>See <a href="/docs/configure_querynode.md">queryNode-related Configurations</a> for detailed description for each parameter under this section.</p>
-<h3 id="indexCoord" class="common-anchor-header"><code translate="no">indexCoord</code></h3><p>See <a href="/docs/configure_indexcoord.md">indexCoord-related Configurations</a> for detailed description for each parameter under this section.</p>
-<h3 id="indexNode" class="common-anchor-header"><code translate="no">indexNode</code></h3><p>See <a href="/docs/configure_indexnode.md">indexNode-related Configurations</a> for detailed description for each parameter under this section.</p>
-<h3 id="dataCoord" class="common-anchor-header"><code translate="no">dataCoord</code></h3><p>See <a href="/docs/configure_datacoord.md">dataCoord-related Configurations</a> for detailed description for each parameter under this section.</p>
-<h3 id="dataNode" class="common-anchor-header"><code translate="no">dataNode</code></h3><p>See <a href="/docs/configure_datanode.md">dataNode-related Configurations</a> for detailed description for each parameter under this section.</p>
-<h3 id="msgChannel" class="common-anchor-header"><code translate="no">msgChannel</code></h3><p>This topic introduces the message channel-related configurations of Milvus.</p>
-<p>See <a href="/docs/configure_msgchannel.md">msgChannel-related Configurations</a> for detailed description for each parameter under this section.</p>
-<h3 id="log" class="common-anchor-header"><code translate="no">log</code></h3><p>Configures the system log output.</p>
-<p>See <a href="/docs/configure_log.md">log-related Configurations</a> for detailed description for each parameter under this section.</p>
-<h3 id="grpc" class="common-anchor-header"><code translate="no">grpc</code></h3><p>See <a href="/docs/configure_grpc.md">grpc-related Configurations</a> for detailed description for each parameter under this section.</p>
-<h3 id="tls" class="common-anchor-header"><code translate="no">tls</code></h3><p>Configure the proxy tls enable.</p>
-<p>See <a href="/docs/configure_tls.md">tls-related Configurations</a> for detailed description for each parameter under this section.</p>
-<h3 id="common" class="common-anchor-header"><code translate="no">common</code></h3><p>See <a href="/docs/configure_common.md">common-related Configurations</a> for detailed description for each parameter under this section.</p>
-<h3 id="quotaAndLimits" class="common-anchor-header"><code translate="no">quotaAndLimits</code></h3><p>QuotaConfig, configurations of Milvus quota and limits.</p>
-<p>By default, we enable:</p>
+<p>readTimeout：10</p>
+<p>このセクションの各パラメータの詳細については、<a href="/docs/ja/configure_rocksmq.md">rocksmq関連の設定を</a>参照。</p>
+<h3 id="natsmq" class="common-anchor-header"><code translate="no">natsmq</code></h3><p>natsmqの設定。</p>
+<p>詳細: https://docs.nats.io/running-a-nats-service/configuration</p>
+<p>このセクションの各パラメータの詳細については、<a href="/docs/ja/configure_natsmq.md">natsmq関連設定を</a>参照のこと。</p>
+<h3 id="rootCoord" class="common-anchor-header"><code translate="no">rootCoord</code></h3><p>データ定義言語(DDL)およびデータ制御言語(DCL)リクエストの処理に使用される rootCoordの関連設定。</p>
+<p>このセクションの各パラメータの詳細については、「<a href="/docs/ja/configure_rootcoord.md">rootCoord 関連設定</a>」を参照してください。</p>
+<h3 id="proxy" class="common-anchor-header"><code translate="no">proxy</code></h3><p>プロキシ関連設定 クライアントリクエストを検証し、返される結果を削減するために使用されます。</p>
+<p>このセクションの各パラメータの詳細については、<a href="/docs/ja/configure_proxy.md">プロキシ関連の設定 を</a>参照のこと。</p>
+<h3 id="queryCoord" class="common-anchor-header"><code translate="no">queryCoord</code></h3><p>queryCoordの関連設定。クエリノードのトポロジーと負荷分散を管理し、成長しているセグメントからシールされたセグメントへのハンドオフに使用される。</p>
+<p>このセクションの各パラメータの詳細については、<a href="/docs/ja/configure_querycoord.md">queryCoord関連設定を</a>参照してください。</p>
+<h3 id="queryNode" class="common-anchor-header"><code translate="no">queryNode</code></h3><p>queryNodeの関連設定。ベクトルデータとスカラーデータのハイブリッド検索を実行するために使用される。</p>
+<p>このセクションの各パラメータの詳細については、<a href="/docs/ja/configure_querynode.md">queryNode 関連設定を</a>参照のこと。</p>
+<h3 id="indexCoord" class="common-anchor-header"><code translate="no">indexCoord</code></h3><p>この節の各パラメータの詳細な説明は<a href="/docs/ja/configure_indexcoord.md">indexCoord 関連設定を</a>参照のこと。</p>
+<h3 id="indexNode" class="common-anchor-header"><code translate="no">indexNode</code></h3><p>この節の各パラメータの詳細については、<a href="/docs/ja/configure_indexnode.md">indexNode 関連設定を</a>参照のこと。</p>
+<h3 id="dataCoord" class="common-anchor-header"><code translate="no">dataCoord</code></h3><p>この節の各パラメータに関する詳細な説明は、<a href="/docs/ja/configure_datacoord.md">dataCoord 関連設定を</a>参照のこと。</p>
+<h3 id="dataNode" class="common-anchor-header"><code translate="no">dataNode</code></h3><p>この節の各パラメータの詳細については、「<a href="/docs/ja/configure_datanode.md">dataNode 関連コンフィギュレーション</a>」を 参照してください。</p>
+<h3 id="msgChannel" class="common-anchor-header"><code translate="no">msgChannel</code></h3><p>Milvusのメッセージチャネル関連の設定について説明します。</p>
+<p>このセクションの各パラメータの詳細については、「<a href="/docs/ja/configure_msgchannel.md">msgChannel関連設定</a>」を参照してください。</p>
+<h3 id="log" class="common-anchor-header"><code translate="no">log</code></h3><p>システムログ出力の設定を行います。</p>
+<p>このセクションの各パラメータの詳細については、「<a href="/docs/ja/configure_log.md">ログ関連設定</a>」を参照してください。</p>
+<h3 id="grpc" class="common-anchor-header"><code translate="no">grpc</code></h3><p>このセクションの各パラメータの詳細については、<a href="/docs/ja/configure_grpc.md">grpc 関連の設定を</a>参照してください。</p>
+<h3 id="tls" class="common-anchor-header"><code translate="no">tls</code></h3><p>プロキシ tls enable を設定します。</p>
+<p>このセクションの各パラメータの詳細については、<a href="/docs/ja/configure_tls.md">tls 関連の設定を</a>参照してください。</p>
+<h3 id="common" class="common-anchor-header"><code translate="no">common</code></h3><p>この節の各パラメータの詳細については、<a href="/docs/ja/configure_common.md">共通関連の設定を</a>参照のこと。</p>
+<h3 id="quotaAndLimits" class="common-anchor-header"><code translate="no">quotaAndLimits</code></h3><p>QuotaConfig、Milvusのクォータとリミットの設定。</p>
+<p>デフォルトでは</p>
 <ol>
-<li><p>TT protection;</p></li>
-<li><p>Memory protection.</p></li>
-<li><p>Disk quota protection.</p></li>
+<li><p>TT保護；</p></li>
+<li><p>メモリ保護.</p></li>
+<li><p>ディスククォータ保護.</p></li>
 </ol>
-<p>You can enable:</p>
+<p>有効にすることができます：</p>
 <ol>
-<li><p>DML throughput limitation;</p></li>
-<li><p>DDL, DQL qps/rps limitation;</p></li>
-<li><p>DQL Queue length/latency protection;</p></li>
-<li><p>DQL result rate protection;</p></li>
+<li><p>DMLスループット制限；</p></li>
+<li><p>DDL、DQL qps/rps制限；</p></li>
+<li><p>DQLキュー長/待ち時間の保護；</p></li>
+<li><p>DQL結果レートの保護；</p></li>
 </ol>
-<p>If necessary, you can also manually force to deny RW requests.</p>
-<p>See <a href="/docs/configure_quotaandlimits.md">quotaAndLimits-related Configurations</a> for detailed description for each parameter under this section.</p>
-<h3 id="trace" class="common-anchor-header"><code translate="no">trace</code></h3><p>See <a href="/docs/configure_trace.md">trace-related Configurations</a> for detailed description for each parameter under this section.</p>
-<h3 id="gpu" class="common-anchor-header"><code translate="no">gpu</code></h3><p>#when using GPU indexing, Milvus will utilize a memory pool to avoid frequent memory allocation and deallocation.</p>
-<p>#here, you can set the size of the memory occupied by the memory pool, with the unit being MB.</p>
-<p>#note that there is a possibility of Milvus crashing when the actual memory demand exceeds the value set by maxMemSize.</p>
-<p>#if initMemSize and MaxMemSize both set zero,</p>
-<p>#milvus will automatically initialize half of the available GPU memory,</p>
-<p>#maxMemSize will the whole available GPU memory.</p>
-<p>See <a href="/docs/configure_gpu.md">gpu-related Configurations</a> for detailed description for each parameter under this section.</p>
+<p>必要に応じて、手動でRW要求を強制的に拒否することもできます。</p>
+<p>このセクションの各パラメータの詳細については、<a href="/docs/ja/configure_quotaandlimits.md">quotaAndLimits関連の設定を</a>参照してください。</p>
+<h3 id="trace" class="common-anchor-header"><code translate="no">trace</code></h3><p>このセクションの各パラメータの詳細については、<a href="/docs/ja/configure_trace.md">トレース関連の設定を</a>参照してください。</p>
+<h3 id="gpu" class="common-anchor-header"><code translate="no">gpu</code></h3><p>#GPUインデックスを使用する場合、Milvusはメモリプールを利用し、頻繁なメモリの割り当てと解放を回避します。</p>
+<p>#ここで, メモリプールが占有するメモリサイズをMB単位で設定できます.</p>
+<p>#実際のメモリ需要がmaxMemSizeで設定した値を超えると、Milvusがクラッシュする可能性があることに注意してください。</p>
+<p>#initMemSizeとMaxMemSizeの両方が0に設定されている場合、</p>
+<p>#milvusは利用可能なGPUメモリの半分を自動的に初期化します、</p>
+<p>#maxMemSizeは利用可能なGPUメモリ全体を初期化します。</p>
+<p>このセクションの各パラメータの詳細については、<a href="/docs/ja/configure_gpu.md">gpu関連の設定を</a>参照してください。</p>

@@ -1,9 +1,9 @@
 ---
 id: hybrid_search_with_milvus.md
-summary: Hybrid Search with Milvus
-title: Hybrid Search with Milvus
+summary: Milvusとのハイブリッド検索
+title: Milvusを使ったハイブリッド検索
 ---
-<h1 id="Hybrid-Search-with-Milvus" class="common-anchor-header">Hybrid Search with Milvus<button data-href="#Hybrid-Search-with-Milvus" class="anchor-icon" translate="no">
+<h1 id="Hybrid-Search-with-Milvus" class="common-anchor-header">Milvusを使ったハイブリッド検索<button data-href="#Hybrid-Search-with-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -21,22 +21,22 @@ title: Hybrid Search with Milvus
     </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/hybrid_search_with_milvus.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
 <a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/hybrid_search_with_milvus.ipynb" target="_blank"><img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/></a></p>
 <p><img translate="no" src="https://raw.githubusercontent.com/milvus-io/bootcamp/master/bootcamp/tutorials/quickstart/apps/hybrid_demo_with_milvus/pics/demo.png"/></p>
-<p>In this tutorial, we will demonstrate how to conduct hybrid search with <a href="https://milvus.io/docs/multi-vector-search.md">Milvus</a> and <a href="https://github.com/FlagOpen/FlagEmbedding/tree/master/FlagEmbedding/BGE_M3">BGE-M3 model</a>. BGE-M3 model can convert text into dense and sparse vectors. Milvus supports storing both types of vectors in one collection, allowing for hybrid search that enhances the result relevance.</p>
-<p>Milvus supports Dense, Sparse, and Hybrid retrieval methods:</p>
+<p>このチュートリアルでは、<a href="https://milvus.io/docs/multi-vector-search.md">Milvusと</a> <a href="https://github.com/FlagOpen/FlagEmbedding/tree/master/FlagEmbedding/BGE_M3">BGE-M3モデルを</a>使ったハイブリッド検索の方法を説明します。BGE-M3モデルはテキストを密なベクトルと疎なベクトルに変換することができます。Milvusは1つのコレクションに両方のタイプのベクトルを格納することをサポートし、結果の関連性を高めるハイブリッド検索を可能にします。</p>
+<p>Milvusは密検索、疎検索、ハイブリッド検索をサポートしています：</p>
 <ul>
-<li>Dense Retrieval: Utilizes semantic context to understand the meaning behind queries.</li>
-<li>Sparse Retrieval: Emphasizes keyword matching to find results based on specific terms, equivalent to full-text search.</li>
-<li>Hybrid Retrieval: Combines both Dense and Sparse approaches, capturing the full context and specific keywords for comprehensive search results.</li>
+<li>密検索：クエリの背後にある意味を理解するためにセマンティックコンテキストを利用します。</li>
+<li>スパース検索：キーワードのマッチングを重視し、全文検索に相当する特定の用語に基づいた検索結果を得る。</li>
+<li>ハイブリッド検索：DenseとSparseの両アプローチを組み合わせ、包括的な検索結果のために完全な文脈と特定のキーワードを捕捉する。</li>
 </ul>
-<p>By integrating these methods, the Milvus Hybrid Search balances semantic and lexical similarities, improving the overall relevance of search outcomes. This notebook will walk through the process of setting up and using these retrieval strategies, highlighting their effectiveness in various search scenarios.</p>
-<h3 id="Dependencies-and-Environment" class="common-anchor-header">Dependencies and Environment</h3><pre><code translate="no" class="language-shell">$ pip install --upgrade pymilvus <span class="hljs-string">&quot;pymilvus[model]&quot;</span>
+<p>Milvusハイブリッド検索は、これらの手法を統合することで、意味的な類似性と語彙的な類似性のバランスをとり、検索結果の全体的な関連性を向上させます。このノートブックでは、これらの検索ストラテジーのセットアップと使用方法を説明し、様々な検索シナリオにおける有効性を強調します。</p>
+<h3 id="Dependencies-and-Environment" class="common-anchor-header">依存関係と環境</h3><pre><code translate="no" class="language-shell">$ pip install --upgrade pymilvus <span class="hljs-string">&quot;pymilvus[model]&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Download-Dataset" class="common-anchor-header">Download Dataset</h3><p>To demonstrate search, we need a corpus of documents. Let’s use the Quora Duplicate Questions dataset and place it in the local directory.</p>
-<p>Source of the dataset: <a href="https://www.quora.com/q/quoradata/First-Quora-Dataset-Release-Question-Pairs">First Quora Dataset Release: Question Pairs</a></p>
+<h3 id="Download-Dataset" class="common-anchor-header">データセットのダウンロード</h3><p>検索を実証するには、文書のコーパスが必要だ。Quora Duplicate Questionsデータセットを使い、ローカルディレクトリに置いてみよう。</p>
+<p>データセットのソース<a href="https://www.quora.com/q/quoradata/First-Quora-Dataset-Release-Question-Pairs">最初のQuoraデータセットリリース：質問ペア</a></p>
 <pre><code translate="no" class="language-shell"><span class="hljs-comment"># Run this cell to download the dataset</span>
 $ wget http://qim.fs.quoracdn.net/quora_duplicate_questions.tsv
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Load-and-Prepare-Data" class="common-anchor-header">Load and Prepare Data</h3><p>We will load the dataset and prepare a small corpus for search.</p>
+<h3 id="Load-and-Prepare-Data" class="common-anchor-header">データのロードと準備</h3><p>データセットをロードし、検索用の小さなコーパスを準備する。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> pandas <span class="hljs-keyword">as</span> pd
 
 file_path = <span class="hljs-string">&quot;quora_duplicate_questions.tsv&quot;</span>
@@ -56,7 +56,7 @@ docs = <span class="hljs-built_in">list</span>(questions)
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">What is the strongest Kevlar cord?
 </code></pre>
-<h3 id="Use-BGE-M3-Model-for-Embeddings" class="common-anchor-header">Use BGE-M3 Model for Embeddings</h3><p>The BGE-M3 model can embed texts as dense and sparse vectors.</p>
+<h3 id="Use-BGE-M3-Model-for-Embeddings" class="common-anchor-header">埋め込みにBGE-M3モデルを使う</h3><p>BGE-M3モデルはテキストを密なベクトルと疎なベクトルとして埋め込むことができる。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> milvus_model.hybrid <span class="hljs-keyword">import</span> BGEM3EmbeddingFunction
 
 ef = BGEM3EmbeddingFunction(use_fp16=<span class="hljs-literal">False</span>, device=<span class="hljs-string">&quot;cpu&quot;</span>)
@@ -68,12 +68,12 @@ docs_embeddings = ef(docs)
 <pre><code translate="no">Fetching 30 files: 100%|██████████| 30/30 [00:00&lt;00:00, 302473.85it/s]
 Inference Embeddings: 100%|██████████| 32/32 [01:59&lt;00:00,  3.74s/it]
 </code></pre>
-<h3 id="Setup-Milvus-Collection-and-Index" class="common-anchor-header">Setup Milvus Collection and Index</h3><p>We will set up the Milvus collection and create indices for the vector fields.</p>
+<h3 id="Setup-Milvus-Collection-and-Index" class="common-anchor-header">Milvusコレクションとインデックスのセットアップ</h3><p>Milvusコレクションをセットアップし、ベクトルフィールドのインデックスを作成する。</p>
 <div class="note alert">
 <ul>
-<li>Setting the uri as a local file, e.g. &quot;./milvus.db&quot;, is the most convenient method, as it automatically utilizes <a href="https://milvus.io/docs/milvus_lite.md">Milvus Lite</a> to store all data in this file.</li>
-<li>If you have large scale of data, say more than a million vectors, you can set up a more performant Milvus server on <a href="https://milvus.io/docs/quickstart.md">Docker or Kubernetes</a>. In this setup, please use the server uri, e.g.http://localhost:19530, as your uri.</li>
-<li>If you want to use <a href="https://zilliz.com/cloud">Zilliz Cloud</a>, the fully managed cloud service for Milvus, adjust the uri and token, which correspond to the <a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#cluster-details">Public Endpoint and API key</a> in Zilliz Cloud.</li>
+<li>uriをローカルファイル、例えば&quot;./milvus.db &quot;に設定するのが最も便利である。</li>
+<li>100万ベクトルを超えるような大規模なデータをお持ちの場合は、<a href="https://milvus.io/docs/quickstart.md">DockerやKubernetes</a>上でよりパフォーマンスの高いMilvusサーバを構築することができます。このセットアップでは、uriとしてサーバのuri、例えば.http://localhost:19530 を使用してください。</li>
+<li>Milvusのフルマネージドクラウドサービスである<a href="https://zilliz.com/cloud">Zilliz Cloudを</a>利用する場合は、Zilliz Cloudの<a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#cluster-details">Public EndpointとAPI Keyに</a>対応するuriとtokenを調整してください。</li>
 </ul>
 </div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> (
@@ -116,7 +116,7 @@ dense_index = {<span class="hljs-string">&quot;index_type&quot;</span>: <span cl
 col.create_index(<span class="hljs-string">&quot;dense_vector&quot;</span>, dense_index)
 col.load()
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Insert-Data-into-Milvus-Collection" class="common-anchor-header">Insert Data into Milvus Collection</h3><p>Insert documents and their embeddings into the collection.</p>
+<h3 id="Insert-Data-into-Milvus-Collection" class="common-anchor-header">Milvusコレクションへのデータ挿入</h3><p>ドキュメントとその埋め込みデータをコレクションに挿入します。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># For efficiency, we insert 50 records in each small batch</span>
 <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">0</span>, <span class="hljs-built_in">len</span>(docs), <span class="hljs-number">50</span>):
     batched_entities = [
@@ -129,7 +129,7 @@ col.load()
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">Number of entities inserted: 502
 </code></pre>
-<h3 id="Enter-Your-Search-Query" class="common-anchor-header">Enter Your Search Query</h3><pre><code translate="no" class="language-python"><span class="hljs-comment"># Enter your search query</span>
+<h3 id="Enter-Your-Search-Query" class="common-anchor-header">検索クエリの入力</h3><pre><code translate="no" class="language-python"><span class="hljs-comment"># Enter your search query</span>
 query = <span class="hljs-built_in">input</span>(<span class="hljs-string">&quot;Enter your search query: &quot;</span>)
 <span class="hljs-built_in">print</span>(query)
 
@@ -139,11 +139,11 @@ query_embeddings = ef([query])
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">How to start learning programming?
 </code></pre>
-<h3 id="Run-the-Search" class="common-anchor-header">Run the Search</h3><p>We will first prepare some helpful functions to run the search:</p>
+<h3 id="Run-the-Search" class="common-anchor-header">検索を実行する</h3><p>まず、検索に役立つ関数を用意します：</p>
 <ul>
-<li><code translate="no">dense_search</code>: only search across dense vector field</li>
-<li><code translate="no">sparse_search</code>: only search across sparse vector field</li>
-<li><code translate="no">hybrid_search</code>: search across both dense and vector fields with a weighted reranker</li>
+<li><code translate="no">dense_search</code>密なベクトルフィールドの検索のみ</li>
+<li><code translate="no">sparse_search</code>疎なベクトル場のみを検索</li>
+<li><code translate="no">hybrid_search</code>密なベクトル場と疎なベクトル場の両方を重み付きリランカーで検索する。</li>
 </ul>
 <pre><code translate="no" class="language-python"><span class="hljs-function"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-title">import</span> (<span class="hljs-params">
     AnnSearchRequest,
@@ -200,7 +200,7 @@ def <span class="hljs-title">dense_search</span>(<span class="hljs-params">col, 
     )[<span class="hljs-number">0</span>]
     <span class="hljs-keyword">return</span> [hit.<span class="hljs-keyword">get</span>(<span class="hljs-string">&quot;text&quot;</span>) <span class="hljs-keyword">for</span> hit <span class="hljs-keyword">in</span> res]
 <button class="copy-code-btn"></button></code></pre>
-<p>Let’s run three different searches with defined functions:</p>
+<p>定義された関数を使って3種類の検索を実行してみよう：</p>
 <pre><code translate="no" class="language-python">dense_results = <span class="hljs-title function_">dense_search</span>(col, query_embeddings[<span class="hljs-string">&quot;dense&quot;</span>][<span class="hljs-number">0</span>])
 sparse_results = <span class="hljs-title function_">sparse_search</span>(col, query_embeddings[<span class="hljs-string">&quot;sparse&quot;</span>].<span class="hljs-title function_">_getrow</span>(<span class="hljs-number">0</span>))
 hybrid_results = <span class="hljs-title function_">hybrid_search</span>(
@@ -211,7 +211,7 @@ hybrid_results = <span class="hljs-title function_">hybrid_search</span>(
     dense_weight=<span class="hljs-number">1.0</span>,
 )
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Display-Search-Results" class="common-anchor-header">Display Search Results</h3><p>To display the results for Dense, Sparse, and Hybrid searches, we need some utilities to format the results.</p>
+<h3 id="Display-Search-Results" class="common-anchor-header">検索結果の表示</h3><p>密検索、疎検索、ハイブリッド検索の結果を表示するには、結果をフォーマットするユーティリティが必要だ。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">doc_text_formatting</span>(<span class="hljs-params">ef, query, docs</span>):
     tokenizer = ef.model.tokenizer
     query_tokens_ids = tokenizer.encode(query, return_offsets_mapping=<span class="hljs-literal">True</span>)
@@ -249,7 +249,7 @@ hybrid_results = <span class="hljs-title function_">hybrid_search</span>(
         formatted_texts.append(formatted_text)
     <span class="hljs-keyword">return</span> formatted_texts
 <button class="copy-code-btn"></button></code></pre>
-<p>Then we can display search results in text with highlights:</p>
+<p>そうすれば、検索結果をテキストでハイライト表示することができる：</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> IPython.display <span class="hljs-keyword">import</span> Markdown, display
 
 <span class="hljs-comment"># Dense search results</span>
@@ -270,44 +270,44 @@ formatted_results = doc_text_formatting(ef, query, hybrid_results)
 <span class="hljs-keyword">for</span> result <span class="hljs-keyword">in</span> formatted_results:
     display(Markdown(result))
 <button class="copy-code-btn"></button></code></pre>
-<p><strong>Dense Search Results:</strong></p>
-<p>What’s the best way to start learning robotics?</p>
-<p>How do I learn a computer language like java?</p>
-<p>How can I get started to learn information security?</p>
-<p>What is Java programming? How To Learn Java Programming Language ?</p>
-<p>How can I learn computer security?</p>
-<p>What is the best way to start robotics? Which is the best development board that I can start working on it?</p>
-<p>How can I learn to speak English fluently?</p>
-<p>What are the best ways to learn French?</p>
-<p>How can you make physics easy to learn?</p>
-<p>How do we prepare for UPSC?</p>
-<p><strong>Sparse Search Results:</strong></p>
-<p>What is Java<span style='color:red'> programming? How</span> To Learn Java Programming Language ?</p>
-<p>What’s the best way<span style='color:red'> to start learning</span> robotics<span style='color:red'>?</span></p>
-<p>What is the alternative<span style='color:red'> to</span> machine<span style='color:red'> learning?</span></p>
-<p><span style='color:red'>How</span> do I create a new Terminal and new shell in Linux using C<span style='color:red'> programming?</span></p>
-<p><span style='color:red'>How</span> do I create a new shell in a new terminal using C<span style='color:red'> programming</span> (Linux terminal)<span style='color:red'>?</span></p>
-<p>Which business is better<span style='color:red'> to start</span> in Hyderabad<span style='color:red'>?</span></p>
-<p>Which business is good<span style='color:red'> start</span> up in Hyderabad<span style='color:red'>?</span></p>
-<p>What is the best way<span style='color:red'> to start</span> robotics<span style='color:red'>?</span> Which is the best development board that I can<span style='color:red'> start</span> working on it<span style='color:red'>?</span></p>
-<p>What math does a complete newbie need<span style='color:red'> to</span> understand algorithms for computer<span style='color:red'> programming?</span> What books on algorithms are suitable for a complete beginner<span style='color:red'>?</span></p>
-<p><span style='color:red'>How</span> do you make life suit you and stop life from abusi<span style='color:red'>ng</span> you mentally and emotionally<span style='color:red'>?</span></p>
-<p><strong>Hybrid Search Results:</strong></p>
-<p>What is the best way<span style='color:red'> to start</span> robotics<span style='color:red'>?</span> Which is the best development board that I can<span style='color:red'> start</span> working on it<span style='color:red'>?</span></p>
-<p>What is Java<span style='color:red'> programming? How</span> To Learn Java Programming Language ?</p>
-<p>What’s the best way<span style='color:red'> to start learning</span> robotics<span style='color:red'>?</span></p>
-<p><span style='color:red'>How</span> do we prepare for UPSC<span style='color:red'>?</span></p>
-<p><span style='color:red'>How</span> can you make physics easy<span style='color:red'> to</span> learn<span style='color:red'>?</span></p>
-<p>What are the best ways<span style='color:red'> to</span> learn French<span style='color:red'>?</span></p>
-<p><span style='color:red'>How</span> can I learn<span style='color:red'> to</span> speak English fluently<span style='color:red'>?</span></p>
-<p><span style='color:red'>How</span> can I learn computer security<span style='color:red'>?</span></p>
-<p><span style='color:red'>How</span> can I get started<span style='color:red'> to</span> learn information security<span style='color:red'>?</span></p>
-<p><span style='color:red'>How</span> do I learn a computer language like java<span style='color:red'>?</span></p>
-<p>What is the alternative<span style='color:red'> to</span> machine<span style='color:red'> learning?</span></p>
-<p><span style='color:red'>How</span> do I create a new Terminal and new shell in Linux using C<span style='color:red'> programming?</span></p>
-<p><span style='color:red'>How</span> do I create a new shell in a new terminal using C<span style='color:red'> programming</span> (Linux terminal)<span style='color:red'>?</span></p>
-<p>Which business is better<span style='color:red'> to start</span> in Hyderabad<span style='color:red'>?</span></p>
-<p>Which business is good<span style='color:red'> start</span> up in Hyderabad<span style='color:red'>?</span></p>
-<p>What math does a complete newbie need<span style='color:red'> to</span> understand algorithms for computer<span style='color:red'> programming?</span> What books on algorithms are suitable for a complete beginner<span style='color:red'>?</span></p>
-<p><span style='color:red'>How</span> do you make life suit you and stop life from abusi<span style='color:red'>ng</span> you mentally and emotionally<span style='color:red'>?</span></p>
-<h3 id="Quick-Deploy" class="common-anchor-header">Quick Deploy</h3><p>To learn about how to start an online demo with this tutorial, please refer to <a href="https://github.com/milvus-io/bootcamp/tree/master/bootcamp/tutorials/quickstart/apps/hybrid_demo_with_milvus">the example application</a>.</p>
+<p><strong>密な検索結果</strong></p>
+<p>ロボット工学の学習を始めるのに最も良い方法は？</p>
+<p>javaのようなコンピュータ言語を学ぶにはどうしたらいいですか？</p>
+<p>情報セキュリティの学習はどのように始めればいいですか？</p>
+<p>Javaプログラミングとは何ですか？Javaプログラミング言語を学ぶには？</p>
+<p>コンピュータ・セキュリティはどのように学べばいいですか？</p>
+<p>ロボット工学を始めるのに最適な方法は何ですか？ロボット製作を始めるのに最適な開発ボードはどれですか？</p>
+<p>英語を流暢に話せるようになるには？</p>
+<p>フランス語を学ぶにはどのような方法がありますか？</p>
+<p>物理を簡単に学ぶにはどうしたらいいですか？</p>
+<p>UPSCの準備はどのようにすればいいですか？</p>
+<p><strong>疎な検索結果</strong></p>
+<p>Java<span style='color:red'> プログラミングとは</span>何<span style='color:red'> ですか？</span>Javaプログラミング言語を<span style='color:red'> 学ぶには</span>？</p>
+<p>ロボット工学を<span style='color:red'> 学び始めるのに</span>最適な方法は<span style='color:red'>？</span></p>
+<p>機械<span style='color:red'> 学習に</span>代わるものは何<span style='color:red'> ですか？</span></p>
+<p>C<span style='color:red'> プログラミングを使って</span>Linuxで新しいターミナルと新しいシェルを作成<span style='color:red'>するには</span><span style='color:red'> ？</span></p>
+<p>C<span style='color:red'> プログラミングを</span>使用して、新しいターミナルで新しいシェルを作成する<span style='color:red'>方法を教えてください</span>（Linuxターミナル）<span style='color:red'>。</span></p>
+<p>ハイデラバードで<span style='color:red'> 起業</span>するのに適したビジネスはどれ<span style='color:red'>ですか？</span></p>
+<p>ハイデラバードで<span style='color:red'> 起業</span>するのに適したビジネスはどれ<span style='color:red'>ですか？</span></p>
+<p>ロボット工学を<span style='color:red'> 始める</span>のに最適な方法は何<span style='color:red'>ですか？</span>私が作業を<span style='color:red'> 開始</span>できる最適な開発ボードはどれ<span style='color:red'>ですか？</span></p>
+<p>全くの初心者がコンピュータ・<span style='color:red'> プログラミングの</span>アルゴリズムを理解するには<span style='color:red'> 、</span>どのような数学が必要ですか<span style='color:red'> ？</span>全くの初心者に適したアルゴリズムに関する本は何<span style='color:red'>ですか？</span></p>
+<p>人生を自分に合ったものにし、精神的・感情的に虐待<span style='color:red'>さ</span>れないように<span style='color:red'>するには</span><span style='color:red'>？</span></p>
+<p><strong>ハイブリッドの検索結果</strong></p>
+<p>ロボット工学を<span style='color:red'> 始めるのに</span>最適な方法は<span style='color:red'>？</span>開発ボードはどれがいいですか<span style='color:red'>？</span></p>
+<p>Java<span style='color:red'> プログラミングとは</span>何<span style='color:red'> ですか？</span>Javaプログラミング言語を<span style='color:red'> 学ぶには</span>？</p>
+<p>ロボット工学を<span style='color:red'> 学ぶ</span>最良の方法は何<span style='color:red'>ですか</span>？</p>
+<p><span style='color:red'>どのように</span>UPSCの準備をするの<span style='color:red'>ですか？</span></p>
+<p>物理を<span style='color:red'> 簡単に</span><span style='color:red'>学ぶには</span><span style='color:red'>？</span></p>
+<p>フランス語を学ぶ最善の<span style='color:red'> 方法は</span>何<span style='color:red'>ですか？</span></p>
+<p><span style='color:red'>どう</span>すれば英語を流暢に話せる<span style='color:red'> ように</span><span style='color:red'>なりますか？</span></p>
+<p>コンピュータ・セキュリティを学ぶには<span style='color:red'>どう</span>したら<span style='color:red'>いいですか？</span></p>
+<p>情報<span style='color:red'> セキュリティを</span>学ぶには<span style='color:red'>どう</span>したら<span style='color:red'>いいですか？</span></p>
+<p>Javaのようなコンピュータ言語はどの<span style='color:red'>ように</span>学べば<span style='color:red'>いいですか？</span></p>
+<p>機械<span style='color:red'> 学習に</span>代わるものは何<span style='color:red'> ですか？</span></p>
+<p>LinuxでC言語を使って新しいターミナルとシェルを作成するには<span style='color:red'>どう</span>すれば<span style='color:red'> いいですか？</span></p>
+<p>C<span style='color:red'> プログラミングを</span>使用して、新しいターミナルに新しいシェルを作成する<span style='color:red'>方法を教えてください</span>。</p>
+<p>ハイデラバードで<span style='color:red'> 起業</span>するのに適したビジネスはどれ<span style='color:red'>ですか？</span></p>
+<p>ハイデラバードで<span style='color:red'> 起業</span>するのに適したビジネスはどれ<span style='color:red'>ですか？</span></p>
+<p>全くの初心者がコンピュータ<span style='color:red'> プログラミングの</span>アルゴリズムを理解する<span style='color:red'> ために</span>必要な数学は何<span style='color:red'> ですか？</span>全くの初心者に適したアルゴリズムに関する本は何<span style='color:red'>ですか？</span></p>
+<p>人生を自分に合ったものにし、精神的・感情的に虐待<span style='color:red'>さ</span>れないように<span style='color:red'>するには</span>どうしたら<span style='color:red'>いいですか？</span></p>
+<h3 id="Quick-Deploy" class="common-anchor-header">クイックデプロイ</h3><p>このチュートリアルでオンライン・デモを始める方法については、<a href="https://github.com/milvus-io/bootcamp/tree/master/bootcamp/tutorials/quickstart/apps/hybrid_demo_with_milvus">アプリケーションの例を</a>参照してください。</p>

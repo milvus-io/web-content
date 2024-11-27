@@ -1,11 +1,9 @@
 ---
 id: vector_visualization.md
-summary: >-
-  In this example, we will show how to visualize the embeddings(vectors) in
-  Milvus using t-SN.
-title: Vector Visualization
+summary: この例では、milvusの埋め込み（ベクトル）をt-SNを使って可視化する方法を示します。
+title: ベクトルの可視化
 ---
-<h1 id="Vector-Visualization" class="common-anchor-header">Vector Visualization<button data-href="#Vector-Visualization" class="anchor-icon" translate="no">
+<h1 id="Vector-Visualization" class="common-anchor-header">ベクトルの可視化<button data-href="#Vector-Visualization" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -26,9 +24,9 @@ title: Vector Visualization
 <a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/vector_visualization.ipynb" target="_blank">
 <img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
 </a></p>
-<p>In this example, we will show how to visualize the embeddings(vectors) in Milvus using <a href="https://www.wikiwand.com/en/articles/T-distributed_stochastic_neighbor_embedding">t-SNE</a>.</p>
-<p>Dimensionality reduction techniques, such as t-SNE, are invaluable for visualizing complex, high-dimensional data in a 2D or 3D space while preserving the local structure. This enables pattern recognition, enhances understanding of feature relationships, and facilitates the interpretation of machine learning model outcomes. Additionally, it aids in algorithm evaluation by visually comparing clustering results, simplifies data presentation to non-specialist audiences, and can reduce computational costs by working with lower-dimensional representations. Through these applications, t-SNE not only helps in gaining deeper insights into datasets but also supports more informed decision-making processes.</p>
-<h2 id="Preparation" class="common-anchor-header">Preparation<button data-href="#Preparation" class="anchor-icon" translate="no">
+<p>この例では、milvusの埋め込み（ベクトル）を<a href="https://www.wikiwand.com/en/articles/T-distributed_stochastic_neighbor_embedding">t-SNEを用いて</a>可視化する方法を示します。</p>
+<p>t-SNEのような次元削減技術は、複雑な高次元データを局所構造を保持したまま2次元または3次元空間で可視化するのに非常に有効です。これにより、パターン認識が可能になり、特徴の関係の理解が深まり、機械学習モデルの結果の解釈が容易になります。さらに、クラスタリング結果を視覚的に比較することでアルゴリズム評価を支援し、専門家以外の聴衆へのデータ提示を簡素化し、低次元の表現で作業することで計算コストを削減することができる。これらのアプリケーションを通じて、t-SNEはデータセットに対するより深い洞察を得るのに役立つだけでなく、より多くの情報に基づいた意思決定プロセスをサポートします。</p>
+<h2 id="Preparation" class="common-anchor-header">準備<button data-href="#Preparation" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -43,14 +41,14 @@ title: Vector Visualization
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Dependencies-and-Environment" class="common-anchor-header">Dependencies and Environment</h3><pre><code translate="no" class="language-shell">$ pip install --upgrade pymilvus openai requests tqdm matplotlib seaborn
+    </button></h2><h3 id="Dependencies-and-Environment" class="common-anchor-header">依存関係と環境</h3><pre><code translate="no" class="language-shell">$ pip install --upgrade pymilvus openai requests tqdm matplotlib seaborn
 <button class="copy-code-btn"></button></code></pre>
-<p>We will use OpenAI’s embedding model in this example. You should prepare the api key OPENAI_API_KEY as an environment variable.</p>
+<p>この例では、OpenAIのエンベッディングモデルを使用します。OPENAI_API_KEYを環境変数として用意してください。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> os
 
 os.<span class="hljs-property">environ</span>[<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</span>] = <span class="hljs-string">&quot;sk-***********&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Prepare-the-data" class="common-anchor-header">Prepare the data<button data-href="#Prepare-the-data" class="anchor-icon" translate="no">
+<h2 id="Prepare-the-data" class="common-anchor-header">データの準備<button data-href="#Prepare-the-data" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -65,12 +63,12 @@ os.<span class="hljs-property">environ</span>[<span class="hljs-string">&quot;OP
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>We use the FAQ pages from the Milvus <a href="https://github.com/milvus-io/milvus-docs/releases/download/v2.4.6-preview/milvus_docs_2.4.x_en.zip">Documentation 2.4.x</a> as the private knowledge in our RAG, which is a good data source for a simple RAG pipeline.</p>
-<p>Download the zip file and extract documents to the folder <code translate="no">milvus_docs</code>.</p>
+    </button></h2><p>Milvus<a href="https://github.com/milvus-io/milvus-docs/releases/download/v2.4.6-preview/milvus_docs_2.4.x_en.zip">ドキュメント2.4.xの</a>FAQページをRAGのプライベートナレッジとして使用します。</p>
+<p>zipファイルをダウンロードし、<code translate="no">milvus_docs</code> フォルダにドキュメントを展開する。</p>
 <pre><code translate="no" class="language-shell">$ wget https://github.com/milvus-io/milvus-docs/releases/download/v2<span class="hljs-number">.4</span><span class="hljs-number">.6</span>-preview/milvus_docs_2<span class="hljs-number">.4</span>.x_en.<span class="hljs-built_in">zip</span>
 $ unzip -q milvus_docs_2<span class="hljs-number">.4</span>.x_en.<span class="hljs-built_in">zip</span> -d milvus_docs
 <button class="copy-code-btn"></button></code></pre>
-<p>We load all markdown files from the folder <code translate="no">milvus_docs/en/faq</code>. For each document, we just simply use &quot;# &quot; to separate the content in the file, which can roughly separate the content of each main part of the markdown file.</p>
+<p>フォルダ<code translate="no">milvus_docs/en/faq</code> からすべてのマークダウン・ファイルをロードする。各ドキュメントについて、私たちは単に &quot;# &quot;を使ってファイル内のコンテンツを区切るだけで、マークダウン・ファイルの各主要部分のコンテンツを大まかに区切ることができる。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> glob <span class="hljs-keyword">import</span> glob
 
 text_lines = []
@@ -81,7 +79,7 @@ text_lines = []
 
     text_lines += file_text.split(<span class="hljs-string">&quot;# &quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Prepare-the-Embedding-Model" class="common-anchor-header">Prepare the Embedding Model<button data-href="#Prepare-the-Embedding-Model" class="anchor-icon" translate="no">
+<h2 id="Prepare-the-Embedding-Model" class="common-anchor-header">埋め込みモデルの準備<button data-href="#Prepare-the-Embedding-Model" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -96,12 +94,12 @@ text_lines = []
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>We initialize the OpenAI client to prepare the embedding model.</p>
+    </button></h2><p>埋め込みモデルを準備するために、OpenAIクライアントを初期化します。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> openai <span class="hljs-keyword">import</span> <span class="hljs-title class_">OpenAI</span>
 
 openai_client = <span class="hljs-title class_">OpenAI</span>()
 <button class="copy-code-btn"></button></code></pre>
-<p>Define a function to generate text embeddings using OpenAI client. We use the <a href="https://platform.openai.com/docs/guides/embeddings">text-embedding-3-large</a> model as an example.</p>
+<p>OpenAIクライアントを使って、テキスト埋め込みを生成する関数を定義します。例として、<a href="https://platform.openai.com/docs/guides/embeddings">text-embedding-3-large</a>モデルを使います。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">emb_text</span>(<span class="hljs-params">text</span>):
     <span class="hljs-keyword">return</span> (
         openai_client.embeddings.create(<span class="hljs-built_in">input</span>=text, model=<span class="hljs-string">&quot;text-embedding-3-large&quot;</span>)
@@ -109,7 +107,7 @@ openai_client = <span class="hljs-title class_">OpenAI</span>()
         .embedding
     )
 <button class="copy-code-btn"></button></code></pre>
-<p>Generate a test embedding and print its dimension and first few elements.</p>
+<p>テスト埋め込みを生成し、その次元と最初の数要素を表示する。</p>
 <pre><code translate="no" class="language-python">test_embedding = emb_text(<span class="hljs-string">&quot;This is a test&quot;</span>)
 embedding_dim = <span class="hljs-built_in">len</span>(test_embedding)
 <span class="hljs-built_in">print</span>(embedding_dim)
@@ -118,7 +116,7 @@ embedding_dim = <span class="hljs-built_in">len</span>(test_embedding)
 <pre><code translate="no">3072
 [-0.015370666049420834, 0.00234124343842268, -0.01011690590530634, 0.044725317507982254, -0.017235849052667618, -0.02880779094994068, -0.026678944006562233, 0.06816216558218002, -0.011376636102795601, 0.021659553050994873]
 </code></pre>
-<h2 id="Load-data-into-Milvus" class="common-anchor-header">Load data into Milvus<button data-href="#Load-data-into-Milvus" class="anchor-icon" translate="no">
+<h2 id="Load-data-into-Milvus" class="common-anchor-header">Milvusにデータをロードする。<button data-href="#Load-data-into-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -133,26 +131,26 @@ embedding_dim = <span class="hljs-built_in">len</span>(test_embedding)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Create-the-Collection" class="common-anchor-header">Create the Collection</h3><pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> <span class="hljs-title class_">MilvusClient</span>
+    </button></h2><h3 id="Create-the-Collection" class="common-anchor-header">コレクションの作成</h3><pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> <span class="hljs-title class_">MilvusClient</span>
 
 milvus_client = <span class="hljs-title class_">MilvusClient</span>(uri=<span class="hljs-string">&quot;./milvus_demo.db&quot;</span>)
 
 collection_name = <span class="hljs-string">&quot;my_rag_collection&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>As for the argument of <code translate="no">MilvusClient</code>:</p>
+<p><code translate="no">MilvusClient</code> の引数として：</p>
 <ul>
-<li>Setting the <code translate="no">uri</code> as a local file, e.g.<code translate="no">./milvus.db</code>, is the most convenient method, as it automatically utilizes <a href="https://milvus.io/docs/milvus_lite.md">Milvus Lite</a> to store all data in this file.</li>
-<li>If you have large scale of data, you can set up a more performant Milvus server on <a href="https://milvus.io/docs/quickstart.md">docker or kubernetes</a>. In this setup, please use the server uri, e.g.<code translate="no">http://localhost:19530</code>, as your <code translate="no">uri</code>.</li>
-<li>If you want to use <a href="https://zilliz.com/cloud">Zilliz Cloud</a>, the fully managed cloud service for Milvus, adjust the <code translate="no">uri</code> and <code translate="no">token</code>, which correspond to the <a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">Public Endpoint and Api key</a> in Zilliz Cloud.</li>
+<li><code translate="no">uri</code> をローカルファイル、例えば<code translate="no">./milvus.db</code> とするのが最も便利です。</li>
+<li>データ規模が大きい場合は、<a href="https://milvus.io/docs/quickstart.md">dockerやkubernetes</a>上に、よりパフォーマンスの高いMilvusサーバを構築することができます。このセットアップでは、サーバの uri、例えば<code translate="no">http://localhost:19530</code> を<code translate="no">uri</code> として使用してください。</li>
+<li>Milvusのフルマネージドクラウドサービスである<a href="https://zilliz.com/cloud">Zilliz Cloudを</a>利用する場合は、Zilliz Cloudの<a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">Public EndpointとApi keyに</a>対応する<code translate="no">uri</code> と<code translate="no">token</code> を調整してください。</li>
 </ul>
 </div>
-<p>Check if the collection already exists and drop it if it does.</p>
+<p>コレクションが既に存在するか確認し、存在する場合は削除します。</p>
 <pre><code translate="no" class="language-python">if milvus_client.has_collection(collection_name):
     milvus_client.drop_collection(collection_name)
 <button class="copy-code-btn"></button></code></pre>
-<p>Create a new collection with specified parameters.</p>
-<p>If we don’t specify any field information, Milvus will automatically create a default <code translate="no">id</code> field for primary key, and a <code translate="no">vector</code> field to store the vector data. A reserved JSON field is used to store non-schema-defined fields and their values.</p>
+<p>指定したパラメータで新しいコレクションを作成します。</p>
+<p>フィールド情報を指定しない場合、Milvusは自動的にプライマリキー用のデフォルト<code translate="no">id</code> フィールドと、ベクトルデータを格納するための<code translate="no">vector</code> フィールドを作成します。予約されたJSONフィールドは、スキーマで定義されていないフィールドとその値を格納するために使用されます。</p>
 <pre><code translate="no" class="language-python">milvus_client.create_collection(
     collection_name=collection_name,
     dimension=embedding_dim,
@@ -160,7 +158,7 @@ collection_name = <span class="hljs-string">&quot;my_rag_collection&quot;</span>
     consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  <span class="hljs-comment"># Strong consistency level</span>
 )
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Insert-data" class="common-anchor-header">Insert data<button data-href="#Insert-data" class="anchor-icon" translate="no">
+<h2 id="Insert-data" class="common-anchor-header">データの挿入<button data-href="#Insert-data" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -175,8 +173,8 @@ collection_name = <span class="hljs-string">&quot;my_rag_collection&quot;</span>
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Iterate through the text lines, create embeddings, and then insert the data into Milvus.</p>
-<p>Here is a new field <code translate="no">text</code>, which is a non-defined field in the collection schema. It will be automatically added to the reserved JSON dynamic field, which can be treated as a normal field at a high level.</p>
+    </button></h2><p>テキスト行を繰り返し、エンベッディングを作成し、milvusにデータを挿入します。</p>
+<p>ここに新しいフィールド<code translate="no">text</code> 、コレクションスキーマで定義されていないフィールドです。これは、予約されたJSONダイナミックフィールドに自動的に追加され、高レベルでは通常のフィールドとして扱うことができます。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> tqdm <span class="hljs-keyword">import</span> tqdm
 
 data = []
@@ -194,7 +192,7 @@ milvus_client.insert(collection_name=collection_name, data=data)
 
 {'insert_count': 72, 'ids': [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71], 'cost': 0}
 </code></pre>
-<h2 id="Visualizing-Embeddings-in-Vector-Search" class="common-anchor-header">Visualizing Embeddings in Vector Search<button data-href="#Visualizing-Embeddings-in-Vector-Search" class="anchor-icon" translate="no">
+<h2 id="Visualizing-Embeddings-in-Vector-Search" class="common-anchor-header">ベクトル検索で埋め込みを可視化する<button data-href="#Visualizing-Embeddings-in-Vector-Search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -209,13 +207,13 @@ milvus_client.insert(collection_name=collection_name, data=data)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>In this section, we perform a milvus search and then visualize the query vector and the retrieved vector together in reduced dimension.</p>
-<h3 id="Retrieve-Data-for-a-Query" class="common-anchor-header">Retrieve Data for a Query</h3><p>Let’s prepare a question for the search.</p>
+    </button></h2><p>このセクションでは、milvus検索を実行し、クエリベクトルと検索されたベクトルを一緒に縮小次元で可視化する。</p>
+<h3 id="Retrieve-Data-for-a-Query" class="common-anchor-header">クエリのデータを取得する</h3><p>検索用の質問を用意しましょう。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Modify the question to test it with your own query!</span>
 
 question = <span class="hljs-string">&quot;How is data stored in Milvus?&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Search for the question in the collection and retrieve the semantic top-10 matches.</p>
+<p>コレクションで質問を検索し、セマンティックトップ10マッチを取得します。</p>
 <pre><code translate="no" class="language-python">search_res = milvus_client.search(
     collection_name=collection_name,
     data=[
@@ -226,7 +224,7 @@ question = <span class="hljs-string">&quot;How is data stored in Milvus?&quot;</
     output_fields=[<span class="hljs-string">&quot;text&quot;</span>],  <span class="hljs-comment"># Return the text field</span>
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>Let’s take a look at the search results of the query</p>
+<p>クエリの検索結果を見てみましょう。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> json
 
 retrieved_lines_with_distances = [
@@ -277,7 +275,7 @@ retrieved_lines_with_distances = [
     ]
 ]
 </code></pre>
-<h3 id="Dimensionality-reduction-to-2-d-by-t-SNE" class="common-anchor-header">Dimensionality reduction to 2-d by t-SNE</h3><p>Let’s reduce the dimension of the embeddings to 2-d by t-SNE. We will use the <code translate="no">sklearn</code> library to perform the t-SNE transformation.</p>
+<h3 id="Dimensionality-reduction-to-2-d-by-t-SNE" class="common-anchor-header">t-SNEによる2次元への次元削減</h3><p>t-SNEによって埋め込み要素の次元を2次元に削減しましょう。t-SNE変換を行うために、<code translate="no">sklearn</code> ライブラリを使用します。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> pandas <span class="hljs-keyword">as</span> pd
 <span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np
 <span class="hljs-keyword">from</span> sklearn.manifold <span class="hljs-keyword">import</span> TSNE
@@ -296,10 +294,7 @@ df_tsne
 <button class="copy-code-btn"></button></code></pre>
 <div>
 <style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-<pre><code translate="no">.dataframe tbody tr th {
+    .dataframe tbody tr th:only-of-type { vertical-align: middle; }.<pre><code translate="no">.dataframe tbody tr th {
     vertical-align: top;
 }
 
@@ -374,9 +369,9 @@ df_tsne
     </tr>
   </tbody>
 </table>
-<p>74 rows × 2 columns</p>
+<p>74行×2列</p>
 </div>
-<h3 id="Visualizing-Milvus-search-results-on-a-2d-plane" class="common-anchor-header">Visualizing Milvus search results on a 2d plane</h3><p>We will plot the query vector in green, the retrieved vectors in red, and the remaining vectors in blue.</p>
+<h3 id="Visualizing-Milvus-search-results-on-a-2d-plane" class="common-anchor-header">Milvus検索結果の2次元平面上での可視化</h3><p>クエリベクトルを緑、検索されたベクトルを赤、残りのベクトルを青でプロットする。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> matplotlib.pyplot <span class="hljs-keyword">as</span> plt
 <span class="hljs-keyword">import</span> seaborn <span class="hljs-keyword">as</span> sns
 
@@ -430,10 +425,8 @@ plt.legend()
 plt.show()
 <button class="copy-code-btn"></button></code></pre>
 <p>
-  <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.5.x/assets/vector_visualization_33_0.png" alt="png" class="doc-image" id="png" />
-    <span>png</span>
-  </span>
-</p>
-<p>As we can see, the query vector is close to the retrieved vectors. Although the retrieved vectors are not within a standard circle with a fixed radius centered on the query, we can see that they are still very close to the query vector on the 2D plane.</p>
-<p>Using dimensionality reduction techniques can facilitate the understanding of vectors and troubleshooting. Hope you can get a better understanding of vectors through this tutorial.</p>
+  
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/vector_visualization_33_0.png" alt="png" class="doc-image" id="png" />
+   </span> <span class="img-wrapper"> <span>png</span> </span></p>
+<p>見ての通り、クエリーベクトルは検索されたベクトルに近い。検索されたベクトルは、クエリを中心とした一定の半径を持つ標準的な円の中にはありませんが、それでも2D平面上ではクエリベクトルに非常に近いことがわかります。</p>
+<p>次元削減技術を使うことで、ベクトルの理解やトラブルシューティングが容易になります。このチュートリアルを通して、ベクトルについての理解が深まることを願っています。</p>

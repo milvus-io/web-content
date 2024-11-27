@@ -1,11 +1,9 @@
 ---
 id: reranking.md
-summary: >-
-  This topic covers the reranking process, explaining its significance and
-  implementation of two reranking methods.
-title: Reranking
+summary: このトピックでは、リランキング・プロセスを取り上げ、その意義と2つのリランキング手法の実装について説明する。
+title: リランキング
 ---
-<h1 id="Reranking" class="common-anchor-header">Reranking<button data-href="#Reranking" class="anchor-icon" translate="no">
+<h1 id="Reranking" class="common-anchor-header">リランキング<button data-href="#Reranking" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -20,8 +18,8 @@ title: Reranking
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Milvus enables hybrid search capabilities using the <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/ORM/Collection/hybrid_search.md">hybrid_search()</a> API, incorporating sophisticated reranking strategies to refine search results from multiple <code translate="no">AnnSearchRequest</code> instances. This topic covers the reranking process, explaining its significance and implementation of different reranking strategies in Milvus.</p>
-<h2 id="Overview" class="common-anchor-header">Overview<button data-href="#Overview" class="anchor-icon" translate="no">
+    </button></h1><p>Milvusは<a href="https://milvus.io/api-reference/pymilvus/v2.4.x/ORM/Collection/hybrid_search.md">hybrid_search()</a>APIを使用してハイブリッド検索機能を実現し、複数の<code translate="no">AnnSearchRequest</code> インスタンスから検索結果を絞り込むための洗練されたリランキング戦略を組み込んでいます。このトピックでは、リランキングプロセスを取り上げ、その意義とMilvusにおける様々なリランキング戦略の実装について説明します。</p>
+<h2 id="Overview" class="common-anchor-header">概要<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -36,14 +34,14 @@ title: Reranking
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>The following figure illustrates the execution of a hybrid search in Milvus and highlights the role of reranking in the process.</p>
+    </button></h2><p>下図はMilvusにおけるハイブリッド検索の実行を示しており、このプロセスにおけるリランキングの役割を強調しています。</p>
 <p><img translate="no" src="/docs/v2.5.x/assets/multi-vector-rerank.png" alt="reranking_process" width="300"/></p>
-<p>Reranking in hybrid search is a crucial step that consolidates results from several vector fields, ensuring the final output is relevant and accurately prioritized. Currently, Milvus offers these reranking strategies:</p>
+<p>ハイブリッド検索における再ランク付けは、複数のベクトルフィールドからの結果を統合し、最終的な出力が関連性があり、正確に優先順位付けされていることを保証する重要なステップです。現在、Milvusは以下の再ランク付け戦略を提供しています：</p>
 <ul>
-<li><p><code translate="no">WeightedRanker</code>: This approach merges results by calculating a weighted average of scores (or vector distances) from different vector searches. It assigns weights based on the significance of each vector field.</p></li>
-<li><p><code translate="no">RRFRanker</code>: This strategy combines results based on their ranks across different vector columns.</p></li>
+<li><p><code translate="no">WeightedRanker</code>:このアプローチは、異なるベクトル検索からのスコア（またはベクトル距離）の加重平均を計算することによって結果を統合します。各ベクトルフィールドの重要性に基づいて重み付けを行います。</p></li>
+<li><p><code translate="no">RRFRanker</code>:異なるベクトル列の順位に基づいて結果を結合する。</p></li>
 </ul>
-<h2 id="Weighted-Scoring-WeightedRanker" class="common-anchor-header">Weighted Scoring (WeightedRanker)<button data-href="#Weighted-Scoring-WeightedRanker" class="anchor-icon" translate="no">
+<h2 id="Weighted-Scoring-WeightedRanker" class="common-anchor-header">重み付きスコアリング（WeightedRanker）<button data-href="#Weighted-Scoring-WeightedRanker" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -58,34 +56,32 @@ title: Reranking
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>The <code translate="no">WeightedRanker</code> strategy assigns different weights to results from each vector retrieval route based on the significance of each vector field. This reranking strategy is applied when the significance of each vector field varies, allowing you to emphasize certain vector fields over others by assigning them higher weights. For example, in a multimodal search, the text description might be considered more important than the color distribution in images.</p>
-<p>WeightedRanker’s basic process is as follows:</p>
+    </button></h2><p><code translate="no">WeightedRanker</code> 戦略は、各ベクトルフィールドの重要度に基づいて、各ベクトル検索ルートからの結果に異なる重みを割り当てます。このリランキング戦略は、各ベクトルフィールドの重要度が異なる場合に適用され、より高い重みを割り当てることで、特定のベクトルフィールドを他のベクトルフィールドよりも強調することができます。例えば、マルチモーダル検索では、画像の色分布よりもテキストの説明の方が重要だと考えられるかもしれない。</p>
+<p>WeightedRankerの基本的なプロセスは以下の通りです：</p>
 <ul>
-<li><p><strong>Collect Scores During Retrieval</strong>: Gather results and their scores from different vector retrieval routes.</p></li>
-<li><p><strong>Score Normalization</strong>: Normalize the scores from each route to a [0,1] range, where values closer to 1 indicate higher relevance. This normalization is crucial due to score distributions varying with different metric types. For instance, the distance for IP ranges from [-∞,+∞], while the distance for L2 ranges from [0,+∞]. Milvus employs the <code translate="no">arctan</code> function, transforming values to the [0,1] range to provide a standardized basis for different metric types.</p>
+<li><p><strong>検索時にスコアを収集する</strong>：異なるベクトル検索ルートから検索結果とそのスコアを収集する。</p></li>
+<li><p><strong>スコアの正規化</strong>：各ルートからのスコアを[0,1]の範囲に正規化する。スコアの分布はメトリックの種類によって異なるため、この正規化は非常に重要である。例えば、IPの距離は[-∞,+∞]、L2の距離は[0,+∞]です。Milvusは<code translate="no">arctan</code> 関数を採用し、値を[0,1]の範囲に変換することで、異なるメトリックタイプに対して標準化された基準を提供します。</p>
 <p><img translate="no" src="/docs/v2.5.x/assets/arctan.png" alt="arctan-function" width="300"/></p></li>
-<li><p><strong>Weight Allocation</strong>: Assign a weight <code translate="no">w𝑖</code> to each vector retrieval route. Users specify the weights, which reflect the data source’s reliability, accuracy, or other pertinent metrics. Each weight ranges from [0,1].</p></li>
-<li><p><strong>Score Fusion</strong>: Calculate a weighted average of the normalized scores to derive the final score. The results are then ranked based on these highest to lowest scores to generate the final sorted results.</p></li>
+<li><p><strong>重みの割り当て</strong>：各ベクトル検索ルートに重み（<code translate="no">w𝑖</code> ）を割り当てる。ユーザーは、データ・ソースの信頼性、精度、またはその他の適切なメトリックを反映する重みを指定します。各重みの範囲は [0,1] です。</p></li>
+<li><p><strong>スコア・フュージョン</strong>：正規化されたスコアの加重平均を計算し、最終的なスコアを導き出します。次に、この最高スコアから最低スコアに基づいて結果をランク付けし、最終的なソート結果を生成する。</p></li>
 </ul>
 <p>
-  <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.5.x//assets/weighted-reranker.png" alt="weighted-reranker" class="doc-image" id="weighted-reranker" />
-    <span>weighted-reranker</span>
-  </span>
-</p>
-<p>To use this strategy, apply a <code translate="no">WeightedRanker</code> instance and set weight values by passing in a variable number of numeric arguments.</p>
+  
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x//assets/weighted-reranker.png" alt="weighted-reranker" class="doc-image" id="weighted-reranker" />
+   </span> <span class="img-wrapper"> <span>重み付き再ランカー</span> </span></p>
+<p>このストラテジーを使用するには、<code translate="no">WeightedRanker</code> インスタンスを適用し、可変数の数値引数を渡して重み値を設定します。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> WeightedRanker
 
 <span class="hljs-comment"># Use WeightedRanker to combine results with specified weights</span>
 rerank = WeightedRanker(<span class="hljs-number">0.8</span>, <span class="hljs-number">0.8</span>, <span class="hljs-number">0.7</span>) 
 <button class="copy-code-btn"></button></code></pre>
-<p>Note that:</p>
+<p>以下の点に注意：</p>
 <ul>
-<li><p>Each weight value ranges from 0 (least important) to 1 (most important), influencing the final aggregated score.</p></li>
-<li><p>The total number of weight values provided in <code translate="no">WeightedRanker</code> should equal the number of <code translate="no">AnnSearchRequest</code> instances you have created earlier.</p></li>
-<li><p>It is worth noting that due to the different measurements of the different metric types, we normalize the distances of the recall results so that they lie in the interval [0,1], where 0 means different and 1 means similar. The final score will be the sum of the weight values and distances.</p></li>
+<li><p>各重み値は0（最も重要でない）から1（最も重要）まであり、最終的な集計スコアに影響する。</p></li>
+<li><p><code translate="no">WeightedRanker</code> で指定する重み値の総数は、先に作成した<code translate="no">AnnSearchRequest</code> インスタンスの数と同じでなければならない。</p></li>
+<li><p>異なるメトリックタイプの異なる測定値のため、我々は想起結果の距離を正規化し、区間[0,1]に入るようにする。最終的なスコアは重み値と距離の合計となる。</p></li>
 </ul>
-<h2 id="Reciprocal-Rank-Fusion-RRFRanker" class="common-anchor-header">Reciprocal Rank Fusion (RRFRanker)<button data-href="#Reciprocal-Rank-Fusion-RRFRanker" class="anchor-icon" translate="no">
+<h2 id="Reciprocal-Rank-Fusion-RRFRanker" class="common-anchor-header">レシプロランク・フュージョン（RRFRanker）<button data-href="#Reciprocal-Rank-Fusion-RRFRanker" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -100,21 +96,19 @@ rerank = WeightedRanker(<span class="hljs-number">0.8</span>, <span class="hljs-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>RRF is a data fusion method that combines ranking lists based on the reciprocal of their ranks. It is an effective way to balance the influence of each vector field, especially when there is no clear precedence of importance. This strategy is typically used when you want to give equal consideration to all vector fields or when there is uncertainty about the relative importance of each field.</p>
-<p>RRF’s basic process is as follows:</p>
+    </button></h2><p>RRFは、順位の逆数に基づいてランキングリストを結合するデータフュージョン手法である。特に重要度の優先順位が明確でない場合に、各ベクトルフィールドの影響力をバランスさせる効果的な方法です。この方法は通常、すべてのベクトルフィールドを同等に考慮したい場合や、各フィールドの相対的な重要性が不明確な場合に使用されます。</p>
+<p>RRFの基本的なプロセスは以下の通りである：</p>
 <ul>
-<li><p><strong>Collect Rankings During Retrieval</strong>: Retrievers across multiple vector fields retrieve and sort results.</p></li>
-<li><p><strong>Rank Fusion</strong>: The RRF algorithm weighs and combines the ranks from each retriever. The formula is as follows:</p>
+<li><p><strong>検索時にランキングを収集する</strong>：複数のベクトルフィールドにまたがるリトリーバーが結果を取得し、ソートする。</p></li>
+<li><p><strong>ランク融合</strong>：RRFアルゴリズムは、各リトリーバーからのランクを重み付けし、結合する。計算式は以下の通り：</p>
 <p>
-  <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.5.x//assets/rrf-ranker.png" alt="rrf-ranker" class="doc-image" id="rrf-ranker" />
-    <span>rrf-ranker</span>
-  </span>
-</p>
-<p>Here, 𝑁 represents the number of different retrieval routes, rank𝑖(𝑑) is the rank position of retrieved document 𝑑 by the 𝑖th retriever, and 𝑘 is a smoothing parameter, typically set to 60.</p></li>
-<li><p><strong>Comprehensive Ranking</strong>: Re-rank the retrieved results based on the combined scores to produce the final results.</p></li>
+  
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x//assets/rrf-ranker.png" alt="rrf-ranker" class="doc-image" id="rrf-ranker" />
+   </span> <span class="img-wrapper"> <span>RRF-RANKER</span> </span></p>
+<p>ここで、↪Lu_1 は異なる検索ルートの数を表し、rank𝑖(↪Ll_1D451) は𝑖番目の検索エンジンによって検索されたドキュメント𝑑のランク位置、↪Ll_1D458 は平滑化パラメータで、通常は60に設定される。</p></li>
+<li><p><strong>総合ランキング</strong>：最終的な結果を生成するために、検索された結果を総合スコアに基づいて再ランク付けする。</p></li>
 </ul>
-<p>To use this strategy, apply an <code translate="no">RRFRanker</code> instance.</p>
+<p>この戦略を使用するには、<code translate="no">RRFRanker</code> インスタンスを適用する。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> RRFRanker
 
 <span class="hljs-comment"># Default k value is 60</span>
@@ -123,4 +117,4 @@ ranker = RRFRanker()
 <span class="hljs-comment"># Or specify k value</span>
 ranker = RRFRanker(k=<span class="hljs-number">100</span>)
 <button class="copy-code-btn"></button></code></pre>
-<p>RRF allows balancing influence across fields without specifying explicit weights. The top matches agreed upon by multiple fields will be prioritized in the final ranking.</p>
+<p>RRFでは、明示的な重みを指定することなく、分野間の影響力のバランスをとることができる。最終的なランキングでは、複数のフィールドで合意された上位のマッチが優先されます。</p>

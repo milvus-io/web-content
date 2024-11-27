@@ -2,9 +2,9 @@
 id: configure_quotaandlimits.md
 related_key: configure
 group: system_configuration.md
-summary: Learn how to configure quotaAndLimits for Milvus.
+summary: MilvusのquotaAndLimitsの設定方法について説明します。
 ---
-<h1 id="quotaAndLimits-related-Configurations" class="common-anchor-header">quotaAndLimits-related Configurations<button data-href="#quotaAndLimits-related-Configurations" class="anchor-icon" translate="no">
+<h1 id="quotaAndLimits-related-Configurations" class="common-anchor-header">quotaAndLimits関連設定<button data-href="#quotaAndLimits-related-Configurations" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -19,21 +19,21 @@ summary: Learn how to configure quotaAndLimits for Milvus.
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>QuotaConfig, configurations of Milvus quota and limits.</p>
-<p>By default, we enable:</p>
+    </button></h1><p>QuotaConfigはMilvusのクォータとリミットの設定です。</p>
+<p>デフォルトでは</p>
 <ol>
-<li><p>TT protection;</p></li>
-<li><p>Memory protection.</p></li>
-<li><p>Disk quota protection.</p></li>
+<li><p>TT保護</p></li>
+<li><p>メモリ保護.</p></li>
+<li><p>ディスククォータ保護。</p></li>
 </ol>
-<p>You can enable:</p>
+<p>有効にすることができます：</p>
 <ol>
-<li><p>DML throughput limitation;</p></li>
-<li><p>DDL, DQL qps/rps limitation;</p></li>
-<li><p>DQL Queue length/latency protection;</p></li>
-<li><p>DQL result rate protection;</p></li>
+<li><p>DMLスループット制限；</p></li>
+<li><p>DDL、DQL qps/rps制限；</p></li>
+<li><p>DQLキュー長/待ち時間の保護；</p></li>
+<li><p>DQL結果レートの保護；</p></li>
 </ol>
-<p>If necessary, you can also manually force to deny RW requests.</p>
+<p>必要に応じて、手動でRW要求を強制的に拒否することもできます。</p>
 <h2 id="quotaAndLimitsenabled" class="common-anchor-header"><code translate="no">quotaAndLimits.enabled</code><button data-href="#quotaAndLimitsenabled" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -52,13 +52,13 @@ summary: Learn how to configure quotaAndLimits for Milvus.
     </button></h2><table id="quotaAndLimits.enabled">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">説明</th>
+      <th class="width20">デフォルト値</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        `true` to enable quota and limits, `false` to disable.      </td>
+      <td>        true`でクォータと制限を有効にし、`false`で無効にする。      </td>
       <td>true</td>
     </tr>
   </tbody>
@@ -81,16 +81,16 @@ summary: Learn how to configure quotaAndLimits for Milvus.
     </button></h2><table id="quotaAndLimits.quotaCenterCollectInterval">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">説明</th>
+      <th class="width20">デフォルト値</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>
-        <li>quotaCenterCollectInterval is the time interval that quotaCenter</li>      
-        <li>collects metrics from Proxies, Query cluster and Data cluster.</li>      
-        <li>seconds, (0 ~ 65536)</li>      </td>
+        <li>quotaCenterCollectInterval は quotaCenter がプロキシ、クエリクラスタ、およびデータクラスタからメトリクスを収集する時間間隔です。</li>      
+        <li>がプロキシ、クエリ・クラスタ、およびデータ・クラスタからメトリクスを収集する時間間隔です。</li>      
+        <li>秒, (0 ~ 65536)</li>      </td>
       <td>3</td>
     </tr>
   </tbody>
@@ -113,13 +113,13 @@ summary: Learn how to configure quotaAndLimits for Milvus.
     </button></h2><table id="quotaAndLimits.limits.allocRetryTimes">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">説明</th>
+      <th class="width20">デフォルト値</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        retry times when delete alloc forward data from rate limit failed      </td>
+      <td>        レート・リミットからの全転送データの削除に失敗した場合のリトライ回数      </td>
       <td>15</td>
     </tr>
   </tbody>
@@ -142,13 +142,13 @@ summary: Learn how to configure quotaAndLimits for Milvus.
     </button></h2><table id="quotaAndLimits.limits.allocWaitInterval">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">説明</th>
+      <th class="width20">デフォルト値</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        retry wait duration when delete alloc forward data rate failed, in millisecond      </td>
+      <td>        転送データの削除に失敗したときのリトライ待機時間（ミリ秒単位      </td>
       <td>1000</td>
     </tr>
   </tbody>
@@ -171,13 +171,13 @@ summary: Learn how to configure quotaAndLimits for Milvus.
     </button></h2><table id="quotaAndLimits.limits.complexDeleteLimitEnable">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">説明</th>
+      <th class="width20">デフォルト値</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        whether complex delete check forward data by limiter      </td>
+      <td>        リミッターによる複雑な前方データの削除チェックの有無      </td>
       <td>false</td>
     </tr>
   </tbody>
@@ -200,13 +200,13 @@ summary: Learn how to configure quotaAndLimits for Milvus.
     </button></h2><table id="quotaAndLimits.limits.maxCollectionNumPerDB">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">説明</th>
+      <th class="width20">デフォルト値</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        Maximum number of collections per database.      </td>
+      <td>        データベースごとのコレクションの最大数。      </td>
       <td>65536</td>
     </tr>
   </tbody>
@@ -229,13 +229,13 @@ summary: Learn how to configure quotaAndLimits for Milvus.
     </button></h2><table id="quotaAndLimits.limits.maxInsertSize">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">説明</th>
+      <th class="width20">デフォルト値</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        maximum size of a single insert request, in bytes, -1 means no limit      </td>
+      <td>        1回の挿入要求の最大サイズをバイト単位で指定します。      </td>
       <td>-1</td>
     </tr>
   </tbody>
@@ -258,13 +258,13 @@ summary: Learn how to configure quotaAndLimits for Milvus.
     </button></h2><table id="quotaAndLimits.limits.maxResourceGroupNumOfQueryNode">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">説明</th>
+      <th class="width20">デフォルト値</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        maximum number of resource groups of query nodes      </td>
+      <td>        クエリ・ノードのリソース・グループの最大数      </td>
       <td>1024</td>
     </tr>
   </tbody>
@@ -287,13 +287,13 @@ summary: Learn how to configure quotaAndLimits for Milvus.
     </button></h2><table id="quotaAndLimits.ddl.enabled">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">説明</th>
+      <th class="width20">デフォルト値</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        Whether DDL request throttling is enabled.      </td>
+      <td>        DDL リクエスト・スロットリングを有効にするかどうか。      </td>
       <td>false</td>
     </tr>
   </tbody>
@@ -316,16 +316,16 @@ summary: Learn how to configure quotaAndLimits for Milvus.
     </button></h2><table id="quotaAndLimits.ddl.collectionRate">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">説明</th>
+      <th class="width20">デフォルト値</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>
-        <li>Maximum number of collection-related DDL requests per second.</li>      
-        <li>Setting this item to 10 indicates that Milvus processes no more than 10 collection-related DDL requests per second, including collection creation requests, collection drop requests, collection load requests, and collection release requests.</li>      
-        <li>To use this setting, set quotaAndLimits.ddl.enabled to true at the same time.</li>      </td>
+        <li>1秒あたりのコレクション関連DDL要求の最大数。</li>      
+        <li>この項目を10に設定すると、Milvusはコレクション作成リクエスト、コレクション削除リクエスト、コレクションロードリクエスト、コレクションリリースリクエストを含む、1秒あたり10を超えるコレクション関連DDLリクエストを処理しないことを示します。</li>      
+        <li>この設定を使用するには、同時にquotaAndLimits.ddl.enabledをtrueに設定してください。</li>      </td>
       <td>-1</td>
     </tr>
   </tbody>
@@ -348,16 +348,16 @@ summary: Learn how to configure quotaAndLimits for Milvus.
     </button></h2><table id="quotaAndLimits.ddl.partitionRate">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">説明</th>
+      <th class="width20">デフォルト値</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>
-        <li>Maximum number of partition-related DDL requests per second.</li>      
-        <li>Setting this item to 10 indicates that Milvus processes no more than 10 partition-related requests per second, including partition creation requests, partition drop requests, partition load requests, and partition release requests.</li>      
-        <li>To use this setting, set quotaAndLimits.ddl.enabled to true at the same time.</li>      </td>
+        <li>1秒あたりのパーティション関連DDL要求の最大数。</li>      
+        <li>この項目を10に設定すると、Milvusはパーティション作成要求、パーティション削除要求、パーティションロード要求、およびパーティション解放要求を含め、1秒あたり10を超えるパーティション関連要求を処理しないことを示します。</li>      
+        <li>この設定を使用するには、同時にquotaAndLimits.ddl.enabledをtrueに設定します。</li>      </td>
       <td>-1</td>
     </tr>
   </tbody>
@@ -380,13 +380,13 @@ summary: Learn how to configure quotaAndLimits for Milvus.
     </button></h2><table id="quotaAndLimits.ddl.db.collectionRate">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">説明</th>
+      <th class="width20">デフォルト値</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        qps of db level , default no limit, rate for CreateCollection, DropCollection, LoadCollection, ReleaseCollection      </td>
+      <td>        dbレベルのqps、デフォルトでは制限なし、CreateCollection、DropCollection、LoadCollection、ReleaseCollectionのレート      </td>
       <td>-1</td>
     </tr>
   </tbody>
@@ -409,13 +409,13 @@ summary: Learn how to configure quotaAndLimits for Milvus.
     </button></h2><table id="quotaAndLimits.ddl.db.partitionRate">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">説明</th>
+      <th class="width20">デフォルト値</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        qps of db level, default no limit, rate for CreatePartition, DropPartition, LoadPartition, ReleasePartition      </td>
+      <td>        dbレベルのqps、デフォルトは制限なし、CreatePartition、DropPartition、LoadPartition、ReleasePartitionのレート      </td>
       <td>-1</td>
     </tr>
   </tbody>
@@ -438,13 +438,13 @@ summary: Learn how to configure quotaAndLimits for Milvus.
     </button></h2><table id="quotaAndLimits.indexRate.enabled">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">説明</th>
+      <th class="width20">デフォルト値</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        Whether index-related request throttling is enabled.      </td>
+      <td>        インデックス関連の要求スロットルを有効にするかどうか。      </td>
       <td>false</td>
     </tr>
   </tbody>
@@ -467,16 +467,16 @@ summary: Learn how to configure quotaAndLimits for Milvus.
     </button></h2><table id="quotaAndLimits.indexRate.max">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">説明</th>
+      <th class="width20">デフォルト値</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>
-        <li>Maximum number of index-related requests per second.</li>      
-        <li>Setting this item to 10 indicates that Milvus processes no more than 10 partition-related requests per second, including index creation requests and index drop requests.</li>      
-        <li>To use this setting, set quotaAndLimits.indexRate.enabled to true at the same time.</li>      </td>
+        <li>1秒あたりのインデックス関連要求の最大数。</li>      
+        <li>この項目を10に設定すると、Milvusはインデックス作成要求とインデックス削除要求を含め、1秒間に10を超えるパーティション関連要求を処理しないことを示します。</li>      
+        <li>この設定を使用するには、同時にquotaAndLimits.indexRate.enabledをtrueに設定します。</li>      </td>
       <td>-1</td>
     </tr>
   </tbody>
@@ -499,13 +499,13 @@ summary: Learn how to configure quotaAndLimits for Milvus.
     </button></h2><table id="quotaAndLimits.indexRate.db.max">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">説明</th>
+      <th class="width20">デフォルト値</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        qps of db level, default no limit, rate for CreateIndex, DropIndex      </td>
+      <td>        dbレベルのqps、デフォルトでは制限なし、CreateIndex、DropIndexのレート      </td>
       <td>-1</td>
     </tr>
   </tbody>
@@ -528,13 +528,13 @@ summary: Learn how to configure quotaAndLimits for Milvus.
     </button></h2><table id="quotaAndLimits.flushRate.enabled">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">説明</th>
+      <th class="width20">デフォルト値</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        Whether flush request throttling is enabled.      </td>
+      <td>        フラッシュ要求のスロットルを有効にするかどうか。      </td>
       <td>true</td>
     </tr>
   </tbody>
@@ -557,16 +557,16 @@ summary: Learn how to configure quotaAndLimits for Milvus.
     </button></h2><table id="quotaAndLimits.flushRate.max">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">説明</th>
+      <th class="width20">デフォルト値</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>
-        <li>Maximum number of flush requests per second.</li>      
-        <li>Setting this item to 10 indicates that Milvus processes no more than 10 flush requests per second.</li>      
-        <li>To use this setting, set quotaAndLimits.flushRate.enabled to true at the same time.</li>      </td>
+        <li>1秒あたりの最大フラッシュ要求数。</li>      
+        <li>この項目を10に設定すると、milvusは毎秒10回を超えるフラッシュ要求を処理しないことを示します。</li>      
+        <li>この設定を使用するには、同時にquotaAndLimits.flushRate.enabledをtrueに設定します。</li>      </td>
       <td>-1</td>
     </tr>
   </tbody>
@@ -589,13 +589,13 @@ summary: Learn how to configure quotaAndLimits for Milvus.
     </button></h2><table id="quotaAndLimits.flushRate.collection.max">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">説明</th>
+      <th class="width20">デフォルト値</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        qps, default no limit, rate for flush at collection level.      </td>
+      <td>        qps、デフォルト制限なし、コレクションレベルでのフラッシュレート。      </td>
       <td>0.1</td>
     </tr>
   </tbody>
@@ -618,13 +618,13 @@ summary: Learn how to configure quotaAndLimits for Milvus.
     </button></h2><table id="quotaAndLimits.flushRate.db.max">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">説明</th>
+      <th class="width20">デフォルト値</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        qps of db level, default no limit, rate for flush      </td>
+      <td>        dbレベルのqps、デフォルトは制限なし、フラッシュのレート      </td>
       <td>-1</td>
     </tr>
   </tbody>
@@ -647,13 +647,13 @@ summary: Learn how to configure quotaAndLimits for Milvus.
     </button></h2><table id="quotaAndLimits.compactionRate.enabled">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">説明</th>
+      <th class="width20">デフォルト値</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        Whether manual compaction request throttling is enabled.      </td>
+      <td>        手動による圧縮要求のスロットリングを有効にするかどうか。      </td>
       <td>false</td>
     </tr>
   </tbody>
@@ -676,16 +676,16 @@ summary: Learn how to configure quotaAndLimits for Milvus.
     </button></h2><table id="quotaAndLimits.compactionRate.max">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">説明</th>
+      <th class="width20">デフォルト値</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>
-        <li>Maximum number of manual-compaction requests per second.</li>      
-        <li>Setting this item to 10 indicates that Milvus processes no more than 10 manual-compaction requests per second.</li>      
-        <li>To use this setting, set quotaAndLimits.compaction.enabled to true at the same time.</li>      </td>
+        <li>1秒あたりの手動コンパクション要求の最大数。</li>      
+        <li>この項目を10に設定すると、milvusは毎秒10回を超える手動コンパクション要求を処理しないことを示します。</li>      
+        <li>この設定を使用するには、同時にquotaAndLimits.compaction.enabledをtrueに設定します。</li>      </td>
       <td>-1</td>
     </tr>
   </tbody>
@@ -708,13 +708,13 @@ summary: Learn how to configure quotaAndLimits for Milvus.
     </button></h2><table id="quotaAndLimits.compactionRate.db.max">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">説明</th>
+      <th class="width20">デフォルト値</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        qps of db level, default no limit, rate for manualCompaction      </td>
+      <td>        dbレベルのqps、デフォルトは制限なし、manualCompactionのレート      </td>
       <td>-1</td>
     </tr>
   </tbody>
@@ -737,13 +737,13 @@ summary: Learn how to configure quotaAndLimits for Milvus.
     </button></h2><table id="quotaAndLimits.dml.enabled">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">説明</th>
+      <th class="width20">デフォルト値</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        Whether DML request throttling is enabled.      </td>
+      <td>        DML リクエスト・スロットルを有効にするかどうか。      </td>
       <td>false</td>
     </tr>
   </tbody>
@@ -766,16 +766,16 @@ summary: Learn how to configure quotaAndLimits for Milvus.
     </button></h2><table id="quotaAndLimits.dml.insertRate.max">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">説明</th>
+      <th class="width20">デフォルト値</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>
-        <li>Highest data insertion rate per second.</li>      
-        <li>Setting this item to 5 indicates that Milvus only allows data insertion at the rate of 5 MB/s.</li>      
-        <li>To use this setting, set quotaAndLimits.dml.enabled to true at the same time.</li>      </td>
+        <li>1秒あたりの最高データ挿入レート。</li>      
+        <li>この項目を5に設定すると、Milvusは5MB/秒のデータ挿入速度しか許可しないことを示します。</li>      
+        <li>この設定を使用するには、同時にquotaAndLimits.dml.enabledをtrueに設定してください。</li>      </td>
       <td>-1</td>
     </tr>
   </tbody>
@@ -798,13 +798,13 @@ summary: Learn how to configure quotaAndLimits for Milvus.
     </button></h2><table id="quotaAndLimits.dml.insertRate.db.max">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">説明</th>
+      <th class="width20">デフォルト値</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        MB/s, default no limit      </td>
+      <td>        MB/s、デフォルトは制限なし      </td>
       <td>-1</td>
     </tr>
   </tbody>
@@ -827,16 +827,16 @@ summary: Learn how to configure quotaAndLimits for Milvus.
     </button></h2><table id="quotaAndLimits.dml.insertRate.collection.max">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">説明</th>
+      <th class="width20">デフォルト値</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>
-        <li>Highest data insertion rate per collection per second.</li>      
-        <li>Setting this item to 5 indicates that Milvus only allows data insertion to any collection at the rate of 5 MB/s.</li>      
-        <li>To use this setting, set quotaAndLimits.dml.enabled to true at the same time.</li>      </td>
+        <li>1秒あたりのコレクションあたりの最高データ挿入レート。</li>      
+        <li>この項目を5に設定すると、Milvusは5MB/秒のレートでのみコレクションへのデータ挿入を許可します。</li>      
+        <li>この設定を使用するには、同時にquotaAndLimits.dml.enabledをtrueに設定します。</li>      </td>
       <td>-1</td>
     </tr>
   </tbody>
@@ -859,13 +859,13 @@ summary: Learn how to configure quotaAndLimits for Milvus.
     </button></h2><table id="quotaAndLimits.dml.insertRate.partition.max">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">説明</th>
+      <th class="width20">デフォルト値</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        MB/s, default no limit      </td>
+      <td>        MB/s, デフォルト 制限なし      </td>
       <td>-1</td>
     </tr>
   </tbody>
@@ -888,13 +888,13 @@ summary: Learn how to configure quotaAndLimits for Milvus.
     </button></h2><table id="quotaAndLimits.dml.upsertRate.max">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">説明</th>
+      <th class="width20">デフォルト値</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        MB/s, default no limit      </td>
+      <td>        MB/s、デフォルト制限なし      </td>
       <td>-1</td>
     </tr>
   </tbody>
@@ -917,13 +917,13 @@ summary: Learn how to configure quotaAndLimits for Milvus.
     </button></h2><table id="quotaAndLimits.dml.upsertRate.db.max">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">説明</th>
+      <th class="width20">デフォルト値</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        MB/s, default no limit      </td>
+      <td>        MB/s、デフォルト制限なし      </td>
       <td>-1</td>
     </tr>
   </tbody>
@@ -946,13 +946,13 @@ summary: Learn how to configure quotaAndLimits for Milvus.
     </button></h2><table id="quotaAndLimits.dml.upsertRate.collection.max">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">説明</th>
+      <th class="width20">デフォルト値</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        MB/s, default no limit      </td>
+      <td>        MB/s、デフォルト制限なし      </td>
       <td>-1</td>
     </tr>
   </tbody>
@@ -975,13 +975,13 @@ summary: Learn how to configure quotaAndLimits for Milvus.
     </button></h2><table id="quotaAndLimits.dml.upsertRate.partition.max">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">説明</th>
+      <th class="width20">デフォルト値</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        MB/s, default no limit      </td>
+      <td>        MB/s、デフォルト制限なし      </td>
       <td>-1</td>
     </tr>
   </tbody>
@@ -1004,16 +1004,16 @@ summary: Learn how to configure quotaAndLimits for Milvus.
     </button></h2><table id="quotaAndLimits.dml.deleteRate.max">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">説明</th>
+      <th class="width20">デフォルト値</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>
-        <li>Highest data deletion rate per second.</li>      
-        <li>Setting this item to 0.1 indicates that Milvus only allows data deletion at the rate of 0.1 MB/s.</li>      
-        <li>To use this setting, set quotaAndLimits.dml.enabled to true at the same time.</li>      </td>
+        <li>1秒あたりの最高データ削除レート。</li>      
+        <li>この項目を0.1に設定すると、Milvusは0.1MB/秒の速度でのみデータ削除を許可します。</li>      
+        <li>この設定を使用するには、同時にquotaAndLimits.dml.enabledをtrueに設定してください。</li>      </td>
       <td>-1</td>
     </tr>
   </tbody>
@@ -1036,13 +1036,13 @@ summary: Learn how to configure quotaAndLimits for Milvus.
     </button></h2><table id="quotaAndLimits.dml.deleteRate.db.max">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">説明</th>
+      <th class="width20">デフォルト値</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        MB/s, default no limit      </td>
+      <td>        MB/s, デフォルト制限なし      </td>
       <td>-1</td>
     </tr>
   </tbody>
@@ -1065,16 +1065,16 @@ summary: Learn how to configure quotaAndLimits for Milvus.
     </button></h2><table id="quotaAndLimits.dml.deleteRate.collection.max">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">説明</th>
+      <th class="width20">デフォルト値</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>
-        <li>Highest data deletion rate per second.</li>      
-        <li>Setting this item to 0.1 indicates that Milvus only allows data deletion from any collection at the rate of 0.1 MB/s.</li>      
-        <li>To use this setting, set quotaAndLimits.dml.enabled to true at the same time.</li>      </td>
+        <li>1秒あたりの最高データ削除レート。</li>      
+        <li>この項目を0.1に設定すると、Milvusはどのコレクションからも0.1MB/秒の速度でのみデータ削除を許可します。</li>      
+        <li>この設定を使用するには、同時にquotaAndLimits.dml.enabledをtrueに設定します。</li>      </td>
       <td>-1</td>
     </tr>
   </tbody>
@@ -1097,13 +1097,13 @@ summary: Learn how to configure quotaAndLimits for Milvus.
     </button></h2><table id="quotaAndLimits.dml.deleteRate.partition.max">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">説明</th>
+      <th class="width20">デフォルト値</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        MB/s, default no limit      </td>
+      <td>        MB/s、デフォルトは制限なし      </td>
       <td>-1</td>
     </tr>
   </tbody>
@@ -1126,13 +1126,13 @@ summary: Learn how to configure quotaAndLimits for Milvus.
     </button></h2><table id="quotaAndLimits.dml.bulkLoadRate.max">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">説明</th>
+      <th class="width20">デフォルト値</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        MB/s, default no limit, not support yet. TODO: limit bulkLoad rate      </td>
+      <td>        MB/s、デフォルトは制限なし。TODO: バルクロード・レートの制限      </td>
       <td>-1</td>
     </tr>
   </tbody>
@@ -1155,13 +1155,13 @@ summary: Learn how to configure quotaAndLimits for Milvus.
     </button></h2><table id="quotaAndLimits.dml.bulkLoadRate.db.max">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">説明</th>
+      <th class="width20">デフォルト値</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        MB/s, default no limit, not support yet. TODO: limit db bulkLoad rate      </td>
+      <td>        MB/s、デフォルトは制限なし。TODO: dbのバルクロードレートを制限する      </td>
       <td>-1</td>
     </tr>
   </tbody>
@@ -1184,13 +1184,13 @@ summary: Learn how to configure quotaAndLimits for Milvus.
     </button></h2><table id="quotaAndLimits.dml.bulkLoadRate.collection.max">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">説明</th>
+      <th class="width20">デフォルト値</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        MB/s, default no limit, not support yet. TODO: limit collection bulkLoad rate      </td>
+      <td>        MB/s、デフォルト無制限、未サポート。TODO: コレクションのバルクロードレートを制限する      </td>
       <td>-1</td>
     </tr>
   </tbody>
@@ -1213,13 +1213,13 @@ summary: Learn how to configure quotaAndLimits for Milvus.
     </button></h2><table id="quotaAndLimits.dml.bulkLoadRate.partition.max">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">説明</th>
+      <th class="width20">デフォルト値</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        MB/s, default no limit, not support yet. TODO: limit partition bulkLoad rate      </td>
+      <td>        MB/s、デフォルトは制限なし、未サポート。TODO: パーティションのバルクロードレートを制限する      </td>
       <td>-1</td>
     </tr>
   </tbody>
@@ -1242,13 +1242,13 @@ summary: Learn how to configure quotaAndLimits for Milvus.
     </button></h2><table id="quotaAndLimits.dql.enabled">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">説明</th>
+      <th class="width20">デフォルト値</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        Whether DQL request throttling is enabled.      </td>
+      <td>        DQLリクエストのスロットリングを有効にするかどうか。      </td>
       <td>false</td>
     </tr>
   </tbody>
@@ -1271,16 +1271,16 @@ summary: Learn how to configure quotaAndLimits for Milvus.
     </button></h2><table id="quotaAndLimits.dql.searchRate.max">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">説明</th>
+      <th class="width20">デフォルト値</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>
-        <li>Maximum number of vectors to search per second.</li>      
-        <li>Setting this item to 100 indicates that Milvus only allows searching 100 vectors per second no matter whether these 100 vectors are all in one search or scattered across multiple searches.</li>      
-        <li>To use this setting, set quotaAndLimits.dql.enabled to true at the same time.</li>      </td>
+        <li>1 秒間に検索するベクターの最大数。</li>      
+        <li>この項目を100に設定すると、Milvusは1秒間に100個のベクターしか検索できないことになります。この100個のベクターが1回の検索ですべて検索されるか、複数の検索にまたがって検索されるかに関係ありません。</li>      
+        <li>この設定を使用するには、同時に quotaAndLimits.dql.enabled を true に設定します。</li>      </td>
       <td>-1</td>
     </tr>
   </tbody>
@@ -1303,13 +1303,13 @@ summary: Learn how to configure quotaAndLimits for Milvus.
     </button></h2><table id="quotaAndLimits.dql.searchRate.db.max">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">説明</th>
+      <th class="width20">デフォルト値</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        vps (vectors per second), default no limit      </td>
+      <td>        vps（1秒あたりのベクター数）、デフォルトは制限なし      </td>
       <td>-1</td>
     </tr>
   </tbody>
@@ -1332,16 +1332,16 @@ summary: Learn how to configure quotaAndLimits for Milvus.
     </button></h2><table id="quotaAndLimits.dql.searchRate.collection.max">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">説明</th>
+      <th class="width20">デフォルト値</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>
-        <li>Maximum number of vectors to search per collection per second.</li>      
-        <li>Setting this item to 100 indicates that Milvus only allows searching 100 vectors per second per collection no matter whether these 100 vectors are all in one search or scattered across multiple searches.</li>      
-        <li>To use this setting, set quotaAndLimits.dql.enabled to true at the same time.</li>      </td>
+        <li>コレクションごとに毎秒検索するベクターの最大数。</li>      
+        <li>この項目を 100 に設定すると、Milvus は、100 個のベクターが 1 回の検索ですべて検索されるか、複数の検索に分散されるかに関係なく、コレクションごとに 1 秒あたり 100 個のベクターしか検索できなくなります。</li>      
+        <li>この設定を使用するには、同時にquotaAndLimits.dql.enabledをtrueに設定してください。</li>      </td>
       <td>-1</td>
     </tr>
   </tbody>
@@ -1364,13 +1364,13 @@ summary: Learn how to configure quotaAndLimits for Milvus.
     </button></h2><table id="quotaAndLimits.dql.searchRate.partition.max">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">説明</th>
+      <th class="width20">デフォルト値</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        vps (vectors per second), default no limit      </td>
+      <td>        vps (1秒あたりのベクター数)、デフォルトは制限なし      </td>
       <td>-1</td>
     </tr>
   </tbody>
@@ -1393,16 +1393,16 @@ summary: Learn how to configure quotaAndLimits for Milvus.
     </button></h2><table id="quotaAndLimits.dql.queryRate.max">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">説明</th>
+      <th class="width20">デフォルト値</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>
-        <li>Maximum number of queries per second.</li>      
-        <li>Setting this item to 100 indicates that Milvus only allows 100 queries per second.</li>      
-        <li>To use this setting, set quotaAndLimits.dql.enabled to true at the same time.</li>      </td>
+        <li>1秒あたりの最大クエリー数。</li>      
+        <li>この項目を100に設定すると、Milvusは毎秒100クエリしか許可しないことを示します。</li>      
+        <li>この設定を使用するには、同時にquotaAndLimits.dql.enabledをtrueに設定します。</li>      </td>
       <td>-1</td>
     </tr>
   </tbody>
@@ -1425,13 +1425,13 @@ summary: Learn how to configure quotaAndLimits for Milvus.
     </button></h2><table id="quotaAndLimits.dql.queryRate.db.max">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">説明</th>
+      <th class="width20">デフォルト値</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        qps, default no limit      </td>
+      <td>        qps、デフォルト制限なし      </td>
       <td>-1</td>
     </tr>
   </tbody>
@@ -1454,16 +1454,16 @@ summary: Learn how to configure quotaAndLimits for Milvus.
     </button></h2><table id="quotaAndLimits.dql.queryRate.collection.max">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">説明</th>
+      <th class="width20">デフォルト値</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>
-        <li>Maximum number of queries per collection per second.</li>      
-        <li>Setting this item to 100 indicates that Milvus only allows 100 queries per collection per second.</li>      
-        <li>To use this setting, set quotaAndLimits.dql.enabled to true at the same time.</li>      </td>
+        <li>1秒あたりのコレクションあたりの最大クエリー数。</li>      
+        <li>この項目を100に設定すると、Milvusは毎秒コレクションあたり100クエリしか許可しません。</li>      
+        <li>この設定を使用するには、同時にquotaAndLimits.dql.enabledをtrueに設定してください。</li>      </td>
       <td>-1</td>
     </tr>
   </tbody>
@@ -1486,13 +1486,13 @@ summary: Learn how to configure quotaAndLimits for Milvus.
     </button></h2><table id="quotaAndLimits.dql.queryRate.partition.max">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">説明</th>
+      <th class="width20">デフォルト値</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        qps, default no limit      </td>
+      <td>        qps、デフォルト制限なし      </td>
       <td>-1</td>
     </tr>
   </tbody>
@@ -1515,15 +1515,15 @@ summary: Learn how to configure quotaAndLimits for Milvus.
     </button></h2><table id="quotaAndLimits.limitWriting.forceDeny">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">説明</th>
+      <th class="width20">デフォルト値</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>
-        <li>forceDeny false means dml requests are allowed (except for some</li>      
-        <li>specific conditions, such as memory of nodes to water marker), true means always reject all dml requests.</li>      </td>
+        <li>forceDenyがfalseの場合はdmlリクエストが許可される(水マーカへのノードのメモリなど特定の条件を除く)。</li>      
+        <li>trueはすべてのdmlリクエストを拒否する。</li>      </td>
       <td>false</td>
     </tr>
   </tbody>
@@ -1546,17 +1546,17 @@ summary: Learn how to configure quotaAndLimits for Milvus.
     </button></h2><table id="quotaAndLimits.limitWriting.ttProtection.maxTimeTickDelay">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">説明</th>
+      <th class="width20">デフォルト値</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>
-        <li>maxTimeTickDelay indicates the backpressure for DML Operations.</li>      
-        <li>DML rates would be reduced according to the ratio of time tick delay to maxTimeTickDelay,</li>      
-        <li>if time tick delay is greater than maxTimeTickDelay, all DML requests would be rejected.</li>      
-        <li>seconds</li>      </td>
+        <li>maxTimeTickDelayはDML操作のバックプレッシャーを示す。</li>      
+        <li>DML レートは maxTimeTickDelay に対する time tick delay の比率に応じて低下する、</li>      
+        <li>もしtime tick delayがmaxTimeTickDelayより大きければ、全てのDMLリクエストは拒否される。</li>      
+        <li>秒</li>      </td>
       <td>300</td>
     </tr>
   </tbody>
@@ -1579,16 +1579,16 @@ summary: Learn how to configure quotaAndLimits for Milvus.
     </button></h2><table id="quotaAndLimits.limitWriting.memProtection.enabled">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">説明</th>
+      <th class="width20">デフォルト値</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>
-        <li>When memory usage > memoryHighWaterLevel, all dml requests would be rejected;</li>      
-        <li>When memoryLowWaterLevel < memory usage < memoryHighWaterLevel, reduce the dml rate;</li>      
-        <li>When memory usage < memoryLowWaterLevel, no action.</li>      </td>
+        <li>memoryLowWaterLevel &lt; memory usage &lt; memoryHighWaterLevel の場合、すべてのDMLリクエストは拒否される；</li>      
+        <li>memoryLowWaterLevel &lt; memory usage &lt; memoryHighWaterLevelのとき、dmlレートを下げる；</li>      
+        <li>メモリ使用量＜memoryLowWaterLevelの場合、何もしない。</li>      </td>
       <td>true</td>
     </tr>
   </tbody>
@@ -1611,13 +1611,13 @@ summary: Learn how to configure quotaAndLimits for Milvus.
     </button></h2><table id="quotaAndLimits.limitWriting.memProtection.dataNodeMemoryLowWaterLevel">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">説明</th>
+      <th class="width20">デフォルト値</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        (0, 1], memoryLowWaterLevel in DataNodes      </td>
+      <td>        (0, 1]、データノードのmemoryLowWaterLevel      </td>
       <td>0.85</td>
     </tr>
   </tbody>
@@ -1640,13 +1640,13 @@ summary: Learn how to configure quotaAndLimits for Milvus.
     </button></h2><table id="quotaAndLimits.limitWriting.memProtection.dataNodeMemoryHighWaterLevel">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">説明</th>
+      <th class="width20">デフォルト値</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        (0, 1], memoryHighWaterLevel in DataNodes      </td>
+      <td>        (0, 1]、データノード内のmemoryHighWaterLevel      </td>
       <td>0.95</td>
     </tr>
   </tbody>
@@ -1669,13 +1669,13 @@ summary: Learn how to configure quotaAndLimits for Milvus.
     </button></h2><table id="quotaAndLimits.limitWriting.memProtection.queryNodeMemoryLowWaterLevel">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">説明</th>
+      <th class="width20">デフォルト値</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        (0, 1], memoryLowWaterLevel in QueryNodes      </td>
+      <td>        (0, 1]、クエリノードのmemoryLowWaterLevel      </td>
       <td>0.85</td>
     </tr>
   </tbody>
@@ -1698,13 +1698,13 @@ summary: Learn how to configure quotaAndLimits for Milvus.
     </button></h2><table id="quotaAndLimits.limitWriting.memProtection.queryNodeMemoryHighWaterLevel">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">説明</th>
+      <th class="width20">デフォルト値</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        (0, 1], memoryHighWaterLevel in QueryNodes      </td>
+      <td>        (0, 1]、クエリノードのmemoryHighWaterLevel      </td>
       <td>0.95</td>
     </tr>
   </tbody>
@@ -1727,16 +1727,16 @@ summary: Learn how to configure quotaAndLimits for Milvus.
     </button></h2><table id="quotaAndLimits.limitWriting.growingSegmentsSizeProtection.enabled">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">説明</th>
+      <th class="width20">デフォルト値</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>
-        <li>No action will be taken if the growing segments size is less than the low watermark.</li>      
-        <li>When the growing segments size exceeds the low watermark, the dml rate will be reduced,</li>      
-        <li>but the rate will not be lower than minRateRatio * dmlRate.</li>      </td>
+        <li>成長セグメントのサイズがLow Watermarkより小さい場合は、何もしない。</li>      
+        <li>成長しているセグメントのサイズが低い透かしを超えた場合、dmlレートは低下する、</li>      
+        <li>ただし、minRateRatio * dmlRateを下回ることはない。</li>      </td>
       <td>false</td>
     </tr>
   </tbody>
@@ -1759,13 +1759,13 @@ summary: Learn how to configure quotaAndLimits for Milvus.
     </button></h2><table id="quotaAndLimits.limitWriting.diskProtection.enabled">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">説明</th>
+      <th class="width20">デフォルト値</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        When the total file size of object storage is greater than `diskQuota`, all dml requests would be rejected;      </td>
+      <td>        オブジェクトストレージのファイルサイズの合計が `diskQuota` より大きい場合、全てのdmlリクエストは拒否される；      </td>
       <td>true</td>
     </tr>
   </tbody>
@@ -1788,13 +1788,13 @@ summary: Learn how to configure quotaAndLimits for Milvus.
     </button></h2><table id="quotaAndLimits.limitWriting.diskProtection.diskQuota">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">説明</th>
+      <th class="width20">デフォルト値</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        MB, (0, +inf), default no limit      </td>
+      <td>        MB, (0, +inf), デフォルトは制限なし      </td>
       <td>-1</td>
     </tr>
   </tbody>
@@ -1817,13 +1817,13 @@ summary: Learn how to configure quotaAndLimits for Milvus.
     </button></h2><table id="quotaAndLimits.limitWriting.diskProtection.diskQuotaPerDB">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">説明</th>
+      <th class="width20">デフォルト値</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        MB, (0, +inf), default no limit      </td>
+      <td>        MB、(0, +inf)、デフォルト制限なし      </td>
       <td>-1</td>
     </tr>
   </tbody>
@@ -1846,13 +1846,13 @@ summary: Learn how to configure quotaAndLimits for Milvus.
     </button></h2><table id="quotaAndLimits.limitWriting.diskProtection.diskQuotaPerCollection">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">説明</th>
+      <th class="width20">デフォルト値</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        MB, (0, +inf), default no limit      </td>
+      <td>        MB、(0, +inf)、デフォルト制限なし      </td>
       <td>-1</td>
     </tr>
   </tbody>
@@ -1875,13 +1875,13 @@ summary: Learn how to configure quotaAndLimits for Milvus.
     </button></h2><table id="quotaAndLimits.limitWriting.diskProtection.diskQuotaPerPartition">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">説明</th>
+      <th class="width20">デフォルト値</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        MB, (0, +inf), default no limit      </td>
+      <td>        MB、(0, +inf)、デフォルト制限なし      </td>
       <td>-1</td>
     </tr>
   </tbody>
@@ -1904,14 +1904,14 @@ summary: Learn how to configure quotaAndLimits for Milvus.
     </button></h2><table id="quotaAndLimits.limitWriting.l0SegmentsRowCountProtection.enabled">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">説明</th>
+      <th class="width20">デフォルト値</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        switch to enable l0 segment row count quota      </td>
-      <td>false</td>
+      <td>        l0セグメント行数クォータを有効にするスイッチ      </td>
+      <td>偽</td>
     </tr>
   </tbody>
 </table>
@@ -1933,13 +1933,13 @@ summary: Learn how to configure quotaAndLimits for Milvus.
     </button></h2><table id="quotaAndLimits.limitWriting.l0SegmentsRowCountProtection.lowWaterLevel">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">説明</th>
+      <th class="width20">デフォルト値</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        l0 segment row count quota, low water level      </td>
+      <td>        l0セグメント行数クォータ、低水位      </td>
       <td>32768</td>
     </tr>
   </tbody>
@@ -1962,13 +1962,13 @@ summary: Learn how to configure quotaAndLimits for Milvus.
     </button></h2><table id="quotaAndLimits.limitWriting.l0SegmentsRowCountProtection.highWaterLevel">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">説明</th>
+      <th class="width20">デフォルト値</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        l0 segment row count quota, low water level      </td>
+      <td>        L0セグメント行数クォータ、低水位      </td>
       <td>65536</td>
     </tr>
   </tbody>
@@ -1991,15 +1991,15 @@ summary: Learn how to configure quotaAndLimits for Milvus.
     </button></h2><table id="quotaAndLimits.limitReading.forceDeny">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">説明</th>
+      <th class="width20">デフォルト値</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>
-        <li>forceDeny false means dql requests are allowed (except for some</li>      
-        <li>specific conditions, such as collection has been dropped), true means always reject all dql requests.</li>      </td>
+        <li>forceDeny falseはdqlリクエストが許可されることを意味する。</li>      
+        <li>trueは常にすべてのdqlリクエストを拒否する。</li>      </td>
       <td>false</td>
     </tr>
   </tbody>
@@ -2022,17 +2022,17 @@ summary: Learn how to configure quotaAndLimits for Milvus.
     </button></h2><table id="quotaAndLimits.limitReading.queueProtection.nqInQueueThreshold">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">説明</th>
+      <th class="width20">デフォルト値</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>
-        <li>nqInQueueThreshold indicated that the system was under backpressure for Search/Query path.</li>      
-        <li>If NQ in any QueryNode's queue is greater than nqInQueueThreshold, search&query rates would gradually cool off</li>      
-        <li>until the NQ in queue no longer exceeds nqInQueueThreshold. We think of the NQ of query request as 1.</li>      
-        <li>int, default no limit</li>      </td>
+        <li>nqInQueueThresholdは、システムがSearch/Queryパスのバックプレッシャー下にあることを示す。</li>      
+        <li>QueryNodeのキューのNQがnqInQueueThresholdより大きい場合、search&amp;queryのレートはキュー内のNQが無くなるまで徐々に下がっていく。</li>      
+        <li>キュー内のNQがnqInQueueThresholdを超えなくなるまで。クエリ要求のNQを1として考える。</li>      
+        <li>int, デフォルト無制限</li>      </td>
       <td>-1</td>
     </tr>
   </tbody>
@@ -2055,18 +2055,18 @@ summary: Learn how to configure quotaAndLimits for Milvus.
     </button></h2><table id="quotaAndLimits.limitReading.queueProtection.queueLatencyThreshold">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">説明</th>
+      <th class="width20">デフォルト値</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>
-        <li>queueLatencyThreshold indicated that the system was under backpressure for Search/Query path.</li>      
-        <li>If dql latency of queuing is greater than queueLatencyThreshold, search&query rates would gradually cool off</li>      
-        <li>until the latency of queuing no longer exceeds queueLatencyThreshold.</li>      
-        <li>The latency here refers to the averaged latency over a period of time.</li>      
-        <li>milliseconds, default no limit</li>      </td>
+        <li>queueLatencyThresholdは、システムがSearch/Queryパスのバックプレッシャー下にあることを示す。</li>      
+        <li>もしキューのdqlの待ち時間がqueueLatencyThresholdより大きければ、検索と問い合わせのレートは、キューの待ち時間がqueueLatencyThresholdを超えなくなるまで、徐々に下がっていく。</li>      
+        <li>キューイングの待ち時間がqueueLatencyThresholdを超えなくなるまで。</li>      
+        <li>ここでの待ち時間とは、ある期間にわたって平均化された待ち時間を指す。</li>      
+        <li>ミリ秒、デフォルトは無制限</li>      </td>
       <td>-1</td>
     </tr>
   </tbody>
@@ -2089,17 +2089,17 @@ summary: Learn how to configure quotaAndLimits for Milvus.
     </button></h2><table id="quotaAndLimits.limitReading.resultProtection.maxReadResultRate">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">説明</th>
+      <th class="width20">デフォルト値</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>
-        <li>maxReadResultRate indicated that the system was under backpressure for Search/Query path.</li>      
-        <li>If dql result rate is greater than maxReadResultRate, search&query rates would gradually cool off</li>      
-        <li>until the read result rate no longer exceeds maxReadResultRate.</li>      
-        <li>MB/s, default no limit</li>      </td>
+        <li>maxReadResultRateは、システムがSearch/Queryパスのバックプレッシャー下にあることを示す。</li>      
+        <li>もしdqlの結果レートがmaxReadResultRateより大きければ、search&amp;queryのレートはmaxReadResultRateを超えなくなるまで、徐々に下がっていく。</li>      
+        <li>がmaxReadResultRateを上回らなくなるまで、search&amp;queryレートは徐々に冷却される。</li>      
+        <li>MB/s、デフォルトは制限なし</li>      </td>
       <td>-1</td>
     </tr>
   </tbody>
@@ -2122,14 +2122,14 @@ summary: Learn how to configure quotaAndLimits for Milvus.
     </button></h2><table id="quotaAndLimits.limitReading.coolOffSpeed">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">説明</th>
+      <th class="width20">デフォルト値</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>
-        <li>colOffSpeed is the speed of search&query rates cool off.</li>      
+        <li>colOffSpeedはsearch&amp;queryレートのクールオフ速度。</li>      
         <li>(0, 1]</li>      </td>
       <td>0.9</td>
     </tr>

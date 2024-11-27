@@ -1,10 +1,10 @@
 ---
 id: scalar_index.md
 related_key: scalar_index
-summary: Scalar index in Milvus.
-title: Scalar Index
+summary: Milvusのスカラー指数。
+title: スカラーインデックス
 ---
-<h1 id="Scalar-Index" class="common-anchor-header">Scalar Index<button data-href="#Scalar-Index" class="anchor-icon" translate="no">
+<h1 id="Scalar-Index" class="common-anchor-header">スカラーインデックス<button data-href="#Scalar-Index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -19,8 +19,8 @@ title: Scalar Index
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Milvus supports filtered searches combining both scalar and vector fields. To enhance the efficiency of searches involving scalar fields, Milvus introduced scalar field indexing starting from version 2.1.0. This article provides an overview of scalar field indexing in Milvus, helping you understand its significance and implementation.</p>
-<h2 id="Overview" class="common-anchor-header">Overview<button data-href="#Overview" class="anchor-icon" translate="no">
+    </button></h1><p>Milvusはスカラーフィールドとベクトルフィールドの両方を組み合わせたフィルタリング検索をサポートしている。スカラーフィールドを含む検索の効率を高めるために、Milvusはバージョン2.1.0からスカラーフィールドインデックスを導入しました。本記事では、Milvusにおけるスカラーフィールドインデックスの概要について説明し、その意義と実装を理解していただきます。</p>
+<h2 id="Overview" class="common-anchor-header">概要<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -35,16 +35,14 @@ title: Scalar Index
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Once conducting vector similarity searches in Milvus, you can use logical operators to organize scalar fields into boolean expressions.</p>
-<p>When Milvus receives a search request with such a boolean expression, it parses the boolean expression into an abstract syntax tree (AST) to generate a physical plan for attribute filtering. Milvus then applies the physical plan in each segment to generate a <a href="/docs/bitset.md">bitset</a> as the filtering result and includes the result as a vector search parameter to narrow down the search scope. In this case, the speed of vector searches relies heavily on the speed of attribute filtering.</p>
+    </button></h2><p>Milvusでベクトル類似検索を行う場合、論理演算子を使ってスカラーフィールドをブーリアン式に整理することができます。</p>
+<p>Milvusはこのようなブーリアン式を含む検索要求を受け取ると、ブーリアン式を抽象構文木(AST)に解析し、属性フィルタリングのための物理計画を生成します。そして、Milvusは各セグメントで物理計画を適用して、フィルタリング結果として<a href="/docs/ja/bitset.md">ビットセットを</a>生成し、その結果をベクトル検索パラメータとして含めることで、検索範囲を絞り込む。この場合、ベクトル検索の速度は属性フィルタリングの速度に大きく依存する。</p>
 <p>
-  <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.5.x/assets/scalar_index.png" alt="Attribute filtering in a segment" class="doc-image" id="attribute-filtering-in-a-segment" />
-    <span>Attribute filtering in a segment</span>
-  </span>
-</p>
-<p>Scalar field indexing is a way of ensuring the speed of attribute filtering by sorting scalar field values in a particular way to accelerate information retrieval.</p>
-<h2 id="Scalar-field-indexing-algorithms" class="common-anchor-header">Scalar field indexing algorithms<button data-href="#Scalar-field-indexing-algorithms" class="anchor-icon" translate="no">
+  
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/scalar_index.png" alt="Attribute filtering in a segment" class="doc-image" id="attribute-filtering-in-a-segment" />
+   </span> <span class="img-wrapper"> <span>セグメント内の属性フィルタリング</span> </span></p>
+<p>スカラー・フィールド・インデックスとは、スカラー・フィールドの値を特定の方法で並べ替えることで、属性フィルタリングの速度を確保し、情報検索を高速化する方法である。</p>
+<h2 id="Scalar-field-indexing-algorithms" class="common-anchor-header">スカラー・フィールド・インデックスのアルゴリズム<button data-href="#Scalar-field-indexing-algorithms" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -59,41 +57,39 @@ title: Scalar Index
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus aims to achieve low memory usage, high filtering efficiency, and short loading time with its scalar field indexing algorithms. These algorithms are categorized into two main types: <a href="#auto-indexing">auto indexing</a> and <a href="#inverted-indexing">inverted indexing</a>.</p>
-<h3 id="Auto-indexing" class="common-anchor-header">Auto indexing</h3><p>Milvus automatically creates an auto index for a scalar field based on its data type, without requiring manual intervention. Auto indexing is suitable for prefix match queries and frequent retrieval scenarios.</p>
-<p>The following table lists the data types that Milvus supports and their corresponding auto indexing algorithms.</p>
+    </button></h2><p>Milvusはスカラーフィールドインデキシングアルゴリズムにより、低いメモリ使用量、高いフィルタリング効率、短いロード時間の達成を目指している。これらのアルゴリズムは<a href="#auto-indexing">オートインデックスと</a> <a href="#inverted-indexing">インバーテッドインデックスの</a>2種類に大別される。</p>
+<h3 id="Auto-indexing" class="common-anchor-header">オートインデックス</h3><p>Milvusは、データ型に基づいたスカラーフィールドのオートインデックスを自動的に作成します。オートインデックスは前方一致クエリや頻繁な検索シナリオに適しています。</p>
+<p>以下の表は、Milvusがサポートするデータタイプとそれに対応するオートインデックスのアルゴリズムの一覧です。</p>
 <table>
 <thead>
-<tr><th>Data type</th><th>Auto indexing algorithm</th></tr>
+<tr><th>データタイプ</th><th>オートインデキシングアルゴリズム</th></tr>
 </thead>
 <tbody>
-<tr><td>VARCHAR</td><td>Inverted index</td></tr>
-<tr><td>INT8</td><td>Inverted index</td></tr>
-<tr><td>INT16</td><td>Inverted index</td></tr>
-<tr><td>INT32</td><td>Inverted index</td></tr>
-<tr><td>INT64</td><td>Inverted index</td></tr>
-<tr><td>FLOAT</td><td>Inverted index</td></tr>
-<tr><td>DOUBLE</td><td>Inverted index</td></tr>
+<tr><td>VARCHAR</td><td>転置インデックス</td></tr>
+<tr><td>INT8</td><td>転置インデックス</td></tr>
+<tr><td>INT16</td><td>転置インデックス</td></tr>
+<tr><td>INT32</td><td>転置インデックス</td></tr>
+<tr><td>INT64</td><td>転置インデックス</td></tr>
+<tr><td>FLOAT</td><td>転置インデックス</td></tr>
+<tr><td>DOUBLE</td><td>転置インデックス</td></tr>
 </tbody>
 </table>
-<h3 id="Inverted-indexing" class="common-anchor-header">Inverted indexing</h3><p>Inverted indexing offers a flexible way to create an index for a scalar field by manually specifying index parameters. This method works well for various scenarios, including point queries, pattern match queries, full-text searches, JSON searches, Boolean searches, and even prefix match queries.</p>
-<p>The inverted indexes implemented in Milvus are powered by <a href="https://github.com/quickwit-oss/tantivy">Tantivy</a>, a full-text search engine library. Tantivy ensures that inverted indexing in Milvus is both efficient and fast.</p>
-<p>An inverted index has two main components: a term dictionary and an inverted list. The term dictionary includes all tokenized words sorted alphabetically, while the inverted list contains the list of documents where each word appears. This setup makes point queries and range queries much faster and more efficient than brute-force searches.</p>
+<h3 id="Inverted-indexing" class="common-anchor-header">転置インデックス</h3><p>転置インデックスでは、インデックスパラメータを手動で指定してスカラフィールドのインデックスを作成する柔軟な方法を提供します。この方法は、ポイントクエリ、パターンマッチクエリ、フルテキスト検索、JSON 検索、ブール検索、さらにはプレフィックスマッチクエリなど、さまざまなシナリオでうまく機能します。</p>
+<p>Milvusに実装されている転置インデックスは、全文検索エンジンライブラリである<a href="https://github.com/quickwit-oss/tantivy">Tantivyを</a>利用しています。Tantivyを利用することで、Milvusにおける転置インデックスの効率性と高速性を実現しています。</p>
+<p>転置インデックスには、用語辞書と転置リストという2つの主要な構成要素があります。用語辞書にはアルファベット順に並べられたトークン化されたすべての単語が含まれ、転置リストには各単語が出現する文書のリストが含まれる。このセットアップにより、ポイント・クエリや範囲クエリは、総当たり検索よりもはるかに高速で効率的になります。</p>
 <p>
-  <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.5.x/assets/scalar_index_inverted.png" alt="Inverted index diagram" class="doc-image" id="inverted-index-diagram" />
-    <span>Inverted index diagram</span>
-  </span>
-</p>
-<p>The advantages of using an inverted index are particularly evident in the following operations:</p>
+  
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/scalar_index_inverted.png" alt="Inverted index diagram" class="doc-image" id="inverted-index-diagram" />
+   </span> <span class="img-wrapper"> <span>転置インデックス図</span> </span></p>
+<p>転置インデックスを使用する利点は、特に以下の操作において明らかである：</p>
 <ul>
-<li><strong>Point query</strong>: For example, when searching for documents containing the word <strong>Milvus</strong>, the process begins by checking if <strong>Milvus</strong> is present in the term dictionary. If it is not found, no documents contain the word. However, if it is found, the inverted list associated with <strong>Milvus</strong> is retrieved, indicating the documents that contain the word. This method is far more efficient than a brute-force search through a million documents, as the sorted term dictionary significantly reduces the time complexity of finding the word <strong>Milvus</strong>.</li>
-<li><strong>Range query</strong>: The efficiency of range queries, such as finding documents with words alphabetically greater than <strong>very</strong>, is also enhanced by the sorted term dictionary. This approach is more efficient than a brute-force search, providing quicker and more accurate results.</li>
+<li><strong>ポイント・クエリー</strong>：たとえば、<strong>Milvusという</strong>単語を含む文書を検索する場合、まず、<strong>Milvusが</strong>用語辞書に存在するかどうかをチェックする。見つからなければ、その単語を含む文書はない。しかし、見つかった場合は、<strong>Milvusに</strong>関連付けられた転置リストが検索され、その単語を含む文書が示される。この方法は、並べ替えられた用語辞書によって<strong>Milvusという</strong>単語を検索する時間の複雑さが大幅に軽減されるため、100万件の文書を総当たりで検索するよりもはるかに効率的である。</li>
+<li><strong>範囲クエリ</strong>：アルファベット順に<strong>veryより</strong>大きい単語を含む文書を検索するような範囲クエリの効率も、ソートされた用語辞書によって向上する。このアプローチは、総当り検索よりも効率的であり、より迅速で正確な結果を提供する。</li>
 </ul>
-<h3 id="Test-results" class="common-anchor-header">Test results</h3><p>To demonstrate the performance improvements provided by scalar indexes in Milvus, an experiment was conducted comparing the performance of several expressions using inverted indexing and brute-force search on raw data.</p>
-<p>The experiment involved testing various expressions under two conditions: with an inverted index and with a brute-force search. To ensure fairness, the same data distribution was maintained across tests, using the same collection each time. Before each test, the collection was released, and the index was dropped and rebuilt. Additionally, a warm query was performed before each test to minimize the impact of cold and hot data, and each query was executed multiple times to ensure accuracy.</p>
-<p>For a dataset of <strong>1 million</strong> records, using an <strong>inverted index</strong> can provide up to a <strong>30x</strong> performance improvement for point queries. The performance gains can be even more significant for larger datasets.</p>
-<h2 id="Performance-recommandations" class="common-anchor-header">Performance recommandations<button data-href="#Performance-recommandations" class="anchor-icon" translate="no">
+<h3 id="Test-results" class="common-anchor-header">テスト結果</h3><p>Milvusにおけるスカラーインデックスによる性能向上を実証するため、生データに対して転置インデックスと総当たり検索を用いたいくつかの式の性能を比較する実験が行われた。</p>
+<p>この実験では、転置インデックスを使用した場合と総当たり検索を使用した場合の2つの条件で様々な式をテストした。公平性を確保するため、毎回同じコレクションを使用し、テスト間で同じデータ配分を維持した。各テストの前に、コレクションを解放し、インデックスを削除して再構築した。さらに、コールドデータとホットデータの影響を最小化するため、各テストの前にウォームクエリを実行し、各クエリを複数回実行して精度を確保した。</p>
+<p><strong>100万</strong>レコードのデータセットの場合、<strong>転置インデックスを</strong>使用することで、ポイントクエリで最大<strong>30倍の</strong>性能向上が得られる。より大きなデータセットの場合、パフォーマンス向上はさらに大きくなる可能性がある。</p>
+<h2 id="Performance-recommandations" class="common-anchor-header">パフォーマンスに関する推奨事項<button data-href="#Performance-recommandations" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -108,41 +104,41 @@ title: Scalar Index
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>To take full advantage of Milvus’ capability in scalar field indexing and unleash its power in vector similarity searches, you may need a model to estimate the size of memory required based on the data you have.</p>
-<p>The following tables list the estimation functions for all the data types that Milvus supports.</p>
+    </button></h2><p>Milvusのスカラーフィールドインデックスの能力をフルに活用し、ベクトル類似検索でその力を発揮させるためには、データに基づいて必要なメモリサイズを見積もるモデルが必要かもしれません。</p>
+<p>以下の表はMilvusがサポートするすべてのデータタイプの推定関数のリストです。</p>
 <ul>
-<li><p>Numeric fields</p>
+<li><p>数値フィールド</p>
 <table>
 <thead>
-<tr><th>Data type</th><th>Memory estimation function (MB)</th></tr>
+<tr><th>データ型</th><th>メモリ推定関数 (MB)</th></tr>
 </thead>
 <tbody>
-<tr><td>INT8</td><td>numOfRows * <strong>12</strong> / 1024 / 1024</td></tr>
-<tr><td>INT16</td><td>numOfRows * <strong>12</strong> / 1024 / 1024</td></tr>
-<tr><td>INT32</td><td>numOfRows * <strong>12</strong> / 1024 / 1024</td></tr>
-<tr><td>INT64</td><td>numOfRows * <strong>24</strong> / 1024 / 1024</td></tr>
-<tr><td>FLOAT32</td><td>numOfRows * <strong>12</strong> / 1024 / 1024</td></tr>
-<tr><td>DOUBLE</td><td>numOfRows * <strong>24</strong> / 1024 / 1024</td></tr>
+<tr><td>INT8</td><td>行数 *<strong>12</strong>/ 1024 / 1024</td></tr>
+<tr><td>INT16</td><td>行数 *<strong>12</strong>/ 1024 / 1024</td></tr>
+<tr><td>INT32</td><td>行数 *<strong>12</strong>/ 1024 / 1024</td></tr>
+<tr><td>INT64</td><td>行数 *<strong>24</strong>/ 1024 / 1024</td></tr>
+<tr><td>FLOAT32</td><td>行数 *<strong>12</strong>/ 1024 / 1024</td></tr>
+<tr><td>DOUBLE</td><td>行数 *<strong>24</strong>/ 1024 / 1024</td></tr>
 </tbody>
 </table>
 </li>
-<li><p>String fields</p>
+<li><p>文字列フィールド</p>
 <table>
 <thead>
-<tr><th>String length</th><th>Memory estimation function (MB)</th></tr>
+<tr><th>文字列の長さ</th><th>メモリ推定関数 (MB)</th></tr>
 </thead>
 <tbody>
-<tr><td>(0, 8]</td><td>numOfRows * <strong>128</strong> / 1024 / 1024</td></tr>
-<tr><td>(8, 16]</td><td>numOfRows * <strong>144</strong> / 1024 / 1024</td></tr>
-<tr><td>(16, 32]</td><td>numOfRows * <strong>160</strong> / 1024 / 1024</td></tr>
-<tr><td>(32, 64]</td><td>numOfRows * <strong>192</strong> / 1024 / 1024</td></tr>
-<tr><td>(64, 128]</td><td>numOfRows * <strong>256</strong> / 1024 / 1024</td></tr>
-<tr><td>(128, 65535]</td><td>numOfRows * <strong>strLen * 1.5</strong> / 1024 / 1024</td></tr>
+<tr><td>(0, 8]</td><td>行数 *<strong>128</strong>/ 1024 / 1024</td></tr>
+<tr><td>(8, 16]</td><td>行数 *<strong>144</strong>/ 1024 / 1024</td></tr>
+<tr><td>(16, 32]</td><td>行数 *<strong>160</strong>/ 1024 / 1024</td></tr>
+<tr><td>(32, 64]</td><td>行数 *<strong>192</strong>/ 1024 / 1024</td></tr>
+<tr><td>(64, 128]</td><td>行数 *<strong>256</strong>/ 1024 / 1024</td></tr>
+<tr><td>(128, 65535]</td><td>行数 *<strong>strLen * 1.5</strong>/ 1024 / 1024</td></tr>
 </tbody>
 </table>
 </li>
 </ul>
-<h2 id="Whats-next" class="common-anchor-header">What’s next<button data-href="#Whats-next" class="anchor-icon" translate="no">
+<h2 id="Whats-next" class="common-anchor-header">次は<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -158,12 +154,12 @@ title: Scalar Index
         ></path>
       </svg>
     </button></h2><ul>
-<li><p>To index a scalar field, read <a href="/docs/index-scalar-fields.md">Build an Index on Scalars</a>.</p></li>
-<li><p>To learn more about the related terms and rules mentioned above, read</p>
+<li><p>スカラー・フィールドにインデックスを作成するには、<a href="/docs/ja/index-scalar-fields.md">スカラーにインデックスを作成するを</a>参照してください。</p></li>
+<li><p>上記の関連用語とルールについては、以下を参照。</p>
 <ul>
-<li><a href="/docs/bitset.md">Bitset</a></li>
-<li><a href="/docs/multi-vector-search.md">Hybrid search</a></li>
-<li><a href="/docs/boolean.md">Boolean expression rules</a></li>
-<li><a href="/docs/schema.md#Supported-data-type">Supported data types</a></li>
+<li><a href="/docs/ja/bitset.md">ビットセット</a></li>
+<li><a href="/docs/ja/multi-vector-search.md">ハイブリッド検索</a></li>
+<li><a href="/docs/ja/boolean.md">ブール式ルール</a></li>
+<li><a href="/docs/ja/schema.md#Supported-data-type">サポートされるデータ型</a></li>
 </ul></li>
 </ul>

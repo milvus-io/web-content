@@ -1,9 +1,9 @@
 ---
 id: operational_faq.md
-summary: Find answers to commonly asked questions about operations in Milvus.
-title: Operational FAQ
+summary: Milvusでの業務に関するよくある質問と回答をご覧いただけます。
+title: 運用に関するFAQ
 ---
-<h1 id="Operational-FAQ" class="common-anchor-header">Operational FAQ<button data-href="#Operational-FAQ" class="anchor-icon" translate="no">
+<h1 id="Operational-FAQ" class="common-anchor-header">運用に関するFAQ<button data-href="#Operational-FAQ" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -18,80 +18,78 @@ title: Operational FAQ
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><h4 id="What-if-I-failed-to-pull-the-Milvus-Docker-image-from-Docker-Hub" class="common-anchor-header">What if I failed to pull the Milvus Docker image from Docker Hub?</h4><p>If you failed to pull the Milvus Docker image from Docker Hub, try adding other registry mirrors.</p>
-<p>Users from Mainland China can add the URL “https://registry.docker-cn.com” to the registry-mirrors array in <strong>/etc.docker/daemon.json</strong>.</p>
+    </button></h1><h4 id="What-if-I-failed-to-pull-the-Milvus-Docker-image-from-Docker-Hub" class="common-anchor-header">Docker HubからのMilvus Dockerイメージのpullに失敗した場合は？</h4><p>Docker HubからのMilvus Dockerイメージの引き抜きに失敗した場合は、他のレジストリミラーを追加してみてください。</p>
+<p>中国本土のユーザは、<strong>/etc.docker/daemon.jsonの</strong>registry-mirrors配列に "https://registry.docker-cn.com "というURLを追加することができます。</p>
 <pre><code translate="no">{
   <span class="hljs-string">&quot;registry-mirrors&quot;</span>: [<span class="hljs-string">&quot;https://registry.docker-cn.com&quot;</span>]
 }
 <button class="copy-code-btn"></button></code></pre>
-<h4 id="Is-Docker-the-only-way-to-install-and-run-Milvus" class="common-anchor-header">Is Docker the only way to install and run Milvus?</h4><p>Docker is an efficient way to deploy Milvus, but not the only way. You can also deploy Milvus from source code. This requires Ubuntu (18.04 or higher) or CentOS (7 or higher). See <a href="https://github.com/milvus-io/milvus#build-milvus-from-source-code">Building Milvus from Source Code</a> for more information.</p>
-<h4 id="What-are-the-main-factors-affecting-recall" class="common-anchor-header">What are the main factors affecting recall?</h4><p>Recall is affected mainly by index type and search parameters.</p>
-<p>For FLAT index, Milvus takes an exhaustive scan within a collection, with a 100% return.</p>
-<p>For IVF indexes, the nprobe parameter determines the scope of a search within the collection. Increasing nprobe increases the proportion of vectors searched and recall, but diminishes query performance.</p>
-<p>For HNSW index, the ef parameter determines the breadth of the graph search. Increasing ef increases the number of points searched on the graph and recall, but diminishes query performance.</p>
-<p>For more information, see <a href="https://www.zilliz.com/blog/Accelerating-Similarity-Search-on-Really-Big-Data-with-Vector-Indexing">Vector Indexing</a>.</p>
-<h4 id="Why-did-my-changes-to-the-configuration-files-not-take-effect" class="common-anchor-header">Why did my changes to the configuration files not take effect?</h4><p>Milvus does not support modification to configuration files during runtime. You must restart Milvus Docker for configuration file changes to take effect.</p>
-<h4 id="How-do-I-know-if-Milvus-has-started-successfully" class="common-anchor-header">How do I know if Milvus has started successfully?</h4><p>If Milvus is started using Docker Compose, run <code translate="no">docker ps</code> to observe how many Docker containers are running and check if Milvus services started correctly.</p>
-<p>For Milvus standalone, you should be able to observe at least three running Docker containers, one being the Milvus service and the other two being etcd management and storage service. For more information, see <a href="/docs/install_standalone-docker.md">Installing Milvus Standalone</a>.</p>
-<h4 id="Why-is-the-time-in-the-log-files-different-from-the-system-time" class="common-anchor-header">Why is the time in the log files different from the system time?</h4><p>The time difference is usually due to the fact that the host machine does not use Coordinated Universal Time (UTC).</p>
-<p>The log files inside the Docker image use UTC by default. If your host machine does not use UTC, this issue may occur.</p>
-<h4 id="How-do-I-know-if-my-CPU-supports-Milvus" class="common-anchor-header">How do I know if my CPU supports Milvus?</h4><p>Milvus’ computing operations depend on CPU’s support for SIMD (Single Instruction, Multiple Data) extension instruction set. Whether your CPU supports SIMD extension instruction set is crucial to index building and vector similarity search within Milvus. Ensure that your CPU supports at least one of the following SIMD instruction sets:</p>
+<h4 id="Is-Docker-the-only-way-to-install-and-run-Milvus" class="common-anchor-header">Milvusをインストールし、実行する唯一の方法はDockerですか？</h4><p>DockerはMilvusの効率的なデプロイ方法ですが、唯一の方法ではありません。ソースコードからMilvusをデプロイすることもできます。これにはUbuntu (18.04以上) または CentOS (7以上) が必要です。詳しくは<a href="https://github.com/milvus-io/milvus#build-milvus-from-source-code">Milvusをソースコードからビルドするを</a>ご覧ください。</p>
+<h4 id="What-are-the-main-factors-affecting-recall" class="common-anchor-header">再現率に影響を与える主な要因は何ですか?</h4><p>検索結果は主にインデックスタイプと検索パラメータに影響されます。</p>
+<p>FLATインデックスの場合、Milvusはコレクション内を網羅的にスキャンし、100%の検索結果を返します。</p>
+<p>IVFインデックスでは、nprobeパラメータがコレクション内の検索範囲を決定します。nprobeを増加させると、検索されるベクトルの割合が増加し、リコールが増加しますが、クエリ性能は低下します。</p>
+<p>HNSWインデックスでは、efパラメータがグラフ検索の幅を決定する。efを増加させると、グラフ上で検索されるポイント数が増加し、リコールも増加しますが、クエリ性能は低下します。</p>
+<p>詳細については、<a href="https://www.zilliz.com/blog/Accelerating-Similarity-Search-on-Really-Big-Data-with-Vector-Indexing">ベクトル・インデックスを</a>参照してください。</p>
+<h4 id="Why-did-my-changes-to-the-configuration-files-not-take-effect" class="common-anchor-header">設定ファイルを変更しても反映されません。</h4><p>Milvusは実行中の設定ファイルの変更をサポートしていません。設定ファイルの変更を有効にするには、Milvus Dockerを再起動する必要があります。</p>
+<h4 id="How-do-I-know-if-Milvus-has-started-successfully" class="common-anchor-header">Milvusが正常に起動したかどうかはどのように確認できますか？</h4><p>Docker Composeを使用してMilvusを起動した場合、<code translate="no">docker ps</code> 、実行中のDockerコンテナ数を確認し、Milvusのサービスが正常に起動したかどうかを確認してください。</p>
+<p>Milvusスタンドアロンの場合、少なくとも3つのDockerコンテナが動作していることが確認できるはずです。1つはMilvusサービス、残りの2つはetcd管理とストレージサービスです。詳細については、<a href="/docs/ja/install_standalone-docker.md">Milvusスタンドアロンのインストールを</a>参照してください。</p>
+<h4 id="Why-is-the-time-in-the-log-files-different-from-the-system-time" class="common-anchor-header">ログファイルの時刻がシステム時刻と異なるのはなぜですか？</h4><p>時間の違いは通常、ホストマシンが協定世界時(UTC)を使用していないことが原因です。</p>
+<p>Dockerイメージ内のログファイルはデフォルトでUTCを使用しています。ホストマシンがUTCを使用していない場合、この問題が発生する可能性があります。</p>
+<h4 id="How-do-I-know-if-my-CPU-supports-Milvus" class="common-anchor-header">自分のCPUがMilvusに対応しているかどうかは、どうすれば分かりますか？</h4><p>Milvusの演算処理は、CPUがSIMD(Single Instruction, Multiple Data)拡張命令セットをサポートしているかどうかに依存します。お使いのCPUがSIMD拡張命令セットに対応しているかどうかは、Milvusのインデックス構築およびベクトル類似検索において非常に重要です。CPUが以下のSIMD命令セットの少なくとも1つをサポートしていることを確認してください：</p>
 <ul>
 <li>SSE4.2</li>
 <li>AVX</li>
 <li>AVX2</li>
 <li>AVX512</li>
 </ul>
-<p>Run the lscpu command to check if your CPU supports the SIMD instruction sets mentioned above:</p>
+<p>lscpuコマンドを実行し、CPUが上記のSIMD命令セットをサポートしているか確認してください：</p>
 <pre><code translate="no">$ lscpu | grep -e sse4_2 -e avx -e avx2 -e avx512
 <button class="copy-code-btn"></button></code></pre>
-<h4 id="Why-does-Milvus-return-illegal-instruction-during-startup" class="common-anchor-header">Why does Milvus return <code translate="no">illegal instruction</code> during startup?</h4><p>Milvus requires your CPU to support a SIMD instruction set: SSE4.2, AVX, AVX2, or AVX512. CPU must support at least one of these to ensure that Milvus operates normally. An <code translate="no">illegal instruction</code> error returned during startup suggests that your CPU does not support any of the above four instruction sets.</p>
-<p>See <a href="/docs/prerequisite-docker.md">CPU’s support for SIMD Instruction Set</a>.</p>
-<h4 id="Can-I-install-Milvus-on-Windows" class="common-anchor-header">Can I install Milvus on Windows?</h4><p>Yes. You can install Milvus on Windows either by compiling from source code or from a binary package.</p>
-<p>See <a href="https://milvus.io/blog/2021-11-19-run-milvus-2.0-on-windows.md">Run Milvus on Windows</a> to learn how to install Milvus on Windows.</p>
-<h4 id="I-got-an-error-when-installing-pymilvus-on-Windows-What-shall-I-do" class="common-anchor-header">I got an error when installing pymilvus on Windows. What shall I do?</h4><p>It is not recommended to install PyMilvus on Windows. But if you have to install PyMilvus on Windows but got an error, try installing it in a <a href="https://docs.conda.io/projects/conda/en/latest/user-guide/install/index.html">Conda</a> environment. See <a href="/docs/install-pymilvus.md">Install Milvus SDK</a> for more information about how to install PyMilvus in the Conda environment.</p>
-<h4 id="Can-I-deploy-Milvus-when-disconnected-from-the-Internet" class="common-anchor-header">Can I deploy Milvus when disconnected from the Internet?</h4><p>Yes. You can install Milvus in an offline environment. See <a href="/docs/install_offline-helm.md">Install Milvus Offline</a> for more information.</p>
-<h4 id="Where-can-I-find-the-logs-generated-by-Milvus" class="common-anchor-header">Where can I find the logs generated by Milvus?</h4><p>The Milvus log is printed to stout (standard output) and stderr (standard error) by default, however we highly recommend redirecting your log to a persistent volume in production. To do so, update <code translate="no">log.file.rootPath</code> in <strong>milvus.yaml</strong>. And if you deploy Milvus with <code translate="no">milvus-helm</code> chart, you also need to enable log persistence first via <code translate="no">--set log.persistence.enabled=true</code>.</p>
-<p>If you didn’t change the config, using kubectl logs &lt;pod-name&gt; or docker logs CONTAINER can also help you to find the log.</p>
-<h4 id="Can-I-create-index-for-a-segment-before-inserting-data-into-it" class="common-anchor-header">Can I create index for a segment before inserting data into it?</h4><p>Yes, you can. But we recommend inserting data in batches, each of which should not exceed 256 MB, before indexing each segment.</p>
-<h4 id="Can-I-share-an-etcd-instance-among-multiple-Milvus-instances" class="common-anchor-header">Can I share an etcd instance among multiple Milvus instances?</h4><p>Yes, you can share an etcd instance among multiple Milvus instances. To do so, you need to change <code translate="no">etcd.rootPath</code> to a separate value for each Milvus instance in the configuration files of each before starting them.</p>
-<h4 id="Can-I-share-a-Pulsar-instance-among-multiple-Milvus-instances" class="common-anchor-header">Can I share a Pulsar instance among multiple Milvus instances?</h4><p>Yes, you can share a Pulsar instance among multiple Milvus instances. To do so, you can</p>
+<h4 id="Why-does-Milvus-return-illegal-instruction-during-startup" class="common-anchor-header">Milvusが起動中に<code translate="no">illegal instruction</code> 。</h4><p>MilvusはCPUがSIMD命令セットをサポートしている必要があります：SSE4.2、AVX、AVX2、またはAVX512です。Milvusが正常に動作するためには、CPUがこれらのうち少なくとも1つをサポートしている必要があります。起動時に返される<code translate="no">illegal instruction</code> のエラーは、CPUが上記4つの命令セットのいずれにも対応していないことを示唆しています。</p>
+<p><a href="/docs/ja/prerequisite-docker.md">CPUのSIMD命令セット対応</a>状況をご覧ください。</p>
+<h4 id="Can-I-install-Milvus-on-Windows" class="common-anchor-header">MilvusをWindowsにインストールできますか？</h4><p>MilvusをWindowsにインストールするには、ソースコードからコンパイルする方法とバイナリパッケージからコンパイルする方法があります。</p>
+<p>WindowsにMilvusをインストールする方法については「<a href="https://milvus.io/blog/2021-11-19-run-milvus-2.0-on-windows.md">WindowsでMilvusを動かす</a>」を参照してください。</p>
+<h4 id="I-got-an-error-when-installing-pymilvus-on-Windows-What-shall-I-do" class="common-anchor-header">Windowsにpymilvusをインストールする際にエラーが発生しました。どうすればよいですか？</h4><p>WindowsにPyMilvusをインストールすることは推奨されません。しかし、WindowsにPyMilvusをインストールしなければならないのにエラーが出る場合は、<a href="https://docs.conda.io/projects/conda/en/latest/user-guide/install/index.html">Conda</a>環境にインストールしてみてください。Conda環境にPyMilvusをインストールする方法の詳細については、<a href="/docs/ja/install-pymilvus.md">Milvus SDKのインストールを</a>参照してください。</p>
+<h4 id="Can-I-deploy-Milvus-when-disconnected-from-the-Internet" class="common-anchor-header">Milvusはインターネットに接続していない状態でもデプロイできますか？</h4><p>Milvusはオフライン環境でインストールすることができます。詳細は<a href="/docs/ja/install_offline-helm.md">Milvusのオフラインインストールを</a>参照してください。</p>
+<h4 id="Where-can-I-find-the-logs-generated-by-Milvus" class="common-anchor-header">Milvusが生成したログはどこにありますか?</h4><p>Milvusのログはデフォルトでstout(標準出力)とstderr(標準エラー)に出力されますが、本番環境ではログを永続ボリュームにリダイレクトすることを強く推奨します。そのためには、<strong>milvus.yamlの</strong> <code translate="no">log.file.rootPath</code> 。また、milvusを<code translate="no">milvus-helm</code> チャートでデプロイする場合、<code translate="no">--set log.persistence.enabled=true</code> を使ってログの永続化を有効にする必要があります。</p>
+<p>設定を変更していない場合は、kubectl logs &lt;pod-name&gt;やdocker logs CONTAINERを使ってもログを見つけることができます。</p>
+<h4 id="Can-I-create-index-for-a-segment-before-inserting-data-into-it" class="common-anchor-header">セグメントにデータを挿入する前にインデックスを作成できますか？</h4><p>はい、できます。しかし、各セグメントにインデックスを作成する前に、256MBを超えない範囲でまとめてデータを挿入することをお勧めします。</p>
+<h4 id="Can-I-share-an-etcd-instance-among-multiple-Milvus-instances" class="common-anchor-header">複数のMilvusインスタンス間でetcdインスタンスを共有できますか？</h4><p>複数のMilvusインスタンス間でetcdインスタンスを共有することは可能です。そのためには、Milvusインスタンスを起動する前に、各Milvusインスタンスの設定ファイルで<code translate="no">etcd.rootPath</code> を別々の値に変更する必要があります。</p>
+<h4 id="Can-I-share-a-Pulsar-instance-among-multiple-Milvus-instances" class="common-anchor-header">複数のMilvusインスタンス間でPulsarインスタンスを共有できますか？</h4><p>はい、複数のMilvusインスタンス間でPulsarインスタンスを共有することができます。そのためには</p>
 <ul>
-<li>If multi-tenancy is enabled on your Pulsar instance, consider allocating a separate tenant or namespace for each Milvus instance. To do so, you need to change <code translate="no">pulsar.tenant</code> or <code translate="no">pulsar.namespace</code> in the configuration files of your Milvus instances to a unique value for each before starting them.</li>
-<li>If you do not plan on enabling multi-tenancy on your Pulsar instance, consider changing <code translate="no">msgChannel.chanNamePrefix.cluster</code> in the configuration files of your Milvus instances to a unique value for each before starting them.</li>
+<li>Pulsarインスタンスでマルチ・テナントが有効になっている場合は、Milvusインスタンスごとに個別のテナントまたはネームスペースを割り当てることを検討してください。そのためには、Milvusインスタンスを起動する前に、Milvusインスタンスの設定ファイル内の<code translate="no">pulsar.tenant</code> または<code translate="no">pulsar.namespace</code> をそれぞれ固有の値に変更する必要があります。</li>
+<li>Pulsarインスタンスでマルチテナントを有効にする予定がない場合は、Milvusインスタンスを起動する前に、Milvusインスタンスの構成ファイル内の<code translate="no">msgChannel.chanNamePrefix.cluster</code> 。</li>
 </ul>
-<h4 id="Can-I-share-a-MinIO-instance-among-multiple-Milvus-instances" class="common-anchor-header">Can I share a MinIO instance among multiple Milvus instances?</h4><p>Yes, you can share a MinIO instance among multiple Milvus instances. To do so, you need to change <code translate="no">minio.rootPath</code> to a unique value for each Milvus instance in the configuration files of each before starting them.</p>
-<h4 id="How-do-I-handle-the-error-message-pymilvusexceptionsConnectionConfigException-ConnectionConfigException-code1-messageIllegal-uri-exampledb-expected-form-httpsuserpwdexamplecom12345" class="common-anchor-header">How do I handle the error message <code translate="no">pymilvus.exceptions.ConnectionConfigException: &lt;ConnectionConfigException: (code=1, message=Illegal uri: [example.db], expected form 'https://user:pwd@example.com:12345')&gt;</code>?</h4><p>The error message <code translate="no">Illegal uri [example.db]</code> indicates that you are trying to connect to Milvus Lite using an earlier version of PyMilvus that does not support this connection type. To resolve this issue, upgrade your PyMilvus installation to at least version 2.4.2, which includes support for connecting to Milvus Lite.</p>
-<p>You can upgrade PyMilvus using the following command:</p>
+<h4 id="Can-I-share-a-MinIO-instance-among-multiple-Milvus-instances" class="common-anchor-header">複数のMilvusインスタンス間でMinIOインスタンスを共有できますか？</h4><p>はい、複数のMilvusインスタンス間でMinIOインスタンスを共有することができます。そのためには、Milvusインスタンスを起動する前に、それぞれのMilvusインスタンスの設定ファイルで、<code translate="no">minio.rootPath</code> を一意な値に変更する必要があります。</p>
+<h4 id="How-do-I-handle-the-error-message-pymilvusexceptionsConnectionConfigException-ConnectionConfigException-code1-messageIllegal-uri-exampledb-expected-form-httpsuserpwdexamplecom12345" class="common-anchor-header">エラーメッセージ<code translate="no">pymilvus.exceptions.ConnectionConfigException: &lt;ConnectionConfigException: (code=1, message=Illegal uri: [example.db], expected form 'https://user:pwd@example.com:12345')&gt;</code> の対処方法は?</h4><p>エラーメッセージ<code translate="no">Illegal uri [example.db]</code> は、この接続タイプをサポートしていない以前のバージョンのPyMilvusを使ってMilvus Liteに接続しようとしていることを示しています。この問題を解決するには、インストールしたPyMilvusを、Milvus Liteへの接続がサポートされているバージョン2.4.2以上にアップグレードしてください。</p>
+<p>PyMilvus は以下のコマンドでアップグレードできます：</p>
 <pre><code translate="no" class="language-shell">pip install pymilvus&gt;=2.4.2
 <button class="copy-code-btn"></button></code></pre>
-<h4 id="Why-am-I-getting-fewer-results-than-the-limit-I-set-in-my-searchquery" class="common-anchor-header">Why am I getting fewer results than the <code translate="no">limit</code> I set in my search/query?</h4><p>There are several reasons why you might receive fewer results than the <code translate="no">limit</code> you specified:</p>
+<h4 id="Why-am-I-getting-fewer-results-than-the-limit-I-set-in-my-searchquery" class="common-anchor-header">検索/クエリで設定した<code translate="no">limit</code> より少ない結果しか得られないのはなぜですか？</h4><p>指定した<code translate="no">limit</code> より少ない結果しか得られない理由はいくつかあります：</p>
 <ul>
-<li><p><strong>Limited Data</strong>: The collection might not have enough entities to fulfill the limit you requested. If the total number of entities in the collection is less than the limit, you will naturally receive fewer results.</p></li>
-<li><p><strong>Duplicate Primary Keys</strong>: Milvus prioritizes specific entities when encountering duplicate primary keys during a search. This behavior varies based on the search type:</p></li>
-<li><p><strong>Query (Exact Match)</strong>: Milvus selects the latest entity with the matching PK.
-ANN Search: Milvus selects the entity with the highest similarity score, even if entities share the same PK.
-This prioritization can result in fewer unique results than the limit if your collection has many duplicate primary keys.</p></li>
-<li><p><strong>Insufficient Matches</strong>: Your search filtering expressions might be too strict, resulting in fewer entities meeting the similarity threshold. If the conditions set for the search are too restrictive, not enough entities will match, leading to fewer results than expected.</p></li>
+<li><p><strong>データが限られている</strong>：限られたデータ： コレクションには、要求した制限を満たすのに十分なエンティティがない可能性があります。コレクション内のエンティティの総数が制限を下回ると、当然、結果の数も少なくなります。</p></li>
+<li><p><strong>主キーの重複</strong>：Milvusは、検索中に主キーの重複に遭遇した場合、特定のエンティティを優先します。この動作は検索タイプによって異なります：</p></li>
+<li><p><strong>クエリ (完全一致)：</strong>ANN検索：Milvusは、同じPKを持つエンティティであっても、最も高い類似度スコアを持つエンティティを選択します。 この優先順位付けにより、重複する主キーが多いコレクションでは、ユニークな検索結果が制限数より少なくなる可能性があります。</p></li>
+<li><p><strong>不十分な一致</strong>：検索フィルタリング式が厳しすぎるため、類似度のしきい値を満たすエンティティが少なくなっている可能性があります。検索に設定する条件が厳しすぎると、一致するエンティティが少なくなり、期待される結果よりも少なくなります。</p></li>
 </ul>
-<h4 id="MilvusClientmilvusdemodb-gives-an-error-ModuleNotFoundError-No-module-named-milvuslite-What-causes-this-and-how-can-it-be-solved" class="common-anchor-header"><code translate="no">MilvusClient(&quot;milvus_demo.db&quot;) gives an error: ModuleNotFoundError: No module named 'milvus_lite'</code>. What causes this and how can it be solved?</h4><p>This error occurs when you attempt to use Milvus Lite on a Windows platform. Milvus Lite is primarily designed for Linux environments and may not have native support for Windows.</p>
-<p>The solution is to utilize a Linux environment:</p>
+<h4 id="MilvusClientmilvusdemodb-gives-an-error-ModuleNotFoundError-No-module-named-milvuslite-What-causes-this-and-how-can-it-be-solved" class="common-anchor-header"><code translate="no">MilvusClient(&quot;milvus_demo.db&quot;) gives an error: ModuleNotFoundError: No module named 'milvus_lite'</code>.このエラーの原因と解決方法を教えてください。</h4><p>このエラーはMilvus LiteをWindowsプラットフォームで使用しようとした場合に発生します。Milvus Liteは主にLinux環境向けに設計されており、Windowsをネイティブサポートしていない可能性があります。</p>
+<p>解決策としては、Linux環境を利用することです：</p>
 <ul>
-<li>Use a Linux-based operating system or virtual machine to run Milvus Lite.</li>
-<li>This approach will ensure compatibility with the library’s dependencies and functionality.</li>
+<li>Linuxベースのオペレーティングシステムまたは仮想マシンを使用してMilvus Liteを実行してください。</li>
+<li>この方法により、ライブラリの依存関係や機能との互換性を確保することができます。</li>
 </ul>
-<h4 id="What-are-the-length-exceeds-max-length-errors-in-Milvus-and-how-can-they-be-understood-and-addressed" class="common-anchor-header">What are the “length exceeds max length” errors in Milvus, and how can they be understood and addressed?</h4><p>“Length exceeds max length” errors in Milvus occur when the size of a data element surpasses the maximum allowable size for a collection or field. Here are some examples and explanations:</p>
+<h4 id="What-are-the-length-exceeds-max-length-errors-in-Milvus-and-how-can-they-be-understood-and-addressed" class="common-anchor-header">Milvusの "length exceeds max length "エラーとは何ですか？</h4><p>Milvusの "Length exceeds max length "エラーは、データ要素のサイズがコレクションまたはフィールドの最大許容サイズを超えた場合に発生します。以下はその例と説明です：</p>
 <ul>
-<li><p>JSON field error: <code translate="no">&lt;MilvusException: (code=1100, message=the length (398324) of json field (metadata) exceeds max length (65536): expected=valid length json string, actual=length exceeds max length: invalid parameter)&gt;</code></p></li>
-<li><p>String length error: <code translate="no">&lt;ParamError: (code=1, message=invalid input, length of string exceeds max length. length: 74238, max length: 60535)&gt;</code></p></li>
-<li><p>VarChar field error: <code translate="no">&lt;MilvusException: (code=1100, message=the length (60540) of 0th VarChar paragraph exceeds max length (0)%!(EXTRA int64=60535): invalid parameter)&gt;</code></p></li>
+<li><p>JSONフィールドエラー<code translate="no">&lt;MilvusException: (code=1100, message=the length (398324) of json field (metadata) exceeds max length (65536): expected=valid length json string, actual=length exceeds max length: invalid parameter)&gt;</code></p></li>
+<li><p>文字列長エラー：<code translate="no">&lt;ParamError: (code=1, message=invalid input, length of string exceeds max length. length: 74238, max length: 60535)&gt;</code></p></li>
+<li><p>VarChar フィールドエラー：<code translate="no">&lt;MilvusException: (code=1100, message=the length (60540) of 0th VarChar paragraph exceeds max length (0)%!(EXTRA int64=60535): invalid parameter)&gt;</code></p></li>
 </ul>
-<p>To understand and address these errors:</p>
+<p>これらのエラーを理解し、対処する：</p>
 <ul>
-<li>Understand that <code translate="no">len(str)</code> in Python represents the number of characters, not the size in bytes.</li>
-<li>For string-based data types like VARCHAR and JSON, use <code translate="no">len(bytes(str, encoding='utf-8'))</code> to determine the actual size in bytes, which is what Milvus uses for &quot;max-length&quot;.</li>
+<li>Pythonの<code translate="no">len(str)</code> はバイト数ではなく文字数を表すことを理解してください。</li>
+<li>VARCHARやJSONのような文字列ベースのデータ型では、<code translate="no">len(bytes(str, encoding='utf-8'))</code> 、Milvusが &quot;max-length &quot;に使用している実際のサイズをバイト単位で判断してください。</li>
 </ul>
-<p>Example in Python:</p>
+<p>Pythonでの例</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Python Example: result of len() str cannot be used as &quot;max-length&quot; in Milvus </span>
 <span class="hljs-meta">&gt;&gt;&gt; </span>s = <span class="hljs-string">&quot;你好，世界！&quot;</span>
 <span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-built_in">len</span>(s) <span class="hljs-comment"># Number of characters of s.</span>
@@ -99,8 +97,8 @@ This prioritization can result in fewer unique results than the limit if your co
 <span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-built_in">len</span>(<span class="hljs-built_in">bytes</span>(s, <span class="hljs-string">&quot;utf-8&quot;</span>)) <span class="hljs-comment"># Size in bytes of s, max-length in Milvus.</span>
 <span class="hljs-number">18</span>
 <button class="copy-code-btn"></button></code></pre>
-<h4 id="Still-have-questions" class="common-anchor-header">Still have questions?</h4><p>You can:</p>
+<h4 id="Still-have-questions" class="common-anchor-header">まだ質問がありますか？</h4><p>できます：</p>
 <ul>
-<li>Check out <a href="https://github.com/milvus-io/milvus/issues">Milvus</a> on GitHub. Feel free to ask questions, share ideas, and help others.</li>
-<li>Join our <a href="https://discuss.milvus.io/">Milvus Forum</a> or <a href="https://join.slack.com/t/milvusio/shared_invite/enQtNzY1OTQ0NDI3NjMzLWNmYmM1NmNjOTQ5MGI5NDhhYmRhMGU5M2NhNzhhMDMzY2MzNDdlYjM5ODQ5MmE3ODFlYzU3YjJkNmVlNDQ2ZTk">Slack Channel</a> to find support and engage with our open-source community.</li>
+<li>GitHubで<a href="https://github.com/milvus-io/milvus/issues">Milvusを</a>チェックしてください。自由に質問したり、アイデアを共有したり、他の人を助けたりしてください。</li>
+<li><a href="https://discuss.milvus.io/">Milvusフォーラムや</a> <a href="https://join.slack.com/t/milvusio/shared_invite/enQtNzY1OTQ0NDI3NjMzLWNmYmM1NmNjOTQ5MGI5NDhhYmRhMGU5M2NhNzhhMDMzY2MzNDdlYjM5ODQ5MmE3ODFlYzU3YjJkNmVlNDQ2ZTk">Slackチャンネルに</a>参加して、オープンソースコミュニティに参加しましょう。</li>
 </ul>

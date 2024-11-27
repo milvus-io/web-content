@@ -1,12 +1,10 @@
 ---
 id: get-and-scalar-query.md
 summary: >-
-  In addition to ANN searches, Milvus also supports metadata filtering through
-  queries. This page introduces how to use Query, Get, and QueryIterators to
-  perform metadata filtering.​
-title: Query
+  MilvusではANN検索だけでなく、クエリーによるメタデータのフィルタリングにも対応しています。このページでは、Query、Get、QueryIteratorを使ってメタデータフィルタリングを行う方法を紹介します。
+title: クエリー
 ---
-<h1 id="Query​" class="common-anchor-header">Query​<button data-href="#Query​" class="anchor-icon" translate="no">
+<h1 id="Query​" class="common-anchor-header">クエリー<button data-href="#Query​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -21,8 +19,8 @@ title: Query
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>In addition to ANN searches, Milvus also supports metadata filtering through queries. This page introduces how to use Query, Get, and QueryIterators to perform metadata filtering.​</p>
-<h2 id="Overview​" class="common-anchor-header">Overview​<button data-href="#Overview​" class="anchor-icon" translate="no">
+    </button></h1><p>MilvusではANN検索だけでなく、クエリーによるメタデータのフィルタリングにも対応しています。このページでは、Query、Get、QueryIteratorを使ってメタデータフィルタリングを行う方法を紹介します。</p>
+<h2 id="Overview​" class="common-anchor-header">概要<button data-href="#Overview​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -37,45 +35,45 @@ title: Query
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>A Collection can store various types of scalar fields. You can have Milvus filter Entities based on one or more scalar fields. Milvus offers three types of queries: Query, Get, and QueryIterator. The table below compares these three query types.​</p>
-<table data-block-token="DGeudDgTNo94IUxh4JpcSQuinMe"><thead><tr><th data-block-token="JomTdgqcwoeufXx8zBDcRGJwnXg" colspan="1" rowspan="1"><p data-block-token="QwjYdtBzUoPD7txs3IEc3xTWnIg">​</p>
-</th><th data-block-token="XjpqdFHvfo4iWOxpBYrcKshZnse" colspan="1" rowspan="1"><p data-block-token="IeTFdFRa4ogyd8x99i4c1fRAnWf">Get​</p>
-</th><th data-block-token="FTqrdhAPXowYTFxQusCcHMConse" colspan="1" rowspan="1"><p data-block-token="HstgdVh8eoLS4yxt6FWcVObCnte">Query​</p>
-</th><th data-block-token="GKPBdkPuSowroJxhQUXcjWzpnyf" colspan="1" rowspan="1"><p data-block-token="K5Ztdh0YfobsHqxIumLcNe6qnkh">QueryIterator​</p>
-</th></tr></thead><tbody><tr><td data-block-token="LgpCd46wWoj17kxyWWJc7re6nif" colspan="1" rowspan="1"><p data-block-token="X0yldaUHEoYWCBxVX2dcqVCon8c">Applicable scenarios​</p>
-</td><td data-block-token="Hg3kdotuJoHIEJxAt7ecZULbnhd" colspan="1" rowspan="1"><p data-block-token="U3xtdrQBqoemt6xtM27cXwoEnUc">To find entities that hold the specified primary keys.​</p>
-<p data-block-token="NEZkdIH0ponBzHxIX2fclJsNnQW">​</p>
-</td><td data-block-token="ItBjdFLS3o4dtVxelAqc5kycnx7" colspan="1" rowspan="1"><p data-block-token="RNdudJ6wNo4RexxBfSjct1kCnHb">To find all or a specified number of entities that meet the custom filtering conditions​</p>
-</td><td data-block-token="KWVzd15x5oJsO8xcEUechuM1n5d" colspan="1" rowspan="1"><p data-block-token="IEmzdCnYEoQeH5xnfafcPeITnkh">To find all entities that meet the custom filtering conditions in paginated queries.​</p>
-</td></tr><tr><td data-block-token="McafdUcFUoyIlrxw147cL3BQnxf" colspan="1" rowspan="1"><p data-block-token="XajHdq8XToVoaAxsgXxcU1LInmh">Filtering method​</p>
-</td><td data-block-token="JNWQd10C8ohTKox2cYUcGdalnrv" colspan="1" rowspan="1"><p data-block-token="XxVhdDCmVogQmXx3zshcy13enQe">By primary keys​</p>
-</td><td data-block-token="PaMId2WSxoiTW8xJ6bAcPJbsntd" colspan="1" rowspan="1"><p data-block-token="Rl3GdtB08oiqFZxhm00cK9l4nh0">By filtering expressions.​</p>
-</td><td data-block-token="JktodwnRbo1H9vxZehkcMMf6nMg" colspan="1" rowspan="1"><p data-block-token="R7rrdcMuQo4xKcxm3rMc8jT6nS4">By filtering expressions.​</p>
-</td></tr><tr><td data-block-token="XHXndNykJo9T24xWY0mcg7Lsn5c" colspan="1" rowspan="1"><p data-block-token="HZGEdb7asoynmWxmHgGcUEiSnSe">Mandatory parameters​</p>
-</td><td data-block-token="RnXDdSiWRoVMLsxKp7ycelbanrc" colspan="1" rowspan="1"><ul data-block-token="VTBwdCwDsoI99TxJDRtcu33YnH0"><li><p>Collection name​</p></li>
-<li><p>Primary keys​</p></li></ul>
-<p data-block-token="B11AdDUZXozgKtx99r5cVG6snOg">​</p>
-</td><td data-block-token="Xl9zdzNlUodUr1xtimTcMktln4e" colspan="1" rowspan="1"><ul data-block-token="TKZvdWyOuofnedxNWjdcw81Angf"><li><p>Collection name​</p></li>
-<li><p>Filtering expressions​</p></li></ul>
-</td><td data-block-token="SqwLddWV7oi5mjxR4Xuc0BsGn6f" colspan="1" rowspan="1"><ul data-block-token="YHfLdqkKLo1MAjxAPpFc1NtvnVh"><li><p>Collection name​</p></li>
-<li><p>Filtering expressions​</p></li>
-<li><p>Number of entities to return per query​</p></li></ul>
-</td></tr><tr><td data-block-token="M7LQdU83DoDar3xjRIBcYRktncb" colspan="1" rowspan="1"><p data-block-token="RegYdilQZojQ9Fxkk0McxoM9nld">Optional parameters​</p>
-</td><td data-block-token="LGpddK4o2oKYYuxBVdKcyZZanQf" colspan="1" rowspan="1"><ul data-block-token="C9AFdJXuro04F0xoRj4cx4UenXb"><li><p>Partition name​</p></li>
-<li><p>Output fields​</p></li></ul>
-</td><td data-block-token="GkCydoTh8o5eRBxfnGQc7niInhe" colspan="1" rowspan="1"><ul data-block-token="XD71d6CwJof3LKxtlR2c9ATZnWh"><li><p>Partition name​</p></li>
-<li><p>Number of entities to return​</p></li>
-<li><p>Output fields​</p></li></ul>
-</td><td data-block-token="RPnPd40mqoFTRzxapogc2BmunOu" colspan="1" rowspan="1"><ul data-block-token="Lf8fdvZWiot1xhxg6X7cuecmn1c"><li><p>Partition name​</p></li>
-<li><p>Number of entities to return in total​</p></li>
-<li><p>Output fields​</p></li></ul>
-</td></tr><tr><td data-block-token="H3ohd3dh5oJNWYx0uOHcQ3DDnmh" colspan="1" rowspan="1"><p data-block-token="VvYJd824VozDaGxi6azcsLQCnre">Returns​</p>
-</td><td data-block-token="HeoXdfD0Voa4U3xXRNFcaxHDnFe" colspan="1" rowspan="1"><p data-block-token="UU4GdhaPEo11xOxHmvJcbaaFnPb">Returns entities that hold the specified primary keys in the specified collection or partition.​</p>
-</td><td data-block-token="UtcOd7eiToNUsMxRR3hcwzCFnNe" colspan="1" rowspan="1"><p data-block-token="CWukdkCxfo5P9WxTLkecEETpnAe">Returns all or a specified number of entities that meet the custom filtering conditions in the specified collection or partition.​</p>
-</td><td data-block-token="VNI6denKyobe8JxUNbRcEL96ncb" colspan="1" rowspan="1"><p data-block-token="GsmPdjuddoZACcxnLPicOyYdnac">Returns all entities that meet the custom filtering conditions in the specified collection or partition through paginated queries.​</p>
+    </button></h2><p>コレクションには様々なタイプのスカラーフィールドを格納することができます。Milvusでは、1つまたは複数のスカラーフィールドに基づいてエンティティをフィルタリングすることができます。Milvusには3種類のクエリがあります：Query、Get、QueryIterator です。下の表はこれら3つのクエリタイプを比較したものです。</p>
+<table data-block-token="DGeudDgTNo94IUxh4JpcSQuinMe"><thead><tr><th data-block-token="JomTdgqcwoeufXx8zBDcRGJwnXg" colspan="1" rowspan="1"><p data-block-token="QwjYdtBzUoPD7txs3IEc3xTWnIg"></p>
+</th><th data-block-token="XjpqdFHvfo4iWOxpBYrcKshZnse" colspan="1" rowspan="1"><p data-block-token="IeTFdFRa4ogyd8x99i4c1fRAnWf">取得</p>
+</th><th data-block-token="FTqrdhAPXowYTFxQusCcHMConse" colspan="1" rowspan="1"><p data-block-token="HstgdVh8eoLS4yxt6FWcVObCnte">クエリー</p>
+</th><th data-block-token="GKPBdkPuSowroJxhQUXcjWzpnyf" colspan="1" rowspan="1"><p data-block-token="K5Ztdh0YfobsHqxIumLcNe6qnkh">QueryIterator</p>
+</th></tr></thead><tbody><tr><td data-block-token="LgpCd46wWoj17kxyWWJc7re6nif" colspan="1" rowspan="1"><p data-block-token="X0yldaUHEoYWCBxVX2dcqVCon8c">適用可能なシナリオ</p>
+</td><td data-block-token="Hg3kdotuJoHIEJxAt7ecZULbnhd" colspan="1" rowspan="1"><p data-block-token="U3xtdrQBqoemt6xtM27cXwoEnUc">指定した主キーを保持するエンティティを検索する。</p>
+<p data-block-token="NEZkdIH0ponBzHxIX2fclJsNnQW"></p>
+</td><td data-block-token="ItBjdFLS3o4dtVxelAqc5kycnx7" colspan="1" rowspan="1"><p data-block-token="RNdudJ6wNo4RexxBfSjct1kCnHb">カスタム・フィルタリング条件を満たすエンティティのすべてまたは指定数を検索する。</p>
+</td><td data-block-token="KWVzd15x5oJsO8xcEUechuM1n5d" colspan="1" rowspan="1"><p data-block-token="IEmzdCnYEoQeH5xnfafcPeITnkh">ページ分割されたクエリで、カスタム・フィルタリング条件を満たすすべてのエンティティを検索する。</p>
+</td></tr><tr><td data-block-token="McafdUcFUoyIlrxw147cL3BQnxf" colspan="1" rowspan="1"><p data-block-token="XajHdq8XToVoaAxsgXxcU1LInmh">フィルタリング方法</p>
+</td><td data-block-token="JNWQd10C8ohTKox2cYUcGdalnrv" colspan="1" rowspan="1"><p data-block-token="XxVhdDCmVogQmXx3zshcy13enQe">主キーによる</p>
+</td><td data-block-token="PaMId2WSxoiTW8xJ6bAcPJbsntd" colspan="1" rowspan="1"><p data-block-token="Rl3GdtB08oiqFZxhm00cK9l4nh0">フィルタリング式による</p>
+</td><td data-block-token="JktodwnRbo1H9vxZehkcMMf6nMg" colspan="1" rowspan="1"><p data-block-token="R7rrdcMuQo4xKcxm3rMc8jT6nS4">フィルタリング式。</p>
+</td></tr><tr><td data-block-token="XHXndNykJo9T24xWY0mcg7Lsn5c" colspan="1" rowspan="1"><p data-block-token="HZGEdb7asoynmWxmHgGcUEiSnSe">必須パラメータ</p>
+</td><td data-block-token="RnXDdSiWRoVMLsxKp7ycelbanrc" colspan="1" rowspan="1"><ul data-block-token="VTBwdCwDsoI99TxJDRtcu33YnH0"><li><p>コレクション名</p></li>
+<li><p>主キー</p></li></ul>
+<p data-block-token="B11AdDUZXozgKtx99r5cVG6snOg"></p>
+</td><td data-block-token="Xl9zdzNlUodUr1xtimTcMktln4e" colspan="1" rowspan="1"><ul data-block-token="TKZvdWyOuofnedxNWjdcw81Angf"><li><p>コレクション名</p></li>
+<li><p>フィルタリング式</p></li></ul>
+</td><td data-block-token="SqwLddWV7oi5mjxR4Xuc0BsGn6f" colspan="1" rowspan="1"><ul data-block-token="YHfLdqkKLo1MAjxAPpFc1NtvnVh"><li><p>コレクション名</p></li>
+<li><p>フィルタリング式</p></li>
+<li><p>クエリごとに返すエンティティの数</p></li></ul>
+</td></tr><tr><td data-block-token="M7LQdU83DoDar3xjRIBcYRktncb" colspan="1" rowspan="1"><p data-block-token="RegYdilQZojQ9Fxkk0McxoM9nld">オプションのパラメータ</p>
+</td><td data-block-token="LGpddK4o2oKYYuxBVdKcyZZanQf" colspan="1" rowspan="1"><ul data-block-token="C9AFdJXuro04F0xoRj4cx4UenXb"><li><p>パーティション名</p></li>
+<li><p>出力フィールド</p></li></ul>
+</td><td data-block-token="GkCydoTh8o5eRBxfnGQc7niInhe" colspan="1" rowspan="1"><ul data-block-token="XD71d6CwJof3LKxtlR2c9ATZnWh"><li><p>パーティション名</p></li>
+<li><p>返すエンティティの数</p></li>
+<li><p>出力フィールド</p></li></ul>
+</td><td data-block-token="RPnPd40mqoFTRzxapogc2BmunOu" colspan="1" rowspan="1"><ul data-block-token="Lf8fdvZWiot1xhxg6X7cuecmn1c"><li><p>パーティション名</p></li>
+<li><p>合計で返すエンティティの数</p></li>
+<li><p>出力フィールド</p></li></ul>
+</td></tr><tr><td data-block-token="H3ohd3dh5oJNWYx0uOHcQ3DDnmh" colspan="1" rowspan="1"><p data-block-token="VvYJd824VozDaGxi6azcsLQCnre">返り値</p>
+</td><td data-block-token="HeoXdfD0Voa4U3xXRNFcaxHDnFe" colspan="1" rowspan="1"><p data-block-token="UU4GdhaPEo11xOxHmvJcbaaFnPb">指定されたコレクションまたはパーティション内の指定された主キーを保持するエンティティを返します。</p>
+</td><td data-block-token="UtcOd7eiToNUsMxRR3hcwzCFnNe" colspan="1" rowspan="1"><p data-block-token="CWukdkCxfo5P9WxTLkecEETpnAe">指定されたコレクションまたはパーティションでカスタム・フィルタリング条件を満たすエンティティのすべてまたは指定された数を返します。</p>
+</td><td data-block-token="VNI6denKyobe8JxUNbRcEL96ncb" colspan="1" rowspan="1"><p data-block-token="GsmPdjuddoZACcxnLPicOyYdnac">ページ分割クエリによって、指定されたコレクションまたはパーティションでカスタム・フィルタリング条件を満たすすべてのエンティティを返します。</p>
 </td></tr></tbody></table>
-<p>For more on metadata filtering, refer to <a href="/docs/boolean.md">​Metadata Filtering</a>.​</p>
-<h2 id="Use-Get​" class="common-anchor-header">Use Get​<button data-href="#Use-Get​" class="anchor-icon" translate="no">
+<p>メタデータ・フィルタリングの詳細は、"<a href="/docs/ja/boolean.md">メタデータ・フィルタリング</a>" を参照してください。</p>
+<h2 id="Use-Get​" class="common-anchor-header">Get の使用法<button data-href="#Use-Get​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -90,7 +88,7 @@ title: Query
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>When you need to find entities by their primary keys, you can use the <strong>Get</strong> method. The following code examples assume that there are three fields named <code translate="no">id</code>, <code translate="no">vector</code>, and <code translate="no">color</code> in your collection and return the entities with primary keys <code translate="no">1</code>, <code translate="no">2</code>, and <code translate="no">3</code>.​</p>
+    </button></h2><p>主キーによってエンティティを検索する必要がある場合は、<strong>Get</strong>メソッドを使用できます。以下のコード例では、コレクションに<code translate="no">id</code> 、<code translate="no">vector</code> 、<code translate="no">color</code> という 3 つのフィールドがあると仮定し、主キー<code translate="no">1</code> 、<code translate="no">2</code> 、<code translate="no">3</code> を持つエンティティを返します。</p>
 <pre><code translate="no" class="language-json">[​
         {<span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">0</span>, <span class="hljs-string">&quot;vector&quot;</span>: [<span class="hljs-number">0.3580376395471989</span>, -<span class="hljs-number">0.6023495712049978</span>, <span class="hljs-number">0.18414012509913835</span>, -<span class="hljs-number">0.26286205330961354</span>, <span class="hljs-number">0.9029438446296592</span>], <span class="hljs-string">&quot;color&quot;</span>: <span class="hljs-string">&quot;pink_8682&quot;</span>},​
         {<span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">1</span>, <span class="hljs-string">&quot;vector&quot;</span>: [<span class="hljs-number">0.19886812562848388</span>, <span class="hljs-number">0.06023560599112088</span>, <span class="hljs-number">0.6976963061752597</span>, <span class="hljs-number">0.2614474506242501</span>, <span class="hljs-number">0.838729485096104</span>], <span class="hljs-string">&quot;color&quot;</span>: <span class="hljs-string">&quot;red_7025&quot;</span>},​
@@ -106,11 +104,7 @@ title: Query
 
 <button class="copy-code-btn"></button></code></pre>
 <div class="multipleCode">
-    <a href="#python">Python </a>
-    <a href="#java">Java</a>
-    <a href="#javascript">Node.js</a>
-    <a href="#curl">cURL</a>
-</div>
+   <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient​
 ​
 client = MilvusClient(​
@@ -186,7 +180,7 @@ curl --request POST \​
 <span class="hljs-comment"># {&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:[{&quot;color&quot;:&quot;pink_8682&quot;,&quot;id&quot;:0,&quot;vector&quot;:[0.35803765,-0.6023496,0.18414013,-0.26286206,0.90294385]},{&quot;color&quot;:&quot;red_7025&quot;,&quot;id&quot;:1,&quot;vector&quot;:[0.19886813,0.060235605,0.6976963,0.26144746,0.8387295]},{&quot;color&quot;:&quot;orange_6781&quot;,&quot;id&quot;:2,&quot;vector&quot;:[0.43742132,-0.55975026,0.6457888,0.7894059,0.20785794]}]}​</span>
 
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Use-Query​" class="common-anchor-header">Use Query​<button data-href="#Use-Query​" class="anchor-icon" translate="no">
+<h2 id="Use-Query​" class="common-anchor-header">クエリーの使用<button data-href="#Use-Query​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -201,13 +195,9 @@ curl --request POST \​
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>When you need to find entities by custom filtering conditions, use the Query method. The following code examples assume there are three fields named <code translate="no">id</code>, <code translate="no">vector</code>, and <code translate="no">color</code> and return the specified number of entities that hold a <code translate="no">color</code> value starting with <code translate="no">red</code>.​</p>
+    </button></h2><p>独自のフィルタリング条件でエンティティを検索する必要がある場合は、Queryメソッドを使用します。以下のコード例では、<code translate="no">id</code> 、<code translate="no">vector</code> 、<code translate="no">color</code> という 3 つのフィールドがあると仮定し、<code translate="no">red</code> で始まる<code translate="no">color</code> 値を保持するエンティティの指定された数を返します。</p>
 <div class="multipleCode">
-    <a href="#python">Python </a>
-    <a href="#java">Java</a>
-    <a href="#javascript">Node.js</a>
-    <a href="#curl">cURL</a>
-</div>
+   <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient​
 ​
 client = MilvusClient(​
@@ -313,7 +303,7 @@ curl --request POST \​
 <span class="hljs-comment">#{&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:[{&quot;color&quot;:&quot;red_7025&quot;,&quot;id&quot;:1,&quot;vector&quot;:[0.19886813,0.060235605,0.6976963,0.26144746,0.8387295]},{&quot;color&quot;:&quot;red_4794&quot;,&quot;id&quot;:4,&quot;vector&quot;:[0.44523495,-0.8757027,0.82207793,0.4640629,0.3033748]},{&quot;color&quot;:&quot;red_9392&quot;,&quot;id&quot;:6,&quot;vector&quot;:[0.8371978,-0.015764369,-0.31062937,-0.56266695,-0.8984948]}]}​</span>
 
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Use-QueryIterator​" class="common-anchor-header">Use QueryIterator​<button data-href="#Use-QueryIterator​" class="anchor-icon" translate="no">
+<h2 id="Use-QueryIterator​" class="common-anchor-header">QueryIteratorの使用<button data-href="#Use-QueryIterator​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -328,13 +318,9 @@ curl --request POST \​
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>When you need to find entities by custom filtering conditions through paginated queries, create a <strong>QueryIterator</strong> and use its <strong>next()</strong> method to iterate over all entities to find those meeting the filtering conditions. The following code examples assume that there are three fields named <code translate="no">id</code>, <code translate="no">vector</code>, and <code translate="no">color</code> and return all entities that hold a <code translate="no">color</code> value starting with <code translate="no">red</code>.​</p>
+    </button></h2><p>ページ分割されたクエリを使用して、カスタム・フィルタリング条件でエンティティを検索する必要がある場合は、<strong>QueryIterator</strong>を作成し、その<strong>next()</strong>メソッドを使用して、すべてのエンティティを繰り返し処理し、フィルタリング条件に一致するエンティティを検索します。以下のコード例では、<code translate="no">id</code> 、<code translate="no">vector</code> 、<code translate="no">color</code> という 3 つのフィールドがあると仮定し、<code translate="no">red</code> から始まる<code translate="no">color</code> 値を保持するすべてのエンティティを返します。</p>
 <div class="multipleCode">
-    <a href="#python">Python </a>
-    <a href="#java">Java</a>
-    <a href="#javascript">Node.js</a>
-    <a href="#curl">cURL</a>
-</div>
+   <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> connections, Collection​
 ​
 connections.connect(​
@@ -414,7 +400,7 @@ results = []​
 <pre><code translate="no" class="language-curl"><span class="hljs-comment"># Currently not available</span>
 
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Queries-in-Partitions​" class="common-anchor-header">Queries in Partitions​<button data-href="#Queries-in-Partitions​" class="anchor-icon" translate="no">
+<h2 id="Queries-in-Partitions​" class="common-anchor-header">パーティション内のクエリ<button data-href="#Queries-in-Partitions​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -429,13 +415,9 @@ results = []​
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>You can also perform queries within one or multiple partitions by including the partition names in the Get, Query, or QueryIterator request. The following code examples assume that there is a partition named <strong>PartitionA</strong> in the collection.​</p>
+    </button></h2><p>Get、Query、QueryIteratorリクエストにパーティション名を含めることで、1つまたは複数のパーティション内でクエリーを実行することもできます。以下のコード例では、コレクション内に<strong>PartitionAという</strong>パーティションがあると仮定しています。</p>
 <div class="multipleCode">
-    <a href="#python">Python </a>
-    <a href="#java">Java</a>
-    <a href="#javascript">Node.js</a>
-    <a href="#curl">cURL</a>
-</div>
+   <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient​
 client = MilvusClient(​
     uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>,​
@@ -600,4 +582,4 @@ curl --request POST \​
 }&#x27;</span>​
 
 <button class="copy-code-btn"></button></code></pre>
-<p>​</p>
+<p></p>

@@ -1,11 +1,9 @@
 ---
 id: migrate_overview.md
-summary: >-
-  This article provides an overview of the Milvus-migration tool, including
-  supported migrations, features, and architecture.
-title: Milvus Migration Overview
+summary: この記事では、対応するマイグレーション、機能、アーキテクチャなど、Milvusマイグレーションツールの概要を説明します。
+title: Milvusマイグレーション概要
 ---
-<h1 id="Milvus-Migration-Overview" class="common-anchor-header">Milvus Migration Overview<button data-href="#Milvus-Migration-Overview" class="anchor-icon" translate="no">
+<h1 id="Milvus-Migration-Overview" class="common-anchor-header">Milvusマイグレーション概要<button data-href="#Milvus-Migration-Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -20,8 +18,8 @@ title: Milvus Migration Overview
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Recognizing the diverse needs of user base, Milvus has expanded its migration tools to not only facilitate upgrades from earlier Milvus 1.x versions but also to enable seamless integration of data from other systems like <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/elasticsearch-intro.html">Elasticsearch</a> and <a href="https://github.com/facebookresearch/faiss">Faiss</a>. The <a href="https://github.com/zilliztech/milvus-migration">Milvus-migration</a> project is designed to bridge the gap between these varied data environments and the latest advancements in Milvus technology, ensuring you can harness improved features and performance seamlessly.</p>
-<h2 id="Supported-migrations" class="common-anchor-header">Supported migrations<button data-href="#Supported-migrations" class="anchor-icon" translate="no">
+    </button></h1><p>Milvusは、ユーザーベースの多様なニーズを認識し、Milvus 1.x以前のバージョンからのアップグレードを容易にするだけでなく、<a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/elasticsearch-intro.html">Elasticsearchや</a> <a href="https://github.com/facebookresearch/faiss">Faissの</a>ような他のシステムからのシームレスなデータ統合を可能にするためにマイグレーションツールを拡張しました。<a href="https://github.com/zilliztech/milvus-migration">Milvusマイグレーションプロジェクトは</a>、このような様々なデータ環境とMilvusテクノロジーの最新の進歩とのギャップを埋めるために設計されており、お客様が改善された機能とパフォーマンスをシームレスに利用できることを保証します。</p>
+<h2 id="Supported-migrations" class="common-anchor-header">対応マイグレーション<button data-href="#Supported-migrations" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -36,14 +34,14 @@ title: Milvus Migration Overview
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>The <a href="https://github.com/zilliztech/milvus-migration">Milvus-migration</a> tool supports a variety of migration paths to accommodate different user needs:</p>
+    </button></h2><p><a href="https://github.com/zilliztech/milvus-migration">Milvusマイグレーションツールは</a>、様々なユーザーニーズに対応するため、様々なマイグレーションパスをサポートしています：</p>
 <ul>
-<li><a href="/docs/es2m.md">Elasticsearch to Milvus 2.x</a>: Enabling users to migrate data from Elasticsearch environments to take advantage of Milvus’s optimized vector search capabilities.</li>
-<li><a href="/docs/f2m.md">Faiss to Milvus 2.x</a>: Providing experimental support for transferring data from Faiss, a popular library for efficient similarity search.</li>
-<li><a href="/docs/m2m.md">Milvus 1.x to Milvus 2.x</a>: Ensuring data from earlier versions is transitioned smoothly to the latest framework.</li>
-<li><a href="/docs/from-m2x.md">Milvus 2.3.x to Milvus 2.3.x or above</a>: Providing a one-time migration path for users who have already migrated to 2.3.x.</li>
+<li><a href="/docs/ja/es2m.md">ElasticsearchからMilvus 2.xへの移行</a>：ElasticsearchからMilvus 2.xへの移行：Elasticsearch環境からデータを移行し、Milvusの最適化されたベクトル検索機能を利用することができます。</li>
+<li><a href="/docs/ja/f2m.md">FaissからMilvus 2.xへ</a>：効率的な類似検索のための一般的なライブラリであるFaissからのデータ移行を実験的にサポート。</li>
+<li><a href="/docs/ja/m2m.md">Milvus 1.xからMilvus 2.xへ</a>：旧バージョンのデータを最新フレームワークへスムーズに移行。</li>
+<li><a href="/docs/ja/from-m2x.md">Milvus 2.3.xからMilvus 2.3.x以上へ</a>：既に2.3.xに移行したユーザーに対して、1回限りの移行パスを提供。</li>
 </ul>
-<h2 id="Features" class="common-anchor-header">Features<button data-href="#Features" class="anchor-icon" translate="no">
+<h2 id="Features" class="common-anchor-header">特徴<button data-href="#Features" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -58,13 +56,13 @@ title: Milvus Migration Overview
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus-migration is designed with robust features to handle diverse migration scenarios:</p>
+    </button></h2><p>Milvus-migrationは、多様な移行シナリオに対応できるよう、堅牢な機能を備えています：</p>
 <ul>
-<li>Multiple interaction methods: You can perform migrations via a command line interface or through a Restful API, with flexibility in how migrations are executed.</li>
-<li>Support for various file formats and cloud storage: The <a href="https://github.com/zilliztech/milvus-migration">Milvus-migration</a> tool can handle data stored in local files as well as in cloud storage solutions such as S3, OSS, and GCP, ensuring broad compatibility.</li>
-<li>Data type handling: <a href="https://github.com/zilliztech/milvus-migration">Milvus-migration</a> is capable of dealing with both vector data and scalar fields, making it a versatile choice for different data migration needs.</li>
+<li>複数のインタラクションメソッド：コマンドラインインターフェイスまたはRestful APIを通じてマイグレーションを実行することができ、マイグレーションの実行方法を柔軟に変更することができます。</li>
+<li>様々なファイル形式とクラウドストレージのサポート<a href="https://github.com/zilliztech/milvus-migration">Milvusマイグレーションツールは</a>、ローカルファイルだけでなく、S3、OSS、GCPなどのクラウドストレージに保存されたデータを扱うことができ、幅広い互換性を確保します。</li>
+<li>データタイプの取り扱い：<a href="https://github.com/zilliztech/milvus-migration">Milvus-migrationは</a>ベクトルデータとスカラーフィールドの両方を扱うことができるため、様々なデータ移行のニーズに対応することができます。</li>
 </ul>
-<h2 id="Architecture" class="common-anchor-header">Architecture<button data-href="#Architecture" class="anchor-icon" translate="no">
+<h2 id="Architecture" class="common-anchor-header">アーキテクチャ<button data-href="#Architecture" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -79,28 +77,24 @@ title: Milvus Migration Overview
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>The architecture of <a href="https://github.com/zilliztech/milvus-migration">Milvus-migration</a> is strategically designed to facilitate efficient data streaming, parsing, and writing processes, enabling robust migration capabilities across various data sources.</p>
+    </button></h2><p><a href="https://github.com/zilliztech/milvus-migration">Milvus-migrationの</a>アーキテクチャは、効率的なデータストリーミング、解析、書き込み処理を促進するために戦略的に設計されており、様々なデータソース間で堅牢なマイグレーション機能を実現します。</p>
 <p>
-  <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.5.x/assets/milvus-migration-architecture.jpeg" alt="Milvus-migration architecture" class="doc-image" id="milvus-migration-architecture" />
-    <span>Milvus-migration architecture</span>
-  </span>
-</p>
-<p>In the preceding figure:</p>
+  
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/milvus-migration-architecture.jpeg" alt="Milvus-migration architecture" class="doc-image" id="milvus-migration-architecture" />
+   </span> <span class="img-wrapper"> <span>Milvusマイグレーションアーキテクチャ</span> </span></p>
+<p>先の図では</p>
 <ul>
-<li><strong>Data source</strong>: <a href="https://github.com/zilliztech/milvus-migration">Milvus-migration</a> supports multiple data sources including Elasticsearch via the <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/scroll-api.html">scroll API</a>, local or cloud storage data files, and Milvus 1.x databases. These are accessed and read in a streamlined manner to initiate the migration process.</li>
-<li><strong>Stream pipeline</strong>:
-<ul>
-<li><strong>Parse process</strong>: Data from the sources is parsed according to its format. For example, for a data source from Elasticsearch, an Elasticsearch format parser is employed, while other formats use respective parsers. This step is crucial for transforming raw data into a structured format that can be further processed.</li>
-<li><strong>Convert process</strong>: Following parsing, data undergoes conversion where fields are filtered, data types are converted, and table names are adjusted according to the target Milvus 2.x schema. This ensures that the data conforms to the expected structure and types in Milvus.</li>
+<li><strong>データソース</strong> <a href="https://github.com/zilliztech/milvus-migration">Milvus-migrationは</a>、<a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/scroll-api.html">scroll API</a>経由のElasticsearch、ローカルまたはクラウドストレージのデータファイル、Milvus 1.xデータベースを含む複数のデータソースをサポートしています。これらは移行プロセスを開始するために合理化された方法でアクセスされ、読み込まれます。</li>
+<li><strong>ストリームパイプライン</strong><ul>
+<li><strong>解析プロセス</strong>：ソースからのデータはそのフォーマットに従って解析されます。例えば、ElasticsearchからのデータソースにはElasticsearchフォーマットのパーサーが採用され、その他のフォーマットにはそれぞれのパーサーが使用される。このステップは、生データをさらに処理可能な構造化フォーマットに変換するために重要である。</li>
+<li><strong>変換プロセス</strong>：パーシングの後、データは変換され、フィールドはフィルタリングされ、データ型は変換され、テーブル名はターゲットMilvus 2.xスキーマに従って調整されます。これにより、データはMilvusで期待される構造と型に適合するようになります。</li>
 </ul></li>
-<li><strong>Data writing and loading</strong>:
-<ul>
-<li><strong>Write data</strong>: The processed data is written into intermediate JSON or NumPy files, ready to be loaded into Milvus 2.x.</li>
-<li><strong>Load data</strong>: Data is finally loaded into Milvus 2.x using the <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/ORM/utility/do_bulk_insert.md">BulkInsert</a> operation, which efficiently writes large volumes of data into Milvus storage systems, either cloud-based or filestore.</li>
+<li><strong>データの書き込みと読み込み</strong><ul>
+<li><strong>データを書き込む</strong>：処理されたデータは中間的なJSONファイルまたはNumPyファイルに書き込まれ、Milvus 2.xにロードされます。</li>
+<li><strong>データのロード</strong>データは最終的に<a href="https://milvus.io/api-reference/pymilvus/v2.4.x/ORM/utility/do_bulk_insert.md">BulkInsert</a>オペレーションを使ってMilvus 2.xにロードされ、大量のデータが効率的にMilvusストレージシステム（クラウドベースまたはファイルストア）に書き込まれる。</li>
 </ul></li>
 </ul>
-<h2 id="Future-plans" class="common-anchor-header">Future plans<button data-href="#Future-plans" class="anchor-icon" translate="no">
+<h2 id="Future-plans" class="common-anchor-header">今後の計画<button data-href="#Future-plans" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -115,10 +109,10 @@ title: Milvus Migration Overview
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>The development team is committed to enhancing <a href="https://github.com/zilliztech/milvus-migration">Milvus-migration</a> with features such as:</p>
+    </button></h2><p>開発チームは、<a href="https://github.com/zilliztech/milvus-migration">Milvusマイグレーションに</a>以下のような機能を追加していく予定です：</p>
 <ul>
-<li><strong>Support for more data sources</strong>: Plans to extend support to additional databases and file systems, such as Pinecone, Chroma, Qdrant. If you need support for a specific data source, please submit your request through this <a href="https://github.com/zilliztech/milvus-migration/issues">GitHub issue link</a>.</li>
-<li><strong>Command simplification</strong>: Efforts to streamline the command process for easier execution.</li>
-<li><strong>SPI parser</strong> / <strong>convert</strong>: The architecture expects to include Service Provider Interface (SPI) tools for both parsing and converting. These tools allow for custom implementations that users can plug into the migration process to handle specific data formats or conversion rules.</li>
-<li><strong>Checkpoint resumption</strong>: Enabling migrations to resume from the last checkpoint to enhance reliability and efficiency in case of interruptions. Save points will be created to ensure data integrity and are stored in databases such as SQLite or MySQL to track the progress of the migration process.</li>
+<li><strong>より多くのデータソースのサポート</strong>Pinecone、Chroma、Qdrantのようなデータベースやファイルシステムのサポートを拡張する予定です。特定のデータソースのサポートが必要な場合は、この<a href="https://github.com/zilliztech/milvus-migration/issues">GitHub issue linkから</a>リクエストを送信してください。</li>
+<li><strong>コマンドの簡素化</strong>：コマンドプロセスを簡素化し、より簡単に実行できるようにしました。</li>
+<li><strong>SPIパーサー</strong>／<strong>変換</strong>：このアーキテクチャには、解析と変換の両方のためのサービス・プロバイダー・インターフェース（SPI）ツールが含まれる予定です。これらのツールは、特定のデータ形式や変換ルールを扱うために、ユーザーが移行プロセスにプラグインできるカスタム実装を可能にする。</li>
+<li><strong>チェックポイントの再開</strong>：移行を最後のチェックポイントから再開できるようにし、中断時の信頼性と効率を高める。セーブポイントはデータの整合性を確保するために作成され、SQLiteやMySQLなどのデータベースに保存され、移行プロセスの進捗を追跡します。</li>
 </ul>

@@ -1,15 +1,11 @@
 ---
 id: number.md
-title: Number Field​
+title: 数値フィールド
 related_key: 'number, integer, float, double'
 summary: >-
-  Number fields are used to store non-vector numerical data in Milvus. These
-  fields are typically employed to describe additional information related to
-  vector data, such as age, price, etc. By using this data, you can better
-  describe vectors and improve the efficiency of data filtering and conditional
-  queries.​
+  数値フィールドはMilvusにおいてベクトル以外の数値データを格納するために使用されます。これらのフィールドは通常、年齢、価格などのベクトルデータに関連する追加情報を記述するために使用されます。このデータを使用することで、ベクトルをより適切に記述し、データフィルタリングや条件クエリの効率を向上させることができます。
 ---
-<h1 id="Number-Field​" class="common-anchor-header">Number Field​<button data-href="#Number-Field​" class="anchor-icon" translate="no">
+<h1 id="Number-Field​" class="common-anchor-header">数値フィールド<button data-href="#Number-Field​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -24,9 +20,9 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Number fields are used to store non-vector numerical data in Milvus. These fields are typically employed to describe additional information related to vector data, such as age, price, etc. By using this data, you can better describe vectors and improve the efficiency of data filtering and conditional queries.​</p>
-<p>Number fields are particularly useful in many scenarios. For example, in e-commerce recommendations, a price field can be used for filtering; in user profile analysis, age ranges can help refine the results. Combined with vector data, number fields can help the system provide similarity searches while meeting personalized user needs more precisely.​</p>
-<h2 id="Supported-number-field-types​" class="common-anchor-header">Supported number field types​<button data-href="#Supported-number-field-types​" class="anchor-icon" translate="no">
+    </button></h1><p>数値フィールドはmilvusのベクトル以外の数値データを格納するために使用されます。これらのフィールドは通常、年齢、価格などのベクトルデータに関連する追加情報を記述するために使用されます。このデータを使用することで、ベクトルをより適切に記述し、データフィルタリングや条件付きクエリの効率を向上させることができます。</p>
+<p>数値フィールドは、多くのシナリオで特に有用です。たとえば、eコマースのレコメンデーションでは、価格フィールドをフィルタリングに使用できます。また、ユーザープロファイル分析では、年齢範囲が結果の絞り込みに役立ちます。ベクトルデータと組み合わせることで、数フィールドは、パーソナライズされたユーザーのニーズをより正確に満たしながら、システムが類似検索を提供するのに役立ちます。</p>
+<h2 id="Supported-number-field-types​" class="common-anchor-header">サポートされる数値フィールドタイプ<button data-href="#Supported-number-field-types​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -41,25 +37,25 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus supports various number field types to meet different data storage and query needs:​</p>
-<table><thead><th data-block-token="AGYrd69etohgaUxzUyGcXFw8npI" colspan="1" rowspan="1"><p data-block-token="Qbx1dsbirortMixjxXJcukoLnjR">Type​</p>
-</th><th data-block-token="AGYrd69etohgaUxzUyGcXFw8npI" colspan="1" rowspan="1"><p data-block-token="Qbx1dsbirortMixjxXJcukoLnjR">Description​</p>
-</th></tr></thead><tbody><tr><td data-block-token="FQ0rdk7NKoAmtUxD5n7cHWBfnKd" colspan="1" rowspan="1"><p data-block-token="J4YBdReSPol6jvxIPyxcs7lRnGQ"><code translate="no">BOOL</code>​</p>
-</td><td data-block-token="XfVYdowyvoY7iwxNCIBcRbE4nFf" colspan="1" rowspan="1"><p data-block-token="WYGTdKI4RoBTXbxR2YbcxC2InOb">Boolean type for storing <code translate="no">true</code> or <code translate="no">false</code>, suitable for describing binary states.​</p>
-</td></tr><tr><td data-block-token="G6JBdjvguofEOnx6lmQcXkJdn6o" colspan="1" rowspan="1"><p data-block-token="PGcDd6i5Ao3jioxzrLkcV5lanUq"><code translate="no">INT8</code>​</p>
-</td><td data-block-token="TEVDdqVe0ooqTbxqkW7cdu8OnMe" colspan="1" rowspan="1"><p data-block-token="G5AOdYaoEom6X0x3NUKc9YL1nRh">8-bit integer, suitable for storing small-range integer data.​</p>
-</td></tr><tr><td data-block-token="Zc6cdGRmVoEOzdxaT8Pc4jdmnxg" colspan="1" rowspan="1"><p data-block-token="SaIUd6XDYoo2msxLCSXcNJk5nre"><code translate="no">INT16</code>​</p>
-</td><td data-block-token="EamldyccGovIeKxaLQ4cxmjMng2" colspan="1" rowspan="1"><p data-block-token="Lx9FdawAgoIlZXxGomRcaglPnyc">16-bit integer, for medium-range integer data.​</p>
-</td></tr><tr><td data-block-token="SPeCdRoc4owdXXxWSDVcNXwVnVf" colspan="1" rowspan="1"><p data-block-token="AL4sd4HrJokAj2xwglOcxIAcnNc"><code translate="no">INT32</code>​</p>
-</td><td data-block-token="PySwdD4CHot4YgxrOwycN2ngnAb" colspan="1" rowspan="1"><p data-block-token="FYgYdL9PPoNme4xOo62cud2Gnob">32-bit integer, ideal for general integer data storage like product quantities or user IDs.​</p>
-</td></tr><tr><td data-block-token="HZWpdo7SuoA04KxvZAxcflidn9c" colspan="1" rowspan="1"><p data-block-token="NbO6dTRRToj5YNxzjICcJe8YnPh"><code translate="no">INT64</code>​</p>
-</td><td data-block-token="FberdUuiZoyA0mxK6T4cfYpqnUf" colspan="1" rowspan="1"><p data-block-token="ZuTHdAIJ5oT8G7xvkJdcGt70nGq">64-bit integer, suitable for storing large-range data like timestamps or identifiers.​</p>
-</td></tr><tr><td data-block-token="XWCHd4raooSVtXxKE58cE3j0nwd" colspan="1" rowspan="1"><p data-block-token="NWOCdcYiYoMVZRxknoicMsk5nae"><code translate="no">FLOAT</code>​</p>
-</td><td data-block-token="PqINdhj44oido7xzrTMcQA2OnDh" colspan="1" rowspan="1"><p data-block-token="BA2jdC2afoK4duxqG8lcJln8nLH">32-bit floating-point number, for data requiring general precision, such as ratings or temperature.​</p>
-</td></tr><tr><td data-block-token="I3YZdrlQcoGhPExUIq0cQUDDnFe" colspan="1" rowspan="1"><p data-block-token="MKqAdpPoPovAxWxjeAXcF6PmnfK"><code translate="no">DOUBLE</code>​</p>
-</td><td data-block-token="Vb2Cdz3wVoBoizxAwswc9CvFnXf" colspan="1" rowspan="1"><p data-block-token="R501ddb8Uoir53xLFwecx1BenVe">64-bit double-precision floating-point number, for high-precision data like financial information or scientific calculations.​</p>
+    </button></h2><p>Milvusは様々なデータ保存やクエリのニーズに対応するため、様々なタイプの数値フィールドをサポートしています。</p>
+<table><thead><th data-block-token="AGYrd69etohgaUxzUyGcXFw8npI" colspan="1" rowspan="1"><p data-block-token="Qbx1dsbirortMixjxXJcukoLnjR">タイプ</p>
+</th><th data-block-token="AGYrd69etohgaUxzUyGcXFw8npI" colspan="1" rowspan="1"><p data-block-token="Qbx1dsbirortMixjxXJcukoLnjR">説明</p>
+</th></tr></thead><tbody><tr><td data-block-token="FQ0rdk7NKoAmtUxD5n7cHWBfnKd" colspan="1" rowspan="1"><p data-block-token="J4YBdReSPol6jvxIPyxcs7lRnGQ"><code translate="no">BOOL</code></p>
+</td><td data-block-token="XfVYdowyvoY7iwxNCIBcRbE4nFf" colspan="1" rowspan="1"><p data-block-token="WYGTdKI4RoBTXbxR2YbcxC2InOb"><code translate="no">true</code> または<code translate="no">false</code> を格納するためのブール型、バイナリ状態を記述するのに適しています。</p>
+</td></tr><tr><td data-block-token="G6JBdjvguofEOnx6lmQcXkJdn6o" colspan="1" rowspan="1"><p data-block-token="PGcDd6i5Ao3jioxzrLkcV5lanUq"><code translate="no">INT8</code></p>
+</td><td data-block-token="TEVDdqVe0ooqTbxqkW7cdu8OnMe" colspan="1" rowspan="1"><p data-block-token="G5AOdYaoEom6X0x3NUKc9YL1nRh">8 ビット整数型。小さな範囲の整数データを格納するのに適している。</p>
+</td></tr><tr><td data-block-token="Zc6cdGRmVoEOzdxaT8Pc4jdmnxg" colspan="1" rowspan="1"><p data-block-token="SaIUd6XDYoo2msxLCSXcNJk5nre"><code translate="no">INT16</code></p>
+</td><td data-block-token="EamldyccGovIeKxaLQ4cxmjMng2" colspan="1" rowspan="1"><p data-block-token="Lx9FdawAgoIlZXxGomRcaglPnyc">16 ビット整数。中範囲の整数データの格納に適する。</p>
+</td></tr><tr><td data-block-token="SPeCdRoc4owdXXxWSDVcNXwVnVf" colspan="1" rowspan="1"><p data-block-token="AL4sd4HrJokAj2xwglOcxIAcnNc"><code translate="no">INT32</code></p>
+</td><td data-block-token="PySwdD4CHot4YgxrOwycN2ngnAb" colspan="1" rowspan="1"><p data-block-token="FYgYdL9PPoNme4xOo62cud2Gnob">32ビット整数。製品数量やユーザーIDのような一般的な整数データの保存に最適。</p>
+</td></tr><tr><td data-block-token="HZWpdo7SuoA04KxvZAxcflidn9c" colspan="1" rowspan="1"><p data-block-token="NbO6dTRRToj5YNxzjICcJe8YnPh"><code translate="no">INT64</code></p>
+</td><td data-block-token="FberdUuiZoyA0mxK6T4cfYpqnUf" colspan="1" rowspan="1"><p data-block-token="ZuTHdAIJ5oT8G7xvkJdcGt70nGq">64ビット整数。タイムスタンプや識別子のような大きな範囲のデータの保存に適しています。</p>
+</td></tr><tr><td data-block-token="XWCHd4raooSVtXxKE58cE3j0nwd" colspan="1" rowspan="1"><p data-block-token="NWOCdcYiYoMVZRxknoicMsk5nae"><code translate="no">FLOAT</code></p>
+</td><td data-block-token="PqINdhj44oido7xzrTMcQA2OnDh" colspan="1" rowspan="1"><p data-block-token="BA2jdC2afoK4duxqG8lcJln8nLH">32ビット浮動小数点数：定格や温度など、一般的な精度を必要とするデータ用。</p>
+</td></tr><tr><td data-block-token="I3YZdrlQcoGhPExUIq0cQUDDnFe" colspan="1" rowspan="1"><p data-block-token="MKqAdpPoPovAxWxjeAXcF6PmnfK"><code translate="no">DOUBLE</code></p>
+</td><td data-block-token="Vb2Cdz3wVoBoizxAwswc9CvFnXf" colspan="1" rowspan="1"><p data-block-token="R501ddb8Uoir53xLFwecx1BenVe">64ビット倍精度浮動小数点数：金融情報や科学計算のような高精度データ用。</p>
 </td></tr></tbody></table>
-<h2 id="Add-number-field​" class="common-anchor-header">Add number field​<button data-href="#Add-number-field​" class="anchor-icon" translate="no">
+<h2 id="Add-number-field​" class="common-anchor-header">数値フィールドの追加<button data-href="#Add-number-field​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -74,14 +70,10 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>To use number fields in Milvus, define the relevant fields in the collection schema, setting the <code translate="no">datatype</code> to a supported type such as <code translate="no">BOOL</code> or <code translate="no">INT8</code>. For a complete list of supported number field types, refer to <a href="#Supported-number-field-types">Supported number field types</a>.​</p>
-<p>The following example shows how to define a schema that includes number fields <code translate="no">age</code> and <code translate="no">price</code>:​</p>
+    </button></h2><p>Milvusで数値フィールドを使用するには、コレクションスキーマで該当するフィールドを定義し、<code translate="no">datatype</code> を<code translate="no">BOOL</code> や<code translate="no">INT8</code> のようなサポートされている型に設定します。サポートされる数値フィールドタイプの完全なリストは、<a href="#Supported-number-field-types">サポートされる数値フィールド</a>タイプを参照してください。</p>
+<p>次の例は、数値フィールド<code translate="no">age</code> と<code translate="no">price</code> を含むスキーマを定義する方法を示しています。</p>
 <div class="multipleCode">
-  <a href="#python">Python </a>
-  <a href="#java">Java</a>
-  <a href="#javascript">Node.js</a>
-  <a href="#curl">cURL</a>
-</div>
+ <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType​
 ​
 client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)​
@@ -195,9 +187,9 @@ schema.addField(AddFieldReq.builder()​
 
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>The primary field and vector field are mandatory when you create a collection. The primary field uniquely identifies each entity, while the vector field is crucial for similarity search. For more details, refer to <a href="/docs/primary-field.md">​Primary Field &amp; AutoID</a>, <a href="/docs/dense-vector.md">​Dense Vector</a>, <a href="/docs/binary-vector.md">​Binary Vector</a>, or <a href="/docs/sparse_vector.md">​Sparse Vector</a>.​</p>
+<p>プライマリフィールドとベクトルフィールドは、コレクションを作成するときに必須である。プライマリ・フィールドは各エンティティを一意に識別し、ベクター・フィールドは類似検索に重要である。詳細は<a href="/docs/ja/primary-field.md">Primary Field &amp; AutoID</a>,<a href="/docs/ja/dense-vector.md">Dense Vector</a>,<a href="/docs/ja/binary-vector.md">Binary Vector</a>,<a href="/docs/ja/sparse_vector.md">Sparse Vector</a> を参照。</p>
 </div>
-<h2 id="Set-index-params​" class="common-anchor-header">Set index params​<button data-href="#Set-index-params​" class="anchor-icon" translate="no">
+<h2 id="Set-index-params​" class="common-anchor-header">インデックス・パラメータの設定<button data-href="#Set-index-params​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -212,14 +204,10 @@ schema.addField(AddFieldReq.builder()​
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Setting index parameters for number fields is optional but can significantly improve retrieval efficiency.​</p>
-<p>In the following example, we create an <code translate="no">AUTOINDEX</code> for the <code translate="no">age</code> number field, allowing Milvus to automatically create an appropriate index based on the data type. For more information, refer to <a href="https://milvus.io/docs/glossary.md#Auto-Index">​AUTOINDEX</a>.​</p>
+    </button></h2><p>数値フィールドにインデックス・パラメータを設定することはオプションですが、検索効率を大幅に向上させることができます。</p>
+<p>以下の例では、<code translate="no">age</code> 番号フィールドに<code translate="no">AUTOINDEX</code> を作成し、Milvusがデータ型に基づいて適切なインデックスを自動的に作成できるようにしています。詳細は<a href="https://milvus.io/docs/glossary.md#Auto-Index">AUTOINDEXを</a>参照してください。</p>
 <div class="multipleCode">
-  <a href="#python">Python </a>
-  <a href="#java">Java</a>
-  <a href="#javascript">Node.js</a>
-  <a href="#curl">cURL</a>
-</div>
+ <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python">index_params = client.<span class="hljs-title function_">prepare_index_params</span>()​
 ​
 index_params.<span class="hljs-title function_">add_index</span>(​
@@ -256,14 +244,10 @@ indexes.add(IndexParam.builder()​
     ]&#x27;</span>​
 
 <button class="copy-code-btn"></button></code></pre>
-<p>In addition to <code translate="no">AUTOINDEX</code>, you can specify other number field index types. For supported index types, refer to <a href="/docs/scalar_index.md">​Scalar Indexes</a>.​</p>
-<p>Moreover, before creating the collection, you must create an index for the vector field. In this example, we use <code translate="no">AUTOINDEX</code> to simplify vector index settings.​</p>
+<p><code translate="no">AUTOINDEX</code> 以外にも、数値フィールドのインデックス・タイプを指定することができます。サポートされているインデックス・タイプについては、<a href="/docs/ja/scalar_index.md">スカラー・インデックスを</a>参照してください。</p>
+<p>さらに、コレクションを作成する前に、ベクトル・フィールドのインデックスを作成する必要が あります。この例では、<code translate="no">AUTOINDEX</code> を使用して、ベクトル・インデックスの設定を簡素化している。</p>
 <div class="multipleCode">
-  <a href="#python">Python </a>
-  <a href="#java">Java</a>
-  <a href="#javascript">Node.js</a>
-  <a href="#curl">cURL</a>
-</div>
+ <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Add vector index​</span>
 index_params.add_index(​
     field_name=<span class="hljs-string">&quot;embedding&quot;</span>,​
@@ -309,7 +293,7 @@ index_params.add_index(​
     ]&#x27;</span>​
 
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Create-collection​" class="common-anchor-header">Create collection​<button data-href="#Create-collection​" class="anchor-icon" translate="no">
+<h2 id="Create-collection​" class="common-anchor-header">コレクションの作成<button data-href="#Create-collection​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -324,13 +308,9 @@ index_params.add_index(​
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Once the schema and indexes are defined, you can create a collection that includes number fields.​</p>
+    </button></h2><p>スキーマとインデックスが定義されたら、数値フィールドを含むコレクションを作成できます。</p>
 <div class="multipleCode">
-  <a href="#python">Python </a>
-  <a href="#java">Java</a>
-  <a href="#javascript">Node.js</a>
-  <a href="#curl">cURL</a>
-</div>
+ <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Create Collection​</span>
 client.create_collection(​
     collection_name=<span class="hljs-string">&quot;your_collection_name&quot;</span>,​
@@ -365,7 +345,7 @@ client.createCollection(requestCreate);​
 }&quot;</span>​
 
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Insert-data​" class="common-anchor-header">Insert data​<button data-href="#Insert-data​" class="anchor-icon" translate="no">
+<h2 id="Insert-data​" class="common-anchor-header">データの挿入<button data-href="#Insert-data​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -380,13 +360,9 @@ client.createCollection(requestCreate);​
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>After creating the collection, you can insert data that includes number fields.​</p>
+    </button></h2><p>コレクションを作成したら、数値フィールドを含むデータを挿入できます。</p>
 <div class="multipleCode">
-  <a href="#python">Python </a>
-  <a href="#java">Java</a>
-  <a href="#javascript">Node.js</a>
-  <a href="#curl">cURL</a>
-</div>
+ <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python">data = [​
     {<span class="hljs-string">&quot;age&quot;</span>: <span class="hljs-number">25</span>, <span class="hljs-string">&quot;price&quot;</span>: <span class="hljs-number">99.99</span>, <span class="hljs-string">&quot;pk&quot;</span>: <span class="hljs-number">1</span>, <span class="hljs-string">&quot;embedding&quot;</span>: [<span class="hljs-number">0.1</span>, <span class="hljs-number">0.2</span>, <span class="hljs-number">0.3</span>]},​
     {<span class="hljs-string">&quot;age&quot;</span>: <span class="hljs-number">30</span>, <span class="hljs-string">&quot;price&quot;</span>: <span class="hljs-number">149.50</span>, <span class="hljs-string">&quot;pk&quot;</span>: <span class="hljs-number">2</span>, <span class="hljs-string">&quot;embedding&quot;</span>: [<span class="hljs-number">0.4</span>, <span class="hljs-number">0.5</span>, <span class="hljs-number">0.6</span>]},​
@@ -444,9 +420,9 @@ client.<span class="hljs-title function_">insert</span>({​
 }&#x27;</span>​
 
 <button class="copy-code-btn"></button></code></pre>
-<p>In this example, we insert data that includes <code translate="no">age</code>, <code translate="no">price</code>, <code translate="no">pk</code> (primary field), and vector representations (<code translate="no">embedding</code>). To ensure that the inserted data matches the fields defined in the schema, it’s recommended to check data types in advance to avoid errors.​</p>
-<p>If you set <code translate="no">enable_dynamic_fields=True</code> when defining the schema, Milvus allows you to insert number fields that were not defined in advance. However, keep in mind that this may increase the complexity of queries and management, potentially impacting performance. For more information, refer to <a href="/docs/enable-dynamic-field.md">​Dynamic Field</a>.​</p>
-<h2 id="Search-and-query​" class="common-anchor-header">Search and query​<button data-href="#Search-and-query​" class="anchor-icon" translate="no">
+<p>この例では、<code translate="no">age</code> 、<code translate="no">price</code> 、<code translate="no">pk</code> （主フィールド）、およびベクトル表現（<code translate="no">embedding</code> ）を含むデータを挿入します。挿入されたデータがスキーマで定義されたフィールドと一致していることを確認するために、エラーを避けるためにデータ型を事前にチェックすることをお勧めします。</p>
+<p>スキーマ定義時に<code translate="no">enable_dynamic_fields=True</code> を設定すると、milvusでは事前に定義されていない数値フィールドを挿入することができます。ただし、この場合、クエリや管理が複雑になり、パフォーマンスに影響を与える可能性があることに留意してください。詳細は<a href="/docs/ja/enable-dynamic-field.md">Dynamic Fieldを</a>参照してください。</p>
+<h2 id="Search-and-query​" class="common-anchor-header">検索とクエリ<button data-href="#Search-and-query​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -461,14 +437,10 @@ client.<span class="hljs-title function_">insert</span>({​
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>After adding number fields, you can use them for filtering in search and query operations to achieve more precise search results.​</p>
-<h3 id="Filter-queries​" class="common-anchor-header">Filter queries​</h3><p>After adding number fields, you can use them for filtering in queries. For example, you can query all entities where <code translate="no">age</code> is between 30 and 40:​</p>
+    </button></h2><p>数値フィールドを追加した後は、検索やクエリ操作のフィルタリングに使用することで、より正確な検索結果を得ることができます。</p>
+<h3 id="Filter-queries​" class="common-anchor-header">フィルタ・クエリ</h3><p>数値フィールドを追加すると、クエリでのフィルタリングに使用できます。たとえば、<code translate="no">age</code> が 30 から 40 の間のすべてのエンティティを検索できます。</p>
 <div class="multipleCode">
-  <a href="#python">Python </a>
-  <a href="#java">Java</a>
-  <a href="#javascript">Node.js</a>
-  <a href="#curl">cURL</a>
-</div>
+ <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&quot;30 &lt;= age &lt;= 40&quot;</span>​
 ​
 res = client.query(​
@@ -520,14 +492,10 @@ System.out.println(resp.getQueryResults());​
 <span class="hljs-comment">## {&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:[{&quot;age&quot;:30,&quot;pk&quot;:2,&quot;price&quot;:149.5},{&quot;age&quot;:35,&quot;pk&quot;:3,&quot;price&quot;:199.99}]}​</span>
 
 <button class="copy-code-btn"></button></code></pre>
-<p>This query expression returns all matching entities and outputs their <code translate="no">age</code> and <code translate="no">price</code> fields. For more information on filter queries, refer to <a href="/docs/boolean.md">​Metadata Filtering</a>.​</p>
-<h3 id="Vector-search-with-number-filtering​" class="common-anchor-header">Vector search with number filtering​</h3><p>In addition to basic number field filtering, you can combine vector similarity searches with number field filters. For example, the following code shows how to add a number field filter to a vector search:​</p>
+<p>このクエリ式は、一致するすべてのエンティティを返し、それらの<code translate="no">age</code> フィールドと<code translate="no">price</code> フィールドを出力します。フィルタ・クエリの詳細については、「<a href="/docs/ja/boolean.md">メタデータ・フィルタリング</a>」を参照してください。</p>
+<h3 id="Vector-search-with-number-filtering​" class="common-anchor-header">数値フィルタリングによるベクトル検索</h3><p>基本的な数値フィールド・フィルタリングに加えて、ベクトル類似性検索を数値フィールド・フィルタリングと組み合わせることができます。例えば、次のコードは、ベクトル検索に数値フィールド・フィルターを追加する方法を示しています。</p>
 <div class="multipleCode">
-  <a href="#python">Python </a>
-  <a href="#java">Java</a>
-  <a href="#javascript">Node.js</a>
-  <a href="#curl">cURL</a>
-</div>
+ <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&quot;25 &lt;= age &lt;= 35&quot;</span>​
 ​
 res = client.search(​
@@ -593,4 +561,4 @@ System.out.println(resp.getSearchResults());​
 <span class="hljs-comment">## {&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:[{&quot;age&quot;:35,&quot;distance&quot;:-0.19054288,&quot;id&quot;:3,&quot;price&quot;:199.99},{&quot;age&quot;:30,&quot;distance&quot;:-0.20163085,&quot;id&quot;:2,&quot;price&quot;:149.5},{&quot;age&quot;:25,&quot;distance&quot;:-0.2364331,&quot;id&quot;:1,&quot;price&quot;:99.99}]}​</span>
 
 <button class="copy-code-btn"></button></code></pre>
-<p>In this example, we first define a query vector and add a filter condition <code translate="no">25 &lt;= age &lt;= 35</code> during the search. This ensures that the search results are not only similar to the query vector but also meet the specified age range. For more information, refer to <a href="/docs/boolean.md">​Metadata Filtering</a>.​</p>
+<p>この例では、まずクエリー・ベクターを定義し、検索中にフィルター条件（<code translate="no">25 &lt;= age &lt;= 35</code> ）を追加します。これにより、検索結果がクエリーベクトルに類似しているだけでなく、指定された年齢範囲も満たすようになります。詳細については、<a href="/docs/ja/boolean.md">メタデータのフィルタリングを</a>参照してください。</p>

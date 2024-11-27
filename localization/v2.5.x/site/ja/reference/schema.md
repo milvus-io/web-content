@@ -1,9 +1,9 @@
 ---
 id: schema.md
-summary: Learn how to define a schema in Milvus.
-title: Manage Schema
+summary: Milvusでスキーマを定義する方法を学びます。
+title: スキーマの管理
 ---
-<h1 id="Manage-Schema" class="common-anchor-header">Manage Schema<button data-href="#Manage-Schema" class="anchor-icon" translate="no">
+<h1 id="Manage-Schema" class="common-anchor-header">スキーマの管理<button data-href="#Manage-Schema" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -18,8 +18,8 @@ title: Manage Schema
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>This topic introduces schema in Milvus. Schema is used to define the properties of a collection and the fields within.</p>
-<h2 id="Field-schema" class="common-anchor-header">Field schema<button data-href="#Field-schema" class="anchor-icon" translate="no">
+    </button></h1><p>このトピックではMilvusにおけるスキーマについて紹介します。スキーマはコレクションとその中のフィールドのプロパティを定義するために使用されます。</p>
+<h2 id="Field-schema" class="common-anchor-header">フィールドスキーマ<button data-href="#Field-schema" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -34,61 +34,61 @@ title: Manage Schema
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>A field schema is the logical definition of a field. It is the first thing you need to define before defining a <a href="#Collection-schema">collection schema</a> and <a href="/docs/manage-collections.md">managing collections</a>.</p>
-<p>Milvus supports only one primary key field in a collection.</p>
-<h3 id="Field-schema-properties" class="common-anchor-header">Field schema properties</h3><table class="properties">
+    </button></h2><p>フィールドスキーマはフィールドの論理的定義です。<a href="#Collection-schema">コレクションスキーマを</a>定義し、<a href="/docs/ja/manage-collections.md">コレクションを管理する</a>前に最初に定義する必要があります。</p>
+<p>Milvusはコレクション内の主キーフィールドを1つだけサポートしています。</p>
+<h3 id="Field-schema-properties" class="common-anchor-header">フィールドスキーマプロパティ</h3><table class="properties">
     <thead>
     <tr>
-        <th>Properties</th>
-        <th>Description</th>
-        <th>Note</th>
+        <th>プロパティ</th>
+        <th>説明</th>
+        <th>備考</th>
     </tr>
     </thead>
     <tbody>
     <tr>
         <td><code translate="no">name</code></td>
-        <td>Name of the field in the collection to create</td>
-        <td>Data type: String.<br/>Mandatory</td>
+        <td>作成するコレクション内のフィールド名</td>
+        <td>データ型：<br/>必須</td>
     </tr>
     <tr>
         <td><code translate="no">dtype</code></td>
-        <td>Data type of the field</td>
-        <td>Mandatory</td>
+        <td>フィールドのデータ型</td>
+        <td>必須</td>
     </tr>
     <tr>
         <td><code translate="no">description</code></td>
-        <td>Description of the field</td>
-        <td>Data type: String.<br/>Optional</td>
+        <td>フィールドの説明</td>
+        <td>データ型：<br/>任意</td>
     </tr>
     <tr>
         <td><code translate="no">is_primary</code></td>
-        <td>Whether to set the field as the primary key field or not</td>
-        <td>Data type: Boolean (<code translate="no">true</code> or <code translate="no">false</code>).<br/>Mandatory for the primary key field</td>
+        <td>フィールドを主キーフィールドとして設定するかどうか。</td>
+        <td>データ型：ブール値（<code translate="no">true</code> または<code translate="no">false</code> ）。<br/>主キーフィールドには必須。</td>
     </tr>
         <tr>
-            <td><code translate="no">auto_id</code> (Mandatory for primary key field)</td>
-            <td>Switch to enable or disable automatic ID (primary key) allocation.</td>
-            <td><code translate="no">True</code> or <code translate="no">False</code></td>
+            <td><code translate="no">auto_id</code> (主キー・フィールドの場合は必須）</td>
+            <td>ID（主キー）の自動割り当てを有効または無効にするスイッチ。</td>
+            <td><code translate="no">True</code> または<code translate="no">False</code></td>
         </tr>
         <tr>
-            <td><code translate="no">max_length</code> (Mandatory for VARCHAR field)</td>
-            <td>Maximum byte length for strings allowed to be inserted. Note that multibyte characters (e.g., Unicode characters) may occupy more than one byte each, so ensure the byte length of inserted strings does not exceed the specified limit.</td>
+            <td><code translate="no">max_length</code> (VARCHARフィールドでは必須）。</td>
+            <td>挿入可能な文字列の最大バイト長。マルチバイト文字（Unicode文字など）はそれぞれ1バイト以上を占めることがあるので、挿入される文字列のバイト長が指定された上限を超えないようにしてください。</td>
             <td>[1, 65,535]</td>
         </tr>
     <tr>
         <td><code translate="no">dim</code></td>
-        <td>Dimension of the vector</td>
-            <td>Data type: Integer &isin;[1, 32768].<br/>Mandatory for a dense vector field. Omit for a <a href="https://milvus.io/docs/sparse_vector.md">sparse vector</a> field.</td>
+        <td>ベクトルの次元</td>
+            <td>データ型：<br/>密なベクトル・フィールドでは必須。<a href="https://milvus.io/docs/sparse_vector.md">疎なベクトル・</a>フィールドでは省略。</td>
     </tr>
     <tr>
         <td><code translate="no">is_partition_key</code></td>
-        <td>Whether this field is a partition-key field.</td>
-        <td>Data type: Boolean (<code translate="no">true</code> or <code translate="no">false</code>).</td>
+        <td>このフィールドがパーティション・キー・フィールドであるかどうか。</td>
+        <td>データ型：Boolean (<code translate="no">true</code> または<code translate="no">false</code>)。</td>
     </tr>
     </tbody>
 </table>
-<h3 id="Create-a-field-schema" class="common-anchor-header">Create a field schema</h3><p>To reduce the complexity in data inserts, Milvus allows you to specify a default value for each scalar field during field schema creation, excluding the primary key field. This indicates that if you leave a field empty when inserting data, the default value you specified for this field applies.</p>
-<p>Create a regular field schema:</p>
+<h3 id="Create-a-field-schema" class="common-anchor-header">フィールド・スキーマの作成</h3><p>データ挿入の複雑さを軽減するために、Milvusではフィールドスキーマ作成時に、プライマリキーフィールドを除く各スカラーフィールドのデフォルト値を指定することができます。これは、データ挿入時にフィールドを空のままにした場合、このフィールドに指定したデフォルト値が適用されることを示します。</p>
+<p>通常のフィールド・スキーマを作成する：</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> FieldSchema
 id_field = FieldSchema(name=<span class="hljs-string">&quot;id&quot;</span>, dtype=DataType.INT64, is_primary=<span class="hljs-literal">True</span>, description=<span class="hljs-string">&quot;primary id&quot;</span>)
 age_field = FieldSchema(name=<span class="hljs-string">&quot;age&quot;</span>, dtype=DataType.INT64, description=<span class="hljs-string">&quot;age&quot;</span>)
@@ -97,7 +97,7 @@ embedding_field = FieldSchema(name=<span class="hljs-string">&quot;embedding&quo
 <span class="hljs-comment"># The following creates a field and use it as the partition key</span>
 position_field = FieldSchema(name=<span class="hljs-string">&quot;position&quot;</span>, dtype=DataType.VARCHAR, max_length=<span class="hljs-number">256</span>, is_partition_key=<span class="hljs-literal">True</span>)
 <button class="copy-code-btn"></button></code></pre>
-<p>Create a field schema with default field values:</p>
+<p>デフォルト・フィールド値を持つフィールド・スキーマを作成します：</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> FieldSchema
 
 fields = [
@@ -107,38 +107,38 @@ fields = [
   embedding_field = FieldSchema(name=<span class="hljs-string">&quot;embedding&quot;</span>, dtype=DataType.FLOAT_VECTOR, dim=<span class="hljs-number">128</span>, description=<span class="hljs-string">&quot;vector&quot;</span>)
 ]
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Supported-data-types" class="common-anchor-header">Supported data types</h3><p><code translate="no">DataType</code> defines the kind of data a field contains. Different fields support different data types.</p>
+<h3 id="Supported-data-types" class="common-anchor-header">サポートされるデータ型</h3><p><code translate="no">DataType</code> は、フィールドに含まれるデータの種類を定義します。フィールドによってサポートするデータ型が異なります。</p>
 <ul>
-<li><p>Primary key field supports:</p>
+<li><p>主キーフィールドは以下のデータ型をサポートします：</p>
 <ul>
 <li>INT64: numpy.int64</li>
-<li>VARCHAR: VARCHAR</li>
+<li>varchar: varchar</li>
 </ul></li>
-<li><p>Scalar field supports:</p>
+<li><p>スカラーフィールドがサポートします：</p>
 <ul>
-<li>BOOL: Boolean (<code translate="no">true</code> or <code translate="no">false</code>)</li>
+<li>BOOL: ブーリアン (<code translate="no">true</code> または<code translate="no">false</code>)</li>
 <li>INT8: numpy.int8</li>
 <li>INT16: numpy.int16</li>
 <li>INT32: numpy.int32</li>
 <li>INT64: numpy.int64</li>
 <li>FLOAT: numpy.float32</li>
 <li>DOUBLE: numpy.double</li>
-<li>VARCHAR: VARCHAR</li>
-<li>JSON: <a href="/docs/use-json-fields.md">JSON</a></li>
-<li>Array: <a href="/docs/array_data_type.md">Array</a></li>
+<li>varchar: varchar</li>
+<li>JSON:<a href="/docs/ja/use-json-fields.md">JSON</a></li>
+<li>配列：<a href="/docs/ja/array_data_type.md">配列</a></li>
 </ul>
-<p>JSON as a composite data type is available. A JSON field comprises key-value pairs. Each key is a string, and a value can be a number, string, boolean value, array, or list. For details, refer to <a href="/docs/use-json-fields.md">JSON: a new data type</a>.</p></li>
-<li><p>Vector field supports:</p>
+<p>複合データ型としてのJSONが利用できます。JSONフィールドはキーと値のペアで構成される。各キーは文字列で、値は数値、文字列、ブーリアン値、配列、リストのいずれかです。詳細は<a href="/docs/ja/use-json-fields.md">JSON: a new data typeを</a>参照。</p></li>
+<li><p>ベクター・フィールドのサポート</p>
 <ul>
-<li>BINARY_VECTOR: Stores binary data as a sequence of 0s and 1s, used for compact feature representation in image processing and information retrieval.</li>
-<li>FLOAT_VECTOR: Stores 32-bit floating-point numbers, commonly used in scientific computing and machine learning for representing real numbers.</li>
-<li>FLOAT16_VECTOR: Stores 16-bit half-precision floating-point numbers, used in deep learning and GPU computations for memory and bandwidth efficiency.</li>
-<li>BFLOAT16_VECTOR: Stores 16-bit floating-point numbers with reduced precision but the same exponent range as Float32, popular in deep learning for reducing memory and computational requirements without significantly impacting accuracy.</li>
-<li>SPARSE_FLOAT_VECTOR: Stores a list of non-zero elements and their corresponding indices, used for representing sparse vectors. For more information, refer to <a href="/docs/sparse_vector.md">Sparse Vectors</a>.</li>
+<li>BINARY_VECTOR：バイナリ・データを0と1のシーケンスとして格納し、画像処理や情報検索でコンパクトな特徴表現に使用される。</li>
+<li>FLOAT_VECTOR：32ビット浮動小数点数を格納。科学計算や機械学習で実数を表現する際によく使用される。</li>
+<li>FLOAT16_VECTOR：16ビットの半精度浮動小数点数を格納し、ディープラーニングやGPU計算でメモリと帯域幅の効率化のために使用されます。</li>
+<li>BFLOAT16_VECTOR：精度を落とした16ビット浮動小数点数を格納しますが、指数範囲はFloat32と同じで、精度に大きな影響を与えることなくメモリと計算量を削減するためにディープラーニングでよく使用されます。</li>
+<li>SPARSE_FLOAT_VECTOR: スパース・ベクトルを表現するために使用される、非ゼロ要素とそれに対応するインデックスのリストを格納する。詳細は<a href="/docs/ja/sparse_vector.md">スパースベクタを</a>参照してください。</li>
 </ul>
-<p>Milvus supports multiple vector fields in a collection. For more information, refer to <a href="/docs/multi-vector-search.md">Hybrid Search</a>.</p></li>
+<p>Milvusはコレクション内の複数のベクトルフィールドをサポートしています。詳細は<a href="/docs/ja/multi-vector-search.md">ハイブリッド検索を</a>参照。</p></li>
 </ul>
-<h2 id="Collection-schema" class="common-anchor-header">Collection schema<button data-href="#Collection-schema" class="anchor-icon" translate="no">
+<h2 id="Collection-schema" class="common-anchor-header">コレクションスキーマ<button data-href="#Collection-schema" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -153,41 +153,40 @@ fields = [
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>A collection schema is the logical definition of a collection. Usually you need to define the <a href="#Field-schema">field schema</a> before defining a collection schema and <a href="/docs/manage-collections.md">managing collections</a>.</p>
-<h3 id="Collection-schema-properties" class="common-anchor-header">Collection schema properties</h3><table class="properties">
+    </button></h2><p>コレクションスキーマはコレクションの論理的定義です。通常、コレクションスキーマを定義して<a href="/docs/ja/manage-collections.md">コレクションを管理する</a>前に、<a href="#Field-schema">フィールドスキーマを</a>定義する必要があります。</p>
+<h3 id="Collection-schema-properties" class="common-anchor-header">コレクションスキーマのプロパティ</h3><table class="properties">
     <thead>
     <tr>
-        <th>Properties</th>
-        <th>Description</th>
-        <th>Note</th>
+        <th>プロパティ</th>
+        <th>説明</th>
+        <th>注釈</th>
     </tr>
     </thead>
     <tbody>
     <tr>
         <td><code translate="no">field</code></td>
-        <td>Fields in the collection to create</td>
-        <td>Mandatory</td>
+        <td>作成するコレクション内のフィールド</td>
+        <td>必須</td>
     </tr>
     <tr>
         <td><code translate="no">description</code></td>
-        <td>Description of the collection</td>
-        <td>Data type: String.<br/>Optional</td>
+        <td>コレクションの説明</td>
+        <td>データ型：<br/>オプション</td>
     </tr>
     <tr>
         <td><code translate="no">partition_key_field</code></td>
-        <td>Name of a field that is designed to act as the partition key.</td>
-        <td>Data type: String.<br/>Optional</td>
+        <td>パーティション・キーとして機能するように設計されたフィールドの名前。</td>
+        <td>データ型：<br/>オプション</td>
     </tr>
     <tr>
         <td><code translate="no">enable_dynamic_field</code></td>
-        <td>Whether to enable dynamic schema or not</td>
-        <td>Data type: Boolean (<code translate="no">true</code> or <code translate="no">false</code>).<br/>Optional, defaults to <code translate="no">False</code>.<br/>For details on dynamic schema, refer to <a herf="enable-dynamic-field.md">Dynamic Schema</a> and the user guides for managing collections.</td>
+        <td>ダイナミック・スキーマを有効にするかどうか。</td>
+        <td>データ型：<code translate="no">true</code> <code translate="no">false</code><br/>オプション、デフォルトは 。 ダイナミック・スキーマの詳細については、<code translate="no">False</code><br/><a herf="enable-dynamic-field.md">ダイナミック・スキーマ</a>およびコレクションを管理するためのユーザー・ガイドを参照してください。</td>
     </tr>
     </tbody>
 </table>
-<h3 id="Create-a-collection-schema" class="common-anchor-header">Create a collection schema</h3><div class="alert note">
-  Define the field schemas before defining a collection schema.
-</div>
+<h3 id="Create-a-collection-schema" class="common-anchor-header">コレクションスキーマの作成</h3><div class="alert note">
+  コレクションスキーマを定義する前に、フィールドスキーマを定義します。</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> FieldSchema, CollectionSchema
 id_field = FieldSchema(name=<span class="hljs-string">&quot;id&quot;</span>, dtype=DataType.INT64, is_primary=<span class="hljs-literal">True</span>, description=<span class="hljs-string">&quot;primary id&quot;</span>)
 age_field = FieldSchema(name=<span class="hljs-string">&quot;age&quot;</span>, dtype=DataType.INT64, description=<span class="hljs-string">&quot;age&quot;</span>)
@@ -199,7 +198,7 @@ position_field = FieldSchema(name=<span class="hljs-string">&quot;position&quot;
 <span class="hljs-comment"># Set enable_dynamic_field to True if you need to use dynamic fields. </span>
 schema = CollectionSchema(fields=[id_field, age_field, embedding_field], auto_id=<span class="hljs-literal">False</span>, enable_dynamic_field=<span class="hljs-literal">True</span>, description=<span class="hljs-string">&quot;desc of a collection&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
-<p>Create a collection with the schema specified:</p>
+<p>スキーマを指定してコレクションを作成します：</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> <span class="hljs-title class_">Collection</span>,connections
 conn = connections.<span class="hljs-title function_">connect</span>(host=<span class="hljs-string">&quot;127.0.0.1&quot;</span>, port=<span class="hljs-number">19530</span>)
 collection_name1 = <span class="hljs-string">&quot;tutorial_1&quot;</span>
@@ -207,14 +206,14 @@ collection1 = <span class="hljs-title class_">Collection</span>(name=collection_
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <ul>
-<li>You can define the shard number with <code translate="no">shards_num</code>.</li>
-<li>You can define the Milvus server on which you wish to create a collection by specifying the alias in <code translate="no">using</code>.</li>
-<li>You can enable the partition key feature on a field by setting <code translate="no">is_partition_key</code> to <code translate="no">True</code> on the field if you need to implement <a href="/docs/multi_tenancy.md">partition-key-based multi-tenancy</a>.</li>
-<li>You can enable dynamic schema by setting <code translate="no">enable_dynamic_field</code> to <code translate="no">True</code> in the collection schema if you need to <a href="/docs/enable-dynamic-field.md">enable dynamic field</a>.</li>
+<li><code translate="no">shards_num</code> でシャード番号を定義できます。</li>
+<li><code translate="no">using</code> でエイリアスを指定して、コレクションを作成するMilvusサーバーを定義できます。</li>
+<li><a href="/docs/ja/multi_tenancy.md">パーティションキーベースのマルチテナンシーを</a>実装する必要がある場合、<code translate="no">is_partition_key</code> を<code translate="no">True</code> に設定することで、フィールドのパーティションキー機能を有効にできます。</li>
+<li><a href="/docs/ja/enable-dynamic-field.md">動的フィールドを有効にする</a>必要がある場合、コレクションスキーマで<code translate="no">enable_dynamic_field</code> を<code translate="no">True</code> に設定することで、動的スキーマを有効にできます。</li>
 </ul>
 </div>
 <p><br/>
-You can also create a collection with <code translate="no">Collection.construct_from_dataframe</code>, which automatically generates a collection schema from DataFrame and creates a collection.</p>
+また、<code translate="no">Collection.construct_from_dataframe</code> を使用してコレクションを作成することもできます。これは、DataFrameからコレクション・スキーマを自動的に生成し、コレクションを作成します。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> pandas <span class="hljs-keyword">as</span> pd
 df = pd.DataFrame({
     <span class="hljs-string">&quot;id&quot;</span>: [i <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(nb)],
@@ -230,7 +229,7 @@ collection, ins_res = Collection.construct_from_dataframe(
     auto_id=<span class="hljs-literal">False</span>
     )
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Whats-next" class="common-anchor-header">What’s next<button data-href="#Whats-next" class="anchor-icon" translate="no">
+<h2 id="Whats-next" class="common-anchor-header">次のページ<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -246,7 +245,7 @@ collection, ins_res = Collection.construct_from_dataframe(
         ></path>
       </svg>
     </button></h2><ul>
-<li>Learn how to prepare schema when <a href="/docs/manage-collections.md">managing collections</a>.</li>
-<li>Read more about <a href="/docs/enable-dynamic-field.md">dynamic schema</a>.</li>
-<li>Read more about partition-key in <a href="/docs/multi_tenancy.md">Multi-tenancy</a>.</li>
+<li><a href="/docs/ja/manage-collections.md">コレクションを管理する</a>際にスキーマを準備する方法を学びます。</li>
+<li><a href="/docs/ja/enable-dynamic-field.md">動的スキーマの</a>詳細。</li>
+<li><a href="/docs/ja/multi_tenancy.md">マルチテナントにおける</a>パーティション・キーについて。</li>
 </ul>

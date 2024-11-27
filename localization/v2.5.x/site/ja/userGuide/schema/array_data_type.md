@@ -1,14 +1,10 @@
 ---
 id: array_data_type.md
-title: Array Field​​
+title: 配列フィールド
 summary: >-
-  The Array type is used to store fields containing multiple values of the same
-  data type. It provides a flexible way to store attributes with multiple
-  elements, making it especially useful in scenarios where a set of related data
-  needs to be saved. In Milvus, you can store Array fields alongside vector
-  data, enabling more complex query and filtering requirements.​
+  Array型は、同じデータ型の複数の値を含むフィールドを保存するために使用されます。複数の要素を持つ属性を保存する柔軟な方法を提供し、関連するデータのセットを保存する必要があるシナリオで特に有用です。Milvusでは、Arrayフィールドをベクターデータと一緒に保存することができ、より複雑なクエリやフィルタリングが可能になります。
 ---
-<h1 id="Array-Field​" class="common-anchor-header">Array Field​<button data-href="#Array-Field​" class="anchor-icon" translate="no">
+<h1 id="Array-Field​" class="common-anchor-header">配列フィールド<button data-href="#Array-Field​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -23,16 +19,16 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>The Array type is used to store fields containing multiple values of the same data type. It provides a flexible way to store attributes with multiple elements, making it especially useful in scenarios where a set of related data needs to be saved. In Milvus, you can store Array fields alongside vector data, enabling more complex query and filtering requirements.​</p>
-<p>For example, in a music recommendation system, an Array field can store a list of tags for a song; in user behavior analysis, it can store user ratings for songs. Below is an example of a typical Array field:​</p>
+    </button></h1><p>Array型は、同じデータ型の複数の値を含むフィールドを保存するために使用されます。複数の要素を持つ属性を保存する柔軟な方法を提供し、関連するデータのセットを保存する必要があるシナリオで特に有用です。Milvusでは、ベクトルデータと共にArrayフィールドを保存することができ、より複雑なクエリやフィルタリングの要件を可能にします。</p>
+<p>例えば、音楽推薦システムでは、Arrayフィールドに曲のタグリストを保存することができ、ユーザー行動分析では、曲に対するユーザー評価を保存することができます。以下は典型的なArrayフィールドの例である。</p>
 <pre><code translate="no" class="language-JSON">{​
   <span class="hljs-string">&quot;tags&quot;</span>: [<span class="hljs-string">&quot;pop&quot;</span>, <span class="hljs-string">&quot;rock&quot;</span>, <span class="hljs-string">&quot;classic&quot;</span>],​
   <span class="hljs-string">&quot;ratings&quot;</span>: [<span class="hljs-number">5</span>, <span class="hljs-number">4</span>, <span class="hljs-number">3</span>]​
 }​
 
 <button class="copy-code-btn"></button></code></pre>
-<p>In this example, <code translate="no">tags</code> and <code translate="no">ratings</code> are both Array fields. The <code translate="no">tags</code> field is a string array representing song genres like pop, rock, and classic, while the <code translate="no">ratings</code> field is an integer array representing user ratings for the song, ranging from 1 to 5. These Array fields provide a flexible way to store multi-value data, making it easier to perform detailed analysis during queries and filtering.​</p>
-<h2 id="Add-Array-field​" class="common-anchor-header">Add Array field​<button data-href="#Add-Array-field​" class="anchor-icon" translate="no">
+<p>この例では、<code translate="no">tags</code> と<code translate="no">ratings</code> はどちらもArrayフィールドである。この例では、<code translate="no">ratings</code> と はどちらも Array フィールドです。<code translate="no">tags</code> フィールドはポップ、ロック、クラシックなどの曲のジャンルを表す文字列配列で、 フィールドは曲に対するユーザー評価を表す 1 から 5 までの整数配列です。これらのArrayフィールドは、複数値のデータを格納する柔軟な方法を提供し、クエリやフィルタリングの際に詳細な分析を行いやすくします。</p>
+<h2 id="Add-Array-field​" class="common-anchor-header">配列フィールドの追加<button data-href="#Add-Array-field​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -47,20 +43,15 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>To use Array fields in Milvus, define the relevant field type when creating the collection schema. This process includes:​</p>
+    </button></h2><p>MilvusでArrayフィールドを使用するには、コレクションスキーマを作成する際に関連するフィールドタイプを定義します。このプロセスには以下が含まれます。</p>
 <ol>
-<li><p>Setting <code translate="no">datatype</code> to the supported Array data type, <code translate="no">ARRAY</code>.​</p></li>
-<li><p>Using the <code translate="no">element_type</code> parameter to specify the data type of elements in the array. This can be any scalar data type supported by Milvus, such as <code translate="no">VARCHAR</code> or <code translate="no">INT64</code>. All elements in the same Array must be of the same data type.​</p></li>
-<li><p>Using the <code translate="no">max_capacity</code> parameter to define the maximum capacity of the array, i.e., the maximum number of elements it can contain.​</p></li>
+<li><p><code translate="no">datatype</code> をサポートされている Array データ型、<code translate="no">ARRAY</code> に設定します。</p></li>
+<li><p><code translate="no">element_type</code> パラメータを使用して、配列内の要素のデータ型を指定します。これは、<code translate="no">VARCHAR</code> や<code translate="no">INT64</code> など、Milvus がサポートする任意のスカラーデータ型にすることができます。 同じ Array 内のすべての要素は、同じデータ型でなければなりません。</p></li>
+<li><p><code translate="no">max_capacity</code> パラメータを使用して、配列の最大容量、つまり格納できる要素の最大数を定義します。</p></li>
 </ol>
-<p>Here’s how to define a collection schema that includes Array fields:​</p>
+<p>Arrayフィールドを含むコレクションスキーマを定義する方法は次のとおりです。</p>
 <div class="multipleCode">
-  <a href="#python">Python </a>
-  <a href="#java">Java</a>
-  <a href="#javascript">Node.js</a>
-  <a href="#go">Go</a>
-  <a href="#curl">cURL</a>
-</div>
+ <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#go">Go</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType​
 ​
 client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)​
@@ -194,16 +185,16 @@ schema.addField(AddFieldReq.builder()​
 }&quot;</span>​
 
 <button class="copy-code-btn"></button></code></pre>
-<p>In this example:​</p>
+<p>この例では</p>
 <ul>
-<li><p><code translate="no">tags</code> is a string array with <code translate="no">element_type</code> set to <code translate="no">VARCHAR</code>, indicating that elements in the array must be strings. <code translate="no">max_capacity</code> is set to 10, meaning the array can contain up to 10 elements.​</p></li>
-<li><p><code translate="no">ratings</code> is an integer array with <code translate="no">element_type</code> set to <code translate="no">INT64</code>, indicating that elements must be integers. <code translate="no">max_capacity</code> is set to 5, allowing up to 5 ratings.​</p></li>
-<li><p>We also add a primary key field <code translate="no">pk</code> and a vector field <code translate="no">embedding</code>.​</p></li>
+<li><p><code translate="no">tags</code> は文字列配列で、 は に設定され、配列の要素は文字列でなければならないことを示します。 は 10 に設定され、配列は最大10個の要素を含むことができることを示します。<code translate="no">element_type</code> <code translate="no">VARCHAR</code> <code translate="no">max_capacity</code> </p></li>
+<li><p><code translate="no">ratings</code> は整数配列で、 が に設定され、要素は整数でなければならないことを示しています。 は 5 に設定され、最大 5 つの評価が可能であることを示しています。<code translate="no">element_type</code> <code translate="no">INT64</code> <code translate="no">max_capacity</code> </p></li>
+<li><p>また、主キーフィールド<code translate="no">pk</code> とベクトルフィールド<code translate="no">embedding</code> を追加します。</p></li>
 </ul>
 <div class="alert note">
-<p>The primary field and vector field are mandatory when you create a collection. The primary field uniquely identifies each entity, while the vector field is crucial for similarity search. For more details, refer to <a href="/docs/primary-field.md">​Primary Field &amp; AutoID</a>, <a href="/docs/dense-vector.md">​Dense Vector</a>, <a href="/docs/binary-vector.md">​Binary Vector</a>, or <a href="/docs/sparse_vector.md">​Sparse Vector</a>.​</p>
+<p>主フィールドとベクトルフィールドは、コレクションを作成するときに必須です。プライマリフィールドは各エンティティを一意に識別し、ベクトルフィールドは類似検索に重要である。詳細は<a href="/docs/ja/primary-field.md">Primary Field &amp; AutoID</a>,<a href="/docs/ja/dense-vector.md">Dense Vector</a>,<a href="/docs/ja/binary-vector.md">Binary Vector</a>,<a href="/docs/ja/sparse_vector.md">Sparse Vector</a> を参照。</p>
 </div>
-<h2 id="Set-index-params​" class="common-anchor-header">Set index params​<button data-href="#Set-index-params​" class="anchor-icon" translate="no">
+<h2 id="Set-index-params​" class="common-anchor-header">インデックスパラメータの設定<button data-href="#Set-index-params​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -218,15 +209,10 @@ schema.addField(AddFieldReq.builder()​
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Setting index parameters for Array fields is optional but can significantly improve retrieval efficiency.​</p>
-<p>In the following example, we create an <code translate="no">AUTOINDEX</code> for the <code translate="no">tags</code> field, which means Milvus will automatically create an appropriate scalar index based on the data type.</p>
+    </button></h2><p>Arrayフィールドにインデックスパラメータを設定することはオプションですが、検索効率を大幅に向上させることができます。</p>
+<p>以下の例では、<code translate="no">tags</code> フィールドに対して<code translate="no">AUTOINDEX</code> を作成しています。これは、milvus がデータ型に基づいて適切なスカラーインデックスを自動的に作成することを意味します。</p>
 <div class="multipleCode">
-  <a href="#python">Python </a>
-  <a href="#java">Java</a>
-  <a href="#javascript">Node.js</a>
-  <a href="#go">Go</a>
-  <a href="#curl">cURL</a>
-</div>
+ <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#go">Go</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Prepare index parameters​</span>
 index_params = client.prepare_index_params()  <span class="hljs-comment"># Prepare IndexParams object​</span>
 ​
@@ -264,15 +250,10 @@ indexes.add(IndexParam.builder()​
     ]&#x27;</span>​
 
 <button class="copy-code-btn"></button></code></pre>
-<p>In addition to <code translate="no">AUTOINDEX</code>, you can specify other scalar index types like <code translate="no">INVERTED</code> or <code translate="no">BITMAP</code>. For supported index types, refer to <a href="/docs/index-scalar-fields.md">​Scalar Indexes</a>.​</p>
-<p>Moreover, you must create an index for the vector field before creating the collection. In this example, we use <code translate="no">AUTOINDEX</code> to simplify vector index setup.​</p>
+<p><code translate="no">AUTOINDEX</code> 以外にも、<code translate="no">INVERTED</code> や<code translate="no">BITMAP</code> などのスカラー・インデックス・タイプを指定することができます。サポートされているインデックス・タイプについては、<a href="/docs/ja/index-scalar-fields.md">スカラー・インデックスを</a>参照。</p>
+<p>さらに、コレクションを作成する前に、ベクトル・フィールド用のインデックスを作成する必要があります。この例では、<code translate="no">AUTOINDEX</code> を使用して、ベクトル・インデックスのセットアップを簡素化している。</p>
 <div class="multipleCode">
-  <a href="#python">Python </a>
-  <a href="#java">Java</a>
-  <a href="#javascript">Node.js</a>
-  <a href="#go">Go</a>
-  <a href="#curl">cURL</a>
-</div>
+ <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#go">Go</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Add vector index​</span>
 index_params.add_index(​
     field_name=<span class="hljs-string">&quot;embedding&quot;</span>,​
@@ -309,7 +290,7 @@ index_params.add_index(​
     ]&#x27;</span>​
 
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Create-collection​" class="common-anchor-header">Create collection​<button data-href="#Create-collection​" class="anchor-icon" translate="no">
+<h2 id="Create-collection​" class="common-anchor-header">コレクションの作成<button data-href="#Create-collection​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -324,14 +305,9 @@ index_params.add_index(​
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Use the defined schema and index parameters to create a collection:​</p>
+    </button></h2><p>定義されたスキーマとインデックスパラメーターを使用して、コレクションを作成します。</p>
 <div class="multipleCode">
-  <a href="#python">Python </a>
-  <a href="#java">Java</a>
-  <a href="#javascript">Node.js</a>
-  <a href="#go">Go</a>
-  <a href="#curl">cURL</a>
-</div>
+ <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#go">Go</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python">client.<span class="hljs-title function_">create_collection</span>(​
     collection_name=<span class="hljs-string">&quot;my_array_collection&quot;</span>,​
     schema=schema,​
@@ -365,7 +341,7 @@ client.createCollection(requestCreate);​
 }&quot;</span>​
 
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Insert-data​" class="common-anchor-header">Insert data​<button data-href="#Insert-data​" class="anchor-icon" translate="no">
+<h2 id="Insert-data​" class="common-anchor-header">データの挿入<button data-href="#Insert-data​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -380,14 +356,9 @@ client.createCollection(requestCreate);​
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>After creating the collection, you can insert data that includes Array fields.​</p>
+    </button></h2><p>コレクションを作成した後、Arrayフィールドを含むデータを挿入できます。</p>
 <div class="multipleCode">
-  <a href="#python">Python </a>
-  <a href="#java">Java</a>
-  <a href="#javascript">Node.js</a>
-  <a href="#go">Go</a>
-  <a href="#curl">cURL</a>
-</div>
+ <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#go">Go</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python">data = [​
     {​
         <span class="hljs-string">&quot;tags&quot;</span>: [<span class="hljs-string">&quot;pop&quot;</span>, <span class="hljs-string">&quot;rock&quot;</span>, <span class="hljs-string">&quot;classic&quot;</span>],​
@@ -489,12 +460,12 @@ client.<span class="hljs-title function_">insert</span>({​
 }&#x27;</span>​
 
 <button class="copy-code-btn"></button></code></pre>
-<p>In this example:​</p>
+<p>この例では</p>
 <ul>
-<li><p>Each data entry includes a primary field (<code translate="no">pk</code>), while <code translate="no">tags</code> and <code translate="no">ratings</code> are Array fields used to store tags and ratings.​</p></li>
-<li><p><code translate="no">embedding</code> is a 3-dimensional vector field used for vector similarity searches.​</p></li>
+<li><p><code translate="no">pk</code> <code translate="no">tags</code> と はタグと評価を格納するためのArrayフィールドです。<code translate="no">ratings</code> </p></li>
+<li><p><code translate="no">embedding</code> はベクトル類似性検索に使用される3次元ベクトル・フィールドである。</p></li>
 </ul>
-<h2 id="Search-and-query​" class="common-anchor-header">Search and query​<button data-href="#Search-and-query​" class="anchor-icon" translate="no">
+<h2 id="Search-and-query​" class="common-anchor-header">検索とクエリ<button data-href="#Search-and-query​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -509,15 +480,10 @@ client.<span class="hljs-title function_">insert</span>({​
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Array fields enable scalar filtering during searches, enhancing Milvus’s vector search capabilities. You can query based on the properties of Array fields alongside vector similarity searches.​</p>
-<h3 id="Filter-queries​" class="common-anchor-header">Filter queries​</h3><p>You can filter data based on properties of Array fields, such as accessing a specific element or checking if an array element meets a certain condition.​</p>
+    </button></h2><p>配列フィールドは検索時のスカラーフィルタリングを可能にし、milvusのベクトル検索機能を強化します。ベクトル類似検索と並行して、Arrayフィールドのプロパティに基づいてクエリを実行することができます。</p>
+<h3 id="Filter-queries​" class="common-anchor-header">フィルタ検索</h3><p>特定の要素にアクセスしたり、配列要素が特定の条件を満たすかどうかをチェックするなど、Arrayフィールドのプロパティに基づいてデータをフィルタリングできます。</p>
 <div class="multipleCode">
-  <a href="#python">Python </a>
-  <a href="#java">Java</a>
-  <a href="#javascript">Node.js</a>
-  <a href="#go">Go</a>
-  <a href="#curl">cURL</a>
-</div>
+ <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#go">Go</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;ratings[0] &lt; 4&#x27;</span>​
 ​
 res = client.query(​
@@ -568,15 +534,10 @@ System.out.println(resp.getQueryResults());​
 <span class="hljs-comment"># {&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:[{&quot;embedding&quot;:[0.67,0.45,0.89],&quot;pk&quot;:3,&quot;ratings&quot;:{&quot;Data&quot;:{&quot;LongData&quot;:{&quot;data&quot;:[3,3,4]}}},&quot;tags&quot;:{&quot;Data&quot;:{&quot;StringData&quot;:{&quot;data&quot;:[&quot;electronic&quot;,&quot;dance&quot;]}}}}]}​</span>
 
 <button class="copy-code-btn"></button></code></pre>
-<p>In this query, Milvus filters out entities where the first element of the <code translate="no">ratings</code> array is less than 4, returning entities that match the condition.​</p>
-<h3 id="Vector-search-with-Array-filtering​" class="common-anchor-header">Vector search with Array filtering​</h3><p>By combining vector similarity with Array filtering, you can ensure that the retrieved data is not only similar in semantics but also meets specific conditions, making the search results more accurate and aligned with business needs.​</p>
+<p>このクエリでは、Milvusは<code translate="no">ratings</code> 配列の最初の要素が4未満のエンティティをフィルタリングし、条件に一致するエンティティを返します。</p>
+<h3 id="Vector-search-with-Array-filtering​" class="common-anchor-header">配列フィルタリングによるベクトル検索</h3><p>ベクトルの類似性と配列のフィルタリングを組み合わせることで、検索されたデータがセマンティクスにおいて類似しているだけでなく、特定の条件を満たしていることを確認することができます。</p>
 <div class="multipleCode">
-  <a href="#python">Python </a>
-  <a href="#java">Java</a>
-  <a href="#javascript">Node.js</a>
-  <a href="#go">Go</a>
-  <a href="#curl">cURL</a>
-</div>
+ <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#go">Go</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;tags[0] == &quot;pop&quot;&#x27;</span>​
 ​
 res = client.search(​
@@ -641,9 +602,9 @@ System.out.println(resp.getSearchResults());​
 <span class="hljs-comment"># {&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:[{&quot;distance&quot;:-0.24793813,&quot;embedding&quot;:[0.12,0.34,0.56],&quot;id&quot;:1,&quot;ratings&quot;:{&quot;Data&quot;:{&quot;LongData&quot;:{&quot;data&quot;:[5,4,3]}}},&quot;tags&quot;:{&quot;Data&quot;:{&quot;StringData&quot;:{&quot;data&quot;:[&quot;pop&quot;,&quot;rock&quot;,&quot;classic&quot;]}}}}]}​</span>
 
 <button class="copy-code-btn"></button></code></pre>
-<p>In this example, Milvus returns the top 5 entities most similar to the query vector, with the <code translate="no">tags</code> array’s first element being <code translate="no">&quot;pop&quot;</code>.​</p>
-<p>Additionally, Milvus supports advanced Array filtering operators like <code translate="no">ARRAY_CONTAINS</code>, <code translate="no">ARRAY_CONTAINS_ALL</code>, <code translate="no">ARRAY_CONTAINS_ANY</code>, and <code translate="no">ARRAY_LENGTH</code> to further enhance query capabilities. For more details, refer to <a href="/docs/boolean.md">​Metadata Filtering</a>.​</p>
-<h2 id="Limits​" class="common-anchor-header">Limits​<button data-href="#Limits​" class="anchor-icon" translate="no">
+<p>この例では、Milvusはクエリベクトルに最も類似した上位5つのエンティティを返し、<code translate="no">tags</code> 配列の最初の要素は<code translate="no">&quot;pop&quot;</code> 。</p>
+<p>さらに、Milvusは<code translate="no">ARRAY_CONTAINS</code> 、<code translate="no">ARRAY_CONTAINS_ALL</code> 、<code translate="no">ARRAY_CONTAINS_ANY</code> 、<code translate="no">ARRAY_LENGTH</code> のような高度な配列フィルタリング演算子をサポートしており、クエリ機能をさらに強化することができます。詳細は<a href="/docs/ja/boolean.md">メタデータフィルタリングを</a>参照してください。</p>
+<h2 id="Limits​" class="common-anchor-header">リミット<button data-href="#Limits​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -659,7 +620,7 @@ System.out.println(resp.getSearchResults());​
         ></path>
       </svg>
     </button></h2><ul>
-<li><p><strong>Data Type</strong>: All elements in an Array field must have the same data type, as specified by the <code translate="no">element_type</code>.​</p></li>
-<li><p><strong>Array Capacity</strong>: The number of elements in an Array field must be less than or equal to the maximum capacity defined when the Array was created, as specified by <code translate="no">max_capacity</code>.​</p></li>
-<li><p><strong>String Handling</strong>: String values in Array fields are stored as-is, without semantic escaping or conversion. For example, <code translate="no">'a&quot;b'</code>, <code translate="no">&quot;a'b&quot;</code>, <code translate="no">'a\'b'</code>, and <code translate="no">&quot;a\&quot;b&quot;</code> are stored as entered, while <code translate="no">'a'b'</code> and <code translate="no">&quot;a&quot;b&quot;</code> are considered invalid values.​</p></li>
+<li><p><strong>データ型</strong>：データ型：配列フィールドのすべての要素は、<code translate="no">element_type</code> で指定されているように、同じデータ型でなければなりません。</p></li>
+<li><p><strong>配列の容量</strong>：配列の容量：配列フィールドの要素数は、<code translate="no">max_capacity</code> で指定されているように、配列の作成時に定義された最大容量以下でなければならない。</p></li>
+<li><p><strong>文字列の処理</strong>：配列フィールドの文字列値は、セマンティック・エスケープや変換を行わず、そのまま格納される。例えば、<code translate="no">'a&quot;b'</code> 、<code translate="no">&quot;a'b&quot;</code> 、<code translate="no">'a\'b'</code> 、<code translate="no">&quot;a\&quot;b&quot;</code> は入力されたまま格納され、<code translate="no">'a'b'</code> 、<code translate="no">&quot;a&quot;b&quot;</code> は無効な値とみなされる。</p></li>
 </ul>

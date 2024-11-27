@@ -2,10 +2,10 @@
 id: install_standalone-docker-compose.md
 label: Docker Compose
 related_key: Docker Compose
-summary: Learn how to install Milvus standalone with Docker Compose.
-title: Run Milvus with Docker Compose
+summary: Docker Composeを使ってmilvusをスタンドアロンインストールする方法をご紹介します。
+title: Docker ComposeでMilvusを起動する
 ---
-<h1 id="Run-Milvus-with-Docker-Compose" class="common-anchor-header">Run Milvus with Docker Compose<button data-href="#Run-Milvus-with-Docker-Compose" class="anchor-icon" translate="no">
+<h1 id="Run-Milvus-with-Docker-Compose" class="common-anchor-header">Docker ComposeでMilvusを起動する<button data-href="#Run-Milvus-with-Docker-Compose" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -20,8 +20,8 @@ title: Run Milvus with Docker Compose
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>This page illustrates how to launch a Milvus instance in Docker using Docker Compose.</p>
-<h2 id="Prerequisites" class="common-anchor-header">Prerequisites<button data-href="#Prerequisites" class="anchor-icon" translate="no">
+    </button></h1><p>このページでは、Docker Composeを使用してDocker上でMilvusインスタンスを起動する方法を説明します。</p>
+<h2 id="Prerequisites" class="common-anchor-header">前提条件<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -37,10 +37,10 @@ title: Run Milvus with Docker Compose
         ></path>
       </svg>
     </button></h2><ul>
-<li><a href="https://docs.docker.com/get-docker/">Install Docker</a>.</li>
-<li><a href="/docs/prerequisite-docker.md">Check the requirements for hardware and software</a> prior to your installation.</li>
+<li><a href="https://docs.docker.com/get-docker/">Dockerをインストール</a>します。</li>
+<li>インストール前に<a href="/docs/ja/prerequisite-docker.md">ハードウェアとソフトウェアの要件を確認して</a>ください。</li>
 </ul>
-<h2 id="Install-Milvus" class="common-anchor-header">Install Milvus<button data-href="#Install-Milvus" class="anchor-icon" translate="no">
+<h2 id="Install-Milvus" class="common-anchor-header">Milvusのインストール<button data-href="#Install-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -55,7 +55,7 @@ title: Run Milvus with Docker Compose
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus provides a Docker Compose configuration file in the Milvus repository. To install Milvus using Docker Compose, just run</p>
+    </button></h2><p>MilvusはDocker Composeの設定ファイルをMilvusリポジトリに用意しています。Docker Composeを使用してMilvusをインストールするには、以下のコマンドを実行してください。</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-comment"># Download the configuration file</span>
 $ wget https://github.com/milvus-io/milvus/releases/download/v2.5.0-beta/milvus-standalone-docker-compose.yml -O docker-compose.yml
 
@@ -68,20 +68,19 @@ Creating milvus-standalone ... <span class="hljs-keyword">done</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <ul>
-<li><p>If you failed to run the above command, please check whether your system has Docker Compose V1 installed. If this is the case, you are advised to migrate to Docker Compose V2 due to the notes on <a href="https://docs.docker.com/compose/">this page</a>.</p></li>
-<li><p>If you encounter any issues pulling the image, contact us at <a href="mailto:community@zilliz.com">community@zilliz.com</a> with details about the problem, and we’ll provide you with the necessary support.</p></li>
+<li><p>上記コマンドの実行に失敗した場合は、システムにDocker Compose V1がインストールされているか確認してください。もしそうであれば、<a href="https://docs.docker.com/compose/">このページの</a>注意事項に従い、Docker Compose V2に移行することをお勧めします。</p></li>
+<li><p>もしイメージのプルに関して問題が発生した場合は、<a href="mailto:community@zilliz.com">community@zilliz.com</a>まで問題の詳細をご連絡ください。</p></li>
 </ul>
 </div>
-<p>After starting up Milvus,</p>
+<p>milvusの起動後、</p>
 <ul>
-<li>Containers named <strong>milvus-standalone</strong>, <strong>milvus-minio</strong>, and <strong>milvus-etcd</strong> are up.
-<ul>
-<li>The <strong>milvus-etcd</strong> container does not expose any ports to the host and maps its data to <strong>volumes/etcd</strong> in the current folder.</li>
-<li>The <strong>milvus-minio</strong> container serves ports <strong>9090</strong> and <strong>9091</strong> locally with the default authentication credentials and maps its data to <strong>volumes/minio</strong> in the current folder.</li>
-<li>The <strong>milvus-standalone</strong> container serves ports <strong>19530</strong> locally with the default settings and maps its data to <strong>volumes/milvus</strong> in the current folder.</li>
+<li><strong>milvus-standalone</strong>、<strong>milvus-minio</strong>、<strong>milvus-etcdという</strong>名前のコンテナが立ち上がっています。<ul>
+<li><strong>milvus-etcd</strong>コンテナはホストにポートを公開せず、カレントフォルダ内の<strong>volumes/etcdに</strong>データをマッピングする。</li>
+<li><strong>milvus-minio</strong>コンテナは、デフォルトの認証情報を使用してポート<strong>9090</strong>および<strong>9091</strong>をローカルに提供し、そのデータを現在のフォルダ内の<strong>volumes/minio</strong>にマップする。</li>
+<li><strong>milvus-standalone</strong>コンテナは、デフォルト設定でローカルにポート<strong>19530</strong>を提供し、そのデータを現在のフォルダ内の<strong>volumes/milvus</strong>にマップする。</li>
 </ul></li>
 </ul>
-<p>You can check if the containers are up and running using the following command:</p>
+<p>コンテナが稼働しているかどうかは、以下のコマンドで確認できる：</p>
 <pre><code translate="no" class="language-shell">$ <span class="hljs-built_in">sudo</span> docker-compose ps
 
       Name                     Command                  State                            Ports
@@ -90,14 +89,14 @@ milvus-etcd         etcd -advertise-client-url ...   Up             2379/tcp, 23
 milvus-minio        /usr/bin/docker-entrypoint ...   Up (healthy)   9000/tcp
 milvus-standalone   /tini -- milvus run standalone   Up             0.0.0.0:19530-&gt;19530/tcp, 0.0.0.0:9091-&gt;9091/tcp
 <button class="copy-code-btn"></button></code></pre>
-<p>You can stop and delete this container as follows</p>
+<p>このコンテナは、以下のようにして停止および削除できる。</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-comment"># Stop Milvus</span>
 $ <span class="hljs-built_in">sudo</span> docker-compose down
 
 <span class="hljs-comment"># Delete service data</span>
 $ <span class="hljs-built_in">sudo</span> <span class="hljs-built_in">rm</span> -rf volumes
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Whats-next" class="common-anchor-header">What’s next<button data-href="#Whats-next" class="anchor-icon" translate="no">
+<h2 id="Whats-next" class="common-anchor-header">次のステップ<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -112,28 +111,28 @@ $ <span class="hljs-built_in">sudo</span> <span class="hljs-built_in">rm</span> 
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Having installed Milvus in Docker, you can:</p>
+    </button></h2><p>DockerにMilvusをインストールしたら、次のことができます：</p>
 <ul>
-<li><p>Check <a href="/docs/quickstart.md">Quickstart</a> to see what Milvus can do.</p></li>
-<li><p>Learn the basic operations of Milvus:</p>
+<li><p><a href="/docs/ja/quickstart.md">クイックスタートで</a>Milvusの機能を確認する。</p></li>
+<li><p>Milvusの基本操作を学ぶ：</p>
 <ul>
-<li><a href="/docs/manage_databases.md">Manage Databases</a></li>
-<li><a href="/docs/manage-collections.md">Manage Collections</a></li>
-<li><a href="/docs/manage-partitions.md">Manage Partitions</a></li>
-<li><a href="/docs/insert-update-delete.md">Insert, Upsert &amp; Delete</a></li>
-<li><a href="/docs/single-vector-search.md">Single-Vector Search</a></li>
-<li><a href="/docs/multi-vector-search.md">Hybrid Search</a></li>
+<li><a href="/docs/ja/manage_databases.md">データベースの管理</a></li>
+<li><a href="/docs/ja/manage-collections.md">コレクションの管理</a></li>
+<li><a href="/docs/ja/manage-partitions.md">パーティションの管理</a></li>
+<li><a href="/docs/ja/insert-update-delete.md">挿入、アップサート、削除</a></li>
+<li><a href="/docs/ja/single-vector-search.md">単一ベクトル検索</a></li>
+<li><a href="/docs/ja/multi-vector-search.md">ハイブリッド検索</a></li>
 </ul></li>
-<li><p><a href="/docs/upgrade_milvus_cluster-helm.md">Upgrade Milvus Using Helm Chart</a>.</p></li>
-<li><p><a href="/docs/scaleout.md">Scale your Milvus cluster</a>.</p></li>
-<li><p>Deploy your Milvus cluster on clouds:</p>
+<li><p><a href="/docs/ja/upgrade_milvus_cluster-helm.md">Helm Chartを使用したMilvusのアップグレード</a>。</p></li>
+<li><p><a href="/docs/ja/scaleout.md">Milvusクラスタをスケールする</a>。</p></li>
+<li><p>Milvusクラスターをクラウド上にデプロイする：</p>
 <ul>
-<li><a href="/docs/eks.md">Amazon EKS</a></li>
-<li><a href="/docs/gcp.md">Google Cloud</a></li>
-<li><a href="/docs/azure.md">Microsoft Azure</a></li>
+<li><a href="/docs/ja/eks.md">Amazon EKS</a></li>
+<li><a href="/docs/ja/gcp.md">Googleクラウド</a></li>
+<li><a href="/docs/ja/azure.md">Microsoft Azure</a></li>
 </ul></li>
-<li><p>Explore <a href="/docs/milvus_backup_overview.md">Milvus Backup</a>, an open-source tool for Milvus data backups.</p></li>
-<li><p>Explore <a href="/docs/birdwatcher_overview.md">Birdwatcher</a>, an open-source tool for debugging Milvus and dynamic configuration updates.</p></li>
-<li><p>Explore <a href="https://github.com/zilliztech/attu">Attu</a>, an open-source GUI tool for intuitive Milvus management.</p></li>
-<li><p><a href="/docs/monitor.md">Monitor Milvus with Prometheus</a>.</p></li>
+<li><p><a href="/docs/ja/milvus_backup_overview.md">Milvusの</a>データバックアップのためのオープンソースツールである<a href="/docs/ja/milvus_backup_overview.md">Milvus Backupを</a>ご紹介します。</p></li>
+<li><p>Milvusのデバッグとダイナミックコンフィギュレーションアップデートのためのオープンソースツール、<a href="/docs/ja/birdwatcher_overview.md">Birdwatcherの</a>ご紹介。</p></li>
+<li><p>Milvusを直感的に管理するオープンソースのGUIツール<a href="https://github.com/zilliztech/attu">Attuを</a>ご覧ください。</p></li>
+<li><p><a href="/docs/ja/monitor.md">PrometheusでMilvusを監視する</a>。</p></li>
 </ul>

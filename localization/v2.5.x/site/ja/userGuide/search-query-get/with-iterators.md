@@ -1,12 +1,10 @@
 ---
 id: with-iterators.md
 order: 4
-summary: >-
-  Milvus provides search and query iterators for iterating results with a large
-  volume of entities.
-title: With Iterators
+summary: Milvusは、大量のエンティティの検索結果を反復処理するための検索イテレータとクエリイテレータを提供する。
+title: イテレータ
 ---
-<h1 id="Search-Iterator​" class="common-anchor-header">Search Iterator​<button data-href="#Search-Iterator​" class="anchor-icon" translate="no">
+<h1 id="Search-Iterator​" class="common-anchor-header">検索イテレータ<button data-href="#Search-Iterator​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -21,8 +19,8 @@ title: With Iterators
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>The ANN Search has a maximum limit on the number of entities that can be recalled in a single query, and simply using basic ANN Search may not meet the demands of large-scale retrieval. For ANN Search requests where topK exceeds 16,384, it is advisable to consider using the SearchIterator. This section will introduce how to use the SearchIterator and related considerations.​</p>
-<h2 id="Overview​" class="common-anchor-header">Overview​<button data-href="#Overview​" class="anchor-icon" translate="no">
+    </button></h1><p>ANN Search には、1 回のクエリで呼び出すことができるエンティティの数に上限があり、基本的な ANN Search を使用するだけでは大規模検索の要求を満たせない場合がある。topKが16,384を超えるようなANN Searchリクエストでは、SearchIteratorの使用を検討することが望ましい。このセクションでは、SearchIterator の使用方法とそれに関連する考察を紹介する。</p>
+<h2 id="Overview​" class="common-anchor-header">概要<button data-href="#Overview​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -37,14 +35,14 @@ title: With Iterators
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>A Search request returns search results, while a SearchIterator returns an iterator. You can call the <strong>next()</strong> method of this iterator to get the search results.​</p>
-<p>Specifically, you can use the SearchIterators as follows:​</p>
+    </button></h2><p>Search リクエストは検索結果を返すが、SearchIterator はイテレーターを返す。このイテレータの<strong>next()</strong>メソッドを呼び出すことで、検索結果を取得することができます。</p>
+<p>具体的には、SearchIterator を次のように使用します。</p>
 <ol>
-<li><p>Create a SearchIterator and set <strong>the number of entities to return per search request</strong> and <strong>the total number of entities to return</strong>.​</p></li>
-<li><p>Call the <strong>next()</strong> method of the SearchIterator in a loop to get the search result in a paginated manner.​</p></li>
-<li><p>Call the <strong>close()</strong> method of the iterator to end the loop if the <strong>next()</strong> method returns an empty result.​</p></li>
+<li><p>SearchIterator を作成し、<strong>検索要求ごとに返すエンティティの</strong>数と<strong>返すエンティティの総数を</strong>設定します。</p></li>
+<li><p>検索結果をページ分割して取得するために、ループ内で SearchIterator の<strong>next()</strong>メソッドを呼び出します。</p></li>
+<li><p><strong>next()</strong>メソッドが空の結果を返した場合は、イテレータの<strong>close()</strong>メソッドを呼び出してループを終了します。</p></li>
 </ol>
-<h2 id="Create-SearchIterator​" class="common-anchor-header">Create SearchIterator​<button data-href="#Create-SearchIterator​" class="anchor-icon" translate="no">
+<h2 id="Create-SearchIterator​" class="common-anchor-header">SearchIterator の作成<button data-href="#Create-SearchIterator​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -59,11 +57,9 @@ title: With Iterators
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>The following code snippet demonstrates how to create a SearchIterator.​</p>
+    </button></h2><p>次のコード・スニペットはSearchIteratorの作成方法を示しています。</p>
 <div class="multipleCode">
-  <a href="#python">Python </a>
-  <a href="#java">Java</a>
-</div>
+ <a href="#python">Python </a> <a href="#java">Java</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus import connections, Collection​
 ​
 connections.connect(​
@@ -114,8 +110,8 @@ iterator = collection.search_iterator(​
         .build());​
 
 <button class="copy-code-btn"></button></code></pre>
-<p>In the above examples, you have set the number of entities to return per search (<strong>batch_size</strong>/<strong>batchSize</strong>) to 50, and the total number of entities to return (<strong>topK</strong>) to 20,000.​</p>
-<h2 id="Use-SearchIterator​" class="common-anchor-header">Use SearchIterator​<button data-href="#Use-SearchIterator​" class="anchor-icon" translate="no">
+<p>上記の例では、1回の検索で返すエンティティの数<strong>（batch_</strong><strong>size</strong><strong>/batchSize</strong>）を50、返すエンティティの総数<strong>（topK</strong>）を20,000に設定しています。</p>
+<h2 id="Use-SearchIterator​" class="common-anchor-header">SearchIterator の使用<button data-href="#Use-SearchIterator​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -130,11 +126,9 @@ iterator = collection.search_iterator(​
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Once the SearchIterator is ready, you can call its next() method to get the search results in a paginated manner.​</p>
+    </button></h2><p>SearchIteratorの準備ができたら、そのnext()メソッドを呼び出して、ページ分割された検索結果を得ることができる。</p>
 <div class="multipleCode">
-  <a href="#python">Python </a>
-  <a href="#java">Java</a>
-</div>
+ <a href="#python">Python </a> <a href="#java">Java</a></div>
 <pre><code translate="no" class="language-python">results = []​
 ​
 <span class="hljs-keyword">while</span> <span class="hljs-literal">True</span>:​
@@ -164,4 +158,4 @@ while (<span class="hljs-literal">true</span>) {​
 }​
 
 <button class="copy-code-btn"></button></code></pre>
-<p>In the above code examples, you have created an infinite loop and called the <strong>next()</strong> method in the loop to store the search results in a variable and closed the iterator when the <strong>next()</strong> returns nothing.​</p>
+<p>上記のコード例では、無限ループを作成し、ループ内で<strong>next()</strong>メソッドを呼び出して検索結果を変数に格納し、<strong>next()</strong>が何も返さなかったときにイテレータを閉じています。</p>

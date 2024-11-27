@@ -1,12 +1,10 @@
 ---
 id: users_and_roles.md
 related_key: 'users, roles'
-summary: >-
-  Learn about the definition of users, roles, objects, and privileges in
-  role-based access control (RBAC).
-title: 'Users, Privileges, and Roles'
+summary: ロール・ベース・アクセス・コントロール（RBAC）におけるユーザー、ロール、オブジェクト、権限の定義について学びます。
+title: ユーザ、権限、ロール
 ---
-<h1 id="Users-Privileges-and-Roles" class="common-anchor-header">Users, Privileges, and Roles<button data-href="#Users-Privileges-and-Roles" class="anchor-icon" translate="no">
+<h1 id="Users-Privileges-and-Roles" class="common-anchor-header">ユーザ、権限、ロール<button data-href="#Users-Privileges-and-Roles" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -21,15 +19,13 @@ title: 'Users, Privileges, and Roles'
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>This topic provides an overview of Role-Based Access Control (RBAC) in Milvus, detailing the definitions and relationships between users, roles, objects, and privileges.</p>
-<p>The following figure illustrates the relationship between objects, privileges, roles, and users.</p>
+    </button></h1><p>このトピックでは、Milvusにおけるロールベースアクセスコントロール(RBAC)の概要を説明し、ユーザ、ロール、オブジェクト、権限の定義と関係について詳しく説明します。</p>
+<p>以下の図にオブジェクト、権限、ロール、ユーザの関係を示します。</p>
 <p>
-  <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.5.x/assets/users_and_roles.png" alt="users_and_roles" class="doc-image" id="users_and_roles" />
-    <span>users_and_roles</span>
-  </span>
-</p>
-<h2 id="Key-concepts" class="common-anchor-header">Key concepts<button data-href="#Key-concepts" class="anchor-icon" translate="no">
+  
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/users_and_roles.png" alt="users_and_roles" class="doc-image" id="users_and_roles" />
+   </span> <span class="img-wrapper"> <span>ユーザとロール</span> </span></p>
+<h2 id="Key-concepts" class="common-anchor-header">主要概念<button data-href="#Key-concepts" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -44,25 +40,25 @@ title: 'Users, Privileges, and Roles'
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>To manage access control to Milvus resources, it’s important to understand the key components of RBAC: object types, object names, users, roles, and privileges.</p>
+    </button></h2><p>Milvusリソースへのアクセスコントロールを管理するためには、RBACの主要な構成要素であるオブジェクトタイプ、オブジェクト名、ユーザ、ロール、権限を理解することが重要です。</p>
 <ul>
-<li><p><strong>Object type</strong>: the category of the object for which a privilege is being assigned. The object type can be:</p>
+<li><p><strong>オブジェクトタイプ</strong>: 特権が割り当てられるオブジェクトのカテゴリ。オブジェクト タイプには次のようなものがあります：</p>
 <ul>
-<li><code translate="no">Global</code>: System-wide objects, allowing the user to perform actions that affect all collections, users, or system-wide settings.</li>
-<li><code translate="no">Collection</code>: Collection-specific objects, allowing the user to perform actions such as creating indexes, loading data, inserting or deleting data, and querying data within a specific collection.</li>
-<li><code translate="no">User</code>: Objects related to user management, allowing the user to manage credentials and roles for database users, such as updating user credentials or viewing user details.</li>
+<li><code translate="no">Global</code>:システム全体のオブジェクト。すべてのコレクション、ユーザー、またはシステム全体の設定に影響するアクションをユーザーが実行できます。</li>
+<li><code translate="no">Collection</code>:コレクション固有のオブジェクト ： インデックスの作成、データのロード、データの挿入または削除、特定のコレクション内のデータのクエリなどのアクションを実行できます。</li>
+<li><code translate="no">User</code>:ユーザ資格情報の更新やユーザ詳細の表示など、ユーザがデータベース・ユーザの資格情報およびロールを管理できるようにします。</li>
 </ul></li>
-<li><p><strong>Object name</strong>: the specific name of the object to control access for. For instance:</p>
+<li><p><strong>オブジェクト名</strong>：アクセスを制御するオブジェクトの具体的な名前。たとえば</p>
 <ul>
-<li>If the object type is <code translate="no">Global</code>, the object name must be set to the wildcard (<code translate="no">*</code>), indicating all objects of the specified type.</li>
-<li>If the object type is <code translate="no">Collection</code>, the object name is the name of a collection.</li>
-<li>If the object type is <code translate="no">User</code>, the object name is the name of a database user.</li>
+<li>オブジェクトのタイプが<code translate="no">Global</code> の場合、オブジェクト名にはワイルドカード (<code translate="no">*</code>) を設定する必要があります。</li>
+<li>オブジェクト・タイプが<code translate="no">Collection</code> の場合、オブジェクト名はコレクション名です。</li>
+<li>オブジェクト・タイプが<code translate="no">User</code> の場合、オブジェクト名はデータベース・ユーザの名前です。</li>
 </ul></li>
-<li><p><strong>User</strong>: a person or an application that interacts with Milvus, which consists of a username and a corresponding password.</p></li>
-<li><p><strong>Privilege</strong>: defines the actions that can be performed and the resources that can be accessed. Privileges are not granted directly to users but are assigned to roles.</p></li>
-<li><p><strong>Role</strong>: defines the set of privileges that a user has for certain objects. Once a role is bound to a user, the user inherits all the privileges granted to that role.</p></li>
+<li><p><strong>ユーザー(User)</strong>: Milvusと相互作用する個人またはアプリケーションで、ユーザー名と対応するパスワードから構成される。</p></li>
+<li><p><strong>特権</strong>：実行可能なアクションとアクセス可能なリソースを定義する。権限はユーザに直接付与されるのではなく、ロールに割り当てられる。</p></li>
+<li><p><strong>ロール</strong>：ユーザーが特定のオブジェクトに対して持つ権限のセットを定義します。ロールがユーザにバインドされると、ユーザはそのロールに付与されたすべての特権を継承します。</p></li>
 </ul>
-<h2 id="Example-Granting-privileges" class="common-anchor-header">Example: Granting privileges<button data-href="#Example-Granting-privileges" class="anchor-icon" translate="no">
+<h2 id="Example-Granting-privileges" class="common-anchor-header">例権限の付与<button data-href="#Example-Granting-privileges" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -77,12 +73,9 @@ title: 'Users, Privileges, and Roles'
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>The following code snippet shows how to grant a <code translate="no">CreateIndex</code> privilege to a role on a specific collection:</p>
+    </button></h2><p>次のコード・スニペットは、特定のコレクションに対して<code translate="no">CreateIndex</code> 特権をロールに付与する方法を示しています：</p>
 <div class="multipleCode">
-    <a href="#python">Python </a>
-    <a href="#java">Java</a>
-    <a href="#javascript">Node.js</a>
-</div>
+   <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a></div>
 <pre><code translate="no" class="language-python">milvusClient.grant_privilege(
     role_name=<span class="hljs-string">&quot;CUSTOM_ROLE_NAME&quot;</span>,
     object_type=<span class="hljs-string">&quot;Collection&quot;</span>,  <span class="hljs-comment"># Valid value: Global, Collection or User.</span>
@@ -106,15 +99,15 @@ client.grantPrivilege(grantPrivilegeReq);
  })
 <button class="copy-code-btn"></button></code></pre>
 <div class="language-python">
-<p>To obtain more information about privilege-related APIs, refer to <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Authentication/grant_privilege.md">grant_privilege</a> and <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Authentication/revoke_privileges.md">revoke_privilege</a>.</p>
+<p>権限関連APIの詳細については、<a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Authentication/grant_privilege.md">grant_privilegeと</a> <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Authentication/revoke_privileges.md">revoke_privilegeを</a>参照してください。</p>
 </div>
 <div class="language-java">
-<p>To obtain more information about privilege-related APIs, refer to <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Authentication/grantPrivilege.md">grantPrivilege</a> and <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Authentication/revokePrivilege.md">revokePrivilege</a>.</p>
+<p>特権関連APIについての詳細は、<a href="https://milvus.io/api-reference/java/v2.4.x/v2/Authentication/grantPrivilege.md">grantPrivilegeと</a> <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Authentication/revokePrivilege.md">revokePrivilegeを</a>参照してください。</p>
 </div>
 <div class="language-javascript">
-<p>To obtain more information about privilege-related APIs, refer to <a href="https://milvus.io/api-reference/node/v2.4.x/Authentication/grantPrivilege.md">grantPrivilege</a> and <a href="https://milvus.io/api-reference/node/v2.4.x/Authentication/revokePrivilege.md">revokePrivilege</a>.</p>
+<p>特権関連 API の詳細については、<a href="https://milvus.io/api-reference/node/v2.4.x/Authentication/grantPrivilege.md">grantPrivilege</a>および<a href="https://milvus.io/api-reference/node/v2.4.x/Authentication/revokePrivilege.md">revokePrivilege</a> を参照してください。</p>
 </div>
-<h2 id="Default-users-and-roles" class="common-anchor-header">Default users and roles<button data-href="#Default-users-and-roles" class="anchor-icon" translate="no">
+<h2 id="Default-users-and-roles" class="common-anchor-header">デフォルトのユーザとロール<button data-href="#Default-users-and-roles" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -129,14 +122,14 @@ client.grantPrivilege(grantPrivilegeReq);
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus creates a <code translate="no">root</code> user by default with a default password <code translate="no">Milvus</code>. The <code translate="no">root</code> user is granted the <code translate="no">admin</code> privileges, which means that this <code translate="no">root</code> user can have access to all resources and perform all actions.</p>
-<p>If a user is associated with the <code translate="no">public</code> role, they are entitled to the following privileges:</p>
+    </button></h2><p>Milvus はデフォルトで<code translate="no">root</code> ユーザーをデフォルトパスワード<code translate="no">Milvus</code> で作成します。<code translate="no">root</code> ユーザーには<code translate="no">admin</code> 権限が付与されます。これは、この<code translate="no">root</code> ユーザーがすべてのリソースにアクセスでき、すべてのアクションを実行できることを意味します。</p>
+<p>ユーザが<code translate="no">public</code> ロールに関連している場合、そのユーザには以下の権限が与えられます：</p>
 <ul>
 <li><code translate="no">DescribeCollection</code></li>
 <li><code translate="no">ShowCollections</code></li>
 <li><code translate="no">IndexDetail</code></li>
 </ul>
-<h2 id="List-of-object-types-and-privileges" class="common-anchor-header">List of object types and privileges<button data-href="#List-of-object-types-and-privileges" class="anchor-icon" translate="no">
+<h2 id="List-of-object-types-and-privileges" class="common-anchor-header">オブジェクト・タイプと権限のリスト<button data-href="#List-of-object-types-and-privileges" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -151,68 +144,68 @@ client.grantPrivilege(grantPrivilegeReq);
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>The following table lists the values you can choose when <a href="/docs/rbac.md">enabling RBAC</a>.</p>
+    </button></h2><p>次の表は、<a href="/docs/ja/rbac.md">RBACを有効にする</a>ときに選択できる値の一覧です。</p>
 <table>
 <thead>
-<tr><th>Object type</th><th>Privilege name</th><th>Relevant API description on the client side</th></tr>
+<tr><th>オブジェクト・タイプ</th><th>特権名</th><th>クライアント側の関連APIの説明</th></tr>
 </thead>
 <tbody>
-<tr><td>Collection</td><td>CreateIndex</td><td>CreateIndex</td></tr>
-<tr><td>Collection</td><td>DropIndex</td><td>DropIndex</td></tr>
-<tr><td>Collection</td><td>IndexDetail</td><td>DescribeIndex/GetIndexState/GetIndexBuildProgress</td></tr>
-<tr><td>Collection</td><td>Load</td><td>LoadCollection/GetLoadingProgress/GetLoadState</td></tr>
-<tr><td>Collection</td><td>GetLoadingProgress</td><td>GetLoadingProgress</td></tr>
-<tr><td>Collection</td><td>GetLoadState</td><td>GetLoadState</td></tr>
-<tr><td>Collection</td><td>Release</td><td>ReleaseCollection</td></tr>
-<tr><td>Collection</td><td>Insert</td><td>Insert</td></tr>
-<tr><td>Collection</td><td>Delete</td><td>Delete</td></tr>
-<tr><td>Collection</td><td>Upsert</td><td>Upsert</td></tr>
-<tr><td>Collection</td><td>Search</td><td>Search</td></tr>
-<tr><td>Collection</td><td>Flush</td><td>Flush/GetFlushState</td></tr>
-<tr><td>Collection</td><td>GetFlushState</td><td>GetFlushState</td></tr>
-<tr><td>Collection</td><td>Query</td><td>Query</td></tr>
-<tr><td>Collection</td><td>GetStatistics</td><td>GetCollectionStatistics</td></tr>
-<tr><td>Collection</td><td>Compaction</td><td>Compact</td></tr>
-<tr><td>Collection</td><td>Import</td><td>BulkInsert/Import</td></tr>
-<tr><td>Collection</td><td>LoadBalance</td><td>LoadBalance</td></tr>
-<tr><td>Collection</td><td>CreatePartition</td><td>CreatePartition</td></tr>
-<tr><td>Collection</td><td>DropPartition</td><td>DropPartition</td></tr>
-<tr><td>Collection</td><td>ShowPartitions</td><td>ShowPartitions</td></tr>
-<tr><td>Collection</td><td>HasPartition</td><td>HasPartition</td></tr>
-<tr><td>Global</td><td>All</td><td>All API operation permissions in this table</td></tr>
-<tr><td>Global</td><td>CreateCollection</td><td>CreateCollection</td></tr>
-<tr><td>Global</td><td>DropCollection</td><td>DropCollection</td></tr>
-<tr><td>Global</td><td>DescribeCollection</td><td>DescribeCollection</td></tr>
-<tr><td>Global</td><td>ShowCollections</td><td>ShowCollections</td></tr>
-<tr><td>Global</td><td>RenameCollection</td><td>RenameCollection</td></tr>
-<tr><td>Global</td><td>FlushAll</td><td>FlushAll</td></tr>
-<tr><td>Global</td><td>CreateOwnership</td><td>CreateUser CreateRole</td></tr>
-<tr><td>Global</td><td>DropOwnership</td><td>DeleteCredential DropRole</td></tr>
-<tr><td>Global</td><td>SelectOwnership</td><td>SelectRole/SelectGrant</td></tr>
-<tr><td>Global</td><td>ManageOwnership</td><td>OperateUserRole OperatePrivilege</td></tr>
-<tr><td>Global</td><td>CreateResourceGroup</td><td>CreateResourceGroup</td></tr>
-<tr><td>Global</td><td>DropResourceGroup</td><td>DropResourceGroup</td></tr>
-<tr><td>Global</td><td>DescribeResourceGroup</td><td>DescribeResourceGroup</td></tr>
-<tr><td>Global</td><td>ListResourceGroups</td><td>ListResourceGroups</td></tr>
-<tr><td>Global</td><td>TransferNode</td><td>TransferNode</td></tr>
-<tr><td>Global</td><td>TransferReplica</td><td>TransferReplica</td></tr>
-<tr><td>Global</td><td>CreateDatabase</td><td>CreateDatabase</td></tr>
-<tr><td>Global</td><td>DropDatabase</td><td>DropDatabase</td></tr>
-<tr><td>Global</td><td>ListDatabases</td><td>ListDatabases</td></tr>
-<tr><td>Global</td><td>CreateAlias</td><td>CreateAlias</td></tr>
-<tr><td>Global</td><td>DropAlias</td><td>DropAlias</td></tr>
-<tr><td>Global</td><td>DescribeAlias</td><td>DescribeAlias</td></tr>
-<tr><td>Global</td><td>ListAliases</td><td>ListAliases</td></tr>
-<tr><td>User</td><td>UpdateUser</td><td>UpdateCredential</td></tr>
-<tr><td>User</td><td>SelectUser</td><td>SelectUser</td></tr>
+<tr><td>コレクション</td><td>作成インデックス</td><td>インデックス作成</td></tr>
+<tr><td>コレクション</td><td>ドロップインデックス</td><td>ドロップインデックス</td></tr>
+<tr><td>コレクション</td><td>インデックスの詳細</td><td>DescribeIndex/GetIndexState/GetIndexBuildProgress(インデックス構築状況)</td></tr>
+<tr><td>コレクション</td><td>ロード</td><td>LoadCollection/GetLoadingProgress/GetLoadState</td></tr>
+<tr><td>コレクション</td><td>ロード進行状況取得</td><td>ロード進行状況の取得</td></tr>
+<tr><td>コレクション</td><td>ロード状態取得</td><td>ロード状態取得</td></tr>
+<tr><td>コレクション</td><td>リリース</td><td>リリースコレクション</td></tr>
+<tr><td>コレクション</td><td>挿入</td><td>インサート</td></tr>
+<tr><td>コレクション</td><td>削除</td><td>削除</td></tr>
+<tr><td>コレクション</td><td>アップサート</td><td>アップサート</td></tr>
+<tr><td>コレクション</td><td>検索</td><td>検索</td></tr>
+<tr><td>コレクション</td><td>フラッシュ</td><td>フラッシュ/フラッシュ状態取得</td></tr>
+<tr><td>コレクション</td><td>フラッシュ状態取得</td><td>フラッシュ状態の取得</td></tr>
+<tr><td>コレクション</td><td>クエリー</td><td>クエリー</td></tr>
+<tr><td>コレクション</td><td>統計</td><td>コレクション統計</td></tr>
+<tr><td>コレクション</td><td>コンパクション</td><td>コンパクト</td></tr>
+<tr><td>コレクション</td><td>インポート</td><td>一括挿入/インポート</td></tr>
+<tr><td>コレクション</td><td>ロードバランス</td><td>ロードバランス</td></tr>
+<tr><td>コレクション</td><td>パーティション作成</td><td>パーティションの作成</td></tr>
+<tr><td>コレクション</td><td>ドロップパーティション</td><td>ドロップパーティション</td></tr>
+<tr><td>コレクション</td><td>パーティションの表示</td><td>パーティションを表示</td></tr>
+<tr><td>コレクション</td><td>パーティション</td><td>パーティションを持つ</td></tr>
+<tr><td>グローバル</td><td>すべて</td><td>このテーブルのすべてのAPI操作権限</td></tr>
+<tr><td>グローバル</td><td>コレクションの作成</td><td>コレクションの作成</td></tr>
+<tr><td>グローバル</td><td>ドロップコレクション</td><td>ドロップコレクション</td></tr>
+<tr><td>グローバル</td><td>DescribeCollection</td><td>DescribeCollection</td></tr>
+<tr><td>グローバル</td><td>コレクションの表示</td><td>コレクションを表示</td></tr>
+<tr><td>グローバル</td><td>コレクション名の変更</td><td>リネームコレクション</td></tr>
+<tr><td>グローバル</td><td>すべてをフラッシュ</td><td>すべてをフラッシュ</td></tr>
+<tr><td>グローバル</td><td>オーナーシップの作成</td><td>CreateUser CreateRole</td></tr>
+<tr><td>グローバル</td><td>所有権の削除</td><td>削除クレデンシャル DropRole</td></tr>
+<tr><td>グローバル</td><td>オーナーシップ選択</td><td>セレクトロール/セレクトグラント</td></tr>
+<tr><td>グローバル</td><td>オーナーシップの管理</td><td>OperateUserRole操作権限</td></tr>
+<tr><td>グローバル</td><td>リソースグループの作成</td><td>リソースグループの作成</td></tr>
+<tr><td>グローバル</td><td>リソースグループの削除</td><td>DropResourceグループ</td></tr>
+<tr><td>グローバル</td><td>DescribeResourceGroup</td><td>リソースグループ</td></tr>
+<tr><td>グローバル</td><td>リソースグループの一覧</td><td>リソースグループの一覧</td></tr>
+<tr><td>グローバル</td><td>転送ノード</td><td>転送ノード</td></tr>
+<tr><td>グローバル</td><td>トランスファーレプリカ</td><td>トランスファーレプリカ</td></tr>
+<tr><td>グローバル</td><td>データベースの作成</td><td>データベースの作成</td></tr>
+<tr><td>グローバル</td><td>データベースの削除</td><td>データベースの削除</td></tr>
+<tr><td>グローバル</td><td>データベース一覧</td><td>リストデータベース</td></tr>
+<tr><td>グローバル</td><td>エイリアスの作成</td><td>エイリアス作成</td></tr>
+<tr><td>グローバル</td><td>エイリアスの削除</td><td>ドロップエイリアス</td></tr>
+<tr><td>グローバル</td><td>エイリアスの記述</td><td>エイリアス記述</td></tr>
+<tr><td>グローバル</td><td>エイリアス一覧</td><td>エイリアス一覧</td></tr>
+<tr><td>ユーザ</td><td>更新ユーザ</td><td>更新クレデンシャル</td></tr>
+<tr><td>ユーザー</td><td>ユーザー選択</td><td>ユーザー選択</td></tr>
 </tbody>
 </table>
 <div class="alert note">
-<li>Object and privilege names are case-sensitive.</li>
-<li>To grant all privileges to a kind of object, like Collection, Global, User, use "*" for privilege name. </li>
-<li>The "*" privilege name for the Global object doesn't include the All privilege, because the All privilege includes all permissions, including any collection and user object.</li>
+<li>オブジェクト名と権限名は大文字と小文字を区別します。</li>
+<li>Collection、Global、Userのように、ある種類のオブジェクトにすべての権限を付与するには、権限名に "*"を使用します。 </li>
+<li>Globalオブジェクトに対する "*"特権名には、All特権は含まれません。All特権には、コレクションやユーザオブジェクトを含むすべての権限が含まれるからです。</li>
 </div>
-<h2 id="Whats-next" class="common-anchor-header">What’s next<button data-href="#Whats-next" class="anchor-icon" translate="no">
+<h2 id="Whats-next" class="common-anchor-header">次のページ<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -228,5 +221,5 @@ client.grantPrivilege(grantPrivilegeReq);
         ></path>
       </svg>
     </button></h2><ul>
-<li>Learn how to <a href="/docs/rbac.md">enable RBAC</a>.</li>
+<li><a href="/docs/ja/rbac.md">RBACを有効に</a>する方法について説明します。</li>
 </ul>

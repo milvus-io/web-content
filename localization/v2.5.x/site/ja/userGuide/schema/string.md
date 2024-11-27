@@ -1,16 +1,10 @@
 ---
 id: string.md
-title: String Field
+title: 文字列フィールド
 summary: >-
-  In Milvus, VARCHAR is the data type used for storing string-type data,
-  suitable for storing variable-length strings. It can store strings with both
-  single- and multi-byte characters, with a maximum length of up to 60,535
-  characters. When defining a VARCHAR field, you must also specify the maximum
-  length parameter max_length. The VARCHAR string type offers an efficient and
-  flexible way to store and manage text data, making it ideal for applications
-  that handle strings of varying lengths.​​
+  Milvusでは、VARCHARは文字列型データの格納に使用されるデータ型で、可変長の文字列の格納に適しています。シングルバイト文字とマルチバイト文字の両方の文字列を格納することができ、最大長は60,535文字までです。VARCHARフィールドを定義する際には、最大長パラメータmax_lengthも指定する必要があります。VARCHAR文字列型は、テキスト・データの格納と管理に効率的で柔軟な方法を提供し、さまざまな長さの文字列を扱うアプリケーションに最適です。
 ---
-<h1 id="String-Field​" class="common-anchor-header">String Field​<button data-href="#String-Field​" class="anchor-icon" translate="no">
+<h1 id="String-Field​" class="common-anchor-header">文字列フィールド<button data-href="#String-Field​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -25,8 +19,8 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>In Milvus, <code translate="no">VARCHAR</code> is the data type used for storing string-type data, suitable for storing variable-length strings. It can store strings with both single- and multi-byte characters, with a maximum length of up to 60,535 characters. When defining a <code translate="no">VARCHAR</code> field, you must also specify the maximum length parameter <code translate="no">max_length</code>. The <code translate="no">VARCHAR</code> string type offers an efficient and flexible way to store and manage text data, making it ideal for applications that handle strings of varying lengths.​</p>
-<h2 id="Add-VARCHAR-field​" class="common-anchor-header">Add VARCHAR field​<button data-href="#Add-VARCHAR-field​" class="anchor-icon" translate="no">
+    </button></h1><p>Milvusでは、<code translate="no">VARCHAR</code> は文字列型データを格納するためのデータ型で、可変長の文字列を格納するのに適しています。シングルバイト文字とマルチバイト文字の両方の文字列を格納することができ、最大長は60,535文字までです。<code translate="no">VARCHAR</code> フィールドを定義する際には、最大長パラメータ<code translate="no">max_length</code> も指定する必要がある。<code translate="no">VARCHAR</code> 文字列型は、テキスト・データを格納・管理する効率的で柔軟な方法を提供し、さまざまな長さの文字列を扱うアプリケーションに最適です。</p>
+<h2 id="Add-VARCHAR-field​" class="common-anchor-header">VARCHAR フィールドの追加<button data-href="#Add-VARCHAR-field​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -41,17 +35,13 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>To use string data in Milvus, define a <code translate="no">VARCHAR</code> field when creating a collection. This process includes:​</p>
+    </button></h2><p>milvusで文字列データを使用するには、コレクション作成時に<code translate="no">VARCHAR</code> フィールドを定義します。このプロセスには以下が含まれます。</p>
 <ol>
-<li><p>Setting <code translate="no">datatype</code> to the supported string data type, i.e., <code translate="no">VARCHAR</code>.​</p></li>
-<li><p>Specifying the maximum length of the string type using the <code translate="no">max_length</code> parameter, which cannot exceed 60,535 characters.​</p></li>
+<li><p><code translate="no">datatype</code> をサポートされる文字列データ型、すなわち<code translate="no">VARCHAR</code> に設定する。</p></li>
+<li><p><code translate="no">max_length</code> パラメータを使用して、文字列タイプの最大長を指定します（60,535 文字を超えることはできません）。</p></li>
 </ol>
 <div class="multipleCode">
-    <a href="#python">Python </a>
-    <a href="#java">Java</a>
-    <a href="#javascript">Node.js</a>
-    <a href="#curl">cURL</a>
-</div>
+   <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType​
 ​
 client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)​
@@ -173,11 +163,11 @@ schema.addField(AddFieldReq.builder()​
 }&quot;</span>​
 
 <button class="copy-code-btn"></button></code></pre>
-<p>In this example, we add two <code translate="no">VARCHAR</code> fields: <code translate="no">varchar_field1</code> and <code translate="no">varchar_field2</code>, with maximum lengths set to 100 and 200 characters, respectively. It is recommended to set <code translate="no">max_length</code> based on your data characteristics to ensure it accommodates the longest data while avoiding excessive space allocation. Additionally, we have added a primary field <code translate="no">pk</code> and a vector field <code translate="no">embedding</code>.​</p>
+<p>この例では、<code translate="no">varchar_field1</code> と<code translate="no">varchar_field2</code> という2つの<code translate="no">VARCHAR</code> フィールドを追加し、それぞれ最大長を100文字と200文字に設定しています。<code translate="no">max_length</code> 、過剰なスペース割り当てを避けながら最長データに対応できるように、データの特性に基づいて設定することを推奨します。さらに、プライマリ・フィールド<code translate="no">pk</code> とベクトル・フィールド<code translate="no">embedding</code> を追加した。</p>
 <div class="alert note">
-<p>The primary field and vector field are mandatory when you create a collection. The primary field uniquely identifies each entity, while the vector field is crucial for similarity search. For more details, refer to <a href="/docs/primary-field.md">​Primary Field &amp; AutoID</a>, <a href="/docs/dense-vector.md">​Dense Vector</a>, <a href="/docs/binary-vector.md">​Binary Vector</a>, or <a href="/docs/sparse_vector.md">​Sparse Vector</a>.​</p>
+<p>プライマリフィールドとベクトルフィールドは、コレクションを作成するときに必須です。プライマリフィールドは各エンティティを一意に識別し、ベクトルフィールドは類似性検索に重要である。詳細は<a href="/docs/ja/primary-field.md">Primary Field &amp; AutoID</a>,<a href="/docs/ja/dense-vector.md">Dense Vector</a>,<a href="/docs/ja/binary-vector.md">Binary Vector</a>,<a href="/docs/ja/sparse_vector.md">Sparse Vector</a> を参照。</p>
 </div>
-<h2 id="Set-index-params​" class="common-anchor-header">Set index params​<button data-href="#Set-index-params​" class="anchor-icon" translate="no">
+<h2 id="Set-index-params​" class="common-anchor-header">インデックスパラメータの設定<button data-href="#Set-index-params​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -192,14 +182,10 @@ schema.addField(AddFieldReq.builder()​
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Setting index parameters for <code translate="no">VARCHAR</code> fields is optional but can significantly improve retrieval efficiency.​</p>
-<p>In the following example, we create an <code translate="no">AUTOINDEX</code> for <code translate="no">varchar_field1</code>, meaning Milvus will automatically create an appropriate index based on the data type. For more information, refer to <a href="https://milvus.io/docs/glossary.md#Auto-Index">​AUTOINDEX</a>.​</p>
+    </button></h2><p><code translate="no">VARCHAR</code> フィールドにインデックス・パラメータを設定することはオプションですが、検索効率を大幅に向上させることができます。</p>
+<p>以下の例では、<code translate="no">varchar_field1</code> に<code translate="no">AUTOINDEX</code> を作成しています。つまり、milvusはデータ型に基づいて適切なインデックスを自動的に作成します。詳細については、<a href="https://milvus.io/docs/glossary.md#Auto-Index">AUTOINDEXを</a>参照してください。</p>
 <div class="multipleCode">
-    <a href="#python">Python </a>
-    <a href="#java">Java</a>
-    <a href="#javascript">Node.js</a>
-    <a href="#curl">cURL</a>
-</div>
+   <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python">index_params = client.<span class="hljs-title function_">prepare_index_params</span>()​
 ​
 index_params.<span class="hljs-title function_">add_index</span>(​
@@ -237,14 +223,10 @@ indexes.add(IndexParam.builder()​
     ]&#x27;</span>​
 
 <button class="copy-code-btn"></button></code></pre>
-<p>In addition to <code translate="no">AUTOINDEX</code>, you can specify other scalar index types, such as <code translate="no">INVERTED</code> or <code translate="no">BITMAP</code>. For supported index types, refer to <a href="https://milvus.io/docs/scalar_index.md">​Scalar Indexes</a>.​</p>
-<p>Moreover, before creating the collection, you must create an index for the vector field. In this example, we use <code translate="no">AUTOINDEX</code> to simplify vector index settings.​</p>
+<p><code translate="no">AUTOINDEX</code> 以外にも、<code translate="no">INVERTED</code> や<code translate="no">BITMAP</code> などのスカラー・インデックス・タイプを指定することができます。サポートされているインデックス・タイプについては、<a href="https://milvus.io/docs/scalar_index.md">スカラー・インデックスを</a>参照。</p>
+<p>さらに、コレクションを作成する前に、ベクトル・フィールドのインデックスを作成する必要があります。この例では、<code translate="no">AUTOINDEX</code> を使用して、ベクトル・インデックスの設定を簡素化しています。</p>
 <div class="multipleCode">
-    <a href="#python">Python </a>
-    <a href="#java">Java</a>
-    <a href="#javascript">Node.js</a>
-    <a href="#curl">cURL</a>
-</div>
+   <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Add vector index​</span>
 index_params.add_index(​
     field_name=<span class="hljs-string">&quot;embedding&quot;</span>,​
@@ -282,7 +264,7 @@ index_params.add_index(​
     ]&#x27;</span>​
 
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Create-collection​" class="common-anchor-header">Create collection​<button data-href="#Create-collection​" class="anchor-icon" translate="no">
+<h2 id="Create-collection​" class="common-anchor-header">コレクションの作成<button data-href="#Create-collection​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -297,13 +279,9 @@ index_params.add_index(​
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Once the schema and index are defined, you can create a collection that includes string fields.​</p>
+    </button></h2><p>スキーマとインデックスが定義されたら、文字列フィールドを含むコレクションを作成できます。</p>
 <div class="multipleCode">
-    <a href="#python">Python </a>
-    <a href="#java">Java</a>
-    <a href="#javascript">Node.js</a>
-    <a href="#curl">cURL</a>
-</div>
+   <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Create Collection​</span>
 client.create_collection(​
     collection_name=<span class="hljs-string">&quot;your_collection_name&quot;</span>,​
@@ -339,7 +317,7 @@ client.createCollection(requestCreate);​
 <span class="hljs-comment">## {&quot;code&quot;:0,&quot;data&quot;:{}}​</span>
 
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Insert-data​" class="common-anchor-header">Insert data​<button data-href="#Insert-data​" class="anchor-icon" translate="no">
+<h2 id="Insert-data​" class="common-anchor-header">データの挿入<button data-href="#Insert-data​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -354,13 +332,9 @@ client.createCollection(requestCreate);​
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>After creating the collection, you can insert data that includes string fields.​</p>
+    </button></h2><p>コレクションを作成したら、文字列フィールドを含むデータを挿入できます。</p>
 <div class="multipleCode">
-    <a href="#python">Python </a>
-    <a href="#java">Java</a>
-    <a href="#javascript">Node.js</a>
-    <a href="#curl">cURL</a>
-</div>
+   <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python">data = [​
     {<span class="hljs-string">&quot;varchar_field1&quot;</span>: <span class="hljs-string">&quot;Product A&quot;</span>, <span class="hljs-string">&quot;varchar_field2&quot;</span>: <span class="hljs-string">&quot;High quality product&quot;</span>, <span class="hljs-string">&quot;pk&quot;</span>: <span class="hljs-number">1</span>, <span class="hljs-string">&quot;embedding&quot;</span>: [<span class="hljs-number">0.1</span>, <span class="hljs-number">0.2</span>, <span class="hljs-number">0.3</span>]},​
     {<span class="hljs-string">&quot;varchar_field1&quot;</span>: <span class="hljs-string">&quot;Product B&quot;</span>, <span class="hljs-string">&quot;varchar_field2&quot;</span>: <span class="hljs-string">&quot;Affordable price&quot;</span>, <span class="hljs-string">&quot;pk&quot;</span>: <span class="hljs-number">2</span>, <span class="hljs-string">&quot;embedding&quot;</span>: [<span class="hljs-number">0.4</span>, <span class="hljs-number">0.5</span>, <span class="hljs-number">0.6</span>]},​
@@ -433,9 +407,9 @@ client.<span class="hljs-title function_">insert</span>({​
 <span class="hljs-comment">## {&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:{&quot;insertCount&quot;:3,&quot;insertIds&quot;:[1,2,3]}}​</span>
 
 <button class="copy-code-btn"></button></code></pre>
-<p>In this example, we insert data that includes <code translate="no">VARCHAR</code> fields (<code translate="no">varchar_field1</code> and <code translate="no">varchar_field2</code>), a primary field (<code translate="no">pk</code>), and vector representations (<code translate="no">embedding</code>). To ensure that the inserted data matches the fields defined in the schema, it is recommended to check data types in advance to avoid insertion errors.​</p>
-<p>If you set <code translate="no">enable_dynamic_fields=True</code> when defining the schema, Milvus allows you to insert string fields that were not defined in advance. However, keep in mind that this may increase the complexity of queries and management, potentially impacting performance. For more information, refer to <a href="/docs/enable-dynamic-field.md">​Dynamic Field</a>.​</p>
-<h2 id="Search-and-query​" class="common-anchor-header">Search and query​<button data-href="#Search-and-query​" class="anchor-icon" translate="no">
+<p>この例では、<code translate="no">VARCHAR</code> フィールド（<code translate="no">varchar_field1</code> と<code translate="no">varchar_field2</code> ）、主フィールド（<code translate="no">pk</code> ）、ベクトル表現（<code translate="no">embedding</code> ）を含むデータを挿入します。挿入されたデータがスキーマで定義されたフィールドと一致していることを確認するために、挿入エラーを避けるために事前にデータ型をチェックすることをお勧めします。</p>
+<p>スキーマ定義時に<code translate="no">enable_dynamic_fields=True</code> を設定すると、milvusでは事前に定義されていない文字列フィールドを挿入することができます。ただし、この場合、クエリや管理の複雑さが増し、パフォーマンスに影響を与える可能性があることに留意してください。詳細は<a href="/docs/ja/enable-dynamic-field.md">Dynamic Fieldを</a>参照してください。</p>
+<h2 id="Search-and-query​" class="common-anchor-header">検索とクエリ<button data-href="#Search-and-query​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -450,14 +424,10 @@ client.<span class="hljs-title function_">insert</span>({​
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>After adding string fields, you can use them for filtering in search and query operations, achieving more precise search results.​</p>
-<h3 id="Filter-queries​" class="common-anchor-header">Filter queries​</h3><p>After adding string fields, you can filter results using these fields in queries. For example, you can query all entities where <code translate="no">varchar_field1</code> equals <code translate="no">&quot;Product A&quot;</code>:​</p>
+    </button></h2><p>文字列フィールドを追加すると、検索やクエリ操作のフィルタリングに使用でき、より正確な検索結果を得ることができます。</p>
+<h3 id="Filter-queries​" class="common-anchor-header">フィルタ・クエリ</h3><p>文字列フィールドを追加すると、クエリでこれらのフィールドを使用して結果をフィルタリングできます。たとえば、<code translate="no">varchar_field1</code> が<code translate="no">&quot;Product A&quot;</code> と等しいエンティティをすべてクエリできます。</p>
 <div class="multipleCode">
-    <a href="#python">Python </a>
-    <a href="#java">Java</a>
-    <a href="#javascript">Node.js</a>
-    <a href="#curl">cURL</a>
-</div>
+   <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;varchar_field1 == &quot;Product A&quot;&#x27;</span>​
 ​
 res = client.query(​
@@ -508,14 +478,10 @@ System.out.println(resp.getQueryResults());​
 <span class="hljs-comment">## {&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:[{&quot;pk&quot;:1,&quot;varchar_field1&quot;:&quot;Product A&quot;,&quot;varchar_field2&quot;:&quot;High quality product&quot;}]}​</span>
 
 <button class="copy-code-btn"></button></code></pre>
-<p>This query expression returns all matching entities and outputs their <code translate="no">varchar_field1</code> and <code translate="no">varchar_field2</code> fields. For more information on filter queries, refer to <a href="/docs/boolean.md">​Metadata Filtering</a>.​</p>
-<h3 id="Vector-search-with-string-filtering​" class="common-anchor-header">Vector search with string filtering​</h3><p>In addition to basic scalar field filtering, you can combine vector similarity searches with scalar field filters. For example, the following code shows how to add a scalar field filter to a vector search:​</p>
+<p>このクエリ式は、一致するすべてのエンティティを返し、それらの<code translate="no">varchar_field1</code> フィールドと<code translate="no">varchar_field2</code> フィールドを出力します。フィルタ・クエリの詳細については、「<a href="/docs/ja/boolean.md">メタデータ・フィルタリング</a>」を参照してください。</p>
+<h3 id="Vector-search-with-string-filtering​" class="common-anchor-header">文字列フィルタリングによるベクトル検索</h3><p>基本的なスカラー・フィールド・フィルタリングに加えて、ベクトル類似性検索をスカラー・フィールド・フィルタリングと組み合わせることができます。例えば、次のコードはベクトル検索にスカラー・フィールド・フィルターを追加する方法を示している。</p>
 <div class="multipleCode">
-    <a href="#python">Python </a>
-    <a href="#java">Java</a>
-    <a href="#javascript">Node.js</a>
-    <a href="#curl">cURL</a>
-</div>
+   <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;varchar_field1 == &quot;Product A&quot;&#x27;</span>​
 ​
 res = client.search(​
@@ -585,4 +551,4 @@ System.out.println(resp.getSearchResults());​
 <span class="hljs-comment">## {&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:[{&quot;distance&quot;:-0.2364331,&quot;id&quot;:1,&quot;varchar_field1&quot;:&quot;Product A&quot;,&quot;varchar_field2&quot;:&quot;High quality product&quot;}]}​</span>
 
 <button class="copy-code-btn"></button></code></pre>
-<p>In this example, we first define a query vector and add a filter condition <code translate="no">varchar_field1 == &quot;Product A&quot;</code> during the search. This ensures that the search results are not only similar to the query vector but also match the specified string filter condition. For more information, refer to <a href="/docs/boolean.md">​Metadata Filtering</a>.​</p>
+<p>この例では、まずクエリー・ベクターを定義し、検索中にフィルター条件（<code translate="no">varchar_field1 == &quot;Product A&quot;</code> ）を追加する。これにより、検索結果がクエリー・ベクターに類似しているだけでなく、指定された文字列フィルター条件にも一致することが保証される。詳細については、<a href="/docs/ja/boolean.md">メタデータのフィルタリングを</a>参照してください。</p>

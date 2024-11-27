@@ -1,9 +1,9 @@
 ---
 id: four_layers.md
-summary: Storage/computing disaggregation structure in Milvus.
-title: Storage/Computing Disaggregation
+summary: Milvusにおけるストレージ/コンピューティングの分離構造。
+title: ストレージ／コンピューティングの分離
 ---
-<h1 id="StorageComputing-Disaggregation" class="common-anchor-header">Storage/Computing Disaggregation<button data-href="#StorageComputing-Disaggregation" class="anchor-icon" translate="no">
+<h1 id="StorageComputing-Disaggregation" class="common-anchor-header">ストレージ／コンピューティングの分離<button data-href="#StorageComputing-Disaggregation" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -18,8 +18,8 @@ title: Storage/Computing Disaggregation
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Following the principle of data plane and control plane disaggregation, Milvus comprises four layers that are mutually independent in terms of scalability and disaster recovery.</p>
-<h2 id="Access-layer" class="common-anchor-header">Access layer<button data-href="#Access-layer" class="anchor-icon" translate="no">
+    </button></h1><p>データプレーンとコントロールプレーンの分離の原則に従い、Milvusはスケーラビリティとディザスタリカバリの点で相互に独立した4つのレイヤーで構成されている。</p>
+<h2 id="Access-layer" class="common-anchor-header">アクセス層<button data-href="#Access-layer" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -34,12 +34,12 @@ title: Storage/Computing Disaggregation
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Composed of a group of stateless proxies, the access layer is the front layer of the system and endpoint to users. It validates client requests and reduces the returned results:</p>
+    </button></h2><p>ステートレスプロキシで構成されるアクセスレイヤーは、システムのフロントレイヤーであり、ユーザーへのエンドポイントである。クライアントのリクエストを検証し、返された結果を削減する：</p>
 <ul>
-<li>Proxy is in itself stateless. It provides a unified service address using load balancing components such as Nginx, Kubernetes Ingress, NodePort, and LVS.</li>
-<li>As Milvus employs a massively parallel processing (MPP) architecture, the proxy aggregates and post-process the intermediate results before returning the final results to the client.</li>
+<li>プロキシはそれ自体ステートレスである。Nginx、Kubernetes Ingress、NodePort、LVSなどのロードバランシングコンポーネントを使用して、統一されたサービスアドレスを提供する。</li>
+<li>Milvusは超並列処理（MPP）アーキテクチャを採用しているため、プロキシは最終結果をクライアントに返す前に中間結果を集約し、後処理を行う。</li>
 </ul>
-<h2 id="Coordinator-service" class="common-anchor-header">Coordinator service<button data-href="#Coordinator-service" class="anchor-icon" translate="no">
+<h2 id="Coordinator-service" class="common-anchor-header">コーディネータサービス<button data-href="#Coordinator-service" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -54,12 +54,12 @@ title: Storage/Computing Disaggregation
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>The coordinator service assigns tasks to the worker nodes and functions as the system’s brain. The tasks it takes on include cluster topology management, load balancing, timestamp generation, data declaration, and data management.</p>
-<p>There are three coordinator types: root coordinator (root coord), data coordinator (data coord), and query coordinator (query coord).</p>
-<h3 id="Root-coordinator-root-coord" class="common-anchor-header">Root coordinator (root coord)</h3><p>Root coord handles data definition language (DDL) and data control language (DCL) requests, such as create or delete collections, partitions, or indexes, as well as manage TSO (timestamp Oracle) and time ticker issuing.</p>
-<h3 id="Query-coordinator-query-coord" class="common-anchor-header">Query coordinator (query coord)</h3><p>Query coord manages topology and load balancing for the query nodes, and handoff from growing segments to sealed segments.</p>
-<h3 id="Data-coordinator-data-coord" class="common-anchor-header">Data coordinator (data coord)</h3><p>Data coord manages topology of the data nodes and index nodes, maintains metadata, and triggers flush, compact, and index building and other background data operations.</p>
-<h2 id="Worker-nodes" class="common-anchor-header">Worker nodes<button data-href="#Worker-nodes" class="anchor-icon" translate="no">
+    </button></h2><p>コーディネータサービスはワーカーノードにタスクを割り当て、システムの頭脳として機能します。担当するタスクには、クラスタトポロジ管理、負荷分散、タイムスタンプ生成、データ宣言、データ管理などがある。</p>
+<p>コーディネータには、ルートコーディネータ（root coordinator）、データコーディネータ（data coordinator）、クエリコーディネータ（query coordinator）の3種類がある。</p>
+<h3 id="Root-coordinator-root-coord" class="common-anchor-header">ルート・コーディネーター（root coordinator）</h3><p>ルート・コーディネータは、コレクション、パーティション、インデックスの作成または削除などのデータ定義言語 (DDL) およびデータ制御言語 (DCL) の要求を処理し、TSO (タイムスタンプ・オラクル) およびタイム・ティッカーの発行を管理します。</p>
+<h3 id="Query-coordinator-query-coord" class="common-anchor-header">クエリコーディネータ（query coordinator）</h3><p>クエリ・コーディネータはクエリ・ノードのトポロジーと負荷分散、成長セグメントから封印セグメントへのハンドオフを管理します。</p>
+<h3 id="Data-coordinator-data-coord" class="common-anchor-header">データコーディネータ(data coordinator)</h3><p>データノードとインデックスノードのトポロジーを管理し、メタデータを保持し、フラッシュ、コンパクト化、インデックス構築、その他のバックグラウンドデータ操作をトリガーする。</p>
+<h2 id="Worker-nodes" class="common-anchor-header">ワーカーノード<button data-href="#Worker-nodes" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -74,11 +74,11 @@ title: Storage/Computing Disaggregation
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>The arms and legs. Worker nodes are dumb executors that follow instructions from the coordinator service and execute data manipulation language (DML) commands from the proxy. Worker nodes are stateless thanks to separation of storage and computation, and can facilitate system scale-out and disaster recovery when deployed on Kubernetes. There are three types of worker nodes:</p>
-<h3 id="Query-node" class="common-anchor-header">Query node</h3><p>Query node retrieves incremental log data and turn them into growing segments by subscribing to the log broker, loads historical data from the object storage, and runs hybrid search between vector and scalar data.</p>
-<h3 id="Data-node" class="common-anchor-header">Data node</h3><p>Data node retrieves incremental log data by subscribing to the log broker, processes mutation requests, and packs log data into log snapshots and stores them in the object storage.</p>
-<h3 id="Index-node" class="common-anchor-header">Index node</h3><p>Index node builds indexes.  Index nodes do not need to be memory resident, and can be implemented with the serverless framework.</p>
-<h2 id="Storage" class="common-anchor-header">Storage<button data-href="#Storage" class="anchor-icon" translate="no">
+    </button></h2><p>手足。ワーカーノードは、コーディネータサービスからの指示に従い、プロキシからのデータ操作言語（DML）コマンドを実行するダムエグゼキュータです。ワーカーノードはストレージと計算を分離しているためステートレスであり、Kubernetesにデプロイするとシステムのスケールアウトやディザスタリカバリを容易にすることができる。ワーカーノードには3つのタイプがある：</p>
+<h3 id="Query-node" class="common-anchor-header">クエリノード</h3><p>クエリノードは、インクリメンタルなログデータを取得し、ログブローカーにサブスクライブすることでそれらを成長するセグメントに変換し、オブジェクトストレージから履歴データをロードし、ベクトルデータとスカラーデータ間のハイブリッド検索を実行する。</p>
+<h3 id="Data-node" class="common-anchor-header">データノード</h3><p>データノードはログブローカーにサブスクライブすることで増分ログデータを取得し、変異リクエストを処理し、ログデータをログスナップショットにパックしてオブジェクトストレージに保存する。</p>
+<h3 id="Index-node" class="common-anchor-header">インデックスノード</h3><p>インデックスノードはインデックスを構築します。  インデックスノードはメモリに常駐する必要はなく、サーバーレスフレームワークで実装できる。</p>
+<h2 id="Storage" class="common-anchor-header">ストレージ<button data-href="#Storage" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -93,19 +93,17 @@ title: Storage/Computing Disaggregation
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Storage is the bone of the system, responsible for data persistence. It comprises meta storage, log broker, and object storage.</p>
-<h3 id="Meta-storage" class="common-anchor-header">Meta storage</h3><p>Meta storage stores snapshots of metadata such as collection schema, and message consumption checkpoints. Storing metadata demands extremely high availability, strong consistency, and transaction support, so Milvus chose etcd for meta store. Milvus also uses etcd for service registration and health check.</p>
-<h3 id="Object-storage" class="common-anchor-header">Object storage</h3><p>Object storage stores snapshot files of logs, index files for scalar and vector data, and intermediate query results. Milvus uses MinIO as object storage and can be readily deployed on AWS S3 and Azure Blob, two of the world’s most popular, cost-effective storage services. However, object storage has high access latency and charges by the number of queries. To improve its performance and lower the costs, Milvus plans to implement cold-hot data separation on a memory- or SSD-based cache pool.</p>
-<h3 id="Log-broker" class="common-anchor-header">Log broker</h3><p>The log broker is a pub-sub system that supports playback. It is responsible for streaming data persistence and event notification. It also ensures integrity of the incremental data when the worker nodes recover from system breakdown. Milvus cluster uses Pulsar as log broker; Milvus standalone uses RocksDB as log broker. Besides, the log broker can be readily replaced with streaming data storage platforms such as Kafka.</p>
-<p>Milvus is built around log broker and follows the “log as data” principle, so Milvus does not maintain a physical table but guarantees data reliability through logging persistence and snapshot logs.</p>
+    </button></h2><p>ストレージはシステムの骨格であり、データの永続化を担う。メタ・ストレージ、ログ・ブローカー、オブジェクト・ストレージで構成される。</p>
+<h3 id="Meta-storage" class="common-anchor-header">メタ・ストレージ</h3><p>メタ・ストレージは、コレクション・スキーマやメッセージ消費チェックポイントなどのメタデータのスナップショットを保存する。メタデータの保存には極めて高い可用性、強力な一貫性、トランザクションサポートが要求されるため、Milvusはメタ・ストレージにetcdを選択した。Milvusはサービスの登録とヘルスチェックにもetcdを使用している。</p>
+<h3 id="Object-storage" class="common-anchor-header">オブジェクトストレージ</h3><p>オブジェクトストレージには、ログのスナップショットファイル、スカラーデータとベクトルデータのインデックスファイル、中間クエリ結果が格納される。MilvusはオブジェクトストレージとしてMinIOを使用しており、AWS S3やAzure Blobといった世界で最も利用されているコスト効率の高いストレージサービスに容易に導入することができる。しかし、オブジェクトストレージはアクセスレイテンシーが高く、クエリー数によって課金される。パフォーマンスを向上させ、コストを下げるために、milvusはメモリまたはSSDベースのキャッシュプール上にコールド・ホットデータ分離を実装する予定である。</p>
+<h3 id="Log-broker" class="common-anchor-header">ログブローカー</h3><p>ログブローカーは再生をサポートするパブサブシステムである。ストリーミングデータの永続化とイベント通知を担当する。また、ワーカー・ノードがシステム故障から回復した際に、増分データの整合性を保証します。MilvusクラスタはPulsarをログ・ブローカとして使い、MilvusスタンドアロンはRocksDBをログ・ブローカとして使う。また、ログ・ブローカーはKafkaのようなストリーミング・データ・ストレージ・プラットフォームに容易に置き換えることができる。</p>
+<p>Milvusはログブローカーを中心に構築され、「データとしてのログ」の原則に従っているため、Milvusは物理テーブルを保持せず、ログの永続性とスナップショットログによってデータの信頼性を保証している。</p>
 <p>
-  <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.5.x/assets/log_mechanism.png" alt="Log_mechanism" class="doc-image" id="log_mechanism" />
-    <span>Log_mechanism</span>
-  </span>
-</p>
-<p>The log broker is the backbone of Milvus. It is responsible for data persistence and read-write disaggregation, thanks to its innate pub-sub mechanism. The above illustration shows a simplified depiction of the mechanism, where the system is divided into two roles, log broker (for maintaining the log sequence) and log subscriber. The former records all operations that change collection states; the latter subscribes to the log sequence to update the local data and provides services in the form of read-only copies. The pub-sub mechanism also makes room for system extendability in terms of change data capture (CDC) and globally-distributed deployment.</p>
-<h2 id="Whats-next" class="common-anchor-header">What’s next<button data-href="#Whats-next" class="anchor-icon" translate="no">
+  
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/log_mechanism.png" alt="Log_mechanism" class="doc-image" id="log_mechanism" />
+   </span> <span class="img-wrapper"> <span>ログメカニズム</span> </span></p>
+<p>ログブローカはMilvusのバックボーンです。生来のpub-subメカニズムにより、データの永続性と読み書き分散を担っています。上の図は、ログブローカー（ログシーケンスの維持）とログサブスクライバーの2つの役割にシステムが分割されているメカニズムを簡略化して示しています。後者は、ローカルデータを更新するためにログシーケンスを購読し、読み取り専用コピーの形でサービスを提供する。Pub-Subメカニズムは、変更データキャプチャ（CDC）とグローバルに分散された展開という点で、システムを拡張する余地もある。</p>
+<h2 id="Whats-next" class="common-anchor-header">次のページ<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -121,5 +119,5 @@ title: Storage/Computing Disaggregation
         ></path>
       </svg>
     </button></h2><ul>
-<li>Read <a href="/docs/main_components.md">Main Components</a> for more details about the Milvus architecture.</li>
+<li>Milvusアーキテクチャの詳細については、<a href="/docs/ja/main_components.md">メインコンポーネントを</a>お読みください。</li>
 </ul>

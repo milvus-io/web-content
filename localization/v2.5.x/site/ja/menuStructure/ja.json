@@ -1,0 +1,2043 @@
+[
+  {
+    "label": "Milvusについて",
+    "id": "about",
+    "isMenu": true,
+    "order": 0,
+    "children": [
+      {
+        "label": "Milvusとは？",
+        "id": "overview.md",
+        "order": 0,
+        "children": []
+      },
+      {
+        "label": "Milvusの採用者",
+        "id": "milvus_adopters.md",
+        "order": 1,
+        "children": []
+      },
+      {
+        "label": "Milvus ロードマップ",
+        "id": "roadmap.md",
+        "order": 2,
+        "children": []
+      },
+      {
+        "label": "リリース",
+        "id": "release_notes.md",
+        "order": 3,
+        "children": []
+      },
+      {
+        "label": "ベンチマーク",
+        "id": "benchmark.md",
+        "order": 4,
+        "children": []
+      },
+      {
+        "label": "比較",
+        "id": "comparison.md",
+        "order": 5,
+        "children": []
+      }
+    ]
+  },
+  {
+    "label": "スタート",
+    "id": "getstarted",
+    "isMenu": true,
+    "order": 1,
+    "children": [
+      {
+        "label": "クイックスタート",
+        "id": "quickstart.md",
+        "order": 0,
+        "children": []
+      },
+      {
+        "label": "Milvusのインストール",
+        "id": "install_milvus",
+        "order": 1,
+        "isMenu": true,
+        "children": [
+          {
+            "label": "概要",
+            "id": "install-overview.md",
+            "order": 0,
+            "children": []
+          },
+          {
+            "label": "Milvus Liteを走らせる",
+            "id": "milvus_lite.md",
+            "order": 1,
+            "children": []
+          },
+          {
+            "label": "Milvusをスタンドアロンで動かす",
+            "id": "run_milvus_docker",
+            "order": 2,
+            "isMenu": true,
+            "children": [
+              {
+                "label": "必要条件",
+                "id": "prerequisite-docker.md",
+                "order": 0,
+                "children": []
+              },
+              {
+                "label": "ドッカー",
+                "id": "install_standalone-docker.md",
+                "order": 1,
+                "children": []
+              },
+              {
+                "label": "Docker Compose",
+                "id": "install_standalone-docker-compose.md",
+                "order": 2,
+                "children": []
+              }
+            ]
+          },
+          {
+            "label": "Milvusディストリビュートを走らせる",
+            "id": "run_milvus_k8s",
+            "order": 3,
+            "isMenu": true,
+            "children": [
+              {
+                "label": "必要条件",
+                "id": "prerequisite-helm.md",
+                "order": 0,
+                "children": []
+              },
+              {
+                "label": "Milvusオペレーター",
+                "id": "install_cluster-milvusoperator.md",
+                "order": 1,
+                "children": []
+              },
+              {
+                "label": "ヘルムチャート",
+                "id": "install_cluster-helm.md",
+                "order": 2,
+                "children": []
+              }
+            ]
+          },
+          {
+            "label": "GPUでMilvusを動かす",
+            "id": "run_milvus_gpu",
+            "order": 4,
+            "isMenu": true,
+            "children": [
+              {
+                "label": "必要条件",
+                "id": "prerequisite-gpu.md",
+                "order": 0,
+                "children": []
+              },
+              {
+                "label": "ヘルムチャート",
+                "id": "install_cluster-helm-gpu.md",
+                "order": 1,
+                "children": []
+              },
+              {
+                "label": "Docker Compose",
+                "id": "install_standalone-docker-compose-gpu.md",
+                "order": 2,
+                "children": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "label": "SDKのインストール",
+        "id": "install_sdks",
+        "order": 2,
+        "children": [
+          {
+            "label": "ピィミルバス",
+            "id": "install-pymilvus.md",
+            "order": 0,
+            "children": []
+          },
+          {
+            "label": "Java SDK",
+            "id": "install-java.md",
+            "order": 1,
+            "children": []
+          },
+          {
+            "label": "囲碁SDK",
+            "id": "install-go.md",
+            "order": 2,
+            "children": []
+          },
+          {
+            "label": "Node.js SDK",
+            "id": "install-node.md",
+            "order": 3,
+            "children": []
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "label": "コンセプト",
+    "id": "concepts",
+    "isMenu": true,
+    "order": 2,
+    "children": [
+      {
+        "label": "建築",
+        "id": "architecture",
+        "order": 0,
+        "isMenu": true,
+        "children": [
+          {
+            "label": "概要",
+            "id": "architecture_overview.md",
+            "order": 0,
+            "children": []
+          },
+          {
+            "label": "ストレージ／コンピューティング",
+            "id": "four_layers.md",
+            "order": 1,
+            "children": []
+          },
+          {
+            "label": "主要コンポーネント",
+            "id": "main_components.md",
+            "order": 2,
+            "children": []
+          },
+          {
+            "label": "データ処理",
+            "id": "data_processing.md",
+            "order": 3,
+            "children": []
+          },
+          {
+            "label": "ノーウェア",
+            "id": "knowhere.md",
+            "order": 5,
+            "children": []
+          }
+        ]
+      },
+      {
+        "label": "ビットセット",
+        "id": "bitset.md",
+        "order": 1,
+        "children": []
+      },
+      {
+        "label": "マルチテナント",
+        "id": "multi_tenancy.md",
+        "order": 3,
+        "children": []
+      },
+      {
+        "label": "タイムスタンプ",
+        "id": "timestamp.md",
+        "order": 4,
+        "children": []
+      },
+      {
+        "label": "時間同期",
+        "id": "time_sync.md",
+        "order": 6,
+        "children": []
+      },
+      {
+        "label": "ベクトル指数",
+        "id": "vector_index",
+        "order": 7,
+        "isMenu": true,
+        "children": [
+          {
+            "label": "インメモリーインデックス",
+            "id": "index.md",
+            "order": 0,
+            "children": []
+          },
+          {
+            "label": "ディスク上のインデックス",
+            "id": "disk_index.md",
+            "order": 1,
+            "children": []
+          },
+          {
+            "label": "GPUインデックス",
+            "id": "gpu_index.md",
+            "order": 2,
+            "children": []
+          }
+        ]
+      },
+      {
+        "label": "スカラー指数",
+        "id": "scalar_index.md",
+        "order": 8,
+        "children": []
+      },
+      {
+        "label": "インメモリーレプリカ",
+        "id": "replica.md",
+        "order": 11,
+        "children": []
+      },
+      {
+        "label": "用語解説",
+        "id": "glossary.md",
+        "order": 12,
+        "children": []
+      }
+    ]
+  },
+  {
+    "label": "ユーザーガイド",
+    "id": "userguide",
+    "isMenu": true,
+    "order": 3,
+    "children": [
+      {
+        "label": "データベース",
+        "id": "manage_databases.md",
+        "order": 0,
+        "children": []
+      },
+      {
+        "label": "コレクション",
+        "id": "collections",
+        "order": 1,
+        "children": [
+          {
+            "label": "コレクションについて",
+            "id": "manage-collections.md",
+            "order": 0,
+            "children": []
+          },
+          {
+            "label": "コレクション作成",
+            "id": "create-collection.md",
+            "order": 1,
+            "children": []
+          },
+          {
+            "label": "コレクションを即座に作成",
+            "id": "create-collection-instantly.md",
+            "order": 2,
+            "children": []
+          },
+          {
+            "label": "コレクションを見る",
+            "id": "view-collections.md",
+            "order": 3,
+            "children": []
+          },
+          {
+            "label": "コレクションの変更",
+            "id": "modify-collection.md",
+            "order": 4,
+            "children": []
+          },
+          {
+            "label": "ロード＆リリース",
+            "id": "load-and-release.md",
+            "order": 5,
+            "children": []
+          },
+          {
+            "label": "パーティションの管理",
+            "id": "manage-partitions.md",
+            "order": 6,
+            "children": []
+          },
+          {
+            "label": "エイリアスの管理",
+            "id": "manage-aliases.md",
+            "order": 7,
+            "children": []
+          },
+          {
+            "label": "ドロップ・コレクション",
+            "id": "drop-collection.md",
+            "order": 8,
+            "children": []
+          }
+        ]
+      },
+      {
+        "label": "スキーマとデータフィールド",
+        "id": "schema",
+        "order": 2,
+        "children": [
+          {
+            "label": "スキーマの説明",
+            "id": "schema.md",
+            "order": 0,
+            "children": []
+          },
+          {
+            "label": "プライマリ・フィールドとAutoID",
+            "id": "primary-field.md",
+            "order": 1,
+            "children": []
+          },
+          {
+            "label": "密集ベクトル",
+            "id": "dense-vector.md",
+            "order": 2,
+            "children": []
+          },
+          {
+            "label": "バイナリ・ベクトル",
+            "id": "binary-vector.md",
+            "order": 3,
+            "children": []
+          },
+          {
+            "label": "スパース・ベクトル",
+            "id": "sparse_vector.md",
+            "order": 4,
+            "children": []
+          },
+          {
+            "label": "文字列フィールド",
+            "id": "string.md",
+            "order": 5,
+            "children": []
+          },
+          {
+            "label": "数字フィールド",
+            "id": "number.md",
+            "order": 6,
+            "children": []
+          },
+          {
+            "label": "JSONフィールド",
+            "id": "use-json-fields.md",
+            "order": 7,
+            "children": []
+          },
+          {
+            "label": "配列フィールド",
+            "id": "array_data_type.md",
+            "order": 8,
+            "children": []
+          },
+          {
+            "label": "ダイナミック・フィールド",
+            "id": "enable-dynamic-field.md",
+            "order": 9,
+            "children": []
+          },
+          {
+            "label": "無効とデフォルト",
+            "id": "nullable-and-default.md",
+            "order": 10,
+            "children": []
+          },
+          {
+            "label": "アナライザー",
+            "id": "analyzer",
+            "order": 11,
+            "children": [
+              {
+                "label": "アナライザーの概要",
+                "id": "analyzer-overview.md",
+                "order": 0,
+                "children": []
+              },
+              {
+                "label": "内蔵アナライザー",
+                "id": "built-in-analyzers",
+                "order": 1,
+                "children": [
+                  {
+                    "label": "スタンダード",
+                    "id": "standard-analyzer.md",
+                    "order": 0,
+                    "children": []
+                  },
+                  {
+                    "label": "英語",
+                    "id": "english-analyzer.md",
+                    "order": 1,
+                    "children": []
+                  },
+                  {
+                    "label": "中国語",
+                    "id": "chinese-analyzer.md",
+                    "order": 2,
+                    "children": []
+                  }
+                ]
+              },
+              {
+                "label": "トーケナイザー",
+                "id": "tokenizers",
+                "order": 2,
+                "children": [
+                  {
+                    "label": "スタンダード",
+                    "id": "standard-tokenizer.md",
+                    "order": 0,
+                    "children": []
+                  },
+                  {
+                    "label": "ホワイトスペース",
+                    "id": "whitespace-tokenizer.md",
+                    "order": 1,
+                    "children": []
+                  },
+                  {
+                    "label": "ジーバ",
+                    "id": "jieba-tokenizer.md",
+                    "order": 1,
+                    "children": []
+                  }
+                ]
+              },
+              {
+                "label": "フィルター",
+                "id": "filters",
+                "order": 3,
+                "children": [
+                  {
+                    "label": "小文字",
+                    "id": "lowercase-filter.md",
+                    "order": 0,
+                    "children": []
+                  },
+                  {
+                    "label": "アスキーフォールディング",
+                    "id": "ascii-folding-filter.md",
+                    "order": 1,
+                    "children": []
+                  },
+                  {
+                    "label": "アルファナムのみ",
+                    "id": "alphanumonly-filter.md",
+                    "order": 2,
+                    "children": []
+                  },
+                  {
+                    "label": "クナルファヌムのみ",
+                    "id": "cnalphanumonly-filter.md",
+                    "order": 3,
+                    "children": []
+                  },
+                  {
+                    "label": "チャロンリー",
+                    "id": "cncharonly-filter.md",
+                    "order": 4,
+                    "children": []
+                  },
+                  {
+                    "label": "長さ",
+                    "id": "length-filter.md",
+                    "order": 5,
+                    "children": []
+                  },
+                  {
+                    "label": "ストップ",
+                    "id": "stop-filter.md",
+                    "order": 6,
+                    "children": []
+                  },
+                  {
+                    "label": "分解機",
+                    "id": "decompounder-filter.md",
+                    "order": 7,
+                    "children": []
+                  },
+                  {
+                    "label": "ステマー",
+                    "id": "stemmer-filter.md",
+                    "order": 8,
+                    "children": []
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "label": "ハンズオン",
+            "id": "schema-hands-on.md",
+            "order": 12,
+            "children": []
+          }
+        ]
+      },
+      {
+        "label": "挿入と削除",
+        "id": "insert-and-delete",
+        "order": 3,
+        "children": [
+          {
+            "label": "エンティティの挿入",
+            "id": "insert-update-delete.md",
+            "order": 0,
+            "children": []
+          },
+          {
+            "label": "アップサート・エンティティ",
+            "id": "upsert-entities.md",
+            "order": 1,
+            "children": []
+          },
+          {
+            "label": "エンティティの削除",
+            "id": "delete-entities.md",
+            "order": 2,
+            "children": []
+          }
+        ]
+      },
+      {
+        "label": "インデックスの管理",
+        "id": "manage_indexes",
+        "order": 4,
+        "isMenu": true,
+        "children": [
+          {
+            "label": "インデックス・ベクトル・フィールド",
+            "id": "index-vector-fields.md",
+            "order": 0,
+            "children": []
+          },
+          {
+            "label": "インデックス・スカラー・フィールド",
+            "id": "index-scalar-fields.md",
+            "order": 1,
+            "children": []
+          },
+          {
+            "label": "BITMAPインデックス",
+            "id": "bitmap.md",
+            "order": 2,
+            "children": []
+          },
+          {
+            "label": "GPU付きインデックス",
+            "id": "index-with-gpu.md",
+            "order": 3,
+            "children": []
+          }
+        ]
+      },
+      {
+        "label": "検索と再ランク",
+        "id": "search-rerank",
+        "order": 5,
+        "isMenu": true,
+        "children": [
+          {
+            "label": "基本的なANN検索",
+            "id": "single-vector-search.md",
+            "order": 0,
+            "children": []
+          },
+          {
+            "label": "フィルター検索",
+            "id": "filtered-search.md",
+            "order": 1,
+            "children": []
+          },
+          {
+            "label": "範囲検索",
+            "id": "range-search.md",
+            "order": 2,
+            "children": []
+          },
+          {
+            "label": "グループ化検索",
+            "id": "grouping-search.md",
+            "order": 3,
+            "children": []
+          },
+          {
+            "label": "ハイブリッド検索",
+            "id": "multi-vector-search.md",
+            "order": 4,
+            "children": []
+          },
+          {
+            "label": "クエリー",
+            "id": "get-and-scalar-query.md",
+            "order": 5,
+            "children": []
+          },
+          {
+            "label": "全文検索",
+            "id": "full-text-search.md",
+            "order": 6,
+            "children": []
+          },
+          {
+            "label": "キーワード・マッチ",
+            "id": "keyword-match.md",
+            "order": 7,
+            "children": []
+          },
+          {
+            "label": "検索イテレータ",
+            "id": "with-iterators.md",
+            "order": 8,
+            "children": []
+          },
+          {
+            "label": "パーティション・キーの使用",
+            "id": "use-partition-key.md",
+            "order": 9,
+            "children": []
+          },
+          {
+            "label": "mmapを使用する",
+            "id": "mmap.md",
+            "order": 10,
+            "children": []
+          },
+          {
+            "label": "クラスタリング・コンパクション",
+            "id": "clustering-compaction.md",
+            "order": 11,
+            "children": []
+          },
+          {
+            "label": "一貫性レベル",
+            "id": "consistency.md",
+            "order": 12,
+            "children": []
+          },
+          {
+            "label": "メートル法",
+            "id": "metric.md",
+            "order": 13,
+            "children": []
+          },
+          {
+            "label": "メタデータのフィルタリング",
+            "id": "boolean.md",
+            "order": 14,
+            "children": []
+          },
+          {
+            "label": "再ランキング",
+            "id": "reranking.md",
+            "order": 15,
+            "children": []
+          }
+        ]
+      },
+      {
+        "label": "データインポート",
+        "id": "data_import",
+        "order": 6,
+        "isMenu": true,
+        "children": [
+          {
+            "label": "ソースデータの準備",
+            "id": "prepare-source-data.md",
+            "order": 0,
+            "children": []
+          },
+          {
+            "label": "インポートデータ",
+            "id": "import-data.md",
+            "order": 1,
+            "children": []
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "label": "モデル",
+    "id": "models",
+    "isMenu": true,
+    "order": 4,
+    "children": [
+      {
+        "label": "埋め込み",
+        "id": "embeddings",
+        "order": 0,
+        "isMenu": true,
+        "children": [
+          {
+            "label": "概要",
+            "id": "embeddings.md",
+            "order": 0,
+            "children": []
+          },
+          {
+            "label": "オープンAI",
+            "id": "embed-with-openai.md",
+            "order": 1,
+            "children": []
+          },
+          {
+            "label": "センテンス・トランスフォーマー",
+            "id": "embed-with-sentence-transform.md",
+            "order": 2,
+            "children": []
+          },
+          {
+            "label": "BGE M3",
+            "id": "embed-with-bgm-m3.md",
+            "order": 3,
+            "children": []
+          },
+          {
+            "label": "BM25",
+            "id": "embed-with-bm25.md",
+            "order": 4,
+            "children": []
+          },
+          {
+            "label": "スプレイド",
+            "id": "embed-with-splade.md",
+            "order": 5,
+            "children": []
+          },
+          {
+            "label": "航海",
+            "id": "embed-with-voyage.md",
+            "order": 6,
+            "children": []
+          },
+          {
+            "label": "ジーナAI",
+            "id": "embed-with-jina.md",
+            "order": 7,
+            "children": []
+          },
+          {
+            "label": "コヒーレ",
+            "id": "embed-with-cohere.md",
+            "order": 8,
+            "children": []
+          },
+          {
+            "label": "講師",
+            "id": "embed-with-instructor.md",
+            "order": 9,
+            "children": []
+          },
+          {
+            "label": "ミストラルAI",
+            "id": "embed-with-mistral-ai.md",
+            "order": 10,
+            "children": []
+          },
+          {
+            "label": "ノミック",
+            "id": "embed-with-nomic.md",
+            "order": 11,
+            "children": []
+          },
+          {
+            "label": "エムジーティーイー",
+            "id": "embed-with-mgte.md",
+            "order": 12,
+            "children": []
+          }
+        ]
+      },
+      {
+        "label": "リランカー",
+        "id": "rerankers",
+        "order": 1,
+        "isMenu": true,
+        "children": [
+          {
+            "label": "概要",
+            "id": "rerankers-overview.md",
+            "order": 0,
+            "children": []
+          },
+          {
+            "label": "BGE",
+            "id": "rerankers-bge.md",
+            "order": 1,
+            "children": []
+          },
+          {
+            "label": "コヒーレ",
+            "id": "rerankers-cohere.md",
+            "order": 2,
+            "children": []
+          },
+          {
+            "label": "クロスエンコーダ",
+            "id": "rerankers-cross-encoder.md",
+            "order": 3,
+            "children": []
+          },
+          {
+            "label": "航海",
+            "id": "rerankers-voyage.md",
+            "order": 4,
+            "children": []
+          },
+          {
+            "label": "ジーナAI",
+            "id": "rerankers-jina.md",
+            "order": 5,
+            "children": []
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "label": "Milvus移住",
+    "id": "milvus_migration",
+    "isMenu": true,
+    "order": 5,
+    "children": [
+      {
+        "label": "概要",
+        "id": "migrate_overview.md",
+        "order": 0,
+        "children": []
+      },
+      {
+        "label": "移行ツールのインストール",
+        "id": "milvusdm_install.md",
+        "order": 1,
+        "children": []
+      },
+      {
+        "label": "Elasticsearchから",
+        "id": "es2m.md",
+        "order": 2,
+        "children": []
+      },
+      {
+        "label": "ファイスより",
+        "id": "f2m.md",
+        "order": 3,
+        "children": []
+      },
+      {
+        "label": "Milvus 1.x より",
+        "id": "m2m.md",
+        "order": 4,
+        "children": []
+      },
+      {
+        "label": "Milvus 2.3.x より",
+        "id": "from-m2x.md",
+        "order": 5,
+        "children": []
+      }
+    ]
+  },
+  {
+    "label": "管理ガイド",
+    "id": "admin_guide",
+    "isMenu": true,
+    "order": 9,
+    "children": [
+      {
+        "label": "配備",
+        "id": "deployment",
+        "order": 0,
+        "isMenu": true,
+        "children": [
+          {
+            "label": "敷地内",
+            "id": "on_premises",
+            "order": 0,
+            "isMenu": true,
+            "children": [
+              {
+                "label": "Dockerで",
+                "id": "configure-docker.md",
+                "order": 0,
+                "children": []
+              },
+              {
+                "label": "ヘルムとともに",
+                "id": "configure-helm.md",
+                "order": 1,
+                "children": []
+              },
+              {
+                "label": "Milvusオペレーター付き",
+                "id": "configure_operator.md",
+                "order": 2,
+                "children": []
+              },
+              {
+                "label": "リソースの割り当て",
+                "id": "allocate.md",
+                "order": 3,
+                "children": []
+              }
+            ]
+          },
+          {
+            "label": "雲について",
+            "id": "on_cloud",
+            "order": 1,
+            "isMenu": true,
+            "children": [
+              {
+                "label": "AWSへのデプロイ",
+                "id": "eks.md",
+                "order": 1,
+                "children": []
+              },
+              {
+                "label": "GCPへのデプロイ",
+                "id": "gcp.md",
+                "order": 2,
+                "children": []
+              },
+              {
+                "label": "Azureへのデプロイ",
+                "id": "azure.md",
+                "order": 3,
+                "children": []
+              },
+              {
+                "label": "OpenShiftにデプロイする",
+                "id": "openshift.md",
+                "order": 4,
+                "children": []
+              },
+              {
+                "label": "レイヤー7負荷分散",
+                "id": "layer-7-lb",
+                "order": 5,
+                "isMenu": true,
+                "children": [
+                  {
+                    "label": "AWS",
+                    "id": "aws_layer7.md",
+                    "order": 1,
+                    "children": []
+                  },
+                  {
+                    "label": "事業継続計画",
+                    "id": "gcp_layer7.md",
+                    "order": 2,
+                    "children": []
+                  },
+                  {
+                    "label": "アジュール",
+                    "id": "ingress.md",
+                    "order": 3,
+                    "children": []
+                  }
+                ]
+              },
+              {
+                "label": "クラウドストレージ",
+                "id": "cloud-storage",
+                "order": 6,
+                "isMenu": true,
+                "children": [
+                  {
+                    "label": "AWS",
+                    "id": "s3.md",
+                    "order": 1,
+                    "children": []
+                  },
+                  {
+                    "label": "事業継続計画",
+                    "id": "gcs.md",
+                    "order": 2,
+                    "children": []
+                  },
+                  {
+                    "label": "アジュール",
+                    "id": "abs.md",
+                    "order": 3,
+                    "children": []
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "label": "構成",
+        "id": "configuration",
+        "order": 1,
+        "isMenu": true,
+        "children": [
+          {
+            "label": "システム構成",
+            "id": "system_configuration.md",
+            "order": 0,
+            "children": []
+          },
+          {
+            "label": "オン・ザ・フライ",
+            "id": "dynamic_config.md",
+            "order": 1,
+            "children": []
+          },
+          {
+            "label": "限度徴収数",
+            "id": "limit_collection_counts.md",
+            "order": 2,
+            "children": []
+          },
+          {
+            "label": "チャンク・キャッシュの設定",
+            "id": "chunk_cache.md",
+            "order": 3,
+            "children": []
+          },
+          {
+            "label": "コーディネーター HA",
+            "id": "coordinator_ha.md",
+            "order": 4,
+            "children": []
+          },
+          {
+            "label": "ローカルディスクを使用するQueryNode",
+            "id": "configure-querynode-localdisk.md",
+            "order": 5,
+            "children": []
+          }
+        ]
+      },
+      {
+        "label": "依存関係の管理",
+        "id": "manage_dependencies",
+        "order": 2,
+        "isMenu": true,
+        "children": [
+          {
+            "label": "DockerまたはHelmで",
+            "id": "docker_helm_dependencies",
+            "order": 0,
+            "isMenu": true,
+            "children": [
+              {
+                "label": "オブジェクト・ストレージ",
+                "id": "deploy_s3.md",
+                "order": 0,
+                "children": []
+              },
+              {
+                "label": "メタストレージ",
+                "id": "deploy_etcd.md",
+                "order": 1,
+                "children": []
+              },
+              {
+                "label": "メッセージストレージ",
+                "id": "deploy_pulsar.md",
+                "order": 2,
+                "children": []
+              }
+            ]
+          },
+          {
+            "label": "Milvusオペレーター付き",
+            "id": "milvus_operator_dependencies",
+            "order": 1,
+            "isMenu": true,
+            "children": [
+              {
+                "label": "オブジェクト・ストレージ",
+                "id": "object_storage_operator.md",
+                "order": 0,
+                "children": []
+              },
+              {
+                "label": "メタストレージ",
+                "id": "meta_storage_operator.md",
+                "order": 1,
+                "children": []
+              },
+              {
+                "label": "メッセージストレージ",
+                "id": "message_storage_operator.md",
+                "order": 2,
+                "children": []
+              }
+            ]
+          },
+          {
+            "label": "パルサーのアップグレード",
+            "id": "upgrade-pulsar-v3.md",
+            "order": 2,
+            "children": []
+          }
+        ]
+      },
+      {
+        "label": "スケーリング",
+        "id": "scaling",
+        "order": 4,
+        "isMenu": true,
+        "children": [
+          {
+            "label": "スケール・クラスター",
+            "id": "scaleout.md",
+            "order": 0,
+            "children": []
+          },
+          {
+            "label": "規模の依存",
+            "id": "scale-dependencies.md",
+            "order": 1,
+            "children": []
+          }
+        ]
+      },
+      {
+        "label": "アップグレード",
+        "id": "upgrade_milvus",
+        "order": 7,
+        "children": [
+          {
+            "label": "Milvusクラスタのアップグレード",
+            "id": "upgrade_milvus_cluster-operator.md",
+            "order": 0,
+            "children": []
+          },
+          {
+            "label": "Milvusスタンドアローンのアップグレード",
+            "id": "upgrade_milvus_standalone-operator.md",
+            "order": 1,
+            "children": []
+          }
+        ]
+      },
+      {
+        "label": "監視、アラート、ログ",
+        "id": "monitor_alert_log",
+        "order": 8,
+        "isMenu": true,
+        "children": [
+          {
+            "label": "モニタリング",
+            "id": "monitoring",
+            "order": 0,
+            "isMenu": true,
+            "children": [
+              {
+                "label": "建築",
+                "id": "monitor_overview.md",
+                "order": 0,
+                "children": []
+              },
+              {
+                "label": "監視サービスの展開",
+                "id": "monitor.md",
+                "order": 1,
+                "children": []
+              },
+              {
+                "label": "メトリクスの可視化",
+                "id": "visualize.md",
+                "order": 2,
+                "children": []
+              },
+              {
+                "label": "Milvus指標ダッシュボード",
+                "id": "metrics_dashboard.md",
+                "order": 3,
+                "children": []
+              }
+            ]
+          },
+          {
+            "label": "アラート",
+            "id": "alerts",
+            "order": 1,
+            "isMenu": true,
+            "children": [
+              {
+                "label": "アラートの作成",
+                "id": "alert.md",
+                "order": 0,
+                "children": []
+              }
+            ]
+          },
+          {
+            "label": "過去ログ",
+            "id": "logs",
+            "order": 2,
+            "isMenu": true,
+            "children": [
+              {
+                "label": "Grafana Lokiを設定する",
+                "id": "configure_grafana_loki.md",
+                "order": 0,
+                "children": []
+              },
+              {
+                "label": "アクセスログの設定",
+                "id": "configure_access_logs.md",
+                "order": 1,
+                "children": []
+              }
+            ]
+          },
+          {
+            "label": "トレース",
+            "id": "trace",
+            "order": 3,
+            "isMenu": true,
+            "children": [
+              {
+                "label": "イェーガー・トレース",
+                "id": "config_jaeger_tracing.md",
+                "order": 0,
+                "children": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "label": "リソースグループ",
+        "id": "resource_groups",
+        "order": 9,
+        "children": [
+          {
+            "label": "リソースグループの管理",
+            "id": "resource_group.md",
+            "order": 0,
+            "children": []
+          }
+        ]
+      },
+      {
+        "label": "セキュリティ",
+        "id": "security",
+        "order": 10,
+        "isMenu": true,
+        "children": [
+          {
+            "label": "認証を有効にする",
+            "id": "authenticate.md",
+            "order": 0,
+            "children": []
+          },
+          {
+            "label": "ユーザー、権限、役割",
+            "id": "users_and_roles.md",
+            "order": 10,
+            "children": []
+          },
+          {
+            "label": "RBACを有効にする",
+            "id": "rbac.md",
+            "order": 1,
+            "isMenu": true,
+            "children": []
+          },
+          {
+            "label": "輸送中の暗号化",
+            "id": "tls.md",
+            "order": 2,
+            "children": []
+          },
+          {
+            "label": "SASL/SSLでKafkaに接続する",
+            "id": "connect_kafka_ssl.md",
+            "order": 3,
+            "children": []
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "label": "ツール",
+    "id": "tools",
+    "isMenu": true,
+    "order": 6,
+    "children": [
+      {
+        "label": "Milvus CLI",
+        "id": "cli",
+        "order": 0,
+        "isMenu": true,
+        "children": [
+          {
+            "label": "概要",
+            "id": "cli_overview.md",
+            "order": 0,
+            "children": []
+          },
+          {
+            "label": "インストール",
+            "id": "install_cli.md",
+            "order": 1,
+            "children": []
+          },
+          {
+            "label": "コマンド",
+            "id": "cli_commands.md",
+            "order": 2,
+            "children": []
+          }
+        ]
+      },
+      {
+        "label": "Milvus バックアップ",
+        "id": "milvus_backup",
+        "order": 1,
+        "children": [
+          {
+            "label": "概要",
+            "id": "milvus_backup_overview.md",
+            "order": 0,
+            "children": []
+          },
+          {
+            "label": "コマンド",
+            "id": "milvus_backup_cli.md",
+            "order": 1,
+            "children": []
+          },
+          {
+            "label": "RESTful API",
+            "id": "milvus_backup_api.md",
+            "order": 2,
+            "children": []
+          }
+        ]
+      },
+      {
+        "label": "Milvus CDC",
+        "id": "milvus_cdc",
+        "order": 3,
+        "isMenu": true,
+        "children": [
+          {
+            "label": "概要",
+            "id": "milvus-cdc-overview.md",
+            "order": 0,
+            "children": []
+          },
+          {
+            "label": "CDCサーバーの展開",
+            "id": "deploy-cdc-server.md",
+            "order": 1,
+            "children": []
+          },
+          {
+            "label": "CDCタスクの管理",
+            "id": "manage-cdc-tasks.md",
+            "order": 2,
+            "children": []
+          },
+          {
+            "label": "モニタリング",
+            "id": "cdc-monitoring.md",
+            "order": 3,
+            "children": []
+          }
+        ]
+      },
+      {
+        "label": "Attu(milvusのGUI)",
+        "id": "milvus_attu",
+        "order": 4,
+        "externalLink": "https://github.com/zilliztech/attu",
+        "children": []
+      },
+      {
+        "label": "バードウォッチャー",
+        "id": "birdwatcher",
+        "order": 5,
+        "children": [
+          {
+            "label": "概要",
+            "id": "birdwatcher_overview.md",
+            "order": 0,
+            "children": []
+          },
+          {
+            "label": "インストールガイド",
+            "id": "birdwatcher_install_guides.md",
+            "order": 1,
+            "children": []
+          },
+          {
+            "label": "利用ガイド",
+            "id": "birdwatcher_usage_guides.md",
+            "order": 2,
+            "children": []
+          }
+        ]
+      },
+      {
+        "label": "Milvusサイジングツール",
+        "id": "sizing",
+        "order": 6,
+        "externalLink": "https://milvus.io/tools/sizing/",
+        "children": []
+      },
+      {
+        "label": "Milvusコネクター",
+        "id": "milvus_connectors",
+        "order": 7,
+        "isMenu": true,
+        "children": [
+          {
+            "label": "スパーク",
+            "id": "integrate_with_spark.md",
+            "order": 0,
+            "children": []
+          }
+        ]
+      },
+      {
+        "label": "Powershellミルバスクライアント",
+        "id": "milvus_powershell",
+        "order": 8,
+        "externalLink": "https://github.com/rrg92/ps-milvus/blob/main/docs/integrate_powershell.md",
+        "children": []
+      }
+    ]
+  },
+  {
+    "label": "統合",
+    "id": "integrations",
+    "isMenu": true,
+    "order": 8,
+    "children": [
+      {
+        "label": "概要",
+        "id": "integrations_overview.md",
+        "order": 0,
+        "children": []
+      },
+      {
+        "label": "モデルの埋め込み",
+        "id": "integrate-embeddings-models",
+        "order": 1,
+        "children": [
+          {
+            "label": "オープンAI",
+            "id": "integrate_with_openai.md",
+            "order": 0,
+            "children": []
+          },
+          {
+            "label": "コヒーレ",
+            "id": "integrate_with_cohere.md",
+            "order": 1,
+            "children": []
+          },
+          {
+            "label": "ハグ顔",
+            "id": "integrate_with_hugging-face.md",
+            "order": 2,
+            "children": []
+          },
+          {
+            "label": "パイトーチ",
+            "id": "integrate_with_pytorch.md",
+            "order": 3,
+            "children": []
+          },
+          {
+            "label": "センテンス・トランスフォーマー",
+            "id": "integrate_with_sentencetransformers.md",
+            "order": 4,
+            "children": []
+          },
+          {
+            "label": "ボヤージュAI",
+            "id": "integrate_with_voyageai.md",
+            "order": 8,
+            "children": []
+          },
+          {
+            "label": "ジーナAI",
+            "id": "integrate_with_jina.md",
+            "order": 11,
+            "children": []
+          },
+          {
+            "label": "トゥエルブ・ラボ",
+            "id": "video_search_with_twelvelabs_and_milvus.md",
+            "order": 12,
+            "children": []
+          },
+          {
+            "label": "ベントML",
+            "id": "integrate_with_bentoml.md",
+            "order": 5,
+            "children": []
+          }
+        ]
+      },
+      {
+        "label": "LLM",
+        "id": "integrate-llms",
+        "order": 2,
+        "children": [
+          {
+            "label": "ブイエルエルエム",
+            "id": "milvus_rag_with_vllm.md",
+            "order": 0,
+            "children": []
+          },
+          {
+            "label": "ミストラルAI",
+            "id": "llama_agents_metadata.md",
+            "order": 1,
+            "children": []
+          },
+          {
+            "label": "花火",
+            "id": "build_RAG_with_milvus_and_fireworks.md",
+            "order": 2,
+            "children": []
+          },
+          {
+            "label": "レプトン",
+            "id": "build_RAG_with_milvus_and_lepton.md",
+            "order": 3,
+            "children": []
+          },
+          {
+            "label": "シリコンフロー",
+            "id": "build_RAG_with_milvus_and_siliconflow.md",
+            "order": 4,
+            "children": []
+          }
+        ]
+      },
+      {
+        "label": "オーケストレーション",
+        "id": "orchestrate-with-milvus",
+        "order": 3,
+        "children": [
+          {
+            "label": "ラングチェーン",
+            "id": "langchain",
+            "order": 0,
+            "children": [
+              {
+                "label": "基本的な使い方",
+                "id": "basic_usage_langchain.md",
+                "order": 1,
+                "children": []
+              },
+              {
+                "label": "ラグ",
+                "id": "integrate_with_langchain.md",
+                "order": 2,
+                "children": []
+              },
+              {
+                "label": "ハイブリッド検索",
+                "id": "milvus_hybrid_search_retriever.md",
+                "order": 3,
+                "children": []
+              }
+            ]
+          },
+          {
+            "label": "ラマインデックス",
+            "id": "llamaindex",
+            "order": 1,
+            "children": [
+              {
+                "label": "ラグ",
+                "id": "integrate_with_llamaindex.md",
+                "order": 4,
+                "children": []
+              }
+            ]
+          },
+          {
+            "label": "DSPy",
+            "id": "integrate_with_dspy.md",
+            "order": 2,
+            "children": []
+          },
+          {
+            "label": "ファストGPT",
+            "id": "integrate_with_fastgpt.md",
+            "order": 3,
+            "children": []
+          },
+          {
+            "label": "ヘイスタック",
+            "id": "integrate_with_haystack.md",
+            "order": 4,
+            "children": []
+          },
+          {
+            "label": "幸太右衛門",
+            "id": "kotaemon_with_milvus.md",
+            "order": 5,
+            "children": []
+          },
+          {
+            "label": "ダイファイ",
+            "id": "dify_with_milvus.md",
+            "order": 6,
+            "children": []
+          },
+          {
+            "label": "ラングフロー",
+            "id": "rag_with_langflow.md",
+            "order": 7,
+            "children": []
+          },
+          {
+            "label": "ドックスGPT",
+            "id": "use_milvus_in_docsgpt.md",
+            "order": 9,
+            "children": []
+          },
+          {
+            "label": "サンバ・ノヴァ",
+            "id": "use_milvus_with_sambanova.md",
+            "order": 10,
+            "children": []
+          },
+          {
+            "label": "プライベートGPT",
+            "id": "use_milvus_in_private_gpt.md",
+            "order": 8,
+            "children": []
+          }
+        ]
+      },
+      {
+        "label": "代理店",
+        "id": "integrate-agents",
+        "order": 4,
+        "children": [
+          {
+            "label": "メモGPT",
+            "id": "integrate_with_memgpt.md",
+            "order": 0,
+            "children": []
+          },
+          {
+            "label": "キャメル",
+            "id": "integrate_with_camel.md",
+            "order": 1,
+            "children": []
+          },
+          {
+            "label": "メム0",
+            "id": "quickstart_mem0_with_milvus.md",
+            "order": 2,
+            "children": []
+          }
+        ]
+      },
+      {
+        "label": "ナレッジ・エンジニアリング",
+        "id": "knowledge-engineering",
+        "order": 5,
+        "children": [
+          {
+            "label": "なぜなぜ",
+            "id": "integrate_with_whyhow.md",
+            "order": 0,
+            "children": []
+          },
+          {
+            "label": "バンナ",
+            "id": "integrate_with_vanna.md",
+            "order": 1,
+            "children": []
+          },
+          {
+            "label": "ナレッジ・テーブル",
+            "id": "knowledge_table_with_milvus.md",
+            "order": 2,
+            "children": []
+          }
+        ]
+      },
+      {
+        "label": "評価と観測可能性",
+        "id": "evaluation-observability",
+        "order": 6,
+        "children": [
+          {
+            "label": "ラガス",
+            "id": "integrate_with_ragas.md",
+            "order": 0,
+            "children": []
+          },
+          {
+            "label": "ラングヒューズ",
+            "id": "integrate_with_langfuse.md",
+            "order": 1,
+            "children": []
+          },
+          {
+            "label": "フィフティワン",
+            "id": "integrate_with_voxel51.md",
+            "order": 2,
+            "children": []
+          },
+          {
+            "label": "アリゼ・フェニックス",
+            "id": "evaluation_with_phoenix.md",
+            "order": 3,
+            "children": []
+          },
+          {
+            "label": "ディープエヴァル",
+            "id": "evaluation_with_deepeval.md",
+            "order": 4,
+            "children": []
+          }
+        ]
+      },
+      {
+        "label": "データソース",
+        "id": "data-sources",
+        "order": 7,
+        "children": [
+          {
+            "label": "エアバイト",
+            "id": "integrate_with_airbyte.md",
+            "order": 0,
+            "children": []
+          },
+          {
+            "label": "カフカ",
+            "id": "kafka-connect-milvus.md",
+            "order": 1,
+            "children": []
+          },
+          {
+            "label": "アピファイ",
+            "id": "apify_milvus_rag.md",
+            "order": 2,
+            "children": []
+          },
+          {
+            "label": "構造化されていない",
+            "id": "rag_with_milvus_and_unstructured.md",
+            "order": 3,
+            "children": []
+          },
+          {
+            "label": "PIIマスカー",
+            "id": "RAG_with_pii_and_milvus.md",
+            "order": 4,
+            "children": []
+          }
+        ]
+      },
+      {
+        "label": "その他",
+        "id": "other-integrations",
+        "order": 8,
+        "children": [
+          {
+            "label": "スノーフレーク",
+            "id": "integrate_with_snowpark.md",
+            "order": 0,
+            "children": []
+          },
+          {
+            "label": "腕",
+            "id": "build_rag_on_arm.md",
+            "order": 1,
+            "children": []
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "label": "チュートリアル",
+    "id": "tutorials",
+    "isMenu": true,
+    "order": 7,
+    "children": [
+      {
+        "label": "概要",
+        "id": "tutorials-overview.md",
+        "order": 0,
+        "children": []
+      },
+      {
+        "label": "MilvusでRAGを構築する",
+        "id": "build-rag-with-milvus.md",
+        "order": 1,
+        "children": []
+      },
+      {
+        "label": "Milvusによる画像検索",
+        "id": "image_similarity_search.md",
+        "order": 2,
+        "children": []
+      },
+      {
+        "label": "Milvusとのハイブリッド検索",
+        "id": "hybrid_search_with_milvus.md",
+        "order": 3,
+        "children": []
+      },
+      {
+        "label": "マルチモーダルRAG",
+        "id": "multimodal_rag_with_milvus.md",
+        "order": 4,
+        "children": []
+      },
+      {
+        "label": "MilvusでRAGをグラフ化する",
+        "id": "graph_rag_with_milvus.md",
+        "order": 6,
+        "children": []
+      },
+      {
+        "label": "文脈検索",
+        "id": "contextual_retrieval_with_milvus.md",
+        "order": 5,
+        "children": []
+      },
+      {
+        "label": "HDBSCANクラスタリング",
+        "id": "hdbscan_clustering_with_milvus.md",
+        "order": 6,
+        "children": []
+      },
+      {
+        "label": "マルチモーダル検索にColPaliを使用する",
+        "id": "use_ColPali_with_milvus.md",
+        "order": 7,
+        "children": []
+      },
+      {
+        "label": "ベクトル可視化",
+        "id": "vector_visualization.md",
+        "order": 8,
+        "children": []
+      },
+      {
+        "label": "映画推薦",
+        "id": "movie_recommendation_with_milvus.md",
+        "order": 9,
+        "children": []
+      },
+      {
+        "label": "マトリョーシカ埋め込みによる漏斗探索",
+        "id": "funnel_search_with_matryoshka.md",
+        "order": 10,
+        "children": []
+      },
+      {
+        "label": "もっと見る",
+        "id": "explore-more",
+        "order": 99,
+        "children": [
+          {
+            "label": "質問応答システム",
+            "id": "question_answering_system.md",
+            "order": 5,
+            "children": []
+          },
+          {
+            "label": "推薦システム",
+            "id": "recommendation_system.md",
+            "order": 6,
+            "children": []
+          },
+          {
+            "label": "ビデオ類似性検索",
+            "id": "video_similarity_search.md",
+            "order": 7,
+            "children": []
+          },
+          {
+            "label": "オーディオ類似性検索",
+            "id": "audio_similarity_search.md",
+            "order": 8,
+            "children": []
+          },
+          {
+            "label": "DNA配列の分類",
+            "id": "dna_sequence_classification.md",
+            "order": 9,
+            "children": []
+          },
+          {
+            "label": "テキスト検索エンジン",
+            "id": "text_search_engine.md",
+            "order": 10,
+            "children": []
+          },
+          {
+            "label": "テキスト画像検索エンジン",
+            "id": "text_image_search.md",
+            "order": 11,
+            "children": []
+          },
+          {
+            "label": "画像重複排除システム",
+            "id": "image_deduplication_system.md",
+            "order": 12,
+            "children": []
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "label": "よくあるご質問",
+    "id": "faq",
+    "isMenu": true,
+    "order": 9,
+    "children": [
+      {
+        "label": "パフォーマンスに関するFAQ",
+        "id": "performance_faq.md",
+        "order": 0,
+        "children": []
+      },
+      {
+        "label": "製品に関するFAQ",
+        "id": "product_faq.md",
+        "order": 1,
+        "children": []
+      },
+      {
+        "label": "運用に関するFAQ",
+        "id": "operational_faq.md",
+        "order": 2,
+        "children": []
+      },
+      {
+        "label": "Milvusリミット",
+        "id": "limitations.md",
+        "order": 3,
+        "children": []
+      },
+      {
+        "label": "トラブルシューティング",
+        "id": "troubleshooting.md",
+        "order": 4,
+        "children": []
+      }
+    ]
+  }
+]
