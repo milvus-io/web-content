@@ -41,7 +41,7 @@ If you encounter any issues pulling the image, contact us at <a href="mailto:com
 Before installing Milvus Helm Charts, you need to add Milvus Helm repository.
 
 ```
-$ helm repo add milvus https://github.com/zilliztech/milvus-helm
+$ helm repo add milvus https://zilliztech.github.io/milvus-helm/
 ```
 
 <div class="alert note">
@@ -49,7 +49,7 @@ $ helm repo add milvus https://github.com/zilliztech/milvus-helm
 The Milvus Helm Charts repo at `https://github.com/milvus-io/milvus-helm` has been archived and you can get further updates from `https://github.com/zilliztech/milvus-helm` as follows:
 
 ```shell
-helm repo add zilliztech https://github.com/zilliztech/milvus-helm
+helm repo add zilliztech https://zilliztech.github.io/milvus-helm/
 helm repo update
 # upgrade existing helm release
 helm upgrade my-release zilliztech/milvus
