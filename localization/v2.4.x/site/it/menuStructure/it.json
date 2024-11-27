@@ -1409,7 +1409,7 @@
             "children": []
           },
           {
-            "label": "Dify",
+            "label": "Dificare",
             "id": "dify_with_milvus.md",
             "order": 6,
             "children": []
@@ -1658,7 +1658,7 @@
         "children": []
       },
       {
-        "label": "Ricerca a imbuto con le matrici Matryoshka",
+        "label": "Ricerca a imbuto con matrioske embeddings",
         "id": "funnel_search_with_matryoshka.md",
         "order": 10,
         "children": []
@@ -1687,7 +1687,7 @@
             "children": []
           },
           {
-            "label": "Ricerca di somiglianza audio",
+            "label": "Ricerca della somiglianza audio",
             "id": "audio_similarity_search.md",
             "order": 8,
             "children": []

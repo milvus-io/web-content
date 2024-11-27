@@ -44,7 +44,7 @@
     ]
   },
   {
-    "label": "Get Started",
+    "label": "시작하기",
     "id": "getstarted",
     "isMenu": true,
     "order": 1,

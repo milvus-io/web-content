@@ -18,7 +18,7 @@
         "children": []
       },
       {
-        "label": "Milvus-Fahrplan",
+        "label": "Milvus Straßenkarte",
         "id": "roadmap.md",
         "order": 2,
         "children": []
@@ -1058,7 +1058,7 @@
             "children": []
           },
           {
-            "label": "RBAC einschalten",
+            "label": "RBAC aktivieren",
             "id": "rbac.md",
             "order": 1,
             "isMenu": true,
