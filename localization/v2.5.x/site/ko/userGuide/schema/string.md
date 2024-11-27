@@ -1,16 +1,13 @@
 ---
 id: string.md
-title: String Field
+title: 문자열 필드
 summary: >-
-  In Milvus, VARCHAR is the data type used for storing string-type data,
-  suitable for storing variable-length strings. It can store strings with both
-  single- and multi-byte characters, with a maximum length of up to 60,535
-  characters. When defining a VARCHAR field, you must also specify the maximum
-  length parameter max_length. The VARCHAR string type offers an efficient and
-  flexible way to store and manage text data, making it ideal for applications
-  that handle strings of varying lengths.​​
+  Milvus에서 VARCHAR는 문자열형 데이터를 저장하는 데 사용되는 데이터 유형으로, 가변 길이 문자열을 저장하는 데 적합합니다. 최대
+  60,535자의 단일 및 다중 바이트 문자열을 모두 저장할 수 있으며, 최대 길이는 60,535자입니다. VARCHAR 필드를 정의할 때는
+  최대 길이 매개변수 max_length도 지정해야 합니다. VARCHAR 문자열 유형은 텍스트 데이터를 저장하고 관리하는 효율적이고 유연한
+  방법을 제공하므로 다양한 길이의 문자열을 처리하는 애플리케이션에 이상적입니다.
 ---
-<h1 id="String-Field​" class="common-anchor-header">String Field​<button data-href="#String-Field​" class="anchor-icon" translate="no">
+<h1 id="String-Field​" class="common-anchor-header">문자열 필드<button data-href="#String-Field​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -25,8 +22,8 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>In Milvus, <code translate="no">VARCHAR</code> is the data type used for storing string-type data, suitable for storing variable-length strings. It can store strings with both single- and multi-byte characters, with a maximum length of up to 60,535 characters. When defining a <code translate="no">VARCHAR</code> field, you must also specify the maximum length parameter <code translate="no">max_length</code>. The <code translate="no">VARCHAR</code> string type offers an efficient and flexible way to store and manage text data, making it ideal for applications that handle strings of varying lengths.​</p>
-<h2 id="Add-VARCHAR-field​" class="common-anchor-header">Add VARCHAR field​<button data-href="#Add-VARCHAR-field​" class="anchor-icon" translate="no">
+    </button></h1><p>Milvus에서 <code translate="no">VARCHAR</code> 은 문자열 유형 데이터를 저장하는 데 사용되는 데이터 유형으로, 가변 길이 문자열을 저장하는 데 적합합니다. 최대 60,535자의 단일 및 다중 바이트 문자열을 모두 저장할 수 있으며, 최대 길이는 60,535자입니다. <code translate="no">VARCHAR</code> 필드를 정의할 때는 최대 길이 매개변수 <code translate="no">max_length</code> 도 지정해야 합니다. <code translate="no">VARCHAR</code> 문자열 유형은 텍스트 데이터를 저장하고 관리하는 효율적이고 유연한 방법을 제공하므로 다양한 길이의 문자열을 처리하는 애플리케이션에 이상적입니다.</p>
+<h2 id="Add-VARCHAR-field​" class="common-anchor-header">VARCHAR 필드 추가<button data-href="#Add-VARCHAR-field​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -41,17 +38,13 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>To use string data in Milvus, define a <code translate="no">VARCHAR</code> field when creating a collection. This process includes:​</p>
+    </button></h2><p>Milvus에서 문자열 데이터를 사용하려면 컬렉션을 만들 때 <code translate="no">VARCHAR</code> 필드를 정의하세요. 이 프로세스에는 다음이 포함됩니다.</p>
 <ol>
-<li><p>Setting <code translate="no">datatype</code> to the supported string data type, i.e., <code translate="no">VARCHAR</code>.​</p></li>
-<li><p>Specifying the maximum length of the string type using the <code translate="no">max_length</code> parameter, which cannot exceed 60,535 characters.​</p></li>
+<li><p><code translate="no">datatype</code> 을 지원되는 문자열 데이터 유형(예: <code translate="no">VARCHAR</code> 으로 설정합니다.</p></li>
+<li><p><code translate="no">max_length</code> 매개변수를 사용하여 문자열 유형의 최대 길이를 지정합니다(60,535자를 초과할 수 없음).</p></li>
 </ol>
 <div class="multipleCode">
-    <a href="#python">Python </a>
-    <a href="#java">Java</a>
-    <a href="#javascript">Node.js</a>
-    <a href="#curl">cURL</a>
-</div>
+   <a href="#python">파이썬 </a> <a href="#java">자바</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType​
 ​
 client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)​
@@ -173,11 +166,11 @@ schema.addField(AddFieldReq.builder()​
 }&quot;</span>​
 
 <button class="copy-code-btn"></button></code></pre>
-<p>In this example, we add two <code translate="no">VARCHAR</code> fields: <code translate="no">varchar_field1</code> and <code translate="no">varchar_field2</code>, with maximum lengths set to 100 and 200 characters, respectively. It is recommended to set <code translate="no">max_length</code> based on your data characteristics to ensure it accommodates the longest data while avoiding excessive space allocation. Additionally, we have added a primary field <code translate="no">pk</code> and a vector field <code translate="no">embedding</code>.​</p>
+<p>이 예에서는 <code translate="no">varchar_field1</code> 및 <code translate="no">varchar_field2</code> 두 개의 <code translate="no">VARCHAR</code> 필드를 추가하고 각각 최대 길이를 100자 및 200자로 설정합니다. 과도한 공간 할당을 피하면서 가장 긴 데이터를 수용할 수 있도록 데이터 특성에 따라 <code translate="no">max_length</code> 을 설정하는 것이 좋습니다. 또한 기본 필드 <code translate="no">pk</code> 와 벡터 필드 <code translate="no">embedding</code> 를 추가했습니다.</p>
 <div class="alert note">
-<p>The primary field and vector field are mandatory when you create a collection. The primary field uniquely identifies each entity, while the vector field is crucial for similarity search. For more details, refer to <a href="/docs/primary-field.md">​Primary Field &amp; AutoID</a>, <a href="/docs/dense-vector.md">​Dense Vector</a>, <a href="/docs/binary-vector.md">​Binary Vector</a>, or <a href="/docs/sparse_vector.md">​Sparse Vector</a>.​</p>
+<p>기본 필드와 벡터 필드는 컬렉션을 만들 때 필수입니다. 기본 필드는 각 엔티티를 고유하게 식별하며, 벡터 필드는 유사성 검색에 매우 중요합니다. 자세한 내용은 <a href="/docs/ko/primary-field.md">기본 필드 및 자동 ID</a>, <a href="/docs/ko/dense-vector.md">고밀도 벡터</a>, <a href="/docs/ko/binary-vector.md">이진 벡터</a> 또는 <a href="/docs/ko/sparse_vector.md">스파스 벡터를</a> 참조하세요.</p>
 </div>
-<h2 id="Set-index-params​" class="common-anchor-header">Set index params​<button data-href="#Set-index-params​" class="anchor-icon" translate="no">
+<h2 id="Set-index-params​" class="common-anchor-header">인덱스 매개변수 설정<button data-href="#Set-index-params​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -192,14 +185,10 @@ schema.addField(AddFieldReq.builder()​
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Setting index parameters for <code translate="no">VARCHAR</code> fields is optional but can significantly improve retrieval efficiency.​</p>
-<p>In the following example, we create an <code translate="no">AUTOINDEX</code> for <code translate="no">varchar_field1</code>, meaning Milvus will automatically create an appropriate index based on the data type. For more information, refer to <a href="https://milvus.io/docs/glossary.md#Auto-Index">​AUTOINDEX</a>.​</p>
+    </button></h2><p><code translate="no">VARCHAR</code> 필드에 대한 인덱스 매개변수를 설정하는 것은 선택 사항이지만 검색 효율성을 크게 향상시킬 수 있습니다.</p>
+<p>다음 예제에서는 <code translate="no">varchar_field1</code> 에 대해 <code translate="no">AUTOINDEX</code> 를 생성하여 Milvus가 데이터 유형에 따라 적절한 인덱스를 자동으로 생성합니다. 자세한 내용은 <a href="https://milvus.io/docs/glossary.md#Auto-Index">자동 인덱스를</a> 참조하세요.</p>
 <div class="multipleCode">
-    <a href="#python">Python </a>
-    <a href="#java">Java</a>
-    <a href="#javascript">Node.js</a>
-    <a href="#curl">cURL</a>
-</div>
+   <a href="#python">파이썬 </a> <a href="#java">자바</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python">index_params = client.<span class="hljs-title function_">prepare_index_params</span>()​
 ​
 index_params.<span class="hljs-title function_">add_index</span>(​
@@ -237,14 +226,10 @@ indexes.add(IndexParam.builder()​
     ]&#x27;</span>​
 
 <button class="copy-code-btn"></button></code></pre>
-<p>In addition to <code translate="no">AUTOINDEX</code>, you can specify other scalar index types, such as <code translate="no">INVERTED</code> or <code translate="no">BITMAP</code>. For supported index types, refer to <a href="https://milvus.io/docs/scalar_index.md">​Scalar Indexes</a>.​</p>
-<p>Moreover, before creating the collection, you must create an index for the vector field. In this example, we use <code translate="no">AUTOINDEX</code> to simplify vector index settings.​</p>
+<p><code translate="no">AUTOINDEX</code> 외에도 <code translate="no">INVERTED</code> 또는 <code translate="no">BITMAP</code> 와 같은 다른 스칼라 인덱스 유형을 지정할 수 있습니다. 지원되는 인덱스 유형은 <a href="https://milvus.io/docs/scalar_index.md">스칼라 인덱스를</a> 참조하세요.</p>
+<p>또한 컬렉션을 만들기 전에 벡터 필드에 대한 인덱스를 만들어야 합니다. 이 예에서는 <code translate="no">AUTOINDEX</code> 을 사용하여 벡터 인덱스 설정을 간소화합니다.</p>
 <div class="multipleCode">
-    <a href="#python">Python </a>
-    <a href="#java">Java</a>
-    <a href="#javascript">Node.js</a>
-    <a href="#curl">cURL</a>
-</div>
+   <a href="#python">파이썬 </a> <a href="#java">자바</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Add vector index​</span>
 index_params.add_index(​
     field_name=<span class="hljs-string">&quot;embedding&quot;</span>,​
@@ -282,7 +267,7 @@ index_params.add_index(​
     ]&#x27;</span>​
 
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Create-collection​" class="common-anchor-header">Create collection​<button data-href="#Create-collection​" class="anchor-icon" translate="no">
+<h2 id="Create-collection​" class="common-anchor-header">컬렉션 만들기<button data-href="#Create-collection​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -297,13 +282,9 @@ index_params.add_index(​
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Once the schema and index are defined, you can create a collection that includes string fields.​</p>
+    </button></h2><p>스키마와 인덱스가 정의되면 문자열 필드를 포함하는 컬렉션을 만들 수 있습니다.</p>
 <div class="multipleCode">
-    <a href="#python">Python </a>
-    <a href="#java">Java</a>
-    <a href="#javascript">Node.js</a>
-    <a href="#curl">cURL</a>
-</div>
+   <a href="#python">파이썬 </a> <a href="#java">자바</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Create Collection​</span>
 client.create_collection(​
     collection_name=<span class="hljs-string">&quot;your_collection_name&quot;</span>,​
@@ -339,7 +320,7 @@ client.createCollection(requestCreate);​
 <span class="hljs-comment">## {&quot;code&quot;:0,&quot;data&quot;:{}}​</span>
 
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Insert-data​" class="common-anchor-header">Insert data​<button data-href="#Insert-data​" class="anchor-icon" translate="no">
+<h2 id="Insert-data​" class="common-anchor-header">데이터 삽입<button data-href="#Insert-data​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -354,13 +335,9 @@ client.createCollection(requestCreate);​
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>After creating the collection, you can insert data that includes string fields.​</p>
+    </button></h2><p>컬렉션을 만든 후 문자열 필드를 포함하는 데이터를 삽입할 수 있습니다.</p>
 <div class="multipleCode">
-    <a href="#python">Python </a>
-    <a href="#java">Java</a>
-    <a href="#javascript">Node.js</a>
-    <a href="#curl">cURL</a>
-</div>
+   <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python">data = [​
     {<span class="hljs-string">&quot;varchar_field1&quot;</span>: <span class="hljs-string">&quot;Product A&quot;</span>, <span class="hljs-string">&quot;varchar_field2&quot;</span>: <span class="hljs-string">&quot;High quality product&quot;</span>, <span class="hljs-string">&quot;pk&quot;</span>: <span class="hljs-number">1</span>, <span class="hljs-string">&quot;embedding&quot;</span>: [<span class="hljs-number">0.1</span>, <span class="hljs-number">0.2</span>, <span class="hljs-number">0.3</span>]},​
     {<span class="hljs-string">&quot;varchar_field1&quot;</span>: <span class="hljs-string">&quot;Product B&quot;</span>, <span class="hljs-string">&quot;varchar_field2&quot;</span>: <span class="hljs-string">&quot;Affordable price&quot;</span>, <span class="hljs-string">&quot;pk&quot;</span>: <span class="hljs-number">2</span>, <span class="hljs-string">&quot;embedding&quot;</span>: [<span class="hljs-number">0.4</span>, <span class="hljs-number">0.5</span>, <span class="hljs-number">0.6</span>]},​
@@ -433,9 +410,9 @@ client.<span class="hljs-title function_">insert</span>({​
 <span class="hljs-comment">## {&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:{&quot;insertCount&quot;:3,&quot;insertIds&quot;:[1,2,3]}}​</span>
 
 <button class="copy-code-btn"></button></code></pre>
-<p>In this example, we insert data that includes <code translate="no">VARCHAR</code> fields (<code translate="no">varchar_field1</code> and <code translate="no">varchar_field2</code>), a primary field (<code translate="no">pk</code>), and vector representations (<code translate="no">embedding</code>). To ensure that the inserted data matches the fields defined in the schema, it is recommended to check data types in advance to avoid insertion errors.​</p>
-<p>If you set <code translate="no">enable_dynamic_fields=True</code> when defining the schema, Milvus allows you to insert string fields that were not defined in advance. However, keep in mind that this may increase the complexity of queries and management, potentially impacting performance. For more information, refer to <a href="/docs/enable-dynamic-field.md">​Dynamic Field</a>.​</p>
-<h2 id="Search-and-query​" class="common-anchor-header">Search and query​<button data-href="#Search-and-query​" class="anchor-icon" translate="no">
+<p>이 예제에서는 <code translate="no">VARCHAR</code> 필드(<code translate="no">varchar_field1</code> 및 <code translate="no">varchar_field2</code>), 기본 필드(<code translate="no">pk</code>) 및 벡터 표현(<code translate="no">embedding</code>)을 포함하는 데이터를 삽입합니다. 삽입된 데이터가 스키마에 정의된 필드와 일치하는지 확인하려면 데이터 유형을 미리 확인하여 삽입 오류를 방지하는 것이 좋습니다.</p>
+<p>스키마를 정의할 때 <code translate="no">enable_dynamic_fields=True</code> 을 설정하면 Milvus에서는 사전에 정의되지 않은 문자열 필드를 삽입할 수 있습니다. 그러나 이렇게 하면 쿼리 및 관리의 복잡성이 증가하여 성능에 영향을 미칠 수 있습니다. 자세한 내용은 <a href="/docs/ko/enable-dynamic-field.md">동적 필드를</a> 참조하세요.</p>
+<h2 id="Search-and-query​" class="common-anchor-header">검색 및 쿼리<button data-href="#Search-and-query​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -450,14 +427,10 @@ client.<span class="hljs-title function_">insert</span>({​
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>After adding string fields, you can use them for filtering in search and query operations, achieving more precise search results.​</p>
-<h3 id="Filter-queries​" class="common-anchor-header">Filter queries​</h3><p>After adding string fields, you can filter results using these fields in queries. For example, you can query all entities where <code translate="no">varchar_field1</code> equals <code translate="no">&quot;Product A&quot;</code>:​</p>
+    </button></h2><p>문자열 필드를 추가한 후에는 검색 및 쿼리 작업에서 필터링에 사용하여 보다 정확한 검색 결과를 얻을 수 있습니다.</p>
+<h3 id="Filter-queries​" class="common-anchor-header">쿼리 필터링</h3><p>문자열 필드를 추가한 후에는 쿼리에서 이러한 필드를 사용하여 결과를 필터링할 수 있습니다. 예를 들어 <code translate="no">varchar_field1</code> 이 <code translate="no">&quot;Product A&quot;</code> 과 같은 모든 엔티티를 쿼리할 수 있습니다.</p>
 <div class="multipleCode">
-    <a href="#python">Python </a>
-    <a href="#java">Java</a>
-    <a href="#javascript">Node.js</a>
-    <a href="#curl">cURL</a>
-</div>
+   <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;varchar_field1 == &quot;Product A&quot;&#x27;</span>​
 ​
 res = client.query(​
@@ -508,14 +481,10 @@ System.out.println(resp.getQueryResults());​
 <span class="hljs-comment">## {&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:[{&quot;pk&quot;:1,&quot;varchar_field1&quot;:&quot;Product A&quot;,&quot;varchar_field2&quot;:&quot;High quality product&quot;}]}​</span>
 
 <button class="copy-code-btn"></button></code></pre>
-<p>This query expression returns all matching entities and outputs their <code translate="no">varchar_field1</code> and <code translate="no">varchar_field2</code> fields. For more information on filter queries, refer to <a href="/docs/boolean.md">​Metadata Filtering</a>.​</p>
-<h3 id="Vector-search-with-string-filtering​" class="common-anchor-header">Vector search with string filtering​</h3><p>In addition to basic scalar field filtering, you can combine vector similarity searches with scalar field filters. For example, the following code shows how to add a scalar field filter to a vector search:​</p>
+<p>이 쿼리 표현식은 일치하는 모든 엔티티를 반환하고 해당 엔티티의 <code translate="no">varchar_field1</code> 및 <code translate="no">varchar_field2</code> 필드를 출력합니다. 필터 쿼리에 대한 자세한 내용은 <a href="/docs/ko/boolean.md">메타데이터 필터링을</a> 참조하세요.</p>
+<h3 id="Vector-search-with-string-filtering​" class="common-anchor-header">문자열 필터링을 사용한 벡터 검색</h3><p>기본 스칼라 필드 필터링 외에도 벡터 유사도 검색을 스칼라 필드 필터와 결합할 수 있습니다. 예를 들어, 다음 코드는 벡터 검색에 스칼라 필드 필터를 추가하는 방법을 보여줍니다.</p>
 <div class="multipleCode">
-    <a href="#python">Python </a>
-    <a href="#java">Java</a>
-    <a href="#javascript">Node.js</a>
-    <a href="#curl">cURL</a>
-</div>
+   <a href="#python">파이썬 </a> <a href="#java">자바</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;varchar_field1 == &quot;Product A&quot;&#x27;</span>​
 ​
 res = client.search(​
@@ -585,4 +554,4 @@ System.out.println(resp.getSearchResults());​
 <span class="hljs-comment">## {&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:[{&quot;distance&quot;:-0.2364331,&quot;id&quot;:1,&quot;varchar_field1&quot;:&quot;Product A&quot;,&quot;varchar_field2&quot;:&quot;High quality product&quot;}]}​</span>
 
 <button class="copy-code-btn"></button></code></pre>
-<p>In this example, we first define a query vector and add a filter condition <code translate="no">varchar_field1 == &quot;Product A&quot;</code> during the search. This ensures that the search results are not only similar to the query vector but also match the specified string filter condition. For more information, refer to <a href="/docs/boolean.md">​Metadata Filtering</a>.​</p>
+<p>이 예에서는 먼저 쿼리 벡터를 정의하고 검색 중에 필터 조건 <code translate="no">varchar_field1 == &quot;Product A&quot;</code> 을 추가합니다. 이렇게 하면 검색 결과가 쿼리 벡터와 유사할 뿐만 아니라 지정된 문자열 필터 조건과도 일치하도록 보장합니다. 자세한 내용은 <a href="/docs/ko/boolean.md">메타데이터 필터링을</a> 참조하세요.</p>

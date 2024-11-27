@@ -2,10 +2,9 @@
 id: rerankers-voyage.md
 order: 5
 summary: >-
-  Milvus supports Voyage reranker model through the `VoyageRerankFunction`
-  class. This functionality allows you to score the relevance of query-document
-  pairs effectively.
-title: Rerankers Voyage
+  Milvus는 `VoyageRerankFunction` 클래스를 통해 Voyage 리랭커 모델을 지원합니다. 이 기능을 사용하면 쿼리-문서
+  쌍의 관련성을 효과적으로 점수화할 수 있습니다.
+title: 랭커 항해
 ---
 <h1 id="Voyage" class="common-anchor-header">Voyage<button data-href="#Voyage" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -22,12 +21,12 @@ title: Rerankers Voyage
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Milvus supports <a href="https://github.com/FlagOpen/FlagEmbedding/tree/master/FlagEmbedding/reranker">Voyage reranker model</a> through the <code translate="no">VoyageRerankFunction</code> class. This functionality allows you to score the relevance of query-document pairs effectively.</p>
-<p>To use this feature, install the necessary dependencies:</p>
+    </button></h1><p>Milvus는 <code translate="no">VoyageRerankFunction</code> 클래스를 통해 <a href="https://github.com/FlagOpen/FlagEmbedding/tree/master/FlagEmbedding/reranker">Voyage 리랭커 모델을</a> 지원합니다. 이 기능을 사용하면 쿼리-문서 쌍의 관련성을 효과적으로 점수화할 수 있습니다.</p>
+<p>이 기능을 사용하려면 필요한 종속성을 설치하세요:</p>
 <pre><code translate="no" class="language-bash">pip install --upgrade pymilvus
 pip install <span class="hljs-string">&quot;pymilvus[model]&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Then, instantiate the <code translate="no">VoyageRerankFunction</code>:</p>
+<p>그런 다음 <code translate="no">VoyageRerankFunction</code> 을 인스턴스화합니다:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus.model.reranker <span class="hljs-keyword">import</span> VoyageRerankFunction
 
 <span class="hljs-comment"># Define the rerank function</span>
@@ -36,14 +35,14 @@ voyage_rf = VoyageRerankFunction(
     api_key=VOYAGE_API_KEY <span class="hljs-comment"># Replace with your Voyage API key</span>
 )
 <button class="copy-code-btn"></button></code></pre>
-<p><strong>Parameters</strong>:</p>
+<p><strong>매개변수</strong></p>
 <ul>
-<li><p><code translate="no">model_name</code> (<em>string</em>)</p>
-<p>The name of the Voyage model to use for encoding. If you leave this parameter unspecified, <code translate="no">rerank-lite-1</code> will be used. For a list of available models, refer to <a href="https://docs.voyageai.com/docs/reranker">Rerankers</a>.</p></li>
-<li><p><code translate="no">api_key</code> (<em>string</em>)</p>
-<p>The API key for accessing the Voyage API. For information on how to create an API key, refer to <a href="https://docs.voyageai.com/docs/api-key-and-installation">API Key and Python Client</a>.</p></li>
+<li><p><code translate="no">model_name</code> <em>(문자열</em>)</p>
+<p>인코딩에 사용할 Voyage 모델의 이름입니다. 이 매개변수를 지정하지 않으면 <code translate="no">rerank-lite-1</code> 이 사용됩니다. 사용 가능한 모델 목록은 <a href="https://docs.voyageai.com/docs/reranker">재랭커를</a> 참조하세요.</p></li>
+<li><p><code translate="no">api_key</code> <em>(문자열</em>)</p>
+<p>Voyage API에 액세스하기 위한 API 키입니다. API 키를 생성하는 방법에 대한 자세한 내용은 <a href="https://docs.voyageai.com/docs/api-key-and-installation">API 키 및 파이썬 클라이언트를</a> 참조하세요.</p></li>
 </ul>
-<p>Then, use the following code to rerank documents based on the query:</p>
+<p>그런 다음 다음 코드를 사용하여 쿼리를 기반으로 문서의 순위를 재조정합니다:</p>
 <pre><code translate="no" class="language-python">query = <span class="hljs-string">&quot;What event in 1956 marked the official birth of artificial intelligence as a discipline?&quot;</span>
 
 documents = [
@@ -64,7 +63,7 @@ results = voyage_rf(
     <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;Score: <span class="hljs-subst">{result.score:<span class="hljs-number">.6</span>f}</span>&quot;</span>)
     <span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;Text: <span class="hljs-subst">{result.text}</span>\n&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
-<p>The expected output is similar to the following:</p>
+<p>예상 출력은 다음과 유사합니다:</p>
 <pre><code translate="no" class="language-python">Index: <span class="hljs-number">1</span>
 Score: <span class="hljs-number">0.898438</span>
 Text: The Dartmouth Conference <span class="hljs-keyword">in</span> <span class="hljs-number">1956</span> <span class="hljs-keyword">is</span> considered the birthplace of artificial intelligence <span class="hljs-keyword">as</span> a field; here, John McCarthy <span class="hljs-keyword">and</span> others coined the term <span class="hljs-string">&#x27;artificial intelligence&#x27;</span> <span class="hljs-keyword">and</span> laid <span class="hljs-keyword">out</span> its basic goals.

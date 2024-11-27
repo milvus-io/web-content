@@ -1,8 +1,8 @@
 ---
 id: create-collection-instantly.md
-title: Create Collection​ Instantly​
+title: 즉시 컬렉션 생성
 ---
-<h1 id="Create-Collection-Instantly​" class="common-anchor-header">Create Collection Instantly​<button data-href="#Create-Collection-Instantly​" class="anchor-icon" translate="no">
+<h1 id="Create-Collection-Instantly​" class="common-anchor-header">컬렉션 즉시 생성<button data-href="#Create-Collection-Instantly​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -17,8 +17,8 @@ title: Create Collection​ Instantly​
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>You can create a collection instantly by setting its name and the vector field dimensionality. Milvus automatically indexes the vector field and loads the collection upon creation. This page demonstrates how to create a collection instantly with default settings.​</p>
-<h2 id="Overview​" class="common-anchor-header">Overview​<button data-href="#Overview​" class="anchor-icon" translate="no">
+    </button></h1><p>컬렉션의 이름과 벡터 필드 차원을 설정하여 컬렉션을 즉시 생성할 수 있습니다. Milvus는 생성 시 자동으로 벡터 필드를 인덱싱하고 컬렉션을 로드합니다. 이 페이지에서는 기본 설정으로 컬렉션을 즉시 생성하는 방법을 보여줍니다.</p>
+<h2 id="Overview​" class="common-anchor-header">개요<button data-href="#Overview​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -33,21 +33,21 @@ title: Create Collection​ Instantly​
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>A collection is a two-dimensional table with fixed columns and variant rows. Each column represents a field, and each row represents an entity. A schema is required to implement such structural data management. Every entity to insert has to meet the constraints defined in the schema.​</p>
-<p>AIGC applications usually use vector databases as a knowledge base to manage the data generated during the interaction between users and Large Language Models (LLMs). Such knowledge bases are almost similar. To accelerate the use of Milvus clusters in such scenarios, an instant method is available for you to create a collection with only two parameters, namely the collection name and the vector field dimensionality.​</p>
-<p>When you create a collection instantly with default settings, the following settings apply:​</p>
+    </button></h2><p>컬렉션은 고정 열과 변형 행이 있는 2차원 테이블입니다. 각 열은 필드를 나타내고 각 행은 엔티티를 나타냅니다. 이러한 구조적 데이터 관리를 구현하려면 스키마가 필요합니다. 삽입할 모든 엔티티는 스키마에 정의된 제약 조건을 충족해야 합니다.</p>
+<p>AIGC 애플리케이션은 일반적으로 벡터 데이터베이스를 지식 베이스로 사용하여 사용자와 LLM(대규모 언어 모델) 간의 상호 작용 중에 생성된 데이터를 관리합니다. 이러한 지식 기반은 거의 비슷합니다. 이러한 시나리오에서 Milvus 클러스터의 사용을 가속화하기 위해 컬렉션 이름과 벡터 필드 차원이라는 두 가지 매개 변수만으로 컬렉션을 생성할 수 있는 인스턴트 방법을 사용할 수 있습니다.</p>
+<p>기본 설정으로 컬렉션을 즉시 만들면 다음 설정이 적용됩니다.</p>
 <ul>
-<li><p>The primary and vector fields are added to the schema (<strong>id</strong> and <strong>vector</strong>).​</p></li>
-<li><p>The primary field accepts integers and disables <strong>AutoId</strong>.​</p></li>
-<li><p>The vector field accepts floating vector embeddings.​</p></li>
-<li><p><strong>AUTOINDEX</strong> is used to create an index on the vector field.​</p></li>
-<li><p><strong>COSINE</strong> is used to measure similarities between vector embeddings.​</p></li>
-<li><p>The reserves dynamic field named <strong>$meta</strong> is enabled to save non-schema-defined fields and their values in key-value pairs.​</p></li>
-<li><p>The collection is automatically loaded upon creation.​</p></li>
+<li><p>기본 필드 및 벡터 필드가 스키마에 추가됩니다<strong>(ID</strong> 및 <strong>벡터</strong>).</p></li>
+<li><p>기본 필드는 정수를 허용하고 <strong>자동 ID를</strong> 비활성화합니다.</p></li>
+<li><p>벡터 필드는 부동 벡터 임베딩을 허용합니다.</p></li>
+<li><p><strong>자동 인덱스는</strong> 벡터 필드에 인덱스를 만드는 데 사용됩니다.</p></li>
+<li><p><strong>COSINE은</strong> 벡터 임베딩 간의 유사성을 측정하는 데 사용됩니다.</p></li>
+<li><p><strong>메타라는</strong> 이름의 예약 동적 필드는 스키마에 정의되지 않은 필드와 해당 값을 키-값 쌍으로 저장하기 위해 활성화됩니다.</p></li>
+<li><p>컬렉션은 생성 시 자동으로 로드됩니다.</p></li>
 </ul>
-<p>For details on the terminologies above, refer to <a href="/docs/manage-collections.md">​Collection Explained</a>. ​</p>
-<p>It is worth noting that creating a collection instantly with default settings does not fit all scenarios. You are advised to familiarize yourself with the <a href="/docs/create-collection.md">common collection creation procedure</a> so that you can gain a better understanding of Milvus’s capabilities.​</p>
-<h2 id="Quick-Setup​" class="common-anchor-header">Quick Setup​<button data-href="#Quick-Setup​" class="anchor-icon" translate="no">
+<p>위의 용어에 대한 자세한 내용은 <a href="/docs/ko/manage-collections.md">컬렉션 설명을</a> 참조하세요. </p>
+<p>기본 설정으로 컬렉션을 즉시 생성하는 것이 모든 시나리오에 적합하지는 않습니다. Milvus의 기능을 더 잘 이해할 수 있도록 <a href="/docs/ko/create-collection.md">일반적인 컬렉션 생성 절차를</a> 숙지하는 것이 좋습니다.</p>
+<h2 id="Quick-Setup​" class="common-anchor-header">빠른 설정<button data-href="#Quick-Setup​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -62,14 +62,9 @@ title: Create Collection​ Instantly​
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>In this manner, you can create a collection instantly with only the collection name and the vector field dimensionality.​</p>
+    </button></h2><p>이러한 방식으로 컬렉션 이름과 벡터 필드 차원만 있으면 컬렉션을 즉시 생성할 수 있습니다.</p>
 <div class="multipleCode">
-  <a href="#python">Python </a>
-  <a href="#java">Java</a>
-  <a href="#javascript">Node.js</a>
-  <a href="#go">Go</a>
-  <a href="#curl">cURL</a>
-</div>
+ <a href="#python">파이썬 </a> <a href="#java">자바</a> <a href="#javascript">Node.js</a> <a href="#go">Go</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType​
 ​
 CLUSTER_ENDPOINT = <span class="hljs-string">&quot;http://localhost:19530&quot;</span>​
@@ -188,7 +183,7 @@ curl --request POST \​
 <span class="hljs-comment"># }​</span>
 
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Quick-Setup-with-Custom-Fields​" class="common-anchor-header">Quick Setup with Custom Fields​<button data-href="#Quick-Setup-with-Custom-Fields​" class="anchor-icon" translate="no">
+<h2 id="Quick-Setup-with-Custom-Fields​" class="common-anchor-header">사용자 정의 필드를 사용한 빠른 설정<button data-href="#Quick-Setup-with-Custom-Fields​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -203,14 +198,9 @@ curl --request POST \​
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>If the default metric type, field names, and data types does not meet your need, you can tune these settings as follows.​</p>
+    </button></h2><p>기본 메트릭 유형, 필드 이름 및 데이터 유형이 필요에 맞지 않는 경우 다음과 같이 이러한 설정을 조정할 수 있습니다.</p>
 <div class="multipleCode">
-  <a href="#python">Python </a>
-  <a href="#java">Java</a>
-  <a href="#javascript">Node.js</a>
-  <a href="#go">Go</a>
-  <a href="#curl">cURL</a>
-</div>
+ <a href="#python">파이썬 </a> <a href="#java">자바</a> <a href="#javascript">Node.js</a> <a href="#go">Go</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType​
 ​
 CLUSTER_ENDPOINT = <span class="hljs-string">&quot;http://localhost:19530&quot;</span>​
@@ -348,4 +338,4 @@ curl --request POST \​
 }&#x27;</span>​
 
 <button class="copy-code-btn"></button></code></pre>
-<p>If the collections created using the above two manners still cannot meet your needs, consider following the procedure in <a href="/docs/create-collection.md">​Create Collection</a>.​</p>
+<p>위의 두 가지 방법을 사용하여 만든 컬렉션이 여전히 요구 사항을 충족하지 못하는 경우 <a href="/docs/ko/create-collection.md">컬렉션 만들기의</a> 절차를 따르세요.</p>

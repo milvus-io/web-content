@@ -1,14 +1,12 @@
 ---
 id: use-json-fields.md
-title: Use JSON Fields
+title: JSON 필드 사용
 summary: >-
-  JSON (JavaScript Object Notation) is a lightweight data exchange format that
-  provides a flexible way to store and query complex data structures. In Milvus,
-  you can store additional structured information alongside vector data using
-  JSON fields, enabling advanced searches and queries that combine vector
-  similarity with structured filtering.​
+  JSON(JavaScript 객체 표기법)은 복잡한 데이터 구조를 저장하고 쿼리할 수 있는 유연한 방법을 제공하는 경량 데이터 교환
+  형식입니다. Milvus에서는 JSON 필드를 사용하여 벡터 데이터와 함께 추가적인 구조화된 정보를 저장할 수 있으므로 벡터 유사성과
+  구조화된 필터링을 결합한 고급 검색 및 쿼리가 가능합니다.
 ---
-<h1 id="JSON-Field​" class="common-anchor-header">JSON Field​<button data-href="#JSON-Field​" class="anchor-icon" translate="no">
+<h1 id="JSON-Field​" class="common-anchor-header">JSON 필드<button data-href="#JSON-Field​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -23,8 +21,8 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p><a href="https://en.wikipedia.org/wiki/JSON">JSON</a> (JavaScript Object Notation) is a lightweight data exchange format that provides a flexible way to store and query complex data structures. In Milvus, you can store additional structured information alongside vector data using JSON fields, enabling advanced searches and queries that combine vector similarity with structured filtering.​</p>
-<p>JSON fields are ideal for applications that require metadata to optimize retrieval results. For example, in e-commerce, product vectors can be enhanced with attributes like category, price, and brand. In recommendation systems, user vectors can be combined with preferences and demographic information. Below is an example of a typical JSON field:​</p>
+    </button></h1><p><a href="https://en.wikipedia.org/wiki/JSON">JSON</a> (JavaScript 객체 표기법)은 복잡한 데이터 구조를 저장하고 쿼리할 수 있는 유연한 방법을 제공하는 경량 데이터 교환 형식입니다. Milvus에서는 JSON 필드를 사용하여 벡터 데이터와 함께 추가적인 구조화된 정보를 저장할 수 있으므로 벡터 유사성과 구조화된 필터링을 결합한 고급 검색 및 쿼리가 가능합니다.</p>
+<p>JSON 필드는 검색 결과를 최적화하기 위해 메타데이터가 필요한 애플리케이션에 이상적입니다. 예를 들어, 이커머스에서는 카테고리, 가격, 브랜드와 같은 속성으로 제품 벡터를 강화할 수 있습니다. 추천 시스템에서는 사용자 벡터를 선호도 및 인구통계학적 정보와 결합할 수 있습니다. 다음은 일반적인 JSON 필드의 예입니다.</p>
 <pre><code translate="no" class="language-json">{​
   <span class="hljs-string">&quot;category&quot;</span>: <span class="hljs-string">&quot;electronics&quot;</span>,​
   <span class="hljs-string">&quot;price&quot;</span>: <span class="hljs-number">99.99</span>,​
@@ -32,7 +30,7 @@ summary: >-
 }​
 
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Add-JSON-field​" class="common-anchor-header">Add JSON field​<button data-href="#Add-JSON-field​" class="anchor-icon" translate="no">
+<h2 id="Add-JSON-field​" class="common-anchor-header">JSON 필드 추가하기<button data-href="#Add-JSON-field​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -47,14 +45,10 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>To use JSON fields in Milvus, define the relevant field type in the collection schema, setting the <code translate="no">datatype</code> to the supported JSON type, i.e., <code translate="no">JSON</code>.​</p>
-<p>Here’s how to define a collection schema that includes a JSON field:​</p>
+    </button></h2><p>Milvus에서 JSON 필드를 사용하려면 컬렉션 스키마에서 관련 필드 유형을 정의하고 <code translate="no">datatype</code> 을 지원되는 JSON 유형(예: <code translate="no">JSON</code> 으로 설정합니다.</p>
+<p>JSON 필드를 포함하는 컬렉션 스키마를 정의하는 방법은 다음과 같습니다.</p>
 <div class="multipleCode">
-    <a href="#python">Python </a>
-    <a href="#java">Java</a>
-    <a href="#javascript">Node.js</a>
-    <a href="#curl">cURL</a>
-</div>
+   <a href="#python">파이썬 </a> <a href="#java">자바</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType​
 ​
 client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)​
@@ -149,11 +143,11 @@ schema.addField(AddFieldReq.builder()​
 }&quot;</span>​
 
 <button class="copy-code-btn"></button></code></pre>
-<p>In this example, we add a JSON field called <code translate="no">metadata</code> to store additional metadata related to vector data, such as product category, price, and brand information.​</p>
+<p>이 예에서는 제품 카테고리, 가격, 브랜드 정보 등 벡터 데이터와 관련된 추가 메타데이터를 저장하기 위해 <code translate="no">metadata</code> 이라는 JSON 필드를 추가합니다.</p>
 <div class="alert note">
-<p>The primary field and vector field are mandatory when you create a collection. The primary field uniquely identifies each entity, while the vector field is crucial for similarity search. For more details, refer to <a href="/docs/primary-field.md">​Primary Field &amp; AutoID</a>, <a href="/docs/dense-vector.md">​Dense Vector</a>, <a href="/docs/binary-vector.md">​Binary Vector</a>, or <a href="/docs/sparse_vector.md">​Sparse Vector</a>.​</p>
+<p>기본 필드와 벡터 필드는 컬렉션을 만들 때 필수입니다. 기본 필드는 각 엔티티를 고유하게 식별하는 반면, 벡터 필드는 유사성 검색에 매우 중요합니다. 자세한 내용은 <a href="/docs/ko/primary-field.md">기본 필드 및 자동 ID</a>, <a href="/docs/ko/dense-vector.md">고밀도 벡터</a>, <a href="/docs/ko/binary-vector.md">이진 벡터</a> 또는 <a href="/docs/ko/sparse_vector.md">스파스 벡터를</a> 참조하세요.</p>
 </div>
-<h2 id="Create-collection​" class="common-anchor-header">Create collection​<button data-href="#Create-collection​" class="anchor-icon" translate="no">
+<h2 id="Create-collection​" class="common-anchor-header">컬렉션 만들기<button data-href="#Create-collection​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -168,13 +162,9 @@ schema.addField(AddFieldReq.builder()​
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>When creating a collection, you must create an index for the vector field to ensure retrieval performance. In this example, we use <code translate="no">AUTOINDEX</code> to simplify index setup. For more details, refer to <a href="https://milvus.io/docs/glossary.md#Auto-Index">​AUTOINDEX</a>.​</p>
+    </button></h2><p>컬렉션을 만들 때 검색 성능을 보장하기 위해 벡터 필드에 대한 인덱스를 만들어야 합니다. 이 예에서는 인덱스 설정을 간소화하기 위해 <code translate="no">AUTOINDEX</code> 을 사용합니다. 자세한 내용은 <a href="https://milvus.io/docs/glossary.md#Auto-Index">자동 인덱스를</a> 참조하세요.</p>
 <div class="multipleCode">
-    <a href="#python">Python </a>
-    <a href="#java">Java</a>
-    <a href="#javascript">Node.js</a>
-    <a href="#curl">cURL</a>
-</div>
+   <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python">​
 index_params = client.<span class="hljs-title function_">prepare_index_params</span>()​
 ​
@@ -213,13 +203,9 @@ indexes.add(IndexParam.builder()​
     ]&#x27;</span>​
 
 <button class="copy-code-btn"></button></code></pre>
-<p>Use the defined schema and index parameters to create a collection:​</p>
+<p>정의된 스키마 및 인덱스 매개변수를 사용하여 컬렉션을 생성합니다.</p>
 <div class="multipleCode">
-    <a href="#python">Python </a>
-    <a href="#java">Java</a>
-    <a href="#javascript">Node.js</a>
-    <a href="#curl">cURL</a>
-</div>
+   <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python">client.<span class="hljs-title function_">create_collection</span>(​
     collection_name=<span class="hljs-string">&quot;my_json_collection&quot;</span>,​
     schema=schema,​
@@ -253,7 +239,7 @@ client.createCollection(requestCreate);​
 }&quot;</span>​
 
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Insert-data​" class="common-anchor-header">Insert data​<button data-href="#Insert-data​" class="anchor-icon" translate="no">
+<h2 id="Insert-data​" class="common-anchor-header">데이터 삽입<button data-href="#Insert-data​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -268,13 +254,9 @@ client.createCollection(requestCreate);​
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>After creating the collection, you can insert data that includes JSON fields.​</p>
+    </button></h2><p>컬렉션을 생성한 후 JSON 필드를 포함하는 데이터를 삽입할 수 있습니다.</p>
 <div class="multipleCode">
-    <a href="#python">Python </a>
-    <a href="#java">Java</a>
-    <a href="#javascript">Node.js</a>
-    <a href="#curl">cURL</a>
-</div>
+   <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Data to be inserted​</span>
 data = [​
   {​
@@ -369,12 +351,12 @@ client.<span class="hljs-title function_">insert</span>({​
 }&#x27;</span>​
 
 <button class="copy-code-btn"></button></code></pre>
-<p>In this example:​</p>
+<p>이 예제에서는</p>
 <ul>
-<li><p>Each data entry includes a primary field (<code translate="no">pk</code>), <code translate="no">metadata</code> as a JSON field to store information such as product category, price, and brand.​</p></li>
-<li><p><code translate="no">embedding</code> is a 3-dimensional vector field used for vector similarity search.​</p></li>
+<li><p>각 데이터 항목에는 제품 카테고리, 가격, 브랜드 등의 정보를 저장하는 기본 필드(<code translate="no">pk</code>), <code translate="no">metadata</code> 이 JSON 필드로 포함되어 있습니다.</p></li>
+<li><p><code translate="no">embedding</code> 는 벡터 유사도 검색에 사용되는 3차원 벡터 필드입니다.</p></li>
 </ul>
-<h2 id="Search-and-query​" class="common-anchor-header">Search and query​<button data-href="#Search-and-query​" class="anchor-icon" translate="no">
+<h2 id="Search-and-query​" class="common-anchor-header">검색 및 쿼리<button data-href="#Search-and-query​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -389,14 +371,10 @@ client.<span class="hljs-title function_">insert</span>({​
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>JSON fields allow scalar filtering during searches, enhancing Milvus’s vector search capabilities. You can query based on JSON properties alongside vector similarity.​</p>
-<h3 id="Filter-queries​" class="common-anchor-header">Filter queries​</h3><p>You can filter data based on JSON properties, such as matching specific values or checking if a number falls within a certain range.​</p>
+    </button></h2><p>JSON 필드는 검색 시 스칼라 필터링이 가능하여 Milvus의 벡터 검색 기능을 향상시킵니다. 벡터 유사도와 함께 JSON 속성을 기반으로 쿼리할 수 있습니다.</p>
+<h3 id="Filter-queries​" class="common-anchor-header">쿼리 필터링</h3><p>특정 값을 일치시키거나 특정 범위 내에 숫자가 있는지 확인하는 등 JSON 속성을 기반으로 데이터를 필터링할 수 있습니다.</p>
 <div class="multipleCode">
-    <a href="#python">Python </a>
-    <a href="#java">Java</a>
-    <a href="#javascript">Node.js</a>
-    <a href="#curl">cURL</a>
-</div>
+   <a href="#python">파이썬 </a> <a href="#java">자바</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;metadata[&quot;category&quot;] == &quot;electronics&quot; and metadata[&quot;price&quot;] &lt; 150&#x27;</span>​
 ​
 res = client.query(​
@@ -447,14 +425,10 @@ System.out.println(resp.getQueryResults());​
 {<span class="hljs-string">&quot;code&quot;</span>:0,<span class="hljs-string">&quot;cost&quot;</span>:0,<span class="hljs-string">&quot;data&quot;</span>:[{<span class="hljs-string">&quot;metadata&quot;</span>:<span class="hljs-string">&quot;{\&quot;category\&quot;: \&quot;electronics\&quot;, \&quot;price\&quot;: 99.99, \&quot;brand\&quot;: \&quot;BrandA\&quot;}&quot;</span>,<span class="hljs-string">&quot;pk&quot;</span>:1}]}​
 
 <button class="copy-code-btn"></button></code></pre>
-<p>In the above query, Milvus filters out entities where the <code translate="no">metadata</code> field has a category of <code translate="no">&quot;electronics&quot;</code> and a price below 150, returning entities that match these criteria.​</p>
-<h3 id="Vector-search-with-JSON-filtering​" class="common-anchor-header">Vector search with JSON filtering​</h3><p>By combining vector similarity with JSON filtering, you can ensure that the retrieved data not only matches semantically but also meets specific business conditions, making the search results more precise and aligned with user needs.​</p>
+<p>위의 쿼리에서 Milvus는 <code translate="no">metadata</code> 필드의 카테고리가 <code translate="no">&quot;electronics&quot;</code>, 가격이 150 미만인 엔티티를 필터링하여 이 조건과 일치하는 엔티티를 반환합니다.</p>
+<h3 id="Vector-search-with-JSON-filtering​" class="common-anchor-header">JSON 필터링을 사용한 벡터 검색</h3><p>벡터 유사성과 JSON 필터링을 결합하면 검색된 데이터가 의미론적으로 일치할 뿐만 아니라 특정 비즈니스 조건을 충족하는지 확인하여 검색 결과를 보다 정확하고 사용자 요구에 맞게 조정할 수 있습니다.</p>
 <div class="multipleCode">
-    <a href="#python">Python </a>
-    <a href="#java">Java</a>
-    <a href="#javascript">Node.js</a>
-    <a href="#curl">cURL</a>
-</div>
+   <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;metadata[&quot;brand&quot;] == &quot;BrandA&quot;&#x27;</span>​
 ​
 res = client.search(​
@@ -522,9 +496,9 @@ System.out.println(resp.getSearchResults());​
 <span class="hljs-comment">## {&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:[{&quot;distance&quot;:-0.24793813,&quot;id&quot;:1,&quot;metadata&quot;:&quot;{\&quot;category\&quot;: \&quot;electronics\&quot;, \&quot;price\&quot;: 99.99, \&quot;brand\&quot;: \&quot;BrandA\&quot;}&quot;}]}​</span>
 
 <button class="copy-code-btn"></button></code></pre>
-<p>In this example, Milvus returns the top 5 entities most similar to the query vector, with the <code translate="no">metadata</code> field containing a brand of <code translate="no">&quot;BrandA&quot;</code>.​</p>
-<p>Additionally, Milvus supports advanced JSON filtering operators such as <code translate="no">JSON_CONTAINS</code>, <code translate="no">JSON_CONTAINS_ALL</code>, and <code translate="no">JSON_CONTAINS_ANY</code>, which can further enhance query capabilities. For more details, refer to <a href="/docs/boolean.md">​Metadata Filtering</a>.​</p>
-<h2 id="Limits​" class="common-anchor-header">Limits​<button data-href="#Limits​" class="anchor-icon" translate="no">
+<p>이 예제에서 Milvus는 <code translate="no">metadata</code> 필드에 <code translate="no">&quot;BrandA&quot;</code> 이라는 브랜드가 포함된 쿼리 벡터와 가장 유사한 상위 5개 엔티티를 반환합니다.</p>
+<p>또한 Milvus는 <code translate="no">JSON_CONTAINS</code>, <code translate="no">JSON_CONTAINS_ALL</code>, <code translate="no">JSON_CONTAINS_ANY</code> 와 같은 고급 JSON 필터링 연산자를 지원하여 쿼리 기능을 더욱 향상시킬 수 있습니다. 자세한 내용은 <a href="/docs/ko/boolean.md">메타데이터 필터링을</a> 참조하세요.</p>
+<h2 id="Limits​" class="common-anchor-header">제한 사항<button data-href="#Limits​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -540,9 +514,9 @@ System.out.println(resp.getSearchResults());​
         ></path>
       </svg>
     </button></h2><ul>
-<li><p><strong>Indexing Limitations</strong>: Due to the complexity of data structures, indexing JSON fields is not supported.​</p></li>
-<li><p><strong>Data Type Matching</strong>: If a JSON field’s key value is an integer or floating point, it can only be compared with another integer or float key or <code translate="no">INT32/64</code> or <code translate="no">FLOAT32/64</code> fields. If the key value is a string (<code translate="no">VARCHAR</code>), it can only be compared with another string key.​</p></li>
-<li><p><strong>Naming Restrictions</strong>: When naming JSON keys, it is recommended to use only letters, numeric characters, and underscores, as other characters may cause issues during filtering or searching.​</p></li>
-<li><p><strong>Handling String Values</strong>: For string values (<code translate="no">VARCHAR</code>), Milvus stores JSON field strings as-is without semantic conversion. For example: <code translate="no">'a&quot;b'</code>, <code translate="no">&quot;a'b&quot;</code>, <code translate="no">'a\\'b'</code>, and <code translate="no">&quot;a\\&quot;b&quot;</code> are stored as entered; however, <code translate="no">'a'b'</code> and <code translate="no">&quot;a&quot;b&quot;</code> are considered invalid.​</p></li>
-<li><p><strong>Handling Nested Dictionaries</strong>: Any nested dictionaries within JSON field values are treated as strings.​</p></li>
+<li><p><strong>인덱싱 제한</strong>: 데이터 구조의 복잡성으로 인해 JSON 필드 인덱싱은 지원되지 않습니다.</p></li>
+<li><p><strong>데이터 유형 일치</strong>: JSON 필드의 키 값이 정수 또는 부동 소수점인 경우 다른 정수 또는 부동 소수점 키 또는 <code translate="no">INT32/64</code> 또는 <code translate="no">FLOAT32/64</code> 필드와만 비교할 수 있습니다. 키 값이 문자열(<code translate="no">VARCHAR</code>)인 경우 다른 문자열 키와만 비교할 수 있습니다.</p></li>
+<li><p><strong>이름 지정 제한</strong>: 다른 문자는 필터링이나 검색 중에 문제를 일으킬 수 있으므로 JSON 키의 이름을 지정할 때는 문자, 숫자, 밑줄만 사용하는 것이 좋습니다.</p></li>
+<li><p><strong>문자열 값 처리하기</strong>: 문자열 값(<code translate="no">VARCHAR</code>)의 경우, Milvus는 의미 변환 없이 JSON 필드 문자열을 그대로 저장합니다. 예를 들어 <code translate="no">'a&quot;b'</code>, <code translate="no">&quot;a'b&quot;</code>, <code translate="no">'a\\'b'</code>, <code translate="no">&quot;a\\&quot;b&quot;</code> 은 입력한 대로 저장되지만 <code translate="no">'a'b'</code> 과 <code translate="no">&quot;a&quot;b&quot;</code> 은 유효하지 않은 것으로 간주됩니다.</p></li>
+<li><p><strong>중첩된 사전 처리</strong>: JSON 필드 값 내에 중첩된 사전은 모두 문자열로 처리됩니다.</p></li>
 </ul>

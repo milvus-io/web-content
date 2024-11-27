@@ -1,16 +1,13 @@
 ---
 id: filtered-search.md
-title: Filtered Search​
+title: 필터링된 검색
 related_key: 'ann search, filtered search'
 summary: >-
-  An ANN search finds vector embeddings most similar to specified vector
-  embeddings. However, the search results may not always be correct. You can
-  include filtering conditions in a search request so that Milvus conducts
-  metadata filtering before conducting ANN searches, reducing the search scope
-  from the whole collection to only the entities matching the specified
-  filtering conditions.​
+  ANN 검색은 지정된 벡터 임베딩과 가장 유사한 벡터 임베딩을 찾습니다. 그러나 검색 결과가 항상 정확하지는 않을 수 있습니다. 검색 요청에
+  필터링 조건을 포함하면 Milvus가 ANN 검색을 수행하기 전에 메타데이터 필터링을 수행하여 검색 범위를 전체 컬렉션에서 지정된 필터링
+  조건과 일치하는 엔티티로만 축소할 수 있습니다.
 ---
-<h1 id="Filtered-Search​" class="common-anchor-header">Filtered Search​<button data-href="#Filtered-Search​" class="anchor-icon" translate="no">
+<h1 id="Filtered-Search​" class="common-anchor-header">필터링된 검색<button data-href="#Filtered-Search​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -25,8 +22,8 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>An ANN search finds vector embeddings most similar to specified vector embeddings. However, the search results may not always be correct. You can include filtering conditions in a search request so that Milvus conducts metadata filtering before conducting ANN searches, reducing the search scope from the whole collection to only the entities matching the specified filtering conditions.​</p>
-<h2 id="Overview" class="common-anchor-header">Overview<button data-href="#Overview" class="anchor-icon" translate="no">
+    </button></h1><p>ANN 검색은 지정된 벡터 임베딩과 가장 유사한 벡터 임베딩을 찾습니다. 그러나 검색 결과가 항상 정확하지는 않을 수 있습니다. 검색 요청에 필터링 조건을 포함하면 Milvus가 ANN 검색을 수행하기 전에 메타데이터 필터링을 수행하여 검색 범위를 전체 컬렉션에서 지정된 필터링 조건과 일치하는 엔티티로만 좁힐 수 있습니다.</p>
+<h2 id="Overview" class="common-anchor-header">개요<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -41,20 +38,18 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>If a collection contains both vector embeddings and their metadata, you can filter metadata before ANN search to improve the relevancy of the search result. Once Milvus receives a search request carrying a filtering condition, it restricts the search scope within the entities matching the specified filtering condition.​</p>
+    </button></h2><p>컬렉션에 벡터 임베딩과 해당 메타데이터가 모두 포함된 경우, ANN 검색 전에 메타데이터를 필터링하여 검색 결과의 관련성을 향상시킬 수 있습니다. Milvus는 필터링 조건이 포함된 검색 요청을 받으면 지정된 필터링 조건과 일치하는 엔티티 내에서 검색 범위를 제한합니다.</p>
 <p>
-  <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.5.x/assets/filtered-search.png" alt="Filtered search" class="doc-image" id="filtered-search" />
-    <span>Filtered search</span>
-  </span>
-</p>
-<p>As shown in the above diagram, the search request carries <code translate="no">chunk like % red %</code> as the filtering condition, indicating that Milvus should conduct the ANN search within all the entities that have the word <code translate="no">red</code> in the <code translate="no">chunk</code> field. Specifically, Milvus does the following:​</p>
+  
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/filtered-search.png" alt="Filtered search" class="doc-image" id="filtered-search" />
+   </span> <span class="img-wrapper"> <span>필터링된 검색</span> </span></p>
+<p>위 다이어그램에서 볼 수 있듯이 검색 요청에는 <code translate="no">chunk like % red %</code> 이 필터링 조건으로 포함되어 있으며, 이는 Milvus가 <code translate="no">chunk</code> 필드에 <code translate="no">red</code> 이라는 단어가 포함된 모든 엔티티 내에서 ANN 검색을 수행해야 함을 나타냅니다. 구체적으로 Milvus는 다음을 수행합니다.</p>
 <ul>
-<li><p>Filter entities that match the filtering conditions carried in the search request.​</p></li>
-<li><p>Conduct the ANN search within the filtered entities.​</p></li>
-<li><p>Returns top-K entities.​</p></li>
+<li><p>검색 요청에 포함된 필터링 조건과 일치하는 엔티티를 필터링합니다.</p></li>
+<li><p>필터링된 엔티티 내에서 ANN 검색을 수행합니다.</p></li>
+<li><p>상위 K 개체를 반환합니다.</p></li>
 </ul>
-<h2 id="Examples" class="common-anchor-header">Examples<button data-href="#Examples" class="anchor-icon" translate="no">
+<h2 id="Examples" class="common-anchor-header">예제<button data-href="#Examples" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -69,7 +64,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>This section demonstrates how to conduct a filtered search. Code snippets in this section assume  you already have the following entities in your collection. Each entity has four fields, namely <strong>id</strong>, <strong>vector</strong>, <strong>color</strong>, and <strong>likes</strong>.​</p>
+    </button></h2><p>이 섹션에서는 필터링된 검색을 수행하는 방법을 설명합니다. 이 섹션의 코드 조각은 컬렉션에 이미 다음과 같은 엔티티가 있다고 가정합니다. 각 엔티티에는 <strong>id</strong>, <strong>벡터</strong>, <strong>색상</strong> 및 <strong>좋아요의</strong> 네 가지 필드가 있습니다.</p>
 <pre><code translate="no" class="language-JSON">[​
     {<span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">0</span>, <span class="hljs-string">&quot;vector&quot;</span>: [<span class="hljs-number">0.3580376395471989</span>, -<span class="hljs-number">0.6023495712049978</span>, <span class="hljs-number">0.18414012509913835</span>, -<span class="hljs-number">0.26286205330961354</span>, <span class="hljs-number">0.9029438446296592</span>], <span class="hljs-string">&quot;color&quot;</span>: <span class="hljs-string">&quot;pink_8682&quot;</span>, <span class="hljs-string">&quot;likes&quot;</span>: <span class="hljs-number">165</span>},​
     {<span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">1</span>, <span class="hljs-string">&quot;vector&quot;</span>: [<span class="hljs-number">0.19886812562848388</span>, <span class="hljs-number">0.06023560599112088</span>, <span class="hljs-number">0.6976963061752597</span>, <span class="hljs-number">0.2614474506242501</span>, <span class="hljs-number">0.838729485096104</span>], <span class="hljs-string">&quot;color&quot;</span>: <span class="hljs-string">&quot;red_7025&quot;</span>, <span class="hljs-string">&quot;likes&quot;</span>: <span class="hljs-number">25</span>},​
@@ -84,13 +79,9 @@ summary: >-
 ]​
 
 <button class="copy-code-btn"></button></code></pre>
-<p>The search request in the following code snippet carries a filtering condition and several output fields.​</p>
+<p>다음 코드 스니펫의 검색 요청에는 필터링 조건과 여러 출력 필드가 포함되어 있습니다.</p>
 <div class="multipleCode">
-    <a href="#python">Python </a>
-    <a href="#java">Java</a>
-    <a href="#javascript">Node.js</a>
-    <a href="#curl">cURL</a>
-</div>
+   <a href="#python">파이썬 </a> <a href="#java">자바</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient​
 ​
 client = MilvusClient(​
@@ -238,7 +229,7 @@ curl --request POST \​
 <span class="hljs-comment"># {&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:[]}​</span>
 
 <button class="copy-code-btn"></button></code></pre>
-<p>The filtering condition carried in the search request reads <code translate="no">color like &quot;red%&quot; and likes &gt; 50</code>. It uses the and operator to include two conditions: the first one asks for entities that have a value starting with <code translate="no">red</code> in the <code translate="no">color</code> field, and the other asks for entities with a value greater than <code translate="no">50</code> in the <code translate="no">likes</code> field. There are only two entities meeting these requirements. With the top-K set to <code translate="no">3</code>, Milvus will calculate the distance between these two entities to the query vector and return them as the search results.​</p>
+<p>검색 요청에 포함된 필터링 조건은 <code translate="no">color like &quot;red%&quot; and likes &gt; 50</code> 입니다. 첫 번째 조건은 <code translate="no">color</code> 필드에 <code translate="no">red</code> 로 시작하는 값을 가진 엔티티를 요청하고, 다른 조건은 <code translate="no">likes</code> 필드에 <code translate="no">50</code> 보다 큰 값을 가진 엔티티를 요청하는 두 가지 조건을 포함하기 위해 및 연산자를 사용합니다. 이러한 요구 사항을 충족하는 엔티티는 두 개뿐입니다. 상위-K를 <code translate="no">3</code> 로 설정하면 Milvus는 이 두 엔티티와 쿼리 벡터 사이의 거리를 계산하여 검색 결과로 반환합니다.</p>
 <pre><code translate="no" class="language-JSON">[​
     {​
         <span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">4</span>, ​
@@ -261,4 +252,4 @@ curl --request POST \​
 ]​
 
 <button class="copy-code-btn"></button></code></pre>
-<p>For more information on the operators that you can use in metadata filtering, refer to <a href="/docs/boolean.md">​Metadata Filtering</a>.​</p>
+<p>메타데이터 필터링에 사용할 수 있는 연산자에 대한 자세한 내용은 <a href="/docs/ko/boolean.md">메타데이터 필터링을</a> 참조하세요.</p>

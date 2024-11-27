@@ -2,9 +2,9 @@
 id: configure_trace.md
 related_key: configure
 group: system_configuration.md
-summary: Learn how to configure trace for Milvus.
+summary: Milvus에 대한 추적을 구성하는 방법을 알아보세요.
 ---
-<h1 id="trace-related-Configurations" class="common-anchor-header">trace-related Configurations<button data-href="#trace-related-Configurations" class="anchor-icon" translate="no">
+<h1 id="trace-related-Configurations" class="common-anchor-header">추적 관련 구성<button data-href="#trace-related-Configurations" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -37,15 +37,15 @@ summary: Learn how to configure trace for Milvus.
     </button></h2><table id="trace.exporter">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">설명</th>
+      <th class="width20">기본값</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>
-        <li>trace exporter type, default is stdout,</li>      
-        <li>optional values: ['noop','stdout', 'jaeger', 'otlp']</li>      </td>
+        <li>추적 내보내기 유형, 기본값은 stdout입니다,</li>      
+        <li>옵션 값: ['noop','stdout','jaeger','otlp']</li>      </td>
       <td>noop</td>
     </tr>
   </tbody>
@@ -68,16 +68,16 @@ summary: Learn how to configure trace for Milvus.
     </button></h2><table id="trace.sampleFraction">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">설명</th>
+      <th class="width20">기본값</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>
-        <li>fraction of traceID based sampler,</li>      
-        <li>optional values: [0, 1]</li>      
-        <li>Fractions >= 1 will always sample. Fractions < 0 are treated as zero.</li>      </td>
+        <li>traceID 기반 샘플러의 분수,</li>      
+        <li>선택적 값입니다: [0, 1]</li>      
+        <li>분수 &gt;= 1은 항상 샘플링합니다. 0 미만의 분수는 0으로 처리됩니다.</li>      </td>
       <td>0</td>
     </tr>
   </tbody>
@@ -100,13 +100,13 @@ summary: Learn how to configure trace for Milvus.
     </button></h2><table id="trace.jaeger.url">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">설명</th>
+      <th class="width20">기본값</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        when exporter is jaeger should set the jaeger's URL      </td>
+      <td>        내보내기가 예거인 경우 예거의 URL을 설정해야 합니다.      </td>
       <td></td>
     </tr>
   </tbody>
@@ -129,13 +129,13 @@ summary: Learn how to configure trace for Milvus.
     </button></h2><table id="trace.otlp.endpoint">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">설명</th>
+      <th class="width20">기본값</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        example: "127.0.0.1:4317" for grpc, "127.0.0.1:4318" for http      </td>
+      <td>        예시 grpc의 경우 "127.0.0.1:4317", http의 경우 "127.0.0.1:4318"      </td>
       <td></td>
     </tr>
   </tbody>
@@ -158,13 +158,13 @@ summary: Learn how to configure trace for Milvus.
     </button></h2><table id="trace.otlp.method">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">설명</th>
+      <th class="width20">기본값</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        otlp export method, acceptable values: ["grpc", "http"],  using "grpc" by default      </td>
+      <td>        OTLP 내보내기 방법, 허용되는 값: ["grpc", "http"], 기본적으로 "grpc" 사용      </td>
       <td></td>
     </tr>
   </tbody>
@@ -187,13 +187,13 @@ summary: Learn how to configure trace for Milvus.
     </button></h2><table id="trace.initTimeoutSeconds">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">설명</th>
+      <th class="width20">기본값</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        segcore initialization timeout in seconds, preventing otlp grpc hangs forever      </td>
+      <td>        세그코어 초기화 시간 초과(초), OTLP GRPC가 영원히 중단되는 것을 방지합니다.      </td>
       <td>10</td>
     </tr>
   </tbody>

@@ -1,8 +1,8 @@
 ---
 id: delete-entities.md
-title: Delete Entities
+title: 엔티티 삭제
 ---
-<h1 id="Delete-Entities​" class="common-anchor-header">Delete Entities​<button data-href="#Delete-Entities​" class="anchor-icon" translate="no">
+<h1 id="Delete-Entities​" class="common-anchor-header">엔티티 삭제<button data-href="#Delete-Entities​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -17,8 +17,8 @@ title: Delete Entities
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>You can delete the entities that are no longer needed by filtering conditions or their primary keys.​</p>
-<h2 id="Delete-Entities-by-Filtering-Conditions​" class="common-anchor-header">Delete Entities by Filtering Conditions​<button data-href="#Delete-Entities-by-Filtering-Conditions​" class="anchor-icon" translate="no">
+    </button></h1><p>조건 또는 기본 키를 필터링하여 더 이상 필요하지 않은 엔티티를 삭제할 수 있습니다.</p>
+<h2 id="Delete-Entities-by-Filtering-Conditions​" class="common-anchor-header">조건을 필터링하여 엔티티 삭제<button data-href="#Delete-Entities-by-Filtering-Conditions​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -33,14 +33,9 @@ title: Delete Entities
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>When deleting multiple entities that share some attributes in a batch, you can use filter expressions. The example code below uses the <strong>in</strong> operator to bulk delete all Entities with thier <strong>color</strong> field set to the values of <strong>red</strong> and <strong>green</strong>. You can also use other operators to construct filter expressions that meet your requirements. For more information about filter expressions, please refer to <a href="/docs/boolean.md">​Metadata Filtering</a>.​</p>
+    </button></h2><p>일부 속성을 공유하는 여러 개체를 일괄 삭제할 때 필터 표현식을 사용할 수 있습니다. 아래 예제 코드는 <strong>in</strong> 연산자를 사용하여 <strong>색상</strong> 필드가 <strong>빨간색과</strong> <strong>녹색</strong> 값으로 설정된 모든 엔티티를 일괄 삭제합니다. 다른 연산자를 사용하여 요구 사항을 충족하는 필터 표현식을 만들 수도 있습니다. 필터 표현식에 대한 자세한 내용은 <a href="/docs/ko/boolean.md">메타데이터 필터링을</a> 참조하세요.</p>
 <div class="multipleCode">
-  <a href="#python">Python </a>
-  <a href="#java">Java</a>
-  <a href="#javascript">Node.js</a>
-  <a href="#go">Go</a>
-  <a href="#curl">cURL</a>
-</div>
+ <a href="#python">파이썬 </a> <a href="#java">자바</a> <a href="#javascript">Node.js</a> <a href="#go">Go</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient​
 ​
 client = MilvusClient(​
@@ -111,7 +106,7 @@ curl --request POST \​
 }&#x27;</span>​
 
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Delete-Entities-by-Primary-Keys​" class="common-anchor-header">Delete Entities by Primary Keys​<button data-href="#Delete-Entities-by-Primary-Keys​" class="anchor-icon" translate="no">
+<h2 id="Delete-Entities-by-Primary-Keys​" class="common-anchor-header">기본 키로 엔티티 삭제하기<button data-href="#Delete-Entities-by-Primary-Keys​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -126,14 +121,9 @@ curl --request POST \​
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>In most cases, a primary key uniquely identifies an Entity. You can delete Entities by setting their primary keys in the delete request. The example code below demonstrates how to delete two entities with primary keys <strong>18</strong> and <strong>19</strong>.​</p>
+    </button></h2><p>대부분의 경우 기본 키는 엔티티를 고유하게 식별합니다. 삭제 요청에서 기본 키를 설정하여 엔티티를 삭제할 수 있습니다. 아래 예제 코드는 기본 키가 <strong>18과</strong> <strong>19인</strong> 두 개의 엔티티를 삭제하는 방법을 보여줍니다.</p>
 <div class="multipleCode">
-  <a href="#python">Python </a>
-  <a href="#java">Java</a>
-  <a href="#javascript">Node.js</a>
-  <a href="#go">Go</a>
-  <a href="#curl">cURL</a>
-</div>
+ <a href="#python">파이썬 </a> <a href="#java">자바</a> <a href="#javascript">Node.js</a> <a href="#go">Go</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python">res = client.delete(​
     collection_name=<span class="hljs-string">&quot;quick_setup&quot;</span>,​
     <span class="hljs-comment"># highlight-next-line​</span>
@@ -187,7 +177,7 @@ curl --request POST \​
 <span class="hljs-comment">## {&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:{}}​</span>
 
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Delete-Entities-from-Partitions​" class="common-anchor-header">Delete Entities from Partitions​<button data-href="#Delete-Entities-from-Partitions​" class="anchor-icon" translate="no">
+<h2 id="Delete-Entities-from-Partitions​" class="common-anchor-header">파티션에서 엔티티 삭제<button data-href="#Delete-Entities-from-Partitions​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -202,14 +192,9 @@ curl --request POST \​
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>You can also delete entities stored in specific partitions. The following code snippets assume that you have a partition named <strong>PartitionA</strong> in your collection.</p>
+    </button></h2><p>특정 파티션에 저장된 엔티티를 삭제할 수도 있습니다. 다음 코드 조각은 컬렉션에 <strong>PartitionA라는</strong> 파티션이 있다고 가정합니다.</p>
 <div class="multipleCode">
-  <a href="#python">Python </a>
-  <a href="#java">Java</a>
-  <a href="#javascript">Node.js</a>
-  <a href="#go">Go</a>
-  <a href="#curl">cURL</a>
-</div>
+ <a href="#python">파이썬 </a> <a href="#java">자바</a> <a href="#javascript">Node.js</a> <a href="#go">Go</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python">res = client.delete(​
     collection_name=<span class="hljs-string">&quot;quick_setup&quot;</span>,​
     ids=[<span class="hljs-number">18</span>, <span class="hljs-number">19</span>],​

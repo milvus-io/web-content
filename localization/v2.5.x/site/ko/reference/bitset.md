@@ -1,9 +1,9 @@
 ---
 id: bitset.md
-summary: Learn about bitsets in Milvus.
-title: Bitset
+summary: Milvus의 비트셋에 대해 알아보세요.
+title: 비트셋
 ---
-<h1 id="Bitset" class="common-anchor-header">Bitset<button data-href="#Bitset" class="anchor-icon" translate="no">
+<h1 id="Bitset" class="common-anchor-header">비트셋<button data-href="#Bitset" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -18,8 +18,8 @@ title: Bitset
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>This topic introduces the bitset mechanism that helps enable key functionalities like attribute filtering and <a href="https://milvus.io/blog/2022-02-07-how-milvus-deletes-streaming-data-in-distributed-cluster.md">delete operations</a> in Milvus.</p>
-<h2 id="Overview" class="common-anchor-header">Overview<button data-href="#Overview" class="anchor-icon" translate="no">
+    </button></h1><p>이 주제에서는 Milvus에서 속성 필터링 및 <a href="https://milvus.io/blog/2022-02-07-how-milvus-deletes-streaming-data-in-distributed-cluster.md">삭제 작업과</a> 같은 주요 기능을 활성화하는 데 도움이 되는 비트셋 메커니즘을 소개합니다.</p>
+<h2 id="Overview" class="common-anchor-header">개요<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -34,9 +34,9 @@ title: Bitset
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>A bitset is a set of bits. Bits are elements with only two possible values, most typically <code translate="no">0</code> and <code translate="no">1</code>, or boolean values <code translate="no">true</code> and <code translate="no">false</code>. In Milvus, bitsets are arrays of bit numbers <code translate="no">0</code> and <code translate="no">1</code> that can be used to represent certain data compactly and efficiently as opposed to in ints, floats, or chars. A bit number is <code translate="no">0</code> by default and is only set to <code translate="no">1</code> if it meets certain requirements.</p>
-<p>Operations on bitsets are conducted with <a href="/docs/boolean.md">boolean logic</a>, under which an output value is either valid or invalid, also denoted by <code translate="no">1</code> and <code translate="no">0</code> respectively. For example, <a href="https://milvus.io/docs/v2.1.x/boolean.md#Logical-operators">logical operator</a> <code translate="no">AND</code> can be used to compare two bitsets based on items in the same index positions and produces a new bitset with the results. If two items in a position are the same, then in the new bitset <code translate="no">1</code> will be written in that position; <code translate="no">0</code> if they are different.</p>
-<h2 id="Implementation" class="common-anchor-header">Implementation<button data-href="#Implementation" class="anchor-icon" translate="no">
+    </button></h2><p>비트셋은 비트의 집합입니다. 비트는 일반적으로 <code translate="no">0</code> 및 <code translate="no">1</code> 또는 부울 값 <code translate="no">true</code> 및 <code translate="no">false</code> 과 같이 두 가지 값만 가능한 요소입니다. Milvus에서 비트셋은 비트 번호 <code translate="no">0</code> 및 <code translate="no">1</code> 의 배열로, 특정 데이터를 정수, 부동 소수점 또는 문자 대신 간결하고 효율적으로 표현하는 데 사용할 수 있습니다. 비트 번호는 기본적으로 <code translate="no">0</code> 이며, 특정 요구 사항을 충족하는 경우에만 <code translate="no">1</code> 으로 설정됩니다.</p>
+<p>비트셋에 대한 연산은 출력 값이 유효하거나 유효하지 않은 <a href="/docs/ko/boolean.md">부울 논리로</a> 수행되며, 각각 <code translate="no">1</code> 및 <code translate="no">0</code> 으로도 표시됩니다. 예를 들어 <a href="https://milvus.io/docs/v2.1.x/boolean.md#Logical-operators">논리 연산자</a> <code translate="no">AND</code> 를 사용하여 동일한 인덱스 위치에 있는 항목을 기준으로 두 비트셋을 비교하고 그 결과로 새 비트셋을 생성할 수 있습니다. 한 위치의 두 항목이 같으면 새 비트셋에 <code translate="no">1</code>, 다르면 <code translate="no">0</code> 이 해당 위치에 기록됩니다.</p>
+<h2 id="Implementation" class="common-anchor-header">구현<button data-href="#Implementation" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -51,10 +51,10 @@ title: Bitset
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Bitset is a simple yet powerful mechanism that helps Milvus perform attribute filtering, data deletion, and query with Time Travel.</p>
-<h3 id="Attribute-filtering" class="common-anchor-header">Attribute filtering</h3><p>As bitsets contain only two possible values, they are perfect for storing results of <a href="https://milvus.io/docs/v2.1.x/hybridsearch.md">attribute filtering</a>. Data that meet the requirement of a given attribute filter are marked with <code translate="no">1</code>.</p>
-<h3 id="Data-deletion" class="common-anchor-header">Data deletion</h3><p>Bitsets serve as a compact way to store information about whether a row in a segment is deleted. Deleted entities are marked with <code translate="no">1</code> in the corresponding bitset, which <a href="https://milvus.io/blog/deleting-data-in-milvus.md">will not be computed</a> during a search or query.</p>
-<h2 id="Examples" class="common-anchor-header">Examples<button data-href="#Examples" class="anchor-icon" translate="no">
+    </button></h2><p>비트셋은 Milvus가 시간 여행을 통해 속성 필터링, 데이터 삭제 및 쿼리를 수행하는 데 도움이 되는 간단하면서도 강력한 메커니즘입니다.</p>
+<h3 id="Attribute-filtering" class="common-anchor-header">속성 필터링</h3><p>비트셋은 두 가지 가능한 값만 포함하므로 <a href="https://milvus.io/docs/v2.1.x/hybridsearch.md">속성 필터링의</a> 결과를 저장하는 데 적합합니다. 주어진 속성 필터의 요구 사항을 충족하는 데이터는 <code translate="no">1</code> 로 표시됩니다.</p>
+<h3 id="Data-deletion" class="common-anchor-header">데이터 삭제</h3><p>비트셋은 세그먼트의 행이 삭제되었는지 여부에 대한 정보를 간결하게 저장하는 역할을 합니다. 삭제된 엔티티는 해당 비트셋에 <code translate="no">1</code> 로 표시되며, 검색 또는 쿼리 중에 <a href="https://milvus.io/blog/deleting-data-in-milvus.md">계산되지</a> 않습니다.</p>
+<h2 id="Examples" class="common-anchor-header">예제<button data-href="#Examples" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -69,54 +69,46 @@ title: Bitset
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Here we present three examples that illustrate how bitsets are used in Milvus, with references to all three major implementations of bitsets discussed above. In all three cases, there is a segment with 8 entities and then a series of data manipulation language (DML) events takes place in the order shown below.</p>
+    </button></h2><p>여기에서는 위에서 설명한 비트셋의 세 가지 주요 구현을 모두 참조하여 Milvus에서 비트셋이 어떻게 사용되는지 설명하는 세 가지 예제를 제시합니다. 세 가지 경우 모두 8개의 엔티티가 있는 세그먼트가 있고, 그 다음 일련의 데이터 조작 언어(DML) 이벤트가 아래 표시된 순서대로 발생합니다.</p>
 <ul>
-<li>Four of the entities, whose <code translate="no">primary_key</code>s are [1, 2, 3, 4] respectively, are inserted when the timestamp <code translate="no">ts</code> equals 100.</li>
-<li>The rest four entities, whose <code translate="no">primary_key</code>s are [5, 6, 7, 8], are inserted when the timestamp <code translate="no">ts</code> equals 200.</li>
-<li>Entities whose <code translate="no">primary_key</code>s are [7, 8] are deleted when the timestamp <code translate="no">ts</code> equals 300.</li>
-<li>Only entities, whose <code translate="no">primary_key</code>s are [1, 3, 5, 7], satisfy the conditions of attribute filtering.</li>
+<li><code translate="no">primary_key</code>s가 각각 [1, 2, 3, 4]인 4개의 엔티티는 타임스탬프 <code translate="no">ts</code> 가 100과 같을 때 삽입됩니다.</li>
+<li><code translate="no">primary_key</code>s가 [5, 6, 7, 8]인 나머지 4개 엔티티는 타임스탬프 <code translate="no">ts</code> 가 200일 때 삽입됩니다.</li>
+<li><code translate="no">primary_key</code>s가 [7, 8]인 엔티티는 타임스탬프 <code translate="no">ts</code> 가 300일 때 삭제됩니다.</li>
+<li><code translate="no">primary_key</code>s가 [1, 3, 5, 7]인 엔티티만 속성 필터링 조건을 충족합니다.</li>
 </ul>
 <p>
-  <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.5.x/assets/bitset_0.svg" alt="Order of DML events" class="doc-image" id="order-of-dml-events" />
-    <span>Order of DML events</span>
-  </span>
-</p>
-<h3 id="Case-one" class="common-anchor-header">Case one</h3><p>In this case, a user sets <code translate="no">time_travel</code> as 150, which means that the user conducts a query on data that satisfy <code translate="no">ts = 150</code>. The bitset generation process is illustrated by Figure 1.</p>
-<p>During the initial filtering stage, the <code translate="no">filter_bitset</code> should be <code translate="no">[1, 0, 1, 0, 1, 0, 1, 0]</code>, where entities [1, 3, 5, 7] are marked as <code translate="no">1</code> because they are valid filtering results.</p>
-<p>However, entities [4, 5, 6, 7] were not inserted to the vector database when <code translate="no">ts</code> equals 150. Therefore, these four entities should be marked as 0 regardless of the filtering condition. Now the bitset result should be <code translate="no">[1, 0, 1, 0, 0, 0, 0, 0]</code>.</p>
-<p>As discussed in <a href="#data-deletion">Data deletion</a>, entities that are marked with <code translate="no">1</code> are ignored during a search or query. The bitset result now needs to be flipped in order to be combined with the deletion bitmap, which gives us <code translate="no">[0, 1, 0, 1, 1, 1, 1, 1]</code>.</p>
-<p>As for the deletion bitset <code translate="no">del_bitset</code>, the initial value should be <code translate="no">[0, 0, 0, 0, 0, 0, 1, 1]</code>. However, entities 7 and 8 are not deleted until <code translate="no">ts</code> is 300. Therefore, when <code translate="no">ts</code> is 150, entities 7 and 8 are still valid. As a result, the <code translate="no">del_bitset</code> value after Time Travel is <code translate="no">[0, 0, 0, 0, 0, 0, 0, 0]</code>.</p>
-<p>Now we have two bitsets after Time Travel and attribute filtering: <code translate="no">filter_bitset</code> <code translate="no">[0, 1, 0, 1, 1, 1, 1, 1]</code> and <code translate="no">del_bitset</code> <code translate="no">[0, 0, 0, 0, 0, 0, 0, 0]</code>.  Combine these two bitsets with the <code translate="no">OR</code> binary logic operator. The ultimate value of result_bitset is <code translate="no">[0, 1, 0, 1, 1, 1, 1, 1]</code>, meaning only entities 1 and 3 will be computed in the following search or query stage.</p>
+  
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/bitset_0.svg" alt="Order of DML events" class="doc-image" id="order-of-dml-events" />
+   </span> <span class="img-wrapper"> <span>DML 이벤트 순서</span> </span></p>
+<h3 id="Case-one" class="common-anchor-header">사례 1</h3><p>이 경우 사용자가 <code translate="no">time_travel</code> 를 150 으로 설정하면 사용자가 <code translate="no">ts = 150</code> 을 만족하는 데이터에 대한 쿼리를 수행한다는 의미입니다. 비트셋 생성 프로세스는 그림 1에 설명되어 있습니다.</p>
+<p>초기 필터링 단계에서 <code translate="no">filter_bitset</code> 은 <code translate="no">[1, 0, 1, 0, 1, 0, 1, 0]</code> 이며, 엔티티 [1, 3, 5, 7]은 유효한 필터링 결과이므로 <code translate="no">1</code> 로 표시됩니다.</p>
+<p>그러나 엔티티 [4, 5, 6, 7]은 <code translate="no">ts</code> 이 150 일 때 벡터 데이터베이스에 삽입되지 않았습니다. 따라서 이 네 개의 엔티티는 필터링 조건에 관계없이 0으로 표시되어야 합니다. 이제 비트셋 결과는 <code translate="no">[1, 0, 1, 0, 0, 0, 0, 0]</code> 이 되어야 합니다.</p>
+<p><a href="#data-deletion">데이터 삭제에서</a> 설명한 대로 <code translate="no">1</code> 로 표시된 엔티티는 검색 또는 쿼리 중에 무시됩니다. 이제 삭제 비트맵과 결합하기 위해 비트셋 결과를 뒤집어야 하며, 그러면 <code translate="no">[0, 1, 0, 1, 1, 1, 1, 1]</code> 이 됩니다.</p>
+<p>삭제 비트셋 <code translate="no">del_bitset</code> 의 경우 초기 값은 <code translate="no">[0, 0, 0, 0, 0, 0, 1, 1]</code> 이 되어야 합니다. 그러나 엔티티 7과 8은 <code translate="no">ts</code> 이 300이 될 때까지 삭제되지 않습니다. 따라서 <code translate="no">ts</code> 이 150일 때 엔티티 7과 8은 여전히 유효합니다. 결과적으로 시간 여행 후 <code translate="no">del_bitset</code> 값은 <code translate="no">[0, 0, 0, 0, 0, 0, 0, 0]</code> 입니다.</p>
+<p>이제 시간 여행 및 속성 필터링 후에 <code translate="no">filter_bitset</code> <code translate="no">[0, 1, 0, 1, 1, 1, 1, 1]</code> 과 <code translate="no">del_bitset</code> <code translate="no">[0, 0, 0, 0, 0, 0, 0, 0]</code> 두 개의 비트셋이 생겼습니다.  이 두 비트셋을 <code translate="no">OR</code> 이진 논리 연산자와 결합합니다. 결과_비트셋의 최종 값은 <code translate="no">[0, 1, 0, 1, 1, 1, 1, 1]</code> 이며, 이는 다음 검색 또는 쿼리 단계에서 엔티티 1과 3만 계산된다는 의미입니다.</p>
 <p>
-  <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.5.x/assets/bitset_1.jpg" alt="Figure 1. Search with Time Travel = 150." class="doc-image" id="figure-1.-search-with-time-travel-=-150." />
-    <span>Figure 1. Search with Time Travel = 150.</span>
-  </span>
-</p>
-<h3 id="Case-two" class="common-anchor-header">Case two</h3><p>In this case, the user sets <code translate="no">time_travel</code> as 250. The bitset generation process is illustrated by Figure 2.</p>
-<p>Like in case one, the initial <code translate="no">filter_bitset</code> is <code translate="no">[1, 0, 1, 0, 1, 0, 1, 0]</code>.</p>
-<p>All entities are in the vector database when <code translate="no">ts</code> = 250. Therefore, the <code translate="no">filter_bitset</code> stays the same when we factor in the timestamp. Again, we need to flip the result and get <code translate="no">[0, 1, 0, 1, 0, 1, 0, 1]</code>.</p>
-<p>As for the deletion bitset <code translate="no">del_bitset</code>, the initial value is <code translate="no">[0, 0, 0, 0, 0, 0, 1, 1]</code>. However, entities 7 and 8 were not deleted until <code translate="no">ts</code> is 300. Therefore, when <code translate="no">ts</code> is 250, entities 7 and 8 are still valid. As a result, the <code translate="no">del_bitset</code> after Time Travel is <code translate="no">[0, 0, 0, 0, 0, 0, 0, 0]</code>.</p>
-<p>Now we have two bitsets after Time Travel and attribute filtering: <code translate="no">filter_bitset</code> <code translate="no">[0, 1, 0, 1, 0, 1, 0, 1]</code> and <code translate="no">del_bitset</code> <code translate="no">[0, 0, 0, 0, 0, 0, 0, 0]</code>. Combine these two bitsets with the <code translate="no">OR</code> binary logic operator. The result_bitset is <code translate="no">[0, 1, 0, 1, 0, 1, 0, 1]</code>. That is to say, only entites [1, 3, 5, 7] will be computed in the following search or query stage.</p>
+ <span class="img-wrapper">
+   <img translate="no" src="/docs/v2.5.x/assets/bitset_1.jpg" alt="Figure 1. Search with Time Travel = 150." class="doc-image" id="figure-1.-search-with-time-travel-=-150." />
+   <span>그림 1. 시간 여행 = 150으로 검색하기</span>. </span></p>
+<h3 id="Case-two" class="common-anchor-header">사례 2</h3><p>이 경우 사용자는 <code translate="no">time_travel</code> 을 250으로 설정합니다. 비트셋 생성 과정은 그림 2에 설명되어 있습니다.</p>
+<p>사례 1과 마찬가지로 초기 <code translate="no">filter_bitset</code> 는 <code translate="no">[1, 0, 1, 0, 1, 0, 1, 0]</code> 입니다.</p>
+<p><code translate="no">ts</code> = 250일 때 모든 엔티티는 벡터 데이터베이스에 있습니다. 따라서 타임스탬프를 고려할 때 <code translate="no">filter_bitset</code> 는 동일하게 유지됩니다. 다시 결과를 뒤집어서 <code translate="no">[0, 1, 0, 1, 0, 1, 0, 1]</code> 를 얻어야 합니다.</p>
+<p>삭제 비트셋 <code translate="no">del_bitset</code> 의 경우 초기 값은 <code translate="no">[0, 0, 0, 0, 0, 0, 1, 1]</code> 입니다. 그러나 엔티티 7과 8은 <code translate="no">ts</code> 이 300이 될 때까지 삭제되지 않았습니다. 따라서 <code translate="no">ts</code> 이 250일 때 엔티티 7과 8은 여전히 유효합니다. 결과적으로 시간 여행 후 <code translate="no">del_bitset</code> 은 <code translate="no">[0, 0, 0, 0, 0, 0, 0, 0]</code> 입니다.</p>
+<p>이제 시간 여행 및 속성 필터링 뒤에 <code translate="no">filter_bitset</code> <code translate="no">[0, 1, 0, 1, 0, 1, 0, 1]</code> 과 <code translate="no">del_bitset</code> <code translate="no">[0, 0, 0, 0, 0, 0, 0, 0]</code> 두 개의 비트셋이 있습니다. 이 두 비트셋을 <code translate="no">OR</code> 이진 논리 연산자와 결합합니다. 결과_비트셋은 <code translate="no">[0, 1, 0, 1, 0, 1, 0, 1]</code> 입니다. 즉, 다음 검색 또는 쿼리 단계에서는 [1, 3, 5, 7] 엔티트만 계산됩니다.</p>
 <p>
-  <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.5.x/assets/bitset_2.jpg" alt="Figure 2. Search with Time Travel = 250." class="doc-image" id="figure-2.-search-with-time-travel-=-250." />
-    <span>Figure 2. Search with Time Travel = 250.</span>
-  </span>
-</p>
-<h3 id="Case-three" class="common-anchor-header">Case three</h3><p>In this case, the user sets <code translate="no">time_travel</code> as 350. The bitset generation process is illustrated by Figure 3.</p>
-<p>As with previous cases, the initial <code translate="no">filter_bitset</code> is <code translate="no">[0, 1, 0, 1, 0, 1, 0, 1]</code>.</p>
-<p>All entities are in the vector database when <code translate="no">ts</code>= 350. Therefore, the final, flipped <code translate="no">filter_bitset</code> is <code translate="no">[0, 1, 0, 1, 0, 1, 0, 1]</code>, the same as in case two.</p>
-<p>As for the deletion bitset <code translate="no">del_bitset</code>, since entities 7 and 8 have already been deleted when <code translate="no">ts = 350</code>, therefore, the result of <code translate="no">del_bitset</code> is <code translate="no">[0, 0, 0, 0, 0, 0, 1, 1]</code>.</p>
-<p>Now we have two bitsets after Time Travel and attribute filtering: <code translate="no">filter_bitset</code> <code translate="no">[0, 1, 0, 1, 0, 1, 0, 1]</code> and <code translate="no">del_bitset</code> <code translate="no">[0, 0, 0, 0, 0, 0, 1, 1]</code>.  Combine these two bitsets with the <code translate="no">OR</code> binary logic operator. The ultimate <code translate="no">result_bitset</code> is <code translate="no">[0, 1, 0, 1, 0, 1, 1, 1]</code>. That is to say, only entities [1, 3, 5] will be computed in the following search or query stage.</p>
+ <span class="img-wrapper">
+   <img translate="no" src="/docs/v2.5.x/assets/bitset_2.jpg" alt="Figure 2. Search with Time Travel = 250." class="doc-image" id="figure-2.-search-with-time-travel-=-250." />
+   <span>그림 2. 시간 여행 = 250으로 검색하기</span>. </span></p>
+<h3 id="Case-three" class="common-anchor-header">사례 3</h3><p>이 경우 사용자는 <code translate="no">time_travel</code> 를 350으로 설정합니다. 비트셋 생성 과정은 그림 3에 설명되어 있습니다.</p>
+<p>이전 사례와 마찬가지로 초기 <code translate="no">filter_bitset</code> 는 <code translate="no">[0, 1, 0, 1, 0, 1, 0, 1]</code> 입니다.</p>
+<p><code translate="no">ts</code>= 350일 때 모든 엔티티는 벡터 데이터베이스에 있습니다. 따라서 최종적으로 뒤집힌 <code translate="no">filter_bitset</code> 은 <code translate="no">[0, 1, 0, 1, 0, 1, 0, 1]</code> 으로 사례 2와 동일합니다.</p>
+<p>삭제 비트셋 <code translate="no">del_bitset</code> 은 엔티티 7과 8이 <code translate="no">ts = 350</code> 일 때 이미 삭제되었으므로 <code translate="no">del_bitset</code> 의 결과는 <code translate="no">[0, 0, 0, 0, 0, 0, 1, 1]</code> 입니다.</p>
+<p>이제 시간 여행 및 속성 필터링 후 두 개의 비트셋이 있습니다: <code translate="no">filter_bitset</code> <code translate="no">[0, 1, 0, 1, 0, 1, 0, 1]</code> 과 <code translate="no">del_bitset</code> <code translate="no">[0, 0, 0, 0, 0, 0, 1, 1]</code> .  이 두 비트셋을 <code translate="no">OR</code> 이진 논리 연산자와 결합합니다. 최종 <code translate="no">result_bitset</code> 은 <code translate="no">[0, 1, 0, 1, 0, 1, 1, 1]</code> 입니다. 즉, 다음 검색 또는 쿼리 단계에서는 엔티티 [1, 3, 5]만 계산됩니다.</p>
 <p>
-  <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.5.x/assets/bitset_3.jpg" alt="Figure 3. Search with Time Travel = 350." class="doc-image" id="figure-3.-search-with-time-travel-=-350." />
-    <span>Figure 3. Search with Time Travel = 350.</span>
-  </span>
-</p>
-<h2 id="Whats-next" class="common-anchor-header">What’s next<button data-href="#Whats-next" class="anchor-icon" translate="no">
+ <span class="img-wrapper">
+   <img translate="no" src="/docs/v2.5.x/assets/bitset_3.jpg" alt="Figure 3. Search with Time Travel = 350." class="doc-image" id="figure-3.-search-with-time-travel-=-350." />
+   <span>그림 3. 시간 여행 = 350으로 검색하기</span>. </span></p>
+<h2 id="Whats-next" class="common-anchor-header">다음 단계<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -131,8 +123,8 @@ title: Bitset
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Now that you know how bitsets work in Milvus, you might also want to:</p>
+    </button></h2><p>이제 Milvus에서 비트셋이 어떻게 작동하는지 알았으니, 여러분도 해보고 싶을 것입니다:</p>
 <ul>
-<li>Learn how to <a href="https://milvus.io/blog/2022-08-08-How-to-use-string-data-to-empower-your-similarity-search-applications.md">use strings to filter</a> your search results, or refer to <a href="https://milvus.io/docs/hybridsearch.md">Hybrid Search</a> on our docs.</li>
-<li>Understand <a href="https://milvus.io/docs/v2.1.x/data_processing.md">how data are processed</a> in Milvus.</li>
+<li><a href="https://milvus.io/blog/2022-08-08-How-to-use-string-data-to-empower-your-similarity-search-applications.md">문자열을 사용하여</a> 검색 결과를 <a href="https://milvus.io/blog/2022-08-08-How-to-use-string-data-to-empower-your-similarity-search-applications.md">필터링하는</a> 방법을 알아보거나, 문서에서 <a href="https://milvus.io/docs/hybridsearch.md">하이브리드 검색을</a> 참조하세요.</li>
+<li>Milvus에서 <a href="https://milvus.io/docs/v2.1.x/data_processing.md">데이터가 처리되는 방식을</a> 이해합니다.</li>
 </ul>

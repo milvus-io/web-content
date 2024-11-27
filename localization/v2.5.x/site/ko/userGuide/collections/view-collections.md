@@ -1,8 +1,8 @@
 ---
 id: view-collections.md
-title: View Collections​
+title: 컬렉션 보기
 ---
-<h1 id="View-Collections​" class="common-anchor-header">View Collections​<button data-href="#View-Collections​" class="anchor-icon" translate="no">
+<h1 id="View-Collections​" class="common-anchor-header">컬렉션 보기<button data-href="#View-Collections​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -17,8 +17,8 @@ title: View Collections​
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>You can obtain the name list of all the collections in the currently connected database, and check the details of a specific collection.​</p>
-<h2 id="List-Collections​" class="common-anchor-header">List Collections​<button data-href="#List-Collections​" class="anchor-icon" translate="no">
+    </button></h1><p>현재 연결된 데이터베이스에 있는 모든 컬렉션의 이름 목록을 확인하고 특정 컬렉션의 세부 정보를 확인할 수 있습니다.</p>
+<h2 id="List-Collections​" class="common-anchor-header">컬렉션 목록 보기<button data-href="#List-Collections​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -33,14 +33,9 @@ title: View Collections​
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>The following example demonstrates how to obtain the name list of all collections in the currently connected database.​</p>
+    </button></h2><p>다음 예제는 현재 연결된 데이터베이스에 있는 모든 컬렉션의 이름 목록을 조회하는 방법을 보여줍니다.</p>
 <div class="multipleCode">
-  <a href="#python">Python </a>
-  <a href="#java">Java</a>
-  <a href="#javascript">Node.js</a>
-  <a href="#go">Go</a>
-  <a href="#curl">cURL</a>
-</div>
+ <a href="#python">파이썬 </a> <a href="#java">자바</a> <a href="#javascript">Node.js</a> <a href="#go">Go</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType​
 ​
 client = MilvusClient(​
@@ -119,11 +114,11 @@ fmt.Println(collectionNames)​
 }&#x27;</span>​
 
 <button class="copy-code-btn"></button></code></pre>
-<p>If you have already created a collection named <code translate="no">quick_setup</code>, the result of the above example should be similar to the following.​</p>
+<p>이미 <code translate="no">quick_setup</code> 라는 이름의 컬렉션을 만든 경우 위 예제의 결과는 다음과 비슷할 것입니다.</p>
 <pre><code translate="no" class="language-JSON">[<span class="hljs-string">&quot;quick_setup&quot;</span>]​
 
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Describe-Collection​" class="common-anchor-header">Describe Collection​<button data-href="#Describe-Collection​" class="anchor-icon" translate="no">
+<h2 id="Describe-Collection​" class="common-anchor-header">컬렉션 설명<button data-href="#Describe-Collection​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -138,14 +133,9 @@ fmt.Println(collectionNames)​
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>You can also obtain the details of a specific collection. The following example assumes that you have already created a collection named quick_setup.​</p>
+    </button></h2><p>특정 컬렉션의 세부 정보를 얻을 수도 있습니다. 다음 예제에서는 이미 quick_setup이라는 컬렉션을 만들었다고 가정합니다.</p>
 <div class="multipleCode">
-  <a href="#python">Python </a>
-  <a href="#java">Java</a>
-  <a href="#javascript">Node.js</a>
-  <a href="#go">Go</a>
-  <a href="#curl">cURL</a>
-</div>
+ <a href="#python">파이썬 </a> <a href="#java">자바</a> <a href="#javascript">Node.js</a> <a href="#go">Go</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python">res = client.describe_collection(​
     collection_name=<span class="hljs-string">&quot;quick_setup&quot;</span>​
 )​

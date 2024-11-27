@@ -1,15 +1,13 @@
 ---
 id: build_rag_on_arm.md
 summary: >-
-  In this tutorial, you learn how to build a Retrieval-Augmented Generation
-  (RAG) application on Arm-based infrastructures. For vector storage, we utilize
-  Zilliz Cloud, the fully-managed Milvus vector database. Zilliz Cloud is
-  available on major cloud such as AWS, GCP and Azure. In this demo we use
-  Zilliz Cloud deployed on AWS with Arm machines. For LLM, we use the
-  Llama-3.1-8B model on the AWS Arm-based server CPU using llama.cpp.
-title: Build RAG on Arm Architecture
+  이 튜토리얼에서는 Arm 기반 인프라에서 검색 증강 세대(RAG) 애플리케이션을 구축하는 방법을 알아봅니다. 벡터 스토리지의 경우, 완전
+  관리형 Milvus 벡터 데이터베이스인 Zilliz Cloud를 활용합니다. Zilliz Cloud는 AWS, GCP, Azure와 같은
+  주요 클라우드에서 사용할 수 있습니다. 이 데모에서는 AWS에 배포된 Zilliz Cloud를 Arm 머신과 함께 사용합니다. LLM의
+  경우, llama.cpp를 사용하여 AWS Arm 기반 서버 CPU에서 Llama-3.1-8B 모델을 사용합니다.
+title: Arm 아키텍처 기반 RAG 구축
 ---
-<h1 id="Build-RAG-on-Arm-Architecture" class="common-anchor-header">Build RAG on Arm Architecture<button data-href="#Build-RAG-on-Arm-Architecture" class="anchor-icon" translate="no">
+<h1 id="Build-RAG-on-Arm-Architecture" class="common-anchor-header">Arm 아키텍처 기반 RAG 구축<button data-href="#Build-RAG-on-Arm-Architecture" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -24,9 +22,9 @@ title: Build RAG on Arm Architecture
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p><a href="https://www.arm.com/">Arm</a> CPUs are extensively utilized across a wide range of applications, including traditional machine learning (ML) and artificial intelligence (AI) use cases.</p>
-<p>In this tutorial, you learn how to build a Retrieval-Augmented Generation (RAG) application on Arm-based infrastructures. For vector storage, we utilize <a href="https://zilliz.com/cloud">Zilliz Cloud</a>, the fully-managed Milvus vector database. Zilliz Cloud is available on major cloud such as AWS, GCP and Azure. In this demo we use Zilliz Cloud deployed on AWS with Arm machines. For LLM, we use the <code translate="no">Llama-3.1-8B</code> model on the AWS Arm-based server CPU using <code translate="no">llama.cpp</code>.</p>
-<h2 id="Prerequisite" class="common-anchor-header">Prerequisite<button data-href="#Prerequisite" class="anchor-icon" translate="no">
+    </button></h1><p><a href="https://www.arm.com/">Arm</a> CPU는 기존의 머신 러닝(ML) 및 인공 지능(AI) 사용 사례를 포함하여 광범위한 애플리케이션에서 광범위하게 활용되고 있습니다.</p>
+<p>이 튜토리얼에서는 Arm 기반 인프라에서 검색 증강 세대(RAG) 애플리케이션을 빌드하는 방법을 알아봅니다. 벡터 스토리지의 경우, 완전 관리형 Milvus 벡터 데이터베이스인 <a href="https://zilliz.com/cloud">Zilliz Cloud를</a> 활용합니다. Zilliz Cloud는 AWS, GCP, Azure와 같은 주요 클라우드에서 사용할 수 있습니다. 이 데모에서는 AWS에 배포된 Zilliz Cloud를 Arm 머신과 함께 사용합니다. LLM의 경우, <code translate="no">llama.cpp</code> 을 사용하는 AWS Arm 기반 서버 CPU에서 <code translate="no">Llama-3.1-8B</code> 모델을 사용합니다.</p>
+<h2 id="Prerequisite" class="common-anchor-header">전제 조건<button data-href="#Prerequisite" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -41,21 +39,21 @@ title: Build RAG on Arm Architecture
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>To run this example, we recommend you to use <a href="https://aws.amazon.com/ec2/graviton/">AWS Graviton</a>, which provides a cost-effective way to run ML workloads on Arm-based servers. This notebook has been tested on an AWS Graviton3 <code translate="no">c7g.2xlarge</code> instance with Ubuntu 22.04 LTS system.</p>
-<p>You need at least four cores and 8GB of RAM to run this example. Configure disk storage up to at least 32 GB. We recommend that you use an instance of the same or better specification.</p>
-<p>After you launch the instance, connect to it and run the following commands to prepare the environment.</p>
-<p>Install python on the server:</p>
+    </button></h2><p>이 예제를 실행하려면 Arm 기반 서버에서 ML 워크로드를 비용 효율적으로 실행할 수 있는 방법을 제공하는 <a href="https://aws.amazon.com/ec2/graviton/">AWS Graviton을</a> 사용하는 것이 좋습니다. 이 노트북은 우분투 22.04 LTS 시스템에서 AWS Graviton3 <code translate="no">c7g.2xlarge</code> 인스턴스에서 테스트되었습니다.</p>
+<p>이 예제를 실행하려면 최소 4개의 코어와 8GB의 RAM이 필요합니다. 디스크 스토리지를 32GB 이상으로 구성합니다. 동일하거나 더 나은 사양의 인스턴스를 사용하는 것이 좋습니다.</p>
+<p>인스턴스를 시작한 후 인스턴스에 연결하고 다음 명령을 실행하여 환경을 준비합니다.</p>
+<p>서버에 파이썬을 설치합니다:</p>
 <pre><code translate="no" class="language-bash">$ <span class="hljs-built_in">sudo</span> apt update
 $ <span class="hljs-built_in">sudo</span> apt install python-is-python3 python3-pip python3-venv -y
 <button class="copy-code-btn"></button></code></pre>
-<p>Create and activate a virtual environment:</p>
+<p>가상 환경을 만들고 활성화합니다:</p>
 <pre><code translate="no" class="language-bash">$ python -m venv venv
 $ <span class="hljs-built_in">source</span> venv/bin/activate
 <button class="copy-code-btn"></button></code></pre>
-<p>Install the required python dependencies:</p>
+<p>필요한 파이썬 종속성을 설치합니다:</p>
 <pre><code translate="no" class="language-shell">$ pip install --upgrade pymilvus openai requests langchain-huggingface huggingface_hub tqdm
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Offline-Data-Loading" class="common-anchor-header">Offline Data Loading<button data-href="#Offline-Data-Loading" class="anchor-icon" translate="no">
+<h2 id="Offline-Data-Loading" class="common-anchor-header">오프라인 데이터 로드<button data-href="#Offline-Data-Loading" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -70,11 +68,11 @@ $ <span class="hljs-built_in">source</span> venv/bin/activate
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Create-the-Collection" class="common-anchor-header">Create the Collection</h3><p>We use <a href="https://zilliz.com/cloud">Zilliz Cloud</a> deployed on AWS with Arm-based machines to store and retrieve the vector data. To quick start, simply <a href="https://docs.zilliz.com/docs/register-with-zilliz-cloud">register an account</a> on Zilliz Cloud for free.</p>
+    </button></h2><h3 id="Create-the-Collection" class="common-anchor-header">컬렉션 생성</h3><p>우리는 벡터 데이터를 저장하고 검색하기 위해 AWS에 배포된 <a href="https://zilliz.com/cloud">Zilliz Cloud와</a> Arm 기반 머신을 사용합니다. 빠르게 시작하려면 Zilliz Cloud에 무료로 <a href="https://docs.zilliz.com/docs/register-with-zilliz-cloud">계정을 등록하기만</a> 하면 됩니다.</p>
 <div class="alert note">
-<p>In addition to Zilliz Cloud, self-hosted Milvus is also a (more complicated to set up) option. We can also deploy <a href="https://milvus.io/docs/install_standalone-docker-compose.md">Milvus Standalone</a> and <a href="https://milvus.io/docs/install_cluster-milvusoperator.md">Kubernetes</a> on ARM-based machines. For more information about Milvus installation, please refer to the <a href="https://milvus.io/docs/install-overview.md">installation documentation</a>.</p>
+<p>Zilliz Cloud 외에도 자체 호스팅 Milvus도 (설정이 조금 더 복잡한) 옵션입니다. 또한 ARM 기반 머신에 <a href="https://milvus.io/docs/install_standalone-docker-compose.md">Milvus Standalone</a> 및 <a href="https://milvus.io/docs/install_cluster-milvusoperator.md">Kubernetes를</a> 배포할 수도 있습니다. Milvus 설치에 대한 자세한 내용은 <a href="https://milvus.io/docs/install-overview.md">설치 설명서를</a> 참조하세요.</p>
 </div>
-<p>We set the <code translate="no">uri</code> and <code translate="no">token</code> as the <a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">Public Endpoint and Api key</a> in Zilliz Cloud.</p>
+<p>질리즈 클라우드에서 <code translate="no">uri</code> 및 <code translate="no">token</code> 을 <a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">퍼블릭 엔드포인트 및 API 키로</a> 설정합니다.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> <span class="hljs-title class_">MilvusClient</span>
 
 milvus_client = <span class="hljs-title class_">MilvusClient</span>(
@@ -84,12 +82,12 @@ milvus_client = <span class="hljs-title class_">MilvusClient</span>(
 collection_name = <span class="hljs-string">&quot;my_rag_collection&quot;</span>
 
 <button class="copy-code-btn"></button></code></pre>
-<p>Check if the collection already exists and drop it if it does.</p>
+<p>컬렉션이 이미 존재하는지 확인하고 존재하는 경우 삭제합니다.</p>
 <pre><code translate="no" class="language-python">if milvus_client.has_collection(collection_name):
     milvus_client.drop_collection(collection_name)
 <button class="copy-code-btn"></button></code></pre>
-<p>Create a new collection with specified parameters.</p>
-<p>If we don’t specify any field information, Milvus will automatically create a default <code translate="no">id</code> field for primary key, and a <code translate="no">vector</code> field to store the vector data. A reserved JSON field is used to store non-schema-defined fields and their values.</p>
+<p>지정된 파라미터로 새 컬렉션을 생성합니다.</p>
+<p>필드 정보를 지정하지 않으면 기본 키인 <code translate="no">id</code> 필드와 벡터 데이터를 저장할 <code translate="no">vector</code> 필드가 자동으로 생성됩니다. 예약된 JSON 필드는 스키마에 정의되지 않은 필드와 그 값을 저장하는 데 사용됩니다.</p>
 <pre><code translate="no" class="language-python">milvus_client.create_collection(
     collection_name=collection_name,
     dimension=<span class="hljs-number">384</span>,
@@ -97,13 +95,13 @@ collection_name = <span class="hljs-string">&quot;my_rag_collection&quot;</span>
     consistency_level=<span class="hljs-string">&quot;Strong&quot;</span>,  <span class="hljs-comment"># Strong consistency level</span>
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>We use inner product distance as the default metric type. For more information about distance types, you can refer to <a href="https://milvus.io/docs/metric.md?tab=floating">Similarity Metrics page</a></p>
-<h3 id="Prepare-the-data" class="common-anchor-header">Prepare the data</h3><p>We use the FAQ pages from the <a href="https://github.com/milvus-io/milvus-docs/releases/download/v2.4.6-preview/milvus_docs_2.4.x_en.zip">Milvus Documentation 2.4.x</a> as the private knowledge in our RAG, which is a good data source for a simple RAG pipeline.</p>
-<p>Download the zip file and extract documents to the folder <code translate="no">milvus_docs</code>.</p>
+<p>기본 메트릭 유형으로는 내적 곱 거리를 사용합니다. 거리 유형에 대한 자세한 내용은 <a href="https://milvus.io/docs/metric.md?tab=floating">유사성 메트릭 페이지를</a> 참조하세요.</p>
+<h3 id="Prepare-the-data" class="common-anchor-header">데이터 준비</h3><p>저희는 <a href="https://github.com/milvus-io/milvus-docs/releases/download/v2.4.6-preview/milvus_docs_2.4.x_en.zip">Milvus 문서 2.4.x의</a> FAQ 페이지를 RAG의 비공개 지식으로 사용하며, 이는 간단한 RAG 파이프라인을 위한 좋은 데이터 소스입니다.</p>
+<p>zip 파일을 다운로드하고 <code translate="no">milvus_docs</code> 폴더에 문서를 압축 해제합니다.</p>
 <pre><code translate="no" class="language-shell">$ wget https://github.com/milvus-io/milvus-docs/releases/download/v2<span class="hljs-number">.4</span><span class="hljs-number">.6</span>-preview/milvus_docs_2<span class="hljs-number">.4</span>.x_en.<span class="hljs-built_in">zip</span>
 $ unzip -q milvus_docs_2<span class="hljs-number">.4</span>.x_en.<span class="hljs-built_in">zip</span> -d milvus_docs
 <button class="copy-code-btn"></button></code></pre>
-<p>We load all markdown files from the folder <code translate="no">milvus_docs/en/faq</code>. For each document, we just simply use &quot;# &quot; to separate the content in the file, which can roughly separate the content of each main part of the markdown file.</p>
+<p><code translate="no">milvus_docs/en/faq</code> 폴더에서 모든 마크다운 파일을 로드합니다. 각 문서에 대해 &quot;#&quot;를 사용하여 파일의 내용을 구분하기만 하면 마크다운 파일의 각 주요 부분의 내용을 대략적으로 구분할 수 있습니다.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> glob <span class="hljs-keyword">import</span> glob
 
 text_lines = []
@@ -114,13 +112,13 @@ text_lines = []
 
     text_lines += file_text.split(<span class="hljs-string">&quot;# &quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Insert-data" class="common-anchor-header">Insert data</h3><p>We prepare a simple but efficient embedding model <a href="https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2">all-MiniLM-L6-v2</a> that can convert text into embedding vectors.</p>
+<h3 id="Insert-data" class="common-anchor-header">데이터 삽입</h3><p>텍스트를 임베딩 벡터로 변환할 수 있는 간단하지만 효율적인 임베딩 모델인 <a href="https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2">all-MiniLM-L6-v2를</a> 준비합니다.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> langchain_huggingface <span class="hljs-keyword">import</span> <span class="hljs-title class_">HuggingFaceEmbeddings</span>
 
 embedding_model = <span class="hljs-title class_">HuggingFaceEmbeddings</span>(model_name=<span class="hljs-string">&quot;all-MiniLM-L6-v2&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
-<p>Iterate through the text lines, create embeddings, and then insert the data into Milvus.</p>
-<p>Here is a new field <code translate="no">text</code>, which is a non-defined field in the collection schema. It will be automatically added to the reserved JSON dynamic field, which can be treated as a normal field at a high level.</p>
+<p>텍스트 줄을 반복하여 임베딩을 생성한 다음 데이터를 Milvus에 삽입합니다.</p>
+<p>다음은 컬렉션 스키마에 정의되지 않은 필드인 새 필드 <code translate="no">text</code> 입니다. 이 필드는 상위 수준에서 일반 필드로 취급할 수 있는 예약된 JSON 동적 필드에 자동으로 추가됩니다.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> tqdm <span class="hljs-keyword">import</span> tqdm
 
 data = []
@@ -136,7 +134,7 @@ milvus_client.insert(collection_name=collection_name, data=data)
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">Creating embeddings: 100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 72/72 [00:18&lt;00:00,  3.91it/s]
 </code></pre>
-<h2 id="Launch-LLM-Service-on-Arm" class="common-anchor-header">Launch LLM Service on Arm<button data-href="#Launch-LLM-Service-on-Arm" class="anchor-icon" translate="no">
+<h2 id="Launch-LLM-Service-on-Arm" class="common-anchor-header">Arm에서 LLM 서비스 시작<button data-href="#Launch-LLM-Service-on-Arm" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -151,54 +149,54 @@ milvus_client.insert(collection_name=collection_name, data=data)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>In this section, we will build and launch the <code translate="no">llama.cpp</code> service on the Arm-based CPU.</p>
-<h3 id="Llama-31-model--llamacpp" class="common-anchor-header">Llama 3.1 model &amp; llama.cpp</h3><p>The <a href="https://huggingface.co/cognitivecomputations/dolphin-2.9.4-llama3.1-8b-gguf">Llama-3.1-8B model</a> from Meta belongs to the Llama 3.1 model family and is free to use for research and commercial purposes. Before you use the model, visit the Llama <a href="https://llama.meta.com/llama-downloads/">website</a> and fill in the form to request access.</p>
-<p><a href="https://github.com/ggerganov/llama.cpp">llama.cpp</a> is an open source C/C++ project that enables efficient LLM inference on a variety of hardware - both locally, and in the cloud. You can conveniently host a Llama 3.1 model using <code translate="no">llama.cpp</code>.</p>
-<h3 id="Download-and-build-llamacpp" class="common-anchor-header">Download and build llama.cpp</h3><p>Run the following commands to install make, cmake, gcc, g++, and other essential tools required for building llama.cpp from source:</p>
+    </button></h2><p>이 섹션에서는 Arm 기반 CPU에서 <code translate="no">llama.cpp</code> 서비스를 빌드하고 실행해 보겠습니다.</p>
+<h3 id="Llama-31-model--llamacpp" class="common-anchor-header">Llama 3.1 모델 및 llama.cpp</h3><p>Meta의 <a href="https://huggingface.co/cognitivecomputations/dolphin-2.9.4-llama3.1-8b-gguf">Llama 3.1-8B 모델은</a> Llama 3.1 모델 제품군에 속하며 연구 및 상업적 목적으로 무료로 사용할 수 있습니다. 모델을 사용하기 전에 Llama <a href="https://llama.meta.com/llama-downloads/">웹사이트를</a> 방문하여 양식을 작성하여 액세스를 요청하세요.</p>
+<p><a href="https://github.com/ggerganov/llama.cpp">llama.cpp는</a> 로컬과 클라우드 모두에서 다양한 하드웨어에서 효율적인 LLM 추론을 가능하게 하는 오픈 소스 C/C++ 프로젝트입니다. <code translate="no">llama.cpp</code> 을 사용하여 Llama 3.1 모델을 편리하게 호스팅할 수 있습니다.</p>
+<h3 id="Download-and-build-llamacpp" class="common-anchor-header">llama.cpp 다운로드 및 빌드</h3><p>다음 명령을 실행하여 소스에서 llama.cpp를 빌드하는 데 필요한 make, cmake, gcc, g++ 및 기타 필수 도구를 설치합니다:</p>
 <pre><code translate="no" class="language-bash">$ <span class="hljs-built_in">sudo</span> apt install make cmake -y
 $ <span class="hljs-built_in">sudo</span> apt install gcc g++ -y
 $ <span class="hljs-built_in">sudo</span> apt install build-essential -y
 <button class="copy-code-btn"></button></code></pre>
-<p>You are now ready to start building <code translate="no">llama.cpp</code>.</p>
-<p>Clone the source repository for llama.cpp:</p>
+<p>이제 빌드를 시작할 준비가 되었습니다 <code translate="no">llama.cpp</code>.</p>
+<p>llama.cpp의 소스 리포지토리를 복제합니다:</p>
 <pre><code translate="no" class="language-bash">$ git <span class="hljs-built_in">clone</span> https://github.com/ggerganov/llama.cpp
 <button class="copy-code-btn"></button></code></pre>
-<p>By default, <code translate="no">llama.cpp</code> builds for CPU only on Linux and Windows. You don’t need to provide any extra switches to build it for the Arm CPU that you run it on.</p>
-<p>Run <code translate="no">make</code> to build it:</p>
+<p>기본적으로 <code translate="no">llama.cpp</code> 은 Linux 및 Windows에서 CPU 용으로만 빌드됩니다. 실행하는 Arm CPU용으로 빌드하기 위해 추가 스위치를 제공할 필요는 없습니다.</p>
+<p><code translate="no">make</code> 을 실행하여 빌드합니다:</p>
 <pre><code translate="no" class="language-bash">$ <span class="hljs-built_in">cd</span> llama.cpp
 $ make GGML_NO_LLAMAFILE=1 -j$(<span class="hljs-built_in">nproc</span>)
 <button class="copy-code-btn"></button></code></pre>
-<p>Check that <code translate="no">llama.cpp</code> has built correctly by running the help command:</p>
+<p>도움말 명령을 실행하여 <code translate="no">llama.cpp</code> 가 올바르게 빌드되었는지 확인합니다:</p>
 <pre><code translate="no" class="language-bash">$ ./llama-cli -h
 <button class="copy-code-btn"></button></code></pre>
-<p>If <code translate="no">llama.cpp</code> has been built correctly, you will see the help option displayed. The output snippet looks like this:</p>
+<p><code translate="no">llama.cpp</code> 가 올바르게 빌드되었다면 도움말 옵션이 표시됩니다. 출력 스니펫은 다음과 같습니다:</p>
 <pre><code translate="no">example usage:
 
     text generation:     ./llama-cli -m your_model.gguf -p &quot;I believe the meaning of life is&quot; -n 128
 
     chat (conversation): ./llama-cli -m your_model.gguf -p &quot;You are a helpful assistant&quot; -cnv
 </code></pre>
-<p>You can now download the model using the huggingface cli:</p>
+<p>이제 huggingface cli를 사용하여 모델을 다운로드할 수 있습니다:</p>
 <pre><code translate="no" class="language-bash">$ huggingface-cli download cognitivecomputations/dolphin-<span class="hljs-number">2.9</span><span class="hljs-number">.4</span>-llama3<span class="hljs-number">.1</span>-8b-gguf dolphin-<span class="hljs-number">2.9</span><span class="hljs-number">.4</span>-llama3<span class="hljs-number">.1</span>-8b-Q4_0.gguf --local-<span class="hljs-built_in">dir</span> . --local-<span class="hljs-built_in">dir</span>-use-symlinks <span class="hljs-literal">False</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>The GGUF model format, introduced by the llama.cpp team, uses compression and quantization to reduce weight precision to 4-bit integers, significantly decreasing computational and memory demands and making Arm CPUs effective for LLM inference.</p>
-<h3 id="Re-quantize-the-model-weights" class="common-anchor-header">Re-quantize the model weights</h3><p>To re-quantize, run</p>
+<p>llama.cpp 팀에서 도입한 GGUF 모델 형식은 압축 및 양자화를 사용하여 가중치 정밀도를 4비트 정수로 줄여 계산 및 메모리 요구량을 크게 줄이고 Arm CPU를 LLM 추론에 효과적으로 사용할 수 있도록 합니다.</p>
+<h3 id="Re-quantize-the-model-weights" class="common-anchor-header">모델 가중치 재정량화</h3><p>다시 정량화하려면 다음을 실행합니다.</p>
 <pre><code translate="no" class="language-bash">$ ./llama-quantize --allow-requantize dolphin-2.9.4-llama3.1-8b-Q4_0.gguf dolphin-2.9.4-llama3.1-8b-Q4_0_8_8.gguf Q4_0_8_8
 <button class="copy-code-btn"></button></code></pre>
-<p>This will output a new file, <code translate="no">dolphin-2.9.4-llama3.1-8b-Q4_0_8_8.gguf</code>, which contains reconfigured weights that allow <code translate="no">llama-cli</code> to use SVE 256 and MATMUL_INT8 support.</p>
+<p>그러면 새 파일 <code translate="no">dolphin-2.9.4-llama3.1-8b-Q4_0_8_8.gguf</code> 이 출력되며, 여기에는 재구성된 가중치가 포함되어 <code translate="no">llama-cli</code> 이 SVE 256 및 MATMUL_INT8 지원을 사용할 수 있도록 합니다.</p>
 <div class="alert note">
-<p>This requantization is optimal specifically for Graviton3. For Graviton2, the optimal requantization should be performed in the <code translate="no">Q4_0_4_4</code> format, and for Graviton4, the <code translate="no">Q4_0_4_8</code> format is the most suitable for requantization.</p>
+<p>이 리퀀트화는 특히 Graviton3에 최적입니다. Graviton2의 경우 <code translate="no">Q4_0_4_4</code> 형식의 리퀀타이제이션을 수행해야 하며, Graviton4의 경우 <code translate="no">Q4_0_4_8</code> 형식이 리퀀타이제이션에 가장 적합합니다.</p>
 </div>
-<h3 id="Start-the-LLM-Service" class="common-anchor-header">Start the LLM Service</h3><p>You can utilize the llama.cpp server program and send requests via an OpenAI-compatible API. This allows you to develop applications that interact with the LLM multiple times without having to repeatedly start and stop it. Additionally, you can access the server from another machine where the LLM is hosted over the network.</p>
-<p>Start the server from the command line, and it listens on port 8080:</p>
+<h3 id="Start-the-LLM-Service" class="common-anchor-header">LLM 서비스 시작</h3><p>llama.cpp 서버 프로그램을 활용하고 OpenAI 호환 API를 통해 요청을 보낼 수 있습니다. 이를 통해 LLM을 반복적으로 시작하고 중지할 필요 없이 여러 번 상호 작용하는 애플리케이션을 개발할 수 있습니다. 또한 네트워크를 통해 LLM이 호스팅되는 다른 컴퓨터에서 서버에 액세스할 수도 있습니다.</p>
+<p>명령줄에서 서버를 시작하면 포트 8080에서 수신 대기합니다:</p>
 <pre><code translate="no" class="language-shell">$ ./llama-server -m dolphin-2.9.4-llama3.1-8b-Q4_0_8_8.gguf -n 2048 -t 64 -c 65536  --port 8080
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">'main: server is listening on 127.0.0.1:8080 - starting the main loop
 </code></pre>
-<p>You can also adjust the parameters of the launched LLM to adapt it to your server hardware to obtain ideal performance. For more parameter information, see the <code translate="no">llama-server --help</code> command.</p>
-<p>If you struggle to perform this step, you can refer to the <a href="https://learn.arm.com/learning-paths/servers-and-cloud-computing/llama-cpu/llama-chatbot/">official documents</a> for more information.</p>
-<p>You have started the LLM service on your Arm-based CPU. Next, we directly interact with the service using the OpenAI SDK.</p>
-<h2 id="Online-RAG" class="common-anchor-header">Online RAG<button data-href="#Online-RAG" class="anchor-icon" translate="no">
+<p>실행된 LLM의 파라미터를 조정하여 서버 하드웨어에 맞게 조정하여 이상적인 성능을 얻을 수도 있습니다. 자세한 매개변수 정보는 <code translate="no">llama-server --help</code> 명령을 참조하세요.</p>
+<p>이 단계를 수행하는 데 어려움이 있는 경우 <a href="https://learn.arm.com/learning-paths/servers-and-cloud-computing/llama-cpu/llama-chatbot/">공식 문서를</a> 참조하여 자세한 내용을 확인할 수 있습니다.</p>
+<p>Arm 기반 CPU에서 LLM 서비스를 시작하셨습니다. 다음으로 OpenAI SDK를 사용하여 서비스와 직접 상호 작용합니다.</p>
+<h2 id="Online-RAG" class="common-anchor-header">온라인 RAG<button data-href="#Online-RAG" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -213,13 +211,13 @@ $ make GGML_NO_LLAMAFILE=1 -j$(<span class="hljs-built_in">nproc</span>)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="LLM-Client-and-Embedding-Model" class="common-anchor-header">LLM Client and Embedding Model</h3><p>We initialize the LLM client and prepare the embedding model.</p>
-<p>For the LLM, we use the OpenAI SDK to request the Llama service launched before. We don’t need to use any API key because it is actually our local llama.cpp service.</p>
+    </button></h2><h3 id="LLM-Client-and-Embedding-Model" class="common-anchor-header">LLM 클라이언트 및 임베딩 모델</h3><p>LLM 클라이언트를 초기화하고 임베딩 모델을 준비합니다.</p>
+<p>LLM의 경우, OpenAI SDK를 사용하여 이전에 실행된 라마 서비스를 요청합니다. 실제로는 로컬 llama.cpp 서비스이므로 API 키를 사용할 필요가 없습니다.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> openai <span class="hljs-keyword">import</span> <span class="hljs-title class_">OpenAI</span>
 
 llm_client = <span class="hljs-title class_">OpenAI</span>(base_url=<span class="hljs-string">&quot;http://localhost:8080/v1&quot;</span>, api_key=<span class="hljs-string">&quot;no-key&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
-<p>Generate a test embedding and print its dimension and first few elements.</p>
+<p>테스트 임베딩을 생성하고 해당 차원과 처음 몇 개의 요소를 인쇄합니다.</p>
 <pre><code translate="no" class="language-python">test_embedding = embedding_model.embed_query(<span class="hljs-string">&quot;This is a test&quot;</span>)
 embedding_dim = <span class="hljs-built_in">len</span>(test_embedding)
 <span class="hljs-built_in">print</span>(embedding_dim)
@@ -228,10 +226,10 @@ embedding_dim = <span class="hljs-built_in">len</span>(test_embedding)
 <pre><code translate="no">384
 [0.03061249852180481, 0.013831384479999542, -0.02084377221763134, 0.016327863559126854, -0.010231520049273968, -0.0479842908680439, -0.017313342541456223, 0.03728749603033066, 0.04588735103607178, 0.034405000507831573]
 </code></pre>
-<h3 id="Retrieve-data-for-a-query" class="common-anchor-header">Retrieve data for a query</h3><p>Let’s specify a frequent question about Milvus.</p>
+<h3 id="Retrieve-data-for-a-query" class="common-anchor-header">쿼리에 대한 데이터 검색</h3><p>Milvus에 대해 자주 묻는 질문을 지정해 보겠습니다.</p>
 <pre><code translate="no" class="language-python">question = <span class="hljs-string">&quot;How is data stored in milvus?&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Search for the question in the collection and retrieve the semantic top-3 matches.</p>
+<p>컬렉션에서 해당 질문을 검색하고 시맨틱 상위 3개 일치 항목을 검색합니다.</p>
 <pre><code translate="no" class="language-python">search_res = milvus_client.search(
     collection_name=collection_name,
     data=[
@@ -242,7 +240,7 @@ embedding_dim = <span class="hljs-built_in">len</span>(test_embedding)
     output_fields=[<span class="hljs-string">&quot;text&quot;</span>],  <span class="hljs-comment"># Return the text field</span>
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>Let’s take a look at the search results of the query</p>
+<p>쿼리의 검색 결과를 살펴봅시다.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> json
 
 retrieved_lines_with_distances = [
@@ -265,7 +263,7 @@ retrieved_lines_with_distances = [
     ]
 ]
 </code></pre>
-<h3 id="Use-LLM-to-get-a-RAG-response" class="common-anchor-header">Use LLM to get a RAG response</h3><p>Convert the retrieved documents into a string format.</p>
+<h3 id="Use-LLM-to-get-a-RAG-response" class="common-anchor-header">LLM을 사용하여 RAG 응답 얻기</h3><p>검색된 문서를 문자열 형식으로 변환합니다.</p>
 <pre><code translate="no" class="language-python">context = <span class="hljs-string">&quot;\n&quot;</span>.<span class="hljs-keyword">join</span>(
     [<span class="hljs-meta">line_with_distance[0</span>] <span class="hljs-keyword">for</span> line_with_distance <span class="hljs-keyword">in</span> retrieved_lines_with_distances]
 )
@@ -285,7 +283,7 @@ Use the following pieces of information enclosed in &lt;context&gt; tags to prov
 &lt;/question&gt;
 &quot;&quot;&quot;
 </code></pre>
-<p>Use LLM to generate a response based on the prompts. We set the <code translate="no">model</code> parameter to <code translate="no">not-used</code> since it is a redundant parameter for the llama.cpp service.</p>
+<p>LLM을 사용하여 프롬프트에 따라 응답을 생성합니다. <code translate="no">model</code> 파라미터는 llama.cpp 서비스에 대한 중복 파라미터이므로 <code translate="no">not-used</code> 으로 설정했습니다.</p>
 <pre><code translate="no" class="language-python">response = llm_client.chat.completions.create(
     model=<span class="hljs-string">&quot;not-used&quot;</span>,
     messages=[
@@ -298,4 +296,4 @@ Use the following pieces of information enclosed in &lt;context&gt; tags to prov
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">Milvus stores data in two types: inserted data and metadata. Inserted data, including vector data, scalar data, and collection-specific schema, are stored in persistent storage as incremental log. Milvus supports multiple object storage backends such as MinIO, AWS S3, Google Cloud Storage (GCS), Azure Blob Storage, Alibaba Cloud OSS, and Tencent Cloud Object Storage (COS). Metadata are generated within Milvus and each Milvus module has its own metadata that are stored in etcd.
 </code></pre>
-<p>Congratulations! You have built a RAG application on top of the Arm-based infrastructures.</p>
+<p>축하합니다! Arm 기반 인프라 위에 RAG 애플리케이션을 구축했습니다.</p>

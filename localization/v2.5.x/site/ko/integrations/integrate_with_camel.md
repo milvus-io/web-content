@@ -1,12 +1,11 @@
 ---
 id: integrate_with_camel.md
 summary: >-
-  This guide demonstrates how to use an open-source embedding model and
-  large-language model on BentoCloud with Milvus vector database to build a
-  Retrieval Augmented Generation (RAG) application.
-title: Retrieval-Augmented Generation (RAG) with Milvus and BentoML
+  이 가이드에서는 Milvus 벡터 데이터베이스와 함께 BentoCloud에서 오픈 소스 임베딩 모델과 대규모 언어 모델을 사용하여 검색 증강
+  생성(RAG) 애플리케이션을 구축하는 방법을 설명합니다.
+title: '검색 증강 세대(RAG), Milvus 및 BentoML 사용'
 ---
-<h1 id="Retrieval-Augmented-Generation-RAG-with-Milvus-and-Camel" class="common-anchor-header">Retrieval-Augmented Generation (RAG) with Milvus and Camel<button data-href="#Retrieval-Augmented-Generation-RAG-with-Milvus-and-Camel" class="anchor-icon" translate="no">
+<h1 id="Retrieval-Augmented-Generation-RAG-with-Milvus-and-Camel" class="common-anchor-header">Milvus와 Camel을 사용한 검색 증강 생성(RAG)<button data-href="#Retrieval-Augmented-Generation-RAG-with-Milvus-and-Camel" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -23,18 +22,18 @@ title: Retrieval-Augmented Generation (RAG) with Milvus and BentoML
       </svg>
     </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/rag_with_milvus_and_camel.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
 <a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/rag_with_milvus_and_camel.ipynb" target="_blank"><img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/></a></p>
-<p>This guide demonstrates how to build a Retrieval-Augmented Generation (RAG) system using CAMEL and Milvus.</p>
-<p>The RAG system combines a retrieval system with a generative model to generate new text based on a given prompt. The system first retrieves relevant documents from a corpus using Milvus, and then uses a generative model to generate new text based on the retrieved documents.</p>
-<p><a href="https://www.camel-ai.org/">CAMEL</a> is a multi-agent framework. <a href="https://milvus.io/">Milvus</a> is the world’s most advanced open-source vector database, built to power embedding similarity search and AI applications.</p>
-<p>In this notebook, we show the usage of CAMEL Retrieve Module in both customized way and auto way. We will also show how to combine <code translate="no">AutoRetriever</code> with <code translate="no">ChatAgent</code>, and further combine <code translate="no">AutoRetriever</code> with <code translate="no">RolePlaying</code> by using <code translate="no">Function Calling</code>.</p>
-<p>4 main parts included:</p>
+<p>이 가이드에서는 CAMEL과 Milvus를 사용하여 검색 증강 생성(RAG) 시스템을 구축하는 방법을 설명합니다.</p>
+<p>RAG 시스템은 검색 시스템과 생성 모델을 결합하여 주어진 프롬프트에 따라 새 텍스트를 생성합니다. 이 시스템은 먼저 Milvus를 사용하여 말뭉치에서 관련 문서를 검색한 다음 생성 모델을 사용하여 검색된 문서를 기반으로 새 텍스트를 생성합니다.</p>
+<p><a href="https://www.camel-ai.org/">CAMEL은</a> 다중 에이전트 프레임워크입니다. <a href="https://milvus.io/">Milvus는</a> 세계에서 가장 진보된 오픈 소스 벡터 데이터베이스로, 임베딩 유사도 검색 및 AI 애플리케이션을 강화하기 위해 구축되었습니다.</p>
+<p>이 노트북에서는 사용자 지정 방식과 자동 방식 모두에서 CAMEL 검색 모듈의 사용법을 보여드립니다. 또한 <code translate="no">AutoRetriever</code> 과 <code translate="no">ChatAgent</code> 을 결합하는 방법과 <code translate="no">Function Calling</code> 을 사용하여 <code translate="no">AutoRetriever</code> 과 <code translate="no">RolePlaying</code> 을 결합하는 방법도 보여드립니다.</p>
+<p>크게 4가지로 구성됩니다:</p>
 <ul>
-<li>Customized RAG</li>
-<li>Auto RAG</li>
-<li>Single Agent with Auto RAG</li>
-<li>Role-playing with Auto RAG</li>
+<li>사용자 정의 RAG</li>
+<li>자동 RAG</li>
+<li>자동 RAG를 사용한 싱글 에이전트</li>
+<li>Auto RAG를 사용한 롤플레잉</li>
 </ul>
-<h2 id="Load-Data" class="common-anchor-header">Load Data<button data-href="#Load-Data" class="anchor-icon" translate="no">
+<h2 id="Load-Data" class="common-anchor-header">데이터 로드<button data-href="#Load-Data" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -49,11 +48,11 @@ title: Retrieval-Augmented Generation (RAG) with Milvus and BentoML
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Let’s first load the CAMEL paper from https://arxiv.org/pdf/2303.17760.pdf. This will be our local example data.</p>
+    </button></h2><p>먼저 https://arxiv.org/pdf/2303.17760.pdf 에서 CAMEL 용지를 로드해 보겠습니다. 이것이 로컬 예제 데이터가 될 것입니다.</p>
 <pre><code translate="no" class="language-python">$ pip install -U <span class="hljs-string">&quot;camel-ai[all]&quot;</span> pymilvus
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>If you are using Google Colab, to enable dependencies just installed, you may need to <strong>restart the runtime</strong> (Click on the “Runtime” menu at the top of the screen, and select “Restart session” from the dropdown menu).</p>
+<p>Google Colab을 사용하는 경우 방금 설치한 종속성을 활성화하려면 <strong>런타임을 다시 시작해야</strong> 할 수 있습니다(화면 상단의 "런타임" 메뉴를 클릭하고 드롭다운 메뉴에서 "세션 다시 시작"을 선택).</p>
 </div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> os
 <span class="hljs-keyword">import</span> requests
@@ -65,7 +64,7 @@ response = requests.get(url)
 <span class="hljs-keyword">with</span> <span class="hljs-built_in">open</span>(<span class="hljs-string">&quot;local_data/camel paper.pdf&quot;</span>, <span class="hljs-string">&quot;wb&quot;</span>) <span class="hljs-keyword">as</span> file:
     file.write(response.content)
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="1-Customized-RAG" class="common-anchor-header">1. Customized RAG<button data-href="#1-Customized-RAG" class="anchor-icon" translate="no">
+<h2 id="1-Customized-RAG" class="common-anchor-header">1. 사용자 지정 RAG<button data-href="#1-Customized-RAG" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -80,16 +79,16 @@ response = requests.get(url)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>In this section we will set our customized RAG pipeline, we will take <code translate="no">VectorRetriever</code> as an example. We will set <code translate="no">OpenAIEmbedding</code> as the embeddding model and <code translate="no">MilvusStorage</code> as the storage for it.</p>
-<p>To set OpenAI embedding, we need to set the <code translate="no">OPENAI_API_KEY</code> in below.</p>
+    </button></h2><p>이 섹션에서는 사용자 정의 RAG 파이프라인을 설정하고 <code translate="no">VectorRetriever</code> 을 예로 들어 보겠습니다. 임베딩 모델은 <code translate="no">OpenAIEmbedding</code>, 저장소는 <code translate="no">MilvusStorage</code> 으로 설정하겠습니다.</p>
+<p>OpenAI 임베딩을 설정하려면 아래에서 <code translate="no">OPENAI_API_KEY</code> 을 설정해야 합니다.</p>
 <pre><code translate="no" class="language-python">os.<span class="hljs-property">environ</span>[<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</span>] = <span class="hljs-string">&quot;Your Key&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Import and set the embedding instance:</p>
+<p>임베딩 인스턴스를 가져와 설정합니다:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> camel.<span class="hljs-property">embeddings</span> <span class="hljs-keyword">import</span> <span class="hljs-title class_">OpenAIEmbedding</span>
 
 embedding_instance = <span class="hljs-title class_">OpenAIEmbedding</span>()
 <button class="copy-code-btn"></button></code></pre>
-<p>Import and set the vector storage instance:</p>
+<p>벡터 스토리지 인스턴스를 가져와서 설정합니다:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> camel.storages <span class="hljs-keyword">import</span> MilvusStorage
 
 storage_instance = MilvusStorage(
@@ -102,22 +101,22 @@ storage_instance = MilvusStorage(
 )
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>For the <code translate="no">url_and_api_key</code>:</p>
+<p><code translate="no">url_and_api_key</code>:</p>
 <ul>
-<li>Using a local file, e.g.<code translate="no">./milvus.db</code>, as the Milvus connection URI is the most convenient method, as it automatically utilizes <a href="https://milvus.io/docs/milvus_lite.md">Milvus Lite</a> to store all data in this file.</li>
-<li>If you have large scale of data, you can set up a more performant Milvus server on <a href="https://milvus.io/docs/quickstart.md">docker or kubernetes</a>. In this setup, please use the server uri, e.g.<code translate="no">http://localhost:19530</code>, as your url.</li>
-<li>If you want to use <a href="https://zilliz.com/cloud">Zilliz Cloud</a>, the fully managed cloud service for Milvus, adjust the connection uri and token, which correspond to the <a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">Public Endpoint and Api key</a> in Zilliz Cloud.</li>
+<li>로컬 파일(예:<code translate="no">./milvus.db</code>)을 Milvus 연결 URI로 사용하는 것이 가장 편리한 방법인데, <a href="https://milvus.io/docs/milvus_lite.md">Milvus Lite를</a> 자동으로 활용하여 모든 데이터를 이 파일에 저장하기 때문입니다.</li>
+<li>데이터 규모가 큰 경우, <a href="https://milvus.io/docs/quickstart.md">도커나 쿠버네티스에</a> 더 성능이 좋은 Milvus 서버를 설정할 수 있습니다. 이 설정에서는 서버 URL(예:<code translate="no">http://localhost:19530</code>)을 사용하세요.</li>
+<li>밀버스의 완전 관리형 클라우드 서비스인 <a href="https://zilliz.com/cloud">질리즈 클라우드를</a> 사용하려면, 질리즈 클라우드의 <a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">퍼블릭 엔드포인트와 API 키에</a> 해당하는 연결 uri와 토큰을 조정하세요.</li>
 </ul>
 </div>
-<p>Import and set the retriever instance:</p>
-<p>By default, the <code translate="no">similarity_threshold</code> is set to 0.75. You can change it.</p>
+<p>리트리버 인스턴스를 가져와 설정합니다:</p>
+<p>기본적으로 <code translate="no">similarity_threshold</code> 은 0.75로 설정되어 있습니다. 변경할 수 있습니다.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> camel.<span class="hljs-property">retrievers</span> <span class="hljs-keyword">import</span> <span class="hljs-title class_">VectorRetriever</span>
 
 vector_retriever = <span class="hljs-title class_">VectorRetriever</span>(
     embedding_model=embedding_instance, storage=storage_instance
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>We use integrated <code translate="no">Unstructured Module</code> to split the content into small chunks, the content will be splited automacitlly with its <code translate="no">chunk_by_title</code> function, the max character for each chunk is 500 characters, which is a suitable length for <code translate="no">OpenAIEmbedding</code>. All the text in the chunks will be embed and stored to the vector storage instance, it will take some time, please wait.</p>
+<p>통합 <code translate="no">Unstructured Module</code> 을 사용하여 콘텐츠를 작은 청크로 분할하고, 콘텐츠는 <code translate="no">chunk_by_title</code> 함수를 사용하여 자동으로 분할되며, 각 청크의 최대 문자는 500 자로 <code translate="no">OpenAIEmbedding</code> 에 적합한 길이입니다. 청크의 모든 텍스트가 벡터 스토리지 인스턴스에 임베드되어 저장되므로 다소 시간이 걸리므로 잠시만 기다려주세요.</p>
 <pre><code translate="no" class="language-python">vector_retriever.<span class="hljs-title function_">process</span>(content_input_path=<span class="hljs-string">&quot;local_data/camel paper.pdf&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">[nltk_data] Downloading package punkt to /root/nltk_data...
@@ -126,20 +125,20 @@ vector_retriever = <span class="hljs-title class_">VectorRetriever</span>(
 [nltk_data]     /root/nltk_data...
 [nltk_data]   Unzipping taggers/averaged_perceptron_tagger.zip.
 </code></pre>
-<p>Now we can retrieve information from the vector storage by giving a query. By default it will give you back the text content from top 1 chunk with highest Cosine similarity score, and the similarity score should be higher than 0.75 to ensure the retrieved content is relevant to the query. You can also change the <code translate="no">top_k</code> value.</p>
-<p>The returned string list includes:</p>
+<p>이제 쿼리를 입력하여 벡터 스토리지에서 정보를 검색할 수 있습니다. 기본적으로 코사인 유사도 점수가 가장 높은 상위 1개 청크의 텍스트 콘텐츠를 반환하며, 검색된 콘텐츠가 쿼리와 관련이 있는지 확인하려면 유사도 점수가 0.75보다 높아야 합니다. <code translate="no">top_k</code> 값을 변경할 수도 있습니다.</p>
+<p>반환된 문자열 목록에는</p>
 <ul>
-<li>similarity score</li>
-<li>content path</li>
-<li>metadata</li>
-<li>text</li>
+<li>유사도 점수</li>
+<li>콘텐츠 경로</li>
+<li>메타데이터</li>
+<li>텍스트</li>
 </ul>
 <pre><code translate="no" class="language-python">retrieved_info = vector_retriever.query(query=<span class="hljs-string">&quot;What is CAMEL?&quot;</span>, top_k=<span class="hljs-number">1</span>)
 <span class="hljs-built_in">print</span>(retrieved_info)
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">[{'similarity score': '0.8321675658226013', 'content path': 'local_data/camel paper.pdf', 'metadata': {'last_modified': '2024-04-19T14:40:00', 'filetype': 'application/pdf', 'page_number': 45}, 'text': 'CAMEL Data and Code License The intended purpose and licensing of CAMEL is solely for research use. The source code is licensed under Apache 2.0. The datasets are licensed under CC BY NC 4.0, which permits only non-commercial usage. It is advised that any models trained using the dataset should not be utilized for anything other than research purposes.\n\n45'}]
 </code></pre>
-<p>Let’s try an irrelevant query:</p>
+<p>관련 없는 쿼리를 해보겠습니다:</p>
 <pre><code translate="no" class="language-python">retrieved_info_irrelevant = vector_retriever.query(
     query=<span class="hljs-string">&quot;Compared with dumpling and rice, which should I take for dinner?&quot;</span>, top_k=<span class="hljs-number">1</span>
 )
@@ -148,7 +147,7 @@ vector_retriever = <span class="hljs-title class_">VectorRetriever</span>(
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">[{'text': 'No suitable information retrieved from local_data/camel paper.pdf                 with similarity_threshold = 0.75.'}]
 </code></pre>
-<h2 id="2-Auto-RAG" class="common-anchor-header">2. Auto RAG<button data-href="#2-Auto-RAG" class="anchor-icon" translate="no">
+<h2 id="2-Auto-RAG" class="common-anchor-header">2. 자동 RAG<button data-href="#2-Auto-RAG" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -163,14 +162,14 @@ vector_retriever = <span class="hljs-title class_">VectorRetriever</span>(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>In this section we will run the <code translate="no">AutoRetriever</code> with default settings. It uses <code translate="no">OpenAIEmbedding</code> as default embedding model and <code translate="no">Milvus</code> as default vector storage.</p>
-<p>What you need to do is:</p>
+    </button></h2><p>이 섹션에서는 기본 설정으로 <code translate="no">AutoRetriever</code> 을 실행해 보겠습니다. 기본 임베딩 모델로는 <code translate="no">OpenAIEmbedding</code>, 기본 벡터 저장소로는 <code translate="no">Milvus</code> 을 사용합니다.</p>
+<p>여러분이 해야 할 일은</p>
 <ul>
-<li>Set content input paths, which can be local paths or remote urls</li>
-<li>Set remote url and api key for Milvus</li>
-<li>Give a query</li>
+<li>콘텐츠 입력 경로를 설정합니다(로컬 경로 또는 원격 URL일 수 있음).</li>
+<li>Milvus의 원격 URL 및 API 키를 설정합니다.</li>
+<li>쿼리 제공</li>
 </ul>
-<p>The Auto RAG pipeline would create collections for given content input paths, the collection name will be set automaticlly based on the content input path name, if the collection exists, it will do the retrieve directly.</p>
+<p>자동 RAG 파이프라인은 지정된 콘텐츠 입력 경로에 대한 컬렉션을 생성하고, 컬렉션 이름은 콘텐츠 입력 경로 이름에 따라 자동으로 설정되며, 컬렉션이 존재하는 경우 직접 검색을 수행합니다.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> camel.retrievers <span class="hljs-keyword">import</span> AutoRetriever
 <span class="hljs-keyword">from</span> camel.types <span class="hljs-keyword">import</span> StorageType
 
@@ -201,7 +200,7 @@ Retrieved Context:
 {'similarity score': '0.8252888321876526', 'content path': 'local_data/camel paper.pdf', 'metadata': {'last_modified': '2024-04-19T14:40:00', 'filetype': 'application/pdf', 'page_number': 7}, 'text': ' Section 3.2, to simulate assistant-user cooperation. For our analysis, we set our attention on AI Society setting. We also gathered conversational data, named CAMEL AI Society and CAMEL Code datasets and problem-solution pairs data named CAMEL Math and CAMEL Science and analyzed and evaluated their quality. Moreover, we will discuss potential extensions of our framework and highlight both the risks and opportunities that future AI society might present.'}
 {'similarity score': '0.8378663659095764', 'content path': 'https://www.camel-ai.org/', 'metadata': {'filetype': 'text/html', 'languages': ['eng'], 'page_number': 1, 'url': 'https://www.camel-ai.org/', 'link_urls': ['#h.3f4tphhd9pn8', 'https://join.slack.com/t/camel-ai/shared_invite/zt-2g7xc41gy-_7rcrNNAArIP6sLQqldkqQ', 'https://discord.gg/CNcNpquyDc'], 'link_texts': [None, None, None], 'emphasized_text_contents': ['Mission', 'CAMEL-AI.org', 'is an open-source community dedicated to the study of autonomous and communicative agents. We believe that studying these agents on a large scale offers valuable insights into their behaviors, capabilities, and potential risks. To facilitate research in this field, we provide, implement, and support various types of agents, tasks, prompts, models, datasets, and simulated environments.', 'Join us via', 'Slack', 'Discord', 'or'], 'emphasized_text_tags': ['span', 'span', 'span', 'span', 'span', 'span', 'span']}, 'text': 'Mission\n\nCAMEL-AI.org is an open-source community dedicated to the study of autonomous and communicative agents. We believe that studying these agents on a large scale offers valuable insights into their behaviors, capabilities, and potential risks. To facilitate research in this field, we provide, implement, and support various types of agents, tasks, prompts, models, datasets, and simulated environments.\n\nJoin us via\n\nSlack\n\nDiscord\n\nor'}
 </code></pre>
-<h2 id="3-Single-Agent-with-Auto-RAG" class="common-anchor-header">3. Single Agent with Auto RAG<button data-href="#3-Single-Agent-with-Auto-RAG" class="anchor-icon" translate="no">
+<h2 id="3-Single-Agent-with-Auto-RAG" class="common-anchor-header">3. 자동 RAG가 있는 단일 에이전트<button data-href="#3-Single-Agent-with-Auto-RAG" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -216,8 +215,8 @@ Retrieved Context:
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>In this section we will show how to combine the <code translate="no">AutoRetriever</code> with one <code translate="no">ChatAgent</code>.</p>
-<p>Let’s set an agent function, in this function we can get the response by providing a query to this agent.</p>
+    </button></h2><p>이 섹션에서는 <code translate="no">AutoRetriever</code> 와 하나의 <code translate="no">ChatAgent</code> 를 결합하는 방법을 보여드리겠습니다.</p>
+<p>에이전트 함수를 설정해 보겠습니다. 이 함수에서는 이 에이전트에 쿼리를 제공하여 응답을 얻을 수 있습니다.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> camel.agents <span class="hljs-keyword">import</span> ChatAgent
 <span class="hljs-keyword">from</span> camel.messages <span class="hljs-keyword">import</span> BaseMessage
 <span class="hljs-keyword">from</span> camel.types <span class="hljs-keyword">import</span> RoleType
@@ -271,7 +270,7 @@ Retrieved Context:
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">CAMEL-AI is an open-source community dedicated to the study of autonomous and communicative agents. It provides, implements, and supports various types of agents, tasks, prompts, models, datasets, and simulated environments to facilitate research in this field.
 </code></pre>
-<h2 id="4-Role-playing-with-Auto-RAG" class="common-anchor-header">4. Role-playing with Auto RAG<button data-href="#4-Role-playing-with-Auto-RAG" class="anchor-icon" translate="no">
+<h2 id="4-Role-playing-with-Auto-RAG" class="common-anchor-header">4. 자동 RAG로 롤플레잉하기<button data-href="#4-Role-playing-with-Auto-RAG" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -286,7 +285,7 @@ Retrieved Context:
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>In this section we will show how to combine the <code translate="no">RETRIEVAL_FUNCS</code> with <code translate="no">RolePlaying</code> by applying <code translate="no">Function Calling</code>.</p>
+    </button></h2><p>이 섹션에서는 <code translate="no">Function Calling</code> 을 적용하여 <code translate="no">RETRIEVAL_FUNCS</code> 과 <code translate="no">RolePlaying</code> 을 결합하는 방법을 보여드리겠습니다.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> typing <span class="hljs-keyword">import</span> <span class="hljs-type">List</span>
 <span class="hljs-keyword">from</span> colorama <span class="hljs-keyword">import</span> Fore
 
@@ -387,7 +386,7 @@ Retrieved Context:
 
         input_msg = assistant_response.msg
 <button class="copy-code-btn"></button></code></pre>
-<p>Run the role-playing with defined retriever function:</p>
+<p>정의된 리트리버 함수로 롤플레잉을 실행합니다:</p>
 <pre><code translate="no" class="language-python">role_playing_with_rag(
     task_prompt=<span class="hljs-string">&quot;&quot;&quot;What is the main termination reasons for AI Society
                    dataset, how many number of messages did camel decided to

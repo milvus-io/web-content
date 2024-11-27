@@ -2,9 +2,9 @@
 id: configure_querynode.md
 related_key: configure
 group: system_configuration.md
-summary: Learn how to configure queryNode for Milvus.
+summary: Milvus용 쿼리노드 구성 방법을 알아보세요.
 ---
-<h1 id="queryNode-related-Configurations" class="common-anchor-header">queryNode-related Configurations<button data-href="#queryNode-related-Configurations" class="anchor-icon" translate="no">
+<h1 id="queryNode-related-Configurations" class="common-anchor-header">쿼리 노드 관련 구성<button data-href="#queryNode-related-Configurations" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -19,7 +19,7 @@ summary: Learn how to configure queryNode for Milvus.
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Related configuration of queryNode, used to run hybrid search between vector and scalar data.</p>
+    </button></h1><p>벡터 데이터와 스칼라 데이터 간의 하이브리드 검색을 실행하는 데 사용되는 쿼리 노드의 관련 구성입니다.</p>
 <h2 id="queryNodestatspublishInterval" class="common-anchor-header"><code translate="no">queryNode.stats.publishInterval</code><button data-href="#queryNodestatspublishInterval" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -38,13 +38,13 @@ summary: Learn how to configure queryNode for Milvus.
     </button></h2><table id="queryNode.stats.publishInterval">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">설명</th>
+      <th class="width20">기본값</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        The interval that query node publishes the node statistics information, including segment status, cpu usage, memory usage, health status, etc. Unit: ms.      </td>
+      <td>        쿼리 노드가 세그먼트 상태, CPU 사용량, 메모리 사용량, 상태 등을 포함한 노드 통계 정보를 게시하는 간격입니다. 단위: ms.      </td>
       <td>1000</td>
     </tr>
   </tbody>
@@ -67,13 +67,13 @@ summary: Learn how to configure queryNode for Milvus.
     </button></h2><table id="queryNode.segcore.knowhereThreadPoolNumRatio">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">설명</th>
+      <th class="width20">기본값</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        The number of threads in knowhere's thread pool. If disk is enabled, the pool size will multiply with knowhereThreadPoolNumRatio([1, 32]).      </td>
+      <td>        knowhere의 스레드 풀에 있는 스레드 수입니다. 디스크가 활성화된 경우 풀 크기는 knowhereThreadPoolNumRatio([1, 32])에 곱해집니다.      </td>
       <td>4</td>
     </tr>
   </tbody>
@@ -96,13 +96,13 @@ summary: Learn how to configure queryNode for Milvus.
     </button></h2><table id="queryNode.segcore.chunkRows">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">설명</th>
+      <th class="width20">기본값</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        Row count by which Segcore divides a segment into chunks.      </td>
+      <td>        세그코어가 세그먼트를 청크로 나누는 행 수입니다.      </td>
       <td>128</td>
     </tr>
   </tbody>
@@ -125,16 +125,16 @@ summary: Learn how to configure queryNode for Milvus.
     </button></h2><table id="queryNode.segcore.interimIndex.enableIndex">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">설명</th>
+      <th class="width20">기본값</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>
-        <li>Whether to create a temporary index for growing segments and sealed segments not yet indexed, improving search performance.</li>      
-        <li>Milvus will eventually seals and indexes all segments, but enabling this optimizes search performance for immediate queries following data insertion.</li>      
-        <li>This defaults to true, indicating that Milvus creates temporary index for growing segments and the sealed segments that are not indexed upon searches.</li>      </td>
+        <li>증가하는 세그먼트와 아직 색인되지 않은 세그먼트에 대한 임시 색인을 생성하여 검색 성능을 개선할지 여부입니다.</li>      
+        <li>Milvus는 결국 모든 세그먼트를 봉인하고 색인하지만, 이 기능을 활성화하면 데이터 삽입 후 즉각적인 쿼리에 대한 검색 성능이 최적화됩니다.</li>      
+        <li>이 설정의 기본값은 true로, Milvus가 증가하는 세그먼트와 검색 시 색인되지 않은 봉인된 세그먼트에 대한 임시 색인을 생성한다는 것을 나타냅니다.</li>      </td>
       <td>true</td>
     </tr>
   </tbody>
@@ -157,13 +157,13 @@ summary: Learn how to configure queryNode for Milvus.
     </button></h2><table id="queryNode.segcore.interimIndex.nlist">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">설명</th>
+      <th class="width20">기본값</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        temp index nlist, recommend to set sqrt(chunkRows), must smaller than chunkRows/8      </td>
+      <td>        임시 인덱스 nlist, sqrt(chunkRows)를 설정하는 것이 좋으며, chunkRows/8보다 작아야 합니다.      </td>
       <td>128</td>
     </tr>
   </tbody>
@@ -186,13 +186,13 @@ summary: Learn how to configure queryNode for Milvus.
     </button></h2><table id="queryNode.segcore.interimIndex.nprobe">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">설명</th>
+      <th class="width20">기본값</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        nprobe to search small index, based on your accuracy requirement, must smaller than nlist      </td>
+      <td>        정확도 요구 사항에 따라 작은 인덱스를 검색할 nprobe는 nlist보다 작아야 합니다.      </td>
       <td>16</td>
     </tr>
   </tbody>
@@ -215,13 +215,13 @@ summary: Learn how to configure queryNode for Milvus.
     </button></h2><table id="queryNode.segcore.interimIndex.memExpansionRate">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">설명</th>
+      <th class="width20">기본값</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        extra memory needed by building interim index      </td>
+      <td>        임시 인덱스 구축에 필요한 추가 메모리      </td>
       <td>1.15</td>
     </tr>
   </tbody>
@@ -244,13 +244,13 @@ summary: Learn how to configure queryNode for Milvus.
     </button></h2><table id="queryNode.segcore.interimIndex.buildParallelRate">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">설명</th>
+      <th class="width20">기본값</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        the ratio of building interim index parallel matched with cpu num      </td>
+      <td>        CPU 수와 일치하는 빌드 중간 인덱스 병렬 비율      </td>
       <td>0.5</td>
     </tr>
   </tbody>
@@ -273,13 +273,13 @@ summary: Learn how to configure queryNode for Milvus.
     </button></h2><table id="queryNode.segcore.knowhereScoreConsistency">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">설명</th>
+      <th class="width20">기본값</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        Enable knowhere strong consistency score computation logic      </td>
+      <td>        강력한 일관성 점수 계산 로직을 사용하도록 설정합니다.      </td>
       <td>false</td>
     </tr>
   </tbody>
@@ -302,13 +302,13 @@ summary: Learn how to configure queryNode for Milvus.
     </button></h2><table id="queryNode.loadMemoryUsageFactor">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">설명</th>
+      <th class="width20">기본값</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        The multiply factor of calculating the memory usage while loading segments      </td>
+      <td>        세그먼트를 로드하는 동안 메모리 사용량을 계산하는 곱셈 계수입니다.      </td>
       <td>1</td>
     </tr>
   </tbody>
@@ -331,13 +331,13 @@ summary: Learn how to configure queryNode for Milvus.
     </button></h2><table id="queryNode.enableDisk">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">설명</th>
+      <th class="width20">기본값</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        enable querynode load disk index, and search on disk index      </td>
+      <td>        쿼리 노드가 디스크 인덱스를 로드하고 디스크 인덱스에서 검색을 사용하도록 설정합니다.      </td>
       <td>false</td>
     </tr>
   </tbody>
@@ -360,13 +360,13 @@ summary: Learn how to configure queryNode for Milvus.
     </button></h2><table id="queryNode.cache.memoryLimit">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">설명</th>
+      <th class="width20">기본값</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        2 GB, 2 * 1024 *1024 *1024      </td>
+      <td>        2GB, 2 * 1024 *1024 *1024     </td>
       <td>2147483648</td>
     </tr>
   </tbody>
@@ -389,13 +389,13 @@ summary: Learn how to configure queryNode for Milvus.
     </button></h2><table id="queryNode.cache.readAheadPolicy">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">설명</th>
+      <th class="width20">기본값</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        The read ahead policy of chunk cache, options: `normal, random, sequential, willneed, dontneed`      </td>
+      <td>        청크 캐시의 미리 읽기 정책, 옵션: '일반, 랜덤, 순차, willneed, dontneed'      </td>
       <td>willneed</td>
     </tr>
   </tbody>
@@ -418,19 +418,19 @@ summary: Learn how to configure queryNode for Milvus.
     </button></h2><table id="queryNode.cache.warmup">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">설명</th>
+      <th class="width20">기본값</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>
-        <li>options: async, sync, disable. </li>      
-        <li>Specifies the necessity for warming up the chunk cache. </li>      
-        <li>1. If set to "sync" or "async" the original vector data will be synchronously/asynchronously loaded into the </li>      
-        <li>chunk cache during the load process. This approach has the potential to substantially reduce query/search latency</li>      
-        <li>for a specific duration post-load, albeit accompanied by a concurrent increase in disk usage;</li>      
-        <li>2. If set to "disable" original vector data will only be loaded into the chunk cache during search/query.</li>      </td>
+        <li>옵션: 비동기, 동기화, 비활성화. </li>      
+        <li>청크 캐시 워밍업 필요성을 지정합니다. </li>      
+        <li>1. "동기화" 또는 "비동기화"로 설정하면 원본 벡터 데이터가 로드 과정에서 동기식/비동기식으로 </li>      
+        <li>청크 캐시에 동기식/비동기식으로 로드됩니다. 이 접근 방식은 쿼리/검색 지연 시간을 크게 줄일 수 있는 잠재력이 있습니다.</li>      
+        <li>을 크게 줄일 수 있는 잠재력을 가지고 있지만, 동시에 디스크 사용량이 증가합니다;</li>      
+        <li>2. '비활성화'로 설정하면 원본 벡터 데이터는 검색/쿼리 중에만 청크 캐시에 로드됩니다.</li>      </td>
       <td>disable</td>
     </tr>
   </tbody>
@@ -453,13 +453,13 @@ summary: Learn how to configure queryNode for Milvus.
     </button></h2><table id="queryNode.mmap.mmapEnabled">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">설명</th>
+      <th class="width20">기본값</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        Enable mmap for loading data      </td>
+      <td>        데이터 로딩에 mmap 사용      </td>
       <td>false</td>
     </tr>
   </tbody>
@@ -482,13 +482,13 @@ summary: Learn how to configure queryNode for Milvus.
     </button></h2><table id="queryNode.mmap.growingMmapEnabled">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">설명</th>
+      <th class="width20">기본값</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        Enable mmap for using in growing raw data      </td>
+      <td>        원시 데이터 증가에 mmap을 사용하도록 설정합니다.      </td>
       <td>false</td>
     </tr>
   </tbody>
@@ -511,13 +511,13 @@ summary: Learn how to configure queryNode for Milvus.
     </button></h2><table id="queryNode.mmap.fixedFileSizeForMmapAlloc">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">설명</th>
+      <th class="width20">기본값</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        tmp file size for mmap chunk manager      </td>
+      <td>        MMAP 청크 관리자를 위한 TMP 파일 크기      </td>
       <td>1</td>
     </tr>
   </tbody>
@@ -540,13 +540,13 @@ summary: Learn how to configure queryNode for Milvus.
     </button></h2><table id="queryNode.mmap.maxDiskUsagePercentageForMmapAlloc">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">설명</th>
+      <th class="width20">기본값</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        disk percentage used in mmap chunk manager      </td>
+      <td>        MMAP 청크 관리자에서 사용되는 디스크 비율      </td>
       <td>50</td>
     </tr>
   </tbody>
@@ -569,13 +569,13 @@ summary: Learn how to configure queryNode for Milvus.
     </button></h2><table id="queryNode.lazyload.enabled">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">설명</th>
+      <th class="width20">기본값</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        Enable lazyload for loading data      </td>
+      <td>        데이터 로딩에 지연 로드 활성화      </td>
       <td>false</td>
     </tr>
   </tbody>
@@ -598,13 +598,13 @@ summary: Learn how to configure queryNode for Milvus.
     </button></h2><table id="queryNode.lazyload.waitTimeout">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">설명</th>
+      <th class="width20">기본값</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        max wait timeout duration in milliseconds before start to do lazyload search and retrieve      </td>
+      <td>        지연 로드 검색 및 검색을 시작하기 전 최대 대기 시간 초과 기간(밀리초)      </td>
       <td>30000</td>
     </tr>
   </tbody>
@@ -627,13 +627,13 @@ summary: Learn how to configure queryNode for Milvus.
     </button></h2><table id="queryNode.lazyload.requestResourceTimeout">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">설명</th>
+      <th class="width20">기본값</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        max timeout in milliseconds for waiting request resource for lazy load, 5s by default      </td>
+      <td>        지연 로드를 위한 대기 요청 리소스의 최대 대기 시간(밀리초), 기본값은 5초입니다.      </td>
       <td>5000</td>
     </tr>
   </tbody>
@@ -656,13 +656,13 @@ summary: Learn how to configure queryNode for Milvus.
     </button></h2><table id="queryNode.lazyload.requestResourceRetryInterval">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">설명</th>
+      <th class="width20">기본값</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        retry interval in milliseconds for waiting request resource for lazy load, 2s by default      </td>
+      <td>        지연 로드를 위한 대기 요청 리소스에 대한 재시도 간격(밀리초), 기본값은 2초입니다.      </td>
       <td>2000</td>
     </tr>
   </tbody>
@@ -685,13 +685,13 @@ summary: Learn how to configure queryNode for Milvus.
     </button></h2><table id="queryNode.lazyload.maxRetryTimes">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">설명</th>
+      <th class="width20">기본값</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        max retry times for lazy load, 1 by default      </td>
+      <td>        지연 로드를 위한 최대 재시도 횟수, 기본값 1 </td>
       <td>1</td>
     </tr>
   </tbody>
@@ -714,13 +714,13 @@ summary: Learn how to configure queryNode for Milvus.
     </button></h2><table id="queryNode.lazyload.maxEvictPerRetry">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">설명</th>
+      <th class="width20">기본값</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        max evict count for lazy load, 1 by default      </td>
+      <td>        지연 로드를 위한 최대 퇴거 횟수, 기본값 1 </td>
       <td>1</td>
     </tr>
   </tbody>
@@ -743,17 +743,17 @@ summary: Learn how to configure queryNode for Milvus.
     </button></h2><table id="queryNode.scheduler.maxReadConcurrentRatio">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">설명</th>
+      <th class="width20">기본값</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>
-        <li>maxReadConcurrentRatio is the concurrency ratio of read task (search task and query task).</li>      
-        <li>Max read concurrency would be the value of hardware.GetCPUNum * maxReadConcurrentRatio.</li>      
-        <li>It defaults to 2.0, which means max read concurrency would be the value of hardware.GetCPUNum * 2.</li>      
-        <li>Max read concurrency must greater than or equal to 1, and less than or equal to hardware.GetCPUNum * 100.</li>      
+        <li>최대 읽기 동시성 비율은 읽기 작업(검색 작업과 쿼리 작업)의 동시성 비율입니다.</li>      
+        <li>최대 읽기 동시성은 hardware.GetCPUNum * maxReadConcurrentRatio의 값입니다.</li>      
+        <li>기본값은 2.0으로, 최대 읽기 동시성은 hardware.GetCPUNum * 2의 값입니다.</li>      
+        <li>최대 읽기 동시성은 1보다 크거나 같아야 하며 hardware.GetCPUNum * 100보다 작아야 합니다.</li>      
         <li>(0, 100]</li>      </td>
       <td>1</td>
     </tr>
@@ -777,13 +777,13 @@ summary: Learn how to configure queryNode for Milvus.
     </button></h2><table id="queryNode.scheduler.cpuRatio">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">설명</th>
+      <th class="width20">기본값</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        ratio used to estimate read task cpu usage.      </td>
+      <td>        읽기 작업 CPU 사용량을 추정하는 데 사용되는 비율입니다.      </td>
       <td>10</td>
     </tr>
   </tbody>
@@ -806,20 +806,20 @@ summary: Learn how to configure queryNode for Milvus.
     </button></h2><table id="queryNode.scheduler.scheduleReadPolicy.name">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">설명</th>
+      <th class="width20">기본값</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>
-        <li>fifo: A FIFO queue support the schedule.</li>      
-        <li>user-task-polling:</li>      
-        <li>    The user's tasks will be polled one by one and scheduled.</li>      
-        <li>    Scheduling is fair on task granularity.</li>      
-        <li>    The policy is based on the username for authentication.</li>      
-        <li>    And an empty username is considered the same user.</li>      
-        <li>    When there are no multi-users, the policy decay into FIFO"</li>      </td>
+        <li>FIFO: FIFO 대기열이 스케줄을 지원합니다.</li>      
+        <li>사용자 작업 폴링:</li>      
+        <li>    사용자의 작업을 하나씩 폴링하여 스케줄링합니다.</li>      
+        <li>    스케줄링은 작업 세분화에 따라 공정하게 이루어집니다.</li>      
+        <li>    이 정책은 인증을 위한 사용자 아이디를 기반으로 합니다.</li>      
+        <li>    그리고 빈 사용자 아이디는 동일한 사용자로 간주됩니다.</li>      
+        <li>    다중 사용자가 없는 경우 정책은 FIFO로 붕괴됩니다."</li>      </td>
       <td>fifo</td>
     </tr>
   </tbody>
@@ -842,13 +842,13 @@ summary: Learn how to configure queryNode for Milvus.
     </button></h2><table id="queryNode.scheduler.scheduleReadPolicy.taskQueueExpire">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">설명</th>
+      <th class="width20">기본값</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        Control how long (many seconds) that queue retains since queue is empty      </td>
+      <td>        대기열이 비어 있는 동안 대기열이 유지되는 기간(초)을 제어합니다.      </td>
       <td>60</td>
     </tr>
   </tbody>
@@ -871,13 +871,13 @@ summary: Learn how to configure queryNode for Milvus.
     </button></h2><table id="queryNode.scheduler.scheduleReadPolicy.enableCrossUserGrouping">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">설명</th>
+      <th class="width20">기본값</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        Enable Cross user grouping when using user-task-polling policy. (Disable it if user's task can not merge each other)      </td>
+      <td>        사용자 작업 폴링 정책을 사용할 때 교차 사용자 그룹화를 사용하도록 설정합니다. (사용자의 작업이 서로 병합될 수 없는 경우 비활성화합니다.)      </td>
       <td>false</td>
     </tr>
   </tbody>
@@ -900,13 +900,13 @@ summary: Learn how to configure queryNode for Milvus.
     </button></h2><table id="queryNode.scheduler.scheduleReadPolicy.maxPendingTaskPerUser">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">설명</th>
+      <th class="width20">기본값</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        Max pending task per user in scheduler      </td>
+      <td>        스케줄러에서 사용자당 최대 보류 중인 작업 수   </td>
       <td>1024</td>
     </tr>
   </tbody>
@@ -929,13 +929,13 @@ summary: Learn how to configure queryNode for Milvus.
     </button></h2><table id="queryNode.dataSync.flowGraph.maxQueueLength">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">설명</th>
+      <th class="width20">기본값</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        The maximum size of task queue cache in flow graph in query node.      </td>
+      <td>        쿼리 노드의 흐름 그래프에서 작업 대기열 캐시의 최대 크기입니다.      </td>
       <td>16</td>
     </tr>
   </tbody>
@@ -958,13 +958,13 @@ summary: Learn how to configure queryNode for Milvus.
     </button></h2><table id="queryNode.dataSync.flowGraph.maxParallelism">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">설명</th>
+      <th class="width20">기본값</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        Maximum number of tasks executed in parallel in the flowgraph      </td>
+      <td>        플로우 그래프에서 병렬로 실행되는 최대 작업 수   </td>
       <td>1024</td>
     </tr>
   </tbody>
@@ -987,13 +987,13 @@ summary: Learn how to configure queryNode for Milvus.
     </button></h2><table id="queryNode.enableSegmentPrune">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">설명</th>
+      <th class="width20">기본값</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        use partition stats to prune data in search/query on shard delegator      </td>
+      <td>        파티션 통계를 사용하여 샤드 위임자의 검색/쿼리에서 데이터를 정리합니다.      </td>
       <td>false</td>
     </tr>
   </tbody>
@@ -1016,13 +1016,13 @@ summary: Learn how to configure queryNode for Milvus.
     </button></h2><table id="queryNode.bloomFilterApplyParallelFactor">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">설명</th>
+      <th class="width20">기본값</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        parallel factor when to apply pk to bloom filter, default to 4*CPU_CORE_NUM      </td>
+      <td>        블룸 필터에 PK를 적용할 때 병렬 계수, 기본값은 4*CPU_CORE_NUM입니다.      </td>
       <td>4</td>
     </tr>
   </tbody>
@@ -1045,13 +1045,13 @@ summary: Learn how to configure queryNode for Milvus.
     </button></h2><table id="queryNode.queryStreamBatchSize">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">설명</th>
+      <th class="width20">기본값</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        return batch size of stream query      </td>
+      <td>        스트림 쿼리의 배치 크기 반환      </td>
       <td>4194304</td>
     </tr>
   </tbody>
@@ -1074,13 +1074,13 @@ summary: Learn how to configure queryNode for Milvus.
     </button></h2><table id="queryNode.workerPooling.size">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">설명</th>
+      <th class="width20">기본값</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        the size for worker querynode client pool      </td>
+      <td>        워커 쿼리노드 클라이언트 풀의 크기      </td>
       <td>10</td>
     </tr>
   </tbody>
@@ -1103,13 +1103,13 @@ summary: Learn how to configure queryNode for Milvus.
     </button></h2><table id="queryNode.ip">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">설명</th>
+      <th class="width20">기본값</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        TCP/IP address of queryNode. If not specified, use the first unicastable address      </td>
+      <td>        쿼리노드의 TCP/IP 주소입니다. 지정하지 않으면 첫 번째 유니캐스트 가능한 주소를 사용합니다.      </td>
       <td></td>
     </tr>
   </tbody>
@@ -1132,13 +1132,13 @@ summary: Learn how to configure queryNode for Milvus.
     </button></h2><table id="queryNode.port">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">설명</th>
+      <th class="width20">기본값</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        TCP port of queryNode      </td>
+      <td>        쿼리 노드의 TCP 포트      </td>
       <td>21123</td>
     </tr>
   </tbody>
@@ -1161,13 +1161,13 @@ summary: Learn how to configure queryNode for Milvus.
     </button></h2><table id="queryNode.grpc.serverMaxSendSize">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">설명</th>
+      <th class="width20">기본값</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        The maximum size of each RPC request that the queryNode can send, unit: byte      </td>
+      <td>        쿼리 노드가 전송할 수 있는 각 RPC 요청의 최대 크기, 단위: 바이트      </td>
       <td>536870912</td>
     </tr>
   </tbody>
@@ -1190,13 +1190,13 @@ summary: Learn how to configure queryNode for Milvus.
     </button></h2><table id="queryNode.grpc.serverMaxRecvSize">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">설명</th>
+      <th class="width20">기본값</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        The maximum size of each RPC request that the queryNode can receive, unit: byte      </td>
+      <td>        쿼리 노드가 수신할 수 있는 각 RPC 요청의 최대 크기, 단위: 바이트      </td>
       <td>268435456</td>
     </tr>
   </tbody>
@@ -1219,13 +1219,13 @@ summary: Learn how to configure queryNode for Milvus.
     </button></h2><table id="queryNode.grpc.clientMaxSendSize">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">설명</th>
+      <th class="width20">기본값</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        The maximum size of each RPC request that the clients on queryNode can send, unit: byte      </td>
+      <td>        쿼리 노드의 클라이언트가 보낼 수 있는 각 RPC 요청의 최대 크기, 단위: 바이트      </td>
       <td>268435456</td>
     </tr>
   </tbody>
@@ -1248,13 +1248,13 @@ summary: Learn how to configure queryNode for Milvus.
     </button></h2><table id="queryNode.grpc.clientMaxRecvSize">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">설명</th>
+      <th class="width20">기본값</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        The maximum size of each RPC request that the clients on queryNode can receive, unit: byte      </td>
+      <td>        쿼리 노드의 클라이언트가 수신할 수 있는 각 RPC 요청의 최대 크기, 단위: 바이트      </td>
       <td>536870912</td>
     </tr>
   </tbody>

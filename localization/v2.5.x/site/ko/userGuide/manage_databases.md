@@ -1,8 +1,8 @@
 ---
 id: manage_databases.md
-title: Manage Databases
+title: 데이터베이스 관리
 ---
-<h1 id="Manage-Databases" class="common-anchor-header">Manage Databases<button data-href="#Manage-Databases" class="anchor-icon" translate="no">
+<h1 id="Manage-Databases" class="common-anchor-header">데이터베이스 관리<button data-href="#Manage-Databases" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -17,11 +17,11 @@ title: Manage Databases
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Similar to traditional database engines, you can also create databases in Milvus and allocate privileges to certain users to manage them. Then such users have the right to manage the collections in the databases. A Milvus cluster supports a maximum of 64 databases.</p>
+    </button></h1><p>기존 데이터베이스 엔진과 마찬가지로 Milvus에서도 데이터베이스를 생성하고 특정 사용자에게 권한을 할당하여 관리할 수 있습니다. 그러면 해당 사용자는 데이터베이스의 컬렉션을 관리할 수 있는 권한을 갖게 됩니다. Milvus 클러스터는 최대 64개의 데이터베이스를 지원합니다.</p>
 <div class="alert note">
-<p>The code snippets on this page use the <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/ORM/Connections/connect.md">PyMilvus ORM module</a> to interact with Milvus. Code snippets with the new <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/About.md">MilvusClient SDK</a> will be available soon.</p>
+<p>이 페이지의 코드 스니펫은 <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/ORM/Connections/connect.md">PyMilvus ORM 모듈을</a> 사용하여 Milvus와 상호 작용합니다. 새로운 <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/About.md">MilvusClient SDK가</a> 포함된 코드 스니펫은 곧 제공될 예정입니다.</p>
 </div>
-<h2 id="Create-database" class="common-anchor-header">Create database<button data-href="#Create-database" class="anchor-icon" translate="no">
+<h2 id="Create-database" class="common-anchor-header">데이터베이스 생성<button data-href="#Create-database" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -37,19 +37,16 @@ title: Manage Databases
         ></path>
       </svg>
     </button></h2><div class="language-python">
-<p>Use <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/ORM/Connections/connect.md">connect()</a> to connect to the Milvus server and <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/ORM/db/create_database.md">create_database()</a> to create a new database:</p>
+<p><a href="https://milvus.io/api-reference/pymilvus/v2.4.x/ORM/Connections/connect.md">connect()를</a> 사용하여 Milvus 서버에 연결하고 <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/ORM/db/create_database.md">create_database()를</a> 사용하여 새 데이터베이스를 생성합니다:</p>
 </div>
 <div class="language-java">
-<p>Use <a href="https://milvus.io/api-reference/java/v2.4.x/v1/Connections/MilvusClient.md">MilvusClient</a> to connect to the Milvus server and <a href="https://milvus.io/api-reference/java/v2.4.x/v1/Database/createDatabase.md">createDatabase()</a> to create a new database:</p>
+<p><a href="https://milvus.io/api-reference/java/v2.4.x/v1/Connections/MilvusClient.md">MilvusClient를</a> 사용하여 Milvus 서버에 연결하고 <a href="https://milvus.io/api-reference/java/v2.4.x/v1/Database/createDatabase.md">createDatabase()를</a> 사용하여 새 데이터베이스를 생성합니다:</p>
 </div>
 <div class="language-javascript">
-<p>Use <a href="https://milvus.io/api-reference/node/v2.4.x/Client/MilvusClient.md">MilvusClient</a> to connect to the Milvus server and <a href="https://milvus.io/api-reference/node/v2.4.x/Database/createDatabase.md">createDatabase()</a> to create a new database:</p>
+<p><a href="https://milvus.io/api-reference/node/v2.4.x/Client/MilvusClient.md">MilvusClient를</a> 사용하여 Milvus 서버에 연결하고 <a href="https://milvus.io/api-reference/node/v2.4.x/Database/createDatabase.md">createDatabase()를</a> 사용하여 새 데이터베이스를 생성합니다:</p>
 </div>
 <div class="multipleCode">
-    <a href="#python">Python </a>
-    <a href="#java">Java</a>
-    <a href="#javascript">Node.js</a>
-</div>
+   <a href="#python">파이썬 </a> <a href="#java">자바</a> <a href="#javascript">Node.js</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> connections, db
 
 conn = connections.<span class="hljs-title function_">connect</span>(host=<span class="hljs-string">&quot;127.0.0.1&quot;</span>, port=<span class="hljs-number">19530</span>)
@@ -95,8 +92,8 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 <span class="hljs-comment">//   detail: &#x27;&#x27;</span>
 <span class="hljs-comment">// }</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>The above code snippets connects to the default database and creates a new database named <code translate="no">my_database</code>.</p>
-<h2 id="Use-a-database" class="common-anchor-header">Use a database<button data-href="#Use-a-database" class="anchor-icon" translate="no">
+<p>위의 코드 조각은 기본 데이터베이스에 연결하여 <code translate="no">my_database</code> 라는 이름의 새 데이터베이스를 생성합니다.</p>
+<h2 id="Use-a-database" class="common-anchor-header">데이터베이스 사용<button data-href="#Use-a-database" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -111,13 +108,10 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>A Milvus cluster ships with a default database, named 'default’. Collections are created in the default database unless otherwise specified.</p>
-<p>To change the default database, do as follows:</p>
+    </button></h2><p>Milvus 클러스터는 'default'라는 이름의 기본 데이터베이스와 함께 제공됩니다. 컬렉션은 별도로 지정하지 않는 한 기본 데이터베이스에 생성됩니다.</p>
+<p>기본 데이터베이스를 변경하려면 다음과 같이 하세요:</p>
 <div class="multipleCode">
-    <a href="#python">Python </a>
-    <a href="#java">Java</a>
-    <a href="#javascript">Node.js</a>
-</div>
+   <a href="#python">파이썬 </a> <a href="#java">자바</a> <a href="#javascript">Node.js</a></div>
 <pre><code translate="no" class="language-python">db.<span class="hljs-title function_">using_database</span>(<span class="hljs-string">&quot;my_database&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-java"><span class="hljs-comment">// No equivalent method is available.</span>
@@ -129,12 +123,9 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 
 <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(res);
 <button class="copy-code-btn"></button></code></pre>
-<p>You can also set a database to use upon connecting to your Milvus cluster as follows:</p>
+<p>다음과 같이 Milvus 클러스터에 연결할 때 사용할 데이터베이스를 설정할 수도 있습니다:</p>
 <div class="multipleCode">
-    <a href="#python">Python </a>
-    <a href="#java">Java</a>
-    <a href="#javascript">Node.js</a>
-</div>
+   <a href="#python">파이썬 </a> <a href="#java">자바</a> <a href="#javascript">노드.js</a></div>
 <pre><code translate="no" class="language-python">conn = connections.<span class="hljs-title function_">connect</span>(
     host=<span class="hljs-string">&quot;127.0.0.1&quot;</span>,
     port=<span class="hljs-string">&quot;19530&quot;</span>,
@@ -155,7 +146,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 <span class="hljs-comment">// 1. Set up a Milvus Client</span>
 client = <span class="hljs-keyword">new</span> <span class="hljs-title class_">MilvusClient</span>({ address, db_name });
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="List-databases" class="common-anchor-header">List databases<button data-href="#List-databases" class="anchor-icon" translate="no">
+<h2 id="List-databases" class="common-anchor-header">데이터베이스 목록<button data-href="#List-databases" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -171,19 +162,16 @@ client = <span class="hljs-keyword">new</span> <span class="hljs-title class_">M
         ></path>
       </svg>
     </button></h2><div class="language-python">
-<p>To find all existing databases in your Milvus cluster, use the <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/ORM/db/list_database.md">list_database()</a> method:</p>
+<p>Milvus 클러스터에 있는 모든 기존 데이터베이스를 찾으려면 <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/ORM/db/list_database.md">list_database()</a> 메서드를 사용합니다:</p>
 </div>
 <div class="language-java">
-<p>To find all existing databases in your Milvus cluster, use the <a href="https://milvus.io/api-reference/java/v2.4.x/v1/Database/listDatabases.md">listDatabases()</a> method:</p>
+<p>Milvus 클러스터에 있는 모든 기존 데이터베이스를 찾으려면 <a href="https://milvus.io/api-reference/java/v2.4.x/v1/Database/listDatabases.md">listDatabases()</a> 메서드를 사용합니다:</p>
 </div>
 <div class="language-javascript">
-<p>To find all existing databases in your Milvus cluster, use the <a href="https://milvus.io/api-reference/node/v2.4.x/Database/listDatabases.md">listDatabases()</a> method:</p>
+<p>Milvus 클러스터에 있는 모든 기존 데이터베이스를 찾으려면 <a href="https://milvus.io/api-reference/node/v2.4.x/Database/listDatabases.md">listDatabases()</a> 메서드를 사용합니다:</p>
 </div>
 <div class="multipleCode">
-    <a href="#python">Python </a>
-    <a href="#java">Java</a>
-    <a href="#javascript">Node.js</a>
-</div>
+   <a href="#python">파이썬 </a> <a href="#java">자바</a> <a href="#javascript">Node.js</a></div>
 <pre><code translate="no" class="language-python">db.list_database()
 
 <span class="hljs-comment"># Output</span>
@@ -209,7 +197,7 @@ System.out.<span class="hljs-built_in">println</span>(listDatabasesResponse.getD
 
 <span class="hljs-comment">// [ &#x27;default&#x27;, &#x27;my_database&#x27; ]</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Drop-database" class="common-anchor-header">Drop database<button data-href="#Drop-database" class="anchor-icon" translate="no">
+<h2 id="Drop-database" class="common-anchor-header">데이터베이스 삭제<button data-href="#Drop-database" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -224,21 +212,18 @@ System.out.<span class="hljs-built_in">println</span>(listDatabasesResponse.getD
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>To drop a database, you have to drop all its collections first. Otherwise, the drop fails.</p>
+    </button></h2><p>데이터베이스를 삭제하려면 먼저 모든 컬렉션을 삭제해야 합니다. 그렇지 않으면 삭제가 실패합니다.</p>
 <div class="language-python">
-<p>To drop a database, use the <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/ORM/db/drop_database.md">drop_database()</a> method:</p>
+<p>데이터베이스를 삭제하려면 <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/ORM/db/drop_database.md">drop_database()</a> 메서드를 사용합니다:</p>
 </div>
 <div class="language-java">
-<p>To drop a database, use the <a href="https://milvus.io/api-reference/java/v2.4.x/v1/Database/dropDatabase.md">dropDatabase()</a> method:</p>
+<p>데이터베이스를 삭제하려면 <a href="https://milvus.io/api-reference/java/v2.4.x/v1/Database/dropDatabase.md">dropDatabase()</a> 메서드를 사용합니다:</p>
 </div>
 <div class="language-javascript">
-<p>To drop a database, use the <a href="https://milvus.io/api-reference/node/v2.4.x/Database/dropDatabase.md">dropDatabase()</a> method:</p>
+<p>데이터베이스를 삭제하려면 <a href="https://milvus.io/api-reference/node/v2.4.x/Database/dropDatabase.md">dropDatabase()</a> 메서드를 사용합니다:</p>
 </div>
 <div class="multipleCode">
-    <a href="#python">Python </a>
-    <a href="#java">Java</a>
-    <a href="#javascript">Node.js</a>
-</div>
+   <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a></div>
 <pre><code translate="no" class="language-python">db.drop_database(<span class="hljs-string">&quot;my_database&quot;</span>)
 
 db.list_database()
@@ -258,7 +243,7 @@ response = client.dropDatabase(dropDatabaseParam);
     <span class="hljs-attr">db_name</span>: <span class="hljs-string">&quot;my_database&quot;</span>,
 });
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Use-RBAC-with-database" class="common-anchor-header">Use RBAC with database<button data-href="#Use-RBAC-with-database" class="anchor-icon" translate="no">
+<h2 id="Use-RBAC-with-database" class="common-anchor-header">데이터베이스에 RBAC 사용<button data-href="#Use-RBAC-with-database" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -273,18 +258,15 @@ response = client.dropDatabase(dropDatabaseParam);
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>RBAC also covers database operations and ensures forward compatibility. The word <strong>database</strong> in the Permission APIs (Grant / Revoke / List Grant) has the following meanings:</p>
+    </button></h2><p>RBAC는 데이터베이스 작업에도 적용되며 앞으로의 호환성을 보장합니다. 권한 API(부여/취소/목록 부여)에서 <strong>데이터베이스라는</strong> 단어의 의미는 다음과 같습니다:</p>
 <ul>
-<li>If neither a Milvus connection nor a Permission API call specifies a <code translate="no">db_name</code>, <strong>database</strong> refers to the default database.</li>
-<li>If a Milvus connection specifies a <code translate="no">db_name</code>, but a Permission API call afterward does not, <strong>database</strong> refers to the database whose name was specified in the Milvus connection.</li>
-<li>If a Permission API call is made upon a Milvus connection, with or without <code translate="no">db_name</code> specified, <strong>database</strong> refers to the database whose name was specified in the Permission API call.</li>
+<li>Milvus 연결이나 권한 API 호출에 <code translate="no">db_name</code>, <strong>데이터베이스가</strong> 지정되지 않은 경우 <strong>데이터베이스는</strong> 기본 데이터베이스를 참조합니다.</li>
+<li>Milvus 연결에서 <code translate="no">db_name</code> 을 지정했지만 이후 권한 API 호출에서 지정하지 않은 경우 <strong>데이터베이스는</strong> Milvus 연결에 이름이 지정된 데이터베이스를 참조합니다.</li>
+<li>Milvus 연결에서 <code translate="no">db_name</code> 을 지정하거나 지정하지 않고 권한 API 호출이 이루어진 경우 <strong>데이터베이스는</strong> 권한 API 호출에 이름이 지정된 데이터베이스를 참조합니다.</li>
 </ul>
-<p>The following code snippet is shared among the listed blocks below.</p>
+<p>다음 코드 스니펫은 아래 나열된 블록에서 공유됩니다.</p>
 <div class="multipleCode">
-    <a href="#python">Python </a>
-    <a href="#java">Java</a>
-    <a href="#javascript">Node.js</a>
-</div>
+   <a href="#python">파이썬 </a> <a href="#java">자바</a> <a href="#javascript">Node.js</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> connections, Role
 
 _URI = <span class="hljs-string">&quot;http://localhost:19530&quot;</span>
@@ -338,12 +320,9 @@ _DB_NAME = <span class="hljs-string">&quot;default&quot;</span>
 }
 <button class="copy-code-btn"></button></code></pre>
 <ul>
-<li><p>If neither a Milvus connection nor a Permission API call specifies a <code translate="no">db_name</code>, <strong>database</strong> refers to the default database.</p>
+<li><p>Milvus 연결이나 권한 API 호출 모두 <code translate="no">db_name</code> 을 지정하지 않으면 <strong>데이터베이스는</strong> 기본 데이터베이스를 참조합니다.</p>
 <p><div class="multipleCode">
-<a href="#python">Python </a>
-<a href="#java">Java</a>
-<a href="#javascript">Node.js</a>
-</div></p>
+<a href="#python">Python </a><a href="#java">Java</a><a href="#javascript">Node.js</a></div></p>
 <pre><code translate="no" class="language-python">_ROLE_NAME = <span class="hljs-string">&quot;test_role&quot;</span>
 _PRIVILEGE_INSERT = <span class="hljs-string">&quot;Insert&quot;</span>
 
@@ -447,12 +426,9 @@ response = client.revokeRolePrivilege(RevokeRolePrivilegeParam.newBuilder()
   <span class="hljs-attr">privilege</span>: <span class="hljs-variable constant_">PRIVILEGE_INSERT</span>,
 });
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p>If a Milvus connection specifies a <code translate="no">db_name</code>, but a Permission API call afterward does not, <strong>database</strong> refers to the database whose name was specified in the Milvus connection.</p>
+<li><p>Milvus 연결에 <code translate="no">db_name</code> 이 지정되어 있지만 이후 권한 API 호출에 지정되지 않은 경우 <strong>데이터베이스는</strong> Milvus 연결에 이름이 지정된 데이터베이스를 참조합니다.</p>
 <p><div class="multipleCode">
-<a href="#python">Python </a>
-<a href="#java">Java</a>
-<a href="#javascript">Node.js</a>
-</div></p>
+<a href="#python">파이썬 </a><a href="#java">자바</a><a href="#javascript">Node.js</a></div></p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># <span class="hljs-doctag">NOTE:</span> please make sure the &#x27;foo&#x27; db has been created</span>
 connect_to_milvus(db_name=<span class="hljs-string">&quot;foo&quot;</span>)
 
@@ -532,12 +508,9 @@ response = client.revokeRolePrivilege(RevokeRolePrivilegeParam.newBuilder()
   <span class="hljs-attr">privilege</span>: <span class="hljs-variable constant_">PRIVILEGE_INSERT</span>,
 });
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p>If a Permission API call is made upon a Milvus connection, with or without <code translate="no">db_name</code> specified, <strong>database</strong> refers to the database whose name was specified in the Permission API call.</p>
+<li><p>Milvus 연결에 <code translate="no">db_name</code> 이 지정되어 있거나 지정되지 않은 상태에서 권한 API 호출이 수행되는 경우 <strong>데이터베이스는</strong> 권한 API 호출에 이름이 지정된 데이터베이스를 참조합니다.</p>
 <p><div class="multipleCode">
-<a href="#python">Python </a>
-<a href="#java">Java</a>
-<a href="#javascript">Node.js</a>
-</div></p>
+<a href="#python">파이썬 </a><a href="#java">자바</a><a href="#javascript">Node.js</a></div></p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># <span class="hljs-doctag">NOTE:</span> please make sure the &#x27;foo&#x27; db has been created</span>
 
 db_name = <span class="hljs-string">&quot;foo&quot;</span>
@@ -603,7 +576,7 @@ response = client.revokeRolePrivilege(RevokeRolePrivilegeParam.newBuilder()
 <pre><code translate="no" class="language-javascript"><span class="hljs-comment">// The Node.js SDK currently cannot support this case.</span>
 <button class="copy-code-btn"></button></code></pre></li>
 </ul>
-<h2 id="Whats-next" class="common-anchor-header">What’s next<button data-href="#Whats-next" class="anchor-icon" translate="no">
+<h2 id="Whats-next" class="common-anchor-header">다음 단계<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -619,6 +592,6 @@ response = client.revokeRolePrivilege(RevokeRolePrivilegeParam.newBuilder()
         ></path>
       </svg>
     </button></h2><ul>
-<li><p><a href="/docs/rbac.md">Enable RBAC</a></p></li>
-<li><p><a href="/docs/multi_tenancy.md">Multi-tenancy</a></p></li>
+<li><p><a href="/docs/ko/rbac.md">RBAC 활성화</a></p></li>
+<li><p><a href="/docs/ko/multi_tenancy.md">멀티 테넌시</a></p></li>
 </ul>

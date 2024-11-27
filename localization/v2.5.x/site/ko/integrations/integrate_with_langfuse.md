@@ -1,11 +1,11 @@
 ---
 id: integrate_with_langfuse.md
 summary: >-
-  This is a simple cookbook that demonstrates how to use the LlamaIndex Langfuse
-  integration. It uses Milvus Lite to store the documents and Query.
-title: Cookbook LlamaIndex & Milvus Integration
+  이 문서는 라마인덱스 랑퓨즈 통합을 사용하는 방법을 보여주는 간단한 쿡북입니다. 문서와 쿼리를 저장하기 위해 Milvus Lite를
+  사용합니다.
+title: 쿡북 라마인덱스 &amp; 밀버스 통합
 ---
-<h1 id="Cookbook---LlamaIndex--Milvus-Integration" class="common-anchor-header">Cookbook - LlamaIndex &amp; Milvus Integration<button data-href="#Cookbook---LlamaIndex--Milvus-Integration" class="anchor-icon" translate="no">
+<h1 id="Cookbook---LlamaIndex--Milvus-Integration" class="common-anchor-header">쿡북 - 라마인덱스와 밀버스 통합<button data-href="#Cookbook---LlamaIndex--Milvus-Integration" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -23,9 +23,9 @@ title: Cookbook LlamaIndex & Milvus Integration
     </button></h1><p><a target="_blank" href="https://colab.research.google.com/github/langfuse/langfuse-docs/blob/main/cookbook/integration_llama-index_milvus-lite.ipynb">
 <img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/>
 </a></p>
-<p>This is a simple cookbook that demonstrates how to use the <a href="https://langfuse.com/docs/integrations/llama-index/get-started">LlamaIndex Langfuse integration</a>. It uses Milvus Lite to store the documents and Query.</p>
-<p><a href="https://github.com/milvus-io/milvus-lite/">Milvus Lite</a> is the lightweight version of Milvus, an open-source vector database that powers AI applications with vector embeddings and similarity search.</p>
-<h2 id="Setup" class="common-anchor-header">Setup<button data-href="#Setup" class="anchor-icon" translate="no">
+<p>이 쿡북은 <a href="https://langfuse.com/docs/integrations/llama-index/get-started">라마인덱스 랑퓨즈 통합을</a> 사용하는 방법을 설명하는 간단한 쿡북입니다. 문서와 쿼리를 저장하기 위해 Milvus Lite를 사용합니다.</p>
+<p>Milvus<a href="https://github.com/milvus-io/milvus-lite/">Lite는</a> 벡터 임베딩 및 유사도 검색을 통해 AI 애플리케이션을 지원하는 오픈 소스 벡터 데이터베이스인 Milvus의 경량 버전입니다.</p>
+<h2 id="Setup" class="common-anchor-header">설정<button data-href="#Setup" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -40,10 +40,10 @@ title: Cookbook LlamaIndex & Milvus Integration
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Make sure you have both <code translate="no">llama-index</code> and <code translate="no">langfuse</code> installed.</p>
+    </button></h2><p><code translate="no">llama-index</code> 및 <code translate="no">langfuse</code> 이 모두 설치되어 있는지 확인합니다.</p>
 <pre><code translate="no" class="language-python">$ pip install llama-index langfuse llama-index-vector-stores-milvus --upgrade
 <button class="copy-code-btn"></button></code></pre>
-<p>Initialize the integration. Get your API keys from the <a href="https://cloud.langfuse.com">Langfuse project settings</a>, and replace public_key secret_key with your key values. This example uses OpenAI for embeddings and chat completions, so you also need to specify your OpenAI key in environment variable.</p>
+<p>연동을 초기화합니다. <a href="https://cloud.langfuse.com">Langfuse 프로젝트 설정에서</a> API 키를 가져와 public_key secret_key를 키 값으로 바꿉니다. 이 예제에서는 임베딩 및 채팅 완성을 위해 OpenAI를 사용하므로 환경 변수에 OpenAI 키도 지정해야 합니다.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> os
 
 <span class="hljs-comment"># Get keys for your project from the project settings page</span>
@@ -63,7 +63,7 @@ os.environ[<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</span>] = <span 
 langfuse_callback_handler = <span class="hljs-title class_">LlamaIndexCallbackHandler</span>()
 <span class="hljs-title class_">Settings</span>.<span class="hljs-property">callback_manager</span> = <span class="hljs-title class_">CallbackManager</span>([langfuse_callback_handler])
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Index-using-Milvus-Lite" class="common-anchor-header">Index using Milvus Lite<button data-href="#Index-using-Milvus-Lite" class="anchor-icon" translate="no">
+<h2 id="Index-using-Milvus-Lite" class="common-anchor-header">Milvus Lite를 사용한 색인<button data-href="#Index-using-Milvus-Lite" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -103,7 +103,7 @@ index = VectorStoreIndex.from_documents(
     [doc1,doc2], storage_context=storage_context
 )
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Query" class="common-anchor-header">Query<button data-href="#Query" class="anchor-icon" translate="no">
+<h2 id="Query" class="common-anchor-header">쿼리<button data-href="#Query" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -126,7 +126,7 @@ response = index.as_query_engine().query(<span class="hljs-string">&quot;What di
 response = index.as_chat_engine().chat(<span class="hljs-string">&quot;What did he do growing up?&quot;</span>)
 <span class="hljs-built_in">print</span>(response)
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Explore-traces-in-Langfuse" class="common-anchor-header">Explore traces in Langfuse<button data-href="#Explore-traces-in-Langfuse" class="anchor-icon" translate="no">
+<h2 id="Explore-traces-in-Langfuse" class="common-anchor-header">Langfuse에서 추적 탐색<button data-href="#Explore-traces-in-Langfuse" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -144,20 +144,18 @@ response = index.as_chat_engine().chat(<span class="hljs-string">&quot;What did 
     </button></h2><pre><code translate="no" class="language-python"><span class="hljs-comment"># As we want to immediately see result in Langfuse, we need to flush the callback handler</span>
 langfuse_callback_handler.flush()
 <button class="copy-code-btn"></button></code></pre>
-<p>Done! ✨ You see traces of your index and query in your Langfuse project.</p>
-<p>Example traces (public links):</p>
+<p>완료! 랭퓨즈 프로젝트에서 인덱스와 쿼리의 추적을 확인할 수 있습니다.</p>
+<p>트레이스 예시(공개 링크):</p>
 <ol>
 <li><a href="https://cloud.langfuse.com/project/cloramnkj0002jz088vzn1ja4/traces/2b26fc72-044f-4b0b-a3c3-485328975161">Query</a></li>
-<li><a href="https://cloud.langfuse.com/project/cloramnkj0002jz088vzn1ja4/traces/72503163-2b25-4693-9cc9-56190b8e32b9">Query (chat)</a></li>
+<li><a href="https://cloud.langfuse.com/project/cloramnkj0002jz088vzn1ja4/traces/72503163-2b25-4693-9cc9-56190b8e32b9">쿼리(채팅)</a></li>
 </ol>
-<p>Trace in Langfuse:</p>
+<p>Langfuse에서 추적:</p>
 <p>
-  <span class="img-wrapper">
-    <img translate="no" src="https://static.langfuse.com/llamaindex-langfuse-docs.gif" alt="Langfuse Traces" class="doc-image" id="langfuse-traces" />
-    <span>Langfuse Traces</span>
-  </span>
-</p>
-<h2 id="Interested-in-more-advanced-features" class="common-anchor-header">Interested in more advanced features?<button data-href="#Interested-in-more-advanced-features" class="anchor-icon" translate="no">
+  
+   <span class="img-wrapper"> <img translate="no" src="https://static.langfuse.com/llamaindex-langfuse-docs.gif" alt="Langfuse Traces" class="doc-image" id="langfuse-traces" />
+   </span> <span class="img-wrapper"> <span>Langfuse 추적</span> </span></p>
+<h2 id="Interested-in-more-advanced-features" class="common-anchor-header">고급 기능에 관심이 있으신가요?<button data-href="#Interested-in-more-advanced-features" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -172,8 +170,8 @@ langfuse_callback_handler.flush()
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>See the full <a href="https://langfuse.com/docs/integrations/llama-index/get-started">integration docs</a> to learn more about advanced features and how to use them:</p>
+    </button></h2><p>전체 <a href="https://langfuse.com/docs/integrations/llama-index/get-started">통합 문서를</a> 참조하여 고급 기능 및 사용 방법에 대해 자세히 알아보세요:</p>
 <ul>
-<li>Interoperability with Langfuse Python SDK and other integrations</li>
-<li>Add custom metadata and attributes to the traces</li>
+<li>Langfuse Python SDK 및 기타 통합과의 상호 운용성</li>
+<li>트레이스에 사용자 정의 메타데이터 및 속성 추가하기</li>
 </ul>

@@ -1,9 +1,9 @@
 ---
 id: schema.md
-summary: Learn how to define a schema in Milvus.
-title: Manage Schema
+summary: Milvus에서 스키마를 정의하는 방법을 알아보세요.
+title: 스키마 관리
 ---
-<h1 id="Manage-Schema" class="common-anchor-header">Manage Schema<button data-href="#Manage-Schema" class="anchor-icon" translate="no">
+<h1 id="Manage-Schema" class="common-anchor-header">스키마 관리<button data-href="#Manage-Schema" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -18,8 +18,8 @@ title: Manage Schema
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>This topic introduces schema in Milvus. Schema is used to define the properties of a collection and the fields within.</p>
-<h2 id="Field-schema" class="common-anchor-header">Field schema<button data-href="#Field-schema" class="anchor-icon" translate="no">
+    </button></h1><p>이 항목에서는 Milvus의 스키마에 대해 소개합니다. 스키마는 컬렉션의 속성과 그 안의 필드를 정의하는 데 사용됩니다.</p>
+<h2 id="Field-schema" class="common-anchor-header">필드 스키마<button data-href="#Field-schema" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -34,61 +34,61 @@ title: Manage Schema
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>A field schema is the logical definition of a field. It is the first thing you need to define before defining a <a href="#Collection-schema">collection schema</a> and <a href="/docs/manage-collections.md">managing collections</a>.</p>
-<p>Milvus supports only one primary key field in a collection.</p>
-<h3 id="Field-schema-properties" class="common-anchor-header">Field schema properties</h3><table class="properties">
+    </button></h2><p>필드 스키마는 필드의 논리적 정의입니다. <a href="#Collection-schema">컬렉션 스키마를</a> 정의하고 <a href="/docs/ko/manage-collections.md">컬렉션을 관리하기</a> 전에 가장 먼저 정의해야 하는 항목입니다.</p>
+<p>Milvus는 컬렉션에서 하나의 기본 키 필드만 지원합니다.</p>
+<h3 id="Field-schema-properties" class="common-anchor-header">필드 스키마 속성</h3><table class="properties">
     <thead>
     <tr>
-        <th>Properties</th>
-        <th>Description</th>
-        <th>Note</th>
+        <th>속성</th>
+        <th>설명</th>
+        <th>참고</th>
     </tr>
     </thead>
     <tbody>
     <tr>
         <td><code translate="no">name</code></td>
-        <td>Name of the field in the collection to create</td>
-        <td>Data type: String.<br/>Mandatory</td>
+        <td>생성할 컬렉션의 필드 이름</td>
+        <td>데이터 유형입니다: 문자열<br/>필수</td>
     </tr>
     <tr>
         <td><code translate="no">dtype</code></td>
-        <td>Data type of the field</td>
-        <td>Mandatory</td>
+        <td>필드의 데이터 유형</td>
+        <td>필수</td>
     </tr>
     <tr>
         <td><code translate="no">description</code></td>
-        <td>Description of the field</td>
-        <td>Data type: String.<br/>Optional</td>
+        <td>필드에 대한 설명</td>
+        <td>데이터 유형: 문자열<br/>선택 사항</td>
     </tr>
     <tr>
         <td><code translate="no">is_primary</code></td>
-        <td>Whether to set the field as the primary key field or not</td>
-        <td>Data type: Boolean (<code translate="no">true</code> or <code translate="no">false</code>).<br/>Mandatory for the primary key field</td>
+        <td>필드를 기본 키 필드로 설정할지 여부입니다.</td>
+        <td>데이터 유형: 부울 (<code translate="no">true</code> 또는 <code translate="no">false</code>).<br/>기본 키 필드의 경우 필수입니다.</td>
     </tr>
         <tr>
-            <td><code translate="no">auto_id</code> (Mandatory for primary key field)</td>
-            <td>Switch to enable or disable automatic ID (primary key) allocation.</td>
-            <td><code translate="no">True</code> or <code translate="no">False</code></td>
+            <td><code translate="no">auto_id</code> (기본 키 필드의 경우 필수)</td>
+            <td>자동 ID(기본 키) 할당을 활성화 또는 비활성화할지 여부를 전환합니다.</td>
+            <td><code translate="no">True</code> 또는 <code translate="no">False</code></td>
         </tr>
         <tr>
-            <td><code translate="no">max_length</code> (Mandatory for VARCHAR field)</td>
-            <td>Maximum byte length for strings allowed to be inserted. Note that multibyte characters (e.g., Unicode characters) may occupy more than one byte each, so ensure the byte length of inserted strings does not exceed the specified limit.</td>
+            <td><code translate="no">max_length</code> (VARCHAR 필드에 필수)</td>
+            <td>삽입할 수 있는 문자열의 최대 바이트 길이입니다. 멀티바이트 문자(예: 유니코드 문자)는 각각 1바이트 이상을 차지할 수 있으므로 삽입된 문자열의 바이트 길이가 지정된 제한을 초과하지 않도록 주의하세요.</td>
             <td>[1, 65,535]</td>
         </tr>
     <tr>
         <td><code translate="no">dim</code></td>
-        <td>Dimension of the vector</td>
-            <td>Data type: Integer &isin;[1, 32768].<br/>Mandatory for a dense vector field. Omit for a <a href="https://milvus.io/docs/sparse_vector.md">sparse vector</a> field.</td>
+        <td>벡터의 차원</td>
+            <td>데이터 유형: 정수 &isin;[1, 32768]<br/>고밀도 벡터 필드의 경우 필수입니다. <a href="https://milvus.io/docs/sparse_vector.md">스파스 벡터</a> 필드의 경우 생략합니다.</td>
     </tr>
     <tr>
         <td><code translate="no">is_partition_key</code></td>
-        <td>Whether this field is a partition-key field.</td>
-        <td>Data type: Boolean (<code translate="no">true</code> or <code translate="no">false</code>).</td>
+        <td>이 필드가 파티션 키 필드인지 여부입니다.</td>
+        <td>데이터 유형: 부울(<code translate="no">true</code> 또는 <code translate="no">false</code>).</td>
     </tr>
     </tbody>
 </table>
-<h3 id="Create-a-field-schema" class="common-anchor-header">Create a field schema</h3><p>To reduce the complexity in data inserts, Milvus allows you to specify a default value for each scalar field during field schema creation, excluding the primary key field. This indicates that if you leave a field empty when inserting data, the default value you specified for this field applies.</p>
-<p>Create a regular field schema:</p>
+<h3 id="Create-a-field-schema" class="common-anchor-header">필드 스키마 만들기</h3><p>데이터 삽입의 복잡성을 줄이기 위해 Milvus에서는 필드 스키마를 생성하는 동안 기본 키 필드를 제외한 각 스칼라 필드에 대해 기본값을 지정할 수 있습니다. 즉, 데이터를 삽입할 때 필드를 비워두면 이 필드에 지정한 기본값이 적용됩니다.</p>
+<p>일반 필드 스키마를 만듭니다:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> FieldSchema
 id_field = FieldSchema(name=<span class="hljs-string">&quot;id&quot;</span>, dtype=DataType.INT64, is_primary=<span class="hljs-literal">True</span>, description=<span class="hljs-string">&quot;primary id&quot;</span>)
 age_field = FieldSchema(name=<span class="hljs-string">&quot;age&quot;</span>, dtype=DataType.INT64, description=<span class="hljs-string">&quot;age&quot;</span>)
@@ -97,7 +97,7 @@ embedding_field = FieldSchema(name=<span class="hljs-string">&quot;embedding&quo
 <span class="hljs-comment"># The following creates a field and use it as the partition key</span>
 position_field = FieldSchema(name=<span class="hljs-string">&quot;position&quot;</span>, dtype=DataType.VARCHAR, max_length=<span class="hljs-number">256</span>, is_partition_key=<span class="hljs-literal">True</span>)
 <button class="copy-code-btn"></button></code></pre>
-<p>Create a field schema with default field values:</p>
+<p>기본 필드 값을 사용하여 필드 스키마를 생성합니다:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> FieldSchema
 
 fields = [
@@ -107,16 +107,16 @@ fields = [
   embedding_field = FieldSchema(name=<span class="hljs-string">&quot;embedding&quot;</span>, dtype=DataType.FLOAT_VECTOR, dim=<span class="hljs-number">128</span>, description=<span class="hljs-string">&quot;vector&quot;</span>)
 ]
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Supported-data-types" class="common-anchor-header">Supported data types</h3><p><code translate="no">DataType</code> defines the kind of data a field contains. Different fields support different data types.</p>
+<h3 id="Supported-data-types" class="common-anchor-header">지원되는 데이터 유형</h3><p><code translate="no">DataType</code> 은 필드에 포함된 데이터의 종류를 정의합니다. 필드마다 지원되는 데이터 유형이 다릅니다.</p>
 <ul>
-<li><p>Primary key field supports:</p>
+<li><p>기본 키 필드 지원</p>
 <ul>
 <li>INT64: numpy.int64</li>
-<li>VARCHAR: VARCHAR</li>
+<li>varchar: varchar</li>
 </ul></li>
-<li><p>Scalar field supports:</p>
+<li><p>스칼라 필드 지원:</p>
 <ul>
-<li>BOOL: Boolean (<code translate="no">true</code> or <code translate="no">false</code>)</li>
+<li>BOOL: 부울(<code translate="no">true</code> 또는 <code translate="no">false</code>)</li>
 <li>INT8: numpy.int8</li>
 <li>INT16: numpy.int16</li>
 <li>INT32: numpy.int32</li>
@@ -124,21 +124,21 @@ fields = [
 <li>FLOAT: numpy.float32</li>
 <li>DOUBLE: numpy.double</li>
 <li>VARCHAR: VARCHAR</li>
-<li>JSON: <a href="/docs/use-json-fields.md">JSON</a></li>
-<li>Array: <a href="/docs/array_data_type.md">Array</a></li>
+<li>JSON: <a href="/docs/ko/use-json-fields.md">JSON</a></li>
+<li>Array: <a href="/docs/ko/array_data_type.md">Array</a></li>
 </ul>
-<p>JSON as a composite data type is available. A JSON field comprises key-value pairs. Each key is a string, and a value can be a number, string, boolean value, array, or list. For details, refer to <a href="/docs/use-json-fields.md">JSON: a new data type</a>.</p></li>
-<li><p>Vector field supports:</p>
+<p>복합 데이터 유형으로 JSON을 사용할 수 있습니다. JSON 필드는 키-값 쌍으로 구성됩니다. 각 키는 문자열이고 값은 숫자, 문자열, 부울 값, 배열 또는 목록일 수 있습니다. 자세한 내용은 <a href="/docs/ko/use-json-fields.md">JSON: 새로운 데이터 유형을</a> 참조하세요.</p></li>
+<li><p>벡터 필드 지원</p>
 <ul>
-<li>BINARY_VECTOR: Stores binary data as a sequence of 0s and 1s, used for compact feature representation in image processing and information retrieval.</li>
-<li>FLOAT_VECTOR: Stores 32-bit floating-point numbers, commonly used in scientific computing and machine learning for representing real numbers.</li>
-<li>FLOAT16_VECTOR: Stores 16-bit half-precision floating-point numbers, used in deep learning and GPU computations for memory and bandwidth efficiency.</li>
-<li>BFLOAT16_VECTOR: Stores 16-bit floating-point numbers with reduced precision but the same exponent range as Float32, popular in deep learning for reducing memory and computational requirements without significantly impacting accuracy.</li>
-<li>SPARSE_FLOAT_VECTOR: Stores a list of non-zero elements and their corresponding indices, used for representing sparse vectors. For more information, refer to <a href="/docs/sparse_vector.md">Sparse Vectors</a>.</li>
+<li>바이너리_벡터: 이진 데이터를 0과 1의 시퀀스로 저장하며, 이미지 처리 및 정보 검색에서 특징을 간결하게 표현하는 데 사용됩니다.</li>
+<li>FLOAT_VECTOR: 과학 컴퓨팅 및 머신 러닝에서 실수를 표현하는 데 일반적으로 사용되는 32비트 부동소수점 숫자를 저장합니다.</li>
+<li>FLOAT16_VECTOR: 메모리 및 대역폭 효율성을 위해 딥러닝 및 GPU 계산에 사용되는 16비트 반정밀도 부동소수점 숫자를 저장합니다.</li>
+<li>BFLOAT16_VECTOR: 정확도는 떨어지지만 Float32와 동일한 지수 범위를 가진 16비트 부동 소수점 숫자를 저장하며, 정확도에 큰 영향을 주지 않고 메모리 및 계산 요구 사항을 줄이기 위해 딥 러닝에서 널리 사용됩니다.</li>
+<li>SPARSE_FLOAT_VECTOR: 희소 벡터를 표현하는 데 사용되는 0이 아닌 요소 목록과 해당 인덱스를 저장합니다. 자세한 내용은 <a href="/docs/ko/sparse_vector.md">스파스 벡터를</a> 참조하세요.</li>
 </ul>
-<p>Milvus supports multiple vector fields in a collection. For more information, refer to <a href="/docs/multi-vector-search.md">Hybrid Search</a>.</p></li>
+<p>Milvus는 컬렉션에서 여러 개의 벡터 필드를 지원합니다. 자세한 내용은 <a href="/docs/ko/multi-vector-search.md">하이브리드 검색을</a> 참조하세요.</p></li>
 </ul>
-<h2 id="Collection-schema" class="common-anchor-header">Collection schema<button data-href="#Collection-schema" class="anchor-icon" translate="no">
+<h2 id="Collection-schema" class="common-anchor-header">컬렉션 스키마<button data-href="#Collection-schema" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -153,41 +153,40 @@ fields = [
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>A collection schema is the logical definition of a collection. Usually you need to define the <a href="#Field-schema">field schema</a> before defining a collection schema and <a href="/docs/manage-collections.md">managing collections</a>.</p>
-<h3 id="Collection-schema-properties" class="common-anchor-header">Collection schema properties</h3><table class="properties">
+    </button></h2><p>컬렉션 스키마는 컬렉션의 논리적 정의입니다. 일반적으로 컬렉션 스키마를 정의하고 <a href="/docs/ko/manage-collections.md">컬렉션을 관리하기</a> 전에 <a href="#Field-schema">필드 스키마를</a> 정의해야 합니다.</p>
+<h3 id="Collection-schema-properties" class="common-anchor-header">컬렉션 스키마 속성</h3><table class="properties">
     <thead>
     <tr>
-        <th>Properties</th>
-        <th>Description</th>
-        <th>Note</th>
+        <th>속성</th>
+        <th>설명</th>
+        <th>참고</th>
     </tr>
     </thead>
     <tbody>
     <tr>
         <td><code translate="no">field</code></td>
-        <td>Fields in the collection to create</td>
-        <td>Mandatory</td>
+        <td>만들 컬렉션의 필드</td>
+        <td>필수</td>
     </tr>
     <tr>
         <td><code translate="no">description</code></td>
-        <td>Description of the collection</td>
-        <td>Data type: String.<br/>Optional</td>
+        <td>컬렉션에 대한 설명</td>
+        <td>데이터 유형입니다: 문자열<br/>선택 사항</td>
     </tr>
     <tr>
         <td><code translate="no">partition_key_field</code></td>
-        <td>Name of a field that is designed to act as the partition key.</td>
-        <td>Data type: String.<br/>Optional</td>
+        <td>파티션 키 역할을 하도록 설계된 필드의 이름입니다.</td>
+        <td>데이터 유형: 문자열<br/>선택 사항</td>
     </tr>
     <tr>
         <td><code translate="no">enable_dynamic_field</code></td>
-        <td>Whether to enable dynamic schema or not</td>
-        <td>Data type: Boolean (<code translate="no">true</code> or <code translate="no">false</code>).<br/>Optional, defaults to <code translate="no">False</code>.<br/>For details on dynamic schema, refer to <a herf="enable-dynamic-field.md">Dynamic Schema</a> and the user guides for managing collections.</td>
+        <td>동적 스키마 활성화 여부</td>
+        <td>데이터 유형: 부울(<code translate="no">true</code> 또는 <code translate="no">false</code>).<br/>선택 사항, 기본값은 <code translate="no">False</code> 입니다.<br/>동적 스키마에 대한 자세한 내용은 동적 <a herf="enable-dynamic-field.md">스키마</a> 및 컬렉션 관리를 위한 사용자 가이드를 참조하세요.</td>
     </tr>
     </tbody>
 </table>
-<h3 id="Create-a-collection-schema" class="common-anchor-header">Create a collection schema</h3><div class="alert note">
-  Define the field schemas before defining a collection schema.
-</div>
+<h3 id="Create-a-collection-schema" class="common-anchor-header">컬렉션 스키마 만들기</h3><div class="alert note">
+  컬렉션 스키마를 정의하기 전에 필드 스키마를 정의합니다.</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> FieldSchema, CollectionSchema
 id_field = FieldSchema(name=<span class="hljs-string">&quot;id&quot;</span>, dtype=DataType.INT64, is_primary=<span class="hljs-literal">True</span>, description=<span class="hljs-string">&quot;primary id&quot;</span>)
 age_field = FieldSchema(name=<span class="hljs-string">&quot;age&quot;</span>, dtype=DataType.INT64, description=<span class="hljs-string">&quot;age&quot;</span>)
@@ -199,7 +198,7 @@ position_field = FieldSchema(name=<span class="hljs-string">&quot;position&quot;
 <span class="hljs-comment"># Set enable_dynamic_field to True if you need to use dynamic fields. </span>
 schema = CollectionSchema(fields=[id_field, age_field, embedding_field], auto_id=<span class="hljs-literal">False</span>, enable_dynamic_field=<span class="hljs-literal">True</span>, description=<span class="hljs-string">&quot;desc of a collection&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
-<p>Create a collection with the schema specified:</p>
+<p>스키마를 지정한 컬렉션을 만듭니다:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> <span class="hljs-title class_">Collection</span>,connections
 conn = connections.<span class="hljs-title function_">connect</span>(host=<span class="hljs-string">&quot;127.0.0.1&quot;</span>, port=<span class="hljs-number">19530</span>)
 collection_name1 = <span class="hljs-string">&quot;tutorial_1&quot;</span>
@@ -207,14 +206,14 @@ collection1 = <span class="hljs-title class_">Collection</span>(name=collection_
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <ul>
-<li>You can define the shard number with <code translate="no">shards_num</code>.</li>
-<li>You can define the Milvus server on which you wish to create a collection by specifying the alias in <code translate="no">using</code>.</li>
-<li>You can enable the partition key feature on a field by setting <code translate="no">is_partition_key</code> to <code translate="no">True</code> on the field if you need to implement <a href="/docs/multi_tenancy.md">partition-key-based multi-tenancy</a>.</li>
-<li>You can enable dynamic schema by setting <code translate="no">enable_dynamic_field</code> to <code translate="no">True</code> in the collection schema if you need to <a href="/docs/enable-dynamic-field.md">enable dynamic field</a>.</li>
+<li>샤드 번호는 <code translate="no">shards_num</code> 로 정의할 수 있습니다.</li>
+<li><code translate="no">using</code> 에 별칭을 지정하여 컬렉션을 생성할 Milvus 서버를 정의할 수 있습니다.</li>
+<li><a href="/docs/ko/multi_tenancy.md">파티션 키 기반 멀티 테넌시를</a> 구현해야 하는 경우 필드에서 <code translate="no">is_partition_key</code> 을 <code translate="no">True</code> 으로 설정하여 필드에서 파티션 키 기능을 활성화할 수 있습니다.</li>
+<li>동적 <a href="/docs/ko/enable-dynamic-field.md">필드를 활성화해야</a> 하는 경우 컬렉션 스키마에서 <code translate="no">enable_dynamic_field</code> 을 <code translate="no">True</code> 으로 설정하여 동적 스키마를 활성화할 수 있습니다.</li>
 </ul>
 </div>
 <p><br/>
-You can also create a collection with <code translate="no">Collection.construct_from_dataframe</code>, which automatically generates a collection schema from DataFrame and creates a collection.</p>
+또한 <code translate="no">Collection.construct_from_dataframe</code> 을 사용하여 컬렉션을 만들 수 있으며, 이 경우 DataFrame에서 컬렉션 스키마가 자동으로 생성되어 컬렉션이 생성됩니다.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> pandas <span class="hljs-keyword">as</span> pd
 df = pd.DataFrame({
     <span class="hljs-string">&quot;id&quot;</span>: [i <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(nb)],
@@ -230,7 +229,7 @@ collection, ins_res = Collection.construct_from_dataframe(
     auto_id=<span class="hljs-literal">False</span>
     )
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Whats-next" class="common-anchor-header">What’s next<button data-href="#Whats-next" class="anchor-icon" translate="no">
+<h2 id="Whats-next" class="common-anchor-header">다음 단계<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -246,7 +245,7 @@ collection, ins_res = Collection.construct_from_dataframe(
         ></path>
       </svg>
     </button></h2><ul>
-<li>Learn how to prepare schema when <a href="/docs/manage-collections.md">managing collections</a>.</li>
-<li>Read more about <a href="/docs/enable-dynamic-field.md">dynamic schema</a>.</li>
-<li>Read more about partition-key in <a href="/docs/multi_tenancy.md">Multi-tenancy</a>.</li>
+<li><a href="/docs/ko/manage-collections.md">컬렉션을 관리할</a> 때 스키마를 준비하는 방법을 알아보세요.</li>
+<li><a href="/docs/ko/enable-dynamic-field.md">동적 스키마에</a> 대해 자세히 알아보세요.</li>
+<li><a href="/docs/ko/multi_tenancy.md">멀티테넌시의</a> 파티션 키에 대해 자세히 알아보세요.</li>
 </ul>

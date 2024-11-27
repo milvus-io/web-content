@@ -2,9 +2,9 @@
 id: configure_quotaandlimits.md
 related_key: configure
 group: system_configuration.md
-summary: Learn how to configure quotaAndLimits for Milvus.
+summary: Milvus에 대한 쿼터 및 제한을 구성하는 방법을 알아보세요.
 ---
-<h1 id="quotaAndLimits-related-Configurations" class="common-anchor-header">quotaAndLimits-related Configurations<button data-href="#quotaAndLimits-related-Configurations" class="anchor-icon" translate="no">
+<h1 id="quotaAndLimits-related-Configurations" class="common-anchor-header">쿼타 및 제한 관련 구성<button data-href="#quotaAndLimits-related-Configurations" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -19,21 +19,21 @@ summary: Learn how to configure quotaAndLimits for Milvus.
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>QuotaConfig, configurations of Milvus quota and limits.</p>
-<p>By default, we enable:</p>
+    </button></h1><p>밀버스 쿼터 및 제한을 구성하는 QuotaConfig.</p>
+<p>기본적으로 활성화되어 있습니다:</p>
 <ol>
-<li><p>TT protection;</p></li>
-<li><p>Memory protection.</p></li>
-<li><p>Disk quota protection.</p></li>
+<li><p>TT 보호;</p></li>
+<li><p>메모리 보호.</p></li>
+<li><p>디스크 할당량 보호.</p></li>
 </ol>
-<p>You can enable:</p>
+<p>활성화할 수 있습니다:</p>
 <ol>
-<li><p>DML throughput limitation;</p></li>
-<li><p>DDL, DQL qps/rps limitation;</p></li>
-<li><p>DQL Queue length/latency protection;</p></li>
-<li><p>DQL result rate protection;</p></li>
+<li><p>DML 처리량 제한;</p></li>
+<li><p>DDL, DQL qps/rps 제한;</p></li>
+<li><p>DQL 대기열 길이/대기 시간 보호;</p></li>
+<li><p>DQL 결과 속도 보호;</p></li>
 </ol>
-<p>If necessary, you can also manually force to deny RW requests.</p>
+<p>필요한 경우 수동으로 RW 요청을 강제로 거부할 수도 있습니다.</p>
 <h2 id="quotaAndLimitsenabled" class="common-anchor-header"><code translate="no">quotaAndLimits.enabled</code><button data-href="#quotaAndLimitsenabled" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -52,13 +52,13 @@ summary: Learn how to configure quotaAndLimits for Milvus.
     </button></h2><table id="quotaAndLimits.enabled">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">설명</th>
+      <th class="width20">기본값</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        `true` to enable quota and limits, `false` to disable.      </td>
+      <td>        할당량 및 제한을 활성화하려면 'true', 비활성화하려면 'false'입니다.      </td>
       <td>true</td>
     </tr>
   </tbody>
@@ -81,16 +81,16 @@ summary: Learn how to configure quotaAndLimits for Milvus.
     </button></h2><table id="quotaAndLimits.quotaCenterCollectInterval">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">설명</th>
+      <th class="width20">기본값</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>
-        <li>quotaCenterCollectInterval is the time interval that quotaCenter</li>      
-        <li>collects metrics from Proxies, Query cluster and Data cluster.</li>      
-        <li>seconds, (0 ~ 65536)</li>      </td>
+        <li>쿼터 센터 수집 간격은 쿼터 센터가</li>      
+        <li>가 프록시, 쿼리 클러스터 및 데이터 클러스터에서 메트릭을 수집하는 시간 간격입니다.</li>      
+        <li>초, (0 ~ 65536)</li>      </td>
       <td>3</td>
     </tr>
   </tbody>
@@ -113,13 +113,13 @@ summary: Learn how to configure quotaAndLimits for Milvus.
     </button></h2><table id="quotaAndLimits.limits.allocRetryTimes">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">설명</th>
+      <th class="width20">기본값</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        retry times when delete alloc forward data from rate limit failed      </td>
+      <td>        속도 제한에서 순방향 데이터 할당 삭제가 실패한 경우 재시도 시간      </td>
       <td>15</td>
     </tr>
   </tbody>
@@ -142,13 +142,13 @@ summary: Learn how to configure quotaAndLimits for Milvus.
     </button></h2><table id="quotaAndLimits.limits.allocWaitInterval">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">설명</th>
+      <th class="width20">기본값</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        retry wait duration when delete alloc forward data rate failed, in millisecond      </td>
+      <td>        순방향 데이터 전송률 할당 삭제 실패 시 재시도 대기 기간(밀리초)      </td>
       <td>1000</td>
     </tr>
   </tbody>
@@ -171,13 +171,13 @@ summary: Learn how to configure quotaAndLimits for Milvus.
     </button></h2><table id="quotaAndLimits.limits.complexDeleteLimitEnable">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">설명</th>
+      <th class="width20">기본값</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        whether complex delete check forward data by limiter      </td>
+      <td>        리미터에 의한 복합 삭제 체크 포워드 데이터 삭제 여부      </td>
       <td>false</td>
     </tr>
   </tbody>
@@ -200,13 +200,13 @@ summary: Learn how to configure quotaAndLimits for Milvus.
     </button></h2><table id="quotaAndLimits.limits.maxCollectionNumPerDB">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">설명</th>
+      <th class="width20">기본값</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        Maximum number of collections per database.      </td>
+      <td>        데이터베이스당 최대 컬렉션 수입니다.      </td>
       <td>65536</td>
     </tr>
   </tbody>
@@ -229,13 +229,13 @@ summary: Learn how to configure quotaAndLimits for Milvus.
     </button></h2><table id="quotaAndLimits.limits.maxInsertSize">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">설명</th>
+      <th class="width20">기본값</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        maximum size of a single insert request, in bytes, -1 means no limit      </td>
+      <td>        단일 삽입 요청의 최대 크기(바이트 단위), -1은 제한이 없음을 의미합니다.      </td>
       <td>-1</td>
     </tr>
   </tbody>
@@ -258,13 +258,13 @@ summary: Learn how to configure quotaAndLimits for Milvus.
     </button></h2><table id="quotaAndLimits.limits.maxResourceGroupNumOfQueryNode">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">설명</th>
+      <th class="width20">기본값</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        maximum number of resource groups of query nodes      </td>
+      <td>        쿼리 노드의 최대 리소스 그룹 수   </td>
       <td>1024</td>
     </tr>
   </tbody>
@@ -287,13 +287,13 @@ summary: Learn how to configure quotaAndLimits for Milvus.
     </button></h2><table id="quotaAndLimits.ddl.enabled">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">설명</th>
+      <th class="width20">기본값</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        Whether DDL request throttling is enabled.      </td>
+      <td>        DDL 요청 스로틀링을 사용할지 여부입니다.      </td>
       <td>false</td>
     </tr>
   </tbody>
@@ -316,16 +316,16 @@ summary: Learn how to configure quotaAndLimits for Milvus.
     </button></h2><table id="quotaAndLimits.ddl.collectionRate">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">설명</th>
+      <th class="width20">기본값</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>
-        <li>Maximum number of collection-related DDL requests per second.</li>      
-        <li>Setting this item to 10 indicates that Milvus processes no more than 10 collection-related DDL requests per second, including collection creation requests, collection drop requests, collection load requests, and collection release requests.</li>      
-        <li>To use this setting, set quotaAndLimits.ddl.enabled to true at the same time.</li>      </td>
+        <li>초당 최대 컬렉션 관련 DDL 요청 수입니다.</li>      
+        <li>이 항목을 10으로 설정하면 Milvus가 컬렉션 생성 요청, 컬렉션 삭제 요청, 컬렉션 로드 요청, 컬렉션 릴리스 요청을 포함하여 초당 컬렉션 관련 DDL 요청을 10개 이하로 처리함을 나타냅니다.</li>      
+        <li>이 설정을 사용하려면 quotaAndLimits.ddl.enabled를 동시에 true로 설정하세요.</li>      </td>
       <td>-1</td>
     </tr>
   </tbody>
@@ -348,16 +348,16 @@ summary: Learn how to configure quotaAndLimits for Milvus.
     </button></h2><table id="quotaAndLimits.ddl.partitionRate">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">설명</th>
+      <th class="width20">기본값</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>
-        <li>Maximum number of partition-related DDL requests per second.</li>      
-        <li>Setting this item to 10 indicates that Milvus processes no more than 10 partition-related requests per second, including partition creation requests, partition drop requests, partition load requests, and partition release requests.</li>      
-        <li>To use this setting, set quotaAndLimits.ddl.enabled to true at the same time.</li>      </td>
+        <li>초당 파티션 관련 DDL 요청의 최대 수입니다.</li>      
+        <li>이 항목을 10으로 설정하면 Milvus는 파티션 생성 요청, 파티션 삭제 요청, 파티션 로드 요청, 파티션 해제 요청을 포함하여 초당 10건 이하의 파티션 관련 요청을 처리합니다.</li>      
+        <li>이 설정을 사용하려면 quotaAndLimits.ddl.enabled를 동시에 true로 설정하세요.</li>      </td>
       <td>-1</td>
     </tr>
   </tbody>
@@ -380,13 +380,13 @@ summary: Learn how to configure quotaAndLimits for Milvus.
     </button></h2><table id="quotaAndLimits.ddl.db.collectionRate">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">설명</th>
+      <th class="width20">기본값</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        qps of db level , default no limit, rate for CreateCollection, DropCollection, LoadCollection, ReleaseCollection      </td>
+      <td>        DB 수준의 쿼터, 기본값 제한 없음, CreateCollection, DropCollection, LoadCollection, ReleaseCollection의 속도      </td>
       <td>-1</td>
     </tr>
   </tbody>
@@ -409,13 +409,13 @@ summary: Learn how to configure quotaAndLimits for Milvus.
     </button></h2><table id="quotaAndLimits.ddl.db.partitionRate">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">설명</th>
+      <th class="width20">기본값</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        qps of db level, default no limit, rate for CreatePartition, DropPartition, LoadPartition, ReleasePartition      </td>
+      <td>        db 수준의 qps, 기본값은 제한 없음, CreatePartition, DropPartition, LoadPartition, ReleasePartition의 속도      </td>
       <td>-1</td>
     </tr>
   </tbody>
@@ -438,13 +438,13 @@ summary: Learn how to configure quotaAndLimits for Milvus.
     </button></h2><table id="quotaAndLimits.indexRate.enabled">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">설명</th>
+      <th class="width20">기본값</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        Whether index-related request throttling is enabled.      </td>
+      <td>        인덱스 관련 요청 스로틀링을 사용할지 여부입니다.      </td>
       <td>false</td>
     </tr>
   </tbody>
@@ -467,16 +467,16 @@ summary: Learn how to configure quotaAndLimits for Milvus.
     </button></h2><table id="quotaAndLimits.indexRate.max">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">설명</th>
+      <th class="width20">기본값</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>
-        <li>Maximum number of index-related requests per second.</li>      
-        <li>Setting this item to 10 indicates that Milvus processes no more than 10 partition-related requests per second, including index creation requests and index drop requests.</li>      
-        <li>To use this setting, set quotaAndLimits.indexRate.enabled to true at the same time.</li>      </td>
+        <li>초당 최대 인덱스 관련 요청 수입니다.</li>      
+        <li>이 항목을 10으로 설정하면 Milvus가 인덱스 생성 요청 및 인덱스 삭제 요청을 포함하여 초당 10개를 초과하지 않는 파티션 관련 요청을 처리한다는 의미입니다.</li>      
+        <li>이 설정을 사용하려면 quotaAndLimits.indexRate.enabled를 동시에 true로 설정하세요.</li>      </td>
       <td>-1</td>
     </tr>
   </tbody>
@@ -499,13 +499,13 @@ summary: Learn how to configure quotaAndLimits for Milvus.
     </button></h2><table id="quotaAndLimits.indexRate.db.max">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">설명</th>
+      <th class="width20">기본값</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        qps of db level, default no limit, rate for CreateIndex, DropIndex      </td>
+      <td>        DB 수준의 쿼터, 기본값은 제한 없음, CreateIndex, DropIndex의 속도      </td>
       <td>-1</td>
     </tr>
   </tbody>
@@ -528,13 +528,13 @@ summary: Learn how to configure quotaAndLimits for Milvus.
     </button></h2><table id="quotaAndLimits.flushRate.enabled">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">설명</th>
+      <th class="width20">기본값</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        Whether flush request throttling is enabled.      </td>
+      <td>        플러시 요청 스로틀링을 사용할지 여부입니다.      </td>
       <td>true</td>
     </tr>
   </tbody>
@@ -557,16 +557,16 @@ summary: Learn how to configure quotaAndLimits for Milvus.
     </button></h2><table id="quotaAndLimits.flushRate.max">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">설명</th>
+      <th class="width20">기본값</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>
-        <li>Maximum number of flush requests per second.</li>      
-        <li>Setting this item to 10 indicates that Milvus processes no more than 10 flush requests per second.</li>      
-        <li>To use this setting, set quotaAndLimits.flushRate.enabled to true at the same time.</li>      </td>
+        <li>초당 최대 플러시 요청 수입니다.</li>      
+        <li>이 항목을 10으로 설정하면 Milvus가 초당 10건 이하의 플러시 요청을 처리합니다.</li>      
+        <li>이 설정을 사용하려면 quotaAndLimits.flushRate.enabled를 동시에 true로 설정하세요.</li>      </td>
       <td>-1</td>
     </tr>
   </tbody>
@@ -589,13 +589,13 @@ summary: Learn how to configure quotaAndLimits for Milvus.
     </button></h2><table id="quotaAndLimits.flushRate.collection.max">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">설명</th>
+      <th class="width20">기본값</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        qps, default no limit, rate for flush at collection level.      </td>
+      <td>        쿼터, 기본값 제한 없음, 수집 수준에서 플러시 속도.      </td>
       <td>0.1</td>
     </tr>
   </tbody>
@@ -618,13 +618,13 @@ summary: Learn how to configure quotaAndLimits for Milvus.
     </button></h2><table id="quotaAndLimits.flushRate.db.max">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">설명</th>
+      <th class="width20">기본값</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        qps of db level, default no limit, rate for flush      </td>
+      <td>        DB 수준의 QPS, 기본값 제한 없음, 플러시 속도      </td>
       <td>-1</td>
     </tr>
   </tbody>
@@ -647,13 +647,13 @@ summary: Learn how to configure quotaAndLimits for Milvus.
     </button></h2><table id="quotaAndLimits.compactionRate.enabled">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">설명</th>
+      <th class="width20">기본값</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        Whether manual compaction request throttling is enabled.      </td>
+      <td>        수동 압축 요청 스로틀링을 사용할지 여부입니다.      </td>
       <td>false</td>
     </tr>
   </tbody>
@@ -676,16 +676,16 @@ summary: Learn how to configure quotaAndLimits for Milvus.
     </button></h2><table id="quotaAndLimits.compactionRate.max">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">설명</th>
+      <th class="width20">기본값</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>
-        <li>Maximum number of manual-compaction requests per second.</li>      
-        <li>Setting this item to 10 indicates that Milvus processes no more than 10 manual-compaction requests per second.</li>      
-        <li>To use this setting, set quotaAndLimits.compaction.enabled to true at the same time.</li>      </td>
+        <li>초당 최대 수동 압축 요청 수입니다.</li>      
+        <li>이 항목을 10으로 설정하면 Milvus가 초당 수동 압축 요청을 10건 이하로 처리합니다.</li>      
+        <li>이 설정을 사용하려면 quotaAndLimits.compaction.enabled를 동시에 true로 설정하세요.</li>      </td>
       <td>-1</td>
     </tr>
   </tbody>
@@ -708,13 +708,13 @@ summary: Learn how to configure quotaAndLimits for Milvus.
     </button></h2><table id="quotaAndLimits.compactionRate.db.max">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">설명</th>
+      <th class="width20">기본값</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        qps of db level, default no limit, rate for manualCompaction      </td>
+      <td>        DB 수준의 쿼터, 기본값은 제한 없음, 수동 압축의 속도      </td>
       <td>-1</td>
     </tr>
   </tbody>
@@ -737,13 +737,13 @@ summary: Learn how to configure quotaAndLimits for Milvus.
     </button></h2><table id="quotaAndLimits.dml.enabled">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">설명</th>
+      <th class="width20">기본값</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        Whether DML request throttling is enabled.      </td>
+      <td>        DML 요청 스로틀링 사용 여부입니다.      </td>
       <td>false</td>
     </tr>
   </tbody>
@@ -766,16 +766,16 @@ summary: Learn how to configure quotaAndLimits for Milvus.
     </button></h2><table id="quotaAndLimits.dml.insertRate.max">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">설명</th>
+      <th class="width20">기본값</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>
-        <li>Highest data insertion rate per second.</li>      
-        <li>Setting this item to 5 indicates that Milvus only allows data insertion at the rate of 5 MB/s.</li>      
-        <li>To use this setting, set quotaAndLimits.dml.enabled to true at the same time.</li>      </td>
+        <li>초당 최고 데이터 삽입 속도.</li>      
+        <li>이 항목을 5로 설정하면 Milvus에서 5MB/s의 속도로만 데이터 삽입을 허용합니다.</li>      
+        <li>이 설정을 사용하려면 quotaAndLimits.dml.enabled를 동시에 true로 설정하세요.</li>      </td>
       <td>-1</td>
     </tr>
   </tbody>
@@ -798,13 +798,13 @@ summary: Learn how to configure quotaAndLimits for Milvus.
     </button></h2><table id="quotaAndLimits.dml.insertRate.db.max">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">설명</th>
+      <th class="width20">기본값</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        MB/s, default no limit      </td>
+      <td>        MB/s, 기본값 제한 없음      </td>
       <td>-1</td>
     </tr>
   </tbody>
@@ -827,16 +827,16 @@ summary: Learn how to configure quotaAndLimits for Milvus.
     </button></h2><table id="quotaAndLimits.dml.insertRate.collection.max">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">설명</th>
+      <th class="width20">기본값</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>
-        <li>Highest data insertion rate per collection per second.</li>      
-        <li>Setting this item to 5 indicates that Milvus only allows data insertion to any collection at the rate of 5 MB/s.</li>      
-        <li>To use this setting, set quotaAndLimits.dml.enabled to true at the same time.</li>      </td>
+        <li>초당 컬렉션당 최고 데이터 삽입 속도입니다.</li>      
+        <li>이 항목을 5로 설정하면 Milvus가 모든 컬렉션에 5MB/s의 속도로만 데이터 삽입을 허용합니다.</li>      
+        <li>이 설정을 사용하려면 quotaAndLimits.dml.enabled를 동시에 true로 설정하세요.</li>      </td>
       <td>-1</td>
     </tr>
   </tbody>
@@ -859,13 +859,13 @@ summary: Learn how to configure quotaAndLimits for Milvus.
     </button></h2><table id="quotaAndLimits.dml.insertRate.partition.max">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">설명</th>
+      <th class="width20">기본값</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        MB/s, default no limit      </td>
+      <td>        MB/s, 기본값 제한 없음      </td>
       <td>-1</td>
     </tr>
   </tbody>
@@ -888,13 +888,13 @@ summary: Learn how to configure quotaAndLimits for Milvus.
     </button></h2><table id="quotaAndLimits.dml.upsertRate.max">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">설명</th>
+      <th class="width20">기본값</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        MB/s, default no limit      </td>
+      <td>        MB/s, 기본값 제한 없음      </td>
       <td>-1</td>
     </tr>
   </tbody>
@@ -917,13 +917,13 @@ summary: Learn how to configure quotaAndLimits for Milvus.
     </button></h2><table id="quotaAndLimits.dml.upsertRate.db.max">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">설명</th>
+      <th class="width20">기본값</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        MB/s, default no limit      </td>
+      <td>        MB/s, 기본값 제한 없음      </td>
       <td>-1</td>
     </tr>
   </tbody>
@@ -946,13 +946,13 @@ summary: Learn how to configure quotaAndLimits for Milvus.
     </button></h2><table id="quotaAndLimits.dml.upsertRate.collection.max">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">설명</th>
+      <th class="width20">기본값</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        MB/s, default no limit      </td>
+      <td>        MB/s, 기본값 제한 없음      </td>
       <td>-1</td>
     </tr>
   </tbody>
@@ -975,13 +975,13 @@ summary: Learn how to configure quotaAndLimits for Milvus.
     </button></h2><table id="quotaAndLimits.dml.upsertRate.partition.max">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">설명</th>
+      <th class="width20">기본값</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        MB/s, default no limit      </td>
+      <td>        MB/s, 기본값 제한 없음      </td>
       <td>-1</td>
     </tr>
   </tbody>
@@ -1004,16 +1004,16 @@ summary: Learn how to configure quotaAndLimits for Milvus.
     </button></h2><table id="quotaAndLimits.dml.deleteRate.max">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">설명</th>
+      <th class="width20">기본값</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>
-        <li>Highest data deletion rate per second.</li>      
-        <li>Setting this item to 0.1 indicates that Milvus only allows data deletion at the rate of 0.1 MB/s.</li>      
-        <li>To use this setting, set quotaAndLimits.dml.enabled to true at the same time.</li>      </td>
+        <li>초당 최고 데이터 삭제 속도입니다.</li>      
+        <li>이 항목을 0.1로 설정하면 Milvus에서 0.1MB/s의 속도로만 데이터 삭제를 허용합니다.</li>      
+        <li>이 설정을 사용하려면 quotaAndLimits.dml.enabled를 동시에 true로 설정하세요.</li>      </td>
       <td>-1</td>
     </tr>
   </tbody>
@@ -1036,13 +1036,13 @@ summary: Learn how to configure quotaAndLimits for Milvus.
     </button></h2><table id="quotaAndLimits.dml.deleteRate.db.max">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">설명</th>
+      <th class="width20">기본값</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        MB/s, default no limit      </td>
+      <td>        MB/s, 기본값 제한 없음      </td>
       <td>-1</td>
     </tr>
   </tbody>
@@ -1065,16 +1065,16 @@ summary: Learn how to configure quotaAndLimits for Milvus.
     </button></h2><table id="quotaAndLimits.dml.deleteRate.collection.max">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">설명</th>
+      <th class="width20">기본값</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>
-        <li>Highest data deletion rate per second.</li>      
-        <li>Setting this item to 0.1 indicates that Milvus only allows data deletion from any collection at the rate of 0.1 MB/s.</li>      
-        <li>To use this setting, set quotaAndLimits.dml.enabled to true at the same time.</li>      </td>
+        <li>초당 최고 데이터 삭제 속도입니다.</li>      
+        <li>이 항목을 0.1로 설정하면 Milvus가 모든 컬렉션에서 0.1MB/s의 속도로만 데이터 삭제를 허용합니다.</li>      
+        <li>이 설정을 사용하려면 quotaAndLimits.dml.enabled를 동시에 true로 설정하세요.</li>      </td>
       <td>-1</td>
     </tr>
   </tbody>
@@ -1097,13 +1097,13 @@ summary: Learn how to configure quotaAndLimits for Milvus.
     </button></h2><table id="quotaAndLimits.dml.deleteRate.partition.max">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">설명</th>
+      <th class="width20">기본값</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        MB/s, default no limit      </td>
+      <td>        MB/s, 기본값 제한 없음      </td>
       <td>-1</td>
     </tr>
   </tbody>
@@ -1126,13 +1126,13 @@ summary: Learn how to configure quotaAndLimits for Milvus.
     </button></h2><table id="quotaAndLimits.dml.bulkLoadRate.max">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">설명</th>
+      <th class="width20">기본값</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        MB/s, default no limit, not support yet. TODO: limit bulkLoad rate      </td>
+      <td>        MB/s, 기본값 제한 없음, 아직 지원되지 않음. 할 일: 벌크로드 속도 제한      </td>
       <td>-1</td>
     </tr>
   </tbody>
@@ -1155,13 +1155,13 @@ summary: Learn how to configure quotaAndLimits for Milvus.
     </button></h2><table id="quotaAndLimits.dml.bulkLoadRate.db.max">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">설명</th>
+      <th class="width20">기본값</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        MB/s, default no limit, not support yet. TODO: limit db bulkLoad rate      </td>
+      <td>        MB/s, 기본값은 제한 없음, 아직 지원되지 않음. TODO: db bulkLoad 속도 제한      </td>
       <td>-1</td>
     </tr>
   </tbody>
@@ -1184,13 +1184,13 @@ summary: Learn how to configure quotaAndLimits for Milvus.
     </button></h2><table id="quotaAndLimits.dml.bulkLoadRate.collection.max">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">설명</th>
+      <th class="width20">기본값</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        MB/s, default no limit, not support yet. TODO: limit collection bulkLoad rate      </td>
+      <td>        MB/s, 기본값은 제한 없음, 아직 지원되지 않음. 할 일: 수집 벌크로드 속도 제한      </td>
       <td>-1</td>
     </tr>
   </tbody>
@@ -1213,13 +1213,13 @@ summary: Learn how to configure quotaAndLimits for Milvus.
     </button></h2><table id="quotaAndLimits.dml.bulkLoadRate.partition.max">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">설명</th>
+      <th class="width20">기본값</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        MB/s, default no limit, not support yet. TODO: limit partition bulkLoad rate      </td>
+      <td>        MB/s, 기본값은 제한 없음, 아직 지원되지 않음. 할 일: 파티션 벌크로드 속도 제한      </td>
       <td>-1</td>
     </tr>
   </tbody>
@@ -1242,13 +1242,13 @@ summary: Learn how to configure quotaAndLimits for Milvus.
     </button></h2><table id="quotaAndLimits.dql.enabled">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">설명</th>
+      <th class="width20">기본값</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        Whether DQL request throttling is enabled.      </td>
+      <td>        DQL 요청 스로틀링 사용 여부입니다.      </td>
       <td>false</td>
     </tr>
   </tbody>
@@ -1271,16 +1271,16 @@ summary: Learn how to configure quotaAndLimits for Milvus.
     </button></h2><table id="quotaAndLimits.dql.searchRate.max">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">설명</th>
+      <th class="width20">기본값</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>
-        <li>Maximum number of vectors to search per second.</li>      
-        <li>Setting this item to 100 indicates that Milvus only allows searching 100 vectors per second no matter whether these 100 vectors are all in one search or scattered across multiple searches.</li>      
-        <li>To use this setting, set quotaAndLimits.dql.enabled to true at the same time.</li>      </td>
+        <li>초당 검색할 수 있는 최대 벡터 수입니다.</li>      
+        <li>이 항목을 100으로 설정하면 이 100개의 벡터가 모두 한 검색에 포함되거나 여러 검색에 흩어져 있든 상관없이 Milvus에서 초당 100개의 벡터만 검색할 수 있습니다.</li>      
+        <li>이 설정을 사용하려면 quotaAndLimits.dql.enabled를 동시에 true로 설정하세요.</li>      </td>
       <td>-1</td>
     </tr>
   </tbody>
@@ -1303,13 +1303,13 @@ summary: Learn how to configure quotaAndLimits for Milvus.
     </button></h2><table id="quotaAndLimits.dql.searchRate.db.max">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">설명</th>
+      <th class="width20">기본값</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        vps (vectors per second), default no limit      </td>
+      <td>        VPS(초당 벡터 수), 기본값 제한 없음      </td>
       <td>-1</td>
     </tr>
   </tbody>
@@ -1332,16 +1332,16 @@ summary: Learn how to configure quotaAndLimits for Milvus.
     </button></h2><table id="quotaAndLimits.dql.searchRate.collection.max">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">설명</th>
+      <th class="width20">기본값</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>
-        <li>Maximum number of vectors to search per collection per second.</li>      
-        <li>Setting this item to 100 indicates that Milvus only allows searching 100 vectors per second per collection no matter whether these 100 vectors are all in one search or scattered across multiple searches.</li>      
-        <li>To use this setting, set quotaAndLimits.dql.enabled to true at the same time.</li>      </td>
+        <li>컬렉션당 초당 검색할 수 있는 최대 벡터 수입니다.</li>      
+        <li>이 항목을 100으로 설정하면 이 100개의 벡터가 모두 한 검색에 포함되든 여러 검색에 흩어져 있든 상관없이 Milvus가 컬렉션당 초당 100개의 벡터만 검색하도록 허용합니다.</li>      
+        <li>이 설정을 사용하려면 quotaAndLimits.dql.enabled를 동시에 true로 설정하세요.</li>      </td>
       <td>-1</td>
     </tr>
   </tbody>
@@ -1364,13 +1364,13 @@ summary: Learn how to configure quotaAndLimits for Milvus.
     </button></h2><table id="quotaAndLimits.dql.searchRate.partition.max">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">설명</th>
+      <th class="width20">기본값</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        vps (vectors per second), default no limit      </td>
+      <td>        VPS(초당 벡터 수), 기본값 제한 없음      </td>
       <td>-1</td>
     </tr>
   </tbody>
@@ -1393,16 +1393,16 @@ summary: Learn how to configure quotaAndLimits for Milvus.
     </button></h2><table id="quotaAndLimits.dql.queryRate.max">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">설명</th>
+      <th class="width20">기본값</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>
-        <li>Maximum number of queries per second.</li>      
-        <li>Setting this item to 100 indicates that Milvus only allows 100 queries per second.</li>      
-        <li>To use this setting, set quotaAndLimits.dql.enabled to true at the same time.</li>      </td>
+        <li>초당 최대 쿼리 수입니다.</li>      
+        <li>이 항목을 100으로 설정하면 Milvus에서 초당 100개의 쿼리만 허용합니다.</li>      
+        <li>이 설정을 사용하려면 quotaAndLimits.dql.enabled를 동시에 true로 설정하세요.</li>      </td>
       <td>-1</td>
     </tr>
   </tbody>
@@ -1425,13 +1425,13 @@ summary: Learn how to configure quotaAndLimits for Milvus.
     </button></h2><table id="quotaAndLimits.dql.queryRate.db.max">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">설명</th>
+      <th class="width20">기본값</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        qps, default no limit      </td>
+      <td>        쿼터, 기본값 제한 없음      </td>
       <td>-1</td>
     </tr>
   </tbody>
@@ -1454,16 +1454,16 @@ summary: Learn how to configure quotaAndLimits for Milvus.
     </button></h2><table id="quotaAndLimits.dql.queryRate.collection.max">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">설명</th>
+      <th class="width20">기본값</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>
-        <li>Maximum number of queries per collection per second.</li>      
-        <li>Setting this item to 100 indicates that Milvus only allows 100 queries per collection per second.</li>      
-        <li>To use this setting, set quotaAndLimits.dql.enabled to true at the same time.</li>      </td>
+        <li>초당 컬렉션당 최대 쿼리 수입니다.</li>      
+        <li>이 항목을 100으로 설정하면 Milvus에서 컬렉션당 초당 100개의 쿼리만 허용합니다.</li>      
+        <li>이 설정을 사용하려면 quotaAndLimits.dql.enabled를 동시에 true로 설정하세요.</li>      </td>
       <td>-1</td>
     </tr>
   </tbody>
@@ -1486,13 +1486,13 @@ summary: Learn how to configure quotaAndLimits for Milvus.
     </button></h2><table id="quotaAndLimits.dql.queryRate.partition.max">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">설명</th>
+      <th class="width20">기본값</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        qps, default no limit      </td>
+      <td>        쿼터, 기본값 제한 없음      </td>
       <td>-1</td>
     </tr>
   </tbody>
@@ -1515,15 +1515,15 @@ summary: Learn how to configure quotaAndLimits for Milvus.
     </button></h2><table id="quotaAndLimits.limitWriting.forceDeny">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">설명</th>
+      <th class="width20">기본값</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>
-        <li>forceDeny false means dml requests are allowed (except for some</li>      
-        <li>specific conditions, such as memory of nodes to water marker), true means always reject all dml requests.</li>      </td>
+        <li>forceDeny false는 dml 요청이 허용됨을 의미하며(워터 마커에 대한 노드의 메모리와 같은 일부</li>      
+        <li>특정 조건 제외), true는 항상 모든 dml 요청을 거부함을 의미합니다.</li>      </td>
       <td>false</td>
     </tr>
   </tbody>
@@ -1546,17 +1546,17 @@ summary: Learn how to configure quotaAndLimits for Milvus.
     </button></h2><table id="quotaAndLimits.limitWriting.ttProtection.maxTimeTickDelay">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">설명</th>
+      <th class="width20">기본값</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>
-        <li>maxTimeTickDelay indicates the backpressure for DML Operations.</li>      
-        <li>DML rates would be reduced according to the ratio of time tick delay to maxTimeTickDelay,</li>      
-        <li>if time tick delay is greater than maxTimeTickDelay, all DML requests would be rejected.</li>      
-        <li>seconds</li>      </td>
+        <li>최대 타임 틱 지연은 DML 작업의 역압을 나타냅니다.</li>      
+        <li>시간 틱 지연과 최대 시간 틱 지연의 비율에 따라 DML 속도가 감소합니다,</li>      
+        <li>시간 틱 지연이 최대 시간 틱 지연보다 크면 모든 DML 요청이 거부됩니다.</li>      
+        <li>초</li>      </td>
       <td>300</td>
     </tr>
   </tbody>
@@ -1579,16 +1579,16 @@ summary: Learn how to configure quotaAndLimits for Milvus.
     </button></h2><table id="quotaAndLimits.limitWriting.memProtection.enabled">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">설명</th>
+      <th class="width20">기본값</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>
-        <li>When memory usage > memoryHighWaterLevel, all dml requests would be rejected;</li>      
-        <li>When memoryLowWaterLevel < memory usage < memoryHighWaterLevel, reduce the dml rate;</li>      
-        <li>When memory usage < memoryLowWaterLevel, no action.</li>      </td>
+        <li>메모리 사용량 &gt; memoryHighWaterLevel일 경우 모든 DML 요청이 거부됩니다;</li>      
+        <li>memoryLowWaterLevel &lt; 메모리 사용량 &lt; memoryHighWaterLevel일 경우, dml 속도를 줄입니다;</li>      
+        <li>메모리 사용량이 memoryLowWaterLevel &lt;이면 아무 조치도 취하지 않습니다.</li>      </td>
       <td>true</td>
     </tr>
   </tbody>
@@ -1611,13 +1611,13 @@ summary: Learn how to configure quotaAndLimits for Milvus.
     </button></h2><table id="quotaAndLimits.limitWriting.memProtection.dataNodeMemoryLowWaterLevel">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">설명</th>
+      <th class="width20">기본값</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        (0, 1], memoryLowWaterLevel in DataNodes      </td>
+      <td>        (0, 1], 데이터 노드의 memoryLowWaterLevel      </td>
       <td>0.85</td>
     </tr>
   </tbody>
@@ -1640,13 +1640,13 @@ summary: Learn how to configure quotaAndLimits for Milvus.
     </button></h2><table id="quotaAndLimits.limitWriting.memProtection.dataNodeMemoryHighWaterLevel">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">설명</th>
+      <th class="width20">기본값</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        (0, 1], memoryHighWaterLevel in DataNodes      </td>
+      <td>        (0, 1], DataNodes의 memoryHighWaterLevel      </td>
       <td>0.95</td>
     </tr>
   </tbody>
@@ -1669,13 +1669,13 @@ summary: Learn how to configure quotaAndLimits for Milvus.
     </button></h2><table id="quotaAndLimits.limitWriting.memProtection.queryNodeMemoryLowWaterLevel">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">설명</th>
+      <th class="width20">기본값</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        (0, 1], memoryLowWaterLevel in QueryNodes      </td>
+      <td>        (0, 1], QueryNodes의 memoryLowWaterLevel      </td>
       <td>0.85</td>
     </tr>
   </tbody>
@@ -1698,13 +1698,13 @@ summary: Learn how to configure quotaAndLimits for Milvus.
     </button></h2><table id="quotaAndLimits.limitWriting.memProtection.queryNodeMemoryHighWaterLevel">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">설명</th>
+      <th class="width20">기본값</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        (0, 1], memoryHighWaterLevel in QueryNodes      </td>
+      <td>        (0, 1], QueryNodes의 memoryHighWaterLevel      </td>
       <td>0.95</td>
     </tr>
   </tbody>
@@ -1727,16 +1727,16 @@ summary: Learn how to configure quotaAndLimits for Milvus.
     </button></h2><table id="quotaAndLimits.limitWriting.growingSegmentsSizeProtection.enabled">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">설명</th>
+      <th class="width20">기본값</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>
-        <li>No action will be taken if the growing segments size is less than the low watermark.</li>      
-        <li>When the growing segments size exceeds the low watermark, the dml rate will be reduced,</li>      
-        <li>but the rate will not be lower than minRateRatio * dmlRate.</li>      </td>
+        <li>증가하는 세그먼트 크기가 낮은 워터마크보다 작으면 아무 조치도 취하지 않습니다.</li>      
+        <li>증가하는 세그먼트 크기가 낮은 워터마크를 초과하면 dml 속도가 감소합니다,</li>      
+        <li>하지만 이 비율은 최소 비율 * dml 비율보다 낮지 않습니다.</li>      </td>
       <td>false</td>
     </tr>
   </tbody>
@@ -1759,13 +1759,13 @@ summary: Learn how to configure quotaAndLimits for Milvus.
     </button></h2><table id="quotaAndLimits.limitWriting.diskProtection.enabled">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">설명</th>
+      <th class="width20">기본값</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        When the total file size of object storage is greater than `diskQuota`, all dml requests would be rejected;      </td>
+      <td>        오브젝트 스토리지의 총 파일 크기가 `디스크 쿼터`보다 크면 모든 dml 요청이 거부됩니다;      </td>
       <td>true</td>
     </tr>
   </tbody>
@@ -1788,13 +1788,13 @@ summary: Learn how to configure quotaAndLimits for Milvus.
     </button></h2><table id="quotaAndLimits.limitWriting.diskProtection.diskQuota">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">설명</th>
+      <th class="width20">기본값</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        MB, (0, +inf), default no limit      </td>
+      <td>        MB, (0, +inf), 기본값 제한 없음      </td>
       <td>-1</td>
     </tr>
   </tbody>
@@ -1817,13 +1817,13 @@ summary: Learn how to configure quotaAndLimits for Milvus.
     </button></h2><table id="quotaAndLimits.limitWriting.diskProtection.diskQuotaPerDB">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">설명</th>
+      <th class="width20">기본값</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        MB, (0, +inf), default no limit      </td>
+      <td>        MB, (0, +inf), 기본값 제한 없음      </td>
       <td>-1</td>
     </tr>
   </tbody>
@@ -1846,13 +1846,13 @@ summary: Learn how to configure quotaAndLimits for Milvus.
     </button></h2><table id="quotaAndLimits.limitWriting.diskProtection.diskQuotaPerCollection">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">설명</th>
+      <th class="width20">기본값</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        MB, (0, +inf), default no limit      </td>
+      <td>        MB, (0, +inf), 기본값 제한 없음      </td>
       <td>-1</td>
     </tr>
   </tbody>
@@ -1875,13 +1875,13 @@ summary: Learn how to configure quotaAndLimits for Milvus.
     </button></h2><table id="quotaAndLimits.limitWriting.diskProtection.diskQuotaPerPartition">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">설명</th>
+      <th class="width20">기본값</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        MB, (0, +inf), default no limit      </td>
+      <td>        MB, (0, +inf), 기본값 제한 없음      </td>
       <td>-1</td>
     </tr>
   </tbody>
@@ -1904,13 +1904,13 @@ summary: Learn how to configure quotaAndLimits for Milvus.
     </button></h2><table id="quotaAndLimits.limitWriting.l0SegmentsRowCountProtection.enabled">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">설명</th>
+      <th class="width20">기본값</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        switch to enable l0 segment row count quota      </td>
+      <td>        L0 세그먼트 행 수 할당량 활성화 스위치      </td>
       <td>false</td>
     </tr>
   </tbody>
@@ -1933,13 +1933,13 @@ summary: Learn how to configure quotaAndLimits for Milvus.
     </button></h2><table id="quotaAndLimits.limitWriting.l0SegmentsRowCountProtection.lowWaterLevel">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">설명</th>
+      <th class="width20">기본값</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        l0 segment row count quota, low water level      </td>
+      <td>        L0 세그먼트 행 수 할당량, 저수위      </td>
       <td>32768</td>
     </tr>
   </tbody>
@@ -1962,13 +1962,13 @@ summary: Learn how to configure quotaAndLimits for Milvus.
     </button></h2><table id="quotaAndLimits.limitWriting.l0SegmentsRowCountProtection.highWaterLevel">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">설명</th>
+      <th class="width20">기본값</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        l0 segment row count quota, low water level      </td>
+      <td>        L0 세그먼트 행 수 할당량, 낮은 수위      </td>
       <td>65536</td>
     </tr>
   </tbody>
@@ -1991,15 +1991,15 @@ summary: Learn how to configure quotaAndLimits for Milvus.
     </button></h2><table id="quotaAndLimits.limitReading.forceDeny">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">설명</th>
+      <th class="width20">기본값</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>
-        <li>forceDeny false means dql requests are allowed (except for some</li>      
-        <li>specific conditions, such as collection has been dropped), true means always reject all dql requests.</li>      </td>
+        <li>forceDeny false는 dql 요청이 허용됨을 의미하며(일부 특정 조건 제외</li>      
+        <li>특정 조건 제외), true는 항상 모든 dql 요청을 거부함을 의미합니다.</li>      </td>
       <td>false</td>
     </tr>
   </tbody>
@@ -2022,17 +2022,17 @@ summary: Learn how to configure quotaAndLimits for Milvus.
     </button></h2><table id="quotaAndLimits.limitReading.queueProtection.nqInQueueThreshold">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">설명</th>
+      <th class="width20">기본값</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>
-        <li>nqInQueueThreshold indicated that the system was under backpressure for Search/Query path.</li>      
-        <li>If NQ in any QueryNode's queue is greater than nqInQueueThreshold, search&query rates would gradually cool off</li>      
-        <li>until the NQ in queue no longer exceeds nqInQueueThreshold. We think of the NQ of query request as 1.</li>      
-        <li>int, default no limit</li>      </td>
+        <li>nqInQueueThreshold는 시스템이 검색/쿼리 경로에 대해 백압을 받고 있음을 나타냅니다.</li>      
+        <li>어떤 쿼리 노드의 큐에 있는 NQ가 nqInQueueThreshold보다 크면, 검색 및 쿼리 속도가 서서히 낮아집니다.</li>      
+        <li>대기열의 NQ가 더 이상 nqInQueueThreshold를 초과하지 않을 때까지 서서히 냉각됩니다. 쿼리 요청의 NQ를 1로 간주합니다.</li>      
+        <li>int, 기본값 제한 없음</li>      </td>
       <td>-1</td>
     </tr>
   </tbody>
@@ -2055,18 +2055,18 @@ summary: Learn how to configure quotaAndLimits for Milvus.
     </button></h2><table id="quotaAndLimits.limitReading.queueProtection.queueLatencyThreshold">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">설명</th>
+      <th class="width20">기본값</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>
-        <li>queueLatencyThreshold indicated that the system was under backpressure for Search/Query path.</li>      
-        <li>If dql latency of queuing is greater than queueLatencyThreshold, search&query rates would gradually cool off</li>      
-        <li>until the latency of queuing no longer exceeds queueLatencyThreshold.</li>      
-        <li>The latency here refers to the averaged latency over a period of time.</li>      
-        <li>milliseconds, default no limit</li>      </td>
+        <li>queueLatencyThreshold는 시스템이 검색/쿼리 경로에 대한 역압박을 받고 있음을 나타냅니다.</li>      
+        <li>큐 큐잉 대기 시간이 queueLatencyThreshold보다 큰 경우, 검색 및 쿼리 속도가 점차적으로 냉각됩니다.</li>      
+        <li>대기 시간이 더 이상 queueLatencyThreshold를 초과하지 않을 때까지 검색 및 쿼리 속도가 점차 낮아집니다.</li>      
+        <li>여기서 지연 시간은 일정 기간 동안의 평균 지연 시간을 의미합니다.</li>      
+        <li>밀리초, 기본값은 제한 없음</li>      </td>
       <td>-1</td>
     </tr>
   </tbody>
@@ -2089,17 +2089,17 @@ summary: Learn how to configure quotaAndLimits for Milvus.
     </button></h2><table id="quotaAndLimits.limitReading.resultProtection.maxReadResultRate">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">설명</th>
+      <th class="width20">기본값</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>
-        <li>maxReadResultRate indicated that the system was under backpressure for Search/Query path.</li>      
-        <li>If dql result rate is greater than maxReadResultRate, search&query rates would gradually cool off</li>      
-        <li>until the read result rate no longer exceeds maxReadResultRate.</li>      
-        <li>MB/s, default no limit</li>      </td>
+        <li>maxReadResultRate는 시스템이 검색/쿼리 경로에 대해 백압을 받고 있음을 나타냅니다.</li>      
+        <li>dql 결과 속도가 maxReadResultRate보다 큰 경우, 검색 및 쿼리 속도가 점차적으로 낮아집니다.</li>      
+        <li>읽기 결과 속도가 더 이상 maxReadResultRate를 초과하지 않을 때까지 서서히 냉각됩니다.</li>      
+        <li>MB/s, 기본값 제한 없음</li>      </td>
       <td>-1</td>
     </tr>
   </tbody>
@@ -2122,14 +2122,14 @@ summary: Learn how to configure quotaAndLimits for Milvus.
     </button></h2><table id="quotaAndLimits.limitReading.coolOffSpeed">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">설명</th>
+      <th class="width20">기본값</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>
-        <li>colOffSpeed is the speed of search&query rates cool off.</li>      
+        <li>colOffSpeed는 검색 및 쿼리 속도가 냉각되는 속도입니다.</li>      
         <li>(0, 1]</li>      </td>
       <td>0.9</td>
     </tr>

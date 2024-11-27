@@ -1,9 +1,9 @@
 ---
 id: multimodal_rag_with_milvus.md
-summary: Multimodal RAG with Milvus
-title: Multimodal RAG with Milvus
+summary: Milvus를 사용한 멀티모달 RAG
+title: Milvus를 사용한 멀티모달 RAG
 ---
-<h1 id="Multimodal-RAG-with-Milvus" class="common-anchor-header">Multimodal RAG with Milvus<button data-href="#Multimodal-RAG-with-Milvus" class="anchor-icon" translate="no">
+<h1 id="Multimodal-RAG-with-Milvus" class="common-anchor-header">Milvus를 사용한 멀티모달 RAG<button data-href="#Multimodal-RAG-with-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -22,8 +22,8 @@ title: Multimodal RAG with Milvus
 <a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/multimodal_rag_with_milvus.ipynb" target="_blank"><img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/></a></p>
 <p><img translate="no" src="https://raw.githubusercontent.com/milvus-io/bootcamp/master/bootcamp/tutorials/quickstart/apps/multimodal_rag_with_milvus/pics/step3.jpg
 "/></p>
-<p>This tutorial showcases the multimodal RAG powered by Milvus, <a href="https://github.com/FlagOpen/FlagEmbedding/tree/master/FlagEmbedding/visual">Visualized BGE model</a>, and <a href="https://openai.com/index/hello-gpt-4o/">GPT-4o</a>. With this system, users are able to upload an image and edit text instructions, which are processed by BGE’s composed retrieval model to search for candidate images. GPT-4o then acts as a reranker, selecting the most suitable image and providing the rationale behind the choice. This powerful combination enables a seamless and intuitive image search experience, leveraging Milvus for efficient retrieval, BGE model for precise image processing and matching, and GPT-4o for advanced reranking.</p>
-<h2 id="Preparation" class="common-anchor-header">Preparation<button data-href="#Preparation" class="anchor-icon" translate="no">
+<p>이 튜토리얼에서는 Milvus, <a href="https://github.com/FlagOpen/FlagEmbedding/tree/master/FlagEmbedding/visual">시각화된 BGE 모델</a> 및 <a href="https://openai.com/index/hello-gpt-4o/">GPT-4o로</a> 구동되는 멀티모달 RAG를 소개합니다. 이 시스템을 사용하면 사용자가 이미지를 업로드하고 텍스트 지침을 편집하면 BGE의 구성된 검색 모델에서 처리하여 후보 이미지를 검색할 수 있습니다. 그런 다음 GPT-4o는 가장 적합한 이미지를 선택하고 그 선택의 근거를 제공하는 재랭커 역할을 합니다. 이 강력한 조합은 효율적인 검색을 위한 Milvus, 정밀한 이미지 처리 및 매칭을 위한 BGE 모델, 고급 재랭킹을 위한 GPT-4o를 활용하여 원활하고 직관적인 이미지 검색 환경을 구현합니다.</p>
+<h2 id="Preparation" class="common-anchor-header">준비<button data-href="#Preparation" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -38,27 +38,27 @@ title: Multimodal RAG with Milvus
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Install-Dependencies" class="common-anchor-header">Install Dependencies</h3><pre><code translate="no" class="language-shell">$ pip install --upgrade pymilvus openai datasets opencv-python timm einops ftfy peft tqdm
+    </button></h2><h3 id="Install-Dependencies" class="common-anchor-header">설치 종속성</h3><pre><code translate="no" class="language-shell">$ pip install --upgrade pymilvus openai datasets opencv-python timm einops ftfy peft tqdm
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-shell">$ git <span class="hljs-built_in">clone</span> https://github.com/FlagOpen/FlagEmbedding.git
 $ pip install -e FlagEmbedding
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>If you are using Google Colab, to enable dependencies just installed, you may need to <strong>restart the runtime</strong> (click on the “Runtime” menu at the top of the screen, and select “Restart session” from the dropdown menu).</p>
+<p>Google Colab을 사용하는 경우 방금 설치한 종속 요소를 사용하려면 <strong>런타임을 다시 시작해야</strong> 할 수 있습니다(화면 상단의 '런타임' 메뉴를 클릭하고 드롭다운 메뉴에서 '세션 다시 시작'을 선택).</p>
 </div>
-<h3 id="Download-Data" class="common-anchor-header">Download Data</h3><p>The following command will download the example data and extract to a local folder “./images_folder” including:</p>
+<h3 id="Download-Data" class="common-anchor-header">데이터 다운로드</h3><p>다음 명령은 예제 데이터를 다운로드하여 다음을 포함한 로컬 폴더 "./images_folder"에 추출합니다:</p>
 <ul>
-<li><p><strong>images</strong>: A subset of <a href="https://github.com/hyp1231/AmazonReviews2023">Amazon Reviews 2023</a> containing approximately 900 images from the categories &quot;Appliance&quot;, &quot;Cell_Phones_and_Accessories&quot;, and &quot;Electronics&quot;.</p></li>
-<li><p><strong>leopard.jpg</strong>: An example query image.</p></li>
+<li><p><strong>images</strong>: &quot;가전제품&quot;, &quot;휴대폰 및 액세서리&quot;, &quot;전자제품&quot; 카테고리의 약 900개 이미지가 포함된 <a href="https://github.com/hyp1231/AmazonReviews2023">Amazon 리뷰 2023의</a> 하위 집합입니다.</p></li>
+<li><p><strong>leopard.jpg</strong>: 쿼리 이미지 예시.</p></li>
 </ul>
 <pre><code translate="no" class="language-shell">$ wget <span class="hljs-attr">https</span>:<span class="hljs-comment">//github.com/milvus-io/bootcamp/releases/download/data/amazon_reviews_2023_subset.tar.gz</span>
 $ tar -xzf amazon_reviews_2023_subset.<span class="hljs-property">tar</span>.<span class="hljs-property">gz</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Load-Embedding-Model" class="common-anchor-header">Load Embedding Model</h3><p>We will use the Visualized BGE model “bge-visualized-base-en-v1.5” to generate embeddings for both images and text.</p>
-<p><strong>1. Download weight</strong></p>
+<h3 id="Load-Embedding-Model" class="common-anchor-header">임베딩 모델 로드</h3><p>이미지와 텍스트 모두에 대한 임베딩을 생성하기 위해 시각화된 BGE 모델 "bge-visualized-base-en-v1.5"를 사용하겠습니다.</p>
+<p><strong>1. 무게 다운로드</strong></p>
 <pre><code translate="no" class="language-shell">$ wget https://huggingface.co/BAAI/bge-visualized/resolve/main/Visualized_base_en_v1.5.pth
 <button class="copy-code-btn"></button></code></pre>
-<p><strong>2. Build encoder</strong></p>
+<p><strong>2. 인코더 빌드</strong></p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> torch
 <span class="hljs-keyword">from</span> FlagEmbedding.visual.modeling <span class="hljs-keyword">import</span> Visualized_BGE
 
@@ -83,7 +83,7 @@ model_name = <span class="hljs-string">&quot;BAAI/bge-base-en-v1.5&quot;</span>
 model_path = <span class="hljs-string">&quot;./Visualized_base_en_v1.5.pth&quot;</span>  <span class="hljs-comment"># Change to your own value if using a different model path</span>
 encoder = Encoder(model_name, model_path)
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Load-Data" class="common-anchor-header">Load Data<button data-href="#Load-Data" class="anchor-icon" translate="no">
+<h2 id="Load-Data" class="common-anchor-header">데이터 로드<button data-href="#Load-Data" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -98,8 +98,8 @@ encoder = Encoder(model_name, model_path)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>This section will load example images into the database with corresponding embeddings.</p>
-<h3 id="Generate-embeddings" class="common-anchor-header">Generate embeddings</h3><p>Load all jpeg images from the data directory and apply the encoder to convert images to embeddings.</p>
+    </button></h2><p>이 섹션에서는 예제 이미지를 해당 임베딩과 함께 데이터베이스에 로드합니다.</p>
+<h3 id="Generate-embeddings" class="common-anchor-header">임베딩 생성</h3><p>데이터 디렉토리에서 모든 jpeg 이미지를 로드하고 인코더를 적용하여 이미지를 임베딩으로 변환합니다.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> os
 <span class="hljs-keyword">from</span> tqdm <span class="hljs-keyword">import</span> tqdm
 <span class="hljs-keyword">from</span> glob <span class="hljs-keyword">import</span> glob
@@ -125,13 +125,13 @@ image_dict = {}
 
 Number of encoded images: 900
 </code></pre>
-<h3 id="Insert-into-Milvus" class="common-anchor-header">Insert into Milvus</h3><p>Insert images with corresponding paths and embeddings into Milvus collection.</p>
+<h3 id="Insert-into-Milvus" class="common-anchor-header">Milvus에 삽입</h3><p>해당 경로와 임베딩이 포함된 이미지를 Milvus 컬렉션에 삽입합니다.</p>
 <div class="alert note">
-<p>As for the argument of <code translate="no">MilvusClient</code>:</p>
+<p>인수는 <code translate="no">MilvusClient</code>:</p>
 <ul>
-<li>Setting the <code translate="no">uri</code> as a local file, e.g. <code translate="no">./milvus_demo.db</code>, is the most convenient method, as it automatically utilizes <a href="https://milvus.io/docs/milvus_lite.md">Milvus Lite</a> to store all data in this file.</li>
-<li>If you have large scale of data, you can set up a more performant Milvus server on <a href="https://milvus.io/docs/quickstart.md">docker or kubernetes</a>. In this setup, please use the server uri, e.g.<code translate="no">http://localhost:19530</code>, as your <code translate="no">uri</code>.</li>
-<li>If you want to use <a href="https://zilliz.com/cloud">Zilliz Cloud</a>, the fully managed cloud service for Milvus, adjust the <code translate="no">uri</code> and <code translate="no">token</code>, which correspond to the <a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">Public Endpoint and Api key</a> in Zilliz Cloud.</li>
+<li><code translate="no">uri</code> 를 로컬 파일(예: <code translate="no">./milvus_demo.db</code>)로 설정하는 것이 가장 편리한 방법인데, 이 경우 <a href="https://milvus.io/docs/milvus_lite.md">Milvus Lite가</a> 자동으로 모든 데이터를 이 파일에 저장하기 때문입니다.</li>
+<li>데이터 규모가 큰 경우, <a href="https://milvus.io/docs/quickstart.md">도커나 쿠버네티스에</a> 더 고성능의 Milvus 서버를 설정할 수 있습니다. 이 설정에서는 서버 URL(예:<code translate="no">http://localhost:19530</code>)을 <code translate="no">uri</code> 으로 사용하세요.</li>
+<li>밀버스의 완전 관리형 클라우드 서비스인 <a href="https://zilliz.com/cloud">질리즈 클라우드를</a> 사용하려면, 질리즈 클라우드의 <a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">퍼블릭 엔드포인트와 API 키에</a> 해당하는 <code translate="no">uri</code> 와 <code translate="no">token</code> 을 조정하세요.</li>
 </ul>
 </div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
@@ -162,7 +162,7 @@ milvus_client.insert(
  'ids': [451537887696781312, 451537887696781313, ..., 451537887696782211],
  'cost': 0}
 </code></pre>
-<h2 id="Multimodal-Search-with-Generative-Reranker" class="common-anchor-header">Multimodal Search with Generative Reranker<button data-href="#Multimodal-Search-with-Generative-Reranker" class="anchor-icon" translate="no">
+<h2 id="Multimodal-Search-with-Generative-Reranker" class="common-anchor-header">제너레이티브 리랭커로 멀티모달 검색하기<button data-href="#Multimodal-Search-with-Generative-Reranker" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -177,8 +177,8 @@ milvus_client.insert(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>In this section, we will firstly search for relevant images by a multimodal query and then use LLM service to rerank the results and find the best one with explanation.</p>
-<h3 id="Run-search" class="common-anchor-header">Run search</h3><p>Now we are ready to perform the advanced image search with query data composed of both image and text instruction.</p>
+    </button></h2><p>이 섹션에서는 먼저 멀티모달 쿼리로 관련 이미지를 검색한 후 LLM 서비스를 사용하여 결과를 재랭크하고 설명이 포함된 최적의 이미지를 찾아보겠습니다.</p>
+<h3 id="Run-search" class="common-anchor-header">검색 실행</h3><p>이제 이미지와 텍스트 설명으로 구성된 쿼리 데이터로 고급 이미지 검색을 수행할 준비가 되었습니다.</p>
 <pre><code translate="no" class="language-python">query_image = os.path.join(
     data_dir, <span class="hljs-string">&quot;leopard.jpg&quot;</span>
 )  <span class="hljs-comment"># Change to your own query image path</span>
@@ -200,8 +200,8 @@ retrieved_images = [hit.get(<span class="hljs-string">&quot;entity&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">['./images_folder/images/518Gj1WQ-RL._AC_.jpg', './images_folder/images/41n00AOfWhL._AC_.jpg', './images_folder/images/51Wqge9HySL._AC_.jpg', './images_folder/images/51R2SZiywnL._AC_.jpg', './images_folder/images/516PebbMAcL._AC_.jpg', './images_folder/images/51RrgfYKUfL._AC_.jpg', './images_folder/images/515DzQVKKwL._AC_.jpg', './images_folder/images/51BsgVw6RhL._AC_.jpg', './images_folder/images/51INtcXu9FL._AC_.jpg']
 </code></pre>
-<h3 id="Rerank-with-GPT-4o" class="common-anchor-header">Rerank with GPT-4o</h3><p>We will use an LLM to rank images and generate an explanation for the best result based on the user query and retrieved results.</p>
-<p><strong>1. Create a panoramic view</strong></p>
+<h3 id="Rerank-with-GPT-4o" class="common-anchor-header">GPT-4o로 순위 재조정</h3><p>LLM을 사용하여 이미지의 순위를 매기고 사용자 쿼리와 검색된 결과를 기반으로 최상의 결과에 대한 설명을 생성합니다.</p>
+<p><strong>1. 파노라마 보기 만들기</strong></p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np
 <span class="hljs-keyword">import</span> cv2
 
@@ -317,7 +317,7 @@ row_count = <span class="hljs-number">3</span>
     panoramic_image = np.hstack([query_image_null, panoramic_image])
     <span class="hljs-keyword">return</span> panoramic_image
 <button class="copy-code-btn"></button></code></pre>
-<p>Combine the query image and retrieved images with indices in a panoramic view.</p>
+<p>쿼리 이미지와 검색된 이미지를 파노라마 보기에서 인덱스와 결합합니다.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> PIL <span class="hljs-keyword">import</span> Image
 
 combined_image_path = os.path.join(data_dir, <span class="hljs-string">&quot;combined_image.jpg&quot;</span>)
@@ -329,13 +329,11 @@ show_combined_image = combined_image.resize((<span class="hljs-number">300</span
 show_combined_image.show()
 <button class="copy-code-btn"></button></code></pre>
 <p>
-  <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.5.x/assets/multimodal_rag_with_milvus_22_0.png" alt="Create a panoramic view" class="doc-image" id="create-a-panoramic-view" />
-    <span>Create a panoramic view</span>
-  </span>
-</p>
-<p><strong>2. Rerank and explain</strong></p>
-<p>We will send the combined image to multimodal LLM service together with proper prompts to rank the retrieved results with explanation. To enable GPT-4o as the LLM, you need to prepare your <a href="https://platform.openai.com/docs/quickstart">OpenAI API Key</a>.</p>
+  
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/multimodal_rag_with_milvus_22_0.png" alt="Create a panoramic view" class="doc-image" id="create-a-panoramic-view" />
+   </span> <span class="img-wrapper"> <span>파노라마 보기 만들기</span> </span></p>
+<p><strong>2. 재랭크 및 설명</strong></p>
+<p>결합된 이미지를 적절한 프롬프트와 함께 멀티모달 LLM 서비스로 전송하여 검색된 결과에 대한 설명과 함께 순위를 매깁니다. GPT-4o를 LLM으로 사용하려면 <a href="https://platform.openai.com/docs/quickstart">OpenAI API 키를</a> 준비해야 합니다.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> requests
 <span class="hljs-keyword">import</span> base64
 
@@ -404,12 +402,12 @@ openai_api_key = <span class="hljs-string">&quot;sk-***&quot;</span>  <span clas
 
     <span class="hljs-keyword">return</span> ranked_indices, explanation
 <button class="copy-code-btn"></button></code></pre>
-<p>Get the image indices after ranking and the reason for the best result:</p>
+<p>랭킹 후 이미지 인덱스와 최상의 결과에 대한 이유를 가져옵니다:</p>
 <pre><code translate="no" class="language-python">ranked_indices, explanation = generate_ranking_explanation(
     combined_image_path, query_text
 )
 <button class="copy-code-btn"></button></code></pre>
-<p><strong>3. Display the best result with explanation</strong></p>
+<p><strong>3. 설명과 함께 최상의 결과 표시</strong></p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">print</span>(explanation)
 
 best_index = ranked_indices[<span class="hljs-number">0</span>]
@@ -420,9 +418,7 @@ best_img.show()
 <pre><code translate="no">Reasons: The most suitable item for the user's query intent is index 6 because the instruction specifies a phone case with the theme of the image, which is a leopard. The phone case with index 6 has a thematic design resembling the leopard pattern, making it the closest match to the user's request for a phone case with the image theme.
 </code></pre>
 <p>
-  <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.5.x/assets/multimodal_rag_with_milvus_28_1.png" alt="The best result" class="doc-image" id="the-best-result" />
-    <span>The best result</span>
-  </span>
-</p>
-<h3 id="Quick-Deploy" class="common-anchor-header">Quick Deploy</h3><p>To learn about how to start an online demo with this tutorial, please refer to <a href="https://github.com/milvus-io/bootcamp/tree/master/bootcamp/tutorials/quickstart/apps/multimodal_rag_with_milvus">the example application</a>.</p>
+  
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/multimodal_rag_with_milvus_28_1.png" alt="The best result" class="doc-image" id="the-best-result" />
+   </span> <span class="img-wrapper"> <span>최상의 결과</span> </span></p>
+<h3 id="Quick-Deploy" class="common-anchor-header">빠른 배포</h3><p>이 튜토리얼을 통해 온라인 데모를 시작하는 방법에 대해 알아보려면 <a href="https://github.com/milvus-io/bootcamp/tree/master/bootcamp/tutorials/quickstart/apps/multimodal_rag_with_milvus">예제 애플리케이션을</a> 참조하세요.</p>

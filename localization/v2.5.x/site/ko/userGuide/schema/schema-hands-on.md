@@ -1,15 +1,13 @@
 ---
 id: schema-hands-on.md
-title: Schema Design Hands-On​
+title: 스키마 디자인 실습
 summary: >-
-  Milvus supports defining the data model through a collection schema. A
-  collection organizes unstructured data like text and images, along with their
-  vector representations, including dense and sparse vectors in various
-  precision used for semantic search. Additionally, Milvus supports storing and
-  filtering non-vector data types called "Scalar". Scalar types include BOOL,
-  INT8/16/32/64, FLOAT/DOUBLE, VARCHAR, JSON, and Array.​
+  Milvus는 컬렉션 스키마를 통해 데이터 모델을 정의할 수 있도록 지원합니다. 컬렉션은 텍스트와 이미지와 같은 비정형 데이터와 시맨틱
+  검색에 사용되는 다양한 정밀도의 고밀도 및 희소 벡터를 포함한 벡터 표현을 구성합니다. 또한, Milvus는 '스칼라'라는 비벡터 데이터
+  유형의 저장과 필터링을 지원합니다. 스칼라 유형에는 BOOL, INT8/16/32/64, FLOAT/DOUBLE, VARCHAR, JSON
+  및 Array가 포함됩니다.
 ---
-<h1 id="Schema-Design-Hands-On​" class="common-anchor-header">Schema Design Hands-On​<button data-href="#Schema-Design-Hands-On​" class="anchor-icon" translate="no">
+<h1 id="Schema-Design-Hands-On​" class="common-anchor-header">스키마 디자인 실습<button data-href="#Schema-Design-Hands-On​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -24,17 +22,15 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Information Retrieval (IR) systems, also known as search, are essential for various AI applications such as Retrieval-augmented generation (RAG), image search, and product recommendation. The first step in developing an IR system is designing the data model, which involves analyzing business requirements, determining how to organize information, and indexing data to make it semantically searchable.​</p>
-<p>Milvus supports defining the data model through a collection schema. A collection organizes unstructured data like text and images, along with their vector representations, including dense and sparse vectors in various precision used for semantic search. Additionally, Milvus supports storing and filtering non-vector data types called &quot;Scalar&quot;. Scalar types include BOOL, INT8/16/32/64, FLOAT/DOUBLE, VARCHAR, JSON, and Array.​</p>
+    </button></h1><p>검색이라고도 하는 정보 검색(IR) 시스템은 검색 증강 생성(RAG), 이미지 검색, 상품 추천과 같은 다양한 AI 애플리케이션에 필수적입니다. IR 시스템 개발의 첫 번째 단계는 데이터 모델을 설계하는 것으로, 여기에는 비즈니스 요구 사항을 분석하고 정보를 구성하는 방법을 결정하며 의미론적으로 검색할 수 있도록 데이터를 색인하는 작업이 포함됩니다.</p>
+<p>Milvus는 컬렉션 스키마를 통해 데이터 모델을 정의할 수 있도록 지원합니다. 컬렉션은 텍스트와 이미지와 같은 비정형 데이터와 그 벡터 표현을 의미론적 검색에 사용되는 다양한 정밀도의 고밀도 및 희소 벡터와 함께 구성합니다. 또한, Milvus는 '스칼라'라는 비벡터 데이터 유형의 저장과 필터링을 지원합니다. 스칼라 유형에는 BOOL, INT8/16/32/64, FLOAT/DOUBLE, VARCHAR, JSON, Array가 포함됩니다.</p>
 <p>
-  <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.5.x/assets/schema-hands-on.png" alt="Example data schema designed for searching news article" class="doc-image" id="example-data-schema-designed-for-searching-news-article" />
-    <span>Example data schema designed for searching news article</span>
-  </span>
-</p>
-<p>The data model design of a search system involves analyzing business needs and abstracting information into a schema-expressed data model. For instance, to search a piece of text, it must be “indexed” by converting the literal string into a vector through &quot;embedding&quot;, enabling vector search. Beyond this basic requirement, it may be necessary to store other properties such as publication timestamp and author. This metadata allows for semantic searches to be refined through filtering, returning only texts published after a specific date or by a particular author. They may also need to be retrieved together with the main text, for rendering the search result in the application. To organize these text pieces, each should be assigned a unique identifier, expressed as an integer or string. These elements are essential for achieving sophisticated search logic.​</p>
-<p>A well-designed schema is important as it abstracts the data model and decides if the business objectives can be achieved through search. Furthermore, since every row of data inserted into the collection needs to follow the schema, it greatly helps to maintain data consistency and long-term quality. From a technical perspective, a well-defined schema leads to well-organized column data storage and a cleaner index structure, which can boost search performance.​</p>
-<h1 id="An-Example-News-Search​" class="common-anchor-header">An Example: News Search​<button data-href="#An-Example-News-Search​" class="anchor-icon" translate="no">
+  
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/schema-hands-on.png" alt="Example data schema designed for searching news article" class="doc-image" id="example-data-schema-designed-for-searching-news-article" />
+   </span> <span class="img-wrapper"> <span>뉴스 기사 검색을 위해 설계된 데이터 스키마 예시</span> </span></p>
+<p>검색 시스템의 데이터 모델 설계에는 비즈니스 요구 사항을 분석하고 스키마로 표현된 데이터 모델로 정보를 추상화하는 작업이 포함됩니다. 예를 들어, 텍스트를 검색하려면 '임베딩'을 통해 리터럴 문자열을 벡터로 변환하여 벡터 검색이 가능하도록 '색인화'해야 합니다. 이 기본 요구 사항 외에도 게시 타임스탬프나 작성자 등의 다른 속성을 저장해야 할 수도 있습니다. 이 메타데이터를 사용하면 필터링을 통해 시맨틱 검색을 구체화하여 특정 날짜 이후에 또는 특정 작성자가 게시한 텍스트만 반환할 수 있습니다. 또한 애플리케이션에서 검색 결과를 렌더링하기 위해 기본 텍스트와 함께 검색해야 할 수도 있습니다. 이러한 텍스트 조각을 구성하려면 정수 또는 문자열로 표현되는 고유 식별자를 각각 할당해야 합니다. 이러한 요소는 정교한 검색 로직을 구현하는 데 필수적입니다.</p>
+<p>잘 설계된 스키마는 데이터 모델을 추상화하고 검색을 통해 비즈니스 목표를 달성할 수 있는지 여부를 결정하기 때문에 중요합니다. 또한 컬렉션에 삽입되는 모든 데이터 행이 스키마를 따라야 하므로 데이터 일관성과 장기적인 품질을 유지하는 데 큰 도움이 됩니다. 기술적 관점에서 잘 정의된 스키마는 잘 정리된 열 데이터 저장과 더 깔끔한 인덱스 구조로 이어져 검색 성능을 향상시킬 수 있습니다.</p>
+<h1 id="An-Example-News-Search​" class="common-anchor-header">예시: 뉴스 검색<button data-href="#An-Example-News-Search​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -49,47 +45,47 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Let’s say we want to build search for a news website and we have a corpus of news with text, thumbnail images, and other metadata. First, we need to analyze how we want to utilize the data to support the business requirement of search. Imagine the requirement is to retrieve the news based the thumbnail image and the summary of the content, and taking the metadata such as author info and publishing time as criteria to filter the search result. These requirements can be further broken down into:​</p>
+    </button></h1><p>뉴스 웹사이트에 대한 검색을 구축하려고 하는데 텍스트, 썸네일 이미지 및 기타 메타데이터가 포함된 뉴스 코퍼스가 있다고 가정해 봅시다. 먼저, 검색이라는 비즈니스 요구 사항을 지원하기 위해 데이터를 어떻게 활용할 것인지 분석해야 합니다. 썸네일 이미지와 콘텐츠 요약을 기반으로 뉴스를 검색하고, 작성자 정보 및 게시 시간과 같은 메타데이터를 검색 결과를 필터링하는 기준으로 삼는다고 가정해 보겠습니다. 이러한 요구 사항은 더 세분화할 수 있습니다.</p>
 <ul>
-<li><p>To search images via text, we can embed images into vectors via multimodal embedding model that can map text and image data into the same latent space.​</p></li>
-<li><p>The summary text of an article is embedded into vectors via text embedding model.​</p></li>
-<li><p>To filter based on the publish time, the dates are stored as a scalar field and an index is needed for the scalar field for efficient filtering. Other more complex data structures such a JSON can be stored in a scalar and a filtered search performed on their contents (indexing JSON is an upcoming feature).​</p></li>
-<li><p>To retrieve the image thumbnail bytes and render it on the search result page, the image url is also stored. Similarly, for the summary text and title. (Alternatively, we could store the raw text and image file data as scalar fields if required.)​</p></li>
-<li><p>To improve the search result on the summary text, we design a hybrid search approach. For one retrieval path, we use regular embedding model to generate dense vector from the text, such as OpenAI’s <code translate="no">text-embedding-3-large</code> or the open-source <code translate="no">bge-large-en-v1.5</code>. These models are good at representing the overall semantic of the text. The other path is to use sparse embedding models such as BM25 or SPLADE to generate a sparse vector, resembling the full-text search which is good at grasping the details and individual concepts in the text. Milvus supports using both in the same data collection thanks to its multi-vector feature. The search on multiple vectors can be done in a single <code translate="no">hybrid_search()</code> operation.​</p></li>
-<li><p>Finally, we also need an ID field to identify each individual news page, formally referred to as an “entity” in Milvus terminology. This field is used as the primary key (or “pk” for short).​</p></li>
+<li><p>텍스트를 통해 이미지를 검색하려면 텍스트와 이미지 데이터를 동일한 잠재 공간에 매핑할 수 있는 멀티모달 임베딩 모델을 통해 이미지를 벡터에 임베드할 수 있습니다.</p></li>
+<li><p>기사의 요약 텍스트는 텍스트 임베딩 모델을 통해 벡터에 임베드됩니다.</p></li>
+<li><p>게시 시간을 기준으로 필터링하기 위해 날짜는 스칼라 필드로 저장되며, 효율적인 필터링을 위해 스칼라 필드에 인덱스가 필요합니다. JSON과 같은 더 복잡한 데이터 구조는 스칼라에 저장하고 그 내용에 대해 필터링된 검색을 수행할 수 있습니다(JSON 색인 기능은 곧 제공될 예정입니다).</p></li>
+<li><p>이미지 썸네일 바이트를 검색하여 검색 결과 페이지에 렌더링하기 위해 이미지 URL도 저장됩니다. 마찬가지로 요약 텍스트와 제목도 마찬가지입니다. (또는 필요한 경우 원시 텍스트 및 이미지 파일 데이터를 스칼라 필드로 저장할 수도 있습니다.)</p></li>
+<li><p>요약 텍스트에 대한 검색 결과를 개선하기 위해 하이브리드 검색 방식을 설계합니다. 하나의 검색 경로의 경우, OpenAI의 <code translate="no">text-embedding-3-large</code> 또는 오픈 소스 <code translate="no">bge-large-en-v1.5</code> 와 같은 일반 임베딩 모델을 사용해 텍스트에서 고밀도 벡터를 생성합니다. 이러한 모델은 텍스트의 전체적인 의미를 잘 표현합니다. 다른 경로는 BM25 또는 SPLADE와 같은 스파스 임베딩 모델을 사용하여 텍스트의 세부 사항과 개별 개념을 파악하는 데 좋은 전체 텍스트 검색과 유사한 스파스 벡터를 생성하는 것입니다. Milvus는 멀티 벡터 기능을 통해 동일한 데이터 수집에서 이 두 가지를 모두 사용할 수 있도록 지원합니다. 여러 벡터에 대한 검색은 단일 <code translate="no">hybrid_search()</code> 작업으로 수행할 수 있습니다.</p></li>
+<li><p>마지막으로, 각 개별 뉴스 페이지를 식별하기 위한 ID 필드도 필요한데, 공식적으로 Milvus 용어로는 '엔티티'라고 합니다. 이 필드는 기본 키(또는 줄여서 "pk")로 사용됩니다.</p></li>
 </ul>
-<table data-block-token="EOxnd1GqhoODuWx4UyucOMahn0e"><thead><tr><th data-block-token="P2g0djnY5oRKT7xw7aSceiaQnRb" colspan="1" rowspan="1"><p data-block-token="TrIsdjxzooLqxUxiqkTcfN5pnHd">Field Name​</p>
-</th><th data-block-token="KVq4dDr4BovOHSxtWd5cZBnnnn5" colspan="1" rowspan="1"><p data-block-token="D9uYdwp8ToHqXmxqueVcBAi2n6b">article_id (Primary Key)​</p>
-</th><th data-block-token="O6jTdN4rBouwtQxFNgpcM7GFnyp" colspan="1" rowspan="1"><p data-block-token="IJuldjRIeoNHRgx0ix5c2eBSn6f">title​</p>
-</th><th data-block-token="V4EKdYzLqoENTTxXuOwcVTIGnLg" colspan="1" rowspan="1"><p data-block-token="Tldydg7BboZeSUxiaTfcUnsfnqd">author_info​</p>
-</th><th data-block-token="GHF6dqGRVoQ6Kpxv9tUcijFXnVc" colspan="1" rowspan="1"><p data-block-token="Ih0jdg4yToRJOkxyriwcKJ39nVd">publish_ts​</p>
-</th><th data-block-token="Ui3ldA2BwovU8LxMHcIcrmVvnLg" colspan="1" rowspan="1"><p data-block-token="PJGJdX1efoo647xvgCDcuhkznye">image_url​</p>
-</th><th data-block-token="VCskd6ySvocz8IxF5CVcpmF5n0b" colspan="1" rowspan="1"><p data-block-token="Cx7idKjgYoctpYxsnskc7OD0nxb">image_vector​</p>
-</th><th data-block-token="WSbhdTqglocn3KxpvBscFOh2n6d" colspan="1" rowspan="1"><p data-block-token="Q16ods013oZUOQxk9vicK0JGn2e">summary​</p>
-</th><th data-block-token="T5HAdXwado1qJpxCpf9cwDjmnhe" colspan="1" rowspan="1"><p data-block-token="ZG3odG5k2oMqFSxM8TFcE8kZnCh">summary_dense_vector​</p>
-</th><th data-block-token="MWAHdYgIvogpIfxsRnscz5WWnOe" colspan="1" rowspan="1"><p data-block-token="MeU1dGziaodmTkxc5q9cvYR9ndd">summary_sparse_vector​</p>
-</th></tr></thead><tbody><tr><td data-block-token="V1x7d7y15oxxNSxpvRJcoW7VnWh" colspan="1" rowspan="1"><p data-block-token="X9old4LgooPgrexElIBc2JgNnac">Type​</p>
-</td><td data-block-token="EWlPdiRtBoqrOYxLoWDcnPUQn3f" colspan="1" rowspan="1"><p data-block-token="TtABd1mq0o2ShTxtXfncI8i9n8g">INT64​</p>
-</td><td data-block-token="ZICad5qEYohcTvxo477cZIWInCh" colspan="1" rowspan="1"><p data-block-token="CBHWdVhLKo2wn1xR3Pocf43NnRs">VARCHAR​</p>
-</td><td data-block-token="VTwJdpuQboqurJxXbQUctG8fnNc" colspan="1" rowspan="1"><p data-block-token="OI1ldgzbAoEIOUx7boRcooR0nvb">JSON​</p>
-</td><td data-block-token="UVWKdd69Mo8hyyxOqLLcZn7kncc" colspan="1" rowspan="1"><p data-block-token="QJUZdxgzEora0PxAxf8c1axknbp">INT32​</p>
-</td><td data-block-token="Wf8AdfYj1on0OkxjHkocPiqInYe" colspan="1" rowspan="1"><p data-block-token="KE0QdVg3doF05Exq3fmccqOcnvc">VARCHAR​</p>
-</td><td data-block-token="JVHgd9P9aoSl9mxqoFfcM7ownXz" colspan="1" rowspan="1"><p data-block-token="TwotdcMshoE2TSxGIauclTZjnLh">FLOAT_VECTOR​</p>
-</td><td data-block-token="MUwwdyV4co3V2QxOxc1cMuD9nbc" colspan="1" rowspan="1"><p data-block-token="RpfxdP0AHoW0xhx8sfBclJvtnyc">VARCHAR​</p>
-</td><td data-block-token="P4bqdeIGOoV67FxhYmtclfBpn1d" colspan="1" rowspan="1"><p data-block-token="RyztdWGXzoP4IBxHd8Pcu0q2nbe">FLOAT_VECTOR​</p>
-</td><td data-block-token="AtJldXTWUoT5FPxY6EncUqWsnrc" colspan="1" rowspan="1"><p data-block-token="FJMJdqKeFodc73xGlnpcYgJanWg">SPARSE_FLOAT_VECTOR​</p>
-</td></tr><tr><td data-block-token="ZAKYdJAv6oj5IxxYUaUcLFOEnkh" colspan="1" rowspan="1"><p data-block-token="Frr0dWnzWo5UFDxLfqaceqvSnmg">Need Index​</p>
-</td><td data-block-token="ONHadATa9ojiwAxEwUdcaJpOnbb" colspan="1" rowspan="1"><p data-block-token="ZGT8dgMGbo8r22xpFztcycKDn9c">N​</p>
-</td><td data-block-token="E3Hod6CkXozMt4x0xF6cPkdin4e" colspan="1" rowspan="1"><p data-block-token="Ha0PdI0byocer9xXJGac8QYdnPg">N​</p>
-</td><td data-block-token="NaJ5dcptooRPe8xk9VTcx6Amnld" colspan="1" rowspan="1"><p data-block-token="U57edD6zqoPY7LxQjPDcnNDVnxc">N (Support coming soon)​</p>
-</td><td data-block-token="MqejdtkWboMHmZxWWCAcK7X0n1e" colspan="1" rowspan="1"><p data-block-token="NeNJdcEvloQ4E7xN9JeczCORnQX">Y​</p>
-</td><td data-block-token="VKy3driI9owHhCx1l4Iczj8Hnkb" colspan="1" rowspan="1"><p data-block-token="QRWQdK0J3oWYc0x8xT6c4Me5nXb">N​</p>
-</td><td data-block-token="EZR0dRNXpotMtdxAKG9cHj8zn2c" colspan="1" rowspan="1"><p data-block-token="LTyRduM2FoGmkVxa1HgceBFbnKf">Y​</p>
-</td><td data-block-token="W3MydyW7bod6UaxdNURcqTnBnFb" colspan="1" rowspan="1"><p data-block-token="EwbCdu2ZZop4zJxbyhZcR2HunUh">N​</p>
-</td><td data-block-token="XQdvd35mVov5cUxstzpcipmlni8" colspan="1" rowspan="1"><p data-block-token="SJoudzWmiouT20xXCCpcQR1Mnsz">Y​</p>
-</td><td data-block-token="MXntdRmaUo91QoxGeNgc9goanee" colspan="1" rowspan="1"><p data-block-token="Sxfzdk7VoocU6kxAV63cI3ObnTe">Y​</p>
+<table data-block-token="EOxnd1GqhoODuWx4UyucOMahn0e"><thead><tr><th data-block-token="P2g0djnY5oRKT7xw7aSceiaQnRb" colspan="1" rowspan="1"><p data-block-token="TrIsdjxzooLqxUxiqkTcfN5pnHd">필드 이름</p>
+</th><th data-block-token="KVq4dDr4BovOHSxtWd5cZBnnnn5" colspan="1" rowspan="1"><p data-block-token="D9uYdwp8ToHqXmxqueVcBAi2n6b">article_id(기본 키)</p>
+</th><th data-block-token="O6jTdN4rBouwtQxFNgpcM7GFnyp" colspan="1" rowspan="1"><p data-block-token="IJuldjRIeoNHRgx0ix5c2eBSn6f">title</p>
+</th><th data-block-token="V4EKdYzLqoENTTxXuOwcVTIGnLg" colspan="1" rowspan="1"><p data-block-token="Tldydg7BboZeSUxiaTfcUnsfnqd">author_info</p>
+</th><th data-block-token="GHF6dqGRVoQ6Kpxv9tUcijFXnVc" colspan="1" rowspan="1"><p data-block-token="Ih0jdg4yToRJOkxyriwcKJ39nVd">publish_ts</p>
+</th><th data-block-token="Ui3ldA2BwovU8LxMHcIcrmVvnLg" colspan="1" rowspan="1"><p data-block-token="PJGJdX1efoo647xvgCDcuhkznye">image_url</p>
+</th><th data-block-token="VCskd6ySvocz8IxF5CVcpmF5n0b" colspan="1" rowspan="1"><p data-block-token="Cx7idKjgYoctpYxsnskc7OD0nxb">이미지_벡터</p>
+</th><th data-block-token="WSbhdTqglocn3KxpvBscFOh2n6d" colspan="1" rowspan="1"><p data-block-token="Q16ods013oZUOQxk9vicK0JGn2e">요약</p>
+</th><th data-block-token="T5HAdXwado1qJpxCpf9cwDjmnhe" colspan="1" rowspan="1"><p data-block-token="ZG3odG5k2oMqFSxM8TFcE8kZnCh">summary_dense_vector</p>
+</th><th data-block-token="MWAHdYgIvogpIfxsRnscz5WWnOe" colspan="1" rowspan="1"><p data-block-token="MeU1dGziaodmTkxc5q9cvYR9ndd">요약_스파스_벡터</p>
+</th></tr></thead><tbody><tr><td data-block-token="V1x7d7y15oxxNSxpvRJcoW7VnWh" colspan="1" rowspan="1"><p data-block-token="X9old4LgooPgrexElIBc2JgNnac">유형</p>
+</td><td data-block-token="EWlPdiRtBoqrOYxLoWDcnPUQn3f" colspan="1" rowspan="1"><p data-block-token="TtABd1mq0o2ShTxtXfncI8i9n8g">INT64</p>
+</td><td data-block-token="ZICad5qEYohcTvxo477cZIWInCh" colspan="1" rowspan="1"><p data-block-token="CBHWdVhLKo2wn1xR3Pocf43NnRs">VARCHAR</p>
+</td><td data-block-token="VTwJdpuQboqurJxXbQUctG8fnNc" colspan="1" rowspan="1"><p data-block-token="OI1ldgzbAoEIOUx7boRcooR0nvb">JSON</p>
+</td><td data-block-token="UVWKdd69Mo8hyyxOqLLcZn7kncc" colspan="1" rowspan="1"><p data-block-token="QJUZdxgzEora0PxAxf8c1axknbp">INT32</p>
+</td><td data-block-token="Wf8AdfYj1on0OkxjHkocPiqInYe" colspan="1" rowspan="1"><p data-block-token="KE0QdVg3doF05Exq3fmccqOcnvc">VARCHAR</p>
+</td><td data-block-token="JVHgd9P9aoSl9mxqoFfcM7ownXz" colspan="1" rowspan="1"><p data-block-token="TwotdcMshoE2TSxGIauclTZjnLh">FLOAT_VECTOR</p>
+</td><td data-block-token="MUwwdyV4co3V2QxOxc1cMuD9nbc" colspan="1" rowspan="1"><p data-block-token="RpfxdP0AHoW0xhx8sfBclJvtnyc">VARCHAR</p>
+</td><td data-block-token="P4bqdeIGOoV67FxhYmtclfBpn1d" colspan="1" rowspan="1"><p data-block-token="RyztdWGXzoP4IBxHd8Pcu0q2nbe">FLOAT_VECTOR</p>
+</td><td data-block-token="AtJldXTWUoT5FPxY6EncUqWsnrc" colspan="1" rowspan="1"><p data-block-token="FJMJdqKeFodc73xGlnpcYgJanWg">SPARSE_FLOAT_VECTOR</p>
+</td></tr><tr><td data-block-token="ZAKYdJAv6oj5IxxYUaUcLFOEnkh" colspan="1" rowspan="1"><p data-block-token="Frr0dWnzWo5UFDxLfqaceqvSnmg">필요 인덱스</p>
+</td><td data-block-token="ONHadATa9ojiwAxEwUdcaJpOnbb" colspan="1" rowspan="1"><p data-block-token="ZGT8dgMGbo8r22xpFztcycKDn9c">N</p>
+</td><td data-block-token="E3Hod6CkXozMt4x0xF6cPkdin4e" colspan="1" rowspan="1"><p data-block-token="Ha0PdI0byocer9xXJGac8QYdnPg">N</p>
+</td><td data-block-token="NaJ5dcptooRPe8xk9VTcx6Amnld" colspan="1" rowspan="1"><p data-block-token="U57edD6zqoPY7LxQjPDcnNDVnxc">N (곧 지원 예정)</p>
+</td><td data-block-token="MqejdtkWboMHmZxWWCAcK7X0n1e" colspan="1" rowspan="1"><p data-block-token="NeNJdcEvloQ4E7xN9JeczCORnQX">Y</p>
+</td><td data-block-token="VKy3driI9owHhCx1l4Iczj8Hnkb" colspan="1" rowspan="1"><p data-block-token="QRWQdK0J3oWYc0x8xT6c4Me5nXb">N</p>
+</td><td data-block-token="EZR0dRNXpotMtdxAKG9cHj8zn2c" colspan="1" rowspan="1"><p data-block-token="LTyRduM2FoGmkVxa1HgceBFbnKf">Y</p>
+</td><td data-block-token="W3MydyW7bod6UaxdNURcqTnBnFb" colspan="1" rowspan="1"><p data-block-token="EwbCdu2ZZop4zJxbyhZcR2HunUh">N</p>
+</td><td data-block-token="XQdvd35mVov5cUxstzpcipmlni8" colspan="1" rowspan="1"><p data-block-token="SJoudzWmiouT20xXCCpcQR1Mnsz">Y</p>
+</td><td data-block-token="MXntdRmaUo91QoxGeNgc9goanee" colspan="1" rowspan="1"><p data-block-token="Sxfzdk7VoocU6kxAV63cI3ObnTe">Y</p>
 </td></tr></tbody></table>
-<h1 id="How-to-Implement-the-Example-Schema​" class="common-anchor-header">How to Implement the Example Schema​<button data-href="#How-to-Implement-the-Example-Schema​" class="anchor-icon" translate="no">
+<h1 id="How-to-Implement-the-Example-Schema​" class="common-anchor-header">예제 스키마를 구현하는 방법<button data-href="#How-to-Implement-the-Example-Schema​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -104,7 +100,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><h2 id="Create-Schema​" class="common-anchor-header">Create Schema​<button data-href="#Create-Schema​" class="anchor-icon" translate="no">
+    </button></h1><h2 id="Create-Schema​" class="common-anchor-header">스키마 생성<button data-href="#Create-Schema​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -119,8 +115,8 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>First, we create a Milvus client instance, which can be used to connect to the Milvus server and manage collections and data. ​</p>
-<p>To set up a schema, we use <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_schema.md"><code translate="no">create_schema()</code></a> to create a schema object and <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/CollectionSchema/add_field.md"><code translate="no">add_field()</code></a> to add fields to the schema.​</p>
+    </button></h2><p>먼저 Milvus 서버에 연결하여 컬렉션과 데이터를 관리하는 데 사용할 수 있는 Milvus 클라이언트 인스턴스를 생성합니다. </p>
+<p>스키마를 설정하려면 <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_schema.md"><code translate="no">create_schema()</code></a> 를 사용하여 스키마 객체를 만들고 <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/CollectionSchema/add_field.md"><code translate="no">add_field()</code></a> 를 사용하여 스키마에 필드를 추가합니다.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType​
 ​
 collection_name = <span class="hljs-string">&quot;my_collection&quot;</span>​
@@ -143,15 +139,15 @@ schema.add_field(field_name=<span class="hljs-string">&quot;summary_dense_vector
 schema.add_field(field_name=<span class="hljs-string">&quot;summary_sparse_vector&quot;</span>, datatype=DataType.SPARSE_FLOAT_VECTOR, description=<span class="hljs-string">&quot;summary sparse vector&quot;</span>)​
 
 <button class="copy-code-btn"></button></code></pre>
-<p>You might notice the argument <code translate="no">uri</code> in <code translate="no">MilvusClient</code>, which is used to connect to the Milvus server. You can set the arguments as follows:​</p>
+<p><code translate="no">MilvusClient</code> 에서 <code translate="no">uri</code> 인수를 볼 수 있는데, 이는 Milvus 서버에 연결하는 데 사용됩니다. 인수는 다음과 같이 설정할 수 있습니다.</p>
 <ul>
-<li><p>If you only need a local vector database for small scale data or prototypeing, setting the uri as a local file, e.g.<code translate="no">./milvus.db</code>, is the most convenient method, as it automatically utilizes <a href="https://milvus.io/docs/milvus_lite.md">Milvus Lite</a> to store all data in this file.​</p></li>
-<li><p>If you have large scale of data, say more than a million vectors, you can set up a more performant Milvus server on <a href="https://milvus.io/docs/quickstart.md">Docker or Kubernetes</a>. In this setup, please use the server address and port as your uri, e.g.<code translate="no">http://localhost:19530</code>. If you enable the authentication feature on Milvus, use “&lt;your_username&gt;:&lt;your_password&gt;” as the token, otherwise don’t set the token.​</p></li>
-<li><p>If you use <a href="https://zilliz.com/cloud">Zilliz Cloud</a>, the fully managed cloud service for Milvus, adjust the <code translate="no">uri</code> and <code translate="no">token</code>, which correspond to the <a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">Public Endpoint and API key</a> in Zilliz Cloud.​</p></li>
+<li><p>소규모 데이터나 프로토타이핑을 위해 로컬 벡터 데이터베이스만 필요한 경우, 예를 들어<code translate="no">./milvus.db</code> 와 같이 로컬 파일로 URI를 설정하는 것이 가장 편리한 방법이며, 이 파일에 모든 데이터를 저장하기 위해 <a href="https://milvus.io/docs/milvus_lite.md">Milvus Lite를</a> 자동으로 활용하기 때문입니다.</p></li>
+<li><p>백만 개 이상의 벡터와 같이 대규모 데이터가 있는 경우, <a href="https://milvus.io/docs/quickstart.md">Docker 또는 Kubernetes에서</a> 더 성능이 뛰어난 Milvus 서버를 설정할 수 있습니다. 이 설정에서는 서버 주소와 포트를 URI로 사용하세요(예:<code translate="no">http://localhost:19530</code>). Milvus에서 인증 기능을 활성화하는 경우 토큰으로 "&lt;사용자 이름&gt;:&lt;사용자 비밀번호&gt;"를 사용하고, 그렇지 않은 경우 토큰을 설정하지 마세요.</p></li>
+<li><p>밀버스의 완전 관리형 클라우드 서비스인 <a href="https://zilliz.com/cloud">질리즈 클라우드를</a> 사용하는 경우, 질리즈 클라우드의 <a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">퍼블릭 엔드포인트와 API 키에</a> 해당하는 <code translate="no">uri</code> 및 <code translate="no">token</code> 을 조정합니다.</p></li>
 </ul>
-<p>As for the <code translate="no">auto_id</code> in <code translate="no">MilvusClient.create_schema</code>, AutoID is an attribute of the primary field that determines whether to enable auto increment for the primary field.  Since we set the field<code translate="no">article_id</code> as the primary key and want to add article id manually, we set <code translate="no">auto_id</code> False to disable this feature.​</p>
-<p>After adding all the fields to the schema object, our schema object agrees with the entries in the table above.​</p>
-<h2 id="Define-Index​" class="common-anchor-header">Define Index​<button data-href="#Define-Index​" class="anchor-icon" translate="no">
+<p><code translate="no">MilvusClient.create_schema</code> 의 <code translate="no">auto_id</code> 는 기본 필드의 속성으로 기본 필드에 대한 자동 증분 활성화 여부를 결정합니다.  <code translate="no">article_id</code> 필드를 기본 키로 설정하고 문서 ID를 수동으로 추가하고자 하므로 <code translate="no">auto_id</code> False를 설정하여 이 기능을 비활성화합니다.</p>
+<p>스키마 객체에 모든 필드를 추가하면 스키마 객체가 위 표의 항목과 일치합니다.</p>
+<h2 id="Define-Index​" class="common-anchor-header">색인 정의<button data-href="#Define-Index​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -166,7 +162,7 @@ schema.add_field(field_name=<span class="hljs-string">&quot;summary_sparse_vecto
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>After defining the schema with various fields, including metadata and vector fields for image and summary data, the next step involves preparing the index parameters. Indexing is crucial for optimizing the search and retrieval of vectors, ensuring efficient query performance. In the following section, we will define the index parameters for the specified vector and scalar fields in the collection.​</p>
+    </button></h2><p>이미지 및 요약 데이터에 대한 메타데이터와 벡터 필드를 포함한 다양한 필드로 스키마를 정의한 후 다음 단계는 인덱스 매개변수를 준비하는 것입니다. 인덱싱은 벡터의 검색과 검색을 최적화하고 효율적인 쿼리 성능을 보장하는 데 매우 중요합니다. 다음 섹션에서는 컬렉션에서 지정된 벡터 및 스칼라 필드에 대한 인덱스 매개변수를 정의하겠습니다.</p>
 <pre><code translate="no" class="language-python">index_params = client.<span class="hljs-title function_">prepare_index_params</span>()​
 ​
 index_params.<span class="hljs-title function_">add_index</span>(​
@@ -190,9 +186,9 @@ index_params.<span class="hljs-title function_">add_index</span>(​
 )​
 
 <button class="copy-code-btn"></button></code></pre>
-<p>Once the index parameters are set up and applied, Milvus is optimized for handling complex queries on vector and scalar data. This indexing enhances the performance and accuracy of similarity searches within the collection, allowing for efficient retrieval of articles based on image vectors and summary vectors. By leveraging the <a href="https://milvus.io/docs/glossary.md#Auto-Index"><code translate="no">AUTOINDEX</code></a> for dense vectors, the <a href="https://milvus.io/docs/sparse_vector.md#Index-the-collection"><code translate="no">SPARSE_INVERTED_INDEX</code></a> for sparse vectors and the <a href="https://milvus.io/docs/scalar_index.md#Inverted-indexing"><code translate="no">INVERTED_INDEX</code></a> for scalars, Milvus can quickly identify and return the most relevant results, significantly improving the overall user experience and effectiveness of the data retrieval process.​</p>
-<p>There are many types of indices and metrics. For more information about them, you can refer to <a href="https://milvus.io/docs/overview.md#Index-types">Milvus index type</a> and <a href="https://milvus.io/docs/glossary.md#Metric-type">Milvus metric type</a>.​</p>
-<h2 id="Create-Collection​" class="common-anchor-header">Create Collection​<button data-href="#Create-Collection​" class="anchor-icon" translate="no">
+<p>인덱스 매개변수를 설정하고 적용하면 Milvus는 벡터 및 스칼라 데이터에 대한 복잡한 쿼리를 처리하는 데 최적화됩니다. 이 인덱싱은 컬렉션 내 유사성 검색의 성능과 정확성을 향상시켜 이미지 벡터와 요약 벡터를 기반으로 한 문서를 효율적으로 검색할 수 있게 해줍니다. 밀도가 높은 벡터의 경우 <a href="https://milvus.io/docs/glossary.md#Auto-Index"><code translate="no">AUTOINDEX</code></a> 고밀도 벡터의 경우 <a href="https://milvus.io/docs/sparse_vector.md#Index-the-collection"><code translate="no">SPARSE_INVERTED_INDEX</code></a> 희소 벡터와 <a href="https://milvus.io/docs/scalar_index.md#Inverted-indexing"><code translate="no">INVERTED_INDEX</code></a> 스칼라 인덱스를 활용함으로써 Milvus는 가장 관련성이 높은 결과를 신속하게 식별하고 반환하여 전반적인 사용자 경험과 데이터 검색 프로세스의 효율성을 크게 개선할 수 있습니다.</p>
+<p>다양한 유형의 인덱스와 메트릭이 있습니다. 이에 대한 자세한 내용은 <a href="https://milvus.io/docs/overview.md#Index-types">Milvus 인덱스 유형</a> 및 <a href="https://milvus.io/docs/glossary.md#Metric-type">Milvus 메트릭 유형을</a> 참조하세요.</p>
+<h2 id="Create-Collection​" class="common-anchor-header">컬렉션 만들기<button data-href="#Create-Collection​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -207,7 +203,7 @@ index_params.<span class="hljs-title function_">add_index</span>(​
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>With the schema and indexes defined, we create a “collection” with these parameters. Collection to Milvus is like a table to a relational DB.​</p>
+    </button></h2><p>스키마와 인덱스가 정의되면 이러한 매개변수를 사용하여 "컬렉션"을 만듭니다. Milvus에 대한 컬렉션은 관계형 DB에 대한 테이블과 같습니다.</p>
 <pre><code translate="no" class="language-python">client.create_collection(​
     collection_name=collection_name,​
     schema=schema,​
@@ -215,14 +211,14 @@ index_params.<span class="hljs-title function_">add_index</span>(​
 )​
 
 <button class="copy-code-btn"></button></code></pre>
-<p>We can verify that the collection has been successfully created by describing the collection.​</p>
+<p>컬렉션에 대한 설명을 통해 컬렉션이 성공적으로 생성되었는지 확인할 수 있습니다.</p>
 <pre><code translate="no" class="language-python">collection_desc = client.describe_collection(​
     collection_name=collection_name​
 )​
 <span class="hljs-built_in">print</span>(collection_desc)​
 
 <button class="copy-code-btn"></button></code></pre>
-<h1 id="Other-Considerations​" class="common-anchor-header">Other Considerations​<button data-href="#Other-Considerations​" class="anchor-icon" translate="no">
+<h1 id="Other-Considerations​" class="common-anchor-header">기타 고려 사항<button data-href="#Other-Considerations​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -237,7 +233,7 @@ index_params.<span class="hljs-title function_">add_index</span>(​
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><h2 id="Loading-Index​" class="common-anchor-header">Loading Index​<button data-href="#Loading-Index​" class="anchor-icon" translate="no">
+    </button></h1><h2 id="Loading-Index​" class="common-anchor-header">인덱스 로드<button data-href="#Loading-Index​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -252,8 +248,8 @@ index_params.<span class="hljs-title function_">add_index</span>(​
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>When creating a collection in Milvus, you can choose to load the index immediately or defer it until after bulk ingesting some data. Typically, you don’t need to make an explicit choice about this, as the above examples show that the index is automatically built for any ingested data right after collection creation. This allows for immediate searchability of the ingested data. However, if you have a large bulk insert after collection creation and don’t need to search for any data until a certain point, you can defer the index building by omitting index_params in the collection creation and build the index by calling load explicitly after ingesting all the data. This method is more efficient for building the index on a large collection, but no searches can be done until calling load().​</p>
-<h2 id="How-to-Define-Data-Model-For-Multi-tenancy​" class="common-anchor-header">How to Define Data Model For Multi-tenancy​<button data-href="#How-to-Define-Data-Model-For-Multi-tenancy​" class="anchor-icon" translate="no">
+    </button></h2><p>Milvus에서 컬렉션을 만들 때 인덱스를 즉시 로드하거나 일부 데이터를 대량으로 수집할 때까지 연기하도록 선택할 수 있습니다. 위의 예에서는 수집 생성 직후 수집된 모든 데이터에 대해 인덱스가 자동으로 생성되므로 일반적으로 이에 대해 명시적으로 선택할 필요가 없습니다. 이렇게 하면 수집된 데이터를 즉시 검색할 수 있습니다. 그러나 컬렉션 생성 후 대량의 대량 삽입이 있고 특정 시점까지 데이터를 검색할 필요가 없는 경우, 컬렉션 생성에서 index_params를 생략하여 인덱스 구축을 연기하고 모든 데이터를 수집한 후 명시적으로 load를 호출하여 인덱스를 구축할 수 있습니다. 이 방법은 대규모 컬렉션에서 인덱스를 구축하는 데 더 효율적이지만 load()를 호출하기 전까지는 검색을 수행할 수 없습니다.</p>
+<h2 id="How-to-Define-Data-Model-For-Multi-tenancy​" class="common-anchor-header">멀티테넌시를 위한 데이터 모델을 정의하는 방법<button data-href="#How-to-Define-Data-Model-For-Multi-tenancy​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -268,5 +264,5 @@ index_params.<span class="hljs-title function_">add_index</span>(​
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>The concept of multiple tenants is commonly used in scenarios where a single software application or service needs to serve multiple independent users or organizations, each with their own isolated environment. This is frequently seen in cloud computing, SaaS (Software as a Service) applications, and database systems. For example, a cloud storage service may utilize multi-tenancy to allow different companies to store and manage their data separately while sharing the same underlying infrastructure. This approach maximizes resource utilization and efficiency while ensuring data security and privacy for each tenant.​</p>
-<p>The easiest way to differentiate tenants is by isolating their data and resources from each other. Each tenant either has exclusive access to specific resources or shares resources with others to manage Milvus entities such as databases, collections, and partitions. There are specific methods aligned with these entities to implement Milvus multi-tenancy. You can refer to the <a href="https://milvus.io/docs/multi_tenancy.md#Multi-tenancy-strategies">Milvus multi-tenancy page</a> for more information.​</p>
+    </button></h2><p>다중 테넌트 개념은 단일 소프트웨어 애플리케이션이나 서비스가 각각 고립된 환경을 가진 여러 독립적인 사용자나 조직에 서비스를 제공해야 하는 시나리오에서 일반적으로 사용됩니다. 이는 클라우드 컴퓨팅, SaaS(서비스형 소프트웨어) 애플리케이션 및 데이터베이스 시스템에서 자주 볼 수 있습니다. 예를 들어, 클라우드 스토리지 서비스는 멀티테넌시를 활용하여 여러 회사가 동일한 기본 인프라를 공유하면서 데이터를 개별적으로 저장하고 관리할 수 있도록 할 수 있습니다. 이 접근 방식은 리소스 활용도와 효율성을 극대화하는 동시에 각 테넌트의 데이터 보안과 개인정보 보호를 보장합니다.</p>
+<p>테넌트를 구분하는 가장 쉬운 방법은 데이터와 리소스를 서로 분리하는 것입니다. 각 테넌트는 특정 리소스에 대한 독점적 액세스 권한을 갖거나 데이터베이스, 컬렉션, 파티션과 같은 Milvus 엔티티를 관리하기 위해 다른 테넌트와 리소스를 공유합니다. 이러한 엔티티에 맞춰 Milvus 멀티테넌시를 구현하기 위한 특정 방법이 있습니다. 자세한 내용은 <a href="https://milvus.io/docs/multi_tenancy.md#Multi-tenancy-strategies">Milvus 멀티테넌시 페이지를</a> 참조하세요.</p>

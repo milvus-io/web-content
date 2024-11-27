@@ -1,10 +1,8 @@
 ---
 id: embed-with-cohere.md
 order: 9
-summary: >-
-  This article describes how to use the CohereEmbeddingFunction to encode
-  documents and queries using the Cohere embedding model.
-title: Embed Cohere
+summary: 이 문서에서는 코히어 임베딩 함수를 사용하여 코히어 임베딩 모델을 사용하여 문서와 쿼리를 인코딩하는 방법을 설명합니다.
+title: Cohere 포함
 ---
 <h1 id="Cohere" class="common-anchor-header">Cohere<button data-href="#Cohere" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -21,13 +19,13 @@ title: Embed Cohere
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Cohere’s embedding models are used to generate text embeddings, which are lists of floating-point numbers that capture semantic information about the text. These embeddings can be used for tasks like text classification and semantic search.</p>
-<p>Milvus integrates with Cohere’s embedding models using the <code translate="no">CohereEmbeddingFunction</code> class. This class handles the computation of embeddings and returns them in a format compatible with Milvus for indexing and searching.</p>
-<p>To use this feature, install the necessary dependencies:</p>
+    </button></h1><p>Cohere의 임베딩 모델은 텍스트에 대한 의미적 정보를 캡처하는 부동 소수점 숫자 목록인 텍스트 임베딩을 생성하는 데 사용됩니다. 이러한 임베딩은 텍스트 분류 및 시맨틱 검색과 같은 작업에 사용할 수 있습니다.</p>
+<p>Milvus는 <code translate="no">CohereEmbeddingFunction</code> 클래스를 사용하여 Cohere의 임베딩 모델과 통합됩니다. 이 클래스는 임베딩 계산을 처리하고 인덱싱 및 검색을 위해 Milvus와 호환되는 형식으로 임베딩을 반환합니다.</p>
+<p>이 기능을 사용하려면 필요한 종속성을 설치하세요:</p>
 <pre><code translate="no" class="language-bash">pip install --upgrade pymilvus
 pip install <span class="hljs-string">&quot;pymilvus[model]&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Then, instantiate the <code translate="no">CohereEmbeddingFunction</code>:</p>
+<p>그런 다음 <code translate="no">CohereEmbeddingFunction</code> 을 인스턴스화합니다:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus.<span class="hljs-property">model</span>.<span class="hljs-property">dense</span> <span class="hljs-keyword">import</span> <span class="hljs-title class_">CohereEmbeddingFunction</span>
 
 cohere_ef = <span class="hljs-title class_">CohereEmbeddingFunction</span>(
@@ -37,29 +35,29 @@ cohere_ef = <span class="hljs-title class_">CohereEmbeddingFunction</span>(
     embedding_types=[<span class="hljs-string">&quot;float&quot;</span>]
 )
 <button class="copy-code-btn"></button></code></pre>
-<p><strong>Parameters</strong>:</p>
+<p><strong>매개변수</strong></p>
 <ul>
-<li><p><code translate="no">model_name</code> (<em>string</em>)</p>
-<p>The name of the Cohere embedding model to use for encoding. You can specify any of the available Cohere embedding model names, for example, <code translate="no">embed-english-v3.0</code>, <code translate="no">embed-multilingual-v3.0</code>, etc. If you leave this parameter unspecified, <code translate="no">embed-english-light-v3.0</code> will be used. For a list of available models, refer to <a href="https://docs.cohere.com/docs/models#embed">Embed</a>.</p></li>
-<li><p><code translate="no">api_key</code> (<em>string</em>)</p>
-<p>The API key for accessing the Cohere API.</p></li>
-<li><p><code translate="no">input_type</code> (<em>string</em>)</p>
-<p>The type of input passed to the model. Required for embedding models v3 and higher.</p>
+<li><p><code translate="no">model_name</code> <em>(문자열</em>)</p>
+<p>인코딩에 사용할 Cohere 임베딩 모델의 이름입니다. 예를 들어 <code translate="no">embed-english-v3.0</code>, <code translate="no">embed-multilingual-v3.0</code> 등과 같이 사용 가능한 Cohere 임베딩 모델 이름을 지정할 수 있습니다. 이 매개변수를 지정하지 않으면 <code translate="no">embed-english-light-v3.0</code> 이 사용됩니다. 사용 가능한 모델 목록은 <a href="https://docs.cohere.com/docs/models#embed">임베드를</a> 참조하세요.</p></li>
+<li><p><code translate="no">api_key</code> <em>(문자열</em>)</p>
+<p>Cohere API에 액세스하기 위한 API 키입니다.</p></li>
+<li><p><code translate="no">input_type</code> <em>(문자열</em>)</p>
+<p>모델에 전달된 입력 유형입니다. 모델 v3 이상 임베드에 필요합니다.</p>
 <ul>
-<li><code translate="no">&quot;search_document&quot;</code>: Used for embeddings stored in a vector database for search use-cases.</li>
-<li><code translate="no">&quot;search_query&quot;</code>: Used for embeddings of search queries run against a vector DB to find relevant documents.</li>
-<li><code translate="no">&quot;classification&quot;</code>: Used for embeddings passed through a text classifier.</li>
-<li><code translate="no">&quot;clustering&quot;</code>: Used for the embeddings run through a clustering algorithm.</li>
+<li><code translate="no">&quot;search_document&quot;</code>: 검색 사용 사례를 위해 벡터 데이터베이스에 저장된 임베딩에 사용됩니다.</li>
+<li><code translate="no">&quot;search_query&quot;</code>: 관련 문서를 찾기 위해 벡터 DB에 대해 실행되는 검색 쿼리의 임베딩에 사용됩니다.</li>
+<li><code translate="no">&quot;classification&quot;</code>: 텍스트 분류기를 통과한 임베딩에 사용됩니다.</li>
+<li><code translate="no">&quot;clustering&quot;</code>: 클러스터링 알고리즘을 통해 실행되는 임베딩에 사용됩니다.</li>
 </ul></li>
-<li><p><code translate="no">embedding_types</code> (<em>List[str]</em>)</p>
-<p>The type of embeddings you want to get back. Not required and default is None, which returns the Embed Floats response type. Currently, you can only specify a single value for this parameter. Possible values:</p>
+<li><p><code translate="no">embedding_types</code> <em>(List[str]</em>)</p>
+<p>반환하려는 임베딩 유형입니다. 필수는 아니며 기본값은 없음으로, 임베드 플로트 응답 유형을 반환합니다. 현재 이 매개변수에는 하나의 값만 지정할 수 있습니다. 가능한 값</p>
 <ul>
-<li><code translate="no">&quot;float&quot;</code>: Use this when you want to get back the default float embeddings. Valid for all models.</li>
-<li><code translate="no">&quot;binary&quot;</code>: Use this when you want to get back signed binary embeddings. Valid for only v3 models.</li>
-<li><code translate="no">&quot;ubinary&quot;</code>: Use this when you want to get back unsigned binary embeddings. Valid for only v3 models.</li>
+<li><code translate="no">&quot;float&quot;</code>: 기본 플로트 임베딩을 반환하려는 경우 이 값을 사용합니다. 모든 모델에 유효합니다.</li>
+<li><code translate="no">&quot;binary&quot;</code>: 서명된 바이너리 임베딩을 반환할 때 사용합니다. v3 모델에만 유효합니다.</li>
+<li><code translate="no">&quot;ubinary&quot;</code>: 서명되지 않은 바이너리 임베딩을 반환할 때 사용합니다. v3 모델에만 유효합니다.</li>
 </ul></li>
 </ul>
-<p>To create embeddings for documents, use the <code translate="no">encode_documents()</code> method:</p>
+<p>문서용 임베딩을 만들려면 <code translate="no">encode_documents()</code> 메서드를 사용합니다:</p>
 <pre><code translate="no" class="language-python">docs = [
     <span class="hljs-string">&quot;Artificial intelligence was founded as an academic discipline in 1956.&quot;</span>,
     <span class="hljs-string">&quot;Alan Turing was the first person to conduct substantial research in AI.&quot;</span>,
@@ -73,7 +71,7 @@ docs_embeddings = cohere_ef.encode_documents(docs)
 <span class="hljs-comment"># Print dimension and shape of embeddings</span>
 <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Dim:&quot;</span>, cohere_ef.dim, docs_embeddings[<span class="hljs-number">0</span>].shape)
 <button class="copy-code-btn"></button></code></pre>
-<p>The expected output is similar to the following:</p>
+<p>예상 출력은 다음과 유사합니다:</p>
 <pre><code translate="no" class="language-python">Embeddings: [array([ <span class="hljs-number">3.43322754e-02</span>,  <span class="hljs-number">1.16252899e-03</span>, <span class="hljs-number">-5.25207520e-02</span>,  <span class="hljs-number">1.32846832e-03</span>,
        <span class="hljs-number">-6.80541992e-02</span>,  <span class="hljs-number">6.10961914e-02</span>, <span class="hljs-number">-7.06176758e-02</span>,  <span class="hljs-number">1.48925781e-01</span>,
         <span class="hljs-number">1.54174805e-01</span>,  <span class="hljs-number">1.98516846e-02</span>,  <span class="hljs-number">2.43835449e-02</span>,  <span class="hljs-number">3.55224609e-02</span>,
@@ -84,7 +82,7 @@ docs_embeddings = cohere_ef.encode_documents(docs)
        <span class="hljs-number">-0.02862549</span>,  <span class="hljs-number">0.04760742</span>, <span class="hljs-number">-0.07891846</span>,  <span class="hljs-number">0.0124054</span> ], dtype=<span class="hljs-type">float32</span>)]
 Dim: <span class="hljs-number">384</span> (<span class="hljs-number">384</span>,)
 <button class="copy-code-btn"></button></code></pre>
-<p>To create embeddings for queries, use the <code translate="no">encode_queries()</code> method:</p>
+<p>쿼리용 임베딩을 만들려면 <code translate="no">encode_queries()</code> 메서드를 사용합니다:</p>
 <pre><code translate="no" class="language-python">queries = [<span class="hljs-string">&quot;When was artificial intelligence founded&quot;</span>, 
            <span class="hljs-string">&quot;Where was Alan Turing born?&quot;</span>]
 
@@ -93,7 +91,7 @@ query_embeddings = cohere_ef.encode_queries(queries)
 <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Embeddings:&quot;</span>, query_embeddings)
 <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Dim&quot;</span>, cohere_ef.dim, query_embeddings[<span class="hljs-number">0</span>].shape)
 <button class="copy-code-btn"></button></code></pre>
-<p>The expected output is similar to the following:</p>
+<p>예상 출력은 다음과 유사합니다:</p>
 <pre><code translate="no" class="language-python">Embeddings: [array([<span class="hljs-number">-1.33361816e-02</span>,  <span class="hljs-number">9.79423523e-04</span>, <span class="hljs-number">-7.28759766e-02</span>, <span class="hljs-number">-1.93786621e-02</span>,
        <span class="hljs-number">-9.71679688e-02</span>,  <span class="hljs-number">4.34875488e-02</span>, <span class="hljs-number">-9.81445312e-02</span>,  <span class="hljs-number">1.16882324e-01</span>,
         <span class="hljs-number">5.89904785e-02</span>, <span class="hljs-number">-4.19921875e-02</span>,  <span class="hljs-number">4.95910645e-02</span>,  <span class="hljs-number">5.83496094e-02</span>,

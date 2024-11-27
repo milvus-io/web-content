@@ -1,9 +1,9 @@
 ---
 id: image_similarity_search.md
-summary: image search with Milvus
-title: Image Search with Milvus
+summary: Milvus로 이미지 검색
+title: Milvus로 이미지 검색하기
 ---
-<h1 id="Image-Search-with-Milvus" class="common-anchor-header">Image Search with Milvus<button data-href="#Image-Search-with-Milvus" class="anchor-icon" translate="no">
+<h1 id="Image-Search-with-Milvus" class="common-anchor-header">Milvus로 이미지 검색하기<button data-href="#Image-Search-with-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -21,8 +21,8 @@ title: Image Search with Milvus
     </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/image_search_with_milvus.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
 <a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/image_search_with_milvus.ipynb" target="_blank"><img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/></a></p>
 <p><img translate="no" src="https://raw.githubusercontent.com/milvus-io/bootcamp/master/bootcamp/tutorials/quickstart/apps/image_search_with_milvus/pics/image_search_demo.png"/></p>
-<p>In this notebook, we will show you how to use Milvus to search for similar images in a dataset. We will use a subset of the <a href="https://www.image-net.org/">ImageNet</a> dataset, then search for an image of an Afghan hound to demonstrate this.</p>
-<h2 id="Dataset-Preparation" class="common-anchor-header">Dataset Preparation<button data-href="#Dataset-Preparation" class="anchor-icon" translate="no">
+<p>이 노트북에서는 Milvus를 사용해 데이터 세트에서 유사한 이미지를 검색하는 방법을 보여드리겠습니다. 이를 보여드리기 위해 <a href="https://www.image-net.org/">ImageNet</a> 데이터 집합의 하위 집합을 사용한 다음 아프간 사냥개 이미지를 검색해 보겠습니다.</p>
+<h2 id="Dataset-Preparation" class="common-anchor-header">데이터 세트 준비<button data-href="#Dataset-Preparation" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -37,11 +37,11 @@ title: Image Search with Milvus
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>First, we need to load the dataset and unextract it for further processing.</p>
+    </button></h2><p>먼저, 추가 처리를 위해 데이터 집합을 로드하고 압축을 풀어야 합니다.</p>
 <pre><code translate="no" class="language-python">!wget https://github.com/milvus-io/pymilvus-assets/releases/download/imagedata/reverse_image_search.<span class="hljs-built_in">zip</span>
 !unzip -q -o reverse_image_search.<span class="hljs-built_in">zip</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Prequisites" class="common-anchor-header">Prequisites<button data-href="#Prequisites" class="anchor-icon" translate="no">
+<h2 id="Prequisites" class="common-anchor-header">전제 조건<button data-href="#Prequisites" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -56,7 +56,7 @@ title: Image Search with Milvus
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>To run this notebook, you need to have the following dependencies installed:</p>
+    </button></h2><p>이 노트북을 실행하려면 다음 종속성이 설치되어 있어야 합니다:</p>
 <ul>
 <li>pymilvus&gt;=2.4.2</li>
 <li>timm</li>
@@ -65,14 +65,14 @@ title: Image Search with Milvus
 <li>sklearn</li>
 <li>pillow</li>
 </ul>
-<p>To run Colab, we provide the handy commands to install the necessary dependencies.</p>
+<p>Colab을 실행하기 위해 필요한 종속성을 설치하는 편리한 명령어를 제공합니다.</p>
 <pre><code translate="no" class="language-python">$ pip install pymilvus --upgrade
 $ pip install timm
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>If you are using Google Colab, to enable dependencies just installed, you may need to <strong>restart the runtime</strong>. (Click on the “Runtime” menu at the top of the screen, and select “Restart session” from the dropdown menu).</p>
+<p>Google Colab을 사용하는 경우 방금 설치한 종속 요소를 사용하려면 <strong>런타임을 다시 시작해야</strong> 할 수 있습니다. (화면 상단의 "런타임" 메뉴를 클릭하고 드롭다운 메뉴에서 "세션 다시 시작"을 선택합니다.)</p>
 </div>
-<h2 id="Define-the-Feature-Extractor" class="common-anchor-header">Define the Feature Extractor<button data-href="#Define-the-Feature-Extractor" class="anchor-icon" translate="no">
+<h2 id="Define-the-Feature-Extractor" class="common-anchor-header">특징 추출기 정의하기<button data-href="#Define-the-Feature-Extractor" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -87,7 +87,7 @@ $ pip install timm
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Then, we need to define a feature extractor which extracts embedding from an image using timm’s ResNet-34 model.</p>
+    </button></h2><p>그런 다음 Timm의 ResNet-34 모델을 사용하여 이미지에서 임베딩을 추출하는 특징 추출기를 정의해야 합니다.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> torch
 <span class="hljs-keyword">from</span> PIL <span class="hljs-keyword">import</span> Image
 <span class="hljs-keyword">import</span> timm
@@ -128,7 +128,7 @@ $ pip install timm
 
         <span class="hljs-keyword">return</span> normalize(feature_vector.reshape(<span class="hljs-number">1</span>, -<span class="hljs-number">1</span>), norm=<span class="hljs-string">&quot;l2&quot;</span>).flatten()
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Create-a-Milvus-Collection" class="common-anchor-header">Create a Milvus Collection<button data-href="#Create-a-Milvus-Collection" class="anchor-icon" translate="no">
+<h2 id="Create-a-Milvus-Collection" class="common-anchor-header">Milvus 컬렉션 만들기<button data-href="#Create-a-Milvus-Collection" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -143,7 +143,7 @@ $ pip install timm
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Then we need to create Milvus collection to store the image embeddings</p>
+    </button></h2><p>그런 다음 이미지 임베딩을 저장할 Milvus 컬렉션을 생성해야 합니다.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 <span class="hljs-comment"># Set up a Milvus client</span>
@@ -161,14 +161,14 @@ client.create_collection(
 )
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>As for the argument of <code translate="no">MilvusClient</code>:</p>
+<p><code translate="no">MilvusClient</code> 의 인수를 사용합니다:</p>
 <ul>
-<li>Setting the <code translate="no">uri</code> as a local file, e.g.<code translate="no">./milvus.db</code>, is the most convenient method, as it automatically utilizes <a href="https://milvus.io/docs/milvus_lite.md">Milvus Lite</a> to store all data in this file.</li>
-<li>If you have large scale of data, you can set up a more performant Milvus server on <a href="https://milvus.io/docs/quickstart.md">docker or kubernetes</a>. In this setup, please use the server uri, e.g.<code translate="no">http://localhost:19530</code>, as your <code translate="no">uri</code>.</li>
-<li>If you want to use <a href="https://zilliz.com/cloud">Zilliz Cloud</a>, the fully managed cloud service for Milvus, adjust the <code translate="no">uri</code> and <code translate="no">token</code>, which correspond to the <a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">Public Endpoint and Api key</a> in Zilliz Cloud.</li>
+<li><code translate="no">uri</code> 를 로컬 파일(예:<code translate="no">./milvus.db</code>)로 설정하는 것이 가장 편리한 방법인데, 이 파일에 모든 데이터를 저장하기 위해 <a href="https://milvus.io/docs/milvus_lite.md">Milvus Lite를</a> 자동으로 활용하기 때문입니다.</li>
+<li>데이터 규모가 큰 경우, <a href="https://milvus.io/docs/quickstart.md">도커나 쿠버네티스에</a> 더 고성능의 Milvus 서버를 설정할 수 있습니다. 이 설정에서는 서버 URL(예:<code translate="no">http://localhost:19530</code>)을 <code translate="no">uri</code> 으로 사용하세요.</li>
+<li>밀버스의 완전 관리형 클라우드 서비스인 <a href="https://zilliz.com/cloud">질리즈 클라우드를</a> 사용하려면, 질리즈 클라우드의 <a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">퍼블릭 엔드포인트와 API 키에</a> 해당하는 <code translate="no">uri</code> 와 <code translate="no">token</code> 을 조정하세요.</li>
 </ul>
 </div>
-<h2 id="Insert-the-Embeddings-to-Milvus" class="common-anchor-header">Insert the Embeddings to Milvus<button data-href="#Insert-the-Embeddings-to-Milvus" class="anchor-icon" translate="no">
+<h2 id="Insert-the-Embeddings-to-Milvus" class="common-anchor-header">밀버스에 임베딩 삽입하기<button data-href="#Insert-the-Embeddings-to-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -183,7 +183,7 @@ client.create_collection(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>We will extract embeddings of each image using the ResNet34 model and insert images from the training set into Milvus.</p>
+    </button></h2><p>ResNet34 모델을 사용하여 각 이미지의 임베딩을 추출하고 학습 세트의 이미지를 Milvus에 삽입합니다.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> os
 
 extractor = FeatureExtractor(<span class="hljs-string">&quot;resnet34&quot;</span>)
@@ -235,21 +235,17 @@ display(concatenated_image)
 <pre><code translate="no">'query'
 </code></pre>
 <p>
-  <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.5.x/image_search_with_milvus_files/image_search_with_milvus_14_1.png" alt="png" class="doc-image" id="png" />
-    <span>png</span>
-  </span>
-</p>
+  
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/image_search_with_milvus_files/image_search_with_milvus_14_1.png" alt="png" class="doc-image" id="png" />
+   </span> <span class="img-wrapper"> <span>png</span> </span></p>
 <pre><code translate="no">'results'
 </code></pre>
 <p>
-  <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.5.x/assets/results.png" alt="Results" class="doc-image" id="results" />
-    <span>Results</span>
-  </span>
-</p>
-<p>We can see that most of the images are from the same category as the search image, which is the Afghan hound. This means that we found similar images to the search image.</p>
-<h2 id="Quick-Deploy" class="common-anchor-header">Quick Deploy<button data-href="#Quick-Deploy" class="anchor-icon" translate="no">
+  
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/results.png" alt="Results" class="doc-image" id="results" />
+   </span> <span class="img-wrapper"> <span>결과</span> </span></p>
+<p>대부분의 이미지가 검색 이미지인 아프간 하운드와 같은 카테고리에 속하는 것을 볼 수 있습니다. 이는 검색 이미지와 유사한 이미지를 찾았음을 의미합니다.</p>
+<h2 id="Quick-Deploy" class="common-anchor-header">빠른 배포<button data-href="#Quick-Deploy" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -264,4 +260,4 @@ display(concatenated_image)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>To learn about how to start an online demo with this tutorial, please refer to <a href="https://github.com/milvus-io/bootcamp/tree/master/bootcamp/tutorials/quickstart/apps/image_search_with_milvus">the example application</a>.</p>
+    </button></h2><p>이 튜토리얼을 통해 온라인 데모를 시작하는 방법에 대해 알아보려면 <a href="https://github.com/milvus-io/bootcamp/tree/master/bootcamp/tutorials/quickstart/apps/image_search_with_milvus">예제 애플리케이션을</a> 참조하세요.</p>

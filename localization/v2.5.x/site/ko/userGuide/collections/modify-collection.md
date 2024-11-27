@@ -1,8 +1,8 @@
 ---
 id: modify-collection.md
-title: Modify Collection​
+title: 컬렉션 수정
 ---
-<h1 id="Modify-Collection​" class="common-anchor-header">Modify Collection​<button data-href="#Modify-Collection​" class="anchor-icon" translate="no">
+<h1 id="Modify-Collection​" class="common-anchor-header">컬렉션 수정<button data-href="#Modify-Collection​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -17,8 +17,8 @@ title: Modify Collection​
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>You can rename a collection or change its settings. This page focuses on how to modify a collection.​</p>
-<h2 id="Rename-Collection​" class="common-anchor-header">Rename Collection​<button data-href="#Rename-Collection​" class="anchor-icon" translate="no">
+    </button></h1><p>컬렉션의 이름을 바꾸거나 컬렉션의 설정을 변경할 수 있습니다. 이 페이지에서는 컬렉션을 수정하는 방법에 대해 중점적으로 설명합니다.</p>
+<h2 id="Rename-Collection​" class="common-anchor-header">컬렉션 이름 바꾸기<button data-href="#Rename-Collection​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -33,14 +33,9 @@ title: Modify Collection​
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>You can rename a collection as follows.​</p>
+    </button></h2><p>다음과 같이 컬렉션의 이름을 변경할 수 있습니다.</p>
 <div class="multipleCode">
-  <a href="#python">Python </a>
-  <a href="#java">Java</a>
-  <a href="#javascript">Node.js</a>
-  <a href="#go">Go</a>
-  <a href="#curl">cURL</a>
-</div>
+ <a href="#python">파이썬 </a> <a href="#java">자바</a> <a href="#javascript">Node.js</a> <a href="#go">Go</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> <span class="hljs-title class_">MilvusClient</span>​
 ​
 client = <span class="hljs-title class_">MilvusClient</span>(​
@@ -132,7 +127,7 @@ curl --request POST \​
 }&#x27;</span>​
 
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Set-Collection-TTL​" class="common-anchor-header">Set Collection TTL​<button data-href="#Set-Collection-TTL​" class="anchor-icon" translate="no">
+<h2 id="Set-Collection-TTL​" class="common-anchor-header">컬렉션 TTL 설정<button data-href="#Set-Collection-TTL​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -147,15 +142,10 @@ curl --request POST \​
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>If a collection needs to be dropped for a specific period, consider setting its Time-To-Live (TTL) in seconds. Once the TTL times out, Milvus deletes entities in the collection and drops the collection. The deletion is asynchronous, indicating that searches and queries are still possible before the deletion is complete.​</p>
-<p>The following code snippet demonstrates how to change the TTL of a collection.​</p>
+    </button></h2><p>컬렉션을 특정 기간 동안 삭제해야 하는 경우 TTL(Time-To-Live)을 초 단위로 설정하는 것이 좋습니다. TTL이 초과되면 Milvus는 컬렉션의 엔티티를 삭제하고 컬렉션을 삭제합니다. 삭제는 비동기식으로 이루어지므로 삭제가 완료되기 전에도 검색 및 쿼리가 여전히 가능합니다.</p>
+<p>다음 코드 스니펫은 컬렉션의 TTL을 변경하는 방법을 보여줍니다.</p>
 <div class="multipleCode">
-  <a href="#python">Python </a>
-  <a href="#java">Java</a>
-  <a href="#javascript">Node.js</a>
-  <a href="#go">Go</a>
-  <a href="#curl">cURL</a>
-</div>
+ <a href="#python">파이썬 </a> <a href="#java">자바</a> <a href="#javascript">Node.js</a> <a href="#go">Go</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Currently not available for Python</span>
 
 <button class="copy-code-btn"></button></code></pre>
