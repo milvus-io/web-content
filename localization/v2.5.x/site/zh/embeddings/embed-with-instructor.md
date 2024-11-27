@@ -1,12 +1,10 @@
 ---
 id: embed-with-instructor.md
 order: 10
-summary: >-
-  This article describes how to use the InstructorEmbeddingFunction to encode
-  documents and queries using the Instructor embedding model.
-title: Instructor
+summary: 本文介绍如何使用 InstructorEmbeddingFunction 使用 Instructor 嵌入模型对文档和查询进行编码。
+title: 指导者
 ---
-<h1 id="Instructor" class="common-anchor-header">Instructor<button data-href="#Instructor" class="anchor-icon" translate="no">
+<h1 id="Instructor" class="common-anchor-header">指导者<button data-href="#Instructor" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -21,13 +19,13 @@ title: Instructor
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p><a href="https://instructor-embedding.github.io/">Instructor</a> is an instruction-finetuned text embedding model that can generate text embeddings tailored to any task (e.g., classification, retrieval, clustering, text evaluation, etc.) and domains (e.g., science, finance, etc.) by simply providing the task instruction, without any finetuning.</p>
-<p>Milvus integrates with Instructor’s embedding models via the InstructorEmbeddingFunction class. This class provides methods for encoding documents and queries using the Instructor embedding models and returning the embeddings as dense vectors compatible with Milvus indexing.</p>
-<p>To use this feature, install the necessary dependencies:</p>
+    </button></h1><p><a href="https://instructor-embedding.github.io/">Instructor</a>是一种根据指令调整的文本嵌入模型，只需提供任务指令，无需任何微调，就能生成适合任何任务（如分类、检索、聚类、文本评估等）和领域（如科学、金融等）的文本嵌入。</p>
+<p>Milvus 通过 InstructorEmbeddingFunction 类与 Instructor 的嵌入模型集成。该类提供了使用 Instructor 嵌入模型对文档和查询进行编码的方法，并将嵌入作为与 Milvus 索引兼容的稠密向量返回。</p>
+<p>要使用该功能，请安装必要的依赖项：</p>
 <pre><code translate="no" class="language-python">pip install --upgrade pymilvus
 pip install <span class="hljs-string">&quot;pymilvus[model]&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Then, instantiate the InstructorEmbeddingFunction:</p>
+<p>然后，实例化 InstructorEmbeddingFunction：</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus.model.dense <span class="hljs-keyword">import</span> InstructorEmbeddingFunction
 
 ef = InstructorEmbeddingFunction(
@@ -36,16 +34,16 @@ ef = InstructorEmbeddingFunction(
     doc_instruction=<span class="hljs-string">&quot;Represent the document for retrieval:&quot;</span>
 )
 <button class="copy-code-btn"></button></code></pre>
-<p><strong>Parameters</strong>:</p>
+<p><strong>参数</strong>：</p>
 <ul>
-<li><p><code translate="no">model_name</code> (<em>string</em>)</p>
-<p>The name of the Mistral AI embedding model to use for encoding. The value defaults to <code translate="no">hkunlp/instructor-xl</code>. For more information, refer to <a href="https://github.com/xlang-ai/instructor-embedding?tab=readme-ov-file#model-list">Model List</a>.</p></li>
-<li><p><code translate="no">query_instruction</code> (<em>string</em>)</p>
-<p>Task-specific instruction that guides the model on how to generate an embedding for a query or question.</p></li>
-<li><p><code translate="no">doc_instruction</code> (<em>string</em>)</p>
-<p>Task-specific instruction that guides the model to generate an embedding for a document.</p></li>
+<li><p><code translate="no">model_name</code> <em>(字符串）</em></p>
+<p>用于编码的 Mistral AI 嵌入模型名称。默认值为<code translate="no">hkunlp/instructor-xl</code> 。更多信息，请参阅<a href="https://github.com/xlang-ai/instructor-embedding?tab=readme-ov-file#model-list">模型列表</a>。</p></li>
+<li><p><code translate="no">query_instruction</code> <em>（字符串）</em></p>
+<p>特定于任务的指令，用于指导模型如何为查询或问题生成 Embeddings。</p></li>
+<li><p><code translate="no">doc_instruction</code> <em>（字符串）</em></p>
+<p>指导模型为文档生成嵌入的特定任务指令。</p></li>
 </ul>
-<p>To create embeddings for documents, use the <code translate="no">encode_documents()</code> method:</p>
+<p>要为文档创建嵌入，请使用<code translate="no">encode_documents()</code> 方法：</p>
 <pre><code translate="no" class="language-python">docs = [
     <span class="hljs-string">&quot;Artificial intelligence was founded as an academic discipline in 1956.&quot;</span>,
     <span class="hljs-string">&quot;Alan Turing was the first person to conduct substantial research in AI.&quot;</span>,
@@ -59,7 +57,7 @@ docs_embeddings = ef.encode_documents(docs)
 <span class="hljs-comment"># Print dimension and shape of embeddings</span>
 <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Dim:&quot;</span>, ef.dim, docs_embeddings[<span class="hljs-number">0</span>].shape)
 <button class="copy-code-btn"></button></code></pre>
-<p>The expected output is similar to the following:</p>
+<p>预期输出类似于下图：</p>
 <pre><code translate="no" class="language-python">Embeddings: [array([ <span class="hljs-number">1.08575663e-02</span>, <span class="hljs-number">3.87877878e-03</span>, <span class="hljs-number">3.18090729e-02</span>, <span class="hljs-number">-8.12458917e-02</span>,
        <span class="hljs-number">-4.68971021e-02</span>, <span class="hljs-number">-5.85585833e-02</span>, <span class="hljs-number">-5.95418774e-02</span>, <span class="hljs-number">-8.55880603e-03</span>,
        <span class="hljs-number">-5.54775111e-02</span>, <span class="hljs-number">-6.08020350e-02</span>, <span class="hljs-number">1.76202394e-02</span>, <span class="hljs-number">1.06648318e-02</span>,
@@ -70,7 +68,7 @@ docs_embeddings = ef.encode_documents(docs)
       dtype=<span class="hljs-type">float32</span>)]
 Dim: <span class="hljs-number">768</span> (<span class="hljs-number">768</span>,)
 <button class="copy-code-btn"></button></code></pre>
-<p>To create embeddings for queries, use the <code translate="no">encode_queries()</code> method:</p>
+<p>要为查询创建嵌入，请使用<code translate="no">encode_queries()</code> 方法：</p>
 <pre><code translate="no" class="language-python">queries = [<span class="hljs-string">&quot;When was artificial intelligence founded&quot;</span>,
            <span class="hljs-string">&quot;Where was Alan Turing born?&quot;</span>]
 
@@ -79,7 +77,7 @@ query_embeddings = ef.encode_queries(queries)
 <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Embeddings:&quot;</span>, query_embeddings)
 <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Dim&quot;</span>, ef.dim, query_embeddings[<span class="hljs-number">0</span>].shape)
 <button class="copy-code-btn"></button></code></pre>
-<p>The expected output is similar to the following:</p>
+<p>预期输出类似于下面的内容：</p>
 <pre><code translate="no" class="language-python">Embeddings: [array([ <span class="hljs-number">1.21721877e-02</span>, <span class="hljs-number">1.88485277e-03</span>, <span class="hljs-number">3.01732980e-02</span>, <span class="hljs-number">-8.10302645e-02</span>,
        <span class="hljs-number">-6.13401756e-02</span>, <span class="hljs-number">-3.98149453e-02</span>, <span class="hljs-number">-5.18723316e-02</span>, <span class="hljs-number">-6.76784338e-03</span>,
        <span class="hljs-number">-6.59285188e-02</span>, <span class="hljs-number">-5.38365729e-02</span>, <span class="hljs-number">-5.13435388e-03</span>, <span class="hljs-number">-2.49210224e-02</span>,

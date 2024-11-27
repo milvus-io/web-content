@@ -1,14 +1,10 @@
 ---
 id: analyzer-overview.md
-title: Analyzer Overview​
+title: 分析器概述
 summary: >-
-  In text processing, an analyzer is a crucial component that converts raw text
-  into a structured, searchable format. Each analyzer typically consists of two
-  core elements: tokenizer and filter. Together, they transform input text into
-  tokens, refine these tokens, and prepare them for efficient indexing and
-  retrieval.​
+  在文本处理中，分析器是将原始文本转换为结构化可搜索格式的关键组件。每个分析器通常由两个核心部件组成：标记器和过滤器。它们共同将输入文本转换为标记，完善这些标记，并为高效索引和检索做好准备。
 ---
-<h1 id="Analyzer-Overview​" class="common-anchor-header">Analyzer Overview​<button data-href="#Analyzer-Overview​" class="anchor-icon" translate="no">
+<h1 id="Analyzer-Overview​" class="common-anchor-header">分析器概述<button data-href="#Analyzer-Overview​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -23,16 +19,16 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>In text processing, an <strong>analyzer</strong> is a crucial component that converts raw text into a structured, searchable format. Each analyzer typically consists of two core elements: <strong>tokenizer</strong> and <strong>filter</strong>. Together, they transform input text into tokens, refine these tokens, and prepare them for efficient indexing and retrieval.​</p>
-<p>In Milvus, analyzers are configured during collection creation when you add <code translate="no">VARCHAR</code> fields to the collection schema. Tokens produced by an analyzer can be used to build an index for keyword matching or converted into sparse embeddings for full text search. For more information, refer to <a href="/docs/keyword-match.md">​Keyword Match</a> or <a href="/docs/full-text-search.md">​Full Text Search</a>.​</p>
+    </button></h1><p>在文本处理中，<strong>分析器</strong>是将原始文本转换为结构化可搜索格式的关键组件。每个分析器通常由两个核心部件组成：<strong>标记器</strong>和<strong>过滤器</strong>。它们共同将输入文本转换为标记，完善这些标记，并为高效索引和检索做好准备。</p>
+<p>在 Milvus 中，创建 Collections 时，将<code translate="no">VARCHAR</code> 字段添加到 Collections Schema 时，会对分析器进行配置。分析器生成的标记可用于建立关键字匹配索引，或转换为稀疏嵌入以进行全文检索。有关详细信息，请参阅<a href="/docs/zh/keyword-match.md">关键字匹配</a>或<a href="/docs/zh/full-text-search.md">全文搜索</a>。</p>
 <div class="alert note">
-<p>The use of analyzers may impact performance:​</p>
+<p>使用分析器可能会影响性能。</p>
 <ul>
-<li><p><strong>Full text search:</strong> For full text search, DataNode and <strong>QueryNode</strong> channels consume data more slowly because they must wait for tokenization to complete. As a result, newly ingested data takes longer to become available for search.​</p></li>
-<li><p><strong>Keyword match:</strong> For keyword matching, index creation is also slower since tokenization needs to finish before an index can be built.​</p></li>
+<li><p><strong>全文搜索：</strong>对于全文搜索，数据节点和<strong>查询节点</strong>通道消耗数据的速度更慢，因为它们必须等待标记化完成。因此，新输入的数据需要更长的时间才能用于搜索。</p></li>
+<li><p><strong>关键词匹配：</strong>对于关键字匹配，索引创建速度也较慢，因为标记化需要在索引建立之前完成。</p></li>
 </ul>
 </div>
-<h2 id="Anatomy-of-an-analyzer​" class="common-anchor-header">Anatomy of an analyzer​<button data-href="#Anatomy-of-an-analyzer​" class="anchor-icon" translate="no">
+<h2 id="Anatomy-of-an-analyzer​" class="common-anchor-header">分析器剖析<button data-href="#Anatomy-of-an-analyzer​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -47,14 +43,14 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>An analyzer in Milvus consists of exactly one <strong>tokenizer</strong> and <strong>zero or more</strong> filters.​</p>
+    </button></h2><p>Milvus 的分析器由一个<strong>标记化器</strong>和<strong>零个或多个</strong>过滤器组成。</p>
 <ul>
-<li><p><strong>Tokenizer</strong>: The tokenizer breaks input text into discrete units called tokens. These tokens could be words or phrases, depending on the tokenizer type.​</p></li>
-<li><p><strong>Filters</strong>: Filters can be applied to tokens to further refine them, for example, by making them lowercase or removing common words.​</p></li>
+<li><p><strong>标记化器</strong>：标记器将输入文本分解为称为标记的离散单元。根据标记符类型的不同，这些标记符可以是单词或短语。</p></li>
+<li><p><strong>过滤器</strong>：可以对标记符进行过滤，进一步细化标记符，例如，将标记符变成小写或删除常用词。</p></li>
 </ul>
-<p>The workflow below shows how an analyzer processes text.​</p>
+<p>下面的工作流程显示了分析器是如何处理文本的。</p>
 <p><img translate="no" src="/docs/v2.5.x/assets/analyzer-overview.png" alt="analyzer-overview" width="400"/></p>
-<h2 id="Analyzer-types​" class="common-anchor-header">Analyzer types​<button data-href="#Analyzer-types​" class="anchor-icon" translate="no">
+<h2 id="Analyzer-types​" class="common-anchor-header">分析器类型<button data-href="#Analyzer-types​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -69,23 +65,23 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus provides two types of analyzers to meet different text processing needs:​</p>
+    </button></h2><p>Milvus 提供两种类型的分析器，以满足不同的文本处理需求。</p>
 <ul>
-<li><p><strong>Built-in analyzer</strong>: These are predefined configurations that cover common text processing tasks with minimal setup. Built-in analyzers are ideal for general-purpose searches, as they require no complex configuration.​</p></li>
-<li><p><strong>Custom analyzer</strong>: For more advanced requirements, custom analyzers allow you to define your own configuration by specifying both the tokenizer and zero or more filters. This level of customization is especially useful for specialized use cases where precise control over text processing is needed.​</p></li>
+<li><p><strong>内置分析器</strong>：这些是预定义的配置，只需最少的设置即可完成常见的文本处理任务。内置分析器不需要复杂的配置，是通用搜索的理想选择。</p></li>
+<li><p><strong>自定义分析器</strong>：对于更高级的需求，自定义分析器允许你通过指定标记器和零个或多个过滤器来定义自己的配置。这种自定义级别对于需要精确控制文本处理的特殊用例尤其有用。</p></li>
 </ul>
 <div class="alert note">
-<p>If you omit analyzer configurations during collection creation, Milvus uses the <code translate="no">standard</code> analyzer for all text processing by default. For details, refer to <a href="/docs/standard-analyzer.md">​Standard</a>.​</p>
+<p>如果在创建 Collections 时省略了分析器配置，Milvus 默认使用<code translate="no">standard</code> 分析器进行所有文本处理。详情请参阅 "<a href="/docs/zh/standard-analyzer.md">标准</a>"。</p>
 </div>
-<h3 id="Built-in-analyzer​" class="common-anchor-header">Built-in analyzer​</h3><p>Built-in analyzers in Milvus are pre-configured with specific tokenizers and filters, allowing you to use them immediately without needing to define these components yourself. Each built-in analyzer serves as a template that includes a preset tokenizer and filters, with optional parameters for customization.​</p>
-<p>For example, to use the <code translate="no">standard</code> built-in analyzer, simply specify its name <code translate="no">standard</code> as the <code translate="no">type</code> and optionally include extra configurations specific to this analyzer type, such as <code translate="no">stop_words</code>:​</p>
+<h3 id="Built-in-analyzer​" class="common-anchor-header">内置分析器</h3><p>Milvus 中的内置分析器预先配置了特定的标记符号化器和过滤器，使您可以立即使用它们，而无需自己定义这些组件。每个内置分析器都是一个模板，包括预设的标记化器和过滤器，以及用于自定义的可选参数。</p>
+<p>例如，要使用<code translate="no">standard</code> 内置分析器，只需将其名称<code translate="no">standard</code> 指定为<code translate="no">type</code> ，并可选择包含该分析器类型的特定额外配置，如<code translate="no">stop_words</code> 。</p>
 <pre><code translate="no" class="language-python">analyzer_params = {​
     <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;standard&quot;</span>, <span class="hljs-comment"># Uses the standard built-in analyzer​</span>
     <span class="hljs-string">&quot;stop_words&quot;</span>: [<span class="hljs-string">&quot;a&quot;</span>, <span class="hljs-string">&quot;an&quot;</span>, <span class="hljs-string">&quot;for&quot;</span>] <span class="hljs-comment"># Defines a list of common words (stop words) to exclude from tokenization​</span>
 }​
 
 <button class="copy-code-btn"></button></code></pre>
-<p>The configuration of the <code translate="no">standard</code> built-in analyzer above is equivalent to setting up a custom analyzer with the following parameters, where <code translate="no">tokenizer</code> and <code translate="no">filter</code> options are explicitly defined to achieve the same functionality:</p>
+<p>上述<code translate="no">standard</code> 内置分析仪的配置等同于使用以下参数设置自定义分析仪，其中<code translate="no">tokenizer</code> 和<code translate="no">filter</code> 选项是为实现相同功能而明确定义的：</p>
 <pre><code translate="no" class="language-python">analyzer_params = {​
     <span class="hljs-string">&quot;tokenizer&quot;</span>: <span class="hljs-string">&quot;standard&quot;</span>,​
     <span class="hljs-string">&quot;filter&quot;</span>: [​
@@ -98,48 +94,48 @@ summary: >-
 }​
 
 <button class="copy-code-btn"></button></code></pre>
-<p>Milvus offers the following built-in analyzers, each of which can be used directly by specifying their name as the <code translate="no">type</code> parameter:​</p>
+<p>Milvus 提供以下内置分析器，每个分析器都可以通过指定其名称作为<code translate="no">type</code> 参数直接使用。</p>
 <ul>
-<li><p><code translate="no">standard</code>: Suitable for general-purpose text processing, applying standard tokenization and lowercase filtering.​</p></li>
-<li><p><code translate="no">english</code>: Optimized for English-language text, with support for English stop words.​</p></li>
-<li><p><code translate="no">chinese</code>: Specialized for processing Chinese text, including tokenization adapted for Chinese language structures.​</p></li>
+<li><p><code translate="no">standard</code>:适用于通用文本处理，应用标准标记化和小写过滤。</p></li>
+<li><p><code translate="no">english</code>:针对英语文本进行了优化，支持英语停止词。</p></li>
+<li><p><code translate="no">chinese</code>:专门用于处理中文文本，包括针对中文语言结构的标记化。</p></li>
 </ul>
-<h3 id="Custom-analyzer​" class="common-anchor-header">Custom analyzer​</h3><p>For more advanced text processing, custom analyzers in Milvus allow you to build a tailored text-handling pipeline by specifying both a <strong>tokenizer</strong> and filters. This setup is ideal for specialized use cases where precise control is required.​</p>
-<h4 id="Tokenizer​" class="common-anchor-header">Tokenizer​</h4><p>The <strong>tokenizer</strong> is a <strong>mandatory</strong> component for a custom analyzer, which initiates the analyzer pipeline by breaking down input text into discrete units or <strong>tokens</strong>. Tokenization follows specific rules, such as splitting by whitespace or punctuation, depending on the tokenizer type. This process allows for more precise and independent handling of each word or phrase.​</p>
-<p>For example, a tokenizer would convert text <code translate="no">&quot;Vector Database Built for Scale&quot;</code> into separate tokens:​</p>
+<h3 id="Custom-analyzer​" class="common-anchor-header">自定义分析器</h3><p>对于更高级的文本处理，Milvus 中的自定义分析器允许您通过指定<strong>标记符号化器</strong>和过滤器来建立一个定制的文本处理管道。这种设置非常适合需要精确控制的特殊用例。</p>
+<h4 id="Tokenizer​" class="common-anchor-header">标记器</h4><p><strong>标记化器</strong>是自定义分析器的<strong>必备</strong>组件，它通过将输入文本分解为离散单元或<strong>标记来</strong>启动分析器管道。标记化遵循特定的规则，例如根据标记化器的类型用空白或标点符号分割。这一过程可以更精确、更独立地处理每个单词或短语。</p>
+<p>例如，标记化器会将文本<code translate="no">&quot;Vector Database Built for Scale&quot;</code> 转换为单独的标记。</p>
 <pre><code translate="no" class="language-Plain Text">[<span class="hljs-string">&quot;Vector&quot;</span>, <span class="hljs-string">&quot;Database&quot;</span>, <span class="hljs-string">&quot;Built&quot;</span>, <span class="hljs-string">&quot;for&quot;</span>, <span class="hljs-string">&quot;Scale&quot;</span>]​
 <button class="copy-code-btn"></button></code></pre>
-<p><strong>Example of specifying a tokenizer</strong>:​</p>
+<p><strong>指定标记符的示例</strong>。</p>
 <pre><code translate="no" class="language-python">analyzer_params = {​
     <span class="hljs-string">&quot;tokenizer&quot;</span>: <span class="hljs-string">&quot;whitespace&quot;</span>,​
 }​
 <button class="copy-code-btn"></button></code></pre>
-<h4 id="Filter​" class="common-anchor-header">Filter​</h4><p><strong>Filters</strong> are <strong>optional</strong> components working on the tokens produced by the tokenizer, transforming or refining them as needed. For example, after applying a <code translate="no">lowercase</code> filter to the tokenized terms <code translate="no">[&quot;Vector&quot;, &quot;Database&quot;, &quot;Built&quot;, &quot;for&quot;, &quot;Scale&quot;]</code>, the result might be:​</p>
+<h4 id="Filter​" class="common-anchor-header">过滤器</h4><p><strong>过滤器</strong>是<strong>可选</strong>组件，用于处理标记符生成的标记，根据需要对其进行转换或细化。例如，在对标记化术语<code translate="no">[&quot;Vector&quot;, &quot;Database&quot;, &quot;Built&quot;, &quot;for&quot;, &quot;Scale&quot;]</code> 应用<code translate="no">lowercase</code> 过滤器后，结果可能是。</p>
 <pre><code translate="no" class="language-SQL">[<span class="hljs-string">&quot;vector&quot;</span>, <span class="hljs-string">&quot;database&quot;</span>, <span class="hljs-string">&quot;built&quot;</span>, <span class="hljs-string">&quot;for&quot;</span>, <span class="hljs-string">&quot;scale&quot;</span>]​
 <button class="copy-code-btn"></button></code></pre>
-<p>Filters in a custom analyzer can be either <strong>built-in</strong> or <strong>custom</strong>, depending on configuration needs.​</p>
+<p>自定义分析器中的过滤器可以是<strong>内置的</strong>，也可以是<strong>自定义的</strong>，具体取决于配置需求。</p>
 <ul>
-<li><p><strong>Built-in filters</strong>: Pre-configured by Milvus, requiring minimal setup. You can use these filters out-of-the-box by specifying their names. The filters below are built-in for direct use:​</p>
+<li><p><strong>内置过滤器</strong>：由 Milvus 预先配置，只需最少的设置。您只需指定过滤器的名称，就能立即使用这些过滤器。以下是可直接使用的内置过滤器。</p>
 <ul>
-<li><p><code translate="no">lowercase</code>: Converts text to lowercase, ensuring case-insensitive matching. For details, refer to <a href="/docs/lowercase-filter.md">​Lowercase</a>.​</p></li>
-<li><p><code translate="no">asciifolding</code>: Converts non-ASCII characters to ASCII equivalents, simplifying multilingual text handling. For details, refer to <a href="/docs/ascii-folding-filter.md">​ASCII folding</a>.​</p></li>
-<li><p><code translate="no">alphanumonly</code>: Retains only alphanumeric characters by removing others. For details, refer to <a href="/docs/alphanumonly-filter.md">​Alphanumonly</a>.​</p></li>
-<li><p><code translate="no">cnalphanumonly</code>: Removes tokens that contain any characters other than Chinese characters, English letters, or digits. For details, refer to <a href="/docs/cnalphanumonly-filter.md">​Cnalphanumonly</a>.​</p></li>
-<li><p><code translate="no">cncharonly</code>: Removes tokens that contain any non-Chinese characters. For details, refer to <a href="/docs/cncharonly-filter.md">​Cncharonly</a>.​</p></li>
+<li><p><code translate="no">lowercase</code>:将文本转换为小写，确保不区分大小写进行匹配。有关详情，请参阅<a href="/docs/zh/lowercase-filter.md">小写</a>。</p></li>
+<li><p><code translate="no">asciifolding</code>:将非 ASCII 字符转换为 ASCII 对应字符，简化多语言文本处理。有关详情，请参阅<a href="/docs/zh/ascii-folding-filter.md">ASCII 折叠</a>。</p></li>
+<li><p><code translate="no">alphanumonly</code>:只保留字母数字字符，删除其他字符。有关详情，请参阅<a href="/docs/zh/alphanumonly-filter.md">Alphanumonly</a>。</p></li>
+<li><p><code translate="no">cnalphanumonly</code>:删除包含除汉字、英文字母或数字以外的任何字符的标记。有关详情，请参阅<a href="/docs/zh/cnalphanumonly-filter.md">Cnalphanumonly</a>。</p></li>
+<li><p><code translate="no">cncharonly</code>:删除包含任何非汉字的标记。详情请参阅<a href="/docs/zh/cncharonly-filter.md">Cncharonly</a>。</p></li>
 </ul>
-<p><strong>Example of using a built-in filter:</strong>​</p>
+<p><strong>使用内置过滤器的示例。</strong></p>
 <pre><code translate="no" class="language-python">analyzer_params = {​
     <span class="hljs-string">&quot;tokenizer&quot;</span>: <span class="hljs-string">&quot;standard&quot;</span>, <span class="hljs-comment"># Mandatory: Specifies tokenizer​</span>
     <span class="hljs-string">&quot;filter&quot;</span>: [<span class="hljs-string">&quot;lowercase&quot;</span>], <span class="hljs-comment"># Optional: Built-in filter that converts text to lowercase​</span>
 }​
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p><strong>Custom filters</strong>: Custom filters allow for specialized configurations. You can define a custom filter by choosing a valid filter type (<code translate="no">filter.type</code>) and adding specific settings for each filter type. Examples of filter types that support customization:​</p>
+<li><p><strong>自定义过滤器</strong>：自定义过滤器允许进行专门配置。您可以通过选择有效的过滤器类型 (<code translate="no">filter.type</code>) 并为每种过滤器类型添加特定设置来定义自定义过滤器。支持自定义的过滤器类型示例。</p>
 <ul>
-<li><p><code translate="no">stop</code>: Removes specified common words by setting a list of stop words (e.g., <code translate="no">&quot;stop_words&quot;: [&quot;of&quot;, &quot;to&quot;]</code>). For details, refer to <a href="/docs/stop-filter.md">​Stop</a>.​</p></li>
-<li><p><code translate="no">length</code>: Excludes tokens based on length criteria, such as setting a maximum token length. For details, refer to <a href="/docs/length-filter.md">​Length</a>.​</p></li>
-<li><p><code translate="no">stemmer</code>: Reduces words to their root forms for more flexible matching. For details, refer to <a href="/docs/stemmer-filter.md">​Stemmer</a>.​</p></li>
+<li><p><code translate="no">stop</code>:通过设置停止词列表（如<code translate="no">&quot;stop_words&quot;: [&quot;of&quot;, &quot;to&quot;]</code> ）删除指定的常用词。有关详情，请参阅<a href="/docs/zh/stop-filter.md">停止</a>。</p></li>
+<li><p><code translate="no">length</code>:根据长度标准（如设置最大标记长度）排除标记。详情请参阅<a href="/docs/zh/length-filter.md">长度</a>。</p></li>
+<li><p><code translate="no">stemmer</code>:将单词还原为词根形式，以便更灵活地进行匹配。详情请参阅<a href="/docs/zh/stemmer-filter.md">词根</a>。</p></li>
 </ul>
-<p><strong>Example of configuring a custom filter:</strong>​</p>
+<p><strong>配置自定义过滤器的示例。</strong></p>
 <pre><code translate="no" class="language-python">analyzer_params = {​
     <span class="hljs-string">&quot;tokenizer&quot;</span>: <span class="hljs-string">&quot;standard&quot;</span>, <span class="hljs-comment"># Mandatory: Specifies tokenizer​</span>
     <span class="hljs-string">&quot;filter&quot;</span>: [​
@@ -152,7 +148,7 @@ summary: >-
 
 <button class="copy-code-btn"></button></code></pre></li>
 </ul>
-<h2 id="Example-use​" class="common-anchor-header">Example use​<button data-href="#Example-use​" class="anchor-icon" translate="no">
+<h2 id="Example-use​" class="common-anchor-header">使用示例<button data-href="#Example-use​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -167,7 +163,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>In this example, we define a collection schema with a vector field for embeddings and two <code translate="no">VARCHAR</code> fields for text processing capabilities. Each <code translate="no">VARCHAR</code> field is configured with its own analyzer settings to handle different processing needs.​</p>
+    </button></h2><p>在此示例中，我们定义了一个 Collections 模式，其中包含一个用于嵌入的向量字段和两个用于文本处理功能的<code translate="no">VARCHAR</code> 字段。每个<code translate="no">VARCHAR</code> 字段都配置了自己的分析器设置，以处理不同的处理需求。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType​
 ​
 <span class="hljs-comment"># Set up a Milvus client​</span>
@@ -237,4 +233,4 @@ client.create_collection(​
     index_params=index_params​
 )​
 <button class="copy-code-btn"></button></code></pre>
-<p>​</p>
+<p></p>

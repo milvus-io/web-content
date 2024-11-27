@@ -1,11 +1,9 @@
 ---
 id: from-m2x.md
-summary: >-
-  This guide provides a comprehensive, step-by-step process for migrating data
-  from Milvus 2.3.x to Milvus 2.3.x or above.
-title: From Milvus 2.3.x
+summary: 本指南提供了从 Milvus 2.3.x 向 Milvus 2.3.x 或更高版本迁移数据的全面、逐步的过程。
+title: 从 Milvus 2.3.x 迁移数据
 ---
-<h1 id="From-Milvus-23x" class="common-anchor-header">From Milvus 2.3.x<button data-href="#From-Milvus-23x" class="anchor-icon" translate="no">
+<h1 id="From-Milvus-23x" class="common-anchor-header">从 Milvus 2.3.x 迁移数据<button data-href="#From-Milvus-23x" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -20,8 +18,8 @@ title: From Milvus 2.3.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>This guide provides a comprehensive, step-by-step process for migrating data from Milvus 2.3.x to Milvus 2.3.x or above.</p>
-<h2 id="Prerequisites" class="common-anchor-header">Prerequisites<button data-href="#Prerequisites" class="anchor-icon" translate="no">
+    </button></h1><p>本指南提供了从 Milvus 2.3.x 向 Milvus 2.3.x 或更高版本迁移数据的全面、逐步过程。</p>
+<h2 id="Prerequisites" class="common-anchor-header">前提条件<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -37,22 +35,19 @@ title: From Milvus 2.3.x
         ></path>
       </svg>
     </button></h2><ul>
-<li><strong>Software versions</strong>:
-<ul>
-<li>Source Milvus: 2.3.0+ (The tool uses the iterator to fetch source collection data, requiring source Milvus to be version 2.3.0 or above.)</li>
-<li>Target Milvus: 2.3.0+</li>
+<li><strong>软件版本</strong>：<ul>
+<li>源 Milvus：2.3.0 以上（该工具使用迭代器获取源 Collections 数据，要求源 Milvus 为 2.3.0 或以上版本。）</li>
+<li>目标 Milvus：2.3.0 及以上版本</li>
 </ul></li>
-<li><strong>Required tools</strong>:
-<ul>
-<li><a href="https://github.com/zilliztech/milvus-migration">Milvus-migration</a> tool. For installation details, refer to <a href="/docs/milvusdm_install.md">Install Migration Tool</a>.</li>
+<li><strong>所需工具</strong><ul>
+<li><a href="https://github.com/zilliztech/milvus-migration">Milvus-migration</a>工具。有关安装细节，请参阅<a href="/docs/zh/milvusdm_install.md">安装迁移工具</a>。</li>
 </ul></li>
-<li><strong>Data preparation</strong>:
-<ul>
-<li>Ensure that the source Milvus collection is loaded and ready for data export.</li>
-<li>If the target Milvus does not contain a collection corresponding to the source collection, the <a href="https://github.com/zilliztech/milvus-migration">milvus-migration</a> tool will automatically create it. Note that after migration, the target collection will not be indexed, and you must manually index the collection afterward.</li>
+<li><strong>数据准备</strong>：<ul>
+<li>确保源 Milvus Collections 已加载并准备好导出数据。</li>
+<li>如果目标 Milvus 中没有与源集合相对应的集合，<a href="https://github.com/zilliztech/milvus-migration">milvus-migration</a>工具会自动创建。请注意，迁移后，目标 Collections 不会被编入索引，之后必须手动编入索引。</li>
 </ul></li>
 </ul>
-<h2 id="Configure-the-migration-file" class="common-anchor-header">Configure the migration file<button data-href="#Configure-the-migration-file" class="anchor-icon" translate="no">
+<h2 id="Configure-the-migration-file" class="common-anchor-header">配置迁移文件<button data-href="#Configure-the-migration-file" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -67,7 +62,7 @@ title: From Milvus 2.3.x
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Save the example migration config file as <code translate="no">migration.yaml</code> and modify the configs based on your actual conditions. You are free to put the config file in any local directory.</p>
+    </button></h2><p>将示例迁移配置文件保存为<code translate="no">migration.yaml</code> ，然后根据你的实际情况修改配置。您可以将配置文件放在任何本地目录下。</p>
 <pre><code translate="no" class="language-yaml">dumper:
   worker:
     workMode: milvus2x
@@ -91,57 +86,57 @@ target:
     username: xxxx
     password: xxxxx
 <button class="copy-code-btn"></button></code></pre>
-<p>The following table describes the parameters in the example config file. For more information, refer to <a href="https://github.com/zilliztech/milvus-migration/blob/main/README_2X.md#milvus-migration-milvus2x-to-milvus2x">Milvus Migration: Milvus2.x to Milvus2.x</a>.</p>
+<p>下表描述了示例配置文件中的参数。更多信息，请参阅<a href="https://github.com/zilliztech/milvus-migration/blob/main/README_2X.md#milvus-migration-milvus2x-to-milvus2x">Milvus 迁移：Milvus2.x 到 Milvus2.x</a>。</p>
 <ul>
 <li><p><code translate="no">dumper</code></p>
 <table>
 <thead>
-<tr><th>Parameter</th><th>Description</th></tr>
+<tr><th>参数</th><th>参数</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">dumper.worker.workMode</code></td><td>The operational mode of the migration job. Set to milvus2x when migrating from Milvus 2.x.</td></tr>
-<tr><td><code translate="no">dumper.worker.reader.bufferSize</code></td><td>Buffer size to read from Milvus 2.x in each batch.</td></tr>
+<tr><td><code translate="no">dumper.worker.workMode</code></td><td>迁移任务的操作符。从 Milvus 2.x 迁移时设置为 milvus2x。</td></tr>
+<tr><td><code translate="no">dumper.worker.reader.bufferSize</code></td><td>每批从 Milvus 2.x 读取的缓冲区大小。</td></tr>
 </tbody>
 </table>
 </li>
 <li><p><code translate="no">meta</code></p>
 <table>
 <thead>
-<tr><th>Parameter</th><th>Description</th></tr>
+<tr><th>参数</th><th>说明</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">meta.mode</code></td><td>Specifies where the meta file is read from. Set to config, indicating that the meta config can be obtained from this migration.yaml file.</td></tr>
-<tr><td><code translate="no">meta.version</code></td><td>Source Milvus version. Set to 2.3.0 or above.</td></tr>
-<tr><td><code translate="no">meta.collection</code></td><td>Source collection name.</td></tr>
+<tr><td><code translate="no">meta.mode</code></td><td>指定从何处读取元文件。设置为 config，表示元配置可以从这个 migration.yaml 文件中获取。</td></tr>
+<tr><td><code translate="no">meta.version</code></td><td>源 Milvus 版本。设置为 2.3.0 或更高版本。</td></tr>
+<tr><td><code translate="no">meta.collection</code></td><td>源 Collections 名称。</td></tr>
 </tbody>
 </table>
 </li>
 <li><p><code translate="no">source</code></p>
 <table>
 <thead>
-<tr><th>Parameter</th><th>Description</th></tr>
+<tr><th>参数</th><th>说明</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">source.milvus2x.endpoint</code></td><td>Address of the source Milvus server.</td></tr>
-<tr><td><code translate="no">source.milvus2x.username</code></td><td>Username for the source Milvus server. This parameter is required if user authentication is enabled for your Milvus server. For more information, refer to <a href="/docs/authenticate.md">Enable Authentication</a>.</td></tr>
-<tr><td><code translate="no">source.milvus2x.password</code></td><td>Password for the source Milvus server. This parameter is required if user authentication is enabled for your Milvus server. For more information, refer to <a href="/docs/authenticate.md">Enable Authentication</a>.</td></tr>
+<tr><td><code translate="no">source.milvus2x.endpoint</code></td><td>源 Milvus 服务器地址。</td></tr>
+<tr><td><code translate="no">source.milvus2x.username</code></td><td>Milvus 源服务器的用户名。如果 Milvus 服务器启用了用户身份验证，则需要使用此参数。有关详细信息，请参阅<a href="/docs/zh/authenticate.md">启用身份验证</a>。</td></tr>
+<tr><td><code translate="no">source.milvus2x.password</code></td><td>源 Milvus 服务器的密码。如果 Milvus 服务器启用了用户身份验证，则需要使用此参数。有关更多信息，请参阅<a href="/docs/zh/authenticate.md">启用身份验证</a>。</td></tr>
 </tbody>
 </table>
 </li>
 <li><p><code translate="no">target</code></p>
 <table>
 <thead>
-<tr><th>Parameter</th><th>Description</th></tr>
+<tr><th>参数</th><th>说明</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">target.milvus2x.endpoint</code></td><td>Address of the target Milvus server.</td></tr>
-<tr><td><code translate="no">target.milvus2x.username</code></td><td>Username for the target Milvus server. This parameter is required if user authentication is enabled for your Milvus server. For more information, refer to <a href="/docs/authenticate.md">Enable Authentication</a>.</td></tr>
-<tr><td><code translate="no">target.milvus2x.password</code></td><td>Password for the target Milvus server. This parameter is required if user authentication is enabled for your Milvus server. For more information, refer to <a href="/docs/authenticate.md">Enable Authentication</a>.</td></tr>
+<tr><td><code translate="no">target.milvus2x.endpoint</code></td><td>目标 Milvus 服务器地址。</td></tr>
+<tr><td><code translate="no">target.milvus2x.username</code></td><td>目标 Milvus 服务器的用户名。如果 Milvus 服务器启用了用户身份验证，则需要使用此参数。有关详细信息，请参阅<a href="/docs/zh/authenticate.md">启用身份验证</a>。</td></tr>
+<tr><td><code translate="no">target.milvus2x.password</code></td><td>目标 Milvus 服务器的密码。如果 Milvus 服务器启用了用户身份验证，则需要使用此参数。更多信息，请参阅<a href="/docs/zh/authenticate.md">启用身份验证</a>。</td></tr>
 </tbody>
 </table>
 </li>
 </ul>
-<h2 id="Start-the-migration-task" class="common-anchor-header">Start the migration task<button data-href="#Start-the-migration-task" class="anchor-icon" translate="no">
+<h2 id="Start-the-migration-task" class="common-anchor-header">启动迁移任务<button data-href="#Start-the-migration-task" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -156,22 +151,22 @@ target:
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>You have two options to start the migration task - using CLI or making API requests. Choose the one that best fits your needs.</p>
-<h3 id="Option-1-Using-CLI" class="common-anchor-header">Option 1: Using CLI</h3><p>Start the migration task with the following command. Replace <code translate="no">{YourConfigFilePath}</code> with the local directory where the config file <code translate="no">migration.yaml</code> resides.</p>
+    </button></h2><p>启动迁移任务有两种选择：使用 CLI 或提出 API 请求。请选择最适合您需要的选项。</p>
+<h3 id="Option-1-Using-CLI" class="common-anchor-header">选项 1：使用 CLI</h3><p>使用以下命令启动迁移任务。将<code translate="no">{YourConfigFilePath}</code> 替换为配置文件<code translate="no">migration.yaml</code> 所在的本地目录。</p>
 <pre><code translate="no" class="language-bash">./milvus-migration start --config=/{YourConfigFilePath}/migration.yaml
 <button class="copy-code-btn"></button></code></pre>
-<p>Monitor the logs for progress updates. Successful migration logs should include entries like:</p>
+<p>监控日志更新进度。成功迁移的日志应包括以下条目：</p>
 <pre><code translate="no" class="language-bash">[INFO] [migration/milvus2x_starter.go:79] [<span class="hljs-string">&quot;=================&gt;JobProcess!&quot;</span>] [Percent=100]
 [INFO] [migration/milvus2x_starter.go:27] [<span class="hljs-string">&quot;[Starter] migration Milvus2x to Milvus2x finish!!!&quot;</span>] [Cost=94.877717375]
 [INFO] [starter/starter.go:109] [<span class="hljs-string">&quot;[Starter] Migration Success!&quot;</span>] [Cost=94.878243583]
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Option-2-Making-API-requests" class="common-anchor-header">Option 2: Making API requests</h3><p>You can also use the Restful API to execute the migration. Start the API server with:</p>
+<h3 id="Option-2-Making-API-requests" class="common-anchor-header">方案 2：提出 API 请求</h3><p>也可以使用还原 API 执行迁移。用以下命令启动 API 服务器：</p>
 <pre><code translate="no" class="language-bash">./milvus-migration server run -p 8080
 <button class="copy-code-btn"></button></code></pre>
-<p>Once the server starts successfully, place the <code translate="no">migration.yaml</code> file in the <code translate="no">configs/</code> directory of the project and start the migration using:</p>
+<p>服务器启动成功后，将<code translate="no">migration.yaml</code> 文件放到项目的<code translate="no">configs/</code> 目录中，然后使用 开始迁移：</p>
 <pre><code translate="no" class="language-bash">curl -XPOST http://localhost:8080/api/v1/start
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Verify-the-result" class="common-anchor-header">Verify the result<button data-href="#Verify-the-result" class="anchor-icon" translate="no">
+<h2 id="Verify-the-result" class="common-anchor-header">验证结果<button data-href="#Verify-the-result" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -186,8 +181,8 @@ target:
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>After the migration task is completed, use Attu to view the number of entities migrated. Additionally, you can create indexes and load collections in Attu. For more information, refer to <a href="https://github.com/zilliztech/attu">Attu</a> and <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/get_collection_stats.md">get_collection_stats()</a>.</p>
-<h2 id="Additional-configuration-options" class="common-anchor-header">Additional configuration options<button data-href="#Additional-configuration-options" class="anchor-icon" translate="no">
+    </button></h2><p>迁移任务完成后，使用 Attu 查看已迁移实体的数量。此外，还可以在 Attu 中创建索引和加载 Collections。更多信息，请参阅<a href="https://github.com/zilliztech/attu">Attu</a>和<a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/get_collection_stats.md">get_collection_stats()</a>。</p>
+<h2 id="Additional-configuration-options" class="common-anchor-header">其他配置选项<button data-href="#Additional-configuration-options" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -202,16 +197,16 @@ target:
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>In addition to the basic configurations mentioned above, you can also add additional settings based on your specific requirements.</p>
+    </button></h2><p>除上述基本配置外，您还可以根据具体要求添加其他设置。</p>
 <ul>
-<li><p><strong>Selective field migration</strong>: If you need to migrate only specific fields in a collection rather than all fields, specify the fields to be migrated in the <code translate="no">meta</code> section of the <code translate="no">migration.yaml</code> file.</p>
+<li><p><strong>选择性字段迁移</strong>：如果只需要迁移 Collections 中的特定字段而不是所有字段，请在<code translate="no">migration.yaml</code> 文件的<code translate="no">meta</code> 部分指定要迁移的字段。</p>
 <pre><code translate="no" class="language-yaml">meta:
   fields:
     - name: <span class="hljs-built_in">id</span>
     - name: title_vector
     - name: reading_time
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p><strong>Custom target collection</strong>: To customize the properties of the target collection, add the related configurations in the <code translate="no">meta</code> section of the <code translate="no">migration.yaml</code> file.</p>
+<li><p><strong>自定义目标 Collections</strong>：要自定义目标 Collections 的属性，请在<code translate="no">migration.yaml</code> 文件的<code translate="no">meta</code> 部分添加相关配置。</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">meta</span>:
   <span class="hljs-attr">milvus</span>:
     <span class="hljs-attr">collection</span>: target_collection_name
@@ -220,4 +215,4 @@ target:
     <span class="hljs-attr">consistencyLevel</span>: <span class="hljs-title class_">Customized</span>
 <button class="copy-code-btn"></button></code></pre></li>
 </ul>
-<p>For detailed information, refer to <a href="https://github.com/zilliztech/milvus-migration/blob/main/README_2X.md#milvus-migration-milvus2x-to-milvus2x">Milvus Migration: Milvus2.x to Milvus2.x</a>.</p>
+<p>详细信息请参阅<a href="https://github.com/zilliztech/milvus-migration/blob/main/README_2X.md#milvus-migration-milvus2x-to-milvus2x">Milvus 迁移：Milvus2.x 到 Milvus2.x</a>。</p>

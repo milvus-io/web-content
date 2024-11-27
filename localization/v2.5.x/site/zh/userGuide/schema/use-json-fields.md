@@ -1,14 +1,12 @@
 ---
 id: use-json-fields.md
-title: Use JSON Fields
+title: 使用 JSON 字段
 summary: >-
-  JSON (JavaScript Object Notation) is a lightweight data exchange format that
-  provides a flexible way to store and query complex data structures. In Milvus,
-  you can store additional structured information alongside vector data using
-  JSON fields, enabling advanced searches and queries that combine vector
-  similarity with structured filtering.​
+  JSON（JavaScript Object Notation，JavaScript
+  对象符号）是一种轻量级数据交换格式，为复杂数据结构的存储和查询提供了灵活的方式。在 Milvus 中，您可以使用 JSON
+  字段在存储向量数据的同时存储额外的结构化信息，从而实现将向量相似性与结构化过滤相结合的高级搜索和查询。
 ---
-<h1 id="JSON-Field​" class="common-anchor-header">JSON Field​<button data-href="#JSON-Field​" class="anchor-icon" translate="no">
+<h1 id="JSON-Field​" class="common-anchor-header">JSON 字段<button data-href="#JSON-Field​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -23,8 +21,8 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p><a href="https://en.wikipedia.org/wiki/JSON">JSON</a> (JavaScript Object Notation) is a lightweight data exchange format that provides a flexible way to store and query complex data structures. In Milvus, you can store additional structured information alongside vector data using JSON fields, enabling advanced searches and queries that combine vector similarity with structured filtering.​</p>
-<p>JSON fields are ideal for applications that require metadata to optimize retrieval results. For example, in e-commerce, product vectors can be enhanced with attributes like category, price, and brand. In recommendation systems, user vectors can be combined with preferences and demographic information. Below is an example of a typical JSON field:​</p>
+    </button></h1><p><a href="https://en.wikipedia.org/wiki/JSON">JSON</a>（JavaScript Object Notation，JavaScript 对象符号）是一种轻量级数据交换格式，为复杂数据结构的存储和查询提供了灵活的方式。在 Milvus 中，您可以使用 JSON 字段在存储向量数据的同时存储额外的结构化信息，从而实现将向量相似性与结构化过滤相结合的高级搜索和查询。</p>
+<p>JSON 字段非常适合需要元数据来优化检索结果的应用。例如，在电子商务中，可以通过类别、价格和品牌等属性来增强产品向量。在推荐系统中，用户向量可以与偏好和人口统计信息相结合。下面是一个典型的 JSON 字段示例。</p>
 <pre><code translate="no" class="language-json">{​
   <span class="hljs-string">&quot;category&quot;</span>: <span class="hljs-string">&quot;electronics&quot;</span>,​
   <span class="hljs-string">&quot;price&quot;</span>: <span class="hljs-number">99.99</span>,​
@@ -32,7 +30,7 @@ summary: >-
 }​
 
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Add-JSON-field​" class="common-anchor-header">Add JSON field​<button data-href="#Add-JSON-field​" class="anchor-icon" translate="no">
+<h2 id="Add-JSON-field​" class="common-anchor-header">添加 JSON 字段<button data-href="#Add-JSON-field​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -47,14 +45,10 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>To use JSON fields in Milvus, define the relevant field type in the collection schema, setting the <code translate="no">datatype</code> to the supported JSON type, i.e., <code translate="no">JSON</code>.​</p>
-<p>Here’s how to define a collection schema that includes a JSON field:​</p>
+    </button></h2><p>要在 Milvus 中使用 JSON 字段，请在 Collections 模式中定义相关字段类型，将<code translate="no">datatype</code> 设置为支持的 JSON 类型，即<code translate="no">JSON</code> 。</p>
+<p>以下是如何定义包含 JSON 字段的 Collections 模式。</p>
 <div class="multipleCode">
-    <a href="#python">Python </a>
-    <a href="#java">Java</a>
-    <a href="#javascript">Node.js</a>
-    <a href="#curl">cURL</a>
-</div>
+   <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType​
 ​
 client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)​
@@ -149,11 +143,11 @@ schema.addField(AddFieldReq.builder()​
 }&quot;</span>​
 
 <button class="copy-code-btn"></button></code></pre>
-<p>In this example, we add a JSON field called <code translate="no">metadata</code> to store additional metadata related to vector data, such as product category, price, and brand information.​</p>
+<p>在本例中，我们添加了一个名为<code translate="no">metadata</code> 的 JSON 字段，用于存储与向量数据相关的附加元数据，如产品类别、价格和品牌信息。</p>
 <div class="alert note">
-<p>The primary field and vector field are mandatory when you create a collection. The primary field uniquely identifies each entity, while the vector field is crucial for similarity search. For more details, refer to <a href="/docs/primary-field.md">​Primary Field &amp; AutoID</a>, <a href="/docs/dense-vector.md">​Dense Vector</a>, <a href="/docs/binary-vector.md">​Binary Vector</a>, or <a href="/docs/sparse_vector.md">​Sparse Vector</a>.​</p>
+<p>创建 Collections 时，主字段和向量字段是必填字段。主字段唯一标识每个实体，而向量字段对于相似性搜索至关重要。有关详细信息，请参阅<a href="/docs/zh/primary-field.md">主字段和自动识别</a>、<a href="/docs/zh/dense-vector.md">密集向量</a>、<a href="/docs/zh/binary-vector.md">二进制向量</a>或<a href="/docs/zh/sparse_vector.md">稀疏向量</a>。</p>
 </div>
-<h2 id="Create-collection​" class="common-anchor-header">Create collection​<button data-href="#Create-collection​" class="anchor-icon" translate="no">
+<h2 id="Create-collection​" class="common-anchor-header">创建 Collections<button data-href="#Create-collection​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -168,13 +162,9 @@ schema.addField(AddFieldReq.builder()​
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>When creating a collection, you must create an index for the vector field to ensure retrieval performance. In this example, we use <code translate="no">AUTOINDEX</code> to simplify index setup. For more details, refer to <a href="https://milvus.io/docs/glossary.md#Auto-Index">​AUTOINDEX</a>.​</p>
+    </button></h2><p>创建 Collections 时，必须为向量字段创建索引，以确保检索性能。在本例中，我们使用<code translate="no">AUTOINDEX</code> 来简化索引设置。有关详细信息，请参阅<a href="https://milvus.io/docs/glossary.md#Auto-Index">自动索引</a>。</p>
 <div class="multipleCode">
-    <a href="#python">Python </a>
-    <a href="#java">Java</a>
-    <a href="#javascript">Node.js</a>
-    <a href="#curl">cURL</a>
-</div>
+   <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python">​
 index_params = client.<span class="hljs-title function_">prepare_index_params</span>()​
 ​
@@ -213,13 +203,9 @@ indexes.add(IndexParam.builder()​
     ]&#x27;</span>​
 
 <button class="copy-code-btn"></button></code></pre>
-<p>Use the defined schema and index parameters to create a collection:​</p>
+<p>使用定义的 Schema 和索引参数创建 Collections。</p>
 <div class="multipleCode">
-    <a href="#python">Python </a>
-    <a href="#java">Java</a>
-    <a href="#javascript">Node.js</a>
-    <a href="#curl">cURL</a>
-</div>
+   <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python">client.<span class="hljs-title function_">create_collection</span>(​
     collection_name=<span class="hljs-string">&quot;my_json_collection&quot;</span>,​
     schema=schema,​
@@ -253,7 +239,7 @@ client.createCollection(requestCreate);​
 }&quot;</span>​
 
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Insert-data​" class="common-anchor-header">Insert data​<button data-href="#Insert-data​" class="anchor-icon" translate="no">
+<h2 id="Insert-data​" class="common-anchor-header">插入数据<button data-href="#Insert-data​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -268,13 +254,9 @@ client.createCollection(requestCreate);​
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>After creating the collection, you can insert data that includes JSON fields.​</p>
+    </button></h2><p>创建 Collections 后，可以插入包含 JSON 字段的数据。</p>
 <div class="multipleCode">
-    <a href="#python">Python </a>
-    <a href="#java">Java</a>
-    <a href="#javascript">Node.js</a>
-    <a href="#curl">cURL</a>
-</div>
+   <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Data to be inserted​</span>
 data = [​
   {​
@@ -369,12 +351,12 @@ client.<span class="hljs-title function_">insert</span>({​
 }&#x27;</span>​
 
 <button class="copy-code-btn"></button></code></pre>
-<p>In this example:​</p>
+<p>在本例中。</p>
 <ul>
-<li><p>Each data entry includes a primary field (<code translate="no">pk</code>), <code translate="no">metadata</code> as a JSON field to store information such as product category, price, and brand.​</p></li>
-<li><p><code translate="no">embedding</code> is a 3-dimensional vector field used for vector similarity search.​</p></li>
+<li><p>每个数据项都包含一个主字段 (<code translate="no">pk</code>),<code translate="no">metadata</code> 作为 JSON 字段，用于存储产品类别、价格和品牌等信息。</p></li>
+<li><p><code translate="no">embedding</code> 是一个三维向量字段，用于向量相似性搜索。</p></li>
 </ul>
-<h2 id="Search-and-query​" class="common-anchor-header">Search and query​<button data-href="#Search-and-query​" class="anchor-icon" translate="no">
+<h2 id="Search-and-query​" class="common-anchor-header">搜索和查询<button data-href="#Search-and-query​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -389,14 +371,10 @@ client.<span class="hljs-title function_">insert</span>({​
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>JSON fields allow scalar filtering during searches, enhancing Milvus’s vector search capabilities. You can query based on JSON properties alongside vector similarity.​</p>
-<h3 id="Filter-queries​" class="common-anchor-header">Filter queries​</h3><p>You can filter data based on JSON properties, such as matching specific values or checking if a number falls within a certain range.​</p>
+    </button></h2><p>JSON 字段允许在搜索过程中进行标量过滤，增强了 Milvus 的向量搜索功能。您可以根据 JSON 属性和向量相似性进行查询。</p>
+<h3 id="Filter-queries​" class="common-anchor-header">过滤查询</h3><p>您可以根据 JSON 属性过滤数据，例如匹配特定值或检查某个数字是否在某个范围内。</p>
 <div class="multipleCode">
-    <a href="#python">Python </a>
-    <a href="#java">Java</a>
-    <a href="#javascript">Node.js</a>
-    <a href="#curl">cURL</a>
-</div>
+   <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;metadata[&quot;category&quot;] == &quot;electronics&quot; and metadata[&quot;price&quot;] &lt; 150&#x27;</span>​
 ​
 res = client.query(​
@@ -447,14 +425,10 @@ System.out.println(resp.getQueryResults());​
 {<span class="hljs-string">&quot;code&quot;</span>:0,<span class="hljs-string">&quot;cost&quot;</span>:0,<span class="hljs-string">&quot;data&quot;</span>:[{<span class="hljs-string">&quot;metadata&quot;</span>:<span class="hljs-string">&quot;{\&quot;category\&quot;: \&quot;electronics\&quot;, \&quot;price\&quot;: 99.99, \&quot;brand\&quot;: \&quot;BrandA\&quot;}&quot;</span>,<span class="hljs-string">&quot;pk&quot;</span>:1}]}​
 
 <button class="copy-code-btn"></button></code></pre>
-<p>In the above query, Milvus filters out entities where the <code translate="no">metadata</code> field has a category of <code translate="no">&quot;electronics&quot;</code> and a price below 150, returning entities that match these criteria.​</p>
-<h3 id="Vector-search-with-JSON-filtering​" class="common-anchor-header">Vector search with JSON filtering​</h3><p>By combining vector similarity with JSON filtering, you can ensure that the retrieved data not only matches semantically but also meets specific business conditions, making the search results more precise and aligned with user needs.​</p>
+<p>在上述查询中，Milvus 过滤掉了<code translate="no">metadata</code> 字段的类别为<code translate="no">&quot;electronics&quot;</code> 、价格低于 150 的实体，返回符合这些条件的实体。</p>
+<h3 id="Vector-search-with-JSON-filtering​" class="common-anchor-header">带 JSON 过滤的向量搜索</h3><p>通过将向量相似性与 JSON 过滤相结合，可以确保检索到的数据不仅在语义上相匹配，而且符合特定的业务条件，从而使搜索结果更加精确并符合用户需求。</p>
 <div class="multipleCode">
-    <a href="#python">Python </a>
-    <a href="#java">Java</a>
-    <a href="#javascript">Node.js</a>
-    <a href="#curl">cURL</a>
-</div>
+   <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;metadata[&quot;brand&quot;] == &quot;BrandA&quot;&#x27;</span>​
 ​
 res = client.search(​
@@ -522,9 +496,9 @@ System.out.println(resp.getSearchResults());​
 <span class="hljs-comment">## {&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:[{&quot;distance&quot;:-0.24793813,&quot;id&quot;:1,&quot;metadata&quot;:&quot;{\&quot;category\&quot;: \&quot;electronics\&quot;, \&quot;price\&quot;: 99.99, \&quot;brand\&quot;: \&quot;BrandA\&quot;}&quot;}]}​</span>
 
 <button class="copy-code-btn"></button></code></pre>
-<p>In this example, Milvus returns the top 5 entities most similar to the query vector, with the <code translate="no">metadata</code> field containing a brand of <code translate="no">&quot;BrandA&quot;</code>.​</p>
-<p>Additionally, Milvus supports advanced JSON filtering operators such as <code translate="no">JSON_CONTAINS</code>, <code translate="no">JSON_CONTAINS_ALL</code>, and <code translate="no">JSON_CONTAINS_ANY</code>, which can further enhance query capabilities. For more details, refer to <a href="/docs/boolean.md">​Metadata Filtering</a>.​</p>
-<h2 id="Limits​" class="common-anchor-header">Limits​<button data-href="#Limits​" class="anchor-icon" translate="no">
+<p>在这个例子中，Milvus 返回了与查询向量最相似的前 5 个实体，其中<code translate="no">metadata</code> 字段包含一个品牌<code translate="no">&quot;BrandA&quot;</code> 。</p>
+<p>此外，Milvus 还支持高级 JSON 过滤操作符，如<code translate="no">JSON_CONTAINS</code> 、<code translate="no">JSON_CONTAINS_ALL</code> 和<code translate="no">JSON_CONTAINS_ANY</code> ，可进一步增强查询功能。更多详情，请参阅<a href="/docs/zh/boolean.md">元数据过滤</a>。</p>
+<h2 id="Limits​" class="common-anchor-header">限制<button data-href="#Limits​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -540,9 +514,9 @@ System.out.println(resp.getSearchResults());​
         ></path>
       </svg>
     </button></h2><ul>
-<li><p><strong>Indexing Limitations</strong>: Due to the complexity of data structures, indexing JSON fields is not supported.​</p></li>
-<li><p><strong>Data Type Matching</strong>: If a JSON field’s key value is an integer or floating point, it can only be compared with another integer or float key or <code translate="no">INT32/64</code> or <code translate="no">FLOAT32/64</code> fields. If the key value is a string (<code translate="no">VARCHAR</code>), it can only be compared with another string key.​</p></li>
-<li><p><strong>Naming Restrictions</strong>: When naming JSON keys, it is recommended to use only letters, numeric characters, and underscores, as other characters may cause issues during filtering or searching.​</p></li>
-<li><p><strong>Handling String Values</strong>: For string values (<code translate="no">VARCHAR</code>), Milvus stores JSON field strings as-is without semantic conversion. For example: <code translate="no">'a&quot;b'</code>, <code translate="no">&quot;a'b&quot;</code>, <code translate="no">'a\\'b'</code>, and <code translate="no">&quot;a\\&quot;b&quot;</code> are stored as entered; however, <code translate="no">'a'b'</code> and <code translate="no">&quot;a&quot;b&quot;</code> are considered invalid.​</p></li>
-<li><p><strong>Handling Nested Dictionaries</strong>: Any nested dictionaries within JSON field values are treated as strings.​</p></li>
+<li><p><strong>索引限制</strong>：由于数据结构的复杂性，不支持 JSON 字段索引。</p></li>
+<li><p><strong>数据类型匹配</strong>：如果 JSON 字段的键值是整数或浮点数，则只能与另一个整数或浮点数键值或<code translate="no">INT32/64</code> 或<code translate="no">FLOAT32/64</code> 字段进行比较。如果键值是字符串 (<code translate="no">VARCHAR</code>)，则只能与另一个字符串键值进行比较。</p></li>
+<li><p><strong>命名限制</strong>：在命名 JSON 键时，建议只使用字母、数字字符和下划线，因为其他字符可能会在过滤或搜索时引起问题。</p></li>
+<li><p><strong>处理字符串值</strong>：对于字符串值 (<code translate="no">VARCHAR</code>)，Milvus 按原样存储 JSON 字段字符串，不进行语义转换。例如<code translate="no">'a&quot;b'</code> <code translate="no">&quot;a'b&quot;</code>,<code translate="no">'a\\'b'</code>, 和<code translate="no">&quot;a\\&quot;b&quot;</code> 会按输入值存储；但<code translate="no">'a'b'</code> 和<code translate="no">&quot;a&quot;b&quot;</code> 会被视为无效。</p></li>
+<li><p><strong>处理嵌套字典</strong>：JSON 字段值中的任何嵌套字典都将作为字符串处理。</p></li>
 </ul>

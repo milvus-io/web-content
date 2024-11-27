@@ -1,15 +1,12 @@
 ---
 id: quickstart_mem0_with_milvus.md
 summary: >-
-  In this tutorial, we’ll cover essential Mem0 memory management
-  operations—adding, retrieving, updating, searching, deleting, and tracking
-  memory history—using Milvus, a high-performance, open-source vector database
-  that powers efficient storage and retrieval. This hands-on introduction will
-  guide you through foundational memory operations to help you build
-  personalized AI interactions with Mem0 and Milvus.
-title: Getting Started with Mem0 and Milvus
+  在本教程中，我们将介绍基本的 Mem0 内存管理操作--添加、检索、更新、搜索、删除和跟踪内存历史记录--使用
+  Milvus，这是一个高性能、开源的向量数据库，可支持高效存储和检索。本实践介绍将指导您完成基础内存操作，帮助您利用 Mem0 和 Milvus
+  构建个性化的人工智能交互。
+title: 开始使用 Mem0 和 Milvus
 ---
-<h1 id="Getting-Started-with-Mem0-and-Milvus" class="common-anchor-header">Getting Started with Mem0 and Milvus<button data-href="#Getting-Started-with-Mem0-and-Milvus" class="anchor-icon" translate="no">
+<h1 id="Getting-Started-with-Mem0-and-Milvus" class="common-anchor-header">开始使用 Mem0 和 Milvus<button data-href="#Getting-Started-with-Mem0-and-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -30,9 +27,9 @@ title: Getting Started with Mem0 and Milvus
 <a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/quickstart_mem0_with_milvus.ipynb" target="_blank">
 <img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/>
 </a></p>
-<p><a href="https://mem0.ai/">Mem0</a> is an intelligent memory layer for AI applications, designed to deliver personalized and efficient interactions by retaining user preferences and continuously adapting over time. Ideal for chatbots and AI-driven tools, Mem0 creates seamless, context-aware experiences.</p>
-<p>In this tutorial, we’ll cover essential Mem0 memory management operations—adding, retrieving, updating, searching, deleting, and tracking memory history—using <a href="https://milvus.io/">Milvus</a>, a high-performance, open-source vector database that powers efficient storage and retrieval. This hands-on introduction will guide you through foundational memory operations to help you build personalized AI interactions with Mem0 and Milvus.</p>
-<h2 id="Preparation" class="common-anchor-header">Preparation<button data-href="#Preparation" class="anchor-icon" translate="no">
+<p><a href="https://mem0.ai/">Mem0</a>是人工智能应用的智能记忆层，旨在通过保留用户偏好和随时间不断调整来提供个性化和高效的交互。作为聊天机器人和人工智能驱动工具的理想选择，Mem0 可创建无缝、上下文感知的体验。</p>
+<p>在本教程中，我们将介绍基本的 Mem0 内存管理操作--使用<a href="https://milvus.io/">Milvus</a> 添加、检索、更新、搜索、删除和跟踪内存历史记录--<a href="https://milvus.io/">Milvus</a> 是一个高性能、开源的向量数据库，为高效存储和检索提供了动力。本实践介绍将指导您完成基础内存操作，帮助您利用 Mem0 和 Milvus 构建个性化的人工智能交互。</p>
+<h2 id="Preparation" class="common-anchor-header">准备工作<button data-href="#Preparation" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -47,17 +44,17 @@ title: Getting Started with Mem0 and Milvus
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Download-required-libraries" class="common-anchor-header">Download required libraries</h3><pre><code translate="no" class="language-shell">$ pip install mem0ai pymilvus
+    </button></h2><h3 id="Download-required-libraries" class="common-anchor-header">下载所需程序库</h3><pre><code translate="no" class="language-shell">$ pip install mem0ai pymilvus
 <button class="copy-code-btn"></button></code></pre>
 <blockquote>
-<p>If you are using Google Colab, to enable dependencies just installed, you may need to <strong>restart the runtime</strong> (click on the “Runtime” menu at the top of the screen, and select “Restart session” from the dropdown menu).</p>
+<p>如果您使用的是 Google Colab，要启用刚刚安装的依赖项，可能需要<strong>重新启动运行时</strong>（点击屏幕顶部的 "运行时 "菜单，从下拉菜单中选择 "重新启动会话"）。</p>
 </blockquote>
-<h3 id="Configure-Mem0-with-Milvus" class="common-anchor-header">Configure Mem0 with Milvus</h3><p>We will use OpenAI as the LLM in this example. You should prepare the <a href="https://platform.openai.com/docs/quickstart">api key</a> <code translate="no">OPENAI_API_KEY</code> as an environment variable.</p>
+<h3 id="Configure-Mem0-with-Milvus" class="common-anchor-header">用 Milvus 配置 Mem0</h3><p>在本例中，我们将使用 OpenAI 作为 LLM。您应将<a href="https://platform.openai.com/docs/quickstart">api 密钥</a> <code translate="no">OPENAI_API_KEY</code> 设置为环境变量。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> os
 
 os.<span class="hljs-property">environ</span>[<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</span>] = <span class="hljs-string">&quot;sk-***********&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Now, we can configure Mem0 to use Milvus as the vector store</p>
+<p>现在，我们可以将 Mem0 配置为使用 Milvus 作为向量存储库</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Define Config</span>
 <span class="hljs-keyword">from</span> mem0 <span class="hljs-keyword">import</span> Memory
 
@@ -78,13 +75,13 @@ m = Memory.from_config(config)
 <div class="alert note">
 <blockquote>
 <ul>
-<li>If you only need a local vector database for small scale data or prototyping, setting the uri as a local file, e.g.<code translate="no">./milvus.db</code>, is the most convenient method, as it automatically utilizes <a href="https://milvus.io/docs/milvus_lite.md">Milvus Lite</a> to store all data in this file.</li>
-<li>If you have large scale of data, say more than a million vectors, you can set up a more performant Milvus server on <a href="https://milvus.io/docs/quickstart.md">Docker or Kubernetes</a>. In this setup, please use the server address and port as your uri, e.g.<code translate="no">http://localhost:19530</code>. If you enable the authentication feature on Milvus, use “&lt;your_username&gt;:&lt;your_password&gt;” as the token, otherwise don’t set the token.</li>
-<li>If you use <a href="https://zilliz.com/cloud">Zilliz Cloud</a>, the fully managed cloud service for Milvus, adjust the <code translate="no">uri</code> and <code translate="no">token</code>, which correspond to the <a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#cluster-details">Public Endpoint and API key</a> in Zilliz Cloud.</li>
+<li>如果你只需要一个本地向量数据库，用于小规模数据或原型设计，那么将 uri 设置为本地文件，例如<code translate="no">./milvus.db</code> ，是最方便的方法，因为它会自动利用<a href="https://milvus.io/docs/milvus_lite.md">Milvus Lite</a>将所有数据存储在此文件中。</li>
+<li>如果你有大规模数据，比如超过一百万个向量，你可以在<a href="https://milvus.io/docs/quickstart.md">Docker 或 Kubernetes</a> 上设置性能更强的 Milvus 服务器。在此设置中，请使用服务器地址和端口作为 uri，例如<code translate="no">http://localhost:19530</code> 。如果在 Milvus 上启用了身份验证功能，请使用"&lt;your_username&gt;:&lt;your_password&gt;"作为令牌，否则不要设置令牌。</li>
+<li>如果您使用<a href="https://zilliz.com/cloud">Zilliz Cloud</a>（Milvus 的全托管云服务），请调整<code translate="no">uri</code> 和<code translate="no">token</code> ，它们与 Zilliz Cloud 中的<a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#cluster-details">公共端点和 API 密钥</a>相对应。</li>
 </ul>
 </blockquote>
 </div>
-<h2 id="Managing-User-Memories-with-Mem0-and-Milvus" class="common-anchor-header">Managing User Memories with Mem0 and Milvus<button data-href="#Managing-User-Memories-with-Mem0-and-Milvus" class="anchor-icon" translate="no">
+<h2 id="Managing-User-Memories-with-Mem0-and-Milvus" class="common-anchor-header">使用 Mem0 和 Milvus 管理用户记忆库<button data-href="#Managing-User-Memories-with-Mem0-and-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -99,8 +96,8 @@ m = Memory.from_config(config)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Adding-a-Memory" class="common-anchor-header">Adding a Memory</h3><p>The <code translate="no">add</code> function stores unstructured text in Milvus as a memory, associating it with a specific user and optional metadata.</p>
-<p>Here, we’re adding Alice’s memory, “working on improving my tennis skills,” along with relevant metadata for context to Milvus.</p>
+    </button></h2><h3 id="Adding-a-Memory" class="common-anchor-header">添加记忆库</h3><p><code translate="no">add</code> 函数将非结构化文本作为内存存储在 Milvus 中，并将其与特定用户和可选元数据关联。</p>
+<p>在这里，我们将爱丽丝的记忆 "努力提高我的网球技术 "连同相关元数据一起添加到 Milvus 中。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Add a memory to user: Working on improving tennis skills</span>
 res = m.add(
     messages=<span class="hljs-string">&quot;I am working on improving my tennis skills.&quot;</span>,
@@ -115,7 +112,7 @@ res
    'event': 'ADD'}],
  'relations': []}
 </code></pre>
-<h3 id="Update-a-Memory" class="common-anchor-header">Update a Memory</h3><p>We can use the <code translate="no">add</code> function’s return value to retrieve the memory ID, allowing us to update this memory with new information via <code translate="no">update</code>.</p>
+<h3 id="Update-a-Memory" class="common-anchor-header">更新记忆</h3><p>我们可以使用<code translate="no">add</code> 函数的返回值检索内存 ID，这样就可以通过<code translate="no">update</code> 用新信息更新内存。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Get memory_id</span>
 memory_id = res[<span class="hljs-string">&quot;results&quot;</span>][<span class="hljs-number">0</span>][<span class="hljs-string">&quot;id&quot;</span>]
 
@@ -124,8 +121,8 @@ m.update(memory_id=memory_id, data=<span class="hljs-string">&quot;Likes to play
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">{'message': 'Memory updated successfully!'}
 </code></pre>
-<h3 id="Get-All-Memory-For-a-User" class="common-anchor-header">Get All Memory For a User</h3><p>We can use the <code translate="no">get_all</code> function to view all inserted memories or filter by <code translate="no">user_id</code> in Milvus.</p>
-<p>Note that we can see the memory is now changed from “Working on impriving tennis skills” to &quot;Likes to play tennis on weekends&quot;.</p>
+<h3 id="Get-All-Memory-For-a-User" class="common-anchor-header">获取用户的所有内存</h3><p>我们可以使用<code translate="no">get_all</code> 函数查看所有插入的内存，或通过 Milvus 中的<code translate="no">user_id</code> 进行筛选。</p>
+<p>请注意，我们可以看到该记忆已从 &quot;努力提高网球技能 &quot;更改为 &quot;喜欢在周末打网球&quot;。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Get all memory for the user Alice</span>
 m.get_all(user_id=<span class="hljs-string">&quot;alice&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
@@ -137,7 +134,7 @@ m.get_all(user_id=<span class="hljs-string">&quot;alice&quot;</span>)
    'updated_at': '2024-11-01T19:33:47.619857-07:00',
    'user_id': 'alice'}]}
 </code></pre>
-<h3 id="View-Memory-Update-History" class="common-anchor-header">View Memory Update History</h3><p>We can also view the memory update history by specifying which memory_id we are interested in via <code translate="no">history</code> function.</p>
+<h3 id="View-Memory-Update-History" class="common-anchor-header">查看记忆更新历史</h3><p>我们还可以通过<code translate="no">history</code> 函数指定我们感兴趣的内存_id，查看内存更新历史。</p>
 <pre><code translate="no" class="language-python">m.history(memory_id=memory_id)
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">[{'id': '71ed3cec-5d9a-4fa6-a009-59802450c0b9',
@@ -155,15 +152,15 @@ m.get_all(user_id=<span class="hljs-string">&quot;alice&quot;</span>)
   'created_at': '2024-11-01T19:33:44.116920-07:00',
   'updated_at': '2024-11-01T19:33:47.619857-07:00'}]
 </code></pre>
-<h3 id="Search-Memory" class="common-anchor-header">Search Memory</h3><p>We can use <code translate="no">search</code> function to look for the most related memory for the user.</p>
-<p>Let’s start by adding another memory for Alice.</p>
+<h3 id="Search-Memory" class="common-anchor-header">搜索内存</h3><p>我们可以使用<code translate="no">search</code> 函数查找与用户最相关的内存。</p>
+<p>让我们从为 Alice 添加另一个内存开始。</p>
 <pre><code translate="no" class="language-python">new_mem = m.<span class="hljs-keyword">add</span>(
     <span class="hljs-string">&quot;I have a linear algebra midterm exam on November 20&quot;</span>,
     user_id=<span class="hljs-string">&quot;alice&quot;</span>,
     metadata={<span class="hljs-string">&quot;category&quot;</span>: <span class="hljs-string">&quot;task&quot;</span>},
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>Now, we call <code translate="no">get_all</code> specifying the user_id to verify that we have indeed 2 memory entries for user Alice.</p>
+<p>现在，我们调用<code translate="no">get_all</code> ，指定 user_id，以验证我们确实有 2 个用户 Alice 的内存条目。</p>
 <pre><code translate="no" class="language-python">m.<span class="hljs-title function_">get_all</span>(user_id=<span class="hljs-string">&quot;alice&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">{'results': [{'id': '77162018-663b-4dfa-88b1-4f029d6136ab',
@@ -181,7 +178,7 @@ m.get_all(user_id=<span class="hljs-string">&quot;alice&quot;</span>)
    'updated_at': None,
    'user_id': 'alice'}]}
 </code></pre>
-<p>We can perform <code translate="no">search</code> now by providing <code translate="no">query</code> and <code translate="no">user_id</code>. Note that we are by default using <code translate="no">L2</code> metric for similarity search, so a smaller <code translate="no">score</code> means greater similarity.</p>
+<p>现在我们可以通过提供<code translate="no">query</code> 和<code translate="no">user_id</code> 来执行<code translate="no">search</code> 。请注意，我们默认使用<code translate="no">L2</code> 指标进行相似性搜索，因此<code translate="no">score</code> 越小表示相似性越高。</p>
 <pre><code translate="no" class="language-python">m.<span class="hljs-title function_">search</span>(query=<span class="hljs-string">&quot;What are Alice&#x27;s hobbies&quot;</span>, user_id=<span class="hljs-string">&quot;alice&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">{'results': [{'id': '77162018-663b-4dfa-88b1-4f029d6136ab',
@@ -201,8 +198,8 @@ m.get_all(user_id=<span class="hljs-string">&quot;alice&quot;</span>)
    'updated_at': None,
    'user_id': 'alice'}]}
 </code></pre>
-<h3 id="Delete-Memory" class="common-anchor-header">Delete Memory</h3><p>We can also <code translate="no">delete</code> a memory by providing the corresponding <code translate="no">memory_id</code>.</p>
-<p>We will delete the memory “Likes to play tennis on weekends” as its <code translate="no">memory_id</code> has already been retrieved, and call <code translate="no">get_all</code> to verify the deletion is successful.</p>
+<h3 id="Delete-Memory" class="common-anchor-header">删除内存</h3><p>我们还可以通过提供相应的<code translate="no">memory_id</code> 来<code translate="no">delete</code> 内存。</p>
+<p>我们将删除内存 "喜欢在周末打网球"，因为它的<code translate="no">memory_id</code> 已被检索，并调用<code translate="no">get_all</code> 验证删除是否成功。</p>
 <pre><code translate="no" class="language-python">m.<span class="hljs-built_in">delete</span>(memory_id=memory_id)
 
 m.get_all(<span class="hljs-string">&quot;alice&quot;</span>)

@@ -1,10 +1,10 @@
 ---
 id: deploy_etcd.md
-title: Configure Meta Storage with Docker Compose or Helm
+title: 使用 Docker Compose 或 Helm 配置元存储
 related_key: 'S3, storage'
-summary: Learn how to configure meta storage for Milvus with Docker Compose/Helm.
+summary: 了解如何使用 Docker Compose/Helm 为 Milvus 配置元存储。
 ---
-<h1 id="Configure-Meta-Storage-with-Docker-Compose-or-Helm" class="common-anchor-header">Configure Meta Storage with Docker Compose or Helm<button data-href="#Configure-Meta-Storage-with-Docker-Compose-or-Helm" class="anchor-icon" translate="no">
+<h1 id="Configure-Meta-Storage-with-Docker-Compose-or-Helm" class="common-anchor-header">使用 Docker Compose 或 Helm 配置元存储<button data-href="#Configure-Meta-Storage-with-Docker-Compose-or-Helm" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -19,8 +19,8 @@ summary: Learn how to configure meta storage for Milvus with Docker Compose/Helm
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Milvus uses etcd for storing metadata. This topic introduces how to configure etcd with Docker Compose or Helm.</p>
-<h2 id="Configure-etcd-with-Docker-Compose" class="common-anchor-header">Configure etcd with Docker Compose<button data-href="#Configure-etcd-with-Docker-Compose" class="anchor-icon" translate="no">
+    </button></h1><p>Milvus 使用 etcd 来存储元数据。本主题介绍如何使用 Docker Compose 或 Helm 配置 etcd。</p>
+<h2 id="Configure-etcd-with-Docker-Compose" class="common-anchor-header">使用 Docker Compose 配置 etcd<button data-href="#Configure-etcd-with-Docker-Compose" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -35,7 +35,7 @@ summary: Learn how to configure meta storage for Milvus with Docker Compose/Helm
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="1-Configure-etcd" class="common-anchor-header">1. Configure etcd</h3><p>To configure etcd with Docker Compose, provide your values for the <code translate="no">etcd</code> section in the <code translate="no">milvus.yaml</code> file on the milvus/configs path.</p>
+    </button></h2><h3 id="1-Configure-etcd" class="common-anchor-header">1.配置 etcd</h3><p>要使用 Docker Compose 配置 etcd，请为<code translate="no">milvus.yaml</code> 文件中的<code translate="no">etcd</code> 部分提供值，该文件位于 Milvus/configs 路径下。</p>
 <pre><code translate="no">etcd:
   endpoints:
     - localhost:<span class="hljs-number">2379</span>
@@ -59,12 +59,12 @@ summary: Learn how to configure meta storage for Milvus with Docker Compose/Helm
     <span class="hljs-comment"># please adjust in embedded Milvus: /tmp/milvus/etcdData/</span>
     <span class="hljs-built_in">dir</span>: default.etcd
 <button class="copy-code-btn"></button></code></pre>
-<p>See <a href="/docs/configure_etcd.md">etcd-related Configurations</a> for more information.</p>
-<h3 id="2-Run-Milvus" class="common-anchor-header">2. Run Milvus</h3><p>Run the following command to start Milvus that uses the etcd configurations.</p>
+<p><a href="/docs/zh/configure_etcd.md">有关</a>详细信息，请参阅<a href="/docs/zh/configure_etcd.md">etcd 相关配置</a>。</p>
+<h3 id="2-Run-Milvus" class="common-anchor-header">2.运行 Milvus</h3><p>运行以下命令启动使用 etcd 配置的 Milvus。</p>
 <pre><code translate="no">docker compose up
 <button class="copy-code-btn"></button></code></pre>
-<div class="alert note">Configurations only take effect after Milvus starts. See <a href="https://milvus.io/docs/install_standalone-docker.md#Start-Milvus">Start Milvus</a> for more information.</div>
-<h2 id="Configure-etcd-on-K8s" class="common-anchor-header">Configure etcd on K8s<button data-href="#Configure-etcd-on-K8s" class="anchor-icon" translate="no">
+<div class="alert note">配置仅在 Milvus 启动后生效。更多信息，请参阅<a href="https://milvus.io/docs/install_standalone-docker.md#Start-Milvus">启动 Milvus</a>。</div>
+<h2 id="Configure-etcd-on-K8s" class="common-anchor-header">在 K8s 上配置 etcd<button data-href="#Configure-etcd-on-K8s" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -79,26 +79,26 @@ summary: Learn how to configure meta storage for Milvus with Docker Compose/Helm
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>For Milvus clusters on K8s, you can configure etcd in the same command that starts Milvus. Alternatively, you can configure etcd using the <code translate="no">values.yml</code> file on the /charts/milvus path in the <a href="https://github.com/milvus-io/milvus-helm">milvus-helm</a> repository before you start Milvus.</p>
-<p>The following table lists the keys for configuring etcd in the YAML file.</p>
+    </button></h2><p>对于 K8s 上的 Milvus 群集，可以在启动 Milvus 的同一命令中配置 etcd。或者，也可以在启动 Milvus 前，使用<a href="https://github.com/milvus-io/milvus-helm">milvus-helm</a>资源库中 /charts/milvus 路径下的<code translate="no">values.yml</code> 文件配置 etcd。</p>
+<p>下表列出了在 YAML 文件中配置 etcd 的键值。</p>
 <table>
 <thead>
-<tr><th>Key</th><th>Description</th><th>Value</th></tr>
+<tr><th>键</th><th>描述</th><th>值</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">etcd.enabled</code></td><td>Enables or disables etcd.</td><td><code translate="no">true</code>/<code translate="no">false</code></td></tr>
-<tr><td><code translate="no">externalEtcd.enabled</code></td><td>Enables or disables external etcd.</td><td><code translate="no">true</code>/<code translate="no">false</code></td></tr>
-<tr><td><code translate="no">externalEtcd.endpoints</code></td><td>The endpoint to access etcd.</td><td></td></tr>
+<tr><td><code translate="no">etcd.enabled</code></td><td>启用或禁用 etcd。</td><td><code translate="no">true</code>/<code translate="no">false</code></td></tr>
+<tr><td><code translate="no">externalEtcd.enabled</code></td><td>启用或禁用外部 etcd。</td><td><code translate="no">true</code>/<code translate="no">false</code></td></tr>
+<tr><td><code translate="no">externalEtcd.endpoints</code></td><td>访问 etcd 的端点。</td><td></td></tr>
 </tbody>
 </table>
-<h3 id="Using-the-YAML-file" class="common-anchor-header">Using the YAML file</h3><ol>
-<li>Configure the <code translate="no">etcd</code> section using your values in the <code translate="no">values.yaml</code> file.</li>
+<h3 id="Using-the-YAML-file" class="common-anchor-header">使用 YAML 文件</h3><ol>
+<li>使用<code translate="no">values.yaml</code> 文件中的值配置<code translate="no">etcd</code> 部分。</li>
 </ol>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">etcd</span>:
   <span class="hljs-attr">enabled</span>: <span class="hljs-literal">false</span>
 <button class="copy-code-btn"></button></code></pre>
 <ol start="2">
-<li>Configure the <code translate="no">externaletcd</code> section using your values in the <code translate="no">values.yaml</code> file.</li>
+<li>使用<code translate="no">values.yaml</code> 文件中的值配置<code translate="no">externaletcd</code> 部分。</li>
 </ol>
 <pre><code translate="no" class="language-yaml">externalEtcd:
   enabled: <span class="hljs-literal">true</span>
@@ -107,14 +107,14 @@ summary: Learn how to configure meta storage for Milvus with Docker Compose/Helm
     - &lt;your_etcd_IP&gt;:2379
 <button class="copy-code-btn"></button></code></pre>
 <ol start="3">
-<li>After configuring the preceding sections and saving the <code translate="no">values.yaml</code> file, run the following command to install Milvus that uses the etcd configurations.</li>
+<li>配置完前面的部分并保存<code translate="no">values.yaml</code> 文件后，运行以下命令安装使用 etcd 配置的 Milvus。</li>
 </ol>
 <pre><code translate="no" class="language-shell">helm install &lt;your_release_name&gt; milvus/milvus -f values.yaml
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Using-a-command" class="common-anchor-header">Using a command</h3><p>To install Milvus and configure etcd, run the following command using your values.</p>
+<h3 id="Using-a-command" class="common-anchor-header">使用命令</h3><p>要安装 Milvus 并配置 etcd，请使用你的值运行以下命令。</p>
 <pre><code translate="no" class="language-shell">helm install &lt;your_release_name&gt; milvus/milvus --<span class="hljs-built_in">set</span> cluster.enabled=<span class="hljs-literal">true</span> --<span class="hljs-built_in">set</span> etcd.enabled=<span class="hljs-literal">false</span> --<span class="hljs-built_in">set</span> externaletcd.enabled=<span class="hljs-literal">true</span> --<span class="hljs-built_in">set</span> externalEtcd.endpoints={&lt;your_etcd_IP&gt;:2379}
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Whats-next" class="common-anchor-header">What’s next<button data-href="#Whats-next" class="anchor-icon" translate="no">
+<h2 id="Whats-next" class="common-anchor-header">下一步<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -129,8 +129,8 @@ summary: Learn how to configure meta storage for Milvus with Docker Compose/Helm
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Learn how to configure other Milvus dependencies with Docker Compose or Helm:</p>
+    </button></h2><p>了解如何使用 Docker Compose 或 Helm 配置 Milvus 的其他依赖项：</p>
 <ul>
-<li><a href="/docs/deploy_s3.md">Configure Object Storage with Docker Compose or Helm</a></li>
-<li><a href="/docs/deploy_pulsar.md">Configure Message Storage with Docker Compose or Helm</a></li>
+<li><a href="/docs/zh/deploy_s3.md">使用 Docker Compose 或 Helm 配置对象存储</a></li>
+<li><a href="/docs/zh/deploy_pulsar.md">使用 Docker Compose 或 Helm 配置消息存储</a></li>
 </ul>

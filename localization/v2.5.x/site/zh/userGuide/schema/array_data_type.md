@@ -1,14 +1,11 @@
 ---
 id: array_data_type.md
-title: Array Field​​
+title: 数组字段
 summary: >-
-  The Array type is used to store fields containing multiple values of the same
-  data type. It provides a flexible way to store attributes with multiple
-  elements, making it especially useful in scenarios where a set of related data
-  needs to be saved. In Milvus, you can store Array fields alongside vector
-  data, enabling more complex query and filtering requirements.​
+  数组类型用于存储包含相同数据类型的多个值的字段。它提供了一种灵活的方式来存储具有多个元素的属性，因此在需要保存一组相关数据的情况下特别有用。在 Milvus
+  中，您可以将 Array 字段与向量数据一起存储，从而实现更复杂的查询和过滤要求。
 ---
-<h1 id="Array-Field​" class="common-anchor-header">Array Field​<button data-href="#Array-Field​" class="anchor-icon" translate="no">
+<h1 id="Array-Field​" class="common-anchor-header">数组字段<button data-href="#Array-Field​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -23,16 +20,16 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>The Array type is used to store fields containing multiple values of the same data type. It provides a flexible way to store attributes with multiple elements, making it especially useful in scenarios where a set of related data needs to be saved. In Milvus, you can store Array fields alongside vector data, enabling more complex query and filtering requirements.​</p>
-<p>For example, in a music recommendation system, an Array field can store a list of tags for a song; in user behavior analysis, it can store user ratings for songs. Below is an example of a typical Array field:​</p>
+    </button></h1><p>数组类型用于存储包含相同数据类型的多个值的字段。它提供了一种灵活的方式来存储具有多个元素的属性，因此在需要保存一组相关数据的情况下特别有用。在 Milvus 中，您可以在存储向量数据的同时存储 Array 字段，从而实现更复杂的查询和过滤要求。</p>
+<p>例如，在音乐推荐系统中，数组字段可以存储歌曲的标签列表；在用户行为分析中，数组字段可以存储用户对歌曲的评分。下面是一个典型 Array 字段的示例。</p>
 <pre><code translate="no" class="language-JSON">{​
   <span class="hljs-string">&quot;tags&quot;</span>: [<span class="hljs-string">&quot;pop&quot;</span>, <span class="hljs-string">&quot;rock&quot;</span>, <span class="hljs-string">&quot;classic&quot;</span>],​
   <span class="hljs-string">&quot;ratings&quot;</span>: [<span class="hljs-number">5</span>, <span class="hljs-number">4</span>, <span class="hljs-number">3</span>]​
 }​
 
 <button class="copy-code-btn"></button></code></pre>
-<p>In this example, <code translate="no">tags</code> and <code translate="no">ratings</code> are both Array fields. The <code translate="no">tags</code> field is a string array representing song genres like pop, rock, and classic, while the <code translate="no">ratings</code> field is an integer array representing user ratings for the song, ranging from 1 to 5. These Array fields provide a flexible way to store multi-value data, making it easier to perform detailed analysis during queries and filtering.​</p>
-<h2 id="Add-Array-field​" class="common-anchor-header">Add Array field​<button data-href="#Add-Array-field​" class="anchor-icon" translate="no">
+<p>在这个例子中，<code translate="no">tags</code> 和<code translate="no">ratings</code> 都是数组字段。<code translate="no">tags</code> 字段是一个字符串数组，代表流行、摇滚和经典等歌曲类型，而<code translate="no">ratings</code> 字段是一个整数数组，代表用户对歌曲的评分，从 1 到 5 不等。这些数组字段为存储多值数据提供了一种灵活的方式，使查询和筛选过程中更容易进行详细分析。</p>
+<h2 id="Add-Array-field​" class="common-anchor-header">添加数组字段<button data-href="#Add-Array-field​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -47,20 +44,15 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>To use Array fields in Milvus, define the relevant field type when creating the collection schema. This process includes:​</p>
+    </button></h2><p>要在 Milvus 中使用 Array 字段，请在创建 Collections Schema 时定义相关字段类型。这一过程包括</p>
 <ol>
-<li><p>Setting <code translate="no">datatype</code> to the supported Array data type, <code translate="no">ARRAY</code>.​</p></li>
-<li><p>Using the <code translate="no">element_type</code> parameter to specify the data type of elements in the array. This can be any scalar data type supported by Milvus, such as <code translate="no">VARCHAR</code> or <code translate="no">INT64</code>. All elements in the same Array must be of the same data type.​</p></li>
-<li><p>Using the <code translate="no">max_capacity</code> parameter to define the maximum capacity of the array, i.e., the maximum number of elements it can contain.​</p></li>
+<li><p>将<code translate="no">datatype</code> 设置为支持的数组数据类型<code translate="no">ARRAY</code> 。</p></li>
+<li><p>使用<code translate="no">element_type</code> 参数指定数组中元素的数据类型。这可以是 Milvus 支持的任何标量数据类型，如<code translate="no">VARCHAR</code> 或<code translate="no">INT64</code> 。同一数组中的所有元素必须具有相同的数据类型。</p></li>
+<li><p>使用<code translate="no">max_capacity</code> 参数定义数组的最大容量，即数组可包含的最大元素数。</p></li>
 </ol>
-<p>Here’s how to define a collection schema that includes Array fields:​</p>
+<p>下面介绍如何定义包含 Array 字段的 Collections Schema。</p>
 <div class="multipleCode">
-  <a href="#python">Python </a>
-  <a href="#java">Java</a>
-  <a href="#javascript">Node.js</a>
-  <a href="#go">Go</a>
-  <a href="#curl">cURL</a>
-</div>
+ <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#go">Go</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType​
 ​
 client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)​
@@ -194,16 +186,16 @@ schema.addField(AddFieldReq.builder()​
 }&quot;</span>​
 
 <button class="copy-code-btn"></button></code></pre>
-<p>In this example:​</p>
+<p>在此示例中</p>
 <ul>
-<li><p><code translate="no">tags</code> is a string array with <code translate="no">element_type</code> set to <code translate="no">VARCHAR</code>, indicating that elements in the array must be strings. <code translate="no">max_capacity</code> is set to 10, meaning the array can contain up to 10 elements.​</p></li>
-<li><p><code translate="no">ratings</code> is an integer array with <code translate="no">element_type</code> set to <code translate="no">INT64</code>, indicating that elements must be integers. <code translate="no">max_capacity</code> is set to 5, allowing up to 5 ratings.​</p></li>
-<li><p>We also add a primary key field <code translate="no">pk</code> and a vector field <code translate="no">embedding</code>.​</p></li>
+<li><p><code translate="no">tags</code> 是字符串数组， 设置为 ，表示数组中的元素必须是字符串。 设置为 10，表示数组最多可包含 10 个元素。<code translate="no">element_type</code> <code translate="no">VARCHAR</code> <code translate="no">max_capacity</code> </p></li>
+<li><p><code translate="no">ratings</code> 是一个整数数组， 设置为 ，表示数组中的元素必须是整数。 设置为 5，最多允许 5 个评级。<code translate="no">element_type</code> <code translate="no">INT64</code> <code translate="no">max_capacity</code> </p></li>
+<li><p>我们还添加了一个主键字段<code translate="no">pk</code> 和一个向量字段<code translate="no">embedding</code> 。</p></li>
 </ul>
 <div class="alert note">
-<p>The primary field and vector field are mandatory when you create a collection. The primary field uniquely identifies each entity, while the vector field is crucial for similarity search. For more details, refer to <a href="/docs/primary-field.md">​Primary Field &amp; AutoID</a>, <a href="/docs/dense-vector.md">​Dense Vector</a>, <a href="/docs/binary-vector.md">​Binary Vector</a>, or <a href="/docs/sparse_vector.md">​Sparse Vector</a>.​</p>
+<p>创建 Collections 时，主字段和向量字段是必须的。主字段唯一标识每个实体，而向量字段对相似性搜索至关重要。更多详情，请参阅<a href="/docs/zh/primary-field.md">主字段与自动识别</a>、<a href="/docs/zh/dense-vector.md">密集向量</a>、<a href="/docs/zh/binary-vector.md">二进制向量</a>或<a href="/docs/zh/sparse_vector.md">稀疏向量</a>。</p>
 </div>
-<h2 id="Set-index-params​" class="common-anchor-header">Set index params​<button data-href="#Set-index-params​" class="anchor-icon" translate="no">
+<h2 id="Set-index-params​" class="common-anchor-header">设置索引参数<button data-href="#Set-index-params​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -218,15 +210,10 @@ schema.addField(AddFieldReq.builder()​
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Setting index parameters for Array fields is optional but can significantly improve retrieval efficiency.​</p>
-<p>In the following example, we create an <code translate="no">AUTOINDEX</code> for the <code translate="no">tags</code> field, which means Milvus will automatically create an appropriate scalar index based on the data type.</p>
+    </button></h2><p>为数组字段设置索引参数是可选的，但可以显著提高检索效率。</p>
+<p>在下面的示例中，我们为<code translate="no">tags</code> 字段创建了<code translate="no">AUTOINDEX</code> ，这意味着 Milvus 会根据数据类型自动创建适当的标量索引。</p>
 <div class="multipleCode">
-  <a href="#python">Python </a>
-  <a href="#java">Java</a>
-  <a href="#javascript">Node.js</a>
-  <a href="#go">Go</a>
-  <a href="#curl">cURL</a>
-</div>
+ <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#go">Go</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Prepare index parameters​</span>
 index_params = client.prepare_index_params()  <span class="hljs-comment"># Prepare IndexParams object​</span>
 ​
@@ -264,15 +251,10 @@ indexes.add(IndexParam.builder()​
     ]&#x27;</span>​
 
 <button class="copy-code-btn"></button></code></pre>
-<p>In addition to <code translate="no">AUTOINDEX</code>, you can specify other scalar index types like <code translate="no">INVERTED</code> or <code translate="no">BITMAP</code>. For supported index types, refer to <a href="/docs/index-scalar-fields.md">​Scalar Indexes</a>.​</p>
-<p>Moreover, you must create an index for the vector field before creating the collection. In this example, we use <code translate="no">AUTOINDEX</code> to simplify vector index setup.​</p>
+<p>除了<code translate="no">AUTOINDEX</code> 之外，您还可以指定其他标量索引类型，如<code translate="no">INVERTED</code> 或<code translate="no">BITMAP</code> 。有关支持的索引类型，请参阅<a href="/docs/zh/index-scalar-fields.md">标量索引</a>。</p>
+<p>此外，在创建 Collections 之前，您必须为向量字段创建索引。在本例中，我们使用<code translate="no">AUTOINDEX</code> 来简化向量索引设置。</p>
 <div class="multipleCode">
-  <a href="#python">Python </a>
-  <a href="#java">Java</a>
-  <a href="#javascript">Node.js</a>
-  <a href="#go">Go</a>
-  <a href="#curl">cURL</a>
-</div>
+ <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#go">Go</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Add vector index​</span>
 index_params.add_index(​
     field_name=<span class="hljs-string">&quot;embedding&quot;</span>,​
@@ -309,7 +291,7 @@ index_params.add_index(​
     ]&#x27;</span>​
 
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Create-collection​" class="common-anchor-header">Create collection​<button data-href="#Create-collection​" class="anchor-icon" translate="no">
+<h2 id="Create-collection​" class="common-anchor-header">创建 Collections<button data-href="#Create-collection​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -324,14 +306,9 @@ index_params.add_index(​
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Use the defined schema and index parameters to create a collection:​</p>
+    </button></h2><p>使用定义的 Schema 和索引参数创建 Collections。</p>
 <div class="multipleCode">
-  <a href="#python">Python </a>
-  <a href="#java">Java</a>
-  <a href="#javascript">Node.js</a>
-  <a href="#go">Go</a>
-  <a href="#curl">cURL</a>
-</div>
+ <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#go">Go</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python">client.<span class="hljs-title function_">create_collection</span>(​
     collection_name=<span class="hljs-string">&quot;my_array_collection&quot;</span>,​
     schema=schema,​
@@ -365,7 +342,7 @@ client.createCollection(requestCreate);​
 }&quot;</span>​
 
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Insert-data​" class="common-anchor-header">Insert data​<button data-href="#Insert-data​" class="anchor-icon" translate="no">
+<h2 id="Insert-data​" class="common-anchor-header">插入数据<button data-href="#Insert-data​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -380,14 +357,9 @@ client.createCollection(requestCreate);​
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>After creating the collection, you can insert data that includes Array fields.​</p>
+    </button></h2><p>创建 Collections 后，您可以插入包含 Array 字段的数据。</p>
 <div class="multipleCode">
-  <a href="#python">Python </a>
-  <a href="#java">Java</a>
-  <a href="#javascript">Node.js</a>
-  <a href="#go">Go</a>
-  <a href="#curl">cURL</a>
-</div>
+ <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#go">Go</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python">data = [​
     {​
         <span class="hljs-string">&quot;tags&quot;</span>: [<span class="hljs-string">&quot;pop&quot;</span>, <span class="hljs-string">&quot;rock&quot;</span>, <span class="hljs-string">&quot;classic&quot;</span>],​
@@ -489,12 +461,12 @@ client.<span class="hljs-title function_">insert</span>({​
 }&#x27;</span>​
 
 <button class="copy-code-btn"></button></code></pre>
-<p>In this example:​</p>
+<p>在本例中。</p>
 <ul>
-<li><p>Each data entry includes a primary field (<code translate="no">pk</code>), while <code translate="no">tags</code> and <code translate="no">ratings</code> are Array fields used to store tags and ratings.​</p></li>
-<li><p><code translate="no">embedding</code> is a 3-dimensional vector field used for vector similarity searches.​</p></li>
+<li><p>每个数据项都包含一个主字段 (<code translate="no">pk</code>)，而<code translate="no">tags</code> 和<code translate="no">ratings</code> 是用于存储标签和评级的 Array 字段。</p></li>
+<li><p><code translate="no">embedding</code> 是一个三维向量字段，用于向量相似性搜索。</p></li>
 </ul>
-<h2 id="Search-and-query​" class="common-anchor-header">Search and query​<button data-href="#Search-and-query​" class="anchor-icon" translate="no">
+<h2 id="Search-and-query​" class="common-anchor-header">搜索和查询<button data-href="#Search-and-query​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -509,15 +481,10 @@ client.<span class="hljs-title function_">insert</span>({​
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Array fields enable scalar filtering during searches, enhancing Milvus’s vector search capabilities. You can query based on the properties of Array fields alongside vector similarity searches.​</p>
-<h3 id="Filter-queries​" class="common-anchor-header">Filter queries​</h3><p>You can filter data based on properties of Array fields, such as accessing a specific element or checking if an array element meets a certain condition.​</p>
+    </button></h2><p>数组字段可在搜索时进行标量过滤，增强了 Milvus 的向量搜索功能。在进行向量相似性搜索的同时，还可以根据数组字段的属性进行查询。</p>
+<h3 id="Filter-queries​" class="common-anchor-header">过滤查询</h3><p>你可以根据数组字段的属性过滤数据，例如访问特定元素或检查数组元素是否满足特定条件。</p>
 <div class="multipleCode">
-  <a href="#python">Python </a>
-  <a href="#java">Java</a>
-  <a href="#javascript">Node.js</a>
-  <a href="#go">Go</a>
-  <a href="#curl">cURL</a>
-</div>
+ <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#go">Go</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;ratings[0] &lt; 4&#x27;</span>​
 ​
 res = client.query(​
@@ -568,15 +535,10 @@ System.out.println(resp.getQueryResults());​
 <span class="hljs-comment"># {&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:[{&quot;embedding&quot;:[0.67,0.45,0.89],&quot;pk&quot;:3,&quot;ratings&quot;:{&quot;Data&quot;:{&quot;LongData&quot;:{&quot;data&quot;:[3,3,4]}}},&quot;tags&quot;:{&quot;Data&quot;:{&quot;StringData&quot;:{&quot;data&quot;:[&quot;electronic&quot;,&quot;dance&quot;]}}}}]}​</span>
 
 <button class="copy-code-btn"></button></code></pre>
-<p>In this query, Milvus filters out entities where the first element of the <code translate="no">ratings</code> array is less than 4, returning entities that match the condition.​</p>
-<h3 id="Vector-search-with-Array-filtering​" class="common-anchor-header">Vector search with Array filtering​</h3><p>By combining vector similarity with Array filtering, you can ensure that the retrieved data is not only similar in semantics but also meets specific conditions, making the search results more accurate and aligned with business needs.​</p>
+<p>在这个查询中，Milvus 过滤掉了<code translate="no">ratings</code> 数组的第一个元素小于 4 的实体，返回符合条件的实体。</p>
+<h3 id="Vector-search-with-Array-filtering​" class="common-anchor-header">向量搜索与数组过滤</h3><p>通过将向量相似性与数组过滤相结合，可以确保检索到的数据不仅语义相似，而且符合特定条件，从而使搜索结果更加准确，更符合业务需求。</p>
 <div class="multipleCode">
-  <a href="#python">Python </a>
-  <a href="#java">Java</a>
-  <a href="#javascript">Node.js</a>
-  <a href="#go">Go</a>
-  <a href="#curl">cURL</a>
-</div>
+ <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#go">Go</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;tags[0] == &quot;pop&quot;&#x27;</span>​
 ​
 res = client.search(​
@@ -641,9 +603,9 @@ System.out.println(resp.getSearchResults());​
 <span class="hljs-comment"># {&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:[{&quot;distance&quot;:-0.24793813,&quot;embedding&quot;:[0.12,0.34,0.56],&quot;id&quot;:1,&quot;ratings&quot;:{&quot;Data&quot;:{&quot;LongData&quot;:{&quot;data&quot;:[5,4,3]}}},&quot;tags&quot;:{&quot;Data&quot;:{&quot;StringData&quot;:{&quot;data&quot;:[&quot;pop&quot;,&quot;rock&quot;,&quot;classic&quot;]}}}}]}​</span>
 
 <button class="copy-code-btn"></button></code></pre>
-<p>In this example, Milvus returns the top 5 entities most similar to the query vector, with the <code translate="no">tags</code> array’s first element being <code translate="no">&quot;pop&quot;</code>.​</p>
-<p>Additionally, Milvus supports advanced Array filtering operators like <code translate="no">ARRAY_CONTAINS</code>, <code translate="no">ARRAY_CONTAINS_ALL</code>, <code translate="no">ARRAY_CONTAINS_ANY</code>, and <code translate="no">ARRAY_LENGTH</code> to further enhance query capabilities. For more details, refer to <a href="/docs/boolean.md">​Metadata Filtering</a>.​</p>
-<h2 id="Limits​" class="common-anchor-header">Limits​<button data-href="#Limits​" class="anchor-icon" translate="no">
+<p>在这个例子中，Milvus 返回了与查询向量最相似的前 5 个实体，<code translate="no">tags</code> 数组的第一个元素是<code translate="no">&quot;pop&quot;</code> 。</p>
+<p>此外，Milvus 还支持高级数组过滤操作符，如<code translate="no">ARRAY_CONTAINS</code>,<code translate="no">ARRAY_CONTAINS_ALL</code>,<code translate="no">ARRAY_CONTAINS_ANY</code> 和<code translate="no">ARRAY_LENGTH</code> ，以进一步增强查询功能。更多详情，请参阅<a href="/docs/zh/boolean.md">元数据过滤</a>。</p>
+<h2 id="Limits​" class="common-anchor-header">限制<button data-href="#Limits​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -659,7 +621,7 @@ System.out.println(resp.getSearchResults());​
         ></path>
       </svg>
     </button></h2><ul>
-<li><p><strong>Data Type</strong>: All elements in an Array field must have the same data type, as specified by the <code translate="no">element_type</code>.​</p></li>
-<li><p><strong>Array Capacity</strong>: The number of elements in an Array field must be less than or equal to the maximum capacity defined when the Array was created, as specified by <code translate="no">max_capacity</code>.​</p></li>
-<li><p><strong>String Handling</strong>: String values in Array fields are stored as-is, without semantic escaping or conversion. For example, <code translate="no">'a&quot;b'</code>, <code translate="no">&quot;a'b&quot;</code>, <code translate="no">'a\'b'</code>, and <code translate="no">&quot;a\&quot;b&quot;</code> are stored as entered, while <code translate="no">'a'b'</code> and <code translate="no">&quot;a&quot;b&quot;</code> are considered invalid values.​</p></li>
+<li><p><strong>数据类型</strong>：数组字段中的所有元素必须具有相同的数据类型，如<code translate="no">element_type</code> 所指定。</p></li>
+<li><p><strong>数组容量</strong>：数组字段中元素的数量必须小于或等于创建数组时定义的最大容量，具体请参见<code translate="no">max_capacity</code> 。</p></li>
+<li><p><strong>字符串处理</strong>：数组字段中的字符串值按原样存储，不进行语义转义或转换。例如，<code translate="no">'a&quot;b'</code> 、<code translate="no">&quot;a'b&quot;</code> 、<code translate="no">'a\'b'</code> 和<code translate="no">&quot;a\&quot;b&quot;</code> 按输入值存储，而<code translate="no">'a'b'</code> 和<code translate="no">&quot;a&quot;b&quot;</code> 则被视为无效值。</p></li>
 </ul>

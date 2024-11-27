@@ -1,11 +1,9 @@
 ---
 id: es2m.md
-summary: >-
-  This guide provides a comprehensive, step-by-step process for migrating data
-  from Elasticsearch to Milvus 2.x.
-title: From Elasticsearch
+summary: 本指南提供了将数据从 Elasticsearch 迁移到 Milvus 2.x 的全面、循序渐进的过程。
+title: 从 Elasticsearch
 ---
-<h1 id="From-Elasticsearch" class="common-anchor-header">From Elasticsearch<button data-href="#From-Elasticsearch" class="anchor-icon" translate="no">
+<h1 id="From-Elasticsearch" class="common-anchor-header">从 Elasticsearch<button data-href="#From-Elasticsearch" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -20,8 +18,8 @@ title: From Elasticsearch
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>This guide provides a comprehensive, step-by-step process for migrating data from Elasticsearch to Milvus 2.x. By following this guide, you will be able to efficiently transfer your data, leveraging Milvus 2.x advanced features and improved performance.</p>
-<h2 id="Prerequisites" class="common-anchor-header">Prerequisites<button data-href="#Prerequisites" class="anchor-icon" translate="no">
+    </button></h1><p>本指南为从 Elasticsearch 向 Milvus 2.x 迁移数据提供了一个全面的、循序渐进的过程。按照本指南，你将能够有效地迁移数据，利用 Milvus 2.x 的高级功能和改进的性能。</p>
+<h2 id="Prerequisites" class="common-anchor-header">前提条件<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -37,23 +35,20 @@ title: From Elasticsearch
         ></path>
       </svg>
     </button></h2><ul>
-<li><strong>Software versions</strong>:
-<ul>
-<li>Source Elasticsearch: 7.x or 8.x</li>
-<li>Target Milvus: 2.x</li>
-<li>For installation details, refer to <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/install-elasticsearch.html">Installing Elasticsearch</a> and <a href="https://milvus.io/docs/install_standalone-docker.md">Install Milvus</a>.</li>
+<li><strong>软件版本</strong>：<ul>
+<li>源 Elasticsearch：7.x 或 8.x</li>
+<li>目标 Milvus：2.x</li>
+<li>有关安装详情，请参阅<a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/install-elasticsearch.html">安装 Elasticsearch</a>和<a href="https://milvus.io/docs/install_standalone-docker.md">安装 Milvus</a>。</li>
 </ul></li>
-<li><strong>Required tools</strong>:
-<ul>
-<li><a href="https://github.com/zilliztech/milvus-migration">Milvus-migration</a> tool. For installation details, refer to <a href="/docs/milvusdm_install.md">Install Migration Tool</a>.</li>
+<li><strong>所需工具</strong><ul>
+<li><a href="https://github.com/zilliztech/milvus-migration">Milvus-migration</a>工具。有关安装详情，请参阅<a href="/docs/zh/milvusdm_install.md">安装迁移工具</a>。</li>
 </ul></li>
-<li><strong>Supported data types for migration</strong>: The fields to migrate from the source Elasticsearch index are of the following types - <a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/dense-vector.html#dense-vector">dense_vector</a>, <a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/keyword.html#keyword-field-type">keyword</a>, <a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/text.html#text-field-type">text</a>, <a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/number.html">long</a>, <a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/number.html">integer</a>, <a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/number.html">double</a>, <a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/number.html">float</a>, <a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/boolean.html">boolean</a>, <a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/object.html">object</a>. Data types not listed here are currently not supported for migration. Refer to <a href="#field-mapping-reference">Field mapping reference</a> for detailed information on data mappings between Milvus collections and Elasticsearch indexes.</li>
-<li><strong>Elasticsearch index requirements</strong>:
-<ul>
-<li>The source Elasticsearch index must contain a vector field of the <code translate="no">dense_vector</code> type. Migration cannot start without a vector field.</li>
+<li><strong>支持迁移的数据类型</strong>：要从源 Elasticsearch 索引中迁移的<a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/keyword.html#keyword-field-type">字</a>段属于以下类型 -<a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/dense-vector.html#dense-vector">dense_vector</a>、<a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/keyword.html#keyword-field-type">keyword</a>、<a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/text.html#text-field-type">text</a>、<a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/number.html">long</a>、<a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/number.html">integer</a>、<a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/number.html">double</a>、<a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/number.html">float</a>、<a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/boolean.html">boolean、</a> <a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/object.html">object</a>。此处未列出的数据类型目前不支持迁移。有关 Milvus Collections 和 Elasticsearch 索引之间数据<a href="#field-mapping-reference">映射的</a>详细信息，请参阅<a href="#field-mapping-reference">字段</a>映射<a href="#field-mapping-reference">参考</a>。</li>
+<li><strong>Elasticsearch 索引要求</strong>：<ul>
+<li>源 Elasticsearch 索引必须包含<code translate="no">dense_vector</code> 类型的向量字段。如果没有向量字段，迁移将无法启动。</li>
 </ul></li>
 </ul>
-<h2 id="Configure-the-migration-file" class="common-anchor-header">Configure the migration file<button data-href="#Configure-the-migration-file" class="anchor-icon" translate="no">
+<h2 id="Configure-the-migration-file" class="common-anchor-header">配置迁移文件<button data-href="#Configure-the-migration-file" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -68,7 +63,7 @@ title: From Elasticsearch
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Save the example migration config file as <code translate="no">migration.yaml</code> and modify the configs based on your actual conditions. You are free to put the config file in any local directory.</p>
+    </button></h2><p>将示例迁移配置文件保存为<code translate="no">migration.yaml</code> ，然后根据实际情况修改配置。您可以将配置文件放在任何本地目录下。</p>
 <pre><code translate="no" class="language-yaml">dumper: <span class="hljs-comment"># configs for the migration job.</span>
   worker:
     workMode: <span class="hljs-string">&quot;elasticsearch&quot;</span> <span class="hljs-comment"># operational mode of the migration job.</span>
@@ -121,76 +116,76 @@ target:
     username: <span class="hljs-string">&quot;****&quot;</span> <span class="hljs-comment"># username for the Milvus 2.x server.</span>
     password: <span class="hljs-string">&quot;******&quot;</span> <span class="hljs-comment"># password for the Milvus 2.x server.</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>The following table describes the parameters in the example config file. For a full list of configs, refer to <a href="https://github.com/zilliztech/milvus-migration/blob/main/README_ES.md#migrationyaml-reference">Milvus Migration: Elasticsearch to Milvus 2.x</a>.</p>
+<p>下表描述了示例配置文件中的参数。有关配置的完整列表，请参阅<a href="https://github.com/zilliztech/milvus-migration/blob/main/README_ES.md#migrationyaml-reference">Milvus 迁移：Elasticsearch 到 Milvus 2.x</a>。</p>
 <ul>
 <li><p><code translate="no">dumper</code></p>
 <table>
 <thead>
-<tr><th>Parameter</th><th>Description</th></tr>
+<tr><th>参数</th><th>参数</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">dumper.worker.workMode</code></td><td>The operational mode of the migration job. Set to <code translate="no">elasticsearch</code> when migrating from Elasticsearch indexes.</td></tr>
-<tr><td><code translate="no">dumper.worker.reader.bufferSize</code></td><td>Buffer size to read from Elasticsearch in each batch. Unit: KB.</td></tr>
+<tr><td><code translate="no">dumper.worker.workMode</code></td><td>迁移作业的操作符。从 Elasticsearch 索引迁移时设置为<code translate="no">elasticsearch</code> 。</td></tr>
+<tr><td><code translate="no">dumper.worker.reader.bufferSize</code></td><td>每批从 Elasticsearch 中读取的缓冲区大小。单位：KB：KB。</td></tr>
 </tbody>
 </table>
 </li>
 <li><p><code translate="no">meta</code></p>
 <table>
 <thead>
-<tr><th>Parameter</th><th>Description</th></tr>
+<tr><th>参数</th><th>说明</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">meta.mode</code></td><td>Specifies the source for meta configs. Currently, only <code translate="no">config</code> is supported.</td></tr>
-<tr><td><code translate="no">meta.index</code></td><td>Identifies the Elasticsearch index to migrate data from.</td></tr>
-<tr><td><code translate="no">meta.fields</code></td><td>Fields within the Elasticsearch index to be migrated.</td></tr>
-<tr><td><code translate="no">meta.fields.name</code></td><td>Name of the Elasticsearch field.</td></tr>
-<tr><td><code translate="no">meta.fields.maxLen</code></td><td>Maximum length of the field. This parameter is required only when <code translate="no">meta.fields.type</code> is <code translate="no">keyword</code> or <code translate="no">text</code>.</td></tr>
-<tr><td><code translate="no">meta.fields.pk</code></td><td>Specifies if the field serves as the primary key.</td></tr>
-<tr><td><code translate="no">meta.fields.type</code></td><td>Data type of the Elasticsearch field. Currently, the following data types in Elasticsearch are supported: <a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/dense-vector.html#dense-vector">dense_vector</a>, <a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/keyword.html#keyword-field-type">keyword</a>, <a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/text.html#text-field-type">text</a>, <a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/number.html">long</a>, <a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/number.html">integer</a>, <a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/number.html">double</a>, <a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/number.html">float</a>, <a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/boolean.html">boolean</a>, <a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/object.html">object</a>.</td></tr>
-<tr><td><code translate="no">meta.fields.dims</code></td><td>Dimension of the vector field. This parameter is required only when <code translate="no">meta.fields.type</code> is <code translate="no">dense_vector</code>.</td></tr>
-<tr><td><code translate="no">meta.milvus</code></td><td>Configs specific to creating the collection in Milvus 2.x.</td></tr>
-<tr><td><code translate="no">meta.milvus.collection</code></td><td>Name of the Milvus collection. Defaults to the Elasticsearch index name if not specified.</td></tr>
-<tr><td><code translate="no">meta.milvus.closeDynamicField</code></td><td>Specifies whether to disable the dynamic field in the collection. Defaults to <code translate="no">false</code>. For more information on dynamic fields, refer to <a href="https://milvus.io/docs/enable-dynamic-field.md#Enable-Dynamic-Field">Enable Dynamic Field</a>.</td></tr>
-<tr><td><code translate="no">meta.milvus.shardNum</code></td><td>Number of shards to be created in the collection. For more information on shards, refer to <a href="https://milvus.io/docs/glossary.md#Shard">Terminology</a>.</td></tr>
-<tr><td><code translate="no">meta.milvus.consistencyLevel</code></td><td>Consistency level for the collection in Milvus. For more information, refer to <a href="https://milvus.io/docs/consistency.md">Consistency</a>.</td></tr>
+<tr><td><code translate="no">meta.mode</code></td><td>指定元配置的来源。目前仅支持<code translate="no">config</code> 。</td></tr>
+<tr><td><code translate="no">meta.index</code></td><td>确定要迁移数据的 Elasticsearch 索引。</td></tr>
+<tr><td><code translate="no">meta.fields</code></td><td>要迁移的 Elasticsearch 索引中的字段。</td></tr>
+<tr><td><code translate="no">meta.fields.name</code></td><td>Elasticsearch 字段的名称。</td></tr>
+<tr><td><code translate="no">meta.fields.maxLen</code></td><td>字段的最大长度。只有当<code translate="no">meta.fields.type</code> 为<code translate="no">keyword</code> 或<code translate="no">text</code> 时才需要此参数。</td></tr>
+<tr><td><code translate="no">meta.fields.pk</code></td><td>指定字段是否作为主键。</td></tr>
+<tr><td><code translate="no">meta.fields.type</code></td><td>Elasticsearch 字段的数据类型。目前，Elasticsearch 支持以下数据类型：<a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/dense-vector.html#dense-vector">dense_vector</a>、<a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/keyword.html#keyword-field-type">keyword</a>、<a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/text.html#text-field-type">text</a>、<a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/number.html">long</a>、<a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/number.html">integer</a>、<a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/number.html">double</a>、<a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/number.html">float</a>、<a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/boolean.html">boolean</a>、<a href="https://www.elastic.co/guide/en/elasticsearch/reference/8.13/object.html">object</a>。</td></tr>
+<tr><td><code translate="no">meta.fields.dims</code></td><td>向量字段的尺寸。只有在<code translate="no">meta.fields.type</code> 是<code translate="no">dense_vector</code> 时才需要此参数。</td></tr>
+<tr><td><code translate="no">meta.milvus</code></td><td>在 Milvus 2.x 中创建 Collections 的特定配置。</td></tr>
+<tr><td><code translate="no">meta.milvus.collection</code></td><td>Milvus Collections 的名称。如果未指定，默认为 Elasticsearch 索引名称。</td></tr>
+<tr><td><code translate="no">meta.milvus.closeDynamicField</code></td><td>指定是否禁用 Collections 中的动态字段。默认为<code translate="no">false</code> 。有关动态字段的更多信息，请参阅<a href="https://milvus.io/docs/enable-dynamic-field.md#Enable-Dynamic-Field">启用动态字段</a>。</td></tr>
+<tr><td><code translate="no">meta.milvus.shardNum</code></td><td>要在 Collections 中创建的分片数量。有关分片的更多信息，请参阅<a href="https://milvus.io/docs/glossary.md#Shard">术语</a>。</td></tr>
+<tr><td><code translate="no">meta.milvus.consistencyLevel</code></td><td>Collections 在 Milvus 中的一致性级别。有关更多信息，请参阅<a href="https://milvus.io/docs/consistency.md">一致性</a>。</td></tr>
 </tbody>
 </table>
 </li>
 <li><p><code translate="no">source</code></p>
 <table>
 <thead>
-<tr><th>Parameter</th><th>Description</th></tr>
+<tr><th>参数</th><th>描述</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">source.es</code></td><td>Connection configs for the source Elasticsearch server.</td></tr>
-<tr><td><code translate="no">source.es.urls</code></td><td>Address of the source Elasticsearch server.</td></tr>
-<tr><td><code translate="no">source.es.username</code></td><td>Username for the Elasticsearch server.</td></tr>
-<tr><td><code translate="no">source.es.password</code></td><td>Password for the Elasticsearch server.</td></tr>
+<tr><td><code translate="no">source.es</code></td><td>源 Elasticsearch 服务器的连接配置。</td></tr>
+<tr><td><code translate="no">source.es.urls</code></td><td>源 Elasticsearch 服务器的地址。</td></tr>
+<tr><td><code translate="no">source.es.username</code></td><td>Elasticsearch 服务器的用户名。</td></tr>
+<tr><td><code translate="no">source.es.password</code></td><td>Elasticsearch 服务器的密码。</td></tr>
 </tbody>
 </table>
 </li>
 <li><p><code translate="no">target</code></p>
 <table>
 <thead>
-<tr><th>Parameter</th><th>Description</th></tr>
+<tr><th>参数</th><th>说明</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">target.mode</code></td><td>Storage location for dumped files. Valid values:<br/>- <code translate="no">local</code>: Store dumped files on local disks.<br/>- <code translate="no">remote</code>: Store dumped files on object storage.</td></tr>
-<tr><td><code translate="no">target.remote.outputDir</code></td><td>Output directory path in the cloud storage bucket.</td></tr>
-<tr><td><code translate="no">target.remote.cloud</code></td><td>Cloud storage service provider. Example values: <code translate="no">aws</code>, <code translate="no">gcp</code>, <code translate="no">azure</code>.</td></tr>
-<tr><td><code translate="no">target.remote.region</code></td><td>Cloud storage region. It can be any value if you use local MinIO.</td></tr>
-<tr><td><code translate="no">target.remote.bucket</code></td><td>Bucket name for storing data. The value must be the same as the config in Milvus 2.x. For more information, refer to <a href="https://milvus.io/docs/configure_minio.md#miniobucketName">System Configurations</a>.</td></tr>
-<tr><td><code translate="no">target.remote.useIAM</code></td><td>Whether to use an IAM Role for connection.</td></tr>
-<tr><td><code translate="no">target.remote.checkBucket</code></td><td>Whether to check if the specified bucket exists in object storage.</td></tr>
-<tr><td><code translate="no">target.milvus2x</code></td><td>Connection configs for the target Milvus 2.x server.</td></tr>
-<tr><td><code translate="no">target.milvus2x.endpoint</code></td><td>Address of the target Milvus server.</td></tr>
-<tr><td><code translate="no">target.milvus2x.username</code></td><td>Username for the Milvus 2.x server. This parameter is required if user authentication is enabled for your Milvus server. For more information, refer to <a href="https://milvus.io/docs/authenticate.md">Enable Authentication</a>.</td></tr>
-<tr><td><code translate="no">target.milvus2x.password</code></td><td>Password for the Milvus 2.x server. This parameter is required if user authentication is enabled for your Milvus server. For more information, refer to <a href="https://milvus.io/docs/authenticate.md">Enable Authentication</a>.</td></tr>
+<tr><td><code translate="no">target.mode</code></td><td>转储文件的存储位置。有效值：<br/>-<code translate="no">local</code>: 将转储文件存储在本地磁盘上。<br/>-<code translate="no">remote</code>: 将转储文件存储在对象存储上。</td></tr>
+<tr><td><code translate="no">target.remote.outputDir</code></td><td>云存储桶中的输出目录路径。</td></tr>
+<tr><td><code translate="no">target.remote.cloud</code></td><td>云存储服务提供商。示例值：<code translate="no">aws</code>,<code translate="no">gcp</code>,<code translate="no">azure</code> 。</td></tr>
+<tr><td><code translate="no">target.remote.region</code></td><td>云存储区域。如果使用本地 MinIO，可以是任何值。</td></tr>
+<tr><td><code translate="no">target.remote.bucket</code></td><td>用于存储数据的存储桶名称。该值必须与 Milvus 2.x 中的配置相同。更多信息，请参阅<a href="https://milvus.io/docs/configure_minio.md#miniobucketName">系统配置</a>。</td></tr>
+<tr><td><code translate="no">target.remote.useIAM</code></td><td>是否使用 IAM 角色进行连接。</td></tr>
+<tr><td><code translate="no">target.remote.checkBucket</code></td><td>是否检查对象存储中是否存在指定的存储桶。</td></tr>
+<tr><td><code translate="no">target.milvus2x</code></td><td>目标 Milvus 2.x 服务器的连接配置。</td></tr>
+<tr><td><code translate="no">target.milvus2x.endpoint</code></td><td>目标 Milvus 服务器的地址。</td></tr>
+<tr><td><code translate="no">target.milvus2x.username</code></td><td>Milvus 2.x 服务器的用户名。如果 Milvus 服务器启用了用户身份验证，则需要使用此参数。有关详细信息，请参阅<a href="https://milvus.io/docs/authenticate.md">启用身份验证</a>。</td></tr>
+<tr><td><code translate="no">target.milvus2x.password</code></td><td>Milvus 2.x 服务器的密码。如果 Milvus 服务器启用了用户身份验证，则需要使用此参数。有关详细信息，请参阅<a href="https://milvus.io/docs/authenticate.md">启用身份验证</a>。</td></tr>
 </tbody>
 </table>
 </li>
 </ul>
-<h2 id="Start-the-migration-task" class="common-anchor-header">Start the migration task<button data-href="#Start-the-migration-task" class="anchor-icon" translate="no">
+<h2 id="Start-the-migration-task" class="common-anchor-header">启动迁移任务<button data-href="#Start-the-migration-task" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -205,10 +200,10 @@ target:
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Start the migration task with the following command. Replace <code translate="no">{YourConfigFilePath}</code> with the local directory where the config file <code translate="no">migration.yaml</code> resides.</p>
+    </button></h2><p>使用以下命令启动迁移任务。将<code translate="no">{YourConfigFilePath}</code> 替换为配置文件<code translate="no">migration.yaml</code> 所在的本地目录。</p>
 <pre><code translate="no" class="language-bash">./milvus-migration start --config=/{YourConfigFilePath}/migration.yaml
 <button class="copy-code-btn"></button></code></pre>
-<p>The following is an example of a successful migration log output:</p>
+<p>以下是迁移日志输出成功的示例：</p>
 <pre><code translate="no" class="language-bash">[task/load_base_task.go:94] [<span class="hljs-string">&quot;[LoadTasker] Dec Task Processing--------------&gt;&quot;</span>] [Count=0] [fileName=testfiles/output/zwh/migration/test_mul_field4/data_1_1.json] [taskId=442665677354739304]
 [task/load_base_task.go:76] [<span class="hljs-string">&quot;[LoadTasker] Progress Task ---------------&gt;&quot;</span>] [fileName=testfiles/output/zwh/migration/test_mul_field4/data_1_1.json] [taskId=442665677354739304]
 [dbclient/cus_field_milvus2x.go:86] [<span class="hljs-string">&quot;[Milvus2x] begin to ShowCollectionRows&quot;</span>]
@@ -219,7 +214,7 @@ target:
 [cleaner/remote_cleaner.go:27] [<span class="hljs-string">&quot;[Remote Cleaner] Begin to clean files&quot;</span>] [bucket=a-bucket] [rootPath=testfiles/output/zwh/migration]
 [cmd/start.go:32] [<span class="hljs-string">&quot;[Cleaner] clean file success!&quot;</span>]
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Verify-the-result" class="common-anchor-header">Verify the result<button data-href="#Verify-the-result" class="anchor-icon" translate="no">
+<h2 id="Verify-the-result" class="common-anchor-header">验证结果<button data-href="#Verify-the-result" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -234,8 +229,8 @@ target:
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Once the migration task is executed, you can make API calls or use Attu to view the number of entities migrated. For more information, refer to <a href="https://github.com/zilliztech/attu">Attu</a> and <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/get_collection_stats.md">get_collection_stats()</a>.</p>
-<h2 id="Field-mapping-reference" class="common-anchor-header">Field mapping reference<button data-href="#Field-mapping-reference" class="anchor-icon" translate="no">
+    </button></h2><p>执行迁移任务后，可以调用 API 或使用 Attu 查看已迁移实体的数量。有关详细信息，请参阅<a href="https://github.com/zilliztech/attu">Attu</a>和<a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/get_collection_stats.md">get_collection_stats()</a>。</p>
+<h2 id="Field-mapping-reference" class="common-anchor-header">字段映射参考<button data-href="#Field-mapping-reference" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -250,21 +245,21 @@ target:
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Review the table below to understand how field types in Elasticsearch indexes are mapped to field types in Milvus collections.</p>
-<p>For more information on supported data types in Milvus, refer to <a href="https://milvus.io/docs/schema.md#Supported-data-types">Supported data types</a>.</p>
+    </button></h2><p>查看下表，了解 Elasticsearch 索引中的字段类型如何映射到 Milvus Collections 中的字段类型。</p>
+<p>有关 Milvus 支持<a href="https://milvus.io/docs/schema.md#Supported-data-types">的</a>数据类型的更多信息，请参阅<a href="https://milvus.io/docs/schema.md#Supported-data-types">支持的数据类型</a>。</p>
 <table>
 <thead>
-<tr><th>Elasticsearch Field Type</th><th>Milvus Field Type</th><th>Description</th></tr>
+<tr><th>Elasticsearch 字段类型</th><th>Milvus 字段类型</th><th>描述</th></tr>
 </thead>
 <tbody>
-<tr><td>dense_vector</td><td>FloatVector</td><td>Vector dimensions remain unchanged during migration.</td></tr>
-<tr><td>keyword</td><td>VarChar</td><td>Set Max Length (1 to 65,535). Strings exceeding the limit can trigger migration errors.</td></tr>
-<tr><td>text</td><td>VarChar</td><td>Set Max Length (1 to 65,535). Strings exceeding the limit can trigger migration errors.</td></tr>
-<tr><td>long</td><td>Int64</td><td>-</td></tr>
-<tr><td>integer</td><td>Int32</td><td>-</td></tr>
-<tr><td>double</td><td>Double</td><td>-</td></tr>
-<tr><td>float</td><td>Float</td><td>-</td></tr>
-<tr><td>boolean</td><td>Bool</td><td>-</td></tr>
-<tr><td>object</td><td>JSON</td><td>-</td></tr>
+<tr><td>密集向量</td><td>浮点矢量</td><td>向量尺寸在迁移过程中保持不变。</td></tr>
+<tr><td>关键字</td><td>变量</td><td>设置最大长度（1 至 65,535）。超过限制的字符串会引发迁移错误。</td></tr>
+<tr><td>文本</td><td>字符串</td><td>设置最大长度（1 至 65,535）。超过限制的字符串会引发迁移错误。</td></tr>
+<tr><td>长</td><td>Int64</td><td>-</td></tr>
+<tr><td>整数</td><td>Int32</td><td>-</td></tr>
+<tr><td>双</td><td>双</td><td>-</td></tr>
+<tr><td>浮点数</td><td>浮点数</td><td>-</td></tr>
+<tr><td>布尔</td><td>布尔</td><td>-</td></tr>
+<tr><td>对象</td><td>JSON</td><td>-</td></tr>
 </tbody>
 </table>

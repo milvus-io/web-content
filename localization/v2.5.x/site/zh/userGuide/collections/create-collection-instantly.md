@@ -1,8 +1,8 @@
 ---
 id: create-collection-instantly.md
-title: Create Collection​ Instantly​
+title: 即时创建 Collections
 ---
-<h1 id="Create-Collection-Instantly​" class="common-anchor-header">Create Collection Instantly​<button data-href="#Create-Collection-Instantly​" class="anchor-icon" translate="no">
+<h1 id="Create-Collection-Instantly​" class="common-anchor-header">即时创建 Collections<button data-href="#Create-Collection-Instantly​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -17,8 +17,8 @@ title: Create Collection​ Instantly​
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>You can create a collection instantly by setting its name and the vector field dimensionality. Milvus automatically indexes the vector field and loads the collection upon creation. This page demonstrates how to create a collection instantly with default settings.​</p>
-<h2 id="Overview​" class="common-anchor-header">Overview​<button data-href="#Overview​" class="anchor-icon" translate="no">
+    </button></h1><p>通过设置名称和向量场维度，可以立即创建一个 Collection。创建时，Milvus 会自动索引向量场并加载 Collections。本页演示如何使用默认设置即时创建 Collections。</p>
+<h2 id="Overview​" class="common-anchor-header">集合概述<button data-href="#Overview​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -33,21 +33,21 @@ title: Create Collection​ Instantly​
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>A collection is a two-dimensional table with fixed columns and variant rows. Each column represents a field, and each row represents an entity. A schema is required to implement such structural data management. Every entity to insert has to meet the constraints defined in the schema.​</p>
-<p>AIGC applications usually use vector databases as a knowledge base to manage the data generated during the interaction between users and Large Language Models (LLMs). Such knowledge bases are almost similar. To accelerate the use of Milvus clusters in such scenarios, an instant method is available for you to create a collection with only two parameters, namely the collection name and the vector field dimensionality.​</p>
-<p>When you create a collection instantly with default settings, the following settings apply:​</p>
+    </button></h2><p>Collection 是一个二维表，有固定的列和变化的行。每列代表一个字段，每行代表一个实体。实现这种结构化数据管理需要一个 Schema。每个要插入的实体都必须符合 Schema 中定义的约束条件。</p>
+<p>AIGC 应用程序通常使用向量数据库作为知识库，管理用户与大型语言模型（LLMs）交互过程中产生的数据。这些知识库几乎是相似的。为了加快 Milvus Collections 在此类场景中的使用，我们提供了一种即时方法，只需两个参数，即 Collections 名称和向量场维度，即可创建一个 Collection。</p>
+<p>使用默认设置即时创建 Collections 时，以下设置适用。</p>
 <ul>
-<li><p>The primary and vector fields are added to the schema (<strong>id</strong> and <strong>vector</strong>).​</p></li>
-<li><p>The primary field accepts integers and disables <strong>AutoId</strong>.​</p></li>
-<li><p>The vector field accepts floating vector embeddings.​</p></li>
-<li><p><strong>AUTOINDEX</strong> is used to create an index on the vector field.​</p></li>
-<li><p><strong>COSINE</strong> is used to measure similarities between vector embeddings.​</p></li>
-<li><p>The reserves dynamic field named <strong>$meta</strong> is enabled to save non-schema-defined fields and their values in key-value pairs.​</p></li>
-<li><p>The collection is automatically loaded upon creation.​</p></li>
+<li><p>主字段和向量字段被添加到 Schema 中<strong>（id</strong>和<strong>向量</strong>）。</p></li>
+<li><p>主字段接受整数并禁用<strong>AutoId</strong>。</p></li>
+<li><p>向量字段接受浮动向量 Embeddings。</p></li>
+<li><p><strong>AUTOINDEX</strong>用于在向量字段上创建索引。</p></li>
+<li><p><strong>COSINE</strong>用于测量向量嵌入之间的相似性。</p></li>
+<li><p>启用名为<strong>$meta</strong>的储备动态字段，可将非 Schema 定义的字段及其值保存为键值对。</p></li>
+<li><p>该 Collections 会在创建时自动加载。</p></li>
 </ul>
-<p>For details on the terminologies above, refer to <a href="/docs/manage-collections.md">​Collection Explained</a>. ​</p>
-<p>It is worth noting that creating a collection instantly with default settings does not fit all scenarios. You are advised to familiarize yourself with the <a href="/docs/create-collection.md">common collection creation procedure</a> so that you can gain a better understanding of Milvus’s capabilities.​</p>
-<h2 id="Quick-Setup​" class="common-anchor-header">Quick Setup​<button data-href="#Quick-Setup​" class="anchor-icon" translate="no">
+<p>有关上述术语的详细信息，请参阅<a href="/docs/zh/manage-collections.md">Collection Explained</a>。</p>
+<p>值得注意的是，使用默认设置即时创建 Collections 并不适合所有情况。建议您熟悉<a href="/docs/zh/create-collection.md">常用的 Collections 创建程序</a>，以便更好地了解 Milvus 的功能。</p>
+<h2 id="Quick-Setup​" class="common-anchor-header">快速设置<button data-href="#Quick-Setup​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -62,14 +62,9 @@ title: Create Collection​ Instantly​
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>In this manner, you can create a collection instantly with only the collection name and the vector field dimensionality.​</p>
+    </button></h2><p>通过这种方式，您只需输入集合名称和向量场维数，即可即时创建集合。</p>
 <div class="multipleCode">
-  <a href="#python">Python </a>
-  <a href="#java">Java</a>
-  <a href="#javascript">Node.js</a>
-  <a href="#go">Go</a>
-  <a href="#curl">cURL</a>
-</div>
+ <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#go">Go</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType​
 ​
 CLUSTER_ENDPOINT = <span class="hljs-string">&quot;http://localhost:19530&quot;</span>​
@@ -188,7 +183,7 @@ curl --request POST \​
 <span class="hljs-comment"># }​</span>
 
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Quick-Setup-with-Custom-Fields​" class="common-anchor-header">Quick Setup with Custom Fields​<button data-href="#Quick-Setup-with-Custom-Fields​" class="anchor-icon" translate="no">
+<h2 id="Quick-Setup-with-Custom-Fields​" class="common-anchor-header">使用自定义字段快速设置<button data-href="#Quick-Setup-with-Custom-Fields​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -203,14 +198,9 @@ curl --request POST \​
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>If the default metric type, field names, and data types does not meet your need, you can tune these settings as follows.​</p>
+    </button></h2><p>如果默认的度量类型、字段名称和数据类型不能满足您的需求，您可以按以下方式调整这些设置。</p>
 <div class="multipleCode">
-  <a href="#python">Python </a>
-  <a href="#java">Java</a>
-  <a href="#javascript">Node.js</a>
-  <a href="#go">Go</a>
-  <a href="#curl">cURL</a>
-</div>
+ <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#go">Go</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType​
 ​
 CLUSTER_ENDPOINT = <span class="hljs-string">&quot;http://localhost:19530&quot;</span>​
@@ -348,4 +338,4 @@ curl --request POST \​
 }&#x27;</span>​
 
 <button class="copy-code-btn"></button></code></pre>
-<p>If the collections created using the above two manners still cannot meet your needs, consider following the procedure in <a href="/docs/create-collection.md">​Create Collection</a>.​</p>
+<p>如果使用上述两种方式创建的 Collections 仍然无法满足您的需求，请考虑按照<a href="/docs/zh/create-collection.md">创建 Collections</a> 中的步骤进行操作。</p>

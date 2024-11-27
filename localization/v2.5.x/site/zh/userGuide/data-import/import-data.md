@@ -1,10 +1,10 @@
 ---
 id: import-data.md
 order: 1
-title: Import Data
-summary: This page demonstrates the procedure to import the prepared data.
+title: 导入数据
+summary: 本页演示导入准备好的数据的程序。
 ---
-<h1 id="Import-data" class="common-anchor-header">Import data<button data-href="#Import-data" class="anchor-icon" translate="no">
+<h1 id="Import-data" class="common-anchor-header">导入数据<button data-href="#Import-data" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -19,8 +19,8 @@ summary: This page demonstrates the procedure to import the prepared data.
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>This page demonstrates the procedure to import the prepared data.</p>
-<h2 id="Before-you-start" class="common-anchor-header">Before you start<button data-href="#Before-you-start" class="anchor-icon" translate="no">
+    </button></h1><p>本页演示导入准备好的数据的步骤。</p>
+<h2 id="Before-you-start" class="common-anchor-header">开始之前<button data-href="#Before-you-start" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -36,17 +36,17 @@ summary: This page demonstrates the procedure to import the prepared data.
         ></path>
       </svg>
     </button></h2><ul>
-<li><p>You have already prepared your data and placed it into the Milvus bucket.</p>
-<p>If not, you should use <strong>RemoteBulkWriter</strong> to prepare your data first, and ensure that the prepared data has already been transferred to the Milvus bucket on the MinIO instance started along with your Milvus instance. For details, refer to <a href="/docs/prepare-source-data.md">Prepare Source Data</a>.</p></li>
-<li><p>You have already created a collection with the schema you use to prepare your data. If not, refer to <a href="/docs/manage-collections.md">Manage Collections</a>.</p></li>
+<li><p>您已经准备好数据并将其放入 Milvus 存储桶。</p>
+<p>如果没有，您应该先使用<strong>RemoteBulkWriter</strong>准备数据，并确保准备好的数据已经传输到与您的 Milvus 实例一起启动的 MinIO 实例上的 Milvus 数据桶中。有关详细信息，请参阅<a href="/docs/zh/prepare-source-data.md">准备源数据</a>。</p></li>
+<li><p>您已经使用用于准备数据的 Schema 创建了一个 Collections。如果没有，请参阅<a href="/docs/zh/manage-collections.md">管理 Collections</a>。</p></li>
 </ul>
 <div class="language-python">
-<p>The following code snippet creates a simple collection with the given schema. For more information on parameters, refer to <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_schema.md"><code translate="no">create_schema()</code></a> and <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_collection.md"><code translate="no">create_collection()</code></a> in the SDK reference.</p>
+<p>下面的代码片段使用给定的 Schema 创建了一个简单的 Collections。有关参数的更多信息，请参阅 <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_schema.md"><code translate="no">create_schema()</code></a>和 <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_collection.md"><code translate="no">create_collection()</code></a>SDK 参考资料。</p>
 </div>
 <div class="language-java">
-<p>The following code snippet creates a simple collection with the given schema. For more information on parameters, refer to <a href="https://milvus.io/api-reference/java/v2.4.x/v1/Collection/createCollection.md"><code translate="no">createCollection()</code></a> in the SDK reference.</p>
+<p>以下代码片段使用给定的 Schema 创建一个简单集合。有关参数的更多信息，请参阅 <a href="https://milvus.io/api-reference/java/v2.4.x/v1/Collection/createCollection.md"><code translate="no">createCollection()</code></a>有关参数的更多信息，请参阅 SDK 参考资料中的</p>
 </div>
-<h2 id="Import-data" class="common-anchor-header">Import data<button data-href="#Import-data" class="anchor-icon" translate="no">
+<h2 id="Import-data" class="common-anchor-header">导入数据<button data-href="#Import-data" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -61,12 +61,9 @@ summary: This page demonstrates the procedure to import the prepared data.
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>To import the prepared data, you have to create an import job as follows:</p>
+    </button></h2><p>要导入准备好的数据，必须创建如下导入任务：</p>
 <div class="multipleCode">
-  <a href="#python">Python </a>
-  <a href="#java">Java</a>
-  <a href="#shell">cURL</a>
-</div>
+ <a href="#python">Python </a> <a href="#java">Java</a> <a href="#shell">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus.bulk_writer <span class="hljs-keyword">import</span> bulk_import
 
 url = <span class="hljs-string">f&quot;http://127.0.0.1:19530&quot;</span>
@@ -125,21 +122,21 @@ curl --request POST <span class="hljs-string">&quot;http://<span class="hljs-var
     &quot;collectionName&quot;: &quot;quick_setup&quot;
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>The request body contains two fields:</p>
+<p>请求体包含两个字段：</p>
 <ul>
 <li><p><code translate="no">collectionName</code></p>
-<p>The name of the target collection.</p></li>
+<p>目标 Collections 的名称。</p></li>
 <li><p><code translate="no">files</code></p>
-<p>A list of lists of file paths relative to the root path of the Milvus bucket on the MioIO instance started along with your Milvus instance. Possible sub-lists are as follows:</p>
+<p>与 Milvus 实例一起启动的 MioIO 实例上相对于 Milvus 存储桶根路径的文件路径列表。可能的子列表如下：</p>
 <ul>
-<li><p><strong>JSON files</strong></p>
-<p>If the prepared file is in JSON format, <strong>each sub-list should contain the path to a single prepared JSON file</strong>.</p>
+<li><p><strong>JSON 文件</strong></p>
+<p>如果准备的文件是 JSON 格式，则<strong>每个子列表都应包含单个准备的 JSON 文件的路径</strong>。</p>
 <pre><code translate="no">[
     <span class="hljs-string">&quot;/d1782fa1-6b65-4ff3-b05a-43a436342445/1.json&quot;</span>
 ],
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p><strong>Parquet files</strong></p>
-<p>If the prepared file is in Parquet format, <strong>each sub-list should contain the path to a single prepared parquet file</strong>.</p>
+<li><p><strong>Parquet 文件</strong></p>
+<p>如果准备的文件是 Parquet 格式，则<strong>每个子列表都应包含单个准备的 parquet 文件的路径</strong>。</p>
 <pre><code translate="no">[
     <span class="hljs-string">&quot;/a6fb2d1c-7b1b-427c-a8a3-178944e3b66d/1.parquet&quot;</span>
 ]
@@ -147,7 +144,7 @@ curl --request POST <span class="hljs-string">&quot;http://<span class="hljs-var
 <button class="copy-code-btn"></button></code></pre></li>
 </ul></li>
 </ul>
-<p>The possible return is as follows:</p>
+<p>可能的返回值如下：</p>
 <pre><code translate="no" class="language-json">{
     <span class="hljs-string">&quot;code&quot;</span>: <span class="hljs-number">200</span>,
     <span class="hljs-string">&quot;data&quot;</span>: {
@@ -155,7 +152,7 @@ curl --request POST <span class="hljs-string">&quot;http://<span class="hljs-var
     }
 }
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Check-import-progress" class="common-anchor-header">Check import progress<button data-href="#Check-import-progress" class="anchor-icon" translate="no">
+<h2 id="Check-import-progress" class="common-anchor-header">检查导入进度<button data-href="#Check-import-progress" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -170,12 +167,9 @@ curl --request POST <span class="hljs-string">&quot;http://<span class="hljs-var
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Once you get an import job ID, you can check the import progress as follows:</p>
+    </button></h2><p>获得导入任务 ID 后，可以按如下方式检查导入进度：</p>
 <div class="multipleCode">
-  <a href="#python">Python </a>
-  <a href="#java">Java</a>
-  <a href="#shell">cURL</a>
-</div>
+ <a href="#python">Python </a> <a href="#java">Java</a> <a href="#shell">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> json
 <span class="hljs-keyword">from</span> pymilvus.bulk_writer <span class="hljs-keyword">import</span> get_import_progress
 
@@ -233,7 +227,7 @@ curl --request POST <span class="hljs-string">&quot;http://<span class="hljs-var
     &quot;jobId&quot;: &quot;449839014328146739&quot;
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>The possible response is as follows:</p>
+<p>可能的返回如下</p>
 <pre><code translate="no">{
     <span class="hljs-string">&quot;code&quot;</span>: <span class="hljs-number">200</span>,
     <span class="hljs-string">&quot;data&quot;</span>: {
@@ -268,7 +262,7 @@ curl --request POST <span class="hljs-string">&quot;http://<span class="hljs-var
     }
 }
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="List-Import-Jobs" class="common-anchor-header">List Import Jobs<button data-href="#List-Import-Jobs" class="anchor-icon" translate="no">
+<h2 id="List-Import-Jobs" class="common-anchor-header">列出导入任务<button data-href="#List-Import-Jobs" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -283,12 +277,9 @@ curl --request POST <span class="hljs-string">&quot;http://<span class="hljs-var
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>You can list all import jobs relative to a specific collection as follows:</p>
+    </button></h2><p>您可以按如下方式列出相对于特定 Collections 的所有导入任务：</p>
 <div class="multipleCode">
-  <a href="#python">Python </a>
-  <a href="#java">Java</a>
-  <a href="#shell">cURL</a>
-</div>
+ <a href="#python">Python </a> <a href="#java">Java</a> <a href="#shell">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> json
 <span class="hljs-keyword">from</span> pymilvus.bulk_writer <span class="hljs-keyword">import</span> list_import_jobs
 
@@ -320,7 +311,7 @@ curl --request POST <span class="hljs-string">&quot;http://<span class="hljs-var
     &quot;collectionName&quot;: &quot;quick_setup&quot;
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>The possible values are as follows:</p>
+<p>可能的值如下：</p>
 <pre><code translate="no" class="language-json">{
     <span class="hljs-string">&quot;code&quot;</span>: <span class="hljs-number">200</span>,
     <span class="hljs-string">&quot;data&quot;</span>: {
@@ -335,7 +326,7 @@ curl --request POST <span class="hljs-string">&quot;http://<span class="hljs-var
     }
 }
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Limitations" class="common-anchor-header">Limitations<button data-href="#Limitations" class="anchor-icon" translate="no">
+<h2 id="Limitations" class="common-anchor-header">限制<button data-href="#Limitations" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -351,12 +342,12 @@ curl --request POST <span class="hljs-string">&quot;http://<span class="hljs-var
         ></path>
       </svg>
     </button></h2><ul>
-<li><p>Each import file size should not exceed <strong>16 GB</strong>.</p></li>
-<li><p>The maximum number of import requests is limited to <strong>1024</strong>.</p></li>
-<li><p>The maximum number of file per import request should not exceed <strong>1024</strong>.</p></li>
-<li><p>Only one partition name can be specified in an import request. If no partition name is specified, the data will be inserted into the default partition. Additionally, you cannot set a partition name in the import request if you have set the Partition Key in the target collection.</p></li>
+<li><p>每个导入文件的大小不得超过<strong>16 GB</strong>。</p></li>
+<li><p>导入请求的最大数量限制为<strong>1024</strong>。</p></li>
+<li><p>每个导入请求的最大文件数不得超过<strong>1024</strong>。</p></li>
+<li><p>导入请求中只能指定一个分区名称。如果没有指定分区名称，数据将插入默认分区。此外，如果在目标 Collections 中设置了 Partition Key，则无法在导入请求中设置分区名称。</p></li>
 </ul>
-<h2 id="Constraints" class="common-anchor-header">Constraints<button data-href="#Constraints" class="anchor-icon" translate="no">
+<h2 id="Constraints" class="common-anchor-header">限制条件<button data-href="#Constraints" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -371,28 +362,28 @@ curl --request POST <span class="hljs-string">&quot;http://<span class="hljs-var
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Before importing data, ensure that you have acknowledged the constaints in terms of the following Milvus behaviors:</p>
+    </button></h2><p>导入数据前，请确保已确认以下 Milvus 行为方面的约束：</p>
 <ul>
-<li><p>Constraints regarding the Load behavior:</p>
+<li><p>有关加载行为的限制：</p>
 <ul>
-<li>If a collection has already been loaded before an import, you can use the <code translate="no">refresh_load</code> function to load the newly imported data after the import is complete.</li>
+<li>如果在导入之前已经加载了一个 Collections，则可以在导入完成后使用<code translate="no">refresh_load</code> 函数加载新导入的数据。</li>
 </ul></li>
-<li><p>Constraints regarding the query &amp; search behaviors:</p>
+<li><p>有关查询和搜索行为的限制：</p>
 <ul>
-<li><p>Before the import job status is <strong>Completed</strong>, the newly import data is guaranteed to be invisible to queries and searches.</p></li>
-<li><p>Once the job status is <strong>Completed</strong>,</p>
+<li><p>在导入任务状态为 "<strong>已完成 "</strong>之前，保证新导入的数据对查询和搜索是不可见的。</p></li>
+<li><p>一旦任务状态为<strong>完成</strong>、</p>
 <ul>
-<li><p>If the collection is not loaded, you can use the <code translate="no">load</code> function to load the newly imported data.</p></li>
-<li><p>If the collection is already loaded, you can call <code translate="no">load(is_refresh=True)</code> to load the imported data.</p></li>
+<li><p>如果 Collections 尚未加载，可以使用<code translate="no">load</code> 函数加载新导入的数据。</p></li>
+<li><p>如果 Collections 已加载，则可调用<code translate="no">load(is_refresh=True)</code> 加载导入的数据。</p></li>
 </ul></li>
 </ul></li>
-<li><p>Constraints regarding the delete behavior:</p>
+<li><p>有关删除行为的限制：</p>
 <ul>
-<li><p>Before the import job status is <strong>Completed</strong>, deletion is not guaranteed and may or may not succeed.</p></li>
-<li><p>Deletion after the job status is <strong>Completed</strong> is guaranted to succeed.</p></li>
+<li><p>在导入任务状态为 "<strong>已完成 "</strong>之前，不保证删除成功。</p></li>
+<li><p>在任务状态为 "<strong>已完成</strong>"后，则保证删除成功。</p></li>
 </ul></li>
 </ul>
-<h2 id="Recommendations" class="common-anchor-header">Recommendations<button data-href="#Recommendations" class="anchor-icon" translate="no">
+<h2 id="Recommendations" class="common-anchor-header">建议<button data-href="#Recommendations" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -407,4 +398,4 @@ curl --request POST <span class="hljs-string">&quot;http://<span class="hljs-var
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>We highly recommend utilizing the multi-file import feature, which allows you to upload several files in a single request. This method not only simplifies the import process but also significantly boosts import performance. Meanwhile, by consolidating your uploads, you can reduce the time spent on data management and make your workflow more efficient.</p>
+    </button></h2><p>我们强烈建议使用多文件导入功能，该功能允许您在单个请求中上传多个文件。这种方法不仅简化了导入过程，还能显著提高导入性能。同时，通过合并上传，您可以减少用于数据管理的时间，提高工作流程的效率。</p>

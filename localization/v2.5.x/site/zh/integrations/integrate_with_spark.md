@@ -1,9 +1,9 @@
 ---
 id: integrate_with_spark.md
-summary: This page discusses the Spark-Milvus connector.
-title: Spark-Milvus Connector User Guide
+summary: 本页讨论 Spark-Milvus 连接器。
+title: Spark-Milvus 连接器用户指南
 ---
-<h1 id="Spark-Milvus-Connector-User-Guide" class="common-anchor-header">Spark-Milvus Connector User Guide<button data-href="#Spark-Milvus-Connector-User-Guide" class="anchor-icon" translate="no">
+<h1 id="Spark-Milvus-Connector-User-Guide" class="common-anchor-header">Spark-Milvus 连接器用户指南<button data-href="#Spark-Milvus-Connector-User-Guide" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -18,13 +18,13 @@ title: Spark-Milvus Connector User Guide
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>The Spark-Milvus Connector (https://github.com/zilliztech/spark-milvus) provides seamless integration between Apache Spark and Milvus, combining the data processing and ML features of Apache Spark with the vector data storage and search capabilities of Milvus. This integration enables various interesting applications, including:</p>
+    </button></h1><p>Spark-Milvus Connector (https://github.com/zilliztech/spark-milvus) 提供 Apache Spark 和 Milvus 之间的无缝集成，将 Apache Spark 的数据处理和 ML 功能与 Milvus 的向量数据存储和搜索功能相结合。这种集成实现了各种有趣的应用，包括</p>
 <ul>
-<li>Efficiently load vector data into Milvus in large batches,</li>
-<li>Move data between Milvus and other storage systems or databases,</li>
-<li>Analyzing the data in Milvus by leveraging Spark MLlib and other AI tools.</li>
+<li>高效地将向量数据大批量加载到 Milvus 中、</li>
+<li>在 Milvus 和其他存储系统或数据库之间移动数据、</li>
+<li>利用 Spark MLlib 和其他人工智能工具分析 Milvus 中的数据。</li>
 </ul>
-<h2 id="Quick-start" class="common-anchor-header">Quick start<button data-href="#Quick-start" class="anchor-icon" translate="no">
+<h2 id="Quick-start" class="common-anchor-header">快速启动<button data-href="#Quick-start" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -39,29 +39,27 @@ title: Spark-Milvus Connector User Guide
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Preparation" class="common-anchor-header">Preparation</h3><p>The Spark-Milvus Connector supports Scala and Python programming languages. Users can use it with <strong>Pyspark</strong> or <strong>Spark-shell</strong>. To run this demo, set up a Spark environment containing Spark-Milvus Connector dependency in the following steps:</p>
+    </button></h2><h3 id="Preparation" class="common-anchor-header">准备工作</h3><p>Spark-Milvus Connector 支持 Scala 和 Python 编程语言。用户可以使用<strong>Pyspark</strong>或<strong>Spark-shell</strong>。要运行此演示，请按以下步骤设置包含 Spark-Milvus Connector 依赖关系的 Spark 环境：</p>
 <ol>
-<li><p>Install Apache Spark (version &gt;= 3.3.0)</p>
-<p>You can install Apache Spark by referring to the <a href="https://spark.apache.org/docs/latest/">official documentation</a>.</p></li>
-<li><p>Download the <strong>spark-milvus</strong> jar file.</p>
+<li><p>安装 Apache Spark（版本 &gt;= 3.3.0）</p>
+<p>您可以参考<a href="https://spark.apache.org/docs/latest/">官方文档</a>安装 Apache Spark。</p></li>
+<li><p>下载<strong>spark-milvus</strong>jar 文件。</p>
 <pre><code translate="no">wget https://github.com/zilliztech/spark-milvus/raw/1.0.0-SNAPSHOT/output/spark-milvus-1.0.0-SNAPSHOT.jar
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p>Start the Spark runtime with <strong>spark-milvus</strong> jar as one of the dependencies.</p>
-<p>To start the Spark runtime with the Spark-Milvus Connector, add the downloaded <strong>spark-milvus</strong> as the dependency to the command.</p>
+<li><p>将<strong>spark-milvus</strong>jar 作为依赖项之一启动 Spark 运行时。</p>
+<p>要使用 Spark-Milvus 连接器启动 Spark 运行时，请将下载的<strong>spark-milvus</strong>作为依赖项添加到命令中。</p>
 <ul>
 <li><p><strong>pyspark</strong></p>
 <pre><code translate="no">./<span class="hljs-built_in">bin</span>/pyspark --jars spark-milvus-<span class="hljs-number">1.0</span><span class="hljs-number">.0</span>-SNAPSHOT.jar
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p><strong>spark-shell</strong></p>
+<li><p><strong>Spark-shell</strong></p>
 <pre><code translate="no">./<span class="hljs-built_in">bin</span>/spark-shell --jars spark-milvus-<span class="hljs-number">1.0</span><span class="hljs-number">.0</span>-SNAPSHOT.jar
 <button class="copy-code-btn"></button></code></pre></li>
 </ul></li>
 </ol>
-<h3 id="Demo" class="common-anchor-header">Demo</h3><p>In this demo, we create a sample Spark DataFrame with vector data and write it to Milvus through the Spark-Milvus Connector. A collection will be created in Milvus automatically based on the schema and specified options.</p>
+<h3 id="Demo" class="common-anchor-header">演示</h3><p>在本演示中，我们将创建一个包含向量数据的 Spark DataFrame 样本，并通过 Spark-Milvus Connector 将其写入 Milvus。根据 Schema 和指定的选项，Milvus 会自动创建一个 Collections。</p>
 <div class="multipleCode">
-  <a href="#python">Python </a>
-  <a href="#scala">Scala</a>
-</div>
+ <a href="#python">Python </a> <a href="#scala">Scala</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pyspark.sql <span class="hljs-keyword">import</span> SparkSession
 
 columns = [<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-string">&quot;text&quot;</span>, <span class="hljs-string">&quot;vec&quot;</span>]
@@ -115,8 +113,8 @@ object Hello <span class="hljs-keyword">extends</span> <span class="hljs-title c
     .save()
 }
 <button class="copy-code-btn"></button></code></pre>
-<p>After executing the above code, you can view the inserted data in Milvus using SDK or Attu (A Milvus Dashboard). You can find a collection named <code translate="no">hello_spark_milvus</code> created with 4 entities already inserted into it.</p>
-<h2 id="Features--concepts" class="common-anchor-header">Features &amp; concepts<button data-href="#Features--concepts" class="anchor-icon" translate="no">
+<p>执行上述代码后，你可以使用 SDK 或 Attu（Milvus 控制面板）在 Milvus 中查看插入的数据。您可以看到一个名为<code translate="no">hello_spark_milvus</code> 的 Collection，其中已插入了 4 个实体。</p>
+<h2 id="Features--concepts" class="common-anchor-header">功能和概念<button data-href="#Features--concepts" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -131,34 +129,34 @@ object Hello <span class="hljs-keyword">extends</span> <span class="hljs-title c
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Milvus-options" class="common-anchor-header">Milvus options</h3><p>In the <a href="#Quick-start">Quick Start</a> section, we have shown setting options during operations with Milvus. These options are abstracted as Milvus Options. They are used to create connections to Milvus and control other Milvus behaviors. Not all of the options are mandatory.</p>
+    </button></h2><h3 id="Milvus-options" class="common-anchor-header">Milvus 选项</h3><p>在<a href="#Quick-start">快速入门</a>部分，我们展示了 Milvus 操作符的设置选项。这些选项被抽象为 Milvus 选项。它们用于创建与 Milvus 的连接，并控制 Milvus 的其他行为。并非所有选项都是强制性的。</p>
 <table>
 <thead>
-<tr><th>Option Key</th><th>Default Value</th><th>Description</th></tr>
+<tr><th>选项键</th><th>默认值</th><th>说明</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">milvus.host</code></td><td><code translate="no">localhost</code></td><td>Milvus server host. See <a href="https://milvus.io/docs/manage_connection.md">Manage Milvus Connections</a> for detail.</td></tr>
-<tr><td><code translate="no">milvus.port</code></td><td><code translate="no">19530</code></td><td>Milvus server port. See <a href="https://milvus.io/docs/manage_connection.md">Manage Milvus Connections</a> for detail.</td></tr>
-<tr><td><code translate="no">milvus.username</code></td><td><code translate="no">root</code></td><td>Username for Milvus server. See <a href="https://milvus.io/docs/manage_connection.md">Manage Milvus Connections</a> for detail.</td></tr>
-<tr><td><code translate="no">milvus.password</code></td><td><code translate="no">Milvus</code></td><td>Password for Milvus server. See <a href="https://milvus.io/docs/manage_connection.md">Manage Milvus Connections</a> for detail.</td></tr>
-<tr><td><code translate="no">milvus.uri</code></td><td><code translate="no">--</code></td><td>Milvus server URI. See <a href="https://milvus.io/docs/manage_connection.md">Manage Milvus Connections</a> for detail.</td></tr>
-<tr><td><code translate="no">milvus.token</code></td><td><code translate="no">--</code></td><td>Milvus server token. See <a href="https://milvus.io/docs/manage_connection.md">Manage Milvus Connections</a> for detail.</td></tr>
-<tr><td><code translate="no">milvus.database.name</code></td><td><code translate="no">default</code></td><td>Name of the Milvus database to read or write.</td></tr>
-<tr><td><code translate="no">milvus.collection.name</code></td><td><code translate="no">hello_milvus</code></td><td>Name of the Milvus collection to read or write.</td></tr>
-<tr><td><code translate="no">milvus.collection.primaryKeyField</code></td><td><code translate="no">None</code></td><td>Name of the primary key field in the collection. Required if the collection does not exist.</td></tr>
-<tr><td><code translate="no">milvus.collection.vectorField</code></td><td><code translate="no">None</code></td><td>Name of the vector field in the collection. Required if the collection does not exist.</td></tr>
-<tr><td><code translate="no">milvus.collection.vectorDim</code></td><td><code translate="no">None</code></td><td>Dimension of the vector field in the collection. Required if the collection does not exist.</td></tr>
-<tr><td><code translate="no">milvus.collection.autoID</code></td><td><code translate="no">false</code></td><td>If the collection does not exist, this option specifies whether to automatically generate IDs for the entities. For more information, see <a href="https://milvus.io/docs/create_collection.md">create_collection</a></td></tr>
-<tr><td><code translate="no">milvus.bucket</code></td><td><code translate="no">a-bucket</code></td><td>Bucket name in the Milvus storage. This should be the same as <code translate="no">minio.bucketName</code> in <a href="https://github.com/milvus-io/milvus/blob/master/configs/milvus.yaml">milvus.yaml</a>.</td></tr>
-<tr><td><code translate="no">milvus.rootpath</code></td><td><code translate="no">files</code></td><td>Root path of the Milvus storage. This should be the same as <code translate="no">minio.rootpath</code> in <a href="https://github.com/milvus-io/milvus/blob/master/configs/milvus.yaml">milvus.yaml</a>.</td></tr>
-<tr><td><code translate="no">milvus.fs</code></td><td><code translate="no">s3a://</code></td><td>File system of the Milvus storage. The value <code translate="no">s3a://</code> applies to open-source Spark. Use <code translate="no">s3://</code> for Databricks.</td></tr>
-<tr><td><code translate="no">milvus.storage.endpoint</code></td><td><code translate="no">localhost:9000</code></td><td>Endpoint of the Milvus storage. This should be the same as <code translate="no">minio.address</code>:<code translate="no">minio.port</code> in <a href="https://github.com/milvus-io/milvus/blob/master/configs/milvus.yaml">milvus.yaml</a>.</td></tr>
-<tr><td><code translate="no">milvus.storage.user</code></td><td><code translate="no">minioadmin</code></td><td>User of the Milvus storage. This should be the same as <code translate="no">minio.accessKeyID</code> in <a href="https://github.com/milvus-io/milvus/blob/master/configs/milvus.yaml">milvus.yaml</a>.</td></tr>
-<tr><td><code translate="no">milvus.storage.password</code></td><td><code translate="no">minioadmin</code></td><td>Password of the Milvus storage. This should be the same as <code translate="no">minio.secretAccessKey</code> in <a href="https://github.com/milvus-io/milvus/blob/master/configs/milvus.yaml">milvus.yaml</a>.</td></tr>
-<tr><td><code translate="no">milvus.storage.useSSL</code></td><td><code translate="no">false</code></td><td>Whether to use SSL for the Milvus storage. This should be the same as <code translate="no">minio.useSSL</code> in <a href="https://github.com/milvus-io/milvus/blob/master/configs/milvus.yaml">milvus.yaml</a>.</td></tr>
+<tr><td><code translate="no">milvus.host</code></td><td><code translate="no">localhost</code></td><td>Milvus 服务器主机。详情请参阅<a href="https://milvus.io/docs/manage_connection.md">管理 Milvus 连接</a>。</td></tr>
+<tr><td><code translate="no">milvus.port</code></td><td><code translate="no">19530</code></td><td>Milvus 服务器端口。详见<a href="https://milvus.io/docs/manage_connection.md">管理 Milvus 连接</a>。</td></tr>
+<tr><td><code translate="no">milvus.username</code></td><td><code translate="no">root</code></td><td>Milvus 服务器的用户名。详见<a href="https://milvus.io/docs/manage_connection.md">管理 Milvus 连接</a>。</td></tr>
+<tr><td><code translate="no">milvus.password</code></td><td><code translate="no">Milvus</code></td><td>Milvus 服务器密码。详见<a href="https://milvus.io/docs/manage_connection.md">管理 Milvus 连接</a>。</td></tr>
+<tr><td><code translate="no">milvus.uri</code></td><td><code translate="no">--</code></td><td>Milvus 服务器 URI。详见<a href="https://milvus.io/docs/manage_connection.md">管理 Milvus 连接</a>。</td></tr>
+<tr><td><code translate="no">milvus.token</code></td><td><code translate="no">--</code></td><td>Milvus 服务器令牌。详见<a href="https://milvus.io/docs/manage_connection.md">管理 Milvus 连接</a>。</td></tr>
+<tr><td><code translate="no">milvus.database.name</code></td><td><code translate="no">default</code></td><td>要读取或写入的 Milvus 数据库名称。</td></tr>
+<tr><td><code translate="no">milvus.collection.name</code></td><td><code translate="no">hello_milvus</code></td><td>要读取或写入的 Milvus Collections 的名称。</td></tr>
+<tr><td><code translate="no">milvus.collection.primaryKeyField</code></td><td><code translate="no">None</code></td><td>Collections 中主键字段的名称。如果 Collection 不存在，则为必填项。</td></tr>
+<tr><td><code translate="no">milvus.collection.vectorField</code></td><td><code translate="no">None</code></td><td>Collections 中向量字段的名称。如果 Collections 不存在，则为必填项。</td></tr>
+<tr><td><code translate="no">milvus.collection.vectorDim</code></td><td><code translate="no">None</code></td><td>Collections 中向量字段的尺寸。如果 Collections 不存在，则为必填项。</td></tr>
+<tr><td><code translate="no">milvus.collection.autoID</code></td><td><code translate="no">false</code></td><td>如果集合不存在，此选项指定是否自动为实体生成 ID。更多信息，请参阅<a href="https://milvus.io/docs/create_collection.md">create_collection</a></td></tr>
+<tr><td><code translate="no">milvus.bucket</code></td><td><code translate="no">a-bucket</code></td><td>Milvus 存储中的存储桶名称。该名称应与<a href="https://github.com/milvus-io/milvus/blob/master/configs/milvus.yaml">Milvus.yaml</a> 中的<code translate="no">minio.bucketName</code> 相同。</td></tr>
+<tr><td><code translate="no">milvus.rootpath</code></td><td><code translate="no">files</code></td><td>Milvus 存储的根路径。应与<a href="https://github.com/milvus-io/milvus/blob/master/configs/milvus.yaml">milvus.yaml</a> 中的<code translate="no">minio.rootpath</code> 相同。</td></tr>
+<tr><td><code translate="no">milvus.fs</code></td><td><code translate="no">s3a://</code></td><td>Milvus 存储的文件系统。<code translate="no">s3a://</code> 适用于开源 Spark。Databricks 使用<code translate="no">s3://</code> 。</td></tr>
+<tr><td><code translate="no">milvus.storage.endpoint</code></td><td><code translate="no">localhost:9000</code></td><td>Milvus 存储的端点。应与<a href="https://github.com/milvus-io/milvus/blob/master/configs/milvus.yaml">milvus.yaml</a> 中的<code translate="no">minio.address</code>:<code translate="no">minio.port</code> 相同。</td></tr>
+<tr><td><code translate="no">milvus.storage.user</code></td><td><code translate="no">minioadmin</code></td><td>Milvus 存储的用户。应与<a href="https://github.com/milvus-io/milvus/blob/master/configs/milvus.yaml">milvus.yaml</a> 中的<code translate="no">minio.accessKeyID</code> 相同。</td></tr>
+<tr><td><code translate="no">milvus.storage.password</code></td><td><code translate="no">minioadmin</code></td><td>Milvus 存储的密码。应与<a href="https://github.com/milvus-io/milvus/blob/master/configs/milvus.yaml">Milvus.yaml</a> 中的<code translate="no">minio.secretAccessKey</code> 相同。</td></tr>
+<tr><td><code translate="no">milvus.storage.useSSL</code></td><td><code translate="no">false</code></td><td>是否为 Milvus 存储使用 SSL。应与<a href="https://github.com/milvus-io/milvus/blob/master/configs/milvus.yaml">milvus.yaml</a> 中的<code translate="no">minio.useSSL</code> 相同。</td></tr>
 </tbody>
 </table>
-<h2 id="Milvus-data-format" class="common-anchor-header">Milvus data format<button data-href="#Milvus-data-format" class="anchor-icon" translate="no">
+<h2 id="Milvus-data-format" class="common-anchor-header">Milvus 数据格式<button data-href="#Milvus-data-format" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -173,31 +171,29 @@ object Hello <span class="hljs-keyword">extends</span> <span class="hljs-title c
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>The Spark-Milvus Connector supports reading and writing data in the following Milvus data formats:</p>
+    </button></h2><p>Spark-Milvus 连接器支持以下列 Milvus 数据格式读写数据：</p>
 <ul>
-<li><code translate="no">milvus</code>: Milvus data format for seamless conversion from Spark DataFrame to Milvus entities.</li>
-<li><code translate="no">milvusbinlog</code>: Milvus data format for reading Milvus build-in binlog data.</li>
-<li><code translate="no">mjson</code>: Milvus JSON format for bulk-inserting data into Milvus.</li>
+<li><code translate="no">milvus</code>:Milvus 数据格式，用于从 Spark DataFrame 到 Milvus 实体的无缝转换。</li>
+<li><code translate="no">milvusbinlog</code>:用于读取 Milvus 内置 binlog 数据的 Milvus 数据格式。</li>
+<li><code translate="no">mjson</code>:用于向 Milvus 批量插入数据的 Milvus JSON 格式。</li>
 </ul>
-<h3 id="milvus" class="common-anchor-header">milvus</h3><p>In <a href="#Quick-start">Quick start</a>, we use the <strong>milvus</strong> format to write sample data into a Milvus cluster. The <strong>milvus</strong> format is a new data format that supports seamlessly writing Spark DataFrame data into Milvus Collections. This is achieved by batch calls to the Insert API of Milvus SDK. If a collection doesn’t exist in Milvus, a new collection will be created based on the schema of the Dataframe. However, the automatically created collection may not support all features of the collection schema. Therefore, it is recommended to create a collection via SDK first and then use spark-milvus for writing. For further information, please refer to <a href="https://github.com/zilliztech/spark-milvus/blob/main/examples/src/main/scala/InsertDemo.scala">the demo</a>.</p>
-<h3 id="milvusbinlog" class="common-anchor-header">milvusbinlog</h3><p>The new data format <strong>milvusbinlog</strong> is for reading Milvus built-in binlog data. Binlog is Milvus’s internal data storage format based on parquet. Unfortunately, it can’t be read by a regular parquet library, so we implemented this new data format to help Spark job read it.
-It is not recommended to use <strong>milvusbinlog</strong> directly unless you are familiar with the milvus internal storage details. We suggest using the <a href="#MilvusUtils">MilvusUtils</a> function that will be introduced in the next section.</p>
+<h3 id="milvus" class="common-anchor-header">milvus</h3><p>在<a href="#Quick-start">快速入门</a>中，我们使用<strong>milvus</strong>格式将样本数据写入 Milvus 集群。<strong>milvus</strong>格式是一种新的数据格式，支持将 Spark DataFrame 数据无缝写入 Milvus Collections。这是通过批量调用 Milvus SDK 的插入 API 实现的。如果某个 Collection 在 Milvus 中不存在，就会根据 Dataframe 的 Schema 创建一个新的 Collection。不过，自动创建的 Collection 可能不支持 Collection Schema 的所有功能。因此，建议先通过 SDK 创建一个 Collection，然后再使用 Spark-milvus 进行编写。有关详细信息，请参阅<a href="https://github.com/zilliztech/spark-milvus/blob/main/examples/src/main/scala/InsertDemo.scala">演示</a>。</p>
+<h3 id="milvusbinlog" class="common-anchor-header">milvusbinlog</h3><p>新数据格式<strong>milvusbinlog</strong>用于读取 Milvus 内置的 binlog 数据。Binlog 是 Milvus 基于 parquet 的内部数据存储格式。除非你熟悉 Milvus 内部存储的细节，否则不建议直接使用<strong>milvusbinlog</strong>。我们建议使用下一节将介绍的<a href="#MilvusUtils">MilvusUtils</a>函数。</p>
 <pre><code translate="no" class="language-scalar">val df = spark.read
   .<span class="hljs-built_in">format</span>(<span class="hljs-string">&quot;milvusbinlog&quot;</span>)
   .load(path)
   .withColumnRenamed(<span class="hljs-string">&quot;val&quot;</span>, <span class="hljs-string">&quot;embedding&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="mjson" class="common-anchor-header">mjson</h3><p>Milvus provides <a href="https://milvus.io/docs/bulk_insert.md">Bulkinsert</a> functionality for better writing performance when operating with large datasets. However, the JSON format used by Milvus is slightly different than Spark’s default JSON output format.
-To resolve this, we introduce <strong>mjson</strong> data format to generate data that meets Milvus requirements. Here is an example that shows the difference between JSON-lines and <strong>mjson</strong>:</p>
+<h3 id="mjson" class="common-anchor-header">mjson</h3><p>Milvus 提供<a href="https://milvus.io/docs/bulk_insert.md">Bulkinsert</a>功能，以便在操作大型数据集时获得更好的写入性能。然而，Milvus 使用的 JSON 格式与 Spark 的默认 JSON 输出格式略有不同。 为了解决这个问题，我们引入了<strong>mjson</strong>数据格式，以生成符合 Milvus 要求的数据。下面的示例展示了 JSON-lines 和<strong>mjson</strong> 之间的区别：</p>
 <ul>
-<li><p>JSON-lines:</p>
+<li><p>JSON-lines：</p>
 <pre><code translate="no" class="language-json">{<span class="hljs-string">&quot;book_id&quot;</span>: <span class="hljs-number">101</span>, <span class="hljs-string">&quot;word_count&quot;</span>: <span class="hljs-number">13</span>, <span class="hljs-string">&quot;book_intro&quot;</span>: [<span class="hljs-number">1.1</span>, <span class="hljs-number">1.2</span>]}
 {<span class="hljs-string">&quot;book_id&quot;</span>: <span class="hljs-number">102</span>, <span class="hljs-string">&quot;word_count&quot;</span>: <span class="hljs-number">25</span>, <span class="hljs-string">&quot;book_intro&quot;</span>: [<span class="hljs-number">2.1</span>, <span class="hljs-number">2.2</span>]}
 {<span class="hljs-string">&quot;book_id&quot;</span>: <span class="hljs-number">103</span>, <span class="hljs-string">&quot;word_count&quot;</span>: <span class="hljs-number">7</span>, <span class="hljs-string">&quot;book_intro&quot;</span>: [<span class="hljs-number">3.1</span>, <span class="hljs-number">3.2</span>]}
 {<span class="hljs-string">&quot;book_id&quot;</span>: <span class="hljs-number">104</span>, <span class="hljs-string">&quot;word_count&quot;</span>: <span class="hljs-number">12</span>, <span class="hljs-string">&quot;book_intro&quot;</span>: [<span class="hljs-number">4.1</span>, <span class="hljs-number">4.2</span>]}
 {<span class="hljs-string">&quot;book_id&quot;</span>: <span class="hljs-number">105</span>, <span class="hljs-string">&quot;word_count&quot;</span>: <span class="hljs-number">34</span>, <span class="hljs-string">&quot;book_intro&quot;</span>: [<span class="hljs-number">5.1</span>, <span class="hljs-number">5.2</span>]}
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p>mjson (Required for Milvus Bulkinsert):</p>
+<li><p>mjson （Milvus Bulkinsert 要求）：</p>
 <pre><code translate="no" class="language-json">{
     <span class="hljs-string">&quot;rows&quot;</span>:[
         {<span class="hljs-string">&quot;book_id&quot;</span>: <span class="hljs-number">101</span>, <span class="hljs-string">&quot;word_count&quot;</span>: <span class="hljs-number">13</span>, <span class="hljs-string">&quot;book_intro&quot;</span>: [<span class="hljs-number">1.1</span>, <span class="hljs-number">1.2</span>]},
@@ -209,7 +205,7 @@ To resolve this, we introduce <strong>mjson</strong> data format to generate dat
 }
 <button class="copy-code-btn"></button></code></pre></li>
 </ul>
-<p>This will be improved in the future. We recommend using parquet format in spark-milvus intergration if your Milvus version is v2.3.7+ which supports bulkinsert with Parquet format. See <a href="https://github.com/zilliztech/spark-milvus/blob/main/examples/src/main/scala/BulkInsertDemo.scala">Demo</a> on Github.</p>
+<p>未来将对此进行改进。我们建议在 Spark-milvus 集成中使用 parquet 格式，如果你的 Milvus 版本是 v2.3.7 以上，支持使用 Parquet 格式的 Bulkinsert。请参见 Github 上的<a href="https://github.com/zilliztech/spark-milvus/blob/main/examples/src/main/scala/BulkInsertDemo.scala">演示</a>。</p>
 <h2 id="MilvusUtils" class="common-anchor-header">MilvusUtils<button data-href="#MilvusUtils" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -225,15 +221,15 @@ To resolve this, we introduce <strong>mjson</strong> data format to generate dat
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>MilvusUtils contains several useful util functions. Currently it is only supported in Scala. More usage examples are in <a href="#Advanced-Usage">Advanced Usage</a> section.</p>
-<h3 id="MilvusUtilsreadMilvusCollection" class="common-anchor-header">MilvusUtils.readMilvusCollection</h3><p><strong>MilvusUtils.readMilvusCollection</strong> is a simple interface for loading a whole Milvus collection into a Spark Dataframe. It wraps various operations, including calling Milvus SDK, reading <strong>milvusbinlog</strong> and common union/join operations.</p>
+    </button></h2><p>MilvusUtils 包含多个有用的 util 函数。目前仅支持 Scala 语言。更多使用示例请参见<a href="#Advanced-Usage">高级使用</a>部分。</p>
+<h3 id="MilvusUtilsreadMilvusCollection" class="common-anchor-header">MilvusUtils.readMilvusCollection</h3><p><strong>MilvusUtils.readMilvusCollection</strong>是一个简单的接口，用于将整个 Milvus Collections 加载到 Spark 数据帧中。它封装了各种操作符，包括调用 Milvus SDK、读取<strong>milvusbinlog</strong>和常见的联合/连接操作。</p>
 <pre><code translate="no" class="language-scala"><span class="hljs-type">val</span> <span class="hljs-variable">collectionDF</span> <span class="hljs-operator">=</span> MilvusUtils.readMilvusCollection(spark, milvusOptions)
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="MilvusUtilsbulkInsertFromSpark" class="common-anchor-header">MilvusUtils.bulkInsertFromSpark</h3><p><strong>MilvusUtils.bulkInsertFromSpark</strong> provides a convenient way to import Spark output files into Milvus in a large batch. It wraps the <strong>Bullkinsert</strong> API of the Milvus SDK.</p>
+<h3 id="MilvusUtilsbulkInsertFromSpark" class="common-anchor-header">MilvusUtils.bulkInsertFromSpark</h3><p><strong>MilvusUtils.bulkInsertFromSpark</strong>提供了将 Spark 输出文件大批量导入 Milvus 的便捷方法。它封装了 Milvus SDK 的<strong>Bullkinsert</strong>API。</p>
 <pre><code translate="no" class="language-scala">df.write.<span class="hljs-built_in">format</span>(<span class="hljs-string">&quot;parquet&quot;</span>).save(outputPath)
 MilvusUtils.bulkInsertFromSpark(spark, milvusOptions, outputPath, <span class="hljs-string">&quot;parquet&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Advanced-Usage" class="common-anchor-header">Advanced Usage<button data-href="#Advanced-Usage" class="anchor-icon" translate="no">
+<h2 id="Advanced-Usage" class="common-anchor-header">高级用法<button data-href="#Advanced-Usage" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -248,14 +244,14 @@ MilvusUtils.bulkInsertFromSpark(spark, milvusOptions, outputPath, <span class="h
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>In this section, you will find advanced usage examples of the Spark-Milvus Connector for data analysis and migration. For more demos, see <a href="https://github.com/zilliztech/spark-milvus/tree/main/examples/src/main/scala">examples</a>.</p>
-<h3 id="MySQL---embedding---Milvus" class="common-anchor-header">MySQL -&gt; embedding -&gt; Milvus</h3><p>In this demo, we will</p>
+    </button></h2><p>在本节中，您将看到 Spark-Milvus 连接器用于数据分析和迁移的高级使用示例。更多演示，请参阅<a href="https://github.com/zilliztech/spark-milvus/tree/main/examples/src/main/scala">示例</a>。</p>
+<h3 id="MySQL---embedding---Milvus" class="common-anchor-header">MySQL -&gt; Embeddings -&gt; Milvus</h3><p>在本演示中，我们将</p>
 <ol>
-<li>Read data from MySQL through the Spark-MySQL Connector,</li>
-<li>Generate embedding (using Word2Vec as an example), and</li>
-<li>Write embedded data into Milvus.</li>
+<li>通过 Spark-MySQL 连接器从 MySQL 读取数据、</li>
+<li>生成嵌入（以 Word2Vec 为例），以及</li>
+<li>将嵌入数据写入 Milvus。</li>
 </ol>
-<p>To enable the Spark-MySQL Connector, you need to add the following dependency to your Spark environment:</p>
+<p>要启用 Spark-MySQL 连接器，需要在 Spark 环境中添加以下依赖项：</p>
 <pre><code translate="no">spark-shell --jars spark-milvus-1.0.0-SNAPSHOT.jar,mysql-connector-j-x.x.x.jar
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-scala"><span class="hljs-keyword">import</span> org.apache.spark.ml.feature.{Tokenizer, Word2Vec}
@@ -331,15 +327,14 @@ object Mysql2MilvusDemo  <span class="hljs-keyword">extends</span> <span class="
     .save()
 }
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Milvus---Transform---Milvus" class="common-anchor-header">Milvus -&gt; Transform -&gt; Milvus</h3><p>In this demo, we will</p>
+<h3 id="Milvus---Transform---Milvus" class="common-anchor-header">Milvus -&gt; 转换 -&gt; Milvus</h3><p>在本演示中，我们将</p>
 <ol>
-<li>Read data from a Milvus collection,</li>
-<li>Apply a transformation (using PCA as an example), and</li>
-<li>Write the transformed data into another Milvus via the Bulkinsert API.</li>
+<li>从一个 Milvus Collections 中读取数据、</li>
+<li>应用转换（以 PCA 为例），以及</li>
+<li>通过 Bulkinsert API 将转换后的数据写入另一个 Milvus。</li>
 </ol>
 <div class="alert notes">
-<p>The PCA model is a tranformation model that reduces the dimensionality of embedding vectors, which is a common operation in machine learning.
-You can add any other processing operations, such as filtering, joining, or normalizing, to the transformation step.</p>
+<p>PCA 模型是一种可降低嵌入向量维度的变换模型，是机器学习中的常见操作。 你可以在变换步骤中添加任何其他处理操作，如过滤、连接或归一化。</p>
 </div>
 <pre><code translate="no" class="language-scala"><span class="hljs-keyword">import</span> org.apache.spark.ml.feature.PCA
 <span class="hljs-keyword">import</span> org.apache.spark.ml.linalg.{Vector, Vectors}
@@ -450,24 +445,22 @@ object TransformDemo <span class="hljs-keyword">extends</span> <span class="hljs
   MilvusUtils.bulkInsertFromSpark(spark, targetMilvusOptions, outputPath, <span class="hljs-string">&quot;parquet&quot;</span>)
 }
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Databricks---Zilliz-Cloud" class="common-anchor-header">Databricks -&gt; Zilliz Cloud</h3><p>If you are using Zilliz Cloud (the managed Milvus service), you can leverage its convenient Data Import API. Zilliz Cloud provides comprehensive tools and documentation to help you efficiently move your data from various data sources, including Spark and Databricks. Simply set up an S3 bucket as an intermediary and open its access to your Zilliz Cloud account. The Zilliz Cloud’s Data Import API will automatically load the full batch of data from the S3 bucket to your Zilliz Cloud cluster.</p>
-<p><strong>Preparations</strong></p>
+<h3 id="Databricks---Zilliz-Cloud" class="common-anchor-header">Databricks -&gt; Zilliz Cloud</h3><p>如果您使用的是 Zilliz Cloud（Milvus 托管服务），您可以利用其便捷的数据导入 API。Zilliz Cloud 提供全面的工具和文档，帮助您高效地从 Spark 和 Databricks 等各种数据源移动数据。只需设置一个 S3 桶作为中介，并开放其对 Zilliz Cloud 账户的访问。Zilliz Cloud 的数据导入 API 会自动将 S3 存储桶中的整批数据加载到您的 Zilliz Cloud 集群。</p>
+<p><strong>准备工作</strong></p>
 <ol>
-<li><p>Load the Spark runtime by adding a jar file to your Databricks Cluster.</p>
-<p>You can install a library in different ways. This screenshot shows uploading a jar from local to the cluster. For more information, see <a href="https://docs.databricks.com/en/libraries/cluster-libraries.html">Cluster Libraries</a> in the Databricks documentation.</p>
+<li><p>通过向 Databricks 集群添加 jar 文件来加载 Spark 运行时。</p>
+<p>您可以通过不同方式安装库。该截图显示的是从本地向集群上传 jar 文件。更多信息，请参阅 Databricks 文档中的<a href="https://docs.databricks.com/en/libraries/cluster-libraries.html">集群库</a>。</p>
 <p>
-  <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.5.x/assets/install-databricks-library.png" alt="Install Databricks Library" class="doc-image" id="install-databricks-library" />
-    <span>Install Databricks Library</span>
-  </span>
-</p></li>
-<li><p>Create an S3 bucket and configure it as an external storage location for you Databricks cluster.</p>
-<p>Bulkinsert required data to be stored in a temporary bucket so that Zilliz Cloud can import the data in a batch. You can create an S3 bucket and configure it as an external location of databricks. Please refer to <a href="https://docs.databricks.com/en/sql/language-manual/sql-ref-external-locations.html">External locations</a> for details.</p></li>
-<li><p>Secure you Databricks credentials.</p>
-<p>For more details, refer to the instructions on the blog <a href="https://www.databricks.com/blog/2018/06/04/securely-managing-credentials-in-databricks.html">Securely Managing Credentials in Databricks</a>.</p></li>
+  
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/install-databricks-library.png" alt="Install Databricks Library" class="doc-image" id="install-databricks-library" />
+   </span> <span class="img-wrapper"> <span>安装 Databricks 库</span> </span></p></li>
+<li><p>创建一个 S3 bucket，并将其配置为 Databricks 集群的外部存储位置。</p>
+<p>Bulkinsert 要求将数据存储在临时存储桶中，以便 Zilliz Cloud 可以批量导入数据。您可以创建一个 S3 存储桶，并将其配置为 Databricks 的外部位置。详情请参阅<a href="https://docs.databricks.com/en/sql/language-manual/sql-ref-external-locations.html">外部位置</a>。</p></li>
+<li><p>确保 Databricks 凭据的安全。</p>
+<p>有关详细信息，请参阅博客 "<a href="https://www.databricks.com/blog/2018/06/04/securely-managing-credentials-in-databricks.html">在 Databricks 中安全管理凭据 "中</a>的说明。</p></li>
 </ol>
-<p><strong>Demo</strong></p>
-<p>Here’s a code snippet showcasing the batch data migration process. Similar to the above Milvus example, you just need to replace the credential and S3 bucket address.</p>
+<p><strong>演示</strong></p>
+<p>下面的代码片段展示了批量数据迁移过程。与上述 Milvus 示例类似，你只需替换凭证和 S3 存储桶地址。</p>
 <pre><code translate="no" class="language-scala"><span class="hljs-comment">// Write the data in batch into the Milvus bucket storage.</span>
 <span class="hljs-type">val</span> <span class="hljs-variable">outputPath</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;s3://my-temp-bucket/result&quot;</span>
 df.write
@@ -491,7 +484,7 @@ df.write
 <span class="hljs-comment">// Bulk insert Spark output files into Milvus</span>
 MilvusUtils.bulkInsertFromSpark(spark, targetMilvusOptions, outputPath, <span class="hljs-string">&quot;mjson&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Hands-on" class="common-anchor-header">Hands-on<button data-href="#Hands-on" class="anchor-icon" translate="no">
+<h2 id="Hands-on" class="common-anchor-header">实际操作<button data-href="#Hands-on" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -506,7 +499,7 @@ MilvusUtils.bulkInsertFromSpark(spark, targetMilvusOptions, outputPath, <span cl
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>To help you quickly get started with the Spark-Milvus Connector, we have prepared a notebook that walks you through both the streaming and batch data transfer processes, with Milvus and Zilliz Cloud.</p>
+    </button></h2><p>为了帮助您快速上手 Spark-Milvus Connector，我们准备了一本笔记本，指导您使用 Milvus 和 Zilliz Cloud 完成流式和批量数据传输过程。</p>
 <ul>
-<li><a href="https://zilliz.com/databricks_zilliz_demos">Spark-Milvus Connector Hands-on</a></li>
+<li><a href="https://zilliz.com/databricks_zilliz_demos">Spark-Milvus 连接器实际操作</a></li>
 </ul>

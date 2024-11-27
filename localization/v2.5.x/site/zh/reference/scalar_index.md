@@ -1,10 +1,10 @@
 ---
 id: scalar_index.md
 related_key: scalar_index
-summary: Scalar index in Milvus.
-title: Scalar Index
+summary: Milvus 的标量指数。
+title: 标量索引
 ---
-<h1 id="Scalar-Index" class="common-anchor-header">Scalar Index<button data-href="#Scalar-Index" class="anchor-icon" translate="no">
+<h1 id="Scalar-Index" class="common-anchor-header">标量索引<button data-href="#Scalar-Index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -19,8 +19,8 @@ title: Scalar Index
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Milvus supports filtered searches combining both scalar and vector fields. To enhance the efficiency of searches involving scalar fields, Milvus introduced scalar field indexing starting from version 2.1.0. This article provides an overview of scalar field indexing in Milvus, helping you understand its significance and implementation.</p>
-<h2 id="Overview" class="common-anchor-header">Overview<button data-href="#Overview" class="anchor-icon" translate="no">
+    </button></h1><p>Milvus 支持结合标量字段和向量字段的过滤搜索。为了提高涉及标量字段的搜索效率，Milvus 从 2.1.0 版开始引入了标量字段索引。本文将概述 Milvus 中的标量字段索引，帮助您了解其意义和实现方法。</p>
+<h2 id="Overview" class="common-anchor-header">概述<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -35,16 +35,14 @@ title: Scalar Index
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Once conducting vector similarity searches in Milvus, you can use logical operators to organize scalar fields into boolean expressions.</p>
-<p>When Milvus receives a search request with such a boolean expression, it parses the boolean expression into an abstract syntax tree (AST) to generate a physical plan for attribute filtering. Milvus then applies the physical plan in each segment to generate a <a href="/docs/bitset.md">bitset</a> as the filtering result and includes the result as a vector search parameter to narrow down the search scope. In this case, the speed of vector searches relies heavily on the speed of attribute filtering.</p>
+    </button></h2><p>在 Milvus 中进行向量相似性搜索时，可以使用逻辑操作符将标量字段组织成布尔表达式。</p>
+<p>当 Milvus 收到带有这种布尔表达式的搜索请求时，它会将布尔表达式解析为抽象语法树（AST），以生成用于属性筛选的物理计划。然后，Milvus 在每个分段中应用物理计划，生成一个<a href="/docs/zh/bitset.md">比特集</a>作为过滤结果，并将结果作为向量搜索参数，以缩小搜索范围。在这种情况下，向量搜索的速度在很大程度上依赖于属性过滤的速度。</p>
 <p>
-  <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.5.x/assets/scalar_index.png" alt="Attribute filtering in a segment" class="doc-image" id="attribute-filtering-in-a-segment" />
-    <span>Attribute filtering in a segment</span>
-  </span>
-</p>
-<p>Scalar field indexing is a way of ensuring the speed of attribute filtering by sorting scalar field values in a particular way to accelerate information retrieval.</p>
-<h2 id="Scalar-field-indexing-algorithms" class="common-anchor-header">Scalar field indexing algorithms<button data-href="#Scalar-field-indexing-algorithms" class="anchor-icon" translate="no">
+  
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/scalar_index.png" alt="Attribute filtering in a segment" class="doc-image" id="attribute-filtering-in-a-segment" />
+   </span> <span class="img-wrapper"> <span>分段属性过滤</span> </span></p>
+<p>标量字段索引是一种确保属性过滤速度的方法，它以特定方式对标量字段值进行排序，以加快信息检索速度。</p>
+<h2 id="Scalar-field-indexing-algorithms" class="common-anchor-header">标量字段索引算法<button data-href="#Scalar-field-indexing-algorithms" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -59,41 +57,39 @@ title: Scalar Index
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus aims to achieve low memory usage, high filtering efficiency, and short loading time with its scalar field indexing algorithms. These algorithms are categorized into two main types: <a href="#auto-indexing">auto indexing</a> and <a href="#inverted-indexing">inverted indexing</a>.</p>
-<h3 id="Auto-indexing" class="common-anchor-header">Auto indexing</h3><p>Milvus automatically creates an auto index for a scalar field based on its data type, without requiring manual intervention. Auto indexing is suitable for prefix match queries and frequent retrieval scenarios.</p>
-<p>The following table lists the data types that Milvus supports and their corresponding auto indexing algorithms.</p>
+    </button></h2><p>Milvus 的标量字段索引算法旨在实现低内存占用率、高过滤效率和短加载时间。这些算法主要分为两类：<a href="#auto-indexing">自动索引</a>和<a href="#inverted-indexing">反转索引</a>。</p>
+<h3 id="Auto-indexing" class="common-anchor-header">自动索引</h3><p>Milvus 根据标量字段的数据类型自动为其创建自动索引，无需人工干预。自动索引适用于前缀匹配查询和频繁检索。</p>
+<p>下表列出了 Milvus 支持的数据类型及其相应的自动索引算法。</p>
 <table>
 <thead>
-<tr><th>Data type</th><th>Auto indexing algorithm</th></tr>
+<tr><th>数据类型</th><th>自动索引算法</th></tr>
 </thead>
 <tbody>
-<tr><td>VARCHAR</td><td>Inverted index</td></tr>
-<tr><td>INT8</td><td>Inverted index</td></tr>
-<tr><td>INT16</td><td>Inverted index</td></tr>
-<tr><td>INT32</td><td>Inverted index</td></tr>
-<tr><td>INT64</td><td>Inverted index</td></tr>
-<tr><td>FLOAT</td><td>Inverted index</td></tr>
-<tr><td>DOUBLE</td><td>Inverted index</td></tr>
+<tr><td>VARCHAR</td><td>反转索引</td></tr>
+<tr><td>INT8</td><td>反转索引</td></tr>
+<tr><td>INT16</td><td>反转索引</td></tr>
+<tr><td>INT32</td><td>反转索引</td></tr>
+<tr><td>INT64</td><td>反转索引</td></tr>
+<tr><td>FLOAT</td><td>反转索引</td></tr>
+<tr><td>二进制</td><td>反转索引</td></tr>
 </tbody>
 </table>
-<h3 id="Inverted-indexing" class="common-anchor-header">Inverted indexing</h3><p>Inverted indexing offers a flexible way to create an index for a scalar field by manually specifying index parameters. This method works well for various scenarios, including point queries, pattern match queries, full-text searches, JSON searches, Boolean searches, and even prefix match queries.</p>
-<p>The inverted indexes implemented in Milvus are powered by <a href="https://github.com/quickwit-oss/tantivy">Tantivy</a>, a full-text search engine library. Tantivy ensures that inverted indexing in Milvus is both efficient and fast.</p>
-<p>An inverted index has two main components: a term dictionary and an inverted list. The term dictionary includes all tokenized words sorted alphabetically, while the inverted list contains the list of documents where each word appears. This setup makes point queries and range queries much faster and more efficient than brute-force searches.</p>
+<h3 id="Inverted-indexing" class="common-anchor-header">反转索引</h3><p>反转索引提供了一种灵活的方法，可通过手动指定索引参数为标量字段创建索引。这种方法适用于各种情况，包括点查询、模式匹配查询、全文检索、JSON 搜索、布尔搜索，甚至前缀匹配查询。</p>
+<p>Milvus 中实现的倒排索引由全文搜索引擎库<a href="https://github.com/quickwit-oss/tantivy">Tantivy</a> 提供支持。Tantivy 确保 Milvus 中的倒排索引既高效又快速。</p>
+<p>倒排索引有两个主要部分：术语字典和倒排列表。术语词典包括按字母顺序排列的所有标记词，而倒排列表则包含每个词出现的文档列表。这种设置使得点查询和范围查询比暴力搜索更快、更有效。</p>
 <p>
-  <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.5.x/assets/scalar_index_inverted.png" alt="Inverted index diagram" class="doc-image" id="inverted-index-diagram" />
-    <span>Inverted index diagram</span>
-  </span>
-</p>
-<p>The advantages of using an inverted index are particularly evident in the following operations:</p>
+  
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/scalar_index_inverted.png" alt="Inverted index diagram" class="doc-image" id="inverted-index-diagram" />
+   </span> <span class="img-wrapper"> <span>倒排索引图</span> </span></p>
+<p>使用倒排索引的优势在以下操作中尤为明显：</p>
 <ul>
-<li><strong>Point query</strong>: For example, when searching for documents containing the word <strong>Milvus</strong>, the process begins by checking if <strong>Milvus</strong> is present in the term dictionary. If it is not found, no documents contain the word. However, if it is found, the inverted list associated with <strong>Milvus</strong> is retrieved, indicating the documents that contain the word. This method is far more efficient than a brute-force search through a million documents, as the sorted term dictionary significantly reduces the time complexity of finding the word <strong>Milvus</strong>.</li>
-<li><strong>Range query</strong>: The efficiency of range queries, such as finding documents with words alphabetically greater than <strong>very</strong>, is also enhanced by the sorted term dictionary. This approach is more efficient than a brute-force search, providing quicker and more accurate results.</li>
+<li><strong>点查询</strong>：例如，在搜索包含单词<strong>Milvus 的</strong>文档时，首先要检查术语字典中是否存在<strong>Milvus</strong>。如果没有找到，则没有文档包含该词。但如果找到了，则会检索与<strong>Milvus</strong>相关的倒序列表，指出包含该词的文档。这种方法比在一百万个文档中进行暴力搜索要有效得多，因为排序后的术语词典大大降低了查找<strong>Milvus</strong> 这个词的时间复杂度。</li>
+<li><strong>范围查询</strong>：范围查询（如查找单词字母大于<strong>very 的</strong>文档）的效率也能通过排序术语字典得到提高。这种方法比暴力搜索更有效，能提供更快、更准确的结果。</li>
 </ul>
-<h3 id="Test-results" class="common-anchor-header">Test results</h3><p>To demonstrate the performance improvements provided by scalar indexes in Milvus, an experiment was conducted comparing the performance of several expressions using inverted indexing and brute-force search on raw data.</p>
-<p>The experiment involved testing various expressions under two conditions: with an inverted index and with a brute-force search. To ensure fairness, the same data distribution was maintained across tests, using the same collection each time. Before each test, the collection was released, and the index was dropped and rebuilt. Additionally, a warm query was performed before each test to minimize the impact of cold and hot data, and each query was executed multiple times to ensure accuracy.</p>
-<p>For a dataset of <strong>1 million</strong> records, using an <strong>inverted index</strong> can provide up to a <strong>30x</strong> performance improvement for point queries. The performance gains can be even more significant for larger datasets.</p>
-<h2 id="Performance-recommandations" class="common-anchor-header">Performance recommandations<button data-href="#Performance-recommandations" class="anchor-icon" translate="no">
+<h3 id="Test-results" class="common-anchor-header">测试结果</h3><p>为了证明标量索引在 Milvus 中提供的性能改进，我们进行了一项实验，比较了在原始数据上使用倒排索引和暴力搜索的几种表达式的性能。</p>
+<p>实验包括在两种条件下测试各种表达式：倒排索引和暴力搜索。为确保公平性，每次测试都使用相同的 Collections，保持相同的数据分布。每次测试前，都会释放 Collections，并丢弃和重建索引。此外，每次测试前都会执行一次热查询，以尽量减少冷数据和热数据的影响，并且每次查询都会执行多次，以确保准确性。</p>
+<p>对于包含<strong>100 万条</strong>记录的数据集，使用<strong>反转索引</strong>最多可将点查询的性能提高<strong>30 倍</strong>。对于更大的数据集，性能提升可能会更显著。</p>
+<h2 id="Performance-recommandations" class="common-anchor-header">性能建议<button data-href="#Performance-recommandations" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -108,41 +104,41 @@ title: Scalar Index
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>To take full advantage of Milvus’ capability in scalar field indexing and unleash its power in vector similarity searches, you may need a model to estimate the size of memory required based on the data you have.</p>
-<p>The following tables list the estimation functions for all the data types that Milvus supports.</p>
+    </button></h2><p>要充分利用 Milvus 在标量字段索引方面的能力，并释放其在向量相似性搜索方面的威力，你可能需要一个模型来根据你所拥有的数据估算所需的内存大小。</p>
+<p>下表列出了 Milvus 支持的所有数据类型的估算功能。</p>
 <ul>
-<li><p>Numeric fields</p>
+<li><p>数值字段</p>
 <table>
 <thead>
-<tr><th>Data type</th><th>Memory estimation function (MB)</th></tr>
+<tr><th>数据类型</th><th>内存估算函数（MB）</th></tr>
 </thead>
 <tbody>
-<tr><td>INT8</td><td>numOfRows * <strong>12</strong> / 1024 / 1024</td></tr>
-<tr><td>INT16</td><td>numOfRows * <strong>12</strong> / 1024 / 1024</td></tr>
-<tr><td>INT32</td><td>numOfRows * <strong>12</strong> / 1024 / 1024</td></tr>
-<tr><td>INT64</td><td>numOfRows * <strong>24</strong> / 1024 / 1024</td></tr>
-<tr><td>FLOAT32</td><td>numOfRows * <strong>12</strong> / 1024 / 1024</td></tr>
-<tr><td>DOUBLE</td><td>numOfRows * <strong>24</strong> / 1024 / 1024</td></tr>
+<tr><td>INT8</td><td>行数 *<strong>12</strong>/ 1024 / 1024</td></tr>
+<tr><td>INT16</td><td>行数 *<strong>12</strong>/ 1024 / 1024</td></tr>
+<tr><td>INT32</td><td>行数 *<strong>12</strong>/ 1024 / 1024</td></tr>
+<tr><td>INT64</td><td>行数 *<strong>24</strong>/ 1024 / 1024</td></tr>
+<tr><td>FLOAT32</td><td>行数 *<strong>12</strong>/ 1024 / 1024</td></tr>
+<tr><td>二进制</td><td>行数 *<strong>24</strong>/ 1024 / 1024</td></tr>
 </tbody>
 </table>
 </li>
-<li><p>String fields</p>
+<li><p>字符串字段</p>
 <table>
 <thead>
-<tr><th>String length</th><th>Memory estimation function (MB)</th></tr>
+<tr><th>字符串长度</th><th>内存估算函数（MB）</th></tr>
 </thead>
 <tbody>
-<tr><td>(0, 8]</td><td>numOfRows * <strong>128</strong> / 1024 / 1024</td></tr>
-<tr><td>(8, 16]</td><td>numOfRows * <strong>144</strong> / 1024 / 1024</td></tr>
-<tr><td>(16, 32]</td><td>numOfRows * <strong>160</strong> / 1024 / 1024</td></tr>
-<tr><td>(32, 64]</td><td>numOfRows * <strong>192</strong> / 1024 / 1024</td></tr>
-<tr><td>(64, 128]</td><td>numOfRows * <strong>256</strong> / 1024 / 1024</td></tr>
-<tr><td>(128, 65535]</td><td>numOfRows * <strong>strLen * 1.5</strong> / 1024 / 1024</td></tr>
+<tr><td>(0, 8]</td><td>行数 *<strong>128</strong>/ 1024 / 1024</td></tr>
+<tr><td>(8, 16]</td><td>行数 *<strong>144</strong>/ 1024 / 1024</td></tr>
+<tr><td>(16, 32]</td><td>行数 *<strong>160</strong>/ 1024 / 1024</td></tr>
+<tr><td>(32, 64]</td><td>行数 *<strong>192</strong>/ 1024 / 1024</td></tr>
+<tr><td>(64, 128]</td><td>行数 *<strong>256</strong>/ 1024 / 1024</td></tr>
+<tr><td>(128, 65535]</td><td>行数 *<strong>strLen * 1.5</strong>/ 1024 / 1024</td></tr>
 </tbody>
 </table>
 </li>
 </ul>
-<h2 id="Whats-next" class="common-anchor-header">What’s next<button data-href="#Whats-next" class="anchor-icon" translate="no">
+<h2 id="Whats-next" class="common-anchor-header">下一步<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -158,12 +154,12 @@ title: Scalar Index
         ></path>
       </svg>
     </button></h2><ul>
-<li><p>To index a scalar field, read <a href="/docs/index-scalar-fields.md">Build an Index on Scalars</a>.</p></li>
-<li><p>To learn more about the related terms and rules mentioned above, read</p>
+<li><p>要为标量字段<a href="/docs/zh/index-scalar-fields.md">建立</a>索引，请阅读<a href="/docs/zh/index-scalar-fields.md">在标量上建立索引</a>。</p></li>
+<li><p>要进一步了解上述相关术语和规则，请阅读</p>
 <ul>
-<li><a href="/docs/bitset.md">Bitset</a></li>
-<li><a href="/docs/multi-vector-search.md">Hybrid search</a></li>
-<li><a href="/docs/boolean.md">Boolean expression rules</a></li>
-<li><a href="/docs/schema.md#Supported-data-type">Supported data types</a></li>
+<li><a href="/docs/zh/bitset.md">比特集</a></li>
+<li><a href="/docs/zh/multi-vector-search.md">混合搜索</a></li>
+<li><a href="/docs/zh/boolean.md">布尔表达式规则</a></li>
+<li><a href="/docs/zh/schema.md#Supported-data-type">支持的数据类型</a></li>
 </ul></li>
 </ul>

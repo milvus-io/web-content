@@ -1,13 +1,11 @@
 ---
 id: funnel_search_with_matryoshka.md
 summary: >-
-  In this notebook, we examine how to use Matryoshka embeddings with Milvus for
-  semantic search. We illustrate an algorithm called "funnel search" that allows
-  us to perform similarity search over a small subset of our embedding
-  dimensions without a drastic drop in recall.
-title: Funnel Search with Matryoshka Embeddings
+  在本笔记本中，我们将研究如何将 Matryoshka 嵌入与 Milvus 一起用于语义搜索。我们展示了一种名为 "漏斗搜索
+  "的算法，它允许我们在嵌入维度的一小部分子集上执行相似性搜索，而不会导致召回率急剧下降。
+title: 使用 Matryoshka 嵌入进行漏斗搜索
 ---
-<h1 id="Funnel-Search-with-Matryoshka-Embeddings" class="common-anchor-header">Funnel Search with Matryoshka Embeddings<button data-href="#Funnel-Search-with-Matryoshka-Embeddings" class="anchor-icon" translate="no">
+<h1 id="Funnel-Search-with-Matryoshka-Embeddings" class="common-anchor-header">使用 Matryoshka 嵌入进行漏斗搜索<button data-href="#Funnel-Search-with-Matryoshka-Embeddings" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -22,12 +20,12 @@ title: Funnel Search with Matryoshka Embeddings
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>When building efficient vector search systems, one key challenge is managing storage costs while maintaining acceptable latency and recall. Modern embedding models output vectors with hundreds or thousands of dimensions, creating significant storage and computational overhead for the raw vector and index.</p>
-<p>Traditionally, the storage requirements are reduced by applying a quantization or dimensionality reduction method just before building the index. For instance, we can save storage by lowering the precision using Product Quantization (PQ) or the number of dimensions using Principal Component Analysis (PCA). These methods analyze the entire vector set to find a more compact one that maintains the semantic relationships between vectors.</p>
-<p>While effective, these standard approaches reduce precision or dimensionality only once and at a single scale. But what if we could maintain multiple layers of detail simultaneously, like a pyramid of increasingly precise representations?</p>
-<p>Enter Matryoshka embeddings. Named after Russian nesting dolls (see illustration), these clever constructs embed multiple scales of representation within a single vector. Unlike traditional post-processing methods, Matryoshka embeddings learn this multi-scale structure during the initial training process. The result is remarkable: not only does the full embedding capture input semantics, but each nested subset prefix (first half, first quarter, etc.) provides a coherent, if less detailed, representation.</p>
+    </button></h1><p>在构建高效的向量搜索系统时，一个关键的挑战是管理存储成本，同时保持可接受的延迟和召回率。现代 Embeddings 模型输出的向量有成百上千个维度，这给原始向量和索引带来了巨大的存储和计算开销。</p>
+<p>传统方法是在建立索引前应用量化或降维方法来降低存储需求。例如，我们可以使用乘积量化（PQ）降低精度，或使用主成分分析（PCA）降低维数，从而节省存储空间。这些方法会对整个向量集进行分析，以找到一个能保持向量间语义关系的更紧凑的向量集。</p>
+<p>这些标准方法虽然有效，但只能在单一尺度上降低一次精度或维度。但是，如果我们能同时保持多层细节，就像一个精确度越来越高的表征金字塔呢？</p>
+<p>这就是 Matryoshka Embeddings。这些巧妙的构造以俄罗斯嵌套娃娃命名（见插图），将多级表示嵌入到单个向量中。与传统的后处理方法不同，Matryoshka 嵌入在初始训练过程中就能学习这种多尺度结构。结果非常显著：不仅完整的 Embeddings 能够捕捉输入语义，而且每个嵌套的子集前缀（前半部分、前四分之一等）都提供了一个连贯的、即使不那么详细的表示。</p>
 <div style='margin: auto; width: 50%;'><img translate="no" src='/docs/v2.5.x/assets/funnel-search.png' width='100%'></div>
-<p>In this notebook, we examine how to use Matryoshka embeddings with Milvus for semantic search. We illustrate an algorithm called “funnel search” that allows us to perform similarity search over a small subset of our embedding dimensions without a drastic drop in recall.</p>
+<p>在本笔记本中，我们将研究如何将 Matryoshka 嵌入与 Milvus 一起用于语义搜索。我们展示了一种名为 "漏斗搜索 "的算法，它允许我们在嵌入维度的一小部分子集上执行相似性搜索，而不会导致召回率急剧下降。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> functools
 
 <span class="hljs-keyword">from</span> datasets <span class="hljs-keyword">import</span> load_dataset
@@ -41,7 +39,7 @@ title: Funnel Search with Matryoshka Embeddings
 <span class="hljs-keyword">import</span> torch.<span class="hljs-property">nn</span>.<span class="hljs-property">functional</span> <span class="hljs-keyword">as</span> F
 <span class="hljs-keyword">from</span> tqdm <span class="hljs-keyword">import</span> tqdm
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Load-Matryoshka-Embedding-Model" class="common-anchor-header">Load Matryoshka Embedding Model<button data-href="#Load-Matryoshka-Embedding-Model" class="anchor-icon" translate="no">
+<h2 id="Load-Matryoshka-Embedding-Model" class="common-anchor-header">加载 Matryoshka 嵌入模型<button data-href="#Load-Matryoshka-Embedding-Model" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -56,7 +54,7 @@ title: Funnel Search with Matryoshka Embeddings
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Instead of using a standard embedding model such as <a href="https://huggingface.co/sentence-transformers/all-MiniLM-L12-v2"><code translate="no">sentence-transformers/all-MiniLM-L12-v2</code></a>, we use <a href="https://huggingface.co/nomic-ai/nomic-embed-text-v1">a model from Nomic</a> trained especially to produce Matryoshka embeddings.</p>
+    </button></h2><p>我们不使用标准的嵌入模型，如 <a href="https://huggingface.co/sentence-transformers/all-MiniLM-L12-v2"><code translate="no">sentence-transformers/all-MiniLM-L12-v2</code></a>等标准嵌入<a href="https://huggingface.co/nomic-ai/nomic-embed-text-v1">模型</a>，我们使用了<a href="https://huggingface.co/nomic-ai/nomic-embed-text-v1">Nomic</a>专门为生成 Matryoshka 嵌入而训练<a href="https://huggingface.co/nomic-ai/nomic-embed-text-v1">的模型</a>。</p>
 <pre><code translate="no" class="language-python">model = SentenceTransformer(
     <span class="hljs-comment"># Remove &#x27;device=&#x27;mps&#x27; if running on non-Mac device</span>
     <span class="hljs-string">&quot;nomic-ai/nomic-embed-text-v1.5&quot;</span>,
@@ -66,7 +64,7 @@ title: Funnel Search with Matryoshka Embeddings
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">&lt;All keys matched successfully&gt;
 </code></pre>
-<h2 id="Loading-Dataset-Embedding-Items-and-Building-Vector-Database" class="common-anchor-header">Loading Dataset, Embedding Items, and Building Vector Database<button data-href="#Loading-Dataset-Embedding-Items-and-Building-Vector-Database" class="anchor-icon" translate="no">
+<h2 id="Loading-Dataset-Embedding-Items-and-Building-Vector-Database" class="common-anchor-header">加载数据集、嵌入项目和构建向量数据库<button data-href="#Loading-Dataset-Embedding-Items-and-Building-Vector-Database" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -81,7 +79,7 @@ title: Funnel Search with Matryoshka Embeddings
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>The following code is a modification of that from the documentation page <a href="https://milvus.io/docs/integrate_with_sentencetransformers.md">“Movie Search with Sentence Transformers and Milvus”</a>. First, we load the dataset from HuggingFace. It contains around 35k entries, each corresponding to a movie having a Wikipedia article. We will use the <code translate="no">Title</code> and <code translate="no">PlotSummary</code> fields in this example.</p>
+    </button></h2><p>以下代码是对文档页面<a href="https://milvus.io/docs/integrate_with_sentencetransformers.md">"使用句子变形器和 Milvus 进行电影搜索 "中</a>的代码的修改<a href="https://milvus.io/docs/integrate_with_sentencetransformers.md">。</a>首先，我们从 HuggingFace 加载数据集。它包含约 35k 个条目，每个条目对应一部有维基百科文章的电影。我们将在本例中使用<code translate="no">Title</code> 和<code translate="no">PlotSummary</code> 字段。</p>
 <pre><code translate="no" class="language-python">ds = load_dataset(<span class="hljs-string">&quot;vishnupriyavr/wiki-movie-plots-with-summaries&quot;</span>, <span class="hljs-built_in">split</span>=<span class="hljs-string">&quot;train&quot;</span>)
 <span class="hljs-built_in">print</span>(ds)
 <button class="copy-code-btn"></button></code></pre>
@@ -90,7 +88,7 @@ title: Funnel Search with Matryoshka Embeddings
     num_rows: 34886
 })
 </code></pre>
-<p>Next, we connect to a Milvus Lite database, specify the data schema, and create a collection with this schema. We will store both the unnormalized embedding and the first sixth of the embedding in separate fields. The reason for this is that we need the first 1/6th of the Matryoshka embedding for performing a similarity search, and the remaining 5/6ths of the embeddings for reranking and improving the search results.</p>
+<p>接下来，我们连接到 Milvus Lite 数据库，指定数据 Schema，并用此 Schema 创建一个 Collections。我们将在不同字段中存储非规范化嵌入和嵌入的前六分之一。这样做的原因是，我们需要前 1/6 的 Matryoshka 嵌入来执行相似性搜索，而其余 5/6 的嵌入则用于重新排序和改进搜索结果。</p>
 <pre><code translate="no" class="language-python">embedding_dim = <span class="hljs-number">768</span>
 search_dim = <span class="hljs-number">128</span>
 collection_name = <span class="hljs-string">&quot;movie_embeddings&quot;</span>
@@ -109,9 +107,9 @@ fields = [
 schema = CollectionSchema(fields=fields, enable_dynamic_field=<span class="hljs-literal">False</span>)
 client.create_collection(collection_name=collection_name, schema=schema)
 <button class="copy-code-btn"></button></code></pre>
-<p>Milvus does not currently support searching over subsets of embeddings, so we break the embeddings into two parts: the head represents the initial subset of the vector to index and search, and the tail is the remainder. The model is trained for cosine distance similarity search, so we normalize the head embeddings. However, in order to calculate similarities for larger subsets later on, we need to store the norm of the head embedding, so we can unnormalize it before joining to the tail.</p>
-<p>To perform search via the first 1/6th of the embedding, we will need to create a vector search index over the <code translate="no">head_embedding</code> field. Later on, we will compare the results of “funnel search” with a regular vector search, and so build a search index over the full embedding also.</p>
-<p><em>Importantly, we use the <code translate="no">COSINE</code> rather than the <code translate="no">IP</code> distance metric, because otherwise we would need to keep track of the embedding norms, which would complicate the implementation (this will make more sense once the funnel search algorithm has been described).</em></p>
+<p>Milvus 目前不支持对嵌入式子集进行搜索，因此我们将嵌入式分成两部分：头部代表要索引和搜索的向量的初始子集，尾部是剩余部分。该模型是为余弦距离相似性搜索而训练的，因此我们对头部嵌入进行了归一化处理。不过，为了以后计算更大子集的相似性，我们需要存储头部嵌入的规范，因此可以在连接到尾部之前对其进行非规范化处理。</p>
+<p>为了通过前 1/6 的嵌入执行搜索，我们需要在<code translate="no">head_embedding</code> 字段上创建一个向量搜索索引。稍后，我们将比较 "漏斗搜索 "和常规向量搜索的结果，因此也要在全嵌入上建立一个搜索索引。</p>
+<p><em>重要的是，我们使用的是<code translate="no">COSINE</code> 而不是<code translate="no">IP</code> 距离度量，因为否则我们就需要跟踪嵌入规范，这将使实现过程变得复杂（一旦介绍了漏斗搜索算法，这一点将更有意义）。</em></p>
 <pre><code translate="no" class="language-python">index_params = client.<span class="hljs-title function_">prepare_index_params</span>()
 index_params.<span class="hljs-title function_">add_index</span>(
     field_name=<span class="hljs-string">&quot;head_embedding&quot;</span>, index_type=<span class="hljs-string">&quot;FLAT&quot;</span>, metric_type=<span class="hljs-string">&quot;COSINE&quot;</span>
@@ -119,7 +117,7 @@ index_params.<span class="hljs-title function_">add_index</span>(
 index_params.<span class="hljs-title function_">add_index</span>(field_name=<span class="hljs-string">&quot;embedding&quot;</span>, index_type=<span class="hljs-string">&quot;FLAT&quot;</span>, metric_type=<span class="hljs-string">&quot;COSINE&quot;</span>)
 client.<span class="hljs-title function_">create_index</span>(collection_name, index_params)
 <button class="copy-code-btn"></button></code></pre>
-<p>Finally, we encode the plot summaries for all 35k movies and enter the corresponding embeddings in to the database.</p>
+<p>最后，我们对所有 35k 部电影的情节摘要进行编码，并将相应的 Embeddings 输入数据库。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">for</span> batch <span class="hljs-keyword">in</span> tqdm(ds.batch(batch_size=<span class="hljs-number">512</span>)):
     <span class="hljs-comment"># This particular model requires us to prefix &#x27;search_document:&#x27; to stored entities</span>
     plot_summary = [<span class="hljs-string">&quot;search_document: &quot;</span> + x.strip() <span class="hljs-keyword">for</span> x <span class="hljs-keyword">in</span> batch[<span class="hljs-string">&quot;PlotSummary&quot;</span>]]
@@ -140,7 +138,7 @@ client.<span class="hljs-title function_">create_index</span>(collection_name, i
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">100%|██████████| 69/69 [05:57&lt;00:00,  5.18s/it]
 </code></pre>
-<h2 id="Performing-Funnel-Search" class="common-anchor-header">Performing Funnel Search<button data-href="#Performing-Funnel-Search" class="anchor-icon" translate="no">
+<h2 id="Performing-Funnel-Search" class="common-anchor-header">执行漏斗搜索<button data-href="#Performing-Funnel-Search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -155,7 +153,7 @@ client.<span class="hljs-title function_">create_index</span>(collection_name, i
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Let’s now implement a “funnel search” using the first 1/6th of the Matryoshka embedding dimensions. I have three movies in mind for retrieval and have produced my own plot summary for querying the database. We embed the queries, then perform a vector search on the <code translate="no">head_embedding</code> field, retrieving 128 result candidates.</p>
+    </button></h2><p>现在，让我们使用 Matryoshka 嵌入维数的前 1/6 来执行 "漏斗搜索"。我有三部要检索的电影，并制作了自己的情节摘要用于查询数据库。我们嵌入查询，然后在<code translate="no">head_embedding</code> 字段上执行向量搜索，检索出 128 个结果候选。</p>
 <pre><code translate="no" class="language-python">queries = [
     <span class="hljs-string">&quot;An archaeologist searches for ancient artifacts while fighting Nazis.&quot;</span>,
     <span class="hljs-string">&quot;A teenager fakes illness to get off school and have adventures with two friends.&quot;</span>,
@@ -185,7 +183,7 @@ res = client.search(
     output_fields=[<span class="hljs-string">&quot;title&quot;</span>, <span class="hljs-string">&quot;head_embedding&quot;</span>, <span class="hljs-string">&quot;embedding&quot;</span>],
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>At this point, we have performed search over a much smaller vector space, and are therefore likely to have lowered latency and lessened storage requirements for the index relative to search over the full space. Let’s examine the top 5 matches for each query:</p>
+<p>此时，我们已经在更小的向量空间上执行了搜索，因此相对于在完整空间上的搜索，可能会降低延迟并减少对索引的存储要求。让我们来看看每个查询的前 5 个匹配结果：</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">for</span> query, hits <span class="hljs-keyword">in</span> <span class="hljs-built_in">zip</span>(queries, res):
     rows = [x[<span class="hljs-string">&quot;entity&quot;</span>] <span class="hljs-keyword">for</span> x <span class="hljs-keyword">in</span> hits][:<span class="hljs-number">5</span>]
 
@@ -219,8 +217,8 @@ The Ref
 Impact
 The House in Marsh Road
 </code></pre>
-<p>As we can see, recall has suffered as a consequence of truncating the embeddings during search. Funnel search fixes this with a clever trick: we can use the remainder of the embedding dimensions to rerank and prune our candidate list to recover retrieval performance without running any additional expensive vector searches.</p>
-<p>For ease of exposition of the funnel search algorithm, we convert the Milvus search hits for each query into a Pandas dataframe.</p>
+<p>我们可以看到，由于在搜索过程中截断了 Embeddings，因此召回率受到了影响。漏斗搜索通过一个巧妙的技巧解决了这一问题：我们可以利用剩余的嵌入维度对候选列表进行重新排序和修剪，从而恢复检索性能，而无需运行任何额外的昂贵向量搜索。</p>
+<p>为了便于阐述漏斗搜索算法，我们将每个查询的 Milvus 搜索命中率转换为 Pandas 数据帧。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">hits_to_dataframe</span>(<span class="hljs-params">hits: pymilvus.client.abstract.Hits</span>) -&gt; pd.DataFrame:
     <span class="hljs-string">&quot;&quot;&quot;
     Convert a Milvus search result to a Pandas dataframe. This function is specific to our data schema.
@@ -235,8 +233,8 @@ The House in Marsh Road
 
 dfs = [hits_to_dataframe(hits) <span class="hljs-keyword">for</span> hits <span class="hljs-keyword">in</span> res]
 <button class="copy-code-btn"></button></code></pre>
-<p>Now, to perform funnel search we iterate over the increasingly larger subsets of the embeddings. At each iteration, we rerank the candidates according to the new similarities and prune some fraction of the lowest ranked ones.</p>
-<p>To make this concrete, from the previous step we have retrieved 128 candidates using 1/6 of the embedding and query dimensions. The first step in performing funnel search is to recalculate the similarities between the queries and candidates using <em>the first 1/3 of the dimensions</em>. The bottom 64 candidates are pruned. Then we repeat this process with <em>the first 2/3 of the dimensions</em>, and then <em>all of the dimensions</em>, successively pruning to 32 and 16 candidates.</p>
+<p>现在，为了执行漏斗搜索，我们对嵌入的越来越大的子集进行迭代。在每次迭代中，我们都会根据新的相似度对候选项进行重新排序，并删除部分排序最低的候选项。</p>
+<p>具体来说，在上一步中，我们使用 1/6 的嵌入维度和查询维度检索到 128 个候选项。执行漏斗搜索的第一步是使用<em>前 1/3 维度</em>重新计算查询和候选项之间的相似度。我们会剪切掉最下面的 64 个候选项。然后，我们使用<em>前 2/3 个维度</em>重复这一过程，然后使用<em>所有维度</em>，依次剪切到 32 个和 16 个候选<em>维度</em>。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># An optimized implementation would vectorize the calculation of similarity scores across rows (using a matrix)</span>
 <span class="hljs-keyword">def</span> <span class="hljs-title function_">calculate_score</span>(<span class="hljs-params">row, query_emb=<span class="hljs-literal">None</span>, dims=<span class="hljs-number">768</span></span>):
     emb = F.normalize(row[<span class="hljs-string">&quot;embedding&quot;</span>][:dims], dim=-<span class="hljs-number">1</span>)
@@ -299,8 +297,8 @@ A young couple with a kid look after a hotel during winter and the husband goes 
 12         Home Alone
 Name: title, dtype: object 
 </code></pre>
-<p>We have been able to restore recall without performing any additional vector searches! Qualitatively, these results seem to have higher recall for “Raiders of the Lost Ark” and “The Shining” than the standard vector search in the tutorial, <a href="https://milvus.io/docs/integrate_with_sentencetransformers.md">“Movie Search using Milvus and Sentence Transformers”</a>, which uses a different embedding model. However, it is unable to find &quot;Ferris Bueller’s Day Off&quot;, which we will return to later in the notebook. (See the paper <a href="https://arxiv.org/abs/2205.13147">Matryoshka Representation Learning</a> for more quantitative experiments and benchmarking.)</p>
-<h2 id="Comparing-Funnel-Search-to-Regular-Search" class="common-anchor-header">Comparing Funnel Search to Regular Search<button data-href="#Comparing-Funnel-Search-to-Regular-Search" class="anchor-icon" translate="no">
+<p>我们已经能够在不执行任何额外向量搜索的情况下恢复召回率！从质量上看，这些结果对 "夺宝奇兵 "和 "闪灵 "<a href="https://milvus.io/docs/integrate_with_sentencetransformers.md">的</a>召回率似乎高于教程 "<a href="https://milvus.io/docs/integrate_with_sentencetransformers.md">使用 Milvus 和 Sentence Transformers 进行电影搜索</a>"中的标准向量搜索，后者使用了不同的嵌入模型。然而，它却无法找到我们将在本手册稍后讨论的 &quot;Ferris Bueller's Day Off&quot;（《Ferris Bueller's Day Off》）。(有关更多定量实验和基准测试，请参阅论文<a href="https://arxiv.org/abs/2205.13147">Matryoshka Representation Learning</a>）。</p>
+<h2 id="Comparing-Funnel-Search-to-Regular-Search" class="common-anchor-header">比较漏斗搜索和常规搜索<button data-href="#Comparing-Funnel-Search-to-Regular-Search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -315,7 +313,7 @@ Name: title, dtype: object
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Let’s compare the results of our funnel search to a standard vector search <em>on the same dataset with the same embedding model</em>. We perform a search on the full embeddings.</p>
+    </button></h2><p>让我们来比较一下我们的漏斗搜索和标准向量搜索<em>在相同嵌入模型的相同数据集上的</em>结果。我们对全嵌入进行搜索。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Search on entire embeddings</span>
 res = client.search(
     collection_name=collection_name,
@@ -358,8 +356,8 @@ Fast and Loose
 Killing Ground
 Home Alone
 </code></pre>
-<p>With the exception of the results for &quot;A teenager fakes illness to get off school…&quot;, the results under funnel search are almost identical to the full search, even though the funnel search was performed on a search space of 128 dimensions vs 768 dimensions for the regular one.</p>
-<h2 id="Investigating-Funnel-Search-Recall-Failure-for-Ferris-Buellers-Day-Off" class="common-anchor-header">Investigating Funnel Search Recall Failure for Ferris Bueller’s Day Off<button data-href="#Investigating-Funnel-Search-Recall-Failure-for-Ferris-Buellers-Day-Off" class="anchor-icon" translate="no">
+<p>除了 &quot;一名青少年为逃学而装病...... &quot;的搜索结果外，漏斗搜索的结果与完全搜索的结果几乎完全相同，尽管漏斗搜索是在 128 维的搜索空间上进行的，而普通搜索是在 768 维的搜索空间上进行的。</p>
+<h2 id="Investigating-Funnel-Search-Recall-Failure-for-Ferris-Buellers-Day-Off" class="common-anchor-header">调查《费里斯-布勒的一天》漏斗搜索召回失败的原因<button data-href="#Investigating-Funnel-Search-Recall-Failure-for-Ferris-Buellers-Day-Off" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -374,7 +372,7 @@ Home Alone
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Why didn’t funnel search succeed in retrieving Ferris Bueller’s Day Off? Let’s examine whether or not it was in the original candidate list or was mistakenly filtered out.</p>
+    </button></h2><p>为什么漏斗搜索没有成功检索到《费里斯-布勒的一天》？让我们来看看它是否在原始候选列表中，还是被错误地过滤掉了。</p>
 <pre><code translate="no" class="language-python">queries2 = [
     <span class="hljs-string">&quot;A teenager fakes illness to get off school and have adventures with two friends.&quot;</span>
 ]
@@ -410,7 +408,7 @@ res = client.search(
 <pre><code translate="no">Query: A teenager fakes illness to get off school and have adventures with two friends.
 Row 228: Ferris Bueller's Day Off
 </code></pre>
-<p>We see that the issue was that the initial candidate list was not large enough, or rather, the desired hit is not similar enough to the query at the highest level of granularity. Changing it from <code translate="no">128</code> to <code translate="no">256</code> results in successful retrieval. <em>We should form a rule-of-thumb to set the number of candidates on a held-out set to empirically evaluate the trade-off between recall and latency.</em></p>
+<p>我们发现，问题在于初始候选列表不够大，或者说，在最高粒度级别上，所需的点击与查询不够相似。将其从<code translate="no">128</code> 改为<code translate="no">256</code> 后，检索成功了。<em>我们应该形成一条经验法则，即通过经验评估召回率和延迟之间的权衡，来设定保留集上的候选项数量。</em></p>
 <pre><code translate="no" class="language-python">dfs = [hits_to_dataframe(hits) <span class="hljs-keyword">for</span> hits <span class="hljs-keyword">in</span> res]
 
 dfs_results = [
@@ -430,7 +428,7 @@ On the Edge of Innocence
               Unfriended
               Simon Says 
 </code></pre>
-<h2 id="Does-the-order-matter-Prefix-vs-suffix-embeddings" class="common-anchor-header">Does the order matter? Prefix vs suffix embeddings.<button data-href="#Does-the-order-matter-Prefix-vs-suffix-embeddings" class="anchor-icon" translate="no">
+<h2 id="Does-the-order-matter-Prefix-vs-suffix-embeddings" class="common-anchor-header">顺序重要吗？前缀与后缀嵌入。<button data-href="#Does-the-order-matter-Prefix-vs-suffix-embeddings" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -445,7 +443,7 @@ On the Edge of Innocence
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>The model was trained to perform well matching recursively smaller prefixes of the embeddings. Does the order of the dimensions we use matter? For instance, could we also take subsets of the embeddings that are suffixes? In this experiment, we reverse the order of the dimensions in the Matryoshka embeddings and perform a funnel search.</p>
+    </button></h2><p>经过训练，该模型能够很好地匹配递归较小的前缀嵌入。我们使用的维度顺序是否重要？例如，我们是否也可以提取后缀嵌入的子集？在本实验中，我们颠倒了 Matryoshka 嵌入中维度的顺序，并进行漏斗搜索。</p>
 <pre><code translate="no" class="language-python">client = MilvusClient(uri=<span class="hljs-string">&quot;./wikiplots-matryoshka-flipped.db&quot;</span>)
 
 fields = [
@@ -547,8 +545,8 @@ Leopard in the Snow
          Unfaithful
      Always a Bride 
 </code></pre>
-<p>Recall is much poorer than funnel search or regular search as expected (the embedding model was trained by contrastive learning on prefixes of the embedding dimensions, not suffixes).</p>
-<h2 id="Summary" class="common-anchor-header">Summary<button data-href="#Summary" class="anchor-icon" translate="no">
+<p>正如预期的那样，召回率比漏斗搜索或常规搜索要差得多（嵌入模型是通过对嵌入维度的前缀而非后缀进行对比学习来训练的）。</p>
+<h2 id="Summary" class="common-anchor-header">总结<button data-href="#Summary" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -563,8 +561,8 @@ Leopard in the Snow
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Here is a comparison of our search results across methods:</p>
+    </button></h2><p>下面是各种方法的搜索结果对比：</p>
 <div style='margin: auto; width: 80%;'><img translate="no" src='/docs/v2.5.x/assets/results-raiders-of-the-lost-ark.png' width='100%'></div>
 <div style='margin: auto; width: 100%;'><img translate="no" src='/docs/v2.5.x/assets/results-ferris-buellers-day-off.png' width='100%'></div>
 <div style='margin: auto; width: 80%;'><img translate="no" src='/docs/v2.5.x/assets/results-the-shining.png' width='100%'></div>
-We have shown how to use Matryoshka embeddings with Milvus for performing a more efficient semantic search algorithm called "funnel search." We also explored the importance of the reranking and pruning steps of the algorithm, as well as a failure mode when the initial candidate list is too small. Finally, we discussed how the order of the dimensions is important when forming sub-embeddings - it must be in the same way for which the model was trained. Or rather, it is only because the model was trained in a certain way that prefixes of the embeddings are meaningful. Now you know how to implement Matryoshka embeddings and funnel search to reduce the storage costs of semantic search without sacrificing too much retrieval performance!
+我们展示了如何使用 Matryoshka 嵌入和 Milvus 来执行一种更高效的语义搜索算法，即 "漏斗搜索"。我们还探讨了该算法的 Rerankers 和剪枝步骤的重要性，以及当初始候选列表太小时的失败模式。最后，我们讨论了在形成子嵌入时，维度的顺序是如何重要的--它必须与模型训练时的顺序一致。或者说，只有因为模型是以某种方式训练的，嵌入的前缀才有意义。现在你知道如何实现 Matryoshka 嵌入和漏斗搜索，以降低语义搜索的存储成本，同时又不会牺牲太多检索性能了吧！

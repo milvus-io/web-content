@@ -1,12 +1,10 @@
 ---
 id: roadmap.md
-title: Milvus Roadmap
+title: Milvus 路线图
 related_key: Milvus roadmap
-summary: >-
-  Milvus is an open-source vector database built to power AI applications. Here
-  is our roadmap to guide our development.
+summary: Milvus 是一个开源向量数据库，旨在为人工智能应用提供动力。以下是我们的发展路线图。
 ---
-<h1 id="Milvus-Roadmap" class="common-anchor-header">Milvus Roadmap<button data-href="#Milvus-Roadmap" class="anchor-icon" translate="no">
+<h1 id="Milvus-Roadmap" class="common-anchor-header">Milvus 路线图<button data-href="#Milvus-Roadmap" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -21,8 +19,8 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Welcome to the Milvus Roadmap! Join us on our continuous journey to enhance and evolve Milvus. We are thrilled to share our accomplishments, future plans, and our vision for what lies ahead. Our roadmap is more than a list of upcoming features—it reflects our commitment to innovation and our dedication to working with the community. We invite you to delve into our roadmap, provide your feedback, and help shape the future of Milvus!</p>
-<h2 id="Roadmap" class="common-anchor-header">Roadmap<button data-href="#Roadmap" class="anchor-icon" translate="no">
+    </button></h1><p>欢迎访问 Milvus 路线图！加入我们不断增强和发展 Milvus 的旅程。我们很高兴与大家分享我们的成就、未来计划以及对未来的展望。我们的路线图不仅仅是一份即将推出的功能列表，它还反映了我们对创新的承诺以及与社区合作的决心。我们邀请您深入了解我们的路线图，提供您的反馈意见，帮助塑造 Milvus 的未来！</p>
+<h2 id="Roadmap" class="common-anchor-header">路线图<button data-href="#Roadmap" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -40,46 +38,46 @@ summary: >-
     </button></h2><table>
     <thead>
         <tr>
-            <th>Category</th>
-            <th>Milvus 2.5.0 (Achieved in recent releases)</th>
-            <th>Next Release (Middle of CY25)</th>
-            <th>Future Roadmap (Within 1 year)</th>
+            <th>类别</th>
+            <th>Milvus 2.5.0 (在最近的版本中实现)</th>
+            <th>下一个版本（25 年中期）</th>
+            <th>未来路线图（1 年内）</th>
         </tr>
     </thead>
     <tbody>
         <tr>
-            <td><strong>AI-Driven Unstructured Data Processing</strong><br/><i>Strengthening the ability to process and analyze unstructured data using AI models and advanced technologies.</i></td>
-            <td><strong>Full Text Search</strong><br/><i>Support full text search with Sparse-BM25. The new API accepts text as input and automatically generates sparse vector inside Milvus</i><br/><br/><strong>Sparse Vector(GA)</strong><br/><i>Support efficient storage and indexing method for sparse vector</i><br/></td>
-            <td><strong>Data-In and Data-Out</strong><br/><i>Support major model services to ingest original data</i><br/><br/><strong>Advanced Reranker</strong><br/><i>Support model-based rerankers and user-defined scoring function</i><br/><br/><strong>JSON Enhancement</strong><br/><i>JSON indexing and parsing to accelerate processing</i></td>
-            <td><strong>Original Data-In and Data-Out</strong><br/><i>Support Blob and url reference to process original data</i><br/><br/><strong>Support More Data Types</strong><br/><i>e.g. Datetime, Map, GIS</i><br/><br/><strong>Support Tensors</strong><br/><i>Support list of vectors, typical usage like Colbert, Copali etc.</i></td>
+            <td><strong>人工智能驱动的非结构化数据处理</strong><br/><i>利用人工智能模型和先进技术加强对非结构化数据的处理和分析能力。</i></td>
+            <td><strong>全文搜索</strong><br/><i>利用 Sparse-BM25 支持全文搜索。新的 API 接受文本作为输入，并在 Milvus 内部自动生成稀疏向量</i><br/><br/><strong>Sparse Vector(GA)</strong><br/><i>支持稀疏向量的高效存储和索引方法</i><br/></td>
+            <td><strong>数据输入和数据输出</strong><br/><i>支持主要模型服务，以摄取原始数据</i><br/><br/><strong>高级</strong><i>Reranker</i><br/><i>支持基于模型的 Reranker 和用户自定义评分函数</i><br/><br/><strong>JSON 增强</strong><br/><i>JSON 索引和解析，以加快处理速度</i></td>
+            <td><strong>原始数据输入和数据输出</strong><br/><i>支持 Blob 和 url 引用以处理原始数据</i><br/><br/><strong>支持更多数据类型</strong><br/> 例如<i>：Datetime、Map、GIS</i><br/><br/><strong>支持</strong><i>向量</i><br/><i>支持向量列表，典型用法如 Colbert、Copali 等。</i></td>
         </tr>
         <tr>
-            <td><strong>Search Quality & Performance</strong><br/><i>Deliver accurate, relevant, and fast results by optimizing architecture, algorithms and APIs</i></td>
-            <td><strong>Text Match Function</strong><br/><i>Quickly filter keywords/tokens in text/varchar</i><br/><br/><strong>Grouping Search Enhancement</strong><br/><i>Introduce group_size and add group by support in hybrid search</i><br/><br/><strong>Bitmap Index & Inverted Index</strong><br/><i>Accelerate filtering on tags</i></td>
-            <td><strong>Advanced Match</strong><br/><i>e.g. Match Phrase, Fuzzy Match, and more tokenizers</i><br/><br/><strong>Aggregations</strong><br/><i>Scalar field aggregations, e.g. min, max, count, distinct.</i><br/></td>
-            <td><strong>Partial Update</strong><br/><i>Support updates to a specific field's value</i><br/><br/><strong>Sorting Capability</strong><br/><i>Sort by scalar fields during execution</i><br/><br/><strong>Support Data Clustering</strong><br/><i>Data co-locality</i></td>
+            <td><strong>搜索质量和性能</strong><br/><i>通过优化架构、算法和 API 提供准确、相关和快速的</i><strong>搜索</strong><i>结果</i></td>
+            <td><strong>文本匹配功能</strong><br/><i>快速过滤文本/varchar 格式的关键字/</i><i>标记</i><br/><br/><strong>增强分组搜索</strong><br/><i>在混合搜索中引入分组_大小并添加分组支持</i><br/><br/> 位图<strong>索引和反向索引</strong><br/><i>加快标签过滤速度</i></td>
+            <td><strong>高级匹配</strong><br/><i>，例如匹配短语、模糊匹配和更多标记符</i><br/><br/> 聚合<br/><i>标量字段聚合，例如最小、最大、计数、不同。</i><br/></td>
+            <td><strong>部分更新</strong><br/><i>支持对特定字段值的更新</i><br/><br/><strong>排序功能</strong><br/><i>在执行过程中按标量字段</i>排序<br/><br/><strong>支持数据聚类</strong><br/><i>数据共定位</i></td>
         </tr>
         <tr>
-            <td><strong>Rich Functionality & Management</strong><br/><i>Developer-friendly and robust data management features</i></td>
-            <td><strong>Support CSV files in data import</strong><br/><i>Bulkinsert supports CSV format</i><br/><br/><strong>Support Null and Default Value</strong><br/><i>Null and Default types make importing data from other DBMS easier</i><br/><br/><strong>Milvus WebUI (Beta)</strong><br/><i>Visual management tools for DBAs</i></td>
-            <td><strong>Primary Key Deduplication</strong><br/><i>By using the global pk index</i><br/><br/><strong>Online Schema Change</strong><br/><i>e.g. Add/delete field, modify varchar length</i><br/><br/><strong>Data Versioning & Restore</strong><br/><i>Support data versioning by snapshot</i></td>
-            <td><strong>Rust and C++ SDK</strong><br/><i>Support more clients</i><br/><br/><strong>Support UDF </strong><br/><i>User-defined function</i></td>
+            <td><strong>丰富的功能和管理</strong><br/><i>对开发人员友好的强大数据管理功能</i></td>
+            <td><strong>在数据导入中支持 CSV 文件</strong><br/><i>Bulkinsert 支持 CSV 格式</i><br/><br/><strong>支持空值和默认值</strong><br/><i>空值和默认值类型使从其他 DBMS 导入数据更加容易</i><br/><br/><strong>Milvus WebUI（测试版）</strong><br/><i>面向 DBA 的可视化管理工具</i></td>
+            <td><strong>主键重复数据删除</strong><br/><i>通过使用全局 pk 索引</i><br/><br/><strong>在线 Schema 更改</strong><br/> 例如<i>添加/删除字段、修改 varchar 长度</i><br/><br/><strong>数据版本管理与还原</strong><br/><i>支持通过快照进行数据版本管理</i></td>
+            <td><strong>Rust 和 C++ SDK</strong><br/><i>支持更多客户端</i><br/><br/><strong>支持 UDF </strong><br/><i>用户自定义函数</i></td>
         </tr>
         <tr>
-            <td><strong>Cost Efficiency & Achitecture</strong><br/><i>State-of-the-art systems, prioritizing stability, cost-efficiency and scalability </i></td>
-            <td><strong>Load by Field</strong><br/><i>Choose part of collection to load</i><br/><br/><strong>Memory Optimization</strong><br/><i>Reduce OOM and load enhancement</i><br/><br/><strong>Streaming Node (Beta)</strong><br/><i>Provide global consistency and solve performance bottleneck on root coordinator</i><br/><br/><strong>Storage Format V2 (Beta)</strong><br/><i>Universal formats design and foundation for disk-based data access</i><br/><br/><strong>Clustering Compaction</strong><br/><i>Data re-distribution based on configuration to accelerate read performance</i></td>
-            <td><strong>Lazy Load</strong><br/><i>Load can be initiated by the first read operation without explicitly calling load()</i><br/><br/><strong>Tiered Storage</strong><br/><i>Support hot and cold storage for cost optimization</i><br/><br/><strong>Release by Field</strong><br/><i>Release part of collection to reduce memory usage</i><br/><br/><strong>Streaming Node (GA)</strong><br/><i>Process streaming data and simplify the architecture</i></td>
-            <td><strong>Remove dependencies</strong><br/><i>Reduce or eliminate dependencies on external components like pulsar, etcd</i><br/><br/><strong>Merge coord logic into MixCoord</strong><br/><i>Simplify the architecture</i></td>
+            <td><strong>成本效益和架构</strong><br/><i>最先进的系统，优先考虑稳定性、成本效益和可扩展性 </i></td>
+            <td><strong>按字段加载</strong><br/><i>选择 Collections 的部分内容进行加载</i><br/><br/><strong>内存优化</strong><br/><i>减少 OOM，增强负载</i><br/><br/><strong>流节点（测试版）</strong><br/><i>提供全局一致性，解决根协调器的性能瓶颈</i><br/><br/><strong>存储格式 V2（测试版）</strong><br/><i>通用格式设计，为基于磁盘的数据访问奠定基础</i><br/><br/><strong>集群压缩</strong><br/><i>基于配置的数据再分配，加快读取性能</i></td>
+            <td><strong>懒加载</strong><br/><i>可通过首次读操作启动加载，而无需显式调用 load()</i><br/><br/><strong>分层存储</strong><br/><i>支持冷热存储，以优化成本</i><br/><br/><strong>按字段释放</strong><br/><strong>释放</strong><i>部分 Collections 以减少内存使用</i><br/><br/><strong>流节点 (GA</strong><i>)</i><br/><i>处理流数据并简化架构</i></td>
+            <td><strong>消除依赖</strong><br/><i>减少或消除对 pulsar、etcd 等外部组件的依赖</i><br/><br/><strong>将协调逻辑并入 MixCoord</strong><br/><i>简化架构</i></td>
         </tr>
     </tbody>
 </table>
 <ul>
-<li>Our roadmap is typically structured into three parts: the most recent release, the next upcoming release, and a mid-to-long term vision within the next year.</li>
-<li>As we progress, we continually learn and occasionally adjust our focus, adding or removing items as needed.</li>
-<li>These plans are indicative and subject to change, and may vary based on subscription services.</li>
-<li>We steadfastly adhere to our roadmap, with our <a href="/docs/release_notes.md">release notes</a> serving as a reference.</li>
+<li>我们的路线图通常分为三个部分：最新发布的版本、即将发布的下一个版本以及明年的中长期愿景。</li>
+<li>随着我们的进步，我们会不断学习，偶尔调整我们的重点，根据需要添加或删除项目。</li>
+<li>这些计划仅供参考，可能会根据订阅服务的不同而有所变化。</li>
+<li>我们将坚定不移地遵循我们的路线图，并以我们的<a href="/docs/zh/release_notes.md">发布说明</a>作为参考。</li>
 </ul>
-<h2 id="How-to-contribute" class="common-anchor-header">How to contribute<button data-href="#How-to-contribute" class="anchor-icon" translate="no">
+<h2 id="How-to-contribute" class="common-anchor-header">如何贡献<button data-href="#How-to-contribute" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -94,16 +92,16 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>As an open-source project, Milvus thrives on community contributions. Here’s how you can be a part of our journey.</p>
-<h3 id="Share-feedback" class="common-anchor-header">Share feedback</h3><ul>
-<li><p>Issue reporting: Encounter a bug or have a suggestion? Open an issue on our <a href="https://github.com/milvus-io/milvus/issues">GitHub page</a>.</p></li>
-<li><p>Feature suggestions: Have ideas for new features or improvements? <a href="https://github.com/milvus-io/milvus/discussions">We’d love to hear them!</a></p></li>
+    </button></h2><p>作为一个开源项目，Milvus 的发展离不开社区的贡献。以下是您如何参与我们的旅程。</p>
+<h3 id="Share-feedback" class="common-anchor-header">分享反馈</h3><ul>
+<li><p>问题报告：遇到错误或有建议？在我们的<a href="https://github.com/milvus-io/milvus/issues">GitHub 页面</a>上打开一个问题。</p></li>
+<li><p>功能建议：有关于新功能或改进的想法？<a href="https://github.com/milvus-io/milvus/discussions">我们很乐意听取您的意见！</a></p></li>
 </ul>
-<h3 id="Code-contributions" class="common-anchor-header">Code contributions</h3><ul>
-<li><p>Pull requests: Contribute directly to our <a href="https://github.com/milvus-io/milvus/pulls">codebase</a>. Whether it’s fixing bugs, adding features, or improving documentation, your contributions are welcome.</p></li>
-<li><p>Development guide: Check our <a href="https://github.com/milvus-io/milvus/blob/82915a9630ab0ff40d7891b97c367ede5726ff7c/CONTRIBUTING.md">Contributor’s Guide</a> for guidelines on code contributions.</p></li>
+<h3 id="Code-contributions" class="common-anchor-header">代码贡献</h3><ul>
+<li><p>拉取请求：直接向我们的<a href="https://github.com/milvus-io/milvus/pulls">代码库</a>投稿。无论是修复错误、添加功能还是改进文档，我们都欢迎您的贡献。</p></li>
+<li><p>开发指南：查看我们的<a href="https://github.com/milvus-io/milvus/blob/82915a9630ab0ff40d7891b97c367ede5726ff7c/CONTRIBUTING.md">贡献者指南</a>，了解代码贡献指南。</p></li>
 </ul>
-<h3 id="Spread-the-word" class="common-anchor-header">Spread the word</h3><ul>
-<li><p>Social sharing: Love Milvus? Share your use cases and experiences on social media and tech blogs.</p></li>
-<li><p>Star us on GitHub: Show your support by starring our <a href="https://github.com/milvus-io/milvus">GitHub repository</a>.</p></li>
+<h3 id="Spread-the-word" class="common-anchor-header">传播信息</h3><ul>
+<li><p>社交分享：喜欢 Milvus 吗？在社交媒体和技术博客上分享您的使用案例和经验。</p></li>
+<li><p>在 GitHub 上为我们加星：在我们的<a href="https://github.com/milvus-io/milvus">GitHub 存储库上</a>加星，以表示您的支持。</p></li>
 </ul>

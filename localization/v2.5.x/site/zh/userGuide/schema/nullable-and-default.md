@@ -1,14 +1,12 @@
 ---
 id: nullable-and-default.md
-title: Nullable & Default​
+title: 可归零和默认值
 related_key: 'nullable, default'
 summary: >-
-  Milvus allows you to set the `nullable` attribute and default values for
-  scalar fields, except the primary field. For fields marked as nullable=True,
-  you can skip the field when inserting data, or set it directly to a null
-  value, and the system will treat it as null without causing an error.
+  Milvus 允许你为标量字段（主字段除外）设置 `nullable` 属性和默认值。对于标记为 nullable=True
+  的字段，你可以在插入数据时跳过该字段，或直接将其设置为空值，系统会将其视为空值而不会导致错误。
 ---
-<h1 id="Nullable--Default​" class="common-anchor-header">Nullable &amp; Default​<button data-href="#Nullable--Default​" class="anchor-icon" translate="no">
+<h1 id="Nullable--Default​" class="common-anchor-header">可归零和默认值<button data-href="#Nullable--Default​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -23,9 +21,9 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Milvus allows you to set the <code translate="no">nullable</code> attribute and default values for scalar fields, except the primary field. For fields marked as <code translate="no">nullable=True</code>, you can skip the field when inserting data, or set it directly to a null value, and the system will treat it as null without causing an error. When a field has a default value, the system will automatically apply this value if no data is specified for the field during insertion.​</p>
-<p>The default value and nullable attributes streamline data migration from other database systems to Milvus by allowing handling of datasets with null values and preserving default value settings. When creating a collection, you can also enable nullable or set default values for fields where values might be uncertain.​</p>
-<h2 id="Limits" class="common-anchor-header">Limits<button data-href="#Limits" class="anchor-icon" translate="no">
+    </button></h1><p>Milvus 允许你为标量字段（主字段除外）设置<code translate="no">nullable</code> 属性和默认值。对于标记为<code translate="no">nullable=True</code> 的字段，您可以在插入数据时跳过该字段，或直接将其设置为空值，系统会将其视为空值而不会导致错误。当字段具有默认值时，如果在插入过程中没有为该字段指定数据，系统将自动应用该值。</p>
+<p>默认值和可归零属性允许处理带有空值的数据集并保留默认值设置，从而简化了从其他数据库系统到 Milvus 的数据迁移。在创建 Collections 时，也可以启用可归零属性或为可能存在不确定值的字段设置默认值。</p>
+<h2 id="Limits" class="common-anchor-header">限制<button data-href="#Limits" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -41,14 +39,14 @@ summary: >-
         ></path>
       </svg>
     </button></h2><ul>
-<li><p>Only scalar fields, excluding the primary field, support default values and the nullable attribute.​</p></li>
-<li><p>JSON and Array fields do not support default values.​</p></li>
-<li><p>Default values or the nullable attribute can only be configured during collection creation and cannot be modified afterward.​</p></li>
-<li><p>Scalar fields with the nullable attribute enabled cannot be used as <code translate="no">group_by_field</code> in Grouping Search. For more information about grouping search, refer to <a href="/docs/grouping-search.md">​Grouping Search</a>.​</p></li>
-<li><p>Fields marked as nullable cannot be used as partition keys. For more information about partition keys, refer to <a href="/docs/use-partition-key.md">​Use Partition Key</a>.​</p></li>
-<li><p>When creating an index on a scalar field with the nullable attribute enabled, null values will be excluded from the index.​</p></li>
+<li><p>只有标量字段（主字段除外）支持默认值和 nullable 属性。</p></li>
+<li><p>JSON 和数组字段不支持默认值。</p></li>
+<li><p>默认值或 nullable 属性只能在创建 Collections 时配置，之后不能修改。</p></li>
+<li><p>启用了可归零属性的标量字段不能在分组搜索中用作<code translate="no">group_by_field</code> 。有关分组搜索的更多信息，请参阅<a href="/docs/zh/grouping-search.md">分组搜索</a>。</p></li>
+<li><p>标记为可归零的字段不能用作分区键。有关分区键的更多信息，请参阅<a href="/docs/zh/use-partition-key.md">使用分区键</a>。</p></li>
+<li><p>在启用了可归零属性的标量字段上创建索引时，索引将排除空值。</p></li>
 </ul>
-<h2 id="Nullable-attribute" class="common-anchor-header">Nullable attribute<button data-href="#Nullable-attribute" class="anchor-icon" translate="no">
+<h2 id="Nullable-attribute" class="common-anchor-header">可归零属性<button data-href="#Nullable-attribute" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -63,14 +61,10 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>The <code translate="no">nullable</code> attribute allows you to store null values in a collection, providing flexibility when handling unknown data.​</p>
-<h3 id="Set-the-nullable-attribute​" class="common-anchor-header">Set the nullable attribute​</h3><p>When creating a collection, use <code translate="no">nullable=True</code> to define nullable fields (defaults to <code translate="no">False</code>). The following example creates a collection named <code translate="no">user_profiles_null</code> and sets the <code translate="no">age</code> field as nullable:​</p>
+    </button></h2><p>通过<code translate="no">nullable</code> 属性，可以在 Collections 中存储空值，从而在处理未知数据时提供灵活性。</p>
+<h3 id="Set-the-nullable-attribute​" class="common-anchor-header">设置 nullable 属性</h3><p>创建 Collections 时，使用<code translate="no">nullable=True</code> 定义可归零字段（默认为<code translate="no">False</code> ）。下面的示例创建了一个名为<code translate="no">user_profiles_null</code> 的 Collection，并将<code translate="no">age</code> 字段设置为可归零。</p>
 <div class="multipleCode">
-  <a href="#python">Python </a>
-  <a href="#java">Java</a>
-  <a href="#javascript">Node.js</a>
-  <a href="#curl">cURL</a>
-</div>
+ <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType​
 ​
 client = MilvusClient(uri=<span class="hljs-string">&#x27;http://localhost:19530&#x27;</span>)​
@@ -226,13 +220,9 @@ curl --request POST \​
 }&quot;</span>​
 
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Insert-entities" class="common-anchor-header">Insert entities</h3><p>When you insert data into a nullable field, insert null or directly omit this field:​</p>
+<h3 id="Insert-entities" class="common-anchor-header">插入实体</h3><p>在可空字段中插入数据时，插入空值或直接省略该字段。</p>
 <div class="multipleCode">
-  <a href="#python">Python </a>
-  <a href="#java">Java</a>
-  <a href="#javascript">Node.js</a>
-  <a href="#curl">cURL</a>
-</div>
+ <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python">data = [​
     {<span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">1</span>, <span class="hljs-string">&quot;vector&quot;</span>: [<span class="hljs-number">0.1</span>, <span class="hljs-number">0.2</span>, <span class="hljs-number">0.3</span>, <span class="hljs-number">0.4</span>, <span class="hljs-number">0.5</span>], <span class="hljs-string">&quot;age&quot;</span>: <span class="hljs-number">30</span>},​
     {<span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">2</span>, <span class="hljs-string">&quot;vector&quot;</span>: [<span class="hljs-number">0.2</span>, <span class="hljs-number">0.3</span>, <span class="hljs-number">0.4</span>, <span class="hljs-number">0.5</span>, <span class="hljs-number">0.6</span>], <span class="hljs-string">&quot;age&quot;</span>: <span class="hljs-literal">None</span>},​
@@ -287,13 +277,9 @@ client.insert({​
 }&#x27;</span>​
 
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Search-and-query-with-null-values​" class="common-anchor-header">Search and query with null values​</h3><p>When using the <code translate="no">search</code> method, if a field contains <code translate="no">null</code> values, the search result will return the field as null:​</p>
+<h3 id="Search-and-query-with-null-values​" class="common-anchor-header">使用空值搜索和查询</h3><p>使用<code translate="no">search</code> 方法时，如果字段包含<code translate="no">null</code> 值，搜索结果将以空值返回该字段。</p>
 <div class="multipleCode">
-  <a href="#python">Python </a>
-  <a href="#java">Java</a>
-  <a href="#javascript">Node.js</a>
-  <a href="#curl">cURL</a>
-</div>
+ <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python">res = client.search(​
     collection_name=<span class="hljs-string">&quot;user_profiles_null&quot;</span>,​
     data=[[0.1, 0.2, 0.4, 0.3, 0.128]],​
@@ -359,13 +345,9 @@ params.<span class="hljs-title function_">put</span>(<span class="hljs-string">&
 <span class="hljs-comment">#{&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:[{&quot;age&quot;:30,&quot;distance&quot;:0.16000001,&quot;id&quot;:1},{&quot;age&quot;:null,&quot;distance&quot;:0.28999996,&quot;id&quot;:2},{&quot;age&quot;:null,&quot;distance&quot;:0.52000004,&quot;id&quot;:3}]}​</span>
 
 <button class="copy-code-btn"></button></code></pre>
-<p>When you use the <code translate="no">query</code> method for scalar filtering, the filtering results for null values are all false, indicating that they will not be selected.​</p>
+<p>当您使用<code translate="no">query</code> 方法进行标量过滤时，空值的过滤结果都是 false，表明它们不会被选中。</p>
 <div class="multipleCode">
-  <a href="#python">Python </a>
-  <a href="#java">Java</a>
-  <a href="#javascript">Node.js</a>
-  <a href="#curl">cURL</a>
-</div>
+ <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Reviewing previously inserted data:​</span>
 <span class="hljs-comment"># {&quot;id&quot;: 1, &quot;vector&quot;: [0.1, 0.2, ..., 0.128], &quot;age&quot;: 30}​</span>
 <span class="hljs-comment"># {&quot;id&quot;: 2, &quot;vector&quot;: [0.2, 0.3, ..., 0.129], &quot;age&quot;: None}​</span>
@@ -420,13 +402,9 @@ System.out.println(resp.getQueryResults());​
 <span class="hljs-comment"># {&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:[{&quot;age&quot;:30,&quot;id&quot;:1}]}​</span>
 
 <button class="copy-code-btn"></button></code></pre>
-<p>To query entities with <code translate="no">null</code> values, use an empty expression <code translate="no">&quot;&quot;</code>:​</p>
+<p>要查询<code translate="no">null</code> 值的实体，请使用空表达式<code translate="no">&quot;&quot;</code> 。</p>
 <div class="multipleCode">
-  <a href="#python">Python </a>
-  <a href="#java">Java</a>
-  <a href="#javascript">Node.js</a>
-  <a href="#curl">cURL</a>
-</div>
+ <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python">null_results = client.query(​
     collection_name=<span class="hljs-string">&quot;user_profiles_null&quot;</span>,​
     filter=<span class="hljs-string">&quot;&quot;</span>,​
@@ -467,7 +445,7 @@ System.out.println(resp.getQueryResults());​
 <span class="hljs-comment"># {&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:[{&quot;age&quot;:30,&quot;id&quot;:1},{&quot;age&quot;:null,&quot;id&quot;:2},{&quot;age&quot;:null,&quot;id&quot;:3}]}​</span>
 
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Default-values​" class="common-anchor-header">Default values​<button data-href="#Default-values​" class="anchor-icon" translate="no">
+<h2 id="Default-values​" class="common-anchor-header">默认值<button data-href="#Default-values​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -482,14 +460,10 @@ System.out.println(resp.getQueryResults());​
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Default values are preset values assigned to scalar fields. If you do not provide a value for a field with a default during insertion, the system automatically uses the default value.​</p>
-<h3 id="Set-default-values" class="common-anchor-header">Set default values</h3><p>When creating a collection, use the <code translate="no">default_value</code> parameter to define the default value for a field. The following example shows how to set the default value of <code translate="no">age</code> to <code translate="no">18</code> and <code translate="no">status</code> to <code translate="no">&quot;active&quot;</code>:​</p>
+    </button></h2><p>默认值是分配给标量字段的预设值。如果在插入时没有为有默认值的字段提供值，系统会自动使用默认值。</p>
+<h3 id="Set-default-values" class="common-anchor-header">设置默认值</h3><p>创建 Collections 时，使用<code translate="no">default_value</code> 参数定义字段的默认值。下面的示例显示了如何将<code translate="no">age</code> 的默认值设置为<code translate="no">18</code> ，将<code translate="no">status</code> 的默认值设置为<code translate="no">&quot;active&quot;</code> 。</p>
 <div class="multipleCode">
-  <a href="#python">Python </a>
-  <a href="#java">Java</a>
-  <a href="#javascript">Node.js</a>
-  <a href="#curl">cURL</a>
-</div>
+ <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python">schema = client.create_schema(​
     auto_id=<span class="hljs-literal">False</span>,​
     enable_dynamic_schema=<span class="hljs-literal">True</span>,​
@@ -650,13 +624,9 @@ curl --request POST \​
 }&quot;</span>​
 
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Insert-entities" class="common-anchor-header">Insert entities</h3><p>When inserting data, if you omit fields with a default value or set their value to null, the system uses the default value:​</p>
+<h3 id="Insert-entities" class="common-anchor-header">插入实体</h3><p>插入数据时，如果省略有默认值的字段或将其值设为空，系统将使用默认值。</p>
 <div class="multipleCode">
-  <a href="#python">Python </a>
-  <a href="#java">Java</a>
-  <a href="#javascript">Node.js</a>
-  <a href="#curl">cURL</a>
-</div>
+ <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python">data = [​
     {<span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">1</span>, <span class="hljs-string">&quot;vector&quot;</span>: [<span class="hljs-number">0.1</span>, <span class="hljs-number">0.2</span>, ..., <span class="hljs-number">0.128</span>], <span class="hljs-string">&quot;age&quot;</span>: <span class="hljs-number">30</span>, <span class="hljs-string">&quot;status&quot;</span>: <span class="hljs-string">&quot;premium&quot;</span>},​
     {<span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">2</span>, <span class="hljs-string">&quot;vector&quot;</span>: [<span class="hljs-number">0.2</span>, <span class="hljs-number">0.3</span>, ..., <span class="hljs-number">0.129</span>]},
@@ -715,16 +685,12 @@ client.<span class="hljs-title function_">insert</span>({​
 
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>For more information on how nullable and default value settings take effect, refer to <a href="#applicable-rules">Applicable rules</a>.</p>
+<p>有关空值和默认值设置如何生效的更多信息，请参阅<a href="#applicable-rules">适用规则</a>。</p>
 </div>
-<h3 id="Search-and-query-with-default-values" class="common-anchor-header">Search and query with default values</h3><p>Entities that contain default values are treated the same as any other entities during vector searches and scalar filtering. You can include default values as part of your <code translate="no">search</code> and <code translate="no">query</code> operations.​</p>
-<p>For example, in a <code translate="no">search</code> operation, entities with <code translate="no">age</code> set to the default value of <code translate="no">18</code> will be included in the results:​</p>
+<h3 id="Search-and-query-with-default-values" class="common-anchor-header">使用默认值进行搜索和查询</h3><p>在向量搜索和标量过滤过程中，包含默认值的实体与其他实体的处理方式相同。您可以将默认值作为<code translate="no">search</code> 和<code translate="no">query</code> 操作符的一部分。</p>
+<p>例如，在<code translate="no">search</code> 操作符中，将<code translate="no">age</code> 设置为默认值<code translate="no">18</code> 的实体将包含在结果中。</p>
 <div class="multipleCode">
-  <a href="#python">Python </a>
-  <a href="#java">Java</a>
-  <a href="#javascript">Node.js</a>
-  <a href="#curl">cURL</a>
-</div>
+ <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python">res = client.search(​
     collection_name=<span class="hljs-string">&quot;user_profiles_default&quot;</span>,​
     data=[[<span class="hljs-number">0.1</span>, <span class="hljs-number">0.2</span>, <span class="hljs-number">0.4</span>, <span class="hljs-number">0.3</span>, <span class="hljs-number">0.128</span>]],​
@@ -794,13 +760,9 @@ params.<span class="hljs-title function_">put</span>(<span class="hljs-string">&
 <span class="hljs-comment"># {&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:[{&quot;age&quot;:18,&quot;distance&quot;:0.050000004,&quot;id&quot;:2,&quot;status&quot;:&quot;active&quot;},{&quot;age&quot;:18,&quot;distance&quot;:0.45000002,&quot;id&quot;:4,&quot;status&quot;:&quot;inactive&quot;}]}​</span>
 
 <button class="copy-code-btn"></button></code></pre>
-<p>In a <code translate="no">query</code> operation, you can match or filter by default values directly:​</p>
+<p>在<code translate="no">query</code> 操作符中，可以直接通过默认值进行匹配或过滤。</p>
 <div class="multipleCode">
-  <a href="#python">Python </a>
-  <a href="#java">Java</a>
-  <a href="#javascript">Node.js</a>
-  <a href="#curl">cURL</a>
-</div>
+ <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Query all entities where `age` equals the default value (18)​</span>
 default_age_results = client.query(​
     collection_name=<span class="hljs-string">&quot;user_profiles_default&quot;</span>,​
@@ -883,7 +845,7 @@ curl --request POST \​
 <span class="hljs-comment"># {&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:[{&quot;age&quot;:18,&quot;id&quot;:2,&quot;status&quot;:&quot;active&quot;},{&quot;age&quot;:25,&quot;id&quot;:3,&quot;status&quot;:&quot;active&quot;}]}​</span>
 
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Applicable-rules" class="common-anchor-header">Applicable rules<button data-href="#Applicable-rules" class="anchor-icon" translate="no">
+<h2 id="Applicable-rules" class="common-anchor-header">适用规则<button data-href="#Applicable-rules" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -898,17 +860,16 @@ curl --request POST \​
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>The following table summarizes the behavior of nullable columns and default values under different configuration combinations. These rules determine how Milvus handles data when attempting to insert null values or if field values are not provided.​
-​</p>
+    </button></h2><p>下表总结了可归零列和默认值在不同配置组合下的行为。这些规则决定了在尝试插入空值或未提供字段值时，Milvus 如何处理数据。</p>
 <table>
 <thead>
-<tr><th>Nullable</th><th>Default Value</th><th>Default Value Type</th><th>User Input</th><th>Result</th><th>Example</th></tr>
+<tr><th>可归零</th><th>默认值</th><th>默认值类型</th><th>用户输入</th><th>结果</th><th>示例</th></tr>
 </thead>
 <tbody>
-<tr><td>✅</td><td>✅</td><td>Non-null</td><td>None/null</td><td>Uses the default value</td><td><ul><li>Field: <code translate="no">age</code></li><li>Default value: <code translate="no">18</code></li><li>User input: null</li><li>Result: stored as <code translate="no">18</code></li></ul></td></tr>
-<tr><td>✅</td><td>❌</td><td>-</td><td>None/null</td><td>Stored as null</td><td><ul><li>Field: <code translate="no">middle_name</code></li><li>Default value: -</li><li>User input: null</li><li>Result: stored as null</td></tr>
-<tr><td>❌</td><td>✅</td><td>Non-null</td><td>None/null</td><td>Uses the default value</td><td><ul><li>Field: <code translate="no">status</code></li><li>Default value: <code translate="no">&quot;active&quot;</code></li><li>User input: null</li><li>Result: stored as <code translate="no">&quot;active&quot;</code></td></tr>
-<tr><td>❌</td><td>❌</td><td>-</td><td>None/null</td><td>Throws an error</td><td><ul><li>Field: <code translate="no">email</code></li><li>Default value: -</li><li>User input: null</li><li>Result: Operation rejected, system throws an error</td></tr>
-<tr><td>❌</td><td>✅</td><td>Null</td><td>None/null</td><td>Throws an error</td><td><ul><li>Field: <code translate="no">username</code></li><li>Default value: null</li><li>User input: null</li><li>Result: Operation rejected, system throws an error</td></tr>
+<tr><td>✅</td><td>✅</td><td>非空</td><td>无/空</td><td>使用默认值</td><td><ul><li>字段：<code translate="no">age</code></li><li>默认值：<code translate="no">18</code></li><li>用户输入：空</li><li>结果：存储为<code translate="no">18</code></li></ul></td></tr>
+<tr><td>✅</td><td>❌</td><td>-</td><td>无/空</td><td>存储为空</td><td><ul><li>字段：<code translate="no">middle_name</code></li><li>默认值： -用户</li><li>输入：空</li><li>结果：存储为空</td></tr>
+<tr><td>❌</td><td>✅</td><td>非空</td><td>无/空</td><td>使用默认值</td><td><ul><li>字段：<code translate="no">status</code></li><li>默认值：<code translate="no">&quot;active&quot;</code></li><li>用户输入：空</li><li>结果：存储为<code translate="no">&quot;active&quot;</code></td></tr>
+<tr><td>❌</td><td>❌</td><td>-</td><td>无/空</td><td>抛出错误</td><td><ul><li>字段：<code translate="no">email</code></li><li>默认值： -用户</li><li>输入：空</li><li>结果：操作被拒绝，系统抛出错误</td></tr>
+<tr><td>❌</td><td>✅</td><td>空</td><td>无/空</td><td>抛出错误</td><td><ul><li>字段：<code translate="no">username</code></li><li>默认值：空用户</li><li>输入：空</li><li>结果：操作被拒绝，系统提示错误</td></tr>
 </tbody>
 </table>

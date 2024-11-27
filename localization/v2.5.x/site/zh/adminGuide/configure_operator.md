@@ -2,10 +2,10 @@
 id: configure_operator.md
 label: Milvus Operator
 related_key: Milvus Operator
-summary: Learn how to configure Milvus with Milvus Operator.
-title: Configure Milvus with Milvus Operator
+summary: 了解如何使用 Milvus Operator 配置 Milvus。
+title: 使用 Milvus Operator 配置 Milvus
 ---
-<h1 id="Configure-Milvus-with-Milvus-Operator" class="common-anchor-header">Configure Milvus with Milvus Operator<button data-href="#Configure-Milvus-with-Milvus-Operator" class="anchor-icon" translate="no">
+<h1 id="Configure-Milvus-with-Milvus-Operator" class="common-anchor-header">使用 Milvus Operator 配置 Milvus<button data-href="#Configure-Milvus-with-Milvus-Operator" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -20,18 +20,17 @@ title: Configure Milvus with Milvus Operator
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>In production environment, you need to allocate resources to the Milvus cluster based on machine type and workload. You can configure during deployment or update the configurations while the cluster is running.</p>
-<p>This topic introduces how to configure a Milvus cluster when you install it with Milvus Operator.</p>
-<p>This topic assumes that you have deployed Milvus Operator. See <a href="/docs/install_cluster-milvusoperator.md">Deploy Milvus Operator</a> for more information.</p>
-<p>Configuring a Milvus cluster with Milvus Operator includes:</p>
+    </button></h1><p>在生产环境中，您需要根据机器类型和工作负载为 Milvus 群集分配资源。您可以在部署时进行配置，也可以在群集运行时更新配置。</p>
+<p>本主题介绍如何在使用 Milvus Operator 安装 Milvus 群集时对其进行配置。</p>
+<p>本主题假设您已部署 Milvus Operator。有关详细信息，请参阅<a href="/docs/zh/install_cluster-milvusoperator.md">部署 Milvus Operator</a>。</p>
+<p>使用 Milvus Operator 配置 Milvus 群集包括：</p>
 <ul>
-<li>Global resource configurations</li>
-<li>Private resource configurations</li>
+<li>全局资源配置</li>
+<li>专用资源配置</li>
 </ul>
 <div class="alert note">
-Private resource configurations will overwrite global resource configurations. If you configure the resources globally and specify the private resource of a certain component at the same time, the component will prioritize and respond to the private configurations first.
-</div>
-<h2 id="Configure-global-resources" class="common-anchor-header">Configure global resources<button data-href="#Configure-global-resources" class="anchor-icon" translate="no">
+私有资源配置将覆盖全局资源配置。如果您在配置全局资源的同时指定了某个组件的私有资源，该组件将优先响应私有配置。</div>
+<h2 id="Configure-global-resources" class="common-anchor-header">配置全局资源<button data-href="#Configure-global-resources" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -46,10 +45,10 @@ Private resource configurations will overwrite global resource configurations. I
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>When using Milvus Operator to start a Milvus cluster, you need to specify a configuration file. The example here uses the default configuration file.</p>
+    </button></h2><p>使用 Milvus Operator 启动 Milvus 群集时，需要指定配置文件。这里的示例使用的是默认配置文件。</p>
 <pre><code translate="no" class="language-yaml">kubectl apply -f <span class="hljs-attr">https</span>:<span class="hljs-comment">//raw.githubusercontent.com/zilliztech/milvus-operator/main/config/samples/milvus_cluster_default.yaml</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>The details of the configuration file is as follows:</p>
+<p>配置文件的详细信息如下：</p>
 <pre><code translate="no" class="language-yaml">apiVersion: milvus.io/v1beta1
 kind: Milvus
 metadata:
@@ -62,16 +61,16 @@ spec:
   components: {}
   config: {}
 <button class="copy-code-btn"></button></code></pre>
-<p>The field <code translate="no">spec.components</code> includes both the global and private resource configuration of all Milvus components. The following are four commonly used fields to configure global resource.</p>
+<p>字段<code translate="no">spec.components</code> 包括所有 Milvus 组件的全局和私有资源配置。以下是配置全局资源的四个常用字段。</p>
 <ul>
-<li><code translate="no">image</code>: The Milvus docker image used.</li>
-<li><code translate="no">resources</code>: The compute resources allocated to each component.</li>
-<li><code translate="no">tolerations</code> and <code translate="no">nodeSelector</code>: The scheduling rules of each Milvus component in the K8s cluster. See <a href="https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/">tolerations</a> and <a href="https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/">nodeSelector</a> for more information.</li>
-<li><code translate="no">env</code>: The environment variables.</li>
+<li><code translate="no">image</code>:使用的 Milvus docker 映像。</li>
+<li><code translate="no">resources</code>:分配给每个组件的计算资源。</li>
+<li><code translate="no">tolerations</code> 和 ：K8s 集群中每个 Milvus 组件的调度规则。更多信息，请参阅<code translate="no">nodeSelector</code><a href="https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/">容忍度</a>和<a href="https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/">节点选择器</a>。</li>
+<li><code translate="no">env</code>:环境变量。</li>
 </ul>
-<p>If you want to configure more fields, see documentation <a href="https://pkg.go.dev/github.com/zilliztech/milvus-operator/apis/milvus.io/v1beta1#ComponentSpec">here</a>.</p>
-<p>To configure global resource for Milvus cluster, create a <code translate="no">milvuscluster_resource.yaml</code> file.</p>
-<h3 id="Example" class="common-anchor-header">Example</h3><p>The following example configures global resource for a Milvus cluster.</p>
+<p>如需配置更多字段，请参阅<a href="https://pkg.go.dev/github.com/zilliztech/milvus-operator/apis/milvus.io/v1beta1#ComponentSpec">此处的</a>文档。</p>
+<p>要配置 Milvus 集群的全局资源，请创建<code translate="no">milvuscluster_resource.yaml</code> 文件。</p>
+<h3 id="Example" class="common-anchor-header">示例</h3><p>下面的示例为 Milvus 群集配置了全局资源。</p>
 <pre><code translate="no">apiVersion: milvus.io/v1beta1
 kind: Milvus
 metadata:
@@ -92,13 +91,12 @@ spec:
         cpu: 200m
         memory: 512Mi
 <button class="copy-code-btn"></button></code></pre>
-<p>Run the following command to apply new configurations:</p>
+<p>运行以下命令应用新配置：</p>
 <pre><code translate="no">kubectl apply -f milvuscluster_resource.yaml
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-Cluster resources will be updated according to the configuration file if there is a Milvus cluster named <code translate="no">my-release</code> in the K8s cluster. Otherwise, a new Milvus cluster will be created.
-</div>
-<h2 id="Configure-private-resources" class="common-anchor-header">Configure private resources<button data-href="#Configure-private-resources" class="anchor-icon" translate="no">
+如果 K8s 集群中有名为<code translate="no">my-release</code> 的 Milvus 集群，则将根据配置文件更新集群资源。否则，将创建一个新的 Milvus 群集。</div>
+<h2 id="Configure-private-resources" class="common-anchor-header">配置私有资源<button data-href="#Configure-private-resources" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -113,60 +111,58 @@ Cluster resources will be updated according to the configuration file if there i
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Originally in Milvus 2.0, a Milvus cluster includes seven components: proxy, root coord, data coord, query coord, index node, data node, and query node. However, a new component, mix coord, is released along with Milvus 2.1.0. Mix coord includes all coordinator components. Therefore, starting a mix coord means that you do not need to install and start other coordinators including root coord, data coord, and query coord.</p>
-<p>Common fields used to configure each component include:</p>
+    </button></h2><p>最初在 Milvus 2.0 中，一个 Milvus 群集包括七个组件：代理、根协调器、数据协调器、查询协调器、索引节点、数据节点和查询节点。不过，随着 Milvus 2.1.0 一起发布的还有一个新的组件--混合协调器。混合协调器包括所有协调器组件。因此，启动混合协调器意味着不需要安装和启动其他协调器，包括根协调器、数据协调器和查询协调器。</p>
+<p>用于配置各组件的常用字段包括</p>
 <ul>
-<li><code translate="no">replica</code>: The number of replicas of each component.</li>
-<li><code translate="no">port</code>: The listen port number of each component.</li>
-<li>The four commonly used fields in global resource configuration: <code translate="no">image</code>, <code translate="no">env</code>, <code translate="no">nodeSelector</code>, <code translate="no">tolerations</code>, <code translate="no">resources</code> (see above). For more configurable fields, click on each component in <a href="https://pkg.go.dev/github.com/zilliztech/milvus-operator/apis/milvus.io/v1beta1#MilvusComponents">this documentation</a>.</li>
+<li><code translate="no">replica</code>:每个组件的副本数量。</li>
+<li><code translate="no">port</code>:每个组件的监听端口号。</li>
+<li>全局资源配置中常用的四个字段：<code translate="no">image</code>,<code translate="no">env</code>,<code translate="no">nodeSelector</code>,<code translate="no">tolerations</code>,<code translate="no">resources</code> （见上文）。有关更多可配置字段，请单击<a href="https://pkg.go.dev/github.com/zilliztech/milvus-operator/apis/milvus.io/v1beta1#MilvusComponents">本文档</a>中的每个组件。</li>
 </ul>
 <div class="alert note">
-In addition, when configuring proxy, there is an extra field called `serviceType`. This field defines the type of service Milvus provides in the K8s cluster.
-</div>
-<p>To configure resources for a specific component, add the component name in the field under <code translate="no">spec.componets</code> first and then configure its private resources.</p>
+此外，在配置代理时，还有一个名为 "服务类型 "的额外字段。该字段定义了 Milvus 在 K8s 集群中提供的服务类型。</div>
+<p>要为特定组件配置资源，请先在<code translate="no">spec.componets</code> 下的字段中添加组件名称，然后配置其私有资源。</p>
 <div class="filter">
-<a href="#component">Components or dependencies</a> <a href="#purpose">Configuration purposes</a> 
-</div>
+<a href="#component">组件或依赖项</a> <a href="#purpose">配置目的</a></div>
 <div class="filter-component table-wrapper">
 <table id="component">
 <thead>
   <tr>
-    <th>Dependencies</th>
-    <th>Components</th>
+    <th>依赖项</th>
+    <th>组件</th>
   </tr>
 </thead>
 <tbody>
   <tr>
     <td>
         <ul>
-            <li><a href="/docs/configure_etcd.md">etcd</a></li>
-            <li><a href="/docs/configure_minio.md">MinIO or S3</a></li>
-            <li><a href="/docs/configure_pulsar.md">Pulsar</a></li>
-            <li><a href="/docs/configure_rocksmq.md">RocksMQ</a></li>
+            <li><a href="/docs/zh/configure_etcd.md">etcd</a></li>
+            <li><a href="/docs/zh/configure_minio.md">MinIO 或 S3</a></li>
+            <li><a href="/docs/zh/configure_pulsar.md">脉冲星</a></li>
+            <li><a href="/docs/zh/configure_rocksmq.md">RocksMQ</a></li>
         </ul>
     </td>
     <td>
         <ul>
-            <li><a href="/docs/configure_rootcoord.md">Root coord</a></li>
-            <li><a href="/docs/configure_proxy.md">Proxy</a></li>
-            <li><a href="/docs/configure_querycoord.md">Query coord</a></li>
-            <li><a href="/docs/configure_querynode.md">Query node</a></li>
-            <li><a href="/docs/configure_indexnode.md">Index node</a></li>
-            <li><a href="/docs/configure_datacoord.md">Data coord</a></li>
-            <li><a href="/docs/configure_datanode.md">Data node</a></li>
-            <li><a href="/docs/configure_localstorage.md">Local storage</a></li>
-            <li><a href="/docs/configure_log.md">Log</a></li>
-            <li><a href="/docs/configure_msgchannel.md">Message channel</a></li>
-            <li><a href="/docs/configure_common.md">Common</a></li>
-            <li><a href="/docs/configure_gpu.md">GPU</a></li>
-            <li><a href="/docs/configure_grpc.md">GRPC</a></li>
-            <li><a href="/docs/configure_indexcoord.md">Index coord</a></li>
-            <li><a href="/docs/configure_metastore.md">Metastore</a></li>
-            <li><a href="/docs/configure_mq.md">Message Queue</a></li>
-            <li><a href="/docs/configure_natsmq.md">Natsmq</a></li>
-            <li><a href="/docs/configure_tikv.md">Tikv</a></li>
-            <li><a href="/docs/configure_trace.md">Trace</a></li>
-            <li><a href="/docs/configure_quotaandlimits.md">Quota and Limits</a></li>
+            <li><a href="/docs/zh/configure_rootcoord.md">根协调</a></li>
+            <li><a href="/docs/zh/configure_proxy.md">代理</a></li>
+            <li><a href="/docs/zh/configure_querycoord.md">查询坐标</a></li>
+            <li><a href="/docs/zh/configure_querynode.md">查询节点</a></li>
+            <li><a href="/docs/zh/configure_indexnode.md">索引节点</a></li>
+            <li><a href="/docs/zh/configure_datacoord.md">数据坐标</a></li>
+            <li><a href="/docs/zh/configure_datanode.md">数据节点</a></li>
+            <li><a href="/docs/zh/configure_localstorage.md">本地存储</a></li>
+            <li><a href="/docs/zh/configure_log.md">日志</a></li>
+            <li><a href="/docs/zh/configure_msgchannel.md">信息通道</a></li>
+            <li><a href="/docs/zh/configure_common.md">通用</a></li>
+            <li><a href="/docs/zh/configure_gpu.md">图形处理器</a></li>
+            <li><a href="/docs/zh/configure_grpc.md">GRPC</a></li>
+            <li><a href="/docs/zh/configure_indexcoord.md">索引坐标</a></li>
+            <li><a href="/docs/zh/configure_metastore.md">元存储</a></li>
+            <li><a href="/docs/zh/configure_mq.md">消息队列</a></li>
+            <li><a href="/docs/zh/configure_natsmq.md">Natsmq</a></li>
+            <li><a href="/docs/zh/configure_tikv.md">Tikv</a></li>
+            <li><a href="/docs/zh/configure_trace.md">跟踪</a></li>
+            <li><a href="/docs/zh/configure_quotaandlimits.md">配额和限制</a></li>
         </ul>
     </td>
   </tr>
@@ -177,98 +173,98 @@ In addition, when configuring proxy, there is an extra field called `serviceType
 <table id="purpose">
 <thead>
   <tr>
-    <th>Purpose</th>
-    <th>Parameters</th>
+    <th>用途</th>
+    <th>参数</th>
   </tr>
 </thead>
 <tbody>
   <tr>
-    <td>Performance tuning</td>
+    <td>性能调整</td>
     <td>
         <ul>
-            <li><a href="/docs/configure_querynode.md#queryNodegracefulTime"><code translate="no">queryNode.gracefulTime</code></a></li>
-            <li><a href="/docs/configure_rootcoord.md#rootCoordminSegmentSizeToEnableIndex"><code translate="no">rootCoord.minSegmentSizeToEnableIndex</code></a></li>
-            <li><a href="/docs/configure_datacoord.md#dataCoordsegmentmaxSize"><code translate="no">dataCoord.segment.maxSize</code></a></li>
-            <li><a href="/docs/configure_datacoord.md#dataCoordsegmentsealProportion"><code translate="no">dataCoord.segment.sealProportion</code></a></li>
-            <li><a href="/docs/configure_datanode.md#dataNodeflushinsertBufSize"><code translate="no">dataNode.flush.insertBufSize</code></a></li>
-            <li><a href="/docs/configure_querycoord.md#queryCoordautoHandoff"><code translate="no">queryCoord.autoHandoff</code></a></li>
-            <li><a href="/docs/configure_querycoord.md#queryCoordautoBalance"><code translate="no">queryCoord.autoBalance</code></a></li>
-            <li><a href="/docs/configure_localstorage.md#localStorageenabled"><code translate="no">localStorage.enabled</code></a></li>
+            <li><a href="/docs/zh/configure_querynode.md#queryNodegracefulTime"><code translate="no">queryNode.gracefulTime</code></a></li>
+            <li><a href="/docs/zh/configure_rootcoord.md#rootCoordminSegmentSizeToEnableIndex"><code translate="no">rootCoord.minSegmentSizeToEnableIndex</code></a></li>
+            <li><a href="/docs/zh/configure_datacoord.md#dataCoordsegmentmaxSize"><code translate="no">dataCoord.segment.maxSize</code></a></li>
+            <li><a href="/docs/zh/configure_datacoord.md#dataCoordsegmentsealProportion"><code translate="no">dataCoord.segment.sealProportion</code></a></li>
+            <li><a href="/docs/zh/configure_datanode.md#dataNodeflushinsertBufSize"><code translate="no">dataNode.flush.insertBufSize</code></a></li>
+            <li><a href="/docs/zh/configure_querycoord.md#queryCoordautoHandoff"><code translate="no">queryCoord.autoHandoff</code></a></li>
+            <li><a href="/docs/zh/configure_querycoord.md#queryCoordautoBalance"><code translate="no">queryCoord.autoBalance</code></a></li>
+            <li><a href="/docs/zh/configure_localstorage.md#localStorageenabled"><code translate="no">localStorage.enabled</code></a></li>
         </ul>
     </td>
   </tr>
   <tr>
-    <td>Data and meta</td>
+    <td>数据和元</td>
     <td>
         <ul>
-            <li><a href="/docs/configure_common.md#commonretentionDuration"><code translate="no">common.retentionDuration</code></a></li>
-            <li><a href="/docs/configure_rocksmq.md#rocksmqretentionTimeInMinutes"><code translate="no">rocksmq.retentionTimeInMinutes</code></a></li>
-            <li><a href="/docs/configure_datacoord.md#dataCoordenableCompaction"><code translate="no">dataCoord.enableCompaction</code></a></li>
-            <li><a href="/docs/configure_datacoord.md#dataCoordenableGarbageCollection"><code translate="no">dataCoord.enableGarbageCollection</code></a></li>
-            <li><a href="/docs/configure_datacoord.md#dataCoordgcdropTolerance"><code translate="no">dataCoord.gc.dropTolerance</code></a></li>
+            <li><a href="/docs/zh/configure_common.md#commonretentionDuration"><code translate="no">common.retentionDuration</code></a></li>
+            <li><a href="/docs/zh/configure_rocksmq.md#rocksmqretentionTimeInMinutes"><code translate="no">rocksmq.retentionTimeInMinutes</code></a></li>
+            <li><a href="/docs/zh/configure_datacoord.md#dataCoordenableCompaction"><code translate="no">dataCoord.enableCompaction</code></a></li>
+            <li><a href="/docs/zh/configure_datacoord.md#dataCoordenableGarbageCollection"><code translate="no">dataCoord.enableGarbageCollection</code></a></li>
+            <li><a href="/docs/zh/configure_datacoord.md#dataCoordgcdropTolerance"><code translate="no">dataCoord.gc.dropTolerance</code></a></li>
         </ul>
     </td>
   </tr>
   <tr>
-    <td>Administration</td>
+    <td>管理</td>
     <td>
         <ul>
-            <li><a href="/docs/configure_log.md#loglevel"><code translate="no">log.level</code></a></li>
-            <li><a href="/docs/configure_log.md#logfilerootPath"><code translate="no">log.file.rootPath</code></a></li>
-            <li><a href="/docs/configure_log.md#logfilemaxAge"><code translate="no">log.file.maxAge</code></a></li>
-            <li><a href="/docs/configure_minio.md#minioaccessKeyID"><code translate="no">minio.accessKeyID</code></a></li>
-            <li><a href="/docs/configure_minio.md#miniosecretAccessKey"><code translate="no">minio.secretAccessKey</code></a></li>
+            <li><a href="/docs/zh/configure_log.md#loglevel"><code translate="no">log.level</code></a></li>
+            <li><a href="/docs/zh/configure_log.md#logfilerootPath"><code translate="no">log.file.rootPath</code></a></li>
+            <li><a href="/docs/zh/configure_log.md#logfilemaxAge"><code translate="no">log.file.maxAge</code></a></li>
+            <li><a href="/docs/zh/configure_minio.md#minioaccessKeyID"><code translate="no">minio.accessKeyID</code></a></li>
+            <li><a href="/docs/zh/configure_minio.md#miniosecretAccessKey"><code translate="no">minio.secretAccessKey</code></a></li>
         </ul>
     </td>
   </tr>
   <tr>
-    <td>Quota and Limits</td>
+    <td>配额和限制</td>
     <td>
         <ul>
-            <li><a href="/docs/configure_quotaandlimits.md#quotaAndLimitslimitsmaxCollectionNumPerDB"><code translate="no">quotaAndLimits.limits.maxCollectionNumPerDB</code></a></li>
-            <li><a href="/docs/configure_quotaandlimits.md#quotaAndLimitsddlenabled"><code translate="no">quotaAndLimits.ddl.enabled</code></a></li>
-            <li><a href="/docs/configure_quotaandlimits.md#quotaAndLimitsddlcollectionRate"><code translate="no">quotaAndLimits.ddl.collectionRate</code></a></li>
-            <li><a href="/docs/configure_quotaandlimits.md#quotaAndLimitsddlpartitionRate"><code translate="no">quotaAndLimits.ddl.partitionRate</code></a></li>
-            <li><a href="/docs/configure_quotaandlimits.md#quotaAndLimitsindexRateenabled"><code translate="no">quotaAndLimits.indexRate.enabled</code></a></li>
-            <li><a href="/docs/configure_quotaandlimits.md#quotaAndLimitsindexRatemax"><code translate="no">quotaAndLimits.indexRate.max</code></a></li>
-            <li><a href="/docs/configure_quotaandlimits.md#quotaAndLimitsflushRateenabled"><code translate="no">quotaAndLimits.flushRate.enabled</code></a></li>
-            <li><a href="/docs/configure_quotaandlimits.md#quotaAndLimitsflushmax"><code translate="no">quotaAndLimits.flush.max</code></a></li>
-            <li><a href="/docs/configure_quotaandlimits.md#quotaAndLimitscompationenabled"><code translate="no">quotaAndLimits.compation.enabled</code></a></li>
-            <li><a href="/docs/configure_quotaandlimits.md#quotaAndLimitscompactionmax"><code translate="no">quotaAndLimits.compaction.max</code></a></li>
-            <li><a href="/docs/configure_quotaandlimits.md#quotaAndLimitsdmlenabled"><code translate="no">quotaAndLimits.dml.enabled</code></a></li>
-            <li><a href="/docs/configure_quotaandlimits.md#quotaAndLimitsdmlinsertRatemax"><code translate="no">quotaAndLimits.dml.insertRate.max</code></a></li>
-            <li><a href="/docs/configure_quotaandlimits.md#quotaAndLimitsdmlinsertRatecollectionmax"><code translate="no">quotaAndLimits.dml.insertRate.collection.max</code></a></li>
-            <li><a href="/docs/configure_quotaandlimits.md#quotaAndLimitsdmldeleteRatemax"><code translate="no">quotaAndLimits.dml.deleteRate.max</code></a></li>
-            <li><a href="/docs/configure_quotaandlimits.md#quotaAndLimitsdmldeleteRatecollectionmax"><code translate="no">quotaAndLimits.dml.deleteRate.collection.max</code></a></li>
-            <li><a href="/docs/configure_quotaandlimits.md#quotaAndLimitsdqlenabled"><code translate="no">quotaAndLimits.dql.enabled</code></a></li>
-            <li><a href="/docs/configure_quotaandlimits.md#quotaAndLimitsdqlsearchRatemax"><code translate="no">quotaAndLimits.dql.searchRate.max</code></a></li>
-            <li><a href="/docs/configure_quotaandlimits.md#quotaAndLimitsdqlsearchRatecollectionmax"><code translate="no">quotaAndLimits.dql.searchRate.collection.max</code></a></li>
-            <li><a href="/docs/configure_quotaandlimits.md#quotaAndLimitsdqlqueryRatemax"><code translate="no">quotaAndLimits.dql.queryRate.max</code></a></li>
-            <li><a href="/docs/configure_quotaandlimits.md#quotaAndLimitsdqlqueryRatecollectionmax"><code translate="no">quotaAndLimits.dql.queryRate.collection.max</code></a></li>
-            <li><a href="/docs/configure_quotaandlimits.md#quotaAndLimitslimitWritingttProtectionenabled"><code translate="no">quotaAndLimits.limitWriting.ttProtection.enabled</code></a></li>
-            <li><a href="/docs/configure_quotaandlimits.md#quotaAndLimitslimitWritingttProtectionmaxTimeTickDelay"><code translate="no">quotaAndLimits.limitWriting.ttProtection.maxTimeTickDelay</code></a></li>
-            <li><a href="/docs/configure_quotaandlimits.md#quotaAndLimitslimitWritingmemProtectionenabled"><code translate="no">quotaAndLimits.limitWriting.memProtection.enabled</code></a></li>
-            <li><a href="/docs/configure_quotaandlimits.md#quotaAndLimitslimitWritingmemProtectiondataNodeMemoryLowWaterLevel"><code translate="no">quotaAndLimits.limitWriting.memProtection.dataNodeMemoryLowWaterLevel</code></a></li>
-            <li><a href="/docs/configure_quotaandlimits.md#quotaAndLimitslimitWritingmemProtectionqueryNodeMemoryLowWaterLevel"><code translate="no">quotaAndLimits.limitWriting.memProtection.queryNodeMemoryLowWaterLevel</code></a></li>
-            <li><a href="/docs/configure_quotaandlimits.md#quotaAndLimitslimitWritingmemProtectiondataNodeMemoryHighWaterLevel"><code translate="no">quotaAndLimits.limitWriting.memProtection.dataNodeMemoryHighWaterLevel</code></a></li>
-            <li><a href="/docs/configure_quotaandlimits.md#quotaAndLimitslimitWritingmemProtectionqueryNodeMemoryHighWaterLevel"><code translate="no">quotaAndLimits.limitWriting.memProtection.queryNodeMemoryHighWaterLevel</code></a></li>
-            <li><a href="/docs/configure_quotaandlimits.md#quotaAndLimitslimitWritingdiskProtectionenabled"><code translate="no">quotaAndLimits.limitWriting.diskProtection.enabled</code></a></li>
-            <li><a href="/docs/configure_quotaandlimits.md#quotaAndLimitslimitWritingdiskProtectiondiskQuota"><code translate="no">quotaAndLimits.limitWriting.diskProtection.diskQuota</code></a></li>
-            <li><a href="/docs/configure_quotaandlimits.md#quotaAndLimitslimitWritingdiskProtectiondiskQuotaPerCollection"><code translate="no">quotaAndLimits.limitWriting.diskProtection.diskQuotaPerCollection</code></a></li>
-            <li><a href="/docs/configure_quotaandlimits.md#quotaAndLimitslimitWritingforceDeny"><code translate="no">quotaAndLimits.limitWriting.forceDeny</code></a></li>
-            <li><a href="/docs/configure_quotaandlimits.md#quotaAndLimitslimitReadingqueueProtectionenabled"><code translate="no">quotaAndLimits.limitReading.queueProtection.enabled</code></a></li>
-            <li><a href="/docs/configure_quotaandlimits.md#quotaAndLimitslimitReadingqueueProtectionnqInQueueThreshold"><code translate="no">quotaAndLimits.limitReading.queueProtection.nqInQueueThreshold</code></a></li>
-            <li><a href="/docs/configure_quotaandlimits.md#quotaAndLimitslimitReadingqueueProtectionqueueLatencyThreshold"><code translate="no">quotaAndLimits.limitReading.queueProtection.queueLatencyThreshold</code></a></li>
-            <li><a href="/docs/configure_quotaandlimits.md#quotaAndLimitslimitReadingresultProtectionenabled"><code translate="no">quotaAndLimits.limitReading.resultProtection.enabled</code></a></li>
-            <li><a href="/docs/configure_quotaandlimits.md#quotaAndLimitslimitReadingresultProtectionmaxReadResultRate"><code translate="no">quotaAndLimits.limitReading.resultProtection.maxReadResultRate</code></a></li>
-            <li><a href="/docs/configure_quotaandlimits.md#quotaAndLimitslimitReadingforceDeny"><code translate="no">quotaAndLimits.limitReading.forceDeny</code></a></li>
+            <li><a href="/docs/zh/configure_quotaandlimits.md#quotaAndLimitslimitsmaxCollectionNumPerDB"><code translate="no">quotaAndLimits.limits.maxCollectionNumPerDB</code></a></li>
+            <li><a href="/docs/zh/configure_quotaandlimits.md#quotaAndLimitsddlenabled"><code translate="no">quotaAndLimits.ddl.enabled</code></a></li>
+            <li><a href="/docs/zh/configure_quotaandlimits.md#quotaAndLimitsddlcollectionRate"><code translate="no">quotaAndLimits.ddl.collectionRate</code></a></li>
+            <li><a href="/docs/zh/configure_quotaandlimits.md#quotaAndLimitsddlpartitionRate"><code translate="no">quotaAndLimits.ddl.partitionRate</code></a></li>
+            <li><a href="/docs/zh/configure_quotaandlimits.md#quotaAndLimitsindexRateenabled"><code translate="no">quotaAndLimits.indexRate.enabled</code></a></li>
+            <li><a href="/docs/zh/configure_quotaandlimits.md#quotaAndLimitsindexRatemax"><code translate="no">quotaAndLimits.indexRate.max</code></a></li>
+            <li><a href="/docs/zh/configure_quotaandlimits.md#quotaAndLimitsflushRateenabled"><code translate="no">quotaAndLimits.flushRate.enabled</code></a></li>
+            <li><a href="/docs/zh/configure_quotaandlimits.md#quotaAndLimitsflushmax"><code translate="no">quotaAndLimits.flush.max</code></a></li>
+            <li><a href="/docs/zh/configure_quotaandlimits.md#quotaAndLimitscompationenabled"><code translate="no">quotaAndLimits.compation.enabled</code></a></li>
+            <li><a href="/docs/zh/configure_quotaandlimits.md#quotaAndLimitscompactionmax"><code translate="no">quotaAndLimits.compaction.max</code></a></li>
+            <li><a href="/docs/zh/configure_quotaandlimits.md#quotaAndLimitsdmlenabled"><code translate="no">quotaAndLimits.dml.enabled</code></a></li>
+            <li><a href="/docs/zh/configure_quotaandlimits.md#quotaAndLimitsdmlinsertRatemax"><code translate="no">quotaAndLimits.dml.insertRate.max</code></a></li>
+            <li><a href="/docs/zh/configure_quotaandlimits.md#quotaAndLimitsdmlinsertRatecollectionmax"><code translate="no">quotaAndLimits.dml.insertRate.collection.max</code></a></li>
+            <li><a href="/docs/zh/configure_quotaandlimits.md#quotaAndLimitsdmldeleteRatemax"><code translate="no">quotaAndLimits.dml.deleteRate.max</code></a></li>
+            <li><a href="/docs/zh/configure_quotaandlimits.md#quotaAndLimitsdmldeleteRatecollectionmax"><code translate="no">quotaAndLimits.dml.deleteRate.collection.max</code></a></li>
+            <li><a href="/docs/zh/configure_quotaandlimits.md#quotaAndLimitsdqlenabled"><code translate="no">quotaAndLimits.dql.enabled</code></a></li>
+            <li><a href="/docs/zh/configure_quotaandlimits.md#quotaAndLimitsdqlsearchRatemax"><code translate="no">quotaAndLimits.dql.searchRate.max</code></a></li>
+            <li><a href="/docs/zh/configure_quotaandlimits.md#quotaAndLimitsdqlsearchRatecollectionmax"><code translate="no">quotaAndLimits.dql.searchRate.collection.max</code></a></li>
+            <li><a href="/docs/zh/configure_quotaandlimits.md#quotaAndLimitsdqlqueryRatemax"><code translate="no">quotaAndLimits.dql.queryRate.max</code></a></li>
+            <li><a href="/docs/zh/configure_quotaandlimits.md#quotaAndLimitsdqlqueryRatecollectionmax"><code translate="no">quotaAndLimits.dql.queryRate.collection.max</code></a></li>
+            <li><a href="/docs/zh/configure_quotaandlimits.md#quotaAndLimitslimitWritingttProtectionenabled"><code translate="no">quotaAndLimits.limitWriting.ttProtection.enabled</code></a></li>
+            <li><a href="/docs/zh/configure_quotaandlimits.md#quotaAndLimitslimitWritingttProtectionmaxTimeTickDelay"><code translate="no">quotaAndLimits.limitWriting.ttProtection.maxTimeTickDelay</code></a></li>
+            <li><a href="/docs/zh/configure_quotaandlimits.md#quotaAndLimitslimitWritingmemProtectionenabled"><code translate="no">quotaAndLimits.limitWriting.memProtection.enabled</code></a></li>
+            <li><a href="/docs/zh/configure_quotaandlimits.md#quotaAndLimitslimitWritingmemProtectiondataNodeMemoryLowWaterLevel"><code translate="no">quotaAndLimits.limitWriting.memProtection.dataNodeMemoryLowWaterLevel</code></a></li>
+            <li><a href="/docs/zh/configure_quotaandlimits.md#quotaAndLimitslimitWritingmemProtectionqueryNodeMemoryLowWaterLevel"><code translate="no">quotaAndLimits.limitWriting.memProtection.queryNodeMemoryLowWaterLevel</code></a></li>
+            <li><a href="/docs/zh/configure_quotaandlimits.md#quotaAndLimitslimitWritingmemProtectiondataNodeMemoryHighWaterLevel"><code translate="no">quotaAndLimits.limitWriting.memProtection.dataNodeMemoryHighWaterLevel</code></a></li>
+            <li><a href="/docs/zh/configure_quotaandlimits.md#quotaAndLimitslimitWritingmemProtectionqueryNodeMemoryHighWaterLevel"><code translate="no">quotaAndLimits.limitWriting.memProtection.queryNodeMemoryHighWaterLevel</code></a></li>
+            <li><a href="/docs/zh/configure_quotaandlimits.md#quotaAndLimitslimitWritingdiskProtectionenabled"><code translate="no">quotaAndLimits.limitWriting.diskProtection.enabled</code></a></li>
+            <li><a href="/docs/zh/configure_quotaandlimits.md#quotaAndLimitslimitWritingdiskProtectiondiskQuota"><code translate="no">quotaAndLimits.limitWriting.diskProtection.diskQuota</code></a></li>
+            <li><a href="/docs/zh/configure_quotaandlimits.md#quotaAndLimitslimitWritingdiskProtectiondiskQuotaPerCollection"><code translate="no">quotaAndLimits.limitWriting.diskProtection.diskQuotaPerCollection</code></a></li>
+            <li><a href="/docs/zh/configure_quotaandlimits.md#quotaAndLimitslimitWritingforceDeny"><code translate="no">quotaAndLimits.limitWriting.forceDeny</code></a></li>
+            <li><a href="/docs/zh/configure_quotaandlimits.md#quotaAndLimitslimitReadingqueueProtectionenabled"><code translate="no">quotaAndLimits.limitReading.queueProtection.enabled</code></a></li>
+            <li><a href="/docs/zh/configure_quotaandlimits.md#quotaAndLimitslimitReadingqueueProtectionnqInQueueThreshold"><code translate="no">quotaAndLimits.limitReading.queueProtection.nqInQueueThreshold</code></a></li>
+            <li><a href="/docs/zh/configure_quotaandlimits.md#quotaAndLimitslimitReadingqueueProtectionqueueLatencyThreshold"><code translate="no">quotaAndLimits.limitReading.queueProtection.queueLatencyThreshold</code></a></li>
+            <li><a href="/docs/zh/configure_quotaandlimits.md#quotaAndLimitslimitReadingresultProtectionenabled"><code translate="no">quotaAndLimits.limitReading.resultProtection.enabled</code></a></li>
+            <li><a href="/docs/zh/configure_quotaandlimits.md#quotaAndLimitslimitReadingresultProtectionmaxReadResultRate"><code translate="no">quotaAndLimits.limitReading.resultProtection.maxReadResultRate</code></a></li>
+            <li><a href="/docs/zh/configure_quotaandlimits.md#quotaAndLimitslimitReadingforceDeny"><code translate="no">quotaAndLimits.limitReading.forceDeny</code></a></li>
         </ul>
     </td>
   </tr>
 </tbody>
 </table>
 </div>
-<h3 id="Example" class="common-anchor-header">Example</h3><p>The example below configures the replicas and compute resources of proxy and datanode in the <code translate="no">milvuscluster.yaml</code> file.</p>
+<h3 id="Example" class="common-anchor-header">示例</h3><p>下面的示例在<code translate="no">milvuscluster.yaml</code> 文件中配置了代理和数据节点的副本和计算资源。</p>
 <pre><code translate="no">apiVersion: milvus.io/v1beta1
 kind: Milvus
 metadata:
@@ -312,12 +308,11 @@ spec:
   dependencies: {}
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-This example configures not only global resources but also private compute resources for root coord and proxy. When using this configuration file to start a Milvus cluster, the private resources configurations will be applied to root coord and proxy, while the rest of the components will follow the global resource configuration.
-</div>
-<p>Run the following command to apply new configurations:</p>
+该示例不仅配置了全局资源，还配置了根节点和代理的私有计算资源。使用此配置文件启动 Milvus 群集时，私有资源配置将应用于根协调器和代理，而其余组件将遵循全局资源配置。</div>
+<p>运行以下命令应用新配置：</p>
 <pre><code translate="no">kubectl apply -f milvuscluster.yaml
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Whats-next" class="common-anchor-header">What’s next<button data-href="#Whats-next" class="anchor-icon" translate="no">
+<h2 id="Whats-next" class="common-anchor-header">下一步<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -333,10 +328,9 @@ This example configures not only global resources but also private compute resou
         ></path>
       </svg>
     </button></h2><ul>
-<li>Learn how to manage the following Milvus dependencies with Milvus Operator:
-<ul>
-<li><a href="/docs/object_storage_operator.md">Configure Object Storage with Milvus Operator</a></li>
-<li><a href="/docs/meta_storage_operator.md">Configure Meta Storage with Milvus Operator</a></li>
-<li><a href="/docs/message_storage_operator.md">Configure Message Storage with Milvus Operator</a></li>
+<li>了解如何使用 Milvus Operator 管理以下 Milvus 依赖项：<ul>
+<li><a href="/docs/zh/object_storage_operator.md">使用 Milvus Operator 配置对象存储</a></li>
+<li><a href="/docs/zh/meta_storage_operator.md">使用 Milvus Operator 配置元存储</a></li>
+<li><a href="/docs/zh/message_storage_operator.md">使用 Milvus Operator 配置消息存储</a></li>
 </ul></li>
 </ul>

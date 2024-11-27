@@ -2,9 +2,9 @@
 id: configure_minio.md
 related_key: configure
 group: system_configuration.md
-summary: Learn how to configure minio for Milvus.
+summary: 了解如何为 Milvus 配置 minio。
 ---
-<h1 id="minio-related-Configurations" class="common-anchor-header">minio-related Configurations<button data-href="#minio-related-Configurations" class="anchor-icon" translate="no">
+<h1 id="minio-related-Configurations" class="common-anchor-header">MinIO 相关配置<button data-href="#minio-related-Configurations" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -19,8 +19,8 @@ summary: Learn how to configure minio for Milvus.
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Related configuration of MinIO/S3/GCS or any other service supports S3 API, which is responsible for data persistence for Milvus.</p>
-<p>We refer to the storage service as MinIO/S3 in the following description for simplicity.</p>
+    </button></h1><p>MinIO/S3/GCS 或任何其他服务的相关配置都支持 S3 API，它负责 Milvus 的数据持久化。</p>
+<p>为简单起见，我们在以下描述中将存储服务称为 MinIO/S3。</p>
 <h2 id="minioaddress" class="common-anchor-header"><code translate="no">minio.address</code><button data-href="#minioaddress" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -39,19 +39,19 @@ summary: Learn how to configure minio for Milvus.
     </button></h2><table id="minio.address">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">描述</th>
+      <th class="width20">默认值</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>
-        <li>IP address of MinIO or S3 service.</li>      
-        <li>Environment variable: MINIO_ADDRESS</li>      
-        <li>minio.address and minio.port together generate the valid access to MinIO or S3 service.</li>      
-        <li>MinIO preferentially acquires the valid IP address from the environment variable MINIO_ADDRESS when Milvus is started.</li>      
-        <li>Default value applies when MinIO or S3 is running on the same network with Milvus.</li>      </td>
-      <td>localhost</td>
+        <li>MinIO 或 S3 服务的 IP 地址。</li>      
+        <li>环境变量：MINIO_ADDRESS</li>      
+        <li>minio.address 和 minio.port 共同生成对 MinIO 或 S3 服务的有效访问。</li>      
+        <li>启动 Milvus 时，MinIO 优先从环境变量 MINIO_ADDRESS 获取有效 IP 地址。</li>      
+        <li>默认值适用于 MinIO 或 S3 与 Milvus 在同一网络上运行的情况。</li>      </td>
+      <td>本地主机</td>
     </tr>
   </tbody>
 </table>
@@ -73,13 +73,13 @@ summary: Learn how to configure minio for Milvus.
     </button></h2><table id="minio.port">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">说明</th>
+      <th class="width20">默认值</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        Port of MinIO or S3 service.      </td>
+      <td>        MinIO 或 S3 服务的端口。      </td>
       <td>9000</td>
     </tr>
   </tbody>
@@ -102,18 +102,18 @@ summary: Learn how to configure minio for Milvus.
     </button></h2><table id="minio.accessKeyID">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">说明</th>
+      <th class="width20">默认值</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>
-        <li>Access key ID that MinIO or S3 issues to user for authorized access.</li>      
-        <li>Environment variable: MINIO_ACCESS_KEY_ID or minio.accessKeyID</li>      
-        <li>minio.accessKeyID and minio.secretAccessKey together are used for identity authentication to access the MinIO or S3 service.</li>      
-        <li>This configuration must be set identical to the environment variable MINIO_ACCESS_KEY_ID, which is necessary for starting MinIO or S3.</li>      
-        <li>The default value applies to MinIO or S3 service that started with the default docker-compose.yml file.</li>      </td>
+        <li>MinIO 或 S3 向用户发放的授权访问密钥 ID。</li>      
+        <li>环境变量：MINIO_ACCESS_KEY_ID 或 minio.accessKeyID</li>      
+        <li>minio.accessKeyID 和 minio.secretAccessKey 一起用于身份验证，以访问 MinIO 或 S3 服务。</li>      
+        <li>此配置的设置必须与环境变量 MINIO_ACCESS_KEY_ID 相同，因为 MINIO_ACCESS_KEY_ID 是启动 MinIO 或 S3 所必需的。</li>      
+        <li>默认值适用于使用默认 docker-compose.yml 文件启动的 MinIO 或 S3 服务。</li>      </td>
       <td>minioadmin</td>
     </tr>
   </tbody>
@@ -136,18 +136,18 @@ summary: Learn how to configure minio for Milvus.
     </button></h2><table id="minio.secretAccessKey">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">说明</th>
+      <th class="width20">默认值</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>
-        <li>Secret key used to encrypt the signature string and verify the signature string on server. It must be kept strictly confidential and accessible only to the MinIO or S3 server and users.</li>      
-        <li>Environment variable: MINIO_SECRET_ACCESS_KEY or minio.secretAccessKey</li>      
-        <li>minio.accessKeyID and minio.secretAccessKey together are used for identity authentication to access the MinIO or S3 service.</li>      
-        <li>This configuration must be set identical to the environment variable MINIO_SECRET_ACCESS_KEY, which is necessary for starting MinIO or S3.</li>      
-        <li>The default value applies to MinIO or S3 service that started with the default docker-compose.yml file.</li>      </td>
+        <li>用于加密签名字符串和在服务器上验证签名字符串的密钥。它必须严格保密，只有 MinIO 或 S3 服务器和用户可以访问。</li>      
+        <li>环境变量：MINIO_SECRET_ACCESS_KEY 或 minio.secretAccessKey</li>      
+        <li>minio.accessKeyID 和 minio.secretAccessKey 一起用于身份验证，以访问 MinIO 或 S3 服务。</li>      
+        <li>此配置的设置必须与环境变量 MINIO_SECRET_ACCESS_KEY 相同，这是启动 MinIO 或 S3 所必需的。</li>      
+        <li>默认值适用于使用默认 docker-compose.yml 文件启动的 MinIO 或 S3 服务。</li>      </td>
       <td>minioadmin</td>
     </tr>
   </tbody>
@@ -170,14 +170,14 @@ summary: Learn how to configure minio for Milvus.
     </button></h2><table id="minio.useSSL">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">说明</th>
+      <th class="width20">默认值</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        Switch value to control if to access the MinIO or S3 service through SSL.      </td>
-      <td>false</td>
+      <td>        控制是否通过 SSL 访问 MinIO 或 S3 服务的开关值。      </td>
+      <td>假</td>
     </tr>
   </tbody>
 </table>
@@ -199,13 +199,13 @@ summary: Learn how to configure minio for Milvus.
     </button></h2><table id="minio.ssl.tlsCACert">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">说明</th>
+      <th class="width20">默认值</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        path to your CACert file      </td>
+      <td>        CACert 文件的路径      </td>
       <td>/path/to/public.crt</td>
     </tr>
   </tbody>
@@ -228,20 +228,20 @@ summary: Learn how to configure minio for Milvus.
     </button></h2><table id="minio.bucketName">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">描述</th>
+      <th class="width20">默认值</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>
-        <li>Name of the bucket where Milvus stores data in MinIO or S3.</li>      
-        <li>Milvus 2.0.0 does not support storing data in multiple buckets.</li>      
-        <li>Bucket with this name will be created if it does not exist. If the bucket already exists and is accessible, it will be used directly. Otherwise, there will be an error.</li>      
-        <li>To share an MinIO instance among multiple Milvus instances, consider changing this to a different value for each Milvus instance before you start them. For details, see Operation FAQs.</li>      
-        <li>The data will be stored in the local Docker if Docker is used to start the MinIO service locally. Ensure that there is sufficient storage space.</li>      
-        <li>A bucket name is globally unique in one MinIO or S3 instance.</li>      </td>
-      <td>a-bucket</td>
+        <li>Milvus 在 MinIO 或 S3 中存储数据的存储桶名称。</li>      
+        <li>Milvus 2.0.0 不支持在多个存储桶中存储数据。</li>      
+        <li>如果不存在，将创建具有此名称的存储桶。如果数据桶已经存在并且可以访问，则会直接使用。否则，将出现错误。</li>      
+        <li>要在多个 Milvus 实例之间共享一个 MinIO 实例，可以考虑在启动它们之前，为每个 Milvus 实例将此更改为不同的值。有关详细信息，请参阅操作常见问题。</li>      
+        <li>如果使用 Docker 在本地启动 MinIO 服务，数据将存储在本地 Docker 中。确保有足够的存储空间。</li>      
+        <li>在一个 MinIO 或 S3 实例中，存储桶名称是全局唯一的。</li>      </td>
+      <td>存储桶</td>
     </tr>
   </tbody>
 </table>
@@ -263,19 +263,19 @@ summary: Learn how to configure minio for Milvus.
     </button></h2><table id="minio.rootPath">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">描述</th>
+      <th class="width20">默认值</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>
-        <li>Root prefix of the key to where Milvus stores data in MinIO or S3.</li>      
-        <li>It is recommended to change this parameter before starting Milvus for the first time.</li>      
-        <li>To share an MinIO instance among multiple Milvus instances, consider changing this to a different value for each Milvus instance before you start them. For details, see Operation FAQs.</li>      
-        <li>Set an easy-to-identify root key prefix for Milvus if etcd service already exists.</li>      
-        <li>Changing this for an already running Milvus instance may result in failures to read legacy data.</li>      </td>
-      <td>files</td>
+        <li>Milvus 在 MinIO 或 S3 中存储数据的 key 的根前缀。</li>      
+        <li>建议在首次启动 Milvus 前更改此参数。</li>      
+        <li>若要在多个 Milvus 实例之间共享 MinIO 实例，请考虑在启动 Milvus 实例之前将其更改为每个实例的不同值。有关详细信息，请参阅操作常见问题。</li>      
+        <li>如果已经存在 etcd 服务，为 Milvus 设置一个易于识别的根密钥前缀。</li>      
+        <li>为已运行的 Milvus 实例更改此值可能会导致读取遗留数据失败。</li>      </td>
+      <td>文件</td>
     </tr>
   </tbody>
 </table>
@@ -297,20 +297,20 @@ summary: Learn how to configure minio for Milvus.
     </button></h2><table id="minio.useIAM">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">文件</th>
+      <th class="width20">默认值</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>
-        <li>Whether to useIAM role to access S3/GCS instead of access/secret keys</li>      
-        <li>For more information, refer to</li>      
+        <li>是否使用 IAM 角色访问 S3/GCS，而不是访问/密钥</li>      
+        <li>有关详细信息，请参阅</li>      
         <li>aws: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use.html</li>      
         <li>gcp: https://cloud.google.com/storage/docs/access-control/iam</li>      
         <li>aliyun (ack): https://www.alibabacloud.com/help/en/container-service-for-kubernetes/latest/use-rrsa-to-enforce-access-control</li>      
         <li>aliyun (ecs): https://www.alibabacloud.com/help/en/elastic-compute-service/latest/attach-an-instance-ram-role</li>      </td>
-      <td>false</td>
+      <td>错误</td>
     </tr>
   </tbody>
 </table>
@@ -332,18 +332,18 @@ summary: Learn how to configure minio for Milvus.
     </button></h2><table id="minio.cloudProvider">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">说明</th>
+      <th class="width20">默认值</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>
-        <li>Cloud Provider of S3. Supports: "aws", "gcp", "aliyun".</li>      
-        <li>You can use "aws" for other cloud provider supports S3 API with signature v4, e.g.: minio</li>      
-        <li>You can use "gcp" for other cloud provider supports S3 API with signature v2</li>      
-        <li>You can use "aliyun" for other cloud provider uses virtual host style bucket</li>      
-        <li>When useIAM enabled, only "aws", "gcp", "aliyun" is supported for now</li>      </td>
+        <li>S3 的云提供商。支持"AWS"、"GCP"、"阿里云"。</li>      
+        <li>如果其他云提供商支持签名为 v4 的 S3 API，则可使用 "aws"，例如：minio。</li>      
+        <li>使用 "gcp "表示其他云提供商支持签名为 v2 的 S3 API</li>      
+        <li>如果其他云提供商使用虚拟主机风格的存储桶，您可以使用 "aliyun"。</li>      
+        <li>启用 useIAM 后，目前仅支持 "aws"、"gcp "和 "aliyun"。</li>      </td>
       <td>aws</td>
     </tr>
   </tbody>
@@ -366,15 +366,15 @@ summary: Learn how to configure minio for Milvus.
     </button></h2><table id="minio.iamEndpoint">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">说明</th>
+      <th class="width20">默认值</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>
-        <li>Custom endpoint for fetch IAM role credentials. when useIAM is true & cloudProvider is "aws".</li>      
-        <li>Leave it empty if you want to use AWS default endpoint</li>      </td>
+        <li>当 useIAM 为 true 且云提供商为 "aws "时，用于获取 IAM 角色凭证的自定义端点。</li>      
+        <li>如果要使用 AWS 默认端点，则留空</li>      </td>
       <td></td>
     </tr>
   </tbody>
@@ -397,14 +397,14 @@ summary: Learn how to configure minio for Milvus.
     </button></h2><table id="minio.logLevel">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">默认值</th>
+      <th class="width20">默认值</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        Log level for aws sdk log. Supported level:  off, fatal, error, warn, info, debug, trace      </td>
-      <td>fatal</td>
+      <td>        aws sdk 日志的日志级别。支持的级别：关闭、致命、错误、警告、信息、调试、跟踪      </td>
+      <td>致命</td>
     </tr>
   </tbody>
 </table>
@@ -426,13 +426,13 @@ summary: Learn how to configure minio for Milvus.
     </button></h2><table id="minio.region">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">描述</th>
+      <th class="width20">默认值</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        Specify minio storage system location region      </td>
+      <td>        指定 minio 存储系统位置区域      </td>
       <td></td>
     </tr>
   </tbody>
@@ -455,14 +455,14 @@ summary: Learn how to configure minio for Milvus.
     </button></h2><table id="minio.useVirtualHost">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">说明</th>
+      <th class="width20">默认值</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        Whether use virtual host mode for bucket      </td>
-      <td>false</td>
+      <td>        是否为存储桶使用虚拟主机模式      </td>
+      <td>假</td>
     </tr>
   </tbody>
 </table>
@@ -484,13 +484,13 @@ summary: Learn how to configure minio for Milvus.
     </button></h2><table id="minio.requestTimeoutMs">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">说明</th>
+      <th class="width20">默认值</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        minio timeout for request time in milliseconds      </td>
+      <td>        请求时间的 minio 超时（毫秒      </td>
       <td>10000</td>
     </tr>
   </tbody>
@@ -513,15 +513,15 @@ summary: Learn how to configure minio for Milvus.
     </button></h2><table id="minio.listObjectsMaxKeys">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">说明</th>
+      <th class="width20">默认值</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>
-        <li>The maximum number of objects requested per batch in minio ListObjects rpc, </li>      
-        <li>0 means using oss client by default, decrease these configration if ListObjects timeout</li>      </td>
+        <li>minio ListObjects rpc 中每批请求的最大对象数、 </li>      
+        <li>0 表示默认使用 oss 客户端，如果 ListObjects 超时，则减少这些配置。</li>      </td>
       <td>0</td>
     </tr>
   </tbody>

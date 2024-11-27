@@ -1,10 +1,10 @@
 ---
 id: multi_tenancy.md
 related_key: multi-tenancy
-summary: Multi-tenancy in Milvus.
-title: Multi-tenancy strategies
+summary: Milvus 中的多租户。
+title: 多租户策略
 ---
-<h1 id="Multi-tenancy-strategies" class="common-anchor-header">Multi-tenancy strategies<button data-href="#Multi-tenancy-strategies" class="anchor-icon" translate="no">
+<h1 id="Multi-tenancy-strategies" class="common-anchor-header">多租户策略<button data-href="#Multi-tenancy-strategies" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -19,9 +19,9 @@ title: Multi-tenancy strategies
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>As ChatGPT gains popularity, more developers are creating their own SaaS services using the CVP (ChatGPT, Vector Database, Prompt) stack. This guide explains how to achieve multi-tenancy on Milvus, one of the most widely-used vector databases in the world, to keep up with this trend.</p>
-<p>Multi-tenancy is an architecture where a single Milvus instance serves multiple tenants. The simplest way to distinguish tenants is by separating their data and resources from those of others. Each tenant has their own dedicated resources or shares resources with others to manage Milvus objects like databases, collections, and partitions. Based on these objects, there are corresponding methods for achieving Milvus multi-tenancy.</p>
-<h2 id="Database-oriented-multi-tenancy" class="common-anchor-header">Database-oriented multi-tenancy<button data-href="#Database-oriented-multi-tenancy" class="anchor-icon" translate="no">
+    </button></h1><p>随着 ChatGPT 的普及，越来越多的开发人员开始使用 CVP（ChatGPT、向量数据库、提示）栈创建自己的 SaaS 服务。本指南介绍了如何在全球使用最广泛的向量数据库之一 Milvus 上实现多租户，以跟上这一趋势。</p>
+<p>多租户是指一个 Milvus 实例服务多个租户的架构。区分租户的最简单方法是将租户的数据和资源与其他租户的数据和资源分开。每个租户都有自己的专用资源，或与其他租户共享资源，以管理数据库、 Collections 和分区等 Milvus 对象。根据这些对象，有相应的方法来实现 Milvus 多租户。</p>
+<h2 id="Database-oriented-multi-tenancy" class="common-anchor-header">面向数据库的多租户<button data-href="#Database-oriented-multi-tenancy" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -36,8 +36,8 @@ title: Multi-tenancy strategies
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Since Milvus version 2.2.9, the object database is now available. You can create multiple databases in a single Milvus cluster. This new feature makes it possible to achieve database-oriented multi-tenancy by assigning a database for each tenant, so that they can create their own collections and partitions to make the most out of their data. However, this strategy ensures data isolation and search performance for tenants, but resources may be wasted on idle tenants.</p>
-<h2 id="Collection-oriented-multi-tenancy" class="common-anchor-header">Collection-oriented multi-tenancy<button data-href="#Collection-oriented-multi-tenancy" class="anchor-icon" translate="no">
+    </button></h2><p>自 Milvus 2.2.9 版起，对象数据库开始可用。您可以在一个 Milvus 集群中创建多个数据库。这一新功能使实现面向数据库的多租户成为可能，为每个租户分配一个数据库，这样他们就可以创建自己的 Collections 和分区，充分利用数据。不过，这种策略可以确保租户的数据隔离和搜索性能，但资源可能会浪费在闲置的租户身上。</p>
+<h2 id="Collection-oriented-multi-tenancy" class="common-anchor-header">面向集合的多租户<button data-href="#Collection-oriented-multi-tenancy" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -52,10 +52,10 @@ title: Multi-tenancy strategies
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>There are two possible ways to achieve collection-oriented multi-tenancy.</p>
-<h3 id="One-collection-for-all-tenants" class="common-anchor-header">One collection for all tenants</h3><p>Using a single collection to implement multi-tenancy by adding a tenant field to distinguish between tenants is a simple option. When conducting ANN searches for a specific tenant, add a filter expression to filter out all entities that belong to other tenants. This is the simplest way to achieve multi-tenancy. However, be aware that the filter’s performance may become the bottleneck of ANN searches.</p>
-<h3 id="One-collection-per-tenant" class="common-anchor-header">One collection per tenant</h3><p>Another approach is to create a collection for each tenant to store its own data, instead of storing the data of all tenants in a single collection. This provides better data isolation and query performance. However, keep in mind that this approach requires more investment in resource scheduling, operational capability, and costs and may be not applicable if the number of tenants exceeds the maximum number of collections that a single Milvus cluster supports.</p>
-<h2 id="Partition-oriented-multi-tenancy" class="common-anchor-header">Partition-oriented multi-tenancy<button data-href="#Partition-oriented-multi-tenancy" class="anchor-icon" translate="no">
+    </button></h2><p>实现面向 Collection 的多租户有两种可能的方法。</p>
+<h3 id="One-collection-for-all-tenants" class="common-anchor-header">所有租户使用一个 Collection</h3><p>通过添加租户字段来区分租户，使用单个 Collections 实现多租户是一种简单的选择。在对特定租户进行 ANN 搜索时，添加一个过滤表达式，以过滤掉属于其他租户的所有实体。这是实现多租户的最简单方法。但要注意，过滤器的性能可能会成为 ANN 搜索的瓶颈。</p>
+<h3 id="One-collection-per-tenant" class="common-anchor-header">每个租户一个 Collection</h3><p>另一种方法是为每个租户创建一个 Collection 来存储自己的数据，而不是将所有租户的数据都存储在一个 Collection 中。这可以提供更好的数据隔离和查询性能。不过，请记住，这种方法需要在资源调度、操作能力和成本方面投入更多，如果租户数量超过了单个 Milvus Operator 集群支持的最大集合数，这种方法可能就不适用了。</p>
+<h2 id="Partition-oriented-multi-tenancy" class="common-anchor-header">面向分区的多租户<button data-href="#Partition-oriented-multi-tenancy" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -70,25 +70,25 @@ title: Multi-tenancy strategies
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>There are also two possible ways to achieve partition-oriented multi-tenancy:</p>
-<h3 id="One-partition-per-tenant" class="common-anchor-header">One partition per tenant</h3><p>Managing a single collection is much easier than managing multiple ones. Instead of creating multiple collections, consider assigning a partition for each tenant to achieve flexible data isolation and memory management. The search performance of partition-oriented multi-tenancy is much better than collection-oriented multi-tenancy. However, note that the number of tenants of the collection should not exceed the maximum number of partitions a collection can hold.</p>
-<h3 id="Partition-key-based-multi-tenancy" class="common-anchor-header">Partition-key-based multi-tenancy</h3><p>Milvus 2.2.9 introduces a new feature named partition key. Upon the creation of a collection, nominate a tenant field and make it the partition key field. Milvus will store entities in a partition according to the values in the partition key field. When conducting ANN searches, Milvus changes to a partition based on the specified partition key, filters entities according to the partition key, and searches among the filtered entities.</p>
+    </button></h2><p>实现面向分区的多租户也有两种可能的方法：</p>
+<h3 id="One-partition-per-tenant" class="common-anchor-header">每个租户一个分区</h3><p>管理单个 Collection 要比管理多个 Collection 容易得多。与其创建多个 Collections，不如考虑为每个租户分配一个分区，实现灵活的数据隔离和内存管理。面向分区的多租户的搜索性能要比面向 Collection 的多租户好得多。但需要注意的是，Collection 的租户数量不应超过一个 Collection 所能容纳的最大分区数。</p>
+<h3 id="Partition-key-based-multi-tenancy" class="common-anchor-header">基于 Partition Key 的多租户功能</h3><p>Milvus 2.2.9 引入了一项名为分区密钥的新功能。创建 Collections 时，指定一个租户字段并将其作为 Partition Key 字段。Milvus 将根据分区键字段中的值在分区中存储实体。在进行 ANN 搜索时，Milvus 会根据指定的分区键切换到一个分区，根据分区键过滤实体，并在过滤后的实体中进行搜索。</p>
 </div>
-<p>This strategy lifts the limit on the maximum number of tenants that a Milvus collection can support and greatly simplifies resource management because Milvus automatically manages partitions for you.</p>
-<p>To recap, you can use either or some of the multi-tenancy strategies above to form your own solution. The following table makes comparisons among these strategies in terms of data isolation, search performance, and maximum number of tenants.</p>
+<p>这种策略解除了 Milvus Collections 可支持的最大租户数限制，并大大简化了资源管理，因为 Milvus 会自动为你管理分区。</p>
+<p>总而言之，你可以使用上述任一或某些多租户策略来形成自己的解决方案。下表从数据隔离、搜索性能和最大租户数等方面对这些策略进行了比较。</p>
 <table>
 <thead>
-<tr><th></th><th>Data isolation</th><th>Search perf.</th><th>Max. num. of tenants</th><th>Recommend scenarios</th></tr>
+<tr><th></th><th>数据隔离</th><th>搜索性能</th><th>最大租户数</th><th>推荐方案</th></tr>
 </thead>
 <tbody>
-<tr><td>Database oriented</td><td>Strong</td><td>Strong</td><td>64</td><td>For those that require collections to vary with projects, especially suitable for data isolation between departments in your organization.</td></tr>
-<tr><td>One collection for all</td><td>Weak</td><td>Medium</td><td>N/A</td><td>For those that have limited resources and are insensitive to data isolation.</td></tr>
-<tr><td>One collection per tenant</td><td>Strong</td><td>Strong</td><td>Less than 10,000</td><td>For those that have less than 10,000 tenants per cluster.</td></tr>
-<tr><td>One partition per tenant</td><td>Medium</td><td>Strong</td><td>4,096</td><td>For those that have less than 4,096 tenants per collection.</td></tr>
-<tr><td>Partition-key-based</td><td>Medium</td><td>Strong</td><td>10,000,000+</td><td>For those that predict a rapid tenant increase into millions.</td></tr>
+<tr><td>面向数据库</td><td>强</td><td>强</td><td>64</td><td>适用于那些需要集合随项目变化而变化的情况，尤其适用于组织内各部门之间的数据隔离。</td></tr>
+<tr><td>一个 Collection 适用于所有项目</td><td>弱</td><td>中等</td><td>不适用</td><td>适用于资源有限且对数据隔离不敏感的企业。</td></tr>
+<tr><td>每个租户一个 Collections</td><td>强</td><td>强</td><td>少于 10,000</td><td>适用于每个群集拥有少于 10,000 个租户的情况。</td></tr>
+<tr><td>每个租户一个分区</td><td>中</td><td>强</td><td>4,096</td><td>适用于每个 Collections 的租户少于 4,096 个的情况。</td></tr>
+<tr><td>基于分区 Key</td><td>中</td><td>强</td><td>10,000,000+</td><td>适用于预测租户数量会迅速增加到数百万的用户。</td></tr>
 </tbody>
 </table>
-<h2 id="Whats-next" class="common-anchor-header">What’s next<button data-href="#Whats-next" class="anchor-icon" translate="no">
+<h2 id="Whats-next" class="common-anchor-header">下一步计划<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -103,5 +103,4 @@ title: Multi-tenancy strategies
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><a href="/docs/manage_databases.md">Manage Databases</a>
-<a href="/docs/schema.md">Schema</a></p>
+    </button></h2><p><a href="/docs/zh/manage_databases.md">管理数据库</a><a href="/docs/zh/schema.md">Schema</a></p>
