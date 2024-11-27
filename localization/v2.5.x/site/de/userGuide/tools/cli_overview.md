@@ -1,11 +1,12 @@
 ---
 id: cli_overview.md
 summary: >-
-  Milvus Command-Line Interface (CLI) is a command-line tool that supports
-  database connection, data operations, and import and export of data.
-title: Milvus Command-Line Interface
+  Die Milvus-Befehlszeilenschnittstelle (CLI) ist ein Befehlszeilenwerkzeug, das
+  Datenbankverbindungen, Datenoperationen sowie den Import und Export von Daten
+  unterstützt.
+title: Milvus Befehlszeilenschnittstelle
 ---
-<h1 id="Milvus-Command-Line-Interface" class="common-anchor-header">Milvus Command-Line Interface<button data-href="#Milvus-Command-Line-Interface" class="anchor-icon" translate="no">
+<h1 id="Milvus-Command-Line-Interface" class="common-anchor-header">Milvus Befehlszeilenschnittstelle<button data-href="#Milvus-Command-Line-Interface" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -20,8 +21,8 @@ title: Milvus Command-Line Interface
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Milvus Command-Line Interface (CLI) is a command-line tool that supports database connection, data operations, and import and export of data. Based on <a href="https://github.com/milvus-io/pymilvus">Milvus Python SDK</a>, it allows the execution of commands through a terminal using interactive command-line prompts.</p>
-<h2 id="Recommended-version" class="common-anchor-header">Recommended version<button data-href="#Recommended-version" class="anchor-icon" translate="no">
+    </button></h1><p>Milvus Command-Line Interface (CLI) ist ein Kommandozeilen-Tool, das Datenbankverbindungen, Datenoperationen sowie den Import und Export von Daten unterstützt. Es basiert auf dem <a href="https://github.com/milvus-io/pymilvus">Milvus Python SDK</a> und ermöglicht die Ausführung von Befehlen über ein Terminal unter Verwendung interaktiver Befehlszeilen-Eingabeaufforderungen.</p>
+<h2 id="Recommended-version" class="common-anchor-header">Empfohlene Version<button data-href="#Recommended-version" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -36,7 +37,7 @@ title: Milvus Command-Line Interface
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>In the following table, you can find the recommended versions of PyMilvus and Milvus_CLI according to the version of Milvus that you use.</p>
+    </button></h2><p>In der folgenden Tabelle finden Sie die empfohlenen Versionen von PyMilvus und Milvus_CLI je nach der von Ihnen verwendeten Milvus-Version.</p>
 <table>
 <thead>
 <tr><th style="text-align:center">Milvus</th><th style="text-align:center">PyMilvus</th><th style="text-align:center">Milvus_CLI</th></tr>
@@ -58,8 +59,8 @@ title: Milvus Command-Line Interface
 <tr><td style="text-align:center">2.4.x</td><td style="text-align:center">2.4.x</td><td style="text-align:center">1.0.0</td></tr>
 </tbody>
 </table>
-<div class="alert note">Milvus 2.0.0-RC7 and later are not backward compatible with 2.0.0-RC6 and earlier due to changes made to storage formats.</div>
-<h2 id="Current-version" class="common-anchor-header">Current version<button data-href="#Current-version" class="anchor-icon" translate="no">
+<div class="alert note">Milvus 2.0.0-RC7 und spätere Versionen sind aufgrund von Änderungen an den Speicherformaten nicht abwärtskompatibel mit 2.0.0-RC6 und früheren Versionen.</div>
+<h2 id="Current-version" class="common-anchor-header">Aktuelle Version<button data-href="#Current-version" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -74,5 +75,4 @@ title: Milvus Command-Line Interface
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>The current version of Milvus_CLI is 1.0.0.
-To find your installed version and see if you need to update, run <code translate="no">milvus_cli --version</code>.</p>
+    </button></h2><p>Die aktuelle Version von Milvus_CLI ist 1.0.0. Um Ihre installierte Version zu ermitteln und festzustellen, ob Sie eine Aktualisierung benötigen, führen Sie <code translate="no">milvus_cli --version</code> aus.</p>

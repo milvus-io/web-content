@@ -1,11 +1,11 @@
 ---
 id: coordinator_ha.md
 summary: >-
-  Learn about the motivation and procedure for Milvus coordinators to work in
-  active standby.
-title: Coordinator HA
+  Erfahren Sie mehr über die Motivation und das Verfahren für
+  Milvus-Koordinatoren, die im aktiven Bereitschaftsdienst arbeiten.
+title: Koordinator HA
 ---
-<h1 id="Coordinator-HA" class="common-anchor-header">Coordinator HA<button data-href="#Coordinator-HA" class="anchor-icon" translate="no">
+<h1 id="Coordinator-HA" class="common-anchor-header">Koordinator HA<button data-href="#Coordinator-HA" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -20,8 +20,8 @@ title: Coordinator HA
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>As shown in the <a href="/docs/architecture_overview.md">Milvus architecture</a>, Milvus consists of many components and has them work in a distributed manner. Among all the components, Milvus ensures the high availability of the workers through <a href="/docs/scaleout.md">scaling up and scaling out</a> of the nodes, making coordinators the only weak link in the chain.</p>
-<h2 id="Overview" class="common-anchor-header">Overview<button data-href="#Overview" class="anchor-icon" translate="no">
+    </button></h1><p>Wie in der <a href="/docs/de/architecture_overview.md">Milvus-Architektur</a> dargestellt, besteht Milvus aus vielen Komponenten und lässt sie verteilt arbeiten. Von allen Komponenten sorgt Milvus für die hohe Verfügbarkeit der Arbeiter durch das <a href="/docs/de/scaleout.md">Hoch- und Runterskalieren</a> der Knoten, wobei die Koordinatoren das einzige schwache Glied in der Kette sind.</p>
+<h2 id="Overview" class="common-anchor-header">Überblick<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -36,15 +36,13 @@ title: Coordinator HA
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>In the 2.2.3 release, Milvus implements high availability for coordinators to make them work in the active-standby mode, mitigating possible single points of failure (SPoFs) that can result in service unavailability.</p>
+    </button></h2><p>In der Version 2.2.3 implementiert Milvus Hochverfügbarkeit für Koordinatoren, um sie im Aktiv-Standby-Modus arbeiten zu lassen und so mögliche Single Points of Failure (SPoFs) zu entschärfen, die zur Nichtverfügbarkeit von Diensten führen können.</p>
 <p>
-  <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.5.x/assets/coordinator_ha.png" alt="Coordinator HA" class="doc-image" id="coordinator-ha" />
-    <span>Coordinator HA</span>
-  </span>
-</p>
-<p>The figure above illustrates how coordinators work in the active-standby mode. When a pair of coordinators start, they register with etcd using their server ID and compete for the active role. The coordinator who succeeds in leasing the active role from the etcd will start serving, and the other coordinator in the pair will remain on standby, watching the active role and ready to serve if the active coordinator dies.</p>
-<h2 id="Enable-coordinator-HA" class="common-anchor-header">Enable coordinator HA<button data-href="#Enable-coordinator-HA" class="anchor-icon" translate="no">
+  
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/coordinator_ha.png" alt="Coordinator HA" class="doc-image" id="coordinator-ha" />
+   </span> <span class="img-wrapper"> <span>Koordinator HA</span> </span></p>
+<p>Die obige Abbildung veranschaulicht, wie Koordinatoren im Active-Standby-Modus arbeiten. Wenn ein Koordinatorenpaar startet, registrieren sie sich mit ihrer Server-ID bei etcd und konkurrieren um die aktive Rolle. Der Koordinator, dem es gelingt, die aktive Rolle vom etcd zu leasen, beginnt mit dem Dienst, während der andere Koordinator des Paares in Bereitschaft bleibt, die aktive Rolle überwacht und bereit ist, den Dienst zu übernehmen, wenn der aktive Koordinator ausfällt.</p>
+<h2 id="Enable-coordinator-HA" class="common-anchor-header">Aktivieren von Koordinator-HA<button data-href="#Enable-coordinator-HA" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -59,12 +57,12 @@ title: Coordinator HA
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="With-Helm" class="common-anchor-header">With Helm</h3><p>To start multiple coordinators and have them work in active-standby mode, you should make the following changes to your <code translate="no">values.yaml</code> file.</p>
+    </button></h2><h3 id="With-Helm" class="common-anchor-header">Mit Helm</h3><p>Um mehrere Koordinatoren zu starten und sie im Aktiv-Standby-Modus arbeiten zu lassen, sollten Sie die folgenden Änderungen an Ihrer Datei <code translate="no">values.yaml</code> vornehmen.</p>
 <ul>
-<li>Set <code translate="no">xxxCoordinator.replicas</code> to <code translate="no">2</code>.</li>
-<li>Set <code translate="no">xxxCoordinator.activeStandby.enabled</code> to <code translate="no">true</code>.</li>
+<li>Setzen Sie <code translate="no">xxxCoordinator.replicas</code> auf <code translate="no">2</code>.</li>
+<li>Setzen Sie <code translate="no">xxxCoordinator.activeStandby.enabled</code> auf <code translate="no">true</code>.</li>
 </ul>
-<p>The following code snippet uses RootCoord as an example. You can do the same to coordinators of other types.</p>
+<p>Der folgende Codeschnipsel verwendet RootCoord als Beispiel. Sie können das Gleiche für Koordinatoren anderer Typen tun.</p>
 <pre><code translate="no" class="language-yaml">rootCoordinator:
   enabled: true
   <span class="hljs-comment"># You can set the number of replicas greater than 1 only if you also need to set activeStandby.enabled to true.</span>
@@ -81,8 +79,8 @@ title: Coordinator HA
   activeStandby:
     enabled: true  <span class="hljs-comment"># Set this to true to have RootCoordinators work in active-standby mode.</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="With-Docker" class="common-anchor-header">With Docker</h3><p>To start multiple coordinators and have them work in active-standby mode, you can add some definitions to the <code translate="no">docker-compose</code> file that you use to start your Milvus cluster.</p>
-<p>The following code snippet uses RootCoord as an example. You can do the same to coordinators of other types.</p>
+<h3 id="With-Docker" class="common-anchor-header">Mit Docker</h3><p>Um mehrere Koordinatoren zu starten und sie im Aktiv-Standby-Modus arbeiten zu lassen, können Sie einige Definitionen in die Datei <code translate="no">docker-compose</code> einfügen, die Sie zum Starten Ihres Milvus-Clusters verwenden.</p>
+<p>Der folgende Codeschnipsel verwendet RootCoord als Beispiel. Sie können das Gleiche für andere Koordinatoren tun.</p>
 <pre><code translate="no" class="language-yaml">  rootcoord:
     container_name: milvus-rootcoord
     image: milvusdb/milvus:v2<span class="hljs-number">.2</span><span class="hljs-number">.3</span>
@@ -116,35 +114,35 @@ title: Coordinator HA
 <span class="hljs-comment">#      - &quot;pulsar&quot;</span>
 <span class="hljs-comment">#      - &quot;minio&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="With-MacLinux-shell" class="common-anchor-header">With Mac/Linux shell</h3><p>To start multiple coordinators and have them work in active-standby mode, you can</p>
+<h3 id="With-MacLinux-shell" class="common-anchor-header">Mit Mac/Linux-Shell</h3><p>Um mehrere Koordinatoren zu starten und sie im Aktiv-Standby-Modus arbeiten zu lassen, können Sie</p>
 <ol>
-<li><p>Download the Milvus source code to your local drive, and <a href="https://github.com/milvus-io/milvus/blob/master/DEVELOPMENT.md">start up a Milvus cluster from the source code</a> as follows:</p>
+<li><p>Laden Sie den Milvus-Quellcode auf Ihr lokales Laufwerk herunter, und <a href="https://github.com/milvus-io/milvus/blob/master/DEVELOPMENT.md">starten Sie einen Milvus-Cluster aus dem Quellcode</a> wie folgt:</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-built_in">sudo</span> ./scripts/start_cluster.sh
 <button class="copy-code-btn"></button></code></pre>
-<p>Milvus runs with only one coordinator of each type at the end of this step.</p></li>
-<li><p>Update <code translate="no">milvus.yaml</code> to change the port number of the coordinator of each type. The following uses <strong>rootCoord</strong> as an example.</p>
+<p>Am Ende dieses Schrittes läuft Milvus mit nur einem Koordinator jedes Typs.</p></li>
+<li><p>Aktualisieren Sie <code translate="no">milvus.yaml</code>, um die Portnummer des Koordinators jedes Typs zu ändern. Im Folgenden wird <strong>rootCoord</strong> als Beispiel verwendet.</p>
 <pre><code translate="no" class="language-yaml">rootCoord:
   address: localhost
   port: <span class="hljs-number">53100</span> <span class="hljs-comment"># change to 53001</span>
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p>Start the standby coordinator.</p>
+<li><p>Starten Sie den Standby-Koordinator.</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-built_in">sudo</span> <span class="hljs-built_in">nohup</span> ./bin/milvus run rootcoord &gt; /tmp/rootcoord2.<span class="hljs-built_in">log</span> 2&gt;&amp;1 &amp;
 <button class="copy-code-btn"></button></code></pre>
-<p>At the end of this step, run the following command to verify that two coordinator processes exists.</p>
+<p>Führen Sie am Ende dieses Schritts den folgenden Befehl aus, um zu überprüfen, ob zwei Coordinator-Prozesse vorhanden sind.</p>
 <pre><code translate="no" class="language-shell">ps aux|grep milvus
 <button class="copy-code-btn"></button></code></pre>
-<p>The output should be similar to</p>
+<p>Die Ausgabe sollte in etwa so aussehen</p>
 <pre><code translate="no" class="language-shell">&gt; ps aux|grep milvus
 root        12813   0.7 0.2 410709648   82432   ??  S   5:18PM  0:33.28 ./bin/milvus run rootcoord
 root        12816   0.5 0.2 409487968   62352   ??  S   5:18PM  0:22.69 ./bin/milvus run proxy
 root        17739   0.1 0.3 410289872   91792 s003  SN  6:01PM  0:00.30 ./bin/milvus run rootcoord
 ...
 <button class="copy-code-btn"></button></code></pre>
-<p>And the standby coordinator outputs a log entry every ten seconds as follows:</p>
+<p>Und der Standby-Koordinator gibt alle zehn Sekunden einen Protokolleintrag wie folgt aus:</p>
 <pre><code translate="no" class="language-shell">[INFO] [sessionutil/session_util.go:649] [<span class="hljs-string">&quot;serverName: rootcoord is in STANDBY ...&quot;</span>]
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p>Kill the active coordinator in a pair and watch the behavior of the standby coordinator.</p>
-<p>You can find that it takes 60 seconds for the standby coordinator to take over the active role.</p>
+<li><p>Beenden Sie den aktiven Koordinator eines Paares und beobachten Sie das Verhalten des Standby-Koordinators.</p>
+<p>Sie können feststellen, dass es 60 Sekunden dauert, bis der Standby-Koordinator die aktive Rolle übernommen hat.</p>
 <pre><code translate="no" class="language-shell">[2022/09/21 11:58:33.855 +08:00] [DEBUG] [sessionutil/session_util.go:677] [<span class="hljs-string">&quot;watch the ACTIVE key&quot;</span>] [DELETE=<span class="hljs-string">&quot;key:\&quot;by-dev/meta/session/rootcoord\&quot; mod_revision:167 &quot;</span>]
 [2022/09/21 11:58:33.856 +08:00] [DEBUG] [sessionutil/session_util.go:677] [<span class="hljs-string">&quot;watch the ACTIVE key&quot;</span>] [DELETE=<span class="hljs-string">&quot;key:\&quot;by-dev/meta/session/rootcoord-15\&quot; mod_revision:167 &quot;</span>]
 [2022/09/21 11:58:33.856 +08:00] [INFO] [sessionutil/session_util.go:683] [<span class="hljs-string">&quot;stop watching ACTIVE key&quot;</span>]
@@ -157,7 +155,7 @@ root        17739   0.1 0.3 410289872   91792 s003  SN  6:01PM  0:00.30 ./bin/mi
 [2022/09/21 11:58:33.859 +08:00] [DEBUG] [components/root_coord.go:58] [<span class="hljs-string">&quot;RootCoord successfully started&quot;</span>]
 <button class="copy-code-btn"></button></code></pre></li>
 </ol>
-<h2 id="Related-configuration-items" class="common-anchor-header">Related configuration items<button data-href="#Related-configuration-items" class="anchor-icon" translate="no">
+<h2 id="Related-configuration-items" class="common-anchor-header">Zugehörige Konfigurationselemente<button data-href="#Related-configuration-items" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -172,13 +170,13 @@ root        17739   0.1 0.3 410289872   91792 s003  SN  6:01PM  0:00.30 ./bin/mi
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Coordinator HA is disabled by default. You can enable this feature manually by changing the following items in your Milvus configuration file.</p>
+    </button></h2><p>Coordinator HA ist standardmäßig deaktiviert. Sie können diese Funktion manuell aktivieren, indem Sie die folgenden Elemente in Ihrer Milvus-Konfigurationsdatei ändern.</p>
 <ul>
-<li><a href="/docs/configure_rootcoord.md#rootCoordactiveStandbyenabled">rootCoord.activeStandby.enabled</a></li>
-<li><a href="/docs/configure_querycoord.md#queryCoordactiveStandbyenabled">queryCoord.activeStandby.enabled</a></li>
-<li><a href="/docs/configure_datacoord.md#dataCoordactiveStandbyenabled">dataCoord.activeStandby.enabled</a></li>
+<li><a href="/docs/de/configure_rootcoord.md#rootCoordactiveStandbyenabled">rootCoord.activeStandby.enabled</a></li>
+<li><a href="/docs/de/configure_querycoord.md#queryCoordactiveStandbyenabled">queryCoord.activeStandby.enabled</a></li>
+<li><a href="/docs/de/configure_datacoord.md#dataCoordactiveStandbyenabled">dataCoord.activeStandby.enabled</a></li>
 </ul>
-<h2 id="Limits" class="common-anchor-header">Limits<button data-href="#Limits" class="anchor-icon" translate="no">
+<h2 id="Limits" class="common-anchor-header">Begrenzt<button data-href="#Limits" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -193,5 +191,5 @@ root        17739   0.1 0.3 410289872   91792 s003  SN  6:01PM  0:00.30 ./bin/mi
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Currently, there is no strong consistency guarantee between the active and standby service. Therefore, the standby coordinator needs to reload the metadata while taking over the active role.</p>
-<p>Etcd releases a lease only after the current session has timed out. The session timeout defaults to 60 seconds. Therefore, there is a 60-second gap between when the active coordinator dies and when the standby coordinator takes over the active role.</p>
+    </button></h2><p>Derzeit gibt es keine starke Konsistenzgarantie zwischen dem aktiven und dem Standby-Dienst. Daher muss der Standby-Koordinator die Metadaten neu laden, wenn er die aktive Rolle übernimmt.</p>
+<p>Etcd gibt einen Lease erst dann frei, wenn die aktuelle Sitzung eine Zeitüberschreitung aufweist. Der Standardwert für die Sitzungsdauer beträgt 60 Sekunden. Daher vergehen 60 Sekunden zwischen dem Tod des aktiven Koordinators und der Übernahme der aktiven Rolle durch den Standby-Koordinator.</p>

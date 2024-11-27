@@ -1,13 +1,13 @@
 ---
 id: enable-dynamic-field.md
-title: Enable Dynamic Field
+title: Dynamisches Feld einschalten
 summary: >-
-  All fields defined in the schema of a collection must be included in the
-  entities to be inserted. If you want some fields to be optional, consider
-  enabling the dynamic field. This topic describes how to enable and use the
-  dynamic field.​
+  Alle im Schema einer Sammlung definierten Felder müssen in den einzufügenden
+  Entitäten enthalten sein. Wenn Sie möchten, dass einige Felder optional sind,
+  sollten Sie das dynamische Feld aktivieren. In diesem Thema wird beschrieben,
+  wie Sie das dynamische Feld aktivieren und verwenden können.
 ---
-<h1 id="Dynamic-Field​" class="common-anchor-header">Dynamic Field​<button data-href="#Dynamic-Field​" class="anchor-icon" translate="no">
+<h1 id="Dynamic-Field​" class="common-anchor-header">Dynamisches Feld<button data-href="#Dynamic-Field​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -22,8 +22,8 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>All fields defined in the schema of a collection must be included in the entities to be inserted. If you want some fields to be optional, consider enabling the dynamic field. This topic describes how to enable and use the dynamic field.​</p>
-<h2 id="Overview​" class="common-anchor-header">Overview​<button data-href="#Overview​" class="anchor-icon" translate="no">
+    </button></h1><p>Alle im Schema einer Sammlung definierten Felder müssen in den einzufügenden Entitäten enthalten sein. Wenn Sie möchten, dass einige Felder optional sind, sollten Sie das dynamische Feld aktivieren. In diesem Thema wird beschrieben, wie Sie das dynamische Feld aktivieren und verwenden können.</p>
+<h2 id="Overview​" class="common-anchor-header">Übersicht<button data-href="#Overview​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -38,10 +38,10 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>In Milvus, you can create a collection schema by setting the names and data types for each field in the collection. When you add a field to the schema, make sure that this field is included in the entity you intend to insert. If you want some fields to be optional, enabling the dynamic field is one option.​</p>
-<p>The dynamic field is a reserved field named <code translate="no">$meta</code>, which is of the JavaScript Object Notation (JSON) type. Any fields in the entities that are not defined in the schema will be stored in this reserved JSON field as key-value pairs.​</p>
-<p>For a collection with the dynamic field enabled, you can use keys in the dynamic field for scalar filtering, just as you would with fields explicitly defined in the schema.​</p>
-<h2 id="Enable-dynamic-field​" class="common-anchor-header">Enable dynamic field​<button data-href="#Enable-dynamic-field​" class="anchor-icon" translate="no">
+    </button></h2><p>In Milvus können Sie ein Sammlungsschema erstellen, indem Sie die Namen und Datentypen für jedes Feld in der Sammlung festlegen. Wenn Sie ein Feld zum Schema hinzufügen, stellen Sie sicher, dass dieses Feld in der Entität enthalten ist, die Sie einfügen möchten. Wenn Sie möchten, dass einige Felder optional sind, ist die Aktivierung des dynamischen Feldes eine Möglichkeit.</p>
+<p>Bei dem dynamischen Feld handelt es sich um ein reserviertes Feld mit der Bezeichnung <code translate="no">$meta</code>, das vom Typ JavaScript Object Notation (JSON) ist. Alle Felder in den Entitäten, die nicht im Schema definiert sind, werden in diesem reservierten JSON-Feld als Schlüssel-Wert-Paare gespeichert.</p>
+<p>Bei einer Sammlung mit aktiviertem dynamischen Feld können Sie die Schlüssel im dynamischen Feld für die skalare Filterung verwenden, genau wie bei explizit im Schema definierten Feldern.</p>
+<h2 id="Enable-dynamic-field​" class="common-anchor-header">Aktivieren des dynamischen Felds<button data-href="#Enable-dynamic-field​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -56,14 +56,9 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Collections created using the method described in <a href="/docs/create-collection-instantly.md">​Create Collection Instantly</a> have the dynamic field enabled by default. You can also enable the dynamic field manually when creating a collection with custom settings.​</p>
+    </button></h2><p>Bei Sammlungen, die mit der unter <a href="/docs/de/create-collection-instantly.md">Sofortige Erstellung einer Sammlung</a> beschriebenen Methode erstellt wurden, ist das dynamische Feld standardmäßig aktiviert. Sie können das dynamische Feld auch manuell aktivieren, wenn Sie eine Sammlung mit benutzerdefinierten Einstellungen erstellen.</p>
 <div class="multipleCode">
-  <a href="#python">Python </a>
-  <a href="#java">Java</a>
-  <a href="#javascript">Node.js</a>
-  <a href="#go">Go</a>
-  <a href="#curl">cURL</a>
-</div>
+ <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#go">Go</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient​
 ​
 client= MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)​
@@ -118,7 +113,7 @@ client.createCollection(createCollectionReq);​
 }&#x27;</span>​
 
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Use-dynamic-field​" class="common-anchor-header">Use dynamic field​<button data-href="#Use-dynamic-field​" class="anchor-icon" translate="no">
+<h2 id="Use-dynamic-field​" class="common-anchor-header">Dynamisches Feld verwenden<button data-href="#Use-dynamic-field​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -133,8 +128,8 @@ client.createCollection(createCollectionReq);​
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>When the dynamic field is enabled in your collection, all fields and their values that are not defined in the schema will be stored as key-value pairs in the dynamic field.​</p>
-<p>For example, suppose your collection schema defines only two fields, named <code translate="no">id</code> and <code translate="no">vector</code>, with the dynamic field enabled. Now, insert the following dataset into this collection.​</p>
+    </button></h2><p>Wenn das dynamische Feld in Ihrer Sammlung aktiviert ist, werden alle Felder und ihre Werte, die nicht im Schema definiert sind, als Schlüssel-Wert-Paare im dynamischen Feld gespeichert.</p>
+<p>Angenommen, Ihr Auflistungsschema definiert nur zwei Felder mit den Namen <code translate="no">id</code> und <code translate="no">vector</code>, wobei das dynamische Feld aktiviert ist. Fügen Sie nun den folgenden Datensatz in diese Sammlung ein.</p>
 <pre><code translate="no" class="language-JSON">[​
     {<span class="hljs-built_in">id</span>: <span class="hljs-number">0</span>, vector: [<span class="hljs-number">0.3580376395471989</span>, -<span class="hljs-number">0.6023495712049978</span>, <span class="hljs-number">0.18414012509913835</span>, -<span class="hljs-number">0.26286205330961354</span>, <span class="hljs-number">0.9029438446296592</span>], color: <span class="hljs-string">&quot;pink_8682&quot;</span>},​
     {<span class="hljs-built_in">id</span>: <span class="hljs-number">1</span>, vector: [<span class="hljs-number">0.19886812562848388</span>, <span class="hljs-number">0.06023560599112088</span>, <span class="hljs-number">0.6976963061752597</span>, <span class="hljs-number">0.2614474506242501</span>, <span class="hljs-number">0.838729485096104</span>], color: <span class="hljs-string">&quot;red_7025&quot;</span>},​
@@ -149,15 +144,10 @@ client.createCollection(createCollectionReq);​
 ]​
 
 <button class="copy-code-btn"></button></code></pre>
-<p>The dataset above contains 10 entities, each including the fields <code translate="no">id</code>, <code translate="no">vector</code>, and <code translate="no">color</code>. Here, the <code translate="no">color</code> field is not defined in the schema. Since the collection has the dynamic field enabled, the field <code translate="no">color</code> will be stored as a key-value pair within the dynamic field.​</p>
-<h3 id="Insert-data​" class="common-anchor-header">Insert data​</h3><p>The following code demonstrates how to insert this dataset into the collection.​</p>
+<p>Der obige Datensatz enthält 10 Entitäten, von denen jede die Felder <code translate="no">id</code>, <code translate="no">vector</code> und <code translate="no">color</code> enthält. Das Feld <code translate="no">color</code> ist hier nicht im Schema definiert. Da in der Sammlung das dynamische Feld aktiviert ist, wird das Feld <code translate="no">color</code> als Schlüssel-Wert-Paar im dynamischen Feld gespeichert.</p>
+<h3 id="Insert-data​" class="common-anchor-header">Daten einfügen</h3><p>Der folgende Code demonstriert, wie dieser Datensatz in die Sammlung eingefügt wird.</p>
 <div class="multipleCode">
-  <a href="#python">Python </a>
-  <a href="#java">Java</a>
-  <a href="#javascript">Node.js</a>
-  <a href="#go">Go</a>
-  <a href="#curl">cURL</a>
-</div>
+ <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#go">Go</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python">data=[​
     {<span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">0</span>, <span class="hljs-string">&quot;vector&quot;</span>: [<span class="hljs-number">0.3580376395471989</span>, -<span class="hljs-number">0.6023495712049978</span>, <span class="hljs-number">0.18414012509913835</span>, -<span class="hljs-number">0.26286205330961354</span>, <span class="hljs-number">0.9029438446296592</span>], <span class="hljs-string">&quot;color&quot;</span>: <span class="hljs-string">&quot;pink_8682&quot;</span>},​
     {<span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">1</span>, <span class="hljs-string">&quot;vector&quot;</span>: [<span class="hljs-number">0.19886812562848388</span>, <span class="hljs-number">0.06023560599112088</span>, <span class="hljs-number">0.6976963061752597</span>, <span class="hljs-number">0.2614474506242501</span>, <span class="hljs-number">0.838729485096104</span>], <span class="hljs-string">&quot;color&quot;</span>: <span class="hljs-string">&quot;red_7025&quot;</span>},​
@@ -288,14 +278,9 @@ curl --request POST \​
 <span class="hljs-comment"># }​</span>
 
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Query-and-search-with-dynamic-field​" class="common-anchor-header">Query and search with dynamic field​</h3><p>Milvus supports the use of filter expressions during queries and searches, allowing you to specify which fields to include in the results. The following example demonstrates how to perform queries and searches using the <code translate="no">color</code> field, which is not defined in the schema, by using the dynamic field.​</p>
+<h3 id="Query-and-search-with-dynamic-field​" class="common-anchor-header">Abfrage und Suche mit dynamischem Feld</h3><p>Milvus unterstützt die Verwendung von Filterausdrücken bei Abfragen und Suchen, mit denen Sie angeben können, welche Felder in die Ergebnisse aufgenommen werden sollen. Das folgende Beispiel zeigt, wie Abfragen und Suchen mit dem Feld <code translate="no">color</code>, das nicht im Schema definiert ist, unter Verwendung des dynamischen Feldes durchgeführt werden können.</p>
 <div class="multipleCode">
-  <a href="#python">Python </a>
-  <a href="#java">Java</a>
-  <a href="#javascript">Node.js</a>
-  <a href="#go">Go</a>
-  <a href="#curl">cURL</a>
-</div>
+ <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#go">Go</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python">query_vector = [<span class="hljs-number">0.3580376395471989</span>, -<span class="hljs-number">0.6023495712049978</span>, <span class="hljs-number">0.18414012509913835</span>, -<span class="hljs-number">0.26286205330961354</span>, <span class="hljs-number">0.9029438446296592</span>]​
 ​
 res = client.search(​
@@ -371,7 +356,7 @@ curl --request POST \​
 <span class="hljs-comment"># {&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:[{&quot;color&quot;:&quot;red_7025&quot;,&quot;distance&quot;:0.6290165,&quot;id&quot;:1},{&quot;color&quot;:&quot;red_4794&quot;,&quot;distance&quot;:0.5975797,&quot;id&quot;:4},{&quot;color&quot;:&quot;red_9392&quot;,&quot;distance&quot;:-0.24996185,&quot;id&quot;:6}]}​</span>
 
 <button class="copy-code-btn"></button></code></pre>
-<p>In the filter expression used in the code example above, <code translate="no">color like &quot;red%&quot; and likes &gt; 50</code>, the conditions specify that the value of the <code translate="no">color</code> field must start with <strong>“red”</strong>. In the sample data, only two entities meet this condition. Thus, when <code translate="no">limit</code> (topK) is set to <code translate="no">3</code> or fewer, both of these entities will be returned.​</p>
+<p>In dem im obigen Codebeispiel verwendeten Filterausdruck <code translate="no">color like &quot;red%&quot; and likes &gt; 50</code> legen die Bedingungen fest, dass der Wert des Feldes <code translate="no">color</code> mit <strong>"rot"</strong> beginnen muss <strong>.</strong> In den Beispieldaten erfüllen nur zwei Entitäten diese Bedingung. Wenn also <code translate="no">limit</code> (topK) auf <code translate="no">3</code> oder weniger gesetzt wird, werden diese beiden Entitäten zurückgegeben.</p>
 <pre><code translate="no" class="language-JSON">[​
     {​
         <span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">4</span>, ​
@@ -394,4 +379,4 @@ curl --request POST \​
 ]​
 
 <button class="copy-code-btn"></button></code></pre>
-<p>​</p>
+<p></p>

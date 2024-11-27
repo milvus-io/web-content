@@ -1,13 +1,15 @@
 ---
 id: funnel_search_with_matryoshka.md
 summary: >-
-  In this notebook, we examine how to use Matryoshka embeddings with Milvus for
-  semantic search. We illustrate an algorithm called "funnel search" that allows
-  us to perform similarity search over a small subset of our embedding
-  dimensions without a drastic drop in recall.
-title: Funnel Search with Matryoshka Embeddings
+  In diesem Notizbuch untersuchen wir, wie wir Matryoshka-Einbettungen mit
+  Milvus für die semantische Suche verwenden können. Wir veranschaulichen einen
+  Algorithmus namens "Trichtersuche", der es uns ermöglicht, eine
+  Ähnlichkeitssuche über eine kleine Teilmenge unserer Einbettungsdimensionen
+  durchzuführen, ohne dass es zu einem drastischen Abfall der Wiedererkennung
+  kommt.
+title: Trichtersuche mit Matryoshka-Embeddings
 ---
-<h1 id="Funnel-Search-with-Matryoshka-Embeddings" class="common-anchor-header">Funnel Search with Matryoshka Embeddings<button data-href="#Funnel-Search-with-Matryoshka-Embeddings" class="anchor-icon" translate="no">
+<h1 id="Funnel-Search-with-Matryoshka-Embeddings" class="common-anchor-header">Trichtersuche mit Matryoshka-Embeddings<button data-href="#Funnel-Search-with-Matryoshka-Embeddings" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -22,12 +24,12 @@ title: Funnel Search with Matryoshka Embeddings
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>When building efficient vector search systems, one key challenge is managing storage costs while maintaining acceptable latency and recall. Modern embedding models output vectors with hundreds or thousands of dimensions, creating significant storage and computational overhead for the raw vector and index.</p>
-<p>Traditionally, the storage requirements are reduced by applying a quantization or dimensionality reduction method just before building the index. For instance, we can save storage by lowering the precision using Product Quantization (PQ) or the number of dimensions using Principal Component Analysis (PCA). These methods analyze the entire vector set to find a more compact one that maintains the semantic relationships between vectors.</p>
-<p>While effective, these standard approaches reduce precision or dimensionality only once and at a single scale. But what if we could maintain multiple layers of detail simultaneously, like a pyramid of increasingly precise representations?</p>
-<p>Enter Matryoshka embeddings. Named after Russian nesting dolls (see illustration), these clever constructs embed multiple scales of representation within a single vector. Unlike traditional post-processing methods, Matryoshka embeddings learn this multi-scale structure during the initial training process. The result is remarkable: not only does the full embedding capture input semantics, but each nested subset prefix (first half, first quarter, etc.) provides a coherent, if less detailed, representation.</p>
+    </button></h1><p>Beim Aufbau effizienter Vektorsuchsysteme besteht eine der größten Herausforderungen darin, die Speicherkosten zu bewältigen und gleichzeitig eine akzeptable Latenzzeit und Wiederauffindbarkeit zu gewährleisten. Moderne Einbettungsmodelle geben Vektoren mit Hunderten oder Tausenden von Dimensionen aus, was zu einem erheblichen Speicher- und Rechenaufwand für den Rohvektor und den Index führt.</p>
+<p>Traditionell wird der Speicherbedarf durch die Anwendung einer Quantisierungs- oder Dimensionalitätsreduzierungsmethode unmittelbar vor dem Aufbau des Index reduziert. Wir können beispielsweise Speicherplatz einsparen, indem wir die Genauigkeit mithilfe der Produktquantisierung (PQ) oder die Anzahl der Dimensionen mithilfe der Hauptkomponentenanalyse (PCA) verringern. Diese Methoden analysieren die gesamte Vektormenge, um eine kompaktere Menge zu finden, die die semantischen Beziehungen zwischen den Vektoren beibehält.</p>
+<p>Diese Standardansätze sind zwar effektiv, aber sie reduzieren die Präzision oder Dimensionalität nur einmal und auf einer einzigen Ebene. Aber was wäre, wenn wir mehrere Detailschichten gleichzeitig beibehalten könnten, wie eine Pyramide von immer präziseren Darstellungen?</p>
+<p>Das ist die Matrjoschka-Einbettung. Diese cleveren Konstrukte, die nach den russischen Schachtelpuppen benannt sind (siehe Abbildung), betten mehrere Darstellungsebenen in einen einzigen Vektor ein. Im Gegensatz zu herkömmlichen Nachbearbeitungsmethoden erlernen Matryoshka-Einbettungen diese Multiskalenstruktur während des anfänglichen Trainingsprozesses. Das Ergebnis ist bemerkenswert: Die vollständige Einbettung erfasst nicht nur die Semantik der Eingabe, sondern jedes verschachtelte Untergruppenpräfix (erste Hälfte, erstes Viertel usw.) liefert eine kohärente, wenn auch weniger detaillierte Darstellung.</p>
 <div style='margin: auto; width: 50%;'><img translate="no" src='/docs/v2.5.x/assets/funnel-search.png' width='100%'></div>
-<p>In this notebook, we examine how to use Matryoshka embeddings with Milvus for semantic search. We illustrate an algorithm called “funnel search” that allows us to perform similarity search over a small subset of our embedding dimensions without a drastic drop in recall.</p>
+<p>In diesem Notizbuch untersuchen wir, wie man Matryoshka-Einbettungen mit Milvus für die semantische Suche verwenden kann. Wir veranschaulichen einen Algorithmus namens "Trichtersuche", der es uns ermöglicht, eine Ähnlichkeitssuche über eine kleine Teilmenge unserer Einbettungsdimensionen durchzuführen, ohne dass es zu einem drastischen Abfall der Wiedererkennbarkeit kommt.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> functools
 
 <span class="hljs-keyword">from</span> datasets <span class="hljs-keyword">import</span> load_dataset
@@ -41,7 +43,7 @@ title: Funnel Search with Matryoshka Embeddings
 <span class="hljs-keyword">import</span> torch.<span class="hljs-property">nn</span>.<span class="hljs-property">functional</span> <span class="hljs-keyword">as</span> F
 <span class="hljs-keyword">from</span> tqdm <span class="hljs-keyword">import</span> tqdm
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Load-Matryoshka-Embedding-Model" class="common-anchor-header">Load Matryoshka Embedding Model<button data-href="#Load-Matryoshka-Embedding-Model" class="anchor-icon" translate="no">
+<h2 id="Load-Matryoshka-Embedding-Model" class="common-anchor-header">Matrjoschka-Einbettungsmodell laden<button data-href="#Load-Matryoshka-Embedding-Model" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -56,7 +58,7 @@ title: Funnel Search with Matryoshka Embeddings
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Instead of using a standard embedding model such as <a href="https://huggingface.co/sentence-transformers/all-MiniLM-L12-v2"><code translate="no">sentence-transformers/all-MiniLM-L12-v2</code></a>, we use <a href="https://huggingface.co/nomic-ai/nomic-embed-text-v1">a model from Nomic</a> trained especially to produce Matryoshka embeddings.</p>
+    </button></h2><p>Anstatt ein Standard-Einbettungsmodell wie <a href="https://huggingface.co/sentence-transformers/all-MiniLM-L12-v2"><code translate="no">sentence-transformers/all-MiniLM-L12-v2</code></a>verwenden wir <a href="https://huggingface.co/nomic-ai/nomic-embed-text-v1">ein Modell von Nomic</a>, das speziell für die Erstellung von Matryoshka-Einbettungen trainiert wurde.</p>
 <pre><code translate="no" class="language-python">model = SentenceTransformer(
     <span class="hljs-comment"># Remove &#x27;device=&#x27;mps&#x27; if running on non-Mac device</span>
     <span class="hljs-string">&quot;nomic-ai/nomic-embed-text-v1.5&quot;</span>,
@@ -66,7 +68,7 @@ title: Funnel Search with Matryoshka Embeddings
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">&lt;All keys matched successfully&gt;
 </code></pre>
-<h2 id="Loading-Dataset-Embedding-Items-and-Building-Vector-Database" class="common-anchor-header">Loading Dataset, Embedding Items, and Building Vector Database<button data-href="#Loading-Dataset-Embedding-Items-and-Building-Vector-Database" class="anchor-icon" translate="no">
+<h2 id="Loading-Dataset-Embedding-Items-and-Building-Vector-Database" class="common-anchor-header">Laden des Datensatzes, Einbetten der Elemente und Aufbau der Vektordatenbank<button data-href="#Loading-Dataset-Embedding-Items-and-Building-Vector-Database" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -81,7 +83,7 @@ title: Funnel Search with Matryoshka Embeddings
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>The following code is a modification of that from the documentation page <a href="https://milvus.io/docs/integrate_with_sentencetransformers.md">“Movie Search with Sentence Transformers and Milvus”</a>. First, we load the dataset from HuggingFace. It contains around 35k entries, each corresponding to a movie having a Wikipedia article. We will use the <code translate="no">Title</code> and <code translate="no">PlotSummary</code> fields in this example.</p>
+    </button></h2><p>Der folgende Code ist eine Abwandlung des Codes aus der Dokumentationsseite <a href="https://milvus.io/docs/integrate_with_sentencetransformers.md">"Movie Search with Sentence Transformers and Milvus".</a> Zuerst laden wir den Datensatz von HuggingFace. Er enthält etwa 35k Einträge, die jeweils einem Film mit einem Wikipedia-Artikel entsprechen. Wir werden in diesem Beispiel die Felder <code translate="no">Title</code> und <code translate="no">PlotSummary</code> verwenden.</p>
 <pre><code translate="no" class="language-python">ds = load_dataset(<span class="hljs-string">&quot;vishnupriyavr/wiki-movie-plots-with-summaries&quot;</span>, <span class="hljs-built_in">split</span>=<span class="hljs-string">&quot;train&quot;</span>)
 <span class="hljs-built_in">print</span>(ds)
 <button class="copy-code-btn"></button></code></pre>
@@ -90,7 +92,7 @@ title: Funnel Search with Matryoshka Embeddings
     num_rows: 34886
 })
 </code></pre>
-<p>Next, we connect to a Milvus Lite database, specify the data schema, and create a collection with this schema. We will store both the unnormalized embedding and the first sixth of the embedding in separate fields. The reason for this is that we need the first 1/6th of the Matryoshka embedding for performing a similarity search, and the remaining 5/6ths of the embeddings for reranking and improving the search results.</p>
+<p>Als nächstes stellen wir eine Verbindung zu einer Milvus-Lite-Datenbank her, geben das Datenschema an und erstellen eine Sammlung mit diesem Schema. Wir werden sowohl die nicht normalisierte Einbettung als auch das erste Sechstel der Einbettung in separaten Feldern speichern. Der Grund dafür ist, dass wir das erste Sechstel des Matrjoschka-Embeddings für die Durchführung einer Ähnlichkeitssuche benötigen und die restlichen 5 Sechstel des Embeddings für das Reranking und die Verbesserung der Suchergebnisse.</p>
 <pre><code translate="no" class="language-python">embedding_dim = <span class="hljs-number">768</span>
 search_dim = <span class="hljs-number">128</span>
 collection_name = <span class="hljs-string">&quot;movie_embeddings&quot;</span>
@@ -109,9 +111,9 @@ fields = [
 schema = CollectionSchema(fields=fields, enable_dynamic_field=<span class="hljs-literal">False</span>)
 client.create_collection(collection_name=collection_name, schema=schema)
 <button class="copy-code-btn"></button></code></pre>
-<p>Milvus does not currently support searching over subsets of embeddings, so we break the embeddings into two parts: the head represents the initial subset of the vector to index and search, and the tail is the remainder. The model is trained for cosine distance similarity search, so we normalize the head embeddings. However, in order to calculate similarities for larger subsets later on, we need to store the norm of the head embedding, so we can unnormalize it before joining to the tail.</p>
-<p>To perform search via the first 1/6th of the embedding, we will need to create a vector search index over the <code translate="no">head_embedding</code> field. Later on, we will compare the results of “funnel search” with a regular vector search, and so build a search index over the full embedding also.</p>
-<p><em>Importantly, we use the <code translate="no">COSINE</code> rather than the <code translate="no">IP</code> distance metric, because otherwise we would need to keep track of the embedding norms, which would complicate the implementation (this will make more sense once the funnel search algorithm has been described).</em></p>
+<p>Milvus unterstützt derzeit nicht die Suche über Teilmengen von Einbettungen, daher unterteilen wir die Einbettungen in zwei Teile: Der Kopf stellt die anfängliche Teilmenge des Vektors dar, die indiziert und durchsucht werden soll, und der Schwanz ist der Rest. Das Modell wurde für die Ähnlichkeitssuche über die Kosinusdistanz trainiert, daher normalisieren wir die Kopfeinbettungen. Um jedoch später Ähnlichkeiten für größere Teilmengen berechnen zu können, müssen wir die Norm der Kopfeinbettung speichern, damit wir sie vor dem Zusammenfügen mit dem Schwanz unnormalisieren können.</p>
+<p>Um die Suche über das erste 1/6 der Einbettung durchzuführen, müssen wir einen Vektorsuchindex über das Feld <code translate="no">head_embedding</code> erstellen. Später werden wir die Ergebnisse der "Trichtersuche" mit einer normalen Vektorsuche vergleichen und daher auch einen Suchindex über die gesamte Einbettung erstellen.</p>
+<p><em>Wichtig ist, dass wir die Distanzmetrik <code translate="no">COSINE</code> und nicht <code translate="no">IP</code> verwenden, da wir sonst die Einbettungsnormen im Auge behalten müssten, was die Implementierung verkomplizieren würde (dies wird sinnvoller, wenn der Trichtersuchalgorithmus beschrieben wurde).</em></p>
 <pre><code translate="no" class="language-python">index_params = client.<span class="hljs-title function_">prepare_index_params</span>()
 index_params.<span class="hljs-title function_">add_index</span>(
     field_name=<span class="hljs-string">&quot;head_embedding&quot;</span>, index_type=<span class="hljs-string">&quot;FLAT&quot;</span>, metric_type=<span class="hljs-string">&quot;COSINE&quot;</span>
@@ -119,7 +121,7 @@ index_params.<span class="hljs-title function_">add_index</span>(
 index_params.<span class="hljs-title function_">add_index</span>(field_name=<span class="hljs-string">&quot;embedding&quot;</span>, index_type=<span class="hljs-string">&quot;FLAT&quot;</span>, metric_type=<span class="hljs-string">&quot;COSINE&quot;</span>)
 client.<span class="hljs-title function_">create_index</span>(collection_name, index_params)
 <button class="copy-code-btn"></button></code></pre>
-<p>Finally, we encode the plot summaries for all 35k movies and enter the corresponding embeddings in to the database.</p>
+<p>Schließlich kodieren wir die Handlungszusammenfassungen für alle 35k Filme und geben die entsprechenden Einbettungen in die Datenbank ein.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">for</span> batch <span class="hljs-keyword">in</span> tqdm(ds.batch(batch_size=<span class="hljs-number">512</span>)):
     <span class="hljs-comment"># This particular model requires us to prefix &#x27;search_document:&#x27; to stored entities</span>
     plot_summary = [<span class="hljs-string">&quot;search_document: &quot;</span> + x.strip() <span class="hljs-keyword">for</span> x <span class="hljs-keyword">in</span> batch[<span class="hljs-string">&quot;PlotSummary&quot;</span>]]
@@ -140,7 +142,7 @@ client.<span class="hljs-title function_">create_index</span>(collection_name, i
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">100%|██████████| 69/69 [05:57&lt;00:00,  5.18s/it]
 </code></pre>
-<h2 id="Performing-Funnel-Search" class="common-anchor-header">Performing Funnel Search<button data-href="#Performing-Funnel-Search" class="anchor-icon" translate="no">
+<h2 id="Performing-Funnel-Search" class="common-anchor-header">Durchführen der Trichtersuche<button data-href="#Performing-Funnel-Search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -155,7 +157,7 @@ client.<span class="hljs-title function_">create_index</span>(collection_name, i
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Let’s now implement a “funnel search” using the first 1/6th of the Matryoshka embedding dimensions. I have three movies in mind for retrieval and have produced my own plot summary for querying the database. We embed the queries, then perform a vector search on the <code translate="no">head_embedding</code> field, retrieving 128 result candidates.</p>
+    </button></h2><p>Nun wollen wir eine "Trichtersuche" mit den ersten 1/6 der Matryoshka-Einbettungsdimensionen durchführen. Ich habe drei Filme im Sinn, die abgerufen werden sollen, und habe meine eigene Zusammenfassung für die Abfrage der Datenbank erstellt. Wir betten die Abfragen ein und führen dann eine Vektorsuche auf dem Feld <code translate="no">head_embedding</code> durch, wobei wir 128 Ergebniskandidaten erhalten.</p>
 <pre><code translate="no" class="language-python">queries = [
     <span class="hljs-string">&quot;An archaeologist searches for ancient artifacts while fighting Nazis.&quot;</span>,
     <span class="hljs-string">&quot;A teenager fakes illness to get off school and have adventures with two friends.&quot;</span>,
@@ -185,7 +187,7 @@ res = client.search(
     output_fields=[<span class="hljs-string">&quot;title&quot;</span>, <span class="hljs-string">&quot;head_embedding&quot;</span>, <span class="hljs-string">&quot;embedding&quot;</span>],
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>At this point, we have performed search over a much smaller vector space, and are therefore likely to have lowered latency and lessened storage requirements for the index relative to search over the full space. Let’s examine the top 5 matches for each query:</p>
+<p>An diesem Punkt haben wir eine Suche über einen viel kleineren Vektorraum durchgeführt und haben daher wahrscheinlich eine geringere Latenz und geringere Speicheranforderungen für den Index im Vergleich zu einer Suche über den gesamten Raum. Untersuchen wir nun die ersten 5 Treffer für jede Abfrage:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">for</span> query, hits <span class="hljs-keyword">in</span> <span class="hljs-built_in">zip</span>(queries, res):
     rows = [x[<span class="hljs-string">&quot;entity&quot;</span>] <span class="hljs-keyword">for</span> x <span class="hljs-keyword">in</span> hits][:<span class="hljs-number">5</span>]
 
@@ -219,8 +221,8 @@ The Ref
 Impact
 The House in Marsh Road
 </code></pre>
-<p>As we can see, recall has suffered as a consequence of truncating the embeddings during search. Funnel search fixes this with a clever trick: we can use the remainder of the embedding dimensions to rerank and prune our candidate list to recover retrieval performance without running any additional expensive vector searches.</p>
-<p>For ease of exposition of the funnel search algorithm, we convert the Milvus search hits for each query into a Pandas dataframe.</p>
+<p>Wie wir sehen können, hat die Wiederauffindbarkeit als Folge des Abschneidens der Einbettungen während der Suche gelitten. Die Trichtersuche behebt dieses Problem mit einem cleveren Trick: Wir können die verbleibenden Einbettungsdimensionen verwenden, um unsere Kandidatenliste neu zu ordnen und zu beschneiden, um die Abrufleistung wiederherzustellen, ohne zusätzliche teure Vektorsuchen durchzuführen.</p>
+<p>Um die Darstellung des Trichtersuchalgorithmus zu vereinfachen, konvertieren wir die Milvus-Suchtreffer für jede Anfrage in einen Pandas-Datenrahmen.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">hits_to_dataframe</span>(<span class="hljs-params">hits: pymilvus.client.abstract.Hits</span>) -&gt; pd.DataFrame:
     <span class="hljs-string">&quot;&quot;&quot;
     Convert a Milvus search result to a Pandas dataframe. This function is specific to our data schema.
@@ -235,8 +237,8 @@ The House in Marsh Road
 
 dfs = [hits_to_dataframe(hits) <span class="hljs-keyword">for</span> hits <span class="hljs-keyword">in</span> res]
 <button class="copy-code-btn"></button></code></pre>
-<p>Now, to perform funnel search we iterate over the increasingly larger subsets of the embeddings. At each iteration, we rerank the candidates according to the new similarities and prune some fraction of the lowest ranked ones.</p>
-<p>To make this concrete, from the previous step we have retrieved 128 candidates using 1/6 of the embedding and query dimensions. The first step in performing funnel search is to recalculate the similarities between the queries and candidates using <em>the first 1/3 of the dimensions</em>. The bottom 64 candidates are pruned. Then we repeat this process with <em>the first 2/3 of the dimensions</em>, and then <em>all of the dimensions</em>, successively pruning to 32 and 16 candidates.</p>
+<p>Um die Trichtersuche durchzuführen, iterieren wir nun über die immer größer werdenden Teilmengen der Einbettungen. Bei jeder Iteration ordnen wir die Kandidaten entsprechend der neuen Ähnlichkeiten neu ein und streichen einen Teil der am niedrigsten eingestuften Kandidaten.</p>
+<p>Um dies zu verdeutlichen, haben wir im vorigen Schritt 128 Kandidaten mit 1/6 der Einbettungs- und Abfragedimensionen gefunden. Der erste Schritt bei der Durchführung der Trichtersuche besteht darin, die Ähnlichkeiten zwischen den Suchanfragen und den Kandidaten unter Verwendung <em>des ersten Drittels der Dimensionen</em> neu zu berechnen. Die untersten 64 Kandidaten werden aussortiert. Dann wiederholen wir diesen Vorgang mit <em>den ersten 2/3 der Dimensionen</em> und dann mit <em>allen Dimensionen</em>, wobei wir nacheinander 32 und 16 Kandidaten aussondern.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># An optimized implementation would vectorize the calculation of similarity scores across rows (using a matrix)</span>
 <span class="hljs-keyword">def</span> <span class="hljs-title function_">calculate_score</span>(<span class="hljs-params">row, query_emb=<span class="hljs-literal">None</span>, dims=<span class="hljs-number">768</span></span>):
     emb = F.normalize(row[<span class="hljs-string">&quot;embedding&quot;</span>][:dims], dim=-<span class="hljs-number">1</span>)
@@ -299,8 +301,8 @@ A young couple with a kid look after a hotel during winter and the husband goes 
 12         Home Alone
 Name: title, dtype: object 
 </code></pre>
-<p>We have been able to restore recall without performing any additional vector searches! Qualitatively, these results seem to have higher recall for “Raiders of the Lost Ark” and “The Shining” than the standard vector search in the tutorial, <a href="https://milvus.io/docs/integrate_with_sentencetransformers.md">“Movie Search using Milvus and Sentence Transformers”</a>, which uses a different embedding model. However, it is unable to find &quot;Ferris Bueller’s Day Off&quot;, which we will return to later in the notebook. (See the paper <a href="https://arxiv.org/abs/2205.13147">Matryoshka Representation Learning</a> for more quantitative experiments and benchmarking.)</p>
-<h2 id="Comparing-Funnel-Search-to-Regular-Search" class="common-anchor-header">Comparing Funnel Search to Regular Search<button data-href="#Comparing-Funnel-Search-to-Regular-Search" class="anchor-icon" translate="no">
+<p>Es ist uns gelungen, die Trefferquote ohne zusätzliche Vektorsuche wiederherzustellen! Qualitativ scheinen diese Ergebnisse für "Raiders of the Lost Ark" und "The Shining" eine höhere Trefferquote zu haben als die Standard-Vektorsuche aus dem Tutorial <a href="https://milvus.io/docs/integrate_with_sentencetransformers.md">"Filmsuche mit Milvus und Satztransformatoren",</a> die ein anderes Einbettungsmodell verwendet. Allerdings ist es nicht in der Lage, &quot;Ferris Bueller's Day Off&quot; zu finden, auf den wir später im Notizbuch zurückkommen werden. (Weitere quantitative Experimente und Benchmarking finden Sie im Dokument <a href="https://arxiv.org/abs/2205.13147">Matryoshka Representation Learning</a> ).</p>
+<h2 id="Comparing-Funnel-Search-to-Regular-Search" class="common-anchor-header">Vergleich der Trichtersuche mit der regulären Suche<button data-href="#Comparing-Funnel-Search-to-Regular-Search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -315,7 +317,7 @@ Name: title, dtype: object
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Let’s compare the results of our funnel search to a standard vector search <em>on the same dataset with the same embedding model</em>. We perform a search on the full embeddings.</p>
+    </button></h2><p>Vergleichen wir die Ergebnisse unserer Trichtersuche mit einer normalen Vektorsuche <em>auf demselben Datensatz mit demselben Einbettungsmodell</em>. Wir führen eine Suche über die vollständigen Einbettungen durch.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Search on entire embeddings</span>
 res = client.search(
     collection_name=collection_name,
@@ -358,8 +360,8 @@ Fast and Loose
 Killing Ground
 Home Alone
 </code></pre>
-<p>With the exception of the results for &quot;A teenager fakes illness to get off school…&quot;, the results under funnel search are almost identical to the full search, even though the funnel search was performed on a search space of 128 dimensions vs 768 dimensions for the regular one.</p>
-<h2 id="Investigating-Funnel-Search-Recall-Failure-for-Ferris-Buellers-Day-Off" class="common-anchor-header">Investigating Funnel Search Recall Failure for Ferris Bueller’s Day Off<button data-href="#Investigating-Funnel-Search-Recall-Failure-for-Ferris-Buellers-Day-Off" class="anchor-icon" translate="no">
+<p>Mit Ausnahme der Ergebnisse für &quot;Ein Jugendlicher täuscht eine Krankheit vor, um die Schule zu schwänzen...&quot; sind die Ergebnisse der Trichtersuche fast identisch mit denen der Vollsuche, obwohl die Trichtersuche auf einem Suchraum von 128 Dimensionen gegenüber 768 Dimensionen für die reguläre Suche durchgeführt wurde.</p>
+<h2 id="Investigating-Funnel-Search-Recall-Failure-for-Ferris-Buellers-Day-Off" class="common-anchor-header">Untersuchung des Misserfolgs der Trichtersuche bei Ferris Bueller's Day Off<button data-href="#Investigating-Funnel-Search-Recall-Failure-for-Ferris-Buellers-Day-Off" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -374,7 +376,7 @@ Home Alone
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Why didn’t funnel search succeed in retrieving Ferris Bueller’s Day Off? Let’s examine whether or not it was in the original candidate list or was mistakenly filtered out.</p>
+    </button></h2><p>Warum gelang es der Trichtersuche nicht, "Ferris Bueller's Day Off" abzurufen? Untersuchen wir, ob er in der ursprünglichen Kandidatenliste enthalten war oder irrtümlich herausgefiltert wurde.</p>
 <pre><code translate="no" class="language-python">queries2 = [
     <span class="hljs-string">&quot;A teenager fakes illness to get off school and have adventures with two friends.&quot;</span>
 ]
@@ -410,7 +412,7 @@ res = client.search(
 <pre><code translate="no">Query: A teenager fakes illness to get off school and have adventures with two friends.
 Row 228: Ferris Bueller's Day Off
 </code></pre>
-<p>We see that the issue was that the initial candidate list was not large enough, or rather, the desired hit is not similar enough to the query at the highest level of granularity. Changing it from <code translate="no">128</code> to <code translate="no">256</code> results in successful retrieval. <em>We should form a rule-of-thumb to set the number of candidates on a held-out set to empirically evaluate the trade-off between recall and latency.</em></p>
+<p>Wir sehen, dass das Problem darin bestand, dass die ursprüngliche Kandidatenliste nicht groß genug war, oder besser gesagt, dass der gewünschte Treffer der Anfrage auf der höchsten Granularitätsebene nicht ähnlich genug ist. Eine Änderung von <code translate="no">128</code> auf <code translate="no">256</code> führt zu einem erfolgreichen Abruf. <em>Wir sollten eine Faustregel aufstellen, um die Anzahl der Kandidaten in einer Warteschleife festzulegen, um den Kompromiss zwischen Wiederauffindbarkeit und Latenzzeit empirisch zu bewerten.</em></p>
 <pre><code translate="no" class="language-python">dfs = [hits_to_dataframe(hits) <span class="hljs-keyword">for</span> hits <span class="hljs-keyword">in</span> res]
 
 dfs_results = [
@@ -430,7 +432,7 @@ On the Edge of Innocence
               Unfriended
               Simon Says 
 </code></pre>
-<h2 id="Does-the-order-matter-Prefix-vs-suffix-embeddings" class="common-anchor-header">Does the order matter? Prefix vs suffix embeddings.<button data-href="#Does-the-order-matter-Prefix-vs-suffix-embeddings" class="anchor-icon" translate="no">
+<h2 id="Does-the-order-matter-Prefix-vs-suffix-embeddings" class="common-anchor-header">Spielt die Reihenfolge eine Rolle? Präfix- vs. Suffixeinbettungen.<button data-href="#Does-the-order-matter-Prefix-vs-suffix-embeddings" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -445,7 +447,7 @@ On the Edge of Innocence
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>The model was trained to perform well matching recursively smaller prefixes of the embeddings. Does the order of the dimensions we use matter? For instance, could we also take subsets of the embeddings that are suffixes? In this experiment, we reverse the order of the dimensions in the Matryoshka embeddings and perform a funnel search.</p>
+    </button></h2><p>Das Modell wurde so trainiert, dass es rekursiv kleinere Präfixe der Einbettungen gut abbildet. Spielt die Reihenfolge der Dimensionen, die wir verwenden, eine Rolle? Könnten wir zum Beispiel auch Teilmengen der Einbettungen nehmen, die Suffixe sind? In diesem Experiment kehren wir die Reihenfolge der Dimensionen in den Matryoshka-Einbettungen um und führen eine Trichtersuche durch.</p>
 <pre><code translate="no" class="language-python">client = MilvusClient(uri=<span class="hljs-string">&quot;./wikiplots-matryoshka-flipped.db&quot;</span>)
 
 fields = [
@@ -547,8 +549,8 @@ Leopard in the Snow
          Unfaithful
      Always a Bride 
 </code></pre>
-<p>Recall is much poorer than funnel search or regular search as expected (the embedding model was trained by contrastive learning on prefixes of the embedding dimensions, not suffixes).</p>
-<h2 id="Summary" class="common-anchor-header">Summary<button data-href="#Summary" class="anchor-icon" translate="no">
+<p>Der Rückruf ist erwartungsgemäß viel schlechter als bei der Trichtersuche oder der regulären Suche (das Einbettungsmodell wurde durch kontrastives Lernen auf Präfixen der Einbettungsdimensionen trainiert, nicht auf Suffixen).</p>
+<h2 id="Summary" class="common-anchor-header">Zusammenfassung<button data-href="#Summary" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -563,8 +565,8 @@ Leopard in the Snow
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Here is a comparison of our search results across methods:</p>
+    </button></h2><p>Hier ist ein Vergleich unserer Suchergebnisse zwischen den Methoden:</p>
 <div style='margin: auto; width: 80%;'><img translate="no" src='/docs/v2.5.x/assets/results-raiders-of-the-lost-ark.png' width='100%'></div>
 <div style='margin: auto; width: 100%;'><img translate="no" src='/docs/v2.5.x/assets/results-ferris-buellers-day-off.png' width='100%'></div>
 <div style='margin: auto; width: 80%;'><img translate="no" src='/docs/v2.5.x/assets/results-the-shining.png' width='100%'></div>
-We have shown how to use Matryoshka embeddings with Milvus for performing a more efficient semantic search algorithm called "funnel search." We also explored the importance of the reranking and pruning steps of the algorithm, as well as a failure mode when the initial candidate list is too small. Finally, we discussed how the order of the dimensions is important when forming sub-embeddings - it must be in the same way for which the model was trained. Or rather, it is only because the model was trained in a certain way that prefixes of the embeddings are meaningful. Now you know how to implement Matryoshka embeddings and funnel search to reduce the storage costs of semantic search without sacrificing too much retrieval performance!
+Wir haben gezeigt, wie man Matryoshka-Einbettungen mit Milvus verwendet, um einen effizienteren semantischen Suchalgorithmus namens "Trichtersuche" durchzuführen. Wir haben auch die Bedeutung der Reranking- und Pruning-Schritte des Algorithmus sowie einen Fehlermodus untersucht, wenn die anfängliche Kandidatenliste zu klein ist. Schließlich haben wir erörtert, wie wichtig die Reihenfolge der Dimensionen bei der Bildung von Sub-Embeddings ist - sie muss die gleiche sein, für die das Modell trainiert wurde. Oder besser gesagt, nur weil das Modell auf eine bestimmte Weise trainiert wurde, sind die Präfixe der Einbettungen sinnvoll. Jetzt wissen Sie, wie Sie Matryoshka-Einbettungen und die Trichtersuche implementieren können, um die Speicherkosten der semantischen Suche zu senken, ohne allzu große Einbußen bei der Abrufleistung hinnehmen zu müssen!

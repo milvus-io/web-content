@@ -1,13 +1,13 @@
 ---
 id: llama_agents_metadata.md
 summary: >-
-  In this Notebook, we will explore different ideas: Store data into Milvus, use
-  llama-index with Mistral models for data queries, create automated data search
-  and reading agents, and develop agents for metadata filtering based on user
-  queries.
-title: 'Multi-agent Systems with Mistral AI, Milvus and Llama-agents'
+  In diesem Notizbuch werden wir verschiedene Ideen untersuchen: Daten in Milvus
+  speichern, llama-index mit Mistral-Modellen für Datenabfragen verwenden,
+  automatische Datensuch- und Leseagenten erstellen und Agenten für die
+  Filterung von Metadaten auf der Grundlage von Benutzerabfragen entwickeln.
+title: 'Multiagentensysteme mit Mistral AI, Milvus und Llama-Agenten'
 ---
-<h1 id="Multi-agent-Systems-with-Mistral-AI-Milvus-and-Llama-agents" class="common-anchor-header">Multi-agent Systems with Mistral AI, Milvus and Llama-agents<button data-href="#Multi-agent-Systems-with-Mistral-AI-Milvus-and-Llama-agents" class="anchor-icon" translate="no">
+<h1 id="Multi-agent-Systems-with-Mistral-AI-Milvus-and-Llama-agents" class="common-anchor-header">Multiagentensysteme mit Mistral AI, Milvus und Llama-Agenten<button data-href="#Multi-agent-Systems-with-Mistral-AI-Milvus-and-Llama-agents" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -22,7 +22,7 @@ title: 'Multi-agent Systems with Mistral AI, Milvus and Llama-agents'
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><h2 id="Goal-of-this-Notebook" class="common-anchor-header">Goal of this Notebook<button data-href="#Goal-of-this-Notebook" class="anchor-icon" translate="no">
+    </button></h1><h2 id="Goal-of-this-Notebook" class="common-anchor-header">Ziel dieses Notebooks<button data-href="#Goal-of-this-Notebook" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -37,18 +37,13 @@ title: 'Multi-agent Systems with Mistral AI, Milvus and Llama-agents'
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>In this Notebook, we will explore different ideas:</p>
+    </button></h2><p>In diesem Notizbuch werden wir verschiedene Ideen untersuchen:</p>
 <ul>
-<li><p>1️⃣ Store Data into Milvus:
-Learn to store data into Milvus, an efficient vector database designed for high-speed similarity searches and AI applications.</p></li>
-<li><p>2️⃣ Use llama-index with Mistral Models for Data Queries:
-Discover how to use llama-index in combination with Mistral models to query data stored in Milvus.</p></li>
-<li><p>3️⃣ Create Automated Data Search and Reading Agents:
-Build agents that can automatically search and read data based on user queries. These automated agents will enhance user experience by delivering quick, accurate responses, reducing manual search effort.</p></li>
-<li><p>4️⃣ Develop Agents for Metadata Filtering Based on User Queries:
-Implement agents that can automatically generate metadata filters from user queries, refining and contextualising search results, avoiding  confusion and enhancing the accuracy of information retrieved, even for complex queries.</p></li>
-<li><p>🔍 Summary
-By the end of this notebook, you’ll have a comprehensive understanding of using Milvus, llama-index with llama-agents, and Mistral models to build a robust and efficient data retrieval system.</p></li>
+<li><p>1️⃣ Daten in Milvus speichern: Lernen Sie, Daten in Milvus zu speichern, einer effizienten Vektor-Datenbank, die für schnelle Ähnlichkeitssuchen und KI-Anwendungen entwickelt wurde.</p></li>
+<li><p>2️⃣ llama-index mit Mistral-Modellen für Datenabfragen verwenden: Entdecken Sie, wie Sie llama-index in Kombination mit Mistral-Modellen verwenden können, um in Milvus gespeicherte Daten abzufragen.</p></li>
+<li><p>3️⃣ Automatisierte Datensuch- und -lese-Agenten erstellen: Erstellen Sie Agenten, die automatisch Daten auf der Grundlage von Benutzeranfragen suchen und lesen können. Diese automatisierten Agenten verbessern die Benutzerfreundlichkeit, indem sie schnelle und genaue Antworten liefern und den manuellen Suchaufwand reduzieren.</p></li>
+<li><p>4️⃣ Entwicklung von Agenten für die Metadatenfilterung auf der Grundlage von Benutzeranfragen: Implementierung von Agenten, die automatisch Metadatenfilter aus Benutzeranfragen generieren können, um Suchergebnisse zu verfeinern und zu kontextualisieren, Verwirrung zu vermeiden und die Genauigkeit der abgerufenen Informationen zu verbessern, selbst bei komplexen Abfragen.</p></li>
+<li><p>Zusammenfassung Am Ende dieses Notizbuchs werden Sie ein umfassendes Verständnis für die Verwendung von Milvus, Llama-Index mit Llama-Agenten und Mistral-Modellen haben, um ein robustes und effizientes Datenabfragesystem aufzubauen.</p></li>
 </ul>
 <h2 id="Milvus" class="common-anchor-header">Milvus<button data-href="#Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -65,21 +60,19 @@ By the end of this notebook, you’ll have a comprehensive understanding of usin
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus is an open-source vector database that powers AI applications with vector embeddings and similarity search.</p>
-<p>In this notebook, we use Milvus Lite, it is the lightweight version of Milvus.</p>
-<p>With Milvus Lite, you can start building an AI application with vector similarity search within minutes! Milvus Lite is good for running in the following environment:</p>
+    </button></h2><p>Milvus ist eine Open-Source-Vektordatenbank, die KI-Anwendungen mit Vektoreinbettungen und Ähnlichkeitssuche unterstützt.</p>
+<p>In diesem Notizbuch verwenden wir Milvus Lite, die abgespeckte Version von Milvus.</p>
+<p>Mit Milvus Lite können Sie innerhalb weniger Minuten eine KI-Anwendung mit Vektorähnlichkeitssuche erstellen! Milvus Lite kann in den folgenden Umgebungen eingesetzt werden:</p>
 <ul>
 <li>Jupyter Notebook / Google Colab</li>
 <li>Laptops</li>
-<li>Edge Devices</li>
+<li>Edge-Geräte</li>
 </ul>
 <p>
-  <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.5.x/assets/ad459431-95ac-4cbd-a931-453d08d5fdef.png" alt="image.png" class="doc-image" id="image.png" />
-    <span>image.png</span>
-  </span>
-</p>
-<h2 id="llama-agents" class="common-anchor-header">llama-agents<button data-href="#llama-agents" class="anchor-icon" translate="no">
+  
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/ad459431-95ac-4cbd-a931-453d08d5fdef.png" alt="image.png" class="doc-image" id="image.png" />
+   </span> <span class="img-wrapper"> <span>bild.png</span> </span></p>
+<h2 id="llama-agents" class="common-anchor-header">Lama-Agenten<button data-href="#llama-agents" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -94,8 +87,8 @@ By the end of this notebook, you’ll have a comprehensive understanding of usin
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><code translate="no">llama-agents</code> makes it possible to run agents as microservices. That makes it possible to scale services up and down.</p>
-<h2 id="llama-index" class="common-anchor-header">llama-index<button data-href="#llama-index" class="anchor-icon" translate="no">
+    </button></h2><p><code translate="no">llama-agents</code> macht es möglich, Agenten als Microservices zu betreiben. Das ermöglicht die Skalierung von Diensten nach oben und unten.</p>
+<h2 id="llama-index" class="common-anchor-header">lama-index<button data-href="#llama-index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -110,20 +103,18 @@ By the end of this notebook, you’ll have a comprehensive understanding of usin
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>LlamaIndex  is a data framework for your LLM application. It provides tools like:</p>
+    </button></h2><p>LlamaIndex ist ein Daten-Framework für Ihre LLM-Anwendung. Es bietet Werkzeuge wie:</p>
 <ul>
-<li>Data connectors ingest your existing data from their native source and format.</li>
-<li>Data indexes structure your data in intermediate representations that are easy and performant for LLMs to consume.</li>
-<li>Engines provide natural language access to your data.</li>
-<li>Agents are LLM-powered knowledge workers augmented by tools, from simple helper functions to API integrations and more.</li>
+<li>Datenkonnektoren nehmen Ihre vorhandenen Daten aus ihrer nativen Quelle und ihrem Format auf.</li>
+<li>Datenindizes strukturieren Ihre Daten in Zwischenrepräsentationen, die für LLMs einfach und performant zu nutzen sind.</li>
+<li>Engines bieten natürlichsprachlichen Zugang zu Ihren Daten.</li>
+<li>Agenten sind LLM-gestützte Wissensarbeiter, die durch Tools erweitert werden, von einfachen Hilfsfunktionen bis hin zu API-Integrationen und mehr.</li>
 </ul>
 <p>
-  <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.5.x/assets/7bd73318-7929-4675-8998-c2e9ef091906.png" alt="image.png" class="doc-image" id="image.png" />
-    <span>image.png</span>
-  </span>
-</p>
-<h2 id="Mistral-AI" class="common-anchor-header">Mistral AI<button data-href="#Mistral-AI" class="anchor-icon" translate="no">
+  
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/7bd73318-7929-4675-8998-c2e9ef091906.png" alt="image.png" class="doc-image" id="image.png" />
+   </span> <span class="img-wrapper"> <span>bild.png</span> </span></p>
+<h2 id="Mistral-AI" class="common-anchor-header">Mistral KI<button data-href="#Mistral-AI" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -138,8 +129,8 @@ By the end of this notebook, you’ll have a comprehensive understanding of usin
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Mistral AI is a research lab building LLMs and Embeddings Models, they recently released new versions of their models, Mistral Nemo and Mistral Large which have shown to be particularly good in RAG and function calling. Because of that, we are going to use them in this notebook</p>
-<h2 id="Install-Dependencies" class="common-anchor-header">Install Dependencies<button data-href="#Install-Dependencies" class="anchor-icon" translate="no">
+    </button></h2><p>Mistral AI ist ein Forschungslabor, das LLMs und Einbettungsmodelle entwickelt. Sie haben kürzlich neue Versionen ihrer Modelle, Mistral Nemo und Mistral Large, veröffentlicht, die sich als besonders gut in RAG und Funktionsaufrufen erwiesen haben. Aus diesem Grund werden wir sie in diesem Notizbuch verwenden.</p>
+<h2 id="Install-Dependencies" class="common-anchor-header">Abhängigkeiten installieren<button data-href="#Install-Dependencies" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -166,7 +157,7 @@ By the end of this notebook, you’ll have a comprehensive understanding of usin
 
 nest_asyncio.apply()
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Get-your-API-Key-for-Mistral" class="common-anchor-header">Get your API Key for Mistral<button data-href="#Get-your-API-Key-for-Mistral" class="anchor-icon" translate="no">
+<h2 id="Get-your-API-Key-for-Mistral" class="common-anchor-header">Besorge dir deinen API Schlüssel für Mistral<button data-href="#Get-your-API-Key-for-Mistral" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -181,7 +172,7 @@ nest_asyncio.apply()
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>You can get the Mistral API key from the <a href="https://console.mistral.ai/api-keys/">Mistral Cloud Console</a>.</p>
+    </button></h2><p>Sie können den Mistral API Schlüssel von der <a href="https://console.mistral.ai/api-keys/">Mistral Cloud Console</a> erhalten.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-string">&quot;&quot;&quot;
 load_dotenv reads key-value pairs from a .env file and can set them as environment variables.
 This is useful to avoid leaking your API key for example :D
@@ -194,7 +185,7 @@ load_dotenv()
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">True
 </code></pre>
-<h2 id="Download-data" class="common-anchor-header">Download data<button data-href="#Download-data" class="anchor-icon" translate="no">
+<h2 id="Download-data" class="common-anchor-header">Daten herunterladen<button data-href="#Download-data" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -213,7 +204,7 @@ load_dotenv()
 $ wget <span class="hljs-string">&#x27;https://raw.githubusercontent.com/run-llama/llama_index/main/docs/docs/examples/data/10k/uber_2021.pdf&#x27;</span> -O <span class="hljs-string">&#x27;data/10k/uber_2021.pdf&#x27;</span>
 $ wget <span class="hljs-string">&#x27;https://raw.githubusercontent.com/run-llama/llama_index/main/docs/docs/examples/data/10k/lyft_2021.pdf&#x27;</span> -O <span class="hljs-string">&#x27;data/10k/lyft_2021.pdf&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h1 id="Prepare-Embedding-Model" class="common-anchor-header">Prepare Embedding Model<button data-href="#Prepare-Embedding-Model" class="anchor-icon" translate="no">
+<h1 id="Prepare-Embedding-Model" class="common-anchor-header">Einbettungsmodell vorbereiten<button data-href="#Prepare-Embedding-Model" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -228,7 +219,7 @@ $ wget <span class="hljs-string">&#x27;https://raw.githubusercontent.com/run-lla
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>We define the Embedding Model that will be used in this notebook. We use <code translate="no">mistral-embed</code>, it is an Embedding model developed by Mistral, it has been trained with Retrievals in mind, which makes it a very good one for our Agentic RAG system. For details, please refer to the <a href="https://docs.mistral.ai/capabilities/embeddings/">Embedding</a> page on Mistral Documentation.</p>
+    </button></h1><p>Wir definieren das Einbettungsmodell, das in diesem Notizbuch verwendet werden soll. Wir verwenden <code translate="no">mistral-embed</code>, es ist ein von Mistral entwickeltes Einbettungsmodell, das mit Retrievals im Hinterkopf trainiert wurde, was es zu einem sehr guten Modell für unser Agentic RAG System macht. Details finden Sie auf der Seite <a href="https://docs.mistral.ai/capabilities/embeddings/">Embedding</a> in der Mistral Dokumentation.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> llama_index.core <span class="hljs-keyword">import</span> Settings
 <span class="hljs-keyword">from</span> llama_index.embeddings.mistralai <span class="hljs-keyword">import</span> MistralAIEmbedding
 
@@ -237,7 +228,7 @@ $ wget <span class="hljs-string">&#x27;https://raw.githubusercontent.com/run-lla
 
 Settings.embed_model = MistralAIEmbedding(model_name=<span class="hljs-string">&quot;mistral-embed&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Define-the-LLM-Model" class="common-anchor-header">Define the LLM Model<button data-href="#Define-the-LLM-Model" class="anchor-icon" translate="no">
+<h2 id="Define-the-LLM-Model" class="common-anchor-header">Definieren Sie das LLM-Modell<button data-href="#Define-the-LLM-Model" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -252,13 +243,12 @@ Settings.embed_model = MistralAIEmbedding(model_name=<span class="hljs-string">&
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Llama Index uses LLMs to respond to prompts and queries, and is responsible for writing natural language responses.
-We define Mistral Nemo as the default one. Nemo offers a large context window of up to 128k tokens. Its reasoning, world knowledge, and coding accuracy are state-of-the-art in its size category.</p>
+    </button></h2><p>Llama Index verwendet LLMs, um auf Prompts und Abfragen zu reagieren, und ist für das Schreiben natürlichsprachlicher Antworten verantwortlich. Wir definieren Mistral Nemo als Standardmodell. Nemo bietet ein großes Kontextfenster von bis zu 128k Token. Sein logisches Denken, sein Weltwissen und seine Kodiergenauigkeit sind in seiner Größenklasse auf dem neuesten Stand.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> llama_index.<span class="hljs-property">llms</span>.<span class="hljs-property">ollama</span> <span class="hljs-keyword">import</span> <span class="hljs-title class_">Ollama</span>
 
 <span class="hljs-title class_">Settings</span>.<span class="hljs-property">llm</span> = <span class="hljs-title class_">Ollama</span>(<span class="hljs-string">&quot;mistral-nemo&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Instanciate-Milvus-and-Load-Data" class="common-anchor-header">Instanciate Milvus and Load Data<button data-href="#Instanciate-Milvus-and-Load-Data" class="anchor-icon" translate="no">
+<h2 id="Instanciate-Milvus-and-Load-Data" class="common-anchor-header">Milvus instanziieren und Daten laden<button data-href="#Instanciate-Milvus-and-Load-Data" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -273,11 +263,11 @@ We define Mistral Nemo as the default one. Nemo offers a large context window of
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><a href="https://milvus.io/">Milvus</a> is a popular open-source vector database that powers AI applications with highly performant and scalable vector similarity search.</p>
+    </button></h2><p><a href="https://milvus.io/">Milvus</a> ist eine beliebte Open-Source-Vektordatenbank, die KI-Anwendungen mit einer hochleistungsfähigen und skalierbaren Vektorähnlichkeitssuche versorgt.</p>
 <ul>
-<li>Setting the uri as a local file, e.g.<code translate="no">./milvus.db</code>, is the most convenient method, as it automatically utilizes <a href="https://milvus.io/docs/milvus_lite.md">Milvus Lite</a> to store all data in this file.</li>
-<li>If you have large scale of data, say more than a million vectors, you can set up a more performant Milvus server on <a href="https://milvus.io/docs/quickstart.md">Docker or Kubernetes</a>. In this setup, please use the server uri, e.g.<code translate="no">http://localhost:19530</code>, as your uri.</li>
-<li>If you want to use <a href="https://zilliz.com/cloud">Zilliz Cloud</a>, the fully managed cloud service for Milvus, adjust the uri and token, which correspond to the <a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#cluster-details">Public Endpoint and API key</a> in Zilliz Cloud.</li>
+<li>Die Einstellung der Uri als lokale Datei, z. B.<code translate="no">./milvus.db</code>, ist die bequemste Methode, da sie automatisch <a href="https://milvus.io/docs/milvus_lite.md">Milvus Lite</a> verwendet, um alle Daten in dieser Datei zu speichern.</li>
+<li>Wenn Sie große Datenmengen haben, z. B. mehr als eine Million Vektoren, können Sie einen leistungsfähigeren Milvus-Server auf <a href="https://milvus.io/docs/quickstart.md">Docker oder Kubernetes</a> einrichten. In diesem Fall verwenden Sie bitte die Server-Uri, z. B.<code translate="no">http://localhost:19530</code>, als Ihre Uri.</li>
+<li>Wenn Sie <a href="https://zilliz.com/cloud">Zilliz Cloud</a>, den vollständig verwalteten Cloud-Service für Milvus, nutzen möchten, passen Sie die uri und das Token an, die dem <a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#cluster-details">Public Endpoint und dem API-Schlüssel</a> in Zilliz Cloud entsprechen.</li>
 </ul>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> llama_index.vector_stores.milvus <span class="hljs-keyword">import</span> MilvusVectorStore
 <span class="hljs-keyword">from</span> llama_index.core <span class="hljs-keyword">import</span> (
@@ -307,7 +297,7 @@ index = VectorStoreIndex.from_documents(docs, storage_context=storage_context)
 <span class="hljs-comment"># Define the query engine</span>
 company_engine = index.as_query_engine(similarity_top_k=<span class="hljs-number">3</span>)
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Define-Tools" class="common-anchor-header">Define Tools<button data-href="#Define-Tools" class="anchor-icon" translate="no">
+<h2 id="Define-Tools" class="common-anchor-header">Tools definieren<button data-href="#Define-Tools" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -322,9 +312,9 @@ company_engine = index.as_query_engine(similarity_top_k=<span class="hljs-number
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>One of the key steps in building an effective agent is defining the tools it can use to perform its tasks. These tools are essentially functions or services that the agent can call upon to retrieve information or perform actions.</p>
-<p>Below, we’ll define two tools that our agent can use to query financial information about Lyft and Uber from the year 2021. These tools will be integrated into our agent, allowing it to respond to natural language queries with precise and relevant information.</p>
-<p>If you look at the graph we have at the top, this is what an “Agent Service” is.</p>
+    </button></h2><p>Einer der wichtigsten Schritte beim Aufbau eines effektiven Agenten ist die Definition der Tools, die er zur Ausführung seiner Aufgaben verwenden kann. Diese Tools sind im Wesentlichen Funktionen oder Dienste, die der Agent aufrufen kann, um Informationen abzurufen oder Aktionen auszuführen.</p>
+<p>Im Folgenden werden wir zwei Tools definieren, mit denen unser Agent Finanzinformationen über Lyft und Uber aus dem Jahr 2021 abfragen kann. Diese Tools werden in unseren Agenten integriert, so dass er auf natürlichsprachliche Abfragen mit präzisen und relevanten Informationen reagieren kann.</p>
+<p>In der Grafik oben sehen Sie, was ein "Agentendienst" ist.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Define the different tools that can be used by our Agent.</span>
 query_engine_tools = [
     QueryEngineTool(
@@ -372,7 +362,7 @@ The revenue for Lyft in 2021 was $3.84 billion.
 
 Uber's total revenue for the year ended December 31, 2021 was $17,455 million.
 </code></pre>
-<h2 id="Metadata-Filtering" class="common-anchor-header">Metadata Filtering<button data-href="#Metadata-Filtering" class="anchor-icon" translate="no">
+<h2 id="Metadata-Filtering" class="common-anchor-header">Metadaten-Filterung<button data-href="#Metadata-Filtering" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -387,8 +377,8 @@ Uber's total revenue for the year ended December 31, 2021 was $17,455 million.
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><strong>Milvus</strong> supports <a href="https://zilliz.com/blog/json-metadata-filtering-in-milvus">Metadata filtering</a>, a technique that allows you to refine and narrow down the search results based on specific attributes or tags associated with your data. This is particularly useful in scenarios where you have a lot of data and need to retrieve only the relevant subset of data that matches certain criteria.</p>
-<h2 id="Use-Cases-for-Metadata-Filtering" class="common-anchor-header">Use Cases for Metadata Filtering<button data-href="#Use-Cases-for-Metadata-Filtering" class="anchor-icon" translate="no">
+    </button></h2><p><strong>Milvus</strong> unterstützt die <a href="https://zilliz.com/blog/json-metadata-filtering-in-milvus">Filterung von Metadaten</a>, eine Technik, mit der Sie die Suchergebnisse auf der Grundlage bestimmter Attribute oder Tags, die mit Ihren Daten verbunden sind, verfeinern und eingrenzen können. Dies ist besonders nützlich in Szenarien, in denen Sie viele Daten haben und nur die relevante Teilmenge von Daten abrufen müssen, die bestimmten Kriterien entsprechen.</p>
+<h2 id="Use-Cases-for-Metadata-Filtering" class="common-anchor-header">Anwendungsfälle für das Filtern von Metadaten<button data-href="#Use-Cases-for-Metadata-Filtering" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -404,11 +394,11 @@ Uber's total revenue for the year ended December 31, 2021 was $17,455 million.
         ></path>
       </svg>
     </button></h2><ul>
-<li><p><strong>Precision in Search Results</strong>: By applying metadata filters, you can ensure that the search results are highly relevant to the user’s query. For example, if you have a collection of financial documents, you can filter them based on the company name, year, or any other relevant metadata.</p></li>
-<li><p><strong>Efficiency</strong>: Metadata filtering helps in reducing the amount of data that needs to be processed, making the search operations more efficient. This is especially beneficial when dealing with large datasets.</p></li>
-<li><p><strong>Customization</strong>: Different users or applications may have different requirements. Metadata filtering allows you to customize the search results to meet specific needs, such as retrieving documents from a particular year or company.</p></li>
+<li><p><strong>Präzision in Suchergebnissen</strong>: Durch die Anwendung von Metadatenfiltern können Sie sicherstellen, dass die Suchergebnisse in hohem Maße relevant für die Suchanfrage des Benutzers sind. Wenn Sie z. B. eine Sammlung von Finanzdokumenten haben, können Sie diese auf der Grundlage des Firmennamens, des Jahres oder anderer relevanter Metadaten filtern.</p></li>
+<li><p><strong>Effizienter</strong>: Die Filterung von Metadaten trägt dazu bei, die zu verarbeitende Datenmenge zu reduzieren und die Suchvorgänge effizienter zu gestalten. Dies ist vor allem bei großen Datenbeständen von Vorteil.</p></li>
+<li><p><strong>Anpassungsfähigkeit</strong>: Verschiedene Benutzer oder Anwendungen können unterschiedliche Anforderungen haben. Mit der Metadatenfilterung können Sie die Suchergebnisse an spezifische Anforderungen anpassen, z. B. an die Suche nach Dokumenten aus einem bestimmten Jahr oder Unternehmen.</p></li>
 </ul>
-<h2 id="Example-usage" class="common-anchor-header">Example usage<button data-href="#Example-usage" class="anchor-icon" translate="no">
+<h2 id="Example-usage" class="common-anchor-header">Beispiel für die Verwendung<button data-href="#Example-usage" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -423,9 +413,8 @@ Uber's total revenue for the year ended December 31, 2021 was $17,455 million.
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>In the code block below, metadata filtering is used to create a filtered query engine that retrieves documents based on a specific metadata key-value pair: <code translate="no">file_name</code>: <code translate="no">lyft_2021.pdf</code></p>
-<p>The <code translate="no">QueryEngineTool</code> defined below is more generic than the one defined above, in the one above, we had a tool per company (Uber and Lyft), in this one, it is more generic. We only know we have financial documents about companies but that’s it.
-By adding a Metadata Filtering, we can then filter on only getting data from a specific document.</p>
+    </button></h2><p>Im folgenden Codeblock wird die Metadatenfilterung verwendet, um eine gefilterte Abfragemaschine zu erstellen, die Dokumente auf der Grundlage eines bestimmten Metadaten-Schlüssel-Wert-Paares abruft: <code translate="no">file_name</code>: <code translate="no">lyft_2021.pdf</code></p>
+<p>Die unten definierte <code translate="no">QueryEngineTool</code> ist allgemeiner als die oben definierte, in der obigen hatten wir ein Tool pro Unternehmen (Uber und Lyft), in dieser ist es allgemeiner. Wir wissen nur, dass wir Finanzdokumente über Unternehmen haben, aber das war's auch schon. Durch Hinzufügen eines Metadatenfilters können wir dann filtern, um nur Daten aus einem bestimmten Dokument zu erhalten.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> llama_index.core.vector_stores <span class="hljs-keyword">import</span> ExactMatchFilter, MetadataFilters
 
 <span class="hljs-comment"># Example usage with metadata filtering</span>
@@ -454,7 +443,7 @@ query_engine_tools = [
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">filters: filters=[MetadataFilter(key='file_name', value='lyft_2021.pdf', operator=&lt;FilterOperator.EQ: '=='&gt;)] condition=&lt;FilterCondition.AND: 'and'&gt;
 </code></pre>
-<h2 id="Function-Calling" class="common-anchor-header">Function Calling<button data-href="#Function-Calling" class="anchor-icon" translate="no">
+<h2 id="Function-Calling" class="common-anchor-header">Funktionsaufrufe<button data-href="#Function-Calling" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -469,14 +458,13 @@ query_engine_tools = [
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Mistral Nemo and Large support native function calling. There’s a seamless integration with LlamaIndex tools, through the <code translate="no">predict_and_call</code> function on the llm.
-This allows the user to attach any tools and let the LLM decide which tools to call (if any).</p>
-<p>You can learn more about <a href="https://docs.llamaindex.ai/en/latest/module_guides/deploying/agents/">Agents</a> on the llama-index website.</p>
+    </button></h2><p>Mistral Nemo und Large unterstützen native Funktionsaufrufe. Es gibt eine nahtlose Integration mit LlamaIndex-Tools durch die <code translate="no">predict_and_call</code> Funktion auf dem LLM. Dies erlaubt dem Benutzer, beliebige Tools anzuhängen und den LLM entscheiden zu lassen, welche Tools aufgerufen werden sollen (wenn überhaupt).</p>
+<p>Weitere Informationen über <a href="https://docs.llamaindex.ai/en/latest/module_guides/deploying/agents/">Agenten</a> finden Sie auf der Llama-Index-Website.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Set up the LLM we will use for Function Calling</span>
 
 llm = Ollama(model=<span class="hljs-string">&quot;mistral-nemo&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Interact-with-the-Agent" class="common-anchor-header">Interact with the Agent<button data-href="#Interact-with-the-Agent" class="anchor-icon" translate="no">
+<h2 id="Interact-with-the-Agent" class="common-anchor-header">Interaktion mit dem Agenten<button data-href="#Interact-with-the-Agent" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -491,10 +479,10 @@ llm = Ollama(model=<span class="hljs-string">&quot;mistral-nemo&quot;</span>)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Now we can the Metadata Filtering in action:</p>
+    </button></h2><p>Jetzt können wir die Metadatenfilterung in Aktion sehen:</p>
 <ol>
-<li>In the first one, the Agent shouldn’t be able to find anything to the user’s query as it’s about Uber and we filter on Documents only about Lyft.</li>
-<li>In the second one, the Agent should be able to find information about Lyft as we will only search through documents that are about Lyft.</li>
+<li>Im ersten Fall sollte der Agent nichts zu der Anfrage des Benutzers finden, da es sich um Uber handelt und wir nur nach Dokumenten über Lyft filtern.</li>
+<li>Im zweiten Fall sollte der Agent in der Lage sein, Informationen über Lyft zu finden, da wir nur Dokumente durchsuchen, die sich auf Lyft beziehen.</li>
 </ol>
 <pre><code translate="no" class="language-python">response = llm.predict_and_call(
     query_engine_tools,
@@ -515,7 +503,7 @@ llm = Ollama(model=<span class="hljs-string">&quot;mistral-nemo&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">Investing in Lyft carries significant risks. These include general economic factors like impacts from pandemics or crises, operational factors such as competition, pricing changes, and driver/ride growth unpredictability, insurance coverage issues, autonomous vehicle technology uncertainties, reputational concerns, potential security breaches, reliance on third-party services, and challenges in expanding platform offerings. Lyft's business operations are subject to numerous other risks not explicitly mentioned here, which could also harm its financial condition and prospects.
 </code></pre>
-<h2 id="Example-of-Confusion-Without-Metadata-Filtering" class="common-anchor-header">Example of Confusion Without Metadata Filtering<button data-href="#Example-of-Confusion-Without-Metadata-Filtering" class="anchor-icon" translate="no">
+<h2 id="Example-of-Confusion-Without-Metadata-Filtering" class="common-anchor-header">Beispiel für Verwirrung ohne Metadatenfilterung<button data-href="#Example-of-Confusion-Without-Metadata-Filtering" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -539,8 +527,8 @@ Based on the provided context, <span class="hljs-built_in">which</span> pertains
 - Operational factors like competition in ride-hailing services, unpredictability in results of operations, and uncertainty about market growth for ridesharing and related services.
 - Risks related to attracting and retaining qualified drivers and riders.
 </span><button class="copy-code-btn"></button></code></pre>
-<p>In this example, the system incorrectly provides information about Lyft instead of Uber, leading to a misleading response. It starts by saying that it doens’t have the information but then just goes on and on.</p>
-<h2 id="Using-an-Agent-to-Extract-Metadata-Filters" class="common-anchor-header">Using an Agent to Extract Metadata Filters<button data-href="#Using-an-Agent-to-Extract-Metadata-Filters" class="anchor-icon" translate="no">
+<p>In diesem Beispiel liefert das System fälschlicherweise Informationen über Lyft statt über Uber, was zu einer irreführenden Antwort führt. Es beginnt mit der Aussage, dass es die Informationen nicht hat, und fährt dann immer weiter fort.</p>
+<h2 id="Using-an-Agent-to-Extract-Metadata-Filters" class="common-anchor-header">Verwendung eines Agenten zur Extraktion von Metadatenfiltern<button data-href="#Using-an-Agent-to-Extract-Metadata-Filters" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -555,8 +543,8 @@ Based on the provided context, <span class="hljs-built_in">which</span> pertains
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>To address this issue, we can use an agent to automatically extract metadata filters from the user’s question and apply them during the question answering process. This ensures that the system retrieves the correct and relevant information.</p>
-<h2 id="Code-Example" class="common-anchor-header">Code Example<button data-href="#Code-Example" class="anchor-icon" translate="no">
+    </button></h2><p>Um dieses Problem zu lösen, können wir einen Agenten einsetzen, der automatisch Metadatenfilter aus der Frage des Benutzers extrahiert und sie während des Beantwortungsprozesses anwendet. Dadurch wird sichergestellt, dass das System die richtigen und relevanten Informationen abruft.</p>
+<h2 id="Code-Example" class="common-anchor-header">Code-Beispiel<button data-href="#Code-Example" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -571,12 +559,12 @@ Based on the provided context, <span class="hljs-built_in">which</span> pertains
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Below is a code example that demonstrates how to create a filtered query engine using an agent to extract metadata filters from the user’s question:</p>
-<h3 id="Explanation" class="common-anchor-header">Explanation</h3><ul>
-<li><p><strong>Prompt Template</strong>: The PromptTemplate class is used to define a template for extracting metadata filters from the user’s question. The template instructs the language model to consider company names, years, and other relevant attributes.</p></li>
-<li><p><strong>LLM</strong>: Mistral Nemo is used to generate the metadata filters based on the user’s question. The model is prompted with the question and the template to extract the relevant filters.</p></li>
-<li><p><strong>Metadata Filters</strong>: The response from the LLM is parsed to create a <code translate="no">MetadataFilters</code> object. If no specific filters are mentioned, an empty <code translate="no">MetadataFilters</code> object is returned.</p></li>
-<li><p><strong>Filtered Query Engine</strong>: The <code translate="no">index.as_query_engine(filters=metadata_filters)</code> method creates a query engine that applies the extracted metadata filters to the index. This ensures that only the documents matching the filter criteria are retrieved.</p></li>
+    </button></h2><p>Das folgende Code-Beispiel zeigt, wie eine gefilterte Abfrage-Engine mit Hilfe eines Agenten erstellt wird, der Metadatenfilter aus der Frage des Benutzers extrahiert:</p>
+<h3 id="Explanation" class="common-anchor-header">Erläuterung</h3><ul>
+<li><p><strong>Prompt-Vorlage</strong>: Die Klasse PromptTemplate wird verwendet, um eine Vorlage für die Extraktion von Metadatenfiltern aus der Frage des Benutzers zu definieren. Die Vorlage weist das Sprachmodell an, Firmennamen, Jahreszahlen und andere relevante Attribute zu berücksichtigen.</p></li>
+<li><p><strong>LLM</strong>: Mistral Nemo wird verwendet, um die Metadatenfilter basierend auf der Frage des Benutzers zu generieren. Das Modell wird mit der Frage und der Vorlage aufgefordert, die relevanten Filter zu extrahieren.</p></li>
+<li><p><strong>Metadaten-Filter</strong>: Die Antwort des LLM wird geparst, um ein <code translate="no">MetadataFilters</code> Objekt zu erstellen. Wenn keine spezifischen Filter erwähnt werden, wird ein leeres <code translate="no">MetadataFilters</code> Objekt zurückgegeben.</p></li>
+<li><p><strong>Filtered Query Engine</strong>: Die Methode <code translate="no">index.as_query_engine(filters=metadata_filters)</code> erstellt eine Query Engine, die die extrahierten Metadatenfilter auf den Index anwendet. Dadurch wird sichergestellt, dass nur die Dokumente abgerufen werden, die den Filterkriterien entsprechen.</p></li>
 </ul>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> llama_index.core.prompts.base <span class="hljs-keyword">import</span> PromptTemplate
 
@@ -643,7 +631,7 @@ response = llm.predict_and_call(
 Response with metadata filtering:
 Uber's total revenue for the year ended December 31, 2021, is $17.455 billion.
 </code></pre>
-<h2 id="Orchestrating-the-different-services-with-Mistral-Large" class="common-anchor-header">Orchestrating the different services with Mistral Large<button data-href="#Orchestrating-the-different-services-with-Mistral-Large" class="anchor-icon" translate="no">
+<h2 id="Orchestrating-the-different-services-with-Mistral-Large" class="common-anchor-header">Orchestrierung der verschiedenen Dienste mit Mistral Large<button data-href="#Orchestrating-the-different-services-with-Mistral-Large" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -658,22 +646,22 @@ Uber's total revenue for the year ended December 31, 2021, is $17.455 billion.
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Mistral Large is the flagship model of Mistral with very good reasoning, knowledge, and coding capabilities. It’s ideal for complex tasks that require large reasoning capabilities or are highly specialized. It has advanced function calling capabilities, which is exactly what we need to orchestrate our different agents.</p>
-<h3 id="Why-do-we-need-a-smarter-Model" class="common-anchor-header">Why do we need a smarter Model?</h3><p>The question being answered below is particularly challenging because it requires the orchestration of multiple services and agents to provide a coherent and accurate response. This involves coordinating various tools and agents to retrieve and process information from different sources, such as financial data from different companies.</p>
-<h3 id="Whats-so-difficult-about-that" class="common-anchor-header">What’s so difficult about that?</h3><ul>
-<li>Complexity: The question involves multiple agents and services, each with its own functionality and data sources. Coordinating these agents to work together seamlessly is a complex task.</li>
+    </button></h2><p>Mistral Large ist das Flaggschiff-Modell von Mistral mit sehr guten Argumentations-, Wissens- und Kodierungsfähigkeiten. Es ist ideal für komplexe Aufgaben, die umfangreiche Fähigkeiten zum Reasoning erfordern oder hoch spezialisiert sind. Es verfügt über fortgeschrittene Funktionsaufrufe, was genau das ist, was wir brauchen, um unsere verschiedenen Agenten zu orchestrieren.</p>
+<h3 id="Why-do-we-need-a-smarter-Model" class="common-anchor-header">Warum brauchen wir ein intelligenteres Modell?</h3><p>Die Frage, die wir im Folgenden beantworten wollen, ist besonders anspruchsvoll, weil sie die Orchestrierung mehrerer Dienste und Agenten erfordert, um eine kohärente und genaue Antwort zu geben. Dazu müssen verschiedene Tools und Agenten koordiniert werden, um Informationen aus unterschiedlichen Quellen abzurufen und zu verarbeiten, z. B. Finanzdaten von verschiedenen Unternehmen.</p>
+<h3 id="Whats-so-difficult-about-that" class="common-anchor-header">Was ist daran so schwierig?</h3><ul>
+<li>Die Komplexität: Die Frage betrifft mehrere Agenten und Dienste, von denen jeder über eigene Funktionen und Datenquellen verfügt. Diese Agenten so zu koordinieren, dass sie nahtlos zusammenarbeiten, ist eine komplexe Aufgabe.</li>
 </ul>
 <ul>
-<li><p>Data Integration: The question requires integrating data from different sources, which can be challenging due to variations in data formats, structures, and metadata.</p></li>
-<li><p>Contextual Understanding: The question may require understanding the context and relationships between different pieces of information, which is a cognitively demanding task.</p></li>
+<li><p>Datenintegration: Die Frage erfordert die Integration von Daten aus verschiedenen Quellen, was aufgrund der unterschiedlichen Datenformate, -strukturen und -metadaten eine Herausforderung darstellen kann.</p></li>
+<li><p>Verständnis des Kontextes: Die Fragestellung kann ein Verständnis des Kontextes und der Beziehungen zwischen verschiedenen Informationen erfordern, was eine kognitiv anspruchsvolle Aufgabe ist.</p></li>
 </ul>
-<h3 id="Why-would-Mistral-Large-help-in-this-case" class="common-anchor-header">Why would Mistral Large help in this case?</h3><p>Mistral Large is well-suited for this task due to its advanced reasoning and function calling capabilities. Here’s how it helps:</p>
+<h3 id="Why-would-Mistral-Large-help-in-this-case" class="common-anchor-header">Warum sollte Mistral Large in diesem Fall helfen?</h3><p>Mistral Large ist für diese Aufgabe gut geeignet, da es über fortgeschrittene Argumentations- und Funktionsaufrufe verfügt. Hier ist, wie es hilft:</p>
 <ul>
-<li><p>Advanced Reasoning: Mistral Large can handle complex reasoning tasks, making it ideal for orchestrating multiple agents and services. It can understand the relationships between different pieces of information and make informed decisions.</p></li>
-<li><p>Function Calling Capabilities: Mistral Large has advanced function calling capabilities, which are essential for coordinating the actions of different agents. This allows for seamless integration and orchestration of various services.</p></li>
-<li><p>Specialized Knowledge: Mistral Large is designed for highly specialized tasks, making it well-suited for handling complex queries that require deep domain knowledge.</p></li>
+<li><p>Fortgeschrittenes Reasoning: Mistral Large kann komplexe Schlussfolgerungen ziehen und ist daher ideal für die Orchestrierung von mehreren Agenten und Diensten. Er kann die Beziehungen zwischen verschiedenen Informationen verstehen und fundierte Entscheidungen treffen.</p></li>
+<li><p>Funktionsaufruf-Fähigkeiten: Mistral Large verfügt über fortschrittliche Funktionsaufrufe, die für die Koordinierung der Aktionen verschiedener Agenten unerlässlich sind. Dies ermöglicht eine nahtlose Integration und Orchestrierung von verschiedenen Diensten.</p></li>
+<li><p>Spezialisiertes Wissen: Mistral Large wurde für hochspezialisierte Aufgaben entwickelt und eignet sich daher gut für die Bearbeitung komplexer Abfragen, die tiefes Domänenwissen erfordern.</p></li>
 </ul>
-<p>For all those reasons, I decided that using Mistral Large instead of Mistral Nemo was better suited here.</p>
+<p>Aus all diesen Gründen habe ich entschieden, dass Mistral Large anstelle von Mistral Nemo hier besser geeignet ist.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> llama_agents <span class="hljs-keyword">import</span> (
     AgentService,
     ToolService,
@@ -778,7 +766,7 @@ INFO:llama_agents.message_queues.simple - Successfully published message 'human'
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">[{&quot;name&quot;: &quot;finalize&quot;, &quot;arguments&quot;: {&quot;input&quot;: &quot;Uber faces several risk factors, including general economic impacts such as pandemics or downturns, operational challenges like competition, market growth uncertainty, attracting and retaining drivers and riders, insurance adequacy, autonomous vehicle technology development, maintaining its reputation and brand, and managing growth. Additionally, reliance on third-party providers for various services can introduce further risks to its operations.&quot;}}]
 </code></pre>
-<h2 id="Conclusion" class="common-anchor-header">Conclusion<button data-href="#Conclusion" class="anchor-icon" translate="no">
+<h2 id="Conclusion" class="common-anchor-header">Schlussfolgerung<button data-href="#Conclusion" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -793,4 +781,4 @@ INFO:llama_agents.message_queues.simple - Successfully published message 'human'
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>In this notebook, you have seen how you can use llama-agents to perform different actions by calling appropriate tools. By using Mistral Large in combination with Mistral Nemo, we demonstrated how to effectively orchestrate intelligent, resource-efficient systems by leveraging the strengths of different LLMs. We saw that the Agent could pick the collection containing the data requested by the user.</p>
+    </button></h2><p>In diesem Notizbuch haben Sie gesehen, wie Sie Llama-Agenten verwenden können, um verschiedene Aktionen auszuführen, indem Sie entsprechende Tools aufrufen. Durch die Verwendung von Mistral Large in Kombination mit Mistral Nemo haben wir gezeigt, wie man intelligente, ressourceneffiziente Systeme effektiv orchestrieren kann, indem man die Stärken verschiedener LLMs nutzt. Wir haben gesehen, dass der Agent die Sammlung auswählen kann, die die vom Benutzer angeforderten Daten enthält.</p>

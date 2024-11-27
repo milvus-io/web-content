@@ -2,11 +2,11 @@
 id: index-with-gpu.md
 order: 3
 summary: >-
-  This guide explains how to build an index with GPU support in Milvus to
-  enhance search performance.
-title: Index with GPU
+  Diese Anleitung erklärt, wie man einen Index mit GPU-Unterstützung in Milvus
+  erstellt, um die Suchleistung zu verbessern.
+title: Index mit GPU
 ---
-<h1 id="Index-with-GPU" class="common-anchor-header">Index with GPU<button data-href="#Index-with-GPU" class="anchor-icon" translate="no">
+<h1 id="Index-with-GPU" class="common-anchor-header">Index mit GPU<button data-href="#Index-with-GPU" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -21,8 +21,8 @@ title: Index with GPU
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>This guide outlines the steps to build an index with GPU support in Milvus, which can significantly improve search performance in high-throughput and high-recall scenarios. For details on the types of GPU indexes supported by Milvus, refer to <a href="/docs/gpu_index.md">GPU Index</a>.</p>
-<h2 id="Configure-Milvus-settings-for-GPU-memory-control" class="common-anchor-header">Configure Milvus settings for GPU memory control<button data-href="#Configure-Milvus-settings-for-GPU-memory-control" class="anchor-icon" translate="no">
+    </button></h1><p>Dieser Leitfaden beschreibt die Schritte zur Erstellung eines Indexes mit GPU-Unterstützung in Milvus, der die Suchleistung in Szenarien mit hohem Durchsatz und hohem Abruf erheblich verbessern kann. Einzelheiten zu den von Milvus unterstützten GPU-Indexen finden Sie unter <a href="/docs/de/gpu_index.md">GPU-Index</a>.</p>
+<h2 id="Configure-Milvus-settings-for-GPU-memory-control" class="common-anchor-header">Konfigurieren Sie die Milvus-Einstellungen für die GPU-Speichersteuerung<button data-href="#Configure-Milvus-settings-for-GPU-memory-control" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -37,20 +37,20 @@ title: Index with GPU
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus uses a global graphics memory pool to allocate GPU memory.</p>
-<p>It supports two parameters <code translate="no">initMemSize</code> and <code translate="no">maxMemSize</code> in <a href="https://github.com/milvus-io/milvus/blob/master/configs/milvus.yaml#L767-L769">Milvus config file</a>. The pool size is initially set to <code translate="no">initMemSize</code>, and will be automatically expanded to <code translate="no">maxMemSize</code> after exceeding this limit.</p>
-<p>The default <code translate="no">initMemSize</code> is 1/2 of the available GPU memory when Milvus starts, and the default <code translate="no">maxMemSize</code> is equal to all available GPU memory.</p>
-<p>Up until Milvus 2.4.1( including version 2.4.1), Milvus used a unified GPU memory pool. For versions prior to 2.4.1( including version 2.4.1), it was recommended to set both of the value to 0.</p>
+    </button></h2><p>Milvus verwendet einen globalen Grafikspeicherpool, um GPU-Speicher zuzuweisen.</p>
+<p>Es unterstützt zwei Parameter <code translate="no">initMemSize</code> und <code translate="no">maxMemSize</code> in der <a href="https://github.com/milvus-io/milvus/blob/master/configs/milvus.yaml#L767-L769">Milvus-Konfigurationsdatei</a>. Die Poolgröße ist anfänglich auf <code translate="no">initMemSize</code> eingestellt und wird automatisch auf <code translate="no">maxMemSize</code> erweitert, wenn diese Grenze überschritten wird.</p>
+<p>Der Standardwert <code translate="no">initMemSize</code> ist 1/2 des verfügbaren GPU-Speichers, wenn Milvus startet, und der Standardwert <code translate="no">maxMemSize</code> ist gleich dem gesamten verfügbaren GPU-Speicher.</p>
+<p>Bis zu Milvus 2.4.1 (einschließlich Version 2.4.1) verwendete Milvus einen einheitlichen GPU-Speicherpool. Für Versionen vor 2.4.1 (einschließlich Version 2.4.1) wurde empfohlen, beide Werte auf 0 zu setzen.</p>
 <pre><code translate="no" class="language-yaml">gpu:
   initMemSize: <span class="hljs-number">0</span> <span class="hljs-comment">#set the initial memory pool size.</span>
   maxMemSize: <span class="hljs-number">0</span> <span class="hljs-comment">#maxMemSize sets the maximum memory usage limit. When the memory usage exceed initMemSize, Milvus will attempt to expand the memory pool. </span>
 <button class="copy-code-btn"></button></code></pre>
-<p>From Milvus 2.4.1 onwards, the GPU memory pool is only used for temporary GPU data during searches. Therefore, it is recommended to set it to 2048 and 4096.</p>
+<p>Ab Milvus 2.4.1 wird der GPU-Speicherpool nur noch für temporäre GPU-Daten während der Suche verwendet. Es wird daher empfohlen, ihn auf 2048 und 4096 zu setzen.</p>
 <pre><code translate="no" class="language-yaml">gpu:
   initMemSize: <span class="hljs-number">2048</span> <span class="hljs-comment">#set the initial memory pool size.</span>
   maxMemSize: <span class="hljs-number">4096</span> <span class="hljs-comment">#maxMemSize sets the maximum memory usage limit. When the memory usage exceed initMemSize, Milvus will attempt to expand the memory pool. </span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Build-an-index" class="common-anchor-header">Build an index<button data-href="#Build-an-index" class="anchor-icon" translate="no">
+<h2 id="Build-an-index" class="common-anchor-header">Einen Index erstellen<button data-href="#Build-an-index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -65,16 +65,16 @@ title: Index with GPU
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>The following examples demonstrate how to build GPU indexes of different types.</p>
-<h3 id="Prepare-index-parameters" class="common-anchor-header">Prepare index parameters</h3><p>When setting up GPU index parameters, define <strong>index_type</strong>, <strong>metric_type</strong>, and <strong>params</strong>:</p>
+    </button></h2><p>Die folgenden Beispiele zeigen, wie man GPU-Indizes verschiedener Typen erstellt.</p>
+<h3 id="Prepare-index-parameters" class="common-anchor-header">Vorbereiten der Indexparameter</h3><p>Beim Einrichten von GPU-Indexparametern müssen <strong>index_type</strong>, <strong>metric_type</strong> und <strong>params</strong> definiert werden:</p>
 <ul>
-<li><p><strong>index_type</strong> (<em>string</em>): The type of index used to accelerate vector search. Valid options include <strong>GPU_CAGRA</strong>, <strong>GPU_IVF_FLAT</strong>, <strong>GPU_IVF_PQ</strong>, and <strong>GPU_BRUTE_FORCE</strong>.</p></li>
-<li><p><strong>metric_type</strong> (<em>string</em>): The type of metrics used to measure the similarity of vectors. Valid options are <strong>IP</strong> and <strong>L2</strong>.</p></li>
-<li><p><strong>params</strong>(<em>dict</em>): The index-specific building parameters. The valid options for this parameter depend on the index type.</p></li>
+<li><p><strong>index_type</strong><em>(string</em>): Der Typ des Indexes, der zur Beschleunigung der Vektorsuche verwendet wird. Gültige Optionen sind <strong>GPU_CAGRA</strong>, <strong>GPU_IVF_FLAT</strong>, <strong>GPU_IVF_PQ</strong> und <strong>GPU_BRUTE_FORCE</strong>.</p></li>
+<li><p><strong>metric_type</strong><em>(Zeichenfolge</em>): Der Typ der Metrik, die zur Messung der Ähnlichkeit von Vektoren verwendet wird. Gültige Optionen sind <strong>IP</strong> und <strong>L2</strong>.</p></li>
+<li><p><strong>params</strong><em>(dict</em>): Die indexspezifischen Bauparameter. Die gültigen Optionen für diesen Parameter hängen vom Indextyp ab.</p></li>
 </ul>
-<p>Here are example configurations for different index types:</p>
+<p>Hier sind Beispielkonfigurationen für verschiedene Indextypen:</p>
 <ul>
-<li><p><strong>GPU_CAGRA</strong> index</p>
+<li><p><strong>GPU_CAGRA-Index</strong> </p>
 <pre><code translate="no" class="language-python">index_params = {
     <span class="hljs-string">&quot;metric_type&quot;</span>: <span class="hljs-string">&quot;L2&quot;</span>,
     <span class="hljs-string">&quot;index_type&quot;</span>: <span class="hljs-string">&quot;GPU_CAGRA&quot;</span>,
@@ -84,18 +84,18 @@ title: Index with GPU
     }
 }
 <button class="copy-code-btn"></button></code></pre>
-<p>Possible options for <strong>params</strong> include:</p>
+<p>Mögliche Optionen für <strong>params</strong> sind:</p>
 <ul>
-<li><p><strong>intermediate_graph_degree</strong> (<em>int</em>): Affects recall and build time by determining the graph’s degree before pruning. Recommended values are <strong>32</strong> or <strong>64</strong>.</p></li>
-<li><p><strong>graph_degree</strong> (<em>int</em>): Affects search performance and recall by setting the graph’s degree after pruning. Typically, it is half of the <strong>intermediate_graph_degree</strong>. A larger difference between these two degrees results in a longer build time. Its value must be smaller than the value of <strong>intermediate_graph_degree</strong>.</p></li>
-<li><p><strong>build_algo</strong> (<em>string</em>): Selects the graph generation algorithm before pruning. Possible options:</p>
+<li><p><strong>intermediate_graph_degree</strong><em>(int</em>): Beeinflusst den Abruf und die Erstellungszeit, indem der Grad des Graphen vor dem Pruning bestimmt wird. Empfohlene Werte sind <strong>32</strong> oder <strong>64</strong>.</p></li>
+<li><p><strong>graph_degree</strong><em>(int</em>): Beeinflusst die Suchleistung und die Wiederauffindbarkeit, indem der Grad des Graphen nach dem Pruning festgelegt wird. Normalerweise beträgt er die Hälfte des <strong>intermediate_graph_degree</strong>. Ein größerer Unterschied zwischen diesen beiden Graden führt zu einer längeren Erstellungszeit. Sein Wert muss kleiner sein als der Wert von <strong>intermediate_graph_degree</strong>.</p></li>
+<li><p><strong>build_algo</strong><em>(String</em>): Wählt den Algorithmus zur Graphenerzeugung vor dem Pruning. Mögliche Optionen:</p>
 <ul>
-<li><p><strong>IVF_PQ</strong>: Offers higher quality but slower build time.</p></li>
-<li><p><strong>NN_DESCENT</strong>: Provides a quicker build with potentially lower recall.</p></li>
+<li><p><strong>IVF_PQ</strong>: Bietet eine höhere Qualität, aber eine langsamere Erstellungszeit.</p></li>
+<li><p><strong>NN_DESCENT</strong>: Bietet einen schnelleren Aufbau mit potenziell geringerer Wiedererkennung.</p></li>
 </ul></li>
-<li><p><strong>cache_dataset_on_device</strong> (<em>string</em>, <strong>“true”</strong> | <strong>“false”</strong>): Decides whether to cache the original dataset in GPU memory. Setting this to <strong>“true”</strong> enhances recall by refining search results, while setting it to <strong>“false”</strong> conserves GPU memory.</p></li>
+<li><p><strong>cache_dataset_on_device</strong><em>(string</em>, <strong>"true"</strong> | <strong>"false")</strong>: Legt fest, ob der Originaldatensatz im GPU-Speicher zwischengespeichert werden soll. Die Einstellung <strong>"true"</strong> erhöht die Wiederauffindbarkeit durch Verfeinerung der Suchergebnisse, während die Einstellung <strong>"false"</strong> den GPU-Speicher schont.</p></li>
 </ul></li>
-<li><p><strong>GPU_IVF_FLAT</strong> or <strong>GPU_IVF_PQ</strong> index</p>
+<li><p><strong>GPU_IVF_FLAT</strong> oder <strong>GPU_IVF_PQ</strong> Index</p>
 <pre><code translate="no" class="language-python">index_params = {
     <span class="hljs-string">&quot;metric_type&quot;</span>: <span class="hljs-string">&quot;L2&quot;</span>,
     <span class="hljs-string">&quot;index_type&quot;</span>: <span class="hljs-string">&quot;GPU_IVF_FLAT&quot;</span>, <span class="hljs-comment"># Or GPU_IVF_PQ</span>
@@ -104,7 +104,7 @@ title: Index with GPU
     }
 }
 <button class="copy-code-btn"></button></code></pre>
-<p>The <strong>params</strong> options are identical to those used in <strong><a href="https://milvus.io/docs/index.md#IVF_FLAT">IVF_FLAT</a></strong> and <strong><a href="https://milvus.io/docs/index.md#IVF_PQ">IVF_PQ</a></strong>.</p></li>
+<p>Die <strong>params-Optionen</strong> sind identisch mit denen, die in <strong><a href="https://milvus.io/docs/index.md#IVF_FLAT">IVF_FLAT</a></strong> und <strong><a href="https://milvus.io/docs/index.md#IVF_PQ">IVF_PQ</a></strong> verwendet werden.</p></li>
 <li><p><strong>GPU_BRUTE_FORCE</strong> index</p>
 <pre><code translate="no" class="language-python">index_params = {
     <span class="hljs-string">&#x27;index_type&#x27;</span>: <span class="hljs-string">&#x27;GPU_BRUTE_FORCE&#x27;</span>,
@@ -112,9 +112,9 @@ title: Index with GPU
     <span class="hljs-string">&#x27;params&#x27;</span>: {}
 }
 <button class="copy-code-btn"></button></code></pre>
-<p>No additional <strong>params</strong> configurations are required.</p></li>
+<p>Es sind keine zusätzlichen <strong>Parameterkonfigurationen</strong> erforderlich.</p></li>
 </ul>
-<h3 id="Build-index" class="common-anchor-header">Build index</h3><p>After configuring the index parameters in <strong>index_params</strong>, call the <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/ORM/Collection/create_index.md"><code translate="no">create_index()</code></a> method to build the index.</p>
+<h3 id="Build-index" class="common-anchor-header">Index erstellen</h3><p>Nach der Konfiguration der Index-Parameter in <strong>index_params</strong>, rufen Sie die <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/ORM/Collection/create_index.md"><code translate="no">create_index()</code></a> Methode auf, um den Index zu erstellen.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Get an existing collection</span>
 collection = Collection(<span class="hljs-string">&quot;YOUR_COLLECTION_NAME&quot;</span>)
 
@@ -123,7 +123,7 @@ collection.create_index(
     index_params=index_params
 )
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Search" class="common-anchor-header">Search<button data-href="#Search" class="anchor-icon" translate="no">
+<h2 id="Search" class="common-anchor-header">Suche<button data-href="#Search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -138,17 +138,17 @@ collection.create_index(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Once you have built your GPU index, the next step is to prepare the search parameters before conducting a search.</p>
-<h3 id="Prepare-search-parameters" class="common-anchor-header">Prepare search parameters</h3><p>Below are example configurations for different index types:</p>
+    </button></h2><p>Nachdem Sie Ihren GPU-Index erstellt haben, müssen Sie im nächsten Schritt die Suchparameter vorbereiten, bevor Sie eine Suche durchführen können.</p>
+<h3 id="Prepare-search-parameters" class="common-anchor-header">Vorbereiten der Suchparameter</h3><p>Nachfolgend finden Sie Beispielkonfigurationen für verschiedene Indextypen:</p>
 <ul>
-<li><p><strong>GPU_BRUTE_FORCE</strong> index</p>
+<li><p><strong>GPU_BRUTE_FORCE-Index</strong> </p>
 <pre><code translate="no" class="language-python">search_params = {
     <span class="hljs-string">&quot;metric_type&quot;</span>: <span class="hljs-string">&quot;L2&quot;</span>,
     <span class="hljs-string">&quot;params&quot;</span>: {}
 }
 <button class="copy-code-btn"></button></code></pre>
-<p>No additional <strong>params</strong> configurations are required.</p></li>
-<li><p><strong>GPU_CAGRA</strong> index</p>
+<p>Es sind keine zusätzlichen <strong>Parameter-Konfigurationen</strong> erforderlich.</p></li>
+<li><p><strong>GPU_CAGRA-Index</strong> </p>
 <pre><code translate="no" class="language-python">search_params = {
     <span class="hljs-string">&quot;metric_type&quot;</span>: <span class="hljs-string">&quot;L2&quot;</span>,
     <span class="hljs-string">&quot;params&quot;</span>: {
@@ -160,22 +160,22 @@ collection.create_index(
     }
 }
 <button class="copy-code-btn"></button></code></pre>
-<p>Key search parameters include:</p>
+<p>Die wichtigsten Suchparameter sind:</p>
 <ul>
-<li><p><strong>itopk_size</strong>: Determines the size of intermediate results kept during the search. A larger value may improve recall at the expense of search performance. It should be at least equal to the final top-k (<strong>limit</strong>) value and is typically a power of 2 (e.g., 16, 32, 64, 128).</p></li>
-<li><p><strong>search_width</strong>: Specifies the number of entry points into the CAGRA graph during the search. Increasing this value can enhance recall but may impact search performance.</p></li>
-<li><p><strong>min_iterations</strong> / <strong>max_iterations</strong>: These parameters control the search iteration process. By default, they are set to <strong>0</strong>, and CAGRA automatically determines the number of iterations based on <strong>itopk_size</strong> and <strong>search_width</strong>. Adjusting these values manually can help balance performance and accuracy.</p></li>
-<li><p><strong>team_size</strong>: Specifies the number of CUDA threads used for calculating metric distance on the GPU. Common values are a power of 2 up to 32 (e.g. 2, 4, 8, 16, 32). It has a minor impact on search performance. The default value is <strong>0</strong>, where Milvus automatically selects the <strong>team_size</strong> based on the vector dimension.</p></li>
+<li><p><strong>itopk_size</strong>: Bestimmt die Größe der Zwischenergebnisse, die während der Suche gespeichert werden. Ein größerer Wert kann die Wiederauffindbarkeit auf Kosten der Suchleistung verbessern. Er sollte mindestens gleich dem endgültigen Top-k-Wert<strong>(Grenzwert</strong>) sein und ist in der Regel eine Potenz von 2 (z. B. 16, 32, 64, 128).</p></li>
+<li><p><strong>search_width</strong>: Gibt die Anzahl der Einstiegspunkte in den CAGRA-Graphen während der Suche an. Eine Erhöhung dieses Wertes kann die Wiederauffindbarkeit verbessern, kann aber die Suchleistung beeinträchtigen.</p></li>
+<li><p><strong>min_iterations</strong> / <strong>max_iterations</strong>: Diese Parameter steuern den Iterationsprozess der Suche. Standardmäßig sind sie auf <strong>0</strong> gesetzt, und CAGRA bestimmt die Anzahl der Iterationen automatisch anhand von <strong>itopk_size</strong> und <strong>search_width</strong>. Eine manuelle Anpassung dieser Werte kann helfen, Leistung und Genauigkeit auszugleichen.</p></li>
+<li><p><strong>team_size</strong>: Gibt die Anzahl der CUDA-Threads an, die für die Berechnung des metrischen Abstands auf der GPU verwendet werden. Übliche Werte sind eine Potenz von 2 bis zu 32 (z. B. 2, 4, 8, 16, 32). Er hat einen geringen Einfluss auf die Suchleistung. Der Standardwert ist <strong>0</strong>, wobei Milvus die <strong>team_size</strong> automatisch auf der Grundlage der Vektordimension auswählt.</p></li>
 </ul></li>
-<li><p><strong>GPU_IVF_FLAT</strong> or <strong>GPU_IVF_PQ</strong> index</p>
+<li><p><strong>GPU_IVF_FLAT-</strong> oder <strong>GPU_IVF_PQ-Index</strong> </p>
 <pre><code translate="no" class="language-python">search_params = {
     <span class="hljs-string">&quot;metric_type&quot;</span>: <span class="hljs-string">&quot;L2&quot;</span>, 
     <span class="hljs-string">&quot;params&quot;</span>: {<span class="hljs-string">&quot;nprobe&quot;</span>: <span class="hljs-number">10</span>}
 }
 <button class="copy-code-btn"></button></code></pre>
-<p>Search parameters for these two index types are similar to those used in <strong><a href="https://milvus.io/docs/index.md#IVF_FLAT">IVF_FLAT</a> and <a href="https://milvus.io/docs/index.md#IVF_PQ">IVF_PQ</a></strong>. For more information, refer to <a href="https://milvus.io/docs/search.md#Prepare-search-parameters">Conduct a Vector Similarity Search</a>.</p></li>
+<p>Die Suchparameter für diese beiden Indextypen sind ähnlich wie die für <strong><a href="https://milvus.io/docs/index.md#IVF_FLAT">IVF_FLAT</a> und <a href="https://milvus.io/docs/index.md#IVF_PQ">IVF_PQ</a></strong> verwendeten. Weitere Informationen finden Sie unter <a href="https://milvus.io/docs/search.md#Prepare-search-parameters">Durchführen einer Vektorähnlichkeitssuche</a>.</p></li>
 </ul>
-<h3 id="Conduct-a-search" class="common-anchor-header">Conduct a search</h3><p>Use the <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/ORM/Collection/search.md"><code translate="no">search()</code></a> method to perform a vector similarity search on the GPU index.</p>
+<h3 id="Conduct-a-search" class="common-anchor-header">Durchführen einer Suche</h3><p>Verwenden Sie die <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/ORM/Collection/search.md"><code translate="no">search()</code></a> Methode, um eine Vektorähnlichkeitssuche im GPU-Index durchzuführen.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Load data into memory</span>
 collection.load()
 
@@ -186,7 +186,7 @@ collection.search(
     limit=<span class="hljs-number">100</span> <span class="hljs-comment"># Number of the results to return</span>
 )
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Limits" class="common-anchor-header">Limits<button data-href="#Limits" class="anchor-icon" translate="no">
+<h2 id="Limits" class="common-anchor-header">Grenzen<button data-href="#Limits" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -201,14 +201,14 @@ collection.search(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>When using GPU indexes, be aware of certain constraints:</p>
+    </button></h2><p>Bei der Verwendung von GPU-Indizes müssen bestimmte Einschränkungen beachtet werden:</p>
 <ul>
-<li><p>For <strong>GPU_IVF_FLAT</strong>, the maximum value for <strong>limit</strong> is 256.</p></li>
-<li><p>For <strong>GPU_IVF_PQ</strong> and <strong>GPU_CAGRA</strong>, the maximum value for <strong>limit</strong> is 1024.</p></li>
-<li><p>While there is no set limit for <strong>limit</strong> on <strong>GPU_BRUTE_FORCE</strong>, it is recommended not to exceed 4096 to avoid potential performance issues.</p></li>
-<li><p>Currently, GPU indexes do not support COSINE distance. If COSINE distance is required, data should be normalized first, and then inner product (IP) distance can be used as a substitute.</p></li>
-<li><p>Loading OOM protection for GPU indexes is not fully supported, too much data might lead to QueryNode crashes.</p></li>
-<li><p>GPU indexes do not support search functions like <a href="https://milvus.io/docs/single-vector-search.md#Range-search">range search</a> and <a href="https://milvus.io/docs/single-vector-search.md#Grouping-searchh">grouping search</a>.</p></li>
+<li><p>Für <strong>GPU_IVF_FLAT</strong> beträgt der Höchstwert für <strong>Limit</strong> 256.</p></li>
+<li><p>Für <strong>GPU_IVF_PQ</strong> und <strong>GPU_CAGRA</strong> ist der Höchstwert für <strong>limit</strong> 1024.</p></li>
+<li><p>Für <strong>GPU_BRUTE_FORCE</strong> gibt es zwar keinen festen <strong>Grenzwert</strong>, es wird jedoch empfohlen, 4096 nicht zu überschreiten, um mögliche Leistungsprobleme zu vermeiden.</p></li>
+<li><p>Derzeit unterstützen GPU-Indizes keinen COSINE-Abstand. Wenn der COSINE-Abstand erforderlich ist, sollten die Daten zuerst normalisiert werden, und dann kann der Innenproduktabstand (IP) als Ersatz verwendet werden.</p></li>
+<li><p>Das Laden von OOM-Schutz für GPU-Indizes wird nicht vollständig unterstützt, zu viele Daten können zum Absturz von QueryNode führen.</p></li>
+<li><p>GPU-Indizes unterstützen keine Suchfunktionen wie <a href="https://milvus.io/docs/single-vector-search.md#Range-search">Bereichssuche</a> und <a href="https://milvus.io/docs/single-vector-search.md#Grouping-searchh">Gruppierungssuche</a>.</p></li>
 </ul>
 <h2 id="FAQ" class="common-anchor-header">FAQ<button data-href="#FAQ" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -226,8 +226,8 @@ collection.search(
         ></path>
       </svg>
     </button></h2><ul>
-<li><p><strong>When is it appropriate to utilize a GPU index?</strong></p>
-<p>A GPU index is particularly beneficial in situations that demand high throughput or high recall. For instance, when dealing with large batches, the throughput of GPU indexing can surpass that of CPU indexing by as much as 100 times. In scenarios with smaller batches, GPU indexes still significantly outshine CPU indexes in terms of performance. Furthermore, if there’s a requirement for rapid data insertion, incorporating a GPU can substantially speed up the process of building indexes.</p></li>
-<li><p><strong>In which scenarios are GPU indexes like CAGRA, GPU_IVF_PQ, GPU_IVF_FLAT, and GPU_BRUTE_FORCE most suitable?</strong></p>
-<p>CAGRA indexes are ideal for scenarios that demand enhanced performance, albeit at the cost of consuming more memory. For environments where memory conservation is a priority, the <strong>GPU_IVF_PQ</strong> index can help minimize storage requirements, though this comes with a higher loss in precision. The <strong>GPU_IVF_FLAT</strong> index serves as a balanced option, offering a compromise between performance and memory usage. Lastly, the <strong>GPU_BRUTE_FORCE</strong> index is designed for exhaustive search operations, guaranteeing a recall rate of 1 by performing traversal searches.</p></li>
+<li><p><strong>Wann ist es sinnvoll, einen GPU-Index zu verwenden?</strong></p>
+<p>Ein GPU-Index ist besonders vorteilhaft in Situationen, die einen hohen Durchsatz oder eine hohe Wiederauffindung erfordern. Bei großen Stapeln kann der Durchsatz der GPU-Indizierung beispielsweise den der CPU-Indizierung um das 100-fache übertreffen. In Szenarien mit kleineren Stapeln übertrifft die GPU-Indizierung die CPU-Indizierung in Bezug auf die Leistung immer noch deutlich. Darüber hinaus kann der Einsatz eines Grafikprozessors den Prozess der Indexerstellung erheblich beschleunigen, wenn Daten schnell eingefügt werden müssen.</p></li>
+<li><p><strong>Für welche Szenarien sind GPU-Indizes wie CAGRA, GPU_IVF_PQ, GPU_IVF_FLAT und GPU_BRUTE_FORCE am besten geeignet?</strong></p>
+<p>CAGRA-Indizes sind ideal für Szenarien, die eine höhere Leistung erfordern, auch wenn dies mit einem höheren Speicherbedarf einhergeht. In Umgebungen, in denen Speicherplatzeinsparungen Priorität haben, kann der <strong>GPU_IVF_PQ-Index</strong> dazu beitragen, die Speicheranforderungen zu minimieren, auch wenn dies mit einem höheren Präzisionsverlust einhergeht. Der <strong>GPU_IVF_FLAT-Index</strong> stellt eine ausgewogene Option dar, die einen Kompromiss zwischen Leistung und Speicherbedarf bietet. Der <strong>GPU_BRUTE_FORCE-Index</strong> schließlich ist für erschöpfende Suchvorgänge konzipiert und garantiert durch die Durchführung von Traversalsuchen eine Abrufrate von 1.</p></li>
 </ul>

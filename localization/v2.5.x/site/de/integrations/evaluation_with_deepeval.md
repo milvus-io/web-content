@@ -1,11 +1,11 @@
 ---
 id: evaluation_with_deepeval.md
 summary: >-
-  This guide demonstrates how to use DeepEval to evaluate a Retrieval-Augmented
-  Generation (RAG) pipeline built upon Milvus.
-title: Evaluation with DeepEval
+  Dieser Leitfaden zeigt, wie man DeepEval verwendet, um eine auf Milvus
+  aufbauende Retrieval-Augmented Generation (RAG) Pipeline zu evaluieren.
+title: Auswertung mit DeepEval
 ---
-<h1 id="Evaluation-with-DeepEval" class="common-anchor-header">Evaluation with DeepEval<button data-href="#Evaluation-with-DeepEval" class="anchor-icon" translate="no">
+<h1 id="Evaluation-with-DeepEval" class="common-anchor-header">Auswertung mit DeepEval<button data-href="#Evaluation-with-DeepEval" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -22,10 +22,10 @@ title: Evaluation with DeepEval
       </svg>
     </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/evaluation_with_deepeval.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
 <a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/evaluation_with_deepeval.ipynb" target="_blank"><img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/></a></p>
-<p>This guide demonstrates how to use <a href="https://docs.confident-ai.com/">DeepEval</a> to evaluate a Retrieval-Augmented Generation (RAG) pipeline built upon <a href="https://milvus.io/">Milvus</a>.</p>
-<p>The RAG system combines a retrieval system with a generative model to generate new text based on a given prompt. The system first retrieves relevant documents from a corpus using Milvus, and then uses a generative model to generate new text based on the retrieved documents.</p>
-<p>DeepEval is a framework that helps you evaluate your RAG pipelines. There are existing tools and frameworks that help you build these pipelines but evaluating it and quantifying your pipeline performance can be hard. This is where DeepEval comes in.</p>
-<h2 id="Prerequisites" class="common-anchor-header">Prerequisites<button data-href="#Prerequisites" class="anchor-icon" translate="no">
+<p>Dieser Leitfaden demonstriert die Verwendung von <a href="https://docs.confident-ai.com/">DeepEval</a> zur Evaluierung einer Retrieval-Augmented Generation (RAG) Pipeline, die auf <a href="https://milvus.io/">Milvus</a> aufbaut.</p>
+<p>Das RAG-System kombiniert ein Retrievalsystem mit einem generativen Modell, um neuen Text auf der Grundlage einer vorgegebenen Aufforderung zu generieren. Das System ruft zunächst relevante Dokumente aus einem Korpus mit Milvus ab und verwendet dann ein generatives Modell, um neuen Text auf der Grundlage der abgerufenen Dokumente zu erzeugen.</p>
+<p>DeepEval ist ein Framework, das Sie bei der Bewertung Ihrer RAG-Pipelines unterstützt. Es gibt bereits Tools und Frameworks, die Ihnen bei der Erstellung dieser Pipelines helfen, aber die Bewertung und Quantifizierung der Leistung Ihrer Pipelines kann schwierig sein. Hier kommt DeepEval ins Spiel.</p>
+<h2 id="Prerequisites" class="common-anchor-header">Voraussetzungen<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -40,18 +40,18 @@ title: Evaluation with DeepEval
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Before running this notebook, make sure you have the following dependencies installed:</p>
+    </button></h2><p>Vergewissern Sie sich, dass Sie die folgenden Abhängigkeiten installiert haben, bevor Sie dieses Notizbuch ausführen:</p>
 <pre><code translate="no" class="language-python">$ pip install --upgrade pymilvus openai requests tqdm pandas deepeval
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>If you are using Google Colab, to enable dependencies just installed, you may need to <strong>restart the runtime</strong> (click on the “Runtime” menu at the top of the screen, and select “Restart session” from the dropdown menu).</p>
+<p>Wenn Sie Google Colab verwenden, müssen Sie möglicherweise <strong>die Runtime neu starten</strong>, um die soeben installierten Abhängigkeiten zu aktivieren (klicken Sie auf das Menü "Runtime" am oberen Rand des Bildschirms und wählen Sie "Restart session" aus dem Dropdown-Menü).</p>
 </div>
-<p>We will use OpenAI as the LLM in this example. You should prepare the <a href="https://platform.openai.com/docs/quickstart">api key</a> <code translate="no">OPENAI_API_KEY</code> as an environment variable.</p>
+<p>Wir werden in diesem Beispiel OpenAI als LLM verwenden. Sie sollten den <a href="https://platform.openai.com/docs/quickstart">Api-Schlüssel</a> <code translate="no">OPENAI_API_KEY</code> als Umgebungsvariable vorbereiten.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> os
 
 os.<span class="hljs-property">environ</span>[<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</span>] = <span class="hljs-string">&quot;sk-*****************&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Define-the-RAG-pipeline" class="common-anchor-header">Define the RAG pipeline<button data-href="#Define-the-RAG-pipeline" class="anchor-icon" translate="no">
+<h2 id="Define-the-RAG-pipeline" class="common-anchor-header">Definieren Sie die RAG-Pipeline<button data-href="#Define-the-RAG-pipeline" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -66,8 +66,7 @@ os.<span class="hljs-property">environ</span>[<span class="hljs-string">&quot;OP
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>We will define the RAG class that use Milvus as the vector store, and OpenAI as the LLM.
-The class contains the <code translate="no">load</code> method, which loads the text data into Milvus, the <code translate="no">retrieve</code> method, which retrieves the most similar text data to the given question, and the <code translate="no">answer</code> method, which answers the given question with the retrieved knowledge.</p>
+    </button></h2><p>Wir werden die RAG-Klasse definieren, die Milvus als Vektorspeicher und OpenAI als LLM verwendet. Die Klasse enthält die Methode <code translate="no">load</code>, die die Textdaten in Milvus lädt, die Methode <code translate="no">retrieve</code>, die die ähnlichsten Textdaten zur gegebenen Frage abruft, und die Methode <code translate="no">answer</code>, die die gegebene Frage mit dem abgerufenen Wissen beantwortet.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> typing <span class="hljs-keyword">import</span> <span class="hljs-type">List</span>
 <span class="hljs-keyword">from</span> tqdm <span class="hljs-keyword">import</span> tqdm
 <span class="hljs-keyword">from</span> openai <span class="hljs-keyword">import</span> OpenAI
@@ -175,21 +174,21 @@ The class contains the <code translate="no">load</code> method, which loads the 
         <span class="hljs-keyword">else</span>:
             <span class="hljs-keyword">return</span> response.choices[<span class="hljs-number">0</span>].message.content, retrieved_texts
 <button class="copy-code-btn"></button></code></pre>
-<p>Let’s initialize the RAG class with OpenAI and Milvus clients.</p>
+<p>Initialisieren wir die RAG-Klasse mit OpenAI- und Milvus-Clients.</p>
 <pre><code translate="no" class="language-python">openai_client = <span class="hljs-title class_">OpenAI</span>()
 milvus_client = <span class="hljs-title class_">MilvusClient</span>(uri=<span class="hljs-string">&quot;./milvus_demo.db&quot;</span>)
 
 my_rag = <span class="hljs-title function_">RAG</span>(openai_client=openai_client, milvus_client=milvus_client)
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>As for the argument of <code translate="no">MilvusClient</code>:</p>
+<p>Was das Argument von <code translate="no">MilvusClient</code> betrifft:</p>
 <ul>
-<li>Setting the <code translate="no">uri</code> as a local file, e.g.<code translate="no">./milvus.db</code>, is the most convenient method, as it automatically utilizes <a href="https://milvus.io/docs/milvus_lite.md">Milvus Lite</a> to store all data in this file.</li>
-<li>If you have large scale of data, you can set up a more performant Milvus server on <a href="https://milvus.io/docs/quickstart.md">docker or kubernetes</a>. In this setup, please use the server uri, e.g.<code translate="no">http://localhost:19530</code>, as your <code translate="no">uri</code>.</li>
-<li>If you want to use <a href="https://zilliz.com/cloud">Zilliz Cloud</a>, the fully managed cloud service for Milvus, adjust the <code translate="no">uri</code> and <code translate="no">token</code>, which correspond to the <a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">Public Endpoint and Api key</a> in Zilliz Cloud.</li>
+<li>Die Einstellung von <code translate="no">uri</code> als lokale Datei, z.B.<code translate="no">./milvus.db</code>, ist die bequemste Methode, da sie automatisch <a href="https://milvus.io/docs/milvus_lite.md">Milvus Lite</a> nutzt, um alle Daten in dieser Datei zu speichern.</li>
+<li>Wenn Sie große Datenmengen haben, können Sie einen leistungsfähigeren Milvus-Server auf <a href="https://milvus.io/docs/quickstart.md">Docker oder Kubernetes</a> einrichten. Bei dieser Einrichtung verwenden Sie bitte die Server-Uri, z. B.<code translate="no">http://localhost:19530</code>, als <code translate="no">uri</code>.</li>
+<li>Wenn Sie <a href="https://zilliz.com/cloud">Zilliz Cloud</a>, den vollständig verwalteten Cloud-Service für Milvus, verwenden möchten, passen Sie <code translate="no">uri</code> und <code translate="no">token</code> an, die dem <a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">öffentlichen Endpunkt und dem Api-Schlüssel</a> in Zilliz Cloud entsprechen.</li>
 </ul>
 </div>
-<h2 id="Run-the-RAG-pipeline-and-get-results" class="common-anchor-header">Run the RAG pipeline and get results<button data-href="#Run-the-RAG-pipeline-and-get-results" class="anchor-icon" translate="no">
+<h2 id="Run-the-RAG-pipeline-and-get-results" class="common-anchor-header">Führen Sie die RAG-Pipeline aus und erhalten Sie die Ergebnisse<button data-href="#Run-the-RAG-pipeline-and-get-results" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -204,8 +203,8 @@ my_rag = <span class="hljs-title function_">RAG</span>(openai_client=openai_clie
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>We use the <a href="https://github.com/milvus-io/milvus/blob/master/DEVELOPMENT.md">Milvus development guide</a> to be as the private knowledge in our RAG, which is a good data source for a simple RAG pipeline.</p>
-<p>Download it and load it into the rag pipeline.</p>
+    </button></h2><p>Wir verwenden das <a href="https://github.com/milvus-io/milvus/blob/master/DEVELOPMENT.md">Milvus-Entwicklungshandbuch</a> als privates Wissen in unserer RAG, das eine gute Datenquelle für eine einfache RAG-Pipeline ist.</p>
+<p>Laden Sie es herunter und laden Sie es in die RAG-Pipeline.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> urllib.request
 <span class="hljs-keyword">import</span> os
 
@@ -222,7 +221,7 @@ my_rag.load(text_lines)
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">Creating embeddings: 100%|██████████| 47/47 [00:20&lt;00:00,  2.26it/s]
 </code></pre>
-<p>Let’s define a query question about the content of the development guide documentation. And then use the <code translate="no">answer</code> method to get the answer and the retrieved context texts.</p>
+<p>Lassen Sie uns eine Abfrage über den Inhalt der Dokumentation des Entwicklungshandbuchs definieren. Und dann verwenden wir die Methode <code translate="no">answer</code>, um die Antwort und die abgerufenen Kontexttexte zu erhalten.</p>
 <pre><code translate="no" class="language-python">question = <span class="hljs-string">&quot;what is the hardware requirements specification if I want to build Milvus and run from source code?&quot;</span>
 my_rag.answer(question, return_retrieved_text=<span class="hljs-literal">True</span>)
 <button class="copy-code-btn"></button></code></pre>
@@ -231,7 +230,7 @@ my_rag.answer(question, return_retrieved_text=<span class="hljs-literal">True</s
   'Building Milvus on a local OS/shell environment\n\nThe details below outline the hardware and software requirements for building on Linux and MacOS.\n\n##',
   &quot;Software Requirements\n\nAll Linux distributions are available for Milvus development. However a majority of our contributor worked with Ubuntu or CentOS systems, with a small portion of Mac (both x86_64 and Apple Silicon) contributors. If you would like Milvus to build and run on other distributions, you are more than welcome to file an issue and contribute!\n\nHere's a list of verified OS types where Milvus can successfully build and run:\n\n- Debian/Ubuntu\n- Amazon Linux\n- MacOS (x86_64)\n- MacOS (Apple Silicon)\n\n##&quot;])
 </code></pre>
-<p>Now let’s prepare some questions with its corresponding ground truth answers. We get answers and contexts from our RAG pipeline.</p>
+<p>Lassen Sie uns nun einige Fragen mit den entsprechenden Antworten vorbereiten. Wir erhalten die Antworten und Kontexte aus unserer RAG-Pipeline.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> datasets <span class="hljs-keyword">import</span> Dataset
 <span class="hljs-keyword">import</span> pandas <span class="hljs-keyword">as</span> pd
 
@@ -269,10 +268,7 @@ Answering questions: 100%|██████████| 3/3 [00:03&lt;00:00,  
 </code></pre>
 <div>
 <style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-<pre><code translate="no">.dataframe tbody tr th {
+    .dataframe tbody tr th:only-of-type { vertical-align: middle; }<pre><code translate="no">.dataframe tbody tr th {
     vertical-align: top;
 }
 
@@ -285,38 +281,38 @@ Answering questions: 100%|██████████| 3/3 [00:03&lt;00:00,  
   <thead>
     <tr style="text-align: right;">
       <th></th>
-      <th>question</th>
-      <th>contexts</th>
-      <th>answer</th>
-      <th>ground_truth</th>
+      <th>Frage</th>
+      <th>Kontexte</th>
+      <th>Antwort</th>
+      <th>grund_wahrheit</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <th>0</th>
-      <td>what is the hardware requirements specificatio...</td>
-      <td>[Hardware Requirements\n\nThe following specif...</td>
-      <td>The hardware requirements specification to bui...</td>
-      <td>If you want to build Milvus and run from sourc...</td>
+      <td>Wie lauten die spezifischen Hardware-Anforderungen...</td>
+      <td>[Hardware-Anforderungen\n\nDie folgende Spezifi...</td>
+      <td>Die Spezifikation der Hardware-Anforderungen für...</td>
+      <td>Wenn Sie Milvus bauen und von der Quelle...</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>What is the programming language used to write...</td>
-      <td>[CMake &amp; Conan\n\nThe algorithm library of Mil...</td>
-      <td>The programming language used to write Knowher...</td>
-      <td>The programming language used to write Knowher...</td>
+      <td>Welche Programmiersprache wird zum Schreiben von...</td>
+      <td>[CMake &amp; Conan\n\nDie Algorithmenbibliothek von Mil...</td>
+      <td>Mit welcher Programmiersprache wird Knowher...</td>
+      <td>Welche Programmiersprache wird zum Schreiben von Knowher...</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>What should be ensured before running code cov...</td>
-      <td>[Code coverage\n\nBefore submitting your pull ...</td>
-      <td>Before running code coverage, it should be ens...</td>
-      <td>Before running code coverage, you should make ...</td>
+      <td>Was sollte sichergestellt werden, bevor die Codeabdeckung...</td>
+      <td>[Codeabdeckung\n\nVor dem Einreichen Ihrer Pull ...</td>
+      <td>Bevor die Codeabdeckung durchgeführt wird, sollte sie...</td>
+      <td>Bevor Sie Code Coverage durchführen, sollten Sie ...</td>
     </tr>
   </tbody>
 </table>
 </div>
-<h2 id="Evaluating-Retriever" class="common-anchor-header">Evaluating Retriever<button data-href="#Evaluating-Retriever" class="anchor-icon" translate="no">
+<h2 id="Evaluating-Retriever" class="common-anchor-header">Retriever auswerten<button data-href="#Evaluating-Retriever" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -331,13 +327,13 @@ Answering questions: 100%|██████████| 3/3 [00:03&lt;00:00,  
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>When evaluating a retriever in large language model (LLM) systems, it’s crucial to assess the following:</p>
+    </button></h2><p>Bei der Evaluierung eines Retrievers in großen Sprachmodellsystemen (LLM) ist es entscheidend, Folgendes zu bewerten:</p>
 <ol>
-<li><p><strong>Ranking Relevance</strong>: How effectively the retriever prioritizes relevant information over irrelevant data.</p></li>
-<li><p><strong>Contextual Retrieval</strong>: The ability to capture and retrieve contextually relevant information based on the input.</p></li>
-<li><p><strong>Balance</strong>: How well the retriever manages text chunk size and retrieval scope to minimize irrelevancies.</p></li>
+<li><p><strong>Relevanz der Rangfolge</strong>: Wie effektiv der Retriever relevante Informationen gegenüber irrelevanten Daten priorisiert.</p></li>
+<li><p><strong>Kontextbezogenes Abrufen</strong>: Die Fähigkeit, kontextuell relevante Informationen auf der Grundlage der Eingaben zu erfassen und abzurufen.</p></li>
+<li><p><strong>Ausgewogenheit</strong>: Wie gut verwaltet der Retriever die Größe von Textstücken und den Abrufumfang, um Irrelevanzen zu minimieren.</p></li>
 </ol>
-<p>Together, these factors provide a comprehensive understanding of how the retriever prioritizes, captures, and presents the most useful information.</p>
+<p>Zusammen bieten diese Faktoren ein umfassendes Verständnis dafür, wie der Retriever die nützlichsten Informationen priorisiert, erfasst und präsentiert.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> deepeval.metrics <span class="hljs-keyword">import</span> (
     ContextualPrecisionMetric,
     ContextualRecallMetric,
@@ -371,21 +367,17 @@ result = evaluate(
 <pre><code translate="no">/Users/eureka/miniconda3/envs/zilliz/lib/python3.9/site-packages/deepeval/__init__.py:49: UserWarning: You are using deepeval version 1.1.6, however version 1.2.2 is available. You should consider upgrading via the &quot;pip install --upgrade deepeval&quot; command.
   warnings.warn(
 </code></pre>
-<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">✨ You're running DeepEval's latest <span style="color: #6a00ff; text-decoration-color: #6a00ff">Contextual Precision Metric</span>! <span style="color: #374151; text-decoration-color: #374151; font-weight: bold">(</span><span style="color: #374151; text-decoration-color: #374151">using gpt-4o, </span><span style="color: #374151; text-decoration-color: #374151">strict</span><span style="color: #374151; text-decoration-color: #374151">=</span><span style="color: #374151; text-decoration-color: #374151; font-style: italic">False</span><span style="color: #374151; text-decoration-color: #374151">, </span><span style="color: #374151; text-decoration-color: #374151">async_mode</span><span style="color: #374151; text-decoration-color: #374151">=</span><span style="color: #374151; text-decoration-color: #374151; font-style: italic">True</span><span style="color: #374151; text-decoration-color: #374151; font-weight: bold">)</span><span style="color: #374151; text-decoration-color: #374151">...</span>
-</pre>
-<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">✨ You're running DeepEval's latest <span style="color: #6a00ff; text-decoration-color: #6a00ff">Contextual Recall Metric</span>! <span style="color: #374151; text-decoration-color: #374151; font-weight: bold">(</span><span style="color: #374151; text-decoration-color: #374151">using gpt-4o, </span><span style="color: #374151; text-decoration-color: #374151">strict</span><span style="color: #374151; text-decoration-color: #374151">=</span><span style="color: #374151; text-decoration-color: #374151; font-style: italic">False</span><span style="color: #374151; text-decoration-color: #374151">, </span><span style="color: #374151; text-decoration-color: #374151">async_mode</span><span style="color: #374151; text-decoration-color: #374151">=</span><span style="color: #374151; text-decoration-color: #374151; font-style: italic">True</span><span style="color: #374151; text-decoration-color: #374151; font-weight: bold">)</span><span style="color: #374151; text-decoration-color: #374151">...</span>
-</pre>
-<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">✨ You're running DeepEval's latest <span style="color: #6a00ff; text-decoration-color: #6a00ff">Contextual Relevancy Metric</span>! <span style="color: #374151; text-decoration-color: #374151; font-weight: bold">(</span><span style="color: #374151; text-decoration-color: #374151">using gpt-4o, </span><span style="color: #374151; text-decoration-color: #374151">strict</span><span style="color: #374151; text-decoration-color: #374151">=</span><span style="color: #374151; text-decoration-color: #374151; font-style: italic">False</span><span style="color: #374151; text-decoration-color: #374151">, </span><span style="color: #374151; text-decoration-color: #374151">async_mode</span><span style="color: #374151; text-decoration-color: #374151">=</span><span style="color: #374151; text-decoration-color: #374151; font-style: italic">True</span><span style="color: #374151; text-decoration-color: #374151; font-weight: bold">)</span><span style="color: #374151; text-decoration-color: #374151">...</span>
-</pre>
+<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">✨ Sie verwenden DeepEvals neueste <span style="color: #6a00ff; text-decoration-color: #6a00ff">Contextual Precision Metric</span>! <span style="color: #374151; text-decoration-color: #374151; font-weight: bold">(</span><span style="color: #374151; text-decoration-color: #374151">mit gpt-4o, </span><span style="color: #374151; text-decoration-color: #374151; font-style: italic">strict=False</span><span style="color: #374151; text-decoration-color: #374151">, </span><span style="color: #374151; text-decoration-color: #374151; font-style: italic">async_mode=True</span><span style="color: #374151; text-decoration-color: #374151; font-weight: bold">)</span><span style="color: #374151; text-decoration-color: #374151">...</span></pre>
+<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">✨ Sie führen DeepEvals neueste <span style="color: #6a00ff; text-decoration-color: #6a00ff">Contextual Recall Metric</span> aus! <span style="color: #374151; text-decoration-color: #374151; font-weight: bold">(</span><span style="color: #374151; text-decoration-color: #374151">unter Verwendung von gpt-4o, </span><span style="color: #374151; text-decoration-color: #374151; font-style: italic">strict=False</span><span style="color: #374151; text-decoration-color: #374151">, </span><span style="color: #374151; text-decoration-color: #374151; font-style: italic">async_mode=True</span><span style="color: #374151; text-decoration-color: #374151; font-weight: bold">)</span><span style="color: #374151; text-decoration-color: #374151">...</span></pre>
+<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">✨ Sie führen die neueste <span style="color: #6a00ff; text-decoration-color: #6a00ff">kontextuelle Relevanz-Metrik</span> von DeepEval aus! <span style="color: #374151; text-decoration-color: #374151; font-weight: bold">(</span><span style="color: #374151; text-decoration-color: #374151">using gpt-4o, </span><span style="color: #374151; text-decoration-color: #374151; font-style: italic">strict=False</span><span style="color: #374151; text-decoration-color: #374151">, </span><span style="color: #374151; text-decoration-color: #374151; font-style: italic">async_mode=True</span><span style="color: #374151; text-decoration-color: #374151; font-weight: bold">)</span><span style="color: #374151; text-decoration-color: #374151">...</span></pre>
 <pre><code translate="no">Event loop is already running. Applying nest_asyncio patch to allow async execution...
 
 
 Evaluating 3 test case(s) in parallel: |██████████|100% (3/3) [Time Taken: 00:11,  3.91s/test case]
 </code></pre>
-<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace"><span style="color: #05f58d; text-decoration-color: #05f58d">✓</span> Tests finished 🎉! Run <span style="color: #008000; text-decoration-color: #008000">'deepeval login'</span> to view evaluation results on Confident AI. 
-‼️  NOTE: You can also run evaluations on ALL of deepeval's metrics directly on Confident AI instead.
-</pre>
-<h2 id="Evaluating-Generation" class="common-anchor-header">Evaluating Generation<button data-href="#Evaluating-Generation" class="anchor-icon" translate="no">
+<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace"><span style="color: #05f58d; text-decoration-color: #05f58d">✓</span> Tests beendet 🎉! Führen Sie <span style="color: #008000; text-decoration-color: #008000">'deepeval login'</span> aus, um die Evaluierungsergebnisse von Confident AI zu sehen. 
+‼️ HINWEIS: Sie können stattdessen auch Auswertungen zu ALLEN deepeval-Metriken direkt auf Confident AI durchführen.</pre>
+<h2 id="Evaluating-Generation" class="common-anchor-header">Evaluierung der Generierung<button data-href="#Evaluating-Generation" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -400,12 +392,12 @@ Evaluating 3 test case(s) in parallel: |██████████|100% (3/3
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>To assess the quality of generated outputs in large language models (LLMs), it’s important to focus on two key aspects:</p>
+    </button></h2><p>Um die Qualität der generierten Ausgaben in großen Sprachmodellen (LLMs) zu bewerten, ist es wichtig, sich auf zwei Schlüsselaspekte zu konzentrieren:</p>
 <ol>
-<li><p><strong>Relevance</strong>: Evaluate whether the prompt effectively guides the LLM to generate helpful and contextually appropriate responses.</p></li>
-<li><p><strong>Faithfulness</strong>: Measure the accuracy of the output, ensuring the model produces information that is factually correct and free from hallucinations or contradictions. The generated content should align with the factual information provided in the retrieval context.</p></li>
+<li><p><strong>Relevanz</strong>: Bewerten Sie, ob die Eingabeaufforderung das LLM effektiv dazu anleitet, hilfreiche und kontextuell passende Antworten zu generieren.</p></li>
+<li><p><strong>Wiedergabetreue</strong>: Messen Sie die Genauigkeit des Outputs und stellen Sie sicher, dass das Modell Informationen erzeugt, die faktisch korrekt und frei von Halluzinationen oder Widersprüchen sind. Der generierte Inhalt sollte mit den im Abfragekontext bereitgestellten faktischen Informationen übereinstimmen.</p></li>
 </ol>
-<p>These factors together ensure that the outputs are both relevant and reliable.</p>
+<p>Diese Faktoren zusammen gewährleisten, dass die Ergebnisse sowohl relevant als auch zuverlässig sind.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> deepeval.metrics <span class="hljs-keyword">import</span> AnswerRelevancyMetric, FaithfulnessMetric
 <span class="hljs-keyword">from</span> deepeval.test_case <span class="hljs-keyword">import</span> LLMTestCase
 <span class="hljs-keyword">from</span> deepeval <span class="hljs-keyword">import</span> evaluate
@@ -431,15 +423,12 @@ result = evaluate(
     print_results=<span class="hljs-literal">False</span>,  <span class="hljs-comment"># Change to True to see detailed metric results</span>
 )
 <button class="copy-code-btn"></button></code></pre>
-<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">✨ You're running DeepEval's latest <span style="color: #6a00ff; text-decoration-color: #6a00ff">Answer Relevancy Metric</span>! <span style="color: #374151; text-decoration-color: #374151; font-weight: bold">(</span><span style="color: #374151; text-decoration-color: #374151">using gpt-4o, </span><span style="color: #374151; text-decoration-color: #374151">strict</span><span style="color: #374151; text-decoration-color: #374151">=</span><span style="color: #374151; text-decoration-color: #374151; font-style: italic">False</span><span style="color: #374151; text-decoration-color: #374151">, </span><span style="color: #374151; text-decoration-color: #374151">async_mode</span><span style="color: #374151; text-decoration-color: #374151">=</span><span style="color: #374151; text-decoration-color: #374151; font-style: italic">True</span><span style="color: #374151; text-decoration-color: #374151; font-weight: bold">)</span><span style="color: #374151; text-decoration-color: #374151">...</span>
-</pre>
-<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">✨ You're running DeepEval's latest <span style="color: #6a00ff; text-decoration-color: #6a00ff">Faithfulness Metric</span>! <span style="color: #374151; text-decoration-color: #374151; font-weight: bold">(</span><span style="color: #374151; text-decoration-color: #374151">using gpt-4o, </span><span style="color: #374151; text-decoration-color: #374151">strict</span><span style="color: #374151; text-decoration-color: #374151">=</span><span style="color: #374151; text-decoration-color: #374151; font-style: italic">False</span><span style="color: #374151; text-decoration-color: #374151">, </span><span style="color: #374151; text-decoration-color: #374151">async_mode</span><span style="color: #374151; text-decoration-color: #374151">=</span><span style="color: #374151; text-decoration-color: #374151; font-style: italic">True</span><span style="color: #374151; text-decoration-color: #374151; font-weight: bold">)</span><span style="color: #374151; text-decoration-color: #374151">...</span>
-</pre>
+<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">✨ Sie verwenden die neueste <span style="color: #6a00ff; text-decoration-color: #6a00ff">Antwortrelevanz-Metrik</span> von DeepEval! <span style="color: #374151; text-decoration-color: #374151; font-weight: bold">(</span><span style="color: #374151; text-decoration-color: #374151">unter Verwendung von gpt-4o, </span><span style="color: #374151; text-decoration-color: #374151; font-style: italic">strict=False</span><span style="color: #374151; text-decoration-color: #374151">, </span><span style="color: #374151; text-decoration-color: #374151; font-style: italic">async_mode=True</span><span style="color: #374151; text-decoration-color: #374151; font-weight: bold">)</span><span style="color: #374151; text-decoration-color: #374151">...</span></pre>
+<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">✨ Sie führen DeepEvals neueste <span style="color: #6a00ff; text-decoration-color: #6a00ff">Faithfulness-Metrik</span> aus! <span style="color: #374151; text-decoration-color: #374151; font-weight: bold">(</span><span style="color: #374151; text-decoration-color: #374151">using gpt-4o, </span><span style="color: #374151; text-decoration-color: #374151; font-style: italic">strict=False</span><span style="color: #374151; text-decoration-color: #374151">, </span><span style="color: #374151; text-decoration-color: #374151; font-style: italic">async_mode=True</span><span style="color: #374151; text-decoration-color: #374151; font-weight: bold">)</span><span style="color: #374151; text-decoration-color: #374151">...</span></pre>
 <pre><code translate="no">Event loop is already running. Applying nest_asyncio patch to allow async execution...
 
 
 Evaluating 3 test case(s) in parallel: |██████████|100% (3/3) [Time Taken: 00:11,  3.97s/test case]
 </code></pre>
-<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace"><span style="color: #05f58d; text-decoration-color: #05f58d">✓</span> Tests finished 🎉! Run <span style="color: #008000; text-decoration-color: #008000">'deepeval login'</span> to view evaluation results on Confident AI. 
-‼️  NOTE: You can also run evaluations on ALL of deepeval's metrics directly on Confident AI instead.
-</pre>
+<pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace"><span style="color: #05f58d; text-decoration-color: #05f58d">✓</span> Tests beendet 🎉! Führen Sie <span style="color: #008000; text-decoration-color: #008000">'deepeval login'</span> aus, um die Evaluierungsergebnisse von Confident AI zu sehen. 
+‼️ HINWEIS: Sie können stattdessen auch Auswertungen zu ALLEN deepeval-Metriken direkt auf Confident AI durchführen.</pre>

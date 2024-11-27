@@ -1,9 +1,9 @@
 ---
 id: tls.md
-title: Encryption in Transit
-summary: Learn how to enable TLS proxy in Milvus.
+title: Verschlüsselung bei der Übermittlung
+summary: 'Erfahren Sie, wie Sie den TLS-Proxy in Milvus aktivieren.'
 ---
-<h1 id="Encryption-in-Transit" class="common-anchor-header">Encryption in Transit<button data-href="#Encryption-in-Transit" class="anchor-icon" translate="no">
+<h1 id="Encryption-in-Transit" class="common-anchor-header">Verschlüsselung bei der Übermittlung<button data-href="#Encryption-in-Transit" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -18,12 +18,12 @@ summary: Learn how to enable TLS proxy in Milvus.
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>TLS (Transport Layer Security) is an encryption protocol to ensure communication security. Milvus proxy uses TLS one-way and two-way authentication.</p>
-<p>This topic describes how to enable TLS in Milvus proxy for both gRPC and RESTful traffics.</p>
+    </button></h1><p>TLS (Transport Layer Security) ist ein Verschlüsselungsprotokoll zur Gewährleistung der Kommunikationssicherheit. Milvus Proxy verwendet TLS für die einseitige und zweiseitige Authentifizierung.</p>
+<p>In diesem Thema wird beschrieben, wie TLS in Milvus-Proxy sowohl für gRPC- als auch für RESTful-Verkehr aktiviert werden kann.</p>
 <div class="alert note">
-<p>TLS and user authentication are two distinct security approaches. If you have enabled both user authentication and TLS in your Milvus system, you will need to provide a username, password, and certificate file paths. For information on how to enable user authentication, refer to <a href="/docs/authenticate.md">Authenticate User Access</a>.</p>
+<p>TLS und Benutzerauthentifizierung sind zwei unterschiedliche Sicherheitsansätze. Wenn Sie sowohl die Benutzerauthentifizierung als auch TLS in Ihrem Milvus-System aktiviert haben, müssen Sie einen Benutzernamen, ein Passwort und Pfade für Zertifikatsdateien angeben. Informationen zur Aktivierung der Benutzerauthentifizierung finden Sie unter <a href="/docs/de/authenticate.md">Authentifizierung des Benutzerzugangs</a>.</p>
 </div>
-<h2 id="Create-your-own-certificate" class="common-anchor-header">Create your own certificate<button data-href="#Create-your-own-certificate" class="anchor-icon" translate="no">
+<h2 id="Create-your-own-certificate" class="common-anchor-header">Erstellen Sie Ihr eigenes Zertifikat<button data-href="#Create-your-own-certificate" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -38,20 +38,20 @@ summary: Learn how to enable TLS proxy in Milvus.
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Prerequisites" class="common-anchor-header">Prerequisites</h3><p>Make sure OpenSSL is installed. If you have not installed it, <a href="https://github.com/openssl/openssl/blob/master/INSTALL.md">build and install</a> OpenSSL first.</p>
+    </button></h2><h3 id="Prerequisites" class="common-anchor-header">Voraussetzungen</h3><p>Stellen Sie sicher, dass OpenSSL installiert ist. Wenn Sie es nicht installiert haben, <a href="https://github.com/openssl/openssl/blob/master/INSTALL.md">erstellen und installieren Sie</a> zuerst OpenSSL.</p>
 <pre><code translate="no" class="language-shell">openssl version
 <button class="copy-code-btn"></button></code></pre>
-<p>If OpenSSL is not installed. It can be installed with the following command in Ubuntu.</p>
+<p>Wenn OpenSSL nicht installiert ist. Es kann mit dem folgenden Befehl in Ubuntu installiert werden.</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-built_in">sudo</span> apt install openssl
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Create-files" class="common-anchor-header">Create files</h3><ol>
-<li>Create the <code translate="no">openssl.cnf</code> and <code translate="no">gen.sh</code> files.</li>
+<h3 id="Create-files" class="common-anchor-header">Dateien erstellen</h3><ol>
+<li>Erstellen Sie die Dateien <code translate="no">openssl.cnf</code> und <code translate="no">gen.sh</code>.</li>
 </ol>
 <pre><code translate="no"><span class="hljs-built_in">mkdir</span> cert &amp;&amp; <span class="hljs-built_in">cd</span> cert
 <span class="hljs-built_in">touch</span> openssl.cnf gen.sh
 <button class="copy-code-btn"></button></code></pre>
 <ol start="2">
-<li>Copy the following configurations into the files respectively.</li>
+<li>Kopieren Sie die folgenden Konfigurationen in die jeweiligen Dateien.</li>
 </ol>
 <p><details><summary><code translate="no">openssl.cnf</code></summary></p>
 <pre><code translate="no" class="language-ini"><span class="hljs-comment">#</span>
@@ -407,8 +407,8 @@ ess_cert_id_chain   = no    <span class="hljs-comment"># Must the ESS cert id ch
                 <span class="hljs-comment"># (optional, default: no)</span>
 <button class="copy-code-btn"></button></code></pre>
 <p></details></p>
-<p>The <code translate="no">openssl.cnf</code> file is a default OpenSSL configuration file. See <a href="https://www.openssl.org/docs/manmaster/man5/config.html">manual page</a> for more information. The <code translate="no">gen.sh</code> file generates relevant certificate files. You can modify the <code translate="no">gen.sh</code> file for different purposes such as changing the validity period of the certificate file, the length of the certificate key or the certificate file names.</p>
-<p>It is necessary to configure the <code translate="no">CommonName</code> in the <code translate="no">gen.sh</code> file. The <code translate="no">CommonName</code> refers to the server name that the client should specify while connecting.</p>
+<p>Die Datei <code translate="no">openssl.cnf</code> ist eine Standard-OpenSSL-Konfigurationsdatei. Weitere Informationen finden Sie auf der <a href="https://www.openssl.org/docs/manmaster/man5/config.html">Handbuchseite</a>. Die Datei <code translate="no">gen.sh</code> generiert relevante Zertifikatsdateien. Sie können die Datei <code translate="no">gen.sh</code> für verschiedene Zwecke modifizieren, z. B. um die Gültigkeitsdauer der Zertifikatsdatei, die Länge des Zertifikatsschlüssels oder die Namen der Zertifikatsdateien zu ändern.</p>
+<p>Es ist notwendig, die <code translate="no">CommonName</code> in der Datei <code translate="no">gen.sh</code> zu konfigurieren. <code translate="no">CommonName</code> bezieht sich auf den Servernamen, den der Client beim Verbindungsaufbau angeben muss.</p>
 <p><details><summary><code translate="no">gen.sh</code></summary></p>
 <pre><code translate="no" class="language-shell"><span class="hljs-meta">#!/usr/bin/env sh</span>
 <span class="hljs-comment"># your variables</span>
@@ -437,47 +437,47 @@ openssl x509 -req -days 3650 -<span class="hljs-keyword">in</span> client.csr -o
 
 <button class="copy-code-btn"></button></code></pre>
 <p></details></p>
-<p>The variables in the <code translate="no">gen.sh</code> file are crucial to the process of creating a certificate signing request file. The first five variables are the basic signing information, including country, state, location, organization, organization unit. Caution is needed when configuring <code translate="no">CommonName</code> as it will be verified during client-server communication.</p>
-<h3 id="Run-gensh-to-generate-certificate" class="common-anchor-header">Run <code translate="no">gen.sh</code> to generate certificate</h3><p>Run the <code translate="no">gen.sh</code> file to create certificate.</p>
+<p>Die Variablen in der Datei <code translate="no">gen.sh</code> sind für den Prozess der Erstellung einer Zertifikatsignierungsanforderungsdatei entscheidend. Die ersten fünf Variablen sind die grundlegenden Signierinformationen, einschließlich Land, Staat, Ort, Organisation und Organisationseinheit. Bei der Konfiguration von <code translate="no">CommonName</code> ist Vorsicht geboten, da sie während der Client-Server-Kommunikation überprüft wird.</p>
+<h3 id="Run-gensh-to-generate-certificate" class="common-anchor-header">Führen Sie <code translate="no">gen.sh</code> aus, um ein Zertifikat zu erzeugen</h3><p>Führen Sie die Datei <code translate="no">gen.sh</code> aus, um das Zertifikat zu erstellen.</p>
 <pre><code translate="no"><span class="hljs-built_in">chmod</span> +x gen.sh
 ./gen.sh
 <button class="copy-code-btn"></button></code></pre>
-<p>The following nine files will be created: <code translate="no">ca.key</code>, <code translate="no">ca.pem</code>, <code translate="no">ca.srl</code>, <code translate="no">server.key</code>, <code translate="no">server.pem</code>, <code translate="no">server.csr</code>, <code translate="no">client.key</code>, <code translate="no">client.pem</code>, <code translate="no">client.csr</code>.</p>
-<h3 id="Modify-the-detail-of-certificate-files-optional" class="common-anchor-header">Modify the detail of certificate files (optional)</h3><p>After generating the certificate, you can modify the detail of the certificate files according to your own need.</p>
-<p>The implementation of SSL or TSL mutual authentication involves a client, a server, and a certificate authority (CA). A CA is used to ensure that the certificate between a client and a server is legal.</p>
-<p>Run <code translate="no">man openssl</code> or see <a href="https://www.openssl.org/docs/">the openssl manual page</a> for more information about using the OpenSSL command.</p>
+<p>Die folgenden neun Dateien werden erstellt: <code translate="no">ca.key</code>, <code translate="no">ca.pem</code>, <code translate="no">ca.srl</code>, <code translate="no">server.key</code>, <code translate="no">server.pem</code>, <code translate="no">server.csr</code>, <code translate="no">client.key</code>, <code translate="no">client.pem</code>, <code translate="no">client.csr</code>.</p>
+<h3 id="Modify-the-detail-of-certificate-files-optional" class="common-anchor-header">Ändern Sie die Details der Zertifikatsdateien (optional)</h3><p>Nachdem Sie das Zertifikat erstellt haben, können Sie die Details der Zertifikatsdateien nach Ihren eigenen Bedürfnissen ändern.</p>
+<p>An der Implementierung der gegenseitigen SSL- oder TSL-Authentifizierung sind ein Client, ein Server und eine Zertifizierungsstelle (CA) beteiligt. Eine CA wird verwendet, um sicherzustellen, dass das Zertifikat zwischen einem Client und einem Server legal ist.</p>
+<p>Führen Sie <code translate="no">man openssl</code> aus oder lesen Sie <a href="https://www.openssl.org/docs/">die openssl-Handbuchseite</a> für weitere Informationen über die Verwendung des OpenSSL-Befehls.</p>
 <ol>
-<li>Generate an RSA private key for the ca.</li>
+<li>Erzeugen Sie einen privaten RSA-Schlüssel für die CA.</li>
 </ol>
 <pre><code translate="no">openssl genpkey -algorithm RSA -<span class="hljs-keyword">out</span> ca.key
 <button class="copy-code-btn"></button></code></pre>
 <ol start="2">
-<li>Request CA certificate generation.</li>
+<li>Fordern Sie die Generierung eines CA-Zertifikats an.</li>
 </ol>
-<p>You need to provide the basic information about the CA in this step. Choose the <code translate="no">x509</code> option to skip the request and directly generate a self-signing certificate.</p>
+<p>In diesem Schritt müssen Sie die grundlegenden Informationen über die Zertifizierungsstelle angeben. Wählen Sie die Option <code translate="no">x509</code>, um die Anforderung zu überspringen und direkt ein selbstsignierendes Zertifikat zu erzeugen.</p>
 <pre><code translate="no">openssl req -new -x509 -key ca.key -out ca.pem -days 3650 -subj <span class="hljs-string">&quot;/C=<span class="hljs-variable">$Country</span>/ST=<span class="hljs-variable">$State</span>/L=<span class="hljs-variable">$Location</span>/O=<span class="hljs-variable">$Organization</span>/OU=<span class="hljs-variable">$Organizational</span>/CN=<span class="hljs-variable">$CommonName</span>&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>You will get a <code translate="no">ca.pem</code> file , a CA certificate that can be used to generate client-server certificates after this step.</p>
+<p>Sie erhalten eine <code translate="no">ca.pem</code> Datei, ein CA-Zertifikat, das nach diesem Schritt zur Erzeugung von Client-Server-Zertifikaten verwendet werden kann.</p>
 <ol start="3">
-<li>Generate a server private key.</li>
+<li>Erzeugen Sie einen privaten Schlüssel für den Server.</li>
 </ol>
 <pre><code translate="no">openssl genpkey -algorithm RSA -<span class="hljs-keyword">out</span> server.key
 <button class="copy-code-btn"></button></code></pre>
-<p>You will get a <code translate="no">server.key</code> file after this step.</p>
+<p>Nach diesem Schritt erhalten Sie eine <code translate="no">server.key</code> Datei.</p>
 <ol start="4">
-<li>Generate a certificate signing request file.</li>
+<li>Generieren Sie eine Zertifikatssignierungsanforderungsdatei.</li>
 </ol>
-<p>You need to provide the required information about the server to generate a certificate signing request file.</p>
+<p>Sie müssen die erforderlichen Informationen über den Server bereitstellen, um eine Zertifikatssignierungsanforderungsdatei zu generieren.</p>
 <pre><code translate="no">openssl req -new -nodes -key server.key -out server.csr -days 3650 -subj <span class="hljs-string">&quot;/C=<span class="hljs-variable">$Country</span>/O=<span class="hljs-variable">$Organization</span>/OU=<span class="hljs-variable">$Organizational</span>/CN=<span class="hljs-variable">$CommonName</span>&quot;</span> -config ./openssl.cnf -extensions v3_req
 <button class="copy-code-btn"></button></code></pre>
-<p>You will get a <code translate="no">server.csr</code> file after this step.</p>
+<p>Nach diesem Schritt erhalten Sie eine <code translate="no">server.csr</code> Datei.</p>
 <ol start="5">
-<li>Sign the certificate.</li>
+<li>Signieren Sie das Zertifikat.</li>
 </ol>
-<p>Open the <code translate="no">server.csr</code>, the <code translate="no">ca.key</code> and the <code translate="no">ca.pem</code> files to sign the certificate. The <code translate="no">CAcreateserial</code> command option is used to create a CA serial number file if it does not exist. You will get an <code translate="no">aca.srl</code> file after choosing this command option.</p>
+<p>Öffnen Sie die Dateien <code translate="no">server.csr</code>, <code translate="no">ca.key</code> und <code translate="no">ca.pem</code>, um das Zertifikat zu signieren. Die Befehlsoption <code translate="no">CAcreateserial</code> wird verwendet, um eine CA-Seriennummerndatei zu erstellen, falls sie nicht existiert. Sie erhalten eine <code translate="no">aca.srl</code> Datei, wenn Sie diese Befehlsoption wählen.</p>
 <pre><code translate="no">openssl x509 -req -days 3650 -<span class="hljs-keyword">in</span> server.csr -out server.pem -CA ca.pem -CAkey ca.key -CAcreateserial -extfile ./openssl.cnf -extensions v3_req
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Set-up-a-Milvus-server-with-TLS" class="common-anchor-header">Set up a Milvus server with TLS<button data-href="#Set-up-a-Milvus-server-with-TLS" class="anchor-icon" translate="no">
+<h2 id="Set-up-a-Milvus-server-with-TLS" class="common-anchor-header">Einrichten eines Milvus-Servers mit TLS<button data-href="#Set-up-a-Milvus-server-with-TLS" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -492,11 +492,11 @@ openssl x509 -req -days 3650 -<span class="hljs-keyword">in</span> client.csr -o
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>This section outlines the steps to configure a Milvus server with TLS encryption.</p>
+    </button></h2><p>In diesem Abschnitt werden die Schritte zur Konfiguration eines Milvus-Servers mit TLS-Verschlüsselung beschrieben.</p>
 <div class="alert note">
-<p>This guide focuses on deployment using Docker Compose. For information on Milvus Operator deployment, refer to <a href="https://github.com/zilliztech/milvus-operator/blob/main/docs/administration/security/encryption-in-transit.md">Milvus Operator TLS documentation</a>.</p>
+<p>Diese Anleitung konzentriert sich auf die Bereitstellung mit Docker Compose. Informationen zur Bereitstellung von Milvus Operator finden Sie in der <a href="https://github.com/zilliztech/milvus-operator/blob/main/docs/administration/security/encryption-in-transit.md">Milvus Operator TLS-Dokumentation</a>.</p>
 </div>
-<h3 id="1-Modify-the-Milvus-server-configuration" class="common-anchor-header">1. Modify the Milvus server configuration</h3><p>To enable TLS, set <code translate="no">common.security.tlsMode</code> in <code translate="no">milvus.yaml</code> to <code translate="no">1</code> (for one-way TLS) or <code translate="no">2</code> (for two-way TLS).</p>
+<h3 id="1-Modify-the-Milvus-server-configuration" class="common-anchor-header">1. Ändern Sie die Konfiguration des Milvus-Servers</h3><p>Um TLS zu aktivieren, setzen Sie <code translate="no">common.security.tlsMode</code> in <code translate="no">milvus.yaml</code> auf <code translate="no">1</code> (für einseitiges TLS) oder <code translate="no">2</code> (für zweiseitiges TLS).</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-attr">tls</span>:
   <span class="hljs-attr">serverPemPath</span>: <span class="hljs-regexp">/milvus/</span>tls/server.<span class="hljs-property">pem</span>
   <span class="hljs-attr">serverKeyPath</span>: <span class="hljs-regexp">/milvus/</span>tls/server.<span class="hljs-property">key</span>
@@ -506,18 +506,17 @@ openssl x509 -req -days 3650 -<span class="hljs-keyword">in</span> client.csr -o
   <span class="hljs-attr">security</span>:
     <span class="hljs-attr">tlsMode</span>: <span class="hljs-number">1</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Parameters:</p>
+<p>Parameter:</p>
 <ul>
-<li><code translate="no">serverPemPath</code>: The path to the server certificate file.</li>
-<li><code translate="no">serverKeyPath</code>: The path to the server key file.</li>
-<li><code translate="no">caPemPath</code>: The path to the CA certificate file.</li>
-<li><code translate="no">tlsMode</code>: The TLS mode for encryption. Valid values:
-<ul>
-<li><code translate="no">1</code>: One-way authentication, where only the server requires a certificate and the client verifies it. This mode requires <code translate="no">server.pem</code> and <code translate="no">server.key</code> from the server side, and <code translate="no">server.pem</code> from the client side.</li>
-<li><code translate="no">2</code>: Two-way authentication, where both the server and the client require certificates to establish a secure connection. This mode requires <code translate="no">server.pem</code>, <code translate="no">server.key</code>, and <code translate="no">ca.pem</code> from the server side, and <code translate="no">client.pem</code>, <code translate="no">client.key</code>, and <code translate="no">ca.pem</code> from the client side.</li>
+<li><code translate="no">serverPemPath</code>: Der Pfad zur Serverzertifikatsdatei.</li>
+<li><code translate="no">serverKeyPath</code>: Der Pfad zur Server-Schlüsseldatei.</li>
+<li><code translate="no">caPemPath</code>: Der Pfad zur CA-Zertifikatsdatei.</li>
+<li><code translate="no">tlsMode</code>: Der TLS-Modus für die Verschlüsselung. Gültige Werte:<ul>
+<li><code translate="no">1</code>: Einseitige Authentifizierung, bei der nur der Server ein Zertifikat benötigt und der Client es verifiziert. Dieser Modus erfordert <code translate="no">server.pem</code> und <code translate="no">server.key</code> auf der Serverseite und <code translate="no">server.pem</code> auf der Clientseite.</li>
+<li><code translate="no">2</code>: Zwei-Wege-Authentifizierung, bei der sowohl der Server als auch der Client Zertifikate benötigen, um eine sichere Verbindung herzustellen. Für diesen Modus sind <code translate="no">server.pem</code>, <code translate="no">server.key</code> und <code translate="no">ca.pem</code> auf der Serverseite und <code translate="no">client.pem</code>, <code translate="no">client.key</code> und <code translate="no">ca.pem</code> auf der Clientseite erforderlich.</li>
 </ul></li>
 </ul>
-<h3 id="2-Map-certificate-files-to-the-container" class="common-anchor-header">2. Map certificate files to the container</h3><h4 id="Prepare-certificate-files" class="common-anchor-header">Prepare certificate files</h4><p>Create a new folder named <code translate="no">tls</code> in the same directory as your <code translate="no">docker-compose.yaml</code>. Copy the <code translate="no">server.pem</code>, <code translate="no">server.key</code>, and <code translate="no">ca.pem</code> into the <code translate="no">tls</code> folder. Place them in a directory structure as follows:</p>
+<h3 id="2-Map-certificate-files-to-the-container" class="common-anchor-header">2. Zertifikatsdateien dem Container zuordnen</h3><h4 id="Prepare-certificate-files" class="common-anchor-header">Vorbereiten der Zertifikatsdateien</h4><p>Erstellen Sie einen neuen Ordner namens <code translate="no">tls</code> im gleichen Verzeichnis wie <code translate="no">docker-compose.yaml</code>. Kopieren Sie die Dateien <code translate="no">server.pem</code>, <code translate="no">server.key</code>, und <code translate="no">ca.pem</code> in den Ordner <code translate="no">tls</code>. Legen Sie sie in einer Verzeichnisstruktur wie folgt ab:</p>
 <pre><code translate="no">├── docker-compose.yml
 ├── milvus.yaml
 └── tls
@@ -525,7 +524,7 @@ openssl x509 -req -days 3650 -<span class="hljs-keyword">in</span> client.csr -o
      ├── server.key
      └── ca.pem
 <button class="copy-code-btn"></button></code></pre>
-<h4 id="Update-Docker-Compose-configuration" class="common-anchor-header">Update Docker Compose configuration</h4><p>Edit the <code translate="no">docker-compose.yaml</code> file to map the certificate file paths inside the container as shown below:</p>
+<h4 id="Update-Docker-Compose-configuration" class="common-anchor-header">Aktualisieren Sie die Konfiguration von Docker Compose</h4><p>Bearbeiten Sie die Datei <code translate="no">docker-compose.yaml</code>, um die Pfade der Zertifikatsdateien innerhalb des Containers wie unten gezeigt zuzuordnen:</p>
 <pre><code translate="no" class="language-yaml">  standalone:
     container_name: milvus-standalone
     image: milvusdb/milvus:latest
@@ -540,10 +539,10 @@ openssl x509 -req -days 3650 -<span class="hljs-keyword">in</span> client.csr -o
       - <span class="hljs-variable">${DOCKER_VOLUME_DIRECTORY:-.}</span>/tls:/milvus/tls
       - <span class="hljs-variable">${DOCKER_VOLUME_DIRECTORY:-.}</span>/milvus.yaml:/milvus/configs/milvus.yaml
 <button class="copy-code-btn"></button></code></pre>
-<h4 id="Deploy-Milvus-using-Docker-Compose" class="common-anchor-header">Deploy Milvus using Docker Compose</h4><p>Execute the following command to deploy Milvus:</p>
+<h4 id="Deploy-Milvus-using-Docker-Compose" class="common-anchor-header">Bereitstellen von Milvus mit Docker Compose</h4><p>Führen Sie den folgenden Befehl aus, um Milvus bereitzustellen:</p>
 <pre><code translate="no" class="language-bash"><span class="hljs-built_in">sudo</span> docker compose up -d
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Connect-to-the-Milvus-server-with-TLS" class="common-anchor-header">Connect to the Milvus server with TLS<button data-href="#Connect-to-the-Milvus-server-with-TLS" class="anchor-icon" translate="no">
+<h2 id="Connect-to-the-Milvus-server-with-TLS" class="common-anchor-header">Verbinden Sie sich mit dem Milvus-Server mit TLS<button data-href="#Connect-to-the-Milvus-server-with-TLS" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -558,8 +557,8 @@ openssl x509 -req -days 3650 -<span class="hljs-keyword">in</span> client.csr -o
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>For SDK interactions, use the following setups depending on the TLS mode.</p>
-<h3 id="One-way-TLS-connection" class="common-anchor-header">One-way TLS connection</h3><p>Provide the path to <code translate="no">server.pem</code> and ensure the <code translate="no">server_name</code> matches the <code translate="no">CommonName</code> configured in the certificate.</p>
+    </button></h2><p>Verwenden Sie für SDK-Interaktionen je nach TLS-Modus die folgenden Konfigurationen.</p>
+<h3 id="One-way-TLS-connection" class="common-anchor-header">Einseitige TLS-Verbindung</h3><p>Geben Sie den Pfad zu <code translate="no">server.pem</code> an und stellen Sie sicher, dass <code translate="no">server_name</code> mit dem im Zertifikat konfigurierten <code translate="no">CommonName</code> übereinstimmt.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client = MilvusClient(
@@ -569,7 +568,7 @@ client = MilvusClient(
     server_name=<span class="hljs-string">&quot;localhost&quot;</span>
 )
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Two-way-TLS-connection" class="common-anchor-header">Two-way TLS connection</h3><p>Provide paths to <code translate="no">client.pem</code>, <code translate="no">client.key</code>, and <code translate="no">ca.pem</code>, and ensure the <code translate="no">server_name</code> matches the <code translate="no">CommonName</code> configured in the certificate.</p>
+<h3 id="Two-way-TLS-connection" class="common-anchor-header">Zwei-Wege-TLS-Verbindung</h3><p>Geben Sie die Pfade zu <code translate="no">client.pem</code>, <code translate="no">client.key</code> und <code translate="no">ca.pem</code> an und stellen Sie sicher, dass <code translate="no">server_name</code> mit dem im Zertifikat konfigurierten <code translate="no">CommonName</code> übereinstimmt.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
 client = MilvusClient(
@@ -581,8 +580,8 @@ client = MilvusClient(
     server_name=<span class="hljs-string">&quot;localhost&quot;</span>
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>See <a href="https://github.com/milvus-io/pymilvus/blob/master/examples/example_tls1.py">example_tls1.py</a> and <a href="https://github.com/milvus-io/pymilvus/blob/master/examples/example_tls2.py">example_tls2.py</a> for more information.</p>
-<h2 id="Connect-to-the-Milvus-RESTful-server-with-TLS" class="common-anchor-header">Connect to the Milvus RESTful server with TLS<button data-href="#Connect-to-the-Milvus-RESTful-server-with-TLS" class="anchor-icon" translate="no">
+<p>Siehe <a href="https://github.com/milvus-io/pymilvus/blob/master/examples/example_tls1.py">example_tls1.py</a> und <a href="https://github.com/milvus-io/pymilvus/blob/master/examples/example_tls2.py">example_tls2.py</a> für weitere Informationen.</p>
+<h2 id="Connect-to-the-Milvus-RESTful-server-with-TLS" class="common-anchor-header">Verbinden mit dem Milvus RESTful Server mit TLS<button data-href="#Connect-to-the-Milvus-RESTful-server-with-TLS" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -597,8 +596,8 @@ client = MilvusClient(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>For RESTful APIs, you can check tls by using the <code translate="no">curl</code> command.</p>
-<h3 id="One-way-TLS-connection" class="common-anchor-header">One-way TLS connection</h3><pre><code translate="no" class="language-bash">curl --cacert path_to/ca.pem https://localhost:19530/v2/vectordb/collections/list
+    </button></h2><p>Für RESTful-APIs können Sie tls mit dem Befehl <code translate="no">curl</code> überprüfen.</p>
+<h3 id="One-way-TLS-connection" class="common-anchor-header">Einseitige TLS-Verbindung</h3><pre><code translate="no" class="language-bash">curl --cacert path_to/ca.pem https://localhost:19530/v2/vectordb/collections/list
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Two-way-TLS-connection" class="common-anchor-header">Two-way TLS connection</h3><pre><code translate="no" class="language-bash">curl --cert path_to/client.pem --key path_to/client.key --cacert path_to/ca.pem https://localhost:19530/v2/vectordb/collections/list
+<h3 id="Two-way-TLS-connection" class="common-anchor-header">Zwei-Wege-TLS-Verbindung</h3><pre><code translate="no" class="language-bash">curl --cert path_to/client.pem --key path_to/client.key --cacert path_to/ca.pem https://localhost:19530/v2/vectordb/collections/list
 <button class="copy-code-btn"></button></code></pre>

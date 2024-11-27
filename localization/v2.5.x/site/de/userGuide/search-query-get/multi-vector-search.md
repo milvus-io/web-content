@@ -2,11 +2,11 @@
 id: multi-vector-search.md
 order: 2
 summary: >-
-  This guide demonstrates how to perform hybrid search in Milvus and understand
-  the reranking of results.
-title: Hybrid Search
+  In diesem Leitfaden wird gezeigt, wie man eine hybride Suche in Milvus
+  durchführt und wie die Ergebnisse neu geordnet werden.
+title: Hybride Suche
 ---
-<h1 id="Hybrid-Search​" class="common-anchor-header">Hybrid Search​<button data-href="#Hybrid-Search​" class="anchor-icon" translate="no">
+<h1 id="Hybrid-Search​" class="common-anchor-header">Hybride Suche<button data-href="#Hybrid-Search​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -21,9 +21,9 @@ title: Hybrid Search
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Hybrid Search refers to a search method that conducts multiple ANN searches simultaneously, reranks multiple sets of results from these ANN searches, and ultimately returns a single set of results. Using Hybrid Search can enhance the search accuracy. Zilliz supports conducting Hybrid Search on a collection with multiple vector fields. ​</p>
-<p>Hybrid Search is most commonly used in scenarios including sparse-dense vector searches and multimodal searches. This guide will demonstrate how to conduct a Hybrid Search in Zilliz with a specific example.​</p>
-<h2 id="Scenarios​" class="common-anchor-header">Scenarios​<button data-href="#Scenarios​" class="anchor-icon" translate="no">
+    </button></h1><p>Die hybride Suche bezieht sich auf eine Suchmethode, die mehrere ANN-Suchen gleichzeitig durchführt, mehrere Ergebnissätze aus diesen ANN-Suchen neu ordnet und schließlich einen einzigen Ergebnissatz liefert. Die Verwendung von Hybrid Search kann die Suchgenauigkeit verbessern. Zilliz unterstützt die Durchführung von Hybrid Search in einer Sammlung mit mehreren Vektorfeldern. </p>
+<p>Die hybride Suche wird am häufigsten in Szenarien mit spärlichen und dichten Vektorsuchen und multimodalen Suchen verwendet. In diesem Leitfaden wird anhand eines konkreten Beispiels gezeigt, wie eine hybride Suche in Zilliz durchgeführt werden kann.</p>
+<h2 id="Scenarios​" class="common-anchor-header">Szenarien<button data-href="#Scenarios​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -38,15 +38,15 @@ title: Hybrid Search
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Hybrid Search is suitable for the following two scenarios:​</p>
-<h3 id="Sparse-Dense-Vector-Search​" class="common-anchor-header">Sparse-Dense Vector Search​</h3><p>Different types of vectors can represent different information, and using various embedding models can more comprehensively represent different features and aspects of the data. For example, using different embedding models for the same sentence can generate a dense vector to represent the semantic meaning and a sparse vector to represent the word frequency in the sentence.​</p>
+    </button></h2><p>Die hybride Suche eignet sich für die folgenden beiden Szenarien.</p>
+<h3 id="Sparse-Dense-Vector-Search​" class="common-anchor-header">Sparse-Dense-Vektorsuche</h3><p>Verschiedene Arten von Vektoren können unterschiedliche Informationen repräsentieren, und die Verwendung verschiedener Einbettungsmodelle kann verschiedene Merkmale und Aspekte der Daten umfassender darstellen. Zum Beispiel kann die Verwendung verschiedener Einbettungsmodelle für denselben Satz einen dichten Vektor zur Darstellung der semantischen Bedeutung und einen spärlichen Vektor zur Darstellung der Worthäufigkeit im Satz erzeugen.</p>
 <ul>
-<li><p><strong>Sparse vectors:</strong> Sparse vectors are characterized by their high vector dimensionality and the presence of few non-zero values. This structure makes them particularly well-suited for traditional information retrieval applications. In most cases, the number of dimensions used in sparse vectors correspond to different tokens across one or more languages. Each dimension is assigned a value that indicates the relative importance of that token within the document. This layout proves advantageous for tasks that involve keyword matching.​</p></li>
-<li><p><strong>Dense vectors:</strong> Dense vectors are embeddings derived from neural networks. When arranged in an ordered array, these vectors capture the semantic essence of the input text. Note that dense vectors are not limited to text processing; they are also extensively used in computer vision to represent the semantics of visual data. These dense vectors, usually generated by text embedding models, are characterized by most or all elements being non-zero. Thus, dense vectors are particularly effective for semantic search applications, as they can return the most similar results based on vector distance even in the absence of exact keyword matches. This capability allows for more nuanced and context-aware search results, often capturing relationships between concepts that might be missed by keyword-based approaches.​</p></li>
+<li><p><strong>Spärliche Vektoren:</strong> Spärliche Vektoren zeichnen sich durch ihre hohe Vektordimensionalität und das Vorhandensein von wenigen Werten ungleich Null aus. Aufgrund dieser Struktur eignen sie sich besonders gut für traditionelle Information Retrieval-Anwendungen. In den meisten Fällen entspricht die Anzahl der Dimensionen, die in spärlichen Vektoren verwendet werden, den verschiedenen Token in einer oder mehreren Sprachen. Jeder Dimension wird ein Wert zugewiesen, der die relative Bedeutung dieses Tokens innerhalb des Dokuments angibt. Diese Anordnung erweist sich als vorteilhaft für Aufgaben, die den Abgleich von Schlüsselwörtern beinhalten.</p></li>
+<li><p><strong>Dichte Vektoren:</strong> Dichte Vektoren sind von neuronalen Netzen abgeleitete Einbettungen. Wenn sie in einem geordneten Array angeordnet sind, erfassen diese Vektoren das semantische Wesen des Eingabetextes. Dichte Vektoren sind nicht auf die Textverarbeitung beschränkt; sie werden auch häufig in der Computer Vision verwendet, um die Semantik von visuellen Daten darzustellen. Diese dichten Vektoren, die in der Regel durch Modelle zur Texteinbettung erzeugt werden, zeichnen sich dadurch aus, dass die meisten oder alle Elemente ungleich Null sind. Daher eignen sich dichte Vektoren besonders gut für semantische Suchanwendungen, da sie auf der Grundlage der Vektordistanz die ähnlichsten Ergebnisse liefern können, selbst wenn es keine exakten Schlüsselwortübereinstimmungen gibt. Diese Fähigkeit ermöglicht nuanciertere und kontextbezogene Suchergebnisse und erfasst oft Beziehungen zwischen Konzepten, die bei schlagwortbasierten Ansätzen übersehen werden könnten.</p></li>
 </ul>
-<p>For more details, refer to <a href="/docs/sparse_vector.md">​Sparse Vector</a> and <a href="/docs/dense-vector.md">​Dense Vector</a>.​</p>
-<h3 id="Multimodal-Search​" class="common-anchor-header">Multimodal Search​</h3><p>Multimodal search refers to the similarity search of unstructured data across multiple modalities (such as images, videos, audio, text, etc). For instance, a person can be represented using various modalities of data such as fingerprints, voiceprints, and facial features. Hybrid Search supports multiple searches simultaneously. For example searching a person with both similar fingerprints and voiceprints.​</p>
-<h2 id="Workflow​" class="common-anchor-header">Workflow​<button data-href="#Workflow​" class="anchor-icon" translate="no">
+<p>Weitere Einzelheiten finden Sie unter <a href="/docs/de/sparse_vector.md">Sparse Vector</a> und <a href="/docs/de/dense-vector.md">Dense Vector</a>.</p>
+<h3 id="Multimodal-Search​" class="common-anchor-header">Multimodale Suche</h3><p>Multimodale Suche bezieht sich auf die Ähnlichkeitssuche von unstrukturierten Daten über mehrere Modalitäten hinweg (wie Bilder, Videos, Audio, Text usw.). Eine Person kann beispielsweise durch verschiedene Modalitäten von Daten wie Fingerabdrücke, Stimmabdrücke und Gesichtsmerkmale dargestellt werden. Die hybride Suche unterstützt mehrere Suchvorgänge gleichzeitig. Zum Beispiel die Suche nach einer Person mit ähnlichen Fingerabdrücken und Stimmbildern.</p>
+<h2 id="Workflow​" class="common-anchor-header">Arbeitsablauf<button data-href="#Workflow​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -61,23 +61,21 @@ title: Hybrid Search
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>The main workflow for conducting a Hybrid Search is as follows:​</p>
+    </button></h2><p>Der Hauptarbeitsablauf für die Durchführung einer hybriden Suche sieht wie folgt aus.</p>
 <ol>
-<li><p>Generate dense vectors through embedding models like <a href="https://zilliz.com/learn/explore-colbert-token-level-embedding-and-ranking-model-for-similarity-search#A-Quick-Recap-of-BERT">BERT</a> and <a href="https://zilliz.com/learn/NLP-essentials-understanding-transformers-in-AI">Transformers</a>.​</p></li>
-<li><p>Generate sparse vectors through embedding models like <a href="https://zilliz.com/learn/mastering-bm25-a-deep-dive-into-the-algorithm-and-application-in-milvus">BM25</a>, <a href="https://zilliz.com/learn/bge-m3-and-splade-two-machine-learning-models-for-generating-sparse-embeddings#BGE-M3">BGE-M3</a>, <a href="https://zilliz.com/learn/bge-m3-and-splade-two-machine-learning-models-for-generating-sparse-embeddings#SPLADE">SPLADE</a>, etc.​</p></li>
-<li><p>Create a collection in Zilliz and define the collection schema which includes both dense and sparse vector fields.​</p></li>
-<li><p>Insert sparse-dense vectors into the collection just created in the previous step.​</p></li>
-<li><p>Conduct a Hybrid Search: ANN Search on dense vectors will return a set of top-K most similar results, and text match on sparse vectors will also return a set of top-K results.​</p></li>
-<li><p>Normalization: Normalize the scores of the two sets of top-K results, converting the scores to a range between [0,1].​</p></li>
-<li><p>Choose an appropriate reranking strategy to merge and rerank the two sets of top-K results and ultimately return a final set of top-K results.​</p></li>
+<li><p>Erzeugen von dichten Vektoren durch Einbettungsmodelle wie <a href="https://zilliz.com/learn/explore-colbert-token-level-embedding-and-ranking-model-for-similarity-search#A-Quick-Recap-of-BERT">BERT</a> und <a href="https://zilliz.com/learn/NLP-essentials-understanding-transformers-in-AI">Transformers</a>.</p></li>
+<li><p>Generierung von spärlichen Vektoren durch Einbettungsmodelle wie <a href="https://zilliz.com/learn/mastering-bm25-a-deep-dive-into-the-algorithm-and-application-in-milvus">BM25</a>, <a href="https://zilliz.com/learn/bge-m3-and-splade-two-machine-learning-models-for-generating-sparse-embeddings#BGE-M3">BGE-M3</a>, <a href="https://zilliz.com/learn/bge-m3-and-splade-two-machine-learning-models-for-generating-sparse-embeddings#SPLADE">SPLADE</a>, etc.</p></li>
+<li><p>Erstellen Sie eine Sammlung in Zilliz und definieren Sie das Sammlungsschema, das sowohl dichte als auch spärliche Vektorfelder enthält.</p></li>
+<li><p>Fügen Sie spärlich-dichte Vektoren in die im vorherigen Schritt erstellte Sammlung ein.</p></li>
+<li><p>Führen Sie eine hybride Suche durch: Die ANN-Suche auf dichten Vektoren liefert eine Reihe von Top-K-Ergebnissen, die am ähnlichsten sind, und der Textabgleich auf spärlichen Vektoren liefert ebenfalls eine Reihe von Top-K-Ergebnissen.</p></li>
+<li><p>Normalisierung: Normalisieren Sie die Punktzahlen der beiden Sätze von Top-K-Ergebnissen, indem Sie die Punktzahlen in einen Bereich zwischen [0,1] umwandeln.</p></li>
+<li><p>Wählen Sie eine geeignete Reranking-Strategie, um die beiden Gruppen von Top-K-Ergebnissen zusammenzuführen und neu zu ordnen und schließlich eine endgültige Gruppe von Top-K-Ergebnissen zu erhalten.</p></li>
 </ol>
 <p>
-  <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.5.x/assets/hybrid-search.png" alt="Hybrid Search Workflow" class="doc-image" id="hybrid-search-workflow" />
-    <span>Hybrid Search Workflow</span>
-  </span>
-</p>
-<h2 id="Examples​" class="common-anchor-header">Examples​<button data-href="#Examples​" class="anchor-icon" translate="no">
+  
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/hybrid-search.png" alt="Hybrid Search Workflow" class="doc-image" id="hybrid-search-workflow" />
+   </span> <span class="img-wrapper"> <span>Hybrider Such-Workflow</span> </span></p>
+<h2 id="Examples​" class="common-anchor-header">Beispiele<button data-href="#Examples​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -92,22 +90,18 @@ title: Hybrid Search
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>This section will use a specific example to illustrate how to conduct a Hybrid Search on sparse-dense vectors to enhance the accuracy of text searches.​</p>
-<h3 id="Create-a-collection-with-multiple-vector-fields​" class="common-anchor-header">Create a collection with multiple vector fields​</h3><p>The process of creating a collection includes three parts: defining the collection schema, configuring the index parameters, and creating the collection.​</p>
-<h4 id="Define-schema​" class="common-anchor-header">Define schema​</h4><p>In this example, multiple vector fields need to be defined within the collection schema. Currently, each collection can include up to 4 vector fields by default. But you can also modify the value of  <a href="https://milvus.io/docs/configure_proxy.md#proxymaxVectorFieldNum"><code translate="no">proxy.maxVectorFieldNum</code></a>  to include up to 10 vector fields in a collection as needed.​</p>
-<p>The following example defines a collection schema, where <code translate="no">dense</code> and <code translate="no">sparse</code> are the two vector fields:​</p>
+    </button></h2><p>In diesem Abschnitt wird anhand eines konkreten Beispiels gezeigt, wie eine hybride Suche auf spärlich dichten Vektoren durchgeführt werden kann, um die Genauigkeit der Textsuche zu verbessern.</p>
+<h3 id="Create-a-collection-with-multiple-vector-fields​" class="common-anchor-header">Erstellen einer Sammlung mit mehreren Vektorfeldern</h3><p>Der Prozess der Erstellung einer Sammlung umfasst drei Teile: Definieren des Schemas der Sammlung, Konfigurieren der Indexparameter und Erstellen der Sammlung.</p>
+<h4 id="Define-schema​" class="common-anchor-header">Definieren des Schemas</h4><p>In diesem Beispiel müssen mehrere Vektorfelder im Schema der Sammlung definiert werden. Derzeit kann jede Sammlung standardmäßig bis zu 4 Vektorfelder enthalten. Sie können aber auch den Wert von  <a href="https://milvus.io/docs/configure_proxy.md#proxymaxVectorFieldNum"><code translate="no">proxy.maxVectorFieldNum</code></a>  ändern, um bei Bedarf bis zu 10 Vektorfelder in eine Sammlung aufzunehmen.</p>
+<p>Das folgende Beispiel definiert ein Auflistungsschema, wobei <code translate="no">dense</code> und <code translate="no">sparse</code> die beiden Vektorfelder sind.</p>
 <ul>
-<li><p><code translate="no">id</code>: This field serves as the primary key for storing text IDs. The data type of this field is INT64.​</p></li>
-<li><p><code translate="no">text</code>: This field is used for storing textual content. The data type of this field is VARCHAR, with a maximum length of 1000 characters.​</p></li>
-<li><p><code translate="no">dense</code>: This field is used to store the dense vectors of the texts. The data type of this field is FLOAT_VECTOR, with a vector dimension of 768.​</p></li>
-<li><p><code translate="no">sparse</code>: This field is used to store the sparse vectors of the texts. The data type of this field is SPARSE_FLOAT_VECTOR.​</p></li>
+<li><p><code translate="no">id</code>: Dieses Feld dient als Primärschlüssel für die Speicherung von Text-IDs. Der Datentyp dieses Feldes ist INT64.</p></li>
+<li><p><code translate="no">text</code>: Dieses Feld dient zur Speicherung von Textinhalten. Der Datentyp dieses Feldes ist VARCHAR, mit einer maximalen Länge von 1000 Zeichen.</p></li>
+<li><p><code translate="no">dense</code>: In diesem Feld werden die dichten Vektoren der Texte gespeichert. Der Datentyp dieses Feldes ist FLOAT_VECTOR, mit einer Vektordimension von 768.</p></li>
+<li><p><code translate="no">sparse</code>: In diesem Feld werden die spärlichen Vektoren der Texte gespeichert. Der Datentyp dieses Feldes ist SPARSE_FLOAT_VECTOR.</p></li>
 </ul>
 <div class="multipleCode">
-    <a href="#python">Python </a>
-    <a href="#java">Java</a>
-    <a href="#javascript">Node.js</a>
-    <a href="#curl">cURL</a>
-</div>
+   <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Create a collection in customized setup mode​</span>
 <span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> (​
     MilvusClient, DataType​
@@ -233,14 +227,10 @@ schema.addField(AddFieldReq.builder()​
     }&#x27;</span>​
 
 <button class="copy-code-btn"></button></code></pre>
-<p>During sparse vector searches, you can simplify the process of generating sparse embedding vectors by leveraging Full Text Search capabilities. For more details, see <a href="/docs/full-text-search.md">​Full Text Search</a>.​</p>
-<h4 id="Create-index​" class="common-anchor-header">Create index​</h4><p>After defining the collection schema, it is necessary to set up the vector indexes and the similarity metrics. In this example, an IVF_FLAT index is created for the dense vector field <code translate="no">dense</code>, and a SPARSE_INVERTED_INDEX is created for the sparse vector field <code translate="no">sparse</code>. To learn about the types of indexes supported, see <a href="https://milvus.io/docs/index.md?tab=floating">​Index Explained</a>.​</p>
+<p>Bei der Suche nach Sparse Vectors können Sie den Prozess der Erzeugung von Sparse Embedding Vectors vereinfachen, indem Sie die Funktionen der Volltextsuche nutzen. Weitere Einzelheiten finden Sie unter <a href="/docs/de/full-text-search.md">Volltextsuche</a>.</p>
+<h4 id="Create-index​" class="common-anchor-header">Index erstellen</h4><p>Nach der Definition des Sammelschemas müssen die Vektorindizes und die Ähnlichkeitsmetriken eingerichtet werden. In diesem Beispiel wird ein IVF_FLAT-Index für das dichte Vektorfeld <code translate="no">dense</code> und ein SPARSE_INVERTED_INDEX für das spärliche Vektorfeld <code translate="no">sparse</code> erstellt. Weitere Informationen zu den unterstützten Indextypen finden Sie unter <a href="https://milvus.io/docs/index.md?tab=floating">Index erklärt</a>.</p>
 <div class="multipleCode">
-    <a href="#python">Python </a>
-    <a href="#java">Java</a>
-    <a href="#javascript">Node.js</a>
-    <a href="#curl">cURL</a>
-</div>
+   <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient​
 ​
 <span class="hljs-comment"># Prepare index parameters​</span>
@@ -320,13 +310,9 @@ indexParams.<span class="hljs-title function_">add</span>(indexParamForSparseFie
     ]&#x27;</span>​
 
 <button class="copy-code-btn"></button></code></pre>
-<h4 id="Create-collection​" class="common-anchor-header">Create collection​</h4><p>Create a collection named <code translate="no">demo</code> with the collection schema and indexes configured in the previous two steps.​</p>
+<h4 id="Create-collection​" class="common-anchor-header">Sammlung erstellen</h4><p>Erstellen Sie eine Sammlung mit dem Namen <code translate="no">demo</code> mit dem Sammlungsschema und den Indizes, die in den beiden vorherigen Schritten konfiguriert wurden.</p>
 <div class="multipleCode">
-    <a href="#python">Python </a>
-    <a href="#java">Java</a>
-    <a href="#javascript">Node.js</a>
-    <a href="#curl">cURL</a>
-</div>
+   <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> <span class="hljs-title class_">MilvusClient</span>​
 ​
 client.<span class="hljs-title function_">create_collection</span>(​
@@ -365,13 +351,9 @@ curl --request POST \​
 }&quot;</span>​
 
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Insert-data​" class="common-anchor-header">Insert data​</h3><p>Insert the sparse-dense vectors into the the collection <code translate="no">demo</code>.​</p>
+<h3 id="Insert-data​" class="common-anchor-header">Daten einfügen</h3><p>Fügen Sie die sparse-denses Vektoren in die Sammlung <code translate="no">demo</code> ein.</p>
 <div class="multipleCode">
-    <a href="#python">Python </a>
-    <a href="#java">Java</a>
-    <a href="#javascript">Node.js</a>
-    <a href="#curl">cURL</a>
-</div>
+   <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> <span class="hljs-title class_">MilvusClient</span>​
 ​
 data=[​
@@ -446,17 +428,13 @@ List&lt;JsonObject&gt; data = Arrays.asList(row1, row2, row3);​
 }&#x27;</span>​
 
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Create-multiple-AnnSearchRequest-instances​" class="common-anchor-header">Create multiple AnnSearchRequest instances​</h3><p>Hybrid Search is implemented by creating multiple <code translate="no">AnnSearchRequest</code> in the <code translate="no">hybrid_search()</code> function, where each <code translate="no">AnnSearchRequest</code> represents a basic ANN search request for a specific vector field. Therefore, before conducting a Hybrid Search, it is necessary to create an <code translate="no">AnnSearchRequest</code> for each vector field.​</p>
+<h3 id="Create-multiple-AnnSearchRequest-instances​" class="common-anchor-header">Mehrere AnnSearchRequest-Instanzen erstellen</h3><p>Die hybride Suche wird durch die Erstellung mehrerer <code translate="no">AnnSearchRequest</code> in der Funktion <code translate="no">hybrid_search()</code> implementiert, wobei jede <code translate="no">AnnSearchRequest</code> eine grundlegende ANN-Suchanfrage für ein bestimmtes Vektorfeld darstellt. Daher muss vor der Durchführung einer Hybrid Search für jedes Vektorfeld eine <code translate="no">AnnSearchRequest</code> erstellt werden.</p>
 <div class="alert note">
-<p>In Hybrid Search, each <code translate="no">AnnSearchRequest</code> supports only one query vector.​</p>
+<p>Bei der hybriden Suche unterstützt jedes <code translate="no">AnnSearchRequest</code> nur einen Abfragevektor.</p>
 </div>
-<p>Suppose the query text “Who started AI research?” has already been converted into sparse and dense vectors. Based on this, two <code translate="no">AnnSearchRequest</code> search requests are created for the <code translate="no">sparse</code> and <code translate="no">dense</code> vector fields respectively, as shown in the following example.​</p>
+<p>Angenommen, der Abfragetext "Wer begann mit der KI-Forschung?" wurde bereits in sparse und dense Vektoren umgewandelt. Auf dieser Grundlage werden zwei <code translate="no">AnnSearchRequest</code> Suchanfragen für die Vektorfelder <code translate="no">sparse</code> und <code translate="no">dense</code> erstellt, wie im folgenden Beispiel gezeigt.</p>
 <div class="multipleCode">
-    <a href="#python">Python </a>
-    <a href="#java">Java</a>
-    <a href="#javascript">Node.js</a>
-    <a href="#curl">cURL</a>
-</div>
+   <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> <span class="hljs-title class_">AnnSearchRequest</span>​
 ​
 query_dense_vector = [<span class="hljs-number">0.3580376395471989</span>, -<span class="hljs-number">0.6023495712049978</span>, <span class="hljs-number">0.18414012509913835</span>, -<span class="hljs-number">0.26286205330961354</span>, <span class="hljs-number">0.9029438446296592</span>]​
@@ -566,23 +544,19 @@ searchRequests.<span class="hljs-keyword">add</span>(AnnSearchReq.builder()​
  ]&#x27;</span>​
 
 <button class="copy-code-btn"></button></code></pre>
-<p>Since the parameter <code translate="no">limit</code> is set to 2, each <code translate="no">AnnSearchRequest</code> returns 2 search results. In this example, 2 <code translate="no">AnnSearchRequest</code> are created, therefore a total of 4 search results will be returned.​</p>
-<h3 id="Configure-a-reranking-strategy​" class="common-anchor-header">Configure a reranking strategy​</h3><p>To merge and rerank the two sets of ANN search results, it is necessary to select an appropriate reranking strategy. Zilliz supports two types of reranking strategy: <strong>WeightedRanker</strong> and <strong>RRFRanker</strong>. When choosing a reranking strategy, one thing to consider is whether to there is any emphasis for one or more basic ANN search on the vector fields.​</p>
+<p>Da der Parameter <code translate="no">limit</code> auf 2 gesetzt ist, liefert jede <code translate="no">AnnSearchRequest</code> 2 Suchergebnisse. In diesem Beispiel werden 2 <code translate="no">AnnSearchRequest</code> erstellt, daher werden insgesamt 4 Suchergebnisse zurückgegeben.</p>
+<h3 id="Configure-a-reranking-strategy​" class="common-anchor-header">Konfigurieren Sie eine Ranglistenstrategie</h3><p>Um die beiden Gruppen von ANN-Suchergebnissen zusammenzuführen und neu zu ordnen, ist es notwendig, eine geeignete Rangordnungsstrategie zu wählen. Zilliz unterstützt zwei Arten von Reranking-Strategien: <strong>WeightedRanker</strong> und <strong>RRFRanker</strong>. Bei der Wahl der Reranking-Strategie muss unter anderem berücksichtigt werden, ob eine oder mehrere ANN-Basissuchen auf den Vektorfeldern einen Schwerpunkt bilden.</p>
 <ul>
-<li><p><strong>WeightedRanker</strong>: This strategy is recommended if you require the results to emphasize a particular vector field. The WeightedRanker allows you to assign higher weights to certain vector fields, emphasizing them more. For instance, in multimodal searches, textual descriptions of an image might be considered more important than the colors in this image.​</p></li>
-<li><p><strong>RRFRanker (Reciprocal Rank Fusion Ranker)</strong>: This strategy is recommended when there is no specific emphasis. The RRF can effectively balance the importance of each vector field.​</p></li>
+<li><p><strong>WeightedRanker</strong>: Diese Strategie wird empfohlen, wenn die Ergebnisse ein bestimmtes Vektorfeld betonen sollen. Mit dem WeightedRanker können Sie bestimmten Vektorfeldern eine höhere Gewichtung zuweisen und sie damit stärker hervorheben. Bei einer multimodalen Suche könnten beispielsweise Textbeschreibungen eines Bildes als wichtiger angesehen werden als die Farben dieses Bildes.</p></li>
+<li><p><strong>RRFRanker (Reciprocal Rank Fusion Ranker)</strong>: Diese Strategie wird empfohlen, wenn es keine besondere Gewichtung gibt. Der RRF kann die Bedeutung der einzelnen Vektorfelder effektiv ausgleichen.</p></li>
 </ul>
-<p>For more details about the mechanisms of these two reranking strategies, refer to <a href="/docs/reranking.md">​Reranking</a>.​</p>
-<p>The following  two examples demonstrate how to use the WeightedRanker and RRFRanker reranking strategies:​</p>
+<p>Weitere Einzelheiten zu den Mechanismen dieser beiden Reranking-Strategien finden Sie unter <a href="/docs/de/reranking.md">Reranking</a>.</p>
+<p>Die folgenden zwei Beispiele zeigen, wie die Reranking-Strategien WeightedRanker und RRFRanker verwendet werden können.</p>
 <ol>
-<li><p><strong>Example 1: Using WeightedRanker</strong>​</p>
-<p>When using the WeightedRanker strategy, you need to input weight values into the <code translate="no">WeightedRanker</code> function. The number of basic ANN searches in a Hybrid Search corresponds to the number of values that need to be inputted. The input values should be in the range [0,1], with values closer to 1 indicating greater importance.​</p>
+<li><p><strong>Beispiel 1: Verwendung von WeightedRanker</strong></p>
+<p>Wenn Sie die WeightedRanker-Strategie verwenden, müssen Sie Gewichtungswerte in die Funktion <code translate="no">WeightedRanker</code> eingeben. Die Anzahl der ANN-Basissuchen in einer Hybrid Search entspricht der Anzahl der einzugebenden Werte. Die Eingabewerte sollten im Bereich [0,1] liegen, wobei Werte, die näher an 1 liegen, eine größere Wichtigkeit anzeigen.</p>
 <p><div class="multipleCode">
-<a href="#python">Python </a>
-<a href="#java">Java</a>
-<a href="#javascript">Node.js</a>
-<a href="#curl">cURL</a>
-</div></p>
+<a href="#python">Python </a><a href="#java">Java</a><a href="#javascript">Node.js</a><a href="#curl">cURL</a></div></p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> <span class="hljs-title class_">WeightedRanker</span>​
 ​
 rerank= <span class="hljs-title class_">WeightedRanker</span>(<span class="hljs-number">0.8</span>, <span class="hljs-number">0.3</span>) ​
@@ -605,14 +579,10 @@ rerank= <span class="hljs-title class_">WeightedRanker</span>(<span class="hljs-
     }&#x27;</span>​
 
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p><strong>Example 2: Using RRFRanker</strong>​</p>
-<p>When using the RRFRanker strategy, you need to input the parameter value <code translate="no">k</code> into the RRFRanker. The default value of <code translate="no">k</code> is 60. This parameter helps to determine how the ranks are combined from different ANN searches, aiming to balance and blend the importance across all searches.​</p>
+<li><p><strong>Beispiel 2: Verwendung von RRFRanker</strong></p>
+<p>Wenn Sie die RRFRanker-Strategie verwenden, müssen Sie den Parameterwert <code translate="no">k</code> in den RRFRanker eingeben. Der Standardwert von <code translate="no">k</code> ist 60. Mit diesem Parameter wird festgelegt, wie die Ränge aus verschiedenen ANN-Suchen kombiniert werden, um die Wichtigkeit über alle Suchen hinweg auszugleichen und zu mischen.</p>
 <p><div class="multipleCode">
-<a href="#python">Python </a>
-<a href="#java">Java</a>
-<a href="#javascript">Node.js</a>
-<a href="#curl">cURL</a>
-</div></p>
+<a href="#python">Python </a><a href="#java">Java</a><a href="#javascript">Node.js</a><a href="#curl">cURL</a></div></p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> <span class="hljs-title class_">RRFRanker</span>​
 ​
 ranker = <span class="hljs-title class_">RRFRanker</span>(<span class="hljs-number">100</span>)​
@@ -636,13 +606,9 @@ ranker = <span class="hljs-title class_">RRFRanker</span>(<span class="hljs-numb
 
 <button class="copy-code-btn"></button></code></pre></li>
 </ol>
-<h3 id="Perform-a-Hybrid-Search​" class="common-anchor-header">Perform a Hybrid Search​</h3><p>Before conducting a Hybrid Search, it is necessary to load the collection into memory. If any vector fields in the collection do not have an index or are not loaded, an error will occur when calling the Hybrid Search method. ​</p>
+<h3 id="Perform-a-Hybrid-Search​" class="common-anchor-header">Durchführen einer hybriden Suche</h3><p>Bevor eine hybride Suche durchgeführt wird, muss die Sammlung in den Speicher geladen werden. Wenn die Vektorfelder in der Sammlung keinen Index haben oder nicht geladen sind, tritt beim Aufruf der Methode Hybrid Search ein Fehler auf. </p>
 <div class="multipleCode">
-    <a href="#python">Python </a>
-    <a href="#java">Java</a>
-    <a href="#javascript">Node.js</a>
-    <a href="#curl">cURL</a>
-</div>
+   <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient​
 ​
 res = client.hybrid_search(​
@@ -710,8 +676,8 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 }&quot;</span>​
 
 <button class="copy-code-btn"></button></code></pre>
-<p>The following is the output:​</p>
+<p>Es folgt die Ausgabe.</p>
 <pre><code translate="no" class="language-json">[<span class="hljs-string">&quot;[&#x27;id: 844, distance: 0.006047376897186041, entity: {}&#x27;, &#x27;id: 876, distance: 0.006422005593776703, entity: {}&#x27;]&quot;</span>]​
 
 <button class="copy-code-btn"></button></code></pre>
-<p>Since <code translate="no">limit=2</code> is specified in the Hybrid Search, Zilliz will rerank the four search results from step 3 and ultimately return only the top 2 most similar search results. ​</p>
+<p>Da <code translate="no">limit=2</code> in der Hybrid Search angegeben ist, wird Zilliz die vier Suchergebnisse aus Schritt 3 neu ordnen und schließlich nur die zwei ähnlichsten Suchergebnisse zurückgeben. </p>

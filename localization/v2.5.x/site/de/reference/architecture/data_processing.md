@@ -1,9 +1,9 @@
 ---
 id: data_processing.md
-summary: Learn about the data processing procedure in Milvus.
-title: Data Processing
+summary: Informieren Sie sich über das Datenverarbeitungsverfahren in Milvus.
+title: Datenverarbeitung
 ---
-<h1 id="Data-Processing" class="common-anchor-header">Data Processing<button data-href="#Data-Processing" class="anchor-icon" translate="no">
+<h1 id="Data-Processing" class="common-anchor-header">Datenverarbeitung<button data-href="#Data-Processing" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -18,8 +18,8 @@ title: Data Processing
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>This article provides a detailed description of the implementation of data insertion, index building, and data query in Milvus.</p>
-<h2 id="Data-insertion" class="common-anchor-header">Data insertion<button data-href="#Data-insertion" class="anchor-icon" translate="no">
+    </button></h1><p>Dieser Artikel enthält eine detaillierte Beschreibung der Implementierung von Dateneinfügung, Indexaufbau und Datenabfrage in Milvus.</p>
+<h2 id="Data-insertion" class="common-anchor-header">Einfügen von Daten<button data-href="#Data-insertion" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -34,30 +34,24 @@ title: Data Processing
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>You can specify a number of shards for each collection in Milvus, each shard corresponding to a virtual channel (<em>vchannel</em>). As the following figure shows, Milvus assigns each vchannel in the log broker a physical channel (<em>pchannel</em>). Any incoming insert/delete request is routed to shards based on the hash value of primary key.</p>
-<p>Validation of DML requests is moved forward to proxy because Milvus does not have complicated transactions. Proxy would request a timestamp for each insert/delete request from TSO (Timestamp Oracle), which is the timing module that colocates with the root coordinator. With the older timestamp being overwritten by the newer one, timestamps are used to determine the sequence of data requests being processed. Proxy retrieves information in batches from data coord including entities’ segments and primary keys to increase overall throughput and avoid overburdening the central node.</p>
+    </button></h2><p>Sie können eine Anzahl von Shards für jede Sammlung in Milvus angeben, wobei jeder Shard einem virtuellen Kanal<em>(vchannel</em>) entspricht. Wie die folgende Abbildung zeigt, weist Milvus jedem vchannel im Log-Broker einen physischen Kanal<em>(pchannel</em>) zu. Jede eingehende Einfüge-/Löschanforderung wird auf der Grundlage des Hashwerts des Primärschlüssels an die Shards weitergeleitet.</p>
+<p>Die Validierung von DML-Anfragen wird auf den Proxy verlagert, da Milvus keine komplizierten Transaktionen hat. Der Proxy würde für jede Einfüge-/Löschanforderung einen Zeitstempel von TSO (Timestamp Oracle) anfordern, dem Zeitmodul, das mit dem Root-Koordinator zusammenarbeitet. Da der ältere Zeitstempel durch den neueren überschrieben wird, werden Zeitstempel verwendet, um die Reihenfolge der zu verarbeitenden Datenanforderungen zu bestimmen. Der Proxy ruft Informationen in Stapeln von der Datenkoordination ab, einschließlich der Segmente und Primärschlüssel der Entitäten, um den Gesamtdurchsatz zu erhöhen und eine Überlastung des zentralen Knotens zu vermeiden.</p>
 <p>
-  <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.5.x/assets/channels_1.jpg" alt="Channels 1" class="doc-image" id="channels-1" />
-    <span>Channels 1</span>
-  </span>
-</p>
-<p>Both DML (data manipulation language) operations and DDL (data definition language) operations are written to the log sequence, but DDL operations are only assigned one channel because of their low frequency of occurrence.</p>
+  
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/channels_1.jpg" alt="Channels 1" class="doc-image" id="channels-1" />
+   </span> <span class="img-wrapper"> <span>Kanäle 1</span> </span></p>
+<p>Sowohl DML (Data Manipulation Language)-Operationen als auch DDL (Data Definition Language)-Operationen werden in die Protokollsequenz geschrieben, aber DDL-Operationen werden wegen ihrer geringen Häufigkeit nur einem Kanal zugeordnet.</p>
 <p>
-  <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.5.x/assets/channels_2.jpg" alt="Channels 2" class="doc-image" id="channels-2" />
-    <span>Channels 2</span>
-  </span>
-</p>
-<p><em>Vchannels</em> are maintained in the underlying log broker nodes. Each channel is physically indivisible and available for any but only one node. When data ingestion rate reaches bottleneck, consider two things: Whether the log broker node is overloaded and needs to be scaled, and whether there are sufficient shards to ensure load balance for each node.</p>
+  
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/channels_2.jpg" alt="Channels 2" class="doc-image" id="channels-2" />
+   </span> <span class="img-wrapper"> <span>Kanäle 2</span> </span></p>
+<p><em>V-Kanäle</em> werden in den zugrunde liegenden Log-Broker-Knoten verwaltet. Jeder Kanal ist physisch unteilbar und für jeden, aber nur für einen Knoten verfügbar. Wenn die Dateneingangsrate einen Engpass erreicht, sind zwei Dinge zu beachten: Ob der Log-Broker-Knoten überlastet ist und skaliert werden muss, und ob genügend Shards vorhanden sind, um den Lastausgleich für jeden Knoten zu gewährleisten.</p>
 <p>
-  <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.5.x/assets/write_log_sequence.jpg" alt="Write log sequence" class="doc-image" id="write-log-sequence" />
-    <span>Write log sequence</span>
-  </span>
-</p>
-<p>The above diagram encapsulates four components involved in the process of writing log sequence: proxy, log broker, data node, and object storage. The process involves four tasks: validation of DML requests, publication-subscription of log sequence, conversion from streaming log to log snapshots, and persistence of log snapshots. The four tasks are decoupled from each other to make sure each task is handled by its corresponding node type. Nodes of the same type are made equal and can be scaled elastically and independently to accommodate various data loads, massive and highly fluctuating streaming data in particular.</p>
-<h2 id="Index-building" class="common-anchor-header">Index building<button data-href="#Index-building" class="anchor-icon" translate="no">
+  
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/write_log_sequence.jpg" alt="Write log sequence" class="doc-image" id="write-log-sequence" />
+   </span> <span class="img-wrapper"> <span>Log-Sequenz schreiben</span> </span></p>
+<p>Das obige Diagramm zeigt die vier Komponenten, die am Prozess des Schreibens der Log-Sequenz beteiligt sind: Proxy, Log Broker, Datenknoten und Objektspeicher. Der Prozess umfasst vier Aufgaben: Validierung von DML-Anforderungen, Veröffentlichung und Abonnement von Log-Sequenzen, Konvertierung von Streaming Log in Log-Snapshots und Persistenz von Log-Snapshots. Die vier Aufgaben sind voneinander entkoppelt, um sicherzustellen, dass jede Aufgabe von dem entsprechenden Knotentyp bearbeitet wird. Knoten desselben Typs sind gleichberechtigt und können elastisch und unabhängig skaliert werden, um verschiedene Datenlasten, insbesondere massive und stark schwankende Streaming-Daten, zu bewältigen.</p>
+<h2 id="Index-building" class="common-anchor-header">Indexaufbau<button data-href="#Index-building" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -72,18 +66,16 @@ title: Data Processing
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Index building is performed by index node. To avoid frequent index building for data updates, a collection in Milvus is divided further into segments, each with its own index.</p>
+    </button></h2><p>Der Indexaufbau wird von einem Indexknoten durchgeführt. Um häufige Indexerstellung bei Datenaktualisierungen zu vermeiden, wird eine Sammlung in Milvus weiter in Segmente unterteilt, die jeweils einen eigenen Index haben.</p>
 <p>
-  <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.5.x/assets/index_building.jpg" alt="Index building" class="doc-image" id="index-building" />
-    <span>Index building</span>
-  </span>
-</p>
-<p>Milvus supports building index for each vector field, scalar field and primary field. Both the input and output of index building engage with object storage: The index node loads the log snapshots to index from a segment (which is in object storage) to memory, deserializes the corresponding data and metadata to build index, serializes the index when index building completes, and writes it back to object storage.</p>
-<p>Index building mainly involves vector and matrix operations and hence is computation- and memory-intensive. Vectors cannot be efficiently indexed with traditional tree-based indexes due to their high-dimensional nature, but can be indexed with techniques that are more mature in this subject, such as cluster- or graph-based indexes. Regardless its type, building index involves massive iterative calculations for large-scale vectors, such as Kmeans or graph traverse.</p>
-<p>Unlike indexing for scalar data, building vector index has to take full advantage of SIMD (single instruction, multiple data) acceleration. Milvus has innate support for SIMD instruction sets, e.g., SSE, AVX2, and AVX512. Given the “hiccup” and resource-intensive nature of vector index building, elasticity becomes crucially important to Milvus in economical terms. Future Milvus releases will further explorations in heterogeneous computing and serverless computation to bring down the related costs.</p>
-<p>Besides, Milvus also supports scalar filtering and primary field query. It has inbuilt indexes to improve query efficiency, e.g., Bloom filter indexes, hash indexes, tree-based indexes, and inverted indexes, and plans to introduce more external indexes, e.g., bitmap indexes and rough indexes.</p>
-<h2 id="Data-query" class="common-anchor-header">Data query<button data-href="#Data-query" class="anchor-icon" translate="no">
+  
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/index_building.jpg" alt="Index building" class="doc-image" id="index-building" />
+   </span> <span class="img-wrapper"> <span>Indexerstellung</span> </span></p>
+<p>Milvus unterstützt die Indexerstellung für jedes Vektorfeld, Skalarfeld und Primärfeld. Sowohl die Eingabe als auch die Ausgabe des Indexaufbaus greifen auf den Objektspeicher zu: Der Indexknoten lädt die zu indizierenden Protokoll-Snapshots aus einem Segment (das sich im Objektspeicher befindet) in den Speicher, deserialisiert die entsprechenden Daten und Metadaten für den Indexaufbau, serialisiert den Index nach Abschluss des Indexaufbaus und schreibt ihn zurück in den Objektspeicher.</p>
+<p>Der Indexaufbau umfasst hauptsächlich Vektor- und Matrixoperationen und ist daher rechen- und speicherintensiv. Vektoren können aufgrund ihrer hochdimensionalen Natur nicht effizient mit traditionellen baumbasierten Indizes indiziert werden, aber sie können mit Techniken indiziert werden, die in diesem Bereich ausgereifter sind, wie z. B. cluster- oder graphbasierte Indizes. Unabhängig von der Art des Indexes erfordert die Indexerstellung massive iterative Berechnungen für große Vektoren, wie Kmeans oder Graph Traverse.</p>
+<p>Anders als bei der Indexierung skalarer Daten muss bei der Erstellung von Vektorindizes die SIMD-Beschleunigung (Single Instruction, Multiple Data) voll genutzt werden. Milvus bietet von Haus aus Unterstützung für SIMD-Befehlssätze, z. B. SSE, AVX2 und AVX512. Angesichts des "Schluckaufs" und der ressourcenintensiven Natur der Vektorindexerstellung ist Elastizität für Milvus in wirtschaftlicher Hinsicht von entscheidender Bedeutung. Zukünftige Milvus-Versionen werden die Erforschung von heterogenem Computing und serverloser Berechnung weiter vorantreiben, um die damit verbundenen Kosten zu senken.</p>
+<p>Außerdem unterstützt Milvus auch skalare Filterung und Primärfeldabfragen. Es verfügt über eingebaute Indizes zur Verbesserung der Abfrageeffizienz, z. B. Bloom-Filter-Indizes, Hash-Indizes, baumbasierte Indizes und invertierte Indizes, und plant die Einführung weiterer externer Indizes, z. B. Bitmap-Indizes und grobe Indizes.</p>
+<h2 id="Data-query" class="common-anchor-header">Datenabfrage<button data-href="#Data-query" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -98,23 +90,19 @@ title: Data Processing
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Data query refers to the process of searching a specified collection for <em>k</em> number of vectors nearest to a target vector or for <em>all</em> vectors within a specified distance range to the vector. Vectors are returned together with their corresponding primary key and fields.</p>
+    </button></h2><p>Die Datenabfrage bezieht sich auf das Durchsuchen einer bestimmten Sammlung nach <em>k</em> Vektoren, die einem Zielvektor am nächsten liegen, oder nach <em>allen</em> Vektoren innerhalb eines bestimmten Abstandsbereichs zum Vektor. Die Vektoren werden zusammen mit den entsprechenden Primärschlüsseln und Feldern zurückgegeben.</p>
 <p>
-  <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.5.x/assets/data_query.jpg" alt="Data query" class="doc-image" id="data-query" />
-    <span>Data query</span>
-  </span>
-</p>
-<p>A collection in Milvus is split into multiple segments, and the query nodes loads indexes by segment. When a search request arrives, it is broadcast to all query nodes for a concurrent search. Each node then prunes the local segments, searches for vectors meeting the criteria, and reduces and returns the search results.</p>
-<p>Query nodes are independent from each other in a data query. Each node is responsible only for two tasks: Load or release segments following the instructions from query coord; conduct a search within the local segments. And proxy is responsible for reducing search results from each query node and returning the final results to the client.</p>
+  
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/data_query.jpg" alt="Data query" class="doc-image" id="data-query" />
+   </span> <span class="img-wrapper"> <span>Datenabfrage</span> </span></p>
+<p>Eine Sammlung in Milvus ist in mehrere Segmente unterteilt, und die Abfrageknoten laden Indizes nach Segment. Wenn eine Suchanfrage eintrifft, wird sie an alle Abfrageknoten gesendet, um eine gleichzeitige Suche durchzuführen. Jeder Knoten durchforstet dann die lokalen Segmente, sucht nach Vektoren, die den Kriterien entsprechen, und reduziert die Suchergebnisse und gibt sie zurück.</p>
+<p>Die Abfrageknoten sind bei einer Datenabfrage unabhängig voneinander. Jeder Knoten ist nur für zwei Aufgaben zuständig: Laden oder Freigeben von Segmenten gemäß den Anweisungen des Abfragekoordinators; Durchführen einer Suche innerhalb der lokalen Segmente. Und der Proxy ist für die Reduzierung der Suchergebnisse von jedem Abfrageknoten und die Rückgabe der endgültigen Ergebnisse an den Client verantwortlich.</p>
 <p>
-  <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.5.x/assets/handoff.jpg" alt="Handoff" class="doc-image" id="handoff" />
-    <span>Handoff</span>
-  </span>
-</p>
-<p>There are two types of segments, growing segments (for incremental data), and sealed segments (for historical data). Query nodes subscribe to vchannel to receive recent updates (incremental data) as growing segments. When a growing segment reaches a predefined threshold, data coord seals it and index building begins. Then a <em>handoff</em> operation initiated by query coord turns incremental data to historical data. Query coord will distribute sealed segments evenly among all query nodes according to memory usage, CPU overhead, and segment number.</p>
-<h2 id="Whats-next" class="common-anchor-header">What’s next<button data-href="#Whats-next" class="anchor-icon" translate="no">
+  
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/handoff.jpg" alt="Handoff" class="doc-image" id="handoff" />
+   </span> <span class="img-wrapper"> <span>Weiterleitung</span> </span></p>
+<p>Es gibt zwei Arten von Segmenten: wachsende Segmente (für inkrementelle Daten) und geschlossene Segmente (für historische Daten). Abfrageknoten abonnieren den vchannel, um aktuelle Aktualisierungen (inkrementelle Daten) als wachsende Segmente zu erhalten. Wenn ein wachsendes Segment einen vordefinierten Schwellenwert erreicht, wird es von der Datenkoordination versiegelt und der Indexaufbau beginnt. Dann werden die inkrementellen Daten durch eine vom Abfragekoordinator initiierte <em>Weitergabeoperation</em> in historische Daten umgewandelt. Die Abfragekoordination verteilt die versiegelten Segmente gleichmäßig auf alle Abfrageknoten entsprechend der Speichernutzung, dem CPU-Overhead und der Segmentanzahl.</p>
+<h2 id="Whats-next" class="common-anchor-header">Der nächste Schritt<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -130,7 +118,7 @@ title: Data Processing
         ></path>
       </svg>
     </button></h2><ul>
-<li>Learn about how to <a href="https://milvus.io/blog/deep-dive-5-real-time-query.md">use the Milvus vector database for real-time query</a>.</li>
-<li>Learn about <a href="https://milvus.io/blog/deep-dive-4-data-insertion-and-data-persistence.md">data insertion and data persistence in Milvus</a>.</li>
-<li>Learn how <a href="https://milvus.io/blog/deep-dive-3-data-processing.md">data is processed in Milvus</a>.</li>
+<li>Erfahren Sie, wie Sie <a href="https://milvus.io/blog/deep-dive-5-real-time-query.md">die Milvus-Vektordatenbank für Echtzeitabfragen nutzen</a> können.</li>
+<li>Lernen Sie das <a href="https://milvus.io/blog/deep-dive-4-data-insertion-and-data-persistence.md">Einfügen von Daten und die Datenpersistenz in Milvus</a> kennen.</li>
+<li>Lernen Sie, wie <a href="https://milvus.io/blog/deep-dive-3-data-processing.md">Daten in Milvus verarbeitet werden</a>.</li>
 </ul>

@@ -1,11 +1,11 @@
 ---
 id: integrations_overview.md
 summary: >-
-  This page provides a list of tutorials for you to interact with Milvus and
-  third-party tools.
-title: Integrations Overview
+  Auf dieser Seite finden Sie eine Liste von Anleitungen zur Interaktion mit
+  Milvus und Tools von Drittanbietern.
+title: Übersicht über Integrationen
 ---
-<h1 id="Integrations-Overview" class="common-anchor-header">Integrations Overview<button data-href="#Integrations-Overview" class="anchor-icon" translate="no">
+<h1 id="Integrations-Overview" class="common-anchor-header">Übersicht über Integrationen<button data-href="#Integrations-Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -20,56 +20,56 @@ title: Integrations Overview
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>This page provides a list of tutorials for you to interact with Milvus and third-party tools.</p>
+    </button></h1><p>Auf dieser Seite finden Sie eine Liste von Tutorials, die Ihnen die Interaktion mit Milvus und Tools von Drittanbietern erleichtern.</p>
 <table>
 <thead>
-<tr><th>Tutorial</th><th>Use Case</th><th>Partners or Stacks</th></tr>
+<tr><th>Lernprogramm</th><th>Anwendungsfall</th><th>Partner oder Stacks</th></tr>
 </thead>
 <tbody>
-<tr><td><a href="/docs/integrate_with_llamaindex.md">RAG with Milvus and LlamaIndex</a></td><td>RAG</td><td>Milvus, LLamaIndex</td></tr>
-<tr><td><a href="/docs/integrate_with_langchain.md">RAG with Milvus and LangChain</a></td><td>RAG</td><td>Milvus, LangChain</td></tr>
-<tr><td><a href="/docs/milvus_hybrid_search_retriever.md">Milvus Hybrid Search Retriever in LangChain</a></td><td>Hybrid Search</td><td>Milvus, LangChain</td></tr>
-<tr><td><a href="/docs/integrate_with_openai.md">Semantic Search with Milvus and OpenAI</a></td><td>Semantic Search</td><td>Milvus, OpenAI</td></tr>
-<tr><td><a href="/docs/integrate_with_cohere.md">Question Answering Using Milvus and Cohere</a></td><td>Semantic Search</td><td>Milvus, Cohere</td></tr>
-<tr><td><a href="/docs/integrate_with_hugging-face.md">Question Answering using Milvus and HuggingFace</a></td><td>Question Answering</td><td>Milvus, HuggingFace</td></tr>
-<tr><td><a href="/docs/integrate_with_pytorch.md">Image Search using Milvus and Pytorch</a></td><td>Semantic Search</td><td>Milvus, Pytorch</td></tr>
-<tr><td><a href="/docs/integrate_with_sentencetransformers.md">Movie Search using Milvus and SentenceTransfromers</a></td><td>Semantic Search</td><td>Milvus, SentenceTransformers</td></tr>
-<tr><td><a href="/docs/basic_usage_langchain.md">Use Milvus as a Vector Store in LangChain</a></td><td>Semantic Search</td><td>Milvus, LangChain</td></tr>
-<tr><td><a href="/docs/integrate_with_haystack.md">RAG with Milvus and Haystack</a></td><td>RAG</td><td>Milvus, Haystack</td></tr>
-<tr><td><a href="/docs/integrate_with_voxel51.md">Conduct Vision Searches with Milvus and FiftyOne</a></td><td>Semantic Search</td><td>Milvus, FiftyOne</td></tr>
-<tr><td><a href="/docs/integrate_with_voyageai.md">Semantic Search with Milvus and VoyageAI</a></td><td>Semantic Search</td><td>Milvus, VoyageAI</td></tr>
-<tr><td><a href="/docs/integrate_with_bentoml.md">RAG with Milvus and BentoML</a></td><td>RAG</td><td>Milvus, BentoML</td></tr>
-<tr><td><a href="/docs/integrate_with_dspy.md">RAG with Milvus and DSPy</a></td><td>RAG</td><td>Milvus, DSPy</td></tr>
-<tr><td><a href="/docs/integrate_with_jina.md">Semantic Search with Milvus and Jina</a></td><td>Semantic Search</td><td>Milvus, Jina</td></tr>
-<tr><td><a href="/docs/integrate_with_snowpark.md">Milvus on Snowpark Container Services</a></td><td>Data Connection</td><td>Milvus, Snowpark</td></tr>
-<tr><td><a href="/docs/integrate_with_whyhow.md">Rule-based Retrieval with Milvus and WhyHow</a></td><td>Question Answering</td><td>Milvus, WhyHow</td></tr>
-<tr><td><a href="/docs/integrate_with_langfuse.md">Milvus in Langfuse</a></td><td>Observability</td><td>Milvus, Langfuse</td></tr>
-<tr><td><a href="/docs/integrate_with_ragas.md">RAG Evaluation with Ragas and Milvus</a></td><td>Evaluation</td><td>Milvus, Ragas</td></tr>
-<tr><td><a href="/docs/integrate_with_memgpt.md">Chatbot Agent with Milvus and MemGPT</a></td><td>Agent</td><td>Milvus, MemGPT</td></tr>
-<tr><td><a href="/docs/integrate_with_fastgpt.md">How to deploy FastGPT with Milvus</a></td><td>RAG</td><td>Milvus, FastGPT</td></tr>
-<tr><td><a href="/docs/integrate_with_vanna.md">Write SQL with Vanna and Milvus</a></td><td>RAG</td><td>Milvus, Vanna</td></tr>
-<tr><td><a href="/docs/integrate_with_camel.md">RAG with Milvus and Camel</a></td><td>RAG</td><td>Milvus, Camel</td></tr>
-<tr><td><a href="/docs/integrate_with_airbyte.md">Airbyte &amp; Milvus: Open-Source Data Movement Infrastructure</a></td><td>Data Connection</td><td>Milvus, Airbyte</td></tr>
-<tr><td><a href="/docs/video_search_with_twelvelabs_and_milvus.md">Advanced Video Search: Leveraging Twelve Labs and Milvus for Semantic Retrieval</a></td><td>Semantic Search</td><td>Milvus, Twelve Labs</td></tr>
-<tr><td><a href="/docs/milvus_rag_with_vllm.md">Building RAG with Milvus, vLLM, and Llama 3.1</a></td><td>RAG</td><td>Milvus, vLLM, LlamaIndex</td></tr>
-<tr><td><a href="/docs/llama_agents_metadata.md">Multi-agent Systems with Mistral AI, Milvus and Llama-agents</a></td><td>Agent</td><td>Milvus, Mistral AI, LlamaIndex</td></tr>
-<tr><td><a href="/docs/kafka-connect-milvus.md">Connect Kafka with Milvus</a></td><td>Data Sources</td><td>Milvus, Kafka</td></tr>
-<tr><td><a href="/docs/kotaemon_with_milvus.md">Kotaemon RAG with Milvus</a></td><td>RAG</td><td>Milvus, Kotaemon</td></tr>
-<tr><td><a href="/docs/apify_milvus_rag.md">Retrieval-Augmented Generation: Crawling Websites with Apify and Saving Data to Milvus for Question Answering</a></td><td>Data Sources</td><td>Milvus, Apify</td></tr>
-<tr><td><a href="/docs/evaluation_with_deepeval.md">Evaluation with DeepEval</a></td><td>Evaluation &amp; Observability</td><td>Milvus, DeepEval</td></tr>
-<tr><td><a href="/docs/evaluation_with_phoenix.md">Evaluation with Arize Pheonix</a></td><td>Evaluation &amp; Observability</td><td>Milvus, Arize Pheonix</td></tr>
-<tr><td><a href="/docs/dify_with_milvus.md">Deploying Dify with Milvus</a></td><td>Ochestration</td><td>Milvus, Dify</td></tr>
-<tr><td><a href="/docs/rag_with_langflow.md">Building a RAG System Using Langflow with Milvus</a></td><td>Ochestration</td><td>Milvus, Langflow</td></tr>
-<tr><td><a href="/docs/build_rag_on_arm.md">Build RAG on Arm Architecture</a></td><td>RAG</td><td>Milvus, Arm</td></tr>
-<tr><td><a href="/docs/build_RAG_with_milvus_and_fireworks.md">Build RAG with Milvus and Fireworks AI</a></td><td>LLMs</td><td>Milvus, Fireworks AI</td></tr>
-<tr><td><a href="/docs/build_RAG_with_milvus_and_lepton.md">Build RAG with Milvus and Lepton AI</a></td><td>LLMs</td><td>Milvus, Lepton AI</td></tr>
-<tr><td><a href="/docs/build_RAG_with_milvus_and_siliconflow">Build RAG with Milvus and SiliconFlow</a></td><td>LLMs</td><td>Milvus, SiliconFlow</td></tr>
-<tr><td><a href="/docs/rag_with_milvus_and_unstructured.md">Build a RAG with Milvus and Unstructured</a></td><td>Data Sources</td><td>Milvus, Unstructured</td></tr>
-<tr><td><a href="/docs/RAG_with_pii_and_milvus.md">Build RAG with Milvus + PII Masker</a></td><td>Data Sources</td><td>Milvus, PII Masker</td></tr>
-<tr><td><a href="/docs/use_milvus_in_private_gpt.md">Use Milvus in PrivateGPT</a></td><td>Ochestration</td><td>vector search</td></tr>
-<tr><td><a href="/docs/quickstart_mem0_with_milvus.md">Getting Started with Mem0 and Milvus</a></td><td>Agents</td><td>Mem0, Milvus</td></tr>
-<tr><td><a href="/docs/knowledge_table_with_milvus.md">Knowledge Table with Milvus</a></td><td>Knowledge Engineering</td><td>Knowledge Table, Milvus</td></tr>
-<tr><td><a href="/docs/use_milvus_in_docsgpt.md">Use Milvus in DocsGPT</a></td><td>Ochestration</td><td>DocsGPT, Milvus</td></tr>
-<tr><td><a href="/docs/use_milvus_with_sambanova.md">Use Milvus with SambaNova</a></td><td>Orchestration</td><td>Milvus, SambaNova</td></tr>
+<tr><td><a href="/docs/de/integrate_with_llamaindex.md">RAG mit Milvus und LlamaIndex</a></td><td>RAG</td><td>Milvus, LLamaIndex</td></tr>
+<tr><td><a href="/docs/de/integrate_with_langchain.md">RAG mit Milvus und LangChain</a></td><td>RAG</td><td>Milvus, LangChain</td></tr>
+<tr><td><a href="/docs/de/milvus_hybrid_search_retriever.md">Milvus Hybrid Search Retriever in LangChain</a></td><td>Hybride Suche</td><td>Milvus, LangChain</td></tr>
+<tr><td><a href="/docs/de/integrate_with_openai.md">Semantische Suche mit Milvus und OpenAI</a></td><td>Semantische Suche</td><td>Milvus, OpenAI</td></tr>
+<tr><td><a href="/docs/de/integrate_with_cohere.md">Fragenbeantwortung mit Milvus und Cohere</a></td><td>Semantische Suche</td><td>Milvus, Cohere</td></tr>
+<tr><td><a href="/docs/de/integrate_with_hugging-face.md">Beantwortung von Fragen mit Milvus und HuggingFace</a></td><td>Beantwortung von Fragen</td><td>Milvus, HuggingFace</td></tr>
+<tr><td><a href="/docs/de/integrate_with_pytorch.md">Bildsuche mit Milvus und Pytorch</a></td><td>Semantische Suche</td><td>Milvus, Pytorch</td></tr>
+<tr><td><a href="/docs/de/integrate_with_sentencetransformers.md">Filmsuche mit Milvus und SentenceTransfromers</a></td><td>Semantische Suche</td><td>Milvus, Satz-Transformatoren</td></tr>
+<tr><td><a href="/docs/de/basic_usage_langchain.md">Verwendung von Milvus als Vektorspeicher in LangChain</a></td><td>Semantische Suche</td><td>Milvus, LangChain</td></tr>
+<tr><td><a href="/docs/de/integrate_with_haystack.md">RAG mit Milvus und Haystack</a></td><td>RAG</td><td>Milvus, Haystack</td></tr>
+<tr><td><a href="/docs/de/integrate_with_voxel51.md">Vision Searches mit Milvus und FiftyOne durchführen</a></td><td>Semantische Suche</td><td>Milvus, FiftyOne</td></tr>
+<tr><td><a href="/docs/de/integrate_with_voyageai.md">Semantische Suche mit Milvus und VoyageAI</a></td><td>Semantische Suche</td><td>Milvus, VoyageAI</td></tr>
+<tr><td><a href="/docs/de/integrate_with_bentoml.md">RAG mit Milvus und BentoML</a></td><td>RAG</td><td>Milvus, BentoML</td></tr>
+<tr><td><a href="/docs/de/integrate_with_dspy.md">RAG mit Milvus und DSPy</a></td><td>RAG</td><td>Milvus, DSPy</td></tr>
+<tr><td><a href="/docs/de/integrate_with_jina.md">Semantische Suche mit Milvus und Jina</a></td><td>Semantische Suche</td><td>Milvus, Jina</td></tr>
+<tr><td><a href="/docs/de/integrate_with_snowpark.md">Milvus auf Snowpark Container Diensten</a></td><td>Datenverbindung</td><td>Milvus, Snowpark</td></tr>
+<tr><td><a href="/docs/de/integrate_with_whyhow.md">Regelbasiertes Retrieval mit Milvus und WhyHow</a></td><td>Beantwortung von Fragen</td><td>Milvus, WhyHow</td></tr>
+<tr><td><a href="/docs/de/integrate_with_langfuse.md">Milvus in Langfuse</a></td><td>Beobachtbarkeit</td><td>Milvus, Langfuse</td></tr>
+<tr><td><a href="/docs/de/integrate_with_ragas.md">RAG-Bewertung mit Ragas und Milvus</a></td><td>Bewertung</td><td>Milvus, Ragas</td></tr>
+<tr><td><a href="/docs/de/integrate_with_memgpt.md">Chatbot-Agent mit Milvus und MemGPT</a></td><td>Agent</td><td>Milvus, MemGPT</td></tr>
+<tr><td><a href="/docs/de/integrate_with_fastgpt.md">Wie man FastGPT mit Milvus einsetzt</a></td><td>RAG</td><td>Milvus, FastGPT</td></tr>
+<tr><td><a href="/docs/de/integrate_with_vanna.md">SQL schreiben mit Vanna und Milvus</a></td><td>RAG</td><td>Milvus, Vanna</td></tr>
+<tr><td><a href="/docs/de/integrate_with_camel.md">RAG mit Milvus und Camel</a></td><td>RAG</td><td>Milvus, Camel</td></tr>
+<tr><td><a href="/docs/de/integrate_with_airbyte.md">Airbyte &amp; Milvus: Open-Source-Infrastruktur für den Datenverkehr</a></td><td>Datenverbindung</td><td>Milvus, Airbyte</td></tr>
+<tr><td><a href="/docs/de/video_search_with_twelvelabs_and_milvus.md">Erweiterte Videosuche: Nutzung von Twelve Labs und Milvus für die semantische Suche</a></td><td>Semantische Suche</td><td>Milvus, Zwölf Laboratorien</td></tr>
+<tr><td><a href="/docs/de/milvus_rag_with_vllm.md">Aufbau von RAG mit Milvus, vLLM und Llama 3.1</a></td><td>RAG</td><td>Milvus, vLLM, LlamaIndex</td></tr>
+<tr><td><a href="/docs/de/llama_agents_metadata.md">Multiagentensysteme mit Mistral AI, Milvus und Llama-Agenten</a></td><td>Agent</td><td>Milvus, Mistral AI, LlamaIndex</td></tr>
+<tr><td><a href="/docs/de/kafka-connect-milvus.md">Kafka mit Milvus verbinden</a></td><td>Daten-Quellen</td><td>Milvus, Kafka</td></tr>
+<tr><td><a href="/docs/de/kotaemon_with_milvus.md">Kotaemon RAG mit Milvus</a></td><td>RAG</td><td>Milvus, Kotaemon</td></tr>
+<tr><td><a href="/docs/de/apify_milvus_rag.md">Retrieval-erweiterte Generierung: Crawlen von Websites mit Apify und Speichern der Daten in Milvus zur Beantwortung von Fragen</a></td><td>Daten-Quellen</td><td>Milvus, Apify</td></tr>
+<tr><td><a href="/docs/de/evaluation_with_deepeval.md">Auswertung mit DeepEval</a></td><td>Auswertung &amp; Beobachtbarkeit</td><td>Milvus, DeepEval</td></tr>
+<tr><td><a href="/docs/de/evaluation_with_phoenix.md">Auswertung mit Arize Pheonix</a></td><td>Bewertung &amp; Beobachtbarkeit</td><td>Milvus, Arize Pheonix</td></tr>
+<tr><td><a href="/docs/de/dify_with_milvus.md">Einsatz von Dify mit Milvus</a></td><td>Einrichtung</td><td>Milvus, Dify</td></tr>
+<tr><td><a href="/docs/de/rag_with_langflow.md">Aufbau eines RAG-Systems unter Verwendung von Langflow mit Milvus</a></td><td>Ochestration</td><td>Milvus, Langflow</td></tr>
+<tr><td><a href="/docs/de/build_rag_on_arm.md">RAG auf der Arm-Architektur aufbauen</a></td><td>RAG</td><td>Milvus, Arm</td></tr>
+<tr><td><a href="/docs/de/build_RAG_with_milvus_and_fireworks.md">Aufbau von RAG mit Milvus und Fireworks AI</a></td><td>LLMs</td><td>Milvus, Feuerwerkskörper-KI</td></tr>
+<tr><td><a href="/docs/de/build_RAG_with_milvus_and_lepton.md">Bauen Sie eine RAG mit Milvus und Lepton AI</a></td><td>LLMs</td><td>Milvus, Lepton AI</td></tr>
+<tr><td><a href="/docs/de/build_RAG_with_milvus_and_siliconflow">Aufbau von RAG mit Milvus und SiliconFlow</a></td><td>LLMs</td><td>Milvus, SiliconFlow</td></tr>
+<tr><td><a href="/docs/de/rag_with_milvus_and_unstructured.md">Erstellen einer RAG mit Milvus und unstrukturierten</a></td><td>Datenquellen</td><td>Milvus, Unstrukturiert</td></tr>
+<tr><td><a href="/docs/de/RAG_with_pii_and_milvus.md">Aufbau einer RAG mit Milvus + PII Masker</a></td><td>Datenquellen</td><td>Milvus, PII-Masker</td></tr>
+<tr><td><a href="/docs/de/use_milvus_in_private_gpt.md">Milvus in PrivateGPT verwenden</a></td><td>Einrichtung</td><td>Vektorsuche</td></tr>
+<tr><td><a href="/docs/de/quickstart_mem0_with_milvus.md">Erste Schritte mit Mem0 und Milvus</a></td><td>Agenten</td><td>Mem0, Milvus</td></tr>
+<tr><td><a href="/docs/de/knowledge_table_with_milvus.md">Wissenstabelle mit Milvus</a></td><td>Wissenstechnik</td><td>Wissenstabelle, Milvus</td></tr>
+<tr><td><a href="/docs/de/use_milvus_in_docsgpt.md">Milvus in DocsGPT verwenden</a></td><td>Organisation</td><td>DocsGPT, Milvus</td></tr>
+<tr><td><a href="/docs/de/use_milvus_with_sambanova.md">Verwendung von Milvus mit SambaNova</a></td><td>Orchestrierung</td><td>Milvus, SambaNova</td></tr>
 </tbody>
 </table>

@@ -1,11 +1,11 @@
 ---
 id: integrate_with_cohere.md
 summary: >-
-  This page goes over how to search for the best answer to questions using
-  Milvus as the Vector Database and Hugging Face as the embedding system.
-title: Question Answering Using Milvus and Cohere
+  Auf dieser Seite wird beschrieben, wie man mit Milvus als Vektordatenbank und
+  Hugging Face als Einbettungssystem nach der besten Antwort auf Fragen sucht.
+title: Fragenbeantwortung mit Milvus und Cohere
 ---
-<h1 id="Question-Answering-Using-Milvus-and-Cohere" class="common-anchor-header">Question Answering Using Milvus and Cohere<button data-href="#Question-Answering-Using-Milvus-and-Cohere" class="anchor-icon" translate="no">
+<h1 id="Question-Answering-Using-Milvus-and-Cohere" class="common-anchor-header">Fragenbeantwortung mit Milvus und Cohere<button data-href="#Question-Answering-Using-Milvus-and-Cohere" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -20,8 +20,8 @@ title: Question Answering Using Milvus and Cohere
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>This page illustrates how to create a question-answering system based on the SQuAD dataset using Milvus as the vector database and Cohere as the embedding system.</p>
-<h2 id="Before-you-begin" class="common-anchor-header">Before you begin<button data-href="#Before-you-begin" class="anchor-icon" translate="no">
+    </button></h1><p>Diese Seite veranschaulicht, wie man ein Frage-Antwort-System auf der Grundlage des SQuAD-Datensatzes mit Milvus als Vektordatenbank und Cohere als Einbettungssystem erstellt.</p>
+<h2 id="Before-you-begin" class="common-anchor-header">Bevor Sie beginnen<button data-href="#Before-you-begin" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -36,17 +36,17 @@ title: Question Answering Using Milvus and Cohere
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Code snippets on this page require <strong>pymilvus</strong>, <strong>cohere</strong>, <strong>pandas</strong>, <strong>numpy</strong>, and <strong>tqdm</strong> installed. Among these packages, <strong>pymilvus</strong> is the client for Milvus. If not present on your system, run the following commands to install them:</p>
+    </button></h2><p>Für die Codeschnipsel auf dieser Seite müssen <strong>pymilvus</strong>, <strong>cohere</strong>, <strong>pandas</strong>, <strong>numpy</strong> und <strong>tqdm</strong> installiert sein. Unter diesen Paketen ist <strong>pymilvus</strong> der Client für Milvus. Falls sie nicht auf Ihrem System vorhanden sind, führen Sie die folgenden Befehle aus, um sie zu installieren:</p>
 <pre><code translate="no" class="language-shell">pip install pymilvus cohere pandas numpy tqdm
 <button class="copy-code-btn"></button></code></pre>
-<p>Then you need to load the modules to be used in this guide.</p>
+<p>Anschließend müssen Sie die Module laden, die in dieser Anleitung verwendet werden sollen.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> cohere
 <span class="hljs-keyword">import</span> pandas
 <span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np
 <span class="hljs-keyword">from</span> tqdm <span class="hljs-keyword">import</span> tqdm
 <span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> connections, <span class="hljs-title class_">FieldSchema</span>, <span class="hljs-title class_">CollectionSchema</span>, <span class="hljs-title class_">DataType</span>, <span class="hljs-title class_">Collection</span>, utility
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Parameters" class="common-anchor-header">Parameters<button data-href="#Parameters" class="anchor-icon" translate="no">
+<h2 id="Parameters" class="common-anchor-header">Parameter<button data-href="#Parameters" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -61,7 +61,7 @@ title: Question Answering Using Milvus and Cohere
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Here we can find the parameters used in the following snippets. Some of them need to be changed to fit your environment. Beside each is a description of what it is.</p>
+    </button></h2><p>Hier finden Sie die Parameter, die in den folgenden Schnipseln verwendet werden. Einige von ihnen müssen geändert werden, um sie an Ihre Umgebung anzupassen. Neben jedem Parameter finden Sie eine Beschreibung seiner Funktion.</p>
 <pre><code translate="no" class="language-python">FILE = <span class="hljs-string">&#x27;https://rajpurkar.github.io/SQuAD-explorer/dataset/train-v2.0.json&#x27;</span>  <span class="hljs-comment"># The SQuAD dataset url</span>
 COLLECTION_NAME = <span class="hljs-string">&#x27;question_answering_db&#x27;</span>  <span class="hljs-comment"># Collection name</span>
 DIMENSION = <span class="hljs-number">1024</span>  <span class="hljs-comment"># Embeddings size, cohere embeddings default to 4096 with the large model</span>
@@ -71,8 +71,8 @@ MILVUS_HOST = <span class="hljs-string">&#x27;localhost&#x27;</span>  <span clas
 MILVUS_PORT = <span class="hljs-string">&#x27;19530&#x27;</span>
 COHERE_API_KEY = <span class="hljs-string">&#x27;replace-this-with-the-cohere-api-key&#x27;</span>  <span class="hljs-comment"># API key obtained from Cohere</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>To know more about the model and dataset used on this page, refer to <a href="https://cohere.ai/">co:here</a> and <a href="https://rajpurkar.github.io/SQuAD-explorer/">SQuAD</a>.</p>
-<h2 id="Prepare-the-dataset" class="common-anchor-header">Prepare the dataset<button data-href="#Prepare-the-dataset" class="anchor-icon" translate="no">
+<p>Weitere Informationen über das Modell und den Datensatz, die auf dieser Seite verwendet werden, finden Sie unter <a href="https://cohere.ai/">co:here</a> und <a href="https://rajpurkar.github.io/SQuAD-explorer/">SQuAD</a>.</p>
+<h2 id="Prepare-the-dataset" class="common-anchor-header">Vorbereiten des Datensatzes<button data-href="#Prepare-the-dataset" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -87,7 +87,7 @@ COHERE_API_KEY = <span class="hljs-string">&#x27;replace-this-with-the-cohere-ap
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>In this example, we are going to use the Stanford Question Answering Dataset (SQuAD) as our truth source for answering questions. This dataset comes in the form of a JSON file and we are going to use <strong>pandas</strong> to load it in.</p>
+    </button></h2><p>In diesem Beispiel werden wir den Stanford Question Answering Dataset (SQuAD) als Wahrheitsquelle für die Beantwortung von Fragen verwenden. Dieser Datensatz liegt in Form einer JSON-Datei vor, die wir mit <strong>Pandas</strong> einlesen werden.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Download the dataset</span>
 dataset = pandas.read_json(FILE)
 
@@ -106,10 +106,10 @@ simplified_records = simplified_records.sample(n=<span class="hljs-built_in">min
 <span class="hljs-comment"># Check the length of the cleaned dataset matches count</span>
 <span class="hljs-built_in">print</span>(<span class="hljs-built_in">len</span>(simplified_records))
 <button class="copy-code-btn"></button></code></pre>
-<p>The output should be the number of records in the dataset</p>
+<p>Die Ausgabe sollte die Anzahl der Datensätze im Datensatz sein</p>
 <pre><code translate="no" class="language-shell">5000
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Create-a-collection" class="common-anchor-header">Create a collection<button data-href="#Create-a-collection" class="anchor-icon" translate="no">
+<h2 id="Create-a-collection" class="common-anchor-header">Eine Sammlung erstellen<button data-href="#Create-a-collection" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -124,7 +124,7 @@ simplified_records = simplified_records.sample(n=<span class="hljs-built_in">min
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>This section deals with Milvus and setting up the database for this use case. Within Milvus, we need to set up a collection and index it.</p>
+    </button></h2><p>Dieser Abschnitt befasst sich mit Milvus und dem Einrichten der Datenbank für diesen Anwendungsfall. In Milvus müssen wir eine Sammlung einrichten und sie indizieren.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Connect to Milvus Database</span>
 connections.connect(host=MILVUS_HOST, port=MILVUS_PORT)
 
@@ -151,7 +151,7 @@ index_params = {
 collection.create_index(field_name=<span class="hljs-string">&quot;original_question_embedding&quot;</span>, index_params=index_params)
 collection.load()
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Insert-data" class="common-anchor-header">Insert data<button data-href="#Insert-data" class="anchor-icon" translate="no">
+<h2 id="Insert-data" class="common-anchor-header">Daten einfügen<button data-href="#Insert-data" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -166,13 +166,13 @@ collection.load()
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Once we have the collection set up we need to start inserting our data. This is done in three steps</p>
+    </button></h2><p>Sobald wir die Sammlung eingerichtet haben, müssen wir mit dem Einfügen unserer Daten beginnen. Dies geschieht in drei Schritten</p>
 <ul>
-<li>reading the data,</li>
-<li>embedding the original questions, and</li>
-<li>inserting the data into the collection we’ve just created on Milvus.</li>
+<li>Einlesen der Daten,</li>
+<li>das Einbetten der Originalfragen und</li>
+<li>Einfügen der Daten in die Sammlung, die wir gerade auf Milvus erstellt haben.</li>
 </ul>
-<p>In this example, the data includes the original question, the original question’s embedding, and the answer to the original question.</p>
+<p>In diesem Beispiel enthalten die Daten die Originalfrage, die Einbettung der Originalfrage und die Antwort auf die Originalfrage.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Set up a co:here client.</span>
 cohere_client = cohere.Client(COHERE_API_KEY)
 
@@ -199,7 +199,7 @@ total = pandas.DataFrame()
 
 time.sleep(<span class="hljs-number">10</span>)
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Ask-questions" class="common-anchor-header">Ask questions<button data-href="#Ask-questions" class="anchor-icon" translate="no">
+<h2 id="Ask-questions" class="common-anchor-header">Fragen stellen<button data-href="#Ask-questions" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -214,9 +214,9 @@ time.sleep(<span class="hljs-number">10</span>)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Once all the data is inserted into the Milvus collection, we can ask the system questions by taking our question phrase, embedding it with Cohere, and searching with the collection.</p>
+    </button></h2><p>Sobald alle Daten in die Milvus-Sammlung eingefügt sind, können wir dem System Fragen stellen, indem wir unsere Fragephrase nehmen, sie mit Cohere einbetten und in der Sammlung suchen.</p>
 <div class="alert note">
-<p>Searches performed on data right after insertion might be a little slower as searching unindexed data is done in a brute-force manner. Once the new data is automatically indexed, the searches will speed up.</p>
+<p>Die Suche in den Daten direkt nach dem Einfügen kann etwas langsamer sein, da die Suche in den nicht indizierten Daten in einer Brute-Force-Methode erfolgt. Sobald die neuen Daten automatisch indiziert sind, werden die Suchvorgänge beschleunigt.</p>
 </div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Search the cluster for an answer to a question text</span>
 <span class="hljs-keyword">def</span> <span class="hljs-title function_">search</span>(<span class="hljs-params">text, top_k = <span class="hljs-number">5</span></span>):
@@ -250,7 +250,7 @@ search_questions = [<span class="hljs-string">&#x27;What kills bacteria?&#x27;</
 
 ret = [ { <span class="hljs-string">&quot;question&quot;</span>: x, <span class="hljs-string">&quot;candidates&quot;</span>: search(x) } <span class="hljs-keyword">for</span> x <span class="hljs-keyword">in</span> search_questions ]
 <button class="copy-code-btn"></button></code></pre>
-<p>The output should be similar to the following:</p>
+<p>Die Ausgabe sollte in etwa so aussehen wie die folgende:</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-comment"># Output</span>
 <span class="hljs-comment">#</span>
 <span class="hljs-comment"># [</span>

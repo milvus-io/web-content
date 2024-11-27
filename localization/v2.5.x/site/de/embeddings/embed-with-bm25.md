@@ -2,8 +2,9 @@
 id: embed-with-bm25.md
 order: 5
 summary: >-
-  BM25 is a ranking function used in information retrieval to estimate the
-  relevance of documents to a given search query.
+  BM25 ist eine Rangordnungsfunktion, die im Information Retrieval verwendet
+  wird, um die Relevanz von Dokumenten für eine bestimmte Suchanfrage
+  einzuschätzen.
 title: BM25
 ---
 <h1 id="BM25" class="common-anchor-header">BM25<button data-href="#BM25" class="anchor-icon" translate="no">
@@ -21,14 +22,14 @@ title: BM25
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p><a href="https://en.wikipedia.org/wiki/Okapi_BM25">BM25</a> is a ranking function used in information retrieval to estimate the relevance of documents to a given search query. It enhances the basic term frequency approach by incorporating document length normalization and term frequency saturation. BM25 can generate sparse embeddings by representing documents as vectors of term importance scores, allowing for efficient retrieval and ranking in sparse vector spaces.</p>
-<p>Milvus integrates with the BM25 model using the <strong>BM25EmbeddingFunction</strong> class. This class handles the computation of embeddings and returns them in a format compatible with Milvus for indexing and searching. Essential to this process is building an analyzer for tokenization.</p>
-<p>To use this feature, install the necessary dependencies:</p>
+    </button></h1><p><a href="https://en.wikipedia.org/wiki/Okapi_BM25">BM25</a> ist eine Rangordnungsfunktion, die im Information Retrieval verwendet wird, um die Relevanz von Dokumenten für eine bestimmte Suchanfrage zu schätzen. Sie erweitert den grundlegenden Begriffshäufigkeitsansatz, indem sie eine Normalisierung der Dokumentlänge und eine Sättigung der Begriffshäufigkeit einbezieht. BM25 kann spärliche Einbettungen generieren, indem es Dokumente als Vektoren von Termbedeutungswerten darstellt, was ein effizientes Retrieval und Ranking in spärlichen Vektorräumen ermöglicht.</p>
+<p>Milvus lässt sich mit dem BM25-Modell über die Klasse <strong>BM25EmbeddingFunction</strong> integrieren. Diese Klasse übernimmt die Berechnung der Einbettungen und gibt sie in einem mit Milvus kompatiblen Format für die Indizierung und Suche zurück. Wesentlich für diesen Prozess ist die Erstellung eines Analysators für die Tokenisierung.</p>
+<p>Um diese Funktion zu nutzen, installieren Sie die notwendigen Abhängigkeiten:</p>
 <pre><code translate="no" class="language-bash">pip install --upgrade pymilvus
 pip install <span class="hljs-string">&quot;pymilvus[model]&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>To easily create a tokenizer, Milvus offers a default analyzer that only requires specifying the language of the text.</p>
-<p><strong>Example</strong>:</p>
+<p>Um einen Tokenizer einfach zu erstellen, bietet Milvus einen Standard-Analysator, der nur die Angabe der Sprache des Textes erfordert.</p>
+<p><strong>Beispiel</strong>:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus.model.sparse.bm25.tokenizers <span class="hljs-keyword">import</span> build_default_analyzer
 <span class="hljs-keyword">from</span> pymilvus.model.sparse <span class="hljs-keyword">import</span> BM25EmbeddingFunction
 
@@ -45,23 +46,23 @@ corpus = [
 tokens = analyzer(corpus[<span class="hljs-number">0</span>])
 <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;tokens:&quot;</span>, tokens)
 <button class="copy-code-btn"></button></code></pre>
-<p><strong>Parameters</strong>:</p>
+<p><strong>Parameter</strong>:</p>
 <ul>
-<li><p><strong>language</strong> (<em>string</em>)</p>
-<p>The language of the text to be tokenized. Valid options are <strong>en</strong> (English), <strong>de</strong> (German), <strong>fr</strong> (French), <strong>ru</strong> (Russian), <strong>sp</strong> (Spanish), <strong>it</strong> (Italian), <strong>pt</strong> (Portuguese), <strong>zh</strong> (Chinese), <strong>jp</strong> (Japanese), <strong>kr</strong> (Korean).</p></li>
+<li><p><strong>language</strong><em>(Zeichenkette</em>)</p>
+<p>Die Sprache des Textes, der tokenisiert werden soll. Gültige Optionen sind <strong>en</strong> (Englisch), <strong>de</strong> (Deutsch), <strong>fr</strong> (Französisch), <strong>ru</strong> (Russisch), <strong>sp</strong> (Spanisch), <strong>it</strong> (Italienisch), <strong>pt</strong> (Portugiesisch), <strong>zh</strong> (Chinesisch), <strong>jp</strong> (Japanisch), <strong>kr</strong> (Koreanisch).</p></li>
 </ul>
-<p>The expected output is similar to the following:</p>
+<p>Die erwartete Ausgabe ist ähnlich wie die folgende:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-attr">tokens</span>: [<span class="hljs-string">&#x27;artifici&#x27;</span>, <span class="hljs-string">&#x27;intellig&#x27;</span>, <span class="hljs-string">&#x27;found&#x27;</span>, <span class="hljs-string">&#x27;academ&#x27;</span>, <span class="hljs-string">&#x27;disciplin&#x27;</span>, <span class="hljs-string">&#x27;1956&#x27;</span>]
 <button class="copy-code-btn"></button></code></pre>
-<p>The BM25 algorithm processes text by first breaking it into tokens using a built-in analyzer, as shown with English language tokens like <strong>‘artifici’</strong>, <strong>‘intellig’</strong>, and <strong>‘academ’</strong>. It then gathers statistics on these tokens, evaluating their frequency and distribution across documents. The core of BM25 calculates the relevance score of each token based on its importance, with rarer tokens receiving higher scores. This concise process enables effective ranking of documents by relevance to a query.</p>
-<p>To gather statistics on the corpus, use the <strong>fit()</strong> method:</p>
+<p>Der BM25-Algorithmus verarbeitet den Text, indem er ihn zunächst mit einem eingebauten Analysator in Token zerlegt, wie bei den englischen Token <strong>"artifici",</strong> <strong>"intellig"</strong> und <strong>"academ"</strong> gezeigt <strong>.</strong> Anschließend werden statistische Daten zu diesen Token gesammelt und ihre Häufigkeit und Verteilung in den Dokumenten ausgewertet. Der Kern von BM25 berechnet die Relevanzbewertung jedes Tokens auf der Grundlage seiner Wichtigkeit, wobei seltenere Tokens eine höhere Bewertung erhalten. Dieser prägnante Prozess ermöglicht eine effektive Einstufung von Dokumenten nach ihrer Relevanz für eine Suchanfrage.</p>
+<p>Um Statistiken über den Korpus zu sammeln, verwenden Sie die <strong>fit()</strong> -Methode:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Use the analyzer to instantiate the BM25EmbeddingFunction</span>
 bm25_ef = BM25EmbeddingFunction(analyzer)
 
 <span class="hljs-comment"># Fit the model on the corpus to get the statstics of the corpus</span>
 bm25_ef.fit(corpus)
 <button class="copy-code-btn"></button></code></pre>
-<p>Then, use <strong>encode_documents()</strong> to create embeddings for documents:</p>
+<p>Verwenden Sie dann <strong>encode_documents()</strong>, um Einbettungen für Dokumente zu erstellen:</p>
 <pre><code translate="no" class="language-python">docs = [
     <span class="hljs-string">&quot;The field of artificial intelligence was established as an academic subject in 1956.&quot;</span>,
     <span class="hljs-string">&quot;Alan Turing was the pioneer in conducting significant research in artificial intelligence.&quot;</span>,
@@ -78,7 +79,7 @@ docs_embeddings = bm25_ef.encode_documents(docs)
 <span class="hljs-comment"># Since the output embeddings are in a 2D csr_array format, we convert them to a list for easier manipulation.</span>
 <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Sparse dim:&quot;</span>, bm25_ef.dim, <span class="hljs-built_in">list</span>(docs_embeddings)[<span class="hljs-number">0</span>].shape)
 <button class="copy-code-btn"></button></code></pre>
-<p>The expected output is similar to the following:</p>
+<p>Die erwartete Ausgabe ist ähnlich wie die folgende:</p>
 <pre><code translate="no" class="language-python">Embeddings:   (0, 0)        1.0208816705336425
   (0, 1)        1.0208816705336425
   (0, 3)        1.0208816705336425
@@ -88,7 +89,7 @@ docs_embeddings = bm25_ef.encode_documents(docs)
   (4, 20)        0.9606986899563318
 Sparse dim: 21 (1, 21)
 <button class="copy-code-btn"></button></code></pre>
-<p>To create embeddings for queries, use the <strong>encode_queries()</strong> method:</p>
+<p>Um Einbettungen für Abfragen zu erstellen, verwenden Sie die Methode <strong>encode_queries()</strong>:</p>
 <pre><code translate="no" class="language-python">queries = [<span class="hljs-string">&quot;When was artificial intelligence founded&quot;</span>, 
            <span class="hljs-string">&quot;Where was Alan Turing born?&quot;</span>]
 
@@ -99,7 +100,7 @@ query_embeddings = bm25_ef.encode_queries(queries)
 <span class="hljs-comment"># Since the output embeddings are in a 2D csr_array format, we convert them to a list for easier manipulation.</span>
 <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Sparse dim:&quot;</span>, bm25_ef.dim, <span class="hljs-built_in">list</span>(query_embeddings)[<span class="hljs-number">0</span>].shape)
 <button class="copy-code-btn"></button></code></pre>
-<p>The expected output is similar to the following:</p>
+<p>Die erwartete Ausgabe ist ähnlich wie die folgende:</p>
 <pre><code translate="no" class="language-python">Embeddings:   (0, 0)        0.5108256237659907
   (0, 1)        0.5108256237659907
   (0, 2)        0.5108256237659907
@@ -108,5 +109,5 @@ query_embeddings = bm25_ef.encode_queries(queries)
   (1, 14)        0.5108256237659907
 Sparse dim: 21 (1, 21)
 <button class="copy-code-btn"></button></code></pre>
-<p><strong>Notes:</strong></p>
-<p>When using <strong>BM25EmbeddingFunction</strong>, note that <strong>encoding_queries()</strong> and <strong>encoding_documents()</strong> operations cannot be interchanged mathematically. Therefore, there is no implemented <strong>bm25_ef(texts)</strong> available.</p>
+<p><strong>Hinweise:</strong></p>
+<p>Bei der Verwendung von <strong>BM25EmbeddingFunction</strong> ist zu beachten, dass die Operationen <strong>encoding_queries()</strong> und <strong>encoding_documents()</strong> mathematisch nicht vertauscht werden können. Daher gibt es kein implementiertes <strong>bm25_ef(texts)</strong>.</p>

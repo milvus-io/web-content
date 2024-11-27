@@ -2,11 +2,11 @@
 id: index-vector-fields.md
 order: 1
 summary: >-
-  This guide walks you through the basic operations on creating and managing
-  indexes on vector fields in a collection.
-title: Index Vector Fields
+  Dieses Handbuch führt Sie durch die grundlegenden Vorgänge zum Erstellen und
+  Verwalten von Indizes für Vektorfelder in einer Sammlung.
+title: Vektorfelder indizieren
 ---
-<h1 id="Index-Vector-Fields" class="common-anchor-header">Index Vector Fields<button data-href="#Index-Vector-Fields" class="anchor-icon" translate="no">
+<h1 id="Index-Vector-Fields" class="common-anchor-header">Vektorfelder indizieren<button data-href="#Index-Vector-Fields" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -21,8 +21,8 @@ title: Index Vector Fields
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>This guide walks you through the basic operations on creating and managing indexes on vector fields in a collection.</p>
-<h2 id="Overview" class="common-anchor-header">Overview<button data-href="#Overview" class="anchor-icon" translate="no">
+    </button></h1><p>Dieser Leitfaden führt Sie durch die grundlegenden Vorgänge beim Erstellen und Verwalten von Indizes für Vektorfelder in einer Sammlung.</p>
+<h2 id="Overview" class="common-anchor-header">Übersicht<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -37,24 +37,21 @@ title: Index Vector Fields
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Leveraging the metadata stored in an index file, Milvus organizes your data in a specialized structure, facilitating rapid retrieval of requested information during searches or queries.</p>
-<p>Milvus provides several index types and metrics to sort field values for efficient similarity searches. The following table lists the supported index types and metrics for different vector field types. Currently, Milvus supports various types of vector data, including floating point embeddings (often known as floating point vectors or dense vectors), binary embeddings (also known as binary vectors), and sparse embeddings (also known as sparse vectors). For details, refer to <a href="/docs/index.md">In-memory Index</a> and <a href="/docs/metric.md">Similarity Metrics</a>.</p>
+    </button></h2><p>Durch die Nutzung der in einer Indexdatei gespeicherten Metadaten organisiert Milvus Ihre Daten in einer spezialisierten Struktur, die ein schnelles Auffinden der gewünschten Informationen bei Suchen oder Abfragen erleichtert.</p>
+<p>Milvus bietet verschiedene Indextypen und Metriken zum Sortieren von Feldwerten für effiziente Ähnlichkeitssuchen. In der folgenden Tabelle sind die unterstützten Indextypen und Metriken für verschiedene Vektorfeldtypen aufgeführt. Derzeit unterstützt Milvus verschiedene Arten von Vektordaten, einschließlich Fließkomma-Einbettungen (oft auch als Fließkomma-Vektoren oder dichte Vektoren bezeichnet), binäre Einbettungen (auch als binäre Vektoren bezeichnet) und spärliche Einbettungen (auch als spärliche Vektoren bezeichnet). Weitere Informationen finden Sie unter <a href="/docs/de/index.md">Index-</a> und <a href="/docs/de/metric.md">Ähnlichkeitsmetriken</a> <a href="/docs/de/index.md">im Arbeitsspeicher</a>.</p>
 <div class="filter">
-  <a href="#floating">Floating point embeddings</a>
-  <a href="#binary">Binary embeddings</a>
-  <a href="#sparse">Sparse embeddings</a>
-</div>
+ <a href="#floating">Fließkommaeinbettungen</a> <a href="#binary">Binäre Einbettungen</a> <a href="#sparse">Sparse Einbettungen</a></div>
 <div class="filter-floating table-wrapper" markdown="block">
 <table class="tg">
 <thead>
   <tr>
-    <th class="tg-0pky" style="width: 204px;">Metric Types</th>
-    <th class="tg-0pky">Index Types</th>
+    <th class="tg-0pky" style="width: 204px;">Metrische Typen</th>
+    <th class="tg-0pky">Index-Typen</th>
   </tr>
 </thead>
 <tbody>
   <tr>
-    <td class="tg-0pky"><ul><li>Euclidean distance (L2)</li><li>Inner product (IP)</li><li>Cosine similarity (COSINE)</li></td>
+    <td class="tg-0pky"><ul><li>Euklidischer Abstand (L2)</li><li>Inneres Produkt (IP)</li><li>Kosinus-Ähnlichkeit (COSINE)</li></td>
     <td class="tg-0pky" rowspan="2"><ul><li>FLAT</li><li>IVF_FLAT</li><li>IVF_SQ8</li><li>IVF_PQ</li><li>GPU_IVF_FLAT</li><li>GPU_IVF_PQ</li><li>HNSW</li><li>DISKANN</li></ul></td>
   </tr>
 </tbody>
@@ -64,8 +61,8 @@ title: Index Vector Fields
 <table class="tg">
 <thead>
   <tr>
-    <th class="tg-0pky" style="width: 204px;">Metric Types</th>
-    <th class="tg-0pky">Index Types</th>
+    <th class="tg-0pky" style="width: 204px;">Metrische Typen</th>
+    <th class="tg-0pky">Index-Typen</th>
   </tr>
 </thead>
 <tbody>
@@ -80,20 +77,20 @@ title: Index Vector Fields
 <table class="tg">
 <thead>
   <tr>
-    <th class="tg-0pky" style="width: 204px;">Metric Types</th>
-    <th class="tg-0pky">Index Types</th>
+    <th class="tg-0pky" style="width: 204px;">Metrische Typen</th>
+    <th class="tg-0pky">Index-Typen</th>
   </tr>
 </thead>
 <tbody>
   <tr>
     <td class="tg-0pky">IP</td>
-    <td class="tg-0pky"><ul><li>SPARSE_INVERTED_INDEX</li><li>SPARSE_WAND</li></ul></td>
+    <td class="tg-0pky"><ul><li>SPÄRLICHER_INVERTIERTER_INDEX</li><li>SPARSE_WAND</li></ul></td>
   </tr>
 </tbody>
 </table>
 </div>
-<p>It is recommended to create indexes for both the vector field and scalar fields that are frequently accessed.</p>
-<h2 id="Preparations" class="common-anchor-header">Preparations<button data-href="#Preparations" class="anchor-icon" translate="no">
+<p>Es wird empfohlen, Indizes sowohl für das Vektorfeld als auch für skalare Felder, auf die häufig zugegriffen wird, anzulegen.</p>
+<h2 id="Preparations" class="common-anchor-header">Vorbereitungen<button data-href="#Preparations" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -108,26 +105,23 @@ title: Index Vector Fields
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>As explained in <a href="/docs/manage-collections.md">Manage Collections</a>, Milvus automatically generates an index and loads it into memory when creating a collection if any of the following conditions are specified in the collection creation request:</p>
+    </button></h2><p>Wie in <a href="/docs/de/manage-collections.md">Sammlungen verwalten</a> erläutert, generiert Milvus beim Erstellen einer Sammlung automatisch einen Index und lädt ihn in den Speicher, wenn eine der folgenden Bedingungen in der Anforderung zur Erstellung der Sammlung angegeben ist:</p>
 <ul>
-<li><p>The dimensionality of the vector field and the metric type, or</p></li>
-<li><p>The schema and the index parameters.</p></li>
+<li><p>Die Dimensionalität des Vektorfeldes und der metrische Typ, oder</p></li>
+<li><p>das Schema und die Indexparameter.</p></li>
 </ul>
-<p>The code snippet below repurposes the existing code to establish a connection to a Milvus instance and create a collection without specifying its index parameters. In this case, the collection lacks an index and remains unloaded.</p>
+<p>Das folgende Codeschnipsel nutzt den vorhandenen Code, um eine Verbindung zu einer Milvus-Instanz herzustellen und eine Sammlung ohne Angabe der Indexparameter zu erstellen. In diesem Fall hat die Sammlung keinen Index und bleibt ungeladen.</p>
 <div class="language-python">
-<p>To prepare for indexing, use <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Client/MilvusClient.md"><code translate="no">MilvusClient</code></a> to connect to the Milvus server and set up a collection by using <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_schema.md"><code translate="no">create_schema()</code></a>, <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/CollectionSchema/add_field.md"><code translate="no">add_field()</code></a>, and <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_collection.md"><code translate="no">create_collection()</code></a>.</p>
+<p>Um die Indizierung vorzubereiten, verwenden Sie <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Client/MilvusClient.md"><code translate="no">MilvusClient</code></a> um eine Verbindung zum Milvus-Server herzustellen und eine Sammlung einzurichten, indem Sie <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_schema.md"><code translate="no">create_schema()</code></a>, <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/CollectionSchema/add_field.md"><code translate="no">add_field()</code></a>, und <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_collection.md"><code translate="no">create_collection()</code></a>.</p>
 </div>
 <div class="language-java">
-<p>To prepare for indexing, use <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Client/MilvusClientV2.md"><code translate="no">MilvusClientV2</code></a> to connect to the Milvus server and set up a collection by using <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Collections/createSchema.md"><code translate="no">createSchema()</code></a>, <a href="https://milvus.io/api-reference/java/v2.4.x/v2/CollectionSchema/addField.md"><code translate="no">addField()</code></a>, and <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Collections/createCollection.md"><code translate="no">createCollection()</code></a>.</p>
+<p>Um die Indizierung vorzubereiten, verwenden Sie <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Client/MilvusClientV2.md"><code translate="no">MilvusClientV2</code></a> um sich mit dem Milvus-Server zu verbinden und eine Sammlung einzurichten, indem Sie <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Collections/createSchema.md"><code translate="no">createSchema()</code></a>, <a href="https://milvus.io/api-reference/java/v2.4.x/v2/CollectionSchema/addField.md"><code translate="no">addField()</code></a>und <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Collections/createCollection.md"><code translate="no">createCollection()</code></a>.</p>
 </div>
 <div class="language-javascript">
-<p>To prepare for indexing, use <a href="https://milvus.io/api-reference/node/v2.4.x/Client/MilvusClient.md"><code translate="no">MilvusClient</code></a> to connect to the Milvus server and set up a collection by using <a href="https://milvus.io/api-reference/node/v2.4.x/Collections/createCollection.md"><code translate="no">createCollection()</code></a>.</p>
+<p>Um die Indizierung vorzubereiten, verwenden Sie <a href="https://milvus.io/api-reference/node/v2.4.x/Client/MilvusClient.md"><code translate="no">MilvusClient</code></a> um sich mit dem Milvus-Server zu verbinden und eine Sammlung einzurichten, indem Sie <a href="https://milvus.io/api-reference/node/v2.4.x/Collections/createCollection.md"><code translate="no">createCollection()</code></a>.</p>
 </div>
 <div class="multipleCode">
-    <a href="#python">Python </a>
-    <a href="#java">Java</a>
-    <a href="#javascript">Node.js</a>
-</div>
+   <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType
 
 <span class="hljs-comment"># 1. Set up a Milvus client</span>
@@ -214,7 +208,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 <span class="hljs-comment">// Success</span>
 <span class="hljs-comment">// </span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Index-a-Collection" class="common-anchor-header">Index a Collection<button data-href="#Index-a-Collection" class="anchor-icon" translate="no">
+<h2 id="Index-a-Collection" class="common-anchor-header">Indizieren einer Sammlung<button data-href="#Index-a-Collection" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -230,19 +224,16 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
         ></path>
       </svg>
     </button></h2><div class="language-python">
-<p>To create an index for a collection or index a collection, use <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/prepare_index_params.md"><code translate="no">prepare_index_params()</code></a> to prepare index parameters and <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/create_index.md"><code translate="no">create_index()</code></a> to create the index.</p>
+<p>Um einen Index für eine Sammlung zu erstellen oder eine Sammlung zu indizieren, verwenden Sie <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/prepare_index_params.md"><code translate="no">prepare_index_params()</code></a> um Indexparameter vorzubereiten und <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/create_index.md"><code translate="no">create_index()</code></a> um den Index zu erstellen.</p>
 </div>
 <div class="language-java">
-<p>To create an index for a collection or index a collection, use <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Management/IndexParam.md"><code translate="no">IndexParam</code></a> to prepare index parameters and <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Management/createIndex.md"><code translate="no">createIndex()</code></a> to create the index.</p>
+<p>Um einen Index für eine Sammlung zu erstellen oder eine Sammlung zu indizieren, verwenden Sie <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Management/IndexParam.md"><code translate="no">IndexParam</code></a> um Index-Parameter vorzubereiten und <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Management/createIndex.md"><code translate="no">createIndex()</code></a> um den Index zu erstellen.</p>
 </div>
 <div class="language-javascript">
-<p>To create an index for a collection or index a collection, use <a href="https://milvus.io/api-reference/node/v2.4.x/Management/createIndex.md"><code translate="no">createIndex()</code></a>.</p>
+<p>Um einen Index für eine Sammlung oder einen Index für eine Sammlung zu erstellen, verwenden Sie <a href="https://milvus.io/api-reference/node/v2.4.x/Management/createIndex.md"><code translate="no">createIndex()</code></a>.</p>
 </div>
 <div class="multipleCode">
-    <a href="#python">Python </a>
-    <a href="#java">Java</a>
-    <a href="#javascript">Node.js</a>
-</div>
+   <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># 4.1. Set up the index parameters</span>
 index_params = MilvusClient.prepare_index_params()
 
@@ -309,41 +300,41 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
   <thead>
     <tr>
       <th>Parameter</th>
-      <th>Description</th>
+      <th>Beschreibung</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <td><code translate="no">field_name</code></td>
-      <td>The name of the target file to apply this object applies.</td>
+      <td>Der Name der Zieldatei, auf die dieses Objekt angewendet wird.</td>
     </tr>
     <tr>
       <td><code translate="no">metric_type</code></td>
-      <td>The algorithm that is used to measure similarity between vectors. Possible values are <strong>IP</strong>, <strong>L2</strong>, <strong>COSINE</strong>, <strong>JACCARD</strong>, <strong>HAMMING</strong>. This is available only when the specified field is a vector field. For more information, refer to <a href="https://milvus.io/docs/index.md#Indexes-supported-in-Milvus">Indexes supported in Milvus</a>.</td>
+      <td>Der Algorithmus, der verwendet wird, um die Ähnlichkeit zwischen Vektoren zu messen. Mögliche Werte sind <strong>IP</strong>, <strong>L2</strong>, <strong>COSINE</strong>, <strong>JACCARD</strong>, <strong>HAMMING</strong>. Diese Option ist nur verfügbar, wenn das angegebene Feld ein Vektorfeld ist. Weitere Informationen finden Sie unter <a href="https://milvus.io/docs/index.md#Indexes-supported-in-Milvus">In Milvus unterstützte Indizes</a>.</td>
     </tr>
     <tr>
       <td><code translate="no">index_type</code></td>
-      <td>The name of the algorithm used to arrange data in the specific field. For applicable algorithms, refer to <a href="https://milvus.io/docs/index.md">In-memory Index</a> and <a href="https://milvus.io/docs/disk_index.md">On-disk Index</a>.</td>
+      <td>Der Name des Algorithmus, der für die Anordnung der Daten in einem bestimmten Feld verwendet wird. Die entsprechenden Algorithmen finden Sie unter <a href="https://milvus.io/docs/index.md">In-Memory-Index</a> und <a href="https://milvus.io/docs/disk_index.md">On-Disk-Index</a>.</td>
     </tr>
     <tr>
       <td><code translate="no">index_name</code></td>
-      <td>The name of the index file generated after this object has been applied.</td>
+      <td>Der Name der Indexdatei, die nach der Anwendung dieses Objekts erstellt wird.</td>
     </tr>
     <tr>
       <td><code translate="no">params</code></td>
-      <td>The fine-tuning parameters for the specified index type. For details on possible keys and value ranges, refer to <a href="https://milvus.io/docs/index.md">In-memory Index</a>.</td>
+      <td>Die Feinabstimmungsparameter für den angegebenen Indextyp. Details zu den möglichen Schlüsseln und Wertebereichen finden Sie unter <a href="https://milvus.io/docs/index.md">In-memory Index</a>.</td>
     </tr>
     <tr>
       <td><code translate="no">collection_name</code></td>
-      <td>The name of an existing collection.</td>
+      <td>Der Name einer bestehenden Sammlung.</td>
     </tr>
     <tr>
       <td><code translate="no">index_params</code></td>
-      <td>An <strong>IndexParams</strong> object containing a list of <strong>IndexParam</strong> objects.</td>
+      <td>Ein <strong>IndexParams-Objekt</strong>, das eine Liste von <strong>IndexParam-Objekten</strong> enthält.</td>
     </tr>
     <tr>
       <td><code translate="no">sync</code></td>
-      <td>Controls how the index is built in relation to the client’s request. Valid values:<br><ul><li><code translate="no">True</code> (default): The client waits until the index is fully built before it returns. This means you will not get a response until the process is complete.</li><li><code translate="no">False</code>: The client returns immediately after the request is received and the index is being built in the background. To find out if index creation has been completed, use the <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/describe_index.md">describe_index()</a> method.</li></ul></td>
+      <td>Steuert, wie der Index in Bezug auf die Anfrage des Clients aufgebaut wird. Gültige Werte:<br><ul><li><code translate="no">True</code> (Standard): Der Client wartet, bis der Index vollständig aufgebaut ist, bevor er zurückkehrt. Das bedeutet, dass Sie keine Antwort erhalten, bis der Prozess abgeschlossen ist.</li><li><code translate="no">False</code>: Der Client kehrt sofort zurück, nachdem die Anfrage eingegangen ist und der Index im Hintergrund aufgebaut wird. Um herauszufinden, ob die Indexerstellung abgeschlossen ist, verwenden Sie die Methode <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/describe_index.md">describe_index()</a>.</li></ul></td>
     </tr>
   </tbody>
 </table>
@@ -351,29 +342,29 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
   <thead>
     <tr>
       <th>Parameter</th>
-      <th>Description</th>
+      <th>Beschreibung</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <td><code translate="no">fieldName</code></td>
-      <td>The name of the target field to apply this IndexParam object applies.</td>
+      <td>Der Name des Zielfeldes, auf das dieses IndexParam-Objekt angewendet wird.</td>
     </tr>
     <tr>
       <td><code translate="no">indexName</code></td>
-      <td>The name of the index file generated after this object has been applied.</td>
+      <td>Der Name der Indexdatei, die nach Anwendung dieses Objekts erstellt wurde.</td>
     </tr>
     <tr>
       <td><code translate="no">indexType</code></td>
-      <td>The name of the algorithm used to arrange data in the specific field. For applicable algorithms, refer to <a href="https://milvus.io/docs/index.md">In-memory Index</a> and <a href="https://milvus.io/docs/disk_index.md">On-disk Index</a>.</td>
+      <td>Der Name des Algorithmus, der für die Anordnung der Daten in dem betreffenden Feld verwendet wird. Anwendbare Algorithmen finden Sie unter <a href="https://milvus.io/docs/index.md">In-memory Index</a> und <a href="https://milvus.io/docs/disk_index.md">On-disk Index</a>.</td>
     </tr>
     <tr>
       <td><code translate="no">metricType</code></td>
-      <td>The distance metric to use for the index. Possible values are <strong>IP</strong>, <strong>L2</strong>, <strong>COSINE</strong>, <strong>JACCARD</strong>, <strong>HAMMING</strong>.</td>
+      <td>Die für den Index zu verwendende Abstandsmetrik. Mögliche Werte sind <strong>IP</strong>, <strong>L2</strong>, <strong>COSINE</strong>, <strong>JACCARD</strong>, <strong>HAMMING</strong>.</td>
     </tr>
     <tr>
       <td><code translate="no">extraParams</code></td>
-      <td>Extra index parameters. For details, refer to <a href="https://milvus.io/docs/index.md">In-memory Index</a> and <a href="https://milvus.io/docs/disk_index.md">On-disk Index</a>.</td>
+      <td>Zusätzliche Index-Parameter. Einzelheiten finden Sie unter <a href="https://milvus.io/docs/index.md">In-Memory-Index</a> und <a href="https://milvus.io/docs/disk_index.md">On-Disk-Index</a>.</td>
     </tr>
   </tbody>
 </table>
@@ -381,41 +372,41 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
   <thead>
     <tr>
       <th>Parameter</th>
-      <th>Description</th>
+      <th>Beschreibung</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <td><code translate="no">collection_name</code></td>
-      <td>The name of an existing collection.</td>
+      <td>Der Name einer vorhandenen Sammlung.</td>
     </tr>
     <tr>
       <td><code translate="no">field_name</code></td>
-      <td>The name of the field in which to create an index.</td>
+      <td>Der Name des Feldes, in dem ein Index erstellt werden soll.</td>
     </tr>
     <tr>
       <td><code translate="no">index_type</code></td>
-      <td>The type of the index to create.</td>
+      <td>Der Typ des zu erstellenden Indexes.</td>
     </tr>
     <tr>
       <td><code translate="no">metric_type</code></td>
-      <td>The metric type used to measure vector distance.</td>
+      <td>Der metrische Typ, der zur Messung des Vektorabstands verwendet wird.</td>
     </tr>
     <tr>
       <td><code translate="no">index_name</code></td>
-      <td>The name of the index to create.</td>
+      <td>Der Name des zu erstellenden Indexes.</td>
     </tr>
     <tr>
       <td><code translate="no">params</code></td>
-      <td>Other index-specific parameters.</td>
+      <td>Andere indexspezifische Parameter.</td>
     </tr>
   </tbody>
 </table>
 <div class="admonition note">
-<p><strong>notes</strong></p>
-<p>Currently, you can create only one index file for each field in a collection.</p>
+<p><strong>Hinweise</strong></p>
+<p>Derzeit können Sie nur eine Indexdatei für jedes Feld in einer Sammlung erstellen.</p>
 </div>
-<h2 id="Check-Index-Details" class="common-anchor-header">Check Index Details<button data-href="#Check-Index-Details" class="anchor-icon" translate="no">
+<h2 id="Check-Index-Details" class="common-anchor-header">Indexdetails prüfen<button data-href="#Check-Index-Details" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -430,21 +421,18 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Once you have created an index, you can check its details.</p>
+    </button></h2><p>Nachdem Sie einen Index erstellt haben, können Sie seine Details überprüfen.</p>
 <div class="language-python">
-<p>To check the index details, use <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/list_indexes.md"><code translate="no">list_indexes()</code></a> to list the index names and <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/describe_index.md"><code translate="no">describe_index()</code></a> to get the index details.</p>
+<p>Um die Indexdetails zu prüfen, verwenden Sie <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/list_indexes.md"><code translate="no">list_indexes()</code></a> um die Indexnamen aufzulisten und <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/describe_index.md"><code translate="no">describe_index()</code></a> um die Indexdetails zu erhalten.</p>
 </div>
 <div class="language-java">
-<p>To check the index details, use <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Management/describeIndex.md"><code translate="no">describeIndex()</code></a> to get the index details.</p>
+<p>Um die Indexdetails zu prüfen, verwenden Sie <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Management/describeIndex.md"><code translate="no">describeIndex()</code></a> um die Indexdetails zu erhalten.</p>
 </div>
 <div class="language-javascript">
-<p>To check the index details, use <a href="https://milvus.io/api-reference/node/v2.4.x/Management/describeIndex.md"><code translate="no">describeIndex()</code></a> to get the index details.</p>
+<p>Um die Indexdetails zu prüfen, verwenden Sie <a href="https://milvus.io/api-reference/node/v2.4.x/Management/describeIndex.md"><code translate="no">describeIndex()</code></a> um die Indexdetails zu erhalten.</p>
 </div>
 <div class="multipleCode">
-    <a href="#python">Python </a>
-    <a href="#java">Java</a>
-    <a href="#javascript">Node.js</a>
-</div>
+   <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># 5. Describe index</span>
 res = client.list_indexes(
     collection_name=<span class="hljs-string">&quot;customized_setup&quot;</span>
@@ -544,8 +532,8 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 <span class="hljs-comment">// ]</span>
 <span class="hljs-comment">// </span>
 <button class="copy-code-btn"></button></code></pre>
-<p>You can check the index file created on a specific field, and collect the statistics on the number of rows indexed using this index file.</p>
-<h2 id="Drop-an-Index" class="common-anchor-header">Drop an Index<button data-href="#Drop-an-Index" class="anchor-icon" translate="no">
+<p>Sie können die Indexdatei überprüfen, die für ein bestimmtes Feld erstellt wurde, und die Statistik über die Anzahl der mit dieser Indexdatei indizierten Zeilen sammeln.</p>
+<h2 id="Drop-an-Index" class="common-anchor-header">Einen Index löschen<button data-href="#Drop-an-Index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -560,24 +548,21 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>You can simply drop an index if it is no longer needed.</p>
+    </button></h2><p>Sie können einen Index einfach löschen, wenn er nicht mehr benötigt wird.</p>
 <div class="alert note">
-<p>Before dropping an index, make sure it has been released first.</p>
+<p>Bevor Sie einen Index löschen, vergewissern Sie sich, dass er zuvor freigegeben wurde.</p>
 </div>
 <div class="language-python">
-<p>To drop an index, use <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/drop_index.md"><code translate="no">drop_index()</code></a>.</p>
+<p>Um einen Index zu löschen, verwenden Sie <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/drop_index.md"><code translate="no">drop_index()</code></a>.</p>
 </div>
 <div class="language-java">
-<p>To drop an index, use <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Management/dropIndex.md"><code translate="no">dropIndex()</code></a>.</p>
+<p>Um einen Index zu löschen, verwenden Sie <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Management/dropIndex.md"><code translate="no">dropIndex()</code></a>.</p>
 </div>
 <div class="language-javascript">
-<p>To drop an index, use <a href="https://milvus.io/api-reference/node/v2.4.x/Management/dropIndex.md"><code translate="no">dropIndex()</code></a>.</p>
+<p>Um einen Index zu löschen, verwenden Sie <a href="https://milvus.io/api-reference/node/v2.4.x/Management/dropIndex.md"><code translate="no">dropIndex()</code></a>.</p>
 </div>
 <div class="multipleCode">
-    <a href="#python">Python </a>
-    <a href="#java">Java</a>
-    <a href="#javascript">Node.js</a>
-</div>
+   <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># 6. Drop index</span>
 client.drop_index(
     collection_name=<span class="hljs-string">&quot;customized_setup&quot;</span>,
