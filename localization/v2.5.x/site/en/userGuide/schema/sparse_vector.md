@@ -518,3 +518,57 @@ sparse.<span class="hljs-title function_">put</span>(1000L, <span class="hljs-nu
 
 <button class="copy-code-btn"></button></code></pre>
 <p>For more information on similarity search parameters, refer to <a href="/docs/single-vector-search.md">​Basic ANN Search</a>.​</p>
+<h2 id="Limits" class="common-anchor-header">Limits<button data-href="#Limits" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>When using sparse vectors in Milvus, consider the following limits:</p>
+<ul>
+<li><p>Currently, only the <strong>IP</strong> distance metric is supported for sparse vectors.</p></li>
+<li><p>For sparse vector fields, only the <strong>SPARSE_INVERTED_INDEX</strong> and <strong>SPARSE_WAND</strong> index types are supported.</p></li>
+<li><p>Currently, <a href="/docs/range-search.md">range search</a>, <a href="/docs/grouping-search.md">grouping search</a>, and <a href="/docs/with-iterators.md">search iterator</a> are not supported for sparse vectors.</p></li>
+</ul>
+<h2 id="FAQ" class="common-anchor-header">FAQ<button data-href="#FAQ" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><ul>
+<li><p><strong>What distance metric is supported for sparse vectors?</strong></p>
+<p>Sparse vectors only support the Inner Product (IP) distance metric due to the high dimensionality of sparse vectors, which makes L2 distance and cosine distance impractical.</p></li>
+<li><p><strong>Can you explain the difference between SPARSE_INVERTED_INDEX and SPARSE_WAND, and how do I choose between them?</strong></p>
+<p><strong>SPARSE_INVERTED_INDEX</strong> is a traditional inverted index, while <strong>SPARSE_WAND</strong> uses the <a href="https://dl.acm.org/doi/10.1145/956863.956944">Weak-AND</a> algorithm to reduce the number of full IP distance evaluations during search. <strong>SPARSE_WAND</strong> is typically faster, but its performance can decline with increasing vector density. To choose between them, conduct experiments and benchmarks based on your specific dataset and use case.</p></li>
+<li><p><strong>How should I choose the drop_ratio_build and drop_ratio_search parameters?</strong></p>
+<p>The choice of <strong>drop_ratio_build</strong> and <strong>drop_ratio_search</strong> depends on the characteristics of your data and your requirements for search latency/throughput and accuracy.</p></li>
+<li><p><strong>What data types are supported for sparse embeddings?</strong></p>
+<p>The dimension part must be an unsigned 32-bit integer, and the value part can be a non-negative 32-bit floating-point number.</p></li>
+<li><p><strong>Can the dimension of a sparse embedding be any discrete value within the uint32 space?</strong></p>
+<p>Yes, with one exception. The dimension of a sparse embedding can be any value in the range of <code translate="no">[0, maximum of uint32)</code>. This means you cannot use the maximum value of uint32.</p></li>
+<li><p><strong>Are searches on growing segments conducted through an index or by brute force?</strong></p>
+<p>Searches on growing segments are conducted through an index of the same type as the sealed segment index. For new growing segments before the index is built, a brute force search is used.</p></li>
+<li><p><strong>Is it possible to have both sparse and dense vectors in a single collection?</strong></p>
+<p>Yes, with multiple vector type support, you can create collections with both sparse and dense vector columns and perform hybrid searches on them.</p></li>
+<li><p><strong>What are the requirements for sparse embeddings to be inserted or searched?</strong></p>
+<p>Sparse embeddings must have at least one non-zero value, and vector indices must be non-negative.</p></li>
+</ul>
