@@ -8,7 +8,7 @@ title: Consistency
 
 As a distributed vector database, Milvus offers multiple levels of consistency to ensure that each node or replica can access the same data during read and write operations. Currently, the supported levels of consistency include **Strong**, **Bounded**, **Eventually**, and **Session**, with **Bounded** being the default level of consistency used.​
 
-## Overview​{#overview​}
+## Overview​
 
 Milvus is a system that separates storage and computation. In this system, **DataNodes** are responsible for the persistence of data and ultimately store it in distributed object storage such as MinIO/S3. **QueryNodes** handle computational tasks like Search. These tasks involve processing both **batch data** and **streaming data**. Simply put, batch data can be understood as data that has already been stored in object storage while streaming data refers to data that has not yet been stored in object storage. Due to network latency, QueryNodes often do not hold the most recent streaming data. Without additional safeguards, performing Search directly on streaming data may result in the loss of many uncommitted data points, affecting the accuracy of search results.​
 
@@ -48,11 +48,11 @@ Milvus provides four types of consistency levels with different GuaranteeTs.​
 
 Milvus uses Bounded Staleness as the default consistency level. If the GuaranteeTs is left unspecified, the latest ServiceTime is used as the GuaranteeTs.​
 
-## Set Consistency Level​{#set-consistency-level​}
+## Set Consistency Level​
 
 You can set different consistency levels when you create a collection as well as perform searches and queries.​
 
-###  Set Consistency Level upon Creating Collection​{#-set-consistency-level-upon-creating-collection​}
+###  Set Consistency Level upon Creating Collection​
 
 When creating a collection, you can set the consistency level for the searches and queries within the collection. The following code example sets the consistency level to **Strong**.​
 
@@ -129,7 +129,7 @@ curl --request POST \​
 
 Possible values for the `consistency_level` parameter are `Strong`, `Bounded`, `Eventually`, and `Session`.​
 
-### Set Consistency Level in Search​{#set-consistency-level-in-search​}
+### Set Consistency Level in Search​
 
 You can always change the consistency level for a specific search. The following code example sets the consistency level back to the Bounded. The change applies only to the current search request.​
 
@@ -183,7 +183,7 @@ curl --request POST \​
 
 This parameter is also available in hybrid searches and the search iterator. Possible values for the `consistency_level` parameter are `Strong`, `Bounded`, `Eventually`, and `Session`.​
 
-### Set Consistency Level in Query​{#set-consistency-level-in-query​}
+### Set Consistency Level in Query​
 
 You can always change the consistency level for a specific search. The following code example sets the consistency level to the **Eventually**. The setting applies only to the current query request.​
 
