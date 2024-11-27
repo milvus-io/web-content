@@ -101,11 +101,11 @@ If you have only a small number of collections in your working Milvus deployment
 
     ```yaml
     {​
-    "segmentIDs": [​
+      "segmentIDs": [​
         454097953998181000,​
         454097953999383600,​
         454097953998180800​
-    ]​
+      ]​
     }​
 
     ```
@@ -263,15 +263,15 @@ If you have installed Milvus using the Milvus Operator, following the steps belo
     apiVersion: milvus.io/v1beta1​
     kind: Milvus​
     metadata:​
-    annotations:​
+      annotations:​
         milvus.io/dependency-values-merged: "true"​
         milvus.io/pod-service-label-added: "true"​
         milvus.io/querynode-current-group-id: "0"​
-    creationTimestamp: "2024-11-22T08:06:59Z"​
-    finalizers:​
-    - milvus.milvus.io/finalizer​
-    generation: 3​
-    labels:​
+      creationTimestamp: "2024-11-22T08:06:59Z"​
+      finalizers:​
+      - milvus.milvus.io/finalizer​
+      generation: 3​
+      labels:​
         app: milvus​
         milvus.io/operator-version: 1.1.2​
     name: my-release​
@@ -279,7 +279,7 @@ If you have installed Milvus using the Milvus Operator, following the steps belo
     resourceVersion: "692217324"​
     uid: 7a469ed0-9df1-494e-bd9a-340fac4305b5​
     spec:​
-    components:​
+      components:​
 
     ```
 
@@ -288,17 +288,17 @@ If you have installed Milvus using the Milvus Operator, following the steps belo
     ```yaml
     # a patch to retain etcd & storage data and delete pulsar data while delete milvus​
     spec:​
-    dependencies:​
+      dependencies:​
         etcd:​
-        inCluster:​
+          inCluster:​
             deletionPolicy: Retain​
             pvcDeletion: false​
         storage:​
-        inCluster:​
+          inCluster:​
             deletionPolicy: Retain​
             pvcDeletion: false​
         pulsar:​
-        inCluster:​
+          inCluster:​
             deletionPolicy: Delete​
             pvcDeletion: true​
 
@@ -372,12 +372,12 @@ In this step, you need to start the Pulsar V3 and Milvus pods.​ There are two 
     ```yaml
     # change the following:​
     pulsar:​
-    enabled: false # set to false​
-    # you may also clean up rest fields under pulsar field​
-    # it's ok to keep them though.​
+      enabled: false # set to false​
+      # you may also clean up rest fields under pulsar field​
+      # it's ok to keep them though.​
     pulsarv3:​
-    enabled: true​
-    # append other values for pulsar v3 chart if needs​
+      enabled: true​
+      # append other values for pulsar v3 chart if needs​
 
     ```
 
@@ -458,13 +458,13 @@ In this step, you need to start the Pulsar V3 and Milvus pods.​ There are two 
     apiVersion: milvus.io/v1beta1​
     kind: Milvus​
     metadata:​
-    annotations: null # this field should be removed or set to null​
-    resourceVersion: null # this field should be removed or set to null​
-    uid: null # this field should be removed or set to null​
+      annotations: null # this field should be removed or set to null​
+      resourceVersion: null # this field should be removed or set to null​
+      uid: null # this field should be removed or set to null​
     spec:​
-    dependencies:​
+      dependencies:​
         pulsar:​
-        inCluster:​
+          inCluster:​
             chartVersion: pulsar-v3​
             # delete all previous values for pulsar v2 and set it to null.​
             # you may add additional values here for pulsar v3 if you're sure about it.​
