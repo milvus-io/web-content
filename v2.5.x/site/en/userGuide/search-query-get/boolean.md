@@ -26,7 +26,7 @@ Suppose the example dataset is stored in a collection named "my_collection" and 
 
 </th><th data-block-token="MtPmdXPnNoarkBxR2bVcEQPlnPS" colspan="1" rowspan="1"><p data-block-token="HvxMduuTKo6cWUxUOsnc3ADEnHh"><strong>description</strong>​</p>
 
-</th></tr></thead><tbody><tr><td data-block-token="QRH0dSPAloZVXtxyQDAcFWxanBc" colspan="1" rowspan="1"></td><td data-block-token="S4vAdpxONo77XJxz5uRcjVVundg" colspan="1" rowspan="1"><p data-block-token="VfRDdF2zwoCC5hxK6PWciImQnVg">pink_8682​</p>
+</th></tr></thead><tbody><tr><td data-block-token="QRH0dSPAloZVXtxyQDAcFWxanBc" colspan="1" rowspan="1">1</td><td data-block-token="S4vAdpxONo77XJxz5uRcjVVundg" colspan="1" rowspan="1"><p data-block-token="VfRDdF2zwoCC5hxK6PWciImQnVg">pink_8682​</p>
 
 </td><td data-block-token="VkCEd7YSyovXfcxe43xcFErPn5g" colspan="1" rowspan="1"><p data-block-token="Thjyd4BtMoyQwkxkyNWcyj77nyd">[0.3580376395471989, -0.6023495712049978, ...]​</p>
 
