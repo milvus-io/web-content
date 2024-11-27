@@ -1,16 +1,17 @@
 ---
 id: string.md
-title: String Field
+title: Champ de la chaîne de caractères
 summary: >-
-  In Milvus, VARCHAR is the data type used for storing string-type data,
-  suitable for storing variable-length strings. It can store strings with both
-  single- and multi-byte characters, with a maximum length of up to 60,535
-  characters. When defining a VARCHAR field, you must also specify the maximum
-  length parameter max_length. The VARCHAR string type offers an efficient and
-  flexible way to store and manage text data, making it ideal for applications
-  that handle strings of varying lengths.​​
+  Dans Milvus, VARCHAR est le type de données utilisé pour stocker des données
+  de type chaîne, adapté au stockage de chaînes de longueur variable. Il permet
+  de stocker des chaînes de caractères à un ou plusieurs octets, avec une
+  longueur maximale de 60 535 caractères. Lorsque vous définissez un champ
+  VARCHAR, vous devez également spécifier le paramètre de longueur maximale
+  max_length. Le type de chaîne VARCHAR offre un moyen efficace et flexible de
+  stocker et de gérer des données textuelles, ce qui le rend idéal pour les
+  applications qui gèrent des chaînes de différentes longueurs.
 ---
-<h1 id="String-Field​" class="common-anchor-header">String Field​<button data-href="#String-Field​" class="anchor-icon" translate="no">
+<h1 id="String-Field​" class="common-anchor-header">Champ chaîne de caractères<button data-href="#String-Field​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -25,8 +26,8 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>In Milvus, <code translate="no">VARCHAR</code> is the data type used for storing string-type data, suitable for storing variable-length strings. It can store strings with both single- and multi-byte characters, with a maximum length of up to 60,535 characters. When defining a <code translate="no">VARCHAR</code> field, you must also specify the maximum length parameter <code translate="no">max_length</code>. The <code translate="no">VARCHAR</code> string type offers an efficient and flexible way to store and manage text data, making it ideal for applications that handle strings of varying lengths.​</p>
-<h2 id="Add-VARCHAR-field​" class="common-anchor-header">Add VARCHAR field​<button data-href="#Add-VARCHAR-field​" class="anchor-icon" translate="no">
+    </button></h1><p>Dans Milvus, <code translate="no">VARCHAR</code> est le type de données utilisé pour stocker des données de type chaîne de caractères, adaptées au stockage de chaînes de caractères de longueur variable. Il permet de stocker des chaînes de caractères à un ou plusieurs octets, avec une longueur maximale de 60 535 caractères. Lorsque vous définissez un champ <code translate="no">VARCHAR</code>, vous devez également spécifier le paramètre de longueur maximale <code translate="no">max_length</code>. Le type de chaîne <code translate="no">VARCHAR</code> offre un moyen efficace et flexible de stocker et de gérer des données textuelles, ce qui le rend idéal pour les applications qui gèrent des chaînes de différentes longueurs.</p>
+<h2 id="Add-VARCHAR-field​" class="common-anchor-header">Ajout d'un champ VARCHAR<button data-href="#Add-VARCHAR-field​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -41,17 +42,13 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>To use string data in Milvus, define a <code translate="no">VARCHAR</code> field when creating a collection. This process includes:​</p>
+    </button></h2><p>Pour utiliser des données de type chaîne dans Milvus, définissez un champ <code translate="no">VARCHAR</code> lors de la création d'une collection. Ce processus comprend les éléments suivants</p>
 <ol>
-<li><p>Setting <code translate="no">datatype</code> to the supported string data type, i.e., <code translate="no">VARCHAR</code>.​</p></li>
-<li><p>Specifying the maximum length of the string type using the <code translate="no">max_length</code> parameter, which cannot exceed 60,535 characters.​</p></li>
+<li><p>Définir <code translate="no">datatype</code> sur le type de données de chaîne pris en charge, c'est-à-dire <code translate="no">VARCHAR</code>.</p></li>
+<li><p>Spécifier la longueur maximale du type de chaîne à l'aide du paramètre <code translate="no">max_length</code>, qui ne peut pas dépasser 60 535 caractères.</p></li>
 </ol>
 <div class="multipleCode">
-    <a href="#python">Python </a>
-    <a href="#java">Java</a>
-    <a href="#javascript">Node.js</a>
-    <a href="#curl">cURL</a>
-</div>
+   <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType​
 ​
 client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)​
@@ -173,11 +170,11 @@ schema.addField(AddFieldReq.builder()​
 }&quot;</span>​
 
 <button class="copy-code-btn"></button></code></pre>
-<p>In this example, we add two <code translate="no">VARCHAR</code> fields: <code translate="no">varchar_field1</code> and <code translate="no">varchar_field2</code>, with maximum lengths set to 100 and 200 characters, respectively. It is recommended to set <code translate="no">max_length</code> based on your data characteristics to ensure it accommodates the longest data while avoiding excessive space allocation. Additionally, we have added a primary field <code translate="no">pk</code> and a vector field <code translate="no">embedding</code>.​</p>
+<p>Dans cet exemple, nous ajoutons deux champs <code translate="no">VARCHAR</code>: <code translate="no">varchar_field1</code> et <code translate="no">varchar_field2</code>, dont les longueurs maximales sont respectivement de 100 et 200 caractères. Il est recommandé de définir <code translate="no">max_length</code> en fonction des caractéristiques de vos données afin de s'assurer qu'il prend en charge les données les plus longues tout en évitant une allocation d'espace excessive. En outre, nous avons ajouté un champ primaire <code translate="no">pk</code> et un champ vectoriel <code translate="no">embedding</code>.</p>
 <div class="alert note">
-<p>The primary field and vector field are mandatory when you create a collection. The primary field uniquely identifies each entity, while the vector field is crucial for similarity search. For more details, refer to <a href="/docs/primary-field.md">​Primary Field &amp; AutoID</a>, <a href="/docs/dense-vector.md">​Dense Vector</a>, <a href="/docs/binary-vector.md">​Binary Vector</a>, or <a href="/docs/sparse_vector.md">​Sparse Vector</a>.​</p>
+<p>Le champ primaire et le champ vectoriel sont obligatoires lorsque vous créez une collection. Le champ primaire identifie chaque entité de manière unique, tandis que le champ vectoriel est essentiel pour la recherche de similarités. Pour plus de détails, reportez-vous à <a href="/docs/fr/primary-field.md">Champ primaire &amp; AutoID</a>, <a href="/docs/fr/dense-vector.md">Vecteur dense</a>, <a href="/docs/fr/binary-vector.md">Vecteur binaire</a> ou <a href="/docs/fr/sparse_vector.md">Vecteur épars</a>.</p>
 </div>
-<h2 id="Set-index-params​" class="common-anchor-header">Set index params​<button data-href="#Set-index-params​" class="anchor-icon" translate="no">
+<h2 id="Set-index-params​" class="common-anchor-header">Définir les paramètres d'index<button data-href="#Set-index-params​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -192,14 +189,10 @@ schema.addField(AddFieldReq.builder()​
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Setting index parameters for <code translate="no">VARCHAR</code> fields is optional but can significantly improve retrieval efficiency.​</p>
-<p>In the following example, we create an <code translate="no">AUTOINDEX</code> for <code translate="no">varchar_field1</code>, meaning Milvus will automatically create an appropriate index based on the data type. For more information, refer to <a href="https://milvus.io/docs/glossary.md#Auto-Index">​AUTOINDEX</a>.​</p>
+    </button></h2><p>La définition de paramètres d'index pour les champs <code translate="no">VARCHAR</code> est facultative, mais elle peut améliorer considérablement l'efficacité de la recherche.</p>
+<p>Dans l'exemple suivant, nous créons un <code translate="no">AUTOINDEX</code> pour <code translate="no">varchar_field1</code>, ce qui signifie que Milvus créera automatiquement un index approprié en fonction du type de données. Pour plus d'informations, voir <a href="https://milvus.io/docs/glossary.md#Auto-Index">AUTOINDEX</a>.</p>
 <div class="multipleCode">
-    <a href="#python">Python </a>
-    <a href="#java">Java</a>
-    <a href="#javascript">Node.js</a>
-    <a href="#curl">cURL</a>
-</div>
+   <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python">index_params = client.<span class="hljs-title function_">prepare_index_params</span>()​
 ​
 index_params.<span class="hljs-title function_">add_index</span>(​
@@ -237,14 +230,10 @@ indexes.add(IndexParam.builder()​
     ]&#x27;</span>​
 
 <button class="copy-code-btn"></button></code></pre>
-<p>In addition to <code translate="no">AUTOINDEX</code>, you can specify other scalar index types, such as <code translate="no">INVERTED</code> or <code translate="no">BITMAP</code>. For supported index types, refer to <a href="https://milvus.io/docs/scalar_index.md">​Scalar Indexes</a>.​</p>
-<p>Moreover, before creating the collection, you must create an index for the vector field. In this example, we use <code translate="no">AUTOINDEX</code> to simplify vector index settings.​</p>
+<p>Outre <code translate="no">AUTOINDEX</code>, vous pouvez spécifier d'autres types d'index scalaires, tels que <code translate="no">INVERTED</code> ou <code translate="no">BITMAP</code>. Pour connaître les types d'index pris en charge, reportez-vous à la section <a href="https://milvus.io/docs/scalar_index.md">Index scalaires</a>.</p>
+<p>En outre, avant de créer la collection, vous devez créer un index pour le champ vectoriel. Dans cet exemple, nous utilisons <code translate="no">AUTOINDEX</code> pour simplifier les paramètres de l'index vectoriel.</p>
 <div class="multipleCode">
-    <a href="#python">Python </a>
-    <a href="#java">Java</a>
-    <a href="#javascript">Node.js</a>
-    <a href="#curl">cURL</a>
-</div>
+   <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Add vector index​</span>
 index_params.add_index(​
     field_name=<span class="hljs-string">&quot;embedding&quot;</span>,​
@@ -282,7 +271,7 @@ index_params.add_index(​
     ]&#x27;</span>​
 
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Create-collection​" class="common-anchor-header">Create collection​<button data-href="#Create-collection​" class="anchor-icon" translate="no">
+<h2 id="Create-collection​" class="common-anchor-header">Créer une collection<button data-href="#Create-collection​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -297,13 +286,9 @@ index_params.add_index(​
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Once the schema and index are defined, you can create a collection that includes string fields.​</p>
+    </button></h2><p>Une fois le schéma et l'index définis, vous pouvez créer une collection comprenant des champs de type chaîne de caractères.</p>
 <div class="multipleCode">
-    <a href="#python">Python </a>
-    <a href="#java">Java</a>
-    <a href="#javascript">Node.js</a>
-    <a href="#curl">cURL</a>
-</div>
+   <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Create Collection​</span>
 client.create_collection(​
     collection_name=<span class="hljs-string">&quot;your_collection_name&quot;</span>,​
@@ -339,7 +324,7 @@ client.createCollection(requestCreate);​
 <span class="hljs-comment">## {&quot;code&quot;:0,&quot;data&quot;:{}}​</span>
 
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Insert-data​" class="common-anchor-header">Insert data​<button data-href="#Insert-data​" class="anchor-icon" translate="no">
+<h2 id="Insert-data​" class="common-anchor-header">Insérer des données<button data-href="#Insert-data​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -354,13 +339,9 @@ client.createCollection(requestCreate);​
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>After creating the collection, you can insert data that includes string fields.​</p>
+    </button></h2><p>Après avoir créé la collection, vous pouvez insérer des données comprenant des champs de type chaîne.</p>
 <div class="multipleCode">
-    <a href="#python">Python </a>
-    <a href="#java">Java</a>
-    <a href="#javascript">Node.js</a>
-    <a href="#curl">cURL</a>
-</div>
+   <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python">data = [​
     {<span class="hljs-string">&quot;varchar_field1&quot;</span>: <span class="hljs-string">&quot;Product A&quot;</span>, <span class="hljs-string">&quot;varchar_field2&quot;</span>: <span class="hljs-string">&quot;High quality product&quot;</span>, <span class="hljs-string">&quot;pk&quot;</span>: <span class="hljs-number">1</span>, <span class="hljs-string">&quot;embedding&quot;</span>: [<span class="hljs-number">0.1</span>, <span class="hljs-number">0.2</span>, <span class="hljs-number">0.3</span>]},​
     {<span class="hljs-string">&quot;varchar_field1&quot;</span>: <span class="hljs-string">&quot;Product B&quot;</span>, <span class="hljs-string">&quot;varchar_field2&quot;</span>: <span class="hljs-string">&quot;Affordable price&quot;</span>, <span class="hljs-string">&quot;pk&quot;</span>: <span class="hljs-number">2</span>, <span class="hljs-string">&quot;embedding&quot;</span>: [<span class="hljs-number">0.4</span>, <span class="hljs-number">0.5</span>, <span class="hljs-number">0.6</span>]},​
@@ -433,9 +414,9 @@ client.<span class="hljs-title function_">insert</span>({​
 <span class="hljs-comment">## {&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:{&quot;insertCount&quot;:3,&quot;insertIds&quot;:[1,2,3]}}​</span>
 
 <button class="copy-code-btn"></button></code></pre>
-<p>In this example, we insert data that includes <code translate="no">VARCHAR</code> fields (<code translate="no">varchar_field1</code> and <code translate="no">varchar_field2</code>), a primary field (<code translate="no">pk</code>), and vector representations (<code translate="no">embedding</code>). To ensure that the inserted data matches the fields defined in the schema, it is recommended to check data types in advance to avoid insertion errors.​</p>
-<p>If you set <code translate="no">enable_dynamic_fields=True</code> when defining the schema, Milvus allows you to insert string fields that were not defined in advance. However, keep in mind that this may increase the complexity of queries and management, potentially impacting performance. For more information, refer to <a href="/docs/enable-dynamic-field.md">​Dynamic Field</a>.​</p>
-<h2 id="Search-and-query​" class="common-anchor-header">Search and query​<button data-href="#Search-and-query​" class="anchor-icon" translate="no">
+<p>Dans cet exemple, nous insérons des données qui comprennent des champs <code translate="no">VARCHAR</code> (<code translate="no">varchar_field1</code> et <code translate="no">varchar_field2</code>), un champ primaire (<code translate="no">pk</code>) et des représentations vectorielles (<code translate="no">embedding</code>). Pour s'assurer que les données insérées correspondent aux champs définis dans le schéma, il est recommandé de vérifier les types de données à l'avance afin d'éviter les erreurs d'insertion.</p>
+<p>Si vous avez défini <code translate="no">enable_dynamic_fields=True</code> lors de la définition du schéma, Milvus vous permet d'insérer des champs de type chaîne qui n'ont pas été définis à l'avance. Cependant, n'oubliez pas que cela peut augmenter la complexité des requêtes et de la gestion, ce qui peut avoir un impact sur les performances. Pour plus d'informations, voir <a href="/docs/fr/enable-dynamic-field.md">Champ dynamique</a>.</p>
+<h2 id="Search-and-query​" class="common-anchor-header">Recherche et interrogation<button data-href="#Search-and-query​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -450,14 +431,10 @@ client.<span class="hljs-title function_">insert</span>({​
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>After adding string fields, you can use them for filtering in search and query operations, achieving more precise search results.​</p>
-<h3 id="Filter-queries​" class="common-anchor-header">Filter queries​</h3><p>After adding string fields, you can filter results using these fields in queries. For example, you can query all entities where <code translate="no">varchar_field1</code> equals <code translate="no">&quot;Product A&quot;</code>:​</p>
+    </button></h2><p>Après avoir ajouté des champs de type chaîne, vous pouvez les utiliser pour le filtrage dans les opérations de recherche et de requête, afin d'obtenir des résultats de recherche plus précis.</p>
+<h3 id="Filter-queries​" class="common-anchor-header">Filtrer les requêtes</h3><p>Après avoir ajouté des champs de type chaîne, vous pouvez filtrer les résultats à l'aide de ces champs dans les requêtes. Par exemple, vous pouvez interroger toutes les entités pour lesquelles <code translate="no">varchar_field1</code> est égal à <code translate="no">&quot;Product A&quot;</code>.</p>
 <div class="multipleCode">
-    <a href="#python">Python </a>
-    <a href="#java">Java</a>
-    <a href="#javascript">Node.js</a>
-    <a href="#curl">cURL</a>
-</div>
+   <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;varchar_field1 == &quot;Product A&quot;&#x27;</span>​
 ​
 res = client.query(​
@@ -508,14 +485,10 @@ System.out.println(resp.getQueryResults());​
 <span class="hljs-comment">## {&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:[{&quot;pk&quot;:1,&quot;varchar_field1&quot;:&quot;Product A&quot;,&quot;varchar_field2&quot;:&quot;High quality product&quot;}]}​</span>
 
 <button class="copy-code-btn"></button></code></pre>
-<p>This query expression returns all matching entities and outputs their <code translate="no">varchar_field1</code> and <code translate="no">varchar_field2</code> fields. For more information on filter queries, refer to <a href="/docs/boolean.md">​Metadata Filtering</a>.​</p>
-<h3 id="Vector-search-with-string-filtering​" class="common-anchor-header">Vector search with string filtering​</h3><p>In addition to basic scalar field filtering, you can combine vector similarity searches with scalar field filters. For example, the following code shows how to add a scalar field filter to a vector search:​</p>
+<p>Cette expression de requête renvoie toutes les entités correspondantes et affiche les champs <code translate="no">varchar_field1</code> et <code translate="no">varchar_field2</code>. Pour plus d'informations sur les requêtes de filtrage, reportez-vous à la section <a href="/docs/fr/boolean.md">Filtrage des métadonnées</a>.</p>
+<h3 id="Vector-search-with-string-filtering​" class="common-anchor-header">Recherche vectorielle avec filtrage de chaînes</h3><p>Outre le filtrage de base des champs scalaires, vous pouvez combiner des recherches de similarité vectorielle avec des filtres de champs scalaires. Par exemple, le code suivant montre comment ajouter un filtre de champ scalaire à une recherche vectorielle.</p>
 <div class="multipleCode">
-    <a href="#python">Python </a>
-    <a href="#java">Java</a>
-    <a href="#javascript">Node.js</a>
-    <a href="#curl">cURL</a>
-</div>
+   <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;varchar_field1 == &quot;Product A&quot;&#x27;</span>​
 ​
 res = client.search(​
@@ -585,4 +558,4 @@ System.out.println(resp.getSearchResults());​
 <span class="hljs-comment">## {&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:[{&quot;distance&quot;:-0.2364331,&quot;id&quot;:1,&quot;varchar_field1&quot;:&quot;Product A&quot;,&quot;varchar_field2&quot;:&quot;High quality product&quot;}]}​</span>
 
 <button class="copy-code-btn"></button></code></pre>
-<p>In this example, we first define a query vector and add a filter condition <code translate="no">varchar_field1 == &quot;Product A&quot;</code> during the search. This ensures that the search results are not only similar to the query vector but also match the specified string filter condition. For more information, refer to <a href="/docs/boolean.md">​Metadata Filtering</a>.​</p>
+<p>Dans cet exemple, nous définissons d'abord un vecteur de requête et ajoutons une condition de filtre <code translate="no">varchar_field1 == &quot;Product A&quot;</code> pendant la recherche. Cela permet de s'assurer que les résultats de la recherche ne sont pas seulement similaires au vecteur de requête, mais qu'ils correspondent également à la condition de filtrage de la chaîne spécifiée. Pour plus d'informations, voir <a href="/docs/fr/boolean.md">Filtrage des métadonnées</a>.</p>

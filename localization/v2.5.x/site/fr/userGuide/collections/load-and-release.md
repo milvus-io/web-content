@@ -1,8 +1,8 @@
 ---
 id: load-and-release.md
-title: Load & Release
+title: Chargement et libération
 ---
-<h1 id="Load--Release​" class="common-anchor-header">Load &amp; Release​<button data-href="#Load--Release​" class="anchor-icon" translate="no">
+<h1 id="Load--Release​" class="common-anchor-header">Charger et libérer<button data-href="#Load--Release​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -17,8 +17,8 @@ title: Load & Release
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Loading a collection is the prerequisite to conducting similarity searches and queries in collections. This page focuses on the procedures for loading and releasing a collection.​</p>
-<h2 id="Load-Collection​" class="common-anchor-header">Load Collection​<button data-href="#Load-Collection​" class="anchor-icon" translate="no">
+    </button></h1><p>Le chargement d'une collection est la condition préalable à l'exécution de recherches de similarités et de requêtes dans les collections. Cette page se concentre sur les procédures de chargement et de libération d'une collection.</p>
+<h2 id="Load-Collection​" class="common-anchor-header">Chargement d'une collection<button data-href="#Load-Collection​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -33,15 +33,10 @@ title: Load & Release
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>When you load a collection, Milvus loads the index files and the raw data of all fields into memory for rapid response to searches and queries. Entities inserted after a collection load are automatically indexed and loaded.​</p>
-<p>The following code snippets demonstrate how to load a collection.​</p>
+    </button></h2><p>Lorsque vous chargez une collection, Milvus charge les fichiers d'index et les données brutes de tous les champs dans la mémoire pour répondre rapidement aux recherches et aux requêtes. Les entités insérées après le chargement d'une collection sont automatiquement indexées et chargées.</p>
+<p>Les extraits de code suivants montrent comment charger une collection.</p>
 <div class="multipleCode">
-  <a href="#python">Python </a>
-  <a href="#java">Java</a>
-  <a href="#javascript">Node.js</a>
-  <a href="#go">Go</a>
-  <a href="#curl">cURL</a>
-</div>
+ <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#go">Go</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient​
 ​
 client = MilvusClient(​
@@ -188,7 +183,7 @@ curl --request POST \​
 <span class="hljs-comment"># }​</span>
 
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Load-Specific-Fields​" class="common-anchor-header">Load Specific Fields​<button data-href="#Load-Specific-Fields​" class="anchor-icon" translate="no">
+<h2 id="Load-Specific-Fields​" class="common-anchor-header">Chargement de champs spécifiques<button data-href="#Load-Specific-Fields​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -203,15 +198,10 @@ curl --request POST \​
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus can load only the fields involved in searches and queries, reducing memory usage and improving search performance.​</p>
-<p>The following code snippet assumes that you have created a collection named <strong>customized_setup_2</strong>, and there are two fields named <strong>my_id</strong> and <strong>my_vector</strong> in the collection.​</p>
+    </button></h2><p>Milvus peut charger uniquement les champs impliqués dans les recherches et les requêtes, ce qui réduit l'utilisation de la mémoire et améliore les performances de recherche.</p>
+<p>L'extrait de code suivant suppose que vous avez créé une collection nommée <strong>customized_setup_2</strong>, et qu'il y a deux champs nommés <strong>my_id</strong> et <strong>my_vector</strong> dans la collection.</p>
 <div class="multipleCode">
-  <a href="#python">Python </a>
-  <a href="#java">Java</a>
-  <a href="#javascript">Node.js</a>
-  <a href="#go">Go</a>
-  <a href="#curl">cURL</a>
-</div>
+ <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#go">Go</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python">client.load_collection(​
     collection_name=<span class="hljs-string">&quot;customized_setup_1&quot;</span>,​
     <span class="hljs-comment"># highlight-next-line​</span>
@@ -289,10 +279,10 @@ err = loadTask.Await(ctx)​
 <pre><code translate="no" class="language-curl"><span class="hljs-comment"># REST 缺失​</span>
 
 <button class="copy-code-btn"></button></code></pre>
-<p>If you choose to load specific fields, it is worth noting that only the fields included in <code translate="no">load_fields</code> can be used as filters and output fields in searches and queries. You should always include the names of the primary field and at least one vector field in <code translate="no">load_fields</code>.​</p>
-<p>You can also use <code translate="no">skip_load_dynamic_field</code> to determine whether to load the dynamic field. The dynamic field is a reserved JSON field named <strong>$meta</strong> and saves all non-schema-defined fields and their values in key-value pairs. When loading the dynamic field, all keys in the fields are loaded and available for filtering and output. If all keys in the dynamic field are not involved in metadata filtering and output, set <code translate="no">skip_load_dynamic_field</code> to <code translate="no">True</code>.​</p>
-<p>To load more fields after the collection load, you need to release the collection first to avoid possible errors prompted because of index changes.​</p>
-<h2 id="Release-Collection​" class="common-anchor-header">Release Collection​<button data-href="#Release-Collection​" class="anchor-icon" translate="no">
+<p>Si vous choisissez de charger des champs spécifiques, il convient de noter que seuls les champs inclus dans <code translate="no">load_fields</code> peuvent être utilisés comme filtres et champs de sortie dans les recherches et les requêtes. Vous devez toujours inclure les noms du champ primaire et d'au moins un champ vectoriel dans <code translate="no">load_fields</code>.</p>
+<p>Vous pouvez également utiliser <code translate="no">skip_load_dynamic_field</code> pour déterminer s'il faut charger le champ dynamique. Le champ dynamique est un champ JSON réservé nommé <strong>$meta</strong> qui enregistre tous les champs non définis par le schéma et leurs valeurs dans des paires clé-valeur. Lors du chargement du champ dynamique, toutes les clés des champs sont chargées et disponibles pour le filtrage et la sortie. Si toutes les clés du champ dynamique ne sont pas impliquées dans le filtrage et l'édition des métadonnées, définissez <code translate="no">skip_load_dynamic_field</code> sur <code translate="no">True</code>.</p>
+<p>Pour charger d'autres champs après le chargement de la collection, vous devez d'abord libérer la collection afin d'éviter d'éventuelles erreurs dues à des changements d'index.</p>
+<h2 id="Release-Collection​" class="common-anchor-header">Libération de la collection<button data-href="#Release-Collection​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -307,15 +297,10 @@ err = loadTask.Await(ctx)​
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Searches and queries are memory-intensive operations. To save the cost, you are advised to release the collections that are currently not in use.​</p>
-<p>The following code snippet demonstrates how to release a collection.​</p>
+    </button></h2><p>Les recherches et les requêtes sont des opérations gourmandes en mémoire. Pour réduire les coûts, il est conseillé de libérer les collections qui ne sont pas utilisées.</p>
+<p>L'extrait de code suivant montre comment libérer une collection.</p>
 <div class="multipleCode">
-  <a href="#python">Python </a>
-  <a href="#java">Java</a>
-  <a href="#javascript">Node.js</a>
-  <a href="#go">Go</a>
-  <a href="#curl">cURL</a>
-</div>
+ <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#go">Go</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># 8. Release the collection​</span>
 client.release_collection(​
     collection_name=<span class="hljs-string">&quot;custom_quick_setup&quot;</span>​

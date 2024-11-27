@@ -1,8 +1,8 @@
 ---
 id: create-collection-instantly.md
-title: Create Collection​ Instantly​
+title: Créer une collection instantanément
 ---
-<h1 id="Create-Collection-Instantly​" class="common-anchor-header">Create Collection Instantly​<button data-href="#Create-Collection-Instantly​" class="anchor-icon" translate="no">
+<h1 id="Create-Collection-Instantly​" class="common-anchor-header">Création instantanée d'une collection<button data-href="#Create-Collection-Instantly​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -17,8 +17,8 @@ title: Create Collection​ Instantly​
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>You can create a collection instantly by setting its name and the vector field dimensionality. Milvus automatically indexes the vector field and loads the collection upon creation. This page demonstrates how to create a collection instantly with default settings.​</p>
-<h2 id="Overview​" class="common-anchor-header">Overview​<button data-href="#Overview​" class="anchor-icon" translate="no">
+    </button></h1><p>Vous pouvez créer une collection instantanément en définissant son nom et la dimensionnalité du champ vectoriel. Milvus indexe automatiquement le champ vectoriel et charge la collection lors de sa création. Cette page montre comment créer une collection instantanément avec les paramètres par défaut.</p>
+<h2 id="Overview​" class="common-anchor-header">Vue d'ensemble<button data-href="#Overview​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -33,21 +33,21 @@ title: Create Collection​ Instantly​
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>A collection is a two-dimensional table with fixed columns and variant rows. Each column represents a field, and each row represents an entity. A schema is required to implement such structural data management. Every entity to insert has to meet the constraints defined in the schema.​</p>
-<p>AIGC applications usually use vector databases as a knowledge base to manage the data generated during the interaction between users and Large Language Models (LLMs). Such knowledge bases are almost similar. To accelerate the use of Milvus clusters in such scenarios, an instant method is available for you to create a collection with only two parameters, namely the collection name and the vector field dimensionality.​</p>
-<p>When you create a collection instantly with default settings, the following settings apply:​</p>
+    </button></h2><p>Une collection est un tableau bidimensionnel avec des colonnes fixes et des lignes variantes. Chaque colonne représente un champ et chaque ligne une entité. Un schéma est nécessaire pour mettre en œuvre une telle gestion structurelle des données. Chaque entité à insérer doit répondre aux contraintes définies dans le schéma.</p>
+<p>Les applications AIGC utilisent généralement des bases de données vectorielles comme base de connaissances pour gérer les données générées lors de l'interaction entre les utilisateurs et les grands modèles linguistiques (LLM). Ces bases de connaissances sont presque similaires. Pour accélérer l'utilisation des clusters Milvus dans de tels scénarios, une méthode instantanée est disponible pour créer une collection avec seulement deux paramètres, à savoir le nom de la collection et la dimensionnalité du champ vectoriel.</p>
+<p>Lorsque vous créez une collection instantanément avec les paramètres par défaut, les paramètres suivants s'appliquent.</p>
 <ul>
-<li><p>The primary and vector fields are added to the schema (<strong>id</strong> and <strong>vector</strong>).​</p></li>
-<li><p>The primary field accepts integers and disables <strong>AutoId</strong>.​</p></li>
-<li><p>The vector field accepts floating vector embeddings.​</p></li>
-<li><p><strong>AUTOINDEX</strong> is used to create an index on the vector field.​</p></li>
-<li><p><strong>COSINE</strong> is used to measure similarities between vector embeddings.​</p></li>
-<li><p>The reserves dynamic field named <strong>$meta</strong> is enabled to save non-schema-defined fields and their values in key-value pairs.​</p></li>
-<li><p>The collection is automatically loaded upon creation.​</p></li>
+<li><p>Les champs primaire et vectoriel sont ajoutés au schéma<strong>(id</strong> et <strong>vector</strong>).</p></li>
+<li><p>Le champ primaire accepte les entiers et désactive <strong>AutoId</strong>.</p></li>
+<li><p>Le champ vectoriel accepte les intégrations de vecteurs flottants.</p></li>
+<li><p><strong>AUTOINDEX</strong> est utilisé pour créer un index sur le champ vectoriel.</p></li>
+<li><p><strong>COSINE</strong> est utilisé pour mesurer les similitudes entre les intégrations vectorielles.</p></li>
+<li><p>Le champ dynamique de réserves nommé <strong>$meta</strong> est activé pour enregistrer des champs non définis par le schéma et leurs valeurs dans des paires clé-valeur.</p></li>
+<li><p>La collection est automatiquement chargée lors de la création.</p></li>
 </ul>
-<p>For details on the terminologies above, refer to <a href="/docs/manage-collections.md">​Collection Explained</a>. ​</p>
-<p>It is worth noting that creating a collection instantly with default settings does not fit all scenarios. You are advised to familiarize yourself with the <a href="/docs/create-collection.md">common collection creation procedure</a> so that you can gain a better understanding of Milvus’s capabilities.​</p>
-<h2 id="Quick-Setup​" class="common-anchor-header">Quick Setup​<button data-href="#Quick-Setup​" class="anchor-icon" translate="no">
+<p>Pour plus de détails sur les terminologies ci-dessus, voir <a href="/docs/fr/manage-collections.md">Collection Explained</a>. </p>
+<p>Il convient de noter que la création instantanée d'une collection avec les paramètres par défaut ne convient pas à tous les scénarios. Il est conseillé de se familiariser avec la <a href="/docs/fr/create-collection.md">procédure courante de création de collection</a> afin de mieux comprendre les capacités de Milvus.</p>
+<h2 id="Quick-Setup​" class="common-anchor-header">Configuration rapide<button data-href="#Quick-Setup​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -62,14 +62,9 @@ title: Create Collection​ Instantly​
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>In this manner, you can create a collection instantly with only the collection name and the vector field dimensionality.​</p>
+    </button></h2><p>De cette manière, vous pouvez créer une collection instantanément avec seulement le nom de la collection et la dimensionnalité du champ vectoriel.</p>
 <div class="multipleCode">
-  <a href="#python">Python </a>
-  <a href="#java">Java</a>
-  <a href="#javascript">Node.js</a>
-  <a href="#go">Go</a>
-  <a href="#curl">cURL</a>
-</div>
+ <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#go">Go</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType​
 ​
 CLUSTER_ENDPOINT = <span class="hljs-string">&quot;http://localhost:19530&quot;</span>​
@@ -188,7 +183,7 @@ curl --request POST \​
 <span class="hljs-comment"># }​</span>
 
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Quick-Setup-with-Custom-Fields​" class="common-anchor-header">Quick Setup with Custom Fields​<button data-href="#Quick-Setup-with-Custom-Fields​" class="anchor-icon" translate="no">
+<h2 id="Quick-Setup-with-Custom-Fields​" class="common-anchor-header">Configuration rapide avec des champs personnalisés<button data-href="#Quick-Setup-with-Custom-Fields​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -203,14 +198,9 @@ curl --request POST \​
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>If the default metric type, field names, and data types does not meet your need, you can tune these settings as follows.​</p>
+    </button></h2><p>Si le type de métrique, les noms de champs et les types de données par défaut ne répondent pas à vos besoins, vous pouvez ajuster ces paramètres comme suit.</p>
 <div class="multipleCode">
-  <a href="#python">Python </a>
-  <a href="#java">Java</a>
-  <a href="#javascript">Node.js</a>
-  <a href="#go">Go</a>
-  <a href="#curl">cURL</a>
-</div>
+ <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#go">Go</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType​
 ​
 CLUSTER_ENDPOINT = <span class="hljs-string">&quot;http://localhost:19530&quot;</span>​
@@ -348,4 +338,4 @@ curl --request POST \​
 }&#x27;</span>​
 
 <button class="copy-code-btn"></button></code></pre>
-<p>If the collections created using the above two manners still cannot meet your needs, consider following the procedure in <a href="/docs/create-collection.md">​Create Collection</a>.​</p>
+<p>Si les collections créées à l'aide des deux méthodes ci-dessus ne répondent toujours pas à vos besoins, envisagez de suivre la procédure de <a href="/docs/fr/create-collection.md">création d'une collection</a>.</p>

@@ -1,9 +1,9 @@
 ---
 id: multimodal_rag_with_milvus.md
-summary: Multimodal RAG with Milvus
-title: Multimodal RAG with Milvus
+summary: RAG multimodal avec Milvus
+title: RAG multimodal avec Milvus
 ---
-<h1 id="Multimodal-RAG-with-Milvus" class="common-anchor-header">Multimodal RAG with Milvus<button data-href="#Multimodal-RAG-with-Milvus" class="anchor-icon" translate="no">
+<h1 id="Multimodal-RAG-with-Milvus" class="common-anchor-header">RAG multimodal avec Milvus<button data-href="#Multimodal-RAG-with-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -22,8 +22,8 @@ title: Multimodal RAG with Milvus
 <a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/quickstart/multimodal_rag_with_milvus.ipynb" target="_blank"><img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/></a></p>
 <p><img translate="no" src="https://raw.githubusercontent.com/milvus-io/bootcamp/master/bootcamp/tutorials/quickstart/apps/multimodal_rag_with_milvus/pics/step3.jpg
 "/></p>
-<p>This tutorial showcases the multimodal RAG powered by Milvus, <a href="https://github.com/FlagOpen/FlagEmbedding/tree/master/FlagEmbedding/visual">Visualized BGE model</a>, and <a href="https://openai.com/index/hello-gpt-4o/">GPT-4o</a>. With this system, users are able to upload an image and edit text instructions, which are processed by BGE’s composed retrieval model to search for candidate images. GPT-4o then acts as a reranker, selecting the most suitable image and providing the rationale behind the choice. This powerful combination enables a seamless and intuitive image search experience, leveraging Milvus for efficient retrieval, BGE model for precise image processing and matching, and GPT-4o for advanced reranking.</p>
-<h2 id="Preparation" class="common-anchor-header">Preparation<button data-href="#Preparation" class="anchor-icon" translate="no">
+<p>Ce tutoriel présente le RAG multimodal alimenté par Milvus, le <a href="https://github.com/FlagOpen/FlagEmbedding/tree/master/FlagEmbedding/visual">modèle BGE visualisé</a> et <a href="https://openai.com/index/hello-gpt-4o/">GPT-4o</a>. Avec ce système, les utilisateurs peuvent télécharger une image et éditer des instructions textuelles, qui sont traitées par le modèle de recherche composé de BGE pour rechercher des images candidates. GPT-4o joue ensuite le rôle d'un re-ranker, en sélectionnant l'image la plus appropriée et en expliquant les raisons de son choix. Cette puissante combinaison permet une expérience de recherche d'images transparente et intuitive, en tirant parti de Milvus pour une recherche efficace, du modèle BGE pour un traitement et une mise en correspondance précis des images, et de GPT-4o pour un reranking avancé.</p>
+<h2 id="Preparation" class="common-anchor-header">Préparation<button data-href="#Preparation" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -38,27 +38,27 @@ title: Multimodal RAG with Milvus
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Install-Dependencies" class="common-anchor-header">Install Dependencies</h3><pre><code translate="no" class="language-shell">$ pip install --upgrade pymilvus openai datasets opencv-python timm einops ftfy peft tqdm
+    </button></h2><h3 id="Install-Dependencies" class="common-anchor-header">Installer les dépendances</h3><pre><code translate="no" class="language-shell">$ pip install --upgrade pymilvus openai datasets opencv-python timm einops ftfy peft tqdm
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-shell">$ git <span class="hljs-built_in">clone</span> https://github.com/FlagOpen/FlagEmbedding.git
 $ pip install -e FlagEmbedding
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>If you are using Google Colab, to enable dependencies just installed, you may need to <strong>restart the runtime</strong> (click on the “Runtime” menu at the top of the screen, and select “Restart session” from the dropdown menu).</p>
+<p>Si vous utilisez Google Colab, pour activer les dépendances qui viennent d'être installées, vous devrez peut-être <strong>redémarrer le runtime</strong> (cliquez sur le menu "Runtime" en haut de l'écran, et sélectionnez "Restart session" (Redémarrer la session) dans le menu déroulant).</p>
 </div>
-<h3 id="Download-Data" class="common-anchor-header">Download Data</h3><p>The following command will download the example data and extract to a local folder “./images_folder” including:</p>
+<h3 id="Download-Data" class="common-anchor-header">Télécharger les données</h3><p>La commande suivante permet de télécharger les données de l'exemple et de les extraire dans un dossier local "./images_folder" :</p>
 <ul>
-<li><p><strong>images</strong>: A subset of <a href="https://github.com/hyp1231/AmazonReviews2023">Amazon Reviews 2023</a> containing approximately 900 images from the categories &quot;Appliance&quot;, &quot;Cell_Phones_and_Accessories&quot;, and &quot;Electronics&quot;.</p></li>
-<li><p><strong>leopard.jpg</strong>: An example query image.</p></li>
+<li><p><strong>images</strong>: Un sous-ensemble d'<a href="https://github.com/hyp1231/AmazonReviews2023">Amazon Reviews 2023</a> contenant environ 900 images des catégories &quot;Appliance&quot;, &quot;Cell_Phones_and_Accessories&quot;, et &quot;Electronics&quot;.</p></li>
+<li><p><strong>leopard.jpg</strong>: Un exemple d'image de requête.</p></li>
 </ul>
 <pre><code translate="no" class="language-shell">$ wget <span class="hljs-attr">https</span>:<span class="hljs-comment">//github.com/milvus-io/bootcamp/releases/download/data/amazon_reviews_2023_subset.tar.gz</span>
 $ tar -xzf amazon_reviews_2023_subset.<span class="hljs-property">tar</span>.<span class="hljs-property">gz</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Load-Embedding-Model" class="common-anchor-header">Load Embedding Model</h3><p>We will use the Visualized BGE model “bge-visualized-base-en-v1.5” to generate embeddings for both images and text.</p>
-<p><strong>1. Download weight</strong></p>
+<h3 id="Load-Embedding-Model" class="common-anchor-header">Modèle d'intégration des charges</h3><p>Nous utiliserons le modèle Visualized BGE "bge-visualized-base-en-v1.5" pour générer des embeddings pour les images et le texte.</p>
+<p><strong>1. Télécharger le poids</strong></p>
 <pre><code translate="no" class="language-shell">$ wget https://huggingface.co/BAAI/bge-visualized/resolve/main/Visualized_base_en_v1.5.pth
 <button class="copy-code-btn"></button></code></pre>
-<p><strong>2. Build encoder</strong></p>
+<p><strong>2. Construire l'encodeur</strong></p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> torch
 <span class="hljs-keyword">from</span> FlagEmbedding.visual.modeling <span class="hljs-keyword">import</span> Visualized_BGE
 
@@ -83,7 +83,7 @@ model_name = <span class="hljs-string">&quot;BAAI/bge-base-en-v1.5&quot;</span>
 model_path = <span class="hljs-string">&quot;./Visualized_base_en_v1.5.pth&quot;</span>  <span class="hljs-comment"># Change to your own value if using a different model path</span>
 encoder = Encoder(model_name, model_path)
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Load-Data" class="common-anchor-header">Load Data<button data-href="#Load-Data" class="anchor-icon" translate="no">
+<h2 id="Load-Data" class="common-anchor-header">Chargement des données<button data-href="#Load-Data" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -98,8 +98,8 @@ encoder = Encoder(model_name, model_path)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>This section will load example images into the database with corresponding embeddings.</p>
-<h3 id="Generate-embeddings" class="common-anchor-header">Generate embeddings</h3><p>Load all jpeg images from the data directory and apply the encoder to convert images to embeddings.</p>
+    </button></h2><p>Cette section chargera des images d'exemple dans la base de données avec les embeddings correspondants.</p>
+<h3 id="Generate-embeddings" class="common-anchor-header">Générer des embeddings</h3><p>Charger toutes les images jpeg du répertoire de données et appliquer l'encodeur pour convertir les images en embeddings.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> os
 <span class="hljs-keyword">from</span> tqdm <span class="hljs-keyword">import</span> tqdm
 <span class="hljs-keyword">from</span> glob <span class="hljs-keyword">import</span> glob
@@ -125,13 +125,13 @@ image_dict = {}
 
 Number of encoded images: 900
 </code></pre>
-<h3 id="Insert-into-Milvus" class="common-anchor-header">Insert into Milvus</h3><p>Insert images with corresponding paths and embeddings into Milvus collection.</p>
+<h3 id="Insert-into-Milvus" class="common-anchor-header">Insérer dans Milvus</h3><p>Insérer dans la collection Milvus les images avec les chemins d'accès correspondants et les embeddings.</p>
 <div class="alert note">
-<p>As for the argument of <code translate="no">MilvusClient</code>:</p>
+<p>Comme pour l'argument de <code translate="no">MilvusClient</code>:</p>
 <ul>
-<li>Setting the <code translate="no">uri</code> as a local file, e.g. <code translate="no">./milvus_demo.db</code>, is the most convenient method, as it automatically utilizes <a href="https://milvus.io/docs/milvus_lite.md">Milvus Lite</a> to store all data in this file.</li>
-<li>If you have large scale of data, you can set up a more performant Milvus server on <a href="https://milvus.io/docs/quickstart.md">docker or kubernetes</a>. In this setup, please use the server uri, e.g.<code translate="no">http://localhost:19530</code>, as your <code translate="no">uri</code>.</li>
-<li>If you want to use <a href="https://zilliz.com/cloud">Zilliz Cloud</a>, the fully managed cloud service for Milvus, adjust the <code translate="no">uri</code> and <code translate="no">token</code>, which correspond to the <a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">Public Endpoint and Api key</a> in Zilliz Cloud.</li>
+<li>Définir <code translate="no">uri</code> comme un fichier local, par exemple <code translate="no">./milvus_demo.db</code>, est la méthode la plus pratique, car elle utilise automatiquement <a href="https://milvus.io/docs/milvus_lite.md">Milvus Lite</a> pour stocker toutes les données dans ce fichier.</li>
+<li>Si vous avez des données à grande échelle, vous pouvez configurer un serveur Milvus plus performant sur <a href="https://milvus.io/docs/quickstart.md">docker ou kubernetes</a>. Dans cette configuration, veuillez utiliser l'uri du serveur, par exemple<code translate="no">http://localhost:19530</code>, comme votre <code translate="no">uri</code>.</li>
+<li>Si vous souhaitez utiliser <a href="https://zilliz.com/cloud">Zilliz Cloud</a>, le service cloud entièrement géré pour Milvus, ajustez les adresses <code translate="no">uri</code> et <code translate="no">token</code>, qui correspondent au <a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">point de terminaison public et à la clé Api</a> dans Zilliz Cloud.</li>
 </ul>
 </div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
@@ -162,7 +162,7 @@ milvus_client.insert(
  'ids': [451537887696781312, 451537887696781313, ..., 451537887696782211],
  'cost': 0}
 </code></pre>
-<h2 id="Multimodal-Search-with-Generative-Reranker" class="common-anchor-header">Multimodal Search with Generative Reranker<button data-href="#Multimodal-Search-with-Generative-Reranker" class="anchor-icon" translate="no">
+<h2 id="Multimodal-Search-with-Generative-Reranker" class="common-anchor-header">Recherche multimodale avec Reranker génératif<button data-href="#Multimodal-Search-with-Generative-Reranker" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -177,8 +177,8 @@ milvus_client.insert(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>In this section, we will firstly search for relevant images by a multimodal query and then use LLM service to rerank the results and find the best one with explanation.</p>
-<h3 id="Run-search" class="common-anchor-header">Run search</h3><p>Now we are ready to perform the advanced image search with query data composed of both image and text instruction.</p>
+    </button></h2><p>Dans cette section, nous allons tout d'abord rechercher des images pertinentes à l'aide d'une requête multimodale, puis utiliser le service LLM pour classer les résultats et trouver le meilleur avec une explication.</p>
+<h3 id="Run-search" class="common-anchor-header">Exécuter la recherche</h3><p>Nous sommes maintenant prêts à effectuer la recherche avancée d'images avec des données de requête composées à la fois d'images et d'instructions textuelles.</p>
 <pre><code translate="no" class="language-python">query_image = os.path.join(
     data_dir, <span class="hljs-string">&quot;leopard.jpg&quot;</span>
 )  <span class="hljs-comment"># Change to your own query image path</span>
@@ -200,8 +200,8 @@ retrieved_images = [hit.get(<span class="hljs-string">&quot;entity&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">['./images_folder/images/518Gj1WQ-RL._AC_.jpg', './images_folder/images/41n00AOfWhL._AC_.jpg', './images_folder/images/51Wqge9HySL._AC_.jpg', './images_folder/images/51R2SZiywnL._AC_.jpg', './images_folder/images/516PebbMAcL._AC_.jpg', './images_folder/images/51RrgfYKUfL._AC_.jpg', './images_folder/images/515DzQVKKwL._AC_.jpg', './images_folder/images/51BsgVw6RhL._AC_.jpg', './images_folder/images/51INtcXu9FL._AC_.jpg']
 </code></pre>
-<h3 id="Rerank-with-GPT-4o" class="common-anchor-header">Rerank with GPT-4o</h3><p>We will use an LLM to rank images and generate an explanation for the best result based on the user query and retrieved results.</p>
-<p><strong>1. Create a panoramic view</strong></p>
+<h3 id="Rerank-with-GPT-4o" class="common-anchor-header">Reclassement avec GPT-4o</h3><p>Nous utiliserons un LLM pour classer les images et générer une explication pour le meilleur résultat en fonction de la requête de l'utilisateur et des résultats récupérés.</p>
+<p><strong>1. Créer une vue panoramique</strong></p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np
 <span class="hljs-keyword">import</span> cv2
 
@@ -317,7 +317,7 @@ row_count = <span class="hljs-number">3</span>
     panoramic_image = np.hstack([query_image_null, panoramic_image])
     <span class="hljs-keyword">return</span> panoramic_image
 <button class="copy-code-btn"></button></code></pre>
-<p>Combine the query image and retrieved images with indices in a panoramic view.</p>
+<p>Combinez l'image de la requête et les images récupérées avec des indices dans une vue panoramique.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> PIL <span class="hljs-keyword">import</span> Image
 
 combined_image_path = os.path.join(data_dir, <span class="hljs-string">&quot;combined_image.jpg&quot;</span>)
@@ -329,13 +329,11 @@ show_combined_image = combined_image.resize((<span class="hljs-number">300</span
 show_combined_image.show()
 <button class="copy-code-btn"></button></code></pre>
 <p>
-  <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.5.x/assets/multimodal_rag_with_milvus_22_0.png" alt="Create a panoramic view" class="doc-image" id="create-a-panoramic-view" />
-    <span>Create a panoramic view</span>
-  </span>
-</p>
-<p><strong>2. Rerank and explain</strong></p>
-<p>We will send the combined image to multimodal LLM service together with proper prompts to rank the retrieved results with explanation. To enable GPT-4o as the LLM, you need to prepare your <a href="https://platform.openai.com/docs/quickstart">OpenAI API Key</a>.</p>
+  
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/multimodal_rag_with_milvus_22_0.png" alt="Create a panoramic view" class="doc-image" id="create-a-panoramic-view" />
+   </span> <span class="img-wrapper"> <span>Créer une vue panoramique</span> </span></p>
+<p><strong>2. Reclasser et expliquer</strong></p>
+<p>Nous enverrons l'image combinée au service LLM multimodal avec les invites appropriées pour classer les résultats récupérés avec des explications. Pour activer GPT-4o en tant que LLM, vous devez préparer votre <a href="https://platform.openai.com/docs/quickstart">clé API OpenAI</a>.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> requests
 <span class="hljs-keyword">import</span> base64
 
@@ -404,12 +402,12 @@ openai_api_key = <span class="hljs-string">&quot;sk-***&quot;</span>  <span clas
 
     <span class="hljs-keyword">return</span> ranked_indices, explanation
 <button class="copy-code-btn"></button></code></pre>
-<p>Get the image indices after ranking and the reason for the best result:</p>
+<p>Obtenez les indices d'image après le classement et la raison du meilleur résultat :</p>
 <pre><code translate="no" class="language-python">ranked_indices, explanation = generate_ranking_explanation(
     combined_image_path, query_text
 )
 <button class="copy-code-btn"></button></code></pre>
-<p><strong>3. Display the best result with explanation</strong></p>
+<p><strong>3. Afficher le meilleur résultat avec une explication</strong></p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">print</span>(explanation)
 
 best_index = ranked_indices[<span class="hljs-number">0</span>]
@@ -420,9 +418,7 @@ best_img.show()
 <pre><code translate="no">Reasons: The most suitable item for the user's query intent is index 6 because the instruction specifies a phone case with the theme of the image, which is a leopard. The phone case with index 6 has a thematic design resembling the leopard pattern, making it the closest match to the user's request for a phone case with the image theme.
 </code></pre>
 <p>
-  <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.5.x/assets/multimodal_rag_with_milvus_28_1.png" alt="The best result" class="doc-image" id="the-best-result" />
-    <span>The best result</span>
-  </span>
-</p>
-<h3 id="Quick-Deploy" class="common-anchor-header">Quick Deploy</h3><p>To learn about how to start an online demo with this tutorial, please refer to <a href="https://github.com/milvus-io/bootcamp/tree/master/bootcamp/tutorials/quickstart/apps/multimodal_rag_with_milvus">the example application</a>.</p>
+  
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/multimodal_rag_with_milvus_28_1.png" alt="The best result" class="doc-image" id="the-best-result" />
+   </span> <span class="img-wrapper"> <span>Le meilleur résultat</span> </span></p>
+<h3 id="Quick-Deploy" class="common-anchor-header">Déploiement rapide</h3><p>Pour savoir comment démarrer une démo en ligne avec ce tutoriel, veuillez vous référer à l <a href="https://github.com/milvus-io/bootcamp/tree/master/bootcamp/tutorials/quickstart/apps/multimodal_rag_with_milvus">'exemple d'application</a>.</p>

@@ -1,9 +1,11 @@
 ---
 id: integrate_with_openai.md
-title: Semantic Search with Milvus and OpenAI
-summary: This page discusses vector database integration with OpenAI's embedding API.
+title: Recherche sémantique avec Milvus et OpenAI
+summary: >-
+  Cette page traite de l'intégration des bases de données vectorielles avec
+  l'API d'intégration d'OpenAI.
 ---
-<h1 id="Semantic-Search-with-Milvus-and-OpenAI" class="common-anchor-header">Semantic Search with Milvus and OpenAI<button data-href="#Semantic-Search-with-Milvus-and-OpenAI" class="anchor-icon" translate="no">
+<h1 id="Semantic-Search-with-Milvus-and-OpenAI" class="common-anchor-header">Recherche sémantique avec Milvus et OpenAI<button data-href="#Semantic-Search-with-Milvus-and-OpenAI" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -20,8 +22,8 @@ summary: This page discusses vector database integration with OpenAI's embedding
       </svg>
     </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/semantic_search_with_milvus_and_openai.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
 <a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/semantic_search_with_milvus_and_openai.ipynb" target="_blank"><img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/></a></p>
-<p>This guide showcases how <a href="https://platform.openai.com/docs/guides/embeddings">OpenAI’s Embedding API</a> can be used with Milvus vector database to conduct semantic search on text.</p>
-<h2 id="Getting-started" class="common-anchor-header">Getting started<button data-href="#Getting-started" class="anchor-icon" translate="no">
+<p>Ce guide montre comment <a href="https://platform.openai.com/docs/guides/embeddings">l'API d'intégration d'OpenAI</a> peut être utilisée avec la base de données vectorielle Milvus pour effectuer une recherche sémantique sur du texte.</p>
+<h2 id="Getting-started" class="common-anchor-header">Pour commencer<button data-href="#Getting-started" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -36,16 +38,16 @@ summary: This page discusses vector database integration with OpenAI's embedding
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Before you start, make sure you have the OpenAI API key ready, or you get one from the <a href="https://openai.com/index/openai-api/">OpenAI website</a>.</p>
-<p>The data used in this example are book titles. You can download the dataset <a href="https://www.kaggle.com/datasets/jealousleopard/goodreadsbooks">here</a> and put it in the same directory where you run the following code.</p>
-<p>First, install the package for Milvus and OpenAI:</p>
+    </button></h2><p>Avant de commencer, assurez-vous que vous disposez de la clé API OpenAI, ou que vous en obtenez une sur le <a href="https://openai.com/index/openai-api/">site Web d'OpenAI</a>.</p>
+<p>Les données utilisées dans cet exemple sont des titres de livres. Vous pouvez télécharger le jeu de données <a href="https://www.kaggle.com/datasets/jealousleopard/goodreadsbooks">ici</a> et le placer dans le même répertoire que celui où vous exécutez le code suivant.</p>
+<p>Tout d'abord, installez le paquetage pour Milvus et OpenAI :</p>
 <pre><code translate="no" class="language-shell">pip install --upgrade openai pymilvus
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>If you are using Google Colab, to enable dependencies just installed, you may need to <strong>restart the runtime</strong>. (Click on the “Runtime” menu at the top of the screen, and select “Restart session” from the dropdown menu).</p>
+<p>Si vous utilisez Google Colab, pour activer les dépendances qui viennent d'être installées, vous devrez peut-être <strong>redémarrer le runtime</strong>. (Cliquez sur le menu "Runtime" en haut de l'écran, et sélectionnez "Restart session" dans le menu déroulant).</p>
 </div>
-<p>With this, we’re ready to generate embeddings and use vector database to conduct semantic search.</p>
-<h2 id="Searching-book-titles-with-OpenAI--Milvus" class="common-anchor-header">Searching book titles with OpenAI &amp; Milvus<button data-href="#Searching-book-titles-with-OpenAI--Milvus" class="anchor-icon" translate="no">
+<p>Nous sommes maintenant prêts à générer des embeddings et à utiliser la base de données vectorielle pour effectuer une recherche sémantique.</p>
+<h2 id="Searching-book-titles-with-OpenAI--Milvus" class="common-anchor-header">Recherche de titres de livres avec OpenAI et Milvus<button data-href="#Searching-book-titles-with-OpenAI--Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -60,7 +62,7 @@ summary: This page discusses vector database integration with OpenAI's embedding
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>In the following example, we load book title data from the downloaded CSV file, use OpenAI embedding model to generate vector representations, and store them in Milvus vector database for semantic search.</p>
+    </button></h2><p>Dans l'exemple suivant, nous chargeons les données relatives aux titres de livres à partir du fichier CSV téléchargé, nous utilisons le modèle d'intégration d'OpenAI pour générer des représentations vectorielles et nous les stockons dans la base de données vectorielles Milvus pour la recherche sémantique.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> openai <span class="hljs-keyword">import</span> OpenAI
 <span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 
@@ -105,14 +107,14 @@ res = milvus_client.insert(collection_name=<span class="hljs-string">&quot;demo_
 <span class="hljs-built_in">print</span>(res[<span class="hljs-string">&quot;insert_count&quot;</span>])
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>As for the argument of <code translate="no">MilvusClient</code>:</p>
+<p>En ce qui concerne l'argument de <code translate="no">MilvusClient</code>:</p>
 <ul>
-<li>Setting the <code translate="no">uri</code> as a local file, e.g.<code translate="no">./milvus.db</code>, is the most convenient method, as it automatically utilizes <a href="https://milvus.io/docs/milvus_lite.md">Milvus Lite</a> to store all data in this file.</li>
-<li>If you have large scale of data, you can set up a more performant Milvus server on <a href="https://milvus.io/docs/quickstart.md">docker or kubernetes</a>. In this setup, please use the server uri, e.g.<code translate="no">http://localhost:19530</code>, as your <code translate="no">uri</code>.</li>
-<li>If you want to use <a href="https://zilliz.com/cloud">Zilliz Cloud</a>, the fully managed cloud service for Milvus, adjust the <code translate="no">uri</code> and <code translate="no">token</code>, which correspond to the <a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">Public Endpoint and Api key</a> in Zilliz Cloud.</li>
+<li>Définir <code translate="no">uri</code> comme un fichier local, par exemple<code translate="no">./milvus.db</code>, est la méthode la plus pratique, car elle utilise automatiquement <a href="https://milvus.io/docs/milvus_lite.md">Milvus Lite</a> pour stocker toutes les données dans ce fichier.</li>
+<li>Si vous avez des données à grande échelle, vous pouvez configurer un serveur Milvus plus performant sur <a href="https://milvus.io/docs/quickstart.md">docker ou kubernetes</a>. Dans cette configuration, veuillez utiliser l'uri du serveur, par exemple<code translate="no">http://localhost:19530</code>, comme votre <code translate="no">uri</code>.</li>
+<li>Si vous souhaitez utiliser <a href="https://zilliz.com/cloud">Zilliz Cloud</a>, le service cloud entièrement géré pour Milvus, ajustez les adresses <code translate="no">uri</code> et <code translate="no">token</code>, qui correspondent au <a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">point de terminaison public et à la clé Api</a> dans Zilliz Cloud.</li>
 </ul>
 </div>
-<p>With all data in Milvus vector database, we can now perform semantic search by generating vector embedding for the query and conduct vector search.</p>
+<p>Avec toutes les données dans la base de données vectorielles Milvus, nous pouvons maintenant effectuer une recherche sémantique en générant une intégration vectorielle pour la requête et en effectuant une recherche vectorielle.</p>
 <pre><code translate="no" class="language-python">queries = [<span class="hljs-string">&quot;When was artificial intelligence founded?&quot;</span>]
 
 query_vectors = [
@@ -133,7 +135,7 @@ res = milvus_client.search(
         <span class="hljs-built_in">print</span>(result)
     <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;\n&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
-<p>You should see the following as the output:</p>
+<p>Vous devriez obtenir le résultat suivant :</p>
 <pre><code translate="no" class="language-python">[
     {
         <span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">0</span>,

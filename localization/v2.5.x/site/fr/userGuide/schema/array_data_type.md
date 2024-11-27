@@ -1,14 +1,16 @@
 ---
 id: array_data_type.md
-title: Array Field​​
+title: Champ du tableau
 summary: >-
-  The Array type is used to store fields containing multiple values of the same
-  data type. It provides a flexible way to store attributes with multiple
-  elements, making it especially useful in scenarios where a set of related data
-  needs to be saved. In Milvus, you can store Array fields alongside vector
-  data, enabling more complex query and filtering requirements.​
+  Le type tableau est utilisé pour stocker des champs contenant plusieurs
+  valeurs du même type de données. Il constitue un moyen souple de stocker des
+  attributs comportant plusieurs éléments, ce qui le rend particulièrement utile
+  dans les scénarios où un ensemble de données connexes doit être enregistré.
+  Dans Milvus, vous pouvez stocker des champs de type tableau avec des données
+  vectorielles, ce qui permet d'effectuer des requêtes et des filtrages plus
+  complexes.
 ---
-<h1 id="Array-Field​" class="common-anchor-header">Array Field​<button data-href="#Array-Field​" class="anchor-icon" translate="no">
+<h1 id="Array-Field​" class="common-anchor-header">Champ de type tableau<button data-href="#Array-Field​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -23,16 +25,16 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>The Array type is used to store fields containing multiple values of the same data type. It provides a flexible way to store attributes with multiple elements, making it especially useful in scenarios where a set of related data needs to be saved. In Milvus, you can store Array fields alongside vector data, enabling more complex query and filtering requirements.​</p>
-<p>For example, in a music recommendation system, an Array field can store a list of tags for a song; in user behavior analysis, it can store user ratings for songs. Below is an example of a typical Array field:​</p>
+    </button></h1><p>Le type "tableau" est utilisé pour stocker des champs contenant plusieurs valeurs du même type de données. Il constitue un moyen souple de stocker des attributs comportant plusieurs éléments, ce qui le rend particulièrement utile dans les scénarios où un ensemble de données connexes doit être enregistré. Dans Milvus, vous pouvez stocker des champs de type tableau avec des données vectorielles, ce qui permet de répondre à des exigences plus complexes en matière de recherche et de filtrage.</p>
+<p>Par exemple, dans un système de recommandation musicale, un champ Array peut stocker une liste de tags pour une chanson ; dans l'analyse du comportement des utilisateurs, il peut stocker les évaluations des utilisateurs pour les chansons. Vous trouverez ci-dessous un exemple de champ Array typique.</p>
 <pre><code translate="no" class="language-JSON">{​
   <span class="hljs-string">&quot;tags&quot;</span>: [<span class="hljs-string">&quot;pop&quot;</span>, <span class="hljs-string">&quot;rock&quot;</span>, <span class="hljs-string">&quot;classic&quot;</span>],​
   <span class="hljs-string">&quot;ratings&quot;</span>: [<span class="hljs-number">5</span>, <span class="hljs-number">4</span>, <span class="hljs-number">3</span>]​
 }​
 
 <button class="copy-code-btn"></button></code></pre>
-<p>In this example, <code translate="no">tags</code> and <code translate="no">ratings</code> are both Array fields. The <code translate="no">tags</code> field is a string array representing song genres like pop, rock, and classic, while the <code translate="no">ratings</code> field is an integer array representing user ratings for the song, ranging from 1 to 5. These Array fields provide a flexible way to store multi-value data, making it easier to perform detailed analysis during queries and filtering.​</p>
-<h2 id="Add-Array-field​" class="common-anchor-header">Add Array field​<button data-href="#Add-Array-field​" class="anchor-icon" translate="no">
+<p>Dans cet exemple, <code translate="no">tags</code> et <code translate="no">ratings</code> sont tous deux des champs de type tableau. Le champ <code translate="no">tags</code> est un tableau de chaînes représentant des genres de chansons tels que pop, rock et classique, tandis que le champ <code translate="no">ratings</code> est un tableau d'entiers représentant les notes attribuées par les utilisateurs à la chanson, allant de 1 à 5. Ces champs Array constituent un moyen souple de stocker des données à valeurs multiples, ce qui facilite l'analyse détaillée lors des requêtes et du filtrage.</p>
+<h2 id="Add-Array-field​" class="common-anchor-header">Ajout d'un champ Array<button data-href="#Add-Array-field​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -47,20 +49,15 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>To use Array fields in Milvus, define the relevant field type when creating the collection schema. This process includes:​</p>
+    </button></h2><p>Pour utiliser des champs de type tableau dans Milvus, définissez le type de champ approprié lors de la création du schéma de collection. Ce processus comprend</p>
 <ol>
-<li><p>Setting <code translate="no">datatype</code> to the supported Array data type, <code translate="no">ARRAY</code>.​</p></li>
-<li><p>Using the <code translate="no">element_type</code> parameter to specify the data type of elements in the array. This can be any scalar data type supported by Milvus, such as <code translate="no">VARCHAR</code> or <code translate="no">INT64</code>. All elements in the same Array must be of the same data type.​</p></li>
-<li><p>Using the <code translate="no">max_capacity</code> parameter to define the maximum capacity of the array, i.e., the maximum number of elements it can contain.​</p></li>
+<li><p>Définir <code translate="no">datatype</code> comme étant le type de données Array pris en charge, <code translate="no">ARRAY</code>.</p></li>
+<li><p>Utiliser le paramètre <code translate="no">element_type</code> pour spécifier le type de données des éléments du tableau. Il peut s'agir de n'importe quel type de données scalaires pris en charge par Milvus, comme <code translate="no">VARCHAR</code> ou <code translate="no">INT64</code>. Tous les éléments d'un même tableau doivent être du même type de données.</p></li>
+<li><p>Utiliser le paramètre <code translate="no">max_capacity</code> pour définir la capacité maximale du tableau, c'est-à-dire le nombre maximal d'éléments qu'il peut contenir.</p></li>
 </ol>
-<p>Here’s how to define a collection schema that includes Array fields:​</p>
+<p>Voici comment définir un schéma de collection qui inclut des champs de type Array.</p>
 <div class="multipleCode">
-  <a href="#python">Python </a>
-  <a href="#java">Java</a>
-  <a href="#javascript">Node.js</a>
-  <a href="#go">Go</a>
-  <a href="#curl">cURL</a>
-</div>
+ <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#go">Go</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType​
 ​
 client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)​
@@ -194,16 +191,16 @@ schema.addField(AddFieldReq.builder()​
 }&quot;</span>​
 
 <button class="copy-code-btn"></button></code></pre>
-<p>In this example:​</p>
+<p>Dans cet exemple.</p>
 <ul>
-<li><p><code translate="no">tags</code> is a string array with <code translate="no">element_type</code> set to <code translate="no">VARCHAR</code>, indicating that elements in the array must be strings. <code translate="no">max_capacity</code> is set to 10, meaning the array can contain up to 10 elements.​</p></li>
-<li><p><code translate="no">ratings</code> is an integer array with <code translate="no">element_type</code> set to <code translate="no">INT64</code>, indicating that elements must be integers. <code translate="no">max_capacity</code> is set to 5, allowing up to 5 ratings.​</p></li>
-<li><p>We also add a primary key field <code translate="no">pk</code> and a vector field <code translate="no">embedding</code>.​</p></li>
+<li><p><code translate="no">tags</code> est un tableau de chaînes avec <code translate="no">element_type</code> fixé à <code translate="no">VARCHAR</code>, indiquant que les éléments du tableau doivent être des chaînes. <code translate="no">max_capacity</code> est fixé à 10, ce qui signifie que le tableau peut contenir jusqu'à 10 éléments.</p></li>
+<li><p><code translate="no">ratings</code> est un tableau d'entiers avec <code translate="no">element_type</code> défini sur <code translate="no">INT64</code>, indiquant que les éléments doivent être des entiers. <code translate="no">max_capacity</code> est défini sur 5, autorisant jusqu'à 5 notations.</p></li>
+<li><p>Nous ajoutons également un champ de clé primaire <code translate="no">pk</code> et un champ vectoriel <code translate="no">embedding</code>.</p></li>
 </ul>
 <div class="alert note">
-<p>The primary field and vector field are mandatory when you create a collection. The primary field uniquely identifies each entity, while the vector field is crucial for similarity search. For more details, refer to <a href="/docs/primary-field.md">​Primary Field &amp; AutoID</a>, <a href="/docs/dense-vector.md">​Dense Vector</a>, <a href="/docs/binary-vector.md">​Binary Vector</a>, or <a href="/docs/sparse_vector.md">​Sparse Vector</a>.​</p>
+<p>Le champ primaire et le champ vectoriel sont obligatoires lorsque vous créez une collection. Le champ primaire identifie chaque entité de manière unique, tandis que le champ vectoriel est essentiel pour la recherche de similarités. Pour plus de détails, reportez-vous aux sections <a href="/docs/fr/primary-field.md">Champ primaire et AutoID</a>, <a href="/docs/fr/dense-vector.md">Vecteur dense</a>, <a href="/docs/fr/binary-vector.md">Vecteur binaire</a> ou <a href="/docs/fr/sparse_vector.md">Vecteur clairsemé</a>.</p>
 </div>
-<h2 id="Set-index-params​" class="common-anchor-header">Set index params​<button data-href="#Set-index-params​" class="anchor-icon" translate="no">
+<h2 id="Set-index-params​" class="common-anchor-header">Définir les paramètres d'index<button data-href="#Set-index-params​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -218,15 +215,10 @@ schema.addField(AddFieldReq.builder()​
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Setting index parameters for Array fields is optional but can significantly improve retrieval efficiency.​</p>
-<p>In the following example, we create an <code translate="no">AUTOINDEX</code> for the <code translate="no">tags</code> field, which means Milvus will automatically create an appropriate scalar index based on the data type.</p>
+    </button></h2><p>La définition de paramètres d'index pour les champs de type tableau est facultative, mais elle peut améliorer considérablement l'efficacité de la recherche.</p>
+<p>Dans l'exemple suivant, nous créons un <code translate="no">AUTOINDEX</code> pour le champ <code translate="no">tags</code>, ce qui signifie que Milvus créera automatiquement un index scalaire approprié en fonction du type de données.</p>
 <div class="multipleCode">
-  <a href="#python">Python </a>
-  <a href="#java">Java</a>
-  <a href="#javascript">Node.js</a>
-  <a href="#go">Go</a>
-  <a href="#curl">cURL</a>
-</div>
+ <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#go">Go</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Prepare index parameters​</span>
 index_params = client.prepare_index_params()  <span class="hljs-comment"># Prepare IndexParams object​</span>
 ​
@@ -264,15 +256,10 @@ indexes.add(IndexParam.builder()​
     ]&#x27;</span>​
 
 <button class="copy-code-btn"></button></code></pre>
-<p>In addition to <code translate="no">AUTOINDEX</code>, you can specify other scalar index types like <code translate="no">INVERTED</code> or <code translate="no">BITMAP</code>. For supported index types, refer to <a href="/docs/index-scalar-fields.md">​Scalar Indexes</a>.​</p>
-<p>Moreover, you must create an index for the vector field before creating the collection. In this example, we use <code translate="no">AUTOINDEX</code> to simplify vector index setup.​</p>
+<p>Outre <code translate="no">AUTOINDEX</code>, vous pouvez spécifier d'autres types d'index scalaire comme <code translate="no">INVERTED</code> ou <code translate="no">BITMAP</code>. Pour connaître les types d'index pris en charge, reportez-vous à la section <a href="/docs/fr/index-scalar-fields.md">Index scalaires</a>.</p>
+<p>De plus, vous devez créer un index pour le champ vectoriel avant de créer la collection. Dans cet exemple, nous utilisons <code translate="no">AUTOINDEX</code> pour simplifier la configuration de l'index vectoriel.</p>
 <div class="multipleCode">
-  <a href="#python">Python </a>
-  <a href="#java">Java</a>
-  <a href="#javascript">Node.js</a>
-  <a href="#go">Go</a>
-  <a href="#curl">cURL</a>
-</div>
+ <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#go">Go</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Add vector index​</span>
 index_params.add_index(​
     field_name=<span class="hljs-string">&quot;embedding&quot;</span>,​
@@ -309,7 +296,7 @@ index_params.add_index(​
     ]&#x27;</span>​
 
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Create-collection​" class="common-anchor-header">Create collection​<button data-href="#Create-collection​" class="anchor-icon" translate="no">
+<h2 id="Create-collection​" class="common-anchor-header">Créer une collection<button data-href="#Create-collection​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -324,14 +311,9 @@ index_params.add_index(​
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Use the defined schema and index parameters to create a collection:​</p>
+    </button></h2><p>Utilisez les paramètres de schéma et d'index définis pour créer une collection.</p>
 <div class="multipleCode">
-  <a href="#python">Python </a>
-  <a href="#java">Java</a>
-  <a href="#javascript">Node.js</a>
-  <a href="#go">Go</a>
-  <a href="#curl">cURL</a>
-</div>
+ <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#go">Go</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python">client.<span class="hljs-title function_">create_collection</span>(​
     collection_name=<span class="hljs-string">&quot;my_array_collection&quot;</span>,​
     schema=schema,​
@@ -365,7 +347,7 @@ client.createCollection(requestCreate);​
 }&quot;</span>​
 
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Insert-data​" class="common-anchor-header">Insert data​<button data-href="#Insert-data​" class="anchor-icon" translate="no">
+<h2 id="Insert-data​" class="common-anchor-header">Insérer des données<button data-href="#Insert-data​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -380,14 +362,9 @@ client.createCollection(requestCreate);​
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>After creating the collection, you can insert data that includes Array fields.​</p>
+    </button></h2><p>Après avoir créé la collection, vous pouvez insérer des données qui comprennent des champs Array.</p>
 <div class="multipleCode">
-  <a href="#python">Python </a>
-  <a href="#java">Java</a>
-  <a href="#javascript">Node.js</a>
-  <a href="#go">Go</a>
-  <a href="#curl">cURL</a>
-</div>
+ <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#go">Go</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python">data = [​
     {​
         <span class="hljs-string">&quot;tags&quot;</span>: [<span class="hljs-string">&quot;pop&quot;</span>, <span class="hljs-string">&quot;rock&quot;</span>, <span class="hljs-string">&quot;classic&quot;</span>],​
@@ -489,12 +466,12 @@ client.<span class="hljs-title function_">insert</span>({​
 }&#x27;</span>​
 
 <button class="copy-code-btn"></button></code></pre>
-<p>In this example:​</p>
+<p>Dans cet exemple.</p>
 <ul>
-<li><p>Each data entry includes a primary field (<code translate="no">pk</code>), while <code translate="no">tags</code> and <code translate="no">ratings</code> are Array fields used to store tags and ratings.​</p></li>
-<li><p><code translate="no">embedding</code> is a 3-dimensional vector field used for vector similarity searches.​</p></li>
+<li><p>Chaque entrée de données comprend un champ primaire (<code translate="no">pk</code>), tandis que <code translate="no">tags</code> et <code translate="no">ratings</code> sont des champs de type tableau utilisés pour stocker les étiquettes et les évaluations.</p></li>
+<li><p><code translate="no">embedding</code> est un champ vectoriel tridimensionnel utilisé pour les recherches de similarité vectorielle.</p></li>
 </ul>
-<h2 id="Search-and-query​" class="common-anchor-header">Search and query​<button data-href="#Search-and-query​" class="anchor-icon" translate="no">
+<h2 id="Search-and-query​" class="common-anchor-header">Recherche et interrogation<button data-href="#Search-and-query​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -509,15 +486,10 @@ client.<span class="hljs-title function_">insert</span>({​
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Array fields enable scalar filtering during searches, enhancing Milvus’s vector search capabilities. You can query based on the properties of Array fields alongside vector similarity searches.​</p>
-<h3 id="Filter-queries​" class="common-anchor-header">Filter queries​</h3><p>You can filter data based on properties of Array fields, such as accessing a specific element or checking if an array element meets a certain condition.​</p>
+    </button></h2><p>Les champs de tableau permettent un filtrage scalaire pendant les recherches, améliorant ainsi les capacités de recherche vectorielle de Milvus. Vous pouvez effectuer des requêtes basées sur les propriétés des champs de tableau parallèlement aux recherches de similarité vectorielle.</p>
+<h3 id="Filter-queries​" class="common-anchor-header">Filtrer les requêtes</h3><p>Vous pouvez filtrer les données en fonction des propriétés des champs Tableau, par exemple en accédant à un élément spécifique ou en vérifiant si un élément du tableau répond à une certaine condition.</p>
 <div class="multipleCode">
-  <a href="#python">Python </a>
-  <a href="#java">Java</a>
-  <a href="#javascript">Node.js</a>
-  <a href="#go">Go</a>
-  <a href="#curl">cURL</a>
-</div>
+ <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#go">Go</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;ratings[0] &lt; 4&#x27;</span>​
 ​
 res = client.query(​
@@ -568,15 +540,10 @@ System.out.println(resp.getQueryResults());​
 <span class="hljs-comment"># {&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:[{&quot;embedding&quot;:[0.67,0.45,0.89],&quot;pk&quot;:3,&quot;ratings&quot;:{&quot;Data&quot;:{&quot;LongData&quot;:{&quot;data&quot;:[3,3,4]}}},&quot;tags&quot;:{&quot;Data&quot;:{&quot;StringData&quot;:{&quot;data&quot;:[&quot;electronic&quot;,&quot;dance&quot;]}}}}]}​</span>
 
 <button class="copy-code-btn"></button></code></pre>
-<p>In this query, Milvus filters out entities where the first element of the <code translate="no">ratings</code> array is less than 4, returning entities that match the condition.​</p>
-<h3 id="Vector-search-with-Array-filtering​" class="common-anchor-header">Vector search with Array filtering​</h3><p>By combining vector similarity with Array filtering, you can ensure that the retrieved data is not only similar in semantics but also meets specific conditions, making the search results more accurate and aligned with business needs.​</p>
+<p>Dans cette requête, Milvus filtre les entités dont le premier élément du tableau <code translate="no">ratings</code> est inférieur à 4, en renvoyant les entités qui répondent à la condition.</p>
+<h3 id="Vector-search-with-Array-filtering​" class="common-anchor-header">Recherche vectorielle avec filtrage de tableau</h3><p>En combinant la similarité vectorielle avec le filtrage de tableau, vous pouvez vous assurer que les données extraites sont non seulement similaires sur le plan sémantique, mais qu'elles répondent également à des conditions spécifiques, ce qui rend les résultats de la recherche plus précis et plus conformes aux besoins de l'entreprise.</p>
 <div class="multipleCode">
-  <a href="#python">Python </a>
-  <a href="#java">Java</a>
-  <a href="#javascript">Node.js</a>
-  <a href="#go">Go</a>
-  <a href="#curl">cURL</a>
-</div>
+ <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#go">Go</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;tags[0] == &quot;pop&quot;&#x27;</span>​
 ​
 res = client.search(​
@@ -641,9 +608,9 @@ System.out.println(resp.getSearchResults());​
 <span class="hljs-comment"># {&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:[{&quot;distance&quot;:-0.24793813,&quot;embedding&quot;:[0.12,0.34,0.56],&quot;id&quot;:1,&quot;ratings&quot;:{&quot;Data&quot;:{&quot;LongData&quot;:{&quot;data&quot;:[5,4,3]}}},&quot;tags&quot;:{&quot;Data&quot;:{&quot;StringData&quot;:{&quot;data&quot;:[&quot;pop&quot;,&quot;rock&quot;,&quot;classic&quot;]}}}}]}​</span>
 
 <button class="copy-code-btn"></button></code></pre>
-<p>In this example, Milvus returns the top 5 entities most similar to the query vector, with the <code translate="no">tags</code> array’s first element being <code translate="no">&quot;pop&quot;</code>.​</p>
-<p>Additionally, Milvus supports advanced Array filtering operators like <code translate="no">ARRAY_CONTAINS</code>, <code translate="no">ARRAY_CONTAINS_ALL</code>, <code translate="no">ARRAY_CONTAINS_ANY</code>, and <code translate="no">ARRAY_LENGTH</code> to further enhance query capabilities. For more details, refer to <a href="/docs/boolean.md">​Metadata Filtering</a>.​</p>
-<h2 id="Limits​" class="common-anchor-header">Limits​<button data-href="#Limits​" class="anchor-icon" translate="no">
+<p>Dans cet exemple, Milvus renvoie les 5 entités les plus similaires au vecteur de la requête, le premier élément du tableau <code translate="no">tags</code> étant <code translate="no">&quot;pop&quot;</code>.</p>
+<p>En outre, Milvus prend en charge des opérateurs de filtrage de tableau avancés tels que <code translate="no">ARRAY_CONTAINS</code>, <code translate="no">ARRAY_CONTAINS_ALL</code>, <code translate="no">ARRAY_CONTAINS_ANY</code> et <code translate="no">ARRAY_LENGTH</code> pour améliorer encore les capacités de recherche. Pour plus de détails, voir <a href="/docs/fr/boolean.md">Filtrage des métadonnées</a>.</p>
+<h2 id="Limits​" class="common-anchor-header">Limites<button data-href="#Limits​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -659,7 +626,7 @@ System.out.println(resp.getSearchResults());​
         ></path>
       </svg>
     </button></h2><ul>
-<li><p><strong>Data Type</strong>: All elements in an Array field must have the same data type, as specified by the <code translate="no">element_type</code>.​</p></li>
-<li><p><strong>Array Capacity</strong>: The number of elements in an Array field must be less than or equal to the maximum capacity defined when the Array was created, as specified by <code translate="no">max_capacity</code>.​</p></li>
-<li><p><strong>String Handling</strong>: String values in Array fields are stored as-is, without semantic escaping or conversion. For example, <code translate="no">'a&quot;b'</code>, <code translate="no">&quot;a'b&quot;</code>, <code translate="no">'a\'b'</code>, and <code translate="no">&quot;a\&quot;b&quot;</code> are stored as entered, while <code translate="no">'a'b'</code> and <code translate="no">&quot;a&quot;b&quot;</code> are considered invalid values.​</p></li>
+<li><p><strong>Type de données</strong>: Tous les éléments d'un champ de tableau doivent avoir le même type de données, comme spécifié par <code translate="no">element_type</code>.</p></li>
+<li><p><strong>Capacité du tableau</strong>: Le nombre d'éléments d'un champ de tableau doit être inférieur ou égal à la capacité maximale définie lors de la création du tableau, comme indiqué dans <code translate="no">max_capacity</code>.</p></li>
+<li><p><strong>Traitement des chaînes de caractères</strong>: Les valeurs des chaînes de caractères dans les champs du tableau sont stockées telles quelles, sans échappement sémantique ni conversion. Par exemple, <code translate="no">'a&quot;b'</code>, <code translate="no">&quot;a'b&quot;</code>, <code translate="no">'a\'b'</code>, et <code translate="no">&quot;a\&quot;b&quot;</code> sont stockées telles qu'elles ont été saisies, tandis que <code translate="no">'a'b'</code> et <code translate="no">&quot;a&quot;b&quot;</code> sont considérées comme des valeurs non valides.</p></li>
 </ul>

@@ -1,10 +1,10 @@
 ---
 id: multi_tenancy.md
 related_key: multi-tenancy
-summary: Multi-tenancy in Milvus.
-title: Multi-tenancy strategies
+summary: Multi-tenance dans Milvus.
+title: Stratégies multi-tenant
 ---
-<h1 id="Multi-tenancy-strategies" class="common-anchor-header">Multi-tenancy strategies<button data-href="#Multi-tenancy-strategies" class="anchor-icon" translate="no">
+<h1 id="Multi-tenancy-strategies" class="common-anchor-header">Stratégies multi-tenant<button data-href="#Multi-tenancy-strategies" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -19,9 +19,9 @@ title: Multi-tenancy strategies
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>As ChatGPT gains popularity, more developers are creating their own SaaS services using the CVP (ChatGPT, Vector Database, Prompt) stack. This guide explains how to achieve multi-tenancy on Milvus, one of the most widely-used vector databases in the world, to keep up with this trend.</p>
-<p>Multi-tenancy is an architecture where a single Milvus instance serves multiple tenants. The simplest way to distinguish tenants is by separating their data and resources from those of others. Each tenant has their own dedicated resources or shares resources with others to manage Milvus objects like databases, collections, and partitions. Based on these objects, there are corresponding methods for achieving Milvus multi-tenancy.</p>
-<h2 id="Database-oriented-multi-tenancy" class="common-anchor-header">Database-oriented multi-tenancy<button data-href="#Database-oriented-multi-tenancy" class="anchor-icon" translate="no">
+    </button></h1><p>Alors que ChatGPT gagne en popularité, de plus en plus de développeurs créent leurs propres services SaaS en utilisant la pile CVP (ChatGPT, Vector Database, Prompt). Ce guide explique comment mettre en place une architecture multi-tenant sur Milvus, l'une des bases de données vectorielles les plus utilisées au monde, afin de suivre cette tendance.</p>
+<p>La multi-location est une architecture dans laquelle une instance unique de Milvus sert plusieurs locataires. La façon la plus simple de distinguer les locataires est de séparer leurs données et leurs ressources de celles des autres. Chaque locataire dispose de ses propres ressources dédiées ou partage des ressources avec d'autres pour gérer les objets Milvus tels que les bases de données, les collections et les partitions. En fonction de ces objets, il existe des méthodes correspondantes pour réaliser le multi-tenant Milvus.</p>
+<h2 id="Database-oriented-multi-tenancy" class="common-anchor-header">Multi-tenance orientée base de données<button data-href="#Database-oriented-multi-tenancy" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -36,8 +36,8 @@ title: Multi-tenancy strategies
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Since Milvus version 2.2.9, the object database is now available. You can create multiple databases in a single Milvus cluster. This new feature makes it possible to achieve database-oriented multi-tenancy by assigning a database for each tenant, so that they can create their own collections and partitions to make the most out of their data. However, this strategy ensures data isolation and search performance for tenants, but resources may be wasted on idle tenants.</p>
-<h2 id="Collection-oriented-multi-tenancy" class="common-anchor-header">Collection-oriented multi-tenancy<button data-href="#Collection-oriented-multi-tenancy" class="anchor-icon" translate="no">
+    </button></h2><p>Depuis la version 2.2.9 de Milvus, la base de données des objets est désormais disponible. Vous pouvez créer plusieurs bases de données dans un seul cluster Milvus. Cette nouvelle fonctionnalité permet de réaliser une multi-location orientée base de données en attribuant une base de données à chaque locataire, afin qu'ils puissent créer leurs propres collections et partitions pour tirer le meilleur parti de leurs données. Toutefois, cette stratégie garantit l'isolation des données et les performances de recherche pour les locataires, mais les ressources risquent d'être gaspillées pour les locataires inactifs.</p>
+<h2 id="Collection-oriented-multi-tenancy" class="common-anchor-header">Multi-location axée sur la collecte<button data-href="#Collection-oriented-multi-tenancy" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -52,10 +52,10 @@ title: Multi-tenancy strategies
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>There are two possible ways to achieve collection-oriented multi-tenancy.</p>
-<h3 id="One-collection-for-all-tenants" class="common-anchor-header">One collection for all tenants</h3><p>Using a single collection to implement multi-tenancy by adding a tenant field to distinguish between tenants is a simple option. When conducting ANN searches for a specific tenant, add a filter expression to filter out all entities that belong to other tenants. This is the simplest way to achieve multi-tenancy. However, be aware that the filter’s performance may become the bottleneck of ANN searches.</p>
-<h3 id="One-collection-per-tenant" class="common-anchor-header">One collection per tenant</h3><p>Another approach is to create a collection for each tenant to store its own data, instead of storing the data of all tenants in a single collection. This provides better data isolation and query performance. However, keep in mind that this approach requires more investment in resource scheduling, operational capability, and costs and may be not applicable if the number of tenants exceeds the maximum number of collections that a single Milvus cluster supports.</p>
-<h2 id="Partition-oriented-multi-tenancy" class="common-anchor-header">Partition-oriented multi-tenancy<button data-href="#Partition-oriented-multi-tenancy" class="anchor-icon" translate="no">
+    </button></h2><p>Il existe deux façons de parvenir à une multi-location orientée collection.</p>
+<h3 id="One-collection-for-all-tenants" class="common-anchor-header">Une collection pour tous les locataires</h3><p>L'utilisation d'une collection unique pour mettre en œuvre la multi-location en ajoutant un champ de locataire pour distinguer les locataires est une option simple. Lorsque vous effectuez des recherches ANN pour un locataire spécifique, ajoutez une expression de filtrage pour éliminer toutes les entités qui appartiennent à d'autres locataires. Il s'agit de la méthode la plus simple pour parvenir à la multi-location. Cependant, il faut savoir que les performances du filtre peuvent devenir le goulot d'étranglement des recherches ANN.</p>
+<h3 id="One-collection-per-tenant" class="common-anchor-header">Une collection par locataire</h3><p>Une autre approche consiste à créer une collection pour chaque locataire afin de stocker ses propres données, au lieu de stocker les données de tous les locataires dans une seule collection. Cela permet de mieux isoler les données et d'améliorer les performances des requêtes. Toutefois, il convient de garder à l'esprit que cette approche nécessite un investissement plus important en termes de planification des ressources, de capacité opérationnelle et de coûts et qu'elle peut ne pas être applicable si le nombre de locataires dépasse le nombre maximum de collections qu'un seul cluster Milvus peut prendre en charge.</p>
+<h2 id="Partition-oriented-multi-tenancy" class="common-anchor-header">Multi-locations orientées vers les partitions<button data-href="#Partition-oriented-multi-tenancy" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -70,25 +70,25 @@ title: Multi-tenancy strategies
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>There are also two possible ways to achieve partition-oriented multi-tenancy:</p>
-<h3 id="One-partition-per-tenant" class="common-anchor-header">One partition per tenant</h3><p>Managing a single collection is much easier than managing multiple ones. Instead of creating multiple collections, consider assigning a partition for each tenant to achieve flexible data isolation and memory management. The search performance of partition-oriented multi-tenancy is much better than collection-oriented multi-tenancy. However, note that the number of tenants of the collection should not exceed the maximum number of partitions a collection can hold.</p>
-<h3 id="Partition-key-based-multi-tenancy" class="common-anchor-header">Partition-key-based multi-tenancy</h3><p>Milvus 2.2.9 introduces a new feature named partition key. Upon the creation of a collection, nominate a tenant field and make it the partition key field. Milvus will store entities in a partition according to the values in the partition key field. When conducting ANN searches, Milvus changes to a partition based on the specified partition key, filters entities according to the partition key, and searches among the filtered entities.</p>
+    </button></h2><p>Il existe également deux façons d'obtenir une multi-location orientée partition :</p>
+<h3 id="One-partition-per-tenant" class="common-anchor-header">Une partition par locataire</h3><p>La gestion d'une seule collection est beaucoup plus facile que la gestion de plusieurs collections. Au lieu de créer plusieurs collections, envisagez d'attribuer une partition à chaque locataire afin d'obtenir une isolation des données et une gestion de la mémoire flexibles. Les performances de recherche de la multi-location orientée partition sont bien meilleures que celles de la multi-location orientée collection. Il convient toutefois de noter que le nombre de locataires de la collection ne doit pas dépasser le nombre maximal de partitions qu'une collection peut contenir.</p>
+<h3 id="Partition-key-based-multi-tenancy" class="common-anchor-header">Multi-tenance basée sur les clés de partition</h3><p>Milvus 2.2.9 introduit une nouvelle fonctionnalité appelée clé de partition. Lors de la création d'une collection, nommez un champ de locataire et faites-en le champ de clé de partition. Milvus stocke les entités dans une partition en fonction des valeurs du champ clé de partition. Lors des recherches ANN, Milvus passe à une partition basée sur la clé de partition spécifiée, filtre les entités en fonction de la clé de partition et effectue une recherche parmi les entités filtrées.</p>
 </div>
-<p>This strategy lifts the limit on the maximum number of tenants that a Milvus collection can support and greatly simplifies resource management because Milvus automatically manages partitions for you.</p>
-<p>To recap, you can use either or some of the multi-tenancy strategies above to form your own solution. The following table makes comparisons among these strategies in terms of data isolation, search performance, and maximum number of tenants.</p>
+<p>Cette stratégie lève la limite du nombre maximum de locataires qu'une collection Milvus peut prendre en charge et simplifie considérablement la gestion des ressources car Milvus gère automatiquement les partitions pour vous.</p>
+<p>Pour récapituler, vous pouvez utiliser l'une ou l'autre des stratégies multi-locataires ci-dessus, ou certaines d'entre elles, pour créer votre propre solution. Le tableau suivant établit des comparaisons entre ces stratégies en termes d'isolation des données, de performances de recherche et de nombre maximum de locataires.</p>
 <table>
 <thead>
-<tr><th></th><th>Data isolation</th><th>Search perf.</th><th>Max. num. of tenants</th><th>Recommend scenarios</th></tr>
+<tr><th></th><th>Isolation des données</th><th>Performances de recherche</th><th>Nombre maximal de locataires</th><th>Scénarios recommandés</th></tr>
 </thead>
 <tbody>
-<tr><td>Database oriented</td><td>Strong</td><td>Strong</td><td>64</td><td>For those that require collections to vary with projects, especially suitable for data isolation between departments in your organization.</td></tr>
-<tr><td>One collection for all</td><td>Weak</td><td>Medium</td><td>N/A</td><td>For those that have limited resources and are insensitive to data isolation.</td></tr>
-<tr><td>One collection per tenant</td><td>Strong</td><td>Strong</td><td>Less than 10,000</td><td>For those that have less than 10,000 tenants per cluster.</td></tr>
-<tr><td>One partition per tenant</td><td>Medium</td><td>Strong</td><td>4,096</td><td>For those that have less than 4,096 tenants per collection.</td></tr>
-<tr><td>Partition-key-based</td><td>Medium</td><td>Strong</td><td>10,000,000+</td><td>For those that predict a rapid tenant increase into millions.</td></tr>
+<tr><td>Orienté base de données</td><td>Forte</td><td>Forte</td><td>64</td><td>Pour ceux qui ont besoin que les collections varient en fonction des projets, particulièrement adapté à l'isolation des données entre les départements de votre organisation.</td></tr>
+<tr><td>Une seule collection pour tous</td><td>Faible</td><td>Moyenne</td><td>SANS OBJET</td><td>Pour ceux qui ont des ressources limitées et qui ne sont pas sensibles à l'isolation des données.</td></tr>
+<tr><td>Une collection par locataire</td><td>Forte</td><td>Fort</td><td>Moins de 10 000</td><td>Pour ceux qui ont moins de 10 000 locataires par cluster.</td></tr>
+<tr><td>Une partition par locataire</td><td>Moyenne</td><td>Fort</td><td>4,096</td><td>Pour ceux qui ont moins de 4 096 locataires par collection.</td></tr>
+<tr><td>Basé sur une clé de partition</td><td>Moyen</td><td>Fort</td><td>10,000,000+</td><td>Pour ceux qui prévoient une augmentation rapide du nombre de locataires à plusieurs millions.</td></tr>
 </tbody>
 </table>
-<h2 id="Whats-next" class="common-anchor-header">What’s next<button data-href="#Whats-next" class="anchor-icon" translate="no">
+<h2 id="Whats-next" class="common-anchor-header">Prochaine étape<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -103,5 +103,4 @@ title: Multi-tenancy strategies
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><a href="/docs/manage_databases.md">Manage Databases</a>
-<a href="/docs/schema.md">Schema</a></p>
+    </button></h2><p><a href="/docs/fr/manage_databases.md">Gérer le</a><a href="/docs/fr/schema.md">schéma des</a><a href="/docs/fr/manage_databases.md">bases de données</a></p>

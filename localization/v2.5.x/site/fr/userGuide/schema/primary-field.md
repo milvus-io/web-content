@@ -1,12 +1,13 @@
 ---
 id: primary-field.md
-title: Primary Field & AutoID
+title: Champ primaire et AutoID
 summary: >-
-  The primary field uniquely identifies an entity. This page introduces how to
-  add the primary field of two different data types and how to enable Milvus to
-  automatically allocate primary field values.​
+  Le champ primaire identifie de manière unique une entité. Cette page explique
+  comment ajouter le champ primaire de deux types de données différents et
+  comment permettre à Milvus d'attribuer automatiquement des valeurs de champ
+  primaire.
 ---
-<h1 id="Primary-Field--AutoID​" class="common-anchor-header">Primary Field &amp; AutoID​<button data-href="#Primary-Field--AutoID​" class="anchor-icon" translate="no">
+<h1 id="Primary-Field--AutoID​" class="common-anchor-header">Champ primaire et AutoID<button data-href="#Primary-Field--AutoID​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -21,8 +22,8 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>The primary field uniquely identifies an entity. This page introduces how to add the primary field of two different data types and how to enable Milvus to automatically allocate primary field values.​</p>
-<h2 id="Overview​" class="common-anchor-header">Overview​<button data-href="#Overview​" class="anchor-icon" translate="no">
+    </button></h1><p>Le champ primaire identifie de manière unique une entité. Cette page explique comment ajouter le champ primaire de deux types de données différents et comment permettre à Milvus d'attribuer automatiquement des valeurs de champ primaire.</p>
+<h2 id="Overview​" class="common-anchor-header">Vue d'ensemble<button data-href="#Overview​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -37,10 +38,10 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>In a collection, the primary key of each entity should be globally unique. When adding the primary field, you need to explicitly set its data type to <strong>VARCHAR</strong> or <strong>INT64</strong>. Setting its data type to <strong>INT64</strong> indicates that the primary keys should be an integer similar to <code translate="no">12345</code>; Setting its data type to <strong>VARCHAR</strong> indicates that the primary keys should be a string similar to <code translate="no">my_entity_1234</code>.​</p>
-<p>You can also enable <strong>AutoID</strong> to make Milvus automatically allocate primary keys for incoming entities. Once you have enabled <strong>AutoID</strong> in your collection, do not include primary keys when inserting entities.​</p>
-<p>The primary field in a collection does not have a default value and cannot be null.​</p>
-<h2 id="Use-Int64-Primary-Keys​" class="common-anchor-header">Use Int64 Primary Keys​<button data-href="#Use-Int64-Primary-Keys​" class="anchor-icon" translate="no">
+    </button></h2><p>Dans une collection, la clé primaire de chaque entité doit être globalement unique. Lors de l'ajout du champ primaire, vous devez explicitement définir son type de données sur <strong>VARCHAR</strong> ou <strong>INT64</strong>. En définissant son type de données sur <strong>INT64</strong>, vous indiquez que les clés primaires doivent être un nombre entier similaire à <code translate="no">12345</code>; En définissant son type de données sur <strong>VARCHAR</strong>, vous indiquez que les clés primaires doivent être une chaîne de caractères similaire à <code translate="no">my_entity_1234</code>.</p>
+<p>Vous pouvez également activer <strong>AutoID</strong> pour que Milvus alloue automatiquement des clés primaires aux entités entrantes. Une fois que vous avez activé <strong>AutoID</strong> dans votre collection, n'incluez pas de clés primaires lors de l'insertion d'entités.</p>
+<p>Le champ primaire d'une collection n'a pas de valeur par défaut et ne peut pas être nul.</p>
+<h2 id="Use-Int64-Primary-Keys​" class="common-anchor-header">Utiliser des clés primaires Int64<button data-href="#Use-Int64-Primary-Keys​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -55,13 +56,9 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>To use primary keys of the Int64 type, you need to set <code translate="no">datatype</code> to <code translate="no">DataType.INT64</code> and set <code translate="no">is_primary</code> to <code translate="no">true</code>. If you also need Milvus to allocate the primary keys for the incoming entities, also set <code translate="no">auto_id</code> to <code translate="no">true</code>.​</p>
+    </button></h2><p>Pour utiliser des clés primaires de type Int64, vous devez définir <code translate="no">datatype</code> sur <code translate="no">DataType.INT64</code> et <code translate="no">is_primary</code> sur <code translate="no">true</code>. Si vous avez également besoin que Milvus alloue les clés primaires pour les entités entrantes, définissez également <code translate="no">auto_id</code> sur <code translate="no">true</code>.</p>
 <div class="multipleCode">
-  <a href="#python">Python </a>
-  <a href="#java">Java</a>
-  <a href="#javascript">Node.js</a>
-  <a href="#curl">cURL</a>
-</div>
+ <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType​
 ​
 schema = MilvusClient.create_schema()​
@@ -123,7 +120,7 @@ schema.addField(AddFieldReq.builder()​
 }&quot;</span>​
 
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Use-VarChar-Primary-Keys​" class="common-anchor-header">Use VarChar Primary Keys​<button data-href="#Use-VarChar-Primary-Keys​" class="anchor-icon" translate="no">
+<h2 id="Use-VarChar-Primary-Keys​" class="common-anchor-header">Utiliser des clés primaires VarChar<button data-href="#Use-VarChar-Primary-Keys​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -138,13 +135,9 @@ schema.addField(AddFieldReq.builder()​
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>To use VarChar primary keys, in addition to changing the value of the <code translate="no">data_type</code> parameter to <code translate="no">DataType.VARCHAR</code>, you also need to set the <code translate="no">max_length</code> parameter for the field. ​</p>
+    </button></h2><p>Pour utiliser les clés primaires VarChar, outre la modification de la valeur du paramètre <code translate="no">data_type</code> en <code translate="no">DataType.VARCHAR</code>, vous devez également définir le paramètre <code translate="no">max_length</code> pour le champ. </p>
 <div class="multipleCode">
-  <a href="#python">Python </a>
-  <a href="#java">Java</a>
-  <a href="#javascript">Node.js</a>
-  <a href="#curl">cURL</a>
-</div>
+ <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python">schema.add_field(​
     field_name=<span class="hljs-string">&quot;my_id&quot;</span>,​
     datatype=DataType.VARCHAR,​

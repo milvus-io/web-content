@@ -1,13 +1,15 @@
 ---
 id: keyword-match.md
 summary: >-
-  Keyword match in Milvus enables precise document retrieval based on specific
-  terms. This feature is primarily used for filtered search to satisfy specific
-  conditions and can incorporate scalar filtering to refine query results,
-  allowing similarity searches within vectors that meet scalar criteria.​
-title: Keyword Match​
+  La correspondance par mot-clé dans Milvus permet une recherche précise de
+  documents sur la base de termes spécifiques. Cette fonction est principalement
+  utilisée pour la recherche filtrée afin de satisfaire des conditions
+  spécifiques et peut incorporer le filtrage scalaire pour affiner les résultats
+  de la requête, permettant des recherches de similarité dans les vecteurs qui
+  répondent aux critères scalaires.
+title: Correspondance de mots-clés
 ---
-<h1 id="Keyword-Match​" class="common-anchor-header">Keyword Match​<button data-href="#Keyword-Match​" class="anchor-icon" translate="no">
+<h1 id="Keyword-Match​" class="common-anchor-header">Correspondance de mots-clés<button data-href="#Keyword-Match​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -22,11 +24,11 @@ title: Keyword Match​
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Keyword match in Milvus enables precise document retrieval based on specific terms. This feature is primarily used for filtered search to satisfy specific conditions and can incorporate scalar filtering to refine query results, allowing similarity searches within vectors that meet scalar criteria.​</p>
+    </button></h1><p>La recherche par mot-clé dans Milvus permet d'extraire des documents avec précision sur la base de termes spécifiques. Cette fonction est principalement utilisée pour la recherche filtrée afin de satisfaire des conditions spécifiques et peut incorporer le filtrage scalaire pour affiner les résultats de la requête, permettant des recherches de similarité dans les vecteurs qui répondent aux critères scalaires.</p>
 <div class="alert note">
-<p>Keyword match focuses on finding exact occurrences of the query terms, without scoring the relevance of the matched documents. If you want to retrieve the most relevant documents based on the semantic meaning and importance of the query terms, we recommend you use <a href="/docs/full-text-search.md">​Full Text Search</a>.​</p>
+<p>La correspondance par mot-clé se concentre sur la recherche d'occurrences exactes des termes de la requête, sans évaluer la pertinence des documents correspondants. Si vous souhaitez récupérer les documents les plus pertinents en fonction de la signification sémantique et de l'importance des termes de la requête, nous vous recommandons d'utiliser la <a href="/docs/fr/full-text-search.md">recherche en texte intégral</a>.</p>
 </div>
-<h2 id="Overview" class="common-anchor-header">Overview<button data-href="#Overview" class="anchor-icon" translate="no">
+<h2 id="Overview" class="common-anchor-header">Vue d'ensemble<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -41,19 +43,17 @@ title: Keyword Match​
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus integrates <a href="https://github.com/quickwit-oss/tantivy">Tantivy</a> to power its underlying inverted index and keyword search. For each text entry, Milvus indexes it following the procedure:​</p>
+    </button></h2><p>Milvus intègre <a href="https://github.com/quickwit-oss/tantivy">Tantivy</a> pour alimenter son index inversé sous-jacent et sa recherche par mot-clé. Pour chaque entrée de texte, Milvus l'indexe en suivant la procédure.</p>
 <ol>
-<li><p><a href="/docs/analyzer-overview.md">Analyzer</a>: The analyzer processes input text by tokenizing it into individual words, or tokens, and then applying filters as needed. This allows Milvus to build an index based on these tokens.​</p></li>
-<li><p><a href="/docs/index-scalar-fields.md">Indexing</a>: After text analysis, Milvus creates an inverted index that maps each unique token to the documents containing it.​</p></li>
+<li><p><a href="/docs/fr/analyzer-overview.md">Analyseur</a>: L'analyseur traite le texte d'entrée en le transformant en mots individuels, ou tokens, puis en appliquant des filtres si nécessaire. Cela permet à Milvus de construire un index basé sur ces tokens.</p></li>
+<li><p><a href="/docs/fr/index-scalar-fields.md">Indexation</a>: Après l'analyse du texte, Milvus crée un index inversé qui associe chaque token unique aux documents qui le contiennent.</p></li>
 </ol>
-<p>When a user performs a keyword match, the inverted index is used to quickly retrieve all documents containing the keywords. This is much faster than scanning through each document individually.​</p>
+<p>Lorsqu'un utilisateur effectue une recherche par mots-clés, l'index inversé est utilisé pour retrouver rapidement tous les documents contenant les mots-clés. Cette méthode est beaucoup plus rapide que l'analyse individuelle de chaque document.</p>
 <p>
-  <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.5.x/assets/keyword-match.png" alt="Keyword Match" class="doc-image" id="keyword-match" />
-    <span>Keyword Match</span>
-  </span>
-</p>
-<h2 id="Enable-keyword-match" class="common-anchor-header">Enable keyword match<button data-href="#Enable-keyword-match" class="anchor-icon" translate="no">
+  
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/keyword-match.png" alt="Keyword Match" class="doc-image" id="keyword-match" />
+   </span> <span class="img-wrapper"> <span>Correspondance par mot-clé</span> </span></p>
+<h2 id="Enable-keyword-match" class="common-anchor-header">Activer la recherche par mot-clé<button data-href="#Enable-keyword-match" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -68,8 +68,8 @@ title: Keyword Match​
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Keyword match works on the <code translate="no">VARCHAR</code> field type, which is essentially the string data type in Milvus. To enable keyword match, set both <code translate="no">enable_analyzer</code> and <code translate="no">enable_match</code> to <code translate="no">True</code> and then optionally configure an analyzer for text analysis when defining your collection schema.​</p>
-<h3 id="Set-enableanalyzer-and-enablematch​" class="common-anchor-header">Set <code translate="no">enable_analyzer</code> and <code translate="no">enable_match</code>​</h3><p>To enable keyword match for a specific <code translate="no">VARCHAR</code> field, set both the <code translate="no">enable_analyzer</code> and <code translate="no">enable_match</code> parameters to <code translate="no">True</code> when defining the field schema. This instructs Milvus to tokenize text and create an inverted index for the specified field, allowing fast and efficient keyword matches.​</p>
+    </button></h2><p>La correspondance par mot-clé fonctionne sur le type de champ <code translate="no">VARCHAR</code>, qui est essentiellement le type de données chaîne dans Milvus. Pour activer la correspondance de mots-clés, définissez <code translate="no">enable_analyzer</code> et <code translate="no">enable_match</code> sur <code translate="no">True</code>, puis configurez éventuellement un analyseur pour l'analyse de texte lors de la définition de votre schéma de collecte.</p>
+<h3 id="Set-enableanalyzer-and-enablematch​" class="common-anchor-header">Définir <code translate="no">enable_analyzer</code> et <code translate="no">enable_match</code></h3><p>Pour activer la correspondance des mots-clés pour un champ <code translate="no">VARCHAR</code> spécifique, définissez les paramètres <code translate="no">enable_analyzer</code> et <code translate="no">enable_match</code> sur <code translate="no">True</code> lors de la définition du schéma de champ. Cela indique à Milvus de tokeniser le texte et de créer un index inversé pour le champ spécifié, ce qui permet des correspondances de mots clés rapides et efficaces.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType​
 ​
 schema = MilvusClient.create_schema(auto_id=<span class="hljs-literal">True</span>, enable_dynamic_field=<span class="hljs-literal">False</span>)​
@@ -83,9 +83,9 @@ schema.add_field(​
 )​
 
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Optional-Configure-an-analyzer​" class="common-anchor-header">Optional: Configure an analyzer​</h3><p>The performance and accuracy of keyword matching depend on the selected analyzer. Different analyzers are tailored to various languages and text structures, so choosing the right one can significantly impact search results for your specific use case.​</p>
-<p>By default, Milvus uses the <code translate="no">standard</code> analyzer, which tokenizes text based on whitespace and punctuation, removes tokens longer than 40 characters, and converts text to lowercase. No additional parameters are needed to apply this default setting. For more information, refer to <a href="/docs/standard-analyzer.md">​Standard</a>.​</p>
-<p>In cases where a different analyzer is required, you can configure one using the <code translate="no">analyzer_params</code> parameter. For example, to apply the <code translate="no">english</code> analyzer for processing English text:​</p>
+<h3 id="Optional-Configure-an-analyzer​" class="common-anchor-header">Facultatif : Configurer un analyseur</h3><p>Les performances et la précision de la recherche par mot-clé dépendent de l'analyseur sélectionné. Différents analyseurs sont adaptés à diverses langues et structures de texte, de sorte que le choix du bon analyseur peut avoir un impact significatif sur les résultats de recherche pour votre cas d'utilisation spécifique.</p>
+<p>Par défaut, Milvus utilise l'analyseur <code translate="no">standard</code>, qui donne un sens au texte en fonction des espaces blancs et de la ponctuation, supprime les tokens de plus de 40 caractères et convertit le texte en minuscules. Aucun paramètre supplémentaire n'est nécessaire pour appliquer ce paramètre par défaut. Pour plus d'informations, voir <a href="/docs/fr/standard-analyzer.md">Standard</a>.</p>
+<p>Si un autre analyseur est nécessaire, vous pouvez le configurer à l'aide du paramètre <code translate="no">analyzer_params</code>. Par exemple, pour appliquer l'analyseur <code translate="no">english</code> au traitement du texte anglais.</p>
 <pre><code translate="no" class="language-python">analyzer_params={​
     <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;english&quot;</span>​
 }​
@@ -100,8 +100,8 @@ schema.add_field(​
 )​
 
 <button class="copy-code-btn"></button></code></pre>
-<p>Milvus also provides various other analyzers suited to different languages and scenarios. For more details, refer to <a href="/docs/analyzer-overview.md">​Overview</a>.​</p>
-<h2 id="Use-keyword-match" class="common-anchor-header">Use keyword match<button data-href="#Use-keyword-match" class="anchor-icon" translate="no">
+<p>Milvus propose également d'autres analyseurs adaptés à différentes langues et à différents scénarios. Pour plus de détails, reportez-vous à la section <a href="/docs/fr/analyzer-overview.md">Vue d'ensemble</a>.</p>
+<h2 id="Use-keyword-match" class="common-anchor-header">Utiliser la correspondance de mots-clés<button data-href="#Use-keyword-match" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -116,25 +116,25 @@ schema.add_field(​
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Once you have enabled keyword match for a VARCHAR field in your collection schema, you can perform keyword matches using the <code translate="no">TEXT_MATCH</code> expression.​</p>
-<h3 id="TEXTMATCH-expression-syntax​" class="common-anchor-header">TEXT_MATCH expression syntax​</h3><p>The <code translate="no">TEXT_MATCH</code> expression is used to specify the field and the keywords to search for. Its syntax is as follows:​</p>
+    </button></h2><p>Une fois que vous avez activé la correspondance de mots-clés pour un champ VARCHAR dans votre schéma de collecte, vous pouvez effectuer des correspondances de mots-clés à l'aide de l'expression <code translate="no">TEXT_MATCH</code>.</p>
+<h3 id="TEXTMATCH-expression-syntax​" class="common-anchor-header">Syntaxe de l'expression TEXT_MATCH</h3><p>L'expression <code translate="no">TEXT_MATCH</code> est utilisée pour spécifier le champ et les mots-clés à rechercher. Sa syntaxe est la suivante.</p>
 <pre><code translate="no" class="language-python">TEXT_MATCH(field_name, text)​
 
 <button class="copy-code-btn"></button></code></pre>
 <ul>
-<li><p><code translate="no">field_name</code>: The name of the VARCHAR field to search for.​</p></li>
-<li><p><code translate="no">text</code>: The keywords to search for. Multiple keywords can be separated by spaces or other appropriate delimiters based on the language and configured analyzer.​</p></li>
+<li><p><code translate="no">field_name</code>: Le nom du champ VARCHAR à rechercher.</p></li>
+<li><p><code translate="no">text</code>: Les mots-clés à rechercher. Plusieurs mots-clés peuvent être séparés par des espaces ou d'autres délimiteurs appropriés en fonction de la langue et de l'analyseur configuré.</p></li>
 </ul>
-<p>By default, <code translate="no">TEXT_MATCH</code> uses the <strong>OR</strong> matching logic, meaning it will return documents that contain any of the specified keywords. For example, to search for documents containing the keywords <code translate="no">machine</code> or <code translate="no">deep</code> in the <code translate="no">text</code> field, use the following expression:​</p>
+<p>Par défaut, <code translate="no">TEXT_MATCH</code> utilise la logique de correspondance <strong>OR</strong>, ce qui signifie qu'il renverra les documents qui contiennent n'importe lequel des mots-clés spécifiés. Par exemple, pour rechercher des documents contenant les mots-clés <code translate="no">machine</code> ou <code translate="no">deep</code> dans le champ <code translate="no">text</code>, utilisez l'expression suivante.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&quot;TEXT_MATCH(text, &#x27;machine deep&#x27;)&quot;</span>​
 
 <button class="copy-code-btn"></button></code></pre>
-<p>You can also combine multiple <code translate="no">TEXT_MATCH</code> expressions using logical operators to perform <strong>AND</strong> matching. For example, to search for documents containing both <code translate="no">machine</code> and <code translate="no">deep</code> in the <code translate="no">text</code> field, use the following expression:​</p>
+<p>Vous pouvez également combiner plusieurs expressions <code translate="no">TEXT_MATCH</code> à l'aide d'opérateurs logiques pour effectuer une correspondance <strong>ET</strong>. Par exemple, pour rechercher les documents contenant les mots-clés <code translate="no">machine</code> et <code translate="no">deep</code> dans le champ <code translate="no">text</code>, utilisez l'expression suivante.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&quot;TEXT_MATCH(text, &#x27;machine&#x27;) and TEXT_MATCH(text, &#x27;deep&#x27;)&quot;</span>​
 
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Search-with-keyword-match​" class="common-anchor-header">Search with keyword match​</h3><p>Keyword match can be used in combination with vector similarity search to narrow the search scope and improve search performance. By filtering the collection using keyword match before vector similarity search, you can reduce the number of documents that need to be searched, resulting in faster query times.​</p>
-<p>In this example, the <code translate="no">filter</code> expression filters the search results to only include documents that match the specified keywords <code translate="no">keyword1</code> or <code translate="no">keyword2</code>. The vector similarity search is then performed on this filtered subset of documents.​</p>
+<h3 id="Search-with-keyword-match​" class="common-anchor-header">Recherche avec correspondance de mots-clés</h3><p>La correspondance par mot-clé peut être utilisée en combinaison avec la recherche de similarité vectorielle pour restreindre le champ de recherche et améliorer les performances de la recherche. En filtrant la collection à l'aide de la correspondance de mots-clés avant la recherche de similarité vectorielle, vous pouvez réduire le nombre de documents à rechercher, ce qui accélère les temps de recherche.</p>
+<p>Dans cet exemple, l'expression <code translate="no">filter</code> filtre les résultats de la recherche pour n'inclure que les documents qui correspondent aux mots-clés spécifiés <code translate="no">keyword1</code> ou <code translate="no">keyword2</code>. La recherche vectorielle de similarité est ensuite effectuée sur ce sous-ensemble de documents filtrés.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Match entities with `keyword1` or `keyword2`​</span>
 <span class="hljs-built_in">filter</span> = <span class="hljs-string">&quot;TEXT_MATCH(text, &#x27;keyword1 keyword2&#x27;)&quot;</span>​
 ​
@@ -150,8 +150,8 @@ result = MilvusClient.search(​
 )​
 
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Query-with-keyword-match​" class="common-anchor-header">Query with keyword match​</h3><p>Keyword match can also be used for scalar filtering in query operations. By specifying a <code translate="no">TEXT_MATCH</code> expression in the <code translate="no">expr</code> parameter of the <code translate="no">query()</code> method, you can retrieve documents that match the given keywords.​</p>
-<p>The example below retrieves documents where the <code translate="no">text</code> field contains both keywords <code translate="no">keyword1</code> and <code translate="no">keyword2</code>.​</p>
+<h3 id="Query-with-keyword-match​" class="common-anchor-header">Requête avec correspondance de mots-clés</h3><p>La correspondance par mot-clé peut également être utilisée pour le filtrage scalaire dans les opérations de requête. En spécifiant une expression <code translate="no">TEXT_MATCH</code> dans le paramètre <code translate="no">expr</code> de la méthode <code translate="no">query()</code>, vous pouvez récupérer les documents qui correspondent aux mots-clés donnés.</p>
+<p>L'exemple ci-dessous permet d'extraire les documents dont le champ <code translate="no">text</code> contient les deux mots-clés <code translate="no">keyword1</code> et <code translate="no">keyword2</code>.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Match entities with both `keyword1` and `keyword2`​</span>
 <span class="hljs-built_in">filter</span> = <span class="hljs-string">&quot;TEXT_MATCH(text, &#x27;keyword1&#x27;) and TEXT_MATCH(text, &#x27;keyword2&#x27;)&quot;</span>​
 ​
@@ -162,7 +162,7 @@ result = MilvusClient.query(​
 )​
 
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Considerations" class="common-anchor-header">Considerations<button data-href="#Considerations" class="anchor-icon" translate="no">
+<h2 id="Considerations" class="common-anchor-header">Points à prendre en considération<button data-href="#Considerations" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -178,6 +178,6 @@ result = MilvusClient.query(​
         ></path>
       </svg>
     </button></h2><ul>
-<li><p>Enabling keyword matching for a field triggers the creation of an inverted index, which consumes storage resources. Consider storage impact when deciding to enable this feature, as it varies based on text size, unique tokens, and the analyzer used.​</p></li>
-<li><p>Once you’ve defined an analyzer in your schema, its settings become permanent for that collection. If you decide that a different analyzer would better suit your needs, you may consider dropping the existing collection and creating a new one with the desired analyzer configuration.​</p></li>
+<li><p>L'activation de la recherche par mot-clé pour un champ déclenche la création d'un index inversé, qui consomme des ressources de stockage. Tenez compte de l'impact sur le stockage lorsque vous décidez d'activer cette fonctionnalité, car il varie en fonction de la taille du texte, des jetons uniques et de l'analyseur utilisé.</p></li>
+<li><p>Une fois que vous avez défini un analyseur dans votre schéma, ses paramètres deviennent permanents pour cette collection. Si vous décidez qu'un autre analyseur répondrait mieux à vos besoins, vous pouvez envisager d'abandonner la collection existante et d'en créer une nouvelle avec la configuration d'analyseur souhaitée.</p></li>
 </ul>

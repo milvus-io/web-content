@@ -2,9 +2,9 @@
 id: configure_quotaandlimits.md
 related_key: configure
 group: system_configuration.md
-summary: Learn how to configure quotaAndLimits for Milvus.
+summary: Découvrez comment configurer quotaAndLimits pour Milvus.
 ---
-<h1 id="quotaAndLimits-related-Configurations" class="common-anchor-header">quotaAndLimits-related Configurations<button data-href="#quotaAndLimits-related-Configurations" class="anchor-icon" translate="no">
+<h1 id="quotaAndLimits-related-Configurations" class="common-anchor-header">Configurations relatives aux quotas et aux limites<button data-href="#quotaAndLimits-related-Configurations" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -19,21 +19,21 @@ summary: Learn how to configure quotaAndLimits for Milvus.
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>QuotaConfig, configurations of Milvus quota and limits.</p>
-<p>By default, we enable:</p>
+    </button></h1><p>QuotaConfig, configurations des quotas et limites de Milvus.</p>
+<p>Par défaut, nous activons :</p>
 <ol>
-<li><p>TT protection;</p></li>
-<li><p>Memory protection.</p></li>
-<li><p>Disk quota protection.</p></li>
+<li><p>Protection TT ;</p></li>
+<li><p>Protection de la mémoire.</p></li>
+<li><p>Protection du quota de disque.</p></li>
 </ol>
-<p>You can enable:</p>
+<p>Vous pouvez activer :</p>
 <ol>
-<li><p>DML throughput limitation;</p></li>
-<li><p>DDL, DQL qps/rps limitation;</p></li>
-<li><p>DQL Queue length/latency protection;</p></li>
-<li><p>DQL result rate protection;</p></li>
+<li><p>Limitation du débit DML ;</p></li>
+<li><p>la limitation du débit DDL, DQL ;</p></li>
+<li><p>Protection de la longueur/latence de la file d'attente DQL ;</p></li>
+<li><p>la protection du taux de résultat DQL ;</p></li>
 </ol>
-<p>If necessary, you can also manually force to deny RW requests.</p>
+<p>Si nécessaire, vous pouvez également forcer manuellement le refus des requêtes RW.</p>
 <h2 id="quotaAndLimitsenabled" class="common-anchor-header"><code translate="no">quotaAndLimits.enabled</code><button data-href="#quotaAndLimitsenabled" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -53,12 +53,12 @@ summary: Learn how to configure quotaAndLimits for Milvus.
   <thead>
     <tr>
       <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width20">Valeur par défaut</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        `true` to enable quota and limits, `false` to disable.      </td>
+      <td>        `true` pour activer les quotas et les limites, `false` pour les désactiver.      </td>
       <td>true</td>
     </tr>
   </tbody>
@@ -82,15 +82,15 @@ summary: Learn how to configure quotaAndLimits for Milvus.
   <thead>
     <tr>
       <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width20">Valeur par défaut</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>
-        <li>quotaCenterCollectInterval is the time interval that quotaCenter</li>      
-        <li>collects metrics from Proxies, Query cluster and Data cluster.</li>      
-        <li>seconds, (0 ~ 65536)</li>      </td>
+        <li>quotaCenterCollectInterval est l'intervalle de temps pendant lequel quotaCenter</li>      
+        <li>collecte les métriques des proxies, du cluster de requêtes et du cluster de données.</li>      
+        <li>secondes, (0 ~ 65536)</li>      </td>
       <td>3</td>
     </tr>
   </tbody>
@@ -113,13 +113,13 @@ summary: Learn how to configure quotaAndLimits for Milvus.
     </button></h2><table id="quotaAndLimits.limits.allocRetryTimes">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Description de la valeur par défaut</th>
+      <th class="width20">Valeur par défaut</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        retry times when delete alloc forward data from rate limit failed      </td>
+      <td>        Temps de réessai en cas d'échec de la suppression de l'allocation des données de la limite de débit      </td>
       <td>15</td>
     </tr>
   </tbody>
@@ -142,13 +142,13 @@ summary: Learn how to configure quotaAndLimits for Milvus.
     </button></h2><table id="quotaAndLimits.limits.allocWaitInterval">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Description de la valeur par défaut</th>
+      <th class="width20">Valeur par défaut</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        retry wait duration when delete alloc forward data rate failed, in millisecond      </td>
+      <td>        durée d'attente de la tentative en cas d'échec de la suppression de l'allocation des données à l'avance, en millisecondes      </td>
       <td>1000</td>
     </tr>
   </tbody>
@@ -171,14 +171,14 @@ summary: Learn how to configure quotaAndLimits for Milvus.
     </button></h2><table id="quotaAndLimits.limits.complexDeleteLimitEnable">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Description de la valeur par défaut</th>
+      <th class="width20">Valeur par défaut</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        whether complex delete check forward data by limiter      </td>
-      <td>false</td>
+      <td>        si l'effacement complexe des données de contrôle d'acheminement par le limiteur      </td>
+      <td>faux</td>
     </tr>
   </tbody>
 </table>
@@ -200,13 +200,13 @@ summary: Learn how to configure quotaAndLimits for Milvus.
     </button></h2><table id="quotaAndLimits.limits.maxCollectionNumPerDB">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Description de la valeur par défaut</th>
+      <th class="width20">Valeur par défaut</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        Maximum number of collections per database.      </td>
+      <td>        Nombre maximal de collections par base de données.      </td>
       <td>65536</td>
     </tr>
   </tbody>
@@ -229,13 +229,13 @@ summary: Learn how to configure quotaAndLimits for Milvus.
     </button></h2><table id="quotaAndLimits.limits.maxInsertSize">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Description de la valeur par défaut</th>
+      <th class="width20">Valeur par défaut</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        maximum size of a single insert request, in bytes, -1 means no limit      </td>
+      <td>        taille maximale d'une demande d'insertion unique, en octets, -1 signifie aucune limite      </td>
       <td>-1</td>
     </tr>
   </tbody>
@@ -258,13 +258,13 @@ summary: Learn how to configure quotaAndLimits for Milvus.
     </button></h2><table id="quotaAndLimits.limits.maxResourceGroupNumOfQueryNode">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Description de la valeur par défaut</th>
+      <th class="width20">Valeur par défaut</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        maximum number of resource groups of query nodes      </td>
+      <td>        nombre maximal de groupes de ressources des nœuds d'interrogation      </td>
       <td>1024</td>
     </tr>
   </tbody>
@@ -288,13 +288,13 @@ summary: Learn how to configure quotaAndLimits for Milvus.
   <thead>
     <tr>
       <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width20">Valeur par défaut</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        Whether DDL request throttling is enabled.      </td>
-      <td>false</td>
+      <td>        Si la limitation des requêtes DDL est activée.      </td>
+      <td>faux</td>
     </tr>
   </tbody>
 </table>
@@ -316,16 +316,16 @@ summary: Learn how to configure quotaAndLimits for Milvus.
     </button></h2><table id="quotaAndLimits.ddl.collectionRate">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Description de la valeur par défaut</th>
+      <th class="width20">Valeur par défaut</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>
-        <li>Maximum number of collection-related DDL requests per second.</li>      
-        <li>Setting this item to 10 indicates that Milvus processes no more than 10 collection-related DDL requests per second, including collection creation requests, collection drop requests, collection load requests, and collection release requests.</li>      
-        <li>To use this setting, set quotaAndLimits.ddl.enabled to true at the same time.</li>      </td>
+        <li>Nombre maximum de requêtes DDL liées aux collections par seconde.</li>      
+        <li>La valeur 10 attribuée à cet élément indique que Milvus ne traite pas plus de 10 demandes DDL liées aux collections par seconde, y compris les demandes de création de collection, les demandes d'abandon de collection, les demandes de chargement de collection et les demandes de libération de collection.</li>      
+        <li>Pour utiliser ce paramètre, définissez en même temps quotaAndLimits.ddl.enabled sur true.</li>      </td>
       <td>-1</td>
     </tr>
   </tbody>
@@ -349,15 +349,15 @@ summary: Learn how to configure quotaAndLimits for Milvus.
   <thead>
     <tr>
       <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width20">Valeur par défaut</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>
-        <li>Maximum number of partition-related DDL requests per second.</li>      
-        <li>Setting this item to 10 indicates that Milvus processes no more than 10 partition-related requests per second, including partition creation requests, partition drop requests, partition load requests, and partition release requests.</li>      
-        <li>To use this setting, set quotaAndLimits.ddl.enabled to true at the same time.</li>      </td>
+        <li>Nombre maximal de requêtes DDL liées à la partition par seconde.</li>      
+        <li>La définition de cet élément sur 10 indique que Milvus ne traite pas plus de 10 demandes liées à la partition par seconde, y compris les demandes de création de partition, les demandes d'abandon de partition, les demandes de chargement de partition et les demandes de libération de partition.</li>      
+        <li>Pour utiliser ce paramètre, définissez en même temps quotaAndLimits.ddl.enabled sur true.</li>      </td>
       <td>-1</td>
     </tr>
   </tbody>
@@ -381,12 +381,12 @@ summary: Learn how to configure quotaAndLimits for Milvus.
   <thead>
     <tr>
       <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width20">Valeur par défaut</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        qps of db level , default no limit, rate for CreateCollection, DropCollection, LoadCollection, ReleaseCollection      </td>
+      <td>        qps du niveau de la base de données, pas de limite par défaut, taux pour CreateCollection, DropCollection, LoadCollection, ReleaseCollection      </td>
       <td>-1</td>
     </tr>
   </tbody>
@@ -409,13 +409,13 @@ summary: Learn how to configure quotaAndLimits for Milvus.
     </button></h2><table id="quotaAndLimits.ddl.db.partitionRate">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Description de la valeur par défaut</th>
+      <th class="width20">Valeur par défaut</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        qps of db level, default no limit, rate for CreatePartition, DropPartition, LoadPartition, ReleasePartition      </td>
+      <td>        qps du niveau de la base de données, pas de limite par défaut, taux pour CreatePartition, DropPartition, LoadPartition, ReleasePartition      </td>
       <td>-1</td>
     </tr>
   </tbody>
@@ -438,14 +438,14 @@ summary: Learn how to configure quotaAndLimits for Milvus.
     </button></h2><table id="quotaAndLimits.indexRate.enabled">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Description de la valeur par défaut</th>
+      <th class="width20">Valeur par défaut</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        Whether index-related request throttling is enabled.      </td>
-      <td>false</td>
+      <td>        Indique si la limitation des requêtes liées à l'index est activée.      </td>
+      <td>faux</td>
     </tr>
   </tbody>
 </table>
@@ -467,16 +467,16 @@ summary: Learn how to configure quotaAndLimits for Milvus.
     </button></h2><table id="quotaAndLimits.indexRate.max">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Description de la valeur par défaut</th>
+      <th class="width20">Valeur par défaut</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>
-        <li>Maximum number of index-related requests per second.</li>      
-        <li>Setting this item to 10 indicates that Milvus processes no more than 10 partition-related requests per second, including index creation requests and index drop requests.</li>      
-        <li>To use this setting, set quotaAndLimits.indexRate.enabled to true at the same time.</li>      </td>
+        <li>Nombre maximum de requêtes liées à l'index par seconde.</li>      
+        <li>La définition de cet élément sur 10 indique que Milvus ne traite pas plus de 10 demandes liées à la partition par seconde, y compris les demandes de création et d'abandon d'index.</li>      
+        <li>Pour utiliser ce paramètre, définissez en même temps quotaAndLimits.indexRate.enabled sur true.</li>      </td>
       <td>-1</td>
     </tr>
   </tbody>
@@ -500,12 +500,12 @@ summary: Learn how to configure quotaAndLimits for Milvus.
   <thead>
     <tr>
       <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width20">Valeur par défaut</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        qps of db level, default no limit, rate for CreateIndex, DropIndex      </td>
+      <td>        qps du niveau de la base de données, pas de limite par défaut, taux pour CreateIndex, DropIndex      </td>
       <td>-1</td>
     </tr>
   </tbody>
@@ -528,14 +528,14 @@ summary: Learn how to configure quotaAndLimits for Milvus.
     </button></h2><table id="quotaAndLimits.flushRate.enabled">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Description de la valeur par défaut</th>
+      <th class="width20">Valeur par défaut</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        Whether flush request throttling is enabled.      </td>
-      <td>true</td>
+      <td>        Indique si la limitation des demandes de vidange est activée.      </td>
+      <td>vrai</td>
     </tr>
   </tbody>
 </table>
@@ -558,15 +558,15 @@ summary: Learn how to configure quotaAndLimits for Milvus.
   <thead>
     <tr>
       <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width20">Valeur par défaut</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>
-        <li>Maximum number of flush requests per second.</li>      
-        <li>Setting this item to 10 indicates that Milvus processes no more than 10 flush requests per second.</li>      
-        <li>To use this setting, set quotaAndLimits.flushRate.enabled to true at the same time.</li>      </td>
+        <li>Nombre maximum de demandes de vidange par seconde.</li>      
+        <li>La valeur 10 indique que Milvus ne traite pas plus de 10 demandes de vidange par seconde.</li>      
+        <li>Pour utiliser ce paramètre, définissez en même temps quotaAndLimits.flushRate.enabled sur true.</li>      </td>
       <td>-1</td>
     </tr>
   </tbody>
@@ -590,12 +590,12 @@ summary: Learn how to configure quotaAndLimits for Milvus.
   <thead>
     <tr>
       <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width20">Valeur par défaut</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        qps, default no limit, rate for flush at collection level.      </td>
+      <td>        qps, pas de limite par défaut, taux de vidange au niveau de la collection.      </td>
       <td>0.1</td>
     </tr>
   </tbody>
@@ -618,13 +618,13 @@ summary: Learn how to configure quotaAndLimits for Milvus.
     </button></h2><table id="quotaAndLimits.flushRate.db.max">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Description de la valeur par défaut</th>
+      <th class="width20">Valeur par défaut</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        qps of db level, default no limit, rate for flush      </td>
+      <td>        qps au niveau de la base de données, pas de limite par défaut, taux de vidange      </td>
       <td>-1</td>
     </tr>
   </tbody>
@@ -647,14 +647,14 @@ summary: Learn how to configure quotaAndLimits for Milvus.
     </button></h2><table id="quotaAndLimits.compactionRate.enabled">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Description de la valeur par défaut</th>
+      <th class="width20">Valeur par défaut</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        Whether manual compaction request throttling is enabled.      </td>
-      <td>false</td>
+      <td>        Indique si la limitation manuelle des demandes de compactage est activée.      </td>
+      <td>faux</td>
     </tr>
   </tbody>
 </table>
@@ -676,16 +676,16 @@ summary: Learn how to configure quotaAndLimits for Milvus.
     </button></h2><table id="quotaAndLimits.compactionRate.max">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Description de la valeur par défaut</th>
+      <th class="width20">Valeur par défaut</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>
-        <li>Maximum number of manual-compaction requests per second.</li>      
-        <li>Setting this item to 10 indicates that Milvus processes no more than 10 manual-compaction requests per second.</li>      
-        <li>To use this setting, set quotaAndLimits.compaction.enabled to true at the same time.</li>      </td>
+        <li>Nombre maximum de demandes de compactage manuel par seconde.</li>      
+        <li>La définition de cet élément sur 10 indique que Milvus ne traite pas plus de 10 demandes de compactage manuel par seconde.</li>      
+        <li>Pour utiliser ce paramètre, définissez en même temps quotaAndLimits.compaction.enabled sur true.</li>      </td>
       <td>-1</td>
     </tr>
   </tbody>
@@ -709,12 +709,12 @@ summary: Learn how to configure quotaAndLimits for Milvus.
   <thead>
     <tr>
       <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width20">Valeur par défaut</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        qps of db level, default no limit, rate for manualCompaction      </td>
+      <td>        qps du niveau de la base de données, pas de limite par défaut, taux de compactage manuel      </td>
       <td>-1</td>
     </tr>
   </tbody>
@@ -737,14 +737,14 @@ summary: Learn how to configure quotaAndLimits for Milvus.
     </button></h2><table id="quotaAndLimits.dml.enabled">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Description de la valeur par défaut</th>
+      <th class="width20">Valeur par défaut</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        Whether DML request throttling is enabled.      </td>
-      <td>false</td>
+      <td>        Indique si la limitation des requêtes DML est activée.      </td>
+      <td>faux</td>
     </tr>
   </tbody>
 </table>
@@ -766,16 +766,16 @@ summary: Learn how to configure quotaAndLimits for Milvus.
     </button></h2><table id="quotaAndLimits.dml.insertRate.max">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Description de la valeur par défaut</th>
+      <th class="width20">Valeur par défaut</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>
-        <li>Highest data insertion rate per second.</li>      
-        <li>Setting this item to 5 indicates that Milvus only allows data insertion at the rate of 5 MB/s.</li>      
-        <li>To use this setting, set quotaAndLimits.dml.enabled to true at the same time.</li>      </td>
+        <li>Taux d'insertion de données le plus élevé par seconde.</li>      
+        <li>La définition de cet élément sur 5 indique que Milvus n'autorise que l'insertion de données au taux de 5 Mo/s.</li>      
+        <li>Pour utiliser ce paramètre, définissez en même temps quotaAndLimits.dml.enabled sur true.</li>      </td>
       <td>-1</td>
     </tr>
   </tbody>
@@ -799,12 +799,12 @@ summary: Learn how to configure quotaAndLimits for Milvus.
   <thead>
     <tr>
       <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width20">Valeur par défaut</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        MB/s, default no limit      </td>
+      <td>        MB/s, pas de limite par défaut      </td>
       <td>-1</td>
     </tr>
   </tbody>
@@ -827,16 +827,16 @@ summary: Learn how to configure quotaAndLimits for Milvus.
     </button></h2><table id="quotaAndLimits.dml.insertRate.collection.max">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Description de la valeur par défaut</th>
+      <th class="width20">Valeur par défaut</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>
-        <li>Highest data insertion rate per collection per second.</li>      
-        <li>Setting this item to 5 indicates that Milvus only allows data insertion to any collection at the rate of 5 MB/s.</li>      
-        <li>To use this setting, set quotaAndLimits.dml.enabled to true at the same time.</li>      </td>
+        <li>Taux d'insertion de données le plus élevé par collection et par seconde.</li>      
+        <li>La valeur 5 indique que Milvus n'autorise l'insertion de données dans une collection qu'à la vitesse de 5 Mo/s.</li>      
+        <li>Pour utiliser ce paramètre, définissez en même temps quotaAndLimits.dml.enabled sur true.</li>      </td>
       <td>-1</td>
     </tr>
   </tbody>
@@ -860,12 +860,12 @@ summary: Learn how to configure quotaAndLimits for Milvus.
   <thead>
     <tr>
       <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width20">Valeur par défaut</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        MB/s, default no limit      </td>
+      <td>        MB/s, pas de limite par défaut      </td>
       <td>-1</td>
     </tr>
   </tbody>
@@ -888,13 +888,13 @@ summary: Learn how to configure quotaAndLimits for Milvus.
     </button></h2><table id="quotaAndLimits.dml.upsertRate.max">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Description de la valeur par défaut</th>
+      <th class="width20">Valeur par défaut</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        MB/s, default no limit      </td>
+      <td>        MB/s, pas de limite par défaut      </td>
       <td>-1</td>
     </tr>
   </tbody>
@@ -917,13 +917,13 @@ summary: Learn how to configure quotaAndLimits for Milvus.
     </button></h2><table id="quotaAndLimits.dml.upsertRate.db.max">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Description de la valeur par défaut</th>
+      <th class="width20">Valeur par défaut</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        MB/s, default no limit      </td>
+      <td>        MB/s, pas de limite par défaut      </td>
       <td>-1</td>
     </tr>
   </tbody>
@@ -946,13 +946,13 @@ summary: Learn how to configure quotaAndLimits for Milvus.
     </button></h2><table id="quotaAndLimits.dml.upsertRate.collection.max">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Description de la valeur par défaut</th>
+      <th class="width20">Valeur par défaut</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        MB/s, default no limit      </td>
+      <td>        MB/s, pas de limite par défaut      </td>
       <td>-1</td>
     </tr>
   </tbody>
@@ -975,13 +975,13 @@ summary: Learn how to configure quotaAndLimits for Milvus.
     </button></h2><table id="quotaAndLimits.dml.upsertRate.partition.max">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Description de la valeur par défaut</th>
+      <th class="width20">Valeur par défaut</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        MB/s, default no limit      </td>
+      <td>        MB/s, pas de limite par défaut      </td>
       <td>-1</td>
     </tr>
   </tbody>
@@ -1004,16 +1004,16 @@ summary: Learn how to configure quotaAndLimits for Milvus.
     </button></h2><table id="quotaAndLimits.dml.deleteRate.max">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Description de la valeur par défaut</th>
+      <th class="width20">Valeur par défaut</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>
-        <li>Highest data deletion rate per second.</li>      
-        <li>Setting this item to 0.1 indicates that Milvus only allows data deletion at the rate of 0.1 MB/s.</li>      
-        <li>To use this setting, set quotaAndLimits.dml.enabled to true at the same time.</li>      </td>
+        <li>Taux de suppression de données le plus élevé par seconde.</li>      
+        <li>La définition de cet élément sur 0,1 indique que Milvus n'autorise que la suppression de données au taux de 0,1 Mo/s.</li>      
+        <li>Pour utiliser ce paramètre, définissez en même temps quotaAndLimits.dml.enabled sur true.</li>      </td>
       <td>-1</td>
     </tr>
   </tbody>
@@ -1037,12 +1037,12 @@ summary: Learn how to configure quotaAndLimits for Milvus.
   <thead>
     <tr>
       <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width20">Valeur par défaut</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        MB/s, default no limit      </td>
+      <td>        MB/s, pas de limite par défaut      </td>
       <td>-1</td>
     </tr>
   </tbody>
@@ -1065,16 +1065,16 @@ summary: Learn how to configure quotaAndLimits for Milvus.
     </button></h2><table id="quotaAndLimits.dml.deleteRate.collection.max">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Description de la valeur par défaut</th>
+      <th class="width20">Valeur par défaut</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>
-        <li>Highest data deletion rate per second.</li>      
-        <li>Setting this item to 0.1 indicates that Milvus only allows data deletion from any collection at the rate of 0.1 MB/s.</li>      
-        <li>To use this setting, set quotaAndLimits.dml.enabled to true at the same time.</li>      </td>
+        <li>Taux de suppression de données le plus élevé par seconde.</li>      
+        <li>La définition de cet élément sur 0,1 indique que Milvus n'autorise la suppression de données d'une collection qu'à un taux de 0,1 Mo/s.</li>      
+        <li>Pour utiliser ce paramètre, définissez en même temps quotaAndLimits.dml.enabled sur true.</li>      </td>
       <td>-1</td>
     </tr>
   </tbody>
@@ -1098,12 +1098,12 @@ summary: Learn how to configure quotaAndLimits for Milvus.
   <thead>
     <tr>
       <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width20">Valeur par défaut</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        MB/s, default no limit      </td>
+      <td>        MB/s, pas de limite par défaut      </td>
       <td>-1</td>
     </tr>
   </tbody>
@@ -1126,13 +1126,13 @@ summary: Learn how to configure quotaAndLimits for Milvus.
     </button></h2><table id="quotaAndLimits.dml.bulkLoadRate.max">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Description de la valeur par défaut</th>
+      <th class="width20">Valeur par défaut</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        MB/s, default no limit, not support yet. TODO: limit bulkLoad rate      </td>
+      <td>        MB/s, pas de limite par défaut, pas encore supporté. TODO : limiter le taux de bulkLoad      </td>
       <td>-1</td>
     </tr>
   </tbody>
@@ -1156,12 +1156,12 @@ summary: Learn how to configure quotaAndLimits for Milvus.
   <thead>
     <tr>
       <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width20">Valeur par défaut</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        MB/s, default no limit, not support yet. TODO: limit db bulkLoad rate      </td>
+      <td>        MB/s, pas de limite par défaut, pas de support pour l'instant. TODO : limit db bulkLoad rate    </td>
       <td>-1</td>
     </tr>
   </tbody>
@@ -1185,12 +1185,12 @@ summary: Learn how to configure quotaAndLimits for Milvus.
   <thead>
     <tr>
       <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width20">Valeur par défaut</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        MB/s, default no limit, not support yet. TODO: limit collection bulkLoad rate      </td>
+      <td>        MB/s, pas de limite par défaut, pas de support pour l'instant. TODO : limiter le taux de chargement de la collection      </td>
       <td>-1</td>
     </tr>
   </tbody>
@@ -1214,12 +1214,12 @@ summary: Learn how to configure quotaAndLimits for Milvus.
   <thead>
     <tr>
       <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width20">Valeur par défaut</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        MB/s, default no limit, not support yet. TODO: limit partition bulkLoad rate      </td>
+      <td>        MB/s, pas de limite par défaut, pas de support pour l'instant. TODO : limiter le taux de chargement en masse des partitions      </td>
       <td>-1</td>
     </tr>
   </tbody>
@@ -1243,13 +1243,13 @@ summary: Learn how to configure quotaAndLimits for Milvus.
   <thead>
     <tr>
       <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width20">Valeur par défaut</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        Whether DQL request throttling is enabled.      </td>
-      <td>false</td>
+      <td>        Indique si la limitation des requêtes DQL est activée.      </td>
+      <td>faux</td>
     </tr>
   </tbody>
 </table>
@@ -1271,16 +1271,16 @@ summary: Learn how to configure quotaAndLimits for Milvus.
     </button></h2><table id="quotaAndLimits.dql.searchRate.max">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Description de la valeur par défaut</th>
+      <th class="width20">Valeur par défaut</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>
-        <li>Maximum number of vectors to search per second.</li>      
-        <li>Setting this item to 100 indicates that Milvus only allows searching 100 vectors per second no matter whether these 100 vectors are all in one search or scattered across multiple searches.</li>      
-        <li>To use this setting, set quotaAndLimits.dql.enabled to true at the same time.</li>      </td>
+        <li>Nombre maximum de vecteurs à rechercher par seconde.</li>      
+        <li>La valeur 100 indique que Milvus n'autorise que la recherche de 100 vecteurs par seconde, que ces 100 vecteurs soient tous regroupés dans une seule recherche ou dispersés dans plusieurs recherches.</li>      
+        <li>Pour utiliser ce paramètre, définissez en même temps quotaAndLimits.dql.enabled sur true.</li>      </td>
       <td>-1</td>
     </tr>
   </tbody>
@@ -1304,12 +1304,12 @@ summary: Learn how to configure quotaAndLimits for Milvus.
   <thead>
     <tr>
       <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width20">Valeur par défaut</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        vps (vectors per second), default no limit      </td>
+      <td>        vps (vecteurs par seconde), pas de limite par défaut      </td>
       <td>-1</td>
     </tr>
   </tbody>
@@ -1332,16 +1332,16 @@ summary: Learn how to configure quotaAndLimits for Milvus.
     </button></h2><table id="quotaAndLimits.dql.searchRate.collection.max">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Description de la valeur par défaut</th>
+      <th class="width20">Valeur par défaut</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>
-        <li>Maximum number of vectors to search per collection per second.</li>      
-        <li>Setting this item to 100 indicates that Milvus only allows searching 100 vectors per second per collection no matter whether these 100 vectors are all in one search or scattered across multiple searches.</li>      
-        <li>To use this setting, set quotaAndLimits.dql.enabled to true at the same time.</li>      </td>
+        <li>Nombre maximum de vecteurs à rechercher par collection et par seconde.</li>      
+        <li>La valeur 100 indique que Milvus n'autorise que la recherche de 100 vecteurs par seconde et par collection, que ces 100 vecteurs soient regroupés dans une seule recherche ou dispersés dans plusieurs recherches.</li>      
+        <li>Pour utiliser ce paramètre, définissez en même temps quotaAndLimits.dql.enabled sur true.</li>      </td>
       <td>-1</td>
     </tr>
   </tbody>
@@ -1365,12 +1365,12 @@ summary: Learn how to configure quotaAndLimits for Milvus.
   <thead>
     <tr>
       <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width20">Valeur par défaut</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        vps (vectors per second), default no limit      </td>
+      <td>        vps (vecteurs par seconde), pas de limite par défaut      </td>
       <td>-1</td>
     </tr>
   </tbody>
@@ -1393,16 +1393,16 @@ summary: Learn how to configure quotaAndLimits for Milvus.
     </button></h2><table id="quotaAndLimits.dql.queryRate.max">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Description de la valeur par défaut</th>
+      <th class="width20">Valeur par défaut</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>
-        <li>Maximum number of queries per second.</li>      
-        <li>Setting this item to 100 indicates that Milvus only allows 100 queries per second.</li>      
-        <li>To use this setting, set quotaAndLimits.dql.enabled to true at the same time.</li>      </td>
+        <li>Nombre maximum de requêtes par seconde.</li>      
+        <li>La valeur 100 indique que Milvus n'autorise que 100 requêtes par seconde.</li>      
+        <li>Pour utiliser ce paramètre, définissez en même temps quotaAndLimits.dql.enabled sur true.</li>      </td>
       <td>-1</td>
     </tr>
   </tbody>
@@ -1426,12 +1426,12 @@ summary: Learn how to configure quotaAndLimits for Milvus.
   <thead>
     <tr>
       <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width20">Valeur par défaut</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        qps, default no limit      </td>
+      <td>        qps, pas de limite par défaut      </td>
       <td>-1</td>
     </tr>
   </tbody>
@@ -1454,16 +1454,16 @@ summary: Learn how to configure quotaAndLimits for Milvus.
     </button></h2><table id="quotaAndLimits.dql.queryRate.collection.max">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Description de la valeur par défaut</th>
+      <th class="width20">Valeur par défaut</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>
-        <li>Maximum number of queries per collection per second.</li>      
-        <li>Setting this item to 100 indicates that Milvus only allows 100 queries per collection per second.</li>      
-        <li>To use this setting, set quotaAndLimits.dql.enabled to true at the same time.</li>      </td>
+        <li>Nombre maximum de requêtes par collection et par seconde.</li>      
+        <li>La valeur 100 indique que Milvus n'autorise que 100 requêtes par collection et par seconde.</li>      
+        <li>Pour utiliser ce paramètre, définissez en même temps quotaAndLimits.dql.enabled sur true.</li>      </td>
       <td>-1</td>
     </tr>
   </tbody>
@@ -1487,12 +1487,12 @@ summary: Learn how to configure quotaAndLimits for Milvus.
   <thead>
     <tr>
       <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width20">Valeur par défaut</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        qps, default no limit      </td>
+      <td>        qps, pas de limite par défaut      </td>
       <td>-1</td>
     </tr>
   </tbody>
@@ -1515,15 +1515,15 @@ summary: Learn how to configure quotaAndLimits for Milvus.
     </button></h2><table id="quotaAndLimits.limitWriting.forceDeny">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Description de la valeur par défaut</th>
+      <th class="width20">Valeur par défaut</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>
-        <li>forceDeny false means dml requests are allowed (except for some</li>      
-        <li>specific conditions, such as memory of nodes to water marker), true means always reject all dml requests.</li>      </td>
+        <li>forceDeny false signifie que les requêtes dml sont autorisées (sauf pour certaines</li>      
+        <li>conditions spécifiques, telles que la mémoire des nœuds pour le marqueur d'eau), true signifie que toutes les demandes dml sont toujours rejetées.</li>      </td>
       <td>false</td>
     </tr>
   </tbody>
@@ -1547,16 +1547,16 @@ summary: Learn how to configure quotaAndLimits for Milvus.
   <thead>
     <tr>
       <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width20">Valeur par défaut</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>
-        <li>maxTimeTickDelay indicates the backpressure for DML Operations.</li>      
-        <li>DML rates would be reduced according to the ratio of time tick delay to maxTimeTickDelay,</li>      
-        <li>if time tick delay is greater than maxTimeTickDelay, all DML requests would be rejected.</li>      
-        <li>seconds</li>      </td>
+        <li>maxTimeTickDelay indique la contre-pression pour les opérations DML.</li>      
+        <li>Les taux de DML sont réduits en fonction du rapport entre le délai d'attente et maxTimeTickDelay,</li>      
+        <li>si le délai est supérieur à maxTimeTickDelay, toutes les demandes DML sont rejetées.</li>      
+        <li>secondes</li>      </td>
       <td>300</td>
     </tr>
   </tbody>
@@ -1579,17 +1579,17 @@ summary: Learn how to configure quotaAndLimits for Milvus.
     </button></h2><table id="quotaAndLimits.limitWriting.memProtection.enabled">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Description de la valeur par défaut</th>
+      <th class="width20">Valeur par défaut</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>
-        <li>When memory usage > memoryHighWaterLevel, all dml requests would be rejected;</li>      
-        <li>When memoryLowWaterLevel < memory usage < memoryHighWaterLevel, reduce the dml rate;</li>      
-        <li>When memory usage < memoryLowWaterLevel, no action.</li>      </td>
-      <td>true</td>
+        <li>Lorsque l'utilisation de la mémoire &gt; memoryHighWaterLevel, toutes les demandes DML sont rejetées ;</li>      
+        <li>Lorsque memoryLowWaterLevel &lt; memory usage &lt; memoryHighWaterLevel, réduire le taux de dml ;</li>      
+        <li>Lorsque l'utilisation de la mémoire est inférieure à memoryLowWaterLevel, aucune action n'est entreprise.</li>      </td>
+      <td>vrai</td>
     </tr>
   </tbody>
 </table>
@@ -1611,13 +1611,13 @@ summary: Learn how to configure quotaAndLimits for Milvus.
     </button></h2><table id="quotaAndLimits.limitWriting.memProtection.dataNodeMemoryLowWaterLevel">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Description de l'option</th>
+      <th class="width20">Valeur par défaut</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        (0, 1], memoryLowWaterLevel in DataNodes      </td>
+      <td>        (0, 1], memoryLowWaterLevel dans les DataNodes      </td>
       <td>0.85</td>
     </tr>
   </tbody>
@@ -1640,13 +1640,13 @@ summary: Learn how to configure quotaAndLimits for Milvus.
     </button></h2><table id="quotaAndLimits.limitWriting.memProtection.dataNodeMemoryHighWaterLevel">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Valeur par défaut (0, 1), memoryLowWaterLevel dans les DataNodes</th>
+      <th class="width20">Valeur par défaut</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        (0, 1], memoryHighWaterLevel in DataNodes      </td>
+      <td>        (0, 1], memoryHighWaterLevel dans les DataNodes      </td>
       <td>0.95</td>
     </tr>
   </tbody>
@@ -1669,13 +1669,13 @@ summary: Learn how to configure quotaAndLimits for Milvus.
     </button></h2><table id="quotaAndLimits.limitWriting.memProtection.queryNodeMemoryLowWaterLevel">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Valeur par défaut (0, 1), memoryHighWaterLevel dans les DataNodes</th>
+      <th class="width20">Valeur par défaut</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        (0, 1], memoryLowWaterLevel in QueryNodes      </td>
+      <td>        (0, 1], memoryLowWaterLevel dans les QueryNodes      </td>
       <td>0.85</td>
     </tr>
   </tbody>
@@ -1698,13 +1698,13 @@ summary: Learn how to configure quotaAndLimits for Milvus.
     </button></h2><table id="quotaAndLimits.limitWriting.memProtection.queryNodeMemoryHighWaterLevel">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Valeur par défaut (0, 1), memoryLowWaterLevel dans QueryNodes</th>
+      <th class="width20">Valeur par défaut</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        (0, 1], memoryHighWaterLevel in QueryNodes      </td>
+      <td>        (0, 1], memoryHighWaterLevel dans QueryNodes      </td>
       <td>0.95</td>
     </tr>
   </tbody>
@@ -1727,17 +1727,17 @@ summary: Learn how to configure quotaAndLimits for Milvus.
     </button></h2><table id="quotaAndLimits.limitWriting.growingSegmentsSizeProtection.enabled">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Valeur par défaut (0, 1), memoryHighWaterLevel dans QueryNodes</th>
+      <th class="width20">Valeur par défaut</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>
-        <li>No action will be taken if the growing segments size is less than the low watermark.</li>      
-        <li>When the growing segments size exceeds the low watermark, the dml rate will be reduced,</li>      
-        <li>but the rate will not be lower than minRateRatio * dmlRate.</li>      </td>
-      <td>false</td>
+        <li>Aucune action ne sera entreprise si la taille des segments croissants est inférieure au filigrane bas.</li>      
+        <li>Lorsque la taille des segments croissants est supérieure au filigrane bas, le taux de dml sera réduit,</li>      
+        <li>mais le taux ne sera pas inférieur à minRateRatio * dmlRate.</li>      </td>
+      <td>faux</td>
     </tr>
   </tbody>
 </table>
@@ -1760,12 +1760,12 @@ summary: Learn how to configure quotaAndLimits for Milvus.
   <thead>
     <tr>
       <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width20">Valeur par défaut</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        When the total file size of object storage is greater than `diskQuota`, all dml requests would be rejected;      </td>
+      <td>        Lorsque la taille totale du fichier du stockage objet est supérieure à `diskQuota`, toutes les demandes de dml sont rejetées ; </td>
       <td>true</td>
     </tr>
   </tbody>
@@ -1789,12 +1789,12 @@ summary: Learn how to configure quotaAndLimits for Milvus.
   <thead>
     <tr>
       <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width20">Valeur par défaut</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        MB, (0, +inf), default no limit      </td>
+      <td>        MB, (0, +inf), pas de limite par défaut      </td>
       <td>-1</td>
     </tr>
   </tbody>
@@ -1817,13 +1817,13 @@ summary: Learn how to configure quotaAndLimits for Milvus.
     </button></h2><table id="quotaAndLimits.limitWriting.diskProtection.diskQuotaPerDB">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Description de la valeur par défaut</th>
+      <th class="width20">Valeur par défaut</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        MB, (0, +inf), default no limit      </td>
+      <td>        MB, (0, +inf), pas de limite par défaut      </td>
       <td>-1</td>
     </tr>
   </tbody>
@@ -1846,13 +1846,13 @@ summary: Learn how to configure quotaAndLimits for Milvus.
     </button></h2><table id="quotaAndLimits.limitWriting.diskProtection.diskQuotaPerCollection">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Description de la valeur par défaut</th>
+      <th class="width20">Valeur par défaut</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        MB, (0, +inf), default no limit      </td>
+      <td>        MB, (0, +inf), pas de limite par défaut      </td>
       <td>-1</td>
     </tr>
   </tbody>
@@ -1875,13 +1875,13 @@ summary: Learn how to configure quotaAndLimits for Milvus.
     </button></h2><table id="quotaAndLimits.limitWriting.diskProtection.diskQuotaPerPartition">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Description de la valeur par défaut</th>
+      <th class="width20">Valeur par défaut</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        MB, (0, +inf), default no limit      </td>
+      <td>        MB, (0, +inf), pas de limite par défaut      </td>
       <td>-1</td>
     </tr>
   </tbody>
@@ -1904,14 +1904,14 @@ summary: Learn how to configure quotaAndLimits for Milvus.
     </button></h2><table id="quotaAndLimits.limitWriting.l0SegmentsRowCountProtection.enabled">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Description de la valeur par défaut</th>
+      <th class="width20">Valeur par défaut</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        switch to enable l0 segment row count quota      </td>
-      <td>false</td>
+      <td>        switch pour activer le quota de nombre de lignes du segment l0  </td>
+      <td>faux</td>
     </tr>
   </tbody>
 </table>
@@ -1934,12 +1934,12 @@ summary: Learn how to configure quotaAndLimits for Milvus.
   <thead>
     <tr>
       <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width20">Valeur par défaut</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        l0 segment row count quota, low water level      </td>
+      <td>        l0 segment row count quota, low water level (niveau d'eau bas)    </td>
       <td>32768</td>
     </tr>
   </tbody>
@@ -1962,13 +1962,13 @@ summary: Learn how to configure quotaAndLimits for Milvus.
     </button></h2><table id="quotaAndLimits.limitWriting.l0SegmentsRowCountProtection.highWaterLevel">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Description de la valeur par défaut</th>
+      <th class="width20">Valeur par défaut</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        l0 segment row count quota, low water level      </td>
+      <td>        l0 segment row count quota, low water level     </td>
       <td>65536</td>
     </tr>
   </tbody>
@@ -1991,15 +1991,15 @@ summary: Learn how to configure quotaAndLimits for Milvus.
     </button></h2><table id="quotaAndLimits.limitReading.forceDeny">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Description de la valeur par défaut</th>
+      <th class="width20">Valeur par défaut</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>
-        <li>forceDeny false means dql requests are allowed (except for some</li>      
-        <li>specific conditions, such as collection has been dropped), true means always reject all dql requests.</li>      </td>
+        <li>forceDeny false signifie que les requêtes dql sont autorisées (sauf pour certaines</li>      
+        <li>conditions spécifiques, telles que la collecte a été abandonnée), true signifie que toutes les requêtes dql sont toujours rejetées.</li>      </td>
       <td>false</td>
     </tr>
   </tbody>
@@ -2023,16 +2023,16 @@ summary: Learn how to configure quotaAndLimits for Milvus.
   <thead>
     <tr>
       <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width20">Valeur par défaut</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>
-        <li>nqInQueueThreshold indicated that the system was under backpressure for Search/Query path.</li>      
-        <li>If NQ in any QueryNode's queue is greater than nqInQueueThreshold, search&query rates would gradually cool off</li>      
-        <li>until the NQ in queue no longer exceeds nqInQueueThreshold. We think of the NQ of query request as 1.</li>      
-        <li>int, default no limit</li>      </td>
+        <li>nqInQueueThreshold indique que le système subit une contre-pression pour le chemin de recherche/requête.</li>      
+        <li>Si le NQ dans la file d'attente d'un QueryNode est supérieur à nqInQueueThreshold, les taux de recherche et d'interrogation diminuent progressivement</li>      
+        <li>jusqu'à ce que le NQ dans la file d'attente ne dépasse plus le seuil nqInQueueThreshold. Nous considérons que le NQ de la demande de requête est égal à 1.</li>      
+        <li>int, par défaut no limit</li>      </td>
       <td>-1</td>
     </tr>
   </tbody>
@@ -2055,18 +2055,18 @@ summary: Learn how to configure quotaAndLimits for Milvus.
     </button></h2><table id="quotaAndLimits.limitReading.queueProtection.queueLatencyThreshold">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Description de la valeur par défaut</th>
+      <th class="width20">Valeur par défaut</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>
-        <li>queueLatencyThreshold indicated that the system was under backpressure for Search/Query path.</li>      
-        <li>If dql latency of queuing is greater than queueLatencyThreshold, search&query rates would gradually cool off</li>      
-        <li>until the latency of queuing no longer exceeds queueLatencyThreshold.</li>      
-        <li>The latency here refers to the averaged latency over a period of time.</li>      
-        <li>milliseconds, default no limit</li>      </td>
+        <li>queueLatencyThreshold indique que le système subit une contre-pression pour le chemin de recherche/requête.</li>      
+        <li>Si la latence de la file d'attente est supérieure au seuil de latence de la file d'attente, les taux de recherche et de requête diminuent progressivement jusqu'à ce que la latence de la file d'attente ne dépasse plus le seuil de latence de la file d'attente.</li>      
+        <li>jusqu'à ce que la latence de la file d'attente ne dépasse plus le seuil de latence de la file d'attente.</li>      
+        <li>La latence se réfère ici à la latence moyenne sur une période de temps.</li>      
+        <li>millisecondes, par défaut pas de limite</li>      </td>
       <td>-1</td>
     </tr>
   </tbody>
@@ -2089,17 +2089,17 @@ summary: Learn how to configure quotaAndLimits for Milvus.
     </button></h2><table id="quotaAndLimits.limitReading.resultProtection.maxReadResultRate">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Description de la valeur par défaut</th>
+      <th class="width20">Valeur par défaut</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>
-        <li>maxReadResultRate indicated that the system was under backpressure for Search/Query path.</li>      
-        <li>If dql result rate is greater than maxReadResultRate, search&query rates would gradually cool off</li>      
-        <li>until the read result rate no longer exceeds maxReadResultRate.</li>      
-        <li>MB/s, default no limit</li>      </td>
+        <li>maxReadResultRate indique que le système subit une contre-pression pour le chemin de recherche/interrogation.</li>      
+        <li>Si le taux de résultats dql est supérieur à maxReadResultRate, les taux de recherche et d'interrogation diminuent progressivement jusqu'à ce que le taux de résultats de lecture ne dépasse plus maxReadResultRate.</li>      
+        <li>jusqu'à ce que le taux de résultat de lecture ne dépasse plus maxReadResultRate.</li>      
+        <li>MB/s, pas de limite par défaut</li>      </td>
       <td>-1</td>
     </tr>
   </tbody>
@@ -2122,14 +2122,14 @@ summary: Learn how to configure quotaAndLimits for Milvus.
     </button></h2><table id="quotaAndLimits.limitReading.coolOffSpeed">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Description de l'option</th>
+      <th class="width20">Valeur par défaut</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>
-        <li>colOffSpeed is the speed of search&query rates cool off.</li>      
+        <li>colOffSpeed est la vitesse de refroidissement des taux de recherche et de requête.</li>      
         <li>(0, 1]</li>      </td>
       <td>0.9</td>
     </tr>

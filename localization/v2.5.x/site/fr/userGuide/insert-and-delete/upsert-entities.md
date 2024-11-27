@@ -1,8 +1,8 @@
 ---
 id: upsert-entities.md
-title: Upsert Entities
+title: Entités Upsert
 ---
-<h1 id="Upsert-Entities​" class="common-anchor-header">Upsert Entities​<button data-href="#Upsert-Entities​" class="anchor-icon" translate="no">
+<h1 id="Upsert-Entities​" class="common-anchor-header">Entités Upsert<button data-href="#Upsert-Entities​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -17,8 +17,8 @@ title: Upsert Entities
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>The Upsert operation combines the actions of updating and inserting data. Milvus determines whether to perform an update or an insert operation by checking if the primary key exists. This section will introduce how to Upsert an Entity and the specific behaviors of the Upsert operation in different scenarios.​</p>
-<h2 id="Overview​" class="common-anchor-header">Overview​<button data-href="#Overview​" class="anchor-icon" translate="no">
+    </button></h1><p>L'opération Upsert combine les actions de mise à jour et d'insertion de données. Milvus détermine s'il faut effectuer une opération de mise à jour ou d'insertion en vérifiant si la clé primaire existe. Cette section présente la procédure d'insertion d'une entité et les comportements spécifiques de l'opération d'insertion dans différents scénarios.</p>
+<h2 id="Overview​" class="common-anchor-header">Vue d'ensemble<button data-href="#Overview​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -33,20 +33,18 @@ title: Upsert Entities
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>When you need to update an Entity in a Collection or are not sure whether to update or insert, you can try using the Upsert operation. When using this operation, it is essential to ensure that the Entity included in the Upsert request contains the primary key; otherwise, an error will occur. Upon receiving an Upsert request, Milvus will execute the following process:​</p>
+    </button></h2><p>Lorsque vous devez mettre à jour une entité dans une collection ou que vous n'êtes pas sûr de devoir effectuer une mise à jour ou une insertion, vous pouvez essayer d'utiliser l'opération Upsert. Lors de l'utilisation de cette opération, il est essentiel de s'assurer que l'entité incluse dans la requête Upsert contient la clé primaire ; dans le cas contraire, une erreur se produira. Lorsqu'il reçoit une requête Upsert, Milvus exécute le processus suivant.</p>
 <ol>
-<li><p>Check whether the primary field of the Collection has AutoId enabled.​</p>
-<p>a.  If it is, Milvus will replace the primary key in the Entity with an automatically generated primary key and insert the data.​</p>
-<p>b. If not, Milvus will use the primary key carried by the Entity to insert the data.​</p></li>
-<li><p>Perform a delete operation based on the primary key value of the Entity included in the Upsert request.​</p></li>
+<li><p>Vérifier si le champ primaire de la collection a l'option AutoId activée.</p>
+<p>a.  Si c'est le cas, Milvus remplace la clé primaire de l'entité par une clé primaire générée automatiquement et insère les données.</p>
+<p>b. Si ce n'est pas le cas, Milvus utilise la clé primaire de l'entité pour insérer les données.</p></li>
+<li><p>Effectuer une opération de suppression basée sur la valeur de la clé primaire de l'entité incluse dans la requête Upsert.</p></li>
 </ol>
 <p>
-  <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.5.x/assets/upsert-entities.png" alt="Upsert Entities" class="doc-image" id="upsert-entities" />
-    <span>Upsert Entities</span>
-  </span>
-</p>
-<h2 id="Upsert-Entity-in-a-Collection​" class="common-anchor-header">Upsert Entity in a Collection​<button data-href="#Upsert-Entity-in-a-Collection​" class="anchor-icon" translate="no">
+  
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/upsert-entities.png" alt="Upsert Entities" class="doc-image" id="upsert-entities" />
+   </span> <span class="img-wrapper"> <span>Entités Upsert</span> </span></p>
+<h2 id="Upsert-Entity-in-a-Collection​" class="common-anchor-header">Insertion d'une entité dans une collection<button data-href="#Upsert-Entity-in-a-Collection​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -61,14 +59,9 @@ title: Upsert Entities
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>In this section, you will upsert Entities into a Collection created <a href="/docs/create-collection-instantly.md#Quick-Setup">in the quick-setup manner</a>. A Collection created in this manner has only two fields, named <strong>id</strong> and <strong>vector</strong>. Additionally, this Collection has the dynamic field enabled, so the Entities in the example code include a field called <strong>color</strong> that is not defined in the Schema.​</p>
+    </button></h2><p>Dans cette section, vous allez insérer des entités dans une collection créée de <a href="/docs/fr/create-collection-instantly.md#Quick-Setup">manière rapide</a>. Une collection créée de cette manière n'a que deux champs, nommés <strong>id</strong> et <strong>vector</strong>. En outre, cette collection a activé le champ dynamique, de sorte que les entités dans le code de l'exemple incluent un champ appelé <strong>color</strong> qui n'est pas défini dans le schéma.</p>
 <div class="multipleCode">
-  <a href="#python">Python </a>
-  <a href="#java">Java</a>
-  <a href="#javascript">Node.js</a>
-  <a href="#go">Go</a>
-  <a href="#curl">cURL</a>
-</div>
+ <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#go">Go</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient​
 ​
 client = MilvusClient(​
@@ -216,7 +209,7 @@ curl --request POST \​
 <span class="hljs-comment"># }​</span>
 
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Upsert-Entities-in-a-Partition​" class="common-anchor-header">Upsert Entities in a Partition​<button data-href="#Upsert-Entities-in-a-Partition​" class="anchor-icon" translate="no">
+<h2 id="Upsert-Entities-in-a-Partition​" class="common-anchor-header">Insertion d'entités dans une partition<button data-href="#Upsert-Entities-in-a-Partition​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -231,14 +224,9 @@ curl --request POST \​
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>You can also insert entities into a specified partition. The following code snippets assume that you have a partition named <strong>PartitionA</strong> in your collection.​</p>
+    </button></h2><p>Vous pouvez également insérer des entités dans une partition spécifiée. Les extraits de code suivants supposent que vous avez une partition nommée <strong>PartitionA</strong> dans votre collection.</p>
 <div class="multipleCode">
-  <a href="#python">Python </a>
-  <a href="#java">Java</a>
-  <a href="#javascript">Node.js</a>
-  <a href="#go">Go</a>
-  <a href="#curl">cURL</a>
-</div>
+ <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#go">Go</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python">data=[​
     {<span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">10</span>, <span class="hljs-string">&quot;vector&quot;</span>: [<span class="hljs-number">0.06998888224297328</span>, <span class="hljs-number">0.8582816610326578</span>, -<span class="hljs-number">0.9657938677934292</span>, <span class="hljs-number">0.6527905683627726</span>, -<span class="hljs-number">0.8668460657158576</span>], <span class="hljs-string">&quot;color&quot;</span>: <span class="hljs-string">&quot;black_3651&quot;</span>},​
     {<span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-number">11</span>, <span class="hljs-string">&quot;vector&quot;</span>: [<span class="hljs-number">0.6060703043917468</span>, -<span class="hljs-number">0.3765080534566074</span>, -<span class="hljs-number">0.7710758854987239</span>, <span class="hljs-number">0.36993888322346136</span>, <span class="hljs-number">0.5507513364206531</span>], <span class="hljs-string">&quot;color&quot;</span>: <span class="hljs-string">&quot;grey_2049&quot;</span>},​
@@ -369,4 +357,4 @@ curl --request POST \​
 <span class="hljs-comment"># }​</span>
 
 <button class="copy-code-btn"></button></code></pre>
-<p>​</p>
+<p></p>

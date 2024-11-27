@@ -1,14 +1,15 @@
 ---
 id: use-json-fields.md
-title: Use JSON Fields
+title: Utiliser des champs JSON
 summary: >-
-  JSON (JavaScript Object Notation) is a lightweight data exchange format that
-  provides a flexible way to store and query complex data structures. In Milvus,
-  you can store additional structured information alongside vector data using
-  JSON fields, enabling advanced searches and queries that combine vector
-  similarity with structured filtering.​
+  JSON (JavaScript Object Notation) est un format d'échange de données léger qui
+  offre un moyen souple de stocker et d'interroger des structures de données
+  complexes. Dans Milvus, vous pouvez stocker des informations structurées
+  supplémentaires avec des données vectorielles à l'aide de champs JSON, ce qui
+  permet d'effectuer des recherches et des requêtes avancées combinant la
+  similarité vectorielle et le filtrage structuré.
 ---
-<h1 id="JSON-Field​" class="common-anchor-header">JSON Field​<button data-href="#JSON-Field​" class="anchor-icon" translate="no">
+<h1 id="JSON-Field​" class="common-anchor-header">Champ JSON<button data-href="#JSON-Field​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -23,8 +24,8 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p><a href="https://en.wikipedia.org/wiki/JSON">JSON</a> (JavaScript Object Notation) is a lightweight data exchange format that provides a flexible way to store and query complex data structures. In Milvus, you can store additional structured information alongside vector data using JSON fields, enabling advanced searches and queries that combine vector similarity with structured filtering.​</p>
-<p>JSON fields are ideal for applications that require metadata to optimize retrieval results. For example, in e-commerce, product vectors can be enhanced with attributes like category, price, and brand. In recommendation systems, user vectors can be combined with preferences and demographic information. Below is an example of a typical JSON field:​</p>
+    </button></h1><p><a href="https://en.wikipedia.org/wiki/JSON">JSON</a> (JavaScript Object Notation) est un format d'échange de données léger qui offre un moyen souple de stocker et d'interroger des structures de données complexes. Dans Milvus, vous pouvez stocker des informations structurées supplémentaires avec des données vectorielles à l'aide de champs JSON, ce qui permet d'effectuer des recherches et des requêtes avancées combinant la similarité vectorielle et le filtrage structuré.</p>
+<p>Les champs JSON sont idéaux pour les applications qui nécessitent des métadonnées afin d'optimiser les résultats de recherche. Par exemple, dans le commerce électronique, les vecteurs de produits peuvent être enrichis d'attributs tels que la catégorie, le prix et la marque. Dans les systèmes de recommandation, les vecteurs d'utilisateurs peuvent être combinés avec des préférences et des informations démographiques. Vous trouverez ci-dessous un exemple de champ JSON typique.</p>
 <pre><code translate="no" class="language-json">{​
   <span class="hljs-string">&quot;category&quot;</span>: <span class="hljs-string">&quot;electronics&quot;</span>,​
   <span class="hljs-string">&quot;price&quot;</span>: <span class="hljs-number">99.99</span>,​
@@ -32,7 +33,7 @@ summary: >-
 }​
 
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Add-JSON-field​" class="common-anchor-header">Add JSON field​<button data-href="#Add-JSON-field​" class="anchor-icon" translate="no">
+<h2 id="Add-JSON-field​" class="common-anchor-header">Ajouter un champ JSON<button data-href="#Add-JSON-field​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -47,14 +48,10 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>To use JSON fields in Milvus, define the relevant field type in the collection schema, setting the <code translate="no">datatype</code> to the supported JSON type, i.e., <code translate="no">JSON</code>.​</p>
-<p>Here’s how to define a collection schema that includes a JSON field:​</p>
+    </button></h2><p>Pour utiliser des champs JSON dans Milvus, définissez le type de champ approprié dans le schéma de la collection, en définissant <code translate="no">datatype</code> sur le type JSON pris en charge, c'est-à-dire <code translate="no">JSON</code>.</p>
+<p>Voici comment définir un schéma de collecte qui inclut un champ JSON.</p>
 <div class="multipleCode">
-    <a href="#python">Python </a>
-    <a href="#java">Java</a>
-    <a href="#javascript">Node.js</a>
-    <a href="#curl">cURL</a>
-</div>
+   <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType​
 ​
 client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)​
@@ -149,11 +146,11 @@ schema.addField(AddFieldReq.builder()​
 }&quot;</span>​
 
 <button class="copy-code-btn"></button></code></pre>
-<p>In this example, we add a JSON field called <code translate="no">metadata</code> to store additional metadata related to vector data, such as product category, price, and brand information.​</p>
+<p>Dans cet exemple, nous ajoutons un champ JSON appelé <code translate="no">metadata</code> pour stocker des métadonnées supplémentaires liées aux données vectorielles, telles que la catégorie de produit, le prix et les informations sur la marque.</p>
 <div class="alert note">
-<p>The primary field and vector field are mandatory when you create a collection. The primary field uniquely identifies each entity, while the vector field is crucial for similarity search. For more details, refer to <a href="/docs/primary-field.md">​Primary Field &amp; AutoID</a>, <a href="/docs/dense-vector.md">​Dense Vector</a>, <a href="/docs/binary-vector.md">​Binary Vector</a>, or <a href="/docs/sparse_vector.md">​Sparse Vector</a>.​</p>
+<p>Le champ primaire et le champ vectoriel sont obligatoires lorsque vous créez une collection. Le champ primaire identifie chaque entité de manière unique, tandis que le champ vectoriel est essentiel pour la recherche de similarités. Pour plus de détails, reportez-vous aux sections <a href="/docs/fr/primary-field.md">Champ primaire et AutoID</a>, <a href="/docs/fr/dense-vector.md">Vecteur dense</a>, <a href="/docs/fr/binary-vector.md">Vecteur binaire</a> ou <a href="/docs/fr/sparse_vector.md">Vecteur épars</a>.</p>
 </div>
-<h2 id="Create-collection​" class="common-anchor-header">Create collection​<button data-href="#Create-collection​" class="anchor-icon" translate="no">
+<h2 id="Create-collection​" class="common-anchor-header">Créer une collection<button data-href="#Create-collection​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -168,13 +165,9 @@ schema.addField(AddFieldReq.builder()​
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>When creating a collection, you must create an index for the vector field to ensure retrieval performance. In this example, we use <code translate="no">AUTOINDEX</code> to simplify index setup. For more details, refer to <a href="https://milvus.io/docs/glossary.md#Auto-Index">​AUTOINDEX</a>.​</p>
+    </button></h2><p>Lors de la création d'une collection, vous devez créer un index pour le champ vectoriel afin de garantir les performances de recherche. Dans cet exemple, nous utilisons <code translate="no">AUTOINDEX</code> pour simplifier la configuration de l'index. Pour plus de détails, reportez-vous à la section <a href="https://milvus.io/docs/glossary.md#Auto-Index">AUTOINDEX</a>.</p>
 <div class="multipleCode">
-    <a href="#python">Python </a>
-    <a href="#java">Java</a>
-    <a href="#javascript">Node.js</a>
-    <a href="#curl">cURL</a>
-</div>
+   <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python">​
 index_params = client.<span class="hljs-title function_">prepare_index_params</span>()​
 ​
@@ -213,13 +206,9 @@ indexes.add(IndexParam.builder()​
     ]&#x27;</span>​
 
 <button class="copy-code-btn"></button></code></pre>
-<p>Use the defined schema and index parameters to create a collection:​</p>
+<p>Utilisez le schéma défini et les paramètres d'index pour créer une collection.</p>
 <div class="multipleCode">
-    <a href="#python">Python </a>
-    <a href="#java">Java</a>
-    <a href="#javascript">Node.js</a>
-    <a href="#curl">cURL</a>
-</div>
+   <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python">client.<span class="hljs-title function_">create_collection</span>(​
     collection_name=<span class="hljs-string">&quot;my_json_collection&quot;</span>,​
     schema=schema,​
@@ -253,7 +242,7 @@ client.createCollection(requestCreate);​
 }&quot;</span>​
 
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Insert-data​" class="common-anchor-header">Insert data​<button data-href="#Insert-data​" class="anchor-icon" translate="no">
+<h2 id="Insert-data​" class="common-anchor-header">Insérer des données<button data-href="#Insert-data​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -268,13 +257,9 @@ client.createCollection(requestCreate);​
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>After creating the collection, you can insert data that includes JSON fields.​</p>
+    </button></h2><p>Après avoir créé la collection, vous pouvez insérer des données comprenant des champs JSON.</p>
 <div class="multipleCode">
-    <a href="#python">Python </a>
-    <a href="#java">Java</a>
-    <a href="#javascript">Node.js</a>
-    <a href="#curl">cURL</a>
-</div>
+   <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Data to be inserted​</span>
 data = [​
   {​
@@ -369,12 +354,12 @@ client.<span class="hljs-title function_">insert</span>({​
 }&#x27;</span>​
 
 <button class="copy-code-btn"></button></code></pre>
-<p>In this example:​</p>
+<p>Dans cet exemple.</p>
 <ul>
-<li><p>Each data entry includes a primary field (<code translate="no">pk</code>), <code translate="no">metadata</code> as a JSON field to store information such as product category, price, and brand.​</p></li>
-<li><p><code translate="no">embedding</code> is a 3-dimensional vector field used for vector similarity search.​</p></li>
+<li><p>Chaque entrée de données comprend un champ primaire (<code translate="no">pk</code>), <code translate="no">metadata</code> en tant que champ JSON pour stocker des informations telles que la catégorie de produit, le prix et la marque.</p></li>
+<li><p><code translate="no">embedding</code> est un champ vectoriel tridimensionnel utilisé pour la recherche de similarités vectorielles.</p></li>
 </ul>
-<h2 id="Search-and-query​" class="common-anchor-header">Search and query​<button data-href="#Search-and-query​" class="anchor-icon" translate="no">
+<h2 id="Search-and-query​" class="common-anchor-header">Recherche et interrogation<button data-href="#Search-and-query​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -389,14 +374,10 @@ client.<span class="hljs-title function_">insert</span>({​
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>JSON fields allow scalar filtering during searches, enhancing Milvus’s vector search capabilities. You can query based on JSON properties alongside vector similarity.​</p>
-<h3 id="Filter-queries​" class="common-anchor-header">Filter queries​</h3><p>You can filter data based on JSON properties, such as matching specific values or checking if a number falls within a certain range.​</p>
+    </button></h2><p>Les champs JSON permettent un filtrage scalaire pendant les recherches, ce qui améliore les capacités de recherche vectorielle de Milvus. Vous pouvez effectuer des requêtes basées sur les propriétés JSON ainsi que sur la similarité vectorielle.</p>
+<h3 id="Filter-queries​" class="common-anchor-header">Filtrer les requêtes</h3><p>Vous pouvez filtrer les données en fonction des propriétés JSON, par exemple en faisant correspondre des valeurs spécifiques ou en vérifiant si un nombre se situe dans une certaine plage.</p>
 <div class="multipleCode">
-    <a href="#python">Python </a>
-    <a href="#java">Java</a>
-    <a href="#javascript">Node.js</a>
-    <a href="#curl">cURL</a>
-</div>
+   <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;metadata[&quot;category&quot;] == &quot;electronics&quot; and metadata[&quot;price&quot;] &lt; 150&#x27;</span>​
 ​
 res = client.query(​
@@ -447,14 +428,10 @@ System.out.println(resp.getQueryResults());​
 {<span class="hljs-string">&quot;code&quot;</span>:0,<span class="hljs-string">&quot;cost&quot;</span>:0,<span class="hljs-string">&quot;data&quot;</span>:[{<span class="hljs-string">&quot;metadata&quot;</span>:<span class="hljs-string">&quot;{\&quot;category\&quot;: \&quot;electronics\&quot;, \&quot;price\&quot;: 99.99, \&quot;brand\&quot;: \&quot;BrandA\&quot;}&quot;</span>,<span class="hljs-string">&quot;pk&quot;</span>:1}]}​
 
 <button class="copy-code-btn"></button></code></pre>
-<p>In the above query, Milvus filters out entities where the <code translate="no">metadata</code> field has a category of <code translate="no">&quot;electronics&quot;</code> and a price below 150, returning entities that match these criteria.​</p>
-<h3 id="Vector-search-with-JSON-filtering​" class="common-anchor-header">Vector search with JSON filtering​</h3><p>By combining vector similarity with JSON filtering, you can ensure that the retrieved data not only matches semantically but also meets specific business conditions, making the search results more precise and aligned with user needs.​</p>
+<p>Dans la requête ci-dessus, Milvus filtre les entités dont le champ <code translate="no">metadata</code> a une catégorie de <code translate="no">&quot;electronics&quot;</code> et un prix inférieur à 150, en renvoyant les entités qui correspondent à ces critères.</p>
+<h3 id="Vector-search-with-JSON-filtering​" class="common-anchor-header">Recherche vectorielle avec filtrage JSON</h3><p>En combinant la similarité vectorielle avec le filtrage JSON, vous pouvez vous assurer que les données extraites correspondent non seulement à la sémantique, mais qu'elles répondent également à des conditions commerciales spécifiques, ce qui rend les résultats de la recherche plus précis et alignés sur les besoins de l'utilisateur.</p>
 <div class="multipleCode">
-    <a href="#python">Python </a>
-    <a href="#java">Java</a>
-    <a href="#javascript">Node.js</a>
-    <a href="#curl">cURL</a>
-</div>
+   <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;metadata[&quot;brand&quot;] == &quot;BrandA&quot;&#x27;</span>​
 ​
 res = client.search(​
@@ -522,9 +499,9 @@ System.out.println(resp.getSearchResults());​
 <span class="hljs-comment">## {&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:[{&quot;distance&quot;:-0.24793813,&quot;id&quot;:1,&quot;metadata&quot;:&quot;{\&quot;category\&quot;: \&quot;electronics\&quot;, \&quot;price\&quot;: 99.99, \&quot;brand\&quot;: \&quot;BrandA\&quot;}&quot;}]}​</span>
 
 <button class="copy-code-btn"></button></code></pre>
-<p>In this example, Milvus returns the top 5 entities most similar to the query vector, with the <code translate="no">metadata</code> field containing a brand of <code translate="no">&quot;BrandA&quot;</code>.​</p>
-<p>Additionally, Milvus supports advanced JSON filtering operators such as <code translate="no">JSON_CONTAINS</code>, <code translate="no">JSON_CONTAINS_ALL</code>, and <code translate="no">JSON_CONTAINS_ANY</code>, which can further enhance query capabilities. For more details, refer to <a href="/docs/boolean.md">​Metadata Filtering</a>.​</p>
-<h2 id="Limits​" class="common-anchor-header">Limits​<button data-href="#Limits​" class="anchor-icon" translate="no">
+<p>Dans cet exemple, Milvus renvoie les 5 entités les plus similaires au vecteur de la requête, le champ <code translate="no">metadata</code> contenant une marque de <code translate="no">&quot;BrandA&quot;</code>.</p>
+<p>En outre, Milvus prend en charge des opérateurs de filtrage JSON avancés tels que <code translate="no">JSON_CONTAINS</code>, <code translate="no">JSON_CONTAINS_ALL</code>, et <code translate="no">JSON_CONTAINS_ANY</code>, qui permettent d'améliorer encore les capacités de requête. Pour plus de détails, voir <a href="/docs/fr/boolean.md">Filtrage des métadonnées</a>.</p>
+<h2 id="Limits​" class="common-anchor-header">Limites<button data-href="#Limits​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -540,9 +517,9 @@ System.out.println(resp.getSearchResults());​
         ></path>
       </svg>
     </button></h2><ul>
-<li><p><strong>Indexing Limitations</strong>: Due to the complexity of data structures, indexing JSON fields is not supported.​</p></li>
-<li><p><strong>Data Type Matching</strong>: If a JSON field’s key value is an integer or floating point, it can only be compared with another integer or float key or <code translate="no">INT32/64</code> or <code translate="no">FLOAT32/64</code> fields. If the key value is a string (<code translate="no">VARCHAR</code>), it can only be compared with another string key.​</p></li>
-<li><p><strong>Naming Restrictions</strong>: When naming JSON keys, it is recommended to use only letters, numeric characters, and underscores, as other characters may cause issues during filtering or searching.​</p></li>
-<li><p><strong>Handling String Values</strong>: For string values (<code translate="no">VARCHAR</code>), Milvus stores JSON field strings as-is without semantic conversion. For example: <code translate="no">'a&quot;b'</code>, <code translate="no">&quot;a'b&quot;</code>, <code translate="no">'a\\'b'</code>, and <code translate="no">&quot;a\\&quot;b&quot;</code> are stored as entered; however, <code translate="no">'a'b'</code> and <code translate="no">&quot;a&quot;b&quot;</code> are considered invalid.​</p></li>
-<li><p><strong>Handling Nested Dictionaries</strong>: Any nested dictionaries within JSON field values are treated as strings.​</p></li>
+<li><p><strong>Limites de l'indexation</strong>: En raison de la complexité des structures de données, l'indexation des champs JSON n'est pas prise en charge.</p></li>
+<li><p><strong>Correspondance des types de données</strong>: si la valeur clé d'un champ JSON est un nombre entier ou un nombre à virgule flottante, elle ne peut être comparée qu'à une autre clé entière ou flottante ou aux champs <code translate="no">INT32/64</code> ou <code translate="no">FLOAT32/64</code>. Si la valeur de la clé est une chaîne de caractères (<code translate="no">VARCHAR</code>), elle ne peut être comparée qu'à une autre clé de type chaîne de caractères.</p></li>
+<li><p><strong>Restrictions de dénomination</strong>: Pour nommer les clés JSON, il est recommandé de n'utiliser que des lettres, des caractères numériques et des traits de soulignement, car les autres caractères peuvent poser des problèmes lors du filtrage ou de la recherche.</p></li>
+<li><p><strong>Traitement des valeurs de chaîne</strong>: Pour les valeurs de chaîne (<code translate="no">VARCHAR</code>), Milvus stocke les chaînes de champ JSON telles quelles sans conversion sémantique. Par exemple, Milvus stocke les chaînes de champ JSON telles quelles, sans conversion sémantique : <code translate="no">'a&quot;b'</code> <code translate="no">&quot;a'b&quot;</code> , <code translate="no">'a\\'b'</code> et <code translate="no">&quot;a\\&quot;b&quot;</code> sont stockés tels qu'ils ont été saisis, mais <code translate="no">'a'b'</code> et <code translate="no">&quot;a&quot;b&quot;</code> sont considérés comme non valides.</p></li>
+<li><p><strong>Traitement des dictionnaires imbriqués</strong>: Tous les dictionnaires imbriqués dans les valeurs des champs JSON sont traités comme des chaînes.</p></li>
 </ul>

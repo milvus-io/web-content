@@ -1,8 +1,8 @@
 ---
 id: modify-collection.md
-title: Modify Collection​
+title: Modifier une collection
 ---
-<h1 id="Modify-Collection​" class="common-anchor-header">Modify Collection​<button data-href="#Modify-Collection​" class="anchor-icon" translate="no">
+<h1 id="Modify-Collection​" class="common-anchor-header">Modifier une collection<button data-href="#Modify-Collection​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -17,8 +17,8 @@ title: Modify Collection​
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>You can rename a collection or change its settings. This page focuses on how to modify a collection.​</p>
-<h2 id="Rename-Collection​" class="common-anchor-header">Rename Collection​<button data-href="#Rename-Collection​" class="anchor-icon" translate="no">
+    </button></h1><p>Vous pouvez renommer une collection ou modifier ses paramètres. Cette page explique comment modifier une collection.</p>
+<h2 id="Rename-Collection​" class="common-anchor-header">Renommer une collection<button data-href="#Rename-Collection​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -33,14 +33,9 @@ title: Modify Collection​
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>You can rename a collection as follows.​</p>
+    </button></h2><p>Vous pouvez renommer une collection comme suit.</p>
 <div class="multipleCode">
-  <a href="#python">Python </a>
-  <a href="#java">Java</a>
-  <a href="#javascript">Node.js</a>
-  <a href="#go">Go</a>
-  <a href="#curl">cURL</a>
-</div>
+ <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#go">Go</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> <span class="hljs-title class_">MilvusClient</span>​
 ​
 client = <span class="hljs-title class_">MilvusClient</span>(​
@@ -132,7 +127,7 @@ curl --request POST \​
 }&#x27;</span>​
 
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Set-Collection-TTL​" class="common-anchor-header">Set Collection TTL​<button data-href="#Set-Collection-TTL​" class="anchor-icon" translate="no">
+<h2 id="Set-Collection-TTL​" class="common-anchor-header">Définir le TTL d'une collection<button data-href="#Set-Collection-TTL​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -147,15 +142,10 @@ curl --request POST \​
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>If a collection needs to be dropped for a specific period, consider setting its Time-To-Live (TTL) in seconds. Once the TTL times out, Milvus deletes entities in the collection and drops the collection. The deletion is asynchronous, indicating that searches and queries are still possible before the deletion is complete.​</p>
-<p>The following code snippet demonstrates how to change the TTL of a collection.​</p>
+    </button></h2><p>Si une collection doit être abandonnée pendant une période spécifique, envisagez de définir son délai de vie (TTL) en secondes. Une fois le TTL dépassé, Milvus supprime les entités de la collection et abandonne la collection. La suppression est asynchrone, ce qui signifie que les recherches et les requêtes sont toujours possibles avant que la suppression ne soit terminée.</p>
+<p>L'extrait de code suivant montre comment modifier le TTL d'une collection.</p>
 <div class="multipleCode">
-  <a href="#python">Python </a>
-  <a href="#java">Java</a>
-  <a href="#javascript">Node.js</a>
-  <a href="#go">Go</a>
-  <a href="#curl">cURL</a>
-</div>
+ <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#go">Go</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Currently not available for Python</span>
 
 <button class="copy-code-btn"></button></code></pre>
