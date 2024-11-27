@@ -1,6 +1,6 @@
 ---
 id: bitset.md
-summary: Learn about bitsets in Milvus.
+summary: Saiba mais sobre bitsets em Milvus.
 title: Bitset
 ---
 <h1 id="Bitset" class="common-anchor-header">Bitset<button data-href="#Bitset" class="anchor-icon" translate="no">
@@ -18,8 +18,8 @@ title: Bitset
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>This topic introduces the bitset mechanism that helps enable key functionalities like attribute filtering and <a href="https://milvus.io/blog/2022-02-07-how-milvus-deletes-streaming-data-in-distributed-cluster.md">delete operations</a> in Milvus.</p>
-<h2 id="Overview" class="common-anchor-header">Overview<button data-href="#Overview" class="anchor-icon" translate="no">
+    </button></h1><p>Este tópico introduz o mecanismo de bitset que ajuda a permitir funcionalidades chave como filtragem de atributos e <a href="https://milvus.io/blog/2022-02-07-how-milvus-deletes-streaming-data-in-distributed-cluster.md">operações de eliminação</a> em Milvus.</p>
+<h2 id="Overview" class="common-anchor-header">Visão geral<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -34,9 +34,9 @@ title: Bitset
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>A bitset is a set of bits. Bits are elements with only two possible values, most typically <code translate="no">0</code> and <code translate="no">1</code>, or boolean values <code translate="no">true</code> and <code translate="no">false</code>. In Milvus, bitsets are arrays of bit numbers <code translate="no">0</code> and <code translate="no">1</code> that can be used to represent certain data compactly and efficiently as opposed to in ints, floats, or chars. A bit number is <code translate="no">0</code> by default and is only set to <code translate="no">1</code> if it meets certain requirements.</p>
-<p>Operations on bitsets are conducted with <a href="/docs/boolean.md">boolean logic</a>, under which an output value is either valid or invalid, also denoted by <code translate="no">1</code> and <code translate="no">0</code> respectively. For example, <a href="https://milvus.io/docs/v2.1.x/boolean.md#Logical-operators">logical operator</a> <code translate="no">AND</code> can be used to compare two bitsets based on items in the same index positions and produces a new bitset with the results. If two items in a position are the same, then in the new bitset <code translate="no">1</code> will be written in that position; <code translate="no">0</code> if they are different.</p>
-<h2 id="Implementation" class="common-anchor-header">Implementation<button data-href="#Implementation" class="anchor-icon" translate="no">
+    </button></h2><p>Um conjunto de bits é um conjunto de bits. Os bits são elementos com apenas dois valores possíveis, geralmente <code translate="no">0</code> e <code translate="no">1</code>, ou valores booleanos <code translate="no">true</code> e <code translate="no">false</code>. No Milvus, os conjuntos de bits são matrizes de números de bits <code translate="no">0</code> e <code translate="no">1</code> que podem ser utilizados para representar determinados dados de forma compacta e eficiente, em oposição a ints, floats ou chars. Um número de bits é <code translate="no">0</code> por defeito e só é definido para <code translate="no">1</code> se cumprir determinados requisitos.</p>
+<p>As operações em conjuntos de bits são efectuadas com <a href="/docs/pt/boolean.md">lógica booleana</a>, segundo a qual um valor de saída é válido ou inválido, também denotado por <code translate="no">1</code> e <code translate="no">0</code>, respetivamente. Por exemplo, o <a href="https://milvus.io/docs/v2.1.x/boolean.md#Logical-operators">operador lógico</a> <code translate="no">AND</code> pode ser utilizado para comparar dois conjuntos de bits com base em itens nas mesmas posições de índice e produz um novo conjunto de bits com os resultados. Se dois itens numa posição forem iguais, então, no novo conjunto de bits, <code translate="no">1</code> será escrito nessa posição; <code translate="no">0</code> se forem diferentes.</p>
+<h2 id="Implementation" class="common-anchor-header">Implementação<button data-href="#Implementation" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -51,10 +51,10 @@ title: Bitset
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Bitset is a simple yet powerful mechanism that helps Milvus perform attribute filtering, data deletion, and query with Time Travel.</p>
-<h3 id="Attribute-filtering" class="common-anchor-header">Attribute filtering</h3><p>As bitsets contain only two possible values, they are perfect for storing results of <a href="https://milvus.io/docs/v2.1.x/hybridsearch.md">attribute filtering</a>. Data that meet the requirement of a given attribute filter are marked with <code translate="no">1</code>.</p>
-<h3 id="Data-deletion" class="common-anchor-header">Data deletion</h3><p>Bitsets serve as a compact way to store information about whether a row in a segment is deleted. Deleted entities are marked with <code translate="no">1</code> in the corresponding bitset, which <a href="https://milvus.io/blog/deleting-data-in-milvus.md">will not be computed</a> during a search or query.</p>
-<h2 id="Examples" class="common-anchor-header">Examples<button data-href="#Examples" class="anchor-icon" translate="no">
+    </button></h2><p>O conjunto de bits é um mecanismo simples, mas poderoso, que ajuda o Milvus a efetuar a filtragem de atributos, a eliminação de dados e a consulta com o Time Travel.</p>
+<h3 id="Attribute-filtering" class="common-anchor-header">Filtragem de atributos</h3><p>Como os bitsets contêm apenas dois valores possíveis, são perfeitos para armazenar resultados de <a href="https://milvus.io/docs/v2.1.x/hybridsearch.md">filtragem</a> de atributos. Os dados que cumprem os requisitos de um determinado filtro de atributos são marcados com <code translate="no">1</code>.</p>
+<h3 id="Data-deletion" class="common-anchor-header">Eliminação de dados</h3><p>Os conjuntos de bits são uma forma compacta de armazenar informação sobre se uma linha num segmento foi eliminada. As entidades eliminadas são marcadas com <code translate="no">1</code> no conjunto de bits correspondente, que <a href="https://milvus.io/blog/deleting-data-in-milvus.md">não será computado</a> durante uma pesquisa ou consulta.</p>
+<h2 id="Examples" class="common-anchor-header">Exemplos<button data-href="#Examples" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -69,54 +69,46 @@ title: Bitset
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Here we present three examples that illustrate how bitsets are used in Milvus, with references to all three major implementations of bitsets discussed above. In all three cases, there is a segment with 8 entities and then a series of data manipulation language (DML) events takes place in the order shown below.</p>
+    </button></h2><p>Aqui apresentamos três exemplos que ilustram como os bitsets são usados no Milvus, com referências às três principais implementações de bitsets discutidas acima. Nos três casos, há um segmento com 8 entidades e, em seguida, uma série de eventos de linguagem de manipulação de dados (DML) ocorre na ordem mostrada abaixo.</p>
 <ul>
-<li>Four of the entities, whose <code translate="no">primary_key</code>s are [1, 2, 3, 4] respectively, are inserted when the timestamp <code translate="no">ts</code> equals 100.</li>
-<li>The rest four entities, whose <code translate="no">primary_key</code>s are [5, 6, 7, 8], are inserted when the timestamp <code translate="no">ts</code> equals 200.</li>
-<li>Entities whose <code translate="no">primary_key</code>s are [7, 8] are deleted when the timestamp <code translate="no">ts</code> equals 300.</li>
-<li>Only entities, whose <code translate="no">primary_key</code>s are [1, 3, 5, 7], satisfy the conditions of attribute filtering.</li>
+<li>Quatro das entidades, cujos <code translate="no">primary_key</code>s são [1, 2, 3, 4], respetivamente, são inseridas quando o carimbo de data/hora <code translate="no">ts</code> é igual a 100.</li>
+<li>As restantes quatro entidades, cujos <code translate="no">primary_key</code>s são [5, 6, 7, 8], são inseridas quando o carimbo de data/hora <code translate="no">ts</code> é igual a 200.</li>
+<li>As entidades cujos <code translate="no">primary_key</code>s são [7, 8] são eliminadas quando o carimbo de data/hora <code translate="no">ts</code> é igual a 300.</li>
+<li>Apenas as entidades, cujos <code translate="no">primary_key</code>s são [1, 3, 5, 7], satisfazem as condições de filtragem de atributos.</li>
 </ul>
 <p>
-  <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.5.x/assets/bitset_0.svg" alt="Order of DML events" class="doc-image" id="order-of-dml-events" />
-    <span>Order of DML events</span>
-  </span>
-</p>
-<h3 id="Case-one" class="common-anchor-header">Case one</h3><p>In this case, a user sets <code translate="no">time_travel</code> as 150, which means that the user conducts a query on data that satisfy <code translate="no">ts = 150</code>. The bitset generation process is illustrated by Figure 1.</p>
-<p>During the initial filtering stage, the <code translate="no">filter_bitset</code> should be <code translate="no">[1, 0, 1, 0, 1, 0, 1, 0]</code>, where entities [1, 3, 5, 7] are marked as <code translate="no">1</code> because they are valid filtering results.</p>
-<p>However, entities [4, 5, 6, 7] were not inserted to the vector database when <code translate="no">ts</code> equals 150. Therefore, these four entities should be marked as 0 regardless of the filtering condition. Now the bitset result should be <code translate="no">[1, 0, 1, 0, 0, 0, 0, 0]</code>.</p>
-<p>As discussed in <a href="#data-deletion">Data deletion</a>, entities that are marked with <code translate="no">1</code> are ignored during a search or query. The bitset result now needs to be flipped in order to be combined with the deletion bitmap, which gives us <code translate="no">[0, 1, 0, 1, 1, 1, 1, 1]</code>.</p>
-<p>As for the deletion bitset <code translate="no">del_bitset</code>, the initial value should be <code translate="no">[0, 0, 0, 0, 0, 0, 1, 1]</code>. However, entities 7 and 8 are not deleted until <code translate="no">ts</code> is 300. Therefore, when <code translate="no">ts</code> is 150, entities 7 and 8 are still valid. As a result, the <code translate="no">del_bitset</code> value after Time Travel is <code translate="no">[0, 0, 0, 0, 0, 0, 0, 0]</code>.</p>
-<p>Now we have two bitsets after Time Travel and attribute filtering: <code translate="no">filter_bitset</code> <code translate="no">[0, 1, 0, 1, 1, 1, 1, 1]</code> and <code translate="no">del_bitset</code> <code translate="no">[0, 0, 0, 0, 0, 0, 0, 0]</code>.  Combine these two bitsets with the <code translate="no">OR</code> binary logic operator. The ultimate value of result_bitset is <code translate="no">[0, 1, 0, 1, 1, 1, 1, 1]</code>, meaning only entities 1 and 3 will be computed in the following search or query stage.</p>
+  
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/bitset_0.svg" alt="Order of DML events" class="doc-image" id="order-of-dml-events" />
+   </span> <span class="img-wrapper"> <span>Ordem dos eventos DML</span> </span></p>
+<h3 id="Case-one" class="common-anchor-header">Caso um</h3><p>Neste caso, um utilizador define <code translate="no">time_travel</code> como 150, o que significa que o utilizador efectua uma consulta sobre dados que satisfazem <code translate="no">ts = 150</code>. O processo de geração do conjunto de bits é ilustrado na Figura 1.</p>
+<p>Durante a fase inicial de filtragem, o <code translate="no">filter_bitset</code> deve ser <code translate="no">[1, 0, 1, 0, 1, 0, 1, 0]</code>, em que as entidades [1, 3, 5, 7] são marcadas como <code translate="no">1</code> porque são resultados de filtragem válidos.</p>
+<p>No entanto, as entidades [4, 5, 6, 7] não foram inseridas na base de dados vetorial quando <code translate="no">ts</code> é igual a 150. Por conseguinte, estas quatro entidades devem ser marcadas como 0, independentemente da condição de filtragem. Agora, o resultado do conjunto de bits deve ser <code translate="no">[1, 0, 1, 0, 0, 0, 0, 0]</code>.</p>
+<p>Como discutido em <a href="#data-deletion">Eliminação de dados</a>, as entidades marcadas com <code translate="no">1</code> são ignoradas durante uma pesquisa ou consulta. O resultado do conjunto de bits precisa agora de ser invertido para ser combinado com o mapa de bits de eliminação, o que nos dá <code translate="no">[0, 1, 0, 1, 1, 1, 1, 1]</code>.</p>
+<p>Quanto ao conjunto de bits de eliminação <code translate="no">del_bitset</code>, o valor inicial deve ser <code translate="no">[0, 0, 0, 0, 0, 0, 1, 1]</code>. No entanto, as entidades 7 e 8 não são eliminadas até que <code translate="no">ts</code> seja 300. Portanto, quando <code translate="no">ts</code> é 150, as entidades 7 e 8 ainda são válidas. Como resultado, o valor de <code translate="no">del_bitset</code> após a Viagem no Tempo é <code translate="no">[0, 0, 0, 0, 0, 0, 0, 0]</code>.</p>
+<p>Agora temos dois conjuntos de bits após a viagem no tempo e a filtragem de atributos: <code translate="no">filter_bitset</code> <code translate="no">[0, 1, 0, 1, 1, 1, 1, 1]</code> e <code translate="no">del_bitset</code> <code translate="no">[0, 0, 0, 0, 0, 0, 0, 0]</code> .  Combine estes dois conjuntos de bits com o operador lógico binário <code translate="no">OR</code>. O valor final de result_bitset é <code translate="no">[0, 1, 0, 1, 1, 1, 1, 1]</code>, o que significa que apenas as entidades 1 e 3 serão computadas na fase seguinte de pesquisa ou consulta.</p>
 <p>
-  <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.5.x/assets/bitset_1.jpg" alt="Figure 1. Search with Time Travel = 150." class="doc-image" id="figure-1.-search-with-time-travel-=-150." />
-    <span>Figure 1. Search with Time Travel = 150.</span>
-  </span>
-</p>
-<h3 id="Case-two" class="common-anchor-header">Case two</h3><p>In this case, the user sets <code translate="no">time_travel</code> as 250. The bitset generation process is illustrated by Figure 2.</p>
-<p>Like in case one, the initial <code translate="no">filter_bitset</code> is <code translate="no">[1, 0, 1, 0, 1, 0, 1, 0]</code>.</p>
-<p>All entities are in the vector database when <code translate="no">ts</code> = 250. Therefore, the <code translate="no">filter_bitset</code> stays the same when we factor in the timestamp. Again, we need to flip the result and get <code translate="no">[0, 1, 0, 1, 0, 1, 0, 1]</code>.</p>
-<p>As for the deletion bitset <code translate="no">del_bitset</code>, the initial value is <code translate="no">[0, 0, 0, 0, 0, 0, 1, 1]</code>. However, entities 7 and 8 were not deleted until <code translate="no">ts</code> is 300. Therefore, when <code translate="no">ts</code> is 250, entities 7 and 8 are still valid. As a result, the <code translate="no">del_bitset</code> after Time Travel is <code translate="no">[0, 0, 0, 0, 0, 0, 0, 0]</code>.</p>
-<p>Now we have two bitsets after Time Travel and attribute filtering: <code translate="no">filter_bitset</code> <code translate="no">[0, 1, 0, 1, 0, 1, 0, 1]</code> and <code translate="no">del_bitset</code> <code translate="no">[0, 0, 0, 0, 0, 0, 0, 0]</code>. Combine these two bitsets with the <code translate="no">OR</code> binary logic operator. The result_bitset is <code translate="no">[0, 1, 0, 1, 0, 1, 0, 1]</code>. That is to say, only entites [1, 3, 5, 7] will be computed in the following search or query stage.</p>
+ <span class="img-wrapper">
+   <img translate="no" src="/docs/v2.5.x/assets/bitset_1.jpg" alt="Figure 1. Search with Time Travel = 150." class="doc-image" id="figure-1.-search-with-time-travel-=-150." />
+   <span>Figura 1. Pesquisa com viagem no tempo = 150</span>. </span></p>
+<h3 id="Case-two" class="common-anchor-header">Caso dois</h3><p>Neste caso, o utilizador define <code translate="no">time_travel</code> como 250. O processo de geração do conjunto de bits é ilustrado na Figura 2.</p>
+<p>Tal como no caso um, o <code translate="no">filter_bitset</code> inicial é <code translate="no">[1, 0, 1, 0, 1, 0, 1, 0]</code>.</p>
+<p>Todas as entidades estão na base de dados vetorial quando <code translate="no">ts</code> = 250. Por conseguinte, o <code translate="no">filter_bitset</code> permanece o mesmo quando se considera o carimbo de data/hora. Mais uma vez, temos de inverter o resultado e obter <code translate="no">[0, 1, 0, 1, 0, 1, 0, 1]</code>.</p>
+<p>Quanto ao conjunto de bits de eliminação <code translate="no">del_bitset</code>, o valor inicial é <code translate="no">[0, 0, 0, 0, 0, 0, 1, 1]</code>. No entanto, as entidades 7 e 8 não foram eliminadas até <code translate="no">ts</code> ser 300. Por conseguinte, quando <code translate="no">ts</code> é 250, as entidades 7 e 8 ainda são válidas. Como resultado, o <code translate="no">del_bitset</code> após a Viagem no Tempo é <code translate="no">[0, 0, 0, 0, 0, 0, 0, 0]</code>.</p>
+<p>Agora temos dois conjuntos de bits após a Viagem no Tempo e a filtragem de atributos: <code translate="no">filter_bitset</code> <code translate="no">[0, 1, 0, 1, 0, 1, 0, 1]</code> e <code translate="no">del_bitset</code> <code translate="no">[0, 0, 0, 0, 0, 0, 0, 0]</code> . Combine estes dois conjuntos de bits com o operador lógico binário <code translate="no">OR</code>. O conjunto de bits resultante é <code translate="no">[0, 1, 0, 1, 0, 1, 0, 1]</code>. Ou seja, apenas as entidades [1, 3, 5, 7] serão computadas na fase de pesquisa ou consulta seguinte.</p>
 <p>
-  <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.5.x/assets/bitset_2.jpg" alt="Figure 2. Search with Time Travel = 250." class="doc-image" id="figure-2.-search-with-time-travel-=-250." />
-    <span>Figure 2. Search with Time Travel = 250.</span>
-  </span>
-</p>
-<h3 id="Case-three" class="common-anchor-header">Case three</h3><p>In this case, the user sets <code translate="no">time_travel</code> as 350. The bitset generation process is illustrated by Figure 3.</p>
-<p>As with previous cases, the initial <code translate="no">filter_bitset</code> is <code translate="no">[0, 1, 0, 1, 0, 1, 0, 1]</code>.</p>
-<p>All entities are in the vector database when <code translate="no">ts</code>= 350. Therefore, the final, flipped <code translate="no">filter_bitset</code> is <code translate="no">[0, 1, 0, 1, 0, 1, 0, 1]</code>, the same as in case two.</p>
-<p>As for the deletion bitset <code translate="no">del_bitset</code>, since entities 7 and 8 have already been deleted when <code translate="no">ts = 350</code>, therefore, the result of <code translate="no">del_bitset</code> is <code translate="no">[0, 0, 0, 0, 0, 0, 1, 1]</code>.</p>
-<p>Now we have two bitsets after Time Travel and attribute filtering: <code translate="no">filter_bitset</code> <code translate="no">[0, 1, 0, 1, 0, 1, 0, 1]</code> and <code translate="no">del_bitset</code> <code translate="no">[0, 0, 0, 0, 0, 0, 1, 1]</code>.  Combine these two bitsets with the <code translate="no">OR</code> binary logic operator. The ultimate <code translate="no">result_bitset</code> is <code translate="no">[0, 1, 0, 1, 0, 1, 1, 1]</code>. That is to say, only entities [1, 3, 5] will be computed in the following search or query stage.</p>
+ <span class="img-wrapper">
+   <img translate="no" src="/docs/v2.5.x/assets/bitset_2.jpg" alt="Figure 2. Search with Time Travel = 250." class="doc-image" id="figure-2.-search-with-time-travel-=-250." />
+   <span>Figura 2. Pesquisa com Viagem no Tempo = 250</span>. </span></p>
+<h3 id="Case-three" class="common-anchor-header">Caso três</h3><p>Neste caso, o utilizador define <code translate="no">time_travel</code> como 350. O processo de geração do conjunto de bits é ilustrado na Figura 3.</p>
+<p>Tal como nos casos anteriores, o <code translate="no">filter_bitset</code> inicial é <code translate="no">[0, 1, 0, 1, 0, 1, 0, 1]</code>.</p>
+<p>Todas as entidades estão na base de dados vetorial quando <code translate="no">ts</code>= 350. Assim, o <code translate="no">filter_bitset</code> final, invertido, é <code translate="no">[0, 1, 0, 1, 0, 1, 0, 1]</code>, tal como no caso dois.</p>
+<p>Quanto ao conjunto de bits de eliminação <code translate="no">del_bitset</code>, como as entidades 7 e 8 já foram eliminadas em <code translate="no">ts = 350</code>, o resultado de <code translate="no">del_bitset</code> é <code translate="no">[0, 0, 0, 0, 0, 0, 1, 1]</code>.</p>
+<p>Agora temos dois conjuntos de bits após a viagem no tempo e a filtragem de atributos: <code translate="no">filter_bitset</code> <code translate="no">[0, 1, 0, 1, 0, 1, 0, 1]</code> e <code translate="no">del_bitset</code> <code translate="no">[0, 0, 0, 0, 0, 0, 1, 1]</code> .  Combine estes dois conjuntos de bits com o operador lógico binário <code translate="no">OR</code>. O <code translate="no">result_bitset</code> final é <code translate="no">[0, 1, 0, 1, 0, 1, 1, 1]</code>. Ou seja, apenas as entidades [1, 3, 5] serão computadas na fase de pesquisa ou consulta seguinte.</p>
 <p>
-  <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.5.x/assets/bitset_3.jpg" alt="Figure 3. Search with Time Travel = 350." class="doc-image" id="figure-3.-search-with-time-travel-=-350." />
-    <span>Figure 3. Search with Time Travel = 350.</span>
-  </span>
-</p>
-<h2 id="Whats-next" class="common-anchor-header">What’s next<button data-href="#Whats-next" class="anchor-icon" translate="no">
+ <span class="img-wrapper">
+   <img translate="no" src="/docs/v2.5.x/assets/bitset_3.jpg" alt="Figure 3. Search with Time Travel = 350." class="doc-image" id="figure-3.-search-with-time-travel-=-350." />
+   <span>Figura 3. Pesquisa com Viagem no Tempo = 350</span>. </span></p>
+<h2 id="Whats-next" class="common-anchor-header">O que se segue<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -131,8 +123,8 @@ title: Bitset
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Now that you know how bitsets work in Milvus, you might also want to:</p>
+    </button></h2><p>Agora que já sabe como funcionam os conjuntos de bits no Milvus, talvez também queira:</p>
 <ul>
-<li>Learn how to <a href="https://milvus.io/blog/2022-08-08-How-to-use-string-data-to-empower-your-similarity-search-applications.md">use strings to filter</a> your search results, or refer to <a href="https://milvus.io/docs/hybridsearch.md">Hybrid Search</a> on our docs.</li>
-<li>Understand <a href="https://milvus.io/docs/v2.1.x/data_processing.md">how data are processed</a> in Milvus.</li>
+<li>Aprender a <a href="https://milvus.io/blog/2022-08-08-How-to-use-string-data-to-empower-your-similarity-search-applications.md">usar strings para filtrar</a> os resultados da pesquisa, ou consultar a <a href="https://milvus.io/docs/hybridsearch.md">Pesquisa Híbrida</a> na nossa documentação.</li>
+<li>Compreender <a href="https://milvus.io/docs/v2.1.x/data_processing.md">como os dados são processados</a> em Milvus.</li>
 </ul>

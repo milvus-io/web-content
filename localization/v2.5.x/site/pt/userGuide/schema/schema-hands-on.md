@@ -1,15 +1,16 @@
 ---
 id: schema-hands-on.md
-title: Schema Design Hands-On​
+title: Desenho de esquemas prático
 summary: >-
-  Milvus supports defining the data model through a collection schema. A
-  collection organizes unstructured data like text and images, along with their
-  vector representations, including dense and sparse vectors in various
-  precision used for semantic search. Additionally, Milvus supports storing and
-  filtering non-vector data types called "Scalar". Scalar types include BOOL,
-  INT8/16/32/64, FLOAT/DOUBLE, VARCHAR, JSON, and Array.​
+  O Milvus permite definir o modelo de dados através de um esquema de coleção.
+  Uma coleção organiza dados não estruturados, como texto e imagens, juntamente
+  com as suas representações vectoriais, incluindo vectores densos e esparsos em
+  várias precisões utilizadas para a pesquisa semântica. Além disso, o Milvus
+  suporta o armazenamento e a filtragem de tipos de dados não vectoriais
+  denominados "Scalar". Os tipos escalares incluem BOOL, INT8/16/32/64,
+  FLOAT/DOUBLE, VARCHAR, JSON e Array.
 ---
-<h1 id="Schema-Design-Hands-On​" class="common-anchor-header">Schema Design Hands-On​<button data-href="#Schema-Design-Hands-On​" class="anchor-icon" translate="no">
+<h1 id="Schema-Design-Hands-On​" class="common-anchor-header">Desenho de esquemas prático<button data-href="#Schema-Design-Hands-On​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -24,17 +25,15 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Information Retrieval (IR) systems, also known as search, are essential for various AI applications such as Retrieval-augmented generation (RAG), image search, and product recommendation. The first step in developing an IR system is designing the data model, which involves analyzing business requirements, determining how to organize information, and indexing data to make it semantically searchable.​</p>
-<p>Milvus supports defining the data model through a collection schema. A collection organizes unstructured data like text and images, along with their vector representations, including dense and sparse vectors in various precision used for semantic search. Additionally, Milvus supports storing and filtering non-vector data types called &quot;Scalar&quot;. Scalar types include BOOL, INT8/16/32/64, FLOAT/DOUBLE, VARCHAR, JSON, and Array.​</p>
+    </button></h1><p>Os sistemas de Recuperação de Informação (RI), também conhecidos como pesquisa, são essenciais para várias aplicações de IA, como Retrieval-augmented generation (RAG), pesquisa de imagens e recomendação de produtos. O primeiro passo no desenvolvimento de um sistema de RI é a conceção do modelo de dados, que envolve a análise dos requisitos comerciais, a determinação da forma de organizar a informação e a indexação dos dados para os tornar semanticamente pesquisáveis.</p>
+<p>O Milvus suporta a definição do modelo de dados através de um esquema de coleção. Uma coleção organiza dados não estruturados como texto e imagens, juntamente com as suas representações vectoriais, incluindo vectores densos e esparsos em várias precisões utilizadas para a pesquisa semântica. Além disso, o Milvus suporta o armazenamento e a filtragem de tipos de dados não vectoriais denominados &quot;Scalar&quot;. Os tipos escalares incluem BOOL, INT8/16/32/64, FLOAT/DOUBLE, VARCHAR, JSON e Array.</p>
 <p>
-  <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.5.x/assets/schema-hands-on.png" alt="Example data schema designed for searching news article" class="doc-image" id="example-data-schema-designed-for-searching-news-article" />
-    <span>Example data schema designed for searching news article</span>
-  </span>
-</p>
-<p>The data model design of a search system involves analyzing business needs and abstracting information into a schema-expressed data model. For instance, to search a piece of text, it must be “indexed” by converting the literal string into a vector through &quot;embedding&quot;, enabling vector search. Beyond this basic requirement, it may be necessary to store other properties such as publication timestamp and author. This metadata allows for semantic searches to be refined through filtering, returning only texts published after a specific date or by a particular author. They may also need to be retrieved together with the main text, for rendering the search result in the application. To organize these text pieces, each should be assigned a unique identifier, expressed as an integer or string. These elements are essential for achieving sophisticated search logic.​</p>
-<p>A well-designed schema is important as it abstracts the data model and decides if the business objectives can be achieved through search. Furthermore, since every row of data inserted into the collection needs to follow the schema, it greatly helps to maintain data consistency and long-term quality. From a technical perspective, a well-defined schema leads to well-organized column data storage and a cleaner index structure, which can boost search performance.​</p>
-<h1 id="An-Example-News-Search​" class="common-anchor-header">An Example: News Search​<button data-href="#An-Example-News-Search​" class="anchor-icon" translate="no">
+  
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/schema-hands-on.png" alt="Example data schema designed for searching news article" class="doc-image" id="example-data-schema-designed-for-searching-news-article" />
+   </span> <span class="img-wrapper"> <span>Exemplo de esquema de dados concebido para pesquisar artigos de notícias</span> </span></p>
+<p>A conceção do modelo de dados de um sistema de pesquisa envolve a análise das necessidades comerciais e a abstração da informação num modelo de dados expresso num esquema. Por exemplo, para pesquisar um pedaço de texto, este deve ser &quot;indexado&quot; convertendo a cadeia literal num vetor através de &quot;embedding&quot;, permitindo a pesquisa vetorial. Para além deste requisito básico, pode ser necessário armazenar outras propriedades, como o carimbo temporal da publicação e o autor. Estes metadados permitem que as pesquisas semânticas sejam refinadas através de filtragem, devolvendo apenas textos publicados após uma data específica ou por um determinado autor. Também podem precisar de ser recuperados juntamente com o texto principal, para apresentar o resultado da pesquisa na aplicação. Para organizar estas partes de texto, deve ser atribuído a cada uma delas um identificador único, expresso como um número inteiro ou uma cadeia de caracteres. Estes elementos são essenciais para obter uma lógica de pesquisa sofisticada.</p>
+<p>Um esquema bem concebido é importante porque abstrai o modelo de dados e decide se os objectivos comerciais podem ser alcançados através da pesquisa. Além disso, uma vez que cada linha de dados inserida na coleção tem de seguir o esquema, este ajuda muito a manter a consistência dos dados e a qualidade a longo prazo. De uma perspetiva técnica, um esquema bem definido leva a um armazenamento de dados de coluna bem organizado e a uma estrutura de índice mais limpa, o que pode aumentar o desempenho da pesquisa.</p>
+<h1 id="An-Example-News-Search​" class="common-anchor-header">Um exemplo: Pesquisa de notícias<button data-href="#An-Example-News-Search​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -49,47 +48,47 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Let’s say we want to build search for a news website and we have a corpus of news with text, thumbnail images, and other metadata. First, we need to analyze how we want to utilize the data to support the business requirement of search. Imagine the requirement is to retrieve the news based the thumbnail image and the summary of the content, and taking the metadata such as author info and publishing time as criteria to filter the search result. These requirements can be further broken down into:​</p>
+    </button></h1><p>Digamos que queremos criar uma pesquisa para um site de notícias e temos um corpus de notícias com texto, imagens em miniatura e outros metadados. Primeiro, precisamos de analisar como queremos utilizar os dados para suportar o requisito comercial da pesquisa. Imaginemos que o requisito é obter as notícias com base na imagem em miniatura e no resumo do conteúdo, e utilizar os metadados, como a informação do autor e a hora de publicação, como critérios para filtrar o resultado da pesquisa. Estes requisitos podem ainda ser divididos em.</p>
 <ul>
-<li><p>To search images via text, we can embed images into vectors via multimodal embedding model that can map text and image data into the same latent space.​</p></li>
-<li><p>The summary text of an article is embedded into vectors via text embedding model.​</p></li>
-<li><p>To filter based on the publish time, the dates are stored as a scalar field and an index is needed for the scalar field for efficient filtering. Other more complex data structures such a JSON can be stored in a scalar and a filtered search performed on their contents (indexing JSON is an upcoming feature).​</p></li>
-<li><p>To retrieve the image thumbnail bytes and render it on the search result page, the image url is also stored. Similarly, for the summary text and title. (Alternatively, we could store the raw text and image file data as scalar fields if required.)​</p></li>
-<li><p>To improve the search result on the summary text, we design a hybrid search approach. For one retrieval path, we use regular embedding model to generate dense vector from the text, such as OpenAI’s <code translate="no">text-embedding-3-large</code> or the open-source <code translate="no">bge-large-en-v1.5</code>. These models are good at representing the overall semantic of the text. The other path is to use sparse embedding models such as BM25 or SPLADE to generate a sparse vector, resembling the full-text search which is good at grasping the details and individual concepts in the text. Milvus supports using both in the same data collection thanks to its multi-vector feature. The search on multiple vectors can be done in a single <code translate="no">hybrid_search()</code> operation.​</p></li>
-<li><p>Finally, we also need an ID field to identify each individual news page, formally referred to as an “entity” in Milvus terminology. This field is used as the primary key (or “pk” for short).​</p></li>
+<li><p>Para pesquisar imagens através de texto, podemos incorporar imagens em vectores através do modelo de incorporação multimodal que pode mapear dados de texto e imagem no mesmo espaço latente.</p></li>
+<li><p>O texto do resumo de um artigo é incorporado em vectores através do modelo de incorporação de texto.</p></li>
+<li><p>Para filtrar com base na hora de publicação, as datas são armazenadas como um campo escalar e é necessário um índice para o campo escalar para uma filtragem eficiente. Outras estruturas de dados mais complexas, como JSON, podem ser armazenadas num escalar e uma pesquisa filtrada pode ser efectuada no seu conteúdo (a indexação de JSON é uma funcionalidade futura).</p></li>
+<li><p>Para recuperar os bytes da miniatura da imagem e apresentá-la na página de resultados da pesquisa, o URL da imagem também é armazenado. Da mesma forma, para o texto de resumo e o título. (Em alternativa, podemos armazenar o texto em bruto e os dados do ficheiro de imagem como campos escalares, se necessário).</p></li>
+<li><p>Para melhorar o resultado da pesquisa no texto de resumo, concebemos uma abordagem de pesquisa híbrida. Para um caminho de recuperação, utilizamos um modelo de incorporação regular para gerar um vetor denso a partir do texto, como o <code translate="no">text-embedding-3-large</code> da OpenAI ou o <code translate="no">bge-large-en-v1.5</code> de código aberto. Estes modelos são bons para representar a semântica global do texto. O outro caminho consiste em utilizar modelos de incorporação esparsos, como o BM25 ou o SPLADE, para gerar um vetor esparso, semelhante à pesquisa de texto completo, que é bom para compreender os detalhes e os conceitos individuais do texto. O Milvus permite a utilização de ambos na mesma recolha de dados graças à sua funcionalidade multi-vetorial. A pesquisa em vários vectores pode ser efectuada numa única operação em <code translate="no">hybrid_search()</code>.</p></li>
+<li><p>Por fim, precisamos também de um campo ID para identificar cada página de notícias individual, formalmente designada por "entidade" na terminologia do Milvus. Este campo é utilizado como chave primária (ou "pk", abreviadamente).</p></li>
 </ul>
-<table data-block-token="EOxnd1GqhoODuWx4UyucOMahn0e"><thead><tr><th data-block-token="P2g0djnY5oRKT7xw7aSceiaQnRb" colspan="1" rowspan="1"><p data-block-token="TrIsdjxzooLqxUxiqkTcfN5pnHd">Field Name​</p>
-</th><th data-block-token="KVq4dDr4BovOHSxtWd5cZBnnnn5" colspan="1" rowspan="1"><p data-block-token="D9uYdwp8ToHqXmxqueVcBAi2n6b">article_id (Primary Key)​</p>
-</th><th data-block-token="O6jTdN4rBouwtQxFNgpcM7GFnyp" colspan="1" rowspan="1"><p data-block-token="IJuldjRIeoNHRgx0ix5c2eBSn6f">title​</p>
-</th><th data-block-token="V4EKdYzLqoENTTxXuOwcVTIGnLg" colspan="1" rowspan="1"><p data-block-token="Tldydg7BboZeSUxiaTfcUnsfnqd">author_info​</p>
-</th><th data-block-token="GHF6dqGRVoQ6Kpxv9tUcijFXnVc" colspan="1" rowspan="1"><p data-block-token="Ih0jdg4yToRJOkxyriwcKJ39nVd">publish_ts​</p>
-</th><th data-block-token="Ui3ldA2BwovU8LxMHcIcrmVvnLg" colspan="1" rowspan="1"><p data-block-token="PJGJdX1efoo647xvgCDcuhkznye">image_url​</p>
-</th><th data-block-token="VCskd6ySvocz8IxF5CVcpmF5n0b" colspan="1" rowspan="1"><p data-block-token="Cx7idKjgYoctpYxsnskc7OD0nxb">image_vector​</p>
-</th><th data-block-token="WSbhdTqglocn3KxpvBscFOh2n6d" colspan="1" rowspan="1"><p data-block-token="Q16ods013oZUOQxk9vicK0JGn2e">summary​</p>
-</th><th data-block-token="T5HAdXwado1qJpxCpf9cwDjmnhe" colspan="1" rowspan="1"><p data-block-token="ZG3odG5k2oMqFSxM8TFcE8kZnCh">summary_dense_vector​</p>
-</th><th data-block-token="MWAHdYgIvogpIfxsRnscz5WWnOe" colspan="1" rowspan="1"><p data-block-token="MeU1dGziaodmTkxc5q9cvYR9ndd">summary_sparse_vector​</p>
-</th></tr></thead><tbody><tr><td data-block-token="V1x7d7y15oxxNSxpvRJcoW7VnWh" colspan="1" rowspan="1"><p data-block-token="X9old4LgooPgrexElIBc2JgNnac">Type​</p>
-</td><td data-block-token="EWlPdiRtBoqrOYxLoWDcnPUQn3f" colspan="1" rowspan="1"><p data-block-token="TtABd1mq0o2ShTxtXfncI8i9n8g">INT64​</p>
-</td><td data-block-token="ZICad5qEYohcTvxo477cZIWInCh" colspan="1" rowspan="1"><p data-block-token="CBHWdVhLKo2wn1xR3Pocf43NnRs">VARCHAR​</p>
-</td><td data-block-token="VTwJdpuQboqurJxXbQUctG8fnNc" colspan="1" rowspan="1"><p data-block-token="OI1ldgzbAoEIOUx7boRcooR0nvb">JSON​</p>
-</td><td data-block-token="UVWKdd69Mo8hyyxOqLLcZn7kncc" colspan="1" rowspan="1"><p data-block-token="QJUZdxgzEora0PxAxf8c1axknbp">INT32​</p>
-</td><td data-block-token="Wf8AdfYj1on0OkxjHkocPiqInYe" colspan="1" rowspan="1"><p data-block-token="KE0QdVg3doF05Exq3fmccqOcnvc">VARCHAR​</p>
-</td><td data-block-token="JVHgd9P9aoSl9mxqoFfcM7ownXz" colspan="1" rowspan="1"><p data-block-token="TwotdcMshoE2TSxGIauclTZjnLh">FLOAT_VECTOR​</p>
-</td><td data-block-token="MUwwdyV4co3V2QxOxc1cMuD9nbc" colspan="1" rowspan="1"><p data-block-token="RpfxdP0AHoW0xhx8sfBclJvtnyc">VARCHAR​</p>
-</td><td data-block-token="P4bqdeIGOoV67FxhYmtclfBpn1d" colspan="1" rowspan="1"><p data-block-token="RyztdWGXzoP4IBxHd8Pcu0q2nbe">FLOAT_VECTOR​</p>
-</td><td data-block-token="AtJldXTWUoT5FPxY6EncUqWsnrc" colspan="1" rowspan="1"><p data-block-token="FJMJdqKeFodc73xGlnpcYgJanWg">SPARSE_FLOAT_VECTOR​</p>
-</td></tr><tr><td data-block-token="ZAKYdJAv6oj5IxxYUaUcLFOEnkh" colspan="1" rowspan="1"><p data-block-token="Frr0dWnzWo5UFDxLfqaceqvSnmg">Need Index​</p>
-</td><td data-block-token="ONHadATa9ojiwAxEwUdcaJpOnbb" colspan="1" rowspan="1"><p data-block-token="ZGT8dgMGbo8r22xpFztcycKDn9c">N​</p>
-</td><td data-block-token="E3Hod6CkXozMt4x0xF6cPkdin4e" colspan="1" rowspan="1"><p data-block-token="Ha0PdI0byocer9xXJGac8QYdnPg">N​</p>
-</td><td data-block-token="NaJ5dcptooRPe8xk9VTcx6Amnld" colspan="1" rowspan="1"><p data-block-token="U57edD6zqoPY7LxQjPDcnNDVnxc">N (Support coming soon)​</p>
-</td><td data-block-token="MqejdtkWboMHmZxWWCAcK7X0n1e" colspan="1" rowspan="1"><p data-block-token="NeNJdcEvloQ4E7xN9JeczCORnQX">Y​</p>
-</td><td data-block-token="VKy3driI9owHhCx1l4Iczj8Hnkb" colspan="1" rowspan="1"><p data-block-token="QRWQdK0J3oWYc0x8xT6c4Me5nXb">N​</p>
-</td><td data-block-token="EZR0dRNXpotMtdxAKG9cHj8zn2c" colspan="1" rowspan="1"><p data-block-token="LTyRduM2FoGmkVxa1HgceBFbnKf">Y​</p>
-</td><td data-block-token="W3MydyW7bod6UaxdNURcqTnBnFb" colspan="1" rowspan="1"><p data-block-token="EwbCdu2ZZop4zJxbyhZcR2HunUh">N​</p>
-</td><td data-block-token="XQdvd35mVov5cUxstzpcipmlni8" colspan="1" rowspan="1"><p data-block-token="SJoudzWmiouT20xXCCpcQR1Mnsz">Y​</p>
-</td><td data-block-token="MXntdRmaUo91QoxGeNgc9goanee" colspan="1" rowspan="1"><p data-block-token="Sxfzdk7VoocU6kxAV63cI3ObnTe">Y​</p>
+<table data-block-token="EOxnd1GqhoODuWx4UyucOMahn0e"><thead><tr><th data-block-token="P2g0djnY5oRKT7xw7aSceiaQnRb" colspan="1" rowspan="1"><p data-block-token="TrIsdjxzooLqxUxiqkTcfN5pnHd">Nome do campo</p>
+</th><th data-block-token="KVq4dDr4BovOHSxtWd5cZBnnnn5" colspan="1" rowspan="1"><p data-block-token="D9uYdwp8ToHqXmxqueVcBAi2n6b">article_id (Chave primária)</p>
+</th><th data-block-token="O6jTdN4rBouwtQxFNgpcM7GFnyp" colspan="1" rowspan="1"><p data-block-token="IJuldjRIeoNHRgx0ix5c2eBSn6f">título</p>
+</th><th data-block-token="V4EKdYzLqoENTTxXuOwcVTIGnLg" colspan="1" rowspan="1"><p data-block-token="Tldydg7BboZeSUxiaTfcUnsfnqd">author_info</p>
+</th><th data-block-token="GHF6dqGRVoQ6Kpxv9tUcijFXnVc" colspan="1" rowspan="1"><p data-block-token="Ih0jdg4yToRJOkxyriwcKJ39nVd">publish_ts</p>
+</th><th data-block-token="Ui3ldA2BwovU8LxMHcIcrmVvnLg" colspan="1" rowspan="1"><p data-block-token="PJGJdX1efoo647xvgCDcuhkznye">URL_da_imagem</p>
+</th><th data-block-token="VCskd6ySvocz8IxF5CVcpmF5n0b" colspan="1" rowspan="1"><p data-block-token="Cx7idKjgYoctpYxsnskc7OD0nxb">vector_imagem</p>
+</th><th data-block-token="WSbhdTqglocn3KxpvBscFOh2n6d" colspan="1" rowspan="1"><p data-block-token="Q16ods013oZUOQxk9vicK0JGn2e">resumo</p>
+</th><th data-block-token="T5HAdXwado1qJpxCpf9cwDjmnhe" colspan="1" rowspan="1"><p data-block-token="ZG3odG5k2oMqFSxM8TFcE8kZnCh">resumo_denso_vector</p>
+</th><th data-block-token="MWAHdYgIvogpIfxsRnscz5WWnOe" colspan="1" rowspan="1"><p data-block-token="MeU1dGziaodmTkxc5q9cvYR9ndd">summary_sparse_vector</p>
+</th></tr></thead><tbody><tr><td data-block-token="V1x7d7y15oxxNSxpvRJcoW7VnWh" colspan="1" rowspan="1"><p data-block-token="X9old4LgooPgrexElIBc2JgNnac">Tipo de vetor</p>
+</td><td data-block-token="EWlPdiRtBoqrOYxLoWDcnPUQn3f" colspan="1" rowspan="1"><p data-block-token="TtABd1mq0o2ShTxtXfncI8i9n8g">INT64</p>
+</td><td data-block-token="ZICad5qEYohcTvxo477cZIWInCh" colspan="1" rowspan="1"><p data-block-token="CBHWdVhLKo2wn1xR3Pocf43NnRs">VARCHAR</p>
+</td><td data-block-token="VTwJdpuQboqurJxXbQUctG8fnNc" colspan="1" rowspan="1"><p data-block-token="OI1ldgzbAoEIOUx7boRcooR0nvb">JSON</p>
+</td><td data-block-token="UVWKdd69Mo8hyyxOqLLcZn7kncc" colspan="1" rowspan="1"><p data-block-token="QJUZdxgzEora0PxAxf8c1axknbp">INT32</p>
+</td><td data-block-token="Wf8AdfYj1on0OkxjHkocPiqInYe" colspan="1" rowspan="1"><p data-block-token="KE0QdVg3doF05Exq3fmccqOcnvc">VARCHAR</p>
+</td><td data-block-token="JVHgd9P9aoSl9mxqoFfcM7ownXz" colspan="1" rowspan="1"><p data-block-token="TwotdcMshoE2TSxGIauclTZjnLh">FLOAT_VECTOR</p>
+</td><td data-block-token="MUwwdyV4co3V2QxOxc1cMuD9nbc" colspan="1" rowspan="1"><p data-block-token="RpfxdP0AHoW0xhx8sfBclJvtnyc">VARCHAR</p>
+</td><td data-block-token="P4bqdeIGOoV67FxhYmtclfBpn1d" colspan="1" rowspan="1"><p data-block-token="RyztdWGXzoP4IBxHd8Pcu0q2nbe">FLOAT_VECTOR</p>
+</td><td data-block-token="AtJldXTWUoT5FPxY6EncUqWsnrc" colspan="1" rowspan="1"><p data-block-token="FJMJdqKeFodc73xGlnpcYgJanWg">VECTOR_FLOAT_ESPARSO</p>
+</td></tr><tr><td data-block-token="ZAKYdJAv6oj5IxxYUaUcLFOEnkh" colspan="1" rowspan="1"><p data-block-token="Frr0dWnzWo5UFDxLfqaceqvSnmg">Índice de necessidade</p>
+</td><td data-block-token="ONHadATa9ojiwAxEwUdcaJpOnbb" colspan="1" rowspan="1"><p data-block-token="ZGT8dgMGbo8r22xpFztcycKDn9c">N</p>
+</td><td data-block-token="E3Hod6CkXozMt4x0xF6cPkdin4e" colspan="1" rowspan="1"><p data-block-token="Ha0PdI0byocer9xXJGac8QYdnPg">N</p>
+</td><td data-block-token="NaJ5dcptooRPe8xk9VTcx6Amnld" colspan="1" rowspan="1"><p data-block-token="U57edD6zqoPY7LxQjPDcnNDVnxc">N (Suporte em breve)</p>
+</td><td data-block-token="MqejdtkWboMHmZxWWCAcK7X0n1e" colspan="1" rowspan="1"><p data-block-token="NeNJdcEvloQ4E7xN9JeczCORnQX">Y</p>
+</td><td data-block-token="VKy3driI9owHhCx1l4Iczj8Hnkb" colspan="1" rowspan="1"><p data-block-token="QRWQdK0J3oWYc0x8xT6c4Me5nXb">N</p>
+</td><td data-block-token="EZR0dRNXpotMtdxAKG9cHj8zn2c" colspan="1" rowspan="1"><p data-block-token="LTyRduM2FoGmkVxa1HgceBFbnKf">Y</p>
+</td><td data-block-token="W3MydyW7bod6UaxdNURcqTnBnFb" colspan="1" rowspan="1"><p data-block-token="EwbCdu2ZZop4zJxbyhZcR2HunUh">N</p>
+</td><td data-block-token="XQdvd35mVov5cUxstzpcipmlni8" colspan="1" rowspan="1"><p data-block-token="SJoudzWmiouT20xXCCpcQR1Mnsz">Y</p>
+</td><td data-block-token="MXntdRmaUo91QoxGeNgc9goanee" colspan="1" rowspan="1"><p data-block-token="Sxfzdk7VoocU6kxAV63cI3ObnTe">Y</p>
 </td></tr></tbody></table>
-<h1 id="How-to-Implement-the-Example-Schema​" class="common-anchor-header">How to Implement the Example Schema​<button data-href="#How-to-Implement-the-Example-Schema​" class="anchor-icon" translate="no">
+<h1 id="How-to-Implement-the-Example-Schema​" class="common-anchor-header">Como implementar o esquema de exemplo<button data-href="#How-to-Implement-the-Example-Schema​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -104,7 +103,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><h2 id="Create-Schema​" class="common-anchor-header">Create Schema​<button data-href="#Create-Schema​" class="anchor-icon" translate="no">
+    </button></h1><h2 id="Create-Schema​" class="common-anchor-header">Criar esquema<button data-href="#Create-Schema​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -119,8 +118,8 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>First, we create a Milvus client instance, which can be used to connect to the Milvus server and manage collections and data. ​</p>
-<p>To set up a schema, we use <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_schema.md"><code translate="no">create_schema()</code></a> to create a schema object and <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/CollectionSchema/add_field.md"><code translate="no">add_field()</code></a> to add fields to the schema.​</p>
+    </button></h2><p>Primeiro, criamos uma instância de cliente Milvus, que pode ser usada para se ligar ao servidor Milvus e gerir colecções e dados. </p>
+<p>Para configurar um esquema, usamos <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_schema.md"><code translate="no">create_schema()</code></a> para criar um objeto de esquema e <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/CollectionSchema/add_field.md"><code translate="no">add_field()</code></a> para adicionar campos ao esquema.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType​
 ​
 collection_name = <span class="hljs-string">&quot;my_collection&quot;</span>​
@@ -143,15 +142,15 @@ schema.add_field(field_name=<span class="hljs-string">&quot;summary_dense_vector
 schema.add_field(field_name=<span class="hljs-string">&quot;summary_sparse_vector&quot;</span>, datatype=DataType.SPARSE_FLOAT_VECTOR, description=<span class="hljs-string">&quot;summary sparse vector&quot;</span>)​
 
 <button class="copy-code-btn"></button></code></pre>
-<p>You might notice the argument <code translate="no">uri</code> in <code translate="no">MilvusClient</code>, which is used to connect to the Milvus server. You can set the arguments as follows:​</p>
+<p>Pode reparar no argumento <code translate="no">uri</code> em <code translate="no">MilvusClient</code>, que é utilizado para estabelecer a ligação ao servidor Milvus. Pode definir os argumentos da seguinte forma.</p>
 <ul>
-<li><p>If you only need a local vector database for small scale data or prototypeing, setting the uri as a local file, e.g.<code translate="no">./milvus.db</code>, is the most convenient method, as it automatically utilizes <a href="https://milvus.io/docs/milvus_lite.md">Milvus Lite</a> to store all data in this file.​</p></li>
-<li><p>If you have large scale of data, say more than a million vectors, you can set up a more performant Milvus server on <a href="https://milvus.io/docs/quickstart.md">Docker or Kubernetes</a>. In this setup, please use the server address and port as your uri, e.g.<code translate="no">http://localhost:19530</code>. If you enable the authentication feature on Milvus, use “&lt;your_username&gt;:&lt;your_password&gt;” as the token, otherwise don’t set the token.​</p></li>
-<li><p>If you use <a href="https://zilliz.com/cloud">Zilliz Cloud</a>, the fully managed cloud service for Milvus, adjust the <code translate="no">uri</code> and <code translate="no">token</code>, which correspond to the <a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">Public Endpoint and API key</a> in Zilliz Cloud.​</p></li>
+<li><p>Se apenas necessitar de uma base de dados vetorial local para dados de pequena escala ou protótipos, definir o uri como um ficheiro local, por exemplo,<code translate="no">./milvus.db</code>, é o método mais conveniente, uma vez que utiliza automaticamente <a href="https://milvus.io/docs/milvus_lite.md">o Milvus Lite</a> para armazenar todos os dados neste ficheiro.</p></li>
+<li><p>Se tiver uma grande escala de dados, digamos mais de um milhão de vectores, pode configurar um servidor Milvus mais eficiente em <a href="https://milvus.io/docs/quickstart.md">Docker ou Kubernetes</a>. Nesta configuração, use o endereço e a porta do servidor como seu uri, por exemplo,<code translate="no">http://localhost:19530</code>. Se ativar a funcionalidade de autenticação no Milvus, utilize "&lt;your_username&gt;:&lt;your_password&gt;" como token, caso contrário não defina o token.</p></li>
+<li><p>Se utilizar <a href="https://zilliz.com/cloud">o Zilliz Cloud</a>, o serviço de nuvem totalmente gerido para o Milvus, ajuste os endereços <code translate="no">uri</code> e <code translate="no">token</code>, que correspondem ao <a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">Public Endpoint e</a> à <a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">chave API</a> no Zilliz Cloud.</p></li>
 </ul>
-<p>As for the <code translate="no">auto_id</code> in <code translate="no">MilvusClient.create_schema</code>, AutoID is an attribute of the primary field that determines whether to enable auto increment for the primary field.  Since we set the field<code translate="no">article_id</code> as the primary key and want to add article id manually, we set <code translate="no">auto_id</code> False to disable this feature.​</p>
-<p>After adding all the fields to the schema object, our schema object agrees with the entries in the table above.​</p>
-<h2 id="Define-Index​" class="common-anchor-header">Define Index​<button data-href="#Define-Index​" class="anchor-icon" translate="no">
+<p>Relativamente a <code translate="no">auto_id</code> em <code translate="no">MilvusClient.create_schema</code>, AutoID é um atributo do campo primário que determina se deve ser ativado o incremento automático para o campo primário.  Uma vez que definimos o campo<code translate="no">article_id</code> como chave primária e pretendemos adicionar o ID do artigo manualmente, definimos <code translate="no">auto_id</code> False para desativar esta funcionalidade.</p>
+<p>Depois de adicionar todos os campos ao objeto de esquema, o nosso objeto de esquema está de acordo com as entradas da tabela acima.</p>
+<h2 id="Define-Index​" class="common-anchor-header">Definir índice<button data-href="#Define-Index​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -166,7 +165,7 @@ schema.add_field(field_name=<span class="hljs-string">&quot;summary_sparse_vecto
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>After defining the schema with various fields, including metadata and vector fields for image and summary data, the next step involves preparing the index parameters. Indexing is crucial for optimizing the search and retrieval of vectors, ensuring efficient query performance. In the following section, we will define the index parameters for the specified vector and scalar fields in the collection.​</p>
+    </button></h2><p>Depois de definir o esquema com vários campos, incluindo metadados e campos vectoriais para dados de imagem e resumo, o passo seguinte envolve a preparação dos parâmetros do índice. A indexação é crucial para otimizar a pesquisa e a recuperação de vectores, garantindo um desempenho de consulta eficiente. Na secção seguinte, definiremos os parâmetros de índice para os campos vectoriais e escalares especificados na coleção.</p>
 <pre><code translate="no" class="language-python">index_params = client.<span class="hljs-title function_">prepare_index_params</span>()​
 ​
 index_params.<span class="hljs-title function_">add_index</span>(​
@@ -190,9 +189,9 @@ index_params.<span class="hljs-title function_">add_index</span>(​
 )​
 
 <button class="copy-code-btn"></button></code></pre>
-<p>Once the index parameters are set up and applied, Milvus is optimized for handling complex queries on vector and scalar data. This indexing enhances the performance and accuracy of similarity searches within the collection, allowing for efficient retrieval of articles based on image vectors and summary vectors. By leveraging the <a href="https://milvus.io/docs/glossary.md#Auto-Index"><code translate="no">AUTOINDEX</code></a> for dense vectors, the <a href="https://milvus.io/docs/sparse_vector.md#Index-the-collection"><code translate="no">SPARSE_INVERTED_INDEX</code></a> for sparse vectors and the <a href="https://milvus.io/docs/scalar_index.md#Inverted-indexing"><code translate="no">INVERTED_INDEX</code></a> for scalars, Milvus can quickly identify and return the most relevant results, significantly improving the overall user experience and effectiveness of the data retrieval process.​</p>
-<p>There are many types of indices and metrics. For more information about them, you can refer to <a href="https://milvus.io/docs/overview.md#Index-types">Milvus index type</a> and <a href="https://milvus.io/docs/glossary.md#Metric-type">Milvus metric type</a>.​</p>
-<h2 id="Create-Collection​" class="common-anchor-header">Create Collection​<button data-href="#Create-Collection​" class="anchor-icon" translate="no">
+<p>Uma vez definidos e aplicados os parâmetros de indexação, o Milvus é optimizado para tratar consultas complexas sobre dados vectoriais e escalares. Esta indexação melhora o desempenho e a precisão das pesquisas por semelhança dentro da coleção, permitindo a recuperação eficiente de artigos com base em vectores de imagem e vectores de resumo. Ao tirar partido da indexação <a href="https://milvus.io/docs/glossary.md#Auto-Index"><code translate="no">AUTOINDEX</code></a> para vectores densos, o <a href="https://milvus.io/docs/sparse_vector.md#Index-the-collection"><code translate="no">SPARSE_INVERTED_INDEX</code></a> para vectores esparsos e o <a href="https://milvus.io/docs/scalar_index.md#Inverted-indexing"><code translate="no">INVERTED_INDEX</code></a> para escalares, o Milvus pode identificar e devolver rapidamente os resultados mais relevantes, melhorando significativamente a experiência geral do utilizador e a eficácia do processo de recuperação de dados.</p>
+<p>Existem muitos tipos de índices e métricas. Para mais informações sobre eles, pode consultar <a href="https://milvus.io/docs/overview.md#Index-types">Milvus index type</a> e <a href="https://milvus.io/docs/glossary.md#Metric-type">Milvus metric type</a>.</p>
+<h2 id="Create-Collection​" class="common-anchor-header">Criar coleção<button data-href="#Create-Collection​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -207,7 +206,7 @@ index_params.<span class="hljs-title function_">add_index</span>(​
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>With the schema and indexes defined, we create a “collection” with these parameters. Collection to Milvus is like a table to a relational DB.​</p>
+    </button></h2><p>Com o esquema e os índices definidos, criamos uma "coleção" com estes parâmetros. A coleção para o Milvus é como uma tabela para uma base de dados relacional.</p>
 <pre><code translate="no" class="language-python">client.create_collection(​
     collection_name=collection_name,​
     schema=schema,​
@@ -215,14 +214,14 @@ index_params.<span class="hljs-title function_">add_index</span>(​
 )​
 
 <button class="copy-code-btn"></button></code></pre>
-<p>We can verify that the collection has been successfully created by describing the collection.​</p>
+<p>Podemos verificar se a coleção foi criada com sucesso descrevendo a coleção.</p>
 <pre><code translate="no" class="language-python">collection_desc = client.describe_collection(​
     collection_name=collection_name​
 )​
 <span class="hljs-built_in">print</span>(collection_desc)​
 
 <button class="copy-code-btn"></button></code></pre>
-<h1 id="Other-Considerations​" class="common-anchor-header">Other Considerations​<button data-href="#Other-Considerations​" class="anchor-icon" translate="no">
+<h1 id="Other-Considerations​" class="common-anchor-header">Outras considerações<button data-href="#Other-Considerations​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -237,7 +236,7 @@ index_params.<span class="hljs-title function_">add_index</span>(​
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><h2 id="Loading-Index​" class="common-anchor-header">Loading Index​<button data-href="#Loading-Index​" class="anchor-icon" translate="no">
+    </button></h1><h2 id="Loading-Index​" class="common-anchor-header">Carregamento do índice<button data-href="#Loading-Index​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -252,8 +251,8 @@ index_params.<span class="hljs-title function_">add_index</span>(​
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>When creating a collection in Milvus, you can choose to load the index immediately or defer it until after bulk ingesting some data. Typically, you don’t need to make an explicit choice about this, as the above examples show that the index is automatically built for any ingested data right after collection creation. This allows for immediate searchability of the ingested data. However, if you have a large bulk insert after collection creation and don’t need to search for any data until a certain point, you can defer the index building by omitting index_params in the collection creation and build the index by calling load explicitly after ingesting all the data. This method is more efficient for building the index on a large collection, but no searches can be done until calling load().​</p>
-<h2 id="How-to-Define-Data-Model-For-Multi-tenancy​" class="common-anchor-header">How to Define Data Model For Multi-tenancy​<button data-href="#How-to-Define-Data-Model-For-Multi-tenancy​" class="anchor-icon" translate="no">
+    </button></h2><p>Ao criar uma coleção no Milvus, pode optar por carregar o índice imediatamente ou adiá-lo até depois de ingerir alguns dados em massa. Normalmente, não é necessário fazer uma escolha explícita sobre isso, pois os exemplos acima mostram que o índice é automaticamente construído para qualquer dado ingerido logo após a criação da coleção. Isso permite a capacidade de pesquisa imediata dos dados ingeridos. No entanto, se tiver uma grande inserção em massa após a criação da coleção e não precisar de pesquisar quaisquer dados até um determinado ponto, pode adiar a construção do índice omitindo index_params na criação da coleção e construir o índice chamando explicitamente load depois de ingerir todos os dados. Este método é mais eficiente para construir o índice numa coleção grande, mas nenhuma pesquisa pode ser feita até chamar load().</p>
+<h2 id="How-to-Define-Data-Model-For-Multi-tenancy​" class="common-anchor-header">Como definir o modelo de dados para vários locatários<button data-href="#How-to-Define-Data-Model-For-Multi-tenancy​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -268,5 +267,5 @@ index_params.<span class="hljs-title function_">add_index</span>(​
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>The concept of multiple tenants is commonly used in scenarios where a single software application or service needs to serve multiple independent users or organizations, each with their own isolated environment. This is frequently seen in cloud computing, SaaS (Software as a Service) applications, and database systems. For example, a cloud storage service may utilize multi-tenancy to allow different companies to store and manage their data separately while sharing the same underlying infrastructure. This approach maximizes resource utilization and efficiency while ensuring data security and privacy for each tenant.​</p>
-<p>The easiest way to differentiate tenants is by isolating their data and resources from each other. Each tenant either has exclusive access to specific resources or shares resources with others to manage Milvus entities such as databases, collections, and partitions. There are specific methods aligned with these entities to implement Milvus multi-tenancy. You can refer to the <a href="https://milvus.io/docs/multi_tenancy.md#Multi-tenancy-strategies">Milvus multi-tenancy page</a> for more information.​</p>
+    </button></h2><p>O conceito de vários locatários é normalmente usado em cenários em que um único aplicativo ou serviço de software precisa atender a vários usuários ou organizações independentes, cada um com seu próprio ambiente isolado. Isso é frequentemente visto em computação em nuvem, aplicativos SaaS (Software as a Service) e sistemas de banco de dados. Por exemplo, um serviço de armazenamento em nuvem pode utilizar o multi-tenancy para permitir que diferentes empresas armazenem e gerenciem seus dados separadamente, compartilhando a mesma infraestrutura subjacente. Essa abordagem maximiza a utilização e a eficiência dos recursos, garantindo a segurança e a privacidade dos dados para cada locatário.</p>
+<p>A forma mais fácil de diferenciar os locatários é isolando os seus dados e recursos uns dos outros. Cada locatário tem acesso exclusivo a recursos específicos ou partilha recursos com outros para gerir entidades Milvus, tais como bases de dados, colecções e partições. Existem métodos específicos alinhados com estas entidades para implementar o Milvus multi-tenancy. Para mais informações, consulte a <a href="https://milvus.io/docs/multi_tenancy.md#Multi-tenancy-strategies">página de multilocação do Milvus</a>.</p>

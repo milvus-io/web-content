@@ -2,9 +2,9 @@
 id: configure_metastore.md
 related_key: configure
 group: system_configuration.md
-summary: Learn how to configure metastore for Milvus.
+summary: Saiba como configurar o metastore para o Milvus.
 ---
-<h1 id="metastore-related-Configurations" class="common-anchor-header">metastore-related Configurations<button data-href="#metastore-related-Configurations" class="anchor-icon" translate="no">
+<h1 id="metastore-related-Configurations" class="common-anchor-header">Configurações relacionadas com o metastore<button data-href="#metastore-related-Configurations" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -37,13 +37,13 @@ summary: Learn how to configure metastore for Milvus.
     </button></h2><table id="metastore.type">
   <thead>
     <tr>
-      <th class="width80">Description</th>
-      <th class="width20">Default Value</th> 
+      <th class="width80">Descrição</th>
+      <th class="width20">Valor por defeito</th> 
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>        Default value: etcd, Valid values: [etcd, tikv]       </td>
+      <td>        Valor predefinido: etcd, Valores válidos: [etcd, tikv]     </td>
       <td>etcd</td>
     </tr>
   </tbody>

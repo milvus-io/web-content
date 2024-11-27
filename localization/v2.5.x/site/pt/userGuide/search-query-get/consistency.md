@@ -1,9 +1,9 @@
 ---
 id: consistency.md
-summary: Learn about the four levels of consistency in Milvus.
-title: Consistency
+summary: Conheça os quatro níveis de consistência do Milvus.
+title: Consistência
 ---
-<h1 id="Consistency-Level​" class="common-anchor-header">Consistency Level​<button data-href="#Consistency-Level​" class="anchor-icon" translate="no">
+<h1 id="Consistency-Level​" class="common-anchor-header">Nível de consistência<button data-href="#Consistency-Level​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -18,8 +18,8 @@ title: Consistency
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>As a distributed vector database, Milvus offers multiple levels of consistency to ensure that each node or replica can access the same data during read and write operations. Currently, the supported levels of consistency include <strong>Strong</strong>, <strong>Bounded</strong>, <strong>Eventually</strong>, and <strong>Session</strong>, with <strong>Bounded</strong> being the default level of consistency used.​</p>
-<h2 id="Overview​" class="common-anchor-header">Overview​<button data-href="#Overview​" class="anchor-icon" translate="no">
+    </button></h1><p>Como um banco de dados vetorial distribuído, Milvus oferece vários níveis de consistência para garantir que cada nó ou réplica possa acessar os mesmos dados durante as operações de leitura e escrita. Atualmente, os níveis de consistência suportados incluem <strong>Strong</strong>, <strong>Bounded</strong>, <strong>Eventually</strong> e <strong>Session</strong>, sendo que <strong>Bounded</strong> é o nível de consistência utilizado por defeito.</p>
+<h2 id="Overview​" class="common-anchor-header">Visão geral<button data-href="#Overview​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -34,43 +34,37 @@ title: Consistency
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus is a system that separates storage and computation. In this system, <strong>DataNodes</strong> are responsible for the persistence of data and ultimately store it in distributed object storage such as MinIO/S3. <strong>QueryNodes</strong> handle computational tasks like Search. These tasks involve processing both <strong>batch data</strong> and <strong>streaming data</strong>. Simply put, batch data can be understood as data that has already been stored in object storage while streaming data refers to data that has not yet been stored in object storage. Due to network latency, QueryNodes often do not hold the most recent streaming data. Without additional safeguards, performing Search directly on streaming data may result in the loss of many uncommitted data points, affecting the accuracy of search results.​</p>
-<p>Milvus Commercial Edition is a system that separates storage and computation. In this system, DataNodes are responsible for the persistence of data and ultimately store it in distributed object storage such as MinIO/S3. QueryNodes handle computational tasks like Search. These tasks involve processing both batch data and streaming data. Simply put, batch data can be understood as data that has already been stored in object storage, while streaming data refers to data that has not yet been stored in object storage. Due to network latency, QueryNodes often do not hold the most recent streaming data. Without additional safeguards, performing Search directly on streaming data may result in the loss of many uncommitted data points, affecting the accuracy of search results.​</p>
+    </button></h2><p>Milvus é um sistema que separa armazenamento e computação. Neste sistema, <strong>os DataNodes</strong> são responsáveis pela persistência dos dados e, em última análise, armazenam-nos no armazenamento de objectos distribuído, como o MinIO/S3. <strong>Os QueryNodes</strong> tratam de tarefas computacionais como a Pesquisa. Estas tarefas envolvem o processamento de <strong>dados em lote</strong> e <strong>de dados em fluxo contínuo</strong>. Em termos simples, os dados em lote podem ser entendidos como dados que já foram armazenados no armazenamento de objectos, enquanto os dados de fluxo contínuo se referem a dados que ainda não foram armazenados no armazenamento de objectos. Devido à latência da rede, os QueryNodes muitas vezes não possuem os dados de streaming mais recentes. Sem salvaguardas adicionais, a execução da Pesquisa diretamente nos dados de fluxo contínuo pode resultar na perda de muitos pontos de dados não confirmados, afectando a precisão dos resultados da pesquisa.</p>
+<p>O Milvus Commercial Edition é um sistema que separa o armazenamento e a computação. Neste sistema, os DataNodes são responsáveis pela persistência dos dados e, em última análise, armazenam-nos em armazenamento de objectos distribuídos, como o MinIO/S3. Os QueryNodes tratam de tarefas computacionais como a Pesquisa. Estas tarefas envolvem o processamento de dados em lote e de dados em fluxo contínuo. Em termos simples, os dados em lote podem ser entendidos como dados que já foram armazenados no armazenamento de objectos, enquanto os dados de fluxo contínuo se referem a dados que ainda não foram armazenados no armazenamento de objectos. Devido à latência da rede, os QueryNodes muitas vezes não possuem os dados de streaming mais recentes. Sem salvaguardas adicionais, a execução da Pesquisa diretamente nos dados de fluxo contínuo pode resultar na perda de muitos pontos de dados não confirmados, afectando a precisão dos resultados da pesquisa.</p>
 <p>
-  <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.5.x/assets/batch-data-and-streaming-data.png" alt="Batch data and streaming data" class="doc-image" id="batch-data-and-streaming-data" />
-    <span>Batch data and streaming data</span>
-  </span>
-</p>
-<p>As shown in the figure above, QueryNodes can receive both streaming data and batch data simultaneously after receiving a Search request. However, due to network latency, the streaming data obtained by QueryNodes may be incomplete.​</p>
-<p>To address this issue, Milvus timestamps each record in the data queue and continuously inserts synchronization timestamps into the data queue. Whenever a synchronization timestamp (syncTs) is received, QueryNodes sets it as the ServiceTime, meaning that QueryNodes can see all data prior to that Service Time. Based on the ServiceTime, Milvus can provide guarantee timestamps (GuaranteeTs) to meet different user requirements for consistency and availability. Users can inform QueryNodes of the need to include data prior to a specified point in time in the search scope by specifying GuaranteeTs in their Search requests.​</p>
+  
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/batch-data-and-streaming-data.png" alt="Batch data and streaming data" class="doc-image" id="batch-data-and-streaming-data" />
+   </span> <span class="img-wrapper"> <span>Dados em lote e dados de fluxo contínuo</span> </span></p>
+<p>Como mostra a figura acima, os QueryNodes podem receber simultaneamente dados de fluxo contínuo e dados em lote depois de receberem um pedido de Pesquisa. No entanto, devido à latência da rede, os dados em fluxo contínuo obtidos pelos QueryNodes podem estar incompletos.</p>
+<p>Para resolver este problema, o Milvus marca o tempo de cada registo na fila de dados e insere continuamente marcas de tempo de sincronização na fila de dados. Sempre que um carimbo de data/hora de sincronização (syncTs) é recebido, os QueryNodes definem-no como ServiceTime, o que significa que os QueryNodes podem ver todos os dados anteriores a esse ServiceTime. Com base no ServiceTime, o Milvus pode fornecer carimbos de data/hora de garantia (GuaranteeTs) para satisfazer os diferentes requisitos dos utilizadores em termos de consistência e disponibilidade. Os utilizadores podem informar os QueryNodes da necessidade de incluir dados anteriores a um determinado momento no âmbito da pesquisa, especificando GuaranteeTs nos seus pedidos de pesquisa.</p>
 <p>
-  <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.5.x/assets/service-time-and-guarantee-time.png" alt="ServiceTime and GuaranteeTs" class="doc-image" id="servicetime-and-guaranteets" />
-    <span>ServiceTime and GuaranteeTs</span>
-  </span>
-</p>
-<p>As shown in the figure above, if GuaranteeTs is less than ServiceTime, it means that all data before the specified time point has been fully written to disk, allowing QueryNodes to immediately perform the Search operation. When GuaranteeTs is greater than ServiceTime, QueryNodes must wait until ServiceTime exceeds GuaranteeTs before they can execute the Search operation.​</p>
-<p>Users need to make a trade-off between query accuracy and query latency. If users have high consistency requirements and are not sensitive to query latency, they can set GuaranteeTs to a value as large as possible; if users wish to receive search results quickly and are more tolerant of query accuracy, then GuaranteeTs can be set to a smaller value.​</p>
+  
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/service-time-and-guarantee-time.png" alt="ServiceTime and GuaranteeTs" class="doc-image" id="servicetime-and-guaranteets" />
+   </span> <span class="img-wrapper"> <span>ServiceTime e GuaranteeTs</span> </span></p>
+<p>Conforme mostrado na figura acima, se GuaranteeTs for menor que ServiceTime, significa que todos os dados anteriores ao ponto de tempo especificado foram totalmente gravados no disco, permitindo que os nós de consulta executem imediatamente a operação de pesquisa. Quando GuaranteeTs é superior a ServiceTime, os QueryNodes têm de esperar até que ServiceTime exceda GuaranteeTs para poderem executar a operação Search.</p>
+<p>Os utilizadores precisam de fazer um compromisso entre a precisão da consulta e a latência da consulta. Se os utilizadores tiverem requisitos de consistência elevados e não forem sensíveis à latência da consulta, podem definir GuaranteeTs para um valor tão grande quanto possível; se os utilizadores pretenderem receber resultados de pesquisa rapidamente e forem mais tolerantes à precisão da consulta, então GuaranteeTs pode ser definido para um valor mais pequeno.</p>
 <p>
-  <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.5.x/assets/consistency-level-illustrated.png" alt="Consistency Levels Illustrated" class="doc-image" id="consistency-levels-illustrated" />
-    <span>Consistency Levels Illustrated</span>
-  </span>
-</p>
-<p>Milvus provides four types of consistency levels with different GuaranteeTs.​</p>
+  
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/consistency-level-illustrated.png" alt="Consistency Levels Illustrated" class="doc-image" id="consistency-levels-illustrated" />
+   </span> <span class="img-wrapper"> <span>Níveis de consistência ilustrados</span> </span></p>
+<p>O Milvus oferece quatro tipos de níveis de consistência com diferentes GuaranteeTs.</p>
 <ul>
-<li><p><strong>Strong</strong>​</p>
-<p>The latest timestamp is used as the GuaranteeTs, and QueryNodes have to wait until the ServiceTime meets the GuaranteeTs before executing Search requests.​</p></li>
-<li><p><strong>Eventual</strong>​</p>
-<p>The GuaranteeTs is set to an extremely small value, such as 1, to avoid consistency checks so that QueryNodes can immediately execute Search requests upon all batch data.​</p></li>
-<li><p><strong>Bounded Staleness</strong>​</p>
-<p>The GuranteeTs is set to a time point earlier than the latest timestamp to make QueryNodes to perform searches with a tolerance of certain data loss.​</p></li>
-<li><p><strong>Session</strong>​</p>
-<p>The latest time point at which the client inserts data is used as the GuaranteeTs so that QueryNodes can perform searches upon all the data inserted by the client.​</p></li>
+<li><p><strong>Forte</strong></p>
+<p>O carimbo de data/hora mais recente é utilizado como GuaranteeTs e os QueryNodes têm de aguardar que o ServiceTime cumpra os GuaranteeTs antes de executarem os pedidos de pesquisa.</p></li>
+<li><p><strong>Eventual</strong></p>
+<p>O GuaranteeTs é definido para um valor extremamente pequeno, como 1, para evitar verificações de consistência, de modo a que os QueryNodes possam executar imediatamente pedidos de Pesquisa em todos os dados do lote.</p></li>
+<li><p><strong>Staleness limitado</strong></p>
+<p>O GuranteeTs é definido para um ponto de tempo anterior ao último carimbo de data/hora para que os QueryNodes executem pesquisas com uma tolerância de determinada perda de dados.</p></li>
+<li><p><strong>Sessão</strong></p>
+<p>O último ponto temporal em que o cliente insere dados é utilizado como GuaranteeTs para que os QueryNodes possam efetuar pesquisas em todos os dados inseridos pelo cliente.</p></li>
 </ul>
-<p>Milvus uses Bounded Staleness as the default consistency level. If the GuaranteeTs is left unspecified, the latest ServiceTime is used as the GuaranteeTs.​</p>
-<h2 id="Set-Consistency-Level​" class="common-anchor-header">Set Consistency Level​<button data-href="#Set-Consistency-Level​" class="anchor-icon" translate="no">
+<p>O Milvus utiliza o Bounded Staleness como nível de consistência predefinido. Se o GuaranteeTs não for especificado, o ServiceTime mais recente é utilizado como GuaranteeTs.</p>
+<h2 id="Set-Consistency-Level​" class="common-anchor-header">Definir o nível de consistência<button data-href="#Set-Consistency-Level​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -85,13 +79,10 @@ title: Consistency
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>You can set different consistency levels when you create a collection as well as perform searches and queries.​</p>
-<h3 id="Set-Consistency-Level-upon-Creating-Collection​" class="common-anchor-header">Set Consistency Level upon Creating Collection​</h3><p>When creating a collection, you can set the consistency level for the searches and queries within the collection. The following code example sets the consistency level to <strong>Strong</strong>.​</p>
+    </button></h2><p>Pode definir diferentes níveis de consistência quando cria uma coleção, bem como quando efectua pesquisas e consultas.</p>
+<h3 id="Set-Consistency-Level-upon-Creating-Collection​" class="common-anchor-header">Definir o nível de consistência ao criar uma coleção</h3><p>Ao criar uma coleção, pode definir o nível de consistência para as pesquisas e consultas dentro da coleção. O exemplo de código a seguir define o nível de consistência como <strong>Strong</strong>.</p>
 <div class="multipleCode">
-    <a href="#python">python</a>
-    <a href="#java">java</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">python</a> <a href="#java">java</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">client.create_collection(​
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,​
     schema=schema,​
@@ -151,13 +142,10 @@ curl --request POST \​
 }&quot;</span>​
 
 <button class="copy-code-btn"></button></code></pre>
-<p>Possible values for the <code translate="no">consistency_level</code> parameter are <code translate="no">Strong</code>, <code translate="no">Bounded</code>, <code translate="no">Eventually</code>, and <code translate="no">Session</code>.​</p>
-<h3 id="Set-Consistency-Level-in-Search​" class="common-anchor-header">Set Consistency Level in Search​</h3><p>You can always change the consistency level for a specific search. The following code example sets the consistency level back to the Bounded. The change applies only to the current search request.​</p>
+<p>Os valores possíveis para o parâmetro <code translate="no">consistency_level</code> são <code translate="no">Strong</code>, <code translate="no">Bounded</code>, <code translate="no">Eventually</code>, e <code translate="no">Session</code>.</p>
+<h3 id="Set-Consistency-Level-in-Search​" class="common-anchor-header">Definir o nível de consistência na pesquisa</h3><p>É sempre possível alterar o nível de consistência de uma pesquisa específica. O exemplo de código a seguir define o nível de consistência de volta para Bounded. A alteração se aplica apenas à solicitação de pesquisa atual.</p>
 <div class="multipleCode">
-    <a href="#python">python</a>
-    <a href="#java">java</a>
-    <a href="#bash">cURL</a>
-</div>
+   <a href="#python">python</a> <a href="#java">java</a> <a href="#bash">cURL</a></div>
 <pre><code translate="no" class="language-python">res = client.search(​
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,​
     data=[query_vector],​
@@ -194,12 +182,10 @@ curl --request POST \​
 }&#x27;</span>​
 
 <button class="copy-code-btn"></button></code></pre>
-<p>This parameter is also available in hybrid searches and the search iterator. Possible values for the <code translate="no">consistency_level</code> parameter are <code translate="no">Strong</code>, <code translate="no">Bounded</code>, <code translate="no">Eventually</code>, and <code translate="no">Session</code>.​</p>
-<h3 id="Set-Consistency-Level-in-Query​" class="common-anchor-header">Set Consistency Level in Query​</h3><p>You can always change the consistency level for a specific search. The following code example sets the consistency level to the <strong>Eventually</strong>. The setting applies only to the current query request.​</p>
+<p>Este parâmetro também está disponível em pesquisas híbridas e no iterador de pesquisa. Os valores possíveis para o parâmetro <code translate="no">consistency_level</code> são <code translate="no">Strong</code>, <code translate="no">Bounded</code>, <code translate="no">Eventually</code>, e <code translate="no">Session</code>.</p>
+<h3 id="Set-Consistency-Level-in-Query​" class="common-anchor-header">Definir o nível de consistência na consulta</h3><p>É sempre possível alterar o nível de consistência para uma pesquisa específica. O exemplo de código a seguir define o nível de consistência para <strong>Eventually</strong>. A definição aplica-se apenas ao pedido de consulta atual.</p>
 <div class="multipleCode">
-    <a href="#python">python</a>
-    <a href="#java">java</a>
-</div>
+   <a href="#python">python</a> <a href="#java">java</a></div>
 <pre><code translate="no" class="language-python">res = client.query(​
     collection_name=<span class="hljs-string">&quot;my_collection&quot;</span>,​
     <span class="hljs-built_in">filter</span>=<span class="hljs-string">&quot;color like \&quot;red%\&quot;&quot;</span>,​
@@ -222,4 +208,4 @@ curl --request POST \​
  <span class="hljs-type">QueryResp</span> <span class="hljs-variable">getResp</span> <span class="hljs-operator">=</span> client.query(queryReq);​
 
 <button class="copy-code-btn"></button></code></pre>
-<p>This parameter is also available in the query iterator. Possible values for the <code translate="no">consistency_level</code> parameter are <code translate="no">Strong</code>, <code translate="no">Bounded</code>, <code translate="no">Eventually</code>, and <code translate="no">Session</code>.​</p>
+<p>Este parâmetro também está disponível no iterador de consulta. Os valores possíveis para o parâmetro <code translate="no">consistency_level</code> são <code translate="no">Strong</code>, <code translate="no">Bounded</code>, <code translate="no">Eventually</code>, e <code translate="no">Session</code>.</p>

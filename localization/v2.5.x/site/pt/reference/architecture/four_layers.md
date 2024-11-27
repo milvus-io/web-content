@@ -1,9 +1,9 @@
 ---
 id: four_layers.md
-summary: Storage/computing disaggregation structure in Milvus.
-title: Storage/Computing Disaggregation
+summary: Estrutura de desagregação de armazenamento/computação em Milvus.
+title: Desagregação Armazenamento/Computação
 ---
-<h1 id="StorageComputing-Disaggregation" class="common-anchor-header">Storage/Computing Disaggregation<button data-href="#StorageComputing-Disaggregation" class="anchor-icon" translate="no">
+<h1 id="StorageComputing-Disaggregation" class="common-anchor-header">Desagregação Armazenamento/Computação<button data-href="#StorageComputing-Disaggregation" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -18,8 +18,8 @@ title: Storage/Computing Disaggregation
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Following the principle of data plane and control plane disaggregation, Milvus comprises four layers that are mutually independent in terms of scalability and disaster recovery.</p>
-<h2 id="Access-layer" class="common-anchor-header">Access layer<button data-href="#Access-layer" class="anchor-icon" translate="no">
+    </button></h1><p>Seguindo o princípio da desagregação do plano de dados e do plano de controlo, o Milvus é composto por quatro camadas que são mutuamente independentes em termos de escalabilidade e de recuperação de desastres.</p>
+<h2 id="Access-layer" class="common-anchor-header">Camada de acesso<button data-href="#Access-layer" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -34,12 +34,12 @@ title: Storage/Computing Disaggregation
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Composed of a group of stateless proxies, the access layer is the front layer of the system and endpoint to users. It validates client requests and reduces the returned results:</p>
+    </button></h2><p>Composta por um grupo de proxies sem estado, a camada de acesso é a camada frontal do sistema e o ponto final para os utilizadores. Valida os pedidos dos clientes e reduz os resultados devolvidos:</p>
 <ul>
-<li>Proxy is in itself stateless. It provides a unified service address using load balancing components such as Nginx, Kubernetes Ingress, NodePort, and LVS.</li>
-<li>As Milvus employs a massively parallel processing (MPP) architecture, the proxy aggregates and post-process the intermediate results before returning the final results to the client.</li>
+<li>O proxy é, por si só, apátrida. Fornece um endereço de serviço unificado utilizando componentes de balanceamento de carga como o Nginx, o Kubernetes Ingress, o NodePort e o LVS.</li>
+<li>Como o Milvus utiliza uma arquitetura de processamento paralelo massivo (MPP), o proxy agrega e pós-processa os resultados intermédios antes de devolver os resultados finais ao cliente.</li>
 </ul>
-<h2 id="Coordinator-service" class="common-anchor-header">Coordinator service<button data-href="#Coordinator-service" class="anchor-icon" translate="no">
+<h2 id="Coordinator-service" class="common-anchor-header">Serviço de coordenação<button data-href="#Coordinator-service" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -54,12 +54,12 @@ title: Storage/Computing Disaggregation
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>The coordinator service assigns tasks to the worker nodes and functions as the system’s brain. The tasks it takes on include cluster topology management, load balancing, timestamp generation, data declaration, and data management.</p>
-<p>There are three coordinator types: root coordinator (root coord), data coordinator (data coord), and query coordinator (query coord).</p>
-<h3 id="Root-coordinator-root-coord" class="common-anchor-header">Root coordinator (root coord)</h3><p>Root coord handles data definition language (DDL) and data control language (DCL) requests, such as create or delete collections, partitions, or indexes, as well as manage TSO (timestamp Oracle) and time ticker issuing.</p>
-<h3 id="Query-coordinator-query-coord" class="common-anchor-header">Query coordinator (query coord)</h3><p>Query coord manages topology and load balancing for the query nodes, and handoff from growing segments to sealed segments.</p>
-<h3 id="Data-coordinator-data-coord" class="common-anchor-header">Data coordinator (data coord)</h3><p>Data coord manages topology of the data nodes and index nodes, maintains metadata, and triggers flush, compact, and index building and other background data operations.</p>
-<h2 id="Worker-nodes" class="common-anchor-header">Worker nodes<button data-href="#Worker-nodes" class="anchor-icon" translate="no">
+    </button></h2><p>O serviço coordenador atribui tarefas aos nós de trabalho e funciona como o cérebro do sistema. As tarefas que assume incluem a gestão da topologia do cluster, o equilíbrio de carga, a geração de carimbos de data/hora, a declaração de dados e a gestão de dados.</p>
+<p>Existem três tipos de coordenadores: coordenador de raiz (root coord), coordenador de dados (data coord) e coordenador de consulta (query coord).</p>
+<h3 id="Root-coordinator-root-coord" class="common-anchor-header">Coordenador raiz (root coord)</h3><p>O coordenador raiz trata os pedidos de linguagem de definição de dados (DDL) e de linguagem de controlo de dados (DCL), tais como criar ou eliminar colecções, partições ou índices, bem como gerir a emissão de TSO (timestamp Oracle) e de time ticker.</p>
+<h3 id="Query-coordinator-query-coord" class="common-anchor-header">Coordenador de consultas (query coord)</h3><p>O coordenador de consultas gere a topologia e o equilíbrio de carga para os nós de consulta, e a transferência de segmentos em crescimento para segmentos selados.</p>
+<h3 id="Data-coordinator-data-coord" class="common-anchor-header">Coordenador de dados (data coord)</h3><p>O coordenador de dados gere a topologia dos nós de dados e dos nós de índice, mantém os metadados e desencadeia as operações de descarga, compactação e construção de índices e outras operações de dados em segundo plano.</p>
+<h2 id="Worker-nodes" class="common-anchor-header">Nós de trabalho<button data-href="#Worker-nodes" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -74,11 +74,11 @@ title: Storage/Computing Disaggregation
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>The arms and legs. Worker nodes are dumb executors that follow instructions from the coordinator service and execute data manipulation language (DML) commands from the proxy. Worker nodes are stateless thanks to separation of storage and computation, and can facilitate system scale-out and disaster recovery when deployed on Kubernetes. There are three types of worker nodes:</p>
-<h3 id="Query-node" class="common-anchor-header">Query node</h3><p>Query node retrieves incremental log data and turn them into growing segments by subscribing to the log broker, loads historical data from the object storage, and runs hybrid search between vector and scalar data.</p>
-<h3 id="Data-node" class="common-anchor-header">Data node</h3><p>Data node retrieves incremental log data by subscribing to the log broker, processes mutation requests, and packs log data into log snapshots and stores them in the object storage.</p>
-<h3 id="Index-node" class="common-anchor-header">Index node</h3><p>Index node builds indexes.  Index nodes do not need to be memory resident, and can be implemented with the serverless framework.</p>
-<h2 id="Storage" class="common-anchor-header">Storage<button data-href="#Storage" class="anchor-icon" translate="no">
+    </button></h2><p>Os braços e as pernas. Os nós de trabalho são executores burros que seguem as instruções do serviço coordenador e executam comandos de linguagem de manipulação de dados (DML) do proxy. Os nós de trabalho não têm estado graças à separação entre armazenamento e computação, e podem facilitar a expansão do sistema e a recuperação de desastres quando implantados no Kubernetes. Há três tipos de nós de trabalho:</p>
+<h3 id="Query-node" class="common-anchor-header">Nó de consulta</h3><p>O nó de consulta recupera dados de registo incrementais e transforma-os em segmentos crescentes ao subscrever o corretor de registo, carrega dados históricos do armazenamento de objectos e executa uma pesquisa híbrida entre dados vectoriais e escalares.</p>
+<h3 id="Data-node" class="common-anchor-header">Nó de dados</h3><p>O nó de dados recupera dados de registo incrementais através da subscrição do corretor de registos, processa pedidos de mutação e agrupa os dados de registo em instantâneos de registo e armazena-os no armazenamento de objectos.</p>
+<h3 id="Index-node" class="common-anchor-header">Nó de índice</h3><p>O nó de índice constrói índices.  Os nós de índice não precisam ser residentes na memória e podem ser implementados com a estrutura sem servidor.</p>
+<h2 id="Storage" class="common-anchor-header">Armazenamento<button data-href="#Storage" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -93,19 +93,17 @@ title: Storage/Computing Disaggregation
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Storage is the bone of the system, responsible for data persistence. It comprises meta storage, log broker, and object storage.</p>
-<h3 id="Meta-storage" class="common-anchor-header">Meta storage</h3><p>Meta storage stores snapshots of metadata such as collection schema, and message consumption checkpoints. Storing metadata demands extremely high availability, strong consistency, and transaction support, so Milvus chose etcd for meta store. Milvus also uses etcd for service registration and health check.</p>
-<h3 id="Object-storage" class="common-anchor-header">Object storage</h3><p>Object storage stores snapshot files of logs, index files for scalar and vector data, and intermediate query results. Milvus uses MinIO as object storage and can be readily deployed on AWS S3 and Azure Blob, two of the world’s most popular, cost-effective storage services. However, object storage has high access latency and charges by the number of queries. To improve its performance and lower the costs, Milvus plans to implement cold-hot data separation on a memory- or SSD-based cache pool.</p>
-<h3 id="Log-broker" class="common-anchor-header">Log broker</h3><p>The log broker is a pub-sub system that supports playback. It is responsible for streaming data persistence and event notification. It also ensures integrity of the incremental data when the worker nodes recover from system breakdown. Milvus cluster uses Pulsar as log broker; Milvus standalone uses RocksDB as log broker. Besides, the log broker can be readily replaced with streaming data storage platforms such as Kafka.</p>
-<p>Milvus is built around log broker and follows the “log as data” principle, so Milvus does not maintain a physical table but guarantees data reliability through logging persistence and snapshot logs.</p>
+    </button></h2><p>O armazenamento é o osso do sistema, responsável pela persistência dos dados. Inclui meta-armazenamento, corretor de registos e armazenamento de objectos.</p>
+<h3 id="Meta-storage" class="common-anchor-header">Meta-armazenamento</h3><p>O meta-armazenamento armazena instantâneos de metadados, como o esquema de coleção e os pontos de verificação do consumo de mensagens. O armazenamento de metadados exige uma disponibilidade extremamente elevada, uma forte consistência e suporte de transacções, pelo que a Milvus escolheu o etcd para o meta storage. A Milvus também utiliza o etcd para registo de serviços e verificação da sua integridade.</p>
+<h3 id="Object-storage" class="common-anchor-header">Armazenamento de objectos</h3><p>O armazenamento de objectos armazena ficheiros de instantâneos de registos, ficheiros de índice para dados escalares e vectoriais e resultados de consultas intermédias. O Milvus utiliza o MinIO como armazenamento de objectos e pode ser facilmente implementado no AWS S3 e no Azure Blob, dois dos serviços de armazenamento mais populares e económicos do mundo. No entanto, o armazenamento de objectos tem uma latência de acesso elevada e cobra pelo número de consultas. Para melhorar o seu desempenho e reduzir os custos, a Milvus planeia implementar a separação de dados cold-hot num conjunto de cache baseado em memória ou SSD.</p>
+<h3 id="Log-broker" class="common-anchor-header">Corretor de registos</h3><p>O corretor de registos é um sistema pub-sub que suporta a reprodução. É responsável pela persistência de dados de streaming e pela notificação de eventos. Ele também garante a integridade dos dados incrementais quando os nós de trabalho se recuperam de uma falha no sistema. O cluster Milvus utiliza o Pulsar como corretor de registos; o Milvus standalone utiliza o RocksDB como corretor de registos. Além disso, o corretor de registos pode ser facilmente substituído por plataformas de armazenamento de dados em fluxo contínuo, como o Kafka.</p>
+<p>O Milvus é construído em torno do corretor de registos e segue o princípio "registo como dados", pelo que não mantém uma tabela física, mas garante a fiabilidade dos dados através da persistência do registo e dos registos instantâneos.</p>
 <p>
-  <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.5.x/assets/log_mechanism.png" alt="Log_mechanism" class="doc-image" id="log_mechanism" />
-    <span>Log_mechanism</span>
-  </span>
-</p>
-<p>The log broker is the backbone of Milvus. It is responsible for data persistence and read-write disaggregation, thanks to its innate pub-sub mechanism. The above illustration shows a simplified depiction of the mechanism, where the system is divided into two roles, log broker (for maintaining the log sequence) and log subscriber. The former records all operations that change collection states; the latter subscribes to the log sequence to update the local data and provides services in the form of read-only copies. The pub-sub mechanism also makes room for system extendability in terms of change data capture (CDC) and globally-distributed deployment.</p>
-<h2 id="Whats-next" class="common-anchor-header">What’s next<button data-href="#Whats-next" class="anchor-icon" translate="no">
+  
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/log_mechanism.png" alt="Log_mechanism" class="doc-image" id="log_mechanism" />
+   </span> <span class="img-wrapper"> <span>Mecanismo de registo</span> </span></p>
+<p>O corretor de registos é a espinha dorsal do Milvus. É responsável pela persistência dos dados e pela desagregação da leitura-escrita, graças ao seu mecanismo inato de pub-sub. A ilustração acima mostra uma representação simplificada do mecanismo, em que o sistema está dividido em duas funções, o corretor de registos (para manter a sequência de registos) e o assinante de registos. O primeiro regista todas as operações que alteram os estados da coleção; o segundo subscreve a sequência de registos para atualizar os dados locais e fornece serviços sob a forma de cópias só de leitura. O mecanismo pub-sub também abre espaço para a extensibilidade do sistema em termos de captura de dados de alteração (CDC) e implementação globalmente distribuída.</p>
+<h2 id="Whats-next" class="common-anchor-header">O que vem a seguir<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -121,5 +119,5 @@ title: Storage/Computing Disaggregation
         ></path>
       </svg>
     </button></h2><ul>
-<li>Read <a href="/docs/main_components.md">Main Components</a> for more details about the Milvus architecture.</li>
+<li>Leia <a href="/docs/pt/main_components.md">Componentes principais</a> para obter mais detalhes sobre a arquitetura Milvus.</li>
 </ul>

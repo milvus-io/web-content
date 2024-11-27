@@ -2,10 +2,10 @@
 id: prerequisite-gpu.md
 label: GPU requirements
 related_key: GPU
-summary: Learn the necessary preparations before installing Milvus with GPU.
-title: Requirements for Installing Milvus with GPU
+summary: Conheça os preparativos necessários antes de instalar o Milvus com GPU.
+title: Requisitos para instalar o Milvus com GPU
 ---
-<h1 id="Requirements-for-Installing-Milvus-with-GPU" class="common-anchor-header">Requirements for Installing Milvus with GPU<button data-href="#Requirements-for-Installing-Milvus-with-GPU" class="anchor-icon" translate="no">
+<h1 id="Requirements-for-Installing-Milvus-with-GPU" class="common-anchor-header">Requisitos para instalar o Milvus com GPU<button data-href="#Requirements-for-Installing-Milvus-with-GPU" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -20,8 +20,8 @@ title: Requirements for Installing Milvus with GPU
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>This page lists the hardware and software requirements to set up Milvus with GPU support.</p>
-<h2 id="Compute-capability" class="common-anchor-header">Compute capability<button data-href="#Compute-capability" class="anchor-icon" translate="no">
+    </button></h1><p>Esta página lista os requisitos de hardware e software para configurar o Milvus com suporte a GPU.</p>
+<h2 id="Compute-capability" class="common-anchor-header">Capacidade de computação<button data-href="#Compute-capability" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -36,9 +36,9 @@ title: Requirements for Installing Milvus with GPU
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>The compute capability of your GPU device must be one of the following: 6.0, 7.0, 7.5, 8.0, 8.6, 9.0.</p>
-<p>To check whether your GPU device suffices the requirement, check <a href="https://developer.nvidia.com/cuda-gpus">Your GPU Compute Capability</a> on the NVIDIA developer website.</p>
-<h2 id="NVIDIA-driver" class="common-anchor-header">NVIDIA driver<button data-href="#NVIDIA-driver" class="anchor-icon" translate="no">
+    </button></h2><p>A capacidade de computação do seu dispositivo GPU deve ser uma das seguintes: 6.0, 7.0, 7.5, 8.0, 8.6, 9.0.</p>
+<p>Para verificar se o seu dispositivo de GPU atende ao requisito, verifique <a href="https://developer.nvidia.com/cuda-gpus">a Capacidade de computação da GPU</a> no site do desenvolvedor NVIDIA.</p>
+<h2 id="NVIDIA-driver" class="common-anchor-header">Driver NVIDIA<button data-href="#NVIDIA-driver" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -53,17 +53,17 @@ title: Requirements for Installing Milvus with GPU
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>The NVIDIA driver for your GPU device must be on one of <a href="https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html#linux-distributions">the supported Linux distributions</a>, and the NVIDIA Container Toolkit has been installed by following <a href="https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html">this guide</a>.</p>
-<p>For Ubuntu 22.04 users, you can install the driver and the container toolkit with the following commands:</p>
+    </button></h2><p>O driver NVIDIA para o seu dispositivo de GPU deve estar em uma das <a href="https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html#linux-distributions">distribuições Linux suportadas</a> e o NVIDIA Container Toolkit deve ter sido instalado seguindo <a href="https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html">este guia</a>.</p>
+<p>Para usuários do Ubuntu 22.04, é possível instalar o driver e o kit de ferramentas de contêiner com os seguintes comandos:</p>
 <pre><code translate="no" class="language-shell">$ <span class="hljs-built_in">sudo</span> apt install --no-install-recommends nvidia-headless-545 nvidia-utils-545
 <button class="copy-code-btn"></button></code></pre>
-<p>For other OS users, refer to the <a href="https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/install-guide.html#installing-on-ubuntu-and-debian">official installation guide</a>.</p>
-<p>You can check whether the driver has been installed correctly by running the following command:</p>
+<p>Para outros utilizadores de sistemas operativos, consulte o <a href="https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/install-guide.html#installing-on-ubuntu-and-debian">guia de instalação oficial</a>.</p>
+<p>Pode verificar se o controlador foi instalado corretamente executando o seguinte comando:</p>
 <pre><code translate="no" class="language-shell">$ modinfo nvidia | grep <span class="hljs-string">&quot;^version&quot;</span>
 <span class="hljs-attr">version</span>:        <span class="hljs-number">545.29</span><span class="hljs-number">.06</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>You are recommended to use the drivers of version 545 and above.</p>
-<h2 id="Software-requirements" class="common-anchor-header">Software requirements<button data-href="#Software-requirements" class="anchor-icon" translate="no">
+<p>Recomenda-se a utilização dos controladores da versão 545 e superior.</p>
+<h2 id="Software-requirements" class="common-anchor-header">Requisitos de software<button data-href="#Software-requirements" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -78,20 +78,20 @@ title: Requirements for Installing Milvus with GPU
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>It is recommended that you run the Kubernetes cluster on Linux platforms.</p>
+    </button></h2><p>Recomenda-se que execute o cluster Kubernetes em plataformas Linux.</p>
 <ul>
-<li>kubectl is the command-line tool for Kubernetes. Use a kubectl version that is within one minor version difference of your cluster. Using the latest version of kubectl helps avoid unforeseen issues.</li>
-<li>minikube is required when running Kubernetes cluster locally. minikube requires Docker as a dependency. Ensure that you install Docker before installing Milvus using Helm. See <a href="https://docs.docker.com/get-docker">Get Docker</a> for more information.</li>
+<li>kubectl é a ferramenta de linha de comando para o Kubernetes. Use uma versão do kubectl que esteja dentro de uma diferença de versão menor do seu cluster. Usar a versão mais recente do kubectl ajuda a evitar problemas imprevistos.</li>
+<li>O minikube é necessário ao executar o cluster Kubernetes localmente. O minikube requer o Docker como uma dependência. Certifique-se de que instala o Docker antes de instalar o Milvus utilizando o Helm. Consulte <a href="https://docs.docker.com/get-docker">Obter o Docker</a> para obter mais informações.</li>
 </ul>
 <table>
 <thead>
-<tr><th>Operating system</th><th>Software</th><th>Note</th></tr>
+<tr><th>Sistema operativo</th><th>Software</th><th>Nota</th></tr>
 </thead>
 <tbody>
-<tr><td>Linux platforms</td><td><ul><li>Kubernetes 1.16 or later</li><li>kubectl</li><li>Helm 3.0.0 or later</li><li>minikube (for Milvus standalone)</li><li>Docker 19.03 or later (for Milvus standalone)</li></ul></td><td>See <a href="https://helm.sh/docs/">Helm Docs</a> for more information.</td></tr>
+<tr><td>Plataformas Linux</td><td><ul><li>Kubernetes 1.16 ou posterior</li><li>kubectl</li><li>Helm 3.0.0 ou posterior</li><li>minikube (para Milvus autónomo)</li><li>Docker 19.03 ou posterior (para Milvus autónomo)</li></ul></td><td>Consulte <a href="https://helm.sh/docs/">os documentos do Helm</a> para obter mais informações.</td></tr>
 </tbody>
 </table>
-<h2 id="FAQs" class="common-anchor-header">FAQs<button data-href="#FAQs" class="anchor-icon" translate="no">
+<h2 id="FAQs" class="common-anchor-header">Perguntas frequentes<button data-href="#FAQs" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -106,35 +106,35 @@ title: Requirements for Installing Milvus with GPU
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="How-can-I-start-a-K8s-cluster-locally-for-test-purposes" class="common-anchor-header">How can I start a K8s cluster locally for test purposes?</h3><p>You can use tools like <a href="https://minikube.sigs.k8s.io/docs/">minikube</a>, <a href="https://kind.sigs.k8s.io/">kind</a>, and <a href="https://kubernetes.io/docs/reference/setup-tools/kubeadm/">Kubeadm</a>, to quickly set up a Kubernetes cluster locally. The following procedure uses minikube as an example.</p>
+    </button></h2><h3 id="How-can-I-start-a-K8s-cluster-locally-for-test-purposes" class="common-anchor-header">Como posso iniciar um cluster do K8s localmente para fins de teste?</h3><p>Pode utilizar ferramentas como <a href="https://minikube.sigs.k8s.io/docs/">minikube</a>, <a href="https://kind.sigs.k8s.io/">kind</a> e <a href="https://kubernetes.io/docs/reference/setup-tools/kubeadm/">Kubeadm</a> para configurar rapidamente um cluster Kubernetes localmente. O procedimento a seguir usa o minikube como exemplo.</p>
 <ol>
-<li>Download minikube</li>
+<li>Descarregar o minikube</li>
 </ol>
-<p>Go to the <a href="https://minikube.sigs.k8s.io/docs/start/">Get Started</a> page, check whether you have met the conditions listed in the <strong>What you’ll need</strong> section, click on the buttons that describe your target platform, and copy the commands to download and install the binary.</p>
+<p>Aceda à página <a href="https://minikube.sigs.k8s.io/docs/start/">Get Started</a>, verifique se cumpre as condições listadas na secção <strong>What you'll need</strong>, clique nos botões que descrevem a sua plataforma de destino e copie os comandos para transferir e instalar o binário.</p>
 <ol start="2">
-<li>Start a K8s cluster using minikube</li>
+<li>Iniciar um cluster K8s usando o minikube</li>
 </ol>
 <pre><code translate="no" class="language-shell">$ minikube start
 <button class="copy-code-btn"></button></code></pre>
 <ol start="3">
-<li>Check the status of the K8s cluster</li>
+<li>Verificar o estado do cluster K8s</li>
 </ol>
-<p>You can check the status of the K8s cluster installed using the following command.</p>
+<p>Pode verificar o estado do cluster K8s instalado utilizando o seguinte comando.</p>
 <pre><code translate="no" class="language-shell">$ kubectl cluster-info
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>Ensure that you can access the K8s cluster via <code translate="no">kubectl</code>. If you have not installed <code translate="no">kubectl</code> locally, see <a href="https://minikube.sigs.k8s.io/docs/handbook/kubectl/">Use kubectl inside minikube</a>.</p>
+<p>Certifique-se de que pode aceder ao cluster K8s através de <code translate="no">kubectl</code>. Se não tiver instalado o <code translate="no">kubectl</code> localmente, consulte <a href="https://minikube.sigs.k8s.io/docs/handbook/kubectl/">Utilizar o kubectl dentro do minikube</a>.</p>
 </div>
-<h3 id="How-can-I-start-a-K8s-cluster-with-GPU-worker-nodes" class="common-anchor-header">How can I start a K8s cluster with GPU worker nodes?</h3><p>If you prefer to use GPU-enabled worker nodes, you can follow the steps below to create a K8s cluster with GPU worker nodes. We recommend installing Milvus on a K8s cluster with GPU worker nodes and using the default storage class provisioned.</p>
+<h3 id="How-can-I-start-a-K8s-cluster-with-GPU-worker-nodes" class="common-anchor-header">Como posso iniciar um cluster do K8s com nós de trabalho de GPU?</h3><p>Se preferir usar nós de trabalho habilitados para GPU, pode seguir as etapas abaixo para criar um cluster K8s com nós de trabalho de GPU. Recomendamos instalar o Milvus em um cluster K8s com nós de trabalho de GPU e usar a classe de armazenamento padrão provisionada.</p>
 <ol>
-<li>Prepare GPU worker nodes</li>
+<li>Preparar nós de trabalho da GPU</li>
 </ol>
-<p>To use GPU-enabled worker nodes, follow steps in <a href="https://gitlab.com/nvidia/kubernetes/device-plugin/-/blob/main/README.md#preparing-your-gpu-nodes">Prepare your GPU nodes</a>.</p>
+<p>Para usar nós de trabalho habilitados para GPU, siga as etapas em <a href="https://gitlab.com/nvidia/kubernetes/device-plugin/-/blob/main/README.md#preparing-your-gpu-nodes">Preparar seus nós de GPU</a>.</p>
 <ol start="2">
-<li>Enable GPU support on K8s</li>
+<li>Habilitar o suporte à GPU no K8s</li>
 </ol>
-<p>Deploy the <strong>nvidia-device-plugin</strong> with Helm by following <a href="https://gitlab.com/nvidia/kubernetes/device-plugin/-/blob/main/README.md#deployment-via-helm">these steps</a>.</p>
-<p>After setting up, view the GPU resources with the following command. Replace <code translate="no">&lt;gpu-worker-node&gt;</code> with the actual node name.</p>
+<p>Implante o <strong>nvidia-device-plugin</strong> com o Helm seguindo <a href="https://gitlab.com/nvidia/kubernetes/device-plugin/-/blob/main/README.md#deployment-via-helm">estas etapas</a>.</p>
+<p>Após a configuração, visualize os recursos da GPU com o seguinte comando. Substitua <code translate="no">&lt;gpu-worker-node&gt;</code> pelo nome real do nó.</p>
 <pre><code translate="no" class="language-shell">  $ kubectl describe node &lt;gpu-worker-node&gt;
 
   Capacity:

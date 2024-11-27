@@ -1,9 +1,9 @@
 ---
 id: schema.md
-summary: Learn how to define a schema in Milvus.
-title: Manage Schema
+summary: Saiba como definir um esquema no Milvus.
+title: Gerir o esquema
 ---
-<h1 id="Manage-Schema" class="common-anchor-header">Manage Schema<button data-href="#Manage-Schema" class="anchor-icon" translate="no">
+<h1 id="Manage-Schema" class="common-anchor-header">Gerir o esquema<button data-href="#Manage-Schema" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -18,8 +18,8 @@ title: Manage Schema
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>This topic introduces schema in Milvus. Schema is used to define the properties of a collection and the fields within.</p>
-<h2 id="Field-schema" class="common-anchor-header">Field schema<button data-href="#Field-schema" class="anchor-icon" translate="no">
+    </button></h1><p>Este tópico introduz o esquema no Milvus. O esquema é utilizado para definir as propriedades de uma coleção e os campos que a compõem.</p>
+<h2 id="Field-schema" class="common-anchor-header">Esquema de campo<button data-href="#Field-schema" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -34,61 +34,61 @@ title: Manage Schema
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>A field schema is the logical definition of a field. It is the first thing you need to define before defining a <a href="#Collection-schema">collection schema</a> and <a href="/docs/manage-collections.md">managing collections</a>.</p>
-<p>Milvus supports only one primary key field in a collection.</p>
-<h3 id="Field-schema-properties" class="common-anchor-header">Field schema properties</h3><table class="properties">
+    </button></h2><p>Um esquema de campo é a definição lógica de um campo. É a primeira coisa a definir antes de definir um <a href="#Collection-schema">esquema de coleção</a> e <a href="/docs/pt/manage-collections.md">gerir colecções</a>.</p>
+<p>O Milvus suporta apenas um campo de chave primária numa coleção.</p>
+<h3 id="Field-schema-properties" class="common-anchor-header">Propriedades do esquema de campo</h3><table class="properties">
     <thead>
     <tr>
-        <th>Properties</th>
-        <th>Description</th>
-        <th>Note</th>
+        <th>Propriedades</th>
+        <th>Descrição do campo</th>
+        <th>Nota</th>
     </tr>
     </thead>
     <tbody>
     <tr>
         <td><code translate="no">name</code></td>
-        <td>Name of the field in the collection to create</td>
-        <td>Data type: String.<br/>Mandatory</td>
+        <td>Nome do campo na coleção a criar</td>
+        <td>Tipo de dados: String.<br/>Obrigatório</td>
     </tr>
     <tr>
         <td><code translate="no">dtype</code></td>
-        <td>Data type of the field</td>
-        <td>Mandatory</td>
+        <td>Tipo de dados do campo</td>
+        <td>Obrigatório</td>
     </tr>
     <tr>
         <td><code translate="no">description</code></td>
-        <td>Description of the field</td>
-        <td>Data type: String.<br/>Optional</td>
+        <td>Descrição do campo</td>
+        <td>Tipo de dados: String.<br/>Facultativo</td>
     </tr>
     <tr>
         <td><code translate="no">is_primary</code></td>
-        <td>Whether to set the field as the primary key field or not</td>
-        <td>Data type: Boolean (<code translate="no">true</code> or <code translate="no">false</code>).<br/>Mandatory for the primary key field</td>
+        <td>Definir ou não o campo como campo de chave primária</td>
+        <td>Tipo de dados: Booleano (<code translate="no">true</code> ou <code translate="no">false</code>).<br/>Obrigatório para o campo de chave primária</td>
     </tr>
         <tr>
-            <td><code translate="no">auto_id</code> (Mandatory for primary key field)</td>
-            <td>Switch to enable or disable automatic ID (primary key) allocation.</td>
-            <td><code translate="no">True</code> or <code translate="no">False</code></td>
+            <td><code translate="no">auto_id</code> (Obrigatório para o campo de chave primária)</td>
+            <td>Comutador para ativar ou desativar a atribuição automática de ID (chave primária).</td>
+            <td><code translate="no">True</code> ou <code translate="no">False</code></td>
         </tr>
         <tr>
-            <td><code translate="no">max_length</code> (Mandatory for VARCHAR field)</td>
-            <td>Maximum byte length for strings allowed to be inserted. Note that multibyte characters (e.g., Unicode characters) may occupy more than one byte each, so ensure the byte length of inserted strings does not exceed the specified limit.</td>
+            <td><code translate="no">max_length</code> (Obrigatório para o campo VARCHAR)</td>
+            <td>Comprimento máximo de bytes para cadeias que podem ser inseridas. Note que os caracteres multibyte (por exemplo, caracteres Unicode) podem ocupar mais do que um byte cada, por isso certifique-se de que o comprimento em bytes das cadeias inseridas não excede o limite especificado.</td>
             <td>[1, 65,535]</td>
         </tr>
     <tr>
         <td><code translate="no">dim</code></td>
-        <td>Dimension of the vector</td>
-            <td>Data type: Integer &isin;[1, 32768].<br/>Mandatory for a dense vector field. Omit for a <a href="https://milvus.io/docs/sparse_vector.md">sparse vector</a> field.</td>
+        <td>Dimensão do vetor</td>
+            <td>Tipo de dados: Integer &isin;[1, 32768].<br/>Obrigatório para um campo vetorial denso. Omitir para um campo <a href="https://milvus.io/docs/sparse_vector.md">vetorial esparso</a>.</td>
     </tr>
     <tr>
         <td><code translate="no">is_partition_key</code></td>
-        <td>Whether this field is a partition-key field.</td>
-        <td>Data type: Boolean (<code translate="no">true</code> or <code translate="no">false</code>).</td>
+        <td>Se este campo é um campo de chave de partição.</td>
+        <td>Tipo de dados: Booleano (<code translate="no">true</code> ou <code translate="no">false</code>).</td>
     </tr>
     </tbody>
 </table>
-<h3 id="Create-a-field-schema" class="common-anchor-header">Create a field schema</h3><p>To reduce the complexity in data inserts, Milvus allows you to specify a default value for each scalar field during field schema creation, excluding the primary key field. This indicates that if you leave a field empty when inserting data, the default value you specified for this field applies.</p>
-<p>Create a regular field schema:</p>
+<h3 id="Create-a-field-schema" class="common-anchor-header">Criar um esquema de campo</h3><p>Para reduzir a complexidade das inserções de dados, o Milvus permite-lhe especificar um valor por defeito para cada campo escalar durante a criação do esquema de campo, excluindo o campo da chave primária. Isto indica que se deixar um campo vazio ao inserir dados, aplica-se o valor por defeito especificado para este campo.</p>
+<p>Criar um esquema de campos normal:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> FieldSchema
 id_field = FieldSchema(name=<span class="hljs-string">&quot;id&quot;</span>, dtype=DataType.INT64, is_primary=<span class="hljs-literal">True</span>, description=<span class="hljs-string">&quot;primary id&quot;</span>)
 age_field = FieldSchema(name=<span class="hljs-string">&quot;age&quot;</span>, dtype=DataType.INT64, description=<span class="hljs-string">&quot;age&quot;</span>)
@@ -97,7 +97,7 @@ embedding_field = FieldSchema(name=<span class="hljs-string">&quot;embedding&quo
 <span class="hljs-comment"># The following creates a field and use it as the partition key</span>
 position_field = FieldSchema(name=<span class="hljs-string">&quot;position&quot;</span>, dtype=DataType.VARCHAR, max_length=<span class="hljs-number">256</span>, is_partition_key=<span class="hljs-literal">True</span>)
 <button class="copy-code-btn"></button></code></pre>
-<p>Create a field schema with default field values:</p>
+<p>Cria um esquema de campo com valores de campo predefinidos:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> FieldSchema
 
 fields = [
@@ -107,16 +107,16 @@ fields = [
   embedding_field = FieldSchema(name=<span class="hljs-string">&quot;embedding&quot;</span>, dtype=DataType.FLOAT_VECTOR, dim=<span class="hljs-number">128</span>, description=<span class="hljs-string">&quot;vector&quot;</span>)
 ]
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Supported-data-types" class="common-anchor-header">Supported data types</h3><p><code translate="no">DataType</code> defines the kind of data a field contains. Different fields support different data types.</p>
+<h3 id="Supported-data-types" class="common-anchor-header">Tipos de dados suportados</h3><p><code translate="no">DataType</code> define o tipo de dados que um campo contém. Diferentes campos suportam diferentes tipos de dados.</p>
 <ul>
-<li><p>Primary key field supports:</p>
+<li><p>O campo de chave primária suporta:</p>
 <ul>
 <li>INT64: numpy.int64</li>
 <li>VARCHAR: VARCHAR</li>
 </ul></li>
-<li><p>Scalar field supports:</p>
+<li><p>O campo Scalar suporta:</p>
 <ul>
-<li>BOOL: Boolean (<code translate="no">true</code> or <code translate="no">false</code>)</li>
+<li>BOOL: Booleano (<code translate="no">true</code> ou <code translate="no">false</code>)</li>
 <li>INT8: numpy.int8</li>
 <li>INT16: numpy.int16</li>
 <li>INT32: numpy.int32</li>
@@ -124,21 +124,21 @@ fields = [
 <li>FLOAT: numpy.float32</li>
 <li>DOUBLE: numpy.double</li>
 <li>VARCHAR: VARCHAR</li>
-<li>JSON: <a href="/docs/use-json-fields.md">JSON</a></li>
-<li>Array: <a href="/docs/array_data_type.md">Array</a></li>
+<li>JSON: <a href="/docs/pt/use-json-fields.md">JSON</a></li>
+<li>Array: <a href="/docs/pt/array_data_type.md">Array</a></li>
 </ul>
-<p>JSON as a composite data type is available. A JSON field comprises key-value pairs. Each key is a string, and a value can be a number, string, boolean value, array, or list. For details, refer to <a href="/docs/use-json-fields.md">JSON: a new data type</a>.</p></li>
-<li><p>Vector field supports:</p>
+<p>JSON como um tipo de dados composto está disponível. Um campo JSON inclui pares chave-valor. Cada chave é uma cadeia de caracteres e um valor pode ser um número, cadeia de caracteres, valor booleano, matriz ou lista. Para obter detalhes, consulte <a href="/docs/pt/use-json-fields.md">JSON: um novo tipo de dados</a>.</p></li>
+<li><p>O campo Vetor suporta:</p>
 <ul>
-<li>BINARY_VECTOR: Stores binary data as a sequence of 0s and 1s, used for compact feature representation in image processing and information retrieval.</li>
-<li>FLOAT_VECTOR: Stores 32-bit floating-point numbers, commonly used in scientific computing and machine learning for representing real numbers.</li>
-<li>FLOAT16_VECTOR: Stores 16-bit half-precision floating-point numbers, used in deep learning and GPU computations for memory and bandwidth efficiency.</li>
-<li>BFLOAT16_VECTOR: Stores 16-bit floating-point numbers with reduced precision but the same exponent range as Float32, popular in deep learning for reducing memory and computational requirements without significantly impacting accuracy.</li>
-<li>SPARSE_FLOAT_VECTOR: Stores a list of non-zero elements and their corresponding indices, used for representing sparse vectors. For more information, refer to <a href="/docs/sparse_vector.md">Sparse Vectors</a>.</li>
+<li>BINARY_VECTOR: armazena dados binários como uma sequência de 0s e 1s, usados para representação compacta de recursos no processamento de imagens e na recuperação de informações.</li>
+<li>FLOAT_VECTOR: Armazena números de ponto flutuante de 32 bits, normalmente utilizados na computação científica e na aprendizagem automática para representar números reais.</li>
+<li>FLOAT16_VECTOR: Armazena números de vírgula flutuante de meia precisão de 16 bits, utilizados em aprendizagem profunda e cálculos de GPU para eficiência de memória e largura de banda.</li>
+<li>BFLOAT16_VECTOR: Armazena números de vírgula flutuante de 16 bits com precisão reduzida, mas com o mesmo intervalo de expoentes que o Float32, popular na aprendizagem profunda para reduzir a memória e os requisitos computacionais sem afetar significativamente a precisão.</li>
+<li>SPARSE_FLOAT_VECTOR: armazena uma lista de elementos não nulos e os respectivos índices, utilizados para representar vectores esparsos. Para mais informações, consulte <a href="/docs/pt/sparse_vector.md">Vectores es</a>parsos.</li>
 </ul>
-<p>Milvus supports multiple vector fields in a collection. For more information, refer to <a href="/docs/multi-vector-search.md">Hybrid Search</a>.</p></li>
+<p>O Milvus suporta múltiplos campos vectoriais numa coleção. Para obter mais informações, consulte <a href="/docs/pt/multi-vector-search.md">Pesquisa híbrida</a>.</p></li>
 </ul>
-<h2 id="Collection-schema" class="common-anchor-header">Collection schema<button data-href="#Collection-schema" class="anchor-icon" translate="no">
+<h2 id="Collection-schema" class="common-anchor-header">Esquema de coleção<button data-href="#Collection-schema" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -153,41 +153,40 @@ fields = [
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>A collection schema is the logical definition of a collection. Usually you need to define the <a href="#Field-schema">field schema</a> before defining a collection schema and <a href="/docs/manage-collections.md">managing collections</a>.</p>
-<h3 id="Collection-schema-properties" class="common-anchor-header">Collection schema properties</h3><table class="properties">
+    </button></h2><p>Um esquema de coleção é a definição lógica de uma coleção. Normalmente, é necessário definir o <a href="#Field-schema">esquema de campo</a> antes de definir um esquema de coleção e <a href="/docs/pt/manage-collections.md">gerir colecções</a>.</p>
+<h3 id="Collection-schema-properties" class="common-anchor-header">Propriedades do esquema de coleção</h3><table class="properties">
     <thead>
     <tr>
-        <th>Properties</th>
-        <th>Description</th>
-        <th>Note</th>
+        <th>Propriedades</th>
+        <th>Descrição das propriedades</th>
+        <th>Nota</th>
     </tr>
     </thead>
     <tbody>
     <tr>
         <td><code translate="no">field</code></td>
-        <td>Fields in the collection to create</td>
-        <td>Mandatory</td>
+        <td>Campos da coleção a criar</td>
+        <td>Obrigatório</td>
     </tr>
     <tr>
         <td><code translate="no">description</code></td>
-        <td>Description of the collection</td>
-        <td>Data type: String.<br/>Optional</td>
+        <td>Descrição da coleção</td>
+        <td>Tipo de dados: String.<br/>Facultativo</td>
     </tr>
     <tr>
         <td><code translate="no">partition_key_field</code></td>
-        <td>Name of a field that is designed to act as the partition key.</td>
-        <td>Data type: String.<br/>Optional</td>
+        <td>Nome de um campo concebido para atuar como chave de partição.</td>
+        <td>Tipo de dados: String.<br/>Facultativo</td>
     </tr>
     <tr>
         <td><code translate="no">enable_dynamic_field</code></td>
-        <td>Whether to enable dynamic schema or not</td>
-        <td>Data type: Boolean (<code translate="no">true</code> or <code translate="no">false</code>).<br/>Optional, defaults to <code translate="no">False</code>.<br/>For details on dynamic schema, refer to <a herf="enable-dynamic-field.md">Dynamic Schema</a> and the user guides for managing collections.</td>
+        <td>Ativar ou não o esquema dinâmico</td>
+        <td>Tipo de dados: Boolean (<code translate="no">true</code> ou <code translate="no">false</code>).<br/>Opcional, a predefinição é <code translate="no">False</code>.<br/>Para mais informações sobre o esquema dinâmico, consulte <a herf="enable-dynamic-field.md">Esquema dinâmico</a> e os manuais do utilizador para gerir colecções.</td>
     </tr>
     </tbody>
 </table>
-<h3 id="Create-a-collection-schema" class="common-anchor-header">Create a collection schema</h3><div class="alert note">
-  Define the field schemas before defining a collection schema.
-</div>
+<h3 id="Create-a-collection-schema" class="common-anchor-header">Criar um esquema de coleção</h3><div class="alert note">
+  Defina os esquemas de campo antes de definir um esquema de coleção.</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> FieldSchema, CollectionSchema
 id_field = FieldSchema(name=<span class="hljs-string">&quot;id&quot;</span>, dtype=DataType.INT64, is_primary=<span class="hljs-literal">True</span>, description=<span class="hljs-string">&quot;primary id&quot;</span>)
 age_field = FieldSchema(name=<span class="hljs-string">&quot;age&quot;</span>, dtype=DataType.INT64, description=<span class="hljs-string">&quot;age&quot;</span>)
@@ -199,7 +198,7 @@ position_field = FieldSchema(name=<span class="hljs-string">&quot;position&quot;
 <span class="hljs-comment"># Set enable_dynamic_field to True if you need to use dynamic fields. </span>
 schema = CollectionSchema(fields=[id_field, age_field, embedding_field], auto_id=<span class="hljs-literal">False</span>, enable_dynamic_field=<span class="hljs-literal">True</span>, description=<span class="hljs-string">&quot;desc of a collection&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
-<p>Create a collection with the schema specified:</p>
+<p>Crie uma coleção com o esquema especificado:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> <span class="hljs-title class_">Collection</span>,connections
 conn = connections.<span class="hljs-title function_">connect</span>(host=<span class="hljs-string">&quot;127.0.0.1&quot;</span>, port=<span class="hljs-number">19530</span>)
 collection_name1 = <span class="hljs-string">&quot;tutorial_1&quot;</span>
@@ -207,14 +206,14 @@ collection1 = <span class="hljs-title class_">Collection</span>(name=collection_
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <ul>
-<li>You can define the shard number with <code translate="no">shards_num</code>.</li>
-<li>You can define the Milvus server on which you wish to create a collection by specifying the alias in <code translate="no">using</code>.</li>
-<li>You can enable the partition key feature on a field by setting <code translate="no">is_partition_key</code> to <code translate="no">True</code> on the field if you need to implement <a href="/docs/multi_tenancy.md">partition-key-based multi-tenancy</a>.</li>
-<li>You can enable dynamic schema by setting <code translate="no">enable_dynamic_field</code> to <code translate="no">True</code> in the collection schema if you need to <a href="/docs/enable-dynamic-field.md">enable dynamic field</a>.</li>
+<li>Pode definir o número do fragmento com <code translate="no">shards_num</code>.</li>
+<li>Pode definir o servidor Milvus no qual pretende criar uma coleção, especificando o alias em <code translate="no">using</code>.</li>
+<li>Pode ativar a funcionalidade de chave de partição num campo definindo <code translate="no">is_partition_key</code> para <code translate="no">True</code> no campo, se necessitar de implementar <a href="/docs/pt/multi_tenancy.md">um multi-tenancy baseado em chaves de partição</a>.</li>
+<li>Pode ativar o esquema dinâmico definindo <code translate="no">enable_dynamic_field</code> para <code translate="no">True</code> no esquema da coleção se precisar de <a href="/docs/pt/enable-dynamic-field.md">ativar o campo dinâmico</a>.</li>
 </ul>
 </div>
 <p><br/>
-You can also create a collection with <code translate="no">Collection.construct_from_dataframe</code>, which automatically generates a collection schema from DataFrame and creates a collection.</p>
+Também pode criar uma coleção com <code translate="no">Collection.construct_from_dataframe</code>, que gera automaticamente um esquema de coleção a partir de DataFrame e cria uma coleção.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> pandas <span class="hljs-keyword">as</span> pd
 df = pd.DataFrame({
     <span class="hljs-string">&quot;id&quot;</span>: [i <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(nb)],
@@ -230,7 +229,7 @@ collection, ins_res = Collection.construct_from_dataframe(
     auto_id=<span class="hljs-literal">False</span>
     )
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Whats-next" class="common-anchor-header">What’s next<button data-href="#Whats-next" class="anchor-icon" translate="no">
+<h2 id="Whats-next" class="common-anchor-header">O que se segue<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -246,7 +245,7 @@ collection, ins_res = Collection.construct_from_dataframe(
         ></path>
       </svg>
     </button></h2><ul>
-<li>Learn how to prepare schema when <a href="/docs/manage-collections.md">managing collections</a>.</li>
-<li>Read more about <a href="/docs/enable-dynamic-field.md">dynamic schema</a>.</li>
-<li>Read more about partition-key in <a href="/docs/multi_tenancy.md">Multi-tenancy</a>.</li>
+<li>Saiba como preparar o esquema ao <a href="/docs/pt/manage-collections.md">gerir colecções</a>.</li>
+<li>Saiba mais sobre o <a href="/docs/pt/enable-dynamic-field.md">esquema dinâmico</a>.</li>
+<li>Leia mais sobre partition-key em <a href="/docs/pt/multi_tenancy.md">Multi-tenancy</a>.</li>
 </ul>

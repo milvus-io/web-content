@@ -1,12 +1,12 @@
 ---
 id: integrate_with_camel.md
 summary: >-
-  This guide demonstrates how to use an open-source embedding model and
-  large-language model on BentoCloud with Milvus vector database to build a
-  Retrieval Augmented Generation (RAG) application.
-title: Retrieval-Augmented Generation (RAG) with Milvus and BentoML
+  Este guia demonstra como utilizar um modelo de incorporação de código aberto e
+  um modelo de linguagem grande no BentoCloud com a base de dados vetorial
+  Milvus para criar uma aplicação Retrieval Augmented Generation (RAG).
+title: Geração Aumentada por Recuperação (RAG) com Milvus e BentoML
 ---
-<h1 id="Retrieval-Augmented-Generation-RAG-with-Milvus-and-Camel" class="common-anchor-header">Retrieval-Augmented Generation (RAG) with Milvus and Camel<button data-href="#Retrieval-Augmented-Generation-RAG-with-Milvus-and-Camel" class="anchor-icon" translate="no">
+<h1 id="Retrieval-Augmented-Generation-RAG-with-Milvus-and-Camel" class="common-anchor-header">Geração Aumentada por Recuperação (RAG) com Milvus e Camel<button data-href="#Retrieval-Augmented-Generation-RAG-with-Milvus-and-Camel" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -23,18 +23,18 @@ title: Retrieval-Augmented Generation (RAG) with Milvus and BentoML
       </svg>
     </button></h1><p><a href="https://colab.research.google.com/github/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/rag_with_milvus_and_camel.ipynb" target="_parent"><img translate="no" src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
 <a href="https://github.com/milvus-io/bootcamp/blob/master/bootcamp/tutorials/integration/rag_with_milvus_and_camel.ipynb" target="_blank"><img translate="no" src="https://img.shields.io/badge/View%20on%20GitHub-555555?style=flat&logo=github&logoColor=white" alt="GitHub Repository"/></a></p>
-<p>This guide demonstrates how to build a Retrieval-Augmented Generation (RAG) system using CAMEL and Milvus.</p>
-<p>The RAG system combines a retrieval system with a generative model to generate new text based on a given prompt. The system first retrieves relevant documents from a corpus using Milvus, and then uses a generative model to generate new text based on the retrieved documents.</p>
-<p><a href="https://www.camel-ai.org/">CAMEL</a> is a multi-agent framework. <a href="https://milvus.io/">Milvus</a> is the world’s most advanced open-source vector database, built to power embedding similarity search and AI applications.</p>
-<p>In this notebook, we show the usage of CAMEL Retrieve Module in both customized way and auto way. We will also show how to combine <code translate="no">AutoRetriever</code> with <code translate="no">ChatAgent</code>, and further combine <code translate="no">AutoRetriever</code> with <code translate="no">RolePlaying</code> by using <code translate="no">Function Calling</code>.</p>
-<p>4 main parts included:</p>
+<p>Este guia demonstra como construir um sistema RAG (Retrieval-Augmented Generation) utilizando o CAMEL e o Milvus.</p>
+<p>O sistema RAG combina um sistema de recuperação com um modelo generativo para gerar novo texto com base num determinado pedido. O sistema começa por recuperar documentos relevantes de um corpus utilizando o Milvus e, em seguida, utiliza um modelo generativo para gerar novo texto com base nos documentos recuperados.</p>
+<p><a href="https://www.camel-ai.org/">CAMEL</a> é uma estrutura multi-agente. <a href="https://milvus.io/">O Milvus</a> é a base de dados vetorial de código aberto mais avançada do mundo, criada para alimentar a pesquisa de semelhanças de incorporação e as aplicações de IA.</p>
+<p>Neste caderno, mostramos a utilização do módulo CAMEL Retrieve tanto de forma personalizada como de forma automática. Também mostraremos como combinar <code translate="no">AutoRetriever</code> com <code translate="no">ChatAgent</code>, e ainda combinar <code translate="no">AutoRetriever</code> com <code translate="no">RolePlaying</code> usando <code translate="no">Function Calling</code>.</p>
+<p>4 partes principais incluídas:</p>
 <ul>
-<li>Customized RAG</li>
-<li>Auto RAG</li>
-<li>Single Agent with Auto RAG</li>
-<li>Role-playing with Auto RAG</li>
+<li>RAG personalizado</li>
+<li>RAG automático</li>
+<li>Agente único com RAG automático</li>
+<li>Interpretação de papéis com o Auto RAG</li>
 </ul>
-<h2 id="Load-Data" class="common-anchor-header">Load Data<button data-href="#Load-Data" class="anchor-icon" translate="no">
+<h2 id="Load-Data" class="common-anchor-header">Carregar dados<button data-href="#Load-Data" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -49,11 +49,11 @@ title: Retrieval-Augmented Generation (RAG) with Milvus and BentoML
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Let’s first load the CAMEL paper from https://arxiv.org/pdf/2303.17760.pdf. This will be our local example data.</p>
+    </button></h2><p>Vamos primeiro carregar o documento CAMEL de https://arxiv.org/pdf/2303.17760.pdf. Estes serão os nossos dados de exemplo locais.</p>
 <pre><code translate="no" class="language-python">$ pip install -U <span class="hljs-string">&quot;camel-ai[all]&quot;</span> pymilvus
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>If you are using Google Colab, to enable dependencies just installed, you may need to <strong>restart the runtime</strong> (Click on the “Runtime” menu at the top of the screen, and select “Restart session” from the dropdown menu).</p>
+<p>Se estiver a utilizar o Google Colab, para ativar as dependências acabadas de instalar, poderá ter de <strong>reiniciar o tempo de execução</strong> (clique no menu "Tempo de execução" na parte superior do ecrã e selecione "Reiniciar sessão" no menu pendente).</p>
 </div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> os
 <span class="hljs-keyword">import</span> requests
@@ -65,7 +65,7 @@ response = requests.get(url)
 <span class="hljs-keyword">with</span> <span class="hljs-built_in">open</span>(<span class="hljs-string">&quot;local_data/camel paper.pdf&quot;</span>, <span class="hljs-string">&quot;wb&quot;</span>) <span class="hljs-keyword">as</span> file:
     file.write(response.content)
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="1-Customized-RAG" class="common-anchor-header">1. Customized RAG<button data-href="#1-Customized-RAG" class="anchor-icon" translate="no">
+<h2 id="1-Customized-RAG" class="common-anchor-header">1. RAG personalizado<button data-href="#1-Customized-RAG" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -80,16 +80,16 @@ response = requests.get(url)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>In this section we will set our customized RAG pipeline, we will take <code translate="no">VectorRetriever</code> as an example. We will set <code translate="no">OpenAIEmbedding</code> as the embeddding model and <code translate="no">MilvusStorage</code> as the storage for it.</p>
-<p>To set OpenAI embedding, we need to set the <code translate="no">OPENAI_API_KEY</code> in below.</p>
+    </button></h2><p>Nesta secção, vamos definir o nosso pipeline RAG personalizado, vamos utilizar <code translate="no">VectorRetriever</code> como exemplo. Vamos definir <code translate="no">OpenAIEmbedding</code> como o modelo de incorporação e <code translate="no">MilvusStorage</code> como o armazenamento para ele.</p>
+<p>Para definir a incorporação do OpenAI, precisamos definir o <code translate="no">OPENAI_API_KEY</code> abaixo.</p>
 <pre><code translate="no" class="language-python">os.<span class="hljs-property">environ</span>[<span class="hljs-string">&quot;OPENAI_API_KEY&quot;</span>] = <span class="hljs-string">&quot;Your Key&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Import and set the embedding instance:</p>
+<p>Importar e definir a instância de incorporação:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> camel.<span class="hljs-property">embeddings</span> <span class="hljs-keyword">import</span> <span class="hljs-title class_">OpenAIEmbedding</span>
 
 embedding_instance = <span class="hljs-title class_">OpenAIEmbedding</span>()
 <button class="copy-code-btn"></button></code></pre>
-<p>Import and set the vector storage instance:</p>
+<p>Importar e definir a instância de armazenamento do vetor:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> camel.storages <span class="hljs-keyword">import</span> MilvusStorage
 
 storage_instance = MilvusStorage(
@@ -102,22 +102,22 @@ storage_instance = MilvusStorage(
 )
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>For the <code translate="no">url_and_api_key</code>:</p>
+<p>Para o <code translate="no">url_and_api_key</code>:</p>
 <ul>
-<li>Using a local file, e.g.<code translate="no">./milvus.db</code>, as the Milvus connection URI is the most convenient method, as it automatically utilizes <a href="https://milvus.io/docs/milvus_lite.md">Milvus Lite</a> to store all data in this file.</li>
-<li>If you have large scale of data, you can set up a more performant Milvus server on <a href="https://milvus.io/docs/quickstart.md">docker or kubernetes</a>. In this setup, please use the server uri, e.g.<code translate="no">http://localhost:19530</code>, as your url.</li>
-<li>If you want to use <a href="https://zilliz.com/cloud">Zilliz Cloud</a>, the fully managed cloud service for Milvus, adjust the connection uri and token, which correspond to the <a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">Public Endpoint and Api key</a> in Zilliz Cloud.</li>
+<li>A utilização de um ficheiro local, por exemplo,<code translate="no">./milvus.db</code>, como URI de ligação do Milvus é o método mais conveniente, uma vez que utiliza automaticamente <a href="https://milvus.io/docs/milvus_lite.md">o Milvus Lite</a> para armazenar todos os dados neste ficheiro.</li>
+<li>Se tiver uma grande escala de dados, pode configurar um servidor Milvus mais eficiente em <a href="https://milvus.io/docs/quickstart.md">docker ou kubernetes</a>. Nesta configuração, utilize o uri do servidor, por exemplo,<code translate="no">http://localhost:19530</code>, como o seu url.</li>
+<li>Se pretender utilizar <a href="https://zilliz.com/cloud">o Zilliz Cloud</a>, o serviço de nuvem totalmente gerido para o Milvus, ajuste o uri e o token de ligação, que correspondem ao <a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">Public Endpoint e</a> à <a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details">chave Api</a> no Zilliz Cloud.</li>
 </ul>
 </div>
-<p>Import and set the retriever instance:</p>
-<p>By default, the <code translate="no">similarity_threshold</code> is set to 0.75. You can change it.</p>
+<p>Importar e definir a instância do retriever:</p>
+<p>Por defeito, o <code translate="no">similarity_threshold</code> está definido para 0,75. Pode alterá-lo.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> camel.<span class="hljs-property">retrievers</span> <span class="hljs-keyword">import</span> <span class="hljs-title class_">VectorRetriever</span>
 
 vector_retriever = <span class="hljs-title class_">VectorRetriever</span>(
     embedding_model=embedding_instance, storage=storage_instance
 )
 <button class="copy-code-btn"></button></code></pre>
-<p>We use integrated <code translate="no">Unstructured Module</code> to split the content into small chunks, the content will be splited automacitlly with its <code translate="no">chunk_by_title</code> function, the max character for each chunk is 500 characters, which is a suitable length for <code translate="no">OpenAIEmbedding</code>. All the text in the chunks will be embed and stored to the vector storage instance, it will take some time, please wait.</p>
+<p>Utilizamos o <code translate="no">Unstructured Module</code> integrado para dividir o conteúdo em pequenos pedaços, o conteúdo será dividido automaticamente com a sua função <code translate="no">chunk_by_title</code>, o carácter máximo para cada pedaço é de 500 caracteres, que é um comprimento adequado para <code translate="no">OpenAIEmbedding</code>. Todo o texto nos pedaços será incorporado e armazenado na instância de armazenamento vetorial, o que levará algum tempo, por favor aguarde.</p>
 <pre><code translate="no" class="language-python">vector_retriever.<span class="hljs-title function_">process</span>(content_input_path=<span class="hljs-string">&quot;local_data/camel paper.pdf&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">[nltk_data] Downloading package punkt to /root/nltk_data...
@@ -126,20 +126,20 @@ vector_retriever = <span class="hljs-title class_">VectorRetriever</span>(
 [nltk_data]     /root/nltk_data...
 [nltk_data]   Unzipping taggers/averaged_perceptron_tagger.zip.
 </code></pre>
-<p>Now we can retrieve information from the vector storage by giving a query. By default it will give you back the text content from top 1 chunk with highest Cosine similarity score, and the similarity score should be higher than 0.75 to ensure the retrieved content is relevant to the query. You can also change the <code translate="no">top_k</code> value.</p>
-<p>The returned string list includes:</p>
+<p>Agora podemos obter informações do armazenamento vetorial através de uma consulta. Por predefinição, será devolvido o conteúdo de texto do primeiro bloco com a pontuação de semelhança de cosseno mais elevada, e a pontuação de semelhança deve ser superior a 0,75 para garantir que o conteúdo recuperado é relevante para a consulta. Também é possível alterar o valor de <code translate="no">top_k</code>.</p>
+<p>A lista de cadeias de caracteres devolvida inclui:</p>
 <ul>
-<li>similarity score</li>
-<li>content path</li>
-<li>metadata</li>
-<li>text</li>
+<li>pontuação de similaridade</li>
+<li>caminho do conteúdo</li>
+<li>metadados</li>
+<li>texto</li>
 </ul>
 <pre><code translate="no" class="language-python">retrieved_info = vector_retriever.query(query=<span class="hljs-string">&quot;What is CAMEL?&quot;</span>, top_k=<span class="hljs-number">1</span>)
 <span class="hljs-built_in">print</span>(retrieved_info)
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">[{'similarity score': '0.8321675658226013', 'content path': 'local_data/camel paper.pdf', 'metadata': {'last_modified': '2024-04-19T14:40:00', 'filetype': 'application/pdf', 'page_number': 45}, 'text': 'CAMEL Data and Code License The intended purpose and licensing of CAMEL is solely for research use. The source code is licensed under Apache 2.0. The datasets are licensed under CC BY NC 4.0, which permits only non-commercial usage. It is advised that any models trained using the dataset should not be utilized for anything other than research purposes.\n\n45'}]
 </code></pre>
-<p>Let’s try an irrelevant query:</p>
+<p>Vamos tentar uma consulta irrelevante:</p>
 <pre><code translate="no" class="language-python">retrieved_info_irrelevant = vector_retriever.query(
     query=<span class="hljs-string">&quot;Compared with dumpling and rice, which should I take for dinner?&quot;</span>, top_k=<span class="hljs-number">1</span>
 )
@@ -148,7 +148,7 @@ vector_retriever = <span class="hljs-title class_">VectorRetriever</span>(
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">[{'text': 'No suitable information retrieved from local_data/camel paper.pdf                 with similarity_threshold = 0.75.'}]
 </code></pre>
-<h2 id="2-Auto-RAG" class="common-anchor-header">2. Auto RAG<button data-href="#2-Auto-RAG" class="anchor-icon" translate="no">
+<h2 id="2-Auto-RAG" class="common-anchor-header">2. RAG automático<button data-href="#2-Auto-RAG" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -163,14 +163,14 @@ vector_retriever = <span class="hljs-title class_">VectorRetriever</span>(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>In this section we will run the <code translate="no">AutoRetriever</code> with default settings. It uses <code translate="no">OpenAIEmbedding</code> as default embedding model and <code translate="no">Milvus</code> as default vector storage.</p>
-<p>What you need to do is:</p>
+    </button></h2><p>Nesta secção, vamos executar o <code translate="no">AutoRetriever</code> com as definições predefinidas. Utiliza <code translate="no">OpenAIEmbedding</code> como modelo de incorporação predefinido e <code translate="no">Milvus</code> como armazenamento vetorial predefinido.</p>
+<p>O que você precisa fazer é:</p>
 <ul>
-<li>Set content input paths, which can be local paths or remote urls</li>
-<li>Set remote url and api key for Milvus</li>
-<li>Give a query</li>
+<li>Definir os caminhos de entrada do conteúdo, que podem ser caminhos locais ou URLs remotos</li>
+<li>Definir o URL remoto e a chave da API para o Milvus</li>
+<li>Fornecer uma consulta</li>
 </ul>
-<p>The Auto RAG pipeline would create collections for given content input paths, the collection name will be set automaticlly based on the content input path name, if the collection exists, it will do the retrieve directly.</p>
+<p>O pipeline Auto RAG criará colecções para os caminhos de entrada de conteúdos indicados. O nome da coleção será definido automaticamente com base no nome do caminho de entrada de conteúdos e, se a coleção existir, será feita a recuperação diretamente.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> camel.retrievers <span class="hljs-keyword">import</span> AutoRetriever
 <span class="hljs-keyword">from</span> camel.types <span class="hljs-keyword">import</span> StorageType
 
@@ -201,7 +201,7 @@ Retrieved Context:
 {'similarity score': '0.8252888321876526', 'content path': 'local_data/camel paper.pdf', 'metadata': {'last_modified': '2024-04-19T14:40:00', 'filetype': 'application/pdf', 'page_number': 7}, 'text': ' Section 3.2, to simulate assistant-user cooperation. For our analysis, we set our attention on AI Society setting. We also gathered conversational data, named CAMEL AI Society and CAMEL Code datasets and problem-solution pairs data named CAMEL Math and CAMEL Science and analyzed and evaluated their quality. Moreover, we will discuss potential extensions of our framework and highlight both the risks and opportunities that future AI society might present.'}
 {'similarity score': '0.8378663659095764', 'content path': 'https://www.camel-ai.org/', 'metadata': {'filetype': 'text/html', 'languages': ['eng'], 'page_number': 1, 'url': 'https://www.camel-ai.org/', 'link_urls': ['#h.3f4tphhd9pn8', 'https://join.slack.com/t/camel-ai/shared_invite/zt-2g7xc41gy-_7rcrNNAArIP6sLQqldkqQ', 'https://discord.gg/CNcNpquyDc'], 'link_texts': [None, None, None], 'emphasized_text_contents': ['Mission', 'CAMEL-AI.org', 'is an open-source community dedicated to the study of autonomous and communicative agents. We believe that studying these agents on a large scale offers valuable insights into their behaviors, capabilities, and potential risks. To facilitate research in this field, we provide, implement, and support various types of agents, tasks, prompts, models, datasets, and simulated environments.', 'Join us via', 'Slack', 'Discord', 'or'], 'emphasized_text_tags': ['span', 'span', 'span', 'span', 'span', 'span', 'span']}, 'text': 'Mission\n\nCAMEL-AI.org is an open-source community dedicated to the study of autonomous and communicative agents. We believe that studying these agents on a large scale offers valuable insights into their behaviors, capabilities, and potential risks. To facilitate research in this field, we provide, implement, and support various types of agents, tasks, prompts, models, datasets, and simulated environments.\n\nJoin us via\n\nSlack\n\nDiscord\n\nor'}
 </code></pre>
-<h2 id="3-Single-Agent-with-Auto-RAG" class="common-anchor-header">3. Single Agent with Auto RAG<button data-href="#3-Single-Agent-with-Auto-RAG" class="anchor-icon" translate="no">
+<h2 id="3-Single-Agent-with-Auto-RAG" class="common-anchor-header">3. Agente único com RAG automático<button data-href="#3-Single-Agent-with-Auto-RAG" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -216,8 +216,8 @@ Retrieved Context:
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>In this section we will show how to combine the <code translate="no">AutoRetriever</code> with one <code translate="no">ChatAgent</code>.</p>
-<p>Let’s set an agent function, in this function we can get the response by providing a query to this agent.</p>
+    </button></h2><p>Nesta secção, mostraremos como combinar o <code translate="no">AutoRetriever</code> com um <code translate="no">ChatAgent</code>.</p>
+<p>Vamos definir uma função de agente, nesta função podemos obter a resposta fornecendo uma consulta a este agente.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> camel.agents <span class="hljs-keyword">import</span> ChatAgent
 <span class="hljs-keyword">from</span> camel.messages <span class="hljs-keyword">import</span> BaseMessage
 <span class="hljs-keyword">from</span> camel.types <span class="hljs-keyword">import</span> RoleType
@@ -271,7 +271,7 @@ Retrieved Context:
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no">CAMEL-AI is an open-source community dedicated to the study of autonomous and communicative agents. It provides, implements, and supports various types of agents, tasks, prompts, models, datasets, and simulated environments to facilitate research in this field.
 </code></pre>
-<h2 id="4-Role-playing-with-Auto-RAG" class="common-anchor-header">4. Role-playing with Auto RAG<button data-href="#4-Role-playing-with-Auto-RAG" class="anchor-icon" translate="no">
+<h2 id="4-Role-playing-with-Auto-RAG" class="common-anchor-header">4. Interpretação de papéis com o Auto RAG<button data-href="#4-Role-playing-with-Auto-RAG" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -286,7 +286,7 @@ Retrieved Context:
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>In this section we will show how to combine the <code translate="no">RETRIEVAL_FUNCS</code> with <code translate="no">RolePlaying</code> by applying <code translate="no">Function Calling</code>.</p>
+    </button></h2><p>Nesta secção, mostraremos como combinar o <code translate="no">RETRIEVAL_FUNCS</code> com o <code translate="no">RolePlaying</code> aplicando o <code translate="no">Function Calling</code>.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> typing <span class="hljs-keyword">import</span> <span class="hljs-type">List</span>
 <span class="hljs-keyword">from</span> colorama <span class="hljs-keyword">import</span> Fore
 
@@ -387,7 +387,7 @@ Retrieved Context:
 
         input_msg = assistant_response.msg
 <button class="copy-code-btn"></button></code></pre>
-<p>Run the role-playing with defined retriever function:</p>
+<p>Execute a representação de papéis com a função de recuperação definida:</p>
 <pre><code translate="no" class="language-python">role_playing_with_rag(
     task_prompt=<span class="hljs-string">&quot;&quot;&quot;What is the main termination reasons for AI Society
                    dataset, how many number of messages did camel decided to
