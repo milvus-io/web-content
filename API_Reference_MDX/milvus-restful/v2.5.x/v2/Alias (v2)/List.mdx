@@ -1,0 +1,20 @@
+---
+displayed_sidebar: restfulSidebar
+sidebar_positition: 25
+slug: /restful/List
+title: "List Aliases | RESTful"
+description: "This operation lists all existing collection aliases in the specified database. | RESTful"
+hide_table_of_contents: true
+sidebar_label: "List Aliases"
+sidebar_custom_props: { badges: ['post']}
+---
+
+# List Aliases
+
+import RestSpecs from '@site/src/components/RestSpecs';
+
+<RestSpecs specs={specs} endpoint={endpoint} method={method} target="milvus" lang="en-US" />
+
+export const specs = {"summary":"List Aliases","deprecated":false,"description":"This operation lists all existing collection aliases in the specified <include target=\"milvus\">database</include><include target=\"zilliz\">Zilliz Cloud cluster</include>.","x-i18n":{"zh-CN":{"summary":"查看 Alias 列表","description":"本接口可列出指定<include target=\"milvus\">数据库</include><include target=\"zilliz\"> Zilliz Cloud 集群</include>中的所有 Collection 别名。"}},"tags":["Alias Operations (V2)"],"parameters":[{"name":"Authorization","in":"header","description":"The authentication token should be <include target=\"zilliz\">an API key with appropriate privileges or </include>a pair of colon-joined username and password, like `username:password`.","required":true,"example":"Bearer {{TOKEN}}","schema":{"type":"string"},"x-i18n":{"zh-CN":{"description":"认证令牌，应为<include target=\"zilliz\">具备适当权限的 API 密钥或</include>用冒号分隔的用户名和密码，如 `username:password`。"}}}],"requestBody":{"content":{"application/json":{"schema":{"type":"object","properties":{"dbName":{"type":"string","description":"The name of an existing database.","default":"default","x-i18n":{"zh-CN":{"description":"已存在的数据库名称。"}},"x-include-target":["milvus"]},"collectionName":{"type":"string","description":"The name of an existing collection. If specified, only returns aliases of the specified collection. If not specified, returns aliases of all collections in the database.","default":"default","x-i18n":{"zh-CN":{"description":"已存在的 Collection 名称。若指定，仅返回该 Collection 的所有 Alias。若不指定将返回所有 Alias。"}}}}},"examples":{"1":{"summary":"example","x-include-target":["milvus"],"value":{"dbName":"default"}},"2":{"summary":"example","x-include-target":["zilliz"],"value":{}}}}}},"responses":{"200":{"description":"A list of collection aliases. ","x-i18n":{"zh-CN":{"description":"返回 Collection 别名列表。"}},"content":{"application/json":{"schema":{"anyOf":[{"x-tab-label":"success","type":"object","properties":{"code":{"description":"Response code.","x-i18n":{"zh-CN":{"description":"响应码。"}},"type":"integer","example":0},"data":{"type":"array","items":{"type":"string","description":"A list of item objects.","x-i18n":{"zh-CN":{"description":"对象列表。"}}},"description":"Response payload which is a list of item objects.","x-i18n":{"zh-CN":{"description":"响应载荷，为元素对象列表。"}}}}},{"x-tab-label":"failure","description":"Returns an error message.","x-i18n":{"zh-CN":{"description":"返回错误消息。"}},"x-i18n-langs":["zh-CN"],"type":"object","properties":{"code":{"type":"integer","description":"Response code.","x-i18n":{"zh-CN":{"description":"响应码。"}}},"message":{"type":"string","description":"Error message.","x-i18n":{"zh-CN":{"description":"错误描述。"}}}}}]},"examples":{"1":{"summary":"success","x-target-response":"OPTION 1","value":{"code":0,"data":["bob"]}},"2":{"summary":"failure","x-target-response":"OPTION 2","value":{"code":0,"message":"The token is illegal."}}}}}}},"security":[]}
+export const endpoint = "/v2/vectordb/aliases/list"
+export const method = "post"
