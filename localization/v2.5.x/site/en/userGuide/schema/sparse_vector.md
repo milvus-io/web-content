@@ -535,9 +535,18 @@ sparse.<span class="hljs-title function_">put</span>(1000L, <span class="hljs-nu
       </svg>
     </button></h2><p>When using sparse vectors in Milvus, consider the following limits:</p>
 <ul>
-<li><p>Currently, only the <strong>IP</strong> distance metric is supported for sparse vectors.</p></li>
+<li><p>Currently, only the <strong>IP</strong> distance metric is supported for sparse vectors. The high dimensionality of sparse vectors makes L2 and cosine distance impractical.</p></li>
 <li><p>For sparse vector fields, only the <strong>SPARSE_INVERTED_INDEX</strong> and <strong>SPARSE_WAND</strong> index types are supported.</p></li>
-<li><p>Currently, <a href="/docs/range-search.md">range search</a>, <a href="/docs/grouping-search.md">grouping search</a>, and <a href="/docs/with-iterators.md">search iterator</a> are not supported for sparse vectors.</p></li>
+<li><p>The data types supported for sparse vectors:</p>
+<ul>
+<li>The dimension part must be an unsigned 32-bit integer;</li>
+<li>The value part can be a non-negative 32-bit floating-point number.</li>
+</ul></li>
+<li><p>Sparse vectors must meet the following requirements for insertion and search:</p>
+<ul>
+<li>At least one value in the vector is non-zero;</li>
+<li>Vector indices are non-negative.</li>
+</ul></li>
 </ul>
 <h2 id="FAQ" class="common-anchor-header">FAQ<button data-href="#FAQ" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -555,20 +564,14 @@ sparse.<span class="hljs-title function_">put</span>(1000L, <span class="hljs-nu
         ></path>
       </svg>
     </button></h2><ul>
-<li><p><strong>What distance metric is supported for sparse vectors?</strong></p>
-<p>Sparse vectors only support the Inner Product (IP) distance metric due to the high dimensionality of sparse vectors, which makes L2 distance and cosine distance impractical.</p></li>
 <li><p><strong>Can you explain the difference between SPARSE_INVERTED_INDEX and SPARSE_WAND, and how do I choose between them?</strong></p>
 <p><strong>SPARSE_INVERTED_INDEX</strong> is a traditional inverted index, while <strong>SPARSE_WAND</strong> uses the <a href="https://dl.acm.org/doi/10.1145/956863.956944">Weak-AND</a> algorithm to reduce the number of full IP distance evaluations during search. <strong>SPARSE_WAND</strong> is typically faster, but its performance can decline with increasing vector density. To choose between them, conduct experiments and benchmarks based on your specific dataset and use case.</p></li>
 <li><p><strong>How should I choose the drop_ratio_build and drop_ratio_search parameters?</strong></p>
 <p>The choice of <strong>drop_ratio_build</strong> and <strong>drop_ratio_search</strong> depends on the characteristics of your data and your requirements for search latency/throughput and accuracy.</p></li>
-<li><p><strong>What data types are supported for sparse embeddings?</strong></p>
-<p>The dimension part must be an unsigned 32-bit integer, and the value part can be a non-negative 32-bit floating-point number.</p></li>
 <li><p><strong>Can the dimension of a sparse embedding be any discrete value within the uint32 space?</strong></p>
 <p>Yes, with one exception. The dimension of a sparse embedding can be any value in the range of <code translate="no">[0, maximum of uint32)</code>. This means you cannot use the maximum value of uint32.</p></li>
 <li><p><strong>Are searches on growing segments conducted through an index or by brute force?</strong></p>
 <p>Searches on growing segments are conducted through an index of the same type as the sealed segment index. For new growing segments before the index is built, a brute force search is used.</p></li>
 <li><p><strong>Is it possible to have both sparse and dense vectors in a single collection?</strong></p>
 <p>Yes, with multiple vector type support, you can create collections with both sparse and dense vector columns and perform hybrid searches on them.</p></li>
-<li><p><strong>What are the requirements for sparse embeddings to be inserted or searched?</strong></p>
-<p>Sparse embeddings must have at least one non-zero value, and vector indices must be non-negative.</p></li>
 </ul>
