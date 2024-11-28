@@ -2,7 +2,7 @@
 
 This operation returns the state of a specified bulk-insert task.
 
-<div class="alert note">
+<div class="alert warning">
 
 This function is deprecated in v2.4.x and will be removed in a future release. Please use `get_import_progress()` instead.
 
