@@ -2,7 +2,7 @@
 
 This operation lists all bulk-insert tasks.
 
-<div class="alert warn">
+<div class="alert warning">
 
 This function is deprecated in v2.4.x and will be removed in a future release. Please use `list_import_jobs()` instead.
 
