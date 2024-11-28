@@ -835,9 +835,10 @@ Match operators include:​
 - `like`: Match constants or prefixes (prefix%), infixes (%infix%), and suffixes (%suffix) within constants. It relies on a brute-force search mechanism using wildcards and does not involve text tokenization. While it can achieve exact matches, its query efficiency is relatively low, making it suitable for simple matching tasks or queries on smaller datasets.​
 
 - `TEXT_MATCH`: Match specific terms or keywords on VARCHAR fields, using tokenization and inverted index to enable efficient text search. Compared to `like`, `TEXT_MATCH` offers more advanced text tokenization and filtering capabilities. It is suited for large-scale datasets where higher query performance is required for complex text search scenarios.​
+    
     <div class="alert note">
 
-    To use the `TEXT_MATCH` filter expression, you must enable text matching for the target `VARCHAR` field when creating the collection. For details, refer to [​Keyword Match](keyword-match.md).​
+    To use the `TEXT_MATCH` filter expression, you must enable text matching for the target `VARCHAR` field when creating the collection. For details, refer to [Text Match](keyword-match.md).​
 
     </div>
 
@@ -1022,11 +1023,11 @@ The filtered results are as follows:​
 
 ```
 
-#### Example 3: Keyword match on VARCHAR fields​
+#### Example 3: Text match on VARCHAR fields​
 
-The `TEXT_MATCH` expression is used for keyword match on `VARCHAR` fields. By default, it applies an **OR** logic, but you can combine it with other logical operators to create more complex query conditions. For details, refer to [​Keyword Match](keyword-match.md).​
+The `TEXT_MATCH` expression is used for text match on `VARCHAR` fields. By default, it applies an **OR** logic, but you can combine it with other logical operators to create more complex query conditions. For details, refer to [Text Match](keyword-match.md).​
 
-The following example demonstrates how to use the `TEXT_MATCH` expression to filter products where the `description` field contains either the keyword `"Apple"` or `"iPhone"`:​
+The following example demonstrates how to use the `TEXT_MATCH` expression to filter products where the `description` field contains either the term `"Apple"` or `"iPhone"`:​
 
 <div class="multipleCode">
   <a href="#python">Python </a>

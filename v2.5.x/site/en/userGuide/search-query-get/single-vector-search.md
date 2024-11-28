@@ -946,11 +946,11 @@ AUTOINDEX considerably flattens the learning curve of ANN searches. However, the
 
     For details on full-text search, refer to [​Full Text Search](full-text-search.md).​
 
-- Keyword Match​
+- Text Match​
 
-    Keyword match in Milvus enables precise document retrieval based on specific terms. This feature is primarily used for filtered search to satisfy specific conditions and can incorporate scalar filtering to refine query results, allowing similarity searches within vectors that meet scalar criteria.​
+    Text match in Milvus enables precise document retrieval based on specific terms. This feature is primarily used for filtered search to satisfy specific conditions and can incorporate scalar filtering to refine query results, allowing similarity searches within vectors that meet scalar criteria.​
 
-    For details on keyword match, refer to [​Keyword Match](keyword-match.md).​
+    For details on text match, refer to [Text Match](keyword-match.md).​
 
 - Use Partition Key​
 

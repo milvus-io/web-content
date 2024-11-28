@@ -38,7 +38,7 @@ Milvus 2.5 introduces a built-in Cluster Management WebUI, reducing system maint
 
 Milvus 2.5 leverages analyzers and indexing from Tantivy for text preprocessing and index building, supporting precise natural language matching of text data based on specific terms. This feature is primarily used for filtered search to satisfy specific conditions and can incorporate scalar filtering to refine query results, allowing similarity searches within vectors that meet scalar criteria.
 
-For details, refer to [Keyword Match](keyword-match.md).
+For details, refer to [Text Match](keyword-match.md).
 
 #### Bitmap Index
 

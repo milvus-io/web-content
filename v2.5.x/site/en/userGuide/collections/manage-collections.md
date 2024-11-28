@@ -85,7 +85,7 @@ For more information about searches and queries, refer to the articles in the [�
 
 - [​Full-Text Search](full-text-search.md)​
 
-- [Keyword Match](keyword-match.md)​
+- [Text Match](keyword-match.md)​
 
 In addition, Milvus also provides enhancements to improve search performance and efficiency. They are disabled by default, and you can enable and use them according to your service requirements. They are​
 

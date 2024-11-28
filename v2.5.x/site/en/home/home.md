@@ -101,7 +101,7 @@ id: home.md
 _Nov 2024 - Milvus 2.5.0 release_
 
 - Added guidance on how to [conduct full text search](full-text-search.md).
-- Added guidance on how to [conduct keyword match](keyword-match.md).
+- Added guidance on how to [conduct text match](keyword-match.md).
 - Added guidance on how to [enable nullable and default values](nullable-and-default.md).
 - Added descriptions of [analyzers](analyzer-overview.md).
 - Added descriptions of [bitmap indexes](bitmap.md).
