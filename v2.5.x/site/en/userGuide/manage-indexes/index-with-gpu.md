@@ -191,7 +191,7 @@ collection.search(
 
 When using GPU indexes, be aware of certain constraints:
 
-- For __GPU_IVF_FLAT__, the maximum value for __limit__ is 256.
+- For __GPU_IVF_FLAT__, the maximum value for __limit__ is 1024.
 
 - For __GPU_IVF_PQ__ and __GPU_CAGRA__, the maximum value for __limit__ is 1024.
 

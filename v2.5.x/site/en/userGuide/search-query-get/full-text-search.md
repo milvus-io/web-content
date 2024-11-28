@@ -31,7 +31,7 @@ Full text search simplifies the process of text-based searching by eliminating t
 
 5. **BM25 scoring**: During a search, Milvus applies the BM25 algorithm to calculate scores for the stored documents and ranks matched results based on relevance to the query text.​
 
-![Full text search](../../../assets/full-text-search.png)
+![Full text search](../../../../assets/full-text-search.png)
 
 To use full text search, follow these main steps:​
 
