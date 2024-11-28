@@ -929,9 +929,9 @@ curl --request POST \​
 <li><p>Full-Text Search​</p>
 <p>Full text search is a feature that retrieves documents containing specific terms or phrases in text datasets, then ranking the results based on relevance. This feature overcomes semantic search limitations, which might overlook precise terms, ensuring you receive the most accurate and contextually relevant results. Additionally, it simplifies vector searches by accepting raw text input, automatically converting your text data into sparse embeddings without the need to manually generate vector embeddings.​</p>
 <p>For details on full-text search, refer to <a href="/docs/full-text-search.md">​Full Text Search</a>.​</p></li>
-<li><p>Keyword Match​</p>
-<p>Keyword match in Milvus enables precise document retrieval based on specific terms. This feature is primarily used for filtered search to satisfy specific conditions and can incorporate scalar filtering to refine query results, allowing similarity searches within vectors that meet scalar criteria.​</p>
-<p>For details on keyword match, refer to <a href="/docs/keyword-match.md">​Keyword Match</a>.​</p></li>
+<li><p>Text Match​</p>
+<p>Text match in Milvus enables precise document retrieval based on specific terms. This feature is primarily used for filtered search to satisfy specific conditions and can incorporate scalar filtering to refine query results, allowing similarity searches within vectors that meet scalar criteria.​</p>
+<p>For details on text match, refer to <a href="/docs/keyword-match.md">Text Match</a>.​</p></li>
 <li><p>Use Partition Key​</p>
 <p>Involving multiple scalar fields in metadata filtering and using a rather complicated filtering condition may affect search efficiency. Once you set a scalar field as the partition key and use a filtering condition involving the partition key in the search request, it can help restrict the search scope within the partitions corresponding to the specified partition key values. ​</p>
 <p>For details on the partition key, refer to <a href="/docs/use-partition-key.md">​Use Partition Key</a>.​</p></li>

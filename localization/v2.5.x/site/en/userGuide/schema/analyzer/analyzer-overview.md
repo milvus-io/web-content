@@ -24,12 +24,12 @@ summary: >-
         ></path>
       </svg>
     </button></h1><p>In text processing, an <strong>analyzer</strong> is a crucial component that converts raw text into a structured, searchable format. Each analyzer typically consists of two core elements: <strong>tokenizer</strong> and <strong>filter</strong>. Together, they transform input text into tokens, refine these tokens, and prepare them for efficient indexing and retrieval.​</p>
-<p>In Milvus, analyzers are configured during collection creation when you add <code translate="no">VARCHAR</code> fields to the collection schema. Tokens produced by an analyzer can be used to build an index for keyword matching or converted into sparse embeddings for full text search. For more information, refer to <a href="/docs/keyword-match.md">​Keyword Match</a> or <a href="/docs/full-text-search.md">​Full Text Search</a>.​</p>
+<p>In Milvus, analyzers are configured during collection creation when you add <code translate="no">VARCHAR</code> fields to the collection schema. Tokens produced by an analyzer can be used to build an index for text matching or converted into sparse embeddings for full text search. For more information, refer to <a href="/docs/keyword-match.md">Text Match</a> or <a href="/docs/full-text-search.md">​Full Text Search</a>.​</p>
 <div class="alert note">
 <p>The use of analyzers may impact performance:​</p>
 <ul>
 <li><p><strong>Full text search:</strong> For full text search, DataNode and <strong>QueryNode</strong> channels consume data more slowly because they must wait for tokenization to complete. As a result, newly ingested data takes longer to become available for search.​</p></li>
-<li><p><strong>Keyword match:</strong> For keyword matching, index creation is also slower since tokenization needs to finish before an index can be built.​</p></li>
+<li><p><strong>Text match:</strong> For text matching, index creation is also slower since tokenization needs to finish before an index can be built.​</p></li>
 </ul>
 </div>
 <h2 id="Anatomy-of-an-analyzer​" class="common-anchor-header">Anatomy of an analyzer​<button data-href="#Anatomy-of-an-analyzer​" class="anchor-icon" translate="no">

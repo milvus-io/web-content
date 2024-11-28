@@ -25,7 +25,7 @@ title: Hybrid Search with Milvus
 <p>Milvus supports Dense, Sparse, and Hybrid retrieval methods:</p>
 <ul>
 <li>Dense Retrieval: Utilizes semantic context to understand the meaning behind queries.</li>
-<li>Sparse Retrieval: Emphasizes keyword matching to find results based on specific terms, equivalent to full-text search.</li>
+<li>Sparse Retrieval: Emphasizes text matching to find results based on specific terms, equivalent to full-text search.</li>
 <li>Hybrid Retrieval: Combines both Dense and Sparse approaches, capturing the full context and specific keywords for comprehensive search results.</li>
 </ul>
 <p>By integrating these methods, the Milvus Hybrid Search balances semantic and lexical similarities, improving the overall relevance of search outcomes. This notebook will walk through the process of setting up and using these retrieval strategies, highlighting their effectiveness in various search scenarios.</p>

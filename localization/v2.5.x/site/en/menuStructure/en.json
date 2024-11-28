@@ -702,7 +702,7 @@
             "children": []
           },
           {
-            "label": "Keyword Match",
+            "label": "Text Match",
             "id": "keyword-match.md",
             "order": 7,
             "children": []

@@ -125,7 +125,7 @@ Here you will learn about what Milvus is, and how to install, use, and deploy Mi
     </button></h2><p><em>Nov 2024 - Milvus 2.5.0 release</em></p>
 <ul>
 <li>Added guidance on how to <a href="/docs/full-text-search.md">conduct full text search</a>.</li>
-<li>Added guidance on how to <a href="/docs/keyword-match.md">conduct keyword match</a>.</li>
+<li>Added guidance on how to <a href="/docs/keyword-match.md">conduct text match</a>.</li>
 <li>Added guidance on how to <a href="/docs/nullable-and-default.md">enable nullable and default values</a>.</li>
 <li>Added descriptions of <a href="/docs/analyzer-overview.md">analyzers</a>.</li>
 <li>Added descriptions of <a href="/docs/bitmap.md">bitmap indexes</a>.</li>

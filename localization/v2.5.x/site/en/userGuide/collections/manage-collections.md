@@ -163,7 +163,7 @@ title: Collection Explained​
 <li><p><a href="/docs/with-iterators.md">​Search Iterator</a>​</p></li>
 <li><p><a href="/docs/get-and-scalar-query.md">​Query</a>​</p></li>
 <li><p><a href="/docs/full-text-search.md">​Full-Text Search</a>​</p></li>
-<li><p><a href="/docs/keyword-match.md">Keyword Match</a>​</p></li>
+<li><p><a href="/docs/keyword-match.md">Text Match</a>​</p></li>
 </ul>
 <p>In addition, Milvus also provides enhancements to improve search performance and efficiency. They are disabled by default, and you can enable and use them according to your service requirements. They are​</p>
 <ul>
