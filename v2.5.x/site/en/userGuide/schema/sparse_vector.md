@@ -563,17 +563,21 @@ For more information on similarity search parameters, refer to [​Basic ANN Sea
 
 When using sparse vectors in Milvus, consider the following limits:
 
-- Currently, only the __IP__ distance metric is supported for sparse vectors.
+- Currently, only the __IP__ distance metric is supported for sparse vectors. The high dimensionality of sparse vectors makes L2 and cosine distance impractical.
 
 - For sparse vector fields, only the __SPARSE_INVERTED_INDEX__ and __SPARSE_WAND__ index types are supported.
 
-- Currently, [range search](range-search.md), [grouping search](grouping-search.md), and [search iterator](with-iterators.md) are not supported for sparse vectors.
+- The data types supported for sparse vectors:
+
+    - The dimension part must be an unsigned 32-bit integer;
+    - The value part can be a non-negative 32-bit floating-point number.
+
+- Sparse vectors must meet the following requirements for insertion and search:
+
+    - At least one value in the vector is non-zero;
+    - Vector indices are non-negative.
 
 ## FAQ
-
-- __What distance metric is supported for sparse vectors?__
-
-    Sparse vectors only support the Inner Product (IP) distance metric due to the high dimensionality of sparse vectors, which makes L2 distance and cosine distance impractical.
 
 - __Can you explain the difference between SPARSE_INVERTED_INDEX and SPARSE_WAND, and how do I choose between them?__
 
@@ -582,10 +586,6 @@ When using sparse vectors in Milvus, consider the following limits:
 - __How should I choose the drop_ratio_build and drop_ratio_search parameters?__
 
     The choice of __drop_ratio_build__ and __drop_ratio_search__ depends on the characteristics of your data and your requirements for search latency/throughput and accuracy.
-
-- __What data types are supported for sparse embeddings?__
-
-    The dimension part must be an unsigned 32-bit integer, and the value part can be a non-negative 32-bit floating-point number.
 
 - __Can the dimension of a sparse embedding be any discrete value within the uint32 space?__
 
@@ -598,8 +598,3 @@ When using sparse vectors in Milvus, consider the following limits:
 - __Is it possible to have both sparse and dense vectors in a single collection?__
 
     Yes, with multiple vector type support, you can create collections with both sparse and dense vector columns and perform hybrid searches on them.
-
-- __What are the requirements for sparse embeddings to be inserted or searched?__
-
-    Sparse embeddings must have at least one non-zero value, and vector indices must be non-negative.
-
