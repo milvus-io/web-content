@@ -21,7 +21,7 @@ title: Grundlegende ANN-Suche
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Auf der Grundlage einer Indexdatei, in der die sortierte Reihenfolge der Vektoreinbettungen aufgezeichnet ist, findet die ANN-Suche (Approximate Nearest Neighbor) eine Untergruppe von Vektoreinbettungen auf der Grundlage des Abfragevektors in einer empfangenen Suchanfrage, vergleicht den Abfragevektor mit denen in der Untergruppe und liefert die ähnlichsten Ergebnisse. Mit der ANN-Suche bietet Milvus ein effizientes Sucherlebnis. Auf dieser Seite erfahren Sie, wie Sie grundlegende ANN-Suchen durchführen können.</p>
+    </button></h1><p>Basierend auf einer Indexdatei, die die sortierte Reihenfolge der Vektoreinbettungen aufzeichnet, findet die ANN-Suche (Approximate Nearest Neighbor) eine Untergruppe von Vektoreinbettungen, die auf dem Abfragevektor in einer empfangenen Suchanfrage basiert, vergleicht den Abfragevektor mit denen in der Untergruppe und liefert die ähnlichsten Ergebnisse. Mit der ANN-Suche bietet Milvus ein effizientes Sucherlebnis. Auf dieser Seite erfahren Sie, wie Sie grundlegende ANN-Suchen durchführen können.</p>
 <h2 id="Overview​" class="common-anchor-header">Überblick<button data-href="#Overview​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -66,7 +66,7 @@ title: Grundlegende ANN-Suche
         ></path>
       </svg>
     </button></h2><p>Bei der ANN-Suche bezieht sich eine Ein-Vektor-Suche auf eine Suche, die nur einen Abfragevektor umfasst. Basierend auf dem vorgefertigten Index und dem metrischen Typ, der in der Suchanfrage enthalten ist, findet Milvus die Top-K Vektoren, die dem Abfragevektor am ähnlichsten sind.</p>
-<p>In diesem Abschnitt erfahren Sie, wie Sie eine Ein-Vektor-Suche durchführen können. Das Code-Snippet geht davon aus, dass Sie eine Sammlung in einer <a href="/docs/de/create-collection-instantly#Quick-Setup">Quick-Setup-Art</a> erstellt haben. Die Suchanfrage enthält einen einzigen Abfragevektor und bittet Milvus, das Innere Produkt (IP) zu verwenden, um die Ähnlichkeit zwischen den Abfragevektoren und den Vektoren in der Sammlung zu berechnen und die drei ähnlichsten zurückzugeben.</p>
+<p>In diesem Abschnitt erfahren Sie, wie Sie eine Ein-Vektor-Suche durchführen können. Das Code-Snippet geht davon aus, dass Sie eine Sammlung in einer <a href="/docs/de/create-collection-instantly#Quick-Setup">Quick-Setup-Art</a> erstellt haben. Die Suchanfrage enthält einen einzelnen Abfragevektor und bittet Milvus, das Innere Produkt (IP) zu verwenden, um die Ähnlichkeit zwischen den Abfragevektoren und den Vektoren in der Sammlung zu berechnen und die drei ähnlichsten zurückzugeben.</p>
 <div class="multipleCode">
  <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#go">Go</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient​
@@ -775,7 +775,7 @@ curl --request POST \​
       </svg>
     </button></h2><p>Sie werden feststellen, dass der Parameter <code translate="no">limit</code>, der in den Suchanfragen enthalten ist, die Anzahl der Entitäten bestimmt, die in die Suchergebnisse aufgenommen werden. Dieser Parameter gibt die maximale Anzahl der Entitäten an, die in einer einzelnen Suche zurückgegeben werden sollen, und wird normalerweise als <strong>Top-K</strong> bezeichnet.</p>
 <p>Wenn Sie paginierte Suchanfragen durchführen möchten, können Sie eine Schleife verwenden, um mehrere Suchanfragen zu senden, wobei die Parameter <strong>Limit</strong> und <strong>Offset</strong> in jeder Suchanfrage enthalten sind. Insbesondere können Sie den Parameter <strong>Limit</strong> auf die Anzahl der Entitäten setzen, die Sie in die aktuellen Abfrageergebnisse aufnehmen möchten, und den Parameter <strong>Offset</strong> auf die Gesamtzahl der Entitäten, die bereits zurückgegeben wurden.</p>
-<p>Die nachstehende Tabelle zeigt, wie Sie die Parameter <strong>Limit</strong> und <strong>Offset</strong> für paginierte Abfragen einstellen, wenn 100 Entitäten auf einmal zurückgegeben werden.</p>
+<p>Die folgende Tabelle zeigt, wie Sie die Parameter <strong>Limit</strong> und <strong>Offset</strong> für paginierte Abfragen einstellen, wenn 100 Entitäten auf einmal zurückgegeben werden.</p>
 <table data-block-token="WHdZdkFtYol0QWxfjYzcMsyrnHd"><thead><tr><th data-block-token="YRpAdF69noO2EwxQJKkcRoB4nGp" colspan="1" rowspan="1"><p data-block-token="EhjLdXqY7op6anxCtOtc8KeKnkh">Abfragen</p>
 </th><th data-block-token="D6tSdFQQAouKA3xol6RcGFUCn4c" colspan="1" rowspan="1"><p data-block-token="KjGadCmVxoLmmIxjI3McBr18nFg">Zurückzugebende Entitäten pro Abfrage</p>
 </th><th data-block-token="IDzvd2OCho3Qp0xMwXWcMZLlnWg" colspan="1" rowspan="1"><p data-block-token="RP69d4efqoAHXkxkY8OcBwPXn9e">Bereits zurückgegebene Einträge insgesamt</p>
@@ -904,9 +904,9 @@ curl --request POST \​
 <li><p>Volltextsuche</p>
 <p>Die Volltextsuche ist eine Funktion, die Dokumente abruft, die bestimmte Begriffe oder Phrasen in Textdatensätzen enthalten, und dann die Ergebnisse nach Relevanz einstuft. Diese Funktion überwindet die Einschränkungen der semantischen Suche, bei der präzise Begriffe übersehen werden können, und stellt sicher, dass Sie die genauesten und kontextrelevanten Ergebnisse erhalten. Darüber hinaus vereinfacht sie die Vektorsuche, indem sie Rohtexteingaben akzeptiert und Ihre Textdaten automatisch in spärliche Einbettungen konvertiert, ohne dass Sie manuell Vektoreinbettungen erstellen müssen.</p>
 <p>Einzelheiten zur Volltextsuche finden Sie unter <a href="/docs/de/full-text-search.md">Volltextsuche</a>.</p></li>
-<li><p>Schlüsselwort-Abgleich</p>
-<p>Der Schlüsselwortabgleich in Milvus ermöglicht die präzise Suche nach Dokumenten auf der Grundlage bestimmter Begriffe. Diese Funktion wird in erster Linie für die gefilterte Suche nach bestimmten Bedingungen verwendet und kann skalare Filter zur Verfeinerung der Abfrageergebnisse einbeziehen, so dass Ähnlichkeitssuchen innerhalb von Vektoren, die skalare Kriterien erfüllen, möglich sind.</p>
-<p>Weitere Informationen zur Schlüsselwortsuche finden Sie unter <a href="/docs/de/keyword-match.md">Schlüsselwortsuche</a>.</p></li>
+<li><p>Textabgleich</p>
+<p>Der Textabgleich in Milvus ermöglicht das präzise Auffinden von Dokumenten auf der Grundlage bestimmter Begriffe. Diese Funktion wird in erster Linie für die gefilterte Suche nach bestimmten Bedingungen verwendet und kann eine skalare Filterung zur Verfeinerung der Abfrageergebnisse beinhalten, die eine Ähnlichkeitssuche innerhalb von Vektoren ermöglicht, die skalare Kriterien erfüllen.</p>
+<p>Einzelheiten zum Textabgleich finden Sie unter <a href="/docs/de/keyword-match.md">Textabgleich</a>.</p></li>
 <li><p>Partitionsschlüssel verwenden</p>
 <p>Die Einbeziehung mehrerer skalarer Felder in die Metadatenfilterung und die Verwendung einer recht komplizierten Filterbedingung können die Sucheffizienz beeinträchtigen. Wenn Sie ein skalares Feld als Partitionsschlüssel festlegen und eine Filterbedingung verwenden, die den Partitionsschlüssel in der Suchanfrage einbezieht, kann dies dazu beitragen, den Suchbereich auf die Partitionen zu beschränken, die den angegebenen Partitionsschlüsselwerten entsprechen. </p>
 <p>Einzelheiten zum Partitionsschlüssel finden Sie unter <a href="/docs/de/use-partition-key.md">Partitionsschlüssel verwenden</a>.</p></li>
@@ -914,6 +914,6 @@ curl --request POST \​
 <p>In Milvus ermöglichen memory-mapped Dateien die direkte Abbildung von Dateiinhalten in den Speicher. Diese Funktion verbessert die Speichereffizienz, insbesondere in Situationen, in denen der verfügbare Speicher knapp ist, aber ein vollständiges Laden der Daten nicht möglich ist. Dieser Optimierungsmechanismus kann die Datenkapazität erhöhen und gleichzeitig die Leistung bis zu einer bestimmten Grenze sicherstellen; wenn jedoch die Datenmenge den Speicherplatz zu sehr übersteigt, kann die Such- und Abfrageleistung ernsthaft beeinträchtigt werden, weshalb Sie diese Funktion je nach Bedarf ein- oder ausschalten sollten.</p>
 <p>Einzelheiten zu den mmap-Einstellungen finden Sie unter <a href="/docs/de/mmap.md">Verwendung von mmap</a>.</p></li>
 <li><p>Clustering-Verdichtung</p>
-<p>Clustering Compaction wurde entwickelt, um die Suchleistung zu verbessern und die Kosten in großen Sammlungen zu reduzieren. Dieser Leitfaden hilft Ihnen, die Clustering-Verdichtung zu verstehen und wie diese Funktion die Suchleistung verbessern kann.</p>
+<p>Clustering Compaction wurde entwickelt, um die Suchleistung zu verbessern und die Kosten in großen Sammlungen zu reduzieren. Dieses Handbuch hilft Ihnen, die Clustering-Verdichtung zu verstehen und wie diese Funktion die Suchleistung verbessern kann.</p>
 <p>Einzelheiten zur Clustering-Kompaktierung finden Sie unter <a href="/docs/de/clustering-compaction.md">Clustering-Kompaktierung</a>.</p></li>
 </ul>

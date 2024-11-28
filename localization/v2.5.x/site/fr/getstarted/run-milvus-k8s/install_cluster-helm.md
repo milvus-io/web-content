@@ -83,11 +83,11 @@ NAME                  PROVISIONER                  RECLAIMPOLICY    VOLUMEBIINDI
         ></path>
       </svg>
     </button></h2><p>Avant d'installer Milvus Helm Charts, vous devez ajouter le référentiel Milvus Helm.</p>
-<pre><code translate="no">$ helm repo <span class="hljs-keyword">add</span> milvus https:<span class="hljs-comment">//github.com/zilliztech/milvus-helm</span>
+<pre><code translate="no">$ helm repo <span class="hljs-keyword">add</span> milvus https:<span class="hljs-comment">//zilliztech.github.io/milvus-helm/</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <p>Le dépôt Milvus Helm Charts à l'adresse <code translate="no">https://github.com/milvus-io/milvus-helm</code> a été archivé et vous pouvez obtenir d'autres mises à jour à l'adresse <code translate="no">https://github.com/zilliztech/milvus-helm</code> comme suit :</p>
-<pre><code translate="no" class="language-shell">helm repo add zilliztech https://github.com/zilliztech/milvus-helm
+<pre><code translate="no" class="language-shell">helm repo add zilliztech https://zilliztech.github.io/milvus-helm/
 helm repo update
 <span class="hljs-comment"># upgrade existing helm release</span>
 helm upgrade my-release zilliztech/milvus

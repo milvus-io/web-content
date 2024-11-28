@@ -67,7 +67,7 @@ NAME                  PROVISIONER                  RECLAIMPOLICY    VOLUMEBIINDI
 <div class="alert note">
 <p>Si vous rencontrez des problèmes en tirant l'image, contactez-nous à l'adresse <a href="mailto:community@zilliz.com">community@zilliz.com</a> en décrivant le problème et nous vous fournirons l'assistance nécessaire.</p>
 </div>
-<h2 id="Install-Milvus-Helm-Chart" class="common-anchor-header">Installer Milvus Helm Chart<button data-href="#Install-Milvus-Helm-Chart" class="anchor-icon" translate="no">
+<h2 id="Install-Milvus-Helm-Chart" class="common-anchor-header">Installation de Milvus Helm Chart<button data-href="#Install-Milvus-Helm-Chart" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -83,11 +83,11 @@ NAME                  PROVISIONER                  RECLAIMPOLICY    VOLUMEBIINDI
         ></path>
       </svg>
     </button></h2><p>Avant d'installer Milvus Helm Charts, vous devez ajouter le référentiel Milvus Helm.</p>
-<pre><code translate="no">$ helm repo <span class="hljs-keyword">add</span> milvus https:<span class="hljs-comment">//github.com/zilliztech/milvus-helm</span>
+<pre><code translate="no">$ helm repo <span class="hljs-keyword">add</span> milvus https:<span class="hljs-comment">//zilliztech.github.io/milvus-helm/</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <p>Le dépôt Milvus Helm Charts à l'adresse <code translate="no">https://github.com/milvus-io/milvus-helm</code> a été archivé et vous pouvez obtenir des mises à jour supplémentaires à l'adresse <code translate="no">https://github.com/zilliztech/milvus-helm</code> comme suit :</p>
-<pre><code translate="no" class="language-shell">helm repo add zilliztech https://github.com/zilliztech/milvus-helm
+<pre><code translate="no" class="language-shell">helm repo add zilliztech https://zilliztech.github.io/milvus-helm/
 helm repo update
 <span class="hljs-comment"># upgrade existing helm release</span>
 helm upgrade my-release zilliztech/milvus
@@ -160,7 +160,7 @@ my-release-pulsar-zookeeper-metadata-98zbr       0/1   Completed  0        3m24s
 <div class="alert note">
 <p>Si vous avez déployé Milvus en mode autonome, modifiez le nom du pod de <code translate="no">my-release-milvus-proxy-xxxxxxxxxx-xxxxx</code> à <code translate="no">my-release-milvus-xxxxxxxxxx-xxxxx</code>.</p>
 </div>
-<p>Ensuite, exécutez la commande suivante pour transférer un port local vers le port auquel Milvus sert.</p>
+<p>Ensuite, exécutez la commande suivante pour transférer un port local vers le port sur lequel Milvus fonctionne.</p>
 <pre><code translate="no" class="language-bash">$ kubectl port-forward service/my-release-milvus <span class="hljs-number">27017</span>:<span class="hljs-number">19530</span>
 <span class="hljs-title class_">Forwarding</span> <span class="hljs-keyword">from</span> <span class="hljs-number">127.0</span><span class="hljs-number">.0</span><span class="hljs-number">.1</span>:<span class="hljs-number">27017</span> -&gt; <span class="hljs-number">19530</span>
 <button class="copy-code-btn"></button></code></pre>
@@ -184,7 +184,7 @@ my-release-pulsar-zookeeper-metadata-98zbr       0/1   Completed  0        3m24s
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Si vous vous trouvez dans un environnement où le réseau est limité, suivez la procédure de cette section pour démarrer un cluster Milvus.</p>
+    </button></h2><p>Si vous vous trouvez dans un environnement où le réseau est restreint, suivez la procédure de cette section pour démarrer un cluster Milvus.</p>
 <h3 id="1-Get-Milvus-manifest" class="common-anchor-header">1. Obtenir le manifeste Milvus</h3><p>Exécutez la commande suivante pour obtenir le manifeste Milvus.</p>
 <pre><code translate="no" class="language-shell">$ helm template my-release milvus/milvus &gt; milvus_manifest.yaml
 <button class="copy-code-btn"></button></code></pre>

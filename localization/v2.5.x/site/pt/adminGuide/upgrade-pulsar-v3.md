@@ -26,7 +26,7 @@ title: Atualizar a Pulsar em Milvus de V2 para V3
 <ol>
 <li><p>O processo de atualização requer uma breve interrupção do serviço (normalmente demora alguns minutos a mais de dez minutos, dependendo da quantidade de dados).</p></li>
 <li><p>Antes da operação, é necessário impedir que todos os clientes em execução escrevam dados no Milvus. Caso contrário, os dados escritos podem perder-se.</p></li>
-<li><p>Este artigo assume que o Milvus está instalado no espaço de nomes <code translate="no">default</code> e tem o nome <code translate="no">my-release</code>. Por favor, altere os parâmetros para o seu próprio espaço de nomes e nome de lançamento enquanto executa os comandos copiados desta página.</p></li>
+<li><p>Este artigo pressupõe que o Milvus está instalado no espaço de nomes <code translate="no">default</code> e tem o nome <code translate="no">my-release</code>. Por favor, altere os parâmetros para o seu próprio espaço de nomes e nome de lançamento enquanto executa os comandos copiados desta página.</p></li>
 <li><p>Certifique-se de que o seu ambiente de trabalho tem permissões no namespace acima mencionado no cluster Kubernetes e que os seguintes comandos estão instalados.</p>
 <p>a. <code translate="no">kubectl</code> &gt;= 1.20</p>
 <p>b. <code translate="no">helm</code> &gt;= 3.14.0</p>
@@ -113,11 +113,11 @@ Forwarding <span class="hljs-keyword">from</span> <span class="hljs-number">127.
 <button class="copy-code-btn"></button></code></pre>
 <p>Saída.</p>
 <pre><code translate="no" class="language-yaml">{​
-<span class="hljs-string">&quot;segmentIDs&quot;</span>: [​
+  <span class="hljs-string">&quot;segmentIDs&quot;</span>: [​
     <span class="hljs-number">454097953998181000</span>,​
     <span class="hljs-number">454097953999383600</span>,​
     <span class="hljs-number">454097953998180800</span>​
-]​
+  ]​
 }​
 
 <button class="copy-code-btn"></button></code></pre></li>
@@ -223,15 +223,15 @@ head milvus.yaml -n <span class="hljs-number">20</span>​
 <pre><code translate="no" class="language-yaml">apiVersion: milvus.io/v1beta1​
 kind: Milvus​
 metadata:​
-annotations:​
+  annotations:​
     milvus.io/dependency-values-merged: <span class="hljs-string">&quot;true&quot;</span>​
     milvus.io/pod-service-label-added: <span class="hljs-string">&quot;true&quot;</span>​
     milvus.io/querynode-current-group-id: <span class="hljs-string">&quot;0&quot;</span>​
-creationTimestamp: <span class="hljs-string">&quot;2024-11-22T08:06:59Z&quot;</span>​
-finalizers:​
-- milvus.milvus.io/finalizer​
-generation: 3​
-labels:​
+  creationTimestamp: <span class="hljs-string">&quot;2024-11-22T08:06:59Z&quot;</span>​
+  finalizers:​
+  - milvus.milvus.io/finalizer​
+  generation: 3​
+  labels:​
     app: milvus​
     milvus.io/operator-version: 1.1.2​
 name: my-release​
@@ -239,23 +239,23 @@ namespace: default​
 resourceVersion: <span class="hljs-string">&quot;692217324&quot;</span>​
 uid: 7a469ed0-9df1-494e-bd9a-340fac4305b5​
 spec:​
-components:​
+  components:​
 
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>Crie um arquivo <code translate="no">patch.yaml</code> com o seguinte conteúdo.</p>
 <pre><code translate="no" class="language-yaml"># a patch to retain etcd &amp; storage data and <span class="hljs-built_in">delete</span> pulsar data while <span class="hljs-built_in">delete</span> milvus​
 spec:​
-dependencies:​
+  dependencies:​
     etcd:​
-    inCluster:​
+      inCluster:​
         deletionPolicy: Retain​
         pvcDeletion: <span class="hljs-literal">false</span>​
     storage:​
-    inCluster:​
+      inCluster:​
         deletionPolicy: Retain​
         pvcDeletion: <span class="hljs-literal">false</span>​
     pulsar:​
-    inCluster:​
+      inCluster:​
         deletionPolicy: Delete​
         pvcDeletion: <span class="hljs-literal">true</span>​
 
@@ -274,7 +274,7 @@ kubectl -n <span class="hljs-keyword">default</span> get milvus my-release​
 kubectl -n <span class="hljs-keyword">default</span> <span class="hljs-keyword">delete</span> milvus my-release --wait=<span class="hljs-literal">true</span>​
 
 <button class="copy-code-btn"></button></code></pre>
-<p>Saída: Observe que pode levar alguns minutos para o milvus parar graciosamente e para o operador excluir os volumes do pulsar.</p>
+<p>Saída: Note que pode levar alguns minutos para que o milvus pare graciosamente e para que o operador exclua os volumes do pulsar.</p>
 <pre><code translate="no" class="language-bash">milvus.milvus.io <span class="hljs-string">&quot;my-release&quot;</span> deleted​
 NAME         MODE      STATUS     UPDATED   AGE​
 my-release   cluster   Deleting   <span class="hljs-literal">True</span>      41m​
@@ -291,10 +291,10 @@ milvus.milvus.io <span class="hljs-string">&quot;my-release&quot;</span> deleted
 
 <button class="copy-code-btn"></button></code></pre></li>
 </ol>
-<h3 id="Start-Pulsar-V3-and-Milvus" class="common-anchor-header">Iniciar Pulsar V3 e Milvus</h3><p>Nesta etapa, você precisa iniciar os pods Pulsar V3 e Milvus. Há duas seções separadas disponíveis:</p>
+<h3 id="Start-Pulsar-V3-and-Milvus" class="common-anchor-header">Iniciar o Pulsar V3 e o Milvus</h3><p>Nesta etapa, você precisa iniciar os pods Pulsar V3 e Milvus. Há duas seções separadas disponíveis:</p>
 <ul>
 <li><p>Para o utilizador do Helm</p>
-<p>Se instalou o Milvus usando a tabela do Milvus Helm, vá para <a href="#For-Helm-User">For Helm User</a>.</p></li>
+<p>Se instalou o Milvus usando o gráfico do Milvus Helm, vá para <a href="#For-Helm-User">For Helm User</a>.</p></li>
 <li><p>Para utilizadores do Milvus Operator</p>
 <p>Se instalou o Milvus usando a carta Milvus Operator, vá para <a href="#For-Milvus-Operator-User">Para</a> o <a href="#For-Milvus-Operator-User">utilizador do Milvus Operator</a>.</p></li>
 </ul>
@@ -302,12 +302,12 @@ milvus.milvus.io <span class="hljs-string">&quot;my-release&quot;</span> deleted
 <li><p>Edite o <code translate="no">values.yaml</code> salvo no Passo anterior.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># change the following:​</span>
 pulsar:​
-enabled: false <span class="hljs-comment"># set to false​</span>
-<span class="hljs-comment"># you may also clean up rest fields under pulsar field​</span>
-<span class="hljs-comment"># it&#x27;s ok to keep them though.​</span>
+  enabled: false <span class="hljs-comment"># set to false​</span>
+  <span class="hljs-comment"># you may also clean up rest fields under pulsar field​</span>
+  <span class="hljs-comment"># it&#x27;s ok to keep them though.​</span>
 pulsarv3:​
-enabled: true​
-<span class="hljs-comment"># append other values for pulsar v3 chart if needs​</span>
+  enabled: true​
+  <span class="hljs-comment"># append other values for pulsar v3 chart if needs​</span>
 
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>Atualize seu repositório helm local</p>
@@ -368,13 +368,13 @@ my-release-pulsarv3-zookeeper<span class="hljs-number">-2</span>               <
 apiVersion: milvus.io/v1beta1​
 kind: Milvus​
 metadata:​
-annotations: null <span class="hljs-comment"># this field should be removed or set to null​</span>
-resourceVersion: null <span class="hljs-comment"># this field should be removed or set to null​</span>
-uid: null <span class="hljs-comment"># this field should be removed or set to null​</span>
+  annotations: null <span class="hljs-comment"># this field should be removed or set to null​</span>
+  resourceVersion: null <span class="hljs-comment"># this field should be removed or set to null​</span>
+  uid: null <span class="hljs-comment"># this field should be removed or set to null​</span>
 spec:​
-dependencies:​
+  dependencies:​
     pulsar:​
-    inCluster:​
+      inCluster:​
         chartVersion: pulsar-v3​
         <span class="hljs-comment"># delete all previous values for pulsar v2 and set it to null.​</span>
         <span class="hljs-comment"># you may add additional values here for pulsar v3 if you&#x27;re sure about it.​</span>

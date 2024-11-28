@@ -114,7 +114,7 @@ id: home.md
     </button></h2><p><em>2024 年 11 月 - Milvus 2.5.0 发布</em></p>
 <ul>
 <li>添加了如何<a href="/docs/zh/full-text-search.md">进行全文搜索</a>的指导。</li>
-<li>添加了如何<a href="/docs/zh/keyword-match.md">进行关键字匹配的</a>指导。</li>
+<li>添加了如何<a href="/docs/zh/keyword-match.md">进行文本匹配的</a>指导。</li>
 <li>添加了如何<a href="/docs/zh/nullable-and-default.md">启用可空值和默认值的</a>指导。</li>
 <li>已添加<a href="/docs/zh/analyzer-overview.md">分析器</a>说明。</li>
 <li>已添加<a href="/docs/zh/bitmap.md">位图索引的</a>说明。</li>

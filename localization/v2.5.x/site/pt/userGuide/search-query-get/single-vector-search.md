@@ -37,7 +37,7 @@ title: Pesquisa ANN básica
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>A pesquisa ANN e a pesquisa k-Nearest Neighbors (kNN) são os métodos habituais nas pesquisas de semelhança de vectores. Numa pesquisa kNN, é necessário comparar todos os vectores de um espaço vetorial com o vetor de consulta transportado no pedido de pesquisa antes de descobrir os mais semelhantes, o que consome muito tempo e recursos.</p>
+    </button></h2><p>A pesquisa ANN e a pesquisa k-Nearest Neighbors (kNN) são os métodos habituais nas pesquisas de semelhança de vectores. Numa pesquisa kNN, é necessário comparar todos os vectores num espaço vetorial com o vetor de consulta transportado no pedido de pesquisa antes de descobrir os mais semelhantes, o que consome muito tempo e recursos.</p>
 <p>Ao contrário das pesquisas kNN, um algoritmo de pesquisa ANN pede um ficheiro <strong>de índice</strong> que regista a ordem ordenada das incorporações vectoriais. Quando chega um pedido de pesquisa, pode utilizar o ficheiro de índice como referência para localizar rapidamente um subgrupo que provavelmente contém as incorporações vectoriais mais semelhantes ao vetor de consulta. Em seguida, pode utilizar o <strong>tipo de métrica</strong> especificado para medir a semelhança entre o vetor de consulta e os do subgrupo, ordenar os membros do grupo com base na semelhança com o vetor de consulta e descobrir os membros do grupo <strong>K de topo</strong>.</p>
 <p>As pesquisas ANN dependem de índices pré-construídos, e o rendimento da pesquisa, a utilização de memória e a correção da pesquisa podem variar com os tipos de índice escolhidos. É necessário equilibrar o desempenho e a correção da pesquisa. </p>
 <p>Para reduzir a curva de aprendizagem, Milvus fornece <strong>AUTOINDEX</strong>. Com o <strong>AUTOINDEX</strong>, o Milvus pode analisar a distribuição de dados dentro da sua coleção enquanto constrói o índice e define os parâmetros de índice mais optimizados com base na análise para atingir um equilíbrio entre o desempenho da pesquisa e a correção. </p>
@@ -255,7 +255,7 @@ curl --request POST \​
 
 <button class="copy-code-btn"></button></code></pre>
 <p>O Milvus classifica os resultados da pesquisa pelas suas pontuações de semelhança com o vetor de consulta, por ordem descendente. A pontuação de semelhança é também designada por distância ao vetor de consulta e os seus intervalos de valores variam consoante os tipos de métricas utilizados.</p>
-<p>A tabela a seguir lista os tipos de métrica aplicáveis e os intervalos de distância correspondentes.</p>
+<p>A tabela seguinte lista os tipos de métricas aplicáveis e os intervalos de distância correspondentes.</p>
 <table data-block-token="CTYBd8RSbogpjGxSmRCc937Qnud"><thead><tr><th data-block-token="Mk6idXTyjokI5FxIHgzc1FmhnLf" colspan="1" rowspan="1"><p data-block-token="DT2rdNtuYoJZPwxsZMCc9zTDnZf">Tipo de métrica</p>
 </th><th data-block-token="DlbbdGOQ8oy3DJxe57tcR4f9nee" colspan="1" rowspan="1"><p data-block-token="CnVsdS8KboXGUGx9rQFcB0G5nXb">Caraterísticas</p>
 </th><th data-block-token="QhwVdn1JvoCPd5x8Pxrck2QOnEf" colspan="1" rowspan="1"><p data-block-token="GQ4cdd3n4oNnjOxD9uhc5SCpnyh">Intervalo de distância</p>
@@ -626,7 +626,7 @@ curl --request POST \​
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Num resultado de pesquisa, o Milvus inclui os valores do campo primário e as distâncias/pontuações de similaridade das entidades que contêm os top-K vetor embeddings por defeito. Você pode incluir os nomes dos campos de destino em uma solicitação de pesquisa como os campos de saída para fazer com que os resultados da pesquisa carreguem os valores de outros campos nessas entidades.</p>
+    </button></h2><p>Num resultado de pesquisa, o Milvus inclui os valores do campo primário e as distâncias/pontuações de similaridade das entidades que contêm os vectores de incorporação top-K por defeito. Você pode incluir os nomes dos campos de destino em uma solicitação de pesquisa como os campos de saída para fazer com que os resultados da pesquisa carreguem os valores de outros campos nessas entidades.</p>
 <div class="multipleCode">
  <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#go">Go</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># 4. Single vector search​</span>
@@ -778,7 +778,7 @@ curl --request POST \​
 <p>A tabela abaixo descreve como definir os parâmetros <strong>Limite</strong> e <strong>Deslocamento</strong> para consultas paginadas ao retornar 100 Entidades de cada vez.</p>
 <table data-block-token="WHdZdkFtYol0QWxfjYzcMsyrnHd"><thead><tr><th data-block-token="YRpAdF69noO2EwxQJKkcRoB4nGp" colspan="1" rowspan="1"><p data-block-token="EhjLdXqY7op6anxCtOtc8KeKnkh">Consultas</p>
 </th><th data-block-token="D6tSdFQQAouKA3xol6RcGFUCn4c" colspan="1" rowspan="1"><p data-block-token="KjGadCmVxoLmmIxjI3McBr18nFg">Entidades a devolver por consulta</p>
-</th><th data-block-token="IDzvd2OCho3Qp0xMwXWcMZLlnWg" colspan="1" rowspan="1"><p data-block-token="RP69d4efqoAHXkxkY8OcBwPXn9e">Entidades já devolvidas no total</p>
+</th><th data-block-token="IDzvd2OCho3Qp0xMwXWcMZLlnWg" colspan="1" rowspan="1"><p data-block-token="RP69d4efqoAHXkxkY8OcBwPXn9e">Entidades já retornadas no total</p>
 </th></tr></thead><tbody><tr><td data-block-token="QkqCdnVafo68dGxGRmicOHEQnxe" colspan="1" rowspan="1"><p data-block-token="QyEBdwnZiolkYZxWLYPc59j6nL0">A <strong>**1ª**</strong> consulta</p>
 </td><td data-block-token="E4vsdiNZQowy6rxIy0ecRQC4nEc" colspan="1" rowspan="1"><p data-block-token="QYfudUm7uokKlIxw2n9cxKGKnyg">100</p>
 </td><td data-block-token="KpaFdQx6qow5zcxElk4clK8dnEp" colspan="1" rowspan="1"><p data-block-token="ZwAAd3eu8oYltYxeyCzcvmkLnbh">0</p>
@@ -891,22 +891,22 @@ curl --request POST \​
 <p>Para obter mais informações sobre filtragem de metadados e condições de filtragem, consulte <a href="/docs/pt/filtered-search.md">Pesquisa filtrada</a> e <a href="/docs/pt/boolean.md">Filtragem de metadados</a>.</p></li>
 <li><p>Pesquisa de intervalo</p>
 <p>É possível melhorar a relevância dos resultados da pesquisa restringindo a distância ou a pontuação das entidades retornadas dentro de um intervalo específico. No Milvus, uma pesquisa de intervalo envolve o desenho de dois círculos concêntricos com a incorporação de vetor mais semelhante ao vetor de consulta como o centro. O pedido de pesquisa especifica o raio de ambos os círculos, e o Milvus devolve todas as incorporações vectoriais que se enquadram no círculo exterior mas não no círculo interior.</p>
-<p>Para saber mais sobre a pesquisa de intervalo, consulte <a href="/docs/pt/range-search.md">Pesquisa de intervalo</a>.</p></li>
+<p>Para obter mais informações sobre a pesquisa de intervalo, consulte <a href="/docs/pt/range-search.md">Pesquisa de intervalo</a>.</p></li>
 <li><p>Pesquisa de agrupamento</p>
 <p>Se as entidades retornadas tiverem o mesmo valor em um campo específico, os resultados da pesquisa podem não representar a distribuição de todas as incorporações vetoriais no espaço vetorial. Para diversificar os resultados da pesquisa, considere o uso da pesquisa de agrupamento.</p>
 <p>Para saber mais sobre a pesquisa de agrupamento, consulte <a href="/docs/pt/grouping-search.md">Pesquisa de agrupamento</a>.</p></li>
 <li><p>Pesquisa híbrida</p>
-<p>Uma coleção pode incluir até quatro campos vectoriais para guardar as incorporações vectoriais geradas utilizando diferentes modelos de incorporação. Ao fazer isso, é possível usar uma pesquisa híbrida para ranquear novamente os resultados de pesquisa desses campos vetoriais, melhorando a taxa de recuperação.</p>
+<p>Uma coleção pode incluir até quatro campos vectoriais para guardar as incorporações vectoriais geradas utilizando diferentes modelos de incorporação. Ao fazer isso, é possível usar uma pesquisa híbrida para ranquear novamente os resultados da pesquisa desses campos vetoriais, melhorando a taxa de recuperação.</p>
 <p>Para saber mais sobre a pesquisa híbrida, consulte <a href="/docs/pt/multi-vector-search.md">Pesquisa híbrida</a>.</p></li>
 <li><p>Iterador de pesquisa</p>
-<p>Uma única pesquisa ANN retorna um máximo de 16.384 entidades. Considere o uso de iteradores de pesquisa se precisar de mais entidades para retornar em uma única pesquisa.</p>
+<p>Uma única pesquisa ANN retorna um máximo de 16.384 entidades. Considere usar iteradores de pesquisa se precisar de mais entidades para retornar em uma única pesquisa.</p>
 <p>Para obter detalhes sobre iteradores de pesquisa, consulte <a href="/docs/pt/with-iterators.md">Iterador de pesquisa</a>.</p></li>
 <li><p>Pesquisa de texto completo</p>
 <p>A pesquisa de texto completo é um recurso que recupera documentos que contêm termos ou frases específicos em conjuntos de dados de texto e, em seguida, classifica os resultados com base na relevância. Esta funcionalidade ultrapassa as limitações da pesquisa semântica, que pode ignorar termos precisos, garantindo que recebe os resultados mais exactos e contextualmente relevantes. Além disso, simplifica as pesquisas vectoriais ao aceitar a entrada de texto em bruto, convertendo automaticamente os seus dados de texto em embeddings esparsos sem a necessidade de gerar manualmente embeddings vectoriais.</p>
-<p>Para obter detalhes sobre a pesquisa de texto integral, consulte <a href="/docs/pt/full-text-search.md">Pesquisa de texto integral</a>.</p></li>
-<li><p>Correspondência de palavras-chave</p>
-<p>A correspondência de palavras-chave no Milvus permite a recuperação precisa de documentos com base em termos específicos. Esta funcionalidade é utilizada principalmente para pesquisa filtrada para satisfazer condições específicas e pode incorporar filtragem escalar para refinar os resultados da consulta, permitindo pesquisas de semelhança dentro de vectores que satisfaçam critérios escalares.</p>
-<p>Para obter detalhes sobre a correspondência de palavras-chave, consulte <a href="/docs/pt/keyword-match.md">Correspondência de palavras-chave</a>.</p></li>
+<p>Para mais informações sobre a pesquisa de texto integral, consulte <a href="/docs/pt/full-text-search.md">Pesquisa de texto integral</a>.</p></li>
+<li><p>Correspondência de texto</p>
+<p>A correspondência de texto em Milvus permite a recuperação precisa de documentos com base em termos específicos. Esta funcionalidade é utilizada principalmente para pesquisa filtrada para satisfazer condições específicas e pode incorporar filtragem escalar para refinar os resultados da consulta, permitindo pesquisas de semelhança dentro de vectores que satisfaçam critérios escalares.</p>
+<p>Para obter detalhes sobre a correspondência de texto, consulte <a href="/docs/pt/keyword-match.md">Correspondência de texto</a>.</p></li>
 <li><p>Usar chave de partição</p>
 <p>O envolvimento de vários campos escalares na filtragem de metadados e a utilização de uma condição de filtragem bastante complicada pode afetar a eficiência da pesquisa. Depois de definir um campo escalar como chave de partição e utilizar uma condição de filtragem que envolva a chave de partição no pedido de pesquisa, pode ajudar a restringir o âmbito da pesquisa dentro das partições correspondentes aos valores de chave de partição especificados. </p>
 <p>Para obter detalhes sobre a chave de partição, consulte <a href="/docs/pt/use-partition-key.md">Usar chave de partição</a>.</p></li>
@@ -915,5 +915,5 @@ curl --request POST \​
 <p>Para obter detalhes sobre as configurações de mmap, consulte <a href="/docs/pt/mmap.md">Usar mmap</a>.</p></li>
 <li><p>Compactação de clustering</p>
 <p>A compactação de clustering foi concebida para melhorar o desempenho da pesquisa e reduzir os custos em grandes colecções. Este guia ajudará a entender a compactação de clustering e como esse recurso pode melhorar o desempenho da pesquisa.</p>
-<p>Para obter detalhes sobre compactações de clustering, consulte <a href="/docs/pt/clustering-compaction.md">Compactação de clustering</a>.</p></li>
+<p>Para obter detalhes sobre compactações de agrupamento, consulte <a href="/docs/pt/clustering-compaction.md">Compactação de agrupamento</a>.</p></li>
 </ul>

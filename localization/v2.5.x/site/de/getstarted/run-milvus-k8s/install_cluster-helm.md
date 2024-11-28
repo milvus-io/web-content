@@ -83,11 +83,11 @@ NAME                  PROVISIONER                  RECLAIMPOLICY    VOLUMEBIINDI
         ></path>
       </svg>
     </button></h2><p>Bevor Sie Milvus Helm Charts installieren, müssen Sie das Milvus Helm Repository hinzufügen.</p>
-<pre><code translate="no">$ helm repo <span class="hljs-keyword">add</span> milvus https:<span class="hljs-comment">//github.com/zilliztech/milvus-helm</span>
+<pre><code translate="no">$ helm repo <span class="hljs-keyword">add</span> milvus https:<span class="hljs-comment">//zilliztech.github.io/milvus-helm/</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <p>Das Milvus Helm Charts-Repository unter <code translate="no">https://github.com/milvus-io/milvus-helm</code> wurde archiviert und Sie können weitere Aktualisierungen wie folgt von <code translate="no">https://github.com/zilliztech/milvus-helm</code> erhalten:</p>
-<pre><code translate="no" class="language-shell">helm repo add zilliztech https://github.com/zilliztech/milvus-helm
+<pre><code translate="no" class="language-shell">helm repo add zilliztech https://zilliztech.github.io/milvus-helm/
 helm repo update
 <span class="hljs-comment"># upgrade existing helm release</span>
 helm upgrade my-release zilliztech/milvus
@@ -120,9 +120,9 @@ helm upgrade my-release zilliztech/milvus
 <p>Mit dem obigen Befehl wird ein Milvus-Cluster mit seinen Komponenten und Abhängigkeiten unter Verwendung von Standardkonfigurationen bereitgestellt. Um diese Einstellungen anzupassen, empfehlen wir Ihnen, das <a href="https://milvus.io/tools/sizing">Milvus Sizing Tool</a> zu verwenden, um die Konfigurationen basierend auf Ihrer tatsächlichen Datengröße anzupassen und dann die entsprechende YAML-Datei herunterzuladen. Weitere Informationen zu den Konfigurationsparametern finden Sie in der <a href="https://milvus.io/docs/system_configuration.md">Milvus System Configurations Checklist</a>.</p>
 <div class="alert note">
   <ul>
-    <li>Der Versionsname sollte nur Buchstaben, Zahlen und Bindestriche enthalten. Punkte sind im Versionsnamen nicht erlaubt.</li>
+    <li>Der Release-Name sollte nur Buchstaben, Zahlen und Bindestriche enthalten. Punkte sind im Versionsnamen nicht erlaubt.</li>
     <li>Die Standard-Befehlszeile installiert die Cluster-Version von Milvus bei der Installation von Milvus mit Helm. Bei der Installation von Milvus als Einzelplatzversion sind weitere Einstellungen erforderlich.</li>
-    <li>Gemäß dem <a href="https://kubernetes.io/docs/reference/using-api/deprecation-guide/#v1-25">veralteten API-Migrationsleitfaden von Kubernetes</a> wird die API-Version <b>policy/v1beta1</b> von PodDisruptionBudget ab v1.25 nicht mehr unterstützt. Es wird empfohlen, Manifeste und API-Clients zu migrieren, um stattdessen die <b>policy/v1-API-Version</b> zu verwenden. <br/>Als Abhilfe für Benutzer, die noch die API-Version <b>policy/v1beta1</b> von PodDisruptionBudget auf Kubernetes v1.25 und später verwenden, können Sie stattdessen den folgenden Befehl ausführen, um Milvus zu installieren:<br/> <code translate="no">helm install my-release milvus/milvus --set pulsar.bookkeeper.pdb.usePolicy=false,pulsar.broker.pdb.usePolicy=false,pulsar.proxy.pdb.usePolicy=false,pulsar.zookeeper.pdb.usePolicy=false</code></li> 
+    <li>Gemäß dem <a href="https://kubernetes.io/docs/reference/using-api/deprecation-guide/#v1-25">veralteten API-Migrationsleitfaden von Kubernetes</a> wird die API-Version <b>policy/v1beta1</b> von PodDisruptionBudget ab v1.25 nicht mehr unterstützt. Es wird empfohlen, Manifeste und API-Clients zu migrieren, um stattdessen die <b>policy/v1-API-Version</b> zu verwenden. <br/>Als Workaround für Benutzer, die noch die API-Version <b>policy/v1beta1</b> von PodDisruptionBudget auf Kubernetes v1.25 und später verwenden, können Sie stattdessen den folgenden Befehl ausführen, um Milvus zu installieren:<br/> <code translate="no">helm install my-release milvus/milvus --set pulsar.bookkeeper.pdb.usePolicy=false,pulsar.broker.pdb.usePolicy=false,pulsar.proxy.pdb.usePolicy=false,pulsar.zookeeper.pdb.usePolicy=false</code></li> 
     <li>Siehe <a href="https://artifacthub.io/packages/helm/milvus/milvus">Milvus Helm Chart</a> und <a href="https://helm.sh/docs/">Helm</a> für weitere Informationen.</li>
   </ul>
 </div>
@@ -204,7 +204,7 @@ $ wget <span class="hljs-attr">https</span>:<span class="hljs-comment">//raw.git
 $ python3 save_image.py --manifest milvus_manifest.yaml
 <button class="copy-code-btn"></button></code></pre>
 <p>Die Bilder werden in einem Unterordner namens <code translate="no">images</code> im aktuellen Verzeichnis gespeichert.</p>
-<h3 id="4-Load-images" class="common-anchor-header">4. Bilder laden</h3><p>Sie können die Bilder nun wie folgt auf die Hosts in der netzbeschränkten Umgebung laden:</p>
+<h3 id="4-Load-images" class="common-anchor-header">4. Bilder laden</h3><p>Sie können nun die Bilder wie folgt auf die Hosts in der netzbeschränkten Umgebung laden:</p>
 <pre><code translate="no" class="language-shell">$ <span class="hljs-keyword">for</span> image <span class="hljs-keyword">in</span> $(find . -<span class="hljs-built_in">type</span> f -name <span class="hljs-string">&quot;*.tar.gz&quot;</span>) ; <span class="hljs-keyword">do</span> gunzip -c <span class="hljs-variable">$image</span> | docker load; <span class="hljs-keyword">done</span>
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="5-Deploy-Milvus" class="common-anchor-header">5. Milvus bereitstellen</h3><pre><code translate="no" class="language-shell">$ kubectl apply -f milvus_manifest.yaml
@@ -283,7 +283,7 @@ $ helm upgrade my-release zilliztech/milvus
 <li><a href="/docs/de/azure.md">Microsoft Azure</a></li>
 </ul></li>
 <li><p>Erkunden Sie <a href="/docs/de/milvus_backup_overview.md">Milvus Backup</a>, ein Open-Source-Tool für Milvus-Datensicherungen.</p></li>
-<li><p><a href="/docs/de/birdwatcher_overview.md">Birdwatcher</a>, ein Open-Source-Tool zur Fehlersuche in Milvus und für dynamische Konfigurations-Updates.</p></li>
+<li><p><a href="/docs/de/birdwatcher_overview.md">Birdwatcher</a>, ein Open-Source-Tool zum Debuggen von Milvus und dynamischen Konfigurations-Updates.</p></li>
 <li><p>Entdecken Sie <a href="https://milvus.io/docs/attu.md">Attu</a>, ein Open-Source-GUI-Tool für die intuitive Milvus-Verwaltung.</p></li>
 <li><p><a href="/docs/de/monitor.md">Überwachen Sie Milvus mit Prometheus</a>.</p></li>
 </ul>

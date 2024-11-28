@@ -24,12 +24,12 @@ summary: >-
         ></path>
       </svg>
     </button></h1><p>En el tratamiento de textos, un <strong>analizador</strong> es un componente crucial que convierte el texto en bruto en un formato estructurado que permite realizar búsquedas. Cada analizador suele constar de dos elementos básicos: <strong>un tokenizador</strong> y un <strong>filtro</strong>. Juntos, transforman el texto de entrada en tokens, refinan estos tokens y los preparan para una indexación y recuperación eficientes.</p>
-<p>En Milvus, los analizadores se configuran durante la creación de la colección cuando se añaden los campos <code translate="no">VARCHAR</code> al esquema de la colección. Los tokens producidos por un analizador pueden utilizarse para construir un índice para la concordancia de palabras clave o convertirse en incrustaciones dispersas para la búsqueda de texto completo. Para obtener más información, consulte <a href="/docs/es/keyword-match.md">Coincidencia de palabras clave</a> o <a href="/docs/es/full-text-search.md">Búsqueda de texto completo</a>.</p>
+<p>En Milvus, los analizadores se configuran durante la creación de la colección cuando se añaden los campos <code translate="no">VARCHAR</code> al esquema de la colección. Los tokens producidos por un analizador pueden utilizarse para construir un índice para la correspondencia de texto o convertirse en incrustaciones dispersas para la búsqueda de texto completo. Para obtener más información, consulte <a href="/docs/es/keyword-match.md">Coincidencia de texto</a> o <a href="/docs/es/full-text-search.md">Búsqueda de texto completo</a>.</p>
 <div class="alert note">
 <p>El uso de analizadores puede afectar al rendimiento.</p>
 <ul>
-<li><p><strong>Búsqueda de texto completo:</strong> Para la búsqueda de texto completo, los canales DataNode y <strong>QueryNode</strong> consumen datos más lentamente porque deben esperar a que se complete la tokenización. Como resultado, los datos recién ingestados tardan más en estar disponibles para la búsqueda.</p></li>
-<li><p><strong>Coincidencia de palabras clave:</strong> En el caso de la concordancia de palabras clave, la creación de índices también es más lenta, ya que la tokenización debe finalizar antes de que se pueda crear un índice.</p></li>
+<li><p><strong>Búsqueda de texto completo:</strong> Para la búsqueda de texto completo, los canales DataNode y <strong>QueryNode</strong> consumen datos más lentamente porque deben esperar a que se complete la tokenización. Como resultado, los datos recién ingresados tardan más en estar disponibles para la búsqueda.</p></li>
+<li><p><strong>Coincidencia de texto:</strong> Para la coincidencia de texto, la creación de índices también es más lenta, ya que la tokenización debe finalizar antes de que se pueda crear un índice.</p></li>
 </ul>
 </div>
 <h2 id="Anatomy-of-an-analyzer​" class="common-anchor-header">Anatomía de un analizador<button data-href="#Anatomy-of-an-analyzer​" class="anchor-icon" translate="no">

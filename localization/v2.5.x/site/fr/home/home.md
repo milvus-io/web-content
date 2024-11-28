@@ -114,7 +114,7 @@ Vous découvrirez ici ce qu'est Milvus et comment installer, utiliser et déploy
     </button></h2><p><em>Nov 2024 - Sortie de Milvus 2.5.0</em></p>
 <ul>
 <li>Ajout d'indications sur la manière d'<a href="/docs/fr/full-text-search.md">effectuer une recherche en texte intégral</a>.</li>
-<li>Ajout d'indications sur la façon d'<a href="/docs/fr/keyword-match.md">effectuer une recherche par mot-clé</a>.</li>
+<li>Ajout d'indications sur la manière d'<a href="/docs/fr/keyword-match.md">effectuer une correspondance de texte</a>.</li>
 <li>Ajout d'indications sur la manière d'<a href="/docs/fr/nullable-and-default.md">activer les valeurs nullables et les valeurs par défaut</a>.</li>
 <li>Ajout de descriptions des <a href="/docs/fr/analyzer-overview.md">analyseurs</a>.</li>
 <li>Ajout de descriptions des <a href="/docs/fr/bitmap.md">index bitmap</a>.</li>

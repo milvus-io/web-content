@@ -22,12 +22,12 @@ summary: >-
         ></path>
       </svg>
     </button></h1><p>텍스트 처리에서 <strong>분석기는</strong> 원시 텍스트를 구조화되고 검색 가능한 형식으로 변환하는 중요한 구성 요소입니다. 각 분석기는 일반적으로 <strong>토큰화기와</strong> <strong>필터라는</strong> 두 가지 핵심 요소로 구성됩니다. 이들은 함께 입력 텍스트를 토큰으로 변환하고, 이러한 토큰을 정제하며, 효율적인 색인 및 검색을 위해 준비합니다.</p>
-<p>Milvus에서 분석기는 컬렉션 스키마에 <code translate="no">VARCHAR</code> 필드를 추가할 때 컬렉션 생성 중에 구성됩니다. 분석기가 생성한 토큰은 키워드 매칭을 위한 인덱스를 구축하는 데 사용하거나 전체 텍스트 검색을 위해 스파스 임베딩으로 변환할 수 있습니다. 자세한 내용은 <a href="/docs/ko/keyword-match.md">키워드 검색</a> 또는 <a href="/docs/ko/full-text-search.md">전체 텍스트 검색을</a> 참조하세요.</p>
+<p>Milvus에서 분석기는 컬렉션 스키마에 <code translate="no">VARCHAR</code> 필드를 추가할 때 컬렉션 생성 중에 구성됩니다. 분석기가 생성한 토큰은 텍스트 매칭을 위한 인덱스를 구축하는 데 사용하거나 전체 텍스트 검색을 위해 스파스 임베딩으로 변환할 수 있습니다. 자세한 내용은 <a href="/docs/ko/keyword-match.md">텍스트 일치</a> 또는 <a href="/docs/ko/full-text-search.md">전체 텍스트 검색을</a> 참조하세요.</p>
 <div class="alert note">
 <p>분석기를 사용하면 성능에 영향을 미칠 수 있습니다.</p>
 <ul>
 <li><p><strong>전체 텍스트 검색:</strong> 전체 텍스트 검색의 경우, 토큰화가 완료될 때까지 기다려야 하기 때문에 DataNode 및 <strong>QueryNode</strong> 채널은 데이터를 더 느리게 소비합니다. 따라서 새로 수집된 데이터를 검색에 사용할 수 있게 되는 데 시간이 더 오래 걸립니다.</p></li>
-<li><p><strong>키워드 일치:</strong> 키워드 매칭의 경우, 인덱스를 구축하기 전에 토큰화가 완료되어야 하므로 인덱스 생성도 더 느려집니다.</p></li>
+<li><p><strong>텍스트 일치:</strong> 텍스트 매칭의 경우, 인덱스를 구축하기 전에 토큰화가 완료되어야 하므로 인덱스 생성도 더 느려집니다.</p></li>
 </ul>
 </div>
 <h2 id="Anatomy-of-an-analyzer​" class="common-anchor-header">분석기의 구조<button data-href="#Anatomy-of-an-analyzer​" class="anchor-icon" translate="no">
@@ -45,7 +45,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus의 분석기는 정확히 하나의 <strong>토큰화</strong> 도구와 <strong>0개 이상의</strong> 필터로 구성됩니다.</p>
+    </button></h2><p>Milvus의 분석기는 정확히 하나의 <strong>토큰화기와</strong> <strong>0개 이상의</strong> 필터로 구성됩니다.</p>
 <ul>
 <li><p><strong>토큰화 도구</strong>: 토큰화기는 입력 텍스트를 토큰이라는 개별 단위로 분해합니다. 이러한 토큰은 토큰라이저 유형에 따라 단어 또는 구문일 수 있습니다.</p></li>
 <li><p><strong>필터</strong>: 필터: 토큰에 필터를 적용하여 토큰을 소문자로 만들거나 일반적인 단어를 제거하는 등 토큰을 더욱 세분화할 수 있습니다.</p></li>

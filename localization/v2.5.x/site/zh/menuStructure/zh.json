@@ -287,6 +287,18 @@
         "children": []
       },
       {
+        "label": "公制类型",
+        "id": "metric.md",
+        "order": 9,
+        "children": []
+      },
+      {
+        "label": "一致性等级",
+        "id": "consistency.md",
+        "order": 10,
+        "children": []
+      },
+      {
         "label": "内存复制",
         "id": "replica.md",
         "order": 11,
@@ -602,31 +614,39 @@
         ]
       },
       {
-        "label": "管理索引",
+        "label": "索引",
         "id": "manage_indexes",
         "order": 4,
         "isMenu": true,
         "children": [
           {
-            "label": "索引向量场",
+            "label": "向量索引",
             "id": "index-vector-fields.md",
             "order": 0,
             "children": []
           },
           {
-            "label": "索引标量字段",
-            "id": "index-scalar-fields.md",
+            "label": "标量索引",
+            "id": "scalar-index",
             "order": 1,
-            "children": []
+            "isMenu": true,
+            "children": [
+              {
+                "label": "索引标量字段",
+                "id": "index-scalar-fields.md",
+                "order": 1,
+                "children": []
+              },
+              {
+                "label": "位图索引",
+                "id": "bitmap.md",
+                "order": 2,
+                "children": []
+              }
+            ]
           },
           {
-            "label": "BITMAP 指数",
-            "id": "bitmap.md",
-            "order": 2,
-            "children": []
-          },
-          {
-            "label": "使用 GPU 的索引",
+            "label": "支持 GPU 的索引",
             "id": "index-with-gpu.md",
             "order": 3,
             "children": []
@@ -682,7 +702,7 @@
             "children": []
           },
           {
-            "label": "关键词匹配",
+            "label": "文本匹配",
             "id": "keyword-match.md",
             "order": 7,
             "children": []
@@ -700,30 +720,6 @@
             "children": []
           },
           {
-            "label": "使用 mmap",
-            "id": "mmap.md",
-            "order": 10,
-            "children": []
-          },
-          {
-            "label": "聚类压缩",
-            "id": "clustering-compaction.md",
-            "order": 11,
-            "children": []
-          },
-          {
-            "label": "一致性等级",
-            "id": "consistency.md",
-            "order": 12,
-            "children": []
-          },
-          {
-            "label": "公制类型",
-            "id": "metric.md",
-            "order": 13,
-            "children": []
-          },
-          {
             "label": "元数据过滤",
             "id": "boolean.md",
             "order": 14,
@@ -733,26 +729,6 @@
             "label": "Rerankers",
             "id": "reranking.md",
             "order": 15,
-            "children": []
-          }
-        ]
-      },
-      {
-        "label": "数据导入",
-        "id": "data_import",
-        "order": 6,
-        "isMenu": true,
-        "children": [
-          {
-            "label": "准备源数据",
-            "id": "prepare-source-data.md",
-            "order": 0,
-            "children": []
-          },
-          {
-            "label": "导入数据",
-            "id": "import-data.md",
-            "order": 1,
             "children": []
           }
         ]
@@ -898,10 +874,30 @@
     ]
   },
   {
+    "label": "数据导入",
+    "id": "data_import",
+    "order": 5,
+    "isMenu": true,
+    "children": [
+      {
+        "label": "准备源数据",
+        "id": "prepare-source-data.md",
+        "order": 0,
+        "children": []
+      },
+      {
+        "label": "导入数据",
+        "id": "import-data.md",
+        "order": 1,
+        "children": []
+      }
+    ]
+  },
+  {
     "label": "Milvus 迁移",
     "id": "milvus_migration",
     "isMenu": true,
-    "order": 5,
+    "order": 6,
     "children": [
       {
         "label": "概述",
@@ -1322,9 +1318,29 @@
         ]
       },
       {
+        "label": "存储优化",
+        "id": "storage_optimization",
+        "order": 10,
+        "isMenu": true,
+        "children": [
+          {
+            "label": "使用 mmap",
+            "id": "mmap.md",
+            "order": 0,
+            "children": []
+          },
+          {
+            "label": "聚类压缩",
+            "id": "clustering-compaction.md",
+            "order": 1,
+            "children": []
+          }
+        ]
+      },
+      {
         "label": "安全",
         "id": "security",
-        "order": 10,
+        "order": 11,
         "isMenu": true,
         "children": [
           {
@@ -1395,7 +1411,7 @@
         ]
       },
       {
-        "label": "Milvus 后备电源",
+        "label": "Milvus 备份",
         "id": "milvus_backup",
         "order": 1,
         "children": [

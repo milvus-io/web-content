@@ -62,7 +62,7 @@ NAME                  PROVISIONER                  RECLAIMPOLICY    VOLUMEBIINDI
 <span class="hljs-title function_">standard</span> <span class="hljs-params">(<span class="hljs-keyword">default</span>)</span>    k8s.io/minikube-hostpath     Delete           Immediate             <span class="hljs-literal">false</span> 
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>Verifique <a href="/docs/pt/prerequisite-helm.md">os requisitos de hardware e software</a> antes da instalação.</p></li>
-<li><p>Antes de instalar o Milvus, recomenda-se a utilização da <a href="https://milvus.io/tools/sizing">Milvus Sizing Tool</a> para estimar os requisitos de hardware com base no tamanho dos dados. Isso ajuda a garantir o desempenho ideal e a alocação de recursos para a instalação do Milvus.</p></li>
+<li><p>Antes de instalar o Milvus, é recomendável usar a <a href="https://milvus.io/tools/sizing">Milvus Sizing Tool</a> para estimar os requisitos de hardware com base no tamanho dos seus dados. Isso ajuda a garantir o desempenho ideal e a alocação de recursos para a instalação do Milvus.</p></li>
 </ul>
 <div class="alert note">
 <p>Se encontrar algum problema ao puxar a imagem, contacte-nos em <a href="mailto:community@zilliz.com">community@zilliz.com</a> com detalhes sobre o problema, e nós forneceremos o suporte necessário.</p>
@@ -83,11 +83,11 @@ NAME                  PROVISIONER                  RECLAIMPOLICY    VOLUMEBIINDI
         ></path>
       </svg>
     </button></h2><p>Antes de instalar o Milvus Helm Charts, é necessário adicionar o repositório Milvus Helm.</p>
-<pre><code translate="no">$ helm repo <span class="hljs-keyword">add</span> milvus https:<span class="hljs-comment">//github.com/zilliztech/milvus-helm</span>
+<pre><code translate="no">$ helm repo <span class="hljs-keyword">add</span> milvus https:<span class="hljs-comment">//zilliztech.github.io/milvus-helm/</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <p>O repositório do Milvus Helm Charts em <code translate="no">https://github.com/milvus-io/milvus-helm</code> foi arquivado e pode obter mais actualizações em <code translate="no">https://github.com/zilliztech/milvus-helm</code> da seguinte forma:</p>
-<pre><code translate="no" class="language-shell">helm repo add zilliztech https://github.com/zilliztech/milvus-helm
+<pre><code translate="no" class="language-shell">helm repo add zilliztech https://zilliztech.github.io/milvus-helm/
 helm repo update
 <span class="hljs-comment"># upgrade existing helm release</span>
 helm upgrade my-release zilliztech/milvus
@@ -122,7 +122,7 @@ helm upgrade my-release zilliztech/milvus
   <ul>
     <li>O nome da versão deve conter apenas letras, números e traços. Não são permitidos pontos no nome da versão.</li>
     <li>A linha de comando padrão instala a versão de cluster do Milvus durante a instalação do Milvus com o Helm. São necessárias outras definições durante a instalação do Milvus autónomo.</li>
-    <li>De acordo com o <a href="https://kubernetes.io/docs/reference/using-api/deprecation-guide/#v1-25">guia de migração de APIs obsoletas do Kubernetes</a>, a versão da API <b>policy/v1beta1</b> do PodDisruptionBudget não é mais servida a partir da versão 1.25. Sugere-se que você migre manifestos e clientes de API para usar a versão de API <b>policy/v1</b>. <br/>Como solução alternativa para usuários que ainda usam a versão da API <b>policy/v1beta1</b> do PodDisruptionBudget no Kubernetes v1.25 e posterior, você pode executar o seguinte comando para instalar o Milvus:<br/> <code translate="no">helm install my-release milvus/milvus --set pulsar.bookkeeper.pdb.usePolicy=false,pulsar.broker.pdb.usePolicy=false,pulsar.proxy.pdb.usePolicy=false,pulsar.zookeeper.pdb.usePolicy=false</code></li> 
+    <li>De acordo com o <a href="https://kubernetes.io/docs/reference/using-api/deprecation-guide/#v1-25">guia de migração de APIs obsoletas do Kubernetes</a>, a versão da API <b>policy/v1beta1</b> do PodDisruptionBudget não é mais servida a partir da versão 1.25. Sugere-se que você migre manifestos e clientes de API para usar a versão de API <b>policy/v1</b>. <br/>Como solução alternativa para os usuários que ainda usam a versão da API <b>policy/v1beta1</b> do PodDisruptionBudget no Kubernetes v1.25 e posterior, você pode executar o seguinte comando para instalar o Milvus:<br/> <code translate="no">helm install my-release milvus/milvus --set pulsar.bookkeeper.pdb.usePolicy=false,pulsar.broker.pdb.usePolicy=false,pulsar.proxy.pdb.usePolicy=false,pulsar.zookeeper.pdb.usePolicy=false</code></li> 
     <li>Consulte <a href="https://artifacthub.io/packages/helm/milvus/milvus">Gráfico de Helm do Milvus</a> e <a href="https://helm.sh/docs/">Helm</a> para obter mais informações.</li>
   </ul>
 </div>
@@ -275,8 +275,8 @@ $ helm upgrade my-release zilliztech/milvus
 <li><a href="/docs/pt/multi-vector-search.md">Pesquisa híbrida</a></li>
 </ul></li>
 <li><p><a href="/docs/pt/upgrade_milvus_cluster-helm.md">Atualizar o Milvus usando o Helm Chart</a>.</p></li>
-<li><p><a href="/docs/pt/scaleout.md">Escalar o cluster do Milvus</a>.</p></li>
-<li><p>Implante seu cluster Milvus em nuvens:</p>
+<li><p><a href="/docs/pt/scaleout.md">Escalar seu cluster Milvus</a>.</p></li>
+<li><p>Implantar seu cluster Milvus em nuvens:</p>
 <ul>
 <li><a href="/docs/pt/eks.md">Amazon EKS</a></li>
 <li><a href="/docs/pt/gcp.md">Google Cloud</a></li>

@@ -287,6 +287,18 @@
         "children": []
       },
       {
+        "label": "メートル法",
+        "id": "metric.md",
+        "order": 9,
+        "children": []
+      },
+      {
+        "label": "一貫性レベル",
+        "id": "consistency.md",
+        "order": 10,
+        "children": []
+      },
+      {
         "label": "インメモリーレプリカ",
         "id": "replica.md",
         "order": 11,
@@ -602,31 +614,39 @@
         ]
       },
       {
-        "label": "インデックスの管理",
+        "label": "インデックス",
         "id": "manage_indexes",
         "order": 4,
         "isMenu": true,
         "children": [
           {
-            "label": "インデックス・ベクトル・フィールド",
+            "label": "ベクトル・インデックス",
             "id": "index-vector-fields.md",
             "order": 0,
             "children": []
           },
           {
-            "label": "インデックス・スカラー・フィールド",
-            "id": "index-scalar-fields.md",
+            "label": "スカラー・インデックス",
+            "id": "scalar-index",
             "order": 1,
-            "children": []
+            "isMenu": true,
+            "children": [
+              {
+                "label": "インデックス・スカラー・フィールド",
+                "id": "index-scalar-fields.md",
+                "order": 1,
+                "children": []
+              },
+              {
+                "label": "ビットマップインデックス",
+                "id": "bitmap.md",
+                "order": 2,
+                "children": []
+              }
+            ]
           },
           {
-            "label": "BITMAPインデックス",
-            "id": "bitmap.md",
-            "order": 2,
-            "children": []
-          },
-          {
-            "label": "GPU付きインデックス",
+            "label": "GPU対応インデックス",
             "id": "index-with-gpu.md",
             "order": 3,
             "children": []
@@ -682,7 +702,7 @@
             "children": []
           },
           {
-            "label": "キーワード・マッチ",
+            "label": "テキストマッチ",
             "id": "keyword-match.md",
             "order": 7,
             "children": []
@@ -700,30 +720,6 @@
             "children": []
           },
           {
-            "label": "mmapを使用する",
-            "id": "mmap.md",
-            "order": 10,
-            "children": []
-          },
-          {
-            "label": "クラスタリング・コンパクション",
-            "id": "clustering-compaction.md",
-            "order": 11,
-            "children": []
-          },
-          {
-            "label": "一貫性レベル",
-            "id": "consistency.md",
-            "order": 12,
-            "children": []
-          },
-          {
-            "label": "メートル法",
-            "id": "metric.md",
-            "order": 13,
-            "children": []
-          },
-          {
             "label": "メタデータのフィルタリング",
             "id": "boolean.md",
             "order": 14,
@@ -733,26 +729,6 @@
             "label": "再ランキング",
             "id": "reranking.md",
             "order": 15,
-            "children": []
-          }
-        ]
-      },
-      {
-        "label": "データインポート",
-        "id": "data_import",
-        "order": 6,
-        "isMenu": true,
-        "children": [
-          {
-            "label": "ソースデータの準備",
-            "id": "prepare-source-data.md",
-            "order": 0,
-            "children": []
-          },
-          {
-            "label": "インポートデータ",
-            "id": "import-data.md",
-            "order": 1,
             "children": []
           }
         ]
@@ -826,7 +802,7 @@
             "children": []
           },
           {
-            "label": "講師",
+            "label": "インストラクター",
             "id": "embed-with-instructor.md",
             "order": 9,
             "children": []
@@ -898,10 +874,30 @@
     ]
   },
   {
+    "label": "データインポート",
+    "id": "data_import",
+    "order": 5,
+    "isMenu": true,
+    "children": [
+      {
+        "label": "ソースデータの準備",
+        "id": "prepare-source-data.md",
+        "order": 0,
+        "children": []
+      },
+      {
+        "label": "インポートデータ",
+        "id": "import-data.md",
+        "order": 1,
+        "children": []
+      }
+    ]
+  },
+  {
     "label": "Milvus移住",
     "id": "milvus_migration",
     "isMenu": true,
-    "order": 5,
+    "order": 6,
     "children": [
       {
         "label": "概要",
@@ -1322,9 +1318,29 @@
         ]
       },
       {
+        "label": "ストレージの最適化",
+        "id": "storage_optimization",
+        "order": 10,
+        "isMenu": true,
+        "children": [
+          {
+            "label": "mmapを使用する",
+            "id": "mmap.md",
+            "order": 0,
+            "children": []
+          },
+          {
+            "label": "クラスタリング・コンパクション",
+            "id": "clustering-compaction.md",
+            "order": 1,
+            "children": []
+          }
+        ]
+      },
+      {
         "label": "セキュリティ",
         "id": "security",
-        "order": 10,
+        "order": 11,
         "isMenu": true,
         "children": [
           {

@@ -68,7 +68,7 @@ title: Index mit GPU
     </button></h2><p>Die folgenden Beispiele zeigen, wie man GPU-Indizes verschiedener Typen erstellt.</p>
 <h3 id="Prepare-index-parameters" class="common-anchor-header">Vorbereiten der Indexparameter</h3><p>Beim Einrichten von GPU-Indexparametern müssen <strong>index_type</strong>, <strong>metric_type</strong> und <strong>params</strong> definiert werden:</p>
 <ul>
-<li><p><strong>index_type</strong><em>(string</em>): Der Typ des Indexes, der zur Beschleunigung der Vektorsuche verwendet wird. Gültige Optionen sind <strong>GPU_CAGRA</strong>, <strong>GPU_IVF_FLAT</strong>, <strong>GPU_IVF_PQ</strong> und <strong>GPU_BRUTE_FORCE</strong>.</p></li>
+<li><p><strong>index_type</strong><em>(string</em>): Der Typ des Index, der zur Beschleunigung der Vektorsuche verwendet wird. Gültige Optionen sind <strong>GPU_CAGRA</strong>, <strong>GPU_IVF_FLAT</strong>, <strong>GPU_IVF_PQ</strong> und <strong>GPU_BRUTE_FORCE</strong>.</p></li>
 <li><p><strong>metric_type</strong><em>(Zeichenfolge</em>): Der Typ der Metrik, die zur Messung der Ähnlichkeit von Vektoren verwendet wird. Gültige Optionen sind <strong>IP</strong> und <strong>L2</strong>.</p></li>
 <li><p><strong>params</strong><em>(dict</em>): Die indexspezifischen Bauparameter. Die gültigen Optionen für diesen Parameter hängen vom Indextyp ab.</p></li>
 </ul>
@@ -203,7 +203,7 @@ collection.search(
       </svg>
     </button></h2><p>Bei der Verwendung von GPU-Indizes müssen bestimmte Einschränkungen beachtet werden:</p>
 <ul>
-<li><p>Für <strong>GPU_IVF_FLAT</strong> beträgt der Höchstwert für <strong>Limit</strong> 256.</p></li>
+<li><p>Für <strong>GPU_IVF_FLAT</strong> beträgt der Höchstwert für <strong>limit</strong> 1024.</p></li>
 <li><p>Für <strong>GPU_IVF_PQ</strong> und <strong>GPU_CAGRA</strong> ist der Höchstwert für <strong>limit</strong> 1024.</p></li>
 <li><p>Für <strong>GPU_BRUTE_FORCE</strong> gibt es zwar keinen festen <strong>Grenzwert</strong>, es wird jedoch empfohlen, 4096 nicht zu überschreiten, um mögliche Leistungsprobleme zu vermeiden.</p></li>
 <li><p>Derzeit unterstützen GPU-Indizes keinen COSINE-Abstand. Wenn der COSINE-Abstand erforderlich ist, sollten die Daten zuerst normalisiert werden, und dann kann der Innenproduktabstand (IP) als Ersatz verwendet werden.</p></li>
@@ -229,5 +229,5 @@ collection.search(
 <li><p><strong>Wann ist es sinnvoll, einen GPU-Index zu verwenden?</strong></p>
 <p>Ein GPU-Index ist besonders vorteilhaft in Situationen, die einen hohen Durchsatz oder eine hohe Wiederauffindung erfordern. Bei großen Stapeln kann der Durchsatz der GPU-Indizierung beispielsweise den der CPU-Indizierung um das 100-fache übertreffen. In Szenarien mit kleineren Stapeln übertrifft die GPU-Indizierung die CPU-Indizierung in Bezug auf die Leistung immer noch deutlich. Darüber hinaus kann der Einsatz eines Grafikprozessors den Prozess der Indexerstellung erheblich beschleunigen, wenn Daten schnell eingefügt werden müssen.</p></li>
 <li><p><strong>Für welche Szenarien sind GPU-Indizes wie CAGRA, GPU_IVF_PQ, GPU_IVF_FLAT und GPU_BRUTE_FORCE am besten geeignet?</strong></p>
-<p>CAGRA-Indizes sind ideal für Szenarien, die eine höhere Leistung erfordern, auch wenn dies mit einem höheren Speicherbedarf einhergeht. In Umgebungen, in denen Speicherplatzeinsparungen Priorität haben, kann der <strong>GPU_IVF_PQ-Index</strong> dazu beitragen, die Speicheranforderungen zu minimieren, auch wenn dies mit einem höheren Präzisionsverlust einhergeht. Der <strong>GPU_IVF_FLAT-Index</strong> stellt eine ausgewogene Option dar, die einen Kompromiss zwischen Leistung und Speicherbedarf bietet. Der <strong>GPU_BRUTE_FORCE-Index</strong> schließlich ist für erschöpfende Suchvorgänge konzipiert und garantiert durch die Durchführung von Traversalsuchen eine Abrufrate von 1.</p></li>
+<p>CAGRA-Indizes sind ideal für Szenarien, die eine höhere Leistung erfordern, auch wenn dies mit einem höheren Speicherbedarf einhergeht. In Umgebungen, in denen Speicherplatzeinsparung Priorität hat, kann der <strong>GPU_IVF_PQ-Index</strong> dazu beitragen, die Speicheranforderungen zu minimieren, auch wenn dies mit einem höheren Präzisionsverlust einhergeht. Der <strong>GPU_IVF_FLAT-Index</strong> stellt eine ausgewogene Option dar, die einen Kompromiss zwischen Leistung und Speicherbedarf bietet. Der <strong>GPU_BRUTE_FORCE-Index</strong> schließlich ist für erschöpfende Suchvorgänge konzipiert und garantiert durch die Durchführung von Traversalsuchen eine Abrufrate von 1.</p></li>
 </ul>

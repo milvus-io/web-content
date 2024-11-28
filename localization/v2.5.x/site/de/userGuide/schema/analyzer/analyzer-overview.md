@@ -24,15 +24,15 @@ summary: >-
         ></path>
       </svg>
     </button></h1><p>In der Textverarbeitung ist ein <strong>Analyzer</strong> eine entscheidende Komponente, die Rohtext in ein strukturiertes, durchsuchbares Format umwandelt. Jeder Analyzer besteht in der Regel aus zwei Kernelementen: <strong>Tokenizer</strong> und <strong>Filter</strong>. Gemeinsam wandeln sie den Eingabetext in Token um, verfeinern diese Token und bereiten sie für eine effiziente Indizierung und Suche vor.</p>
-<p>In Milvus werden die Analyzer während der Erstellung der Sammlung konfiguriert, wenn Sie <code translate="no">VARCHAR</code> Felder zum Schema der Sammlung hinzufügen. Die von einem Analyzer erzeugten Token können zum Aufbau eines Indexes für den Schlüsselwortabgleich verwendet oder in Sparse Embeddings für die Volltextsuche konvertiert werden. Weitere Informationen finden Sie unter <a href="/docs/de/keyword-match.md">Schlüsselwortabgleich</a> oder <a href="/docs/de/full-text-search.md">Volltextsuche</a>.</p>
+<p>In Milvus werden die Analyzer während der Erstellung der Sammlung konfiguriert, wenn Sie <code translate="no">VARCHAR</code> Felder zum Schema der Sammlung hinzufügen. Von einem Analyzer erzeugte Token können zum Aufbau eines Index für den Textabgleich verwendet oder in Sparse Embeddings für die Volltextsuche konvertiert werden. Weitere Informationen finden Sie unter <a href="/docs/de/keyword-match.md">Textabgleich</a> oder <a href="/docs/de/full-text-search.md">Volltextsuche</a>.</p>
 <div class="alert note">
 <p>Die Verwendung von Analyzern kann die Leistung beeinträchtigen.</p>
 <ul>
 <li><p><strong>Volltextsuche:</strong> Bei der Volltextsuche verbrauchen die DataNode- und <strong>QueryNode-Channels</strong> die Daten langsamer, da sie auf den Abschluss der Tokenisierung warten müssen. Infolgedessen dauert es länger, bis neu eingegebene Daten für die Suche verfügbar sind.</p></li>
-<li><p><strong>Schlüsselwortabgleich:</strong> Beim Stichwortabgleich ist die Indexerstellung ebenfalls langsamer, da die Tokenisierung abgeschlossen werden muss, bevor ein Index erstellt werden kann.</p></li>
+<li><p><strong>Textabgleich:</strong> Beim Textabgleich ist die Indexerstellung ebenfalls langsamer, da die Tokenisierung erst abgeschlossen werden muss, bevor ein Index erstellt werden kann.</p></li>
 </ul>
 </div>
-<h2 id="Anatomy-of-an-analyzer​" class="common-anchor-header">Anatomie eines Analyzers<button data-href="#Anatomy-of-an-analyzer​" class="anchor-icon" translate="no">
+<h2 id="Anatomy-of-an-analyzer​" class="common-anchor-header">Anatomie eines Analysators<button data-href="#Anatomy-of-an-analyzer​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -114,7 +114,7 @@ summary: >-
     <span class="hljs-string">&quot;tokenizer&quot;</span>: <span class="hljs-string">&quot;whitespace&quot;</span>,​
 }​
 <button class="copy-code-btn"></button></code></pre>
-<h4 id="Filter​" class="common-anchor-header">Filter</h4><p><strong>Filter</strong> sind <strong>optionale</strong> Komponenten, die mit den vom Tokenizer erzeugten Token arbeiten und sie nach Bedarf umwandeln oder verfeinern. Nach Anwendung eines <code translate="no">lowercase</code> -Filters auf die tokenisierten Begriffe <code translate="no">[&quot;Vector&quot;, &quot;Database&quot;, &quot;Built&quot;, &quot;for&quot;, &quot;Scale&quot;]</code> könnte das Ergebnis zum Beispiel so aussehen.</p>
+<h4 id="Filter​" class="common-anchor-header">Filter</h4><p><strong>Filter</strong> sind <strong>optionale</strong> Komponenten, die mit den vom Tokenizer erzeugten Token arbeiten und sie je nach Bedarf transformieren oder verfeinern. Nach Anwendung eines <code translate="no">lowercase</code> -Filters auf die tokenisierten Begriffe <code translate="no">[&quot;Vector&quot;, &quot;Database&quot;, &quot;Built&quot;, &quot;for&quot;, &quot;Scale&quot;]</code> könnte das Ergebnis zum Beispiel so aussehen.</p>
 <pre><code translate="no" class="language-SQL">[<span class="hljs-string">&quot;vector&quot;</span>, <span class="hljs-string">&quot;database&quot;</span>, <span class="hljs-string">&quot;built&quot;</span>, <span class="hljs-string">&quot;for&quot;</span>, <span class="hljs-string">&quot;scale&quot;</span>]​
 <button class="copy-code-btn"></button></code></pre>
 <p>Filter in einem benutzerdefinierten Analyzer können entweder <strong>eingebaut</strong> oder <strong>benutzerdefiniert</strong> sein, je nach Konfigurationsbedarf.</p>

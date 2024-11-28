@@ -17,7 +17,7 @@ title: Explicação da coleção
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>No Milvus, pode criar várias colecções para gerir os seus dados e inserir os seus dados como entidades nas colecções. A coleção e a entidade são semelhantes às tabelas e registos nas bases de dados relacionais. Esta página ajuda-o a aprender sobre a coleção e conceitos relacionados.</p>
+    </button></h1><p>No Milvus, pode criar várias colecções para gerir os seus dados e inserir os seus dados como entidades nas colecções. A coleção e a entidade são semelhantes a tabelas e registos em bases de dados relacionais. Esta página ajuda-o a aprender sobre a coleção e conceitos relacionados.</p>
 <h2 id="Collection​" class="common-anchor-header">Coleção<button data-href="#Collection​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -77,7 +77,7 @@ title: Explicação da coleção
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>À semelhança do campo primário numa base de dados relacional, uma coleção tem um campo primário para distinguir uma entidade de outras. Cada valor no campo primário é globalmente único e corresponde a uma entidade específica. </p>
+    </button></h2><p>À semelhança do campo primário numa base de dados relacional, uma coleção tem um campo primário para distinguir uma entidade das outras. Cada valor no campo primário é globalmente único e corresponde a uma entidade específica. </p>
 <p>Como mostrado no gráfico acima, o campo denominado <strong>id</strong> serve como campo primário, e o primeiro ID <strong>0</strong> corresponde a uma entidade intitulada <em>A taxa de mortalidade do coronavírus não é importante</em>. Não haverá nenhuma outra entidade que tenha o campo primário 0.</p>
 <p>Um campo primário aceita apenas números inteiros ou cadeias de caracteres. Ao inserir entidades, você deve incluir os valores do campo primário por padrão. No entanto, se tiver ativado o <strong>AutoId</strong> aquando da criação da coleção, o Milvus irá gerar esses valores aquando da inserção de dados. Nesse caso, exclua os valores do campo primário das entidades a serem inseridas.</p>
 <p>Para mais informações, consulte <a href="/docs/pt/primary-field.md">Primary Field &amp; AutoID</a>.</p>
@@ -130,7 +130,7 @@ title: Explicação da coleção
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Carregar uma coleção é o pré-requisito para realizar pesquisas e consultas por similaridade nas coleções. Ao carregar uma coleção, o Milvus carrega todos os arquivos de índice e os dados brutos em cada campo na memória para uma resposta rápida às pesquisas e consultas.</p>
+    </button></h2><p>Carregar uma coleção é o pré-requisito para realizar pesquisas e consultas por similaridade nas coleções. Quando você carrega uma coleção, o Milvus carrega todos os arquivos de índice e os dados brutos em cada campo na memória para uma resposta rápida às pesquisas e consultas.</p>
 <p>As pesquisas e consultas são operações que consomem muita memória. Para poupar custos, é aconselhável libertar as colecções que não estão a ser utilizadas.</p>
 <p>Para obter mais detalhes, consulte <a href="/docs/pt/load-and-release.md">Carregar e liberar</a>.</p>
 <h2 id="Search-and-Query​" class="common-anchor-header">Pesquisa e consulta<button data-href="#Search-and-Query​" class="anchor-icon" translate="no">
@@ -151,7 +151,7 @@ title: Explicação da coleção
     </button></h2><p>Depois de criar índices e carregar a coleção, pode iniciar uma pesquisa por semelhança alimentando um ou vários vectores de consulta. Por exemplo, ao receber a representação vetorial da sua consulta transportada num pedido de pesquisa, o Milvus utiliza o tipo de métrica especificado para medir a semelhança entre o vetor de consulta e os vectores da coleção de destino antes de devolver os que são semanticamente semelhantes à consulta.</p>
 <p>Também é possível incluir a filtragem de metadados nas pesquisas e consultas para melhorar a relevância dos resultados. Note que as condições de filtragem de metadados são obrigatórias nas consultas, mas opcionais nas pesquisas.</p>
 <p>Para obter detalhes sobre os tipos de métricas aplicáveis, consulte <a href="/docs/pt/metric.md">Tipos de métricas</a>.</p>
-<p>Para obter mais informações sobre pesquisas e consultas, consulte os artigos do capítulo <a href="/docs/pt/single-vector-search.md">Pesquisa e classificação</a>, entre os quais se encontram as funcionalidades básicas.</p>
+<p>Para obter mais informações sobre pesquisas e consultas, consulte os artigos no capítulo <a href="/docs/pt/single-vector-search.md">Pesquisa e classificação</a>, entre os quais se encontram as funcionalidades básicas.</p>
 <ul>
 <li><p><a href="/docs/pt/single-vector-search.md">Pesquisa ANN básica</a></p></li>
 <li><p><a href="/docs/pt/filtered-search.md">Pesquisa filtrada</a></p></li>
@@ -161,9 +161,9 @@ title: Explicação da coleção
 <li><p><a href="/docs/pt/with-iterators.md">Iterador de pesquisa</a></p></li>
 <li><p><a href="/docs/pt/get-and-scalar-query.md">Consulta</a></p></li>
 <li><p><a href="/docs/pt/full-text-search.md">Pesquisa de texto completo</a></p></li>
-<li><p><a href="/docs/pt/keyword-match.md">Correspondência de palavras-chave</a></p></li>
+<li><p><a href="/docs/pt/keyword-match.md">Correspondência de texto</a></p></li>
 </ul>
-<p>Além disso, o Milvus também fornece melhorias para melhorar o desempenho e a eficiência da pesquisa. Estão desactivadas por defeito e pode activá-las e utilizá-las de acordo com os seus requisitos de serviço. São elas</p>
+<p>Além disso, o Milvus também fornece melhorias para melhorar o desempenho e a eficiência da pesquisa. Estas estão desactivadas por defeito e pode activá-las e utilizá-las de acordo com os seus requisitos de serviço. São elas</p>
 <ul>
 <li><p><a href="/docs/pt/use-partition-key.md">Usar chave de partição</a></p></li>
 <li><p><a href="/docs/pt/mmap.md">Usar mmap</a></p></li>
@@ -236,7 +236,7 @@ title: Explicação da coleção
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>É possível definir funções para o Milvus para derivar campos na criação da coleção. Por exemplo, a função de pesquisa de texto completo utiliza a função definida pelo utilizador para derivar um campo de vetor esparso de um campo varchar específico. Para obter mais informações sobre a pesquisa de texto completo, consulte <a href="/docs/pt/full-text-search.md">Pesquisa de texto completo</a>.</p>
+    </button></h2><p>É possível definir funções para o Milvus derivar campos aquando da criação da coleção. Por exemplo, a função de pesquisa de texto completo utiliza a função definida pelo utilizador para derivar um campo de vetor esparso de um campo varchar específico. Para obter mais informações sobre a pesquisa de texto completo, consulte <a href="/docs/pt/full-text-search.md">Pesquisa de texto completo</a>.</p>
 <h2 id="Consistency-Level​" class="common-anchor-header">Nível de consistência<button data-href="#Consistency-Level​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

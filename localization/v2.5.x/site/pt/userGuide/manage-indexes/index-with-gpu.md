@@ -138,7 +138,7 @@ collection.create_index(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Depois de criar seu índice GPU, a próxima etapa é preparar os parâmetros de pesquisa antes de realizar uma pesquisa.</p>
+    </button></h2><p>Depois de criar o índice GPU, a próxima etapa é preparar os parâmetros de pesquisa antes de realizar uma pesquisa.</p>
 <h3 id="Prepare-search-parameters" class="common-anchor-header">Preparar parâmetros de pesquisa</h3><p>Abaixo estão exemplos de configurações para diferentes tipos de índice:</p>
 <ul>
 <li><p>Índice<strong>GPU_BRUTE_FORCE</strong> </p>
@@ -162,7 +162,7 @@ collection.create_index(
 <button class="copy-code-btn"></button></code></pre>
 <p>Os principais parâmetros de pesquisa incluem:</p>
 <ul>
-<li><p><strong>itopk_size</strong>: Determina o tamanho dos resultados intermediários mantidos durante a pesquisa. Um valor maior pode melhorar a recuperação às custas do desempenho da pesquisa. Ele deve ser pelo menos igual ao valor final do top-k<strong>(limite</strong>) e é tipicamente uma potência de 2 (por exemplo, 16, 32, 64, 128).</p></li>
+<li><p><strong>itopk_size</strong>: Determina o tamanho dos resultados intermediários mantidos durante a pesquisa. Um valor maior pode melhorar a recuperação à custa do desempenho da pesquisa. Ele deve ser pelo menos igual ao valor final do top-k<strong>(limite</strong>) e é tipicamente uma potência de 2 (por exemplo, 16, 32, 64, 128).</p></li>
 <li><p><strong>search_width</strong>: Especifica o número de pontos de entrada no gráfico CAGRA durante a pesquisa. O aumento deste valor pode melhorar a recuperação, mas pode afetar o desempenho da pesquisa.</p></li>
 <li><p><strong>min_iterações</strong> / <strong>max_iterações</strong>: Estes parâmetros controlam o processo de iteração da pesquisa. Por padrão, eles são definidos como <strong>0</strong>, e o CAGRA determina automaticamente o número de iterações com base em <strong>itopk_size</strong> e <strong>search_width</strong>. O ajuste manual desses valores pode ajudar a equilibrar o desempenho e a precisão.</p></li>
 <li><p><strong>team_size</strong>: Especifica o número de threads CUDA usadas para calcular a distância métrica na GPU. Os valores comuns são uma potência de 2 até 32 (por exemplo, 2, 4, 8, 16, 32). Tem um impacto menor no desempenho da pesquisa. O valor predefinido é <strong>0</strong>, em que o Milvus seleciona automaticamente o <strong>team_size</strong> com base na dimensão do vetor.</p></li>
@@ -203,7 +203,7 @@ collection.search(
       </svg>
     </button></h2><p>Ao usar índices de GPU, esteja ciente de certas restrições:</p>
 <ul>
-<li><p>Para <strong>GPU_IVF_FLAT</strong>, o valor máximo para o <strong>limite</strong> é 256.</p></li>
+<li><p>Para <strong>GPU_IVF_FLAT</strong>, o valor máximo para o <strong>limite</strong> é 1024.</p></li>
 <li><p>Para <strong>GPU_IVF_PQ</strong> e <strong>GPU_CAGRA</strong>, o valor máximo para o <strong>limite</strong> é 1024.</p></li>
 <li><p>Embora não exista um limite definido para o <strong>limite</strong> em <strong>GPU_BRUTE_FORCE</strong>, recomenda-se que não exceda 4096 para evitar potenciais problemas de desempenho.</p></li>
 <li><p>Atualmente, os índices GPU não suportam a distância COSINE. Se a distância COSINE for necessária, os dados devem ser normalizados primeiro e, em seguida, a distância do produto interno (IP) pode ser usada como um substituto.</p></li>

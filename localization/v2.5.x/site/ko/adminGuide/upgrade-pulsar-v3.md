@@ -111,11 +111,11 @@ Forwarding <span class="hljs-keyword">from</span> <span class="hljs-number">127.
 <button class="copy-code-btn"></button></code></pre>
 <p>출력.</p>
 <pre><code translate="no" class="language-yaml">{​
-<span class="hljs-string">&quot;segmentIDs&quot;</span>: [​
+  <span class="hljs-string">&quot;segmentIDs&quot;</span>: [​
     <span class="hljs-number">454097953998181000</span>,​
     <span class="hljs-number">454097953999383600</span>,​
     <span class="hljs-number">454097953998180800</span>​
-]​
+  ]​
 }​
 
 <button class="copy-code-btn"></button></code></pre></li>
@@ -221,15 +221,15 @@ head milvus.yaml -n <span class="hljs-number">20</span>​
 <pre><code translate="no" class="language-yaml">apiVersion: milvus.io/v1beta1​
 kind: Milvus​
 metadata:​
-annotations:​
+  annotations:​
     milvus.io/dependency-values-merged: <span class="hljs-string">&quot;true&quot;</span>​
     milvus.io/pod-service-label-added: <span class="hljs-string">&quot;true&quot;</span>​
     milvus.io/querynode-current-group-id: <span class="hljs-string">&quot;0&quot;</span>​
-creationTimestamp: <span class="hljs-string">&quot;2024-11-22T08:06:59Z&quot;</span>​
-finalizers:​
-- milvus.milvus.io/finalizer​
-generation: 3​
-labels:​
+  creationTimestamp: <span class="hljs-string">&quot;2024-11-22T08:06:59Z&quot;</span>​
+  finalizers:​
+  - milvus.milvus.io/finalizer​
+  generation: 3​
+  labels:​
     app: milvus​
     milvus.io/operator-version: 1.1.2​
 name: my-release​
@@ -237,23 +237,23 @@ namespace: default​
 resourceVersion: <span class="hljs-string">&quot;692217324&quot;</span>​
 uid: 7a469ed0-9df1-494e-bd9a-340fac4305b5​
 spec:​
-components:​
+  components:​
 
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>다음 내용으로 <code translate="no">patch.yaml</code> 파일을 생성합니다.</p>
 <pre><code translate="no" class="language-yaml"># a patch to retain etcd &amp; storage data and <span class="hljs-built_in">delete</span> pulsar data while <span class="hljs-built_in">delete</span> milvus​
 spec:​
-dependencies:​
+  dependencies:​
     etcd:​
-    inCluster:​
+      inCluster:​
         deletionPolicy: Retain​
         pvcDeletion: <span class="hljs-literal">false</span>​
     storage:​
-    inCluster:​
+      inCluster:​
         deletionPolicy: Retain​
         pvcDeletion: <span class="hljs-literal">false</span>​
     pulsar:​
-    inCluster:​
+      inCluster:​
         deletionPolicy: Delete​
         pvcDeletion: <span class="hljs-literal">true</span>​
 
@@ -300,12 +300,12 @@ milvus.milvus.io <span class="hljs-string">&quot;my-release&quot;</span> deleted
 <li><p>이전 단계에서 저장한 <code translate="no">values.yaml</code> 을 편집합니다.</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># change the following:​</span>
 pulsar:​
-enabled: false <span class="hljs-comment"># set to false​</span>
-<span class="hljs-comment"># you may also clean up rest fields under pulsar field​</span>
-<span class="hljs-comment"># it&#x27;s ok to keep them though.​</span>
+  enabled: false <span class="hljs-comment"># set to false​</span>
+  <span class="hljs-comment"># you may also clean up rest fields under pulsar field​</span>
+  <span class="hljs-comment"># it&#x27;s ok to keep them though.​</span>
 pulsarv3:​
-enabled: true​
-<span class="hljs-comment"># append other values for pulsar v3 chart if needs​</span>
+  enabled: true​
+  <span class="hljs-comment"># append other values for pulsar v3 chart if needs​</span>
 
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>로컬 헬름 리포지토리를 업데이트합니다.</p>
@@ -366,13 +366,13 @@ my-release-pulsarv3-zookeeper<span class="hljs-number">-2</span>               <
 apiVersion: milvus.io/v1beta1​
 kind: Milvus​
 metadata:​
-annotations: null <span class="hljs-comment"># this field should be removed or set to null​</span>
-resourceVersion: null <span class="hljs-comment"># this field should be removed or set to null​</span>
-uid: null <span class="hljs-comment"># this field should be removed or set to null​</span>
+  annotations: null <span class="hljs-comment"># this field should be removed or set to null​</span>
+  resourceVersion: null <span class="hljs-comment"># this field should be removed or set to null​</span>
+  uid: null <span class="hljs-comment"># this field should be removed or set to null​</span>
 spec:​
-dependencies:​
+  dependencies:​
     pulsar:​
-    inCluster:​
+      inCluster:​
         chartVersion: pulsar-v3​
         <span class="hljs-comment"># delete all previous values for pulsar v2 and set it to null.​</span>
         <span class="hljs-comment"># you may add additional values here for pulsar v3 if you&#x27;re sure about it.​</span>

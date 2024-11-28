@@ -203,7 +203,7 @@ collection.search(
       </svg>
     </button></h2><p>Ao usar índices de GPU, esteja ciente de certas restrições:</p>
 <ul>
-<li><p>Para <strong>GPU_IVF_FLAT</strong>, o valor máximo para o <strong>limite</strong> é 256.</p></li>
+<li><p>Para <strong>GPU_IVF_FLAT</strong>, o valor máximo para o <strong>limite</strong> é 1024.</p></li>
 <li><p>Para <strong>GPU_IVF_PQ</strong> e <strong>GPU_CAGRA</strong>, o valor máximo para o <strong>limite</strong> é 1024.</p></li>
 <li><p>Embora não exista um limite definido para o <strong>limite</strong> em <strong>GPU_BRUTE_FORCE</strong>, recomenda-se que não exceda 4096 para evitar potenciais problemas de desempenho.</p></li>
 <li><p>Atualmente, os índices GPU não suportam a distância COSINE. Se a distância COSINE for necessária, os dados devem ser normalizados primeiro e, em seguida, a distância do produto interno (IP) pode ser usada como um substituto.</p></li>

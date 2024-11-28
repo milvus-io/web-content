@@ -62,7 +62,7 @@ NAME                  PROVISIONER                  RECLAIMPOLICY    VOLUMEBIINDI
 <span class="hljs-title function_">standard</span> <span class="hljs-params">(<span class="hljs-keyword">default</span>)</span>    k8s.io/minikube-hostpath     Delete           Immediate             <span class="hljs-literal">false</span> 
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>Verifique <a href="/docs/pt/prerequisite-helm.md">os requisitos de hardware e software</a> antes da instalação.</p></li>
-<li><p>Antes de instalar o Milvus, é recomendável usar a <a href="https://milvus.io/tools/sizing">Milvus Sizing Tool</a> para estimar os requisitos de hardware com base no tamanho dos seus dados. Isso ajuda a garantir o desempenho ideal e a alocação de recursos para a instalação do Milvus.</p></li>
+<li><p>Antes de instalar o Milvus, recomenda-se a utilização da <a href="https://milvus.io/tools/sizing">Milvus Sizing Tool</a> para estimar os requisitos de hardware com base no tamanho dos dados. Isso ajuda a garantir o desempenho ideal e a alocação de recursos para a instalação do Milvus.</p></li>
 </ul>
 <div class="alert note">
 <p>Se encontrar algum problema ao puxar a imagem, contacte-nos em <a href="mailto:community@zilliz.com">community@zilliz.com</a> com detalhes sobre o problema, e nós forneceremos o suporte necessário.</p>
@@ -83,11 +83,11 @@ NAME                  PROVISIONER                  RECLAIMPOLICY    VOLUMEBIINDI
         ></path>
       </svg>
     </button></h2><p>Antes de instalar o Milvus Helm Charts, é necessário adicionar o repositório Milvus Helm.</p>
-<pre><code translate="no">$ helm repo <span class="hljs-keyword">add</span> milvus https:<span class="hljs-comment">//github.com/zilliztech/milvus-helm</span>
+<pre><code translate="no">$ helm repo <span class="hljs-keyword">add</span> milvus https:<span class="hljs-comment">//zilliztech.github.io/milvus-helm/</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <p>O repositório do Milvus Helm Charts em <code translate="no">https://github.com/milvus-io/milvus-helm</code> foi arquivado e pode obter mais actualizações em <code translate="no">https://github.com/zilliztech/milvus-helm</code> da seguinte forma:</p>
-<pre><code translate="no" class="language-shell">helm repo add zilliztech https://github.com/zilliztech/milvus-helm
+<pre><code translate="no" class="language-shell">helm repo add zilliztech https://zilliztech.github.io/milvus-helm/
 helm repo update
 <span class="hljs-comment"># upgrade existing helm release</span>
 helm upgrade my-release zilliztech/milvus
@@ -275,7 +275,7 @@ $ helm upgrade my-release zilliztech/milvus
 <li><a href="/docs/pt/multi-vector-search.md">Pesquisa híbrida</a></li>
 </ul></li>
 <li><p><a href="/docs/pt/upgrade_milvus_cluster-helm.md">Atualizar o Milvus usando o Helm Chart</a>.</p></li>
-<li><p><a href="/docs/pt/scaleout.md">Escalar seu cluster Milvus</a>.</p></li>
+<li><p><a href="/docs/pt/scaleout.md">Escalar o cluster do Milvus</a>.</p></li>
 <li><p>Implantar seu cluster Milvus em nuvens:</p>
 <ul>
 <li><a href="/docs/pt/eks.md">Amazon EKS</a></li>

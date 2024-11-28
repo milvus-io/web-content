@@ -52,7 +52,7 @@ summary: >-
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/sparse-vector.png" alt="Spare vector representation" class="doc-image" id="spare-vector-representation" />
    </span> <span class="img-wrapper"> <span>Representação de vectores esparsos</span> </span></p>
 <p>Os vectores esparsos podem ser gerados utilizando vários métodos, como o <a href="https://en.wikipedia.org/wiki/Tf%E2%80%93idf">TF-IDF</a> (Term Frequency-Inverse Document Frequency) e o <a href="https://en.wikipedia.org/wiki/Okapi_BM25">BM25</a> no processamento de texto. Além disso, o Milvus oferece métodos convenientes para ajudar a gerar e processar vectores esparsos. Para obter detalhes, consulte <a href="/docs/pt/embeddings.md">Embeddings</a>.</p>
-<p>Para dados de texto, o Milvus também fornece capacidades de pesquisa de texto completo, permitindo-lhe efetuar pesquisas vectoriais diretamente em dados de texto em bruto sem utilizar modelos de incorporação externos para gerar vectores esparsos. Para obter mais informações, consulte <a href="/docs/pt/full-text-search.md">Pesquisa de texto completo</a>.</p>
+<p>Para dados de texto, Milvus também fornece capacidades de pesquisa de texto completo, permitindo-lhe realizar pesquisas vectoriais diretamente em dados de texto em bruto sem utilizar modelos de incorporação externos para gerar vectores esparsos. Para obter mais informações, consulte <a href="/docs/pt/full-text-search.md">Pesquisa de texto completo</a>.</p>
 <p>Após a vectorização, os dados podem ser armazenados no Milvus para gestão e recuperação de vectores. O diagrama abaixo ilustra o processo básico.</p>
 <p>
   
@@ -116,7 +116,7 @@ sparse_vector = [[(<span class="hljs-number">1</span>, <span class="hljs-number"
 
 <button class="copy-code-btn"></button></code></pre></li>
 </ul>
-<h3 id="Add-vector-field​" class="common-anchor-header">Adicionar campo vetorial</h3><p>Para utilizar vectores esparsos em Milvus, defina um campo para armazenar vectores esparsos ao criar uma coleção. Este processo inclui.</p>
+<h3 id="Add-vector-field​" class="common-anchor-header">Adicionar campo vetorial</h3><p>Para utilizar vectores esparsos no Milvus, defina um campo para armazenar vectores esparsos ao criar uma coleção. Este processo inclui.</p>
 <ol>
 <li><p>Definir <code translate="no">datatype</code> como o tipo de dados de vetor esparso suportado, <code translate="no">SPARSE_FLOAT_VECTOR</code>.</p></li>
 <li><p>Não é necessário especificar a dimensão.</p></li>
@@ -208,7 +208,7 @@ schema.addField(AddFieldReq.builder()​
 }&quot;</span>​
 
 <button class="copy-code-btn"></button></code></pre>
-<p>Neste exemplo, é adicionado um campo de vetor chamado <code translate="no">sparse_vector</code> para armazenar vectores esparsos. O tipo de dados deste campo é <code translate="no">SPARSE_FLOAT_VECTOR</code>.</p>
+<p>Neste exemplo, um campo de vetor chamado <code translate="no">sparse_vector</code> é adicionado para armazenar vectores esparsos. O tipo de dados deste campo é <code translate="no">SPARSE_FLOAT_VECTOR</code>.</p>
 <h3 id="Set-index-params-for-vector-field​" class="common-anchor-header">Definir parâmetros de índice para o campo de vetor</h3><p>O processo de criação de um índice para vectores esparsos é semelhante ao dos <a href="/docs/pt/dense-vector.md">vectores densos</a>, mas com diferenças no tipo de índice especificado (<code translate="no">index_type</code>), na métrica de distância (<code translate="no">metric_type</code>) e nos parâmetros de índice (<code translate="no">params</code>).</p>
 <div class="multipleCode">
    <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
@@ -262,9 +262,9 @@ indexes.<span class="hljs-title function_">add</span>(<span class="hljs-title cl
 <button class="copy-code-btn"></button></code></pre>
 <p>No exemplo acima.</p>
 <ul>
-<li><p>Um índice do tipo <code translate="no">SPARSE_INVERTED_INDEX</code> é criado para o vetor esparso. Para vectores esparsos, pode especificar <code translate="no">SPARSE_INVERTED_INDEX</code> ou <code translate="no">SPARSE_WAND</code>. Para obter detalhes, consulte <a href="https://milvus.io/docs/index.md?tab=sparse">Índices de vetor esparso</a>.</p></li>
+<li><p>Um índice do tipo <code translate="no">SPARSE_INVERTED_INDEX</code> é criado para o vetor esparso. Para vectores esparsos, pode especificar <code translate="no">SPARSE_INVERTED_INDEX</code> ou <code translate="no">SPARSE_WAND</code>. Para obter detalhes, consulte <a href="https://milvus.io/docs/index.md?tab=sparse">Índices de vetor</a> esparso.</p></li>
 <li><p>Para vectores esparsos, <code translate="no">metric_type</code> suporta apenas <code translate="no">IP</code> (Inner Product), utilizado para medir a semelhança entre dois vectores esparsos. Para obter mais informações sobre similaridade, consulte <a href="/docs/pt/metric.md">Tipos de métrica</a>.</p></li>
-<li><p><code translate="no">drop_ratio_build</code> é um parâmetro de índice opcional específico para vectores esparsos. Controla a proporção de pequenos valores de vetor excluídos durante a construção do índice. Por exemplo, com <code translate="no">{&quot;drop_ratio_build&quot;: 0.2}</code>, os 20% mais pequenos dos valores de vetor serão excluídos durante a criação do índice, reduzindo o esforço computacional durante as pesquisas.</p></li>
+<li><p><code translate="no">drop_ratio_build</code> é um parâmetro de índice opcional especificamente para vectores esparsos. Controla a proporção de pequenos valores de vetor excluídos durante a construção do índice. Por exemplo, com <code translate="no">{&quot;drop_ratio_build&quot;: 0.2}</code>, os 20% mais pequenos dos valores de vetor serão excluídos durante a criação do índice, reduzindo o esforço computacional durante as pesquisas.</p></li>
 </ul>
 <h3 id="Create-collection​" class="common-anchor-header">Criar coleção</h3><p>Quando as definições do vetor esparso e do índice estiverem concluídas, pode criar uma coleção que contenha vectores esparsos. O exemplo abaixo utiliza o método <ins><code translate="no">create_collection</code></ins> para criar uma coleção denominada <code translate="no">my_sparse_collection</code>.</p>
 <div class="multipleCode">
@@ -479,3 +479,60 @@ sparse.<span class="hljs-title function_">put</span>(1000L, <span class="hljs-nu
 
 <button class="copy-code-btn"></button></code></pre>
 <p>Para obter mais informações sobre os parâmetros de pesquisa de similaridade, consulte <a href="/docs/pt/single-vector-search.md">Pesquisa ANN básica</a>.</p>
+<h2 id="Limits" class="common-anchor-header">Limites<button data-href="#Limits" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>Ao usar vetores esparsos no Milvus, considere os seguintes limites:</p>
+<ul>
+<li><p>Atualmente, apenas a métrica de distância <strong>IP</strong> é suportada para vetores esparsos. A elevada dimensionalidade dos vectores esparsos torna a distância L2 e cosseno impraticável.</p></li>
+<li><p>Para campos de vectores esparsos, apenas são suportados os tipos de índice <strong>SPARSE_INVERTED_INDEX</strong> e <strong>SPARSE_WAND</strong>.</p></li>
+<li><p>Os tipos de dados suportados para vectores esparsos:</p>
+<ul>
+<li>A parte da dimensão deve ser um inteiro de 32 bits sem sinal;</li>
+<li>A parte do valor pode ser um número de ponto flutuante de 32 bits não negativo.</li>
+</ul></li>
+<li><p>Os vectores esparsos têm de cumprir os seguintes requisitos para inserção e pesquisa:</p>
+<ul>
+<li>Pelo menos um valor no vetor é diferente de zero;</li>
+<li>Os índices do vetor são não-negativos.</li>
+</ul></li>
+</ul>
+<h2 id="FAQ" class="common-anchor-header">PERGUNTAS FREQUENTES<button data-href="#FAQ" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><ul>
+<li><p><strong>Pode explicar a diferença entre SPARSE_INVERTED_INDEX e SPARSE_WAND, e como posso escolher entre eles?</strong></p>
+<p><strong>O SPARSE_INVERTED_INDEX</strong> é um índice invertido tradicional, enquanto <strong>o SPARSE_WAND</strong> utiliza o algoritmo <a href="https://dl.acm.org/doi/10.1145/956863.956944">Weak-AND</a> para reduzir o número de avaliações de distância IP completas durante a pesquisa. <strong>O SPARSE_WAND</strong> é normalmente mais rápido, mas o seu desempenho pode diminuir com o aumento da densidade do vetor. Para escolher entre eles, realize experiências e benchmarks com base no seu conjunto de dados e caso de utilização específicos.</p></li>
+<li><p><strong>Como devo escolher os parâmetros drop_ratio_build e drop_ratio_search?</strong></p>
+<p>A escolha de <strong>drop_ratio_build</strong> e <strong>drop_ratio_search</strong> depende das caraterísticas dos seus dados e dos seus requisitos de latência/rendimento e precisão da pesquisa.</p></li>
+<li><p><strong>A dimensão de um embedding esparso pode ser qualquer valor discreto dentro do espaço uint32?</strong></p>
+<p>Sim, com uma exceção. A dimensão de uma incorporação esparsa pode ser qualquer valor no intervalo de <code translate="no">[0, maximum of uint32)</code>. Isso significa que você não pode usar o valor máximo de uint32.</p></li>
+<li><p><strong>As pesquisas em segmentos crescentes são conduzidas através de um índice ou por força bruta?</strong></p>
+<p>As pesquisas em segmentos crescentes são realizadas através de um índice do mesmo tipo que o índice do segmento selado. Para novos segmentos crescentes antes de o índice ser construído, é usada uma pesquisa de força bruta.</p></li>
+<li><p><strong>É possível ter vetores esparsos e densos em uma única coleção?</strong></p>
+<p>Sim, com suporte a vários tipos de vetores, é possível criar coleções com colunas de vetores esparsos e densos e executar pesquisas híbridas nelas.</p></li>
+</ul>

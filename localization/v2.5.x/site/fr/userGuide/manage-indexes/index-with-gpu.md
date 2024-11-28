@@ -203,9 +203,9 @@ collection.search(
       </svg>
     </button></h2><p>Lorsque vous utilisez des index GPU, vous devez tenir compte de certaines contraintes :</p>
 <ul>
-<li><p>Pour <strong>GPU_IVF_FLAT</strong>, la valeur maximale de la <strong>limite</strong> est 256.</p></li>
+<li><p>Pour <strong>GPU_IVF_FLAT</strong>, la valeur maximale de la <strong>limite</strong> est de 1024.</p></li>
 <li><p>Pour <strong>GPU_IVF_PQ</strong> et <strong>GPU_CAGRA</strong>, la valeur maximale de la <strong>limite</strong> est de 1024.</p></li>
-<li><p>Bien qu'il n'y ait pas de <strong>limite</strong> définie pour <strong>GPU_BRUTE_FORCE</strong>, il est recommandé de ne pas dépasser 4096 pour éviter les problèmes de performance.</p></li>
+<li><p>Bien qu'il n'y ait pas de <strong>limite</strong> fixée pour <strong>GPU_BRUTE_FORCE</strong>, il est recommandé de ne pas dépasser 4096 pour éviter les problèmes de performance.</p></li>
 <li><p>Actuellement, les index GPU ne prennent pas en charge la distance COSINE. Si la distance COSINE est requise, les données doivent d'abord être normalisées, puis la distance du produit intérieur (IP) peut être utilisée comme substitut.</p></li>
 <li><p>La protection OOM du chargement pour les index GPU n'est pas entièrement prise en charge, une trop grande quantité de données peut entraîner le blocage du QueryNode.</p></li>
 <li><p>Les index GPU ne prennent pas en charge les fonctions de recherche telles que la <a href="https://milvus.io/docs/single-vector-search.md#Range-search">recherche par plage</a> et la <a href="https://milvus.io/docs/single-vector-search.md#Grouping-searchh">recherche par groupement</a>.</p></li>

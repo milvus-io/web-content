@@ -80,7 +80,7 @@ Milvusドキュメントへようこそ！</h1></p>
 <li><a href="/docs/ja/configure-docker.md">Milvusの設定</a></li>
 <li><a href="/docs/ja/deploy_s3.md">依存関係の管理</a></li>
 <li><a href="/docs/ja/eks.md">クラウドへのデプロイ</a></li>
-<li><a href="/docs/ja/scaleout.md">Milvusクラスターのスケール</a></li>
+<li><a href="/docs/ja/scaleout.md">Milvusクラスタのスケール</a></li>
 <li><a href="/docs/ja/monitor_overview.md">監視とアラート</a></li>
 </ul>
 </div>
@@ -114,7 +114,7 @@ Milvusドキュメントへようこそ！</h1></p>
     </button></h2><p><em>2024年11月 - Milvus 2.5.0リリース</em></p>
 <ul>
 <li><a href="/docs/ja/full-text-search.md">全文検索の</a>ガイダンスを追加しました。</li>
-<li><a href="/docs/ja/keyword-match.md">キーワード検索の</a>方法に関するガイダンスを追加しました。</li>
+<li><a href="/docs/ja/keyword-match.md">テキストマッチの</a>方法に関するガイダンスを追加しました。</li>
 <li><a href="/docs/ja/nullable-and-default.md">NULL値およびデフォルト値の有効</a>化方法に関するガイダンスを追加しました。</li>
 <li><a href="/docs/ja/analyzer-overview.md">アナライザーの</a>説明を追加。</li>
 <li><a href="/docs/ja/bitmap.md">ビットマップインデックスの</a>説明を追加。</li>

@@ -287,6 +287,18 @@
         "children": []
       },
       {
+        "label": "Tipos métricos",
+        "id": "metric.md",
+        "order": 9,
+        "children": []
+      },
+      {
+        "label": "Nivel de coherencia",
+        "id": "consistency.md",
+        "order": 10,
+        "children": []
+      },
+      {
         "label": "Réplica en memoria",
         "id": "replica.md",
         "order": 11,
@@ -602,31 +614,39 @@
         ]
       },
       {
-        "label": "Gestionar índices",
+        "label": "Índices",
         "id": "manage_indexes",
         "order": 4,
         "isMenu": true,
         "children": [
           {
-            "label": "Campos vectoriales de índice",
+            "label": "Índices vectoriales",
             "id": "index-vector-fields.md",
             "order": 0,
             "children": []
           },
           {
-            "label": "Índice Campos escalares",
-            "id": "index-scalar-fields.md",
+            "label": "Índices escalares",
+            "id": "scalar-index",
             "order": 1,
-            "children": []
+            "isMenu": true,
+            "children": [
+              {
+                "label": "Índice Campos escalares",
+                "id": "index-scalar-fields.md",
+                "order": 1,
+                "children": []
+              },
+              {
+                "label": "Índice de mapa de bits",
+                "id": "bitmap.md",
+                "order": 2,
+                "children": []
+              }
+            ]
           },
           {
-            "label": "Índice BITMAP",
-            "id": "bitmap.md",
-            "order": 2,
-            "children": []
-          },
-          {
-            "label": "Índice con GPU",
+            "label": "Índices habilitados para GPU",
             "id": "index-with-gpu.md",
             "order": 3,
             "children": []
@@ -682,7 +702,7 @@
             "children": []
           },
           {
-            "label": "Coincidencia de palabras clave",
+            "label": "Coincidencia de texto",
             "id": "keyword-match.md",
             "order": 7,
             "children": []
@@ -700,30 +720,6 @@
             "children": []
           },
           {
-            "label": "Utilizar mmap",
-            "id": "mmap.md",
-            "order": 10,
-            "children": []
-          },
-          {
-            "label": "Agrupación Compactación",
-            "id": "clustering-compaction.md",
-            "order": 11,
-            "children": []
-          },
-          {
-            "label": "Nivel de coherencia",
-            "id": "consistency.md",
-            "order": 12,
-            "children": []
-          },
-          {
-            "label": "Tipos métricos",
-            "id": "metric.md",
-            "order": 13,
-            "children": []
-          },
-          {
             "label": "Filtrado de metadatos",
             "id": "boolean.md",
             "order": 14,
@@ -733,26 +729,6 @@
             "label": "Nueva clasificación",
             "id": "reranking.md",
             "order": 15,
-            "children": []
-          }
-        ]
-      },
-      {
-        "label": "Importación de datos",
-        "id": "data_import",
-        "order": 6,
-        "isMenu": true,
-        "children": [
-          {
-            "label": "Preparar los datos de origen",
-            "id": "prepare-source-data.md",
-            "order": 0,
-            "children": []
-          },
-          {
-            "label": "Importar datos",
-            "id": "import-data.md",
-            "order": 1,
             "children": []
           }
         ]
@@ -898,10 +874,30 @@
     ]
   },
   {
+    "label": "Importación de datos",
+    "id": "data_import",
+    "order": 5,
+    "isMenu": true,
+    "children": [
+      {
+        "label": "Preparar los datos de origen",
+        "id": "prepare-source-data.md",
+        "order": 0,
+        "children": []
+      },
+      {
+        "label": "Importar datos",
+        "id": "import-data.md",
+        "order": 1,
+        "children": []
+      }
+    ]
+  },
+  {
     "label": "Migración Milvus",
     "id": "milvus_migration",
     "isMenu": true,
-    "order": 5,
+    "order": 6,
     "children": [
       {
         "label": "Visión general",
@@ -998,7 +994,7 @@
                 "children": []
               },
               {
-                "label": "Despliegue en GCP",
+                "label": "Implantación en GCP",
                 "id": "gcp.md",
                 "order": 2,
                 "children": []
@@ -1299,7 +1295,7 @@
             "isMenu": true,
             "children": [
               {
-                "label": "Rastreo de Jaeger",
+                "label": "Seguimiento de Jaeger",
                 "id": "config_jaeger_tracing.md",
                 "order": 0,
                 "children": []
@@ -1322,9 +1318,29 @@
         ]
       },
       {
+        "label": "Optimización del almacenamiento",
+        "id": "storage_optimization",
+        "order": 10,
+        "isMenu": true,
+        "children": [
+          {
+            "label": "Utilizar mmap",
+            "id": "mmap.md",
+            "order": 0,
+            "children": []
+          },
+          {
+            "label": "Agrupación Compactación",
+            "id": "clustering-compaction.md",
+            "order": 1,
+            "children": []
+          }
+        ]
+      },
+      {
         "label": "Seguridad",
         "id": "security",
-        "order": 10,
+        "order": 11,
         "isMenu": true,
         "children": [
           {

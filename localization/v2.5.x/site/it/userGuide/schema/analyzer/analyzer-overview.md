@@ -24,12 +24,12 @@ summary: >-
         ></path>
       </svg>
     </button></h1><p>Nell'elaborazione del testo, un <strong>analizzatore</strong> è un componente cruciale che converte il testo grezzo in un formato strutturato e ricercabile. Ogni analizzatore è generalmente composto da due elementi fondamentali: <strong>tokenizer</strong> e <strong>filtro</strong>. Insieme, trasformano il testo in ingresso in token, li raffinano e li preparano per un'indicizzazione e un recupero efficienti.</p>
-<p>In Milvus, gli analizzatori vengono configurati durante la creazione della raccolta, quando si aggiungono i campi <code translate="no">VARCHAR</code> allo schema della raccolta. I token prodotti da un analizzatore possono essere usati per costruire un indice per la corrispondenza con le parole chiave o convertiti in embedding sparsi per la ricerca full text. Per ulteriori informazioni, fare riferimento a <a href="/docs/it/keyword-match.md">Corrispondenza per parola chiave</a> o <a href="/docs/it/full-text-search.md">Ricerca a testo completo</a>.</p>
+<p>In Milvus, gli analizzatori vengono configurati durante la creazione della raccolta, quando si aggiungono i campi <code translate="no">VARCHAR</code> allo schema della raccolta. I token prodotti da un analizzatore possono essere usati per costruire un indice per la corrispondenza del testo o convertiti in embedding sparsi per la ricerca full text. Per ulteriori informazioni, fare riferimento a <a href="/docs/it/keyword-match.md">Corrispondenza del testo</a> o <a href="/docs/it/full-text-search.md">Ricerca di testo completo</a>.</p>
 <div class="alert note">
 <p>L'uso degli analizzatori può influire sulle prestazioni.</p>
 <ul>
 <li><p><strong>Ricerca a testo pieno:</strong> Per la ricerca full text, i canali DataNode e <strong>QueryNode</strong> consumano i dati più lentamente perché devono attendere il completamento della tokenizzazione. Di conseguenza, i dati appena ingeriti impiegano più tempo per diventare disponibili per la ricerca.</p></li>
-<li><p><strong>Corrispondenza di parole chiave:</strong> Per la corrispondenza delle parole chiave, anche la creazione dell'indice è più lenta, poiché la tokenizzazione deve essere completata prima di poter costruire un indice.</p></li>
+<li><p><strong>Corrispondenza di testo:</strong> Per la corrispondenza del testo, anche la creazione dell'indice è più lenta, poiché la tokenizzazione deve essere completata prima di poter costruire un indice.</p></li>
 </ul>
 </div>
 <h2 id="Anatomy-of-an-analyzer​" class="common-anchor-header">Anatomia di un analizzatore<button data-href="#Anatomy-of-an-analyzer​" class="anchor-icon" translate="no">
@@ -102,7 +102,7 @@ summary: >-
 <ul>
 <li><p><code translate="no">standard</code>: Adatto per l'elaborazione di testi generici, applicando la tokenizzazione standard e il filtraggio delle minuscole.</p></li>
 <li><p><code translate="no">english</code>: Ottimizzato per i testi in lingua inglese, con supporto per le stop words inglesi.</p></li>
-<li><p><code translate="no">chinese</code>: Specializzato per l'elaborazione di testi in cinese, compresa la tokenizzazione adattata alle strutture della lingua cinese.</p></li>
+<li><p><code translate="no">chinese</code>: Specializzato per l'elaborazione del testo cinese, con tokenizzazione adattata alle strutture della lingua cinese.</p></li>
 </ul>
 <h3 id="Custom-analyzer​" class="common-anchor-header">Analizzatore personalizzato</h3><p>Per un'elaborazione del testo più avanzata, gli analizzatori personalizzati di Milvus consentono di costruire una pipeline di trattamento del testo su misura, specificando sia un <strong>tokenizzatore</strong> che dei filtri. Questa configurazione è ideale per casi d'uso specializzati in cui è richiesto un controllo preciso.</p>
 <h4 id="Tokenizer​" class="common-anchor-header">Tokenizzatore</h4><p>Il <strong>tokenizer</strong> è un componente <strong>obbligatorio</strong> per un analizzatore personalizzato, che avvia la pipeline di analisi scomponendo il testo in ingresso in unità discrete o <strong>token</strong>. La tokenizzazione segue regole specifiche, come la divisione per spazi bianchi o punteggiatura, a seconda del tipo di tokenizzatore. Questo processo consente una gestione più precisa e indipendente di ogni parola o frase.</p>

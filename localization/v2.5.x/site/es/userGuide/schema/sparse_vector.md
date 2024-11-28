@@ -478,4 +478,61 @@ sparse.<span class="hljs-title function_">put</span>(1000L, <span class="hljs-nu
 <span class="hljs-comment">## {&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:[{&quot;distance&quot;:0.63,&quot;id&quot;:&quot;453577185629572535&quot;,&quot;pk&quot;:&quot;453577185629572535&quot;},{&quot;distance&quot;:0.1,&quot;id&quot;:&quot;453577185629572534&quot;,&quot;pk&quot;:&quot;453577185629572534&quot;}]}​</span>
 
 <button class="copy-code-btn"></button></code></pre>
-<p>Para obtener más información sobre los parámetros de búsqueda por similitud, consulte <a href="/docs/es/single-vector-search.md">Búsqueda básica de RNA</a>.</p>
+<p>Para obtener más información sobre los parámetros de búsqueda de similitudes, consulte <a href="/docs/es/single-vector-search.md">Búsqueda básica de RNA</a>.</p>
+<h2 id="Limits" class="common-anchor-header">Límites<button data-href="#Limits" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>Cuando utilice vectores dispersos en Milvus, tenga en cuenta los siguientes límites:</p>
+<ul>
+<li><p>Actualmente, sólo se admite la métrica de distancia <strong>IP</strong> para vectores dispersos. La alta dimensionalidad de los vectores dispersos hace que las distancias L2 y coseno sean poco prácticas.</p></li>
+<li><p>Para los campos de vectores dispersos, sólo se admiten los tipos de índice <strong>SPARSE_INVERTED_INDEX</strong> y <strong>SPARSE_WAND</strong>.</p></li>
+<li><p>Tipos de datos admitidos para vectores dispersos:</p>
+<ul>
+<li>La parte de dimensión debe ser un entero de 32 bits sin signo;</li>
+<li>La parte de valor puede ser un número de coma flotante de 32 bits no negativo.</li>
+</ul></li>
+<li><p>Los vectores dispersos deben cumplir los siguientes requisitos para la inserción y la búsqueda:</p>
+<ul>
+<li>Al menos un valor del vector es distinto de cero;</li>
+<li>Los índices del vector no son negativos.</li>
+</ul></li>
+</ul>
+<h2 id="FAQ" class="common-anchor-header">FAQ<button data-href="#FAQ" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><ul>
+<li><p><strong>¿Puede explicar la diferencia entre SPARSE_INVERTED_INDEX y SPARSE_WAND, y cómo puedo elegir entre ellos?</strong></p>
+<p><strong>SPARSE_INVERTED_INDEX</strong> es un índice invertido tradicional, mientras que <strong>SPARSE_WAND</strong> utiliza el algoritmo <a href="https://dl.acm.org/doi/10.1145/956863.956944">Weak-AND</a> para reducir el número de evaluaciones de distancia IP completa durante la búsqueda. <strong>SPARSE_WAND</strong> suele ser más rápido, pero su rendimiento puede disminuir al aumentar la densidad del vector. Para elegir entre ellos, realice experimentos y pruebas comparativas basadas en su conjunto de datos y caso de uso específicos.</p></li>
+<li><p><strong>¿Cómo debo elegir los parámetros drop_ratio_build y drop_ratio_search?</strong></p>
+<p>La elección de <strong>drop_ratio_build</strong> y <strong>drop_ratio_search</strong> depende de las características de los datos y de los requisitos de latencia/rendimiento y precisión de la búsqueda.</p></li>
+<li><p><strong>¿Puede la dimensión de una incrustación dispersa ser cualquier valor discreto dentro del espacio uint32?</strong></p>
+<p>Sí, con una excepción. La dimensión de una incrustación dispersa puede ser cualquier valor en el intervalo de <code translate="no">[0, maximum of uint32)</code>. Esto significa que no se puede utilizar el valor máximo de uint32.</p></li>
+<li><p><strong>¿Las búsquedas en segmentos crecientes se realizan a través de un índice o por fuerza bruta?</strong></p>
+<p>Las búsquedas en segmentos crecientes se realizan a través de un índice del mismo tipo que el índice de segmento sellado. Para nuevos segmentos crecientes antes de que se construya el índice, se utiliza una búsqueda por fuerza bruta.</p></li>
+<li><p><strong>¿Es posible tener vectores dispersos y densos en una misma colección?</strong></p>
+<p>Sí, con el soporte de tipos de vectores múltiples, puede crear colecciones con columnas de vectores tanto dispersos como densos y realizar búsquedas híbridas en ellas.</p></li>
+</ul>

@@ -24,7 +24,7 @@ title: 将 Milvus 的脉冲星从 V2 升级到 V3
 <ol>
 <li><p>升级过程需要短暂的服务中断（通常需要几分钟到十多分钟，视数据量而定）。</p></li>
 <li><p>操作前，需要停止所有正在运行的客户端向 Milvus 写入数据。否则，写入的数据可能会丢失。</p></li>
-<li><p>本文假设 Milvus 安装在命名空间<code translate="no">default</code> 并命名为<code translate="no">my-release</code> 。在执行从本页复制的命令时，请将参数更改为您自己的命名空间和发布名称。</p></li>
+<li><p>本文假定 Milvus 安装在命名空间<code translate="no">default</code> 并命名为<code translate="no">my-release</code> 。在执行从本页复制的命令时，请将参数更改为您自己的命名空间和发布名称。</p></li>
 <li><p>确保您的工作环境在 Kubernetes 集群的上述命名空间下拥有权限，并安装了以下命令。</p>
 <p>a.<code translate="no">kubectl</code> &gt;= 1.20</p>
 <p>b.<code translate="no">helm</code> &gt;= 3.14.0</p>
@@ -69,7 +69,7 @@ title: 将 Milvus 的脉冲星从 V2 升级到 V3
         ></path>
       </svg>
     </button></h2><p>本节提供在 Milvus 中将 Pulsar 从 V2 升级到 V3 的详细步骤。</p>
-<h3 id="Persist-data-not-consumed-in-Pulsar" class="common-anchor-header">保留 Pulsar 中未消耗的数据</h3><p>在这一步中，需要确保 Pulsar 中的现有数据已持久化到对象存储服务。 有两种方法可供选择，你可以根据自己的需要来选择。</p>
+<h3 id="Persist-data-not-consumed-in-Pulsar" class="common-anchor-header">保留 Pulsar 中未消耗的数据</h3><p>在这一步中，需要确保 Pulsar 中的现有数据已持久化到对象存储服务中。 有两种方法可供选择，你可以根据自己的需要进行选择。</p>
 <h4 id="Approach-1-Using-Attu" class="common-anchor-header">方法 1：使用 Attu</h4><p>如果你的工作 Milvus 部署中只有少量的 Collections，且分段不多，你可以使用 Attu 将数据持久化到对象存储服务。</p>
 <ol>
 <li><p>选择所有数据库中的每个 Collections，进入<code translate="no">Segments</code> 面板，点击<code translate="no">Flush</code> 按钮</p>
@@ -111,11 +111,11 @@ Forwarding <span class="hljs-keyword">from</span> <span class="hljs-number">127.
 <button class="copy-code-btn"></button></code></pre>
 <p>输出。</p>
 <pre><code translate="no" class="language-yaml">{​
-<span class="hljs-string">&quot;segmentIDs&quot;</span>: [​
+  <span class="hljs-string">&quot;segmentIDs&quot;</span>: [​
     <span class="hljs-number">454097953998181000</span>,​
     <span class="hljs-number">454097953999383600</span>,​
     <span class="hljs-number">454097953998180800</span>​
-]​
+  ]​
 }​
 
 <button class="copy-code-btn"></button></code></pre></li>
@@ -210,7 +210,7 @@ persistentvolumeclaim <span class="hljs-string">&quot;my-release-pulsar-zookeepe
 
 <button class="copy-code-btn"></button></code></pre></li>
 </ol>
-<h4 id="Delete-Pulsar-V2-using-Milvus-Operator" class="common-anchor-header">使用 Milvus 操作符删除 Pulsar V2</h4><p>如果使用 Milvus 操作符安装了 Milvus，请按照以下步骤停止 Milvus pod 并删除 Pulsar V2 部署。</p>
+<h4 id="Delete-Pulsar-V2-using-Milvus-Operator" class="common-anchor-header">使用 Milvus 操作符删除 Pulsar V2</h4><p>如果使用 Milvus Operator 安装了 Milvus，请按照以下步骤停止 Milvus pod 并删除 Pulsar V2 部署。</p>
 <ol>
 <li><p>将当前 Milvus Manifest 保存到<code translate="no">milvus.yaml</code> 以备后用。</p>
 <pre><code translate="no" class="language-bash">kubectl -n <span class="hljs-literal">default</span> <span class="hljs-keyword">get</span> milvus my-release -o yaml &gt; milvus.yaml​
@@ -221,15 +221,15 @@ head milvus.yaml -n <span class="hljs-number">20</span>​
 <pre><code translate="no" class="language-yaml">apiVersion: milvus.io/v1beta1​
 kind: Milvus​
 metadata:​
-annotations:​
+  annotations:​
     milvus.io/dependency-values-merged: <span class="hljs-string">&quot;true&quot;</span>​
     milvus.io/pod-service-label-added: <span class="hljs-string">&quot;true&quot;</span>​
     milvus.io/querynode-current-group-id: <span class="hljs-string">&quot;0&quot;</span>​
-creationTimestamp: <span class="hljs-string">&quot;2024-11-22T08:06:59Z&quot;</span>​
-finalizers:​
-- milvus.milvus.io/finalizer​
-generation: 3​
-labels:​
+  creationTimestamp: <span class="hljs-string">&quot;2024-11-22T08:06:59Z&quot;</span>​
+  finalizers:​
+  - milvus.milvus.io/finalizer​
+  generation: 3​
+  labels:​
     app: milvus​
     milvus.io/operator-version: 1.1.2​
 name: my-release​
@@ -237,23 +237,23 @@ namespace: default​
 resourceVersion: <span class="hljs-string">&quot;692217324&quot;</span>​
 uid: 7a469ed0-9df1-494e-bd9a-340fac4305b5​
 spec:​
-components:​
+  components:​
 
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>创建包含以下内容的<code translate="no">patch.yaml</code> 文件。</p>
 <pre><code translate="no" class="language-yaml"># a patch to retain etcd &amp; storage data and <span class="hljs-built_in">delete</span> pulsar data while <span class="hljs-built_in">delete</span> milvus​
 spec:​
-dependencies:​
+  dependencies:​
     etcd:​
-    inCluster:​
+      inCluster:​
         deletionPolicy: Retain​
         pvcDeletion: <span class="hljs-literal">false</span>​
     storage:​
-    inCluster:​
+      inCluster:​
         deletionPolicy: Retain​
         pvcDeletion: <span class="hljs-literal">false</span>​
     pulsar:​
-    inCluster:​
+      inCluster:​
         deletionPolicy: Delete​
         pvcDeletion: <span class="hljs-literal">true</span>​
 
@@ -300,12 +300,12 @@ milvus.milvus.io <span class="hljs-string">&quot;my-release&quot;</span> deleted
 <li><p>编辑上一步保存的<code translate="no">values.yaml</code> 。</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># change the following:​</span>
 pulsar:​
-enabled: false <span class="hljs-comment"># set to false​</span>
-<span class="hljs-comment"># you may also clean up rest fields under pulsar field​</span>
-<span class="hljs-comment"># it&#x27;s ok to keep them though.​</span>
+  enabled: false <span class="hljs-comment"># set to false​</span>
+  <span class="hljs-comment"># you may also clean up rest fields under pulsar field​</span>
+  <span class="hljs-comment"># it&#x27;s ok to keep them though.​</span>
 pulsarv3:​
-enabled: true​
-<span class="hljs-comment"># append other values for pulsar v3 chart if needs​</span>
+  enabled: true​
+  <span class="hljs-comment"># append other values for pulsar v3 chart if needs​</span>
 
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>更新本地 Helm repo</p>
@@ -366,13 +366,13 @@ my-release-pulsarv3-zookeeper<span class="hljs-number">-2</span>               <
 apiVersion: milvus.io/v1beta1​
 kind: Milvus​
 metadata:​
-annotations: null <span class="hljs-comment"># this field should be removed or set to null​</span>
-resourceVersion: null <span class="hljs-comment"># this field should be removed or set to null​</span>
-uid: null <span class="hljs-comment"># this field should be removed or set to null​</span>
+  annotations: null <span class="hljs-comment"># this field should be removed or set to null​</span>
+  resourceVersion: null <span class="hljs-comment"># this field should be removed or set to null​</span>
+  uid: null <span class="hljs-comment"># this field should be removed or set to null​</span>
 spec:​
-dependencies:​
+  dependencies:​
     pulsar:​
-    inCluster:​
+      inCluster:​
         chartVersion: pulsar-v3​
         <span class="hljs-comment"># delete all previous values for pulsar v2 and set it to null.​</span>
         <span class="hljs-comment"># you may add additional values here for pulsar v3 if you&#x27;re sure about it.​</span>

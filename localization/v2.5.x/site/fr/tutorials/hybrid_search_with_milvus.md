@@ -25,8 +25,8 @@ title: Recherche hybride avec Milvus
 <p>Milvus prend en charge les méthodes de recherche denses, éparses et hybrides :</p>
 <ul>
 <li>Recherche dense : Utilise le contexte sémantique pour comprendre le sens des requêtes.</li>
-<li>Récupération éparse : Elle met l'accent sur la correspondance des mots-clés pour trouver des résultats basés sur des termes spécifiques, ce qui équivaut à une recherche en texte intégral.</li>
-<li>Recherche hybride : Combine les approches denses et éparses, en capturant le contexte complet et les mots-clés spécifiques pour obtenir des résultats de recherche complets.</li>
+<li>Récupération éparse : Elle met l'accent sur la correspondance des textes pour trouver des résultats basés sur des termes spécifiques, ce qui équivaut à une recherche en texte intégral.</li>
+<li>Recherche hybride : Combine les approches denses et éparses, en capturant le contexte complet et les mots-clés spécifiques pour des résultats de recherche complets.</li>
 </ul>
 <p>En intégrant ces méthodes, la recherche hybride Milvus équilibre les similitudes sémantiques et lexicales, améliorant ainsi la pertinence globale des résultats de la recherche. Ce bloc-notes décrit le processus de mise en place et d'utilisation de ces stratégies de recherche, en soulignant leur efficacité dans divers scénarios de recherche.</p>
 <h3 id="Dependencies-and-Environment" class="common-anchor-header">Dépendances et environnement</h3><pre><code translate="no" class="language-shell">$ pip install --upgrade pymilvus <span class="hljs-string">&quot;pymilvus[model]&quot;</span>

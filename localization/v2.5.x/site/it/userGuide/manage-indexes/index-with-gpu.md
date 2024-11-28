@@ -147,7 +147,7 @@ collection.create_index(
     <span class="hljs-string">&quot;params&quot;</span>: {}
 }
 <button class="copy-code-btn"></button></code></pre>
-<p>Non sono richieste configurazioni <strong>di parametri</strong> aggiuntivi.</p></li>
+<p>Non sono necessarie configurazioni <strong>di parametri</strong> aggiuntivi.</p></li>
 <li><p>Indice<strong>GPU_CAGRA</strong> </p>
 <pre><code translate="no" class="language-python">search_params = {
     <span class="hljs-string">&quot;metric_type&quot;</span>: <span class="hljs-string">&quot;L2&quot;</span>,
@@ -164,8 +164,8 @@ collection.create_index(
 <ul>
 <li><p><strong>itopk_size</strong>: Determina la dimensione dei risultati intermedi conservati durante la ricerca. Un valore maggiore può migliorare la ricerca a scapito delle prestazioni. Deve essere almeno uguale al valore finale top-k<strong>(limite</strong>) ed è tipicamente una potenza di 2 (ad esempio, 16, 32, 64, 128).</p></li>
 <li><p><strong>search_width</strong>: Specifica il numero di punti di ingresso nel grafo CAGRA durante la ricerca. L'aumento di questo valore può migliorare il richiamo, ma può influire sulle prestazioni della ricerca.</p></li>
-<li><p><strong>min_iterations</strong> / <strong>max_iterations</strong>: Questi parametri controllano il processo di iterazione della ricerca. Per impostazione predefinita, sono impostati su <strong>0</strong> e CAGRA determina automaticamente il numero di iterazioni in base a <strong>itopk_size</strong> e <strong>search_width</strong>. La regolazione manuale di questi valori può aiutare a bilanciare prestazioni e accuratezza.</p></li>
-<li><p><strong>team_size</strong>: Specifica il numero di thread CUDA utilizzati per calcolare la distanza metrica sulla GPU. I valori più comuni sono una potenza di 2 fino a 32 (ad esempio, 2, 4, 8, 16, 32). Ha un impatto minimo sulle prestazioni della ricerca. Il valore predefinito è <strong>0</strong>, dove Milvus seleziona automaticamente il <strong>team_size</strong> in base alla dimensione del vettore.</p></li>
+<li><p><strong>min_iterations</strong> / <strong>max_iterations</strong>: Questi parametri controllano il processo di iterazione della ricerca. Per impostazione predefinita, sono impostati su <strong>0</strong> e CAGRA determina automaticamente il numero di iterazioni in base a <strong>itopk_size</strong> e <strong>search_width</strong>. La regolazione manuale di questi valori può aiutare a bilanciare prestazioni e precisione.</p></li>
+<li><p><strong>team_size</strong>: Specifica il numero di thread CUDA utilizzati per calcolare la distanza metrica sulla GPU. I valori comuni sono una potenza di 2 fino a 32 (ad esempio, 2, 4, 8, 16, 32). Ha un impatto minimo sulle prestazioni della ricerca. Il valore predefinito è <strong>0</strong>, dove Milvus seleziona automaticamente il <strong>team_size</strong> in base alla dimensione del vettore.</p></li>
 </ul></li>
 <li><p>Indice<strong>GPU_IVF_FLAT</strong> o <strong>GPU_IVF_PQ</strong> </p>
 <pre><code translate="no" class="language-python">search_params = {
@@ -203,7 +203,7 @@ collection.search(
       </svg>
     </button></h2><p>Quando si usano gli indici GPU, occorre tenere conto di alcuni vincoli:</p>
 <ul>
-<li><p>Per <strong>GPU_IVF_FLAT</strong>, il valore massimo di <strong>limit</strong> è 256.</p></li>
+<li><p>Per <strong>GPU_IVF_FLAT</strong>, il valore massimo per il <strong>limite</strong> è 1024.</p></li>
 <li><p>Per <strong>GPU_IVF_PQ</strong> e <strong>GPU_CAGRA</strong>, il valore massimo di <strong>limit</strong> è 1024.</p></li>
 <li><p>Sebbene non sia stato fissato un limite per <strong>GPU_BRUTE_FORCE</strong>, si consiglia di non superare i 4096 per evitare potenziali problemi di prestazioni.</p></li>
 <li><p>Attualmente, gli indici GPU non supportano la distanza COSINE. Se è necessaria la distanza COSINE, i dati devono essere prima normalizzati e poi si può usare la distanza del prodotto interno (IP) come sostituto.</p></li>

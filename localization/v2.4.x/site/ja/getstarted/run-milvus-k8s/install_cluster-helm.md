@@ -83,11 +83,11 @@ NAME                  PROVISIONER                  RECLAIMPOLICY    VOLUMEBIINDI
         ></path>
       </svg>
     </button></h2><p>Milvus Helm Chartsをインストールする前に、Milvus Helmリポジトリを追加する必要があります。</p>
-<pre><code translate="no">$ helm repo <span class="hljs-keyword">add</span> milvus https:<span class="hljs-comment">//github.com/zilliztech/milvus-helm</span>
+<pre><code translate="no">$ helm repo <span class="hljs-keyword">add</span> milvus https:<span class="hljs-comment">//zilliztech.github.io/milvus-helm/</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <p><code translate="no">https://github.com/milvus-io/milvus-helm</code> にある Milvus Helm Charts リポジトリはアーカイブされており、<code translate="no">https://github.com/zilliztech/milvus-helm</code> から以下のようにアップデートを入手することができます：</p>
-<pre><code translate="no" class="language-shell">helm repo add zilliztech https://github.com/zilliztech/milvus-helm
+<pre><code translate="no" class="language-shell">helm repo add zilliztech https://zilliztech.github.io/milvus-helm/
 helm repo update
 <span class="hljs-comment"># upgrade existing helm release</span>
 helm upgrade my-release zilliztech/milvus
@@ -123,7 +123,7 @@ helm upgrade my-release zilliztech/milvus
     <li>リリース名にはアルファベット、数字、ダッシュのみを使用してください。リリース名にはドットは使用できません。</li>
     <li>MilvusをHelmと共にインストールする場合、デフォルトのコマンドラインはMilvusのクラスタバージョンをインストールします。Milvusをスタンドアロンでインストールする場合は、さらなる設定が必要です。</li>
     <li><a href="https://kubernetes.io/docs/reference/using-api/deprecation-guide/#v1-25">Kubernetesのdeprecated API migration guideに</a>よると、PodDisruptionBudgetの<b>policy/v1beta1</b>APIバージョンはv1.25で提供されなくなった。代わりに<b>policy/v1</b>APIバージョンを使用するようにマニフェストとAPIクライアントを移行することが推奨されます。<br/>Kubernetes v1.25以降でPodDisruptionBudgetの<b>policy/v1beta1</b>APIバージョンをまだ使用しているユーザのための回避策として、代わりに以下のコマンドを実行してmilvusをインストールすることができます:<br/> <code translate="no">helm install my-release milvus/milvus --set pulsar.bookkeeper.pdb.usePolicy=false,pulsar.broker.pdb.usePolicy=false,pulsar.proxy.pdb.usePolicy=false,pulsar.zookeeper.pdb.usePolicy=false</code></li> 
-    <li>詳細は<a href="https://artifacthub.io/packages/helm/milvus/milvus">Milvus Helm Chartと</a> <a href="https://helm.sh/docs/">Helmを</a>参照してください。</li>
+    <li>詳細については、<a href="https://artifacthub.io/packages/helm/milvus/milvus">Milvus Helm Chart</a>および<a href="https://helm.sh/docs/">Helmを</a>参照してください。</li>
   </ul>
 </div>
 <h3 id="2-Check-Milvus-cluster-status" class="common-anchor-header">2.Milvusクラスタのステータスの確認</h3><p>以下のコマンドを実行し、Milvusクラスタ内のすべてのPodのステータスを確認します。</p>
@@ -188,7 +188,7 @@ my-release-pulsar-zookeeper-metadata-98zbr       0/1   Completed  0        3m24s
 <h3 id="1-Get-Milvus-manifest" class="common-anchor-header">1.Milvusマニフェストの取得</h3><p>以下のコマンドを実行してMilvusマニフェストを取得します。</p>
 <pre><code translate="no" class="language-shell">$ helm template my-release milvus/milvus &gt; milvus_manifest.yaml
 <button class="copy-code-btn"></button></code></pre>
-<p>上記のコマンドはMilvusクラスタのチャートテンプレートをレンダリングし、その出力を<code translate="no">milvus_manifest.yaml</code> という名前のマニフェストファイルに保存します。このマニフェストを使用すると、コンポーネントと依存関係を持つMilvusクラスタを個別のポッドにインストールできます。</p>
+<p>上記のコマンドはMilvusクラスタのチャートテンプレートをレンダリングし、その出力を<code translate="no">milvus_manifest.yaml</code> という名前のマニフェストファイルに保存します。このマニフェストを使用して、コンポーネントと依存関係を持つMilvusクラスタを個別のポッドにインストールすることができます。</p>
 <div class="alert note">
 <ul>
 <li>すべてのMilvusコンポーネントが単一のポッドに含まれるスタンドアロンモードでMilvusインスタンスをインストールするには、代わりに<code translate="no">helm template my-release --set cluster.enabled=false --set etcd.replicaCount=1 --set minio.mode=standalone --set pulsar.enabled=false milvus/milvus &gt; milvus_manifest.yaml</code> を実行して、スタンドアロンモードのMilvusインスタンス用のチャートテンプレートをレンダリングする必要があります。</li>
@@ -284,6 +284,6 @@ $ helm upgrade my-release zilliztech/milvus
 </ul></li>
 <li><p><a href="/docs/ja/milvus_backup_overview.md">Milvusの</a>データバックアップのためのオープンソースツールである<a href="/docs/ja/milvus_backup_overview.md">Milvus Backupを</a>ご紹介します。</p></li>
 <li><p>Milvusのデバッグとダイナミックコンフィギュレーションアップデートのためのオープンソースツール、<a href="/docs/ja/birdwatcher_overview.md">Birdwatcherの</a>ご紹介。</p></li>
-<li><p>Milvusを直感的に管理するオープンソースのGUIツール<a href="https://milvus.io/docs/attu.md">Attuを</a>ご紹介します。</p></li>
+<li><p>Milvusを直感的に管理するオープンソースのGUIツール<a href="https://milvus.io/docs/attu.md">Attuを</a>ご覧ください。</p></li>
 <li><p><a href="/docs/ja/monitor.md">PrometheusでMilvusを監視する</a>。</p></li>
 </ul>

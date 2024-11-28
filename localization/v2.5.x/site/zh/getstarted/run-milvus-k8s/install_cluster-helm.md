@@ -65,7 +65,7 @@ NAME                  PROVISIONER                  RECLAIMPOLICY    VOLUMEBIINDI
 <li><p>安装 Milvus 之前，建议使用<a href="https://milvus.io/tools/sizing">Milvus 大小工具</a>，根据数据大小估算硬件需求。这有助于确保 Milvus 安装的最佳性能和资源分配。</p></li>
 </ul>
 <div class="alert note">
-<p>如果您在绘制图像时遇到任何问题，请通过<a href="mailto:community@zilliz.com">community@zilliz.com</a>联系我们，并提供有关问题的详细信息，我们将为您提供必要的支持。</p>
+<p>如果您在拉动图像时遇到任何问题，请通过<a href="mailto:community@zilliz.com">community@zilliz.com</a>联系我们，并提供有关问题的详细信息，我们将为您提供必要的支持。</p>
 </div>
 <h2 id="Install-Milvus-Helm-Chart" class="common-anchor-header">安装 Milvus Helm 图表<button data-href="#Install-Milvus-Helm-Chart" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -83,16 +83,16 @@ NAME                  PROVISIONER                  RECLAIMPOLICY    VOLUMEBIINDI
         ></path>
       </svg>
     </button></h2><p>在安装 Milvus Helm 图表之前，您需要添加 Milvus Helm 资源库。</p>
-<pre><code translate="no">$ helm repo <span class="hljs-keyword">add</span> milvus https:<span class="hljs-comment">//github.com/zilliztech/milvus-helm</span>
+<pre><code translate="no">$ helm repo <span class="hljs-keyword">add</span> milvus https:<span class="hljs-comment">//zilliztech.github.io/milvus-helm/</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <p>位于<code translate="no">https://github.com/milvus-io/milvus-helm</code> 的 Milvus Helm Charts 软件仓库已经存档，您可以从<code translate="no">https://github.com/zilliztech/milvus-helm</code> 获取进一步更新，具体如下：</p>
-<pre><code translate="no" class="language-shell">helm repo add zilliztech https://github.com/zilliztech/milvus-helm
+<pre><code translate="no" class="language-shell">helm repo add zilliztech https://zilliztech.github.io/milvus-helm/
 helm repo update
 <span class="hljs-comment"># upgrade existing helm release</span>
 helm upgrade my-release zilliztech/milvus
 <button class="copy-code-btn"></button></code></pre>
-<p>归档软件源仍可用于 4.0.31 之前的图表。对于以后的版本，请使用新版本库。</p>
+<p>存档软件源仍可用于 4.0.31 之前的图表。对于后续版本，请使用新版本库。</p>
 </div>
 <p>然后从软件源中获取 Milvus 图表，如下所示：</p>
 <pre><code translate="no">$ helm repo update
@@ -156,7 +156,7 @@ my-release-pulsar-zookeeper-metadata-98zbr       0/1   Completed  0        3m24s
 =<span class="hljs-string">&#x27;{{(index (index .spec.containers 0).ports 0).containerPort}}{{&quot;\n&quot;}}&#x27;</span>
 <span class="hljs-number">19530</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>输出结果显示，Milvus 实例的默认端口为<strong>19530</strong>。</p>
+<p>输出结果显示，Milvus 实例的默认服务端口为<strong>19530</strong>。</p>
 <div class="alert note">
 <p>如果以独立模式部署了 Milvus，请将 pod 名称从<code translate="no">my-release-milvus-proxy-xxxxxxxxxx-xxxxx</code> 更改为<code translate="no">my-release-milvus-xxxxxxxxxx-xxxxx</code> 。</p>
 </div>
@@ -184,7 +184,7 @@ my-release-pulsar-zookeeper-metadata-98zbr       0/1   Completed  0        3m24s
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>如果处于网络受限的环境，请按照本节的步骤启动 Milvus 群集。</p>
+    </button></h2><p>如果您处于网络受限的环境，请按照本节的步骤启动 Milvus 群集。</p>
 <h3 id="1-Get-Milvus-manifest" class="common-anchor-header">1.获取 Milvus 清单</h3><p>运行以下命令获取 Milvus 清单。</p>
 <pre><code translate="no" class="language-shell">$ helm template my-release milvus/milvus &gt; milvus_manifest.yaml
 <button class="copy-code-btn"></button></code></pre>

@@ -35,7 +35,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>稀疏向量是高维向量的一种特殊表示形式，其中大部分元素为零，只有少数维度具有非零值。这一特性使得稀疏向量在处理大规模、高维但稀疏的数据时特别有效。常见的应用包括</p>
+    </button></h2><p>稀疏向量是高维向量的一种特殊表示形式，其中大部分元素为零，只有少数维度的值不为零。这一特性使得稀疏向量在处理大规模、高维但稀疏的数据时特别有效。常见的应用包括</p>
 <ul>
 <li><p><strong>文本分析：</strong>将文档表示为词袋向量，其中每个维度对应一个单词，只有在文档中出现的单词才有非零值。</p></li>
 <li><p><strong>推荐系统：</strong>用户-物品交互矩阵，其中每个维度代表用户对特定物品的评分，大多数用户只与少数物品交互。</p></li>
@@ -48,7 +48,7 @@ summary: >-
    </span> <span class="img-wrapper"> <span>稀疏向量表示法</span> </span></p>
 <p>稀疏向量可以使用多种方法生成，例如文本处理中的<a href="https://en.wikipedia.org/wiki/Tf%E2%80%93idf">TF-IDF</a>（词频-反向文档频率）和<a href="https://en.wikipedia.org/wiki/Okapi_BM25">BM25</a>。此外，Milvus 还提供了帮助生成和处理稀疏向量的便捷方法。详情请参阅<a href="/docs/zh/embeddings.md">Embeddings</a>。</p>
 <p>对于文本数据，Milvus 还提供全文搜索功能，让您可以直接在原始文本数据上执行向量搜索，而无需使用外部嵌入模型来生成稀疏向量。更多信息，请参阅<a href="/docs/zh/full-text-search.md">全文搜索</a>。</p>
-<p>矢量化后，数据可存储在 Milvus 中，以便进行管理和矢量检索。下图说明了基本流程。</p>
+<p>矢量化后，数据可存储在 Milvus 中进行管理和矢量检索。下图说明了基本流程。</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/use-sparse-vector.png" alt="Use sparse vector in Milvus" class="doc-image" id="use-sparse-vector-in-milvus" />
@@ -259,7 +259,7 @@ indexes.<span class="hljs-title function_">add</span>(<span class="hljs-title cl
 <ul>
 <li><p>为稀疏向量创建了一个<code translate="no">SPARSE_INVERTED_INDEX</code> 类型的索引。对于稀疏向量，可以指定<code translate="no">SPARSE_INVERTED_INDEX</code> 或<code translate="no">SPARSE_WAND</code> 。有关详情，请参阅<a href="https://milvus.io/docs/index.md?tab=sparse">稀疏向量索引</a>。</p></li>
 <li><p>对于稀疏向量，<code translate="no">metric_type</code> 只支持<code translate="no">IP</code> （内积），用于衡量两个稀疏向量之间的相似性。有关相似性的更多信息，请参阅 "<a href="/docs/zh/metric.md">度量类型</a>"。</p></li>
-<li><p><code translate="no">drop_ratio_build</code> 是一个可选的索引参数，专门用于稀疏向量。它可以控制在建立索引时排除小向量值的比例。例如，使用 时，最小的 20% 向量值将在索引创建过程中被排除，从而减少搜索过程中的计算量。<code translate="no">{&quot;drop_ratio_build&quot;: 0.2}</code></p></li>
+<li><p><code translate="no">drop_ratio_build</code> 是一个可选的索引参数，专门用于稀疏向量。它可以控制索引建立过程中排除小向量值的比例。例如，使用 时，最小的 20% 向量值将在索引创建过程中被排除，从而减少搜索过程中的计算量。<code translate="no">{&quot;drop_ratio_build&quot;: 0.2}</code></p></li>
 </ul>
 <h3 id="Create-collection​" class="common-anchor-header">创建 Collections</h3><p>完成稀疏向量和索引设置后，就可以创建包含稀疏向量的 Collections。下面的示例使用 <ins><code translate="no">create_collection</code></ins>方法创建一个名为<code translate="no">my_sparse_collection</code> 的 Collection。</p>
 <div class="multipleCode">
@@ -474,3 +474,60 @@ sparse.<span class="hljs-title function_">put</span>(1000L, <span class="hljs-nu
 
 <button class="copy-code-btn"></button></code></pre>
 <p>有关相似性搜索参数的更多信息，请参阅<a href="/docs/zh/single-vector-search.md">基本 ANN 搜索</a>。</p>
+<h2 id="Limits" class="common-anchor-header">限制<button data-href="#Limits" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>在 Milvus 中使用稀疏向量时，请考虑以下限制：</p>
+<ul>
+<li><p>目前，稀疏向量只支持<strong>IP</strong>距离度量。稀疏向量的高维度使得 L2 和余弦距离不切实际。</p></li>
+<li><p>对于稀疏向量场，只支持<strong>SPARSE_INVERTED_INDEX</strong>和<strong>SPARSE_WAND</strong>索引类型。</p></li>
+<li><p>稀疏向量支持的数据类型：</p>
+<ul>
+<li>维数部分必须是无符号 32 位整数；</li>
+<li>值部分可以是非负 32 位浮点数。</li>
+</ul></li>
+<li><p>稀疏向量在插入和搜索时必须满足以下要求：</p>
+<ul>
+<li>向量中至少有一个值为非零；</li>
+<li>向量索引为非负。</li>
+</ul></li>
+</ul>
+<h2 id="FAQ" class="common-anchor-header">常见问题<button data-href="#FAQ" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><ul>
+<li><p><strong>能否解释 SPARSE_INVERTED_INDEX 和 SPARSE_WAND 之间的区别，以及如何在两者之间进行选择？</strong></p>
+<p><strong>SPARSE_INVERTED_INDEX</strong>是一种传统的倒排索引，而<strong>SPARSE_WAND</strong>则使用<a href="https://dl.acm.org/doi/10.1145/956863.956944">弱-AND</a>算法来减少搜索过程中全 IP 距离评估的次数。<strong>SPARSE_WAND</strong>通常速度更快，但其性能会随着向量密度的增加而下降。要在它们之间做出选择，请根据您的特定数据集和使用案例进行实验和基准测试。</p></li>
+<li><p><strong>如何选择 drop_ratio_build 和 drop_ratio_search 参数？</strong></p>
+<p><strong>drop_ratio_build</strong>和<strong>drop_ratio_search</strong>的选择取决于数据的特性以及对搜索延迟/吞吐量和准确性的要求。</p></li>
+<li><p><strong>稀疏嵌入的维度可以是 uint32 空间内的任何离散值吗？</strong></p>
+<p>可以，但有一个例外。稀疏嵌入的维度可以是<code translate="no">[0, maximum of uint32)</code> 范围内的任何值。这意味着不能使用 uint32 的最大值。</p></li>
+<li><p><strong>是通过索引还是蛮力来搜索不断增长的数据段？</strong></p>
+<p>对增长的数据段的搜索是通过与密封数据段索引相同类型的索引进行的。对于索引建立前的新增长区段，则使用蛮力搜索。</p></li>
+<li><p><strong>是否可以在一个 Collections 中同时包含稀疏向量和密集向量？</strong></p>
+<p>可以，通过多向量类型支持，您可以创建既有稀疏向量列又有密集向量列的 Collections，并对它们执行混合搜索。</p></li>
+</ul>

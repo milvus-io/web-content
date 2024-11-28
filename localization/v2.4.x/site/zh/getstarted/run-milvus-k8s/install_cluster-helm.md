@@ -83,11 +83,11 @@ NAME                  PROVISIONER                  RECLAIMPOLICY    VOLUMEBIINDI
         ></path>
       </svg>
     </button></h2><p>在安装 Milvus Helm 图表之前，您需要添加 Milvus Helm 资源库。</p>
-<pre><code translate="no">$ helm repo <span class="hljs-keyword">add</span> milvus https:<span class="hljs-comment">//github.com/zilliztech/milvus-helm</span>
+<pre><code translate="no">$ helm repo <span class="hljs-keyword">add</span> milvus https:<span class="hljs-comment">//zilliztech.github.io/milvus-helm/</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <p>位于<code translate="no">https://github.com/milvus-io/milvus-helm</code> 的 Milvus Helm Charts 软件仓库已经存档，您可以从<code translate="no">https://github.com/zilliztech/milvus-helm</code> 获取进一步更新，具体如下：</p>
-<pre><code translate="no" class="language-shell">helm repo add zilliztech https://github.com/zilliztech/milvus-helm
+<pre><code translate="no" class="language-shell">helm repo add zilliztech https://zilliztech.github.io/milvus-helm/
 helm repo update
 <span class="hljs-comment"># upgrade existing helm release</span>
 helm upgrade my-release zilliztech/milvus
@@ -117,12 +117,12 @@ helm upgrade my-release zilliztech/milvus
 <pre><code translate="no" class="language-shell">$ helm install my-release milvus/milvus
 <button class="copy-code-btn"></button></code></pre>
 <p>在上述命令中，<code translate="no">my-release</code> 是版本名称，<code translate="no">milvus/milvus</code> 是本地安装的图表版本库。要使用其他名称，请将<code translate="no">my-release</code> 替换为您认为合适的名称。</p>
-<p>上述命令使用默认配置部署 Milvus 群集及其组件和依赖项。要自定义这些设置，我们建议你使用<a href="https://milvus.io/tools/sizing">Milvus 大小</a>调整<a href="https://milvus.io/tools/sizing">工具</a>，根据实际数据大小调整配置，然后下载相应的 YAML 文件。要了解有关配置参数的更多信息，请参阅<a href="https://milvus.io/docs/system_configuration.md">Milvus 系统配置检查表</a>。</p>
+<p>上述命令使用默认配置部署 Milvus 群集及其组件和依赖项。要自定义这些设置，我们建议你使用<a href="https://milvus.io/tools/sizing">Milvus 大小工具</a>，根据实际数据大小调整配置，然后下载相应的 YAML 文件。要了解有关配置参数的更多信息，请参阅<a href="https://milvus.io/docs/system_configuration.md">Milvus 系统配置检查表</a>。</p>
 <div class="alert note">
   <ul>
     <li>版本名称只能包含字母、数字和破折号。版本名称中不允许使用点。</li>
     <li>在使用 Helm 安装 Milvus 时，默认命令行会安装群集版本的 Milvus。独立安装 Milvus 时需要进一步设置。</li>
-    <li>根据<a href="https://kubernetes.io/docs/reference/using-api/deprecation-guide/#v1-25">Kubernetes 过时的 API 迁移指南</a>，从 v1.25 起，PodDisruptionBudget 的<b>policy/v1beta1</b>API 版本不再提供服务。建议迁移清单和 API 客户端，改用<b>policy/v1</b>API 版本。<br/>对于仍在 Kubernetes v1.25 及更高版本上使用 PodDisruptionBudget 的<b>policy/v1beta1</b>API 版本的用户，作为一种变通方法，您可以运行以下命令来安装 Milvus：<br/> <code translate="no">helm install my-release milvus/milvus --set pulsar.bookkeeper.pdb.usePolicy=false,pulsar.broker.pdb.usePolicy=false,pulsar.proxy.pdb.usePolicy=false,pulsar.zookeeper.pdb.usePolicy=false</code></li> 
+    <li>根据<a href="https://kubernetes.io/docs/reference/using-api/deprecation-guide/#v1-25">Kubernetes 过时的 API 迁移指南</a>，自 v1.25 起，PodDisruptionBudget 的<b>policy/v1beta1</b>API 版本不再提供服务。建议迁移清单和 API 客户端，改用<b>policy/v1</b>API 版本。<br/>对于仍在 Kubernetes v1.25 及更高版本上使用 PodDisruptionBudget 的<b>policy/v1beta1</b>API 版本的用户，作为一种变通方法，您可以运行以下命令来安装 Milvus：<br/> <code translate="no">helm install my-release milvus/milvus --set pulsar.bookkeeper.pdb.usePolicy=false,pulsar.broker.pdb.usePolicy=false,pulsar.proxy.pdb.usePolicy=false,pulsar.zookeeper.pdb.usePolicy=false</code></li> 
     <li>更多信息请参见<a href="https://artifacthub.io/packages/helm/milvus/milvus">Milvus Helm Chart</a>和<a href="https://helm.sh/docs/">Helm</a>。</li>
   </ul>
 </div>
@@ -195,7 +195,7 @@ my-release-pulsar-zookeeper-metadata-98zbr       0/1   Completed  0        3m24s
 <li>要更改 Milvus 配置，请下载 <a href="https://raw.githubusercontent.com/milvus-io/milvus-helm/master/charts/milvus/values.yaml"><code translate="no">value.yaml</code></a>模板，将所需设置放入其中，然后使用<code translate="no">helm template -f values.yaml my-release milvus/milvus &gt; milvus_manifest.yaml</code> 渲染相应的清单。</li>
 </ul>
 </div>
-<h3 id="2-Download-image-pulling-script" class="common-anchor-header">2.下载图像提取脚本</h3><p>图像提取脚本是用 Python 开发的。您应在<code translate="no">requirement.txt</code> 文件中下载脚本及其依赖项。</p>
+<h3 id="2-Download-image-pulling-script" class="common-anchor-header">2.下载图像拉取脚本</h3><p>图像提取脚本是用 Python 开发的。您应在<code translate="no">requirement.txt</code> 文件中下载该脚本及其依赖项。</p>
 <pre><code translate="no" class="language-shell">$ wget <span class="hljs-attr">https</span>:<span class="hljs-comment">//raw.githubusercontent.com/milvus-io/milvus/master/deployments/offline/requirements.txt</span>
 $ wget <span class="hljs-attr">https</span>:<span class="hljs-comment">//raw.githubusercontent.com/milvus-io/milvus/master/deployments/offline/save_image.py</span>
 <button class="copy-code-btn"></button></code></pre>

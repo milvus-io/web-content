@@ -161,7 +161,7 @@ title: Collection expliquée
 <li><p><a href="/docs/fr/with-iterators.md">Itérateur de recherche</a></p></li>
 <li><p><a href="/docs/fr/get-and-scalar-query.md">Requête</a></p></li>
 <li><p><a href="/docs/fr/full-text-search.md">Recherche plein texte</a></p></li>
-<li><p><a href="/docs/fr/keyword-match.md">Correspondance de mots-clés</a></p></li>
+<li><p><a href="/docs/fr/keyword-match.md">Correspondance de texte</a></p></li>
 </ul>
 <p>En outre, Milvus fournit également des améliorations destinées à accroître les performances et l'efficacité de la recherche. Elles sont désactivées par défaut et vous pouvez les activer et les utiliser en fonction de vos besoins. Ces améliorations sont les suivantes</p>
 <ul>

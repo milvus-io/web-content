@@ -25,7 +25,7 @@ title: Búsqueda híbrida con Milvus
 <p>Milvus admite métodos de recuperación densos, dispersos e híbridos:</p>
 <ul>
 <li>Recuperación densa: Utiliza el contexto semántico para comprender el significado de las consultas.</li>
-<li>Recuperación dispersa: Hace hincapié en la concordancia de palabras clave para encontrar resultados basados en términos específicos, lo que equivale a una búsqueda de texto completo.</li>
+<li>Recuperación dispersa: Hace hincapié en la concordancia de textos para encontrar resultados basados en términos específicos, lo que equivale a una búsqueda de texto completo.</li>
 <li>Recuperación híbrida: Combina los enfoques Dense y Sparse, capturando el contexto completo y las palabras clave específicas para obtener resultados de búsqueda completos.</li>
 </ul>
 <p>Al integrar estos métodos, la búsqueda híbrida de Milvus equilibra las similitudes semánticas y léxicas, mejorando la relevancia global de los resultados de la búsqueda. Este cuaderno mostrará el proceso de configuración y uso de estas estrategias de recuperación, destacando su eficacia en varios escenarios de búsqueda.</p>

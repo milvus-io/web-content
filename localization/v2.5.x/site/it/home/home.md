@@ -114,7 +114,7 @@ Qui imparerete cos'è Milvus e come installare, usare e distribuire Milvus per c
     </button></h2><p><em>Nov 2024 - Rilascio di Milvus 2.5.0</em></p>
 <ul>
 <li>Aggiunta una guida su come <a href="/docs/it/full-text-search.md">condurre una ricerca full text</a>.</li>
-<li>Aggiunta una guida su come <a href="/docs/it/keyword-match.md">effettuare la corrispondenza delle parole chiave</a>.</li>
+<li>Aggiunta una guida su come <a href="/docs/it/keyword-match.md">effettuare le corrispondenze testuali</a>.</li>
 <li>Aggiunta una guida su come <a href="/docs/it/nullable-and-default.md">abilitare i valori nullable e predefiniti</a>.</li>
 <li>Aggiunte le descrizioni degli <a href="/docs/it/analyzer-overview.md">analizzatori</a>.</li>
 <li>Aggiunta la descrizione degli <a href="/docs/it/bitmap.md">indici bitmap</a>.</li>

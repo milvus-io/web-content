@@ -479,3 +479,60 @@ sparse.<span class="hljs-title function_">put</span>(1000L, <span class="hljs-nu
 
 <button class="copy-code-btn"></button></code></pre>
 <p>Pour plus d'informations sur les paramètres de recherche de similarité, reportez-vous à la section <a href="/docs/fr/single-vector-search.md">Recherche ANN de base</a>.</p>
+<h2 id="Limits" class="common-anchor-header">Limites<button data-href="#Limits" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>Lorsque vous utilisez des vecteurs épars dans Milvus, tenez compte des limites suivantes :</p>
+<ul>
+<li><p>Actuellement, seule la métrique de distance <strong>IP</strong> est prise en charge pour les vecteurs peu denses. La dimensionnalité élevée des vecteurs clairsemés rend les distances L2 et cosinus impraticables.</p></li>
+<li><p>Seuls les types d'index <strong>SPARSE_INVERTED_INDEX</strong> et <strong>SPARSE_WAND</strong> sont pris en charge pour les champs de vecteurs peu denses.</p></li>
+<li><p>Types de données pris en charge pour les vecteurs peu denses :</p>
+<ul>
+<li>La partie dimension doit être un entier non signé de 32 bits ;</li>
+<li>La partie valeur peut être un nombre à virgule flottante 32 bits non négatif.</li>
+</ul></li>
+<li><p>Les vecteurs épars doivent répondre aux exigences suivantes en matière d'insertion et de recherche :</p>
+<ul>
+<li>Au moins une valeur du vecteur est non nulle ;</li>
+<li>Les indices du vecteur sont non négatifs.</li>
+</ul></li>
+</ul>
+<h2 id="FAQ" class="common-anchor-header">FAQ<button data-href="#FAQ" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><ul>
+<li><p><strong>Pouvez-vous expliquer la différence entre SPARSE_INVERTED_INDEX et SPARSE_WAND, et comment choisir entre les deux ?</strong></p>
+<p><strong>SPARSE_INVERTED_INDEX</strong> est un index inversé traditionnel, tandis que <strong>SPARSE_WAND</strong> utilise l'algorithme <a href="https://dl.acm.org/doi/10.1145/956863.956944">Weak-AND</a> pour réduire le nombre d'évaluations de la distance IP complète pendant la recherche. <strong>SPARSE_WAND</strong> est généralement plus rapide, mais ses performances peuvent diminuer avec l'augmentation de la densité des vecteurs. Pour choisir entre les deux, effectuez des expériences et des analyses comparatives en fonction de votre jeu de données et de votre cas d'utilisation spécifiques.</p></li>
+<li><p><strong>Comment dois-je choisir les paramètres drop_ratio_build et drop_ratio_search ?</strong></p>
+<p>Le choix des paramètres <strong>drop_ratio_build</strong> et <strong>drop_ratio_search</strong> dépend des caractéristiques de vos données et de vos exigences en matière de latence, de débit et de précision de la recherche.</p></li>
+<li><p><strong>La dimension d'un encastrement clairsemé peut-elle être n'importe quelle valeur discrète dans l'espace uint32 ?</strong></p>
+<p>Oui, à une exception près. La dimension d'un encastrement clairsemé peut être n'importe quelle valeur dans l'intervalle <code translate="no">[0, maximum of uint32)</code>. Cela signifie que vous ne pouvez pas utiliser la valeur maximale de uint32.</p></li>
+<li><p><strong>Les recherches sur les segments croissants sont-elles effectuées à l'aide d'un index ou par force brute ?</strong></p>
+<p>Les recherches sur les segments croissants sont effectuées à l'aide d'un index du même type que l'index du segment scellé. Pour les nouveaux segments croissants avant que l'index ne soit construit, une recherche par force brute est utilisée.</p></li>
+<li><p><strong>Est-il possible d'avoir à la fois des vecteurs denses et peu denses dans une même collection ?</strong></p>
+<p>Oui, grâce à la prise en charge de plusieurs types de vecteurs, vous pouvez créer des collections avec des colonnes de vecteurs denses et peu denses et effectuer des recherches hybrides sur ces collections.</p></li>
+</ul>

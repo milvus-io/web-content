@@ -87,7 +87,7 @@ title: Index avec GPU
 <p>Les options possibles pour <strong>params</strong> sont les suivantes</p>
 <ul>
 <li><p><strong>intermediate_graph_degree</strong><em>(int</em>) : Affecte le rappel et le temps de construction en déterminant le degré du graphe avant l'élagage. Les valeurs recommandées sont <strong>32</strong> ou <strong>64</strong>.</p></li>
-<li><p><strong>graph_degree</strong><em>(int)</em>: Affecte les performances de recherche et le rappel en déterminant le degré du graphe après l'élagage. En règle générale, il est égal à la moitié du <strong>degré intermédiaire du graphe.</strong> Une plus grande différence entre ces deux degrés se traduit par un temps de construction plus long. Sa valeur doit être inférieure à la valeur de <strong>intermediate_graph_degree</strong>.</p></li>
+<li><p><strong>graph_degree</strong><em>(int</em>) : Affecte les performances de recherche et le rappel en déterminant le degré du graphe après l'élagage. En règle générale, il est égal à la moitié du <strong>degré intermédiaire du graphe</strong>. Une plus grande différence entre ces deux degrés se traduit par un temps de construction plus long. Sa valeur doit être inférieure à la valeur de <strong>intermediate_graph_degree</strong>.</p></li>
 <li><p><strong>build_algo</strong><em>(chaîne</em>) : Sélectionne l'algorithme de génération de graphe avant l'élagage. Options possibles :</p>
 <ul>
 <li><p><strong>IVF_PQ</strong>: offre une meilleure qualité mais un temps de construction plus lent.</p></li>
@@ -203,9 +203,9 @@ collection.search(
       </svg>
     </button></h2><p>Lorsque vous utilisez des index GPU, vous devez tenir compte de certaines contraintes :</p>
 <ul>
-<li><p>Pour <strong>GPU_IVF_FLAT</strong>, la valeur maximale de la <strong>limite</strong> est 256.</p></li>
+<li><p>Pour <strong>GPU_IVF_FLAT</strong>, la valeur maximale de la <strong>limite</strong> est de 1024.</p></li>
 <li><p>Pour <strong>GPU_IVF_PQ</strong> et <strong>GPU_CAGRA</strong>, la valeur maximale de la <strong>limite</strong> est de 1024.</p></li>
-<li><p>Bien qu'il n'y ait pas de <strong>limite</strong> définie pour <strong>GPU_BRUTE_FORCE</strong>, il est recommandé de ne pas dépasser 4096 pour éviter les problèmes de performance.</p></li>
+<li><p>Bien qu'il n'y ait pas de <strong>limite</strong> fixée pour <strong>GPU_BRUTE_FORCE</strong>, il est recommandé de ne pas dépasser 4096 pour éviter les problèmes de performance.</p></li>
 <li><p>Actuellement, les index GPU ne prennent pas en charge la distance COSINE. Si la distance COSINE est requise, les données doivent d'abord être normalisées, puis la distance du produit intérieur (IP) peut être utilisée comme substitut.</p></li>
 <li><p>La protection OOM du chargement pour les index GPU n'est pas entièrement prise en charge, une trop grande quantité de données peut entraîner le blocage du QueryNode.</p></li>
 <li><p>Les index GPU ne prennent pas en charge les fonctions de recherche telles que la <a href="https://milvus.io/docs/single-vector-search.md#Range-search">recherche par plage</a> et la <a href="https://milvus.io/docs/single-vector-search.md#Grouping-searchh">recherche par groupement</a>.</p></li>

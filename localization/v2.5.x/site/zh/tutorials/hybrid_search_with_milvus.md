@@ -25,14 +25,14 @@ title: 使用 Milvus 进行混合搜索
 <p>Milvus 支持密集、稀疏和混合检索方法：</p>
 <ul>
 <li>密集检索：利用语义上下文来理解查询背后的含义。</li>
-<li>稀疏检索：强调关键词匹配，根据特定术语查找结果，相当于全文检索。</li>
+<li>稀疏检索：强调文本匹配，根据特定术语查找结果，相当于全文检索。</li>
 <li>混合检索：结合了密集和稀疏两种方法，捕捉完整的上下文和特定的关键词，从而获得全面的搜索结果。</li>
 </ul>
-<p>通过整合这些方法，Milvus 混合搜索平衡了语义和词汇的相似性，提高了搜索结果的整体相关性。本笔记本将介绍这些检索策略的设置和使用过程，并重点介绍它们在各种搜索场景中的有效性。</p>
+<p>通过整合这些方法，Milvus 混合搜索平衡了语义和词汇的相似性，提高了搜索结果的整体相关性。本笔记本将介绍设置和使用这些检索策略的过程，并重点介绍它们在各种搜索场景中的有效性。</p>
 <h3 id="Dependencies-and-Environment" class="common-anchor-header">依赖关系和环境</h3><pre><code translate="no" class="language-shell">$ pip install --upgrade pymilvus <span class="hljs-string">&quot;pymilvus[model]&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Download-Dataset" class="common-anchor-header">下载数据集</h3><p>要演示搜索，我们需要一个文档语料库。让我们使用 Quora 重复问题数据集，并将其放在本地目录中。</p>
-<p>数据集来源：<a href="https://www.quora.com/q/quoradata/First-Quora-Dataset-Release-Question-Pairs">第一个 Quora 数据集发布：问题对</a></p>
+<p>数据集来源：<a href="https://www.quora.com/q/quoradata/First-Quora-Dataset-Release-Question-Pairs">首次发布的 Quora 数据集：问题对</a></p>
 <pre><code translate="no" class="language-shell"><span class="hljs-comment"># Run this cell to download the dataset</span>
 $ wget http://qim.fs.quoracdn.net/quora_duplicate_questions.tsv
 <button class="copy-code-btn"></button></code></pre>
@@ -291,7 +291,7 @@ formatted_results = doc_text_formatting(ef, query, hybrid_results)
 <p>在海得拉巴做哪一行比较好<span style='color:red'>？</span></p>
 <p><span style='color:red'> 启动</span>机器人技术的最佳方式是什么<span style='color:red'>？</span>哪种开发板最适合我<span style='color:red'> 开始</span>工作<span style='color:red'>？</span></p>
 <p>新手需要掌握哪些数学知识<span style='color:red'> 才能</span>理解计算机<span style='color:red'> 编程</span>的算法<span style='color:red'> ？</span>哪些算法书籍适合完全初学者<span style='color:red'>？</span></p>
-<p><span style='color:red'>如何</span>让生活适合自己，让生活不再从精神和情感上<span style='color:red'>虐待</span>自己<span style='color:red'>？</span></p>
+<p><span style='color:red'>如何</span>让生活适合自己，不让生活在精神上和情感上<span style='color:red'>虐待</span>自己<span style='color:red'>？</span></p>
 <p><strong>混合搜索结果：</strong></p>
 <p><span style='color:red'> 开始学习</span>机器人技术的最佳方法是什么<span style='color:red'>？</span>哪种开发板最好<span style='color:red'>？</span></p>
 <p>什么是 Java<span style='color:red'> 编程？如何</span>学习 Java 编程语言？</p>

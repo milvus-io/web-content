@@ -34,7 +34,7 @@ Milvus 문서에 오신 것을 환영합니다!</h1></p>
 <div class="start_card_container">
   
    <a href="/docs/ko/install_standalone-docker.md"> <img translate="no" src="/docs/v2.5.x/assets/home_install.svg" alt="icon" />
-   </a> <a href="/docs/ko/install_standalone-docker.md"> <p class="link-btn">Milvus 설치하기</p> </a><p>도커 컴포즈 또는 쿠버네티스를 사용하여 Milvus를 설치하는 방법을 알아보세요.</p>
+   </a> <a href="/docs/ko/install_standalone-docker.md"> <p class="link-btn">밀버스 설치하기</p> </a><p>도커 컴포즈 또는 쿠버네티스를 사용하여 Milvus를 설치하는 방법을 알아보세요.</p>
 </div>
 <div class="start_card_container">
   
@@ -114,8 +114,8 @@ Milvus 문서에 오신 것을 환영합니다!</h1></p>
     </button></h2><p><em>2024년 11월 - Milvus 2.5.0 출시</em></p>
 <ul>
 <li><a href="/docs/ko/full-text-search.md">전체 텍스트 검색을 수행하는</a> 방법에 대한 지침이 추가되었습니다.</li>
-<li><a href="/docs/ko/keyword-match.md">키워드 검색을 수행하는</a> 방법에 대한 안내를 추가했습니다.</li>
-<li><a href="/docs/ko/nullable-and-default.md">널 가능 및 기본값을 활성화하는</a> 방법에 대한 안내를 추가했습니다.</li>
+<li><a href="/docs/ko/keyword-match.md">텍스트 일치를 수행하는</a> 방법에 대한 안내를 추가했습니다.</li>
+<li><a href="/docs/ko/nullable-and-default.md">널 가능 및 기본값을 활성화하는</a> 방법에 대한 지침이 추가되었습니다.</li>
 <li><a href="/docs/ko/analyzer-overview.md">분석기에</a> 대한 설명을 추가했습니다.</li>
 <li><a href="/docs/ko/bitmap.md">비트맵 인덱스에</a> 대한 설명을 추가했습니다.</li>
 </ul>

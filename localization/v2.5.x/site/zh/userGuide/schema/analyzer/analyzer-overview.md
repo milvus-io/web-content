@@ -20,12 +20,12 @@ summary: >-
         ></path>
       </svg>
     </button></h1><p>在文本处理中，<strong>分析器</strong>是将原始文本转换为结构化可搜索格式的关键组件。每个分析器通常由两个核心部件组成：<strong>标记器</strong>和<strong>过滤器</strong>。它们共同将输入文本转换为标记，完善这些标记，并为高效索引和检索做好准备。</p>
-<p>在 Milvus 中，创建 Collections 时，将<code translate="no">VARCHAR</code> 字段添加到 Collections Schema 时，会对分析器进行配置。分析器生成的标记可用于建立关键字匹配索引，或转换为稀疏嵌入以进行全文检索。有关详细信息，请参阅<a href="/docs/zh/keyword-match.md">关键字匹配</a>或<a href="/docs/zh/full-text-search.md">全文搜索</a>。</p>
+<p>在 Milvus 中，创建 Collections 时，将<code translate="no">VARCHAR</code> 字段添加到 Collections Schema 时，会对分析器进行配置。分析器生成的标记可用于建立文本匹配索引，或转换为稀疏嵌入以进行全文检索。更多信息，请参阅<a href="/docs/zh/keyword-match.md">文本匹配</a>或<a href="/docs/zh/full-text-search.md">全文搜索</a>。</p>
 <div class="alert note">
 <p>使用分析器可能会影响性能。</p>
 <ul>
-<li><p><strong>全文搜索：</strong>对于全文搜索，数据节点和<strong>查询节点</strong>通道消耗数据的速度更慢，因为它们必须等待标记化完成。因此，新输入的数据需要更长的时间才能用于搜索。</p></li>
-<li><p><strong>关键词匹配：</strong>对于关键字匹配，索引创建速度也较慢，因为标记化需要在索引建立之前完成。</p></li>
+<li><p><strong>全文搜索：</strong>对于全文搜索，数据节点和<strong>查询节点</strong>通道消耗数据的速度更慢，因为它们必须等待标记化完成。因此，新输入的数据需要更长时间才能用于搜索。</p></li>
+<li><p><strong>文本匹配：</strong>对于文本匹配，索引创建速度也较慢，因为标记化需要在建立索引之前完成。</p></li>
 </ul>
 </div>
 <h2 id="Anatomy-of-an-analyzer​" class="common-anchor-header">分析器剖析<button data-href="#Anatomy-of-an-analyzer​" class="anchor-icon" translate="no">
@@ -46,7 +46,7 @@ summary: >-
     </button></h2><p>Milvus 的分析器由一个<strong>标记化器</strong>和<strong>零个或多个</strong>过滤器组成。</p>
 <ul>
 <li><p><strong>标记化器</strong>：标记器将输入文本分解为称为标记的离散单元。根据标记符类型的不同，这些标记符可以是单词或短语。</p></li>
-<li><p><strong>过滤器</strong>：可以对标记符进行过滤，进一步细化标记符，例如，将标记符变成小写或删除常用词。</p></li>
+<li><p><strong>过滤器</strong>：可以对标记符进行过滤，以进一步细化标记符，例如，将标记符变成小写或删除常用词。</p></li>
 </ul>
 <p>下面的工作流程显示了分析器是如何处理文本的。</p>
 <p><img translate="no" src="/docs/v2.5.x/assets/analyzer-overview.png" alt="analyzer-overview" width="400"/></p>
@@ -67,7 +67,7 @@ summary: >-
       </svg>
     </button></h2><p>Milvus 提供两种类型的分析器，以满足不同的文本处理需求。</p>
 <ul>
-<li><p><strong>内置分析器</strong>：这些是预定义的配置，只需最少的设置即可完成常见的文本处理任务。内置分析器不需要复杂的配置，是通用搜索的理想选择。</p></li>
+<li><p><strong>内置分析器</strong>：这些是预定义配置，只需最少的设置即可完成常见的文本处理任务。内置分析器不需要复杂的配置，是通用搜索的理想选择。</p></li>
 <li><p><strong>自定义分析器</strong>：对于更高级的需求，自定义分析器允许你通过指定标记器和零个或多个过滤器来定义自己的配置。这种自定义级别对于需要精确控制文本处理的特殊用例尤其有用。</p></li>
 </ul>
 <div class="alert note">
@@ -100,7 +100,7 @@ summary: >-
 <li><p><code translate="no">english</code>:针对英语文本进行了优化，支持英语停止词。</p></li>
 <li><p><code translate="no">chinese</code>:专门用于处理中文文本，包括针对中文语言结构的标记化。</p></li>
 </ul>
-<h3 id="Custom-analyzer​" class="common-anchor-header">自定义分析器</h3><p>对于更高级的文本处理，Milvus 中的自定义分析器允许您通过指定<strong>标记符号化器</strong>和过滤器来建立一个定制的文本处理管道。这种设置非常适合需要精确控制的特殊用例。</p>
+<h3 id="Custom-analyzer​" class="common-anchor-header">自定义分析器</h3><p>对于更高级的文本处理，Milvus 中的自定义分析器允许您通过指定<strong>标记化器</strong>和过滤器来构建定制的文本处理管道。这种设置非常适合需要精确控制的特殊用例。</p>
 <h4 id="Tokenizer​" class="common-anchor-header">标记器</h4><p><strong>标记化器</strong>是自定义分析器的<strong>必备</strong>组件，它通过将输入文本分解为离散单元或<strong>标记来</strong>启动分析器管道。标记化遵循特定的规则，例如根据标记化器的类型用空白或标点符号分割。这一过程可以更精确、更独立地处理每个单词或短语。</p>
 <p>例如，标记化器会将文本<code translate="no">&quot;Vector Database Built for Scale&quot;</code> 转换为单独的标记。</p>
 <pre><code translate="no" class="language-Plain Text">[<span class="hljs-string">&quot;Vector&quot;</span>, <span class="hljs-string">&quot;Database&quot;</span>, <span class="hljs-string">&quot;Built&quot;</span>, <span class="hljs-string">&quot;for&quot;</span>, <span class="hljs-string">&quot;Scale&quot;</span>]​

@@ -96,7 +96,7 @@ title: Sammlung erklärt
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Die Erstellung von Indizes für bestimmte Felder verbessert die Sucheffizienz. Wir empfehlen Ihnen, Indizes für alle Felder zu erstellen, auf die Ihr Dienst angewiesen ist, wobei Indizes für Vektorfelder obligatorisch sind.</p>
+    </button></h2><p>Die Erstellung von Indizes für bestimmte Felder verbessert die Sucheffizienz. Es wird empfohlen, Indizes für alle Felder zu erstellen, auf die Ihr Dienst angewiesen ist, wobei Indizes für Vektorfelder obligatorisch sind.</p>
 <h2 id="Entity​" class="common-anchor-header">Entität<button data-href="#Entity​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -112,7 +112,7 @@ title: Sammlung erklärt
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Entitäten sind Datensätze, die in einer Sammlung denselben Satz von Feldern verwenden. Die Werte in allen Feldern derselben Zeile bilden eine Entität.</p>
+    </button></h2><p>Entitäten sind Datensätze, die in einer Sammlung denselben Satz von Feldern verwenden. Die Werte in allen Feldern der gleichen Zeile bilden eine Entität.</p>
 <p>Sie können so viele Entitäten in eine Sammlung einfügen, wie Sie benötigen. Mit der Anzahl der Entitäten steigt jedoch auch die benötigte Speichergröße, was die Suchleistung beeinträchtigt.</p>
 <p>Weitere Informationen finden Sie unter <a href="/docs/de/schema.md">Schema erklärt</a>.</p>
 <h2 id="Load-and-Release​" class="common-anchor-header">Laden und Freigeben<button data-href="#Load-and-Release​" class="anchor-icon" translate="no">
@@ -161,7 +161,7 @@ title: Sammlung erklärt
 <li><p><a href="/docs/de/with-iterators.md">Such-Iterator</a></p></li>
 <li><p><a href="/docs/de/get-and-scalar-query.md">Abfrage</a></p></li>
 <li><p><a href="/docs/de/full-text-search.md">Volltextsuche</a></p></li>
-<li><p><a href="/docs/de/keyword-match.md">Schlüsselwort-Abgleich</a></p></li>
+<li><p><a href="/docs/de/keyword-match.md">Text-Abgleich</a></p></li>
 </ul>
 <p>Darüber hinaus bietet Milvus auch Erweiterungen zur Verbesserung der Suchleistung und -effizienz. Diese sind standardmäßig deaktiviert, und Sie können sie je nach Ihren Serviceanforderungen aktivieren und verwenden. Diese sind</p>
 <ul>

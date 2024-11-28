@@ -24,12 +24,12 @@ summary: >-
         ></path>
       </svg>
     </button></h1><p>Dans le traitement de texte, un <strong>analyseur</strong> est un composant crucial qui convertit le texte brut en un format structuré et consultable. Chaque analyseur se compose généralement de deux éléments principaux : le <strong>tokéniseur</strong> et le <strong>filtre</strong>. Ensemble, ils transforment le texte d'entrée en tokens, affinent ces tokens et les préparent pour une indexation et une recherche efficaces.</p>
-<p>Dans Milvus, les analyseurs sont configurés lors de la création de la collection lorsque vous ajoutez des champs <code translate="no">VARCHAR</code> au schéma de la collection. Les jetons produits par un analyseur peuvent être utilisés pour construire un index pour la recherche par mot-clé ou convertis en encastrements épars pour la recherche en texte intégral. Pour plus d'informations, reportez-vous à la section <a href="/docs/fr/keyword-match.md">Correspondance par mot-clé</a> ou <a href="/docs/fr/full-text-search.md">recherche en texte intégral</a>.</p>
+<p>Dans Milvus, les analyseurs sont configurés lors de la création de la collection lorsque vous ajoutez des champs <code translate="no">VARCHAR</code> au schéma de la collection. Les jetons produits par un analyseur peuvent être utilisés pour construire un index pour la mise en correspondance de texte ou convertis en encastrements épars pour la recherche en texte intégral. Pour plus d'informations, reportez-vous à la section <a href="/docs/fr/keyword-match.md">Correspondance de texte</a> ou <a href="/docs/fr/full-text-search.md">Recherche en texte intégral</a>.</p>
 <div class="alert note">
 <p>L'utilisation d'analyseurs peut avoir un impact sur les performances.</p>
 <ul>
 <li><p><strong>Recherche en texte intégral :</strong> Pour la recherche en texte intégral, les canaux DataNode et <strong>QueryNode</strong> consomment les données plus lentement car ils doivent attendre la fin de la tokenisation. Par conséquent, les données nouvellement ingérées mettent plus de temps à être disponibles pour la recherche.</p></li>
-<li><p><strong>Correspondance par mot-clé :</strong> Pour la correspondance par mot-clé, la création de l'index est également plus lente car la tokenisation doit être terminée avant qu'un index puisse être construit.</p></li>
+<li><p><strong>Correspondance de texte :</strong> Pour la correspondance de texte, la création d'index est également plus lente car la tokenisation doit être terminée avant qu'un index puisse être construit.</p></li>
 </ul>
 </div>
 <h2 id="Anatomy-of-an-analyzer​" class="common-anchor-header">Anatomie d'un analyseur<button data-href="#Anatomy-of-an-analyzer​" class="anchor-icon" translate="no">
@@ -78,7 +78,7 @@ summary: >-
 <p>Si vous omettez les configurations de l'analyseur lors de la création de la collection, Milvus utilise par défaut l'analyseur <code translate="no">standard</code> pour tous les traitements de texte. Pour plus de détails, voir <a href="/docs/fr/standard-analyzer.md">Standard</a>.</p>
 </div>
 <h3 id="Built-in-analyzer​" class="common-anchor-header">Analyseur intégré</h3><p>Les analyseurs intégrés dans Milvus sont préconfigurés avec des tokenizers et des filtres spécifiques, ce qui vous permet de les utiliser immédiatement sans avoir à définir ces composants vous-même. Chaque analyseur intégré sert de modèle et comprend un tokenizer et des filtres prédéfinis, avec des paramètres facultatifs pour la personnalisation.</p>
-<p>Par exemple, pour utiliser l'analyseur intégré <code translate="no">standard</code>, il suffit de spécifier son nom <code translate="no">standard</code> comme <code translate="no">type</code> et d'inclure éventuellement des configurations supplémentaires spécifiques à ce type d'analyseur, comme <code translate="no">stop_words</code>.</p>
+<p>Par exemple, pour utiliser l'analyseur intégré <code translate="no">standard</code>, il suffit de spécifier son nom <code translate="no">standard</code> comme <code translate="no">type</code> et d'inclure éventuellement des configurations supplémentaires spécifiques à ce type d'analyseur, telles que <code translate="no">stop_words</code>.</p>
 <pre><code translate="no" class="language-python">analyzer_params = {​
     <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;standard&quot;</span>, <span class="hljs-comment"># Uses the standard built-in analyzer​</span>
     <span class="hljs-string">&quot;stop_words&quot;</span>: [<span class="hljs-string">&quot;a&quot;</span>, <span class="hljs-string">&quot;an&quot;</span>, <span class="hljs-string">&quot;for&quot;</span>] <span class="hljs-comment"># Defines a list of common words (stop words) to exclude from tokenization​</span>
@@ -121,7 +121,7 @@ summary: >-
 <ul>
 <li><p><strong>Filtres intégrés</strong>: Préconfigurés par Milvus, ils ne nécessitent qu'une configuration minimale. Vous pouvez utiliser ces filtres prêts à l'emploi en spécifiant leur nom. Les filtres ci-dessous sont intégrés pour une utilisation directe.</p>
 <ul>
-<li><p><code translate="no">lowercase</code>: Convertit le texte en minuscules pour garantir une correspondance insensible à la casse. Pour plus de détails, voir <a href="/docs/fr/lowercase-filter.md">Minuscules</a>.</p></li>
+<li><p><code translate="no">lowercase</code>: Convertit le texte en minuscules, ce qui garantit une correspondance insensible à la casse. Pour plus de détails, voir <a href="/docs/fr/lowercase-filter.md">Minuscules</a>.</p></li>
 <li><p><code translate="no">asciifolding</code>: Convertit les caractères non ASCII en équivalents ASCII, ce qui simplifie la gestion des textes multilingues. Pour plus d'informations, reportez-vous à la section <a href="/docs/fr/ascii-folding-filter.md">Pliage ASCII</a>.</p></li>
 <li><p><code translate="no">alphanumonly</code>: Conserve uniquement les caractères alphanumériques en supprimant les autres. Pour plus de détails, voir <a href="/docs/fr/alphanumonly-filter.md">Alphanumonly</a>.</p></li>
 <li><p><code translate="no">cnalphanumonly</code>: Supprime les jetons contenant des caractères autres que des caractères chinois, des lettres anglaises ou des chiffres. Pour plus de détails, voir <a href="/docs/fr/cnalphanumonly-filter.md">Cnalphanumonly</a>.</p></li>

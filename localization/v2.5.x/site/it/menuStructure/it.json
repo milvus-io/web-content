@@ -287,6 +287,18 @@
         "children": []
       },
       {
+        "label": "Tipi metrici",
+        "id": "metric.md",
+        "order": 9,
+        "children": []
+      },
+      {
+        "label": "Livello di coerenza",
+        "id": "consistency.md",
+        "order": 10,
+        "children": []
+      },
+      {
         "label": "Replica in memoria",
         "id": "replica.md",
         "order": 11,
@@ -602,31 +614,39 @@
         ]
       },
       {
-        "label": "Gestire gli indici",
+        "label": "Indici",
         "id": "manage_indexes",
         "order": 4,
         "isMenu": true,
         "children": [
           {
-            "label": "Campi vettoriali indice",
+            "label": "Indici vettoriali",
             "id": "index-vector-fields.md",
             "order": 0,
             "children": []
           },
           {
-            "label": "Campi scalari indice",
-            "id": "index-scalar-fields.md",
+            "label": "Indici scalari",
+            "id": "scalar-index",
             "order": 1,
-            "children": []
+            "isMenu": true,
+            "children": [
+              {
+                "label": "Campi scalari indice",
+                "id": "index-scalar-fields.md",
+                "order": 1,
+                "children": []
+              },
+              {
+                "label": "Indice della bitmap",
+                "id": "bitmap.md",
+                "order": 2,
+                "children": []
+              }
+            ]
           },
           {
-            "label": "Indice BITMAP",
-            "id": "bitmap.md",
-            "order": 2,
-            "children": []
-          },
-          {
-            "label": "Indice con GPU",
+            "label": "Indici abilitati alle GPU",
             "id": "index-with-gpu.md",
             "order": 3,
             "children": []
@@ -682,7 +702,7 @@
             "children": []
           },
           {
-            "label": "Parola chiave abbinata",
+            "label": "Corrispondenza del testo",
             "id": "keyword-match.md",
             "order": 7,
             "children": []
@@ -700,30 +720,6 @@
             "children": []
           },
           {
-            "label": "Utilizzare mmap",
-            "id": "mmap.md",
-            "order": 10,
-            "children": []
-          },
-          {
-            "label": "Compattazione del clustering",
-            "id": "clustering-compaction.md",
-            "order": 11,
-            "children": []
-          },
-          {
-            "label": "Livello di coerenza",
-            "id": "consistency.md",
-            "order": 12,
-            "children": []
-          },
-          {
-            "label": "Tipi metrici",
-            "id": "metric.md",
-            "order": 13,
-            "children": []
-          },
-          {
             "label": "Filtraggio dei metadati",
             "id": "boolean.md",
             "order": 14,
@@ -733,26 +729,6 @@
             "label": "Reranking",
             "id": "reranking.md",
             "order": 15,
-            "children": []
-          }
-        ]
-      },
-      {
-        "label": "Importazione dei dati",
-        "id": "data_import",
-        "order": 6,
-        "isMenu": true,
-        "children": [
-          {
-            "label": "Preparare i dati di partenza",
-            "id": "prepare-source-data.md",
-            "order": 0,
-            "children": []
-          },
-          {
-            "label": "Importazione dei dati",
-            "id": "import-data.md",
-            "order": 1,
             "children": []
           }
         ]
@@ -898,10 +874,30 @@
     ]
   },
   {
+    "label": "Importazione dei dati",
+    "id": "data_import",
+    "order": 5,
+    "isMenu": true,
+    "children": [
+      {
+        "label": "Preparare i dati di partenza",
+        "id": "prepare-source-data.md",
+        "order": 0,
+        "children": []
+      },
+      {
+        "label": "Importazione dei dati",
+        "id": "import-data.md",
+        "order": 1,
+        "children": []
+      }
+    ]
+  },
+  {
     "label": "Migrazione di Milvus",
     "id": "milvus_migration",
     "isMenu": true,
-    "order": 5,
+    "order": 6,
     "children": [
       {
         "label": "Panoramica",
@@ -1322,9 +1318,29 @@
         ]
       },
       {
+        "label": "Ottimizzazione dello stoccaggio",
+        "id": "storage_optimization",
+        "order": 10,
+        "isMenu": true,
+        "children": [
+          {
+            "label": "Utilizzare mmap",
+            "id": "mmap.md",
+            "order": 0,
+            "children": []
+          },
+          {
+            "label": "Compattazione del clustering",
+            "id": "clustering-compaction.md",
+            "order": 1,
+            "children": []
+          }
+        ]
+      },
+      {
         "label": "Sicurezza",
         "id": "security",
-        "order": 10,
+        "order": 11,
         "isMenu": true,
         "children": [
           {

@@ -25,8 +25,8 @@ title: Hybride Suche mit Milvus
 <p>Milvus unterstützt dichte, spärliche und hybride Retrievalmethoden:</p>
 <ul>
 <li>Dichtes Retrieval: Nutzt den semantischen Kontext, um die Bedeutung hinter den Abfragen zu verstehen.</li>
-<li>Sparse Retrieval: Konzentriert sich auf den Abgleich von Schlüsselwörtern, um Ergebnisse auf der Grundlage bestimmter Begriffe zu finden, was einer Volltextsuche entspricht.</li>
-<li>Hybrides Retrieval: Kombiniert sowohl Dense- als auch Sparse-Ansätze und erfasst den vollständigen Kontext und spezifische Schlüsselwörter für umfassende Suchergebnisse.</li>
+<li>Sparse Retrieval: Konzentriert sich auf den Textabgleich, um Ergebnisse auf der Grundlage bestimmter Begriffe zu finden, was einer Volltextsuche entspricht.</li>
+<li>Hybrides Retrieval: Kombiniert sowohl Dense- als auch Sparse-Ansätze und erfasst den gesamten Kontext und spezifische Schlüsselwörter für umfassende Suchergebnisse.</li>
 </ul>
 <p>Durch die Integration dieser Methoden gleicht die Milvus-Hybridsuche semantische und lexikalische Ähnlichkeiten aus und verbessert so die Gesamtrelevanz der Suchergebnisse. Dieses Notebook führt durch den Prozess der Einrichtung und Verwendung dieser Suchstrategien und zeigt ihre Effektivität in verschiedenen Suchszenarien auf.</p>
 <h3 id="Dependencies-and-Environment" class="common-anchor-header">Abhängigkeiten und Umgebung</h3><pre><code translate="no" class="language-shell">$ pip install --upgrade pymilvus <span class="hljs-string">&quot;pymilvus[model]&quot;</span>
@@ -308,6 +308,6 @@ formatted_results = doc_text_formatting(ef, query, hybrid_results)
 <p><span style='color:red'>Wie</span> erstelle ich eine neue Shell in einem neuen Terminal mit<span style='color:red'> C-Programmierung</span> (Linux-Terminal)<span style='color:red'>?</span></p>
 <p>Welches Unternehmen ist in Hyderabad besser<span style='color:red'> zu gründen</span><span style='color:red'>?</span></p>
 <p>Welches Unternehmen ist ein guter<span style='color:red'> Start</span> in Hyderabad<span style='color:red'>?</span></p>
-<p>Welche Mathematik braucht ein absoluter Neuling<span style='color:red'>, um</span> Algorithmen für die<span style='color:red'> Computerprogrammierung</span> zu verstehen<span style='color:red'>?</span> Welche Bücher über Algorithmen sind für einen absoluten Anfänger geeignet<span style='color:red'>?</span></p>
+<p>Welche Mathematik braucht ein völliger Neuling<span style='color:red'>, um</span> Algorithmen für die<span style='color:red'> Computerprogrammierung</span> zu verstehen<span style='color:red'>?</span> Welche Bücher über Algorithmen sind für einen absoluten Anfänger geeignet<span style='color:red'>?</span></p>
 <p><span style='color:red'>Wie</span> kann man das Leben so gestalten, dass es zu einem passt, und wie kann man verhindern, dass das Leben einen geistig und emotional <span style='color:red'>missbraucht</span><span style='color:red'>?</span></p>
 <h3 id="Quick-Deploy" class="common-anchor-header">Schnell einsatzbereit</h3><p>Um zu erfahren, wie man mit diesem Tutorial eine Online-Demo startet, sehen Sie sich bitte <a href="https://github.com/milvus-io/bootcamp/tree/master/bootcamp/tutorials/quickstart/apps/hybrid_demo_with_milvus">die Beispielanwendung</a> an.</p>

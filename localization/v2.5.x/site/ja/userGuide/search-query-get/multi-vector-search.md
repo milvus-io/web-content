@@ -39,10 +39,10 @@ title: ハイブリッド検索
     </button></h2><p>ハイブリッド検索は以下の2つのシナリオに適しています。</p>
 <h3 id="Sparse-Dense-Vector-Search​" class="common-anchor-header">疎密ベクトル検索</h3><p>異なるタイプのベクトルは異なる情報を表現することができ、様々な埋め込みモデルを使用することで、データの異なる特徴や側面をより包括的に表現することができます。例えば、同じ文に対して異なる埋め込みモデルを使用することで、意味的な意味を表す密なベクトルと、文中の単語頻度を表す疎なベクトルを生成することができる。</p>
 <ul>
-<li><p><strong>スパース・ベクトル：</strong>スパースベクトルは、ベクトル次元が高く、非ゼロ値が少ないという特徴がある。この構造により、従来の情報検索アプリケーションに特に適している。ほとんどの場合、スパース・ベクトルで使用される次元数は、1つまたは複数の言語にわたる異なるトークンに対応します。各次元には、文書内のそのトークンの相対的な重要度を示す値が割り当てられます。このレイアウトは、キーワードのマッチングを伴うタスクに有利です。</p></li>
-<li><p><strong>密なベクトル：</strong>密なベクトルは、ニューラルネットワークから派生した埋め込みである。順序付けられた配列に配置されたとき、これらのベクトルは入力テキストの意味的本質を捉える。密なベクトルはテキスト処理に限定されるものではなく、視覚データの意味を表現するためにコンピュータビジョンでも広く使用されている。これらの密なベクトルは、通常テキスト埋め込みモデルによって生成され、ほとんどの要素またはすべての要素が非ゼロであることを特徴とする。したがって、密なベクトルは意味検索アプリケーションに特に有効であり、キーワードの完全一致がない場合でも、ベクトル距離に基づいて最も類似した結果を返すことができる。この機能により、キーワードベースのアプローチでは見逃されがちな概念間の関係性を捉えることができ、よりニュアンスや文脈を考慮した検索結果を得ることができる。</p></li>
+<li><p><strong>スパース・ベクトル：</strong>スパースベクトルは、ベクトル次元が高く、非ゼロ値が少ないという特徴がある。この構造により、従来の情報検索アプリケーションに特に適している。ほとんどの場合、スパースベクトルで使用される次元数は、1つ以上の言語にわたる異なるトークンに対応します。各次元には、文書内のそのトークンの相対的な重要度を示す値が割り当てられます。このレイアウトは、テキストのマッチングを伴うタスクに有利です。</p></li>
+<li><p><strong>密なベクトル：</strong>密なベクトルは、ニューラルネットワークに由来する埋め込みである。順序付けられた配列に配置されたとき、これらのベクトルは入力テキストの意味的本質を捉える。密なベクトルはテキスト処理に限定されるものではなく、視覚データの意味を表現するためにコンピュータビジョンでも広く使用されている。これらの密なベクトルは、通常テキスト埋め込みモデルによって生成され、ほとんどの要素またはすべての要素が非ゼロであることを特徴とする。したがって、密なベクトルは意味検索アプリケーションに特に効果的であり、テキストが完全に一致しない場合でも、ベクトル距離に基づいて最も類似した結果を返すことができる。この機能により、キーワードベースのアプローチでは見逃されがちな概念間の関係性を捉えることができ、よりニュアンスや文脈を考慮した検索結果を得ることができます。</p></li>
 </ul>
-<p>詳しくは、<a href="/docs/ja/sparse_vector.md">Sparse Vectorと</a> <a href="/docs/ja/dense-vector.md">Dense Vectorを</a>参照してください。</p>
+<p>詳しくは、<a href="/docs/ja/sparse_vector.md">Sparse Vectorと</a> <a href="/docs/ja/dense-vector.md">Dense Vectorを</a>ご参照ください。</p>
 <h3 id="Multimodal-Search​" class="common-anchor-header">マルチモーダル検索</h3><p>マルチモーダル検索とは、複数のモダリティ（画像、動画、音声、テキストなど）にまたがる非構造化データの類似検索を指す。例えば、人物は指紋、声紋、顔の特徴など様々なモダリティのデータを使って表現することができる。ハイブリッド検索は、複数の検索を同時にサポートする。例えば、指紋と声紋の両方が似ている人物を検索することができます。</p>
 <h2 id="Workflow​" class="common-anchor-header">ワークフロー<button data-href="#Workflow​" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -91,7 +91,7 @@ title: ハイブリッド検索
     </button></h2><p>このセクションでは、テキスト検索の精度を高めるために、疎な密度を持つベクトルでハイブリッド検索を行う方法を、具体的な例を使って説明する。</p>
 <h3 id="Create-a-collection-with-multiple-vector-fields​" class="common-anchor-header">複数のベクトル・フィールドでコレクションを作成する</h3><p>コレクションを作成するプロセスには、コレクション・スキーマの定義、インデックス・パラメータの構 成、コレクションの作成の3つの部分があります。</p>
 <h4 id="Define-schema​" class="common-anchor-header">スキーマの定義</h4><p>この例では、コレクションスキーマ内で複数のベクトルフィールドを定義する必要があります。現在、各コレクションはデフォルトで最大4つのベクトルフィールドを含むことができます。しかし  <a href="https://milvus.io/docs/configure_proxy.md#proxymaxVectorFieldNum"><code translate="no">proxy.maxVectorFieldNum</code></a>  の値を変更することもできます。</p>
-<p>以下の例では、<code translate="no">dense</code> と<code translate="no">sparse</code> の2つのベクトル・フィールドをコレクション・スキーマとして定義しています。</p>
+<p>以下の例では、<code translate="no">dense</code> と<code translate="no">sparse</code> の2つのベクトル・フィールドをコレクション・スキーマに定義しています。</p>
 <ul>
 <li><p><code translate="no">id</code>:このフィールドは、テキストIDを格納するプライマリキーの役割を果たす。このフィールドのデータ型はINT64である。</p></li>
 <li><p><code translate="no">text</code>:このフィールドはテキストコンテンツを格納するために使用される。このフィールドのデータ型は VARCHAR で、最大長は 1000 文字である。</p></li>
@@ -604,7 +604,7 @@ ranker = <span class="hljs-title class_">RRFRanker</span>(<span class="hljs-numb
 
 <button class="copy-code-btn"></button></code></pre></li>
 </ol>
-<h3 id="Perform-a-Hybrid-Search​" class="common-anchor-header">ハイブリッド検索の実行</h3><p>ハイブリッド検索を実行する前に、コレクションをメモリにロードする必要がある。コレクション内のベクトル・フィールドにインデックスがなかったり、ロードされていなかったりすると、Hybrid Searchメソッドを呼び出すときにエラーが発生する。</p>
+<h3 id="Perform-a-Hybrid-Search​" class="common-anchor-header">ハイブリッド検索の実行</h3><p>ハイブリッド検索を実行する前に、コレクションをメモリにロードする必要がある。コレクション内のベクトル・フィールドにインデックスがないか、ロードされていない場合、Hybrid Searchメソッドを呼び出すときにエラーが発生する。</p>
 <div class="multipleCode">
    <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient​

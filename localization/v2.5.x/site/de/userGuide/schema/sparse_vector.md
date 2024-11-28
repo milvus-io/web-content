@@ -4,9 +4,9 @@ title: Spärlicher Vektor
 summary: >-
   Dünne Vektoren sind eine wichtige Methode der Datendarstellung bei der
   Informationsgewinnung und der Verarbeitung natürlicher Sprache. Während dichte
-  Vektoren wegen ihrer hervorragenden semantischen Verständnisfähigkeiten
+  Vektoren wegen ihrer ausgezeichneten semantischen Verständnisfähigkeiten
   beliebt sind, liefern spärliche Vektoren oft genauere Ergebnisse, wenn es um
-  Anwendungen geht, die eine präzise Übereinstimmung von Schlüsselwörtern oder
+  Anwendungen geht, die einen präzisen Abgleich von Schlüsselwörtern oder
   Phrasen erfordern.
 ---
 <h1 id="Sparse-Vector​" class="common-anchor-header">Sparsamer Vektor<button data-href="#Sparse-Vector​" class="anchor-icon" translate="no">
@@ -479,3 +479,60 @@ sparse.<span class="hljs-title function_">put</span>(1000L, <span class="hljs-nu
 
 <button class="copy-code-btn"></button></code></pre>
 <p>Weitere Informationen zu den Parametern der Ähnlichkeitssuche finden Sie unter <a href="/docs/de/single-vector-search.md">Grundlegende ANN-Suche</a>.</p>
+<h2 id="Limits" class="common-anchor-header">Begrenzungen<button data-href="#Limits" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>Bei der Verwendung von spärlichen Vektoren in Milvus sind die folgenden Grenzen zu beachten:</p>
+<ul>
+<li><p>Derzeit wird nur die <strong>IP-Distanzmetrik</strong> für spärliche Vektoren unterstützt. Die hohe Dimensionalität von spärlichen Vektoren macht L2 und Kosinusabstand unpraktisch.</p></li>
+<li><p>Für spärliche Vektorfelder werden nur die Indextypen <strong>SPARSE_INVERTED_INDEX</strong> und <strong>SPARSE_WAND</strong> unterstützt.</p></li>
+<li><p>Die für spärliche Vektoren unterstützten Datentypen:</p>
+<ul>
+<li>Der Dimensionsteil muss eine 32-Bit-Ganzzahl ohne Vorzeichen sein;</li>
+<li>Der Wertteil kann eine nicht-negative 32-Bit-Gleitkommazahl sein.</li>
+</ul></li>
+<li><p>Sparse Vectors müssen die folgenden Anforderungen für das Einfügen und Suchen erfüllen:</p>
+<ul>
+<li>Mindestens ein Wert im Vektor ist ungleich Null;</li>
+<li>Vektorindizes sind nicht-negativ.</li>
+</ul></li>
+</ul>
+<h2 id="FAQ" class="common-anchor-header">FAQ<button data-href="#FAQ" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><ul>
+<li><p><strong>Können Sie den Unterschied zwischen SPARSE_INVERTED_INDEX und SPARSE_WAND erklären, und wie wähle ich zwischen ihnen?</strong></p>
+<p><strong>SPARSE_INVERTED_INDEX</strong> ist ein traditioneller invertierter Index, während <strong>SPARSE_WAND</strong> den <a href="https://dl.acm.org/doi/10.1145/956863.956944">Weak-AND-Algorithmus</a> verwendet, um die Anzahl der vollständigen IP-Abstandsauswertungen während der Suche zu reduzieren. <strong>SPARSE_WAND</strong> ist in der Regel schneller, aber seine Leistung kann mit zunehmender Vektordichte abnehmen. Um zwischen den beiden Algorithmen zu wählen, führen Sie Experimente und Benchmarks durch, die auf Ihrem spezifischen Datensatz und Anwendungsfall basieren.</p></li>
+<li><p><strong>Wie sollte ich die Parameter drop_ratio_build und drop_ratio_search wählen?</strong></p>
+<p>Die Wahl von <strong>drop_ratio_build</strong> und <strong>drop_ratio_search</strong> hängt von den Eigenschaften Ihrer Daten und Ihren Anforderungen an Suchlatenz/Durchsatz und Genauigkeit ab.</p></li>
+<li><p><strong>Kann die Dimension einer Sparse-Einbettung ein beliebiger diskreter Wert innerhalb des uint32-Raums sein?</strong></p>
+<p>Ja, mit einer Ausnahme. Die Dimension einer spärlichen Einbettung kann ein beliebiger Wert im Bereich von <code translate="no">[0, maximum of uint32)</code> sein. Das bedeutet, dass Sie nicht den Maximalwert von uint32 verwenden können.</p></li>
+<li><p><strong>Wird die Suche nach wachsenden Segmenten über einen Index oder mit roher Gewalt durchgeführt?</strong></p>
+<p>Die Suche nach wachsenden Segmenten wird über einen Index desselben Typs wie der Index des versiegelten Segments durchgeführt. Für neue wachsende Segmente, bevor der Index aufgebaut ist, wird eine Brute-Force-Suche verwendet.</p></li>
+<li><p><strong>Ist es möglich, sowohl spärliche als auch dichte Vektoren in einer einzigen Sammlung zu haben?</strong></p>
+<p>Ja, mit der Unterstützung für mehrere Vektortypen können Sie Sammlungen mit sowohl spärlichen als auch dichten Vektorspalten erstellen und hybride Suchvorgänge mit ihnen durchführen.</p></li>
+</ul>

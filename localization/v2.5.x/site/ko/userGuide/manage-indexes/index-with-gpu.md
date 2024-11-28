@@ -201,7 +201,7 @@ collection.search(
       </svg>
     </button></h2><p>GPU 인덱스를 사용할 때는 특정 제약 조건에 유의해야 합니다:</p>
 <ul>
-<li><p><strong>GPU_IVF_FLAT의</strong> 경우 <strong>제한의</strong> 최대값은 256입니다.</p></li>
+<li><p><strong>GPU_IVF_FLAT의</strong> 경우, <strong>제한의</strong> 최대값은 1024입니다.</p></li>
 <li><p><strong>GPU_IVF_PQ</strong> 및 <strong>GPU_CAGRA의</strong> 경우, <strong>제한의</strong> 최대값은 1024입니다.</p></li>
 <li><p><strong>GPU_BRUTE_FORCE에</strong> 대한 <strong>제한은</strong> 설정되어 있지 않지만 잠재적인 성능 문제를 피하기 위해 4096을 초과하지 않는 것이 좋습니다.</p></li>
 <li><p>현재 GPU 인덱스는 COSINE 거리를 지원하지 않습니다. COSINE 거리가 필요한 경우 먼저 데이터를 정규화한 다음 내부 곱(IP) 거리를 대체로 사용할 수 있습니다.</p></li>

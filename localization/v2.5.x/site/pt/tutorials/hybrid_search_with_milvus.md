@@ -25,7 +25,7 @@ title: Pesquisa híbrida com Milvus
 <p>O Milvus suporta métodos de recuperação densos, esparsos e híbridos:</p>
 <ul>
 <li>Recuperação Densa: Utiliza o contexto semântico para entender o significado por trás das consultas.</li>
-<li>Recuperação esparsa: Dá ênfase à correspondência de palavras-chave para encontrar resultados com base em termos específicos, equivalente à pesquisa de texto completo.</li>
+<li>Recuperação esparsa: Dá ênfase à correspondência de texto para encontrar resultados com base em termos específicos, equivalente à pesquisa de texto completo.</li>
 <li>Recuperação híbrida: Combina as abordagens Densa e Esparsa, capturando todo o contexto e palavras-chave específicas para obter resultados de pesquisa abrangentes.</li>
 </ul>
 <p>Ao integrar estes métodos, a Pesquisa Híbrida Milvus equilibra as semelhanças semânticas e lexicais, melhorando a relevância geral dos resultados da pesquisa. Este bloco de notas irá percorrer o processo de configuração e utilização destas estratégias de recuperação, realçando a sua eficácia em vários cenários de pesquisa.</p>
@@ -71,7 +71,7 @@ Inference Embeddings: 100%|██████████| 32/32 [01:59&lt;00:00
 <h3 id="Setup-Milvus-Collection-and-Index" class="common-anchor-header">Configurar a coleção e o índice Milvus</h3><p>Vamos configurar a coleção Milvus e criar índices para os campos vectoriais.</p>
 <div class="note alert">
 <ul>
-<li>Definir o uri como um ficheiro local, por exemplo, &quot;./milvus.db&quot;, é o método mais conveniente, uma vez que utiliza automaticamente <a href="https://milvus.io/docs/milvus_lite.md">o Milvus Lite</a> para armazenar todos os dados neste ficheiro.</li>
+<li>Definir o uri como um ficheiro local, por exemplo &quot;./milvus.db&quot;, é o método mais conveniente, uma vez que utiliza automaticamente <a href="https://milvus.io/docs/milvus_lite.md">o Milvus Lite</a> para armazenar todos os dados neste ficheiro.</li>
 <li>Se tiver uma grande escala de dados, digamos mais de um milhão de vectores, pode configurar um servidor Milvus mais eficiente em <a href="https://milvus.io/docs/quickstart.md">Docker ou Kubernetes</a>. Nesta configuração, utilize o uri do servidor, por exemplo, http://localhost:19530, como o seu uri.</li>
 <li>Se pretender utilizar <a href="https://zilliz.com/cloud">o Zilliz Cloud</a>, o serviço de nuvem totalmente gerido para o Milvus, ajuste o uri e o token, que correspondem ao <a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#cluster-details">Public Endpoint e</a> à <a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#cluster-details">chave API</a> no Zilliz Cloud.</li>
 </ul>

@@ -161,7 +161,7 @@ title: Explicación de las colecciones
 <li><p><a href="/docs/es/with-iterators.md">Iterador de búsqueda</a></p></li>
 <li><p><a href="/docs/es/get-and-scalar-query.md">Consulta</a></p></li>
 <li><p><a href="/docs/es/full-text-search.md">Búsqueda de texto completo</a></p></li>
-<li><p><a href="/docs/es/keyword-match.md">Coincidencia de palabras clave</a></p></li>
+<li><p><a href="/docs/es/keyword-match.md">Coincidencia de texto</a></p></li>
 </ul>
 <p>Además, Milvus también proporciona mejoras para aumentar el rendimiento y la eficacia de la búsqueda. Están desactivadas por defecto, y usted puede activarlas y utilizarlas según sus necesidades de servicio. Son las siguientes</p>
 <ul>

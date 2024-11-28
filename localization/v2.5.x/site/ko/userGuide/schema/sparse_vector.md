@@ -40,7 +40,7 @@ summary: >-
 <ul>
 <li><p><strong>텍스트 분석:</strong> 각 차원이 단어에 해당하고 문서에 나타나는 단어만 0이 아닌 값을 갖는 단어 가방 벡터로 문서를 표현합니다.</p></li>
 <li><p><strong>추천 시스템:</strong> 사용자-항목 상호 작용 행렬: 각 차원은 특정 항목에 대한 사용자의 평가를 나타내며, 대부분의 사용자는 몇 개의 항목과만 상호 작용합니다.</p></li>
-<li><p><strong>이미지 처리:</strong> 이미지의 핵심 포인트에만 초점을 맞춘 로컬 특징 표현으로, 고차원 스파스 벡터를 생성합니다.</p></li>
+<li><p><strong>이미지 처리:</strong> 이미지의 주요 포인트에만 초점을 맞춘 로컬 특징 표현으로, 고차원 스파스 벡터를 생성합니다.</p></li>
 </ul>
 <p>아래 다이어그램에서 볼 수 있듯이 고밀도 벡터는 일반적으로 각 위치에 값이 있는 연속 배열로 표현됩니다(예: <code translate="no">[0.3, 0.8, 0.2, 0.3, 0.1]</code>). 이와 대조적으로 희소 벡터는 0이 아닌 요소와 그 인덱스만 저장하며, 키-값 쌍으로 표현되는 경우가 많습니다(예: <code translate="no">[{2: 0.2}, ..., {9997: 0.5}, {9999: 0.7}]</code>). 이 표현은 저장 공간을 크게 줄이고 계산 효율성을 높이며, 특히 매우 고차원적인 데이터(예: 10,000차원)를 다룰 때 유용합니다.</p>
 <p>
@@ -395,7 +395,7 @@ search_params = {​
 query_vector = [{<span class="hljs-number">1</span>: <span class="hljs-number">0.2</span>, <span class="hljs-number">50</span>: <span class="hljs-number">0.4</span>, <span class="hljs-number">1000</span>: <span class="hljs-number">0.7</span>}]​
 
 <button class="copy-code-btn"></button></code></pre>
-<p>이 예에서 <code translate="no">drop_ratio_search</code> 은 희소 벡터를 위한 선택적 파라미터로, 검색 중에 쿼리 벡터의 작은 값을 미세 조정할 수 있습니다. 예를 들어 <code translate="no">{&quot;drop_ratio_search&quot;: 0.2}</code> 을 사용하면 쿼리 벡터에서 가장 작은 20%의 값은 검색 중에 무시됩니다.</p>
+<p>이 예에서 <code translate="no">drop_ratio_search</code> 은 희소 벡터를 위한 선택적 파라미터로, 검색 중에 쿼리 벡터의 작은 값을 미세 조정할 수 있습니다. 예를 들어 <code translate="no">{&quot;drop_ratio_search&quot;: 0.2}</code> 을 사용하면 검색 중에 쿼리 벡터에서 가장 작은 20%의 값은 무시됩니다.</p>
 <p>그런 다음 <code translate="no">search</code> 메서드를 사용하여 유사도 검색을 실행합니다.</p>
 <div class="multipleCode">
  <a href="#python">파이썬 </a> <a href="#java">자바</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
@@ -475,3 +475,60 @@ sparse.<span class="hljs-title function_">put</span>(1000L, <span class="hljs-nu
 
 <button class="copy-code-btn"></button></code></pre>
 <p>유사도 검색 매개변수에 대한 자세한 내용은 <a href="/docs/ko/single-vector-search.md">기본 ANN 검색을</a> 참조하세요.</p>
+<h2 id="Limits" class="common-anchor-header">제한 사항<button data-href="#Limits" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>Milvus에서 스파스 벡터를 사용할 때는 다음과 같은 제한 사항을 고려하세요:</p>
+<ul>
+<li><p>현재 스파스 벡터에는 <strong>IP</strong> 거리 메트릭만 지원됩니다. 희소 벡터의 차원이 높기 때문에 L2 및 코사인 거리는 실용적이지 않습니다.</p></li>
+<li><p>스파스 벡터 필드의 경우, <strong>SPARSE_INVERTED_INDEX</strong> 및 <strong>SPARSE_WAND</strong> 인덱스 유형만 지원됩니다.</p></li>
+<li><p>스파스 벡터에 지원되는 데이터 유형:</p>
+<ul>
+<li>차원 부분은 부호가 없는 32비트 정수여야 합니다;</li>
+<li>값 부분은 음수가 아닌 32비트 부동 소수점 숫자일 수 있습니다.</li>
+</ul></li>
+<li><p>스파스 벡터는 삽입 및 검색을 위해 다음 요구 사항을 충족해야 합니다:</p>
+<ul>
+<li>벡터의 값이 하나 이상 0이 아닐 것;</li>
+<li>벡터 인덱스는 음수가 아닙니다.</li>
+</ul></li>
+</ul>
+<h2 id="FAQ" class="common-anchor-header">FAQ<button data-href="#FAQ" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><ul>
+<li><p><strong>SPARSE_INVERTED_INDEX와 SPARSE_WAND의 차이점을 설명해 주시고, 둘 중 하나를 선택하려면 어떻게 해야 하나요?</strong></p>
+<p><strong>SPARSE_INVERTED_INDEX는</strong> 기존의 반전 인덱스인 반면, <strong>SPARSE_WAND는</strong> 검색 시 전체 IP 거리 평가 횟수를 줄이기 위해 <a href="https://dl.acm.org/doi/10.1145/956863.956944">Weak-AND</a> 알고리즘을 사용합니다. <strong>SPARSE_WAND는</strong> 일반적으로 더 빠르지만 벡터 밀도가 증가하면 성능이 저하될 수 있습니다. 이 중 하나를 선택하려면 특정 데이터 세트와 사용 사례에 따라 실험과 벤치마크를 수행하세요.</p></li>
+<li><p><strong>drop_ratio_build 및 drop_ratio_search 매개변수는 어떻게 선택해야 하나요?</strong></p>
+<p><strong>drop_ratio_build</strong> 및 <strong>drop_ratio_search의</strong> 선택은 데이터의 특성과 검색 지연 시간/처리량 및 정확도에 대한 요구 사항에 따라 달라집니다.</p></li>
+<li><p><strong>스파스 임베딩의 차원은 uint32 공간 내에서 임의의 불연속형 값이 될 수 있나요?</strong></p>
+<p>예, 한 가지 예외가 있습니다. 희소 임베딩의 차원은 <code translate="no">[0, maximum of uint32)</code> 범위의 모든 값을 사용할 수 있습니다. 즉, 최대값인 uint32를 사용할 수 없습니다.</p></li>
+<li><p><strong>증가하는 세그먼트에 대한 검색은 인덱스를 통해 수행되나요 아니면 무차별 대입으로 수행되나요?</strong></p>
+<p>증가하는 세그먼트에 대한 검색은 봉인된 세그먼트 인덱스와 동일한 유형의 인덱스를 통해 수행됩니다. 인덱스가 구축되기 전에 새로 증가하는 세그먼트의 경우 무차별 대입 검색이 사용됩니다.</p></li>
+<li><p><strong>하나의 컬렉션에 희소 벡터와 고밀도 벡터를 모두 포함할 수 있나요?</strong></p>
+<p>예, 여러 벡터 유형을 지원하므로 희소 벡터 열과 고밀도 벡터 열이 모두 포함된 컬렉션을 생성하고 하이브리드 검색을 수행할 수 있습니다.</p></li>
+</ul>

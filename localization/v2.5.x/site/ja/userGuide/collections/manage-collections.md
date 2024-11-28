@@ -161,9 +161,9 @@ title: コレクションの説明
 <li><p><a href="/docs/ja/with-iterators.md">検索反復子</a></p></li>
 <li><p><a href="/docs/ja/get-and-scalar-query.md">クエリー</a></p></li>
 <li><p><a href="/docs/ja/full-text-search.md">全文検索</a></p></li>
-<li><p><a href="/docs/ja/keyword-match.md">キーワードマッチ</a></p></li>
+<li><p><a href="/docs/ja/keyword-match.md">テキストマッチ</a></p></li>
 </ul>
-<p>また、Milvusでは検索のパフォーマンスと効率を向上させるための拡張機能も提供しております。これらはデフォルトでは無効になっており、お客様のサービス要件に応じて有効にしたり、使用したりすることができます。それらは以下の通りです。</p>
+<p>さらに、Milvusは検索パフォーマンスと効率を向上させるための拡張機能も提供しています。これらはデフォルトでは無効になっており、お客様のサービス要件に応じて有効にしたり、使用したりすることができます。それらは以下の通りです。</p>
 <ul>
 <li><p><a href="/docs/ja/use-partition-key.md">パーティションキーの使用</a></p></li>
 <li><p><a href="/docs/ja/mmap.md">mmapの使用</a></p></li>

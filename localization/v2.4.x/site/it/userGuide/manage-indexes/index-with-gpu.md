@@ -40,7 +40,7 @@ title: Indice con GPU
     </button></h2><p>Milvus utilizza un pool di memoria grafica globale per allocare la memoria della GPU.</p>
 <p>Supporta due parametri <code translate="no">initMemSize</code> e <code translate="no">maxMemSize</code> nel <a href="https://github.com/milvus-io/milvus/blob/master/configs/milvus.yaml#L767-L769">file di configurazione di Milvus</a>. La dimensione del pool è inizialmente impostata su <code translate="no">initMemSize</code> e verrà automaticamente espansa a <code translate="no">maxMemSize</code> dopo aver superato questo limite.</p>
 <p>Il valore predefinito di <code translate="no">initMemSize</code> è pari a 1/2 della memoria della GPU disponibile all'avvio di Milvus, mentre il valore predefinito di <code translate="no">maxMemSize</code> è pari a tutta la memoria della GPU disponibile.</p>
-<p>Fino a Milvus 2.4.1 (compresa la versione 2.4.1), Milvus utilizzava un pool di memoria GPU unificato. Per le versioni precedenti alla 2.4.1 (compresa la versione 2.4.1), si raccomandava di impostare entrambi i valori a 0.</p>
+<p>Fino a Milvus 2.4.1 (compresa la versione 2.4.1), Milvus utilizzava un pool di memoria GPU unificato. Per le versioni precedenti alla 2.4.1 (inclusa la versione 2.4.1), si raccomandava di impostare entrambi i valori a 0.</p>
 <pre><code translate="no" class="language-yaml">gpu:
   initMemSize: <span class="hljs-number">0</span> <span class="hljs-comment">#set the initial memory pool size.</span>
   maxMemSize: <span class="hljs-number">0</span> <span class="hljs-comment">#maxMemSize sets the maximum memory usage limit. When the memory usage exceed initMemSize, Milvus will attempt to expand the memory pool. </span>
@@ -93,7 +93,7 @@ title: Indice con GPU
 <li><p><strong>IVF_PQ</strong>: Offre una qualità superiore ma un tempo di costruzione più lento.</p></li>
 <li><p><strong>NN_DESCENT</strong>: Fornisce una costruzione più rapida con un richiamo potenzialmente inferiore.</p></li>
 </ul></li>
-<li><p><strong>cache_dataset_on_device</strong><em>(stringa</em>, <strong>"true"</strong> | <strong>"false")</strong>: Decide se mettere in cache il dataset originale nella memoria della GPU. Impostando <strong>"true"</strong> si migliora il richiamo raffinando i risultati della ricerca, mentre impostando <strong>"false" si</strong> conserva la memoria della GPU.</p></li>
+<li><p><strong>cache_dataset_on_device</strong><em>(stringa</em>, <strong>"true"</strong> | <strong>"false")</strong>: Decide se mettere in cache il dataset originale nella memoria della GPU. Impostando <strong>"true"</strong> si migliora il richiamo affinando i risultati della ricerca, mentre impostando <strong>"false" si</strong> conserva la memoria della GPU.</p></li>
 </ul></li>
 <li><p>Indice<strong>GPU_IVF_FLAT</strong> o <strong>GPU_IVF_PQ</strong> </p>
 <pre><code translate="no" class="language-python">index_params = {
@@ -164,8 +164,8 @@ collection.create_index(
 <ul>
 <li><p><strong>itopk_size</strong>: Determina la dimensione dei risultati intermedi conservati durante la ricerca. Un valore maggiore può migliorare la ricerca a scapito delle prestazioni. Deve essere almeno uguale al valore finale top-k<strong>(limite</strong>) ed è tipicamente una potenza di 2 (ad esempio, 16, 32, 64, 128).</p></li>
 <li><p><strong>search_width</strong>: Specifica il numero di punti di ingresso nel grafo CAGRA durante la ricerca. L'aumento di questo valore può migliorare il richiamo, ma può influire sulle prestazioni della ricerca.</p></li>
-<li><p><strong>min_iterations</strong> / <strong>max_iterations</strong>: Questi parametri controllano il processo di iterazione della ricerca. Per impostazione predefinita, sono impostati su <strong>0</strong> e CAGRA determina automaticamente il numero di iterazioni in base a <strong>itopk_size</strong> e <strong>search_width</strong>. La regolazione manuale di questi valori può aiutare a bilanciare prestazioni e precisione.</p></li>
-<li><p><strong>team_size</strong>: Specifica il numero di thread CUDA utilizzati per calcolare la distanza metrica sulla GPU. I valori comuni sono una potenza di 2 fino a 32 (ad esempio, 2, 4, 8, 16, 32). Ha un impatto minimo sulle prestazioni della ricerca. Il valore predefinito è <strong>0</strong>, dove Milvus seleziona automaticamente il <strong>team_size</strong> in base alla dimensione del vettore.</p></li>
+<li><p><strong>min_iterations</strong> / <strong>max_iterations</strong>: Questi parametri controllano il processo di iterazione della ricerca. Per impostazione predefinita, sono impostati su <strong>0</strong> e CAGRA determina automaticamente il numero di iterazioni in base a <strong>itopk_size</strong> e <strong>search_width</strong>. La regolazione manuale di questi valori può aiutare a bilanciare prestazioni e accuratezza.</p></li>
+<li><p><strong>team_size</strong>: Specifica il numero di thread CUDA utilizzati per calcolare la distanza metrica sulla GPU. I valori più comuni sono una potenza di 2 fino a 32 (ad esempio, 2, 4, 8, 16, 32). Ha un impatto minimo sulle prestazioni della ricerca. Il valore predefinito è <strong>0</strong>, dove Milvus seleziona automaticamente il <strong>team_size</strong> in base alla dimensione del vettore.</p></li>
 </ul></li>
 <li><p>Indice<strong>GPU_IVF_FLAT</strong> o <strong>GPU_IVF_PQ</strong> </p>
 <pre><code translate="no" class="language-python">search_params = {
@@ -203,11 +203,11 @@ collection.search(
       </svg>
     </button></h2><p>Quando si usano gli indici GPU, occorre tenere conto di alcuni vincoli:</p>
 <ul>
-<li><p>Per <strong>GPU_IVF_FLAT</strong>, il valore massimo di <strong>limit</strong> è 256.</p></li>
+<li><p>Per <strong>GPU_IVF_FLAT</strong>, il valore massimo per il <strong>limite</strong> è 1024.</p></li>
 <li><p>Per <strong>GPU_IVF_PQ</strong> e <strong>GPU_CAGRA</strong>, il valore massimo di <strong>limit</strong> è 1024.</p></li>
 <li><p>Sebbene non sia stato fissato un limite per <strong>GPU_BRUTE_FORCE</strong>, si consiglia di non superare i 4096 per evitare potenziali problemi di prestazioni.</p></li>
 <li><p>Attualmente, gli indici GPU non supportano la distanza COSINE. Se è necessaria la distanza COSINE, i dati devono essere prima normalizzati e poi si può usare la distanza del prodotto interno (IP) come sostituto.</p></li>
-<li><p>Il caricamento della protezione OOM per gli indici GPU non è pienamente supportato; una quantità eccessiva di dati potrebbe causare l'arresto anomalo del QueryNode.</p></li>
+<li><p>Il caricamento della protezione OOM per gli indici GPU non è pienamente supportato, una quantità eccessiva di dati potrebbe causare l'arresto anomalo del QueryNode.</p></li>
 <li><p>Gli indici GPU non supportano funzioni di ricerca come la <a href="https://milvus.io/docs/single-vector-search.md#Range-search">ricerca per intervallo</a> e la <a href="https://milvus.io/docs/single-vector-search.md#Grouping-searchh">ricerca per raggruppamento</a>.</p></li>
 </ul>
 <h2 id="FAQ" class="common-anchor-header">DOMANDE FREQUENTI<button data-href="#FAQ" class="anchor-icon" translate="no">

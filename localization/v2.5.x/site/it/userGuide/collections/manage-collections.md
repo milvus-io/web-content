@@ -79,7 +79,7 @@ title: Spiegazione delle raccolte
       </svg>
     </button></h2><p>Analogamente al campo primario di un database relazionale, una collezione ha un campo primario per distinguere un'entità dalle altre. Ogni valore del campo primario è globalmente unico e corrisponde a un'entità specifica. </p>
 <p>Come mostrato nel grafico precedente, il campo <strong>id</strong> funge da campo primario e il primo ID <strong>0</strong> corrisponde a un'entità intitolata <em>Il tasso di mortalità del Coronavirus non è importante</em>. Non ci sarà nessun'altra entità che abbia il campo primario 0.</p>
-<p>Un campo primario accetta solo numeri interi o stringhe. Quando si inseriscono le entità, i valori del campo primario devono essere inclusi per impostazione predefinita. Tuttavia, se si è abilitato l'<strong>AutoId</strong> alla creazione della collezione, Milvus genererà questi valori al momento dell'inserimento dei dati. In questo caso, escludere i valori del campo primario dalle entità da inserire.</p>
+<p>Un campo primario accetta solo numeri interi o stringhe. Quando si inseriscono le entità, i valori del campo primario devono essere inclusi per impostazione predefinita. Tuttavia, se si è abilitato l'<strong>AutoId</strong> alla creazione della collezione, Milvus genererà questi valori al momento dell'inserimento dei dati. In tal caso, escludere i valori del campo primario dalle entità da inserire.</p>
 <p>Per ulteriori informazioni, consultare <a href="/docs/it/primary-field.md">Campo primario e AutoID</a>.</p>
 <h2 id="Index​" class="common-anchor-header">Indice<button data-href="#Index​" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -130,7 +130,7 @@ title: Spiegazione delle raccolte
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Il caricamento di una collezione è il prerequisito per eseguire ricerche e query di similarità nelle collezioni. Quando si carica una collezione, Milvus carica in memoria tutti i file di indice e i dati grezzi di ogni campo per rispondere rapidamente alle ricerche e alle query.</p>
+    </button></h2><p>Il caricamento di una collezione è il prerequisito per effettuare ricerche di similarità e query nelle collezioni. Quando si carica una collezione, Milvus carica in memoria tutti i file di indice e i dati grezzi di ogni campo per rispondere rapidamente alle ricerche e alle query.</p>
 <p>Le ricerche e le query sono operazioni che richiedono molta memoria. Per risparmiare sui costi, si consiglia di rilasciare le raccolte che non sono attualmente in uso.</p>
 <p>Per maggiori dettagli, consultare <a href="/docs/it/load-and-release.md">Carica e rilascia</a>.</p>
 <h2 id="Search-and-Query​" class="common-anchor-header">Ricerca e query<button data-href="#Search-and-Query​" class="anchor-icon" translate="no">
@@ -161,7 +161,7 @@ title: Spiegazione delle raccolte
 <li><p><a href="/docs/it/with-iterators.md">Iteratore di ricerca</a></p></li>
 <li><p><a href="/docs/it/get-and-scalar-query.md">Query</a></p></li>
 <li><p><a href="/docs/it/full-text-search.md">Ricerca a tutto testo</a></p></li>
-<li><p><a href="/docs/it/keyword-match.md">Corrispondenza di parole chiave</a></p></li>
+<li><p><a href="/docs/it/keyword-match.md">Corrispondenza del testo</a></p></li>
 </ul>
 <p>Inoltre, Milvus offre anche miglioramenti per migliorare le prestazioni e l'efficienza della ricerca. Questi miglioramenti sono disattivati per impostazione predefinita e possono essere attivati e utilizzati in base alle esigenze del servizio. Essi sono</p>
 <ul>

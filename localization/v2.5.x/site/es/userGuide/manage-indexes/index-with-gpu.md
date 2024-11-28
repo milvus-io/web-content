@@ -203,8 +203,8 @@ collection.search(
       </svg>
     </button></h2><p>Cuando utilice índices GPU, tenga en cuenta ciertas restricciones:</p>
 <ul>
-<li><p>Para <strong>GPU_IVF_FLAT</strong>, el valor máximo para <strong>limit</strong> es 256.</p></li>
-<li><p>Para <strong>GPU_IVF_PQ</strong> y <strong>GPU_CAGRA</strong>, el valor máximo de <strong>limit</strong> es 1024.</p></li>
+<li><p>Para <strong>GPU_IVF_FLAT</strong>, el valor máximo de <strong>límite</strong> es 1024.</p></li>
+<li><p>Para <strong>GPU_IVF_PQ</strong> y <strong>GPU_CAGRA</strong>, el valor máximo para <strong>limit</strong> es 1024.</p></li>
 <li><p>Aunque no hay un <strong>límite</strong> establecido para <strong>GPU_BRUTE_FORCE</strong>, se recomienda no superar los 4096 para evitar posibles problemas de rendimiento.</p></li>
 <li><p>Actualmente, los índices GPU no soportan la distancia COSINE. Si se requiere la distancia COSINE, los datos deben ser normalizados en primer lugar, y luego la distancia de producto interno (IP) se puede utilizar como sustituto.</p></li>
 <li><p>La carga de la protección OOM para los índices de la GPU no está totalmente soportada, demasiados datos pueden provocar fallos en el QueryNode.</p></li>

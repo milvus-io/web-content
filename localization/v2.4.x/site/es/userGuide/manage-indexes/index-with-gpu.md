@@ -22,7 +22,7 @@ title: Índice con GPU
         ></path>
       </svg>
     </button></h1><p>Esta guía describe los pasos para construir un índice con soporte GPU en Milvus, que puede mejorar significativamente el rendimiento de la búsqueda en escenarios de alto rendimiento y alta recuperación. Para más detalles sobre los tipos de índices GPU soportados por Milvus, consulte <a href="/docs/es/gpu_index.md">Índice GPU</a>.</p>
-<h2 id="Configure-Milvus-settings-for-GPU-memory-control" class="common-anchor-header">Configurar los ajustes de Milvus para el control de la memoria de la GPU<button data-href="#Configure-Milvus-settings-for-GPU-memory-control" class="anchor-icon" translate="no">
+<h2 id="Configure-Milvus-settings-for-GPU-memory-control" class="common-anchor-header">Configure los ajustes de Milvus para el control de la memoria de la GPU<button data-href="#Configure-Milvus-settings-for-GPU-memory-control" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -173,7 +173,7 @@ collection.create_index(
     <span class="hljs-string">&quot;params&quot;</span>: {<span class="hljs-string">&quot;nprobe&quot;</span>: <span class="hljs-number">10</span>}
 }
 <button class="copy-code-btn"></button></code></pre>
-<p>Los parámetros de búsqueda para estos dos tipos de índice son similares a los utilizados en <strong><a href="https://milvus.io/docs/index.md#IVF_FLAT">IVF_FLAT</a> e <a href="https://milvus.io/docs/index.md#IVF_PQ">IVF_PQ</a></strong>. Para más información, consulte <a href="https://milvus.io/docs/search.md#Prepare-search-parameters">Realizar una búsqueda de similitud vectorial</a>.</p></li>
+<p>Los parámetros de búsqueda para estos dos tipos de índice son similares a los utilizados en <strong><a href="https://milvus.io/docs/index.md#IVF_FLAT">IVF_FLAT</a> e <a href="https://milvus.io/docs/index.md#IVF_PQ">IVF_PQ</a></strong>. Para obtener más información, consulte <a href="https://milvus.io/docs/search.md#Prepare-search-parameters">Realizar una búsqueda de similitud vectorial</a>.</p></li>
 </ul>
 <h3 id="Conduct-a-search" class="common-anchor-header">Realizar una búsqueda</h3><p>Utilice el método <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/ORM/Collection/search.md"><code translate="no">search()</code></a> para realizar una búsqueda de similitud vectorial en el índice GPU.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Load data into memory</span>
@@ -203,7 +203,7 @@ collection.search(
       </svg>
     </button></h2><p>Cuando utilice índices GPU, tenga en cuenta ciertas restricciones:</p>
 <ul>
-<li><p>Para <strong>GPU_IVF_FLAT</strong>, el valor máximo para <strong>limit</strong> es 256.</p></li>
+<li><p>Para <strong>GPU_IVF_FLAT</strong>, el valor máximo de <strong>límite</strong> es 1024.</p></li>
 <li><p>Para <strong>GPU_IVF_PQ</strong> y <strong>GPU_CAGRA</strong>, el valor máximo de <strong>limit</strong> es 1024.</p></li>
 <li><p>Aunque no hay un <strong>límite</strong> establecido para <strong>GPU_BRUTE_FORCE</strong>, se recomienda no superar los 4096 para evitar posibles problemas de rendimiento.</p></li>
 <li><p>Actualmente, los índices GPU no soportan la distancia COSINE. Si se requiere la distancia COSINE, los datos deben ser normalizados en primer lugar, y luego la distancia de producto interno (IP) se puede utilizar como sustituto.</p></li>

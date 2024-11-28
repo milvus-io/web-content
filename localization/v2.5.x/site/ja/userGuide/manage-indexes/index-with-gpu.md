@@ -67,7 +67,7 @@ title: GPUによるインデックス
 <h3 id="Prepare-index-parameters" class="common-anchor-header">インデックスパラメータの準備</h3><p>GPU インデックスパラメータを設定する際に、<strong>index_type</strong>、<strong>metric_type</strong>、<strong>params</strong> を定義します：</p>
 <ul>
 <li><p><strong>index_type</strong><em>(文字列</em>)：index_type (string): ベクトル探索を加速するために使用するインデックスのタイプ。有効なオプションは<strong>GPU_CAGRA</strong>、<strong>GPU_IVF_FLAT</strong>、<strong>GPU_IVF_PQ</strong>、<strong>GPU_BRUTE_FORCE</strong>です。</p></li>
-<li><p><strong>metric_type</strong><em>（文字列</em>）：ベクトルの類似度を測定するために使用されるメトリクスのタイプ。有効なオプションは<strong>IP</strong>と<strong>L2</strong> です。</p></li>
+<li><p><strong>metric_type</strong><em>（文字列</em>）：ベクトルの類似度を測定するために使用するメトリクスのタイプ。有効なオプションは<strong>IP</strong>と<strong>L2</strong> です。</p></li>
 <li><p><strong>params</strong><em>(dict</em>)：インデックス固有の構築パラメータ。このパラメータに有効なオプションは、インデックスの種類に依存します。</p></li>
 </ul>
 <p>以下は、異なるインデックス・タイプの構成例です：</p>
@@ -102,7 +102,7 @@ title: GPUによるインデックス
     }
 }
 <button class="copy-code-btn"></button></code></pre>
-<p><strong>params</strong>オプションは、<strong><a href="https://milvus.io/docs/index.md#IVF_FLAT">IVF_FLAT</a></strong>と<strong><a href="https://milvus.io/docs/index.md#IVF_PQ">IVF_PQ</a></strong> で使われているものと同じです。</p></li>
+<p><strong>params</strong>オプションは<strong><a href="https://milvus.io/docs/index.md#IVF_FLAT">IVF_FLAT</a></strong>および<strong><a href="https://milvus.io/docs/index.md#IVF_PQ">IVF_PQ</a></strong> で使用されるものと同じです。</p></li>
 <li><p><strong>GPU_BRUTE_FORCE</strong>インデックス</p>
 <pre><code translate="no" class="language-python">index_params = {
     <span class="hljs-string">&#x27;index_type&#x27;</span>: <span class="hljs-string">&#x27;GPU_BRUTE_FORCE&#x27;</span>,
@@ -201,7 +201,7 @@ collection.search(
       </svg>
     </button></h2><p>GPU インデックスを使用する場合、特定の制約に注意してください：</p>
 <ul>
-<li><p><strong>GPU_IVF_FLAT</strong> の場合、<strong>limit</strong>の最大値は 256 です。</p></li>
+<li><p><strong>GPU_IVF_FLAT</strong> の場合、<strong>limit</strong>の最大値は 1024 です。</p></li>
 <li><p><strong>GPU_IVF_PQ</strong>と<strong>GPU_CAGRA の</strong>場合、<strong>limit</strong>の最大値は 1024 です。</p></li>
 <li><p><strong>GPU_BRUTE_FORCE</strong> には<strong>limit</strong>の上限は設定されていませんが、潜在的なパ フォーマンスの問題を避けるために 4096 を超えないことが推奨されます。</p></li>
 <li><p>現在、GPUインデックスはCOSINE距離をサポートしていません。COSINE 距離が必要な場合は、まずデータを正規化し、それから内積 (IP) 距離で代用することができます。</p></li>

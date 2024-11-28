@@ -50,9 +50,9 @@ title: 릴리스 노트
 <h4 id="Cluster-Management-WebUI-Beta" class="common-anchor-header">클러스터 관리 웹 UI(베타)</h4><p>대규모 데이터와 풍부한 기능을 보다 효과적으로 지원하기 위해 Milvus의 정교한 설계에는 다양한 종속성, 수많은 노드 역할, 복잡한 데이터 구조 등이 포함되어 있습니다. 이러한 측면은 사용 및 유지 관리에 어려움을 초래할 수 있습니다.</p>
 <p>Milvus 2.5는 빌트인 클러스터 관리 웹UI를 도입하여 Milvus의 복잡한 런타임 환경 정보를 시각화함으로써 시스템 유지 관리의 어려움을 줄여줍니다. 여기에는 데이터베이스 및 컬렉션, 세그먼트, 채널, 종속성, 노드 상태, 작업 정보, 느린 쿼리 등에 대한 세부 정보가 포함됩니다.</p>
 <h4 id="Text-Match" class="common-anchor-header">텍스트 일치</h4><p>Milvus 2.5는 텍스트 전처리 및 인덱스 구축을 위해 Tantivy의 분석기와 인덱싱을 활용하여 특정 용어를 기반으로 텍스트 데이터의 정확한 자연어 매칭을 지원합니다. 이 기능은 주로 특정 조건을 충족하는 필터링 검색에 사용되며, 스칼라 필터링을 통합하여 쿼리 결과를 구체화함으로써 스칼라 기준을 충족하는 벡터 내에서 유사성 검색을 할 수 있습니다.</p>
-<p>자세한 내용은 <a href="/docs/ko/keyword-match.md">키워드 검색을</a> 참조하세요.</p>
-<h4 id="Bitmap-Index" class="common-anchor-header">비트맵 색인</h4><p>새로운 스칼라 데이터 인덱스가 Milvus 제품군에 추가되었습니다. 비트맵 인덱스는 행 수와 동일한 길이의 비트 배열을 사용해 값의 존재를 나타내고 검색 속도를 높입니다.</p>
-<p>비트맵 인덱스는 일반적으로 고유 값의 수가 적은 낮은 카디널리티 필드(예: 남성, 여성 두 가지 값만 있는 성별 정보가 포함된 열)에 효과적이었습니다.</p>
+<p>자세한 내용은 <a href="/docs/ko/keyword-match.md">텍스트 일치를</a> 참조하세요.</p>
+<h4 id="Bitmap-Index" class="common-anchor-header">비트맵 색인</h4><p>새로운 스칼라 데이터 인덱스가 Milvus 제품군에 추가되었습니다. 비트맵 인덱스는 행 수와 동일한 길이의 비트 배열을 사용하여 값의 존재를 나타내고 검색 속도를 높입니다.</p>
+<p>비트맵 인덱스는 일반적으로 고유 값의 수가 적은 저카디널리티 필드(예: 남성, 여성 두 가지 값만 있는 성별 정보가 포함된 열)에 효과적이었습니다.</p>
 <p>자세한 내용은 <a href="/docs/ko/bitmap.md">비트맵 인덱스를</a> 참조하세요.</p>
 <h4 id="Nullable--Default-Value" class="common-anchor-header">널 가능 및 기본값</h4><p>Milvus는 이제 기본 키 필드 이외의 스칼라 필드에 대해 널 가능 속성 및 기본값 설정을 지원합니다. <code translate="no">nullable=True</code> 로 표시된 스칼라 필드의 경우 사용자는 데이터를 삽입할 때 해당 필드를 생략할 수 있으며, 시스템에서는 오류를 발생시키지 않고 해당 필드를 널 값 또는 기본값(설정된 경우)으로 처리합니다.</p>
 <p>기본값과 널 가능 속성은 Milvus에 더 큰 유연성을 제공합니다. 사용자는 컬렉션을 만들 때 값이 불확실한 필드에 이 기능을 활용할 수 있습니다. 또한 다른 데이터베이스 시스템에서 Milvus로 데이터 마이그레이션을 간소화하여 원래의 기본값 설정을 유지하면서 null 값이 포함된 데이터 세트를 처리할 수 있습니다.</p>
@@ -62,7 +62,7 @@ title: 릴리스 노트
 <p>PRQ는 PQ와 AQ(애디티브 퀀타이저)의 융합입니다. PQ와 비교했을 때, 특히 높은 압축률에서 더 나은 리콜을 제공하기 위해 더 긴 빌드 시간이 필요하며, 이진 압축이라고 합니다.</p>
 <h4 id="Clustering-Compaction-Beta" class="common-anchor-header">클러스터링 압축(베타)</h4><p>Milvus 2.5에는 대규모 컬렉션에서 검색을 가속화하고 비용을 절감하기 위해 클러스터링 압축이 도입되었습니다. 스칼라 필드를 클러스터링 키로 지정하면 데이터를 범위별로 재분배하여 저장 및 검색을 최적화할 수 있습니다. 글로벌 인덱스처럼 작동하는 이 기능은 클러스터링 메타데이터를 기반으로 쿼리 중에 데이터를 효율적으로 정리하여 스칼라 필터를 적용할 때 검색 성능을 향상시킬 수 있습니다.</p>
 <p>자세한 내용은 <a href="/docs/ko/clustering-compaction.md">클러스터링 압축을</a> 참조하세요.</p>
-<h3 id="Other-Features" class="common-anchor-header">기타 기능</h3><h4 id="Streaming-Node-Beta" class="common-anchor-header">스트리밍 노드(베타)</h4><p>Milvus 2.5에는 미리 쓰기 로깅(WAL) 서비스를 제공하는 스트리밍 노드라는 새로운 구성 요소가 도입되었습니다. 이를 통해 Milvus는 채널 읽기 및 쓰기 전후에 합의를 달성하여 새로운 특징, 기능 및 최적화를 실현할 수 있습니다. 이 기능은 Milvus 2.5에서는 기본적으로 비활성화되어 있으며 3.0 버전에서 공식적으로 제공될 예정입니다.</p>
+<h3 id="Other-Features" class="common-anchor-header">기타 기능</h3><h4 id="Streaming-Node-Beta" class="common-anchor-header">스트리밍 노드(베타)</h4><p>Milvus 2.5에는 미리 쓰기 로깅(WAL) 서비스를 제공하는 스트리밍 노드라는 새로운 구성 요소가 도입되었습니다. 이를 통해 Milvus는 채널 읽기 및 쓰기 전후에 합의를 달성하여 새로운 특징, 기능 및 최적화를 실현할 수 있습니다. 이 기능은 Milvus 2.5에서 기본적으로 비활성화되어 있으며 3.0 버전에서 공식적으로 제공될 예정입니다.</p>
 <h4 id="IPv6-Support" class="common-anchor-header">IPv6 지원</h4><p>Milvus는 이제 IPv6를 지원하여 네트워크 연결성과 호환성을 확장합니다.</p>
 <h4 id="CSV-Bulk-Import" class="common-anchor-header">CSV 일괄 가져오기</h4><p>이제 Milvus는 JSON 및 Parquet 형식 외에도 CSV 형식의 데이터를 직접 대량으로 가져올 수 있습니다.</p>
 <h4 id="Expression-Templates-for-Query-Acceleration" class="common-anchor-header">쿼리 가속화를 위한 표현식 템플릿</h4><p>Milvus는 이제 표현식 템플릿을 지원하여 특히 복잡한 표현식이 있는 시나리오에서 표현식 구문 분석의 효율성을 향상시킵니다.</p>
@@ -78,6 +78,6 @@ title: 릴리스 노트
 <h4 id="Dependencies-Upgrade" class="common-anchor-header">종속성 업그레이드</h4><p>ETCD 3.5.16 및 Pulsar 3.0.7 LTS로 업그레이드하여 기존 CVE를 수정하고 보안을 강화했습니다. 참고: Pulsar 3.x로의 업그레이드는 이전 2.x 버전과 호환되지 않습니다.</p>
 <p>이미 Milvus를 배포한 사용자의 경우, 새로운 기능을 사용하려면 먼저 ETCD 및 Pulsar 구성 요소를 업그레이드해야 합니다. 자세한 내용은 <a href="/docs/ko/upgrade-pulsar-v3.md">Pulsar를 2.x에서 3.x로 업그레이드하기를</a> 참조하세요.</p>
 <h4 id="Local-Storage-V2" class="common-anchor-header">로컬 스토리지 V2</h4><p>Milvus 2.5에 새로운 로컬 파일 형식이 도입되어 스칼라 데이터의 로딩 및 쿼리 효율성이 향상되고 메모리 오버헤드가 줄어들며 향후 최적화를 위한 토대가 마련되었습니다.</p>
-<h4 id="Expression-Parsing-Optimization" class="common-anchor-header">표현식 구문 분석 최적화</h4><p>반복 표현식에 대한 캐싱 구현, ANTLR 업그레이드, <code translate="no">NOT IN</code> 절의 성능 최적화를 통해 표현식 구문 분석이 개선되었습니다.</p>
+<h4 id="Expression-Parsing-Optimization" class="common-anchor-header">표현식 구문 분석 최적화</h4><p>반복 표현식에 대한 캐싱을 구현하고, ANTLR을 업그레이드하고, <code translate="no">NOT IN</code> 절의 성능을 최적화하여 표현식 구문 분석이 개선되었습니다.</p>
 <h4 id="Improved-DDL-Concurrency-Performance" class="common-anchor-header">DDL 동시성 성능 개선</h4><p>데이터 정의 언어(DDL) 작업의 동시성 성능을 최적화했습니다.</p>
 <h4 id="RESTful-API-Feature-Alignment" class="common-anchor-header">RESTful API 기능 조정</h4><p>일관성을 위해 RESTful API의 기능을 다른 SDK와 정렬했습니다.</p>

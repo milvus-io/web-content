@@ -48,13 +48,13 @@ summary: >-
    </span> <span class="img-wrapper"> <span>疎ベクトル表現</span> </span></p>
 <p>スパースベクトルは、テキスト処理における<a href="https://en.wikipedia.org/wiki/Tf%E2%80%93idf">TF-IDF</a>（項頻度-逆文書頻度）や<a href="https://en.wikipedia.org/wiki/Okapi_BM25">BM25など</a>、様々な手法を用いて生成することができます。さらに、Milvusはスパースベクトルの生成と処理を支援する便利なメソッドを提供しています。詳細は<a href="/docs/ja/embeddings.md">埋め込みを</a>ご参照ください。</p>
 <p>Milvusはテキストデータの全文検索機能も提供しており、スパースベクトルを生成するために外部の埋め込みモデルを使用することなく、生のテキストデータに対して直接ベクトル検索を行うことができます。詳細は<a href="/docs/ja/full-text-search.md">全文検索を</a>ご参照ください。</p>
-<p>ベクトル化後、データはMilvusに保存され、管理およびベクトル検索を行うことができます。下図は基本的なプロセスを示しています。</p>
+<p>ベクトル化されたデータはMilvusに保存され、管理やベクトル検索に利用することができます。下図は基本的なプロセスを示しています。</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/use-sparse-vector.png" alt="Use sparse vector in Milvus" class="doc-image" id="use-sparse-vector-in-milvus" />
    </span> <span class="img-wrapper"> <span>Milvusでスパースベクトルを使用する。</span> </span></p>
 <div class="alert note">
-<p>Milvusはスパースベクトル以外にも、デンスベクトルやバイナリベクトルにも対応しています。密なベクトルは深い意味的関係を把握するのに適しており、バイナリベクトルは迅速な類似性比較やコンテンツの重複排除などのシナリオに優れています。詳細については、<a href="/docs/ja/dense-vector.md">密なベクトルと</a> <a href="/docs/ja/binary-vector.md">バイナリベクトルを</a>参照してください。</p>
+<p>Milvusはスパースベクトル以外にも、デンスベクトルやバイナリベクトルにも対応しています。密なベクトルは深い意味的関係を把握するのに理想的であり、バイナリベクトルは迅速な類似性比較やコンテンツの重複排除などのシナリオに優れています。詳細については、<a href="/docs/ja/dense-vector.md">密なベクトルと</a> <a href="/docs/ja/binary-vector.md">バイナリベクトルを</a>参照してください。</p>
 </div>
 <h2 id="Use-sparse-vectors-in-Milvus​" class="common-anchor-header">Milvusでスパースベクトルを使う<button data-href="#Use-sparse-vectors-in-Milvus​" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -473,4 +473,61 @@ sparse.<span class="hljs-title function_">put</span>(1000L, <span class="hljs-nu
 <span class="hljs-comment">## {&quot;code&quot;:0,&quot;cost&quot;:0,&quot;data&quot;:[{&quot;distance&quot;:0.63,&quot;id&quot;:&quot;453577185629572535&quot;,&quot;pk&quot;:&quot;453577185629572535&quot;},{&quot;distance&quot;:0.1,&quot;id&quot;:&quot;453577185629572534&quot;,&quot;pk&quot;:&quot;453577185629572534&quot;}]}​</span>
 
 <button class="copy-code-btn"></button></code></pre>
-<p>類似検索パラメーターの詳細については、「<a href="/docs/ja/single-vector-search.md">ANN検索の基本</a>」を参照のこと。</p>
+<p>類似検索パラメーターの詳細については、「<a href="/docs/ja/single-vector-search.md">基本的なANN検索</a>」を参照のこと。</p>
+<h2 id="Limits" class="common-anchor-header">限界<button data-href="#Limits" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>Milvusでスパースベクトルを使用する場合、以下の制限を考慮してください：</p>
+<ul>
+<li><p>現在、スパースベクトルでは<strong>IP</strong>距離メトリックのみがサポートされています。スパースベクトルは次元が高いため、L2距離や余弦距離は実用的ではありません。</p></li>
+<li><p>疎なベクトル・フィールドでは、<strong>SPARSE_INVERTED_INDEX</strong>と<strong>SPARSE_WAND</strong>インデックス型のみがサポートされています。</p></li>
+<li><p>スパース・ベクトルでサポートされるデータ型：</p>
+<ul>
+<li>次元部は符号なし32ビット整数でなければならない；</li>
+<li>値部は非負32ビット浮動小数点数。</li>
+</ul></li>
+<li><p>スパース・ベクトルは、挿入と検索に関して以下の要件を満たす必要があります：</p>
+<ul>
+<li>ベクトル内の少なくとも1つの値が非ゼロである；</li>
+<li>ベクトルの添字が非負であること。</li>
+</ul></li>
+</ul>
+<h2 id="FAQ" class="common-anchor-header">よくある質問<button data-href="#FAQ" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><ul>
+<li><p><strong>SPARSE_INVERTED_INDEX と SPARSE_WAND の違いと、その選択方法を教えてください。</strong></p>
+<p><strong>SPARSE_INVERTED_INDEXは</strong>伝統的な転置インデックスで、<strong>SPARSE_WANDは</strong> <a href="https://dl.acm.org/doi/10.1145/956863.956944">Weak-AND</a>アルゴリズムを使用して検索中のフルIP距離評価数を減らします。<strong>SPARSE_WANDは</strong>一般的に高速ですが、ベクトル密度が高くなるにつれて性能が低下する可能性があります。どちらかを選択するには、特定のデータセットとユースケースに基づいた実験とベンチマークを実施してください。</p></li>
+<li><p><strong>drop_ratio_buildとdrop_ratio_searchパラメータはどのように選択すればよいですか？</strong></p>
+<p><strong>drop_ratio_buildと</strong> <strong>drop_ratio_searchの</strong>選択は、データの特性や、検索レイテンシー/スループット、精度に対する要件に依存します。</p></li>
+<li><p><strong>スパース埋込みの次元は、uint32空間内の任意の離散値にすることができますか？</strong></p>
+<p>はい，ただし1つの例外があります．スパース埋込みの次元は，<code translate="no">[0, maximum of uint32)</code> の範囲内の任意の値にすることができます． つまり，uint32の最大値を使うことはできません．</p></li>
+<li><p><strong>成長しているセグメントの検索は、インデックスを使って行うのですか?</strong></p>
+<p>成長中のセグメントを検索する際には、セグメントインデックスと同じ型のインデックスを使用します。インデックスが作成される前の新しい成長中のセグメントについては、 総当たり検索を使用します。</p></li>
+<li><p><strong>1つのコレクションに、疎なベクトルと密なベクトルの両方を持つことは可能ですか?</strong></p>
+<p>はい、複数のベクトル型をサポートしているため、疎なベクトル列と密なベクトル列の両方を持つコレクションを作成し、それに対してハイブリッド検索を実行することができます。</p></li>
+</ul>

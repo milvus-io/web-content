@@ -20,12 +20,12 @@ summary: >-
         ></path>
       </svg>
     </button></h1><p>テキスト処理において、<strong>アナライザーは</strong>生テキストを構造化された検索可能な形式に変換する重要なコンポーネントである。アナライザーは通常、<strong>トークナイザーと</strong> <strong>フィルターという</strong>2つのコア要素で構成される。これらは共に入力テキストをトークンに変換し、トークンを洗練させ、効率的なインデックス作成と検索に備えます。</p>
-<p>Milvusでは、アナライザはコレクション作成時に<code translate="no">VARCHAR</code> フィールドをコレクションスキーマに追加する際に設定されます。アナライザによって生成されたトークンは、キーワードマッチングのためのインデックスを構築するために使用したり、全文検索のためにスパース埋め込みに変換したりすることができます。詳細については、<a href="/docs/ja/keyword-match.md">キーワード・マッチ</a>または<a href="/docs/ja/full-text-search.md">全文検索を</a>参照してください。</p>
+<p>Milvusでは、アナライザはコレクション作成時に<code translate="no">VARCHAR</code> フィールドをコレクションスキーマに追加する際に設定されます。アナライザによって生成されたトークンは、テキストマッチングのためのインデックスを構築するために使用したり、全文検索のためにスパース埋め込みに変換したりすることができます。詳細については、<a href="/docs/ja/keyword-match.md">テキスト・マッチ</a>または<a href="/docs/ja/full-text-search.md">全文検索を</a>参照してください。</p>
 <div class="alert note">
-<p>アナライザの使用は、パフォーマンスに影響を与える場合があります。</p>
+<p>アナライザーの使用はパフォーマンスに影響する場合があります。</p>
 <ul>
 <li><p><strong>全文検索：</strong>全文検索：全文検索の場合、DataNodeと<strong>QueryNode</strong>チャネルはトークン化の完了を待つ必要があるため、データの消費が遅くなります。その結果、新しく取り込まれたデータが検索に利用できるようになるまでに時間がかかる。</p></li>
-<li><p><strong>キーワードマッチ：</strong>キーワードマッチの場合、インデックスを構築する前にトークン化が完了する必要があるため、インデックス作成も遅くなります。</p></li>
+<li><p><strong>テキストマッチ：</strong>テキスト照合の場合、インデックスを構築する前にトークン化を完了する必要があるため、インデックス作成も遅くなります。</p></li>
 </ul>
 </div>
 <h2 id="Anatomy-of-an-analyzer​" class="common-anchor-header">アナライザーの構造<button data-href="#Anatomy-of-an-analyzer​" class="anchor-icon" translate="no">
@@ -67,14 +67,14 @@ summary: >-
       </svg>
     </button></h2><p>Milvusでは、様々なテキスト処理のニーズに対応するため、2種類のアナライザを提供しています。</p>
 <ul>
-<li><p><strong>内蔵アナライザ</strong>：ビルトイン アナライザ: 最小限のセットアップで一般的なテキスト処理タスクをカバーする、定義済みのコンフィギュレーションです。複雑な設定が不要なため、汎用的な検索に最適です。</p></li>
+<li><p><strong>内蔵アナライザ</strong>：ビルトイン アナライザ: 最小限のセットアップで一般的なテキスト処理タスクに対応する定義済みの設定です。複雑な設定が不要なため、汎用的な検索に最適です。</p></li>
 <li><p><strong>カスタムアナライザー</strong>：より高度な要件に対応するカスタム・アナライザでは、トークナイザとゼロ個以上のフィルタの両方を指定することで、独自の設定を定義できます。このレベルのカスタマイズは、テキスト処理を正確に制御する必要がある特殊なユースケースで特に役立ちます。</p></li>
 </ul>
 <div class="alert note">
 <p>コレクション作成時にアナライザ設定を省略した場合、Milvusはデフォルトですべてのテキスト処理に<code translate="no">standard</code> アナライザを使用します。詳細については、「<a href="/docs/ja/standard-analyzer.md">標準</a>」を参照してください。</p>
 </div>
 <h3 id="Built-in-analyzer​" class="common-anchor-header">内蔵アナライザ</h3><p>Milvusのビルトインアナライザは、特定のトークナイザやフィルタがあらかじめ設定されており、これらのコンポーネントを自分で定義することなく、すぐに使用することができます。各ビルトインアナライザは、予め設定されたトークナイザーとフィルタを含むテンプレートとして機能し、カスタマイズのためのオプションパラメータが用意されています。</p>
-<p>たとえば、<code translate="no">standard</code> 組み込み解析器を使用するには、<code translate="no">standard</code> という名前を<code translate="no">type</code> と指定し、オプションで<code translate="no">stop_words</code> など、この解析器タイプに固有の追加設定を含めるだけです。</p>
+<p>たとえば、<code translate="no">standard</code> 組み込み解析器を使用するには、<code translate="no">standard</code> という名前を<code translate="no">type</code> として指定し、オプションで<code translate="no">stop_words</code> など、この解析器タイプに固有の追加設定を含めるだけです。</p>
 <pre><code translate="no" class="language-python">analyzer_params = {​
     <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;standard&quot;</span>, <span class="hljs-comment"># Uses the standard built-in analyzer​</span>
     <span class="hljs-string">&quot;stop_words&quot;</span>: [<span class="hljs-string">&quot;a&quot;</span>, <span class="hljs-string">&quot;an&quot;</span>, <span class="hljs-string">&quot;for&quot;</span>] <span class="hljs-comment"># Defines a list of common words (stop words) to exclude from tokenization​</span>
@@ -101,7 +101,7 @@ summary: >-
 <li><p><code translate="no">chinese</code>:中国語のテキスト処理に特化し、中国語の言語構造に適応したトークン化を含む。</p></li>
 </ul>
 <h3 id="Custom-analyzer​" class="common-anchor-header">カスタムアナライザー</h3><p>より高度なテキスト処理のために、Milvusのカスタムアナライザーでは、<strong>トークナイザーと</strong>フィルターの両方を指定することで、独自のテキスト処理パイプラインを構築することができます。この設定は、精密な制御が必要な特殊なユースケースに最適です。</p>
-<h4 id="Tokenizer​" class="common-anchor-header">トークナイザー</h4><p><strong>トークナイザーは</strong>カスタムアナライザーに<strong>必須の</strong>コンポーネントで、入力テキストを個別の単位（<strong>トークン</strong>）に分解することでアナライザーパイプラインを開始します。トークン化は、トークナイザーのタイプに応じて、空白や句読点による分割など、特定のルールに従います。この処理により、各単語や語句をより正確かつ独立して処理できるようになります。</p>
+<h4 id="Tokenizer​" class="common-anchor-header">トークナイザー</h4><p><strong>トークナイザーは</strong>カスタムアナライザーに<strong>必須の</strong>コンポーネントで、入力テキストを個別の単位（<strong>トークン</strong>）に分解することでアナライザーパイプラインを開始します。トークン化は、トークナイザーのタイプに応じて、空白や句読点による分割など、特定のルールに従います。この処理により、各単語や語句をより正確かつ独立に扱うことができます。</p>
 <p>たとえば、トークナイザーはテキスト<code translate="no">&quot;Vector Database Built for Scale&quot;</code> を個別のトークンに変換します。</p>
 <pre><code translate="no" class="language-Plain Text">[<span class="hljs-string">&quot;Vector&quot;</span>, <span class="hljs-string">&quot;Database&quot;</span>, <span class="hljs-string">&quot;Built&quot;</span>, <span class="hljs-string">&quot;for&quot;</span>, <span class="hljs-string">&quot;Scale&quot;</span>]​
 <button class="copy-code-btn"></button></code></pre>

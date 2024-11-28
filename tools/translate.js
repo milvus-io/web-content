@@ -23,7 +23,7 @@ import {
 import { remarkToHtml } from "./remark.js";
 
 const MOCK_TRANSLATE = false;
-const VERSIONS = ["v2.5.x"];
+const VERSIONS = ["v2.5.x", "v2.4.x"];
 const sourceFilePath = "site/en";
 const sourceLang = "en";
 const targetLangs = ["zh", "ja", "ko", "fr", "de", "it", "pt", "es"];

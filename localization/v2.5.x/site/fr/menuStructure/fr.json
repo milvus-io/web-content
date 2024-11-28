@@ -287,6 +287,18 @@
         "children": []
       },
       {
+        "label": "Types métriques",
+        "id": "metric.md",
+        "order": 9,
+        "children": []
+      },
+      {
+        "label": "Niveau de cohérence",
+        "id": "consistency.md",
+        "order": 10,
+        "children": []
+      },
+      {
         "label": "Réplique en mémoire",
         "id": "replica.md",
         "order": 11,
@@ -602,31 +614,39 @@
         ]
       },
       {
-        "label": "Gérer les index",
+        "label": "Index",
         "id": "manage_indexes",
         "order": 4,
         "isMenu": true,
         "children": [
           {
-            "label": "Champs vectoriels d'index",
+            "label": "Indices vectoriels",
             "id": "index-vector-fields.md",
             "order": 0,
             "children": []
           },
           {
-            "label": "Champs scalaires indexés",
-            "id": "index-scalar-fields.md",
+            "label": "Index scalaires",
+            "id": "scalar-index",
             "order": 1,
-            "children": []
+            "isMenu": true,
+            "children": [
+              {
+                "label": "Champs scalaires indexés",
+                "id": "index-scalar-fields.md",
+                "order": 1,
+                "children": []
+              },
+              {
+                "label": "Index Bitmap",
+                "id": "bitmap.md",
+                "order": 2,
+                "children": []
+              }
+            ]
           },
           {
-            "label": "Index BITMAP",
-            "id": "bitmap.md",
-            "order": 2,
-            "children": []
-          },
-          {
-            "label": "Index avec GPU",
+            "label": "Index compatibles avec le GPU",
             "id": "index-with-gpu.md",
             "order": 3,
             "children": []
@@ -682,7 +702,7 @@
             "children": []
           },
           {
-            "label": "Correspondance des mots-clés",
+            "label": "Correspondance des textes",
             "id": "keyword-match.md",
             "order": 7,
             "children": []
@@ -700,30 +720,6 @@
             "children": []
           },
           {
-            "label": "Utiliser mmap",
-            "id": "mmap.md",
-            "order": 10,
-            "children": []
-          },
-          {
-            "label": "Regroupement Compaction",
-            "id": "clustering-compaction.md",
-            "order": 11,
-            "children": []
-          },
-          {
-            "label": "Niveau de cohérence",
-            "id": "consistency.md",
-            "order": 12,
-            "children": []
-          },
-          {
-            "label": "Types métriques",
-            "id": "metric.md",
-            "order": 13,
-            "children": []
-          },
-          {
             "label": "Filtrage des métadonnées",
             "id": "boolean.md",
             "order": 14,
@@ -733,26 +729,6 @@
             "label": "Reranking",
             "id": "reranking.md",
             "order": 15,
-            "children": []
-          }
-        ]
-      },
-      {
-        "label": "Importation de données",
-        "id": "data_import",
-        "order": 6,
-        "isMenu": true,
-        "children": [
-          {
-            "label": "Préparer les données sources",
-            "id": "prepare-source-data.md",
-            "order": 0,
-            "children": []
-          },
-          {
-            "label": "Importer des données",
-            "id": "import-data.md",
-            "order": 1,
             "children": []
           }
         ]
@@ -898,10 +874,30 @@
     ]
   },
   {
+    "label": "Importation de données",
+    "id": "data_import",
+    "order": 5,
+    "isMenu": true,
+    "children": [
+      {
+        "label": "Préparer les données sources",
+        "id": "prepare-source-data.md",
+        "order": 0,
+        "children": []
+      },
+      {
+        "label": "Importer des données",
+        "id": "import-data.md",
+        "order": 1,
+        "children": []
+      }
+    ]
+  },
+  {
     "label": "Milvus Migration",
     "id": "milvus_migration",
     "isMenu": true,
-    "order": 5,
+    "order": 6,
     "children": [
       {
         "label": "Vue d'ensemble",
@@ -1322,9 +1318,29 @@
         ]
       },
       {
+        "label": "Optimisation du stockage",
+        "id": "storage_optimization",
+        "order": 10,
+        "isMenu": true,
+        "children": [
+          {
+            "label": "Utiliser mmap",
+            "id": "mmap.md",
+            "order": 0,
+            "children": []
+          },
+          {
+            "label": "Regroupement Compaction",
+            "id": "clustering-compaction.md",
+            "order": 1,
+            "children": []
+          }
+        ]
+      },
+      {
         "label": "Sécurité",
         "id": "security",
-        "order": 10,
+        "order": 11,
         "isMenu": true,
         "children": [
           {
@@ -1715,7 +1731,7 @@
             "children": []
           },
           {
-            "label": "PrivéGPT",
+            "label": "PrivateGPT",
             "id": "use_milvus_in_private_gpt.md",
             "order": 8,
             "children": []
