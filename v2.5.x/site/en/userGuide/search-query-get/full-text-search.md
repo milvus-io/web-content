@@ -55,6 +55,13 @@ To enable full text search, create a collection with a specific schema. This sch
 
 First, create the schema and add the necessary fields:​
 
+<div class="multipleCode">
+    <a href="#python">Python </a>
+    <a href="#java">Java</a>
+    <a href="#javascript">Node.js</a>
+    <a href="#curl">cURL</a>
+</div>
+
 ```python
 from pymilvus import MilvusClient, DataType, Function, FunctionType​
 ​
@@ -64,6 +71,86 @@ schema.add_field(field_name="id", datatype=DataType.INT64, is_primary=True, auto
 schema.add_field(field_name="text", datatype=DataType.VARCHAR, max_length=1000, enable_analyzer=True)​
 schema.add_field(field_name="sparse", datatype=DataType.SPARSE_FLOAT_VECTOR)​
 
+```
+
+```java
+import io.milvus.v2.common.DataType;
+import io.milvus.v2.service.collection.request.AddFieldReq;
+import io.milvus.v2.service.collection.request.CreateCollectionReq;
+
+CreateCollectionReq.CollectionSchema schema = CreateCollectionReq.CollectionSchema.builder()
+        .build();
+schema.addField(AddFieldReq.builder()
+        .fieldName("id")
+        .dataType(DataType.Int64)
+        .isPrimaryKey(true)
+        .autoID(true)
+        .build());
+schema.addField(AddFieldReq.builder()
+        .fieldName("text")
+        .dataType(DataType.VarChar)
+        .maxLength(1000)
+        .enableAnalyzer(true)
+        .build());
+schema.addField(AddFieldReq.builder()
+        .fieldName("sparse")
+        .dataType(DataType.SparseFloatVector)
+        .build());
+```
+
+```javascript
+import { MilvusClient, DataType } from "@zilliz/milvus2-sdk-node";
+
+const address = "http://localhost:19530";
+const token = "root:Milvus";
+const client = new MilvusClient({address, token});
+const schema = [
+  {
+    name: "id",
+    data_type: DataType.Int64,
+    is_primary_key: true,
+  },
+  {
+    name: "text",
+    data_type: "VarChar",
+    enable_analyzer: true,
+    enable_match: true,
+    max_length: 1000,
+  },
+  {
+    name: "sparse",
+    data_type: DataType.SparseFloatVector,
+  },
+];
+
+
+console.log(res.results)
+```
+
+```curl
+export schema='{
+        "autoId": true,
+        "enabledDynamicField": false,
+        "fields": [
+            {
+                "fieldName": "id",
+                "dataType": "Int64",
+                "isPrimary": true
+            },
+            {
+                "fieldName": "text",
+                "dataType": "VarChar",
+                "elementTypeParams": {
+                    "max_length": 1000,
+                    "enable_analyzer": true
+                }
+            },
+            {
+                "fieldName": "sparse",
+                "dataType": "SparseFloatVector"
+            }
+        ]
+    }'
 ```
 
 In this configuration,​
@@ -76,6 +163,13 @@ In this configuration,​
 
 Now, define a function that will convert your text into sparse vector representations and then add it to the schema:​
 
+<div class="multipleCode">
+    <a href="#python">Python </a>
+    <a href="#java">Java</a>
+    <a href="#javascript">Node.js</a>
+    <a href="#curl">cURL</a>
+</div>
+
 ```python
 bm25_function = Function(​
     name="text_bm25_emb", # Function name​
@@ -86,6 +180,68 @@ bm25_function = Function(​
 ​
 schema.add_function(bm25_function)​
 
+```
+
+```java
+import io.milvus.common.clientenum.FunctionType;
+import io.milvus.v2.service.collection.request.CreateCollectionReq.Function;
+
+import java.util.*;
+
+schema.addFunction(Function.builder()
+        .functionType(FunctionType.BM25)
+        .name("text_bm25_emb")
+        .inputFieldNames(Collections.singletonList("text"))
+        .outputFieldNames(Collections.singletonList("vector"))
+        .build());
+```
+
+```javascript
+const functions = [
+    {
+      name: 'text_bm25_emb',
+      description: 'bm25 function',
+      type: FunctionType.BM25,
+      input_field_names: ['text'],
+      output_field_names: ['vector'],
+      params: {},
+    },
+]；
+```
+
+```curl
+export schema='{
+        "autoId": true,
+        "enabledDynamicField": false,
+        "fields": [
+            {
+                "fieldName": "id",
+                "dataType": "Int64",
+                "isPrimary": true
+            },
+            {
+                "fieldName": "text",
+                "dataType": "VarChar",
+                "elementTypeParams": {
+                    "max_length": 1000,
+                    "enable_analyzer": true
+                }
+            },
+            {
+                "fieldName": "sparse",
+                "dataType": "SparseFloatVector"
+            }
+        ],
+        "functions": [
+            {
+                "name": "text_bm25_emb",
+                "type": "BM25",
+                "inputFieldNames": ["text"],
+                "outputFieldNames": ["sparse"],
+                "params": {}
+            }
+        ]
+    }'
 ```
 
 <table data-block-token="EfAfdS3iXoAULPxQ3mwckzTrnUb"><thead><tr><th data-block-token="O3sLd5KNXou4Egxq6XVcoNiJnMW" colspan="1" rowspan="1"><p data-block-token="QRttdgJBpo2hEuxb438c7eOgn2f">Parameter​</p>
@@ -122,6 +278,13 @@ For collections with multiple `VARCHAR` fields requiring text-to-sparse-vector c
 
 After defining the schema with necessary fields and the built-in function, set up the index for your collection. To simplify this process, use `AUTOINDEX` as the `index_type`, an option that allows Milvus to choose and configure the most suitable index type based on the structure of your data.​
 
+<div class="multipleCode">
+    <a href="#python">Python </a>
+    <a href="#java">Java</a>
+    <a href="#javascript">Node.js</a>
+    <a href="#curl">cURL</a>
+</div>
+
 ```python
 index_params = MilvusClient.prepare_index_params()​
 ​
@@ -131,6 +294,37 @@ index_params.add_index(​
     metric_type="BM25"​
 )​
 
+```
+
+```java
+import io.milvus.v2.common.IndexParam;
+
+List<IndexParam> indexes = new ArrayList<>();
+indexes.add(IndexParam.builder()
+        .fieldName("sparse")
+        .indexType(IndexParam.IndexType.SPARSE_INVERTED_INDEX)
+        .metricType(IndexParam.MetricType.BM25)
+        .build());
+```
+
+```javascript
+const index_params = [
+  {
+    fieldName: "sparse",
+    metricType: "BM25",
+    indexType: "AUTOINDEX",
+  },
+];
+```
+
+```curl
+export indexParams='[
+        {
+            "fieldName": "sparse",
+            "metricType": "BM25",
+            "indexType": "AUTOINDEX"
+        }
+    ]'
 ```
 
 <table data-block-token="XEoodLxOFoukWJx9aLXcH46snXc"><thead><tr><th data-block-token="PfGNdbuq9o9PEWxzAWecWWoInUf" colspan="1" rowspan="1"><p data-block-token="KX1VdsOJCoO0Exxhg8acsduwncd">Parameter​</p>
@@ -155,6 +349,13 @@ index_params.add_index(​
 
 Now create the collection using the schema and index parameters defined.​
 
+<div class="multipleCode">
+    <a href="#python">Python </a>
+    <a href="#java">Java</a>
+    <a href="#javascript">Node.js</a>
+    <a href="#curl">cURL</a>
+</div>
+
 ```python
 MilvusClient.create_collection(​
     collection_name='demo', ​
@@ -164,22 +365,114 @@ MilvusClient.create_collection(​
 
 ```
 
+```java
+import io.milvus.v2.service.collection.request.CreateCollectionReq;
+
+CreateCollectionReq requestCreate = CreateCollectionReq.builder()
+        .collectionName("demo")
+        .collectionSchema(schema)
+        .indexParams(indexes)
+        .build();
+client.createCollection(requestCreate);
+```
+
+```javascript
+await client.create_collection(
+    collection_name: 'demo', 
+    schema: schema, 
+    index_params: index_params
+);
+```
+
+```curl
+export CLUSTER_ENDPOINT="http://localhost:19530"
+export TOKEN="root:Milvus"
+
+curl --request POST \
+--url "${CLUSTER_ENDPOINT}/v2/vectordb/collections/create" \
+--header "Authorization: Bearer ${TOKEN}" \
+--header "Content-Type: application/json" \
+-d "{
+    \"collectionName\": \"demo\",
+    \"schema\": $schema,
+    \"indexParams\": $indexParams
+}"
+```
+
 ## Insert text data
 
 After setting up your collection and index, you're ready to insert text data. In this process, you need only to provide the raw text. The built-in function we defined earlier automatically generates the corresponding sparse vector for each text entry.​
 
-```python
-MilvusClient.insert('demo', [​
-    {'text': 'Artificial intelligence was founded as an academic discipline in 1956.'},​
-    {'text': 'Alan Turing was the first person to conduct substantial research in AI.'},​
-    {'text': 'Born in Maida Vale, London, Turing was raised in southern England.'},​
-])​
+<div class="multipleCode">
+    <a href="#python">Python </a>
+    <a href="#java">Java</a>
+    <a href="#javascript">Node.js</a>
+    <a href="#curl">cURL</a>
+</div>
 
+```python
+client.insert('demo', [
+    {'text': 'information retrieval is a field of study.'},
+    {'text': 'information retrieval focuses on finding relevant information in large datasets.'},
+    {'text': 'data mining and information retrieval overlap in research.'},
+])
+
+```
+
+```java
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+
+import io.milvus.v2.service.vector.request.InsertReq;
+
+Gson gson = new Gson();
+List<JsonObject> rows = Arrays.asList(
+        gson.fromJson("{\"text\": \"information retrieval is a field of study.\"}", JsonObject.class),
+        gson.fromJson("{\"text\": \"information retrieval focuses on finding relevant information in large datasets.\"}", JsonObject.class),
+        gson.fromJson("{\"text\": \"data mining and information retrieval overlap in research.\"}", JsonObject.class)
+);
+
+client.insert(InsertReq.builder()
+        .collectionName("demo")
+        .data(rows)
+        .build());
+```
+
+```javascript
+await client.insert({
+collection_name: 'demo', 
+data: [
+    {'text': 'information retrieval is a field of study.'},
+    {'text': 'information retrieval focuses on finding relevant information in large datasets.'},
+    {'text': 'data mining and information retrieval overlap in research.'},
+]);
+```
+
+```curl
+curl --request POST \
+--url "${CLUSTER_ENDPOINT}/v2/vectordb/entities/insert" \
+--header "Authorization: Bearer ${TOKEN}" \
+--header "Content-Type: application/json" \
+-d '{
+    "data": [
+        {"text": "information retrieval is a field of study."},
+        {"text": "information retrieval focuses on finding relevant information in large datasets."},
+        {"text": "data mining and information retrieval overlap in research."}       
+    ],
+    "collectionName": "demo"
+}'
 ```
 
 ## Perform full text search
 
 Once you've inserted data into your collection, you can perform full text searches using raw text queries. Milvus automatically converts your query into a sparse vector and ranks the matched search results using the BM25 algorithm, and then returns the topK (`limit`) results.​
+
+<div class="multipleCode">
+    <a href="#python">Python </a>
+    <a href="#java">Java</a>
+    <a href="#javascript">Node.js</a>
+    <a href="#curl">cURL</a>
+</div>
 
 ```python
 search_params = {​
@@ -188,12 +481,62 @@ search_params = {​
 ​
 MilvusClient.search(​
     collection_name='demo', ​
-    data=['Who started AI research?'],​
+    data=['whats the focus of information retrieval?'],​
     anns_field='sparse',​
     limit=3,​
     search_params=search_params​
 )​
 
+```
+
+```java
+import io.milvus.v2.service.vector.request.SearchReq;
+import io.milvus.v2.service.vector.request.data.EmbeddedText;
+import io.milvus.v2.service.vector.response.SearchResp;
+
+Map<String,Object> searchParams = new HashMap<>();
+searchParams.put("drop_ratio_search", 0.6);
+SearchResp searchResp = client.search(SearchReq.builder()
+        .collectionName("demo")
+        .data(Collections.singletonList(new EmbeddedText("whats the focus of information retrieval?")))
+        .annsField("sparse")
+        .topK(3)
+        .searchParams(searchParams)
+        .outputFields(Collections.singletonList("text"))
+        .build());
+```
+
+```javascript
+await client.search(
+    collection_name: 'demo', 
+    data: ['whats the focus of information retrieval?'],
+    anns_field: 'sparse',
+    limit: 3,
+    params: {'drop_ratio_search': 0.6},
+)
+```
+
+```curl
+curl --request POST \
+--url "${CLUSTER_ENDPOINT}/v2/vectordb/entities/search" \
+--header "Authorization: Bearer ${TOKEN}" \
+--header "Content-Type: application/json" \
+--data-raw '{
+    "collectionName": "demo",
+    "data": [
+        "whats the focus of information retrieval?"
+    ],
+    "annsField": "sparse",
+    "limit": 3,
+    "outputFields": [
+        "text"
+    ],
+    "searchParams":{
+        "params":{
+            "drop_ratio_search":0.6
+        }
+    }
+}'
 ```
 
 <table data-block-token="M37Zdx7XdoYN41xdKtfcHcJpnqh"><thead><tr><th data-block-token="UhTwdxk3Mo5eLjxff0PcL1CHn8b" colspan="1" rowspan="1"><p data-block-token="OwUXdMhOgoRxjzx5t9ecKR9Zn6J">Parameter​</p>
