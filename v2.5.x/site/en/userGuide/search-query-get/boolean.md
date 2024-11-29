@@ -192,9 +192,9 @@ The following types of operators can be used in filters with single condition:�
 
 - [Arithmetic operators](#Arithmetic-operators)​
 
-- [Advanced JSON operators](#Advanced-json-operators)​
+- [Advanced JSON operators](#Advanced-JSON-operators)​
 
-- [Advanced Array operators](#Advanced-array-operators)​
+- [Advanced Array operators](#Advanced-Array-operators)​
 
 ### Comparison operators
 
