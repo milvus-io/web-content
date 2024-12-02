@@ -310,9 +310,9 @@ indexes.add(IndexParam.builder()
 ```javascript
 const index_params = [
   {
-    fieldName: "sparse",
-    metricType: "BM25",
-    indexType: "AUTOINDEX",
+    field_name: "sparse",
+    metric_type: "BM25",
+    index_type: "AUTOINDEX",
   },
 ];
 ```
