@@ -294,9 +294,9 @@ indexes.<span class="hljs-title function_">add</span>(<span class="hljs-title cl
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> index_params = [
   {
-    <span class="hljs-attr">fieldName</span>: <span class="hljs-string">&quot;sparse&quot;</span>,
-    <span class="hljs-attr">metricType</span>: <span class="hljs-string">&quot;BM25&quot;</span>,
-    <span class="hljs-attr">indexType</span>: <span class="hljs-string">&quot;AUTOINDEX&quot;</span>,
+    <span class="hljs-attr">field_name</span>: <span class="hljs-string">&quot;sparse&quot;</span>,
+    <span class="hljs-attr">metric_type</span>: <span class="hljs-string">&quot;BM25&quot;</span>,
+    <span class="hljs-attr">index_type</span>: <span class="hljs-string">&quot;AUTOINDEX&quot;</span>,
   },
 ];
 <button class="copy-code-btn"></button></code></pre>
