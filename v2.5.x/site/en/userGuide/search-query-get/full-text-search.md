@@ -380,7 +380,8 @@ client.createCollection(requestCreate);
 await client.create_collection(
     collection_name: 'demo', 
     schema: schema, 
-    index_params: index_params
+    index_params: index_params,
+    functions: functions
 );
 ```
 
