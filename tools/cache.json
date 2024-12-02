@@ -212,7 +212,7 @@
     "v2.4.x/site/en/reference/array_data_type.md": "2024-09-04T05:52:37.189Z",
     "v2.4.x/site/en/userGuide/search-query-get/single-vector-search.md": "2024-11-18T03:35:05.168Z",
     "v2.4.x/site/en/userGuide/use-json-fields.md": "2024-09-04T05:53:07.135Z",
-    "v2.4.x/site/en/menuStructure/en.json": "2024-11-27T05:21:24.654Z",
+    "v2.4.x/site/en/menuStructure/en.json": "2024-12-02T08:47:15.415Z",
     "v2.4.x/site/en/userGuide/manage-collections.md": "2024-11-18T03:34:16.027Z",
     "v2.4.x/site/en/getstarted/milvus_lite.md": "2024-09-06T02:54:42.351Z",
     "v2.4.x/site/en/release_notes.md": "2024-11-25T08:33:06.376Z",
@@ -1204,11 +1204,11 @@
     "v2.5.x/site/en/userGuide/schema/sparse_vector.md": "2024-11-28T09:47:52.969Z",
     "v2.5.x/site/en/userGuide/schema/string.md": "2024-11-27T07:25:06.902Z",
     "v2.5.x/site/en/userGuide/schema/use-json-fields.md": "2024-11-27T07:25:08.435Z",
-    "v2.5.x/site/en/userGuide/search-query-get/boolean.md": "2024-11-28T09:48:02.808Z",
+    "v2.5.x/site/en/userGuide/search-query-get/boolean.md": "2024-12-02T08:32:24.348Z",
     "v2.5.x/site/en/userGuide/search-query-get/clustering-compaction.md": "2024-11-27T07:25:11.309Z",
     "v2.5.x/site/en/userGuide/search-query-get/consistency.md": "2024-11-27T07:25:12.617Z",
     "v2.5.x/site/en/userGuide/search-query-get/filtered-search.md": "2024-11-27T07:25:13.813Z",
-    "v2.5.x/site/en/userGuide/search-query-get/full-text-search.md": "2024-11-28T09:48:15.179Z",
+    "v2.5.x/site/en/userGuide/search-query-get/full-text-search.md": "2024-12-02T08:32:32.235Z",
     "v2.5.x/site/en/userGuide/search-query-get/get-and-scalar-query.md": "2024-11-27T07:25:16.835Z",
     "v2.5.x/site/en/userGuide/search-query-get/grouping-search.md": "2024-11-27T07:25:18.446Z",
     "v2.5.x/site/en/userGuide/search-query-get/keyword-match.md": "2024-11-28T09:48:27.368Z",
@@ -1217,7 +1217,7 @@
     "v2.5.x/site/en/userGuide/search-query-get/multi-vector-search.md": "2024-11-28T09:48:45.103Z",
     "v2.5.x/site/en/userGuide/search-query-get/range-search.md": "2024-11-27T07:25:25.809Z",
     "v2.5.x/site/en/userGuide/search-query-get/reranking.md": "2024-11-27T07:25:27.331Z",
-    "v2.5.x/site/en/userGuide/search-query-get/single-vector-search.md": "2024-11-28T09:48:59.636Z",
+    "v2.5.x/site/en/userGuide/search-query-get/single-vector-search.md": "2024-12-02T08:32:43.156Z",
     "v2.5.x/site/en/userGuide/search-query-get/use-partition-key.md": "2024-11-27T07:25:30.235Z",
     "v2.5.x/site/en/userGuide/search-query-get/with-iterators.md": "2024-11-27T07:25:31.386Z",
     "v2.5.x/site/en/userGuide/tools/birdwatcher_install_guides.md": "2024-11-27T07:25:32.349Z",
@@ -1233,6 +1233,6 @@
     "v2.5.x/site/en/userGuide/tools/milvus_backup_api.md": "2024-11-27T07:25:46.624Z",
     "v2.5.x/site/en/userGuide/tools/milvus_backup_cli.md": "2024-11-27T07:25:47.846Z",
     "v2.5.x/site/en/userGuide/tools/milvus_backup_overview.md": "2024-11-27T07:25:49.181Z",
-    "v2.5.x/site/en/menuStructure/en.json": "2024-11-28T10:08:24.394Z"
+    "v2.5.x/site/en/menuStructure/en.json": "2024-12-02T08:40:55.783Z"
   }
 }

@@ -12,7 +12,7 @@
         "children": []
       },
       {
-        "label": "Milvus Adoptantes",
+        "label": "Adoptantes de Milvus",
         "id": "milvus_adopters.md",
         "order": 1,
         "children": []
@@ -994,7 +994,7 @@
                 "children": []
               },
               {
-                "label": "Implantación en GCP",
+                "label": "Despliegue en GCP",
                 "id": "gcp.md",
                 "order": 2,
                 "children": []
@@ -1295,7 +1295,7 @@
             "isMenu": true,
             "children": [
               {
-                "label": "Seguimiento de Jaeger",
+                "label": "Rastreo de Jaeger",
                 "id": "config_jaeger_tracing.md",
                 "order": 0,
                 "children": []
@@ -1849,7 +1849,7 @@
             "children": []
           },
           {
-            "label": "Sin estructurar",
+            "label": "No estructurado",
             "id": "rag_with_milvus_and_unstructured.md",
             "order": 3,
             "children": []

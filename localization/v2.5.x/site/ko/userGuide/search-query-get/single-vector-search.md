@@ -38,7 +38,7 @@ title: 기본 ANN 검색
     </button></h2><p>ANN과 kNN(k-Nearest Neighbors) 검색은 벡터 유사도 검색의 일반적인 방법입니다. kNN 검색에서는 벡터 공간의 모든 벡터를 검색 요청에 포함된 쿼리 벡터와 비교하여 가장 유사한 벡터를 찾아내야 하므로 시간과 리소스가 많이 소요됩니다.</p>
 <p>kNN 검색과 달리 ANN 검색 알고리즘은 벡터 임베딩의 정렬된 순서를 기록하는 <strong>인덱스</strong> 파일을 요청합니다. 검색 요청이 들어오면 인덱스 파일을 참조로 사용해 쿼리 벡터와 가장 유사한 벡터 임베딩이 포함된 하위 그룹을 빠르게 찾을 수 있습니다. 그런 다음 지정된 <strong>메트릭 유형을</strong> 사용하여 쿼리 벡터와 하위 그룹의 벡터 간의 유사성을 측정하고, 쿼리 벡터와의 유사성을 기준으로 그룹 구성원을 정렬하고, <strong>상위 K</strong> 개의 그룹 구성원을 파악할 수 있습니다.</p>
 <p>ANN 검색은 미리 구축된 인덱스에 따라 달라지며, 검색 처리량, 메모리 사용량 및 검색 정확도는 선택한 인덱스 유형에 따라 달라질 수 있습니다. 검색 성능과 정확성 간의 균형을 맞춰야 합니다. </p>
-<p>학습 곡선을 줄이기 위해 Milvus는 <strong>AUTOINDEX를</strong> 제공합니다. <strong>자동 인덱</strong>스는 인덱스를 구축하는 동안 컬렉션 내의 데이터 분포를 분석하고 분석 결과에 따라 가장 최적화된 인덱스 매개변수를 설정하여 검색 성능과 정확성 간의 균형을 맞출 수 있습니다. </p>
+<p>학습 곡선을 줄이기 위해 Milvus는 <strong>AUTOINDEX를</strong> 제공합니다. <strong>자동 인덱</strong>스는 인덱스를 구축하는 동안 컬렉션 내의 데이터 분포를 분석하고 분석 결과에 따라 가장 최적화된 인덱스 파라미터를 설정하여 검색 성능과 정확성 간의 균형을 맞출 수 있습니다. </p>
 <p>자동 인덱스 및 적용 가능한 메트릭 유형에 대한 자세한 내용은 <a href="https://milvus.io/docs/glossary.md#Auto-Index">자동 인덱스</a> 및 <a href="/docs/ko/metric.md">메트릭 유형을</a> 참조하세요. 이 섹션에서는 다음 주제에 대한 자세한 정보를 확인할 수 있습니다.</p>
 <ul>
 <li><p><a href="#Single-Vector-Search">단일 벡터 검색</a></p></li>
@@ -777,16 +777,16 @@ curl --request POST \​
 <table data-block-token="WHdZdkFtYol0QWxfjYzcMsyrnHd"><thead><tr><th data-block-token="YRpAdF69noO2EwxQJKkcRoB4nGp" colspan="1" rowspan="1"><p data-block-token="EhjLdXqY7op6anxCtOtc8KeKnkh">쿼리</p>
 </th><th data-block-token="D6tSdFQQAouKA3xol6RcGFUCn4c" colspan="1" rowspan="1"><p data-block-token="KjGadCmVxoLmmIxjI3McBr18nFg">쿼리당 반환할 엔티티 수</p>
 </th><th data-block-token="IDzvd2OCho3Qp0xMwXWcMZLlnWg" colspan="1" rowspan="1"><p data-block-token="RP69d4efqoAHXkxkY8OcBwPXn9e">이미 반환된 총 엔티티 수</p>
-</th></tr></thead><tbody><tr><td data-block-token="QkqCdnVafo68dGxGRmicOHEQnxe" colspan="1" rowspan="1"><p data-block-token="QyEBdwnZiolkYZxWLYPc59j6nL0"><strong>첫 번째**</strong> 쿼리</p>
+</th></tr></thead><tbody><tr><td data-block-token="QkqCdnVafo68dGxGRmicOHEQnxe" colspan="1" rowspan="1"><p data-block-token="QyEBdwnZiolkYZxWLYPc59j6nL0"><strong>첫 번째</strong> 쿼리</p>
 </td><td data-block-token="E4vsdiNZQowy6rxIy0ecRQC4nEc" colspan="1" rowspan="1"><p data-block-token="QYfudUm7uokKlIxw2n9cxKGKnyg">100</p>
 </td><td data-block-token="KpaFdQx6qow5zcxElk4clK8dnEp" colspan="1" rowspan="1"><p data-block-token="ZwAAd3eu8oYltYxeyCzcvmkLnbh">0</p>
-</td></tr><tr><td data-block-token="D8teddAAZoM2duxDniIc2njyn6C" colspan="1" rowspan="1"><p data-block-token="CdySdMxJ2oZ0uSxNddQcByijnhb"><strong>두 번째**</strong> 쿼리</p>
+</td></tr><tr><td data-block-token="D8teddAAZoM2duxDniIc2njyn6C" colspan="1" rowspan="1"><p data-block-token="CdySdMxJ2oZ0uSxNddQcByijnhb"><strong>두 번째</strong> 쿼리</p>
 </td><td data-block-token="EhRzdF75hoPXIsxmi4Iczj87nIc" colspan="1" rowspan="1"><p data-block-token="VAPzdkDTHogP5axuOI8c101tnAh">100</p>
 </td><td data-block-token="WZQ1dHMMPooABtxi0OfcEOC7nQe" colspan="1" rowspan="1"><p data-block-token="LQ59denn6obaw0xiNGec9uVEn7f">100</p>
-</td></tr><tr><td data-block-token="LqQcdHDM5ozahHxEiKzcOtrxn2g" colspan="1" rowspan="1"><p data-block-token="KfKjdUdK3oAt7Fx2w7icUIapnbd"><strong>세 번째**</strong> 쿼리</p>
+</td></tr><tr><td data-block-token="LqQcdHDM5ozahHxEiKzcOtrxn2g" colspan="1" rowspan="1"><p data-block-token="KfKjdUdK3oAt7Fx2w7icUIapnbd"><strong>세 번째</strong> 쿼리</p>
 </td><td data-block-token="W1TfddD7poKCKzxX83wcjvoXnXb" colspan="1" rowspan="1"><p data-block-token="ELT7dJe2Ao8L6LxZODccTjAcnKb">100</p>
 </td><td data-block-token="SDYedyTVDoSt9Pxwf2xcQtrInBb" colspan="1" rowspan="1"><p data-block-token="DmAId1cA0oOaUNxg6bzc1iIEn2I">200</p>
-</td></tr><tr><td data-block-token="EV1Sddbj4og1YnxN3pVcI4PenWe" colspan="1" rowspan="1"><p data-block-token="J1zAdtY1MosjA0xrNuycUTLln7b"><strong>n번째**</strong> 쿼리</p>
+</td></tr><tr><td data-block-token="EV1Sddbj4og1YnxN3pVcI4PenWe" colspan="1" rowspan="1"><p data-block-token="J1zAdtY1MosjA0xrNuycUTLln7b"><strong>n번째</strong> 쿼리</p>
 </td><td data-block-token="M9EPdp9haoP5HqxfNvTcP9Non3e" colspan="1" rowspan="1"><p data-block-token="KNJfdZ7bFo9Jooxy2d2ckuf7n3c">100</p>
 </td><td data-block-token="NobhdOnAgo2DFixUrNTcmBOVnje" colspan="1" rowspan="1"><p data-block-token="DxU4dV3WpoqEDbxMIWYcumjenUb">100 x (n-1)</p>
 </td></tr></tbody></table>
@@ -909,7 +909,7 @@ curl --request POST \​
 <p>메타데이터 필터링에 여러 개의 스칼라 필드를 포함시키고 다소 복잡한 필터링 조건을 사용하면 검색 효율성에 영향을 미칠 수 있습니다. 스칼라 필드를 파티션 키로 설정하고 검색 요청에 파티션 키와 관련된 필터링 조건을 사용하면 지정된 파티션 키 값에 해당하는 파티션 내에서 검색 범위를 제한하는 데 도움이 될 수 있습니다. </p>
 <p>파티션 키에 대한 자세한 내용은 <a href="/docs/ko/use-partition-key.md">파티션 키 사용을</a> 참조하세요.</p></li>
 <li><p>mmap 사용</p>
-<p>Milvus에서 메모리 매핑 파일을 사용하면 파일 내용을 메모리에 직접 매핑할 수 있습니다. 이 기능은 특히 사용 가능한 메모리가 부족하지만 완전한 데이터 로딩이 불가능한 상황에서 메모리 효율성을 향상시킵니다. 이 최적화 메커니즘은 일정 한도까지 성능을 보장하면서 데이터 용량을 늘릴 수 있지만 데이터 양이 메모리를 너무 많이 초과하면 검색 및 쿼리 성능이 심각하게 저하될 수 있으므로 이 기능을 적절하게 켜거나 끄도록 선택하세요.</p>
+<p>Milvus에서 메모리 매핑 파일을 사용하면 파일 내용을 메모리에 직접 매핑할 수 있습니다. 이 기능은 특히 사용 가능한 메모리가 부족하지만 완전한 데이터 로딩이 불가능한 상황에서 메모리 효율성을 향상시킵니다. 이 최적화 메커니즘은 일정 한도까지 성능을 보장하면서 데이터 용량을 늘릴 수 있지만 데이터 양이 메모리를 너무 많이 초과하면 검색 및 쿼리 성능이 심각하게 저하될 수 있으므로 이 기능을 적절히 켜거나 끄도록 선택하세요.</p>
 <p>mmap 설정에 대한 자세한 내용은 <a href="/docs/ko/mmap.md">mmap 사용을</a> 참조하세요.</p></li>
 <li><p>클러스터링 압축</p>
 <p>클러스터링 압축은 대규모 컬렉션에서 검색 성능을 개선하고 비용을 절감하기 위해 고안된 기능입니다. 이 가이드는 클러스터링 압축을 이해하고 이 기능으로 검색 성능을 개선하는 방법을 이해하는 데 도움이 됩니다.</p>

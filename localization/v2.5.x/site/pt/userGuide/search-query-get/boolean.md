@@ -147,8 +147,8 @@ title: Filtragem de metadados
 <li><p><a href="#Term-operators">Term operators</a>​</p></li>
 <li><p><a href="#Match-operators">Match operators</a>​</p></li>
 <li><p><a href="#Arithmetic-operators">Arithmetic operators</a>​</p></li>
-<li><p><a href="#Advanced-json-operators">Advanced JSON operators</a>​</p></li>
-<li><p><a href="#Advanced-array-operators">Advanced Array operators</a>​</p></li>
+<li><p><a href="#Advanced-JSON-operators">Advanced JSON operators</a>​</p></li>
+<li><p><a href="#Advanced-Array-operators">Advanced Array operators</a>​</p></li>
 </ul>
 <h3 id="Comparison-operators" class="common-anchor-header">Comparison operators</h3><p>Comparison operators include:​</p>
 <ul>

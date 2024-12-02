@@ -281,9 +281,9 @@ indexes.<span class="hljs-title function_">add</span>(<span class="hljs-title cl
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> index_params = [
   {
-    <span class="hljs-attr">fieldName</span>: <span class="hljs-string">&quot;sparse&quot;</span>,
-    <span class="hljs-attr">metricType</span>: <span class="hljs-string">&quot;BM25&quot;</span>,
-    <span class="hljs-attr">indexType</span>: <span class="hljs-string">&quot;AUTOINDEX&quot;</span>,
+    <span class="hljs-attr">field_name</span>: <span class="hljs-string">&quot;sparse&quot;</span>,
+    <span class="hljs-attr">metric_type</span>: <span class="hljs-string">&quot;BM25&quot;</span>,
+    <span class="hljs-attr">index_type</span>: <span class="hljs-string">&quot;AUTOINDEX&quot;</span>,
   },
 ];
 <button class="copy-code-btn"></button></code></pre>
@@ -323,10 +323,11 @@ indexes.<span class="hljs-title function_">add</span>(<span class="hljs-title cl
         .build();
 client.createCollection(requestCreate);
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">await</span> client.<span class="hljs-title function_">create_collection</span>(
-    <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&#x27;demo&#x27;</span>, 
-    <span class="hljs-attr">schema</span>: schema, 
-    <span class="hljs-attr">index_params</span>: index_params
+<pre><code translate="no" class="language-javascript">await client.create_collection(
+    collection_name: <span class="hljs-string">&#x27;demo&#x27;</span>, 
+    schema: schema, 
+    index_params: index_params,
+    <span class="hljs-built_in">functions</span>: <span class="hljs-built_in">functions</span>
 );
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-curl"><span class="hljs-built_in">export</span> CLUSTER_ENDPOINT=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>
