@@ -8,7 +8,7 @@ summary: "In text processing, an analyzer is a crucial component that converts r
 
 In text processing, an **analyzer** is a crucial component that converts raw text into a structured, searchable format. Each analyzer typically consists of two core elements: **tokenizer** and **filter**. Together, they transform input text into tokens, refine these tokens, and prepare them for efficient indexing and retrieval.​
 
-In Milvus, analyzers are configured during collection creation when you add `VARCHAR` fields to the collection schema. Tokens produced by an analyzer can be used to build an index for text matching or converted into sparse embeddings for full text search. For more information, refer to [Text Match](keyword-match.md) or [​Full Text Search](full-text-search.md).​
+Powered by [Tantivy](https://github.com/quickwit-oss/tantivy), analyzers in Milvus are configured during collection creation when you add `VARCHAR` fields to the collection schema. Tokens produced by an analyzer can be used to build an index for text matching or converted into sparse embeddings for full text search. For more information, refer to [Text Match](keyword-match.md) or [​Full Text Search](full-text-search.md).​
 
 <div class="alert note">
 

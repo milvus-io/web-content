@@ -212,7 +212,7 @@ Parameter description:​
 
 - `​D`: The document being evaluated.​
 
-- `​TF(qi​,D)`: Term frequency, representing how often term ​qi​appears in document ​D.​
+- `​TF(qi​,D)`: Term frequency, representing how often term `​qi` ​appears in document `​D`.​
 
 - `​IDF(qi​)`: Inverse document frequency, calculated as:​
 

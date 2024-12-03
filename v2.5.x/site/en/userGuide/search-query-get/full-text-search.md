@@ -23,7 +23,7 @@ Full text search simplifies the process of text-based searching by eliminating t
 
 1. **Text input**: You insert raw text documents or provide query text without any need for manual embedding.​
 
-2. **Text analysis**: Milvus uses an analyzer to tokenize input text into individual, searchable terms.​
+2. **Text analysis**: Milvus uses an analyzer to tokenize input text into individual, searchable terms.​ For more information on analyzers, refer to [Analyzer Overview](analyzer-overview.md).
 
 3. **Function processing**: The built-in function receives tokenized terms and converts them into sparse vector representations.​
 

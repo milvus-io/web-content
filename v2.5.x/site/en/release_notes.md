@@ -24,9 +24,9 @@ Milvus 2.5.0-beta brings significant advancements to enhance usability, scalabil
 
 Milvus 2.5 supports full text search implemented with Sparse-BM25! This feature is an important complement to Milvus's strong semantic search capabilities, especially in scenarios involving rare words or technical terms. In previous versions, Milvus supported sparse vectors to assist with keyword search scenarios. These sparse vectors were generated outside of Milvus by neural models like SPLADEv2/BGE-M3 or statistical models such as the BM25 algorithm.
 
-Milvus 2.5 has built-in tokenization and sparse vector extraction, extending the API from only receiving vectors as input to directly accepting text. BM25 statistical information is updated in real time as data is inserted, enhancing usability and accuracy. Additionally, sparse vectors based on approximate nearest neighbor (ANN) algorithms offer more powerful performance than standard keyword search systems.
+Powered by [Tantivy](https://github.com/quickwit-oss/tantivy), Milvus 2.5 has built-in analyzers and sparse vector extraction, extending the API from only receiving vectors as input to directly accepting text. BM25 statistical information is updated in real time as data is inserted, enhancing usability and accuracy. Additionally, sparse vectors based on approximate nearest neighbor (ANN) algorithms offer more powerful performance than standard keyword search systems.
 
-For details, refer to [Full Text Search](full-text-search.md).
+For details, refer to [Analyzer Overview](analyzer-overview.md) and [Full Text Search](full-text-search.md).
 
 #### Cluster Management WebUI (Beta)
 
@@ -36,9 +36,9 @@ Milvus 2.5 introduces a built-in Cluster Management WebUI, reducing system maint
 
 #### Text Match
 
-Milvus 2.5 leverages analyzers and indexing from Tantivy for text preprocessing and index building, supporting precise natural language matching of text data based on specific terms. This feature is primarily used for filtered search to satisfy specific conditions and can incorporate scalar filtering to refine query results, allowing similarity searches within vectors that meet scalar criteria.
+Milvus 2.5 leverages analyzers and indexing from [Tantivy](https://github.com/quickwit-oss/tantivy) for text preprocessing and index building, supporting precise natural language matching of text data based on specific terms. This feature is primarily used for filtered search to satisfy specific conditions and can incorporate scalar filtering to refine query results, allowing similarity searches within vectors that meet scalar criteria.
 
-For details, refer to [Text Match](keyword-match.md).
+For details, refer to [Analyzer Overview](analyzer-overview.md) and [Text Match](keyword-match.md).
 
 #### Bitmap Index
 
