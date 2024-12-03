@@ -172,6 +172,14 @@ Example in Python:
 18
 ```
 
+#### `pymilvus.exceptions.ConnectionConfigException: <ConnectionConfigException: (code=1, message=Illegal uri: [example.db], expected form 'https://user:pwd@example.com:12345')>`. What causes this and how can it be solved?
+
+This error indicates that you're trying to connect to Milvus Lite using an earlier version of pymilvus that doesn't support it. To resolve it, upgrade your pymilvus installation to at least version 2.4.2. This version supports connecting to Milvus Lite. To upgrade, use the following command:
+
+```shell
+pip install pymilvus>=2.4.2
+```
+
 #### Still have questions?
 
 You can:

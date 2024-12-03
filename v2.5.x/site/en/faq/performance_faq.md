@@ -39,19 +39,6 @@ Insert operations are not CPU intensive. However, because new segments may not h
 
 The `rootcoord.minSegmentSizeToEnableIndex` parameter determines the index-building threshold for a segment, and is set to 1024 rows by default. See [System Configuration](system_configuration.md) for more information.
 
-#### Is storage space released right after data deletion in Milvus?
-
-No, storage space will not be immediately released when you delete data in Milvus. Although deleting data marks entities as "logically deleted," the actual space might not be freed instantly. Here's why:
-
-- **Compaction**: Milvus automatically compacts data in the background. This process merges smaller data segments into larger ones and removes logically deleted data (entities marked for deletion) or data that has exceeded its Time-To-Live (TTL). However, compaction creates new segments while marking old ones as "Dropped."
-- **Garbage Collection**: A separate process called Garbage Collection (GC) periodically removes these "Dropped" segments, freeing up the storage space they occupied. This ensures efficient use of storage but can introduce a slight delay between deletion and space reclamation.
-
-#### Can I see inserted, deleted, or upserted data immediately after the operation without waiting for a flush?
-
-Yes, in Milvus, data visibility is not directly tied to flush operations due to its storage-compute disaggregation architecture. You can manage data readability using consistency levels.
-
-When selecting a consistency level, consider the trade-offs between consistency and performance. For operations requiring immediate visibility, use a "Strong" consistency level. For faster writes, prioritize weaker consistency (data might not be immediately visible). For more information, refer to [Consistency](consistency.md).
-
 #### Can indexing a VARCHAR field improve deletion speed?
 
 Indexing a VARCHAR field can speed up "Delete By Expression" operations, but only under certain conditions:

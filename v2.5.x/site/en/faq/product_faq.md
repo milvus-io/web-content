@@ -165,6 +165,47 @@ Milvus supports Binary, Float32, Float16, and BFloat16 vector types.
 
 Currently, Milvus 2.4.x does not support specifying default values for scalar or vector fields. This feature is planned for future releases.
 
+#### Is storage space released right after data deletion in Milvus?
+
+No, storage space will not be immediately released when you delete data in Milvus. Although deleting data marks entities as "logically deleted," the actual space might not be freed instantly. Here's why:
+
+- **Compaction**: Milvus automatically compacts data in the background. This process merges smaller data segments into larger ones and removes logically deleted data (entities marked for deletion) or data that has exceeded its Time-To-Live (TTL). However, compaction creates new segments while marking old ones as "Dropped."
+- **Garbage Collection**: A separate process called Garbage Collection (GC) periodically removes these "Dropped" segments, freeing up the storage space they occupied. This ensures efficient use of storage but can introduce a slight delay between deletion and space reclamation.
+
+#### Can I see inserted, deleted, or upserted data immediately after the operation without waiting for a flush?
+
+Yes, in Milvus, data visibility is not directly tied to flush operations due to its storage-compute disaggregation architecture. You can manage data readability using consistency levels.
+
+When selecting a consistency level, consider the trade-offs between consistency and performance. For operations requiring immediate visibility, use a "Strong" consistency level. For faster writes, prioritize weaker consistency (data might not be immediately visible). For more information, refer to [Consistency](consistency.md).
+
+#### After enabling the partition key feature, what is the default value of `num_partitions` in Milvus, and why?
+
+When the partition key feature is enabled, the default value of `num_partitions` in Milvus is set to `16`. This default is chosen for stability and performance reasons. You can adjust the `num_partitions` value as needed by specifying it in the `create_collection` function.
+
+#### Is there a maximum length limit for scalar filtering expressions?
+
+Yes, the maximum length of a scalar filtering expression is constrained by the RPC transfer limit, which is defined in the `milvus.yaml` configuration file. Specifically, the limit is set by the `serverMaxRecvSize` parameter under the proxy section:
+
+```yaml
+proxy:
+  grpc:
+    serverMaxRecvSize: 67108864 # The maximum size of each RPC request that the proxy can receive, unit: byte
+```
+
+By default, the maximum size of each RPC request is 64MB. Therefore, the length of the filtering expression must be less than this limit to ensure successful processing.
+
+#### When performing a bulk vector search, how many vectors can be specified at once? Is there a limit?
+
+Yes, the number of vectors that can be specified in a bulk vector search is limited by the RPC transfer size, as defined in the `milvus.yaml` configuration file. This limit is determined by the `serverMaxRecvSize` parameter under the proxy section:
+
+```yaml
+proxy:
+  grpc:
+    serverMaxRecvSize: 67108864 # The maximum size of each RPC request that the proxy can receive, unit: byte
+```
+
+By default, the maximum size of each RPC request is 64MB. Therefore, the total size of the input vectors, including their dimensional data and metadata, must be less than this limit to ensure successful execution.
+
 #### Still have questions?
 
 You can:
