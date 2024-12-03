@@ -25,7 +25,7 @@ Milvus aims to achieve low memory usage, high filtering efficiency, and short lo
 
 ### Auto indexing
 
-Milvus automatically creates an auto index for a scalar field based on its data type, without requiring manual intervention. Auto indexing is suitable for prefix match queries and frequent retrieval scenarios.
+Milvus provides the `AUTOINDEX` option to free you from having to manually choose an index type. When calling the `create_index` method, if the `index_type` is not specified, Milvus automatically selects the most suitable index type based on the data type.
 
 The following table lists the data types that Milvus supports and their corresponding auto indexing algorithms.
 
