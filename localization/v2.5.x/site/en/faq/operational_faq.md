@@ -99,6 +99,9 @@ This prioritization can result in fewer unique results than the limit if your co
 <span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-built_in">len</span>(<span class="hljs-built_in">bytes</span>(s, <span class="hljs-string">&quot;utf-8&quot;</span>)) <span class="hljs-comment"># Size in bytes of s, max-length in Milvus.</span>
 <span class="hljs-number">18</span>
 <button class="copy-code-btn"></button></code></pre>
+<h4 id="pymilvusexceptionsConnectionConfigException-ConnectionConfigException-code1-messageIllegal-uri-exampledb-expected-form-httpsuserpwdexamplecom12345-What-causes-this-and-how-can-it-be-solved" class="common-anchor-header"><code translate="no">pymilvus.exceptions.ConnectionConfigException: &lt;ConnectionConfigException: (code=1, message=Illegal uri: [example.db], expected form 'https://user:pwd@example.com:12345')&gt;</code>. What causes this and how can it be solved?</h4><p>This error indicates that you’re trying to connect to Milvus Lite using an earlier version of pymilvus that doesn’t support it. To resolve it, upgrade your pymilvus installation to at least version 2.4.2. This version supports connecting to Milvus Lite. To upgrade, use the following command:</p>
+<pre><code translate="no" class="language-shell">pip install pymilvus&gt;=2.4.2
+<button class="copy-code-btn"></button></code></pre>
 <h4 id="Still-have-questions" class="common-anchor-header">Still have questions?</h4><p>You can:</p>
 <ul>
 <li>Check out <a href="https://github.com/milvus-io/milvus/issues">Milvus</a> on GitHub. Feel free to ask questions, share ideas, and help others.</li>

@@ -60,7 +60,7 @@ title: Scalar Index
         ></path>
       </svg>
     </button></h2><p>Milvus aims to achieve low memory usage, high filtering efficiency, and short loading time with its scalar field indexing algorithms. These algorithms are categorized into two main types: <a href="#auto-indexing">auto indexing</a> and <a href="#inverted-indexing">inverted indexing</a>.</p>
-<h3 id="Auto-indexing" class="common-anchor-header">Auto indexing</h3><p>Milvus automatically creates an auto index for a scalar field based on its data type, without requiring manual intervention. Auto indexing is suitable for prefix match queries and frequent retrieval scenarios.</p>
+<h3 id="Auto-indexing" class="common-anchor-header">Auto indexing</h3><p>Milvus provides the <code translate="no">AUTOINDEX</code> option to free you from having to manually choose an index type. When calling the <code translate="no">create_index</code> method, if the <code translate="no">index_type</code> is not specified, Milvus automatically selects the most suitable index type based on the data type.</p>
 <p>The following table lists the data types that Milvus supports and their corresponding auto indexing algorithms.</p>
 <table>
 <thead>
