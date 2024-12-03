@@ -164,20 +164,17 @@ print(res)
 ```
 
 ```java
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
-import java.util.Random;
-
-import com.alibaba.fastjson.JSONObject;
-
-import io.milvus.v2.client.ConnectConfig;
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 import io.milvus.v2.client.MilvusClientV2;
+import io.milvus.v2.client.ConnectConfig;
 import io.milvus.v2.service.collection.request.CreateCollectionReq;
 import io.milvus.v2.service.collection.request.GetLoadStateReq;
+import io.milvus.v2.service.partition.request.CreatePartitionReq;
 import io.milvus.v2.service.vector.request.InsertReq;
-import io.milvus.v2.service.vector.response.InsertResp; 
+import io.milvus.v2.service.vector.response.InsertResp;
+
+import java.util.*;
 
 String CLUSTER_ENDPOINT = "http://localhost:19530";
 
@@ -190,16 +187,16 @@ MilvusClientV2 client = new MilvusClientV2(connectConfig);
 
 // 2. Create a collection in quick setup mode
 CreateCollectionReq quickSetupReq = CreateCollectionReq.builder()
-    .collectionName("quick_setup")
-    .dimension(5)
-    .metricType("IP")
-    .build();
+        .collectionName("quick_setup")
+        .dimension(5)
+        .metricType("IP")
+        .build();
 
 client.createCollection(quickSetupReq);
 
 GetLoadStateReq loadStateReq = GetLoadStateReq.builder()
-    .collectionName("quick_setup")
-    .build();
+        .collectionName("quick_setup")
+        .build();
 
 boolean state = client.getLoadState(loadStateReq);
 
@@ -210,42 +207,42 @@ System.out.println(state);
 
 // 3. Insert randomly generated vectors into the collection
 List<String> colors = Arrays.asList("green", "blue", "yellow", "red", "black", "white", "purple", "pink", "orange", "brown", "grey");
-List<JSONObject> data = new ArrayList<>();
-
+List<JsonObject> data = new ArrayList<>();
+Gson gson = new Gson();
 for (int i=0; i<1000; i++) {
     Random rand = new Random();
     String current_color = colors.get(rand.nextInt(colors.size()-1));
-    JSONObject row = new JSONObject();
-    row.put("id", Long.valueOf(i));
-    row.put("vector", Arrays.asList(rand.nextFloat(), rand.nextFloat(), rand.nextFloat(), rand.nextFloat(), rand.nextFloat()));
-    row.put("color_tag", current_color + "_" + String.valueOf(rand.nextInt(8999) + 1000));
+    JsonObject row = new JsonObject();
+    row.addProperty("id", (long) i);
+    row.add("vector", gson.toJsonTree(Arrays.asList(rand.nextFloat(), rand.nextFloat(), rand.nextFloat(), rand.nextFloat(), rand.nextFloat())));
+    row.addProperty("color_tag", current_color + "_" + String.valueOf(rand.nextInt(8999) + 1000));
     data.add(row);
 }
 
 InsertReq insertReq = InsertReq.builder()
-    .collectionName("quick_setup")
-    .data(data)
-    .build();
+        .collectionName("quick_setup")
+        .data(data)
+        .build();
 
 InsertResp insertResp = client.insert(insertReq);
 
-System.out.println(JSONObject.toJSON(insertResp));
+System.out.println(insertResp.getInsertCnt());
 
 // Output:
-// {"insertCnt": 1000}
+// 1000
 
 // 6.1. Create a partition
 CreatePartitionReq partitionReq = CreatePartitionReq.builder()
-    .collectionName("quick_setup")
-    .partitionName("red")
-    .build();
+        .collectionName("quick_setup")
+        .partitionName("red")
+        .build();
 
 client.createPartition(partitionReq);
 
 partitionReq = CreatePartitionReq.builder()
-    .collectionName("quick_setup")
-    .partitionName("blue")
-    .build();
+        .collectionName("quick_setup")
+        .partitionName("blue")
+        .build();
 
 client.createPartition(partitionReq);
 
@@ -255,52 +252,52 @@ data = new ArrayList<>();
 for (int i=1000; i<1500; i++) {
     Random rand = new Random();
     String current_color = "red";
-    JSONObject row = new JSONObject();
-    row.put("id", Long.valueOf(i));
-    row.put("vector", Arrays.asList(rand.nextFloat(), rand.nextFloat(), rand.nextFloat(), rand.nextFloat(), rand.nextFloat()));
-    row.put("color", current_color);
-    row.put("color_tag", current_color + "_" + String.valueOf(rand.nextInt(8999) + 1000));
+    JsonObject row = new JsonObject();
+    row.addProperty("id", (long) i);
+    row.add("vector", gson.toJsonTree(Arrays.asList(rand.nextFloat(), rand.nextFloat(), rand.nextFloat(), rand.nextFloat(), rand.nextFloat())));
+    row.addProperty("color", current_color);
+    row.addProperty("color_tag", current_color + "_" + String.valueOf(rand.nextInt(8999) + 1000));
     data.add(row);
-}     
+}
 
 insertReq = InsertReq.builder()
-    .collectionName("quick_setup")
-    .data(data)
-    .partitionName("red")
-    .build();
+        .collectionName("quick_setup")
+        .data(data)
+        .partitionName("red")
+        .build();
 
 insertResp = client.insert(insertReq);
 
-System.out.println(JSONObject.toJSON(insertResp));
+System.out.println(insertResp.getInsertCnt());
 
 // Output:
-// {"insertCnt": 500}
+// 500
 
 data = new ArrayList<>();
 
 for (int i=1500; i<2000; i++) {
     Random rand = new Random();
     String current_color = "blue";
-    JSONObject row = new JSONObject();
-    row.put("id", Long.valueOf(i));
-    row.put("vector", Arrays.asList(rand.nextFloat(), rand.nextFloat(), rand.nextFloat(), rand.nextFloat(), rand.nextFloat()));
-    row.put("color", current_color);
-    row.put("color_tag", current_color + "_" + String.valueOf(rand.nextInt(8999) + 1000));
+    JsonObject row = new JsonObject();
+    row.addProperty("id", (long) i);
+    row.add("vector", gson.toJsonTree(Arrays.asList(rand.nextFloat(), rand.nextFloat(), rand.nextFloat(), rand.nextFloat(), rand.nextFloat())));
+    row.addProperty("color", current_color);
+    row.addProperty("color_tag", current_color + "_" + String.valueOf(rand.nextInt(8999) + 1000));
     data.add(row);
 }
 
 insertReq = InsertReq.builder()
-    .collectionName("quick_setup")
-    .data(data)
-    .partitionName("blue")
-    .build();
+        .collectionName("quick_setup")
+        .data(data)
+        .partitionName("blue")
+        .build();
 
 insertResp = client.insert(insertReq);
 
-System.out.println(JSONObject.toJSON(insertResp));
+System.out.println(insertResp.getInsertCnt());
 
 // Output:
-// {"insertCnt": 500}
+// 500
 ```
 
 ```javascript

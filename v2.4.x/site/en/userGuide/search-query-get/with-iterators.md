@@ -72,9 +72,23 @@ client.create_collection(
 ```
 
 ```java
-import io.milvus.client.MilvusServiceClient;
-import io.milvus.param.ConnectParam;
-import io.milvus.param.highlevel.collection.CreateSimpleCollectionParam;
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+import io.milvus.orm.iterator.QueryIterator;
+import io.milvus.orm.iterator.SearchIterator;
+import io.milvus.response.QueryResultsWrapper;
+import io.milvus.v2.client.MilvusClientV2;
+import io.milvus.v2.client.ConnectConfig;
+import io.milvus.v2.common.ConsistencyLevel;
+import io.milvus.v2.common.IndexParam;
+import io.milvus.v2.service.collection.request.CreateCollectionReq;
+import io.milvus.v2.service.collection.request.DropCollectionReq;
+import io.milvus.v2.service.vector.request.*;
+import io.milvus.v2.service.vector.request.data.FloatVec;
+import io.milvus.v2.service.vector.response.InsertResp;
+import io.milvus.v2.service.vector.response.QueryResp;
+
+import java.util.*;
 
 String CLUSTER_ENDPOINT = "http://localhost:19530";
 
@@ -86,12 +100,11 @@ ConnectParam connectParam = ConnectParam.newBuilder()
 MilvusServiceClient client  = new MilvusServiceClient(connectParam);
 
 // 2. Create a collection
-CreateSimpleCollectionParam createCollectionParam = CreateSimpleCollectionParam.newBuilder()
-        .withCollectionName("quick_setup")
-        .withDimension(5)
+CreateCollectionReq quickSetupReq = CreateCollectionReq.builder()
+        .collectionName("quick_setup")
+        .dimension(5)
         .build();
-
-client.createCollection(createCollectionParam);
+client.createCollection(quickSetupReq);
 ```
 
 ### Step 2: Insert randomly generated entities
@@ -175,46 +188,28 @@ print(res)
 ```
 
 ```java
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Random;
-
-import com.alibaba.fastjson.JSONObject;
-
-import io.milvus.param.R;
-import io.milvus.param.dml.InsertParam;
-import io.milvus.response.MutationResultWrapper;
-import io.milvus.grpc.MutationResult;
-
-
 // 3. Insert randomly generated vectors into the collection
 List<String> colors = Arrays.asList("green", "blue", "yellow", "red", "black", "white", "purple", "pink", "orange", "brown", "grey");
-List<JSONObject> data = new ArrayList<>();
-
+List<JsonObject> data = new ArrayList<>();
+Gson gson = new Gson();
 for (int i=0; i<10000; i++) {
     Random rand = new Random();
     String current_color = colors.get(rand.nextInt(colors.size()-1));
-    JSONObject row = new JSONObject();
-    row.put("id", Long.valueOf(i));
-    row.put("vector", Arrays.asList(rand.nextFloat(), rand.nextFloat(), rand.nextFloat(), rand.nextFloat(), rand.nextFloat()));
-    row.put("color_tag", current_color + "_" + String.valueOf(rand.nextInt(8999) + 1000));
+    JsonObject row = new JsonObject();
+    row.addProperty("id", (long) i);
+    row.add("vector", gson.toJsonTree(Arrays.asList(rand.nextFloat(), rand.nextFloat(), rand.nextFloat(), rand.nextFloat(), rand.nextFloat())));
+    row.addProperty("color_tag", current_color + "_" + (rand.nextInt(8999) + 1000));
     data.add(row);
 }
 
-InsertParam insertParam = InsertParam.newBuilder()
-    .withCollectionName("quick_setup")
-    .withRows(data)
-    .build();
+InsertResp insertR = client.insert(InsertReq.builder()
+        .collectionName("quick_setup")
+        .data(data)
+        .build());
+System.out.println(insertR.getInsertCnt());
 
-R<MutationResult> insertRes = client.insert(insertParam);
-
-if (insertRes.getStatus() != R.Status.Success.getCode()) {
-    System.err.println(insertRes.getMessage());
-}
-
-MutationResultWrapper wrapper = new MutationResultWrapper(insertRes.getData());
-System.out.println(wrapper.getInsertCount());
+// Output
+// 10000
 ```
 
 ## Search with iterator
@@ -314,43 +309,34 @@ print(results)
 ```
 
 ```java
-import io.milvus.param.dml.QueryIteratorParam;
-import io.milvus.param.dml.SearchIteratorParam;
-import io.milvus.response.QueryResultsWrapper;
-import io.milvus.orm.iterator.SearchIterator;
-
 // 4. Search with iterators
-SearchIteratorParam iteratorParam = SearchIteratorParam.newBuilder()
-    .withCollectionName("quick_setup")
-    .withVectorFieldName("vector")
-    // Use withFloatVectors() in clusters compatible with Milvus 2.4.x
-    .withVectors(Arrays.asList(0.3580376395471989f, -0.6023495712049978f, 0.18414012509913835f, -0.26286205330961354f, 0.9029438446296592f))
-    .withBatchSize(10L)
-    .withParams("{\"metric_type\": \"COSINE\", \"params\": {\"level\": 1}}")
-    .build();
-        
+SearchIteratorReq iteratorReq = SearchIteratorReq.builder()
+        .collectionName("quick_setup")
+        .vectorFieldName("vector")
+        .batchSize(10L)
+        .vectors(Collections.singletonList(new FloatVec(Arrays.asList(0.3580376395471989f, -0.6023495712049978f, 0.18414012509913835f, -0.26286205330961354f, 0.9029438446296592f))))
+        .params("{\"level\": 1}")
+        .metricType(IndexParam.MetricType.COSINE)
+        .outputFields(Collections.singletonList("color_tag"))
+        .topK(300)
+        .build();
 
-R<SearchIterator> searchIteratorRes = client.searchIterator(iteratorParam);
+SearchIterator searchIterator = client.searchIterator(iteratorReq);
 
-if (searchIteratorRes.getStatus() != R.Status.Success.getCode()) {
-    System.err.println(searchIteratorRes.getMessage());
-}
-
-SearchIterator searchIterator = searchIteratorRes.getData();
 List<QueryResultsWrapper.RowRecord> results = new ArrayList<>();
-
 while (true) {
     List<QueryResultsWrapper.RowRecord> batchResults = searchIterator.next();
     if (batchResults.isEmpty()) {
         searchIterator.close();
         break;
     }
-    for (QueryResultsWrapper.RowRecord rowRecord : batchResults) {
-        results.add(rowRecord);
-    }
-}
 
+    results.addAll(batchResults);
+}
 System.out.println(results.size());
+
+// Output
+// 300
 ```
 
 <table class="language-python">
@@ -480,34 +466,15 @@ print(results[:3])
 ```
 
 ```java
-import io.milvus.param.dml.QueryIteratorParam;
-import io.milvus.orm.iterator.QueryIterator;
-
 // 5. Query with iterators
+QueryIterator queryIterator = client.queryIterator(QueryIteratorReq.builder()
+        .collectionName("quick_setup")
+        .expr("color_tag like \"brown_8%\"")
+        .batchSize(50L)
+        .outputFields(Arrays.asList("vector", "color_tag"))
+        .build());
 
-try {
-    Files.write(Path.of("results.json"), JSON.toJSONString(new ArrayList<>()).getBytes(), StandardOpenOption.CREATE, StandardOpenOption.TRUNCATE_EXISTING);
-} catch (Exception e) {
-    // TODO: handle exception
-    e.printStackTrace();
-}
-
-QueryIteratorParam queryIteratorParam = QueryIteratorParam.newBuilder()
-    .withCollectionName("quick_setup")
-    .withExpr("color_tag like \"brown_8%\"")
-    .withBatchSize(50L)
-    .addOutField("vector")
-    .addOutField("color_tag")
-    .build();
-
-R<QueryIterator> queryIteratRes = client.queryIterator(queryIteratorParam);
-
-if (queryIteratRes.getStatus() != R.Status.Success.getCode()) {
-    System.err.println(queryIteratRes.getMessage());
-}
-
-QueryIterator queryIterator = queryIteratRes.getData();
-
+results.clear();
 while (true) {
     List<QueryResultsWrapper.RowRecord> batchResults = queryIterator.next();
     if (batchResults.isEmpty()) {
@@ -515,31 +482,18 @@ while (true) {
         break;
     }
 
-    String jsonString = "";
-    List<JSONObject> jsonObject = new ArrayList<>();
-    try {
-        jsonString = Files.readString(Path.of("results.json"));
-        jsonObject = JSON.parseArray(jsonString).toJavaList(null);
-    } catch (IOException e) {
-        // TODO Auto-generated catch block
-        e.printStackTrace();
-    }
-
-    for (QueryResultsWrapper.RowRecord queryResult : batchResults) {
-        JSONObject row = new JSONObject();
-        row.put("id", queryResult.get("id"));
-        row.put("vector", queryResult.get("vector"));
-        row.put("color_tag", queryResult.get("color_tag"));
-        jsonObject.add(row);
-    }
-
-    try {
-        Files.write(Path.of("results.json"), JSON.toJSONString(jsonObject).getBytes(), StandardOpenOption.WRITE);
-    } catch (IOException e) {
-        // TODO Auto-generated catch block
-        e.printStackTrace();
-    }
+    results.addAll(batchResults);
 }
+
+System.out.println(results.subList(0, 3));
+
+// Output
+// [
+//	[color_tag:brown_8975, vector:[0.93425006, 0.42161798, 0.1603949, 0.86406225, 0.30063087], id:104],
+//	[color_tag:brown_8292, vector:[0.075261295, 0.51725155, 0.13842249, 0.13178307, 0.90713704], id:793],
+//	[color_tag:brown_8763, vector:[0.80366623, 0.6534371, 0.6446101, 0.094082, 0.1318503], id:1157]
+// ]
+
 ```
 
 <table class="language-python">

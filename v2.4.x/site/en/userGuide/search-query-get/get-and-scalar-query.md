@@ -61,6 +61,21 @@ client.create_collection(
 ```
 
 ```java
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+import io.milvus.v2.client.MilvusClientV2;
+import io.milvus.v2.client.ConnectConfig;
+import io.milvus.v2.common.ConsistencyLevel;
+import io.milvus.v2.service.collection.request.CreateCollectionReq;
+import io.milvus.v2.service.collection.request.DropCollectionReq;
+import io.milvus.v2.service.partition.request.CreatePartitionReq;
+import io.milvus.v2.service.vector.request.GetReq;
+import io.milvus.v2.service.vector.request.InsertReq;
+import io.milvus.v2.service.vector.response.GetResp;
+import io.milvus.v2.service.vector.response.InsertResp;
+
+import java.util.*;
+
 String CLUSTER_ENDPOINT = "http://localhost:19530";
 
 // 1. Connect to Milvus server
@@ -185,32 +200,32 @@ print(res)
 ```java
 // 3. Insert randomly generated vectors into the collection
 List<String> colors = Arrays.asList("green", "blue", "yellow", "red", "black", "white", "purple", "pink", "orange", "brown", "grey");
-List<JSONObject> data = new ArrayList<>();
-
+List<JsonObject> data = new ArrayList<>();
+Gson gson = new Gson();
 for (int i=0; i<1000; i++) {
     Random rand = new Random();
     String current_color = colors.get(rand.nextInt(colors.size()-1));
     int current_tag = rand.nextInt(8999) + 1000;
-    JSONObject row = new JSONObject();
-    row.put("id", Long.valueOf(i));
-    row.put("vector", Arrays.asList(rand.nextFloat(), rand.nextFloat(), rand.nextFloat(), rand.nextFloat(), rand.nextFloat()));
-    row.put("color", current_color);
-    row.put("tag", current_tag);
-    row.put("color_tag", current_color + '_' + String.valueOf(rand.nextInt(8999) + 1000));
+    JsonObject row = new JsonObject();
+    row.addProperty("id", (long) i);
+    row.add("vector", gson.toJsonTree(Arrays.asList(rand.nextFloat(), rand.nextFloat(), rand.nextFloat(), rand.nextFloat(), rand.nextFloat())));
+    row.addProperty("color", current_color);
+    row.addProperty("tag", current_tag);
+    row.addProperty("color_tag", current_color + '_' + String.valueOf(rand.nextInt(8999) + 1000));
     data.add(row);
 }
 
 InsertReq insertReq = InsertReq.builder()
-    .collectionName("quick_setup")
-    .data(data)
-    .build();
+        .collectionName("quick_setup")
+        .data(data)
+        .build();
 
 InsertResp insertResp = client.insert(insertReq);
 
-System.out.println(JSONObject.toJSON(insertResp));
+System.out.println(insertResp.getInsertCnt());
 
 // Output:
-// {"insertCnt": 1000}
+// 1000
 ```
 
 ```javascript
@@ -382,16 +397,16 @@ print(res)
 ```java
 // 4. Create partitions and insert some more data
 CreatePartitionReq createPartitionReq = CreatePartitionReq.builder()
-    .collectionName("quick_setup")
-    .partitionName("partitionA")
-    .build();
+        .collectionName("quick_setup")
+        .partitionName("partitionA")
+        .build();
 
 client.createPartition(createPartitionReq);
 
 createPartitionReq = CreatePartitionReq.builder()
-    .collectionName("quick_setup")
-    .partitionName("partitionB")
-    .build();
+        .collectionName("quick_setup")
+        .partitionName("partitionB")
+        .build();
 
 client.createPartition(createPartitionReq);
 
@@ -401,26 +416,26 @@ for (int i=1000; i<1500; i++) {
     Random rand = new Random();
     String current_color = colors.get(rand.nextInt(colors.size()-1));
     int current_tag = rand.nextInt(8999) + 1000;
-    JSONObject row = new JSONObject();
-    row.put("id", Long.valueOf(i));
-    row.put("vector", Arrays.asList(rand.nextFloat(), rand.nextFloat(), rand.nextFloat(), rand.nextFloat(), rand.nextFloat()));
-    row.put("color", current_color);
-    row.put("tag", current_tag);
+    JsonObject row = new JsonObject();
+    row.addProperty("id", (long) i);
+    row.add("vector", gson.toJsonTree(Arrays.asList(rand.nextFloat(), rand.nextFloat(), rand.nextFloat(), rand.nextFloat(), rand.nextFloat())));
+    row.addProperty("color", current_color);
+    row.addProperty("tag", current_tag);
     data.add(row);
 }
 
 insertReq = InsertReq.builder()
-    .collectionName("quick_setup")
-    .data(data)
-    .partitionName("partitionA")
-    .build();
+        .collectionName("quick_setup")
+        .data(data)
+        .partitionName("partitionA")
+        .build();
 
 insertResp = client.insert(insertReq);
 
-System.out.println(JSONObject.toJSON(insertResp));
+System.out.println(insertResp.getInsertCnt());
 
 // Output:
-// {"insertCnt": 500}
+// 500
 
 data.clear();
 
@@ -428,26 +443,26 @@ for (int i=1500; i<2000; i++) {
     Random rand = new Random();
     String current_color = colors.get(rand.nextInt(colors.size()-1));
     int current_tag = rand.nextInt(8999) + 1000;
-    JSONObject row = new JSONObject();
-    row.put("id", Long.valueOf(i));
-    row.put("vector", Arrays.asList(rand.nextFloat(), rand.nextFloat(), rand.nextFloat(), rand.nextFloat(), rand.nextFloat()));
-    row.put("color", current_color);
-    row.put("tag", current_tag);
+    JsonObject row = new JsonObject();
+    row.addProperty("id", (long) i);
+    row.add("vector", gson.toJsonTree(Arrays.asList(rand.nextFloat(), rand.nextFloat(), rand.nextFloat(), rand.nextFloat(), rand.nextFloat())));
+    row.addProperty("color", current_color);
+    row.addProperty("tag", current_tag);
     data.add(row);
 }
 
 insertReq = InsertReq.builder()
-    .collectionName("quick_setup")
-    .data(data)
-    .partitionName("partitionB")
-    .build();
+        .collectionName("quick_setup")
+        .data(data)
+        .partitionName("partitionB")
+        .build();
 
 insertResp = client.insert(insertReq);
 
-System.out.println(JSONObject.toJSON(insertResp));
+System.out.println(insertResp.getInsertCnt());
 
 // Output:
-// {"insertCnt": 500}
+// 500
 ```
 
 ```javascript
@@ -599,56 +614,21 @@ print(res)
 ```java
 // 5. Get entities by ID
 GetReq getReq = GetReq.builder()
-    .collectionName("quick_setup")
-    .ids(Arrays.asList(0L, 1L, 2L))
-    .build();
+        .collectionName("quick_setup")
+        .ids(Arrays.asList(0L, 1L, 2L))
+        .build();
 
 GetResp entities = client.get(getReq);
 
-System.out.println(JSONObject.toJSON(entities));
+System.out.println(entities.getGetResults());
 
 // Output:
-// {"getResults": [
-//     {"entity": {
-//         "color": "white",
-//         "color_tag": "white_4597",
-//         "vector": [
-//             0.09665024,
-//             0.1163497,
-//             0.0701347,
-//             0.32577968,
-//             0.40943468
-//         ],
-//         "tag": 8946,
-//         "id": 0
-//     }},
-//     {"entity": {
-//         "color": "green",
-//         "color_tag": "green_3039",
-//         "vector": [
-//             0.90689456,
-//             0.4377399,
-//             0.75387514,
-//             0.36454988,
-//             0.8702918
-//         ],
-//         "tag": 2341,
-//         "id": 1
-//     }},
-//     {"entity": {
-//         "color": "white",
-//         "color_tag": "white_8708",
-//         "vector": [
-//             0.9757728,
-//             0.13974023,
-//             0.8023141,
-//             0.61947155,
-//             0.8290197
-//         ],
-//         "tag": 9913,
-//         "id": 2
-//     }}
-// ]}
+// [
+//	QueryResp.QueryResult(entity={color=blue, color_tag=blue_4025, vector=[0.64311606, 0.73486423, 0.7352375, 0.7020566, 0.9885356], id=0, tag=4018}),
+//	QueryResp.QueryResult(entity={color=red, color_tag=red_4788, vector=[0.27244627, 0.7068031, 0.25976115, 0.69258106, 0.8767045], id=1, tag=6611}),
+//	QueryResp.QueryResult(entity={color=yellow, color_tag=yellow_8382, vector=[0.19625628, 0.40176708, 0.13231951, 0.50702184, 0.88406855], id=2, tag=5349})
+//]
+
 ```
 
 ```javascript
@@ -769,54 +749,21 @@ print(res)
 ```java
 // 5. Get entities by ID in a partition
 getReq = GetReq.builder()
-    .collectionName("quick_setup")
-    .ids(Arrays.asList(1001L, 1002L, 1003L))
-    .partitionName("partitionA")
-    .build();
+        .collectionName("quick_setup")
+        .ids(Arrays.asList(1001L, 1002L, 1003L))
+        .partitionName("partitionA")
+        .build();
 
 entities = client.get(getReq);
 
-System.out.println(JSONObject.toJSON(entities));
+System.out.println(entities.getGetResults());
 
 // Output:
-// {"getResults": [
-//     {"entity": {
-//         "color": "yellow",
-//         "vector": [
-//             0.4300114,
-//             0.599917,
-//             0.799163,
-//             0.75395125,
-//             0.89947814
-//         ],
-//         "id": 1001,
-//         "tag": 5803
-//     }},
-//     {"entity": {
-//         "color": "blue",
-//         "vector": [
-//             0.009218454,
-//             0.64637834,
-//             0.19815737,
-//             0.30519038,
-//             0.8218663
-//         ],
-//         "id": 1002,
-//         "tag": 7212
-//     }},
-//     {"entity": {
-//         "color": "black",
-//         "vector": [
-//             0.76521933,
-//             0.7818409,
-//             0.16976339,
-//             0.8719652,
-//             0.1434964
-//         ],
-//         "id": 1003,
-//         "tag": 1710
-//     }}
-// ]}
+// [
+//	QueryResp.QueryResult(entity={color=pink, vector=[0.28847772, 0.5116072, 0.5695933, 0.49643654, 0.3461541], id=1001, tag=9632}), 
+//	QueryResp.QueryResult(entity={color=blue, vector=[0.22428268, 0.8648047, 0.78426147, 0.84020555, 0.60779166], id=1002, tag=4523}), 
+//	QueryResp.QueryResult(entity={color=white, vector=[0.4081068, 0.9027214, 0.88685805, 0.38036376, 0.27950126], id=1003, tag=9321})
+// ]
 ```
 
 ```javascript
