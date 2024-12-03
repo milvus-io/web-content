@@ -44,41 +44,39 @@ print(data[0])
 ```
 
 ```java
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
-import java.util.Random;
+import java.util.*;
 
-import com.alibaba.fastjson.JSONObject;
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 
 // 3. Insert randomly generated vectors and JSON data into the collection
 List<String> colors = Arrays.asList("green", "blue", "yellow", "red", "black", "white", "purple", "pink", "orange", "brown", "grey");
-List<JSONObject> data = new ArrayList<>();
+List<JsonObject> data = new ArrayList<>();
 
+Gson gson = new Gson();
+Random rand = new Random();
 for (int i=0; i<1000; i++) {
-    Random rand = new Random();
     String current_color = colors.get(rand.nextInt(colors.size()-1));
     Integer current_tag = rand.nextInt(8999) + 1000;
     List<Integer> current_coord = Arrays.asList(rand.nextInt(40), rand.nextInt(40), rand.nextInt(40));
     List<List<String>> current_ref = Arrays.asList(
-        Arrays.asList(colors.get(rand.nextInt(colors.size()-1)), colors.get(rand.nextInt(colors.size()-1)), colors.get(rand.nextInt(colors.size()-1))),
-        Arrays.asList(colors.get(rand.nextInt(colors.size()-1)), colors.get(rand.nextInt(colors.size()-1)), colors.get(rand.nextInt(colors.size()-1))),
-        Arrays.asList(colors.get(rand.nextInt(colors.size()-1)), colors.get(rand.nextInt(colors.size()-1)), colors.get(rand.nextInt(colors.size()-1)))
+            Arrays.asList(colors.get(rand.nextInt(colors.size()-1)), colors.get(rand.nextInt(colors.size()-1)), colors.get(rand.nextInt(colors.size()-1))),
+            Arrays.asList(colors.get(rand.nextInt(colors.size()-1)), colors.get(rand.nextInt(colors.size()-1)), colors.get(rand.nextInt(colors.size()-1))),
+            Arrays.asList(colors.get(rand.nextInt(colors.size()-1)), colors.get(rand.nextInt(colors.size()-1)), colors.get(rand.nextInt(colors.size()-1)))
     );
-    JSONObject row = new JSONObject();
-    row.put("id", Long.valueOf(i));
-    row.put("vector", Arrays.asList(rand.nextFloat(), rand.nextFloat(), rand.nextFloat(), rand.nextFloat(), rand.nextFloat()));
-    JSONObject color = new JSONObject();
-    color.put("label", current_color);
-    color.put("tag", current_tag);
-    color.put("coord", current_coord);
-    color.put("ref", current_ref);
-    row.put("color", color);
+    JsonObject row = new JsonObject();
+    row.addProperty("id", (long) i);
+    row.add("vector", gson.toJsonTree(Arrays.asList(rand.nextFloat(), rand.nextFloat(), rand.nextFloat(), rand.nextFloat(), rand.nextFloat())));
+    JsonObject color = new JsonObject();
+    color.addProperty("label", current_color);
+    color.addProperty("tag", current_tag);
+    color.add("coord", gson.toJsonTree(current_coord));
+    color.add("ref", gson.toJsonTree(current_ref));
+    row.add("color", color);
     data.add(row);
 }
 
-System.out.println(JSONObject.toJSON(data.get(0)));   
+System.out.println(data.get(0));
 ```
 
 ```javascript
@@ -244,6 +242,15 @@ print(res)
 ```
 
 ```java
+import io.milvus.v2.client.MilvusClientV2;
+import io.milvus.v2.client.ConnectConfig;
+import io.milvus.v2.common.DataType;
+import io.milvus.v2.common.IndexParam;
+import io.milvus.v2.service.collection.request.*;
+import io.milvus.v2.service.vector.request.*;
+import io.milvus.v2.service.vector.request.data.*;
+import io.milvus.v2.service.vector.response.*;
+
 String CLUSTER_ENDPOINT = "http://localhost:19530";
 
 // 1. Connect to Milvus server
@@ -260,35 +267,37 @@ CreateCollectionReq.CollectionSchema schema = client.createSchema();
 
 // 2.2 Add fields to schema
 schema.addField(AddFieldReq.builder()
-    .fieldName("id")
-    .dataType(DataType.Int64)
-    .isPrimaryKey(true)
-    .autoID(false)
-    .build());
+        .fieldName("id")
+        .dataType(DataType.Int64)
+        .isPrimaryKey(true)
+        .autoID(false)
+        .build());
 
 schema.addField(AddFieldReq.builder()
-    .fieldName("vector")
-    .dataType(DataType.FloatVector)
-    .dimension(5)
-    .build());
+        .fieldName("vector")
+        .dataType(DataType.FloatVector)
+        .dimension(5)
+        .build());
 
 schema.addField(AddFieldReq.builder()
-    .fieldName("color")
-    .dataType(DataType.JSON)
-    .build());
+        .fieldName("color")
+        .dataType(DataType.JSON)
+        .build());
 
 // 2.3 Prepare index parameters
 IndexParam indexParamForIdField = IndexParam.builder()
-    .fieldName("id")
-    .indexType(IndexParam.IndexType.STL_SORT)
-    .build();
+        .fieldName("id")
+        .indexType(IndexParam.IndexType.STL_SORT)
+        .build();
 
+Map<String, Object> params = new HashMap<>();
+params.put("nlist", 1024);
 IndexParam indexParamForVectorField = IndexParam.builder()
-    .fieldName("vector")
-    .indexType(IndexParam.IndexType.IVF_FLAT)
-    .metricType(IndexParam.MetricType.IP)
-    .extraParams(Map.of("nlist", 1024))
-    .build();
+        .fieldName("vector")
+        .indexType(IndexParam.IndexType.IVF_FLAT)
+        .metricType(IndexParam.MetricType.IP)
+        .extraParams(params)
+        .build();
 
 List<IndexParam> indexParams = new ArrayList<>();
 indexParams.add(indexParamForIdField);
@@ -296,17 +305,17 @@ indexParams.add(indexParamForVectorField);
 
 // 2.4 Create a collection with schema and index parameters
 CreateCollectionReq customizedSetupReq = CreateCollectionReq.builder()
-    .collectionName("test_collection")
-    .collectionSchema(schema)
-    .indexParams(indexParams)         
-    .build();
+        .collectionName("test_collection")
+        .collectionSchema(schema)
+        .indexParams(indexParams)
+        .build();
 
 client.createCollection(customizedSetupReq);
 
 // 2.5 Check if the collection is loaded
 GetLoadStateReq getLoadStateReq = GetLoadStateReq.builder()
-    .collectionName("test_collection")
-    .build();
+        .collectionName("test_collection")
+        .build();
 
 Boolean isLoaded = client.getLoadState(getLoadStateReq);
 
@@ -456,16 +465,16 @@ print(res)
 ```java
 // 3.1 Insert data into the collection
 InsertReq insertReq = InsertReq.builder()
-    .collectionName("test_collection")
-    .data(data)
-    .build();
+        .collectionName("test_collection")
+        .data(data)
+        .build();
 
 InsertResp insertResp = client.insert(insertReq);
 
-System.out.println(JSONObject.toJSON(insertResp));
+System.out.println(insertResp.getInsertCnt());
 
 // Output:
-// {"insertCnt": 1000}
+// 1000
 ```
 
 ```javascript
@@ -627,75 +636,31 @@ print(res)
 ```
 
 ```java
-// 4. Basic search with a JSON field
-List<List<Float>> query_vectors = Arrays.asList(Arrays.asList(0.3580376395471989f, -0.6023495712049978f, 0.18414012509913835f, -0.26286205330961354f, 0.9029438446296592f));
+// 4. Search with partition key
+List<BaseVector> query_vectors = Collections.singletonList(new FloatVec(new float[]{0.3580376395471989f, -0.6023495712049978f, 0.18414012509913835f, -0.26286205330961354f, 0.9029438446296592f}));
 
 SearchReq searchReq = SearchReq.builder()
-    .collectionName("test_collection")
-    .data(query_vectors)
-    .filter("color[\"label\"] in [\"red\"]")
-    .outputFields(Arrays.asList("id", "color"))
-    .topK(3)
-    .build();
+        .collectionName("test_collection")
+        .data(query_vectors)
+        .filter("color[\"label\"] in [\"red\"]")
+        .outputFields(Arrays.asList("id", "color"))
+        .topK(3)
+        .build();
 
 SearchResp searchResp = client.search(searchReq);
 
-System.out.println(JSONObject.toJSON(searchResp));
+List<List<SearchResp.SearchResult>> searchResults = searchResp.getSearchResults();
+for (List<SearchResp.SearchResult> results : searchResults) {
+    System.out.println("TopK results:");
+    for (SearchResp.SearchResult result : results) {
+        System.out.println(result);
+    }
+}
 
 // Output:
-// {"searchResults": [[
-//     {
-//         "distance": 1.2636482,
-//         "id": 290,
-//         "entity": {
-//             "color": {
-//                 "coord": [32,37,32],
-//                 "ref": [
-//                     ["green", "blue", "yellow"],
-//                     ["yellow", "pink", "pink"],
-//                     ["purple", "red", "brown"]
-//                 ],
-//                 "label": "red",
-//                 "tag": 8949
-//             },
-//             "id": 290
-//         }
-//     },
-//     {
-//         "distance": 1.002122,
-//         "id": 629,
-//         "entity": {
-//             "color": {
-//                 "coord": [23,5,35],
-//                 "ref": [
-//                     ["black", ""yellow", "black"],
-//                     ["black", "purple", "white"],
-//                     ["black", "brown", "orange"]
-//                 ],
-//                 "label": "red",
-//                 "tag": 5072
-//             },
-//             "id": 629
-//         }
-//     },
-//     {
-//         "distance": 0.9542817,
-//         "id": 279,
-//         "entity": {
-//             "color": {
-//                 "coord": [20,33,33],
-//                 "ref": [
-//                     ["yellow", "white", "brown"],
-//                     ["black", "white", "purple"],
-//                     ["green", "brown", "blue"]
-//                 ],
-//                 "label": "red",
-//                 "tag": 4704
-//             },
-//             "id": 279
-//         }
-//     }
-// ]]}
+// SearchResp.SearchResult(entity={color={"label":"red","tag":1018,"coord":[3,30,1],"ref":[["yellow","brown","orange"],["yellow","purple","blue"],["green","purple","purple"]]}, id=295}, score=1.1190735, id=295)
+// SearchResp.SearchResult(entity={color={"label":"red","tag":8141,"coord":[38,31,29],"ref":[["blue","white","white"],["green","orange","green"],["yellow","green","black"]]}, id=667}, score=1.0679582, id=667)
+// SearchResp.SearchResult(entity={color={"label":"red","tag":6837,"coord":[29,9,8],"ref":[["green","black","blue"],["purple","white","green"],["red","blue","black"]]}, id=927}, score=1.0029297, id=927)
 ```
 
 ```javascript
@@ -877,119 +842,28 @@ Milvus provides a set of advanced filters for scalar filtering in JSON fields. T
     ```java
     // 5. Advanced search within a JSON field
     searchReq = SearchReq.builder()
-        .collectionName("test_collection")
-        .data(query_vectors)
-        .filter("JSON_CONTAINS(color[\"ref\"], [\"purple\", \"pink\", \"orange\"])")
-        .outputFields(Arrays.asList("id", "color"))
-        .topK(3)
-        .build();
+            .collectionName("test_collection")
+            .data(query_vectors)
+            .filter("JSON_CONTAINS(color[\"ref\"], [\"purple\", \"pink\", \"orange\"])")
+            .outputFields(Arrays.asList("id", "color"))
+            .topK(3)
+            .build();
 
     searchResp = client.search(searchReq);
 
-    System.out.println(JSONObject.toJSON(searchResp));
+    searchResults = searchResp.getSearchResults();
+    for (List<SearchResp.SearchResult> results : searchResults) {
+        System.out.println("TopK results:");
+        for (SearchResp.SearchResult result : results) {
+            System.out.println(result);
+        }
+    }
 
     // Output:
-    // {"searchResults": [[
-    //     {
-    //         "distance": 1.1811467,
-    //         "id": 180,
-    //         "entity": {
-    //             "color": {
-    //                 "coord": [
-    //                     17,
-    //                     26,
-    //                     14
-    //                 ],
-    //                 "ref": [
-    //                     [
-    //                         "white",
-    //                         "black",
-    //                         "brown"
-    //                     ],
-    //                     [
-    //                         "purple",
-    //                         "pink",
-    //                         "orange"
-    //                     ],
-    //                     [
-    //                         "black",
-    //                         "pink",
-    //                         "red"
-    //                     ]
-    //                 ],
-    //                 "label": "green",
-    //                 "tag": 2470
-    //             },
-    //             "id": 180
-    //         }
-    //     },
-    //     {
-    //         "distance": 0.6487204,
-    //         "id": 331,
-    //         "entity": {
-    //             "color": {
-    //                 "coord": [
-    //                     16,
-    //                     32,
-    //                     23
-    //                 ],
-    //                 "ref": [
-    //                     [
-    //                         "purple",
-    //                         "pink",
-    //                         "orange"
-    //                     ],
-    //                     [
-    //                         "brown",
-    //                         "red",
-    //                         "orange"
-    //                     ],
-    //                     [
-    //                         "red",
-    //                         "yellow",
-    //                         "brown"
-    //                     ]
-    //                 ],
-    //                 "label": "white",
-    //                 "tag": 1236
-    //             },
-    //             "id": 331
-    //         }
-    //     },
-    //     {
-    //         "distance": 0.59387654,
-    //         "id": 483,
-    //         "entity": {
-    //             "color": {
-    //                 "coord": [
-    //                     8,
-    //                     33,
-    //                     2
-    //                 ],
-    //                 "ref": [
-    //                     [
-    //                         "red",
-    //                         "orange",
-    //                         "brown"
-    //                     ],
-    //                     [
-    //                         "purple",
-    //                         "pink",
-    //                         "orange"
-    //                     ],
-    //                     [
-    //                         "brown",
-    //                         "blue",
-    //                         "green"
-    //                     ]
-    //                 ],
-    //                 "label": "pink",
-    //                 "tag": 5686
-    //             },
-    //             "id": 483
-    //         }
-    //     }
-    // ]]}
+    // SearchResp.SearchResult(entity={color={"label":"pink","tag":2963,"coord":[15,33,30],"ref":[["green","white","white"],["purple","pink","orange"],["yellow","black","pink"]]}, id=273}, score=0.46558747, id=273)
+    // SearchResp.SearchResult(entity={color={"label":"pink","tag":4027,"coord":[32,34,19],"ref":[["red","white","blue"],["white","pink","yellow"],["purple","pink","orange"]]}, id=344}, score=0.2637315, id=344)
+    // SearchResp.SearchResult(entity={color={"label":"black","tag":1603,"coord":[33,12,23],"ref":[["pink","brown","black"],["black","purple","black"],["purple","pink","orange"]]}, id=205}, score=0.26133868, id=205)
+
     ```    
 
     ```javascript
@@ -1212,119 +1086,28 @@ Milvus provides a set of advanced filters for scalar filtering in JSON fields. T
 
     ```java
     searchReq = SearchReq.builder()
-        .collectionName("test_collection")
-        .data(query_vectors)
-        .filter("JSON_CONTAINS_ALL(color[\"coord\"], [4, 5])")
-        .outputFields(Arrays.asList("id", "color"))
-        .topK(3)
-        .build();
+            .collectionName("test_collection")
+            .data(query_vectors)
+            .filter("JSON_CONTAINS_ALL(color[\"coord\"], [4, 5])")
+            .outputFields(Arrays.asList("id", "color"))
+            .topK(3)
+            .build();
 
     searchResp = client.search(searchReq);
 
-    System.out.println(JSONObject.toJSON(searchResp));     
+    searchResults = searchResp.getSearchResults();
+    for (List<SearchResp.SearchResult> results : searchResults) {
+        System.out.println("TopK results:");
+        for (SearchResp.SearchResult result : results) {
+            System.out.println(result);
+        }
+    } 
 
     // Output:
-    // {"searchResults": [[
-    //     {
-    //         "distance": 0.77485126,
-    //         "id": 304,
-    //         "entity": {
-    //             "color": {
-    //                 "coord": [
-    //                     4,
-    //                     5,
-    //                     13
-    //                 ],
-    //                 "ref": [
-    //                     [
-    //                         "purple",
-    //                         "pink",
-    //                         "brown"
-    //                     ],
-    //                     [
-    //                         "orange",
-    //                         "red",
-    //                         "blue"
-    //                     ],
-    //                     [
-    //                         "yellow",
-    //                         "blue",
-    //                         "purple"
-    //                     ]
-    //                 ],
-    //                 "label": "blue",
-    //                 "tag": 7228
-    //             },
-    //             "id": 304
-    //         }
-    //     },
-    //     {
-    //         "distance": 0.68138736,
-    //         "id": 253,
-    //         "entity": {
-    //             "color": {
-    //                 "coord": [
-    //                     5,
-    //                     38,
-    //                     4
-    //                 ],
-    //                 "ref": [
-    //                     [
-    //                         "black",
-    //                         "pink",
-    //                         "blue"
-    //                     ],
-    //                     [
-    //                         "pink",
-    //                         "brown",
-    //                         "pink"
-    //                     ],
-    //                     [
-    //                         "red",
-    //                         "pink",
-    //                         "orange"
-    //                     ]
-    //                 ],
-    //                 "label": "blue",
-    //                 "tag": 6935
-    //             },
-    //             "id": 253
-    //         }
-    //     },
-    //     {
-    //         "distance": 0.56997097,
-    //         "id": 944,
-    //         "entity": {
-    //             "color": {
-    //                 "coord": [
-    //                     5,
-    //                     6,
-    //                     4
-    //                 ],
-    //                 "ref": [
-    //                     [
-    //                         "blue",
-    //                         "yellow",
-    //                         "orange"
-    //                     ],
-    //                     [
-    //                         "orange",
-    //                         "white",
-    //                         "orange"
-    //                     ],
-    //                     [
-    //                         "pink",
-    //                         "brown",
-    //                         "white"
-    //                     ]
-    //                 ],
-    //                 "label": "pink",
-    //                 "tag": 3325
-    //             },
-    //             "id": 944
-    //         }
-    //     }
-    // ]]}
+    // SearchResp.SearchResult(entity={color={"label":"green","tag":9899,"coord":[5,4,25],"ref":[["purple","black","yellow"],["orange","green","purple"],["red","purple","pink"]]}, id=708}, score=0.56576324, id=708)
+    // SearchResp.SearchResult(entity={color={"label":"red","tag":2176,"coord":[4,5,23],"ref":[["red","black","green"],["brown","orange","brown"],["brown","orange","yellow"]]}, id=981}, score=0.5656834, id=981)
+    // SearchResp.SearchResult(entity={color={"label":"pink","tag":3085,"coord":[5,3,4],"ref":[["yellow","orange","green"],["black","pink","red"],["orange","blue","blue"]]}, id=221}, score=0.3708634, id=221)
+
     ```    
 
     ```javascript
@@ -1519,119 +1302,27 @@ Milvus provides a set of advanced filters for scalar filtering in JSON fields. T
 
     ```java
     searchReq = SearchReq.builder()
-        .collectionName("test_collection")
-        .data(query_vectors)
-        .filter("JSON_CONTAINS_ANY(color[\"coord\"], [4, 5])")
-        .outputFields(Arrays.asList("id", "color"))
-        .topK(3)
-        .build();
+            .collectionName("test_collection")
+            .data(query_vectors)
+            .filter("JSON_CONTAINS_ANY(color[\"coord\"], [4, 5])")
+            .outputFields(Arrays.asList("id", "color"))
+            .topK(3)
+            .build();
 
     searchResp = client.search(searchReq);
-
-    System.out.println(JSONObject.toJSON(searchResp));   
+    searchResults = searchResp.getSearchResults();
+    for (List<SearchResp.SearchResult> results : searchResults) {
+        System.out.println("TopK results:");
+        for (SearchResp.SearchResult result : results) {
+            System.out.println(result);
+        }
+    } 
 
     // Output:
-    // {"searchResults": [[
-    //     {
-    //         "distance": 1.002122,
-    //         "id": 629,
-    //         "entity": {
-    //             "color": {
-    //                 "coord": [
-    //                     23,
-    //                     5,
-    //                     35
-    //                 ],
-    //                 "ref": [
-    //                     [
-    //                         "black",
-    //                         "yellow",
-    //                         "black"
-    //                     ],
-    //                     [
-    //                         "black",
-    //                         "purple",
-    //                         "white"
-    //                     ],
-    //                     [
-    //                         "black",
-    //                         "brown",
-    //                         "orange"
-    //                     ]
-    //                 ],
-    //                 "label": "red",
-    //                 "tag": 5072
-    //             },
-    //             "id": 629
-    //         }
-    //     },
-    //     {
-    //         "distance": 0.85788506,
-    //         "id": 108,
-    //         "entity": {
-    //             "color": {
-    //                 "coord": [
-    //                     25,
-    //                     5,
-    //                     38
-    //                 ],
-    //                 "ref": [
-    //                     [
-    //                         "green",
-    //                         "brown",
-    //                         "pink"
-    //                     ],
-    //                     [
-    //                         "purple",
-    //                         "green",
-    //                         "green"
-    //                     ],
-    //                     [
-    //                         "green",
-    //                         "pink",
-    //                         "black"
-    //                     ]
-    //                 ],
-    //                 "label": "orange",
-    //                 "tag": 8982
-    //             },
-    //             "id": 108
-    //         }
-    //     },
-    //     {
-    //         "distance": 0.80550396,
-    //         "id": 120,
-    //         "entity": {
-    //             "color": {
-    //                 "coord": [
-    //                     25,
-    //                     16,
-    //                     4
-    //                 ],
-    //                 "ref": [
-    //                     [
-    //                         "red",
-    //                         "green",
-    //                         "orange"
-    //                     ],
-    //                     [
-    //                         "blue",
-    //                         "pink",
-    //                         "blue"
-    //                     ],
-    //                     [
-    //                         "brown",
-    //                         "black",
-    //                         "green"
-    //                     ]
-    //                 ],
-    //                 "label": "purple",
-    //                 "tag": 6711
-    //             },
-    //             "id": 120
-    //         }
-    //     }
-    // ]]}
+    // SearchResp.SearchResult(entity={color={"label":"brown","tag":8414,"coord":[3,4,15],"ref":[["blue","green","pink"],["red","orange","pink"],["yellow","pink","green"]]}, id=11}, score=1.18235, id=11)
+    // SearchResp.SearchResult(entity={color={"label":"yellow","tag":2846,"coord":[20,4,15],"ref":[["white","black","purple"],["green","black","yellow"],["red","purple","brown"]]}, id=589}, score=1.1414992, id=589)
+    // SearchResp.SearchResult(entity={color={"label":"pink","tag":6744,"coord":[25,33,5],"ref":[["orange","purple","white"],["white","pink","brown"],["red","pink","red"]]}, id=567}, score=1.1087029, id=567)
+
     ```
 
     ```javascript

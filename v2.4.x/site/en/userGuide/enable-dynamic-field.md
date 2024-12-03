@@ -99,20 +99,25 @@ print(res)
 ```
 
 ```java
-import io.milvus.v2.client.ConnectConfig;
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 import io.milvus.v2.client.MilvusClientV2;
+import io.milvus.v2.client.ConnectConfig;
 import io.milvus.v2.common.DataType;
 import io.milvus.v2.common.IndexParam;
-import io.milvus.v2.service.collection.request.AddFieldReq;
-import io.milvus.v2.service.collection.request.CreateCollectionReq;
-import io.milvus.v2.service.collection.request.GetLoadStateReq;
+import io.milvus.v2.service.collection.request.*;
+import io.milvus.v2.service.vector.request.*;
+import io.milvus.v2.service.vector.request.data.*;
+import io.milvus.v2.service.vector.response.*;
+
+import java.util.*;
 
 String CLUSTER_ENDPOINT = "http://localhost:19530";
 
 // 1. Connect to Milvus server
 ConnectConfig connectConfig = ConnectConfig.builder()
-    .uri(CLUSTER_ENDPOINT)
-    .build();
+        .uri(CLUSTER_ENDPOINT)
+        .build();
 
 MilvusClientV2 client = new MilvusClientV2(connectConfig);
 
@@ -120,6 +125,7 @@ MilvusClientV2 client = new MilvusClientV2(connectConfig);
 
 // 2.1 Create schema
 CreateCollectionReq.CollectionSchema schema = client.createSchema();
+schema.setEnableDynamicField(true);
 
 // 2.2 Add fields to schema
 schema.addField(AddFieldReq.builder().fieldName("id").dataType(DataType.Int64).isPrimaryKey(true).autoID(false).build());
@@ -127,16 +133,18 @@ schema.addField(AddFieldReq.builder().fieldName("vector").dataType(DataType.Floa
 
 // 2.3 Prepare index parameters
 IndexParam indexParamForIdField = IndexParam.builder()
-    .fieldName("id")
-    .indexType(IndexParam.IndexType.STL_SORT)
-    .build();
+        .fieldName("id")
+        .indexType(IndexParam.IndexType.STL_SORT)
+        .build();
 
+Map<String, Object> params = new HashMap<>();
+params.put("nlist", 1024);
 IndexParam indexParamForVectorField = IndexParam.builder()
-    .fieldName("vector")
-    .indexType(IndexParam.IndexType.IVF_FLAT)
-    .metricType(IndexParam.MetricType.IP)
-    .extraParams(Map.of("nlist", 1024))
-    .build();
+        .fieldName("vector")
+        .indexType(IndexParam.IndexType.IVF_FLAT)
+        .metricType(IndexParam.MetricType.IP)
+        .extraParams(params)
+        .build();
 
 List<IndexParam> indexParams = new ArrayList<>();
 indexParams.add(indexParamForIdField);
@@ -144,11 +152,10 @@ indexParams.add(indexParamForVectorField);
 
 // 2.4 Create a collection with schema and index parameters
 CreateCollectionReq customizedSetupReq = CreateCollectionReq.builder()
-    .collectionName("customized_setup")
-    .collectionSchema(schema)
-    .indexParams(indexParams)
-    .enableDynamicField(true)
-    .build();
+        .collectionName("customized_setup")
+        .collectionSchema(schema)
+        .indexParams(indexParams)
+        .build();
 
 client.createCollection(customizedSetupReq);
 
@@ -156,8 +163,8 @@ Thread.sleep(5000);
 
 // 2.5 Get load state of the collection
 GetLoadStateReq customSetupLoadStateReq1 = GetLoadStateReq.builder()
-    .collectionName("customized_setup")
-    .build();
+        .collectionName("customized_setup")
+        .build();
 
 boolean res = client.getLoadState(customSetupLoadStateReq1);
 
@@ -264,22 +271,22 @@ print(data[0])
 
 ```java
 List<String> colors = Arrays.asList("green", "blue", "yellow", "red", "black", "white", "purple", "pink", "orange", "brown", "grey");
-List<JSONObject> data = new ArrayList<>();
-
+List<JsonObject> data = new ArrayList<>();
+Gson gson = new Gson();
+Random rand = new Random();
 for (int i=0; i<1000; i++) {
-    Random rand = new Random();
     String current_color = colors.get(rand.nextInt(colors.size()-1));
     int current_tag = rand.nextInt(8999) + 1000;
-    JSONObject row = new JSONObject();
-    row.put("id", Long.valueOf(i));
-    row.put("vector", Arrays.asList(rand.nextFloat(), rand.nextFloat(), rand.nextFloat(), rand.nextFloat(), rand.nextFloat()));
-    row.put("color", current_color);
-    row.put("tag", current_tag);
-    row.put("color_tag", current_color + "_" + String.valueOf(rand.nextInt(8999) + 1000));
+    JsonObject row = new JsonObject();
+    row.addProperty("id", (long) i);
+    row.add("vector", gson.toJsonTree(Arrays.asList(rand.nextFloat(), rand.nextFloat(), rand.nextFloat(), rand.nextFloat(), rand.nextFloat())));
+    row.addProperty("color", current_color);
+    row.addProperty("tag", current_tag);
+    row.addProperty("color_tag", current_color + "_" + (rand.nextInt(8999) + 1000));
     data.add(row);
 }
 
-System.out.println(JSONObject.toJSON(data.get(0)));
+System.out.println(data.get(0).toString());
 ```
 
 ```javascript
@@ -380,16 +387,16 @@ time.sleep(5)
 ```java
 // 3.1 Insert data into the collection
 InsertReq insertReq = InsertReq.builder()
-    .collectionName("customized_setup")
-    .data(data)
-    .build();
+        .collectionName("customized_setup")
+        .data(data)
+        .build();
 
 InsertResp insertResp = client.insert(insertReq);
 
-System.out.println(JSONObject.toJSON(insertResp));
+System.out.println(insertResp.getInsertCnt());
 
 // Output:
-// {"insertCnt": 1000}
+// 1000
 
 Thread.sleep(5000);
 ```
@@ -486,47 +493,30 @@ print(res)
 
 ```java
 // 4. Search with non-schema-defined fields
-List<List<Float>> queryVectors = Arrays.asList(Arrays.asList(0.3580376395471989f, -0.6023495712049978f, 0.18414012509913835f, -0.26286205330961354f, 0.9029438446296592f));
+List<BaseVector> queryVectors = Collections.singletonList(new FloatVec(new float[]{0.3580376395471989f, -0.6023495712049978f, 0.18414012509913835f, -0.26286205330961354f, 0.9029438446296592f}));
 
 SearchReq searchReq = SearchReq.builder()
-    .collectionName("customized_setup")
-    .data(queryVectors)
-    .filter("$meta[\"color\"] in [\"red\", \"green\"]")
-    .outputFields(List.of("id", "color_tag"))
-    .topK(3)
-    .build();
+        .collectionName("customized_setup")
+        .data(queryVectors)
+        .filter("$meta[\"color\"] in [\"red\", \"green\"]")
+        .outputFields(Arrays.asList("id", "color_tag"))
+        .topK(3)
+        .build();
 
 SearchResp searchResp = client.search(searchReq);
 
-System.out.println(JSONObject.toJSON(searchResp));
+List<List<SearchResp.SearchResult>> searchResults = searchResp.getSearchResults();
+for (List<SearchResp.SearchResult> results : searchResults) {
+    System.out.println("TopK results:");
+    for (SearchResp.SearchResult result : results) {
+        System.out.println(result);
+    }
+}
 
 // Output:
-// {"searchResults": [[
-//     {
-//         "distance": 1.3159835,
-//         "id": 979,
-//         "entity": {
-//             "color_tag": "red_7155",
-//             "id": 979
-//         }
-//     },
-//     {
-//         "distance": 1.0744804,
-//         "id": 44,
-//         "entity": {
-//             "color_tag": "green_8006",
-//             "id": 44
-//         }
-//     },
-//     {
-//         "distance": 1.0060014,
-//         "id": 617,
-//         "entity": {
-//             "color_tag": "red_4056",
-//             "id": 617
-//         }
-//     }
-// ]]}
+// SearchResp.SearchResult(entity={color_tag=green_2205, id=556}, score=1.134007, id=556)
+// SearchResp.SearchResult(entity={color_tag=red_2786, id=310}, score=0.9072295, id=310)
+// SearchResp.SearchResult(entity={color_tag=red_9493, id=215}, score=0.8819287, id=215)
 ```
 
 ```javascript
