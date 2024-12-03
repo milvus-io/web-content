@@ -77,7 +77,7 @@ To reduce the complexity in data inserts, Milvus allows you to specify a default
 Create a regular field schema:
 
 ```python
-from pymilvus import FieldSchema
+from pymilvus import DataType, FieldSchema
 id_field = FieldSchema(name="id", dtype=DataType.INT64, is_primary=True, description="primary id")
 age_field = FieldSchema(name="age", dtype=DataType.INT64, description="age")
 embedding_field = FieldSchema(name="embedding", dtype=DataType.FLOAT_VECTOR, dim=128, description="vector")
@@ -89,7 +89,7 @@ position_field = FieldSchema(name="position", dtype=DataType.VARCHAR, max_length
 Create a field schema with default field values:
 
 ```python
-from pymilvus import FieldSchema
+from pymilvus import DataType, FieldSchema
 
 fields = [
   FieldSchema(name="id", dtype=DataType.INT64, is_primary=True),
@@ -174,7 +174,7 @@ A collection schema is the logical definition of a collection. Usually you need 
 </div>
 
 ```python
-from pymilvus import FieldSchema, CollectionSchema
+from pymilvus import DataType, FieldSchema, CollectionSchema
 id_field = FieldSchema(name="id", dtype=DataType.INT64, is_primary=True, description="primary id")
 age_field = FieldSchema(name="age", dtype=DataType.INT64, description="age")
 embedding_field = FieldSchema(name="embedding", dtype=DataType.FLOAT_VECTOR, dim=128, description="vector")
@@ -189,7 +189,7 @@ schema = CollectionSchema(fields=[id_field, age_field, embedding_field], auto_id
 Create a collection with the schema specified:
 
 ```python
-from pymilvus import Collection,connections
+from pymilvus import Collection, connections
 conn = connections.connect(host="127.0.0.1", port=19530)
 collection_name1 = "tutorial_1"
 collection1 = Collection(name=collection_name1, schema=schema, using='default', shards_num=2)
@@ -207,6 +207,7 @@ collection1 = Collection(name=collection_name1, schema=schema, using='default', 
 You can also create a collection with <code>Collection.construct_from_dataframe</code>, which automatically generates a collection schema from DataFrame and creates a collection.
 
 ```python
+from pymilvus import Collection
 import pandas as pd
 df = pd.DataFrame({
     "id": [i for i in range(nb)],
