@@ -45,7 +45,7 @@ summary: >-
     </button></h2><p>Full text search simplifies the process of text-based searching by eliminating the need for manual embedding. This feature operates through the following workflow:​</p>
 <ol>
 <li><p><strong>Text input</strong>: You insert raw text documents or provide query text without any need for manual embedding.​</p></li>
-<li><p><strong>Text analysis</strong>: Milvus uses an analyzer to tokenize input text into individual, searchable terms.​</p></li>
+<li><p><strong>Text analysis</strong>: Milvus uses an analyzer to tokenize input text into individual, searchable terms.​ For more information on analyzers, refer to <a href="/docs/analyzer-overview.md">Analyzer Overview</a>.</p></li>
 <li><p><strong>Function processing</strong>: The built-in function receives tokenized terms and converts them into sparse vector representations.​</p></li>
 <li><p><strong>Collection store</strong>: Milvus stores these sparse embeddings in a collection for efficient retrieval.​</p></li>
 <li><p><strong>BM25 scoring</strong>: During a search, Milvus applies the BM25 algorithm to calculate scores for the stored documents and ranks matched results based on relevance to the query text.​</p></li>

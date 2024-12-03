@@ -253,7 +253,7 @@ title: Metric Types
 <ul>
 <li><p><code translate="no">​Q</code>: The query text provided by the user.​</p></li>
 <li><p><code translate="no">​D</code>: The document being evaluated.​</p></li>
-<li><p><code translate="no">​TF(qi​,D)</code>: Term frequency, representing how often term ​qi​appears in document ​D.​</p></li>
+<li><p><code translate="no">​TF(qi​,D)</code>: Term frequency, representing how often term <code translate="no">​qi</code> ​appears in document <code translate="no">​D</code>.​</p></li>
 <li><p><code translate="no">​IDF(qi​)</code>: Inverse document frequency, calculated as:​</p>
 <p>
   <span class="img-wrapper">
