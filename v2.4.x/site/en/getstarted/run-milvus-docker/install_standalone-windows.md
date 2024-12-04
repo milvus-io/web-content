@@ -130,7 +130,7 @@ Once you have installed Docker Desktop on Microsoft Windows, you can access the 
     C:\>Invoke-WebRequest https://github.com/milvus-io/milvus/releases/download/v2.4.15/milvus-standalone-docker-compose.yml -OutFile docker-compose.yml​
     ​
     # Start Milvus​
-    C:\>docker-compose up -d​
+    C:\>docker compose up -d​
     Creating milvus-etcd  ... done​
     Creating milvus-minio ... done​
     Creating milvus-standalone ... done​
@@ -170,7 +170,7 @@ The procedure is similar to using Docker Compose to install Milvus in Linux syst
 3. Start Milvus.​
 
     ```shell
-    $ sudo docker-compose up -d​
+    $ sudo docker compose up -d​
     ​
     Creating milvus-etcd  ... done​
     Creating milvus-minio ... done​

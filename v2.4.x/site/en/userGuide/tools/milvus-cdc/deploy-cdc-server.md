@@ -149,6 +149,6 @@ After saving the `cdc.yaml` file, navigate to the `milvus-cdc` directory and run
 - Using Docker Compose:
 
     ```bash
-    docker-compose up -d
+    docker compose up -d
     ```
 
