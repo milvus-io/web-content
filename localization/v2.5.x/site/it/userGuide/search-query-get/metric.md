@@ -54,7 +54,7 @@ title: Tipi metrici
 <div class="alert note">
 <ul>
 <li><p>Per i campi vettoriali del tipo <code translate="no">SPARSE_FLOAT_VECTOR</code>, utilizzare il tipo di metrica <code translate="no">BM25</code> solo quando si esegue la ricerca a testo completo. Per ulteriori informazioni, consultare la sezione <a href="/docs/it/full-text-search.md">Ricerca a testo completo</a>.</p></li>
-<li><p>Per i campi vettoriali del tipo <code translate="no">BINARY_VECTOR</code>, il valore di dimensione (<code translate="no">dim</code>) deve essere un multiplo di 8. </p></li>
+<li><p>Per i campi vettoriali di tipo <code translate="no">BINARY_VECTOR</code>, il valore della dimensione (<code translate="no">dim</code>) deve essere un multiplo di 8. </p></li>
 </ul>
 </div>
 <p>La tabella seguente riassume le caratteristiche dei valori della distanza di similarità di tutti i tipi di metrica supportati e il loro intervallo di valori.</p>
@@ -129,7 +129,7 @@ title: Tipi metrici
    </span> <span class="img-wrapper"> <span>Formula del prodotto interno</span> </span></p>
 <p>L'IP è più utile se si devono confrontare dati non normalizzati o se si tiene conto della grandezza e dell'angolo.</p>
 <div class="alert note">
-<p>Se si utilizza l'IP per calcolare le somiglianze tra embedding, è necessario normalizzare gli embedding. Dopo la normalizzazione, il prodotto interno equivale alla somiglianza del coseno.</p>
+<p>Se si utilizza l'IP per calcolare le somiglianze tra embeddings, è necessario normalizzare le embeddings. Dopo la normalizzazione, il prodotto interno equivale alla somiglianza del coseno.</p>
 </div>
 <p>Supponiamo che X' sia normalizzato dall'incorporamento X.</p>
 <p>
@@ -237,7 +237,7 @@ title: Tipi metrici
 <ul>
 <li><p><code translate="no">​Q</code>: Il testo della query fornito dall'utente.</p></li>
 <li><p><code translate="no">​D</code>: Il documento da valutare.</p></li>
-<li><p><code translate="no">​TF(qi​,D)</code>: Frequenza del termine, che rappresenta la frequenza con cui il termine qiappare nel documento D.</p></li>
+<li><p><code translate="no">​TF(qi​,D)</code>: Frequenza dei termini, che rappresenta la frequenza con cui il termine <code translate="no">​qi</code> compare nel documento <code translate="no">​D</code>.</p></li>
 <li><p><code translate="no">​IDF(qi​)</code>: Frequenza inversa del documento, calcolata come.</p>
 <p>
   

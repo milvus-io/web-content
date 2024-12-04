@@ -79,33 +79,37 @@ data = []
 
 <span class="hljs-built_in">print</span>(data[<span class="hljs-number">0</span>])
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java"><span class="hljs-title class_">List</span>&lt;<span class="hljs-title class_">String</span>&gt; colors = <span class="hljs-title class_">Arrays</span>.<span class="hljs-title function_">asList</span>(<span class="hljs-string">&quot;green&quot;</span>, <span class="hljs-string">&quot;blue&quot;</span>, <span class="hljs-string">&quot;yellow&quot;</span>, <span class="hljs-string">&quot;red&quot;</span>, <span class="hljs-string">&quot;black&quot;</span>, <span class="hljs-string">&quot;white&quot;</span>, <span class="hljs-string">&quot;purple&quot;</span>, <span class="hljs-string">&quot;pink&quot;</span>, <span class="hljs-string">&quot;orange&quot;</span>, <span class="hljs-string">&quot;brown&quot;</span>, <span class="hljs-string">&quot;grey&quot;</span>);
-<span class="hljs-title class_">List</span>&lt;<span class="hljs-title class_">JSON</span><span class="hljs-built_in">Object</span>&gt; data = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();
+<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> com.google.gson.Gson;
+<span class="hljs-keyword">import</span> com.google.gson.JsonObject;
 
-<span class="hljs-keyword">for</span> (int i=<span class="hljs-number">0</span>; i&lt;<span class="hljs-number">1000</span>; i++) {
-    <span class="hljs-title class_">Random</span> rand = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Random</span>();
-    <span class="hljs-title class_">String</span> current_color = colors.<span class="hljs-title function_">get</span>(rand.<span class="hljs-title function_">nextInt</span>(colors.<span class="hljs-title function_">size</span>()-<span class="hljs-number">1</span>));
-    <span class="hljs-title class_">Long</span> current_tag = rand.<span class="hljs-title function_">nextLong</span>(8999L) + 1000L;
+<span class="hljs-keyword">import</span> java.util.*;
+
+List&lt;String&gt; colors = Arrays.asList(<span class="hljs-string">&quot;green&quot;</span>, <span class="hljs-string">&quot;blue&quot;</span>, <span class="hljs-string">&quot;yellow&quot;</span>, <span class="hljs-string">&quot;red&quot;</span>, <span class="hljs-string">&quot;black&quot;</span>, <span class="hljs-string">&quot;white&quot;</span>, <span class="hljs-string">&quot;purple&quot;</span>, <span class="hljs-string">&quot;pink&quot;</span>, <span class="hljs-string">&quot;orange&quot;</span>, <span class="hljs-string">&quot;brown&quot;</span>, <span class="hljs-string">&quot;grey&quot;</span>);
+List&lt;JsonObject&gt; data = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();
+
+<span class="hljs-type">Gson</span> <span class="hljs-variable">gson</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Gson</span>();
+<span class="hljs-type">Random</span> <span class="hljs-variable">rand</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Random</span>();
+<span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i=<span class="hljs-number">0</span>; i&lt;<span class="hljs-number">1000</span>; i++) {
+    <span class="hljs-type">String</span> <span class="hljs-variable">current_color</span> <span class="hljs-operator">=</span> colors.get(rand.nextInt(colors.size()-<span class="hljs-number">1</span>));
+    <span class="hljs-type">Integer</span> <span class="hljs-variable">current_tag</span> <span class="hljs-operator">=</span> rand.nextInt(<span class="hljs-number">8999</span>) + <span class="hljs-number">1000</span>;
 
     <span class="hljs-comment">// Generate an random-sized array</span>
-    <span class="hljs-title class_">Long</span> capacity = rand.<span class="hljs-title function_">nextLong</span>(5L) + 1L;
-    <span class="hljs-title class_">List</span>&lt;<span class="hljs-title class_">Long</span>&gt; current_coord = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();
-    current_coord.<span class="hljs-title function_">add</span>(rand.<span class="hljs-title function_">nextLong</span>(40L) + 1L);
-    current_coord.<span class="hljs-title function_">add</span>(rand.<span class="hljs-title function_">nextLong</span>(40L) + 1L);
-    <span class="hljs-keyword">for</span> (int j=<span class="hljs-number">3</span>; j&lt;capacity; j++) {
-        current_coord.<span class="hljs-title function_">add</span>(rand.<span class="hljs-title function_">nextLong</span>(40L) + 1L);
+    <span class="hljs-type">int</span> <span class="hljs-variable">capacity</span> <span class="hljs-operator">=</span> rand.nextInt(<span class="hljs-number">5</span>) + <span class="hljs-number">1</span>;
+    List&lt;Integer&gt; current_coord = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();
+    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> j=<span class="hljs-number">0</span>; j&lt;capacity; j++) {
+        current_coord.add(rand.nextInt(<span class="hljs-number">40</span>));
     }
 
-    <span class="hljs-title class_">JSON</span><span class="hljs-built_in">Object</span> row = <span class="hljs-keyword">new</span> <span class="hljs-title class_">JSON</span><span class="hljs-built_in">Object</span>();
-    row.<span class="hljs-title function_">put</span>(<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-title class_">Long</span>.<span class="hljs-title function_">valueOf</span>(i));
-    row.<span class="hljs-title function_">put</span>(<span class="hljs-string">&quot;vector&quot;</span>, <span class="hljs-title class_">Arrays</span>.<span class="hljs-title function_">asList</span>(rand.<span class="hljs-title function_">nextFloat</span>(), rand.<span class="hljs-title function_">nextFloat</span>(), rand.<span class="hljs-title function_">nextFloat</span>(), rand.<span class="hljs-title function_">nextFloat</span>(), rand.<span class="hljs-title function_">nextFloat</span>()));
-    row.<span class="hljs-title function_">put</span>(<span class="hljs-string">&quot;color&quot;</span>, current_color);
-    row.<span class="hljs-title function_">put</span>(<span class="hljs-string">&quot;color_tag&quot;</span>, current_tag);
-    row.<span class="hljs-title function_">put</span>(<span class="hljs-string">&quot;color_coord&quot;</span>, current_coord);
-    data.<span class="hljs-title function_">add</span>(row);
+    <span class="hljs-type">JsonObject</span> <span class="hljs-variable">row</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">JsonObject</span>();
+    row.addProperty(<span class="hljs-string">&quot;id&quot;</span>, (<span class="hljs-type">long</span>) i);
+    row.add(<span class="hljs-string">&quot;vector&quot;</span>, gson.toJsonTree(Arrays.asList(rand.nextFloat(), rand.nextFloat(), rand.nextFloat(), rand.nextFloat(), rand.nextFloat())));
+    row.addProperty(<span class="hljs-string">&quot;color&quot;</span>, current_color);
+    row.addProperty(<span class="hljs-string">&quot;color_tag&quot;</span>, current_tag);
+    row.add(<span class="hljs-string">&quot;color_coord&quot;</span>, gson.toJsonTree(current_coord));
+    data.add(row);
 }
 
-<span class="hljs-title class_">System</span>.<span class="hljs-property">out</span>.<span class="hljs-title function_">println</span>(<span class="hljs-title class_">JSON</span><span class="hljs-built_in">Object</span>.<span class="hljs-title function_">toJSON</span>(data.<span class="hljs-title function_">get</span>(<span class="hljs-number">0</span>)));   
+System.out.println(data.get(<span class="hljs-number">0</span>));
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> colors = [<span class="hljs-string">&quot;green&quot;</span>, <span class="hljs-string">&quot;blue&quot;</span>, <span class="hljs-string">&quot;yellow&quot;</span>, <span class="hljs-string">&quot;red&quot;</span>, <span class="hljs-string">&quot;black&quot;</span>, <span class="hljs-string">&quot;white&quot;</span>, <span class="hljs-string">&quot;purple&quot;</span>, <span class="hljs-string">&quot;pink&quot;</span>, <span class="hljs-string">&quot;orange&quot;</span>, <span class="hljs-string">&quot;brown&quot;</span>, <span class="hljs-string">&quot;grey&quot;</span>];
 <span class="hljs-keyword">let</span> data = [];
@@ -169,9 +173,14 @@ data = []
 
 client = <span class="hljs-title class_">MilvusClient</span>(uri=<span class="hljs-variable constant_">SERVER_ADDR</span>)
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.client.ConnectConfig;
-<span class="hljs-keyword">import</span> io.milvus.v2.client.MilvusClientV2;
+<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.client.MilvusClientV2;
+<span class="hljs-keyword">import</span> io.milvus.v2.client.ConnectConfig;
 <span class="hljs-keyword">import</span> io.milvus.v2.common.DataType;
+<span class="hljs-keyword">import</span> io.milvus.v2.common.IndexParam;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.*;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.index.request.CreateIndexReq;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.*;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.response.*;
 
 <span class="hljs-type">String</span> <span class="hljs-variable">SERVER_ADDR</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;http://localhost:19530&quot;</span>;
 
@@ -246,35 +255,35 @@ CreateCollectionReq.<span class="hljs-type">CollectionSchema</span> <span class=
 
 <span class="hljs-comment">// Add fields to schema</span>
 schema.addField(AddFieldReq.builder()
-    .fieldName(<span class="hljs-string">&quot;id&quot;</span>)
-    .dataType(DataType.Int64)
-    .isPrimaryKey(<span class="hljs-literal">true</span>)
-    .autoID(<span class="hljs-literal">false</span>)
-    .build());
+        .fieldName(<span class="hljs-string">&quot;id&quot;</span>)
+        .dataType(DataType.Int64)
+        .isPrimaryKey(<span class="hljs-literal">true</span>)
+        .autoID(<span class="hljs-literal">false</span>)
+        .build());
 
 schema.addField(AddFieldReq.builder()
-    .fieldName(<span class="hljs-string">&quot;vector&quot;</span>)
-    .dataType(DataType.FloatVector)
-    .dimension(<span class="hljs-number">5</span>)
-    .build());
-    
-schema.addField(AddFieldReq.builder()
-    .fieldName(<span class="hljs-string">&quot;color&quot;</span>)
-    .dataType(DataType.VarChar)
-    .maxLength(<span class="hljs-number">512</span>)
-    .build());
+        .fieldName(<span class="hljs-string">&quot;vector&quot;</span>)
+        .dataType(DataType.FloatVector)
+        .dimension(<span class="hljs-number">5</span>)
+        .build());
 
 schema.addField(AddFieldReq.builder()
-    .fieldName(<span class="hljs-string">&quot;color_tag&quot;</span>)
-    .dataType(DataType.Int64)
-    .build());
+        .fieldName(<span class="hljs-string">&quot;color&quot;</span>)
+        .dataType(DataType.VarChar)
+        .maxLength(<span class="hljs-number">512</span>)
+        .build());
 
 schema.addField(AddFieldReq.builder()
-    .fieldName(<span class="hljs-string">&quot;color_coord&quot;</span>)
-    .dataType(DataType.Array)
-    .elementType(DataType.Int64)
-    .maxCapacity(<span class="hljs-number">5</span>)
-    .build());
+        .fieldName(<span class="hljs-string">&quot;color_tag&quot;</span>)
+        .dataType(DataType.Int64)
+        .build());
+
+schema.addField(AddFieldReq.builder()
+        .fieldName(<span class="hljs-string">&quot;color_coord&quot;</span>)
+        .dataType(DataType.Array)
+        .elementType(DataType.Int64)
+        .maxCapacity(<span class="hljs-number">5</span>)
+        .build());
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> fields = [
     {
@@ -460,16 +469,16 @@ client.describe_index(collection_name=<span class="hljs-string">&quot;test_colle
 #  <span class="hljs-string">&#x27;field_name&#x27;</span>: <span class="hljs-string">&#x27;color_coord&#x27;</span>,
 #  <span class="hljs-string">&#x27;index_name&#x27;</span>: <span class="hljs-string">&#x27;inverted_index&#x27;</span>}
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java"><span class="hljs-type">IndexParam</span> <span class="hljs-variable">indexParam</span> <span class="hljs-operator">=</span> IndexParam.builder()
-        .indexType(IndexParam.IndexType.INVERTED)
-        .fieldName(<span class="hljs-string">&quot;color_coord&quot;</span>)
-        .indexName(<span class="hljs-string">&quot;inverted_index&quot;</span>)
-        .build();
-<span class="hljs-type">CreateIndexReq</span> <span class="hljs-variable">createIndexReq</span> <span class="hljs-operator">=</span> CreateIndexReq.builder()
-        .collectionName(<span class="hljs-string">&quot;test_collection&quot;</span>)
-        .indexParams(Collections.singletonList(indexParam))
-        .build();
-client.createIndex(createIndexReq);
+<pre><code translate="no" class="language-java">indexParam = <span class="hljs-title class_">IndexParam</span>.<span class="hljs-title function_">builder</span>()
+        .<span class="hljs-title function_">indexType</span>(<span class="hljs-title class_">IndexParam</span>.<span class="hljs-property">IndexType</span>.<span class="hljs-property">INVERTED</span>)
+        .<span class="hljs-title function_">fieldName</span>(<span class="hljs-string">&quot;color_coord&quot;</span>)
+        .<span class="hljs-title function_">indexName</span>(<span class="hljs-string">&quot;inverted_index&quot;</span>)
+        .<span class="hljs-title function_">build</span>();
+createIndexReq = <span class="hljs-title class_">CreateIndexReq</span>.<span class="hljs-title function_">builder</span>()
+        .<span class="hljs-title function_">collectionName</span>(<span class="hljs-string">&quot;test_collection&quot;</span>)
+        .<span class="hljs-title function_">indexParams</span>(<span class="hljs-title class_">Collections</span>.<span class="hljs-title function_">singletonList</span>(indexParam))
+        .<span class="hljs-title function_">build</span>();
+client.<span class="hljs-title function_">createIndex</span>(createIndexReq);
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-keyword">await</span> client.createIndex({
     collection_name: <span class="hljs-string">&quot;test_collection&quot;</span>,
@@ -633,49 +642,23 @@ res = client.search(
 <span class="hljs-comment"># data: [&quot;[{&#x27;id&#x27;: 918, &#x27;distance&#x27;: 0.974249541759491, &#x27;entity&#x27;: {&#x27;color_coord&#x27;: [4, 34, 9, 18, 29], &#x27;id&#x27;: 918, &#x27;color&#x27;: &#x27;purple&#x27;, &#x27;color_tag&#x27;: 2940}}, {&#x27;id&#x27;: 822, &#x27;distance&#x27;: 0.9177230000495911, &#x27;entity&#x27;: {&#x27;color_coord&#x27;: [7, 36, 32], &#x27;id&#x27;: 822, &#x27;color&#x27;: &#x27;red&#x27;, &#x27;color_tag&#x27;: 8519}}, {&#x27;id&#x27;: 981, &#x27;distance&#x27;: 0.9116519689559937, &#x27;entity&#x27;: {&#x27;color_coord&#x27;: [7, 16, 40, 32, 32], &#x27;id&#x27;: 981, &#x27;color&#x27;: &#x27;pink&#x27;, &#x27;color_tag&#x27;: 2992}}]&quot;] , extra_info: {&#x27;cost&#x27;: 0}</span>
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-java"><span class="hljs-comment">// 4. Basic search with an Array field</span>
+<span class="hljs-type">QueryReq</span> <span class="hljs-variable">queryReq</span> <span class="hljs-operator">=</span> QueryReq.builder()
+        .collectionName(<span class="hljs-string">&quot;test_collection&quot;</span>)
+        .filter(<span class="hljs-string">&quot;color_coord[0] in [7, 8, 9]&quot;</span>)
+        .outputFields(Arrays.asList(<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-string">&quot;color&quot;</span>, <span class="hljs-string">&quot;color_tag&quot;</span>, <span class="hljs-string">&quot;color_coord&quot;</span>))
+        .limit(<span class="hljs-number">3L</span>)
+        .build();
 
-<span class="hljs-title class_">QueryReq</span> queryReq = <span class="hljs-title class_">QueryReq</span>.<span class="hljs-title function_">builder</span>()
-    .<span class="hljs-title function_">collectionName</span>(<span class="hljs-string">&quot;test_collection&quot;</span>)
-    .<span class="hljs-title function_">filter</span>(<span class="hljs-string">&quot;color_coord[0] in [7, 8, 9]&quot;</span>)
-    .<span class="hljs-title function_">outputFields</span>(<span class="hljs-title class_">Arrays</span>.<span class="hljs-title function_">asList</span>(<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-string">&quot;color&quot;</span>, <span class="hljs-string">&quot;color_tag&quot;</span>, <span class="hljs-string">&quot;color_coord&quot;</span>))
-    .<span class="hljs-title function_">limit</span>(3L)
-    .<span class="hljs-title function_">build</span>();
+<span class="hljs-type">QueryResp</span> <span class="hljs-variable">queryResp</span> <span class="hljs-operator">=</span> client.query(queryReq);
 
-<span class="hljs-title class_">QueryResp</span> queryResp = client.<span class="hljs-title function_">query</span>(queryReq);
-
-<span class="hljs-title class_">System</span>.<span class="hljs-property">out</span>.<span class="hljs-title function_">println</span>(<span class="hljs-title class_">JSON</span><span class="hljs-built_in">Object</span>.<span class="hljs-title function_">toJSON</span>(queryResp));
+System.out.println(queryResp.getQueryResults());
 
 <span class="hljs-comment">// Output:</span>
-<span class="hljs-comment">// {&quot;queryResults&quot;: [</span>
-<span class="hljs-comment">//     {&quot;entity&quot;: {</span>
-<span class="hljs-comment">//         &quot;color&quot;: &quot;orange&quot;,</span>
-<span class="hljs-comment">//         &quot;color_tag&quot;: 2464,</span>
-<span class="hljs-comment">//         &quot;id&quot;: 18,</span>
-<span class="hljs-comment">//         &quot;color_coord&quot;: [</span>
-<span class="hljs-comment">//             9,</span>
-<span class="hljs-comment">//             30</span>
-<span class="hljs-comment">//         ]</span>
-<span class="hljs-comment">//     }},</span>
-<span class="hljs-comment">//     {&quot;entity&quot;: {</span>
-<span class="hljs-comment">//         &quot;color&quot;: &quot;pink&quot;,</span>
-<span class="hljs-comment">//         &quot;color_tag&quot;: 2602,</span>
-<span class="hljs-comment">//         &quot;id&quot;: 22,</span>
-<span class="hljs-comment">//         &quot;color_coord&quot;: [</span>
-<span class="hljs-comment">//             8,</span>
-<span class="hljs-comment">//             34,</span>
-<span class="hljs-comment">//             16</span>
-<span class="hljs-comment">//         ]</span>
-<span class="hljs-comment">//     }},</span>
-<span class="hljs-comment">//     {&quot;entity&quot;: {</span>
-<span class="hljs-comment">//         &quot;color&quot;: &quot;pink&quot;,</span>
-<span class="hljs-comment">//         &quot;color_tag&quot;: 1243,</span>
-<span class="hljs-comment">//         &quot;id&quot;: 42,</span>
-<span class="hljs-comment">//         &quot;color_coord&quot;: [</span>
-<span class="hljs-comment">//             9,</span>
-<span class="hljs-comment">//             20</span>
-<span class="hljs-comment">//         ]</span>
-<span class="hljs-comment">//     }}</span>
-<span class="hljs-comment">// ]}</span>
+<span class="hljs-comment">// [</span>
+<span class="hljs-comment">//  QueryResp.QueryResult(entity={color=black, color_tag=6107, id=8, color_coord=[8, 19, 31, 10]}), </span>
+<span class="hljs-comment">//  QueryResp.QueryResult(entity={color=blue, color_tag=3252, id=11, color_coord=[7, 16, 1]}),</span>
+<span class="hljs-comment">//  QueryResp.QueryResult(entity={color=blue, color_tag=3069, id=16, color_coord=[9, 16, 19]})</span>
+<span class="hljs-comment">// ]</span>
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> query_vectors = [<span class="hljs-title class_">Array</span>(<span class="hljs-number">5</span>).<span class="hljs-title function_">fill</span>(<span class="hljs-number">0</span>).<span class="hljs-title function_">map</span>(<span class="hljs-function">() =&gt;</span> <span class="hljs-title class_">Math</span>.<span class="hljs-title function_">random</span>())];
 
@@ -770,51 +753,23 @@ res = client.query(
 <span class="hljs-comment"># data: [&quot;{&#x27;id&#x27;: 2, &#x27;color&#x27;: &#x27;green&#x27;, &#x27;color_tag&#x27;: 3676, &#x27;color_coord&#x27;: [26, 37, 30, 10]}&quot;, &quot;{&#x27;id&#x27;: 28, &#x27;color&#x27;: &#x27;red&#x27;, &#x27;color_tag&#x27;: 4735, &#x27;color_coord&#x27;: [30, 10, 40, 34]}&quot;, &quot;{&#x27;id&#x27;: 32, &#x27;color&#x27;: &#x27;green&#x27;, &#x27;color_tag&#x27;: 8816, &#x27;color_coord&#x27;: [10, 9, 24, 39]}&quot;] , extra_info: {&#x27;cost&#x27;: 0}</span>
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-java"><span class="hljs-comment">// 5. Advanced query within an Array field</span>
-queryReq = <span class="hljs-title class_">QueryReq</span>.<span class="hljs-title function_">builder</span>()
-    .<span class="hljs-title function_">collectionName</span>(<span class="hljs-string">&quot;test_collection&quot;</span>)
-    .<span class="hljs-title function_">filter</span>(<span class="hljs-string">&quot;ARRAY_CONTAINS(color_coord, 10)&quot;</span>)
-    .<span class="hljs-title function_">outputFields</span>(<span class="hljs-title class_">Arrays</span>.<span class="hljs-title function_">asList</span>(<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-string">&quot;color&quot;</span>, <span class="hljs-string">&quot;color_tag&quot;</span>, <span class="hljs-string">&quot;color_coord&quot;</span>))
-    .<span class="hljs-title function_">limit</span>(<span class="hljs-number">3</span>)
-    .<span class="hljs-title function_">build</span>();
+queryReq = QueryReq.builder()
+        .collectionName(<span class="hljs-string">&quot;test_collection&quot;</span>)
+        .filter(<span class="hljs-string">&quot;ARRAY_CONTAINS(color_coord, 10)&quot;</span>)
+        .outputFields(Arrays.asList(<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-string">&quot;color&quot;</span>, <span class="hljs-string">&quot;color_tag&quot;</span>, <span class="hljs-string">&quot;color_coord&quot;</span>))
+        .limit(<span class="hljs-number">3</span>)
+        .build();
 
-queryResp = client.<span class="hljs-title function_">query</span>(queryReq);
+queryResp = client.query(queryReq);
 
-<span class="hljs-title class_">System</span>.<span class="hljs-property">out</span>.<span class="hljs-title function_">println</span>(<span class="hljs-title class_">JSON</span><span class="hljs-built_in">Object</span>.<span class="hljs-title function_">toJSON</span>(queryResp));
+System.out.<span class="hljs-built_in">println</span>(queryResp.getQueryResults());
 
 <span class="hljs-comment">// Output:</span>
-<span class="hljs-comment">// {&quot;queryResults&quot;: [</span>
-<span class="hljs-comment">//     {&quot;entity&quot;: {</span>
-<span class="hljs-comment">//         &quot;color&quot;: &quot;blue&quot;,</span>
-<span class="hljs-comment">//         &quot;color_tag&quot;: 4337,</span>
-<span class="hljs-comment">//         &quot;id&quot;: 17,</span>
-<span class="hljs-comment">//         &quot;color_coord&quot;: [</span>
-<span class="hljs-comment">//             11,</span>
-<span class="hljs-comment">//             33,</span>
-<span class="hljs-comment">//             10,</span>
-<span class="hljs-comment">//             20</span>
-<span class="hljs-comment">//         ]</span>
-<span class="hljs-comment">//     }},</span>
-<span class="hljs-comment">//     {&quot;entity&quot;: {</span>
-<span class="hljs-comment">//         &quot;color&quot;: &quot;white&quot;,</span>
-<span class="hljs-comment">//         &quot;color_tag&quot;: 5219,</span>
-<span class="hljs-comment">//         &quot;id&quot;: 25,</span>
-<span class="hljs-comment">//         &quot;color_coord&quot;: [</span>
-<span class="hljs-comment">//             10,</span>
-<span class="hljs-comment">//             15</span>
-<span class="hljs-comment">//         ]</span>
-<span class="hljs-comment">//     }},</span>
-<span class="hljs-comment">//     {&quot;entity&quot;: {</span>
-<span class="hljs-comment">//         &quot;color&quot;: &quot;red&quot;,</span>
-<span class="hljs-comment">//         &quot;color_tag&quot;: 7120,</span>
-<span class="hljs-comment">//         &quot;id&quot;: 35,</span>
-<span class="hljs-comment">//         &quot;color_coord&quot;: [</span>
-<span class="hljs-comment">//             19,</span>
-<span class="hljs-comment">//             10,</span>
-<span class="hljs-comment">//             10,</span>
-<span class="hljs-comment">//             14</span>
-<span class="hljs-comment">//         ]</span>
-<span class="hljs-comment">//     }}</span>
-<span class="hljs-comment">// ]}</span>
+<span class="hljs-comment">// [</span>
+<span class="hljs-comment">//    QueryResp.QueryResult(entity={color=black, color_tag=6107, id=8, color_coord=[8, 19, 31, 10]}), </span>
+<span class="hljs-comment">//    QueryResp.QueryResult(entity={color=brown, color_tag=7727, id=17, color_coord=[1, 10, 16, 29]}), </span>
+<span class="hljs-comment">//    QueryResp.QueryResult(entity={color=orange, color_tag=8128, id=26, color_coord=[10, 16, 3, 3]})</span>
+<span class="hljs-comment">// ]</span>
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-comment">// 5. Advanced search within the array field</span>
 res = <span class="hljs-keyword">await</span> client.<span class="hljs-title function_">search</span>({
@@ -885,29 +840,22 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 # Output:
 # data: [<span class="hljs-string">&quot;{&#x27;id&#x27;: 147, &#x27;color&#x27;: &#x27;brown&#x27;, &#x27;color_tag&#x27;: 1287, &#x27;color_coord&#x27;: [7, 8, 11, 0]}&quot;</span>, <span class="hljs-string">&quot;{&#x27;id&#x27;: 257, &#x27;color&#x27;: &#x27;white&#x27;, &#x27;color_tag&#x27;: 3641, &#x27;color_coord&#x27;: [2, 8, 31, 7]}&quot;</span>, <span class="hljs-string">&quot;{&#x27;id&#x27;: 280, &#x27;color&#x27;: &#x27;orange&#x27;, &#x27;color_tag&#x27;: 1072, &#x27;color_coord&#x27;: [22, 7, 8]}&quot;</span>] , extra_info: {<span class="hljs-string">&#x27;cost&#x27;</span>: <span class="hljs-number">0</span>}
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java">queryReq = <span class="hljs-title class_">QueryReq</span>.<span class="hljs-title function_">builder</span>()
-    .<span class="hljs-title function_">collectionName</span>(<span class="hljs-string">&quot;test_collection&quot;</span>)
-    .<span class="hljs-title function_">filter</span>(<span class="hljs-string">&quot;ARRAY_CONTAINS_ALL(color_coord, [7, 8, 9])&quot;</span>)
-    .<span class="hljs-title function_">outputFields</span>(<span class="hljs-title class_">Arrays</span>.<span class="hljs-title function_">asList</span>(<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-string">&quot;color&quot;</span>, <span class="hljs-string">&quot;color_tag&quot;</span>, <span class="hljs-string">&quot;color_coord&quot;</span>))
-    .<span class="hljs-title function_">limit</span>(<span class="hljs-number">3</span>)
-    .<span class="hljs-title function_">build</span>();
+<pre><code translate="no" class="language-java">queryReq = QueryReq.builder()
+        .collectionName(<span class="hljs-string">&quot;test_collection&quot;</span>)
+        .filter(<span class="hljs-string">&quot;ARRAY_CONTAINS_ALL(color_coord, [7, 8])&quot;</span>)
+        .outputFields(Arrays.asList(<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-string">&quot;color&quot;</span>, <span class="hljs-string">&quot;color_tag&quot;</span>, <span class="hljs-string">&quot;color_coord&quot;</span>))
+        .limit(<span class="hljs-number">3</span>)
+        .build();
 
-queryResp = client.<span class="hljs-title function_">query</span>(queryReq);
+queryResp = client.query(queryReq);
 
-<span class="hljs-title class_">System</span>.<span class="hljs-property">out</span>.<span class="hljs-title function_">println</span>(<span class="hljs-title class_">JSON</span><span class="hljs-built_in">Object</span>.<span class="hljs-title function_">toJSON</span>(queryResp));     
+System.out.<span class="hljs-built_in">println</span>(queryResp.getQueryResults());
 
 <span class="hljs-comment">// Output:</span>
-<span class="hljs-comment">// {&quot;queryResults&quot;: [{&quot;entity&quot;: {</span>
-<span class="hljs-comment">//     &quot;color&quot;: &quot;red&quot;,</span>
-<span class="hljs-comment">//     &quot;color_tag&quot;: 6986,</span>
-<span class="hljs-comment">//     &quot;id&quot;: 423,</span>
-<span class="hljs-comment">//     &quot;color_coord&quot;: [</span>
-<span class="hljs-comment">//         26,</span>
-<span class="hljs-comment">//         7,</span>
-<span class="hljs-comment">//         8,</span>
-<span class="hljs-comment">//         9</span>
-<span class="hljs-comment">//     ]</span>
-<span class="hljs-comment">// }}]}</span>
+<span class="hljs-comment">// [</span>
+<span class="hljs-comment">//  QueryResp.QueryResult(entity={color=blue, color_tag=6939, id=246, color_coord=[1, 8, 27, 7]}), </span>
+<span class="hljs-comment">//  QueryResp.QueryResult(entity={color=brown, color_tag=6341, id=673, color_coord=[8, 7, 33, 20, 11]})</span>
+<span class="hljs-comment">// ]</span>
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript">res = <span class="hljs-keyword">await</span> client.<span class="hljs-title function_">search</span>({
     <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;test_collection&quot;</span>,
@@ -980,48 +928,23 @@ queryResp = client.<span class="hljs-title function_">query</span>(queryReq);
 # Output:
 # data: [<span class="hljs-string">&quot;{&#x27;id&#x27;: 0, &#x27;color&#x27;: &#x27;white&#x27;, &#x27;color_tag&#x27;: 2081, &#x27;color_coord&#x27;: [16, 7, 35, 5, 25]}&quot;</span>, <span class="hljs-string">&quot;{&#x27;id&#x27;: 1, &#x27;color&#x27;: &#x27;purple&#x27;, &#x27;color_tag&#x27;: 4669, &#x27;color_coord&#x27;: [11, 9, 15, 38, 21]}&quot;</span>, <span class="hljs-string">&quot;{&#x27;id&#x27;: 3, &#x27;color&#x27;: &#x27;yellow&#x27;, &#x27;color_tag&#x27;: 2612, &#x27;color_coord&#x27;: [0, 12, 22, 7]}&quot;</span>] , extra_info: {<span class="hljs-string">&#x27;cost&#x27;</span>: <span class="hljs-number">0</span>}
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java">queryReq = <span class="hljs-title class_">QueryReq</span>.<span class="hljs-title function_">builder</span>()
-    .<span class="hljs-title function_">collectionName</span>(<span class="hljs-string">&quot;test_collection&quot;</span>)
-    .<span class="hljs-title function_">filter</span>(<span class="hljs-string">&quot;ARRAY_CONTAINS_ANY(color_coord, [7, 8, 9])&quot;</span>)
-    .<span class="hljs-title function_">outputFields</span>(<span class="hljs-title class_">Arrays</span>.<span class="hljs-title function_">asList</span>(<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-string">&quot;color&quot;</span>, <span class="hljs-string">&quot;color_tag&quot;</span>, <span class="hljs-string">&quot;color_coord&quot;</span>))
-    .<span class="hljs-title function_">limit</span>(<span class="hljs-number">3</span>)
-    .<span class="hljs-title function_">build</span>();
+<pre><code translate="no" class="language-java">queryReq = QueryReq.builder()
+        .collectionName(<span class="hljs-string">&quot;test_collection&quot;</span>)
+        .filter(<span class="hljs-string">&quot;ARRAY_CONTAINS_ANY(color_coord, [7, 8, 9])&quot;</span>)
+        .outputFields(Arrays.asList(<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-string">&quot;color&quot;</span>, <span class="hljs-string">&quot;color_tag&quot;</span>, <span class="hljs-string">&quot;color_coord&quot;</span>))
+        .limit(<span class="hljs-number">3</span>)
+        .build();
 
-queryResp = client.<span class="hljs-title function_">query</span>(queryReq);
+queryResp = client.query(queryReq);
 
-<span class="hljs-title class_">System</span>.<span class="hljs-property">out</span>.<span class="hljs-title function_">println</span>(<span class="hljs-title class_">JSON</span><span class="hljs-built_in">Object</span>.<span class="hljs-title function_">toJSON</span>(queryResp));   
+System.out.<span class="hljs-built_in">println</span>(queryResp.getQueryResults());
 
 <span class="hljs-comment">// Output:</span>
-<span class="hljs-comment">// {&quot;queryResults&quot;: [</span>
-<span class="hljs-comment">//     {&quot;entity&quot;: {</span>
-<span class="hljs-comment">//         &quot;color&quot;: &quot;orange&quot;,</span>
-<span class="hljs-comment">//         &quot;color_tag&quot;: 2464,</span>
-<span class="hljs-comment">//         &quot;id&quot;: 18,</span>
-<span class="hljs-comment">//         &quot;color_coord&quot;: [</span>
-<span class="hljs-comment">//             9,</span>
-<span class="hljs-comment">//             30</span>
-<span class="hljs-comment">//         ]</span>
-<span class="hljs-comment">//     }},</span>
-<span class="hljs-comment">//     {&quot;entity&quot;: {</span>
-<span class="hljs-comment">//         &quot;color&quot;: &quot;pink&quot;,</span>
-<span class="hljs-comment">//         &quot;color_tag&quot;: 2602,</span>
-<span class="hljs-comment">//         &quot;id&quot;: 22,</span>
-<span class="hljs-comment">//         &quot;color_coord&quot;: [</span>
-<span class="hljs-comment">//             8,</span>
-<span class="hljs-comment">//             34,</span>
-<span class="hljs-comment">//             16</span>
-<span class="hljs-comment">//         ]</span>
-<span class="hljs-comment">//     }},</span>
-<span class="hljs-comment">//     {&quot;entity&quot;: {</span>
-<span class="hljs-comment">//         &quot;color&quot;: &quot;pink&quot;,</span>
-<span class="hljs-comment">//         &quot;color_tag&quot;: 1243,</span>
-<span class="hljs-comment">//         &quot;id&quot;: 42,</span>
-<span class="hljs-comment">//         &quot;color_coord&quot;: [</span>
-<span class="hljs-comment">//             9,</span>
-<span class="hljs-comment">//             20</span>
-<span class="hljs-comment">//         ]</span>
-<span class="hljs-comment">//     }}</span>
-<span class="hljs-comment">// ]}</span>
+<span class="hljs-comment">// [</span>
+<span class="hljs-comment">//  QueryResp.QueryResult(entity={color=purple, color_tag=3687, id=1, color_coord=[22, 7, 29, 25]}), </span>
+<span class="hljs-comment">//  QueryResp.QueryResult(entity={color=black, color_tag=6107, id=8, color_coord=[8, 19, 31, 10]}), </span>
+<span class="hljs-comment">//  QueryResp.QueryResult(entity={color=blue, color_tag=3252, id=11, color_coord=[7, 16, 1]})</span>
+<span class="hljs-comment">// ]</span>
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript">res = <span class="hljs-keyword">await</span> client.<span class="hljs-title function_">search</span>({
     <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;test_collection&quot;</span>,
@@ -1091,53 +1014,23 @@ queryResp = client.<span class="hljs-title function_">query</span>(queryReq);
 # Output:
 # data: [<span class="hljs-string">&quot;{&#x27;id&#x27;: 2, &#x27;color&#x27;: &#x27;green&#x27;, &#x27;color_tag&#x27;: 3676, &#x27;color_coord&#x27;: [26, 37, 30, 10]}&quot;</span>, <span class="hljs-string">&quot;{&#x27;id&#x27;: 3, &#x27;color&#x27;: &#x27;yellow&#x27;, &#x27;color_tag&#x27;: 2612, &#x27;color_coord&#x27;: [0, 12, 22, 7]}&quot;</span>, <span class="hljs-string">&quot;{&#x27;id&#x27;: 4, &#x27;color&#x27;: &#x27;green&#x27;, &#x27;color_tag&#x27;: 6912, &#x27;color_coord&#x27;: [4, 5, 19, 28]}&quot;</span>] , extra_info: {<span class="hljs-string">&#x27;cost&#x27;</span>: <span class="hljs-number">0</span>}
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java">queryReq = <span class="hljs-title class_">QueryReq</span>.<span class="hljs-title function_">builder</span>()
-    .<span class="hljs-title function_">collectionName</span>(<span class="hljs-string">&quot;test_collection&quot;</span>)
-    .<span class="hljs-title function_">filter</span>(<span class="hljs-string">&quot;ARRAY_LENGTH(color_coord) == 4&quot;</span>)
-    .<span class="hljs-title function_">outputFields</span>(<span class="hljs-title class_">Arrays</span>.<span class="hljs-title function_">asList</span>(<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-string">&quot;color&quot;</span>, <span class="hljs-string">&quot;color_tag&quot;</span>, <span class="hljs-string">&quot;color_coord&quot;</span>))
-    .<span class="hljs-title function_">limit</span>(<span class="hljs-number">3</span>)
-    .<span class="hljs-title function_">build</span>();
+<pre><code translate="no" class="language-java">queryReq = QueryReq.builder()
+        .collectionName(<span class="hljs-string">&quot;test_collection&quot;</span>)
+        .filter(<span class="hljs-string">&quot;ARRAY_LENGTH(color_coord) == 4&quot;</span>)
+        .outputFields(Arrays.asList(<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-string">&quot;color&quot;</span>, <span class="hljs-string">&quot;color_tag&quot;</span>, <span class="hljs-string">&quot;color_coord&quot;</span>))
+        .limit(<span class="hljs-number">3</span>)
+        .build();
 
-queryResp = client.<span class="hljs-title function_">query</span>(queryReq);
+queryResp = client.query(queryReq);
 
-<span class="hljs-title class_">System</span>.<span class="hljs-property">out</span>.<span class="hljs-title function_">println</span>(<span class="hljs-title class_">JSON</span><span class="hljs-built_in">Object</span>.<span class="hljs-title function_">toJSON</span>(queryResp));   
+System.out.<span class="hljs-built_in">println</span>(queryResp.getQueryResults()); 
 
 <span class="hljs-comment">// Output:</span>
-<span class="hljs-comment">// {&quot;queryResults&quot;: [</span>
-<span class="hljs-comment">//     {&quot;entity&quot;: {</span>
-<span class="hljs-comment">//         &quot;color&quot;: &quot;green&quot;,</span>
-<span class="hljs-comment">//         &quot;color_tag&quot;: 2984,</span>
-<span class="hljs-comment">//         &quot;id&quot;: 2,</span>
-<span class="hljs-comment">//         &quot;color_coord&quot;: [</span>
-<span class="hljs-comment">//             27,</span>
-<span class="hljs-comment">//             31,</span>
-<span class="hljs-comment">//             23,</span>
-<span class="hljs-comment">//             29</span>
-<span class="hljs-comment">//         ]</span>
-<span class="hljs-comment">//     }},</span>
-<span class="hljs-comment">//     {&quot;entity&quot;: {</span>
-<span class="hljs-comment">//         &quot;color&quot;: &quot;black&quot;,</span>
-<span class="hljs-comment">//         &quot;color_tag&quot;: 6867,</span>
-<span class="hljs-comment">//         &quot;id&quot;: 4,</span>
-<span class="hljs-comment">//         &quot;color_coord&quot;: [</span>
-<span class="hljs-comment">//             37,</span>
-<span class="hljs-comment">//             3,</span>
-<span class="hljs-comment">//             30,</span>
-<span class="hljs-comment">//             33</span>
-<span class="hljs-comment">//         ]</span>
-<span class="hljs-comment">//     }},</span>
-<span class="hljs-comment">//     {&quot;entity&quot;: {</span>
-<span class="hljs-comment">//         &quot;color&quot;: &quot;brown&quot;,</span>
-<span class="hljs-comment">//         &quot;color_tag&quot;: 3464,</span>
-<span class="hljs-comment">//         &quot;id&quot;: 10,</span>
-<span class="hljs-comment">//         &quot;color_coord&quot;: [</span>
-<span class="hljs-comment">//             31,</span>
-<span class="hljs-comment">//             38,</span>
-<span class="hljs-comment">//             21,</span>
-<span class="hljs-comment">//             28</span>
-<span class="hljs-comment">//         ]</span>
-<span class="hljs-comment">//     }}</span>
-<span class="hljs-comment">// ]}</span>
+<span class="hljs-comment">// [</span>
+<span class="hljs-comment">//  QueryResp.QueryResult(entity={color=purple, color_tag=3687, id=1, color_coord=[22, 7, 29, 25]}),</span>
+<span class="hljs-comment">//  QueryResp.QueryResult(entity={color=yellow, color_tag=1990, id=3, color_coord=[26, 20, 15, 26]}),</span>
+<span class="hljs-comment">//  QueryResp.QueryResult(entity={color=purple, color_tag=3199, id=4, color_coord=[13, 19, 21, 30]})</span>
+<span class="hljs-comment">// ]</span>
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript">res = <span class="hljs-keyword">await</span> client.<span class="hljs-title function_">search</span>({
 <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;test_collection&quot;</span>,

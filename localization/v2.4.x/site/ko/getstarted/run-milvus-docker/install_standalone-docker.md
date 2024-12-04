@@ -3,9 +3,9 @@ id: install_standalone-docker.md
 label: Docker
 related_key: Docker
 summary: Docker를 사용하여 Milvus를 독립형으로 설치하는 방법을 알아보세요.
-title: Docker에서 Milvus 실행
+title: Docker에서 Milvus 실행하기(Linux)
 ---
-<h1 id="Run-Milvus-in-Docker" class="common-anchor-header">Docker에서 Milvus 실행<button data-href="#Run-Milvus-in-Docker" class="anchor-icon" translate="no">
+<h1 id="Run-Milvus-in-Docker-Linux" class="common-anchor-header">Docker에서 Milvus 실행하기(Linux)<button data-href="#Run-Milvus-in-Docker-Linux" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -121,5 +121,5 @@ $ bash standalone_embed.sh upgrade
 <li><p>Milvus 데이터 백업을 위한 오픈 소스 도구인 Milvus <a href="/docs/ko/milvus_backup_overview.md">Backup을</a> 살펴보세요.</p></li>
 <li><p>Milvus 디버깅 및 동적 구성 업데이트를 위한 오픈 소스 도구인 <a href="/docs/ko/birdwatcher_overview.md">Birdwatcher를</a> 살펴보세요.</p></li>
 <li><p>직관적인 Milvus 관리를 위한 오픈 소스 GUI 도구인 <a href="https://milvus.io/docs/attu.md">Attu를</a> 살펴보세요.</p></li>
-<li><p><a href="/docs/ko/monitor.md">Prometheus로 Milvus 모니터링하기</a>.</p></li>
+<li><p><a href="/docs/ko/monitor.md">Prometheus로 Milvus 모니터링</a>.</p></li>
 </ul>

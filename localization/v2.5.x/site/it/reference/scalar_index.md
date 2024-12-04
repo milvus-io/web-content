@@ -58,7 +58,7 @@ title: Indice scalare
         ></path>
       </svg>
     </button></h2><p>Milvus mira a ottenere un basso utilizzo della memoria, un'elevata efficienza di filtraggio e tempi di caricamento ridotti con i suoi algoritmi di indicizzazione dei campi scalari. Questi algoritmi si dividono in due tipi principali: <a href="#auto-indexing">indicizzazione automatica</a> e <a href="#inverted-indexing">indicizzazione inversa</a>.</p>
-<h3 id="Auto-indexing" class="common-anchor-header">Indicizzazione automatica</h3><p>Milvus crea automaticamente un indice automatico per un campo scalare in base al suo tipo di dati, senza richiedere un intervento manuale. L'indicizzazione automatica è adatta alle interrogazioni con corrispondenza di prefisso e agli scenari di recupero frequenti.</p>
+<h3 id="Auto-indexing" class="common-anchor-header">Indicizzazione automatica</h3><p>Milvus offre l'opzione <code translate="no">AUTOINDEX</code> per evitare di dover scegliere manualmente il tipo di indice. Quando si chiama il metodo <code translate="no">create_index</code>, se l'opzione <code translate="no">index_type</code> non è specificata, Milvus seleziona automaticamente il tipo di indice più adatto in base al tipo di dati.</p>
 <p>La tabella seguente elenca i tipi di dati supportati da Milvus e i corrispondenti algoritmi di indicizzazione automatica.</p>
 <table>
 <thead>
@@ -155,7 +155,7 @@ title: Indice scalare
       </svg>
     </button></h2><ul>
 <li><p>Per indicizzare un campo scalare, leggere <a href="/docs/it/index-scalar-fields.md">Costruire un indice sugli scalari</a>.</p></li>
-<li><p>Per saperne di più sui termini correlati e sulle regole sopra menzionate, leggere</p>
+<li><p>Per saperne di più sui termini correlati e sulle regole sopra menzionate, leggete</p>
 <ul>
 <li><a href="/docs/it/bitset.md">Bitset</a></li>
 <li><a href="/docs/it/multi-vector-search.md">Ricerca ibrida</a></li>

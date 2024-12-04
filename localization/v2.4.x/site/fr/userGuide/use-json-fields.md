@@ -1,6 +1,6 @@
 ---
 id: use-json-fields.md
-title: Utiliser des champs JSON
+title: Utiliser les champs JSON
 ---
 <h1 id="Use-JSON-Fields" class="common-anchor-header">Utiliser les champs JSON<button data-href="#Use-JSON-Fields" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -59,41 +59,39 @@ data = []
 
 <span class="hljs-built_in">print</span>(data[<span class="hljs-number">0</span>])
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> java.util.ArrayList;
-<span class="hljs-keyword">import</span> java.util.Arrays;
-<span class="hljs-keyword">import</span> java.util.List;
-<span class="hljs-keyword">import</span> java.util.Map;
-<span class="hljs-keyword">import</span> java.util.Random;
+<pre><code translate="no" class="language-java">import java.util.*;
 
-<span class="hljs-keyword">import</span> com.alibaba.fastjson.JSONObject;
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 
 <span class="hljs-comment">// 3. Insert randomly generated vectors and JSON data into the collection</span>
 List&lt;String&gt; colors = Arrays.asList(<span class="hljs-string">&quot;green&quot;</span>, <span class="hljs-string">&quot;blue&quot;</span>, <span class="hljs-string">&quot;yellow&quot;</span>, <span class="hljs-string">&quot;red&quot;</span>, <span class="hljs-string">&quot;black&quot;</span>, <span class="hljs-string">&quot;white&quot;</span>, <span class="hljs-string">&quot;purple&quot;</span>, <span class="hljs-string">&quot;pink&quot;</span>, <span class="hljs-string">&quot;orange&quot;</span>, <span class="hljs-string">&quot;brown&quot;</span>, <span class="hljs-string">&quot;grey&quot;</span>);
-List&lt;JSONObject&gt; data = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();
+List&lt;JsonObject&gt; data = <span class="hljs-keyword">new</span> ArrayList&lt;&gt;();
 
-<span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i=<span class="hljs-number">0</span>; i&lt;<span class="hljs-number">1000</span>; i++) {
-    <span class="hljs-type">Random</span> <span class="hljs-variable">rand</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Random</span>();
-    <span class="hljs-type">String</span> <span class="hljs-variable">current_color</span> <span class="hljs-operator">=</span> colors.get(rand.nextInt(colors.size()-<span class="hljs-number">1</span>));
-    <span class="hljs-type">Integer</span> <span class="hljs-variable">current_tag</span> <span class="hljs-operator">=</span> rand.nextInt(<span class="hljs-number">8999</span>) + <span class="hljs-number">1000</span>;
+Gson gson = <span class="hljs-keyword">new</span> Gson();
+Random rand = <span class="hljs-keyword">new</span> Random();
+<span class="hljs-keyword">for</span> (<span class="hljs-built_in">int</span> i=<span class="hljs-number">0</span>; i&lt;<span class="hljs-number">1000</span>; i++) {
+    String current_color = colors.<span class="hljs-keyword">get</span>(rand.nextInt(colors.size()<span class="hljs-number">-1</span>));
+    Integer current_tag = rand.nextInt(<span class="hljs-number">8999</span>) + <span class="hljs-number">1000</span>;
     List&lt;Integer&gt; current_coord = Arrays.asList(rand.nextInt(<span class="hljs-number">40</span>), rand.nextInt(<span class="hljs-number">40</span>), rand.nextInt(<span class="hljs-number">40</span>));
     List&lt;List&lt;String&gt;&gt; current_ref = Arrays.asList(
-        Arrays.asList(colors.get(rand.nextInt(colors.size()-<span class="hljs-number">1</span>)), colors.get(rand.nextInt(colors.size()-<span class="hljs-number">1</span>)), colors.get(rand.nextInt(colors.size()-<span class="hljs-number">1</span>))),
-        Arrays.asList(colors.get(rand.nextInt(colors.size()-<span class="hljs-number">1</span>)), colors.get(rand.nextInt(colors.size()-<span class="hljs-number">1</span>)), colors.get(rand.nextInt(colors.size()-<span class="hljs-number">1</span>))),
-        Arrays.asList(colors.get(rand.nextInt(colors.size()-<span class="hljs-number">1</span>)), colors.get(rand.nextInt(colors.size()-<span class="hljs-number">1</span>)), colors.get(rand.nextInt(colors.size()-<span class="hljs-number">1</span>)))
+            Arrays.asList(colors.<span class="hljs-keyword">get</span>(rand.nextInt(colors.size()<span class="hljs-number">-1</span>)), colors.<span class="hljs-keyword">get</span>(rand.nextInt(colors.size()<span class="hljs-number">-1</span>)), colors.<span class="hljs-keyword">get</span>(rand.nextInt(colors.size()<span class="hljs-number">-1</span>))),
+            Arrays.asList(colors.<span class="hljs-keyword">get</span>(rand.nextInt(colors.size()<span class="hljs-number">-1</span>)), colors.<span class="hljs-keyword">get</span>(rand.nextInt(colors.size()<span class="hljs-number">-1</span>)), colors.<span class="hljs-keyword">get</span>(rand.nextInt(colors.size()<span class="hljs-number">-1</span>))),
+            Arrays.asList(colors.<span class="hljs-keyword">get</span>(rand.nextInt(colors.size()<span class="hljs-number">-1</span>)), colors.<span class="hljs-keyword">get</span>(rand.nextInt(colors.size()<span class="hljs-number">-1</span>)), colors.<span class="hljs-keyword">get</span>(rand.nextInt(colors.size()<span class="hljs-number">-1</span>)))
     );
-    <span class="hljs-type">JSONObject</span> <span class="hljs-variable">row</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">JSONObject</span>();
-    row.put(<span class="hljs-string">&quot;id&quot;</span>, Long.valueOf(i));
-    row.put(<span class="hljs-string">&quot;vector&quot;</span>, Arrays.asList(rand.nextFloat(), rand.nextFloat(), rand.nextFloat(), rand.nextFloat(), rand.nextFloat()));
-    <span class="hljs-type">JSONObject</span> <span class="hljs-variable">color</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">JSONObject</span>();
-    color.put(<span class="hljs-string">&quot;label&quot;</span>, current_color);
-    color.put(<span class="hljs-string">&quot;tag&quot;</span>, current_tag);
-    color.put(<span class="hljs-string">&quot;coord&quot;</span>, current_coord);
-    color.put(<span class="hljs-string">&quot;ref&quot;</span>, current_ref);
-    row.put(<span class="hljs-string">&quot;color&quot;</span>, color);
-    data.add(row);
+    JsonObject row = <span class="hljs-keyword">new</span> JsonObject();
+    row.addProperty(<span class="hljs-string">&quot;id&quot;</span>, (<span class="hljs-built_in">long</span>) i);
+    row.<span class="hljs-keyword">add</span>(<span class="hljs-string">&quot;vector&quot;</span>, gson.toJsonTree(Arrays.asList(rand.nextFloat(), rand.nextFloat(), rand.nextFloat(), rand.nextFloat(), rand.nextFloat())));
+    JsonObject color = <span class="hljs-keyword">new</span> JsonObject();
+    color.addProperty(<span class="hljs-string">&quot;label&quot;</span>, current_color);
+    color.addProperty(<span class="hljs-string">&quot;tag&quot;</span>, current_tag);
+    color.<span class="hljs-keyword">add</span>(<span class="hljs-string">&quot;coord&quot;</span>, gson.toJsonTree(current_coord));
+    color.<span class="hljs-keyword">add</span>(<span class="hljs-string">&quot;ref&quot;</span>, gson.toJsonTree(current_ref));
+    row.<span class="hljs-keyword">add</span>(<span class="hljs-string">&quot;color&quot;</span>, color);
+    data.<span class="hljs-keyword">add</span>(row);
 }
 
-System.out.println(JSONObject.toJSON(data.get(<span class="hljs-number">0</span>)));   
+System.<span class="hljs-keyword">out</span>.println(data.<span class="hljs-keyword">get</span>(<span class="hljs-number">0</span>));
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-comment">// 3. Insert randomly generated vectors </span>
 <span class="hljs-keyword">const</span> colors = [<span class="hljs-string">&quot;green&quot;</span>, <span class="hljs-string">&quot;blue&quot;</span>, <span class="hljs-string">&quot;yellow&quot;</span>, <span class="hljs-string">&quot;red&quot;</span>, <span class="hljs-string">&quot;black&quot;</span>, <span class="hljs-string">&quot;white&quot;</span>, <span class="hljs-string">&quot;purple&quot;</span>, <span class="hljs-string">&quot;pink&quot;</span>, <span class="hljs-string">&quot;orange&quot;</span>, <span class="hljs-string">&quot;brown&quot;</span>, <span class="hljs-string">&quot;grey&quot;</span>]
@@ -162,7 +160,7 @@ System.out.println(JSONObject.toJSON(data.get(<span class="hljs-number">0</span>
 <ul>
 <li><p>Assurez-vous que toutes les valeurs d'une liste ou d'un tableau sont du même type de données.</p></li>
 <li><p>Tout dictionnaire imbriqué dans une valeur de champ JSON sera considéré comme une chaîne de caractères.</p></li>
-<li><p>N'utilisez que des caractères alphanumériques et des traits de soulignement pour nommer les clés JSON, car d'autres caractères peuvent poser des problèmes lors du filtrage ou de la recherche.</p></li>
+<li><p>N'utilisez que des caractères alphanumériques et des traits de soulignement pour nommer les clés JSON, car d'autres caractères peuvent poser des problèmes de filtrage ou de recherche.</p></li>
 <li>Actuellement, l'indexation des champs JSON n'est pas disponible, ce qui peut rendre le filtrage fastidieux. Cette limitation sera toutefois prise en compte dans les prochaines versions.</li>
 </ul>
 </div>
@@ -245,7 +243,16 @@ res = client.get_load_state(
 <span class="hljs-comment">#     &quot;state&quot;: &quot;&lt;LoadState: Loaded&gt;&quot;</span>
 <span class="hljs-comment"># }</span>
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java"><span class="hljs-type">String</span> <span class="hljs-variable">CLUSTER_ENDPOINT</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;http://localhost:19530&quot;</span>;
+<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.client.MilvusClientV2;
+<span class="hljs-keyword">import</span> io.milvus.v2.client.ConnectConfig;
+<span class="hljs-keyword">import</span> io.milvus.v2.common.DataType;
+<span class="hljs-keyword">import</span> io.milvus.v2.common.IndexParam;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.*;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.*;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.data.*;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.response.*;
+
+<span class="hljs-type">String</span> <span class="hljs-variable">CLUSTER_ENDPOINT</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;http://localhost:19530&quot;</span>;
 
 <span class="hljs-comment">// 1. Connect to Milvus server</span>
 <span class="hljs-type">ConnectConfig</span> <span class="hljs-variable">connectConfig</span> <span class="hljs-operator">=</span> ConnectConfig.builder()
@@ -261,35 +268,37 @@ CreateCollectionReq.<span class="hljs-type">CollectionSchema</span> <span class=
 
 <span class="hljs-comment">// 2.2 Add fields to schema</span>
 schema.addField(AddFieldReq.builder()
-    .fieldName(<span class="hljs-string">&quot;id&quot;</span>)
-    .dataType(DataType.Int64)
-    .isPrimaryKey(<span class="hljs-literal">true</span>)
-    .autoID(<span class="hljs-literal">false</span>)
-    .build());
+        .fieldName(<span class="hljs-string">&quot;id&quot;</span>)
+        .dataType(DataType.Int64)
+        .isPrimaryKey(<span class="hljs-literal">true</span>)
+        .autoID(<span class="hljs-literal">false</span>)
+        .build());
 
 schema.addField(AddFieldReq.builder()
-    .fieldName(<span class="hljs-string">&quot;vector&quot;</span>)
-    .dataType(DataType.FloatVector)
-    .dimension(<span class="hljs-number">5</span>)
-    .build());
+        .fieldName(<span class="hljs-string">&quot;vector&quot;</span>)
+        .dataType(DataType.FloatVector)
+        .dimension(<span class="hljs-number">5</span>)
+        .build());
 
 schema.addField(AddFieldReq.builder()
-    .fieldName(<span class="hljs-string">&quot;color&quot;</span>)
-    .dataType(DataType.JSON)
-    .build());
+        .fieldName(<span class="hljs-string">&quot;color&quot;</span>)
+        .dataType(DataType.JSON)
+        .build());
 
 <span class="hljs-comment">// 2.3 Prepare index parameters</span>
 <span class="hljs-type">IndexParam</span> <span class="hljs-variable">indexParamForIdField</span> <span class="hljs-operator">=</span> IndexParam.builder()
-    .fieldName(<span class="hljs-string">&quot;id&quot;</span>)
-    .indexType(IndexParam.IndexType.STL_SORT)
-    .build();
+        .fieldName(<span class="hljs-string">&quot;id&quot;</span>)
+        .indexType(IndexParam.IndexType.STL_SORT)
+        .build();
 
+Map&lt;String, Object&gt; params = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();
+params.put(<span class="hljs-string">&quot;nlist&quot;</span>, <span class="hljs-number">1024</span>);
 <span class="hljs-type">IndexParam</span> <span class="hljs-variable">indexParamForVectorField</span> <span class="hljs-operator">=</span> IndexParam.builder()
-    .fieldName(<span class="hljs-string">&quot;vector&quot;</span>)
-    .indexType(IndexParam.IndexType.IVF_FLAT)
-    .metricType(IndexParam.MetricType.IP)
-    .extraParams(Map.of(<span class="hljs-string">&quot;nlist&quot;</span>, <span class="hljs-number">1024</span>))
-    .build();
+        .fieldName(<span class="hljs-string">&quot;vector&quot;</span>)
+        .indexType(IndexParam.IndexType.IVF_FLAT)
+        .metricType(IndexParam.MetricType.IP)
+        .extraParams(params)
+        .build();
 
 List&lt;IndexParam&gt; indexParams = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();
 indexParams.add(indexParamForIdField);
@@ -297,17 +306,17 @@ indexParams.add(indexParamForVectorField);
 
 <span class="hljs-comment">// 2.4 Create a collection with schema and index parameters</span>
 <span class="hljs-type">CreateCollectionReq</span> <span class="hljs-variable">customizedSetupReq</span> <span class="hljs-operator">=</span> CreateCollectionReq.builder()
-    .collectionName(<span class="hljs-string">&quot;test_collection&quot;</span>)
-    .collectionSchema(schema)
-    .indexParams(indexParams)         
-    .build();
+        .collectionName(<span class="hljs-string">&quot;test_collection&quot;</span>)
+        .collectionSchema(schema)
+        .indexParams(indexParams)
+        .build();
 
 client.createCollection(customizedSetupReq);
 
 <span class="hljs-comment">// 2.5 Check if the collection is loaded</span>
 <span class="hljs-type">GetLoadStateReq</span> <span class="hljs-variable">getLoadStateReq</span> <span class="hljs-operator">=</span> GetLoadStateReq.builder()
-    .collectionName(<span class="hljs-string">&quot;test_collection&quot;</span>)
-    .build();
+        .collectionName(<span class="hljs-string">&quot;test_collection&quot;</span>)
+        .build();
 
 <span class="hljs-type">Boolean</span> <span class="hljs-variable">isLoaded</span> <span class="hljs-operator">=</span> client.getLoadState(getLoadStateReq);
 
@@ -440,17 +449,17 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 <span class="hljs-comment"># }</span>
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-java"><span class="hljs-comment">// 3.1 Insert data into the collection</span>
-<span class="hljs-title class_">InsertReq</span> insertReq = <span class="hljs-title class_">InsertReq</span>.<span class="hljs-title function_">builder</span>()
-    .<span class="hljs-title function_">collectionName</span>(<span class="hljs-string">&quot;test_collection&quot;</span>)
-    .<span class="hljs-title function_">data</span>(data)
-    .<span class="hljs-title function_">build</span>();
+<span class="hljs-type">InsertReq</span> <span class="hljs-variable">insertReq</span> <span class="hljs-operator">=</span> InsertReq.builder()
+        .collectionName(<span class="hljs-string">&quot;test_collection&quot;</span>)
+        .data(data)
+        .build();
 
-<span class="hljs-title class_">InsertResp</span> insertResp = client.<span class="hljs-title function_">insert</span>(insertReq);
+<span class="hljs-type">InsertResp</span> <span class="hljs-variable">insertResp</span> <span class="hljs-operator">=</span> client.insert(insertReq);
 
-<span class="hljs-title class_">System</span>.<span class="hljs-property">out</span>.<span class="hljs-title function_">println</span>(<span class="hljs-title class_">JSON</span><span class="hljs-built_in">Object</span>.<span class="hljs-title function_">toJSON</span>(insertResp));
+System.out.println(insertResp.getInsertCnt());
 
 <span class="hljs-comment">// Output:</span>
-<span class="hljs-comment">// {&quot;insertCnt&quot;: 1000}</span>
+<span class="hljs-comment">// 1000</span>
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-comment">// 3. Insert randomly generated vectors </span>
 <span class="hljs-keyword">const</span> colors = [<span class="hljs-string">&quot;green&quot;</span>, <span class="hljs-string">&quot;blue&quot;</span>, <span class="hljs-string">&quot;yellow&quot;</span>, <span class="hljs-string">&quot;red&quot;</span>, <span class="hljs-string">&quot;black&quot;</span>, <span class="hljs-string">&quot;white&quot;</span>, <span class="hljs-string">&quot;purple&quot;</span>, <span class="hljs-string">&quot;pink&quot;</span>, <span class="hljs-string">&quot;orange&quot;</span>, <span class="hljs-string">&quot;brown&quot;</span>, <span class="hljs-string">&quot;grey&quot;</span>]
@@ -605,76 +614,32 @@ res = client.search(
 <span class="hljs-comment">#     ]</span>
 <span class="hljs-comment"># ]</span>
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java">// 4. Basic search with a JSON field
-List&lt;List&lt;Float&gt;&gt; query_vectors = Arrays.asList(Arrays.asList(0.3580376395471989f, -0.6023495712049978f, 0.18414012509913835f, -0.26286205330961354f, 0.9029438446296592f));
+<pre><code translate="no" class="language-java">// <span class="hljs-number">4.</span> Search <span class="hljs-keyword">with</span> partition key
+<span class="hljs-type">List</span>&lt;BaseVector&gt; query_vectors = Collections.singletonList(new FloatVec(new <span class="hljs-built_in">float</span>[]{<span class="hljs-number">0.3580376395471989</span>f, -<span class="hljs-number">0.6023495712049978</span>f, <span class="hljs-number">0.18414012509913835</span>f, -<span class="hljs-number">0.26286205330961354</span>f, <span class="hljs-number">0.9029438446296592</span>f}));
 
 SearchReq searchReq = SearchReq.builder()
-    .collectionName(<span class="hljs-string">&quot;test_collection&quot;</span>)
-    .data(query_vectors)
-    .filter(<span class="hljs-string">&quot;color[\&quot;label\&quot;] in [\&quot;red\&quot;]&quot;</span>)
-    .outputFields(Arrays.asList(<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-string">&quot;color&quot;</span>))
-    .topK(3)
-    .build();
+        .collectionName(<span class="hljs-string">&quot;test_collection&quot;</span>)
+        .data(query_vectors)
+        .<span class="hljs-built_in">filter</span>(<span class="hljs-string">&quot;color[\&quot;label\&quot;] in [\&quot;red\&quot;]&quot;</span>)
+        .outputFields(Arrays.asList(<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-string">&quot;color&quot;</span>))
+        .topK(<span class="hljs-number">3</span>)
+        .build();
 
 SearchResp searchResp = client.search(searchReq);
 
-System.out.println(JSONObject.toJSON(searchResp));
+<span class="hljs-type">List</span>&lt;<span class="hljs-type">List</span>&lt;SearchResp.SearchResult&gt;&gt; searchResults = searchResp.getSearchResults();
+<span class="hljs-keyword">for</span> (<span class="hljs-type">List</span>&lt;SearchResp.SearchResult&gt; results : searchResults) {
+    System.out.println(<span class="hljs-string">&quot;TopK results:&quot;</span>);
+    <span class="hljs-keyword">for</span> (SearchResp.SearchResult result : results) {
+        System.out.println(result);
+    }
+}
 
 // Output:
-// {<span class="hljs-string">&quot;searchResults&quot;</span>: [[
-//     {
-//         <span class="hljs-string">&quot;distance&quot;</span>: 1.2636482,
-//         <span class="hljs-string">&quot;id&quot;</span>: 290,
-//         <span class="hljs-string">&quot;entity&quot;</span>: {
-//             <span class="hljs-string">&quot;color&quot;</span>: {
-//                 <span class="hljs-string">&quot;coord&quot;</span>: [32,37,32],
-//                 <span class="hljs-string">&quot;ref&quot;</span>: [
-//                     [<span class="hljs-string">&quot;green&quot;</span>, <span class="hljs-string">&quot;blue&quot;</span>, <span class="hljs-string">&quot;yellow&quot;</span>],
-//                     [<span class="hljs-string">&quot;yellow&quot;</span>, <span class="hljs-string">&quot;pink&quot;</span>, <span class="hljs-string">&quot;pink&quot;</span>],
-//                     [<span class="hljs-string">&quot;purple&quot;</span>, <span class="hljs-string">&quot;red&quot;</span>, <span class="hljs-string">&quot;brown&quot;</span>]
-//                 ],
-//                 <span class="hljs-string">&quot;label&quot;</span>: <span class="hljs-string">&quot;red&quot;</span>,
-//                 <span class="hljs-string">&quot;tag&quot;</span>: 8949
-//             },
-//             <span class="hljs-string">&quot;id&quot;</span>: 290
-//         }
-//     },
-//     {
-//         <span class="hljs-string">&quot;distance&quot;</span>: 1.002122,
-//         <span class="hljs-string">&quot;id&quot;</span>: 629,
-//         <span class="hljs-string">&quot;entity&quot;</span>: {
-//             <span class="hljs-string">&quot;color&quot;</span>: {
-//                 <span class="hljs-string">&quot;coord&quot;</span>: [23,5,35],
-//                 <span class="hljs-string">&quot;ref&quot;</span>: [
-//                     [<span class="hljs-string">&quot;black&quot;</span>, <span class="hljs-string">&quot;&quot;</span>yellow<span class="hljs-string">&quot;, &quot;</span>black<span class="hljs-string">&quot;],
-//                     [&quot;</span>black<span class="hljs-string">&quot;, &quot;</span>purple<span class="hljs-string">&quot;, &quot;</span>white<span class="hljs-string">&quot;],
-//                     [&quot;</span>black<span class="hljs-string">&quot;, &quot;</span>brown<span class="hljs-string">&quot;, &quot;</span>orange<span class="hljs-string">&quot;]
-//                 ],
-//                 &quot;</span>label<span class="hljs-string">&quot;: &quot;</span>red<span class="hljs-string">&quot;,
-//                 &quot;</span>tag<span class="hljs-string">&quot;: 5072
-//             },
-//             &quot;</span><span class="hljs-built_in">id</span><span class="hljs-string">&quot;: 629
-//         }
-//     },
-//     {
-//         &quot;</span>distance<span class="hljs-string">&quot;: 0.9542817,
-//         &quot;</span><span class="hljs-built_in">id</span><span class="hljs-string">&quot;: 279,
-//         &quot;</span>entity<span class="hljs-string">&quot;: {
-//             &quot;</span>color<span class="hljs-string">&quot;: {
-//                 &quot;</span>coord<span class="hljs-string">&quot;: [20,33,33],
-//                 &quot;</span>ref<span class="hljs-string">&quot;: [
-//                     [&quot;</span>yellow<span class="hljs-string">&quot;, &quot;</span>white<span class="hljs-string">&quot;, &quot;</span>brown<span class="hljs-string">&quot;],
-//                     [&quot;</span>black<span class="hljs-string">&quot;, &quot;</span>white<span class="hljs-string">&quot;, &quot;</span>purple<span class="hljs-string">&quot;],
-//                     [&quot;</span>green<span class="hljs-string">&quot;, &quot;</span>brown<span class="hljs-string">&quot;, &quot;</span>blue<span class="hljs-string">&quot;]
-//                 ],
-//                 &quot;</span>label<span class="hljs-string">&quot;: &quot;</span>red<span class="hljs-string">&quot;,
-//                 &quot;</span>tag<span class="hljs-string">&quot;: 4704
-//             },
-//             &quot;</span><span class="hljs-built_in">id</span><span class="hljs-string">&quot;: 279
-//         }
-//     }
-// ]]}
-</span><button class="copy-code-btn"></button></code></pre>
+// SearchResp.SearchResult(entity={color={<span class="hljs-string">&quot;label&quot;</span>:<span class="hljs-string">&quot;red&quot;</span>,<span class="hljs-string">&quot;tag&quot;</span>:<span class="hljs-number">1018</span>,<span class="hljs-string">&quot;coord&quot;</span>:[<span class="hljs-number">3</span>,<span class="hljs-number">30</span>,<span class="hljs-number">1</span>],<span class="hljs-string">&quot;ref&quot;</span>:[[<span class="hljs-string">&quot;yellow&quot;</span>,<span class="hljs-string">&quot;brown&quot;</span>,<span class="hljs-string">&quot;orange&quot;</span>],[<span class="hljs-string">&quot;yellow&quot;</span>,<span class="hljs-string">&quot;purple&quot;</span>,<span class="hljs-string">&quot;blue&quot;</span>],[<span class="hljs-string">&quot;green&quot;</span>,<span class="hljs-string">&quot;purple&quot;</span>,<span class="hljs-string">&quot;purple&quot;</span>]]}, <span class="hljs-built_in">id</span>=<span class="hljs-number">295</span>}, score=<span class="hljs-number">1.1190735</span>, <span class="hljs-built_in">id</span>=<span class="hljs-number">295</span>)
+// SearchResp.SearchResult(entity={color={<span class="hljs-string">&quot;label&quot;</span>:<span class="hljs-string">&quot;red&quot;</span>,<span class="hljs-string">&quot;tag&quot;</span>:<span class="hljs-number">8141</span>,<span class="hljs-string">&quot;coord&quot;</span>:[<span class="hljs-number">38</span>,<span class="hljs-number">31</span>,<span class="hljs-number">29</span>],<span class="hljs-string">&quot;ref&quot;</span>:[[<span class="hljs-string">&quot;blue&quot;</span>,<span class="hljs-string">&quot;white&quot;</span>,<span class="hljs-string">&quot;white&quot;</span>],[<span class="hljs-string">&quot;green&quot;</span>,<span class="hljs-string">&quot;orange&quot;</span>,<span class="hljs-string">&quot;green&quot;</span>],[<span class="hljs-string">&quot;yellow&quot;</span>,<span class="hljs-string">&quot;green&quot;</span>,<span class="hljs-string">&quot;black&quot;</span>]]}, <span class="hljs-built_in">id</span>=<span class="hljs-number">667</span>}, score=<span class="hljs-number">1.0679582</span>, <span class="hljs-built_in">id</span>=<span class="hljs-number">667</span>)
+// SearchResp.SearchResult(entity={color={<span class="hljs-string">&quot;label&quot;</span>:<span class="hljs-string">&quot;red&quot;</span>,<span class="hljs-string">&quot;tag&quot;</span>:<span class="hljs-number">6837</span>,<span class="hljs-string">&quot;coord&quot;</span>:[<span class="hljs-number">29</span>,<span class="hljs-number">9</span>,<span class="hljs-number">8</span>],<span class="hljs-string">&quot;ref&quot;</span>:[[<span class="hljs-string">&quot;green&quot;</span>,<span class="hljs-string">&quot;black&quot;</span>,<span class="hljs-string">&quot;blue&quot;</span>],[<span class="hljs-string">&quot;purple&quot;</span>,<span class="hljs-string">&quot;white&quot;</span>,<span class="hljs-string">&quot;green&quot;</span>],[<span class="hljs-string">&quot;red&quot;</span>,<span class="hljs-string">&quot;blue&quot;</span>,<span class="hljs-string">&quot;black&quot;</span>]]}, <span class="hljs-built_in">id</span>=<span class="hljs-number">927</span>}, score=<span class="hljs-number">1.0029297</span>, <span class="hljs-built_in">id</span>=<span class="hljs-number">927</span>)
+<button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-comment">// 4. Basic search with a JSON field</span>
 query_vectors = [[<span class="hljs-number">0.6765405125697714</span>, <span class="hljs-number">0.759217474274025</span>, <span class="hljs-number">0.4122471841491111</span>, <span class="hljs-number">0.3346805565394215</span>, <span class="hljs-number">0.09679748345514638</span>]]
 
@@ -855,121 +820,30 @@ res = client.query(
 <span class="hljs-comment">#     }</span>
 <span class="hljs-comment"># ]</span>
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java"><span class="hljs-comment">// 5. Advanced search within a JSON field</span>
-searchReq = <span class="hljs-title class_">SearchReq</span>.<span class="hljs-title function_">builder</span>()
-    .<span class="hljs-title function_">collectionName</span>(<span class="hljs-string">&quot;test_collection&quot;</span>)
-    .<span class="hljs-title function_">data</span>(query_vectors)
-    .<span class="hljs-title function_">filter</span>(<span class="hljs-string">&quot;JSON_CONTAINS(color[\&quot;ref\&quot;], [\&quot;purple\&quot;, \&quot;pink\&quot;, \&quot;orange\&quot;])&quot;</span>)
-    .<span class="hljs-title function_">outputFields</span>(<span class="hljs-title class_">Arrays</span>.<span class="hljs-title function_">asList</span>(<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-string">&quot;color&quot;</span>))
-    .<span class="hljs-title function_">topK</span>(<span class="hljs-number">3</span>)
-    .<span class="hljs-title function_">build</span>();
+<pre><code translate="no" class="language-java">// <span class="hljs-number">5.</span> Advanced search within a JSON field
+searchReq = SearchReq.builder()
+        .collectionName(<span class="hljs-string">&quot;test_collection&quot;</span>)
+        .data(query_vectors)
+        .<span class="hljs-built_in">filter</span>(<span class="hljs-string">&quot;JSON_CONTAINS(color[\&quot;ref\&quot;], [\&quot;purple\&quot;, \&quot;pink\&quot;, \&quot;orange\&quot;])&quot;</span>)
+        .outputFields(Arrays.asList(<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-string">&quot;color&quot;</span>))
+        .topK(<span class="hljs-number">3</span>)
+        .build();
 
-searchResp = client.<span class="hljs-title function_">search</span>(searchReq);
+searchResp = client.search(searchReq);
 
-<span class="hljs-title class_">System</span>.<span class="hljs-property">out</span>.<span class="hljs-title function_">println</span>(<span class="hljs-title class_">JSON</span><span class="hljs-built_in">Object</span>.<span class="hljs-title function_">toJSON</span>(searchResp));
+searchResults = searchResp.getSearchResults();
+<span class="hljs-keyword">for</span> (<span class="hljs-type">List</span>&lt;SearchResp.SearchResult&gt; results : searchResults) {
+    System.out.println(<span class="hljs-string">&quot;TopK results:&quot;</span>);
+    <span class="hljs-keyword">for</span> (SearchResp.SearchResult result : results) {
+        System.out.println(result);
+    }
+}
 
-<span class="hljs-comment">// Output:</span>
-<span class="hljs-comment">// {&quot;searchResults&quot;: [[</span>
-<span class="hljs-comment">//     {</span>
-<span class="hljs-comment">//         &quot;distance&quot;: 1.1811467,</span>
-<span class="hljs-comment">//         &quot;id&quot;: 180,</span>
-<span class="hljs-comment">//         &quot;entity&quot;: {</span>
-<span class="hljs-comment">//             &quot;color&quot;: {</span>
-<span class="hljs-comment">//                 &quot;coord&quot;: [</span>
-<span class="hljs-comment">//                     17,</span>
-<span class="hljs-comment">//                     26,</span>
-<span class="hljs-comment">//                     14</span>
-<span class="hljs-comment">//                 ],</span>
-<span class="hljs-comment">//                 &quot;ref&quot;: [</span>
-<span class="hljs-comment">//                     [</span>
-<span class="hljs-comment">//                         &quot;white&quot;,</span>
-<span class="hljs-comment">//                         &quot;black&quot;,</span>
-<span class="hljs-comment">//                         &quot;brown&quot;</span>
-<span class="hljs-comment">//                     ],</span>
-<span class="hljs-comment">//                     [</span>
-<span class="hljs-comment">//                         &quot;purple&quot;,</span>
-<span class="hljs-comment">//                         &quot;pink&quot;,</span>
-<span class="hljs-comment">//                         &quot;orange&quot;</span>
-<span class="hljs-comment">//                     ],</span>
-<span class="hljs-comment">//                     [</span>
-<span class="hljs-comment">//                         &quot;black&quot;,</span>
-<span class="hljs-comment">//                         &quot;pink&quot;,</span>
-<span class="hljs-comment">//                         &quot;red&quot;</span>
-<span class="hljs-comment">//                     ]</span>
-<span class="hljs-comment">//                 ],</span>
-<span class="hljs-comment">//                 &quot;label&quot;: &quot;green&quot;,</span>
-<span class="hljs-comment">//                 &quot;tag&quot;: 2470</span>
-<span class="hljs-comment">//             },</span>
-<span class="hljs-comment">//             &quot;id&quot;: 180</span>
-<span class="hljs-comment">//         }</span>
-<span class="hljs-comment">//     },</span>
-<span class="hljs-comment">//     {</span>
-<span class="hljs-comment">//         &quot;distance&quot;: 0.6487204,</span>
-<span class="hljs-comment">//         &quot;id&quot;: 331,</span>
-<span class="hljs-comment">//         &quot;entity&quot;: {</span>
-<span class="hljs-comment">//             &quot;color&quot;: {</span>
-<span class="hljs-comment">//                 &quot;coord&quot;: [</span>
-<span class="hljs-comment">//                     16,</span>
-<span class="hljs-comment">//                     32,</span>
-<span class="hljs-comment">//                     23</span>
-<span class="hljs-comment">//                 ],</span>
-<span class="hljs-comment">//                 &quot;ref&quot;: [</span>
-<span class="hljs-comment">//                     [</span>
-<span class="hljs-comment">//                         &quot;purple&quot;,</span>
-<span class="hljs-comment">//                         &quot;pink&quot;,</span>
-<span class="hljs-comment">//                         &quot;orange&quot;</span>
-<span class="hljs-comment">//                     ],</span>
-<span class="hljs-comment">//                     [</span>
-<span class="hljs-comment">//                         &quot;brown&quot;,</span>
-<span class="hljs-comment">//                         &quot;red&quot;,</span>
-<span class="hljs-comment">//                         &quot;orange&quot;</span>
-<span class="hljs-comment">//                     ],</span>
-<span class="hljs-comment">//                     [</span>
-<span class="hljs-comment">//                         &quot;red&quot;,</span>
-<span class="hljs-comment">//                         &quot;yellow&quot;,</span>
-<span class="hljs-comment">//                         &quot;brown&quot;</span>
-<span class="hljs-comment">//                     ]</span>
-<span class="hljs-comment">//                 ],</span>
-<span class="hljs-comment">//                 &quot;label&quot;: &quot;white&quot;,</span>
-<span class="hljs-comment">//                 &quot;tag&quot;: 1236</span>
-<span class="hljs-comment">//             },</span>
-<span class="hljs-comment">//             &quot;id&quot;: 331</span>
-<span class="hljs-comment">//         }</span>
-<span class="hljs-comment">//     },</span>
-<span class="hljs-comment">//     {</span>
-<span class="hljs-comment">//         &quot;distance&quot;: 0.59387654,</span>
-<span class="hljs-comment">//         &quot;id&quot;: 483,</span>
-<span class="hljs-comment">//         &quot;entity&quot;: {</span>
-<span class="hljs-comment">//             &quot;color&quot;: {</span>
-<span class="hljs-comment">//                 &quot;coord&quot;: [</span>
-<span class="hljs-comment">//                     8,</span>
-<span class="hljs-comment">//                     33,</span>
-<span class="hljs-comment">//                     2</span>
-<span class="hljs-comment">//                 ],</span>
-<span class="hljs-comment">//                 &quot;ref&quot;: [</span>
-<span class="hljs-comment">//                     [</span>
-<span class="hljs-comment">//                         &quot;red&quot;,</span>
-<span class="hljs-comment">//                         &quot;orange&quot;,</span>
-<span class="hljs-comment">//                         &quot;brown&quot;</span>
-<span class="hljs-comment">//                     ],</span>
-<span class="hljs-comment">//                     [</span>
-<span class="hljs-comment">//                         &quot;purple&quot;,</span>
-<span class="hljs-comment">//                         &quot;pink&quot;,</span>
-<span class="hljs-comment">//                         &quot;orange&quot;</span>
-<span class="hljs-comment">//                     ],</span>
-<span class="hljs-comment">//                     [</span>
-<span class="hljs-comment">//                         &quot;brown&quot;,</span>
-<span class="hljs-comment">//                         &quot;blue&quot;,</span>
-<span class="hljs-comment">//                         &quot;green&quot;</span>
-<span class="hljs-comment">//                     ]</span>
-<span class="hljs-comment">//                 ],</span>
-<span class="hljs-comment">//                 &quot;label&quot;: &quot;pink&quot;,</span>
-<span class="hljs-comment">//                 &quot;tag&quot;: 5686</span>
-<span class="hljs-comment">//             },</span>
-<span class="hljs-comment">//             &quot;id&quot;: 483</span>
-<span class="hljs-comment">//         }</span>
-<span class="hljs-comment">//     }</span>
-<span class="hljs-comment">// ]]}</span>
+// Output:
+// SearchResp.SearchResult(entity={color={<span class="hljs-string">&quot;label&quot;</span>:<span class="hljs-string">&quot;pink&quot;</span>,<span class="hljs-string">&quot;tag&quot;</span>:<span class="hljs-number">2963</span>,<span class="hljs-string">&quot;coord&quot;</span>:[<span class="hljs-number">15</span>,<span class="hljs-number">33</span>,<span class="hljs-number">30</span>],<span class="hljs-string">&quot;ref&quot;</span>:[[<span class="hljs-string">&quot;green&quot;</span>,<span class="hljs-string">&quot;white&quot;</span>,<span class="hljs-string">&quot;white&quot;</span>],[<span class="hljs-string">&quot;purple&quot;</span>,<span class="hljs-string">&quot;pink&quot;</span>,<span class="hljs-string">&quot;orange&quot;</span>],[<span class="hljs-string">&quot;yellow&quot;</span>,<span class="hljs-string">&quot;black&quot;</span>,<span class="hljs-string">&quot;pink&quot;</span>]]}, <span class="hljs-built_in">id</span>=<span class="hljs-number">273</span>}, score=<span class="hljs-number">0.46558747</span>, <span class="hljs-built_in">id</span>=<span class="hljs-number">273</span>)
+// SearchResp.SearchResult(entity={color={<span class="hljs-string">&quot;label&quot;</span>:<span class="hljs-string">&quot;pink&quot;</span>,<span class="hljs-string">&quot;tag&quot;</span>:<span class="hljs-number">4027</span>,<span class="hljs-string">&quot;coord&quot;</span>:[<span class="hljs-number">32</span>,<span class="hljs-number">34</span>,<span class="hljs-number">19</span>],<span class="hljs-string">&quot;ref&quot;</span>:[[<span class="hljs-string">&quot;red&quot;</span>,<span class="hljs-string">&quot;white&quot;</span>,<span class="hljs-string">&quot;blue&quot;</span>],[<span class="hljs-string">&quot;white&quot;</span>,<span class="hljs-string">&quot;pink&quot;</span>,<span class="hljs-string">&quot;yellow&quot;</span>],[<span class="hljs-string">&quot;purple&quot;</span>,<span class="hljs-string">&quot;pink&quot;</span>,<span class="hljs-string">&quot;orange&quot;</span>]]}, <span class="hljs-built_in">id</span>=<span class="hljs-number">344</span>}, score=<span class="hljs-number">0.2637315</span>, <span class="hljs-built_in">id</span>=<span class="hljs-number">344</span>)
+// SearchResp.SearchResult(entity={color={<span class="hljs-string">&quot;label&quot;</span>:<span class="hljs-string">&quot;black&quot;</span>,<span class="hljs-string">&quot;tag&quot;</span>:<span class="hljs-number">1603</span>,<span class="hljs-string">&quot;coord&quot;</span>:[<span class="hljs-number">33</span>,<span class="hljs-number">12</span>,<span class="hljs-number">23</span>],<span class="hljs-string">&quot;ref&quot;</span>:[[<span class="hljs-string">&quot;pink&quot;</span>,<span class="hljs-string">&quot;brown&quot;</span>,<span class="hljs-string">&quot;black&quot;</span>],[<span class="hljs-string">&quot;black&quot;</span>,<span class="hljs-string">&quot;purple&quot;</span>,<span class="hljs-string">&quot;black&quot;</span>],[<span class="hljs-string">&quot;purple&quot;</span>,<span class="hljs-string">&quot;pink&quot;</span>,<span class="hljs-string">&quot;orange&quot;</span>]]}, <span class="hljs-built_in">id</span>=<span class="hljs-number">205</span>}, score=<span class="hljs-number">0.26133868</span>, <span class="hljs-built_in">id</span>=<span class="hljs-number">205</span>)
+
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-comment">// 5. Advanced search within a JSON field</span>
 res = <span class="hljs-keyword">await</span> client.<span class="hljs-title function_">search</span>({
@@ -1075,7 +949,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 <span class="hljs-comment">// ]</span>
 <span class="hljs-comment">// </span>
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p>Filtre les entités qui ont le coordinateur de <code translate="no">[4, 5]</code>.</p>
+<li><p>Filtre les entités dont le coordinateur est <code translate="no">[4, 5]</code>.</p>
 <p><div class="multipleCode">
 <a href="#python">Python </a><a href="#java">Java</a><a href="#javascript">Node.js</a></div></p>
 <pre><code translate="no" class="language-python">res = client.query(
@@ -1180,120 +1054,29 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 <span class="hljs-comment">#     }</span>
 <span class="hljs-comment"># ]</span>
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java">searchReq = <span class="hljs-title class_">SearchReq</span>.<span class="hljs-title function_">builder</span>()
-    .<span class="hljs-title function_">collectionName</span>(<span class="hljs-string">&quot;test_collection&quot;</span>)
-    .<span class="hljs-title function_">data</span>(query_vectors)
-    .<span class="hljs-title function_">filter</span>(<span class="hljs-string">&quot;JSON_CONTAINS_ALL(color[\&quot;coord\&quot;], [4, 5])&quot;</span>)
-    .<span class="hljs-title function_">outputFields</span>(<span class="hljs-title class_">Arrays</span>.<span class="hljs-title function_">asList</span>(<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-string">&quot;color&quot;</span>))
-    .<span class="hljs-title function_">topK</span>(<span class="hljs-number">3</span>)
-    .<span class="hljs-title function_">build</span>();
+<pre><code translate="no" class="language-java">searchReq = SearchReq.builder()
+        .collectionName(<span class="hljs-string">&quot;test_collection&quot;</span>)
+        .data(query_vectors)
+        .<span class="hljs-built_in">filter</span>(<span class="hljs-string">&quot;JSON_CONTAINS_ALL(color[\&quot;coord\&quot;], [4, 5])&quot;</span>)
+        .outputFields(Arrays.asList(<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-string">&quot;color&quot;</span>))
+        .topK(<span class="hljs-number">3</span>)
+        .build();
 
-searchResp = client.<span class="hljs-title function_">search</span>(searchReq);
+searchResp = client.search(searchReq);
 
-<span class="hljs-title class_">System</span>.<span class="hljs-property">out</span>.<span class="hljs-title function_">println</span>(<span class="hljs-title class_">JSON</span><span class="hljs-built_in">Object</span>.<span class="hljs-title function_">toJSON</span>(searchResp));     
+searchResults = searchResp.getSearchResults();
+<span class="hljs-keyword">for</span> (<span class="hljs-type">List</span>&lt;SearchResp.SearchResult&gt; results : searchResults) {
+    System.out.println(<span class="hljs-string">&quot;TopK results:&quot;</span>);
+    <span class="hljs-keyword">for</span> (SearchResp.SearchResult result : results) {
+        System.out.println(result);
+    }
+} 
 
-<span class="hljs-comment">// Output:</span>
-<span class="hljs-comment">// {&quot;searchResults&quot;: [[</span>
-<span class="hljs-comment">//     {</span>
-<span class="hljs-comment">//         &quot;distance&quot;: 0.77485126,</span>
-<span class="hljs-comment">//         &quot;id&quot;: 304,</span>
-<span class="hljs-comment">//         &quot;entity&quot;: {</span>
-<span class="hljs-comment">//             &quot;color&quot;: {</span>
-<span class="hljs-comment">//                 &quot;coord&quot;: [</span>
-<span class="hljs-comment">//                     4,</span>
-<span class="hljs-comment">//                     5,</span>
-<span class="hljs-comment">//                     13</span>
-<span class="hljs-comment">//                 ],</span>
-<span class="hljs-comment">//                 &quot;ref&quot;: [</span>
-<span class="hljs-comment">//                     [</span>
-<span class="hljs-comment">//                         &quot;purple&quot;,</span>
-<span class="hljs-comment">//                         &quot;pink&quot;,</span>
-<span class="hljs-comment">//                         &quot;brown&quot;</span>
-<span class="hljs-comment">//                     ],</span>
-<span class="hljs-comment">//                     [</span>
-<span class="hljs-comment">//                         &quot;orange&quot;,</span>
-<span class="hljs-comment">//                         &quot;red&quot;,</span>
-<span class="hljs-comment">//                         &quot;blue&quot;</span>
-<span class="hljs-comment">//                     ],</span>
-<span class="hljs-comment">//                     [</span>
-<span class="hljs-comment">//                         &quot;yellow&quot;,</span>
-<span class="hljs-comment">//                         &quot;blue&quot;,</span>
-<span class="hljs-comment">//                         &quot;purple&quot;</span>
-<span class="hljs-comment">//                     ]</span>
-<span class="hljs-comment">//                 ],</span>
-<span class="hljs-comment">//                 &quot;label&quot;: &quot;blue&quot;,</span>
-<span class="hljs-comment">//                 &quot;tag&quot;: 7228</span>
-<span class="hljs-comment">//             },</span>
-<span class="hljs-comment">//             &quot;id&quot;: 304</span>
-<span class="hljs-comment">//         }</span>
-<span class="hljs-comment">//     },</span>
-<span class="hljs-comment">//     {</span>
-<span class="hljs-comment">//         &quot;distance&quot;: 0.68138736,</span>
-<span class="hljs-comment">//         &quot;id&quot;: 253,</span>
-<span class="hljs-comment">//         &quot;entity&quot;: {</span>
-<span class="hljs-comment">//             &quot;color&quot;: {</span>
-<span class="hljs-comment">//                 &quot;coord&quot;: [</span>
-<span class="hljs-comment">//                     5,</span>
-<span class="hljs-comment">//                     38,</span>
-<span class="hljs-comment">//                     4</span>
-<span class="hljs-comment">//                 ],</span>
-<span class="hljs-comment">//                 &quot;ref&quot;: [</span>
-<span class="hljs-comment">//                     [</span>
-<span class="hljs-comment">//                         &quot;black&quot;,</span>
-<span class="hljs-comment">//                         &quot;pink&quot;,</span>
-<span class="hljs-comment">//                         &quot;blue&quot;</span>
-<span class="hljs-comment">//                     ],</span>
-<span class="hljs-comment">//                     [</span>
-<span class="hljs-comment">//                         &quot;pink&quot;,</span>
-<span class="hljs-comment">//                         &quot;brown&quot;,</span>
-<span class="hljs-comment">//                         &quot;pink&quot;</span>
-<span class="hljs-comment">//                     ],</span>
-<span class="hljs-comment">//                     [</span>
-<span class="hljs-comment">//                         &quot;red&quot;,</span>
-<span class="hljs-comment">//                         &quot;pink&quot;,</span>
-<span class="hljs-comment">//                         &quot;orange&quot;</span>
-<span class="hljs-comment">//                     ]</span>
-<span class="hljs-comment">//                 ],</span>
-<span class="hljs-comment">//                 &quot;label&quot;: &quot;blue&quot;,</span>
-<span class="hljs-comment">//                 &quot;tag&quot;: 6935</span>
-<span class="hljs-comment">//             },</span>
-<span class="hljs-comment">//             &quot;id&quot;: 253</span>
-<span class="hljs-comment">//         }</span>
-<span class="hljs-comment">//     },</span>
-<span class="hljs-comment">//     {</span>
-<span class="hljs-comment">//         &quot;distance&quot;: 0.56997097,</span>
-<span class="hljs-comment">//         &quot;id&quot;: 944,</span>
-<span class="hljs-comment">//         &quot;entity&quot;: {</span>
-<span class="hljs-comment">//             &quot;color&quot;: {</span>
-<span class="hljs-comment">//                 &quot;coord&quot;: [</span>
-<span class="hljs-comment">//                     5,</span>
-<span class="hljs-comment">//                     6,</span>
-<span class="hljs-comment">//                     4</span>
-<span class="hljs-comment">//                 ],</span>
-<span class="hljs-comment">//                 &quot;ref&quot;: [</span>
-<span class="hljs-comment">//                     [</span>
-<span class="hljs-comment">//                         &quot;blue&quot;,</span>
-<span class="hljs-comment">//                         &quot;yellow&quot;,</span>
-<span class="hljs-comment">//                         &quot;orange&quot;</span>
-<span class="hljs-comment">//                     ],</span>
-<span class="hljs-comment">//                     [</span>
-<span class="hljs-comment">//                         &quot;orange&quot;,</span>
-<span class="hljs-comment">//                         &quot;white&quot;,</span>
-<span class="hljs-comment">//                         &quot;orange&quot;</span>
-<span class="hljs-comment">//                     ],</span>
-<span class="hljs-comment">//                     [</span>
-<span class="hljs-comment">//                         &quot;pink&quot;,</span>
-<span class="hljs-comment">//                         &quot;brown&quot;,</span>
-<span class="hljs-comment">//                         &quot;white&quot;</span>
-<span class="hljs-comment">//                     ]</span>
-<span class="hljs-comment">//                 ],</span>
-<span class="hljs-comment">//                 &quot;label&quot;: &quot;pink&quot;,</span>
-<span class="hljs-comment">//                 &quot;tag&quot;: 3325</span>
-<span class="hljs-comment">//             },</span>
-<span class="hljs-comment">//             &quot;id&quot;: 944</span>
-<span class="hljs-comment">//         }</span>
-<span class="hljs-comment">//     }</span>
-<span class="hljs-comment">// ]]}</span>
+// Output:
+// SearchResp.SearchResult(entity={color={<span class="hljs-string">&quot;label&quot;</span>:<span class="hljs-string">&quot;green&quot;</span>,<span class="hljs-string">&quot;tag&quot;</span>:<span class="hljs-number">9899</span>,<span class="hljs-string">&quot;coord&quot;</span>:[<span class="hljs-number">5</span>,<span class="hljs-number">4</span>,<span class="hljs-number">25</span>],<span class="hljs-string">&quot;ref&quot;</span>:[[<span class="hljs-string">&quot;purple&quot;</span>,<span class="hljs-string">&quot;black&quot;</span>,<span class="hljs-string">&quot;yellow&quot;</span>],[<span class="hljs-string">&quot;orange&quot;</span>,<span class="hljs-string">&quot;green&quot;</span>,<span class="hljs-string">&quot;purple&quot;</span>],[<span class="hljs-string">&quot;red&quot;</span>,<span class="hljs-string">&quot;purple&quot;</span>,<span class="hljs-string">&quot;pink&quot;</span>]]}, <span class="hljs-built_in">id</span>=<span class="hljs-number">708</span>}, score=<span class="hljs-number">0.56576324</span>, <span class="hljs-built_in">id</span>=<span class="hljs-number">708</span>)
+// SearchResp.SearchResult(entity={color={<span class="hljs-string">&quot;label&quot;</span>:<span class="hljs-string">&quot;red&quot;</span>,<span class="hljs-string">&quot;tag&quot;</span>:<span class="hljs-number">2176</span>,<span class="hljs-string">&quot;coord&quot;</span>:[<span class="hljs-number">4</span>,<span class="hljs-number">5</span>,<span class="hljs-number">23</span>],<span class="hljs-string">&quot;ref&quot;</span>:[[<span class="hljs-string">&quot;red&quot;</span>,<span class="hljs-string">&quot;black&quot;</span>,<span class="hljs-string">&quot;green&quot;</span>],[<span class="hljs-string">&quot;brown&quot;</span>,<span class="hljs-string">&quot;orange&quot;</span>,<span class="hljs-string">&quot;brown&quot;</span>],[<span class="hljs-string">&quot;brown&quot;</span>,<span class="hljs-string">&quot;orange&quot;</span>,<span class="hljs-string">&quot;yellow&quot;</span>]]}, <span class="hljs-built_in">id</span>=<span class="hljs-number">981</span>}, score=<span class="hljs-number">0.5656834</span>, <span class="hljs-built_in">id</span>=<span class="hljs-number">981</span>)
+// SearchResp.SearchResult(entity={color={<span class="hljs-string">&quot;label&quot;</span>:<span class="hljs-string">&quot;pink&quot;</span>,<span class="hljs-string">&quot;tag&quot;</span>:<span class="hljs-number">3085</span>,<span class="hljs-string">&quot;coord&quot;</span>:[<span class="hljs-number">5</span>,<span class="hljs-number">3</span>,<span class="hljs-number">4</span>],<span class="hljs-string">&quot;ref&quot;</span>:[[<span class="hljs-string">&quot;yellow&quot;</span>,<span class="hljs-string">&quot;orange&quot;</span>,<span class="hljs-string">&quot;green&quot;</span>],[<span class="hljs-string">&quot;black&quot;</span>,<span class="hljs-string">&quot;pink&quot;</span>,<span class="hljs-string">&quot;red&quot;</span>],[<span class="hljs-string">&quot;orange&quot;</span>,<span class="hljs-string">&quot;blue&quot;</span>,<span class="hljs-string">&quot;blue&quot;</span>]]}, <span class="hljs-built_in">id</span>=<span class="hljs-number">221</span>}, score=<span class="hljs-number">0.3708634</span>, <span class="hljs-built_in">id</span>=<span class="hljs-number">221</span>)
+
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript">res = <span class="hljs-keyword">await</span> client.<span class="hljs-title function_">search</span>({
     <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;test_collection&quot;</span>,
@@ -1476,120 +1259,28 @@ searchResp = client.<span class="hljs-title function_">search</span>(searchReq);
 <span class="hljs-comment">#     }</span>
 <span class="hljs-comment"># ]</span>
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java">searchReq = <span class="hljs-title class_">SearchReq</span>.<span class="hljs-title function_">builder</span>()
-    .<span class="hljs-title function_">collectionName</span>(<span class="hljs-string">&quot;test_collection&quot;</span>)
-    .<span class="hljs-title function_">data</span>(query_vectors)
-    .<span class="hljs-title function_">filter</span>(<span class="hljs-string">&quot;JSON_CONTAINS_ANY(color[\&quot;coord\&quot;], [4, 5])&quot;</span>)
-    .<span class="hljs-title function_">outputFields</span>(<span class="hljs-title class_">Arrays</span>.<span class="hljs-title function_">asList</span>(<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-string">&quot;color&quot;</span>))
-    .<span class="hljs-title function_">topK</span>(<span class="hljs-number">3</span>)
-    .<span class="hljs-title function_">build</span>();
+<pre><code translate="no" class="language-java">searchReq = SearchReq.builder()
+        .collectionName(<span class="hljs-string">&quot;test_collection&quot;</span>)
+        .data(query_vectors)
+        .<span class="hljs-built_in">filter</span>(<span class="hljs-string">&quot;JSON_CONTAINS_ANY(color[\&quot;coord\&quot;], [4, 5])&quot;</span>)
+        .outputFields(Arrays.asList(<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-string">&quot;color&quot;</span>))
+        .topK(<span class="hljs-number">3</span>)
+        .build();
 
-searchResp = client.<span class="hljs-title function_">search</span>(searchReq);
+searchResp = client.search(searchReq);
+searchResults = searchResp.getSearchResults();
+<span class="hljs-keyword">for</span> (<span class="hljs-type">List</span>&lt;SearchResp.SearchResult&gt; results : searchResults) {
+    System.out.println(<span class="hljs-string">&quot;TopK results:&quot;</span>);
+    <span class="hljs-keyword">for</span> (SearchResp.SearchResult result : results) {
+        System.out.println(result);
+    }
+} 
 
-<span class="hljs-title class_">System</span>.<span class="hljs-property">out</span>.<span class="hljs-title function_">println</span>(<span class="hljs-title class_">JSON</span><span class="hljs-built_in">Object</span>.<span class="hljs-title function_">toJSON</span>(searchResp));   
+// Output:
+// SearchResp.SearchResult(entity={color={<span class="hljs-string">&quot;label&quot;</span>:<span class="hljs-string">&quot;brown&quot;</span>,<span class="hljs-string">&quot;tag&quot;</span>:<span class="hljs-number">8414</span>,<span class="hljs-string">&quot;coord&quot;</span>:[<span class="hljs-number">3</span>,<span class="hljs-number">4</span>,<span class="hljs-number">15</span>],<span class="hljs-string">&quot;ref&quot;</span>:[[<span class="hljs-string">&quot;blue&quot;</span>,<span class="hljs-string">&quot;green&quot;</span>,<span class="hljs-string">&quot;pink&quot;</span>],[<span class="hljs-string">&quot;red&quot;</span>,<span class="hljs-string">&quot;orange&quot;</span>,<span class="hljs-string">&quot;pink&quot;</span>],[<span class="hljs-string">&quot;yellow&quot;</span>,<span class="hljs-string">&quot;pink&quot;</span>,<span class="hljs-string">&quot;green&quot;</span>]]}, <span class="hljs-built_in">id</span>=<span class="hljs-number">11</span>}, score=<span class="hljs-number">1.18235</span>, <span class="hljs-built_in">id</span>=<span class="hljs-number">11</span>)
+// SearchResp.SearchResult(entity={color={<span class="hljs-string">&quot;label&quot;</span>:<span class="hljs-string">&quot;yellow&quot;</span>,<span class="hljs-string">&quot;tag&quot;</span>:<span class="hljs-number">2846</span>,<span class="hljs-string">&quot;coord&quot;</span>:[<span class="hljs-number">20</span>,<span class="hljs-number">4</span>,<span class="hljs-number">15</span>],<span class="hljs-string">&quot;ref&quot;</span>:[[<span class="hljs-string">&quot;white&quot;</span>,<span class="hljs-string">&quot;black&quot;</span>,<span class="hljs-string">&quot;purple&quot;</span>],[<span class="hljs-string">&quot;green&quot;</span>,<span class="hljs-string">&quot;black&quot;</span>,<span class="hljs-string">&quot;yellow&quot;</span>],[<span class="hljs-string">&quot;red&quot;</span>,<span class="hljs-string">&quot;purple&quot;</span>,<span class="hljs-string">&quot;brown&quot;</span>]]}, <span class="hljs-built_in">id</span>=<span class="hljs-number">589</span>}, score=<span class="hljs-number">1.1414992</span>, <span class="hljs-built_in">id</span>=<span class="hljs-number">589</span>)
+// SearchResp.SearchResult(entity={color={<span class="hljs-string">&quot;label&quot;</span>:<span class="hljs-string">&quot;pink&quot;</span>,<span class="hljs-string">&quot;tag&quot;</span>:<span class="hljs-number">6744</span>,<span class="hljs-string">&quot;coord&quot;</span>:[<span class="hljs-number">25</span>,<span class="hljs-number">33</span>,<span class="hljs-number">5</span>],<span class="hljs-string">&quot;ref&quot;</span>:[[<span class="hljs-string">&quot;orange&quot;</span>,<span class="hljs-string">&quot;purple&quot;</span>,<span class="hljs-string">&quot;white&quot;</span>],[<span class="hljs-string">&quot;white&quot;</span>,<span class="hljs-string">&quot;pink&quot;</span>,<span class="hljs-string">&quot;brown&quot;</span>],[<span class="hljs-string">&quot;red&quot;</span>,<span class="hljs-string">&quot;pink&quot;</span>,<span class="hljs-string">&quot;red&quot;</span>]]}, <span class="hljs-built_in">id</span>=<span class="hljs-number">567</span>}, score=<span class="hljs-number">1.1087029</span>, <span class="hljs-built_in">id</span>=<span class="hljs-number">567</span>)
 
-<span class="hljs-comment">// Output:</span>
-<span class="hljs-comment">// {&quot;searchResults&quot;: [[</span>
-<span class="hljs-comment">//     {</span>
-<span class="hljs-comment">//         &quot;distance&quot;: 1.002122,</span>
-<span class="hljs-comment">//         &quot;id&quot;: 629,</span>
-<span class="hljs-comment">//         &quot;entity&quot;: {</span>
-<span class="hljs-comment">//             &quot;color&quot;: {</span>
-<span class="hljs-comment">//                 &quot;coord&quot;: [</span>
-<span class="hljs-comment">//                     23,</span>
-<span class="hljs-comment">//                     5,</span>
-<span class="hljs-comment">//                     35</span>
-<span class="hljs-comment">//                 ],</span>
-<span class="hljs-comment">//                 &quot;ref&quot;: [</span>
-<span class="hljs-comment">//                     [</span>
-<span class="hljs-comment">//                         &quot;black&quot;,</span>
-<span class="hljs-comment">//                         &quot;yellow&quot;,</span>
-<span class="hljs-comment">//                         &quot;black&quot;</span>
-<span class="hljs-comment">//                     ],</span>
-<span class="hljs-comment">//                     [</span>
-<span class="hljs-comment">//                         &quot;black&quot;,</span>
-<span class="hljs-comment">//                         &quot;purple&quot;,</span>
-<span class="hljs-comment">//                         &quot;white&quot;</span>
-<span class="hljs-comment">//                     ],</span>
-<span class="hljs-comment">//                     [</span>
-<span class="hljs-comment">//                         &quot;black&quot;,</span>
-<span class="hljs-comment">//                         &quot;brown&quot;,</span>
-<span class="hljs-comment">//                         &quot;orange&quot;</span>
-<span class="hljs-comment">//                     ]</span>
-<span class="hljs-comment">//                 ],</span>
-<span class="hljs-comment">//                 &quot;label&quot;: &quot;red&quot;,</span>
-<span class="hljs-comment">//                 &quot;tag&quot;: 5072</span>
-<span class="hljs-comment">//             },</span>
-<span class="hljs-comment">//             &quot;id&quot;: 629</span>
-<span class="hljs-comment">//         }</span>
-<span class="hljs-comment">//     },</span>
-<span class="hljs-comment">//     {</span>
-<span class="hljs-comment">//         &quot;distance&quot;: 0.85788506,</span>
-<span class="hljs-comment">//         &quot;id&quot;: 108,</span>
-<span class="hljs-comment">//         &quot;entity&quot;: {</span>
-<span class="hljs-comment">//             &quot;color&quot;: {</span>
-<span class="hljs-comment">//                 &quot;coord&quot;: [</span>
-<span class="hljs-comment">//                     25,</span>
-<span class="hljs-comment">//                     5,</span>
-<span class="hljs-comment">//                     38</span>
-<span class="hljs-comment">//                 ],</span>
-<span class="hljs-comment">//                 &quot;ref&quot;: [</span>
-<span class="hljs-comment">//                     [</span>
-<span class="hljs-comment">//                         &quot;green&quot;,</span>
-<span class="hljs-comment">//                         &quot;brown&quot;,</span>
-<span class="hljs-comment">//                         &quot;pink&quot;</span>
-<span class="hljs-comment">//                     ],</span>
-<span class="hljs-comment">//                     [</span>
-<span class="hljs-comment">//                         &quot;purple&quot;,</span>
-<span class="hljs-comment">//                         &quot;green&quot;,</span>
-<span class="hljs-comment">//                         &quot;green&quot;</span>
-<span class="hljs-comment">//                     ],</span>
-<span class="hljs-comment">//                     [</span>
-<span class="hljs-comment">//                         &quot;green&quot;,</span>
-<span class="hljs-comment">//                         &quot;pink&quot;,</span>
-<span class="hljs-comment">//                         &quot;black&quot;</span>
-<span class="hljs-comment">//                     ]</span>
-<span class="hljs-comment">//                 ],</span>
-<span class="hljs-comment">//                 &quot;label&quot;: &quot;orange&quot;,</span>
-<span class="hljs-comment">//                 &quot;tag&quot;: 8982</span>
-<span class="hljs-comment">//             },</span>
-<span class="hljs-comment">//             &quot;id&quot;: 108</span>
-<span class="hljs-comment">//         }</span>
-<span class="hljs-comment">//     },</span>
-<span class="hljs-comment">//     {</span>
-<span class="hljs-comment">//         &quot;distance&quot;: 0.80550396,</span>
-<span class="hljs-comment">//         &quot;id&quot;: 120,</span>
-<span class="hljs-comment">//         &quot;entity&quot;: {</span>
-<span class="hljs-comment">//             &quot;color&quot;: {</span>
-<span class="hljs-comment">//                 &quot;coord&quot;: [</span>
-<span class="hljs-comment">//                     25,</span>
-<span class="hljs-comment">//                     16,</span>
-<span class="hljs-comment">//                     4</span>
-<span class="hljs-comment">//                 ],</span>
-<span class="hljs-comment">//                 &quot;ref&quot;: [</span>
-<span class="hljs-comment">//                     [</span>
-<span class="hljs-comment">//                         &quot;red&quot;,</span>
-<span class="hljs-comment">//                         &quot;green&quot;,</span>
-<span class="hljs-comment">//                         &quot;orange&quot;</span>
-<span class="hljs-comment">//                     ],</span>
-<span class="hljs-comment">//                     [</span>
-<span class="hljs-comment">//                         &quot;blue&quot;,</span>
-<span class="hljs-comment">//                         &quot;pink&quot;,</span>
-<span class="hljs-comment">//                         &quot;blue&quot;</span>
-<span class="hljs-comment">//                     ],</span>
-<span class="hljs-comment">//                     [</span>
-<span class="hljs-comment">//                         &quot;brown&quot;,</span>
-<span class="hljs-comment">//                         &quot;black&quot;,</span>
-<span class="hljs-comment">//                         &quot;green&quot;</span>
-<span class="hljs-comment">//                     ]</span>
-<span class="hljs-comment">//                 ],</span>
-<span class="hljs-comment">//                 &quot;label&quot;: &quot;purple&quot;,</span>
-<span class="hljs-comment">//                 &quot;tag&quot;: 6711</span>
-<span class="hljs-comment">//             },</span>
-<span class="hljs-comment">//             &quot;id&quot;: 120</span>
-<span class="hljs-comment">//         }</span>
-<span class="hljs-comment">//     }</span>
-<span class="hljs-comment">// ]]}</span>
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript">res = <span class="hljs-keyword">await</span> client.<span class="hljs-title function_">search</span>({
     <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;test_collection&quot;</span>,
@@ -1687,7 +1378,7 @@ searchResp = client.<span class="hljs-title function_">search</span>(searchReq);
 <div class="admonition note">
 <p><b>notes</b></p>
 <ul>
-<li>Milvus enregistre les valeurs de chaîne dans le champ JSON telles quelles sans effectuer d'échappement sémantique ou de conversion. </li>
+<li>Milvus stocke les valeurs de chaîne dans le champ JSON telles quelles sans effectuer d'échappement sémantique ou de conversion. </li>
 </ul>
 <p>Par exemple, <code translate="no">'a"b'</code>, <code translate="no">"a'b"</code>, <code translate="no">'a\\\\'b'</code>, et <code translate="no">"a\\\\"b"</code> seront enregistrés tels quels, tandis que <code translate="no">'a'b'</code> et <code translate="no">"a"b"</code> seront traités comme des valeurs non valides.</p>
 <ul>
@@ -1696,7 +1387,7 @@ searchResp = client.<span class="hljs-title function_">search</span>(searchReq);
 <li><p>Si la valeur d'une clé est une chaîne de caractères, vous ne pouvez la comparer qu'avec une autre clé de type chaîne de caractères ou un champ VARCHAR.</p></li>
 </ul>
 </div>
-<h3 id="Basic-Operators-in-JSON-Fields" class="common-anchor-header">Opérateurs de base dans les champs JSON</h3><p>Le tableau suivant suppose que la valeur d'un champ JSON nommé <code translate="no">json_key</code> a une clé nommée <code translate="no">A</code>. Utilisez-le comme référence lorsque vous construisez des expressions booléennes à l'aide de clés de champ JSON.</p>
+<h3 id="Basic-Operators-in-JSON-Fields" class="common-anchor-header">Opérateurs de base dans les champs JSON</h3><p>Le tableau suivant suppose que la valeur d'un champ JSON nommé <code translate="no">json_key</code> a une clé nommée <code translate="no">A</code>. Utilisez-le comme référence lors de la construction d'expressions booléennes utilisant des clés de champ JSON.</p>
 <table>
 <thead>
 <tr><th><strong>Opérateur</strong></th><th><strong>Exemples</strong></th><th><strong>Remarques</strong></th></tr>
@@ -1711,7 +1402,7 @@ searchResp = client.<span class="hljs-title function_">search</span>(searchReq);
 <tr><td><strong>not</strong></td><td><code translate="no">'not json_field[&quot;A&quot;] == 1'</code></td><td>Cette expression est considérée comme vraie si<br/> - <code translate="no">json_field</code> n'a pas de clé nommée <code translate="no">A</code>.<br/> - <code translate="no">json_field[&quot;A&quot;]</code> n'est pas égal à <code translate="no">1</code>.<br/></td></tr>
 <tr><td><strong>in</strong></td><td><code translate="no">'json_field[&quot;A&quot;] in [1, 2, 3]'</code></td><td>Cette expression est considérée comme vraie si la valeur de <code translate="no">json_field[&quot;A&quot;]</code> est <code translate="no">1</code>, <code translate="no">2</code>, ou <code translate="no">3</code>.</td></tr>
 <tr><td><strong>et (&amp;&amp;)</strong></td><td><code translate="no">'json_field[&quot;A&quot;] &gt; 1 &amp;&amp; json_field[&quot;A&quot;] &lt; 3'</code></td><td>Cette expression est vraie si la valeur de <code translate="no">json_field[&quot;A&quot;]</code> est supérieure à 1 et inférieure à <code translate="no">3</code>.</td></tr>
-<tr><td><strong>ou (||)</strong></td><td><code translate="no">‘json_field[“A”] &gt; 1 || json_field[“A”] &lt; 3’</code></td><td>Cette expression est vraie si la valeur de <code translate="no">json_field[&quot;A&quot;]</code> est supérieure à <code translate="no">1</code> ou inférieure à <code translate="no">3</code>.</td></tr>
+<tr><td><strong>ou (||)</strong></td><td><code translate="no">‘json_field[“A”] &gt; 1 || json_field[“A”] &lt; 3’</code></td><td>Cette expression est considérée comme vraie si la valeur de <code translate="no">json_field[&quot;A&quot;]</code> est supérieure à <code translate="no">1</code> ou inférieure à <code translate="no">3</code>.</td></tr>
 <tr><td><strong>existe</strong></td><td><code translate="no">'exists json_field[&quot;A&quot;]'</code></td><td>Cette expression est considérée comme vraie si <code translate="no">json_field</code> possède une clé nommée <code translate="no">A</code>.</td></tr>
 </tbody>
 </table>
@@ -1736,8 +1427,8 @@ json_contains(x, [<span class="hljs-number">3</span>,<span class="hljs-number">2
 json_contains_all(x, [<span class="hljs-number">4</span>,<span class="hljs-number">5</span>,<span class="hljs-number">6</span>]) <span class="hljs-comment"># =&gt; False (x does not has a member 6.)</span>
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p><code translate="no">json_contains_any(identifier, jsonExpr)</code></p>
-<p>Cet opérateur filtre les entités dont l'identifiant contient l'un des membres de l'expression JSON.</p>
-<p>Exemple : <code translate="no">{&quot;x&quot;: [1,2,3,4,5,7,8]}</code></p>
+<p>Cet opérateur filtre les entités dont l'identifiant contient tous les membres de l'expression JSON.</p>
+<p>Exemple : Cet opérateur filtre les entités dont l'identifiant contient tous les membres de l'expression JSON : <code translate="no">{&quot;x&quot;: [1,2,3,4,5,7,8]}</code></p>
 <pre><code translate="no" class="language-python">json_contains_any(x, [<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">8</span>]) <span class="hljs-comment"># =&gt; True (x contains 1, 2, and 8.)</span>
 json_contains_any(x, [<span class="hljs-number">4</span>,<span class="hljs-number">5</span>,<span class="hljs-number">6</span>]) <span class="hljs-comment"># =&gt; True (x contains 4 and 5.)</span>
 json_contains_any(x, [<span class="hljs-number">6</span>,<span class="hljs-number">9</span>]) <span class="hljs-comment"># =&gt; False (x contains none of 6 and 9.)</span>

@@ -89,7 +89,7 @@ title: FAQ Operativas
 <p>Para entender y solucionar estos errores</p>
 <ul>
 <li>Comprenda que <code translate="no">len(str)</code> en Python representa el número de caracteres, no el tamaño en bytes.</li>
-<li>Para los tipos de datos basados en cadenas como VARCHAR y JSON, utilice <code translate="no">len(bytes(str, encoding='utf-8'))</code> para determinar el tamaño real en bytes, que es lo que Milvus utiliza para &quot;max-length&quot;.</li>
+<li>Para tipos de datos basados en cadenas como VARCHAR y JSON, utilice <code translate="no">len(bytes(str, encoding='utf-8'))</code> para determinar el tamaño real en bytes, que es lo que Milvus utiliza para &quot;max-length&quot;.</li>
 </ul>
 <p>Ejemplo en Python:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Python Example: result of len() str cannot be used as &quot;max-length&quot; in Milvus </span>
@@ -99,8 +99,11 @@ title: FAQ Operativas
 <span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-built_in">len</span>(<span class="hljs-built_in">bytes</span>(s, <span class="hljs-string">&quot;utf-8&quot;</span>)) <span class="hljs-comment"># Size in bytes of s, max-length in Milvus.</span>
 <span class="hljs-number">18</span>
 <button class="copy-code-btn"></button></code></pre>
+<h4 id="pymilvusexceptionsConnectionConfigException-ConnectionConfigException-code1-messageIllegal-uri-exampledb-expected-form-httpsuserpwdexamplecom12345-What-causes-this-and-how-can-it-be-solved" class="common-anchor-header"><code translate="no">pymilvus.exceptions.ConnectionConfigException: &lt;ConnectionConfigException: (code=1, message=Illegal uri: [example.db], expected form 'https://user:pwd@example.com:12345')&gt;</code>. ¿Qué causa esto y cómo puede solucionarse?</h4><p>Este error indica que está intentando conectarse a Milvus Lite utilizando una versión anterior de pymilvus que no lo soporta. Para solucionarlo, actualice su instalación de pymilvus al menos a la versión 2.4.2. Esta versión soporta la conexión a Milvus Lite. Para actualizar, utilice el siguiente comando:</p>
+<pre><code translate="no" class="language-shell">pip install pymilvus&gt;=2.4.2
+<button class="copy-code-btn"></button></code></pre>
 <h4 id="Still-have-questions" class="common-anchor-header">¿Todavía tiene preguntas?</h4><p>Puede hacerlo:</p>
 <ul>
-<li>Echa un vistazo a <a href="https://github.com/milvus-io/milvus/issues">Milvus</a> en GitHub. Siéntase libre de hacer preguntas, compartir ideas y ayudar a otros.</li>
-<li>Únase a nuestro <a href="https://discuss.milvus.io/">Foro Milvus</a> o <a href="https://join.slack.com/t/milvusio/shared_invite/enQtNzY1OTQ0NDI3NjMzLWNmYmM1NmNjOTQ5MGI5NDhhYmRhMGU5M2NhNzhhMDMzY2MzNDdlYjM5ODQ5MmE3ODFlYzU3YjJkNmVlNDQ2ZTk">Canal Slack</a> para encontrar apoyo y participar con nuestra comunidad de código abierto.</li>
+<li>Eche un vistazo a <a href="https://github.com/milvus-io/milvus/issues">Milvus</a> en GitHub. Siéntase libre de hacer preguntas, compartir ideas y ayudar a otros.</li>
+<li>Únete a nuestro <a href="https://discuss.milvus.io/">Foro Milvus</a> o <a href="https://join.slack.com/t/milvusio/shared_invite/enQtNzY1OTQ0NDI3NjMzLWNmYmM1NmNjOTQ5MGI5NDhhYmRhMGU5M2NhNzhhMDMzY2MzNDdlYjM5ODQ5MmE3ODFlYzU3YjJkNmVlNDQ2ZTk">Canal Slack</a> para encontrar apoyo y participar con nuestra comunidad de código abierto.</li>
 </ul>

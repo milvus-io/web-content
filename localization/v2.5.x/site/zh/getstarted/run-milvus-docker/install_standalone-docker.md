@@ -3,9 +3,9 @@ id: install_standalone-docker.md
 label: Docker
 related_key: Docker
 summary: 了解如何使用 Docker 独立安装 Milvus。
-title: 在 Docker 中运行 Milvus
+title: 在 Docker 中运行 Milvus (Linux)
 ---
-<h1 id="Run-Milvus-in-Docker" class="common-anchor-header">在 Docker 中运行 Milvus<button data-href="#Run-Milvus-in-Docker" class="anchor-icon" translate="no">
+<h1 id="Run-Milvus-in-Docker-Linux" class="common-anchor-header">在 Docker 中运行 Milvus (Linux)<button data-href="#Run-Milvus-in-Docker-Linux" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

@@ -3,9 +3,9 @@ id: install_standalone-docker-compose.md
 label: Docker Compose
 related_key: Docker Compose
 summary: 'Erfahren Sie, wie Sie Milvus eigenständig mit Docker Compose installieren.'
-title: Milvus mit Docker Compose starten
+title: Milvus mit Docker Compose ausführen (Linux)
 ---
-<h1 id="Run-Milvus-with-Docker-Compose" class="common-anchor-header">Milvus mit Docker Compose starten<button data-href="#Run-Milvus-with-Docker-Compose" class="anchor-icon" translate="no">
+<h1 id="Run-Milvus-with-Docker-Compose-Linux" class="common-anchor-header">Milvus mit Docker Compose ausführen (Linux)<button data-href="#Run-Milvus-with-Docker-Compose-Linux" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -20,7 +20,7 @@ title: Milvus mit Docker Compose starten
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Diese Seite veranschaulicht, wie Sie eine Milvus-Instanz in Docker mit Docker Compose starten können.</p>
+    </button></h1><p>Diese Seite veranschaulicht, wie man eine Milvus-Instanz in Docker mit Docker Compose startet.</p>
 <h2 id="Prerequisites" class="common-anchor-header">Voraussetzungen<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -40,7 +40,7 @@ title: Milvus mit Docker Compose starten
 <li><a href="https://docs.docker.com/get-docker/">Installieren Sie Docker</a>.</li>
 <li><a href="/docs/de/prerequisite-docker.md">Prüfen Sie</a> vor der Installation<a href="/docs/de/prerequisite-docker.md">die Anforderungen an Hardware und Software</a>.</li>
 </ul>
-<h2 id="Install-Milvus" class="common-anchor-header">Milvus installieren<button data-href="#Install-Milvus" class="anchor-icon" translate="no">
+<h2 id="Install-Milvus" class="common-anchor-header">Installieren Sie Milvus<button data-href="#Install-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -132,7 +132,7 @@ $ <span class="hljs-built_in">sudo</span> <span class="hljs-built_in">rm</span> 
 <li><a href="/docs/de/azure.md">Microsoft Azure</a></li>
 </ul></li>
 <li><p>Erkunden Sie <a href="/docs/de/milvus_backup_overview.md">Milvus Backup</a>, ein Open-Source-Tool für Milvus-Datensicherungen.</p></li>
-<li><p><a href="/docs/de/birdwatcher_overview.md">Birdwatcher</a>, ein Open-Source-Tool zum Debuggen von Milvus und dynamischen Konfigurations-Updates.</p></li>
+<li><p><a href="/docs/de/birdwatcher_overview.md">Birdwatcher</a>, ein Open-Source-Tool zur Fehlersuche in Milvus und für dynamische Konfigurations-Updates.</p></li>
 <li><p>Entdecken Sie <a href="https://github.com/zilliztech/attu">Attu</a>, ein Open-Source-GUI-Tool für die intuitive Milvus-Verwaltung.</p></li>
 <li><p><a href="/docs/de/monitor.md">Überwachen Sie Milvus mit Prometheus</a>.</p></li>
 </ul>

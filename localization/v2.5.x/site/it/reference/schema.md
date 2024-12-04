@@ -89,7 +89,7 @@ title: Gestire gli schemi
 </table>
 <h3 id="Create-a-field-schema" class="common-anchor-header">Creare uno schema di campo</h3><p>Per ridurre la complessità degli inserimenti di dati, Milvus consente di specificare un valore predefinito per ogni campo scalare durante la creazione dello schema di campo, escluso il campo chiave primaria. Ciò significa che se si lascia un campo vuoto durante l'inserimento dei dati, si applica il valore predefinito specificato per questo campo.</p>
 <p>Creare uno schema di campo regolare:</p>
-<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> FieldSchema
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> DataType, FieldSchema
 id_field = FieldSchema(name=<span class="hljs-string">&quot;id&quot;</span>, dtype=DataType.INT64, is_primary=<span class="hljs-literal">True</span>, description=<span class="hljs-string">&quot;primary id&quot;</span>)
 age_field = FieldSchema(name=<span class="hljs-string">&quot;age&quot;</span>, dtype=DataType.INT64, description=<span class="hljs-string">&quot;age&quot;</span>)
 embedding_field = FieldSchema(name=<span class="hljs-string">&quot;embedding&quot;</span>, dtype=DataType.FLOAT_VECTOR, dim=<span class="hljs-number">128</span>, description=<span class="hljs-string">&quot;vector&quot;</span>)
@@ -98,7 +98,7 @@ embedding_field = FieldSchema(name=<span class="hljs-string">&quot;embedding&quo
 position_field = FieldSchema(name=<span class="hljs-string">&quot;position&quot;</span>, dtype=DataType.VARCHAR, max_length=<span class="hljs-number">256</span>, is_partition_key=<span class="hljs-literal">True</span>)
 <button class="copy-code-btn"></button></code></pre>
 <p>Crea uno schema di campo con valori di campo predefiniti:</p>
-<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> FieldSchema
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> DataType, FieldSchema
 
 fields = [
   FieldSchema(name=<span class="hljs-string">&quot;id&quot;</span>, dtype=DataType.INT64, is_primary=<span class="hljs-literal">True</span>),
@@ -181,13 +181,13 @@ fields = [
     <tr>
         <td><code translate="no">enable_dynamic_field</code></td>
         <td>Se abilitare o meno lo schema dinamico</td>
-        <td>Tipo di dati: Booleano (<code translate="no">true</code> o <code translate="no">false</code>).<br/>Opzionale, predefinito a <code translate="no">False</code>.<br/>Per i dettagli sullo schema dinamico, consultare <a herf="enable-dynamic-field.md">Schema dinamico</a> e le guide utente per la gestione delle raccolte.</td>
+        <td>Tipo di dati: Booleano (<code translate="no">true</code> o <code translate="no">false</code>).<br/>Opzionale, per impostazione predefinita <code translate="no">False</code>.<br/>Per informazioni dettagliate sullo schema dinamico, consultare <a herf="enable-dynamic-field.md">Schema dinamico</a> e le guide utente per la gestione delle raccolte.</td>
     </tr>
     </tbody>
 </table>
 <h3 id="Create-a-collection-schema" class="common-anchor-header">Creare uno schema di raccolta</h3><div class="alert note">
   Definire gli schemi dei campi prima di definire uno schema di raccolta.</div>
-<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> FieldSchema, CollectionSchema
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> DataType, FieldSchema, CollectionSchema
 id_field = FieldSchema(name=<span class="hljs-string">&quot;id&quot;</span>, dtype=DataType.INT64, is_primary=<span class="hljs-literal">True</span>, description=<span class="hljs-string">&quot;primary id&quot;</span>)
 age_field = FieldSchema(name=<span class="hljs-string">&quot;age&quot;</span>, dtype=DataType.INT64, description=<span class="hljs-string">&quot;age&quot;</span>)
 embedding_field = FieldSchema(name=<span class="hljs-string">&quot;embedding&quot;</span>, dtype=DataType.FLOAT_VECTOR, dim=<span class="hljs-number">128</span>, description=<span class="hljs-string">&quot;vector&quot;</span>)
@@ -199,7 +199,7 @@ position_field = FieldSchema(name=<span class="hljs-string">&quot;position&quot;
 schema = CollectionSchema(fields=[id_field, age_field, embedding_field], auto_id=<span class="hljs-literal">False</span>, enable_dynamic_field=<span class="hljs-literal">True</span>, description=<span class="hljs-string">&quot;desc of a collection&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
 <p>Creare una raccolta con lo schema specificato:</p>
-<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> <span class="hljs-title class_">Collection</span>,connections
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> <span class="hljs-title class_">Collection</span>, connections
 conn = connections.<span class="hljs-title function_">connect</span>(host=<span class="hljs-string">&quot;127.0.0.1&quot;</span>, port=<span class="hljs-number">19530</span>)
 collection_name1 = <span class="hljs-string">&quot;tutorial_1&quot;</span>
 collection1 = <span class="hljs-title class_">Collection</span>(name=collection_name1, schema=schema, using=<span class="hljs-string">&#x27;default&#x27;</span>, shards_num=<span class="hljs-number">2</span>)
@@ -214,7 +214,8 @@ collection1 = <span class="hljs-title class_">Collection</span>(name=collection_
 </div>
 <p><br/>
 Si può anche creare una collezione con <code translate="no">Collection.construct_from_dataframe</code>, che genera automaticamente uno schema di collezione da DataFrame e crea una collezione.</p>
-<pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> pandas <span class="hljs-keyword">as</span> pd
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> Collection
+<span class="hljs-keyword">import</span> pandas <span class="hljs-keyword">as</span> pd
 df = pd.DataFrame({
     <span class="hljs-string">&quot;id&quot;</span>: [i <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(nb)],
     <span class="hljs-string">&quot;age&quot;</span>: [random.randint(<span class="hljs-number">20</span>, <span class="hljs-number">40</span>) <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(nb)],
@@ -247,5 +248,5 @@ collection, ins_res = Collection.construct_from_dataframe(
     </button></h2><ul>
 <li>Imparare a preparare lo schema quando si <a href="/docs/it/manage-collections.md">gestiscono le raccolte</a>.</li>
 <li>Per saperne di più sullo <a href="/docs/it/enable-dynamic-field.md">schema dinamico</a>.</li>
-<li>Ulteriori informazioni sulla chiave di partizione in <a href="/docs/it/multi_tenancy.md">Multi-tenancy</a>.</li>
+<li>Per saperne di più sulla chiave di partizione in <a href="/docs/it/multi_tenancy.md">Multi-tenancy</a>.</li>
 </ul>

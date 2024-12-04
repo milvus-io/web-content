@@ -162,7 +162,7 @@ title: Metrische Typen
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/cosine_similarity.png" alt="Cosine similarity formula" class="doc-image" id="cosine-similarity-formula" />
    </span> <span class="img-wrapper"> <span>Kosinus-Ähnlichkeitsformel</span> </span></p>
-<p>Die Kosinusähnlichkeit liegt immer im Intervall <strong>[-1, 1]</strong>. Zwei proportionale Vektoren haben beispielsweise eine Cosinus-Ähnlichkeit von <strong>1</strong>, zwei orthogonale Vektoren haben eine Ähnlichkeit von <strong>0</strong> und zwei entgegengesetzte Vektoren haben eine Ähnlichkeit von <strong>-1</strong>. Je größer der Cosinus, desto kleiner der Winkel zwischen den beiden Vektoren, was bedeutet, dass diese beiden Vektoren einander ähnlicher sind.</p>
+<p>Die Kosinusähnlichkeit liegt immer im Intervall <strong>[-1, 1]</strong>. Zwei proportionale Vektoren haben beispielsweise eine Cosinus-Ähnlichkeit von <strong>1</strong>, zwei orthogonale Vektoren haben eine Ähnlichkeit von <strong>0</strong> und zwei entgegengesetzte Vektoren haben eine Ähnlichkeit von <strong>-1</strong>. Je größer der Cosinus, desto kleiner ist der Winkel zwischen den beiden Vektoren, was bedeutet, dass diese beiden Vektoren einander ähnlicher sind.</p>
 <p>Wenn man die Kosinusähnlichkeit von 1 subtrahiert, erhält man den Kosinusabstand zwischen zwei Vektoren.</p>
 <h2 id="JACCARD-distance​" class="common-anchor-header">JACCARD-Abstand<button data-href="#JACCARD-distance​" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -184,7 +184,7 @@ title: Metrische Typen
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/jaccard_coeff.png" alt="JACCARD similarity coefficient formula" class="doc-image" id="jaccard-similarity-coefficient-formula" />
    </span> <span class="img-wrapper"> <span>Formel für den JACCARD-Ähnlichkeitskoeffizienten</span> </span></p>
-<p>Die JACCARD-Distanz misst die Unähnlichkeit zwischen Datensätzen und wird durch Subtraktion des JACCARD-Ähnlichkeitskoeffizienten von 1 ermittelt. Bei binären Variablen entspricht die JACCARD-Distanz dem Tanimoto-Koeffizienten.</p>
+<p>Die JACCARD-Distanz misst die Unähnlichkeit zwischen Datensätzen und ergibt sich durch Subtraktion des JACCARD-Ähnlichkeitskoeffizienten von 1. Für binäre Variablen entspricht die JACCARD-Distanz dem Tanimoto-Koeffizienten.</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/jaccard_dist.png" alt="JACCARD distance formula" class="doc-image" id="jaccard-distance-formula" />
@@ -237,7 +237,7 @@ title: Metrische Typen
 <ul>
 <li><p><code translate="no">​Q</code>: Der vom Benutzer angegebene Suchtext.</p></li>
 <li><p><code translate="no">​D</code>: Das zu bewertende Dokument.</p></li>
-<li><p><code translate="no">​TF(qi​,D)</code>: Begriffshäufigkeit, die angibt, wie oft der Begriff q in Dokument D vorkommt.</p></li>
+<li><p><code translate="no">​TF(qi​,D)</code>: Begriffshäufigkeit, die angibt, wie oft der Begriff <code translate="no">​qi</code> im Dokument <code translate="no">​D</code> vorkommt.</p></li>
 <li><p><code translate="no">​IDF(qi​)</code>: Inverse Dokumenthäufigkeit, berechnet als.</p>
 <p>
   

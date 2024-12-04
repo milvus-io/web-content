@@ -22,7 +22,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>La ricerca full text è una funzione che recupera i documenti contenenti termini o frasi specifiche nei dataset di testo, classificando poi i risultati in base alla rilevanza. Questa funzione supera le limitazioni della ricerca semantica, che potrebbe trascurare termini precisi, garantendo la ricezione dei risultati più accurati e contestualmente rilevanti. Inoltre, semplifica le ricerche vettoriali accettando input di testo grezzo, convertendo automaticamente i dati testuali in embedding sparsi senza la necessità di generare manualmente embedding vettoriali.</p>
+    </button></h1><p>La ricerca full text è una funzione che recupera i documenti contenenti termini o frasi specifiche nei dataset di testo, classificando poi i risultati in base alla rilevanza. Questa funzione supera le limitazioni della ricerca semantica, che potrebbe trascurare termini precisi, garantendo la ricezione di risultati più accurati e contestualmente rilevanti. Inoltre, semplifica le ricerche vettoriali accettando input di testo grezzo, convertendo automaticamente i dati testuali in embedding sparsi senza dover generare manualmente embedding vettoriali.</p>
 <p>Utilizzando l'algoritmo BM25 per il punteggio di rilevanza, questa funzione è particolarmente preziosa negli scenari di retrieval-augmented generation (RAG), dove dà priorità ai documenti che corrispondono strettamente a termini di ricerca specifici.</p>
 <div class="alert note">
 <p>Integrando la ricerca full text con la ricerca vettoriale densa basata sulla semantica, è possibile migliorare l'accuratezza e la pertinenza dei risultati della ricerca. Per ulteriori informazioni, consultare <a href="/docs/it/multi-vector-search.md">Ricerca ibrida</a>.</p>
@@ -45,7 +45,7 @@ summary: >-
     </button></h2><p>La ricerca full text semplifica il processo di ricerca basato sul testo, eliminando la necessità di incorporare manualmente i dati. Questa funzione funziona attraverso il seguente flusso di lavoro.</p>
 <ol>
 <li><p><strong>Inserimento del testo</strong>: L'utente inserisce documenti di testo grezzi o fornisce un testo di query senza necessità di incorporazione manuale.</p></li>
-<li><p><strong>Analisi del testo</strong>: Milvus utilizza un analizzatore per tokenizzare il testo in ingresso in singoli termini ricercabili.</p></li>
+<li><p><strong>Analisi del testo</strong>: Milvus utilizza un analizzatore per tokenizzare il testo in ingresso in singoli termini ricercabili. Per ulteriori informazioni sugli analizzatori, consultare la sezione <a href="/docs/it/analyzer-overview.md">Panoramica degli analizzatori</a>.</p></li>
 <li><p><strong>Elaborazione della funzione</strong>: La funzione incorporata riceve i termini tokenizzati e li converte in rappresentazioni vettoriali rade.</p></li>
 <li><p><strong>Memorizzazione delle collezioni</strong>: Milvus memorizza queste rappresentazioni rade in una raccolta per un recupero efficiente.</p></li>
 <li><p><strong>Punteggio BM25</strong>: Durante la ricerca, Milvus applica l'algoritmo BM25 per calcolare i punteggi dei documenti memorizzati e classifica i risultati corrispondenti in base alla pertinenza con il testo dell'interrogazione.</p></li>
@@ -85,8 +85,10 @@ summary: >-
 <div class="multipleCode">
    <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType, Function, FunctionType​
+
+client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)
 ​
-schema = MilvusClient.create_schema()​
+schema = client.create_schema()​
 ​
 schema.add_field(field_name=<span class="hljs-string">&quot;id&quot;</span>, datatype=DataType.INT64, is_primary=<span class="hljs-literal">True</span>, auto_id=<span class="hljs-literal">True</span>)​
 schema.add_field(field_name=<span class="hljs-string">&quot;text&quot;</span>, datatype=DataType.VARCHAR, max_length=<span class="hljs-number">1000</span>, enable_analyzer=<span class="hljs-literal">True</span>)​
@@ -246,7 +248,7 @@ schema.addFunction(Function.builder()
 </th><th data-block-token="SMGGduN8zo3cgXxVnwZcW0UAnbA" colspan="1" rowspan="1"><p data-block-token="LY39dA2eOoyVUUxvKwlcyyjdn3e">Descrizione</p>
 </th></tr></thead><tbody><tr><td data-block-token="Pbj3dPvuno3x6kxnCsWcTb3knag" colspan="1" rowspan="1"><p data-block-token="EeHOdxCjloFUAGxuY1CcScCTnDe"><code translate="no">name</code></p>
 <p data-block-token="FzAJdVbrzozmTdxwy4fcJQkQnlh"></p>
-</td><td data-block-token="VJWydnWHJoV66jx6oEPcH9lGnvh" colspan="1" rowspan="1"><p data-block-token="Clg3dWrJpo39lfxSWjVcbE7GnYm">Il nome della funzione. Questa funzione converte il testo grezzo dal campo <code translate="no">text</code> in vettori ricercabili che saranno memorizzati nel campo <code translate="no">sparse</code>.</p>
+</td><td data-block-token="VJWydnWHJoV66jx6oEPcH9lGnvh" colspan="1" rowspan="1"><p data-block-token="Clg3dWrJpo39lfxSWjVcbE7GnYm">Il nome della funzione. Questa funzione converte il testo grezzo del campo <code translate="no">text</code> in vettori ricercabili che verranno memorizzati nel campo <code translate="no">sparse</code>.</p>
 </td></tr><tr><td data-block-token="ShPJdlvMQoXnSHxIQ1GcoyegnEb" colspan="1" rowspan="1"><p data-block-token="HFT1dYVCioUj4PxnNSVcYIBInNh"><code translate="no">input_field_names</code></p>
 </td><td data-block-token="YiZCdrUaaovWnrxef29cmpQFn9c" colspan="1" rowspan="1"><p data-block-token="YFVOd29cUovDpXx7L2zcJK37n1g">Il nome del campo <code translate="no">VARCHAR</code> che richiede la conversione del testo in vettori sparsi. Per <code translate="no">FunctionType.BM25</code>, questo parametro accetta solo un nome di campo.</p>
 </td></tr><tr><td data-block-token="QpcMdDoXfo62aNxQfoyc2E6lneg" colspan="1" rowspan="1"><p data-block-token="D1LkdH1KIojwKDx14HUcHdDJnPh"><code translate="no">output_field_names</code></p>
@@ -260,7 +262,7 @@ schema.addFunction(Function.builder()
 <h3 id="Configure-the-index" class="common-anchor-header">Configurare l'indice</h3><p>Dopo aver definito lo schema con i campi necessari e la funzione incorporata, configurare l'indice per la raccolta. Per semplificare questo processo, utilizzare <code translate="no">AUTOINDEX</code> come <code translate="no">index_type</code>, un'opzione che consente a Milvus di scegliere e configurare il tipo di indice più adatto in base alla struttura dei dati.</p>
 <div class="multipleCode">
    <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
-<pre><code translate="no" class="language-python">index_params = <span class="hljs-title class_">MilvusClient</span>.<span class="hljs-title function_">prepare_index_params</span>()​
+<pre><code translate="no" class="language-python">index_params = client.<span class="hljs-title function_">prepare_index_params</span>()​
 ​
 index_params.<span class="hljs-title function_">add_index</span>(​
     field_name=<span class="hljs-string">&quot;sparse&quot;</span>,​
@@ -306,7 +308,7 @@ indexes.<span class="hljs-title function_">add</span>(<span class="hljs-title cl
 <h3 id="Create-the-collection​" class="common-anchor-header">Creare la collezione</h3><p>Creare ora la collezione utilizzando i parametri dello schema e dell'indice definiti.</p>
 <div class="multipleCode">
    <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
-<pre><code translate="no" class="language-python"><span class="hljs-title class_">MilvusClient</span>.<span class="hljs-title function_">create_collection</span>(​
+<pre><code translate="no" class="language-python">client.<span class="hljs-title function_">create_collection</span>(​
     collection_name=<span class="hljs-string">&#x27;demo&#x27;</span>, ​
     schema=schema, ​
     index_params=index_params​
@@ -424,10 +426,10 @@ client.insert(InsertReq.builder()
 <div class="multipleCode">
    <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python">search_params = {​
-    <span class="hljs-string">&#x27;params&#x27;</span>: {<span class="hljs-string">&#x27;drop_ratio_search&#x27;</span>: 0.6},​
+    <span class="hljs-string">&#x27;params&#x27;</span>: {<span class="hljs-string">&#x27;drop_ratio_search&#x27;</span>: 0.2},​
 }​
 ​
-MilvusClient.search(​
+client.search(​
     collection_name=<span class="hljs-string">&#x27;demo&#x27;</span>, ​
     data=[<span class="hljs-string">&#x27;whats the focus of information retrieval?&#x27;</span>],​
     anns_field=<span class="hljs-string">&#x27;sparse&#x27;</span>,​
@@ -441,7 +443,7 @@ MilvusClient.search(​
 <span class="hljs-keyword">import</span> io.<span class="hljs-property">milvus</span>.<span class="hljs-property">v2</span>.<span class="hljs-property">service</span>.<span class="hljs-property">vector</span>.<span class="hljs-property">response</span>.<span class="hljs-property">SearchResp</span>;
 
 <span class="hljs-title class_">Map</span>&lt;<span class="hljs-title class_">String</span>,<span class="hljs-title class_">Object</span>&gt; searchParams = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();
-searchParams.<span class="hljs-title function_">put</span>(<span class="hljs-string">&quot;drop_ratio_search&quot;</span>, <span class="hljs-number">0.6</span>);
+searchParams.<span class="hljs-title function_">put</span>(<span class="hljs-string">&quot;drop_ratio_search&quot;</span>, <span class="hljs-number">0.2</span>);
 <span class="hljs-title class_">SearchResp</span> searchResp = client.<span class="hljs-title function_">search</span>(<span class="hljs-title class_">SearchReq</span>.<span class="hljs-title function_">builder</span>()
         .<span class="hljs-title function_">collectionName</span>(<span class="hljs-string">&quot;demo&quot;</span>)
         .<span class="hljs-title function_">data</span>(<span class="hljs-title class_">Collections</span>.<span class="hljs-title function_">singletonList</span>(<span class="hljs-keyword">new</span> <span class="hljs-title class_">EmbeddedText</span>(<span class="hljs-string">&quot;whats the focus of information retrieval?&quot;</span>)))
@@ -456,7 +458,7 @@ searchParams.<span class="hljs-title function_">put</span>(<span class="hljs-str
     data: [<span class="hljs-string">&#x27;whats the focus of information retrieval?&#x27;</span>],
     anns_field: <span class="hljs-string">&#x27;sparse&#x27;</span>,
     limit: <span class="hljs-number">3</span>,
-    <span class="hljs-keyword">params</span>: {<span class="hljs-string">&#x27;drop_ratio_search&#x27;</span>: <span class="hljs-number">0.6</span>},
+    <span class="hljs-keyword">params</span>: {<span class="hljs-string">&#x27;drop_ratio_search&#x27;</span>: <span class="hljs-number">0.2</span>},
 )
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-curl">curl --request POST \
@@ -475,7 +477,7 @@ searchParams.<span class="hljs-title function_">put</span>(<span class="hljs-str
     ],
     &quot;searchParams&quot;:{
         &quot;params&quot;:{
-            &quot;drop_ratio_search&quot;:0.6
+            &quot;drop_ratio_search&quot;:0.2
         }
     }
 }&#x27;</span>

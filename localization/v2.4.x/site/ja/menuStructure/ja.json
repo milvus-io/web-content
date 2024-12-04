@@ -86,15 +86,21 @@
                 "children": []
               },
               {
-                "label": "ドッカー",
+                "label": "ドッカー（Linux）",
                 "id": "install_standalone-docker.md",
                 "order": 1,
                 "children": []
               },
               {
-                "label": "Docker Compose",
+                "label": "Docker Compose (Linux)",
                 "id": "install_standalone-docker-compose.md",
                 "order": 2,
+                "children": []
+              },
+              {
+                "label": "Dockerデスクトップ（Windows）",
+                "id": "install_standalone-windows.md",
+                "order": 3,
                 "children": []
               }
             ]

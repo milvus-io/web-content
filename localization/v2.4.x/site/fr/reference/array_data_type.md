@@ -1,8 +1,8 @@
 ---
 id: array_data_type.md
-title: Utiliser des champs de type tableau
+title: Use Array Fields
 ---
-<h1 id="Use-Array-Fields" class="common-anchor-header">Utiliser les champs de type tableau<button data-href="#Use-Array-Fields" class="anchor-icon" translate="no">
+<h1 id="Use-Array-Fields" class="common-anchor-header">Use Array Fields<button data-href="#Use-Array-Fields" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -17,8 +17,8 @@ title: Utiliser des champs de type tableau
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Ce guide explique comment utiliser les champs de type tableau, comme l'insertion de valeurs de type tableau, la création d'index sur les champs de type vecteur et tableau, ainsi que la recherche et l'interrogation dans les champs de type tableau à l'aide d'opérateurs de base et avancés.</p>
-<h2 id="Prerequisites" class="common-anchor-header">Conditions préalables<button data-href="#Prerequisites" class="anchor-icon" translate="no">
+    </button></h1><p>This guide explains how to use the array fields, such as inserting array values, creating indexes on vector and array fields, as well as searching and querying in array fields with basic and advanced operators.</p>
+<h2 id="Prerequisites" class="common-anchor-header">Prerequisites<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -33,12 +33,12 @@ title: Utiliser des champs de type tableau
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Assurez-vous d'avoir les éléments suivants :</p>
+    </button></h2><p>Ensure you have the following:</p>
 <ul>
-<li>Milvus est installé et fonctionne. Pour plus d'informations sur l'installation de Milvus, voir <a href="/docs/fr/install-overview.md">Installer Milvus</a>.</li>
-<li>L'un des SDK Milvus est installé dans votre environnement. Pour plus d'informations, reportez-vous à la section <a href="/docs/fr/install-pymilvus.md">Installation des SDK</a>.</li>
+<li>Milvus installed and running. For information on how to install Milvus, refer to <a href="/docs/fr/install-overview.md">Install Milvus</a>.</li>
+<li>One of Milvus SDKs installed in your environment. For details, refer to <a href="/docs/fr/install-pymilvus.md">Install SDKs</a>.</li>
 </ul>
-<h2 id="Prepare-data-with-an-array-field" class="common-anchor-header">Préparer des données avec un champ de tableau<button data-href="#Prepare-data-with-an-array-field" class="anchor-icon" translate="no">
+<h2 id="Prepare-data-with-an-array-field" class="common-anchor-header">Prepare data with an array field<button data-href="#Prepare-data-with-an-array-field" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -53,10 +53,13 @@ title: Utiliser des champs de type tableau
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus prend en charge les tableaux comme l'un des types de données de champ. Un tableau dans une collection Milvus doit toujours avoir des éléments du même type de données et le type de données pour les éléments du tableau peut être n'importe lequel des types de données pris en charge dans Milvus. Pour obtenir la liste des types de données pris en charge, reportez-vous à la section <a href="https://milvus.io/docs/schema.md#Supported-data-types">Types de données pris en charge</a>.</p>
-<p>L'extrait de code suivant génère un ensemble de données aléatoires contenant un champ de tableau nommé <code translate="no">color_coord</code>, dont tous les éléments sont du type de données interger.</p>
+    </button></h2><p>Milvus supports arrays as one of the field data types. An array in a Milvus collection should always have elements of the same data type, and the data type for array elements can be any of the supported data types in Milvus. For a list of supported data types, refer to <a href="https://milvus.io/docs/schema.md#Supported-data-types">Supported data types</a>.</p>
+<p>The following code snippet generates a random dataset containing an array field named <code translate="no">color_coord</code>, with all elements of the interger data type.</p>
 <div class="multipleCode">
-   <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a></div>
+    <a href="#python">Python </a>
+    <a href="#java">Java</a>
+    <a href="#javascript">Node.js</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> random
 
 colors = [<span class="hljs-string">&quot;green&quot;</span>, <span class="hljs-string">&quot;blue&quot;</span>, <span class="hljs-string">&quot;yellow&quot;</span>, <span class="hljs-string">&quot;red&quot;</span>, <span class="hljs-string">&quot;black&quot;</span>, <span class="hljs-string">&quot;white&quot;</span>, <span class="hljs-string">&quot;purple&quot;</span>, <span class="hljs-string">&quot;pink&quot;</span>, <span class="hljs-string">&quot;orange&quot;</span>, <span class="hljs-string">&quot;brown&quot;</span>, <span class="hljs-string">&quot;grey&quot;</span>]
@@ -76,33 +79,37 @@ data = []
 
 <span class="hljs-built_in">print</span>(data[<span class="hljs-number">0</span>])
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java"><span class="hljs-title class_">List</span>&lt;<span class="hljs-title class_">String</span>&gt; colors = <span class="hljs-title class_">Arrays</span>.<span class="hljs-title function_">asList</span>(<span class="hljs-string">&quot;green&quot;</span>, <span class="hljs-string">&quot;blue&quot;</span>, <span class="hljs-string">&quot;yellow&quot;</span>, <span class="hljs-string">&quot;red&quot;</span>, <span class="hljs-string">&quot;black&quot;</span>, <span class="hljs-string">&quot;white&quot;</span>, <span class="hljs-string">&quot;purple&quot;</span>, <span class="hljs-string">&quot;pink&quot;</span>, <span class="hljs-string">&quot;orange&quot;</span>, <span class="hljs-string">&quot;brown&quot;</span>, <span class="hljs-string">&quot;grey&quot;</span>);
-<span class="hljs-title class_">List</span>&lt;<span class="hljs-title class_">JSON</span><span class="hljs-built_in">Object</span>&gt; data = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();
+<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> com.google.gson.Gson;
+<span class="hljs-keyword">import</span> com.google.gson.JsonObject;
 
-<span class="hljs-keyword">for</span> (int i=<span class="hljs-number">0</span>; i&lt;<span class="hljs-number">1000</span>; i++) {
-    <span class="hljs-title class_">Random</span> rand = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Random</span>();
-    <span class="hljs-title class_">String</span> current_color = colors.<span class="hljs-title function_">get</span>(rand.<span class="hljs-title function_">nextInt</span>(colors.<span class="hljs-title function_">size</span>()-<span class="hljs-number">1</span>));
-    <span class="hljs-title class_">Long</span> current_tag = rand.<span class="hljs-title function_">nextLong</span>(8999L) + 1000L;
+<span class="hljs-keyword">import</span> java.util.*;
+
+List&lt;String&gt; colors = Arrays.asList(<span class="hljs-string">&quot;green&quot;</span>, <span class="hljs-string">&quot;blue&quot;</span>, <span class="hljs-string">&quot;yellow&quot;</span>, <span class="hljs-string">&quot;red&quot;</span>, <span class="hljs-string">&quot;black&quot;</span>, <span class="hljs-string">&quot;white&quot;</span>, <span class="hljs-string">&quot;purple&quot;</span>, <span class="hljs-string">&quot;pink&quot;</span>, <span class="hljs-string">&quot;orange&quot;</span>, <span class="hljs-string">&quot;brown&quot;</span>, <span class="hljs-string">&quot;grey&quot;</span>);
+List&lt;JsonObject&gt; data = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();
+
+<span class="hljs-type">Gson</span> <span class="hljs-variable">gson</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Gson</span>();
+<span class="hljs-type">Random</span> <span class="hljs-variable">rand</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Random</span>();
+<span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i=<span class="hljs-number">0</span>; i&lt;<span class="hljs-number">1000</span>; i++) {
+    <span class="hljs-type">String</span> <span class="hljs-variable">current_color</span> <span class="hljs-operator">=</span> colors.get(rand.nextInt(colors.size()-<span class="hljs-number">1</span>));
+    <span class="hljs-type">Integer</span> <span class="hljs-variable">current_tag</span> <span class="hljs-operator">=</span> rand.nextInt(<span class="hljs-number">8999</span>) + <span class="hljs-number">1000</span>;
 
     <span class="hljs-comment">// Generate an random-sized array</span>
-    <span class="hljs-title class_">Long</span> capacity = rand.<span class="hljs-title function_">nextLong</span>(5L) + 1L;
-    <span class="hljs-title class_">List</span>&lt;<span class="hljs-title class_">Long</span>&gt; current_coord = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();
-    current_coord.<span class="hljs-title function_">add</span>(rand.<span class="hljs-title function_">nextLong</span>(40L) + 1L);
-    current_coord.<span class="hljs-title function_">add</span>(rand.<span class="hljs-title function_">nextLong</span>(40L) + 1L);
-    <span class="hljs-keyword">for</span> (int j=<span class="hljs-number">3</span>; j&lt;capacity; j++) {
-        current_coord.<span class="hljs-title function_">add</span>(rand.<span class="hljs-title function_">nextLong</span>(40L) + 1L);
+    <span class="hljs-type">int</span> <span class="hljs-variable">capacity</span> <span class="hljs-operator">=</span> rand.nextInt(<span class="hljs-number">5</span>) + <span class="hljs-number">1</span>;
+    List&lt;Integer&gt; current_coord = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();
+    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> j=<span class="hljs-number">0</span>; j&lt;capacity; j++) {
+        current_coord.add(rand.nextInt(<span class="hljs-number">40</span>));
     }
 
-    <span class="hljs-title class_">JSON</span><span class="hljs-built_in">Object</span> row = <span class="hljs-keyword">new</span> <span class="hljs-title class_">JSON</span><span class="hljs-built_in">Object</span>();
-    row.<span class="hljs-title function_">put</span>(<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-title class_">Long</span>.<span class="hljs-title function_">valueOf</span>(i));
-    row.<span class="hljs-title function_">put</span>(<span class="hljs-string">&quot;vector&quot;</span>, <span class="hljs-title class_">Arrays</span>.<span class="hljs-title function_">asList</span>(rand.<span class="hljs-title function_">nextFloat</span>(), rand.<span class="hljs-title function_">nextFloat</span>(), rand.<span class="hljs-title function_">nextFloat</span>(), rand.<span class="hljs-title function_">nextFloat</span>(), rand.<span class="hljs-title function_">nextFloat</span>()));
-    row.<span class="hljs-title function_">put</span>(<span class="hljs-string">&quot;color&quot;</span>, current_color);
-    row.<span class="hljs-title function_">put</span>(<span class="hljs-string">&quot;color_tag&quot;</span>, current_tag);
-    row.<span class="hljs-title function_">put</span>(<span class="hljs-string">&quot;color_coord&quot;</span>, current_coord);
-    data.<span class="hljs-title function_">add</span>(row);
+    <span class="hljs-type">JsonObject</span> <span class="hljs-variable">row</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">JsonObject</span>();
+    row.addProperty(<span class="hljs-string">&quot;id&quot;</span>, (<span class="hljs-type">long</span>) i);
+    row.add(<span class="hljs-string">&quot;vector&quot;</span>, gson.toJsonTree(Arrays.asList(rand.nextFloat(), rand.nextFloat(), rand.nextFloat(), rand.nextFloat(), rand.nextFloat())));
+    row.addProperty(<span class="hljs-string">&quot;color&quot;</span>, current_color);
+    row.addProperty(<span class="hljs-string">&quot;color_tag&quot;</span>, current_tag);
+    row.add(<span class="hljs-string">&quot;color_coord&quot;</span>, gson.toJsonTree(current_coord));
+    data.add(row);
 }
 
-<span class="hljs-title class_">System</span>.<span class="hljs-property">out</span>.<span class="hljs-title function_">println</span>(<span class="hljs-title class_">JSON</span><span class="hljs-built_in">Object</span>.<span class="hljs-title function_">toJSON</span>(data.<span class="hljs-title function_">get</span>(<span class="hljs-number">0</span>)));   
+System.out.println(data.get(<span class="hljs-number">0</span>));
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> colors = [<span class="hljs-string">&quot;green&quot;</span>, <span class="hljs-string">&quot;blue&quot;</span>, <span class="hljs-string">&quot;yellow&quot;</span>, <span class="hljs-string">&quot;red&quot;</span>, <span class="hljs-string">&quot;black&quot;</span>, <span class="hljs-string">&quot;white&quot;</span>, <span class="hljs-string">&quot;purple&quot;</span>, <span class="hljs-string">&quot;pink&quot;</span>, <span class="hljs-string">&quot;orange&quot;</span>, <span class="hljs-string">&quot;brown&quot;</span>, <span class="hljs-string">&quot;grey&quot;</span>];
 <span class="hljs-keyword">let</span> data = [];
@@ -123,8 +130,8 @@ data = []
 
 <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(data[<span class="hljs-number">0</span>]);
 <button class="copy-code-btn"></button></code></pre>
-<p>Cet extrait de code prépare une liste de couleurs aléatoires et génère un jeu de données contenant 1 000 entités. Chaque entité possède un identifiant, un vecteur de cinq nombres à virgule flottante, une couleur, une étiquette de couleur et un champ de tableau <code translate="no">color_coord</code> contenant entre 3 et 5 valeurs entières. L'échantillon de données est imprimé pour vérifier sa structure.</p>
-<p>Structure de sortie :</p>
+<p>This code snippet prepares a list of random colors and generates a dataset containing 1,000 entities. Each entity has an ID, a vector of five floating-point numbers, a color, a color tag, and an array field <code translate="no">color_coord</code> containing between 3 to 5 integer values. The sample data is printed to verify its structure.</p>
+<p>Output structure:</p>
 <pre><code translate="no" class="language-json">{
     <span class="hljs-built_in">id</span>: <span class="hljs-number">0</span>,
     vector: [
@@ -139,7 +146,7 @@ data = []
     color_coord: [ <span class="hljs-number">3</span>, <span class="hljs-number">0</span>, <span class="hljs-number">18</span>, <span class="hljs-number">29</span> ]
 }
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Set-up-MilvusClient" class="common-anchor-header">Configuration du client Milvus<button data-href="#Set-up-MilvusClient" class="anchor-icon" translate="no">
+<h2 id="Set-up-MilvusClient" class="common-anchor-header">Set up MilvusClient<button data-href="#Set-up-MilvusClient" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -154,18 +161,26 @@ data = []
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Pour interagir avec Milvus, configurez le client Milvus en spécifiant l'adresse du serveur.</p>
+    </button></h2><p>To interact with Milvus, set up the Milvus client by specifying the server address.</p>
 <div class="multipleCode">
-   <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a></div>
+    <a href="#python">Python </a>
+    <a href="#java">Java</a>
+    <a href="#javascript">Node.js</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> <span class="hljs-title class_">MilvusClient</span>, <span class="hljs-title class_">DataType</span>
 
 <span class="hljs-variable constant_">SERVER_ADDR</span> = <span class="hljs-string">&quot;http://localhost:19530&quot;</span>
 
 client = <span class="hljs-title class_">MilvusClient</span>(uri=<span class="hljs-variable constant_">SERVER_ADDR</span>)
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.client.ConnectConfig;
-<span class="hljs-keyword">import</span> io.milvus.v2.client.MilvusClientV2;
+<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.client.MilvusClientV2;
+<span class="hljs-keyword">import</span> io.milvus.v2.client.ConnectConfig;
 <span class="hljs-keyword">import</span> io.milvus.v2.common.DataType;
+<span class="hljs-keyword">import</span> io.milvus.v2.common.IndexParam;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.*;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.index.request.CreateIndexReq;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.*;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.response.*;
 
 <span class="hljs-type">String</span> <span class="hljs-variable">SERVER_ADDR</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;http://localhost:19530&quot;</span>;
 
@@ -183,7 +198,7 @@ client = <span class="hljs-title class_">MilvusClient</span>(uri=<span class="hl
 
 <span class="hljs-keyword">const</span> milvusClient = <span class="hljs-keyword">new</span> <span class="hljs-title class_">MilvusClient</span>({<span class="hljs-attr">address</span>: address});
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Create-a-collection-with-an-array-field" class="common-anchor-header">Créer une collection avec un champ de type tableau<button data-href="#Create-a-collection-with-an-array-field" class="anchor-icon" translate="no">
+<h2 id="Create-a-collection-with-an-array-field" class="common-anchor-header">Create a collection with an array field<button data-href="#Create-a-collection-with-an-array-field" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -198,32 +213,35 @@ client = <span class="hljs-title class_">MilvusClient</span>(uri=<span class="hl
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Define-collection-schema" class="common-anchor-header">Définir le schéma d'une collection</h3><p>Un schéma définit la structure de la collection, y compris les champs et leurs types de données. L'exemple ci-dessous définit un schéma de collection correspondant à l'échantillon de données généré dans la <a href="#prepare-data-with-an-array-field">section précédente</a>.</p>
-<p>Pour configurer un champ de type tableau dans une collection :</p>
+    </button></h2><h3 id="Define-collection-schema" class="common-anchor-header">Define collection schema</h3><p>A schema defines the structure of the collection, including the fields and their data types. The example below defines a collection schema matching the sample data generated in the <a href="#prepare-data-with-an-array-field">previous section</a>.</p>
+<p>To configure an array field in a collection:</p>
 <div class="language-python">
 <ol>
-<li>Définissez le champ <code translate="no">datatype</code>: Configurez-le en tant que <code translate="no">DataType.ARRAY</code>.</li>
-<li>Spécifiez le <code translate="no">element_type</code>: Choisissez le type de données pour les éléments du tableau. Les éléments d'un champ de type tableau doivent tous avoir le même type de données. Dans cet exemple, <code translate="no">element_type</code> est défini comme <code translate="no">DataType.INT64</code>.</li>
-<li>Define the <code translate="no">max_capacity</code>: Définissez ce paramètre pour spécifier le nombre maximum d'éléments que le champ de tableau peut contenir.</li>
+<li>Set the <code translate="no">datatype</code>: Configure it as <code translate="no">DataType.ARRAY</code>.</li>
+<li>Specify the <code translate="no">element_type</code>: Choose the data type for the elements in the array. Elements in an array field should all have the same data type. In this example, the <code translate="no">element_type</code> is set to <code translate="no">DataType.INT64</code>.</li>
+<li>Define the <code translate="no">max_capacity</code>: Set this parameter to specify the maximum number of elements the array field can hold.</li>
 </ol>
 </div>
 <div class="language-java">
 <ol>
-<li>Définir le <code translate="no">dataType</code>: Configurez-le en tant que <code translate="no">DataType.Array</code>.</li>
-<li>Spécifier le <code translate="no">elementType</code>: Choisir le type de données pour les éléments du tableau. Les éléments d'un champ de tableau doivent tous avoir le même type de données. Dans cet exemple, <code translate="no">elementType</code> est défini comme <code translate="no">DataType.Int64</code>.</li>
-<li>Define the <code translate="no">maxCapacity</code>: Définissez ce paramètre pour spécifier le nombre maximum d'éléments que le champ de tableau peut contenir.</li>
+<li>Set the <code translate="no">dataType</code>: Configure it as <code translate="no">DataType.Array</code>.</li>
+<li>Specify the <code translate="no">elementType</code>: Choose the data type for the elements in the array. Elements in an array field should all have the same data type. In this example, the <code translate="no">elementType</code> is set to <code translate="no">DataType.Int64</code>.</li>
+<li>Define the <code translate="no">maxCapacity</code>: Set this parameter to specify the maximum number of elements the array field can hold.</li>
 </ol>
 </div>
 <div class="language-javascript">
 <ol>
-<li>Définir le <code translate="no">data_type</code>: Configurez-le en tant que <code translate="no">DataType.Array</code>.</li>
-<li>Spécifier le <code translate="no">element_type</code>: Choisir le type de données pour les éléments du tableau. Les éléments d'un champ de tableau doivent tous avoir le même type de données. Dans cet exemple, <code translate="no">element_type</code> est défini comme <code translate="no">DataType.Int64</code>.</li>
-<li>Définissez le paramètre <code translate="no">max_capacity</code>: Définissez ce paramètre pour spécifier le nombre maximum d'éléments que le champ de tableau peut contenir.</li>
+<li>Set the <code translate="no">data_type</code>: Configure it as <code translate="no">DataType.Array</code>.</li>
+<li>Specify the <code translate="no">element_type</code>: Choose the data type for the elements in the array. Elements in an array field should all have the same data type. In this example, the <code translate="no">element_type</code> is set to <code translate="no">DataType.Int64</code>.</li>
+<li>Define the <code translate="no">max_capacity</code>: Set this parameter to specify the maximum number of elements the array field can hold.</li>
 </ol>
 </div>
-<p>L'exemple de code ci-dessous définit le schéma de la collection avec un champ de tableau <code translate="no">color_coord</code>, avec un maximum de 5 éléments et chaque élément du type de données integer.</p>
+<p>The example code below defines the collection schema with an array field <code translate="no">color_coord</code>, with a maximum of 5 elements and each element of the integer data type.</p>
 <div class="multipleCode">
-   <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a></div>
+    <a href="#python">Python </a>
+    <a href="#java">Java</a>
+    <a href="#javascript">Node.js</a>
+</div>
 <pre><code translate="no" class="language-python">schema = client.create_schema(auto_id=<span class="hljs-literal">False</span>, enable_dynamic_field=<span class="hljs-literal">False</span>)
 
 schema.add_field(field_name=<span class="hljs-string">&quot;id&quot;</span>, datatype=DataType.INT64, is_primary=<span class="hljs-literal">True</span>)
@@ -237,35 +255,35 @@ CreateCollectionReq.<span class="hljs-type">CollectionSchema</span> <span class=
 
 <span class="hljs-comment">// Add fields to schema</span>
 schema.addField(AddFieldReq.builder()
-    .fieldName(<span class="hljs-string">&quot;id&quot;</span>)
-    .dataType(DataType.Int64)
-    .isPrimaryKey(<span class="hljs-literal">true</span>)
-    .autoID(<span class="hljs-literal">false</span>)
-    .build());
+        .fieldName(<span class="hljs-string">&quot;id&quot;</span>)
+        .dataType(DataType.Int64)
+        .isPrimaryKey(<span class="hljs-literal">true</span>)
+        .autoID(<span class="hljs-literal">false</span>)
+        .build());
 
 schema.addField(AddFieldReq.builder()
-    .fieldName(<span class="hljs-string">&quot;vector&quot;</span>)
-    .dataType(DataType.FloatVector)
-    .dimension(<span class="hljs-number">5</span>)
-    .build());
-    
-schema.addField(AddFieldReq.builder()
-    .fieldName(<span class="hljs-string">&quot;color&quot;</span>)
-    .dataType(DataType.VarChar)
-    .maxLength(<span class="hljs-number">512</span>)
-    .build());
+        .fieldName(<span class="hljs-string">&quot;vector&quot;</span>)
+        .dataType(DataType.FloatVector)
+        .dimension(<span class="hljs-number">5</span>)
+        .build());
 
 schema.addField(AddFieldReq.builder()
-    .fieldName(<span class="hljs-string">&quot;color_tag&quot;</span>)
-    .dataType(DataType.Int64)
-    .build());
+        .fieldName(<span class="hljs-string">&quot;color&quot;</span>)
+        .dataType(DataType.VarChar)
+        .maxLength(<span class="hljs-number">512</span>)
+        .build());
 
 schema.addField(AddFieldReq.builder()
-    .fieldName(<span class="hljs-string">&quot;color_coord&quot;</span>)
-    .dataType(DataType.Array)
-    .elementType(DataType.Int64)
-    .maxCapacity(<span class="hljs-number">5</span>)
-    .build());
+        .fieldName(<span class="hljs-string">&quot;color_tag&quot;</span>)
+        .dataType(DataType.Int64)
+        .build());
+
+schema.addField(AddFieldReq.builder()
+        .fieldName(<span class="hljs-string">&quot;color_coord&quot;</span>)
+        .dataType(DataType.Array)
+        .elementType(DataType.Int64)
+        .maxCapacity(<span class="hljs-number">5</span>)
+        .build());
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> fields = [
     {
@@ -297,17 +315,20 @@ schema.addField(AddFieldReq.builder()
 ];
 <button class="copy-code-btn"></button></code></pre>
 <div class="language-python">
-<p>Pour plus d'informations sur les méthodes et les paramètres, voir <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_schema.md">create_schema</a> et <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/CollectionSchema/add_field.md">add_field</a>.</p>
+<p>For more information on methods and parameters, refer to <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_schema.md">create_schema</a> and <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/CollectionSchema/add_field.md">add_field</a>.</p>
 </div>
 <div class="language-java">
-<p>Pour plus d'informations sur les méthodes et les paramètres, voir <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Collections/createSchema.md">createSchema</a> et <a href="https://milvus.io/api-reference/java/v2.4.x/v2/CollectionSchema/addField.md">addField</a>.</p>
+<p>For more information on methods and parameters, refer to <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Collections/createSchema.md">createSchema</a> and <a href="https://milvus.io/api-reference/java/v2.4.x/v2/CollectionSchema/addField.md">addField</a>.</p>
 </div>
 <div class="language-javascript">
-<p>Pour plus d'informations sur les méthodes et les paramètres, voir <a href="https://milvus.io/api-reference/node/v2.4.x/Collections/createCollection.md">createCollection</a>.</p>
+<p>For more information on methods and parameters, refer to <a href="https://milvus.io/api-reference/node/v2.4.x/Collections/createCollection.md">createCollection</a>.</p>
 </div>
-<h3 id="Create-the-collection" class="common-anchor-header">Création de la collection</h3><p>Créez ensuite la collection à l'aide du schéma défini.</p>
+<h3 id="Create-the-collection" class="common-anchor-header">Create the collection</h3><p>Then, create the collection using the defined schema.</p>
 <div class="multipleCode">
-   <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a></div>
+    <a href="#python">Python </a>
+    <a href="#java">Java</a>
+    <a href="#javascript">Node.js</a>
+</div>
 <pre><code translate="no" class="language-python">client.create_collection(collection_name=<span class="hljs-string">&quot;test_collection&quot;</span>, schema=schema)
 client.list_collections()
 
@@ -334,15 +355,15 @@ client.createCollection(customizedSetupReq);
 <span class="hljs-comment">// Existing collections: test_collection</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="language-python">
-<p>Pour plus d'informations sur les méthodes et les paramètres, voir <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_collection.md">create_collection</a> et <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/list_collections.md">list_collections</a>.</p>
+<p>For more information on methods and parameters, refer to <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_collection.md">create_collection</a> and <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/list_collections.md">list_collections</a>.</p>
 </div>
 <div class="language-java">
-<p>Pour plus d'informations sur les méthodes et les paramètres, voir <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Collections/createCollection.md">createCollection</a>.</p>
+<p>For more information on methods and parameters, refer to <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Collections/createCollection.md">createCollection</a>.</p>
 </div>
 <div class="language-javascript">
-<p>Pour plus d'informations sur les méthodes et les paramètres, voir <a href="https://milvus.io/api-reference/node/v2.4.x/Collections/createCollection.md">create_collection</a> et <a href="https://milvus.io/api-reference/node/v2.4.x/Collections/listCollections.md">list_collections</a>.</p>
+<p>For more information on methods and parameters, refer to <a href="https://milvus.io/api-reference/node/v2.4.x/Collections/createCollection.md">createCollection</a> and <a href="https://milvus.io/api-reference/node/v2.4.x/Collections/listCollections.md">listCollections</a>.</p>
 </div>
-<h2 id="Create-indexes" class="common-anchor-header">Création d'index<button data-href="#Create-indexes" class="anchor-icon" translate="no">
+<h2 id="Create-indexes" class="common-anchor-header">Create indexes<button data-href="#Create-indexes" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -357,11 +378,14 @@ client.createCollection(customizedSetupReq);
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Les index améliorent les performances des opérations de recherche et de requête. Dans Milvus, vous pouvez créer des index sur les champs vectoriels et scalaires. Dans cet exemple, nous allons créer un index <code translate="no">IVF_FLAT</code> sur le champ vectoriel <code translate="no">vector</code> et un index <code translate="no">INVERTED</code> sur le champ scalaire <code translate="no">color_coord</code>. Pour plus d'informations sur les index, reportez-vous aux sections <a href="https://milvus.io/docs/index-vector-fields.md?tab=floating">Indexer les champs vectoriels</a> et <a href="https://milvus.io/docs/index-scalar-fields.md">Indexer les champs scalaires</a>.</p>
-<h3 id="Index-vector-field" class="common-anchor-header">Champ vectoriel indexé</h3><p>La création d'un index sur un champ vectoriel peut améliorer les performances de la recherche de similarité vectorielle, qui est nécessaire pour chaque opération de recherche.</p>
-<p>L'exemple ci-dessous crée un index de type <code translate="no">IVF_FLAT</code> sur le champ vectoriel <code translate="no">vector</code>.</p>
+    </button></h2><p>Indexes improve the performance of search and query operations. In Milvus, you can create indexes on both vector fields and scalar fields. In this example, we’ll create an <code translate="no">IVF_FLAT</code> index on the vector field <code translate="no">vector</code> and an <code translate="no">INVERTED</code> index on the array field <code translate="no">color_coord</code>. For more information on indexes, refer to <a href="https://milvus.io/docs/index-vector-fields.md?tab=floating">Index Vector Fields</a> and <a href="https://milvus.io/docs/index-scalar-fields.md">Index Scalar Fields</a>.</p>
+<h3 id="Index-vector-field" class="common-anchor-header">Index vector field</h3><p>Creating an index on a vector field can improve the performance of vector similarity search, which is necessary for each search operation.</p>
+<p>The example below creates an index of type <code translate="no">IVF_FLAT</code> on the vector field <code translate="no">vector</code>.</p>
 <div class="multipleCode">
-   <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a></div>
+    <a href="#python">Python </a>
+    <a href="#java">Java</a>
+    <a href="#javascript">Node.js</a>
+</div>
 <pre><code translate="no" class="language-python">index_params = client.prepare_index_params()
 
 index_params.add_index(
@@ -414,18 +438,21 @@ console.log(<span class="hljs-string">&quot;Vector index description: &quot;</sp
 // Vector index description: {<span class="hljs-string">&quot;index_descriptions&quot;</span>:[{<span class="hljs-string">&quot;params&quot;</span>:[{<span class="hljs-string">&quot;key&quot;</span>:<span class="hljs-string">&quot;params&quot;</span>,<span class="hljs-string">&quot;value&quot;</span>:<span class="hljs-string">&quot;{\&quot;nlist\&quot;:128}&quot;</span>},{<span class="hljs-string">&quot;key&quot;</span>:<span class="hljs-string">&quot;index_type&quot;</span>,<span class="hljs-string">&quot;value&quot;</span>:<span class="hljs-string">&quot;IVF_FLAT&quot;</span>},{<span class="hljs-string">&quot;key&quot;</span>:<span class="hljs-string">&quot;metric_type&quot;</span>,<span class="hljs-string">&quot;value&quot;</span>:<span class="hljs-string">&quot;COSINE&quot;</span>}],<span class="hljs-string">&quot;index_name&quot;</span>:<span class="hljs-string">&quot;vector_index&quot;</span>,<span class="hljs-string">&quot;indexID&quot;</span>:<span class="hljs-string">&quot;451543183233666062&quot;</span>,<span class="hljs-string">&quot;field_name&quot;</span>:<span class="hljs-string">&quot;vector&quot;</span>,<span class="hljs-string">&quot;indexed_rows&quot;</span>:<span class="hljs-string">&quot;0&quot;</span>,<span class="hljs-string">&quot;total_rows&quot;</span>:<span class="hljs-string">&quot;0&quot;</span>,<span class="hljs-string">&quot;state&quot;</span>:<span class="hljs-string">&quot;Finished&quot;</span>,<span class="hljs-string">&quot;index_state_fail_reason&quot;</span>:<span class="hljs-string">&quot;&quot;</span>,<span class="hljs-string">&quot;pending_index_rows&quot;</span>:<span class="hljs-string">&quot;0&quot;</span>}],<span class="hljs-string">&quot;status&quot;</span>:{<span class="hljs-string">&quot;extra_info&quot;</span>:{},<span class="hljs-string">&quot;error_code&quot;</span>:<span class="hljs-string">&quot;Success&quot;</span>,<span class="hljs-string">&quot;reason&quot;</span>:<span class="hljs-string">&quot;&quot;</span>,<span class="hljs-string">&quot;code&quot;</span>:<span class="hljs-number">0</span>,<span class="hljs-string">&quot;retriable&quot;</span>:false,<span class="hljs-string">&quot;detail&quot;</span>:<span class="hljs-string">&quot;&quot;</span>}}
 <button class="copy-code-btn"></button></code></pre>
 <div class="language-python">
-<p>Pour plus d'informations sur les méthodes et les paramètres, voir <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/prepare_index_params.md">prepare_index_params</a>, <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/create_index.md">create_index</a> et <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/describe_index.md">describe_index</a>.</p>
+<p>For more information on methods and parameters, refer to <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/prepare_index_params.md">prepare_index_params</a>, <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/create_index.md">create_index</a>, and <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/describe_index.md">describe_index</a>.</p>
 </div>
 <div class="language-java">
-<p>Pour plus d'informations sur les méthodes et les paramètres, voir <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Management/IndexParam.md">IndexParam</a> et <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Management/createIndex.md">createIndex</a>.</p>
+<p>For more information on methods and parameters, refer to <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Management/IndexParam.md">IndexParam</a> and <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Management/createIndex.md">createIndex</a>.</p>
 </div>
 <div class="language-javascript">
-<p>Pour plus d'informations sur les méthodes et les paramètres, voir <a href="https://milvus.io/api-reference/node/v2.4.x/Management/createIndex.md">createIndex</a> et <a href="https://milvus.io/api-reference/node/v2.4.x/Management/describeIndex.md">describeIndex</a>.</p>
+<p>For more information on methods and parameters, refer to <a href="https://milvus.io/api-reference/node/v2.4.x/Management/createIndex.md">createIndex</a>, and <a href="https://milvus.io/api-reference/node/v2.4.x/Management/describeIndex.md">describeIndex</a>.</p>
 </div>
-<h3 id="Index-array-field" class="common-anchor-header">Champ de tableau d'index</h3><p>La création d'un index sur un champ scalaire peut améliorer les performances d'extraction des requêtes sur ce champ, ce qui est facultatif mais recommandé pour les grands ensembles de données.</p>
-<p>Dans cet exemple, nous allons créer un index inversé sur le champ de tableau <code translate="no">color_coord</code>. Cela nous permettra d'accélérer le filtrage basé sur ce champ. L'index inversé présente d'excellentes performances globales, surpassant de manière significative le filtrage par force brute à l'aide de données brutes lorsque les données ne sont pas fréquemment extraites, et conservant des performances comparables lors d'opérations d'extraction fréquentes. Pour plus d'informations sur les index inversés, voir <a href="/docs/fr/scalar_index.md#Inverted-indexing">Scalar Index</a>.</p>
+<h3 id="Index-array-field" class="common-anchor-header">Index array field</h3><p>Creating an index on a scalar field can improve the retrieval performance of queries on that field, which is optional but recommended for large datasets.</p>
+<p>In this example, we’ll create an inverted index on the <code translate="no">color_coord</code> array field. This will allow us to speed up filtering based on this field. The inverted index demonstrates excellent overall performance, significantly outperforming brute force filtering using raw data when data is not frequently retrieved, and maintaining comparable performance with frequent retrieval operations. For more information on inverted indexes, refer to <a href="/docs/fr/scalar_index.md#Inverted-indexing">Scalar Index</a>.</p>
 <div class="multipleCode">
-   <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a></div>
+    <a href="#python">Python </a>
+    <a href="#java">Java</a>
+    <a href="#javascript">Node.js</a>
+</div>
 <pre><code translate="no" class="language-python">index_params = client.prepare_index_params()
 
 index_params.add_index(
@@ -442,16 +469,16 @@ client.describe_index(collection_name=<span class="hljs-string">&quot;test_colle
 #  <span class="hljs-string">&#x27;field_name&#x27;</span>: <span class="hljs-string">&#x27;color_coord&#x27;</span>,
 #  <span class="hljs-string">&#x27;index_name&#x27;</span>: <span class="hljs-string">&#x27;inverted_index&#x27;</span>}
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java"><span class="hljs-type">IndexParam</span> <span class="hljs-variable">indexParam</span> <span class="hljs-operator">=</span> IndexParam.builder()
-        .indexType(IndexParam.IndexType.INVERTED)
-        .fieldName(<span class="hljs-string">&quot;color_coord&quot;</span>)
-        .indexName(<span class="hljs-string">&quot;inverted_index&quot;</span>)
-        .build();
-<span class="hljs-type">CreateIndexReq</span> <span class="hljs-variable">createIndexReq</span> <span class="hljs-operator">=</span> CreateIndexReq.builder()
-        .collectionName(<span class="hljs-string">&quot;test_collection&quot;</span>)
-        .indexParams(Collections.singletonList(indexParam))
-        .build();
-client.createIndex(createIndexReq);
+<pre><code translate="no" class="language-java">indexParam = <span class="hljs-title class_">IndexParam</span>.<span class="hljs-title function_">builder</span>()
+        .<span class="hljs-title function_">indexType</span>(<span class="hljs-title class_">IndexParam</span>.<span class="hljs-property">IndexType</span>.<span class="hljs-property">INVERTED</span>)
+        .<span class="hljs-title function_">fieldName</span>(<span class="hljs-string">&quot;color_coord&quot;</span>)
+        .<span class="hljs-title function_">indexName</span>(<span class="hljs-string">&quot;inverted_index&quot;</span>)
+        .<span class="hljs-title function_">build</span>();
+createIndexReq = <span class="hljs-title class_">CreateIndexReq</span>.<span class="hljs-title function_">builder</span>()
+        .<span class="hljs-title function_">collectionName</span>(<span class="hljs-string">&quot;test_collection&quot;</span>)
+        .<span class="hljs-title function_">indexParams</span>(<span class="hljs-title class_">Collections</span>.<span class="hljs-title function_">singletonList</span>(indexParam))
+        .<span class="hljs-title function_">build</span>();
+client.<span class="hljs-title function_">createIndex</span>(createIndexReq);
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-keyword">await</span> client.createIndex({
     collection_name: <span class="hljs-string">&quot;test_collection&quot;</span>,
@@ -471,15 +498,15 @@ console.log(<span class="hljs-string">&quot;Array index description: &quot;</spa
 // Array index description: {<span class="hljs-string">&quot;index_descriptions&quot;</span>:[{<span class="hljs-string">&quot;params&quot;</span>:[{<span class="hljs-string">&quot;key&quot;</span>:<span class="hljs-string">&quot;index_type&quot;</span>,<span class="hljs-string">&quot;value&quot;</span>:<span class="hljs-string">&quot;INVERTED&quot;</span>}],<span class="hljs-string">&quot;index_name&quot;</span>:<span class="hljs-string">&quot;inverted_index&quot;</span>,<span class="hljs-string">&quot;indexID&quot;</span>:<span class="hljs-string">&quot;451543183233667243&quot;</span>,<span class="hljs-string">&quot;field_name&quot;</span>:<span class="hljs-string">&quot;color_coord&quot;</span>,<span class="hljs-string">&quot;indexed_rows&quot;</span>:<span class="hljs-string">&quot;0&quot;</span>,<span class="hljs-string">&quot;total_rows&quot;</span>:<span class="hljs-string">&quot;0&quot;</span>,<span class="hljs-string">&quot;state&quot;</span>:<span class="hljs-string">&quot;Finished&quot;</span>,<span class="hljs-string">&quot;index_state_fail_reason&quot;</span>:<span class="hljs-string">&quot;&quot;</span>,<span class="hljs-string">&quot;pending_index_rows&quot;</span>:<span class="hljs-string">&quot;0&quot;</span>}],<span class="hljs-string">&quot;status&quot;</span>:{<span class="hljs-string">&quot;extra_info&quot;</span>:{},<span class="hljs-string">&quot;error_code&quot;</span>:<span class="hljs-string">&quot;Success&quot;</span>,<span class="hljs-string">&quot;reason&quot;</span>:<span class="hljs-string">&quot;&quot;</span>,<span class="hljs-string">&quot;code&quot;</span>:<span class="hljs-number">0</span>,<span class="hljs-string">&quot;retriable&quot;</span>:false,<span class="hljs-string">&quot;detail&quot;</span>:<span class="hljs-string">&quot;&quot;</span>}}
 <button class="copy-code-btn"></button></code></pre>
 <div class="language-python">
-<p>Pour plus d'informations sur les méthodes et les paramètres, voir <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/prepare_index_params.md">prepare_index_params</a>, <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/create_index.md">create_index</a> et <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/describe_index.md">describe_index</a>.</p>
+<p>For more information on methods and parameters, refer to <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/prepare_index_params.md">prepare_index_params</a>, <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/create_index.md">create_index</a>, and <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Management/describe_index.md">describe_index</a>.</p>
 </div>
 <div class="language-java">
-<p>Pour plus d'informations sur les méthodes et les paramètres, voir <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Management/IndexParam.md">IndexParam</a> et <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Management/createIndex.md">createIndex</a>.</p>
+<p>For more information on methods and parameters, refer to <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Management/IndexParam.md">IndexParam</a> and <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Management/createIndex.md">createIndex</a>.</p>
 </div>
 <div class="language-javascript">
-<p>Pour plus d'informations sur les méthodes et les paramètres, voir <a href="https://milvus.io/api-reference/node/v2.4.x/Management/createIndex.md">createIndex</a> et <a href="https://milvus.io/api-reference/node/v2.4.x/Management/describeIndex.md">describeIndex</a>.</p>
+<p>For more information on methods and parameters, refer to <a href="https://milvus.io/api-reference/node/v2.4.x/Management/createIndex.md">createIndex</a>, and <a href="https://milvus.io/api-reference/node/v2.4.x/Management/describeIndex.md">describeIndex</a>.</p>
 </div>
-<h2 id="Insert-data" class="common-anchor-header">Insérer des données<button data-href="#Insert-data" class="anchor-icon" translate="no">
+<h2 id="Insert-data" class="common-anchor-header">Insert data<button data-href="#Insert-data" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -494,9 +521,12 @@ console.log(<span class="hljs-string">&quot;Array index description: &quot;</spa
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Une fois la collection et les index créés, nous pouvons insérer les données dans la collection. Cette étape insère 1 000 entités dans le site <code translate="no">test_collection</code>.</p>
+    </button></h2><p>Once the collection and indexes are created, we can insert the data into the collection. This step inserts 1,000 entities into the <code translate="no">test_collection</code>.</p>
 <div class="multipleCode">
-   <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a></div>
+    <a href="#python">Python </a>
+    <a href="#java">Java</a>
+    <a href="#javascript">Node.js</a>
+</div>
 <pre><code translate="no" class="language-python">res = client.insert(collection_name=<span class="hljs-string">&quot;test_collection&quot;</span>, data=data)
 <span class="hljs-built_in">print</span>(res)
 
@@ -520,7 +550,7 @@ console.log(<span class="hljs-string">&quot;Array index description: &quot;</spa
 <span class="hljs-comment">// Output:</span>
 <span class="hljs-comment">// Inserted 1000 entities</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Load-the-collection" class="common-anchor-header">Charger la collection<button data-href="#Load-the-collection" class="anchor-icon" translate="no">
+<h2 id="Load-the-collection" class="common-anchor-header">Load the collection<button data-href="#Load-the-collection" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -535,9 +565,12 @@ console.log(<span class="hljs-string">&quot;Array index description: &quot;</spa
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Après avoir inséré des données, nous devons charger la collection afin de la rendre disponible pour les opérations de recherche et d'interrogation.</p>
+    </button></h2><p>After inserting data, we need to load the collection to make it available for search and query operations.</p>
 <div class="multipleCode">
-   <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a></div>
+    <a href="#python">Python </a>
+    <a href="#java">Java</a>
+    <a href="#javascript">Node.js</a>
+</div>
 <pre><code translate="no" class="language-python">client.<span class="hljs-title function_">load_collection</span>(<span class="hljs-string">&#x27;test_collection&#x27;</span>)
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-java"><span class="hljs-type">LoadCollectionReq</span> <span class="hljs-variable">loadCollectionReq</span> <span class="hljs-operator">=</span> LoadCollectionReq.builder()
@@ -558,7 +591,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 <span class="hljs-comment">// Output:</span>
 <span class="hljs-comment">// Collection load state: LoadStateLoaded</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Basic-scalar-filtering" class="common-anchor-header">Filtrage scalaire de base<button data-href="#Basic-scalar-filtering" class="anchor-icon" translate="no">
+<h2 id="Basic-scalar-filtering" class="common-anchor-header">Basic scalar filtering<button data-href="#Basic-scalar-filtering" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -573,18 +606,21 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Une fois que toutes les données ont été ajoutées, vous pouvez effectuer des recherches et des requêtes en utilisant les éléments du champ tableau de la même manière que vous le feriez avec un champ scalaire standard.</p>
+    </button></h2><p>Once all of your data has been added, you can conduct searches and queries using the elements in the array field in the same manner as you would with a standard scalar field.</p>
 <div class="language-python">
-<p>Pour plus d'informations sur les paramètres, reportez-vous à <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Vector/search.md"><code translate="no">search()</code></a> dans la référence SDK.</p>
+<p>For more information on parameters, refer to <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Vector/search.md"><code translate="no">search()</code></a> in the SDK reference.</p>
 </div>
 <div class="language-java">
-<p>Pour plus d'informations sur les paramètres, voir <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Vector/search.md"><code translate="no">search()</code></a> dans la référence du SDK.</p>
+<p>For more information on parameters, refer to <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Vector/search.md"><code translate="no">search()</code></a> in the SDK reference.</p>
 </div>
 <div class="language-javascript">
-<p>Pour plus d'informations sur les paramètres, voir <a href="https://milvus.io/api-reference/node/v2.4.x/Vector/search.md"><code translate="no">search()</code></a> dans la référence du SDK.</p>
+<p>For more information on parameters, refer to <a href="https://milvus.io/api-reference/node/v2.4.x/Vector/search.md"><code translate="no">search()</code></a> in the SDK reference.</p>
 </div>
 <div class="multipleCode">
-   <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a></div>
+    <a href="#python">Python </a>
+    <a href="#java">Java</a>
+    <a href="#javascript">Node.js</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># 4. Basic search with the array field</span>
 query_vectors = [ [ random.uniform(-<span class="hljs-number">1</span>, <span class="hljs-number">1</span>) <span class="hljs-keyword">for</span> _ <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">5</span>) ]]
 
@@ -606,49 +642,23 @@ res = client.search(
 <span class="hljs-comment"># data: [&quot;[{&#x27;id&#x27;: 918, &#x27;distance&#x27;: 0.974249541759491, &#x27;entity&#x27;: {&#x27;color_coord&#x27;: [4, 34, 9, 18, 29], &#x27;id&#x27;: 918, &#x27;color&#x27;: &#x27;purple&#x27;, &#x27;color_tag&#x27;: 2940}}, {&#x27;id&#x27;: 822, &#x27;distance&#x27;: 0.9177230000495911, &#x27;entity&#x27;: {&#x27;color_coord&#x27;: [7, 36, 32], &#x27;id&#x27;: 822, &#x27;color&#x27;: &#x27;red&#x27;, &#x27;color_tag&#x27;: 8519}}, {&#x27;id&#x27;: 981, &#x27;distance&#x27;: 0.9116519689559937, &#x27;entity&#x27;: {&#x27;color_coord&#x27;: [7, 16, 40, 32, 32], &#x27;id&#x27;: 981, &#x27;color&#x27;: &#x27;pink&#x27;, &#x27;color_tag&#x27;: 2992}}]&quot;] , extra_info: {&#x27;cost&#x27;: 0}</span>
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-java"><span class="hljs-comment">// 4. Basic search with an Array field</span>
+<span class="hljs-type">QueryReq</span> <span class="hljs-variable">queryReq</span> <span class="hljs-operator">=</span> QueryReq.builder()
+        .collectionName(<span class="hljs-string">&quot;test_collection&quot;</span>)
+        .filter(<span class="hljs-string">&quot;color_coord[0] in [7, 8, 9]&quot;</span>)
+        .outputFields(Arrays.asList(<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-string">&quot;color&quot;</span>, <span class="hljs-string">&quot;color_tag&quot;</span>, <span class="hljs-string">&quot;color_coord&quot;</span>))
+        .limit(<span class="hljs-number">3L</span>)
+        .build();
 
-<span class="hljs-title class_">QueryReq</span> queryReq = <span class="hljs-title class_">QueryReq</span>.<span class="hljs-title function_">builder</span>()
-    .<span class="hljs-title function_">collectionName</span>(<span class="hljs-string">&quot;test_collection&quot;</span>)
-    .<span class="hljs-title function_">filter</span>(<span class="hljs-string">&quot;color_coord[0] in [7, 8, 9]&quot;</span>)
-    .<span class="hljs-title function_">outputFields</span>(<span class="hljs-title class_">Arrays</span>.<span class="hljs-title function_">asList</span>(<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-string">&quot;color&quot;</span>, <span class="hljs-string">&quot;color_tag&quot;</span>, <span class="hljs-string">&quot;color_coord&quot;</span>))
-    .<span class="hljs-title function_">limit</span>(3L)
-    .<span class="hljs-title function_">build</span>();
+<span class="hljs-type">QueryResp</span> <span class="hljs-variable">queryResp</span> <span class="hljs-operator">=</span> client.query(queryReq);
 
-<span class="hljs-title class_">QueryResp</span> queryResp = client.<span class="hljs-title function_">query</span>(queryReq);
-
-<span class="hljs-title class_">System</span>.<span class="hljs-property">out</span>.<span class="hljs-title function_">println</span>(<span class="hljs-title class_">JSON</span><span class="hljs-built_in">Object</span>.<span class="hljs-title function_">toJSON</span>(queryResp));
+System.out.println(queryResp.getQueryResults());
 
 <span class="hljs-comment">// Output:</span>
-<span class="hljs-comment">// {&quot;queryResults&quot;: [</span>
-<span class="hljs-comment">//     {&quot;entity&quot;: {</span>
-<span class="hljs-comment">//         &quot;color&quot;: &quot;orange&quot;,</span>
-<span class="hljs-comment">//         &quot;color_tag&quot;: 2464,</span>
-<span class="hljs-comment">//         &quot;id&quot;: 18,</span>
-<span class="hljs-comment">//         &quot;color_coord&quot;: [</span>
-<span class="hljs-comment">//             9,</span>
-<span class="hljs-comment">//             30</span>
-<span class="hljs-comment">//         ]</span>
-<span class="hljs-comment">//     }},</span>
-<span class="hljs-comment">//     {&quot;entity&quot;: {</span>
-<span class="hljs-comment">//         &quot;color&quot;: &quot;pink&quot;,</span>
-<span class="hljs-comment">//         &quot;color_tag&quot;: 2602,</span>
-<span class="hljs-comment">//         &quot;id&quot;: 22,</span>
-<span class="hljs-comment">//         &quot;color_coord&quot;: [</span>
-<span class="hljs-comment">//             8,</span>
-<span class="hljs-comment">//             34,</span>
-<span class="hljs-comment">//             16</span>
-<span class="hljs-comment">//         ]</span>
-<span class="hljs-comment">//     }},</span>
-<span class="hljs-comment">//     {&quot;entity&quot;: {</span>
-<span class="hljs-comment">//         &quot;color&quot;: &quot;pink&quot;,</span>
-<span class="hljs-comment">//         &quot;color_tag&quot;: 1243,</span>
-<span class="hljs-comment">//         &quot;id&quot;: 42,</span>
-<span class="hljs-comment">//         &quot;color_coord&quot;: [</span>
-<span class="hljs-comment">//             9,</span>
-<span class="hljs-comment">//             20</span>
-<span class="hljs-comment">//         ]</span>
-<span class="hljs-comment">//     }}</span>
-<span class="hljs-comment">// ]}</span>
+<span class="hljs-comment">// [</span>
+<span class="hljs-comment">//  QueryResp.QueryResult(entity={color=black, color_tag=6107, id=8, color_coord=[8, 19, 31, 10]}), </span>
+<span class="hljs-comment">//  QueryResp.QueryResult(entity={color=blue, color_tag=3252, id=11, color_coord=[7, 16, 1]}),</span>
+<span class="hljs-comment">//  QueryResp.QueryResult(entity={color=blue, color_tag=3069, id=16, color_coord=[9, 16, 19]})</span>
+<span class="hljs-comment">// ]</span>
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> query_vectors = [<span class="hljs-title class_">Array</span>(<span class="hljs-number">5</span>).<span class="hljs-title function_">fill</span>(<span class="hljs-number">0</span>).<span class="hljs-title function_">map</span>(<span class="hljs-function">() =&gt;</span> <span class="hljs-title class_">Math</span>.<span class="hljs-title function_">random</span>())];
 
@@ -705,7 +715,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 <span class="hljs-comment">//     }</span>
 <span class="hljs-comment">// ]</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Advanced-filtering" class="common-anchor-header">Filtrage avancé<button data-href="#Advanced-filtering" class="anchor-icon" translate="no">
+<h2 id="Advanced-filtering" class="common-anchor-header">Advanced filtering<button data-href="#Advanced-filtering" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -720,11 +730,14 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Comme pour un champ JSON, Milvus propose également des opérateurs de filtrage avancé pour les tableaux, à savoir <code translate="no">ARRAY_CONTAINS</code>, <code translate="no">ARRAY_CONTAINS_ALL</code>, <code translate="no">ARRAY_CONTAINS_ANY</code> et <code translate="no">ARRAY_LENGTH</code>. Pour plus d'informations sur les opérateurs, reportez-vous à la section <a href="#reference-on-array-filters">Référence sur les filtres de tableaux</a>.</p>
+    </button></h2><p>As what we have in a JSON field, Milvus also provides advanced filtering operators for arrays, namely <code translate="no">ARRAY_CONTAINS</code>, <code translate="no">ARRAY_CONTAINS_ALL</code>, <code translate="no">ARRAY_CONTAINS_ANY</code>, and <code translate="no">ARRAY_LENGTH</code>. For more information on operators, refer to <a href="#reference-on-array-filters">Reference on array filters</a>.</p>
 <ul>
-<li><p>Filtre toutes les entités ayant un <code translate="no">10</code> dans leurs valeurs <code translate="no">color_coord</code>.</p>
+<li><p>Filters all entities having a <code translate="no">10</code> in their <code translate="no">color_coord</code> values.</p>
 <p><div class="multipleCode">
-<a href="#python">Python </a><a href="#java">Java</a><a href="#javascript">Node.js</a></div></p>
+<a href="#python">Python </a>
+<a href="#java">Java</a>
+<a href="#javascript">Node.js</a>
+</div></p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># 5. Advanced query within the array field</span>
 
 res = client.query(
@@ -740,51 +753,23 @@ res = client.query(
 <span class="hljs-comment"># data: [&quot;{&#x27;id&#x27;: 2, &#x27;color&#x27;: &#x27;green&#x27;, &#x27;color_tag&#x27;: 3676, &#x27;color_coord&#x27;: [26, 37, 30, 10]}&quot;, &quot;{&#x27;id&#x27;: 28, &#x27;color&#x27;: &#x27;red&#x27;, &#x27;color_tag&#x27;: 4735, &#x27;color_coord&#x27;: [30, 10, 40, 34]}&quot;, &quot;{&#x27;id&#x27;: 32, &#x27;color&#x27;: &#x27;green&#x27;, &#x27;color_tag&#x27;: 8816, &#x27;color_coord&#x27;: [10, 9, 24, 39]}&quot;] , extra_info: {&#x27;cost&#x27;: 0}</span>
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-java"><span class="hljs-comment">// 5. Advanced query within an Array field</span>
-queryReq = <span class="hljs-title class_">QueryReq</span>.<span class="hljs-title function_">builder</span>()
-    .<span class="hljs-title function_">collectionName</span>(<span class="hljs-string">&quot;test_collection&quot;</span>)
-    .<span class="hljs-title function_">filter</span>(<span class="hljs-string">&quot;ARRAY_CONTAINS(color_coord, 10)&quot;</span>)
-    .<span class="hljs-title function_">outputFields</span>(<span class="hljs-title class_">Arrays</span>.<span class="hljs-title function_">asList</span>(<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-string">&quot;color&quot;</span>, <span class="hljs-string">&quot;color_tag&quot;</span>, <span class="hljs-string">&quot;color_coord&quot;</span>))
-    .<span class="hljs-title function_">limit</span>(<span class="hljs-number">3</span>)
-    .<span class="hljs-title function_">build</span>();
+queryReq = QueryReq.builder()
+        .collectionName(<span class="hljs-string">&quot;test_collection&quot;</span>)
+        .filter(<span class="hljs-string">&quot;ARRAY_CONTAINS(color_coord, 10)&quot;</span>)
+        .outputFields(Arrays.asList(<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-string">&quot;color&quot;</span>, <span class="hljs-string">&quot;color_tag&quot;</span>, <span class="hljs-string">&quot;color_coord&quot;</span>))
+        .limit(<span class="hljs-number">3</span>)
+        .build();
 
-queryResp = client.<span class="hljs-title function_">query</span>(queryReq);
+queryResp = client.query(queryReq);
 
-<span class="hljs-title class_">System</span>.<span class="hljs-property">out</span>.<span class="hljs-title function_">println</span>(<span class="hljs-title class_">JSON</span><span class="hljs-built_in">Object</span>.<span class="hljs-title function_">toJSON</span>(queryResp));
+System.out.<span class="hljs-built_in">println</span>(queryResp.getQueryResults());
 
 <span class="hljs-comment">// Output:</span>
-<span class="hljs-comment">// {&quot;queryResults&quot;: [</span>
-<span class="hljs-comment">//     {&quot;entity&quot;: {</span>
-<span class="hljs-comment">//         &quot;color&quot;: &quot;blue&quot;,</span>
-<span class="hljs-comment">//         &quot;color_tag&quot;: 4337,</span>
-<span class="hljs-comment">//         &quot;id&quot;: 17,</span>
-<span class="hljs-comment">//         &quot;color_coord&quot;: [</span>
-<span class="hljs-comment">//             11,</span>
-<span class="hljs-comment">//             33,</span>
-<span class="hljs-comment">//             10,</span>
-<span class="hljs-comment">//             20</span>
-<span class="hljs-comment">//         ]</span>
-<span class="hljs-comment">//     }},</span>
-<span class="hljs-comment">//     {&quot;entity&quot;: {</span>
-<span class="hljs-comment">//         &quot;color&quot;: &quot;white&quot;,</span>
-<span class="hljs-comment">//         &quot;color_tag&quot;: 5219,</span>
-<span class="hljs-comment">//         &quot;id&quot;: 25,</span>
-<span class="hljs-comment">//         &quot;color_coord&quot;: [</span>
-<span class="hljs-comment">//             10,</span>
-<span class="hljs-comment">//             15</span>
-<span class="hljs-comment">//         ]</span>
-<span class="hljs-comment">//     }},</span>
-<span class="hljs-comment">//     {&quot;entity&quot;: {</span>
-<span class="hljs-comment">//         &quot;color&quot;: &quot;red&quot;,</span>
-<span class="hljs-comment">//         &quot;color_tag&quot;: 7120,</span>
-<span class="hljs-comment">//         &quot;id&quot;: 35,</span>
-<span class="hljs-comment">//         &quot;color_coord&quot;: [</span>
-<span class="hljs-comment">//             19,</span>
-<span class="hljs-comment">//             10,</span>
-<span class="hljs-comment">//             10,</span>
-<span class="hljs-comment">//             14</span>
-<span class="hljs-comment">//         ]</span>
-<span class="hljs-comment">//     }}</span>
-<span class="hljs-comment">// ]}</span>
+<span class="hljs-comment">// [</span>
+<span class="hljs-comment">//    QueryResp.QueryResult(entity={color=black, color_tag=6107, id=8, color_coord=[8, 19, 31, 10]}), </span>
+<span class="hljs-comment">//    QueryResp.QueryResult(entity={color=brown, color_tag=7727, id=17, color_coord=[1, 10, 16, 29]}), </span>
+<span class="hljs-comment">//    QueryResp.QueryResult(entity={color=orange, color_tag=8128, id=26, color_coord=[10, 16, 3, 3]})</span>
+<span class="hljs-comment">// ]</span>
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-comment">// 5. Advanced search within the array field</span>
 res = <span class="hljs-keyword">await</span> client.<span class="hljs-title function_">search</span>({
@@ -837,9 +822,12 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 <span class="hljs-comment">// ]</span>
 <span class="hljs-comment">// </span>
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p>Filtre toutes les entités ayant un <code translate="no">7</code> et un <code translate="no">8</code> dans leurs valeurs <code translate="no">color_coord</code>.</p>
+<li><p>Filters all entities having a <code translate="no">7</code> and an <code translate="no">8</code> in their <code translate="no">color_coord</code> values.</p>
 <p><div class="multipleCode">
-<a href="#python">Python </a><a href="#java">Java</a><a href="#javascript">Node.js</a></div></p>
+<a href="#python">Python </a>
+<a href="#java">Java</a>
+<a href="#javascript">Node.js</a>
+</div></p>
 <pre><code translate="no" class="language-python">res = client.query(
     collection_name=<span class="hljs-string">&quot;test_collection&quot;</span>,
     filter=<span class="hljs-string">&quot;ARRAY_CONTAINS_ALL(color_coord, [7, 8])&quot;</span>,
@@ -852,29 +840,22 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 # Output:
 # data: [<span class="hljs-string">&quot;{&#x27;id&#x27;: 147, &#x27;color&#x27;: &#x27;brown&#x27;, &#x27;color_tag&#x27;: 1287, &#x27;color_coord&#x27;: [7, 8, 11, 0]}&quot;</span>, <span class="hljs-string">&quot;{&#x27;id&#x27;: 257, &#x27;color&#x27;: &#x27;white&#x27;, &#x27;color_tag&#x27;: 3641, &#x27;color_coord&#x27;: [2, 8, 31, 7]}&quot;</span>, <span class="hljs-string">&quot;{&#x27;id&#x27;: 280, &#x27;color&#x27;: &#x27;orange&#x27;, &#x27;color_tag&#x27;: 1072, &#x27;color_coord&#x27;: [22, 7, 8]}&quot;</span>] , extra_info: {<span class="hljs-string">&#x27;cost&#x27;</span>: <span class="hljs-number">0</span>}
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java">queryReq = <span class="hljs-title class_">QueryReq</span>.<span class="hljs-title function_">builder</span>()
-    .<span class="hljs-title function_">collectionName</span>(<span class="hljs-string">&quot;test_collection&quot;</span>)
-    .<span class="hljs-title function_">filter</span>(<span class="hljs-string">&quot;ARRAY_CONTAINS_ALL(color_coord, [7, 8, 9])&quot;</span>)
-    .<span class="hljs-title function_">outputFields</span>(<span class="hljs-title class_">Arrays</span>.<span class="hljs-title function_">asList</span>(<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-string">&quot;color&quot;</span>, <span class="hljs-string">&quot;color_tag&quot;</span>, <span class="hljs-string">&quot;color_coord&quot;</span>))
-    .<span class="hljs-title function_">limit</span>(<span class="hljs-number">3</span>)
-    .<span class="hljs-title function_">build</span>();
+<pre><code translate="no" class="language-java">queryReq = QueryReq.builder()
+        .collectionName(<span class="hljs-string">&quot;test_collection&quot;</span>)
+        .filter(<span class="hljs-string">&quot;ARRAY_CONTAINS_ALL(color_coord, [7, 8])&quot;</span>)
+        .outputFields(Arrays.asList(<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-string">&quot;color&quot;</span>, <span class="hljs-string">&quot;color_tag&quot;</span>, <span class="hljs-string">&quot;color_coord&quot;</span>))
+        .limit(<span class="hljs-number">3</span>)
+        .build();
 
-queryResp = client.<span class="hljs-title function_">query</span>(queryReq);
+queryResp = client.query(queryReq);
 
-<span class="hljs-title class_">System</span>.<span class="hljs-property">out</span>.<span class="hljs-title function_">println</span>(<span class="hljs-title class_">JSON</span><span class="hljs-built_in">Object</span>.<span class="hljs-title function_">toJSON</span>(queryResp));     
+System.out.<span class="hljs-built_in">println</span>(queryResp.getQueryResults());
 
 <span class="hljs-comment">// Output:</span>
-<span class="hljs-comment">// {&quot;queryResults&quot;: [{&quot;entity&quot;: {</span>
-<span class="hljs-comment">//     &quot;color&quot;: &quot;red&quot;,</span>
-<span class="hljs-comment">//     &quot;color_tag&quot;: 6986,</span>
-<span class="hljs-comment">//     &quot;id&quot;: 423,</span>
-<span class="hljs-comment">//     &quot;color_coord&quot;: [</span>
-<span class="hljs-comment">//         26,</span>
-<span class="hljs-comment">//         7,</span>
-<span class="hljs-comment">//         8,</span>
-<span class="hljs-comment">//         9</span>
-<span class="hljs-comment">//     ]</span>
-<span class="hljs-comment">// }}]}</span>
+<span class="hljs-comment">// [</span>
+<span class="hljs-comment">//  QueryResp.QueryResult(entity={color=blue, color_tag=6939, id=246, color_coord=[1, 8, 27, 7]}), </span>
+<span class="hljs-comment">//  QueryResp.QueryResult(entity={color=brown, color_tag=6341, id=673, color_coord=[8, 7, 33, 20, 11]})</span>
+<span class="hljs-comment">// ]</span>
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript">res = <span class="hljs-keyword">await</span> client.<span class="hljs-title function_">search</span>({
     <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;test_collection&quot;</span>,
@@ -929,9 +910,12 @@ queryResp = client.<span class="hljs-title function_">query</span>(queryReq);
 <span class="hljs-comment">// ]</span>
 <span class="hljs-comment">// </span>
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p>Filtre toutes les entités ayant 7, 8 ou 9 dans leurs valeurs <code translate="no">color_coord</code>.</p>
+<li><p>Filters all entities having either 7, 8, or 9 in their <code translate="no">color_coord</code> values.</p>
 <p><div class="multipleCode">
-<a href="#python">Python </a><a href="#java">Java</a><a href="#javascript">Node.js</a></div></p>
+<a href="#python">Python </a>
+<a href="#java">Java</a>
+<a href="#javascript">Node.js</a>
+</div></p>
 <pre><code translate="no" class="language-python">res = client.query(
     collection_name=<span class="hljs-string">&quot;test_collection&quot;</span>,
     filter=<span class="hljs-string">&quot;ARRAY_CONTAINS_ANY(color_coord, [7, 8, 9])&quot;</span>,
@@ -944,48 +928,23 @@ queryResp = client.<span class="hljs-title function_">query</span>(queryReq);
 # Output:
 # data: [<span class="hljs-string">&quot;{&#x27;id&#x27;: 0, &#x27;color&#x27;: &#x27;white&#x27;, &#x27;color_tag&#x27;: 2081, &#x27;color_coord&#x27;: [16, 7, 35, 5, 25]}&quot;</span>, <span class="hljs-string">&quot;{&#x27;id&#x27;: 1, &#x27;color&#x27;: &#x27;purple&#x27;, &#x27;color_tag&#x27;: 4669, &#x27;color_coord&#x27;: [11, 9, 15, 38, 21]}&quot;</span>, <span class="hljs-string">&quot;{&#x27;id&#x27;: 3, &#x27;color&#x27;: &#x27;yellow&#x27;, &#x27;color_tag&#x27;: 2612, &#x27;color_coord&#x27;: [0, 12, 22, 7]}&quot;</span>] , extra_info: {<span class="hljs-string">&#x27;cost&#x27;</span>: <span class="hljs-number">0</span>}
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java">queryReq = <span class="hljs-title class_">QueryReq</span>.<span class="hljs-title function_">builder</span>()
-    .<span class="hljs-title function_">collectionName</span>(<span class="hljs-string">&quot;test_collection&quot;</span>)
-    .<span class="hljs-title function_">filter</span>(<span class="hljs-string">&quot;ARRAY_CONTAINS_ANY(color_coord, [7, 8, 9])&quot;</span>)
-    .<span class="hljs-title function_">outputFields</span>(<span class="hljs-title class_">Arrays</span>.<span class="hljs-title function_">asList</span>(<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-string">&quot;color&quot;</span>, <span class="hljs-string">&quot;color_tag&quot;</span>, <span class="hljs-string">&quot;color_coord&quot;</span>))
-    .<span class="hljs-title function_">limit</span>(<span class="hljs-number">3</span>)
-    .<span class="hljs-title function_">build</span>();
+<pre><code translate="no" class="language-java">queryReq = QueryReq.builder()
+        .collectionName(<span class="hljs-string">&quot;test_collection&quot;</span>)
+        .filter(<span class="hljs-string">&quot;ARRAY_CONTAINS_ANY(color_coord, [7, 8, 9])&quot;</span>)
+        .outputFields(Arrays.asList(<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-string">&quot;color&quot;</span>, <span class="hljs-string">&quot;color_tag&quot;</span>, <span class="hljs-string">&quot;color_coord&quot;</span>))
+        .limit(<span class="hljs-number">3</span>)
+        .build();
 
-queryResp = client.<span class="hljs-title function_">query</span>(queryReq);
+queryResp = client.query(queryReq);
 
-<span class="hljs-title class_">System</span>.<span class="hljs-property">out</span>.<span class="hljs-title function_">println</span>(<span class="hljs-title class_">JSON</span><span class="hljs-built_in">Object</span>.<span class="hljs-title function_">toJSON</span>(queryResp));   
+System.out.<span class="hljs-built_in">println</span>(queryResp.getQueryResults());
 
 <span class="hljs-comment">// Output:</span>
-<span class="hljs-comment">// {&quot;queryResults&quot;: [</span>
-<span class="hljs-comment">//     {&quot;entity&quot;: {</span>
-<span class="hljs-comment">//         &quot;color&quot;: &quot;orange&quot;,</span>
-<span class="hljs-comment">//         &quot;color_tag&quot;: 2464,</span>
-<span class="hljs-comment">//         &quot;id&quot;: 18,</span>
-<span class="hljs-comment">//         &quot;color_coord&quot;: [</span>
-<span class="hljs-comment">//             9,</span>
-<span class="hljs-comment">//             30</span>
-<span class="hljs-comment">//         ]</span>
-<span class="hljs-comment">//     }},</span>
-<span class="hljs-comment">//     {&quot;entity&quot;: {</span>
-<span class="hljs-comment">//         &quot;color&quot;: &quot;pink&quot;,</span>
-<span class="hljs-comment">//         &quot;color_tag&quot;: 2602,</span>
-<span class="hljs-comment">//         &quot;id&quot;: 22,</span>
-<span class="hljs-comment">//         &quot;color_coord&quot;: [</span>
-<span class="hljs-comment">//             8,</span>
-<span class="hljs-comment">//             34,</span>
-<span class="hljs-comment">//             16</span>
-<span class="hljs-comment">//         ]</span>
-<span class="hljs-comment">//     }},</span>
-<span class="hljs-comment">//     {&quot;entity&quot;: {</span>
-<span class="hljs-comment">//         &quot;color&quot;: &quot;pink&quot;,</span>
-<span class="hljs-comment">//         &quot;color_tag&quot;: 1243,</span>
-<span class="hljs-comment">//         &quot;id&quot;: 42,</span>
-<span class="hljs-comment">//         &quot;color_coord&quot;: [</span>
-<span class="hljs-comment">//             9,</span>
-<span class="hljs-comment">//             20</span>
-<span class="hljs-comment">//         ]</span>
-<span class="hljs-comment">//     }}</span>
-<span class="hljs-comment">// ]}</span>
+<span class="hljs-comment">// [</span>
+<span class="hljs-comment">//  QueryResp.QueryResult(entity={color=purple, color_tag=3687, id=1, color_coord=[22, 7, 29, 25]}), </span>
+<span class="hljs-comment">//  QueryResp.QueryResult(entity={color=black, color_tag=6107, id=8, color_coord=[8, 19, 31, 10]}), </span>
+<span class="hljs-comment">//  QueryResp.QueryResult(entity={color=blue, color_tag=3252, id=11, color_coord=[7, 16, 1]})</span>
+<span class="hljs-comment">// ]</span>
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript">res = <span class="hljs-keyword">await</span> client.<span class="hljs-title function_">search</span>({
     <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;test_collection&quot;</span>,
@@ -1037,9 +996,12 @@ queryResp = client.<span class="hljs-title function_">query</span>(queryReq);
 <span class="hljs-comment">// ]</span>
 <span class="hljs-comment">// </span>
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p>Filtre les entités qui ont exactement quatre éléments.</p>
+<li><p>Filters entities that have exactly four elements.</p>
 <p><div class="multipleCode">
-<a href="#python">Python </a><a href="#java">Java</a><a href="#javascript">Node.js</a></div></p>
+<a href="#python">Python </a>
+<a href="#java">Java</a>
+<a href="#javascript">Node.js</a>
+</div></p>
 <pre><code translate="no" class="language-python">res = client.query(
     collection_name=<span class="hljs-string">&quot;test_collection&quot;</span>,
     filter=<span class="hljs-string">&quot;ARRAY_LENGTH(color_coord) == 4&quot;</span>,
@@ -1052,53 +1014,23 @@ queryResp = client.<span class="hljs-title function_">query</span>(queryReq);
 # Output:
 # data: [<span class="hljs-string">&quot;{&#x27;id&#x27;: 2, &#x27;color&#x27;: &#x27;green&#x27;, &#x27;color_tag&#x27;: 3676, &#x27;color_coord&#x27;: [26, 37, 30, 10]}&quot;</span>, <span class="hljs-string">&quot;{&#x27;id&#x27;: 3, &#x27;color&#x27;: &#x27;yellow&#x27;, &#x27;color_tag&#x27;: 2612, &#x27;color_coord&#x27;: [0, 12, 22, 7]}&quot;</span>, <span class="hljs-string">&quot;{&#x27;id&#x27;: 4, &#x27;color&#x27;: &#x27;green&#x27;, &#x27;color_tag&#x27;: 6912, &#x27;color_coord&#x27;: [4, 5, 19, 28]}&quot;</span>] , extra_info: {<span class="hljs-string">&#x27;cost&#x27;</span>: <span class="hljs-number">0</span>}
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java">queryReq = <span class="hljs-title class_">QueryReq</span>.<span class="hljs-title function_">builder</span>()
-    .<span class="hljs-title function_">collectionName</span>(<span class="hljs-string">&quot;test_collection&quot;</span>)
-    .<span class="hljs-title function_">filter</span>(<span class="hljs-string">&quot;ARRAY_LENGTH(color_coord) == 4&quot;</span>)
-    .<span class="hljs-title function_">outputFields</span>(<span class="hljs-title class_">Arrays</span>.<span class="hljs-title function_">asList</span>(<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-string">&quot;color&quot;</span>, <span class="hljs-string">&quot;color_tag&quot;</span>, <span class="hljs-string">&quot;color_coord&quot;</span>))
-    .<span class="hljs-title function_">limit</span>(<span class="hljs-number">3</span>)
-    .<span class="hljs-title function_">build</span>();
+<pre><code translate="no" class="language-java">queryReq = QueryReq.builder()
+        .collectionName(<span class="hljs-string">&quot;test_collection&quot;</span>)
+        .filter(<span class="hljs-string">&quot;ARRAY_LENGTH(color_coord) == 4&quot;</span>)
+        .outputFields(Arrays.asList(<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-string">&quot;color&quot;</span>, <span class="hljs-string">&quot;color_tag&quot;</span>, <span class="hljs-string">&quot;color_coord&quot;</span>))
+        .limit(<span class="hljs-number">3</span>)
+        .build();
 
-queryResp = client.<span class="hljs-title function_">query</span>(queryReq);
+queryResp = client.query(queryReq);
 
-<span class="hljs-title class_">System</span>.<span class="hljs-property">out</span>.<span class="hljs-title function_">println</span>(<span class="hljs-title class_">JSON</span><span class="hljs-built_in">Object</span>.<span class="hljs-title function_">toJSON</span>(queryResp));   
+System.out.<span class="hljs-built_in">println</span>(queryResp.getQueryResults()); 
 
 <span class="hljs-comment">// Output:</span>
-<span class="hljs-comment">// {&quot;queryResults&quot;: [</span>
-<span class="hljs-comment">//     {&quot;entity&quot;: {</span>
-<span class="hljs-comment">//         &quot;color&quot;: &quot;green&quot;,</span>
-<span class="hljs-comment">//         &quot;color_tag&quot;: 2984,</span>
-<span class="hljs-comment">//         &quot;id&quot;: 2,</span>
-<span class="hljs-comment">//         &quot;color_coord&quot;: [</span>
-<span class="hljs-comment">//             27,</span>
-<span class="hljs-comment">//             31,</span>
-<span class="hljs-comment">//             23,</span>
-<span class="hljs-comment">//             29</span>
-<span class="hljs-comment">//         ]</span>
-<span class="hljs-comment">//     }},</span>
-<span class="hljs-comment">//     {&quot;entity&quot;: {</span>
-<span class="hljs-comment">//         &quot;color&quot;: &quot;black&quot;,</span>
-<span class="hljs-comment">//         &quot;color_tag&quot;: 6867,</span>
-<span class="hljs-comment">//         &quot;id&quot;: 4,</span>
-<span class="hljs-comment">//         &quot;color_coord&quot;: [</span>
-<span class="hljs-comment">//             37,</span>
-<span class="hljs-comment">//             3,</span>
-<span class="hljs-comment">//             30,</span>
-<span class="hljs-comment">//             33</span>
-<span class="hljs-comment">//         ]</span>
-<span class="hljs-comment">//     }},</span>
-<span class="hljs-comment">//     {&quot;entity&quot;: {</span>
-<span class="hljs-comment">//         &quot;color&quot;: &quot;brown&quot;,</span>
-<span class="hljs-comment">//         &quot;color_tag&quot;: 3464,</span>
-<span class="hljs-comment">//         &quot;id&quot;: 10,</span>
-<span class="hljs-comment">//         &quot;color_coord&quot;: [</span>
-<span class="hljs-comment">//             31,</span>
-<span class="hljs-comment">//             38,</span>
-<span class="hljs-comment">//             21,</span>
-<span class="hljs-comment">//             28</span>
-<span class="hljs-comment">//         ]</span>
-<span class="hljs-comment">//     }}</span>
-<span class="hljs-comment">// ]}</span>
+<span class="hljs-comment">// [</span>
+<span class="hljs-comment">//  QueryResp.QueryResult(entity={color=purple, color_tag=3687, id=1, color_coord=[22, 7, 29, 25]}),</span>
+<span class="hljs-comment">//  QueryResp.QueryResult(entity={color=yellow, color_tag=1990, id=3, color_coord=[26, 20, 15, 26]}),</span>
+<span class="hljs-comment">//  QueryResp.QueryResult(entity={color=purple, color_tag=3199, id=4, color_coord=[13, 19, 21, 30]})</span>
+<span class="hljs-comment">// ]</span>
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript">res = <span class="hljs-keyword">await</span> client.<span class="hljs-title function_">search</span>({
 <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;test_collection&quot;</span>,
@@ -1153,7 +1085,7 @@ queryResp = client.<span class="hljs-title function_">query</span>(queryReq);
 <span class="hljs-comment">// </span>
 <button class="copy-code-btn"></button></code></pre></li>
 </ul>
-<h2 id="Limits" class="common-anchor-header">Limites<button data-href="#Limits" class="anchor-icon" translate="no">
+<h2 id="Limits" class="common-anchor-header">Limits<button data-href="#Limits" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -1169,10 +1101,10 @@ queryResp = client.<span class="hljs-title function_">query</span>(queryReq);
         ></path>
       </svg>
     </button></h2><ul>
-<li><p>Les éléments d'un champ ARRAY doivent être du même type de données, spécifié par <code translate="no">element_type</code>. Tout type de données valide disponible pour les champs scalaires dans Milvus peut être utilisé comme <code translate="no">element_type</code>. Pour une liste des types de données pris en charge, voir <a href="https://milvus.io/docs/schema.md#Supported-data-types">Types de données pris en charge</a>.</p></li>
-<li><p>Le nombre d'éléments d'un champ ARRAY doit être inférieur ou égal à la capacité maximale du champ tableau, spécifiée par <code translate="no">max_capacity</code>.</p></li>
+<li><p>Elements in an ARRAY field should be of the same data type, specified by <code translate="no">element_type</code>. Any valid data type available for scalar fields in Milvus can be used as <code translate="no">element_type</code>. For a list of supported data types, refer to <a href="https://milvus.io/docs/schema.md#Supported-data-types">Supported data types</a>.</p></li>
+<li><p>The number of elements in an ARRAY field should be less than or equal to the maximum capacity of the array field, specified by <code translate="no">max_capacity</code>.</p></li>
 </ul>
-<h2 id="Reference-on-array-filters" class="common-anchor-header">Référence sur les filtres de tableau<button data-href="#Reference-on-array-filters" class="anchor-icon" translate="no">
+<h2 id="Reference-on-array-filters" class="common-anchor-header">Reference on array filters<button data-href="#Reference-on-array-filters" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -1187,28 +1119,28 @@ queryResp = client.<span class="hljs-title function_">query</span>(queryReq);
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Lorsque vous travaillez avec des champs de type tableau, vous pouvez entourer une valeur de type chaîne de caractères avec des guillemets doubles ("") ou des guillemets simples (''). Il est important de noter que Milvus stocke les valeurs de chaîne dans le champ de tableau telles quelles, sans effectuer d'échappement sémantique ni de conversion. Par exemple, <strong>'a &quot;b',</strong> <strong>'a'b',</strong> <strong>'a'b'</strong> et <strong>'a &quot;b'</strong> seront enregistrés tels quels, tandis que <strong>'a'b'</strong> et <strong>'a &quot;b'</strong> seront traités comme des valeurs non valides.</p>
-<p>Supposons que deux champs de tableau <code translate="no">int_array</code> et <code translate="no">var_array</code> aient été définis. Le tableau suivant décrit les expressions booléennes prises en charge que vous pouvez utiliser dans <code translate="no">expr</code> lors d'une recherche dans des champs de type tableau.</p>
+    </button></h2><p>When working with array fields, you can enclose a string value with either double quotation marks (“”) or single quotation marks (‘’). It’s important to note that Milvus stores string values in the array field as is without performing semantic escape or conversion. For instance, <strong>‘a&quot;b’</strong>, <strong>“a’b”</strong>, <strong>‘a’b’</strong>, and <strong>“a&quot;b”</strong> will be saved as is, while <strong>‘a’b’</strong> and <strong>“a&quot;b”</strong> will be treated as invalid values.</p>
+<p>Assume that two array fields <code translate="no">int_array</code> and <code translate="no">var_array</code> have been defined. The following table describes the supported boolean expressions that you can use in <code translate="no">expr</code> when searching with array fields.</p>
 <table>
 <thead>
-<tr><th>Opérateur</th><th>Exemples</th><th>Remarques</th></tr>
+<tr><th>Operator</th><th>Examples</th><th>Remarks</th></tr>
 </thead>
 <tbody>
-<tr><td>&lt;</td><td><code translate="no">‘int_array[0] &lt; 3’</code></td><td>Cette expression est considérée comme vraie si la valeur de <code translate="no">int_array[0]</code> est inférieure à 3.</td></tr>
-<tr><td>&gt;</td><td><code translate="no">‘int_array[0] &gt; 5’</code></td><td>Cette expression est vraie si la valeur de <code translate="no">int_array[0]</code> est supérieure à 5.</td></tr>
-<tr><td>==</td><td><code translate="no">‘int_array[0] == 0’</code></td><td>Cette expression est vraie si la valeur de <code translate="no">int_array[0]</code> est égale à 0.</td></tr>
-<tr><td>!=</td><td><code translate="no">‘var_array[0] != &quot;a&quot;’</code></td><td>Cette expression est considérée comme vraie si la valeur de <code translate="no">var_array[0]</code> n'est pas égale à <code translate="no">“a”</code>.</td></tr>
-<tr><td>&lt;=</td><td><code translate="no">‘int_array[0] &lt;= 3’</code></td><td>Cette expression est considérée comme vraie si la valeur de <code translate="no">int_array[0]</code> est inférieure ou égale à 3.</td></tr>
-<tr><td>&gt;=</td><td><code translate="no">‘int_array[0] &gt;= 10’</code></td><td>Cette expression est considérée comme vraie si la valeur de <code translate="no">int_array[0]</code> est supérieure ou égale à 10.</td></tr>
-<tr><td>in</td><td><code translate="no">'var_array[0] in [&quot;str1&quot;, “str2”]'</code></td><td>Cette expression est considérée comme vraie si la valeur de <code translate="no">var_array[0]</code> est <code translate="no">“str1”</code> ou <code translate="no">“str2”</code>.</td></tr>
-<tr><td>not in</td><td><code translate="no">'int_array[0] not in [1, 2, 3]'</code></td><td>Cette expression est considérée comme vraie si la valeur de <code translate="no">int_array[0]</code> n'est pas 1, 2 ou 3.</td></tr>
-<tr><td>+, -, *, /, %, **</td><td><code translate="no">‘int_array[0] + 100 &gt; 200’</code></td><td>Cette expression est considérée comme vraie si la valeur de <code translate="no">int_array[0] + 100</code> est supérieure à 200.</td></tr>
-<tr><td>comme (LIKE)</td><td><code translate="no">‘var_array[0] like &quot;prefix%&quot;’</code></td><td>Cette expression est considérée comme vraie si la valeur de <code translate="no">var_array[0]</code> est préfixée par <code translate="no">“prefix”</code>.</td></tr>
-<tr><td>et (&amp;&amp;)</td><td><code translate="no">‘var_array[0] like “prefix%” &amp;&amp; int_array[0] &lt;= 100’</code></td><td>Cette expression est considérée comme vraie si la valeur de <code translate="no">var_array[0]</code> est préfixée par <code translate="no">“prefix”</code>, et que la valeur de <code translate="no">int_array[0]</code> est inférieure ou égale à 100.</td></tr>
-<tr><td>ou (||)</td><td><code translate="no">‘var_array[0] like “prefix%” || int_array[0] &lt;= 100’</code></td><td>Cette expression est considérée comme vraie si la valeur de <code translate="no">var_array[0]</code> est préfixée par <code translate="no">“prefix”</code>, ou si la valeur de <code translate="no">int_array[0]</code> est inférieure ou égale à 100.</td></tr>
-<tr><td>array_contains (ARRAY_CONTAINS)</td><td><code translate="no">'array_contains(int_array, 100)'</code></td><td>Cette expression vaut true si <code translate="no">int_array</code> contient l'élément <code translate="no">100</code>.</td></tr>
-<tr><td>array_contains_all (ARRAY_CONTAINS_ALL)</td><td><code translate="no">'array_contains_all(int_array, [1, 2, 3])'</code></td><td>Cette expression est évaluée à true si <code translate="no">int_array</code> contient tous les éléments <code translate="no">1</code>, <code translate="no">2</code>, et <code translate="no">3</code>.</td></tr>
-<tr><td>array_contains_any (ARRAY_CONTAINS_ANY)</td><td><code translate="no">'array_contains_any(var_array, [&quot;a&quot;, &quot;b&quot;, “c”])'</code></td><td>Cette expression est considérée comme vraie si <code translate="no">var_array</code> contient n'importe quel élément de <code translate="no">“a”</code>, <code translate="no">“b”</code>, et <code translate="no">“c”</code>.</td></tr>
-<tr><td>array_length</td><td><code translate="no">‘array_length(int_array) == 10’</code></td><td>La valeur de cette expression est vraie si <code translate="no">int_array</code> contient exactement 10 éléments.</td></tr>
+<tr><td>&lt;</td><td><code translate="no">‘int_array[0] &lt; 3’</code></td><td>This expression evaluates to true if the value of <code translate="no">int_array[0]</code> is less than 3.</td></tr>
+<tr><td>&gt;</td><td><code translate="no">‘int_array[0] &gt; 5’</code></td><td>This expression evaluates to true if the value of <code translate="no">int_array[0]</code> is greater than 5.</td></tr>
+<tr><td>==</td><td><code translate="no">‘int_array[0] == 0’</code></td><td>This expression evaluates to true if the value of <code translate="no">int_array[0]</code> is equal to 0.</td></tr>
+<tr><td>!=</td><td><code translate="no">‘var_array[0] != &quot;a&quot;’</code></td><td>This expression evaluates to true if the value of <code translate="no">var_array[0]</code> is not equal to <code translate="no">“a”</code>.</td></tr>
+<tr><td>&lt;=</td><td><code translate="no">‘int_array[0] &lt;= 3’</code></td><td>This expression evaluates to true if the value of <code translate="no">int_array[0]</code> is smaller than or equal to 3.</td></tr>
+<tr><td>&gt;=</td><td><code translate="no">‘int_array[0] &gt;= 10’</code></td><td>This expression evaluates to true if the value of <code translate="no">int_array[0]</code> is greater than or equal to 10.</td></tr>
+<tr><td>in</td><td><code translate="no">'var_array[0] in [&quot;str1&quot;, “str2”]'</code></td><td>This expression evaluates to true if the value of <code translate="no">var_array[0]</code> is <code translate="no">“str1”</code> or <code translate="no">“str2”</code>.</td></tr>
+<tr><td>not in</td><td><code translate="no">'int_array[0] not in [1, 2, 3]'</code></td><td>This expression evaluates to true if the value of <code translate="no">int_array[0]</code> is not 1, 2, or 3.</td></tr>
+<tr><td>+, -, *, /, %, **</td><td><code translate="no">‘int_array[0] + 100 &gt; 200’</code></td><td>This expression evaluates to true if the value of <code translate="no">int_array[0] + 100</code> is greater than 200.</td></tr>
+<tr><td>like (LIKE)</td><td><code translate="no">‘var_array[0] like &quot;prefix%&quot;’</code></td><td>This expression evaluates to true if the value of <code translate="no">var_array[0]</code> is prefixed with <code translate="no">“prefix”</code>.</td></tr>
+<tr><td>and (&amp;&amp;)</td><td><code translate="no">‘var_array[0] like “prefix%” &amp;&amp; int_array[0] &lt;= 100’</code></td><td>This expression evaluates to true if the value of <code translate="no">var_array[0]</code> is prefixed with <code translate="no">“prefix”</code>, and the value of <code translate="no">int_array[0]</code> is smaller than or equal to 100.</td></tr>
+<tr><td>or (||)</td><td><code translate="no">‘var_array[0] like “prefix%” || int_array[0] &lt;= 100’</code></td><td>This expression evaluates to true if the value of <code translate="no">var_array[0]</code> is prefixed with <code translate="no">“prefix”</code>, or the value of <code translate="no">int_array[0]</code> is smaller than or equal to 100.</td></tr>
+<tr><td>array_contains (ARRAY_CONTAINS)</td><td><code translate="no">'array_contains(int_array, 100)'</code></td><td>This expression evaluates to true if <code translate="no">int_array</code> contains element <code translate="no">100</code>.</td></tr>
+<tr><td>array_contains_all (ARRAY_CONTAINS_ALL)</td><td><code translate="no">'array_contains_all(int_array, [1, 2, 3])'</code></td><td>This expression evaluates to true if <code translate="no">int_array</code> contains all elements <code translate="no">1</code>, <code translate="no">2</code>, and <code translate="no">3</code>.</td></tr>
+<tr><td>array_contains_any (ARRAY_CONTAINS_ANY)</td><td><code translate="no">'array_contains_any(var_array, [&quot;a&quot;, &quot;b&quot;, “c”])'</code></td><td>This expression evaluates to true if <code translate="no">var_array</code> contains any element of <code translate="no">“a”</code>, <code translate="no">“b”</code>, and <code translate="no">“c”</code>.</td></tr>
+<tr><td>array_length</td><td><code translate="no">‘array_length(int_array) == 10’</code></td><td>This expression evaluates to true if <code translate="no">int_array</code> contains exactly 10 elements.</td></tr>
 </tbody>
 </table>

@@ -3,9 +3,9 @@ id: install_standalone-docker-compose.md
 label: Docker Compose
 related_key: Docker Compose
 summary: Aprenda a instalar Milvus de forma autónoma con Docker Compose.
-title: Ejecutar Milvus con Docker Compose
+title: Ejecutar Milvus con Docker Compose (Linux)
 ---
-<h1 id="Run-Milvus-with-Docker-Compose" class="common-anchor-header">Ejecutar Milvus con Docker Compose<button data-href="#Run-Milvus-with-Docker-Compose" class="anchor-icon" translate="no">
+<h1 id="Run-Milvus-with-Docker-Compose-Linux" class="common-anchor-header">Ejecutar Milvus con Docker Compose (Linux)<button data-href="#Run-Milvus-with-Docker-Compose-Linux" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -113,7 +113,7 @@ $ <span class="hljs-built_in">sudo</span> <span class="hljs-built_in">rm</span> 
       </svg>
     </button></h2><p>Habiendo instalado Milvus en Docker, puede:</p>
 <ul>
-<li><p>Comprobar <a href="/docs/es/quickstart.md">Quickstart</a> para ver qué puede hacer Milvus.</p></li>
+<li><p>Comprobar <a href="/docs/es/quickstart.md">Quickstart</a> para ver lo que Milvus puede hacer.</p></li>
 <li><p>Aprender las operaciones básicas de Milvus:</p>
 <ul>
 <li><a href="/docs/es/manage_databases.md">Gestionar bases de datos</a></li>

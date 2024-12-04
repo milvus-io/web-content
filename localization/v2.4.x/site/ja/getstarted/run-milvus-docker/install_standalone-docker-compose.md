@@ -3,9 +3,9 @@ id: install_standalone-docker-compose.md
 label: Docker Compose
 related_key: Docker Compose
 summary: Docker Composeを使ってmilvusをスタンドアロンインストールする方法をご紹介します。
-title: Docker ComposeでMilvusを起動する
+title: Docker ComposeでMilvusを起動する(Linux)
 ---
-<h1 id="Run-Milvus-with-Docker-Compose" class="common-anchor-header">Docker ComposeでMilvusを起動する<button data-href="#Run-Milvus-with-Docker-Compose" class="anchor-icon" translate="no">
+<h1 id="Run-Milvus-with-Docker-Compose-Linux" class="common-anchor-header">Docker ComposeでMilvusを起動する(Linux)<button data-href="#Run-Milvus-with-Docker-Compose-Linux" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

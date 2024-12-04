@@ -86,15 +86,21 @@
                 "children": []
               },
               {
-                "label": "Docker",
+                "label": "Docker (Linux)",
                 "id": "install_standalone-docker.md",
                 "order": 1,
                 "children": []
               },
               {
-                "label": "Docker Compose",
+                "label": "Docker Compose (Linux)",
                 "id": "install_standalone-docker-compose.md",
                 "order": 2,
+                "children": []
+              },
+              {
+                "label": "Docker 桌面（Windows）",
+                "id": "install_standalone-windows.md",
+                "order": 3,
                 "children": []
               }
             ]
@@ -671,7 +677,7 @@
         "children": []
       },
       {
-        "label": "来自 Milvus 2.3.x",
+        "label": "From Milvus 2.3.x",
         "id": "from-m2x.md",
         "order": 5,
         "children": []

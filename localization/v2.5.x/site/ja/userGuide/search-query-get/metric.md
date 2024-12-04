@@ -235,7 +235,7 @@ title: メートル法
 <ul>
 <li><p><code translate="no">​Q</code>:ユーザーによって提供されたクエリーテキスト。</p></li>
 <li><p><code translate="no">​D</code>:評価対象の文書。</p></li>
-<li><p><code translate="no">​TF(qi​,D)</code>:文書Dにおける用語qの出現頻度。</p></li>
+<li><p><code translate="no">​TF(qi​,D)</code>:用語頻度。用語<code translate="no">​qi</code> が文書<code translate="no">​D</code> に出現する頻度を表す。</p></li>
 <li><p><code translate="no">​IDF(qi​)</code>:逆文書頻度。</p>
 <p>
   

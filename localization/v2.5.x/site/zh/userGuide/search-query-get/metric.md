@@ -19,7 +19,7 @@ title: 公制类型
         ></path>
       </svg>
     </button></h1><p>相似度量用于衡量向量之间的相似性。选择合适的距离度量有助于显著提高分类和聚类性能。</p>
-<p>目前，Milvus 支持这些类型的相似度度量：欧氏距离 (<code translate="no">L2</code>)、内积 (<code translate="no">IP</code>)、余弦相似度 (<code translate="no">COSINE</code>)、<code translate="no">JACCARD</code>,<code translate="no">HAMMING</code> 和<code translate="no">BM25</code> （专门为稀疏向量的全文检索而设计）。</p>
+<p>目前，Milvus 支持这些类型的相似性度量：欧氏距离 (<code translate="no">L2</code>)、内积 (<code translate="no">IP</code>)、余弦相似度 (<code translate="no">COSINE</code>)、<code translate="no">JACCARD</code>,<code translate="no">HAMMING</code> 和<code translate="no">BM25</code> （专门为稀疏向量的全文检索而设计）。</p>
 <p>下表总结了不同字段类型与相应度量类型之间的映射关系。</p>
 <table data-block-token="LHu5dKCHro3mnTx6PsmckEsinQd"><thead><tr><th data-block-token="JOJvdTK9MouhT8x7tfGc59NGnfg" colspan="1" rowspan="1"><p data-block-token="TS9tdnaJaoG4kfx96cfcqXINnnc">字段类型</p>
 </th><th data-block-token="Iy8ZdPGpIo6nfwxiz4RcSuwanwf" colspan="1" rowspan="1"><p data-block-token="SKIAdxDFJo9oOyxg7iTcmfGAnz1">维度范围</p>
@@ -223,7 +223,7 @@ title: 公制类型
 <ul>
 <li><p><strong>术语频率 (TF)：</strong>衡量术语在文档中出现的频率。虽然较高的频率通常表示较高的重要性，但 BM25 使用饱和参数 k1 来防止过于频繁的术语主导相关性得分。</p></li>
 <li><p><strong>反向文档频率（IDF）：</strong>反映术语在整个语料库中的重要性。在较少文档中出现的术语会获得较高的 IDF 值，这表明其对相关性的贡献更大。</p></li>
-<li><p><strong>文档长度<strong>归一化</strong>：</strong>较长的文档由于包含较多的术语，往往得分较高。BM25 通过对文档长度进行归一化处理来减轻这种偏差，参数 b 可控制归一化处理的强度。</p></li>
+<li><p><strong>文档长度<strong>归一化</strong>：</strong>较长的文档由于包含较多的术语，往往得分较高。BM25 通过对文档长度进行归一化处理来减轻这种偏差，参数 b 控制这种归一化处理的强度。</p></li>
 </ul>
 <p>BM25 评分的计算方法如下。</p>
 <p>
@@ -234,7 +234,7 @@ title: 公制类型
 <ul>
 <li><p><code translate="no">​Q</code>:用户提供的查询文本。</p></li>
 <li><p><code translate="no">​D</code>:正在评估的文档。</p></li>
-<li><p><code translate="no">​TF(qi​,D)</code>:术语频率，表示术语 qia 在文档 D 中出现的频率。</p></li>
+<li><p><code translate="no">​TF(qi​,D)</code>:术语频率，表示术语<code translate="no">​qi</code> 在文档<code translate="no">​D</code> 中出现的频率。</p></li>
 <li><p><code translate="no">​IDF(qi​)</code>:反向文档频率，计算公式如下</p>
 <p>
   

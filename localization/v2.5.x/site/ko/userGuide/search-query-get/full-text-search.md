@@ -42,8 +42,8 @@ summary: 전체 텍스트 검색은 텍스트 데이터 세트에서 특정 용�
     </button></h2><p>전체 텍스트 검색은 수동 임베딩의 필요성을 제거하여 텍스트 기반 검색 프로세스를 간소화합니다. 이 기능은 다음 워크플로우를 통해 작동합니다.</p>
 <ol>
 <li><p><strong>텍스트 입력</strong>: 원시 텍스트 문서를 삽입하거나 수동으로 임베드할 필요 없이 쿼리 텍스트를 제공합니다.</p></li>
-<li><p><strong>텍스트 분석</strong>: Milvus는 분석기를 사용하여 입력 텍스트를 검색 가능한 개별 용어로 토큰화합니다.</p></li>
-<li><p><strong>함수 처리</strong>: 내장된 함수는 토큰화된 용어를 수신하여 희소 벡터 표현으로 변환합니다.</p></li>
+<li><p><strong>텍스트 분석</strong>: Milvus는 분석기를 사용하여 입력 텍스트를 검색 가능한 개별 용어로 토큰화합니다. 분석기에 대한 자세한 내용은 분석기 <a href="/docs/ko/analyzer-overview.md">개요를</a> 참조하세요.</p></li>
+<li><p><strong>함수 처리</strong>: 기본 제공 함수는 토큰화된 용어를 수신하여 희소 벡터 표현으로 변환합니다.</p></li>
 <li><p><strong>컬렉션 저장소</strong>: Milvus는 효율적인 검색을 위해 이러한 희소 임베딩을 컬렉션에 저장합니다.</p></li>
 <li><p><strong>BM25 점수</strong>: 검색 중에 Milvus는 BM25 알고리즘을 적용하여 저장된 문서에 대한 점수를 계산하고 쿼리 텍스트와의 관련성에 따라 일치하는 결과의 순위를 매깁니다.</p></li>
 </ol>
@@ -54,7 +54,7 @@ summary: 전체 텍스트 검색은 텍스트 데이터 세트에서 특정 용�
 <p>전체 텍스트 검색을 사용하려면 다음 주요 단계를 따르세요.</p>
 <ol>
 <li><p><a href="#Create-a-collection-for-full-text-search">컬렉션을 만듭니다</a>: 필요한 필드로 컬렉션을 설정하고 원시 텍스트를 스파스 임베딩으로 변환하는 함수를 정의합니다.</p></li>
-<li><p><a href="#Insert-text-data">데이터 삽입하기</a>: 원시 텍스트 문서를 컬렉션에 수집합니다.</p></li>
+<li><p><a href="#Insert-text-data">데이터 삽입</a>: 원시 텍스트 문서를 컬렉션에 수집합니다.</p></li>
 <li><p><a href="#Perform-full-text-search">검색 수행하기</a>: 쿼리 텍스트를 사용하여 컬렉션을 검색하고 관련 결과를 검색합니다.</p></li>
 </ol>
 <h2 id="Create-a-collection-for-full-text-search​" class="common-anchor-header">전체 텍스트 검색을 위한 컬렉션 만들기<button data-href="#Create-a-collection-for-full-text-search​" class="anchor-icon" translate="no">
@@ -82,8 +82,10 @@ summary: 전체 텍스트 검색은 텍스트 데이터 세트에서 특정 용�
 <div class="multipleCode">
    <a href="#python">파이썬 </a> <a href="#java">자바</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType, Function, FunctionType​
+
+client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)
 ​
-schema = MilvusClient.create_schema()​
+schema = client.create_schema()​
 ​
 schema.add_field(field_name=<span class="hljs-string">&quot;id&quot;</span>, datatype=DataType.INT64, is_primary=<span class="hljs-literal">True</span>, auto_id=<span class="hljs-literal">True</span>)​
 schema.add_field(field_name=<span class="hljs-string">&quot;text&quot;</span>, datatype=DataType.VARCHAR, max_length=<span class="hljs-number">1000</span>, enable_analyzer=<span class="hljs-literal">True</span>)​
@@ -167,7 +169,7 @@ schema.addField(AddFieldReq.builder()
 <p>이 구성에서는</p>
 <ul>
 <li><p><code translate="no">id</code>은 기본 키로 사용되며 <code translate="no">auto_id=True</code> 으로 자동 생성됩니다.</p></li>
-<li><p><code translate="no">text</code>는 전체 텍스트 검색 작업을 위한 원시 텍스트 데이터를 저장합니다. 데이터 유형은 <code translate="no">VARCHAR</code> 이 Milvus의 텍스트 저장용 문자열 데이터 유형이므로 <code translate="no">VARCHAR</code> 이어야 합니다. <code translate="no">enable_analyzer=True</code> 를 설정하면 Milvus가 텍스트를 토큰화할 수 있습니다. 기본적으로 Milvus는 텍스트 분석에 <a href="/docs/ko/standard-analyzer.md">표준 분석기를</a> 사용합니다. 다른 분석기를 구성하려면 <a href="/docs/ko/analyzer-overview.md">개요를</a> 참조하세요.</p></li>
+<li><p><code translate="no">text</code>는 전체 텍스트 검색 작업을 위한 원시 텍스트 데이터를 저장합니다. 데이터 유형은 <code translate="no">VARCHAR</code> 이 Milvus의 텍스트 저장용 문자열 데이터 유형이므로 <code translate="no">VARCHAR</code> 이어야 합니다. <code translate="no">enable_analyzer=True</code> 을 설정하면 Milvus가 텍스트를 토큰화할 수 있습니다. 기본적으로 Milvus는 텍스트 분석에 <a href="/docs/ko/standard-analyzer.md">표준 분석기를</a> 사용합니다. 다른 분석기를 구성하려면 <a href="/docs/ko/analyzer-overview.md">개요를</a> 참조하세요.</p></li>
 <li><p><code translate="no">sparse</code>전체 텍스트 검색 작업을 위해 내부적으로 생성된 스파스 임베딩을 저장하기 위해 예약된 벡터 필드입니다. 데이터 유형은 <code translate="no">SPARSE_FLOAT_VECTOR</code> 여야 합니다.</p></li>
 </ul>
 <p>이제 텍스트를 스파스 벡터 표현으로 변환하는 함수를 정의한 다음 스키마에 추가합니다.</p>
@@ -239,7 +241,7 @@ schema.addFunction(Function.builder()
         ]
     }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<table data-block-token="EfAfdS3iXoAULPxQ3mwckzTrnUb"><thead><tr><th data-block-token="O3sLd5KNXou4Egxq6XVcoNiJnMW" colspan="1" rowspan="1"><p data-block-token="QRttdgJBpo2hEuxb438c7eOgn2f">매개변수</p>
+<table data-block-token="EfAfdS3iXoAULPxQ3mwckzTrnUb"><thead><tr><th data-block-token="O3sLd5KNXou4Egxq6XVcoNiJnMW" colspan="1" rowspan="1"><p data-block-token="QRttdgJBpo2hEuxb438c7eOgn2f">파라미터</p>
 </th><th data-block-token="SMGGduN8zo3cgXxVnwZcW0UAnbA" colspan="1" rowspan="1"><p data-block-token="LY39dA2eOoyVUUxvKwlcyyjdn3e">설명</p>
 </th></tr></thead><tbody><tr><td data-block-token="Pbj3dPvuno3x6kxnCsWcTb3knag" colspan="1" rowspan="1"><p data-block-token="EeHOdxCjloFUAGxuY1CcScCTnDe"><code translate="no">name</code></p>
 <p data-block-token="FzAJdVbrzozmTdxwy4fcJQkQnlh"></p>
@@ -257,7 +259,7 @@ schema.addFunction(Function.builder()
 <h3 id="Configure-the-index" class="common-anchor-header">인덱스 구성</h3><p>필요한 필드와 기본 제공 함수로 스키마를 정의한 후에는 컬렉션의 색인을 설정하세요. 이 과정을 간소화하기 위해 <code translate="no">AUTOINDEX</code> 을 <code translate="no">index_type</code> 으로 사용하면 Milvus가 데이터 구조에 따라 가장 적합한 인덱스 유형을 선택하고 구성할 수 있는 옵션이 제공됩니다.</p>
 <div class="multipleCode">
    <a href="#python">파이썬 </a> <a href="#java">자바</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
-<pre><code translate="no" class="language-python">index_params = <span class="hljs-title class_">MilvusClient</span>.<span class="hljs-title function_">prepare_index_params</span>()​
+<pre><code translate="no" class="language-python">index_params = client.<span class="hljs-title function_">prepare_index_params</span>()​
 ​
 index_params.<span class="hljs-title function_">add_index</span>(​
     field_name=<span class="hljs-string">&quot;sparse&quot;</span>,​
@@ -303,7 +305,7 @@ indexes.<span class="hljs-title function_">add</span>(<span class="hljs-title cl
 <h3 id="Create-the-collection​" class="common-anchor-header">컬렉션 만들기</h3><p>이제 정의한 스키마 및 인덱스 매개변수를 사용하여 컬렉션을 생성합니다.</p>
 <div class="multipleCode">
    <a href="#python">파이썬 </a> <a href="#java">자바</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
-<pre><code translate="no" class="language-python"><span class="hljs-title class_">MilvusClient</span>.<span class="hljs-title function_">create_collection</span>(​
+<pre><code translate="no" class="language-python">client.<span class="hljs-title function_">create_collection</span>(​
     collection_name=<span class="hljs-string">&#x27;demo&#x27;</span>, ​
     schema=schema, ​
     index_params=index_params​
@@ -421,10 +423,10 @@ client.insert(InsertReq.builder()
 <div class="multipleCode">
    <a href="#python">파이썬 </a> <a href="#java">자바</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python">search_params = {​
-    <span class="hljs-string">&#x27;params&#x27;</span>: {<span class="hljs-string">&#x27;drop_ratio_search&#x27;</span>: 0.6},​
+    <span class="hljs-string">&#x27;params&#x27;</span>: {<span class="hljs-string">&#x27;drop_ratio_search&#x27;</span>: 0.2},​
 }​
 ​
-MilvusClient.search(​
+client.search(​
     collection_name=<span class="hljs-string">&#x27;demo&#x27;</span>, ​
     data=[<span class="hljs-string">&#x27;whats the focus of information retrieval?&#x27;</span>],​
     anns_field=<span class="hljs-string">&#x27;sparse&#x27;</span>,​
@@ -438,7 +440,7 @@ MilvusClient.search(​
 <span class="hljs-keyword">import</span> io.<span class="hljs-property">milvus</span>.<span class="hljs-property">v2</span>.<span class="hljs-property">service</span>.<span class="hljs-property">vector</span>.<span class="hljs-property">response</span>.<span class="hljs-property">SearchResp</span>;
 
 <span class="hljs-title class_">Map</span>&lt;<span class="hljs-title class_">String</span>,<span class="hljs-title class_">Object</span>&gt; searchParams = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();
-searchParams.<span class="hljs-title function_">put</span>(<span class="hljs-string">&quot;drop_ratio_search&quot;</span>, <span class="hljs-number">0.6</span>);
+searchParams.<span class="hljs-title function_">put</span>(<span class="hljs-string">&quot;drop_ratio_search&quot;</span>, <span class="hljs-number">0.2</span>);
 <span class="hljs-title class_">SearchResp</span> searchResp = client.<span class="hljs-title function_">search</span>(<span class="hljs-title class_">SearchReq</span>.<span class="hljs-title function_">builder</span>()
         .<span class="hljs-title function_">collectionName</span>(<span class="hljs-string">&quot;demo&quot;</span>)
         .<span class="hljs-title function_">data</span>(<span class="hljs-title class_">Collections</span>.<span class="hljs-title function_">singletonList</span>(<span class="hljs-keyword">new</span> <span class="hljs-title class_">EmbeddedText</span>(<span class="hljs-string">&quot;whats the focus of information retrieval?&quot;</span>)))
@@ -453,7 +455,7 @@ searchParams.<span class="hljs-title function_">put</span>(<span class="hljs-str
     data: [<span class="hljs-string">&#x27;whats the focus of information retrieval?&#x27;</span>],
     anns_field: <span class="hljs-string">&#x27;sparse&#x27;</span>,
     limit: <span class="hljs-number">3</span>,
-    <span class="hljs-keyword">params</span>: {<span class="hljs-string">&#x27;drop_ratio_search&#x27;</span>: <span class="hljs-number">0.6</span>},
+    <span class="hljs-keyword">params</span>: {<span class="hljs-string">&#x27;drop_ratio_search&#x27;</span>: <span class="hljs-number">0.2</span>},
 )
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-curl">curl --request POST \
@@ -472,7 +474,7 @@ searchParams.<span class="hljs-title function_">put</span>(<span class="hljs-str
     ],
     &quot;searchParams&quot;:{
         &quot;params&quot;:{
-            &quot;drop_ratio_search&quot;:0.6
+            &quot;drop_ratio_search&quot;:0.2
         }
     }
 }&#x27;</span>

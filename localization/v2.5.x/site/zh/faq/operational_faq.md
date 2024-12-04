@@ -50,7 +50,7 @@ title: 操作常见问题
 <h4 id="Can-I-install-Milvus-on-Windows" class="common-anchor-header">我可以在 Windows 上安装 Milvus 吗？</h4><p>可以。您可以通过源代码编译或二进制包在 Windows 上安装 Milvus。</p>
 <p>请参阅<a href="https://milvus.io/blog/2021-11-19-run-milvus-2.0-on-windows.md">在 Windows 上运行 Milvus</a>了解如何在 Windows 上安装 Milvus。</p>
 <h4 id="I-got-an-error-when-installing-pymilvus-on-Windows-What-shall-I-do" class="common-anchor-header">我在 Windows 上安装 pymilvus 时出错了。我该怎么办？</h4><p>不建议在 Windows 上安装 PyMilvus。但如果您必须在 Windows 上安装 PyMilvus，却发现了错误，请尝试在<a href="https://docs.conda.io/projects/conda/en/latest/user-guide/install/index.html">Conda</a>环境中安装。有关如何在 Conda 环境中安装 PyMilvus 的详细信息，请参阅<a href="/docs/zh/install-pymilvus.md">安装 Milvus SDK</a>。</p>
-<h4 id="Can-I-deploy-Milvus-when-disconnected-from-the-Internet" class="common-anchor-header">断开互联网时能部署 Milvus 吗？</h4><p>可以。您可以在离线环境中安装 Milvus。请参阅<a href="/docs/zh/install_offline-helm.md">离线安装 Milvus</a>获取更多信息。</p>
+<h4 id="Can-I-deploy-Milvus-when-disconnected-from-the-Internet" class="common-anchor-header">断开网络连接后还能部署 Milvus 吗？</h4><p>可以。您可以在离线环境中安装 Milvus。请参阅<a href="/docs/zh/install_offline-helm.md">离线安装 Milvus</a>获取更多信息。</p>
 <h4 id="Where-can-I-find-the-logs-generated-by-Milvus" class="common-anchor-header">在哪里可以找到 Milvus 生成的日志？</h4><p>Milvus 日志默认打印到 stout（标准输出）和 stderr（标准错误），但是我们强烈建议在生产中将日志重定向到持久卷。为此，请更新<strong>Milvus.yaml</strong> 中的<code translate="no">log.file.rootPath</code> 。而如果你用<code translate="no">milvus-helm</code> chart 部署 Milvus，也需要先通过<code translate="no">--set log.persistence.enabled=true</code> 启用日志持久性。</p>
 <p>如果你没有更改配置，使用 kubectl logs &lt;pod-name&gt; 或 docker logs CONTAINER 也能帮你找到日志。</p>
 <h4 id="Can-I-create-index-for-a-segment-before-inserting-data-into-it" class="common-anchor-header">在插入数据之前，我可以为段创建索引吗？</h4><p>可以。但我们建议在为每个数据段创建索引之前，分批插入数据，每批不应超过 256 MB。</p>
@@ -89,7 +89,7 @@ title: 操作常见问题
 <li>要理解<code translate="no">len(str)</code> 在 Python 中代表的是字符数，而不是以字节为单位的大小。</li>
 <li>对于基于字符串的数据类型，如 VARCHAR 和 JSON，使用<code translate="no">len(bytes(str, encoding='utf-8'))</code> 来确定以字节为单位的实际大小，这就是 Milvus 使用的 &quot;max-length&quot;。</li>
 </ul>
-<p>Python 示例：</p>
+<p>Python 示例</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Python Example: result of len() str cannot be used as &quot;max-length&quot; in Milvus </span>
 <span class="hljs-meta">&gt;&gt;&gt; </span>s = <span class="hljs-string">&quot;你好，世界！&quot;</span>
 <span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-built_in">len</span>(s) <span class="hljs-comment"># Number of characters of s.</span>
@@ -97,8 +97,11 @@ title: 操作常见问题
 <span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-built_in">len</span>(<span class="hljs-built_in">bytes</span>(s, <span class="hljs-string">&quot;utf-8&quot;</span>)) <span class="hljs-comment"># Size in bytes of s, max-length in Milvus.</span>
 <span class="hljs-number">18</span>
 <button class="copy-code-btn"></button></code></pre>
-<h4 id="Still-have-questions" class="common-anchor-header">还有问题？</h4><p>你可以</p>
+<h4 id="pymilvusexceptionsConnectionConfigException-ConnectionConfigException-code1-messageIllegal-uri-exampledb-expected-form-httpsuserpwdexamplecom12345-What-causes-this-and-how-can-it-be-solved" class="common-anchor-header"><code translate="no">pymilvus.exceptions.ConnectionConfigException: &lt;ConnectionConfigException: (code=1, message=Illegal uri: [example.db], expected form 'https://user:pwd@example.com:12345')&gt;</code>.什么原因导致这种情况，如何解决？</h4><p>这个错误表明，你试图使用不支持 Milvus Lite 的早期版本 pymilvus 连接 Milvus Lite。要解决这个问题，请将你的 pymilvus 至少升级到 2.4.2 版。该版本支持连接 Milvus Lite。要升级，请使用以下命令：</p>
+<pre><code translate="no" class="language-shell">pip install pymilvus&gt;=2.4.2
+<button class="copy-code-btn"></button></code></pre>
+<h4 id="Still-have-questions" class="common-anchor-header">仍有问题？</h4><p>你可以</p>
 <ul>
 <li>查看 GitHub 上的<a href="https://github.com/milvus-io/milvus/issues">Milvus</a>。随时提问、分享想法并帮助其他用户。</li>
-<li>加入我们的<a href="https://discuss.milvus.io/">Milvus 论坛</a>或<a href="https://join.slack.com/t/milvusio/shared_invite/enQtNzY1OTQ0NDI3NjMzLWNmYmM1NmNjOTQ5MGI5NDhhYmRhMGU5M2NhNzhhMDMzY2MzNDdlYjM5ODQ5MmE3ODFlYzU3YjJkNmVlNDQ2ZTk">Slack 频道</a>，寻求支持并与我们的开源社区互动。</li>
+<li>加入我们的<a href="https://discuss.milvus.io/">Milvus 论坛</a>或<a href="https://join.slack.com/t/milvusio/shared_invite/enQtNzY1OTQ0NDI3NjMzLWNmYmM1NmNjOTQ5MGI5NDhhYmRhMGU5M2NhNzhhMDMzY2MzNDdlYjM5ODQ5MmE3ODFlYzU3YjJkNmVlNDQ2ZTk">Slack 频道</a>，寻求支持并参与我们的开源社区。</li>
 </ul>

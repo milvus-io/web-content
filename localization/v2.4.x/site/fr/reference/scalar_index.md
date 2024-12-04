@@ -2,7 +2,7 @@
 id: scalar_index.md
 related_key: scalar_index
 summary: Indice scalaire en Milvus.
-title: Indice scalaire
+title: Index scalaire
 ---
 <h1 id="Scalar-Index" class="common-anchor-header">Index scalaire<button data-href="#Scalar-Index" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -41,7 +41,7 @@ title: Indice scalaire
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/scalar_index.png" alt="Attribute filtering in a segment" class="doc-image" id="attribute-filtering-in-a-segment" />
    </span> <span class="img-wrapper"> <span>Filtrage d'attributs dans un segment</span> </span></p>
-<p>L'indexation des champs scalaires est un moyen de garantir la rapidité du filtrage des attributs en triant les valeurs des champs scalaires d'une manière particulière afin d'accélérer la recherche d'informations.</p>
+<p>L'indexation des champs scalaires est un moyen d'assurer la rapidité du filtrage des attributs en triant les valeurs des champs scalaires d'une manière particulière afin d'accélérer la recherche d'informations.</p>
 <h2 id="Scalar-field-indexing-algorithms" class="common-anchor-header">Algorithmes d'indexation des champs scalaires<button data-href="#Scalar-field-indexing-algorithms" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -58,7 +58,7 @@ title: Indice scalaire
         ></path>
       </svg>
     </button></h2><p>Milvus vise à obtenir une faible utilisation de la mémoire, une grande efficacité de filtrage et un temps de chargement court grâce à ses algorithmes d'indexation des champs scalaires. Ces algorithmes sont classés en deux catégories principales : l'<a href="#auto-indexing">indexation automatique</a> et l'<a href="#inverted-indexing">indexation inversée</a>.</p>
-<h3 id="Auto-indexing" class="common-anchor-header">Indexation automatique</h3><p>Milvus crée automatiquement un index automatique pour un champ scalaire en fonction de son type de données, sans nécessiter d'intervention manuelle. L'indexation automatique convient aux requêtes de correspondance préfixe et aux scénarios de recherche fréquente.</p>
+<h3 id="Auto-indexing" class="common-anchor-header">Indexation automatique</h3><p>Milvus propose l'option <code translate="no">AUTOINDEX</code> pour vous éviter de devoir choisir manuellement un type d'index. Lors de l'appel de la méthode <code translate="no">create_index</code>, si l'option <code translate="no">index_type</code> n'est pas spécifiée, Milvus sélectionne automatiquement le type d'index le plus approprié en fonction du type de données.</p>
 <p>Le tableau suivant répertorie les types de données pris en charge par Milvus et les algorithmes d'indexation automatique correspondants.</p>
 <table>
 <thead>

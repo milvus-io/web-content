@@ -3,9 +3,9 @@ id: install_standalone-docker.md
 label: Docker
 related_key: Docker
 summary: Aprenda a instalar Milvus de forma autónoma con Docker.
-title: Ejecutar Milvus en Docker
+title: Ejecutar Milvus en Docker (Linux)
 ---
-<h1 id="Run-Milvus-in-Docker" class="common-anchor-header">Ejecutar Milvus en Docker<button data-href="#Run-Milvus-in-Docker" class="anchor-icon" translate="no">
+<h1 id="Run-Milvus-in-Docker-Linux" class="common-anchor-header">Ejecutar Milvus en Docker (Linux)<button data-href="#Run-Milvus-in-Docker-Linux" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -65,7 +65,7 @@ $ bash standalone_embed.sh start
 <div class="alert note">
 <p>Si encuentra algún problema al extraer la imagen, póngase en contacto con nosotros en <a href="mailto:community@zilliz.com">community@zilliz.com</a> con detalles sobre el problema, y le proporcionaremos el soporte necesario.</p>
 </div>
-<p>Después de ejecutar el script de instalación</p>
+<p>Después de ejecutar el script de instalación:</p>
 <ul>
 <li>Se ha iniciado un contenedor docker llamado milvus en el puerto <strong>19530</strong>.</li>
 <li>Un embed etcd está instalado junto con Milvus en el mismo contenedor y sirve en el puerto <strong>2379</strong>. Su archivo de configuración se asigna a <strong>embedEtcd.yaml</strong> en la carpeta actual.</li>

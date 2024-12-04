@@ -58,7 +58,7 @@ title: 标量索引
         ></path>
       </svg>
     </button></h2><p>Milvus 的标量字段索引算法旨在实现低内存占用率、高过滤效率和短加载时间。这些算法主要分为两类：<a href="#auto-indexing">自动索引</a>和<a href="#inverted-indexing">反转索引</a>。</p>
-<h3 id="Auto-indexing" class="common-anchor-header">自动索引</h3><p>Milvus 根据标量字段的数据类型自动为其创建自动索引，无需人工干预。自动索引适用于前缀匹配查询和频繁检索。</p>
+<h3 id="Auto-indexing" class="common-anchor-header">自动索引</h3><p>Milvus 提供了<code translate="no">AUTOINDEX</code> 选项，让你无需手动选择索引类型。调用<code translate="no">create_index</code> 方法时，如果没有指定<code translate="no">index_type</code> ，Milvus 会根据数据类型自动选择最合适的索引类型。</p>
 <p>下表列出了 Milvus 支持的数据类型及其相应的自动索引算法。</p>
 <table>
 <thead>

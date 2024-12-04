@@ -3,9 +3,9 @@ id: install_standalone-docker-compose.md
 label: Docker Compose
 related_key: Docker Compose
 summary: Découvrez comment installer Milvus de manière autonome avec Docker Compose.
-title: Exécuter Milvus avec Docker Compose
+title: Exécuter Milvus avec Docker Compose (Linux)
 ---
-<h1 id="Run-Milvus-with-Docker-Compose" class="common-anchor-header">Exécuter Milvus avec Docker Compose<button data-href="#Run-Milvus-with-Docker-Compose" class="anchor-icon" translate="no">
+<h1 id="Run-Milvus-with-Docker-Compose-Linux" class="common-anchor-header">Exécuter Milvus avec Docker Compose (Linux)<button data-href="#Run-Milvus-with-Docker-Compose-Linux" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

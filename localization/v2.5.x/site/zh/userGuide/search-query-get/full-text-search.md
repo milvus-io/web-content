@@ -42,7 +42,7 @@ summary: 全文搜索是一种在文本数据集中检索包含特定术语或�
     </button></h2><p>全文搜索无需手动嵌入，从而简化了基于文本的搜索过程。该功能通过以下工作流程进行操作符。</p>
 <ol>
 <li><p><strong>文本输入</strong>：插入原始文本文档或提供查询文本，无需手动嵌入。</p></li>
-<li><p><strong>文本分析</strong>：Milvus 使用分析器将输入文本标记为可搜索的单个术语。</p></li>
+<li><p><strong>文本分析</strong>：有关分析器的更多信息，请参阅分析器<a href="/docs/zh/analyzer-overview.md">概述</a>。</p></li>
 <li><p><strong>函数处理</strong>：内置函数接收标记化术语，并将其转换为稀疏向量表示。</p></li>
 <li><p><strong>Collections 存储</strong>：Milvus 将这些稀疏嵌入存储在 Collections 中，以便高效检索。</p></li>
 <li><p><strong>BM25 评分</strong>：在搜索过程中，Milvus 应用 BM25 算法为存储的文档计算分数，并根据与查询文本的相关性对匹配结果进行排序。</p></li>
@@ -82,8 +82,10 @@ summary: 全文搜索是一种在文本数据集中检索包含特定术语或�
 <div class="multipleCode">
    <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType, Function, FunctionType​
+
+client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)
 ​
-schema = MilvusClient.create_schema()​
+schema = client.create_schema()​
 ​
 schema.add_field(field_name=<span class="hljs-string">&quot;id&quot;</span>, datatype=DataType.INT64, is_primary=<span class="hljs-literal">True</span>, auto_id=<span class="hljs-literal">True</span>)​
 schema.add_field(field_name=<span class="hljs-string">&quot;text&quot;</span>, datatype=DataType.VARCHAR, max_length=<span class="hljs-number">1000</span>, enable_analyzer=<span class="hljs-literal">True</span>)​
@@ -168,7 +170,7 @@ schema.addField(AddFieldReq.builder()
 <ul>
 <li><p><code translate="no">id</code>: 作为主键，由<code translate="no">auto_id=True</code> 自动生成。</p></li>
 <li><p><code translate="no">text</code>:存储原始文本数据，用于全文搜索操作。数据类型必须是<code translate="no">VARCHAR</code> ，因为<code translate="no">VARCHAR</code> 是 Milvus 用于文本存储的字符串数据类型。设置<code translate="no">enable_analyzer=True</code> 以允许 Milvus 对文本进行标记化。默认情况下，Milvus 使用<a href="/docs/zh/standard-analyzer.md">标准分析器</a>进行文本分析。要配置不同的分析器，请参阅<a href="/docs/zh/analyzer-overview.md">概述</a>。</p></li>
-<li><p><code translate="no">sparse</code>矢量字段：预留矢量字段，用于存储内部生成的稀疏嵌入，以进行全文搜索操作。数据类型必须是<code translate="no">SPARSE_FLOAT_VECTOR</code> 。</p></li>
+<li><p><code translate="no">sparse</code>矢量字段：保留一个矢量字段，用于存储内部生成的稀疏嵌入，以进行全文搜索操作。数据类型必须是<code translate="no">SPARSE_FLOAT_VECTOR</code> 。</p></li>
 </ul>
 <p>现在，定义一个将文本转换为稀疏向量表示的函数，然后将其添加到 Schema 中。</p>
 <div class="multipleCode">
@@ -243,7 +245,7 @@ schema.addFunction(Function.builder()
 </th><th data-block-token="SMGGduN8zo3cgXxVnwZcW0UAnbA" colspan="1" rowspan="1"><p data-block-token="LY39dA2eOoyVUUxvKwlcyyjdn3e">说明</p>
 </th></tr></thead><tbody><tr><td data-block-token="Pbj3dPvuno3x6kxnCsWcTb3knag" colspan="1" rowspan="1"><p data-block-token="EeHOdxCjloFUAGxuY1CcScCTnDe"><code translate="no">name</code></p>
 <p data-block-token="FzAJdVbrzozmTdxwy4fcJQkQnlh"></p>
-</td><td data-block-token="VJWydnWHJoV66jx6oEPcH9lGnvh" colspan="1" rowspan="1"><p data-block-token="Clg3dWrJpo39lfxSWjVcbE7GnYm">函数名称。该函数将<code translate="no">text</code> 字段中的原始文本转换为可搜索的向量，这些向量将存储在<code translate="no">sparse</code> 字段中。</p>
+</td><td data-block-token="VJWydnWHJoV66jx6oEPcH9lGnvh" colspan="1" rowspan="1"><p data-block-token="Clg3dWrJpo39lfxSWjVcbE7GnYm">函数名称。该函数将<code translate="no">text</code> 字段中的原始文本转换为可搜索向量，这些向量将存储在<code translate="no">sparse</code> 字段中。</p>
 </td></tr><tr><td data-block-token="ShPJdlvMQoXnSHxIQ1GcoyegnEb" colspan="1" rowspan="1"><p data-block-token="HFT1dYVCioUj4PxnNSVcYIBInNh"><code translate="no">input_field_names</code></p>
 </td><td data-block-token="YiZCdrUaaovWnrxef29cmpQFn9c" colspan="1" rowspan="1"><p data-block-token="YFVOd29cUovDpXx7L2zcJK37n1g">需要将文本转换为稀疏向量的<code translate="no">VARCHAR</code> 字段的名称。对于<code translate="no">FunctionType.BM25</code> ，该参数只接受一个字段名称。</p>
 </td></tr><tr><td data-block-token="QpcMdDoXfo62aNxQfoyc2E6lneg" colspan="1" rowspan="1"><p data-block-token="D1LkdH1KIojwKDx14HUcHdDJnPh"><code translate="no">output_field_names</code></p>
@@ -257,7 +259,7 @@ schema.addFunction(Function.builder()
 <h3 id="Configure-the-index" class="common-anchor-header">配置索引</h3><p>在定义了包含必要字段和内置函数的 Schema 后，请为 Collections 设置索引。为简化这一过程，请使用<code translate="no">AUTOINDEX</code> 作为<code translate="no">index_type</code> ，该选项允许 Milvus 根据数据结构选择和配置最合适的索引类型。</p>
 <div class="multipleCode">
    <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
-<pre><code translate="no" class="language-python">index_params = <span class="hljs-title class_">MilvusClient</span>.<span class="hljs-title function_">prepare_index_params</span>()​
+<pre><code translate="no" class="language-python">index_params = client.<span class="hljs-title function_">prepare_index_params</span>()​
 ​
 index_params.<span class="hljs-title function_">add_index</span>(​
     field_name=<span class="hljs-string">&quot;sparse&quot;</span>,​
@@ -303,7 +305,7 @@ indexes.<span class="hljs-title function_">add</span>(<span class="hljs-title cl
 <h3 id="Create-the-collection​" class="common-anchor-header">创建 Collections</h3><p>现在使用定义的 Schema 和索引参数创建 Collections。</p>
 <div class="multipleCode">
    <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
-<pre><code translate="no" class="language-python"><span class="hljs-title class_">MilvusClient</span>.<span class="hljs-title function_">create_collection</span>(​
+<pre><code translate="no" class="language-python">client.<span class="hljs-title function_">create_collection</span>(​
     collection_name=<span class="hljs-string">&#x27;demo&#x27;</span>, ​
     schema=schema, ​
     index_params=index_params​
@@ -421,10 +423,10 @@ client.insert(InsertReq.builder()
 <div class="multipleCode">
    <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python">search_params = {​
-    <span class="hljs-string">&#x27;params&#x27;</span>: {<span class="hljs-string">&#x27;drop_ratio_search&#x27;</span>: 0.6},​
+    <span class="hljs-string">&#x27;params&#x27;</span>: {<span class="hljs-string">&#x27;drop_ratio_search&#x27;</span>: 0.2},​
 }​
 ​
-MilvusClient.search(​
+client.search(​
     collection_name=<span class="hljs-string">&#x27;demo&#x27;</span>, ​
     data=[<span class="hljs-string">&#x27;whats the focus of information retrieval?&#x27;</span>],​
     anns_field=<span class="hljs-string">&#x27;sparse&#x27;</span>,​
@@ -438,7 +440,7 @@ MilvusClient.search(​
 <span class="hljs-keyword">import</span> io.<span class="hljs-property">milvus</span>.<span class="hljs-property">v2</span>.<span class="hljs-property">service</span>.<span class="hljs-property">vector</span>.<span class="hljs-property">response</span>.<span class="hljs-property">SearchResp</span>;
 
 <span class="hljs-title class_">Map</span>&lt;<span class="hljs-title class_">String</span>,<span class="hljs-title class_">Object</span>&gt; searchParams = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();
-searchParams.<span class="hljs-title function_">put</span>(<span class="hljs-string">&quot;drop_ratio_search&quot;</span>, <span class="hljs-number">0.6</span>);
+searchParams.<span class="hljs-title function_">put</span>(<span class="hljs-string">&quot;drop_ratio_search&quot;</span>, <span class="hljs-number">0.2</span>);
 <span class="hljs-title class_">SearchResp</span> searchResp = client.<span class="hljs-title function_">search</span>(<span class="hljs-title class_">SearchReq</span>.<span class="hljs-title function_">builder</span>()
         .<span class="hljs-title function_">collectionName</span>(<span class="hljs-string">&quot;demo&quot;</span>)
         .<span class="hljs-title function_">data</span>(<span class="hljs-title class_">Collections</span>.<span class="hljs-title function_">singletonList</span>(<span class="hljs-keyword">new</span> <span class="hljs-title class_">EmbeddedText</span>(<span class="hljs-string">&quot;whats the focus of information retrieval?&quot;</span>)))
@@ -453,7 +455,7 @@ searchParams.<span class="hljs-title function_">put</span>(<span class="hljs-str
     data: [<span class="hljs-string">&#x27;whats the focus of information retrieval?&#x27;</span>],
     anns_field: <span class="hljs-string">&#x27;sparse&#x27;</span>,
     limit: <span class="hljs-number">3</span>,
-    <span class="hljs-keyword">params</span>: {<span class="hljs-string">&#x27;drop_ratio_search&#x27;</span>: <span class="hljs-number">0.6</span>},
+    <span class="hljs-keyword">params</span>: {<span class="hljs-string">&#x27;drop_ratio_search&#x27;</span>: <span class="hljs-number">0.2</span>},
 )
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-curl">curl --request POST \
@@ -472,7 +474,7 @@ searchParams.<span class="hljs-title function_">put</span>(<span class="hljs-str
     ],
     &quot;searchParams&quot;:{
         &quot;params&quot;:{
-            &quot;drop_ratio_search&quot;:0.6
+            &quot;drop_ratio_search&quot;:0.2
         }
     }
 }&#x27;</span>

@@ -3,9 +3,9 @@ id: install_standalone-docker-compose.md
 label: Docker Compose
 related_key: Docker Compose
 summary: 'Erfahren Sie, wie Sie Milvus eigenständig mit Docker Compose installieren.'
-title: Milvus mit Docker Compose starten
+title: Milvus mit Docker Compose ausführen (Linux)
 ---
-<h1 id="Run-Milvus-with-Docker-Compose" class="common-anchor-header">Milvus mit Docker Compose starten<button data-href="#Run-Milvus-with-Docker-Compose" class="anchor-icon" translate="no">
+<h1 id="Run-Milvus-with-Docker-Compose-Linux" class="common-anchor-header">Milvus mit Docker Compose ausführen (Linux)<button data-href="#Run-Milvus-with-Docker-Compose-Linux" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -38,9 +38,9 @@ title: Milvus mit Docker Compose starten
       </svg>
     </button></h2><ul>
 <li><a href="https://docs.docker.com/get-docker/">Installieren Sie Docker</a>.</li>
-<li><a href="/docs/de/prerequisite-docker.md">Überprüfen Sie die Anforderungen an Hardware und Software</a> vor der Installation.</li>
+<li><a href="/docs/de/prerequisite-docker.md">Prüfen Sie</a> vor der Installation<a href="/docs/de/prerequisite-docker.md">die Anforderungen an Hardware und Software</a>.</li>
 </ul>
-<h2 id="Install-Milvus" class="common-anchor-header">Milvus installieren<button data-href="#Install-Milvus" class="anchor-icon" translate="no">
+<h2 id="Install-Milvus" class="common-anchor-header">Installieren Sie Milvus<button data-href="#Install-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

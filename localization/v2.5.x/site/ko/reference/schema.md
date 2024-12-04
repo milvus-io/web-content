@@ -67,7 +67,7 @@ title: 스키마 관리
     </tr>
         <tr>
             <td><code translate="no">auto_id</code> (기본 키 필드의 경우 필수)</td>
-            <td>자동 ID(기본 키) 할당을 활성화 또는 비활성화할지 여부를 전환합니다.</td>
+            <td>자동 ID(기본 키) 할당을 사용하거나 사용하지 않도록 전환합니다.</td>
             <td><code translate="no">True</code> 또는 <code translate="no">False</code></td>
         </tr>
         <tr>
@@ -78,7 +78,7 @@ title: 스키마 관리
     <tr>
         <td><code translate="no">dim</code></td>
         <td>벡터의 차원</td>
-            <td>데이터 유형: 정수 &isin;[1, 32768]<br/>고밀도 벡터 필드의 경우 필수입니다. <a href="https://milvus.io/docs/sparse_vector.md">스파스 벡터</a> 필드의 경우 생략합니다.</td>
+            <td>데이터 유형: 정수 &isin;[1, 32768]<br/>밀집 벡터 필드의 경우 필수입니다. <a href="https://milvus.io/docs/sparse_vector.md">스파스 벡터</a> 필드의 경우 생략합니다.</td>
     </tr>
     <tr>
         <td><code translate="no">is_partition_key</code></td>
@@ -89,7 +89,7 @@ title: 스키마 관리
 </table>
 <h3 id="Create-a-field-schema" class="common-anchor-header">필드 스키마 만들기</h3><p>데이터 삽입의 복잡성을 줄이기 위해 Milvus에서는 필드 스키마를 생성하는 동안 기본 키 필드를 제외한 각 스칼라 필드에 대해 기본값을 지정할 수 있습니다. 즉, 데이터를 삽입할 때 필드를 비워두면 이 필드에 지정한 기본값이 적용됩니다.</p>
 <p>일반 필드 스키마를 만듭니다:</p>
-<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> FieldSchema
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> DataType, FieldSchema
 id_field = FieldSchema(name=<span class="hljs-string">&quot;id&quot;</span>, dtype=DataType.INT64, is_primary=<span class="hljs-literal">True</span>, description=<span class="hljs-string">&quot;primary id&quot;</span>)
 age_field = FieldSchema(name=<span class="hljs-string">&quot;age&quot;</span>, dtype=DataType.INT64, description=<span class="hljs-string">&quot;age&quot;</span>)
 embedding_field = FieldSchema(name=<span class="hljs-string">&quot;embedding&quot;</span>, dtype=DataType.FLOAT_VECTOR, dim=<span class="hljs-number">128</span>, description=<span class="hljs-string">&quot;vector&quot;</span>)
@@ -98,7 +98,7 @@ embedding_field = FieldSchema(name=<span class="hljs-string">&quot;embedding&quo
 position_field = FieldSchema(name=<span class="hljs-string">&quot;position&quot;</span>, dtype=DataType.VARCHAR, max_length=<span class="hljs-number">256</span>, is_partition_key=<span class="hljs-literal">True</span>)
 <button class="copy-code-btn"></button></code></pre>
 <p>기본 필드 값을 사용하여 필드 스키마를 생성합니다:</p>
-<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> FieldSchema
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> DataType, FieldSchema
 
 fields = [
   FieldSchema(name=<span class="hljs-string">&quot;id&quot;</span>, dtype=DataType.INT64, is_primary=<span class="hljs-literal">True</span>),
@@ -125,7 +125,7 @@ fields = [
 <li>DOUBLE: numpy.double</li>
 <li>VARCHAR: VARCHAR</li>
 <li>JSON: <a href="/docs/ko/use-json-fields.md">JSON</a></li>
-<li>Array: <a href="/docs/ko/array_data_type.md">Array</a></li>
+<li>Array: <a href="/docs/ko/array_data_type.md">배열</a></li>
 </ul>
 <p>복합 데이터 유형으로 JSON을 사용할 수 있습니다. JSON 필드는 키-값 쌍으로 구성됩니다. 각 키는 문자열이고 값은 숫자, 문자열, 부울 값, 배열 또는 목록일 수 있습니다. 자세한 내용은 <a href="/docs/ko/use-json-fields.md">JSON: 새로운 데이터 유형을</a> 참조하세요.</p></li>
 <li><p>벡터 필드 지원</p>
@@ -133,8 +133,8 @@ fields = [
 <li>바이너리_벡터: 이진 데이터를 0과 1의 시퀀스로 저장하며, 이미지 처리 및 정보 검색에서 특징을 간결하게 표현하는 데 사용됩니다.</li>
 <li>FLOAT_VECTOR: 과학 컴퓨팅 및 머신 러닝에서 실수를 표현하는 데 일반적으로 사용되는 32비트 부동소수점 숫자를 저장합니다.</li>
 <li>FLOAT16_VECTOR: 메모리 및 대역폭 효율성을 위해 딥러닝 및 GPU 계산에 사용되는 16비트 반정밀도 부동소수점 숫자를 저장합니다.</li>
-<li>BFLOAT16_VECTOR: 정확도는 떨어지지만 Float32와 동일한 지수 범위를 가진 16비트 부동 소수점 숫자를 저장하며, 정확도에 큰 영향을 주지 않고 메모리 및 계산 요구 사항을 줄이기 위해 딥 러닝에서 널리 사용됩니다.</li>
-<li>SPARSE_FLOAT_VECTOR: 희소 벡터를 표현하는 데 사용되는 0이 아닌 요소 목록과 해당 인덱스를 저장합니다. 자세한 내용은 <a href="/docs/ko/sparse_vector.md">스파스 벡터를</a> 참조하세요.</li>
+<li>BFLOAT16_VECTOR: 정확도는 떨어지지만 지수 범위는 Float32와 동일한 16비트 부동 소수점 숫자를 저장하며, 정확도에 큰 영향을 주지 않고 메모리 및 계산 요구 사항을 줄이기 위해 딥러닝에서 널리 사용됩니다.</li>
+<li>SPARSE_FLOAT_VECTOR: 희소 벡터를 표현하는 데 사용되는 0이 아닌 요소 목록과 그에 해당하는 인덱스를 저장합니다. 자세한 내용은 <a href="/docs/ko/sparse_vector.md">스파스 벡터를</a> 참조하세요.</li>
 </ul>
 <p>Milvus는 컬렉션에서 여러 개의 벡터 필드를 지원합니다. 자세한 내용은 <a href="/docs/ko/multi-vector-search.md">하이브리드 검색을</a> 참조하세요.</p></li>
 </ul>
@@ -187,7 +187,7 @@ fields = [
 </table>
 <h3 id="Create-a-collection-schema" class="common-anchor-header">컬렉션 스키마 만들기</h3><div class="alert note">
   컬렉션 스키마를 정의하기 전에 필드 스키마를 정의합니다.</div>
-<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> FieldSchema, CollectionSchema
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> DataType, FieldSchema, CollectionSchema
 id_field = FieldSchema(name=<span class="hljs-string">&quot;id&quot;</span>, dtype=DataType.INT64, is_primary=<span class="hljs-literal">True</span>, description=<span class="hljs-string">&quot;primary id&quot;</span>)
 age_field = FieldSchema(name=<span class="hljs-string">&quot;age&quot;</span>, dtype=DataType.INT64, description=<span class="hljs-string">&quot;age&quot;</span>)
 embedding_field = FieldSchema(name=<span class="hljs-string">&quot;embedding&quot;</span>, dtype=DataType.FLOAT_VECTOR, dim=<span class="hljs-number">128</span>, description=<span class="hljs-string">&quot;vector&quot;</span>)
@@ -199,7 +199,7 @@ position_field = FieldSchema(name=<span class="hljs-string">&quot;position&quot;
 schema = CollectionSchema(fields=[id_field, age_field, embedding_field], auto_id=<span class="hljs-literal">False</span>, enable_dynamic_field=<span class="hljs-literal">True</span>, description=<span class="hljs-string">&quot;desc of a collection&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
 <p>스키마를 지정한 컬렉션을 만듭니다:</p>
-<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> <span class="hljs-title class_">Collection</span>,connections
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> <span class="hljs-title class_">Collection</span>, connections
 conn = connections.<span class="hljs-title function_">connect</span>(host=<span class="hljs-string">&quot;127.0.0.1&quot;</span>, port=<span class="hljs-number">19530</span>)
 collection_name1 = <span class="hljs-string">&quot;tutorial_1&quot;</span>
 collection1 = <span class="hljs-title class_">Collection</span>(name=collection_name1, schema=schema, using=<span class="hljs-string">&#x27;default&#x27;</span>, shards_num=<span class="hljs-number">2</span>)
@@ -214,7 +214,8 @@ collection1 = <span class="hljs-title class_">Collection</span>(name=collection_
 </div>
 <p><br/>
 또한 <code translate="no">Collection.construct_from_dataframe</code> 을 사용하여 컬렉션을 만들 수 있으며, 이 경우 DataFrame에서 컬렉션 스키마가 자동으로 생성되어 컬렉션이 생성됩니다.</p>
-<pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> pandas <span class="hljs-keyword">as</span> pd
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> Collection
+<span class="hljs-keyword">import</span> pandas <span class="hljs-keyword">as</span> pd
 df = pd.DataFrame({
     <span class="hljs-string">&quot;id&quot;</span>: [i <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(nb)],
     <span class="hljs-string">&quot;age&quot;</span>: [random.randint(<span class="hljs-number">20</span>, <span class="hljs-number">40</span>) <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(nb)],

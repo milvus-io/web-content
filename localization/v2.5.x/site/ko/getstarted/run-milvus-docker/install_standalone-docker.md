@@ -3,9 +3,9 @@ id: install_standalone-docker.md
 label: Docker
 related_key: Docker
 summary: Docker를 사용하여 Milvus를 독립형으로 설치하는 방법을 알아보세요.
-title: Docker에서 Milvus 실행
+title: Docker에서 Milvus 실행하기(Linux)
 ---
-<h1 id="Run-Milvus-in-Docker" class="common-anchor-header">Docker에서 Milvus 실행<button data-href="#Run-Milvus-in-Docker" class="anchor-icon" translate="no">
+<h1 id="Run-Milvus-in-Docker-Linux" class="common-anchor-header">Docker에서 Milvus 실행하기(Linux)<button data-href="#Run-Milvus-in-Docker-Linux" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

@@ -35,8 +35,8 @@ title: 获取和标量查询
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>标量查询使用布尔表达式根据定义的条件过滤集合中的实体。查询结果是一组符合定义条件的实体。与向量搜索（在集合中识别与给定向量最接近的向量）不同，查询是根据特定条件过滤实体。</p>
-<p>在 Milvus 中，<strong>过滤器总是一个由字段名和运算符组成的字符串</strong>。在本指南中，你将看到各种过滤器示例。要了解更多运算符详情，<a href="https://milvus.io/docs/get-and-scalar-query.md#Reference-on-scalar-filters">请参阅参考资料</a>部分。</p>
+    </button></h2><p>标量查询使用布尔表达式根据定义的条件过滤 Collections 中的实体。查询结果是一组符合定义条件的实体。与向量搜索（在 Collections 中识别与给定向量最接近的向量）不同，查询是根据特定条件过滤实体。</p>
+<p>在 Milvus 中，<strong>过滤器总是一个由字段名和操作符组成的字符串</strong>。在本指南中，你将看到各种过滤器示例。要了解更多操作符详情，请参阅<a href="https://milvus.io/docs/get-and-scalar-query.md#Reference-on-scalar-filters">参考资料</a>部分。</p>
 <h2 id="Preparations" class="common-anchor-header">准备工作<button data-href="#Preparations" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -52,15 +52,15 @@ title: 获取和标量查询
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>以下步骤将重新利用代码连接到 Milvus，快速建立一个集合，并在集合中插入 1000 多个随机生成的实体。</p>
-<h3 id="Step-1-Create-a-collection" class="common-anchor-header">步骤 1：创建集合</h3><div class="language-python">
-<p>使用 <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Client/MilvusClient.md"><code translate="no">MilvusClient</code></a>连接到 Milvus 服务器，并使用 <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_collection.md"><code translate="no">create_collection()</code></a>来创建集合。</p>
+    </button></h2><p>下面的步骤将重新利用代码连接到 Milvus，快速建立一个 Collections，并将 1000 多个随机生成的实体插入到 Collections 中。</p>
+<h3 id="Step-1-Create-a-collection" class="common-anchor-header">步骤 1：创建 Collections</h3><div class="language-python">
+<p>使用 <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Client/MilvusClient.md"><code translate="no">MilvusClient</code></a>连接到 Milvus 服务器，并使用 <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_collection.md"><code translate="no">create_collection()</code></a>创建 Collections。</p>
 </div>
 <div class="language-java">
-<p>使用 <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Client/MilvusClientV2.md"><code translate="no">MilvusClientV2</code></a>连接到 Milvus 服务器并 <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Collections/createCollection.md"><code translate="no">createCollection()</code></a>创建收藏集。</p>
+<p>使用 <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Client/MilvusClientV2.md"><code translate="no">MilvusClientV2</code></a>连接到 Milvus 服务器，并使用 <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Collections/createCollection.md"><code translate="no">createCollection()</code></a>创建 Collections。</p>
 </div>
 <div class="language-javascript">
-<p>使用 <a href="https://milvus.io/api-reference/node/v2.4.x/Client/MilvusClient.md"><code translate="no">MilvusClient</code></a>连接到 Milvus 服务器并 <a href="https://milvus.io/api-reference/node/v2.4.x/Collections/createCollection.md"><code translate="no">createCollection()</code></a>创建集合。</p>
+<p>使用 <a href="https://milvus.io/api-reference/node/v2.4.x/Client/MilvusClient.md"><code translate="no">MilvusClient</code></a>连接到 Milvus 服务器，并使用 <a href="https://milvus.io/api-reference/node/v2.4.x/Collections/createCollection.md"><code translate="no">createCollection()</code></a>创建 Collections。</p>
 </div>
 <div class="multipleCode">
    <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a></div>
@@ -77,7 +77,22 @@ client.create_collection(
     dimension=<span class="hljs-number">5</span>,
 )
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java"><span class="hljs-type">String</span> <span class="hljs-variable">CLUSTER_ENDPOINT</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;http://localhost:19530&quot;</span>;
+<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> com.google.gson.Gson;
+<span class="hljs-keyword">import</span> com.google.gson.JsonObject;
+<span class="hljs-keyword">import</span> io.milvus.v2.client.MilvusClientV2;
+<span class="hljs-keyword">import</span> io.milvus.v2.client.ConnectConfig;
+<span class="hljs-keyword">import</span> io.milvus.v2.common.ConsistencyLevel;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.CreateCollectionReq;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.DropCollectionReq;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.partition.request.CreatePartitionReq;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.GetReq;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.InsertReq;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.response.GetResp;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.response.InsertResp;
+
+<span class="hljs-keyword">import</span> java.util.*;
+
+<span class="hljs-type">String</span> <span class="hljs-variable">CLUSTER_ENDPOINT</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;http://localhost:19530&quot;</span>;
 
 <span class="hljs-comment">// 1. Connect to Milvus server</span>
 <span class="hljs-type">ConnectConfig</span> <span class="hljs-variable">connectConfig</span> <span class="hljs-operator">=</span> ConnectConfig.builder()
@@ -109,13 +124,13 @@ client = <span class="hljs-keyword">new</span> <span class="hljs-title class_">M
 }); 
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Step-2-Insert-randomly-generated-entities" class="common-anchor-header">第二步：插入随机生成的实体</h3><div class="language-python">
-<p>使用 <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Vector/insert.md"><code translate="no">insert()</code></a>将实体插入集合。</p>
+<p>使用 <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Vector/insert.md"><code translate="no">insert()</code></a>将实体插入 Collections。</p>
 </div>
 <div class="language-java">
-<p>使用 <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Vector/insert.md"><code translate="no">insert()</code></a>将实体插入集合。</p>
+<p>使用 <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Vector/insert.md"><code translate="no">insert()</code></a>将实体插入 Collections。</p>
 </div>
 <div class="language-javascript">
-<p>使用 <a href="https://milvus.io/api-reference/node/v2.4.x/Vector/insert.md"><code translate="no">insert()</code></a>将实体插入集合。</p>
+<p>使用 <a href="https://milvus.io/api-reference/node/v2.4.x/Vector/insert.md"><code translate="no">insert()</code></a>将实体插入 Collections。</p>
 </div>
 <div class="multipleCode">
    <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a></div>
@@ -179,33 +194,33 @@ res = client.insert(
 <span class="hljs-comment"># }</span>
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-java"><span class="hljs-comment">// 3. Insert randomly generated vectors into the collection</span>
-<span class="hljs-title class_">List</span>&lt;<span class="hljs-title class_">String</span>&gt; colors = <span class="hljs-title class_">Arrays</span>.<span class="hljs-title function_">asList</span>(<span class="hljs-string">&quot;green&quot;</span>, <span class="hljs-string">&quot;blue&quot;</span>, <span class="hljs-string">&quot;yellow&quot;</span>, <span class="hljs-string">&quot;red&quot;</span>, <span class="hljs-string">&quot;black&quot;</span>, <span class="hljs-string">&quot;white&quot;</span>, <span class="hljs-string">&quot;purple&quot;</span>, <span class="hljs-string">&quot;pink&quot;</span>, <span class="hljs-string">&quot;orange&quot;</span>, <span class="hljs-string">&quot;brown&quot;</span>, <span class="hljs-string">&quot;grey&quot;</span>);
-<span class="hljs-title class_">List</span>&lt;<span class="hljs-title class_">JSON</span><span class="hljs-built_in">Object</span>&gt; data = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();
-
-<span class="hljs-keyword">for</span> (int i=<span class="hljs-number">0</span>; i&lt;<span class="hljs-number">1000</span>; i++) {
-    <span class="hljs-title class_">Random</span> rand = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Random</span>();
-    <span class="hljs-title class_">String</span> current_color = colors.<span class="hljs-title function_">get</span>(rand.<span class="hljs-title function_">nextInt</span>(colors.<span class="hljs-title function_">size</span>()-<span class="hljs-number">1</span>));
-    int current_tag = rand.<span class="hljs-title function_">nextInt</span>(<span class="hljs-number">8999</span>) + <span class="hljs-number">1000</span>;
-    <span class="hljs-title class_">JSON</span><span class="hljs-built_in">Object</span> row = <span class="hljs-keyword">new</span> <span class="hljs-title class_">JSON</span><span class="hljs-built_in">Object</span>();
-    row.<span class="hljs-title function_">put</span>(<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-title class_">Long</span>.<span class="hljs-title function_">valueOf</span>(i));
-    row.<span class="hljs-title function_">put</span>(<span class="hljs-string">&quot;vector&quot;</span>, <span class="hljs-title class_">Arrays</span>.<span class="hljs-title function_">asList</span>(rand.<span class="hljs-title function_">nextFloat</span>(), rand.<span class="hljs-title function_">nextFloat</span>(), rand.<span class="hljs-title function_">nextFloat</span>(), rand.<span class="hljs-title function_">nextFloat</span>(), rand.<span class="hljs-title function_">nextFloat</span>()));
-    row.<span class="hljs-title function_">put</span>(<span class="hljs-string">&quot;color&quot;</span>, current_color);
-    row.<span class="hljs-title function_">put</span>(<span class="hljs-string">&quot;tag&quot;</span>, current_tag);
-    row.<span class="hljs-title function_">put</span>(<span class="hljs-string">&quot;color_tag&quot;</span>, current_color + <span class="hljs-string">&#x27;_&#x27;</span> + <span class="hljs-title class_">String</span>.<span class="hljs-title function_">valueOf</span>(rand.<span class="hljs-title function_">nextInt</span>(<span class="hljs-number">8999</span>) + <span class="hljs-number">1000</span>));
-    data.<span class="hljs-title function_">add</span>(row);
+List&lt;String&gt; colors = Arrays.asList(<span class="hljs-string">&quot;green&quot;</span>, <span class="hljs-string">&quot;blue&quot;</span>, <span class="hljs-string">&quot;yellow&quot;</span>, <span class="hljs-string">&quot;red&quot;</span>, <span class="hljs-string">&quot;black&quot;</span>, <span class="hljs-string">&quot;white&quot;</span>, <span class="hljs-string">&quot;purple&quot;</span>, <span class="hljs-string">&quot;pink&quot;</span>, <span class="hljs-string">&quot;orange&quot;</span>, <span class="hljs-string">&quot;brown&quot;</span>, <span class="hljs-string">&quot;grey&quot;</span>);
+List&lt;JsonObject&gt; data = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();
+<span class="hljs-type">Gson</span> <span class="hljs-variable">gson</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Gson</span>();
+<span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i=<span class="hljs-number">0</span>; i&lt;<span class="hljs-number">1000</span>; i++) {
+    <span class="hljs-type">Random</span> <span class="hljs-variable">rand</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Random</span>();
+    <span class="hljs-type">String</span> <span class="hljs-variable">current_color</span> <span class="hljs-operator">=</span> colors.get(rand.nextInt(colors.size()-<span class="hljs-number">1</span>));
+    <span class="hljs-type">int</span> <span class="hljs-variable">current_tag</span> <span class="hljs-operator">=</span> rand.nextInt(<span class="hljs-number">8999</span>) + <span class="hljs-number">1000</span>;
+    <span class="hljs-type">JsonObject</span> <span class="hljs-variable">row</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">JsonObject</span>();
+    row.addProperty(<span class="hljs-string">&quot;id&quot;</span>, (<span class="hljs-type">long</span>) i);
+    row.add(<span class="hljs-string">&quot;vector&quot;</span>, gson.toJsonTree(Arrays.asList(rand.nextFloat(), rand.nextFloat(), rand.nextFloat(), rand.nextFloat(), rand.nextFloat())));
+    row.addProperty(<span class="hljs-string">&quot;color&quot;</span>, current_color);
+    row.addProperty(<span class="hljs-string">&quot;tag&quot;</span>, current_tag);
+    row.addProperty(<span class="hljs-string">&quot;color_tag&quot;</span>, current_color + <span class="hljs-string">&#x27;_&#x27;</span> + String.valueOf(rand.nextInt(<span class="hljs-number">8999</span>) + <span class="hljs-number">1000</span>));
+    data.add(row);
 }
 
-<span class="hljs-title class_">InsertReq</span> insertReq = <span class="hljs-title class_">InsertReq</span>.<span class="hljs-title function_">builder</span>()
-    .<span class="hljs-title function_">collectionName</span>(<span class="hljs-string">&quot;quick_setup&quot;</span>)
-    .<span class="hljs-title function_">data</span>(data)
-    .<span class="hljs-title function_">build</span>();
+<span class="hljs-type">InsertReq</span> <span class="hljs-variable">insertReq</span> <span class="hljs-operator">=</span> InsertReq.builder()
+        .collectionName(<span class="hljs-string">&quot;quick_setup&quot;</span>)
+        .data(data)
+        .build();
 
-<span class="hljs-title class_">InsertResp</span> insertResp = client.<span class="hljs-title function_">insert</span>(insertReq);
+<span class="hljs-type">InsertResp</span> <span class="hljs-variable">insertResp</span> <span class="hljs-operator">=</span> client.insert(insertReq);
 
-<span class="hljs-title class_">System</span>.<span class="hljs-property">out</span>.<span class="hljs-title function_">println</span>(<span class="hljs-title class_">JSON</span><span class="hljs-built_in">Object</span>.<span class="hljs-title function_">toJSON</span>(insertResp));
+System.out.println(insertResp.getInsertCnt());
 
 <span class="hljs-comment">// Output:</span>
-<span class="hljs-comment">// {&quot;insertCnt&quot;: 1000}</span>
+<span class="hljs-comment">// 1000</span>
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-comment">// 3. Insert randomly generated vectors</span>
 <span class="hljs-keyword">const</span> colors = [<span class="hljs-string">&quot;green&quot;</span>, <span class="hljs-string">&quot;blue&quot;</span>, <span class="hljs-string">&quot;yellow&quot;</span>, <span class="hljs-string">&quot;red&quot;</span>, <span class="hljs-string">&quot;black&quot;</span>, <span class="hljs-string">&quot;white&quot;</span>, <span class="hljs-string">&quot;purple&quot;</span>, <span class="hljs-string">&quot;pink&quot;</span>, <span class="hljs-string">&quot;orange&quot;</span>, <span class="hljs-string">&quot;brown&quot;</span>, <span class="hljs-string">&quot;grey&quot;</span>]
@@ -255,13 +270,13 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 <span class="hljs-comment">// </span>
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Step-3-Create-partitions-and-insert-more-entities" class="common-anchor-header">第 3 步：创建分区并插入更多实体</h3><div class="language-python">
-<p>使用 <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Partitions/create_partition.md"><code translate="no">create_partition()</code></a>创建分区，并使用 <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Vector/insert.md"><code translate="no">insert()</code></a>向集合中插入更多实体。</p>
+<p>使用 <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Partitions/create_partition.md"><code translate="no">create_partition()</code></a>创建分区，并使用 <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Vector/insert.md"><code translate="no">insert()</code></a>将更多实体插入 Collections。</p>
 </div>
 <div class="language-java">
-<p>使用 <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Partitions/createPartition.md"><code translate="no">createPartition()</code></a>创建分区并 <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Vector/insert.md"><code translate="no">insert()</code></a>向集合中插入更多实体。</p>
+<p>使用 <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Partitions/createPartition.md"><code translate="no">createPartition()</code></a>创建分区并 <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Vector/insert.md"><code translate="no">insert()</code></a>将更多实体插入 Collections。</p>
 </div>
 <div class="language-javascript">
-<p>使用 <a href="https://milvus.io/api-reference/node/v2.4.x/Partitions/createPartition.md"><code translate="no">createPartition()</code></a>创建分区，并 <a href="https://milvus.io/api-reference/node/v2.4.x/Vector/insert.md"><code translate="no">insert()</code></a>向集合中插入更多实体。</p>
+<p>使用 <a href="https://milvus.io/api-reference/node/v2.4.x/Partitions/createPartition.md"><code translate="no">createPartition()</code></a>创建分区，并 <a href="https://milvus.io/api-reference/node/v2.4.x/Vector/insert.md"><code translate="no">insert()</code></a>向 Collection 插入更多实体。</p>
 </div>
 <div class="multipleCode">
    <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a></div>
@@ -355,73 +370,73 @@ res = client.insert(
 <span class="hljs-comment"># }</span>
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-java"><span class="hljs-comment">// 4. Create partitions and insert some more data</span>
-<span class="hljs-title class_">CreatePartitionReq</span> createPartitionReq = <span class="hljs-title class_">CreatePartitionReq</span>.<span class="hljs-title function_">builder</span>()
-    .<span class="hljs-title function_">collectionName</span>(<span class="hljs-string">&quot;quick_setup&quot;</span>)
-    .<span class="hljs-title function_">partitionName</span>(<span class="hljs-string">&quot;partitionA&quot;</span>)
-    .<span class="hljs-title function_">build</span>();
+CreatePartitionReq createPartitionReq = CreatePartitionReq.builder()
+        .collectionName(<span class="hljs-string">&quot;quick_setup&quot;</span>)
+        .partitionName(<span class="hljs-string">&quot;partitionA&quot;</span>)
+        .build();
 
-client.<span class="hljs-title function_">createPartition</span>(createPartitionReq);
+client.createPartition(createPartitionReq);
 
-createPartitionReq = <span class="hljs-title class_">CreatePartitionReq</span>.<span class="hljs-title function_">builder</span>()
-    .<span class="hljs-title function_">collectionName</span>(<span class="hljs-string">&quot;quick_setup&quot;</span>)
-    .<span class="hljs-title function_">partitionName</span>(<span class="hljs-string">&quot;partitionB&quot;</span>)
-    .<span class="hljs-title function_">build</span>();
+createPartitionReq = CreatePartitionReq.builder()
+        .collectionName(<span class="hljs-string">&quot;quick_setup&quot;</span>)
+        .partitionName(<span class="hljs-string">&quot;partitionB&quot;</span>)
+        .build();
 
-client.<span class="hljs-title function_">createPartition</span>(createPartitionReq);
+client.createPartition(createPartitionReq);
 
-data.<span class="hljs-title function_">clear</span>();
+data.clear();
 
-<span class="hljs-keyword">for</span> (int i=<span class="hljs-number">1000</span>; i&lt;<span class="hljs-number">1500</span>; i++) {
-    <span class="hljs-title class_">Random</span> rand = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Random</span>();
-    <span class="hljs-title class_">String</span> current_color = colors.<span class="hljs-title function_">get</span>(rand.<span class="hljs-title function_">nextInt</span>(colors.<span class="hljs-title function_">size</span>()-<span class="hljs-number">1</span>));
-    int current_tag = rand.<span class="hljs-title function_">nextInt</span>(<span class="hljs-number">8999</span>) + <span class="hljs-number">1000</span>;
-    <span class="hljs-title class_">JSON</span><span class="hljs-built_in">Object</span> row = <span class="hljs-keyword">new</span> <span class="hljs-title class_">JSON</span><span class="hljs-built_in">Object</span>();
-    row.<span class="hljs-title function_">put</span>(<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-title class_">Long</span>.<span class="hljs-title function_">valueOf</span>(i));
-    row.<span class="hljs-title function_">put</span>(<span class="hljs-string">&quot;vector&quot;</span>, <span class="hljs-title class_">Arrays</span>.<span class="hljs-title function_">asList</span>(rand.<span class="hljs-title function_">nextFloat</span>(), rand.<span class="hljs-title function_">nextFloat</span>(), rand.<span class="hljs-title function_">nextFloat</span>(), rand.<span class="hljs-title function_">nextFloat</span>(), rand.<span class="hljs-title function_">nextFloat</span>()));
-    row.<span class="hljs-title function_">put</span>(<span class="hljs-string">&quot;color&quot;</span>, current_color);
-    row.<span class="hljs-title function_">put</span>(<span class="hljs-string">&quot;tag&quot;</span>, current_tag);
-    data.<span class="hljs-title function_">add</span>(row);
+<span class="hljs-keyword">for</span> (<span class="hljs-built_in">int</span> i=<span class="hljs-number">1000</span>; i&lt;<span class="hljs-number">1500</span>; i++) {
+    Random rand = <span class="hljs-keyword">new</span> Random();
+    String current_color = colors.<span class="hljs-keyword">get</span>(rand.nextInt(colors.size()<span class="hljs-number">-1</span>));
+    <span class="hljs-built_in">int</span> current_tag = rand.nextInt(<span class="hljs-number">8999</span>) + <span class="hljs-number">1000</span>;
+    JsonObject row = <span class="hljs-keyword">new</span> JsonObject();
+    row.addProperty(<span class="hljs-string">&quot;id&quot;</span>, (<span class="hljs-built_in">long</span>) i);
+    row.<span class="hljs-keyword">add</span>(<span class="hljs-string">&quot;vector&quot;</span>, gson.toJsonTree(Arrays.asList(rand.nextFloat(), rand.nextFloat(), rand.nextFloat(), rand.nextFloat(), rand.nextFloat())));
+    row.addProperty(<span class="hljs-string">&quot;color&quot;</span>, current_color);
+    row.addProperty(<span class="hljs-string">&quot;tag&quot;</span>, current_tag);
+    data.<span class="hljs-keyword">add</span>(row);
 }
 
-insertReq = <span class="hljs-title class_">InsertReq</span>.<span class="hljs-title function_">builder</span>()
-    .<span class="hljs-title function_">collectionName</span>(<span class="hljs-string">&quot;quick_setup&quot;</span>)
-    .<span class="hljs-title function_">data</span>(data)
-    .<span class="hljs-title function_">partitionName</span>(<span class="hljs-string">&quot;partitionA&quot;</span>)
-    .<span class="hljs-title function_">build</span>();
+insertReq = InsertReq.builder()
+        .collectionName(<span class="hljs-string">&quot;quick_setup&quot;</span>)
+        .data(data)
+        .partitionName(<span class="hljs-string">&quot;partitionA&quot;</span>)
+        .build();
 
-insertResp = client.<span class="hljs-title function_">insert</span>(insertReq);
+insertResp = client.insert(insertReq);
 
-<span class="hljs-title class_">System</span>.<span class="hljs-property">out</span>.<span class="hljs-title function_">println</span>(<span class="hljs-title class_">JSON</span><span class="hljs-built_in">Object</span>.<span class="hljs-title function_">toJSON</span>(insertResp));
+System.<span class="hljs-keyword">out</span>.println(insertResp.getInsertCnt());
 
 <span class="hljs-comment">// Output:</span>
-<span class="hljs-comment">// {&quot;insertCnt&quot;: 500}</span>
+<span class="hljs-comment">// 500</span>
 
-data.<span class="hljs-title function_">clear</span>();
+data.clear();
 
-<span class="hljs-keyword">for</span> (int i=<span class="hljs-number">1500</span>; i&lt;<span class="hljs-number">2000</span>; i++) {
-    <span class="hljs-title class_">Random</span> rand = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Random</span>();
-    <span class="hljs-title class_">String</span> current_color = colors.<span class="hljs-title function_">get</span>(rand.<span class="hljs-title function_">nextInt</span>(colors.<span class="hljs-title function_">size</span>()-<span class="hljs-number">1</span>));
-    int current_tag = rand.<span class="hljs-title function_">nextInt</span>(<span class="hljs-number">8999</span>) + <span class="hljs-number">1000</span>;
-    <span class="hljs-title class_">JSON</span><span class="hljs-built_in">Object</span> row = <span class="hljs-keyword">new</span> <span class="hljs-title class_">JSON</span><span class="hljs-built_in">Object</span>();
-    row.<span class="hljs-title function_">put</span>(<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-title class_">Long</span>.<span class="hljs-title function_">valueOf</span>(i));
-    row.<span class="hljs-title function_">put</span>(<span class="hljs-string">&quot;vector&quot;</span>, <span class="hljs-title class_">Arrays</span>.<span class="hljs-title function_">asList</span>(rand.<span class="hljs-title function_">nextFloat</span>(), rand.<span class="hljs-title function_">nextFloat</span>(), rand.<span class="hljs-title function_">nextFloat</span>(), rand.<span class="hljs-title function_">nextFloat</span>(), rand.<span class="hljs-title function_">nextFloat</span>()));
-    row.<span class="hljs-title function_">put</span>(<span class="hljs-string">&quot;color&quot;</span>, current_color);
-    row.<span class="hljs-title function_">put</span>(<span class="hljs-string">&quot;tag&quot;</span>, current_tag);
-    data.<span class="hljs-title function_">add</span>(row);
+<span class="hljs-keyword">for</span> (<span class="hljs-built_in">int</span> i=<span class="hljs-number">1500</span>; i&lt;<span class="hljs-number">2000</span>; i++) {
+    Random rand = <span class="hljs-keyword">new</span> Random();
+    String current_color = colors.<span class="hljs-keyword">get</span>(rand.nextInt(colors.size()<span class="hljs-number">-1</span>));
+    <span class="hljs-built_in">int</span> current_tag = rand.nextInt(<span class="hljs-number">8999</span>) + <span class="hljs-number">1000</span>;
+    JsonObject row = <span class="hljs-keyword">new</span> JsonObject();
+    row.addProperty(<span class="hljs-string">&quot;id&quot;</span>, (<span class="hljs-built_in">long</span>) i);
+    row.<span class="hljs-keyword">add</span>(<span class="hljs-string">&quot;vector&quot;</span>, gson.toJsonTree(Arrays.asList(rand.nextFloat(), rand.nextFloat(), rand.nextFloat(), rand.nextFloat(), rand.nextFloat())));
+    row.addProperty(<span class="hljs-string">&quot;color&quot;</span>, current_color);
+    row.addProperty(<span class="hljs-string">&quot;tag&quot;</span>, current_tag);
+    data.<span class="hljs-keyword">add</span>(row);
 }
 
-insertReq = <span class="hljs-title class_">InsertReq</span>.<span class="hljs-title function_">builder</span>()
-    .<span class="hljs-title function_">collectionName</span>(<span class="hljs-string">&quot;quick_setup&quot;</span>)
-    .<span class="hljs-title function_">data</span>(data)
-    .<span class="hljs-title function_">partitionName</span>(<span class="hljs-string">&quot;partitionB&quot;</span>)
-    .<span class="hljs-title function_">build</span>();
+insertReq = InsertReq.builder()
+        .collectionName(<span class="hljs-string">&quot;quick_setup&quot;</span>)
+        .data(data)
+        .partitionName(<span class="hljs-string">&quot;partitionB&quot;</span>)
+        .build();
 
-insertResp = client.<span class="hljs-title function_">insert</span>(insertReq);
+insertResp = client.insert(insertReq);
 
-<span class="hljs-title class_">System</span>.<span class="hljs-property">out</span>.<span class="hljs-title function_">println</span>(<span class="hljs-title class_">JSON</span><span class="hljs-built_in">Object</span>.<span class="hljs-title function_">toJSON</span>(insertResp));
+System.<span class="hljs-keyword">out</span>.println(insertResp.getInsertCnt());
 
 <span class="hljs-comment">// Output:</span>
-<span class="hljs-comment">// {&quot;insertCnt&quot;: 500}</span>
+<span class="hljs-comment">// 500</span>
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-comment">// 4. Create partitions and insert more entities</span>
 <span class="hljs-keyword">await</span> client.<span class="hljs-title function_">createPartition</span>({
@@ -509,7 +524,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 <p>如果您知道感兴趣的实体的 ID，可以使用 <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Vector/get.md"><code translate="no">get()</code></a>方法。</p>
 </div>
 <div class="language-java">
-<p>如果知道感兴趣的实体的 ID，可以使用 <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Vector/get.md"><code translate="no">get()</code></a>方法。</p>
+<p>如果您知道您感兴趣的实体的 ID，可以使用 <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Vector/get.md"><code translate="no">get()</code></a>方法。</p>
 </div>
 <div class="language-javascript">
 <p>如果您知道您感兴趣的实体的 ID，可以使用 <a href="https://milvus.io/api-reference/node/v2.4.x/Vector/get.md"><code translate="no">get()</code></a>方法。</p>
@@ -566,57 +581,22 @@ res = client.get(
 <span class="hljs-comment"># ]</span>
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-java"><span class="hljs-comment">// 5. Get entities by ID</span>
-<span class="hljs-title class_">GetReq</span> getReq = <span class="hljs-title class_">GetReq</span>.<span class="hljs-title function_">builder</span>()
-    .<span class="hljs-title function_">collectionName</span>(<span class="hljs-string">&quot;quick_setup&quot;</span>)
-    .<span class="hljs-title function_">ids</span>(<span class="hljs-title class_">Arrays</span>.<span class="hljs-title function_">asList</span>(0L, 1L, 2L))
-    .<span class="hljs-title function_">build</span>();
+<span class="hljs-type">GetReq</span> <span class="hljs-variable">getReq</span> <span class="hljs-operator">=</span> GetReq.builder()
+        .collectionName(<span class="hljs-string">&quot;quick_setup&quot;</span>)
+        .ids(Arrays.asList(<span class="hljs-number">0L</span>, <span class="hljs-number">1L</span>, <span class="hljs-number">2L</span>))
+        .build();
 
-<span class="hljs-title class_">GetResp</span> entities = client.<span class="hljs-title function_">get</span>(getReq);
+<span class="hljs-type">GetResp</span> <span class="hljs-variable">entities</span> <span class="hljs-operator">=</span> client.get(getReq);
 
-<span class="hljs-title class_">System</span>.<span class="hljs-property">out</span>.<span class="hljs-title function_">println</span>(<span class="hljs-title class_">JSON</span><span class="hljs-built_in">Object</span>.<span class="hljs-title function_">toJSON</span>(entities));
+System.out.println(entities.getGetResults());
 
 <span class="hljs-comment">// Output:</span>
-<span class="hljs-comment">// {&quot;getResults&quot;: [</span>
-<span class="hljs-comment">//     {&quot;entity&quot;: {</span>
-<span class="hljs-comment">//         &quot;color&quot;: &quot;white&quot;,</span>
-<span class="hljs-comment">//         &quot;color_tag&quot;: &quot;white_4597&quot;,</span>
-<span class="hljs-comment">//         &quot;vector&quot;: [</span>
-<span class="hljs-comment">//             0.09665024,</span>
-<span class="hljs-comment">//             0.1163497,</span>
-<span class="hljs-comment">//             0.0701347,</span>
-<span class="hljs-comment">//             0.32577968,</span>
-<span class="hljs-comment">//             0.40943468</span>
-<span class="hljs-comment">//         ],</span>
-<span class="hljs-comment">//         &quot;tag&quot;: 8946,</span>
-<span class="hljs-comment">//         &quot;id&quot;: 0</span>
-<span class="hljs-comment">//     }},</span>
-<span class="hljs-comment">//     {&quot;entity&quot;: {</span>
-<span class="hljs-comment">//         &quot;color&quot;: &quot;green&quot;,</span>
-<span class="hljs-comment">//         &quot;color_tag&quot;: &quot;green_3039&quot;,</span>
-<span class="hljs-comment">//         &quot;vector&quot;: [</span>
-<span class="hljs-comment">//             0.90689456,</span>
-<span class="hljs-comment">//             0.4377399,</span>
-<span class="hljs-comment">//             0.75387514,</span>
-<span class="hljs-comment">//             0.36454988,</span>
-<span class="hljs-comment">//             0.8702918</span>
-<span class="hljs-comment">//         ],</span>
-<span class="hljs-comment">//         &quot;tag&quot;: 2341,</span>
-<span class="hljs-comment">//         &quot;id&quot;: 1</span>
-<span class="hljs-comment">//     }},</span>
-<span class="hljs-comment">//     {&quot;entity&quot;: {</span>
-<span class="hljs-comment">//         &quot;color&quot;: &quot;white&quot;,</span>
-<span class="hljs-comment">//         &quot;color_tag&quot;: &quot;white_8708&quot;,</span>
-<span class="hljs-comment">//         &quot;vector&quot;: [</span>
-<span class="hljs-comment">//             0.9757728,</span>
-<span class="hljs-comment">//             0.13974023,</span>
-<span class="hljs-comment">//             0.8023141,</span>
-<span class="hljs-comment">//             0.61947155,</span>
-<span class="hljs-comment">//             0.8290197</span>
-<span class="hljs-comment">//         ],</span>
-<span class="hljs-comment">//         &quot;tag&quot;: 9913,</span>
-<span class="hljs-comment">//         &quot;id&quot;: 2</span>
-<span class="hljs-comment">//     }}</span>
-<span class="hljs-comment">// ]}</span>
+<span class="hljs-comment">// [</span>
+<span class="hljs-comment">//  QueryResp.QueryResult(entity={color=blue, color_tag=blue_4025, vector=[0.64311606, 0.73486423, 0.7352375, 0.7020566, 0.9885356], id=0, tag=4018}),</span>
+<span class="hljs-comment">//  QueryResp.QueryResult(entity={color=red, color_tag=red_4788, vector=[0.27244627, 0.7068031, 0.25976115, 0.69258106, 0.8767045], id=1, tag=6611}),</span>
+<span class="hljs-comment">//  QueryResp.QueryResult(entity={color=yellow, color_tag=yellow_8382, vector=[0.19625628, 0.40176708, 0.13231951, 0.50702184, 0.88406855], id=2, tag=5349})</span>
+<span class="hljs-comment">//]</span>
+
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-comment">// 5. Get entities by id</span>
 res = <span class="hljs-keyword">await</span> client.<span class="hljs-title function_">get</span>({
@@ -723,55 +703,22 @@ res = client.get(
 <span class="hljs-comment"># ]</span>
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-java"><span class="hljs-comment">// 5. Get entities by ID in a partition</span>
-getReq = <span class="hljs-title class_">GetReq</span>.<span class="hljs-title function_">builder</span>()
-    .<span class="hljs-title function_">collectionName</span>(<span class="hljs-string">&quot;quick_setup&quot;</span>)
-    .<span class="hljs-title function_">ids</span>(<span class="hljs-title class_">Arrays</span>.<span class="hljs-title function_">asList</span>(1001L, 1002L, 1003L))
-    .<span class="hljs-title function_">partitionName</span>(<span class="hljs-string">&quot;partitionA&quot;</span>)
-    .<span class="hljs-title function_">build</span>();
+getReq = GetReq.builder()
+        .collectionName(<span class="hljs-string">&quot;quick_setup&quot;</span>)
+        .ids(Arrays.asList(<span class="hljs-number">1001L</span>, <span class="hljs-number">1002L</span>, <span class="hljs-number">1003L</span>))
+        .partitionName(<span class="hljs-string">&quot;partitionA&quot;</span>)
+        .build();
 
-entities = client.<span class="hljs-title function_">get</span>(getReq);
+entities = client.<span class="hljs-keyword">get</span>(getReq);
 
-<span class="hljs-title class_">System</span>.<span class="hljs-property">out</span>.<span class="hljs-title function_">println</span>(<span class="hljs-title class_">JSON</span><span class="hljs-built_in">Object</span>.<span class="hljs-title function_">toJSON</span>(entities));
+System.<span class="hljs-keyword">out</span>.println(entities.getGetResults());
 
 <span class="hljs-comment">// Output:</span>
-<span class="hljs-comment">// {&quot;getResults&quot;: [</span>
-<span class="hljs-comment">//     {&quot;entity&quot;: {</span>
-<span class="hljs-comment">//         &quot;color&quot;: &quot;yellow&quot;,</span>
-<span class="hljs-comment">//         &quot;vector&quot;: [</span>
-<span class="hljs-comment">//             0.4300114,</span>
-<span class="hljs-comment">//             0.599917,</span>
-<span class="hljs-comment">//             0.799163,</span>
-<span class="hljs-comment">//             0.75395125,</span>
-<span class="hljs-comment">//             0.89947814</span>
-<span class="hljs-comment">//         ],</span>
-<span class="hljs-comment">//         &quot;id&quot;: 1001,</span>
-<span class="hljs-comment">//         &quot;tag&quot;: 5803</span>
-<span class="hljs-comment">//     }},</span>
-<span class="hljs-comment">//     {&quot;entity&quot;: {</span>
-<span class="hljs-comment">//         &quot;color&quot;: &quot;blue&quot;,</span>
-<span class="hljs-comment">//         &quot;vector&quot;: [</span>
-<span class="hljs-comment">//             0.009218454,</span>
-<span class="hljs-comment">//             0.64637834,</span>
-<span class="hljs-comment">//             0.19815737,</span>
-<span class="hljs-comment">//             0.30519038,</span>
-<span class="hljs-comment">//             0.8218663</span>
-<span class="hljs-comment">//         ],</span>
-<span class="hljs-comment">//         &quot;id&quot;: 1002,</span>
-<span class="hljs-comment">//         &quot;tag&quot;: 7212</span>
-<span class="hljs-comment">//     }},</span>
-<span class="hljs-comment">//     {&quot;entity&quot;: {</span>
-<span class="hljs-comment">//         &quot;color&quot;: &quot;black&quot;,</span>
-<span class="hljs-comment">//         &quot;vector&quot;: [</span>
-<span class="hljs-comment">//             0.76521933,</span>
-<span class="hljs-comment">//             0.7818409,</span>
-<span class="hljs-comment">//             0.16976339,</span>
-<span class="hljs-comment">//             0.8719652,</span>
-<span class="hljs-comment">//             0.1434964</span>
-<span class="hljs-comment">//         ],</span>
-<span class="hljs-comment">//         &quot;id&quot;: 1003,</span>
-<span class="hljs-comment">//         &quot;tag&quot;: 1710</span>
-<span class="hljs-comment">//     }}</span>
-<span class="hljs-comment">// ]}</span>
+<span class="hljs-comment">// [</span>
+<span class="hljs-comment">//  QueryResp.QueryResult(entity={color=pink, vector=[0.28847772, 0.5116072, 0.5695933, 0.49643654, 0.3461541], id=1001, tag=9632}), </span>
+<span class="hljs-comment">//  QueryResp.QueryResult(entity={color=blue, vector=[0.22428268, 0.8648047, 0.78426147, 0.84020555, 0.60779166], id=1002, tag=4523}), </span>
+<span class="hljs-comment">//  QueryResp.QueryResult(entity={color=white, vector=[0.4081068, 0.9027214, 0.88685805, 0.38036376, 0.27950126], id=1003, tag=9321})</span>
+<span class="hljs-comment">// ]</span>
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-comment">// 5.1 Get entities by id in a partition</span>
 res = <span class="hljs-keyword">await</span> client.<span class="hljs-title function_">get</span>({
@@ -822,7 +769,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 <span class="hljs-comment">// ]</span>
 <span class="hljs-comment">// </span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Use-Basic-Operators" class="common-anchor-header">使用基本运算符<button data-href="#Use-Basic-Operators" class="anchor-icon" translate="no">
+<h2 id="Use-Basic-Operators" class="common-anchor-header">使用基本操作符<button data-href="#Use-Basic-Operators" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -837,7 +784,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>在本节中，您将找到如何在标量过滤中使用基本运算符的示例。您也可以将这些筛选器应用于<a href="https://milvus.io/docs/single-vector-search.md#Filtered-search">向量搜索</a>和<a href="https://milvus.io/docs/insert-update-delete.md#Delete-entities">数据删除</a>。</p>
+    </button></h2><p>在本节中，您将找到如何在标量过滤中使用基本操作符的示例。您也可以将这些筛选器应用于<a href="https://milvus.io/docs/single-vector-search.md#Filtered-search">向量搜索</a>和<a href="https://milvus.io/docs/insert-update-delete.md#Delete-entities">数据删除</a>。</p>
 <div class="language-python">
 <p>有关详细信息，请参阅 <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Vector/query.md"><code translate="no">query()</code></a>中的</p>
 </div>
@@ -1284,9 +1231,9 @@ queryResp = client.<span class="hljs-title function_">query</span>(queryReq);
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>本节将举例说明如何在标量过滤中使用高级运算符。您也可以将这些筛选器应用于<a href="https://milvus.io/docs/single-vector-search.md#Filtered-search">向量搜索</a>和<a href="https://milvus.io/docs/insert-update-delete.md#Delete-entities">数据删除</a>。</p>
+    </button></h2><p>本节将举例说明如何在标量过滤中使用高级操作符。您也可以将这些筛选器应用于<a href="https://milvus.io/docs/single-vector-search.md#Filtered-search">向量搜索</a>和<a href="https://milvus.io/docs/insert-update-delete.md#Delete-entities">数据删除</a>。</p>
 <h3 id="Count-entities" class="common-anchor-header">计数实体</h3><ul>
-<li><p>计算集合中实体的总数。</p>
+<li><p>计算 Collections 中实体的总数。</p>
 <p><div class="multipleCode">
 <a href="#python">Python </a><a href="#java">Java</a><a href="#javascript">Node.js</a></div></p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># 7. Use advanced operators</span>
@@ -1449,7 +1396,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><h3 id="Basic-Operators" class="common-anchor-header">基本运算符</h3><p><strong>布尔表达式</strong>始终是<strong>由字段名和操作符组成的字符串</strong>。本节将详细介绍基本运算符。</p>
+    </button></h2><h3 id="Basic-Operators" class="common-anchor-header">基本操作符</h3><p><strong>布尔表达式</strong>始终是<strong>由字段名和操作符组成的字符串</strong>。本节将详细介绍基本操作符。</p>
 <table>
 <thead>
 <tr><th><strong>操作符</strong></th><th><strong>说明</strong></th></tr>
@@ -1468,9 +1415,9 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 <tr><td><strong>in</strong></td><td>测试表达式是否匹配值列表中的任何值。</td></tr>
 </tbody>
 </table>
-<h3 id="Advanced-operators" class="common-anchor-header">高级运算符</h3><ul>
+<h3 id="Advanced-operators" class="common-anchor-header">高级操作符</h3><ul>
 <li><p><code translate="no">count(*)</code></p>
-<p>计算集合中实体的确切数量。将其用作输出字段，可获得集合或分区中实体的确切数目。</p>
+<p>计算 Collections 中实体的确切数量。将其用作输出字段，可获得 Collections 或分区中实体的确切数目。</p>
 <p><div class="admonition note"></p>
 <p><p><b>注释</b></p></p>
 <p><p>这适用于已加载的集合。应将其作为唯一的输出字段。</p></p>

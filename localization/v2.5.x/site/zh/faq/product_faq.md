@@ -62,7 +62,7 @@ title: 产品常见问题
 <h4 id="Is-Milvus-scalable" class="common-anchor-header">Milvus 可以扩展吗？</h4><p>是的。您可以在 Kubernetes 上使用 Helm Chart 部署多节点的 Milvus 集群。更多说明请参阅《<a href="/docs/zh/scaleout.md">扩展指南》</a>。</p>
 <h4 id="What-are-growing-segment-and-sealed-segment" class="common-anchor-header">什么是增长段和封存段？</h4><p>当有搜索请求时，Milvus 会同时搜索增量数据和历史数据。增量数据是最近更新的数据，它们存储在增长段中，在达到在对象存储中持久化的阈值之前在内存中缓冲，并为它们建立更高效的索引。历史数据是一段时间前的更新，它们位于已在对象存储中持久化的封存段中。增量数据和历史数据共同构成了整个搜索数据集。这种设计使任何数据输入 Milvus 后都能立即搜索。对于 Milvus Distributed 而言，有更复杂的因素来决定刚录入的记录何时可以显示在搜索结果中。在<a href="https://milvus.io/docs/consistency.md">一致性级别</a>了解更多细微差别。</p>
 <h4 id="Is-Milvus-available-for-concurrent-search" class="common-anchor-header">Milvus 可用于并发搜索吗？</h4><p>是的。对于同一 Collections 的查询，Milvus 会同时搜索增量数据和历史数据。不过，对不同 Collection 的查询是串联进行的。历史数据可能是一个极其庞大的数据集，因此对历史数据的搜索相对更耗时，而且基本上是串联进行的。</p>
-<h4 id="Why-does-the-data-in-MinIO-remain-after-the-corresponding-collection-is-dropped" class="common-anchor-header">为什么在相应的 Collections 丢弃后，MinIO 中的数据仍会保留？</h4><p>MinIO 中的数据被设计为保留一段时间，以方便数据回滚。</p>
+<h4 id="Why-does-the-data-in-MinIO-remain-after-the-corresponding-collection-is-dropped" class="common-anchor-header">为什么相应的 Collections 丢弃后，MinIO 中的数据仍会保留？</h4><p>MinIO 中的数据被设计为保留一段时间，以方便数据回滚。</p>
 <h4 id="Does-Milvus-support-message-engines-other-than-Pulsar" class="common-anchor-header">Milvus 是否支持 Pulsar 以外的消息引擎？</h4><p>支持。Milvus 2.1.0 支持 Kafka。</p>
 <h4 id="Whats-the-difference-between-a-search-and-a-query" class="common-anchor-header">搜索和查询有什么区别？</h4><p>在 Milvus 中，向量相似性搜索根据相似性计算和向量索引加速检索向量。与向量相似性搜索不同，向量查询是通过基于布尔表达式的标量过滤来检索向量的。布尔表达式会对标量字段或主键字段进行过滤，并检索所有符合过滤条件的结果。在查询中，既不涉及相似度指标，也不涉及向量索引。</p>
 <h4 id="Why-does-a-float-vector-value-have-a-precision-of-7-decimal-digits-in-Milvus" class="common-anchor-header">为什么在 Milvus 中，浮点向量值的精度是小数点后 7 位？</h4><p>Milvus 支持将向量存储为 Float32 数组。Float32 值的精度为小数点后 7 位。即使是 Float64 值，例如 1.3476964684980388，Milvus 也将其存储为 1.347696。因此，当你从 Milvus 获取这样一个向量时，Float64 值的精度就会丢失。</p>
@@ -73,8 +73,28 @@ title: 产品常见问题
 <li>Float16 和 BFloat16 向量：可降低精度和内存使用量。Float16 适用于带宽和存储有限的应用，而 BFloat16 则兼顾了范围和效率，常用于深度学习，在不显著影响精度的情况下降低计算要求。</li>
 </ul>
 <h4 id="Does-Milvus-support-specifying-default-values-for-scalar-or-vector-fields" class="common-anchor-header">Milvus 是否支持为标量或向量场指定默认值？</h4><p>目前，Milvus 2.4.x 不支持为标量或向量场指定默认值。该功能计划在未来版本中推出。</p>
-<h4 id="Still-have-questions" class="common-anchor-header">仍有问题？</h4><p>您可以</p>
+<h4 id="Is-storage-space-released-right-after-data-deletion-in-Milvus" class="common-anchor-header">在 Milvus 中删除数据后，存储空间会立即释放吗？</h4><p>不，在 Milvus 中删除数据后，存储空间不会立即释放。虽然删除数据会将实体标记为 "逻辑删除"，但实际空间可能不会立即释放。原因如下：</p>
 <ul>
-<li>查看 GitHub 上的<a href="https://github.com/milvus-io/milvus/issues">Milvus</a>。欢迎提出问题、分享想法并帮助其他用户。</li>
+<li><strong>压缩</strong>：Milvus 会在后台自动压缩数据。这个过程会将较小的数据段合并为较大的数据段，并删除逻辑上已删除的数据（标记为删除的实体）或已超过有效时间（TTL）的数据。不过，压缩会创建新的数据段，同时将旧数据段标记为 "已丢弃"。</li>
+<li><strong>垃圾收集</strong>：一个名为 Garbage Collection (GC) 的独立进程会定期删除这些 "已丢弃 "的数据段，从而释放它们占用的存储空间。这样可以确保存储空间的有效利用，但在删除和空间回收之间会有轻微延迟。</li>
+</ul>
+<h4 id="Can-I-see-inserted-deleted-or-upserted-data-immediately-after-the-operation-without-waiting-for-a-flush" class="common-anchor-header">操作符插入、删除或上插数据后，我能否立即看到这些数据，而无需等待刷新？</h4><p>是的，在 Milvus，由于其存储-计算分解架构，数据可见性与刷新操作没有直接联系。您可以使用一致性级别管理数据可读性。</p>
+<p>选择一致性级别时，要考虑一致性和性能之间的权衡。对于需要即时可见性的操作符，请使用 "强 "一致性级别。对于更快的写入，优先考虑较弱的一致性（数据可能不会立即可见）。有关详细信息，请参阅<a href="/docs/zh/consistency.md">一致性</a>。</p>
+<h4 id="After-enabling-the-partition-key-feature-what-is-the-default-value-of-numpartitions-in-Milvus-and-why" class="common-anchor-header">启用分区密钥功能后，Milvus 中<code translate="no">num_partitions</code> 的默认值是多少，为什么？</h4><p>启用分区密钥功能后，Milvus 中<code translate="no">num_partitions</code> 的默认值设置为<code translate="no">16</code> 。选择这一默认值是出于稳定性和性能方面的考虑。您可以根据需要在<code translate="no">create_collection</code> 功能中指定<code translate="no">num_partitions</code> 值。</p>
+<h4 id="Is-there-a-maximum-length-limit-for-scalar-filtering-expressions" class="common-anchor-header">标量过滤表达式有最大长度限制吗？</h4><p>有，标量过滤表达式的最大长度受 RPC 传输限制的约束，该限制在<code translate="no">milvus.yaml</code> 配置文件中定义。具体来说，该限制由代理部分下的<code translate="no">serverMaxRecvSize</code> 参数设置：</p>
+<pre><code translate="no" class="language-yaml">proxy:
+  grpc:
+    serverMaxRecvSize: <span class="hljs-number">67108864</span> <span class="hljs-comment"># The maximum size of each RPC request that the proxy can receive, unit: byte</span>
+<button class="copy-code-btn"></button></code></pre>
+<p>默认情况下，每个 RPC 请求的最大大小为 64MB。因此，过滤表达式的长度必须小于此限制，才能确保成功处理。</p>
+<h4 id="When-performing-a-bulk-vector-search-how-many-vectors-can-be-specified-at-once-Is-there-a-limit" class="common-anchor-header">执行批量向量搜索时，一次可以指定多少个向量？有限制吗？</h4><p>是的，在批量向量搜索中可以指定的向量数量受 RPC 传输大小的限制，RPC 传输大小在<code translate="no">milvus.yaml</code> 配置文件中定义。该限制由代理部分下的<code translate="no">serverMaxRecvSize</code> 参数决定：</p>
+<pre><code translate="no" class="language-yaml">proxy:
+  grpc:
+    serverMaxRecvSize: <span class="hljs-number">67108864</span> <span class="hljs-comment"># The maximum size of each RPC request that the proxy can receive, unit: byte</span>
+<button class="copy-code-btn"></button></code></pre>
+<p>默认情况下，每个 RPC 请求的最大大小为 64MB。因此，输入向量（包括其维度数据和元数据）的总大小必须小于此限制，以确保成功执行。</p>
+<h4 id="Still-have-questions" class="common-anchor-header">还有问题？</h4><p>您可以</p>
+<ul>
+<li>在 GitHub 上查看<a href="https://github.com/milvus-io/milvus/issues">Milvus</a>。欢迎提出问题、分享想法并帮助其他用户。</li>
 <li>加入我们的<a href="https://slack.milvus.io/">Slack 社区</a>，寻求支持并参与我们的开源社区。</li>
 </ul>

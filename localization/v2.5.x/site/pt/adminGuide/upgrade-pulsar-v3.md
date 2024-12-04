@@ -21,10 +21,10 @@ title: Atualizar a Pulsar em Milvus de V2 para V3
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Este artigo descreve o procedimento para atualizar seu componente Pulsar de V2 para V3 se você já tem uma implantação Milvus funcionando com Pulsar V2. Desde Milvus v2.5, <strong>milvus-helm</strong> e <strong>milvus-operator</strong> usarão pulsar V3 por padrão para corrigir alguns bugs e vulnerabilidades de segurança.</p>
+    </button></h1><p>Este artigo descreve o procedimento para atualizar seu componente Pulsar de V2 para V3 se você já tem uma implantação Milvus funcionando com Pulsar V2. Desde Milvus v2.5, <strong>milvus-helm</strong> e <strong>milvus-operator</strong> usarão Pulsar V3 por padrão para corrigir alguns bugs e vulnerabilidades de segurança. Enquanto Milvus 2.5 é compatível com Pulsar 2.x, a atualização para Pulsar V3 é opcional. Para maior estabilidade e desempenho, recomendamos a atualização para a Pulsar V3.</p>
 <div class="alert note">
 <ol>
-<li><p>O processo de atualização requer uma breve interrupção do serviço (normalmente demora alguns minutos a mais de dez minutos, dependendo da quantidade de dados).</p></li>
+<li><p>O processo de atualização requer uma breve interrupção de serviço (geralmente leva de alguns minutos a mais de dez minutos, dependendo da quantidade de dados).</p></li>
 <li><p>Antes da operação, é necessário impedir que todos os clientes em execução escrevam dados no Milvus. Caso contrário, os dados escritos podem perder-se.</p></li>
 <li><p>Este artigo pressupõe que o Milvus está instalado no espaço de nomes <code translate="no">default</code> e tem o nome <code translate="no">my-release</code>. Por favor, altere os parâmetros para o seu próprio espaço de nomes e nome de lançamento enquanto executa os comandos copiados desta página.</p></li>
 <li><p>Certifique-se de que o seu ambiente de trabalho tem permissões no namespace acima mencionado no cluster Kubernetes e que os seguintes comandos estão instalados.</p>
@@ -138,7 +138,7 @@ Forwarding <span class="hljs-keyword">from</span> <span class="hljs-number">127.
 
 <button class="copy-code-btn"></button></code></pre></li>
 </ol>
-<h3 id="Stop-Milvus-and-delete-Pulsar-V2" class="common-anchor-header">Parar o Milvus e excluir o Pulsar V2</h3><p>Nesta etapa, você precisa parar o pod do Milvus e excluir a implantação da Pulsar V2. Há duas seções separadas disponíveis:</p>
+<h3 id="Stop-Milvus-and-delete-Pulsar-V2" class="common-anchor-header">Parar o Milvus e excluir o Pulsar V2</h3><p>Nesta etapa, você precisa parar o pod do Milvus e excluir a implantação do Pulsar V2. Há duas seções separadas disponíveis:</p>
 <ul>
 <li><p>Para utilizadores do Milvus Helm</p>
 <p>Se instalou o Milvus utilizando o gráfico do Milvus Helm, vá para <a href="#Delete-Pulsar-V2-using-Helm">Para o utilizador do Helm</a>.</p></li>
@@ -274,7 +274,7 @@ kubectl -n <span class="hljs-keyword">default</span> get milvus my-release​
 kubectl -n <span class="hljs-keyword">default</span> <span class="hljs-keyword">delete</span> milvus my-release --wait=<span class="hljs-literal">true</span>​
 
 <button class="copy-code-btn"></button></code></pre>
-<p>Saída: Note que pode levar alguns minutos para que o milvus pare graciosamente e para que o operador exclua os volumes do pulsar.</p>
+<p>Saída: Observe que pode levar alguns minutos para o milvus parar graciosamente e para o operador excluir os volumes do pulsar.</p>
 <pre><code translate="no" class="language-bash">milvus.milvus.io <span class="hljs-string">&quot;my-release&quot;</span> deleted​
 NAME         MODE      STATUS     UPDATED   AGE​
 my-release   cluster   Deleting   <span class="hljs-literal">True</span>      41m​

@@ -69,7 +69,7 @@ title: Mit Iteratoren
 <p>Verwenden Sie <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Client/MilvusClient.md"><code translate="no">MilvusClient</code></a> um sich mit dem Milvus-Server zu verbinden und <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Collections/create_collection.md"><code translate="no">create_collection()</code></a> um eine Sammlung zu erstellen.</p>
 </div>
 <div class="language-java">
-<p>Verwenden Sie <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Client/MilvusClientV2.md"><code translate="no">MilvusClientV2</code></a> um sich mit dem Milvus-Server zu verbinden und <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Collections/createCollection.md"><code translate="no">createCollection()</code></a> um eine Sammlung zu erstellen.</p>
+<p>Verwenden Sie <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Client/MilvusClientV2.md"><code translate="no">MilvusClientV2</code></a> um eine Verbindung zum Milvus-Server herzustellen und <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Collections/createCollection.md"><code translate="no">createCollection()</code></a> um eine Sammlung zu erstellen.</p>
 </div>
 <div class="multipleCode">
    <a href="#python">Python </a> <a href="#java">Java</a></div>
@@ -86,9 +86,23 @@ client.create_collection(
     dimension=<span class="hljs-number">5</span>,
 )
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.client.MilvusServiceClient;
-<span class="hljs-keyword">import</span> io.milvus.param.ConnectParam;
-<span class="hljs-keyword">import</span> io.milvus.param.highlevel.collection.CreateSimpleCollectionParam;
+<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> com.google.gson.Gson;
+<span class="hljs-keyword">import</span> com.google.gson.JsonObject;
+<span class="hljs-keyword">import</span> io.milvus.orm.iterator.QueryIterator;
+<span class="hljs-keyword">import</span> io.milvus.orm.iterator.SearchIterator;
+<span class="hljs-keyword">import</span> io.milvus.response.QueryResultsWrapper;
+<span class="hljs-keyword">import</span> io.milvus.v2.client.MilvusClientV2;
+<span class="hljs-keyword">import</span> io.milvus.v2.client.ConnectConfig;
+<span class="hljs-keyword">import</span> io.milvus.v2.common.ConsistencyLevel;
+<span class="hljs-keyword">import</span> io.milvus.v2.common.IndexParam;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.CreateCollectionReq;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.DropCollectionReq;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.*;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.data.FloatVec;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.response.InsertResp;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.response.QueryResp;
+
+<span class="hljs-keyword">import</span> java.util.*;
 
 <span class="hljs-type">String</span> <span class="hljs-variable">CLUSTER_ENDPOINT</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;http://localhost:19530&quot;</span>;
 
@@ -100,12 +114,11 @@ client.create_collection(
 <span class="hljs-type">MilvusServiceClient</span> <span class="hljs-variable">client</span>  <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">MilvusServiceClient</span>(connectParam);
 
 <span class="hljs-comment">// 2. Create a collection</span>
-<span class="hljs-type">CreateSimpleCollectionParam</span> <span class="hljs-variable">createCollectionParam</span> <span class="hljs-operator">=</span> CreateSimpleCollectionParam.newBuilder()
-        .withCollectionName(<span class="hljs-string">&quot;quick_setup&quot;</span>)
-        .withDimension(<span class="hljs-number">5</span>)
+<span class="hljs-type">CreateCollectionReq</span> <span class="hljs-variable">quickSetupReq</span> <span class="hljs-operator">=</span> CreateCollectionReq.builder()
+        .collectionName(<span class="hljs-string">&quot;quick_setup&quot;</span>)
+        .dimension(<span class="hljs-number">5</span>)
         .build();
-
-client.createCollection(createCollectionParam);
+client.createCollection(quickSetupReq);
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Step-2-Insert-randomly-generated-entities" class="common-anchor-header">Schritt 2: Zufällig generierte Entitäten einfügen</h3><div class="language-python">
 <p>Verwenden Sie <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Vector/insert.md"><code translate="no">insert()</code></a> um Entitäten in die Sammlung einzufügen.</p>
@@ -174,46 +187,28 @@ res = client.insert(
 <span class="hljs-comment">#     ]</span>
 <span class="hljs-comment"># }</span>
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> java.util.ArrayList;
-<span class="hljs-keyword">import</span> java.util.Arrays;
-<span class="hljs-keyword">import</span> java.util.List;
-<span class="hljs-keyword">import</span> java.util.Random;
-
-<span class="hljs-keyword">import</span> com.alibaba.fastjson.JSONObject;
-
-<span class="hljs-keyword">import</span> io.milvus.param.R;
-<span class="hljs-keyword">import</span> io.milvus.param.dml.InsertParam;
-<span class="hljs-keyword">import</span> io.milvus.response.MutationResultWrapper;
-<span class="hljs-keyword">import</span> io.milvus.grpc.MutationResult;
-
-
-<span class="hljs-comment">// 3. Insert randomly generated vectors into the collection</span>
+<pre><code translate="no" class="language-java"><span class="hljs-comment">// 3. Insert randomly generated vectors into the collection</span>
 List&lt;String&gt; colors = Arrays.asList(<span class="hljs-string">&quot;green&quot;</span>, <span class="hljs-string">&quot;blue&quot;</span>, <span class="hljs-string">&quot;yellow&quot;</span>, <span class="hljs-string">&quot;red&quot;</span>, <span class="hljs-string">&quot;black&quot;</span>, <span class="hljs-string">&quot;white&quot;</span>, <span class="hljs-string">&quot;purple&quot;</span>, <span class="hljs-string">&quot;pink&quot;</span>, <span class="hljs-string">&quot;orange&quot;</span>, <span class="hljs-string">&quot;brown&quot;</span>, <span class="hljs-string">&quot;grey&quot;</span>);
-List&lt;JSONObject&gt; data = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();
-
+List&lt;JsonObject&gt; data = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();
+<span class="hljs-type">Gson</span> <span class="hljs-variable">gson</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Gson</span>();
 <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i=<span class="hljs-number">0</span>; i&lt;<span class="hljs-number">10000</span>; i++) {
     <span class="hljs-type">Random</span> <span class="hljs-variable">rand</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Random</span>();
     <span class="hljs-type">String</span> <span class="hljs-variable">current_color</span> <span class="hljs-operator">=</span> colors.get(rand.nextInt(colors.size()-<span class="hljs-number">1</span>));
-    <span class="hljs-type">JSONObject</span> <span class="hljs-variable">row</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">JSONObject</span>();
-    row.put(<span class="hljs-string">&quot;id&quot;</span>, Long.valueOf(i));
-    row.put(<span class="hljs-string">&quot;vector&quot;</span>, Arrays.asList(rand.nextFloat(), rand.nextFloat(), rand.nextFloat(), rand.nextFloat(), rand.nextFloat()));
-    row.put(<span class="hljs-string">&quot;color_tag&quot;</span>, current_color + <span class="hljs-string">&quot;_&quot;</span> + String.valueOf(rand.nextInt(<span class="hljs-number">8999</span>) + <span class="hljs-number">1000</span>));
+    <span class="hljs-type">JsonObject</span> <span class="hljs-variable">row</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">JsonObject</span>();
+    row.addProperty(<span class="hljs-string">&quot;id&quot;</span>, (<span class="hljs-type">long</span>) i);
+    row.add(<span class="hljs-string">&quot;vector&quot;</span>, gson.toJsonTree(Arrays.asList(rand.nextFloat(), rand.nextFloat(), rand.nextFloat(), rand.nextFloat(), rand.nextFloat())));
+    row.addProperty(<span class="hljs-string">&quot;color_tag&quot;</span>, current_color + <span class="hljs-string">&quot;_&quot;</span> + (rand.nextInt(<span class="hljs-number">8999</span>) + <span class="hljs-number">1000</span>));
     data.add(row);
 }
 
-<span class="hljs-type">InsertParam</span> <span class="hljs-variable">insertParam</span> <span class="hljs-operator">=</span> InsertParam.newBuilder()
-    .withCollectionName(<span class="hljs-string">&quot;quick_setup&quot;</span>)
-    .withRows(data)
-    .build();
+<span class="hljs-type">InsertResp</span> <span class="hljs-variable">insertR</span> <span class="hljs-operator">=</span> client.insert(InsertReq.builder()
+        .collectionName(<span class="hljs-string">&quot;quick_setup&quot;</span>)
+        .data(data)
+        .build());
+System.out.println(insertR.getInsertCnt());
 
-R&lt;MutationResult&gt; insertRes = client.insert(insertParam);
-
-<span class="hljs-keyword">if</span> (insertRes.getStatus() != R.Status.Success.getCode()) {
-    System.err.println(insertRes.getMessage());
-}
-
-<span class="hljs-type">MutationResultWrapper</span> <span class="hljs-variable">wrapper</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">MutationResultWrapper</span>(insertRes.getData());
-System.out.println(wrapper.getInsertCount());
+<span class="hljs-comment">// Output</span>
+<span class="hljs-comment">// 10000</span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Search-with-iterator" class="common-anchor-header">Suche mit Iterator<button data-href="#Search-with-iterator" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -311,43 +306,34 @@ results = []
 <span class="hljs-comment">#     }</span>
 <span class="hljs-comment"># ]</span>
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.param.dml.QueryIteratorParam;
-<span class="hljs-keyword">import</span> io.milvus.param.dml.SearchIteratorParam;
-<span class="hljs-keyword">import</span> io.milvus.response.QueryResultsWrapper;
-<span class="hljs-keyword">import</span> io.milvus.orm.iterator.SearchIterator;
+<pre><code translate="no" class="language-java"><span class="hljs-comment">// 4. Search with iterators</span>
+<span class="hljs-type">SearchIteratorReq</span> <span class="hljs-variable">iteratorReq</span> <span class="hljs-operator">=</span> SearchIteratorReq.builder()
+        .collectionName(<span class="hljs-string">&quot;quick_setup&quot;</span>)
+        .vectorFieldName(<span class="hljs-string">&quot;vector&quot;</span>)
+        .batchSize(<span class="hljs-number">10L</span>)
+        .vectors(Collections.singletonList(<span class="hljs-keyword">new</span> <span class="hljs-title class_">FloatVec</span>(Arrays.asList(<span class="hljs-number">0.3580376395471989f</span>, -<span class="hljs-number">0.6023495712049978f</span>, <span class="hljs-number">0.18414012509913835f</span>, -<span class="hljs-number">0.26286205330961354f</span>, <span class="hljs-number">0.9029438446296592f</span>))))
+        .params(<span class="hljs-string">&quot;{\&quot;level\&quot;: 1}&quot;</span>)
+        .metricType(IndexParam.MetricType.COSINE)
+        .outputFields(Collections.singletonList(<span class="hljs-string">&quot;color_tag&quot;</span>))
+        .topK(<span class="hljs-number">300</span>)
+        .build();
 
-<span class="hljs-comment">// 4. Search with iterators</span>
-<span class="hljs-type">SearchIteratorParam</span> <span class="hljs-variable">iteratorParam</span> <span class="hljs-operator">=</span> SearchIteratorParam.newBuilder()
-    .withCollectionName(<span class="hljs-string">&quot;quick_setup&quot;</span>)
-    .withVectorFieldName(<span class="hljs-string">&quot;vector&quot;</span>)
-    <span class="hljs-comment">// Use withFloatVectors() in clusters compatible with Milvus 2.4.x</span>
-    .withVectors(Arrays.asList(<span class="hljs-number">0.3580376395471989f</span>, -<span class="hljs-number">0.6023495712049978f</span>, <span class="hljs-number">0.18414012509913835f</span>, -<span class="hljs-number">0.26286205330961354f</span>, <span class="hljs-number">0.9029438446296592f</span>))
-    .withBatchSize(<span class="hljs-number">10L</span>)
-    .withParams(<span class="hljs-string">&quot;{\&quot;metric_type\&quot;: \&quot;COSINE\&quot;, \&quot;params\&quot;: {\&quot;level\&quot;: 1}}&quot;</span>)
-    .build();
-        
+<span class="hljs-type">SearchIterator</span> <span class="hljs-variable">searchIterator</span> <span class="hljs-operator">=</span> client.searchIterator(iteratorReq);
 
-R&lt;SearchIterator&gt; searchIteratorRes = client.searchIterator(iteratorParam);
-
-<span class="hljs-keyword">if</span> (searchIteratorRes.getStatus() != R.Status.Success.getCode()) {
-    System.err.println(searchIteratorRes.getMessage());
-}
-
-<span class="hljs-type">SearchIterator</span> <span class="hljs-variable">searchIterator</span> <span class="hljs-operator">=</span> searchIteratorRes.getData();
 List&lt;QueryResultsWrapper.RowRecord&gt; results = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();
-
 <span class="hljs-keyword">while</span> (<span class="hljs-literal">true</span>) {
     List&lt;QueryResultsWrapper.RowRecord&gt; batchResults = searchIterator.next();
     <span class="hljs-keyword">if</span> (batchResults.isEmpty()) {
         searchIterator.close();
         <span class="hljs-keyword">break</span>;
     }
-    <span class="hljs-keyword">for</span> (QueryResultsWrapper.RowRecord rowRecord : batchResults) {
-        results.add(rowRecord);
-    }
-}
 
+    results.addAll(batchResults);
+}
 System.out.println(results.size());
+
+<span class="hljs-comment">// Output</span>
+<span class="hljs-comment">// 300</span>
 <button class="copy-code-btn"></button></code></pre>
 <table class="language-python">
   <thead>
@@ -367,11 +353,11 @@ System.out.println(results.size());
     </tr>
     <tr>
       <td><code translate="no">batch_size</code></td>
-      <td>Die Anzahl der Entitäten, die jedes Mal zurückgegeben werden sollen, wenn Sie <code translate="no">next()</code> für den aktuellen Iterator aufrufen.<br/>Der Standardwert ist <strong>1000</strong>. Setzen Sie ihn auf einen geeigneten Wert, um die Anzahl der pro Iteration zurückzugebenden Objekte zu steuern.</td>
+      <td>Die Anzahl der Entitäten, die jedes Mal zurückgegeben werden sollen, wenn Sie <code translate="no">next()</code> für den aktuellen Iterator aufrufen.<br/>Der Wert ist standardmäßig <strong>1000</strong>. Setzen Sie ihn auf einen geeigneten Wert, um die Anzahl der pro Iteration zurückzugebenden Objekte zu steuern.</td>
     </tr>
     <tr>
       <td><code translate="no">param</code></td>
-      <td>Die spezifischen Parametereinstellungen für diesen Vorgang.<br/><ul><li><code translate="no">metric_type</code>: Der Metrik-Typ, der auf diese Operation angewendet wird. Dies sollte derselbe sein, der verwendet wird, wenn Sie das oben angegebene Vektorfeld indizieren. Mögliche Werte sind <strong>L2</strong>, <strong>IP</strong>, <strong>COSINE</strong>, <strong>JACCARD</strong>, <strong>HAMMING</strong>.</li><li><code translate="no">params</code>: Zusätzliche Parameter. Einzelheiten finden Sie unter <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/ORM/Collection/search_iterator.md">search_iterator()</a>.</li></ul></td>
+      <td>Die spezifischen Parametereinstellungen für diese Operation.<br/><ul><li><code translate="no">metric_type</code>: Der Metrik-Typ, der auf diese Operation angewendet wird. Dies sollte derselbe sein, der verwendet wird, wenn Sie das oben angegebene Vektorfeld indizieren. Mögliche Werte sind <strong>L2</strong>, <strong>IP</strong>, <strong>COSINE</strong>, <strong>JACCARD</strong>, <strong>HAMMING</strong>.</li><li><code translate="no">params</code>: Zusätzliche Parameter. Einzelheiten finden Sie unter <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/ORM/Collection/search_iterator.md">search_iterator()</a>.</li></ul></td>
     </tr>
     <tr>
       <td><code translate="no">output_fields</code></td>
@@ -401,7 +387,7 @@ System.out.println(results.size());
     </tr>
     <tr>
       <td><code translate="no">withVectors</code></td>
-      <td>Legen Sie die Zielvektoren fest. Bis zu 16384 Vektoren sind erlaubt.</td>
+      <td>Legen Sie die Zielvektoren fest. Bis zu 16384 Vektoren sind zulässig.</td>
     </tr>
     <tr>
       <td><code translate="no">withBatchSize</code></td>
@@ -475,66 +461,34 @@ results = []
 <span class="hljs-comment">#     }</span>
 <span class="hljs-comment"># ]</span>
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.<span class="hljs-property">milvus</span>.<span class="hljs-property">param</span>.<span class="hljs-property">dml</span>.<span class="hljs-property">QueryIteratorParam</span>;
-<span class="hljs-keyword">import</span> io.<span class="hljs-property">milvus</span>.<span class="hljs-property">orm</span>.<span class="hljs-property">iterator</span>.<span class="hljs-property">QueryIterator</span>;
+<pre><code translate="no" class="language-java"><span class="hljs-comment">// 5. Query with iterators</span>
+<span class="hljs-type">QueryIterator</span> <span class="hljs-variable">queryIterator</span> <span class="hljs-operator">=</span> client.queryIterator(QueryIteratorReq.builder()
+        .collectionName(<span class="hljs-string">&quot;quick_setup&quot;</span>)
+        .expr(<span class="hljs-string">&quot;color_tag like \&quot;brown_8%\&quot;&quot;</span>)
+        .batchSize(<span class="hljs-number">50L</span>)
+        .outputFields(Arrays.asList(<span class="hljs-string">&quot;vector&quot;</span>, <span class="hljs-string">&quot;color_tag&quot;</span>))
+        .build());
 
-<span class="hljs-comment">// 5. Query with iterators</span>
-
-<span class="hljs-keyword">try</span> {
-    <span class="hljs-title class_">Files</span>.<span class="hljs-title function_">write</span>(<span class="hljs-title class_">Path</span>.<span class="hljs-title function_">of</span>(<span class="hljs-string">&quot;results.json&quot;</span>), <span class="hljs-title class_">JSON</span>.<span class="hljs-title function_">toJSONString</span>(<span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;()).<span class="hljs-title function_">getBytes</span>(), <span class="hljs-title class_">StandardOpenOption</span>.<span class="hljs-property">CREATE</span>, <span class="hljs-title class_">StandardOpenOption</span>.<span class="hljs-property">TRUNCATE_EXISTING</span>);
-} <span class="hljs-keyword">catch</span> (<span class="hljs-title class_">Exception</span> e) {
-    <span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> handle exception</span>
-    e.<span class="hljs-title function_">printStackTrace</span>();
-}
-
-<span class="hljs-title class_">QueryIteratorParam</span> queryIteratorParam = <span class="hljs-title class_">QueryIteratorParam</span>.<span class="hljs-title function_">newBuilder</span>()
-    .<span class="hljs-title function_">withCollectionName</span>(<span class="hljs-string">&quot;quick_setup&quot;</span>)
-    .<span class="hljs-title function_">withExpr</span>(<span class="hljs-string">&quot;color_tag like \&quot;brown_8%\&quot;&quot;</span>)
-    .<span class="hljs-title function_">withBatchSize</span>(50L)
-    .<span class="hljs-title function_">addOutField</span>(<span class="hljs-string">&quot;vector&quot;</span>)
-    .<span class="hljs-title function_">addOutField</span>(<span class="hljs-string">&quot;color_tag&quot;</span>)
-    .<span class="hljs-title function_">build</span>();
-
-R&lt;<span class="hljs-title class_">QueryIterator</span>&gt; queryIteratRes = client.<span class="hljs-title function_">queryIterator</span>(queryIteratorParam);
-
-<span class="hljs-keyword">if</span> (queryIteratRes.<span class="hljs-title function_">getStatus</span>() != R.<span class="hljs-property">Status</span>.<span class="hljs-property">Success</span>.<span class="hljs-title function_">getCode</span>()) {
-    <span class="hljs-title class_">System</span>.<span class="hljs-property">err</span>.<span class="hljs-title function_">println</span>(queryIteratRes.<span class="hljs-title function_">getMessage</span>());
-}
-
-<span class="hljs-title class_">QueryIterator</span> queryIterator = queryIteratRes.<span class="hljs-title function_">getData</span>();
-
+results.clear();
 <span class="hljs-keyword">while</span> (<span class="hljs-literal">true</span>) {
-    <span class="hljs-title class_">List</span>&lt;<span class="hljs-title class_">QueryResultsWrapper</span>.<span class="hljs-property">RowRecord</span>&gt; batchResults = queryIterator.<span class="hljs-title function_">next</span>();
-    <span class="hljs-keyword">if</span> (batchResults.<span class="hljs-title function_">isEmpty</span>()) {
-        queryIterator.<span class="hljs-title function_">close</span>();
+    List&lt;QueryResultsWrapper.RowRecord&gt; batchResults = queryIterator.next();
+    <span class="hljs-keyword">if</span> (batchResults.isEmpty()) {
+        queryIterator.close();
         <span class="hljs-keyword">break</span>;
     }
 
-    <span class="hljs-title class_">String</span> jsonString = <span class="hljs-string">&quot;&quot;</span>;
-    <span class="hljs-title class_">List</span>&lt;<span class="hljs-title class_">JSON</span><span class="hljs-built_in">Object</span>&gt; jsonObject = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();
-    <span class="hljs-keyword">try</span> {
-        jsonString = <span class="hljs-title class_">Files</span>.<span class="hljs-title function_">readString</span>(<span class="hljs-title class_">Path</span>.<span class="hljs-title function_">of</span>(<span class="hljs-string">&quot;results.json&quot;</span>));
-        jsonObject = <span class="hljs-title class_">JSON</span>.<span class="hljs-title function_">parseArray</span>(jsonString).<span class="hljs-title function_">toJavaList</span>(<span class="hljs-literal">null</span>);
-    } <span class="hljs-keyword">catch</span> (<span class="hljs-title class_">IOException</span> e) {
-        <span class="hljs-comment">// TODO Auto-generated catch block</span>
-        e.<span class="hljs-title function_">printStackTrace</span>();
-    }
-
-    <span class="hljs-keyword">for</span> (<span class="hljs-title class_">QueryResultsWrapper</span>.<span class="hljs-property">RowRecord</span> queryResult : batchResults) {
-        <span class="hljs-title class_">JSON</span><span class="hljs-built_in">Object</span> row = <span class="hljs-keyword">new</span> <span class="hljs-title class_">JSON</span><span class="hljs-built_in">Object</span>();
-        row.<span class="hljs-title function_">put</span>(<span class="hljs-string">&quot;id&quot;</span>, queryResult.<span class="hljs-title function_">get</span>(<span class="hljs-string">&quot;id&quot;</span>));
-        row.<span class="hljs-title function_">put</span>(<span class="hljs-string">&quot;vector&quot;</span>, queryResult.<span class="hljs-title function_">get</span>(<span class="hljs-string">&quot;vector&quot;</span>));
-        row.<span class="hljs-title function_">put</span>(<span class="hljs-string">&quot;color_tag&quot;</span>, queryResult.<span class="hljs-title function_">get</span>(<span class="hljs-string">&quot;color_tag&quot;</span>));
-        jsonObject.<span class="hljs-title function_">add</span>(row);
-    }
-
-    <span class="hljs-keyword">try</span> {
-        <span class="hljs-title class_">Files</span>.<span class="hljs-title function_">write</span>(<span class="hljs-title class_">Path</span>.<span class="hljs-title function_">of</span>(<span class="hljs-string">&quot;results.json&quot;</span>), <span class="hljs-title class_">JSON</span>.<span class="hljs-title function_">toJSONString</span>(jsonObject).<span class="hljs-title function_">getBytes</span>(), <span class="hljs-title class_">StandardOpenOption</span>.<span class="hljs-property">WRITE</span>);
-    } <span class="hljs-keyword">catch</span> (<span class="hljs-title class_">IOException</span> e) {
-        <span class="hljs-comment">// TODO Auto-generated catch block</span>
-        e.<span class="hljs-title function_">printStackTrace</span>();
-    }
+    results.addAll(batchResults);
 }
+
+System.out.println(results.subList(<span class="hljs-number">0</span>, <span class="hljs-number">3</span>));
+
+<span class="hljs-comment">// Output</span>
+<span class="hljs-comment">// [</span>
+<span class="hljs-comment">//  [color_tag:brown_8975, vector:[0.93425006, 0.42161798, 0.1603949, 0.86406225, 0.30063087], id:104],</span>
+<span class="hljs-comment">//  [color_tag:brown_8292, vector:[0.075261295, 0.51725155, 0.13842249, 0.13178307, 0.90713704], id:793],</span>
+<span class="hljs-comment">//  [color_tag:brown_8763, vector:[0.80366623, 0.6534371, 0.6446101, 0.094082, 0.1318503], id:1157]</span>
+<span class="hljs-comment">// ]</span>
+
 <button class="copy-code-btn"></button></code></pre>
 <table class="language-python">
   <thead>

@@ -12,7 +12,7 @@
         "children": []
       },
       {
-        "label": "Adoptantes de Milvus",
+        "label": "Milvus Adoptantes",
         "id": "milvus_adopters.md",
         "order": 1,
         "children": []
@@ -86,15 +86,21 @@
                 "children": []
               },
               {
-                "label": "Docker",
+                "label": "Docker (Linux)",
                 "id": "install_standalone-docker.md",
                 "order": 1,
                 "children": []
               },
               {
-                "label": "Docker Compose",
+                "label": "Docker Compose (Linux)",
                 "id": "install_standalone-docker-compose.md",
                 "order": 2,
+                "children": []
+              },
+              {
+                "label": "Escritorio Docker (Windows)",
+                "id": "install_standalone-windows.md",
+                "order": 3,
                 "children": []
               }
             ]
@@ -1849,7 +1855,7 @@
             "children": []
           },
           {
-            "label": "No estructurado",
+            "label": "Sin estructurar",
             "id": "rag_with_milvus_and_unstructured.md",
             "order": 3,
             "children": []

@@ -3,9 +3,9 @@ id: install_standalone-docker.md
 label: Docker
 related_key: Docker
 summary: 'Erfahren Sie, wie Sie Milvus eigenständig mit Docker installieren können.'
-title: Milvus in Docker ausführen
+title: Milvus in Docker ausführen (Linux)
 ---
-<h1 id="Run-Milvus-in-Docker" class="common-anchor-header">Milvus in Docker ausführen<button data-href="#Run-Milvus-in-Docker" class="anchor-icon" translate="no">
+<h1 id="Run-Milvus-in-Docker-Linux" class="common-anchor-header">Milvus in Docker ausführen (Linux)<button data-href="#Run-Milvus-in-Docker-Linux" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -100,7 +100,7 @@ $ bash standalone_embed.sh upgrade
       </svg>
     </button></h2><p>Nachdem Sie Milvus in Docker installiert haben, können Sie:</p>
 <ul>
-<li><p><a href="/docs/de/quickstart.md">Quickstart</a> prüfen, um zu sehen, was Milvus tun kann.</p></li>
+<li><p><a href="/docs/de/quickstart.md">Quickstart</a> prüfen, um zu sehen, was Milvus alles kann.</p></li>
 <li><p>Lernen Sie die grundlegenden Operationen von Milvus:</p>
 <ul>
 <li><a href="/docs/de/manage_databases.md">Verwalten von Datenbanken</a></li>

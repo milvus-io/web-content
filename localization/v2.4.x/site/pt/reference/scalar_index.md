@@ -35,7 +35,7 @@ title: Índice escalar
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Depois de efetuar pesquisas de semelhança de vectores no Milvus, pode utilizar operadores lógicos para organizar campos escalares em expressões booleanas.</p>
+    </button></h2><p>Ao efetuar pesquisas de semelhança vetorial no Milvus, pode utilizar operadores lógicos para organizar campos escalares em expressões booleanas.</p>
 <p>Quando o Milvus recebe um pedido de pesquisa com uma expressão booleana deste tipo, analisa a expressão booleana numa árvore de sintaxe abstrata (AST) para gerar um plano físico para filtragem de atributos. O Milvus aplica então o plano físico em cada segmento para gerar um <a href="/docs/pt/bitset.md">conjunto de bits</a> como resultado da filtragem e inclui o resultado como parâmetro de pesquisa vetorial para limitar o âmbito da pesquisa. Neste caso, a velocidade das pesquisas vectoriais depende fortemente da velocidade da filtragem de atributos.</p>
 <p>
   
@@ -57,8 +57,8 @@ title: Índice escalar
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>O objetivo do Milvus é conseguir uma utilização reduzida da memória, uma elevada eficiência de filtragem e um tempo de carregamento curto com os seus algoritmos de indexação de campos escalares. Estes algoritmos são classificados em dois tipos principais: <a href="#auto-indexing">indexação automática</a> e <a href="#inverted-indexing">indexação invertida</a>.</p>
-<h3 id="Auto-indexing" class="common-anchor-header">Auto indexação</h3><p>Milvus cria automaticamente um índice automático para um campo escalar com base no seu tipo de dados, sem necessidade de intervenção manual. A indexação automática é adequada para consultas de correspondência de prefixos e cenários de recuperação frequente.</p>
+    </button></h2><p>O objetivo do Milvus é conseguir uma baixa utilização de memória, uma elevada eficiência de filtragem e um tempo de carregamento curto com os seus algoritmos de indexação de campos escalares. Estes algoritmos são classificados em dois tipos principais: <a href="#auto-indexing">indexação automática</a> e <a href="#inverted-indexing">indexação invertida</a>.</p>
+<h3 id="Auto-indexing" class="common-anchor-header">Indexação automática</h3><p>Milvus fornece a opção <code translate="no">AUTOINDEX</code> para evitar que tenha de escolher manualmente um tipo de índice. Ao chamar o método <code translate="no">create_index</code>, se o <code translate="no">index_type</code> não for especificado, o Milvus seleciona automaticamente o tipo de índice mais adequado com base no tipo de dados.</p>
 <p>A tabela seguinte lista os tipos de dados que o Milvus suporta e os algoritmos de indexação automática correspondentes.</p>
 <table>
 <thead>
@@ -74,9 +74,9 @@ title: Índice escalar
 <tr><td>DOUBLE</td><td>Índice invertido</td></tr>
 </tbody>
 </table>
-<h3 id="Inverted-indexing" class="common-anchor-header">Indexação invertida</h3><p>A indexação invertida oferece uma forma flexível de criar um índice para um campo escalar, especificando manualmente os parâmetros do índice. Este método funciona bem para vários cenários, incluindo consultas pontuais, consultas de correspondência de padrões, pesquisas de texto completo, pesquisas JSON, pesquisas booleanas e até mesmo consultas de correspondência de prefixos.</p>
+<h3 id="Inverted-indexing" class="common-anchor-header">Indexação invertida</h3><p>A indexação invertida oferece uma forma flexível de criar um índice para um campo escalar, especificando manualmente os parâmetros do índice. Este método funciona bem em vários cenários, incluindo consultas pontuais, consultas de correspondência de padrões, pesquisas de texto completo, pesquisas JSON, pesquisas booleanas e até mesmo consultas de correspondência de prefixos.</p>
 <p>Os índices invertidos implementados no Milvus são alimentados por <a href="https://github.com/quickwit-oss/tantivy">Tantivy</a>, uma biblioteca de motor de pesquisa de texto completo. Tantivy garante que a indexação invertida em Milvus é eficiente e rápida.</p>
-<p>Um índice invertido tem dois componentes principais: um dicionário de termos e uma lista invertida. O dicionário de termos inclui todas as palavras tokenizadas ordenadas alfabeticamente, enquanto a lista invertida contém a lista de documentos onde cada palavra aparece. Esta configuração torna as consultas pontuais e as consultas de intervalo muito mais rápidas e eficientes do que as pesquisas de força bruta.</p>
+<p>Um índice invertido tem dois componentes principais: um dicionário de termos e uma lista invertida. O dicionário de termos inclui todas as palavras tokenizadas ordenadas alfabeticamente, enquanto a lista invertida contém a lista de documentos onde cada palavra aparece. Esta configuração torna as consultas por pontos e por intervalos muito mais rápidas e eficientes do que as pesquisas de força bruta.</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/scalar_index_inverted.png" alt="Inverted index diagram" class="doc-image" id="inverted-index-diagram" />
@@ -88,7 +88,7 @@ title: Índice escalar
 </ul>
 <h3 id="Test-results" class="common-anchor-header">Resultados dos testes</h3><p>Para demonstrar as melhorias de desempenho proporcionadas pelos índices escalares no Milvus, foi efectuada uma experiência que comparou o desempenho de várias expressões utilizando a indexação invertida e a pesquisa de força bruta em dados brutos.</p>
 <p>A experiência envolveu testar várias expressões em duas condições: com um índice invertido e com uma pesquisa de força bruta. Para garantir a equidade, foi mantida a mesma distribuição de dados entre os testes, utilizando sempre a mesma coleção. Antes de cada teste, a coleção foi libertada e o índice foi eliminado e reconstruído. Além disso, uma consulta quente foi realizada antes de cada teste para minimizar o impacto dos dados frios e quentes, e cada consulta foi executada várias vezes para garantir a precisão.</p>
-<p>Para um conjunto de dados de <strong>1 milhão de</strong> registos, a utilização de um <strong>índice invertido</strong> pode proporcionar uma melhoria <strong>de</strong> desempenho até <strong>30 vezes</strong> superior para consultas pontuais. Os ganhos de desempenho podem ser ainda mais significativos para conjuntos de dados maiores.</p>
+<p>Para um conjunto de dados de <strong>1 milhão de</strong> registos, a utilização de um <strong>índice invertido</strong> pode proporcionar uma melhoria de desempenho até <strong>30 vezes</strong> superior para consultas pontuais. Os ganhos de desempenho podem ser ainda mais significativos para conjuntos de dados maiores.</p>
 <h2 id="Performance-recommandations" class="common-anchor-header">Recomendações de desempenho<button data-href="#Performance-recommandations" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

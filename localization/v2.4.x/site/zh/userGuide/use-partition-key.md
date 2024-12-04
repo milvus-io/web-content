@@ -59,7 +59,7 @@ title: 使用分区密钥
 <p>有关参数的更多信息，请参阅 <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Client/MilvusClientV2.md"><code translate="no">MilvusClientV2</code></a>, <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Collections/createSchema.md"><code translate="no">createSchema()</code></a>和 <a href="https://milvus.io/api-reference/java/v2.4.x/v2/CollectionSchema/addField.md"><code translate="no">addField()</code></a>有关参数的更多信息，请参阅 SDK 参考资料中的</p>
 </div>
 <div class="language-javascript">
-<p>有关参数的更多信息，请参阅 <a href="https://milvus.io/api-reference/node/v2.4.x/Client/MilvusClient.md"><code translate="no">MilvusClient</code></a>和 <a href="https://milvus.io/api-reference/node/v2.4.x/Collections/createCollection.md"><code translate="no">createCollection()</code></a>的 SDK 参考资料。</p>
+<p>有关参数的更多信息，请参阅 <a href="https://milvus.io/api-reference/node/v2.4.x/Client/MilvusClient.md"><code translate="no">MilvusClient</code></a>和 <a href="https://milvus.io/api-reference/node/v2.4.x/Collections/createCollection.md"><code translate="no">createCollection()</code></a>SDK 参考资料中的参数。</p>
 </div>
 <div class="multipleCode">
    <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a></div>
@@ -105,27 +105,28 @@ schema.add_field(field_name=<span class="hljs-string">&quot;color&quot;</span>, 
 
 <span class="hljs-comment">// 2.1 Create schema</span>
 CreateCollectionReq.<span class="hljs-type">CollectionSchema</span> <span class="hljs-variable">schema</span> <span class="hljs-operator">=</span> client.createSchema();
+schema.setEnableDynamicField(<span class="hljs-literal">true</span>);
 
 <span class="hljs-comment">// 2.2 Add fields to schema</span>
 schema.addField(AddFieldReq.builder()
-    .fieldName(<span class="hljs-string">&quot;id&quot;</span>)
-    .dataType(DataType.Int64)
-    .isPrimaryKey(<span class="hljs-literal">true</span>)
-    .autoID(<span class="hljs-literal">false</span>)
-    .build());
+        .fieldName(<span class="hljs-string">&quot;id&quot;</span>)
+        .dataType(DataType.Int64)
+        .isPrimaryKey(<span class="hljs-literal">true</span>)
+        .autoID(<span class="hljs-literal">false</span>)
+        .build());
 
 schema.addField(AddFieldReq.builder()
-    .fieldName(<span class="hljs-string">&quot;vector&quot;</span>)
-    .dataType(DataType.FloatVector)
-    .dimension(<span class="hljs-number">5</span>)
-    .build());
-    
+        .fieldName(<span class="hljs-string">&quot;vector&quot;</span>)
+        .dataType(DataType.FloatVector)
+        .dimension(<span class="hljs-number">5</span>)
+        .build());
+
 schema.addField(AddFieldReq.builder()
-    .fieldName(<span class="hljs-string">&quot;color&quot;</span>)
-    .dataType(DataType.VarChar)
-    .maxLength(<span class="hljs-number">512</span>)
-    .isPartitionKey(<span class="hljs-literal">true</span>)
-    .build());
+        .fieldName(<span class="hljs-string">&quot;color&quot;</span>)
+        .dataType(DataType.VarChar)
+        .maxLength(<span class="hljs-number">512</span>)
+        .isPartitionKey(<span class="hljs-literal">true</span>)
+        .build());
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> { <span class="hljs-title class_">MilvusClient</span>, <span class="hljs-title class_">DataType</span>, sleep } = <span class="hljs-built_in">require</span>(<span class="hljs-string">&quot;@zilliz/milvus2-sdk-node&quot;</span>)
 
@@ -180,15 +181,17 @@ index_params.add_index(
 )
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-java"><span class="hljs-comment">// 2.3 Prepare index parameters</span>
-<span class="hljs-title class_">IndexParam</span> indexParamForVectorField = <span class="hljs-title class_">IndexParam</span>.<span class="hljs-title function_">builder</span>()
-    .<span class="hljs-title function_">fieldName</span>(<span class="hljs-string">&quot;vector&quot;</span>)
-    .<span class="hljs-title function_">indexType</span>(<span class="hljs-title class_">IndexParam</span>.<span class="hljs-property">IndexType</span>.<span class="hljs-property">IVF_FLAT</span>)
-    .<span class="hljs-title function_">metricType</span>(<span class="hljs-title class_">IndexParam</span>.<span class="hljs-property">MetricType</span>.<span class="hljs-property">IP</span>)
-    .<span class="hljs-title function_">extraParams</span>(<span class="hljs-title class_">Map</span>.<span class="hljs-title function_">of</span>(<span class="hljs-string">&quot;nlist&quot;</span>, <span class="hljs-number">1024</span>))
-    .<span class="hljs-title function_">build</span>();
+Map&lt;String, Object&gt; <span class="hljs-keyword">params</span> = <span class="hljs-keyword">new</span> HashMap&lt;&gt;();
+<span class="hljs-keyword">params</span>.put(<span class="hljs-string">&quot;nlist&quot;</span>, <span class="hljs-number">1024</span>);
+IndexParam indexParamForVectorField = IndexParam.builder()
+        .fieldName(<span class="hljs-string">&quot;vector&quot;</span>)
+        .indexType(IndexParam.IndexType.IVF_FLAT)
+        .metricType(IndexParam.MetricType.IP)
+        .extraParams(<span class="hljs-keyword">params</span>)
+        .build();
 
-<span class="hljs-title class_">List</span>&lt;<span class="hljs-title class_">IndexParam</span>&gt; indexParams = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();
-indexParams.<span class="hljs-title function_">add</span>(indexParamForVectorField);
+List&lt;IndexParam&gt; indexParams = <span class="hljs-keyword">new</span> ArrayList&lt;&gt;();
+indexParams.<span class="hljs-keyword">add</span>(indexParamForVectorField);
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-comment">// 2.2 Prepare index parameters</span>
 <span class="hljs-keyword">const</span> index_params = [{
@@ -215,10 +218,10 @@ indexParams.<span class="hljs-title function_">add</span>(indexParamForVectorFie
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-java"><span class="hljs-comment">// 2.4 Create a collection with schema and index parameters</span>
 <span class="hljs-type">CreateCollectionReq</span> <span class="hljs-variable">customizedSetupReq</span> <span class="hljs-operator">=</span> CreateCollectionReq.builder()
-    .collectionName(<span class="hljs-string">&quot;test_collection&quot;</span>)
-    .collectionSchema(schema)
-    .indexParams(indexParams)          
-    .build();
+        .collectionName(<span class="hljs-string">&quot;test_collection&quot;</span>)
+        .collectionSchema(schema)
+        .indexParams(indexParams)
+        .build();
 
 client.createCollection(customizedSetupReq);
 <button class="copy-code-btn"></button></code></pre>
@@ -289,23 +292,24 @@ data = []
 <span class="hljs-built_in">print</span>(data[<span class="hljs-number">0</span>])
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-java"><span class="hljs-comment">// 3. Insert randomly generated vectors</span>
-<span class="hljs-title class_">List</span>&lt;<span class="hljs-title class_">String</span>&gt; colors = <span class="hljs-title class_">Arrays</span>.<span class="hljs-title function_">asList</span>(<span class="hljs-string">&quot;green&quot;</span>, <span class="hljs-string">&quot;blue&quot;</span>, <span class="hljs-string">&quot;yellow&quot;</span>, <span class="hljs-string">&quot;red&quot;</span>, <span class="hljs-string">&quot;black&quot;</span>, <span class="hljs-string">&quot;white&quot;</span>, <span class="hljs-string">&quot;purple&quot;</span>, <span class="hljs-string">&quot;pink&quot;</span>, <span class="hljs-string">&quot;orange&quot;</span>, <span class="hljs-string">&quot;brown&quot;</span>, <span class="hljs-string">&quot;grey&quot;</span>);
-<span class="hljs-title class_">List</span>&lt;<span class="hljs-title class_">JSON</span><span class="hljs-built_in">Object</span>&gt; data = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();
+List&lt;String&gt; colors = Arrays.asList(<span class="hljs-string">&quot;green&quot;</span>, <span class="hljs-string">&quot;blue&quot;</span>, <span class="hljs-string">&quot;yellow&quot;</span>, <span class="hljs-string">&quot;red&quot;</span>, <span class="hljs-string">&quot;black&quot;</span>, <span class="hljs-string">&quot;white&quot;</span>, <span class="hljs-string">&quot;purple&quot;</span>, <span class="hljs-string">&quot;pink&quot;</span>, <span class="hljs-string">&quot;orange&quot;</span>, <span class="hljs-string">&quot;brown&quot;</span>, <span class="hljs-string">&quot;grey&quot;</span>);
+List&lt;JsonObject&gt; data = <span class="hljs-keyword">new</span> ArrayList&lt;&gt;();
 
-<span class="hljs-keyword">for</span> (int i=<span class="hljs-number">0</span>; i&lt;<span class="hljs-number">1000</span>; i++) {
-    <span class="hljs-title class_">Random</span> rand = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Random</span>();
-    <span class="hljs-title class_">String</span> current_color = colors.<span class="hljs-title function_">get</span>(rand.<span class="hljs-title function_">nextInt</span>(colors.<span class="hljs-title function_">size</span>()-<span class="hljs-number">1</span>));
-    int current_tag = rand.<span class="hljs-title function_">nextInt</span>(<span class="hljs-number">8999</span>) + <span class="hljs-number">1000</span>;
-    <span class="hljs-title class_">JSON</span><span class="hljs-built_in">Object</span> row = <span class="hljs-keyword">new</span> <span class="hljs-title class_">JSON</span><span class="hljs-built_in">Object</span>();
-    row.<span class="hljs-title function_">put</span>(<span class="hljs-string">&quot;id&quot;</span>, <span class="hljs-title class_">Long</span>.<span class="hljs-title function_">valueOf</span>(i));
-    row.<span class="hljs-title function_">put</span>(<span class="hljs-string">&quot;vector&quot;</span>, <span class="hljs-title class_">Arrays</span>.<span class="hljs-title function_">asList</span>(rand.<span class="hljs-title function_">nextFloat</span>(), rand.<span class="hljs-title function_">nextFloat</span>(), rand.<span class="hljs-title function_">nextFloat</span>(), rand.<span class="hljs-title function_">nextFloat</span>(), rand.<span class="hljs-title function_">nextFloat</span>()));
-    row.<span class="hljs-title function_">put</span>(<span class="hljs-string">&quot;color&quot;</span>, current_color);
-    row.<span class="hljs-title function_">put</span>(<span class="hljs-string">&quot;tag&quot;</span>, current_tag);
-    row.<span class="hljs-title function_">put</span>(<span class="hljs-string">&quot;color_tag&quot;</span>, current_color + <span class="hljs-string">&quot;_&quot;</span> + <span class="hljs-title class_">String</span>.<span class="hljs-title function_">valueOf</span>(rand.<span class="hljs-title function_">nextInt</span>(<span class="hljs-number">8999</span>) + <span class="hljs-number">1000</span>));
-    data.<span class="hljs-title function_">add</span>(row);
+Gson gson = <span class="hljs-keyword">new</span> Gson();
+Random rand = <span class="hljs-keyword">new</span> Random();
+<span class="hljs-keyword">for</span> (<span class="hljs-built_in">int</span> i=<span class="hljs-number">0</span>; i&lt;<span class="hljs-number">1000</span>; i++) {
+    String current_color = colors.<span class="hljs-keyword">get</span>(rand.nextInt(colors.size()<span class="hljs-number">-1</span>));
+    <span class="hljs-built_in">int</span> current_tag = rand.nextInt(<span class="hljs-number">8999</span>) + <span class="hljs-number">1000</span>;
+    JsonObject row = <span class="hljs-keyword">new</span> JsonObject();
+    row.addProperty(<span class="hljs-string">&quot;id&quot;</span>, (<span class="hljs-built_in">long</span>) i);
+    row.<span class="hljs-keyword">add</span>(<span class="hljs-string">&quot;vector&quot;</span>, gson.toJsonTree(Arrays.asList(rand.nextFloat(), rand.nextFloat(), rand.nextFloat(), rand.nextFloat(), rand.nextFloat())));
+    row.addProperty(<span class="hljs-string">&quot;color&quot;</span>, current_color);
+    row.addProperty(<span class="hljs-string">&quot;tag&quot;</span>, current_tag);
+    row.addProperty(<span class="hljs-string">&quot;color_tag&quot;</span>, current_color + <span class="hljs-string">&quot;_&quot;</span> + (rand.nextInt(<span class="hljs-number">8999</span>) + <span class="hljs-number">1000</span>));
+    data.<span class="hljs-keyword">add</span>(row);
 }
 
-<span class="hljs-title class_">System</span>.<span class="hljs-property">out</span>.<span class="hljs-title function_">println</span>(<span class="hljs-title class_">JSON</span><span class="hljs-built_in">Object</span>.<span class="hljs-title function_">toJSON</span>(data.<span class="hljs-title function_">get</span>(<span class="hljs-number">0</span>)));   
+System.<span class="hljs-keyword">out</span>.println(data.<span class="hljs-keyword">get</span>(<span class="hljs-number">0</span>));
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-comment">// 3. Insert randomly generated vectors </span>
 <span class="hljs-keyword">const</span> colors = [<span class="hljs-string">&quot;green&quot;</span>, <span class="hljs-string">&quot;blue&quot;</span>, <span class="hljs-string">&quot;yellow&quot;</span>, <span class="hljs-string">&quot;red&quot;</span>, <span class="hljs-string">&quot;black&quot;</span>, <span class="hljs-string">&quot;white&quot;</span>, <span class="hljs-string">&quot;purple&quot;</span>, <span class="hljs-string">&quot;pink&quot;</span>, <span class="hljs-string">&quot;orange&quot;</span>, <span class="hljs-string">&quot;brown&quot;</span>, <span class="hljs-string">&quot;grey&quot;</span>]
@@ -378,17 +382,17 @@ data = []
 <span class="hljs-comment"># }</span>
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-java"><span class="hljs-comment">// 3.1 Insert data into the collection</span>
-<span class="hljs-title class_">InsertReq</span> insertReq = <span class="hljs-title class_">InsertReq</span>.<span class="hljs-title function_">builder</span>()
-    .<span class="hljs-title function_">collectionName</span>(<span class="hljs-string">&quot;test_collection&quot;</span>)
-    .<span class="hljs-title function_">data</span>(data)
-    .<span class="hljs-title function_">build</span>();
+<span class="hljs-type">InsertReq</span> <span class="hljs-variable">insertReq</span> <span class="hljs-operator">=</span> InsertReq.builder()
+        .collectionName(<span class="hljs-string">&quot;test_collection&quot;</span>)
+        .data(data)
+        .build();
 
-<span class="hljs-title class_">InsertResp</span> insertResp = client.<span class="hljs-title function_">insert</span>(insertReq);
+<span class="hljs-type">InsertResp</span> <span class="hljs-variable">insertResp</span> <span class="hljs-operator">=</span> client.insert(insertReq);
 
-<span class="hljs-title class_">System</span>.<span class="hljs-property">out</span>.<span class="hljs-title function_">println</span>(<span class="hljs-title class_">JSON</span><span class="hljs-built_in">Object</span>.<span class="hljs-title function_">toJSON</span>(insertResp));
+System.out.println(insertResp.getInsertCnt());
 
 <span class="hljs-comment">// Output:</span>
-<span class="hljs-comment">// {&quot;insertCnt&quot;: 1000}</span>
+<span class="hljs-comment">// 1000</span>
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript">res = <span class="hljs-keyword">await</span> client.<span class="hljs-title function_">insert</span>({
     <span class="hljs-attr">collection_name</span>: <span class="hljs-string">&quot;test_collection&quot;</span>,
@@ -484,37 +488,30 @@ res = client.search(
 <span class="hljs-comment"># ]</span>
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-java"><span class="hljs-comment">// 4. Search with partition key</span>
-<span class="hljs-title class_">List</span>&lt;<span class="hljs-title class_">List</span>&lt;<span class="hljs-title class_">Float</span>&gt;&gt; query_vectors = <span class="hljs-title class_">Arrays</span>.<span class="hljs-title function_">asList</span>(<span class="hljs-title class_">Arrays</span>.<span class="hljs-title function_">asList</span>(<span class="hljs-number">0.</span>3580376395471989f, -<span class="hljs-number">0.</span>6023495712049978f, <span class="hljs-number">0.</span>18414012509913835f, -<span class="hljs-number">0.</span>26286205330961354f, <span class="hljs-number">0.</span>9029438446296592f));
+List&lt;BaseVector&gt; query_vectors = Collections.singletonList(<span class="hljs-keyword">new</span> FloatVec(<span class="hljs-keyword">new</span> <span class="hljs-built_in">float</span>[]{<span class="hljs-number">0.3580376395471989f</span>, <span class="hljs-number">-0.6023495712049978f</span>, <span class="hljs-number">0.18414012509913835f</span>, <span class="hljs-number">-0.26286205330961354f</span>, <span class="hljs-number">0.9029438446296592f</span>}));
 
-<span class="hljs-title class_">SearchReq</span> searchReq = <span class="hljs-title class_">SearchReq</span>.<span class="hljs-title function_">builder</span>()
-    .<span class="hljs-title function_">collectionName</span>(<span class="hljs-string">&quot;test_collection&quot;</span>)
-    .<span class="hljs-title function_">data</span>(query_vectors)
-    .<span class="hljs-title function_">filter</span>(<span class="hljs-string">&quot;color == \&quot;green\&quot;&quot;</span>)
-    .<span class="hljs-title function_">topK</span>(<span class="hljs-number">3</span>)
-    .<span class="hljs-title function_">build</span>();
+SearchReq searchReq = SearchReq.builder()
+        .collectionName(<span class="hljs-string">&quot;test_collection&quot;</span>)
+        .data(query_vectors)
+        .filter(<span class="hljs-string">&quot;color == \&quot;green\&quot;&quot;</span>)
+        .topK(<span class="hljs-number">3</span>)
+        .outputFields(Collections.singletonList(<span class="hljs-string">&quot;color_tag&quot;</span>))
+        .build();
 
-<span class="hljs-title class_">SearchResp</span> searchResp = client.<span class="hljs-title function_">search</span>(searchReq);
+SearchResp searchResp = client.search(searchReq);
 
-<span class="hljs-title class_">System</span>.<span class="hljs-property">out</span>.<span class="hljs-title function_">println</span>(<span class="hljs-title class_">JSON</span><span class="hljs-built_in">Object</span>.<span class="hljs-title function_">toJSON</span>(searchResp));   
+List&lt;List&lt;SearchResp.SearchResult&gt;&gt; searchResults = searchResp.getSearchResults();
+<span class="hljs-keyword">for</span> (List&lt;SearchResp.SearchResult&gt; results : searchResults) {
+    System.<span class="hljs-keyword">out</span>.println(<span class="hljs-string">&quot;TopK results:&quot;</span>);
+    <span class="hljs-keyword">for</span> (SearchResp.SearchResult result : results) {
+        System.<span class="hljs-keyword">out</span>.println(result);
+    }
+}
 
 <span class="hljs-comment">// Output:</span>
-<span class="hljs-comment">// {&quot;searchResults&quot;: [[</span>
-<span class="hljs-comment">//     {</span>
-<span class="hljs-comment">//         &quot;distance&quot;: 1.0586997,</span>
-<span class="hljs-comment">//         &quot;id&quot;: 414,</span>
-<span class="hljs-comment">//         &quot;entity&quot;: {}</span>
-<span class="hljs-comment">//     },</span>
-<span class="hljs-comment">//     {</span>
-<span class="hljs-comment">//         &quot;distance&quot;: 0.981384,</span>
-<span class="hljs-comment">//         &quot;id&quot;: 293,</span>
-<span class="hljs-comment">//         &quot;entity&quot;: {}</span>
-<span class="hljs-comment">//     },</span>
-<span class="hljs-comment">//     {</span>
-<span class="hljs-comment">//         &quot;distance&quot;: 0.9548756,</span>
-<span class="hljs-comment">//         &quot;id&quot;: 325,</span>
-<span class="hljs-comment">//         &quot;entity&quot;: {}</span>
-<span class="hljs-comment">//     }</span>
-<span class="hljs-comment">// ]]}</span>
+<span class="hljs-comment">// SearchResp.SearchResult(entity={color_tag=green_4945}, score=1.192079, id=542)</span>
+<span class="hljs-comment">// SearchResp.SearchResult(entity={color_tag=green_4633}, score=0.9138917, id=144)</span>
+<span class="hljs-comment">// SearchResp.SearchResult(entity={color_tag=green_8038}, score=0.8381896, id=962)</span>
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-comment">// 4. Search with partition key</span>
 <span class="hljs-keyword">const</span> query_vectors = [<span class="hljs-number">0.3580376395471989</span>, -<span class="hljs-number">0.6023495712049978</span>, <span class="hljs-number">0.18414012509913835</span>, -<span class="hljs-number">0.26286205330961354</span>, <span class="hljs-number">0.9029438446296592</span>]
@@ -553,4 +550,4 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>您可以利用 Partition Key 功能实现更好的搜索性能并启用多租户功能。具体做法是为每个实体指定一个特定于租户的值作为分区键字段。在搜索或查询 Collections 时，可以通过在布尔表达式中包含 Partition Key 字段，根据租户特定值过滤实体。这种方法可确保按租户进行数据隔离，并避免扫描不必要的分区。</p>
+    </button></h2><p>您可以利用 Partition Key 功能实现更好的搜索性能并启用多租户。具体做法是为每个实体指定一个特定于租户的值作为分区键字段。在搜索或查询 Collections 时，可以通过在布尔表达式中包含 Partition Key 字段，根据租户特定值过滤实体。这种方法可确保按租户进行数据隔离，并避免扫描不必要的分区。</p>

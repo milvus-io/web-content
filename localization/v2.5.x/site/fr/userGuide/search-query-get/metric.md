@@ -238,8 +238,8 @@ title: Types métriques
 <ul>
 <li><p><code translate="no">​Q</code>: Le texte de la requête fourni par l'utilisateur.</p></li>
 <li><p><code translate="no">​D</code>: Le document à évaluer.</p></li>
-<li><p><code translate="no">​TF(qi​,D)</code>: La fréquence du terme, qui représente la fréquence d'apparition du terme qia dans le document D.</p></li>
-<li><p><code translate="no">​IDF(qi​)</code>: La fréquence inverse du document, calculée comme suit.</p>
+<li><p><code translate="no">​TF(qi​,D)</code>: La fréquence des termes, qui représente la fréquence d'apparition du terme <code translate="no">​qi</code> dans le document <code translate="no">​D</code>.</p></li>
+<li><p><code translate="no">​IDF(qi​)</code>: Fréquence inverse du document, calculée comme suit.</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/idf.png" alt="IDF formula" class="doc-image" id="idf-formula" />

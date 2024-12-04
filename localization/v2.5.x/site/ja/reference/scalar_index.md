@@ -41,7 +41,7 @@ title: スカラーインデックス
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/scalar_index.png" alt="Attribute filtering in a segment" class="doc-image" id="attribute-filtering-in-a-segment" />
    </span> <span class="img-wrapper"> <span>セグメント内の属性フィルタリング</span> </span></p>
-<p>スカラー・フィールド・インデックスとは、スカラー・フィールドの値を特定の方法で並べ替えることで、属性フィルタリングの速度を確保し、情報検索を高速化する方法である。</p>
+<p>スカラーフィールドインデックスは、スカラーフィールドの値を特定の方法で並べ替えることで、属性フィルタリングの速度を確保し、情報検索を高速化する方法である。</p>
 <h2 id="Scalar-field-indexing-algorithms" class="common-anchor-header">スカラー・フィールド・インデックスのアルゴリズム<button data-href="#Scalar-field-indexing-algorithms" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -58,11 +58,11 @@ title: スカラーインデックス
         ></path>
       </svg>
     </button></h2><p>Milvusはスカラーフィールドインデキシングアルゴリズムにより、低いメモリ使用量、高いフィルタリング効率、短いロード時間の達成を目指している。これらのアルゴリズムは<a href="#auto-indexing">オートインデックスと</a> <a href="#inverted-indexing">インバーテッドインデックスの</a>2種類に大別される。</p>
-<h3 id="Auto-indexing" class="common-anchor-header">オートインデックス</h3><p>Milvusは、データ型に基づいたスカラーフィールドのオートインデックスを自動的に作成します。オートインデックスは前方一致クエリや頻繁な検索シナリオに適しています。</p>
-<p>以下の表は、Milvusがサポートするデータタイプとそれに対応するオートインデックスのアルゴリズムの一覧です。</p>
+<h3 id="Auto-indexing" class="common-anchor-header">オートインデックス</h3><p>Milvusは<code translate="no">AUTOINDEX</code> 、インデックスタイプを手動で選択する手間を省くオプションを提供しています。<code translate="no">create_index</code> メソッドを呼び出す際、<code translate="no">index_type</code> が指定されていない場合、Milvusはデータ型に基づいて最適なインデックス型を自動的に選択します。</p>
+<p>以下の表は、Milvusがサポートしているデータタイプと、それに対応するオートインデックス アルゴリズムの一覧です。</p>
 <table>
 <thead>
-<tr><th>データタイプ</th><th>オートインデキシングアルゴリズム</th></tr>
+<tr><th>データ型</th><th>オートインデックス アルゴリズム</th></tr>
 </thead>
 <tbody>
 <tr><td>VARCHAR</td><td>転置インデックス</td></tr>
@@ -76,7 +76,7 @@ title: スカラーインデックス
 </table>
 <h3 id="Inverted-indexing" class="common-anchor-header">転置インデックス</h3><p>転置インデックスでは、インデックスパラメータを手動で指定してスカラフィールドのインデックスを作成する柔軟な方法を提供します。この方法は、ポイントクエリ、パターンマッチクエリ、フルテキスト検索、JSON 検索、ブール検索、さらにはプレフィックスマッチクエリなど、さまざまなシナリオでうまく機能します。</p>
 <p>Milvusに実装されている転置インデックスは、全文検索エンジンライブラリである<a href="https://github.com/quickwit-oss/tantivy">Tantivyを</a>利用しています。Tantivyを利用することで、Milvusにおける転置インデックスの効率性と高速性を実現しています。</p>
-<p>転置インデックスには、用語辞書と転置リストという2つの主要な構成要素があります。用語辞書にはアルファベット順に並べられたトークン化されたすべての単語が含まれ、転置リストには各単語が出現する文書のリストが含まれる。このセットアップにより、ポイント・クエリや範囲クエリは、総当たり検索よりもはるかに高速で効率的になります。</p>
+<p>転置インデックスには、用語辞書と転置リストという2つの主要な構成要素があります。用語辞書にはアルファベット順に並べられたトークン化されたすべての単語が含まれ、転置リストには各単語が出現する文書のリストが含まれる。このセットアップにより、ポイント・クエリーと範囲クエリーは、総当たり検索よりもはるかに高速で効率的になります。</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/scalar_index_inverted.png" alt="Inverted index diagram" class="doc-image" id="inverted-index-diagram" />

@@ -86,15 +86,21 @@
                 "children": []
               },
               {
-                "label": "Docker",
+                "label": "Docker(Linux)",
                 "id": "install_standalone-docker.md",
                 "order": 1,
                 "children": []
               },
               {
-                "label": "도커 컴포즈",
+                "label": "Docker Compose(Linux)",
                 "id": "install_standalone-docker-compose.md",
                 "order": 2,
+                "children": []
+              },
+              {
+                "label": "Docker 데스크톱(Windows)",
+                "id": "install_standalone-windows.md",
+                "order": 3,
                 "children": []
               }
             ]
@@ -1291,7 +1297,7 @@
             "children": []
           },
           {
-            "label": "12개의 랩",
+            "label": "12개의 실험실",
             "id": "video_search_with_twelvelabs_and_milvus.md",
             "order": 12,
             "children": []
@@ -1334,7 +1340,7 @@
             "children": []
           },
           {
-            "label": "SiliconFlow",
+            "label": "실리콘 플로우",
             "id": "build_RAG_with_milvus_and_siliconflow.md",
             "order": 4,
             "children": []

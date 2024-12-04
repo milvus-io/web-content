@@ -58,7 +58,7 @@ title: Schema verwalten
     <tr>
         <td><code translate="no">description</code></td>
         <td>Beschreibung des Feldes</td>
-        <td>Datentyp: Zeichenfolge.<br/>Fakultativ</td>
+        <td>Datentyp: Zeichenfolge.<br/>Optional</td>
     </tr>
     <tr>
         <td><code translate="no">is_primary</code></td>
@@ -87,9 +87,9 @@ title: Schema verwalten
     </tr>
     </tbody>
 </table>
-<h3 id="Create-a-field-schema" class="common-anchor-header">Ein Feldschema erstellen</h3><p>Um die Komplexität beim Einfügen von Daten zu verringern, ermöglicht Milvus die Angabe eines Standardwerts für jedes Skalarfeld während der Erstellung des Feldschemas, außer für das Primärschlüsselfeld. Dies bedeutet, dass, wenn Sie beim Einfügen von Daten ein Feld leer lassen, der von Ihnen angegebene Standardwert für dieses Feld gilt.</p>
+<h3 id="Create-a-field-schema" class="common-anchor-header">Ein Feldschema erstellen</h3><p>Um die Komplexität beim Einfügen von Daten zu verringern, ermöglicht Milvus die Angabe eines Standardwerts für jedes Skalarfeld während der Erstellung des Feldschemas, außer für das Primärschlüsselfeld. Dies bedeutet, dass, wenn Sie ein Feld beim Einfügen von Daten leer lassen, der von Ihnen für dieses Feld angegebene Standardwert gilt.</p>
 <p>Erstellen Sie ein reguläres Feldschema:</p>
-<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> FieldSchema
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> DataType, FieldSchema
 id_field = FieldSchema(name=<span class="hljs-string">&quot;id&quot;</span>, dtype=DataType.INT64, is_primary=<span class="hljs-literal">True</span>, description=<span class="hljs-string">&quot;primary id&quot;</span>)
 age_field = FieldSchema(name=<span class="hljs-string">&quot;age&quot;</span>, dtype=DataType.INT64, description=<span class="hljs-string">&quot;age&quot;</span>)
 embedding_field = FieldSchema(name=<span class="hljs-string">&quot;embedding&quot;</span>, dtype=DataType.FLOAT_VECTOR, dim=<span class="hljs-number">128</span>, description=<span class="hljs-string">&quot;vector&quot;</span>)
@@ -98,7 +98,7 @@ embedding_field = FieldSchema(name=<span class="hljs-string">&quot;embedding&quo
 position_field = FieldSchema(name=<span class="hljs-string">&quot;position&quot;</span>, dtype=DataType.VARCHAR, max_length=<span class="hljs-number">256</span>, is_partition_key=<span class="hljs-literal">True</span>)
 <button class="copy-code-btn"></button></code></pre>
 <p>Erstellen Sie ein Feldschema mit Standardfeldwerten:</p>
-<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> FieldSchema
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> DataType, FieldSchema
 
 fields = [
   FieldSchema(name=<span class="hljs-string">&quot;id&quot;</span>, dtype=DataType.INT64, is_primary=<span class="hljs-literal">True</span>),
@@ -130,7 +130,7 @@ fields = [
 <p>JSON ist als zusammengesetzter Datentyp verfügbar. Ein JSON-Feld besteht aus Schlüssel-Werte-Paaren. Jeder Schlüssel ist eine Zeichenfolge, und ein Wert kann eine Zahl, eine Zeichenfolge, ein boolescher Wert, ein Array oder eine Liste sein. Einzelheiten finden Sie unter <a href="/docs/de/use-json-fields.md">JSON: ein neuer Datentyp</a>.</p></li>
 <li><p>Vektorfeld unterstützt:</p>
 <ul>
-<li>BINARY_VECTOR: Speichert binäre Daten als eine Folge von 0en und 1en und wird für die kompakte Darstellung von Merkmalen in der Bildverarbeitung und beim Informationsabruf verwendet.</li>
+<li>BINARY_VECTOR: Speichert binäre Daten als eine Folge von 0en und 1en, die für eine kompakte Merkmalsdarstellung in der Bildverarbeitung und beim Informationsabruf verwendet werden.</li>
 <li>FLOAT_VECTOR: Speichert 32-Bit-Gleitkommazahlen, die häufig in der wissenschaftlichen Datenverarbeitung und beim maschinellen Lernen zur Darstellung reeller Zahlen verwendet werden.</li>
 <li>FLOAT16_VECTOR: Speichert 16-Bit-Gleitkommazahlen mit halber Genauigkeit, die bei Deep Learning und GPU-Berechnungen für Speicher- und Bandbreiteneffizienz verwendet werden.</li>
 <li>BFLOAT16_VECTOR: Speichert 16-Bit-Gleitkommazahlen mit verringerter Genauigkeit, aber demselben Exponentenbereich wie Float32, die beim Deep Learning zur Verringerung der Speicher- und Berechnungsanforderungen verwendet werden, ohne die Genauigkeit wesentlich zu beeinträchtigen.</li>
@@ -187,7 +187,7 @@ fields = [
 </table>
 <h3 id="Create-a-collection-schema" class="common-anchor-header">Erstellen eines Sammlungsschemas</h3><div class="alert note">
   Definieren Sie die Feldschemata, bevor Sie ein Sammlungsschema definieren.</div>
-<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> FieldSchema, CollectionSchema
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> DataType, FieldSchema, CollectionSchema
 id_field = FieldSchema(name=<span class="hljs-string">&quot;id&quot;</span>, dtype=DataType.INT64, is_primary=<span class="hljs-literal">True</span>, description=<span class="hljs-string">&quot;primary id&quot;</span>)
 age_field = FieldSchema(name=<span class="hljs-string">&quot;age&quot;</span>, dtype=DataType.INT64, description=<span class="hljs-string">&quot;age&quot;</span>)
 embedding_field = FieldSchema(name=<span class="hljs-string">&quot;embedding&quot;</span>, dtype=DataType.FLOAT_VECTOR, dim=<span class="hljs-number">128</span>, description=<span class="hljs-string">&quot;vector&quot;</span>)
@@ -199,7 +199,7 @@ position_field = FieldSchema(name=<span class="hljs-string">&quot;position&quot;
 schema = CollectionSchema(fields=[id_field, age_field, embedding_field], auto_id=<span class="hljs-literal">False</span>, enable_dynamic_field=<span class="hljs-literal">True</span>, description=<span class="hljs-string">&quot;desc of a collection&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
 <p>Erstellen Sie eine Sammlung mit dem angegebenen Schema:</p>
-<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> <span class="hljs-title class_">Collection</span>,connections
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> <span class="hljs-title class_">Collection</span>, connections
 conn = connections.<span class="hljs-title function_">connect</span>(host=<span class="hljs-string">&quot;127.0.0.1&quot;</span>, port=<span class="hljs-number">19530</span>)
 collection_name1 = <span class="hljs-string">&quot;tutorial_1&quot;</span>
 collection1 = <span class="hljs-title class_">Collection</span>(name=collection_name1, schema=schema, using=<span class="hljs-string">&#x27;default&#x27;</span>, shards_num=<span class="hljs-number">2</span>)
@@ -214,7 +214,8 @@ collection1 = <span class="hljs-title class_">Collection</span>(name=collection_
 </div>
 <p><br/>
 Sie können auch eine Sammlung mit <code translate="no">Collection.construct_from_dataframe</code> erstellen, die automatisch ein Sammelschema aus DataFrame generiert und eine Sammlung erstellt.</p>
-<pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> pandas <span class="hljs-keyword">as</span> pd
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> Collection
+<span class="hljs-keyword">import</span> pandas <span class="hljs-keyword">as</span> pd
 df = pd.DataFrame({
     <span class="hljs-string">&quot;id&quot;</span>: [i <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(nb)],
     <span class="hljs-string">&quot;age&quot;</span>: [random.randint(<span class="hljs-number">20</span>, <span class="hljs-number">40</span>) <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(nb)],

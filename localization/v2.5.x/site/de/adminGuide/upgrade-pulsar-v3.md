@@ -21,11 +21,11 @@ title: Aufrüstung des Pulsar in Milvus von V2 auf V3
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Dieser Artikel beschreibt, wie Sie Ihre Pulsar-Komponente von V2 auf V3 aktualisieren können, wenn Sie bereits einen funktionierenden Milvus-Einsatz mit Pulsar V2 haben. <strong>milvus-helm</strong> und <strong>milvus-operator</strong> verwenden seit Milvus v2.5 standardmäßig Pulsar V3, um einige Fehler und Sicherheitslücken zu beheben.</p>
+    </button></h1><p>Dieser Artikel beschreibt, wie Sie Ihre Pulsar-Komponente von V2 auf V3 aktualisieren können, wenn Sie bereits eine funktionierende Milvus-Installation mit Pulsar V2 haben. Seit Milvus v2.5 verwenden <strong>milvus-helm</strong> und <strong>milvus-operator</strong> standardmäßig Pulsar V3, um einige Bugs und Sicherheitslücken zu beheben. Während Milvus 2.5 mit Pulsar 2.x kompatibel ist, ist das Upgrade auf Pulsar V3 optional. Um die Stabilität und Leistung zu verbessern, empfehlen wir ein Upgrade auf Pulsar V3.</p>
 <div class="alert note">
 <ol>
 <li><p>Der Upgrade-Vorgang erfordert eine kurze Unterbrechung des Dienstes (je nach Datenmenge dauert er zwischen einigen Minuten und mehr als zehn Minuten).</p></li>
-<li><p>Vor dem Vorgang müssen Sie alle laufenden Clients davon abhalten, Daten in Milvus zu schreiben. Andernfalls können die geschriebenen Daten verloren gehen.</p></li>
+<li><p>Vor dem Vorgang müssen Sie alle laufenden Clients davon abhalten, Daten auf Milvus zu schreiben. Andernfalls können die geschriebenen Daten verloren gehen.</p></li>
 <li><p>Dieser Artikel geht davon aus, dass Milvus im Namensraum <code translate="no">default</code> installiert ist und den Namen <code translate="no">my-release</code> trägt. Bitte ändern Sie die Parameter auf Ihren eigenen Namespace und Freigabenamen, während Sie die von dieser Seite kopierten Befehle ausführen.</p></li>
 <li><p>Stellen Sie sicher, dass Ihre Arbeitsumgebung unter dem oben genannten Namespace im Kubernetes-Cluster über Berechtigungen verfügt und die folgenden Befehle installiert sind.</p>
 <p>a. <code translate="no">kubectl</code> &gt;= 1.20</p>
@@ -74,7 +74,7 @@ title: Aufrüstung des Pulsar in Milvus von V2 auf V3
 <h3 id="Persist-data-not-consumed-in-Pulsar" class="common-anchor-header">Persistieren von nicht verbrauchten Daten in Pulsar</h3><p>In diesem Schritt müssen Sie sicherstellen, dass die in Pulsar vorhandenen Daten in den Objektspeicherdienst persistiert wurden. Es gibt zwei Ansätze, von denen Sie den Ihren Bedürfnissen entsprechenden wählen können.</p>
 <h4 id="Approach-1-Using-Attu" class="common-anchor-header">Ansatz 1: Verwendung von Attu</h4><p>Wenn Sie nur eine kleine Anzahl von Sammlungen in Ihrer Milvus-Bereitstellung mit nicht vielen Segmenten haben, können Sie Attu verwenden, um die Daten im Objektspeicherdienst zu persistieren.</p>
 <ol>
-<li><p>Wählen Sie jede Sammlung in all Ihren Datenbanken aus, gehen Sie in das Panel <code translate="no">Segments</code> und klicken Sie auf die Schaltfläche <code translate="no">Flush</code> </p>
+<li><p>Wählen Sie jede Sammlung in all Ihren Datenbanken aus, gehen Sie in das <code translate="no">Segments</code> Panel und klicken Sie auf die Schaltfläche <code translate="no">Flush</code> </p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/attu-select-collection.png" alt="Segment panel of a collection" class="doc-image" id="segment-panel-of-a-collection" />
@@ -145,7 +145,7 @@ Forwarding <span class="hljs-keyword">from</span> <span class="hljs-number">127.
 <li><p>Für Milvus Operator-Benutzer</p>
 <p>Wenn Sie Milvus mit dem Milvus Operator installiert haben, gehen Sie zu <a href="#Delete-Pulsar-V2-using-Milvus-Operator">Für Milvus Operator-Benutzer</a>.</p></li>
 </ul>
-<h4 id="Delete-Pulsar-V2-using-Helm" class="common-anchor-header">Pulsar V2 mit Helm löschen</h4><p>Wenn Sie Milvus mit Hilfe des Milvus Helm-Diagramms installiert haben, befolgen Sie die nachstehenden Schritte, um den Milvus-Pod zu stoppen und die Pulsar-V2-Bereitstellung zu löschen.</p>
+<h4 id="Delete-Pulsar-V2-using-Helm" class="common-anchor-header">Pulsar V2 mit Helm löschen</h4><p>Wenn Sie Milvus mit Hilfe des Milvus Helm-Diagramms installiert haben, befolgen Sie die nachstehenden Schritte, um den Milvus-Pod zu stoppen und die Pulsar V2-Bereitstellung zu löschen.</p>
 <ol>
 <li><p>Speichern Sie die aktuellen Milvus-Freigabewerte auf <code translate="no">values.yaml</code> für eine spätere Wiederherstellung.</p>
 <pre><code translate="no" class="language-bash">helm -n <span class="hljs-literal">default</span> <span class="hljs-keyword">get</span> values my-release -o yaml &gt; values.yaml​
@@ -296,7 +296,7 @@ milvus.milvus.io <span class="hljs-string">&quot;my-release&quot;</span> deleted
 <li><p>Für Helm-Benutzer</p>
 <p>Wenn Sie Milvus mit Hilfe des Milvus Helm Diagramms installiert haben, gehen Sie zu <a href="#For-Helm-User">Für Helm Benutzer</a>.</p></li>
 <li><p>Für Milvus Operator Benutzer</p>
-<p>Wenn Sie Milvus mit dem Milvus Operator installiert haben, gehen Sie zu <a href="#For-Milvus-Operator-User">Für Milvus Operator Benutzer</a>.</p></li>
+<p>Wenn Sie Milvus mit dem Milvus Operator installiert haben, gehen Sie zu <a href="#For-Milvus-Operator-User">Für Milvus Operator-Benutzer</a>.</p></li>
 </ul>
 <h4 id="Start-Pulsar-V3-and-using-Helm" class="common-anchor-header">Starten Sie Pulsar V3 und verwenden Sie Helm</h4><ol>
 <li><p>Bearbeiten Sie die im vorherigen Schritt gespeicherte <code translate="no">values.yaml</code>.</p>

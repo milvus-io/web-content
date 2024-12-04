@@ -42,9 +42,9 @@ summary: 全文検索とは、テキストデータセット中の特定の語�
     </button></h2><p>全文検索は、手作業による埋め込みを不要にすることで、テキストベースの検索プロセスを簡素化します。この機能は、次のようなワークフローで動作します。</p>
 <ol>
 <li><p><strong>テキスト入力</strong>：テキスト入力： 生のテキスト文書を挿入するか、クエリーテキストを提供します。</p></li>
-<li><p><strong>テキスト分析</strong>：Milvusはアナライザーを使って、入力テキストを検索可能な個々の用語にトークン化します。</p></li>
-<li><p><strong>関数処理</strong>：組み込み関数がトークン化された用語を受け取り、スパースベクトル表現に変換します。</p></li>
-<li><p><strong>コレクションストア</strong>：Milvusはこれらのスパース埋め込みをコレクションに保存し、効率的な検索を可能にする。</p></li>
+<li><p><strong>テキスト分析</strong>：Milvusはアナライザーを使用して、入力テキストを検索可能な個々の用語にトークン化します。 アナライザーの詳細については、<a href="/docs/ja/analyzer-overview.md">アナライザーの概要を</a>参照してください。</p></li>
+<li><p><strong>関数処理</strong>：組み込み関数はトークン化された用語を受け取り、スパースベクトル表現に変換します。</p></li>
+<li><p><strong>コレクションストア</strong>：Milvusは効率的な検索のために、これらのスパース埋め込みをコレクションに保存します。</p></li>
 <li><p><strong>BM25スコアリング</strong>：検索中、MilvusはBM25アルゴリズムを適用して保存された文書のスコアを計算し、クエリテキストとの関連性に基づいてマッチした結果をランク付けします。</p></li>
 </ol>
 <p>
@@ -82,8 +82,10 @@ summary: 全文検索とは、テキストデータセット中の特定の語�
 <div class="multipleCode">
    <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType, Function, FunctionType​
+
+client = MilvusClient(uri=<span class="hljs-string">&quot;http://localhost:19530&quot;</span>)
 ​
-schema = MilvusClient.create_schema()​
+schema = client.create_schema()​
 ​
 schema.add_field(field_name=<span class="hljs-string">&quot;id&quot;</span>, datatype=DataType.INT64, is_primary=<span class="hljs-literal">True</span>, auto_id=<span class="hljs-literal">True</span>)​
 schema.add_field(field_name=<span class="hljs-string">&quot;text&quot;</span>, datatype=DataType.VARCHAR, max_length=<span class="hljs-number">1000</span>, enable_analyzer=<span class="hljs-literal">True</span>)​
@@ -257,7 +259,7 @@ schema.addFunction(Function.builder()
 <h3 id="Configure-the-index" class="common-anchor-header">インデックスの構成</h3><p>必要なフィールドと組み込み関数でスキーマを定義した後、コレクションのインデックスを設定します。このプロセスを簡素化するために、<code translate="no">AUTOINDEX</code> を<code translate="no">index_type</code> として使用します。このオプションを使用すると、Milvusはデータの構造に基づいて最適なインデックスタイプを選択し、設定することができます。</p>
 <div class="multipleCode">
    <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
-<pre><code translate="no" class="language-python">index_params = <span class="hljs-title class_">MilvusClient</span>.<span class="hljs-title function_">prepare_index_params</span>()​
+<pre><code translate="no" class="language-python">index_params = client.<span class="hljs-title function_">prepare_index_params</span>()​
 ​
 index_params.<span class="hljs-title function_">add_index</span>(​
     field_name=<span class="hljs-string">&quot;sparse&quot;</span>,​
@@ -303,7 +305,7 @@ indexes.<span class="hljs-title function_">add</span>(<span class="hljs-title cl
 <h3 id="Create-the-collection​" class="common-anchor-header">コレクションの作成</h3><p>定義したスキーマとインデックスパラメータを使用してコレクションを作成します。</p>
 <div class="multipleCode">
    <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
-<pre><code translate="no" class="language-python"><span class="hljs-title class_">MilvusClient</span>.<span class="hljs-title function_">create_collection</span>(​
+<pre><code translate="no" class="language-python">client.<span class="hljs-title function_">create_collection</span>(​
     collection_name=<span class="hljs-string">&#x27;demo&#x27;</span>, ​
     schema=schema, ​
     index_params=index_params​
@@ -421,10 +423,10 @@ client.insert(InsertReq.builder()
 <div class="multipleCode">
    <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python">search_params = {​
-    <span class="hljs-string">&#x27;params&#x27;</span>: {<span class="hljs-string">&#x27;drop_ratio_search&#x27;</span>: 0.6},​
+    <span class="hljs-string">&#x27;params&#x27;</span>: {<span class="hljs-string">&#x27;drop_ratio_search&#x27;</span>: 0.2},​
 }​
 ​
-MilvusClient.search(​
+client.search(​
     collection_name=<span class="hljs-string">&#x27;demo&#x27;</span>, ​
     data=[<span class="hljs-string">&#x27;whats the focus of information retrieval?&#x27;</span>],​
     anns_field=<span class="hljs-string">&#x27;sparse&#x27;</span>,​
@@ -438,7 +440,7 @@ MilvusClient.search(​
 <span class="hljs-keyword">import</span> io.<span class="hljs-property">milvus</span>.<span class="hljs-property">v2</span>.<span class="hljs-property">service</span>.<span class="hljs-property">vector</span>.<span class="hljs-property">response</span>.<span class="hljs-property">SearchResp</span>;
 
 <span class="hljs-title class_">Map</span>&lt;<span class="hljs-title class_">String</span>,<span class="hljs-title class_">Object</span>&gt; searchParams = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;&gt;();
-searchParams.<span class="hljs-title function_">put</span>(<span class="hljs-string">&quot;drop_ratio_search&quot;</span>, <span class="hljs-number">0.6</span>);
+searchParams.<span class="hljs-title function_">put</span>(<span class="hljs-string">&quot;drop_ratio_search&quot;</span>, <span class="hljs-number">0.2</span>);
 <span class="hljs-title class_">SearchResp</span> searchResp = client.<span class="hljs-title function_">search</span>(<span class="hljs-title class_">SearchReq</span>.<span class="hljs-title function_">builder</span>()
         .<span class="hljs-title function_">collectionName</span>(<span class="hljs-string">&quot;demo&quot;</span>)
         .<span class="hljs-title function_">data</span>(<span class="hljs-title class_">Collections</span>.<span class="hljs-title function_">singletonList</span>(<span class="hljs-keyword">new</span> <span class="hljs-title class_">EmbeddedText</span>(<span class="hljs-string">&quot;whats the focus of information retrieval?&quot;</span>)))
@@ -453,7 +455,7 @@ searchParams.<span class="hljs-title function_">put</span>(<span class="hljs-str
     data: [<span class="hljs-string">&#x27;whats the focus of information retrieval?&#x27;</span>],
     anns_field: <span class="hljs-string">&#x27;sparse&#x27;</span>,
     limit: <span class="hljs-number">3</span>,
-    <span class="hljs-keyword">params</span>: {<span class="hljs-string">&#x27;drop_ratio_search&#x27;</span>: <span class="hljs-number">0.6</span>},
+    <span class="hljs-keyword">params</span>: {<span class="hljs-string">&#x27;drop_ratio_search&#x27;</span>: <span class="hljs-number">0.2</span>},
 )
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-curl">curl --request POST \
@@ -472,7 +474,7 @@ searchParams.<span class="hljs-title function_">put</span>(<span class="hljs-str
     ],
     &quot;searchParams&quot;:{
         &quot;params&quot;:{
-            &quot;drop_ratio_search&quot;:0.6
+            &quot;drop_ratio_search&quot;:0.2
         }
     }
 }&#x27;</span>

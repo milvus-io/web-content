@@ -58,11 +58,11 @@ title: Índice escalar
         ></path>
       </svg>
     </button></h2><p>Milvus pretende conseguir un bajo uso de memoria, una alta eficacia de filtrado y un tiempo de carga corto con sus algoritmos de indexación de campos escalares. Estos algoritmos se clasifican en dos tipos principales: <a href="#auto-indexing">autoindización</a> e <a href="#inverted-indexing">indización invertida</a>.</p>
-<h3 id="Auto-indexing" class="common-anchor-header">Autoíndice</h3><p>Milvus crea automáticamente un índice automático para un campo escalar basado en su tipo de datos, sin necesidad de intervención manual. La indexación automática es adecuada para consultas de coincidencia de prefijos y escenarios de recuperación frecuente.</p>
-<p>La siguiente tabla enumera los tipos de datos que admite Milvus y sus correspondientes algoritmos de autoíndice.</p>
+<h3 id="Auto-indexing" class="common-anchor-header">Indexación automática</h3><p>Milvus proporciona la opción <code translate="no">AUTOINDEX</code> para liberarle de tener que elegir manualmente un tipo de índice. Al llamar al método <code translate="no">create_index</code>, si no se especifica <code translate="no">index_type</code>, Milvus selecciona automáticamente el tipo de índice más adecuado en función del tipo de datos.</p>
+<p>La siguiente tabla enumera los tipos de datos que soporta Milvus y sus correspondientes algoritmos de indexación automática.</p>
 <table>
 <thead>
-<tr><th>Tipo de datos</th><th>Algoritmo de auto indexación</th></tr>
+<tr><th>Tipo de datos</th><th>Algoritmo de autoíndice</th></tr>
 </thead>
 <tbody>
 <tr><td>VARCHAR</td><td>Índice invertido</td></tr>
@@ -84,7 +84,7 @@ title: Índice escalar
 <p>Las ventajas de utilizar un índice invertido son especialmente evidentes en las siguientes operaciones:</p>
 <ul>
 <li><strong>Consultas puntuales</strong>: Por ejemplo, al buscar documentos que contengan la palabra <strong>Milvus</strong>, el proceso comienza comprobando si <strong>Milvus</strong> está presente en el diccionario de términos. Si no se encuentra, ningún documento contiene la palabra. Sin embargo, si se encuentra, se recupera la lista invertida asociada a <strong>Milvus</strong>, que indica los documentos que contienen la palabra. Este método es mucho más eficaz que una búsqueda por fuerza bruta en un millón de documentos, ya que el diccionario de términos ordenado reduce considerablemente la complejidad temporal de la búsqueda de la palabra <strong>Milvus</strong>.</li>
-<li><strong>Consulta por rango</strong>: La eficacia de las consultas de rango, como la búsqueda de documentos con palabras alfabéticamente mayores que <strong>muy</strong>, también se ve mejorada por el diccionario de términos ordenados. Este enfoque es más eficaz que una búsqueda por fuerza bruta, ya que proporciona resultados más rápidos y precisos.</li>
+<li><strong>Consulta por rango</strong>: La eficacia de las consultas de rango, como la búsqueda de documentos con palabras alfabéticamente mayores que <strong>muy</strong>, también se ve mejorada por el diccionario de términos ordenados. Este enfoque es más eficaz que una búsqueda de fuerza bruta, ya que proporciona resultados más rápidos y precisos.</li>
 </ul>
 <h3 id="Test-results" class="common-anchor-header">Resultados de las pruebas</h3><p>Para demostrar las mejoras de rendimiento proporcionadas por los índices escalares en Milvus, se realizó un experimento comparando el rendimiento de varias expresiones utilizando la indexación invertida y la búsqueda de fuerza bruta en datos brutos.</p>
 <p>El experimento consistió en probar varias expresiones en dos condiciones: con un índice invertido y con una búsqueda de fuerza bruta. Para garantizar la equidad, se mantuvo la misma distribución de datos en todas las pruebas, utilizando la misma colección cada vez. Antes de cada prueba, se liberó la colección y se eliminó y reconstruyó el índice. Además, se realizó una consulta en caliente antes de cada prueba para minimizar el impacto de los datos fríos y calientes, y cada consulta se ejecutó varias veces para garantizar la precisión.</p>

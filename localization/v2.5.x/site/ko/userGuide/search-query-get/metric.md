@@ -21,7 +21,7 @@ title: 메트릭 유형
         ></path>
       </svg>
     </button></h1><p>유사성 메트릭은 벡터 간의 유사성을 측정하는 데 사용됩니다. 적절한 거리 메트릭을 선택하면 분류 및 클러스터링 성능을 크게 향상시키는 데 도움이 됩니다.</p>
-<p>현재 Milvus는 다음과 같은 유형의 유사도 메트릭을 지원합니다: 유클리드 거리 (<code translate="no">L2</code>), 내부 곱 (<code translate="no">IP</code>), 코사인 유사도 (<code translate="no">COSINE</code>), <code translate="no">JACCARD</code>, <code translate="no">HAMMING</code>, <code translate="no">BM25</code> (특히 희소 벡터의 전체 텍스트 검색을 위해 설계됨).</p>
+<p>현재 Milvus는 다음과 같은 유형의 유사도 메트릭을 지원합니다: 유클리드 거리 (<code translate="no">L2</code>), 내적 곱 (<code translate="no">IP</code>), 코사인 유사도 (<code translate="no">COSINE</code>), <code translate="no">JACCARD</code>, <code translate="no">HAMMING</code>, <code translate="no">BM25</code> (특히 희소 벡터의 전체 텍스트 검색을 위해 설계됨).</p>
 <p>아래 표에는 다양한 필드 유형과 해당 메트릭 유형 간의 매핑이 요약되어 있습니다.</p>
 <table data-block-token="LHu5dKCHro3mnTx6PsmckEsinQd"><thead><tr><th data-block-token="JOJvdTK9MouhT8x7tfGc59NGnfg" colspan="1" rowspan="1"><p data-block-token="TS9tdnaJaoG4kfx96cfcqXINnnc">필드 유형</p>
 </th><th data-block-token="Iy8ZdPGpIo6nfwxiz4RcSuwanwf" colspan="1" rowspan="1"><p data-block-token="SKIAdxDFJo9oOyxg7iTcmfGAnz1">차원 범위</p>
@@ -236,13 +236,13 @@ title: 메트릭 유형
 <ul>
 <li><p><code translate="no">​Q</code>: 사용자가 제공한 쿼리 텍스트입니다.</p></li>
 <li><p><code translate="no">​D</code>: 평가 중인 문서입니다.</p></li>
-<li><p><code translate="no">​TF(qi​,D)</code>: 용어 빈도, 문서 D에서 용어 qi가 얼마나 자주 나타나는지 나타냅니다.</p></li>
+<li><p><code translate="no">​TF(qi​,D)</code>: 문서에서 <code translate="no">​qi</code> 용어가 얼마나 자주 나타나는지 나타내는 용어 빈도 <code translate="no">​D</code>.</p></li>
 <li><p><code translate="no">​IDF(qi​)</code>: 역 문서 빈도, 다음과 같이 계산됩니다.</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/idf.png" alt="IDF formula" class="doc-image" id="idf-formula" />
    </span> <span class="img-wrapper"> <span>IDF 공식</span> </span></p>
-<p>여기서 <code translate="no">​N</code> 은 말뭉치의 총 문서 수이고 <code translate="no">​n(qi​)</code> 은 용어 qi가 포함된 문서 수입니다.</p></li>
+<p>여기서 <code translate="no">​N</code> 은 말뭉치의 총 문서 수이고 <code translate="no">​n(qi​)</code> 은 용어 qi 가 포함된 문서 수입니다.</p></li>
 <li><p><code translate="no">​∣D∣</code>: 문서 길이 <code translate="no">​D</code> (총 용어 수).</p></li>
 <li><p><code translate="no">​avgdl</code>: 코퍼스에 있는 모든 문서의 평균 길이.</p></li>
 <li><p><code translate="no">​k1​</code>: 용어 빈도가 점수에 미치는 영향을 제어합니다. 값이 높을수록 용어 빈도의 중요도가 높아집니다. 일반적인 범위는 [1.2, 2.0]이며, Milvus는 [0, 3]의 범위를 허용합니다.</p></li>

@@ -18,7 +18,7 @@ title: Häufig gestellte Fragen zum Betrieb
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><h4 id="What-if-I-failed-to-pull-the-Milvus-Docker-image-from-Docker-Hub" class="common-anchor-header">Was ist, wenn ich das Milvus-Docker-Abbild nicht von Docker Hub ziehen konnte?</h4><p>Wenn Sie das Milvus-Docker-Abbild nicht von Docker Hub abrufen konnten, versuchen Sie, andere Registry-Mirrors hinzuzufügen.</p>
+    </button></h1><h4 id="What-if-I-failed-to-pull-the-Milvus-Docker-image-from-Docker-Hub" class="common-anchor-header">Was ist, wenn ich das Milvus-Docker-Abbild nicht von Docker Hub abrufen konnte?</h4><p>Wenn Sie das Milvus-Docker-Abbild nicht von Docker Hub abrufen konnten, versuchen Sie, andere Registry-Mirrors hinzuzufügen.</p>
 <p>Benutzer aus Festlandchina können die URL "https://registry.docker-cn.com" zum Array registry-mirrors in <strong>/etc.docker/daemon.json</strong> hinzufügen.</p>
 <pre><code translate="no">{
   <span class="hljs-string">&quot;registry-mirrors&quot;</span>: [<span class="hljs-string">&quot;https://registry.docker-cn.com&quot;</span>]
@@ -97,8 +97,11 @@ title: Häufig gestellte Fragen zum Betrieb
 <span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-built_in">len</span>(<span class="hljs-built_in">bytes</span>(s, <span class="hljs-string">&quot;utf-8&quot;</span>)) <span class="hljs-comment"># Size in bytes of s, max-length in Milvus.</span>
 <span class="hljs-number">18</span>
 <button class="copy-code-btn"></button></code></pre>
+<h4 id="pymilvusexceptionsConnectionConfigException-ConnectionConfigException-code1-messageIllegal-uri-exampledb-expected-form-httpsuserpwdexamplecom12345-What-causes-this-and-how-can-it-be-solved" class="common-anchor-header"><code translate="no">pymilvus.exceptions.ConnectionConfigException: &lt;ConnectionConfigException: (code=1, message=Illegal uri: [example.db], expected form 'https://user:pwd@example.com:12345')&gt;</code>. Was ist die Ursache für diesen Fehler und wie kann er behoben werden?</h4><p>Dieser Fehler deutet darauf hin, dass Sie versuchen, eine Verbindung zu Milvus Lite herzustellen, indem Sie eine frühere Version von pymilvus verwenden, die dies nicht unterstützt. Um diesen Fehler zu beheben, aktualisieren Sie Ihre pymilvus-Installation auf mindestens Version 2.4.2. Diese Version unterstützt die Verbindung zu Milvus Lite. Verwenden Sie zum Upgrade den folgenden Befehl:</p>
+<pre><code translate="no" class="language-shell">pip install pymilvus&gt;=2.4.2
+<button class="copy-code-btn"></button></code></pre>
 <h4 id="Still-have-questions" class="common-anchor-header">Haben Sie noch Fragen?</h4><p>Sie können:</p>
 <ul>
-<li>Schauen Sie sich <a href="https://github.com/milvus-io/milvus/issues">Milvus</a> auf GitHub an. Sie können Fragen stellen, Ideen austauschen und anderen helfen.</li>
+<li>Schauen Sie sich <a href="https://github.com/milvus-io/milvus/issues">Milvus</a> auf GitHub an. Hier können Sie Fragen stellen, Ideen austauschen und anderen helfen.</li>
 <li>Treten Sie unserem <a href="https://discuss.milvus.io/">Milvus Forum</a> oder <a href="https://join.slack.com/t/milvusio/shared_invite/enQtNzY1OTQ0NDI3NjMzLWNmYmM1NmNjOTQ5MGI5NDhhYmRhMGU5M2NhNzhhMDMzY2MzNDdlYjM5ODQ5MmE3ODFlYzU3YjJkNmVlNDQ2ZTk">Slack Channel</a> bei, um Unterstützung zu erhalten und sich mit unserer Open-Source-Community auszutauschen.</li>
 </ul>

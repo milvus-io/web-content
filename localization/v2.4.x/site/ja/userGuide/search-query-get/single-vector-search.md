@@ -2,9 +2,9 @@
 id: single-vector-search.md
 order: 1
 summary: この記事では、Milvusコレクション内のベクターを単一のクエリーベクターを使って検索する方法について説明します。
-title: 単一ベクトル検索
+title: Single-Vector Search
 ---
-<h1 id="Single-Vector-Search" class="common-anchor-header">単一ベクトル検索<button data-href="#Single-Vector-Search" class="anchor-icon" translate="no">
+<h1 id="Single-Vector-Search" class="common-anchor-header">Single-Vector Search<button data-href="#Single-Vector-Search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -19,14 +19,14 @@ title: 単一ベクトル検索
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>データを挿入したら、次のステップはMilvusでコレクションの類似性検索を行うことです。</p>
-<p>Milvusでは、コレクション内のベクトルフィールドの数に応じて2種類の検索を行うことができます：</p>
+    </button></h1><p>Once you have inserted your data, the next step is to perform similarity searches on your collection in Milvus.</p>
+<p>Milvus allows you to conduct two types of searches, depending on the number of vector fields in your collection:</p>
 <ul>
-<li><strong>単一ベクトル検索</strong>：コレクションにベクトルフィールドが1つしかない場合は <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Vector/search.md"><code translate="no">search()</code></a>メソッドを使用します。このメソッドは、クエリ・ベクタをコレクション内の既存のベクタと比較し、最も近い一致の ID をそれらの間の距離とともに返します。オプションで、結果のベクトル値とメタデータを返すこともできます。</li>
-<li><strong>ハイブリッド検索</strong>：2つ以上のベクトルフィールドを持つコレクションには <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/ORM/Collection/hybrid_search.md"><code translate="no">hybrid_search()</code></a>メソッドを使用します。このメソッドは、複数の近似最近傍（ANN）検索要求を実行し、結果を組み合わせて、再ランク付け後に最も関連性の高いマッチを返します。</li>
+<li><strong>Single-vector search</strong>: If your collection has only one vector field, use the <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Vector/search.md"><code translate="no">search()</code></a> method to find the most similar entities. This method compares your query vector with the existing vectors in your collection and returns the IDs of the closest matches along with the distances between them. Optionally, it can also return the vector values and metadata of the results.</li>
+<li><strong>Hybrid search</strong>: For collections with two or more vector fields, use the <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/ORM/Collection/hybrid_search.md"><code translate="no">hybrid_search()</code></a> method. This method performs multiple Approximate Nearest Neighbor (ANN) search requests and combines the results to return the most relevant matches after reranking.</li>
 </ul>
-<p>このガイドでは、Milvusで単一ベクトル検索を実行する方法を中心に説明します。ハイブリッド検索の詳細については、<a href="https://milvus.io/docs/multi-vector-search.md">ハイブリッド検索を</a>参照してください。</p>
-<h2 id="Overview" class="common-anchor-header">概要<button data-href="#Overview" class="anchor-icon" translate="no">
+<p>This guide focuses on how to perform a single-vector search in Milvus. For details on hybrid search, refer to <a href="https://milvus.io/docs/multi-vector-search.md">Hybrid search</a>.</p>
+<h2 id="Overview" class="common-anchor-header">Overview<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -41,14 +41,14 @@ title: 単一ベクトル検索
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>様々な要件に対応するため、様々な検索タイプがあります：</p>
+    </button></h2><p>There are a variety of search types to meet different requirements:</p>
 <ul>
-<li><p><a href="https://milvus.io/docs/single-vector-search.md#Basic-search">基本検索</a>：基本検索：単一ベクトル検索、一括ベクトル検索、パーティション検索、出力フィールドを指定した検索。</p></li>
-<li><p><a href="https://milvus.io/docs/single-vector-search.md#Filtered-search">フィルタリング検索</a>：スカラー・フィールドに基づくフィルタリング基準を適用し、検索結果を絞り込む。</p></li>
-<li><p><a href="https://milvus.io/docs/single-vector-search.md#Range-search">範囲検索</a>：クエリ・ベクトルから特定の距離範囲内にあるベクトルを検索します。</p></li>
-<li><p><a href="https://milvus.io/docs/single-vector-search.md#Grouping-search">グルーピング検索</a>：特定のフィールドに基づいて検索結果をグループ化し、結果の多様性を確保します。</p></li>
+<li><p><a href="https://milvus.io/docs/single-vector-search.md#Basic-search">Basic search</a>: Includes single-vector search, bulk-vector search, partition search, and search with specified output fields.</p></li>
+<li><p><a href="https://milvus.io/docs/single-vector-search.md#Filtered-search">Filtered search</a>: Applies filtering criteria based on scalar fields to refine search results.</p></li>
+<li><p><a href="https://milvus.io/docs/single-vector-search.md#Range-search">Range search</a>: Finds vectors within a specific distance range from the query vector.</p></li>
+<li><p><a href="https://milvus.io/docs/single-vector-search.md#Grouping-search">Grouping search</a>: Groups search results based on a specific field to ensure diversity in the results.</p></li>
 </ul>
-<h2 id="Preparations" class="common-anchor-header">準備<button data-href="#Preparations" class="anchor-icon" translate="no">
+<h2 id="Preparations" class="common-anchor-header">Preparations<button data-href="#Preparations" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -63,9 +63,12 @@ title: 単一ベクトル検索
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>以下のコードスニペットは、Milvusへの接続を確立し、コレクションを素早くセットアップするために既存のコードを再利用しています。</p>
+    </button></h2><p>The code snippet below repurposes the existing code to establish a connection to Milvus and quickly set up a collection.</p>
 <div class="multipleCode">
-   <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a></div>
+    <a href="#python">Python </a>
+    <a href="#java">Java</a>
+    <a href="#javascript">Node.js</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
 <span class="hljs-keyword">import</span> random
 
@@ -189,20 +192,17 @@ res = client.insert(
 <span class="hljs-comment">#     ]</span>
 <span class="hljs-comment"># }</span>
 <button class="copy-code-btn"></button></code></pre>
-<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> java.util.ArrayList;
-<span class="hljs-keyword">import</span> java.util.Arrays;
-<span class="hljs-keyword">import</span> java.util.List;
-<span class="hljs-keyword">import</span> java.util.Map;
-<span class="hljs-keyword">import</span> java.util.Random;
-
-<span class="hljs-keyword">import</span> com.alibaba.fastjson.JSONObject;
-
-<span class="hljs-keyword">import</span> io.milvus.v2.client.ConnectConfig;
+<pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> com.google.gson.Gson;
+<span class="hljs-keyword">import</span> com.google.gson.JsonObject;
 <span class="hljs-keyword">import</span> io.milvus.v2.client.MilvusClientV2;
+<span class="hljs-keyword">import</span> io.milvus.v2.client.ConnectConfig;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.CreateCollectionReq;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.GetLoadStateReq;
+<span class="hljs-keyword">import</span> io.milvus.v2.service.partition.request.CreatePartitionReq;
 <span class="hljs-keyword">import</span> io.milvus.v2.service.vector.request.InsertReq;
-<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.response.InsertResp; 
+<span class="hljs-keyword">import</span> io.milvus.v2.service.vector.response.InsertResp;
+
+<span class="hljs-keyword">import</span> java.util.*;
 
 <span class="hljs-type">String</span> <span class="hljs-variable">CLUSTER_ENDPOINT</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;http://localhost:19530&quot;</span>;
 
@@ -215,16 +215,16 @@ res = client.insert(
 
 <span class="hljs-comment">// 2. Create a collection in quick setup mode</span>
 <span class="hljs-type">CreateCollectionReq</span> <span class="hljs-variable">quickSetupReq</span> <span class="hljs-operator">=</span> CreateCollectionReq.builder()
-    .collectionName(<span class="hljs-string">&quot;quick_setup&quot;</span>)
-    .dimension(<span class="hljs-number">5</span>)
-    .metricType(<span class="hljs-string">&quot;IP&quot;</span>)
-    .build();
+        .collectionName(<span class="hljs-string">&quot;quick_setup&quot;</span>)
+        .dimension(<span class="hljs-number">5</span>)
+        .metricType(<span class="hljs-string">&quot;IP&quot;</span>)
+        .build();
 
 client.createCollection(quickSetupReq);
 
 <span class="hljs-type">GetLoadStateReq</span> <span class="hljs-variable">loadStateReq</span> <span class="hljs-operator">=</span> GetLoadStateReq.builder()
-    .collectionName(<span class="hljs-string">&quot;quick_setup&quot;</span>)
-    .build();
+        .collectionName(<span class="hljs-string">&quot;quick_setup&quot;</span>)
+        .build();
 
 <span class="hljs-type">boolean</span> <span class="hljs-variable">state</span> <span class="hljs-operator">=</span> client.getLoadState(loadStateReq);
 
@@ -235,42 +235,42 @@ System.out.println(state);
 
 <span class="hljs-comment">// 3. Insert randomly generated vectors into the collection</span>
 List&lt;String&gt; colors = Arrays.asList(<span class="hljs-string">&quot;green&quot;</span>, <span class="hljs-string">&quot;blue&quot;</span>, <span class="hljs-string">&quot;yellow&quot;</span>, <span class="hljs-string">&quot;red&quot;</span>, <span class="hljs-string">&quot;black&quot;</span>, <span class="hljs-string">&quot;white&quot;</span>, <span class="hljs-string">&quot;purple&quot;</span>, <span class="hljs-string">&quot;pink&quot;</span>, <span class="hljs-string">&quot;orange&quot;</span>, <span class="hljs-string">&quot;brown&quot;</span>, <span class="hljs-string">&quot;grey&quot;</span>);
-List&lt;JSONObject&gt; data = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();
-
+List&lt;JsonObject&gt; data = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();
+<span class="hljs-type">Gson</span> <span class="hljs-variable">gson</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Gson</span>();
 <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i=<span class="hljs-number">0</span>; i&lt;<span class="hljs-number">1000</span>; i++) {
     <span class="hljs-type">Random</span> <span class="hljs-variable">rand</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Random</span>();
     <span class="hljs-type">String</span> <span class="hljs-variable">current_color</span> <span class="hljs-operator">=</span> colors.get(rand.nextInt(colors.size()-<span class="hljs-number">1</span>));
-    <span class="hljs-type">JSONObject</span> <span class="hljs-variable">row</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">JSONObject</span>();
-    row.put(<span class="hljs-string">&quot;id&quot;</span>, Long.valueOf(i));
-    row.put(<span class="hljs-string">&quot;vector&quot;</span>, Arrays.asList(rand.nextFloat(), rand.nextFloat(), rand.nextFloat(), rand.nextFloat(), rand.nextFloat()));
-    row.put(<span class="hljs-string">&quot;color_tag&quot;</span>, current_color + <span class="hljs-string">&quot;_&quot;</span> + String.valueOf(rand.nextInt(<span class="hljs-number">8999</span>) + <span class="hljs-number">1000</span>));
+    <span class="hljs-type">JsonObject</span> <span class="hljs-variable">row</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">JsonObject</span>();
+    row.addProperty(<span class="hljs-string">&quot;id&quot;</span>, (<span class="hljs-type">long</span>) i);
+    row.add(<span class="hljs-string">&quot;vector&quot;</span>, gson.toJsonTree(Arrays.asList(rand.nextFloat(), rand.nextFloat(), rand.nextFloat(), rand.nextFloat(), rand.nextFloat())));
+    row.addProperty(<span class="hljs-string">&quot;color_tag&quot;</span>, current_color + <span class="hljs-string">&quot;_&quot;</span> + String.valueOf(rand.nextInt(<span class="hljs-number">8999</span>) + <span class="hljs-number">1000</span>));
     data.add(row);
 }
 
 <span class="hljs-type">InsertReq</span> <span class="hljs-variable">insertReq</span> <span class="hljs-operator">=</span> InsertReq.builder()
-    .collectionName(<span class="hljs-string">&quot;quick_setup&quot;</span>)
-    .data(data)
-    .build();
+        .collectionName(<span class="hljs-string">&quot;quick_setup&quot;</span>)
+        .data(data)
+        .build();
 
 <span class="hljs-type">InsertResp</span> <span class="hljs-variable">insertResp</span> <span class="hljs-operator">=</span> client.insert(insertReq);
 
-System.out.println(JSONObject.toJSON(insertResp));
+System.out.println(insertResp.getInsertCnt());
 
 <span class="hljs-comment">// Output:</span>
-<span class="hljs-comment">// {&quot;insertCnt&quot;: 1000}</span>
+<span class="hljs-comment">// 1000</span>
 
 <span class="hljs-comment">// 6.1. Create a partition</span>
 <span class="hljs-type">CreatePartitionReq</span> <span class="hljs-variable">partitionReq</span> <span class="hljs-operator">=</span> CreatePartitionReq.builder()
-    .collectionName(<span class="hljs-string">&quot;quick_setup&quot;</span>)
-    .partitionName(<span class="hljs-string">&quot;red&quot;</span>)
-    .build();
+        .collectionName(<span class="hljs-string">&quot;quick_setup&quot;</span>)
+        .partitionName(<span class="hljs-string">&quot;red&quot;</span>)
+        .build();
 
 client.createPartition(partitionReq);
 
 partitionReq = CreatePartitionReq.builder()
-    .collectionName(<span class="hljs-string">&quot;quick_setup&quot;</span>)
-    .partitionName(<span class="hljs-string">&quot;blue&quot;</span>)
-    .build();
+        .collectionName(<span class="hljs-string">&quot;quick_setup&quot;</span>)
+        .partitionName(<span class="hljs-string">&quot;blue&quot;</span>)
+        .build();
 
 client.createPartition(partitionReq);
 
@@ -280,52 +280,52 @@ data = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Arr
 <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i=<span class="hljs-number">1000</span>; i&lt;<span class="hljs-number">1500</span>; i++) {
     <span class="hljs-type">Random</span> <span class="hljs-variable">rand</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Random</span>();
     <span class="hljs-type">String</span> <span class="hljs-variable">current_color</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;red&quot;</span>;
-    <span class="hljs-type">JSONObject</span> <span class="hljs-variable">row</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">JSONObject</span>();
-    row.put(<span class="hljs-string">&quot;id&quot;</span>, Long.valueOf(i));
-    row.put(<span class="hljs-string">&quot;vector&quot;</span>, Arrays.asList(rand.nextFloat(), rand.nextFloat(), rand.nextFloat(), rand.nextFloat(), rand.nextFloat()));
-    row.put(<span class="hljs-string">&quot;color&quot;</span>, current_color);
-    row.put(<span class="hljs-string">&quot;color_tag&quot;</span>, current_color + <span class="hljs-string">&quot;_&quot;</span> + String.valueOf(rand.nextInt(<span class="hljs-number">8999</span>) + <span class="hljs-number">1000</span>));
+    <span class="hljs-type">JsonObject</span> <span class="hljs-variable">row</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">JsonObject</span>();
+    row.addProperty(<span class="hljs-string">&quot;id&quot;</span>, (<span class="hljs-type">long</span>) i);
+    row.add(<span class="hljs-string">&quot;vector&quot;</span>, gson.toJsonTree(Arrays.asList(rand.nextFloat(), rand.nextFloat(), rand.nextFloat(), rand.nextFloat(), rand.nextFloat())));
+    row.addProperty(<span class="hljs-string">&quot;color&quot;</span>, current_color);
+    row.addProperty(<span class="hljs-string">&quot;color_tag&quot;</span>, current_color + <span class="hljs-string">&quot;_&quot;</span> + String.valueOf(rand.nextInt(<span class="hljs-number">8999</span>) + <span class="hljs-number">1000</span>));
     data.add(row);
-}     
+}
 
 insertReq = InsertReq.builder()
-    .collectionName(<span class="hljs-string">&quot;quick_setup&quot;</span>)
-    .data(data)
-    .partitionName(<span class="hljs-string">&quot;red&quot;</span>)
-    .build();
+        .collectionName(<span class="hljs-string">&quot;quick_setup&quot;</span>)
+        .data(data)
+        .partitionName(<span class="hljs-string">&quot;red&quot;</span>)
+        .build();
 
 insertResp = client.insert(insertReq);
 
-System.out.println(JSONObject.toJSON(insertResp));
+System.out.println(insertResp.getInsertCnt());
 
 <span class="hljs-comment">// Output:</span>
-<span class="hljs-comment">// {&quot;insertCnt&quot;: 500}</span>
+<span class="hljs-comment">// 500</span>
 
 data = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;&gt;();
 
 <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i=<span class="hljs-number">1500</span>; i&lt;<span class="hljs-number">2000</span>; i++) {
     <span class="hljs-type">Random</span> <span class="hljs-variable">rand</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Random</span>();
     <span class="hljs-type">String</span> <span class="hljs-variable">current_color</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;blue&quot;</span>;
-    <span class="hljs-type">JSONObject</span> <span class="hljs-variable">row</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">JSONObject</span>();
-    row.put(<span class="hljs-string">&quot;id&quot;</span>, Long.valueOf(i));
-    row.put(<span class="hljs-string">&quot;vector&quot;</span>, Arrays.asList(rand.nextFloat(), rand.nextFloat(), rand.nextFloat(), rand.nextFloat(), rand.nextFloat()));
-    row.put(<span class="hljs-string">&quot;color&quot;</span>, current_color);
-    row.put(<span class="hljs-string">&quot;color_tag&quot;</span>, current_color + <span class="hljs-string">&quot;_&quot;</span> + String.valueOf(rand.nextInt(<span class="hljs-number">8999</span>) + <span class="hljs-number">1000</span>));
+    <span class="hljs-type">JsonObject</span> <span class="hljs-variable">row</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">JsonObject</span>();
+    row.addProperty(<span class="hljs-string">&quot;id&quot;</span>, (<span class="hljs-type">long</span>) i);
+    row.add(<span class="hljs-string">&quot;vector&quot;</span>, gson.toJsonTree(Arrays.asList(rand.nextFloat(), rand.nextFloat(), rand.nextFloat(), rand.nextFloat(), rand.nextFloat())));
+    row.addProperty(<span class="hljs-string">&quot;color&quot;</span>, current_color);
+    row.addProperty(<span class="hljs-string">&quot;color_tag&quot;</span>, current_color + <span class="hljs-string">&quot;_&quot;</span> + String.valueOf(rand.nextInt(<span class="hljs-number">8999</span>) + <span class="hljs-number">1000</span>));
     data.add(row);
 }
 
 insertReq = InsertReq.builder()
-    .collectionName(<span class="hljs-string">&quot;quick_setup&quot;</span>)
-    .data(data)
-    .partitionName(<span class="hljs-string">&quot;blue&quot;</span>)
-    .build();
+        .collectionName(<span class="hljs-string">&quot;quick_setup&quot;</span>)
+        .data(data)
+        .partitionName(<span class="hljs-string">&quot;blue&quot;</span>)
+        .build();
 
 insertResp = client.insert(insertReq);
 
-System.out.println(JSONObject.toJSON(insertResp));
+System.out.println(insertResp.getInsertCnt());
 
 <span class="hljs-comment">// Output:</span>
-<span class="hljs-comment">// {&quot;insertCnt&quot;: 500}</span>
+<span class="hljs-comment">// 500</span>
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> { <span class="hljs-title class_">MilvusClient</span>, <span class="hljs-title class_">DataType</span>, sleep } = <span class="hljs-built_in">require</span>(<span class="hljs-string">&quot;@zilliz/milvus2-sdk-node&quot;</span>)
 
@@ -425,7 +425,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 <span class="hljs-comment">// 500</span>
 <span class="hljs-comment">// </span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Basic-search" class="common-anchor-header">基本的な検索<button data-href="#Basic-search" class="anchor-icon" translate="no">
+<h2 id="Basic-search" class="common-anchor-header">Basic search<button data-href="#Basic-search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -440,13 +440,16 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><code translate="no">search</code> リクエストを送信する際、クエリの埋め込みを表す1つ以上のベクトル値と、返す結果の数を示す<code translate="no">limit</code> 値を指定することができます。</p>
-<p>データとクエリーベクトルによっては、<code translate="no">limit</code> より少ない結果しか得られないかもしれません。これは、<code translate="no">limit</code> がクエリにマッチする可能性のあるベクトルの数よりも大きい場合に起こります。</p>
-<h3 id="Single-vector-search" class="common-anchor-header">単一ベクトル検索</h3><p>単一ベクトル検索はMilvusの<code translate="no">search</code> 操作の中で最も単純なもので、与えられたクエリーベクトルに最も類似したベクトルを検索するように設計されています。</p>
-<p>単一ベクトル検索を実行するには、ターゲットコレクション名、クエリベクトル、希望する結果数 (<code translate="no">limit</code>) を指定します。この操作は、最も類似したベクトル、そのID、クエリ・ベクトルからの距離からなる結果セットを返します。</p>
-<p>以下は、クエリ・ベクトルに最も似ている上位 5 つのエンティティを検索する例です：</p>
+    </button></h2><p>When sending a <code translate="no">search</code> request, you can provide one or more vector values representing your query embeddings and a <code translate="no">limit</code> value indicating the number of results to return.</p>
+<p>Depending on your data and your query vector, you may get fewer than <code translate="no">limit</code> results. This happens when <code translate="no">limit</code> is larger than the number of possible matching vectors for your query.</p>
+<h3 id="Single-vector-search" class="common-anchor-header">Single-vector search</h3><p>Single-vector search is the simplest form of <code translate="no">search</code> operations in Milvus, designed to find the most similar vectors to a given query vector.</p>
+<p>To perform a single-vector search, specify the target collection name, the query vector, and the desired number of results (<code translate="no">limit</code>). This operation returns a result set comprising the most similar vectors, their IDs, and distances from the query vector.</p>
+<p>Here is an example of searching for the top 5 entities that are most similar to the query vector:</p>
 <div class="multipleCode">
-   <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a></div>
+    <a href="#python">Python </a>
+    <a href="#java">Java</a>
+    <a href="#javascript">Node.js</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Single vector search</span>
 res = client.search(
     collection_name=<span class="hljs-string">&quot;quick_setup&quot;</span>, <span class="hljs-comment"># Replace with the actual name of your collection</span>
@@ -487,76 +490,79 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 <table class="language-python">
   <thead>
     <tr>
-      <th>パラメータ</th>
-      <th>説明</th>
+      <th>Parameter</th>
+      <th>Description</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <td><code translate="no">collection_name</code></td>
-      <td>既存のコレクションの名前。</td>
+      <td>The name of an existing collection.</td>
     </tr>
     <tr>
       <td><code translate="no">data</code></td>
-      <td><br/>Milvusは指定されたベクトル埋め込みに最も類似したベクトル埋め込みを検索する。</td>
+      <td>A list of vector embeddings.<br/>Milvus searches for the most similar vector embeddings to the specified ones.</td>
     </tr>
     <tr>
       <td><code translate="no">limit</code></td>
-      <td><br/>このパラメータと<strong>paramの</strong> <strong>offsetを組み合わせて</strong>使用すると、ページ分割が可能になる。<br/>この値と<strong>paramの</strong> <strong>offsetの</strong>和は、16,384未満でなければならない。</td>
+      <td>The total number of entities to return.<br/>You can use this parameter in combination with <strong>offset</strong> in <strong>param</strong> to enable pagination.<br/>The sum of this value and <strong>offset</strong> in <strong>param</strong> should be less than 16,384.</td>
     </tr>
     <tr>
       <td><code translate="no">search_params</code></td>
-      <td>この操作に固有のパラメータ設定。<br/><ul><li><code translate="no">metric_type</code>:この操作に適用されるメトリックタイプ。これは、上記で指定したベクトル・フィールドのインデックスを作成するときに使用するものと同じでなければなりません。指定可能な値は、<strong>L2</strong>、<strong>IP</strong>、<strong>COSINE</strong>、<strong>JACCARD</strong>、<strong>HAMMING</strong> です。</li><li><code translate="no">params</code>:追加パラメータ。詳細は<a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Vector/search.md">search()</a> を参照。</li></ul></td>
+      <td>The parameter settings specific to this operation.<br/><ul><li><code translate="no">metric_type</code>: The metric type applied to this operation. This should be the same as the one used when you index the vector field specified above. Possible values are <strong>L2</strong>, <strong>IP</strong>, <strong>COSINE</strong>, <strong>JACCARD</strong>, <strong>HAMMING</strong>.</li><li><code translate="no">params</code>: Additional parameters. For details, refer to <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Vector/search.md">search()</a>.</li></ul></td>
     </tr>
   </tbody>
 </table>
 <table class="language-java">
   <thead>
     <tr>
-      <th>パラメータ</th>
-      <th>説明</th>
+      <th>Parameter</th>
+      <th>Description</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <td><code translate="no">collectionName</code></td>
-      <td>既存のコレクションの名前。</td>
+      <td>The name of an existing collection.</td>
     </tr>
     <tr>
       <td><code translate="no">data</code></td>
-      <td><br/>Milvusは指定されたものに最も類似したベクトル埋め込みを検索する。</td>
+      <td>A list of vector embeddings.<br/>Milvus searches for the most similar vector embeddings to the specified ones.</td>
     </tr>
     <tr>
       <td><code translate="no">topK</code></td>
-      <td>検索結果で返すレコード数。このパラメータは<strong>limit</strong>パラメータと同じ構文を使用するので、どちらか一方だけを設定する必要があります。<br/>このパラメータは<strong>paramの</strong> <strong>offsetと組み合わせて</strong>使用することで、ページ分割を有効にすることができます。<br/>この値と<strong>paramの</strong> <strong>offsetの</strong>合計は16,384未満でなければなりません。</td>
+      <td>The number of records to return in the search result. This parameter uses the same syntax as the <strong>limit</strong> parameter, so you should only set one of them.<br/>You can use this parameter in combination with <strong>offset</strong> in <strong>param</strong> to enable pagination.<br/>The sum of this value and <strong>offset</strong> in <strong>param</strong> should be less than 16,384.</td>
     </tr>
   </tbody>
 </table>
 <table class="language-javascript">
   <thead>
     <tr>
-      <th>パラメータ</th>
-      <th>説明</th>
+      <th>Parameter</th>
+      <th>Description</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <td><code translate="no">collection_name</code></td>
-      <td>既存のコレクションの名前。</td>
+      <td>The name of an existing collection.</td>
     </tr>
     <tr>
       <td><code translate="no">data</code></td>
-      <td><br/>Milvusは指定されたベクトル埋め込みに最も類似したベクトル埋め込みを検索する。</td>
+      <td>A list of vector embeddings.<br/>Milvus searches for the most similar vector embeddings to the specified ones.</td>
     </tr>
     <tr>
       <td><code translate="no">limit</code></td>
-      <td><br/>このパラメータと<strong>paramの</strong> <strong>offsetを組み合わせて</strong>使用すると、ページ分割が可能になります。<br/>この値と<strong>paramの</strong> <strong>offsetの</strong>和は、16,384未満でなければなりません。</td>
+      <td>The total number of entities to return.<br/>You can use this parameter in combination with <strong>offset</strong> in <strong>param</strong> to enable pagination.<br/>The sum of this value and <strong>offset</strong> in <strong>param</strong> should be less than 16,384.</td>
     </tr>
   </tbody>
 </table>
-<p>出力は以下のようになる：</p>
+<p>The output is similar to the following:</p>
 <div class="multipleCode">
-   <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a></div>
+    <a href="#python">Python </a>
+    <a href="#java">Java</a>
+    <a href="#javascript">Node.js</a>
+</div>
 <pre><code translate="no" class="language-python">[
     [
         {
@@ -635,12 +641,15 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
   { score: <span class="hljs-number">1.7258622646331787</span>, <span class="hljs-built_in">id</span>: <span class="hljs-string">&#x27;718&#x27;</span> }
 ]
 <button class="copy-code-btn"></button></code></pre>
-<p>出力には、クエリベクトルに最も近い上位5つの近傍ベクトルが表示され、一意のIDと計算された距離も表示されます。</p>
-<h3 id="Bulk-vector-search" class="common-anchor-header">一括ベクトル検索</h3><p>一括ベクトル検索は、<a href="https://milvus.io/docs/single-vector-search.md#Single-Vector-Search">1回の</a>リクエストで複数のクエリベクトルを検索できるようにすることで、<a href="https://milvus.io/docs/single-vector-search.md#Single-Vector-Search">単一ベクトル検索の</a>概念を拡張します。このタイプの検索は、クエリベクターのセットに対して類似したベクトルを検索する必要があるシナリオに最適で、必要な時間と計算リソースを大幅に削減します。</p>
-<p>一括ベクトル検索では、<code translate="no">data</code> フィールドに複数のクエリベクトルを含めることができます。システムはこれらのベクトルを並列処理し、クエリ・ベクタごとに個別の結果セットを返し、各セットにはコレクション内で見つかった最も近い一致が含まれます。</p>
-<p>以下は、2 つのクエリ・ベクタから、最も類似したエンティティの 2 つの異なるセットを検索する例です：</p>
+<p>The output showcases the top 5 neighbors nearest to your query vector, including their unique IDs and the calculated distances.</p>
+<h3 id="Bulk-vector-search" class="common-anchor-header">Bulk-vector search</h3><p>A bulk-vector search extends the <a href="https://milvus.io/docs/single-vector-search.md#Single-Vector-Search">single-vector search</a> concept by allowing multiple query vectors to be searched in a single request. This type of search is ideal for scenarios where you need to find similar vectors for a set of query vectors, significantly reducing the time and computational resources required.</p>
+<p>In a bulk-vector search, you can include several query vectors in the <code translate="no">data</code> field. The system processes these vectors in parallel, returning a separate result set for each query vector, each set containing the closest matches found within the collection.</p>
+<p>Here is an example of searching for two distinct sets of the most similar entities from two query vectors:</p>
 <div class="multipleCode">
-   <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a></div>
+    <a href="#python">Python </a>
+    <a href="#java">Java</a>
+    <a href="#javascript">Node.js</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Bulk-vector search</span>
 res = client.search(
     collection_name=<span class="hljs-string">&quot;quick_setup&quot;</span>, <span class="hljs-comment"># Replace with the actual name of your collection</span>
@@ -685,9 +694,12 @@ res = <span class="hljs-keyword">await</span> client.search({
 
 console.log(res.results)
 <button class="copy-code-btn"></button></code></pre>
-<p>出力は以下のようになる：</p>
+<p>The output is similar to the following:</p>
 <div class="multipleCode">
-   <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a></div>
+    <a href="#python">Python </a>
+    <a href="#java">Java</a>
+    <a href="#javascript">Node.js</a>
+</div>
 <pre><code translate="no" class="language-python">[
     [
         {
@@ -786,12 +798,15 @@ console.log(res.results)
   ]
 ]
 <button class="copy-code-btn"></button></code></pre>
-<p>その結果、各クエリベクトルに対して1つずつ、2つの最近傍セットが含まれており、複数のクエリベクトルを一度に処理するバルクベクトル検索の効率性を示している。</p>
-<h3 id="Partition-search" class="common-anchor-header">パーティション検索</h3><p>パーティション検索は、検索範囲をコレクションの特定のサブセットまたはパーティションに絞り込みます。これは、データが論理的またはカテゴリー的に分割されている組織化されたデータセットに特に有効で、スキャンするデータ量を減らすことにより、より高速な検索操作を可能にします。</p>
-<p>パーティション検索を行うには、検索要求の<code translate="no">partition_names</code> にターゲット・パーティション名を含めるだけです。これは、<code translate="no">search</code> 操作が、指定されたパーティション内のベクトルだけを考慮することを指定します。</p>
-<p>以下は、<code translate="no">red</code> 内のエンティティを検索する例です：</p>
+<p>The results include two sets of nearest neighbors, one for each query vector, showcasing the efficiency of bulk-vector searches in handling multiple query vectors at once.</p>
+<h3 id="Partition-search" class="common-anchor-header">Partition search</h3><p>Partition search narrows the scope of your search to a specific subset or partition of your collection. This is particularly useful for organized datasets where data is segmented into logical or categorical divisions, allowing for faster search operations by reducing the volume of data to scan.</p>
+<p>To conduct a partition search, simply include the name of the target partition in <code translate="no">partition_names</code> of your search request. This specifies that the <code translate="no">search</code> operation only considers vectors within the specified partition.</p>
+<p>Here is an example of searching for entities in <code translate="no">red</code>:</p>
 <div class="multipleCode">
-   <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a></div>
+    <a href="#python">Python </a>
+    <a href="#java">Java</a>
+    <a href="#javascript">Node.js</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># 6.2 Search within a partition</span>
 query_vector = [<span class="hljs-number">0.3580376395471989</span>, -<span class="hljs-number">0.6023495712049978</span>, <span class="hljs-number">0.18414012509913835</span>, -<span class="hljs-number">0.26286205330961354</span>, <span class="hljs-number">0.9029438446296592</span>]
 
@@ -831,9 +846,12 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 
 <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(res.<span class="hljs-property">results</span>)
 <button class="copy-code-btn"></button></code></pre>
-<p>出力は以下のようになる：</p>
+<p>The output is similar to the following:</p>
 <div class="multipleCode">
-   <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a></div>
+    <a href="#python">Python </a>
+    <a href="#java">Java</a>
+    <a href="#javascript">Node.js</a>
+</div>
 <pre><code translate="no" class="language-python">[
     [
         {
@@ -1009,9 +1027,12 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
   { score: <span class="hljs-number">2.797295093536377</span>, <span class="hljs-built_in">id</span>: <span class="hljs-string">&#x27;1406&#x27;</span> }
 ]
 <button class="copy-code-btn"></button></code></pre>
-<p>次に、<code translate="no">blue</code> でエンティティを検索する：</p>
+<p>Then, search for entities in <code translate="no">blue</code>:</p>
 <div class="multipleCode">
-   <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a></div>
+    <a href="#python">Python </a>
+    <a href="#java">Java</a>
+    <a href="#javascript">Node.js</a>
+</div>
 <pre><code translate="no" class="language-python">res = client.search(
     collection_name=<span class="hljs-string">&quot;quick_setup&quot;</span>,
     data=[query_vector],
@@ -1042,9 +1063,12 @@ searchResp = client.<span class="hljs-title function_">search</span>(searchReq);
 
 <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(res.<span class="hljs-property">results</span>)
 <button class="copy-code-btn"></button></code></pre>
-<p>出力は以下のようになる：</p>
+<p>The output is similar to the following:</p>
 <div class="multipleCode">
-   <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a></div>
+    <a href="#python">Python </a>
+    <a href="#java">Java</a>
+    <a href="#javascript">Node.js</a>
+</div>
 <pre><code translate="no" class="language-python">[
     [
         {
@@ -1220,12 +1244,15 @@ searchResp = client.<span class="hljs-title function_">search</span>(searchReq);
   { score: <span class="hljs-number">2.7014894485473633</span>, <span class="hljs-built_in">id</span>: <span class="hljs-string">&#x27;1597&#x27;</span> }
 ]
 <button class="copy-code-btn"></button></code></pre>
-<p><code translate="no">red</code> のデータは<code translate="no">blue</code> のデータとは異なる。したがって、検索結果は、指定されたパーティションに制約され、そのサブセットの固有の特性とデータ分布が反映されます。</p>
-<h3 id="Search-with-output-fields" class="common-anchor-header">出力フィールド付き検索</h3><p>出力フィールド付き検索では、一致したベクトルのどの属性またはフィールドを検索結果に含めるかを指定でき ます。</p>
-<p>リクエストで<code translate="no">output_fields</code> を指定すると、特定のフィールドを含む結果を返すことができます。</p>
-<p>以下は、<code translate="no">color</code> 属性値を含む結果を返す例です：</p>
+<p>The data in <code translate="no">red</code> differs from that in <code translate="no">blue</code>. Therefore, the search results will be constrained to the specified partition, reflecting the unique characteristics and data distribution of that subset.</p>
+<h3 id="Search-with-output-fields" class="common-anchor-header">Search with output fields</h3><p>Search with output fields allows you to specify which attributes or fields of the matched vectors should be included in the search results.</p>
+<p>You can specify <code translate="no">output_fields</code> in a request to return results with specific fields.</p>
+<p>Here is an example of returning results with <code translate="no">color</code> attribute values:</p>
 <div class="multipleCode">
-   <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a></div>
+    <a href="#python">Python </a>
+    <a href="#java">Java</a>
+    <a href="#javascript">Node.js</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Search with output fields</span>
 res = client.search(
     collection_name=<span class="hljs-string">&quot;quick_setup&quot;</span>, <span class="hljs-comment"># Replace with the actual name of your collection</span>
@@ -1264,9 +1291,12 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 
 <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(res.<span class="hljs-property">results</span>)
 <button class="copy-code-btn"></button></code></pre>
-<p>出力は以下のようになる：</p>
+<p>The output is similar to the following:</p>
 <div class="multipleCode">
-   <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a></div>
+    <a href="#python">Python </a>
+    <a href="#java">Java</a>
+    <a href="#javascript">Node.js</a>
+</div>
 <pre><code translate="no" class="language-python">[
     [
         {
@@ -1341,8 +1371,8 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
   { score: <span class="hljs-number">2.916019916534424</span>, <span class="hljs-built_in">id</span>: <span class="hljs-string">&#x27;425&#x27;</span>, color: <span class="hljs-string">&#x27;purple&#x27;</span> }
 ]
 <button class="copy-code-btn"></button></code></pre>
-<p>検索結果には、最近傍情報とともに、指定されたフィールド<code translate="no">color</code> が含まれ、各マッチングベクトルに対してより豊富な情報が提供されます。</p>
-<h2 id="Filtered-search" class="common-anchor-header">フィルター検索<button data-href="#Filtered-search" class="anchor-icon" translate="no">
+<p>Alongside the nearest neighbors, the search results will include the specified field <code translate="no">color</code>, providing a richer set of information for each matching vector.</p>
+<h2 id="Filtered-search" class="common-anchor-header">Filtered search<button data-href="#Filtered-search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -1357,23 +1387,26 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>フィルタリング検索はスカラー・フィルタをベクトル検索に適用し、特定の条件に基づいて検索結果を絞り込むことができます。フィルタ式の詳細については、「<a href="https://milvus.io/docs/boolean.md">Boolean Expression Rules（ブーリアン式のルール</a>）」と「<a href="https://milvus.io/docs/get-and-scalar-query.md">Get &amp; Scalar Query（取得とスカラー・クエリ</a>）」の例を参照してください。</p>
-<h3 id="Use-the-like-operator" class="common-anchor-header"><code translate="no">like</code> 演算子の使用</h3><p><code translate="no">like</code> 演算子は、接頭辞、接尾辞、接尾辞を含むパターンを評価することで、文字列検索を強化します：</p>
+    </button></h2><p>Filtered search applies scalar filters to vector searches, allowing you to refine the search results based on specific criteria. You can find more about filter expressions in <a href="https://milvus.io/docs/boolean.md">Boolean Expression Rules</a> and examples in <a href="https://milvus.io/docs/get-and-scalar-query.md">Get &amp; Scalar Query</a>.</p>
+<h3 id="Use-the-like-operator" class="common-anchor-header">Use the <code translate="no">like</code> operator</h3><p>The <code translate="no">like</code> operator enhances string searches by evaluating patterns including prefixes, infixes, and suffixes:</p>
 <ul>
-<li><strong>接頭辞マッチング</strong>: 特定の接頭辞で始まる値を検索するには、構文<code translate="no">'like &quot;prefix%&quot;'</code> を使用します。</li>
-<li><strong>接尾辞マッチング</strong>: 文字列内の任意の場所で特定の文字列を含む値を検索するには、構文<code translate="no">'like &quot;%infix%&quot;'</code> を使用します。</li>
-<li><strong>接尾辞マッチング</strong>：特定の接尾辞で終わる値を検索するには、構文<code translate="no">'like &quot;%suffix&quot;'</code> を使用します。</li>
+<li><strong>Prefix matching</strong>: To find values starting with a specific prefix, use the syntax <code translate="no">'like &quot;prefix%&quot;'</code>.</li>
+<li><strong>Infix matching</strong>: To find values containing a specific sequence of characters anywhere within the string, use the syntax <code translate="no">'like &quot;%infix%&quot;'</code>.</li>
+<li><strong>Suffix matching</strong>: To find values ending with a specific suffix, use the syntax <code translate="no">'like &quot;%suffix&quot;'</code>.</li>
 </ul>
-<p>1文字マッチングでは、アンダースコア(<code translate="no">_</code>)が1文字に対するワイルドカードとして機能します（例：<code translate="no">'like &quot;y_llow&quot;'</code> ）。</p>
-<h3 id="Special-characters-in-search-strings" class="common-anchor-header">検索文字列の特殊文字</h3><p>アンダースコア(<code translate="no">_</code>)やパーセント記号(<code translate="no">%</code>)のような特殊文字を含む文字列を検索したい場合、通常、検索パターンではワイルドカードとして使用されます（<code translate="no">_</code> は任意の1文字、<code translate="no">%</code> は任意の連続した文字）。これらの文字をエスケープして、リテラル文字として扱う必要があります。特殊文字をエスケープするにはバックスラッシュ (<code translate="no">\</code>) を使用し、バックスラッシュ自体をエスケープすることを忘れない。例えば</p>
+<p>For single-character matching, underscore (<code translate="no">_</code>) acts as a wildcard for one character, e.g., <code translate="no">'like &quot;y_llow&quot;'</code>.</p>
+<h3 id="Special-characters-in-search-strings" class="common-anchor-header">Special characters in search strings</h3><p>If you want to search for a string that contains special characters like underscores (<code translate="no">_</code>) or percent signs (<code translate="no">%</code>), which are normally used as wildcards in search patterns (<code translate="no">_</code> for any single character and <code translate="no">%</code> for any sequence of characters), you must escape these characters to treat them as literal characters. Use a backslash (<code translate="no">\</code>) to escape special characters, and remember to escape the backslash itself. For instance:</p>
 <ul>
-<li>リテラル・アンダースコアを検索するには、<code translate="no">\\_</code> を使用します。</li>
-<li>パーセント記号を検索するには、<code translate="no">\\%</code> を使用します。</li>
+<li>To search for a literal underscore, use <code translate="no">\\_</code>.</li>
+<li>To search for a literal percent sign, use <code translate="no">\\%</code>.</li>
 </ul>
-<p>したがって、<code translate="no">&quot;_version_&quot;</code> というテキストを検索する必要がある場合は、<code translate="no">'like &quot;\\_version\\_&quot;'</code> と書式を整え、アンダースコアがワイルドカードとしてではなく、検索語の一部として扱われるようにします。</p>
-<p><strong>赤で</strong>始まる<strong>色を</strong>持つ結果をフィルタリングします：</p>
+<p>So, if you need to search for the text <code translate="no">&quot;_version_&quot;</code>, your query should be formatted as <code translate="no">'like &quot;\\_version\\_&quot;'</code> to ensure the underscores are treated as part of the search term and not as wildcards.</p>
+<p>Filter results whose <strong>color</strong> is prefixed with <strong>red</strong>:</p>
 <div class="multipleCode">
-   <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a></div>
+    <a href="#python">Python </a>
+    <a href="#java">Java</a>
+    <a href="#javascript">Node.js</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Search with filter</span>
 res = client.search(
     collection_name=<span class="hljs-string">&quot;quick_setup&quot;</span>, <span class="hljs-comment"># Replace with the actual name of your collection</span>
@@ -1416,9 +1449,12 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 
 <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(res.<span class="hljs-property">results</span>)
 <button class="copy-code-btn"></button></code></pre>
-<p>出力は以下のようになる：</p>
+<p>The output is similar to the following:</p>
 <div class="multipleCode">
-   <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a></div>
+    <a href="#python">Python </a>
+    <a href="#java">Java</a>
+    <a href="#javascript">Node.js</a>
+</div>
 <pre><code translate="no" class="language-python">[
     [
         {
@@ -1478,9 +1514,12 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
   { score: <span class="hljs-number">2.4004223346710205</span>, <span class="hljs-built_in">id</span>: <span class="hljs-string">&#x27;854&#x27;</span>, color_tag: <span class="hljs-string">&#x27;black_5990&#x27;</span> }
 ]
 <button class="copy-code-btn"></button></code></pre>
-<p>文字列のどこかに<strong>ll の</strong> <strong>文字が</strong>含まれる結果をフィルタリングする：</p>
+<p>Filter results whose <strong>color</strong> contains the letters <strong>ll</strong> anywhere within the string:</p>
 <div class="multipleCode">
-   <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a></div>
+    <a href="#python">Python </a>
+    <a href="#java">Java</a>
+    <a href="#javascript">Node.js</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Infix match on color field</span>
 res = client.search(
     collection_name=<span class="hljs-string">&quot;quick_setup&quot;</span>, <span class="hljs-comment"># Replace with the actual name of your collection</span>
@@ -1523,9 +1562,12 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 
 <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(res.<span class="hljs-property">results</span>)
 <button class="copy-code-btn"></button></code></pre>
-<p>出力は以下のようになる：</p>
+<p>The output is similar to the following:</p>
 <div class="multipleCode">
-   <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a></div>
+    <a href="#python">Python </a>
+    <a href="#java">Java</a>
+    <a href="#javascript">Node.js</a>
+</div>
 <pre><code translate="no" class="language-python">[
     [
         {
@@ -1551,7 +1593,7 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
   { score: <span class="hljs-number">2.5080761909484863</span>, <span class="hljs-built_in">id</span>: <span class="hljs-string">&#x27;1201&#x27;</span>, color_tag: <span class="hljs-string">&#x27;yellow_4222&#x27;</span> }
 ]
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Range-search" class="common-anchor-header">範囲検索<button data-href="#Range-search" class="anchor-icon" translate="no">
+<h2 id="Range-search" class="common-anchor-header">Range search<button data-href="#Range-search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -1566,14 +1608,17 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>範囲検索では、クエリ・ベクトルから指定した距離範囲内にあるベクトルを見つけることができます。</p>
-<p><code translate="no">radius</code> とオプションで<code translate="no">range_filter</code> を設定することで、クエリ・ベクトルにある程度似ているベクトルも含めるように検索の幅を調整することができ、マッチする可能性のあるベクトルをより包括的に表示することができます。</p>
+    </button></h2><p>Range search allows you to find vectors that lie within a specified distance range from your query vector.</p>
+<p>By setting <code translate="no">radius</code> and optionally <code translate="no">range_filter</code>, you can adjust the breadth of your search to include vectors that are somewhat similar to the query vector, providing a more comprehensive view of potential matches.</p>
 <ul>
-<li><p><code translate="no">radius</code>:検索空間の外側の境界を定義します。クエリ・ベクトルからこの距離内にあるベクトルだけが、マッチする可能性があるとみなされます。</p></li>
-<li><p><code translate="no">range_filter</code>:<code translate="no">radius</code> は検索の外枠を設定しますが、<code translate="no">range_filter</code> はオプションで内側の境界を定義するために使用することができます。</p></li>
+<li><p><code translate="no">radius</code>: Defines the outer boundary of your search space. Only vectors that are within this distance from the query vector are considered potential matches.</p></li>
+<li><p><code translate="no">range_filter</code>: While <code translate="no">radius</code> sets the outer limit of the search, <code translate="no">range_filter</code> can be optionally used to define an inner boundary, creating a distance range within which vectors must fall to be considered matches.</p></li>
 </ul>
 <div class="multipleCode">
-   <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a></div>
+    <a href="#python">Python </a>
+    <a href="#java">Java</a>
+    <a href="#javascript">Node.js</a>
+</div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Conduct a range search</span>
 search_params = {
     <span class="hljs-string">&quot;metric_type&quot;</span>: <span class="hljs-string">&quot;IP&quot;</span>,
@@ -1625,9 +1670,12 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
 
 <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(res.<span class="hljs-property">results</span>)
 <button class="copy-code-btn"></button></code></pre>
-<p>出力は以下のようになる：</p>
+<p>The output is similar to the following:</p>
 <div class="multipleCode">
-   <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a></div>
+    <a href="#python">Python </a>
+    <a href="#java">Java</a>
+    <a href="#javascript">Node.js</a>
+</div>
 <pre><code translate="no" class="language-python">[
     [
         {
@@ -1687,22 +1735,22 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
   { score: <span class="hljs-number">2.2593345642089844</span>, <span class="hljs-built_in">id</span>: <span class="hljs-string">&#x27;1309&#x27;</span>, color_tag: <span class="hljs-string">&#x27;red_8458&#x27;</span> }
 ]
 <button class="copy-code-btn"></button></code></pre>
-<p>返されるすべてのエンティティの距離が、クエリベクトルから0.8～1.0の範囲内にあることがわかります。</p>
-<p><code translate="no">radius</code> と<code translate="no">range_filter</code> のパラメータ設定は、使用するメトリック・タイプによって異なります。</p>
+<p>You will observe that all the entities returned have a distance that falls within the range of 0.8 to 1.0 from the query vector.</p>
+<p>The parameter settings for <code translate="no">radius</code> and <code translate="no">range_filter</code> vary with the metric type in use.</p>
 <table>
 <thead>
-<tr><th><strong>メトリックタイプ</strong></th><th><strong>特性</strong></th><th><strong>範囲検索の設定</strong></th></tr>
+<tr><th><strong>Metric Type</strong></th><th><strong>Charactericstics</strong></th><th><strong>Range Search Settings</strong></th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">L2</code></td><td>L2 距離が小さいほど、類似度が高いことを示します。</td><td>最も近いベクトルを結果から除外するには、次のようにします：<br/> <code translate="no">range_filter</code> &lt;= distance &lt;<code translate="no">radius</code></td></tr>
-<tr><td><code translate="no">IP</code></td><td>IP距離が大きいほど類似度が高い．</td><td>最も近いベクトルを結果から除外するには、次のようにします：<br/> <code translate="no">radius</code> &lt; distance &lt;= 。<code translate="no">range_filter</code></td></tr>
-<tr><td><code translate="no">COSINE</code></td><td>コサイン値が大きいほど類似度が高いことを示します。</td><td>最も近いベクトルを結果から除外するには、次のようにします：<br/> <code translate="no">radius</code> &lt; distance &lt;=。<code translate="no">range_filter</code></td></tr>
-<tr><td><code translate="no">JACCARD</code></td><td>Jaccard距離が小さいほど、類似度が高いことを示す。</td><td>最も近いベクトルを結果から除外するには、次のようにします：<br/> <code translate="no">range_filter</code> &lt;= distance &lt;<code translate="no">radius</code></td></tr>
-<tr><td><code translate="no">HAMMING</code></td><td>ハミング距離が小さいほど、類似度が高いことを示します。</td><td>最も近いベクトルを結果から除外するには、次のようにします：<br/> <code translate="no">range_filter</code> &lt;= distance &lt;<code translate="no">radius</code></td></tr>
+<tr><td><code translate="no">L2</code></td><td>Smaller L2 distances indicate higher similarity.</td><td>To exclude the closest vectors from results, ensure that:<br/> <code translate="no">range_filter</code> &lt;= distance &lt; <code translate="no">radius</code></td></tr>
+<tr><td><code translate="no">IP</code></td><td>Larger IP distances indicate higher similarity.</td><td>To exclude the closest vectors from results, ensure that:<br/> <code translate="no">radius</code> &lt; distance &lt;= <code translate="no">range_filter</code></td></tr>
+<tr><td><code translate="no">COSINE</code></td><td>Larger cosine value indicates higher similarity.</td><td>To exclude the closest vectors from results, ensure that:<br/> <code translate="no">radius</code> &lt; distance &lt;= <code translate="no">range_filter</code></td></tr>
+<tr><td><code translate="no">JACCARD</code></td><td>Smaller Jaccard distances indicate higher similarity.</td><td>To exclude the closest vectors from results, ensure that:<br/> <code translate="no">range_filter</code> &lt;= distance &lt; <code translate="no">radius</code></td></tr>
+<tr><td><code translate="no">HAMMING</code></td><td>Smaller Hamming distances indicate higher similarity.</td><td>To exclude the closest vectors from results, ensure that:<br/> <code translate="no">range_filter</code> &lt;= distance &lt; <code translate="no">radius</code></td></tr>
 </tbody>
 </table>
-<p>距離メトリックの種類については、<a href="/docs/ja/metric.md">類似度メトリックを</a>参照してください。</p>
-<h2 id="Grouping-search" class="common-anchor-header">グループ化検索<button data-href="#Grouping-search" class="anchor-icon" translate="no">
+<p>To learn more about distance metric types, refer to <a href="/docs/ja/metric.md">Similarity Metrics</a>.</p>
+<h2 id="Grouping-search" class="common-anchor-header">Grouping search<button data-href="#Grouping-search" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -1717,10 +1765,10 @@ res = <span class="hljs-keyword">await</span> client.<span class="hljs-title fun
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvusでは、検索結果の網羅性と精度を向上させるためにグループ化検索が設計されています。</p>
-<p>RAGのシナリオを考えてみましょう。ここでは、ロードされた文書が様々なパッセージに分割され、各パッセージが1つのベクトル埋め込みで表現されています。ユーザはLLMを正確に促すために最も関連性の高い文章を見つけたい。Milvusの通常の検索機能はこの要求を満たすことができるが、検索結果が非常に偏ったものになる可能性がある：ほとんどのパッセージは数個の文書からしか得られず、検索結果の包括性は非常に低い。これは、LLMが提供する検索結果の正確さ、あるいは正しさを著しく損ない、LLM利用者の経験に悪影響を与える可能性がある。</p>
-<p>グループ化検索は、この問題を効果的に解決することができます。group_by_fieldとgroup_sizeを渡すことにより、Milvusユーザーは検索結果をいくつかのグループに分け、各グループのエンティティ数が特定のgroup_sizeを超えないようにすることができる。この機能により、検索結果の網羅性と公平性が大幅に向上し、LLM出力の品質が顕著に改善されます。</p>
-<p>検索結果をフィールドごとにグループ化するコード例を以下に示す：</p>
+    </button></h2><p>In Milvus, grouping search is designed to improve comprehensiveness and accuracy for search results.</p>
+<p>Consider a scenario in RAG, where loads of documents are split into various passages, and each passage is represented by one vector embedding. Users want to find the most relevant passages to prompt the LLMs accurately. The ordinary Milvus search function can meet this requirement, but it may result in highly skewed and biased results: most of the passages come from only a few documents, and the comprehensiveness of the search results is very poor. This can seriously impair the accuracy or even correctness of the results given by the LLM and influence the LLM users’ experience negatively.</p>
+<p>Grouping search can effectively solve this problem. By passing a group_by_field and group_size, Milvus users can bucket the search results into several groups and ensure that the number of entities from each group does not exceed a specific group_size. This feature can significantly enhance the comprehensiveness and fairness of search results, noticeably improving the quality of LLM output.</p>
+<p>Here is the example code to group search results by field:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Connect to Milvus</span>
 client = MilvusClient(uri=<span class="hljs-string">&#x27;http://localhost:19530&#x27;</span>) <span class="hljs-comment"># Milvus server address</span>
 
@@ -1749,12 +1797,12 @@ passage_ids = [result[<span class="hljs-string">&#x27;entity&#x27;</span>][<span
 <span class="hljs-built_in">print</span>(doc_ids)
 <span class="hljs-built_in">print</span>(passage_ids)
 <button class="copy-code-btn"></button></code></pre>
-<p>出力は以下のようになる：</p>
+<p>The output is similar to the following:</p>
 <pre><code translate="no" class="language-python">[<span class="hljs-string">&quot;doc_11&quot;</span>, <span class="hljs-string">&quot;doc_11&quot;</span>, <span class="hljs-string">&quot;doc_7&quot;</span>, <span class="hljs-string">&quot;doc_7&quot;</span>, <span class="hljs-string">&quot;doc_3&quot;</span>, <span class="hljs-string">&quot;doc_3&quot;</span>, <span class="hljs-string">&quot;doc_2&quot;</span>, <span class="hljs-string">&quot;doc_2&quot;</span>, <span class="hljs-string">&quot;doc_8&quot;</span>, <span class="hljs-string">&quot;doc_8&quot;</span>]
 [<span class="hljs-meta">5, 10, 11, 10, 9, 6, 5, 4, 9, 2</span>]
 <button class="copy-code-btn"></button></code></pre>
-<p>与えられた出力では、各文書に対してちょうど2つの文章が検索され、合計で5つの文書が結果を構成していることがわかる。</p>
-<p>比較のために、グループ関連のパラメーターをコメントアウトして、通常の検索を行ってみよう：</p>
+<p>In the given output, it can be observed that for each document, exactly two passages are retrieved and a total of 5 documents collectively make up the results.</p>
+<p>For comparison, let’s comment out the group-related parameters and conduct a regular search:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Connect to Milvus</span>
 client = MilvusClient(uri=<span class="hljs-string">&#x27;http://localhost:19530&#x27;</span>) <span class="hljs-comment"># Milvus server address</span>
 
@@ -1783,21 +1831,21 @@ passage_ids = [result[<span class="hljs-string">&#x27;entity&#x27;</span>][<span
 <span class="hljs-built_in">print</span>(doc_ids)
 <span class="hljs-built_in">print</span>(passage_ids)
 <button class="copy-code-btn"></button></code></pre>
-<p>出力は以下のようになる：</p>
+<p>The output is similar to the following:</p>
 <pre><code translate="no" class="language-python">[<span class="hljs-string">&quot;doc_11&quot;</span>, <span class="hljs-string">&quot;doc_11&quot;</span>, <span class="hljs-string">&quot;doc_11&quot;</span>, <span class="hljs-string">&quot;doc_11&quot;</span>, <span class="hljs-string">&quot;doc_11&quot;</span>]
 [<span class="hljs-meta">1, 10, 3, 12, 9</span>]
 <button class="copy-code-btn"></button></code></pre>
-<p>与えられた出力では、"doc_11 "が検索結果を完全に支配し、他の文書からの質の高いパラグラフを覆い隠していることが観察できる。</p>
-<p>もう一つ注意すべき点があります。デフォルトでは、grouping_searchは十分なグループ数があれば即座に結果を返しますが、その結果、各グループの検索結果数がgroup_sizeを満たさないことがあります。各グループの検索結果数を気にするのであれば、上のコードのようにgroup_strict_size=Trueを設定してください。これにより、Milvusは各グループで十分な結果を得ようと努力するようになりますが、パフォーマンスは若干低下します。</p>
-<p><strong>制限事項</strong></p>
+<p>In the given output, it can be observed that “doc_11” completely dominated the search results, overshadowing the high-quality paragraphs from other documents, which can be a poor prompt to LLM.</p>
+<p>One more point to note: by default, grouping_search will return results instantly when it has enough groups, which may lead to the number of results in each group not being sufficient to meet the group_size. If you care about the number of results for each group, set group_strict_size=True as shown in the code above. This will make Milvus strive to obtain enough results for each group, at a slight cost to performance.</p>
+<p><strong>Limitations</strong></p>
 <ul>
-<li><p><strong>インデックス作成</strong>：このグループ化機能は<strong>HNSW</strong>、<strong>IVF_FLAT</strong>、または<strong>FLAT</strong>タイプでインデックスされたコレクションに対してのみ機能します。詳細については、<a href="https://milvus.io/docs/index.md#HNSW">メモリ内インデックスを</a>参照してください。</p></li>
-<li><p><strong>ベクトル</strong>：現在、グループ化検索は<strong>BINARY_VECTOR</strong>型のベクトル・フィールドをサポートしていません。データ型の詳細については、<a href="https://milvus.io/docs/schema.md#Supported-data-types">サポートされるデータ</a>型を参照してください。</p></li>
-<li><p><strong>フィールド</strong>：現在のところ、グループ化検索では1つの列しか使用できません。<code translate="no">group_by_field</code> コンフィグで複数のフィールド名を指定することはできません。  また、グループ化検索は、JSON、FLOAT、DOUBLE、ARRAY、またはvectorフィールドのデータ型とは互換性がありません。</p></li>
-<li><p><strong>パフォーマンスへの影響</strong>：クエリ・ベクタ数が増えるとパフォーマンスが低下することに注意してください。CPUコア2個、メモリ8GBのクラスタを例にとると、グルーピング検索の実行時間は入力クエリベクタ数に比例して増加します。</p></li>
-<li><p><strong>機能</strong>現在のところ、グルーピング検索は<a href="https://milvus.io/docs/single-vector-search.md#Range-search">範囲検索</a>、<a href="https://milvus.io/docs/with-iterators.md#Search-with-iterator">検索イテレータでは</a>サポートされていません。</p></li>
+<li><p><strong>Indexing</strong>: This grouping feature works only for collections that are indexed with the <strong>HNSW</strong>, <strong>IVF_FLAT</strong>, or <strong>FLAT</strong> type. For more information, refer to <a href="https://milvus.io/docs/index.md#HNSW">In-memory Index</a>.</p></li>
+<li><p><strong>Vector</strong>: Currently, grouping search does not support a vector field of the <strong>BINARY_VECTOR</strong> type. For more information on data types, refer to <a href="https://milvus.io/docs/schema.md#Supported-data-types">Supported data types</a>.</p></li>
+<li><p><strong>Field</strong>: Currently, grouping search allows only for a single column. You cannot specify multiple field names in the <code translate="no">group_by_field</code> config.  Additionally, grouping search is incompatible with data types of JSON, FLOAT, DOUBLE, ARRAY, or vector fields.</p></li>
+<li><p><strong>Performance Impact</strong>: Be mindful that performance degrades with increasing query vector counts. Using a cluster with 2 CPU cores and 8 GB of memory as an example, the execution time for grouping search increases proportionally with the number of input query vectors.</p></li>
+<li><p><strong>Functionality</strong>: Currently, grouping search is not supported by <a href="https://milvus.io/docs/single-vector-search.md#Range-search">range search</a>, <a href="https://milvus.io/docs/with-iterators.md#Search-with-iterator">search iterators</a></p></li>
 </ul>
-<h2 id="Search-parameters" class="common-anchor-header">検索パラメータ<button data-href="#Search-parameters" class="anchor-icon" translate="no">
+<h2 id="Search-parameters" class="common-anchor-header">Search parameters<button data-href="#Search-parameters" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -1812,7 +1860,7 @@ passage_ids = [result[<span class="hljs-string">&#x27;entity&#x27;</span>][<span
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>範囲検索を除く上記の検索では、デフォルトの検索パラメータが適用されます。通常の場合、検索パラメータを手動で設定する必要はありません。</p>
+    </button></h2><p>In the above searches except the range search, the default search parameters apply. In normal cases, you do not need to manually set search parameters.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># In normal cases, you do not need to set search parameters manually</span>
 <span class="hljs-comment"># Except for range searches.</span>
 search_parameters = {
@@ -1825,21 +1873,21 @@ search_parameters = {
     }
 }
 <button class="copy-code-btn"></button></code></pre>
-<p>次の表は、検索パラメータで設定可能なすべての一覧です。</p>
+<p>The following table lists all possible settings in the search parameters.</p>
 <table>
 <thead>
-<tr><th><strong>パラメータ名</strong></th><th><strong>パラメータ説明</strong></th></tr>
+<tr><th><strong>Parameter Name</strong></th><th><strong>Parameter Description</strong></th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">metric_type</code></td><td>ベクトル埋め込み間の類似度を測定する方法。<br/> 指定可能な値は<code translate="no">IP</code>,<code translate="no">L2</code>,<code translate="no">COSINE</code>,<code translate="no">JACCARD</code>,<code translate="no">HAMMING</code> で、デフォルトは読み込まれたインデックス・ファイルの値。</td></tr>
-<tr><td><code translate="no">params.nprobe</code></td><td>検索中にクエリーするユニット数。<br/> 値は[1, nlist<sub>[1</sub>]]の範囲です。</td></tr>
-<tr><td><code translate="no">params.level</code></td><td>検索精度レベル。<br/> 指定可能な値は<code translate="no">1</code> 、<code translate="no">2</code> 、および<code translate="no">3</code> で、デフォルトは<code translate="no">1</code> です。値を高くすると、より正確な結果が得られますが、パフォーマンスは低下します。</td></tr>
-<tr><td><code translate="no">params.radius</code></td><td>検索空間の外側の境界を定義します。<br/>値の範囲は<code translate="no">metric_type</code> パラメータによって決まります。たとえば、<code translate="no">metric_type</code> が<code translate="no">L2</code> に設定されている場合、有効な値域は<code translate="no">[0, ∞]</code> です。<code translate="no">metric_type</code> が<code translate="no">COSINE</code> に設定されている場合、有効な値域は<code translate="no">[-1, 1]</code> です。詳細については、「<a href="/docs/ja/metric.md">類似度メトリクス</a>」を参照のこと。</td></tr>
-<tr><td><code translate="no">params.range_filter</code></td><td><code translate="no">radius</code> は検索の外側の限界を設定しますが、<code translate="no">range_filter</code> はオプションで内側の境界を定義するために使用することができ、ベクターが一致とみなされるために必要な距離範囲を作成します。<br/>値の範囲は<code translate="no">metric_type</code> パラメータによって決定されます。例えば、<code translate="no">metric_type</code> が<code translate="no">L2</code> に設定されている場合、有効な値の範囲は<code translate="no">[0, ∞]</code> です。<code translate="no">metric_type</code> が<code translate="no">COSINE</code> に設定されている場合、有効な値の範囲は<code translate="no">[-1, 1]</code> です。詳細については、「<a href="/docs/ja/metric.md">類似度メトリクス</a>」を参照してください。</td></tr>
+<tr><td><code translate="no">metric_type</code></td><td>How to measure similarity between vector embeddings.<br/> Possible values are <code translate="no">IP</code>, <code translate="no">L2</code>, <code translate="no">COSINE</code>, <code translate="no">JACCARD</code>, and <code translate="no">HAMMING</code>, and defaults to that of the loaded index file.</td></tr>
+<tr><td><code translate="no">params.nprobe</code></td><td>Number of units to query during the search.<br/> The value falls in the range [1, nlist<sub>[1]</sub>].</td></tr>
+<tr><td><code translate="no">params.level</code></td><td>Search precision level.<br/> Possible values are <code translate="no">1</code>, <code translate="no">2</code>, and <code translate="no">3</code>, and defaults to <code translate="no">1</code>. Higher values yield more accurate results but slower performance.</td></tr>
+<tr><td><code translate="no">params.radius</code></td><td>Defines the outer boundary of your search space. Only vectors that are within this distance from the query vector are considered potential matches.<br/>The value range is determined by the <code translate="no">metric_type</code> parameter. For instance, if <code translate="no">metric_type</code> is set to <code translate="no">L2</code>, the valid value range is <code translate="no">[0, ∞]</code>. If <code translate="no">metric_type</code> is set to <code translate="no">COSINE</code>, the valid value range is <code translate="no">[-1, 1]</code>. For more information, refer to <a href="/docs/ja/metric.md">Similarity Metrics</a>.</td></tr>
+<tr><td><code translate="no">params.range_filter</code></td><td>While <code translate="no">radius</code> sets the outer limit of the search, <code translate="no">range_filter</code> can be optionally used to define an inner boundary, creating a distance range within which vectors must fall to be considered matches.<br/>The value range is determined by the <code translate="no">metric_type</code> parameter. For instance, if <code translate="no">metric_type</code> is set to <code translate="no">L2</code>, the valid value range is <code translate="no">[0, ∞]</code>. If <code translate="no">metric_type</code> is set to <code translate="no">COSINE</code>, the valid value range is <code translate="no">[-1, 1]</code>. For more information, refer to <a href="/docs/ja/metric.md">Similarity Metrics</a>.</td></tr>
 </tbody>
 </table>
 <div class="admonition note">
-<p><strong>注釈</strong></p>
-<p>[1] インデックス作成後のクラスタ単位数。Milvusはコレクションのインデックスを作成する際、ベクトルデータを複数のクラスタ単位に分割します。</p>
-<p>[2] 検索で返すエンティティの数。</p>
+<p><strong>notes</strong></p>
+<p>[1] Number of cluster units after indexing. When indexing a collection, Milvus sub-divides the vector data into multiple cluster units, the number of which varies with the actual index settings.</p>
+<p>[2] Number of entities to return in a search.</p>
 </div>

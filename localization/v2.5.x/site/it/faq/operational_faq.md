@@ -97,8 +97,11 @@ title: FAQ operative
 <span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-built_in">len</span>(<span class="hljs-built_in">bytes</span>(s, <span class="hljs-string">&quot;utf-8&quot;</span>)) <span class="hljs-comment"># Size in bytes of s, max-length in Milvus.</span>
 <span class="hljs-number">18</span>
 <button class="copy-code-btn"></button></code></pre>
+<h4 id="pymilvusexceptionsConnectionConfigException-ConnectionConfigException-code1-messageIllegal-uri-exampledb-expected-form-httpsuserpwdexamplecom12345-What-causes-this-and-how-can-it-be-solved" class="common-anchor-header"><code translate="no">pymilvus.exceptions.ConnectionConfigException: &lt;ConnectionConfigException: (code=1, message=Illegal uri: [example.db], expected form 'https://user:pwd@example.com:12345')&gt;</code>. Quali sono le cause e come si può risolvere questo problema?</h4><p>Questo errore indica che si sta cercando di connettersi a Milvus Lite utilizzando una versione precedente di pymilvus che non lo supporta. Per risolvere il problema, aggiornate la vostra installazione di pymilvus almeno alla versione 2.4.2. Questa versione supporta la connessione a Milvus Lite. Per aggiornare, utilizzare il seguente comando:</p>
+<pre><code translate="no" class="language-shell">pip install pymilvus&gt;=2.4.2
+<button class="copy-code-btn"></button></code></pre>
 <h4 id="Still-have-questions" class="common-anchor-header">Avete ancora domande?</h4><p>È possibile:</p>
 <ul>
 <li>Controllare <a href="https://github.com/milvus-io/milvus/issues">Milvus</a> su GitHub. Sentitevi liberi di fare domande, condividere idee e aiutare gli altri.</li>
-<li>Unitevi al nostro <a href="https://discuss.milvus.io/">Forum Milvus</a> o al <a href="https://join.slack.com/t/milvusio/shared_invite/enQtNzY1OTQ0NDI3NjMzLWNmYmM1NmNjOTQ5MGI5NDhhYmRhMGU5M2NhNzhhMDMzY2MzNDdlYjM5ODQ5MmE3ODFlYzU3YjJkNmVlNDQ2ZTk">canale Slack</a> per trovare supporto e impegnarvi con la nostra comunità open-source.</li>
+<li>Unitevi al nostro <a href="https://discuss.milvus.io/">Forum Milvus</a> o al <a href="https://join.slack.com/t/milvusio/shared_invite/enQtNzY1OTQ0NDI3NjMzLWNmYmM1NmNjOTQ5MGI5NDhhYmRhMGU5M2NhNzhhMDMzY2MzNDdlYjM5ODQ5MmE3ODFlYzU3YjJkNmVlNDQ2ZTk">canale Slack</a> per trovare supporto e partecipare alla nostra comunità open-source.</li>
 </ul>

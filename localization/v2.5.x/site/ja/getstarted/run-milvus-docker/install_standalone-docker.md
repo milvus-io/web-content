@@ -3,9 +3,9 @@ id: install_standalone-docker.md
 label: Docker
 related_key: Docker
 summary: MilvusをDockerでスタンドアロンインストールする方法をご紹介します。
-title: DockerでMilvusを起動する
+title: DockerでMilvusを起動する(Linux)
 ---
-<h1 id="Run-Milvus-in-Docker" class="common-anchor-header">DockerでMilvusを起動する<button data-href="#Run-Milvus-in-Docker" class="anchor-icon" translate="no">
+<h1 id="Run-Milvus-in-Docker-Linux" class="common-anchor-header">DockerでMilvusを起動する(Linux)<button data-href="#Run-Milvus-in-Docker-Linux" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -37,7 +37,7 @@ title: DockerでMilvusを起動する
         ></path>
       </svg>
     </button></h2><ul>
-<li><a href="https://docs.docker.com/get-docker/">Dockerをインストール</a>する。</li>
+<li><a href="https://docs.docker.com/get-docker/">Dockerをインストールして</a>ください。</li>
 <li>インストール前に<a href="/docs/ja/prerequisite-docker.md">ハードウェアとソフトウェアの要件を確認して</a>ください。</li>
 </ul>
 <h2 id="Install-Milvus-in-Docker" class="common-anchor-header">DockerへのMilvusのインストール<button data-href="#Install-Milvus-in-Docker" class="anchor-icon" translate="no">

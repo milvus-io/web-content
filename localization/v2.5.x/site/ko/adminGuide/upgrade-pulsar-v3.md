@@ -19,7 +19,7 @@ title: Milvus의 Pulsar를 V2에서 V3로 업그레이드하기
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>이 문서에서는 이미 Pulsar V2로 작동 중인 Milvus 배포가 있는 경우 Pulsar 구성 요소를 V2에서 V3로 업그레이드하는 절차에 대해 설명합니다. Milvus v2.5부터는 일부 버그와 보안 취약성을 수정하기 위해 기본적으로 <strong>milvus-helm</strong> 및 <strong>milvus-operator가</strong> Pulsar V3를 사용합니다.</p>
+    </button></h1><p>이 문서에서는 이미 Pulsar V2로 작동 중인 Milvus 배포가 있는 경우 Pulsar 구성 요소를 V2에서 V3로 업그레이드하는 절차에 대해 설명합니다. Milvus v2.5부터 <strong>milvus-helm</strong> 및 <strong>milvus-operator는</strong> 일부 버그 및 보안 취약성을 수정하기 위해 기본적으로 Pulsar V3를 사용합니다. Milvus 2.5는 Pulsar 2.x와 호환되지만 Pulsar V3로 업그레이드하는 것은 선택 사항입니다. 향상된 안정성과 성능을 위해 Pulsar V3로 업그레이드하는 것이 좋습니다.</p>
 <div class="alert note">
 <ol>
 <li><p>업그레이드 과정에서 잠시 서비스가 중단될 수 있습니다(일반적으로 데이터 양에 따라 약 몇 분에서 10분 이상 소요됨).</p></li>
@@ -185,7 +185,7 @@ pvc-60dcb6e4-760d-46c7-af1a-d1fc153b0caf​
 pvc-2da33f64-c053-42b9-bb72-c5d50779aa0a​
 
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p><code translate="no">pulsar-pvcs.txt</code> 의 PVC 목록이 모두 Pulsar용인지 확인합니다. 오류가 없는 것을 확인했다면 PVC를 삭제합니다.</p>
+<li><p><code translate="no">pulsar-pvcs.txt</code> 의 PVC 목록이 모두 Pulsar에 대한 것인지 확인합니다. 오류가 없는 것을 확인했다면 PVC를 삭제합니다.</p>
 <pre><code translate="no" class="language-bash">cat pulsar-pvcs.<span class="hljs-property">txt</span> |xargs -I {} kubectl -n <span class="hljs-keyword">default</span> <span class="hljs-keyword">delete</span> pvc {} --wait=<span class="hljs-literal">false</span>​
 
 <button class="copy-code-btn"></button></code></pre>
@@ -258,7 +258,7 @@ spec:​
         pvcDeletion: <span class="hljs-literal">true</span>​
 
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p><code translate="no">kubectl patch</code> 을 사용하여 Milvus를 삭제하는 동안 etcd 및 스토리지 데이터를 유지하고 펄서 데이터를 삭제합니다.</p>
+<li><p><code translate="no">kubectl patch</code> 을 사용하여 밀버스를 삭제하는 동안 etcd 및 스토리지 데이터를 유지하고 펄서 데이터를 삭제합니다.</p>
 <pre><code translate="no" class="language-yaml">kubectl -n <span class="hljs-keyword">default</span> patch milvus my-release --patch-file patch.yaml --<span class="hljs-keyword">type</span>=merge​
 
 <button class="copy-code-btn"></button></code></pre>

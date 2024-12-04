@@ -19,7 +19,7 @@ title: Indice scalare
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Milvus supporta ricerche filtrate che combinano campi scalari e vettoriali. Per migliorare l'efficienza delle ricerche che coinvolgono campi scalari, Milvus ha introdotto l'indicizzazione dei campi scalari a partire dalla versione 2.1.0. Questo articolo fornisce una panoramica dell'indicizzazione dei campi scalari in Milvus, aiutandovi a comprenderne il significato e l'implementazione.</p>
+    </button></h1><p>Milvus supporta ricerche filtrate che combinano campi scalari e vettoriali. Per migliorare l'efficienza delle ricerche che coinvolgono campi scalari, Milvus ha introdotto l'indicizzazione per campi scalari a partire dalla versione 2.1.0. Questo articolo fornisce una panoramica dell'indicizzazione dei campi scalari in Milvus, aiutandovi a comprenderne il significato e l'implementazione.</p>
 <h2 id="Overview" class="common-anchor-header">Panoramica<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -58,7 +58,7 @@ title: Indice scalare
         ></path>
       </svg>
     </button></h2><p>Milvus mira a ottenere un basso utilizzo della memoria, un'elevata efficienza di filtraggio e tempi di caricamento ridotti con i suoi algoritmi di indicizzazione dei campi scalari. Questi algoritmi si dividono in due tipi principali: <a href="#auto-indexing">indicizzazione automatica</a> e <a href="#inverted-indexing">indicizzazione inversa</a>.</p>
-<h3 id="Auto-indexing" class="common-anchor-header">Indicizzazione automatica</h3><p>Milvus crea automaticamente un indice automatico per un campo scalare in base al suo tipo di dati, senza richiedere un intervento manuale. L'indicizzazione automatica è adatta alle interrogazioni con corrispondenza di prefisso e agli scenari di recupero frequenti.</p>
+<h3 id="Auto-indexing" class="common-anchor-header">Indicizzazione automatica</h3><p>Milvus offre l'opzione <code translate="no">AUTOINDEX</code> per evitare di dover scegliere manualmente il tipo di indice. Quando si chiama il metodo <code translate="no">create_index</code>, se l'opzione <code translate="no">index_type</code> non è specificata, Milvus seleziona automaticamente il tipo di indice più adatto in base al tipo di dati.</p>
 <p>La tabella seguente elenca i tipi di dati supportati da Milvus e i corrispondenti algoritmi di indicizzazione automatica.</p>
 <table>
 <thead>
@@ -86,7 +86,7 @@ title: Indice scalare
 <li><strong>Interrogazione a punti</strong>: Ad esempio, quando si cercano documenti contenenti la parola <strong>Milvus</strong>, il processo inizia controllando se <strong>Milvus</strong> è presente nel dizionario dei termini. Se non viene trovata, nessun documento contiene la parola. Se invece viene trovata, viene recuperata la lista invertita associata a <strong>Milvus</strong>, che indica i documenti che contengono la parola. Questo metodo è molto più efficiente di una ricerca a forza bruta in un milione di documenti, poiché il dizionario dei termini ordinato riduce significativamente la complessità temporale della ricerca della parola <strong>Milvus</strong>.</li>
 <li><strong>Interrogazione di intervallo</strong>: Anche l'efficienza delle query di intervallo, come la ricerca di documenti con parole alfabeticamente maggiori di <strong>molto</strong>, è migliorata dal dizionario dei termini ordinati. Questo approccio è più efficiente rispetto a una ricerca bruta e fornisce risultati più rapidi e accurati.</li>
 </ul>
-<h3 id="Test-results" class="common-anchor-header">Risultati del test</h3><p>Per dimostrare i miglioramenti delle prestazioni forniti dagli indici scalari in Milvus, è stato condotto un esperimento che ha confrontato le prestazioni di diverse espressioni utilizzando l'indicizzazione inversa e la ricerca a forza bruta su dati grezzi.</p>
+<h3 id="Test-results" class="common-anchor-header">Risultati del test</h3><p>Per dimostrare i miglioramenti delle prestazioni forniti dagli indici scalari in Milvus, è stato condotto un esperimento che ha messo a confronto le prestazioni di diverse espressioni utilizzando l'indicizzazione inversa e la ricerca a forza bruta su dati grezzi.</p>
 <p>L'esperimento consisteva nel testare varie espressioni in due condizioni: con un indice invertito e con una ricerca brutale. Per garantire l'equità, è stata mantenuta la stessa distribuzione dei dati nei vari test, utilizzando ogni volta la stessa collezione. Prima di ogni test, la collezione è stata rilasciata e l'indice è stato eliminato e ricostruito. Inoltre, prima di ogni test è stata eseguita una query a caldo per minimizzare l'impatto dei dati freddi e caldi, e ogni query è stata eseguita più volte per garantire la precisione.</p>
 <p>Per un set di dati di <strong>1 milione di</strong> record, l'uso di un <strong>indice invertito</strong> può fornire un miglioramento delle prestazioni fino a <strong>30 volte</strong> per le query puntuali. I guadagni di prestazioni possono essere ancora più significativi per i dataset più grandi.</p>
 <h2 id="Performance-recommandations" class="common-anchor-header">Raccomandazioni sulle prestazioni<button data-href="#Performance-recommandations" class="anchor-icon" translate="no">
@@ -155,7 +155,7 @@ title: Indice scalare
       </svg>
     </button></h2><ul>
 <li><p>Per indicizzare un campo scalare, leggere <a href="/docs/it/index-scalar-fields.md">Costruire un indice sugli scalari</a>.</p></li>
-<li><p>Per saperne di più sui termini correlati e sulle regole sopra menzionate, leggere</p>
+<li><p>Per saperne di più sui termini correlati e sulle regole sopra menzionate, leggete</p>
 <ul>
 <li><a href="/docs/it/bitset.md">Bitset</a></li>
 <li><a href="/docs/it/multi-vector-search.md">Ricerca ibrida</a></li>

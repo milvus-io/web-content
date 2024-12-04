@@ -58,7 +58,7 @@ title: Index scalaire
         ></path>
       </svg>
     </button></h2><p>Milvus vise à obtenir une faible utilisation de la mémoire, une grande efficacité de filtrage et un temps de chargement court grâce à ses algorithmes d'indexation des champs scalaires. Ces algorithmes sont classés en deux catégories principales : l'<a href="#auto-indexing">indexation automatique</a> et l'<a href="#inverted-indexing">indexation inversée</a>.</p>
-<h3 id="Auto-indexing" class="common-anchor-header">Indexation automatique</h3><p>Milvus crée automatiquement un index automatique pour un champ scalaire en fonction de son type de données, sans nécessiter d'intervention manuelle. L'indexation automatique convient aux requêtes de correspondance préfixe et aux scénarios de recherche fréquente.</p>
+<h3 id="Auto-indexing" class="common-anchor-header">Indexation automatique</h3><p>Milvus propose l'option <code translate="no">AUTOINDEX</code> pour vous éviter de devoir choisir manuellement un type d'index. Lors de l'appel de la méthode <code translate="no">create_index</code>, si l'option <code translate="no">index_type</code> n'est pas spécifiée, Milvus sélectionne automatiquement le type d'index le plus approprié en fonction du type de données.</p>
 <p>Le tableau suivant répertorie les types de données pris en charge par Milvus et les algorithmes d'indexation automatique correspondants.</p>
 <table>
 <thead>
@@ -68,15 +68,15 @@ title: Index scalaire
 <tr><td>VARCHAR</td><td>Index inversé</td></tr>
 <tr><td>INT8</td><td>Index inversé</td></tr>
 <tr><td>INT16</td><td>Index inversé</td></tr>
-<tr><td>INT32</td><td>Indice inversé</td></tr>
+<tr><td>INT32</td><td>Index inversé</td></tr>
 <tr><td>INT64</td><td>Indice inversé</td></tr>
 <tr><td>FLOAT</td><td>Indice inversé</td></tr>
 <tr><td>DOUBLE</td><td>Index inversé</td></tr>
 </tbody>
 </table>
-<h3 id="Inverted-indexing" class="common-anchor-header">Indexation inversée</h3><p>L'indexation inversée offre un moyen flexible de créer un index pour un champ scalaire en spécifiant manuellement les paramètres de l'index. Cette méthode fonctionne bien pour différents scénarios, y compris les requêtes ponctuelles, les requêtes de correspondance de motifs, les recherches en texte intégral, les recherches JSON, les recherches booléennes et même les requêtes de correspondance de préfixes.</p>
+<h3 id="Inverted-indexing" class="common-anchor-header">Indexation inversée</h3><p>L'indexation inversée offre un moyen flexible de créer un index pour un champ scalaire en spécifiant manuellement les paramètres de l'index. Cette méthode fonctionne bien pour différents scénarios, notamment les requêtes ponctuelles, les requêtes de correspondance de motifs, les recherches en texte intégral, les recherches JSON, les recherches booléennes et même les requêtes de correspondance de préfixes.</p>
 <p>Les index inversés mis en œuvre dans Milvus sont alimentés par <a href="https://github.com/quickwit-oss/tantivy">Tantivy</a>, une bibliothèque de moteur de recherche en texte intégral. Tantivy garantit que l'indexation inversée dans Milvus est à la fois efficace et rapide.</p>
-<p>Un index inversé se compose de deux éléments principaux : un dictionnaire de termes et une liste inversée. Le dictionnaire de termes comprend tous les mots tokenisés triés par ordre alphabétique, tandis que la liste inversée contient la liste des documents dans lesquels chaque mot apparaît. Cette configuration rend les requêtes ponctuelles et les requêtes par plage beaucoup plus rapides et efficaces que les recherches par force brute.</p>
+<p>Un index inversé comporte deux composants principaux : un dictionnaire de termes et une liste inversée. Le dictionnaire de termes comprend tous les mots tokenisés triés par ordre alphabétique, tandis que la liste inversée contient la liste des documents dans lesquels chaque mot apparaît. Cette configuration rend les requêtes ponctuelles et les requêtes par plage beaucoup plus rapides et efficaces que les recherches par force brute.</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/scalar_index_inverted.png" alt="Inverted index diagram" class="doc-image" id="inverted-index-diagram" />

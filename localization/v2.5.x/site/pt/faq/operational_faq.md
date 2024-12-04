@@ -21,7 +21,7 @@ title: FAQ operacional
         ></path>
       </svg>
     </button></h1><h4 id="What-if-I-failed-to-pull-the-Milvus-Docker-image-from-Docker-Hub" class="common-anchor-header">E se eu não conseguir extrair a imagem do Milvus Docker do Docker Hub?</h4><p>Se não conseguiu extrair a imagem do Milvus Docker do Docker Hub, tente adicionar outros espelhos de registo.</p>
-<p>Os utilizadores da China continental podem adicionar o URL "https://registry.docker-cn.com" à matriz registry-mirrors em <strong>/etc.docker/daemon.json</strong>.</p>
+<p>Os utilizadores da China Continental podem adicionar o URL "https://registry.docker-cn.com" ao array registry-mirrors em <strong>/etc.docker/daemon.json</strong>.</p>
 <pre><code translate="no">{
   <span class="hljs-string">&quot;registry-mirrors&quot;</span>: [<span class="hljs-string">&quot;https://registry.docker-cn.com&quot;</span>]
 }
@@ -47,7 +47,7 @@ title: FAQ operacional
 <p>Execute o comando lscpu para verificar se sua CPU suporta os conjuntos de instruções SIMD mencionados acima:</p>
 <pre><code translate="no">$ lscpu | grep -e sse4_2 -e avx -e avx2 -e avx512
 <button class="copy-code-btn"></button></code></pre>
-<h4 id="Why-does-Milvus-return-illegal-instruction-during-startup" class="common-anchor-header">Por que o Milvus retorna <code translate="no">illegal instruction</code> durante a inicialização?</h4><p>O Milvus requer que sua CPU suporte um conjunto de instruções SIMD: SSE4.2, AVX, AVX2, ou AVX512. A CPU deve suportar pelo menos um desses conjuntos para garantir que o Milvus funcione normalmente. Um erro <code translate="no">illegal instruction</code> retornado durante a inicialização sugere que sua CPU não suporta nenhum dos quatro conjuntos de instruções acima.</p>
+<h4 id="Why-does-Milvus-return-illegal-instruction-during-startup" class="common-anchor-header">Porque é que o Milvus devolve <code translate="no">illegal instruction</code> durante o arranque?</h4><p>O Milvus requer que sua CPU suporte um conjunto de instruções SIMD: SSE4.2, AVX, AVX2, ou AVX512. A CPU deve suportar pelo menos um desses conjuntos para garantir que o Milvus funcione normalmente. Um erro <code translate="no">illegal instruction</code> retornado durante a inicialização sugere que sua CPU não suporta nenhum dos quatro conjuntos de instruções acima.</p>
 <p>Veja <a href="/docs/pt/prerequisite-docker.md">o suporte da CPU para o conjunto de instruções SIMD</a>.</p>
 <h4 id="Can-I-install-Milvus-on-Windows" class="common-anchor-header">Posso instalar o Milvus no Windows?</h4><p>Sim. Você pode instalar o Milvus no Windows compilando a partir do código fonte ou de um pacote binário.</p>
 <p>Veja <a href="https://milvus.io/blog/2021-11-19-run-milvus-2.0-on-windows.md">Executar o Milvus no Windows</a> para saber como instalar o Milvus no Windows.</p>
@@ -99,8 +99,11 @@ title: FAQ operacional
 <span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-built_in">len</span>(<span class="hljs-built_in">bytes</span>(s, <span class="hljs-string">&quot;utf-8&quot;</span>)) <span class="hljs-comment"># Size in bytes of s, max-length in Milvus.</span>
 <span class="hljs-number">18</span>
 <button class="copy-code-btn"></button></code></pre>
+<h4 id="pymilvusexceptionsConnectionConfigException-ConnectionConfigException-code1-messageIllegal-uri-exampledb-expected-form-httpsuserpwdexamplecom12345-What-causes-this-and-how-can-it-be-solved" class="common-anchor-header"><code translate="no">pymilvus.exceptions.ConnectionConfigException: &lt;ConnectionConfigException: (code=1, message=Illegal uri: [example.db], expected form 'https://user:pwd@example.com:12345')&gt;</code>. O que causa este erro e como pode ser resolvido?</h4><p>Este erro indica que está a tentar ligar-se ao Milvus Lite utilizando uma versão anterior do pymilvus que não o suporta. Para o resolver, actualize a sua instalação do pymilvus para, pelo menos, a versão 2.4.2. Esta versão suporta a ligação ao Milvus Lite. Para atualizar, utilize o seguinte comando:</p>
+<pre><code translate="no" class="language-shell">pip install pymilvus&gt;=2.4.2
+<button class="copy-code-btn"></button></code></pre>
 <h4 id="Still-have-questions" class="common-anchor-header">Ainda tem dúvidas?</h4><p>Você pode:</p>
 <ul>
-<li>Verificar <a href="https://github.com/milvus-io/milvus/issues">o Milvus</a> no GitHub. Sinta-se à vontade para fazer perguntas, partilhar ideias e ajudar os outros.</li>
-<li>Junte-se ao nosso <a href="https://discuss.milvus.io/">Fórum Milvus</a> ou <a href="https://join.slack.com/t/milvusio/shared_invite/enQtNzY1OTQ0NDI3NjMzLWNmYmM1NmNjOTQ5MGI5NDhhYmRhMGU5M2NhNzhhMDMzY2MzNDdlYjM5ODQ5MmE3ODFlYzU3YjJkNmVlNDQ2ZTk">Canal Slack</a> para encontrar apoio e envolver-se com a nossa comunidade de código aberto.</li>
+<li>Confira <a href="https://github.com/milvus-io/milvus/issues">o Milvus</a> no GitHub. Sinta-se à vontade para fazer perguntas, partilhar ideias e ajudar os outros.</li>
+<li>Junte-se ao nosso <a href="https://discuss.milvus.io/">Fórum Milvus</a> ou <a href="https://join.slack.com/t/milvusio/shared_invite/enQtNzY1OTQ0NDI3NjMzLWNmYmM1NmNjOTQ5MGI5NDhhYmRhMGU5M2NhNzhhMDMzY2MzNDdlYjM5ODQ5MmE3ODFlYzU3YjJkNmVlNDQ2ZTk">Canal Slack</a> para encontrar suporte e envolver-se com a nossa comunidade de código aberto.</li>
 </ul>
