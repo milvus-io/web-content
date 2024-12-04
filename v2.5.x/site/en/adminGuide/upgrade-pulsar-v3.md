@@ -7,7 +7,7 @@ title: Upgrade Pulsar in Milvus from V2 to V3
 
 # Upgrading Pulsar ​
 
-This article describes the proceure for you to upgrade your Pulsar component from V2 to V3 if you already have a working Milvus deployment with Pulsar V2.​ Since Milvus v2.5, **milvus-helm** and **milvus-operator** will use pulsar V3 by default to fix some bugs and security vulnerabilities.​
+This article describes the proceure for you to upgrade your Pulsar component from V2 to V3 if you already have a working Milvus deployment with Pulsar V2.​ Since Milvus v2.5, **milvus-helm** and **milvus-operator** will use Pulsar V3 by default to fix some bugs and security vulnerabilities.​ While Milvus 2.5 is compatible with Pulsar 2.x, upgrading to Pulsar V3 is optional. For enhanced stability and performance, we recommend upgrading to Pulsar V3.
 
 <div class="alert note">
 
