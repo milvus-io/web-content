@@ -39,10 +39,10 @@ GPU_CAGRA is a graph-based index optimized for GPUs, Using inference-grade GPUs 
 
 * Limits on search
 
-  | Parameter | Range                                                |
-  | --------- | ---------------------------------------------------- |
-  | `top-K`   | <= 1024                                              |
-  | `top-K`   | <=max((`itopk_size` + 31)// 32, `search_width`) * 32 |
+  | Parameter       | Range                                                |
+  |-----------------|------------------------------------------------------|
+  | `limit` (top-K) | <= 1024                                              |
+  | `limit` (top-K) | <=max((`itopk_size` + 31)// 32, `search_width`) * 32 |
 
 ## GPU_IVF_FLAT
 
@@ -71,9 +71,9 @@ When conducting searches, note that you can set the top-K up to 256 for any sear
 
 - Limits on search
 
-  | Parameter | Range     |
-  | --------- | --------- |
-  | `top-K`   | <= `2048` |
+  | Parameter       | Range     |
+  |-----------------|-----------|
+  | `limit` (top-K) | <= `2048` |
 
 ## GPU_IVF_PQ
 
@@ -108,9 +108,9 @@ When conducting searches, note that you can set the top-K up to 8192 for any sea
 
 - Limits on search
 
-  | Parameter | Range     |
-  | --------- | --------- |
-  | `top-K`   | <= `1024` |
+  | Parameter       | Range     |
+  |-----------------|-----------|
+  | `limit` (top-K) | <= `1024` |
 
 ## GPU_BRUTE_FORCE
 
