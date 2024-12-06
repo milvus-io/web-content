@@ -150,6 +150,7 @@ openssl req -new -key client.key\
   | openssl x509 -req -days $ExpireDays -out client.pem -CA ca.pem -CAkey ca.key -CAcreateserial \
     -extfile ./openssl.cnf -extensions v3_req
 ```
+</details>
 
 Run the `renew.sh` file to create certificate.
 
