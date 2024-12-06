@@ -27,6 +27,9 @@ summary: >-
 <div class="alert note">
 <p>By integrating full text search with semantic-based dense vector search, you can enhance the accuracy and relevance of search results. For more information, refer to <a href="/docs/multi-vector-search.md">​Hybrid Search</a>.​</p>
 </div>
+<div class="alert note">
+<p>Full text search is available in Milvus Standalone and Milvus Distributed but not Milvus Lite, although adding it to Milvus Lite is on the roadmap.</p>
+</div>
 <h2 id="Overview​" class="common-anchor-header">Overview​<button data-href="#Overview​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
