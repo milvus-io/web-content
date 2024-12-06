@@ -23,6 +23,9 @@ CollectionSchema.addField(AddFieldReq.builder()
     .maxCapacity(Integer maxCapacity)
     .isNullable(Boolean isNullable)
     .defaultValue(DataType dataType)
+    .enableAnalyzer(Boolean enableAnalyzer)
+    .enableMatch(Boolean enableMatch)
+    .analyzerParams(Map<String, Object>, analyzerParams)
 
     .build()
 )
@@ -109,6 +112,45 @@ CollectionSchema.addField(AddFieldReq.builder()
 - `defaultValue(DataType dataType)`
 
     Sets a default value for a specific field in a collection schema when creating it. This is particularly useful when you want certain fields to have an initial value even if no value is explicitly provided during data insertion.
+
+- `enableAnalyzer(Boolean enableAnalyzer)`
+
+    Whether to enable text analysis for the specified `VARCHAR` field. When set to `true`, it instructs Milvus to use a text analyzer, which tokenizes and filters the text content of the field.
+
+- `enableMatch(Boolean enableMatch)`
+
+    Whether to enable keyword matching for the specified `VARCHAR` field. When set to `true`, Milvus creates an inverted index for the field, allowing for quick and efficient keyword lookups. `enableMatch` works in conjunction with `enableAnalyzer` to provide structured term-based text search, with `enableAnalyzer` handling tokenization and `enableMatch` handling the search operations on these tokens.
+
+- `analyzerParams(Map<String, Object>, analyzerParams)`
+
+    Configures the analyzer for text processing, specifically for `DataType.VarChar` fields. This parameter configures tokenizer and filter settings, particularly for text fields used in [keyword matching](https://milvus.io/docs/keyword-match.md) or [full text search](https://milvus.io/docs/full-text-search.md). Depending on the type of analyzer, it can be configured in either of the following methods:
+
+    - Built-in analyzer
+
+        ```java
+        Map<String, Object> analyzerParams = new HashMap<>();
+        analyzerParams.put("type", "english");
+        ```
+
+        - `type` (*String*) -
+
+            Pre-configured analyzer type built into Milvus, which can be used out-of-the-box by specifying its name. Possible values: `standard`, `english`, `chinese`. For more information, refer to [Standard Analyzer](https://milvus.io/docs/standard-analyzer.md), [English Analyzer](https://milvus.io/docs/english-analyzer.md), and [Chinese Analyzer](https://milvus.io/docs/chinese-analyzer.md).
+
+    - Custom analyzer
+
+        ```java
+        Map<String, Object> analyzerParams = new HashMap<>();
+        analyzerParams.put("tokenizer", "standard");
+        analyzerParams.put("filter", Collections.singletonList("lowercase"));
+        ```
+
+        - `tokenizer` (*String*) -
+
+            Defines the tokenizer type. Possible values: `standard` (default), `whitespace`, `jieba`. For more information, refer to [Standard Tokenizer](https://milvus.io/docs/standard-tokenizer.md), [Whitespace Tokenizer](https://milvus.io/docs/whitespace-tokenizer.md), and [Jieba Tokenizer](https://milvus.io/docs/jieba-tokenizer.md).
+
+        - `filter` (*List\<String>*) -
+
+            Lists filters to refine tokens produced by the tokenizer, with options for built-in filters and custom filters. For more information, refer to [Alphanumonly Filter](https://milvus.io/docs/alphanumonly-filer.md) and others.
 
 **RETURNS:**
 

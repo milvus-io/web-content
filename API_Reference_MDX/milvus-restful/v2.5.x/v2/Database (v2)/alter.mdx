@@ -1,0 +1,20 @@
+---
+displayed_sidebar: restfulSidebar
+sidebar_positition: 10
+slug: /restful/alter
+title: "Alter | RESTful"
+description: "This operation modifies a new database. | RESTful"
+hide_table_of_contents: true
+sidebar_label: "Alter"
+sidebar_custom_props: { badges: ['post']}
+---
+
+# Alter
+
+import RestSpecs from '@site/src/components/RestSpecs';
+
+<RestSpecs specs={specs} endpoint={endpoint} method={method} target="milvus" lang="en-US" />
+
+export const specs = {"summary":"Alter","deprecated":false,"description":"This operation modifies a new database.","x-i18n":{"zh-CN":{"summary":"修改数据库","description":"此操作用于修改指定数据库。"}},"tags":["Database Operations (V2)"],"x-include-target":["milvus"],"parameters":[{"name":"Authorization","in":"header","description":"The authentication token should be <include target=\"zilliz\">an API key with appropriate privileges or </include>a pair of colon-joined username and password, like `username:password`.","required":true,"example":"Bearer {{TOKEN}}","schema":{"type":"string"},"x-i18n":{"zh-CN":{"description":"认证令牌，应为<include target=\"zilliz\">具备适当权限的 API 密钥或</include>用冒号分隔的用户名和密码，如 `username:password`。"}}}],"requestBody":{"content":{"application/json":{"schema":{"type":"object","properties":{"dbName":{"type":"string","description":"The name of the database to modify.","x-i18n":{"zh-CN":{"description":"待修改数据库名称。"}}},"properties":{"type":"object","description":"Database properties to modify. For example, you can reset the `mmap.enabled` property to `false` to disable the mmap feature for the collections in the database.","x-i18n":{"zh-CN":{"description":"待修改的数据库属性。例如，可以重新设置 `mmap.enabled` 属性为 `false` 以禁用数据库中 Collection 的 mmap 特性。"}}}},"required":["dbName"]},"example":{"dbName":"test","properties":{"mmap.enabled":true}}}}},"responses":{"200":{"description":"Returns an empty object.","x-i18n":{"zh-CN":{"description":"返回空对象。"}},"content":{"application/json":{"schema":{"oneOf":[{"x-tab-label":"success","type":"object","properties":{"code":{"type":"integer","description":"Response code.","x-i18n":{"zh-CN":{"description":"响应码。"}}},"data":{"type":"object","description":"Response payload which is an empty object.","x-i18n":{"zh-CN":{"description":"响应载荷，为空对象。"}},"properties":{}}}},{"x-tab-label":"failure","description":"Returns an error message.","x-i18n":{"zh-CN":{"description":"返回错误消息。"}},"x-i18n-langs":["zh-CN"],"type":"object","properties":{"code":{"type":"integer","description":"Response code.","x-i18n":{"zh-CN":{"description":"响应码。"}}},"message":{"type":"string","description":"Error message.","x-i18n":{"zh-CN":{"description":"错误描述。"}}}}}]},"examples":{"1":{"summary":"success","x-target-response":"OPTION 1","value":{"code":0,"data":{}}},"2":{"summary":"failure","x-target-response":"OPTION 2","value":{"code":0,"message":"The token is illegal."}}}}}}}}
+export const endpoint = "/v2/vectordb/databases/alter"
+export const method = "post"
