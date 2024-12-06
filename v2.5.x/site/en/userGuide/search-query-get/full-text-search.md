@@ -17,6 +17,12 @@ By integrating full text search with semantic-based dense vector search, you can
 
 </div>
 
+<div class="alert note">
+
+Full text search is available in Milvus Standalone and Milvus Distributed but not Milvus Lite, although adding it to Milvus Lite is on the roadmap.
+
+</div>
+
 ## Overview​
 
 Full text search simplifies the process of text-based searching by eliminating the need for manual embedding. This feature operates through the following workflow:​
