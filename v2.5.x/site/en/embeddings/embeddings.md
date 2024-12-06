@@ -23,7 +23,6 @@ To create embeddings in action, refer to [Using PyMilvus's Model To Generate Tex
 | ------------------------------------------------------------------------------------- | ------- | -------------------- |
 |  [openai](https://milvus.io/api-reference/pymilvus/v2.4.x/EmbeddingModels/OpenAIEmbeddingFunction/OpenAIEmbeddingFunction.md)                            |  Dense  |  API                 |
 |  [sentence-transformer](https://milvus.io/api-reference/pymilvus/v2.4.x/EmbeddingModels/SentenceTransformerEmbeddingFunction/SentenceTransformerEmbeddingFunction.md) |  Dense  |  Open-sourced        |
-|  [bm25](https://milvus.io/api-reference/pymilvus/v2.4.x/EmbeddingModels/BM25EmbeddingFunction/BM25EmbeddingFunction.md)                                |  Sparse |  Open-sourced        |
 |  [Splade](https://milvus.io/api-reference/pymilvus/v2.4.x/EmbeddingModels/SpladeEmbeddingFunction/SpladeEmbeddingFunction.md)                            |  Sparse |  Open-sourced        |
 |  [bge-m3](https://milvus.io/api-reference/pymilvus/v2.4.x/EmbeddingModels/BGEM3EmbeddingFunction/BGEM3EmbeddingFunction.md)                             |  Hybrid |  Open-sourced        |
 |  [voyageai](https://milvus.io/api-reference/pymilvus/v2.4.x/EmbeddingModels/VoyageEmbeddingFunction/VoyageEmbeddingFunction.md)                            |  Dense  |  API                 |
@@ -42,7 +41,7 @@ To use embedding functions with Milvus, first install the PyMilvus client librar
 pip install "pymilvus[model]"
 ```
 
-The `model` subpackage supports various embedding models, from [OpenAI](https://milvus.io/docs/embed-with-openai.md), [Sentence Transformers](https://milvus.io/docs/embed-with-sentence-transform.md), [BGE M3](https://milvus.io/docs/embed-with-bgm-m3.md), [BM25](https://milvus.io/docs/embed-with-bm25.md), to [SPLADE](https://milvus.io/docs/embed-with-splade.md) pretrained models. For simpilicity, this example uses the `DefaultEmbeddingFunction` which is __all-MiniLM-L6-v2__ sentence transformer model, the model is about 70MB and it will be downloaded during first use:
+The `model` subpackage supports various embedding models, from [OpenAI](https://milvus.io/docs/embed-with-openai.md), [Sentence Transformers](https://milvus.io/docs/embed-with-sentence-transform.md), [BGE M3](https://milvus.io/docs/embed-with-bgm-m3.md), to [SPLADE](https://milvus.io/docs/embed-with-splade.md) pretrained models. For simpilicity, this example uses the `DefaultEmbeddingFunction` which is __all-MiniLM-L6-v2__ sentence transformer model, the model is about 70MB and it will be downloaded during first use:
 
 ```python
 from pymilvus import model
@@ -120,47 +119,4 @@ bge_m3_ef = BGEM3EmbeddingFunction(use_fp16=False, device="cpu")
 
 docs_embeddings = bge_m3_ef(docs)
 query_embeddings = bge_m3_ef([query])
-```
-
-## Example 3: Generate  sparse vectors using BM25 model
-
-BM25 is a well-known method that uses word occurrence frequencies to determine the relevance between queries and documents. In this example, we will show how to use `BM25EmbeddingFunction` to generate sparse embeddings for both queries and documents.
-
-First, import the __BM25EmbeddingFunction__ class.
-
-```xml
-from pymilvus.model.sparse import BM25EmbeddingFunction
-```
-
-In BM25, it's important to calculate the statistics in your documents to obtain the IDF (Inverse Document Frequency), which can represent the pattern in your documents. The IDF is a measure of how much information a word provides, that is, whether it's common or rare across all documents.
-
-```python
-# 1. prepare a small corpus to search
-docs = [
-    "Artificial intelligence was founded as an academic discipline in 1956.",
-    "Alan Turing was the first person to conduct substantial research in AI.",
-    "Born in Maida Vale, London, Turing was raised in southern England.",
-]
-query = "Where was Turing born?"
-bm25_ef = BM25EmbeddingFunction()
-
-# 2. fit the corpus to get BM25 model parameters on your documents.
-bm25_ef.fit(docs)
-
-# 3. store the fitted parameters to disk to expedite future processing.
-bm25_ef.save("bm25_params.json")
-
-# 4. load the saved params
-new_bm25_ef = BM25EmbeddingFunction()
-new_bm25_ef.load("bm25_params.json")
-
-docs_embeddings = new_bm25_ef.encode_documents(docs)
-query_embeddings = new_bm25_ef.encode_queries([query])
-print("Dim:", new_bm25_ef.dim, list(docs_embeddings)[0].shape)
-```
-
-The expected output is similar to the following:
-
-```python
-Dim: 21 (1, 21)
 ```
