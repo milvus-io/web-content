@@ -71,5 +71,9 @@ title: Integrations Overview
 <tr><td><a href="/docs/knowledge_table_with_milvus.md">Knowledge Table with Milvus</a></td><td>Knowledge Engineering</td><td>Knowledge Table, Milvus</td></tr>
 <tr><td><a href="/docs/use_milvus_in_docsgpt.md">Use Milvus in DocsGPT</a></td><td>Ochestration</td><td>DocsGPT, Milvus</td></tr>
 <tr><td><a href="/docs/use_milvus_with_sambanova.md">Use Milvus with SambaNova</a></td><td>Orchestration</td><td>Milvus, SambaNova</td></tr>
+<tr><td><a href="/docs/build_RAG_with_milvus_and_cognee.md">Build RAG with Milvus and Cognee</a></td><td>Knowledge Engineering</td><td>Milvus, Cognee</td></tr>
+<tr><td><a href="/docs/build_RAG_with_milvus_and_gemini.md">Build RAG with Milvus and Gemini</a></td><td>LLMs</td><td>Milvus, Gemini</td></tr>
+<tr><td><a href="/docs/build_RAG_with_milvus_and_ollama.md">Build RAG with Milvus and Ollama</a></td><td>LLMs</td><td>Milvus, Ollama</td></tr>
+<tr><td><a href="/docs/milvus_rag_with_dynamiq.md">Getting Started with Dynamiq and Milvus</a></td><td>Orchestration</td><td>Milvus, Dynamiq</td></tr>
 </tbody>
 </table>

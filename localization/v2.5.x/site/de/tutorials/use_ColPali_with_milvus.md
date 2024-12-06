@@ -1,10 +1,10 @@
 ---
 id: use_ColPali_with_milvus.md
 summary: >-
-  In diesem Notizbuch bezeichnen wir diese Art der Multi-Vektor-Darstellung der
-  Allgemeinheit halber als "ColBERT-Einbettungen". Das tatsächliche Modell, das
-  verwendet wird, ist jedoch das ColPali-Modell. Wir werden demonstrieren, wie
-  Milvus für Multi-Vektor-Retrieval verwendet werden kann. Darauf aufbauend
+  In diesem Notizbuch bezeichnen wir diese Art der Multi-Vektor-Darstellung aus
+  Gründen der Allgemeinheit als "ColBERT-Einbettungen". Das tatsächliche Modell,
+  das verwendet wird, ist jedoch das ColPali-Modell. Wir werden demonstrieren,
+  wie Milvus für Multi-Vektor-Retrieval verwendet werden kann. Darauf aufbauend
   stellen wir vor, wie ColPali für das Abrufen von Seiten auf der Grundlage
   einer gegebenen Abfrage verwendet werden kann.
 title: ColPali für multimodales Retrieval mit Milvus verwenden
@@ -33,7 +33,7 @@ title: ColPali für multimodales Retrieval mit Milvus verwenden
 <p>Moderne Retrieval-Modelle verwenden in der Regel eine einzige Einbettung, um Text oder Bilder darzustellen. ColBERT hingegen ist ein neuronales Modell, das eine Liste von Einbettungen für jede Dateninstanz verwendet und eine "MaxSim"-Operation zur Berechnung der Ähnlichkeit zwischen zwei Texten einsetzt. Neben Textdaten enthalten auch Abbildungen, Tabellen und Diagramme reichhaltige Informationen, die beim textbasierten Information Retrieval oft unberücksichtigt bleiben.</p>
 <p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.5.x/images/colpali_formula.png" alt="" class="doc-image" id="" />
+    <img translate="no" src="/docs/v2.5.x/assets/colpali_formula.png" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 </p>

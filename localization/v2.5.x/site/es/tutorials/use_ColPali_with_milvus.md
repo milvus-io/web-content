@@ -33,7 +33,7 @@ title: Utilizar ColPali para la recuperación multimodal con Milvus
 <p>Los modelos de recuperación modernos suelen utilizar una única incrustación para representar texto o imágenes. ColBERT, sin embargo, es un modelo neuronal que utiliza una lista de incrustaciones para cada instancia de datos y emplea una operación "MaxSim" para calcular la similitud entre dos textos. Más allá de los datos textuales, las figuras, tablas y diagramas también contienen abundante información, que a menudo no se tiene en cuenta en la recuperación de información basada en texto.</p>
 <p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.5.x/images/colpali_formula.png" alt="" class="doc-image" id="" />
+    <img translate="no" src="/docs/v2.5.x/assets/colpali_formula.png" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 </p>

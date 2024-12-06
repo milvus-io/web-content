@@ -839,7 +839,7 @@
             "children": []
           },
           {
-            "label": "Configurar Chunk Cache",
+            "label": "Configurar la caché de trozos",
             "id": "chunk_cache.md",
             "order": 3,
             "children": []
@@ -1036,7 +1036,7 @@
             "isMenu": true,
             "children": [
               {
-                "label": "Seguimiento de Jaeger",
+                "label": "Rastreo de Jaeger",
                 "id": "config_jaeger_tracing.md",
                 "order": 0,
                 "children": []
@@ -1344,6 +1344,24 @@
             "id": "build_RAG_with_milvus_and_siliconflow.md",
             "order": 4,
             "children": []
+          },
+          {
+            "label": "SambaNova",
+            "id": "use_milvus_with_sambanova.md",
+            "order": 5,
+            "children": []
+          },
+          {
+            "label": "Géminis",
+            "id": "build_RAG_with_milvus_and_gemini.md",
+            "order": 6,
+            "children": []
+          },
+          {
+            "label": "Ollama",
+            "id": "build_RAG_with_milvus_and_ollama.md",
+            "order": 7,
+            "children": []
           }
         ]
       },
@@ -1433,15 +1451,15 @@
             "children": []
           },
           {
-            "label": "SambaNova",
-            "id": "use_milvus_with_sambanova.md",
+            "label": "PrivadoGPT",
+            "id": "use_milvus_in_private_gpt.md",
             "order": 10,
             "children": []
           },
           {
-            "label": "PrivadoGPT",
-            "id": "use_milvus_in_private_gpt.md",
-            "order": 8,
+            "label": "Dynamiq",
+            "id": "milvus_rag_with_dynamiq.md",
+            "order": 11,
             "children": []
           }
         ]
@@ -1492,6 +1510,12 @@
             "label": "Tabla de conocimientos",
             "id": "knowledge_table_with_milvus.md",
             "order": 2,
+            "children": []
+          },
+          {
+            "label": "Cognee",
+            "id": "build_RAG_with_milvus_and_cognee.md",
+            "order": 3,
             "children": []
           }
         ]

@@ -32,12 +32,12 @@ title: Use ColPali para recuperação multimodal com Milvus
 <p>Os modelos de recuperação modernos utilizam normalmente um único embedding para representar texto ou imagens. O ColBERT, no entanto, é um modelo neural que utiliza uma lista de embeddings para cada instância de dados e emprega uma operação "MaxSim" para calcular a semelhança entre dois textos. Para além dos dados textuais, as figuras, tabelas e diagramas também contêm informações ricas, que são frequentemente ignoradas na recuperação de informações baseada em texto.</p>
 <p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.5.x/images/colpali_formula.png" alt="" class="doc-image" id="" />
+    <img translate="no" src="/docs/v2.5.x/assets/colpali_formula.png" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 </p>
 <p>A função MaxSim compara uma consulta com um documento (o que está a ser pesquisado) através da análise dos seus token embeddings. Para cada palavra na consulta, seleciona a palavra mais semelhante do documento (utilizando a semelhança de cosseno ou a distância L2 ao quadrado) e soma estas semelhanças máximas entre todas as palavras na consulta</p>
-<p>O ColPali é um método que combina a representação multi-vetorial do ColBERT com o PaliGemma (um modelo de linguagem multimodal de grande dimensão) para tirar partido das suas fortes capacidades de compreensão. Esta abordagem permite que uma página com texto e imagens seja representada utilizando uma incorporação multi-vetorial unificada. As incorporações dentro desta representação multi-vetorial podem capturar informações detalhadas, melhorando o desempenho da geração aumentada de recuperação (RAG) para dados multimodais.</p>
+<p>O ColPali é um método que combina a representação multi-vetorial do ColBERT com o PaliGemma (um modelo de linguagem multimodal de grande dimensão) para tirar partido das suas fortes capacidades de compreensão. Esta abordagem permite que uma página com texto e imagens seja representada utilizando uma incorporação multi-vetorial unificada. As incorporações dentro desta representação multi-vetorial podem captar informações detalhadas, melhorando o desempenho da geração aumentada de recuperação (RAG) para dados multimodais.</p>
 <p>Neste caderno, referimo-nos a este tipo de representação multi-vetorial como "ColBERT embeddings" por uma questão de generalidade. No entanto, o modelo real que está a ser utilizado é o <strong>modelo ColPali</strong>. Vamos demonstrar como utilizar o Milvus para a recuperação multi-vetorial. Com base nisso, apresentaremos como utilizar o ColPali para recuperar páginas com base numa determinada consulta.</p>
 <h2 id="Preparation" class="common-anchor-header">Preparação<button data-href="#Preparation" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -75,7 +75,7 @@ $ pip instal pillow
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Utilizaremos o PDF RAG como exemplo. Pode descarregar o documento <a href="https://arxiv.org/pdf/2004.12832">ColBERT</a> e colocá-lo em <code translate="no">./pdf</code>. O ColPali não processa diretamente o texto; em vez disso, toda a página é rasterizada numa imagem. O modelo ColPali é excelente para compreender a informação textual contida nestas imagens. Portanto, converteremos cada página do PDF em uma imagem para processamento.</p>
+    </button></h2><p>Utilizaremos o PDF RAG como exemplo. Pode descarregar o documento <a href="https://arxiv.org/pdf/2004.12832">ColBERT</a> e colocá-lo em <code translate="no">./pdf</code>. O ColPali não processa o texto diretamente; em vez disso, toda a página é rasterizada numa imagem. O modelo ColPali é excelente para compreender a informação textual contida nestas imagens. Portanto, converteremos cada página do PDF em uma imagem para processamento.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pdf2image <span class="hljs-keyword">import</span> convert_from_path
 
 pdf_path = <span class="hljs-string">&quot;pdfs/2004.12832v2.pdf&quot;</span>
@@ -332,4 +332,4 @@ retriever.<span class="hljs-title function_">create_index</span>()
 <pre><code translate="no">./pages/page_5.png
 ./pages/page_7.png
 </code></pre>
-<p>Por fim, recuperamos o nome da página original. Com o ColPali, podemos recuperar documentos multimodais sem a necessidade de técnicas de processamento complexas para extrair texto e imagens dos documentos. Ao tirar partido de modelos de visão de grande dimensão, podem ser analisadas mais informações, como tabelas e figuras, sem perdas significativas de informação.</p>
+<p>Por fim, recuperamos o nome da página original. Com o ColPali, podemos recuperar documentos multimodais sem a necessidade de técnicas de processamento complexas para extrair texto e imagens dos documentos. Ao tirar partido de modelos de visão de grande dimensão, é possível analisar mais informações - como tabelas e figuras - sem perdas significativas de informação.</p>

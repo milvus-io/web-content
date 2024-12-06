@@ -28,7 +28,7 @@ title: Milvusでマルチモーダル検索にColPaliを使う
 <p>最新の検索モデルでは、テキストや画像を表現するために単一の埋め込みを使用するのが一般的です。しかしColBERTは、各データインスタンスに対して埋め込みリストを利用するニューラルモデルであり、2つのテキスト間の類似度を計算するために「MaxSim」演算を採用しています。テキストデータだけでなく、図、表、ダイアグラムにも豊富な情報が含まれているが、テキストベースの情報検索では軽視されがちである。</p>
 <p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.5.x/images/colpali_formula.png" alt="" class="doc-image" id="" />
+    <img translate="no" src="/docs/v2.5.x/assets/colpali_formula.png" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 </p>
@@ -71,7 +71,7 @@ $ pip instal pillow
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>PDF RAGを例として使用する。<a href="https://arxiv.org/pdf/2004.12832">ColBERT</a>論文をダウンロードし、<code translate="no">./pdf</code> 。ColPaliはテキストを直接処理するのではなく、ページ全体を画像にラスタライズする。ColPali モデルは、これらの画像に含まれるテキスト情報を理解することに優れています。したがって、各 PDF ページを画像に変換して処理します。</p>
+    </button></h2><p>PDF RAGを例として使用する。<a href="https://arxiv.org/pdf/2004.12832">ColBERT</a>論文をダウンロードし、<code translate="no">./pdf</code> 。ColPaliはテキストを直接処理するのではなく、ページ全体を画像にラスタライズする。ColPali モデルは、これらの画像に含まれるテキスト情報を理解することに優れています。そのため、各 PDF ページを画像に変換して処理します。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pdf2image <span class="hljs-keyword">import</span> convert_from_path
 
 pdf_path = <span class="hljs-string">&quot;pdfs/2004.12832v2.pdf&quot;</span>
@@ -91,10 +91,10 @@ client = <span class="hljs-title class_">MilvusClient</span>(uri=<span class="hl
 <ul>
 <li>小規模なデータやプロトタイピングのためにローカルのベクターデータベースが必要なだけであれば、uriをローカルファイル、例えば<code translate="no">./milvus.db</code> に設定するのが最も便利な方法です。</li>
 <li>もし、100万ベクトルを超えるような大規模なデータがある場合は、<a href="https://milvus.io/docs/quickstart.md">DockerやKubernetes</a>上に、よりパフォーマンスの高いMilvusサーバを構築することができます。このセットアップでは、サーバのアドレスとポートをURIとして使用してください（例：<code translate="no">http://localhost:19530</code> ）。Milvusで認証機能を有効にしている場合、トークンには"&lt;your_username&gt;:&lt;your_password&gt;"を使用します。</li>
-<li>Milvusのフルマネージドクラウドサービスである<a href="https://zilliz.com/cloud">Milvus Cloudを</a>利用する場合は、Milvus Cloudの<a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#cluster-details">Public EndpointとAPI Keyに</a>対応する<code translate="no">uri</code> と<code translate="no">token</code> を調整します。</li>
+<li>Milvusのフルマネージドクラウドサービスである<a href="https://zilliz.com/cloud">Milvus Cloudを</a>利用する場合は、Milvus Cloudの<a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#cluster-details">Public EndpointとAPI keyに</a>対応する<code translate="no">uri</code> と<code translate="no">token</code> を調整してください。</li>
 </ul>
 </div>
-<p>MilvusColbertRetrieverクラスを定義し、Milvusクライアントをラップしてマルチベクターデータを取得できるようにします。この実装は、ColBERT埋め込みを平坦化してコレクションに挿入し、各行がColBERT埋め込みリストの個々の埋め込みを表す。また、各埋め込みの出所を追跡するために、doc_id と seq_id を記録する。</p>
+<p>MilvusColbertRetrieverクラスを定義し、Milvusクライアントをラップしてマルチベクターデータを取得できるようにします。この実装は、ColBERT 埋め込みデータを平坦化し、コレクションに挿入する。また、各埋め込みの出所を追跡するために、doc_id と seq_id を記録する。</p>
 <p>ColBERT 埋め込みリストで検索する場合、複数の検索が行われる。検索された doc_id は、重複排除される。再ランク付けプロセスが実行され、各 doc_id の完全な埋め込みが取得され、MaxSim スコアが計算され、最終的なランク付け結果が生成される。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">class</span> <span class="hljs-title class_">MilvusColbertRetriever</span>:
     <span class="hljs-keyword">def</span> <span class="hljs-title function_">__init__</span>(<span class="hljs-params">self, milvus_client, collection_name, dim=<span class="hljs-number">128</span></span>):
