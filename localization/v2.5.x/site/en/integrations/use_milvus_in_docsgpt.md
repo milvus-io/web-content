@@ -139,6 +139,6 @@ $ <span class="hljs-built_in">cd</span> DocsGPT
   </span>
 </p>
 <p>If you want to stop the services, run:</p>
-<pre><code translate="no" class="language-shell">$ docker-compose down
+<pre><code translate="no" class="language-shell">$ docker compose down
 <button class="copy-code-btn"></button></code></pre>
 <p>For further details and more advanced setups, please refer to the <a href="https://github.com/arc53/DocsGPT">DocsGPT</a> official documentation.</p>
