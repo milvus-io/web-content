@@ -2313,6 +2313,25 @@ The filtered results are as follows:​
 
 The following table lists the precedence of operators. Operators are listed top to bottom, in descending precedence.​
 
+| Precedence | Operator                |
+|------------|-------------------------|
+| 1          | +, -                    |
+| 2          | not                     |
+| 3          | **                      |
+| 4          | *, /, %                 |
+| 5          | <, <=, >, >=            |
+| 6          | ==, !=                  |
+| 7          | like                    |
+| 8          | JSON_CONTAINS           |
+| 9          | ARRAY_CONTAINS          |
+| 10         | JSON_CONTAINS_ALL       |
+| 11         | ARRAY_CONTAINS_ALL      |
+| 12         | JSON_CONTAINS_ANY       |
+| 13         | ARRAY_CONTAINS_ANY      |
+| 14         | ARRAY_LENGTH            |
+| 15         | and (&&)                |
+| 16         | or (\|\|)               |
+
 Expressions are normally evaluated from left to right. Complex expressions are evaluated one at a time. The order in which the expressions are evaluated is determined by the precedence of the operators used.​
 
 If an expression contains two or more operators with the same precedence, the operator to the left is evaluated first. When a lower precedence operation should be processed first, it should be enclosed within parentheses.​
