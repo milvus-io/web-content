@@ -77,8 +77,8 @@ title: Índice GPU
 <tr><th>Parâmetro</th><th>Limite</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">top-K</code></td><td>&lt;= 1024</td></tr>
-<tr><td><code translate="no">top-K</code></td><td>&lt;=max((<code translate="no">itopk_size</code> + 31)// 32, <code translate="no">search_width</code>) * 32</td></tr>
+<tr><td><code translate="no">limit</code> (top-K)</td><td>&lt;= 1024</td></tr>
+<tr><td><code translate="no">limit</code> (top-K)</td><td>&lt;=max((<code translate="no">itopk_size</code> + 31)// 32, <code translate="no">search_width</code>) * 32</td></tr>
 </tbody>
 </table>
 </li>
@@ -98,7 +98,7 @@ title: Índice GPU
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Semelhante ao <a href="https://milvus.io/docs/index.md#IVF_FLAT">IVF_FLAT</a>, o GPU_IVF_FLAT também divide os dados vectoriais em <code translate="no">nlist</code> unidades de cluster e, em seguida, compara as distâncias entre o vetor de entrada alvo e o centro de cada cluster. Dependendo do número de clusters que o sistema está definido para consultar (<code translate="no">nprobe</code>), os resultados da pesquisa de semelhança são devolvidos com base em comparações entre a entrada de destino e os vectores apenas no(s) cluster(s) mais semelhante(s) - reduzindo drasticamente o tempo de consulta.</p>
+    </button></h2><p>Semelhante ao <a href="https://milvus.io/docs/index.md#IVF_FLAT">IVF_FLAT</a>, o GPU_IVF_FLAT também divide os dados vetoriais em <code translate="no">nlist</code> unidades de cluster e, em seguida, compara as distâncias entre o vetor de entrada de destino e o centro de cada cluster. Dependendo do número de clusters que o sistema está definido para consultar (<code translate="no">nprobe</code>), os resultados da pesquisa de semelhança são devolvidos com base em comparações entre a entrada de destino e os vectores apenas no(s) cluster(s) mais semelhante(s) - reduzindo drasticamente o tempo de consulta.</p>
 <p>Ao ajustar <code translate="no">nprobe</code>, é possível encontrar um equilíbrio ideal entre precisão e velocidade para um determinado cenário. Os resultados do <a href="https://zilliz.com/blog/Accelerating-Similarity-Search-on-Really-Big-Data-with-Vector-Indexing">teste de desempenho do IVF_FLAT</a> demonstram que o tempo de consulta aumenta drasticamente à medida que o número de vectores de entrada alvo (<code translate="no">nq</code>) e o número de clusters a pesquisar (<code translate="no">nprobe</code>) aumentam.</p>
 <p>GPU_IVF_FLAT é o índice IVF mais básico, e os dados codificados armazenados em cada unidade são consistentes com os dados originais.</p>
 <p>Ao realizar pesquisas, observe que é possível definir o top-K até 256 para qualquer pesquisa em uma coleção indexada por GPU_IVF_FLAT.</p>
@@ -130,10 +130,10 @@ title: Índice GPU
 <li><p>Limites da pesquisa</p>
 <table>
 <thead>
-<tr><th>Parâmetro</th><th>Limite</th></tr>
+<tr><th>Parâmetro</th><th>Intervalo</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">top-K</code></td><td>&lt;= <code translate="no">2048</code></td></tr>
+<tr><td><code translate="no">limit</code> (top-K)</td><td>&lt;= <code translate="no">2048</code></td></tr>
 </tbody>
 </table>
 </li>
@@ -189,10 +189,10 @@ title: Índice GPU
 <li><p>Limites da pesquisa</p>
 <table>
 <thead>
-<tr><th>Parâmetro</th><th>Limite</th></tr>
+<tr><th>Parâmetro</th><th>Intervalo</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">top-K</code></td><td>&lt;= <code translate="no">1024</code></td></tr>
+<tr><td><code translate="no">limit</code> (top-K)</td><td>&lt;= <code translate="no">1024</code></td></tr>
 </tbody>
 </table>
 </li>

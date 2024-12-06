@@ -30,11 +30,11 @@ title: Milvus로 다중 모달 검색에 ColPali 사용
 <p>최신 검색 모델은 일반적으로 텍스트나 이미지를 표현하기 위해 단일 임베딩을 사용합니다. 그러나 ColBERT는 각 데이터 인스턴스에 대한 임베딩 목록을 활용하고 "MaxSim" 연산을 사용하여 두 텍스트 간의 유사성을 계산하는 신경 모델입니다. 텍스트 데이터 외에도 그림, 표, 다이어그램에는 텍스트 기반 정보 검색에서 종종 무시되는 풍부한 정보가 포함되어 있습니다.</p>
 <p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.5.x/assets/colpali_formula.png" alt="" class="doc-image" id="" />
+    <img translate="no" src="/docs/v2.5.x/images/colpali_formula.png" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 </p>
-<p>MaxSim 기능은 토큰 임베딩을 보고 쿼리와 문서(검색 대상)를 비교합니다. 쿼리의 각 단어에 대해 문서에서 가장 유사한 단어를 선택하고(코사인 유사도 또는 제곱 L2 거리 사용) 쿼리의 모든 단어에 대해 이러한 최대 유사도를 합산합니다.</p>
+<p>MaxSim 함수는 토큰 임베딩을 보고 쿼리와 문서(검색 대상)를 비교합니다. 쿼리의 각 단어에 대해 문서에서 가장 유사한 단어를 선택하고(코사인 유사도 또는 제곱 L2 거리 사용) 쿼리의 모든 단어에 대해 이러한 최대 유사도를 합산합니다.</p>
 <p>ColPali는 강력한 이해 능력을 활용하기 위해 ColBERT의 다중 벡터 표현을 PaliGemma(다중 모드 대규모 언어 모델)와 결합한 방법입니다. 이 접근 방식을 사용하면 텍스트와 이미지가 모두 포함된 페이지를 통합된 멀티 벡터 임베딩을 사용하여 표현할 수 있습니다. 이 다중 벡터 표현 내의 임베딩은 상세한 정보를 캡처하여 멀티모달 데이터에 대한 검색 증강 생성(RAG)의 성능을 향상시킬 수 있습니다.</p>
 <p>이 노트북에서는 일반성을 위해 이러한 종류의 다중 벡터 표현을 '콜버트 임베딩'이라고 부릅니다. 그러나 실제로 사용되는 모델은 <strong>ColPali 모델입니다</strong>. 다중 벡터 검색을 위해 Milvus를 사용하는 방법을 보여드리겠습니다. 이를 바탕으로 주어진 쿼리를 기반으로 페이지를 검색하기 위해 ColPali를 사용하는 방법을 소개하겠습니다.</p>
 <h2 id="Preparation" class="common-anchor-header">준비<button data-href="#Preparation" class="anchor-icon" translate="no">
@@ -188,7 +188,7 @@ client = <span class="hljs-title class_">MilvusClient</span>(uri=<span class="hl
             <span class="hljs-comment"># Rerank a single document by retrieving its embeddings and calculating the similarity with the query.</span>
             doc_colbert_vecs = client.query(
                 collection_name=collection_name,
-                <span class="hljs-built_in">filter</span>=<span class="hljs-string">f&quot;doc_id in [<span class="hljs-subst">{doc_id}</span>, <span class="hljs-subst">{doc_id + <span class="hljs-number">1</span>}</span>]&quot;</span>,
+                <span class="hljs-built_in">filter</span>=<span class="hljs-string">f&quot;doc_id in [<span class="hljs-subst">{doc_id}</span>]&quot;</span>,
                 output_fields=[<span class="hljs-string">&quot;seq_id&quot;</span>, <span class="hljs-string">&quot;vector&quot;</span>, <span class="hljs-string">&quot;doc&quot;</span>],
                 limit=<span class="hljs-number">1000</span>,
             )

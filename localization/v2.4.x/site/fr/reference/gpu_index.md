@@ -2,7 +2,7 @@
 id: gpu_index.md
 related_key: gpu_index
 summary: Mécanisme d'indexation du GPU dans Milvus.
-title: Index des GPU
+title: Index GPU
 ---
 <h1 id="GPU-Index" class="common-anchor-header">Index GPU<button data-href="#GPU-Index" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -74,11 +74,11 @@ title: Index des GPU
 <li><p>Limites de la recherche</p>
 <table>
 <thead>
-<tr><th>Paramètre</th><th>Plage</th></tr>
+<tr><th>Paramètre</th><th>Fourchette</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">top-K</code></td><td>&lt;= 1024</td></tr>
-<tr><td><code translate="no">top-K</code></td><td>&lt;=max((<code translate="no">itopk_size</code> + 31)// 32, <code translate="no">search_width</code>) * 32</td></tr>
+<tr><td><code translate="no">limit</code> (top-K)</td><td>&lt;= 1024</td></tr>
+<tr><td><code translate="no">limit</code> (top-K)</td><td>&lt;=max((<code translate="no">itopk_size</code> + 31)// 32, <code translate="no">search_width</code>) * 32</td></tr>
 </tbody>
 </table>
 </li>
@@ -98,7 +98,7 @@ title: Index des GPU
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Comme <a href="https://milvus.io/docs/index.md#IVF_FLAT">IVF_FLAT</a>, GPU_IVF_FLAT divise également les données vectorielles en <code translate="no">nlist</code> unités de grappes, puis compare les distances entre le vecteur d'entrée cible et le centre de chaque grappe. En fonction du nombre de grappes que le système est configuré pour interroger (<code translate="no">nprobe</code>), les résultats de la recherche de similarité sont renvoyés sur la base de comparaisons entre l'entrée cible et les vecteurs dans la ou les grappes les plus similaires uniquement - ce qui réduit considérablement le temps de recherche.</p>
+    </button></h2><p>Comme <a href="https://milvus.io/docs/index.md#IVF_FLAT">IVF_FLAT</a>, GPU_IVF_FLAT divise également les données vectorielles en <code translate="no">nlist</code> unités de cluster, puis compare les distances entre le vecteur d'entrée cible et le centre de chaque cluster. En fonction du nombre de grappes que le système est configuré pour interroger (<code translate="no">nprobe</code>), les résultats de la recherche de similarité sont renvoyés sur la base de comparaisons entre l'entrée cible et les vecteurs dans la ou les grappes les plus similaires uniquement - ce qui réduit considérablement le temps de recherche.</p>
 <p>En ajustant <code translate="no">nprobe</code>, un équilibre idéal entre la précision et la vitesse peut être trouvé pour un scénario donné. Les résultats du <a href="https://zilliz.com/blog/Accelerating-Similarity-Search-on-Really-Big-Data-with-Vector-Indexing">test de performance IVF_FLAT</a> montrent que le temps d'interrogation augmente fortement à mesure que le nombre de vecteurs d'entrée cibles (<code translate="no">nq</code>) et le nombre de grappes à rechercher (<code translate="no">nprobe</code>) augmentent.</p>
 <p>GPU_IVF_FLAT est l'index IVF le plus basique, et les données encodées stockées dans chaque unité sont cohérentes avec les données originales.</p>
 <p>Lorsque vous effectuez des recherches, notez que vous pouvez définir le top-K jusqu'à 256 pour toute recherche sur une collection indexée par GPU_IVF_FLAT.</p>
@@ -133,7 +133,7 @@ title: Index des GPU
 <tr><th>Paramètre</th><th>Plage de valeurs</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">top-K</code></td><td>&lt;= <code translate="no">2048</code></td></tr>
+<tr><td><code translate="no">limit</code> (top-K)</td><td>&lt;= <code translate="no">2048</code></td></tr>
 </tbody>
 </table>
 </li>
@@ -156,7 +156,7 @@ title: Index des GPU
     </button></h2><p><code translate="no">PQ</code> (Quantification par produit) décompose uniformément l'espace vectoriel haute dimension original en produits cartésiens d'espaces vectoriels basse dimension <code translate="no">m</code>, puis quantifie les espaces vectoriels basse dimension décomposés. Au lieu de calculer les distances entre le vecteur cible et le centre de toutes les unités, la quantification par produit permet de calculer les distances entre le vecteur cible et le centre de regroupement de chaque espace de faible dimension, ce qui réduit considérablement la complexité temporelle et spatiale de l'algorithme.</p>
 <p>IVF_PQ effectue le regroupement de l'index IVF avant de quantifier le produit des vecteurs. Son fichier d'index est encore plus petit que IVF_SQ8, mais il entraîne également une perte de précision lors de la recherche de vecteurs.</p>
 <div class="alert note">
-<p>Les paramètres de construction d'index et les paramètres de recherche varient en fonction de la distribution Milvus. Sélectionnez d'abord votre distribution Milvus.</p>
+<p>Les paramètres de construction de l'index et les paramètres de recherche varient en fonction de la distribution Milvus. Sélectionnez d'abord votre distribution Milvus.</p>
 <p>Lorsque vous effectuez des recherches, notez que vous pouvez définir le top-K jusqu'à 8192 pour toute recherche sur une collection indexée GPU_IVF_FLAT.</p>
 </div>
 <ul>
@@ -192,7 +192,7 @@ title: Index des GPU
 <tr><th>Paramètre</th><th>Plage de valeurs</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">top-K</code></td><td>&lt;= <code translate="no">1024</code></td></tr>
+<tr><td><code translate="no">limit</code> (top-K)</td><td>&lt;= <code translate="no">1024</code></td></tr>
 </tbody>
 </table>
 </li>
@@ -233,5 +233,5 @@ title: Index des GPU
 <ul>
 <li><strong>GPU_CAGRA</strong>: L'utilisation de la mémoire est environ 1,8 fois celle des données vectorielles d'origine.</li>
 <li><strong>GPU_IVF_FLAT</strong> et <strong>GPU_BRUTE_FORCE</strong>: Nécessite une mémoire égale à la taille des données d'origine.</li>
-<li><strong>GPU_IVF_PQ</strong>: Utilise une empreinte mémoire plus petite, qui dépend des paramètres de compression.</li>
+<li><strong>GPU_IVF_PQ</strong>: Utilise une empreinte mémoire plus petite, qui dépend de la configuration des paramètres de compression.</li>
 </ul>

@@ -135,6 +135,6 @@ $ <span class="hljs-built_in">cd</span> DocsGPT
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/doscgpt_ui.png" alt="alt text" class="doc-image" id="alt-text" />
    </span> <span class="img-wrapper"> <span>대체 텍스트</span> </span></p>
 <p>서비스를 중지하려면 실행을 클릭합니다:</p>
-<pre><code translate="no" class="language-shell">$ docker-compose down
+<pre><code translate="no" class="language-shell">$ docker compose down
 <button class="copy-code-btn"></button></code></pre>
 <p>자세한 내용 및 고급 설정에 대한 자세한 내용은 <a href="https://github.com/arc53/DocsGPT">DocsGPT</a> 공식 문서를 참조하세요.</p>

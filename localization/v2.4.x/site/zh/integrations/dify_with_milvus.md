@@ -66,7 +66,7 @@ title: 使用 Milvus 部署 Dify
 <pre><code translate="no">MILVUS_URI=xxx
 MILVUS_TOKEN=xxx
 <button class="copy-code-btn"></button></code></pre>
-<p>在此设置中，请使用服务器的外部 URI，如<code translate="no">http://172.16.16.16:19530</code> ，作为您的<code translate="no">MILVUS_URI</code> 。</p>
+<p>在此设置中，请使用服务器的外部 URI，例如<code translate="no">http://172.16.16.16:19530</code> ，作为您的<code translate="no">MILVUS_URI</code> 。</p>
 <p>对于<code translate="no">MILVUS_TOKEN</code> ，如果您没有为 Milvus 服务器设置令牌，可以将其设置为空字符串，如<code translate="no">MILVUS_TOKEN=</code> ，否则，需要将其设置为您的 Milvus 令牌。有关如何在 Milvus 中设置令牌的更多信息，可参考<a href="https://milvus.io/docs/authenticate.md?tab=docker#Update-user-password">身份验证页面</a>。</p>
 <h2 id="Start-the-Docker-Containers" class="common-anchor-header">启动 Docker 容器<button data-href="#Start-the-Docker-Containers" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -88,7 +88,7 @@ MILVUS_TOKEN=xxx
 <pre><code translate="no" class="language-shell">docker compose up -d
 <button class="copy-code-btn"></button></code></pre>
 <p>如果您使用的是 Docker Compose V1，请使用以下命令：</p>
-<pre><code translate="no" class="language-shell">docker-compose up -d
+<pre><code translate="no" class="language-shell">docker compose up -d
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Log-in-to-Dify" class="common-anchor-header">登录 Dify<button data-href="#Log-in-to-Dify" class="anchor-icon" translate="no">
       <svg translate="no"

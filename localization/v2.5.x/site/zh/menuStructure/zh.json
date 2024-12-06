@@ -672,7 +672,7 @@
             "children": []
           },
           {
-            "label": "过滤搜索",
+            "label": "Filtered Search",
             "id": "filtered-search.md",
             "order": 1,
             "children": []
@@ -936,7 +936,7 @@
         "children": []
       },
       {
-        "label": "来自 Milvus 2.3.x",
+        "label": "From Milvus 2.3.x",
         "id": "from-m2x.md",
         "order": 5,
         "children": []
@@ -1417,7 +1417,7 @@
         ]
       },
       {
-        "label": "Milvus 备份",
+        "label": "Milvus 后备电源",
         "id": "milvus_backup",
         "order": 1,
         "children": [
@@ -1642,6 +1642,24 @@
             "id": "build_RAG_with_milvus_and_siliconflow.md",
             "order": 4,
             "children": []
+          },
+          {
+            "label": "桑巴诺瓦",
+            "id": "use_milvus_with_sambanova.md",
+            "order": 5,
+            "children": []
+          },
+          {
+            "label": "双子座",
+            "id": "build_RAG_with_milvus_and_gemini.md",
+            "order": 6,
+            "children": []
+          },
+          {
+            "label": "奥拉玛",
+            "id": "build_RAG_with_milvus_and_ollama.md",
+            "order": 7,
+            "children": []
           }
         ]
       },
@@ -1731,15 +1749,15 @@
             "children": []
           },
           {
-            "label": "桑巴诺瓦",
-            "id": "use_milvus_with_sambanova.md",
+            "label": "PrivateGPT",
+            "id": "use_milvus_in_private_gpt.md",
             "order": 10,
             "children": []
           },
           {
-            "label": "PrivateGPT",
-            "id": "use_milvus_in_private_gpt.md",
-            "order": 8,
+            "label": "Dynamiq",
+            "id": "milvus_rag_with_dynamiq.md",
+            "order": 11,
             "children": []
           }
         ]
@@ -1790,6 +1808,12 @@
             "label": "知识表",
             "id": "knowledge_table_with_milvus.md",
             "order": 2,
+            "children": []
+          },
+          {
+            "label": "Cognee",
+            "id": "build_RAG_with_milvus_and_cognee.md",
+            "order": 3,
             "children": []
           }
         ]
@@ -1965,6 +1989,12 @@
         "label": "利用 Matryoshka Embeddings 进行漏斗搜索",
         "id": "funnel_search_with_matryoshka.md",
         "order": 10,
+        "children": []
+      },
+      {
+        "label": "使用 Milvus 进行全文检索",
+        "id": "full_text_search_with_milvus.md",
+        "order": 11,
         "children": []
       },
       {

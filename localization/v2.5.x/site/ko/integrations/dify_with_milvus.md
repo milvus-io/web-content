@@ -19,7 +19,7 @@ title: Milvus로 Dify 배포하기
         ></path>
       </svg>
     </button></h1><p><a href="https://dify.ai/">Dify는</a> 서비스형 백엔드와 LLMOps를 결합하여 AI 애플리케이션 구축을 간소화하도록 설계된 오픈 소스 플랫폼입니다. 주요 LLM을 지원하고, 직관적인 프롬프트 오케스트레이션 인터페이스, 고품질 RAG 엔진, 유연한 AI 에이전트 프레임워크를 제공합니다. 로우코드 워크플로, 사용하기 쉬운 인터페이스 및 API를 통해 개발자와 비기술자 모두 복잡한 문제를 처리하지 않고도 혁신적인 실제 AI 솔루션을 만드는 데 집중할 수 있습니다.</p>
-<p>이 튜토리얼에서는 Milvus와 함께 Dify를 배포하여 효율적인 검색과 RAG 엔진을 활성화하는 방법을 보여드립니다.</p>
+<p>이 튜토리얼에서는 Milvus와 함께 Dify를 배포하여 효율적인 검색 및 RAG 엔진을 활성화하는 방법을 보여드립니다.</p>
 <h2 id="Clone-the-Repository" class="common-anchor-header">리포지토리 복제<button data-href="#Clone-the-Repository" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -88,7 +88,7 @@ MILVUS_TOKEN=xxx
 <pre><code translate="no" class="language-shell">docker compose up -d
 <button class="copy-code-btn"></button></code></pre>
 <p>Docker Compose V1을 사용하는 경우 다음 명령을 사용합니다:</p>
-<pre><code translate="no" class="language-shell">docker-compose up -d
+<pre><code translate="no" class="language-shell">docker compose up -d
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Log-in-to-Dify" class="common-anchor-header">Dify에 로그인합니다.<button data-href="#Log-in-to-Dify" class="anchor-icon" translate="no">
       <svg translate="no"

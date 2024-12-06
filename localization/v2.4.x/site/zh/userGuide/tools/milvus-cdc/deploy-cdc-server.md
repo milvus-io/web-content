@@ -19,7 +19,7 @@ title: 部署 CDC 服务器
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>本指南提供部署 Milvus-CDC 服务器的逐步过程。</p>
+    </button></h1><p>本指南提供部署 Milvus-CDC 服务器的分步流程。</p>
 <h2 id="Prerequisites" class="common-anchor-header">先决条件<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -37,7 +37,7 @@ title: 部署 CDC 服务器
       </svg>
     </button></h2><p>在部署 Milvus-CDC 服务器之前，确保满足以下条件：</p>
 <ul>
-<li><p><strong>Milvus 实例</strong>：源 Milvus 和至少一个目标 Milvus 都应部署并运行。</p>
+<li><p><strong>Milvus 实例</strong>：源 Milvus 和至少一个目标 Milvus 都应部署并操作符。</p>
 <ul>
 <li><p>源和目标 Milvus 版本都必须是 2.3.2 或更高，最好是 2.4.x。我们建议源和目标 Milvus 使用相同的版本，以确保兼容性。</p></li>
 <li><p>将目标 Milvus 的<code translate="no">common.ttMsgEnabled</code> 配置设为<code translate="no">false</code> 。</p></li>
@@ -94,11 +94,11 @@ metaStoreConfig:
 <li><p><code translate="no">sourceConfig.etcdRootPath</code>:源 Milvus 在 etcd 中存储数据的键的根前缀。根据 Milvus 实例的部署方法，该值可能会有所不同：</p>
 <ul>
 <li><p><strong>Helm</strong>或<strong>Docker Compose</strong>：默认为<code translate="no">by-dev</code> 。</p></li>
-<li><p><strong>操作员</strong>：默认为<code translate="no">&lt;release_name&gt;</code> 。</p></li>
+<li><p><strong>操作符</strong>：默认为<code translate="no">&lt;release_name&gt;</code> 。</p></li>
 </ul></li>
 <li><p><code translate="no">replicateChan</code>：Milvus 复制通道名称，在 milvus.yaml 文件中为<code translate="no">{msgChannel.chanNamePrefix.cluster}/{msgChannel.chanNamePrefix.replicateMsg}</code> 。</p></li>
 <li><p><code translate="no">sourceConfig.pulsar</code>:源 Milvus 的 Pulsar 配置。如果源 Milvus 使用 Kafka 进行消息存储，请移除所有与 Pulsar 相关的配置。更多信息，请参阅<a href="https://milvus.io/docs/configure_pulsar.md">Pulsar 相关配置</a>。</p></li>
-<li><p><code translate="no">sourceConfig.kafka.address</code>:Milvus 源的 Kafka 地址。如果源 Milvus 使用 Kafka 进行消息存储，则取消注释此配置。</p></li>
+<li><p><code translate="no">sourceConfig.kafka.address</code>:源 Milvus 的 Kafka 地址。如果源 Milvus 使用 Kafka 进行消息存储，则取消注释此配置。</p></li>
 </ul></li>
 </ul>
 <p>配置示例：</p>
@@ -149,6 +149,6 @@ sourceConfig:
 ./milvus-cdc server
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>使用 Docker Compose：</p>
-<pre><code translate="no" class="language-bash">docker-compose up -d
+<pre><code translate="no" class="language-bash">docker compose up -d
 <button class="copy-code-btn"></button></code></pre></li>
 </ul>

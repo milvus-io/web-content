@@ -160,7 +160,7 @@ System.<span class="hljs-keyword">out</span>.println(data.<span class="hljs-keyw
 <ul>
 <li><p>リストまたは配列内のすべての値が同じデータ型であることを確認してください。</p></li>
 <li><p>JSONフィールド値内のネストされた辞書はすべて文字列とみなされます。</p></li>
-<li><p>JSON キーの名前には、英数字とアンダースコアのみを使用してください。他の文字を使用すると、フィルタリングや検索で問題が発生する可能性があります。</p></li>
+<li><p>JSONキーの名前には、英数字とアンダースコアのみを使用してください。他の文字を使用すると、フィルタリングや検索で問題が発生する可能性があります。</p></li>
 <li>現在、JSONフィールドにインデックスを付けることはできないため、フィルタリングに時間がかかる可能性があります。しかし、この制限は今後のリリースで対処される予定です。</li>
 </ul>
 </div>
@@ -1374,7 +1374,7 @@ searchResults = searchResp.getSearchResults();
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>JSON フィールドを扱う場合、JSON フィールドをフィルターとして使用するか、その特定のキーの一部を使用することができます。</p>
+    </button></h2><p>JSON フィールドを使用する場合、JSON フィールドをフィルターとして使用するか、その特定のキーの一部を使用することができます。</p>
 <div class="admonition note">
 <p><b>注釈</b></p>
 <ul>
@@ -1402,7 +1402,7 @@ searchResults = searchResp.getSearchResults();
 <tr><td><strong>not</strong></td><td><code translate="no">'not json_field[&quot;A&quot;] == 1'</code></td><td>この式は、<br/> -<code translate="no">json_field</code> に<code translate="no">A</code> というキーがない場合に真と評価される。<br/> -<code translate="no">json_field[&quot;A&quot;]</code> は<code translate="no">1</code> と等しくない。<br/></td></tr>
 <tr><td><strong>in</strong></td><td><code translate="no">'json_field[&quot;A&quot;] in [1, 2, 3]'</code></td><td>この式は、<code translate="no">json_field[&quot;A&quot;]</code> の値が<code translate="no">1</code>,<code translate="no">2</code>, または<code translate="no">3</code> の場合に真と評価される。</td></tr>
 <tr><td><strong>and (&amp;&amp;)</strong></td><td><code translate="no">'json_field[&quot;A&quot;] &gt; 1 &amp;&amp; json_field[&quot;A&quot;] &lt; 3'</code></td><td>この式は、<code translate="no">json_field[&quot;A&quot;]</code> の値が 1 より大きく、<code translate="no">3</code> より小さい場合に真と評価される。</td></tr>
-<tr><td><strong>または (||)</strong></td><td><code translate="no">‘json_field[“A”] &gt; 1 || json_field[“A”] &lt; 3’</code></td><td>この式は、<code translate="no">json_field[&quot;A&quot;]</code> の値が<code translate="no">1</code> より大きいか<code translate="no">3</code> より小さい場合に真と評価される。</td></tr>
+<tr><td><strong>または (||)</strong></td><td><code translate="no">‘json_field[“A”] &gt; 1 || json_field[“A”] &lt; 3’</code></td><td>この式は、<code translate="no">json_field[&quot;A&quot;]</code> の値が<code translate="no">1</code> より大きいか、<code translate="no">3</code> より小さい場合に真と評価される。</td></tr>
 <tr><td><strong>存在する</strong></td><td><code translate="no">'exists json_field[&quot;A&quot;]'</code></td><td>この式は、<code translate="no">json_field</code> に<code translate="no">A</code> というキーがある場合に真と評価されます。</td></tr>
 </tbody>
 </table>

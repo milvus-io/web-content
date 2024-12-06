@@ -67,7 +67,7 @@ $ curl -o docker-compose.yml https://raw.githubusercontent.com/labring/FastGPT/m
       </svg>
     </button></h2><p>Eseguire nella stessa directory di docker-compose.yml. Assicurarsi che la versione di docker-compose sia idealmente superiore alla 2.17, poiché altrimenti alcuni comandi di automazione potrebbero non funzionare.</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-comment"># Launch the container</span>
-$ docker-compose up -d
+$ docker compose up -d
 <span class="hljs-comment"># Wait for 10s, OneAPI typically needs to restart a few times to initially connect to Mysql</span>
 $ sleep <span class="hljs-number">10</span>
 <span class="hljs-comment"># Restart oneapi (Due to certain issues with the default Key of OneAPI, it will display &#x27;channel not found&#x27; if not restarted, this can be temporarily resolved by manually restarting once, while waiting for the author&#x27;s fix)</span>
@@ -90,7 +90,7 @@ $ docker restart oneapi
       </svg>
     </button></h2><p>Si può accedere a OneAPI all'indirizzo <code translate="no">ip:3001</code>. Il nome utente predefinito è root e la password è 123456. È possibile modificare la password dopo l'accesso.<br>
 Utilizzando il modello di OpenAI come esempio, fare clic sulla scheda &quot;Canale&quot; e selezionare il modello di chat e il modello di incorporamento in &quot;Modelli&quot;.<br>
-Inserire la <a href="https://platform.openai.com/docs/quickstart">chiave API</a> di <a href="https://platform.openai.com/docs/quickstart">OpenAI</a> nella sezione "Segreti".<br>
+Inserire la <a href="https://platform.openai.com/docs/quickstart">chiave API OpenAI</a> nella sezione "Segreti".<br>
 Per l'utilizzo di modelli diversi da OpenAI e per ulteriori informazioni, consultare <a href="https://doc.fastgpt.in/docs/development/one-api/">One API</a>.</p>
 <h2 id="Setting-Tokens" class="common-anchor-header">Impostazione dei token<button data-href="#Setting-Tokens" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -124,7 +124,7 @@ Fare clic su "Copia" del token, assicurandosi che il valore di questo token corr
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Attualmente è possibile accedere direttamente a FastGPT all'indirizzo <code translate="no">ip:3000</code> (attenzione al firewall). Il nome utente di accesso è root, con la password impostata su <code translate="no">DEFAULT_ROOT_PSW</code> nella variabile d'ambiente docker-compose.yml. Se si desidera accedere a un nome di dominio, è necessario installare e configurare <a href="https://nginx.org/en/">Nginx</a> per conto proprio.</p>
+    </button></h2><p>Al momento è possibile accedere direttamente a FastGPT all'indirizzo <code translate="no">ip:3000</code> (attenzione al firewall). Il nome utente di accesso è root, con la password impostata su <code translate="no">DEFAULT_ROOT_PSW</code> nella variabile d'ambiente docker-compose.yml. Se si desidera accedere a un nome di dominio, è necessario installare e configurare <a href="https://nginx.org/en/">Nginx</a> per conto proprio.</p>
 <h2 id="Stop-the-Container" class="common-anchor-header">Arresto del contenitore<button data-href="#Stop-the-Container" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -141,5 +141,5 @@ Fare clic su "Copia" del token, assicurandosi che il valore di questo token corr
         ></path>
       </svg>
     </button></h2><p>Eseguire il seguente comando per arrestare il contenitore.</p>
-<pre><code translate="no" class="language-shell">$ docker-compose down
+<pre><code translate="no" class="language-shell">$ docker compose down
 <button class="copy-code-btn"></button></code></pre>

@@ -89,7 +89,7 @@ Delete successfully. <span class="hljs-comment"># Data has been removed.​</spa
 
 <button class="copy-code-btn"></button></code></pre></li>
 </ol>
-<h3 id="From-WSL-2​" class="common-anchor-header">Da WSL 2</h3><p>Se si preferisce avviare Milvus usando i comandi di Linux e gli script di shell su Windows, assicurarsi di aver già installato il comando WSL 2. Per i dettagli su come installare il comando WSL 2, potete consultare questo <a href="https://learn.microsoft.com/en-us/windows/wsl/install#install-wsl-command">articolo di Microsoft</a>.</p>
+<h3 id="From-WSL-2​" class="common-anchor-header">Da WSL 2</h3><p>Se si preferisce avviare Milvus utilizzando i comandi Linux e gli script di shell su Windows, assicurarsi di aver già installato il comando WSL 2. Per i dettagli su come installare il comando WSL 2, potete consultare questo <a href="https://learn.microsoft.com/en-us/windows/wsl/install#install-wsl-command">articolo di Microsoft</a>.</p>
 <ol>
 <li><p>Avviare WSL 2.</p>
 <pre><code translate="no" class="language-powershell">C:\&gt;wsl --install​
@@ -147,7 +147,7 @@ Delete successfully.​
 C:\&gt;Invoke-WebRequest https://github.com/milvus-io/milvus/releases/download/v2.4.15/milvus-standalone-docker-compose.yml -OutFile docker-compose.yml​
 ​
 <span class="hljs-comment"># Start Milvus​</span>
-C:\&gt;docker-compose up -d​
+C:\&gt;docker compose up -d​
 Creating milvus-etcd  ... <span class="hljs-keyword">done</span>​
 Creating milvus-minio ... <span class="hljs-keyword">done</span>​
 Creating milvus-standalone ... <span class="hljs-keyword">done</span>​
@@ -174,7 +174,7 @@ Starting Ubuntu...​
 
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>Avviare Milvus.</p>
-<pre><code translate="no" class="language-shell">$ <span class="hljs-built_in">sudo</span> docker-compose up -d​
+<pre><code translate="no" class="language-shell">$ <span class="hljs-built_in">sudo</span> docker compose up -d​
 ​
 Creating milvus-etcd  ... <span class="hljs-keyword">done</span>​
 Creating milvus-minio ... <span class="hljs-keyword">done</span>​
@@ -251,7 +251,7 @@ Switching to windows engine: Post <span class="hljs-string">&quot;http://ipc/eng
 <h3 id="How-can-I-deal-with-the-volume-related-errors-prompted-during-Milvus-startup-that-reads-Read-config-failed​" class="common-anchor-header">Come posso gestire gli errori relativi al volume che vengono visualizzati durante l'avvio di Milvus che legge <code translate="no">Read config failed</code>?</h3><p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/milvus-read-config-fails-01.png" alt="Read config failed error prompt in Milvus startup" class="doc-image" id="read-config-failed-error-prompt-in-milvus-startup" />
-   </span> <span class="img-wrapper"> <span>Errore di lettura della configurazione non riuscita all'avvio di Milvus</span> </span></p>
+   </span> <span class="img-wrapper"> <span>Errore di lettura della configurazione fallito all'avvio di Milvus</span> </span></p>
 <p>Per risolvere l'errore visualizzato all'avvio di Milvus, che recita "Read config failed", è necessario verificare se il volume montato nel contenitore Milvus è corretto. Se il volume è montato correttamente nel contenitore, si può usare il comando <code translate="no">docker exec</code> per entrare nel contenitore ed elencare la cartella <strong>/milvus/configs</strong> come segue.</p>
 <p>
   

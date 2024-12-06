@@ -92,7 +92,7 @@ metaStoreConfig:
 <li><p><strong>Configuration de la source Milvus :</strong></p>
 <p>Spécifier les détails de connexion du Milvus source, y compris etcd et le stockage des messages, pour établir une connexion entre le serveur Milvus-CDC et le Milvus source.</p>
 <ul>
-<li><p><code translate="no">sourceConfig.etcdAddress</code>: Adresse de connexion au etcd du Milvus source. Pour plus d'informations, voir <a href="https://milvus.io/docs/configure_etcd.md#etcd-related-Configurations">Configurations liées à etcd.</a></p></li>
+<li><p><code translate="no">sourceConfig.etcdAddress</code>: Adresse de connexion au etcd du Milvus source. Pour plus d'informations, voir <a href="https://milvus.io/docs/configure_etcd.md#etcd-related-Configurations">Configurations liées à etcd</a>.</p></li>
 <li><p><code translate="no">sourceConfig.etcdRootPath</code>: Préfixe racine de la clé dans laquelle le Milvus source stocke les données dans etcd. La valeur peut varier en fonction de la méthode de déploiement de l'instance Milvus :</p>
 <ul>
 <li><p><strong>Helm</strong> ou <strong>Docker Compose</strong>: La valeur par défaut est <code translate="no">by-dev</code>.</p></li>
@@ -151,6 +151,6 @@ sourceConfig:
 ./milvus-cdc server
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>En utilisant Docker Compose :</p>
-<pre><code translate="no" class="language-bash">docker-compose up -d
+<pre><code translate="no" class="language-bash">docker compose up -d
 <button class="copy-code-btn"></button></code></pre></li>
 </ul>

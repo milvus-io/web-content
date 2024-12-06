@@ -17,7 +17,7 @@ title: JSON 필드 사용하기
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>이 가이드에서는 기본 및 고급 연산자를 사용하여 JSON 필드에 JSON 값을 삽입하고 검색 및 쿼리하는 등 JSON 필드를 사용하는 방법을 설명합니다.</p>
+    </button></h1><p>이 가이드에서는 기본 및 고급 연산자를 사용하여 JSON 필드에서 JSON 값을 삽입하고 검색 및 쿼리하는 등 JSON 필드를 사용하는 방법을 설명합니다.</p>
 <h2 id="Overview" class="common-anchor-header">개요<button data-href="#Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -1380,7 +1380,7 @@ searchResults = searchResp.getSearchResults();
 <ul>
 <li>Milvus는 시맨틱 이스케이프나 변환을 수행하지 않고 JSON 필드에 문자열 값을 그대로 저장합니다. </li>
 </ul>
-<p>예를 들어 <code translate="no">'a"b'</code>, <code translate="no">"a'b"</code>, <code translate="no">'a\\\\'b'</code>, <code translate="no">"a\\\\"b"</code> 은 그대로 저장되지만 <code translate="no">'a'b'</code> 및 <code translate="no">"a"b"</code> 은 유효하지 않은 값으로 처리됩니다.</p>
+<p>예를 들어 <code translate="no">'a"b'</code>, <code translate="no">"a'b"</code>, <code translate="no">'a\\\\'b'</code>, <code translate="no">"a\\\\"b"</code> 은 그대로 저장되지만 <code translate="no">'a'b'</code>, <code translate="no">"a"b"</code> 은 유효하지 않은 값으로 처리됩니다.</p>
 <ul>
 <li><p>JSON 필드를 사용하여 필터 표현식을 작성하려면 필드 내의 키를 활용할 수 있습니다. </p></li>
 <li><p>키의 값이 정수 또는 실수인 경우 다른 정수 또는 실수 키 또는 INT32/64 또는 FLOAT32/64 필드와 비교할 수 있습니다.</p></li>

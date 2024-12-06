@@ -20,7 +20,7 @@ title: GPU 索引
         ></path>
       </svg>
     </button></h1><p>Milvus 支持各种 GPU 索引类型，以加快搜索性能和效率，尤其是在高吞吐量和高调用场景中。本主题概述了 Milvus 支持的 GPU 索引类型、适合的使用案例和性能特点。有关使用 GPU 建立索引的信息，请参阅《<a href="/docs/zh/index-with-gpu.md">使用 GPU 建立索引</a>》。</p>
-<p>值得注意的是，与使用 CPU 索引相比，使用 GPU 索引并不一定能减少延迟。如果想完全最大化吞吐量，则需要极高的请求压力或大量的查询向量。</p>
+<p>值得注意的是，与使用 CPU 索引相比，使用 GPU 索引并不一定能减少延迟。如果想充分发挥吞吐量，就需要极高的请求压力或大量的查询向量。</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/gpu_index.png" alt="performance" class="doc-image" id="performance" />
@@ -49,7 +49,7 @@ title: GPU 索引
 <tr><th>参数</th><th>说明</th><th>默认值</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">intermediate_graph_degree</code></td><td>通过在剪枝之前确定图的度数来影响召回率和构建时间。推荐值为<code translate="no">32</code> 或<code translate="no">64</code> 。</td><td><code translate="no">128</code></td></tr>
+<tr><td><code translate="no">intermediate_graph_degree</code></td><td>通过在剪枝前确定图的度数来影响召回率和构建时间。推荐值为<code translate="no">32</code> 或<code translate="no">64</code> 。</td><td><code translate="no">128</code></td></tr>
 <tr><td><code translate="no">graph_degree</code></td><td>通过设置剪枝后图形的度数来影响搜索性能和召回率。这两个度数之间的差值越大，构建时间就越长。其值必须小于<strong>intermediate_graph_degree</strong> 的值。</td><td><code translate="no">64</code></td></tr>
 <tr><td><code translate="no">build_algo</code></td><td>选择剪枝前的图形生成算法。可能的值：</br><code translate="no">IVF_PQ</code>:提供更高的质量，但构建时间较慢。</br><code translate="no">NN_DESCENT</code>提供更快的生成速度，但召回率可能较低。</td><td><code translate="no">IVF_PQ</code></td></tr>
 <tr><td><code translate="no">cache_dataset_on_device</code></td><td>决定是否在 GPU 内存中缓存原始数据集。可能的值</br><code translate="no">“true”</code>:缓存原始数据集，通过细化搜索结果提高召回率。</br><code translate="no">“false”</code>不缓存原始数据集，以节省 GPU 内存。</td><td><code translate="no">“false”</code></td></tr>
@@ -77,8 +77,8 @@ title: GPU 索引
 <tr><th>参数</th><th>范围</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">top-K</code></td><td>&lt;= 1024</td></tr>
-<tr><td><code translate="no">top-K</code></td><td>&lt;=max((<code translate="no">itopk_size</code> + 31)// 32,<code translate="no">search_width</code>)* 32</td></tr>
+<tr><td><code translate="no">limit</code> (顶-K)</td><td>&lt;= 1024</td></tr>
+<tr><td><code translate="no">limit</code> (top-K)</td><td>&lt;=max((<code translate="no">itopk_size</code> + 31)// 32,<code translate="no">search_width</code>)* 32</td></tr>
 </tbody>
 </table>
 </li>
@@ -99,9 +99,9 @@ title: GPU 索引
         ></path>
       </svg>
     </button></h2><p>与<a href="https://milvus.io/docs/index.md#IVF_FLAT">IVF_FLAT</a> 类似，GPU_IVF_<a href="https://milvus.io/docs/index.md#IVF_FLAT">FLAT</a> 也是将向量数据划分为<code translate="no">nlist</code> 聚类单元，然后比较目标输入向量与每个聚类中心之间的距离。根据系统设置查询的簇数（<code translate="no">nprobe</code> ），相似性搜索结果仅根据目标输入与最相似簇中向量的比较结果返回--大大缩短了查询时间。</p>
-<p>通过调整<code translate="no">nprobe</code> ，可以在特定情况下找到准确性和速度之间的理想平衡。<a href="https://zilliz.com/blog/Accelerating-Similarity-Search-on-Really-Big-Data-with-Vector-Indexing">IVF_FLAT 性能测试</a>的结果表明，随着目标输入向量数 (<code translate="no">nq</code>) 和搜索集群数 (<code translate="no">nprobe</code>) 的增加，查询时间也会急剧增加。</p>
+<p>通过调整<code translate="no">nprobe</code> ，可以在特定情况下找到准确性和速度之间的理想平衡。<a href="https://zilliz.com/blog/Accelerating-Similarity-Search-on-Really-Big-Data-with-Vector-Indexing">IVF_FLAT 性能测试</a>结果表明，随着目标输入向量数 (<code translate="no">nq</code>) 和要搜索的簇数 (<code translate="no">nprobe</code>) 的增加，查询时间也会急剧增加。</p>
 <p>GPU_IVF_FLAT 是最基本的 IVF 索引，每个单元中存储的编码数据与原始数据一致。</p>
-<p>在进行搜索时要注意，针对 GPU_IVF_FLAT 索引的 Collections 进行任何搜索时，都可以将 top-K 设置为最多 256。</p>
+<p>在进行搜索时，请注意针对 GPU_IVF_FLAT 索引的 Collections 的任何搜索，都可以将 top-K 设置为最多 256。</p>
 <ul>
 <li><p>索引建立参数</p>
 <table>
@@ -133,7 +133,7 @@ title: GPU 索引
 <tr><th>参数</th><th>范围</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">top-K</code></td><td>&lt;=<code translate="no">2048</code></td></tr>
+<tr><td><code translate="no">limit</code> (top-K)</td><td>&lt;=<code translate="no">2048</code></td></tr>
 </tbody>
 </table>
 </li>
@@ -192,7 +192,7 @@ title: GPU 索引
 <tr><th>参数</th><th>范围</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">top-K</code></td><td>&lt;=<code translate="no">1024</code></td></tr>
+<tr><td><code translate="no">limit</code> (top-K)</td><td>&lt;=<code translate="no">1024</code></td></tr>
 </tbody>
 </table>
 </li>

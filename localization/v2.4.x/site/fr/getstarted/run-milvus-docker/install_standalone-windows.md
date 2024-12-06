@@ -149,7 +149,7 @@ Delete successfully.​
 C:\&gt;Invoke-WebRequest https://github.com/milvus-io/milvus/releases/download/v2.4.15/milvus-standalone-docker-compose.yml -OutFile docker-compose.yml​
 ​
 <span class="hljs-comment"># Start Milvus​</span>
-C:\&gt;docker-compose up -d​
+C:\&gt;docker compose up -d​
 Creating milvus-etcd  ... <span class="hljs-keyword">done</span>​
 Creating milvus-minio ... <span class="hljs-keyword">done</span>​
 Creating milvus-standalone ... <span class="hljs-keyword">done</span>​
@@ -176,7 +176,7 @@ Starting Ubuntu...​
 
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>Démarrer Milvus.</p>
-<pre><code translate="no" class="language-shell">$ <span class="hljs-built_in">sudo</span> docker-compose up -d​
+<pre><code translate="no" class="language-shell">$ <span class="hljs-built_in">sudo</span> docker compose up -d​
 ​
 Creating milvus-etcd  ... <span class="hljs-keyword">done</span>​
 Creating milvus-minio ... <span class="hljs-keyword">done</span>​

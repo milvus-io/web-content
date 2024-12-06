@@ -32,7 +32,7 @@ title: Use ColPali for Multi-Modal Retrieval with Milvus
 <p>Modern retrieval models typically use a single embedding to represent text or images. ColBERT, however, is a neural model that utilizes a list of embeddings for each data instance and employs a “MaxSim” operation to calculate the similarity between two texts. Beyond textual data, figures, tables, and diagrams also contain rich information, which is often disregarded in text-based information retrieval.</p>
 <p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.5.x/assets/colpali_formula.png" alt="" class="doc-image" id="" />
+    <img translate="no" src="/docs/v2.5.x/images/colpali_formula.png" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 </p>
@@ -190,7 +190,7 @@ client = <span class="hljs-title class_">MilvusClient</span>(uri=<span class="hl
             <span class="hljs-comment"># Rerank a single document by retrieving its embeddings and calculating the similarity with the query.</span>
             doc_colbert_vecs = client.query(
                 collection_name=collection_name,
-                <span class="hljs-built_in">filter</span>=<span class="hljs-string">f&quot;doc_id in [<span class="hljs-subst">{doc_id}</span>, <span class="hljs-subst">{doc_id + <span class="hljs-number">1</span>}</span>]&quot;</span>,
+                <span class="hljs-built_in">filter</span>=<span class="hljs-string">f&quot;doc_id in [<span class="hljs-subst">{doc_id}</span>]&quot;</span>,
                 output_fields=[<span class="hljs-string">&quot;seq_id&quot;</span>, <span class="hljs-string">&quot;vector&quot;</span>, <span class="hljs-string">&quot;doc&quot;</span>],
                 limit=<span class="hljs-number">1000</span>,
             )

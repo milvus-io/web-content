@@ -60,7 +60,7 @@ title: Docker ComposeでMilvusを起動する(Linux)
 $ wget https://github.com/milvus-io/milvus/releases/download/v2.5.0-beta/milvus-standalone-docker-compose.yml -O docker-compose.yml
 
 <span class="hljs-comment"># Start Milvus</span>
-$ <span class="hljs-built_in">sudo</span> docker-compose up -d
+$ <span class="hljs-built_in">sudo</span> docker compose up -d
 
 Creating milvus-etcd  ... <span class="hljs-keyword">done</span>
 Creating milvus-minio ... <span class="hljs-keyword">done</span>
@@ -76,7 +76,7 @@ Creating milvus-standalone ... <span class="hljs-keyword">done</span>
 <ul>
 <li><strong>milvus-standalone</strong>、<strong>milvus-minio</strong>、<strong>milvus-etcdという</strong>名前のコンテナが立ち上がっています。<ul>
 <li><strong>milvus-etcd</strong>コンテナはホストにポートを公開せず、カレントフォルダ内の<strong>volumes/etcdに</strong>データをマッピングする。</li>
-<li><strong>milvus-minio</strong>コンテナは、デフォルトの認証情報を使用してポート<strong>9090</strong>および<strong>9091</strong>をローカルに提供し、そのデータを現在のフォルダ内の<strong>volumes/minio</strong>にマップする。</li>
+<li><strong>milvus-minio</strong>コンテナは、デフォルトの認証情報を使用してポート<strong>9090</strong>および<strong>9091</strong>をローカルに提供し、そのデータをカレントフォルダ内の<strong>volumes/minio</strong>にマップする。</li>
 <li><strong>milvus-standalone</strong>コンテナは、デフォルト設定でローカルにポート<strong>19530</strong>を提供し、そのデータを現在のフォルダ内の<strong>volumes/milvus</strong>にマップする。</li>
 </ul></li>
 </ul>
@@ -91,7 +91,7 @@ milvus-standalone   /tini -- milvus run standalone   Up             0.0.0.0:1953
 <button class="copy-code-btn"></button></code></pre>
 <p>このコンテナは、以下のようにして停止および削除できる。</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-comment"># Stop Milvus</span>
-$ <span class="hljs-built_in">sudo</span> docker-compose down
+$ <span class="hljs-built_in">sudo</span> docker compose down
 
 <span class="hljs-comment"># Delete service data</span>
 $ <span class="hljs-built_in">sudo</span> <span class="hljs-built_in">rm</span> -rf volumes

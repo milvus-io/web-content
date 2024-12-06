@@ -28,7 +28,7 @@ title: Milvusでマルチモーダル検索にColPaliを使う
 <p>最新の検索モデルでは、テキストや画像を表現するために単一の埋め込みを使用するのが一般的です。しかしColBERTは、各データインスタンスに対して埋め込みリストを利用するニューラルモデルであり、2つのテキスト間の類似度を計算するために「MaxSim」演算を採用しています。テキストデータだけでなく、図、表、ダイアグラムにも豊富な情報が含まれているが、テキストベースの情報検索では軽視されがちである。</p>
 <p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.5.x/assets/colpali_formula.png" alt="" class="doc-image" id="" />
+    <img translate="no" src="/docs/v2.5.x/images/colpali_formula.png" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 </p>
@@ -91,7 +91,7 @@ client = <span class="hljs-title class_">MilvusClient</span>(uri=<span class="hl
 <ul>
 <li>小規模なデータやプロトタイピングのためにローカルのベクターデータベースが必要なだけであれば、uriをローカルファイル、例えば<code translate="no">./milvus.db</code> に設定するのが最も便利な方法です。</li>
 <li>もし、100万ベクトルを超えるような大規模なデータがある場合は、<a href="https://milvus.io/docs/quickstart.md">DockerやKubernetes</a>上に、よりパフォーマンスの高いMilvusサーバを構築することができます。このセットアップでは、サーバのアドレスとポートをURIとして使用してください（例：<code translate="no">http://localhost:19530</code> ）。Milvusで認証機能を有効にしている場合、トークンには"&lt;your_username&gt;:&lt;your_password&gt;"を使用します。</li>
-<li>Milvusのフルマネージドクラウドサービスである<a href="https://zilliz.com/cloud">Milvus Cloudを</a>利用する場合は、Milvus Cloudの<a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#cluster-details">Public EndpointとAPI keyに</a>対応する<code translate="no">uri</code> と<code translate="no">token</code> を調整してください。</li>
+<li>Milvusのフルマネージドクラウドサービスである<a href="https://zilliz.com/cloud">Milvus Cloudを</a>利用する場合は、Milvus Cloudの<a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#cluster-details">Public EndpointとAPI Keyに</a>対応する<code translate="no">uri</code> と<code translate="no">token</code> を調整します。</li>
 </ul>
 </div>
 <p>MilvusColbertRetrieverクラスを定義し、Milvusクライアントをラップしてマルチベクターデータを取得できるようにします。この実装は、ColBERT埋め込みを平坦化してコレクションに挿入し、各行がColBERT埋め込みリストの個々の埋め込みを表す。また、各埋め込みの出所を追跡するために、doc_id と seq_id を記録する。</p>
@@ -186,7 +186,7 @@ client = <span class="hljs-title class_">MilvusClient</span>(uri=<span class="hl
             <span class="hljs-comment"># Rerank a single document by retrieving its embeddings and calculating the similarity with the query.</span>
             doc_colbert_vecs = client.query(
                 collection_name=collection_name,
-                <span class="hljs-built_in">filter</span>=<span class="hljs-string">f&quot;doc_id in [<span class="hljs-subst">{doc_id}</span>, <span class="hljs-subst">{doc_id + <span class="hljs-number">1</span>}</span>]&quot;</span>,
+                <span class="hljs-built_in">filter</span>=<span class="hljs-string">f&quot;doc_id in [<span class="hljs-subst">{doc_id}</span>]&quot;</span>,
                 output_fields=[<span class="hljs-string">&quot;seq_id&quot;</span>, <span class="hljs-string">&quot;vector&quot;</span>, <span class="hljs-string">&quot;doc&quot;</span>],
                 limit=<span class="hljs-number">1000</span>,
             )

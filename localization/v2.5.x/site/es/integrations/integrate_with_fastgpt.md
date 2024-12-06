@@ -67,7 +67,7 @@ $ curl -o docker-compose.yml https://raw.githubusercontent.com/labring/FastGPT/m
       </svg>
     </button></h2><p>Ejecutar en el mismo directorio que docker-compose.yml. Asegúrese de que la versión de docker-compose es idealmente superior a 2.17, ya que algunos comandos de automatización pueden no funcionar de otra manera.</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-comment"># Launch the container</span>
-$ docker-compose up -d
+$ docker compose up -d
 <span class="hljs-comment"># Wait for 10s, OneAPI typically needs to restart a few times to initially connect to Mysql</span>
 $ sleep <span class="hljs-number">10</span>
 <span class="hljs-comment"># Restart oneapi (Due to certain issues with the default Key of OneAPI, it will display &#x27;channel not found&#x27; if not restarted, this can be temporarily resolved by manually restarting once, while waiting for the author&#x27;s fix)</span>
@@ -141,5 +141,5 @@ Haga clic en "Copiar" en su token, asegurándose de que el valor de este token c
         ></path>
       </svg>
     </button></h2><p>Ejecute el siguiente comando para detener el contenedor.</p>
-<pre><code translate="no" class="language-shell">$ docker-compose down
+<pre><code translate="no" class="language-shell">$ docker compose down
 <button class="copy-code-btn"></button></code></pre>

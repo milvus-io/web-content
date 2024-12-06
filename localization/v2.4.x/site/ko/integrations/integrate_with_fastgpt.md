@@ -67,7 +67,7 @@ $ curl -o docker-compose.yml https://raw.githubusercontent.com/labring/FastGPT/m
       </svg>
     </button></h2><p>docker-compose.yml과 동일한 디렉토리에서 실행합니다. 일부 자동화 명령어가 작동하지 않을 수 있으므로 docker-compose 버전이 2.17 이상인지 확인하세요.</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-comment"># Launch the container</span>
-$ docker-compose up -d
+$ docker compose up -d
 <span class="hljs-comment"># Wait for 10s, OneAPI typically needs to restart a few times to initially connect to Mysql</span>
 $ sleep <span class="hljs-number">10</span>
 <span class="hljs-comment"># Restart oneapi (Due to certain issues with the default Key of OneAPI, it will display &#x27;channel not found&#x27; if not restarted, this can be temporarily resolved by manually restarting once, while waiting for the author&#x27;s fix)</span>
@@ -124,7 +124,7 @@ OpenAI 이외의 모델을 사용하는 방법 및 자세한 내용은 <a href="
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>현재 FastGPT는 <code translate="no">ip:3000</code> 에서 직접 액세스할 수 있습니다(방화벽에 유의하세요). 로그인 사용자 이름은 root이며, 비밀번호는 docker-compose.yml 환경 변수 내에 <code translate="no">DEFAULT_ROOT_PSW</code> 로 설정되어 있습니다. 도메인 이름 액세스가 필요한 경우 직접 <a href="https://nginx.org/en/">Nginx를</a> 설치 및 구성해야 합니다.</p>
+    </button></h2><p>현재 FastGPT는 <code translate="no">ip:3000</code> 에서 직접 액세스할 수 있습니다(방화벽에 유의하세요). 로그인 사용자 이름은 root이며, 비밀번호는 docker-compose.yml 환경 변수 내에 <code translate="no">DEFAULT_ROOT_PSW</code> 로 설정되어 있습니다. 도메인 네임 액세스가 필요한 경우 직접 <a href="https://nginx.org/en/">Nginx를</a> 설치하고 구성해야 합니다.</p>
 <h2 id="Stop-the-Container" class="common-anchor-header">컨테이너 중지<button data-href="#Stop-the-Container" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -141,5 +141,5 @@ OpenAI 이외의 모델을 사용하는 방법 및 자세한 내용은 <a href="
         ></path>
       </svg>
     </button></h2><p>다음 명령을 실행하여 컨테이너를 중지합니다.</p>
-<pre><code translate="no" class="language-shell">$ docker-compose down
+<pre><code translate="no" class="language-shell">$ docker compose down
 <button class="copy-code-btn"></button></code></pre>

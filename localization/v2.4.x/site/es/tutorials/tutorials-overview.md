@@ -1,6 +1,6 @@
 ---
 id: tutorials-overview.md
-summary: Esta página le ofrece una lista de tutoriales para interactuar con Milvus.
+summary: Esta página ofrece una lista de tutoriales para interactuar con Milvus.
 title: Visión general de los tutoriales
 ---
 <h1 id="Tutorials-Overview" class="common-anchor-header">Visión general de los tutoriales<button data-href="#Tutorials-Overview" class="anchor-icon" translate="no">

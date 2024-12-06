@@ -99,7 +99,7 @@ metaStoreConfig:
 <li><p><strong>Operator (Operador</strong>): A predefinição é <code translate="no">&lt;release_name&gt;</code>.</p></li>
 </ul></li>
 <li><p><code translate="no">replicateChan</code>Nome do canal de replicação do milvus, que é <code translate="no">{msgChannel.chanNamePrefix.cluster}/{msgChannel.chanNamePrefix.replicateMsg}</code> no ficheiro milvus.yaml</p></li>
-<li><p><code translate="no">sourceConfig.pulsar</code>: Configurações do Pulsar para o Milvus de origem. Se o Milvus de origem usa Kafka para armazenamento de mensagens, remova todas as configurações relacionadas ao Pulsar. Para obter mais informações, consulte <a href="https://milvus.io/docs/configure_pulsar.md">Configurações relacionadas ao Pulsar</a>.</p></li>
+<li><p><code translate="no">sourceConfig.pulsar</code>: Configurações do Pulsar para o Milvus de origem. Se o Milvus de origem usa o Kafka para armazenamento de mensagens, remova todas as configurações relacionadas ao Pulsar. Para obter mais informações, consulte <a href="https://milvus.io/docs/configure_pulsar.md">Configurações relacionadas ao Pulsar</a>.</p></li>
 <li><p><code translate="no">sourceConfig.kafka.address</code>: Endereço do Kafka para o Milvus de origem. Descomente esta configuração se o Milvus de origem usa Kafka para armazenamento de mensagens.</p></li>
 </ul></li>
 </ul>
@@ -128,7 +128,7 @@ sourceConfig:
 <span class="hljs-comment">#  kafka:</span>
 <span class="hljs-comment">#    address: 127.0.0.1:9092</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Compile-the-Milvus-CDC-server" class="common-anchor-header">Compilar o servidor Milvus-CDC</h3><p>Depois de guardar o ficheiro <code translate="no">cdc.yaml</code>, navegue para o diretório <code translate="no">milvus-cdc</code> e execute um dos seguintes comandos para compilar o servidor:</p>
+<h3 id="Compile-the-Milvus-CDC-server" class="common-anchor-header">Compilar o servidor Milvus-CDC</h3><p>Depois de guardar o ficheiro <code translate="no">cdc.yaml</code>, navegue até ao diretório <code translate="no">milvus-cdc</code> e execute um dos seguintes comandos para compilar o servidor:</p>
 <ul>
 <li><p>Para um ficheiro binário:</p>
 <pre><code translate="no" class="language-bash"><span class="hljs-built_in">make</span> build
@@ -151,6 +151,6 @@ sourceConfig:
 ./milvus-cdc server
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>Usando o Docker Compose:</p>
-<pre><code translate="no" class="language-bash">docker-compose up -d
+<pre><code translate="no" class="language-bash">docker compose up -d
 <button class="copy-code-btn"></button></code></pre></li>
 </ul>

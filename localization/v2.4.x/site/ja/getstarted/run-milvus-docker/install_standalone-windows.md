@@ -147,7 +147,7 @@ Delete successfully.​
 C:\&gt;Invoke-WebRequest https://github.com/milvus-io/milvus/releases/download/v2.4.15/milvus-standalone-docker-compose.yml -OutFile docker-compose.yml​
 ​
 <span class="hljs-comment"># Start Milvus​</span>
-C:\&gt;docker-compose up -d​
+C:\&gt;docker compose up -d​
 Creating milvus-etcd  ... <span class="hljs-keyword">done</span>​
 Creating milvus-minio ... <span class="hljs-keyword">done</span>​
 Creating milvus-standalone ... <span class="hljs-keyword">done</span>​
@@ -174,7 +174,7 @@ Starting Ubuntu...​
 
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>Milvusを起動します。</p>
-<pre><code translate="no" class="language-shell">$ <span class="hljs-built_in">sudo</span> docker-compose up -d​
+<pre><code translate="no" class="language-shell">$ <span class="hljs-built_in">sudo</span> docker compose up -d​
 ​
 Creating milvus-etcd  ... <span class="hljs-keyword">done</span>​
 Creating milvus-minio ... <span class="hljs-keyword">done</span>​
@@ -242,7 +242,7 @@ Switching to windows engine: Post <span class="hljs-string">&quot;http://ipc/eng
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/docker-desktop-wsl-01.png" alt="Use the WSL 2 based engine in Docker Desktop Settings" class="doc-image" id="use-the-wsl-2-based-engine-in-docker-desktop-settings" />
    </span> <span class="img-wrapper"> <span>Docker Desktopの設定でWSL 2ベースのエンジンを使用する</span> </span></p></li>
-<li><p>インストールされているWSL 2ディストリビューションから、Dockerインテグレーションを有効にしたいディストリビューションを選択します：<strong>設定</strong>&gt;<strong>リソース</strong>&gt;<strong>WSL統合</strong>。</p>
+<li><p>インストールされているWSL 2ディストリビューションから、Docker統合を有効にしたいディストリビューションを選択します：<strong>設定</strong>&gt;<strong>リソース</strong>&gt;<strong>WSL統合</strong>。</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/docker-desktop-wsl-02.png" alt="Select WSL 2 distributions in Docker Desktop Settings" class="doc-image" id="select-wsl-2-distributions-in-docker-desktop-settings" />
@@ -251,7 +251,7 @@ Switching to windows engine: Post <span class="hljs-string">&quot;http://ipc/eng
 <h3 id="How-can-I-deal-with-the-volume-related-errors-prompted-during-Milvus-startup-that-reads-Read-config-failed​" class="common-anchor-header">Milvusの起動時にボリューム関連のエラーが表示され、<code translate="no">Read config failed</code> 。</h3><p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/milvus-read-config-fails-01.png" alt="Read config failed error prompt in Milvus startup" class="doc-image" id="read-config-failed-error-prompt-in-milvus-startup" />
-   </span> <span class="img-wrapper"> <span>Milvus起動時のRead config failedエラーのプロンプト</span> </span></p>
+   </span> <span class="img-wrapper"> <span>Milvus起動時に表示されるRead config failedエラーのプロンプトについて</span> </span></p>
 <p>Milvus起動時に表示される「Read config failed」というエラーに対処するには、Milvusコンテナにマウントされているボリュームが正しいかどうかを確認する必要があります。ボリュームが正しくコンテナにマウントされていれば、<code translate="no">docker exec</code> コマンドでコンテナに入り、以下のように<strong>/milvus/configs</strong>フォルダをリストアップすることができる。</p>
 <p>
   

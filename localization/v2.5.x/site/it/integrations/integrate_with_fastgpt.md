@@ -67,7 +67,7 @@ $ curl -o docker-compose.yml https://raw.githubusercontent.com/labring/FastGPT/m
       </svg>
     </button></h2><p>Eseguire nella stessa directory di docker-compose.yml. Assicurarsi che la versione di docker-compose sia idealmente superiore alla 2.17, poiché altrimenti alcuni comandi di automazione potrebbero non funzionare.</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-comment"># Launch the container</span>
-$ docker-compose up -d
+$ docker compose up -d
 <span class="hljs-comment"># Wait for 10s, OneAPI typically needs to restart a few times to initially connect to Mysql</span>
 $ sleep <span class="hljs-number">10</span>
 <span class="hljs-comment"># Restart oneapi (Due to certain issues with the default Key of OneAPI, it will display &#x27;channel not found&#x27; if not restarted, this can be temporarily resolved by manually restarting once, while waiting for the author&#x27;s fix)</span>
@@ -90,7 +90,7 @@ $ docker restart oneapi
       </svg>
     </button></h2><p>Si può accedere a OneAPI all'indirizzo <code translate="no">ip:3001</code>. Il nome utente predefinito è root e la password è 123456. È possibile modificare la password dopo l'accesso.<br>
 Utilizzando il modello di OpenAI come esempio, fare clic sulla scheda &quot;Canale&quot; e selezionare il modello di chat e il modello di incorporamento in &quot;Modelli&quot;.<br>
-Inserire la <a href="https://platform.openai.com/docs/quickstart">chiave API</a> di <a href="https://platform.openai.com/docs/quickstart">OpenAI</a> nella sezione "Segreti".<br>
+Inserire la <a href="https://platform.openai.com/docs/quickstart">chiave API OpenAI</a> nella sezione "Segreti".<br>
 Per l'utilizzo di modelli diversi da OpenAI e per ulteriori informazioni, consultare <a href="https://doc.fastgpt.in/docs/development/one-api/">One API</a>.</p>
 <h2 id="Setting-Tokens" class="common-anchor-header">Impostazione dei token<button data-href="#Setting-Tokens" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -141,5 +141,5 @@ Fare clic su "Copia" del token, assicurandosi che il valore di questo token corr
         ></path>
       </svg>
     </button></h2><p>Eseguire il seguente comando per arrestare il contenitore.</p>
-<pre><code translate="no" class="language-shell">$ docker-compose down
+<pre><code translate="no" class="language-shell">$ docker compose down
 <button class="copy-code-btn"></button></code></pre>

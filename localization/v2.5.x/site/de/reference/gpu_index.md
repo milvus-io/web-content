@@ -41,7 +41,7 @@ title: GPU-Index
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>GPU_CAGRA ist ein grafikbasierter Index, der für GPUs optimiert ist. Die Verwendung von GPUs mit Inferenzqualität zur Ausführung der GPU-Version von Milvus kann im Vergleich zur Verwendung teurer GPUs mit Trainingsqualität kostengünstiger sein.</p>
+    </button></h2><p>GPU_CAGRA ist ein graphbasierter Index, der für GPUs optimiert ist. Die Verwendung von GPUs mit Inferenzqualität zur Ausführung der GPU-Version von Milvus kann im Vergleich zur Verwendung teurer GPUs mit Trainingsqualität kostengünstiger sein.</p>
 <ul>
 <li><p>Parameter für die Indexerstellung</p>
 <table>
@@ -62,7 +62,7 @@ title: GPU-Index
 <tr><th>Parameter</th><th>Beschreibung</th><th>Standardwert</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">itopk_size</code></td><td>Bestimmt die Größe der Zwischenergebnisse, die während der Suche gespeichert werden. Ein größerer Wert kann die Auffindbarkeit auf Kosten der Suchleistung verbessern. Er sollte mindestens dem endgültigen Top-k-Wert (Grenzwert) entsprechen und ist normalerweise eine Potenz von 2 (z. B. 16, 32, 64, 128).</td><td>Leer</td></tr>
+<tr><td><code translate="no">itopk_size</code></td><td>Bestimmt die Größe der Zwischenergebnisse, die während der Suche gespeichert werden. Ein größerer Wert kann die Wiederauffindbarkeit auf Kosten der Suchleistung verbessern. Er sollte mindestens dem endgültigen Top-k-Wert (Grenzwert) entsprechen und ist normalerweise eine Potenz von 2 (z. B. 16, 32, 64, 128).</td><td>Leer</td></tr>
 <tr><td><code translate="no">search_width</code></td><td>Gibt die Anzahl der Einstiegspunkte in den CAGRA-Graphen während der Suche an. Eine Erhöhung dieses Wertes kann die Wiederauffindbarkeit verbessern, kann sich aber auf die Suchleistung auswirken（z.B. 1, 2, 4, 8, 16, 32).</td><td>Leer</td></tr>
 <tr><td><code translate="no">min_iterations</code> / <code translate="no">max_iterations</code></td><td>Steuert den Iterationsprozess der Suche. Standardmäßig sind sie auf <code translate="no">0</code> eingestellt, und CAGRA bestimmt automatisch die Anzahl der Iterationen auf der Grundlage von <code translate="no">itopk_size</code> und <code translate="no">search_width</code>. Eine manuelle Anpassung dieser Werte kann helfen, Leistung und Genauigkeit auszugleichen.</td><td><code translate="no">0</code></td></tr>
 <tr><td><code translate="no">team_size</code></td><td>Gibt die Anzahl der CUDA-Threads an, die für die Berechnung des metrischen Abstands auf dem Grafikprozessor verwendet werden. Übliche Werte sind eine Potenz von 2 bis zu 32 (z. B. 2, 4, 8, 16, 32). Er hat einen geringen Einfluss auf die Suchleistung. Der Standardwert ist <code translate="no">0</code>, wobei Milvus die <code translate="no">team_size</code> automatisch auf der Grundlage der Vektordimension auswählt.</td><td><code translate="no">0</code></td></tr>
@@ -77,8 +77,8 @@ title: GPU-Index
 <tr><th>Parameter</th><th>Bereich</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">top-K</code></td><td>&lt;= 1024</td></tr>
-<tr><td><code translate="no">top-K</code></td><td>&lt;=max((<code translate="no">itopk_size</code> + 31)// 32, <code translate="no">search_width</code>) * 32</td></tr>
+<tr><td><code translate="no">limit</code> (Top-K)</td><td>&lt;= 1024</td></tr>
+<tr><td><code translate="no">limit</code> (Top-K)</td><td>&lt;=max((<code translate="no">itopk_size</code> + 31)// 32, <code translate="no">search_width</code>) * 32</td></tr>
 </tbody>
 </table>
 </li>
@@ -98,7 +98,7 @@ title: GPU-Index
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Ähnlich wie <a href="https://milvus.io/docs/index.md#IVF_FLAT">IVF_FLAT</a> unterteilt auch GPU_IVF_FLAT die Vektordaten in <code translate="no">nlist</code> Cluster-Einheiten und vergleicht dann die Abstände zwischen dem Ziel-Eingangsvektor und dem Zentrum jedes Clusters. Abhängig von der Anzahl der Cluster, die das System abfragt (<code translate="no">nprobe</code>), werden die Ergebnisse der Ähnlichkeitssuche nur auf der Grundlage von Vergleichen zwischen der Zieleingabe und den Vektoren in den ähnlichsten Clustern zurückgegeben, was die Abfragezeit drastisch reduziert.</p>
+    </button></h2><p>Ähnlich wie <a href="https://milvus.io/docs/index.md#IVF_FLAT">IVF_FLAT</a> unterteilt auch GPU_IVF_FLAT die Vektordaten in <code translate="no">nlist</code> Cluster-Einheiten und vergleicht dann die Abstände zwischen dem Zieleingabevektor und dem Zentrum jedes Clusters. Abhängig von der Anzahl der Cluster, die das System abfragt (<code translate="no">nprobe</code>), werden die Ergebnisse der Ähnlichkeitssuche nur auf der Grundlage von Vergleichen zwischen der Zieleingabe und den Vektoren in den ähnlichsten Clustern zurückgegeben, was die Abfragezeit drastisch reduziert.</p>
 <p>Durch die Anpassung von <code translate="no">nprobe</code> kann ein ideales Gleichgewicht zwischen Genauigkeit und Geschwindigkeit für ein bestimmtes Szenario gefunden werden. Die Ergebnisse des <a href="https://zilliz.com/blog/Accelerating-Similarity-Search-on-Really-Big-Data-with-Vector-Indexing">IVF_FLAT-Leistungstests</a> zeigen, dass die Abfragezeit stark ansteigt, wenn sowohl die Anzahl der Zieleingangsvektoren (<code translate="no">nq</code>) als auch die Anzahl der zu durchsuchenden Cluster (<code translate="no">nprobe</code>) zunimmt.</p>
 <p>GPU_IVF_FLAT ist der einfachste IVF-Index, und die in jeder Einheit gespeicherten kodierten Daten stimmen mit den Originaldaten überein.</p>
 <p>Bei der Durchführung von Suchvorgängen ist zu beachten, dass Sie bei jeder Suche in einer mit GPU_IVF_FLAT indizierten Sammlung den Top-K-Wert auf bis zu 256 setzen können.</p>
@@ -133,7 +133,7 @@ title: GPU-Index
 <tr><th>Parameter</th><th>Bereich</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">top-K</code></td><td>&lt;= <code translate="no">2048</code></td></tr>
+<tr><td><code translate="no">limit</code> (Top-K)</td><td>&lt;= <code translate="no">2048</code></td></tr>
 </tbody>
 </table>
 </li>
@@ -154,7 +154,7 @@ title: GPU-Index
         ></path>
       </svg>
     </button></h2><p><code translate="no">PQ</code> (Produktquantisierung) zerlegt den ursprünglichen hochdimensionalen Vektorraum gleichmäßig in kartesische Produkte von <code translate="no">m</code> niedrigdimensionalen Vektorräumen und quantisiert dann die zerlegten niedrigdimensionalen Vektorräume. Anstatt die Abstände zwischen dem Zielvektor und dem Zentrum aller Einheiten zu berechnen, ermöglicht die Produktquantisierung die Berechnung der Abstände zwischen dem Zielvektor und dem Clustering-Zentrum jedes niedrigdimensionalen Raums und reduziert die Zeit- und Raumkomplexität des Algorithmus erheblich.</p>
-<p>IVF_PQ führt das IVF-Index-Clustering durch, bevor das Produkt der Vektoren quantisiert wird. Seine Indexdatei ist noch kleiner als die von IVF_SQ8, aber auch hier kommt es zu einem Verlust an Genauigkeit bei der Suche nach Vektoren.</p>
+<p>IVF_PQ führt das IVF-Index-Clustering durch, bevor das Produkt der Vektoren quantisiert wird. Seine Indexdatei ist sogar noch kleiner als IVF_SQ8, aber auch hier kommt es zu einem Verlust an Genauigkeit bei der Suche nach Vektoren.</p>
 <div class="alert note">
 <p>Die Parameter für die Indexerstellung und die Suchparameter variieren je nach Milvus-Verteilung. Wählen Sie zunächst Ihre Milvus-Distribution aus.</p>
 <p>Beachten Sie bei der Durchführung von Suchvorgängen, dass Sie den Top-K-Wert für jede Suche gegen eine GPU_IVF_FLAT-indizierte Sammlung auf bis zu 8192 einstellen können.</p>
@@ -192,7 +192,7 @@ title: GPU-Index
 <tr><th>Parameter</th><th>Bereich</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">top-K</code></td><td>&lt;= <code translate="no">1024</code></td></tr>
+<tr><td><code translate="no">limit</code> (Top-K)</td><td>&lt;= <code translate="no">1024</code></td></tr>
 </tbody>
 </table>
 </li>

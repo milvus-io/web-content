@@ -1642,6 +1642,24 @@
             "id": "build_RAG_with_milvus_and_siliconflow.md",
             "order": 4,
             "children": []
+          },
+          {
+            "label": "삼바노바",
+            "id": "use_milvus_with_sambanova.md",
+            "order": 5,
+            "children": []
+          },
+          {
+            "label": "쌍둥이자리",
+            "id": "build_RAG_with_milvus_and_gemini.md",
+            "order": 6,
+            "children": []
+          },
+          {
+            "label": "Ollama",
+            "id": "build_RAG_with_milvus_and_ollama.md",
+            "order": 7,
+            "children": []
           }
         ]
       },
@@ -1731,15 +1749,15 @@
             "children": []
           },
           {
-            "label": "삼바노바",
-            "id": "use_milvus_with_sambanova.md",
+            "label": "PrivateGPT",
+            "id": "use_milvus_in_private_gpt.md",
             "order": 10,
             "children": []
           },
           {
-            "label": "PrivateGPT",
-            "id": "use_milvus_in_private_gpt.md",
-            "order": 8,
+            "label": "Dynamiq",
+            "id": "milvus_rag_with_dynamiq.md",
+            "order": 11,
             "children": []
           }
         ]
@@ -1790,6 +1808,12 @@
             "label": "지식 표",
             "id": "knowledge_table_with_milvus.md",
             "order": 2,
+            "children": []
+          },
+          {
+            "label": "Cognee",
+            "id": "build_RAG_with_milvus_and_cognee.md",
+            "order": 3,
             "children": []
           }
         ]
@@ -1965,6 +1989,12 @@
         "label": "마트료시카 임베딩을 사용한 퍼널 검색",
         "id": "funnel_search_with_matryoshka.md",
         "order": 10,
+        "children": []
+      },
+      {
+        "label": "Milvus로 전체 텍스트 검색",
+        "id": "full_text_search_with_milvus.md",
+        "order": 11,
         "children": []
       },
       {

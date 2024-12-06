@@ -741,7 +741,7 @@
                 "children": []
               },
               {
-                "label": "Implantación en GCP",
+                "label": "Despliegue en GCP",
                 "id": "gcp.md",
                 "order": 2,
                 "children": []
@@ -839,7 +839,7 @@
             "children": []
           },
           {
-            "label": "Configurar la caché de trozos",
+            "label": "Configurar Chunk Cache",
             "id": "chunk_cache.md",
             "order": 3,
             "children": []
@@ -1036,7 +1036,7 @@
             "isMenu": true,
             "children": [
               {
-                "label": "Rastreo de Jaeger",
+                "label": "Seguimiento de Jaeger",
                 "id": "config_jaeger_tracing.md",
                 "order": 0,
                 "children": []

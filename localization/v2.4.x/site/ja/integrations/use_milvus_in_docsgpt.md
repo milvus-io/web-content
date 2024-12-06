@@ -21,7 +21,7 @@ title: DocsGPTでMilvusを使う
     </button></h1><p><a href="https://github.com/arc53/DocsGPT">DocsGPTは</a>、強力なGPTモデルを統合することで、プロジェクトドキュメントの情報検索を簡素化する先進的なオープンソースソリューションです。これにより、開発者はプロジェクトに関する質問に対する正確な答えを簡単に得ることができ、時間のかかる手作業による検索を省くことができます。</p>
 <p>このチュートリアルでは、MilvusをDocsGPTのバックエンドベクターデータベースとして使用する方法を紹介します。</p>
 <div class="alert note">
-<p>このチュートリアルは主に<a href="https://github.com/arc53/DocsGPT?tab=readme-ov-file#quickstart">DocsGPT</a>公式インストールガイドを参照しています。もしこのチュートリアルに古い部分があるようでしたら、オフィシャルガイドに従うことを優先し、私たちに問題を作成してください。</p>
+<p>このチュートリアルは主に<a href="https://github.com/arc53/DocsGPT?tab=readme-ov-file#quickstart">DocsGPT</a>公式インストールガイドを参照しています。もしこのチュートリアルに古い部分があるようでしたら、オフィシャルガイドに従うことを優先していただき、私たちにissueを作成してください。</p>
 </div>
 <h2 id="Requirements" class="common-anchor-header">必要条件<button data-href="#Requirements" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -135,6 +135,6 @@ $ <span class="hljs-built_in">cd</span> DocsGPT
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/doscgpt_ui.png" alt="alt text" class="doc-image" id="alt-text" />
    </span> <span class="img-wrapper"> <span>オルトテキスト</span> </span></p>
 <p>サービスを停止したい場合は、実行します：</p>
-<pre><code translate="no" class="language-shell">$ docker-compose down
+<pre><code translate="no" class="language-shell">$ docker compose down
 <button class="copy-code-btn"></button></code></pre>
 <p>詳細やより高度な設定については、<a href="https://github.com/arc53/DocsGPT">DocsGPTの</a>公式ドキュメントを参照してください。</p>

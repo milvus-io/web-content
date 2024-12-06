@@ -151,6 +151,6 @@ sourceConfig:
 ./milvus-cdc server
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>Verwenden Sie Docker Compose:</p>
-<pre><code translate="no" class="language-bash">docker-compose up -d
+<pre><code translate="no" class="language-bash">docker compose up -d
 <button class="copy-code-btn"></button></code></pre></li>
 </ul>

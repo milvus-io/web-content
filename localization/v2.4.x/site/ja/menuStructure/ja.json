@@ -641,7 +641,7 @@
     ]
   },
   {
-    "label": "Milvus移住",
+    "label": "Milvusマイグレーション",
     "id": "milvus_migration",
     "isMenu": true,
     "order": 5,

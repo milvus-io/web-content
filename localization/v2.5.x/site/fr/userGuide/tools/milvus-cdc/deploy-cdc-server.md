@@ -74,7 +74,7 @@ title: Déployer le serveur CDC
 <li><p><code translate="no">metaStoreConfig.storeType</code>: Type de métastore pour Milvus-CDC. Les valeurs possibles sont <code translate="no">etcd</code> ou <code translate="no">mysql</code>.</p></li>
 <li><p><code translate="no">metaStoreConfig.etcdEndpoints</code>: Adresse de connexion au etcd de Milvus-CDC. Requis si <code translate="no">storeType</code> est défini sur <code translate="no">etcd</code>.</p></li>
 <li><p><code translate="no">metaStoreConfig.mysqlSourceUrl</code>: Adresse de connexion à la base de données MySQL du serveur Milvus-CDC. Requis si <code translate="no">storeType</code> est défini sur <code translate="no">mysql</code>.</p></li>
-<li><p><code translate="no">metaStoreConfig.rootPath</code>: Chemin racine du métastore Milvus-CDC. Cette configuration permet une utilisation multiple, permettant à plusieurs services CDC d'utiliser la même instance etcd ou MySQL tout en assurant l'isolation par le biais de chemins d'accès différents.</p></li>
+<li><p><code translate="no">metaStoreConfig.rootPath</code>: Chemin racine du métastore Milvus-CDC. Cette configuration permet une utilisation multiple, permettant à plusieurs services CDC d'utiliser la même instance etcd ou MySQL tout en assurant l'isolation grâce à des chemins d'accès différents.</p></li>
 </ul>
 <p>Exemple de configuration :</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># cdc meta data config</span>
@@ -140,7 +140,7 @@ sourceConfig:
 </ul>
 <h3 id="Start-the-server" class="common-anchor-header">Démarrer le serveur</h3><ul>
 <li><p>En utilisant le fichier binaire</p>
-<p>Naviguez vers le répertoire contenant le binaire <code translate="no">milvus-cdc</code> et le répertoire <code translate="no">configs</code> avec le fichier <code translate="no">cdc.yaml</code>, puis démarrez le serveur :</p>
+<p>Naviguer vers le répertoire contenant le binaire <code translate="no">milvus-cdc</code> et le répertoire <code translate="no">configs</code> avec le fichier <code translate="no">cdc.yaml</code>, puis démarrer le serveur :</p>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># dir tree</span>
 .
 ├── milvus-cdc <span class="hljs-comment"># build from source code or download from release page</span>
@@ -151,6 +151,6 @@ sourceConfig:
 ./milvus-cdc server
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>En utilisant Docker Compose :</p>
-<pre><code translate="no" class="language-bash">docker-compose up -d
+<pre><code translate="no" class="language-bash">docker compose up -d
 <button class="copy-code-btn"></button></code></pre></li>
 </ul>

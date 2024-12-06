@@ -60,7 +60,7 @@ title: 使用 Docker Compose 运行 Milvus (Linux)
 $ wget https://github.com/milvus-io/milvus/releases/download/v2.5.0-beta/milvus-standalone-docker-compose.yml -O docker-compose.yml
 
 <span class="hljs-comment"># Start Milvus</span>
-$ <span class="hljs-built_in">sudo</span> docker-compose up -d
+$ <span class="hljs-built_in">sudo</span> docker compose up -d
 
 Creating milvus-etcd  ... <span class="hljs-keyword">done</span>
 Creating milvus-minio ... <span class="hljs-keyword">done</span>
@@ -91,7 +91,7 @@ milvus-standalone   /tini -- milvus run standalone   Up             0.0.0.0:1953
 <button class="copy-code-btn"></button></code></pre>
 <p>您可以按以下步骤停止和删除该容器</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-comment"># Stop Milvus</span>
-$ <span class="hljs-built_in">sudo</span> docker-compose down
+$ <span class="hljs-built_in">sudo</span> docker compose down
 
 <span class="hljs-comment"># Delete service data</span>
 $ <span class="hljs-built_in">sudo</span> <span class="hljs-built_in">rm</span> -rf volumes

@@ -41,7 +41,7 @@ title: Distribuzione del server CDC
 <ul>
 <li><p><strong>Istanze Milvus</strong>: Sia il Milvus di origine che almeno un Milvus di destinazione devono essere distribuiti e operativi.</p>
 <ul>
-<li><p>Entrambe le versioni di Milvus di origine e di destinazione devono essere 2.3.2 o superiori, preferibilmente 2.4.x. Si consiglia di utilizzare la stessa versione per Milvus di origine e di destinazione per garantire la compatibilità.</p></li>
+<li><p>Entrambe le versioni di Milvus di origine e di destinazione devono essere 2.3.2 o superiore, preferibilmente 2.4.x. Si consiglia di utilizzare la stessa versione per Milvus di origine e di destinazione per garantire la compatibilità.</p></li>
 <li><p>Impostare la configurazione <code translate="no">common.ttMsgEnabled</code> del Milvus di destinazione su <code translate="no">false</code>.</p></li>
 <li><p>Configurare il Milvus di origine e quello di destinazione con impostazioni distinte per la memorizzazione dei meta e dei messaggi, per evitare conflitti. Ad esempio, evitare di usare le stesse configurazioni etcd e rootPath, nonché servizi Pulsar e <code translate="no">chanNamePrefix</code> identici in più istanze Milvus.</p></li>
 </ul></li>
@@ -95,7 +95,7 @@ metaStoreConfig:
 <li><p><code translate="no">sourceConfig.etcdAddress</code>: Indirizzo per la connessione all'etcd del Milvus di origine. Per ulteriori informazioni, fare riferimento a <a href="https://milvus.io/docs/configure_etcd.md#etcd-related-Configurations">Configurazioni relative a etcd</a>.</p></li>
 <li><p><code translate="no">sourceConfig.etcdRootPath</code>: Prefisso radice della chiave in cui il Milvus di origine memorizza i dati in etcd. Il valore può variare in base al metodo di distribuzione dell'istanza Milvus:</p>
 <ul>
-<li><p><strong>Helm</strong> o <strong>Docker Compose</strong>: Valore predefinito: <code translate="no">by-dev</code>.</p></li>
+<li><p><strong>Helm</strong> o <strong>Docker Compose</strong>: valore predefinito: <code translate="no">by-dev</code>.</p></li>
 <li><p><strong>Operatore</strong>: Valore predefinito: <code translate="no">&lt;release_name&gt;</code>.</p></li>
 </ul></li>
 <li><p><code translate="no">replicateChan</code>Nome del canale di replica di Milvus, che è <code translate="no">{msgChannel.chanNamePrefix.cluster}/{msgChannel.chanNamePrefix.replicateMsg}</code> nel file milvus.yaml.</p></li>
@@ -151,6 +151,6 @@ sourceConfig:
 ./milvus-cdc server
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>Utilizzando Docker Compose:</p>
-<pre><code translate="no" class="language-bash">docker-compose up -d
+<pre><code translate="no" class="language-bash">docker compose up -d
 <button class="copy-code-btn"></button></code></pre></li>
 </ul>

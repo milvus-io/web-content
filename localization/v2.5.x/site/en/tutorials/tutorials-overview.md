@@ -44,5 +44,6 @@ title: Tutorials Overview
 <tr><td><a href="/docs/vector_visualization.md">Vector Visualization</a></td><td>Quickstart</td><td>vector search</td></tr>
 <tr><td><a href="/docs/movie_recommendation_with_milvus.md">Movie Recommendation with Milvus</a></td><td>Recommendation System</td><td>vector search</td></tr>
 <tr><td><a href="/docs/funnel_search_with_matryoshka.md">Funnel Search with Matryoshka Embeddings</a></td><td>Quickstart</td><td>vector search</td></tr>
+<tr><td><a href="/docs/full_text_search_with_milvus.md">Full Text Search with Milvus</a></td><td>Quickstart</td><td>Full-Text Search</td></tr>
 </tbody>
 </table>

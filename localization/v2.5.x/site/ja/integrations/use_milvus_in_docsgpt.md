@@ -135,6 +135,6 @@ $ <span class="hljs-built_in">cd</span> DocsGPT
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/doscgpt_ui.png" alt="alt text" class="doc-image" id="alt-text" />
    </span> <span class="img-wrapper"> <span>オルトテキスト</span> </span></p>
 <p>サービスを停止したい場合は、実行します：</p>
-<pre><code translate="no" class="language-shell">$ docker-compose down
+<pre><code translate="no" class="language-shell">$ docker compose down
 <button class="copy-code-btn"></button></code></pre>
 <p>詳細やより高度な設定については、<a href="https://github.com/arc53/DocsGPT">DocsGPTの</a>公式ドキュメントを参照してください。</p>

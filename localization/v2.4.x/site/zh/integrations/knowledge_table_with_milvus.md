@@ -23,7 +23,7 @@ title: 使用 Milvus 的知识表
       </svg>
     </button></h1><p><a href="https://github.com/whyhow-ai/knowledge-table">Knowledge Table</a> 由<a href="https://www.whyhow.ai/">WhyHow AI</a> 开发，是一个开源软件包，旨在促进从非结构化文档中提取和探索结构化数据。它为用户提供了一个类似电子表格的界面，并能通过自然语言查询界面创建表格和图形等知识表征。该软件包包括可定制的提取规则、格式选项和通过出处进行的数据追踪，使其适用于各种应用。它支持无缝集成到 RAG 工作流中，既满足了需要用户友好界面的企业用户的需求，也满足了需要灵活后端来高效处理文档的开发人员的需求。</p>
 <p>默认情况下，Knowledge Table 使用 Milvus 数据库来存储和检索提取的数据。这样，用户就可以利用 Milvus 的强大功能轻松搜索、过滤和分析数据。在本教程中，我们将介绍如何开始使用 Knowledge Table 和 Milvus。</p>
-<h2 id="Prerequisites" class="common-anchor-header">前提条件<button data-href="#Prerequisites" class="anchor-icon" translate="no">
+<h2 id="Prerequisites" class="common-anchor-header">先决条件<button data-href="#Prerequisites" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -99,7 +99,7 @@ title: 使用 Milvus 的知识表
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><pre><code translate="no" class="language-sh">$ docker-compose up -d --build
+    </button></h2><pre><code translate="no" class="language-sh">$ docker compose up -d --build
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Stopping-the-app" class="common-anchor-header">停止应用程序<button data-href="#Stopping-the-app" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -116,7 +116,7 @@ title: 使用 Milvus 的知识表
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><pre><code translate="no" class="language-sh">$ docker-compose down
+    </button></h2><pre><code translate="no" class="language-sh">$ docker compose down
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Accessing-the-project" class="common-anchor-header">访问项目<button data-href="#Accessing-the-project" class="anchor-icon" translate="no">
       <svg translate="no"

@@ -1336,7 +1336,7 @@
             "children": []
           },
           {
-            "label": "Compattazione del clustering",
+            "label": "Compattazione dei cluster",
             "id": "clustering-compaction.md",
             "order": 1,
             "children": []
@@ -1642,6 +1642,24 @@
             "id": "build_RAG_with_milvus_and_siliconflow.md",
             "order": 4,
             "children": []
+          },
+          {
+            "label": "SambaNova",
+            "id": "use_milvus_with_sambanova.md",
+            "order": 5,
+            "children": []
+          },
+          {
+            "label": "Gemelli",
+            "id": "build_RAG_with_milvus_and_gemini.md",
+            "order": 6,
+            "children": []
+          },
+          {
+            "label": "Ollama",
+            "id": "build_RAG_with_milvus_and_ollama.md",
+            "order": 7,
+            "children": []
           }
         ]
       },
@@ -1731,15 +1749,15 @@
             "children": []
           },
           {
-            "label": "SambaNova",
-            "id": "use_milvus_with_sambanova.md",
+            "label": "PrivatoGPT",
+            "id": "use_milvus_in_private_gpt.md",
             "order": 10,
             "children": []
           },
           {
-            "label": "PrivatoGPT",
-            "id": "use_milvus_in_private_gpt.md",
-            "order": 8,
+            "label": "Dynamiq",
+            "id": "milvus_rag_with_dynamiq.md",
+            "order": 11,
             "children": []
           }
         ]
@@ -1790,6 +1808,12 @@
             "label": "Tabella delle conoscenze",
             "id": "knowledge_table_with_milvus.md",
             "order": 2,
+            "children": []
+          },
+          {
+            "label": "Cognee",
+            "id": "build_RAG_with_milvus_and_cognee.md",
+            "order": 3,
             "children": []
           }
         ]
@@ -1962,9 +1986,15 @@
         "children": []
       },
       {
-        "label": "Ricerca a imbuto con matrioske embeddings",
+        "label": "Ricerca a imbuto con le matrici Matryoshka",
         "id": "funnel_search_with_matryoshka.md",
         "order": 10,
+        "children": []
+      },
+      {
+        "label": "Ricerca a tutto testo con Milvus",
+        "id": "full_text_search_with_milvus.md",
+        "order": 11,
         "children": []
       },
       {
@@ -1991,7 +2021,7 @@
             "children": []
           },
           {
-            "label": "Ricerca di somiglianza audio",
+            "label": "Ricerca della somiglianza audio",
             "id": "audio_similarity_search.md",
             "order": 8,
             "children": []

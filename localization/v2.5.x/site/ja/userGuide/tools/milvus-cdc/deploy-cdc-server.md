@@ -94,7 +94,7 @@ metaStoreConfig:
 <li><p><code translate="no">sourceConfig.etcdRootPath</code>:ソースMilvusがetcdにデータを保存するキーのルート接頭辞。Milvusインスタンスのデプロイ方法によって値が異なる場合があります：</p>
 <ul>
 <li><p><strong>Helm</strong>または<strong>Docker Compose</strong>: デフォルトは<code translate="no">by-dev</code> です。</p></li>
-<li><p><strong>オペレータ</strong>：デフォルトは<code translate="no">&lt;release_name&gt;</code> 。</p></li>
+<li><p><strong>Operator</strong>：デフォルトは<code translate="no">&lt;release_name&gt;</code> 。</p></li>
 </ul></li>
 <li><p><code translate="no">replicateChan</code>: milvusレプリケートチャネル名。milvus.yamlファイルの<code translate="no">{msgChannel.chanNamePrefix.cluster}/{msgChannel.chanNamePrefix.replicateMsg}</code> 。</p></li>
 <li><p><code translate="no">sourceConfig.pulsar</code>:ソースmilvusのパルサー・コンフィギュレーション。ソースMilvusがメッセージ・ストレージにKafkaを使用している場合は、Pulsar関連の設定をすべて削除してください。詳細は<a href="https://milvus.io/docs/configure_pulsar.md">Pulsar関連コンフィギュレーションを</a>参照。</p></li>
@@ -149,6 +149,6 @@ sourceConfig:
 ./milvus-cdc server
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>Docker Composeを使用する：</p>
-<pre><code translate="no" class="language-bash">docker-compose up -d
+<pre><code translate="no" class="language-bash">docker compose up -d
 <button class="copy-code-btn"></button></code></pre></li>
 </ul>

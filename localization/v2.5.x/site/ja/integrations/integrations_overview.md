@@ -21,11 +21,11 @@ title: インテグレーション概要
     </button></h1><p>このページでは、Milvusとサードパーティツールを連携させるためのチュートリアルをご紹介します。</p>
 <table>
 <thead>
-<tr><th>チュートリアル</th><th>ユースケース</th><th>パートナーまたはスタック</th></tr>
+<tr><th>チュートリアル</th><th>使用例</th><th>パートナーまたはスタック</th></tr>
 </thead>
 <tbody>
 <tr><td><a href="/docs/ja/integrate_with_llamaindex.md">MilvusとLlamaIndexを使用したRAG</a></td><td>RAG</td><td>MilvusとLLamaIndexの組み合わせ</td></tr>
-<tr><td><a href="/docs/ja/integrate_with_langchain.md">MilvusとLangChainとのRAG</a></td><td>RAG</td><td>Milvus, LangChain</td></tr>
+<tr><td><a href="/docs/ja/integrate_with_langchain.md">MilvusとLangChainを使用したRAG</a></td><td>RAG</td><td>Milvus, LangChain</td></tr>
 <tr><td><a href="/docs/ja/milvus_hybrid_search_retriever.md">LangChainのMilvusハイブリッド検索レトリバー</a></td><td>ハイブリッド検索</td><td>MilvusとLangChainのハイブリッド検索</td></tr>
 <tr><td><a href="/docs/ja/integrate_with_openai.md">MilvusとOpenAIによるセマンティック検索</a></td><td>セマンティック検索</td><td>Milvus、OpenAI</td></tr>
 <tr><td><a href="/docs/ja/integrate_with_cohere.md">MilvusとCohereを使った質問応答</a></td><td>セマンティック検索</td><td>Milvus、Cohere</td></tr>
@@ -35,7 +35,7 @@ title: インテグレーション概要
 <tr><td><a href="/docs/ja/basic_usage_langchain.md">LangChainでMilvusをベクトルストアとして使う</a></td><td>セマンティック検索</td><td>Milvus, LangChain</td></tr>
 <tr><td><a href="/docs/ja/integrate_with_haystack.md">MilvusとHaystackを使ったRAG</a></td><td>RAG</td><td>Milvus、Haystack</td></tr>
 <tr><td><a href="/docs/ja/integrate_with_voxel51.md">MilvusとFiftyOneによるビジョンサーチの実施</a></td><td>セマンティック検索</td><td>Milvus, FiftyOne</td></tr>
-<tr><td><a href="/docs/ja/integrate_with_voyageai.md">MilvusとVoyageAIによるセマンティック検索</a></td><td>セマンティック検索</td><td>Milvus、VoyageAI</td></tr>
+<tr><td><a href="/docs/ja/integrate_with_voyageai.md">MilvusとVoyageAIによるセマンティック検索</a></td><td>セマンティック検索</td><td>Milvus, VoyageAI</td></tr>
 <tr><td><a href="/docs/ja/integrate_with_bentoml.md">MilvusとBentoMLによるRAG</a></td><td>RAG</td><td>Milvus、BentoML</td></tr>
 <tr><td><a href="/docs/ja/integrate_with_dspy.md">RAGとMilvus、DSPy</a></td><td>RAG</td><td>Milvus、DSPy</td></tr>
 <tr><td><a href="/docs/ja/integrate_with_jina.md">MilvusとJinaによるセマンティック検索</a></td><td>セマンティック検索</td><td>Milvus、Jina</td></tr>
@@ -69,5 +69,9 @@ title: インテグレーション概要
 <tr><td><a href="/docs/ja/knowledge_table_with_milvus.md">Milvusとナレッジテーブル</a></td><td>ナレッジエンジニアリング</td><td>ナレッジテーブル, Milvus</td></tr>
 <tr><td><a href="/docs/ja/use_milvus_in_docsgpt.md">DocsGPTでMilvusを使う</a></td><td>オーケストレーション</td><td>DocsGPT、Milvus</td></tr>
 <tr><td><a href="/docs/ja/use_milvus_with_sambanova.md">SambaNovaでMilvusを使う</a></td><td>オーケストレーション</td><td>Milvus、SambaNova</td></tr>
+<tr><td><a href="/docs/ja/build_RAG_with_milvus_and_cognee.md">MilvusとCogneeによるRAG構築</a></td><td>ナレッジエンジニアリング</td><td>Milvus、Cognee</td></tr>
+<tr><td><a href="/docs/ja/build_RAG_with_milvus_and_gemini.md">MilvusとGeminiによるRAGの構築</a></td><td>LLM</td><td>Milvus、Gemini</td></tr>
+<tr><td><a href="/docs/ja/build_RAG_with_milvus_and_ollama.md">MilvusとOllamaによるRAGの構築</a></td><td>LLM</td><td>Milvus、Ollama</td></tr>
+<tr><td><a href="/docs/ja/milvus_rag_with_dynamiq.md">DynamiqとMilvusを使い始める</a></td><td>オーケストレーション</td><td>Milvus、Dynamiq</td></tr>
 </tbody>
 </table>

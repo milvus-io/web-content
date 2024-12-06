@@ -31,7 +31,7 @@ title: 통합 개요
 <tr><td><a href="/docs/ko/integrate_with_cohere.md">Milvus와 Cohere를 사용한 질문 답변</a></td><td>시맨틱 검색</td><td>밀버스, 코히어</td></tr>
 <tr><td><a href="/docs/ko/integrate_with_hugging-face.md">밀버스와 허깅페이스를 이용한 질문 답변</a></td><td>질문 답변</td><td>밀버스, 허깅페이스</td></tr>
 <tr><td><a href="/docs/ko/integrate_with_pytorch.md">밀버스와 파이토치를 이용한 이미지 검색</a></td><td>시맨틱 검색</td><td>밀버스, 파이토치</td></tr>
-<tr><td><a href="/docs/ko/integrate_with_sentencetransformers.md">밀버스와 센텐스 트랜스포머를 사용한 동영상 검색</a></td><td>시맨틱 검색</td><td>밀버스, 센텐스 트랜스포머</td></tr>
+<tr><td><a href="/docs/ko/integrate_with_sentencetransformers.md">Milvus와 SentenceTransfomers를 사용한 동영상 검색</a></td><td>시맨틱 검색</td><td>밀버스, 센텐스 트랜스포머</td></tr>
 <tr><td><a href="/docs/ko/basic_usage_langchain.md">LangChain에서 Milvus를 벡터 저장소로 사용하기</a></td><td>시맨틱 검색</td><td>밀버스, LangChain</td></tr>
 <tr><td><a href="/docs/ko/integrate_with_haystack.md">밀버스와 헤이스택을 사용한 RAG</a></td><td>RAG</td><td>밀버스, 헤이스택</td></tr>
 <tr><td><a href="/docs/ko/integrate_with_voxel51.md">밀버스 및 피프티원과 함께 비전 검색 수행하기</a></td><td>시맨틱 검색</td><td>밀버스, 피프티원</td></tr>
@@ -46,7 +46,7 @@ title: 통합 개요
 <tr><td><a href="/docs/ko/integrate_with_memgpt.md">Milvus 및 MemGPT를 사용한 챗봇 에이전트</a></td><td>에이전트</td><td>Milvus, MemGPT</td></tr>
 <tr><td><a href="/docs/ko/integrate_with_fastgpt.md">Milvus와 함께 FastGPT를 배포하는 방법</a></td><td>RAG</td><td>Milvus, FastGPT</td></tr>
 <tr><td><a href="/docs/ko/integrate_with_vanna.md">Vanna 및 Milvus로 SQL 작성하기</a></td><td>RAG</td><td>Milvus, Vanna</td></tr>
-<tr><td><a href="/docs/ko/integrate_with_camel.md">밀버스 및 카멜을 사용한 RAG</a></td><td>RAG</td><td>Milvus, Camel</td></tr>
+<tr><td><a href="/docs/ko/integrate_with_camel.md">밀부스 및 카멜과 RAG</a></td><td>RAG</td><td>Milvus, Camel</td></tr>
 <tr><td><a href="/docs/ko/integrate_with_airbyte.md">에어바이트 &amp; 밀버스: 오픈소스 데이터 이동 인프라</a></td><td>데이터 연결</td><td>Milvus, Airbyte</td></tr>
 <tr><td><a href="/docs/ko/video_search_with_twelvelabs_and_milvus.md">고급 비디오 검색: 시맨틱 검색을 위한 Twelve Labs와 Milvus 활용하기</a></td><td>시맨틱 검색</td><td>Milvus, Twelve Labs</td></tr>
 <tr><td><a href="/docs/ko/milvus_rag_with_vllm.md">Milvus, vLLM, Llama 3.1로 RAG 구축하기</a></td><td>RAG</td><td>Milvus, vLLM, LlamaIndex</td></tr>
@@ -55,7 +55,7 @@ title: 통합 개요
 <tr><td><a href="/docs/ko/kotaemon_with_milvus.md">밀버스와 코타에몬 RAG</a></td><td>RAG</td><td>밀버스, 코타에몬</td></tr>
 <tr><td><a href="/docs/ko/apify_milvus_rag.md">검색 증강 세대: Apify로 웹사이트를 크롤링하고 질문 답변을 위해 Milvus에 데이터 저장하기</a></td><td>데이터 소스</td><td>Milvus, Apify</td></tr>
 <tr><td><a href="/docs/ko/evaluation_with_deepeval.md">DeepEval을 사용한 평가</a></td><td>평가 및 관찰 가능성</td><td>Milvus, DeepEval</td></tr>
-<tr><td><a href="/docs/ko/evaluation_with_phoenix.md">아리제 피오닉스를 사용한 평가</a></td><td>평가 및 관찰 가능성</td><td>Milvus, 아리제 피닉스</td></tr>
+<tr><td><a href="/docs/ko/evaluation_with_phoenix.md">아리제 피오닉스를 사용한 평가</a></td><td>평가 및 관찰 가능성</td><td>Milvus, 아리제 피오닉스</td></tr>
 <tr><td><a href="/docs/ko/dify_with_milvus.md">Milvus로 Dify 배포</a></td><td>오케스트레이션</td><td>Milvus, Dify</td></tr>
 <tr><td><a href="/docs/ko/rag_with_langflow.md">Milvus와 함께 Langflow를 사용하여 RAG 시스템 구축하기</a></td><td>오케스트레이션</td><td>Milvus, Langflow</td></tr>
 <tr><td><a href="/docs/ko/build_rag_on_arm.md">Arm 아키텍처에 RAG 구축</a></td><td>RAG</td><td>Milvus, Arm</td></tr>

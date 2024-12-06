@@ -46,5 +46,6 @@ title: Vue d'ensemble des didacticiels
 <tr><td><a href="/docs/fr/vector_visualization.md">Visualisation vectorielle</a></td><td>Démarrage rapide</td><td>recherche vectorielle</td></tr>
 <tr><td><a href="/docs/fr/movie_recommendation_with_milvus.md">Recommandation de films avec Milvus</a></td><td>Système de recommandation</td><td>Recherche vectorielle</td></tr>
 <tr><td><a href="/docs/fr/funnel_search_with_matryoshka.md">Recherche en entonnoir avec Matryoshka Embeddings</a></td><td>Démarrage rapide</td><td>recherche vectorielle</td></tr>
+<tr><td><a href="/docs/fr/full_text_search_with_milvus.md">Recherche plein texte avec Milvus</a></td><td>Démarrage rapide</td><td>Recherche en texte intégral</td></tr>
 </tbody>
 </table>

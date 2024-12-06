@@ -187,7 +187,7 @@ System.<span class="hljs-keyword">out</span>.println(data.<span class="hljs-keyw
 <p>有关参数的更多信息，请参阅 <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Client/MilvusClientV2.md"><code translate="no">MilvusClientV2</code></a>, <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Collections/createSchema.md"><code translate="no">createSchema()</code></a>, <a href="https://milvus.io/api-reference/java/v2.4.x/v2/CollectionSchema/addField.md"><code translate="no">addField()</code></a>, <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Management/IndexParam.md"><code translate="no">IndexParam</code></a>, <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Collections/createCollection.md"><code translate="no">createCollection()</code></a>和 <a href="https://milvus.io/api-reference/java/v2.4.x/v2/Management/getLoadState.md"><code translate="no">getLoadState()</code></a>在 SDK 参考资料中。</p>
 </div>
 <div class="language-javascript">
-<p>有关参数的更多信息，请参阅 <a href="https://milvus.io/api-reference/node/v2.4.x/Client/MilvusClient.md"><code translate="no">MilvusClient</code></a>和 <a href="https://milvus.io/api-reference/node/v2.4.x/Collections/createCollection.md"><code translate="no">createCollection()</code></a>和 <a href="https://milvus.io/api-reference/node/v2.4.x/Collections/createCollection.md"><code translate="no">createCollection()</code></a>SDK 参考资料中的参数。</p>
+<p>有关参数的更多信息，请参阅 <a href="https://milvus.io/api-reference/node/v2.4.x/Client/MilvusClient.md"><code translate="no">MilvusClient</code></a>和 <a href="https://milvus.io/api-reference/node/v2.4.x/Collections/createCollection.md"><code translate="no">createCollection()</code></a>和 <a href="https://milvus.io/api-reference/node/v2.4.x/Collections/createCollection.md"><code translate="no">createCollection()</code></a>和</p>
 </div>
 <div class="multipleCode">
    <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a></div>
@@ -1378,7 +1378,7 @@ searchResults = searchResp.getSearchResults();
 <div class="admonition note">
 <p><b>注释</b></p>
 <ul>
-<li>Milvus 将字符串值原封不动地存储在 JSON 字段中，而不执行语义转义或转换。 </li>
+<li>Milvus 会将字符串值原样存储在 JSON 字段中，而不会执行语义转义或转换。 </li>
 </ul>
 <p>例如，<code translate="no">'a"b'</code> 、<code translate="no">"a'b"</code> 、<code translate="no">'a\\\\'b'</code> 和<code translate="no">"a\\\\"b"</code> 将按原样保存，而<code translate="no">'a'b'</code> 和<code translate="no">"a"b"</code> 将被视为无效值。</p>
 <ul>

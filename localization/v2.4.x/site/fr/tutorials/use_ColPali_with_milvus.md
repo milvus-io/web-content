@@ -313,7 +313,7 @@ torch.Size([1030, 128])
 retriever.<span class="hljs-title function_">create_collection</span>()
 retriever.<span class="hljs-title function_">create_index</span>()
 <button class="copy-code-btn"></button></code></pre>
-<p>Nous insérerons les listes d'encastrements dans la base de données Milvus.</p>
+<p>Nous allons insérer des listes d'encastrements dans la base de données Milvus.</p>
 <pre><code translate="no" class="language-python">filepaths = [<span class="hljs-string">&quot;./pages/&quot;</span> + name <span class="hljs-keyword">for</span> name <span class="hljs-keyword">in</span> os.listdir(<span class="hljs-string">&quot;./pages&quot;</span>)]
 <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-built_in">len</span>(filepaths)):
     data = {

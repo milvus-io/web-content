@@ -3,9 +3,9 @@ id: full-text-search.md
 title: Volltextsuche
 related_key: 'full, text, search'
 summary: >-
-  Die Volltextsuche ist eine Funktion, die Dokumente abruft, die bestimmte
-  Begriffe oder Phrasen in Textdatensätzen enthalten, und dann die Ergebnisse
-  nach Relevanz einstuft.
+  Die Volltextsuche ist eine Funktion, die Dokumente mit bestimmten Begriffen
+  oder Phrasen in Textdatensätzen abruft und die Ergebnisse dann nach Relevanz
+  einstuft.
 ---
 <h1 id="Full-Text-Search​" class="common-anchor-header">Volltextsuche<button data-href="#Full-Text-Search​" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -26,6 +26,9 @@ summary: >-
 <p>Durch die Verwendung des BM25-Algorithmus für die Relevanzbewertung ist diese Funktion besonders wertvoll in Retrieval-Augmented-Generating-Szenarien (RAG), bei denen Dokumente mit hoher Übereinstimmung mit bestimmten Suchbegriffen priorisiert werden.</p>
 <div class="alert note">
 <p>Durch die Integration der Volltextsuche mit der semantikbasierten dichten Vektorsuche können Sie die Genauigkeit und Relevanz der Suchergebnisse verbessern. Weitere Informationen finden Sie unter <a href="/docs/de/multi-vector-search.md">Hybride Suche</a>.</p>
+</div>
+<div class="alert note">
+<p>Die Volltextsuche ist in Milvus Standalone und Milvus Distributed verfügbar, aber nicht in Milvus Lite, obwohl die Aufnahme in Milvus Lite auf der Roadmap steht.</p>
 </div>
 <h2 id="Overview​" class="common-anchor-header">Überblick<button data-href="#Overview​" class="anchor-icon" translate="no">
       <svg translate="no"

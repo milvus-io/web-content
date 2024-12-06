@@ -19,7 +19,7 @@ title: Indice GPU
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Milvus supporta diversi tipi di indice GPU per accelerare le prestazioni e l'efficienza della ricerca, soprattutto in scenari ad alto rendimento e ad alto richiamo. Questo argomento fornisce una panoramica dei tipi di indice GPU supportati da Milvus, dei casi d'uso adatti e delle caratteristiche delle prestazioni. Per informazioni sulla creazione di indici con le GPU, consultare la sezione <a href="/docs/it/index-with-gpu.md">Indici con le GPU</a>.</p>
+    </button></h1><p>Milvus supporta diversi tipi di indici GPU per accelerare le prestazioni e l'efficienza della ricerca, soprattutto in scenari ad alto rendimento e ad alto richiamo. Questo argomento fornisce una panoramica dei tipi di indice GPU supportati da Milvus, dei casi d'uso adatti e delle caratteristiche delle prestazioni. Per informazioni sulla creazione di indici con le GPU, consultare la sezione <a href="/docs/it/index-with-gpu.md">Indici con le GPU</a>.</p>
 <p>È importante notare che l'uso di un indice GPU non necessariamente riduce la latenza rispetto all'uso di un indice CPU. Per massimizzare al massimo il throughput, è necessaria una pressione di richiesta estremamente elevata o un numero elevato di vettori di query.</p>
 <p>
   
@@ -77,8 +77,8 @@ title: Indice GPU
 <tr><th>Parametro</th><th>Intervallo</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">top-K</code></td><td>&lt;= 1024</td></tr>
-<tr><td><code translate="no">top-K</code></td><td>&lt;=max((<code translate="no">itopk_size</code> + 31)// 32, <code translate="no">search_width</code>) * 32</td></tr>
+<tr><td><code translate="no">limit</code> (top-K)</td><td>&lt;= 1024</td></tr>
+<tr><td><code translate="no">limit</code> (top-K)</td><td>&lt;=max((<code translate="no">itopk_size</code> + 31)// 32, <code translate="no">search_width</code>) * 32</td></tr>
 </tbody>
 </table>
 </li>
@@ -98,7 +98,7 @@ title: Indice GPU
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Simile a <a href="https://milvus.io/docs/index.md#IVF_FLAT">IVF_FLAT</a>, GPU_IVF_FLAT divide i dati vettoriali in unità cluster <code translate="no">nlist</code> e confronta le distanze tra il vettore di input target e il centro di ciascun cluster. A seconda del numero di cluster che il sistema è impostato per interrogare (<code translate="no">nprobe</code>), i risultati della ricerca di similarità vengono restituiti in base al confronto tra l'input di destinazione e i vettori nei soli cluster più simili, riducendo drasticamente i tempi di interrogazione.</p>
+    </button></h2><p>Simile a <a href="https://milvus.io/docs/index.md#IVF_FLAT">IVF_FLAT</a>, anche GPU_IVF_FLAT divide i dati vettoriali in unità cluster <code translate="no">nlist</code> e poi confronta le distanze tra il vettore di input target e il centro di ciascun cluster. A seconda del numero di cluster che il sistema è impostato per interrogare (<code translate="no">nprobe</code>), i risultati della ricerca di similarità vengono restituiti in base al confronto tra l'input di destinazione e i vettori nei soli cluster più simili, riducendo drasticamente i tempi di interrogazione.</p>
 <p>Regolando <code translate="no">nprobe</code>, è possibile trovare un equilibrio ideale tra precisione e velocità per un determinato scenario. I risultati del <a href="https://zilliz.com/blog/Accelerating-Similarity-Search-on-Really-Big-Data-with-Vector-Indexing">test delle prestazioni</a> di <a href="https://zilliz.com/blog/Accelerating-Similarity-Search-on-Really-Big-Data-with-Vector-Indexing">IVF_FLAT</a> dimostrano che il tempo di interrogazione aumenta bruscamente all'aumentare del numero di vettori di input target (<code translate="no">nq</code>) e del numero di cluster da ricercare (<code translate="no">nprobe</code>).</p>
 <p>GPU_IVF_FLAT è l'indice IVF più elementare e i dati codificati memorizzati in ogni unità sono coerenti con i dati originali.</p>
 <p>Quando si effettuano le ricerche, è possibile impostare il top-K fino a 256 per qualsiasi ricerca su una raccolta indicizzata con GPU_IVF_FLAT.</p>
@@ -133,7 +133,7 @@ title: Indice GPU
 <tr><th>Parametro</th><th>Intervallo</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">top-K</code></td><td>&lt;= <code translate="no">2048</code></td></tr>
+<tr><td><code translate="no">limit</code> (top-K)</td><td>&lt;= <code translate="no">2048</code></td></tr>
 </tbody>
 </table>
 </li>
@@ -168,7 +168,7 @@ title: Indice GPU
 <tbody>
 <tr><td><code translate="no">nlist</code></td><td>Numero di unità cluster</td><td>[1, 65536]</td><td><code translate="no">128</code></td></tr>
 <tr><td><code translate="no">m</code></td><td>Numero di fattori di quantizzazione del prodotto,</td><td><code translate="no">dim mod m or = 0</code></td><td><code translate="no">0</code></td></tr>
-<tr><td><code translate="no">nbits</code></td><td>[Numero di bit in cui è memorizzato ogni vettore a bassa dimensione.</td><td>[1, 16]</td><td><code translate="no">8</code></td></tr>
+<tr><td><code translate="no">nbits</code></td><td>[Numero di bit in cui viene memorizzato ogni vettore a bassa dimensione.</td><td>[1, 16]</td><td><code translate="no">8</code></td></tr>
 <tr><td><code translate="no">cache_dataset_on_device</code></td><td>Decide se memorizzare nella cache il set di dati originale nella memoria della GPU. Valori possibili:</br><code translate="no">“true”</code>: Mette in cache il set di dati originale per migliorare il richiamo affinando i risultati della ricerca.</br> <code translate="no">“false”</code> Non memorizza nella cache il set di dati originale per risparmiare memoria della GPU.</td><td><code translate="no">&quot;true&quot;</code> <code translate="no">&quot;false&quot;</code></td><td><code translate="no">&quot;false&quot;</code></td></tr>
 </tbody>
 </table>
@@ -192,7 +192,7 @@ title: Indice GPU
 <tr><th>Parametro</th><th>Intervallo</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">top-K</code></td><td>&lt;= <code translate="no">1024</code></td></tr>
+<tr><td><code translate="no">limit</code> (top-K)</td><td>&lt;= <code translate="no">1024</code></td></tr>
 </tbody>
 </table>
 </li>
@@ -212,7 +212,7 @@ title: Indice GPU
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>GPU_BRUTE_FORCE è stato pensato per i casi in cui è fondamentale un richiamo estremamente elevato, garantendo un richiamo di 1 confrontando ogni query con tutti i vettori del set di dati. Richiede solo il tipo di metrica (<code translate="no">metric_type</code>) e top-k (<code translate="no">limit</code>) come parametri di costruzione e ricerca dell'indice.</p>
+    </button></h2><p>GPU_BRUTE_FORCE è stato pensato per i casi in cui è fondamentale un richiamo estremamente elevato, garantendo un richiamo pari a 1 confrontando ogni query con tutti i vettori del set di dati. Richiede solo il tipo di metrica (<code translate="no">metric_type</code>) e top-k (<code translate="no">limit</code>) come parametri di costruzione e ricerca dell'indice.</p>
 <p>Per GPU_BRUTE_FORCE non sono necessari altri parametri di costruzione dell'indice o di ricerca.</p>
 <h2 id="Conclusion" class="common-anchor-header">Conclusione<button data-href="#Conclusion" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -233,5 +233,5 @@ title: Indice GPU
 <ul>
 <li><strong>GPU_CAGRA</strong>: l'utilizzo della memoria è circa 1,8 volte quello dei dati vettoriali originali.</li>
 <li><strong>GPU_IVF_FLAT</strong> e <strong>GPU_BRUTE_FORCE</strong>: Richiedono una memoria pari alla dimensione dei dati originali.</li>
-<li><strong>GPU_IVF_PQ</strong>: Utilizza un ingombro di memoria inferiore, che dipende dalle impostazioni dei parametri di compressione.</li>
+<li><strong>GPU_IVF_PQ</strong>: utilizza un ingombro di memoria inferiore, che dipende dalle impostazioni dei parametri di compressione.</li>
 </ul>

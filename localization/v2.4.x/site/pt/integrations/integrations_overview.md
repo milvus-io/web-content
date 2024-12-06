@@ -62,7 +62,7 @@ title: Visão geral das integrações
 <tr><td><a href="/docs/pt/rag_with_langflow.md">Construindo um sistema RAG usando Langflow com Milvus</a></td><td>Ochestration</td><td>Milvus, Langflow</td></tr>
 <tr><td><a href="/docs/pt/build_rag_on_arm.md">Construir RAG na arquitetura Arm</a></td><td>RAG</td><td>Milvus, Arm</td></tr>
 <tr><td><a href="/docs/pt/build_RAG_with_milvus_and_fireworks.md">Construir o RAG com Milvus e Fireworks AI</a></td><td>LLMs</td><td>Milvus, Fireworks AI</td></tr>
-<tr><td><a href="/docs/pt/build_RAG_with_milvus_and_lepton.md">Criar um RAG com Milvus e Lepton AI</a></td><td>LLMs</td><td>Milvus, Lepton AI</td></tr>
+<tr><td><a href="/docs/pt/build_RAG_with_milvus_and_lepton.md">Construir RAG com Milvus e Lepton AI</a></td><td>LLMs</td><td>Milvus, Lepton AI</td></tr>
 <tr><td><a href="/docs/pt/build_RAG_with_milvus_and_siliconflow">Construir RAG com Milvus e SiliconFlow</a></td><td>LLMs</td><td>Milvus, SiliconFlow</td></tr>
 <tr><td><a href="/docs/pt/rag_with_milvus_and_unstructured.md">Construir um RAG com Milvus e fontes de dados não estruturados</a></td><td>Estruturadas</td><td>Milvus, Não estruturado</td></tr>
 <tr><td><a href="/docs/pt/RAG_with_pii_and_milvus.md">Construir um RAG com Milvus + Mascarador de PII</a></td><td>Fontes de dados</td><td>Milvus, mascarador de PII</td></tr>

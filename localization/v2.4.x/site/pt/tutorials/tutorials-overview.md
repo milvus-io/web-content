@@ -1,6 +1,6 @@
 ---
 id: tutorials-overview.md
-summary: Esta página fornece uma lista de tutoriais para interagir com o Milvus.
+summary: Esta página apresenta uma lista de tutoriais para interagir com o Milvus.
 title: Visão geral dos tutoriais
 ---
 <h1 id="Tutorials-Overview" class="common-anchor-header">Visão geral dos tutoriais<button data-href="#Tutorials-Overview" class="anchor-icon" translate="no">
@@ -40,7 +40,7 @@ title: Visão geral dos tutoriais
 <tr><td><a href="/docs/pt/graph_rag_with_milvus.md">RAG gráfico com Milvus</a></td><td>RAG</td><td>pesquisa em grafos</td></tr>
 <tr><td><a href="/docs/pt/contextual_retrieval_with_milvus.md">Recuperação contextual com Milvus</a></td><td>Início rápido</td><td>pesquisa vetorial</td></tr>
 <tr><td><a href="/docs/pt/hdbscan_clustering_with_milvus.md">Agrupamento HDBSCAN com Milvus</a></td><td>Início rápido</td><td>pesquisa vetorial</td></tr>
-<tr><td><a href="/docs/pt/use_ColPali_with_milvus.md">Utilizar ColPali para recuperação multimodal com Milvus</a></td><td>Início rápido</td><td>pesquisa vetorial</td></tr>
+<tr><td><a href="/docs/pt/use_ColPali_with_milvus.md">Usar ColPali para recuperação multimodal com Milvus</a></td><td>Início rápido</td><td>pesquisa vetorial</td></tr>
 <tr><td><a href="/docs/pt/vector_visualization.md">Visualização de vectores</a></td><td>Início rápido</td><td>pesquisa vetorial</td></tr>
 <tr><td><a href="/docs/pt/movie_recommendation_with_milvus.md">Recomendação de filmes com Milvus</a></td><td>Sistema de recomendação</td><td>pesquisa vetorial</td></tr>
 <tr><td><a href="/docs/pt/funnel_search_with_matryoshka.md">Pesquisa de funil com Matryoshka Embeddings</a></td><td>Início rápido</td><td>pesquisa vetorial</td></tr>

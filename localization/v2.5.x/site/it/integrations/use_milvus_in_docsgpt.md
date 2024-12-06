@@ -112,7 +112,7 @@ $ <span class="hljs-built_in">cd</span> DocsGPT
 <p>Per i servizi <code translate="no">MILVUS_URI</code> e <code translate="no">MILVUS_TOKEN</code>, è possibile utilizzare il servizio <a href="https://zilliz.com/cloud">Zilliz Cloud</a>(consigliato) completamente gestito o il servizio Milvus avviato manualmente.</p>
 <ul>
 <li><p>Per il servizio Zilliz Cloud completamente gestito: Si consiglia di utilizzare il servizio Zilliz Cloud. È possibile registrarsi per un account di prova gratuito su <a href="https://zilliz.com/cloud">Zilliz Cloud</a>. Successivamente, si otterranno <code translate="no">MILVUS_URI</code> e <code translate="no">MILVUS_TOKEN</code>, che corrispondono all'<a href="https://docs.zilliz.com/docs/on-zilliz-cloud-console#cluster-details">endpoint pubblico e alla chiave API</a>.</p></li>
-<li><p>Per il servizio Milvus avviato manualmente: Se si desidera configurare un servizio Milvus, è possibile seguire la <a href="https://milvus.io/docs/install_standalone-docker-compose.md">documentazione ufficiale di Milvus</a> per configurare un server Milvus, quindi ottenere <code translate="no">MILVUS_URI</code> e <code translate="no">MILVUS_TOKEN</code> dal server. <code translate="no">MILVUS_URI</code> e <code translate="no">MILVUS_TOKEN</code> devono essere rispettivamente nel formato <code translate="no">http://&lt;your_server_ip&gt;:19530</code> e <code translate="no">&lt;your_username&gt;:&lt;your_password&gt;</code>.</p></li>
+<li><p>Per il servizio Milvus avviato manualmente: Se si desidera configurare un servizio Milvus, è possibile seguire la <a href="https://milvus.io/docs/install_standalone-docker-compose.md">documentazione ufficiale di Milvus</a> per configurare un server Milvus, quindi ottenere <code translate="no">MILVUS_URI</code> e <code translate="no">MILVUS_TOKEN</code> dal server. I file <code translate="no">MILVUS_URI</code> e <code translate="no">MILVUS_TOKEN</code> devono essere rispettivamente nel formato <code translate="no">http://&lt;your_server_ip&gt;:19530</code> e <code translate="no">&lt;your_username&gt;:&lt;your_password&gt;</code>.</p></li>
 </ul>
 <h2 id="Start-the-services" class="common-anchor-header">Avviare i servizi<button data-href="#Start-the-services" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -137,6 +137,6 @@ $ <span class="hljs-built_in">cd</span> DocsGPT
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/doscgpt_ui.png" alt="alt text" class="doc-image" id="alt-text" />
    </span> <span class="img-wrapper"> <span>testo alt</span> </span></p>
 <p>Se si desidera arrestare i servizi, eseguire:</p>
-<pre><code translate="no" class="language-shell">$ docker-compose down
+<pre><code translate="no" class="language-shell">$ docker compose down
 <button class="copy-code-btn"></button></code></pre>
 <p>Per ulteriori dettagli e configurazioni più avanzate, consultare la documentazione ufficiale di <a href="https://github.com/arc53/DocsGPT">DocsGPT</a>.</p>

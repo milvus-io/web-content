@@ -21,14 +21,14 @@ title: インテグレーション概要
     </button></h1><p>このページでは、Milvusとサードパーティツールを連携させるためのチュートリアルをご紹介します。</p>
 <table>
 <thead>
-<tr><th>チュートリアル</th><th>ユースケース</th><th>パートナーまたはスタック</th></tr>
+<tr><th>チュートリアル</th><th>使用例</th><th>パートナーまたはスタック</th></tr>
 </thead>
 <tbody>
 <tr><td><a href="/docs/ja/integrate_with_llamaindex.md">MilvusとLlamaIndexを使用したRAG</a></td><td>RAG</td><td>MilvusとLLamaIndexの組み合わせ</td></tr>
-<tr><td><a href="/docs/ja/integrate_with_langchain.md">MilvusとLangChainとのRAG</a></td><td>RAG</td><td>Milvus, LangChain</td></tr>
+<tr><td><a href="/docs/ja/integrate_with_langchain.md">MilvusとLangChainを使用したRAG</a></td><td>RAG</td><td>Milvus, LangChain</td></tr>
 <tr><td><a href="/docs/ja/milvus_hybrid_search_retriever.md">LangChainのMilvusハイブリッド検索レトリバー</a></td><td>ハイブリッド検索</td><td>MilvusとLangChainのハイブリッド検索</td></tr>
 <tr><td><a href="/docs/ja/integrate_with_openai.md">MilvusとOpenAIによるセマンティック検索</a></td><td>セマンティック検索</td><td>Milvus、OpenAI</td></tr>
-<tr><td><a href="/docs/ja/integrate_with_cohere.md">MilvusとCohereを使った質問応答</a></td><td>セマンティック検索</td><td>Milvus, Cohere</td></tr>
+<tr><td><a href="/docs/ja/integrate_with_cohere.md">MilvusとCohereを使った質問応答</a></td><td>セマンティック検索</td><td>Milvus、Cohere</td></tr>
 <tr><td><a href="/docs/ja/integrate_with_hugging-face.md">MilvusとHuggingFaceを使った質問応答</a></td><td>質問応答</td><td>Milvus, HuggingFace</td></tr>
 <tr><td><a href="/docs/ja/integrate_with_pytorch.md">MilvusとPytorchを使った画像検索</a></td><td>意味検索</td><td>MilvusとPytorchを使った画像検索</td></tr>
 <tr><td><a href="/docs/ja/integrate_with_sentencetransformers.md">MilvusとSentenceTransfromersを使った動画検索</a></td><td>意味検索</td><td>MilvusとSentenceTransformersを使った映画検索</td></tr>

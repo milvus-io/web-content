@@ -24,7 +24,7 @@ title: 集成概述
 <tr><th>教程</th><th>使用案例</th><th>合作伙伴或堆栈</th></tr>
 </thead>
 <tbody>
-<tr><td><a href="/docs/zh/integrate_with_llamaindex.md">使用 Milvus 和 LlamaIndex 的 RAG</a></td><td>RAG</td><td>Milvus、LLamaIndex</td></tr>
+<tr><td><a href="/docs/zh/integrate_with_llamaindex.md">使用 Milvus 和 LlamaIndex 的 RAG</a></td><td>RAG</td><td>Milvus 和 LLamaIndex</td></tr>
 <tr><td><a href="/docs/zh/integrate_with_langchain.md">使用 Milvus 和 LangChain 的 RAG</a></td><td>RAG</td><td>Milvus, LangChain</td></tr>
 <tr><td><a href="/docs/zh/milvus_hybrid_search_retriever.md">Milvus 混合搜索检索器在 LangChain 中的应用</a></td><td>混合搜索</td><td>Milvus、LangChain</td></tr>
 <tr><td><a href="/docs/zh/integrate_with_openai.md">使用 Milvus 和 OpenAI 的语义搜索</a></td><td>语义搜索</td><td>Milvus、OpenAI</td></tr>
@@ -69,5 +69,9 @@ title: 集成概述
 <tr><td><a href="/docs/zh/knowledge_table_with_milvus.md">使用 Milvus 的知识表</a></td><td>知识工程</td><td>知识表，Milvus</td></tr>
 <tr><td><a href="/docs/zh/use_milvus_in_docsgpt.md">在 DocsGPT 中使用 Milvus</a></td><td>协调</td><td>在 DocsGPT 中使用 Milvus</td></tr>
 <tr><td><a href="/docs/zh/use_milvus_with_sambanova.md">在 SambaNova 中使用 Milvus</a></td><td>协调</td><td>Milvus、SambaNova</td></tr>
+<tr><td><a href="/docs/zh/build_RAG_with_milvus_and_cognee.md">使用 Milvus 和 Cognee 构建 RAG</a></td><td>知识工程</td><td>Milvus、Cognee</td></tr>
+<tr><td><a href="/docs/zh/build_RAG_with_milvus_and_gemini.md">使用 Milvus 和 Gemini 构建 RAG</a></td><td>LLMs</td><td>Milvus、Gemini</td></tr>
+<tr><td><a href="/docs/zh/build_RAG_with_milvus_and_ollama.md">使用 Milvus 和 Ollama 构建 RAG</a></td><td>LLMs</td><td>Milvus、Ollama</td></tr>
+<tr><td><a href="/docs/zh/milvus_rag_with_dynamiq.md">开始使用 Dynamiq 和 Milvus</a></td><td>协调</td><td>Milvus、Dynamiq</td></tr>
 </tbody>
 </table>

@@ -1,7 +1,7 @@
 ---
 id: use_ColPali_with_milvus.md
 summary: >-
-  在本笔记本中，我们将这种多向量表示法称为 "ColBERT embeddings"，以求通俗易懂。不过，实际使用的模型是 ColPali
+  在本笔记本中，为了通用起见，我们将这种多向量表示法称为 "ColBERT embeddings"。不过，实际使用的模型是 ColPali
   模型。我们将演示如何使用 Milvus 进行多向量检索。在此基础上，我们将介绍如何使用 ColPali 根据给定查询检索网页。
 title: 使用 ColPali 与 Milvus 一起进行多模式检索
 ---
@@ -29,7 +29,7 @@ title: 使用 ColPali 与 Milvus 一起进行多模式检索
 <p>现代检索模型通常使用单一嵌入来表示文本或图像。而 ColBERT 是一种神经模型，它利用每个数据实例的嵌入列表，并采用 "MaxSim "操作来计算两个文本之间的相似度。除文本数据外，图、表和图表也包含丰富的信息，而这些信息在基于文本的信息检索中往往被忽略。</p>
 <p>
   <span class="img-wrapper">
-    <img translate="no" src="/docs/v2.5.x/assets/colpali_formula.png" alt="" class="doc-image" id="" />
+    <img translate="no" src="/docs/v2.5.x/images/colpali_formula.png" alt="" class="doc-image" id="" />
     <span></span>
   </span>
 </p>
@@ -81,7 +81,7 @@ images = convert_from_path(pdf_path)
 <span class="hljs-keyword">for</span> i, image <span class="hljs-keyword">in</span> <span class="hljs-built_in">enumerate</span>(images):
     image.save(<span class="hljs-string">f&quot;pages/page_<span class="hljs-subst">{i + <span class="hljs-number">1</span>}</span>.png&quot;</span>, <span class="hljs-string">&quot;PNG&quot;</span>)
 <button class="copy-code-btn"></button></code></pre>
-<p>接下来，我们将使用 Milvus Lite 初始化数据库。只需将 uri 设置为 Milvus 服务托管的相应地址，就可以轻松切换到完整的 Milvus 实例。</p>
+<p>接下来，我们将使用 Milvus Lite 初始化数据库。只需将 uri 设置为 Milvus 服务托管的相应地址，就能轻松切换到完整的 Milvus 实例。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> <span class="hljs-title class_">MilvusClient</span>, <span class="hljs-title class_">DataType</span>
 <span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np
 <span class="hljs-keyword">import</span> concurrent.<span class="hljs-property">futures</span>
@@ -187,7 +187,7 @@ client = <span class="hljs-title class_">MilvusClient</span>(uri=<span class="hl
             <span class="hljs-comment"># Rerank a single document by retrieving its embeddings and calculating the similarity with the query.</span>
             doc_colbert_vecs = client.query(
                 collection_name=collection_name,
-                <span class="hljs-built_in">filter</span>=<span class="hljs-string">f&quot;doc_id in [<span class="hljs-subst">{doc_id}</span>, <span class="hljs-subst">{doc_id + <span class="hljs-number">1</span>}</span>]&quot;</span>,
+                <span class="hljs-built_in">filter</span>=<span class="hljs-string">f&quot;doc_id in [<span class="hljs-subst">{doc_id}</span>]&quot;</span>,
                 output_fields=[<span class="hljs-string">&quot;seq_id&quot;</span>, <span class="hljs-string">&quot;vector&quot;</span>, <span class="hljs-string">&quot;doc&quot;</span>],
                 limit=<span class="hljs-number">1000</span>,
             )

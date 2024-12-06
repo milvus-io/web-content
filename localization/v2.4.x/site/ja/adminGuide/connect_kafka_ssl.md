@@ -3,7 +3,7 @@ id: connect_kafka_ssl.md
 title: SASL/SSLによるKafkaへの接続
 related_key: 'kafka, sasl, tls'
 summary: >-
-  本ガイドでは、MilvusとKafkaの接続方法について、SASL/SSLを使用しない最もシンプルな方法から、SASL/SSLを使用した完全にセキュアな方法まで、いくつかご紹介します。
+  本ガイドでは、MilvusとKafkaの接続方法について、SASL/SSLを使用しない最もシンプルな方法から、SASL/SSLを使用した完全にセキュアな方法まで、いくつかの方法を紹介しています。
 ---
 <h1 id="Connecting-to-Kafka-with-SASLSSL" class="common-anchor-header">SASL/SSLによるKafkaへの接続<button data-href="#Connecting-to-Kafka-with-SASLSSL" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -61,7 +61,7 @@ services:
     restart: always
 <button class="copy-code-btn"></button></code></pre>
 <p>次のコマンドでKafkaサービスを起動できます：</p>
-<pre><code translate="no" class="language-shell">$ docker-compose up -d
+<pre><code translate="no" class="language-shell">$ docker compose up -d
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="2-Start-Milvus-and-Connect-to-Kafka" class="common-anchor-header">2.Milvusの起動とKafkaへの接続</h3><p>Kafkaサービスが起動したら、Milvusを起動してKafkaに接続します。SASL/SSLなしでMilvusを起動し、Kafkaに接続するには、以下の<code translate="no">docker-compose.yaml</code> ：</p>
 <pre><code translate="no" class="language-yaml">version: <span class="hljs-string">&#x27;3.5&#x27;</span>
@@ -102,7 +102,7 @@ kafka:
     tlsKeyPassword:
 <button class="copy-code-btn"></button></code></pre>
 <p>その後、以下のコマンドでMilvusを起動します：</p>
-<pre><code translate="no" class="language-shell">$ docker-compose up -d
+<pre><code translate="no" class="language-shell">$ docker compose up -d
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Connect-Milus-to-Kafka-with-SASLPLAIN-Alone" class="common-anchor-header">SASL/PLAIN単独でKafkaにMilusを接続する<button data-href="#Connect-Milus-to-Kafka-with-SASLPLAIN-Alone" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -166,7 +166,7 @@ services:
 };
 <button class="copy-code-btn"></button></code></pre>
 <p>その後、以下のコマンドでKafkaサービスを起動します：</p>
-<pre><code translate="no" class="language-shell">$ docker-compose up -d
+<pre><code translate="no" class="language-shell">$ docker compose up -d
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="2-Start-Milvus-and-Connect-to-Kafka" class="common-anchor-header">2.Milvusの起動とKafkaへの接続</h3><p>Kafkaサービスが起動したら、Milvusを起動してKafkaに接続します。以下の<code translate="no">docker-compose.yaml</code> ファイルを使用して、Milvus を起動し、SASL/PLAIN で Kafka に接続します：</p>
 <pre><code translate="no" class="language-yaml">version: <span class="hljs-string">&#x27;3.5&#x27;</span>
@@ -207,7 +207,7 @@ kafka:
     tlsKeyPassword: <span class="hljs-comment"># private key passphrase for use with private key, if any</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>次に、以下のコマンドでMilvusを起動します：</p>
-<pre><code translate="no" class="language-shell">$ docker-compose up -d
+<pre><code translate="no" class="language-shell">$ docker compose up -d
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Connect-Milvus-to-Kafka-with-SSL-Alone" class="common-anchor-header">SSL認証でKafkaにMilvusを接続する<button data-href="#Connect-Milvus-to-Kafka-with-SSL-Alone" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -225,7 +225,7 @@ kafka:
         ></path>
       </svg>
     </button></h2><p>SSL認証でKafkaを起動するには、証明書ファイルを取得するか、自己署名証明書を生成する必要があります。この例では、自己署名証明書を使用します。</p>
-<h3 id="1-Generate-Self-Signed-Certificates" class="common-anchor-header">1.自己署名証明書の生成</h3><p><code translate="no">my_secrets</code> という名前のフォルダを作成し、その中に<code translate="no">gen-ssl-certs.sh</code> という名前の bash スクリプトを追加し、以下の内容を貼り付けます：</p>
+<h3 id="1-Generate-Self-Signed-Certificates" class="common-anchor-header">1.自己署名証明書の生成</h3><p><code translate="no">my_secrets</code> 」というフォルダを作成し、その中に「<code translate="no">gen-ssl-certs.sh</code> 」というbashスクリプトを追加し、以下の内容を貼り付けます：</p>
 <pre><code translate="no" class="language-bash"><span class="hljs-meta">#!/bin/bash</span>
 <span class="hljs-comment">#</span>
 <span class="hljs-comment">#</span>
@@ -463,7 +463,7 @@ services:
       - <span class="hljs-variable">${DOCKER_VOLUME_DIRECTORY:-.}</span>/my_secrets:/etc/kafka/secrets
 <button class="copy-code-btn"></button></code></pre>
 <p>次に、以下のコマンドでKafkaサービスを開始します：</p>
-<pre><code translate="no" class="language-shell">$ docker-compose up -d
+<pre><code translate="no" class="language-shell">$ docker compose up -d
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="3-Start-Milvus-and-Connect-to-Kafka-with-SSL" class="common-anchor-header">3.Milvusの起動とSSLによるKafkaへの接続</h3><p>Kafkaサービスが起動したら、Milvusを起動してKafkaに接続します。Milvusの起動とKafkaへのSSL接続は、以下の<code translate="no">docker-compose.yaml</code> ：</p>
 <pre><code translate="no" class="language-yaml">version: <span class="hljs-string">&#x27;3.5&#x27;</span>
@@ -505,7 +505,7 @@ kafka:
     tlsKeyPassword: abcdefgh <span class="hljs-comment"># private key passphrase for use with private key, if any</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>次に、以下のコマンドでMilvusを起動します：</p>
-<pre><code translate="no" class="language-shell">$ docker-compose up -d
+<pre><code translate="no" class="language-shell">$ docker compose up -d
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Connect-Milvus-to-Kafka-with-SASLPLAIN-and-SSL" class="common-anchor-header">SASL/PLAINとSSLでMilvusをKafkaに接続する<button data-href="#Connect-Milvus-to-Kafka-with-SASLPLAIN-and-SSL" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -575,7 +575,7 @@ services:
       - <span class="hljs-variable">${DOCKER_VOLUME_DIRECTORY:-.}</span>/kafka_server_jass.conf:/etc/kafka/configs/kafka_server_jass.conf
 <button class="copy-code-btn"></button></code></pre>
 <p>次に、次のコマンドでKafkaサービスを開始します：</p>
-<pre><code translate="no" class="language-shell">$ docker-compose up -d
+<pre><code translate="no" class="language-shell">$ docker compose up -d
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="2-Start-Milvus-and-Connect-to-Kafka-with-SASLPLAIN-and-SSL" class="common-anchor-header">2.Milvus を起動し、SASL/PLAIN および SSL で Kafka に接続する。</h3><p>Kafkaサービスが起動したら、Milvusを起動して接続します。以下の<code translate="no">docker-compose.yaml</code> ファイルを使用して、Milvus を起動し、SASL/PLAIN および SSL を使用して Kafka に接続します：</p>
 <pre><code translate="no" class="language-yaml">version: <span class="hljs-string">&#x27;3.5&#x27;</span>

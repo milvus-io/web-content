@@ -1387,7 +1387,7 @@ searchResults = searchResp.getSearchResults();
 <li><p>Si la valeur d'une clé est une chaîne de caractères, vous ne pouvez la comparer qu'avec une autre clé de type chaîne de caractères ou un champ VARCHAR.</p></li>
 </ul>
 </div>
-<h3 id="Basic-Operators-in-JSON-Fields" class="common-anchor-header">Opérateurs de base dans les champs JSON</h3><p>Le tableau suivant suppose que la valeur d'un champ JSON nommé <code translate="no">json_key</code> a une clé nommée <code translate="no">A</code>. Utilisez-le comme référence lors de la construction d'expressions booléennes utilisant des clés de champ JSON.</p>
+<h3 id="Basic-Operators-in-JSON-Fields" class="common-anchor-header">Opérateurs de base dans les champs JSON</h3><p>Le tableau suivant suppose que la valeur d'un champ JSON nommé <code translate="no">json_key</code> a une clé nommée <code translate="no">A</code>. Utilisez-le comme référence lorsque vous construisez des expressions booléennes à l'aide de clés de champ JSON.</p>
 <table>
 <thead>
 <tr><th><strong>Opérateur</strong></th><th><strong>Exemples</strong></th><th><strong>Remarques</strong></th></tr>
