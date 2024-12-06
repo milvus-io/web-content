@@ -63,7 +63,7 @@ If you have Docker Compose V1, use the following command:
 
 
 ```shell
-docker-compose up -d
+docker compose up -d
 ```
 
 ## Log in to Dify

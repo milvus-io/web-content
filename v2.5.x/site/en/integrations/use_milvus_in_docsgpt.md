@@ -75,6 +75,6 @@ You can play around with the UI and ask questions about your documents.
 
 If you want to stop the services, run:
 ```shell
-$ docker-compose down
+$ docker compose down
 ```
 For further details and more advanced setups, please refer to the [DocsGPT](https://github.com/arc53/DocsGPT) official documentation.

@@ -35,13 +35,13 @@ Besides Milvus, you should also set other environments, e.g. `OPENAI_API_KEY`. Y
 ## Starting the app
 
 ```sh
-$ docker-compose up -d --build
+$ docker compose up -d --build
 ```
 
 ## Stopping the app
 
 ```sh
-$ docker-compose down
+$ docker compose down
 ```
 
 ## Accessing the project

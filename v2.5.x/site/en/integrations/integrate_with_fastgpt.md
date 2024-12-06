@@ -27,7 +27,7 @@ $ curl -o docker-compose.yml https://raw.githubusercontent.com/labring/FastGPT/m
 Execute in the same directory as docker-compose.yml. Ensure that the docker-compose version is ideally above 2.17, as some automation commands may not function otherwise.
 ```shell
 # Launch the container
-$ docker-compose up -d
+$ docker compose up -d
 # Wait for 10s, OneAPI typically needs to restart a few times to initially connect to Mysql
 $ sleep 10
 # Restart oneapi (Due to certain issues with the default Key of OneAPI, it will display 'channel not found' if not restarted, this can be temporarily resolved by manually restarting once, while waiting for the author's fix)
@@ -50,5 +50,5 @@ At present, FastGPT can be directly accessed at `ip:3000` (please mind the firew
 ## Stop the Container
 Run the following command to stop the container.
 ```shell
-$ docker-compose down
+$ docker compose down
 ```

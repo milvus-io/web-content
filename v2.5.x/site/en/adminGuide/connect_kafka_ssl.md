@@ -44,7 +44,7 @@ services:
 Then you can start the Kafka service with the following command:
 
 ```shell
-$ docker-compose up -d
+$ docker compose up -d
 ```
 
 ### 2. Start Milvus and Connect to Kafka
@@ -99,7 +99,7 @@ kafka:
 Then you can start Milvus with the following command:
 
 ```shell
-$ docker-compose up -d
+$ docker compose up -d
 ```
 
 ## Connect Milus to Kafka with SASL/PLAIN Alone
@@ -162,7 +162,7 @@ KafkaServer {
 Then you can start the Kafka service with the following command:
 
 ```shell
-$ docker-compose up -d
+$ docker compose up -d
 ```
 
 ### 2. Start Milvus and Connect to Kafka
@@ -217,7 +217,7 @@ kafka:
 Then you can start Milvus with the following command:
 
 ```shell
-$ docker-compose up -d
+$ docker compose up -d
 ```
 
 ## Connect Milvus to Kafka with SSL Alone
@@ -489,7 +489,7 @@ services:
 Then start the Kafka service with the following command:
 
 ```shell
-$ docker-compose up -d
+$ docker compose up -d
 ```
 
 ### 3. Start Milvus and Connect to Kafka with SSL
@@ -545,7 +545,7 @@ kafka:
 Then start Milvus with the following command:
 
 ```shell
-$ docker-compose up -d
+$ docker compose up -d
 ```
 
 ## Connect Milvus to Kafka with SASL/PLAIN and SSL
@@ -612,7 +612,7 @@ services:
 Then start the Kafka service with the following command:
 
 ```shell
-$ docker-compose up -d
+$ docker compose up -d
 ```
 
 ### 2. Start Milvus and Connect to Kafka with SASL/PLAIN and SSL
