@@ -142,6 +142,7 @@ openssl req -new -key client.key\
   | openssl x509 -req -days <span class="hljs-variable">$ExpireDays</span> -out client.pem -CA ca.pem -CAkey ca.key -CAcreateserial \
     -extfile ./openssl.cnf -extensions v3_req
 <button class="copy-code-btn"></button></code></pre>
+<p></details></p>
 <p>Run the <code translate="no">renew.sh</code> file to create certificate.</p>
 <pre><code translate="no"><span class="hljs-built_in">chmod</span> +x renew.sh
 ./renew.sh
