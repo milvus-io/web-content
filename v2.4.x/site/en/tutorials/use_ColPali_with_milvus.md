@@ -27,7 +27,6 @@ ColPali is a method that combines ColBERT's multi-vector representation with Pal
 
 ## Preparation
 
-
 ```shell
 $ pip install pdf2image
 $ pip pymilvus
@@ -60,6 +59,7 @@ import concurrent.futures
 
 client = MilvusClient(uri="milvus.db")
 ```
+
 
 <div class="alert note">
 
@@ -167,7 +167,7 @@ class MilvusColbertRetriever:
             # Rerank a single document by retrieving its embeddings and calculating the similarity with the query.
             doc_colbert_vecs = client.query(
                 collection_name=collection_name,
-                filter=f"doc_id in [{doc_id}, {doc_id + 1}]",
+                filter=f"doc_id in [{doc_id}]",
                 output_fields=["seq_id", "vector", "doc"],
                 limit=1000,
             )

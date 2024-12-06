@@ -658,9 +658,9 @@ for (List<SearchResp.SearchResult> results : searchResults) {
 }
 
 // Output:
-// SearchResp.SearchResult(entity={color={"label":"red","tag":1018,"coord":[3,30,1],"ref":[["yellow","brown","orange"],["yellow","purple","blue"],["green","purple","purple"]]}, id=295}, score=1.1190735, id=295)
-// SearchResp.SearchResult(entity={color={"label":"red","tag":8141,"coord":[38,31,29],"ref":[["blue","white","white"],["green","orange","green"],["yellow","green","black"]]}, id=667}, score=1.0679582, id=667)
-// SearchResp.SearchResult(entity={color={"label":"red","tag":6837,"coord":[29,9,8],"ref":[["green","black","blue"],["purple","white","green"],["red","blue","black"]]}, id=927}, score=1.0029297, id=927)
+// SearchResp.SearchResult(entity=\{color=\{"label":"red","tag":1018,"coord":[3,30,1],"ref":[["yellow","brown","orange"],["yellow","purple","blue"],["green","purple","purple"]]}, id=295}, score=1.1190735, id=295)
+// SearchResp.SearchResult(entity=\{color=\{"label":"red","tag":8141,"coord":[38,31,29],"ref":[["blue","white","white"],["green","orange","green"],["yellow","green","black"]]}, id=667}, score=1.0679582, id=667)
+// SearchResp.SearchResult(entity=\{color=\{"label":"red","tag":6837,"coord":[29,9,8],"ref":[["green","black","blue"],["purple","white","green"],["red","blue","black"]]}, id=927}, score=1.0029297, id=927)
 ```
 
 ```javascript
