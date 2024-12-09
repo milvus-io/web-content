@@ -493,7 +493,7 @@
             "children": []
           },
           {
-            "label": "Compattazione del clustering",
+            "label": "Compattazione dei cluster",
             "id": "clustering-compaction.md",
             "order": 8,
             "children": []
@@ -1433,7 +1433,7 @@
             "children": []
           },
           {
-            "label": "Dificare",
+            "label": "Dify",
             "id": "dify_with_milvus.md",
             "order": 6,
             "children": []
@@ -1688,7 +1688,7 @@
         "children": []
       },
       {
-        "label": "Ricerca a imbuto con matrioske embeddings",
+        "label": "Ricerca a imbuto con le matrici Matryoshka",
         "id": "funnel_search_with_matryoshka.md",
         "order": 10,
         "children": []
@@ -1717,7 +1717,7 @@
             "children": []
           },
           {
-            "label": "Ricerca della somiglianza audio",
+            "label": "Ricerca di somiglianza audio",
             "id": "audio_similarity_search.md",
             "order": 8,
             "children": []

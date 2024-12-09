@@ -778,12 +778,6 @@
             "children": []
           },
           {
-            "label": "BM25",
-            "id": "embed-with-bm25.md",
-            "order": 4,
-            "children": []
-          },
-          {
             "label": "SPLADE",
             "id": "embed-with-splade.md",
             "order": 5,

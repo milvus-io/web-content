@@ -69,5 +69,9 @@ title: 集成概述
 <tr><td><a href="/docs/zh/knowledge_table_with_milvus.md">使用 Milvus 的知识表</a></td><td>知识工程</td><td>知识表，Milvus</td></tr>
 <tr><td><a href="/docs/zh/use_milvus_in_docsgpt.md">在 DocsGPT 中使用 Milvus</a></td><td>协调</td><td>在 DocsGPT 中使用 Milvus</td></tr>
 <tr><td><a href="/docs/zh/use_milvus_with_sambanova.md">在 SambaNova 中使用 Milvus</a></td><td>协调</td><td>Milvus、SambaNova</td></tr>
+<tr><td><a href="/docs/zh/build_RAG_with_milvus_and_cognee.md">使用 Milvus 和 Cognee 构建 RAG</a></td><td>知识工程</td><td>Milvus、Cognee</td></tr>
+<tr><td><a href="/docs/zh/build_RAG_with_milvus_and_gemini.md">使用 Milvus 和 Gemini 构建 RAG</a></td><td>LLMs</td><td>Milvus、Gemini</td></tr>
+<tr><td><a href="/docs/zh/build_RAG_with_milvus_and_ollama.md">使用 Milvus 和 Ollama 构建 RAG</a></td><td>LLMs</td><td>Milvus、Ollama</td></tr>
+<tr><td><a href="/docs/zh/milvus_rag_with_dynamiq.md">开始使用 Dynamiq 和 Milvus</a></td><td>协调</td><td>Milvus、Dynamiq</td></tr>
 </tbody>
 </table>

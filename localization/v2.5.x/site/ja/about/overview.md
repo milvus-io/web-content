@@ -43,7 +43,7 @@ summary: >-
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/unstructured-data-embedding-and-milvus.png" alt="Untructured data, embeddings, and Milvus" class="doc-image" id="untructured-data,-embeddings,-and-milvus" />
    </span> <span class="img-wrapper"> <span>非構造化データ、エンベッディング、Milvus</span> </span></p>
-<p>Milvusは3つのデプロイメントモードを提供し、Jupyter Notebooksでのローカルプロトタイピングから数百億のベクトルを管理する巨大なKubernetesクラスタまで、幅広いデータスケールをカバーします：</p>
+<p>Milvusは3つのデプロイメントモードを提供し、Jupyter Notebooksでのローカルプロトタイピングから数百億のベクトルを管理する大規模なKubernetesクラスタまで、幅広いデータスケールをカバーします：</p>
 <ul>
 <li>Milvus Liteは、アプリケーションに簡単に統合できるPythonライブラリです。Milvusの軽量版として、Jupyter Notebooksでの迅速なプロトタイピングや、リソースが限られたエッジデバイスでの実行に最適です。<a href="/docs/ja/milvus_lite.md">詳細は</a>こちら。</li>
 <li>Milvus Standaloneは、シングルマシンサーバーデプロイメントで、すべてのコンポーネントが単一のDockerイメージにバンドルされており、デプロイに便利です。詳細は<a href="/docs/ja/install_standalone-docker.md">こちら</a>。</li>
@@ -67,7 +67,7 @@ summary: >-
     </button></h2><p>Milvusは初日から非常に効率的なベクトルデータベースシステムとして設計されました。ほとんどの場合、Milvusは他のベクトルデータベースを2～5倍凌駕しています（VectorDBBenchの結果を参照）。この高い性能は、いくつかの重要な設計上の決定の結果です：</p>
 <p><strong>ハードウェアを考慮した最適化</strong>：Milvusを様々なハードウェア環境に対応させるため、AVX512、SIMD、GPU、NVMe SSDなど、多くのハードウェアアーキテクチャとプラットフォームに特化して性能を最適化しました。</p>
 <p><strong>高度な検索アルゴリズム</strong>：milvusは、IVF、HNSW、DiskANNなど、幅広いインメモリおよびオンディスクインデックス/検索アルゴリズムをサポートしており、これらはすべて深く最適化されています。FAISSやHNSWLibのような一般的な実装と比較して、Milvusは30%から70%の性能向上を実現しています。</p>
-<p><strong>C++の検索エンジン</strong>：ベクトルデータベースの性能の80%以上は検索エンジンによって決まります。Milvusは、高性能、低レベル最適化、効率的なリソース管理のために、この重要なコンポーネントにC++を使用しています。最も重要なことは、Milvusはハードウェアの能力を十分に活用するために、アセンブリレベルのベクトル化からマルチスレッド並列化、スケジューリングに至るまで、ハードウェアを意識した数多くのコード最適化を統合していることです。</p>
+<p><strong>C++の検索エンジン</strong>：ベクトルデータベースの性能の80%以上は検索エンジンによって決まります。Milvusは、高性能、低レベル最適化、効率的なリソース管理のために、この重要なコンポーネントにC++を使用しています。最も重要な点として、Milvusはハードウェアの能力をフルに活用するために、アセンブリレベルのベクトル化からマルチスレッド並列化、スケジューリングに至るまで、ハードウェアを意識した数多くのコード最適化を統合しています。</p>
 <p><strong>列指向</strong>：Milvusは列指向のベクトルデータベースシステムです。主な利点はデータアクセスパターンにある。クエリを実行する際、列指向データベースは行全体ではなく、クエリに関係する特定のフィールドのみを読み込むため、アクセスされるデータ量が大幅に削減される。さらに、列ベースのデータに対する操作は簡単にベクトル化することができるため、列全体に一度に操作を適用することができ、パフォーマンスをさらに向上させることができます。</p>
 <h2 id="What-Makes-Milvus-so-Scalable" class="common-anchor-header">Milvusがスケーラブルである理由<button data-href="#What-Makes-Milvus-so-Scalable" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -112,9 +112,9 @@ summary: >-
 <li><a href="/docs/ja/single-vector-search.md#Filtered-search">フィルタリング検索</a>：指定されたフィルタリング条件でANN検索を行います。</li>
 <li><a href="/docs/ja/single-vector-search.md#Range-search">範囲検索</a>：クエリーベクトルから指定した半径内のベクトルを検索します。</li>
 <li><a href="/docs/ja/multi-vector-search.md">ハイブリッド検索</a>複数のベクトルフィールドに基づいてANN検索を行います。</li>
-<li>キーワード検索BM25に基づいたキーワード検索を行います。</li>
+<li><a href="/docs/ja/full-text-search.md">全文検索</a>BM25に基づく全文検索。</li>
 <li><a href="/docs/ja/reranking.md">再順位付け</a>追加条件または二次アルゴリズムに基づいて検索結果の順序を調整し、最初のANN検索結果を絞り込む。</li>
-<li><a href="/docs/ja/get-and-scalar-query.md#Get-Entities-by-ID">フェッチ</a>：主キーでデータを検索する。</li>
+<li><a href="/docs/ja/get-and-scalar-query.md#Get-Entities-by-ID">フェッチ</a>主キーでデータを検索する。</li>
 <li><a href="/docs/ja/get-and-scalar-query.md#Use-Basic-Operators">クエリー</a>：特定の式を使用してデータを検索します。</li>
 </ul>
 <h2 id="Comprehensive-Feature-Set" class="common-anchor-header">包括的な機能セット<button data-href="#Comprehensive-Feature-Set" class="anchor-icon" translate="no">
@@ -172,5 +172,5 @@ summary: >-
 <li><p>Milvusバックアップ Milvusバックアップは、Milvusデータのバックアップとリストアを可能にするツールです。CLIとAPIの両方を提供し、様々なアプリケーションシナリオに対応します。詳細は<a href="/docs/ja/milvus_backup_overview.md">Milvus Backupを</a>ご参照ください。</p></li>
 <li><p>Milvus Capture Data Change (CDC) Milvus-CDCはMilvusインスタンス内の増分データをキャプチャして同期し、ソースインスタンスとターゲットインスタンス間でシームレスに転送することでビジネスデータの信頼性を確保し、増分バックアップやディザスタリカバリを容易に行うことができます。詳細は<a href="/docs/ja/milvus-cdc-overview.md">Milvus CDCを</a>ご参照ください。</p></li>
 <li><p>Milvusコネクタ Milvusは、MilvusをApache Sparkなどのサードパーティツールとシームレスに統合するためのコネクタ群を計画しています。現在、Spark Connectorを使用することで、MilvusのデータをApache Sparkに供給し、機械学習処理を行うことができます。詳細は<a href="/docs/ja/integrate_with_spark.md">Spark-Milvus Connectorを</a>ご参照ください。</p></li>
-<li><p>Vector Transmission Services (VTS) Milvusは、Milvusインスタンスと、Zillizクラスタ、Elasticsearch、Postgres (PgVector)、別のMilvusインスタンスなどの多数のデータソース間でデータを転送するためのツールセットを提供しています。詳細は<a href="/docs/ja/migrate_overview.md">マイグレーションを</a>ご参照ください。</p></li>
+<li><p>Vector Transmission Services (VTS) Milvusは、Milvusインスタンスと、Zillizクラスタ、Elasticsearch、Postgres (PgVector)、別のMilvusインスタンスなどの多数のデータソース間でデータを転送するためのツールセットを提供しています。詳細は<a href="/docs/ja/migrate_overview.md">マイグレーションを</a>参照してください。</p></li>
 </ul>

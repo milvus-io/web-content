@@ -433,7 +433,7 @@
             "children": []
           },
           {
-            "label": "番号フィールド",
+            "label": "数字フィールド",
             "id": "number.md",
             "order": 6,
             "children": []
@@ -775,12 +775,6 @@
             "label": "BGE M3",
             "id": "embed-with-bgm-m3.md",
             "order": 3,
-            "children": []
-          },
-          {
-            "label": "BM25",
-            "id": "embed-with-bm25.md",
-            "order": 4,
             "children": []
           },
           {
@@ -2009,7 +2003,7 @@
             "children": []
           },
           {
-            "label": "レコメンダー・システム",
+            "label": "推薦システム",
             "id": "recommendation_system.md",
             "order": 6,
             "children": []

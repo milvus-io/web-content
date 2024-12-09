@@ -778,12 +778,6 @@
             "children": []
           },
           {
-            "label": "BM25",
-            "id": "embed-with-bm25.md",
-            "order": 4,
-            "children": []
-          },
-          {
             "label": "SPLADE",
             "id": "embed-with-splade.md",
             "order": 5,
@@ -936,7 +930,7 @@
         "children": []
       },
       {
-        "label": "From Milvus 2.3.x",
+        "label": "来自 Milvus 2.3.x",
         "id": "from-m2x.md",
         "order": 5,
         "children": []

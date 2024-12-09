@@ -778,12 +778,6 @@
             "children": []
           },
           {
-            "label": "BM25",
-            "id": "embed-with-bm25.md",
-            "order": 4,
-            "children": []
-          },
-          {
             "label": "SPLADE",
             "id": "embed-with-splade.md",
             "order": 5,
@@ -1362,7 +1356,7 @@
             "children": []
           },
           {
-            "label": "RBAC aktivieren",
+            "label": "RBAC einschalten",
             "id": "rbac.md",
             "order": 1,
             "isMenu": true,

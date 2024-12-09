@@ -2,9 +2,9 @@
 id: embeddings.md
 order: 1
 summary: 'Erfahren Sie, wie Sie Einbettungen für Ihre Daten erstellen können.'
-title: Einbettung Überblick
+title: Einbettung - Überblick
 ---
-<h1 id="Embedding-Overview" class="common-anchor-header">Einbettung Überblick<button data-href="#Embedding-Overview" class="anchor-icon" translate="no">
+<h1 id="Embedding-Overview" class="common-anchor-header">Einbettung - Überblick<button data-href="#Embedding-Overview" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -19,7 +19,7 @@ title: Einbettung Überblick
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Embedding ist ein Konzept des maschinellen Lernens zur Abbildung von Daten in einem hochdimensionalen Raum, in dem Daten mit ähnlicher Semantik nahe beieinander angeordnet werden. Bei dem Einbettungsmodell handelt es sich in der Regel um ein Deep Neural Network von BERT oder anderen Transformer-Familien, das die Semantik von Text, Bildern und anderen Datentypen durch eine Reihe von Zahlen, die als Vektoren bezeichnet werden, effektiv darstellen kann. Ein wesentliches Merkmal dieser Modelle ist, dass der mathematische Abstand zwischen Vektoren im hochdimensionalen Raum die Ähnlichkeit der Semantik von Originaltexten oder -bildern anzeigen kann. Diese Eigenschaft ermöglicht zahlreiche Anwendungen für die Informationsbeschaffung, z. B. Web-Suchmaschinen wie Google und Bing, Produktsuche und -empfehlungen auf E-Commerce-Websites und das kürzlich populäre Paradigma Retrieval Augmented Generation (RAG) in der generativen KI.</p>
+    </button></h1><p>Embedding ist ein Konzept des maschinellen Lernens zur Abbildung von Daten in einem hochdimensionalen Raum, in dem Daten mit ähnlicher Semantik nahe beieinander angeordnet werden. Bei dem Einbettungsmodell handelt es sich in der Regel um ein Deep Neural Network von BERT oder anderen Transformer-Familien, das die Semantik von Text, Bildern und anderen Datentypen durch eine Reihe von Zahlen, die als Vektoren bezeichnet werden, effektiv darstellen kann. Ein wesentliches Merkmal dieser Modelle ist, dass der mathematische Abstand zwischen Vektoren im hochdimensionalen Raum die Ähnlichkeit der Semantik von Originaltexten oder -bildern anzeigen kann. Diese Eigenschaft ermöglicht zahlreiche Anwendungen für die Informationsgewinnung, z. B. Web-Suchmaschinen wie Google und Bing, Produktsuche und -empfehlungen auf E-Commerce-Websites und das kürzlich populäre Retrieval Augmented Generation (RAG)-Paradigma in der generativen KI.</p>
 <p>Es gibt zwei Hauptkategorien von Einbettungen, die jeweils eine andere Art von Vektor erzeugen:</p>
 <ul>
 <li><p><strong>Dense Embedding</strong>: Die meisten Einbettungsmodelle stellen Informationen als Gleitkomma-Vektor mit Hunderten bis Tausenden von Dimensionen dar. Die Ausgabe wird als "dichte" Vektoren bezeichnet, da die meisten Dimensionen Nicht-Null-Werte haben. Das beliebte Open-Source-Einbettungsmodell BAAI/bge-base-de-v1.5 beispielsweise gibt Vektoren mit 768 Fließkommazahlen aus (768-dimensionaler Float-Vektor).</p></li>
@@ -34,7 +34,6 @@ title: Einbettung Überblick
 <tbody>
 <tr><td><a href="https://milvus.io/api-reference/pymilvus/v2.4.x/EmbeddingModels/OpenAIEmbeddingFunction/OpenAIEmbeddingFunction.md">openai</a></td><td>Dichtes</td><td>API</td></tr>
 <tr><td><a href="https://milvus.io/api-reference/pymilvus/v2.4.x/EmbeddingModels/SentenceTransformerEmbeddingFunction/SentenceTransformerEmbeddingFunction.md">Satzumwandler</a></td><td>Dicht</td><td>Open-Source</td></tr>
-<tr><td><a href="https://milvus.io/api-reference/pymilvus/v2.4.x/EmbeddingModels/BM25EmbeddingFunction/BM25EmbeddingFunction.md">bm25</a></td><td>Lückenhaft</td><td>Open-sourced</td></tr>
 <tr><td><a href="https://milvus.io/api-reference/pymilvus/v2.4.x/EmbeddingModels/SpladeEmbeddingFunction/SpladeEmbeddingFunction.md">Splade</a></td><td>Spärlich</td><td>Open-sourced</td></tr>
 <tr><td><a href="https://milvus.io/api-reference/pymilvus/v2.4.x/EmbeddingModels/BGEM3EmbeddingFunction/BGEM3EmbeddingFunction.md">bge-m3</a></td><td>Hybride</td><td>Open-source</td></tr>
 <tr><td><a href="https://milvus.io/api-reference/pymilvus/v2.4.x/EmbeddingModels/VoyageEmbeddingFunction/VoyageEmbeddingFunction.md">voyageai</a></td><td>Dichtes</td><td>API</td></tr>
@@ -64,7 +63,7 @@ title: Einbettung Überblick
     </button></h2><p>Um Einbettungsfunktionen mit Milvus zu verwenden, installieren Sie zunächst die PyMilvus-Client-Bibliothek mit dem Unterpaket <code translate="no">model</code>, das alle Dienstprogramme für die Einbettungserzeugung enthält.</p>
 <pre><code translate="no" class="language-python">pip install <span class="hljs-string">&quot;pymilvus[model]&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Das Unterpaket <code translate="no">model</code> unterstützt verschiedene Einbettungsmodelle, von <a href="https://milvus.io/docs/embed-with-openai.md">OpenAI</a>, <a href="https://milvus.io/docs/embed-with-sentence-transform.md">Sentence Transformers</a>, <a href="https://milvus.io/docs/embed-with-bgm-m3.md">BGE M3</a>, <a href="https://milvus.io/docs/embed-with-bm25.md">BM25</a>, bis hin zu <a href="https://milvus.io/docs/embed-with-splade.md">SPLADE</a> Pretrained Models. Der Einfachheit halber wird in diesem Beispiel das Modell <code translate="no">DefaultEmbeddingFunction</code> verwendet, das ein <strong>reines MiniLM-L6-v2-Satztransformatormodell</strong> ist. Das Modell ist etwa 70 MB groß und wird bei der ersten Verwendung heruntergeladen:</p>
+<p>Das Unterpaket <code translate="no">model</code> unterstützt verschiedene Einbettungsmodelle, von <a href="https://milvus.io/docs/embed-with-openai.md">OpenAI</a>, <a href="https://milvus.io/docs/embed-with-sentence-transform.md">Sentence Transformers</a>, <a href="https://milvus.io/docs/embed-with-bgm-m3.md">BGE M3</a> bis hin zu vortrainierten <a href="https://milvus.io/docs/embed-with-splade.md">SPLADE-Modellen</a>. Der Einfachheit halber wird in diesem Beispiel das Modell <code translate="no">DefaultEmbeddingFunction</code> verwendet, das ein <strong>reines MiniLM-L6-v2-Satztransformatormodell</strong> ist. Das Modell ist etwa 70 MB groß und wird bei der ersten Verwendung heruntergeladen:</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> model
 
 <span class="hljs-comment"># This will download &quot;all-MiniLM-L6-v2&quot;, a light weight model.</span>
@@ -141,50 +140,4 @@ bge_m3_ef = BGEM3EmbeddingFunction(use_fp16=<span class="hljs-literal">False</sp
 
 docs_embeddings = bge_m3_ef(docs)
 query_embeddings = bge_m3_ef([query])
-<button class="copy-code-btn"></button></code></pre>
-<h2 id="Example-3-Generate--sparse-vectors-using-BM25-model" class="common-anchor-header">Beispiel 3: Generierung von spärlichen Vektoren mit dem BM25-Modell<button data-href="#Example-3-Generate--sparse-vectors-using-BM25-model" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h2><p>BM25 ist eine bekannte Methode, die die Häufigkeit des Auftretens von Wörtern verwendet, um die Relevanz zwischen Abfragen und Dokumenten zu bestimmen. In diesem Beispiel wird gezeigt, wie <code translate="no">BM25EmbeddingFunction</code> verwendet wird, um spärliche Einbettungen sowohl für Abfragen als auch für Dokumente zu erzeugen.</p>
-<p>Zunächst wird die Klasse <strong>BM25EmbeddingFunction</strong> importiert.</p>
-<pre><code translate="no" class="language-xml"><span class="hljs-keyword">from</span> pymilvus.<span class="hljs-property">model</span>.<span class="hljs-property">sparse</span> <span class="hljs-keyword">import</span> <span class="hljs-title class_">BM25EmbeddingFunction</span>
-<button class="copy-code-btn"></button></code></pre>
-<p>In BM25 ist es wichtig, die Statistiken in Ihren Dokumenten zu berechnen, um die IDF (Inverse Document Frequency) zu erhalten, die das Muster in Ihren Dokumenten darstellen kann. Die IDF ist ein Maß dafür, wie viele Informationen ein Wort liefert, d. h. ob es in allen Dokumenten häufig oder selten vorkommt.</p>
-<pre><code translate="no" class="language-python"><span class="hljs-comment"># 1. prepare a small corpus to search</span>
-docs = [
-    <span class="hljs-string">&quot;Artificial intelligence was founded as an academic discipline in 1956.&quot;</span>,
-    <span class="hljs-string">&quot;Alan Turing was the first person to conduct substantial research in AI.&quot;</span>,
-    <span class="hljs-string">&quot;Born in Maida Vale, London, Turing was raised in southern England.&quot;</span>,
-]
-query = <span class="hljs-string">&quot;Where was Turing born?&quot;</span>
-bm25_ef = BM25EmbeddingFunction()
-
-<span class="hljs-comment"># 2. fit the corpus to get BM25 model parameters on your documents.</span>
-bm25_ef.fit(docs)
-
-<span class="hljs-comment"># 3. store the fitted parameters to disk to expedite future processing.</span>
-bm25_ef.save(<span class="hljs-string">&quot;bm25_params.json&quot;</span>)
-
-<span class="hljs-comment"># 4. load the saved params</span>
-new_bm25_ef = BM25EmbeddingFunction()
-new_bm25_ef.load(<span class="hljs-string">&quot;bm25_params.json&quot;</span>)
-
-docs_embeddings = new_bm25_ef.encode_documents(docs)
-query_embeddings = new_bm25_ef.encode_queries([query])
-<span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Dim:&quot;</span>, new_bm25_ef.dim, <span class="hljs-built_in">list</span>(docs_embeddings)[<span class="hljs-number">0</span>].shape)
-<button class="copy-code-btn"></button></code></pre>
-<p>Das erwartete Ergebnis sieht wie folgt aus:</p>
-<pre><code translate="no" class="language-python">Dim: 21 (1, 21)
 <button class="copy-code-btn"></button></code></pre>

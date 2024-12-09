@@ -71,5 +71,9 @@ title: Visão geral das integrações
 <tr><td><a href="/docs/pt/knowledge_table_with_milvus.md">Tabela de conhecimento com Milvus</a></td><td>Engenharia do conhecimento</td><td>Tabela de Conhecimentos, Milvus</td></tr>
 <tr><td><a href="/docs/pt/use_milvus_in_docsgpt.md">Utilizar o Milvus no DocsGPT</a></td><td>Ochestração</td><td>DocsGPT, Milvus</td></tr>
 <tr><td><a href="/docs/pt/use_milvus_with_sambanova.md">Utilizar o Milvus com o SambaNova</a></td><td>Orquestração</td><td>Milvus, SambaNova</td></tr>
+<tr><td><a href="/docs/pt/build_RAG_with_milvus_and_cognee.md">Criar RAG com Milvus e Cognee</a></td><td>Engenharia do conhecimento</td><td>Milvus, Cognee</td></tr>
+<tr><td><a href="/docs/pt/build_RAG_with_milvus_and_gemini.md">Criar RAG com Milvus e Gemini</a></td><td>LLMs</td><td>Milvus, Gemini</td></tr>
+<tr><td><a href="/docs/pt/build_RAG_with_milvus_and_ollama.md">Construir RAG com Milvus e Ollama</a></td><td>LLMs</td><td>Milvus, Ollama</td></tr>
+<tr><td><a href="/docs/pt/milvus_rag_with_dynamiq.md">Introdução ao Dynamiq e ao Milvus</a></td><td>Orquestração</td><td>Milvus, Dynamiq</td></tr>
 </tbody>
 </table>

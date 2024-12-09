@@ -39,7 +39,7 @@ title: ColPali für multimodales Retrieval mit Milvus verwenden
 </p>
 <p>Die MaxSim-Funktion vergleicht eine Abfrage mit einem Dokument (in dem Sie suchen), indem sie deren Token-Einbettungen betrachtet. Für jedes Wort in der Abfrage wählt sie das ähnlichste Wort aus dem Dokument aus (unter Verwendung der Kosinusähnlichkeit oder der quadrierten L2-Distanz) und summiert diese maximalen Ähnlichkeiten über alle Wörter in der Abfrage</p>
 <p>ColPali ist eine Methode, die die Multi-Vektor-Darstellung von ColBERT mit PaliGemma (einem multimodalen großen Sprachmodell) kombiniert, um dessen starke Verständnisfähigkeiten zu nutzen. Dieser Ansatz ermöglicht es, eine Seite, die sowohl Text als auch Bilder enthält, durch eine einheitliche Multi-Vektor-Einbettung darzustellen. Die Einbettungen innerhalb dieser Multi-Vektor-Darstellung können detaillierte Informationen erfassen und so die Leistung der Retrieval-augmented Generation (RAG) für multimodale Daten verbessern.</p>
-<p>In diesem Notizbuch bezeichnen wir diese Art von Multi-Vektor-Darstellung aus Gründen der Allgemeinheit als "ColBERT-Einbettungen". Das tatsächliche Modell, das verwendet wird, ist jedoch das <strong>ColPali-Modell</strong>. Wir werden demonstrieren, wie Milvus für die Suche nach mehreren Vektoren verwendet werden kann. Darauf aufbauend wird gezeigt, wie ColPali für das Abrufen von Seiten auf der Grundlage einer gegebenen Anfrage verwendet werden kann.</p>
+<p>In diesem Notizbuch bezeichnen wir diese Art von Multi-Vektor-Darstellung aus Gründen der Allgemeinheit als "ColBERT-Einbettungen". Das tatsächliche Modell, das verwendet wird, ist jedoch das <strong>ColPali-Modell</strong>. Wir werden demonstrieren, wie Milvus für Multi-Vektor-Retrieval verwendet werden kann. Darauf aufbauend wird gezeigt, wie ColPali für das Abrufen von Seiten auf der Grundlage einer gegebenen Anfrage verwendet werden kann.</p>
 <h2 id="Preparation" class="common-anchor-header">Vorbereitung<button data-href="#Preparation" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -191,7 +191,7 @@ client = <span class="hljs-title class_">MilvusClient</span>(uri=<span class="hl
             <span class="hljs-comment"># Rerank a single document by retrieving its embeddings and calculating the similarity with the query.</span>
             doc_colbert_vecs = client.query(
                 collection_name=collection_name,
-                <span class="hljs-built_in">filter</span>=<span class="hljs-string">f&quot;doc_id in [<span class="hljs-subst">{doc_id}</span>, <span class="hljs-subst">{doc_id + <span class="hljs-number">1</span>}</span>]&quot;</span>,
+                <span class="hljs-built_in">filter</span>=<span class="hljs-string">f&quot;doc_id in [<span class="hljs-subst">{doc_id}</span>]&quot;</span>,
                 output_fields=[<span class="hljs-string">&quot;seq_id&quot;</span>, <span class="hljs-string">&quot;vector&quot;</span>, <span class="hljs-string">&quot;doc&quot;</span>],
                 limit=<span class="hljs-number">1000</span>,
             )

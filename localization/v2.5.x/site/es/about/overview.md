@@ -115,7 +115,7 @@ summary: >-
 <li><a href="/docs/es/single-vector-search.md#Filtered-search">Búsqueda por filtrado</a>: Realiza la búsqueda RNA bajo condiciones de filtrado especificadas.</li>
 <li><a href="/docs/es/single-vector-search.md#Range-search">Búsqueda por rango</a>: Busca vectores dentro de un radio especificado a partir del vector de consulta.</li>
 <li><a href="/docs/es/multi-vector-search.md">Búsqueda híbrida</a>: Realiza una búsqueda RNA basada en múltiples campos vectoriales.</li>
-<li>Búsqueda por palabra clave: Búsqueda de palabras clave basada en BM25.</li>
+<li><a href="/docs/es/full-text-search.md">Búsqueda de texto completo</a>: Búsqueda de texto completo basada en BM25.</li>
 <li><a href="/docs/es/reranking.md">Reordenación</a>: Ajusta el orden de los resultados de la búsqueda basándose en criterios adicionales o en un algoritmo secundario, refinando los resultados iniciales de la búsqueda RNA.</li>
 <li><a href="/docs/es/get-and-scalar-query.md#Get-Entities-by-ID">Recuperar</a>: Recupera datos por sus claves primarias.</li>
 <li><a href="/docs/es/get-and-scalar-query.md#Use-Basic-Operators">Consulta</a>: Recupera datos utilizando expresiones específicas.</li>

@@ -778,12 +778,6 @@
             "children": []
           },
           {
-            "label": "BM25",
-            "id": "embed-with-bm25.md",
-            "order": 4,
-            "children": []
-          },
-          {
             "label": "SPLADE",
             "id": "embed-with-splade.md",
             "order": 5,
@@ -2021,7 +2015,7 @@
             "children": []
           },
           {
-            "label": "오디오 유사도 검색",
+            "label": "Audio Similarity Search",
             "id": "audio_similarity_search.md",
             "order": 8,
             "children": []
