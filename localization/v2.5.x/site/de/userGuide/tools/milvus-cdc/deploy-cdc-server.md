@@ -74,7 +74,7 @@ title: CDC-Server bereitstellen
 <li><p><code translate="no">metaStoreConfig.storeType</code>: Typ des Metaspeichers für Milvus-CDC. Mögliche Werte sind <code translate="no">etcd</code> oder <code translate="no">mysql</code>.</p></li>
 <li><p><code translate="no">metaStoreConfig.etcdEndpoints</code>: Adresse für die Verbindung mit dem etcd von Milvus-CDC. Erforderlich, wenn <code translate="no">storeType</code> auf <code translate="no">etcd</code> eingestellt ist.</p></li>
 <li><p><code translate="no">metaStoreConfig.mysqlSourceUrl</code>: Verbindungsadresse der MySQL-Datenbank für den Milvus-CDC-Server. Erforderlich, wenn <code translate="no">storeType</code> auf <code translate="no">mysql</code> gesetzt ist.</p></li>
-<li><p><code translate="no">metaStoreConfig.rootPath</code>: Wurzelpfad des Milvus-CDC-Metaspeichers. Diese Konfiguration ermöglicht Multi-Tenancy, so dass mehrere CDC-Dienste dieselbe etcd- oder MySQL-Instanz verwenden können, während sie durch unterschiedliche Root-Pfade isoliert werden.</p></li>
+<li><p><code translate="no">metaStoreConfig.rootPath</code>: Wurzelpfad des Milvus-CDC-Metaspeichers. Diese Konfiguration ermöglicht Multi-Tenancy, so dass mehrere CDC-Dienste dieselbe etcd- oder MySQL-Instanz nutzen können, während sie durch unterschiedliche Root-Pfade isoliert werden.</p></li>
 </ul>
 <p>Beispielkonfiguration:</p>
 <pre><code translate="no" class="language-yaml"><span class="hljs-comment"># cdc meta data config</span>
@@ -151,6 +151,6 @@ sourceConfig:
 ./milvus-cdc server
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>Verwenden Sie Docker Compose:</p>
-<pre><code translate="no" class="language-bash">docker-compose up -d
+<pre><code translate="no" class="language-bash">docker compose up -d
 <button class="copy-code-btn"></button></code></pre></li>
 </ul>

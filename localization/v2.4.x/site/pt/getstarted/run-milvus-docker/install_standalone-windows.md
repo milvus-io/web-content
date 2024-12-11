@@ -149,7 +149,7 @@ Delete successfully.​
 C:\&gt;Invoke-WebRequest https://github.com/milvus-io/milvus/releases/download/v2.4.15/milvus-standalone-docker-compose.yml -OutFile docker-compose.yml​
 ​
 <span class="hljs-comment"># Start Milvus​</span>
-C:\&gt;docker-compose up -d​
+C:\&gt;docker compose up -d​
 Creating milvus-etcd  ... <span class="hljs-keyword">done</span>​
 Creating milvus-minio ... <span class="hljs-keyword">done</span>​
 Creating milvus-standalone ... <span class="hljs-keyword">done</span>​
@@ -159,7 +159,7 @@ Creating milvus-standalone ... <span class="hljs-keyword">done</span>​
 <ul>
 <li><p>O contentor <strong>milvus-etcd</strong> não expõe quaisquer portas ao anfitrião e mapeia os seus dados para <strong>volumes/etcd</strong> na pasta atual.</p></li>
 <li><p>O contentor <strong>milvus-minio</strong> serve as portas <strong>9090</strong> e <strong>9091</strong> localmente com as credenciais de autenticação predefinidas e mapeia os seus dados para <strong>volumes/minio</strong> na pasta atual.</p></li>
-<li><p>O contentor <strong>milvus-standalone</strong> serve as portas <strong>19530</strong> localmente com as definições predefinidas e mapeia os seus dados para <strong>volumes/milvus</strong> na pasta atual.</p></li>
+<li><p>O contentor <strong>milvus-standalone</strong> serve as portas <strong>19530</strong> localmente com as predefinições e mapeia os seus dados para <strong>volumes/milvus</strong> na pasta atual.</p></li>
 </ul></li>
 </ol>
 <p>Também pode chamar a versão Linux dos comandos do Docker Compose se tiver a WSL 2 instalada.</p>
@@ -176,7 +176,7 @@ Starting Ubuntu...​
 
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>Inicie o Milvus.</p>
-<pre><code translate="no" class="language-shell">$ <span class="hljs-built_in">sudo</span> docker-compose up -d​
+<pre><code translate="no" class="language-shell">$ <span class="hljs-built_in">sudo</span> docker compose up -d​
 ​
 Creating milvus-etcd  ... <span class="hljs-keyword">done</span>​
 Creating milvus-minio ... <span class="hljs-keyword">done</span>​
@@ -239,12 +239,12 @@ Switching to windows engine: Post <span class="hljs-string">&quot;http://ipc/eng
 </ol>
 <h3 id="How-can-I-deal-with-WSL-related-issues-while-deploying-Milvus​" class="common-anchor-header">Como posso lidar com problemas relacionados com a WSL durante a implementação do Milvus?</h3><p>Se encontrou problemas relacionados com a WSL enquanto executava o Milvus a partir da WSL 2, poderá ter de verificar se configurou o Docker Desktop para utilizar o motor baseado na WSL 2 da seguinte forma.</p>
 <ol>
-<li><p>Certifique-se de que a opção "Usar o mecanismo baseado na WSL 2" esteja marcada em <strong>Configurações</strong> &gt; <strong>Geral</strong>. </p>
+<li><p>Certifique-se de que a opção "Usar o mecanismo baseado na WSL 2" está marcada em <strong>Configurações</strong> &gt; <strong>Geral</strong>. </p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/docker-desktop-wsl-01.png" alt="Use the WSL 2 based engine in Docker Desktop Settings" class="doc-image" id="use-the-wsl-2-based-engine-in-docker-desktop-settings" />
    </span> <span class="img-wrapper"> <span>Usar o mecanismo baseado em WSL 2 em Configurações do Docker Desktop</span> </span></p></li>
-<li><p>Selecione, de entre as suas distribuições WSL 2 instaladas, aquela em que pretende ativar a integração do Docker, acedendo a: <strong>Configurações</strong> &gt; <strong>Recursos</strong> &gt; <strong>Integração WSL</strong>.</p>
+<li><p>Selecione, de entre as distribuições WSL 2 instaladas, aquela em que pretende ativar a integração do Docker, acedendo a: <strong>Configurações</strong> &gt; <strong>Recursos</strong> &gt; <strong>Integração WSL</strong>.</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/docker-desktop-wsl-02.png" alt="Select WSL 2 distributions in Docker Desktop Settings" class="doc-image" id="select-wsl-2-distributions-in-docker-desktop-settings" />

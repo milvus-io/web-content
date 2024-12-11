@@ -69,7 +69,7 @@ summary: >-
 <p><strong>硬件感知优化</strong>：为了让 Milvus 适应各种硬件环境，我们专门针对多种硬件架构和平台优化了其性能，包括 AVX512、SIMD、GPU 和 NVMe SSD。</p>
 <p><strong>高级搜索算法</strong>：Milvus 支持多种内存和磁盘索引/搜索算法，包括 IVF、HNSW、DiskANN 等，所有这些算法都经过了深度优化。与 FAISS 和 HNSWLib 等流行实现相比，Milvus 的性能提高了 30%-70%。</p>
 <p><strong>C++ 搜索引擎</strong>向量数据库性能的 80% 以上取决于其搜索引擎。由于 C++ 语言的高性能、底层优化和高效资源管理，Milvus 使用 C++ 来处理这一关键组件。最重要的是，Milvus 集成了大量硬件感知代码优化，从汇编级向量到多线程并行化和调度，以充分利用硬件能力。</p>
-<p><strong>面向列</strong>：Milvus 是面向列的向量数据库系统。其主要优势来自数据访问模式。在执行查询时，面向列的数据库只读取查询中涉及的特定字段，而不是整行，这大大减少了访问的数据量。此外，对基于列的数据的操作可以很容易地进行向量化，从而可以一次性在整个列中应用操作，进一步提高性能。</p>
+<p><strong>面向列</strong>：Milvus 是面向列的向量数据库系统。其主要优势来自数据访问模式。在执行查询时，面向列的数据库只读取查询所涉及的特定字段，而不是整行，这大大减少了访问的数据量。此外，对基于列的数据的操作可以很容易地进行向量化，从而可以一次性在整个列中应用操作，进一步提高性能。</p>
 <h2 id="What-Makes-Milvus-so-Scalable" class="common-anchor-header">是什么让 Milvus 具有如此高的可扩展性？<button data-href="#What-Makes-Milvus-so-Scalable" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -113,8 +113,8 @@ summary: >-
 <li><a href="/docs/zh/single-vector-search.md#Filtered-search">过滤搜索</a>：在指定的过滤条件下执行 ANN 搜索。</li>
 <li><a href="/docs/zh/single-vector-search.md#Range-search">范围搜索</a>：查找查询向量指定半径范围内的向量。</li>
 <li><a href="/docs/zh/multi-vector-search.md">混合搜索</a>：基于多个向量场进行 ANN 搜索。</li>
-<li>关键词搜索基于 BM25 的关键词搜索。</li>
-<li><a href="/docs/zh/reranking.md">Rerankers</a>：根据附加标准或辅助算法调整搜索结果的顺序，完善最初的 ANN 搜索结果。</li>
+<li><a href="/docs/zh/full-text-search.md">全文搜索</a>：基于 BM25 的全文搜索。</li>
+<li><a href="/docs/zh/reranking.md">Rerankers</a>：根据附加标准或辅助算法调整搜索结果顺序，完善初始 ANN 搜索结果。</li>
 <li><a href="/docs/zh/get-and-scalar-query.md#Get-Entities-by-ID">获取</a>：根据主键检索数据。</li>
 <li><a href="/docs/zh/get-and-scalar-query.md#Use-Basic-Operators">查询</a>使用特定表达式检索数据。</li>
 </ul>

@@ -71,5 +71,9 @@ title: Panoramica delle integrazioni
 <tr><td><a href="/docs/it/knowledge_table_with_milvus.md">Tabella della conoscenza con Milvus</a></td><td>Ingegneria della conoscenza</td><td>Tabella della conoscenza, Milvus</td></tr>
 <tr><td><a href="/docs/it/use_milvus_in_docsgpt.md">Utilizzare Milvus in DocsGPT</a></td><td>Ochestrazione</td><td>DocsGPT, Milvus</td></tr>
 <tr><td><a href="/docs/it/use_milvus_with_sambanova.md">Utilizzare Milvus con SambaNova</a></td><td>Orchestrazione</td><td>Milvus, SambaNova</td></tr>
+<tr><td><a href="/docs/it/build_RAG_with_milvus_and_cognee.md">Costruire RAG con Milvus e Cognee</a></td><td>Ingegneria della conoscenza</td><td>Milvus, Cognee</td></tr>
+<tr><td><a href="/docs/it/build_RAG_with_milvus_and_gemini.md">Costruire RAG con Milvus e Gemini</a></td><td>LLM</td><td>Milvus, Gemini</td></tr>
+<tr><td><a href="/docs/it/build_RAG_with_milvus_and_ollama.md">Costruire RAG con Milvus e Ollama</a></td><td>LLM</td><td>Milvus, Ollama</td></tr>
+<tr><td><a href="/docs/it/milvus_rag_with_dynamiq.md">Come iniziare con Dynamiq e Milvus</a></td><td>Orchestrazione</td><td>Milvus, Dynamiq</td></tr>
 </tbody>
 </table>

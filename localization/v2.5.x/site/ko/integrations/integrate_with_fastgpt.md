@@ -67,7 +67,7 @@ $ curl -o docker-compose.yml https://raw.githubusercontent.com/labring/FastGPT/m
       </svg>
     </button></h2><p>docker-compose.yml과 동일한 디렉토리에서 실행합니다. 일부 자동화 명령어가 작동하지 않을 수 있으므로 docker-compose 버전이 2.17 이상인지 확인하세요.</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-comment"># Launch the container</span>
-$ docker-compose up -d
+$ docker compose up -d
 <span class="hljs-comment"># Wait for 10s, OneAPI typically needs to restart a few times to initially connect to Mysql</span>
 $ sleep <span class="hljs-number">10</span>
 <span class="hljs-comment"># Restart oneapi (Due to certain issues with the default Key of OneAPI, it will display &#x27;channel not found&#x27; if not restarted, this can be temporarily resolved by manually restarting once, while waiting for the author&#x27;s fix)</span>
@@ -141,5 +141,5 @@ OpenAI 이외의 모델을 사용하는 방법 및 자세한 내용은 <a href="
         ></path>
       </svg>
     </button></h2><p>다음 명령을 실행하여 컨테이너를 중지합니다.</p>
-<pre><code translate="no" class="language-shell">$ docker-compose down
+<pre><code translate="no" class="language-shell">$ docker compose down
 <button class="copy-code-btn"></button></code></pre>

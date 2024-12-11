@@ -67,7 +67,7 @@ summary: >-
       </svg>
     </button></h2><p>Milvus는 처음부터 매우 효율적인 벡터 데이터베이스 시스템으로 설계되었습니다. 대부분의 경우 Milvus는 다른 벡터 데이터베이스보다 2~5배 더 뛰어난 성능을 발휘합니다(VectorDBBench 결과 참조). 이러한 높은 성능은 몇 가지 주요 설계 결정의 결과입니다:</p>
 <p><strong>하드웨어 인식 최적화</strong>: 다양한 하드웨어 환경에서 Milvus를 사용할 수 있도록 AVX512, SIMD, GPU, NVMe SSD를 비롯한 여러 하드웨어 아키텍처와 플랫폼에 맞게 성능을 최적화했습니다.</p>
-<p><strong>고급 검색 알고리즘</strong>: Milvus는 IVF, HNSW, DiskANN 등 광범위한 인메모리 및 온디스크 인덱싱/검색 알고리즘을 지원하며, 모두 심층적으로 최적화되어 있습니다. Milvus는 FAISS 및 HNSWLib와 같은 널리 사용되는 구현에 비해 30%~70% 더 나은 성능을 제공합니다.</p>
+<p><strong>고급 검색 알고리즘</strong>: Milvus는 IVF, HNSW, DiskANN 등 다양한 인메모리 및 온디스크 인덱싱/검색 알고리즘을 지원하며, 모두 심층적으로 최적화되어 있습니다. Milvus는 FAISS 및 HNSWLib와 같은 널리 사용되는 구현에 비해 30%~70% 더 나은 성능을 제공합니다.</p>
 <p><strong>C++로 구현된 검색 엔진</strong>: 벡터 데이터베이스 성능의 80% 이상은 검색 엔진에 의해 결정됩니다. Milvus는 이 중요한 구성 요소에 C++를 사용하는데, 그 이유는 이 언어의 고성능, 저수준 최적화, 효율적인 리소스 관리 때문입니다. 가장 중요한 점은 Milvus가 어셈블리 수준의 벡터화부터 멀티스레드 병렬화 및 스케줄링에 이르기까지 수많은 하드웨어 인식 코드 최적화 기능을 통합하여 하드웨어 기능을 최대한 활용한다는 점입니다.</p>
 <p><strong>컬럼 지향</strong>: Milvus는 컬럼 지향 벡터 데이터베이스 시스템입니다. 주요 장점은 데이터 액세스 패턴에서 비롯됩니다. 쿼리를 수행할 때 열 지향 데이터베이스는 전체 행이 아닌 쿼리와 관련된 특정 필드만 읽으므로 액세스하는 데이터의 양이 크게 줄어듭니다. 또한 열 기반 데이터에 대한 연산을 쉽게 벡터화할 수 있으므로 전체 열에 한 번에 연산을 적용할 수 있어 성능이 더욱 향상됩니다.</p>
 <h2 id="What-Makes-Milvus-so-Scalable" class="common-anchor-header">Milvus의 확장성이 뛰어난 이유<button data-href="#What-Makes-Milvus-so-Scalable" class="anchor-icon" translate="no">
@@ -91,7 +91,7 @@ summary: >-
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/highly-decoupled-architecture.png" alt="Highly decoupled system architecture of Milvus" class="doc-image" id="highly-decoupled-system-architecture-of-milvus" />
    </span> <span class="img-wrapper"> <span>밀버스의 고도로 분리된 시스템 아키텍처</span> </span></p>
-<p>Milvus 자체는 완전히 상태 비저장형이므로 Kubernetes 또는 퍼블릭 클라우드를 통해 쉽게 확장할 수 있습니다. 또한 Milvus 구성 요소는 검색, 데이터 삽입, 인덱싱/압축이라는 가장 중요한 세 가지 작업을 쉽게 병렬화된 프로세스로 설계하고 복잡한 로직을 분리하는 등 잘 분리되어 있습니다. 따라서 해당 쿼리 노드, 데이터 노드, 인덱스 노드가 독립적으로 확장 및 축소할 수 있어 성능과 비용 효율성을 최적화할 수 있습니다.</p>
+<p>Milvus 자체는 완전히 상태 비저장형이므로 Kubernetes 또는 퍼블릭 클라우드를 통해 쉽게 확장할 수 있습니다. 또한 Milvus 구성 요소는 검색, 데이터 삽입, 인덱싱/압축이라는 가장 중요한 세 가지 작업을 쉽게 병렬화할 수 있는 프로세스로 설계하고 복잡한 로직을 분리하는 등 잘 분리되어 있습니다. 따라서 해당 쿼리 노드, 데이터 노드, 인덱스 노드가 독립적으로 확장 및 축소할 수 있어 성능과 비용 효율성을 최적화할 수 있습니다.</p>
 <h2 id="Types-of-Searches-Supported-by-Milvus" class="common-anchor-header">Milvus가 지원하는 검색 유형<button data-href="#Types-of-Searches-Supported-by-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -113,7 +113,7 @@ summary: >-
 <li><a href="/docs/ko/single-vector-search.md#Filtered-search">필터링 검색</a>: 지정된 필터링 조건에 따라 ANN 검색을 수행합니다.</li>
 <li><a href="/docs/ko/single-vector-search.md#Range-search">범위 검색</a>: 쿼리 벡터에서 지정된 반경 내의 벡터를 찾습니다.</li>
 <li><a href="/docs/ko/multi-vector-search.md">하이브리드 검색</a>: 여러 벡터 필드를 기반으로 ANN 검색을 수행합니다.</li>
-<li>키워드 검색: BM25에 기반한 키워드 검색.</li>
+<li><a href="/docs/ko/full-text-search.md">전체 텍스트 검색</a>: BM25에 기반한 전체 텍스트 검색.</li>
 <li><a href="/docs/ko/reranking.md">순위 재조정</a>: 추가 기준 또는 보조 알고리즘을 기반으로 검색 결과의 순서를 조정하여 초기 ANN 검색 결과를 개선합니다.</li>
 <li><a href="/docs/ko/get-and-scalar-query.md#Get-Entities-by-ID">가져오기</a>: 기본 키로 데이터를 검색합니다.</li>
 <li><a href="/docs/ko/get-and-scalar-query.md#Use-Basic-Operators">쿼리</a>: 특정 표현식을 사용해 데이터를 검색합니다.</li>
@@ -140,9 +140,9 @@ summary: >-
 <li><a href="https://milvus.io/api-reference/go/v2.4.x/About.md">Go SDK</a> (공식)</li>
 <li><a href="https://milvus.io/api-reference/java/v2.4.x/About.md">Java SDK</a> (공식)</li>
 <li><a href="https://milvus.io/api-reference/node/v2.4.x/About.md">Node.js</a> (JavaScript) SDK(공식)</li>
-<li><a href="https://milvus.io/api-reference/csharp/v2.2.x/About.md">C#</a> (Microsoft에서 제공)</li>
+<li><a href="https://milvus.io/api-reference/csharp/v2.2.x/About.md">C#</a> (Microsoft 제공)</li>
 </ul>
-<h3 id="Advanced-Data-Types" class="common-anchor-header">고급 데이터 유형</h3><p>Milvus는 기본 데이터 유형 외에도 다양한 고급 데이터 유형과 각각의 적용 가능한 거리 메트릭을 지원합니다.</p>
+<h3 id="Advanced-Data-Types" class="common-anchor-header">고급 데이터 유형</h3><p>기본 데이터 유형 외에도 Milvus는 다양한 고급 데이터 유형과 각각의 적용 가능한 거리 메트릭을 지원합니다.</p>
 <ul>
 <li><a href="/docs/ko/sparse_vector.md">스파스 벡터</a></li>
 <li><a href="/docs/ko/index-vector-fields.md">바이너리 벡터</a></li>
@@ -152,7 +152,7 @@ summary: >-
 </ul>
 <h3 id="Acceleration" class="common-anchor-header">가속</h3><ul>
 <li><p>검색 알고리즘 Milvus는 조정 가능한 인덱싱 및 검색 알고리즘 세트를 지원합니다. 자세한 내용은 <a href="/docs/ko/index.md">인메모리 인덱스</a>, <a href="/docs/ko/disk_index.md">온디스크 인덱스</a> 및 <a href="/docs/ko/gpu_index.md">GPU 인덱스를</a> 참조하세요.</p></li>
-<li><p>파티션 및 파티션 키 파티션은 Milvus 컬렉션의 하위 구분입니다. 검색 성능을 향상시키기 위해 스칼라 필드를 파티션 키로 선택할 수 있습니다. 자세한 내용은 <a href="/docs/ko/manage-partitions.md">파티션 관리</a> 및 <a href="/docs/ko/use-partition-key.md">파티션 키 사용을</a> 참조하세요.</p></li>
+<li><p>파티션 및 파티션 키 파티션은 Milvus 컬렉션의 하위 구분입니다. 검색 성능 향상을 위해 스칼라 필드를 파티션 키로 선택할 수 있습니다. 자세한 내용은 <a href="/docs/ko/manage-partitions.md">파티션 관리</a> 및 <a href="/docs/ko/use-partition-key.md">파티션 키 사용을</a> 참조하세요.</p></li>
 <li><p>조정 가능한 일관성 모델 일관성은 주어진 시간에 데이터를 쓰거나 읽을 때 모든 Milvus 노드 또는 복제본이 동일한 데이터 보기를 갖도록 보장합니다. Milvus에서 ANN 검색을 수행할 때 일관성 수준을 쉽게 조정할 수 있습니다. 자세한 내용은 <a href="/docs/ko/consistency.md">일관성을</a> 참조하세요.</p></li>
 <li><p>대용량 데이터 가져오기 데이터를 하나씩 삽입하는 대신 대량의 데이터를 Milvus로 가져오려면, 대용량 데이터 가져오기 도구를 사용하는 것을 고려해 보세요. 자세한 내용은 <a href="/docs/ko/prepare-source-data.md">소스 데이터 준비</a> 및 <a href="/docs/ko/import-data.md">데이터 가져오기를</a> 참조하세요.</p></li>
 <li><p>멀티테넌시 지원 Milvus는 파티션 키, 클러스터링 키 등 멀티테넌시 시나리오를 지향하는 많은 기능을 구현했습니다. 자세한 내용은 <a href="/docs/ko/multi_tenancy.md">멀티테넌시 전략을</a> 참조하세요.</p></li>
@@ -163,15 +163,15 @@ summary: >-
 </ul>
 <h3 id="AI-Integrations" class="common-anchor-header">AI 통합</h3><ul>
 <li><p>임베딩 모델 통합 임베딩 모델은 비정형 데이터를 고차원 데이터 공간에서 숫자 표현으로 변환하여 Milvus에 저장할 수 있도록 합니다. 현재 Python SDK인 PyMilvus는 여러 임베딩 모델을 통합하여 데이터를 벡터 임베딩으로 빠르게 준비할 수 있도록 지원합니다. 자세한 내용은 <a href="/docs/ko/embeddings.md">임베딩 개요를</a> 참조하세요.</p></li>
-<li><p>재랭크 모델 통합 정보 검색 및 생성 AI 영역에서 재랭커는 초기 검색 결과의 순서를 최적화하는 필수적인 도구입니다. PyMilvus는 초기 검색에서 반환되는 결과의 순서를 최적화하기 위해 여러 재랭크 모델을 통합합니다. 자세한 내용은 <a href="/docs/ko/rerankers-overview.md">리랭커 개요를</a> 참조하세요.</p></li>
+<li><p>재랭크 모델 통합 정보 검색 및 생성 AI 영역에서 재랭커는 초기 검색 결과의 순서를 최적화하는 필수적인 도구입니다. 파이밀버스는 초기 검색에서 반환되는 결과의 순서를 최적화하기 위해 여러 가지 재랭크 모델을 통합합니다. 자세한 내용은 <a href="/docs/ko/rerankers-overview.md">리랭커 개요를</a> 참조하세요.</p></li>
 <li><p>LangChain 및 기타 AI 도구 통합 GenAI 시대에는 애플리케이션 개발자들로부터 많은 관심을 받고 있는 도구가 LangChain과 같은 도구입니다. 핵심 구성 요소인 Milvus는 일반적으로 이러한 도구에서 벡터 저장소 역할을 합니다. 즐겨 사용하는 AI 도구에 Milvus를 통합하는 방법을 알아보려면 <a href="/docs/ko/integrate_with_openai.md">통합</a> 및 <a href="/docs/ko/build-rag-with-milvus.md">튜토리얼을</a> 참조하세요.</p></li>
 </ul>
 <h3 id="Tools-and-Ecosystem" class="common-anchor-header">도구 및 에코시스템</h3><ul>
 <li><p>Attu Attu는 Milvus와 저장된 데이터를 관리하는 데 도움이 되는 직관적인 올인원 GUI입니다. 자세한 내용은 <a href="https://github.com/zilliztech/attu">Attu</a> 리포지토리를 참조하세요.</p></li>
 <li><p>버드워처 버드워처는 Milvus를 위한 디버깅 도구입니다. 이를 사용하여 etcd에 연결하면 Milvus 시스템의 상태를 확인하거나 즉석에서 구성할 수 있습니다. 자세한 내용은 <a href="/docs/ko/birdwatcher_overview.md">버드워처를</a> 참조하세요.</p></li>
-<li><p>Promethus 및 Grafana 통합 Promethus는 오픈 소스 시스템 모니터링 및 알림 툴킷으로, Kubernetes용입니다. Grafana는 모든 데이터 소스와 연결할 수 있는 오픈 소스 시각화 스택입니다. Promethus 및 Grafana를 모니터링 서비스 공급자로 사용하여 배포된 Milvus의 성능을 시각적으로 모니터링할 수 있습니다. 자세한 내용은 <a href="/docs/ko/monitor.md">모니터링 서비스 배포하기를</a> 참조하세요.</p></li>
+<li><p>Promethus 및 Grafana 통합 Promethus는 오픈 소스 시스템 모니터링 및 알림 툴킷으로 Kubernetes를 위한 것입니다. Grafana는 모든 데이터 소스와 연결할 수 있는 오픈 소스 시각화 스택입니다. Promethus 및 Grafana를 모니터링 서비스 공급자로 사용하여 배포된 Milvus의 성능을 시각적으로 모니터링할 수 있습니다. 자세한 내용은 <a href="/docs/ko/monitor.md">모니터링 서비스 배포하기를</a> 참조하세요.</p></li>
 <li><p>Milvus 백업 Milvus 백업은 사용자가 Milvus 데이터를 백업 및 복원할 수 있는 도구입니다. 다양한 애플리케이션 시나리오에 맞게 CLI와 API를 모두 제공합니다. 자세한 내용은 <a href="/docs/ko/milvus_backup_overview.md">Milvus 백업을</a> 참조하세요.</p></li>
-<li><p>Milvus 데이터 변경 캡처(CDC) Milvus-CDC는 Milvus 인스턴스에서 증분 데이터를 캡처하고 동기화할 수 있으며, 소스 인스턴스와 대상 인스턴스 간에 원활하게 전송하여 비즈니스 데이터의 안정성을 보장하고 증분 백업 및 재해 복구를 쉽게 수행할 수 있도록 지원합니다. 자세한 내용은 <a href="/docs/ko/milvus-cdc-overview.md">Milvus CDC를</a> 참조하세요.</p></li>
+<li><p>Milvus 데이터 변경 캡처(CDC) Milvus-CDC는 Milvus 인스턴스의 증분 데이터를 캡처하고 동기화할 수 있으며, 소스 인스턴스와 대상 인스턴스 간에 원활하게 전송하여 비즈니스 데이터의 안정성을 보장하고 증분 백업 및 재해 복구를 쉽게 수행할 수 있도록 지원합니다. 자세한 내용은 <a href="/docs/ko/milvus-cdc-overview.md">Milvus CDC를</a> 참조하세요.</p></li>
 <li><p>Milvus 커넥터 Milvus는 Apache Spark와 같은 타사 도구와 Milvus를 원활하게 통합할 수 있도록 커넥터 세트를 계획했습니다. 현재, Spark 커넥터를 사용하여 머신 러닝 처리를 위해 Milvus 데이터를 Apache Spark에 공급할 수 있습니다. 자세한 내용은 <a href="/docs/ko/integrate_with_spark.md">Spark-Milvus 커넥터를</a> 참조하세요.</p></li>
 <li><p>벡터 전송 서비스(VTS) Milvus는 Milvus 인스턴스와 Zilliz 클러스터, Elasticsearch, Postgres(PgVector) 및 다른 Milvus 인스턴스를 비롯한 여러 데이터 소스 간에 데이터를 전송할 수 있는 도구 세트를 제공합니다. 자세한 내용은 <a href="/docs/ko/migrate_overview.md">마이그레이션을</a> 참조하세요.</p></li>
 </ul>

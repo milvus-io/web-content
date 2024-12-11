@@ -44,5 +44,6 @@ title: 教程概览
 <tr><td><a href="/docs/zh/vector_visualization.md">向量可视化</a></td><td>快速启动</td><td>向量搜索</td></tr>
 <tr><td><a href="/docs/zh/movie_recommendation_with_milvus.md">使用 Milvus 进行电影推荐</a></td><td>推荐系统</td><td>向量搜索</td></tr>
 <tr><td><a href="/docs/zh/funnel_search_with_matryoshka.md">利用 Matryoshka Embeddings 进行漏斗搜索</a></td><td>快速启动</td><td>向量搜索</td></tr>
+<tr><td><a href="/docs/zh/full_text_search_with_milvus.md">使用 Milvus 进行全文搜索</a></td><td>快速启动</td><td>全文搜索</td></tr>
 </tbody>
 </table>

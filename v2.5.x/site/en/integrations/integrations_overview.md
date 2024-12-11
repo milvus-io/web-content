@@ -55,3 +55,7 @@ This page provides a list of tutorials for you to interact with Milvus and third
 | [Knowledge Table with Milvus](knowledge_table_with_milvus.md) | Knowledge Engineering | Knowledge Table, Milvus |
 | [Use Milvus in DocsGPT](use_milvus_in_docsgpt.md) | Ochestration | DocsGPT, Milvus |
 | [Use Milvus with SambaNova](use_milvus_with_sambanova.md) | Orchestration | Milvus, SambaNova |
+| [Build RAG with Milvus and Cognee](build_RAG_with_milvus_and_cognee.md) | Knowledge Engineering | Milvus, Cognee |
+| [Build RAG with Milvus and Gemini](build_RAG_with_milvus_and_gemini.md) | LLMs | Milvus, Gemini |
+| [Build RAG with Milvus and Ollama](build_RAG_with_milvus_and_ollama.md) | LLMs | Milvus, Ollama |
+| [Getting Started with Dynamiq and Milvus](milvus_rag_with_dynamiq.md) | Orchestration | Milvus, Dynamiq |

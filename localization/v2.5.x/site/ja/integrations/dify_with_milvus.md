@@ -88,7 +88,7 @@ MILVUS_TOKEN=xxx
 <pre><code translate="no" class="language-shell">docker compose up -d
 <button class="copy-code-btn"></button></code></pre>
 <p>Docker Compose V1の場合は、以下のコマンドを使用してください：</p>
-<pre><code translate="no" class="language-shell">docker-compose up -d
+<pre><code translate="no" class="language-shell">docker compose up -d
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Log-in-to-Dify" class="common-anchor-header">Difyにログインします。<button data-href="#Log-in-to-Dify" class="anchor-icon" translate="no">
       <svg translate="no"

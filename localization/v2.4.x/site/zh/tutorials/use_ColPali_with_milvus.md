@@ -1,7 +1,7 @@
 ---
 id: use_ColPali_with_milvus.md
 summary: >-
-  在本笔记本中，我们将这种多向量表示法称为 "ColBERT embeddings"，以求通俗易懂。不过，实际使用的模型是 ColPali
+  在本笔记本中，为了通用起见，我们将这种多向量表示法称为 "ColBERT embeddings"。不过，实际使用的模型是 ColPali
   模型。我们将演示如何使用 Milvus 进行多向量检索。在此基础上，我们将介绍如何使用 ColPali 根据给定查询检索网页。
 title: 使用 ColPali 与 Milvus 一起进行多模式检索
 ---
@@ -187,7 +187,7 @@ client = <span class="hljs-title class_">MilvusClient</span>(uri=<span class="hl
             <span class="hljs-comment"># Rerank a single document by retrieving its embeddings and calculating the similarity with the query.</span>
             doc_colbert_vecs = client.query(
                 collection_name=collection_name,
-                <span class="hljs-built_in">filter</span>=<span class="hljs-string">f&quot;doc_id in [<span class="hljs-subst">{doc_id}</span>, <span class="hljs-subst">{doc_id + <span class="hljs-number">1</span>}</span>]&quot;</span>,
+                <span class="hljs-built_in">filter</span>=<span class="hljs-string">f&quot;doc_id in [<span class="hljs-subst">{doc_id}</span>]&quot;</span>,
                 output_fields=[<span class="hljs-string">&quot;seq_id&quot;</span>, <span class="hljs-string">&quot;vector&quot;</span>, <span class="hljs-string">&quot;doc&quot;</span>],
                 limit=<span class="hljs-number">1000</span>,
             )

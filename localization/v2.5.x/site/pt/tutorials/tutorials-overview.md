@@ -32,7 +32,7 @@ title: Visão geral dos tutoriais
 <tr><td><a href="/docs/pt/question_answering_system.md">Sistema de resposta a perguntas</a></td><td>Resposta a perguntas</td><td>pesquisa vetorial</td></tr>
 <tr><td><a href="/docs/pt/recommendation_system.md">Sistema de recomendação</a></td><td>Sistema de recomendação</td><td>pesquisa vetorial</td></tr>
 <tr><td><a href="/docs/pt/video_similarity_search.md">Pesquisa de similaridade de vídeo</a></td><td>Pesquisa semântica</td><td>pesquisa vetorial</td></tr>
-<tr><td><a href="/docs/pt/audio_similarity_search.md">Pesquisa de similaridade de áudio</a></td><td>Pesquisa semântica</td><td>pesquisa vetorial</td></tr>
+<tr><td><a href="/docs/pt/audio_similarity_search.md">Pesquisa de similaridade de áudio</a></td><td>Pesquisa Semântica</td><td>pesquisa vetorial</td></tr>
 <tr><td><a href="/docs/pt/dna_sequence_classification.md">Classificação de ADN</a></td><td>Classificação</td><td>pesquisa vetorial</td></tr>
 <tr><td><a href="/docs/pt/text_search_engine.md">Motor de pesquisa de texto</a></td><td>Pesquisa semântica</td><td>pesquisa vetorial</td></tr>
 <tr><td><a href="/docs/pt/text_image_search.md">Pesquisa de imagem por texto</a></td><td>Pesquisa Semântica</td><td>pesquisa vetorial</td></tr>
@@ -44,5 +44,6 @@ title: Visão geral dos tutoriais
 <tr><td><a href="/docs/pt/vector_visualization.md">Visualização de vectores</a></td><td>Início rápido</td><td>pesquisa vetorial</td></tr>
 <tr><td><a href="/docs/pt/movie_recommendation_with_milvus.md">Recomendação de filmes com Milvus</a></td><td>Sistema de recomendação</td><td>pesquisa vetorial</td></tr>
 <tr><td><a href="/docs/pt/funnel_search_with_matryoshka.md">Pesquisa de funil com Matryoshka Embeddings</a></td><td>Início rápido</td><td>pesquisa vetorial</td></tr>
+<tr><td><a href="/docs/pt/full_text_search_with_milvus.md">Pesquisa de texto completo com Milvus</a></td><td>Início rápido</td><td>Pesquisa de texto integral</td></tr>
 </tbody>
 </table>

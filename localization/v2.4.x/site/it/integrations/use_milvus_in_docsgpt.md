@@ -137,6 +137,6 @@ $ <span class="hljs-built_in">cd</span> DocsGPT
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/doscgpt_ui.png" alt="alt text" class="doc-image" id="alt-text" />
    </span> <span class="img-wrapper"> <span>testo alt</span> </span></p>
 <p>Se si desidera arrestare i servizi, eseguire:</p>
-<pre><code translate="no" class="language-shell">$ docker-compose down
+<pre><code translate="no" class="language-shell">$ docker compose down
 <button class="copy-code-btn"></button></code></pre>
 <p>Per ulteriori dettagli e configurazioni più avanzate, consultare la documentazione ufficiale di <a href="https://github.com/arc53/DocsGPT">DocsGPT</a>.</p>

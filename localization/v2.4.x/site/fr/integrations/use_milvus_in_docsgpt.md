@@ -41,7 +41,7 @@ title: Utiliser Milvus dans DocsGPT
         ></path>
       </svg>
     </button></h2><p>Assurez-vous que <a href="https://docs.docker.com/engine/install/">Docker</a> est installé</p>
-<h2 id="Clone-the-repository" class="common-anchor-header">Clonez le dépôt<button data-href="#Clone-the-repository" class="anchor-icon" translate="no">
+<h2 id="Clone-the-repository" class="common-anchor-header">Cloner le dépôt<button data-href="#Clone-the-repository" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -137,6 +137,6 @@ $ <span class="hljs-built_in">cd</span> DocsGPT
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/doscgpt_ui.png" alt="alt text" class="doc-image" id="alt-text" />
    </span> <span class="img-wrapper"> <span>texte alt</span> </span></p>
 <p>Si vous souhaitez arrêter les services, exécutez :</p>
-<pre><code translate="no" class="language-shell">$ docker-compose down
+<pre><code translate="no" class="language-shell">$ docker compose down
 <button class="copy-code-btn"></button></code></pre>
 <p>Pour plus de détails et des configurations plus avancées, veuillez vous référer à la documentation officielle de <a href="https://github.com/arc53/DocsGPT">DocsGPT</a>.</p>

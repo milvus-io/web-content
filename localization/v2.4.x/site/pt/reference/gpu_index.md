@@ -52,7 +52,7 @@ title: Índice GPU
 <tr><td><code translate="no">intermediate_graph_degree</code></td><td>Afecta a recuperação e o tempo de construção ao determinar o grau do gráfico antes da poda. Os valores recomendados são <code translate="no">32</code> ou <code translate="no">64</code>.</td><td><code translate="no">128</code></td></tr>
 <tr><td><code translate="no">graph_degree</code></td><td>Afeta o desempenho da pesquisa e a recuperação ao definir o grau do gráfico após a poda. Uma diferença maior entre esses dois graus resulta em um tempo de construção mais longo. O seu valor tem de ser inferior ao valor de <strong>intermediate_graph_degree</strong>.</td><td><code translate="no">64</code></td></tr>
 <tr><td><code translate="no">build_algo</code></td><td>Seleciona o algoritmo de geração do grafo antes da poda. Valores possíveis:</br><code translate="no">IVF_PQ</code>: Oferece uma qualidade superior mas um tempo de construção mais lento.</br> <code translate="no">NN_DESCENT</code> Oferece uma construção mais rápida com uma recuperação potencialmente inferior.</td><td><code translate="no">IVF_PQ</code></td></tr>
-<tr><td><code translate="no">cache_dataset_on_device</code></td><td>Decide se o conjunto de dados original deve ser armazenado em cache na memória da GPU. Valores possíveis:</br><code translate="no">“true”</code>: Armazena em cache o conjunto de dados original para melhorar a recuperação ao refinar os resultados da pesquisa.</br> <code translate="no">“false”</code> Valores possíveis: : Não armazena em cache o conjunto de dados original para economizar memória da GPU.</td><td><code translate="no">“false”</code></td></tr>
+<tr><td><code translate="no">cache_dataset_on_device</code></td><td>Decide se o conjunto de dados original deve ser armazenado em cache na memória da GPU. Valores possíveis:</br><code translate="no">“true”</code>: Armazena em cache o conjunto de dados original para melhorar a recuperação, refinando os resultados da pesquisa.</br> <code translate="no">“false”</code> Valores possíveis: : Não armazena em cache o conjunto de dados original para economizar memória da GPU.</td><td><code translate="no">“false”</code></td></tr>
 </tbody>
 </table>
 </li>
@@ -77,8 +77,8 @@ title: Índice GPU
 <tr><th>Parâmetro</th><th>Limite</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">top-K</code></td><td>&lt;= 1024</td></tr>
-<tr><td><code translate="no">top-K</code></td><td>&lt;=max((<code translate="no">itopk_size</code> + 31)// 32, <code translate="no">search_width</code>) * 32</td></tr>
+<tr><td><code translate="no">limit</code> (top-K)</td><td>&lt;= 1024</td></tr>
+<tr><td><code translate="no">limit</code> (top-K)</td><td>&lt;=max((<code translate="no">itopk_size</code> + 31)// 32, <code translate="no">search_width</code>) * 32</td></tr>
 </tbody>
 </table>
 </li>
@@ -98,7 +98,7 @@ title: Índice GPU
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Semelhante ao <a href="https://milvus.io/docs/index.md#IVF_FLAT">IVF_FLAT</a>, o GPU_IVF_FLAT também divide os dados vectoriais em <code translate="no">nlist</code> unidades de cluster e, em seguida, compara as distâncias entre o vetor de entrada alvo e o centro de cada cluster. Dependendo do número de clusters que o sistema está definido para consultar (<code translate="no">nprobe</code>), os resultados da pesquisa de semelhança são devolvidos com base em comparações entre a entrada de destino e os vectores apenas no(s) cluster(s) mais semelhante(s) - reduzindo drasticamente o tempo de consulta.</p>
+    </button></h2><p>Semelhante ao <a href="https://milvus.io/docs/index.md#IVF_FLAT">IVF_FLAT</a>, o GPU_IVF_FLAT também divide os dados vetoriais em <code translate="no">nlist</code> unidades de cluster e, em seguida, compara as distâncias entre o vetor de entrada de destino e o centro de cada cluster. Dependendo do número de clusters que o sistema está definido para consultar (<code translate="no">nprobe</code>), os resultados da pesquisa de semelhança são devolvidos com base em comparações entre a entrada de destino e os vectores apenas no(s) cluster(s) mais semelhante(s) - reduzindo drasticamente o tempo de consulta.</p>
 <p>Ao ajustar <code translate="no">nprobe</code>, é possível encontrar um equilíbrio ideal entre precisão e velocidade para um determinado cenário. Os resultados do <a href="https://zilliz.com/blog/Accelerating-Similarity-Search-on-Really-Big-Data-with-Vector-Indexing">teste de desempenho do IVF_FLAT</a> demonstram que o tempo de consulta aumenta drasticamente à medida que o número de vectores de entrada alvo (<code translate="no">nq</code>) e o número de clusters a pesquisar (<code translate="no">nprobe</code>) aumentam.</p>
 <p>GPU_IVF_FLAT é o índice IVF mais básico, e os dados codificados armazenados em cada unidade são consistentes com os dados originais.</p>
 <p>Ao realizar pesquisas, observe que é possível definir o top-K até 256 para qualquer pesquisa em uma coleção indexada por GPU_IVF_FLAT.</p>
@@ -133,7 +133,7 @@ title: Índice GPU
 <tr><th>Parâmetro</th><th>Intervalo</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">top-K</code></td><td>&lt;= <code translate="no">2048</code></td></tr>
+<tr><td><code translate="no">limit</code> (top-K)</td><td>&lt;= <code translate="no">2048</code></td></tr>
 </tbody>
 </table>
 </li>
@@ -154,7 +154,7 @@ title: Índice GPU
         ></path>
       </svg>
     </button></h2><p><code translate="no">PQ</code> (Quantização de produto) decompõe uniformemente o espaço vetorial de alta dimensão original em produtos cartesianos de <code translate="no">m</code> espaços vetoriais de baixa dimensão e, em seguida, quantifica os espaços vetoriais de baixa dimensão decompostos. Em vez de calcular as distâncias entre o vetor-alvo e o centro de todas as unidades, a quantização do produto permite o cálculo das distâncias entre o vetor-alvo e o centro de agrupamento de cada espaço de baixa dimensão e reduz consideravelmente a complexidade temporal e espacial do algoritmo.</p>
-<p>O IVF_PQ executa o agrupamento de índices IVF antes de quantificar o produto de vectores. O seu ficheiro de índice é ainda mais pequeno do que o IVF_SQ8, mas também causa uma perda de precisão durante a pesquisa de vectores.</p>
+<p>O IVF_PQ efectua o agrupamento de índices IVF antes de quantificar o produto de vectores. O seu ficheiro de índice é ainda mais pequeno do que o IVF_SQ8, mas também causa uma perda de precisão durante a pesquisa de vectores.</p>
 <div class="alert note">
 <p>Os parâmetros de construção do índice e os parâmetros de pesquisa variam consoante a distribuição Milvus. Selecione primeiro a sua distribuição Milvus.</p>
 <p>Ao efetuar pesquisas, note que pode definir o top-K até 8192 para qualquer pesquisa numa coleção indexada por GPU_IVF_FLAT.</p>
@@ -169,7 +169,7 @@ title: Índice GPU
 <tr><td><code translate="no">nlist</code></td><td>Número de unidades de cluster</td><td>[1, 65536]</td><td><code translate="no">128</code></td></tr>
 <tr><td><code translate="no">m</code></td><td>Número de factores de quantização do produto,</td><td><code translate="no">dim mod m or = 0</code></td><td><code translate="no">0</code></td></tr>
 <tr><td><code translate="no">nbits</code></td><td>[Opcional] Número de bits em que cada vetor de baixa dimensão é armazenado.</td><td>[1, 16]</td><td><code translate="no">8</code></td></tr>
-<tr><td><code translate="no">cache_dataset_on_device</code></td><td>Decide se o conjunto de dados original deve ser armazenado em cache na memória da GPU. Valores possíveis:</br><code translate="no">“true”</code>: Armazena em cache o conjunto de dados original para melhorar a recuperação ao refinar os resultados da pesquisa.</br> <code translate="no">“false”</code> Não coloca em cache o conjunto de dados original para poupar memória da GPU.</td><td><code translate="no">&quot;true&quot;</code> <code translate="no">&quot;false&quot;</code></td><td><code translate="no">&quot;false&quot;</code></td></tr>
+<tr><td><code translate="no">cache_dataset_on_device</code></td><td>Decide se o conjunto de dados original deve ser armazenado em cache na memória da GPU. Valores possíveis:</br><code translate="no">“true”</code>: Armazena em cache o conjunto de dados original para melhorar a recuperação, refinando os resultados da pesquisa.</br> <code translate="no">“false”</code> Não coloca em cache o conjunto de dados original para poupar memória da GPU.</td><td><code translate="no">&quot;true&quot;</code> <code translate="no">&quot;false&quot;</code></td><td><code translate="no">&quot;false&quot;</code></td></tr>
 </tbody>
 </table>
 </li>
@@ -189,10 +189,10 @@ title: Índice GPU
 <li><p>Limites da pesquisa</p>
 <table>
 <thead>
-<tr><th>Parâmetro</th><th>Limite</th></tr>
+<tr><th>Parâmetro</th><th>Intervalo</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">top-K</code></td><td>&lt;= <code translate="no">1024</code></td></tr>
+<tr><td><code translate="no">limit</code> (top-K)</td><td>&lt;= <code translate="no">1024</code></td></tr>
 </tbody>
 </table>
 </li>

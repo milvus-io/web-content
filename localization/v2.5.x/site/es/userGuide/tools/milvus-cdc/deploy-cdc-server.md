@@ -43,7 +43,7 @@ title: Desplegar un servidor CDC
 <ul>
 <li><p>Tanto la versión de Milvus de origen como la de destino deben ser 2.3.2 o superior, preferiblemente 2.4.x. Recomendamos utilizar la misma versión para Milvus de origen y de destino para garantizar la compatibilidad.</p></li>
 <li><p>Establezca la configuración <code translate="no">common.ttMsgEnabled</code> del Milvus de destino en <code translate="no">false</code>.</p></li>
-<li><p>Configure el Milvus de origen y de destino con distintas opciones de almacenamiento de mensajes y meta para evitar conflictos. Por ejemplo, evite utilizar las mismas configuraciones de etcd y rootPath, así como servicios Pulsar y <code translate="no">chanNamePrefix</code> idénticos en varias instancias Milvus.</p></li>
+<li><p>Configure el Milvus de origen y de destino con distintas opciones de meta y almacenamiento de mensajes para evitar conflictos. Por ejemplo, evite utilizar las mismas configuraciones de etcd y rootPath, así como servicios Pulsar y <code translate="no">chanNamePrefix</code> idénticos en varias instancias Milvus.</p></li>
 </ul></li>
 <li><p><strong>Metastore</strong>: Tenga preparada una base de datos etcd o MySQL para el metastore de Milvus-CDC.</p></li>
 </ul>
@@ -151,6 +151,6 @@ sourceConfig:
 ./milvus-cdc server
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>Usando Docker Compose:</p>
-<pre><code translate="no" class="language-bash">docker-compose up -d
+<pre><code translate="no" class="language-bash">docker compose up -d
 <button class="copy-code-btn"></button></code></pre></li>
 </ul>

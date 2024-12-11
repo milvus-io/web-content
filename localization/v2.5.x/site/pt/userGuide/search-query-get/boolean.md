@@ -1953,5 +1953,28 @@ curl --request POST \​
         ></path>
       </svg>
     </button></h2><p>The following table lists the precedence of operators. Operators are listed top to bottom, in descending precedence.​</p>
+<table>
+<thead>
+<tr><th>Precedence</th><th>Operator</th></tr>
+</thead>
+<tbody>
+<tr><td>1</td><td>+, -</td></tr>
+<tr><td>2</td><td>not</td></tr>
+<tr><td>3</td><td>**</td></tr>
+<tr><td>4</td><td>*, /, %</td></tr>
+<tr><td>5</td><td>&lt;, &lt;=, &gt;, &gt;=</td></tr>
+<tr><td>6</td><td>==, !=</td></tr>
+<tr><td>7</td><td>like</td></tr>
+<tr><td>8</td><td>JSON_CONTAINS</td></tr>
+<tr><td>9</td><td>ARRAY_CONTAINS</td></tr>
+<tr><td>10</td><td>JSON_CONTAINS_ALL</td></tr>
+<tr><td>11</td><td>ARRAY_CONTAINS_ALL</td></tr>
+<tr><td>12</td><td>JSON_CONTAINS_ANY</td></tr>
+<tr><td>13</td><td>ARRAY_CONTAINS_ANY</td></tr>
+<tr><td>14</td><td>ARRAY_LENGTH</td></tr>
+<tr><td>15</td><td>and (&amp;&amp;)</td></tr>
+<tr><td>16</td><td>or (\</td><td>\</td><td>)</td></tr>
+</tbody>
+</table>
 <p>Expressions are normally evaluated from left to right. Complex expressions are evaluated one at a time. The order in which the expressions are evaluated is determined by the precedence of the operators used.​</p>
 <p>If an expression contains two or more operators with the same precedence, the operator to the left is evaluated first. When a lower precedence operation should be processed first, it should be enclosed within parentheses.​</p>

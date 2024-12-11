@@ -50,9 +50,9 @@ title: Índice GPU
 </thead>
 <tbody>
 <tr><td><code translate="no">intermediate_graph_degree</code></td><td>Afecta a la recuperación y al tiempo de construcción al determinar el grado del gráfico antes de la poda. Los valores recomendados son <code translate="no">32</code> o <code translate="no">64</code>.</td><td><code translate="no">128</code></td></tr>
-<tr><td><code translate="no">graph_degree</code></td><td>Afecta al rendimiento de la búsqueda y a la recuperación estableciendo el grado del gráfico después de la poda. Una diferencia mayor entre estos dos grados se traduce en un tiempo de construcción más largo. Su valor debe ser menor que el valor de <strong>intermediate_graph_degree</strong>.</td><td><code translate="no">64</code></td></tr>
+<tr><td><code translate="no">graph_degree</code></td><td>Afecta al rendimiento de la búsqueda y a la recuperación estableciendo el grado del gráfico después de la poda. Una mayor diferencia entre estos dos grados se traduce en un mayor tiempo de construcción. Su valor debe ser menor que el valor de <strong>intermediate_graph_degree</strong>.</td><td><code translate="no">64</code></td></tr>
 <tr><td><code translate="no">build_algo</code></td><td>Selecciona el algoritmo de generación del grafo antes de la poda. Valores posibles:</br><code translate="no">IVF_PQ</code>: Ofrece mayor calidad pero menor tiempo de construcción.</br> <code translate="no">NN_DESCENT</code> Ofrece una construcción más rápida con una recuperación potencialmente menor.</td><td><code translate="no">IVF_PQ</code></td></tr>
-<tr><td><code translate="no">cache_dataset_on_device</code></td><td>Decide si almacenar en caché el conjunto de datos original en la memoria de la GPU. Valores posibles:</br><code translate="no">“true”</code>: Almacena en caché el conjunto de datos original para mejorar la recuperación refinando los resultados de la búsqueda.</br> <code translate="no">“false”</code> No almacena en caché el conjunto de datos original para ahorrar memoria de la GPU.</td><td><code translate="no">“false”</code></td></tr>
+<tr><td><code translate="no">cache_dataset_on_device</code></td><td>Decide si almacenar en caché el conjunto de datos original en la memoria de la GPU. Valores posibles:</br><code translate="no">“true”</code>: Almacena en caché el conjunto de datos original para mejorar la recuperación al refinar los resultados de búsqueda.</br> <code translate="no">“false”</code> No almacena en caché el conjunto de datos original para ahorrar memoria de la GPU.</td><td><code translate="no">“false”</code></td></tr>
 </tbody>
 </table>
 </li>
@@ -65,7 +65,7 @@ title: Índice GPU
 <tr><td><code translate="no">itopk_size</code></td><td>Determina el tamaño de los resultados intermedios guardados durante la búsqueda. Un valor mayor puede mejorar la recuperación a expensas del rendimiento de la búsqueda. Debe ser al menos igual al valor final top-k (límite) y suele ser una potencia de 2 (por ejemplo, 16, 32, 64, 128).</td><td>Vacío</td></tr>
 <tr><td><code translate="no">search_width</code></td><td>Especifica el número de puntos de entrada en el gráfico CAGRA durante la búsqueda. Aumentar este valor puede mejorar la recuperación, pero puede afectar al rendimiento de la búsqueda (por ejemplo, 1, 2, 4, 8, 16, 32).</td><td>Vacío</td></tr>
 <tr><td><code translate="no">min_iterations</code> / <code translate="no">max_iterations</code></td><td>Controla el proceso de iteración de la búsqueda. Por defecto, se establecen en <code translate="no">0</code>, y CAGRA determina automáticamente el número de iteraciones basándose en <code translate="no">itopk_size</code> y <code translate="no">search_width</code>. Ajustar estos valores manualmente puede ayudar a equilibrar el rendimiento y la precisión.</td><td><code translate="no">0</code></td></tr>
-<tr><td><code translate="no">team_size</code></td><td>Especifica el número de subprocesos CUDA utilizados para calcular la distancia métrica en la GPU. Los valores habituales son una potencia de 2 hasta 32 (por ejemplo, 2, 4, 8, 16, 32). Tiene un impacto menor en el rendimiento de la búsqueda. El valor por defecto es <code translate="no">0</code>, donde Milvus selecciona automáticamente <code translate="no">team_size</code> basándose en la dimensión del vector.</td><td><code translate="no">0</code></td></tr>
+<tr><td><code translate="no">team_size</code></td><td>Especifica el número de subprocesos CUDA utilizados para calcular la distancia métrica en la GPU. Los valores comunes son una potencia de 2 hasta 32 (por ejemplo, 2, 4, 8, 16, 32). Tiene un impacto menor en el rendimiento de la búsqueda. El valor por defecto es <code translate="no">0</code>, donde Milvus selecciona automáticamente <code translate="no">team_size</code> basándose en la dimensión del vector.</td><td><code translate="no">0</code></td></tr>
 </tbody>
 </table>
 </li>
@@ -77,8 +77,8 @@ title: Índice GPU
 <tr><th>Parámetro</th><th>Rango</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">top-K</code></td><td>&lt;= 1024</td></tr>
-<tr><td><code translate="no">top-K</code></td><td>&lt;=max((<code translate="no">itopk_size</code> + 31)// 32, <code translate="no">search_width</code>) * 32</td></tr>
+<tr><td><code translate="no">limit</code> (top-K)</td><td>&lt;= 1024</td></tr>
+<tr><td><code translate="no">limit</code> (top-K)</td><td>&lt;=max((<code translate="no">itopk_size</code> + 31)// 32, <code translate="no">search_width</code>) * 32</td></tr>
 </tbody>
 </table>
 </li>
@@ -133,7 +133,7 @@ title: Índice GPU
 <tr><th>Parámetro</th><th>Rango</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">top-K</code></td><td>&lt;= <code translate="no">2048</code></td></tr>
+<tr><td><code translate="no">limit</code> (top-K)</td><td>&lt;= <code translate="no">2048</code></td></tr>
 </tbody>
 </table>
 </li>
@@ -157,7 +157,7 @@ title: Índice GPU
 <p>IVF_PQ realiza la agrupación de índices IVF antes de cuantificar el producto de vectores. Su archivo de índices es aún más pequeño que IVF_SQ8, pero también provoca una pérdida de precisión durante la búsqueda de vectores.</p>
 <div class="alert note">
 <p>Los parámetros de construcción del índice y los parámetros de búsqueda varían según la distribución Milvus. Seleccione primero su distribución Milvus.</p>
-<p>Al realizar búsquedas, tenga en cuenta que puede establecer el top-K hasta 8192 para cualquier búsqueda contra una colección indexada GPU_IVF_FLAT.</p>
+<p>Cuando realice búsquedas, tenga en cuenta que puede establecer el top-K hasta 8192 para cualquier búsqueda contra una colección indexada GPU_IVF_FLAT.</p>
 </div>
 <ul>
 <li><p>Parámetros de creación de índices</p>
@@ -169,7 +169,7 @@ title: Índice GPU
 <tr><td><code translate="no">nlist</code></td><td>Número de unidades de clúster</td><td>[1, 65536]</td><td><code translate="no">128</code></td></tr>
 <tr><td><code translate="no">m</code></td><td>Número de factores de cuantificación del producto,</td><td><code translate="no">dim mod m or = 0</code></td><td><code translate="no">0</code></td></tr>
 <tr><td><code translate="no">nbits</code></td><td>[Opcional] Número de bits en los que se almacena cada vector de baja dimensión.</td><td>[1, 16]</td><td><code translate="no">8</code></td></tr>
-<tr><td><code translate="no">cache_dataset_on_device</code></td><td>Decide si se almacena en caché el conjunto de datos original en la memoria de la GPU. Valores posibles:</br><code translate="no">“true”</code>: Almacena en caché el conjunto de datos original para mejorar la recuperación refinando los resultados de la búsqueda.</br> <code translate="no">“false”</code> No almacena en caché el conjunto de datos original para ahorrar memoria de la GPU.</td><td><code translate="no">&quot;true&quot;</code> <code translate="no">&quot;false&quot;</code></td><td><code translate="no">&quot;false&quot;</code></td></tr>
+<tr><td><code translate="no">cache_dataset_on_device</code></td><td>Decide si se almacena en caché el conjunto de datos original en la memoria de la GPU. Valores posibles:</br><code translate="no">“true”</code>: Almacena en caché el conjunto de datos original para mejorar la recuperación refinando los resultados de búsqueda.</br> <code translate="no">“false”</code> No almacena en caché el conjunto de datos original para ahorrar memoria de la GPU.</td><td><code translate="no">&quot;true&quot;</code> <code translate="no">&quot;false&quot;</code></td><td><code translate="no">&quot;false&quot;</code></td></tr>
 </tbody>
 </table>
 </li>
@@ -192,7 +192,7 @@ title: Índice GPU
 <tr><th>Parámetro</th><th>Rango</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">top-K</code></td><td>&lt;= <code translate="no">1024</code></td></tr>
+<tr><td><code translate="no">limit</code> (top-K)</td><td>&lt;= <code translate="no">1024</code></td></tr>
 </tbody>
 </table>
 </li>

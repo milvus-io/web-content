@@ -44,5 +44,6 @@ title: 튜토리얼 개요
 <tr><td><a href="/docs/ko/vector_visualization.md">벡터 시각화</a></td><td>빠른 시작</td><td>벡터 검색</td></tr>
 <tr><td><a href="/docs/ko/movie_recommendation_with_milvus.md">Milvus를 사용한 영화 추천</a></td><td>추천 시스템</td><td>벡터 검색</td></tr>
 <tr><td><a href="/docs/ko/funnel_search_with_matryoshka.md">마트료시카 임베딩을 사용한 퍼널 검색</a></td><td>빠른 시작</td><td>벡터 검색</td></tr>
+<tr><td><a href="/docs/ko/full_text_search_with_milvus.md">Milvus를 사용한 전체 텍스트 검색</a></td><td>빠른 시작</td><td>전체 텍스트 검색</td></tr>
 </tbody>
 </table>

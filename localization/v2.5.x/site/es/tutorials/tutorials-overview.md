@@ -44,5 +44,6 @@ title: Visión general de los tutoriales
 <tr><td><a href="/docs/es/vector_visualization.md">Visualización de vectores</a></td><td>Inicio rápido</td><td>búsqueda vectorial</td></tr>
 <tr><td><a href="/docs/es/movie_recommendation_with_milvus.md">Recomendación de películas con Milvus</a></td><td>Sistema de recomendación</td><td>Búsqueda vectorial</td></tr>
 <tr><td><a href="/docs/es/funnel_search_with_matryoshka.md">Búsqueda en embudo con Matryoshka Embeddings</a></td><td>Inicio rápido</td><td>búsqueda vectorial</td></tr>
+<tr><td><a href="/docs/es/full_text_search_with_milvus.md">Búsqueda de texto completo con Milvus</a></td><td>Inicio rápido</td><td>Búsqueda de texto completo</td></tr>
 </tbody>
 </table>

@@ -26,7 +26,7 @@ title: チュートリアル概要
 <tbody>
 <tr><td><a href="/docs/ja/build-rag-with-milvus.md">MilvusでRAGを構築する</a></td><td>RAG</td><td>ベクトル検索</td></tr>
 <tr><td><a href="/docs/ja/multimodal_rag_with_milvus.md">Milvusを使ったマルチモーダルRAG</a></td><td>RAG</td><td>ベクトル検索, ダイナミックフィールド</td></tr>
-<tr><td><a href="/docs/ja/image_similarity_search.md">Milvusによる画像検索</a></td><td>セマンティック検索</td><td>ベクトル検索, ダイナミックフィールド</td></tr>
+<tr><td><a href="/docs/ja/image_similarity_search.md">Milvusによる画像検索</a></td><td>セマンティック検索</td><td>ベクトル検索、ダイナミックフィールド</td></tr>
 <tr><td><a href="/docs/ja/hybrid_search_with_milvus.md">Milvusのハイブリッド検索</a></td><td>ハイブリッド検索</td><td>ハイブリッド検索, マルチベクトル, 密包埋, 疎包埋</td></tr>
 <tr><td><a href="/docs/ja/multimodal_rag_with_milvus.md">マルチベクトルを使ったマルチモーダル検索</a></td><td>セマンティック検索</td><td>マルチベクトル、ハイブリッド検索</td></tr>
 <tr><td><a href="/docs/ja/question_answering_system.md">質問応答システム</a></td><td>質問応答</td><td>ベクトル検索</td></tr>
@@ -44,5 +44,6 @@ title: チュートリアル概要
 <tr><td><a href="/docs/ja/vector_visualization.md">ベクトルの可視化</a></td><td>クイックスタート</td><td>ベクトル検索</td></tr>
 <tr><td><a href="/docs/ja/movie_recommendation_with_milvus.md">Milvusによる映画推薦</a></td><td>レコメンドシステム</td><td>ベクトル検索</td></tr>
 <tr><td><a href="/docs/ja/funnel_search_with_matryoshka.md">マトリョーシカ埋め込みによる漏斗探索</a></td><td>クイックスタート</td><td>ベクトル検索</td></tr>
+<tr><td><a href="/docs/ja/full_text_search_with_milvus.md">milvusによる全文検索</a></td><td>クイックスタート</td><td>全文検索</td></tr>
 </tbody>
 </table>

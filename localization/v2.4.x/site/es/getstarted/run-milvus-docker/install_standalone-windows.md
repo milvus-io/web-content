@@ -147,7 +147,7 @@ Delete successfully.​
 C:\&gt;Invoke-WebRequest https://github.com/milvus-io/milvus/releases/download/v2.4.15/milvus-standalone-docker-compose.yml -OutFile docker-compose.yml​
 ​
 <span class="hljs-comment"># Start Milvus​</span>
-C:\&gt;docker-compose up -d​
+C:\&gt;docker compose up -d​
 Creating milvus-etcd  ... <span class="hljs-keyword">done</span>​
 Creating milvus-minio ... <span class="hljs-keyword">done</span>​
 Creating milvus-standalone ... <span class="hljs-keyword">done</span>​
@@ -174,7 +174,7 @@ Starting Ubuntu...​
 
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>Inicie Milvus.</p>
-<pre><code translate="no" class="language-shell">$ <span class="hljs-built_in">sudo</span> docker-compose up -d​
+<pre><code translate="no" class="language-shell">$ <span class="hljs-built_in">sudo</span> docker compose up -d​
 ​
 Creating milvus-etcd  ... <span class="hljs-keyword">done</span>​
 Creating milvus-minio ... <span class="hljs-keyword">done</span>​
@@ -235,7 +235,7 @@ Switching to windows engine: Post <span class="hljs-string">&quot;http://ipc/eng
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/docker-desktop.png" alt="Start Docker Desktop as Administrator" class="doc-image" id="start-docker-desktop-as-administrator" />
    </span> <span class="img-wrapper"> <span>Iniciar Docker Desktop como administrador</span> </span></p></li>
 </ol>
-<h3 id="How-can-I-deal-with-WSL-related-issues-while-deploying-Milvus​" class="common-anchor-header">¿Cómo puedo solucionar los problemas relacionados con WSL al desplegar Milvus?</h3><p>Si se ha encontrado con problemas relacionados con WSL mientras ejecuta Milvus desde WSL 2, puede que necesite comprobar si ha configurado Docker Desktop para utilizar el motor basado en WSL 2 como se indica a continuación.</p>
+<h3 id="How-can-I-deal-with-WSL-related-issues-while-deploying-Milvus​" class="common-anchor-header">¿Cómo puedo solucionar los problemas relacionados con WSL al desplegar Milvus?</h3><p>Si ha encontrado problemas relacionados con WSL mientras ejecuta Milvus desde WSL 2, puede que necesite comprobar si ha configurado Docker Desktop para utilizar el motor basado en WSL 2 de la siguiente manera.</p>
 <ol>
 <li><p>Asegúrese de que "Usar el motor basado en WSL 2" está marcado en <strong>Configuración</strong> &gt; <strong>General</strong>. </p>
 <p>
@@ -246,7 +246,7 @@ Switching to windows engine: Post <span class="hljs-string">&quot;http://ipc/eng
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.4.x/assets/docker-desktop-wsl-02.png" alt="Select WSL 2 distributions in Docker Desktop Settings" class="doc-image" id="select-wsl-2-distributions-in-docker-desktop-settings" />
-   </span> <span class="img-wrapper"> <span>Seleccione las distribuciones WSL 2 en la configuración de Docker Desktop</span> </span>.</p></li>
+   </span> <span class="img-wrapper"> <span>Selecciona las distribuciones WSL 2 en la configuración de Docker Desktop</span> </span>.</p></li>
 </ol>
 <h3 id="How-can-I-deal-with-the-volume-related-errors-prompted-during-Milvus-startup-that-reads-Read-config-failed​" class="common-anchor-header">¿Cómo puedo solucionar los errores relacionados con el volumen que aparecen durante el inicio de Milvus que lee <code translate="no">Read config failed</code>?</h3><p>
   

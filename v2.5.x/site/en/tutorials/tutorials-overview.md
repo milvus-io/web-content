@@ -30,3 +30,4 @@ This page provides a list of tutorials for you to interact with Milvus.
 | [Vector Visualization](vector_visualization.md) | Quickstart | vector search |
 | [Movie Recommendation with Milvus](movie_recommendation_with_milvus.md) | Recommendation System | vector search |
 | [Funnel Search with Matryoshka Embeddings](funnel_search_with_matryoshka.md) | Quickstart | vector search |
+| [Full Text Search with Milvus](full_text_search_with_milvus.md) | Quickstart | Full-Text Search |

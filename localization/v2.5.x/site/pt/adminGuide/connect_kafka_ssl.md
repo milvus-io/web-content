@@ -37,7 +37,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Para iniciar o Milvus e o Kafka sem SASL/SSL, desactive a autenticação e a encriptação do Kafka e do Milvus. Use-os apenas em um ambiente confiável.</p>
+    </button></h2><p>Para iniciar o Milvus e o Kafka sem SASL/SSL, desactive a autenticação e a encriptação para o Kafka e o Milvus. Use-os apenas em um ambiente confiável.</p>
 <h3 id="1-Start-a-Kafka-service-without-SASLSSL" class="common-anchor-header">1. Iniciar um serviço Kafka sem SASL/SSL</h3><p>Pode utilizar o seguinte ficheiro <code translate="no">docker-compose.yaml</code> para iniciar um serviço Kafka sem SASL/SSL:</p>
 <pre><code translate="no" class="language-yaml">version: <span class="hljs-string">&#x27;3&#x27;</span>
 services:
@@ -62,7 +62,7 @@ services:
     restart: always
 <button class="copy-code-btn"></button></code></pre>
 <p>Em seguida, pode iniciar o serviço Kafka com o seguinte comando:</p>
-<pre><code translate="no" class="language-shell">$ docker-compose up -d
+<pre><code translate="no" class="language-shell">$ docker compose up -d
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="2-Start-Milvus-and-Connect-to-Kafka" class="common-anchor-header">2. Iniciar o Milvus e ligar-se ao Kafka</h3><p>Assim que o serviço Kafka for iniciado, pode iniciar o Milvus e ligar-se a ele. Use o seguinte arquivo <code translate="no">docker-compose.yaml</code> para iniciar o Milvus e conectar-se ao Kafka sem SASL/SSL:</p>
 <pre><code translate="no" class="language-yaml">version: <span class="hljs-string">&#x27;3.5&#x27;</span>
@@ -103,7 +103,7 @@ kafka:
     tlsKeyPassword:
 <button class="copy-code-btn"></button></code></pre>
 <p>Em seguida, é possível iniciar o Milvus com o seguinte comando:</p>
-<pre><code translate="no" class="language-shell">$ docker-compose up -d
+<pre><code translate="no" class="language-shell">$ docker compose up -d
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Connect-Milus-to-Kafka-with-SASLPLAIN-Alone" class="common-anchor-header">Conectar o Milus ao Kafka com SASL/PLAIN sozinho<button data-href="#Connect-Milus-to-Kafka-with-SASLPLAIN-Alone" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -167,9 +167,9 @@ services:
 };
 <button class="copy-code-btn"></button></code></pre>
 <p>Em seguida, pode iniciar o serviço Kafka com o seguinte comando:</p>
-<pre><code translate="no" class="language-shell">$ docker-compose up -d
+<pre><code translate="no" class="language-shell">$ docker compose up -d
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="2-Start-Milvus-and-Connect-to-Kafka" class="common-anchor-header">2. Iniciar o Milvus e ligar-se ao Kafka</h3><p>Assim que o serviço Kafka for iniciado, pode iniciar o Milvus e ligar-se a ele. Use o seguinte arquivo <code translate="no">docker-compose.yaml</code> para iniciar o Milvus e conectar-se ao Kafka com SASL/PLAIN:</p>
+<h3 id="2-Start-Milvus-and-Connect-to-Kafka" class="common-anchor-header">2. Iniciar o Milvus e ligar ao Kafka</h3><p>Assim que o serviço Kafka for iniciado, pode iniciar o Milvus e ligar-se a ele. Use o seguinte arquivo <code translate="no">docker-compose.yaml</code> para iniciar o Milvus e conectar-se ao Kafka com SASL/PLAIN:</p>
 <pre><code translate="no" class="language-yaml">version: <span class="hljs-string">&#x27;3.5&#x27;</span>
 
 services:
@@ -208,7 +208,7 @@ kafka:
     tlsKeyPassword: <span class="hljs-comment"># private key passphrase for use with private key, if any</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Em seguida, pode iniciar o Milvus com o seguinte comando:</p>
-<pre><code translate="no" class="language-shell">$ docker-compose up -d
+<pre><code translate="no" class="language-shell">$ docker compose up -d
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Connect-Milvus-to-Kafka-with-SSL-Alone" class="common-anchor-header">Conectar o Milvus ao Kafka com SSL sozinho<button data-href="#Connect-Milvus-to-Kafka-with-SSL-Alone" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -464,7 +464,7 @@ services:
       - <span class="hljs-variable">${DOCKER_VOLUME_DIRECTORY:-.}</span>/my_secrets:/etc/kafka/secrets
 <button class="copy-code-btn"></button></code></pre>
 <p>Em seguida, inicie o serviço Kafka com o seguinte comando:</p>
-<pre><code translate="no" class="language-shell">$ docker-compose up -d
+<pre><code translate="no" class="language-shell">$ docker compose up -d
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="3-Start-Milvus-and-Connect-to-Kafka-with-SSL" class="common-anchor-header">3. Iniciar o Milvus e ligar-se ao Kafka com SSL</h3><p>Assim que o serviço Kafka for iniciado, pode iniciar o Milvus e ligar-se a ele. Use o seguinte arquivo <code translate="no">docker-compose.yaml</code> para iniciar o Milvus e se conectar ao Kafka com SSL:</p>
 <pre><code translate="no" class="language-yaml">version: <span class="hljs-string">&#x27;3.5&#x27;</span>
@@ -506,7 +506,7 @@ kafka:
     tlsKeyPassword: abcdefgh <span class="hljs-comment"># private key passphrase for use with private key, if any</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Em seguida, inicie o Milvus com o seguinte comando:</p>
-<pre><code translate="no" class="language-shell">$ docker-compose up -d
+<pre><code translate="no" class="language-shell">$ docker compose up -d
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Connect-Milvus-to-Kafka-with-SASLPLAIN-and-SSL" class="common-anchor-header">Conectar o Milvus ao Kafka com SASL/PLAIN e SSL<button data-href="#Connect-Milvus-to-Kafka-with-SASLPLAIN-and-SSL" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -576,7 +576,7 @@ services:
       - <span class="hljs-variable">${DOCKER_VOLUME_DIRECTORY:-.}</span>/kafka_server_jass.conf:/etc/kafka/configs/kafka_server_jass.conf
 <button class="copy-code-btn"></button></code></pre>
 <p>Em seguida, inicie o serviço Kafka com o seguinte comando:</p>
-<pre><code translate="no" class="language-shell">$ docker-compose up -d
+<pre><code translate="no" class="language-shell">$ docker compose up -d
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="2-Start-Milvus-and-Connect-to-Kafka-with-SASLPLAIN-and-SSL" class="common-anchor-header">2. Iniciar o Milvus e ligar ao Kafka com SASL/PLAIN e SSL</h3><p>Assim que o serviço Kafka for iniciado, pode iniciar o Milvus e ligar-se a ele. Utilize o seguinte ficheiro <code translate="no">docker-compose.yaml</code> para iniciar o Milvus e ligar-se ao Kafka com SASL/PLAIN e SSL:</p>
 <pre><code translate="no" class="language-yaml">version: <span class="hljs-string">&#x27;3.5&#x27;</span>

@@ -4,7 +4,7 @@ order: 2
 summary: >-
   Esta guía proporciona un proceso paso a paso para desplegar un servidor
   Milvus-CDC.
-title: Despliegue del servidor CDC
+title: Desplegar un servidor CDC
 ---
 <h1 id="Deploy-CDC-Server" class="common-anchor-header">Desplegar un servidor CDC<button data-href="#Deploy-CDC-Server" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -151,6 +151,6 @@ sourceConfig:
 ./milvus-cdc server
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>Usando Docker Compose:</p>
-<pre><code translate="no" class="language-bash">docker-compose up -d
+<pre><code translate="no" class="language-bash">docker compose up -d
 <button class="copy-code-btn"></button></code></pre></li>
 </ul>

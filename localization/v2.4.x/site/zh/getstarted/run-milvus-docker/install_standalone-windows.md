@@ -112,7 +112,7 @@ Start successfully.​
 To change the <span class="hljs-literal">default</span> Milvus configuration, <span class="hljs-keyword">add</span> your settings to the user.yaml file <span class="hljs-keyword">and</span> then restart the service.​
 
 <button class="copy-code-btn"></button></code></pre>
-<p>你可以使用以下命令管理 Milvus 容器和存储的数据。</p>
+<p>你可以使用以下命令来管理 Milvus 容器和存储的数据。</p>
 <pre><code translate="no" class="language-bash"><span class="hljs-comment"># Stop Milvus​</span>
 $ bash standalone_embed.sh stop​
 Stop successfully.​
@@ -147,7 +147,7 @@ Delete successfully.​
 C:\&gt;Invoke-WebRequest https://github.com/milvus-io/milvus/releases/download/v2.4.15/milvus-standalone-docker-compose.yml -OutFile docker-compose.yml​
 ​
 <span class="hljs-comment"># Start Milvus​</span>
-C:\&gt;docker-compose up -d​
+C:\&gt;docker compose up -d​
 Creating milvus-etcd  ... <span class="hljs-keyword">done</span>​
 Creating milvus-minio ... <span class="hljs-keyword">done</span>​
 Creating milvus-standalone ... <span class="hljs-keyword">done</span>​
@@ -174,7 +174,7 @@ Starting Ubuntu...​
 
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>启动 Milvus。</p>
-<pre><code translate="no" class="language-shell">$ <span class="hljs-built_in">sudo</span> docker-compose up -d​
+<pre><code translate="no" class="language-shell">$ <span class="hljs-built_in">sudo</span> docker compose up -d​
 ​
 Creating milvus-etcd  ... <span class="hljs-keyword">done</span>​
 Creating milvus-minio ... <span class="hljs-keyword">done</span>​
@@ -214,7 +214,7 @@ The Docker <span class="hljs-keyword">for</span> Windows Service service <span c
 The Docker <span class="hljs-keyword">for</span> Windows Service service was started successfully.​
 
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p>检查 WSL 是否已正确安装。</p>
+<li><p>检查是否已正确安装 WSL。</p>
 <p>你可以运行以下命令来安装或更新 WSL 2 命令。</p>
 <pre><code translate="no" class="language-powershell">C:\&gt;wsl --update​
 Checking <span class="hljs-keyword">for</span> updates.​

@@ -778,12 +778,6 @@
             "children": []
           },
           {
-            "label": "BM25",
-            "id": "embed-with-bm25.md",
-            "order": 4,
-            "children": []
-          },
-          {
             "label": "SPLADE",
             "id": "embed-with-splade.md",
             "order": 5,
@@ -1642,6 +1636,24 @@
             "id": "build_RAG_with_milvus_and_siliconflow.md",
             "order": 4,
             "children": []
+          },
+          {
+            "label": "SambaNova",
+            "id": "use_milvus_with_sambanova.md",
+            "order": 5,
+            "children": []
+          },
+          {
+            "label": "Gemini",
+            "id": "build_RAG_with_milvus_and_gemini.md",
+            "order": 6,
+            "children": []
+          },
+          {
+            "label": "Ollama",
+            "id": "build_RAG_with_milvus_and_ollama.md",
+            "order": 7,
+            "children": []
           }
         ]
       },
@@ -1731,15 +1743,15 @@
             "children": []
           },
           {
-            "label": "SambaNova",
-            "id": "use_milvus_with_sambanova.md",
+            "label": "PrivateGPT",
+            "id": "use_milvus_in_private_gpt.md",
             "order": 10,
             "children": []
           },
           {
-            "label": "PrivateGPT",
-            "id": "use_milvus_in_private_gpt.md",
-            "order": 8,
+            "label": "Dynamiq",
+            "id": "milvus_rag_with_dynamiq.md",
+            "order": 11,
             "children": []
           }
         ]
@@ -1790,6 +1802,12 @@
             "label": "Knowledge Table",
             "id": "knowledge_table_with_milvus.md",
             "order": 2,
+            "children": []
+          },
+          {
+            "label": "Cognee",
+            "id": "build_RAG_with_milvus_and_cognee.md",
+            "order": 3,
             "children": []
           }
         ]
@@ -1965,6 +1983,12 @@
         "label": "Funnel Search with Matryoshka Embeddings",
         "id": "funnel_search_with_matryoshka.md",
         "order": 10,
+        "children": []
+      },
+      {
+        "label": "Full-Text Search with Milvus",
+        "id": "full_text_search_with_milvus.md",
+        "order": 11,
         "children": []
       },
       {

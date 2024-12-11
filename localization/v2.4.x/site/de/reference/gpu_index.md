@@ -77,8 +77,8 @@ title: GPU-Index
 <tr><th>Parameter</th><th>Bereich</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">top-K</code></td><td>&lt;= 1024</td></tr>
-<tr><td><code translate="no">top-K</code></td><td>&lt;=max((<code translate="no">itopk_size</code> + 31)// 32, <code translate="no">search_width</code>) * 32</td></tr>
+<tr><td><code translate="no">limit</code> (Top-K)</td><td>&lt;= 1024</td></tr>
+<tr><td><code translate="no">limit</code> (Top-K)</td><td>&lt;=max((<code translate="no">itopk_size</code> + 31)// 32, <code translate="no">search_width</code>) * 32</td></tr>
 </tbody>
 </table>
 </li>
@@ -98,7 +98,7 @@ title: GPU-Index
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Ähnlich wie <a href="https://milvus.io/docs/index.md#IVF_FLAT">IVF_FLAT</a> unterteilt auch GPU_IVF_FLAT die Vektordaten in <code translate="no">nlist</code> Cluster-Einheiten und vergleicht dann die Abstände zwischen dem Ziel-Eingangsvektor und dem Zentrum jedes Clusters. Abhängig von der Anzahl der Cluster, die das System abfragt (<code translate="no">nprobe</code>), werden die Ergebnisse der Ähnlichkeitssuche nur auf der Grundlage von Vergleichen zwischen der Zieleingabe und den Vektoren in den ähnlichsten Clustern zurückgegeben, was die Abfragezeit drastisch reduziert.</p>
+    </button></h2><p>Ähnlich wie <a href="https://milvus.io/docs/index.md#IVF_FLAT">IVF_FLAT</a> unterteilt auch GPU_IVF_FLAT die Vektordaten in <code translate="no">nlist</code> Cluster-Einheiten und vergleicht dann die Abstände zwischen dem Zieleingabevektor und dem Zentrum jedes Clusters. Abhängig von der Anzahl der Cluster, die das System abfragt (<code translate="no">nprobe</code>), werden die Ergebnisse der Ähnlichkeitssuche nur auf der Grundlage von Vergleichen zwischen der Zieleingabe und den Vektoren in den ähnlichsten Clustern zurückgegeben, was die Abfragezeit drastisch reduziert.</p>
 <p>Durch die Anpassung von <code translate="no">nprobe</code> kann ein ideales Gleichgewicht zwischen Genauigkeit und Geschwindigkeit für ein bestimmtes Szenario gefunden werden. Die Ergebnisse des <a href="https://zilliz.com/blog/Accelerating-Similarity-Search-on-Really-Big-Data-with-Vector-Indexing">IVF_FLAT-Leistungstests</a> zeigen, dass die Abfragezeit stark ansteigt, wenn sowohl die Anzahl der Zieleingangsvektoren (<code translate="no">nq</code>) als auch die Anzahl der zu durchsuchenden Cluster (<code translate="no">nprobe</code>) zunimmt.</p>
 <p>GPU_IVF_FLAT ist der einfachste IVF-Index, und die in jeder Einheit gespeicherten kodierten Daten stimmen mit den Originaldaten überein.</p>
 <p>Bei der Durchführung von Suchvorgängen ist zu beachten, dass Sie bei jeder Suche in einer mit GPU_IVF_FLAT indizierten Sammlung den Top-K-Wert auf bis zu 256 setzen können.</p>
@@ -133,7 +133,7 @@ title: GPU-Index
 <tr><th>Parameter</th><th>Bereich</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">top-K</code></td><td>&lt;= <code translate="no">2048</code></td></tr>
+<tr><td><code translate="no">limit</code> (Top-K)</td><td>&lt;= <code translate="no">2048</code></td></tr>
 </tbody>
 </table>
 </li>
@@ -157,7 +157,7 @@ title: GPU-Index
 <p>IVF_PQ führt das IVF-Index-Clustering durch, bevor das Produkt der Vektoren quantisiert wird. Seine Indexdatei ist sogar noch kleiner als IVF_SQ8, aber auch hier kommt es zu einem Verlust an Genauigkeit bei der Suche nach Vektoren.</p>
 <div class="alert note">
 <p>Die Parameter für die Indexerstellung und die Suchparameter variieren je nach Milvus-Verteilung. Wählen Sie zunächst Ihre Milvus-Distribution aus.</p>
-<p>Beachten Sie bei der Durchführung von Suchvorgängen, dass Sie bei jeder Suche gegen eine GPU_IVF_FLAT-indizierte Sammlung den Top-K-Wert auf bis zu 8192 einstellen können.</p>
+<p>Beachten Sie bei der Durchführung von Suchvorgängen, dass Sie den Top-K-Wert für jede Suche gegen eine GPU_IVF_FLAT-indizierte Sammlung auf bis zu 8192 einstellen können.</p>
 </div>
 <ul>
 <li><p>Parameter für den Indexaufbau</p>
@@ -192,7 +192,7 @@ title: GPU-Index
 <tr><th>Parameter</th><th>Bereich</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">top-K</code></td><td>&lt;= <code translate="no">1024</code></td></tr>
+<tr><td><code translate="no">limit</code> (Top-K)</td><td>&lt;= <code translate="no">1024</code></td></tr>
 </tbody>
 </table>
 </li>
@@ -232,6 +232,6 @@ title: GPU-Index
     </button></h2><p>Derzeit lädt Milvus alle Indizes in den GPU-Speicher, um effiziente Suchvorgänge zu ermöglichen. Die Menge der Daten, die geladen werden können, hängt von der Größe des GPU-Speichers ab:</p>
 <ul>
 <li><strong>GPU_CAGRA</strong>: Der Speicherbedarf beträgt etwa das 1,8-fache der ursprünglichen Vektordaten.</li>
-<li><strong>GPU_IVF_FLAT</strong> und <strong>GPU_BRUTE_FORCE</strong>: Benötigen Speicher, der der Größe der Originaldaten entspricht.</li>
-<li><strong>GPU_IVF_PQ</strong>: Verwendet einen kleineren Speicherplatz, der von den Einstellungen der Komprimierungsparameter abhängt.</li>
+<li><strong>GPU_IVF_FLAT</strong> und <strong>GPU_BRUTE_FORCE</strong>: Benötigt Speicher, der der Größe der Originaldaten entspricht.</li>
+<li><strong>GPU_IVF_PQ</strong>: Verwendet einen kleineren Speicherbedarf, der von den Einstellungen der Komprimierungsparameter abhängt.</li>
 </ul>

@@ -20,7 +20,7 @@ title: Implementação do FastGPT com Milvus
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p><a href="https://fastgpt.in/">O FastGPT</a> é um sistema de perguntas e respostas baseado no conhecimento e construído sobre o modelo de linguagem grande LLM, oferecendo recursos prontos para uso para processamento de dados e invocação de modelos. Além disso, permite a orquestração do fluxo de trabalho através da visualização do fluxo, facilitando assim cenários complexos de perguntas e respostas. Este tutorial irá guiá-lo sobre como implantar rapidamente seu próprio aplicativo FastGPT exclusivo usando <a href="https://milvus.io/">Milvus</a>.</p>
+    </button></h1><p><a href="https://fastgpt.in/">O FastGPT</a> é um sistema de perguntas e respostas baseado no conhecimento e construído sobre o modelo de linguagem grande LLM, oferecendo recursos prontos para uso para processamento de dados e invocação de modelos. Além disso, ele permite a orquestração do fluxo de trabalho por meio da visualização do fluxo, facilitando assim cenários complexos de perguntas e respostas. Este tutorial irá guiá-lo sobre como implantar rapidamente seu próprio aplicativo FastGPT exclusivo usando <a href="https://milvus.io/">Milvus</a>.</p>
 <h2 id="Download-docker-composeyml" class="common-anchor-header">Baixar docker-compose.yml<button data-href="#Download-docker-composeyml" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -67,7 +67,7 @@ $ curl -o docker-compose.yml https://raw.githubusercontent.com/labring/FastGPT/m
       </svg>
     </button></h2><p>Execute no mesmo diretório que docker-compose.yml. Certifique-se de que a versão do docker-compose está idealmente acima de 2.17, pois alguns comandos de automação podem não funcionar de outra forma.</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-comment"># Launch the container</span>
-$ docker-compose up -d
+$ docker compose up -d
 <span class="hljs-comment"># Wait for 10s, OneAPI typically needs to restart a few times to initially connect to Mysql</span>
 $ sleep <span class="hljs-number">10</span>
 <span class="hljs-comment"># Restart oneapi (Due to certain issues with the default Key of OneAPI, it will display &#x27;channel not found&#x27; if not restarted, this can be temporarily resolved by manually restarting once, while waiting for the author&#x27;s fix)</span>
@@ -141,5 +141,5 @@ Clique em "Copy" (Copiar) no seu token, certificando-se de que o valor deste tok
         ></path>
       </svg>
     </button></h2><p>Execute o seguinte comando para parar o contentor.</p>
-<pre><code translate="no" class="language-shell">$ docker-compose down
+<pre><code translate="no" class="language-shell">$ docker compose down
 <button class="copy-code-btn"></button></code></pre>
