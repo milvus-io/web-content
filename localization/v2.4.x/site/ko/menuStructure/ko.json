@@ -1600,7 +1600,7 @@
         "order": 8,
         "children": [
           {
-            "label": "눈송이",
+            "label": "Snowflake",
             "id": "integrate_with_snowpark.md",
             "order": 0,
             "children": []

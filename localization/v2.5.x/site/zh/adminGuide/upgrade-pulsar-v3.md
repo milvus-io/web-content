@@ -19,12 +19,14 @@ title: 将 Milvus 的脉冲星从 V2 升级到 V3
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>本文介绍了将 Pulsar 组件从 V2 升级到 V3 的过程，如果您已经部署了使用 Pulsar V2 的 Milvus。 自 Milvus v2.5 起，<strong>milvus-helm</strong>和<strong>milvus-operator</strong>默认使用 Pulsar V3，以修复一些错误和安全漏洞。 虽然 Milvus 2.5 与 Pulsar 2.x 兼容，但升级到 Pulsar V3 是可选的。为了提高稳定性和性能，我们建议升级到 Pulsar V3。</p>
+    </button></h1><p>本文介绍了将 Pulsar 组件从 V2 升级到 V3 的过程，如果您已经部署了使用 Pulsar V2 的 Milvus。</p>
+<p>自 Milvus v2.5 起，<strong>milvus-helm</strong>和<strong>milvus-operator</strong>将默认使用 Pulsar V3，以修复一些错误和安全漏洞。 虽然 Milvus 2.5 与 Pulsar 2.x 兼容，但升级到 Pulsar V3 是可选的。为了提高稳定性和性能，我们建议升级到 Pulsar V3。</p>
+<p>如果你希望使用 Pulsar V2 与 Milvus v2.5.x，请阅读<a href="/docs/zh/use-pulsar-v2.md">Use Pulsar V2 with Milvus v2.5.x</a>。</p>
 <div class="alert note">
 <ol>
 <li><p>升级过程需要短暂的服务中断（通常需要几分钟到十多分钟，视数据量而定）。</p></li>
 <li><p>操作前，需要停止所有正在运行的客户端向 Milvus 写入数据。否则，写入的数据可能会丢失。</p></li>
-<li><p>本文假设 Milvus 安装在命名空间<code translate="no">default</code> 并命名为<code translate="no">my-release</code> 。在执行从本页复制的命令时，请将参数更改为您自己的命名空间和发布名称。</p></li>
+<li><p>本文假设 Milvus 安装在命名空间<code translate="no">default</code> 并命名为<code translate="no">my-release</code> 。在执行从本页复制的命令时，请将参数更改为自己的命名空间和发布名称。</p></li>
 <li><p>确保您的工作环境在 Kubernetes 集群的上述命名空间下拥有权限，并安装了以下命令。</p>
 <p>a.<code translate="no">kubectl</code> &gt;= 1.20</p>
 <p>b.<code translate="no">helm</code> &gt;= 3.14.0</p>
@@ -69,7 +71,7 @@ title: 将 Milvus 的脉冲星从 V2 升级到 V3
         ></path>
       </svg>
     </button></h2><p>本节提供在 Milvus 中将 Pulsar 从 V2 升级到 V3 的详细步骤。</p>
-<h3 id="Persist-data-not-consumed-in-Pulsar" class="common-anchor-header">保留 Pulsar 中未消耗的数据</h3><p>在这一步中，需要确保 Pulsar 中的现有数据已持久化到对象存储服务。 有两种方法可供选择，你可以根据自己的需要来选择。</p>
+<h3 id="Persist-data-not-consumed-in-Pulsar" class="common-anchor-header">保留 Pulsar 中未消耗的数据</h3><p>在这一步中，需要确保 Pulsar 中的现有数据已持久化到对象存储服务中。 有两种方法可供选择，你可以根据自己的需要进行选择。</p>
 <h4 id="Approach-1-Using-Attu" class="common-anchor-header">方法 1：使用 Attu</h4><p>如果你的工作 Milvus 部署中只有少量的 Collections，且分段不多，你可以使用 Attu 将数据持久化到对象存储服务。</p>
 <ol>
 <li><p>选择所有数据库中的每个 Collections，进入<code translate="no">Segments</code> 面板，点击<code translate="no">Flush</code> 按钮</p>
@@ -139,11 +141,11 @@ Forwarding <span class="hljs-keyword">from</span> <span class="hljs-number">127.
 <h3 id="Stop-Milvus-and-delete-Pulsar-V2" class="common-anchor-header">停止 Milvus 并删除 Pulsar V2</h3><p>在这一步中，需要停止 Milvus pod 并删除 Pulsar V2 部署。 有两个独立的部分可用：</p>
 <ul>
 <li><p>针对 Milvus Helm 用户</p>
-<p>如果您使用 Milvus Helm 图表安装了 Milvus，请转至<a href="#Delete-Pulsar-V2-using-Helm">For Helm User</a>。</p></li>
+<p>如果使用 Milvus Helm 图表安装了 Milvus，请转到<a href="#Delete-Pulsar-V2-using-Helm">使用 Helm 删除 Pulsar V2</a>。</p></li>
 <li><p>针对 Milvus 操作符用户</p>
-<p>如果您使用 Milvus 操作符安装了 Milvus，请转至<a href="#Delete-Pulsar-V2-using-Milvus-Operator">For Milvus Operator User</a>。</p></li>
+<p>如果您使用 Milvus 操作符安装了 Milvus，请转到<a href="#Delete-Pulsar-V2-using-Milvus-Operator">使用 Milvus 操作符删除 Pulsar V2</a>。</p></li>
 </ul>
-<h4 id="Delete-Pulsar-V2-using-Helm" class="common-anchor-header">使用 Helm 删除 Pulsar V2</h4><p>如果您使用 Milvus Helm 图表安装了 Milvus，请按照以下步骤停止 Milvus pod 并删除 Pulsar V2 部署。</p>
+<h4 id="Delete-Pulsar-V2-using-Helm" class="common-anchor-header">使用 Helm 删除 Pulsar V2</h4><p>如果使用 Milvus Helm 图表安装了 Milvus，请按照以下步骤停止 Milvus pod 并删除 Pulsar V2 部署。</p>
 <ol>
 <li><p>将当前 Milvus 发布值保存到<code translate="no">values.yaml</code> ，以便以后恢复。</p>
 <pre><code translate="no" class="language-bash">helm -n <span class="hljs-literal">default</span> <span class="hljs-keyword">get</span> values my-release -o yaml &gt; values.yaml​
@@ -320,7 +322,7 @@ helm repo update zilliztech​
 <span class="hljs-title class_">Update</span> <span class="hljs-title class_">Complete</span>. ⎈<span class="hljs-title class_">Happy</span> <span class="hljs-title class_">Helming</span>!⎈​
 
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p>使用编辑后的<code translate="no">values.yaml</code> ，用最新的 Helm 图表版本安装你的 milvus 版本。</p>
+<li><p>使用已编辑的<code translate="no">values.yaml</code> ，用最新的 Helm 图表版本安装你的 milvus 版本。</p>
 <pre><code translate="no" class="language-bash">helm -n <span class="hljs-keyword">default</span> install my-release zilliztech/milvus --reset-values -f values.<span class="hljs-property">yaml</span>​
 
 <button class="copy-code-btn"></button></code></pre>

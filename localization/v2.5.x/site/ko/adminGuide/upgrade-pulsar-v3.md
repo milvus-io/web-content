@@ -19,7 +19,9 @@ title: Milvus의 Pulsar를 V2에서 V3로 업그레이드하기
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>이 문서에서는 이미 Pulsar V2로 작동 중인 Milvus 배포가 있는 경우 Pulsar 구성 요소를 V2에서 V3로 업그레이드하는 절차에 대해 설명합니다. Milvus v2.5부터 <strong>milvus-helm</strong> 및 <strong>milvus-operator는</strong> 일부 버그 및 보안 취약성을 수정하기 위해 기본적으로 Pulsar V3를 사용합니다. Milvus 2.5는 Pulsar 2.x와 호환되지만 Pulsar V3로 업그레이드하는 것은 선택 사항입니다. 향상된 안정성과 성능을 위해 Pulsar V3로 업그레이드하는 것이 좋습니다.</p>
+    </button></h1><p>이 문서에서는 이미 Pulsar V2로 작동 중인 Milvus 배포가 있는 경우 Pulsar 구성 요소를 V2에서 V3로 업그레이드하는 절차에 대해 설명합니다.</p>
+<p>Milvus v2.5부터는 일부 버그와 보안 취약점을 수정하기 위해 기본적으로 <strong>milvus-helm</strong> 및 <strong>milvus-operator가</strong> Pulsar V3를 사용합니다. Milvus 2.5는 Pulsar 2.x와 호환되지만, Pulsar V3로 업그레이드하는 것은 선택 사항입니다. 안정성과 성능을 향상하려면 Pulsar V3로 업그레이드하는 것이 좋습니다.</p>
+<p>Milvus v2.5.x와 함께 Pulsar V2를 사용하려면 Milvus <a href="/docs/ko/use-pulsar-v2.md">v2.5.x와 함께 Pulsar V2 사용하기를</a> 참조하세요.</p>
 <div class="alert note">
 <ol>
 <li><p>업그레이드 과정에서 잠시 서비스가 중단될 수 있습니다(일반적으로 데이터 양에 따라 약 몇 분에서 10분 이상 소요됨).</p></li>
@@ -139,11 +141,11 @@ Forwarding <span class="hljs-keyword">from</span> <span class="hljs-number">127.
 <h3 id="Stop-Milvus-and-delete-Pulsar-V2" class="common-anchor-header">Milvus를 중지하고 Pulsar V2를 삭제합니다.</h3><p>이 단계에서는 Milvus 파드를 중지하고 Pulsar V2 배포를 삭제해야 합니다. 두 가지 섹션이 있습니다:</p>
 <ul>
 <li><p>밀버스 헬름 사용자의 경우</p>
-<p>밀버스 헬름 차트를 사용하여 밀버스를 설치한 경우, <a href="#Delete-Pulsar-V2-using-Helm">헬름 사용자의 경우로</a> 이동합니다.</p></li>
+<p>Milvus 헬름 차트를 사용하여 Milvus를 설치한 경우, <a href="#Delete-Pulsar-V2-using-Helm">헬름을 사용하여 Pulsar v2 삭제로</a> 이동합니다.</p></li>
 <li><p>밀버스 오퍼레이터 사용자의 경우</p>
-<p>밀버스 오퍼레이터를 사용하여 밀버스를 설치한 경우 밀버스 오퍼레이터 <a href="#Delete-Pulsar-V2-using-Milvus-Operator">사용자의 경우로</a> 이동합니다.</p></li>
+<p>밀버스 오퍼레이터를 사용하여 밀버스를 설치한 경우, <a href="#Delete-Pulsar-V2-using-Milvus-Operator">밀버스 오퍼레이터를 사용하여 Pulsar v2 삭제로</a> 이동합니다.</p></li>
 </ul>
-<h4 id="Delete-Pulsar-V2-using-Helm" class="common-anchor-header">헬름을 사용하여 펄서 V2 삭제하기</h4><p>Milvus 헬름 차트를 사용하여 Milvus를 설치한 경우, 아래 단계에 따라 Milvus 파드를 중지하고 Pulsar V2 배포를 삭제하세요.</p>
+<h4 id="Delete-Pulsar-V2-using-Helm" class="common-anchor-header">헬름을 사용하여 Pulsar V2 삭제하기</h4><p>Milvus 헬름 차트를 사용하여 Milvus를 설치한 경우, 아래 단계에 따라 Milvus 파드를 중지하고 Pulsar V2 배포를 삭제하세요.</p>
 <ol>
 <li><p>나중에 복구할 수 있도록 현재 Milvus 릴리스 값을 <code translate="no">values.yaml</code> 에 저장합니다.</p>
 <pre><code translate="no" class="language-bash">helm -n <span class="hljs-literal">default</span> <span class="hljs-keyword">get</span> values my-release -o yaml &gt; values.yaml​

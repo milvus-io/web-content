@@ -918,7 +918,7 @@
         "children": []
       },
       {
-        "label": "From Faiss",
+        "label": "De Faiss",
         "id": "f2m.md",
         "order": 3,
         "children": []
@@ -1170,10 +1170,24 @@
             ]
           },
           {
-            "label": "Améliorer Pulsar",
-            "id": "upgrade-pulsar-v3.md",
+            "label": "Utiliser Pulsa avec Milvus",
+            "id": "pulsar_dependencies",
             "order": 2,
-            "children": []
+            "isMenu": true,
+            "children": [
+              {
+                "label": "Passer à Pulsar v3",
+                "id": "upgrade-pulsar-v3.md",
+                "order": 0,
+                "children": []
+              },
+              {
+                "label": "Continuer à utiliser Pulsar v2",
+                "id": "use-pulsar-v2.md",
+                "order": 1,
+                "children": []
+              }
+            ]
           }
         ]
       },

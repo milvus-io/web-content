@@ -1170,10 +1170,24 @@
             ]
           },
           {
-            "label": "パルサーのアップグレード",
-            "id": "upgrade-pulsar-v3.md",
+            "label": "パルサとmilvusの併用",
+            "id": "pulsar_dependencies",
             "order": 2,
-            "children": []
+            "isMenu": true,
+            "children": [
+              {
+                "label": "パルサーv3へのアップグレード",
+                "id": "upgrade-pulsar-v3.md",
+                "order": 0,
+                "children": []
+              },
+              {
+                "label": "パルサーv2を使い続ける",
+                "id": "use-pulsar-v2.md",
+                "order": 1,
+                "children": []
+              }
+            ]
           }
         ]
       },
