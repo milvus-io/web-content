@@ -1170,10 +1170,24 @@
             ]
           },
           {
-            "label": "Upgrade Pulsar",
-            "id": "upgrade-pulsar-v3.md",
+            "label": "Pulsa mit Milvus verwenden",
+            "id": "pulsar_dependencies",
             "order": 2,
-            "children": []
+            "isMenu": true,
+            "children": [
+              {
+                "label": "Upgrade auf Pulsar v3",
+                "id": "upgrade-pulsar-v3.md",
+                "order": 0,
+                "children": []
+              },
+              {
+                "label": "Pulsar v2 weiter verwenden",
+                "id": "use-pulsar-v2.md",
+                "order": 1,
+                "children": []
+              }
+            ]
           }
         ]
       },
@@ -1356,7 +1370,7 @@
             "children": []
           },
           {
-            "label": "RBAC einschalten",
+            "label": "RBAC aktivieren",
             "id": "rbac.md",
             "order": 1,
             "isMenu": true,

@@ -1170,10 +1170,24 @@
             ]
           },
           {
-            "label": "Pulsar 업그레이드",
-            "id": "upgrade-pulsar-v3.md",
+            "label": "밀버스와 함께 펄사 사용",
+            "id": "pulsar_dependencies",
             "order": 2,
-            "children": []
+            "isMenu": true,
+            "children": [
+              {
+                "label": "Pulsar v3로 업그레이드",
+                "id": "upgrade-pulsar-v3.md",
+                "order": 0,
+                "children": []
+              },
+              {
+                "label": "Pulsar v2 계속 사용",
+                "id": "use-pulsar-v2.md",
+                "order": 1,
+                "children": []
+              }
+            ]
           }
         ]
       },
@@ -2015,7 +2029,7 @@
             "children": []
           },
           {
-            "label": "Audio Similarity Search",
+            "label": "오디오 유사도 검색",
             "id": "audio_similarity_search.md",
             "order": 8,
             "children": []

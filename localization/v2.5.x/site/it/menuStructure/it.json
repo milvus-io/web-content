@@ -348,7 +348,7 @@
             "children": []
           },
           {
-            "label": "Creare una collezione istantanea",
+            "label": "Creare istantaneamente una collezione",
             "id": "create-collection-instantly.md",
             "order": 2,
             "children": []
@@ -1170,10 +1170,24 @@
             ]
           },
           {
-            "label": "Aggiornamento di Pulsar",
-            "id": "upgrade-pulsar-v3.md",
+            "label": "Utilizzare Pulsa con Milvus",
+            "id": "pulsar_dependencies",
             "order": 2,
-            "children": []
+            "isMenu": true,
+            "children": [
+              {
+                "label": "Aggiornamento a Pulsar v3",
+                "id": "upgrade-pulsar-v3.md",
+                "order": 0,
+                "children": []
+              },
+              {
+                "label": "Continuare a utilizzare Pulsar v2",
+                "id": "use-pulsar-v2.md",
+                "order": 1,
+                "children": []
+              }
+            ]
           }
         ]
       },
@@ -1725,7 +1739,7 @@
             "children": []
           },
           {
-            "label": "Dify",
+            "label": "Dificare",
             "id": "dify_with_milvus.md",
             "order": 6,
             "children": []
@@ -2015,7 +2029,7 @@
             "children": []
           },
           {
-            "label": "Ricerca di somiglianza audio",
+            "label": "Ricerca della somiglianza audio",
             "id": "audio_similarity_search.md",
             "order": 8,
             "children": []

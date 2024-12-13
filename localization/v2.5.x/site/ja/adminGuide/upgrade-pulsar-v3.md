@@ -19,11 +19,13 @@ title: MilvusのパルサーをV2からV3にアップグレード
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>この記事では、Pulsar V2を使ったMilvus配備がすでに動作している場合に、PulsarコンポーネントをV2からV3にアップグレードする手順を説明します。 Milvus v2.5以降、<strong>milvus-helmと</strong> <strong>milvus-operatorは</strong>、いくつかのバグとセキュリティ脆弱性を修正するため、デフォルトでPulsar V3を使用します。 Milvus 2.5はPulsar 2.xと互換性がありますが、Pulsar V3へのアップグレードはオプションです。安定性とパフォーマンスを向上させるため、Pulsar V3へのアップグレードをお勧めします。</p>
+    </button></h1><p>この記事では、既にPulsar V2を使ったMilvusデプロイメントが動作している場合に、PulsarコンポーネントをV2からV3にアップグレードする手順を説明します。</p>
+<p>Milvus v2.5以降、<strong>milvus-helmと</strong> <strong>milvus-operatorは</strong>、いくつかのバグとセキュリティ脆弱性を修正するため、デフォルトでPulsar V3を使用します。 Milvus 2.5はPulsar 2.xと互換性がありますが、Pulsar V3へのアップグレードはオプションです。安定性とパフォーマンスを向上させるため、Pulsar V3へのアップグレードをお勧めします。</p>
+<p>Pulsar V2をMilvus v2.5.xと併用したい場合は、<a href="/docs/ja/use-pulsar-v2.md">Pulsar V2をMilvus v2.5.xと併用するを</a>ご参照ください。</p>
 <div class="alert note">
 <ol>
 <li><p>アップグレード作業には短時間のサービス停止が必要です（データ量にもよりますが、通常数分から10分以上かかります）。</p></li>
-<li><p>操作の前に、実行中の全てのクライアントがmilvusにデータを書き込むのを停止する必要があります。さもないと、書き込まれたデータが失われる可能性があります。</p></li>
+<li><p>アップグレード作業前に、Milvusへのデータ書き込みを停止する必要があります。さもないと、書き込まれたデータが失われる可能性があります。</p></li>
 <li><p>本記事では、Milvusが名前空間<code translate="no">default</code> 、名前<code translate="no">my-release</code> にインストールされていることを前提としています。このページからコピーしたコマンドを実行する際には、パラメータをご自身の名前空間とリリース名に変更してください。</p></li>
 <li><p>作業環境がKubernetesクラスタの上記の名前空間配下にパーミッションがあり、以下のコマンドがインストールされていることを確認してください。</p>
 <p>a.<code translate="no">kubectl</code> &gt;= 1.20</p>
@@ -69,7 +71,7 @@ title: MilvusのパルサーをV2からV3にアップグレード
         ></path>
       </svg>
     </button></h2><p>このセクションでは、MilvusでPulsarをV2からV3にアップグレードする詳細手順を説明します。</p>
-<h3 id="Persist-data-not-consumed-in-Pulsar" class="common-anchor-header">Pulsarで消費されなかったデータの永続化</h3><p>この手順では、Pulsar内の既存データがオブジェクト・ストレージ・サービスに永続化されていることを確認する必要があります。 2つのアプローチがあり、ニーズに合わせてお選びいただけます。</p>
+<h3 id="Persist-data-not-consumed-in-Pulsar" class="common-anchor-header">Pulsarで消費されなかったデータの永続化</h3><p>この手順では、Pulsar内の既存データがオブジェクト・ストレージ・サービスに永続化されていることを確認する必要があります。 2つのアプローチがあり、ニーズに合わせて選択することができます。</p>
 <h4 id="Approach-1-Using-Attu" class="common-anchor-header">アプローチ1：Attuを使う</h4><p>Milvusデプロイメントのコレクション数が少なく、セグメント数もそれほど多くない場合は、Attuを使用してデータをオブジェクト・ストレージ・サービスに永続化することができます。</p>
 <ol>
 <li><p>全てのデータベースで全てのコレクションを選択し、<code translate="no">Segments</code> パネルに入り、<code translate="no">Flush</code> ボタンをクリックします。</p>
@@ -139,11 +141,11 @@ Forwarding <span class="hljs-keyword">from</span> <span class="hljs-number">127.
 <h3 id="Stop-Milvus-and-delete-Pulsar-V2" class="common-anchor-header">Milvusを停止し、Pulsar V2を削除する</h3><p>このステップでは、Milvusポッドを停止し、Pulsar V2デプロイメントを削除する必要があります。 利用可能なセクションは2つに分かれています：</p>
 <ul>
 <li><p>Milvus Helmユーザの方へ</p>
-<p>Milvus Helmチャートを使用してMilvusをインストールした場合は、[<a href="#Delete-Pulsar-V2-using-Helm">Helmユーザ用</a>]に進んでください。</p></li>
-<li><p>Milvus Operatorユーザ向け</p>
-<p>Milvus Operatorを使用してMilvusをインストールした場合は、<a href="#Delete-Pulsar-V2-using-Milvus-Operator">For Milvus Operator Userを</a>ご覧ください。</p></li>
+<p>Milvus Helmチャートを使ってMilvusをインストールした場合は、「<a href="#Delete-Pulsar-V2-using-Helm">Helmを使ってPulsar v2を削除する</a>」に進んでください。</p></li>
+<li><p>Milvus Operatorをお使いの方</p>
+<p>Milvus Operatorを使ってMilvusをインストールした場合は、<a href="#Delete-Pulsar-V2-using-Milvus-Operator">Milvus Operatorを使ってPulsar v2を削除するを</a>ご覧ください。</p></li>
 </ul>
-<h4 id="Delete-Pulsar-V2-using-Helm" class="common-anchor-header">Helmを使ったパルサーV2の削除</h4><p>Milvus Helmチャートを使用してMilvusをインストールした場合は、以下の手順に従ってMilvusポッドを停止し、Pulsar V2配備を削除してください。</p>
+<h4 id="Delete-Pulsar-V2-using-Helm" class="common-anchor-header">Helmを使ってPulsar V2を削除する</h4><p>Milvus Helmチャートを使用してMilvusをインストールした場合は、以下の手順に従ってMilvusポッドを停止し、Pulsar V2配備を削除してください。</p>
 <ol>
 <li><p>後で復元できるよう、現在のMilvusリリース値を<code translate="no">values.yaml</code> 。</p>
 <pre><code translate="no" class="language-bash">helm -n <span class="hljs-literal">default</span> <span class="hljs-keyword">get</span> values my-release -o yaml &gt; values.yaml​

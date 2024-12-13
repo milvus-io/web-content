@@ -1170,10 +1170,24 @@
             ]
           },
           {
-            "label": "Atualizar o Pulsar",
-            "id": "upgrade-pulsar-v3.md",
+            "label": "Utilizar Pulsa com Milvus",
+            "id": "pulsar_dependencies",
             "order": 2,
-            "children": []
+            "isMenu": true,
+            "children": [
+              {
+                "label": "Atualização para Pulsar v3",
+                "id": "upgrade-pulsar-v3.md",
+                "order": 0,
+                "children": []
+              },
+              {
+                "label": "Continuar a utilizar o Pulsar v2",
+                "id": "use-pulsar-v2.md",
+                "order": 1,
+                "children": []
+              }
+            ]
           }
         ]
       },

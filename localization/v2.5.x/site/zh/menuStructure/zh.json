@@ -1170,10 +1170,24 @@
             ]
           },
           {
-            "label": "升级脉冲星",
-            "id": "upgrade-pulsar-v3.md",
+            "label": "将 Pulsa 与 Milvus 搭配使用",
+            "id": "pulsar_dependencies",
             "order": 2,
-            "children": []
+            "isMenu": true,
+            "children": [
+              {
+                "label": "升级至 Pulsar v3",
+                "id": "upgrade-pulsar-v3.md",
+                "order": 0,
+                "children": []
+              },
+              {
+                "label": "继续使用 Pulsar v2",
+                "id": "use-pulsar-v2.md",
+                "order": 1,
+                "children": []
+              }
+            ]
           }
         ]
       },

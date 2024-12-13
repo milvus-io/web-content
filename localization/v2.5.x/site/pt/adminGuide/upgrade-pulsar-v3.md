@@ -2,8 +2,8 @@
 id: upgrade-pulsar-v3.md
 related_key: upgrade pulsar v3
 summary: >-
-  Saiba como atualizar a Pulsar de V2 para V3 no Milvus, de modo a poder
-  utilizar a versão mais recente do Milvus v2.5.x.
+  Saiba como atualizar a Pulsar de V2 para V3 no Milvus para poder utilizar a
+  versão mais recente do Milvus v2.5.x.
 title: Atualizar a Pulsar em Milvus de V2 para V3
 ---
 <h1 id="Upgrading-Pulsar-​" class="common-anchor-header">Atualizando o Pulsar<button data-href="#Upgrading-Pulsar-​" class="anchor-icon" translate="no">
@@ -21,12 +21,14 @@ title: Atualizar a Pulsar em Milvus de V2 para V3
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Este artigo descreve o procedimento para atualizar seu componente Pulsar de V2 para V3 se você já tem uma implantação Milvus funcionando com Pulsar V2. Desde Milvus v2.5, <strong>milvus-helm</strong> e <strong>milvus-operator</strong> usarão Pulsar V3 por padrão para corrigir alguns bugs e vulnerabilidades de segurança. Enquanto Milvus 2.5 é compatível com Pulsar 2.x, a atualização para Pulsar V3 é opcional. Para maior estabilidade e desempenho, recomendamos a atualização para a Pulsar V3.</p>
+    </button></h1><p>Este artigo descreve o procedimento para atualizar seu componente Pulsar de V2 para V3 se você já tem um deployment Milvus funcionando com Pulsar V2.</p>
+<p>Desde o Milvus v2.5, <strong>o milvus-helm</strong> e <strong>o milvus-operator</strong> usarão o Pulsar V3 por padrão para corrigir alguns bugs e vulnerabilidades de segurança. Embora o Milvus 2.5 seja compatível com o Pulsar 2.x, a atualização para o Pulsar V3 é opcional. Para maior estabilidade e desempenho, recomendamos a atualização para a Pulsar V3.</p>
+<p>Se preferir usar o Pulsar V2 com o Milvus v2.5.x, leia <a href="/docs/pt/use-pulsar-v2.md">Usar o Pulsar V2 com o Milvus v2.5.x</a>.</p>
 <div class="alert note">
 <ol>
 <li><p>O processo de atualização requer uma breve interrupção de serviço (geralmente leva de alguns minutos a mais de dez minutos, dependendo da quantidade de dados).</p></li>
 <li><p>Antes da operação, é necessário impedir que todos os clientes em execução escrevam dados no Milvus. Caso contrário, os dados escritos podem perder-se.</p></li>
-<li><p>Este artigo pressupõe que o Milvus está instalado no espaço de nomes <code translate="no">default</code> e tem o nome <code translate="no">my-release</code>. Por favor, altere os parâmetros para o seu próprio espaço de nomes e nome de lançamento enquanto executa os comandos copiados desta página.</p></li>
+<li><p>Este artigo assume que o Milvus está instalado no espaço de nomes <code translate="no">default</code> e tem o nome <code translate="no">my-release</code>. Por favor, altere os parâmetros para o seu próprio espaço de nomes e nome de lançamento enquanto executa os comandos copiados desta página.</p></li>
 <li><p>Certifique-se de que o seu ambiente de trabalho tem permissões no namespace acima mencionado no cluster Kubernetes e que os seguintes comandos estão instalados.</p>
 <p>a. <code translate="no">kubectl</code> &gt;= 1.20</p>
 <p>b. <code translate="no">helm</code> &gt;= 3.14.0</p>
@@ -141,11 +143,11 @@ Forwarding <span class="hljs-keyword">from</span> <span class="hljs-number">127.
 <h3 id="Stop-Milvus-and-delete-Pulsar-V2" class="common-anchor-header">Parar o Milvus e excluir o Pulsar V2</h3><p>Nesta etapa, você precisa parar o pod do Milvus e excluir a implantação do Pulsar V2. Há duas seções separadas disponíveis:</p>
 <ul>
 <li><p>Para utilizadores do Milvus Helm</p>
-<p>Se instalou o Milvus utilizando o gráfico do Milvus Helm, vá para <a href="#Delete-Pulsar-V2-using-Helm">Para o utilizador do Helm</a>.</p></li>
+<p>Se você instalou o Milvus usando o gráfico do Milvus Helm, vá para <a href="#Delete-Pulsar-V2-using-Helm">Excluir o Pulsar v2 usando o Helm</a>.</p></li>
 <li><p>Para utilizadores do Milvus Operator</p>
-<p>Se instalou o Milvus utilizando o Milvus Operator, vá para <a href="#Delete-Pulsar-V2-using-Milvus-Operator">Para</a> o <a href="#Delete-Pulsar-V2-using-Milvus-Operator">utilizador do Milvus Operator</a>.</p></li>
+<p>Se instalou o Milvus usando o Milvus Operator, vá para <a href="#Delete-Pulsar-V2-using-Milvus-Operator">Apagar a Pulsar v2 usando o Milvus Operator</a>.</p></li>
 </ul>
-<h4 id="Delete-Pulsar-V2-using-Helm" class="common-anchor-header">Eliminar o Pulsar V2 utilizando o Helm</h4><p>Se você instalou o Milvus usando o gráfico Milvus Helm, siga as etapas abaixo para interromper o pod do Milvus e excluir a implantação do Pulsar V2.</p>
+<h4 id="Delete-Pulsar-V2-using-Helm" class="common-anchor-header">Apagar o Pulsar V2 usando o Helm</h4><p>Se você instalou o Milvus usando o gráfico Milvus Helm, siga as etapas abaixo para interromper o pod do Milvus e excluir a implantação da Pulsar V2.</p>
 <ol>
 <li><p>Salve os valores atuais da versão do Milvus em <code translate="no">values.yaml</code> para recuperação posterior.</p>
 <pre><code translate="no" class="language-bash">helm -n <span class="hljs-literal">default</span> <span class="hljs-keyword">get</span> values my-release -o yaml &gt; values.yaml​
@@ -294,7 +296,7 @@ milvus.milvus.io <span class="hljs-string">&quot;my-release&quot;</span> deleted
 <h3 id="Start-Pulsar-V3-and-Milvus" class="common-anchor-header">Iniciar o Pulsar V3 e o Milvus</h3><p>Nesta etapa, você precisa iniciar os pods Pulsar V3 e Milvus. Há duas seções separadas disponíveis:</p>
 <ul>
 <li><p>Para o utilizador do Helm</p>
-<p>Se instalou o Milvus usando o gráfico do Milvus Helm, vá para <a href="#For-Helm-User">For Helm User</a>.</p></li>
+<p>Se instalou o Milvus usando a tabela do Milvus Helm, vá para <a href="#For-Helm-User">For Helm User</a>.</p></li>
 <li><p>Para utilizadores do Milvus Operator</p>
 <p>Se instalou o Milvus usando a carta Milvus Operator, vá para <a href="#For-Milvus-Operator-User">Para</a> o <a href="#For-Milvus-Operator-User">utilizador do Milvus Operator</a>.</p></li>
 </ul>

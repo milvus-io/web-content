@@ -21,7 +21,9 @@ title: Faire passer le Pulsar de Milvus de V2 à V3
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Cet article décrit la procédure à suivre pour mettre à niveau votre composant Pulsar de V2 à V3 si vous avez déjà un déploiement Milvus fonctionnel avec Pulsar V2. Depuis Milvus v2.5, <strong>milvus-helm</strong> et <strong>milvus-operator</strong> utiliseront Pulsar V3 par défaut pour corriger certains bogues et vulnérabilités de sécurité. Bien que Milvus 2.5 soit compatible avec Pulsar 2.x, la mise à niveau vers Pulsar V3 est facultative. Pour une stabilité et des performances accrues, nous recommandons la mise à niveau vers Pulsar V3.</p>
+    </button></h1><p>Cet article décrit la procédure à suivre pour mettre à jour votre composant Pulsar de V2 à V3 si vous avez déjà un déploiement Milvus fonctionnel avec Pulsar V2.</p>
+<p>Depuis Milvus v2.5, <strong>milvus-helm</strong> et <strong>milvus-operator</strong> utilisent par défaut Pulsar V3 pour corriger certains bogues et vulnérabilités de sécurité. Bien que Milvus 2.5 soit compatible avec Pulsar 2.x, la mise à niveau vers Pulsar V3 est facultative. Pour une stabilité et des performances accrues, nous recommandons la mise à niveau vers Pulsar V3.</p>
+<p>Si vous préférez utiliser Pulsar V2 avec Milvus v2.5.x, lisez <a href="/docs/fr/use-pulsar-v2.md">Utiliser Pulsar V2 avec Milvus v2.5.x</a>.</p>
 <div class="alert note">
 <ol>
 <li><p>Le processus de mise à niveau nécessite une brève interruption de service (cela prend généralement de quelques minutes à plus de dix minutes, en fonction de la quantité de données).</p></li>
@@ -141,9 +143,9 @@ Forwarding <span class="hljs-keyword">from</span> <span class="hljs-number">127.
 <h3 id="Stop-Milvus-and-delete-Pulsar-V2" class="common-anchor-header">Arrêter Milvus et supprimer Pulsar V2</h3><p>Dans cette étape, vous devez arrêter le pod Milvus et supprimer le déploiement de Pulsar V2. Deux sections distinctes sont disponibles :</p>
 <ul>
 <li><p>Pour les utilisateurs de Milvus Helm</p>
-<p>Si vous avez installé Milvus à l'aide de la carte Milvus Helm, passez à <a href="#Delete-Pulsar-V2-using-Helm">Pour l'utilisateur Helm</a>.</p></li>
+<p>Si vous avez installé Milvus à l'aide de la carte Milvus Helm, allez à <a href="#Delete-Pulsar-V2-using-Helm">Supprimer Pulsar v2 à l'aide de Helm</a>.</p></li>
 <li><p>Pour les utilisateurs de Milvus Operator</p>
-<p>Si vous avez installé Milvus à l'aide de Milvus Operator, allez à <a href="#Delete-Pulsar-V2-using-Milvus-Operator">Pour l'utilisateur de Milvus Operator</a>.</p></li>
+<p>Si vous avez installé Milvus à l'aide de Milvus Operator, allez à <a href="#Delete-Pulsar-V2-using-Milvus-Operator">Supprimer Pulsar v2 à l'aide de Milvus Operator</a>.</p></li>
 </ul>
 <h4 id="Delete-Pulsar-V2-using-Helm" class="common-anchor-header">Supprimer Pulsar V2 à l'aide de Helm</h4><p>Si vous avez installé Milvus à l'aide de la carte Milvus Helm, suivez les étapes ci-dessous pour arrêter le pod Milvus et supprimer le déploiement de Pulsar V2.</p>
 <ol>
@@ -395,7 +397,7 @@ helm -n milvus-<span class="hljs-keyword">operator</span> upgrade milvus-<span c
 <pre><code translate="no" class="language-yaml">milvus.milvus.io/my-release created​
 
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p>Vérifier les pods pour voir si tous sont planifiés et en cours d'exécution avec <code translate="no">kubectl -n default get pods</code>. </p>
+<li><p>Vérifiez les pods pour voir si tous sont planifiés et en cours d'exécution avec <code translate="no">kubectl -n default get pods</code>. </p>
 <p>Cela peut prendre quelques minutes pour que tous les pods démarrent.</p>
 <p>Le résultat est le suivant.</p>
 <pre><code translate="no" class="language-yaml">NAME                                            READY   STATUS      RESTARTS   AGE​

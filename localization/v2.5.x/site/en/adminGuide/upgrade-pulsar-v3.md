@@ -21,7 +21,9 @@ title: Upgrade Pulsar in Milvus from V2 to V3
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>This article describes the proceure for you to upgrade your Pulsar component from V2 to V3 if you already have a working Milvus deployment with Pulsar V2.​ Since Milvus v2.5, <strong>milvus-helm</strong> and <strong>milvus-operator</strong> will use Pulsar V3 by default to fix some bugs and security vulnerabilities.​ While Milvus 2.5 is compatible with Pulsar 2.x, upgrading to Pulsar V3 is optional. For enhanced stability and performance, we recommend upgrading to Pulsar V3.</p>
+    </button></h1><p>This article describes the proceure for you to upgrade your Pulsar component from V2 to V3 if you already have a working Milvus deployment with Pulsar V2.​</p>
+<p>Since Milvus v2.5, <strong>milvus-helm</strong> and <strong>milvus-operator</strong> will use Pulsar V3 by default to fix some bugs and security vulnerabilities.​ While Milvus 2.5 is compatible with Pulsar 2.x, upgrading to Pulsar V3 is optional. For enhanced stability and performance, we recommend upgrading to Pulsar V3.</p>
+<p>If you prefer to use Pulsar V2 with Milvus v2.5.x, read <a href="/docs/use-pulsar-v2.md">Use Pulsar V2 with Milvus v2.5.x</a>.</p>
 <div class="alert note">
 <ol>
 <li><p>The upgrade process requires a brief service outage (usually takes about a few minutes to more than ten minutes, depending on the amount of data).​</p></li>
@@ -147,9 +149,9 @@ Forwarding <span class="hljs-keyword">from</span> <span class="hljs-number">127.
 <h3 id="Stop-Milvus-and-delete-Pulsar-V2" class="common-anchor-header">Stop Milvus and delete Pulsar V2</h3><p>In this step, you need to stop the Milvus pod and delete the Pulsar V2 deployment.​ There are two separate sections available:</p>
 <ul>
 <li><p>For Milvus Helm users</p>
-<p>If you have installed Milvus using the Milvus Helm chart, go to <a href="#Delete-Pulsar-V2-using-Helm">For Helm User</a>.</p></li>
+<p>If you have installed Milvus using the Milvus Helm chart, go to <a href="#Delete-Pulsar-V2-using-Helm">Delete Pulsar v2 using Helm</a>.</p></li>
 <li><p>For Milvus Operator users</p>
-<p>If you have installed Milvus using the Milvus Operator, go to <a href="#Delete-Pulsar-V2-using-Milvus-Operator">For Milvus Operator User</a>.</p></li>
+<p>If you have installed Milvus using the Milvus Operator, go to <a href="#Delete-Pulsar-V2-using-Milvus-Operator">Delete Pulsar v2 using Milvus Operator</a>.</p></li>
 </ul>
 <h4 id="Delete-Pulsar-V2-using-Helm" class="common-anchor-header">Delete Pulsar V2 using Helm</h4><p>If you have installed Milvus using the Milvus Helm chart, following the steps below to stop the Milvus pod and delete the Pulsar V2 deployment.</p>
 <ol>

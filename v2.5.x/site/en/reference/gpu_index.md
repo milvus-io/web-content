@@ -27,6 +27,7 @@ GPU_CAGRA is a graph-based index optimized for GPUs, Using inference-grade GPUs 
   | `graph_degree`              | Affects search performance and recall by setting the graph's degree after pruning. A larger difference between these two degrees results in a longer build time. Its value must be smaller than the value of __intermediate_graph_degree__. | <code>64</code>      |
   | `build_algo`                | Selects the graph generation algorithm before pruning. Possible values:</br><code>IVF_PQ</code>: Offers higher quality but slower build time.</br> <code>NN_DESCENT</code>: Provides a quicker build with potentially lower recall. | <code>IVF_PQ</code>  |
   | `cache_dataset_on_device`   | Decides whether to cache the original dataset in GPU memory. Possible values:</br><code>"true"</code>: Caches the original dataset to enhance recall by refining search results.</br> <code>"false"</code>: Does not cache the original dataset to save gpu memory. | <code>"false"</code> |
+  | `adapt_for_cpu`             | Decides whether to use GPU for index-building and CPU for search. <br/>Setting this parameter to `true` requires the presence of the `ef` parameter in the search requests.         | <code>"false"</code> |
 
 - Search parameters
 
@@ -36,6 +37,7 @@ GPU_CAGRA is a graph-based index optimized for GPUs, Using inference-grade GPUs 
     | `search_width`                      | Specifies the number of entry points into the CAGRA graph during the search. Increasing this value can enhance recall but may impact search performance（e.g. 1, 2, 4, 8, 16, 32).                                                                                                                        | Empty         |
     | `min_iterations` / `max_iterations` | Controls the search iteration process. By default, they are set to `0`, and CAGRA automatically determines the number of iterations based on `itopk_size` and `search_width`. Adjusting these values manually can help balance performance and accuracy.                                                       | `0`             |
     | `team_size`                         | Specifies the number of CUDA threads used for calculating metric distance on the GPU. Common values are a power of 2 up to 32 (e.g. 2, 4, 8, 16, 32). It has a minor impact on search performance. The default value is `0`, where Milvus automatically selects the `team_size` based on the vector dimension. | `0`             |
+    | `ef` | Specifies the query time/accuracy trade-off. A higher `ef` value leads to more accurate but slower search. <br/>This parameter is mandatory if you set `adapt_for_cpu` to `true` when you build the index. | `[top_k, int_max]` |
 
 * Limits on search
 

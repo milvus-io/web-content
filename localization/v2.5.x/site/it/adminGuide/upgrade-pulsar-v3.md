@@ -21,7 +21,9 @@ title: Aggiornamento di Pulsar a Milvus da V2 a V3
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Questo articolo descrive la procedura per aggiornare il componente Pulsar da V2 a V3 se si dispone già di una distribuzione Milvus funzionante con Pulsar V2. Da Milvus v2.5, <strong>milvus-helm</strong> e <strong>milvus-operator</strong> utilizzeranno Pulsar V3 per impostazione predefinita per correggere alcuni bug e vulnerabilità di sicurezza. Mentre Milvus 2.5 è compatibile con Pulsar 2.x, l'aggiornamento a Pulsar V3 è opzionale. Per migliorare la stabilità e le prestazioni, si consiglia l'aggiornamento a Pulsar V3.</p>
+    </button></h1><p>Questo articolo descrive la procedura per aggiornare il componente Pulsar da V2 a V3 se si dispone già di una distribuzione Milvus funzionante con Pulsar V2.</p>
+<p>Da Milvus v2.5, <strong>milvus-helm</strong> e <strong>milvus-operator</strong> useranno Pulsar V3 per impostazione predefinita per correggere alcuni bug e vulnerabilità di sicurezza. Mentre Milvus 2.5 è compatibile con Pulsar 2.x, l'aggiornamento a Pulsar V3 è facoltativo. Per migliorare la stabilità e le prestazioni, si consiglia l'aggiornamento a Pulsar V3.</p>
+<p>Se si preferisce utilizzare Pulsar V2 con Milvus v2.5.x, leggere <a href="/docs/it/use-pulsar-v2.md">Utilizzare Pulsar V2 con Milvus v2.5.x</a>.</p>
 <div class="alert note">
 <ol>
 <li><p>Il processo di aggiornamento richiede una breve interruzione del servizio (di solito dura da pochi minuti a più di dieci minuti, a seconda della quantità di dati).</p></li>
@@ -79,7 +81,7 @@ title: Aggiornamento di Pulsar a Milvus da V2 a V3
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/attu-select-collection.png" alt="Segment panel of a collection" class="doc-image" id="segment-panel-of-a-collection" />
    </span> <span class="img-wrapper"> <span>Pannello dei segmenti di una raccolta</span> </span></p></li>
-<li><p>Quindi, alla comparsa del popup, fare nuovamente clic su <code translate="no">Flush</code>.</p>
+<li><p>Quindi, quando appare il popup, fare di nuovo clic su <code translate="no">Flush</code>.</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/data-flush-prompt.png" alt="Data flush prompt in Attu" class="doc-image" id="data-flush-prompt-in-attu" />
@@ -138,16 +140,16 @@ Forwarding <span class="hljs-keyword">from</span> <span class="hljs-number">127.
 
 <button class="copy-code-btn"></button></code></pre></li>
 </ol>
-<h3 id="Stop-Milvus-and-delete-Pulsar-V2" class="common-anchor-header">Arresto di Milvus e cancellazione di Pulsar V2</h3><p>In questo passaggio, è necessario arrestare il pod Milvus ed eliminare il deployment di Pulsar V2. Sono disponibili due sezioni separate:</p>
+<h3 id="Stop-Milvus-and-delete-Pulsar-V2" class="common-anchor-header">Arresto di Milvus e cancellazione di Pulsar V2</h3><p>In questo passaggio è necessario arrestare il pod Milvus ed eliminare il deployment di Pulsar V2. Sono disponibili due sezioni separate:</p>
 <ul>
 <li><p>Per gli utenti di Milvus Helm</p>
-<p>Se avete installato Milvus usando la tabella Milvus Helm, andate a <a href="#Delete-Pulsar-V2-using-Helm">Per gli utenti Helm</a>.</p></li>
-<li><p>Per gli utenti Milvus Operator</p>
-<p>Se avete installato Milvus utilizzando Milvus Operator, andate a <a href="#Delete-Pulsar-V2-using-Milvus-Operator">Per gli utenti di Milvus Operator</a>.</p></li>
+<p>Se avete installato Milvus usando il diagramma Milvus Helm, andate a <a href="#Delete-Pulsar-V2-using-Helm">Cancellare Pulsar v2 usando Helm</a>.</p></li>
+<li><p>Per gli utenti di Milvus Operator</p>
+<p>Se avete installato Milvus utilizzando Milvus Operator, andate a <a href="#Delete-Pulsar-V2-using-Milvus-Operator">Cancellare Pulsar v2 utilizzando Milvus Operator</a>.</p></li>
 </ul>
-<h4 id="Delete-Pulsar-V2-using-Helm" class="common-anchor-header">Cancellare Pulsar V2 con Helm</h4><p>Se avete installato Milvus usando il diagramma Milvus Helm, seguite i passaggi seguenti per arrestare il pod Milvus ed eliminare la distribuzione di Pulsar V2.</p>
+<h4 id="Delete-Pulsar-V2-using-Helm" class="common-anchor-header">Eliminare Pulsar V2 con Helm</h4><p>Se avete installato Milvus usando il diagramma Milvus Helm, seguite i passaggi seguenti per arrestare il pod Milvus ed eliminare la distribuzione di Pulsar V2.</p>
 <ol>
-<li><p>Salvare i valori attuali della release di Milvus in <code translate="no">values.yaml</code> per recuperarli in seguito.</p>
+<li><p>Salvare i valori attuali della release di Milvus su <code translate="no">values.yaml</code> per recuperarli in seguito.</p>
 <pre><code translate="no" class="language-bash">helm -n <span class="hljs-literal">default</span> <span class="hljs-keyword">get</span> values my-release -o yaml &gt; values.yaml​
 cat values.yaml​
 
@@ -212,7 +214,7 @@ persistentvolumeclaim <span class="hljs-string">&quot;my-release-pulsar-zookeepe
 
 <button class="copy-code-btn"></button></code></pre></li>
 </ol>
-<h4 id="Delete-Pulsar-V2-using-Milvus-Operator" class="common-anchor-header">Eliminare Pulsar V2 utilizzando Milvus Operator</h4><p>Se avete installato Milvus usando Milvus Operator, seguite i passi seguenti per fermare il pod Milvus ed eliminare il deployment di Pulsar V2.</p>
+<h4 id="Delete-Pulsar-V2-using-Milvus-Operator" class="common-anchor-header">Eliminare Pulsar V2 usando Milvus Operator</h4><p>Se avete installato Milvus usando Milvus Operator, seguite i passi seguenti per fermare il pod Milvus ed eliminare il deployment di Pulsar V2.</p>
 <ol>
 <li><p>Salvare il manifesto Milvus corrente in <code translate="no">milvus.yaml</code> per un uso successivo.</p>
 <pre><code translate="no" class="language-bash">kubectl -n <span class="hljs-literal">default</span> <span class="hljs-keyword">get</span> milvus my-release -o yaml &gt; milvus.yaml​
@@ -322,7 +324,7 @@ helm repo update zilliztech​
 <span class="hljs-title class_">Update</span> <span class="hljs-title class_">Complete</span>. ⎈<span class="hljs-title class_">Happy</span> <span class="hljs-title class_">Helming</span>!⎈​
 
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p>Installare la release di Milvus con la versione più recente di helm chart utilizzando il file <code translate="no">values.yaml</code> modificato.</p>
+<li><p>Installare la release di Milvus con la versione più recente del grafico di Helm utilizzando il file <code translate="no">values.yaml</code> modificato.</p>
 <pre><code translate="no" class="language-bash">helm -n <span class="hljs-keyword">default</span> install my-release zilliztech/milvus --reset-values -f values.<span class="hljs-property">yaml</span>​
 
 <button class="copy-code-btn"></button></code></pre>

@@ -595,7 +595,7 @@
         ]
       },
       {
-        "label": "Insertar y suprimir",
+        "label": "Insertar y eliminar",
         "id": "insert-and-delete",
         "order": 3,
         "children": [
@@ -660,7 +660,7 @@
         ]
       },
       {
-        "label": "Búsqueda y renombre",
+        "label": "Búsqueda y Rerank",
         "id": "search-rerank",
         "order": 5,
         "isMenu": true,
@@ -1170,10 +1170,24 @@
             ]
           },
           {
-            "label": "Actualizar Pulsar",
-            "id": "upgrade-pulsar-v3.md",
+            "label": "Utilizar Pulsa con Milvus",
+            "id": "pulsar_dependencies",
             "order": 2,
-            "children": []
+            "isMenu": true,
+            "children": [
+              {
+                "label": "Actualización a Pulsar v3",
+                "id": "upgrade-pulsar-v3.md",
+                "order": 0,
+                "children": []
+              },
+              {
+                "label": "Seguir utilizando Pulsar v2",
+                "id": "use-pulsar-v2.md",
+                "order": 1,
+                "children": []
+              }
+            ]
           }
         ]
       },
