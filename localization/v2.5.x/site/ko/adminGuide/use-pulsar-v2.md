@@ -102,19 +102,19 @@ helm repo update milvus
 <pre><code translate="no" class="language-bash">wget <span class="hljs-attr">https</span>:<span class="hljs-comment">//raw.githubusercontent.com/zilliztech/milvus-operator/main/config/samples/milvus_cluster_default.yaml</span>
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p><code translate="no">milvus_cluster_default.yaml</code> 파일을 편집하여 Pulsar 버전을 v2로 지정합니다.</p>
-<pre><code translate="no" class="language-yaml"> <span class="hljs-attr">apiVersion</span>: milvus.<span class="hljs-property">io</span>/v1beta1
- <span class="hljs-attr">kind</span>: <span class="hljs-title class_">Milvus</span>
- <span class="hljs-attr">metadata</span>:
-   <span class="hljs-attr">name</span>: my-release
-   <span class="hljs-attr">namespace</span>: <span class="hljs-keyword">default</span>
-   <span class="hljs-attr">labels</span>:
-     <span class="hljs-attr">app</span>: milvus
- <span class="hljs-attr">spec</span>:
-   <span class="hljs-attr">mode</span>: cluster
-   <span class="hljs-attr">dependencies</span>:
-     <span class="hljs-attr">pulsar</span>:
-       <span class="hljs-attr">inCluster</span>:
-         <span class="hljs-attr">chartVersion</span>: pulsar-v2
+<pre><code translate="no" class="language-yaml"><span class="hljs-attr">apiVersion</span>: milvus.<span class="hljs-property">io</span>/v1beta1
+<span class="hljs-attr">kind</span>: <span class="hljs-title class_">Milvus</span>
+<span class="hljs-attr">metadata</span>:
+  <span class="hljs-attr">name</span>: my-release
+  <span class="hljs-attr">namespace</span>: <span class="hljs-keyword">default</span>
+  <span class="hljs-attr">labels</span>:
+    <span class="hljs-attr">app</span>: milvus
+<span class="hljs-attr">spec</span>:
+  <span class="hljs-attr">mode</span>: cluster
+  <span class="hljs-attr">dependencies</span>:
+    <span class="hljs-attr">pulsar</span>:
+      <span class="hljs-attr">inCluster</span>:
+        <span class="hljs-attr">chartVersion</span>: pulsar-v2
 <button class="copy-code-btn"></button></code></pre>
 <p><code translate="no">dependencies</code> 의 경우 <code translate="no">pulsar.inCluster.chartVersion</code> 을 <code translate="no">pulsar-v2</code> 으로 변경합니다.</p></li>
 <li><p>밀버스 <a href="https://milvus.io/docs/install_cluster-milvusoperator.md#Deploy-Milvus">오퍼레이터로 밀버스 클러스터 설치의</a> 단계를 계속 진행하여 편집한 CRD 파일을 사용하여 Pulsar v2와 함께 밀버스 v2.5.x를 배포합니다.</p>

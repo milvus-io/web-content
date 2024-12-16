@@ -51,21 +51,23 @@ title: Índice GPU
 <tbody>
 <tr><td><code translate="no">intermediate_graph_degree</code></td><td>Afecta a recuperação e o tempo de construção ao determinar o grau do gráfico antes da poda. Os valores recomendados são <code translate="no">32</code> ou <code translate="no">64</code>.</td><td><code translate="no">128</code></td></tr>
 <tr><td><code translate="no">graph_degree</code></td><td>Afeta o desempenho da pesquisa e a recuperação ao definir o grau do gráfico após a poda. Uma diferença maior entre esses dois graus resulta em um tempo de construção mais longo. O seu valor tem de ser inferior ao valor de <strong>intermediate_graph_degree</strong>.</td><td><code translate="no">64</code></td></tr>
-<tr><td><code translate="no">build_algo</code></td><td>Seleciona o algoritmo de geração do grafo antes da poda. Valores possíveis:</br><code translate="no">IVF_PQ</code>: Oferece uma qualidade superior mas um tempo de construção mais lento.</br> <code translate="no">NN_DESCENT</code> Oferece uma construção mais rápida com uma recuperação potencialmente inferior.</td><td><code translate="no">IVF_PQ</code></td></tr>
+<tr><td><code translate="no">build_algo</code></td><td>Seleciona o algoritmo de geração do grafo antes da poda. Valores possíveis:</br><code translate="no">IVF_PQ</code>: Oferece uma qualidade superior mas um tempo de construção mais lento.</br> <code translate="no">NN_DESCENT</code> Fornece uma construção mais rápida com uma recuperação potencialmente inferior.</td><td><code translate="no">IVF_PQ</code></td></tr>
 <tr><td><code translate="no">cache_dataset_on_device</code></td><td>Decide se o conjunto de dados original deve ser armazenado em cache na memória da GPU. Valores possíveis:</br><code translate="no">“true”</code>: Armazena em cache o conjunto de dados original para melhorar a recuperação ao refinar os resultados da pesquisa.</br> <code translate="no">“false”</code> Valores possíveis: : Não armazena em cache o conjunto de dados original para economizar memória da GPU.</td><td><code translate="no">“false”</code></td></tr>
+<tr><td><code translate="no">adapt_for_cpu</code></td><td>Decide se a GPU deve ser usada para construção de índice e a CPU para pesquisa. <br/>Definir este parâmetro para <code translate="no">true</code> requer a presença do parâmetro <code translate="no">ef</code> nos pedidos de pesquisa.</td><td><code translate="no">“false”</code></td></tr>
 </tbody>
 </table>
 </li>
 <li><p>Parâmetros de pesquisa</p>
 <table>
 <thead>
-<tr><th>Parâmetro</th><th>Descrição</th><th>Valor predefinido</th></tr>
+<tr><th>Parâmetro</th><th>Descrição</th><th>Valor por defeito</th></tr>
 </thead>
 <tbody>
 <tr><td><code translate="no">itopk_size</code></td><td>Determina o tamanho dos resultados intermédios mantidos durante a pesquisa. Um valor maior pode melhorar a recuperação à custa do desempenho da pesquisa. Deve ser pelo menos igual ao valor final do top-k (limite) e é tipicamente uma potência de 2 (por exemplo, 16, 32, 64, 128).</td><td>Vazio</td></tr>
 <tr><td><code translate="no">search_width</code></td><td>Especifica o número de pontos de entrada no gráfico CAGRA durante a pesquisa. Aumentar este valor pode melhorar a recordação, mas pode afetar o desempenho da pesquisa (por exemplo, 1, 2, 4, 8, 16, 32).</td><td>Vazio</td></tr>
 <tr><td><code translate="no">min_iterations</code> / <code translate="no">max_iterations</code></td><td>Controla o processo de iteração da pesquisa. Por defeito, estão definidos para <code translate="no">0</code>, e o CAGRA determina automaticamente o número de iterações com base em <code translate="no">itopk_size</code> e <code translate="no">search_width</code>. O ajuste manual desses valores pode ajudar a equilibrar o desempenho e a precisão.</td><td><code translate="no">0</code></td></tr>
 <tr><td><code translate="no">team_size</code></td><td>Especifica o número de threads CUDA usadas para calcular a distância métrica na GPU. Os valores comuns são uma potência de 2 até 32 (por exemplo, 2, 4, 8, 16, 32). Tem um impacto menor no desempenho da pesquisa. O valor predefinido é <code translate="no">0</code>, em que o Milvus seleciona automaticamente o <code translate="no">team_size</code> com base na dimensão do vetor.</td><td><code translate="no">0</code></td></tr>
+<tr><td><code translate="no">ef</code></td><td>Especifica o compromisso tempo de consulta/precisão. Um valor <code translate="no">ef</code> mais elevado conduz a uma pesquisa mais exacta mas mais lenta. <br/>Este parâmetro é obrigatório se definir <code translate="no">adapt_for_cpu</code> para <code translate="no">true</code> quando construir o índice.</td><td><code translate="no">[top_k, int_max]</code></td></tr>
 </tbody>
 </table>
 </li>
@@ -74,7 +76,7 @@ title: Índice GPU
 <li><p>Limites da pesquisa</p>
 <table>
 <thead>
-<tr><th>Parâmetro</th><th>Limite</th></tr>
+<tr><th>Parâmetro</th><th>Intervalo</th></tr>
 </thead>
 <tbody>
 <tr><td><code translate="no">limit</code> (top-K)</td><td>&lt;= 1024</td></tr>
@@ -103,7 +105,7 @@ title: Índice GPU
 <p>GPU_IVF_FLAT é o índice IVF mais básico, e os dados codificados armazenados em cada unidade são consistentes com os dados originais.</p>
 <p>Ao realizar pesquisas, observe que é possível definir o top-K até 256 para qualquer pesquisa em uma coleção indexada por GPU_IVF_FLAT.</p>
 <ul>
-<li><p>Parâmetros de construção de índice</p>
+<li><p>Parâmetros de criação de índices</p>
 <table>
 <thead>
 <tr><th>Parâmetro</th><th>Descrição</th><th>Intervalo</th><th>Valor padrão</th></tr>

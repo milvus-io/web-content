@@ -52,7 +52,8 @@ title: GPUインデックス
 <tr><td><code translate="no">intermediate_graph_degree</code></td><td>プルーニングの前にグラフの次数を決定することで、リコールと構築時間に影響する。推奨値は<code translate="no">32</code> または<code translate="no">64</code> 。</td><td><code translate="no">128</code></td></tr>
 <tr><td><code translate="no">graph_degree</code></td><td>プルーニング後のグラフの次数を設定することで、検索パフォーマンスと想起に影響する。この2つの次数の差が大きいほど、構築時間が長くなる。この値は<strong>intermediate_graph_degree</strong> の値より小さくなければならない。</td><td><code translate="no">64</code></td></tr>
 <tr><td><code translate="no">build_algo</code></td><td>プルーニング前のグラフ生成アルゴリズムを選択する。取り得る値：</br><code translate="no">IVF_PQ</code>:より高い品質を提供するが、構築時間は遅くなる。</br><code translate="no">NN_DESCENT</code>リコールが低くなる可能性がある。</td><td><code translate="no">IVF_PQ</code></td></tr>
-<tr><td><code translate="no">cache_dataset_on_device</code></td><td>元のデータセットをGPUメモリにキャッシュするかどうかを決定します。可能な値：</br><code translate="no">“true”</code>:元のデータセットをキャッシュし、検索結果を絞り込むことで想起を高める。</br><code translate="no">“false”</code>: GPUメモリを節約するため、元のデータセットをキャッシュしない。</td><td><code translate="no">“false”</code></td></tr>
+<tr><td><code translate="no">cache_dataset_on_device</code></td><td>元のデータセットをGPUメモリにキャッシュするかどうかを決定します。可能な値：</br><code translate="no">“true”</code>:元のデータセットをキャッシュし、検索結果を絞り込むことで想起を高める。</br><code translate="no">“false”</code>GPU メモリを節約するために元のデータセットをキャッシュしない。</td><td><code translate="no">“false”</code></td></tr>
+<tr><td><code translate="no">adapt_for_cpu</code></td><td>インデックス構築にGPUを使用し、検索にCPUを使用するかを決定する。<br/>このパラメータを<code translate="no">true</code> に設定するには、検索リクエストに<code translate="no">ef</code> パラメータが存在する必要がある。</td><td><code translate="no">“false”</code></td></tr>
 </tbody>
 </table>
 </li>
@@ -66,6 +67,7 @@ title: GPUインデックス
 <tr><td><code translate="no">search_width</code></td><td>検索中に CAGRA グラフに入る点の数を指定する。この値を大きくすると、想起率は向上するが、検索性能に影響を与える可能性がある（例：1, 2, 4, 8, 16, 32）。</td><td>空</td></tr>
 <tr><td><code translate="no">min_iterations</code> /<code translate="no">max_iterations</code></td><td>検索の反復処理を制御する。デフォルトでは<code translate="no">0</code> に設定されており、CAGRA は<code translate="no">itopk_size</code> と<code translate="no">search_width</code> に基づいて自動的に反復回数を決定する。これらの値を手動で調整することで、性能と精度のバランスをとることができます。</td><td><code translate="no">0</code></td></tr>
 <tr><td><code translate="no">team_size</code></td><td>GPU でのメトリック距離計算に使用する CUDA スレッド数を指定します。一般的な値は2の累乗から32までです（例：2、4、8、16、32）。これは検索性能に軽微な影響を与えます。デフォルト値は<code translate="no">0</code> で、milvus はベクトル次元に基づいて自動的に<code translate="no">team_size</code> を選択します。</td><td><code translate="no">0</code></td></tr>
+<tr><td><code translate="no">ef</code></td><td>クエリ時間と精度のトレードオフを指定します。<code translate="no">ef</code> の値を高くすると、検索精度は高くなりますが、検索速度は遅くなります。<br/>インデックス作成時に<code translate="no">adapt_for_cpu</code> を<code translate="no">true</code> に設定した場合、このパラメータは必須となります。</td><td><code translate="no">[top_k, int_max]</code></td></tr>
 </tbody>
 </table>
 </li>

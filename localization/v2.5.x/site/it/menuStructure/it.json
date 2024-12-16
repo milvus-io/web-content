@@ -1436,7 +1436,7 @@
             "children": []
           },
           {
-            "label": "Comandi",
+            "label": "Commands",
             "id": "milvus_backup_cli.md",
             "order": 1,
             "children": []

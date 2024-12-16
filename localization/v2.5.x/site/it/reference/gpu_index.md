@@ -53,6 +53,7 @@ title: Indice GPU
 <tr><td><code translate="no">graph_degree</code></td><td>Influisce sulle prestazioni della ricerca e sul richiamo impostando il grado del grafo dopo la potatura. Una differenza maggiore tra questi due gradi comporta un tempo di costruzione più lungo. Il suo valore deve essere inferiore al valore di <strong>intermediate_graph_degree</strong>.</td><td><code translate="no">64</code></td></tr>
 <tr><td><code translate="no">build_algo</code></td><td>Seleziona l'algoritmo di generazione del grafo prima della potatura. Valori possibili:</br><code translate="no">IVF_PQ</code>: Offre una qualità superiore ma un tempo di costruzione più lento.</br> <code translate="no">NN_DESCENT</code> Fornisce una creazione più rapida con un richiamo potenzialmente inferiore.</td><td><code translate="no">IVF_PQ</code></td></tr>
 <tr><td><code translate="no">cache_dataset_on_device</code></td><td>Decide se memorizzare nella cache il set di dati originale nella memoria della GPU. Valori possibili:</br><code translate="no">“true”</code>: Mette in cache il set di dati originale per migliorare il richiamo affinando i risultati della ricerca.</br> <code translate="no">“false”</code> Non memorizza nella cache il set di dati originale per risparmiare memoria della GPU.</td><td><code translate="no">“false”</code></td></tr>
+<tr><td><code translate="no">adapt_for_cpu</code></td><td>Decide se utilizzare la GPU per la creazione dell'indice e la CPU per la ricerca. <br/>L'impostazione di questo parametro su <code translate="no">true</code> richiede la presenza del parametro <code translate="no">ef</code> nelle richieste di ricerca.</td><td><code translate="no">“false”</code></td></tr>
 </tbody>
 </table>
 </li>
@@ -66,6 +67,7 @@ title: Indice GPU
 <tr><td><code translate="no">search_width</code></td><td>Specifica il numero di punti di ingresso nel grafo CAGRA durante la ricerca. L'aumento di questo valore può migliorare il richiamo, ma può influire sulle prestazioni della ricerca (es. 1, 2, 4, 8, 16, 32).</td><td>Vuoto</td></tr>
 <tr><td><code translate="no">min_iterations</code> / <code translate="no">max_iterations</code></td><td>Controlla il processo di iterazione della ricerca. Per impostazione predefinita, sono impostati su <code translate="no">0</code>, e CAGRA determina automaticamente il numero di iterazioni in base a <code translate="no">itopk_size</code> e <code translate="no">search_width</code>. La regolazione manuale di questi valori può aiutare a bilanciare prestazioni e precisione.</td><td><code translate="no">0</code></td></tr>
 <tr><td><code translate="no">team_size</code></td><td>Specifica il numero di thread CUDA utilizzati per il calcolo della distanza metrica sulla GPU. I valori più comuni sono una potenza di 2 fino a 32 (ad esempio, 2, 4, 8, 16, 32). Ha un impatto minimo sulle prestazioni della ricerca. Il valore predefinito è <code translate="no">0</code>, dove Milvus seleziona automaticamente <code translate="no">team_size</code> in base alla dimensione del vettore.</td><td><code translate="no">0</code></td></tr>
+<tr><td><code translate="no">ef</code></td><td>Specifica il compromesso tempo di interrogazione/accuratezza. Un valore più alto di <code translate="no">ef</code> porta a una ricerca più accurata ma più lenta. <br/>Questo parametro è obbligatorio se si imposta <code translate="no">adapt_for_cpu</code> su <code translate="no">true</code> quando si costruisce l'indice.</td><td><code translate="no">[top_k, int_max]</code></td></tr>
 </tbody>
 </table>
 </li>
@@ -233,5 +235,5 @@ title: Indice GPU
 <ul>
 <li><strong>GPU_CAGRA</strong>: l'utilizzo della memoria è circa 1,8 volte quello dei dati vettoriali originali.</li>
 <li><strong>GPU_IVF_FLAT</strong> e <strong>GPU_BRUTE_FORCE</strong>: Richiedono una memoria pari alla dimensione dei dati originali.</li>
-<li><strong>GPU_IVF_PQ</strong>: utilizza un ingombro di memoria inferiore, che dipende dalle impostazioni dei parametri di compressione.</li>
+<li><strong>GPU_IVF_PQ</strong>: Utilizza un ingombro di memoria inferiore, che dipende dalle impostazioni dei parametri di compressione.</li>
 </ul>

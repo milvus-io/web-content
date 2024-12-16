@@ -53,6 +53,7 @@ title: GPU-Index
 <tr><td><code translate="no">graph_degree</code></td><td>Beeinflusst die Suchleistung und den Abruf, indem der Grad des Graphen nach dem Pruning festgelegt wird. Eine größere Differenz zwischen diesen beiden Graden führt zu einer längeren Erstellungszeit. Sein Wert muss kleiner sein als der Wert von <strong>intermediate_graph_degree</strong>.</td><td><code translate="no">64</code></td></tr>
 <tr><td><code translate="no">build_algo</code></td><td>Wählt den Graphenerzeugungsalgorithmus vor dem Pruning. Mögliche Werte:</br><code translate="no">IVF_PQ</code>: Bietet eine höhere Qualität, aber eine langsamere Erstellungszeit.</br> <code translate="no">NN_DESCENT</code> Bietet einen schnelleren Aufbau mit potenziell geringerer Wiedererkennung.</td><td><code translate="no">IVF_PQ</code></td></tr>
 <tr><td><code translate="no">cache_dataset_on_device</code></td><td>Legt fest, ob der Originaldatensatz im GPU-Speicher zwischengespeichert werden soll. Mögliche Werte:</br><code translate="no">“true”</code>: Zwischenspeichern des Originaldatensatzes zur Verbesserung der Wiederauffindung durch Verfeinerung der Suchergebnisse.</br> <code translate="no">“false”</code> Cache: Der Originaldatensatz wird nicht zwischengespeichert, um GPU-Speicher zu sparen.</td><td><code translate="no">“false”</code></td></tr>
+<tr><td><code translate="no">adapt_for_cpu</code></td><td>Entscheidet, ob die GPU für die Indexerstellung und die CPU für die Suche verwendet werden soll. <br/>Die Einstellung dieses Parameters auf <code translate="no">true</code> erfordert das Vorhandensein des Parameters <code translate="no">ef</code> in den Suchanfragen.</td><td><code translate="no">“false”</code></td></tr>
 </tbody>
 </table>
 </li>
@@ -65,13 +66,14 @@ title: GPU-Index
 <tr><td><code translate="no">itopk_size</code></td><td>Bestimmt die Größe der Zwischenergebnisse, die während der Suche gespeichert werden. Ein größerer Wert kann die Wiederauffindbarkeit auf Kosten der Suchleistung verbessern. Er sollte mindestens dem endgültigen Top-k-Wert (Grenzwert) entsprechen und ist normalerweise eine Potenz von 2 (z. B. 16, 32, 64, 128).</td><td>Leer</td></tr>
 <tr><td><code translate="no">search_width</code></td><td>Gibt die Anzahl der Einstiegspunkte in den CAGRA-Graphen während der Suche an. Eine Erhöhung dieses Wertes kann die Wiederauffindbarkeit verbessern, kann sich aber auf die Suchleistung auswirken（z.B. 1, 2, 4, 8, 16, 32).</td><td>Leer</td></tr>
 <tr><td><code translate="no">min_iterations</code> / <code translate="no">max_iterations</code></td><td>Steuert den Iterationsprozess der Suche. Standardmäßig sind sie auf <code translate="no">0</code> eingestellt, und CAGRA bestimmt automatisch die Anzahl der Iterationen auf der Grundlage von <code translate="no">itopk_size</code> und <code translate="no">search_width</code>. Eine manuelle Anpassung dieser Werte kann helfen, Leistung und Genauigkeit auszugleichen.</td><td><code translate="no">0</code></td></tr>
-<tr><td><code translate="no">team_size</code></td><td>Gibt die Anzahl der CUDA-Threads an, die für die Berechnung des metrischen Abstands auf dem Grafikprozessor verwendet werden. Übliche Werte sind eine Potenz von 2 bis zu 32 (z. B. 2, 4, 8, 16, 32). Er hat einen geringen Einfluss auf die Suchleistung. Der Standardwert ist <code translate="no">0</code>, wobei Milvus die <code translate="no">team_size</code> automatisch auf der Grundlage der Vektordimension auswählt.</td><td><code translate="no">0</code></td></tr>
+<tr><td><code translate="no">team_size</code></td><td>Gibt die Anzahl der CUDA-Threads an, die für die Berechnung des metrischen Abstands auf dem Grafikprozessor verwendet werden. Übliche Werte sind eine Potenz von 2 bis zu 32 (z. B. 2, 4, 8, 16, 32). Er hat einen geringen Einfluss auf die Suchleistung. Der Standardwert ist <code translate="no">0</code>, wobei Milvus automatisch die <code translate="no">team_size</code> basierend auf der Vektordimension auswählt.</td><td><code translate="no">0</code></td></tr>
+<tr><td><code translate="no">ef</code></td><td>Legt den Kompromiss zwischen Abfragezeit und -genauigkeit fest. Ein höherer <code translate="no">ef</code> Wert führt zu einer genaueren, aber langsameren Suche. <br/>Dieser Parameter ist obligatorisch, wenn Sie beim Erstellen des Index <code translate="no">adapt_for_cpu</code> auf <code translate="no">true</code> gesetzt haben.</td><td><code translate="no">[top_k, int_max]</code></td></tr>
 </tbody>
 </table>
 </li>
 </ul>
 <ul>
-<li><p>Grenzen für die Suche</p>
+<li><p>Grenzwerte für die Suche</p>
 <table>
 <thead>
 <tr><th>Parameter</th><th>Bereich</th></tr>
@@ -233,5 +235,5 @@ title: GPU-Index
 <ul>
 <li><strong>GPU_CAGRA</strong>: Der Speicherbedarf beträgt etwa das 1,8-fache der ursprünglichen Vektordaten.</li>
 <li><strong>GPU_IVF_FLAT</strong> und <strong>GPU_BRUTE_FORCE</strong>: Benötigt Speicher, der der Größe der Originaldaten entspricht.</li>
-<li><strong>GPU_IVF_PQ</strong>: Verwendet einen kleineren Speicherplatz, der von den Einstellungen der Komprimierungsparameter abhängt.</li>
+<li><strong>GPU_IVF_PQ</strong>: Verwendet einen kleineren Speicherbedarf, der von den Einstellungen der Komprimierungsparameter abhängt.</li>
 </ul>

@@ -102,26 +102,26 @@ helm repo update milvus
 <pre><code translate="no" class="language-bash">wget <span class="hljs-attr">https</span>:<span class="hljs-comment">//raw.githubusercontent.com/zilliztech/milvus-operator/main/config/samples/milvus_cluster_default.yaml</span>
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p><code translate="no">milvus_cluster_default.yaml</code> ファイルを編集し、Pulsarのバージョンをv2に指定します。</p>
-<pre><code translate="no" class="language-yaml"> <span class="hljs-attr">apiVersion</span>: milvus.<span class="hljs-property">io</span>/v1beta1
- <span class="hljs-attr">kind</span>: <span class="hljs-title class_">Milvus</span>
- <span class="hljs-attr">metadata</span>:
-   <span class="hljs-attr">name</span>: my-release
-   <span class="hljs-attr">namespace</span>: <span class="hljs-keyword">default</span>
-   <span class="hljs-attr">labels</span>:
-     <span class="hljs-attr">app</span>: milvus
- <span class="hljs-attr">spec</span>:
-   <span class="hljs-attr">mode</span>: cluster
-   <span class="hljs-attr">dependencies</span>:
-     <span class="hljs-attr">pulsar</span>:
-       <span class="hljs-attr">inCluster</span>:
-         <span class="hljs-attr">chartVersion</span>: pulsar-v2
+<pre><code translate="no" class="language-yaml"><span class="hljs-attr">apiVersion</span>: milvus.<span class="hljs-property">io</span>/v1beta1
+<span class="hljs-attr">kind</span>: <span class="hljs-title class_">Milvus</span>
+<span class="hljs-attr">metadata</span>:
+  <span class="hljs-attr">name</span>: my-release
+  <span class="hljs-attr">namespace</span>: <span class="hljs-keyword">default</span>
+  <span class="hljs-attr">labels</span>:
+    <span class="hljs-attr">app</span>: milvus
+<span class="hljs-attr">spec</span>:
+  <span class="hljs-attr">mode</span>: cluster
+  <span class="hljs-attr">dependencies</span>:
+    <span class="hljs-attr">pulsar</span>:
+      <span class="hljs-attr">inCluster</span>:
+        <span class="hljs-attr">chartVersion</span>: pulsar-v2
 <button class="copy-code-btn"></button></code></pre>
 <p><code translate="no">dependencies</code> の場合、<code translate="no">pulsar.inCluster.chartVersion</code> を<code translate="no">pulsar-v2</code> に変更してください。</p></li>
 <li><p><a href="https://milvus.io/docs/install_cluster-milvusoperator.md#Deploy-Milvus">Install Milvus Cluster with Milvus Operatorの</a>手順に進み、編集したCRDファイルを使用してMilvus v2.5.xとPulsar v2を展開します。</p>
 <pre><code translate="no" class="language-bash">kubectl apply -f milvus_cluster_default.yaml
 <button class="copy-code-btn"></button></code></pre></li>
 </ol>
-<h3 id="For-Helm-users" class="common-anchor-header">Helmユーザの場合</h3><p>Milvus v2.5.xをデプロイする前に、<code translate="no">values.yaml</code> ファイルを用意するか、インライン・パラメータを使ってPulsarのバージョンを指定してください。Helmを使用したMilvusのインストール方法については、「<a href="/docs/ja/install_cluster-helm.md">Helmを使用したMilvusクラスタのインストール</a>」をご参照ください。</p>
+<h3 id="For-Helm-users" class="common-anchor-header">Helmユーザの場合</h3><p>Milvus v2.5.xをデプロイする前に、<code translate="no">values.yaml</code> ファイルを用意するか、インライン・パラメータを使用してPulsarのバージョンを指定してください。Helmを使用したMilvusのインストール方法については、「<a href="/docs/ja/install_cluster-helm.md">Helmを使用したMilvusクラスタのインストール</a>」をご参照ください。</p>
 <ul>
 <li><p>インライン・パラメータを使用して、Pulsarのバージョンをv2に指定します。</p>
 <pre><code translate="no" class="language-bash">helm install my-release milvus/milvus --<span class="hljs-built_in">set</span> pulsar.enabled=<span class="hljs-literal">true</span>,pulsarv3.enabled=<span class="hljs-literal">false</span>

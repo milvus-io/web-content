@@ -212,7 +212,7 @@
     "v2.4.x/site/en/reference/array_data_type.md": "2024-12-04T08:00:16.529Z",
     "v2.4.x/site/en/userGuide/search-query-get/single-vector-search.md": "2024-12-04T08:01:10.984Z",
     "v2.4.x/site/en/userGuide/use-json-fields.md": "2024-12-09T08:39:18.854Z",
-    "v2.4.x/site/en/menuStructure/en.json": "2024-12-12T07:40:16.051Z",
+    "v2.4.x/site/en/menuStructure/en.json": "2024-12-16T08:47:46.487Z",
     "v2.4.x/site/en/userGuide/manage-collections.md": "2024-11-18T03:34:16.027Z",
     "v2.4.x/site/en/getstarted/milvus_lite.md": "2024-09-06T02:54:42.351Z",
     "v2.4.x/site/en/release_notes.md": "2024-11-25T08:33:06.376Z",
@@ -1099,7 +1099,7 @@
     "v2.5.x/site/en/reference/coordinator_ha.md": "2024-11-27T07:22:37.695Z",
     "v2.5.x/site/en/reference/disk_index.md": "2024-11-27T07:22:38.790Z",
     "v2.5.x/site/en/reference/glossary.md": "2024-11-27T07:22:41.283Z",
-    "v2.5.x/site/en/reference/gpu_index.md": "2024-12-06T07:02:25.676Z",
+    "v2.5.x/site/en/reference/gpu_index.md": "2024-12-16T08:33:11.320Z",
     "v2.5.x/site/en/reference/index.md": "2024-11-27T07:22:45.070Z",
     "v2.5.x/site/en/reference/knowhere.md": "2024-11-27T07:22:46.477Z",
     "v2.5.x/site/en/reference/multi_tenancy.md": "2024-11-27T07:22:47.729Z",
@@ -1238,13 +1238,13 @@
     "v2.5.x/site/en/userGuide/tools/milvus_backup_api.md": "2024-11-27T07:25:46.624Z",
     "v2.5.x/site/en/userGuide/tools/milvus_backup_cli.md": "2024-11-27T07:25:47.846Z",
     "v2.5.x/site/en/userGuide/tools/milvus_backup_overview.md": "2024-11-27T07:25:49.181Z",
-    "v2.5.x/site/en/menuStructure/en.json": "2024-12-12T07:33:49.398Z",
+    "v2.5.x/site/en/menuStructure/en.json": "2024-12-16T08:40:47.676Z",
     "v2.5.x/site/en/getstarted/run-milvus-docker/install_standalone-windows.md": "2024-12-06T07:01:20.487Z",
     "v2.5.x/site/en/integrations/build_RAG_with_milvus_and_cognee.md": "2024-12-06T07:01:27.204Z",
     "v2.5.x/site/en/integrations/build_RAG_with_milvus_and_gemini.md": "2024-12-06T07:01:34.066Z",
     "v2.5.x/site/en/integrations/build_RAG_with_milvus_and_ollama.md": "2024-12-06T07:01:41.084Z",
     "v2.5.x/site/en/integrations/milvus_rag_with_dynamiq.md": "2024-12-06T07:02:12.036Z",
     "v2.5.x/site/en/tutorials/full_text_search_with_milvus.md": "2024-12-06T07:02:31.417Z",
-    "v2.5.x/site/en/adminGuide/use-pulsar-v2.md": "2024-12-12T07:25:59.850Z"
+    "v2.5.x/site/en/adminGuide/use-pulsar-v2.md": "2024-12-16T08:33:00.666Z"
   }
 }
