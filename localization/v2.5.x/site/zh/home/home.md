@@ -13,7 +13,7 @@ id: home.md
     <p class="promotion-desc">免费试用Zilliz Cloud！体验Milvus的最简单方式！</p>
   </div>
   <div class="cta-wrapper">
-   <a class="cta-global" href="https://cloud.zilliz.com/signup">Zilliz Cloud</a>Zilliz Cloud 中国  </div>
+   <a class="cta-global" href="https://cloud.zilliz.com/signup">Zilliz Cloud</a> <a class="cta-cn" href="https://cloud.zilliz.com.cn/signup">Zilliz Cloud 中国</a></div>
 </div>
 <h2 id="Get-Started" class="common-anchor-header">开始使用<button data-href="#Get-Started" class="anchor-icon" translate="no">
       <svg translate="no"
