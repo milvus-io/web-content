@@ -38,16 +38,16 @@ connect [-uri (text)] [-t (text)]
 
 <h3 id="connect">Options</h3>
 
-| Option | Full name    | Description                                                                                                 |
-| :----- | :----------- | :---------------------------------------------------------------------------------------------------------- |
-| -uri   | --uri        | (Optional) The uri name. The default is "http://127.0.0.1:19530".                                                       |
-| -t     | --token      | (Optional) The zilliz cloud apikey or `username:password`. The default is None.                                                         |
-| --help | n/a          | Displays help for using the command.                                                                        |
+| Option | Full name | Description                                                                     |
+| :----- | :-------- | :------------------------------------------------------------------------------ |
+| -uri   | --uri     | (Optional) The uri name. The default is "http://127.0.0.1:19530".               |
+| -t     | --token   | (Optional) The zilliz cloud apikey or `username:password`. The default is None. |
+| --help | n/a       | Displays help for using the command.                                            |
 
 <h3 id="connect">Example</h3>
 
 ```shell
-milvus_cli > connect -uri http://127.0.0.1:19530 
+milvus_cli > connect -uri http://127.0.0.1:19530
 ```
 
 ## create Database
@@ -57,21 +57,21 @@ Create Database in Milvus
 <h3 id="create-database">Syntax</h3>
 
 ```shell
-create database -db (text) 
+create database -db (text)
 ```
 
 ### Options
 
-| Option | Full name  | Description                                         |
-| :----- | :--------- | :-------------------------------------------------- |
-| -db    | --database | [Required] The database name in milvus.              |
-| --help | n/a        | Displays help for using the command.                |
+| Option | Full name  | Description                             |
+| :----- | :--------- | :-------------------------------------- |
+| -db    | --database | [Required] The database name in milvus. |
+| --help | n/a        | Displays help for using the command.    |
 
 ### Examples
 
 #### Example 1
 
-The following example create the database <code>testdb</code>  in milvus.
+The following example create the database <code>testdb</code> in milvus.
 
 ```shell
 milvus_cli > create database -db testdb
@@ -84,21 +84,21 @@ Use Database in Milvus
 <h3 id="use-database">Syntax</h3>
 
 ```shell
-use database -db (text) 
+use database -db (text)
 ```
 
 ### Options
 
-| Option | Full name  | Description                                         |
-| :----- | :--------- | :-------------------------------------------------- |
-| -db    | --database | [Required] The database name in milvus.              |
-| --help | n/a        | Displays help for using the command.                |
+| Option | Full name  | Description                             |
+| :----- | :--------- | :-------------------------------------- |
+| -db    | --database | [Required] The database name in milvus. |
+| --help | n/a        | Displays help for using the command.    |
 
 ### Examples
 
 #### Example 1
 
-The following example use the database <code>testdb</code>  in milvus.
+The following example use the database <code>testdb</code> in milvus.
 
 ```shell
 milvus_cli > use database -db testdb
@@ -111,8 +111,9 @@ List Databases in Milvus
 <h3 id="list-database">Syntax</h3>
 
 ```shell
-list databases 
+list databases
 ```
+
 ### Examples
 
 #### Example 1
@@ -130,21 +131,21 @@ Delete Database in Milvus
 <h3 id="delete-database">Syntax</h3>
 
 ```shell
-delete database -db (text) 
+delete database -db (text)
 ```
 
 ### Options
 
-| Option | Full name  | Description                                         |
-| :----- | :--------- | :-------------------------------------------------- |
-| -db    | --database | [Required] The database name in milvus.              |
-| --help | n/a        | Displays help for using the command.                |
+| Option | Full name  | Description                             |
+| :----- | :--------- | :-------------------------------------- |
+| -db    | --database | [Required] The database name in milvus. |
+| --help | n/a        | Displays help for using the command.    |
 
 ### Examples
 
 #### Example 1
 
-The following example delete the database <code>testdb</code>  in milvus.
+The following example delete the database <code>testdb</code> in milvus.
 
 ```shell
 milvus_cli > delete database -db testdb
@@ -178,6 +179,33 @@ The following example create the user <code>zilliz</code> and password <code>zil
 milvus_cli > create user -u zilliz -p zilliz
 ```
 
+## create role
+
+Create role in Milvus
+
+<h3 id="create-role">Syntax</h3>
+
+```shell
+create role -r (text)
+```
+
+### Options
+
+| Option | Full name  | Description                          |
+| :----- | :--------- | :----------------------------------- |
+| -r     | --roleName | The role name of milvus role.        |
+| --help | n/a        | Displays help for using the command. |
+
+### Examples
+
+#### Example 1
+
+The following example create the role <code>role1</code> in milvus.
+
+```shell
+milvus_cli > create role -r role1
+```
+
 ## create alias
 
 Specifies unique aliases for a collection.
@@ -187,17 +215,17 @@ Specifies unique aliases for a collection.
 <h3 id="create-alias">Syntax</h3>
 
 ```shell
-create alias -c (text) -a (text) [-A] 
+create alias -c (text) -a (text) [-A]
 ```
 
 <h3 id="create-alias">Options</h3>
 
-| Option | Full name         | Description                                                                                                                                                                      |
-| :----- | :---------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| -c     | --collection-name | The name of the collection.                                                                                                                                                      |
-| -a     | --alias-name      | The alias.                                                                                                                                                                       |
-| -A     | --alter           | (Optional) Flag to transfer the alias to a specified collection.                                                                                                                 |
-| --help | n/a               | Displays help for using the command.                                                                                                                                             |
+| Option | Full name         | Description                                                      |
+| :----- | :---------------- | :--------------------------------------------------------------- |
+| -c     | --collection-name | The name of the collection.                                      |
+| -a     | --alias-name      | The alias.                                                       |
+| -A     | --alter           | (Optional) Flag to transfer the alias to a specified collection. |
+| --help | n/a               | Displays help for using the command.                             |
 
 <h3 id="create-alias">Examples</h3>
 
@@ -240,7 +268,7 @@ create collection -c (text) -f (text) -p (text) [-a] [-d (text)]
 | -desc  | --schema-description   | (Optional) The description of the collection.                                          |
 | -level | --consistency-level    | (Optional) Consistency level: Bounded,Session,Strong, Eventual .                       |
 | -d     | --is-dynamic           | (Optional) Collection schema supports dynamic fields or not.                           |
-| -s     | --shards-num           | (Optional) Shards number                           |
+| -s     | --shards-num           | (Optional) Shards number                                                               |
 | --help | n/a                    | Displays help for using the command.                                                   |
 
 <h3 id="create-collection">Example</h3>
@@ -308,10 +336,10 @@ The name of the field to create an index for (vector): vector
 Index name: vectorIndex
 
 # Default is ''
-Index type FLAT, IVF_FLAT, IVF_SQ8, IVF_PQ, RNSG, HNSW, ANNOY, AUTOINDEX, DISKANN, GPU_IVF_FLAT, GPU_IVF_PQ, SPARSE_INVERTED_INDEX, SPARSE_WAND, SCANN, STL_SORT, Trie, INVERTED, ) []: IVF_FLAT  
+Index type FLAT, IVF_FLAT, IVF_SQ8, IVF_PQ, RNSG, HNSW, ANNOY, AUTOINDEX, DISKANN, GPU_IVF_FLAT, GPU_IVF_PQ, SPARSE_INVERTED_INDEX, SPARSE_WAND, SCANN, STL_SORT, Trie, INVERTED, ) []: IVF_FLAT
 
 # Default is ''
-Index metric type (L2, IP, HAMMING, TANIMOTO, COSINE, ) []: 
+Index metric type (L2, IP, HAMMING, TANIMOTO, COSINE, ) []:
 
 Timeout []:
 ```
@@ -339,6 +367,31 @@ delete user -u (text)
 milvus_cli > delete user -u zilliz
 ```
 
+## delete role
+
+Delete role in Milvus
+
+<h3 id="delete-role">Syntax</h3>
+
+```shell
+delete role -r (text)
+```
+
+### Options
+
+| Option | Full name  | Description                          |
+| :----- | :--------- | :----------------------------------- |
+| -r     | --roleName | The role name of milvus role.        |
+| --help | n/a        | Displays help for using the command. |
+
+### Examples
+
+The following example delete the role <code>role1</code> in milvus.
+
+```shell
+milvus_cli > delete role -r role1
+```
+
 ## delete alias
 
 Deletes an alias.
@@ -346,15 +399,15 @@ Deletes an alias.
 <h3 id="delete-alias">Syntax</h3>
 
 ```shell
-delete alias -a (text) 
+delete alias -a (text)
 ```
 
 <h3 id="delete-alias">Options</h3>
 
-| Option | Full name    | Description                                                                                                                                                                      |
-| :----- | :----------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| -a     | --alias-name | The alias.                                                                                                                                                                       |
-| --help | n/a          | Displays help for using the command.                                                                                                                                             |
+| Option | Full name    | Description                          |
+| :----- | :----------- | :----------------------------------- |
+| -a     | --alias-name | The alias.                           |
+| --help | n/a          | Displays help for using the command. |
 |        |
 
 ## delete collection
@@ -364,15 +417,15 @@ Deletes a collection.
 <h3 id="delete-collection">Syntax</h3>
 
 ```shell
-delete collection -c (text) 
+delete collection -c (text)
 ```
 
 <h3 id="delete-collection">Options</h3>
 
-| Option | Full name         | Description                                                                                                                                                                      |
-| :----- | :---------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| -c     | --collection-name | The name of the collection to be deleted.                                                                                                                                        |
-| --help | n/a               | Displays help for using the command.                                                                                                                                             |
+| Option | Full name         | Description                               |
+| :----- | :---------------- | :---------------------------------------- |
+| -c     | --collection-name | The name of the collection to be deleted. |
+| --help | n/a               | Displays help for using the command.      |
 
 <h3 id="delete-collection">Example</h3>
 
@@ -387,16 +440,16 @@ Deletes entities.
 <h3 id="delete-entities">Syntax</h3>
 
 ```
-delete entities -c (text) -p (text) 
+delete entities -c (text) -p (text)
 ```
 
 <h3 id="delete-entities">Options</h3>
 
-| Option | Full name         | Description                                                                                                                                                                      |
-| :----- | :---------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| -c     | --collection-name | The name of the collection that entities to be deleted belongs to.                                                                                                               |
-| -p     | --partition       | (Optional) The name of the partition to be deleted.                                                                                                                              |
-| --help | n/a               | Displays help for using the command.                                                                                                                                             |
+| Option | Full name         | Description                                                        |
+| :----- | :---------------- | :----------------------------------------------------------------- |
+| -c     | --collection-name | The name of the collection that entities to be deleted belongs to. |
+| -p     | --partition       | (Optional) The name of the partition to be deleted.                |
+| --help | n/a               | Displays help for using the command.                               |
 
 <h3 id="delete-entities">Example</h3>
 
@@ -422,11 +475,11 @@ delete partition -c (text) -p (text)
 
 <h3 id="delete-partition">Options</h3>
 
-| Option | Full name         | Description                                                                                                                                                                      |
-| :----- | :---------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| -c     | --collection-name | The name of the collection that the partition to be deleted belongs to.                                                                                                          |
-| -p     | --partition       | The name of the partition to be deleted.                                                                                                                                         |
-| --help | n/a               | Displays help for using the command.                                                                                                                                             |
+| Option | Full name         | Description                                                             |
+| :----- | :---------------- | :---------------------------------------------------------------------- |
+| -c     | --collection-name | The name of the collection that the partition to be deleted belongs to. |
+| -p     | --partition       | The name of the partition to be deleted.                                |
+| --help | n/a               | Displays help for using the command.                                    |
 
 <h3 id="delete-partition">Example</h3>
 
@@ -446,18 +499,94 @@ Deletes an index and the corresponding index files.
 delete index -c (text) -in (text)
 ```
 
-<h3 id="delete-index">Options</h3>
+<h3 >Options</h3>
 
-| Option | Full name         | Description                                                                                                                                                                      |
-| :----- | :---------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| -c     | --collection-name | The name of the collection.                                                                                                                                                      |
-| -in    | --index-name      | The name of the index name.                                                                                                                                                      |
-| --help | n/a               | Displays help for using the command.                                                                                                                                             |
+| Option | Full name         | Description                          |
+| :----- | :---------------- | :----------------------------------- |
+| -c     | --collection-name | The name of the collection.          |
+| -in    | --index-name      | The name of the index name.          |
+| --help | n/a               | Displays help for using the command. |
 
-<h3 id="delete-index">Example</h3>
+<h3 >Example</h3>
 
 ```shell
 milvus_cli > delete index -c car -in indexName
+```
+
+## grant role
+
+Grant role to user
+
+<h3 id="grant-user">Syntax</h3>
+
+<h3 >Options</h3>
+
+| Option | Full name  | Description                          |
+| :----- | :--------- | :----------------------------------- |
+| -r     | --roleName | The role name of milvus role.        |
+| -u     | --username | The username of milvus user.         |
+| --help | n/a        | Displays help for using the command. |
+
+<h3 >Example</h3>
+
+```shell
+grant role -r role1 -u user1
+```
+
+## grant privilege
+
+Assigns a privilege to a role.
+
+<h3 id="assign-privilege">Syntax</h3>
+
+<h3 >Options</h3>
+
+| Option | Full name | Description                          |
+| :----- | :-------- | :----------------------------------- |
+| --help | n/a       | Displays help for using the command. |
+
+<h3 >Example</h3>
+
+```shell
+grant privilege
+```
+
+## revoke role
+
+Revokes the role assigned to a user.
+
+<h3 id="grant-user">Syntax</h3>
+
+<h3 >Options</h3>
+
+| Option | Full name  | Description                          |
+| :----- | :--------- | :----------------------------------- |
+| -r     | --roleName | The role name of milvus role.        |
+| -u     | --username | The username of milvus user.         |
+| --help | n/a        | Displays help for using the command. |
+
+<h3 >Example</h3>
+
+```shell
+grant role -r role1 -u user1
+```
+
+## revoke privilege
+
+Revokes a privilege already assigned to a role.
+
+<h3 id="revoke-privilege">Syntax</h3>
+
+<h3 >Options</h3>
+
+| Option | Full name | Description                          |
+| :----- | :-------- | :----------------------------------- |
+| --help | n/a       | Displays help for using the command. |
+
+<h3 >Example</h3>
+
+```shell
+revoke privilege
 ```
 
 ## show collection
@@ -531,6 +660,7 @@ show index -c (text) -in (text)
 ```shell
 milvus_cli > show index -c test_collection -in index_name
 ```
+
 ## exit
 
 Closes the command line window.
@@ -559,24 +689,26 @@ help <command>
 
 <h3 id="help">Commands</h3>
 
-| Command      | Description                                                                                                         |
-| :----------- | :------------------------------------------------------------------------------------------------------------------ |
-| clear        | Clears the screen.                                                                                                  |
-| connect      | Connects to Milvus.                                                                                                 |
-| create       | Create collection, database, partition,user and index.                                                              |
-| delete       | Delete collection, database, partition,alias,user or index.                                                         |
-| exit         | Closes the command line window.                                                                                     |
-| help         | Displays help for using a command.                                                                                  |
-| insert       | Imports data into a partition.                                                                                      |
-| list         | List collections,databases, partitions,users or indexes.                                                            |
-| load         | Loads a collection or partition.                                                                                    |
-| query        | Shows query results that match all the criteria that you enter.                                                     |
-| release      | Releases a collection or partition.                                                                                 |
-| search       | Performs a vector similarity search or hybrid search.                                                               |
-| show         | Show connection, database,collection, loading_progress or index_progress.                                           |
-| rename       | Rename collection                                                                                                   |
-| use          | Use database                                                                                                        |
-| version      | Shows the version of Milvus_CLI.                                                                                    |
+| Command | Description                                                               |
+| :------ | :------------------------------------------------------------------------ |
+| clear   | Clears the screen.                                                        |
+| connect | Connects to Milvus.                                                       |
+| create  | Create collection, database, partition,user,role and index.               |
+| grant   | Grant role, privilege .                                                   |
+| revoke  | Revoke role, privilege .                                                  |
+| delete  | Delete collection, database, partition,alias,user,role or index.          |
+| exit    | Closes the command line window.                                           |
+| help    | Displays help for using a command.                                        |
+| insert  | Imports data into a partition.                                            |
+| list    | List collections,databases, partitions,users,roles,grants or indexes.     |
+| load    | Loads a collection or partition.                                          |
+| query   | Shows query results that match all the criteria that you enter.           |
+| release | Releases a collection or partition.                                       |
+| search  | Performs a vector similarity search or hybrid search.                     |
+| show    | Show connection, database,collection, loading_progress or index_progress. |
+| rename  | Rename collection                                                         |
+| use     | Use database                                                              |
+| version | Shows the version of Milvus_CLI.                                          |
 
 ## import
 
@@ -590,11 +722,11 @@ import -c (text)[-p (text)] <file_path>
 
 <h3 id="import">Options</h3>
 
-| Option | Full name         | Description                                                                                                                                                                      |
-| :----- | :---------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| -c     | --collection-name | The name of the collection that the data are inserted into.                                                                                                                      |
-| -p     | --partition       | (Optional) The name of the partition that the data are inserted into. Not passing this partition option indicates choosing the "\_default" partition.                            |
-| --help | n/a               | Displays help for using the command.                                                                                                                                             |
+| Option | Full name         | Description                                                                                                                                           |
+| :----- | :---------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------- |
+| -c     | --collection-name | The name of the collection that the data are inserted into.                                                                                           |
+| -p     | --partition       | (Optional) The name of the partition that the data are inserted into. Not passing this partition option indicates choosing the "\_default" partition. |
+| --help | n/a               | Displays help for using the command.                                                                                                                  |
 
 <h3 id="import">Example 1</h3>
 The following example imports a local CSV file.
@@ -659,6 +791,47 @@ list users
 | Option | Full name | Description |
 | --help | n/a | Displays help for using the command. |
 
+## List roles
+
+List roles in Milvus
+
+<h3 id="list-role">Syntax</h3>
+
+```shell
+list roles
+```
+
+### Options
+
+| Option | Full name | Description                          |
+| :----- | :-------- | :----------------------------------- |
+| --help | n/a       | Displays help for using the command. |
+
+### Examples
+
+```shell
+milvus_cli > list roles
+```
+
+## List grants
+
+List grants in Milvus
+
+### Options
+
+| Option | Full name    | Description                          |
+| :----- | :----------- | :----------------------------------- |
+| -r     | --roleName   | The role name of milvus role.        |
+| -o     | --objectName | The object name of milvus object.    |
+| -t     | --objectType | Global, Collection or User.          |
+| --help | n/a          | Displays help for using the command. |
+
+### Examples
+
+```shell
+milvus_cli > list grants -r role1 -o object1 -t Collection
+```
+
 ## list collections
 
 Lists all collections.
@@ -671,9 +844,9 @@ list collections
 
 <h3 id="list-collections">Options<h3>
 
-| Option | Full name     | Description                                                                                                                                                                      |
-| :----- | :------------ | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| --help | n/a           | Displays help for using the command.                                                                                                                                             |
+| Option | Full name | Description                          |
+| :----- | :-------- | :----------------------------------- |
+| --help | n/a       | Displays help for using the command. |
 
 ## list indexes
 
@@ -919,14 +1092,14 @@ List connections.
 <h3 id="show-connection">Syntax</h3>
 
 ```shell
-list connections 
+list connections
 ```
 
 <h3 id="show-connection">Options</h3>
 
-| Option | Full name | Description                               |
-| :----- | :-------- | :---------------------------------------- |
-| --help | n/a       | Displays help for using the command.      |
+| Option | Full name | Description                          |
+| :----- | :-------- | :----------------------------------- |
+| --help | n/a       | Displays help for using the command. |
 
 ## show index_progress
 
@@ -962,7 +1135,6 @@ show loading_progress -c (text) [-p (text)]
 |-c|--collection-name|The name of the collection that the entities belong to.|
 |-p|--partition|(Optional/Multiple) The name of the loading partition.|
 |--help|n/a|Displays help for using the command.|
-
 
 ## version
 
