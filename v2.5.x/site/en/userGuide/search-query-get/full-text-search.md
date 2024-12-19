@@ -13,13 +13,8 @@ Using the BM25 algorithm for relevance scoring, this feature is particularly val
 
 <div class="alert note">
 
-By integrating full text search with semantic-based dense vector search, you can enhance the accuracy and relevance of search results. For more information, refer to [​Hybrid Search](multi-vector-search.md).​
-
-</div>
-
-<div class="alert note">
-
-Full text search is available in Milvus Standalone and Milvus Distributed but not Milvus Lite, although adding it to Milvus Lite is on the roadmap.
+- By integrating full text search with semantic-based dense vector search, you can enhance the accuracy and relevance of search results. For more information, refer to [​Hybrid Search](multi-vector-search.md).​
+- Full text search is available in Milvus Standalone and Milvus Distributed but not Milvus Lite, although adding it to Milvus Lite is on the roadmap.
 
 </div>
 
