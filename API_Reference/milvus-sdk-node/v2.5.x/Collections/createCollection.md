@@ -120,14 +120,31 @@ milvusClient.createCollection({
        type_params: {
          dim: "8"
        },
+       
        nullable: boolean,
-       default_value: DataType
+       default_value: object,
+       enable_analyzer: boolean,
+       enable_match: boolean,
+       analyzer_params: object
+       
      }
    ],
    num_partitions?: number,
    partition_key_field?: string,
    shards_num?: number,
-   timeout?: number
+   timeout?: number,
+   
+   functions: [
+      {
+        name: string,
+        description: string,
+        type: FunctionType,
+        input_field_names: string[],
+        output_field_names: string[],
+        params: Record<string, any>,
+      },
+   ]
+   
  })
 ```
 
@@ -221,7 +238,7 @@ milvusClient.createCollection({
 
             The maximum lengths of a string in this field.
 
-            This is required when the **data_type** of this field is **VARCHAR**.
+            This is required when the **data_type** of this field is **VarChar**.
 
         - **type_params** (*object*) -
 
@@ -237,9 +254,48 @@ milvusClient.createCollection({
 
         For more information, refer to [Nullable & Default](https://milvus.io/docs/nullable-and-default.md).
 
-    - **default_value** (*DataType*)
+    - **default_value** (*object*)
 
         Sets a default value for a specific field in a collection schema when creating it. This is particularly useful when you want certain fields to have an initial value even if no value is explicitly provided during data insertion.
+
+    - **enable_analyzer** (*boolean*) -
+
+        Whether to enable text analysis for the specified `VarChar` field. When set to `true`, it instructs Milvus to use a text analyzer, which tokenizes and filters the text content of the field.
+
+    - **enable_match** (*boolean*)
+
+        Whether to enable keyword matching for the specified `VarChar` field. When set to `true`, Milvus creates an inverted index for the field, allowing for quick and efficient keyword lookups. `enable_match` works in conjunction with `enable_analyzer` to provide structured term-based text search, with `enable_analyzer` handling tokenization and `enable_match` handling the search operations on these tokens.
+
+    - **analyzer_params** (*object*)
+
+        Configures the analyzer for text processing, specifically for `VarChar` fields. This parameter configures tokenizer and filter settings, particularly for text fields used in [keyword matching](https://milvus.io/docs/keyword-match.md) or [full text search](https://milvus.io/docs/full-text-search.md). Depending on the type of analyzer, it can be configured in either of the following methods:
+
+        - Built-in analyzer
+
+            ```javascript
+            const analyzer_params: { type: 'english' };
+            ```
+
+            - `type` (*string*) -
+
+                Pre-configured analyzer type built into Milvus, which can be used out-of-the-box by specifying its name. Possible values: `standard`, `english`, `chinese`. For more information, refer to [Standard Analyzer](https://milvus.io/docs/standard-analyzer.md), [English Analyzer](https://milvus.io/docs/english-analyzer.md), and [Chinese Analyzer](https://milvus.io/docs/chinese-analyzer.md).
+
+        - Custom analyzer
+
+            ```javascript
+            const analyzer_params: {
+                "tokenizer": "standard",
+                "filter": ["lowercase"],
+            };
+            ```
+
+            - `tokenizer` (*string*) -
+
+                Defines the tokenizer type. Possible values: `standard` (default), `whitespace`, `jieba`. For more information, refer to [Standard Tokenizer](https://milvus.io/docs/standard-tokenizer.md), [Whitespace Tokenizer](https://milvus.io/docs/whitespace-tokenizer.md), and [Jieba Tokenizer](https://milvus.io/docs/jieba-tokenizer.md).
+
+            - `filter` (*list*) -
+
+                Lists filters to refine tokens produced by the tokenizer, with options for built-in filters and custom filters. For more information, refer to [Alphanumonly Filter](https://milvus.io/docs/alphanumonly-filer.md) and others.
 
 - **num_partitions** (*number)* -
 
@@ -284,6 +340,32 @@ milvusClient.createCollection({
 
     The timeout duration for this operation. Setting this to **None** indicates that this operation timeouts when any response returns or error occurs.
 
+- **functions** (*list*)
+
+    Converts data into vector embeddings. This function will be added to the schema of a collection.
+
+    - **name** (*string*)
+
+        The name of the function. This identifier is used to reference the function within queries and collections.
+
+    - **description** (*string*)
+
+        A brief description of the function’s purpose. This can be useful for documentation or clarity in larger projects and defaults to an empty string.
+
+    - **type** (*[FunctionType](FunctionType.md)*)
+
+        The type of function for processing raw data. Possible values:
+
+        - `FunctionType.BM25`: Uses the BM25 algorithm for generating sparse embeddings from a `VARCHAR` field.
+
+    - **input_field_names** (*string[]*)
+
+        The name of the field containing the raw data that requires conversion to vector representation. For functions using `FunctionType.BM25`, this parameter accepts only one field name.
+
+    - **output_field_names** (*string[]*)
+
+        The name of the field where the generated embeddings will be stored. This should correspond to a vector field defined in the collection schema. For functions using `FunctionType.BM25`, this parameter accepts only one field name.
+
 ### With CreateCollectionWithSchemaAndIndexParamsReq
 
 Using this request body, you can customize the schema and index settings of the collection. Upon creation, the collection is automatically loaded.
@@ -302,8 +384,13 @@ milvusClient.createCollection({
        type_params: {
          dim: "8"
        },
+       
        nullable: boolean,
-       default_value: DataType
+       default_value: object,
+       enable_analyzer: boolean,
+       enable_match: boolean,
+       analyzer_params: object
+       
      }
    ],
    num_partitions?: number,
@@ -318,7 +405,19 @@ milvusClient.createCollection({
        metric_type?: string,
        params?: keyValueObj
      }     
+   ],
+   
+   functions: [
+      {
+        name: string,
+        description: string,
+        type: FunctionType,
+        input_field_names: string[],
+        output_field_names: string[],
+        params: Record<string, any>,
+      },
    ]
+   
  })
 ```
 
@@ -430,6 +529,45 @@ milvusClient.createCollection({
 
         Sets a default value for a specific field in a collection schema when creating it. This is particularly useful when you want certain fields to have an initial value even if no value is explicitly provided during data insertion.
 
+    - **enable_analyzer** (*boolean*) -
+
+        Whether to enable text analysis for the specified `VarChar` field. When set to `true`, it instructs Milvus to use a text analyzer, which tokenizes and filters the text content of the field.
+
+    - **enable_match** (*boolean*)
+
+        Whether to enable keyword matching for the specified `VarChar` field. When set to `true`, Milvus creates an inverted index for the field, allowing for quick and efficient keyword lookups. `enable_match` works in conjunction with `enable_analyzer` to provide structured term-based text search, with `enable_analyzer` handling tokenization and `enable_match` handling the search operations on these tokens.
+
+    - **analyzer_params** (*object*)
+
+        Configures the analyzer for text processing, specifically for `VarChar` fields. This parameter configures tokenizer and filter settings, particularly for text fields used in [keyword matching](https://milvus.io/docs/keyword-match.md) or [full text search](https://milvus.io/docs/full-text-search.md). Depending on the type of analyzer, it can be configured in either of the following methods:
+
+        - Built-in analyzer
+
+            ```javascript
+            const analyzer_params: { type: 'english' }
+            ```
+
+            - `type` (*string*) -
+
+                Pre-configured analyzer type built into Milvus, which can be used out-of-the-box by specifying its name. Possible values: `standard`, `english`, `chinese`. For more information, refer to [Standard Analyzer](https://milvus.io/docs/standard-analyzer.md), [English Analyzer](https://milvus.io/docs/english-analyzer.md), and [Chinese Analyzer](https://milvus.io/docs/chinese-analyzer.md).
+
+        - Custom analyzer
+
+            ```javascript
+            const analyzer_params: {
+                "tokenizer": "standard",
+                "filter": ["lowercase"],
+            }
+            ```
+
+            - `tokenizer` (*string*) -
+
+                Defines the tokenizer type. Possible values: `standard` (default), `whitespace`, `jieba`. For more information, refer to [Standard Tokenizer](https://milvus.io/docs/standard-tokenizer.md), [Whitespace Tokenizer](https://milvus.io/docs/whitespace-tokenizer.md), and [Jieba Tokenizer](https://milvus.io/docs/jieba-tokenizer.md).
+
+            - `filter` (*list*) -
+
+                Lists filters to refine tokens produced by the tokenizer, with options for built-in filters and custom filters. For more information, refer to [Alphanumonly Filter](https://milvus.io/docs/alphanumonly-filer.md) and others.
+
 - **num_partitions** (*number)* -
 
     The number of partitions to create in the collection.
@@ -496,6 +634,32 @@ milvusClient.createCollection({
     - **params** (*KeyValueObj*) -
 
         Extra index-related parameters in key-value pairs.
+
+- **functions** (*list*)
+
+    Converts data into vector embeddings. This function will be added to the schema of a collection.
+
+    - **name** (*string*)
+
+        The name of the function. This identifier is used to reference the function within queries and collections.
+
+    - **description** (*string*)
+
+        A brief description of the function’s purpose. This can be useful for documentation or clarity in larger projects and defaults to an empty string.
+
+    - **type** (*[FunctionType](FunctionType.md)*)
+
+        The type of function for processing raw data. Possible values:
+
+        - `FunctionType.BM25`: Uses the BM25 algorithm for generating sparse embeddings from a `VARCHAR` field.
+
+    - **input_field_names** (*string[]*)
+
+        The name of the field containing the raw data that requires conversion to vector representation. For functions using `FunctionType.BM25`, this parameter accepts only one field name.
+
+    - **output_field_names** (*string[]*)
+
+        The name of the field where the generated embeddings will be stored. This should correspond to a vector field defined in the collection schema. For functions using `FunctionType.BM25`, this parameter accepts only one field name.
 
 **RETURNS** *Promise\<ResStatus>*
 
