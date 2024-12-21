@@ -7,6 +7,68 @@ title: Release Notes
 
 Find out what’s new in Milvus! This page summarizes new features, improvements, known issues, and bug fixes in each release. You can find the release notes for each released version after v2.4.0 in this section. We suggest that you regularly visit this page to learn about updates.
 
+## v2.4.18
+
+Release Date: December 20, 2024
+
+| Milvus version | Python SDK version | Java SDK version | Node.js SDK version |
+|----------------|--------------------|------------------|---------------------|
+| 2.4.18         | 2.4.11              | 2.4.9            | 2.4.9               |
+
+Milvus 2.4.18 introduces customizable privilege groups and an enhanced Grant/Revoke API, significantly streamlining permission management. This version also brings a suite of built-in privilege groups for common operational scenarios, as well as a host of performance and stability improvements—ranging from CPU optimization to faster collection loading and more efficient indexing. In addition, critical bug fixes ensure a more resilient system, addressing issues like crash scenarios and synchronization failures. We recommend you upgrade to 2.4.18 to take advantage of these key enhancements and improved overall reliability.
+
+### Features
+
+RBAC Enhancements:
+
+- Introduces customizable privilege groups, allowing users to create, drop, list, and dynamically manage privileges (add/remove) within their defined groups.
+- Includes a suite of built-in privilege groups for common operational scenarios:
+  - Cluster-Level: *ClusterReadOnly*, *ClusterReadWrite*, *ClusterAdmin*
+  - Database-Level: *DatabaseReadOnly*, *DatabaseReadWrite*, *DatabaseAdmin*
+  - Collection-Level: *CollectionReadOnly*, *CollectionReadWrite*, *CollectionAdmin*
+- Provides a new version of the Grant/Revoke API, enabling the use of these new interfaces without the need to specify an `ObjectType`.
+
+### Improvements
+
+- Allow hyphens in partition names ([#38474](https://github.com/milvus-io/milvus/pull/38474))
+- Optimize CPU usage for health check requests ([#35595](https://github.com/milvus-io/milvus/pull/35595))
+- Support templates for expressions in RESTful APIs ([#38161](https://github.com/milvus-io/milvus/pull/38161))
+- Remove the limit on the number of load tasks per round ([#38497](https://github.com/milvus-io/milvus/pull/38497))
+- `alterindex` & `altercollection` now support modifying properties ([#38361](https://github.com/milvus-io/milvus/pull/38361) [#38111](https://github.com/milvus-io/milvus/pull/38111) [#38421](https://github.com/milvus-io/milvus/pull/38421))
+- `alterdatabase` supports deleting properties ([#38450](https://github.com/milvus-io/milvus/pull/38450))
+- Add detailed replica counts for resource groups ([#38315](https://github.com/milvus-io/milvus/pull/38315))
+- Support score-based balancing for channel policies  ([#38378](https://github.com/milvus-io/milvus/pull/38378))
+- Add metrics to count the number of non-zero values/tokens in sparse searches ([#38328](https://github.com/milvus-io/milvus/pull/38328))
+- Remove the RPC layer of the coordinator when running in standalone or mixed mode ([#38207](https://github.com/milvus-io/milvus/pull/38207))
+- Add mmap file usage metrics ([#38211](https://github.com/milvus-io/milvus/pull/38211))
+- Support database requests in RESTful API ([#38188](https://github.com/milvus-io/milvus/pull/38188))
+- Enable rate limiting for RESTful V1 ([#38190](https://github.com/milvus-io/milvus/pull/38190))
+- Add collection ID to search request count metrics ([#38144](https://github.com/milvus-io/milvus/pull/38144))
+- Refine clustering compaction logs ([#38102](https://github.com/milvus-io/milvus/pull/38102))
+- Accelerate the collection loading process ([#37841](https://github.com/milvus-io/milvus/pull/37841))
+- Improve compaction performance by removing ParamTable lookups ([#37882](https://github.com/milvus-io/milvus/pull/37882))
+- Support retrying searches when topk is reduced and results are insufficient ([#37093](https://github.com/milvus-io/milvus/pull/37093))
+- Update Knowhere version ([#38277](https://github.com/milvus-io/milvus/pull/38277))
+  - Optimize sparse index and get ~10% performance improvement
+
+### Bug fixes
+
+- Fixed a crash caused by growing-groupby ([#38553](https://github.com/milvus-io/milvus/pull/38553))
+- Fixed an issue where the `SyncSegments` RPC would always fail ([#38032](https://github.com/milvus-io/milvus/pull/38032))
+- Fixed an issue where sync tasks remained running after the DataNode had stopped ([#38441](https://github.com/milvus-io/milvus/pull/38441))
+- Fixed inaccurate general counts ([#38525](https://github.com/milvus-io/milvus/pull/38525))
+- Escaped prefixes before conducting searches in inverted indexes  ([#38425](https://github.com/milvus-io/milvus/pull/38425))
+- Fixed an issue where roles could be dropped even though grants still existed ([#38369](https://github.com/milvus-io/milvus/pull/38369))
+- Fixed empty import task results ([#38317](https://github.com/milvus-io/milvus/pull/38317))
+- Fixed a DataNode issue where progress could stall at the writer buffer memory check ([#38287](https://github.com/milvus-io/milvus/pull/38287))
+- Fixed an issue that prevented the permission grant on the `manualcompact` API ([#38168](https://github.com/milvus-io/milvus/pull/38168))
+- Fixed inaccurate partition count metrics ([#38073](https://github.com/milvus-io/milvus/pull/38073))
+- Accelerated flushing speed by optimizing lock usage ([#37897](https://github.com/milvus-io/milvus/pull/37897))
+- Handled errors gracefully when the compaction queue is full ([#37990](https://github.com/milvus-io/milvus/pull/37990))
+- Optimized loading speed by separating the pool for target observation and collection loading ([#37735](https://github.com/milvus-io/milvus/pull/37735))
+- Fixed a crash caused by retrieving varchar data from a memory-mapped growing segment ([#37995](https://github.com/milvus-io/milvus/pull/37995))
+- Fixed an issue where channels could be accidentally released after balancing ([#37940](https://github.com/milvus-io/milvus/pull/37940))
+
 ## v2.4.17
 
 Release Date: November 22, 2024
