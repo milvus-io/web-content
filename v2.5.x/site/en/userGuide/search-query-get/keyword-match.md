@@ -269,30 +269,57 @@ const filter = "TEXT_MATCH(text, 'machine deep')";
 export filter="\"TEXT_MATCH(text, 'machine deep')\""
 ```
 
-You can also combine multiple `TEXT_MATCH` expressions using logical operators to perform **AND** matching. For example, to search for documents containing both `machine` and `deep` in the `text` field, use the following expression:​
+You can also combine multiple `TEXT_MATCH` expressions using logical operators to perform **AND** matching.
 
-<div class="multipleCode">
-    <a href="#python">Python </a>
-    <a href="#java">Java</a>
-    <a href="#javascript">Node.js</a>
-    <a href="#curl">cURL</a>
-</div>
+- To search for documents containing both `machine` and `deep` in the `text` field, use the following expression:​
 
-```python
-filter = "TEXT_MATCH(text, 'machine') and TEXT_MATCH(text, 'deep')"​
-```
+    <div class="multipleCode">
+        <a href="#python">Python </a>
+        <a href="#java">Java</a>
+        <a href="#javascript">Node.js</a>
+        <a href="#curl">cURL</a>
+    </div>
 
-```java
-String filter = "TEXT_MATCH(text, 'machine') and TEXT_MATCH(text, 'deep')";
-```
+    ```python
+    filter = "TEXT_MATCH(text, 'machine') and TEXT_MATCH(text, 'deep')"​
+    ```
 
-```javascript
-const filter = "TEXT_MATCH(text, 'machine') and TEXT_MATCH(text, 'deep')"
-```
+    ```java
+    String filter = "TEXT_MATCH(text, 'machine') and TEXT_MATCH(text, 'deep')";
+    ```
 
-```curl
-export filter="\"TEXT_MATCH(text, 'machine') and TEXT_MATCH(text, 'deep')\""
-```
+    ```javascript
+    const filter = "TEXT_MATCH(text, 'machine') and TEXT_MATCH(text, 'deep')"
+    ```
+
+    ```curl
+    export filter="\"TEXT_MATCH(text, 'machine') and TEXT_MATCH(text, 'deep')\""
+    ```
+
+- To search for documents containing both `machine` and `learning` but without `deep` in the `text` field, use the following expressions:
+
+    <div class="multipleCode">
+        <a href="#python">Python </a>
+        <a href="#java">Java</a>
+        <a href="#javascript">Node.js</a>
+        <a href="#curl">cURL</a>
+    </div>
+
+    ```python
+    filter = "not TEXT_MATCH(text, 'deep') and TEXT_MATCH(text, 'machine') and TEXT_MATCH(text, 'learning')"
+    ```
+
+    ```java
+    String filter = "not TEXT_MATCH(text, 'deep') and TEXT_MATCH(text, 'machine') and TEXT_MATCH(text, 'learning')";
+    ```
+
+    ```javascript
+    const filter = "not TEXT_MATCH(text, 'deep') and TEXT_MATCH(text, 'machine') and TEXT_MATCH(text, 'learning')";
+    ```
+
+    ```curl
+    export filter="\"not TEXT_MATCH(text, 'deep') and TEXT_MATCH(text, 'machine') and TEXT_MATCH(text, 'learning')\""
+    ```
 
 ### Search with text match​
 
