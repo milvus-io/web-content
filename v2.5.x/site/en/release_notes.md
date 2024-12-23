@@ -8,15 +8,15 @@ title: Release Notes
 
 Find out what’s new in Milvus! This page summarizes new features, improvements, known issues, and bug fixes in each release. You can find the release notes for each released version after v2.5.0 in this section. We suggest that you regularly visit this page to learn about updates.
 
-## v2.5.0-beta
+## v2.5.0
 
-Release date: November 26, 2024
+Release date: December 23, 2024
 
 | Milvus version | Python SDK version | Node.js SDK version | Java SDK version |
 |----------------|--------------------|---------------------|------------------|
-| 2.5.0-beta     | 2.5.0              | 2.5.0               | 2.5.0            |
+| 2.5.0          | 2.5.1              | 2.5.2               | 2.5.2            |
 
-Milvus 2.5.0-beta brings significant advancements to enhance usability, scalability, and performance for users dealing with vector search and large-scale data management. With this release, Milvus integrates powerful new features like term-based search, clustering compaction for optimized queries, and versatile support for sparse and dense vector search methods. Enhancements in cluster management, indexing, and data handling introduce new levels of flexibility and ease of use, making Milvus an even more robust and user-friendly vector database.
+Milvus 2.5.0 brings significant advancements to enhance usability, scalability, and performance for users dealing with vector search and large-scale data management. With this release, Milvus integrates powerful new features like term-based search, clustering compaction for optimized queries, and versatile support for sparse and dense vector search methods. Enhancements in cluster management, indexing, and data handling introduce new levels of flexibility and ease of use, making Milvus an even more robust and user-friendly vector database.
 
 ### Key Features
 
@@ -125,3 +125,15 @@ Optimized the concurrency performance of Data Definition Language (DDL) operatio
 #### RESTful API Feature Alignment
 
 Aligned the functionalities of the RESTful API with other SDKs for consistency.
+
+#### Security & Configuration Updates
+
+Supported TLS to secure inter-node communication in more complex or enterprise environments. For details, refer to [Security Configuration](tls.md).
+
+#### Compaction Performance Enhancements
+
+Removed maximum segment limitations in mixed compaction and now prioritizes smaller segments first, improving efficiency and speeding up queries on large or fragmented datasets.
+
+#### Score-Based Channel Balancing
+
+Introduced a policy that dynamically balances loads across channels, enhancing resource utilization and overall stability in large-scale deployments.
