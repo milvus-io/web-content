@@ -266,9 +266,11 @@ schema.<span class="hljs-title function_">addField</span>(<span class="hljs-titl
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-curl"><span class="hljs-keyword">export</span> filter=<span class="hljs-string">&quot;\&quot;TEXT_MATCH(text, &#x27;machine deep&#x27;)\&quot;&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Vous pouvez également combiner plusieurs expressions <code translate="no">TEXT_MATCH</code> à l'aide d'opérateurs logiques pour effectuer une correspondance <strong>ET.</strong> Par exemple, pour rechercher des documents contenant à la fois <code translate="no">machine</code> et <code translate="no">deep</code> dans le champ <code translate="no">text</code>, utilisez l'expression suivante.</p>
-<div class="multipleCode">
-   <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
+<p>Vous pouvez également combiner plusieurs expressions <code translate="no">TEXT_MATCH</code> à l'aide d'opérateurs logiques pour effectuer une correspondance <strong>ET.</strong> </p>
+<ul>
+<li><p>Pour rechercher les documents contenant à la fois <code translate="no">machine</code> et <code translate="no">deep</code> dans le champ <code translate="no">text</code>, utilisez l'expression suivante.</p>
+<p><div class="multipleCode">
+<a href="#python">Python </a><a href="#java">Java</a><a href="#javascript">Node.js</a><a href="#curl">cURL</a></div></p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&quot;TEXT_MATCH(text, &#x27;machine&#x27;) and TEXT_MATCH(text, &#x27;deep&#x27;)&quot;</span>​
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-java"><span class="hljs-title class_">String</span> filter = <span class="hljs-string">&quot;TEXT_MATCH(text, &#x27;machine&#x27;) and TEXT_MATCH(text, &#x27;deep&#x27;)&quot;</span>;
@@ -276,7 +278,19 @@ schema.<span class="hljs-title function_">addField</span>(<span class="hljs-titl
 <pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> filter = <span class="hljs-string">&quot;TEXT_MATCH(text, &#x27;machine&#x27;) and TEXT_MATCH(text, &#x27;deep&#x27;)&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-curl"><span class="hljs-keyword">export</span> filter=<span class="hljs-string">&quot;\&quot;TEXT_MATCH(text, &#x27;machine&#x27;) and TEXT_MATCH(text, &#x27;deep&#x27;)\&quot;&quot;</span>
+<button class="copy-code-btn"></button></code></pre></li>
+<li><p>Pour rechercher les documents contenant à la fois <code translate="no">machine</code> et <code translate="no">learning</code> mais sans <code translate="no">deep</code> dans le champ <code translate="no">text</code>, utilisez les expressions suivantes :</p>
+<p><div class="multipleCode">
+<a href="#python">Python </a><a href="#java">Java</a><a href="#javascript">Node.js</a><a href="#curl">cURL</a></div></p>
+<pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&quot;not TEXT_MATCH(text, &#x27;deep&#x27;) and TEXT_MATCH(text, &#x27;machine&#x27;) and TEXT_MATCH(text, &#x27;learning&#x27;)&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java"><span class="hljs-title class_">String</span> filter = <span class="hljs-string">&quot;not TEXT_MATCH(text, &#x27;deep&#x27;) and TEXT_MATCH(text, &#x27;machine&#x27;) and TEXT_MATCH(text, &#x27;learning&#x27;)&quot;</span>;
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> filter = <span class="hljs-string">&quot;not TEXT_MATCH(text, &#x27;deep&#x27;) and TEXT_MATCH(text, &#x27;machine&#x27;) and TEXT_MATCH(text, &#x27;learning&#x27;)&quot;</span>;
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-curl"><span class="hljs-keyword">export</span> filter=<span class="hljs-string">&quot;\&quot;not TEXT_MATCH(text, &#x27;deep&#x27;) and TEXT_MATCH(text, &#x27;machine&#x27;) and TEXT_MATCH(text, &#x27;learning&#x27;)\&quot;&quot;</span>
+<button class="copy-code-btn"></button></code></pre></li>
+</ul>
 <h3 id="Search-with-text-match​" class="common-anchor-header">Recherche avec correspondance de texte</h3><p>La correspondance de texte peut être utilisée en combinaison avec la recherche de similarité vectorielle pour restreindre le champ de recherche et améliorer les performances de la recherche. En filtrant la collection à l'aide de la correspondance de texte avant la recherche de similarité vectorielle, vous pouvez réduire le nombre de documents à rechercher, ce qui accélère les temps de recherche.</p>
 <p>Dans cet exemple, l'expression <code translate="no">filter</code> filtre les résultats de la recherche pour n'inclure que les documents qui correspondent au terme spécifié <code translate="no">keyword1</code> ou <code translate="no">keyword2</code>. La recherche vectorielle de similarité est ensuite effectuée sur ce sous-ensemble de documents filtrés.</p>
 <div class="multipleCode">
@@ -409,4 +423,10 @@ curl --request POST \
     </button></h2><ul>
 <li><p>L'activation de la correspondance textuelle pour un champ déclenche la création d'un index inversé, qui consomme des ressources de stockage. Tenez compte de l'impact sur le stockage lorsque vous décidez d'activer cette fonctionnalité, car il varie en fonction de la taille du texte, des jetons uniques et de l'analyseur utilisé.</p></li>
 <li><p>Une fois que vous avez défini un analyseur dans votre schéma, ses paramètres deviennent permanents pour cette collection. Si vous décidez qu'un autre analyseur répondrait mieux à vos besoins, vous pouvez envisager d'abandonner la collection existante et d'en créer une nouvelle avec la configuration d'analyseur souhaitée.</p></li>
+<li><p>Règles d'échappement dans les expressions <code translate="no">filter</code>:</p>
+<ul>
+<li>Les caractères placés entre guillemets doubles ou simples dans les expressions sont interprétés comme des constantes de chaîne. Si la constante de chaîne comprend des caractères d'échappement, ceux-ci doivent être représentés par une séquence d'échappement. Par exemple, utilisez <code translate="no">\\</code> pour représenter <code translate="no">\</code>, <code translate="no">\\t</code> pour représenter une tabulation <code translate="no">\t</code>, et <code translate="no">\\n</code> pour représenter une nouvelle ligne.</li>
+<li>Si une constante de chaîne est entourée de guillemets simples, un guillemet simple à l'intérieur de la constante doit être représenté par <code translate="no">\\'</code>, tandis qu'un guillemet double peut être représenté par <code translate="no">&quot;</code> ou <code translate="no">\\&quot;</code>. Exemple : <code translate="no">'It\\'s milvus'</code>.</li>
+<li>Si une constante de chaîne est entourée de guillemets doubles, un guillemet double à l'intérieur de la constante doit être représenté par <code translate="no">\\&quot;</code> tandis qu'un guillemet simple peut être représenté par <code translate="no">'</code> ou <code translate="no">\\'</code>. Exemple : <code translate="no">&quot;He said \\&quot;Hi\\&quot;&quot;</code>.</li>
+</ul></li>
 </ul>

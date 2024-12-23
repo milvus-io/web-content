@@ -26,10 +26,10 @@ summary: >-
     </button></h1><p>La recherche en texte intégral est une fonction qui permet de récupérer des documents contenant des termes ou des phrases spécifiques dans des ensembles de données textuelles, puis de classer les résultats en fonction de leur pertinence. Cette fonction permet de surmonter les limites de la recherche sémantique, qui peut négliger des termes précis, et de garantir que vous recevrez les résultats les plus précis et les plus pertinents sur le plan contextuel. En outre, elle simplifie les recherches vectorielles en acceptant les entrées de texte brut, convertissant automatiquement vos données textuelles en encastrements épars sans qu'il soit nécessaire de générer manuellement des encastrements vectoriels.</p>
 <p>Utilisant l'algorithme BM25 pour l'évaluation de la pertinence, cette fonction est particulièrement utile dans les scénarios de génération augmentée de recherche (RAG), où elle donne la priorité aux documents qui correspondent étroitement à des termes de recherche spécifiques.</p>
 <div class="alert note">
-<p>En intégrant la recherche en texte intégral à la recherche vectorielle dense basée sur la sémantique, vous pouvez améliorer la précision et la pertinence des résultats de la recherche. Pour plus d'informations, voir <a href="/docs/fr/multi-vector-search.md">Recherche hybride</a>.</p>
-</div>
-<div class="alert note">
-<p>La recherche en texte intégral est disponible dans Milvus Standalone et Milvus Distributed mais pas dans Milvus Lite, bien que l'ajout de cette fonction à Milvus Lite soit prévu dans la feuille de route.</p>
+<ul>
+<li>En intégrant la recherche en texte intégral à la recherche vectorielle dense basée sur la sémantique, vous pouvez améliorer la précision et la pertinence des résultats de la recherche. Pour plus d'informations, voir <a href="/docs/fr/multi-vector-search.md">Recherche hybride</a>.</li>
+<li>La recherche plein texte est disponible dans Milvus Standalone et Milvus Distributed mais pas dans Milvus Lite, bien que l'ajout de cette fonction à Milvus Lite soit prévu dans la feuille de route.</li>
+</ul>
 </div>
 <h2 id="Overview​" class="common-anchor-header">Vue d'ensemble<button data-href="#Overview​" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -177,7 +177,7 @@ schema.addField(AddFieldReq.builder()
 <ul>
 <li><p><code translate="no">id</code>: sert de clé primaire et est automatiquement généré avec <code translate="no">auto_id=True</code>.</p></li>
 <li><p><code translate="no">text</code>Le champ : stocke vos données textuelles brutes pour les opérations de recherche en texte intégral. Le type de données doit être <code translate="no">VARCHAR</code>, car <code translate="no">VARCHAR</code> est le type de données de chaîne de Milvus pour le stockage de texte. Définissez <code translate="no">enable_analyzer=True</code> pour permettre à Milvus de symboliser le texte. Par défaut, Milvus utilise l'<a href="/docs/fr/standard-analyzer.md">analyseur standard</a> pour l'analyse de texte. Pour configurer un autre analyseur, reportez-vous à la section <a href="/docs/fr/analyzer-overview.md">Vue d'ensemble</a>.</p></li>
-<li><p><code translate="no">sparse</code>: un champ vectoriel réservé au stockage des enchâssements épars générés en interne pour les opérations de recherche plein texte. Le type de données doit être <code translate="no">SPARSE_FLOAT_VECTOR</code>.</p></li>
+<li><p><code translate="no">sparse</code>: un champ vectoriel réservé au stockage des enchâssements épars générés en interne pour les opérations de recherche en texte intégral. Le type de données doit être <code translate="no">SPARSE_FLOAT_VECTOR</code>.</p></li>
 </ul>
 <p>Définissez maintenant une fonction qui convertira votre texte en représentations vectorielles éparses, puis ajoutez-la au schéma.</p>
 <div class="multipleCode">

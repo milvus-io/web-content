@@ -63,8 +63,8 @@ title: テキストマッチ
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>テキストマッチは<code translate="no">VARCHAR</code> フィールドタイプで機能します。これは基本的にmilvusの文字列データ型です。テキスト照合を有効にするには、<code translate="no">enable_analyzer</code> と<code translate="no">enable_match</code> の両方を<code translate="no">True</code> に設定し、コレクションスキーマを定義するときにオプションでテキスト分析用のアナライザを設定します。</p>
-<h3 id="Set-enableanalyzer-and-enablematch​" class="common-anchor-header"><code translate="no">enable_analyzer</code> および<code translate="no">enable_match</code>を設定します。</h3><p>特定の<code translate="no">VARCHAR</code> フィールドのテキスト照合を有効にするには、フィールドスキーマの定義時に<code translate="no">enable_analyzer</code> と<code translate="no">enable_match</code> パラメータの両方を<code translate="no">True</code> に設定します。これにより、Milvusはテキストをトークン化し、指定されたフィールドに対して転置インデックスを作成し、高速で効率的なテキストマッチを可能にします。</p>
+    </button></h2><p>テキストマッチは<code translate="no">VARCHAR</code> フィールドタイプで機能します。これは基本的にmilvusの文字列データ型です。テキスト照合を有効にするには、<code translate="no">enable_analyzer</code> と<code translate="no">enable_match</code> の両方を<code translate="no">True</code> に設定し、コレクションスキーマを定義する際にオプションでテキスト分析用のアナライザを設定します。</p>
+<h3 id="Set-enableanalyzer-and-enablematch​" class="common-anchor-header"><code translate="no">enable_analyzer</code> および<code translate="no">enable_match</code>を設定します。</h3><p>特定の<code translate="no">VARCHAR</code> フィールドのテキスト照合を有効にするには、フィールドスキーマを定義する際に<code translate="no">enable_analyzer</code> と<code translate="no">enable_match</code> の両方のパラメータを<code translate="no">True</code> に設定します。これにより、Milvusはテキストをトークン化し、指定されたフィールドに対して転置インデックスを作成し、高速で効率的なテキストマッチを可能にします。</p>
 <div class="multipleCode">
    <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType​
@@ -261,9 +261,11 @@ schema.<span class="hljs-title function_">addField</span>(<span class="hljs-titl
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-curl"><span class="hljs-keyword">export</span> filter=<span class="hljs-string">&quot;\&quot;TEXT_MATCH(text, &#x27;machine deep&#x27;)\&quot;&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>また、論理演算子を使用して複数の<code translate="no">TEXT_MATCH</code> 式を組み合わせ、<strong>AND</strong>マッチを実行することもできます。たとえば、<code translate="no">text</code> フィールドに<code translate="no">machine</code> と<code translate="no">deep</code> の両方を含む文書を検索するには、次の式を使用します。</p>
-<div class="multipleCode">
-   <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
+<p>論理演算子を使用して複数の<code translate="no">TEXT_MATCH</code> 式を組み合わせ、<strong>AND</strong>マッチングを実行することもできます。</p>
+<ul>
+<li><p><code translate="no">text</code> フィールドに<code translate="no">machine</code> と<code translate="no">deep</code> の両方を含む文書を検索するには、次の式を使用します。</p>
+<p><div class="multipleCode">
+<a href="#python">Python </a><a href="#java">Java</a><a href="#javascript">Node.js</a><a href="#curl">cURL</a></div></p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&quot;TEXT_MATCH(text, &#x27;machine&#x27;) and TEXT_MATCH(text, &#x27;deep&#x27;)&quot;</span>​
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-java"><span class="hljs-title class_">String</span> filter = <span class="hljs-string">&quot;TEXT_MATCH(text, &#x27;machine&#x27;) and TEXT_MATCH(text, &#x27;deep&#x27;)&quot;</span>;
@@ -271,8 +273,20 @@ schema.<span class="hljs-title function_">addField</span>(<span class="hljs-titl
 <pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> filter = <span class="hljs-string">&quot;TEXT_MATCH(text, &#x27;machine&#x27;) and TEXT_MATCH(text, &#x27;deep&#x27;)&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-curl"><span class="hljs-keyword">export</span> filter=<span class="hljs-string">&quot;\&quot;TEXT_MATCH(text, &#x27;machine&#x27;) and TEXT_MATCH(text, &#x27;deep&#x27;)\&quot;&quot;</span>
+<button class="copy-code-btn"></button></code></pre></li>
+<li><p><code translate="no">machine</code> と<code translate="no">learning</code> の両方を含み、<code translate="no">text</code> フィールドに<code translate="no">deep</code> を含まない文書を検索するには、以下の式を使用する：</p>
+<p><div class="multipleCode">
+<a href="#python">Python </a><a href="#java">Java</a><a href="#javascript">Node.js</a><a href="#curl">cURL</a></div></p>
+<pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&quot;not TEXT_MATCH(text, &#x27;deep&#x27;) and TEXT_MATCH(text, &#x27;machine&#x27;) and TEXT_MATCH(text, &#x27;learning&#x27;)&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Search-with-text-match​" class="common-anchor-header">テキストマッチによる検索</h3><p>テキスト・マッチをベクトル類似性検索と組み合わせて使用することで、検索範囲を狭め、検索パフォーマンスを向上させることができます。ベクトル類似検索の前にテキストマッチを使ってコレクションをフィルタリングすることで、検索が必要なドキュメントの数を減らすことができ、結果的にクエリー時間を短縮することができます。</p>
+<pre><code translate="no" class="language-java"><span class="hljs-title class_">String</span> filter = <span class="hljs-string">&quot;not TEXT_MATCH(text, &#x27;deep&#x27;) and TEXT_MATCH(text, &#x27;machine&#x27;) and TEXT_MATCH(text, &#x27;learning&#x27;)&quot;</span>;
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> filter = <span class="hljs-string">&quot;not TEXT_MATCH(text, &#x27;deep&#x27;) and TEXT_MATCH(text, &#x27;machine&#x27;) and TEXT_MATCH(text, &#x27;learning&#x27;)&quot;</span>;
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-curl"><span class="hljs-keyword">export</span> filter=<span class="hljs-string">&quot;\&quot;not TEXT_MATCH(text, &#x27;deep&#x27;) and TEXT_MATCH(text, &#x27;machine&#x27;) and TEXT_MATCH(text, &#x27;learning&#x27;)\&quot;&quot;</span>
+<button class="copy-code-btn"></button></code></pre></li>
+</ul>
+<h3 id="Search-with-text-match​" class="common-anchor-header">テキスト・マッチによる検索</h3><p>テキスト・マッチをベクトル類似性検索と組み合わせて使うことで、検索範囲を狭め、検索パフォーマンスを向上させることができる。ベクトル類似検索の前にテキストマッチを使ってコレクションをフィルタリングすることで、検索が必要なドキュメントの数を減らすことができ、結果的にクエリー時間を短縮することができます。</p>
 <p>この例では、<code translate="no">filter</code> 式は、指定された用語<code translate="no">keyword1</code> または<code translate="no">keyword2</code> に一致する文書のみを含むように検索結果をフィルタリングします。その後、ベクトル類似性検索は、このフィルタリングされた文書のサブセットに対して実行されます。</p>
 <div class="multipleCode">
    <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
@@ -339,7 +353,7 @@ curl --request POST \
     &quot;outputFields&quot;: [&quot;text&quot;,&quot;id&quot;]
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Query-with-text-match​" class="common-anchor-header">テキストマッチによるクエリー</h3><p>テキストマッチは、クエリー操作のスカラーフィルタリングにも使うことができる。<code translate="no">query()</code> メソッドの<code translate="no">expr</code> パラメータに<code translate="no">TEXT_MATCH</code> 式を指定することで、与えられた条件にマッチするドキュメントを取得することができます。</p>
+<h3 id="Query-with-text-match​" class="common-anchor-header">テキストマッチによるクエリー</h3><p>テキストマッチは、クエリー操作のスカラーフィルタリングにも使うことができる。<code translate="no">query()</code> メソッドの<code translate="no">expr</code> パラメータに<code translate="no">TEXT_MATCH</code> 式を指定することで、指定した条件にマッチするドキュメントを取得することができます。</p>
 <p>以下の例は、<code translate="no">text</code> フィールドが<code translate="no">keyword1</code> と<code translate="no">keyword2</code> の両方の用語を含むドキュメントを検索します。</p>
 <div class="multipleCode">
    <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
@@ -403,5 +417,11 @@ curl --request POST \
       </svg>
     </button></h2><ul>
 <li><p>フィールドのテキスト・マッチを有効にすると、転置インデックスが作成され、 ストレージ・リソースが消費されます。この機能を有効にするかどうかは、テキストのサイズや一意なトークン、使用する解析器によって異なるので、ストレージへの影響を考慮してください。</p></li>
-<li><p>スキーマでアナライザを定義すると、その設定はそのコレクションに対して永続的になります。別のアナライザの方がニーズに合っていると判断した場合は、既存のコレクションを削除して、必要なアナライザ設定で新しいコレクションを作成することを検討できます。</p></li>
+<li><p>スキーマでアナライザを定義すると、その設定はそのコレクションに対して永続的になります。異なるアナライザがよりニーズに合うと判断した場合は、既存のコレクションを削除し、希望するアナライザ設定で新しいコレクションを作成することを検討してください。</p></li>
+<li><p><code translate="no">filter</code> 式のエスケープ規則：</p>
+<ul>
+<li>式内の二重引用符または一重引用符で囲まれた文字は、文字列定数として解釈されます。文字列定数にエスケープ文字が含まれる場合、エスケープ文字はエスケープシーケンスで表現しなければならない。例えば、<code translate="no">\</code> を表すには<code translate="no">\\</code> を、タブを表すには<code translate="no">\\t</code> を、改行を表すには<code translate="no">\t</code> を、<code translate="no">\\n</code> を使用する。</li>
+<li><code translate="no">'It\\'s milvus'</code>文字列定数が一重引用符で囲まれている場合、定数内の一重引用符は<code translate="no">\\'</code> と表現し、二重引用符は<code translate="no">&quot;</code> または<code translate="no">\\&quot;</code> と表現する。</li>
+<li><code translate="no">&quot;He said \\&quot;Hi\\&quot;&quot;</code>文字列定数が二重引用符で囲まれている場合、定数内の二重引用符は<code translate="no">\\&quot;</code> 、一重引用符は<code translate="no">'</code> または<code translate="no">\\'</code> のように表す。</li>
+</ul></li>
 </ul>

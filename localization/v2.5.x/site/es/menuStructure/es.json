@@ -559,7 +559,7 @@
                     "children": []
                   },
                   {
-                    "label": "Length",
+                    "label": "Longitud",
                     "id": "length-filter.md",
                     "order": 5,
                     "children": []
@@ -660,7 +660,7 @@
         ]
       },
       {
-        "label": "Búsqueda y renombre",
+        "label": "Búsqueda y Rerank",
         "id": "search-rerank",
         "order": 5,
         "isMenu": true,
@@ -994,7 +994,7 @@
                 "children": []
               },
               {
-                "label": "Implantación en GCP",
+                "label": "Despliegue en GCP",
                 "id": "gcp.md",
                 "order": 2,
                 "children": []

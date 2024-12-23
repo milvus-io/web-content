@@ -79,7 +79,7 @@ title: Milvus_CLI 명령 참조
 </tbody>
 </table>
 <p><h3 id="connect">예제</h3></p>
-<pre><code translate="no" class="language-shell">milvus_cli &gt; connect -uri <span class="hljs-attr">http</span>:<span class="hljs-comment">//127.0.0.1:19530 </span>
+<pre><code translate="no" class="language-shell">milvus_cli &gt; connect -uri <span class="hljs-attr">http</span>:<span class="hljs-comment">//127.0.0.1:19530</span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="create-Database" class="common-anchor-header">데이터베이스 생성<button data-href="#create-Database" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -98,7 +98,7 @@ title: Milvus_CLI 명령 참조
       </svg>
     </button></h2><p>밀버스에서 데이터베이스 만들기</p>
 <p><h3 id="create-database">구문</h3></p>
-<pre><code translate="no" class="language-shell">create database -db (text) 
+<pre><code translate="no" class="language-shell">create database -db (text)
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Options" class="common-anchor-header">옵션</h3><table>
 <thead>
@@ -129,7 +129,7 @@ title: Milvus_CLI 명령 참조
       </svg>
     </button></h2><p>밀버스에서 데이터베이스 사용</p>
 <p><h3 id="use-database">구문</h3></p>
-<pre><code translate="no" class="language-shell">use database -db (text) 
+<pre><code translate="no" class="language-shell">use database -db (text)
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Options" class="common-anchor-header">옵션</h3><table>
 <thead>
@@ -160,7 +160,7 @@ title: Milvus_CLI 명령 참조
       </svg>
     </button></h2><p>밀버스에서 데이터베이스 나열</p>
 <p><h3 id="list-database">구문</h3></p>
-<pre><code translate="no" class="language-shell">list databases 
+<pre><code translate="no" class="language-shell">list databases
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Examples" class="common-anchor-header">예제</h3><h4 id="Example-1" class="common-anchor-header">예제 1</h4><p>다음 예제는 밀버스로 데이터베이스를 나열합니다.</p>
 <pre><code translate="no" class="language-shell">milvus_cli &gt; list databases
@@ -182,7 +182,7 @@ title: Milvus_CLI 명령 참조
       </svg>
     </button></h2><p>밀버스에서 데이터베이스 삭제</p>
 <p><h3 id="delete-database">구문</h3></p>
-<pre><code translate="no" class="language-shell"><span class="hljs-keyword">delete</span> database -<span class="hljs-title function_">db</span> (text) 
+<pre><code translate="no" class="language-shell"><span class="hljs-keyword">delete</span> database -<span class="hljs-title function_">db</span> (text)
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Options" class="common-anchor-header">옵션</h3><table>
 <thead>
@@ -228,6 +228,37 @@ title: Milvus_CLI 명령 참조
 <h3 id="Examples" class="common-anchor-header">예제</h3><h4 id="Example-1" class="common-anchor-header">예제 1</h4><p>다음 예에서는 밀버스에서 <code translate="no">zilliz</code> 사용자 및 <code translate="no">zilliz</code> 비밀번호를 만듭니다.</p>
 <pre><code translate="no" class="language-shell">milvus_cli &gt; create user -u zilliz -p zilliz
 <button class="copy-code-btn"></button></code></pre>
+<h2 id="create-role" class="common-anchor-header">역할 만들기<button data-href="#create-role" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>밀버스에서 역할 만들기</p>
+<p><h3 id="create-role">구문</h3></p>
+<pre><code translate="no" class="language-shell">create role -r (text)
+<button class="copy-code-btn"></button></code></pre>
+<h3 id="Options" class="common-anchor-header">옵션</h3><table>
+<thead>
+<tr><th style="text-align:left">옵션</th><th style="text-align:left">전체 이름</th><th style="text-align:left">설명</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">-r</td><td style="text-align:left">-역할 이름</td><td style="text-align:left">밀버스 역할의 역할 이름입니다.</td></tr>
+<tr><td style="text-align:left">-help</td><td style="text-align:left">n/a</td><td style="text-align:left">명령 사용에 대한 도움말을 표시합니다.</td></tr>
+</tbody>
+</table>
+<h3 id="Examples" class="common-anchor-header">예제</h3><h4 id="Example-1" class="common-anchor-header">예제 1</h4><p>다음 예에서는 밀버스에서 <code translate="no">role1</code> 역할을 만듭니다.</p>
+<pre><code translate="no" class="language-shell">milvus_cli &gt; create role -r role1
+<button class="copy-code-btn"></button></code></pre>
 <h2 id="create-alias" class="common-anchor-header">별칭 만들기<button data-href="#create-alias" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -246,7 +277,7 @@ title: Milvus_CLI 명령 참조
     </button></h2><p>컬렉션의 고유한 별칭을 지정합니다.</p>
 <div class="alert note">컬렉션에는 여러 개의 별칭을 가질 수 있습니다. 그러나 별칭은 최대 하나의 컬렉션에 해당합니다.</div>
 <p><h3 id="create-alias">구문</h3></p>
-<pre><code translate="no" class="language-shell">create <span class="hljs-built_in">alias</span> -c (text) -a (text) [-A] 
+<pre><code translate="no" class="language-shell">create <span class="hljs-built_in">alias</span> -c (text) -a (text) [-A]
 <button class="copy-code-btn"></button></code></pre>
 <p><h3 id="create-alias">옵션</h3></p>
 <table>
@@ -385,10 +416,10 @@ The name of the field to create an index <span class="hljs-keyword">for</span> (
 Index name: vectorIndex
 
 <span class="hljs-comment"># Default is &#x27;&#x27;</span>
-Index <span class="hljs-built_in">type</span> FLAT, IVF_FLAT, IVF_SQ8, IVF_PQ, RNSG, HNSW, ANNOY, AUTOINDEX, DISKANN, GPU_IVF_FLAT, GPU_IVF_PQ, SPARSE_INVERTED_INDEX, SPARSE_WAND, SCANN, STL_SORT, Trie, INVERTED, ) []: IVF_FLAT  
+Index <span class="hljs-built_in">type</span> FLAT, IVF_FLAT, IVF_SQ8, IVF_PQ, RNSG, HNSW, ANNOY, AUTOINDEX, DISKANN, GPU_IVF_FLAT, GPU_IVF_PQ, SPARSE_INVERTED_INDEX, SPARSE_WAND, SCANN, STL_SORT, Trie, INVERTED, ) []: IVF_FLAT
 
 <span class="hljs-comment"># Default is &#x27;&#x27;</span>
-Index metric <span class="hljs-built_in">type</span> (L2, IP, HAMMING, TANIMOTO, COSINE, ) []: 
+Index metric <span class="hljs-built_in">type</span> (L2, IP, HAMMING, TANIMOTO, COSINE, ) []:
 
 Timeout []:
 <button class="copy-code-btn"></button></code></pre>
@@ -421,7 +452,38 @@ Timeout []:
 </table>
 <h3 id="Example" class="common-anchor-header">예제</h3><pre><code translate="no" class="language-shell">milvus_cli &gt; <span class="hljs-keyword">delete</span> user -u zilliz
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="delete-alias" class="common-anchor-header">삭제 별칭<button data-href="#delete-alias" class="anchor-icon" translate="no">
+<h2 id="delete-role" class="common-anchor-header">삭제 역할<button data-href="#delete-role" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>Milvus에서 역할 삭제</p>
+<p><h3 id="delete-role">구문</h3></p>
+<pre><code translate="no" class="language-shell"><span class="hljs-keyword">delete</span> role -<span class="hljs-title function_">r</span> (text)
+<button class="copy-code-btn"></button></code></pre>
+<h3 id="Options" class="common-anchor-header">옵션</h3><table>
+<thead>
+<tr><th style="text-align:left">옵션</th><th style="text-align:left">전체 이름</th><th style="text-align:left">설명</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">-r</td><td style="text-align:left">-역할 이름</td><td style="text-align:left">밀버스 역할의 역할 이름입니다.</td></tr>
+<tr><td style="text-align:left">-help</td><td style="text-align:left">n/a</td><td style="text-align:left">명령 사용에 대한 도움말을 표시합니다.</td></tr>
+</tbody>
+</table>
+<h3 id="Examples" class="common-anchor-header">예제</h3><p>다음 예는 밀버스에서 <code translate="no">role1</code> 역할을 삭제합니다.</p>
+<pre><code translate="no" class="language-shell">milvus_cli &gt; <span class="hljs-keyword">delete</span> role -r role1
+<button class="copy-code-btn"></button></code></pre>
+<h2 id="delete-alias" class="common-anchor-header">별칭 삭제<button data-href="#delete-alias" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -438,7 +500,7 @@ Timeout []:
       </svg>
     </button></h2><p>별칭을 삭제합니다.</p>
 <p><h3 id="delete-alias">구문</h3></p>
-<pre><code translate="no" class="language-shell"><span class="hljs-keyword">delete</span> alias -<span class="hljs-title function_">a</span> (text) 
+<pre><code translate="no" class="language-shell"><span class="hljs-keyword">delete</span> alias -<span class="hljs-title function_">a</span> (text)
 <button class="copy-code-btn"></button></code></pre>
 <p><h3 id="delete-alias">옵션</h3></p>
 <table>
@@ -468,7 +530,7 @@ Timeout []:
       </svg>
     </button></h2><p>컬렉션을 삭제합니다.</p>
 <p><h3 id="delete-collection">구문</h3></p>
-<pre><code translate="no" class="language-shell"><span class="hljs-keyword">delete</span> collection -<span class="hljs-title function_">c</span> (text) 
+<pre><code translate="no" class="language-shell"><span class="hljs-keyword">delete</span> collection -<span class="hljs-title function_">c</span> (text)
 <button class="copy-code-btn"></button></code></pre>
 <p><h3 id="delete-collection">옵션</h3></p>
 <table>
@@ -500,7 +562,7 @@ Timeout []:
       </svg>
     </button></h2><p>엔티티를 삭제합니다.</p>
 <p><h3 id="delete-entities">구문</h3></p>
-<pre><code translate="no"><span class="hljs-keyword">delete</span> entities -<span class="hljs-title function_">c</span> (text) -<span class="hljs-title function_">p</span> (text) 
+<pre><code translate="no"><span class="hljs-keyword">delete</span> entities -<span class="hljs-title function_">c</span> (text) -<span class="hljs-title function_">p</span> (text)
 <button class="copy-code-btn"></button></code></pre>
 <p><h3 id="delete-entities">옵션</h3></p>
 <table>
@@ -575,7 +637,7 @@ Timeout []:
 <p><h3 id="delete-index">구문</h3></p>
 <pre><code translate="no" class="language-shell"><span class="hljs-keyword">delete</span> index -<span class="hljs-title function_">c</span> (text) -<span class="hljs-title function_">in</span> (text)
 <button class="copy-code-btn"></button></code></pre>
-<p><h3 id="delete-index">옵션</h3></p>
+<p><h3 >옵션</h3></p>
 <table>
 <thead>
 <tr><th style="text-align:left">옵션</th><th style="text-align:left">전체 이름</th><th style="text-align:left">설명</th></tr>
@@ -586,8 +648,128 @@ Timeout []:
 <tr><td style="text-align:left">-help</td><td style="text-align:left">n/a</td><td style="text-align:left">명령 사용에 대한 도움말을 표시합니다.</td></tr>
 </tbody>
 </table>
-<p><h3 id="delete-index">예제</h3></p>
+<p><h3 >예제</h3></p>
 <pre><code translate="no" class="language-shell">milvus_cli &gt; <span class="hljs-keyword">delete</span> index -c car -<span class="hljs-keyword">in</span> indexName
+<button class="copy-code-btn"></button></code></pre>
+<h2 id="grant-role" class="common-anchor-header">부여 역할<button data-href="#grant-role" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>사용자에게 역할 부여</p>
+<p><h3 id="grant-user">구문</h3></p>
+<p><h3 >옵션</h3></p>
+<table>
+<thead>
+<tr><th style="text-align:left">옵션</th><th style="text-align:left">전체 이름</th><th style="text-align:left">설명</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">-r</td><td style="text-align:left">-역할 이름</td><td style="text-align:left">밀버스 역할의 역할 이름입니다.</td></tr>
+<tr><td style="text-align:left">-u</td><td style="text-align:left">-사용자 이름</td><td style="text-align:left">밀버스 사용자의 사용자 이름입니다.</td></tr>
+<tr><td style="text-align:left">-help</td><td style="text-align:left">n/a</td><td style="text-align:left">명령 사용에 대한 도움말을 표시합니다.</td></tr>
+</tbody>
+</table>
+<p><h3 >예제</h3></p>
+<pre><code translate="no" class="language-shell">grant role -r role1 -u user1
+<button class="copy-code-btn"></button></code></pre>
+<h2 id="grant-privilege" class="common-anchor-header">부여 권한<button data-href="#grant-privilege" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>역할에 권한을 할당합니다.</p>
+<p><h3 id="assign-privilege">구문</h3></p>
+<p><h3 >옵션</h3></p>
+<table>
+<thead>
+<tr><th style="text-align:left">옵션</th><th style="text-align:left">전체 이름</th><th style="text-align:left">설명</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">-help</td><td style="text-align:left">n/a</td><td style="text-align:left">명령 사용에 대한 도움말을 표시합니다.</td></tr>
+</tbody>
+</table>
+<p><h3 >예제</h3></p>
+<pre><code translate="no" class="language-shell">grant privilege
+<button class="copy-code-btn"></button></code></pre>
+<h2 id="revoke-role" class="common-anchor-header">revoke role<button data-href="#revoke-role" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>사용자에게 할당된 역할을 취소합니다.</p>
+<p><h3 id="grant-user">구문</h3></p>
+<p><h3 >옵션</h3></p>
+<table>
+<thead>
+<tr><th style="text-align:left">옵션</th><th style="text-align:left">전체 이름</th><th style="text-align:left">설명</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">-r</td><td style="text-align:left">-역할 이름</td><td style="text-align:left">밀버스 역할의 역할 이름입니다.</td></tr>
+<tr><td style="text-align:left">-u</td><td style="text-align:left">-사용자 이름</td><td style="text-align:left">밀버스 사용자의 사용자 이름입니다.</td></tr>
+<tr><td style="text-align:left">-help</td><td style="text-align:left">n/a</td><td style="text-align:left">명령 사용에 대한 도움말을 표시합니다.</td></tr>
+</tbody>
+</table>
+<p><h3 >예제</h3></p>
+<pre><code translate="no" class="language-shell">grant role -r role1 -u user1
+<button class="copy-code-btn"></button></code></pre>
+<h2 id="revoke-privilege" class="common-anchor-header">revoke privilege<button data-href="#revoke-privilege" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>역할에 이미 할당된 권한을 취소합니다.</p>
+<p><h3 id="revoke-privilege">구문</h3></p>
+<p><h3 >옵션</h3></p>
+<table>
+<thead>
+<tr><th style="text-align:left">옵션</th><th style="text-align:left">전체 이름</th><th style="text-align:left">설명</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">-help</td><td style="text-align:left">n/a</td><td style="text-align:left">명령 사용에 대한 도움말을 표시합니다.</td></tr>
+</tbody>
+</table>
+<p><h3 >예제</h3></p>
+<pre><code translate="no" class="language-shell">revoke privilege
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="show-collection" class="common-anchor-header">show collection<button data-href="#show-collection" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -683,7 +865,7 @@ Timeout []:
 <tr><td style="text-align:left">-in</td><td style="text-align:left">-인덱스 이름</td><td style="text-align:left">인덱스의 이름입니다.</td></tr>
 </tbody>
 </table>
-<p>| --help | N/A | 명령 사용에 대한 도움말을 표시합니다. |</p>
+<p>| --help | n/a | 명령 사용에 대한 도움말을 표시합니다. |</p>
 <p><h3 >예제</h3></p>
 <pre><code translate="no" class="language-shell">milvus_cli &gt; show index -c test_collection -in index_name
 <button class="copy-code-btn"></button></code></pre>
@@ -742,12 +924,14 @@ Timeout []:
 <tbody>
 <tr><td style="text-align:left">clear</td><td style="text-align:left">화면을 지웁니다.</td></tr>
 <tr><td style="text-align:left">연결</td><td style="text-align:left">밀버스에 연결합니다.</td></tr>
-<tr><td style="text-align:left">create</td><td style="text-align:left">컬렉션, 데이터베이스, 파티션, 사용자 및 인덱스를 생성합니다.</td></tr>
-<tr><td style="text-align:left">삭제</td><td style="text-align:left">컬렉션, 데이터베이스, 파티션, 별칭, 사용자 또는 인덱스를 삭제합니다.</td></tr>
+<tr><td style="text-align:left">create</td><td style="text-align:left">컬렉션, 데이터베이스, 파티션, 사용자, 역할 및 인덱스를 생성합니다.</td></tr>
+<tr><td style="text-align:left">부여</td><td style="text-align:left">역할, 권한을 부여합니다.</td></tr>
+<tr><td style="text-align:left">revoke</td><td style="text-align:left">역할, 권한을 취소합니다.</td></tr>
+<tr><td style="text-align:left">삭제</td><td style="text-align:left">컬렉션, 데이터베이스, 파티션, 별칭, 사용자, 역할 또는 인덱스를 삭제합니다.</td></tr>
 <tr><td style="text-align:left">exit</td><td style="text-align:left">명령줄 창을 닫습니다.</td></tr>
 <tr><td style="text-align:left">도움말</td><td style="text-align:left">명령 사용에 대한 도움말을 표시합니다.</td></tr>
 <tr><td style="text-align:left">insert</td><td style="text-align:left">데이터를 파티션으로 가져옵니다.</td></tr>
-<tr><td style="text-align:left">목록</td><td style="text-align:left">컬렉션, 데이터베이스, 파티션, 사용자 또는 인덱스를 나열합니다.</td></tr>
+<tr><td style="text-align:left">목록</td><td style="text-align:left">컬렉션, 데이터베이스, 파티션, 사용자, 역할, 권한 또는 인덱스를 나열합니다.</td></tr>
 <tr><td style="text-align:left">load</td><td style="text-align:left">컬렉션 또는 파티션을 로드합니다.</td></tr>
 <tr><td style="text-align:left">쿼리</td><td style="text-align:left">입력한 모든 조건과 일치하는 쿼리 결과를 표시합니다.</td></tr>
 <tr><td style="text-align:left">release</td><td style="text-align:left">컬렉션 또는 파티션을 해제합니다.</td></tr>
@@ -784,7 +968,7 @@ Timeout []:
 </thead>
 <tbody>
 <tr><td style="text-align:left">-c</td><td style="text-align:left">-컬렉션 이름</td><td style="text-align:left">데이터가 삽입되는 컬렉션의 이름입니다.</td></tr>
-<tr><td style="text-align:left">-p</td><td style="text-align:left">-partition</td><td style="text-align:left">(선택 사항) 데이터를 삽입할 파티션의 이름입니다. 이 파티션 옵션을 전달하지 않으면 "_기본" 파티션을 선택하게 됩니다.</td></tr>
+<tr><td style="text-align:left">-p</td><td style="text-align:left">-partition</td><td style="text-align:left">(선택 사항) 데이터를 삽입할 파티션의 이름입니다. 이 파티션 옵션을 전달하지 않으면 "_기본" 파티션을 선택합니다.</td></tr>
 <tr><td style="text-align:left">-help</td><td style="text-align:left">n/a</td><td style="text-align:left">명령 사용에 대한 도움말을 표시합니다.</td></tr>
 </tbody>
 </table>
@@ -849,7 +1033,65 @@ Milvus timestamp:           428849214449254403
 <h3 id="Syntax" class="common-anchor-header">구문</h3><pre><code translate="no" class="language-shell">list <span class="hljs-built_in">users</span>
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Options" class="common-anchor-header">옵션</h3><p>| 옵션 | 전체 이름 | 설명 | --help | n/a | 명령 사용에 대한 도움말을 표시합니다. |</p>
-<h2 id="list-collections" class="common-anchor-header">컬렉션 목록<button data-href="#list-collections" class="anchor-icon" translate="no">
+<h2 id="List-roles" class="common-anchor-header">역할 나열<button data-href="#List-roles" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>밀버스에서 역할 나열</p>
+<p><h3 id="list-role">구문</h3></p>
+<pre><code translate="no" class="language-shell">list roles
+<button class="copy-code-btn"></button></code></pre>
+<h3 id="Options" class="common-anchor-header">옵션</h3><table>
+<thead>
+<tr><th style="text-align:left">옵션</th><th style="text-align:left">전체 이름</th><th style="text-align:left">설명</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">-help</td><td style="text-align:left">n/a</td><td style="text-align:left">명령 사용에 대한 도움말을 표시합니다.</td></tr>
+</tbody>
+</table>
+<h3 id="Examples" class="common-anchor-header">예제</h3><pre><code translate="no" class="language-shell">milvus_cli &gt; list roles
+<button class="copy-code-btn"></button></code></pre>
+<h2 id="List-grants" class="common-anchor-header">보조금 목록<button data-href="#List-grants" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>밀버스에서 보조금을 나열합니다.</p>
+<h3 id="Options" class="common-anchor-header">옵션</h3><table>
+<thead>
+<tr><th style="text-align:left">옵션</th><th style="text-align:left">전체 이름</th><th style="text-align:left">설명</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">-r</td><td style="text-align:left">-역할 이름</td><td style="text-align:left">밀버스 역할의 역할 이름입니다.</td></tr>
+<tr><td style="text-align:left">-o</td><td style="text-align:left">-objectName</td><td style="text-align:left">밀버스 오브젝트의 오브젝트 이름입니다.</td></tr>
+<tr><td style="text-align:left">-t</td><td style="text-align:left">-objectType</td><td style="text-align:left">전역, 컬렉션 또는 사용자.</td></tr>
+<tr><td style="text-align:left">-help</td><td style="text-align:left">n/a</td><td style="text-align:left">명령 사용에 대한 도움말을 표시합니다.</td></tr>
+</tbody>
+</table>
+<h3 id="Examples" class="common-anchor-header">예제</h3><pre><code translate="no" class="language-shell">milvus_cli &gt; list grants -r role1 -o object1 -t Collection
+<button class="copy-code-btn"></button></code></pre>
+<h2 id="list-collections" class="common-anchor-header">목록 컬렉션<button data-href="#list-collections" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -1143,7 +1385,7 @@ Guarantee <span class="hljs-title">Timestamp</span>(<span class="hljs-params">It
 
 </span><button class="copy-code-btn"></button></code></pre>
 <p><h4 id="search">예 3</h4></p>
-<p>인덱싱되지 않은 컬렉션에서 검색을 수행하고 필요한 입력을 묻는 메시지를 표시하려면 다음과 같이 하세요:</p>
+<p>색인되지 않은 컬렉션에서 검색을 수행하고 필요한 입력을 묻는 메시지를 표시하려면 다음과 같이 하세요:</p>
 <pre><code translate="no" class="language-shell">milvus_cli &gt; search
 
 Collection name (car, car2): car
@@ -1182,7 +1424,7 @@ Guarantee Timestamp(It instructs Milvus to see <span class="hljs-built_in">all</
       </svg>
     </button></h2><p>연결을 나열합니다.</p>
 <p><h3 id="show-connection">구문</h3></p>
-<pre><code translate="no" class="language-shell">list connections 
+<pre><code translate="no" class="language-shell">list connections
 <button class="copy-code-btn"></button></code></pre>
 <p><h3 id="show-connection">옵션</h3></p>
 <table>

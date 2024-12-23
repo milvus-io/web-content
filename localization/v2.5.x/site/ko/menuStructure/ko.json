@@ -1682,7 +1682,7 @@
             "order": 0,
             "children": [
               {
-                "label": "Basic Usage",
+                "label": "기본 사용법",
                 "id": "basic_usage_langchain.md",
                 "order": 1,
                 "children": []

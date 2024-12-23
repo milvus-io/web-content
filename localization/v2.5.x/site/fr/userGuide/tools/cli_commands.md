@@ -79,7 +79,7 @@ title: Référence de la commande Milvus_CLI
 </tbody>
 </table>
 <p><h3 id="connect">Exemple</h3></p>
-<pre><code translate="no" class="language-shell">milvus_cli &gt; connect -uri <span class="hljs-attr">http</span>:<span class="hljs-comment">//127.0.0.1:19530 </span>
+<pre><code translate="no" class="language-shell">milvus_cli &gt; connect -uri <span class="hljs-attr">http</span>:<span class="hljs-comment">//127.0.0.1:19530</span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="create-Database" class="common-anchor-header">créer une base de données<button data-href="#create-Database" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -98,7 +98,7 @@ title: Référence de la commande Milvus_CLI
       </svg>
     </button></h2><p>Créer une base de données dans Milvus</p>
 <p><h3 id="create-database">Syntaxe de la commande</h3></p>
-<pre><code translate="no" class="language-shell">create database -db (text) 
+<pre><code translate="no" class="language-shell">create database -db (text)
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Options" class="common-anchor-header">Options de la commande</h3><table>
 <thead>
@@ -129,7 +129,7 @@ title: Référence de la commande Milvus_CLI
       </svg>
     </button></h2><p>Utiliser la base de données dans Milvus</p>
 <p><h3 id="use-database">Syntaxe</h3></p>
-<pre><code translate="no" class="language-shell">use database -db (text) 
+<pre><code translate="no" class="language-shell">use database -db (text)
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Options" class="common-anchor-header">Options</h3><table>
 <thead>
@@ -160,7 +160,7 @@ title: Référence de la commande Milvus_CLI
       </svg>
     </button></h2><p>Liste des bases de données dans Milvus</p>
 <p><h3 id="list-database">Syntaxe</h3></p>
-<pre><code translate="no" class="language-shell">list databases 
+<pre><code translate="no" class="language-shell">list databases
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Examples" class="common-anchor-header">Exemples de base de données</h3><h4 id="Example-1" class="common-anchor-header">Exemple 1</h4><p>L'exemple suivant répertorie les bases de données dans Milvus.</p>
 <pre><code translate="no" class="language-shell">milvus_cli &gt; list databases
@@ -182,7 +182,7 @@ title: Référence de la commande Milvus_CLI
       </svg>
     </button></h2><p>Supprimer une base de données dans Milvus</p>
 <p><h3 id="delete-database">Syntaxe</h3></p>
-<pre><code translate="no" class="language-shell"><span class="hljs-keyword">delete</span> database -<span class="hljs-title function_">db</span> (text) 
+<pre><code translate="no" class="language-shell"><span class="hljs-keyword">delete</span> database -<span class="hljs-title function_">db</span> (text)
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Options" class="common-anchor-header">Options</h3><table>
 <thead>
@@ -228,7 +228,38 @@ title: Référence de la commande Milvus_CLI
 <h3 id="Examples" class="common-anchor-header">Exemples d'utilisation</h3><h4 id="Example-1" class="common-anchor-header">Exemple 1</h4><p>L'exemple suivant crée l'utilisateur <code translate="no">zilliz</code> et le mot de passe <code translate="no">zilliz</code> dans milvus.</p>
 <pre><code translate="no" class="language-shell">milvus_cli &gt; create user -u zilliz -p zilliz
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="create-alias" class="common-anchor-header">create alias<button data-href="#create-alias" class="anchor-icon" translate="no">
+<h2 id="create-role" class="common-anchor-header">créer un rôle<button data-href="#create-role" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>Créer un rôle dans Milvus</p>
+<p><h3 id="create-role">Syntaxe</h3></p>
+<pre><code translate="no" class="language-shell">create role -r (text)
+<button class="copy-code-btn"></button></code></pre>
+<h3 id="Options" class="common-anchor-header">Options</h3><table>
+<thead>
+<tr><th style="text-align:left">Option</th><th style="text-align:left">Nom complet</th><th style="text-align:left">Description de l'option</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">-r</td><td style="text-align:left">-Nom de rôle</td><td style="text-align:left">Le nom du rôle de milvus.</td></tr>
+<tr><td style="text-align:left">-help</td><td style="text-align:left">n/a</td><td style="text-align:left">Affiche l'aide pour l'utilisation de la commande.</td></tr>
+</tbody>
+</table>
+<h3 id="Examples" class="common-anchor-header">Exemples d'utilisation</h3><h4 id="Example-1" class="common-anchor-header">Exemple 1</h4><p>L'exemple suivant crée le rôle <code translate="no">role1</code> dans milvus.</p>
+<pre><code translate="no" class="language-shell">milvus_cli &gt; create role -r role1
+<button class="copy-code-btn"></button></code></pre>
+<h2 id="create-alias" class="common-anchor-header">créer un alias<button data-href="#create-alias" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -246,7 +277,7 @@ title: Référence de la commande Milvus_CLI
     </button></h2><p>Spécifie des alias uniques pour une collection.</p>
 <div class="alert note">Une collection peut avoir plusieurs alias. Toutefois, un alias correspond au maximum à une collection.</div>
 <p><h3 id="create-alias">Syntaxe</h3></p>
-<pre><code translate="no" class="language-shell">create <span class="hljs-built_in">alias</span> -c (text) -a (text) [-A] 
+<pre><code translate="no" class="language-shell">create <span class="hljs-built_in">alias</span> -c (text) -a (text) [-A]
 <button class="copy-code-btn"></button></code></pre>
 <p><h3 id="create-alias">Options</h3></p>
 <table>
@@ -256,7 +287,7 @@ title: Référence de la commande Milvus_CLI
 <tbody>
 <tr><td style="text-align:left">-c</td><td style="text-align:left">-Nom de la collection</td><td style="text-align:left">Le nom de la collection.</td></tr>
 <tr><td style="text-align:left">-a</td><td style="text-align:left">-Nom de l'alias</td><td style="text-align:left">L'alias.</td></tr>
-<tr><td style="text-align:left">-A</td><td style="text-align:left">-alter</td><td style="text-align:left">(Facultatif) Indicateur permettant de transférer l'alias dans une collection spécifique.</td></tr>
+<tr><td style="text-align:left">-A</td><td style="text-align:left">-alter</td><td style="text-align:left">(Facultatif) Indicateur permettant de transférer l'alias vers une collection spécifique.</td></tr>
 <tr><td style="text-align:left">-help</td><td style="text-align:left">s.o.</td><td style="text-align:left">Affiche l'aide à l'utilisation de la commande.</td></tr>
 </tbody>
 </table>
@@ -385,10 +416,10 @@ The name of the field to create an index <span class="hljs-keyword">for</span> (
 Index name: vectorIndex
 
 <span class="hljs-comment"># Default is &#x27;&#x27;</span>
-Index <span class="hljs-built_in">type</span> FLAT, IVF_FLAT, IVF_SQ8, IVF_PQ, RNSG, HNSW, ANNOY, AUTOINDEX, DISKANN, GPU_IVF_FLAT, GPU_IVF_PQ, SPARSE_INVERTED_INDEX, SPARSE_WAND, SCANN, STL_SORT, Trie, INVERTED, ) []: IVF_FLAT  
+Index <span class="hljs-built_in">type</span> FLAT, IVF_FLAT, IVF_SQ8, IVF_PQ, RNSG, HNSW, ANNOY, AUTOINDEX, DISKANN, GPU_IVF_FLAT, GPU_IVF_PQ, SPARSE_INVERTED_INDEX, SPARSE_WAND, SCANN, STL_SORT, Trie, INVERTED, ) []: IVF_FLAT
 
 <span class="hljs-comment"># Default is &#x27;&#x27;</span>
-Index metric <span class="hljs-built_in">type</span> (L2, IP, HAMMING, TANIMOTO, COSINE, ) []: 
+Index metric <span class="hljs-built_in">type</span> (L2, IP, HAMMING, TANIMOTO, COSINE, ) []:
 
 Timeout []:
 <button class="copy-code-btn"></button></code></pre>
@@ -412,7 +443,7 @@ Timeout []:
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Options" class="common-anchor-header">Options</h3><table>
 <thead>
-<tr><th style="text-align:left">Option</th><th style="text-align:left">Nom complet</th><th style="text-align:left">Description de l'option</th></tr>
+<tr><th style="text-align:left">Option</th><th style="text-align:left">Nom complet</th><th style="text-align:left">Description</th></tr>
 </thead>
 <tbody>
 <tr><td style="text-align:left">-u</td><td style="text-align:left">-Nom d'utilisateur</td><td style="text-align:left">Le nom d'utilisateur.</td></tr>
@@ -420,6 +451,37 @@ Timeout []:
 </tbody>
 </table>
 <h3 id="Example" class="common-anchor-header">Exemple</h3><pre><code translate="no" class="language-shell">milvus_cli &gt; <span class="hljs-keyword">delete</span> user -u zilliz
+<button class="copy-code-btn"></button></code></pre>
+<h2 id="delete-role" class="common-anchor-header">delete role<button data-href="#delete-role" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>Supprimer un rôle dans Milvus</p>
+<p><h3 id="delete-role">Syntaxe de la commande</h3></p>
+<pre><code translate="no" class="language-shell"><span class="hljs-keyword">delete</span> role -<span class="hljs-title function_">r</span> (text)
+<button class="copy-code-btn"></button></code></pre>
+<h3 id="Options" class="common-anchor-header">Options de la commande</h3><table>
+<thead>
+<tr><th style="text-align:left">Option</th><th style="text-align:left">Nom complet</th><th style="text-align:left">Description de l'option</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">-r</td><td style="text-align:left">-Nom de rôle</td><td style="text-align:left">Le nom du rôle de milvus.</td></tr>
+<tr><td style="text-align:left">-help</td><td style="text-align:left">n/a</td><td style="text-align:left">Affiche l'aide pour l'utilisation de la commande.</td></tr>
+</tbody>
+</table>
+<h3 id="Examples" class="common-anchor-header">Exemples d'utilisation</h3><p>L'exemple suivant supprime le rôle <code translate="no">role1</code> dans milvus.</p>
+<pre><code translate="no" class="language-shell">milvus_cli &gt; <span class="hljs-keyword">delete</span> role -r role1
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="delete-alias" class="common-anchor-header">delete alias<button data-href="#delete-alias" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -438,9 +500,9 @@ Timeout []:
       </svg>
     </button></h2><p>Supprime un alias.</p>
 <p><h3 id="delete-alias">Syntaxe de la commande</h3></p>
-<pre><code translate="no" class="language-shell"><span class="hljs-keyword">delete</span> alias -<span class="hljs-title function_">a</span> (text) 
+<pre><code translate="no" class="language-shell"><span class="hljs-keyword">delete</span> alias -<span class="hljs-title function_">a</span> (text)
 <button class="copy-code-btn"></button></code></pre>
-<p><h3 id="delete-alias">Options</h3></p>
+<p><h3 id="delete-alias">Options de l'alias</h3></p>
 <table>
 <thead>
 <tr><th style="text-align:left">Option de l'alias</th><th style="text-align:left">Nom complet</th><th style="text-align:left">Description de l'alias</th></tr>
@@ -468,7 +530,7 @@ Timeout []:
       </svg>
     </button></h2><p>Supprime une collection.</p>
 <p><h3 id="delete-collection">Syntaxe</h3></p>
-<pre><code translate="no" class="language-shell"><span class="hljs-keyword">delete</span> collection -<span class="hljs-title function_">c</span> (text) 
+<pre><code translate="no" class="language-shell"><span class="hljs-keyword">delete</span> collection -<span class="hljs-title function_">c</span> (text)
 <button class="copy-code-btn"></button></code></pre>
 <p><h3 id="delete-collection">Options</h3></p>
 <table>
@@ -500,7 +562,7 @@ Timeout []:
       </svg>
     </button></h2><p>Supprime les entités.</p>
 <p><h3 id="delete-entities">Syntaxe de la commande</h3></p>
-<pre><code translate="no"><span class="hljs-keyword">delete</span> entities -<span class="hljs-title function_">c</span> (text) -<span class="hljs-title function_">p</span> (text) 
+<pre><code translate="no"><span class="hljs-keyword">delete</span> entities -<span class="hljs-title function_">c</span> (text) -<span class="hljs-title function_">p</span> (text)
 <button class="copy-code-btn"></button></code></pre>
 <p><h3 id="delete-entities">Options</h3></p>
 <table>
@@ -575,7 +637,7 @@ Timeout []:
 <p><h3 id="delete-index">Syntaxe de la commande</h3></p>
 <pre><code translate="no" class="language-shell"><span class="hljs-keyword">delete</span> index -<span class="hljs-title function_">c</span> (text) -<span class="hljs-title function_">in</span> (text)
 <button class="copy-code-btn"></button></code></pre>
-<p><h3 id="delete-index">Options</h3></p>
+<p><h3 >Options</h3></p>
 <table>
 <thead>
 <tr><th style="text-align:left">Option</th><th style="text-align:left">Nom complet</th><th style="text-align:left">Description</th></tr>
@@ -586,8 +648,128 @@ Timeout []:
 <tr><td style="text-align:left">-help</td><td style="text-align:left">n/a</td><td style="text-align:left">Affiche l'aide pour l'utilisation de la commande.</td></tr>
 </tbody>
 </table>
-<p><h3 id="delete-index">Exemple</h3></p>
+<p><h3 >Exemple</h3></p>
 <pre><code translate="no" class="language-shell">milvus_cli &gt; <span class="hljs-keyword">delete</span> index -c car -<span class="hljs-keyword">in</span> indexName
+<button class="copy-code-btn"></button></code></pre>
+<h2 id="grant-role" class="common-anchor-header">grant role<button data-href="#grant-role" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>Attribuer un rôle à un utilisateur</p>
+<p><h3 id="grant-user">Syntaxe de la commande</h3></p>
+<p><h3 >Options de la commande</h3></p>
+<table>
+<thead>
+<tr><th style="text-align:left">Option</th><th style="text-align:left">Nom complet</th><th style="text-align:left">Description de l'option</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">-r</td><td style="text-align:left">-Nom de rôle</td><td style="text-align:left">Le nom du rôle de milvus.</td></tr>
+<tr><td style="text-align:left">-u</td><td style="text-align:left">-Nom d'utilisateur</td><td style="text-align:left">Le nom d'utilisateur de l'utilisateur de milvus.</td></tr>
+<tr><td style="text-align:left">-help</td><td style="text-align:left">n/a</td><td style="text-align:left">Affiche l'aide pour l'utilisation de la commande.</td></tr>
+</tbody>
+</table>
+<p><h3 >Exemple</h3></p>
+<pre><code translate="no" class="language-shell">grant role -r role1 -u user1
+<button class="copy-code-btn"></button></code></pre>
+<h2 id="grant-privilege" class="common-anchor-header">grant privilege (accorder un privilège)<button data-href="#grant-privilege" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>Attribue un privilège à un rôle.</p>
+<p><h3 id="assign-privilege">Syntaxe de la commande</h3></p>
+<p><h3 >Options</h3></p>
+<table>
+<thead>
+<tr><th style="text-align:left">Option</th><th style="text-align:left">Nom complet</th><th style="text-align:left">Description</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">-help</td><td style="text-align:left">s.o.</td><td style="text-align:left">Affiche l'aide à l'utilisation de la commande.</td></tr>
+</tbody>
+</table>
+<p><h3 >Exemple</h3></p>
+<pre><code translate="no" class="language-shell">grant privilege
+<button class="copy-code-btn"></button></code></pre>
+<h2 id="revoke-role" class="common-anchor-header">révoquer le rôle<button data-href="#revoke-role" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>Révoque le rôle attribué à un utilisateur.</p>
+<p><h3 id="grant-user">Syntaxe de la commande</h3></p>
+<p><h3 >Options de la commande</h3></p>
+<table>
+<thead>
+<tr><th style="text-align:left">Option</th><th style="text-align:left">Nom complet</th><th style="text-align:left">Description de l'option</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">-r</td><td style="text-align:left">-Nom de rôle</td><td style="text-align:left">Le nom du rôle de milvus.</td></tr>
+<tr><td style="text-align:left">-u</td><td style="text-align:left">-Nom d'utilisateur</td><td style="text-align:left">Le nom d'utilisateur de l'utilisateur de milvus.</td></tr>
+<tr><td style="text-align:left">-help</td><td style="text-align:left">n/a</td><td style="text-align:left">Affiche l'aide pour l'utilisation de la commande.</td></tr>
+</tbody>
+</table>
+<p><h3 >Exemple</h3></p>
+<pre><code translate="no" class="language-shell">grant role -r role1 -u user1
+<button class="copy-code-btn"></button></code></pre>
+<h2 id="revoke-privilege" class="common-anchor-header">révoquer un privilège<button data-href="#revoke-privilege" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>Révoque un privilège déjà attribué à un rôle.</p>
+<p><h3 id="revoke-privilege">Syntaxe de la commande</h3></p>
+<p><h3 >Options de la commande</h3></p>
+<table>
+<thead>
+<tr><th style="text-align:left">Option</th><th style="text-align:left">Nom complet</th><th style="text-align:left">Description</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">-help</td><td style="text-align:left">s.o.</td><td style="text-align:left">Affiche l'aide à l'utilisation de la commande.</td></tr>
+</tbody>
+</table>
+<p><h3 >Exemple</h3></p>
+<pre><code translate="no" class="language-shell">revoke privilege
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="show-collection" class="common-anchor-header">show collection<button data-href="#show-collection" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -742,12 +924,14 @@ Timeout []:
 <tbody>
 <tr><td style="text-align:left">effacer</td><td style="text-align:left">Efface l'écran.</td></tr>
 <tr><td style="text-align:left">connect</td><td style="text-align:left">Se connecte à Milvus.</td></tr>
-<tr><td style="text-align:left">créer</td><td style="text-align:left">Crée une collection, une base de données, une partition, un utilisateur et un index.</td></tr>
-<tr><td style="text-align:left">supprimer</td><td style="text-align:left">Supprime une collection, une base de données, une partition, un alias, un utilisateur ou un index.</td></tr>
+<tr><td style="text-align:left">créer</td><td style="text-align:left">Crée une collection, une base de données, une partition, un utilisateur, un rôle et un index.</td></tr>
+<tr><td style="text-align:left">grant</td><td style="text-align:left">Accorde un rôle, un privilège.</td></tr>
+<tr><td style="text-align:left">révoquer</td><td style="text-align:left">Révoquer un rôle, un privilège .</td></tr>
+<tr><td style="text-align:left">delete</td><td style="text-align:left">Supprime une collection, une base de données, une partition, un alias, un utilisateur, un rôle ou un index.</td></tr>
 <tr><td style="text-align:left">exit</td><td style="text-align:left">Ferme la fenêtre de la ligne de commande.</td></tr>
 <tr><td style="text-align:left">help</td><td style="text-align:left">Affiche l'aide relative à l'utilisation d'une commande.</td></tr>
 <tr><td style="text-align:left">insert</td><td style="text-align:left">Importe des données dans une partition.</td></tr>
-<tr><td style="text-align:left">list</td><td style="text-align:left">Liste les collections, les bases de données, les partitions, les utilisateurs ou les index.</td></tr>
+<tr><td style="text-align:left">list</td><td style="text-align:left">Liste les collections, les bases de données, les partitions, les utilisateurs, les rôles, les subventions ou les index.</td></tr>
 <tr><td style="text-align:left">load</td><td style="text-align:left">Charge une collection ou une partition.</td></tr>
 <tr><td style="text-align:left">requête</td><td style="text-align:left">Affiche les résultats de la requête qui correspondent à tous les critères que vous avez saisis.</td></tr>
 <tr><td style="text-align:left">release</td><td style="text-align:left">Libère une collection ou une partition.</td></tr>
@@ -849,6 +1033,64 @@ Milvus timestamp:           428849214449254403
 <h3 id="Syntax" class="common-anchor-header">Syntaxe</h3><pre><code translate="no" class="language-shell">list <span class="hljs-built_in">users</span>
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Options" class="common-anchor-header">Options</h3><p>| Option | Nom complet | Description | | --help | n/a | Affiche l'aide pour l'utilisation de la commande. |</p>
+<h2 id="List-roles" class="common-anchor-header">Liste des rôles<button data-href="#List-roles" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>Liste des rôles dans Milvus</p>
+<p><h3 id="list-role">Syntaxe de la commande</h3></p>
+<pre><code translate="no" class="language-shell">list roles
+<button class="copy-code-btn"></button></code></pre>
+<h3 id="Options" class="common-anchor-header">Options</h3><table>
+<thead>
+<tr><th style="text-align:left">Option</th><th style="text-align:left">Nom complet</th><th style="text-align:left">Description de l'option</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">-help</td><td style="text-align:left">s.o.</td><td style="text-align:left">Affiche l'aide à l'utilisation de la commande.</td></tr>
+</tbody>
+</table>
+<h3 id="Examples" class="common-anchor-header">Exemples d'utilisation de la commande</h3><pre><code translate="no" class="language-shell">milvus_cli &gt; list roles
+<button class="copy-code-btn"></button></code></pre>
+<h2 id="List-grants" class="common-anchor-header">Liste des subventions<button data-href="#List-grants" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>Liste des subventions dans Milvus</p>
+<h3 id="Options" class="common-anchor-header">Options de la commande</h3><table>
+<thead>
+<tr><th style="text-align:left">Option</th><th style="text-align:left">Nom complet</th><th style="text-align:left">Description de l'option</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">-r</td><td style="text-align:left">-Nom de rôle</td><td style="text-align:left">Le nom du rôle de milvus.</td></tr>
+<tr><td style="text-align:left">-o</td><td style="text-align:left">-objectName</td><td style="text-align:left">Le nom de l'objet de milvus.</td></tr>
+<tr><td style="text-align:left">-t</td><td style="text-align:left">-Type d'objet</td><td style="text-align:left">Global, Collection ou Utilisateur.</td></tr>
+<tr><td style="text-align:left">-help</td><td style="text-align:left">n/a</td><td style="text-align:left">Affiche l'aide à l'utilisation de la commande.</td></tr>
+</tbody>
+</table>
+<h3 id="Examples" class="common-anchor-header">Exemples</h3><pre><code translate="no" class="language-shell">milvus_cli &gt; list grants -r role1 -o object1 -t Collection
+<button class="copy-code-btn"></button></code></pre>
 <h2 id="list-collections" class="common-anchor-header">list collections<button data-href="#list-collections" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -1182,7 +1424,7 @@ Guarantee Timestamp(It instructs Milvus to see <span class="hljs-built_in">all</
       </svg>
     </button></h2><p>Répertorie les connexions.</p>
 <p><h3 id="show-connection">Syntaxe</h3></p>
-<pre><code translate="no" class="language-shell">list connections 
+<pre><code translate="no" class="language-shell">list connections
 <button class="copy-code-btn"></button></code></pre>
 <p><h3 id="show-connection">Options</h3></p>
 <table>

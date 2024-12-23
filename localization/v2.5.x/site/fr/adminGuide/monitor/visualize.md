@@ -58,7 +58,7 @@ summary: Découvrez comment visualiser les métriques Milvus dans Grafana.
         ></path>
       </svg>
     </button></h2><h3 id="1-Download-and-import-dashboard" class="common-anchor-header">1. Télécharger et importer le tableau de bord</h3><p>Téléchargez et importez le tableau de bord Milvus à partir du fichier JSON.</p>
-<pre><code translate="no">wget https://raw.githubusercontent.com/milvus-io/milvus/2.2.0/deployments/monitor/grafana/milvus-dashboard.json
+<pre><code translate="no">wget <span class="hljs-attr">https</span>:<span class="hljs-comment">//raw.githubusercontent.com/milvus-io/milvus/refs/heads/master/deployments/monitor/grafana/milvus-dashboard.json</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>
   
@@ -89,7 +89,7 @@ summary: Découvrez comment visualiser les métriques Milvus dans Grafana.
         ></path>
       </svg>
     </button></h2><ul>
-<li>Si vous avez configuré Grafana pour visualiser les métriques Milvus, vous pouvez également.. :<ul>
+<li>Si vous avez configuré Grafana pour visualiser les métriques Milvus, vous voudrez peut-être aussi.. :<ul>
 <li>Apprendre à <a href="/docs/fr/alert.md">créer une alerte pour les services Milvus</a></li>
 <li>Ajuster l'<a href="/docs/fr/allocate.md">allocation des ressources</a></li>
 <li><a href="/docs/fr/scaleout.md">Réduire ou augmenter la taille d'un cluster Milvus</a></li>

@@ -25,10 +25,10 @@ summary: >-
     </button></h1><p>La búsqueda de texto completo es una función que recupera documentos que contienen términos o frases específicos en conjuntos de datos de texto y, a continuación, clasifica los resultados en función de su relevancia. Esta función supera las limitaciones de la búsqueda semántica, que puede pasar por alto términos precisos, garantizando que usted reciba los resultados más exactos y contextualmente relevantes. Además, simplifica las búsquedas vectoriales al aceptar la entrada de texto sin formato, convirtiendo automáticamente los datos de texto en incrustaciones dispersas sin necesidad de generar manualmente incrustaciones vectoriales.</p>
 <p>Esta función, que utiliza el algoritmo BM25 para la puntuación de la relevancia, es especialmente valiosa en escenarios de generación de recuperación aumentada (RAG), donde da prioridad a los documentos que coinciden estrechamente con términos de búsqueda específicos.</p>
 <div class="alert note">
-<p>Al integrar la búsqueda de texto completo con la búsqueda de vectores densos basada en la semántica, puede mejorar la precisión y la relevancia de los resultados de búsqueda. Para más información, consulte <a href="/docs/es/multi-vector-search.md">Búsqueda híbrida</a>.</p>
-</div>
-<div class="alert note">
-<p>La búsqueda de texto completo está disponible en Milvus Standalone y Milvus Distributed, pero no en Milvus Lite, aunque está previsto añadirla a Milvus Lite.</p>
+<ul>
+<li>Al integrar la búsqueda de texto completo con la búsqueda de vectores densos basada en la semántica, puede mejorar la precisión y la relevancia de los resultados de búsqueda. Para más información, consulte <a href="/docs/es/multi-vector-search.md">Búsqueda híbrida</a>.</li>
+<li>La búsqueda de texto completo está disponible en Milvus Standalone y Milvus Distributed, pero no en Milvus Lite, aunque está previsto añadirla a Milvus Lite.</li>
+</ul>
 </div>
 <h2 id="Overview​" class="common-anchor-header">Resumen<button data-href="#Overview​" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -176,7 +176,7 @@ schema.addField(AddFieldReq.builder()
 <ul>
 <li><p><code translate="no">id</code>: sirve como clave primaria y se genera automáticamente con <code translate="no">auto_id=True</code>.</p></li>
 <li><p><code translate="no">text</code>: almacena los datos de texto sin procesar para las operaciones de búsqueda de texto completo. El tipo de datos debe ser <code translate="no">VARCHAR</code>, ya que <code translate="no">VARCHAR</code> es el tipo de datos de cadena de Milvus para el almacenamiento de texto. Establezca <code translate="no">enable_analyzer=True</code> para permitir que Milvus tokenice el texto. Por defecto, Milvus utiliza el <a href="/docs/es/standard-analyzer.md">analizador estándar</a> para el análisis de texto. Para configurar un analizador diferente, consulte <a href="/docs/es/analyzer-overview.md">Visión general</a>.</p></li>
-<li><p><code translate="no">sparse</code>Un campo vectorial reservado para almacenar incrustaciones dispersas generadas internamente para operaciones de búsqueda de texto completo. El tipo de datos debe ser <code translate="no">SPARSE_FLOAT_VECTOR</code>.</p></li>
+<li><p><code translate="no">sparse</code>Campo vectorial : un campo vectorial reservado para almacenar incrustaciones dispersas generadas internamente para operaciones de búsqueda de texto completo. El tipo de datos debe ser <code translate="no">SPARSE_FLOAT_VECTOR</code>.</p></li>
 </ul>
 <p>Ahora, defina una función que convierta su texto en representaciones vectoriales dispersas y añádala al esquema.</p>
 <div class="multipleCode">

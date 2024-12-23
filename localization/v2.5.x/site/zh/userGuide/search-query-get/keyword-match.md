@@ -64,8 +64,8 @@ title: 文本匹配
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>文本匹配适用于<code translate="no">VARCHAR</code> 字段类型，这在 milvus 中本质上是字符串数据类型。要启用文本匹配，请将<code translate="no">enable_analyzer</code> 和<code translate="no">enable_match</code> 设置为<code translate="no">True</code> ，然后在定义 Collections Schema 时选择性地配置文本分析分析器。</p>
-<h3 id="Set-enableanalyzer-and-enablematch​" class="common-anchor-header">设置<code translate="no">enable_analyzer</code> 和<code translate="no">enable_match</code></h3><p>要启用特定<code translate="no">VARCHAR</code> 字段的文本匹配，可在定义字段 Schema 时将<code translate="no">enable_analyzer</code> 和<code translate="no">enable_match</code> 参数都设为<code translate="no">True</code> 。这将指示 Milvus 对文本进行标记化处理，并为指定字段创建反向索引，从而实现快速高效的文本匹配。</p>
+    </button></h2><p>文本匹配适用于<code translate="no">VARCHAR</code> 字段类型，这在 milvus 中本质上是字符串数据类型。要启用文本匹配，请将<code translate="no">enable_analyzer</code> 和<code translate="no">enable_match</code> 设置为<code translate="no">True</code> ，然后在定义 Collections Schema 时选择性地配置文本分析的分析器。</p>
+<h3 id="Set-enableanalyzer-and-enablematch​" class="common-anchor-header">设置<code translate="no">enable_analyzer</code> 和<code translate="no">enable_match</code></h3><p>要启用特定<code translate="no">VARCHAR</code> 字段的文本匹配，可在定义字段 Schema 时将<code translate="no">enable_analyzer</code> 和<code translate="no">enable_match</code> 参数都设为<code translate="no">True</code> 。这将指示 Milvus 对文本进行标记化，并为指定字段创建一个反向索引，从而实现快速高效的文本匹配。</p>
 <div class="multipleCode">
    <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient, DataType​
@@ -262,9 +262,11 @@ schema.<span class="hljs-title function_">addField</span>(<span class="hljs-titl
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-curl"><span class="hljs-keyword">export</span> filter=<span class="hljs-string">&quot;\&quot;TEXT_MATCH(text, &#x27;machine deep&#x27;)\&quot;&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>您还可以使用逻辑操作符组合多个<code translate="no">TEXT_MATCH</code> 表达式来执行<strong>AND</strong>匹配。例如，要搜索<code translate="no">text</code> 字段中同时包含<code translate="no">machine</code> 和<code translate="no">deep</code> 的文档，请使用以下表达式。</p>
-<div class="multipleCode">
-   <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
+<p>您还可以使用逻辑操作符组合多个<code translate="no">TEXT_MATCH</code> 表达式来执行<strong>AND</strong>匹配。</p>
+<ul>
+<li><p>要搜索<code translate="no">text</code> 字段中同时包含<code translate="no">machine</code> 和<code translate="no">deep</code> 的文档，请使用以下表达式。</p>
+<p><div class="multipleCode">
+<a href="#python">Python </a><a href="#java">Java</a><a href="#javascript">Node.js</a><a href="#curl">cURL</a></div></p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&quot;TEXT_MATCH(text, &#x27;machine&#x27;) and TEXT_MATCH(text, &#x27;deep&#x27;)&quot;</span>​
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-java"><span class="hljs-title class_">String</span> filter = <span class="hljs-string">&quot;TEXT_MATCH(text, &#x27;machine&#x27;) and TEXT_MATCH(text, &#x27;deep&#x27;)&quot;</span>;
@@ -272,7 +274,19 @@ schema.<span class="hljs-title function_">addField</span>(<span class="hljs-titl
 <pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> filter = <span class="hljs-string">&quot;TEXT_MATCH(text, &#x27;machine&#x27;) and TEXT_MATCH(text, &#x27;deep&#x27;)&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-curl"><span class="hljs-keyword">export</span> filter=<span class="hljs-string">&quot;\&quot;TEXT_MATCH(text, &#x27;machine&#x27;) and TEXT_MATCH(text, &#x27;deep&#x27;)\&quot;&quot;</span>
+<button class="copy-code-btn"></button></code></pre></li>
+<li><p>要搜索<code translate="no">text</code> 字段中同时包含<code translate="no">machine</code> 和<code translate="no">learning</code> 但不包含<code translate="no">deep</code> 的文档，请使用以下表达式：</p>
+<p><div class="multipleCode">
+<a href="#python">Python </a><a href="#java">Java</a><a href="#javascript">Node.js</a><a href="#curl">cURL</a></div></p>
+<pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&quot;not TEXT_MATCH(text, &#x27;deep&#x27;) and TEXT_MATCH(text, &#x27;machine&#x27;) and TEXT_MATCH(text, &#x27;learning&#x27;)&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java"><span class="hljs-title class_">String</span> filter = <span class="hljs-string">&quot;not TEXT_MATCH(text, &#x27;deep&#x27;) and TEXT_MATCH(text, &#x27;machine&#x27;) and TEXT_MATCH(text, &#x27;learning&#x27;)&quot;</span>;
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> filter = <span class="hljs-string">&quot;not TEXT_MATCH(text, &#x27;deep&#x27;) and TEXT_MATCH(text, &#x27;machine&#x27;) and TEXT_MATCH(text, &#x27;learning&#x27;)&quot;</span>;
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-curl"><span class="hljs-keyword">export</span> filter=<span class="hljs-string">&quot;\&quot;not TEXT_MATCH(text, &#x27;deep&#x27;) and TEXT_MATCH(text, &#x27;machine&#x27;) and TEXT_MATCH(text, &#x27;learning&#x27;)\&quot;&quot;</span>
+<button class="copy-code-btn"></button></code></pre></li>
+</ul>
 <h3 id="Search-with-text-match​" class="common-anchor-header">使用文本匹配搜索</h3><p>文本匹配可与向量相似性搜索结合使用，以缩小搜索范围并提高搜索性能。通过在向量相似性搜索前使用文本匹配过滤 Collections，可以减少需要搜索的文档数量，从而加快查询速度。</p>
 <p>在这个示例中，<code translate="no">filter</code> 表达式过滤了搜索结果，使其只包含与指定术语<code translate="no">keyword1</code> 或<code translate="no">keyword2</code> 匹配的文档。然后在这个过滤后的文档子集中执行向量相似性搜索。</p>
 <div class="multipleCode">
@@ -341,7 +355,7 @@ curl --request POST \
 }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Query-with-text-match​" class="common-anchor-header">文本匹配查询</h3><p>文本匹配也可用于查询操作中的标量过滤。通过在<code translate="no">query()</code> 方法的<code translate="no">expr</code> 参数中指定<code translate="no">TEXT_MATCH</code> 表达式，可以检索与给定术语匹配的文档。</p>
-<p>下面的示例检索了<code translate="no">text</code> 字段包含<code translate="no">keyword1</code> 和<code translate="no">keyword2</code> 两个术语的文档。</p>
+<p>下面的示例检索了<code translate="no">text</code> 字段包含<code translate="no">keyword1</code> 和<code translate="no">keyword2</code> 这两个术语的文档。</p>
 <div class="multipleCode">
    <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># Match entities with both `keyword1` and `keyword2`​</span>
@@ -405,4 +419,10 @@ curl --request POST \
     </button></h2><ul>
 <li><p>为字段启用文本匹配会触发倒排索引的创建，从而消耗存储资源。在决定是否启用此功能时，请考虑对存储的影响，因为它会根据文本大小、唯一标记和所使用的分析器而有所不同。</p></li>
 <li><p>在 Schema 中定义分析器后，其设置将永久适用于该 Collections。如果您认为不同的分析器更适合您的需要，您可以考虑放弃现有的 Collections，然后使用所需的分析器配置创建一个新的 Collections。</p></li>
+<li><p><code translate="no">filter</code> 表达式中的转义规则：</p>
+<ul>
+<li>表达式中用双引号或单引号括起来的字符被解释为字符串常量。如果字符串常量包含转义字符，则必须使用转义序列来表示转义字符。例如，用<code translate="no">\\</code> 表示<code translate="no">\</code> ，用<code translate="no">\\t</code> 表示制表符<code translate="no">\t</code> ，用<code translate="no">\\n</code> 表示换行符。</li>
+<li>如果字符串常量由单引号括起来，常量内的单引号应表示为<code translate="no">\\'</code> ，而双引号可表示为<code translate="no">&quot;</code> 或<code translate="no">\\&quot;</code> 。 示例：<code translate="no">'It\\'s milvus'</code> 。</li>
+<li>如果字符串常量由双引号括起来，常量中的双引号应表示为<code translate="no">\\&quot;</code> ，而单引号可表示为<code translate="no">'</code> 或<code translate="no">\\'</code> 。 示例：<code translate="no">&quot;He said \\&quot;Hi\\&quot;&quot;</code> 。</li>
+</ul></li>
 </ul>

@@ -25,10 +25,10 @@ summary: >-
     </button></h1><p>A pesquisa de texto integral é uma funcionalidade que recupera documentos que contêm termos ou frases específicos em conjuntos de dados de texto, classificando depois os resultados com base na relevância. Esta funcionalidade ultrapassa as limitações da pesquisa semântica, que pode ignorar termos precisos, garantindo que recebe os resultados mais exactos e contextualmente relevantes. Além disso, simplifica as pesquisas vectoriais ao aceitar a entrada de texto em bruto, convertendo automaticamente os seus dados de texto em embeddings esparsos sem a necessidade de gerar manualmente embeddings vectoriais.</p>
 <p>Utilizando o algoritmo BM25 para pontuação de relevância, esta funcionalidade é particularmente valiosa em cenários de geração aumentada de recuperação (RAG), onde dá prioridade a documentos que correspondem a termos de pesquisa específicos.</p>
 <div class="alert note">
-<p>Ao integrar a pesquisa de texto integral com a pesquisa de vectores densos baseada em semântica, pode melhorar a precisão e a relevância dos resultados de pesquisa. Para obter mais informações, consulte <a href="/docs/pt/multi-vector-search.md">Pesquisa híbrida</a>.</p>
-</div>
-<div class="alert note">
-<p>A pesquisa de texto completo está disponível no Milvus Standalone e no Milvus Distributed, mas não no Milvus Lite, embora a adição ao Milvus Lite esteja no roteiro.</p>
+<ul>
+<li>Ao integrar a pesquisa de texto integral com a pesquisa de vectores densos baseada em semântica, pode melhorar a precisão e a relevância dos resultados de pesquisa. Para obter mais informações, consulte <a href="/docs/pt/multi-vector-search.md">Pesquisa híbrida</a>.</li>
+<li>A pesquisa de texto completo está disponível no Milvus Standalone e no Milvus Distributed, mas não no Milvus Lite, embora a adição ao Milvus Lite esteja no roteiro.</li>
+</ul>
 </div>
 <h2 id="Overview​" class="common-anchor-header">Visão geral<button data-href="#Overview​" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -48,7 +48,7 @@ summary: >-
     </button></h2><p>A pesquisa de texto completo simplifica o processo de pesquisa baseado em texto, eliminando a necessidade de incorporação manual. Esta funcionalidade funciona através do seguinte fluxo de trabalho.</p>
 <ol>
 <li><p><strong>Entrada de texto</strong>: Insere documentos de texto em bruto ou fornece texto de consulta sem qualquer necessidade de incorporação manual.</p></li>
-<li><p><strong>Análise de texto</strong>: O Milvus usa um analisador para transformar o texto de entrada em termos individuais e pesquisáveis. Para obter mais informações sobre analisadores, consulte <a href="/docs/pt/analyzer-overview.md">Visão geral do analisador</a>.</p></li>
+<li><p><strong>Análise de texto</strong>: O Milvus utiliza um analisador para transformar o texto de entrada em termos individuais e pesquisáveis. Para obter mais informações sobre analisadores, consulte <a href="/docs/pt/analyzer-overview.md">Visão geral do analisador</a>.</p></li>
 <li><p><strong>Processamento de funções</strong>: A função incorporada recebe os termos tokenizados e converte-os em representações vectoriais esparsas.</p></li>
 <li><p><strong>Armazenamento de colecções</strong>: O Milvus armazena esses embeddings esparsos em uma coleção para uma recuperação eficiente.</p></li>
 <li><p><strong>Pontuação BM25</strong>: Durante uma pesquisa, o Milvus aplica o algoritmo BM25 para calcular as pontuações dos documentos armazenados e classifica os resultados correspondentes com base na relevância para o texto da consulta.</p></li>
@@ -176,7 +176,7 @@ schema.addField(AddFieldReq.builder()
 <ul>
 <li><p><code translate="no">id</code>: serve como chave primária e é gerado automaticamente com <code translate="no">auto_id=True</code>.</p></li>
 <li><p><code translate="no">text</code>: armazena os seus dados de texto em bruto para operações de pesquisa de texto completo. O tipo de dados deve ser <code translate="no">VARCHAR</code>, uma vez que <code translate="no">VARCHAR</code> é o tipo de dados de cadeia de caracteres do Milvus para armazenamento de texto. Defina <code translate="no">enable_analyzer=True</code> para permitir que o Milvus tokenize o texto. Por defeito, o Milvus utiliza o <a href="/docs/pt/standard-analyzer.md">analisador padrão</a> para a análise de texto. Para configurar um analisador diferente, consulte <a href="/docs/pt/analyzer-overview.md">Visão geral</a>.</p></li>
-<li><p><code translate="no">sparse</code>Campo vetorial: um campo vetorial reservado para armazenar as incorporações esparsas geradas internamente para operações de pesquisa de texto completo. O tipo de dados tem de ser <code translate="no">SPARSE_FLOAT_VECTOR</code>.</p></li>
+<li><p><code translate="no">sparse</code>Campo vetorial: um campo vetorial reservado para armazenar as incorporações esparsas geradas internamente para operações de pesquisa de texto completo. O tipo de dados deve ser <code translate="no">SPARSE_FLOAT_VECTOR</code>.</p></li>
 </ul>
 <p>Agora, defina uma função que converterá o seu texto em representações vectoriais esparsas e, em seguida, adicione-a ao esquema.</p>
 <div class="multipleCode">

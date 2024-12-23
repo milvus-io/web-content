@@ -79,7 +79,7 @@ title: Milvus_CLI 命令参考
 </tbody>
 </table>
 <p><h3 id="connect">示例</h3></p>
-<pre><code translate="no" class="language-shell">milvus_cli &gt; connect -uri <span class="hljs-attr">http</span>:<span class="hljs-comment">//127.0.0.1:19530 </span>
+<pre><code translate="no" class="language-shell">milvus_cli &gt; connect -uri <span class="hljs-attr">http</span>:<span class="hljs-comment">//127.0.0.1:19530</span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="create-Database" class="common-anchor-header">创建数据库<button data-href="#create-Database" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -98,7 +98,7 @@ title: Milvus_CLI 命令参考
       </svg>
     </button></h2><p>在 Milvus 中创建数据库</p>
 <p><h3 id="create-database">语法</h3></p>
-<pre><code translate="no" class="language-shell">create database -db (text) 
+<pre><code translate="no" class="language-shell">create database -db (text)
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Options" class="common-anchor-header">选项</h3><table>
 <thead>
@@ -129,7 +129,7 @@ title: Milvus_CLI 命令参考
       </svg>
     </button></h2><p>在 Milvus 中使用数据库</p>
 <p><h3 id="use-database">语法</h3></p>
-<pre><code translate="no" class="language-shell">use database -db (text) 
+<pre><code translate="no" class="language-shell">use database -db (text)
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Options" class="common-anchor-header">选项</h3><table>
 <thead>
@@ -160,7 +160,7 @@ title: Milvus_CLI 命令参考
       </svg>
     </button></h2><p>列出 Milvus 中的数据库</p>
 <p><h3 id="list-database">语法</h3></p>
-<pre><code translate="no" class="language-shell">list databases 
+<pre><code translate="no" class="language-shell">list databases
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Examples" class="common-anchor-header">示例</h3><h4 id="Example-1" class="common-anchor-header">示例 1</h4><p>下面的示例列出了 milvus 中的数据库。</p>
 <pre><code translate="no" class="language-shell">milvus_cli &gt; list databases
@@ -182,7 +182,7 @@ title: Milvus_CLI 命令参考
       </svg>
     </button></h2><p>删除 Milvus 中的数据库</p>
 <p><h3 id="delete-database">语法</h3></p>
-<pre><code translate="no" class="language-shell"><span class="hljs-keyword">delete</span> database -<span class="hljs-title function_">db</span> (text) 
+<pre><code translate="no" class="language-shell"><span class="hljs-keyword">delete</span> database -<span class="hljs-title function_">db</span> (text)
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Options" class="common-anchor-header">选项</h3><table>
 <thead>
@@ -228,6 +228,37 @@ title: Milvus_CLI 命令参考
 <h3 id="Examples" class="common-anchor-header">示例</h3><h4 id="Example-1" class="common-anchor-header">示例 1</h4><p>下面的示例在 milvus 中创建了用户<code translate="no">zilliz</code> 和密码<code translate="no">zilliz</code> 。</p>
 <pre><code translate="no" class="language-shell">milvus_cli &gt; create user -u zilliz -p zilliz
 <button class="copy-code-btn"></button></code></pre>
+<h2 id="create-role" class="common-anchor-header">创建角色<button data-href="#create-role" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>在 Milvus 中创建角色</p>
+<p><h3 id="create-role">语法</h3></p>
+<pre><code translate="no" class="language-shell">create role -r (text)
+<button class="copy-code-btn"></button></code></pre>
+<h3 id="Options" class="common-anchor-header">选项</h3><table>
+<thead>
+<tr><th style="text-align:left">选项</th><th style="text-align:left">全名</th><th style="text-align:left">说明</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">-r</td><td style="text-align:left">-角色名称</td><td style="text-align:left">milvus 角色的角色名称。</td></tr>
+<tr><td style="text-align:left">-帮助</td><td style="text-align:left">不适用</td><td style="text-align:left">显示命令使用帮助。</td></tr>
+</tbody>
+</table>
+<h3 id="Examples" class="common-anchor-header">示例</h3><h4 id="Example-1" class="common-anchor-header">示例 1</h4><p>下面的示例在 milvus 中创建了角色<code translate="no">role1</code> 。</p>
+<pre><code translate="no" class="language-shell">milvus_cli &gt; create role -r role1
+<button class="copy-code-btn"></button></code></pre>
 <h2 id="create-alias" class="common-anchor-header">创建别名<button data-href="#create-alias" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -246,7 +277,7 @@ title: Milvus_CLI 命令参考
     </button></h2><p>为 Collections 指定唯一的别名。</p>
 <div class="alert note">一个 Collection 可以有多个别名。不过，一个别名最多对应一个 Collection。</div>
 <p><h3 id="create-alias">语法</h3></p>
-<pre><code translate="no" class="language-shell">create <span class="hljs-built_in">alias</span> -c (text) -a (text) [-A] 
+<pre><code translate="no" class="language-shell">create <span class="hljs-built_in">alias</span> -c (text) -a (text) [-A]
 <button class="copy-code-btn"></button></code></pre>
 <p><h3 id="create-alias">选项</h3></p>
 <table>
@@ -254,7 +285,7 @@ title: Milvus_CLI 命令参考
 <tr><th style="text-align:left">选项</th><th style="text-align:left">全名</th><th style="text-align:left">说明</th></tr>
 </thead>
 <tbody>
-<tr><td style="text-align:left">-c</td><td style="text-align:left">-collection-名称</td><td style="text-align:left">Collections 的名称。</td></tr>
+<tr><td style="text-align:left">-c</td><td style="text-align:left">-Collection-名称</td><td style="text-align:left">Collections 的名称。</td></tr>
 <tr><td style="text-align:left">-a</td><td style="text-align:left">-别名</td><td style="text-align:left">别名。</td></tr>
 <tr><td style="text-align:left">-A</td><td style="text-align:left">-alter</td><td style="text-align:left">(可选）将别名转移到指定 Collections 的标志。</td></tr>
 <tr><td style="text-align:left">-help</td><td style="text-align:left">不适用</td><td style="text-align:left">显示命令使用帮助。</td></tr>
@@ -336,7 +367,7 @@ milvus_cli &gt; create collection -c car -f <span class="hljs-built_in">id</span
 <tr><th style="text-align:left">选项</th><th style="text-align:left">全名</th><th style="text-align:left">说明</th></tr>
 </thead>
 <tbody>
-<tr><td style="text-align:left">-c</td><td style="text-align:left">-collection-名称</td><td style="text-align:left">Collections 的名称。</td></tr>
+<tr><td style="text-align:left">-c</td><td style="text-align:left">-Collection-名称</td><td style="text-align:left">Collections 的名称。</td></tr>
 <tr><td style="text-align:left">-p</td><td style="text-align:left">-分区</td><td style="text-align:left">分区名称。</td></tr>
 <tr><td style="text-align:left">-d</td><td style="text-align:left">-分区描述</td><td style="text-align:left">(可选）分区描述。</td></tr>
 <tr><td style="text-align:left">-help</td><td style="text-align:left">不适用</td><td style="text-align:left">显示命令使用帮助。</td></tr>
@@ -385,10 +416,10 @@ The name of the field to create an index <span class="hljs-keyword">for</span> (
 Index name: vectorIndex
 
 <span class="hljs-comment"># Default is &#x27;&#x27;</span>
-Index <span class="hljs-built_in">type</span> FLAT, IVF_FLAT, IVF_SQ8, IVF_PQ, RNSG, HNSW, ANNOY, AUTOINDEX, DISKANN, GPU_IVF_FLAT, GPU_IVF_PQ, SPARSE_INVERTED_INDEX, SPARSE_WAND, SCANN, STL_SORT, Trie, INVERTED, ) []: IVF_FLAT  
+Index <span class="hljs-built_in">type</span> FLAT, IVF_FLAT, IVF_SQ8, IVF_PQ, RNSG, HNSW, ANNOY, AUTOINDEX, DISKANN, GPU_IVF_FLAT, GPU_IVF_PQ, SPARSE_INVERTED_INDEX, SPARSE_WAND, SCANN, STL_SORT, Trie, INVERTED, ) []: IVF_FLAT
 
 <span class="hljs-comment"># Default is &#x27;&#x27;</span>
-Index metric <span class="hljs-built_in">type</span> (L2, IP, HAMMING, TANIMOTO, COSINE, ) []: 
+Index metric <span class="hljs-built_in">type</span> (L2, IP, HAMMING, TANIMOTO, COSINE, ) []:
 
 Timeout []:
 <button class="copy-code-btn"></button></code></pre>
@@ -421,6 +452,37 @@ Timeout []:
 </table>
 <h3 id="Example" class="common-anchor-header">示例</h3><pre><code translate="no" class="language-shell">milvus_cli &gt; <span class="hljs-keyword">delete</span> user -u zilliz
 <button class="copy-code-btn"></button></code></pre>
+<h2 id="delete-role" class="common-anchor-header">删除角色<button data-href="#delete-role" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>删除 Milvus 中的角色</p>
+<p><h3 id="delete-role">语法</h3></p>
+<pre><code translate="no" class="language-shell"><span class="hljs-keyword">delete</span> role -<span class="hljs-title function_">r</span> (text)
+<button class="copy-code-btn"></button></code></pre>
+<h3 id="Options" class="common-anchor-header">选项</h3><table>
+<thead>
+<tr><th style="text-align:left">选项</th><th style="text-align:left">全名</th><th style="text-align:left">说明</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">-r</td><td style="text-align:left">-角色名称</td><td style="text-align:left">milvus 角色的角色名称。</td></tr>
+<tr><td style="text-align:left">-帮助</td><td style="text-align:left">不适用</td><td style="text-align:left">显示命令使用帮助。</td></tr>
+</tbody>
+</table>
+<h3 id="Examples" class="common-anchor-header">示例</h3><p>下面的示例删除了 milvus 中的角色<code translate="no">role1</code> 。</p>
+<pre><code translate="no" class="language-shell">milvus_cli &gt; <span class="hljs-keyword">delete</span> role -r role1
+<button class="copy-code-btn"></button></code></pre>
 <h2 id="delete-alias" class="common-anchor-header">删除别名<button data-href="#delete-alias" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -438,7 +500,7 @@ Timeout []:
       </svg>
     </button></h2><p>删除别名。</p>
 <p><h3 id="delete-alias">语法</h3></p>
-<pre><code translate="no" class="language-shell"><span class="hljs-keyword">delete</span> alias -<span class="hljs-title function_">a</span> (text) 
+<pre><code translate="no" class="language-shell"><span class="hljs-keyword">delete</span> alias -<span class="hljs-title function_">a</span> (text)
 <button class="copy-code-btn"></button></code></pre>
 <p><h3 id="delete-alias">选项</h3></p>
 <table>
@@ -468,7 +530,7 @@ Timeout []:
       </svg>
     </button></h2><p>删除一个 Collection。</p>
 <p><h3 id="delete-collection">语法</h3></p>
-<pre><code translate="no" class="language-shell"><span class="hljs-keyword">delete</span> collection -<span class="hljs-title function_">c</span> (text) 
+<pre><code translate="no" class="language-shell"><span class="hljs-keyword">delete</span> collection -<span class="hljs-title function_">c</span> (text)
 <button class="copy-code-btn"></button></code></pre>
 <p><h3 id="delete-collection">选项</h3></p>
 <table>
@@ -476,7 +538,7 @@ Timeout []:
 <tr><th style="text-align:left">选项</th><th style="text-align:left">全名</th><th style="text-align:left">说明</th></tr>
 </thead>
 <tbody>
-<tr><td style="text-align:left">-c</td><td style="text-align:left">-Collection-名称</td><td style="text-align:left">要删除的 Collection 的名称。</td></tr>
+<tr><td style="text-align:left">-c</td><td style="text-align:left">-collection-名称</td><td style="text-align:left">要删除的 Collection 的名称。</td></tr>
 <tr><td style="text-align:left">-帮助</td><td style="text-align:left">不适用</td><td style="text-align:left">显示命令使用帮助。</td></tr>
 </tbody>
 </table>
@@ -500,7 +562,7 @@ Timeout []:
       </svg>
     </button></h2><p>删除实体。</p>
 <p><h3 id="delete-entities">语法</h3></p>
-<pre><code translate="no"><span class="hljs-keyword">delete</span> entities -<span class="hljs-title function_">c</span> (text) -<span class="hljs-title function_">p</span> (text) 
+<pre><code translate="no"><span class="hljs-keyword">delete</span> entities -<span class="hljs-title function_">c</span> (text) -<span class="hljs-title function_">p</span> (text)
 <button class="copy-code-btn"></button></code></pre>
 <p><h3 id="delete-entities">选项</h3></p>
 <table>
@@ -575,7 +637,7 @@ Timeout []:
 <p><h3 id="delete-index">语法</h3></p>
 <pre><code translate="no" class="language-shell"><span class="hljs-keyword">delete</span> index -<span class="hljs-title function_">c</span> (text) -<span class="hljs-title function_">in</span> (text)
 <button class="copy-code-btn"></button></code></pre>
-<p><h3 id="delete-index">选项</h3></p>
+<p><h3 >选项</h3></p>
 <table>
 <thead>
 <tr><th style="text-align:left">选项</th><th style="text-align:left">全名</th><th style="text-align:left">说明</th></tr>
@@ -583,11 +645,131 @@ Timeout []:
 <tbody>
 <tr><td style="text-align:left">-c</td><td style="text-align:left">-Collection-名称</td><td style="text-align:left">Collections 的名称。</td></tr>
 <tr><td style="text-align:left">-在</td><td style="text-align:left">-索引名称</td><td style="text-align:left">索引名称。</td></tr>
+<tr><td style="text-align:left">-帮助</td><td style="text-align:left">无</td><td style="text-align:left">显示命令使用帮助。</td></tr>
+</tbody>
+</table>
+<p><h3 >示例</h3></p>
+<pre><code translate="no" class="language-shell">milvus_cli &gt; <span class="hljs-keyword">delete</span> index -c car -<span class="hljs-keyword">in</span> indexName
+<button class="copy-code-btn"></button></code></pre>
+<h2 id="grant-role" class="common-anchor-header">授予角色<button data-href="#grant-role" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>授予用户角色</p>
+<p><h3 id="grant-user">语法</h3></p>
+<p><h3 >选项</h3></p>
+<table>
+<thead>
+<tr><th style="text-align:left">选项</th><th style="text-align:left">全称</th><th style="text-align:left">说明</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">-r</td><td style="text-align:left">-角色名称</td><td style="text-align:left">milvus 角色的角色名称。</td></tr>
+<tr><td style="text-align:left">-u</td><td style="text-align:left">-用户名</td><td style="text-align:left">milvus 用户的用户名。</td></tr>
+<tr><td style="text-align:left">-help</td><td style="text-align:left">不适用</td><td style="text-align:left">显示命令使用帮助。</td></tr>
+</tbody>
+</table>
+<p><h3 >示例</h3></p>
+<pre><code translate="no" class="language-shell">grant role -r role1 -u user1
+<button class="copy-code-btn"></button></code></pre>
+<h2 id="grant-privilege" class="common-anchor-header">授予权限<button data-href="#grant-privilege" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>为角色分配权限。</p>
+<p><h3 id="assign-privilege">语法</h3></p>
+<p><h3 >选项</h3></p>
+<table>
+<thead>
+<tr><th style="text-align:left">选项</th><th style="text-align:left">全称</th><th style="text-align:left">说明</th></tr>
+</thead>
+<tbody>
 <tr><td style="text-align:left">-帮助</td><td style="text-align:left">不适用</td><td style="text-align:left">显示命令使用帮助。</td></tr>
 </tbody>
 </table>
-<p><h3 id="delete-index">示例</h3></p>
-<pre><code translate="no" class="language-shell">milvus_cli &gt; <span class="hljs-keyword">delete</span> index -c car -<span class="hljs-keyword">in</span> indexName
+<p><h3 >示例</h3></p>
+<pre><code translate="no" class="language-shell">grant privilege
+<button class="copy-code-btn"></button></code></pre>
+<h2 id="revoke-role" class="common-anchor-header">撤销角色<button data-href="#revoke-role" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>撤销分配给用户的角色。</p>
+<p><h3 id="grant-user">语法</h3></p>
+<p><h3 >选项</h3></p>
+<table>
+<thead>
+<tr><th style="text-align:left">选项</th><th style="text-align:left">全称</th><th style="text-align:left">说明</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">-r</td><td style="text-align:left">-角色名称</td><td style="text-align:left">milvus 角色的角色名称。</td></tr>
+<tr><td style="text-align:left">-u</td><td style="text-align:left">-用户名</td><td style="text-align:left">milvus 用户的用户名。</td></tr>
+<tr><td style="text-align:left">-help</td><td style="text-align:left">不适用</td><td style="text-align:left">显示命令使用帮助。</td></tr>
+</tbody>
+</table>
+<p><h3 >示例</h3></p>
+<pre><code translate="no" class="language-shell">grant role -r role1 -u user1
+<button class="copy-code-btn"></button></code></pre>
+<h2 id="revoke-privilege" class="common-anchor-header">撤销权限<button data-href="#revoke-privilege" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>撤销已分配给角色的权限。</p>
+<p><h3 id="revoke-privilege">语法</h3></p>
+<p><h3 >选项</h3></p>
+<table>
+<thead>
+<tr><th style="text-align:left">选项</th><th style="text-align:left">全称</th><th style="text-align:left">说明</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">-帮助</td><td style="text-align:left">不适用</td><td style="text-align:left">显示命令使用帮助。</td></tr>
+</tbody>
+</table>
+<p><h3 >示例</h3></p>
+<pre><code translate="no" class="language-shell">revoke privilege
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="show-collection" class="common-anchor-header">show Collections<button data-href="#show-collection" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -679,7 +861,7 @@ Timeout []:
 <tr><th style="text-align:left">选项</th><th style="text-align:left">全名</th><th style="text-align:left">说明</th></tr>
 </thead>
 <tbody>
-<tr><td style="text-align:left">-c</td><td style="text-align:left">-Collection-名称</td><td style="text-align:left">Collections 的名称。</td></tr>
+<tr><td style="text-align:left">-c</td><td style="text-align:left">-collection-名称</td><td style="text-align:left">Collections 的名称。</td></tr>
 <tr><td style="text-align:left">-在</td><td style="text-align:left">-索引名称</td><td style="text-align:left">索引名称。</td></tr>
 </tbody>
 </table>
@@ -742,12 +924,14 @@ Timeout []:
 <tbody>
 <tr><td style="text-align:left">清除</td><td style="text-align:left">清除屏幕。</td></tr>
 <tr><td style="text-align:left">连接</td><td style="text-align:left">连接 Milvus。</td></tr>
-<tr><td style="text-align:left">创建</td><td style="text-align:left">创建 Collections、数据库、分区、用户和索引。</td></tr>
-<tr><td style="text-align:left">删除</td><td style="text-align:left">删除 Collections、数据库、分区、别名、用户或索引。</td></tr>
+<tr><td style="text-align:left">创建</td><td style="text-align:left">创建 Collections、数据库、分区、用户、角色和索引。</td></tr>
+<tr><td style="text-align:left">授予</td><td style="text-align:left">授予角色、权限。</td></tr>
+<tr><td style="text-align:left">撤销</td><td style="text-align:left">撤销角色、权限。</td></tr>
+<tr><td style="text-align:left">删除</td><td style="text-align:left">删除 Collections、数据库、分区、别名、用户、角色或索引。</td></tr>
 <tr><td style="text-align:left">退出</td><td style="text-align:left">关闭命令行窗口。</td></tr>
 <tr><td style="text-align:left">帮助</td><td style="text-align:left">显示命令使用帮助。</td></tr>
 <tr><td style="text-align:left">插入</td><td style="text-align:left">将数据导入分区。</td></tr>
-<tr><td style="text-align:left">列表</td><td style="text-align:left">列出 Collections、数据库、分区、用户或索引。</td></tr>
+<tr><td style="text-align:left">列表</td><td style="text-align:left">列出 Collections、数据库、分区、用户、角色、授权或索引。</td></tr>
 <tr><td style="text-align:left">加载</td><td style="text-align:left">加载一个 Collection 或分区。</td></tr>
 <tr><td style="text-align:left">查询</td><td style="text-align:left">显示符合所有输入条件的查询结果。</td></tr>
 <tr><td style="text-align:left">释放</td><td style="text-align:left">释放一个 Collection 或分区。</td></tr>
@@ -783,7 +967,7 @@ Timeout []:
 <tr><th style="text-align:left">选项</th><th style="text-align:left">全名</th><th style="text-align:left">说明</th></tr>
 </thead>
 <tbody>
-<tr><td style="text-align:left">-c</td><td style="text-align:left">-collection-名称</td><td style="text-align:left">插入数据的 Collection 的名称。</td></tr>
+<tr><td style="text-align:left">-c</td><td style="text-align:left">-collection-名称</td><td style="text-align:left">插入数据的 Collections 名称。</td></tr>
 <tr><td style="text-align:left">-p</td><td style="text-align:left">-分区</td><td style="text-align:left">(可选）插入数据的分区名称。不通过此分区选项表示选择"_默认 "分区。</td></tr>
 <tr><td style="text-align:left">-help</td><td style="text-align:left">不适用</td><td style="text-align:left">显示命令使用帮助。</td></tr>
 </tbody>
@@ -849,6 +1033,64 @@ Milvus timestamp:           428849214449254403
 <h3 id="Syntax" class="common-anchor-header">语法</h3><pre><code translate="no" class="language-shell">list <span class="hljs-built_in">users</span>
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Options" class="common-anchor-header">选项</h3><p>| 选项 | 全名 | 说明 | | --help | n/a | 显示命令使用帮助。|</p>
+<h2 id="List-roles" class="common-anchor-header">列出角色<button data-href="#List-roles" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>列出 Milvus 中的角色</p>
+<p><h3 id="list-role">语法</h3></p>
+<pre><code translate="no" class="language-shell">list roles
+<button class="copy-code-btn"></button></code></pre>
+<h3 id="Options" class="common-anchor-header">选项</h3><table>
+<thead>
+<tr><th style="text-align:left">选项</th><th style="text-align:left">全名</th><th style="text-align:left">说明</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">-帮助</td><td style="text-align:left">不适用</td><td style="text-align:left">显示命令使用帮助。</td></tr>
+</tbody>
+</table>
+<h3 id="Examples" class="common-anchor-header">示例</h3><pre><code translate="no" class="language-shell">milvus_cli &gt; list roles
+<button class="copy-code-btn"></button></code></pre>
+<h2 id="List-grants" class="common-anchor-header">列出拨款<button data-href="#List-grants" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>列出 Milvus 中的授权</p>
+<h3 id="Options" class="common-anchor-header">选项</h3><table>
+<thead>
+<tr><th style="text-align:left">选项</th><th style="text-align:left">全称</th><th style="text-align:left">说明</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">-r</td><td style="text-align:left">-角色名称</td><td style="text-align:left">milvus 角色的角色名称。</td></tr>
+<tr><td style="text-align:left">-o</td><td style="text-align:left">-对象名称</td><td style="text-align:left">milvus 对象的对象名称。</td></tr>
+<tr><td style="text-align:left">-t</td><td style="text-align:left">-对象类型</td><td style="text-align:left">全局、Collection 或用户。</td></tr>
+<tr><td style="text-align:left">-帮助</td><td style="text-align:left">不适用</td><td style="text-align:left">显示命令使用帮助。</td></tr>
+</tbody>
+</table>
+<h3 id="Examples" class="common-anchor-header">示例</h3><pre><code translate="no" class="language-shell">milvus_cli &gt; list grants -r role1 -o object1 -t Collection
+<button class="copy-code-btn"></button></code></pre>
 <h2 id="list-collections" class="common-anchor-header">list Collections<button data-href="#list-collections" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -1182,7 +1424,7 @@ Guarantee Timestamp(It instructs Milvus to see <span class="hljs-built_in">all</
       </svg>
     </button></h2><p>列出连接。</p>
 <p><h3 id="show-connection">语法</h3></p>
-<pre><code translate="no" class="language-shell">list connections 
+<pre><code translate="no" class="language-shell">list connections
 <button class="copy-code-btn"></button></code></pre>
 <p><h3 id="show-connection">选项</h3></p>
 <table>

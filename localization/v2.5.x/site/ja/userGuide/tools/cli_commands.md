@@ -79,7 +79,7 @@ title: Milvus_CLI コマンドリファレンス
 </tbody>
 </table>
 <p><h3 id="connect">例</h3></p>
-<pre><code translate="no" class="language-shell">milvus_cli &gt; connect -uri <span class="hljs-attr">http</span>:<span class="hljs-comment">//127.0.0.1:19530 </span>
+<pre><code translate="no" class="language-shell">milvus_cli &gt; connect -uri <span class="hljs-attr">http</span>:<span class="hljs-comment">//127.0.0.1:19530</span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="create-Database" class="common-anchor-header">データベースの作成<button data-href="#create-Database" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -98,7 +98,7 @@ title: Milvus_CLI コマンドリファレンス
       </svg>
     </button></h2><p>Milvusでデータベースを作成する。</p>
 <p><h3 id="create-database">構文</h3></p>
-<pre><code translate="no" class="language-shell">create database -db (text) 
+<pre><code translate="no" class="language-shell">create database -db (text)
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Options" class="common-anchor-header">オプション</h3><table>
 <thead>
@@ -129,7 +129,7 @@ title: Milvus_CLI コマンドリファレンス
       </svg>
     </button></h2><p>milvusでデータベースを使用する。</p>
 <p><h3 id="use-database">構文</h3></p>
-<pre><code translate="no" class="language-shell">use database -db (text) 
+<pre><code translate="no" class="language-shell">use database -db (text)
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Options" class="common-anchor-header">オプション</h3><table>
 <thead>
@@ -160,7 +160,7 @@ title: Milvus_CLI コマンドリファレンス
       </svg>
     </button></h2><p>milvusのデータベースをリストアップする。</p>
 <p><h3 id="list-database">構文</h3></p>
-<pre><code translate="no" class="language-shell">list databases 
+<pre><code translate="no" class="language-shell">list databases
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Examples" class="common-anchor-header">例</h3><h4 id="Example-1" class="common-anchor-header">例 1</h4><p>次の例はmilvusのデータベースをリストアップします。</p>
 <pre><code translate="no" class="language-shell">milvus_cli &gt; list databases
@@ -182,7 +182,7 @@ title: Milvus_CLI コマンドリファレンス
       </svg>
     </button></h2><p>milvusのデータベースを削除する。</p>
 <p><h3 id="delete-database">構文</h3></p>
-<pre><code translate="no" class="language-shell"><span class="hljs-keyword">delete</span> database -<span class="hljs-title function_">db</span> (text) 
+<pre><code translate="no" class="language-shell"><span class="hljs-keyword">delete</span> database -<span class="hljs-title function_">db</span> (text)
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Options" class="common-anchor-header">オプション</h3><table>
 <thead>
@@ -220,13 +220,44 @@ title: Milvus_CLI コマンドリファレンス
 <tr><th style="text-align:left">オプション</th><th style="text-align:left">フルネーム</th><th style="text-align:left">説明</th></tr>
 </thead>
 <tbody>
-<tr><td style="text-align:left">-p</td><td style="text-align:left">-パスワード</td><td style="text-align:left">milvusのユーザーパスワード。デフォルトは &quot;None&quot;。</td></tr>
+<tr><td style="text-align:left">-p</td><td style="text-align:left">-パスワード</td><td style="text-align:left">milvusのユーザーパスワード。デフォルトは &quot;None&quot; です。</td></tr>
 <tr><td style="text-align:left">-u</td><td style="text-align:left">-ユーザー名</td><td style="text-align:left">milvusでのユーザー名。デフォルトは &quot;None&quot; です。</td></tr>
 <tr><td style="text-align:left">-ヘルプ</td><td style="text-align:left">n/a</td><td style="text-align:left">コマンドの使用に関するヘルプを表示します。</td></tr>
 </tbody>
 </table>
-<h3 id="Examples" class="common-anchor-header">例</h3><h4 id="Example-1" class="common-anchor-header">例</h4><p>次の例では、milvusにユーザー<code translate="no">zilliz</code> 、パスワード<code translate="no">zilliz</code> を作成します。</p>
+<h3 id="Examples" class="common-anchor-header">例</h3><h4 id="Example-1" class="common-anchor-header">例</h4><p>次の例では、milvusにユーザー<code translate="no">zilliz</code> 、パスワード<code translate="no">zilliz</code> 。</p>
 <pre><code translate="no" class="language-shell">milvus_cli &gt; create user -u zilliz -p zilliz
+<button class="copy-code-btn"></button></code></pre>
+<h2 id="create-role" class="common-anchor-header">ロールの作成<button data-href="#create-role" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>milvusにロールを作成する。</p>
+<p><h3 id="create-role">構文</h3></p>
+<pre><code translate="no" class="language-shell">create role -r (text)
+<button class="copy-code-btn"></button></code></pre>
+<h3 id="Options" class="common-anchor-header">オプション</h3><table>
+<thead>
+<tr><th style="text-align:left">オプション</th><th style="text-align:left">フルネーム</th><th style="text-align:left">説明</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">-r</td><td style="text-align:left">-ロール名</td><td style="text-align:left">milvusロールのロール名。</td></tr>
+<tr><td style="text-align:left">-ヘルプ</td><td style="text-align:left">n/a</td><td style="text-align:left">コマンドの使用に関するヘルプを表示します。</td></tr>
+</tbody>
+</table>
+<h3 id="Examples" class="common-anchor-header">例</h3><h4 id="Example-1" class="common-anchor-header">例1</h4><p>次の例では、milvusに<code translate="no">role1</code> というロールを作成します。</p>
+<pre><code translate="no" class="language-shell">milvus_cli &gt; create role -r role1
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="create-alias" class="common-anchor-header">エイリアスの作成<button data-href="#create-alias" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -246,7 +277,7 @@ title: Milvus_CLI コマンドリファレンス
     </button></h2><p>コレクションに一意のエイリアスを指定します。</p>
 <div class="alert note">コレクションは複数のエイリアスを持つことができます。ただし、エイリアスは最大1つのコレクションに対応します。</div>
 <p><h3 id="create-alias">構文</h3></p>
-<pre><code translate="no" class="language-shell">create <span class="hljs-built_in">alias</span> -c (text) -a (text) [-A] 
+<pre><code translate="no" class="language-shell">create <span class="hljs-built_in">alias</span> -c (text) -a (text) [-A]
 <button class="copy-code-btn"></button></code></pre>
 <p><h3 id="create-alias">オプション</h3></p>
 <table>
@@ -385,10 +416,10 @@ The name of the field to create an index <span class="hljs-keyword">for</span> (
 Index name: vectorIndex
 
 <span class="hljs-comment"># Default is &#x27;&#x27;</span>
-Index <span class="hljs-built_in">type</span> FLAT, IVF_FLAT, IVF_SQ8, IVF_PQ, RNSG, HNSW, ANNOY, AUTOINDEX, DISKANN, GPU_IVF_FLAT, GPU_IVF_PQ, SPARSE_INVERTED_INDEX, SPARSE_WAND, SCANN, STL_SORT, Trie, INVERTED, ) []: IVF_FLAT  
+Index <span class="hljs-built_in">type</span> FLAT, IVF_FLAT, IVF_SQ8, IVF_PQ, RNSG, HNSW, ANNOY, AUTOINDEX, DISKANN, GPU_IVF_FLAT, GPU_IVF_PQ, SPARSE_INVERTED_INDEX, SPARSE_WAND, SCANN, STL_SORT, Trie, INVERTED, ) []: IVF_FLAT
 
 <span class="hljs-comment"># Default is &#x27;&#x27;</span>
-Index metric <span class="hljs-built_in">type</span> (L2, IP, HAMMING, TANIMOTO, COSINE, ) []: 
+Index metric <span class="hljs-built_in">type</span> (L2, IP, HAMMING, TANIMOTO, COSINE, ) []:
 
 Timeout []:
 <button class="copy-code-btn"></button></code></pre>
@@ -421,6 +452,37 @@ Timeout []:
 </table>
 <h3 id="Example" class="common-anchor-header">例</h3><pre><code translate="no" class="language-shell">milvus_cli &gt; <span class="hljs-keyword">delete</span> user -u zilliz
 <button class="copy-code-btn"></button></code></pre>
+<h2 id="delete-role" class="common-anchor-header">ロール削除<button data-href="#delete-role" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>Milvusのロールを削除する。</p>
+<p><h3 id="delete-role">構文</h3></p>
+<pre><code translate="no" class="language-shell"><span class="hljs-keyword">delete</span> role -<span class="hljs-title function_">r</span> (text)
+<button class="copy-code-btn"></button></code></pre>
+<h3 id="Options" class="common-anchor-header">オプション</h3><table>
+<thead>
+<tr><th style="text-align:left">オプション</th><th style="text-align:left">フルネーム</th><th style="text-align:left">説明</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">-r</td><td style="text-align:left">-ロール名</td><td style="text-align:left">milvusロールのロール名。</td></tr>
+<tr><td style="text-align:left">-ヘルプ</td><td style="text-align:left">n/a</td><td style="text-align:left">コマンドの使用に関するヘルプを表示します。</td></tr>
+</tbody>
+</table>
+<h3 id="Examples" class="common-anchor-header">例</h3><p>以下の例では、milvusのロール<code translate="no">role1</code> を削除しています。</p>
+<pre><code translate="no" class="language-shell">milvus_cli &gt; <span class="hljs-keyword">delete</span> role -r role1
+<button class="copy-code-btn"></button></code></pre>
 <h2 id="delete-alias" class="common-anchor-header">エイリアス削除<button data-href="#delete-alias" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -438,7 +500,7 @@ Timeout []:
       </svg>
     </button></h2><p>エイリアスを削除します。</p>
 <p><h3 id="delete-alias">構文</h3></p>
-<pre><code translate="no" class="language-shell"><span class="hljs-keyword">delete</span> alias -<span class="hljs-title function_">a</span> (text) 
+<pre><code translate="no" class="language-shell"><span class="hljs-keyword">delete</span> alias -<span class="hljs-title function_">a</span> (text)
 <button class="copy-code-btn"></button></code></pre>
 <p><h3 id="delete-alias">オプション</h3></p>
 <table>
@@ -468,7 +530,7 @@ Timeout []:
       </svg>
     </button></h2><p>コレクションを削除します。</p>
 <p><h3 id="delete-collection">構文</h3></p>
-<pre><code translate="no" class="language-shell"><span class="hljs-keyword">delete</span> collection -<span class="hljs-title function_">c</span> (text) 
+<pre><code translate="no" class="language-shell"><span class="hljs-keyword">delete</span> collection -<span class="hljs-title function_">c</span> (text)
 <button class="copy-code-btn"></button></code></pre>
 <p><h3 id="delete-collection">オプション</h3></p>
 <table>
@@ -500,7 +562,7 @@ Timeout []:
       </svg>
     </button></h2><p>エンティティを削除する。</p>
 <p><h3 id="delete-entities">構文</h3></p>
-<pre><code translate="no"><span class="hljs-keyword">delete</span> entities -<span class="hljs-title function_">c</span> (text) -<span class="hljs-title function_">p</span> (text) 
+<pre><code translate="no"><span class="hljs-keyword">delete</span> entities -<span class="hljs-title function_">c</span> (text) -<span class="hljs-title function_">p</span> (text)
 <button class="copy-code-btn"></button></code></pre>
 <p><h3 id="delete-entities">オプション</h3></p>
 <table>
@@ -575,7 +637,7 @@ Timeout []:
 <p><h3 id="delete-index">構文</h3></p>
 <pre><code translate="no" class="language-shell"><span class="hljs-keyword">delete</span> index -<span class="hljs-title function_">c</span> (text) -<span class="hljs-title function_">in</span> (text)
 <button class="copy-code-btn"></button></code></pre>
-<p><h3 id="delete-index">オプション</h3></p>
+<p><h3 >オプション</h3></p>
 <table>
 <thead>
 <tr><th style="text-align:left">オプション</th><th style="text-align:left">フルネーム</th><th style="text-align:left">説明</th></tr>
@@ -586,8 +648,128 @@ Timeout []:
 <tr><td style="text-align:left">-ヘルプ</td><td style="text-align:left">n/a</td><td style="text-align:left">コマンドの使用に関するヘルプを表示する。</td></tr>
 </tbody>
 </table>
-<p><h3 id="delete-index">例</h3></p>
+<p><h3 >例</h3></p>
 <pre><code translate="no" class="language-shell">milvus_cli &gt; <span class="hljs-keyword">delete</span> index -c car -<span class="hljs-keyword">in</span> indexName
+<button class="copy-code-btn"></button></code></pre>
+<h2 id="grant-role" class="common-anchor-header">ロールの付与<button data-href="#grant-role" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>ユーザにロールを付与する</p>
+<p><h3 id="grant-user">構文</h3></p>
+<p><h3 >オプション</h3></p>
+<table>
+<thead>
+<tr><th style="text-align:left">オプション</th><th style="text-align:left">フルネーム</th><th style="text-align:left">説明</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">-r</td><td style="text-align:left">-ロール名</td><td style="text-align:left">milvusロールのロール名。</td></tr>
+<tr><td style="text-align:left">-u</td><td style="text-align:left">-ユーザー名</td><td style="text-align:left">milvusユーザーのユーザー名。</td></tr>
+<tr><td style="text-align:left">-ヘルプ</td><td style="text-align:left">n/a</td><td style="text-align:left">コマンドの使用に関するヘルプを表示します。</td></tr>
+</tbody>
+</table>
+<p><h3 >例</h3></p>
+<pre><code translate="no" class="language-shell">grant role -r role1 -u user1
+<button class="copy-code-btn"></button></code></pre>
+<h2 id="grant-privilege" class="common-anchor-header">権限付与<button data-href="#grant-privilege" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>ロールに権限を割り当てます。</p>
+<p><h3 id="assign-privilege">構文</h3></p>
+<p><h3 >オプション</h3></p>
+<table>
+<thead>
+<tr><th style="text-align:left">オプション</th><th style="text-align:left">フルネーム</th><th style="text-align:left">説明</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">-ヘルプ</td><td style="text-align:left">n/a</td><td style="text-align:left">コマンドの使用に関するヘルプを表示します。</td></tr>
+</tbody>
+</table>
+<p><h3 >例</h3></p>
+<pre><code translate="no" class="language-shell">grant privilege
+<button class="copy-code-btn"></button></code></pre>
+<h2 id="revoke-role" class="common-anchor-header">役割を取り消す<button data-href="#revoke-role" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>ユーザに割り当てられているロールを取り消します。</p>
+<p><h3 id="grant-user">構文</h3></p>
+<p><h3 >オプション</h3></p>
+<table>
+<thead>
+<tr><th style="text-align:left">オプション</th><th style="text-align:left">フルネーム</th><th style="text-align:left">説明</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">-r</td><td style="text-align:left">-ロール名</td><td style="text-align:left">milvusロールのロール名。</td></tr>
+<tr><td style="text-align:left">-u</td><td style="text-align:left">-ユーザー名</td><td style="text-align:left">milvusユーザーのユーザー名。</td></tr>
+<tr><td style="text-align:left">-ヘルプ</td><td style="text-align:left">n/a</td><td style="text-align:left">コマンドの使用に関するヘルプを表示します。</td></tr>
+</tbody>
+</table>
+<p><h3 >例</h3></p>
+<pre><code translate="no" class="language-shell">grant role -r role1 -u user1
+<button class="copy-code-btn"></button></code></pre>
+<h2 id="revoke-privilege" class="common-anchor-header">権限を取り消す<button data-href="#revoke-privilege" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>既にロールに割り当てられている権限を取り消します。</p>
+<p><h3 id="revoke-privilege">構文</h3></p>
+<p><h3 >オプション</h3></p>
+<table>
+<thead>
+<tr><th style="text-align:left">オプション</th><th style="text-align:left">フルネーム</th><th style="text-align:left">説明</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">-ヘルプ</td><td style="text-align:left">n/a</td><td style="text-align:left">コマンドの使用に関するヘルプを表示します。</td></tr>
+</tbody>
+</table>
+<p><h3 >例</h3></p>
+<pre><code translate="no" class="language-shell">revoke privilege
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="show-collection" class="common-anchor-header">ショーコレクション<button data-href="#show-collection" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -742,13 +924,15 @@ Timeout []:
 <tbody>
 <tr><td style="text-align:left">クリア</td><td style="text-align:left">画面を消去します。</td></tr>
 <tr><td style="text-align:left">接続</td><td style="text-align:left">Milvusに接続します。</td></tr>
-<tr><td style="text-align:left">作成</td><td style="text-align:left">コレクション、データベース、パーティション、ユーザ、インデックスを作成する。</td></tr>
-<tr><td style="text-align:left">削除</td><td style="text-align:left">コレクション、データベース、パーティション、エイリアス、ユーザ、インデックスを削除します。</td></tr>
+<tr><td style="text-align:left">作成</td><td style="text-align:left">コレクション、データベース、パーティション、ユーザ、ロール、インデックスを作成する。</td></tr>
+<tr><td style="text-align:left">グラント</td><td style="text-align:left">ロール、権限を付与する。</td></tr>
+<tr><td style="text-align:left">取り消す</td><td style="text-align:left">ロール、権限を取り消します。</td></tr>
+<tr><td style="text-align:left">削除</td><td style="text-align:left">コレクション、データベース、パーティション、エイリアス、ユーザ、ロール、インデックスを削除します。</td></tr>
 <tr><td style="text-align:left">終了</td><td style="text-align:left">コマンドラインウィンドウを閉じます。</td></tr>
 <tr><td style="text-align:left">ヘルプ</td><td style="text-align:left">コマンドの使用に関するヘルプを表示します。</td></tr>
 <tr><td style="text-align:left">インサート</td><td style="text-align:left">パーティションにデータをインポートします。</td></tr>
-<tr><td style="text-align:left">リスト</td><td style="text-align:left">コレクション、データベース、パーティション、ユーザ、インデックスをリストします。</td></tr>
-<tr><td style="text-align:left">ロード</td><td style="text-align:left">コレクションやパーティションをロードします。</td></tr>
+<tr><td style="text-align:left">リスト</td><td style="text-align:left">コレクション、データベース、パーティション、ユーザ、ロール、グラント、インデックスをリストします。</td></tr>
+<tr><td style="text-align:left">ロード</td><td style="text-align:left">コレクションまたはパーティションをロードします。</td></tr>
 <tr><td style="text-align:left">クエリ</td><td style="text-align:left">入力したすべての条件に一致するクエリ結果を表示します。</td></tr>
 <tr><td style="text-align:left">リリース</td><td style="text-align:left">コレクションまたはパーティションをリリースします。</td></tr>
 <tr><td style="text-align:left">検索</td><td style="text-align:left">ベクトル類似検索またはハイブリッド検索を実行します。</td></tr>
@@ -808,7 +992,7 @@ Milvus timestamp:           <span class="hljs-number">428849214449254403</span>
 --------------------------  ------------------
 <button class="copy-code-btn"></button></code></pre>
 <p><h3 id="import">例 2</h3>
-次の例は、リモートの CSV ファイルをインポートします。</p>
+以下の例では、リモートの CSV ファイルをインポートします。</p>
 <pre><code translate="no" class="language-shell">milvus_cli &gt; import -c car <span class="hljs-string">&#x27;https://raw.githubusercontent.com/milvus-
 io/milvus_cli/main/examples/import_csv/vectors.csv&#x27;</span>
 
@@ -849,6 +1033,64 @@ Milvus timestamp:           428849214449254403
 <h3 id="Syntax" class="common-anchor-header">構文</h3><pre><code translate="no" class="language-shell">list <span class="hljs-built_in">users</span>
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Options" class="common-anchor-header">オプション</h3><p>| オプション | フルネーム | 説明 | --help | n/a | コマンドの使用に関するヘルプを表示します。|</p>
+<h2 id="List-roles" class="common-anchor-header">ロールのリスト<button data-href="#List-roles" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>Milvusのロールをリストアップする。</p>
+<p><h3 id="list-role">構文</h3></p>
+<pre><code translate="no" class="language-shell">list roles
+<button class="copy-code-btn"></button></code></pre>
+<h3 id="Options" class="common-anchor-header">オプション</h3><table>
+<thead>
+<tr><th style="text-align:left">オプション</th><th style="text-align:left">フルネーム</th><th style="text-align:left">説明</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">-ヘルプ</td><td style="text-align:left">n/a</td><td style="text-align:left">コマンドの使用に関するヘルプを表示します。</td></tr>
+</tbody>
+</table>
+<h3 id="Examples" class="common-anchor-header">例</h3><pre><code translate="no" class="language-shell">milvus_cli &gt; list roles
+<button class="copy-code-btn"></button></code></pre>
+<h2 id="List-grants" class="common-anchor-header">補助金の一覧表示<button data-href="#List-grants" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>Milvusのグラント一覧を表示する。</p>
+<h3 id="Options" class="common-anchor-header">オプション</h3><table>
+<thead>
+<tr><th style="text-align:left">オプション</th><th style="text-align:left">正式名称</th><th style="text-align:left">説明</th></tr>
+</thead>
+<tbody>
+<tr><td style="text-align:left">-r</td><td style="text-align:left">-ロール名</td><td style="text-align:left">milvusロールのロール名。</td></tr>
+<tr><td style="text-align:left">-o</td><td style="text-align:left">-オブジェクト名</td><td style="text-align:left">milvus オブジェクトのオブジェクト名。</td></tr>
+<tr><td style="text-align:left">-t</td><td style="text-align:left">-オブジェクトタイプ</td><td style="text-align:left">グローバル、コレクションまたはユーザー。</td></tr>
+<tr><td style="text-align:left">-ヘルプ</td><td style="text-align:left">n/a</td><td style="text-align:left">コマンドの使用に関するヘルプを表示します。</td></tr>
+</tbody>
+</table>
+<h3 id="Examples" class="common-anchor-header">例</h3><pre><code translate="no" class="language-shell">milvus_cli &gt; list grants -r role1 -o object1 -t Collection
+<button class="copy-code-btn"></button></code></pre>
 <h2 id="list-collections" class="common-anchor-header">コレクションをリストする<button data-href="#list-collections" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -1059,7 +1301,7 @@ Graceful time. Only used <span class="hljs-keyword">in</span> bounded consistenc
 </thead>
 <tbody>
 <tr><td style="text-align:left">-c</td><td style="text-align:left">-コレクション名</td><td style="text-align:left">パーティションが属するコレクションの名前。</td></tr>
-<tr><td style="text-align:left">-p</td><td style="text-align:left">-パーティション</td><td style="text-align:left">(オプション/複数）パーティション名。</td></tr>
+<tr><td style="text-align:left">-p</td><td style="text-align:left">-パーティション</td><td style="text-align:left">(オプション/複数) パーティションの名前。</td></tr>
 <tr><td style="text-align:left">-ヘルプ</td><td style="text-align:left">n/a</td><td style="text-align:left">コマンドの使用に関するヘルプを表示する。</td></tr>
 </tbody>
 </table>
@@ -1142,7 +1384,7 @@ timeout []:
 Guarantee <span class="hljs-title">Timestamp</span>(<span class="hljs-params">It instructs Milvus to see all operations performed before a provided timestamp. If no such timestamp <span class="hljs-keyword">is</span> provided, then Milvus will search all operations performed to date</span>) [0]:
 
 </span><button class="copy-code-btn"></button></code></pre>
-<p><h4 id="search">例3</h4></p>
+<p><h4 id="search">例 3</h4></p>
 <p>索引付けされていないコレクションで検索を実行し、必要な入力を求めるには：</p>
 <pre><code translate="no" class="language-shell">milvus_cli &gt; search
 
@@ -1182,7 +1424,7 @@ Guarantee Timestamp(It instructs Milvus to see <span class="hljs-built_in">all</
       </svg>
     </button></h2><p>接続をリストする。</p>
 <p><h3 id="show-connection">構文</h3></p>
-<pre><code translate="no" class="language-shell">list connections 
+<pre><code translate="no" class="language-shell">list connections
 <button class="copy-code-btn"></button></code></pre>
 <p><h3 id="show-connection">オプション</h3></p>
 <table>

@@ -348,7 +348,7 @@
             "children": []
           },
           {
-            "label": "Creare istantaneamente una collezione",
+            "label": "Creare una collezione istantanea",
             "id": "create-collection-instantly.md",
             "order": 2,
             "children": []
@@ -565,7 +565,7 @@
                     "children": []
                   },
                   {
-                    "label": "Fermarsi",
+                    "label": "Stop",
                     "id": "stop-filter.md",
                     "order": 6,
                     "children": []
@@ -1436,7 +1436,7 @@
             "children": []
           },
           {
-            "label": "Commands",
+            "label": "Comandi",
             "id": "milvus_backup_cli.md",
             "order": 1,
             "children": []

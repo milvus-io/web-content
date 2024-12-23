@@ -1124,7 +1124,7 @@
         "order": 1,
         "children": [
           {
-            "label": "Visión general",
+            "label": "Overview",
             "id": "milvus_backup_overview.md",
             "order": 0,
             "children": []
@@ -1136,7 +1136,7 @@
             "children": []
           },
           {
-            "label": "API RESTful",
+            "label": "RESTful API",
             "id": "milvus_backup_api.md",
             "order": 2,
             "children": []
@@ -1581,7 +1581,7 @@
             "children": []
           },
           {
-            "label": "No estructurado",
+            "label": "Sin estructurar",
             "id": "rag_with_milvus_and_unstructured.md",
             "order": 3,
             "children": []

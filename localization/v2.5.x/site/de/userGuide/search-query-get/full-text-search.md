@@ -25,10 +25,10 @@ summary: >-
     </button></h1><p>Die Volltextsuche ist eine Funktion, die Dokumente mit bestimmten Begriffen oder Phrasen in Textdatensätzen abruft und die Ergebnisse dann nach Relevanz einstuft. Diese Funktion überwindet die Beschränkungen der semantischen Suche, bei der präzise Begriffe übersehen werden können, und stellt sicher, dass Sie die genauesten und kontextuell relevanten Ergebnisse erhalten. Darüber hinaus vereinfacht es die Vektorsuche, indem es Rohtexteingaben akzeptiert und Ihre Textdaten automatisch in spärliche Einbettungen konvertiert, ohne dass Sie manuell Vektoreinbettungen erstellen müssen.</p>
 <p>Durch die Verwendung des BM25-Algorithmus für die Relevanzbewertung ist diese Funktion besonders wertvoll in Retrieval-Augmented-Generating-Szenarien (RAG), bei denen Dokumente mit hoher Übereinstimmung mit bestimmten Suchbegriffen priorisiert werden.</p>
 <div class="alert note">
-<p>Durch die Integration der Volltextsuche mit der semantikbasierten dichten Vektorsuche können Sie die Genauigkeit und Relevanz der Suchergebnisse verbessern. Weitere Informationen finden Sie unter <a href="/docs/de/multi-vector-search.md">Hybride Suche</a>.</p>
-</div>
-<div class="alert note">
-<p>Die Volltextsuche ist in Milvus Standalone und Milvus Distributed verfügbar, aber nicht in Milvus Lite, obwohl die Aufnahme in Milvus Lite auf der Roadmap steht.</p>
+<ul>
+<li>Durch die Integration der Volltextsuche mit der semantikbasierten dichten Vektorsuche können Sie die Genauigkeit und Relevanz der Suchergebnisse verbessern. Weitere Informationen finden Sie unter <a href="/docs/de/multi-vector-search.md">Hybride Suche</a>.</li>
+<li>Die Volltextsuche ist in Milvus Standalone und Milvus Distributed verfügbar, aber nicht in Milvus Lite, obwohl die Aufnahme in Milvus Lite auf der Roadmap steht.</li>
+</ul>
 </div>
 <h2 id="Overview​" class="common-anchor-header">Überblick<button data-href="#Overview​" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -347,7 +347,7 @@ curl --request POST \
     \&quot;indexParams\&quot;: <span class="hljs-variable">$indexParams</span>
 }&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h2 id="Insert-text-data" class="common-anchor-header">Textdaten einfügen<button data-href="#Insert-text-data" class="anchor-icon" translate="no">
+<h2 id="Insert-text-data" class="common-anchor-header">Einfügen von Textdaten<button data-href="#Insert-text-data" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

@@ -20,7 +20,7 @@ title: Docker Composeを使用したMilvusクラスタのアップグレード
         ></path>
       </svg>
     </button></h1><p>このトピックでは、Docker Composeを使用してMilvusをアップグレードする方法について説明します。</p>
-<p>通常の場合、<a href="#Upgrade-Milvus-by-changing-its-image">Milvusのイメージを変更することでアップグレードが</a>可能です。ただし、v2.1.xからv2.4.17にアップグレードする場合は、事前に<a href="#Migrate-the-metadata">メタデータを移行する</a>必要があります。</p>
+<p>通常の場合、<a href="#Upgrade-Milvus-by-changing-its-image">Milvusのイメージを変更することでアップグレードが</a>可能です。ただし、v2.1.xからv2.4.18にアップグレードする場合は、事前に<a href="#Migrate-the-metadata">メタデータを移行する</a>必要があります。</p>
 <h2 id="Upgrade-Milvus-by-changing-its-image" class="common-anchor-header">Milvusのイメージ変更によるアップグレード<button data-href="#Upgrade-Milvus-by-changing-its-image" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -43,35 +43,35 @@ title: Docker Composeを使用したMilvusクラスタのアップグレード
 <pre><code translate="no" class="language-yaml">...
 rootcoord:
   container_name: milvus-rootcoord
-  image: milvusdb/milvus:v2.4.17
+  image: milvusdb/milvus:v2.4.18
 ...
 proxy:
   container_name: milvus-proxy
-  image: milvusdb/milvus:v2.4.17
+  image: milvusdb/milvus:v2.4.18
 ...
 querycoord:
   container_name: milvus-querycoord
-  image: milvusdb/milvus:v2.4.17  
+  image: milvusdb/milvus:v2.4.18  
 ...
 querynode:
   container_name: milvus-querynode
-  image: milvusdb/milvus:v2.4.17
+  image: milvusdb/milvus:v2.4.18
 ...
 indexcoord:
   container_name: milvus-indexcoord
-  image: milvusdb/milvus:v2.4.17
+  image: milvusdb/milvus:v2.4.18
 ...
 indexnode:
   container_name: milvus-indexnode
-  image: milvusdb/milvus:v2.4.17 
+  image: milvusdb/milvus:v2.4.18 
 ...
 datacoord:
   container_name: milvus-datacoord
-  image: milvusdb/milvus:v2.4.17   
+  image: milvusdb/milvus:v2.4.18   
 ...
 datanode:
   container_name: milvus-datanode
-  image: milvusdb/milvus:v2.4.17
+  image: milvusdb/milvus:v2.4.18
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>以下のコマンドを実行してアップグレードを実行します。</p>
 <pre><code translate="no" class="language-shell">docker compose down
@@ -105,7 +105,7 @@ cmd:
   runWithBackup: true
 config:
   sourceVersion: <span class="hljs-number">2.1</span><span class="hljs-number">.4</span>   <span class="hljs-comment"># Specify your milvus version</span>
-  targetVersion: <span class="hljs-number">2.4</span><span class="hljs-number">.17</span>
+  targetVersion: <span class="hljs-number">2.4</span><span class="hljs-number">.18</span>
   backupFilePath: /tmp/migration.bak
 metastore:
   <span class="hljs-built_in">type</span>: etcd
@@ -148,7 +148,7 @@ docker compose up -d
 </ul></li>
 <li>クラウド上にクラスターをデプロイする準備ができている場合は、次の方法を参照してください：<ul>
 <li><a href="/docs/ja/eks.md">Terraformを使ってAmazon EKSにMilvusをデプロイ</a>する方法を学ぶ</li>
-<li><a href="/docs/ja/gcp.md">Kubernetesを使用してGCPにMilvusクラスタをデプロイ</a>する方法を学ぶ</li>
+<li><a href="/docs/ja/gcp.md">Kubernetesを使ってGCPにMilvusクラスタをデプロイ</a>する方法</li>
 <li><a href="/docs/ja/azure.md">Kubernetesを使ってMicrosoft AzureにMilvusをデプロイ</a>する方法を学ぶ</li>
 </ul></li>
 </ul>

@@ -22,13 +22,13 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>La ricerca full text è una funzione che recupera i documenti contenenti termini o frasi specifiche nei dataset di testo, classificando poi i risultati in base alla rilevanza. Questa funzione supera le limitazioni della ricerca semantica, che potrebbe trascurare termini precisi, garantendo la ricezione di risultati più accurati e contestualmente rilevanti. Inoltre, semplifica le ricerche vettoriali accettando input di testo grezzo, convertendo automaticamente i dati testuali in embedding sparsi senza dover generare manualmente embedding vettoriali.</p>
+    </button></h1><p>La ricerca full text è una funzione che recupera i documenti contenenti termini o frasi specifiche nei dataset di testo, classificando poi i risultati in base alla rilevanza. Questa funzione supera le limitazioni della ricerca semantica, che potrebbe trascurare termini precisi, garantendo la ricezione dei risultati più accurati e contestualmente rilevanti. Inoltre, semplifica le ricerche vettoriali accettando input di testo grezzo, convertendo automaticamente i dati testuali in embedding sparsi senza la necessità di generare manualmente embedding vettoriali.</p>
 <p>Utilizzando l'algoritmo BM25 per il punteggio di rilevanza, questa funzione è particolarmente preziosa negli scenari di retrieval-augmented generation (RAG), dove dà priorità ai documenti che corrispondono strettamente a termini di ricerca specifici.</p>
 <div class="alert note">
-<p>Integrando la ricerca full text con la ricerca vettoriale densa basata sulla semantica, è possibile migliorare l'accuratezza e la pertinenza dei risultati della ricerca. Per ulteriori informazioni, consultare la sezione <a href="/docs/it/multi-vector-search.md">Ricerca ibrida</a>.</p>
-</div>
-<div class="alert note">
-<p>La ricerca full text è disponibile in Milvus Standalone e Milvus Distributed ma non in Milvus Lite, anche se l'aggiunta a Milvus Lite è in programma.</p>
+<ul>
+<li>Integrando la ricerca full text con la ricerca vettoriale densa basata sulla semantica, è possibile migliorare l'accuratezza e la pertinenza dei risultati della ricerca. Per ulteriori informazioni, consultare la sezione <a href="/docs/it/multi-vector-search.md">Ricerca ibrida</a>.</li>
+<li>La ricerca full text è disponibile in Milvus Standalone e Milvus Distributed ma non in Milvus Lite, anche se l'aggiunta a Milvus Lite è in programma.</li>
+</ul>
 </div>
 <h2 id="Overview​" class="common-anchor-header">Panoramica<button data-href="#Overview​" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -49,7 +49,7 @@ summary: >-
 <ol>
 <li><p><strong>Inserimento del testo</strong>: L'utente inserisce documenti di testo grezzi o fornisce un testo di query senza necessità di incorporazione manuale.</p></li>
 <li><p><strong>Analisi del testo</strong>: Milvus utilizza un analizzatore per tokenizzare il testo in ingresso in singoli termini ricercabili. Per ulteriori informazioni sugli analizzatori, consultare la sezione <a href="/docs/it/analyzer-overview.md">Panoramica degli analizzatori</a>.</p></li>
-<li><p><strong>Elaborazione della funzione</strong>: La funzione incorporata riceve i termini tokenizzati e li converte in rappresentazioni vettoriali rade.</p></li>
+<li><p><strong>Elaborazione della funzione</strong>: La funzione integrata riceve i termini tokenizzati e li converte in rappresentazioni vettoriali rade.</p></li>
 <li><p><strong>Memorizzazione delle collezioni</strong>: Milvus memorizza queste rappresentazioni rade in una raccolta per un recupero efficiente.</p></li>
 <li><p><strong>Punteggio BM25</strong>: Durante la ricerca, Milvus applica l'algoritmo BM25 per calcolare i punteggi dei documenti memorizzati e classifica i risultati corrispondenti in base alla pertinenza con il testo dell'interrogazione.</p></li>
 </ol>
@@ -490,7 +490,7 @@ searchParams.<span class="hljs-title function_">put</span>(<span class="hljs-str
 </th></tr></thead><tbody><tr><td data-block-token="QpGIdQ2m0oogCvxColKcNWnYnUc" colspan="1" rowspan="1"><p data-block-token="TkffdBxkKo2hVvx9gGucca46nic"><code translate="no">search_params</code></p>
 </td><td data-block-token="HYemdqt6Dow9tvxOcYScmYdPn8e" colspan="1" rowspan="1"><p data-block-token="JiIOdJrBcoGIQ4xrqYycMdjnn7g">Un dizionario contenente i parametri di ricerca.</p>
 </td></tr><tr><td data-block-token="DJDgdH5WUoZQxkxmLzQcXqcXnQh" colspan="1" rowspan="1"><p data-block-token="LKWbdw498o9mtRxm9gDcg28FnQd"><code translate="no">params.drop_ratio_search</code></p>
-</td><td data-block-token="SEJ7d5y18otFTOxy7gLcvLYRnfb" colspan="1" rowspan="1"><p data-block-token="MnladDjOGoUphGxrZzXchD0anzf">Percentuale di termini a bassa frequenza da ignorare durante la ricerca. Per i dettagli, fare riferimento a <a href="/docs/it/sparse_vector.md">Vettore sparso</a>.</p>
+</td><td data-block-token="SEJ7d5y18otFTOxy7gLcvLYRnfb" colspan="1" rowspan="1"><p data-block-token="MnladDjOGoUphGxrZzXchD0anzf">Percentuale di termini a bassa frequenza da ignorare durante la ricerca. Per maggiori dettagli, fare riferimento a <a href="/docs/it/sparse_vector.md">Vettore sparso</a>.</p>
 </td></tr><tr><td data-block-token="XPPYdAYUPoASg5xuIYmcyxqHnPe" colspan="1" rowspan="1"><p data-block-token="T90ndG7H0okLa4xa1wzcHQmEnEg"><code translate="no">data</code></p>
 </td><td data-block-token="NMhsduxr1oUESPx2J8YcA8csnA1" colspan="1" rowspan="1"><p data-block-token="ZmEQdkdGtofQsAx9YXNcsnlHnYe">Il testo grezzo della query.</p>
 </td></tr><tr><td data-block-token="O4OVdL9BIollH1xORz3czhInnSh" colspan="1" rowspan="1"><p data-block-token="CYdGd82dRopaWrxfJ9ycWQQnnPc"><code translate="no">anns_field</code></p>

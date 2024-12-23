@@ -45,7 +45,7 @@ title: Text-Abgleich
       </svg>
     </button></h2><p>Milvus integriert <a href="https://github.com/quickwit-oss/tantivy">Tantivy</a>, um den zugrunde liegenden invertierten Index und die begriffsbasierte Textsuche zu betreiben. Für jeden Texteintrag indiziert Milvus diesen nach folgendem Verfahren.</p>
 <ol>
-<li><p><a href="/docs/de/analyzer-overview.md">Analyzer</a>: Der Analyzer verarbeitet den eingegebenen Text, indem er ihn in einzelne Wörter (Token) zerlegt und dann nach Bedarf Filter anwendet. So kann Milvus einen Index auf der Grundlage dieser Token erstellen.</p></li>
+<li><p><a href="/docs/de/analyzer-overview.md">Analyzer</a>: Der Analyzer verarbeitet den eingegebenen Text, indem er ihn in einzelne Wörter (Token) zerlegt und dann je nach Bedarf Filter anwendet. So kann Milvus einen Index auf der Grundlage dieser Token erstellen.</p></li>
 <li><p><a href="/docs/de/index-scalar-fields.md">Indizierung</a>: Nach der Textanalyse erstellt Milvus einen invertierten Index, der jedes einzelne Token den Dokumenten zuordnet, die es enthalten.</p></li>
 </ol>
 <p>Wenn ein Benutzer einen Textabgleich durchführt, wird der invertierte Index verwendet, um schnell alle Dokumente aufzufinden, die die Begriffe enthalten. Dies ist wesentlich schneller, als jedes Dokument einzeln zu durchsuchen.</p>
@@ -266,9 +266,11 @@ schema.<span class="hljs-title function_">addField</span>(<span class="hljs-titl
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-curl"><span class="hljs-keyword">export</span> filter=<span class="hljs-string">&quot;\&quot;TEXT_MATCH(text, &#x27;machine deep&#x27;)\&quot;&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Sie können auch mehrere <code translate="no">TEXT_MATCH</code> Ausdrücke mit logischen Operatoren kombinieren, um einen <strong>UND-Abgleich</strong> durchzuführen. Um zum Beispiel nach Dokumenten zu suchen, die sowohl <code translate="no">machine</code> als auch <code translate="no">deep</code> im Feld <code translate="no">text</code> enthalten, verwenden Sie den folgenden Ausdruck.</p>
-<div class="multipleCode">
-   <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
+<p>Sie können auch mehrere <code translate="no">TEXT_MATCH</code> Ausdrücke mit logischen Operatoren kombinieren, um einen <strong>UND-Abgleich</strong> durchzuführen.</p>
+<ul>
+<li><p>Um nach Dokumenten zu suchen, die sowohl <code translate="no">machine</code> als auch <code translate="no">deep</code> im Feld <code translate="no">text</code> enthalten, verwenden Sie den folgenden Ausdruck.</p>
+<p><div class="multipleCode">
+<a href="#python">Python </a><a href="#java">Java</a><a href="#javascript">Node.js</a><a href="#curl">cURL</a></div></p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&quot;TEXT_MATCH(text, &#x27;machine&#x27;) and TEXT_MATCH(text, &#x27;deep&#x27;)&quot;</span>​
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-java"><span class="hljs-title class_">String</span> filter = <span class="hljs-string">&quot;TEXT_MATCH(text, &#x27;machine&#x27;) and TEXT_MATCH(text, &#x27;deep&#x27;)&quot;</span>;
@@ -276,7 +278,19 @@ schema.<span class="hljs-title function_">addField</span>(<span class="hljs-titl
 <pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> filter = <span class="hljs-string">&quot;TEXT_MATCH(text, &#x27;machine&#x27;) and TEXT_MATCH(text, &#x27;deep&#x27;)&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-curl"><span class="hljs-keyword">export</span> filter=<span class="hljs-string">&quot;\&quot;TEXT_MATCH(text, &#x27;machine&#x27;) and TEXT_MATCH(text, &#x27;deep&#x27;)\&quot;&quot;</span>
+<button class="copy-code-btn"></button></code></pre></li>
+<li><p>Um nach Dokumenten zu suchen, die sowohl <code translate="no">machine</code> als auch <code translate="no">learning</code>, aber nicht <code translate="no">deep</code> im Feld <code translate="no">text</code> enthalten, verwenden Sie die folgenden Ausdrücke:</p>
+<p><div class="multipleCode">
+<a href="#python">Python </a><a href="#java">Java</a><a href="#javascript">Node.js</a><a href="#curl">cURL</a></div></p>
+<pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&quot;not TEXT_MATCH(text, &#x27;deep&#x27;) and TEXT_MATCH(text, &#x27;machine&#x27;) and TEXT_MATCH(text, &#x27;learning&#x27;)&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java"><span class="hljs-title class_">String</span> filter = <span class="hljs-string">&quot;not TEXT_MATCH(text, &#x27;deep&#x27;) and TEXT_MATCH(text, &#x27;machine&#x27;) and TEXT_MATCH(text, &#x27;learning&#x27;)&quot;</span>;
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> filter = <span class="hljs-string">&quot;not TEXT_MATCH(text, &#x27;deep&#x27;) and TEXT_MATCH(text, &#x27;machine&#x27;) and TEXT_MATCH(text, &#x27;learning&#x27;)&quot;</span>;
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-curl"><span class="hljs-keyword">export</span> filter=<span class="hljs-string">&quot;\&quot;not TEXT_MATCH(text, &#x27;deep&#x27;) and TEXT_MATCH(text, &#x27;machine&#x27;) and TEXT_MATCH(text, &#x27;learning&#x27;)\&quot;&quot;</span>
+<button class="copy-code-btn"></button></code></pre></li>
+</ul>
 <h3 id="Search-with-text-match​" class="common-anchor-header">Suche mit Textabgleich</h3><p>Textabgleich kann in Kombination mit der Vektorähnlichkeitssuche verwendet werden, um den Suchbereich einzugrenzen und die Suchleistung zu verbessern. Indem Sie die Sammlung vor der Vektorähnlichkeitssuche mit einem Textabgleich filtern, können Sie die Anzahl der zu durchsuchenden Dokumente reduzieren, was zu schnelleren Abfragezeiten führt.</p>
 <p>In diesem Beispiel filtert der Ausdruck <code translate="no">filter</code> die Suchergebnisse so, dass nur Dokumente enthalten sind, die mit dem angegebenen Begriff <code translate="no">keyword1</code> oder <code translate="no">keyword2</code> übereinstimmen. Die Vektorähnlichkeitssuche wird dann auf dieser gefilterten Teilmenge von Dokumenten durchgeführt.</p>
 <div class="multipleCode">
@@ -408,5 +422,11 @@ curl --request POST \
       </svg>
     </button></h2><ul>
 <li><p>Die Aktivierung des Textabgleichs für ein Feld löst die Erstellung eines invertierten Indexes aus, der Speicherressourcen verbraucht. Berücksichtigen Sie die Auswirkungen auf den Speicherplatz, wenn Sie sich für die Aktivierung dieser Funktion entscheiden, da diese je nach Textgröße, eindeutigen Token und dem verwendeten Analysator variieren.</p></li>
-<li><p>Sobald Sie einen Analyzer in Ihrem Schema definiert haben, werden seine Einstellungen für diese Sammlung dauerhaft. Wenn Sie entscheiden, dass ein anderes Analyseprogramm besser zu Ihren Anforderungen passt, können Sie die vorhandene Sammlung löschen und eine neue Sammlung mit der gewünschten Analysekonfiguration erstellen.</p></li>
+<li><p>Sobald Sie einen Analyzer in Ihrem Schema definiert haben, werden seine Einstellungen für diese Sammlung dauerhaft. Wenn Sie entscheiden, dass ein anderer Analyzer Ihren Anforderungen besser entspricht, können Sie die bestehende Sammlung löschen und eine neue mit der gewünschten Analyzer-Konfiguration erstellen.</p></li>
+<li><p>Escape-Regeln in <code translate="no">filter</code> Ausdrücken:</p>
+<ul>
+<li>Zeichen, die in doppelten oder einfachen Anführungszeichen innerhalb von Ausdrücken eingeschlossen sind, werden als Stringkonstanten interpretiert. Wenn die Zeichenkettenkonstante Escape-Zeichen enthält, müssen die Escape-Zeichen mit einer Escape-Sequenz dargestellt werden. Verwenden Sie zum Beispiel <code translate="no">\\</code> für <code translate="no">\</code>, <code translate="no">\\t</code> für einen Tabulator <code translate="no">\t</code> und <code translate="no">\\n</code> für einen Zeilenumbruch.</li>
+<li>Wenn eine Stringkonstante von einfachen Anführungszeichen eingeschlossen ist, sollte ein einfaches Anführungszeichen innerhalb der Konstante als <code translate="no">\\'</code> dargestellt werden, während ein doppeltes Anführungszeichen entweder als <code translate="no">&quot;</code> oder <code translate="no">\\&quot;</code> dargestellt werden kann. Beispiel: <code translate="no">'It\\'s milvus'</code>.</li>
+<li>Wenn eine String-Konstante von doppelten Anführungszeichen eingeschlossen ist, sollte ein doppeltes Anführungszeichen innerhalb der Konstante als <code translate="no">\\&quot;</code> dargestellt werden, während ein einfaches Anführungszeichen entweder als <code translate="no">'</code> oder <code translate="no">\\'</code> dargestellt werden kann. Beispiel: <code translate="no">&quot;He said \\&quot;Hi\\&quot;&quot;</code>.</li>
+</ul></li>
 </ul>

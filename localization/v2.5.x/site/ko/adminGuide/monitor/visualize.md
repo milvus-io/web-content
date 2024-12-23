@@ -58,7 +58,7 @@ summary: Grafana에서 Milvus 메트릭을 시각화하는 방법을 알아보�
         ></path>
       </svg>
     </button></h2><h3 id="1-Download-and-import-dashboard" class="common-anchor-header">1. 대시보드 다운로드 및 가져오기</h3><p>JSON 파일에서 Milvus 대시보드를 다운로드하여 가져옵니다.</p>
-<pre><code translate="no">wget https://raw.githubusercontent.com/milvus-io/milvus/2.2.0/deployments/monitor/grafana/milvus-dashboard.json
+<pre><code translate="no">wget <span class="hljs-attr">https</span>:<span class="hljs-comment">//raw.githubusercontent.com/milvus-io/milvus/refs/heads/master/deployments/monitor/grafana/milvus-dashboard.json</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>
   

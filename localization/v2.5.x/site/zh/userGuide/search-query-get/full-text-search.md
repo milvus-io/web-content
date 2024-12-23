@@ -22,10 +22,10 @@ summary: 全文搜索是一种在文本数据集中检索包含特定术语或�
     </button></h1><p>全文搜索是一种在文本数据集中检索包含特定术语或短语的文档，然后根据相关性对结果进行排序的功能。该功能克服了语义搜索的局限性（语义搜索可能会忽略精确的术语），确保您获得最准确且与上下文最相关的结果。此外，它还通过接受原始文本输入来简化向量搜索，自动将您的文本数据转换为稀疏嵌入，而无需手动生成向量嵌入。</p>
 <p>该功能使用 BM25 算法进行相关性评分，在检索增强生成 (RAG) 场景中尤为重要，它能优先处理与特定搜索词密切匹配的文档。</p>
 <div class="alert note">
-<p>通过将全文检索与基于语义的密集向量搜索相结合，可以提高搜索结果的准确性和相关性。更多信息，请参阅<a href="/docs/zh/multi-vector-search.md">混合搜索</a>。</p>
-</div>
-<div class="alert note">
-<p>全文搜索在 Milvus Standalone 和 Milvus Distributed 中可用，但在 Milvus Lite 中不可用，不过将其添加到 Milvus Lite 中已列入路线图。</p>
+<ul>
+<li>通过将全文检索与基于语义的密集向量搜索相结合，可以提高搜索结果的准确性和相关性。更多信息，请参阅<a href="/docs/zh/multi-vector-search.md">混合搜索</a>。</li>
+<li>全文搜索在 Milvus Standalone 和 Milvus Distributed 中可用，但在 Milvus Lite 中不可用，不过将其添加到 Milvus Lite 中已列入路线图。</li>
+</ul>
 </div>
 <h2 id="Overview​" class="common-anchor-header">概述<button data-href="#Overview​" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -56,7 +56,7 @@ summary: 全文搜索是一种在文本数据集中检索包含特定术语或�
    </span> <span class="img-wrapper"> <span>全文搜索</span> </span></p>
 <p>要使用全文搜索，请遵循以下主要步骤。</p>
 <ol>
-<li><p><a href="#Create-a-collection-for-full-text-search">创建 Collections</a>：设置带有必要字段的 Collections，并定义一个将原始文本转换为稀疏嵌入的函数。</p></li>
+<li><p><a href="#Create-a-collection-for-full-text-search">创建 Collections</a>：用必要的字段设置一个 Collections，并定义一个函数将原始文本转换为稀疏嵌入。</p></li>
 <li><p><a href="#Insert-text-data">插入数据</a>：将原始文本文档插入 Collections。</p></li>
 <li><p><a href="#Perform-full-text-search">执行搜索</a>：使用查询文本搜索你的 Collections 并检索相关结果。</p></li>
 </ol>
@@ -248,7 +248,7 @@ schema.addFunction(Function.builder()
 </th><th data-block-token="SMGGduN8zo3cgXxVnwZcW0UAnbA" colspan="1" rowspan="1"><p data-block-token="LY39dA2eOoyVUUxvKwlcyyjdn3e">说明</p>
 </th></tr></thead><tbody><tr><td data-block-token="Pbj3dPvuno3x6kxnCsWcTb3knag" colspan="1" rowspan="1"><p data-block-token="EeHOdxCjloFUAGxuY1CcScCTnDe"><code translate="no">name</code></p>
 <p data-block-token="FzAJdVbrzozmTdxwy4fcJQkQnlh"></p>
-</td><td data-block-token="VJWydnWHJoV66jx6oEPcH9lGnvh" colspan="1" rowspan="1"><p data-block-token="Clg3dWrJpo39lfxSWjVcbE7GnYm">函数名称。该函数将<code translate="no">text</code> 字段中的原始文本转换为可搜索向量，这些向量将存储在<code translate="no">sparse</code> 字段中。</p>
+</td><td data-block-token="VJWydnWHJoV66jx6oEPcH9lGnvh" colspan="1" rowspan="1"><p data-block-token="Clg3dWrJpo39lfxSWjVcbE7GnYm">函数名称。该函数将<code translate="no">text</code> 字段中的原始文本转换为可搜索的向量，这些向量将存储在<code translate="no">sparse</code> 字段中。</p>
 </td></tr><tr><td data-block-token="ShPJdlvMQoXnSHxIQ1GcoyegnEb" colspan="1" rowspan="1"><p data-block-token="HFT1dYVCioUj4PxnNSVcYIBInNh"><code translate="no">input_field_names</code></p>
 </td><td data-block-token="YiZCdrUaaovWnrxef29cmpQFn9c" colspan="1" rowspan="1"><p data-block-token="YFVOd29cUovDpXx7L2zcJK37n1g">需要将文本转换为稀疏向量的<code translate="no">VARCHAR</code> 字段的名称。对于<code translate="no">FunctionType.BM25</code> ，该参数只接受一个字段名称。</p>
 </td></tr><tr><td data-block-token="QpcMdDoXfo62aNxQfoyc2E6lneg" colspan="1" rowspan="1"><p data-block-token="D1LkdH1KIojwKDx14HUcHdDJnPh"><code translate="no">output_field_names</code></p>

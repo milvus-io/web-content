@@ -20,7 +20,7 @@ summary: Aprenda a visualizar las métricas de Milvus en Grafana.
         ></path>
       </svg>
     </button></h1><p>Este tema describe cómo visualizar las métricas de Milvus usando Grafana.</p>
-<p>Como se describe en la <a href="/docs/es/monitor.md">guía de monitoreo</a>, las métricas contienen información útil como cuánta memoria utiliza un componente específico de Milvus. La supervisión de las métricas le ayuda a comprender mejor el rendimiento de Milvus y su estado de ejecución para que pueda ajustar la asignación de recursos a tiempo.</p>
+<p>Como se describe en la <a href="/docs/es/monitor.md">guía de monitoreo</a>, las métricas contienen información útil como cuánta memoria utiliza un componente específico de Milvus. El monitoreo de las métricas le ayuda a comprender mejor el rendimiento de Milvus y su estado de ejecución para que pueda ajustar la asignación de recursos a tiempo.</p>
 <p>La visualización es un gráfico que muestra el cambio del uso de recursos a través del tiempo, lo que le facilita ver y notar rápidamente los cambios en el uso de recursos, especialmente cuando ocurre un evento.</p>
 <p>Este tutorial utiliza Grafana, una plataforma de código abierto para el análisis de series temporales, para visualizar varias métricas de rendimiento de un clúster Milvus desplegado en Kubernetes (K8s).</p>
 <h2 id="Prerequisites" class="common-anchor-header">Requisitos previos<button data-href="#Prerequisites" class="anchor-icon" translate="no">
@@ -58,7 +58,7 @@ summary: Aprenda a visualizar las métricas de Milvus en Grafana.
         ></path>
       </svg>
     </button></h2><h3 id="1-Download-and-import-dashboard" class="common-anchor-header">1. Descargue e importe el panel de control</h3><p>Descargue e importe el cuadro de mandos de Milvus desde el archivo JSON.</p>
-<pre><code translate="no">wget https://raw.githubusercontent.com/milvus-io/milvus/2.2.0/deployments/monitor/grafana/milvus-dashboard.json
+<pre><code translate="no">wget <span class="hljs-attr">https</span>:<span class="hljs-comment">//raw.githubusercontent.com/milvus-io/milvus/refs/heads/master/deployments/monitor/grafana/milvus-dashboard.json</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>
   

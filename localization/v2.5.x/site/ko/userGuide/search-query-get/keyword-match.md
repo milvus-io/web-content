@@ -41,7 +41,7 @@ title: 텍스트 일치
       </svg>
     </button></h2><p>Milvus는 기본 반전 색인 및 용어 기반 텍스트 검색을 강화하기 위해 <a href="https://github.com/quickwit-oss/tantivy">Tantivy를</a> 통합합니다. 각 텍스트 항목에 대해 Milvus는 절차에 따라 색인을 생성합니다.</p>
 <ol>
-<li><p><a href="/docs/ko/analyzer-overview.md">분석기</a>: 분석기는 입력 텍스트를 개별 단어 또는 토큰으로 토큰화한 다음 필요에 따라 필터를 적용하여 처리합니다. 이를 통해 Milvus는 이러한 토큰을 기반으로 색인을 구축할 수 있습니다.</p></li>
+<li><p><a href="/docs/ko/analyzer-overview.md">분석기</a>: 분석기는 입력 텍스트를 개별 단어 또는 토큰으로 토큰화한 다음 필요에 따라 필터를 적용하여 처리합니다. 이를 통해 Milvus는 이러한 토큰을 기반으로 인덱스를 구축할 수 있습니다.</p></li>
 <li><p><a href="/docs/ko/index-scalar-fields.md">인덱싱</a>: 텍스트 분석 후, Milvus는 각 고유 토큰을 해당 토큰이 포함된 문서에 매핑하는 역 인덱스를 생성합니다.</p></li>
 </ol>
 <p>사용자가 텍스트 일치를 수행하면 반전된 색인을 사용하여 해당 용어가 포함된 모든 문서를 빠르게 검색합니다. 이는 각 문서를 개별적으로 스캔하는 것보다 훨씬 빠릅니다.</p>
@@ -262,9 +262,11 @@ schema.<span class="hljs-title function_">addField</span>(<span class="hljs-titl
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-curl"><span class="hljs-keyword">export</span> filter=<span class="hljs-string">&quot;\&quot;TEXT_MATCH(text, &#x27;machine deep&#x27;)\&quot;&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>논리 연산자를 사용하여 여러 개의 <code translate="no">TEXT_MATCH</code> 표현식을 결합하여 <strong>AND</strong> 일치를 수행할 수도 있습니다. 예를 들어 <code translate="no">text</code> 필드에 <code translate="no">machine</code> 및 <code translate="no">deep</code> 이 모두 포함된 문서를 검색하려면 다음 표현식을 사용합니다.</p>
-<div class="multipleCode">
-   <a href="#python">파이썬 </a> <a href="#java">자바</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
+<p>논리 연산자를 사용하여 여러 개의 <code translate="no">TEXT_MATCH</code> 표현식을 결합하여 <strong>AND</strong> 일치를 수행할 수도 있습니다.</p>
+<ul>
+<li><p><code translate="no">text</code> 필드에 <code translate="no">machine</code> 및 <code translate="no">deep</code> 이 모두 포함된 문서를 검색하려면 다음 표현식을 사용합니다.</p>
+<p><div class="multipleCode">
+<a href="#python">파이썬 </a><a href="#java">자바</a><a href="#javascript">Node.js</a><a href="#curl">cURL</a></div></p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&quot;TEXT_MATCH(text, &#x27;machine&#x27;) and TEXT_MATCH(text, &#x27;deep&#x27;)&quot;</span>​
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-java"><span class="hljs-title class_">String</span> filter = <span class="hljs-string">&quot;TEXT_MATCH(text, &#x27;machine&#x27;) and TEXT_MATCH(text, &#x27;deep&#x27;)&quot;</span>;
@@ -272,7 +274,19 @@ schema.<span class="hljs-title function_">addField</span>(<span class="hljs-titl
 <pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> filter = <span class="hljs-string">&quot;TEXT_MATCH(text, &#x27;machine&#x27;) and TEXT_MATCH(text, &#x27;deep&#x27;)&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-curl"><span class="hljs-keyword">export</span> filter=<span class="hljs-string">&quot;\&quot;TEXT_MATCH(text, &#x27;machine&#x27;) and TEXT_MATCH(text, &#x27;deep&#x27;)\&quot;&quot;</span>
+<button class="copy-code-btn"></button></code></pre></li>
+<li><p><code translate="no">text</code> 필드에 <code translate="no">deep</code> 없이 <code translate="no">machine</code> 및 <code translate="no">learning</code> 이 모두 포함된 문서를 검색하려면 다음 표현식을 사용합니다:</p>
+<p><div class="multipleCode">
+<a href="#python">Python </a><a href="#java">Java</a><a href="#javascript">Node.js</a><a href="#curl">cURL</a></div></p>
+<pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&quot;not TEXT_MATCH(text, &#x27;deep&#x27;) and TEXT_MATCH(text, &#x27;machine&#x27;) and TEXT_MATCH(text, &#x27;learning&#x27;)&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java"><span class="hljs-title class_">String</span> filter = <span class="hljs-string">&quot;not TEXT_MATCH(text, &#x27;deep&#x27;) and TEXT_MATCH(text, &#x27;machine&#x27;) and TEXT_MATCH(text, &#x27;learning&#x27;)&quot;</span>;
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> filter = <span class="hljs-string">&quot;not TEXT_MATCH(text, &#x27;deep&#x27;) and TEXT_MATCH(text, &#x27;machine&#x27;) and TEXT_MATCH(text, &#x27;learning&#x27;)&quot;</span>;
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-curl"><span class="hljs-keyword">export</span> filter=<span class="hljs-string">&quot;\&quot;not TEXT_MATCH(text, &#x27;deep&#x27;) and TEXT_MATCH(text, &#x27;machine&#x27;) and TEXT_MATCH(text, &#x27;learning&#x27;)\&quot;&quot;</span>
+<button class="copy-code-btn"></button></code></pre></li>
+</ul>
 <h3 id="Search-with-text-match​" class="common-anchor-header">텍스트 일치로 검색</h3><p>텍스트 일치를 벡터 유사도 검색과 함께 사용하면 검색 범위를 좁히고 검색 성능을 향상시킬 수 있습니다. 벡터 유사도 검색 전에 텍스트 일치를 사용하여 컬렉션을 필터링하면 검색해야 하는 문서 수를 줄여 쿼리 시간을 단축할 수 있습니다.</p>
 <p>이 예에서 <code translate="no">filter</code> 표현식은 지정된 용어 <code translate="no">keyword1</code> 또는 <code translate="no">keyword2</code> 와 일치하는 문서만 포함하도록 검색 결과를 필터링합니다. 그런 다음 이 필터링된 문서의 하위 집합에서 벡터 유사성 검색이 수행됩니다.</p>
 <div class="multipleCode">
@@ -403,6 +417,12 @@ curl --request POST \
         ></path>
       </svg>
     </button></h2><ul>
-<li><p>필드에 대해 텍스트 일치를 활성화하면 반전 인덱스가 생성되어 스토리지 리소스를 소모합니다. 이 기능을 사용하도록 설정할 때는 텍스트 크기, 고유 토큰 및 사용되는 분석기에 따라 달라지므로 스토리지 영향을 고려하세요.</p></li>
+<li><p>필드에 대해 텍스트 일치를 활성화하면 반전된 인덱스가 생성되어 스토리지 리소스를 소모합니다. 이 기능을 사용하도록 설정할 때는 텍스트 크기, 고유 토큰 및 사용되는 분석기에 따라 달라지므로 스토리지 영향을 고려하세요.</p></li>
 <li><p>스키마에서 분석기를 정의하면 해당 컬렉션에 대해 해당 설정이 영구적으로 적용됩니다. 다른 분석기가 필요에 더 적합하다고 판단되면 기존 컬렉션을 삭제하고 원하는 분석기 구성으로 새 컬렉션을 만들 수 있습니다.</p></li>
+<li><p><code translate="no">filter</code> 표현식의 이스케이프 규칙:</p>
+<ul>
+<li>표현식 내에서 큰따옴표 또는 작은따옴표로 묶인 문자는 문자열 상수로 해석됩니다. 문자열 상수에 이스케이프 문자가 포함된 경우, 이스케이프 문자는 이스케이프 시퀀스를 사용하여 표현해야 합니다. 예를 들어 <code translate="no">\\</code> 은 <code translate="no">\</code>, <code translate="no">\\t</code> 은 탭 <code translate="no">\t</code>, <code translate="no">\\n</code> 은 개행으로 표현합니다.</li>
+<li>문자열 상수를 작은따옴표로 묶은 경우 상수 내의 작은따옴표는 <code translate="no">\\'</code> 로 표시해야 하며 큰따옴표는 <code translate="no">&quot;</code> 또는 <code translate="no">\\&quot;</code> 로 표시할 수 있습니다. 예: <code translate="no">'It\\'s milvus'</code>.</li>
+<li>문자열 상수가 큰따옴표로 묶여 있는 경우 상수 내의 큰따옴표는 <code translate="no">\\&quot;</code> 로 표시하고 작은따옴표는 <code translate="no">'</code> 또는 <code translate="no">\\'</code> 로 표시할 수 있습니다. 예: <code translate="no">&quot;He said \\&quot;Hi\\&quot;&quot;</code>.</li>
+</ul></li>
 </ul>

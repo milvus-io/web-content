@@ -22,10 +22,10 @@ summary: 전체 텍스트 검색은 텍스트 데이터 세트에서 특정 용�
     </button></h1><p>전체 텍스트 검색은 텍스트 데이터 세트에서 특정 용어나 구문이 포함된 문서를 검색한 다음 관련성에 따라 결과의 순위를 매기는 기능입니다. 이 기능은 정확한 용어를 놓칠 수 있는 시맨틱 검색의 한계를 극복하여 가장 정확하고 문맥과 연관성이 높은 결과를 얻을 수 있도록 해줍니다. 또한, 원시 텍스트 입력을 받아 벡터 임베딩을 수동으로 생성할 필요 없이 텍스트 데이터를 스파스 임베딩으로 자동 변환함으로써 벡터 검색을 간소화합니다.</p>
 <p>관련성 점수에 BM25 알고리즘을 사용하는 이 기능은 특정 검색어와 가장 근접하게 일치하는 문서의 우선순위를 정하는 검색 증강 생성(RAG) 시나리오에서 특히 유용합니다.</p>
 <div class="alert note">
-<p>전체 텍스트 검색과 시맨틱 기반의 고밀도 벡터 검색을 통합하면 검색 결과의 정확도와 관련성을 높일 수 있습니다. 자세한 내용은 <a href="/docs/ko/multi-vector-search.md">하이브리드 검색을</a> 참조하세요.</p>
-</div>
-<div class="alert note">
-<p>전체 텍스트 검색은 Milvus Standalone 및 Milvus Distributed에서는 사용할 수 있지만 Milvus Lite에서는 사용할 수 없지만, Milvus Lite에 추가하는 것이 로드맵에 포함되어 있습니다.</p>
+<ul>
+<li>전체 텍스트 검색과 시맨틱 기반의 고밀도 벡터 검색을 통합하면 검색 결과의 정확도와 관련성을 높일 수 있습니다. 자세한 내용은 <a href="/docs/ko/multi-vector-search.md">하이브리드 검색을</a> 참조하세요.</li>
+<li>전체 텍스트 검색은 Milvus Standalone 및 Milvus Distributed에서는 사용할 수 있지만 Milvus Lite에서는 사용할 수 없지만, Milvus Lite에 추가하는 것이 로드맵에 포함되어 있습니다.</li>
+</ul>
 </div>
 <h2 id="Overview​" class="common-anchor-header">개요<button data-href="#Overview​" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -305,7 +305,7 @@ indexes.<span class="hljs-title function_">add</span>(<span class="hljs-title cl
 </td></tr><tr><td data-block-token="KJfgdQmD1odMgdxkG6uczBYknQh" colspan="1" rowspan="1"><p data-block-token="XVCsdz9Ulo93A2xavPtcF9Bvnec"><code translate="no">metric_type</code></p>
 </td><td data-block-token="S3NHds6MTodtrsxRILIc8E1wngh" colspan="1" rowspan="1"><p data-block-token="G9i7dPczzoyJRHxyXbecrWBBn0d">특히 전체 텍스트 검색 기능을 사용하려면 이 매개변수의 값을 <code translate="no">BM25</code> 으로 설정해야 합니다.</p>
 </td></tr></tbody></table>
-<h3 id="Create-the-collection​" class="common-anchor-header">컬렉션 만들기</h3><p>이제 정의한 스키마 및 인덱스 매개변수를 사용하여 컬렉션을 생성합니다.</p>
+<h3 id="Create-the-collection​" class="common-anchor-header">컬렉션 만들기</h3><p>이제 정의한 스키마 및 인덱스 파라미터를 사용하여 컬렉션을 생성합니다.</p>
 <div class="multipleCode">
    <a href="#python">파이썬 </a> <a href="#java">자바</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python">client.<span class="hljs-title function_">create_collection</span>(​

@@ -59,8 +59,8 @@ title: Esecuzione di Milvus con supporto GPU tramite Docker Compose
         ></path>
       </svg>
     </button></h2><p>Per installare Milvus con supporto GPU usando Docker Compose, seguite i seguenti passi.</p>
-<h3 id="1-Download-and-configure-the-YAML-file" class="common-anchor-header">1. Scaricare e configurare il file YAML</h3><p>Scaricare <a href="https://github.com/milvus-io/milvus/releases/download/v2.4.17/milvus-standalone-docker-compose-gpu.yml"><code translate="no">milvus-standalone-docker-compose-gpu.yml</code></a> e salvarlo come docker-compose.yml manualmente o con il seguente comando.</p>
-<pre><code translate="no" class="language-shell">$ wget https://github.com/milvus-io/milvus/releases/download/v2.4.17/milvus-standalone-docker-compose-gpu.yml -O docker-compose.yml
+<h3 id="1-Download-and-configure-the-YAML-file" class="common-anchor-header">1. Scaricare e configurare il file YAML</h3><p>Scaricare <a href="https://github.com/milvus-io/milvus/releases/download/v2.4.18/milvus-standalone-docker-compose-gpu.yml"><code translate="no">milvus-standalone-docker-compose-gpu.yml</code></a> e salvarlo come docker-compose.yml manualmente o con il seguente comando.</p>
+<pre><code translate="no" class="language-shell">$ wget https://github.com/milvus-io/milvus/releases/download/v2.4.18/milvus-standalone-docker-compose-gpu.yml -O docker-compose.yml
 <button class="copy-code-btn"></button></code></pre>
 <p>È necessario apportare alcune modifiche alle variabili d'ambiente del servizio standalone nel file YAML come segue:</p>
 <ul>
@@ -100,7 +100,7 @@ Creating milvus-minio ... <span class="hljs-keyword">done</span>
 Creating milvus-standalone ... <span class="hljs-keyword">done</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
-<p>Se non si è riusciti a eseguire il comando precedente, verificare se nel sistema è installato Docker Compose V1. In tal caso, si consiglia di migrare a Docker Compose V2, come indicato nelle note di <a href="https://docs.docker.com/compose/">questa pagina</a>.</p>
+<p>Se non si è riusciti a eseguire il comando precedente, verificare se sul sistema è installato Docker Compose V1. In tal caso, si consiglia di migrare a Docker Compose V2, come indicato nelle note di <a href="https://docs.docker.com/compose/">questa pagina</a>.</p>
 </div>
 <p>Dopo aver avviato Milvus,</p>
 <ul>
@@ -120,7 +120,7 @@ milvus-minio        /usr/bin/docker-entrypoint ...   Up (healthy)   9000/tcp
 milvus-standalone   /tini -- milvus run standalone   Up             0.0.0.0:19530-&gt;19530/tcp, 0.0.0.0:9091-&gt;9091/tcp
 <button class="copy-code-btn"></button></code></pre>
 <p>Se sono stati assegnati più dispositivi GPU a Milvus in docker-compose.yml, è possibile specificare quale dispositivo GPU è visibile o disponibile per l'uso.</p>
-<p>Rendere visibile a Milvus il dispositivo GPU <code translate="no">0</code>:</p>
+<p>Rendere il dispositivo GPU <code translate="no">0</code> visibile a Milvus:</p>
 <pre><code translate="no" class="language-shell">$ CUDA_VISIBLE_DEVICES=0 ./milvus run standalone
 <button class="copy-code-btn"></button></code></pre>
 <p>Rendere visibili a Milvus i dispositivi GPU <code translate="no">0</code> e <code translate="no">1</code>:</p>

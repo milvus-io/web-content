@@ -54,6 +54,7 @@ title: Milvus 명령줄 인터페이스
 <tr><td style="text-align:center">2.2.x</td><td style="text-align:center">2.2.x</td><td style="text-align:center">0.4.0</td></tr>
 <tr><td style="text-align:center">2.3.x</td><td style="text-align:center">2.3.x</td><td style="text-align:center">0.4.2</td></tr>
 <tr><td style="text-align:center">2.4.x</td><td style="text-align:center">2.4.x</td><td style="text-align:center">1.0.0</td></tr>
+<tr><td style="text-align:center">2.4.x</td><td style="text-align:center">2.4.x</td><td style="text-align:center">1.0.1</td></tr>
 </tbody>
 </table>
 <div class="alert note">Milvus 2.0.0-RC7 이상 버전은 스토리지 형식 변경으로 인해 2.0.0-RC6 이하 버전과 이전 버전과 호환되지 않습니다.</div>
@@ -72,4 +73,4 @@ title: Milvus 명령줄 인터페이스
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus_CLI의 현재 버전은 1.0.0입니다. 설치된 버전을 찾고 업데이트가 필요한지 확인하려면 <code translate="no">milvus_cli --version</code> 을 실행하세요.</p>
+    </button></h2><p>Milvus_CLI의 현재 버전은 1.0.1입니다. 설치된 버전을 찾고 업데이트가 필요한지 확인하려면 <code translate="no">milvus_cli --version</code> 을 실행하세요.</p>

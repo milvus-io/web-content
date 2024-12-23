@@ -5,7 +5,7 @@ summary: >-
   in base a termini specifici. Questa funzione è utilizzata principalmente per
   la ricerca filtrata per soddisfare condizioni specifiche e può incorporare un
   filtro scalare per affinare i risultati della query, consentendo ricerche di
-  similarità all'interno di vettori che soddisfano criteri scalari.
+  somiglianza all'interno di vettori che soddisfano criteri scalari.
 title: Corrispondenza del testo
 ---
 <h1 id="Text-Match​" class="common-anchor-header">Corrispondenza del testo<button data-href="#Text-Match​" class="anchor-icon" translate="no">
@@ -245,7 +245,7 @@ schema.<span class="hljs-title function_">addField</span>(<span class="hljs-titl
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Una volta abilitata la corrispondenza del testo per un campo VARCHAR nello schema della raccolta, è possibile eseguire corrispondenze di testo utilizzando l'espressione <code translate="no">TEXT_MATCH</code>.</p>
+    </button></h2><p>Una volta abilitata la corrispondenza del testo per un campo VARCHAR nello schema della raccolta, è possibile eseguire corrispondenze del testo utilizzando l'espressione <code translate="no">TEXT_MATCH</code>.</p>
 <h3 id="TEXTMATCH-expression-syntax​" class="common-anchor-header">Sintassi dell'espressione TEXT_MATCH</h3><p>L'espressione <code translate="no">TEXT_MATCH</code> è usata per specificare il campo e i termini da cercare. La sua sintassi è la seguente.</p>
 <pre><code translate="no">TEXT_MATCH(field_name, text)​
 
@@ -265,9 +265,11 @@ schema.<span class="hljs-title function_">addField</span>(<span class="hljs-titl
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-curl"><span class="hljs-keyword">export</span> filter=<span class="hljs-string">&quot;\&quot;TEXT_MATCH(text, &#x27;machine deep&#x27;)\&quot;&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>È inoltre possibile combinare più espressioni <code translate="no">TEXT_MATCH</code> utilizzando gli operatori logici per eseguire la corrispondenza <strong>AND</strong>. Ad esempio, per cercare documenti contenenti sia <code translate="no">machine</code> che <code translate="no">deep</code> nel campo <code translate="no">text</code>, utilizzare la seguente espressione.</p>
-<div class="multipleCode">
-   <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
+<p>È inoltre possibile combinare più espressioni <code translate="no">TEXT_MATCH</code> utilizzando gli operatori logici per eseguire la corrispondenza <strong>AND</strong>.</p>
+<ul>
+<li><p>Per cercare documenti contenenti sia <code translate="no">machine</code> che <code translate="no">deep</code> nel campo <code translate="no">text</code>, utilizzare la seguente espressione.</p>
+<p><div class="multipleCode">
+<a href="#python">Python </a><a href="#java">Java</a><a href="#javascript">Node.js</a><a href="#curl">cURL</a></div></p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&quot;TEXT_MATCH(text, &#x27;machine&#x27;) and TEXT_MATCH(text, &#x27;deep&#x27;)&quot;</span>​
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-java"><span class="hljs-title class_">String</span> filter = <span class="hljs-string">&quot;TEXT_MATCH(text, &#x27;machine&#x27;) and TEXT_MATCH(text, &#x27;deep&#x27;)&quot;</span>;
@@ -275,7 +277,19 @@ schema.<span class="hljs-title function_">addField</span>(<span class="hljs-titl
 <pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> filter = <span class="hljs-string">&quot;TEXT_MATCH(text, &#x27;machine&#x27;) and TEXT_MATCH(text, &#x27;deep&#x27;)&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-curl"><span class="hljs-keyword">export</span> filter=<span class="hljs-string">&quot;\&quot;TEXT_MATCH(text, &#x27;machine&#x27;) and TEXT_MATCH(text, &#x27;deep&#x27;)\&quot;&quot;</span>
+<button class="copy-code-btn"></button></code></pre></li>
+<li><p>Per cercare documenti contenenti sia <code translate="no">machine</code> che <code translate="no">learning</code> ma senza <code translate="no">deep</code> nel campo <code translate="no">text</code>, utilizzare le seguenti espressioni:</p>
+<p><div class="multipleCode">
+<a href="#python">Python </a><a href="#java">Java</a><a href="#javascript">Node.js</a><a href="#curl">cURL</a></div></p>
+<pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&quot;not TEXT_MATCH(text, &#x27;deep&#x27;) and TEXT_MATCH(text, &#x27;machine&#x27;) and TEXT_MATCH(text, &#x27;learning&#x27;)&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-java"><span class="hljs-title class_">String</span> filter = <span class="hljs-string">&quot;not TEXT_MATCH(text, &#x27;deep&#x27;) and TEXT_MATCH(text, &#x27;machine&#x27;) and TEXT_MATCH(text, &#x27;learning&#x27;)&quot;</span>;
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> filter = <span class="hljs-string">&quot;not TEXT_MATCH(text, &#x27;deep&#x27;) and TEXT_MATCH(text, &#x27;machine&#x27;) and TEXT_MATCH(text, &#x27;learning&#x27;)&quot;</span>;
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-curl"><span class="hljs-keyword">export</span> filter=<span class="hljs-string">&quot;\&quot;not TEXT_MATCH(text, &#x27;deep&#x27;) and TEXT_MATCH(text, &#x27;machine&#x27;) and TEXT_MATCH(text, &#x27;learning&#x27;)\&quot;&quot;</span>
+<button class="copy-code-btn"></button></code></pre></li>
+</ul>
 <h3 id="Search-with-text-match​" class="common-anchor-header">Ricerca con corrispondenza di testo</h3><p>La corrispondenza del testo può essere utilizzata in combinazione con la ricerca per similarità vettoriale per restringere l'ambito di ricerca e migliorare le prestazioni della ricerca. Filtrando la raccolta con la corrispondenza del testo prima della ricerca per similarità vettoriale, è possibile ridurre il numero di documenti da ricercare, con conseguenti tempi di interrogazione più rapidi.</p>
 <p>In questo esempio, l'espressione <code translate="no">filter</code> filtra i risultati della ricerca per includere solo i documenti che corrispondono al termine specificato <code translate="no">keyword1</code> o <code translate="no">keyword2</code>. La ricerca di similarità vettoriale viene quindi eseguita su questo sottoinsieme di documenti filtrati.</p>
 <div class="multipleCode">
@@ -407,5 +421,11 @@ curl --request POST \
       </svg>
     </button></h2><ul>
 <li><p>L'abilitazione della corrispondenza del testo per un campo attiva la creazione di un indice invertito, che consuma risorse di memorizzazione. Considerare l'impatto sullo storage quando si decide di abilitare questa funzione, poiché varia in base alla dimensione del testo, ai token unici e all'analizzatore utilizzato.</p></li>
-<li><p>Una volta definito un analizzatore nello schema, le sue impostazioni diventano permanenti per quella raccolta. Se si decide che un analizzatore diverso è più adatto alle proprie esigenze, si può decidere di abbandonare la raccolta esistente e crearne una nuova con la configurazione dell'analizzatore desiderato.</p></li>
+<li><p>Una volta definito un analizzatore nello schema, le sue impostazioni diventano permanenti per quella raccolta. Se si decide che un analizzatore diverso è più adatto alle proprie esigenze, si può pensare di eliminare l'insieme esistente e crearne uno nuovo con la configurazione dell'analizzatore desiderata.</p></li>
+<li><p>Regole di escape nelle espressioni di <code translate="no">filter</code>:</p>
+<ul>
+<li>I caratteri racchiusi tra doppi apici o apici singoli all'interno delle espressioni vengono interpretati come costanti di stringa. Se la costante di stringa include caratteri di escape, i caratteri di escape devono essere rappresentati con una sequenza di escape. Ad esempio, utilizzare <code translate="no">\\</code> per rappresentare <code translate="no">\</code>, <code translate="no">\\t</code> per rappresentare una tabulazione <code translate="no">\t</code> e <code translate="no">\\n</code> per rappresentare una newline.</li>
+<li>Se una costante di stringa è racchiusa da apici singoli, un apice singolo all'interno della costante deve essere rappresentato come <code translate="no">\\'</code> mentre un doppio apice può essere rappresentato come <code translate="no">&quot;</code> o <code translate="no">\\&quot;</code>. Esempio: <code translate="no">'It\\'s milvus'</code>.</li>
+<li>Se una costante di stringa è racchiusa da doppi apici, un doppio apice all'interno della costante deve essere rappresentato come <code translate="no">\\&quot;</code> mentre un apice singolo può essere rappresentato come <code translate="no">'</code> o <code translate="no">\\'</code>. Esempio: <code translate="no">&quot;He said \\&quot;Hi\\&quot;&quot;</code>.</li>
+</ul></li>
 </ul>

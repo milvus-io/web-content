@@ -108,10 +108,10 @@ zilliztech/milvus       4.1.1           2.3.0                   Milvus is an ope
 zilliztech/milvus       4.1.0           2.3.0                   Milvus is an open-source vector database built ...
 <button class="copy-code-btn"></button></code></pre>
 <p>Puede elegir la ruta de actualización para su Milvus de la siguiente manera:</p>
-<div style="display: none;">- Realice una actualización continua](#conduct-a-rolling-upgrade) de Milvus v2.2.3 y versiones posteriores a v2.4.17.</div>
+<div style="display: none;">- Realice una actualización continua](#conduct-a-rolling-upgrade) de Milvus v2.2.3 y versiones posteriores a v2.4.18.</div>
 <ul>
-<li><p><a href="#Upgrade-Milvus-using-Helm">Actualice Milvus utilizando Helm</a> para una actualización desde una versión menor anterior a v2.2.3 a v2.4.17.</p></li>
-<li><p><a href="#Migrate-the-metadata">Migre los metadatos</a> antes de la actualización de Milvus v2.1.x a v2.4.17.</p></li>
+<li><p><a href="#Upgrade-Milvus-using-Helm">Actualice Milvus utilizando Helm</a> para una actualización desde una versión menor anterior a v2.2.3 a v2.4.18.</p></li>
+<li><p><a href="#Migrate-the-metadata">Migre los metadatos</a> antes de la actualización de Milvus v2.1.x a v2.4.18.</p></li>
 </ul>
 <div style="display: none;">
 <h2 id="Conduct-a-rolling-upgrade" class="common-anchor-header">Realizar una actualización continua<button data-href="#Conduct-a-rolling-upgrade" class="anchor-icon" translate="no">
@@ -145,8 +145,8 @@ zilliztech/milvus       4.1.0           2.3.0                   Milvus is an ope
 <tr><td><code translate="no">o</code></td><td>Operación</td><td><code translate="no">update</code></td><td>Falso</td></tr>
 </tbody>
 </table>
-<p>Una vez que se haya asegurado de que todos los despliegues en su instancia de Milvus están en su estado normal. Puede ejecutar el siguiente comando para actualizar la instancia de Milvus a 2.4.17.</p>
-<pre><code translate="no" class="language-shell">sh rollingUpdate.<span class="hljs-property">sh</span> -n <span class="hljs-keyword">default</span> -i my-release -o update -t <span class="hljs-number">2.4</span><span class="hljs-number">.17</span> -w <span class="hljs-string">&#x27;milvusdb/milvus:v2.4.17&#x27;</span>
+<p>Una vez que se haya asegurado de que todos los despliegues en su instancia de Milvus están en su estado normal. Puede ejecutar el siguiente comando para actualizar la instancia de Milvus a 2.4.18.</p>
+<pre><code translate="no" class="language-shell">sh rollingUpdate.<span class="hljs-property">sh</span> -n <span class="hljs-keyword">default</span> -i my-release -o update -t <span class="hljs-number">2.4</span><span class="hljs-number">.18</span> -w <span class="hljs-string">&#x27;milvusdb/milvus:v2.4.18&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <ol>

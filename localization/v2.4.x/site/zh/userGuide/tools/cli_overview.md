@@ -1,6 +1,6 @@
 ---
 id: cli_overview.md
-summary: Milvus 命令行界面（CLI）是一种命令行工具，支持数据库连接、数据操作以及数据导入和导出。
+summary: Milvus 命令行界面（CLI）是一种命令行工具，支持数据库连接、数据操作和数据导入导出。
 title: Milvus 命令行界面
 ---
 <h1 id="Milvus-Command-Line-Interface" class="common-anchor-header">Milvus 命令行界面<button data-href="#Milvus-Command-Line-Interface" class="anchor-icon" translate="no">
@@ -18,7 +18,7 @@ title: Milvus 命令行界面
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Milvus 命令行界面（CLI）是一种命令行工具，支持数据库连接、数据操作以及数据导入和导出。它基于<a href="https://github.com/milvus-io/pymilvus">Milvus Python SDK</a>，允许使用交互式命令行提示通过终端执行命令。</p>
+    </button></h1><p>Milvus 命令行界面（CLI）是一种命令行工具，支持数据库连接、数据操作和数据导入导出。它基于<a href="https://github.com/milvus-io/pymilvus">Milvus Python SDK</a>，允许通过终端使用交互式命令行提示执行命令。</p>
 <h2 id="Recommended-version" class="common-anchor-header">推荐版本<button data-href="#Recommended-version" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -54,6 +54,7 @@ title: Milvus 命令行界面
 <tr><td style="text-align:center">2.2.x</td><td style="text-align:center">2.2.x</td><td style="text-align:center">0.4.0</td></tr>
 <tr><td style="text-align:center">2.3.x</td><td style="text-align:center">2.3.x</td><td style="text-align:center">0.4.2</td></tr>
 <tr><td style="text-align:center">2.4.x</td><td style="text-align:center">2.4.x</td><td style="text-align:center">1.0.0</td></tr>
+<tr><td style="text-align:center">2.4.x</td><td style="text-align:center">2.4.x</td><td style="text-align:center">1.0.1</td></tr>
 </tbody>
 </table>
 <div class="alert note">Milvus 2.0.0-RC7 及更高版本与 2.0.0-RC6 及更早版本不向后兼容，原因是存储格式有所更改。</div>
@@ -72,4 +73,4 @@ title: Milvus 命令行界面
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus_CLI 的当前版本是 1.0.0。要查找已安装的版本并确定是否需要更新，请运行<code translate="no">milvus_cli --version</code> 。</p>
+    </button></h2><p>Milvus_CLI 的当前版本是 1.0.1。要查找已安装的版本并确定是否需要更新，请运行<code translate="no">milvus_cli --version</code> 。</p>

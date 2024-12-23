@@ -2069,7 +2069,7 @@
     "order": 9,
     "children": [
       {
-        "label": "Performance FAQs",
+        "label": "FAQs sobre o desempenho",
         "id": "performance_faq.md",
         "order": 0,
         "children": []

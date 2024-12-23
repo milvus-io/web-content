@@ -19,6 +19,83 @@ title: Release Notes
         ></path>
       </svg>
     </button></h1><p>Find out what’s new in Milvus! This page summarizes new features, improvements, known issues, and bug fixes in each release. You can find the release notes for each released version after v2.4.0 in this section. We suggest that you regularly visit this page to learn about updates.</p>
+<h2 id="v2418" class="common-anchor-header">v2.4.18<button data-href="#v2418" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>Release Date: December 20, 2024</p>
+<table>
+<thead>
+<tr><th>Milvus version</th><th>Python SDK version</th><th>Java SDK version</th><th>Node.js SDK version</th></tr>
+</thead>
+<tbody>
+<tr><td>2.4.18</td><td>2.4.11</td><td>2.4.9</td><td>2.4.9</td></tr>
+</tbody>
+</table>
+<p>Milvus 2.4.18 introduces customizable privilege groups and an enhanced Grant/Revoke API, significantly streamlining permission management. This version also brings a suite of built-in privilege groups for common operational scenarios, as well as a host of performance and stability improvements—ranging from CPU optimization to faster collection loading and more efficient indexing. In addition, critical bug fixes ensure a more resilient system, addressing issues like crash scenarios and synchronization failures. We recommend you upgrade to 2.4.18 to take advantage of these key enhancements and improved overall reliability.</p>
+<h3 id="Features" class="common-anchor-header">Features</h3><p>RBAC Enhancements:</p>
+<ul>
+<li>Introduces customizable privilege groups, allowing users to create, drop, list, and dynamically manage privileges (add/remove) within their defined groups.</li>
+<li>Includes a suite of built-in privilege groups for common operational scenarios:
+<ul>
+<li>Cluster-Level: <em>ClusterReadOnly</em>, <em>ClusterReadWrite</em>, <em>ClusterAdmin</em></li>
+<li>Database-Level: <em>DatabaseReadOnly</em>, <em>DatabaseReadWrite</em>, <em>DatabaseAdmin</em></li>
+<li>Collection-Level: <em>CollectionReadOnly</em>, <em>CollectionReadWrite</em>, <em>CollectionAdmin</em></li>
+</ul></li>
+<li>Provides a new version of the Grant/Revoke API, enabling the use of these new interfaces without the need to specify an <code translate="no">ObjectType</code>.</li>
+</ul>
+<h3 id="Improvements" class="common-anchor-header">Improvements</h3><ul>
+<li>Allow hyphens in partition names (<a href="https://github.com/milvus-io/milvus/pull/38474">#38474</a>)</li>
+<li>Optimize CPU usage for health check requests (<a href="https://github.com/milvus-io/milvus/pull/35595">#35595</a>)</li>
+<li>Support templates for expressions in RESTful APIs (<a href="https://github.com/milvus-io/milvus/pull/38161">#38161</a>)</li>
+<li>Remove the limit on the number of load tasks per round (<a href="https://github.com/milvus-io/milvus/pull/38497">#38497</a>)</li>
+<li><code translate="no">alterindex</code> &amp; <code translate="no">altercollection</code> now support modifying properties (<a href="https://github.com/milvus-io/milvus/pull/38361">#38361</a> <a href="https://github.com/milvus-io/milvus/pull/38111">#38111</a> <a href="https://github.com/milvus-io/milvus/pull/38421">#38421</a>)</li>
+<li><code translate="no">alterdatabase</code> supports deleting properties (<a href="https://github.com/milvus-io/milvus/pull/38450">#38450</a>)</li>
+<li>Add detailed replica counts for resource groups (<a href="https://github.com/milvus-io/milvus/pull/38315">#38315</a>)</li>
+<li>Support score-based balancing for channel policies  (<a href="https://github.com/milvus-io/milvus/pull/38378">#38378</a>)</li>
+<li>Add metrics to count the number of non-zero values/tokens in sparse searches (<a href="https://github.com/milvus-io/milvus/pull/38328">#38328</a>)</li>
+<li>Remove the RPC layer of the coordinator when running in standalone or mixed mode (<a href="https://github.com/milvus-io/milvus/pull/38207">#38207</a>)</li>
+<li>Add mmap file usage metrics (<a href="https://github.com/milvus-io/milvus/pull/38211">#38211</a>)</li>
+<li>Support database requests in RESTful API (<a href="https://github.com/milvus-io/milvus/pull/38188">#38188</a>)</li>
+<li>Enable rate limiting for RESTful V1 (<a href="https://github.com/milvus-io/milvus/pull/38190">#38190</a>)</li>
+<li>Add collection ID to search request count metrics (<a href="https://github.com/milvus-io/milvus/pull/38144">#38144</a>)</li>
+<li>Refine clustering compaction logs (<a href="https://github.com/milvus-io/milvus/pull/38102">#38102</a>)</li>
+<li>Accelerate the collection loading process (<a href="https://github.com/milvus-io/milvus/pull/37841">#37841</a>)</li>
+<li>Improve compaction performance by removing ParamTable lookups (<a href="https://github.com/milvus-io/milvus/pull/37882">#37882</a>)</li>
+<li>Support retrying searches when topk is reduced and results are insufficient (<a href="https://github.com/milvus-io/milvus/pull/37093">#37093</a>)</li>
+<li>Update Knowhere version (<a href="https://github.com/milvus-io/milvus/pull/38277">#38277</a>)
+<ul>
+<li>Optimize sparse index and get ~10% performance improvement</li>
+</ul></li>
+</ul>
+<h3 id="Bug-fixes" class="common-anchor-header">Bug fixes</h3><ul>
+<li>Fixed a crash caused by growing-groupby (<a href="https://github.com/milvus-io/milvus/pull/38553">#38553</a>)</li>
+<li>Fixed an issue where the <code translate="no">SyncSegments</code> RPC would always fail (<a href="https://github.com/milvus-io/milvus/pull/38032">#38032</a>)</li>
+<li>Fixed an issue where sync tasks remained running after the DataNode had stopped (<a href="https://github.com/milvus-io/milvus/pull/38441">#38441</a>)</li>
+<li>Fixed inaccurate general counts (<a href="https://github.com/milvus-io/milvus/pull/38525">#38525</a>)</li>
+<li>Escaped prefixes before conducting searches in inverted indexes  (<a href="https://github.com/milvus-io/milvus/pull/38425">#38425</a>)</li>
+<li>Fixed an issue where roles could be dropped even though grants still existed (<a href="https://github.com/milvus-io/milvus/pull/38369">#38369</a>)</li>
+<li>Fixed empty import task results (<a href="https://github.com/milvus-io/milvus/pull/38317">#38317</a>)</li>
+<li>Fixed a DataNode issue where progress could stall at the writer buffer memory check (<a href="https://github.com/milvus-io/milvus/pull/38287">#38287</a>)</li>
+<li>Fixed an issue that prevented the permission grant on the <code translate="no">manualcompact</code> API (<a href="https://github.com/milvus-io/milvus/pull/38168">#38168</a>)</li>
+<li>Fixed inaccurate partition count metrics (<a href="https://github.com/milvus-io/milvus/pull/38073">#38073</a>)</li>
+<li>Accelerated flushing speed by optimizing lock usage (<a href="https://github.com/milvus-io/milvus/pull/37897">#37897</a>)</li>
+<li>Handled errors gracefully when the compaction queue is full (<a href="https://github.com/milvus-io/milvus/pull/37990">#37990</a>)</li>
+<li>Optimized loading speed by separating the pool for target observation and collection loading (<a href="https://github.com/milvus-io/milvus/pull/37735">#37735</a>)</li>
+<li>Fixed a crash caused by retrieving varchar data from a memory-mapped growing segment (<a href="https://github.com/milvus-io/milvus/pull/37995">#37995</a>)</li>
+<li>Fixed an issue where channels could be accidentally released after balancing (<a href="https://github.com/milvus-io/milvus/pull/37940">#37940</a>)</li>
+</ul>
 <h2 id="v2417" class="common-anchor-header">v2.4.17<button data-href="#v2417" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

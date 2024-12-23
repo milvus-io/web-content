@@ -4,7 +4,7 @@ summary: >-
   O Milvus Command-Line Interface (CLI) é uma ferramenta de linha de comandos
   que suporta a ligação à base de dados, operações de dados e importação e
   exportação de dados.
-title: Interface de linha de comando do Milvus
+title: Milvus Command-Line Interface
 ---
 <h1 id="Milvus-Command-Line-Interface" class="common-anchor-header">Milvus Command-Line Interface<button data-href="#Milvus-Command-Line-Interface" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -57,6 +57,7 @@ title: Interface de linha de comando do Milvus
 <tr><td style="text-align:center">2.2.x</td><td style="text-align:center">2.2.x</td><td style="text-align:center">0.4.0</td></tr>
 <tr><td style="text-align:center">2.3.x</td><td style="text-align:center">2.3.x</td><td style="text-align:center">0.4.2</td></tr>
 <tr><td style="text-align:center">2.4.x</td><td style="text-align:center">2.4.x</td><td style="text-align:center">1.0.0</td></tr>
+<tr><td style="text-align:center">2.4.x</td><td style="text-align:center">2.4.x</td><td style="text-align:center">1.0.1</td></tr>
 </tbody>
 </table>
 <div class="alert note">O Milvus 2.0.0-RC7 e posteriores não são retrocompatíveis com o 2.0.0-RC6 e anteriores devido a alterações efectuadas nos formatos de armazenamento.</div>
@@ -75,4 +76,4 @@ title: Interface de linha de comando do Milvus
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>A versão atual do Milvus_CLI é a 1.0.0. Para encontrar a versão instalada e verificar se é necessário actualizá-la, execute <code translate="no">milvus_cli --version</code>.</p>
+    </button></h2><p>A versão atual do Milvus_CLI é a 1.0.1. Para encontrar a versão instalada e verificar se é necessário actualizá-la, execute <code translate="no">milvus_cli --version</code>.</p>

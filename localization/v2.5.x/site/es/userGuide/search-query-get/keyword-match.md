@@ -266,9 +266,11 @@ schema.<span class="hljs-title function_">addField</span>(<span class="hljs-titl
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-curl"><span class="hljs-keyword">export</span> filter=<span class="hljs-string">&quot;\&quot;TEXT_MATCH(text, &#x27;machine deep&#x27;)\&quot;&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>También puede combinar varias expresiones <code translate="no">TEXT_MATCH</code> utilizando operadores lógicos para realizar una búsqueda <strong>AND</strong>. Por ejemplo, para buscar documentos que contengan <code translate="no">machine</code> y <code translate="no">deep</code> en el campo <code translate="no">text</code>, utilice la siguiente expresión.</p>
-<div class="multipleCode">
-   <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
+<p>También puede combinar varias expresiones <code translate="no">TEXT_MATCH</code> utilizando operadores lógicos para realizar una búsqueda <strong>AND</strong>.</p>
+<ul>
+<li><p>Para buscar documentos que contengan <code translate="no">machine</code> y <code translate="no">deep</code> en el campo <code translate="no">text</code>, utilice la siguiente expresión.</p>
+<p><div class="multipleCode">
+<a href="#python">Python </a><a href="#java">Java</a><a href="#javascript">Node.js</a><a href="#curl">cURL</a></div></p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&quot;TEXT_MATCH(text, &#x27;machine&#x27;) and TEXT_MATCH(text, &#x27;deep&#x27;)&quot;</span>​
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-java"><span class="hljs-title class_">String</span> filter = <span class="hljs-string">&quot;TEXT_MATCH(text, &#x27;machine&#x27;) and TEXT_MATCH(text, &#x27;deep&#x27;)&quot;</span>;
@@ -276,8 +278,20 @@ schema.<span class="hljs-title function_">addField</span>(<span class="hljs-titl
 <pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> filter = <span class="hljs-string">&quot;TEXT_MATCH(text, &#x27;machine&#x27;) and TEXT_MATCH(text, &#x27;deep&#x27;)&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-curl"><span class="hljs-keyword">export</span> filter=<span class="hljs-string">&quot;\&quot;TEXT_MATCH(text, &#x27;machine&#x27;) and TEXT_MATCH(text, &#x27;deep&#x27;)\&quot;&quot;</span>
+<button class="copy-code-btn"></button></code></pre></li>
+<li><p>Para buscar documentos que contengan <code translate="no">machine</code> y <code translate="no">learning</code> pero sin <code translate="no">deep</code> en el campo <code translate="no">text</code>, utilice las siguientes expresiones:</p>
+<p><div class="multipleCode">
+<a href="#python">Python </a><a href="#java">Java</a><a href="#javascript">Node.js</a><a href="#curl">cURL</a></div></p>
+<pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&quot;not TEXT_MATCH(text, &#x27;deep&#x27;) and TEXT_MATCH(text, &#x27;machine&#x27;) and TEXT_MATCH(text, &#x27;learning&#x27;)&quot;</span>
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Search-with-text-match​" class="common-anchor-header">Búsqueda con coincidencia de texto</h3><p>La concordancia de texto puede utilizarse en combinación con la búsqueda por similitud vectorial para acotar el ámbito de búsqueda y mejorar el rendimiento de la misma. Al filtrar la colección utilizando la concordancia de texto antes de la búsqueda por similitud vectorial, puede reducir el número de documentos en los que es necesario buscar, lo que se traduce en tiempos de consulta más rápidos.</p>
+<pre><code translate="no" class="language-java"><span class="hljs-title class_">String</span> filter = <span class="hljs-string">&quot;not TEXT_MATCH(text, &#x27;deep&#x27;) and TEXT_MATCH(text, &#x27;machine&#x27;) and TEXT_MATCH(text, &#x27;learning&#x27;)&quot;</span>;
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-javascript"><span class="hljs-keyword">const</span> filter = <span class="hljs-string">&quot;not TEXT_MATCH(text, &#x27;deep&#x27;) and TEXT_MATCH(text, &#x27;machine&#x27;) and TEXT_MATCH(text, &#x27;learning&#x27;)&quot;</span>;
+<button class="copy-code-btn"></button></code></pre>
+<pre><code translate="no" class="language-curl"><span class="hljs-keyword">export</span> filter=<span class="hljs-string">&quot;\&quot;not TEXT_MATCH(text, &#x27;deep&#x27;) and TEXT_MATCH(text, &#x27;machine&#x27;) and TEXT_MATCH(text, &#x27;learning&#x27;)\&quot;&quot;</span>
+<button class="copy-code-btn"></button></code></pre></li>
+</ul>
+<h3 id="Search-with-text-match​" class="common-anchor-header">Búsqueda con concordancia de texto</h3><p>La concordancia de texto puede utilizarse en combinación con la búsqueda por similitud vectorial para acotar el ámbito de búsqueda y mejorar el rendimiento de la misma. Al filtrar la colección mediante la concordancia de texto antes de la búsqueda por similitud vectorial, puede reducir el número de documentos en los que es necesario buscar, lo que se traduce en tiempos de consulta más rápidos.</p>
 <p>En este ejemplo, la expresión <code translate="no">filter</code> filtra los resultados de la búsqueda para incluir únicamente los documentos que coinciden con el término especificado <code translate="no">keyword1</code> o <code translate="no">keyword2</code>. A continuación, se realiza la búsqueda de similitud vectorial en este subconjunto filtrado de documentos.</p>
 <div class="multipleCode">
    <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
@@ -408,5 +422,11 @@ curl --request POST \
       </svg>
     </button></h2><ul>
 <li><p>La activación de la concordancia de texto para un campo desencadena la creación de un índice invertido, que consume recursos de almacenamiento. Tenga en cuenta el impacto en el almacenamiento cuando decida activar esta función, ya que varía en función del tamaño del texto, los tokens únicos y el analizador utilizado.</p></li>
-<li><p>Una vez que haya definido un analizador en su esquema, su configuración será permanente para esa colección. Si decide que un analizador diferente se adaptaría mejor a sus necesidades, puede considerar eliminar la colección existente y crear una nueva con la configuración de analizador deseada.</p></li>
+<li><p>Una vez que haya definido un analizador en su esquema, su configuración será permanente para esa colección. Si decide que un analizador diferente se adapta mejor a sus necesidades, puede considerar eliminar la colección existente y crear una nueva con la configuración de analizador deseada.</p></li>
+<li><p>Reglas de escape en las expresiones <code translate="no">filter</code>:</p>
+<ul>
+<li>Los caracteres entre comillas dobles o simples dentro de expresiones se interpretan como constantes de cadena. Si la constante de cadena incluye caracteres de escape, éstos deben representarse con una secuencia de escape. Por ejemplo, utilice <code translate="no">\\</code> para representar <code translate="no">\</code>, <code translate="no">\\t</code> para representar un tabulador <code translate="no">\t</code> y <code translate="no">\\n</code> para representar una nueva línea.</li>
+<li>Si una constante de cadena está encerrada entre comillas simples, una comilla simple dentro de la constante debe representarse como <code translate="no">\\'</code> mientras que una comilla doble puede representarse como <code translate="no">&quot;</code> o <code translate="no">\\&quot;</code>. Ejemplo: <code translate="no">'It\\'s milvus'</code>.</li>
+<li>Si una constante de cadena está entre comillas dobles, una comilla doble dentro de la constante debe representarse como <code translate="no">\\&quot;</code> mientras que una comilla simple puede representarse como <code translate="no">'</code> o <code translate="no">\\'</code>. Ejemplo: <code translate="no">&quot;He said \\&quot;Hi\\&quot;&quot;</code>.</li>
+</ul></li>
 </ul>

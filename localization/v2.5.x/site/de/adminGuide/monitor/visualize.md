@@ -58,7 +58,7 @@ summary: 'Erfahren Sie, wie Sie Milvus-Metriken in Grafana visualisieren können
         ></path>
       </svg>
     </button></h2><h3 id="1-Download-and-import-dashboard" class="common-anchor-header">1. Herunterladen und Importieren des Dashboards</h3><p>Laden Sie das Milvus Dashboard herunter und importieren Sie es aus der JSON-Datei.</p>
-<pre><code translate="no">wget https://raw.githubusercontent.com/milvus-io/milvus/2.2.0/deployments/monitor/grafana/milvus-dashboard.json
+<pre><code translate="no">wget <span class="hljs-attr">https</span>:<span class="hljs-comment">//raw.githubusercontent.com/milvus-io/milvus/refs/heads/master/deployments/monitor/grafana/milvus-dashboard.json</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>
   

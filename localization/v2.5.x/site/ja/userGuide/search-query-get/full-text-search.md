@@ -22,10 +22,10 @@ summary: 全文検索とは、テキストデータセット中の特定の語�
     </button></h1><p>全文検索は、テキストデータセット内の特定の語句を含む文書を検索し、関連性に基づいて結果をランク付けする機能です。この機能は、正確な用語を見落とす可能性のあるセマンティック検索の制限を克服し、最も正確で文脈に関連した結果を確実に受け取れるようにします。さらに、生のテキスト入力を受け付けることでベクトル検索を簡素化し、ベクトル埋め込みを手動で生成することなく、テキストデータをスパース埋め込みに自動的に変換します。</p>
 <p>関連性のスコアリングにBM25アルゴリズムを使用するこの機能は、特定の検索用語に密接に一致する文書を優先的に検索する、検索拡張世代（RAG）シナリオで特に有用です。</p>
 <div class="alert note">
-<p>全文検索とセマンティックベースの密なベクトル検索を統合することで、検索結果の精度と関連性を高めることができます。詳しくは<a href="/docs/ja/multi-vector-search.md">ハイブリッド検索を</a>ご参照ください。</p>
-</div>
-<div class="alert note">
-<p>全文検索はMilvus StandaloneとMilvus Distributedでご利用いただけますが、Milvus Liteではご利用いただけません。</p>
+<ul>
+<li>全文検索とセマンティックベースの密なベクトル検索を統合することで、検索結果の精度と関連性を高めることができます。詳しくは<a href="/docs/ja/multi-vector-search.md">ハイブリッド検索を</a>ご参照ください。</li>
+<li>全文検索はMilvus StandaloneとMilvus Distributedでご利用いただけますが、Milvus Liteではご利用いただけません。</li>
+</ul>
 </div>
 <h2 id="Overview​" class="common-anchor-header">概要<button data-href="#Overview​" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -78,7 +78,7 @@ summary: 全文検索とは、テキストデータセット中の特定の語�
     </button></h2><p>全文検索を有効にするには、特定のスキーマを持つコレクションを作成します。このスキーマには3つの必要なフィールドが含まれていなければなりません。</p>
 <ul>
 <li><p>コレクション内の各エンティティを一意に識別するプライマリ・フィールド。</p></li>
-<li><p>生のテキスト文書を格納する<code translate="no">VARCHAR</code> フィールド。<code translate="no">enable_analyzer</code> 属性は<code translate="no">True</code> に設定されている。これにより、milvus はテキストを機能処理のために特定の用語にトークン化することができる。</p></li>
+<li><p>生のテキスト文書を格納する<code translate="no">VARCHAR</code> フィールド。<code translate="no">enable_analyzer</code> 属性は<code translate="no">True</code> に設定されている。これにより、milvus はテキストを特定の用語にトークン化し、機能処理を行うことができる。</p></li>
 <li><p>Milvusが<code translate="no">VARCHAR</code> フィールド用に自動生成するスパース埋め込みを格納するために予約された<code translate="no">SPARSE_FLOAT_VECTOR</code> フィールド。</p></li>
 </ul>
 <h3 id="Define-the-collection-schema" class="common-anchor-header">コレクションスキーマの定義</h3><p>まず、スキーマを作成し、必要なフィールドを追加する。</p>
@@ -169,7 +169,7 @@ schema.addField(AddFieldReq.builder()
         ]
     }&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>この設定では</p>
+<p>この構成では</p>
 <ul>
 <li><p><code translate="no">id</code>: は主キーとして機能し、<code translate="no">auto_id=True</code> で自動的に生成される。</p></li>
 <li><p><code translate="no">text</code>この構成では、 : が主キーとなり、 で自動的に生成されます。 : には、全文検索操作のための生のテキスト・データが格納されます。データ型は<code translate="no">VARCHAR</code> でなければなりません。<code translate="no">VARCHAR</code> はMilvusのテキスト保存用の文字列データ型です。Milvusがテキストをトークン化できるようにするには、<code translate="no">enable_analyzer=True</code> を設定します。デフォルトでは、Milvusはテキスト分析に<a href="/docs/ja/standard-analyzer.md">標準アナライザを</a>使用します。別の解析器を設定するには、<a href="/docs/ja/analyzer-overview.md">概要を</a>参照してください。</p></li>

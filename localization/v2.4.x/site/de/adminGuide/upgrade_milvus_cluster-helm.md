@@ -108,10 +108,10 @@ zilliztech/milvus       4.1.1           2.3.0                   Milvus is an ope
 zilliztech/milvus       4.1.0           2.3.0                   Milvus is an open-source vector database built ...
 <button class="copy-code-btn"></button></code></pre>
 <p>Sie können den Upgrade-Pfad für Ihren Milvus wie folgt wählen:</p>
-<div style="display: none;">- [Führen Sie ein rollendes Upgrade durch](#conduct-a-rolling-upgrade) von Milvus v2.2.3 und späteren Versionen auf v2.4.17.</div>
+<div style="display: none;">- [Führen Sie ein rollendes Upgrade durch](#conduct-a-rolling-upgrade) von Milvus v2.2.3 und späteren Versionen auf v2.4.18.</div>
 <ul>
-<li><p><a href="#Upgrade-Milvus-using-Helm">Führen Sie ein Upgrade von Milvus mit Helm</a> für ein Upgrade von einer Nebenversion vor v2.2.3 auf v2.4.17<a href="#Upgrade-Milvus-using-Helm">durch</a>.</p></li>
-<li><p><a href="#Migrate-the-metadata">Migrieren Sie die Metadaten</a> vor dem Upgrade von Milvus v2.1.x auf v2.4.17.</p></li>
+<li><p><a href="#Upgrade-Milvus-using-Helm">Führen Sie ein Upgrade von Milvus mit Helm</a> für ein Upgrade von einer Nebenversion vor v2.2.3 auf v2.4.18 durch.</p></li>
+<li><p><a href="#Migrate-the-metadata">Migrieren Sie die Metadaten</a> vor dem Upgrade von Milvus v2.1.x auf v2.4.18.</p></li>
 </ul>
 <div style="display: none;">
 <h2 id="Conduct-a-rolling-upgrade" class="common-anchor-header">Durchführen eines rollenden Upgrades<button data-href="#Conduct-a-rolling-upgrade" class="anchor-icon" translate="no">
@@ -145,14 +145,14 @@ zilliztech/milvus       4.1.0           2.3.0                   Milvus is an ope
 <tr><td><code translate="no">o</code></td><td>Vorgang</td><td><code translate="no">update</code></td><td>Falsch</td></tr>
 </tbody>
 </table>
-<p>Sobald Sie sichergestellt haben, dass sich alle Einsätze in Ihrer Milvus-Instanz in ihrem normalen Status befinden, können Sie den folgenden Befehl ausführen. Sie können den folgenden Befehl ausführen, um die Milvus-Instanz auf 2.4.17 zu aktualisieren.</p>
-<pre><code translate="no" class="language-shell">sh rollingUpdate.<span class="hljs-property">sh</span> -n <span class="hljs-keyword">default</span> -i my-release -o update -t <span class="hljs-number">2.4</span><span class="hljs-number">.17</span> -w <span class="hljs-string">&#x27;milvusdb/milvus:v2.4.17&#x27;</span>
+<p>Sobald Sie sichergestellt haben, dass sich alle Einsätze in Ihrer Milvus-Instanz in ihrem normalen Status befinden, können Sie den folgenden Befehl ausführen. Sie können den folgenden Befehl ausführen, um die Milvus-Instanz auf 2.4.18 zu aktualisieren.</p>
+<pre><code translate="no" class="language-shell">sh rollingUpdate.<span class="hljs-property">sh</span> -n <span class="hljs-keyword">default</span> -i my-release -o update -t <span class="hljs-number">2.4</span><span class="hljs-number">.18</span> -w <span class="hljs-string">&#x27;milvusdb/milvus:v2.4.18&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <ol>
 <li>Das Skript kodiert die Upgrade-Reihenfolge der Einsätze fest und kann nicht geändert werden.</li>
 <li>Das Skript verwendet <code translate="no">kubectl patch</code>, um die Einsätze zu aktualisieren, und <code translate="no">kubectl rollout status</code>, um ihren Status zu überwachen.</li>
-<li>Das Skript verwendet <code translate="no">kubectl patch</code>, um die Bezeichnung <code translate="no">app.kubernetes.io/version</code> der Einsätze auf die Bezeichnung zu aktualisieren, die hinter dem Flag <code translate="no">-t</code> im Befehl angegeben ist.</li>
+<li>Das Skript verwendet <code translate="no">kubectl patch</code>, um die Bezeichnung <code translate="no">app.kubernetes.io/version</code> der Einsätze auf die Bezeichnung zu aktualisieren, die nach dem Flag <code translate="no">-t</code> im Befehl angegeben ist.</li>
 </ol>
 </div>
 </div>
