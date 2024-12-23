@@ -1,12 +1,12 @@
 ---
 id: string.md
 title: String Field
-summary: "In Milvus, VARCHAR is the data type used for storing string-type data, suitable for storing variable-length strings. It can store strings with both single- and multi-byte characters, with a maximum length of up to 60,535 characters. When defining a VARCHAR field, you must also specify the maximum length parameter max_length. The VARCHAR string type offers an efficient and flexible way to store and manage text data, making it ideal for applications that handle strings of varying lengths.​​"
+summary: "In Milvus, VARCHAR is the data type used for storing string-type data, suitable for storing variable-length strings. It can store strings with both single- and multi-byte characters, with a maximum length of up to 65,535 characters. When defining a VARCHAR field, you must also specify the maximum length parameter max_length. The VARCHAR string type offers an efficient and flexible way to store and manage text data, making it ideal for applications that handle strings of varying lengths.​​"
 ---
 
 # String Field​
 
-In Milvus, `VARCHAR` is the data type used for storing string-type data, suitable for storing variable-length strings. It can store strings with both single- and multi-byte characters, with a maximum length of up to 60,535 characters. When defining a `VARCHAR` field, you must also specify the maximum length parameter `max_length`. The `VARCHAR` string type offers an efficient and flexible way to store and manage text data, making it ideal for applications that handle strings of varying lengths.​
+In Milvus, `VARCHAR` is the data type used for storing string-type data, suitable for storing variable-length strings. It can store strings with both single- and multi-byte characters, with a maximum length of up to 65,535 characters. When defining a `VARCHAR` field, you must also specify the maximum length parameter `max_length`. The `VARCHAR` string type offers an efficient and flexible way to store and manage text data, making it ideal for applications that handle strings of varying lengths.​
 
 ## Add VARCHAR field​
 
