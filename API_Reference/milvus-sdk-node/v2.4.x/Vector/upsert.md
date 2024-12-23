@@ -10,6 +10,7 @@ upsert(data): Promise<MutationResult>
 
 ```javascript
 milvusClient.upsert({
+   db_name: string,
    collection_name: string,
    data: RowData[],
    hash_keys: Number[],
@@ -19,6 +20,10 @@ milvusClient.upsert({
 ```
 
 **PARAMETERS:**
+
+- **db_name** (*string*) -
+
+    The name of the database that holds the target collection.
 
 - **collection_name** (*str*) -
 

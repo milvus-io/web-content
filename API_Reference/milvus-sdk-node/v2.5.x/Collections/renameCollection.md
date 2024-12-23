@@ -10,6 +10,7 @@ renameCollection(data): Promise<ResStatus>
 
 ```javascript
 milvusClient.renameCollection({
+   db_name: string,
    collection_name: string,
    new_collection_name: string,
    timeout?: number
@@ -17,6 +18,10 @@ milvusClient.renameCollection({
 ```
 
 **PARAMETERS:**
+
+- **db_name** (*string*) -
+
+    The name of the database that holds the target collection.
 
 - **collection_name** (*string*) -
 

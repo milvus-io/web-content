@@ -11,6 +11,7 @@ createAlias(data): Promise<ResStatus>
 ```javascript
 milvusClient.createAlias({
    alias: string,
+   db_name: string,
    collection_name: string,
    timeout?: number
  })
@@ -43,6 +44,10 @@ milvusClient.createAlias({
     </ul>
 
     </div>
+
+- **db_name** (*str*) -
+
+    The name of the database that holds the target collection.
 
 - **collection_name** (*str*) -
 

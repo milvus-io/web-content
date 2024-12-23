@@ -10,6 +10,7 @@ createPartition(data): Promise<ResStatus>
 
 ```javascript
 milvusClient.createPartition({
+    db_name: string,
     collection_name: string,
     partition_name: string,
     timeout?: number
@@ -17,6 +18,10 @@ milvusClient.createPartition({
 ```
 
 **PARAMETERS:**
+
+- **db_name** (*string*) -
+
+    The name of the database that holds the target collection.
 
 - **collection_name** (*string*) -
 

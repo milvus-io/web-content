@@ -11,6 +11,7 @@ createIndex(data): Promise<ResStatus>
 ```javascript
 milvusClient.createIndex([
     {
+       db_name: string,
        collection_name: string,
        field_name: string,
        index_name?: string,
@@ -23,6 +24,10 @@ milvusClient.createIndex([
 ```
 
 **PARAMETERS:**
+
+- **db_name** (*string*) -
+
+    The name of the database that holds the target collection.
 
 - **collection_name** (*string*) -
 

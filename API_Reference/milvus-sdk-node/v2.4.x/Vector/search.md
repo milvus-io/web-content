@@ -10,6 +10,7 @@ search(data): Promise<ResStatus>
 
 ```javascript
 milvusClient.search({
+   db_name: string,
    collection_name: string,
    partition_names?: string[], 
    data: number[] | number[][], 
@@ -25,6 +26,10 @@ milvusClient.search({
 ```
 
 **PARAMETERS:**
+
+- **db_name** (*string*) -
+
+    The name of the database that holds the target collection.
 
 - **collection_name** (*string*) -
 
@@ -73,6 +78,20 @@ milvusClient.search({
 - **params** (*KeyValueObj*) -
 
     The additional search parameters in key-value pairs.
+
+    - **radius** (*number*) -
+
+        Determines the threshold of least similarity. When setting `metric_type` to `L2`, ensure that this value is greater than that of **range_filter**. Otherwise, this value should be lower than that of **range_filter**. 
+
+    - **range_filter**  (*number*) -  
+
+        Refines the search to vectors within a specific similarity range. When setting `metric_type` to `IP` or `COSINE`, ensure that this value is greater than that of **radius**. Otherwise, this value should be lower than that of **radius**.
+
+    - **max_empty_result_buckets** (*number*)
+
+        This param is only used for range search for IVF-serial indexes, including **BIN_IVF_FLAT**, **IVF_FLAT**, **IVF_SQ8**, **IVF_PQ**, and **SCANN**. The value defaults to 1 and ranges from 1 to 65536.
+
+        During range search, the search process terminates early if the number of buckets with no valid range search results reaches the specified value. Increasing this parameter improves range search recall.
 
 - **output_fields** (*string[]*) -
 

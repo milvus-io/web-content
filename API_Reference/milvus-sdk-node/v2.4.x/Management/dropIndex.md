@@ -10,6 +10,7 @@ dropIndex(data): Promise<ResStatus>
 
 ```javascript
 milvusClient.dropPartition({
+    db_name: string,
     collection_name: string,
     field_name?: string,
     index_name?: string,
@@ -18,6 +19,10 @@ milvusClient.dropPartition({
 ```
 
 **PARAMETERS:**
+
+- **db_name** (*string*) -
+
+    The name of the database that holds the target collection.
 
 - **collection_name** (*string*) -
 

@@ -10,12 +10,17 @@ releaseCollection(data): Promise<ResStatus>
 
 ```javascript
 milvusClient.releaseCollection({ 
+    db_name: string,
     collection_name: 'my_collection',
     timeout?: number 
 })
 ```
 
 **PARAMETERS:**
+
+- **db_name** (*string*) -
+
+    The name of the database that holds the target collection.
 
 - **collection_name** (*str*) -
 

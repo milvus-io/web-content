@@ -10,6 +10,7 @@ releasePartitions(data): Promise<ResStatus>
 
 ```javascript
 milvusClient.releasePartitions({
+    db_name: string,
     collection_name: string,
     partition_names: string[],
     timeout?: number
@@ -17,6 +18,10 @@ milvusClient.releasePartitions({
 ```
 
 **PARAMETERS:**
+
+- **db_name** (*string*) -
+
+    The name of the database that holds the target collection.
 
 - **collection_name** (*string*) -
 

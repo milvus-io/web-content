@@ -10,6 +10,7 @@ loadCollection(data): Promise<ResStatus>
 
 ```javascript
 milvusClient.loadCollection({ 
+    db_name: string,
     collection_name: string,
     refresh?: boolean,
     replica_number?: number,
@@ -19,6 +20,10 @@ milvusClient.loadCollection({
 ```
 
 **PARAMETERS:**
+
+- **db_name** (*string*) -
+
+    The name of the database that holds the target collection.
 
 - **collection_name** (*string*) -
 
