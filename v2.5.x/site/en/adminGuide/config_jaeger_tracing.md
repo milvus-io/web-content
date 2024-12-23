@@ -36,7 +36,7 @@ NAME              DESIRED   CURRENT   UP-TO-DATE   AVAILABLE   AGE
 jaeger-operator   1         1         1            1           48s
 ```
 
-### 2. Deploy Jager
+### 2. Deploy Jaeger
 
 The simplest possible way to create a Jaeger instance is by creating a YAML file like the following example. This will install the default AllInOne strategy, which deploys the **all-in-one** image (combining **jaeger-agent**, **jaeger-collector**, **jaeger-query**, and Jaeger UI) in a single pod, using **in-memory storage** by default.
 
