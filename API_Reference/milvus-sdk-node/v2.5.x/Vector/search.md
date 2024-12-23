@@ -79,6 +79,34 @@ milvusClient.search({
 
     The additional search parameters in key-value pairs.
 
+    - **radius** (*number*) -
+
+        Determines the threshold of least similarity. When setting `metric_type` to `L2`, ensure that this value is greater than that of **range_filter**. Otherwise, this value should be lower than that of **range_filter**. 
+
+    - **range_filter**  (*number*) -  
+
+        Refines the search to vectors within a specific similarity range. When setting `metric_type` to `IP` or `COSINE`, ensure that this value is greater than that of **radius**. Otherwise, this value should be lower than that of **radius**.
+
+    - **max_empty_result_buckets** (*number*)
+
+        This param is only used for range search for IVF-serial indexes, including **BIN_IVF_FLAT**, **IVF_FLAT**, **IVF_SQ8**, **IVF_PQ**, and **SCANN**. The value defaults to 1 and ranges from 1 to 65536.
+
+        During range search, the search process terminates early if the number of buckets with no valid range search results reaches the specified value. Increasing this parameter improves range search recall.
+
+    - **output_fields** (*string[]*) -
+
+        A list of field names to include in each entity in return.
+
+        The value defaults to **None**. If left unspecified, only the primary field is included.
+
+    - **partition_names** (*string[]*) -
+
+        A list of the names of the partitions to search.
+
+    - **timeout** (*number*) -
+
+        The timeout duration for this operation. Setting this to **None** indicates that this operation timeouts when any response arrives or any error occurs.
+
 - **output_fields** (*string[]*) -
 
     A list of field names to include in each entity in return.

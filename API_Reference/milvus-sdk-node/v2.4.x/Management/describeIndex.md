@@ -10,6 +10,7 @@ describeIndex(data): Promise<DescribeIndexResponse>
 
 ```javascript
  milvusClient.describeIndex({ 
+     db_name: string,
      collection_name: string,
      field_name?: string,
      index_name?: string,
@@ -18,6 +19,10 @@ describeIndex(data): Promise<DescribeIndexResponse>
 ```
 
 **PARAMETERS:**
+
+- **db_name** (*string*) -
+
+    The name of the database that holds the target collection.
 
 - **collection_name** (*string*) -
 

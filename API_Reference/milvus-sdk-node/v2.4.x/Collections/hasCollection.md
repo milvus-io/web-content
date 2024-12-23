@@ -10,12 +10,17 @@ hasCollection(data): Promise<BoolResponse>
 
 ```javascript
 milvusClient.hasCollection({ 
+    db_name: string,
     collection_name: string,
     timeout?: number
 })
 ```
 
 **PARAMETERS:**
+
+- **db_name** (*str*) -
+
+    The name of the database that holds the target collection.
 
 - **collection_name** (*str*) -
 

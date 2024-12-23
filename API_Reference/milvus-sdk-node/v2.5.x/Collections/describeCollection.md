@@ -10,11 +10,16 @@ describeCollection(data): Promise<DescribeCollectionResponse>
 
 ```javascript
 milvusClient.describeCollection({ 
+    db_name: string,
     collection_name: string 
 })
 ```
 
 **PARAMETERS:**
+
+- **db_name** (*string*) -
+
+    The name of the database that holds the target collection.
 
 - **collection_name** (*string*) -
 

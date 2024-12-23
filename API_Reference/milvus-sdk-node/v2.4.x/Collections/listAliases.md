@@ -12,12 +12,17 @@ This method has the following alternatives.
 
 ```javascript
 listAliases({
+    db_name: string
     collection_name: string
     timeout?: number
 })
 ```
 
 **PARAMETERS:**
+
+- **db_name** (*string*) -
+
+    The name of the database that holds the target collection.
 
 - **collection_name** (*string*) -
 

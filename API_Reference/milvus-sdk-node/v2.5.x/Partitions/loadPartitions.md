@@ -10,6 +10,7 @@ loadPartitions(data): Promise<ResStatus>
 
 ```javascript
 milvusClient.loadPartitions({
+    db_name: string,
     collection_name: string,
     partition_names: string[],
     replica_number?: number,
@@ -19,6 +20,10 @@ milvusClient.loadPartitions({
 ```
 
 **PARAMETERS:**
+
+- **db_name** (*string*) -
+
+    The name of the database that holds the target collection.
 
 - **collection_name** (*string*) -
 

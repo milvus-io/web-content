@@ -10,12 +10,17 @@ describeAlias(data): Promise<DescribeAliasResponse>
 
 ```javascript
 milvusClient.describeAlias({
+    db_name: string,
     alias: string,
     collection_name: string
 })
 ```
 
 **PARAMETERS:**
+
+- **db_name** (*str*) -
+
+    The name of the database that holds the target collection.
 
 - **alias** (*str*) -
 
