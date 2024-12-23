@@ -451,4 +451,10 @@ curl --request POST \
     </button></h2><ul>
 <li><p>Enabling text matching for a field triggers the creation of an inverted index, which consumes storage resources. Consider storage impact when deciding to enable this feature, as it varies based on text size, unique tokens, and the analyzer used.​</p></li>
 <li><p>Once you’ve defined an analyzer in your schema, its settings become permanent for that collection. If you decide that a different analyzer would better suit your needs, you may consider dropping the existing collection and creating a new one with the desired analyzer configuration.​</p></li>
+<li><p>Escape rules in <code translate="no">filter</code> expressions:</p>
+<ul>
+<li>Characters enclosed in double quotes or single quotes within expressions are interpreted as string constants. If the string constant includes escape characters, the escape characters must be represented with escape sequence. For example, use <code translate="no">\\</code> to represent <code translate="no">\</code>, <code translate="no">\\t</code> to represent a tab <code translate="no">\t</code>, and <code translate="no">\\n</code> to represent a newline.</li>
+<li>If a string constant is enclosed by single quotes, a single quote within the constant should be represented as <code translate="no">\\'</code> while a double quote can be represented as either <code translate="no">&quot;</code> or <code translate="no">\\&quot;</code>. Example: <code translate="no">'It\\'s milvus'</code>.</li>
+<li>If a string constant is enclosed by double quotes, a double quote within the constant should be represented as <code translate="no">\\&quot;</code> while a single quote can be represented as either <code translate="no">'</code> or <code translate="no">\\'</code>. Example: <code translate="no">&quot;He said \\&quot;Hi\\&quot;&quot;</code>.</li>
+</ul></li>
 </ul>
