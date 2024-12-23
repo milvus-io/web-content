@@ -1576,6 +1576,12 @@
         ]
       },
       {
+        "label": "Milvus WebUI",
+        "id": "milvus-webui.md",
+        "order": 6,
+        "children": []
+      },
+      {
         "label": "Milvus Sizing Tool",
         "id": "sizing",
         "order": 6,
