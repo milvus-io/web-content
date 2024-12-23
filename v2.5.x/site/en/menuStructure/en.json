@@ -1364,17 +1364,48 @@
             "children": []
           },
           {
-            "label": "Users, Privileges, and Roles",
-            "id": "users_and_roles.md",
-            "order": 10,
-            "children": []
-          },
-          {
-            "label": "Enable RBAC",
-            "id": "rbac.md",
+            "label": "RBAC",
+            "id": "rbac",
             "order": 1,
             "isMenu": true,
-            "children": []
+            "children": [
+              {
+                "label": "RBAC Explained",
+                "id": "rbac.md",
+                "order": 0,
+                "children": []
+              },
+              {
+                "label": "Create Users & Roles",
+                "id": "users_and_roles.md",
+                "order": 1,
+                "children": []
+              },
+              {
+                "label": "Create Privilege Group",
+                "id": "privilege_group.md",
+                "order": 2,
+                "children": []
+              },
+              {
+                "label": "Grant Privileges",
+                "id": "grant_privileges.md",
+                "order": 3,
+                "children": []
+              },
+              {
+                "label": "Grant Roles",
+                "id": "grant_roles.md",
+                "order": 4,
+                "children": []
+              },
+              {
+                "label": "Drop Users & Roles",
+                "id": "drop_users_roles.md",
+                "order": 5,
+                "children": []
+              }
+            ]
           },
           {
             "label": "Encryption in Transit",

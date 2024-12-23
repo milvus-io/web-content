@@ -1,201 +1,44 @@
 ---
 id: rbac.md
 related_key: enable RBAC
-summary: Learn how to manage users, roles, and privileges.
-title: Enable RBAC
+summary: RBAC (Role-Based Access Control) is an access control method based on roles. With RBAC, you can finely control the operations users can perform at the collection, database, and instance levels, enhancing data security. ​
+title: RBAC Explained
 ---
 
-# Enable RBAC
+# RBAC Explained​
 
-By enabling RBAC, you can control access to specific Milvus resources (Eg. a collection or a partition) or permissions based on user role and privileges. Currently, this feature is only available in Python and Java.
+RBAC (Role-Based Access Control) is an access control method based on roles. With RBAC, you can finely control the operations users can perform at the collection, database, and instance levels, enhancing data security. ​
 
-This topic describes how to enable RBAC and manage [users and roles](users_and_roles.md).
+Unlike traditional user access control models, RBAC introduces the concept of **roles**. In the RBAC model, you  grant privileges to roles and then grant those roles to users. Then users can obtain privileges. ​
 
-<div class="alert note">
+The RBAC model can improve the efficiency of access control management. For example, if multiple users require the same set of privileges, you do not need to manually set the privileges for each user. Instead, you can create a role and assign the role to users. If you want to adjust the privileges of these users, you can just adjust the role privileges and the modification will be applied to all users with this role.​
 
-The code snippets on this page use new <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/About.md">MilvusClient</a> (Python) to interact with Milvus. New MilvusClient SDKs for other languages will be released in future updates.
+## RBAC key concepts​
 
-</div>
+![Users, roles, and privileges](../../../assets/users_roles_privileges.png)
 
-## 1. Initiate a Milvus client to establish a connection
+There are four major components in the RBAC model.​
 
-After you enable [user authentication](authenticate.md), connect to your Milvus instance using `token` that consists of a username and a password. By default, Milvus uses the `root` user with the password `Milvus`.
+- **Resource: **The resource entity that can be accessed. There are three levels of resources in Milvus - instance, database, and collection.​
 
-```python
-from pymilvus import MilvusClient
+- **Privilege: **The permission to perform certain operations on Milvus resources (eg. create collections, insert data, etc). ​
 
-client = MilvusClient(
-    uri='http://localhost:19530', # replace with your own Milvus server address
-    token='root:Milvus' # replace with your own Milvus server token
-)
-```
+- **Privilege group: **A group of multiple privileges.​
 
-## 2. Create a user
+- **Role: **A role consists of two parts-privileges and resources. Privileges define the type of operations that a role can perform while resources define the target resources that the operations can be performed on. For example, the database administrator role can perform read, write, and manage operations on certain databases.​
 
-Create a user named `user_1` with the password `P@ssw0rd`:
+- **User: **A user is someone who uses Milvus. Each user has a unique ID and is granted a role or multiple roles. ​
 
-```python
-client.create_user(
-    user_name='user_1',
-    password='P@ssw0rd'
-)
-```
+## Procedures​
 
-After creating a user, you can:
+The achieve access control via RBAC, you need to follow the steps below:​
 
-- Update a user password. You need to provide both the original and the new password.
+1. [Create a user](users_and_roles.md#Create-a-user): In addition to the default user `root` in Milvus, you can create new users and set passwords to protect data security.​
 
-```python
-client.update_password(
-    user_name='user_1',
-    old_password='P@ssw0rd',
-    new_password='P@ssw0rd123'
-)
-```
+2. [Create a role](users_and_roles.md#Create-a-role): You can create customized roles based on your needs. The specific capabilities of a role are determined by its privileges.​
 
-- List all users.
+3. [Create a privilege group](privilege_group.md): Combine multiple privileges into one privilege group to streamline the process of granting privileges to a role.​
 
-```python
-client.list_users()
+4. [Grant privileges or privilege groups to a role](grant_privileges.md): Define the capabilities of a role be granting privileges or privilege groups to this role. ​
 
-# output:
-# ['root', 'user_1']
-```
-
-- Check the role of a particular user.
-
-```python
-client.describe_user(user_name='user_1')
-
-# output:
-# {'user_name': 'user_1', 'roles': ()}
-```
-
-## 3. Create a role
-
-The following example creates a role named `roleA`.
-
-```python
-client.create_role(
-    role_name="roleA",
-)
-```
-
-After creating a role, you can:
-
-- List all roles.
-
-```python
-client.list_roles()
-
-# output:
-# ['admin', 'public', 'roleA']
-```
-
-## 4. Grant a privilege to a role
-
-The following example demonstrates how to grant the permission of searching all collections to the role named `roleA`.
-
-The `object_type` specifies the object type, which can also be understood as the resource type. Currently, valid values ​​include Collection/User/Global, etc., where Global means that there is no specific resource type. The `object_name` is the resource name. If object*type is Collection, then object name can be referred to a specific collection name, or you can use * to specify all collections. If object*type is Global, then the object name can be only specified as *. See [Users and Roles](users_and_roles.md) for other types of privileges you can grant.
-
-Before managing role privileges, make sure you have enabled user authentication. Otherwise, an error may occur. For information on how to enable user authentication, refer to [Authenticate User Access](authenticate.md).
-
-```python
-# grant privilege to a role
-
-client.grant_privilege(
-    role_name='roleA',
-    object_type='User',  # value here can be Global, Collection or User, object type also depends on the API defined in privilegeName
-    object_name='user_1',  # value here can be * or a specific user name if object type is 'User'
-    privilege='SelectUser'
-)
-```
-
-After granting a privilege to a role, you can:
-
-- View the privileges granted to a role.
-
-```python
-client.describe_role(
-    role_name='roleA'
-)
-
-# output:
-# {'role': 'roleA',
-#  'privileges': [{'object_type': 'User',
-#    'object_name': 'user_1',
-#    'db_name': 'default',
-#    'role_name': 'roleA',
-#    'privilege': 'SelectUser',
-#    'grantor_name': 'root'}]}
-```
-
-## 5. Grant a role to a user
-
-Grant the role to a user so that this user can inherit all the privileges of the role.
-
-```python
-# grant a role to a user
-
-client.grant_role(
-    user_name='user_1',
-    role_name='roleA'
-)
-```
-
-After granting the role, verify that it has been granted:
-
-```python
-client.describe_user(
-    user_name='user_1'
-)
-
-# output:
-# {'user_name': 'user_1', 'roles': ('roleA')}
-```
-
-## 6. Revoke privileges
-
-<div class="alert caution">
-
-Exercise caution when performing the following operations because these operations are irreversible.
-
-</div>
-
-- Remove a privilege from a role. If you revoke a privilege that has not been granted to the role, an error will occur.
-
-```python
-client.revoke_privilege(
-    role_name='roleA',
-    object_type='User',  # value here can be Global, Collection or User, object type also depends on the API defined in privilegeName
-    object_name='user_1',  # value here can be * or a specific user name if object type is 'User'
-    privilege='SelectUser'
-)
-```
-
-- Remove a user from a role. If you revoke a role that has not been granted to the user, an error will occur.
-
-```python
-client.revoke_role(
-    user_name='user_1',
-    role_name='roleA'
-)
-```
-
-- Drop a role.
-
-```python
-client.drop_role(role_name='roleA')
-```
-
-- Drop a user.
-
-```python
-client.drop_user(user_name='user_1')
-```
-
-## What's next
-
-- Learn how to manage [user authentication](authenticate.md).
-
-- Learn how to enable [TLS proxy](tls.md) in Milvus.
+5. [Grant roles to users](grant_roles.md): Grant roles with certain privileges to users so that users can have the privileges of a role. A single role can be granted to multiple users.​
