@@ -122,7 +122,7 @@ curl --request POST \​
 
 ## Set Collection TTL​
 
-If a collection needs to be dropped for a specific period, consider setting its Time-To-Live (TTL) in seconds. Once the TTL times out, Milvus deletes entities in the collection and drops the collection. The deletion is asynchronous, indicating that searches and queries are still possible before the deletion is complete.​
+If a collection needs to be dropped for a specific period, consider setting its Time-To-Live (TTL) in seconds. Once the TTL times out, Milvus deletes entities in the collection. The deletion is asynchronous, indicating that searches and queries are still possible before the deletion is complete.​
 
 The following code snippet demonstrates how to change the TTL of a collection.​
 
@@ -135,8 +135,12 @@ The following code snippet demonstrates how to change the TTL of a collection.�
 </div>
 
 ```python
-# Currently not available for Python
+from pymilvus import MilvusClient
 
+client.alter_collection_properties(
+  collection_name="collection_name",
+  properties = {"collection.ttl.seconds": 500}
+)
 ```
 
 ```java
