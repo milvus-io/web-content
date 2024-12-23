@@ -1,10 +1,12 @@
 ---
 id: rbac.md
 related_key: enable RBAC
-summary: 了解如何管理用户、角色和权限。
-title: 启用 RBAC
+summary: >-
+  RBAC（基于角色的访问控制）是一种基于角色的访问控制方法。通过 RBAC，可以精细控制用户在
+  Collections、数据库和实例级别上可以执行的操作，增强数据的安全性。
+title: RBAC 解释
 ---
-<h1 id="Enable-RBAC" class="common-anchor-header">启用 RBAC<button data-href="#Enable-RBAC" class="anchor-icon" translate="no">
+<h1 id="RBAC-Explained​" class="common-anchor-header">RBAC 解释<button data-href="#RBAC-Explained​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -19,12 +21,10 @@ title: 启用 RBAC
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>通过启用 RBAC，可以根据用户角色和权限控制对特定 Milvus 资源（如 Collections 或分区）或权限的访问。目前，该功能仅在 Python 和 Java 中可用。</p>
-<p>本主题介绍如何启用 RBAC 并管理<a href="/docs/zh/users_and_roles.md">用户和角色</a>。</p>
-<div class="alert note">
-<p>本页的代码片段使用新的<a href="https://milvus.io/api-reference/pymilvus/v2.4.x/About.md">MilvusClient</a>（Python）与 Milvus 进行交互。用于其他语言的新 MilvusClient SDK 将在未来更新中发布。</p>
-</div>
-<h2 id="1-Initiate-a-Milvus-client-to-establish-a-connection" class="common-anchor-header">1.启动 Milvus 客户端建立连接<button data-href="#1-Initiate-a-Milvus-client-to-establish-a-connection" class="anchor-icon" translate="no">
+    </button></h1><p>RBAC（基于角色的访问控制）是一种基于角色的访问控制方法。通过 RBAC，可以精细控制用户在 Collections、数据库和实例级别上可以执行的操作，增强数据的安全性。</p>
+<p>与传统的用户访问控制模型不同，RBAC 引入了<strong>角色</strong>的概念。在 RBAC 模型中，先授予角色权限，然后再将这些角色授予用户。然后，用户才能获得权限。</p>
+<p>RBAC 模型可以提高访问控制管理的效率。例如，如果多个用户需要同一套权限，就不需要为每个用户手动设置权限。相反，你可以创建一个角色并将该角色分配给用户。如果要调整这些用户的权限，只需调整角色的权限，修改后的权限将应用到所有拥有该角色的用户。</p>
+<h2 id="RBAC-key-concepts​" class="common-anchor-header">RBAC 主要概念<button data-href="#RBAC-key-concepts​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -39,15 +39,19 @@ title: 启用 RBAC
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>启用<a href="/docs/zh/authenticate.md">用户身份验证</a>后，使用由用户名和密码组成的<code translate="no">token</code> 连接到 Milvus 实例。默认情况下，Milvus 使用<code translate="no">root</code> 用户，密码为<code translate="no">Milvus</code> 。</p>
-<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
-
-client = MilvusClient(
-    uri=<span class="hljs-string">&#x27;http://localhost:19530&#x27;</span>, <span class="hljs-comment"># replace with your own Milvus server address</span>
-    token=<span class="hljs-string">&#x27;root:Milvus&#x27;</span> <span class="hljs-comment"># replace with your own Milvus server token</span>
-)
-<button class="copy-code-btn"></button></code></pre>
-<h2 id="2-Create-a-user" class="common-anchor-header">2.创建用户<button data-href="#2-Create-a-user" class="anchor-icon" translate="no">
+    </button></h2><p>
+  
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/users_roles_privileges.png" alt="Users, roles, and privileges" class="doc-image" id="users,-roles,-and-privileges" />
+   </span> <span class="img-wrapper"> <span>用户、角色和权限</span> </span></p>
+<p>RBAC 模型中有四个主要组成部分。</p>
+<ul>
+<li><p>**资源：**可访问的资源实体。Milvus 中的资源分为三个级别--实例、数据库和 Collections。</p></li>
+<li><p>**权限：**对 Milvus 资源执行特定操作的权限（如创建 Collection、插入数据等）。</p></li>
+<li><p>**权限组：**由多个权限组成的组。</p></li>
+<li><p>**角色：**角色由权限和资源两部分组成。权限定义了角色可以执行的操作类型，而资源则定义了可以执行操作的目标资源。例如，数据库管理员角色可以对某些数据库执行读、写和管理操作。</p></li>
+<li><p>**用户：**用户是指使用 Milvus 的人。每个用户都有一个唯一的 ID，并被授予一个或多个角色。</p></li>
+</ul>
+<h2 id="Procedures​" class="common-anchor-header">程序<button data-href="#Procedures​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -62,204 +66,11 @@ client = MilvusClient(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>创建一个名为<code translate="no">user_1</code> 的用户，密码为<code translate="no">P@ssw0rd</code> ：</p>
-<pre><code translate="no" class="language-python">client.<span class="hljs-title function_">create_user</span>(
-    user_name=<span class="hljs-string">&#x27;user_1&#x27;</span>,
-    password=<span class="hljs-string">&#x27;P@ssw0rd&#x27;</span>
-)
-<button class="copy-code-btn"></button></code></pre>
-<p>创建用户后，您可以</p>
-<ul>
-<li>更新用户密码。您需要提供原始密码和新密码。</li>
-</ul>
-<pre><code translate="no" class="language-python">client.<span class="hljs-title function_">update_password</span>(
-    user_name=<span class="hljs-string">&#x27;user_1&#x27;</span>,
-    old_password=<span class="hljs-string">&#x27;P@ssw0rd&#x27;</span>,
-    new_password=<span class="hljs-string">&#x27;P@ssw0rd123&#x27;</span>
-)
-<button class="copy-code-btn"></button></code></pre>
-<ul>
-<li>列出所有用户。</li>
-</ul>
-<pre><code translate="no" class="language-python">client.list_users()
-
-<span class="hljs-comment"># output:</span>
-<span class="hljs-comment"># [&#x27;root&#x27;, &#x27;user_1&#x27;]</span>
-<button class="copy-code-btn"></button></code></pre>
-<ul>
-<li>检查某个用户的角色。</li>
-</ul>
-<pre><code translate="no" class="language-python">client.describe_user(user_name=<span class="hljs-string">&#x27;user_1&#x27;</span>)
-
-# output:
-# {<span class="hljs-string">&#x27;user_name&#x27;</span>: <span class="hljs-string">&#x27;user_1&#x27;</span>, <span class="hljs-string">&#x27;roles&#x27;</span>: ()}
-<button class="copy-code-btn"></button></code></pre>
-<h2 id="3-Create-a-role" class="common-anchor-header">3.创建角色<button data-href="#3-Create-a-role" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h2><p>下面的示例创建了一个名为<code translate="no">roleA</code> 的角色。</p>
-<pre><code translate="no" class="language-python">client.<span class="hljs-title function_">create_role</span>(
-    role_name=<span class="hljs-string">&quot;roleA&quot;</span>,
-)
-<button class="copy-code-btn"></button></code></pre>
-<p>创建角色后，您可以</p>
-<ul>
-<li>列出所有角色。</li>
-</ul>
-<pre><code translate="no" class="language-python">client.list_roles()
-
-# output:
-# [<span class="hljs-string">&#x27;admin&#x27;</span>, <span class="hljs-string">&#x27;public&#x27;</span>, <span class="hljs-string">&#x27;roleA&#x27;</span>]
-<button class="copy-code-btn"></button></code></pre>
-<h2 id="4-Grant-a-privilege-to-a-role" class="common-anchor-header">4.向角色授予权限<button data-href="#4-Grant-a-privilege-to-a-role" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h2><p>下面的示例演示了如何向名为<code translate="no">roleA</code> 的角色授予搜索所有 Collections 的权限。</p>
-<p><code translate="no">object_type</code> 指定对象类型，也可以理解为资源类型。目前，有效值包括 Collections/User/Global 等，其中 Global 表示没有特定的资源类型。<code translate="no">object_name</code> 是资源名称。如果 objecttype<em>为 Collection，那么 object name 可以指特定的 Collections 名称，也可以使用 * 来指定所有 Collections。如果对象类型</em>为全局，则只能用 * 指定对象名称。有关可以授予的其他权限类型，请参阅<a href="/docs/zh/users_and_roles.md">用户和角色</a>。</p>
-<p>在管理角色权限之前，请确保已启用用户身份验证。否则可能会出错。有关如何启用用户身份验证的信息，请参阅<a href="/docs/zh/authenticate.md">验证用户访问</a>。</p>
-<pre><code translate="no" class="language-python"><span class="hljs-comment"># grant privilege to a role</span>
-
-client.grant_privilege(
-    role_name=<span class="hljs-string">&#x27;roleA&#x27;</span>,
-    object_type=<span class="hljs-string">&#x27;User&#x27;</span>,  <span class="hljs-comment"># value here can be Global, Collection or User, object type also depends on the API defined in privilegeName</span>
-    object_name=<span class="hljs-string">&#x27;user_1&#x27;</span>,  <span class="hljs-comment"># value here can be * or a specific user name if object type is &#x27;User&#x27;</span>
-    privilege=<span class="hljs-string">&#x27;SelectUser&#x27;</span>
-)
-<button class="copy-code-btn"></button></code></pre>
-<p>向角色授予权限后，您可以</p>
-<ul>
-<li>查看授予角色的权限。</li>
-</ul>
-<pre><code translate="no" class="language-python">client.describe_role(
-    role_name=<span class="hljs-string">&#x27;roleA&#x27;</span>
-)
-
-# output:
-# {<span class="hljs-string">&#x27;role&#x27;</span>: <span class="hljs-string">&#x27;roleA&#x27;</span>,
-#  <span class="hljs-string">&#x27;privileges&#x27;</span>: [{<span class="hljs-string">&#x27;object_type&#x27;</span>: <span class="hljs-string">&#x27;User&#x27;</span>,
-#    <span class="hljs-string">&#x27;object_name&#x27;</span>: <span class="hljs-string">&#x27;user_1&#x27;</span>,
-#    <span class="hljs-string">&#x27;db_name&#x27;</span>: <span class="hljs-string">&#x27;default&#x27;</span>,
-#    <span class="hljs-string">&#x27;role_name&#x27;</span>: <span class="hljs-string">&#x27;roleA&#x27;</span>,
-#    <span class="hljs-string">&#x27;privilege&#x27;</span>: <span class="hljs-string">&#x27;SelectUser&#x27;</span>,
-#    <span class="hljs-string">&#x27;grantor_name&#x27;</span>: <span class="hljs-string">&#x27;root&#x27;</span>}]}
-<button class="copy-code-btn"></button></code></pre>
-<h2 id="5-Grant-a-role-to-a-user" class="common-anchor-header">5.向用户授予角色<button data-href="#5-Grant-a-role-to-a-user" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h2><p>向用户授予角色，使该用户可以继承角色的所有权限。</p>
-<pre><code translate="no" class="language-python"><span class="hljs-comment"># grant a role to a user</span>
-
-client.grant_role(
-    user_name=<span class="hljs-string">&#x27;user_1&#x27;</span>,
-    role_name=<span class="hljs-string">&#x27;roleA&#x27;</span>
-)
-<button class="copy-code-btn"></button></code></pre>
-<p>授予角色后，验证角色是否已授予：</p>
-<pre><code translate="no" class="language-python">client.describe_user(
-    user_name=<span class="hljs-string">&#x27;user_1&#x27;</span>
-)
-
-# output:
-# {<span class="hljs-string">&#x27;user_name&#x27;</span>: <span class="hljs-string">&#x27;user_1&#x27;</span>, <span class="hljs-string">&#x27;roles&#x27;</span>: (<span class="hljs-string">&#x27;roleA&#x27;</span>)}
-<button class="copy-code-btn"></button></code></pre>
-<h2 id="6-Revoke-privileges" class="common-anchor-header">6.撤销权限<button data-href="#6-Revoke-privileges" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h2><div class="alert caution">
-<p>执行以下操作时要谨慎，因为这些操作是不可逆的。</p>
-</div>
-<ul>
-<li>从角色中删除权限。如果撤销的权限尚未授予角色，则会出现错误。</li>
-</ul>
-<pre><code translate="no" class="language-python">client.revoke_privilege(
-    role_name=<span class="hljs-string">&#x27;roleA&#x27;</span>,
-    object_type=<span class="hljs-string">&#x27;User&#x27;</span>,  <span class="hljs-comment"># value here can be Global, Collection or User, object type also depends on the API defined in privilegeName</span>
-    object_name=<span class="hljs-string">&#x27;user_1&#x27;</span>,  <span class="hljs-comment"># value here can be * or a specific user name if object type is &#x27;User&#x27;</span>
-    privilege=<span class="hljs-string">&#x27;SelectUser&#x27;</span>
-)
-<button class="copy-code-btn"></button></code></pre>
-<ul>
-<li>从角色中删除用户。如果撤销未授予用户的角色，将发生错误。</li>
-</ul>
-<pre><code translate="no" class="language-python">client.<span class="hljs-title function_">revoke_role</span>(
-    user_name=<span class="hljs-string">&#x27;user_1&#x27;</span>,
-    role_name=<span class="hljs-string">&#x27;roleA&#x27;</span>
-)
-<button class="copy-code-btn"></button></code></pre>
-<ul>
-<li>删除角色。</li>
-</ul>
-<pre><code translate="no" class="language-python">client.<span class="hljs-title function_">drop_role</span>(role_name=<span class="hljs-string">&#x27;roleA&#x27;</span>)
-<button class="copy-code-btn"></button></code></pre>
-<ul>
-<li>删除用户。</li>
-</ul>
-<pre><code translate="no" class="language-python">client.<span class="hljs-title function_">drop_user</span>(user_name=<span class="hljs-string">&#x27;user_1&#x27;</span>)
-<button class="copy-code-btn"></button></code></pre>
-<h2 id="Whats-next" class="common-anchor-header">下一步<button data-href="#Whats-next" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h2><ul>
-<li><p>学习如何管理<a href="/docs/zh/authenticate.md">用户身份验证</a>。</p></li>
-<li><p>了解如何在 Milvus 启用<a href="/docs/zh/tls.md">TLS 代理</a>。</p></li>
-</ul>
+    </button></h2><p>要通过 RBAC 实现访问控制，需要遵循以下步骤。</p>
+<ol>
+<li><p><a href="/docs/zh/users_and_roles.md#Create-a-user">创建用户</a>：除了 Milvus 的默认用户<code translate="no">root</code> 外，您还可以创建新用户并设置密码，以保护数据安全。</p></li>
+<li><p><a href="/docs/zh/users_and_roles.md#Create-a-role">创建角色</a>：您可以根据需要创建自定义角色。角色的具体功能由其权限决定。</p></li>
+<li><p><a href="/docs/zh/privilege_group.md">创建权限组</a>：将多个权限合并为一个权限组，以简化向角色授予权限的流程。</p></li>
+<li><p><a href="/docs/zh/grant_privileges.md">向角色授予权限或权限组</a>：通过向角色授予权限或权限组来定义角色的功能。</p></li>
+<li><p><a href="/docs/zh/grant_roles.md">向用户授予角色</a>：向用户授予具有特定权限的角色，这样用户就可以拥有某个角色的权限。一个角色可以授予多个用户。</p></li>
+</ol>

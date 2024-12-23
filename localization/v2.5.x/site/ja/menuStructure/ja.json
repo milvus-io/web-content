@@ -433,7 +433,7 @@
             "children": []
           },
           {
-            "label": "番号フィールド",
+            "label": "数字フィールド",
             "id": "number.md",
             "order": 6,
             "children": []
@@ -702,39 +702,70 @@
             "children": []
           },
           {
+            "label": "フィルタリング",
+            "id": "filtering",
+            "order": 6,
+            "children": [
+              {
+                "label": "フィルタリングの説明",
+                "id": "boolean.md",
+                "order": 0,
+                "children": []
+              },
+              {
+                "label": "ベーシック・オペレーター",
+                "id": "basic-operators.md",
+                "order": 1,
+                "children": []
+              },
+              {
+                "label": "フィルタリング・テンプレート",
+                "id": "filtering-templating.md",
+                "order": 2,
+                "children": []
+              },
+              {
+                "label": "JSON演算子",
+                "id": "json-operators.md",
+                "order": 3,
+                "children": []
+              },
+              {
+                "label": "配列演算子",
+                "id": "array-operators.md",
+                "order": 4,
+                "children": []
+              }
+            ]
+          },
+          {
             "label": "全文検索",
             "id": "full-text-search.md",
-            "order": 6,
+            "order": 7,
             "children": []
           },
           {
             "label": "テキストマッチ",
             "id": "keyword-match.md",
-            "order": 7,
+            "order": 8,
             "children": []
           },
           {
             "label": "検索イテレータ",
             "id": "with-iterators.md",
-            "order": 8,
+            "order": 9,
             "children": []
           },
           {
             "label": "パーティション・キーの使用",
             "id": "use-partition-key.md",
-            "order": 9,
-            "children": []
-          },
-          {
-            "label": "メタデータのフィルタリング",
-            "id": "boolean.md",
-            "order": 14,
+            "order": 10,
             "children": []
           },
           {
             "label": "再ランキング",
             "id": "reranking.md",
-            "order": 15,
+            "order": 11,
             "children": []
           }
         ]
@@ -894,7 +925,7 @@
     ]
   },
   {
-    "label": "Milvus移住",
+    "label": "Milvusマイグレーション",
     "id": "milvus_migration",
     "isMenu": true,
     "order": 6,
@@ -1364,17 +1395,48 @@
             "children": []
           },
           {
-            "label": "ユーザー、権限、役割",
-            "id": "users_and_roles.md",
-            "order": 10,
-            "children": []
-          },
-          {
-            "label": "RBACを有効にする",
-            "id": "rbac.md",
+            "label": "リレーショナルアクセス制御",
+            "id": "rbac",
             "order": 1,
             "isMenu": true,
-            "children": []
+            "children": [
+              {
+                "label": "RBACの説明",
+                "id": "rbac.md",
+                "order": 0,
+                "children": []
+              },
+              {
+                "label": "ユーザーとロールの作成",
+                "id": "users_and_roles.md",
+                "order": 1,
+                "children": []
+              },
+              {
+                "label": "特権グループの作成",
+                "id": "privilege_group.md",
+                "order": 2,
+                "children": []
+              },
+              {
+                "label": "特権の付与",
+                "id": "grant_privileges.md",
+                "order": 3,
+                "children": []
+              },
+              {
+                "label": "補助金の役割",
+                "id": "grant_roles.md",
+                "order": 4,
+                "children": []
+              },
+              {
+                "label": "ユーザーとロールの削除",
+                "id": "drop_users_roles.md",
+                "order": 5,
+                "children": []
+              }
+            ]
           },
           {
             "label": "輸送中の暗号化",
@@ -1512,6 +1574,12 @@
             "children": []
           }
         ]
+      },
+      {
+        "label": "Milvus WebUI",
+        "id": "milvus-webui.md",
+        "order": 6,
+        "children": []
       },
       {
         "label": "Milvusサイジングツール",
@@ -2017,7 +2085,7 @@
             "children": []
           },
           {
-            "label": "レコメンダー・システム",
+            "label": "推薦システム",
             "id": "recommendation_system.md",
             "order": 6,
             "children": []

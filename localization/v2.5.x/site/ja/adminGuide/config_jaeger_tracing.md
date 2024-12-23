@@ -65,7 +65,7 @@ $ kubectl create -f https://github.com/jaegertracing/jaeger-operator/releases/do
 NAME              DESIRED   CURRENT   UP-TO-DATE   AVAILABLE   AGE
 jaeger-<span class="hljs-keyword">operator</span>   <span class="hljs-number">1</span>         <span class="hljs-number">1</span>         <span class="hljs-number">1</span>            <span class="hljs-number">1</span>           <span class="hljs-number">48</span>s
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="2-Deploy-Jager" class="common-anchor-header">2.Jagerのデプロイ</h3><p>Jagerインスタンスを作成する最も簡単な方法は、次の例のようなYAMLファイルを作成することです。これはデフォルトのAllInOneストラテジーをインストールし、<strong>オールインワン</strong>イメージ（<strong>jaeger-agent</strong>、<strong>jaeger-collector</strong>、<strong>jaeger-query</strong>、Jaeger UIを組み合わせたもの）を単一のポッドにデプロイします。</p>
+<h3 id="2-Deploy-Jaeger" class="common-anchor-header">2.Jaegerのデプロイ</h3><p>Jaegerインスタンスを作成する最もシンプルな方法は、次の例のようなYAMLファイルを作成することです。これはデフォルトのAllInOneストラテジーをインストールし、<strong>オールインワン</strong>イメージ（<strong>jaeger-agent</strong>、<strong>jaeger-collector</strong>、<strong>jaeger-query</strong>、Jaeger UIを組み合わせたもの）を単一のポッドにデプロイします。</p>
 <p>トレースを長期間保存したい場合は、<a href="https://www.jaegertracing.io/docs/1.62/operator/#production-strategy">production-strategyを</a>参照してください。</p>
 <pre><code translate="no" class="language-yaml">apiVersion: jaegertracing.io/v1
 kind: Jaeger

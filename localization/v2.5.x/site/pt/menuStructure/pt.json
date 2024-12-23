@@ -702,39 +702,70 @@
             "children": []
           },
           {
+            "label": "Filtragem",
+            "id": "filtering",
+            "order": 6,
+            "children": [
+              {
+                "label": "Explicação da filtragem",
+                "id": "boolean.md",
+                "order": 0,
+                "children": []
+              },
+              {
+                "label": "Operadores básicos",
+                "id": "basic-operators.md",
+                "order": 1,
+                "children": []
+              },
+              {
+                "label": "Filtragem de modelos",
+                "id": "filtering-templating.md",
+                "order": 2,
+                "children": []
+              },
+              {
+                "label": "Operadores JSON",
+                "id": "json-operators.md",
+                "order": 3,
+                "children": []
+              },
+              {
+                "label": "Operadores de matriz",
+                "id": "array-operators.md",
+                "order": 4,
+                "children": []
+              }
+            ]
+          },
+          {
             "label": "Pesquisa de texto integral",
             "id": "full-text-search.md",
-            "order": 6,
+            "order": 7,
             "children": []
           },
           {
             "label": "Correspondência de texto",
             "id": "keyword-match.md",
-            "order": 7,
+            "order": 8,
             "children": []
           },
           {
             "label": "Iteradores de pesquisa",
             "id": "with-iterators.md",
-            "order": 8,
+            "order": 9,
             "children": []
           },
           {
             "label": "Utilizar chave de partição",
             "id": "use-partition-key.md",
-            "order": 9,
-            "children": []
-          },
-          {
-            "label": "Filtragem de metadados",
-            "id": "boolean.md",
-            "order": 14,
+            "order": 10,
             "children": []
           },
           {
             "label": "Reranking",
             "id": "reranking.md",
-            "order": 15,
+            "order": 11,
             "children": []
           }
         ]
@@ -1364,17 +1395,48 @@
             "children": []
           },
           {
-            "label": "Utilizadores, privilégios e funções",
-            "id": "users_and_roles.md",
-            "order": 10,
-            "children": []
-          },
-          {
-            "label": "Ativar RBAC",
-            "id": "rbac.md",
+            "label": "RBAC",
+            "id": "rbac",
             "order": 1,
             "isMenu": true,
-            "children": []
+            "children": [
+              {
+                "label": "Explicação do RBAC",
+                "id": "rbac.md",
+                "order": 0,
+                "children": []
+              },
+              {
+                "label": "Criar utilizadores e funções",
+                "id": "users_and_roles.md",
+                "order": 1,
+                "children": []
+              },
+              {
+                "label": "Criar grupo de privilégios",
+                "id": "privilege_group.md",
+                "order": 2,
+                "children": []
+              },
+              {
+                "label": "Conceder privilégios",
+                "id": "grant_privileges.md",
+                "order": 3,
+                "children": []
+              },
+              {
+                "label": "Funções de subvenção",
+                "id": "grant_roles.md",
+                "order": 4,
+                "children": []
+              },
+              {
+                "label": "Largar utilizadores e funções",
+                "id": "drop_users_roles.md",
+                "order": 5,
+                "children": []
+              }
+            ]
           },
           {
             "label": "Encriptação em trânsito",
@@ -1512,6 +1574,12 @@
             "children": []
           }
         ]
+      },
+      {
+        "label": "Milvus WebUI",
+        "id": "milvus-webui.md",
+        "order": 6,
+        "children": []
       },
       {
         "label": "Ferramenta de dimensionamento Milvus",

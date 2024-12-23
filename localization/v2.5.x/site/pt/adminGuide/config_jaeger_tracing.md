@@ -67,7 +67,7 @@ $ kubectl create -f https://github.com/jaegertracing/jaeger-operator/releases/do
 NAME              DESIRED   CURRENT   UP-TO-DATE   AVAILABLE   AGE
 jaeger-<span class="hljs-keyword">operator</span>   <span class="hljs-number">1</span>         <span class="hljs-number">1</span>         <span class="hljs-number">1</span>            <span class="hljs-number">1</span>           <span class="hljs-number">48</span>s
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="2-Deploy-Jager" class="common-anchor-header">2. Implantar o Jager</h3><p>A maneira mais simples possível de criar uma instância do Jaeger é criando um arquivo YAML como o exemplo a seguir. Isso instalará a estratégia AllInOne padrão, que implanta a imagem <strong>all-in-one</strong> (combinando <strong>jaeger-agent</strong>, <strong>jaeger-collector</strong>, <strong>jaeger-query</strong> e Jaeger UI) em um único pod, usando <strong>o armazenamento na memória</strong> por padrão.</p>
+<h3 id="2-Deploy-Jaeger" class="common-anchor-header">2. Implantar o Jaeger</h3><p>A maneira mais simples possível de criar uma instância do Jaeger é criando um arquivo YAML como o exemplo a seguir. Isso instalará a estratégia AllInOne padrão, que implanta a imagem <strong>all-in-one</strong> (combinando <strong>jaeger-agent</strong>, <strong>jaeger-collector</strong>, <strong>jaeger-query</strong> e Jaeger UI) em um único pod, usando <strong>o armazenamento na memória</strong> por padrão.</p>
 <p>Se você quiser armazenar traços por um longo tempo, consulte <a href="https://www.jaegertracing.io/docs/1.62/operator/#production-strategy">production-strategy</a>.</p>
 <pre><code translate="no" class="language-yaml">apiVersion: jaegertracing.io/v1
 kind: Jaeger

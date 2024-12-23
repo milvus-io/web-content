@@ -65,7 +65,7 @@ $ kubectl create -f https://github.com/jaegertracing/jaeger-operator/releases/do
 NAME              DESIRED   CURRENT   UP-TO-DATE   AVAILABLE   AGE
 jaeger-<span class="hljs-keyword">operator</span>   <span class="hljs-number">1</span>         <span class="hljs-number">1</span>         <span class="hljs-number">1</span>            <span class="hljs-number">1</span>           <span class="hljs-number">48</span>s
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="2-Deploy-Jager" class="common-anchor-header">2. 예거 배포</h3><p>예거 인스턴스를 만드는 가장 간단한 방법은 다음 예제와 같이 YAML 파일을 만드는 것입니다. 이렇게 하면 기본적으로 <strong>인메모리 스토리지를</strong> 사용하여 단일 포드에 <strong>올인원</strong> 이미지(예거 <strong>에이전트</strong>, 예거 <strong>수집기</strong>, 예거 <strong>쿼리</strong> 및 예거 UI를 결합)를 배포하는 기본 올인원 전략이 설치됩니다.</p>
+<h3 id="2-Deploy-Jaeger" class="common-anchor-header">2. 예거 배포</h3><p>예거 인스턴스를 만드는 가장 간단한 방법은 다음 예제와 같이 YAML 파일을 만드는 것입니다. 이렇게 하면 기본적으로 <strong>인메모리 스토리지를</strong> 사용하여 단일 포드에 <strong>올인원</strong> 이미지(예거 <strong>에이전트</strong>, 예거 <strong>수집기</strong>, 예거 <strong>쿼리</strong> 및 예거 UI를 결합)를 배포하는 기본 AllInOne 전략이 설치됩니다.</p>
 <p>추적을 장기간 저장하려면 <a href="https://www.jaegertracing.io/docs/1.62/operator/#production-strategy">프로덕션 전략을</a> 참조하세요.</p>
 <pre><code translate="no" class="language-yaml">apiVersion: jaegertracing.io/v1
 kind: Jaeger

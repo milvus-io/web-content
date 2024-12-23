@@ -61,13 +61,13 @@ summary: >-
 <pre><code translate="no" class="language-shell">$ kubectl create namespace observability
 $ kubectl create -f https://github.com/jaegertracing/jaeger-operator/releases/download/v1.62.0/jaeger-operator.yaml -n observability
 <button class="copy-code-btn"></button></code></pre>
-<p>A questo punto, dovrebbe essere disponibile un deployment <code translate="no">jaeger-operator</code>. È possibile visualizzarlo eseguendo il seguente comando:</p>
+<p>A questo punto, dovrebbe essere disponibile una distribuzione <code translate="no">jaeger-operator</code>. È possibile visualizzarlo eseguendo il seguente comando:</p>
 <pre><code translate="no" class="language-shell">$ kubectl <span class="hljs-keyword">get</span> deployment jaeger-<span class="hljs-keyword">operator</span> -n observability
 
 NAME              DESIRED   CURRENT   UP-TO-DATE   AVAILABLE   AGE
 jaeger-<span class="hljs-keyword">operator</span>   <span class="hljs-number">1</span>         <span class="hljs-number">1</span>         <span class="hljs-number">1</span>            <span class="hljs-number">1</span>           <span class="hljs-number">48</span>s
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="2-Deploy-Jager" class="common-anchor-header">2. Distribuire Jager</h3><p>Il modo più semplice per creare un'istanza di Jaeger è creare un file YAML come nell'esempio seguente. Questo installerà la strategia predefinita AllInOne, che distribuisce l'immagine <strong>all-in-one</strong> (che combina <strong>jaeger-agent</strong>, <strong>jaeger-collector</strong>, <strong>jaeger-query</strong> e Jaeger UI) in un singolo pod, utilizzando per impostazione predefinita lo <strong>storage in-memory</strong>.</p>
+<h3 id="2-Deploy-Jaeger" class="common-anchor-header">2. Distribuire Jaeger</h3><p>Il modo più semplice per creare un'istanza di Jaeger è creare un file YAML come nell'esempio seguente. Questo installerà la strategia predefinita AllInOne, che distribuisce l'immagine <strong>all-in-one</strong> (che combina <strong>jaeger-agent</strong>, <strong>jaeger-collector</strong>, <strong>jaeger-query</strong> e Jaeger UI) in un singolo pod, utilizzando per impostazione predefinita lo <strong>storage in-memory</strong>.</p>
 <p>Se si desidera memorizzare le tracce per un lungo periodo, fare riferimento a <a href="https://www.jaegertracing.io/docs/1.62/operator/#production-strategy">production-strategy</a>.</p>
 <pre><code translate="no" class="language-yaml">apiVersion: jaegertracing.io/v1
 kind: Jaeger
@@ -136,7 +136,7 @@ $ helm upgrade --install -f values.yaml my-release milvus/milvus
 NAME           CLASS    HOSTS   ADDRESS         PORTS   AGE
 jaeger-query   &lt;none&gt;   *       <span class="hljs-number">192.168</span><span class="hljs-number">.122</span><span class="hljs-number">.34</span>  <span class="hljs-number">80</span>      <span class="hljs-number">14</span>m
 <button class="copy-code-btn"></button></code></pre>
-<p>Una volta che l'ingress è disponibile, è possibile accedere all'interfaccia utente di Jaeger navigando su <code translate="no">http://${ADDRESS}</code>. Sostituire <code translate="no">${ADDRESS}</code> con l'indirizzo IP effettivo dell'ingress.</p>
+<p>Una volta che l'ingress è disponibile, si può accedere all'interfaccia utente di Jaeger navigando su <code translate="no">http://${ADDRESS}</code>. Sostituire <code translate="no">${ADDRESS}</code> con l'indirizzo IP effettivo dell'ingress.</p>
 <p>La seguente schermata mostra l'interfaccia Jaeger con le tracce di Milvus durante un'operazione di ricerca e un'operazione di raccolta del carico:</p>
 <p>
   
@@ -145,4 +145,4 @@ jaeger-query   &lt;none&gt;   *       <span class="hljs-number">192.168</span><s
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/jaeger-trace-load.png" alt="Trace Load Collection Request" class="doc-image" id="trace-load-collection-request" />
-   </span> <span class="img-wrapper"> <span>Richiesta di raccolta del carico</span> </span></p>
+   </span> <span class="img-wrapper"> <span>Traccia della richiesta di raccolta del carico</span> </span></p>

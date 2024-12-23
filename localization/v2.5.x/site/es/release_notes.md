@@ -19,7 +19,7 @@ title: Notas de la versión
         ></path>
       </svg>
     </button></h1><p>Descubra las novedades de Milvus. Esta página resume las nuevas características, mejoras, problemas conocidos y correcciones de errores de cada versión. Puede encontrar las notas de la versión para cada versión publicada después de la v2.5.0 en esta sección. Le sugerimos que visite regularmente esta página para conocer las actualizaciones.</p>
-<h2 id="v250-beta" class="common-anchor-header">v2.5.0-beta<button data-href="#v250-beta" class="anchor-icon" translate="no">
+<h2 id="v250" class="common-anchor-header">v2.5.0<button data-href="#v250" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -34,16 +34,16 @@ title: Notas de la versión
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Fecha de lanzamiento: 26 de noviembre de 2024</p>
+    </button></h2><p>Fecha de lanzamiento: 23 de diciembre de 2024</p>
 <table>
 <thead>
 <tr><th>Versión de Milvus</th><th>Versión del SDK de Python</th><th>Versión del SDK de Node.js</th><th>Versión del SDK de Java</th></tr>
 </thead>
 <tbody>
-<tr><td>2.5.0-beta</td><td>2.5.0</td><td>2.5.0</td><td>2.5.0</td></tr>
+<tr><td>2.5.0</td><td>2.5.1</td><td>2.5.2</td><td>2.5.2</td></tr>
 </tbody>
 </table>
-<p>Milvus 2.5.0-beta aporta avances significativos para mejorar la facilidad de uso, la escalabilidad y el rendimiento para los usuarios que se ocupan de la búsqueda vectorial y la gestión de datos a gran escala. Con esta versión, Milvus integra nuevas y potentes funciones como la búsqueda basada en términos, la compactación de clústeres para optimizar las consultas y la compatibilidad versátil con métodos de búsqueda vectorial dispersa y densa. Las mejoras en la gestión de clusters, indexación y manejo de datos introducen nuevos niveles de flexibilidad y facilidad de uso, haciendo de Milvus una base de datos vectorial aún más robusta y fácil de usar.</p>
+<p>Milvus 2.5.0 aporta avances significativos para mejorar la facilidad de uso, la escalabilidad y el rendimiento para los usuarios que se ocupan de la búsqueda vectorial y la gestión de datos a gran escala. Con esta versión, Milvus integra nuevas y potentes funciones como la búsqueda basada en términos, la compactación de clústeres para optimizar las consultas y la compatibilidad versátil con métodos de búsqueda vectorial dispersa y densa. Las mejoras en la gestión de clusters, indexación y manejo de datos introducen nuevos niveles de flexibilidad y facilidad de uso, haciendo de Milvus una base de datos vectorial aún más robusta y fácil de usar.</p>
 <h3 id="Key-Features" class="common-anchor-header">Características principales</h3><h4 id="Full-Text-Search" class="common-anchor-header">Búsqueda de texto completo</h4><p>Milvus 2.5 es compatible con la búsqueda de texto completo implementada con Sparse-BM25. Esta función es un complemento importante de las potentes capacidades de búsqueda semántica de Milvus, especialmente en situaciones en las que intervienen palabras raras o términos técnicos. En versiones anteriores, Milvus soportaba vectores dispersos para ayudar en escenarios de búsqueda de palabras clave. Estos vectores dispersos se generaban fuera de Milvus mediante modelos neuronales como SPLADEv2/BGE-M3 o modelos estadísticos como el algoritmo BM25.</p>
 <p>Desarrollado por <a href="https://github.com/quickwit-oss/tantivy">Tantivy</a>, Milvus 2.5 incorpora analizadores y extracción de vectores dispersos, ampliando la API de sólo recibir vectores como entrada a aceptar directamente texto. La información estadística de BM25 se actualiza en tiempo real a medida que se introducen los datos, lo que mejora la facilidad de uso y la precisión. Además, los vectores dispersos basados en algoritmos de aproximación al vecino más cercano (RNA) ofrecen un rendimiento más potente que los sistemas estándar de búsqueda por palabras clave.</p>
 <p>Para obtener más información, consulte <a href="/docs/es/analyzer-overview.md">Visión general del analizador</a> y <a href="/docs/es/full-text-search.md">Búsqueda de texto completo</a>.</p>
@@ -80,4 +80,7 @@ title: Notas de la versión
 <h4 id="Local-Storage-V2" class="common-anchor-header">Almacenamiento local V2</h4><p>Introdujo un nuevo formato de archivo local en Milvus 2.5, mejorando la eficiencia de carga y consulta para datos escalares, reduciendo la sobrecarga de memoria y sentando las bases para futuras optimizaciones.</p>
 <h4 id="Expression-Parsing-Optimization" class="common-anchor-header">Optimización del análisis sintáctico de expresiones</h4><p>Se ha mejorado el análisis sintáctico de expresiones implementando el almacenamiento en caché para expresiones repetidas, actualizando ANTLR y optimizando el rendimiento de las cláusulas <code translate="no">NOT IN</code>.</p>
 <h4 id="Improved-DDL-Concurrency-Performance" class="common-anchor-header">Mejora del rendimiento de la concurrencia de DDL</h4><p>Se ha optimizado el rendimiento de la concurrencia de las operaciones del lenguaje de definición de datos (DDL).</p>
-<h4 id="RESTful-API-Feature-Alignment" class="common-anchor-header">Alineación de las funciones de la API RESTful</h4><p>Alineación de las funcionalidades de la API RESTful con otros SDK en aras de la coherencia.</p>
+<h4 id="RESTful-API-Feature-Alignment" class="common-anchor-header">Alineación de las funciones de la API RESTful</h4><p>Alineación de las funcionalidades de la API RESTful con otros SDK para mayor coherencia.</p>
+<h4 id="Security--Configuration-Updates" class="common-anchor-header">Actualizaciones de seguridad y configuración</h4><p>Soporte de TLS para asegurar la comunicación entre nodos en entornos más complejos o empresariales. Para obtener más información, consulte <a href="/docs/es/tls.md">Configuración de seguridad</a>.</p>
+<h4 id="Compaction-Performance-Enhancements" class="common-anchor-header">Mejoras en el rendimiento de la compactación</h4><p>Se han eliminado las limitaciones de segmentos máximos en la compactación mixta y ahora se da prioridad a los segmentos más pequeños, lo que mejora la eficacia y acelera las consultas en conjuntos de datos grandes o fragmentados.</p>
+<h4 id="Score-Based-Channel-Balancing" class="common-anchor-header">Equilibrio de canales basado en la puntuación</h4><p>Se ha introducido una política que equilibra dinámicamente las cargas entre canales, lo que mejora la utilización de los recursos y la estabilidad general en las implantaciones a gran escala.</p>

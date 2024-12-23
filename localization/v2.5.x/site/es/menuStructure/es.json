@@ -702,39 +702,70 @@
             "children": []
           },
           {
+            "label": "Filtrado",
+            "id": "filtering",
+            "order": 6,
+            "children": [
+              {
+                "label": "Explicación del filtrado",
+                "id": "boolean.md",
+                "order": 0,
+                "children": []
+              },
+              {
+                "label": "Operadores básicos",
+                "id": "basic-operators.md",
+                "order": 1,
+                "children": []
+              },
+              {
+                "label": "Filtrado Plantillas",
+                "id": "filtering-templating.md",
+                "order": 2,
+                "children": []
+              },
+              {
+                "label": "Operadores JSON",
+                "id": "json-operators.md",
+                "order": 3,
+                "children": []
+              },
+              {
+                "label": "Operadores de matrices",
+                "id": "array-operators.md",
+                "order": 4,
+                "children": []
+              }
+            ]
+          },
+          {
             "label": "Búsqueda de texto completo",
             "id": "full-text-search.md",
-            "order": 6,
+            "order": 7,
             "children": []
           },
           {
             "label": "Coincidencia de texto",
             "id": "keyword-match.md",
-            "order": 7,
+            "order": 8,
             "children": []
           },
           {
             "label": "Iteradores de búsqueda",
             "id": "with-iterators.md",
-            "order": 8,
+            "order": 9,
             "children": []
           },
           {
             "label": "Utilizar clave de partición",
             "id": "use-partition-key.md",
-            "order": 9,
-            "children": []
-          },
-          {
-            "label": "Filtrado de metadatos",
-            "id": "boolean.md",
-            "order": 14,
+            "order": 10,
             "children": []
           },
           {
             "label": "Nueva clasificación",
             "id": "reranking.md",
-            "order": 15,
+            "order": 11,
             "children": []
           }
         ]
@@ -994,7 +1025,7 @@
                 "children": []
               },
               {
-                "label": "Despliegue en GCP",
+                "label": "Implantación en GCP",
                 "id": "gcp.md",
                 "order": 2,
                 "children": []
@@ -1309,7 +1340,7 @@
             "isMenu": true,
             "children": [
               {
-                "label": "Rastreo de Jaeger",
+                "label": "Seguimiento de Jaeger",
                 "id": "config_jaeger_tracing.md",
                 "order": 0,
                 "children": []
@@ -1364,17 +1395,48 @@
             "children": []
           },
           {
-            "label": "Usuarios, privilegios y funciones",
-            "id": "users_and_roles.md",
-            "order": 10,
-            "children": []
-          },
-          {
-            "label": "Activar RBAC",
-            "id": "rbac.md",
+            "label": "RBAC",
+            "id": "rbac",
             "order": 1,
             "isMenu": true,
-            "children": []
+            "children": [
+              {
+                "label": "Explicación de RBAC",
+                "id": "rbac.md",
+                "order": 0,
+                "children": []
+              },
+              {
+                "label": "Crear usuarios y funciones",
+                "id": "users_and_roles.md",
+                "order": 1,
+                "children": []
+              },
+              {
+                "label": "Crear grupo de privilegios",
+                "id": "privilege_group.md",
+                "order": 2,
+                "children": []
+              },
+              {
+                "label": "Conceder privilegios",
+                "id": "grant_privileges.md",
+                "order": 3,
+                "children": []
+              },
+              {
+                "label": "Funciones de las subvenciones",
+                "id": "grant_roles.md",
+                "order": 4,
+                "children": []
+              },
+              {
+                "label": "Eliminar usuarios y funciones",
+                "id": "drop_users_roles.md",
+                "order": 5,
+                "children": []
+              }
+            ]
           },
           {
             "label": "Cifrado en tránsito",
@@ -1512,6 +1574,12 @@
             "children": []
           }
         ]
+      },
+      {
+        "label": "Milvus WebUI",
+        "id": "milvus-webui.md",
+        "order": 6,
+        "children": []
       },
       {
         "label": "Herramienta de dimensionamiento Milvus",

@@ -702,39 +702,70 @@
             "children": []
           },
           {
+            "label": "필터링",
+            "id": "filtering",
+            "order": 6,
+            "children": [
+              {
+                "label": "필터링 설명",
+                "id": "boolean.md",
+                "order": 0,
+                "children": []
+              },
+              {
+                "label": "기본 연산자",
+                "id": "basic-operators.md",
+                "order": 1,
+                "children": []
+              },
+              {
+                "label": "필터링 템플릿",
+                "id": "filtering-templating.md",
+                "order": 2,
+                "children": []
+              },
+              {
+                "label": "JSON 연산자",
+                "id": "json-operators.md",
+                "order": 3,
+                "children": []
+              },
+              {
+                "label": "배열 연산자",
+                "id": "array-operators.md",
+                "order": 4,
+                "children": []
+              }
+            ]
+          },
+          {
             "label": "전체 텍스트 검색",
             "id": "full-text-search.md",
-            "order": 6,
+            "order": 7,
             "children": []
           },
           {
             "label": "텍스트 일치",
             "id": "keyword-match.md",
-            "order": 7,
+            "order": 8,
             "children": []
           },
           {
             "label": "검색 이터레이터",
             "id": "with-iterators.md",
-            "order": 8,
+            "order": 9,
             "children": []
           },
           {
             "label": "파티션 키 사용",
             "id": "use-partition-key.md",
-            "order": 9,
-            "children": []
-          },
-          {
-            "label": "메타데이터 필터링",
-            "id": "boolean.md",
-            "order": 14,
+            "order": 10,
             "children": []
           },
           {
             "label": "순위 재조정",
             "id": "reranking.md",
-            "order": 15,
+            "order": 11,
             "children": []
           }
         ]
@@ -944,7 +975,7 @@
     "order": 9,
     "children": [
       {
-        "label": "배포",
+        "label": "Deployment",
         "id": "deployment",
         "order": 0,
         "isMenu": true,
@@ -1364,17 +1395,48 @@
             "children": []
           },
           {
-            "label": "사용자, 권한 및 역할",
-            "id": "users_and_roles.md",
-            "order": 10,
-            "children": []
-          },
-          {
-            "label": "RBAC 사용",
-            "id": "rbac.md",
+            "label": "RBAC",
+            "id": "rbac",
             "order": 1,
             "isMenu": true,
-            "children": []
+            "children": [
+              {
+                "label": "RBAC 설명",
+                "id": "rbac.md",
+                "order": 0,
+                "children": []
+              },
+              {
+                "label": "사용자 및 역할 만들기",
+                "id": "users_and_roles.md",
+                "order": 1,
+                "children": []
+              },
+              {
+                "label": "권한 그룹 만들기",
+                "id": "privilege_group.md",
+                "order": 2,
+                "children": []
+              },
+              {
+                "label": "권한 부여",
+                "id": "grant_privileges.md",
+                "order": 3,
+                "children": []
+              },
+              {
+                "label": "역할 부여",
+                "id": "grant_roles.md",
+                "order": 4,
+                "children": []
+              },
+              {
+                "label": "사용자 및 역할 삭제",
+                "id": "drop_users_roles.md",
+                "order": 5,
+                "children": []
+              }
+            ]
           },
           {
             "label": "전송 중 암호화",
@@ -1514,6 +1576,12 @@
         ]
       },
       {
+        "label": "Milvus WebUI",
+        "id": "milvus-webui.md",
+        "order": 6,
+        "children": []
+      },
+      {
         "label": "밀버스 사이징 도구",
         "id": "sizing",
         "order": 6,
@@ -1603,7 +1671,7 @@
             "children": []
           },
           {
-            "label": "12개의 실험실",
+            "label": "12개의 랩",
             "id": "video_search_with_twelvelabs_and_milvus.md",
             "order": 12,
             "children": []

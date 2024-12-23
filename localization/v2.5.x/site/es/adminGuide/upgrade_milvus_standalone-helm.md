@@ -108,10 +108,10 @@ zilliztech/milvus       4.1.1           2.3.0                   Milvus is an ope
 zilliztech/milvus       4.1.0           2.3.0                   Milvus is an open-source vector database built ...
 <button class="copy-code-btn"></button></code></pre>
 <p>Puede elegir la ruta de actualización para su Milvus de la siguiente manera:</p>
-<div style="display: none;">- Realice una actualización continua](#conduct-a-rolling-upgrade) de Milvus v2.2.3 y versiones posteriores a v2.5.0-beta.</div>
+<div style="display: none;">- Realice una actualización continua](#conduct-a-rolling-upgrade) de Milvus v2.2.3 y versiones posteriores a v2.5.0.</div>
 <ul>
-<li><p><a href="#Upgrade-Milvus-using-Helm">Actualice Milvus utilizando Helm</a> para una actualización desde una versión menor anterior a v2.2.3 a v2.5.0-beta.</p></li>
-<li><p><a href="#Migrate-the-metadata">Migre los metadatos</a> antes de la actualización de Milvus v2.1.x a v2.5.0-beta.</p></li>
+<li><p><a href="#Upgrade-Milvus-using-Helm">Actualice Milvus utilizando Helm</a> para una actualización desde una versión menor anterior a v2.2.3 a v2.5.0.</p></li>
+<li><p><a href="#Migrate-the-metadata">Migre los metadatos</a> antes de la actualización de Milvus v2.1.x a v2.5.0.</p></li>
 </ul>
 <div style="display:none;">
 <h2 id="Conduct-a-rolling-upgrade" class="common-anchor-header">Realizar una actualización continua<button data-href="#Conduct-a-rolling-upgrade" class="anchor-icon" translate="no">
@@ -129,7 +129,7 @@ zilliztech/milvus       4.1.0           2.3.0                   Milvus is an ope
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Desde Milvus 2.2.3, puede configurar los coordinadores de Milvus para que funcionen en modo activo-espera y habilitar la función de actualización continua para ellos, de forma que Milvus pueda responder a las solicitudes entrantes durante las actualizaciones de los coordinadores. En versiones anteriores, los coordinadores debían eliminarse y luego crearse durante una actualización, lo que podía introducir cierto tiempo de inactividad del servicio.</p>
+    </button></h2><p>Desde Milvus 2.2.3, puede configurar los coordinadores de Milvus para que funcionen en modo activo-espera y habilitar la función de actualización continua para ellos, de modo que Milvus pueda responder a las solicitudes entrantes durante las actualizaciones de los coordinadores. En versiones anteriores, los coordinadores debían eliminarse y luego crearse durante una actualización, lo que podía introducir cierto tiempo de inactividad del servicio.</p>
 <p>Las actualizaciones continuas requieren que los coordinadores trabajen en modo activo-espera. Puede utilizar <a href="https://raw.githubusercontent.com/milvus-io/milvus/master/deployments/upgrade/rollingUpdate.sh">el script</a> que le proporcionamos para configurar los coordinadores para que trabajen en modo de espera activo e iniciar la actualización continua.</p>
 <p>Basándose en las capacidades de actualización continua proporcionadas por Kubernetes, el script anterior impone una actualización ordenada de los despliegues según sus dependencias. Además, Milvus implementa un mecanismo para garantizar que sus componentes sigan siendo compatibles con aquellos que dependen de ellos durante la actualización, lo que reduce significativamente el posible tiempo de inactividad del servicio.</p>
 <p>El script sólo se aplica a la actualización de Milvus instalado con Helm. La siguiente tabla enumera los indicadores de comando disponibles en los scripts.</p>
@@ -145,8 +145,8 @@ zilliztech/milvus       4.1.0           2.3.0                   Milvus is an ope
 <tr><td><code translate="no">o</code></td><td>Operación</td><td><code translate="no">update</code></td><td>Falso</td></tr>
 </tbody>
 </table>
-<p>Una vez que se haya asegurado de que todos los despliegues en su instancia de Milvus están en su estado normal. Puede ejecutar el siguiente comando para actualizar la instancia de Milvus a 2.5.0-beta.</p>
-<pre><code translate="no" class="language-shell">sh rollingUpdate.<span class="hljs-property">sh</span> -n <span class="hljs-keyword">default</span> -i my-release -o update -t <span class="hljs-number">2.5</span><span class="hljs-number">.0</span>-beta -w <span class="hljs-string">&#x27;milvusdb/milvus:v2.5.0-beta&#x27;</span>
+<p>Una vez que se haya asegurado de que todos los despliegues de su instancia de Milvus están en su estado normal. Puede ejecutar el siguiente comando para actualizar la instancia de Milvus a 2.5.0.</p>
+<pre><code translate="no" class="language-shell">sh rollingUpdate.<span class="hljs-property">sh</span> -n <span class="hljs-keyword">default</span> -i my-release -o update -t <span class="hljs-number">2.5</span><span class="hljs-number">.0</span> -w <span class="hljs-string">&#x27;milvusdb/milvus:v2.5.0&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <ol>
@@ -235,25 +235,25 @@ my-release-minio-744dd9586f-qngzv               1/1     Running   0          84s
 <li>Migre los metadatos de Milvus.</li>
 <li>Inicie los componentes de Milvus con una nueva imagen.</li>
 </ol>
-<h4 id="2-Upgrade-Milvus-from-v21x-to-250-beta" class="common-anchor-header">2. Actualice Milvus de v2.1.x a 2.5.0-beta</h4><p>Los siguientes comandos asumen que usted actualiza Milvus de v2.1.4 a 2.5.0-beta. Cámbielos por las versiones que se ajusten a sus necesidades.</p>
+<h4 id="2-Upgrade-Milvus-from-v21x-to-250" class="common-anchor-header">2. Actualizar Milvus de v2.1.x a 2.5.0</h4><p>Los siguientes comandos asumen que usted actualiza Milvus de v2.1.4 a 2.5.0. Cámbielos por las versiones que se ajusten a sus necesidades.</p>
 <ol>
 <li><p>Especifique el nombre de la instancia de Milvus, la versión de Milvus de origen y la versión de Milvus de destino.</p>
-<pre><code translate="no">./migrate.sh -i my-release -s 2.1.4 -t 2.5.0-beta
+<pre><code translate="no">./migrate.sh -i my-release -s 2.1.4 -t 2.5.0
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>Especifique el espacio de nombres con <code translate="no">-n</code> si su Milvus no está instalado en el espacio de nombres predeterminado de K8s.</p>
-<pre><code translate="no">./migrate.sh -i my-release -n milvus -s 2.1.4 -t 2.5.0-beta
+<pre><code translate="no">./migrate.sh -i my-release -n milvus -s 2.1.4 -t 2.5.0
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>Especifique la ruta raíz con <code translate="no">-r</code> si su Milvus está instalado con la costumbre <code translate="no">rootpath</code>.</p>
-<pre><code translate="no">./migrate.sh -i my-release -n milvus -s 2.1.4 -t 2.5.0-beta -r by-dev
+<pre><code translate="no">./migrate.sh -i my-release -n milvus -s 2.1.4 -t 2.5.0 -r by-dev
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>Especifique la etiqueta de imagen con <code translate="no">-w</code> si su Milvus está instalado con la personalizada <code translate="no">image</code>.</p>
-<pre><code translate="no">./migrate.sh -i my-release -n milvus -s 2.1.4 -t 2.5.0-beta -r by-dev -w milvusdb/milvus:v2.5.0-beta
+<pre><code translate="no">./migrate.sh -i my-release -n milvus -s 2.1.4 -t 2.5.0 -r by-dev -w milvusdb/milvus:v2.5.0
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>Establezca <code translate="no">-d true</code> si desea eliminar automáticamente el pod de migración una vez finalizada la migración.</p>
-<pre><code translate="no">./migrate.sh -i my-release -n milvus -s 2.1.4 -t 2.5.0-beta -w milvusdb/milvus:v2.5.0-beta -d <span class="hljs-literal">true</span>
+<pre><code translate="no">./migrate.sh -i my-release -n milvus -s 2.1.4 -t 2.5.0 -w milvusdb/milvus:v2.5.0 -d <span class="hljs-literal">true</span>
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>Retroceda y migre de nuevo si la migración falla.</p>
-<pre><code translate="no">./migrate.sh -i my-release -n milvus -s 2.1.4 -t 2.5.0-beta -r by-dev -o rollback -w milvusdb/milvus:v2.1.1
-./migrate.sh -i my-release -n milvus -s 2.1.4 -t 2.5.0-beta -r by-dev -o migrate -w milvusdb/milvus:v2.5.0-beta
+<pre><code translate="no">./migrate.sh -i my-release -n milvus -s 2.1.4 -t 2.5.0 -r by-dev -o rollback -w milvusdb/milvus:v2.1.1
+./migrate.sh -i my-release -n milvus -s 2.1.4 -t 2.5.0 -r by-dev -o migrate -w milvusdb/milvus:v2.5.0
 <button class="copy-code-btn"></button></code></pre></li>
 </ol>

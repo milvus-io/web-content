@@ -5,7 +5,7 @@ summary: >-
   In Milvus, VARCHAR è il tipo di dati utilizzato per la memorizzazione di dati
   di tipo stringa, adatto alla memorizzazione di stringhe di lunghezza
   variabile. Può memorizzare stringhe con caratteri sia a uno che a più byte,
-  con una lunghezza massima di 60.535 caratteri. Quando si definisce un campo
+  con una lunghezza massima di 65.535 caratteri. Quando si definisce un campo
   VARCHAR, è necessario specificare anche il parametro di lunghezza massima
   max_length. Il tipo di stringa VARCHAR offre un modo efficiente e flessibile
   di memorizzare e gestire i dati di testo, rendendolo ideale per le
@@ -26,7 +26,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>In Milvus, <code translate="no">VARCHAR</code> è il tipo di dati utilizzato per la memorizzazione di dati di tipo stringa, adatto alla memorizzazione di stringhe di lunghezza variabile. Può memorizzare stringhe con caratteri sia a uno che a più byte, con una lunghezza massima di 60.535 caratteri. Quando si definisce un campo <code translate="no">VARCHAR</code>, è necessario specificare anche il parametro di lunghezza massima <code translate="no">max_length</code>. Il tipo di stringa <code translate="no">VARCHAR</code> offre un modo efficiente e flessibile di memorizzare e gestire i dati di testo, rendendolo ideale per le applicazioni che gestiscono stringhe di varia lunghezza.</p>
+    </button></h1><p>In Milvus, <code translate="no">VARCHAR</code> è il tipo di dati utilizzato per la memorizzazione di dati di tipo stringa, adatto alla memorizzazione di stringhe di lunghezza variabile. Può memorizzare stringhe con caratteri sia a uno che a più byte, con una lunghezza massima di 65.535 caratteri. Quando si definisce un campo <code translate="no">VARCHAR</code>, è necessario specificare anche il parametro di lunghezza massima <code translate="no">max_length</code>. Il tipo di stringa <code translate="no">VARCHAR</code> offre un modo efficiente e flessibile di memorizzare e gestire i dati di testo, rendendolo ideale per le applicazioni che gestiscono stringhe di varia lunghezza.</p>
 <h2 id="Add-VARCHAR-field​" class="common-anchor-header">Aggiungere un campo VARCHAR<button data-href="#Add-VARCHAR-field​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -170,7 +170,7 @@ schema.addField(AddFieldReq.builder()​
 }&quot;</span>​
 
 <button class="copy-code-btn"></button></code></pre>
-<p>In questo esempio, si aggiungono due campi <code translate="no">VARCHAR</code>: <code translate="no">varchar_field1</code> e <code translate="no">varchar_field2</code>, con lunghezza massima impostata rispettivamente a 100 e 200 caratteri. Si consiglia di impostare <code translate="no">max_length</code> in base alle caratteristiche dei propri dati, per assicurarsi che possa accogliere i dati più lunghi evitando un'eccessiva allocazione di spazio. Inoltre, sono stati aggiunti un campo primario <code translate="no">pk</code> e un campo vettoriale <code translate="no">embedding</code>.</p>
+<p>In questo esempio, si aggiungono due campi <code translate="no">VARCHAR</code>: <code translate="no">varchar_field1</code> e <code translate="no">varchar_field2</code>, con lunghezza massima impostata rispettivamente a 100 e 200 caratteri. Si consiglia di impostare <code translate="no">max_length</code> in base alle caratteristiche dei dati, per assicurarsi che possa accogliere i dati più lunghi evitando di allocare troppo spazio. Inoltre, sono stati aggiunti un campo primario <code translate="no">pk</code> e un campo vettoriale <code translate="no">embedding</code>.</p>
 <div class="alert note">
 <p>Il campo primario e il campo vettoriale sono obbligatori quando si crea una raccolta. Il campo primario identifica in modo univoco ogni entità, mentre il campo vettoriale è fondamentale per la ricerca di similarità. Per maggiori dettagli, consultare <a href="/docs/it/primary-field.md">Campo primario e AutoID</a>, <a href="/docs/it/dense-vector.md">Vettore denso</a>, <a href="/docs/it/binary-vector.md">Vettore binario</a> o <a href="/docs/it/sparse_vector.md">Vettore sparso</a>.</p>
 </div>
@@ -432,7 +432,7 @@ client.<span class="hljs-title function_">insert</span>({​
         ></path>
       </svg>
     </button></h2><p>Dopo aver aggiunto i campi stringa, è possibile utilizzarli per filtrare le operazioni di ricerca e di interrogazione, ottenendo risultati di ricerca più precisi.</p>
-<h3 id="Filter-queries​" class="common-anchor-header">Filtro delle query</h3><p>Dopo aver aggiunto i campi stringa, è possibile filtrare i risultati utilizzando questi campi nelle query. Ad esempio, si possono interrogare tutte le entità in cui <code translate="no">varchar_field1</code> è uguale a <code translate="no">&quot;Product A&quot;</code>.</p>
+<h3 id="Filter-queries​" class="common-anchor-header">Filtrare le query</h3><p>Dopo aver aggiunto i campi stringa, è possibile filtrare i risultati utilizzando questi campi nelle query. Ad esempio, si possono interrogare tutte le entità in cui <code translate="no">varchar_field1</code> è uguale a <code translate="no">&quot;Product A&quot;</code>.</p>
 <div class="multipleCode">
    <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&#x27;varchar_field1 == &quot;Product A&quot;&#x27;</span>​

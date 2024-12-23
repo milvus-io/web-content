@@ -3,9 +3,9 @@ id: string.md
 title: 문자열 필드
 summary: >-
   Milvus에서 VARCHAR는 문자열형 데이터를 저장하는 데 사용되는 데이터 유형으로, 가변 길이 문자열을 저장하는 데 적합합니다. 최대
-  60,535자의 단일 및 다중 바이트 문자열을 모두 저장할 수 있으며, 최대 길이는 60,535자입니다. VARCHAR 필드를 정의할 때는
-  최대 길이 매개변수 max_length도 지정해야 합니다. VARCHAR 문자열 유형은 텍스트 데이터를 저장하고 관리하는 효율적이고 유연한
-  방법을 제공하므로 다양한 길이의 문자열을 처리하는 애플리케이션에 이상적입니다.
+  65,535자까지 단일 및 멀티바이트 문자로 문자열을 저장할 수 있습니다. VARCHAR 필드를 정의할 때는 최대 길이 매개변수
+  max_length도 지정해야 합니다. VARCHAR 문자열 유형은 텍스트 데이터를 저장하고 관리하는 효율적이고 유연한 방법을 제공하므로
+  다양한 길이의 문자열을 처리하는 애플리케이션에 이상적입니다.
 ---
 <h1 id="String-Field​" class="common-anchor-header">문자열 필드<button data-href="#String-Field​" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -22,7 +22,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Milvus에서 <code translate="no">VARCHAR</code> 은 문자열 유형 데이터를 저장하는 데 사용되는 데이터 유형으로, 가변 길이 문자열을 저장하는 데 적합합니다. 최대 60,535자의 단일 및 다중 바이트 문자열을 모두 저장할 수 있으며, 최대 길이는 60,535자입니다. <code translate="no">VARCHAR</code> 필드를 정의할 때는 최대 길이 매개변수 <code translate="no">max_length</code> 도 지정해야 합니다. <code translate="no">VARCHAR</code> 문자열 유형은 텍스트 데이터를 저장하고 관리하는 효율적이고 유연한 방법을 제공하므로 다양한 길이의 문자열을 처리하는 애플리케이션에 이상적입니다.</p>
+    </button></h1><p>Milvus에서 <code translate="no">VARCHAR</code> 은 문자열 유형 데이터를 저장하는 데 사용되는 데이터 유형으로, 가변 길이 문자열을 저장하는 데 적합합니다. 최대 65,535자까지 단일 및 멀티바이트 문자로 문자열을 저장할 수 있습니다. <code translate="no">VARCHAR</code> 필드를 정의할 때는 최대 길이 매개변수 <code translate="no">max_length</code> 도 지정해야 합니다. <code translate="no">VARCHAR</code> 문자열 유형은 텍스트 데이터를 저장하고 관리하는 효율적이고 유연한 방법을 제공하므로 다양한 길이의 문자열을 처리하는 애플리케이션에 이상적입니다.</p>
 <h2 id="Add-VARCHAR-field​" class="common-anchor-header">VARCHAR 필드 추가<button data-href="#Add-VARCHAR-field​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

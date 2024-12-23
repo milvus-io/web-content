@@ -702,39 +702,70 @@
             "children": []
           },
           {
+            "label": "过滤",
+            "id": "filtering",
+            "order": 6,
+            "children": [
+              {
+                "label": "过滤说明",
+                "id": "boolean.md",
+                "order": 0,
+                "children": []
+              },
+              {
+                "label": "基本操作符",
+                "id": "basic-operators.md",
+                "order": 1,
+                "children": []
+              },
+              {
+                "label": "过滤模板",
+                "id": "filtering-templating.md",
+                "order": 2,
+                "children": []
+              },
+              {
+                "label": "JSON 操作符",
+                "id": "json-operators.md",
+                "order": 3,
+                "children": []
+              },
+              {
+                "label": "数组操作符",
+                "id": "array-operators.md",
+                "order": 4,
+                "children": []
+              }
+            ]
+          },
+          {
             "label": "全文检索",
             "id": "full-text-search.md",
-            "order": 6,
+            "order": 7,
             "children": []
           },
           {
             "label": "文本匹配",
             "id": "keyword-match.md",
-            "order": 7,
+            "order": 8,
             "children": []
           },
           {
             "label": "搜索迭代器",
             "id": "with-iterators.md",
-            "order": 8,
+            "order": 9,
             "children": []
           },
           {
             "label": "使用 Partition Key",
             "id": "use-partition-key.md",
-            "order": 9,
-            "children": []
-          },
-          {
-            "label": "元数据过滤",
-            "id": "boolean.md",
-            "order": 14,
+            "order": 10,
             "children": []
           },
           {
             "label": "Rerankers",
             "id": "reranking.md",
-            "order": 15,
+            "order": 11,
             "children": []
           }
         ]
@@ -1364,17 +1395,48 @@
             "children": []
           },
           {
-            "label": "用户、权限和角色",
-            "id": "users_and_roles.md",
-            "order": 10,
-            "children": []
-          },
-          {
-            "label": "启用 RBAC",
-            "id": "rbac.md",
+            "label": "RBAC",
+            "id": "rbac",
             "order": 1,
             "isMenu": true,
-            "children": []
+            "children": [
+              {
+                "label": "RBAC 解释",
+                "id": "rbac.md",
+                "order": 0,
+                "children": []
+              },
+              {
+                "label": "创建用户和角色",
+                "id": "users_and_roles.md",
+                "order": 1,
+                "children": []
+              },
+              {
+                "label": "创建权限组",
+                "id": "privilege_group.md",
+                "order": 2,
+                "children": []
+              },
+              {
+                "label": "授予特权",
+                "id": "grant_privileges.md",
+                "order": 3,
+                "children": []
+              },
+              {
+                "label": "资助角色",
+                "id": "grant_roles.md",
+                "order": 4,
+                "children": []
+              },
+              {
+                "label": "删除用户和角色",
+                "id": "drop_users_roles.md",
+                "order": 5,
+                "children": []
+              }
+            ]
           },
           {
             "label": "传输中加密",
@@ -1512,6 +1574,12 @@
             "children": []
           }
         ]
+      },
+      {
+        "label": "Milvus 网络用户界面",
+        "id": "milvus-webui.md",
+        "order": 6,
+        "children": []
       },
       {
         "label": "Milvus 尺寸工具",

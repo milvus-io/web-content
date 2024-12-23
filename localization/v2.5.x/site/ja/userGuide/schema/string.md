@@ -2,7 +2,7 @@
 id: string.md
 title: 文字列フィールド
 summary: >-
-  Milvusでは、VARCHARは文字列型データの格納に使用されるデータ型で、可変長の文字列の格納に適しています。シングルバイト文字とマルチバイト文字の両方の文字列を格納することができ、最大長は60,535文字までです。VARCHARフィールドを定義する際には、最大長パラメータmax_lengthも指定する必要があります。VARCHAR文字列型は、テキスト・データの格納と管理に効率的で柔軟な方法を提供し、さまざまな長さの文字列を扱うアプリケーションに最適です。
+  Milvusでは、VARCHARは文字列型データの格納に使用されるデータ型で、可変長の文字列の格納に適しています。シングルバイト文字とマルチバイト文字の両方の文字列を格納することができ、最大長は65,535文字までです。VARCHARフィールドを定義する際には、最大長パラメータmax_lengthも指定する必要があります。VARCHAR文字列型は、テキスト・データの格納と管理に効率的で柔軟な方法を提供し、さまざまな長さの文字列を扱うアプリケーションに最適です。
 ---
 <h1 id="String-Field​" class="common-anchor-header">文字列フィールド<button data-href="#String-Field​" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -19,7 +19,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Milvusでは、<code translate="no">VARCHAR</code> は文字列型データを格納するためのデータ型で、可変長の文字列を格納するのに適しています。シングルバイト文字とマルチバイト文字の両方の文字列を格納することができ、最大長は60,535文字までです。<code translate="no">VARCHAR</code> フィールドを定義する際には、最大長パラメータ<code translate="no">max_length</code> も指定する必要がある。<code translate="no">VARCHAR</code> 文字列型は、テキスト・データを格納・管理する効率的で柔軟な方法を提供し、さまざまな長さの文字列を扱うアプリケーションに最適です。</p>
+    </button></h1><p>Milvusでは、<code translate="no">VARCHAR</code> は文字列型データを格納するためのデータ型で、可変長の文字列を格納するのに適しています。シングルバイト文字とマルチバイト文字の両方の文字列を格納することができ、最大長は65,535文字までです。<code translate="no">VARCHAR</code> フィールドを定義する際には、最大長パラメータ<code translate="no">max_length</code> も指定する必要がある。<code translate="no">VARCHAR</code> 文字列型は、テキスト・データを格納・管理する効率的で柔軟な方法を提供し、さまざまな長さの文字列を扱うアプリケーションに最適です。</p>
 <h2 id="Add-VARCHAR-field​" class="common-anchor-header">VARCHAR フィールドの追加<button data-href="#Add-VARCHAR-field​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

@@ -3,7 +3,7 @@ id: string.md
 title: 字符串字段
 summary: >-
   在 Milvus 中，VARCHAR 是用于存储字符串类型数据的数据类型，适合存储长度可变的字符串。它可以存储具有单字节和多字节字符的字符串，最大长度可达
-  60,535 个字符。定义 VARCHAR 字段时，还必须指定最大长度参数 max_length。VARCHAR
+  65,535 个字符。定义 VARCHAR 字段时，还必须指定最大长度参数 max_length。VARCHAR
   字符串类型为存储和管理文本数据提供了一种高效灵活的方式，非常适合处理不同长度字符串的应用程序。
 ---
 <h1 id="String-Field​" class="common-anchor-header">字符串字段<button data-href="#String-Field​" class="anchor-icon" translate="no">
@@ -21,7 +21,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>在 Milvus 中，<code translate="no">VARCHAR</code> 是用于存储字符串类型数据的数据类型，适合存储长度可变的字符串。它可以存储具有单字节和多字节字符的字符串，最大长度可达 60,535 个字符。定义<code translate="no">VARCHAR</code> 字段时，还必须指定最大长度参数<code translate="no">max_length</code> 。<code translate="no">VARCHAR</code> 字符串类型为存储和管理文本数据提供了一种高效灵活的方式，非常适合处理不同长度字符串的应用程序。</p>
+    </button></h1><p>在 Milvus 中，<code translate="no">VARCHAR</code> 是用于存储字符串类型数据的数据类型，适合存储长度可变的字符串。它可以存储具有单字节和多字节字符的字符串，最大长度可达 65,535 个字符。定义<code translate="no">VARCHAR</code> 字段时，还必须指定最大长度参数<code translate="no">max_length</code> 。<code translate="no">VARCHAR</code> 字符串类型为存储和管理文本数据提供了一种高效灵活的方式，非常适合处理不同长度字符串的应用程序。</p>
 <h2 id="Add-VARCHAR-field​" class="common-anchor-header">添加 VARCHAR 字段<button data-href="#Add-VARCHAR-field​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

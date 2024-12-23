@@ -527,7 +527,7 @@
             "children": []
           },
           {
-            "label": "Satz-Transformatoren",
+            "label": "Satzumwandler",
             "id": "embed-with-sentence-transform.md",
             "order": 2,
             "children": []
@@ -1064,7 +1064,7 @@
             "children": []
           },
           {
-            "label": "RBAC aktivieren",
+            "label": "RBAC einschalten",
             "id": "rbac.md",
             "order": 1,
             "isMenu": true,

@@ -65,7 +65,7 @@ $ kubectl create -f https://github.com/jaegertracing/jaeger-operator/releases/do
 NAME              DESIRED   CURRENT   UP-TO-DATE   AVAILABLE   AGE
 jaeger-<span class="hljs-keyword">operator</span>   <span class="hljs-number">1</span>         <span class="hljs-number">1</span>         <span class="hljs-number">1</span>            <span class="hljs-number">1</span>           <span class="hljs-number">48</span>s
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="2-Deploy-Jager" class="common-anchor-header">2.部署 Jager</h3><p>创建 Jaeger 实例的最简单方法是创建一个 YAML 文件，如下所示。这将安装默认的 AllInOne 策略，在单个 pod 中部署<strong>一体化</strong>镜像（结合了<strong>jaeger-agents</strong>、<strong>jaeger-collector</strong>、<strong>jaeger</strong> <strong>-query</strong> 和 Jaeger UI），默认使用<strong>内存存储</strong>。</p>
+<h3 id="2-Deploy-Jaeger" class="common-anchor-header">2.部署 Jaeger</h3><p>创建 Jaeger 实例的最简单方法是创建类似下面示例的 YAML 文件。这将安装默认的 AllInOne 策略，在单个 pod 中部署<strong>一体化</strong>镜像（结合了<strong>jaeger-agents</strong>、<strong>jaeger-collector</strong>、<strong>jaeger</strong> <strong>-query</strong> 和 Jaeger UI），默认使用<strong>内存存储</strong>。</p>
 <p>如果想长期存储跟踪信息，请参考<a href="https://www.jaegertracing.io/docs/1.62/operator/#production-strategy">生产策略</a>。</p>
 <pre><code translate="no" class="language-yaml">apiVersion: jaegertracing.io/v1
 kind: Jaeger
@@ -128,7 +128,7 @@ $ helm upgrade --install -f values.yaml my-release milvus/milvus
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>一旦使用 Helm Chart 部署了 Jaeger 和 Milvus，dfault 就会启用入口。你可以运行以下命令查看入口：</p>
+    </button></h2><p>一旦使用 Helm Chart 部署了 Jaeger 和 Milvus，dfault 就会启用入口。您可以运行以下命令查看入口：</p>
 <pre><code translate="no" class="language-shell">$ kubectl <span class="hljs-keyword">get</span> ingress
 
 NAME           CLASS    HOSTS   ADDRESS         PORTS   AGE

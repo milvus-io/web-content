@@ -20,7 +20,7 @@ title: 使用 Docker Compose 升级 Milvus 群集
         ></path>
       </svg>
     </button></h1><p>本主题介绍如何使用 Docker Compose 升级 Milvus。</p>
-<p>在正常情况下，你可以<a href="#Upgrade-Milvus-by-changing-its-image">通过更改映像来升级 Milvus</a>。不过，在从 v2.1.x 升级到 v2.5.0-beta 之前，需要<a href="#Migrate-the-metadata">迁移元数据</a>。</p>
+<p>在正常情况下，你可以<a href="#Upgrade-Milvus-by-changing-its-image">通过更改映像来升级 Milvus</a>。不过，在从 v2.1.x 升级到 v2.5.0 之前，需要<a href="#Migrate-the-metadata">迁移元数据</a>。</p>
 <h2 id="Upgrade-Milvus-by-changing-its-image" class="common-anchor-header">通过更改映像升级 Milvus<button data-href="#Upgrade-Milvus-by-changing-its-image" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -39,39 +39,39 @@ title: 使用 Docker Compose 升级 Milvus 群集
     </button></h2><p>在正常情况下，你可以按以下方法升级 Milvus：</p>
 <ol>
 <li><p>在<code translate="no">docker-compose.yaml</code> 中更改 Milvus 图像标签。</p>
-<p>请注意，您需要更改代理、所有协调器和所有工作节点的镜像标签。</p>
+<p>请注意，您需要更改代理、所有协调器和所有工作节点的映像标签。</p>
 <pre><code translate="no" class="language-yaml">...
 rootcoord:
   container_name: milvus-rootcoord
-  image: milvusdb/milvus:v2.5.0-beta
+  image: milvusdb/milvus:v2.5.0
 ...
 proxy:
   container_name: milvus-proxy
-  image: milvusdb/milvus:v2.5.0-beta
+  image: milvusdb/milvus:v2.5.0
 ...
 querycoord:
   container_name: milvus-querycoord
-  image: milvusdb/milvus:v2.5.0-beta  
+  image: milvusdb/milvus:v2.5.0  
 ...
 querynode:
   container_name: milvus-querynode
-  image: milvusdb/milvus:v2.5.0-beta
+  image: milvusdb/milvus:v2.5.0
 ...
 indexcoord:
   container_name: milvus-indexcoord
-  image: milvusdb/milvus:v2.5.0-beta
+  image: milvusdb/milvus:v2.5.0
 ...
 indexnode:
   container_name: milvus-indexnode
-  image: milvusdb/milvus:v2.5.0-beta 
+  image: milvusdb/milvus:v2.5.0 
 ...
 datacoord:
   container_name: milvus-datacoord
-  image: milvusdb/milvus:v2.5.0-beta   
+  image: milvusdb/milvus:v2.5.0   
 ...
 datanode:
   container_name: milvus-datanode
-  image: milvusdb/milvus:v2.5.0-beta
+  image: milvusdb/milvus:v2.5.0
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>运行以下命令执行升级。</p>
 <pre><code translate="no" class="language-shell">docker compose down
@@ -105,7 +105,7 @@ cmd:
   runWithBackup: true
 config:
   sourceVersion: <span class="hljs-number">2.1</span><span class="hljs-number">.4</span>   <span class="hljs-comment"># Specify your milvus version</span>
-  targetVersion: <span class="hljs-number">2.5</span><span class="hljs-number">.0</span>-beta
+  targetVersion: <span class="hljs-number">2.5</span><span class="hljs-number">.0</span>
   backupFilePath: /tmp/migration.bak
 metastore:
   <span class="hljs-built_in">type</span>: etcd

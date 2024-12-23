@@ -61,13 +61,13 @@ summary: >-
 <pre><code translate="no" class="language-shell">$ kubectl create namespace observability
 $ kubectl create -f https://github.com/jaegertracing/jaeger-operator/releases/download/v1.62.0/jaeger-operator.yaml -n observability
 <button class="copy-code-btn"></button></code></pre>
-<p>Zu diesem Zeitpunkt sollte eine <code translate="no">jaeger-operator</code> Bereitstellung verfügbar sein. Sie können es mit folgendem Befehl anzeigen:</p>
+<p>Zu diesem Zeitpunkt sollte eine <code translate="no">jaeger-operator</code> Bereitstellung verfügbar sein. Sie können es mit dem folgenden Befehl anzeigen:</p>
 <pre><code translate="no" class="language-shell">$ kubectl <span class="hljs-keyword">get</span> deployment jaeger-<span class="hljs-keyword">operator</span> -n observability
 
 NAME              DESIRED   CURRENT   UP-TO-DATE   AVAILABLE   AGE
 jaeger-<span class="hljs-keyword">operator</span>   <span class="hljs-number">1</span>         <span class="hljs-number">1</span>         <span class="hljs-number">1</span>            <span class="hljs-number">1</span>           <span class="hljs-number">48</span>s
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="2-Deploy-Jager" class="common-anchor-header">2. Jager bereitstellen</h3><p>Der einfachste Weg, eine Jaeger-Instanz zu erstellen, ist die Erstellung einer YAML-Datei wie im folgenden Beispiel. Dadurch wird die standardmäßige AllInOne-Strategie installiert, die das <strong>All-In-One-Image</strong> (eine Kombination aus <strong>Jaeger-Agent</strong>, <strong>Jaeger-Collector</strong>, <strong>Jaeger-Query</strong> und Jaeger-UI) in einem einzigen Pod bereitstellt und standardmäßig <strong>In-Memory-Speicher</strong> verwendet.</p>
+<h3 id="2-Deploy-Jaeger" class="common-anchor-header">2. Jaeger bereitstellen</h3><p>Der einfachste Weg, eine Jaeger-Instanz zu erstellen, ist die Erstellung einer YAML-Datei wie im folgenden Beispiel. Dadurch wird die standardmäßige AllInOne-Strategie installiert, die das <strong>All-In-One-Image</strong> (eine Kombination aus <strong>Jaeger-Agent</strong>, <strong>Jaeger-Collector</strong>, <strong>Jaeger-Query</strong> und Jaeger-UI) in einem einzigen Pod bereitstellt und standardmäßig <strong>In-Memory-Speicher</strong> verwendet.</p>
 <p>Wenn Sie Traces über einen längeren Zeitraum speichern möchten, lesen Sie bitte <a href="https://www.jaegertracing.io/docs/1.62/operator/#production-strategy">production-strategy</a>.</p>
 <pre><code translate="no" class="language-yaml">apiVersion: jaegertracing.io/v1
 kind: Jaeger

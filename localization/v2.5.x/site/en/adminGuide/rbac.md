@@ -1,10 +1,13 @@
 ---
 id: rbac.md
 related_key: enable RBAC
-summary: 'Learn how to manage users, roles, and privileges.'
-title: Enable RBAC
+summary: >-
+  RBAC (Role-Based Access Control) is an access control method based on roles.
+  With RBAC, you can finely control the operations users can perform at the
+  collection, database, and instance levels, enhancing data security. ​
+title: RBAC Explained
 ---
-<h1 id="Enable-RBAC" class="common-anchor-header">Enable RBAC<button data-href="#Enable-RBAC" class="anchor-icon" translate="no">
+<h1 id="RBAC-Explained​" class="common-anchor-header">RBAC Explained​<button data-href="#RBAC-Explained​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -19,12 +22,10 @@ title: Enable RBAC
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>By enabling RBAC, you can control access to specific Milvus resources (Eg. a collection or a partition) or permissions based on user role and privileges. Currently, this feature is only available in Python and Java.</p>
-<p>This topic describes how to enable RBAC and manage <a href="/docs/users_and_roles.md">users and roles</a>.</p>
-<div class="alert note">
-<p>The code snippets on this page use new <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/About.md">MilvusClient</a> (Python) to interact with Milvus. New MilvusClient SDKs for other languages will be released in future updates.</p>
-</div>
-<h2 id="1-Initiate-a-Milvus-client-to-establish-a-connection" class="common-anchor-header">1. Initiate a Milvus client to establish a connection<button data-href="#1-Initiate-a-Milvus-client-to-establish-a-connection" class="anchor-icon" translate="no">
+    </button></h1><p>RBAC (Role-Based Access Control) is an access control method based on roles. With RBAC, you can finely control the operations users can perform at the collection, database, and instance levels, enhancing data security. ​</p>
+<p>Unlike traditional user access control models, RBAC introduces the concept of <strong>roles</strong>. In the RBAC model, you  grant privileges to roles and then grant those roles to users. Then users can obtain privileges. ​</p>
+<p>The RBAC model can improve the efficiency of access control management. For example, if multiple users require the same set of privileges, you do not need to manually set the privileges for each user. Instead, you can create a role and assign the role to users. If you want to adjust the privileges of these users, you can just adjust the role privileges and the modification will be applied to all users with this role.​</p>
+<h2 id="RBAC-key-concepts​" class="common-anchor-header">RBAC key concepts​<button data-href="#RBAC-key-concepts​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -39,15 +40,21 @@ title: Enable RBAC
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>After you enable <a href="/docs/authenticate.md">user authentication</a>, connect to your Milvus instance using <code translate="no">token</code> that consists of a username and a password. By default, Milvus uses the <code translate="no">root</code> user with the password <code translate="no">Milvus</code>.</p>
-<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> MilvusClient
-
-client = MilvusClient(
-    uri=<span class="hljs-string">&#x27;http://localhost:19530&#x27;</span>, <span class="hljs-comment"># replace with your own Milvus server address</span>
-    token=<span class="hljs-string">&#x27;root:Milvus&#x27;</span> <span class="hljs-comment"># replace with your own Milvus server token</span>
-)
-<button class="copy-code-btn"></button></code></pre>
-<h2 id="2-Create-a-user" class="common-anchor-header">2. Create a user<button data-href="#2-Create-a-user" class="anchor-icon" translate="no">
+    </button></h2><p>
+  <span class="img-wrapper">
+    <img translate="no" src="/docs/v2.5.x/assets/users_roles_privileges.png" alt="Users, roles, and privileges" class="doc-image" id="users,-roles,-and-privileges" />
+    <span>Users, roles, and privileges</span>
+  </span>
+</p>
+<p>There are four major components in the RBAC model.​</p>
+<ul>
+<li><p>**Resource: **The resource entity that can be accessed. There are three levels of resources in Milvus - instance, database, and collection.​</p></li>
+<li><p>**Privilege: **The permission to perform certain operations on Milvus resources (eg. create collections, insert data, etc). ​</p></li>
+<li><p>**Privilege group: **A group of multiple privileges.​</p></li>
+<li><p>**Role: **A role consists of two parts-privileges and resources. Privileges define the type of operations that a role can perform while resources define the target resources that the operations can be performed on. For example, the database administrator role can perform read, write, and manage operations on certain databases.​</p></li>
+<li><p>**User: **A user is someone who uses Milvus. Each user has a unique ID and is granted a role or multiple roles. ​</p></li>
+</ul>
+<h2 id="Procedures​" class="common-anchor-header">Procedures​<button data-href="#Procedures​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -62,204 +69,11 @@ client = MilvusClient(
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Create a user named <code translate="no">user_1</code> with the password <code translate="no">P@ssw0rd</code>:</p>
-<pre><code translate="no" class="language-python">client.<span class="hljs-title function_">create_user</span>(
-    user_name=<span class="hljs-string">&#x27;user_1&#x27;</span>,
-    password=<span class="hljs-string">&#x27;P@ssw0rd&#x27;</span>
-)
-<button class="copy-code-btn"></button></code></pre>
-<p>After creating a user, you can:</p>
-<ul>
-<li>Update a user password. You need to provide both the original and the new password.</li>
-</ul>
-<pre><code translate="no" class="language-python">client.<span class="hljs-title function_">update_password</span>(
-    user_name=<span class="hljs-string">&#x27;user_1&#x27;</span>,
-    old_password=<span class="hljs-string">&#x27;P@ssw0rd&#x27;</span>,
-    new_password=<span class="hljs-string">&#x27;P@ssw0rd123&#x27;</span>
-)
-<button class="copy-code-btn"></button></code></pre>
-<ul>
-<li>List all users.</li>
-</ul>
-<pre><code translate="no" class="language-python">client.list_users()
-
-<span class="hljs-comment"># output:</span>
-<span class="hljs-comment"># [&#x27;root&#x27;, &#x27;user_1&#x27;]</span>
-<button class="copy-code-btn"></button></code></pre>
-<ul>
-<li>Check the role of a particular user.</li>
-</ul>
-<pre><code translate="no" class="language-python">client.describe_user(user_name=<span class="hljs-string">&#x27;user_1&#x27;</span>)
-
-# output:
-# {<span class="hljs-string">&#x27;user_name&#x27;</span>: <span class="hljs-string">&#x27;user_1&#x27;</span>, <span class="hljs-string">&#x27;roles&#x27;</span>: ()}
-<button class="copy-code-btn"></button></code></pre>
-<h2 id="3-Create-a-role" class="common-anchor-header">3. Create a role<button data-href="#3-Create-a-role" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h2><p>The following example creates a role named <code translate="no">roleA</code>.</p>
-<pre><code translate="no" class="language-python">client.<span class="hljs-title function_">create_role</span>(
-    role_name=<span class="hljs-string">&quot;roleA&quot;</span>,
-)
-<button class="copy-code-btn"></button></code></pre>
-<p>After creating a role, you can:</p>
-<ul>
-<li>List all roles.</li>
-</ul>
-<pre><code translate="no" class="language-python">client.list_roles()
-
-# output:
-# [<span class="hljs-string">&#x27;admin&#x27;</span>, <span class="hljs-string">&#x27;public&#x27;</span>, <span class="hljs-string">&#x27;roleA&#x27;</span>]
-<button class="copy-code-btn"></button></code></pre>
-<h2 id="4-Grant-a-privilege-to-a-role" class="common-anchor-header">4. Grant a privilege to a role<button data-href="#4-Grant-a-privilege-to-a-role" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h2><p>The following example demonstrates how to grant the permission of searching all collections to the role named <code translate="no">roleA</code>.</p>
-<p>The <code translate="no">object_type</code> specifies the object type, which can also be understood as the resource type. Currently, valid values ​​include Collection/User/Global, etc., where Global means that there is no specific resource type. The <code translate="no">object_name</code> is the resource name. If object<em>type is Collection, then object name can be referred to a specific collection name, or you can use * to specify all collections. If object</em>type is Global, then the object name can be only specified as *. See <a href="/docs/users_and_roles.md">Users and Roles</a> for other types of privileges you can grant.</p>
-<p>Before managing role privileges, make sure you have enabled user authentication. Otherwise, an error may occur. For information on how to enable user authentication, refer to <a href="/docs/authenticate.md">Authenticate User Access</a>.</p>
-<pre><code translate="no" class="language-python"><span class="hljs-comment"># grant privilege to a role</span>
-
-client.grant_privilege(
-    role_name=<span class="hljs-string">&#x27;roleA&#x27;</span>,
-    object_type=<span class="hljs-string">&#x27;User&#x27;</span>,  <span class="hljs-comment"># value here can be Global, Collection or User, object type also depends on the API defined in privilegeName</span>
-    object_name=<span class="hljs-string">&#x27;user_1&#x27;</span>,  <span class="hljs-comment"># value here can be * or a specific user name if object type is &#x27;User&#x27;</span>
-    privilege=<span class="hljs-string">&#x27;SelectUser&#x27;</span>
-)
-<button class="copy-code-btn"></button></code></pre>
-<p>After granting a privilege to a role, you can:</p>
-<ul>
-<li>View the privileges granted to a role.</li>
-</ul>
-<pre><code translate="no" class="language-python">client.describe_role(
-    role_name=<span class="hljs-string">&#x27;roleA&#x27;</span>
-)
-
-# output:
-# {<span class="hljs-string">&#x27;role&#x27;</span>: <span class="hljs-string">&#x27;roleA&#x27;</span>,
-#  <span class="hljs-string">&#x27;privileges&#x27;</span>: [{<span class="hljs-string">&#x27;object_type&#x27;</span>: <span class="hljs-string">&#x27;User&#x27;</span>,
-#    <span class="hljs-string">&#x27;object_name&#x27;</span>: <span class="hljs-string">&#x27;user_1&#x27;</span>,
-#    <span class="hljs-string">&#x27;db_name&#x27;</span>: <span class="hljs-string">&#x27;default&#x27;</span>,
-#    <span class="hljs-string">&#x27;role_name&#x27;</span>: <span class="hljs-string">&#x27;roleA&#x27;</span>,
-#    <span class="hljs-string">&#x27;privilege&#x27;</span>: <span class="hljs-string">&#x27;SelectUser&#x27;</span>,
-#    <span class="hljs-string">&#x27;grantor_name&#x27;</span>: <span class="hljs-string">&#x27;root&#x27;</span>}]}
-<button class="copy-code-btn"></button></code></pre>
-<h2 id="5-Grant-a-role-to-a-user" class="common-anchor-header">5. Grant a role to a user<button data-href="#5-Grant-a-role-to-a-user" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h2><p>Grant the role to a user so that this user can inherit all the privileges of the role.</p>
-<pre><code translate="no" class="language-python"><span class="hljs-comment"># grant a role to a user</span>
-
-client.grant_role(
-    user_name=<span class="hljs-string">&#x27;user_1&#x27;</span>,
-    role_name=<span class="hljs-string">&#x27;roleA&#x27;</span>
-)
-<button class="copy-code-btn"></button></code></pre>
-<p>After granting the role, verify that it has been granted:</p>
-<pre><code translate="no" class="language-python">client.describe_user(
-    user_name=<span class="hljs-string">&#x27;user_1&#x27;</span>
-)
-
-# output:
-# {<span class="hljs-string">&#x27;user_name&#x27;</span>: <span class="hljs-string">&#x27;user_1&#x27;</span>, <span class="hljs-string">&#x27;roles&#x27;</span>: (<span class="hljs-string">&#x27;roleA&#x27;</span>)}
-<button class="copy-code-btn"></button></code></pre>
-<h2 id="6-Revoke-privileges" class="common-anchor-header">6. Revoke privileges<button data-href="#6-Revoke-privileges" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h2><div class="alert caution">
-<p>Exercise caution when performing the following operations because these operations are irreversible.</p>
-</div>
-<ul>
-<li>Remove a privilege from a role. If you revoke a privilege that has not been granted to the role, an error will occur.</li>
-</ul>
-<pre><code translate="no" class="language-python">client.revoke_privilege(
-    role_name=<span class="hljs-string">&#x27;roleA&#x27;</span>,
-    object_type=<span class="hljs-string">&#x27;User&#x27;</span>,  <span class="hljs-comment"># value here can be Global, Collection or User, object type also depends on the API defined in privilegeName</span>
-    object_name=<span class="hljs-string">&#x27;user_1&#x27;</span>,  <span class="hljs-comment"># value here can be * or a specific user name if object type is &#x27;User&#x27;</span>
-    privilege=<span class="hljs-string">&#x27;SelectUser&#x27;</span>
-)
-<button class="copy-code-btn"></button></code></pre>
-<ul>
-<li>Remove a user from a role. If you revoke a role that has not been granted to the user, an error will occur.</li>
-</ul>
-<pre><code translate="no" class="language-python">client.<span class="hljs-title function_">revoke_role</span>(
-    user_name=<span class="hljs-string">&#x27;user_1&#x27;</span>,
-    role_name=<span class="hljs-string">&#x27;roleA&#x27;</span>
-)
-<button class="copy-code-btn"></button></code></pre>
-<ul>
-<li>Drop a role.</li>
-</ul>
-<pre><code translate="no" class="language-python">client.<span class="hljs-title function_">drop_role</span>(role_name=<span class="hljs-string">&#x27;roleA&#x27;</span>)
-<button class="copy-code-btn"></button></code></pre>
-<ul>
-<li>Drop a user.</li>
-</ul>
-<pre><code translate="no" class="language-python">client.<span class="hljs-title function_">drop_user</span>(user_name=<span class="hljs-string">&#x27;user_1&#x27;</span>)
-<button class="copy-code-btn"></button></code></pre>
-<h2 id="Whats-next" class="common-anchor-header">What’s next<button data-href="#Whats-next" class="anchor-icon" translate="no">
-      <svg translate="no"
-        aria-hidden="true"
-        focusable="false"
-        height="20"
-        version="1.1"
-        viewBox="0 0 16 16"
-        width="16"
-      >
-        <path
-          fill="#0092E4"
-          fill-rule="evenodd"
-          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
-        ></path>
-      </svg>
-    </button></h2><ul>
-<li><p>Learn how to manage <a href="/docs/authenticate.md">user authentication</a>.</p></li>
-<li><p>Learn how to enable <a href="/docs/tls.md">TLS proxy</a> in Milvus.</p></li>
-</ul>
+    </button></h2><p>The achieve access control via RBAC, you need to follow the steps below:​</p>
+<ol>
+<li><p><a href="/docs/users_and_roles.md#Create-a-user">Create a user</a>: In addition to the default user <code translate="no">root</code> in Milvus, you can create new users and set passwords to protect data security.​</p></li>
+<li><p><a href="/docs/users_and_roles.md#Create-a-role">Create a role</a>: You can create customized roles based on your needs. The specific capabilities of a role are determined by its privileges.​</p></li>
+<li><p><a href="/docs/privilege_group.md">Create a privilege group</a>: Combine multiple privileges into one privilege group to streamline the process of granting privileges to a role.​</p></li>
+<li><p><a href="/docs/grant_privileges.md">Grant privileges or privilege groups to a role</a>: Define the capabilities of a role be granting privileges or privilege groups to this role. ​</p></li>
+<li><p><a href="/docs/grant_roles.md">Grant roles to users</a>: Grant roles with certain privileges to users so that users can have the privileges of a role. A single role can be granted to multiple users.​</p></li>
+</ol>

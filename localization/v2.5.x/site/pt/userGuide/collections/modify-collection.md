@@ -142,12 +142,16 @@ curl --request POST \​
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Se uma coleção precisar de ser abandonada durante um período específico, considere definir o seu Time-To-Live (TTL) em segundos. Uma vez que o TTL se esgota, o Milvus apaga as entidades da coleção e abandona a coleção. A exclusão é assíncrona, indicando que as pesquisas e consultas ainda são possíveis antes que a exclusão seja concluída.</p>
+    </button></h2><p>Se uma coleção precisar de ser abandonada durante um período específico, considere definir o seu Time-To-Live (TTL) em segundos. Uma vez que o TTL se esgota, Milvus apaga as entidades da coleção. A eliminação é assíncrona, indicando que as pesquisas e consultas ainda são possíveis antes de a eliminação estar concluída.</p>
 <p>O trecho de código a seguir demonstra como alterar o TTL de uma coleção.</p>
 <div class="multipleCode">
  <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#go">Go</a> <a href="#curl">cURL</a></div>
-<pre><code translate="no" class="language-python"><span class="hljs-comment"># Currently not available for Python</span>
+<pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> <span class="hljs-title class_">MilvusClient</span>
 
+client.<span class="hljs-title function_">alter_collection_properties</span>(
+  collection_name=<span class="hljs-string">&quot;collection_name&quot;</span>,
+  properties = {<span class="hljs-string">&quot;collection.ttl.seconds&quot;</span>: <span class="hljs-number">500</span>}
+)
 <button class="copy-code-btn"></button></code></pre>
 <pre><code translate="no" class="language-java"><span class="hljs-keyword">import</span> io.milvus.v2.service.collection.request.AlterCollectionReq;​
 <span class="hljs-keyword">import</span> java.util.HashMap;​

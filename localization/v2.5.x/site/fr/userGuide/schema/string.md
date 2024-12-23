@@ -5,7 +5,7 @@ summary: >-
   Dans Milvus, VARCHAR est le type de données utilisé pour stocker des données
   de type chaîne, adapté au stockage de chaînes de longueur variable. Il permet
   de stocker des chaînes de caractères à un ou plusieurs octets, avec une
-  longueur maximale de 60 535 caractères. Lorsque vous définissez un champ
+  longueur maximale de 65 535 caractères. Lorsque vous définissez un champ
   VARCHAR, vous devez également spécifier le paramètre de longueur maximale
   max_length. Le type de chaîne VARCHAR offre un moyen efficace et flexible de
   stocker et de gérer des données textuelles, ce qui le rend idéal pour les
@@ -26,7 +26,7 @@ summary: >-
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Dans Milvus, <code translate="no">VARCHAR</code> est le type de données utilisé pour stocker des données de type chaîne de caractères, adaptées au stockage de chaînes de caractères de longueur variable. Il permet de stocker des chaînes de caractères à un ou plusieurs octets, avec une longueur maximale de 60 535 caractères. Lorsque vous définissez un champ <code translate="no">VARCHAR</code>, vous devez également spécifier le paramètre de longueur maximale <code translate="no">max_length</code>. Le type de chaîne <code translate="no">VARCHAR</code> offre un moyen efficace et flexible de stocker et de gérer des données textuelles, ce qui le rend idéal pour les applications qui gèrent des chaînes de différentes longueurs.</p>
+    </button></h1><p>Dans Milvus, <code translate="no">VARCHAR</code> est le type de données utilisé pour stocker des données de type chaîne, adaptées au stockage de chaînes de longueur variable. Il permet de stocker des chaînes de caractères à un ou plusieurs octets, avec une longueur maximale de 65 535 caractères. Lorsque vous définissez un champ <code translate="no">VARCHAR</code>, vous devez également spécifier le paramètre de longueur maximale <code translate="no">max_length</code>. Le type de chaîne <code translate="no">VARCHAR</code> offre un moyen efficace et flexible de stocker et de gérer des données textuelles, ce qui le rend idéal pour les applications qui gèrent des chaînes de différentes longueurs.</p>
 <h2 id="Add-VARCHAR-field​" class="common-anchor-header">Ajout d'un champ VARCHAR<button data-href="#Add-VARCHAR-field​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

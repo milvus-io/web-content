@@ -67,7 +67,7 @@ $ kubectl create -f https://github.com/jaegertracing/jaeger-operator/releases/do
 NAME              DESIRED   CURRENT   UP-TO-DATE   AVAILABLE   AGE
 jaeger-<span class="hljs-keyword">operator</span>   <span class="hljs-number">1</span>         <span class="hljs-number">1</span>         <span class="hljs-number">1</span>            <span class="hljs-number">1</span>           <span class="hljs-number">48</span>s
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="2-Deploy-Jager" class="common-anchor-header">2. Despliegue de Jager</h3><p>La forma más sencilla de crear una instancia de Jaeger es crear un archivo YAML como el siguiente ejemplo. Esto instalará la estrategia AllInOne predeterminada, que despliega la imagen <strong>todo en uno</strong> (que combina <strong>jaeger-agent</strong>, <strong>jaeger-collector</strong>, <strong>jaeger-query</strong> y Jaeger UI) en un único pod, utilizando <strong>almacenamiento en memoria</strong> de forma predeterminada.</p>
+<h3 id="2-Deploy-Jaeger" class="common-anchor-header">2. Despliegue de Jaeger</h3><p>La forma más sencilla de crear una instancia de Jaeger es crear un archivo YAML como el siguiente ejemplo. Esto instalará la estrategia AllInOne predeterminada, que despliega la imagen <strong>todo en uno</strong> (que combina <strong>jaeger-agent</strong>, <strong>jaeger-collector</strong>, <strong>jaeger-query</strong> y Jaeger UI) en un único pod, utilizando <strong>almacenamiento en memoria</strong> de forma predeterminada.</p>
 <p>Si desea almacenar trazas durante mucho tiempo, consulte <a href="https://www.jaegertracing.io/docs/1.62/operator/#production-strategy">production-strategy</a>.</p>
 <pre><code translate="no" class="language-yaml">apiVersion: jaegertracing.io/v1
 kind: Jaeger
@@ -136,7 +136,7 @@ $ helm upgrade --install -f values.yaml my-release milvus/milvus
 NAME           CLASS    HOSTS   ADDRESS         PORTS   AGE
 jaeger-query   &lt;none&gt;   *       <span class="hljs-number">192.168</span><span class="hljs-number">.122</span><span class="hljs-number">.34</span>  <span class="hljs-number">80</span>      <span class="hljs-number">14</span>m
 <button class="copy-code-btn"></button></code></pre>
-<p>Una vez que la entrada está disponible, puede acceder a la interfaz de usuario de Jaeger navegando a <code translate="no">http://${ADDRESS}</code>. Reemplace <code translate="no">${ADDRESS}</code> con la dirección IP real del ingress.</p>
+<p>Una vez que el ingress está disponible, puede acceder a la UI de Jaeger navegando a <code translate="no">http://${ADDRESS}</code>. Reemplace <code translate="no">${ADDRESS}</code> con la dirección IP real del ingress.</p>
 <p>La siguiente captura de pantalla muestra la UI de Jaeger con las trazas de Milvus durante una operación de búsqueda y una operación de recogida de carga:</p>
 <p>
   

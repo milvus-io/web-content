@@ -2,7 +2,7 @@
 id: config_jaeger_tracing.md
 title: 配置跟踪
 related_key: 'Jaeger, Milvus, Trace'
-summary: 本指南提供了如何配置 Jaeger 以收集 Milvus 跟踪信息的说明。
+summary: 本指南介绍了如何配置 Jaeger 为 Milvus 收集跟踪信息。
 ---
 <h1 id="Configure-Trace" class="common-anchor-header">配置跟踪<button data-href="#Configure-Trace" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -37,7 +37,7 @@ summary: 本指南提供了如何配置 Jaeger 以收集 Milvus 跟踪信息的�
       </svg>
     </button></h2><ul>
 <li>已安装必要的工具，包括<a href="https://helm.sh/docs/intro/install/">Helm</a>和<a href="https://kubernetes.io/docs/tasks/tools/">Kubectl</a>。</li>
-<li>必须安装 Cert-manager 1.6.1 或更高版本。安装指南请<a href="https://cert-manager.io/v1.6-docs/installation/#default-static-install">点击此处</a>。</li>
+<li>必须安装 Cert-manager 1.6.1 或更高版本。请<a href="https://cert-manager.io/v1.6-docs/installation/#default-static-install">点击此处</a>查看安装指南。</li>
 </ul>
 <h2 id="Deply-Jaeger" class="common-anchor-header">部署 Jaeger<button data-href="#Deply-Jaeger" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -65,8 +65,8 @@ $ kubectl create -f https://github.com/jaegertracing/jaeger-operator/releases/do
 NAME              DESIRED   CURRENT   UP-TO-DATE   AVAILABLE   AGE
 jaeger-<span class="hljs-keyword">operator</span>   <span class="hljs-number">1</span>         <span class="hljs-number">1</span>         <span class="hljs-number">1</span>            <span class="hljs-number">1</span>           <span class="hljs-number">48</span>s
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="2-Deploy-Jager" class="common-anchor-header">2.部署 Jager</h3><p>创建 Jaeger 实例的最简单方法是创建一个 YAML 文件，如下所示。这将安装默认的 AllInOne 策略，在单个 pod 中部署<strong>一体化</strong>镜像（结合了<strong>jaeger-agents</strong>、<strong>jaeger-collector</strong>、<strong>jaeger</strong> <strong>-query</strong> 和 Jaeger UI），默认使用<strong>内存存储</strong>。</p>
-<p>如果想长期存储跟踪信息，请参考<a href="https://www.jaegertracing.io/docs/1.62/operator/#production-strategy">生产策略</a>。</p>
+<h3 id="2-Deploy-Jaeger" class="common-anchor-header">2.部署 Jaeger</h3><p>创建 Jaeger 实例的最简单方法是创建类似下面示例的 YAML 文件。这将安装默认的 AllInOne 策略，在单个 pod 中部署<strong>一体化</strong>镜像（结合了<strong>jaeger-agents</strong>、<strong>jaeger-collector</strong>、<strong>jaeger</strong> <strong>-query</strong> 和 Jaeger UI），默认使用<strong>内存存储</strong>。</p>
+<p>如果你想长期存储跟踪信息，请参考<a href="https://www.jaegertracing.io/docs/1.62/operator/#production-strategy">生产策略</a>。</p>
 <pre><code translate="no" class="language-yaml">apiVersion: jaegertracing.io/v1
 kind: Jaeger
 metadata:
