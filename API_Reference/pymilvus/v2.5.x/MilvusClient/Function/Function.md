@@ -1,6 +1,6 @@
 # Function
 
-A `Function` instance for generating vector embeddings from user-provided raw text data in Milvus.
+A `Function` instance for generating vector embeddings from user-provided raw data in Milvus.
 
 ```python
 class pymilvus.Function
@@ -27,7 +27,7 @@ Function(
 
     **[REQUIRED]**
 
-      The name of the function. This identifier is used to reference the function within queries and collections.
+    The name of the function. This identifier is used to reference the function within queries and collections.
 
 - `function_type` (*FunctionType*) -
 
