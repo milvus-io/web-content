@@ -49,6 +49,7 @@ title: Release Notes
 <p>For details, refer to <a href="/docs/analyzer-overview.md">Analyzer Overview</a> and <a href="/docs/full-text-search.md">Full Text Search</a>.</p>
 <h4 id="Cluster-Management-WebUI-Beta" class="common-anchor-header">Cluster Management WebUI (Beta)</h4><p>To better support massive data and rich features, Milvus’s sophisticated design includes various dependencies, numerous node roles, complex data structures, and more. These aspects can pose challenges for usage and maintenance.</p>
 <p>Milvus 2.5 introduces a built-in Cluster Management WebUI, reducing system maintenance difficulty by visualizing Milvus’s complex runtime environment information. This includes details of databases and collections, segments, channels, dependencies, node health status, task information, slow queries, and more.</p>
+<p>For details, refer to <a href="/docs/milvus-webui.md">Milvus WebUI</a>.</p>
 <h4 id="Text-Match" class="common-anchor-header">Text Match</h4><p>Milvus 2.5 leverages analyzers and indexing from <a href="https://github.com/quickwit-oss/tantivy">Tantivy</a> for text preprocessing and index building, supporting precise natural language matching of text data based on specific terms. This feature is primarily used for filtered search to satisfy specific conditions and can incorporate scalar filtering to refine query results, allowing similarity searches within vectors that meet scalar criteria.</p>
 <p>For details, refer to <a href="/docs/analyzer-overview.md">Analyzer Overview</a> and <a href="/docs/keyword-match.md">Text Match</a>.</p>
 <h4 id="Bitmap-Index" class="common-anchor-header">Bitmap Index</h4><p>A new scalar data index has been added to the Milvus family. The BitMap index uses an array of bits, equal in length to the number of rows, to represent the existence of values and accelerate searches.</p>
@@ -66,6 +67,7 @@ title: Release Notes
 <h4 id="IPv6-Support" class="common-anchor-header">IPv6 Support</h4><p>Milvus now supports IPv6, allowing for expanded network connectivity and compatibility.</p>
 <h4 id="CSV-Bulk-Import" class="common-anchor-header">CSV Bulk Import</h4><p>In addition to JSON and Parquet formats, Milvus now supports direct bulk import of data in CSV format.</p>
 <h4 id="Expression-Templates-for-Query-Acceleration" class="common-anchor-header">Expression Templates for Query Acceleration</h4><p>Milvus now supports expression templates, improving expression parsing efficiency, particularly in scenarios with complex expressions.</p>
+<p>For details, refer to <a href="/docs/filtering-templating.md">Filter Templating</a>.</p>
 <h4 id="GroupBy-Enhancements" class="common-anchor-header">GroupBy Enhancements</h4><ul>
 <li><strong>Customizable Group Size</strong>: Added support for specifying the number of entries returned for each group.</li>
 <li><strong>Hybrid GroupBy Search</strong>: Supports hybrid GroupBy search based on multiple vector columns.</li>
