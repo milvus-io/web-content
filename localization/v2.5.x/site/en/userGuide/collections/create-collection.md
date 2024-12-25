@@ -533,7 +533,7 @@ curl --request POST \​
       </svg>
     </button></h2><p>You can set properties for the collection to create to make it fit into your service. The applicable properties are as follows.​</p>
 <h3 id="Set-Shard-Number​" class="common-anchor-header">Set Shard Number​</h3><p>Shards are horizontal slices of a collection. Each shard corresponds to a data input channel. Every collection has a shard by default. You can set the appropriate number of shards when creating a collection based on the expected throughput and the volume of the data to insert into the collection.​</p>
-<p>In common cases, consider increasing the shard number by one every time the expected throughput increases by 500 MB/s or the volume of data to insert increases by 100 GB. This suggestion does not prevent you from inserting data into the collection using the default shard number.​</p>
+<p>In common cases, consider increasing the shard number by one every time the expected throughput increases by 500 MB/s or the volume of data to insert increases by 100 GB. This suggestion is based on our own experience and may not completely fit in your application scenarios. You can tune this number to fit your own needs or just use the default value.</p>
 <p>The following code snippet demonstrates how to set the shard number when you create a collection.​</p>
 <div class="multipleCode">
   <a href="#python">Python </a>
