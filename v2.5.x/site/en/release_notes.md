@@ -34,6 +34,8 @@ To better support massive data and rich features, Milvus's sophisticated design 
 
 Milvus 2.5 introduces a built-in Cluster Management WebUI, reducing system maintenance difficulty by visualizing Milvus's complex runtime environment information. This includes details of databases and collections, segments, channels, dependencies, node health status, task information, slow queries, and more.
 
+For details, refer to [Milvus WebUI](milvus-webui.md).
+
 #### Text Match
 
 Milvus 2.5 leverages analyzers and indexing from [Tantivy](https://github.com/quickwit-oss/tantivy) for text preprocessing and index building, supporting precise natural language matching of text data based on specific terms. This feature is primarily used for filtered search to satisfy specific conditions and can incorporate scalar filtering to refine query results, allowing similarity searches within vectors that meet scalar criteria.
@@ -87,6 +89,8 @@ In addition to JSON and Parquet formats, Milvus now supports direct bulk import 
 #### Expression Templates for Query Acceleration
 
 Milvus now supports expression templates, improving expression parsing efficiency, particularly in scenarios with complex expressions.
+
+For details, refer to [Filter Templating](filtering-templating.md).
 
 #### GroupBy Enhancements
 
