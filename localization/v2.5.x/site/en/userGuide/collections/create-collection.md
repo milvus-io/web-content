@@ -414,7 +414,7 @@ curl --request POST \​
 
 <button class="copy-code-btn"></button></code></pre>
 <p>You can also create a collection without any index parameters and add them afterward. In this case, Milvus does not load the collection upon its creation. For details on how to create indexes for an existing collection, refer to <a href="/docs/index-vector-fields.md">​Index Explained</a>.​</p>
-<p>The following code snippet demonstrates how to create a collection without a collection, and the load status of the collection remains unloaded upon creation.​</p>
+<p>The following code snippet demonstrates how to create a collection without an index, and the load status of the collection remains unloaded upon creation.​</p>
 <div class="multipleCode">
   <a href="#python">Python </a>
   <a href="#java">Java</a>
