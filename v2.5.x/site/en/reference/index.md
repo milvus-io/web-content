@@ -39,7 +39,7 @@ Milvus supports various index types, which are categorized by the type of vector
 
 For 128-dimensional floating-point embeddings (vectors), the storage they take up is 128 * the size of float = 512 bytes. And the [distance metrics](metric.md) used for float-point embeddings are Euclidean distance (`L2`) and Inner product (`IP`).
 
-These types of indexes include `FLAT`, `IVF_FLAT`, `IVF_PQ`, `IVF_SQ8`, `HNSW`, and `SCANN` for CPU-based ANN searches.
+These types of indexes include `FLAT`, `IVF_FLAT`, `IVF_PQ`, `IVF_SQ8`, `HNSW`, `HNSW_SQ`, `HNSW_PQ`, `HNSW_PRQ`, and `SCANN` for CPU-based ANN searches.
 
 </div>
 
@@ -86,7 +86,7 @@ The types of indexes include `SPARSE_INVERTED_INDEX` and `SPARSE_WAND`.
   </tr>
   <tr>
     <td>IVF_FLAT</td>
-    <td>Quantization-based index</td>
+    <td>N/A</td>
     <td>
       <ul>
         <li>High-speed query</li>
@@ -99,7 +99,7 @@ The types of indexes include `SPARSE_INVERTED_INDEX` and `SPARSE_WAND`.
     <td>Quantization-based index</td>
     <td>
       <ul>
-        <li>High-speed query</li>
+        <li>Very high-speed query</li>
         <li>Limited memory resources</li>
         <li>Accepts minor compromise in recall rate</li>
       </ul>
@@ -110,9 +110,9 @@ The types of indexes include `SPARSE_INVERTED_INDEX` and `SPARSE_WAND`.
     <td>Quantization-based index</td>
     <td>
       <ul>
-        <li>Very high-speed query</li>
+        <li>High-speed query</li>
         <li>Limited memory resources</li>
-        <li>Accepts substantial compromise in recall rate</li>
+        <li>Accepts minor compromise in recall rate</li>
       </ul>
     </td>
   </tr>
@@ -124,6 +124,40 @@ The types of indexes include `SPARSE_INVERTED_INDEX` and `SPARSE_WAND`.
         <li>Very high-speed query</li>
         <li>Requires a recall rate as high as possible</li>
         <li>Large memory resources</li>
+      </ul>
+    </td>
+  </tr>
+  <tr>
+    <td>HNSW_SQ</td>
+    <td>Quantization-based index</td>
+    <td>
+      <ul>
+        <li>Very high-speed query</li>
+        <li>Limited memory resources</li>
+        <li>Accepts minor compromise in recall rate</li>
+      </ul>
+    </td>
+  </tr>
+    <tr>
+    <td>HNSW_PQ</td>
+    <td>Quantization-based index</td>
+    <td>
+      <ul>
+        <li>Medium speed query</li>
+        <li>Very limited memory resources</li>
+        <li>Accepts minor compromise in recall rate</li>
+      </ul>
+    </td>
+  </tr>
+    </tr>
+    <tr>
+    <td>HNSW_PRQ</td>
+    <td>Quantization-based index</td>
+    <td>
+      <ul>
+        <li>Medium speed query</li>
+        <li>Very limited memory resources</li>
+        <li>Accepts minor compromise in recall rate</li>
       </ul>
     </td>
   </tr>
@@ -351,16 +385,88 @@ In order to improve performance, HNSW limits the maximum degree of nodes on each
 
 - Index building parameters
 
-  | Parameter        | Description                | Range        |
-  | ---------------- | -------------------------- | ------------ |
-  | `M`              | M defines tha maximum number of outgoing connections in the graph. Higher M leads to higher accuracy/run_time at fixed ef/efConstruction.  | [2, 2048]    |
-  | `efConstruction` | ef_construction controls index search speed/build speed tradeoff. Increasing the efConstruction parameter may enhance index quality, but it also tends to lengthen the indexing time.              | [1, int_max] |
+  | Parameter        | Description                                                                                                                                                                           | Range        | Default Value |
+  |------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------------|---------------|
+  | `M`              | M defines tha maximum number of outgoing connections in the graph. Higher M leads to higher accuracy/run_time at fixed ef/efConstruction.                                             | [2, 2048]    | None          |
+  | `efConstruction` | ef_construction controls index search speed/build speed tradeoff. Increasing the efConstruction parameter may enhance index quality, but it also tends to lengthen the indexing time. | [1, int_max] | None          |
 
 - Search parameters
 
-  | Parameter | Description  | Range            |
-  | --------- | ------------ | ---------------- |
-  | `ef`      | Parameter controlling query time/accuracy trade-off. Higher `ef` leads to more accurate but slower search. | [`top_k`, int_max]     |
+  | Parameter | Description                                                                                                | Range              | Default Value |
+  |-----------|------------------------------------------------------------------------------------------------------------|--------------------|---------------|
+  | `ef`      | Parameter controlling query time/accuracy trade-off. Higher `ef` leads to more accurate but slower search. | [`top_k`, int_max] | None          |
+
+### HNSW_SQ
+
+Scalar Quantization (SQ) is a technique used to discretize floating-point data into a finite set of values based on their magnitude. For example, **SQ6** represents quantization into \(2^6 = 64\) discrete values, where each floating-point number is encoded using 6 bits. Similarly, **SQ8** quantizes the data into \(2^8 = 256\) discrete values, with each floating-point number represented by 8 bits. This quantization reduces the memory footprint while preserving the essential structure of the data for efficient processing.
+
+Combined with SQ, HNSW_SQ offers a controllable trade-off between index size and accuracy, while maintaining high query-per-second (QPS) performance. Compared to standard HNSW, it results in a modest increase in index construction time.
+
+- Index building parameters
+
+  | Parameter        | Description                                                                                                                                                                           | Range                       | Default Value |
+  |------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------|---------------|
+  | `M`              | M defines tha maximum number of outgoing connections in the graph. Higher M leads to higher accuracy/run_time at fixed ef/efConstruction.                                             | [2, 2048]                   | None          |
+  | `efConstruction` | ef_construction controls index search speed/build speed tradeoff. Increasing the efConstruction parameter may enhance index quality, but it also tends to lengthen the indexing time. | [1, int_max]                | None          |
+  | `sq_type`        | Scalar quantizer type.                                                                                                                                                                | `SQ6`,`SQ8`, `BF16`, `FP16` | `SQ8`         |
+
+- Search parameters
+
+  | Parameter     | Description                                                                                                | Range                                | Default Value |
+  |---------------|------------------------------------------------------------------------------------------------------------|--------------------------------------|---------------|
+  | `ef`          | Parameter controlling query time/accuracy trade-off. Higher `ef` leads to more accurate but slower search. | [`top_k`, int_max]                   | None          |
+  | `refine`      | Whether the refine is used during the train.                                                               | `true`, `false`                      | `false`       |
+  | `refine_k`    | The magnification factor of refine compared to *k*.                                                        | [1, *float_max*)                     | `1`           |
+  | `refine_type` | The data type of the refine index.                                                                         | `SQ6`, `SQ8`, `BF16`, `FP16`, `FP32` | None          |
+
+### HNSW_PQ
+
+The basic idea of PQ is to split the vector into `m` sub-vectors, each of which will find 2^{*nbits*} centroids based on kmeans, and each sub-vector will select the nearest centroid as its approximate sub-vector. Then we record all the centriods, so each subvector can be encoded as `nbits`, and a floating vector of length `dim` can be encoded as *m ⋅ nbits* bits.
+
+Combined with PQ, HNSW_PQ offers a controllable tradeoff between index size and accuracy, but it has a lower QPS value and a higher recall rate than HNSW_SQ for the same compression rate. Compared with HNSW_SQ, it takes longer to build the index.
+
+- Index building parameters
+
+  | Parameter        | Description                                                                                                                                                                           | Range        | Default Value |
+  |------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------------|---------------|
+  | `M`              | M defines tha maximum number of outgoing connections in the graph. Higher M leads to higher accuracy/run_time at fixed ef/efConstruction.                                             | [2, 2048]    | None          |
+  | `efConstruction` | ef_construction controls index search speed/build speed tradeoff. Increasing the efConstruction parameter may enhance index quality, but it also tends to lengthen the indexing time. | [1, int_max] | None          |
+  | `m`              | The number of sub-vector groups to split the vector into.                                                                                                                             | [1, 65536]   | 32            |
+  | `nbits`          | The number of bits into which each group of sub-vectors is quantized.                                                                                                                 | [1, 24]      | 8             |
+
+- Search parameters
+
+  | Parameter     | Description                                                                                                | Range                                | Default Value |
+  |---------------|------------------------------------------------------------------------------------------------------------|--------------------------------------|---------------|
+  | `ef`          | Parameter controlling query time/accuracy trade-off. Higher `ef` leads to more accurate but slower search. | [`top_k`, int_max]                   | None          |
+  | `refine`      | Whether the refine is used during the train.                                                               | `true`, `false`                      | `false`       |
+  | `refine_k`    | The magnification factor of refine compared to *k*.                                                        | [1, *float_max*)                     | `1`           |
+  | `refine_type` | The data type of the refine index.                                                                         | `SQ6`, `SQ8`, `BF16`, `FP16`, `FP32` | None          |
+
+### HNSW_PRQ
+
+PRQ is similar to PQ, and also divides the vector into `m` groups. Each sub-vector will be encoded as `nbits`. After completing a pq quantization, it will calculate the residual between the vector and the pq quantized vector, and apply pq quantization to the residual vector. A total of `nrq` complete pq quantizations will be performed, so a floating vector of length `dim` will be encoded as *m ⋅ nbits ⋅ nrq* bits.
+
+Combined with a Product Residual Quantizer (PRQ), HNSW_PRQ offers an even higher controllable tradeoff between index size and accuracy. It has almost equivalent QPS value and a higher recall rate than HNSW_PQ for the same compression rate. Compared with HNSW_PQ, the time to build the index may increase several times.
+
+- Index building parameters
+
+  | Parameter        | Description                                                                                                                                                                           | Range        | Default Value |
+  |------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------------|---------------|
+  | `M`              | M defines tha maximum number of outgoing connections in the graph. Higher M leads to higher accuracy/run_time at fixed ef/efConstruction.                                             | [2, 2048]    | None          |
+  | `efConstruction` | ef_construction controls index search speed/build speed tradeoff. Increasing the efConstruction parameter may enhance index quality, but it also tends to lengthen the indexing time. | [1, int_max] | None          |
+  | `m`              | The number of sub-vector groups to split the vector into.                                                                                                                             | [1, 65536]   | 32            |
+  | `nbits`          | The number of bits into which each group of sub-vectors is quantized.                                                                                                                 | [1, 24]      | 8             |
+  | `nrq`            | The number of residual subquantizers.                                                                                                                                                 | [1, 16]      | 2             |
+
+- Search parameters
+
+  | Parameter     | Description                                                                                                | Range                                | Default Value |
+  |---------------|------------------------------------------------------------------------------------------------------------|--------------------------------------|---------------|
+  | `ef`          | Parameter controlling query time/accuracy trade-off. Higher `ef` leads to more accurate but slower search. | [`top_k`, int_max]                   | None          |
+  | `refine`      | Whether the refine is used during the train.                                                               | `true`, `false`                      | `false`       |
+  | `refine_k`    | The magnification factor of refine compared to *k*.                                                        | [1, *float_max*)                     | `1`           |
+  | `refine_type` | The data type of the refine index.                                                                         | `SQ6`, `SQ8`, `BF16`, `FP16`, `FP32` | None          |
 
 </div>
 
