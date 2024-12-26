@@ -65,7 +65,7 @@ Currently, a vector field only supports one index type. Milvus automatically del
 </div>
 <div class="filter-floating">
 <h3 id="Indexes-for-floating-point-embeddings" class="common-anchor-header">Indexes for floating-point embeddings</h3><p>For 128-dimensional floating-point embeddings (vectors), the storage they take up is 128 * the size of float = 512 bytes. And the <a href="/docs/metric.md">distance metrics</a> used for float-point embeddings are Euclidean distance (<code translate="no">L2</code>) and Inner product (<code translate="no">IP</code>).</p>
-<p>These types of indexes include <code translate="no">FLAT</code>, <code translate="no">IVF_FLAT</code>, <code translate="no">IVF_PQ</code>, <code translate="no">IVF_SQ8</code>, <code translate="no">HNSW</code>, and <code translate="no">SCANN</code> for CPU-based ANN searches.</p>
+<p>These types of indexes include <code translate="no">FLAT</code>, <code translate="no">IVF_FLAT</code>, <code translate="no">IVF_PQ</code>, <code translate="no">IVF_SQ8</code>, <code translate="no">HNSW</code>, <code translate="no">HNSW_SQ</code>, <code translate="no">HNSW_PQ</code>, <code translate="no">HNSW_PRQ</code>, and <code translate="no">SCANN</code> for CPU-based ANN searches.</p>
 </div>
 <div class="filter-binary">
 <h3 id="Indexes-for-binary-embeddings" class="common-anchor-header">Indexes for binary embeddings</h3><p>For 128-dimensional binary embeddings, the storage they take up is 128 / 8 = 16 bytes. And the distance metrics used for binary embeddings are <code translate="no">JACCARD</code> and <code translate="no">HAMMING</code>.</p>
@@ -97,7 +97,7 @@ Currently, a vector field only supports one index type. Milvus automatically del
   </tr>
   <tr>
     <td>IVF_FLAT</td>
-    <td>Quantization-based index</td>
+    <td>N/A</td>
     <td>
       <ul>
         <li>High-speed query</li>
@@ -110,7 +110,7 @@ Currently, a vector field only supports one index type. Milvus automatically del
     <td>Quantization-based index</td>
     <td>
       <ul>
-        <li>High-speed query</li>
+        <li>Very high-speed query</li>
         <li>Limited memory resources</li>
         <li>Accepts minor compromise in recall rate</li>
       </ul>
@@ -121,9 +121,9 @@ Currently, a vector field only supports one index type. Milvus automatically del
     <td>Quantization-based index</td>
     <td>
       <ul>
-        <li>Very high-speed query</li>
+        <li>High-speed query</li>
         <li>Limited memory resources</li>
-        <li>Accepts substantial compromise in recall rate</li>
+        <li>Accepts minor compromise in recall rate</li>
       </ul>
     </td>
   </tr>
@@ -135,6 +135,40 @@ Currently, a vector field only supports one index type. Milvus automatically del
         <li>Very high-speed query</li>
         <li>Requires a recall rate as high as possible</li>
         <li>Large memory resources</li>
+      </ul>
+    </td>
+  </tr>
+  <tr>
+    <td>HNSW_SQ</td>
+    <td>Quantization-based index</td>
+    <td>
+      <ul>
+        <li>Very high-speed query</li>
+        <li>Limited memory resources</li>
+        <li>Accepts minor compromise in recall rate</li>
+      </ul>
+    </td>
+  </tr>
+    <tr>
+    <td>HNSW_PQ</td>
+    <td>Quantization-based index</td>
+    <td>
+      <ul>
+        <li>Medium speed query</li>
+        <li>Very limited memory resources</li>
+        <li>Accepts minor compromise in recall rate</li>
+      </ul>
+    </td>
+  </tr>
+    </tr>
+    <tr>
+    <td>HNSW_PRQ</td>
+    <td>Quantization-based index</td>
+    <td>
+      <ul>
+        <li>Medium speed query</li>
+        <li>Very limited memory resources</li>
+        <li>Accepts minor compromise in recall rate</li>
       </ul>
     </td>
   </tr>
@@ -391,21 +425,111 @@ Currently, a vector field only supports one index type. Milvus automatically del
 <li><p>Index building parameters</p>
 <table>
 <thead>
-<tr><th>Parameter</th><th>Description</th><th>Range</th></tr>
+<tr><th>Parameter</th><th>Description</th><th>Range</th><th>Default Value</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">M</code></td><td>M defines tha maximum number of outgoing connections in the graph. Higher M leads to higher accuracy/run_time at fixed ef/efConstruction.</td><td>[2, 2048]</td></tr>
-<tr><td><code translate="no">efConstruction</code></td><td>ef_construction controls index search speed/build speed tradeoff. Increasing the efConstruction parameter may enhance index quality, but it also tends to lengthen the indexing time.</td><td>[1, int_max]</td></tr>
+<tr><td><code translate="no">M</code></td><td>M defines tha maximum number of outgoing connections in the graph. Higher M leads to higher accuracy/run_time at fixed ef/efConstruction.</td><td>[2, 2048]</td><td>None</td></tr>
+<tr><td><code translate="no">efConstruction</code></td><td>ef_construction controls index search speed/build speed tradeoff. Increasing the efConstruction parameter may enhance index quality, but it also tends to lengthen the indexing time.</td><td>[1, int_max]</td><td>None</td></tr>
 </tbody>
 </table>
 </li>
 <li><p>Search parameters</p>
 <table>
 <thead>
-<tr><th>Parameter</th><th>Description</th><th>Range</th></tr>
+<tr><th>Parameter</th><th>Description</th><th>Range</th><th>Default Value</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">ef</code></td><td>Parameter controlling query time/accuracy trade-off. Higher <code translate="no">ef</code> leads to more accurate but slower search.</td><td>[<code translate="no">top_k</code>, int_max]</td></tr>
+<tr><td><code translate="no">ef</code></td><td>Parameter controlling query time/accuracy trade-off. Higher <code translate="no">ef</code> leads to more accurate but slower search.</td><td>[<code translate="no">top_k</code>, int_max]</td><td>None</td></tr>
+</tbody>
+</table>
+</li>
+</ul>
+<h3 id="HNSWSQ" class="common-anchor-header">HNSW_SQ</h3><p>Scalar Quantization (SQ) is a technique used to discretize floating-point data into a finite set of values based on their magnitude. For example, <strong>SQ6</strong> represents quantization into (2^6 = 64) discrete values, where each floating-point number is encoded using 6 bits. Similarly, <strong>SQ8</strong> quantizes the data into (2^8 = 256) discrete values, with each floating-point number represented by 8 bits. This quantization reduces the memory footprint while preserving the essential structure of the data for efficient processing.</p>
+<p>Combined with SQ, HNSW_SQ offers a controllable trade-off between index size and accuracy, while maintaining high query-per-second (QPS) performance. Compared to standard HNSW, it results in a modest increase in index construction time.</p>
+<ul>
+<li><p>Index building parameters</p>
+<table>
+<thead>
+<tr><th>Parameter</th><th>Description</th><th>Range</th><th>Default Value</th></tr>
+</thead>
+<tbody>
+<tr><td><code translate="no">M</code></td><td>M defines tha maximum number of outgoing connections in the graph. Higher M leads to higher accuracy/run_time at fixed ef/efConstruction.</td><td>[2, 2048]</td><td>None</td></tr>
+<tr><td><code translate="no">efConstruction</code></td><td>ef_construction controls index search speed/build speed tradeoff. Increasing the efConstruction parameter may enhance index quality, but it also tends to lengthen the indexing time.</td><td>[1, int_max]</td><td>None</td></tr>
+<tr><td><code translate="no">sq_type</code></td><td>Scalar quantizer type.</td><td><code translate="no">SQ6</code>,<code translate="no">SQ8</code>, <code translate="no">BF16</code>, <code translate="no">FP16</code></td><td><code translate="no">SQ8</code></td></tr>
+</tbody>
+</table>
+</li>
+<li><p>Search parameters</p>
+<table>
+<thead>
+<tr><th>Parameter</th><th>Description</th><th>Range</th><th>Default Value</th></tr>
+</thead>
+<tbody>
+<tr><td><code translate="no">ef</code></td><td>Parameter controlling query time/accuracy trade-off. Higher <code translate="no">ef</code> leads to more accurate but slower search.</td><td>[<code translate="no">top_k</code>, int_max]</td><td>None</td></tr>
+<tr><td><code translate="no">refine</code></td><td>Whether the refine is used during the train.</td><td><code translate="no">true</code>, <code translate="no">false</code></td><td><code translate="no">false</code></td></tr>
+<tr><td><code translate="no">refine_k</code></td><td>The magnification factor of refine compared to <em>k</em>.</td><td>[1, <em>float_max</em>)</td><td><code translate="no">1</code></td></tr>
+<tr><td><code translate="no">refine_type</code></td><td>The data type of the refine index.</td><td><code translate="no">SQ6</code>, <code translate="no">SQ8</code>, <code translate="no">BF16</code>, <code translate="no">FP16</code>, <code translate="no">FP32</code></td><td>None</td></tr>
+</tbody>
+</table>
+</li>
+</ul>
+<h3 id="HNSWPQ" class="common-anchor-header">HNSW_PQ</h3><p>The basic idea of PQ is to split the vector into <code translate="no">m</code> sub-vectors, each of which will find 2^{<em>nbits</em>} centroids based on kmeans, and each sub-vector will select the nearest centroid as its approximate sub-vector. Then we record all the centriods, so each subvector can be encoded as <code translate="no">nbits</code>, and a floating vector of length <code translate="no">dim</code> can be encoded as <em>m ⋅ nbits</em> bits.</p>
+<p>Combined with PQ, HNSW_PQ offers a controllable tradeoff between index size and accuracy, but it has a lower QPS value and a higher recall rate than HNSW_SQ for the same compression rate. Compared with HNSW_SQ, it takes longer to build the index.</p>
+<ul>
+<li><p>Index building parameters</p>
+<table>
+<thead>
+<tr><th>Parameter</th><th>Description</th><th>Range</th><th>Default Value</th></tr>
+</thead>
+<tbody>
+<tr><td><code translate="no">M</code></td><td>M defines tha maximum number of outgoing connections in the graph. Higher M leads to higher accuracy/run_time at fixed ef/efConstruction.</td><td>[2, 2048]</td><td>None</td></tr>
+<tr><td><code translate="no">efConstruction</code></td><td>ef_construction controls index search speed/build speed tradeoff. Increasing the efConstruction parameter may enhance index quality, but it also tends to lengthen the indexing time.</td><td>[1, int_max]</td><td>None</td></tr>
+<tr><td><code translate="no">m</code></td><td>The number of sub-vector groups to split the vector into.</td><td>[1, 65536]</td><td>32</td></tr>
+<tr><td><code translate="no">nbits</code></td><td>The number of bits into which each group of sub-vectors is quantized.</td><td>[1, 24]</td><td>8</td></tr>
+</tbody>
+</table>
+</li>
+<li><p>Search parameters</p>
+<table>
+<thead>
+<tr><th>Parameter</th><th>Description</th><th>Range</th><th>Default Value</th></tr>
+</thead>
+<tbody>
+<tr><td><code translate="no">ef</code></td><td>Parameter controlling query time/accuracy trade-off. Higher <code translate="no">ef</code> leads to more accurate but slower search.</td><td>[<code translate="no">top_k</code>, int_max]</td><td>None</td></tr>
+<tr><td><code translate="no">refine</code></td><td>Whether the refine is used during the train.</td><td><code translate="no">true</code>, <code translate="no">false</code></td><td><code translate="no">false</code></td></tr>
+<tr><td><code translate="no">refine_k</code></td><td>The magnification factor of refine compared to <em>k</em>.</td><td>[1, <em>float_max</em>)</td><td><code translate="no">1</code></td></tr>
+<tr><td><code translate="no">refine_type</code></td><td>The data type of the refine index.</td><td><code translate="no">SQ6</code>, <code translate="no">SQ8</code>, <code translate="no">BF16</code>, <code translate="no">FP16</code>, <code translate="no">FP32</code></td><td>None</td></tr>
+</tbody>
+</table>
+</li>
+</ul>
+<h3 id="HNSWPRQ" class="common-anchor-header">HNSW_PRQ</h3><p>PRQ is similar to PQ, and also divides the vector into <code translate="no">m</code> groups. Each sub-vector will be encoded as <code translate="no">nbits</code>. After completing a pq quantization, it will calculate the residual between the vector and the pq quantized vector, and apply pq quantization to the residual vector. A total of <code translate="no">nrq</code> complete pq quantizations will be performed, so a floating vector of length <code translate="no">dim</code> will be encoded as <em>m ⋅ nbits ⋅ nrq</em> bits.</p>
+<p>Combined with a Product Residual Quantizer (PRQ), HNSW_PRQ offers an even higher controllable tradeoff between index size and accuracy. It has almost equivalent QPS value and a higher recall rate than HNSW_PQ for the same compression rate. Compared with HNSW_PQ, the time to build the index may increase several times.</p>
+<ul>
+<li><p>Index building parameters</p>
+<table>
+<thead>
+<tr><th>Parameter</th><th>Description</th><th>Range</th><th>Default Value</th></tr>
+</thead>
+<tbody>
+<tr><td><code translate="no">M</code></td><td>M defines tha maximum number of outgoing connections in the graph. Higher M leads to higher accuracy/run_time at fixed ef/efConstruction.</td><td>[2, 2048]</td><td>None</td></tr>
+<tr><td><code translate="no">efConstruction</code></td><td>ef_construction controls index search speed/build speed tradeoff. Increasing the efConstruction parameter may enhance index quality, but it also tends to lengthen the indexing time.</td><td>[1, int_max]</td><td>None</td></tr>
+<tr><td><code translate="no">m</code></td><td>The number of sub-vector groups to split the vector into.</td><td>[1, 65536]</td><td>32</td></tr>
+<tr><td><code translate="no">nbits</code></td><td>The number of bits into which each group of sub-vectors is quantized.</td><td>[1, 24]</td><td>8</td></tr>
+<tr><td><code translate="no">nrq</code></td><td>The number of residual subquantizers.</td><td>[1, 16]</td><td>2</td></tr>
+</tbody>
+</table>
+</li>
+<li><p>Search parameters</p>
+<table>
+<thead>
+<tr><th>Parameter</th><th>Description</th><th>Range</th><th>Default Value</th></tr>
+</thead>
+<tbody>
+<tr><td><code translate="no">ef</code></td><td>Parameter controlling query time/accuracy trade-off. Higher <code translate="no">ef</code> leads to more accurate but slower search.</td><td>[<code translate="no">top_k</code>, int_max]</td><td>None</td></tr>
+<tr><td><code translate="no">refine</code></td><td>Whether the refine is used during the train.</td><td><code translate="no">true</code>, <code translate="no">false</code></td><td><code translate="no">false</code></td></tr>
+<tr><td><code translate="no">refine_k</code></td><td>The magnification factor of refine compared to <em>k</em>.</td><td>[1, <em>float_max</em>)</td><td><code translate="no">1</code></td></tr>
+<tr><td><code translate="no">refine_type</code></td><td>The data type of the refine index.</td><td><code translate="no">SQ6</code>, <code translate="no">SQ8</code>, <code translate="no">BF16</code>, <code translate="no">FP16</code>, <code translate="no">FP32</code></td><td>None</td></tr>
 </tbody>
 </table>
 </li>
