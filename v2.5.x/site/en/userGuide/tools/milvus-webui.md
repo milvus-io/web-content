@@ -22,6 +22,14 @@ The following table compares the features of Milvus Web UI and Birdwatcher/Attu:
 | Dependencies | Milvus | Milvus / etcd | Milvus |
 | Primary Functionalities | Runtime environment, database/collection details, segments, channles, tasks, and slow query requests | Metadata inspection and Milvus API execution | Database management and operational tasks |
 
+You can access Milvus Web UI using the following URL:
+
+```
+http://localhost:9091/webui
+```
+
+## Features
+
 Milvus Web UI provides the following features:
 
 ![Milvus Web UI overview](../../../../assets/milvus-webui-overview.png)
@@ -81,6 +89,10 @@ On the Collections page, you can view the list of databases and collections curr
 - **Database**: View the list of databases currently in Milvus and their details.
 
 - **Collection**: View the list of collections in each database and their details.
+
+    You can click on a collection to view its details, including the number of fields, partitions, indexes, and other information in detail.   
+
+    ![Milvus Web UI Collection Details](../../../../assets/webui-collection-details.png)
 
 ## Query
 
