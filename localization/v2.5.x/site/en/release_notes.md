@@ -19,6 +19,46 @@ title: Release Notes
         ></path>
       </svg>
     </button></h1><p>Find out what’s new in Milvus! This page summarizes new features, improvements, known issues, and bug fixes in each release. You can find the release notes for each released version after v2.5.0 in this section. We suggest that you regularly visit this page to learn about updates.</p>
+<h2 id="v251" class="common-anchor-header">v2.5.1<button data-href="#v251" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>Release date: December 26, 2024</p>
+<table>
+<thead>
+<tr><th>Milvus version</th><th>Python SDK version</th><th>Node.js SDK version</th><th>Java SDK version</th></tr>
+</thead>
+<tbody>
+<tr><td>2.5.1</td><td>2.5.2</td><td>2.5.2</td><td>2.5.2</td></tr>
+</tbody>
+</table>
+<p>Milvus 2.5.1 focuses on a series of bug fixes addressing memory loading, RBAC listings, query node balancing, and sealed segment indexing, while also improving the Web UI and interceptors. We highly recommend upgrading to 2.5.1 for enhanced stability and reliability.</p>
+<h3 id="Improvement" class="common-anchor-header">Improvement</h3><ul>
+<li>Update web UI collection and query pages. (<a href="https://github.com/milvus-io/milvus/pull/38701">#38701</a>)</li>
+</ul>
+<h3 id="Bug-fixes" class="common-anchor-header">Bug fixes</h3><ul>
+<li>Fixed OOM issues by adding a memory factor to loading estimations. (<a href="https://github.com/milvus-io/milvus/pull/38722">#38722</a>)</li>
+<li>Fixed privilege group expansion when listing policies in RootCoord. (<a href="https://github.com/milvus-io/milvus/pull/38760">#38760</a>)</li>
+<li>Fixed issues with listing privilege groups and collections. (<a href="https://github.com/milvus-io/milvus/pull/38738">#38738</a>)</li>
+<li>Fixed the balancer to avoid repeatedly overloading the same query node. (<a href="https://github.com/milvus-io/milvus/pull/38724">#38724</a>)</li>
+<li>Fixed unexpected balance tasks triggered after QueryCoord restarts. (<a href="https://github.com/milvus-io/milvus/pull/38725">#38725</a>)</li>
+<li>Fixed load config updates not applying to loading collections. (<a href="https://github.com/milvus-io/milvus/pull/38737">#38737</a>)</li>
+<li>Fixed zero read count during data import. (<a href="https://github.com/milvus-io/milvus/pull/38695">#38695</a>)</li>
+<li>Fixed Unicode decoding for JSON keys in expressions. (<a href="https://github.com/milvus-io/milvus/pull/38653">#38653</a>)</li>
+<li>Fixed interceptor DB name for alterCollectionField in 2.5.  (<a href="https://github.com/milvus-io/milvus/pull/38663">#38663</a>)</li>
+<li>Fixed empty index parameters for sealed segments when using BM25 brute force search. (<a href="https://github.com/milvus-io/milvus/pull/38752">#38752</a>)</li>
+</ul>
 <h2 id="v250" class="common-anchor-header">v2.5.0<button data-href="#v250" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

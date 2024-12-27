@@ -61,7 +61,7 @@ title: Install Milvus Python SDK
 <div class="alert note">
 It is recommended to install a PyMilvus version that matches the version of the Milvus server you installed. For more information, see <a href="/docs/release_notes.md">Release Notes</a>.
 </div>
-<pre><code translate="no">$ python3 -m pip install pymilvus==2.5.1
+<pre><code translate="no">$ python3 -m pip install pymilvus==2.5.2
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Verify-installation" class="common-anchor-header">Verify installation<button data-href="#Verify-installation" class="anchor-icon" translate="no">
       <svg translate="no"
