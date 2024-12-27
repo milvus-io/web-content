@@ -12,7 +12,7 @@ Here you will learn about what Milvus is, and how to install, use, and deploy Mi
 <div class="doc-home-promotion-wrapper">
   <div class="promotion-content">
     <h2 class="promotion-title">Try Managed Milvus For Free!</h2>
-    <p class="promotion-desc">Try Zilliz Cloud for free! The easiest way to experience Milvus!</p>
+    <p class="promotion-desc">Zilliz Cloud is hassle-free, powered by Milvus and 10x faster.</p>
   </div>
   <div class="cta-wrapper">
     <a class="cta-global" href="https://cloud.zilliz.com/signup">Zilliz Cloud</a>
