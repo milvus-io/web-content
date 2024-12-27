@@ -7,6 +7,34 @@ title: Release Notes
 
 Find out what’s new in Milvus! This page summarizes new features, improvements, known issues, and bug fixes in each release. You can find the release notes for each released version after v2.4.0 in this section. We suggest that you regularly visit this page to learn about updates.
 
+## v2.4.19
+
+Release Date: December 26, 2024
+
+| Milvus version | Python SDK version | Java SDK version | Node.js SDK version |
+|----------------|--------------------|------------------|---------------------|
+| 2.4.19         | 2.4.13              | 2.4.9            | 2.4.9               |
+
+Milvus 2.4.19 focuses on fixing issues in RBAC, Balancer, and loading processes, while also introducing several performance enhancements in areas such as PartitionKey Deletion and hybrid searching. We highly recommend upgrading to this version for increased stability and reliability.
+
+### Improvements
+
+- Expression templates are introduced to accelerate hybrid searches. ([#38624](https://github.com/milvus-io/milvus/pull/38624))
+- Additional metrics are provided for improved deletion monitoring. ([#38746](https://github.com/milvus-io/milvus/pull/38746))
+- L0 file generation is restricted to specific partition for partitionKey deletion to reduce amplification. ([#38232](https://github.com/milvus-io/milvus/pull/38232))
+
+### Bug fixes
+
+- Fixed OOM issues by adding a memory factor to loading estimations. ([#38721](https://github.com/milvus-io/milvus/pull/38721))
+- Fixed privilege group expansion when listing policies in RootCoord. ([#38759](https://github.com/milvus-io/milvus/pull/38759))
+- Fixed access log retention, skipping empty log rotation. ([#38661](https://github.com/milvus-io/milvus/pull/38661))
+- Fixed the balancer to avoid repeatedly overloading the same query node. ([#38720](https://github.com/milvus-io/milvus/pull/38720))
+- Fixed issues with listing privilege groups and collections. ([#38698](https://github.com/milvus-io/milvus/pull/38698))
+- Fixed load config updates not applying to loading collections. ([#38596](https://github.com/milvus-io/milvus/pull/38596))
+- Fixed unexpected balance tasks triggered after QueryCoord restarts. ([#38714](https://github.com/milvus-io/milvus/pull/38714))
+- Fixed zero read count during data import. ([#38696](https://github.com/milvus-io/milvus/pull/38696))
+- Fixed Unicode decoding for JSON keys in expressions. ([#38652](https://github.com/milvus-io/milvus/pull/38652))
+
 ## v2.4.18
 
 Release Date: December 20, 2024

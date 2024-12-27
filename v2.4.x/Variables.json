@@ -1,10 +1,10 @@
 {
-  "milvus_release_version": "2.4.18",
-  "milvus_release_tag": "2.4.18",
+  "milvus_release_version": "2.4.19",
+  "milvus_release_tag": "2.4.19",
   "milvus_deb_name": "milvus_2.2.0-1_amd64",
   "milvus_rpm_name": "milvus-2.2.0-1.el7.x86_64",
   "milvus_python_sdk_version": "2.4.x",
-  "milvus_python_sdk_real_version": "2.4.9",
+  "milvus_python_sdk_real_version": "2.4.13",
   "milvus_node_sdk_version": "2.4.x",
   "milvus_node_sdk_real_version": "v2.4.9",
   "milvus_go_sdk_version": "2.3.x",
