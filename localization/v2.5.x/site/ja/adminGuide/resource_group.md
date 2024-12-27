@@ -70,8 +70,8 @@ title: リソースグループの管理
 <p><code translate="no">.requests.nodeNum &lt; nodeNumOfResourceGroup &lt; .limits.nodeNum.</code></p>
 <p>ただし、以下の場合を除く：</p>
 <ul>
-<li>Milvusクラスタ内のQueryNode数が不足している場合（<code translate="no">NumOfQueryNode &lt; sum(.requests.nodeNum)</code> ）、常に十分なQueryNode数を持たないリソースグループが存在します。</li>
-<li>MilvusクラスタのQueryNode数が過剰な場合、すなわち<code translate="no">NumOfQueryNode &gt; sum(.limits.nodeNum)</code> 、冗長なQueryNodeは常に<strong>__default_resource_groupに</strong>最初に配置されます。</li>
+<li>Milvusクラスタ内のQueryNode数が不足している場合(<code translate="no">NumOfQueryNode &lt; sum(.requests.nodeNum)</code>)、常に十分なQueryNode数を持たないリソースグループが存在します。</li>
+<li>MilvusクラスタのQueryNode数が過剰な場合、つまり<code translate="no">NumOfQueryNode &gt; sum(.limits.nodeNum)</code> 、冗長なQueryNodeは常に<strong>__default_resource_groupに</strong>最初に配置されます。</li>
 </ul>
 <p>もちろん、クラスタ内のQueryNode数が変更された場合、Milvusは最終的な条件を満たすように継続的に調整を試みます。そのため、最初にリソースグループの設定変更を適用し、その後QueryNodeのスケーリングを実行することができます。</p>
 <h2 id="Use-declarative-api-to-manage-resource-group" class="common-anchor-header">宣言型apiを使用してリソースグループを管理する<button data-href="#Use-declarative-api-to-manage-resource-group" class="anchor-icon" translate="no">
@@ -90,7 +90,7 @@ title: リソースグループの管理
         ></path>
       </svg>
     </button></h2><div class="alert note">
-<p>このページのコードサンプルはすべて PyMilvus 2.5.0 のものです。実行する前に PyMilvus をアップグレードしてください。</p>
+<p>このページのコードサンプルはすべて PyMilvus 2.5.2 のものです。実行する前に PyMilvus をアップグレードしてください。</p>
 </div>
 <ol>
 <li><p>リソースグループの作成</p>
@@ -268,7 +268,7 @@ _PENDING_NODES_RESOURCE_GROUP=<span class="hljs-string">&quot;__pending_nodes&qu
 
 init_cluster(<span class="hljs-number">1</span>)
 <button class="copy-code-btn"></button></code></pre>
-<p>上記のコード例を使用して、追加のQueryNodeを保持するために<strong>__pending_nodesという</strong>リソース・グループを作成します。また、<strong>rg</strong>1と<strong>rg2という</strong>2つのユーザー固有のリソース・グループを作成します。さらに、もう1つのリソース・グループが、<strong>__pending_nodesから</strong>不足または冗長なQueryNodesをリカバリすることを優先するようにします。</p></li>
+<p>上記のコード例を使用して、追加のQueryNodeを保持するために<strong>__pending_nodesという</strong>リソース・グループを作成します。また、<strong>rg</strong>1と<strong>rg2という</strong>2つのユーザー固有のリソース・グループを作成します。さらに、<strong>__pending_nodesから</strong>不足または冗長なQueryNodesをリカバリすることを、もう1つのリソース・グループが優先するようにします。</p></li>
 <li><p>クラスタのスケールアウト</p>
 <p>以下のスケーリング機能があると仮定します：</p>
 <pre><code translate="no" class="language-python">
@@ -296,7 +296,7 @@ scale_to(<span class="hljs-number">5</span>)
 <span class="hljs-comment"># rg1 has 3 nodes, rg2 has 1 node, __default_resource_group has 1 node.</span>
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>クラスタのスケールイン</p>
-<p>同様に、<strong>__pending_nodes</strong>リソースグループからQueryNodesを優先的に選択するスケーリングインルールを確立することができます。この情報は<code translate="no">describe_resource_group</code> API から取得できます。指定したリソースグループのスケールインという目標を達成する。</p>
+<p>同様に、<strong>__pending_nodes</strong>リソースグループからQueryNodesを優先的に選択するスケーリングイン・ルールを確立することができます。この情報は<code translate="no">describe_resource_group</code> API から取得できます。指定したリソースグループのスケールインという目標を達成する。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># scale rg1 from 3 nodes into 2 nodes</span>
 utility.update_resource_groups({
     <span class="hljs-string">&quot;rg1&quot;</span>: ResourceGroupConfig(

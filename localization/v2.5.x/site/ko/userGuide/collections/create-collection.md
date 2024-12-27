@@ -399,7 +399,7 @@ curl --request POST \​
 
 <button class="copy-code-btn"></button></code></pre>
 <p>인덱스 매개변수 없이 컬렉션을 생성한 후 나중에 추가할 수도 있습니다. 이 경우 Milvus는 컬렉션 생성 시 컬렉션을 로드하지 않습니다. 기존 컬렉션에 대한 인덱스를 만드는 방법에 대한 자세한 내용은 <a href="/docs/ko/index-vector-fields.md">인덱스 설명을</a> 참조하세요.</p>
-<p>다음 코드 조각은 컬렉션 없이 컬렉션을 생성하는 방법을 보여 주며, 생성 시 컬렉션의 로드 상태는 로드되지 않은 상태로 유지됩니다.</p>
+<p>다음 코드 조각은 인덱스 없이 컬렉션을 생성하는 방법을 보여 주며, 생성 시 컬렉션의 로드 상태는 로드되지 않은 상태로 유지됩니다.</p>
 <div class="multipleCode">
  <a href="#python">파이썬 </a> <a href="#java">자바</a> <a href="#javascript">Node.js</a> <a href="#go">Go</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># 3.6. Create a collection and index it separately​</span>
@@ -513,7 +513,7 @@ curl --request POST \​
       </svg>
     </button></h2><p>생성할 컬렉션의 속성을 설정하여 서비스에 적합하게 만들 수 있습니다. 적용 가능한 속성은 다음과 같습니다.</p>
 <h3 id="Set-Shard-Number​" class="common-anchor-header">샤드 번호 설정</h3><p>샤드는 컬렉션의 수평적 조각입니다. 각 샤드는 데이터 입력 채널에 해당합니다. 모든 컬렉션에는 기본적으로 샤드가 있습니다. 컬렉션을 만들 때 예상 처리량과 컬렉션에 삽입할 데이터의 양에 따라 적절한 샤드 수를 설정할 수 있습니다.</p>
-<p>일반적인 경우, 예상 처리량이 500MB/s 증가하거나 삽입할 데이터의 볼륨이 100GB 증가할 때마다 샤드 수를 하나씩 늘리는 것을 고려하세요. 이 제안은 기본 샤드 번호를 사용하여 컬렉션에 데이터를 삽입하는 것을 방해하지 않습니다.</p>
+<p>일반적인 경우, 예상 처리량이 500MB/s 증가하거나 삽입할 데이터의 양이 100GB 증가할 때마다 샤드 수를 하나씩 늘리는 것을 고려하세요. 이 제안은 저희의 경험을 바탕으로 한 것이며, 여러분의 애플리케이션 시나리오에 완전히 적합하지 않을 수도 있습니다. 필요에 맞게 이 수치를 조정하거나 기본값을 사용할 수 있습니다.</p>
 <p>다음 코드 스니펫은 컬렉션을 만들 때 샤드 번호를 설정하는 방법을 보여줍니다.</p>
 <div class="multipleCode">
  <a href="#python">파이썬 </a> <a href="#java">자바</a> <a href="#javascript">Node.js</a> <a href="#go">Go</a> <a href="#curl">cURL</a></div>
@@ -571,7 +571,7 @@ curl --request POST \​
 }&quot;</span>​
 
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Enable-mmap​" class="common-anchor-header">mmap 활성화</h3><p>Milvus는 기본적으로 모든 컬렉션에서 mmap을 사용하도록 설정하여 원시 필드 데이터를 완전히 로드하는 대신 메모리에 매핑할 수 있도록 합니다. 이렇게 하면 메모리 사용량이 줄어들고 수집 용량이 증가합니다. mmap에 대한 자세한 내용은 <a href="/docs/ko/mmap.md">mmap 사용을</a> 참조하세요.</p>
+<h3 id="Enable-mmap​" class="common-anchor-header">mmap 활성화</h3><p>Milvus는 기본적으로 모든 컬렉션에서 mmap을 사용하도록 설정하여 Milvus가 원시 필드 데이터를 완전히 로드하는 대신 메모리에 매핑할 수 있도록 합니다. 이렇게 하면 메모리 사용량이 줄어들고 수집 용량이 증가합니다. mmap에 대한 자세한 내용은 <a href="/docs/ko/mmap.md">mmap 사용을</a> 참조하세요.</p>
 <div class="multipleCode">
  <a href="#python">파이썬 </a> <a href="#java">자바</a> <a href="#javascript">Node.js</a> <a href="#go">Go</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># With mmap​</span>

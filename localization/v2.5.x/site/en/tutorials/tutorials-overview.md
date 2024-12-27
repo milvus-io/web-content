@@ -25,10 +25,19 @@ title: Tutorials Overview
 </thead>
 <tbody>
 <tr><td><a href="/docs/build-rag-with-milvus.md">Build RAG with Milvus</a></td><td>RAG</td><td>vector search</td></tr>
-<tr><td><a href="/docs/multimodal_rag_with_milvus.md">Multimodal RAG with Milvus</a></td><td>RAG</td><td>vector search, dynamic field</td></tr>
-<tr><td><a href="/docs/image_similarity_search.md">Image Search with Milvus</a></td><td>Semantic Search</td><td>vector search, dynamic field</td></tr>
+<tr><td><a href="/docs/how_to_enhance_your_rag.md">Advanced RAG</a></td><td>RAG</td><td>vector search</td></tr>
+<tr><td><a href="/docs/full_text_search_with_milvus.md">Full Text Search with Milvus</a></td><td>Quickstart</td><td>Full-Text Search</td></tr>
 <tr><td><a href="/docs/hybrid_search_with_milvus.md">Hybrid Search with Milvus</a></td><td>Hybrid Search</td><td>hybrid search, multi vector, dense embedding, sparse embedding</td></tr>
+<tr><td><a href="/docs/image_similarity_search.md">Image Search with Milvus</a></td><td>Semantic Search</td><td>vector search, dynamic field</td></tr>
+<tr><td><a href="/docs/multimodal_rag_with_milvus.md">Multimodal RAG with Milvus</a></td><td>RAG</td><td>vector search, dynamic field</td></tr>
 <tr><td><a href="/docs/multimodal_rag_with_milvus.md">Multimodal Search using Multi Vectors</a></td><td>Semantic Search</td><td>multi vector, hybrid search</td></tr>
+<tr><td><a href="/docs/graph_rag_with_milvus.md">Graph RAG with Milvus</a></td><td>RAG</td><td>graph search</td></tr>
+<tr><td><a href="/docs/contextual_retrieval_with_milvus.md">Contextual Retrieval with Milvus</a></td><td>Quickstart</td><td>vector search</td></tr>
+<tr><td><a href="/docs/hdbscan_clustering_with_milvus.md">HDBSCAN Clustering with Milvus</a></td><td>Quickstart</td><td>vector search</td></tr>
+<tr><td><a href="/docs/use_ColPali_with_milvus.md">Use ColPali for Multi-Modal Retrieval with Milvus</a></td><td>Quickstart</td><td>vector search</td></tr>
+<tr><td><a href="/docs/vector_visualization.md">Vector Visualization</a></td><td>Quickstart</td><td>vector search</td></tr>
+<tr><td><a href="/docs/movie_recommendation_with_milvus.md">Movie Recommendation with Milvus</a></td><td>Recommendation System</td><td>vector search</td></tr>
+<tr><td><a href="/docs/funnel_search_with_matryoshka.md">Funnel Search with Matryoshka Embeddings</a></td><td>Quickstart</td><td>vector search</td></tr>
 <tr><td><a href="/docs/question_answering_system.md">Question Answering System</a></td><td>Question Answering</td><td>vector search</td></tr>
 <tr><td><a href="/docs/recommendation_system.md">Recommender System</a></td><td>Recommendation System</td><td>vector search</td></tr>
 <tr><td><a href="/docs/video_similarity_search.md">Video Similarity Search</a></td><td>Semantic Search</td><td>vector search</td></tr>
@@ -37,13 +46,5 @@ title: Tutorials Overview
 <tr><td><a href="/docs/text_search_engine.md">Text Search Engine</a></td><td>Semantic Search</td><td>vector search</td></tr>
 <tr><td><a href="/docs/text_image_search.md">Search Image by Text</a></td><td>Semantic Search</td><td>vector search</td></tr>
 <tr><td><a href="/docs/image_deduplication_system.md">Image Deduplication</a></td><td>Deduplication</td><td>vector search</td></tr>
-<tr><td><a href="/docs/graph_rag_with_milvus.md">Graph RAG with Milvus</a></td><td>RAG</td><td>graph search</td></tr>
-<tr><td><a href="/docs/contextual_retrieval_with_milvus.md">Contextual Retrieval with Milvus</a></td><td>Quickstart</td><td>vector search</td></tr>
-<tr><td><a href="/docs/hdbscan_clustering_with_milvus.md">HDBSCAN Clustering with Milvus</a></td><td>Quickstart</td><td>vector search</td></tr>
-<tr><td><a href="/docs/use_ColPali_with_milvus.md">Use ColPali for Multi-Modal Retrieval with Milvus</a></td><td>Quickstart</td><td>vector search</td></tr>
-<tr><td><a href="/docs/vector_visualization.md">Vector Visualization</a></td><td>Quickstart</td><td>vector search</td></tr>
-<tr><td><a href="/docs/movie_recommendation_with_milvus.md">Movie Recommendation with Milvus</a></td><td>Recommendation System</td><td>vector search</td></tr>
-<tr><td><a href="/docs/funnel_search_with_matryoshka.md">Funnel Search with Matryoshka Embeddings</a></td><td>Quickstart</td><td>vector search</td></tr>
-<tr><td><a href="/docs/full_text_search_with_milvus.md">Full Text Search with Milvus</a></td><td>Quickstart</td><td>Full-Text Search</td></tr>
 </tbody>
 </table>

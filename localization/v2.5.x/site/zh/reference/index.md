@@ -61,10 +61,10 @@ title: 内存索引
  <a href="#floating">浮点嵌入</a> <a href="#binary">二进制嵌入</a> <a href="#sparse">稀疏嵌入</a></div>
 <div class="filter-floating">
 <h3 id="Indexes-for-floating-point-embeddings" class="common-anchor-header">浮点嵌入的索引</h3><p>对于 128 维浮点嵌入（向量），其占用的存储空间为 128 * float 的大小 = 512 字节。而用于浮点嵌入的<a href="/docs/zh/metric.md">距离度量</a>是欧氏距离（<code translate="no">L2</code> ）和内积（<code translate="no">IP</code> ）。</p>
-<p>这些类型的索引包括<code translate="no">FLAT</code>,<code translate="no">IVF_FLAT</code>,<code translate="no">IVF_PQ</code>,<code translate="no">IVF_SQ8</code>,<code translate="no">HNSW</code> 和<code translate="no">SCANN</code> ，用于基于 CPU 的 ANN 搜索。</p>
+<p>这些类型的索引包括<code translate="no">FLAT</code>,<code translate="no">IVF_FLAT</code>,<code translate="no">IVF_PQ</code>,<code translate="no">IVF_SQ8</code>,<code translate="no">HNSW</code>,<code translate="no">HNSW_SQ</code>,<code translate="no">HNSW_PQ</code>,<code translate="no">HNSW_PRQ</code> 和<code translate="no">SCANN</code> ，用于基于 CPU 的 ANN 搜索。</p>
 </div>
 <div class="filter-binary">
-<h3 id="Indexes-for-binary-embeddings" class="common-anchor-header">二进制嵌入的索引</h3><p>对于 128 维的二进制嵌入，其占用的存储空间为 128 / 8 = 16 字节。而用于二进制嵌入的距离度量是<code translate="no">JACCARD</code> 和<code translate="no">HAMMING</code> 。</p>
+<h3 id="Indexes-for-binary-embeddings" class="common-anchor-header">二进制嵌入索引</h3><p>对于 128 维的二进制嵌入，其占用的存储空间为 128 / 8 = 16 字节。而用于二进制嵌入的距离度量是<code translate="no">JACCARD</code> 和<code translate="no">HAMMING</code> 。</p>
 <p>这类索引包括<code translate="no">BIN_FLAT</code> 和<code translate="no">BIN_IVF_FLAT</code> 。</p>
 </div>
 <div class="filter-sparse">
@@ -93,7 +93,7 @@ title: 内存索引
   </tr>
   <tr>
     <td>IVF_FLAT</td>
-    <td>基于量化的索引</td>
+    <td>不适用</td>
     <td>
       <ul>
         <li>高速查询</li>
@@ -106,7 +106,7 @@ title: 内存索引
     <td>基于量化的索引</td>
     <td>
       <ul>
-        <li>高速查询</li>
+        <li>极高速查询</li>
         <li>内存资源有限</li>
         <li>可接受召回率略有下降</li>
       </ul>
@@ -117,9 +117,9 @@ title: 内存索引
     <td>基于量化的索引</td>
     <td>
       <ul>
-        <li>极高速查询</li>
+        <li>高速查询</li>
         <li>内存资源有限</li>
-        <li>可接受召回率大幅降低</li>
+        <li>可略微降低召回率</li>
       </ul>
     </td>
   </tr>
@@ -128,9 +128,43 @@ title: 内存索引
     <td>基于图形的索引</td>
     <td>
       <ul>
-        <li>非常高速的查询</li>
+        <li>极高速查询</li>
         <li>要求尽可能高的召回率</li>
         <li>内存资源大</li>
+      </ul>
+    </td>
+  </tr>
+  <tr>
+    <td>HNSW_SQ</td>
+    <td>基于量化的索引</td>
+    <td>
+      <ul>
+        <li>非常高速的查询</li>
+        <li>内存资源有限</li>
+        <li>可略微降低召回率</li>
+      </ul>
+    </td>
+  </tr>
+    <tr>
+    <td>HNSW_PQ</td>
+    <td>基于量化的索引</td>
+    <td>
+      <ul>
+        <li>中速查询</li>
+        <li>内存资源非常有限</li>
+        <li>在召回率方面略有妥协</li>
+      </ul>
+    </td>
+  </tr>
+    </tr>
+    <tr>
+    <td>HNSW_PRQ</td>
+    <td>基于量化的索引</td>
+    <td>
+      <ul>
+        <li>中速查询</li>
+        <li>内存资源非常有限</li>
+        <li>召回率略有下降</li>
       </ul>
     </td>
   </tr>
@@ -223,8 +257,8 @@ title: 内存索引
 </table>
 </li>
 </ul>
-<h3 id="IVFFLAT" class="common-anchor-header">IVF_FLAT</h3><p>IVF_FLAT 将向量数据划分为<code translate="no">nlist</code> 个聚类单元，然后比较目标输入向量与每个聚类中心之间的距离。根据系统设置查询的簇数 (<code translate="no">nprobe</code>)，相似性搜索结果仅根据目标输入与最相似簇中向量的比较结果返回--大大缩短了查询时间。</p>
-<p>通过调整<code translate="no">nprobe</code> ，可以在特定情况下找到准确性和速度之间的理想平衡。<a href="https://zilliz.com/blog/Accelerating-Similarity-Search-on-Really-Big-Data-with-Vector-Indexing">IVF_FLAT 性能测试</a>的结果表明，随着目标输入向量数 (<code translate="no">nq</code>) 和搜索簇数 (<code translate="no">nprobe</code>) 的增加，查询时间也会急剧增加。</p>
+<h3 id="IVFFLAT" class="common-anchor-header">IVF_FLAT</h3><p>IVF_FLAT 将向量数据划分为<code translate="no">nlist</code> 个聚类单元，然后比较目标输入向量与每个聚类中心之间的距离。根据系统设置查询的簇数 (<code translate="no">nprobe</code>)，相似性搜索结果将仅根据目标输入与最相似簇中向量的比较结果返回--大大缩短了查询时间。</p>
+<p>通过调整<code translate="no">nprobe</code> ，可以在特定情况下找到准确性和速度之间的理想平衡。<a href="https://zilliz.com/blog/Accelerating-Similarity-Search-on-Really-Big-Data-with-Vector-Indexing">IVF_FLAT 性能测试</a>结果表明，随着目标输入向量数 (<code translate="no">nq</code>) 和要搜索的簇数 (<code translate="no">nprobe</code>) 的增加，查询时间也会急剧增加。</p>
 <p>IVF_FLAT 是最基本的 IVF 索引，每个单元中存储的编码数据与原始数据一致。</p>
 <ul>
 <li><p>索引构建参数</p>
@@ -262,7 +296,7 @@ title: 内存索引
 </ul></li>
 </ul>
 <h3 id="IVFSQ8" class="common-anchor-header">IVF_SQ8</h3><p>IVF_FLAT 不进行任何压缩，因此它生成的索引文件大小与原始的非索引向量数据大致相同。例如，如果原始的 1B SIFT 数据集为 476 GB，那么其 IVF_FLAT 索引文件就会稍小一些（~470 GB）。将所有索引文件加载到内存中将消耗 470 GB 的存储空间。</p>
-<p>当磁盘、CPU 或 GPU 内存资源有限时，IVF_SQ8 是比 IVF_FLAT 更好的选择。这种索引类型可以通过执行标量量化（SQ）将每个 FLOAT（4 字节）转换为 UINT8（1 字节）。这将减少 70-75% 的磁盘、CPU 和 GPU 内存消耗。对于 1B SIFT 数据集，IVF_SQ8 索引文件仅需 140 GB 的存储空间。</p>
+<p>当磁盘、CPU 或 GPU 内存资源有限时，IVF_SQ8 是比 IVF_FLAT 更好的选择。这种索引类型可以通过执行标量量化（SQ）将每个 FLOAT（4 字节）转换为 UINT8（1 字节）。这样可以减少 70-75% 的磁盘、CPU 和 GPU 内存消耗。对于 1B SIFT 数据集，IVF_SQ8 索引文件仅需 140 GB 的存储空间。</p>
 <ul>
 <li><p>索引构建参数</p>
 <table>
@@ -387,30 +421,120 @@ title: 内存索引
 <li><p>索引建立参数</p>
 <table>
 <thead>
-<tr><th>参数</th><th>说明</th><th>范围</th></tr>
+<tr><th>参数</th><th>说明</th><th>范围</th><th>默认值</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">M</code></td><td>M 定义图中传出连接的最大数量。在固定 ef/efConstruction 条件下，M 越大，精度/运行时间越长。</td><td>[2, 2048]</td></tr>
-<tr><td><code translate="no">efConstruction</code></td><td>ef_construction控制索引搜索速度/构建速度的权衡。增加 efConstruction 参数可能会提高索引质量，但也会延长索引编制时间。</td><td>[1，int_max］</td></tr>
+<tr><td><code translate="no">M</code></td><td>M 定义图形中传出连接的最大数量。在固定 ef/efConstruction 条件下，M 越大，精度/运行时间越长。</td><td>[2, 2048]</td><td>无</td></tr>
+<tr><td><code translate="no">efConstruction</code></td><td>ef_construction控制索引搜索速度/构建速度的权衡。增加 efConstruction 参数可能会提高索引质量，但也会延长索引编制时间。</td><td>[1,int_max]（最大值</td><td>无</td></tr>
 </tbody>
 </table>
 </li>
 <li><p>搜索参数</p>
 <table>
 <thead>
-<tr><th>参数</th><th>说明</th><th>范围</th></tr>
+<tr><th>参数</th><th>说明</th><th>范围</th><th>默认值</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">ef</code></td><td>控制查询时间/准确度权衡的参数。<code translate="no">ef</code> 越高，搜索越准确，但速度越慢。</td><td>[<code translate="no">top_k</code>, int_max]</td></tr>
+<tr><td><code translate="no">ef</code></td><td>控制查询时间/准确性权衡的参数。<code translate="no">ef</code> 越高，搜索越准确，但速度越慢。</td><td>[<code translate="no">top_k</code>, int_max]</td><td>无</td></tr>
+</tbody>
+</table>
+</li>
+</ul>
+<h3 id="HNSWSQ" class="common-anchor-header">HNSW_SQ</h3><p>标量量化（SQ）是一种技术，用于根据浮点数据的大小将其离散化为一组有限的值。例如，<strong>SQ6</strong>表示量化为 (2^6 = 64) 个离散值，其中每个浮点数使用 6 位编码。同样，<strong>SQ8</strong>将数据量化为 (2^8 = 256) 个离散值，每个浮点数用 8 位表示。这种量化方法既减少了内存占用，又保留了数据的基本结构，从而提高了处理效率。</p>
+<p>结合 SQ，HNSW_SQ 可以在索引大小和精确度之间进行可控的权衡，同时保持较高的每秒查询次数（QPS）性能。与标准 HNSW 相比，它只会适度增加索引构建时间。</p>
+<ul>
+<li><p>索引构建参数</p>
+<table>
+<thead>
+<tr><th>参数</th><th>说明</th><th>范围</th><th>默认值</th></tr>
+</thead>
+<tbody>
+<tr><td><code translate="no">M</code></td><td>M 定义图形中传出连接的最大数量。在固定 ef/efConstruction 条件下，M 越大，精度/运行时间越长。</td><td>[2, 2048]</td><td>无</td></tr>
+<tr><td><code translate="no">efConstruction</code></td><td>ef_construction控制索引搜索速度/构建速度的权衡。增加 efConstruction 参数可能会提高索引质量，但也会延长索引编制时间。</td><td>[1,int_max]（最大值</td><td>无</td></tr>
+<tr><td><code translate="no">sq_type</code></td><td>标量量化器类型。</td><td><code translate="no">SQ6</code>,<code translate="no">SQ8</code>,<code translate="no">BF16</code> 、<code translate="no">FP16</code></td><td><code translate="no">SQ8</code></td></tr>
+</tbody>
+</table>
+</li>
+<li><p>搜索参数</p>
+<table>
+<thead>
+<tr><th>参数</th><th>说明</th><th>范围</th><th>默认值</th></tr>
+</thead>
+<tbody>
+<tr><td><code translate="no">ef</code></td><td>控制查询时间/准确性权衡的参数。<code translate="no">ef</code> 越高，搜索越准确，但速度越慢。</td><td>[<code translate="no">top_k</code>, int_max]</td><td>无</td></tr>
+<tr><td><code translate="no">refine</code></td><td>是否在列车运行过程中使用细化。</td><td><code translate="no">true</code>,<code translate="no">false</code></td><td><code translate="no">false</code></td></tr>
+<tr><td><code translate="no">refine_k</code></td><td>refine 相对于<em>k</em> 的放大系数。</td><td>[1,<em>float_max</em>)</td><td><code translate="no">1</code></td></tr>
+<tr><td><code translate="no">refine_type</code></td><td>细化索引的数据类型。</td><td><code translate="no">SQ6</code>,<code translate="no">SQ8</code>,<code translate="no">BF16</code>,<code translate="no">FP16</code> 、<code translate="no">FP32</code></td><td>无</td></tr>
+</tbody>
+</table>
+</li>
+</ul>
+<h3 id="HNSWPQ" class="common-anchor-header">HNSW_PQ</h3><p>PQ 的基本思想是将向量分割成<code translate="no">m</code> 个子向量，每个子向量将根据 kmeans 找到<em>2^{nbits}</em> 个中心点，每个子向量将选择最近的中心点作为其近似子向量。然后我们记录所有的中心点，因此每个子向量可以编码为<code translate="no">nbits</code> ，长度为<code translate="no">dim</code> 的浮动向量可以编码为<em>m ⋅ nbits</em>位。</p>
+<p>与 PQ 相结合，HNSW_PQ 可以在索引大小和准确性之间进行可控的权衡，但在相同的压缩率下，它的 QPS 值和召回率都比 HNSW_SQ 低。与 HNSW_SQ 相比，它建立索引的时间更长。</p>
+<ul>
+<li><p>索引建立参数</p>
+<table>
+<thead>
+<tr><th>参数</th><th>说明</th><th>范围</th><th>默认值</th></tr>
+</thead>
+<tbody>
+<tr><td><code translate="no">M</code></td><td>M 定义图形中传出连接的最大数量。在固定 ef/efConstruction 条件下，M 越大，精度/运行时间越长。</td><td>[2, 2048]</td><td>无</td></tr>
+<tr><td><code translate="no">efConstruction</code></td><td>ef_construction控制索引搜索速度/构建速度的权衡。增加 efConstruction 参数可能会提高索引质量，但也会延长索引编制时间。</td><td>[1,int_max]（最大值</td><td>无</td></tr>
+<tr><td><code translate="no">m</code></td><td>将向量分割成的子向量组的个数。</td><td>[1, 65536]</td><td>32</td></tr>
+<tr><td><code translate="no">nbits</code></td><td>每个子向量组量化成的比特数。</td><td>[1, 24]</td><td>8</td></tr>
+</tbody>
+</table>
+</li>
+<li><p>搜索参数</p>
+<table>
+<thead>
+<tr><th>参数</th><th>说明</th><th>范围</th><th>默认值</th></tr>
+</thead>
+<tbody>
+<tr><td><code translate="no">ef</code></td><td>控制查询时间/准确性权衡的参数。<code translate="no">ef</code> 越高，搜索越准确，但速度越慢。</td><td>[<code translate="no">top_k</code>, int_max]</td><td>无</td></tr>
+<tr><td><code translate="no">refine</code></td><td>是否在列车运行过程中使用细化。</td><td><code translate="no">true</code>,<code translate="no">false</code></td><td><code translate="no">false</code></td></tr>
+<tr><td><code translate="no">refine_k</code></td><td>refine 相对于<em>k</em> 的放大系数。</td><td>[1,<em>float_max</em>)</td><td><code translate="no">1</code></td></tr>
+<tr><td><code translate="no">refine_type</code></td><td>细化索引的数据类型。</td><td><code translate="no">SQ6</code>,<code translate="no">SQ8</code>,<code translate="no">BF16</code>,<code translate="no">FP16</code> 、<code translate="no">FP32</code></td><td>无</td></tr>
+</tbody>
+</table>
+</li>
+</ul>
+<h3 id="HNSWPRQ" class="common-anchor-header">HNSW_PRQ</h3><p>PRQ 与 PQ 类似，也是将向量分为<code translate="no">m</code> 组。每个子向量将被编码为<code translate="no">nbits</code> 。完成 pq 量化后，它会计算向量与 pq 量化向量之间的残差，并对残差向量应用 pq 量化。总共将进行<code translate="no">nrq</code> 次完整的 pq 量化，因此长度为<code translate="no">dim</code> 的浮动向量将被编码为<em>m ⋅ nbits ⋅ nrq</em>bits。</p>
+<p>HNSW_PRQ 与乘积残差量化器（PRQ）相结合，在索引大小和精确度之间提供了更高的可控权衡。与 HNSW_PQ 相比，在相同的压缩率下，HNSW_PRQ 的 QPS 值和召回率几乎相同。与 HNSW_PQ 相比，建立索引的时间可能会增加数倍。</p>
+<ul>
+<li><p>索引建立参数</p>
+<table>
+<thead>
+<tr><th>参数</th><th>说明</th><th>范围</th><th>默认值</th></tr>
+</thead>
+<tbody>
+<tr><td><code translate="no">M</code></td><td>M 定义图形中传出连接的最大数量。在固定 ef/efConstruction 条件下，M 越大，精度/运行时间越长。</td><td>[2, 2048]</td><td>无</td></tr>
+<tr><td><code translate="no">efConstruction</code></td><td>ef_construction控制索引搜索速度/构建速度的权衡。增加 efConstruction 参数可能会提高索引质量，但也会延长索引编制时间。</td><td>[1,int_max]（最大值</td><td>无</td></tr>
+<tr><td><code translate="no">m</code></td><td>将向量分割成的子向量组的个数。</td><td>[1, 65536]</td><td>32</td></tr>
+<tr><td><code translate="no">nbits</code></td><td>每个子向量组量化成的比特数。</td><td>[1, 24]</td><td>8</td></tr>
+<tr><td><code translate="no">nrq</code></td><td>剩余子量化器的个数。</td><td>[1, 16]</td><td>2</td></tr>
+</tbody>
+</table>
+</li>
+<li><p>搜索参数</p>
+<table>
+<thead>
+<tr><th>参数</th><th>说明</th><th>范围</th><th>默认值</th></tr>
+</thead>
+<tbody>
+<tr><td><code translate="no">ef</code></td><td>控制查询时间/准确性权衡的参数。<code translate="no">ef</code> 越高，搜索越准确，但速度越慢。</td><td>[<code translate="no">top_k</code>, int_max]</td><td>无</td></tr>
+<tr><td><code translate="no">refine</code></td><td>是否在列车运行过程中使用细化。</td><td><code translate="no">true</code>,<code translate="no">false</code></td><td><code translate="no">false</code></td></tr>
+<tr><td><code translate="no">refine_k</code></td><td>refine 相对于<em>k</em> 的放大系数。</td><td>[1,<em>float_max</em>)</td><td><code translate="no">1</code></td></tr>
+<tr><td><code translate="no">refine_type</code></td><td>细化索引的数据类型。</td><td><code translate="no">SQ6</code>,<code translate="no">SQ8</code>,<code translate="no">BF16</code>,<code translate="no">FP16</code> 、<code translate="no">FP32</code></td><td>无</td></tr>
 </tbody>
 </table>
 </li>
 </ul>
 </div>
 <div class="filter-binary">
-<h3 id="BINFLAT" class="common-anchor-header">BIN_FLAT</h3><p>该索引与 FLAT 完全相同，但只能用于二进制 Embeddings。</p>
-<p>对于需要完美精确度且依赖于相对较小（百万级别）数据集的向量相似性搜索应用，BIN_FLAT 索引是一个不错的选择。BIN_FLAT 不压缩向量，是唯一能保证精确搜索结果的索引。BIN_FLAT 的结果还可以作为其他召回率低于 100% 的索引所产生结果的比较点。</p>
-<p>BIN_FLAT 之所以准确，是因为它采用了穷举搜索方法，这意味着每次查询都要将目标输入与数据集中的向量进行比较。这使得 BIN_FLAT 成为我们列表中速度最慢的索引，而且不适合查询海量向量数据。Milvus 中的 BIN_FLAT 索引没有参数，使用它不需要数据训练或额外存储。</p>
+<h3 id="BINFLAT" class="common-anchor-header">BIN_FLAT</h3><p>该索引与 FLAT 完全相同，只是只能用于二进制嵌入。</p>
+<p>对于要求完美精确度并依赖于相对较小（百万量级）数据集的向量相似性搜索应用，BIN_FLAT 索引是一个不错的选择。BIN_FLAT 不压缩向量，是唯一能保证精确搜索结果的索引。BIN_FLAT 的结果还可以作为其他召回率低于 100% 的索引所产生结果的比较点。</p>
+<p>BIN_FLAT 之所以准确，是因为它采用了穷举搜索方法，这意味着每次查询都要将目标输入与数据集中的向量进行比较。这使得 BIN_FLAT 成为我们列表中速度最慢的索引，不适合查询海量向量数据。Milvus 中的 BIN_FLAT 索引没有参数，使用它不需要数据训练或额外存储。</p>
 <ul>
 <li><p>搜索参数</p>
 <table>

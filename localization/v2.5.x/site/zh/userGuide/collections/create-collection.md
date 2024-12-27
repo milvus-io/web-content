@@ -204,9 +204,9 @@ schema := entity.NewSchema().WithDynamicFieldEnabled(<span class="hljs-literal">
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>在特定字段上创建索引可加快对该字段的搜索。索引记录了 Collections 中实体的顺序。如下面的代码片段所示，你可以使用<code translate="no">metric_type</code> 和<code translate="no">index_type</code> 为 Milvus 选择适当的方式来为字段建立索引，并测量向量嵌入之间的相似性。</p>
+    </button></h2><p>在特定字段上创建索引可加快对该字段的搜索。索引记录了 Collections 中实体的顺序。如下面的代码片段所示，你可以使用<code translate="no">metric_type</code> 和<code translate="no">index_type</code> 来为 Milvus 选择适当的方式为字段建立索引，并测量向量嵌入之间的相似性。</p>
 <p>在 Milvus 中，您可以使用<code translate="no">AUTOINDEX</code> 作为所有向量场的索引类型，并根据需要使用<code translate="no">COSINE</code> 、<code translate="no">L2</code> 和<code translate="no">IP</code> 中的一种作为度量类型。</p>
-<p>如上述代码片段所示，您需要为向量场同时设置索引类型和度量类型，而只需为标量场设置索引类型。向量字段必须设置索引，建议在筛选条件中经常使用的标量字段上创建索引。</p>
+<p>如上述代码片段所示，您需要为向量场同时设置索引类型和度量类型，而标量场只需设置索引类型。向量字段必须设置索引，建议在筛选条件中经常使用的标量字段上创建索引。</p>
 <p>有关详情，请参阅<a href="/docs/zh/index-vector-fields.md">索引</a>。</p>
 <div class="multipleCode">
  <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#go">Go</a> <a href="#curl">cURL</a></div>
@@ -399,7 +399,7 @@ curl --request POST \​
 
 <button class="copy-code-btn"></button></code></pre>
 <p>您也可以创建不带任何索引参数的 Collections，然后再添加索引参数。在这种情况下，Milvus 不会在创建时加载 Collection。有关如何为现有 Collections 创建索引的详情，请参阅<a href="/docs/zh/index-vector-fields.md">Index Explained</a>。</p>
-<p>下面的代码片段演示了如何在没有集合的情况下创建一个 Collection，创建时 Collection 的加载状态仍为未加载。</p>
+<p>下面的代码片段演示了如何创建一个不带索引的 Collection，创建时 Collection 的加载状态仍为未加载。</p>
 <div class="multipleCode">
  <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#go">Go</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># 3.6. Create a collection and index it separately​</span>
@@ -495,7 +495,7 @@ curl --request POST \​
 }&quot;</span>​
 
 <button class="copy-code-btn"></button></code></pre>
-<p>Milvus 还为您提供了即时创建 Collections 的方法。详情请参阅<a href="/docs/zh/create-collection-instantly.md">即时创建 Collection</a>。</p>
+<p>Milvus 还为你提供了即时创建 Collections 的方法。详情请参阅<a href="/docs/zh/create-collection-instantly.md">即时创建 Collection</a>。</p>
 <h2 id="Set-Collection-Properties​" class="common-anchor-header">设置 Collections 属性<button data-href="#Set-Collection-Properties​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -513,8 +513,8 @@ curl --request POST \​
       </svg>
     </button></h2><p>您可以为要创建的 Collection 设置属性，使其适合您的服务。适用的属性如下。</p>
 <h3 id="Set-Shard-Number​" class="common-anchor-header">设置分片编号</h3><p>分区是 Collections 的水平切片。每个分区对应一个数据输入通道。每个 Collections 默认都有一个分区。创建 Collections 时，可根据预期吞吐量和要插入 Collections 的数据量设置适当的分片数。</p>
-<p>在常见情况下，每当预期吞吐量增加 500 MB/秒或要插入的数据量增加 100 GB 时，可考虑将分区数量增加一个。这一建议并不妨碍你使用默认的分片编号将数据插入 Collections。</p>
-<p>下面的代码片段演示了如何在创建 Collection 时设置分片编号。</p>
+<p>在常见情况下，每当预期吞吐量增加 500 MB/秒或要插入的数据量增加 100 GB 时，就可以考虑增加一个分区。这一建议是基于我们自己的经验，可能并不完全适合您的应用场景。你可以根据自己的需要调整这个数字，或者直接使用默认值。</p>
+<p>下面的代码片段演示了如何在创建 Collections 时设置分片数。</p>
 <div class="multipleCode">
  <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#go">Go</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-meta"># With shard number​</span>
@@ -619,7 +619,7 @@ fmt.Println(<span class="hljs-string">&quot;collection created&quot;</span>)​
 <pre><code translate="no" class="language-curl"><span class="hljs-comment"># Currently not available for REST</span>
 
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Set-Collection-TTL​" class="common-anchor-header">设置 Collections TTL</h3><p>如果需要在一段特定时间内丢弃某个 Collections，可以考虑以秒为单位设置其 "存活时间"（TTL）。一旦 TTL 超时，Milvus 就会删除集合中的实体并丢弃集合。删除是异步的，这表明在删除完成之前，搜索和查询仍然可以进行。</p>
+<h3 id="Set-Collection-TTL​" class="common-anchor-header">设置 Collections TTL</h3><p>如果需要在特定时间内丢弃某个 Collections，可以考虑以秒为单位设置其生存时间（TTL）。一旦 TTL 超时，Milvus 就会删除集合中的实体并丢弃集合。删除是异步的，这表明在删除完成之前，搜索和查询仍然可以进行。</p>
 <p>以下代码片段将 TTL 设置为一天（86400 秒）。建议至少将 TTL 设置为几天。</p>
 <div class="multipleCode">
  <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#go">Go</a> <a href="#curl">cURL</a></div>

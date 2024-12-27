@@ -51,7 +51,25 @@ title: Milvus WebUI
 <tr><td>Fonctionnalités principales</td><td>Environnement d'exécution, détails de la base de données/collection, segments, canaux, tâches et demandes de requêtes lentes</td><td>Inspection des métadonnées et exécution de l'API Milvus</td><td>Gestion de la base de données et tâches opérationnelles</td></tr>
 </tbody>
 </table>
-<p>L'interface Web Milvus offre les fonctionnalités suivantes :</p>
+<p>Vous pouvez accéder à l'interface Web Milvus à l'aide de l'URL suivante :</p>
+<pre><code translate="no">http://localhost:9091/webui
+<button class="copy-code-btn"></button></code></pre>
+<h2 id="Features" class="common-anchor-header">Fonctionnalités<button data-href="#Features" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>L'interface Web Milvus offre les fonctionnalités suivantes :</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/milvus-webui-overview.png" alt="Milvus Web UI overview" class="doc-image" id="milvus-web-ui-overview" />
@@ -122,7 +140,12 @@ title: Milvus WebUI
    </span> <span class="img-wrapper"> <span>Collections de l'interface Web de Milvus</span> </span></p>
 <ul>
 <li><p><strong>Base de données</strong>: Afficher la liste des bases de données actuellement dans Milvus et leurs détails.</p></li>
-<li><p><strong>Collection</strong>: Voir la liste des collections dans chaque base de données et leurs détails.</p></li>
+<li><p><strong>Collection</strong>: Affiche la liste des collections de chaque base de données et leurs détails.</p>
+<p>Vous pouvez cliquer sur une collection pour afficher ses détails, y compris le nombre de champs, les partitions, les index et d'autres informations en détail.</p>
+<p>
+  
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/webui-collection-details.png" alt="Milvus Web UI Collection Details" class="doc-image" id="milvus-web-ui-collection-details" />
+   </span> <span class="img-wrapper"> <span>Détails de la collection de l'interface Web Milvus</span> </span></p></li>
 </ul>
 <h2 id="Query" class="common-anchor-header">Requête<button data-href="#Query" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -142,12 +165,12 @@ title: Milvus WebUI
     </button></h2><p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/webui-query.png" alt="Milvus Web UI Query Page" class="doc-image" id="milvus-web-ui-query-page" />
-   </span> <span class="img-wrapper"> <span>Page de requête de l'interface Web de Milvus</span> </span></p>
+   </span> <span class="img-wrapper"> <span>Page de requête de l'interface Web Milvus</span> </span></p>
 <ul>
 <li><p><strong>Segments</strong>: Affiche la liste des segments et leurs détails, y compris l'ID du segment, la collection correspondante, l'état, la taille, etc.</p>
 <p>Dans la colonne <strong>De</strong>, vous pouvez trouver la source du segment. Les indicateurs de sources possibles sont les suivants</p>
 <ul>
-<li><p><strong>QN</strong>: Query node (nœud de requête)</p></li>
+<li><p><strong>QN</strong>: nœud de requête</p></li>
 <li><p><strong>CT</strong>: cible actuelle dans QueryCoord</p></li>
 <li><p><strong>NT</strong>: Prochaine cible dans QueryCoord</p></li>
 <li><p><strong>DIST</strong>: Distribution dans QueryCoord</p></li>
@@ -209,7 +232,7 @@ title: Milvus WebUI
 <li><p><strong>Tâches</strong>: Affiche la liste des tâches en cours d'exécution dans Milvus, y compris le type de tâche, l'état et les actions.</p>
 <ul>
 <li><p><strong>Tâches QueryCoord</strong>: Affiche toutes les tâches du planificateur QueryCoord, y compris les vérificateurs d'équilibre, d'index/segment/canal/chef de file au cours des 15 dernières minutes.</p></li>
-<li><p><strong>Tâches de compactage</strong>: Afficher toutes les tâches de compactage des coordinateurs de données au cours des 15 dernières minutes.</p></li>
+<li><p><strong>Tâches de compactage</strong>: Voir toutes les tâches de compactage des coordinateurs de données au cours des 15 dernières minutes.</p></li>
 <li><p><strong>Tâches de construction d'index</strong>: Voir toutes les tâches de construction d'index des coordinateurs de données au cours des 30 dernières minutes.</p></li>
 <li><p><strong>Tâches d'importation</strong>: Voir toutes les tâches d'importation effectuées par les coordinateurs de données au cours des 30 dernières minutes.</p></li>
 <li><p><strong>Tâches de synchronisation des données</strong>: Afficher toutes les tâches de synchronisation des données effectuées par les nœuds de données au cours des 15 dernières minutes.</p></li>
@@ -233,7 +256,7 @@ title: Milvus WebUI
     </button></h2><p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/webui-slow-requests.png" alt="Milvus Web UI Slow Requests Page" class="doc-image" id="milvus-web-ui-slow-requests-page" />
-   </span> <span class="img-wrapper"> <span>Page des demandes lentes de l'interface Web Milvus</span> </span></p>
+   </span> <span class="img-wrapper"> <span>Page des requêtes lentes de l'interface Web Milvus</span> </span></p>
 <ul>
 <li><strong>Requêtes lentes</strong>: Une demande lente est une recherche ou une requête dont le temps de latence est supérieur à la valeur de <code translate="no">proxy.slowQuerySpanInSeconds</code> spécifiée dans la configuration. La liste des requêtes lentes affiche toutes les requêtes lentes des 15 dernières minutes.</li>
 </ul>

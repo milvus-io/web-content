@@ -702,70 +702,39 @@
             "children": []
           },
           {
-            "label": "Filtering",
-            "id": "filtering",
-            "order": 6,
-            "children": [
-              {
-                "label": "Filtering Explained",
-                "id": "boolean.md",
-                "order": 0,
-                "children": []
-              },
-              {
-                "label": "Basic Operators",
-                "id": "basic-operators.md",
-                "order": 1,
-                "children": []
-              },
-              {
-                "label": "Filtering Templating",
-                "id": "filtering-templating.md",
-                "order": 2,
-                "children": []
-              },
-              {
-                "label": "JSON Operators",
-                "id": "json-operators.md",
-                "order": 3,
-                "children": []
-              },
-              {
-                "label": "Array Operators",
-                "id": "array-operators.md",
-                "order": 4,
-                "children": []
-              }
-            ]
-          },
-          {
             "label": "Full Text Search",
             "id": "full-text-search.md",
-            "order": 7,
+            "order": 6,
             "children": []
           },
           {
             "label": "Text Match",
             "id": "keyword-match.md",
-            "order": 8,
+            "order": 7,
             "children": []
           },
           {
             "label": "Search Iterators",
             "id": "with-iterators.md",
-            "order": 9,
+            "order": 8,
             "children": []
           },
           {
             "label": "Use Partition Key",
             "id": "use-partition-key.md",
-            "order": 10,
+            "order": 9,
+            "children": []
+          },
+          {
+            "label": "Metadata Filtering",
+            "id": "boolean.md",
+            "order": 14,
             "children": []
           },
           {
             "label": "Reranking",
             "id": "reranking.md",
-            "order": 11,
+            "order": 15,
             "children": []
           }
         ]
@@ -1395,48 +1364,17 @@
             "children": []
           },
           {
-            "label": "RBAC",
-            "id": "rbac",
+            "label": "Users, Privileges, and Roles",
+            "id": "users_and_roles.md",
+            "order": 10,
+            "children": []
+          },
+          {
+            "label": "Enable RBAC",
+            "id": "rbac.md",
             "order": 1,
             "isMenu": true,
-            "children": [
-              {
-                "label": "RBAC Explained",
-                "id": "rbac.md",
-                "order": 0,
-                "children": []
-              },
-              {
-                "label": "Create Users & Roles",
-                "id": "users_and_roles.md",
-                "order": 1,
-                "children": []
-              },
-              {
-                "label": "Create Privilege Group",
-                "id": "privilege_group.md",
-                "order": 2,
-                "children": []
-              },
-              {
-                "label": "Grant Privileges",
-                "id": "grant_privileges.md",
-                "order": 3,
-                "children": []
-              },
-              {
-                "label": "Grant Roles",
-                "id": "grant_roles.md",
-                "order": 4,
-                "children": []
-              },
-              {
-                "label": "Drop Users & Roles",
-                "id": "drop_users_roles.md",
-                "order": 5,
-                "children": []
-              }
-            ]
+            "children": []
           },
           {
             "label": "Encryption in Transit",
@@ -1574,12 +1512,6 @@
             "children": []
           }
         ]
-      },
-      {
-        "label": "Milvus WebUI",
-        "id": "milvus-webui.md",
-        "order": 6,
-        "children": []
       },
       {
         "label": "Milvus Sizing Tool",
@@ -2008,69 +1940,75 @@
         "children": []
       },
       {
-        "label": "Image Search with Milvus",
-        "id": "image_similarity_search.md",
+        "label": "Advanced RAG",
+        "id": "how_to_enhance_your_rag.md",
         "order": 2,
-        "children": []
-      },
-      {
-        "label": "Hybrid Search with Milvus",
-        "id": "hybrid_search_with_milvus.md",
-        "order": 3,
-        "children": []
-      },
-      {
-        "label": "Multimodal RAG",
-        "id": "multimodal_rag_with_milvus.md",
-        "order": 4,
-        "children": []
-      },
-      {
-        "label": "Graph RAG with Milvus",
-        "id": "graph_rag_with_milvus.md",
-        "order": 6,
-        "children": []
-      },
-      {
-        "label": "Contextual Retrieval",
-        "id": "contextual_retrieval_with_milvus.md",
-        "order": 5,
-        "children": []
-      },
-      {
-        "label": "HDBSCAN Clustering",
-        "id": "hdbscan_clustering_with_milvus.md",
-        "order": 6,
-        "children": []
-      },
-      {
-        "label": "Use ColPali for Multi-Modal Retrieval",
-        "id": "use_ColPali_with_milvus.md",
-        "order": 7,
-        "children": []
-      },
-      {
-        "label": "Vector Visualization",
-        "id": "vector_visualization.md",
-        "order": 8,
-        "children": []
-      },
-      {
-        "label": "Movie Recommendation",
-        "id": "movie_recommendation_with_milvus.md",
-        "order": 9,
-        "children": []
-      },
-      {
-        "label": "Funnel Search with Matryoshka Embeddings",
-        "id": "funnel_search_with_matryoshka.md",
-        "order": 10,
         "children": []
       },
       {
         "label": "Full-Text Search with Milvus",
         "id": "full_text_search_with_milvus.md",
+        "order": 3,
+        "children": []
+      },
+      {
+        "label": "Hybrid Search with Milvus",
+        "id": "hybrid_search_with_milvus.md",
+        "order": 4,
+        "children": []
+      },
+      {
+        "label": "Image Search with Milvus",
+        "id": "image_similarity_search.md",
+        "order": 5,
+        "children": []
+      },
+      {
+        "label": "Multimodal RAG",
+        "id": "multimodal_rag_with_milvus.md",
+        "order": 6,
+        "children": []
+      },
+      {
+        "label": "Graph RAG with Milvus",
+        "id": "graph_rag_with_milvus.md",
+        "order": 7,
+        "children": []
+      },
+      {
+        "label": "Contextual Retrieval",
+        "id": "contextual_retrieval_with_milvus.md",
+        "order": 8,
+        "children": []
+      },
+      {
+        "label": "HDBSCAN Clustering",
+        "id": "hdbscan_clustering_with_milvus.md",
+        "order": 9,
+        "children": []
+      },
+      {
+        "label": "Use ColPali for Multi-Modal Retrieval",
+        "id": "use_ColPali_with_milvus.md",
+        "order": 10,
+        "children": []
+      },
+      {
+        "label": "Vector Visualization",
+        "id": "vector_visualization.md",
         "order": 11,
+        "children": []
+      },
+      {
+        "label": "Movie Recommendation",
+        "id": "movie_recommendation_with_milvus.md",
+        "order": 12,
+        "children": []
+      },
+      {
+        "label": "Funnel Search with Matryoshka Embeddings",
+        "id": "funnel_search_with_matryoshka.md",
+        "order": 13,
         "children": []
       },
       {

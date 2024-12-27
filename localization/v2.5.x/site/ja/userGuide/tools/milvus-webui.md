@@ -44,20 +44,38 @@ title: Milvus WebUI
 </thead>
 <tbody>
 <tr><td>運用形態</td><td>GUI</td><td>CLI</td><td>GUI</td></tr>
-<tr><td>対象ユーザー</td><td>保守者、開発者</td><td>保守者</td><td>開発者</td></tr>
+<tr><td>対象ユーザー</td><td>メンテナ、開発者</td><td>保守者</td><td>開発者</td></tr>
 <tr><td>インストール</td><td>組み込み</td><td>スタンドアロンツール</td><td>スタンドアロンツール</td></tr>
 <tr><td>依存関係</td><td>Milvus</td><td>Milvus / etcd</td><td>Milvus</td></tr>
-<tr><td>主な機能</td><td>実行環境、データベース/コレクションの詳細、セグメント、チャンネル、タスク、スロークエリリクエスト</td><td>メタデータの検査とMilvus APIの実行</td><td>データベース管理と運用タスク</td></tr>
+<tr><td>主な機能</td><td>実行環境、データベース/コレクションの詳細、セグメント、チャンネル、タスク、スロークエリリクエスト</td><td>メタデータの検査とMilvus APIの実行</td><td>データベース管理および運用タスク</td></tr>
 </tbody>
 </table>
-<p>Milvus Web UIは以下の機能を提供します：</p>
+<p>Milvus Web UIには以下のURLからアクセスできます：</p>
+<pre><code translate="no">http://localhost:9091/webui
+<button class="copy-code-btn"></button></code></pre>
+<h2 id="Features" class="common-anchor-header">機能<button data-href="#Features" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>Milvus Web UIには以下の機能があります：</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/milvus-webui-overview.png" alt="Milvus Web UI overview" class="doc-image" id="milvus-web-ui-overview" />
    </span> <span class="img-wrapper"> <span>Milvus Web UIの概要</span> </span></p>
 <ul>
 <li><p><a href="#Home">ホーム</a></p>
-<p>現在稼働中のMilvusインスタンス、そのコンポーネント、接続クライアント、依存関係に関する情報を確認することができます。</p></li>
+<p>現在実行中のMilvusインスタンス、そのコンポーネント、接続クライアント、依存関係に関する情報を確認することができます。</p></li>
 <li><p><a href="#Collections">コレクション</a></p>
 <p>現在Milvusに登録されているデータベースやコレクションの一覧を表示し、その詳細を確認することができます。</p></li>
 <li><p><a href="#Query">クエリ</a></p>
@@ -121,7 +139,12 @@ title: Milvus WebUI
    </span> <span class="img-wrapper"> <span>Milvus Web UI コレクション</span> </span></p>
 <ul>
 <li><p><strong>データベース</strong>現在Milvusに登録されているデータベースの一覧とその詳細を表示します。</p></li>
-<li><p><strong>コレクション</strong>各データベース内のコレクションの一覧と詳細を表示します。</p></li>
+<li><p><strong>コレクション</strong>各データベース内のコレクションの一覧と詳細を表示します。</p>
+<p>コレクションをクリックすると、フィールド数、パーティション、インデックスなどの詳細情報を表示することができます。</p>
+<p>
+  
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/webui-collection-details.png" alt="Milvus Web UI Collection Details" class="doc-image" id="milvus-web-ui-collection-details" />
+   </span> <span class="img-wrapper"> <span>Milvus Web UI コレクションの詳細</span> </span></p></li>
 </ul>
 <h2 id="Query" class="common-anchor-header">クエリ<button data-href="#Query" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -144,11 +167,11 @@ title: Milvus WebUI
    </span> <span class="img-wrapper"> <span>Milvus Web UI クエリページ</span> </span></p>
 <ul>
 <li><p><strong>セグメント</strong>セグメントID、対応するコレクション、状態、サイズなど、セグメントのリストとその詳細を表示します。</p>
-<p><strong>From</strong>列にはセグメントのソースが表示されます。表示可能なソースは以下のとおりです：</p>
+<p><strong>From</strong>列では、セグメントのソースを確認できます。表示可能なソースは以下のとおりです：</p>
 <ul>
 <li><p><strong>QN</strong>: クエリ・ノード</p></li>
 <li><p><strong>CT</strong>: クエリコード内の現在のターゲット</p></li>
-<li><p><strong>NT</strong>: クエリコード内の次のターゲット</p></li>
+<li><p><strong>NT</strong>: QueryCoord 内の次のターゲット</p></li>
 <li><p><strong>DIST</strong>：QueryCoord内の分布</p></li>
 </ul></li>
 <li><p><strong>チャンネル</strong>：チャネル名、対応するコレクションなど、チャネルのリストとその詳細を表示します。</p>
@@ -182,7 +205,7 @@ title: Milvus WebUI
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/webui-data.png" alt="Milvus Web UI Data Page" class="doc-image" id="milvus-web-ui-data-page" />
    </span> <span class="img-wrapper"> <span>Milvus Web UI データページ</span> </span></p>
 <ul>
-<li><p><strong>セグメント</strong>データノード/コーディネーターからのセグメントのリストと、セグメントID、対応するコレクション、状態、サイズなどの詳細を表示します。</p></li>
+<li><p><strong>セグメント</strong>データノード/コーディネーターからのセグメントのリストとその詳細（セグメントID、対応するコレクション、状態、サイズなど）を表示します。</p></li>
 <li><p><strong>チャンネル</strong>データノード/コーディネーターからのチャンネルのリストと、チャンネル名、対応するコレクションなどの詳細を表示します。</p></li>
 </ul>
 <h2 id="Tasks" class="common-anchor-header">タスク<button data-href="#Tasks" class="anchor-icon" translate="no">

@@ -108,10 +108,10 @@ zilliztech/milvus       4.1.1           2.3.0                   Milvus is an ope
 zilliztech/milvus       4.1.0           2.3.0                   Milvus is an open-source vector database built ...
 <button class="copy-code-btn"></button></code></pre>
 <p>Vous pouvez choisir le chemin de mise à niveau pour votre Milvus comme suit :</p>
-<div style="display: none;">- [Effectuer une mise à niveau continue](#conduct-a-rolling-upgrade) de Milvus v2.2.3 et versions ultérieures vers v2.5.0.</div>
+<div style="display: none;">- [Effectuer une mise à niveau continue](#conduct-a-rolling-upgrade) de Milvus v2.2.3 et versions ultérieures vers v2.5.1.</div>
 <ul>
-<li><p><a href="#Upgrade-Milvus-using-Helm">Mettre à niveau Milvus à l'aide de Helm</a> pour une mise à niveau d'une version mineure antérieure à v2.2.3 vers v2.5.0.</p></li>
-<li><p><a href="#Migrate-the-metadata">Migrer les métadonnées</a> avant la mise à niveau de Milvus v2.1.x vers v2.5.0.</p></li>
+<li><p><a href="#Upgrade-Milvus-using-Helm">Mettre à niveau Milvus à l'aide de Helm</a> pour une mise à niveau d'une version mineure antérieure à v2.2.3 vers v2.5.1.</p></li>
+<li><p><a href="#Migrate-the-metadata">Migrer les métadonnées</a> avant la mise à niveau de Milvus v2.1.x vers v2.5.1.</p></li>
 </ul>
 <div style="display: none;">
 <h2 id="Conduct-a-rolling-upgrade" class="common-anchor-header">Effectuer une mise à niveau continue<button data-href="#Conduct-a-rolling-upgrade" class="anchor-icon" translate="no">
@@ -145,8 +145,8 @@ zilliztech/milvus       4.1.0           2.3.0                   Milvus is an ope
 <tr><td><code translate="no">o</code></td><td>Fonctionnement</td><td><code translate="no">update</code></td><td>Faux</td></tr>
 </tbody>
 </table>
-<p>Une fois que vous vous êtes assuré que tous les déploiements de votre instance Milvus sont dans leur état normal, vous pouvez exécuter la commande suivante pour mettre à niveau l'instance Milvus vers la version 2.5.0. Vous pouvez exécuter la commande suivante pour mettre à niveau l'instance Milvus vers 2.5.0.</p>
-<pre><code translate="no" class="language-shell">sh rollingUpdate.<span class="hljs-property">sh</span> -n <span class="hljs-keyword">default</span> -i my-release -o update -t <span class="hljs-number">2.5</span><span class="hljs-number">.0</span> -w <span class="hljs-string">&#x27;milvusdb/milvus:v2.5.0&#x27;</span>
+<p>Une fois que vous vous êtes assuré que tous les déploiements de votre instance Milvus sont dans leur état normal, vous pouvez exécuter la commande suivante pour mettre à niveau l'instance Milvus vers la version 2.5.1. Vous pouvez exécuter la commande suivante pour mettre à niveau l'instance Milvus vers la version 2.5.1.</p>
+<pre><code translate="no" class="language-shell">sh rollingUpdate.<span class="hljs-property">sh</span> -n <span class="hljs-keyword">default</span> -i my-release -o update -t <span class="hljs-number">2.5</span><span class="hljs-number">.1</span> -w <span class="hljs-string">&#x27;milvusdb/milvus:v2.5.1&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <ol>

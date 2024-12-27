@@ -398,8 +398,8 @@ curl --request POST \​
 }&quot;</span>​
 
 <button class="copy-code-btn"></button></code></pre>
-<p>Sie können auch eine Sammlung ohne Index-Parameter erstellen und diese nachträglich hinzufügen. In diesem Fall lädt Milvus die Sammlung bei deren Erstellung nicht. Details zur Erstellung von Indizes für eine bestehende Sammlung finden Sie unter <a href="/docs/de/index-vector-fields.md">Index Explained</a>.</p>
-<p>Der folgende Codeschnipsel demonstriert, wie man eine Sammlung ohne Sammlung erstellt, wobei der Ladestatus der Sammlung bei der Erstellung ungeladen bleibt.</p>
+<p>Sie können auch eine Sammlung ohne Index-Parameter erstellen und diese nachträglich hinzufügen. In diesem Fall lädt Milvus die Sammlung bei deren Erstellung nicht. Details zum Erstellen von Indizes für eine bestehende Sammlung finden Sie unter <a href="/docs/de/index-vector-fields.md">Index Explained</a>.</p>
+<p>Der folgende Codeschnipsel demonstriert, wie eine Sammlung ohne Index erstellt wird und der Ladestatus der Sammlung bei der Erstellung ungeladen bleibt.</p>
 <div class="multipleCode">
  <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#go">Go</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># 3.6. Create a collection and index it separately​</span>
@@ -513,8 +513,8 @@ curl --request POST \​
       </svg>
     </button></h2><p>Sie können Eigenschaften für die zu erstellende Sammlung festlegen, damit sie in Ihren Dienst passt. Die anwendbaren Eigenschaften sind wie folgt.</p>
 <h3 id="Set-Shard-Number​" class="common-anchor-header">Shard-Nummer festlegen</h3><p>Shards sind horizontale Abschnitte einer Sammlung. Jeder Shard entspricht einem Dateneingangskanal. Jede Sammlung hat standardmäßig einen Shard. Sie können bei der Erstellung einer Sammlung die entsprechende Anzahl von Scherben auf der Grundlage des erwarteten Durchsatzes und des Volumens der in die Sammlung einzufügenden Daten festlegen.</p>
-<p>In allgemeinen Fällen sollten Sie die Anzahl der Shards jedes Mal um eins erhöhen, wenn der erwartete Durchsatz um 500 MB/s oder das einzufügende Datenvolumen um 100 GB steigt. Dieser Vorschlag hindert Sie nicht daran, Daten mit der Standard-Shard-Nummer in die Sammlung einzufügen.</p>
-<p>Der folgende Codeausschnitt veranschaulicht, wie Sie die Shard-Nummer beim Erstellen einer Sammlung festlegen.</p>
+<p>In den meisten Fällen sollten Sie die Anzahl der Shards jedes Mal um eins erhöhen, wenn der erwartete Durchsatz um 500 MB/s oder das einzufügende Datenvolumen um 100 GB steigt. Dieser Vorschlag basiert auf unseren eigenen Erfahrungen und ist möglicherweise nicht vollständig auf Ihre Anwendungsszenarien abgestimmt. Sie können diese Zahl an Ihre eigenen Bedürfnisse anpassen oder einfach den Standardwert verwenden.</p>
+<p>Der folgende Codeschnipsel zeigt, wie man die Shard-Nummer beim Erstellen einer Sammlung festlegt.</p>
 <div class="multipleCode">
  <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#go">Go</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-meta"># With shard number​</span>
@@ -689,7 +689,7 @@ curl --request POST \​
 }&quot;</span>​
 
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Set-Consistency-Level​" class="common-anchor-header">Konsistenzlevel festlegen</h3><p>Beim Erstellen einer Sammlung können Sie die Konsistenzstufe für Suchen und Abfragen in der Sammlung festlegen. Sie können auch die Konsistenzstufe der Sammlung während einer bestimmten Suche oder Abfrage ändern.</p>
+<h3 id="Set-Consistency-Level​" class="common-anchor-header">Konsistenzstufe festlegen</h3><p>Beim Erstellen einer Sammlung können Sie die Konsistenzstufe für Suchen und Abfragen in der Sammlung festlegen. Sie können auch die Konsistenzstufe der Sammlung während einer bestimmten Suche oder Abfrage ändern.</p>
 <div class="multipleCode">
  <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#go">Go</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># With consistency level​</span>

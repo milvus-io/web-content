@@ -399,7 +399,7 @@ curl --request POST \​
 
 <button class="copy-code-btn"></button></code></pre>
 <p>Vous pouvez également créer une collection sans paramètres d'index et les ajouter par la suite. Dans ce cas, Milvus ne charge pas la collection lors de sa création. Pour plus de détails sur la création d'index pour une collection existante, voir <a href="/docs/fr/index-vector-fields.md">Index Explained</a>.</p>
-<p>L'extrait de code suivant montre comment créer une collection sans collection, et l'état de chargement de la collection reste non chargé lors de la création.</p>
+<p>L'extrait de code suivant montre comment créer une collection sans index, et l'état de chargement de la collection reste non chargé lors de la création.</p>
 <div class="multipleCode">
  <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#go">Go</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># 3.6. Create a collection and index it separately​</span>
@@ -513,8 +513,8 @@ curl --request POST \​
       </svg>
     </button></h2><p>Vous pouvez définir des propriétés pour la collection à créer afin de l'intégrer à votre service. Les propriétés applicables sont les suivantes.</p>
 <h3 id="Set-Shard-Number​" class="common-anchor-header">Définir le nombre d'unités</h3><p>Les groupes de données sont des tranches horizontales d'une collection. Chaque shard correspond à un canal d'entrée de données. Chaque collection possède un shard par défaut. Lors de la création d'une collection, vous pouvez définir le nombre approprié d'unités en fonction du débit attendu et du volume des données à insérer dans la collection.</p>
-<p>Dans les cas les plus courants, vous pouvez envisager d'augmenter d'une unité le nombre de cartes à chaque fois que le débit attendu augmente de 500 Mo/s ou que le volume de données à insérer augmente de 100 Go. Cette suggestion ne vous empêche pas d'insérer des données dans la collection en utilisant le nombre de tessons par défaut.</p>
-<p>L'extrait de code suivant montre comment définir le numéro de dépôt lors de la création d'une collection.</p>
+<p>Dans les cas les plus courants, envisagez d'augmenter le nombre de shards d'une unité chaque fois que le débit attendu augmente de 500 Mo/s ou que le volume de données à insérer augmente de 100 Go. Cette suggestion est basée sur notre propre expérience et peut ne pas être totalement adaptée à vos scénarios d'application. Vous pouvez adapter ce nombre à vos propres besoins ou simplement utiliser la valeur par défaut.</p>
+<p>L'extrait de code suivant montre comment définir le nombre de tessons lors de la création d'une collection.</p>
 <div class="multipleCode">
  <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#go">Go</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-meta"># With shard number​</span>
@@ -571,7 +571,7 @@ curl --request POST \​
 }&quot;</span>​
 
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Enable-mmap​" class="common-anchor-header">Activer mmap</h3><p>Milvus active mmap sur toutes les collections par défaut, ce qui lui permet de mapper les données de champ brutes dans la mémoire au lieu de les charger complètement. Cela permet de réduire les empreintes mémoire et d'augmenter la capacité des collections. Pour plus de détails sur mmap, reportez-vous à la section <a href="/docs/fr/mmap.md">Utiliser mmap</a>.</p>
+<h3 id="Enable-mmap​" class="common-anchor-header">Activer mmap</h3><p>Milvus active mmap sur toutes les collections par défaut, ce qui permet à Milvus de mapper les données de champ brutes dans la mémoire au lieu de les charger complètement. Cela permet de réduire les empreintes mémoire et d'augmenter la capacité des collections. Pour plus de détails sur mmap, reportez-vous à la section <a href="/docs/fr/mmap.md">Utiliser mmap</a>.</p>
 <div class="multipleCode">
  <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#go">Go</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># With mmap​</span>

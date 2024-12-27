@@ -702,70 +702,39 @@
             "children": []
           },
           {
-            "label": "Filtragem",
-            "id": "filtering",
-            "order": 6,
-            "children": [
-              {
-                "label": "Explicação da filtragem",
-                "id": "boolean.md",
-                "order": 0,
-                "children": []
-              },
-              {
-                "label": "Operadores básicos",
-                "id": "basic-operators.md",
-                "order": 1,
-                "children": []
-              },
-              {
-                "label": "Filtragem de modelos",
-                "id": "filtering-templating.md",
-                "order": 2,
-                "children": []
-              },
-              {
-                "label": "Operadores JSON",
-                "id": "json-operators.md",
-                "order": 3,
-                "children": []
-              },
-              {
-                "label": "Operadores de matriz",
-                "id": "array-operators.md",
-                "order": 4,
-                "children": []
-              }
-            ]
-          },
-          {
             "label": "Pesquisa de texto integral",
             "id": "full-text-search.md",
-            "order": 7,
+            "order": 6,
             "children": []
           },
           {
             "label": "Correspondência de texto",
             "id": "keyword-match.md",
-            "order": 8,
+            "order": 7,
             "children": []
           },
           {
             "label": "Iteradores de pesquisa",
             "id": "with-iterators.md",
-            "order": 9,
+            "order": 8,
             "children": []
           },
           {
             "label": "Utilizar chave de partição",
             "id": "use-partition-key.md",
-            "order": 10,
+            "order": 9,
+            "children": []
+          },
+          {
+            "label": "Filtragem de metadados",
+            "id": "boolean.md",
+            "order": 14,
             "children": []
           },
           {
             "label": "Reranking",
             "id": "reranking.md",
-            "order": 11,
+            "order": 15,
             "children": []
           }
         ]
@@ -1395,48 +1364,17 @@
             "children": []
           },
           {
-            "label": "RBAC",
-            "id": "rbac",
+            "label": "Utilizadores, privilégios e funções",
+            "id": "users_and_roles.md",
+            "order": 10,
+            "children": []
+          },
+          {
+            "label": "Ativar RBAC",
+            "id": "rbac.md",
             "order": 1,
             "isMenu": true,
-            "children": [
-              {
-                "label": "Explicação do RBAC",
-                "id": "rbac.md",
-                "order": 0,
-                "children": []
-              },
-              {
-                "label": "Criar utilizadores e funções",
-                "id": "users_and_roles.md",
-                "order": 1,
-                "children": []
-              },
-              {
-                "label": "Criar grupo de privilégios",
-                "id": "privilege_group.md",
-                "order": 2,
-                "children": []
-              },
-              {
-                "label": "Conceder privilégios",
-                "id": "grant_privileges.md",
-                "order": 3,
-                "children": []
-              },
-              {
-                "label": "Funções de subvenção",
-                "id": "grant_roles.md",
-                "order": 4,
-                "children": []
-              },
-              {
-                "label": "Largar utilizadores e funções",
-                "id": "drop_users_roles.md",
-                "order": 5,
-                "children": []
-              }
-            ]
+            "children": []
           },
           {
             "label": "Encriptação em trânsito",
@@ -1576,12 +1514,6 @@
         ]
       },
       {
-        "label": "Milvus WebUI",
-        "id": "milvus-webui.md",
-        "order": 6,
-        "children": []
-      },
-      {
         "label": "Ferramenta de dimensionamento Milvus",
         "id": "sizing",
         "order": 6,
@@ -1641,7 +1573,7 @@
             "children": []
           },
           {
-            "label": "Cara de Abraço",
+            "label": "AbraçoFace",
             "id": "integrate_with_hugging-face.md",
             "order": 2,
             "children": []
@@ -2008,69 +1940,75 @@
         "children": []
       },
       {
-        "label": "Pesquisa de imagens com Milvus",
-        "id": "image_similarity_search.md",
+        "label": "RAG avançado",
+        "id": "how_to_enhance_your_rag.md",
         "order": 2,
-        "children": []
-      },
-      {
-        "label": "Pesquisa híbrida com Milvus",
-        "id": "hybrid_search_with_milvus.md",
-        "order": 3,
-        "children": []
-      },
-      {
-        "label": "RAG multimodal",
-        "id": "multimodal_rag_with_milvus.md",
-        "order": 4,
-        "children": []
-      },
-      {
-        "label": "Gráfico RAG com Milvus",
-        "id": "graph_rag_with_milvus.md",
-        "order": 6,
-        "children": []
-      },
-      {
-        "label": "Recuperação contextual",
-        "id": "contextual_retrieval_with_milvus.md",
-        "order": 5,
-        "children": []
-      },
-      {
-        "label": "Agrupamento de HDBSCAN",
-        "id": "hdbscan_clustering_with_milvus.md",
-        "order": 6,
-        "children": []
-      },
-      {
-        "label": "Utilizar ColPali para recuperação multimodal",
-        "id": "use_ColPali_with_milvus.md",
-        "order": 7,
-        "children": []
-      },
-      {
-        "label": "Visualização de vectores",
-        "id": "vector_visualization.md",
-        "order": 8,
-        "children": []
-      },
-      {
-        "label": "Recomendação de filmes",
-        "id": "movie_recommendation_with_milvus.md",
-        "order": 9,
-        "children": []
-      },
-      {
-        "label": "Pesquisa de funil com embeddings Matryoshka",
-        "id": "funnel_search_with_matryoshka.md",
-        "order": 10,
         "children": []
       },
       {
         "label": "Pesquisa de texto integral com Milvus",
         "id": "full_text_search_with_milvus.md",
+        "order": 3,
+        "children": []
+      },
+      {
+        "label": "Pesquisa híbrida com Milvus",
+        "id": "hybrid_search_with_milvus.md",
+        "order": 4,
+        "children": []
+      },
+      {
+        "label": "Pesquisa de imagens com Milvus",
+        "id": "image_similarity_search.md",
+        "order": 5,
+        "children": []
+      },
+      {
+        "label": "RAG multimodal",
+        "id": "multimodal_rag_with_milvus.md",
+        "order": 6,
+        "children": []
+      },
+      {
+        "label": "Gráfico RAG com Milvus",
+        "id": "graph_rag_with_milvus.md",
+        "order": 7,
+        "children": []
+      },
+      {
+        "label": "Recuperação contextual",
+        "id": "contextual_retrieval_with_milvus.md",
+        "order": 8,
+        "children": []
+      },
+      {
+        "label": "Agrupamento HDBSCAN",
+        "id": "hdbscan_clustering_with_milvus.md",
+        "order": 9,
+        "children": []
+      },
+      {
+        "label": "Utilizar ColPali para recuperação multimodal",
+        "id": "use_ColPali_with_milvus.md",
+        "order": 10,
+        "children": []
+      },
+      {
+        "label": "Visualização de vectores",
+        "id": "vector_visualization.md",
         "order": 11,
+        "children": []
+      },
+      {
+        "label": "Recomendação de filmes",
+        "id": "movie_recommendation_with_milvus.md",
+        "order": 12,
+        "children": []
+      },
+      {
+        "label": "Pesquisa de funil com embeddings Matryoshka",
+        "id": "funnel_search_with_matryoshka.md",
+        "order": 13,
         "children": []
       },
       {
@@ -2131,7 +2069,7 @@
     ]
   },
   {
-    "label": "FAQs",
+    "label": "Perguntas frequentes",
     "id": "faq",
     "isMenu": true,
     "order": 9,

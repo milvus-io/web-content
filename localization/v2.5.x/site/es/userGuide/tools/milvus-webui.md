@@ -50,14 +50,32 @@ title: Milvus WebUI
 <tr><td>Funciones principales</td><td>Entorno de ejecución, detalles de la base de datos/colección, segmentos, canales, tareas y solicitudes de consultas lentas</td><td>Inspección de metadatos y ejecución de la API de Milvus</td><td>Gestión de bases de datos y tareas operativas</td></tr>
 </tbody>
 </table>
-<p>Milvus Web UI proporciona las siguientes funciones:</p>
+<p>Puede acceder a Milvus Web UI utilizando la siguiente URL:</p>
+<pre><code translate="no">http://localhost:9091/webui
+<button class="copy-code-btn"></button></code></pre>
+<h2 id="Features" class="common-anchor-header">Características<button data-href="#Features" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>Milvus Web UI proporciona las siguientes características:</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/milvus-webui-overview.png" alt="Milvus Web UI overview" class="doc-image" id="milvus-web-ui-overview" />
    </span> <span class="img-wrapper"> <span>Visión general de Milvus Web UI</span> </span></p>
 <ul>
 <li><p><a href="#Home">Inicio</a></p>
-<p>Puede encontrar información sobre la instancia de Milvus que se está ejecutando actualmente, sus componentes, los clientes conectados y las dependencias.</p></li>
+<p>Puede encontrar información sobre la instancia Milvus en ejecución, sus componentes, clientes conectados y dependencias.</p></li>
 <li><p><a href="#Collections">Colecciones</a></p>
 <p>Puede ver la lista de bases de datos y colecciones actualmente en Milvus y comprobar sus detalles.</p></li>
 <li><p><a href="#Query">Consulta</a></p>
@@ -121,7 +139,12 @@ title: Milvus WebUI
    </span> <span class="img-wrapper"> <span>Colecciones de Milvus Web UI</span> </span></p>
 <ul>
 <li><p><strong>Base de datos</strong>: Vea la lista de bases de datos actualmente en Milvus y sus detalles.</p></li>
-<li><p><strong>Colecciones</strong>: Ver la lista de colecciones en cada base de datos y sus detalles.</p></li>
+<li><p><strong>Colecciones</strong>: Vea la lista de colecciones en cada base de datos y sus detalles.</p>
+<p>Puede hacer clic en una colección para ver sus detalles, incluido el número de campos, particiones, índices y otra información detallada.</p>
+<p>
+  
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/webui-collection-details.png" alt="Milvus Web UI Collection Details" class="doc-image" id="milvus-web-ui-collection-details" />
+   </span> <span class="img-wrapper"> <span>Detalles de la colección de Milvus Web UI</span> </span></p></li>
 </ul>
 <h2 id="Query" class="common-anchor-header">Consulta<button data-href="#Query" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -141,9 +164,9 @@ title: Milvus WebUI
     </button></h2><p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/webui-query.png" alt="Milvus Web UI Query Page" class="doc-image" id="milvus-web-ui-query-page" />
-   </span> <span class="img-wrapper"> <span>Página de consulta de la interfaz web de Milvus</span> </span></p>
+   </span> <span class="img-wrapper"> <span>Página de consulta de Milvus Web UI</span> </span></p>
 <ul>
-<li><p><strong>Segmentos</strong>: Ver la lista de segmentos y sus detalles, incluido el ID del segmento, la colección correspondiente, el estado, el tamaño, etc.</p>
+<li><p><strong>Segmentos</strong>: Vea la lista de segmentos y sus detalles, incluido el ID del segmento, la colección correspondiente, el estado, el tamaño, etc.</p>
 <p>En la columna <strong>Desde</strong>, puede encontrar la fuente del segmento. Los posibles indicadores de origen son los siguientes</p>
 <ul>
 <li><p><strong>QN</strong>: Nodo de consulta</p></li>

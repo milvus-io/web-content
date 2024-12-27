@@ -305,7 +305,7 @@
         "children": []
       },
       {
-        "label": "インメモリーレプリカ",
+        "label": "インメモリ・レプリカ",
         "id": "replica.md",
         "order": 11,
         "children": []
@@ -702,70 +702,39 @@
             "children": []
           },
           {
-            "label": "フィルタリング",
-            "id": "filtering",
-            "order": 6,
-            "children": [
-              {
-                "label": "フィルタリングの説明",
-                "id": "boolean.md",
-                "order": 0,
-                "children": []
-              },
-              {
-                "label": "ベーシック・オペレーター",
-                "id": "basic-operators.md",
-                "order": 1,
-                "children": []
-              },
-              {
-                "label": "フィルタリング・テンプレート",
-                "id": "filtering-templating.md",
-                "order": 2,
-                "children": []
-              },
-              {
-                "label": "JSON演算子",
-                "id": "json-operators.md",
-                "order": 3,
-                "children": []
-              },
-              {
-                "label": "配列演算子",
-                "id": "array-operators.md",
-                "order": 4,
-                "children": []
-              }
-            ]
-          },
-          {
             "label": "全文検索",
             "id": "full-text-search.md",
-            "order": 7,
+            "order": 6,
             "children": []
           },
           {
             "label": "テキストマッチ",
             "id": "keyword-match.md",
-            "order": 8,
+            "order": 7,
             "children": []
           },
           {
             "label": "検索イテレータ",
             "id": "with-iterators.md",
-            "order": 9,
+            "order": 8,
             "children": []
           },
           {
             "label": "パーティション・キーの使用",
             "id": "use-partition-key.md",
-            "order": 10,
+            "order": 9,
+            "children": []
+          },
+          {
+            "label": "メタデータのフィルタリング",
+            "id": "boolean.md",
+            "order": 14,
             "children": []
           },
           {
             "label": "再ランキング",
             "id": "reranking.md",
-            "order": 11,
+            "order": 15,
             "children": []
           }
         ]
@@ -925,7 +894,7 @@
     ]
   },
   {
-    "label": "Milvusマイグレーション",
+    "label": "Milvus移住",
     "id": "milvus_migration",
     "isMenu": true,
     "order": 6,
@@ -1395,48 +1364,17 @@
             "children": []
           },
           {
-            "label": "リレーショナルアクセス制御",
-            "id": "rbac",
+            "label": "ユーザー、権限、役割",
+            "id": "users_and_roles.md",
+            "order": 10,
+            "children": []
+          },
+          {
+            "label": "RBACを有効にする",
+            "id": "rbac.md",
             "order": 1,
             "isMenu": true,
-            "children": [
-              {
-                "label": "RBACの説明",
-                "id": "rbac.md",
-                "order": 0,
-                "children": []
-              },
-              {
-                "label": "ユーザーとロールの作成",
-                "id": "users_and_roles.md",
-                "order": 1,
-                "children": []
-              },
-              {
-                "label": "特権グループの作成",
-                "id": "privilege_group.md",
-                "order": 2,
-                "children": []
-              },
-              {
-                "label": "特権の付与",
-                "id": "grant_privileges.md",
-                "order": 3,
-                "children": []
-              },
-              {
-                "label": "補助金の役割",
-                "id": "grant_roles.md",
-                "order": 4,
-                "children": []
-              },
-              {
-                "label": "ユーザーとロールの削除",
-                "id": "drop_users_roles.md",
-                "order": 5,
-                "children": []
-              }
-            ]
+            "children": []
           },
           {
             "label": "輸送中の暗号化",
@@ -1574,12 +1512,6 @@
             "children": []
           }
         ]
-      },
-      {
-        "label": "Milvus WebUI",
-        "id": "milvus-webui.md",
-        "order": 6,
-        "children": []
       },
       {
         "label": "Milvusサイジングツール",
@@ -2008,69 +1940,75 @@
         "children": []
       },
       {
-        "label": "Milvusによる画像検索",
-        "id": "image_similarity_search.md",
+        "label": "上級RAG",
+        "id": "how_to_enhance_your_rag.md",
         "order": 2,
-        "children": []
-      },
-      {
-        "label": "Milvusとのハイブリッド検索",
-        "id": "hybrid_search_with_milvus.md",
-        "order": 3,
-        "children": []
-      },
-      {
-        "label": "マルチモーダルRAG",
-        "id": "multimodal_rag_with_milvus.md",
-        "order": 4,
-        "children": []
-      },
-      {
-        "label": "MilvusでRAGをグラフ化する",
-        "id": "graph_rag_with_milvus.md",
-        "order": 6,
-        "children": []
-      },
-      {
-        "label": "文脈検索",
-        "id": "contextual_retrieval_with_milvus.md",
-        "order": 5,
-        "children": []
-      },
-      {
-        "label": "HDBSCANクラスタリング",
-        "id": "hdbscan_clustering_with_milvus.md",
-        "order": 6,
-        "children": []
-      },
-      {
-        "label": "マルチモーダル検索にColPaliを使用する",
-        "id": "use_ColPali_with_milvus.md",
-        "order": 7,
-        "children": []
-      },
-      {
-        "label": "ベクトル可視化",
-        "id": "vector_visualization.md",
-        "order": 8,
-        "children": []
-      },
-      {
-        "label": "映画推薦",
-        "id": "movie_recommendation_with_milvus.md",
-        "order": 9,
-        "children": []
-      },
-      {
-        "label": "マトリョーシカ埋め込みによる漏斗探索",
-        "id": "funnel_search_with_matryoshka.md",
-        "order": 10,
         "children": []
       },
       {
         "label": "Milvusによる全文検索",
         "id": "full_text_search_with_milvus.md",
+        "order": 3,
+        "children": []
+      },
+      {
+        "label": "Milvusとのハイブリッド検索",
+        "id": "hybrid_search_with_milvus.md",
+        "order": 4,
+        "children": []
+      },
+      {
+        "label": "Milvusによる画像検索",
+        "id": "image_similarity_search.md",
+        "order": 5,
+        "children": []
+      },
+      {
+        "label": "マルチモーダルRAG",
+        "id": "multimodal_rag_with_milvus.md",
+        "order": 6,
+        "children": []
+      },
+      {
+        "label": "MilvusでRAGをグラフ化する",
+        "id": "graph_rag_with_milvus.md",
+        "order": 7,
+        "children": []
+      },
+      {
+        "label": "文脈検索",
+        "id": "contextual_retrieval_with_milvus.md",
+        "order": 8,
+        "children": []
+      },
+      {
+        "label": "HDBSCANクラスタリング",
+        "id": "hdbscan_clustering_with_milvus.md",
+        "order": 9,
+        "children": []
+      },
+      {
+        "label": "マルチモーダル検索にColPaliを使用する",
+        "id": "use_ColPali_with_milvus.md",
+        "order": 10,
+        "children": []
+      },
+      {
+        "label": "ベクトル可視化",
+        "id": "vector_visualization.md",
         "order": 11,
+        "children": []
+      },
+      {
+        "label": "映画推薦",
+        "id": "movie_recommendation_with_milvus.md",
+        "order": 12,
+        "children": []
+      },
+      {
+        "label": "マトリョーシカ埋め込みによる漏斗探索",
+        "id": "funnel_search_with_matryoshka.md",
+        "order": 13,
         "children": []
       },
       {

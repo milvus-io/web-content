@@ -51,7 +51,25 @@ title: Milvus WebUI
 <tr><td>Primäre Funktionalitäten</td><td>Laufzeitumgebung, Datenbank-/Sammlungsdetails, Segmente, Kanäle, Aufgaben und langsame Abfragen</td><td>Überprüfung von Metadaten und Ausführung der Milvus-API</td><td>Datenbankverwaltung und operative Aufgaben</td></tr>
 </tbody>
 </table>
-<p>Milvus Web UI bietet die folgenden Funktionen:</p>
+<p>Sie können auf die Milvus Web UI über die folgende URL zugreifen:</p>
+<pre><code translate="no">http://localhost:9091/webui
+<button class="copy-code-btn"></button></code></pre>
+<h2 id="Features" class="common-anchor-header">Funktionen<button data-href="#Features" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>Milvus Web UI bietet die folgenden Funktionen:</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/milvus-webui-overview.png" alt="Milvus Web UI overview" class="doc-image" id="milvus-web-ui-overview" />
@@ -122,7 +140,12 @@ title: Milvus WebUI
    </span> <span class="img-wrapper"> <span>Milvus Web UI Sammlungen</span> </span></p>
 <ul>
 <li><p><strong>Datenbank</strong>: Zeigen Sie die Liste der derzeit in Milvus vorhandenen Datenbanken und deren Details an.</p></li>
-<li><p><strong>Sammlungen</strong>: Zeigen Sie die Liste der Sammlungen in jeder Datenbank und deren Details an.</p></li>
+<li><p><strong>Sammlungen</strong>: Zeigen Sie die Liste der Sammlungen in jeder Datenbank und deren Details an.</p>
+<p>Sie können auf eine Sammlung klicken, um ihre Details zu sehen, einschließlich der Anzahl der Felder, Partitionen, Indizes und anderer Informationen im Detail.</p>
+<p>
+  
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/webui-collection-details.png" alt="Milvus Web UI Collection Details" class="doc-image" id="milvus-web-ui-collection-details" />
+   </span> <span class="img-wrapper"> <span>Milvus Web UI Sammlungsdetails</span> </span></p></li>
 </ul>
 <h2 id="Query" class="common-anchor-header">Abfrage<button data-href="#Query" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -144,7 +167,7 @@ title: Milvus WebUI
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/webui-query.png" alt="Milvus Web UI Query Page" class="doc-image" id="milvus-web-ui-query-page" />
    </span> <span class="img-wrapper"> <span>Milvus Web UI Abfrage Seite</span> </span></p>
 <ul>
-<li><p><strong>Segmente</strong>: Zeigen Sie die Liste der Segmente und deren Details an, einschließlich der Segment-ID, der entsprechenden Sammlung, des Status, der Größe usw.</p>
+<li><p><strong>Segmente</strong>: Zeigen Sie die Liste der Segmente und ihre Details an, einschließlich der Segment-ID, der entsprechenden Sammlung, des Status, der Größe usw.</p>
 <p>In der Spalte <strong>Von</strong> können Sie die Quelle des Segments finden. Mögliche Quellenindikatoren sind wie folgt</p>
 <ul>
 <li><p><strong>QN</strong>: Abfrageknoten</p></li>
@@ -160,7 +183,7 @@ title: Milvus WebUI
 <li><p><strong>NT</strong>: Nächstes Ziel in QueryCoord</p></li>
 <li><p><strong>DIST</strong>: Verteilung in QueryCoord</p></li>
 </ul></li>
-<li><p><strong>Replikate</strong>: Anzeigen der Liste der Replikate und ihrer Details, einschließlich der Replikat-ID, der entsprechenden Sammlung usw.</p></li>
+<li><p><strong>Replikate</strong>: Anzeige der Liste der Replikate und ihrer Details, einschließlich der Replikat-ID, der entsprechenden Sammlung usw.</p></li>
 <li><p><strong>Ressourcengruppen</strong>: Zeigen Sie die Liste der Ressourcengruppen und ihre Details an, einschließlich des Namens der Ressourcengruppe, der Anzahl der Abfrageknoten in der Gruppe und ihrer Konfigurationen, usw.</p></li>
 </ul>
 <h2 id="Data" class="common-anchor-header">Daten<button data-href="#Data" class="anchor-icon" translate="no">
@@ -184,7 +207,7 @@ title: Milvus WebUI
    </span> <span class="img-wrapper"> <span>Milvus Web UI Daten Seite</span> </span></p>
 <ul>
 <li><p><strong>Segmente</strong>: Zeigen Sie die Liste der Segmente aus den Datenknoten/Koordinatoren und deren Details an, einschließlich der Segment-ID, der entsprechenden Sammlung, des Status, der Größe usw.</p></li>
-<li><p><strong>Kanäle</strong>: Zeigen Sie die Liste der Kanäle aus den Datenknoten/Koordinatoren und deren Details an, einschließlich des Kanalnamens, der entsprechenden Sammlungen usw.</p></li>
+<li><p><strong>Kanäle</strong>: Zeigen Sie die Liste der Kanäle von den Datenknoten/Koordinatoren und deren Details an, einschließlich des Kanalnamens, der entsprechenden Sammlungen usw.</p></li>
 </ul>
 <h2 id="Tasks" class="common-anchor-header">Aufgaben<button data-href="#Tasks" class="anchor-icon" translate="no">
       <svg translate="no"

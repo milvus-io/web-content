@@ -61,7 +61,7 @@ title: インメモリインデックス
  <a href="#floating">浮動小数点</a> <a href="#binary">埋め込み バイナリ埋め込み</a> <a href="#sparse">スパース埋め込み</a></div>
 <div class="filter-floating">
 <h3 id="Indexes-for-floating-point-embeddings" class="common-anchor-header">浮動小数点埋込みのインデックス</h3><p>128次元の浮動小数点埋め込み（ベクトル）の場合、浮動小数点埋め込みが占有するストレージは128 * floatのサイズ = 512バイトです。また、浮動小数点埋め込みに使われる<a href="/docs/ja/metric.md">距離指標は</a>、ユークリッド距離 (<code translate="no">L2</code>) と内積 (<code translate="no">IP</code>) です。</p>
-<p>これらのタイプのインデックスには、CPUベースのANN検索用に<code translate="no">FLAT</code>,<code translate="no">IVF_FLAT</code>,<code translate="no">IVF_PQ</code>,<code translate="no">IVF_SQ8</code>,<code translate="no">HNSW</code>,<code translate="no">SCANN</code> がある。</p>
+<p>これらのタイプのインデックスには、<code translate="no">FLAT</code> 、<code translate="no">IVF_FLAT</code> 、<code translate="no">IVF_PQ</code> 、<code translate="no">IVF_SQ8</code> 、<code translate="no">HNSW</code> 、<code translate="no">HNSW_SQ</code> 、<code translate="no">HNSW_PQ</code> 、<code translate="no">HNSW_PRQ</code> 、<code translate="no">SCANN</code> 、CPUベースのANN検索用などがある。</p>
 </div>
 <div class="filter-binary">
 <h3 id="Indexes-for-binary-embeddings" class="common-anchor-header">バイナリ埋め込み用インデックス</h3><p>128次元のバイナリ埋め込みでは、128 / 8 = 16バイトのストレージを占有する。そして、バイナリ埋め込みに使われる距離メトリックは<code translate="no">JACCARD</code> と<code translate="no">HAMMING</code> です。</p>
@@ -93,11 +93,11 @@ title: インメモリインデックス
   </tr>
   <tr>
     <td>IVF_FLAT</td>
-    <td>量子化ベースのインデックス</td>
+    <td>該当なし</td>
     <td>
       <ul>
         <li>高速クエリ</li>
-        <li>可能な限り高い再現率が必要</li>
+        <li>可能な限り高い回収率が必要</li>
       </ul>
     </td>
   </tr>
@@ -106,7 +106,7 @@ title: インメモリインデックス
     <td>量子化ベースのインデックス</td>
     <td>
       <ul>
-        <li>高速クエリ</li>
+        <li>超高速クエリ</li>
         <li>限られたメモリリソース</li>
         <li>想起率の多少の妥協は許容</li>
       </ul>
@@ -117,9 +117,9 @@ title: インメモリインデックス
     <td>量子化ベースのインデックス</td>
     <td>
       <ul>
-        <li>超高速クエリ</li>
+        <li>高速クエリ</li>
         <li>限られたメモリリソース</li>
-        <li>想起率の大幅な妥協を受け入れる</li>
+        <li>想起率のわずかな妥協を受け入れる</li>
       </ul>
     </td>
   </tr>
@@ -135,13 +135,47 @@ title: インメモリインデックス
     </td>
   </tr>
   <tr>
+    <td>HNSW_SQ</td>
+    <td>量子化ベースのインデックス</td>
+    <td>
+      <ul>
+        <li>超高速クエリ</li>
+        <li>限られたメモリリソース</li>
+        <li>想起率に若干の妥協を許容</li>
+      </ul>
+    </td>
+  </tr>
+    <tr>
+    <td>HNSW_PQ</td>
+    <td>量子化ベースのインデックス</td>
+    <td>
+      <ul>
+        <li>中速クエリ</li>
+        <li>非常に限られたメモリリソース</li>
+        <li>想起率に若干の妥協を許容</li>
+      </ul>
+    </td>
+  </tr>
+    </tr>
+    <tr>
+    <td>HNSW_PRQ</td>
+    <td>量子化ベースのインデックス</td>
+    <td>
+      <ul>
+        <li>中速クエリ</li>
+        <li>非常に限られたメモリリソース</li>
+        <li>想起率に若干の妥協を許容</li>
+      </ul>
+    </td>
+  </tr>
+  <tr>
     <td>SCANN</td>
     <td>量子化ベースのインデックス</td>
     <td>
       <ul>
-        <li>非常に高速なクエリ</li>
-        <li>可能な限り高い再現率が必要</li>
-        <li>大きなメモリリソース</li>
+        <li>非常に高速なクエリー</li>
+        <li>可能な限り高い想起率を要求</li>
+        <li>メモリリソースが大きい</li>
       </ul>
     </td>
   </tr>
@@ -225,7 +259,7 @@ title: インメモリインデックス
 </ul>
 <h3 id="IVFFLAT" class="common-anchor-header">IVF_FLAT</h3><p>IVF_FLAT はベクトルデータを<code translate="no">nlist</code> クラスタ単位に分割し、ターゲット入力ベクトルと各クラスタの中心との距離を比較します。システムがクエリに設定したクラスタ数 (<code translate="no">nprobe</code>) に応じて、ターゲット入力と最も類似したクラスタ内のベクトルとの比較のみに基づいて類似性検索結果が返され、クエリ時間が大幅に短縮されます。</p>
 <p><code translate="no">nprobe</code> を調整することで、シナリオに応じた精度と速度の理想的なバランスを見つけることができる。<a href="https://zilliz.com/blog/Accelerating-Similarity-Search-on-Really-Big-Data-with-Vector-Indexing">IVF_FLATの性能テストの</a>結果は、ターゲット入力ベクトルの数(<code translate="no">nq</code>)と検索するクラスタの数(<code translate="no">nprobe</code>)の両方が増加すると、クエリ時間が急激に増加することを示しています。</p>
-<p>IVF_FLATは最も基本的なIVFインデックスであり、各ユニットに格納される符号化データは元データと一致する。</p>
+<p>IVF_FLATは最も基本的なIVFインデックスであり、各ユニットに格納される符号化データは元データと一致している。</p>
 <ul>
 <li><p>インデックス構築パラメータ</p>
 <table>
@@ -261,8 +295,8 @@ title: インメモリインデックス
 </li>
 </ul></li>
 </ul>
-<h3 id="IVFSQ8" class="common-anchor-header">IVF_SQ8</h3><p>IVF_FLATは圧縮を行わないため、生成されるインデックスファイルのサイズは、インデックス付けされていない元の生のベクトルデータとほぼ同じです。例えば、元の 1B SIFT データセットが 476 GB の場合、IVF_FLAT のインデックスファイルは若干小さくなります (~470 GB)。すべてのインデックスファイルをメモリにロードすると、470GBのストレージを消費します。</p>
-<p>ディスク、CPU、GPU のメモリリソースが限られている場合は、IVF_FLAT よりも IVF_SQ8 の方が適しています。このインデックスタイプは、スカラー量子化（SQ）を実行することで、各 FLOAT（4バイト）を UINT8（1バイト）に変換することができます。これにより、ディスク、CPU、GPUのメモリ消費量が70～75%削減される。1B SIFT データセットでは、IVF_SQ8 インデックスファイルは 140 GB のストレージしか必要としません。</p>
+<h3 id="IVFSQ8" class="common-anchor-header">IVF_SQ8</h3><p>IVF_FLATは圧縮を行わないため、生成されるインデックスファイルのサイズは、インデックス付けされていない元の生のベクトルデータとほぼ同じです。例えば、元の 1B SIFT データセットが 476 GB である場合、IVF_FLAT のインデックスファイルは若干小さくなります (~470 GB)。すべてのインデックスファイルをメモリにロードすると、470GBのストレージを消費します。</p>
+<p>ディスク、CPU、GPU のメモリリソースが限られている場合は、IVF_FLAT よりも IVF_SQ8 の方が適しています。このインデックスタイプは、スカラー量子化（SQ）を実行することで、各 FLOAT（4バイト）を UINT8（1バイト）に変換することができます。これにより、ディスク、CPU、GPUのメモリ消費量が70～75%削減される。1B SIFTデータセットの場合、IVF_SQ8インデックスファイルは140GBのストレージで済みます。</p>
 <ul>
 <li><p>インデックス作成パラメータ</p>
 <table>
@@ -301,7 +335,7 @@ title: インメモリインデックス
 <h3 id="IVFPQ" class="common-anchor-header">IVF_PQ</h3><p><code translate="no">PQ</code> (Product Quantization) は、元の高次元ベクトル空間を、 低次元ベクトル空間のデカルト積に一様に分解し、分解された低次元ベクトル空間を量子化する。積量子化により、対象ベクトルと全ユニットの中心との距離を計算する代わりに、対象ベクトルと各低次元空間のクラスタリング中心との距離を計算することが可能となり、アルゴリズムの時間的複雑性と空間的複雑性を大幅に削減することができる。<code translate="no">m</code> </p>
 <p>IVF_PQ は，ベクトルの積を量子化する前にIVFインデックスクラスタリングを行います．そのインデックスファイルはIVF_SQ8よりもさらに小さいが、ベクトル探索時の精度が低下する。</p>
 <div class="alert note">
-<p>インデックス構築パラメータと検索パラメータはMilvus分布によって異なります。まずはMilvusディストリビューションを選択してください。</p>
+<p>インデックス作成パラメータと検索パラメータはMilvus分布によって異なります。まずはMilvusディストリビューションを選択してください。</p>
 </div>
 <ul>
 <li><p>インデックス作成パラメータ</p>
@@ -324,7 +358,7 @@ title: インメモリインデックス
 <tr><th>パラメータ</th><th>説明</th><th>範囲</th><th>デフォルト値</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">nprobe</code></td><td>クエリーするユニットの数</td><td>[1, nlist］</td><td>8</td></tr>
+<tr><td><code translate="no">nprobe</code></td><td>検索するユニットの数</td><td>[1, nlist］</td><td>8</td></tr>
 </tbody>
 </table>
 </li>
@@ -353,7 +387,7 @@ title: インメモリインデックス
 </tbody>
 </table>
   <div class="alert note">
-<p>IVF_PQ とは異なり、デフォルト値はパフォーマンスを最適化するために<code translate="no">m</code> と<code translate="no">nbits</code> に適用されます。</p>
+<p>IVF_PQ とは異なり、パフォーマンスを最適化するために、デフォルト値は<code translate="no">m</code> と<code translate="no">nbits</code> に適用されます。</p>
   </div>
 </li>
 <li><p>検索パラメータ</p>
@@ -365,7 +399,7 @@ title: インメモリインデックス
 </thead>
 <tbody>
 <tr><td><code translate="no">nprobe</code></td><td>検索するユニットの数</td><td>[1, nlist］</td><td></td></tr>
-<tr><td><code translate="no">reorder_k</code></td><td>クエリーするユニット候補の数</td><td>[<code translate="no">top_k</code>, ∞ ]を指定する。</td><td><code translate="no">top_k</code></td></tr>
+<tr><td><code translate="no">reorder_k</code></td><td>クエリーするユニット候補の数</td><td>[<code translate="no">top_k</code>, ∞ ]（英語</td><td><code translate="no">top_k</code></td></tr>
 </tbody>
 </table>
 </li>
@@ -387,29 +421,119 @@ title: インメモリインデックス
 <li><p>インデックス構築パラメータ</p>
 <table>
 <thead>
-<tr><th>パラメータ</th><th>説明</th><th>範囲</th></tr>
+<tr><th>パラメータ</th><th>説明</th><th>範囲</th><th>デフォルト値</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">M</code></td><td>M は、グラフ内の発信接続の最大数を定義します。Mが大きいほど、固定ef/efConstructionでの精度/run_timeが高くなる。</td><td>[2, 2048]</td></tr>
-<tr><td><code translate="no">efConstruction</code></td><td>ef_construction は、インデックス検索速度と構築速度のトレードオフを制御する。efConstructionパラメータを大きくするとインデックスの品質が向上するが、インデックス作成時間が長くなる傾向がある。</td><td>[1, int_max］</td></tr>
+<tr><td><code translate="no">M</code></td><td>Mは、グラフ内の発信接続の最大数を定義する。M が大きいほど、固定 ef/efConstruction での精度/run_time が高くなる。</td><td>[2, 2048]</td><td>なし</td></tr>
+<tr><td><code translate="no">efConstruction</code></td><td>ef_construction はインデックス検索速度と構築速度のトレードオフを制御します。efConstructionパラメータを大きくするとインデックスの品質が向上しますが、インデックス作成時間が長くなる傾向があります。</td><td>[1, int_max］</td><td>なし</td></tr>
 </tbody>
 </table>
 </li>
 <li><p>検索パラメータ</p>
 <table>
 <thead>
-<tr><th>パラメータ</th><th>説明</th><th>範囲</th></tr>
+<tr><th>パラメータ</th><th>説明</th><th>範囲</th><th>デフォルト値</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">ef</code></td><td>検索時間と精度のトレードオフを制御するパラメータ。<code translate="no">ef</code> が高いほど検索精度は高くなるが、検索時間は遅くなる。</td><td>[<code translate="no">top_k</code>, int_max］</td></tr>
+<tr><td><code translate="no">ef</code></td><td>検索時間と精度のトレードオフを制御するパラメータ。<code translate="no">ef</code> を高くすると、検索精度は高くなるが、検索時間は遅くなる。</td><td>[<code translate="no">top_k</code>, int_max］</td><td>なし</td></tr>
+</tbody>
+</table>
+</li>
+</ul>
+<h3 id="HNSWSQ" class="common-anchor-header">HNSW_SQ</h3><p>スカラー量子化(SQ)は、浮動小数点データをその大きさに基づいて有限の値の集合に離散化するために使用される技法である。例えば、<strong>SQ6 は</strong>(2^6 = 64) 個の離散値への量子化を表し、各浮動小数点数は 6 ビットでエンコードされる。同様に、<strong>SQ8 は</strong>データを (2^8 = 256) 個の離散値に量子化し、各浮動小数点数は 8 ビットで表されます。この量子化により、効率的な処理のためにデータの本質的な構造を保持しながら、メモリフットプリントを削減します。</p>
+<p>SQと組み合わせることで、HNSW_SQは高いクエリーパーセカンド（QPS）性能を維持しながら、インデックスサイズと精度のトレードオフを制御できる。標準的なHNSWと比較すると、インデックス構築時間の増加はわずかである。</p>
+<ul>
+<li><p>インデックス構築パラメータ</p>
+<table>
+<thead>
+<tr><th>パラメータ</th><th>説明</th><th>範囲</th><th>デフォルト値</th></tr>
+</thead>
+<tbody>
+<tr><td><code translate="no">M</code></td><td>Mは、グラフ内の発信接続の最大数を定義する。M が大きいほど、固定 ef/efConstruction での精度/run_time が高くなる。</td><td>[2, 2048]</td><td>なし</td></tr>
+<tr><td><code translate="no">efConstruction</code></td><td>ef_construction はインデックス検索速度と構築速度のトレードオフを制御します。efConstructionパラメータを大きくするとインデックスの品質が向上しますが、インデックス作成時間が長くなる傾向があります。</td><td>[1, int_max］</td><td>なし</td></tr>
+<tr><td><code translate="no">sq_type</code></td><td>スカラー量子化タイプ。</td><td><code translate="no">SQ6</code><code translate="no">SQ8</code>, 、<code translate="no">BF16</code> <code translate="no">FP16</code></td><td><code translate="no">SQ8</code></td></tr>
+</tbody>
+</table>
+</li>
+<li><p>検索パラメータ</p>
+<table>
+<thead>
+<tr><th>パラメータ</th><th>説明</th><th>範囲</th><th>デフォルト値</th></tr>
+</thead>
+<tbody>
+<tr><td><code translate="no">ef</code></td><td>検索時間と精度のトレードオフを制御するパラメータ。<code translate="no">ef</code> を高くすると、検索精度は高くなるが、検索時間は遅くなる。</td><td>[<code translate="no">top_k</code>, int_max］</td><td>なし</td></tr>
+<tr><td><code translate="no">refine</code></td><td>訓練中にrefineを使用するかどうか。</td><td><code translate="no">true</code>,<code translate="no">false</code></td><td><code translate="no">false</code></td></tr>
+<tr><td><code translate="no">refine_k</code></td><td><em>kに対する</em>refineの倍率。</td><td>[1,<em>float_max</em>)</td><td><code translate="no">1</code></td></tr>
+<tr><td><code translate="no">refine_type</code></td><td>refineインデックスのデータ型。</td><td><code translate="no">SQ6</code> <code translate="no">SQ8</code>, , 、<code translate="no">BF16</code> <code translate="no">FP16</code> <code translate="no">FP32</code></td><td>なし</td></tr>
+</tbody>
+</table>
+</li>
+</ul>
+<h3 id="HNSWPQ" class="common-anchor-header">HNSW_PQ</h3><p>PQの基本的な考え方は、ベクトルを<code translate="no">m</code> 個の部分ベクトルに分割し、それぞれの部分ベクトルがkmeansに基づいて2^{<em>nbits</em>}個のセントロイドを見つけ、それぞれの部分ベクトルが最も近いセントロイドをその近似部分ベクトルとして選択することである。そして、すべてのセントロイドを記録する。したがって、各サブベクトルは<code translate="no">nbits</code> 、長さ<code translate="no">dim</code> の浮動ベクトルは<em>m・nビットとして</em>符号化できる。</p>
+<p>PQと組み合わせることで、HNSW_PQはインデックスサイズと精度のトレードオフを制御できるが、同じ圧縮率ではHNSW_SQよりQPS値が低く、想起率が高い。HNSW_SQと比較すると、インデックス構築に時間がかかる。</p>
+<ul>
+<li><p>インデックス構築パラメータ</p>
+<table>
+<thead>
+<tr><th>パラメータ</th><th>説明</th><th>範囲</th><th>デフォルト値</th></tr>
+</thead>
+<tbody>
+<tr><td><code translate="no">M</code></td><td>Mは、グラフ内の発信接続の最大数を定義する。M が大きいほど、固定 ef/efConstruction での精度/run_time が高くなる。</td><td>[2, 2048]</td><td>なし</td></tr>
+<tr><td><code translate="no">efConstruction</code></td><td>ef_construction はインデックス検索速度と構築速度のトレードオフを制御します。efConstructionパラメータを大きくするとインデックスの品質が向上しますが、インデックス作成時間が長くなる傾向があります。</td><td>[1, int_max］</td><td>なし</td></tr>
+<tr><td><code translate="no">m</code></td><td>ベクトルを分割するサブベクターグループの数。</td><td>[1, 65536]</td><td>32</td></tr>
+<tr><td><code translate="no">nbits</code></td><td>各サブ・ベクトル・グループを量子化するビット数。</td><td>[1, 24]</td><td>8</td></tr>
+</tbody>
+</table>
+</li>
+<li><p>検索パラメータ</p>
+<table>
+<thead>
+<tr><th>パラメータ</th><th>説明</th><th>範囲</th><th>デフォルト値</th></tr>
+</thead>
+<tbody>
+<tr><td><code translate="no">ef</code></td><td>検索時間と精度のトレードオフを制御するパラメータ。<code translate="no">ef</code> を高くすると、検索精度は高くなるが、検索時間は遅くなる。</td><td>[<code translate="no">top_k</code>, int_max］</td><td>なし</td></tr>
+<tr><td><code translate="no">refine</code></td><td>訓練中にrefineを使用するかどうか。</td><td><code translate="no">true</code>,<code translate="no">false</code></td><td><code translate="no">false</code></td></tr>
+<tr><td><code translate="no">refine_k</code></td><td><em>kに対する</em>refineの倍率。</td><td>[1,<em>float_max</em>)</td><td><code translate="no">1</code></td></tr>
+<tr><td><code translate="no">refine_type</code></td><td>refineインデックスのデータ型。</td><td><code translate="no">SQ6</code> <code translate="no">SQ8</code>, , 、<code translate="no">BF16</code> <code translate="no">FP16</code> <code translate="no">FP32</code></td><td>なし</td></tr>
+</tbody>
+</table>
+</li>
+</ul>
+<h3 id="HNSWPRQ" class="common-anchor-header">HNSW_PRQ</h3><p>PRQ は PQ に似ており、ベクトルを<code translate="no">m</code> グループに分割する。各サブベクトルは<code translate="no">nbits</code> として符号化される。pq 量子化が完了すると、ベクトルと pq 量子化されたベクトルの残差を計算し、残差ベクトルに pq 量子化を適用します。合計<code translate="no">nrq</code> の完全な pq 量子化が実行されるため、長さ<code translate="no">dim</code> の浮動ベクトルは<em>m・nビット・nrq</em>ビットとして符号化されます。</p>
+<p>積残差量子化器（PRQ）と組み合わせることで、HNSW_PRQはインデックスサイズと精度のトレードオフをさらに高く制御できる。HNSW_PRQは同じ圧縮率でHNSW_PQとほぼ同等のQPS値と高い再現率を持つ。HNSW_PQと比較すると、インデックス構築にかかる時間は数倍になる可能性がある。</p>
+<ul>
+<li><p>インデックス構築パラメータ</p>
+<table>
+<thead>
+<tr><th>パラメータ</th><th>説明</th><th>範囲</th><th>デフォルト値</th></tr>
+</thead>
+<tbody>
+<tr><td><code translate="no">M</code></td><td>Mは、グラフ内の発信接続の最大数を定義する。M が大きいほど、固定 ef/efConstruction での精度/run_time が高くなる。</td><td>[2, 2048]</td><td>なし</td></tr>
+<tr><td><code translate="no">efConstruction</code></td><td>ef_construction はインデックス検索速度と構築速度のトレードオフを制御します。efConstructionパラメータを大きくするとインデックスの品質が向上しますが、インデックス作成時間が長くなる傾向があります。</td><td>[1, int_max］</td><td>なし</td></tr>
+<tr><td><code translate="no">m</code></td><td>ベクトルを分割するサブベクターグループの数。</td><td>[1, 65536]</td><td>32</td></tr>
+<tr><td><code translate="no">nbits</code></td><td>各グループのサブベクトルを量子化するビット数。</td><td>[1, 24]</td><td>8</td></tr>
+<tr><td><code translate="no">nrq</code></td><td>残余部分量子化器の数。</td><td>[1, 16]</td><td>2</td></tr>
+</tbody>
+</table>
+</li>
+<li><p>検索パラメータ</p>
+<table>
+<thead>
+<tr><th>パラメータ</th><th>説明</th><th>範囲</th><th>デフォルト値</th></tr>
+</thead>
+<tbody>
+<tr><td><code translate="no">ef</code></td><td>検索時間と精度のトレードオフを制御するパラメータ。<code translate="no">ef</code> を高くすると、検索精度は高くなるが、検索時間は遅くなる。</td><td>[<code translate="no">top_k</code>, int_max］</td><td>なし</td></tr>
+<tr><td><code translate="no">refine</code></td><td>訓練中にrefineを使用するかどうか。</td><td><code translate="no">true</code>,<code translate="no">false</code></td><td><code translate="no">false</code></td></tr>
+<tr><td><code translate="no">refine_k</code></td><td><em>kに対する</em>refineの倍率。</td><td>[1,<em>float_max</em>)</td><td><code translate="no">1</code></td></tr>
+<tr><td><code translate="no">refine_type</code></td><td>refineインデックスのデータ型。</td><td><code translate="no">SQ6</code> <code translate="no">SQ8</code>, , 、<code translate="no">BF16</code> <code translate="no">FP16</code> <code translate="no">FP32</code></td><td>なし</td></tr>
 </tbody>
 </table>
 </li>
 </ul>
 </div>
 <div class="filter-binary">
-<h3 id="BINFLAT" class="common-anchor-header">BIN_FLAT</h3><p>このインデックスはFLATと全く同じであるが、バイナリ埋め込みにのみ使用できる。</p>
-<p>完璧な精度が要求され、比較的小さな（百万規模の）データセットに依存するベクトル類似検索のアプリケーションには、BIN_FLATインデックスが良い選択です。BIN_FLAT はベクトルを圧縮せず、正確な検索結果を保証できる唯一のインデックスです。BIN_FLATの結果は、再現率が100%に満たない他のインデックスが作成した結果の比較対象としても使用できます。</p>
+<h3 id="BINFLAT" class="common-anchor-header">BIN_FLAT</h3><p>このインデックスはFLATと全く同じですが、バイナリ埋め込みにしか使えません。</p>
+<p>完璧な精度が要求され、比較的小さな（100万個規模の）データセットに依存するベクトル類似検索アプリケーションには、BIN_FLATインデックスが良い選択です。BIN_FLAT はベクトルを圧縮せず、正確な検索結果を保証できる唯一のインデックスです。BIN_FLATの結果は、再現率が100%に満たない他のインデックスが作成した結果の比較対象としても使用できます。</p>
 <p>BIN_FLATが正確なのは、検索に網羅的なアプローチを取るからである。つまり、クエリごとに、ターゲット入力がデータセットのベクトルと比較される。このため、BIN_FLATは我々のリストの中で最も遅いインデックスであり、膨大なベクトルデータのクエリには適していない。MilvusにはBIN_FLATインデックス用のパラメータはなく、これを使用することでデータトレーニングや追加ストレージを必要としない。</p>
 <ul>
 <li><p>検索パラメータ</p>
@@ -424,7 +548,7 @@ title: インメモリインデックス
 </li>
 </ul>
 <h3 id="BINIVFFLAT" class="common-anchor-header">BIN_IVF_FLAT</h3><p>このインデックスは IVF_FLAT と全く同じですが、バイナリ埋め込みにのみ使用できます。</p>
-<p>BIN_IVF_FLAT はベクトルデータを<code translate="no">nlist</code> クラスタ単位に分割し、ターゲット入力ベクトルと各クラスタの中心との距離を比較します。システムがクエリに設定するクラスタ数 (<code translate="no">nprobe</code>) に応じて、ターゲット入力と最も類似したクラスタ内のベクトルとの比較のみに基づいて類似性検索結果が返され、クエリ時間が大幅に短縮されます。</p>
+<p>BIN_IVF_FLAT はベクトルデータを<code translate="no">nlist</code> クラスタ単位に分割し、ターゲット入力ベクトルと各クラスタの中心との距離を比較します。システムがクエリに設定するクラスタ数（<code translate="no">nprobe</code> ）に応じて、ターゲット入力と最も類似したクラスタ（複数可）内のベクトル間の比較に基づく類似性検索結果が返され、クエリ時間が大幅に短縮されます。</p>
 <p><code translate="no">nprobe</code> を調整することで、精度と速度の理想的なバランスを見つけることができます。クエリ時間は、ターゲット入力ベクトルの数 (<code translate="no">nq</code>) と検索するクラスタの数 (<code translate="no">nprobe</code>) の両方が増加するにつれて急激に増加します。</p>
 <p>BIN_IVF_FLATは最も基本的なBIN_IVFインデックスであり、各ユニットに格納されるエンコードされたデータは元のデータと一致する。</p>
 <ul>
@@ -472,7 +596,7 @@ title: インメモリインデックス
 <tr><th>パラメータ</th><th>説明</th><th>範囲</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">drop_ratio_build</code></td><td>インデックス作成時に除外される小さなベクトル値の割合。このオプションを使用すると、インデックスを作成する際に小さな値を除外することで、効率と精度のトレードオフを行い、インデックス作成処理を微調整することができます。</td><td>[0, 1]</td></tr>
+<tr><td><code translate="no">drop_ratio_build</code></td><td>インデックス作成時に除外される小さなベクトル値の割合。このオプションを使用すると、インデックスを作成する際に小さな値を無視することで、効率と精度のトレードオフを行い、インデックス作成プロセスを微調整することができます。</td><td>[0, 1]</td></tr>
 </tbody>
 </table>
 </li>
@@ -531,7 +655,7 @@ title: インメモリインデックス
 <summary><font color="#4fc4f9">FLATインデックスとIVF_FLATインデックスの違いは何ですか？</font></summary></p>
 <p>IVF_FLAT インデックスはベクトル空間を<code translate="no">nlist</code> クラスタに分割します。<code translate="no">nlist</code> のデフォルト値を16384のままにしておくと、Milvusはターゲットベクトルと16384クラスタすべての中心との距離を比較し、<code translate="no">nprobe</code> 最も近いクラスタを取得します。次に、Milvusはターゲットベクトルと選択されたクラスタのベクトル間の距離を比較し、最も近いベクトルを得ます。IVF_FLATと異なり、FLATはターゲットベクトルと各ベクトル間の距離を直接比較します。</p>
 <p>
-そのため、ベクトルの総数が<code translate="no">nlist</code> 程度であれば、IVF_FLAT と FLAT は、必要な計算方法や探索性能にほとんど差がありません。しかし、ベクトル数が<code translate="no">nlist</code> の2倍、3倍、n倍と増えるにつれて、IVF_FLATインデックスがますます大きな利点を示し始めます。</p>
+そのため、ベクトルの総数が<code translate="no">nlist</code> 程度であれば、IVF_FLAT と FLAT は必要な計算方法や探索性能にほとんど差がありません。しかし、ベクトル数が<code translate="no">nlist</code> の2倍、3倍、n倍と増えるにつれて、IVF_FLATインデックスがますます大きな利点を示し始めます。</p>
 <p>
 詳しくは<a href="https://medium.com/unstructured-data-service/how-to-choose-an-index-in-milvus-4f3d15259212">Milvusにおけるインデックスの選び方を</a>参照してください。</p>
 </details>

@@ -59,8 +59,8 @@ title: Docker Composeを使用したGPUサポート付きMilvusの実行
         ></path>
       </svg>
     </button></h2><p>Docker Composeを使用してGPUをサポートしたMilvusをインストールするには、以下の手順に従ってください。</p>
-<h3 id="1-Download-and-configure-the-YAML-file" class="common-anchor-header">1.YAMLファイルのダウンロードと設定</h3><p>ダウンロード <a href="https://github.com/milvus-io/milvus/releases/download/v2.4.18/milvus-standalone-docker-compose-gpu.yml"><code translate="no">milvus-standalone-docker-compose-gpu.yml</code></a>をダウンロードし、docker-compose.ymlとして手動または以下のコマンドで保存します。</p>
-<pre><code translate="no" class="language-shell">$ wget https://github.com/milvus-io/milvus/releases/download/v2.4.18/milvus-standalone-docker-compose-gpu.yml -O docker-compose.yml
+<h3 id="1-Download-and-configure-the-YAML-file" class="common-anchor-header">1.YAMLファイルのダウンロードと設定</h3><p>ダウンロード <a href="https://github.com/milvus-io/milvus/releases/download/v2.4.19/milvus-standalone-docker-compose-gpu.yml"><code translate="no">milvus-standalone-docker-compose-gpu.yml</code></a>をダウンロードし、docker-compose.ymlとして手動または以下のコマンドで保存します。</p>
+<pre><code translate="no" class="language-shell">$ wget https://github.com/milvus-io/milvus/releases/download/v2.4.19/milvus-standalone-docker-compose-gpu.yml -O docker-compose.yml
 <button class="copy-code-btn"></button></code></pre>
 <p>YAMLファイル内のスタンドアロンサービスの環境変数に、以下のように変更を加える必要があります：</p>
 <ul>
@@ -119,7 +119,7 @@ milvus-etcd         etcd -advertise-client-url ...   Up             2379/tcp, 23
 milvus-minio        /usr/bin/docker-entrypoint ...   Up (healthy)   9000/tcp
 milvus-standalone   /tini -- milvus run standalone   Up             0.0.0.0:19530-&gt;19530/tcp, 0.0.0.0:9091-&gt;9091/tcp
 <button class="copy-code-btn"></button></code></pre>
-<p>docker-compose.ymlでMilvusに複数のGPUデバイスを割り当てている場合は、どのGPUデバイスを可視または使用可能にするかを指定できます。</p>
+<p>docker-compose.ymlでMilvusに複数のGPUデバイスを割り当てている場合は、どのGPUデバイスを可視化するか、または使用可能にするかを指定できます。</p>
 <p>GPU デバイス<code translate="no">0</code> を Milvus から見えるようにします：</p>
 <pre><code translate="no" class="language-shell">$ CUDA_VISIBLE_DEVICES=0 ./milvus run standalone
 <button class="copy-code-btn"></button></code></pre>
@@ -152,7 +152,7 @@ $ <span class="hljs-built_in">sudo</span> <span class="hljs-built_in">rm</span> 
 <div class="alert note">
 <p><code translate="no">milvus.yaml</code> ファイルは、Milvus コンテナ内の<code translate="no">/milvus/configs/</code> ディレクトリにあります。</p>
 </div>
-<p>メモリプールをカスタマイズするには、<code translate="no">milvus.yaml</code> ファイル内の<code translate="no">initMemSize</code> および<code translate="no">maxMemSize</code> の設定を以下のように変更します。</p>
+<p>メモリプールをカスタマイズするには、<code translate="no">milvus.yaml</code> ファイルの<code translate="no">initMemSize</code> および<code translate="no">maxMemSize</code> の設定を以下のように変更します。</p>
 <ol>
 <li><p>以下のコマンドを使用して、<code translate="no">milvus.yaml</code> を Milvus コンテナからローカルマシンにコピーする。<code translate="no">&lt;milvus_container_id&gt;</code> を実際の Milvus コンテナ ID に置き換える。</p>
 <pre><code translate="no" class="language-shell">docker <span class="hljs-built_in">cp</span> &lt;milvus_container_id&gt;:/milvus/configs/milvus.yaml milvus.yaml
@@ -214,7 +214,7 @@ docker start &lt;milvus_container_id&gt;
 <li><a href="/docs/ja/gcp.md">Googleクラウド</a></li>
 <li><a href="/docs/ja/azure.md">Microsoft Azure</a></li>
 </ul></li>
-<li><p><a href="/docs/ja/milvus_backup_overview.md">Milvusの</a>データバックアップのためのオープンソースツールである<a href="/docs/ja/milvus_backup_overview.md">Milvus Backupを</a>ご紹介します。</p></li>
+<li><p><a href="/docs/ja/milvus_backup_overview.md">Milvusの</a>データバックアップのためのオープンソースツールである<a href="/docs/ja/milvus_backup_overview.md">Milvus Backupを</a>紹介します。</p></li>
 <li><p>Milvusのデバッグとダイナミックコンフィギュレーションアップデートのためのオープンソースツール、<a href="/docs/ja/birdwatcher_overview.md">Birdwatcherの</a>ご紹介。</p></li>
 <li><p>Milvusを直感的に管理するオープンソースのGUIツール<a href="https://milvus.io/docs/attu.md">Attuを</a>ご覧ください。</p></li>
 <li><p><a href="/docs/ja/monitor.md">PrometheusでMilvusを監視する</a>。</p></li>

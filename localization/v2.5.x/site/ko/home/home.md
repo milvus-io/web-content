@@ -10,7 +10,7 @@ Milvus 문서에 오신 것을 환영합니다!</h1></p>
 <div class="doc-home-promotion-wrapper">
   <div class="promotion-content">
     <h2 class="promotion-title">관리형 Milvus를 무료로 체험해 보세요!</h2>
-    <p class="promotion-desc">질리즈 클라우드를 무료로 체험해보세요! 밀버스를 가장 쉽게 경험하는 방법!</p>
+    <p class="promotion-desc">번거로움이 없고, Milvus로 구동되며, 10배 더 빠른 Zilliz Cloud.</p>
   </div>
   <div class="cta-wrapper">
    <a class="cta-global" href="https://cloud.zilliz.com/signup">질리즈 클라우드</a> <a class="cta-cn" href="https://cloud.zilliz.com.cn/signup">질리즈 클라우드 중국</a></div>
@@ -34,7 +34,7 @@ Milvus 문서에 오신 것을 환영합니다!</h1></p>
 <div class="start_card_container">
   
    <a href="/docs/ko/install_standalone-docker.md"> <img translate="no" src="/docs/v2.5.x/assets/home_install.svg" alt="icon" />
-   </a> <a href="/docs/ko/install_standalone-docker.md"> <p class="link-btn">밀버스 설치하기</p> </a><p>도커 컴포즈 또는 쿠버네티스를 사용하여 Milvus를 설치하는 방법을 알아보세요.</p>
+   </a> <a href="/docs/ko/install_standalone-docker.md"> <p class="link-btn">Milvus 설치하기</p> </a><p>Docker Compose 또는 Kubernetes를 사용하여 Milvus를 설치하는 방법을 알아보세요.</p>
 </div>
 <div class="start_card_container">
   

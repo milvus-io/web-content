@@ -60,7 +60,7 @@ title: Instalar Milvus Python SDK
     </button></h2><p>PyMilvus está disponible en <a href="https://pypi.org/project/pymilvus/">Python Package Index</a>.</p>
 <div class="alert note">
 Se recomienda instalar una versión de PyMilvus que coincida con la versión del servidor Milvus que ha instalado. Para más información, consulte <a href="/docs/es/release_notes.md">las Notas de la versión</a>.</div>
-<pre><code translate="no">$ python3 -m pip install pymilvus==2.5.0
+<pre><code translate="no">$ python3 -m pip install pymilvus==2.5.2
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Verify-installation" class="common-anchor-header">Verifique la instalación<button data-href="#Verify-installation" class="anchor-icon" translate="no">
       <svg translate="no"

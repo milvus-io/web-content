@@ -90,7 +90,7 @@ title: Verwalten von Ressourcengruppen
         ></path>
       </svg>
     </button></h2><div class="alert note">
-<p>Alle Codebeispiele auf dieser Seite sind in PyMilvus 2.4.9. Aktualisieren Sie Ihre PyMilvus-Installation, bevor Sie sie ausführen.</p>
+<p>Alle Codebeispiele auf dieser Seite sind in PyMilvus 2.4.13. Aktualisieren Sie Ihre PyMilvus-Installation, bevor Sie sie ausführen.</p>
 </div>
 <ol>
 <li><p>Erstellen Sie eine Ressourcengruppe.</p>
@@ -231,7 +231,7 @@ num_replicas = <span class="hljs-number">1</span>
     </button></h2><p>Derzeit kann Milvus in Cloud-nativen Umgebungen nicht unabhängig ein- und ausskaliert werden. Durch die Verwendung der <strong>deklarativen Ressourcengruppen-API</strong> in Verbindung mit der Container-Orchestrierung kann Milvus jedoch auf einfache Weise eine Ressourcenisolierung und -verwaltung für QueryNodes erreichen. Hier ist eine gute Praxis für die Verwaltung von QueryNodes in einer Cloud-Umgebung:</p>
 <ol>
 <li><p>Standardmäßig erstellt Milvus eine <strong>__default_resource_group</strong>. Diese Ressourcengruppe kann nicht gelöscht werden und dient auch als Standard-Laderessourcengruppe für alle Sammlungen, und redundante QueryNodes werden ihr immer zugewiesen. Daher können wir eine schwebende Ressourcengruppe erstellen, die unbenutzte QueryNode-Ressourcen aufnimmt und verhindert, dass QueryNode-Ressourcen von der <strong>__default_resource_group</strong> belegt werden.</p>
-<p>Wenn wir außerdem die Einschränkung <code translate="no">sum(.requests.nodeNum) &lt;= queryNodeNum</code> strikt durchsetzen, können wir die Zuweisung von QueryNodes im Cluster genau kontrollieren. Gehen wir davon aus, dass es derzeit nur einen QueryNode im Cluster gibt und initialisieren wir den Cluster. Hier ist ein Beispiel-Setup:</p>
+<p>Wenn wir außerdem die Einschränkung <code translate="no">sum(.requests.nodeNum) &lt;= queryNodeNum</code> strikt durchsetzen, können wir die Zuweisung von QueryNodes im Cluster genau kontrollieren. Nehmen wir an, dass es derzeit nur einen QueryNode im Cluster gibt und initialisieren wir den Cluster. Hier ist ein Beispiel-Setup:</p>
 <pre><code translate="no" class="language-Python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> utility
 <span class="hljs-keyword">from</span> pymilvus.client.types <span class="hljs-keyword">import</span> ResourceGroupConfig
 
@@ -276,7 +276,7 @@ init_cluster(<span class="hljs-number">1</span>)
     <span class="hljs-comment"># scale the querynode number in Milvus into node_num.</span>
     <span class="hljs-keyword">pass</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Wir können die API verwenden, um eine bestimmte Ressourcengruppe auf eine bestimmte Anzahl von Abfrageknoten zu skalieren, ohne andere Ressourcengruppen zu beeinträchtigen.</p>
+<p>Wir können die API verwenden, um eine bestimmte Ressourcengruppe auf eine bestimmte Anzahl von QueryNodes zu skalieren, ohne andere Ressourcengruppen zu beeinträchtigen.</p>
 <pre><code translate="no" class="language-Python"><span class="hljs-comment"># scale rg1 into 3 nodes, rg2 into 1 nodes</span>
 utility.update_resource_groups({
     <span class="hljs-string">&quot;rg1&quot;</span>: ResourceGroupConfig(

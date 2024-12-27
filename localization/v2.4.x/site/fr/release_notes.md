@@ -19,6 +19,47 @@ title: Release Notes
         ></path>
       </svg>
     </button></h1><p>Find out what’s new in Milvus! This page summarizes new features, improvements, known issues, and bug fixes in each release. You can find the release notes for each released version after v2.4.0 in this section. We suggest that you regularly visit this page to learn about updates.</p>
+<h2 id="v2419" class="common-anchor-header">v2.4.19<button data-href="#v2419" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>Release Date: December 26, 2024</p>
+<table>
+<thead>
+<tr><th>Milvus version</th><th>Python SDK version</th><th>Java SDK version</th><th>Node.js SDK version</th></tr>
+</thead>
+<tbody>
+<tr><td>2.4.19</td><td>2.4.13</td><td>2.4.9</td><td>2.4.9</td></tr>
+</tbody>
+</table>
+<p>Milvus 2.4.19 focuses on fixing issues in RBAC, Balancer, and loading processes, while also introducing several performance enhancements in areas such as PartitionKey Deletion and hybrid searching. We highly recommend upgrading to this version for increased stability and reliability.</p>
+<h3 id="Improvements" class="common-anchor-header">Improvements</h3><ul>
+<li>Expression templates are introduced to accelerate hybrid searches. (<a href="https://github.com/milvus-io/milvus/pull/38624">#38624</a>)</li>
+<li>Additional metrics are provided for improved deletion monitoring. (<a href="https://github.com/milvus-io/milvus/pull/38746">#38746</a>)</li>
+<li>L0 file generation is restricted to specific partition for partitionKey deletion to reduce amplification. (<a href="https://github.com/milvus-io/milvus/pull/38232">#38232</a>)</li>
+</ul>
+<h3 id="Bug-fixes" class="common-anchor-header">Bug fixes</h3><ul>
+<li>Fixed OOM issues by adding a memory factor to loading estimations. (<a href="https://github.com/milvus-io/milvus/pull/38721">#38721</a>)</li>
+<li>Fixed privilege group expansion when listing policies in RootCoord. (<a href="https://github.com/milvus-io/milvus/pull/38759">#38759</a>)</li>
+<li>Fixed access log retention, skipping empty log rotation. (<a href="https://github.com/milvus-io/milvus/pull/38661">#38661</a>)</li>
+<li>Fixed the balancer to avoid repeatedly overloading the same query node. (<a href="https://github.com/milvus-io/milvus/pull/38720">#38720</a>)</li>
+<li>Fixed issues with listing privilege groups and collections. (<a href="https://github.com/milvus-io/milvus/pull/38698">#38698</a>)</li>
+<li>Fixed load config updates not applying to loading collections. (<a href="https://github.com/milvus-io/milvus/pull/38596">#38596</a>)</li>
+<li>Fixed unexpected balance tasks triggered after QueryCoord restarts. (<a href="https://github.com/milvus-io/milvus/pull/38714">#38714</a>)</li>
+<li>Fixed zero read count during data import. (<a href="https://github.com/milvus-io/milvus/pull/38696">#38696</a>)</li>
+<li>Fixed Unicode decoding for JSON keys in expressions. (<a href="https://github.com/milvus-io/milvus/pull/38652">#38652</a>)</li>
+</ul>
 <h2 id="v2418" class="common-anchor-header">v2.4.18<button data-href="#v2418" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

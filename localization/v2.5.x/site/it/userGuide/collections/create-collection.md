@@ -59,7 +59,7 @@ title: Creare una raccolta
     </button></h2><p>Uno schema definisce la struttura dei dati di una raccolta. Quando si crea una raccolta, è necessario progettare lo schema in base alle proprie esigenze. Per maggiori dettagli, consultare <a href="/docs/it/manage-collections.md">Schema spiegato</a>.</p>
 <p>I seguenti frammenti di codice creano uno schema con il campo dinamico abilitato e tre campi obbligatori denominati <code translate="no">my_id</code>, <code translate="no">my_vector</code> e <code translate="no">my_varchar</code>.</p>
 <div class="alert note">
-<p>È possibile impostare valori predefiniti per qualsiasi campo scalare e renderlo nullable. Per maggiori dettagli, fare riferimento a <a href="/docs/it/nullable-and-default.md">Nullable e Default</a>.</p>
+<p>È possibile impostare valori predefiniti per qualsiasi campo scalare e renderlo nullable. Per maggiori dettagli, consultare <a href="/docs/it/nullable-and-default.md">Nullable e Default</a>.</p>
 </div>
 <div class="multipleCode">
  <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#go">Go</a> <a href="#curl">cURL</a></div>
@@ -206,7 +206,7 @@ schema := entity.NewSchema().WithDynamicFieldEnabled(<span class="hljs-literal">
       </svg>
     </button></h2><p>La creazione di un indice su un campo specifico accelera la ricerca su questo campo. Un indice registra l'ordine delle entità all'interno di un insieme. Come mostrato nei seguenti frammenti di codice, è possibile utilizzare <code translate="no">metric_type</code> e <code translate="no">index_type</code> per selezionare i modi appropriati per Milvus di indicizzare un campo e misurare le somiglianze tra le incorporazioni vettoriali.</p>
 <p>In Milvus, si può usare <code translate="no">AUTOINDEX</code> come tipo di indice per tutti i campi vettoriali e uno tra <code translate="no">COSINE</code>, <code translate="no">L2</code> e <code translate="no">IP</code> come tipo di metrica in base alle proprie esigenze.</p>
-<p>Come dimostrato nel frammento di codice precedente, è necessario impostare sia il tipo di indice che il tipo di metrica per i campi vettoriali e solo il tipo di indice per i campi scalari. Gli indici sono obbligatori per i campi vettoriali e si consiglia di creare indici sui campi scalari utilizzati di frequente nelle condizioni di filtraggio.</p>
+<p>Come dimostrato nel frammento di codice precedente, è necessario impostare sia il tipo di indice che il tipo di metrica per i campi vettoriali e solo il tipo di indice per i campi scalari. Gli indici sono obbligatori per i campi vettoriali e si consiglia di creare indici per i campi scalari usati frequentemente nelle condizioni di filtraggio.</p>
 <p>Per maggiori dettagli, consultare la sezione <a href="/docs/it/index-vector-fields.md">Indici</a>.</p>
 <div class="multipleCode">
  <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#go">Go</a> <a href="#curl">cURL</a></div>
@@ -399,7 +399,7 @@ curl --request POST \​
 
 <button class="copy-code-btn"></button></code></pre>
 <p>È anche possibile creare una collezione senza parametri di indice e aggiungerli successivamente. In questo caso, Milvus non carica la collezione al momento della sua creazione. Per maggiori dettagli su come creare indici per una collezione esistente, consultare la sezione <a href="/docs/it/index-vector-fields.md">Indice spiegato</a>.</p>
-<p>Lo snippet di codice seguente mostra come creare una collezione senza una collezione e lo stato di caricamento della collezione rimane scarico al momento della creazione.</p>
+<p>Il seguente frammento di codice mostra come creare una collezione senza indice, e lo stato di caricamento della collezione rimane scarico al momento della creazione.</p>
 <div class="multipleCode">
  <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#go">Go</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># 3.6. Create a collection and index it separately​</span>
@@ -495,7 +495,7 @@ curl --request POST \​
 }&quot;</span>​
 
 <button class="copy-code-btn"></button></code></pre>
-<p>Milvus offre anche un modo per creare istantaneamente una collezione. Per maggiori dettagli, consultare la sezione <a href="/docs/it/create-collection-instantly.md">Creare una raccolta all'istante</a>.</p>
+<p>Milvus offre anche la possibilità di creare una raccolta istantaneamente. Per maggiori dettagli, consultare la sezione <a href="/docs/it/create-collection-instantly.md">Creare una raccolta all'istante</a>.</p>
 <h2 id="Set-Collection-Properties​" class="common-anchor-header">Impostare le proprietà della raccolta<button data-href="#Set-Collection-Properties​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -513,8 +513,8 @@ curl --request POST \​
       </svg>
     </button></h2><p>È possibile impostare le proprietà della raccolta da creare per adattarla al proprio servizio. Le proprietà applicabili sono le seguenti.</p>
 <h3 id="Set-Shard-Number​" class="common-anchor-header">Imposta numero di frammenti</h3><p>I frammenti sono fette orizzontali di una raccolta. Ogni frammento corrisponde a un canale di ingresso dei dati. Ogni raccolta ha un frammento per impostazione predefinita. È possibile impostare il numero appropriato di shard quando si crea una raccolta, in base al throughput previsto e al volume dei dati da inserire nella raccolta.</p>
-<p>Nei casi più comuni, si consiglia di aumentare il numero di shard di uno ogni volta che il throughput previsto aumenta di 500 MB/s o il volume dei dati da inserire aumenta di 100 GB. Questo suggerimento non impedisce di inserire i dati nella raccolta utilizzando il numero di shard predefinito.</p>
-<p>Il seguente frammento di codice mostra come impostare il numero di shard quando si crea una raccolta.</p>
+<p>Nei casi più comuni, si consiglia di aumentare il numero di shard di uno ogni volta che il throughput previsto aumenta di 500 MB/s o il volume dei dati da inserire aumenta di 100 GB. Questo suggerimento si basa sulla nostra esperienza e potrebbe non essere completamente adatto agli scenari applicativi. È possibile modificare questo numero per adattarlo alle proprie esigenze o utilizzare il valore predefinito.</p>
+<p>Il seguente frammento di codice mostra come impostare il numero di shard quando si crea una collezione.</p>
 <div class="multipleCode">
  <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#go">Go</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-meta"># With shard number​</span>

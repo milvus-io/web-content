@@ -10,10 +10,10 @@ Vous découvrirez ici ce qu'est Milvus et comment installer, utiliser et déploy
 <div class="doc-home-promotion-wrapper">
   <div class="promotion-content">
     <h2 class="promotion-title">Essayez Milvus Managed gratuitement !</h2>
-    <p class="promotion-desc">Essayez Zilliz Cloud gratuitement ! Le moyen le plus simple de découvrir Milvus !</p>
+    <p class="promotion-desc">Zilliz Cloud est sans tracas, alimenté par Milvus et 10 fois plus rapide.</p>
   </div>
   <div class="cta-wrapper">
-   <a class="cta-global" href="https://cloud.zilliz.com/signup">Zilliz Cloud</a> <a class="cta-cn" href="https://cloud.zilliz.com.cn/signup">Zilliz Cloud China</a></div>
+   <a class="cta-global" href="https://cloud.zilliz.com/signup">Zilliz</a> <a class="cta-cn" href="https://cloud.zilliz.com.cn/signup">Cloud Zilliz Cloud Chine</a></div>
 </div>
 <h2 id="Get-Started" class="common-anchor-header">Commencer<button data-href="#Get-Started" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -34,7 +34,7 @@ Vous découvrirez ici ce qu'est Milvus et comment installer, utiliser et déploy
 <div class="start_card_container">
   
    <a href="/docs/fr/install_standalone-docker.md"> <img translate="no" src="/docs/v2.5.x/assets/home_install.svg" alt="icon" />
-   </a> <a href="/docs/fr/install_standalone-docker.md"> <p class="link-btn">Installer Milvus</p> </a><p>Apprenez à installer Milvus à l'aide de Docker Compose ou sur Kubernetes.</p>
+   </a> <a href="/docs/fr/install_standalone-docker.md"> <p class="link-btn">Installer Milvus</p> </a><p>Découvrez comment installer Milvus à l'aide de Docker Compose ou sur Kubernetes.</p>
 </div>
 <div class="start_card_container">
   

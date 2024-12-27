@@ -702,70 +702,39 @@
             "children": []
           },
           {
-            "label": "Filtraggio",
-            "id": "filtering",
-            "order": 6,
-            "children": [
-              {
-                "label": "Il filtraggio spiegato",
-                "id": "boolean.md",
-                "order": 0,
-                "children": []
-              },
-              {
-                "label": "Operatori di base",
-                "id": "basic-operators.md",
-                "order": 1,
-                "children": []
-              },
-              {
-                "label": "Filtraggio Templating",
-                "id": "filtering-templating.md",
-                "order": 2,
-                "children": []
-              },
-              {
-                "label": "Operatori JSON",
-                "id": "json-operators.md",
-                "order": 3,
-                "children": []
-              },
-              {
-                "label": "Operatori di matrice",
-                "id": "array-operators.md",
-                "order": 4,
-                "children": []
-              }
-            ]
-          },
-          {
             "label": "Ricerca a testo completo",
             "id": "full-text-search.md",
-            "order": 7,
+            "order": 6,
             "children": []
           },
           {
             "label": "Corrispondenza del testo",
             "id": "keyword-match.md",
-            "order": 8,
+            "order": 7,
             "children": []
           },
           {
             "label": "Iteratori di ricerca",
             "id": "with-iterators.md",
-            "order": 9,
+            "order": 8,
             "children": []
           },
           {
             "label": "Utilizzare la chiave di partizione",
             "id": "use-partition-key.md",
-            "order": 10,
+            "order": 9,
+            "children": []
+          },
+          {
+            "label": "Filtraggio dei metadati",
+            "id": "boolean.md",
+            "order": 14,
             "children": []
           },
           {
             "label": "Reranking",
             "id": "reranking.md",
-            "order": 11,
+            "order": 15,
             "children": []
           }
         ]
@@ -1167,7 +1136,7 @@
                 "children": []
               },
               {
-                "label": "Memorizzazione dei messaggi",
+                "label": "Message Storage",
                 "id": "deploy_pulsar.md",
                 "order": 2,
                 "children": []
@@ -1395,48 +1364,17 @@
             "children": []
           },
           {
-            "label": "RBAC",
-            "id": "rbac",
+            "label": "Utenti, privilegi e ruoli",
+            "id": "users_and_roles.md",
+            "order": 10,
+            "children": []
+          },
+          {
+            "label": "Abilitare RBAC",
+            "id": "rbac.md",
             "order": 1,
             "isMenu": true,
-            "children": [
-              {
-                "label": "RBAC spiegato",
-                "id": "rbac.md",
-                "order": 0,
-                "children": []
-              },
-              {
-                "label": "Creare utenti e ruoli",
-                "id": "users_and_roles.md",
-                "order": 1,
-                "children": []
-              },
-              {
-                "label": "Creare un gruppo di privilegi",
-                "id": "privilege_group.md",
-                "order": 2,
-                "children": []
-              },
-              {
-                "label": "Concessione di privilegi",
-                "id": "grant_privileges.md",
-                "order": 3,
-                "children": []
-              },
-              {
-                "label": "Ruoli delle sovvenzioni",
-                "id": "grant_roles.md",
-                "order": 4,
-                "children": []
-              },
-              {
-                "label": "Eliminare utenti e ruoli",
-                "id": "drop_users_roles.md",
-                "order": 5,
-                "children": []
-              }
-            ]
+            "children": []
           },
           {
             "label": "Crittografia in transito",
@@ -1574,12 +1512,6 @@
             "children": []
           }
         ]
-      },
-      {
-        "label": "Milvus WebUI",
-        "id": "milvus-webui.md",
-        "order": 6,
-        "children": []
       },
       {
         "label": "Strumento di dimensionamento Milvus",
@@ -2008,69 +1940,75 @@
         "children": []
       },
       {
-        "label": "Ricerca immagini con Milvus",
-        "id": "image_similarity_search.md",
+        "label": "RAG avanzato",
+        "id": "how_to_enhance_your_rag.md",
         "order": 2,
-        "children": []
-      },
-      {
-        "label": "Ricerca ibrida con Milvus",
-        "id": "hybrid_search_with_milvus.md",
-        "order": 3,
-        "children": []
-      },
-      {
-        "label": "RAG multimodale",
-        "id": "multimodal_rag_with_milvus.md",
-        "order": 4,
-        "children": []
-      },
-      {
-        "label": "Grafico RAG con Milvus",
-        "id": "graph_rag_with_milvus.md",
-        "order": 6,
-        "children": []
-      },
-      {
-        "label": "Recupero contestuale",
-        "id": "contextual_retrieval_with_milvus.md",
-        "order": 5,
-        "children": []
-      },
-      {
-        "label": "Raggruppamento HDBSCAN",
-        "id": "hdbscan_clustering_with_milvus.md",
-        "order": 6,
-        "children": []
-      },
-      {
-        "label": "Utilizzare ColPali per il recupero multimodale",
-        "id": "use_ColPali_with_milvus.md",
-        "order": 7,
-        "children": []
-      },
-      {
-        "label": "Visualizzazione vettoriale",
-        "id": "vector_visualization.md",
-        "order": 8,
-        "children": []
-      },
-      {
-        "label": "Raccomandazione di film",
-        "id": "movie_recommendation_with_milvus.md",
-        "order": 9,
-        "children": []
-      },
-      {
-        "label": "Ricerca a imbuto con le matrici Matryoshka",
-        "id": "funnel_search_with_matryoshka.md",
-        "order": 10,
         "children": []
       },
       {
         "label": "Ricerca a tutto testo con Milvus",
         "id": "full_text_search_with_milvus.md",
+        "order": 3,
+        "children": []
+      },
+      {
+        "label": "Ricerca ibrida con Milvus",
+        "id": "hybrid_search_with_milvus.md",
+        "order": 4,
+        "children": []
+      },
+      {
+        "label": "Ricerca immagini con Milvus",
+        "id": "image_similarity_search.md",
+        "order": 5,
+        "children": []
+      },
+      {
+        "label": "RAG multimodale",
+        "id": "multimodal_rag_with_milvus.md",
+        "order": 6,
+        "children": []
+      },
+      {
+        "label": "Grafico RAG con Milvus",
+        "id": "graph_rag_with_milvus.md",
+        "order": 7,
+        "children": []
+      },
+      {
+        "label": "Recupero contestuale",
+        "id": "contextual_retrieval_with_milvus.md",
+        "order": 8,
+        "children": []
+      },
+      {
+        "label": "Raggruppamento HDBSCAN",
+        "id": "hdbscan_clustering_with_milvus.md",
+        "order": 9,
+        "children": []
+      },
+      {
+        "label": "Utilizzare ColPali per il recupero multimodale",
+        "id": "use_ColPali_with_milvus.md",
+        "order": 10,
+        "children": []
+      },
+      {
+        "label": "Visualizzazione vettoriale",
+        "id": "vector_visualization.md",
         "order": 11,
+        "children": []
+      },
+      {
+        "label": "Raccomandazione di film",
+        "id": "movie_recommendation_with_milvus.md",
+        "order": 12,
+        "children": []
+      },
+      {
+        "label": "Ricerca a imbuto con le matrici Matryoshka",
+        "id": "funnel_search_with_matryoshka.md",
+        "order": 13,
         "children": []
       },
       {

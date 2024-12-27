@@ -22,7 +22,7 @@ title: Upgrade des Milvus-Clusters mit Docker Compose
         ></path>
       </svg>
     </button></h1><p>Dieses Thema beschreibt, wie Sie Ihr Milvus mit Docker Compose aktualisieren können.</p>
-<p>Im Normalfall können Sie <a href="#Upgrade-Milvus-by-changing-its-image">Milvus aktualisieren, indem Sie sein Image ändern</a>. Sie müssen jedoch <a href="#Migrate-the-metadata">die Metadaten</a> vor einem Upgrade von v2.1.x auf v2.5.0 <a href="#Migrate-the-metadata">migrieren</a>.</p>
+<p>Im Normalfall können Sie <a href="#Upgrade-Milvus-by-changing-its-image">Milvus aktualisieren, indem Sie sein Image ändern</a>. Sie müssen jedoch <a href="#Migrate-the-metadata">die Metadaten</a> vor einem Upgrade von v2.1.x auf v2.5.1 <a href="#Migrate-the-metadata">migrieren</a>.</p>
 <h2 id="Upgrade-Milvus-by-changing-its-image" class="common-anchor-header">Upgrade von Milvus durch Ändern des Images<button data-href="#Upgrade-Milvus-by-changing-its-image" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -45,35 +45,35 @@ title: Upgrade des Milvus-Clusters mit Docker Compose
 <pre><code translate="no" class="language-yaml">...
 rootcoord:
   container_name: milvus-rootcoord
-  image: milvusdb/milvus:v2.5.0
+  image: milvusdb/milvus:v2.5.1
 ...
 proxy:
   container_name: milvus-proxy
-  image: milvusdb/milvus:v2.5.0
+  image: milvusdb/milvus:v2.5.1
 ...
 querycoord:
   container_name: milvus-querycoord
-  image: milvusdb/milvus:v2.5.0  
+  image: milvusdb/milvus:v2.5.1  
 ...
 querynode:
   container_name: milvus-querynode
-  image: milvusdb/milvus:v2.5.0
+  image: milvusdb/milvus:v2.5.1
 ...
 indexcoord:
   container_name: milvus-indexcoord
-  image: milvusdb/milvus:v2.5.0
+  image: milvusdb/milvus:v2.5.1
 ...
 indexnode:
   container_name: milvus-indexnode
-  image: milvusdb/milvus:v2.5.0 
+  image: milvusdb/milvus:v2.5.1 
 ...
 datacoord:
   container_name: milvus-datacoord
-  image: milvusdb/milvus:v2.5.0   
+  image: milvusdb/milvus:v2.5.1   
 ...
 datanode:
   container_name: milvus-datanode
-  image: milvusdb/milvus:v2.5.0
+  image: milvusdb/milvus:v2.5.1
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>Führen Sie die folgenden Befehle aus, um das Upgrade durchzuführen.</p>
 <pre><code translate="no" class="language-shell">docker compose down
@@ -107,7 +107,7 @@ cmd:
   runWithBackup: true
 config:
   sourceVersion: <span class="hljs-number">2.1</span><span class="hljs-number">.4</span>   <span class="hljs-comment"># Specify your milvus version</span>
-  targetVersion: <span class="hljs-number">2.5</span><span class="hljs-number">.0</span>
+  targetVersion: <span class="hljs-number">2.5</span><span class="hljs-number">.1</span>
   backupFilePath: /tmp/migration.bak
 metastore:
   <span class="hljs-built_in">type</span>: etcd

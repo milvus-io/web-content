@@ -399,7 +399,7 @@ curl --request POST \​
 
 <button class="copy-code-btn"></button></code></pre>
 <p>También puede crear una colección sin parámetros de índice y añadirlos después. En este caso, Milvus no carga la colección en el momento de su creación. Para más detalles sobre cómo crear índices para una colección existente, consulte <a href="/docs/es/index-vector-fields.md">Index Explained</a>.</p>
-<p>El siguiente fragmento de código demuestra cómo crear una colección sin una colección, y el estado de carga de la colección permanece sin cargar en el momento de su creación.</p>
+<p>El siguiente fragmento de código demuestra cómo crear una colección sin un índice, y el estado de carga de la colección permanece sin cargar en el momento de su creación.</p>
 <div class="multipleCode">
  <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#go">Go</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># 3.6. Create a collection and index it separately​</span>
@@ -513,7 +513,7 @@ curl --request POST \​
       </svg>
     </button></h2><p>Puede establecer propiedades para la colección a crear para que se ajuste a su servicio. Las propiedades aplicables son las siguientes.</p>
 <h3 id="Set-Shard-Number​" class="common-anchor-header">Establecer número de fragmentos</h3><p>Los fragmentos son partes horizontales de una colección. Cada fragmento corresponde a un canal de entrada de datos. Por defecto, cada colección tiene un fragmento. Puede establecer el número apropiado de fragmentos al crear una colección basándose en el rendimiento esperado y el volumen de los datos a insertar en la colección.</p>
-<p>En casos comunes, considere aumentar el número de fragmentos en uno cada vez que el rendimiento esperado aumente en 500 MB/s o el volumen de datos a insertar aumente en 100 GB. Esta sugerencia no le impide insertar datos en la colección utilizando el número de fragmentos predeterminado.</p>
+<p>En casos comunes, considere aumentar el número de fragmentos en uno cada vez que el rendimiento esperado aumente en 500 MB/s o el volumen de datos a insertar aumente en 100 GB. Esta sugerencia se basa en nuestra propia experiencia y puede no ajustarse completamente a sus escenarios de aplicación. Puede ajustar este número a sus propias necesidades o simplemente utilizar el valor por defecto.</p>
 <p>El siguiente fragmento de código muestra cómo establecer el número de fragmentos al crear una colección.</p>
 <div class="multipleCode">
  <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#go">Go</a> <a href="#curl">cURL</a></div>
@@ -755,6 +755,6 @@ curl --request POST \​
 }&quot;</span>​
 
 <button class="copy-code-btn"></button></code></pre>
-<p>Para obtener más información sobre los niveles de coherencia, consulte <a href="/docs/es/consistency.md">Nivel de coherencia</a>.</p>
+<p>Para obtener más información sobre los niveles de consistencia, consulte <a href="/docs/es/consistency.md">Nivel de consistencia</a>.</p>
 <h3 id="Enable-Dynamic-Field​" class="common-anchor-header">Habilitar campo dinámico</h3><p>El campo dinámico de una colección es un campo reservado de JavaScript Object Notation (JSON) llamado <strong>$meta</strong>. Una vez habilitado este campo, Milvus guarda todos los campos no definidos por el esquema que lleva cada entidad y sus valores como pares clave-valor en el campo reservado.</p>
 <p>Para más detalles sobre cómo utilizar el campo dinámico, consulte <a href="/docs/es/enable-dynamic-field.md">Campo dinámico</a>.</p>

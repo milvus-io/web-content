@@ -90,11 +90,11 @@ title: 管理资源组
         ></path>
       </svg>
     </button></h2><div class="alert note">
-<p>本页面上的所有代码示例都在 PyMilvus 2.5.0 中。运行这些示例之前，请升级您的 PyMilvus 安装。</p>
+<p>本页面上的所有代码示例都在 PyMilvus 2.5.2 中。运行这些示例之前，请升级您的 PyMilvus 安装。</p>
 </div>
 <ol>
 <li><p>创建资源组。</p>
-<p>要创建资源组，请在连接到 Milvus 实例后运行以下代码。以下代码段假定<code translate="no">default</code> 是 Milvus 连接的别名。</p>
+<p>要创建资源组，请在连接 Milvus 实例后运行以下代码。以下代码段假定<code translate="no">default</code> 是 Milvus 连接的别名。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">import</span> pymilvus
 
 <span class="hljs-comment"># A resource group name should be a string of 1 to 255 characters, starting with a letter or an underscore (_) and containing only numbers, letters, and underscores (_).</span>
@@ -133,7 +133,7 @@ node_num = <span class="hljs-number">0</span>
 <span class="hljs-comment">#        &lt;num_incoming_node:{}&gt;.  // map[string]int, from collection_name to incoming accessed node num by replica loaded in other rg</span>
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>在资源组之间转移节点。</p>
-<p>您可能会注意到，所描述的资源组还没有任何查询节点。将一些节点从默认资源组转移到你创建的资源组，如下所示： 假设集群的__default_<strong>resource</strong>_group 中目前有 1 个查询节点，我们想将一个节点转移到创建的<strong>rg</strong> 中。<code translate="no">update_resource_groups</code> ，确保多次配置更改的原子性，因此 Milvus 不会看到中间状态。</p>
+<p>您可能会注意到，所描述的资源组还没有任何查询节点。将一些节点从默认资源组转移到你创建的资源组，如下所示： 假设集群的<strong>__default_resource_group</strong>中目前有 1 个查询节点，我们想将一个节点转移到创建的<strong>rg</strong> 中。<code translate="no">update_resource_groups</code> ，确保多个配置更改的原子性，因此 Milvus 不会看到任何中间状态。</p>
 <pre><code translate="no" class="language-python">source = <span class="hljs-string">&#x27;__default_resource_group&#x27;</span>
 target = <span class="hljs-string">&#x27;rg&#x27;</span>
 expected_num_nodes_in_default = <span class="hljs-number">0</span>
@@ -170,7 +170,7 @@ collection.load(replica_number=<span class="hljs-number">2</span>)
 resource_groups = [<span class="hljs-string">&#x27;rg&#x27;</span>]
 collection.load(replica_number=<span class="hljs-number">2</span>, _resource_groups=resource_groups) 
 <button class="copy-code-btn"></button></code></pre>
-<p>此外，您还可以将一个分区加载到一个资源组中，并将其副本分布到多个资源组中。下面假设已经存在名为<code translate="no">Books</code> 的 Collections，并且它有一个名为<code translate="no">Novels</code> 的分区。</p>
+<p>此外，您还可以将一个分区加载到一个资源组中，并将其副本分布到多个资源组中。下面假定已经存在名为<code translate="no">Books</code> 的 Collections，并且它有一个名为<code translate="no">Novels</code> 的分区。</p>
 <pre><code translate="no" class="language-python">collection = Collection(<span class="hljs-string">&quot;Books&quot;</span>)
 
 <span class="hljs-comment"># Use the load method of a collection to load one of its partition</span>

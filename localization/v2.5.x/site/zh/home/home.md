@@ -9,11 +9,11 @@ id: home.md
 </div>
 <div class="doc-home-promotion-wrapper">
   <div class="promotion-content">
-    <h2 class="promotion-title">免费试用托管的 Milvus！</h2>
-    <p class="promotion-desc">免费试用Zilliz Cloud！体验Milvus的最简单方式！</p>
+    <h2 class="promotion-title">免费试用Milvus托管服务！</h2>
+    <p class="promotion-desc">Zilliz Cloud由Milvus提供支持，无后顾之忧，速度快10倍。</p>
   </div>
   <div class="cta-wrapper">
-   <a class="cta-global" href="https://cloud.zilliz.com/signup">Zilliz Cloud</a> <a class="cta-cn" href="https://cloud.zilliz.com.cn/signup">Zilliz Cloud 中国</a></div>
+   <a class="cta-global" href="https://cloud.zilliz.com/signup">Zilliz Cloud</a>Zilliz Cloud 中国  </div>
 </div>
 <h2 id="Get-Started" class="common-anchor-header">开始使用<button data-href="#Get-Started" class="anchor-icon" translate="no">
       <svg translate="no"

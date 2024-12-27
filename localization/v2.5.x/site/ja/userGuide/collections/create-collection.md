@@ -399,7 +399,7 @@ curl --request POST \​
 
 <button class="copy-code-btn"></button></code></pre>
 <p>インデックスパラメータなしでコレクションを作成し、後からインデックスパラメータを追加することもできます。この場合、Milvusはコレクション作成時にコレクションをロードしません。既存のコレクションにインデックスを作成する方法の詳細については、<a href="/docs/ja/index-vector-fields.md">Index Explainedを</a>参照してください。</p>
-<p>以下のコードスニペットは、コレクションなしでコレクションを作成する方法を示しており、コレクションのロード状態は作成時にアンロードされたままです。</p>
+<p>以下のコードスニペットは、インデックスなしでコレクションを作成する方法を示しており、コレクションのロード状態は作成時にアンロードされたままです。</p>
 <div class="multipleCode">
  <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#go">Go</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># 3.6. Create a collection and index it separately​</span>
@@ -513,8 +513,8 @@ curl --request POST \​
       </svg>
     </button></h2><p>作成するコレクションにプロパティを設定して、サービスに適合させることができます。適用可能なプロパティは以下のとおりです。</p>
 <h3 id="Set-Shard-Number​" class="common-anchor-header">シャード番号の設定</h3><p>シャードは、コレクションの水平スライスです。各シャードはデータ入力チャネルに対応します。すべてのコレクションには、デフォルトでシャードがあります。予想されるスループットとコレクションに挿入するデータ量に基づいて、コ レクションを作成するときに適切なシャード数を設定できます。</p>
-<p>一般的なケースでは、予想されるスループットが500 MB/s増加するたび、または挿入するデータ量が100 GB増加するたびに、シャード数を1つ増やすことを検討してください。この提案は、デフォルトのシャード番号を使用してコレクションにデータを挿入することを妨げるものではありません。</p>
-<p>次のコード・スニペットは、コレクションの作成時にシャード番号を設定する方法を示しています。</p>
+<p>一般的なケースでは、予想されるスループットが500 MB/s増加するたびに、または挿入するデータ量が100 GB増加するたびに、シャード数を1つ増やすことを検討してください。この提案は私たち自身の経験に基づいており、アプリケーションのシナリオに完全に適合するとは限りません。ご自身のニーズに合わせてこの数値を調整することもできますし、デフォルト値を使用することもできます。</p>
+<p>以下のコード・スニペットは、コレクション作成時にシャード数を設定する方法を示しています。</p>
 <div class="multipleCode">
  <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#go">Go</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-meta"># With shard number​</span>
@@ -571,7 +571,7 @@ curl --request POST \​
 }&quot;</span>​
 
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Enable-mmap​" class="common-anchor-header">mmapの有効化</h3><p>Milvusはデフォルトですべてのコレクションでmmapを有効にし、Milvusがフィールドデータを完全にロードする代わりに、生のフィールドデータをメモリにマッピングすることを可能にします。これにより、メモリフットプリントが削減され、コレクション容量が増加します。mmapの詳細については、<a href="/docs/ja/mmap.md">Use mmapを</a>参照してください。</p>
+<h3 id="Enable-mmap​" class="common-anchor-header">mmapを有効にする</h3><p>Milvusはデフォルトですべてのコレクションでmmapを有効にし、Milvusがフィールドデータを完全にロードする代わりに、生のフィールドデータをメモリにマッピングすることを可能にします。これにより、メモリフットプリントが削減され、コレクション容量が増加します。mmapの詳細については、<a href="/docs/ja/mmap.md">Use mmapを</a>参照してください。</p>
 <div class="multipleCode">
  <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#go">Go</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># With mmap​</span>

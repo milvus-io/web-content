@@ -48,14 +48,32 @@ title: Milvus WebUI
 <tr><td>主要功能</td><td>运行环境、数据库/ Collections 详情、段、通道、任务和慢查询请求</td><td>元数据检查和 Milvus API 执行</td><td>数据库管理和操作任务</td></tr>
 </tbody>
 </table>
-<p>Milvus Web UI 提供以下功能：</p>
+<p>您可以使用以下 URL 访问 Milvus Web UI：</p>
+<pre><code translate="no">http://localhost:9091/webui
+<button class="copy-code-btn"></button></code></pre>
+<h2 id="Features" class="common-anchor-header">功能<button data-href="#Features" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>Milvus Web UI 提供以下功能：</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/milvus-webui-overview.png" alt="Milvus Web UI overview" class="doc-image" id="milvus-web-ui-overview" />
    </span> <span class="img-wrapper"> <span>Milvus Web UI 概述</span> </span></p>
 <ul>
 <li><p><a href="#Home">主页</a></p>
-<p>你可以找到关于当前运行的 Milvus 实例、其组件、连接的客户端和依赖关系的信息。</p></li>
+<p>您可以找到有关当前运行的 Milvus 实例、其组件、连接的客户端和依赖项的信息。</p></li>
 <li><p><a href="#Collections">Collections</a></p>
 <p>可查看 Milvus 当前的数据库和 Collections 列表，并检查其详细信息。</p></li>
 <li><p><a href="#Query">查询</a></p>
@@ -69,7 +87,7 @@ title: Milvus WebUI
 <li><p><a href="#Configurations">配置</a></p>
 <p>可以查看 Milvus 配置及其值的列表。</p></li>
 <li><p><a href="#Tools">工具</a></p>
-<p>可从 Web UI 访问两个内置工具，即 pprof 和 Milvus 数据可视化工具。</p></li>
+<p>您可以从 Web UI 访问两个内置工具，即 pprof 和 Milvus 数据可视化工具。</p></li>
 </ul>
 <h2 id="Home" class="common-anchor-header">主页<button data-href="#Home" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -119,7 +137,12 @@ title: Milvus WebUI
    </span> <span class="img-wrapper"> <span>Milvus Web UI 集合</span> </span></p>
 <ul>
 <li><p><strong>数据库</strong>：查看当前 Milvus 中的数据库列表及其详细信息。</p></li>
-<li><p><strong>Collections</strong>：查看每个数据库中的 Collection 列表及其详细信息。</p></li>
+<li><p><strong>Collections</strong>：查看每个数据库中的 Collection 列表及其详细信息。</p>
+<p>可以点击某个 Collection 查看其详细信息，包括字段数量、分区、索引等详细信息。</p>
+<p>
+  
+   <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/webui-collection-details.png" alt="Milvus Web UI Collection Details" class="doc-image" id="milvus-web-ui-collection-details" />
+   </span> <span class="img-wrapper"> <span>Milvus Web UI Collectionions 详情</span> </span></p></li>
 </ul>
 <h2 id="Query" class="common-anchor-header">查询<button data-href="#Query" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -141,8 +164,8 @@ title: Milvus WebUI
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/webui-query.png" alt="Milvus Web UI Query Page" class="doc-image" id="milvus-web-ui-query-page" />
    </span> <span class="img-wrapper"> <span>Milvus Web UI 查询页面</span> </span></p>
 <ul>
-<li><p><strong>分段</strong>：查看分段列表及其详细信息，包括分段 ID、对应的 Collections、状态、大小等。</p>
-<p>在 "<strong>来自 "</strong>列中，您可以找到数据段的来源。可能的来源指标如下：</p>
+<li><p><strong>分段</strong>：查看分段列表及其详细信息，包括分段 ID、对应的 Collections、状态、大小等详细信息。</p>
+<p>在 "<strong>来自 "</strong>列中，您可以找到段的来源。可能的来源指标如下：</p>
 <ul>
 <li><p><strong>QN</strong>：查询节点</p></li>
 <li><p><strong>CT</strong>：查询节点中的当前目标</p></li>

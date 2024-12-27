@@ -61,7 +61,7 @@ Atualmente, um campo vetorial apenas suporta um tipo de índice. O Milvus elimin
  <a href="#floating">Incorporações de vírgula flutuante</a> <a href="#binary">Incorporações binárias</a> <a href="#sparse">Incorporações esparsas</a></div>
 <div class="filter-floating">
 <h3 id="Indexes-for-floating-point-embeddings" class="common-anchor-header">Índices para incorporações de vírgula flutuante</h3><p>Para as incorporações de vírgula flutuante de 128 dimensões (vectores), o armazenamento que ocupam é 128 * o tamanho da vírgula flutuante = 512 bytes. E as <a href="/docs/pt/metric.md">métricas de distância</a> utilizadas para as incorporações de vírgula flutuante são a distância euclidiana (<code translate="no">L2</code>) e o produto interno (<code translate="no">IP</code>).</p>
-<p>Estes tipos de índices incluem <code translate="no">FLAT</code>, <code translate="no">IVF_FLAT</code>, <code translate="no">IVF_PQ</code>, <code translate="no">IVF_SQ8</code>, <code translate="no">HNSW</code>, e <code translate="no">SCANN</code> para pesquisas ANN baseadas em CPU.</p>
+<p>Estes tipos de índices incluem <code translate="no">FLAT</code>, <code translate="no">IVF_FLAT</code>, <code translate="no">IVF_PQ</code>, <code translate="no">IVF_SQ8</code>, <code translate="no">HNSW</code>, <code translate="no">HNSW_SQ</code>, <code translate="no">HNSW_PQ</code>, <code translate="no">HNSW_PRQ</code>, e <code translate="no">SCANN</code> para pesquisas ANN baseadas em CPU.</p>
 </div>
 <div class="filter-binary">
 <h3 id="Indexes-for-binary-embeddings" class="common-anchor-header">Índices para incrustações binárias</h3><p>Para as incorporações binárias de 128 dimensões, o armazenamento que ocupam é de 128 / 8 = 16 bytes. E as métricas de distância utilizadas para as incrustações binárias são <code translate="no">JACCARD</code> e <code translate="no">HAMMING</code>.</p>
@@ -93,7 +93,7 @@ Atualmente, um campo vetorial apenas suporta um tipo de índice. O Milvus elimin
   </tr>
   <tr>
     <td>IVF_FLAT</td>
-    <td>Índice baseado na quantização</td>
+    <td>N/A</td>
     <td>
       <ul>
         <li>Consulta de alta velocidade</li>
@@ -106,7 +106,7 @@ Atualmente, um campo vetorial apenas suporta um tipo de índice. O Milvus elimin
     <td>Índice baseado na quantificação</td>
     <td>
       <ul>
-        <li>Consulta de alta velocidade</li>
+        <li>Consulta a muito alta velocidade</li>
         <li>Recursos de memória limitados</li>
         <li>Aceita um pequeno compromisso na taxa de recuperação</li>
       </ul>
@@ -117,9 +117,9 @@ Atualmente, um campo vetorial apenas suporta um tipo de índice. O Milvus elimin
     <td>Índice baseado na quantificação</td>
     <td>
       <ul>
-        <li>Consulta a muito alta velocidade</li>
+        <li>Consulta de alta velocidade</li>
         <li>Recursos de memória limitados</li>
-        <li>Aceita um compromisso substancial na taxa de recuperação</li>
+        <li>Aceita um pequeno compromisso na taxa de recuperação</li>
       </ul>
     </td>
   </tr>
@@ -128,15 +128,49 @@ Atualmente, um campo vetorial apenas suporta um tipo de índice. O Milvus elimin
     <td>Índice baseado em gráficos</td>
     <td>
       <ul>
-        <li>Consulta de muito alta velocidade</li>
+        <li>Consulta a muito alta velocidade</li>
         <li>Requer uma taxa de recuperação tão elevada quanto possível</li>
         <li>Grandes recursos de memória</li>
       </ul>
     </td>
   </tr>
   <tr>
-    <td>SCANN</td>
+    <td>HNSW_SQ</td>
     <td>Índice baseado na quantização</td>
+    <td>
+      <ul>
+        <li>Consulta a muito alta velocidade</li>
+        <li>Recursos de memória limitados</li>
+        <li>Aceita um pequeno compromisso na taxa de recuperação</li>
+      </ul>
+    </td>
+  </tr>
+    <tr>
+    <td>HNSW_PQ</td>
+    <td>Índice baseado na quantificação</td>
+    <td>
+      <ul>
+        <li>Consulta a média velocidade</li>
+        <li>Recursos de memória muito limitados</li>
+        <li>Aceita um pequeno compromisso na taxa de recuperação</li>
+      </ul>
+    </td>
+  </tr>
+    </tr>
+    <tr>
+    <td>HNSW_PRQ</td>
+    <td>Índice baseado na quantificação</td>
+    <td>
+      <ul>
+        <li>Consulta de velocidade média</li>
+        <li>Recursos de memória muito limitados</li>
+        <li>Aceita um pequeno compromisso na taxa de recuperação</li>
+      </ul>
+    </td>
+  </tr>
+  <tr>
+    <td>SCANN</td>
+    <td>Índice baseado na quantificação</td>
     <td>
       <ul>
         <li>Consulta a muito alta velocidade</li>
@@ -387,21 +421,111 @@ Atualmente, um campo vetorial apenas suporta um tipo de índice. O Milvus elimin
 <li><p>Parâmetros de construção de índices</p>
 <table>
 <thead>
-<tr><th>Parâmetro</th><th>Descrição</th><th>Intervalo</th></tr>
+<tr><th>Parâmetro</th><th>Descrição</th><th>Intervalo</th><th>Valor por defeito</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">M</code></td><td>M define o número máximo de ligações de saída no gráfico. Um M mais elevado leva a uma maior precisão/tempo de execução com ef/efConstruction fixos.</td><td>[2, 2048]</td></tr>
-<tr><td><code translate="no">efConstruction</code></td><td>ef_construction controla o compromisso entre a velocidade de pesquisa do índice e a velocidade de construção. Aumentar o parâmetro efConstruction pode melhorar a qualidade do índice, mas também tende a aumentar o tempo de indexação.</td><td>[1, int_max]</td></tr>
+<tr><td><code translate="no">M</code></td><td>M define o número máximo de ligações de saída no gráfico. Um M mais elevado leva a uma maior precisão/tempo de execução com ef/efConstruction fixos.</td><td>[2, 2048]</td><td>Nenhum</td></tr>
+<tr><td><code translate="no">efConstruction</code></td><td>ef_construction controla a velocidade de pesquisa do índice/comparação da velocidade de construção. Aumentar o parâmetro efConstruction pode melhorar a qualidade do índice, mas também tende a aumentar o tempo de indexação.</td><td>[1, int_max]</td><td>Nenhum</td></tr>
 </tbody>
 </table>
 </li>
 <li><p>Parâmetros de pesquisa</p>
 <table>
 <thead>
-<tr><th>Parâmetro</th><th>Descrição</th><th>Intervalo</th></tr>
+<tr><th>Parâmetro</th><th>Descrição</th><th>Intervalo</th><th>Valor por defeito</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">ef</code></td><td>Parâmetro que controla o compromisso tempo/precisão da consulta. Um valor mais elevado em <code translate="no">ef</code> conduz a uma pesquisa mais exacta mas mais lenta.</td><td>[<code translate="no">top_k</code>, int_max]</td></tr>
+<tr><td><code translate="no">ef</code></td><td>Parâmetro que controla o compromisso tempo/precisão da consulta. Um valor mais elevado em <code translate="no">ef</code> conduz a uma pesquisa mais exacta mas mais lenta.</td><td>[<code translate="no">top_k</code>, int_max]</td><td>Nenhum</td></tr>
+</tbody>
+</table>
+</li>
+</ul>
+<h3 id="HNSWSQ" class="common-anchor-header">HNSW_SQ</h3><p>A Quantização Escalar (SQ) é uma técnica utilizada para discretizar dados de vírgula flutuante num conjunto finito de valores com base na sua magnitude. Por exemplo, <strong>SQ6</strong> representa a quantização em (2^6 = 64) valores discretos, em que cada número de vírgula flutuante é codificado utilizando 6 bits. Da mesma forma, <strong>SQ8</strong> quantiza os dados em (2^8 = 256) valores discretos, com cada número de vírgula flutuante representado por 8 bits. Esta quantização reduz o espaço de memória, preservando a estrutura essencial dos dados para um processamento eficiente.</p>
+<p>Combinado com o SQ, o HNSW_SQ oferece um compromisso controlável entre o tamanho do índice e a precisão, mantendo um elevado desempenho de consulta por segundo (QPS). Em comparação com o HNSW padrão, resulta num aumento modesto do tempo de construção do índice.</p>
+<ul>
+<li><p>Parâmetros de construção de índices</p>
+<table>
+<thead>
+<tr><th>Parâmetro</th><th>Descrição</th><th>Intervalo</th><th>Valor por defeito</th></tr>
+</thead>
+<tbody>
+<tr><td><code translate="no">M</code></td><td>M define o número máximo de ligações de saída no gráfico. Um M mais elevado leva a uma maior precisão/tempo de execução com ef/efConstruction fixos.</td><td>[2, 2048]</td><td>Nenhum</td></tr>
+<tr><td><code translate="no">efConstruction</code></td><td>ef_construction controla a velocidade de pesquisa do índice/comparação da velocidade de construção. Aumentar o parâmetro efConstruction pode melhorar a qualidade do índice, mas também tende a aumentar o tempo de indexação.</td><td>[1, int_max]</td><td>Nenhum</td></tr>
+<tr><td><code translate="no">sq_type</code></td><td>Tipo de quantizador escalar.</td><td><code translate="no">SQ6</code>,<code translate="no">SQ8</code>, <code translate="no">BF16</code>, <code translate="no">FP16</code></td><td><code translate="no">SQ8</code></td></tr>
+</tbody>
+</table>
+</li>
+<li><p>Parâmetros de pesquisa</p>
+<table>
+<thead>
+<tr><th>Parâmetro</th><th>Descrição do parâmetro</th><th>Intervalo</th><th>Valor por defeito</th></tr>
+</thead>
+<tbody>
+<tr><td><code translate="no">ef</code></td><td>Parâmetro que controla o compromisso tempo/precisão da consulta. Um valor mais elevado em <code translate="no">ef</code> conduz a uma pesquisa mais exacta mas mais lenta.</td><td>[<code translate="no">top_k</code>, int_max]</td><td>Nenhum</td></tr>
+<tr><td><code translate="no">refine</code></td><td>Se o refinamento é utilizado durante o comboio.</td><td><code translate="no">true</code>, <code translate="no">false</code></td><td><code translate="no">false</code></td></tr>
+<tr><td><code translate="no">refine_k</code></td><td>O fator de ampliação do refino em comparação com <em>k</em>.</td><td>[1, <em>float_max)</em></td><td><code translate="no">1</code></td></tr>
+<tr><td><code translate="no">refine_type</code></td><td>O tipo de dados do índice de refinamento.</td><td><code translate="no">SQ6</code>, <code translate="no">SQ8</code>, <code translate="no">BF16</code>, <code translate="no">FP16</code>, <code translate="no">FP32</code></td><td>Nenhum</td></tr>
+</tbody>
+</table>
+</li>
+</ul>
+<h3 id="HNSWPQ" class="common-anchor-header">HNSW_PQ</h3><p>A ideia básica de PQ é dividir o vetor em <code translate="no">m</code> sub-vectores, cada um dos quais encontrará <em>2^{nbits}</em> centróides com base em kmeans, e cada sub-vetor selecionará o centróide mais próximo como o seu sub-vetor aproximado. Em seguida, registamos todos os centróides, pelo que cada sub-vetor pode ser codificado como <code translate="no">nbits</code>, e um vetor flutuante de comprimento <code translate="no">dim</code> pode ser codificado como <em>m ⋅ nbits</em> bits.</p>
+<p>Combinado com o PQ, o HNSW_PQ oferece um compromisso controlável entre o tamanho do índice e a precisão, mas tem um valor QPS mais baixo e uma taxa de recuperação mais elevada do que o HNSW_SQ para a mesma taxa de compressão. Em comparação com o HNSW_SQ, demora mais tempo a construir o índice.</p>
+<ul>
+<li><p>Parâmetros de construção do índice</p>
+<table>
+<thead>
+<tr><th>Parâmetro</th><th>Descrição</th><th>Intervalo</th><th>Valor por defeito</th></tr>
+</thead>
+<tbody>
+<tr><td><code translate="no">M</code></td><td>M define o número máximo de ligações de saída no gráfico. Um M mais elevado leva a uma maior precisão/tempo de execução com ef/efConstruction fixos.</td><td>[2, 2048]</td><td>Nenhum</td></tr>
+<tr><td><code translate="no">efConstruction</code></td><td>ef_construction controla a velocidade de pesquisa do índice/comparação da velocidade de construção. Aumentar o parâmetro efConstruction pode melhorar a qualidade do índice, mas também tende a aumentar o tempo de indexação.</td><td>[1, int_max]</td><td>Nenhum</td></tr>
+<tr><td><code translate="no">m</code></td><td>O número de grupos de sub-vectores em que dividir o vetor.</td><td>[1, 65536]</td><td>32</td></tr>
+<tr><td><code translate="no">nbits</code></td><td>O número de bits em que cada grupo de sub-vectores é quantizado.</td><td>[1, 24]</td><td>8</td></tr>
+</tbody>
+</table>
+</li>
+<li><p>Parâmetros de pesquisa</p>
+<table>
+<thead>
+<tr><th>Parâmetro</th><th>Descrição do parâmetro</th><th>Gama</th><th>Valor por defeito</th></tr>
+</thead>
+<tbody>
+<tr><td><code translate="no">ef</code></td><td>Parâmetro que controla o compromisso tempo/precisão da consulta. Um valor mais elevado em <code translate="no">ef</code> conduz a uma pesquisa mais exacta mas mais lenta.</td><td>[<code translate="no">top_k</code>, int_max]</td><td>Nenhum</td></tr>
+<tr><td><code translate="no">refine</code></td><td>Se o refinamento é utilizado durante o comboio.</td><td><code translate="no">true</code>, <code translate="no">false</code></td><td><code translate="no">false</code></td></tr>
+<tr><td><code translate="no">refine_k</code></td><td>O fator de ampliação do refino em comparação com <em>k</em>.</td><td>[1, <em>float_max)</em></td><td><code translate="no">1</code></td></tr>
+<tr><td><code translate="no">refine_type</code></td><td>O tipo de dados do índice de refinamento.</td><td><code translate="no">SQ6</code>, <code translate="no">SQ8</code>, <code translate="no">BF16</code>, <code translate="no">FP16</code>, <code translate="no">FP32</code></td><td>Nenhum</td></tr>
+</tbody>
+</table>
+</li>
+</ul>
+<h3 id="HNSWPRQ" class="common-anchor-header">HNSW_PRQ</h3><p>PRQ é semelhante a PQ, e também divide o vetor em <code translate="no">m</code> grupos. Cada sub-vetor será codificado como <code translate="no">nbits</code>. Depois de completar uma quantização pq, calculará o resíduo entre o vetor e o vetor quantizado pq e aplicará a quantização pq ao vetor residual. Será efectuado um total de <code translate="no">nrq</code> quantizações pq completas, pelo que um vetor flutuante de comprimento <code translate="no">dim</code> será codificado como <em>m ⋅ nbits ⋅ nrq</em> bits.</p>
+<p>Combinado com um Quantizador Residual de Produto (PRQ), o HNSW_PRQ oferece um compromisso ainda mais controlável entre o tamanho do índice e a precisão. Tem um valor QPS quase equivalente e uma taxa de recuperação mais elevada do que o HNSW_PQ para a mesma taxa de compressão. Em comparação com o HNSW_PQ, o tempo para construir o índice pode aumentar várias vezes.</p>
+<ul>
+<li><p>Parâmetros de construção do índice</p>
+<table>
+<thead>
+<tr><th>Parâmetro</th><th>Descrição</th><th>Intervalo</th><th>Valor por defeito</th></tr>
+</thead>
+<tbody>
+<tr><td><code translate="no">M</code></td><td>M define o número máximo de ligações de saída no gráfico. Um M mais elevado leva a uma maior precisão/tempo de execução com ef/efConstruction fixos.</td><td>[2, 2048]</td><td>Nenhum</td></tr>
+<tr><td><code translate="no">efConstruction</code></td><td>ef_construction controla a velocidade de pesquisa do índice/comparação da velocidade de construção. Aumentar o parâmetro efConstruction pode melhorar a qualidade do índice, mas também tende a aumentar o tempo de indexação.</td><td>[1, int_max]</td><td>Nenhum</td></tr>
+<tr><td><code translate="no">m</code></td><td>O número de grupos de sub-vectores em que dividir o vetor.</td><td>[1, 65536]</td><td>32</td></tr>
+<tr><td><code translate="no">nbits</code></td><td>O número de bits em que cada grupo de sub-vectores é quantizado.</td><td>[1, 24]</td><td>8</td></tr>
+<tr><td><code translate="no">nrq</code></td><td>O número de subquantizadores residuais.</td><td>[1, 16]</td><td>2</td></tr>
+</tbody>
+</table>
+</li>
+<li><p>Parâmetros de pesquisa</p>
+<table>
+<thead>
+<tr><th>Parâmetro</th><th>Descrição do parâmetro</th><th>Intervalo</th><th>Valor por defeito</th></tr>
+</thead>
+<tbody>
+<tr><td><code translate="no">ef</code></td><td>Parâmetro que controla o compromisso tempo/precisão da consulta. Um valor mais elevado em <code translate="no">ef</code> conduz a uma pesquisa mais exacta mas mais lenta.</td><td>[<code translate="no">top_k</code>, int_max]</td><td>Nenhum</td></tr>
+<tr><td><code translate="no">refine</code></td><td>Se o refinamento é utilizado durante o comboio.</td><td><code translate="no">true</code>, <code translate="no">false</code></td><td><code translate="no">false</code></td></tr>
+<tr><td><code translate="no">refine_k</code></td><td>O fator de ampliação do refino em comparação com <em>k</em>.</td><td>[1, <em>float_max)</em></td><td><code translate="no">1</code></td></tr>
+<tr><td><code translate="no">refine_type</code></td><td>O tipo de dados do índice de refinamento.</td><td><code translate="no">SQ6</code>, <code translate="no">SQ8</code>, <code translate="no">BF16</code>, <code translate="no">FP16</code>, <code translate="no">FP32</code></td><td>Nenhum</td></tr>
 </tbody>
 </table>
 </li>

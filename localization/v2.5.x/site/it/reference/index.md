@@ -2,9 +2,9 @@
 id: index.md
 related_key: index
 summary: Meccanismo di indicizzazione a Milvus.
-title: Indice in memoria
+title: Indice in-memory
 ---
-<h1 id="In-memory-Index" class="common-anchor-header">Indice in memoria<button data-href="#In-memory-Index" class="anchor-icon" translate="no">
+<h1 id="In-memory-Index" class="common-anchor-header">Indice in-memory<button data-href="#In-memory-Index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -61,7 +61,7 @@ Attualmente, un campo vettoriale supporta solo un tipo di indice. Milvus cancell
  <a href="#floating">Incorporazioni in virgola mobile</a> <a href="#binary">Incorporazioni binarie</a> <a href="#sparse">Incorporazioni rade</a></div>
 <div class="filter-floating">
 <h3 id="Indexes-for-floating-point-embeddings" class="common-anchor-header">Indici per le incorporazioni in virgola mobile</h3><p>Per le incorporazioni in virgola mobile (vettori) a 128 dimensioni, la memoria occupata è 128 * la dimensione del float = 512 byte. Le <a href="/docs/it/metric.md">metriche di distanza</a> utilizzate per le incorporazioni in virgola mobile sono la distanza euclidea (<code translate="no">L2</code>) e il prodotto interno (<code translate="no">IP</code>).</p>
-<p>Questi tipi di indici includono <code translate="no">FLAT</code>, <code translate="no">IVF_FLAT</code>, <code translate="no">IVF_PQ</code>, <code translate="no">IVF_SQ8</code>, <code translate="no">HNSW</code> e <code translate="no">SCANN</code> per le ricerche di RNA basate su CPU.</p>
+<p>Questi tipi di indici includono <code translate="no">FLAT</code>, <code translate="no">IVF_FLAT</code>, <code translate="no">IVF_PQ</code>, <code translate="no">IVF_SQ8</code>, <code translate="no">HNSW</code>, <code translate="no">HNSW_SQ</code>, <code translate="no">HNSW_PQ</code>, <code translate="no">HNSW_PRQ</code>, e <code translate="no">SCANN</code> per le ricerche di RNA basate su CPU.</p>
 </div>
 <div class="filter-binary">
 <h3 id="Indexes-for-binary-embeddings" class="common-anchor-header">Indici per le incorporazioni binarie</h3><p>Per le incorporazioni binarie a 128 dimensioni, la memoria che occupano è 128 / 8 = 16 byte. Le metriche di distanza utilizzate per le incorporazioni binarie sono <code translate="no">JACCARD</code> e <code translate="no">HAMMING</code>.</p>
@@ -93,7 +93,7 @@ Attualmente, un campo vettoriale supporta solo un tipo di indice. Milvus cancell
   </tr>
   <tr>
     <td>FIV_FLAT</td>
-    <td>Indice basato sulla quantizzazione</td>
+    <td>N/D</td>
     <td>
       <ul>
         <li>Interrogazione ad alta velocità</li>
@@ -102,11 +102,11 @@ Attualmente, un campo vettoriale supporta solo un tipo di indice. Milvus cancell
     </td>
   </tr>
   <tr>
-    <td>IVF_SQ8</td>
+    <td>FIV_SQ8</td>
     <td>Indice basato sulla quantizzazione</td>
     <td>
       <ul>
-        <li>Interrogazione ad alta velocità</li>
+        <li>Interrogazione ad altissima velocità</li>
         <li>Risorse di memoria limitate</li>
         <li>Accetta un piccolo compromesso nel tasso di richiamo</li>
       </ul>
@@ -117,9 +117,9 @@ Attualmente, un campo vettoriale supporta solo un tipo di indice. Milvus cancell
     <td>Indice basato sulla quantizzazione</td>
     <td>
       <ul>
-        <li>Interrogazione ad altissima velocità</li>
+        <li>Interrogazione ad alta velocità</li>
         <li>Risorse di memoria limitate</li>
-        <li>Accetta un compromesso sostanziale nel tasso di richiamo</li>
+        <li>Accetta un piccolo compromesso nel tasso di richiamo</li>
       </ul>
     </td>
   </tr>
@@ -131,6 +131,40 @@ Attualmente, un campo vettoriale supporta solo un tipo di indice. Milvus cancell
         <li>Interrogazione ad altissima velocità</li>
         <li>Richiede un tasso di richiamo il più alto possibile</li>
         <li>Grandi risorse di memoria</li>
+      </ul>
+    </td>
+  </tr>
+  <tr>
+    <td>HNSW_SQ</td>
+    <td>Indice basato sulla quantizzazione</td>
+    <td>
+      <ul>
+        <li>Interrogazione ad altissima velocità</li>
+        <li>Risorse di memoria limitate</li>
+        <li>Accetta un piccolo compromesso nel tasso di richiamo</li>
+      </ul>
+    </td>
+  </tr>
+    <tr>
+    <td>HNSW_PQ</td>
+    <td>Indice basato sulla quantizzazione</td>
+    <td>
+      <ul>
+        <li>Interrogazione a media velocità</li>
+        <li>Risorse di memoria molto limitate</li>
+        <li>Accetta un piccolo compromesso nel tasso di richiamo</li>
+      </ul>
+    </td>
+  </tr>
+    </tr>
+    <tr>
+    <td>HNSW_PRQ</td>
+    <td>Indice basato sulla quantizzazione</td>
+    <td>
+      <ul>
+        <li>Interrogazione a media velocità</li>
+        <li>Risorse di memoria molto limitate</li>
+        <li>Accetta un piccolo compromesso nel tasso di richiamo</li>
       </ul>
     </td>
   </tr>
@@ -381,27 +415,117 @@ Attualmente, un campo vettoriale supporta solo un tipo di indice. Milvus cancell
 </li>
 </ul></li>
 </ul>
-<h3 id="HNSW" class="common-anchor-header">HNSW</h3><p>HNSW (Hierarchical Navigable Small World Graph) è un algoritmo di indicizzazione basato su grafi. Costruisce una struttura di navigazione multistrato per un'immagine in base a determinate regole. In questa struttura, gli strati superiori sono più radi e le distanze tra i nodi sono maggiori; gli strati inferiori sono più densi e le distanze tra i nodi sono maggiori. La ricerca inizia dal livello più alto, trova il nodo più vicino all'obiettivo in questo livello e poi passa al livello successivo per iniziare una nuova ricerca. Dopo diverse iterazioni, è possibile avvicinarsi rapidamente alla posizione del target.</p>
+<h3 id="HNSW" class="common-anchor-header">HNSW</h3><p>HNSW (Hierarchical Navigable Small World Graph) è un algoritmo di indicizzazione basato su grafi. Costruisce una struttura di navigazione multistrato per un'immagine in base a determinate regole. In questa struttura, gli strati superiori sono più radi e le distanze tra i nodi sono maggiori; gli strati inferiori sono più densi e le distanze tra i nodi sono maggiori. La ricerca inizia dal livello più alto, trova il nodo più vicino all'obiettivo in questo livello e poi passa al livello successivo per iniziare una nuova ricerca. Dopo diverse iterazioni, può avvicinarsi rapidamente alla posizione del target.</p>
 <p>Per migliorare le prestazioni, HNSW limita il grado massimo dei nodi su ciascun livello del grafo a <code translate="no">M</code>. Inoltre, è possibile utilizzare <code translate="no">efConstruction</code> (quando si costruisce l'indice) o <code translate="no">ef</code> (quando si cercano i target) per specificare un intervallo di ricerca.</p>
 <ul>
 <li><p>Parametri di costruzione dell'indice</p>
 <table>
 <thead>
-<tr><th>Parametro</th><th>Descrizione</th><th>Intervallo</th></tr>
+<tr><th>Parametro</th><th>Descrizione</th><th>Intervallo</th><th>Valore predefinito</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">M</code></td><td>M definisce il numero massimo di connessioni in uscita nel grafico. Un numero più alto di M porta a una maggiore precisione/tempo di esecuzione a ef/efCostruzione fissa.</td><td>[2, 2048]</td></tr>
-<tr><td><code translate="no">efConstruction</code></td><td>ef_construction controlla il compromesso tra velocità di ricerca e velocità di costruzione dell'indice. L'aumento del parametro efConstruction può migliorare la qualità dell'indice, ma tende anche ad allungare i tempi di indicizzazione.</td><td>[1, int_max]</td></tr>
+<tr><td><code translate="no">M</code></td><td>M definisce il numero massimo di connessioni in uscita nel grafico. Un numero più alto di M porta a una maggiore precisione/tempo di esecuzione a ef/efCostruzione fissa.</td><td>[2, 2048]</td><td>Nessuno</td></tr>
+<tr><td><code translate="no">efConstruction</code></td><td>ef_construction controlla il compromesso tra velocità di ricerca dell'indice e velocità di costruzione. L'aumento del parametro efConstruction può migliorare la qualità dell'indice, ma tende anche ad allungare i tempi di indicizzazione.</td><td>[1, int_max]</td><td>Nessuno</td></tr>
 </tbody>
 </table>
 </li>
 <li><p>Parametri di ricerca</p>
 <table>
 <thead>
-<tr><th>Parametro</th><th>Descrizione</th><th>Intervallo</th></tr>
+<tr><th>Parametro</th><th>Descrizione</th><th>Intervallo</th><th>Valore predefinito</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">ef</code></td><td>Parametro che controlla il compromesso tempo di ricerca/accuratezza. Un valore più alto di <code translate="no">ef</code> porta a una ricerca più accurata ma più lenta.</td><td>[<code translate="no">top_k</code>, int_max]</td></tr>
+<tr><td><code translate="no">ef</code></td><td>Parametro che controlla il compromesso tempo di ricerca/accuratezza. Un valore più alto di <code translate="no">ef</code> porta a una ricerca più accurata ma più lenta.</td><td>[<code translate="no">top_k</code>, int_max]</td><td>Nessuno</td></tr>
+</tbody>
+</table>
+</li>
+</ul>
+<h3 id="HNSWSQ" class="common-anchor-header">HNSW_SQ</h3><p>La quantizzazione scalare (SQ) è una tecnica utilizzata per discretizzare i dati in virgola mobile in un insieme finito di valori in base alla loro grandezza. Ad esempio, <strong>SQ6</strong> rappresenta la quantizzazione in (2^6 = 64) valori discreti, dove ogni numero in virgola mobile è codificato con 6 bit. Analogamente, <strong>SQ8</strong> quantizza i dati in (2^8 = 256) valori discreti, con ogni numero in virgola mobile rappresentato da 8 bit. Questa quantizzazione riduce l'ingombro in memoria, preservando la struttura essenziale dei dati per un'elaborazione efficiente.</p>
+<p>In combinazione con SQ, HNSW_SQ offre un compromesso controllabile tra dimensione dell'indice e precisione, mantenendo elevate prestazioni di query al secondo (QPS). Rispetto a HNSW standard, si ottiene un modesto aumento del tempo di costruzione dell'indice.</p>
+<ul>
+<li><p>Parametri di costruzione dell'indice</p>
+<table>
+<thead>
+<tr><th>Parametro</th><th>Descrizione</th><th>Intervallo</th><th>Valore predefinito</th></tr>
+</thead>
+<tbody>
+<tr><td><code translate="no">M</code></td><td>M definisce il numero massimo di connessioni in uscita nel grafico. Un numero più alto di M porta a una maggiore precisione/tempo di esecuzione a ef/efCostruzione fissa.</td><td>[2, 2048]</td><td>Nessuno</td></tr>
+<tr><td><code translate="no">efConstruction</code></td><td>ef_construction controlla il compromesso tra velocità di ricerca dell'indice e velocità di costruzione. L'aumento del parametro efConstruction può migliorare la qualità dell'indice, ma tende anche ad allungare i tempi di indicizzazione.</td><td>[1, int_max]</td><td>Nessuno</td></tr>
+<tr><td><code translate="no">sq_type</code></td><td>Tipo di quantizzatore scalare.</td><td><code translate="no">SQ6</code>,<code translate="no">SQ8</code>, <code translate="no">BF16</code>, <code translate="no">FP16</code></td><td><code translate="no">SQ8</code></td></tr>
+</tbody>
+</table>
+</li>
+<li><p>Parametri di ricerca</p>
+<table>
+<thead>
+<tr><th>Parametro</th><th>Descrizione</th><th>Intervallo</th><th>Valore predefinito</th></tr>
+</thead>
+<tbody>
+<tr><td><code translate="no">ef</code></td><td>Parametro che controlla il compromesso tempo di ricerca/accuratezza. Un valore più alto di <code translate="no">ef</code> porta a una ricerca più accurata ma più lenta.</td><td>[<code translate="no">top_k</code>, int_max]</td><td>Nessuno</td></tr>
+<tr><td><code translate="no">refine</code></td><td>Se il raffinamento viene usato durante il treno.</td><td><code translate="no">true</code>, <code translate="no">false</code></td><td><code translate="no">false</code></td></tr>
+<tr><td><code translate="no">refine_k</code></td><td>Il fattore di ingrandimento del raffinamento rispetto a <em>k</em>.</td><td>[1, <em>float_max</em>] Nessuno</td><td><code translate="no">1</code></td></tr>
+<tr><td><code translate="no">refine_type</code></td><td>Il tipo di dati dell'indice di raffinazione.</td><td><code translate="no">SQ6</code>, <code translate="no">SQ8</code>, <code translate="no">BF16</code>, <code translate="no">FP16</code>, <code translate="no">FP32</code></td><td>Nessuno</td></tr>
+</tbody>
+</table>
+</li>
+</ul>
+<h3 id="HNSWPQ" class="common-anchor-header">HNSW_PQ</h3><p>L'idea di base di PQ è quella di dividere il vettore in <code translate="no">m</code> sottovettori, ognuno dei quali troverà <em>2^{nbits}</em> centroidi basati su kmeans, e ogni sottovettore selezionerà il centroide più vicino come suo sottovettore approssimato. Quindi si registrano tutti i centroidi, per cui ogni sottovettore può essere codificato come <code translate="no">nbits</code>, e un vettore fluttuante di lunghezza <code translate="no">dim</code> può essere codificato come <em>m ⋅ nbits</em> bit.</p>
+<p>In combinazione con PQ, HNSW_PQ offre un compromesso controllabile tra dimensione dell'indice e accuratezza, ma presenta un valore QPS inferiore e un tasso di richiamo superiore a HNSW_SQ a parità di tasso di compressione. Rispetto a HNSW_SQ, la costruzione dell'indice richiede più tempo.</p>
+<ul>
+<li><p>Parametri di costruzione dell'indice</p>
+<table>
+<thead>
+<tr><th>Parametro</th><th>Descrizione</th><th>Intervallo</th><th>Valore predefinito</th></tr>
+</thead>
+<tbody>
+<tr><td><code translate="no">M</code></td><td>M definisce il numero massimo di connessioni in uscita nel grafico. Un numero più alto di M porta a una maggiore precisione/tempo di esecuzione a ef/efCostruzione fissa.</td><td>[2, 2048]</td><td>Nessuno</td></tr>
+<tr><td><code translate="no">efConstruction</code></td><td>ef_construction controlla il compromesso tra velocità di ricerca dell'indice e velocità di costruzione. L'aumento del parametro efConstruction può migliorare la qualità dell'indice, ma tende anche ad allungare i tempi di indicizzazione.</td><td>[1, int_max]</td><td>Nessuno</td></tr>
+<tr><td><code translate="no">m</code></td><td>Il numero di gruppi di sottovettori in cui dividere il vettore.</td><td>[1, 65536]</td><td>32</td></tr>
+<tr><td><code translate="no">nbits</code></td><td>Il numero di bit in cui viene quantizzato ogni gruppo di sottovettori.</td><td>[1, 24]</td><td>8</td></tr>
+</tbody>
+</table>
+</li>
+<li><p>Parametri di ricerca</p>
+<table>
+<thead>
+<tr><th>Parametro</th><th>Descrizione</th><th>Intervallo</th><th>Valore predefinito</th></tr>
+</thead>
+<tbody>
+<tr><td><code translate="no">ef</code></td><td>Parametro che controlla il compromesso tempo di ricerca/accuratezza. Un valore più alto di <code translate="no">ef</code> porta a una ricerca più accurata ma più lenta.</td><td>[<code translate="no">top_k</code>, int_max]</td><td>Nessuno</td></tr>
+<tr><td><code translate="no">refine</code></td><td>Se il raffinamento viene usato durante il treno.</td><td><code translate="no">true</code>, <code translate="no">false</code></td><td><code translate="no">false</code></td></tr>
+<tr><td><code translate="no">refine_k</code></td><td>Fattore di ingrandimento del raffinamento rispetto a <em>k</em>.</td><td>[1, <em>float_max</em>] Nessuno</td><td><code translate="no">1</code></td></tr>
+<tr><td><code translate="no">refine_type</code></td><td>Il tipo di dati dell'indice di raffinazione.</td><td><code translate="no">SQ6</code>, <code translate="no">SQ8</code>, <code translate="no">BF16</code>, <code translate="no">FP16</code>, <code translate="no">FP32</code></td><td>Nessuno</td></tr>
+</tbody>
+</table>
+</li>
+</ul>
+<h3 id="HNSWPRQ" class="common-anchor-header">HNSW_PRQ</h3><p>PRQ è simile a PQ e divide il vettore in <code translate="no">m</code> gruppi. Ogni sottovettore sarà codificato come <code translate="no">nbits</code>. Dopo aver completato una quantizzazione pq, calcola il residuo tra il vettore e il vettore quantizzato pq e applica la quantizzazione pq al vettore residuo. Verranno eseguite in totale <code translate="no">nrq</code> quantizzazioni pq complete, quindi un vettore fluttuante di lunghezza <code translate="no">dim</code> sarà codificato come <em>m ⋅ nbits ⋅ nrq</em> bit.</p>
+<p>In combinazione con un quantizzatore di prodotto residuo (PRQ), HNSW_PRQ offre un compromesso ancora più controllabile tra dimensione dell'indice e precisione. Ha un valore QPS quasi equivalente e un tasso di richiamo superiore a HNSW_PQ a parità di tasso di compressione. Rispetto a HNSW_PQ, il tempo di costruzione dell'indice può aumentare di diverse volte.</p>
+<ul>
+<li><p>Parametri di costruzione dell'indice</p>
+<table>
+<thead>
+<tr><th>Parametro</th><th>Descrizione</th><th>Intervallo</th><th>Valore predefinito</th></tr>
+</thead>
+<tbody>
+<tr><td><code translate="no">M</code></td><td>M definisce il numero massimo di connessioni in uscita nel grafico. Un numero più alto di M porta a una maggiore precisione/tempo di esecuzione a ef/efCostruzione fissa.</td><td>[2, 2048]</td><td>Nessuno</td></tr>
+<tr><td><code translate="no">efConstruction</code></td><td>ef_construction controlla il compromesso tra velocità di ricerca dell'indice e velocità di costruzione. L'aumento del parametro efConstruction può migliorare la qualità dell'indice, ma tende anche ad allungare i tempi di indicizzazione.</td><td>[1, int_max]</td><td>Nessuno</td></tr>
+<tr><td><code translate="no">m</code></td><td>Il numero di gruppi di sottovettori in cui dividere il vettore.</td><td>[1, 65536]</td><td>32</td></tr>
+<tr><td><code translate="no">nbits</code></td><td>Il numero di bit in cui viene quantizzato ogni gruppo di sottovettori.</td><td>[1, 24]</td><td>8</td></tr>
+<tr><td><code translate="no">nrq</code></td><td>Il numero di subquantizzatori residui.</td><td>[1, 16]</td><td>2</td></tr>
+</tbody>
+</table>
+</li>
+<li><p>Parametri di ricerca</p>
+<table>
+<thead>
+<tr><th>Parametro</th><th>Descrizione</th><th>Intervallo</th><th>Valore predefinito</th></tr>
+</thead>
+<tbody>
+<tr><td><code translate="no">ef</code></td><td>Parametro che controlla il compromesso tempo di ricerca/accuratezza. Un valore più alto di <code translate="no">ef</code> porta a una ricerca più accurata ma più lenta.</td><td>[<code translate="no">top_k</code>, int_max]</td><td>Nessuno</td></tr>
+<tr><td><code translate="no">refine</code></td><td>Se il raffinamento viene usato durante il treno.</td><td><code translate="no">true</code>, <code translate="no">false</code></td><td><code translate="no">false</code></td></tr>
+<tr><td><code translate="no">refine_k</code></td><td>Il fattore di ingrandimento del raffinamento rispetto a <em>k</em>.</td><td>[1, <em>float_max</em>] Nessuno</td><td><code translate="no">1</code></td></tr>
+<tr><td><code translate="no">refine_type</code></td><td>Il tipo di dati dell'indice di raffinazione.</td><td><code translate="no">SQ6</code>, <code translate="no">SQ8</code>, <code translate="no">BF16</code>, <code translate="no">FP16</code>, <code translate="no">FP32</code></td><td>Nessuno</td></tr>
 </tbody>
 </table>
 </li>
@@ -426,7 +550,7 @@ Attualmente, un campo vettoriale supporta solo un tipo di indice. Milvus cancell
 <h3 id="BINIVFFLAT" class="common-anchor-header">BIN_IVF_FLAT</h3><p>Questo indice è esattamente uguale a IVF_FLAT, ma può essere usato solo per le incorporazioni binarie.</p>
 <p>BIN_IVF_FLAT divide i dati vettoriali in unità di cluster <code translate="no">nlist</code> e poi confronta le distanze tra il vettore di input target e il centro di ciascun cluster. A seconda del numero di cluster che il sistema è impostato per interrogare (<code translate="no">nprobe</code>), i risultati della ricerca di similarità vengono restituiti in base al confronto tra l'input di destinazione e i vettori nei cluster più simili, riducendo drasticamente il tempo di interrogazione.</p>
 <p>Regolando <code translate="no">nprobe</code>, è possibile trovare un equilibrio ideale tra precisione e velocità per un determinato scenario. Il tempo di interrogazione aumenta bruscamente all'aumentare del numero di vettori di input target (<code translate="no">nq</code>) e del numero di cluster da ricercare (<code translate="no">nprobe</code>).</p>
-<p>BIN_IVF_FLAT è l'indice BIN_IVF più semplice e i dati codificati memorizzati in ogni unità sono coerenti con i dati originali.</p>
+<p>BIN_IVF_FLAT è l'indice BIN_IVF più elementare e i dati codificati memorizzati in ogni unità sono coerenti con i dati originali.</p>
 <ul>
 <li><p>Parametri di costruzione dell'indice</p>
 <table>
@@ -487,7 +611,7 @@ Attualmente, un campo vettoriale supporta solo un tipo di indice. Milvus cancell
 </table>
 </li>
 </ul>
-<h3 id="SPARSEWAND" class="common-anchor-header">BANDA SPARSA</h3><p>Questo indice presenta analogie con <code translate="no">SPARSE_INVERTED_INDEX</code>, ma utilizza l'algoritmo <a href="https://dl.acm.org/doi/10.1145/956863.956944">Weak-AND</a> per ridurre ulteriormente il numero di valutazioni della distanza IP completa durante il processo di ricerca.</p>
+<h3 id="SPARSEWAND" class="common-anchor-header">BANDA_PARZIALE</h3><p>Questo indice presenta analogie con <code translate="no">SPARSE_INVERTED_INDEX</code>, ma utilizza l'algoritmo <a href="https://dl.acm.org/doi/10.1145/956863.956944">Weak-AND</a> per ridurre ulteriormente il numero di valutazioni della distanza IP completa durante il processo di ricerca.</p>
 <p>In base ai nostri test, <code translate="no">SPARSE_WAND</code> supera generalmente gli altri metodi in termini di velocità. Tuttavia, le sue prestazioni possono deteriorarsi rapidamente all'aumentare della densità dei vettori. Per risolvere questo problema, l'introduzione di un <code translate="no">drop_ratio_search</code> non nullo può migliorare significativamente le prestazioni, con una perdita minima di precisione. Per ulteriori informazioni, consultare <a href="/docs/it/sparse_vector.md">Vettore sparso</a>.</p>
 <ul>
 <li><p>Parametri di costruzione dell'indice</p>

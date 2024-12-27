@@ -70,8 +70,8 @@ title: リソースグループの管理
 <p><code translate="no">.requests.nodeNum &lt; nodeNumOfResourceGroup &lt; .limits.nodeNum.</code></p>
 <p>ただし、以下の場合を除く：</p>
 <ul>
-<li>Milvusクラスタ内のQueryNode数が不足している場合(<code translate="no">NumOfQueryNode &lt; sum(.requests.nodeNum)</code>)、常に十分なQueryNode数を持たないリソースグループが存在します。</li>
-<li>MilvusクラスタのQueryNode数が過剰な場合、つまり<code translate="no">NumOfQueryNode &gt; sum(.limits.nodeNum)</code> 、冗長なQueryNodeは常に<strong>__default_resource_groupに</strong>最初に配置されます。</li>
+<li>Milvusクラスタ内のQueryNode数が不足している場合（<code translate="no">NumOfQueryNode &lt; sum(.requests.nodeNum)</code> ）、常に十分なQueryNode数を持たないリソースグループが存在します。</li>
+<li>MilvusクラスタのQueryNode数が過剰な場合、すなわち<code translate="no">NumOfQueryNode &gt; sum(.limits.nodeNum)</code> 、冗長なQueryNodeは常に<strong>__default_resource_groupに</strong>最初に配置されます。</li>
 </ul>
 <p>もちろん、クラスタ内のQueryNode数が変更された場合、Milvusは最終的な条件を満たすように継続的に調整を試みます。そのため、最初にリソースグループの設定変更を適用し、その後QueryNodeのスケーリングを実行することができます。</p>
 <h2 id="Use-declarative-api-to-manage-resource-group" class="common-anchor-header">宣言型apiを使用してリソースグループを管理する<button data-href="#Use-declarative-api-to-manage-resource-group" class="anchor-icon" translate="no">
@@ -90,11 +90,11 @@ title: リソースグループの管理
         ></path>
       </svg>
     </button></h2><div class="alert note">
-<p>このページのコードサンプルはすべて PyMilvus 2.4.9 のものです。実行する前に PyMilvus をアップグレードしてください。</p>
+<p>このページのコードサンプルはすべて PyMilvus 2.4.13 のものです。実行する前に PyMilvus をアップグレードしてください。</p>
 </div>
 <ol>
 <li><p>リソースグループの作成</p>
-<p>リソースグループを作成するには、milvusインスタンスに接続した後に以下を実行します。以下のスニペットでは、<code translate="no">default</code> が Milvus 接続のエイリアスであると仮定しています。</p>
+<p>リソースグループを作成するには、milvusインスタンスに接続した後に以下を実行してください。以下のスニペットでは、<code translate="no">default</code> が Milvus 接続のエイリアスであると仮定しています。</p>
 <pre><code translate="no" class="language-Python"><span class="hljs-keyword">import</span> pymilvus
 
 <span class="hljs-comment"># A resource group name should be a string of 1 to 255 characters, starting with a letter or an underscore (_) and containing only numbers, letters, and underscores (_).</span>
@@ -180,7 +180,7 @@ collection.load([<span class="hljs-string">&quot;Novels&quot;</span>], replica_n
 partition = Partition(collection, <span class="hljs-string">&quot;Novels&quot;</span>)
 partition.load(replica_number=<span class="hljs-number">2</span>, _resource_groups=resource_groups)
 <button class="copy-code-btn"></button></code></pre>
-<p><code translate="no">_resource_groups</code> はオプションのパラメータで、指定しないままにしておくと、Milvusはデフォルトのリソースグループのクエリノードにレプリカをロードします。</p>
+<p>なお、<code translate="no">_resource_groups</code> はオプションのパラメータで、指定しないままにしておくと、Milvusはデフォルトのリソースグループのクエリノードにレプリカをロードします。</p>
 <p>Milusにコレクションの各レプリカを個別のリソースグループにロードさせるには、リソースグループの数がレプリカの数と等しくなるようにします。</p></li>
 <li><p>リソースグループ間でレプリカを転送します。</p>
 <p>Milvusは、複数のクエリノードに分散した<a href="/docs/ja/glossary.md#Segment">セグメント</a>間の負荷分散を実現するために<a href="/docs/ja/replica.md">レプリカを</a>使用します。コレクションの特定のレプリカをあるリソースグループから別のリソースグループに移動するには、次のようにします：</p>
@@ -268,7 +268,7 @@ _PENDING_NODES_RESOURCE_GROUP=<span class="hljs-string">&quot;__pending_nodes&qu
 
 init_cluster(<span class="hljs-number">1</span>)
 <button class="copy-code-btn"></button></code></pre>
-<p>上記のコード例を使用して、追加のQueryNodeを保持するために<strong>__pending_nodesという</strong>リソース・グループを作成します。また、<strong>rg</strong>1と<strong>rg2という</strong>2つのユーザー固有のリソース・グループを作成します。さらに、もう1つのリソース・グループが、<strong>__pending_nodesから</strong>不足または冗長なQueryNodesをリカバリすることを優先するようにします。</p></li>
+<p>上記のコード例を使用して、追加のQueryNodeを保持するために<strong>__pending_nodesという</strong>リソース・グループを作成します。また、<strong>rg</strong>1と<strong>rg2という</strong>2つのユーザー固有のリソース・グループを作成します。さらに、もう1つのリソース・グループが<strong>__pending_nodesから</strong>不足または冗長なQueryNodesをリカバリすることを優先するようにします。</p></li>
 <li><p>クラスタのスケールアウト</p>
 <p>以下のスケーリング機能があると仮定します：</p>
 <pre><code translate="no" class="language-Python">

@@ -19,6 +19,46 @@ title: リリースノート
         ></path>
       </svg>
     </button></h1><p>Milvusの新機能をご確認ください！このページでは、各リリースの新機能、改善点、既知の問題、バグ修正についてまとめています。v2.5.0以降の各バージョンのリリースノートはこのセクションにあります。定期的にこのページをご覧いただき、アップデート情報をご確認ください。</p>
+<h2 id="v251" class="common-anchor-header">v2.5.1<button data-href="#v251" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>リリース日: 2024年12月26日</p>
+<table>
+<thead>
+<tr><th>Milvusバージョン</th><th>Python SDKバージョン</th><th>Node.js SDKバージョン</th><th>Java SDKバージョン</th></tr>
+</thead>
+<tbody>
+<tr><td>2.5.1</td><td>2.5.2</td><td>2.5.2</td><td>2.5.2</td></tr>
+</tbody>
+</table>
+<p>Milvus 2.5.1では、メモリローディング、RBACリスト、クエリノードバランシング、シールされたセグメントインデックスに対応する一連のバグフィックスに重点を置き、同時にWeb UIとインターセプターを改善しました。安定性と信頼性の向上のため、2.5.1へのアップグレードを強くお勧めします。</p>
+<h3 id="Improvement" class="common-anchor-header">改善</h3><ul>
+<li>Web UI のコレクションとクエリページを更新しました。<a href="https://github.com/milvus-io/milvus/pull/38701">(#38701</a>)</li>
+</ul>
+<h3 id="Bug-fixes" class="common-anchor-header">バグ修正</h3><ul>
+<li>ロード予測にメモリ係数を追加することにより、OOM問題を修正した。<a href="https://github.com/milvus-io/milvus/pull/38722">(#38722</a>)</li>
+<li>RootCoord でポリシーを一覧表示する際の特権グループの拡張を修正。<a href="https://github.com/milvus-io/milvus/pull/38760">(#38760</a>)</li>
+<li>特権グループとコレクションのリストに関する問題を修正しました。<a href="https://github.com/milvus-io/milvus/pull/38738">(#38738</a>)</li>
+<li>バランサが同じクエリノードに繰り返し負荷をかけないように修正。<a href="https://github.com/milvus-io/milvus/pull/38724">(#38724</a>)</li>
+<li>QueryCoordの再起動後に予期しないバランスタスクが発生する問題を修正しました。<a href="https://github.com/milvus-io/milvus/pull/38725">(#38725</a>)</li>
+<li>ロード設定の更新がコレクションのロードに適用されない問題を修正しました。<a href="https://github.com/milvus-io/milvus/pull/38737">(#38737</a>)</li>
+<li>データインポート時に読み取りカウントがゼロになる問題を修正。<a href="https://github.com/milvus-io/milvus/pull/38695">(#38695</a>)</li>
+<li>式の JSON キーの Unicode デコードを修正した。<a href="https://github.com/milvus-io/milvus/pull/38653">(#38653</a>)</li>
+<li>2.5 の alterCollectionField のインターセプター DB 名を修正。 <a href="https://github.com/milvus-io/milvus/pull/38663">(#38663</a>)</li>
+<li>BM25 ブルートフォースサーチを使用した場合に、封印されたセグメントのインデックスパラメータが空だったのを修正した。<a href="https://github.com/milvus-io/milvus/pull/38752">(#38752</a>)</li>
+</ul>
 <h2 id="v250" class="common-anchor-header">v2.5.0<button data-href="#v250" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -49,7 +89,8 @@ title: リリースノート
 <p>詳細については、<a href="/docs/ja/analyzer-overview.md">Analyzer Overview</a>および<a href="/docs/ja/full-text-search.md">Full Text Searchを</a>ご参照ください。</p>
 <h4 id="Cluster-Management-WebUI-Beta" class="common-anchor-header">クラスタ管理WebUI（ベータ版）</h4><p>膨大なデータと豊富な機能をより良くサポートするために、Milvusの洗練された設計には様々な依存関係、多数のノードの役割、複雑なデータ構造などが含まれています。このような側面は、使用やメンテナンスに困難をもたらす可能性があります。</p>
 <p>Milvus 2.5では、組み込みのクラスタ管理WebUIを導入し、Milvusの複雑な実行環境情報を可視化することで、システムメンテナンスの難易度を下げています。これにはデータベースやコレクション、セグメント、チャネル、依存関係、ノードのヘルスステータス、タスク情報、スロークエリなどの詳細が含まれます。</p>
-<h4 id="Text-Match" class="common-anchor-header">テキストマッチ</h4><p>Milvus2.5は、<a href="https://github.com/quickwit-oss/tantivy">Tantivyの</a>アナライザとインデックスを活用してテキストの前処理とインデックスを構築し、特定の用語に基づいたテキストデータの正確な自然言語マッチングをサポートします。この機能は主に特定の条件を満たすフィルタリング検索に使用され、クエリー結果を絞り込むためにスカラーフィルタリングを組み込むことができ、スカラー条件を満たすベクトル内の類似検索を可能にします。</p>
+<p>詳細は<a href="/docs/ja/milvus-webui.md">Milvus WebUIを</a>ご参照ください。</p>
+<h4 id="Text-Match" class="common-anchor-header">テキストマッチ</h4><p>Milvus 2.5では、<a href="https://github.com/quickwit-oss/tantivy">Tantivyの</a>アナライザとインデックスを活用してテキストの前処理とインデックスを作成し、特定の用語に基づいたテキストデータの正確な自然言語マッチングをサポートしています。この機能は主に特定の条件を満たすフィルタリング検索に使用され、クエリー結果を絞り込むためにスカラーフィルタリングを組み込むことができ、スカラー条件を満たすベクトル内の類似検索を可能にします。</p>
 <p>詳細は<a href="/docs/ja/analyzer-overview.md">アナライザーの概要と</a> <a href="/docs/ja/keyword-match.md">テキストマッチを</a>参照。</p>
 <h4 id="Bitmap-Index" class="common-anchor-header">ビットマップインデックス</h4><p>Milvusファミリーに新しいスカラーデータインデックスが追加されました。BitMap インデックスは行数と同じ長さのビットの配列を使用して値の存在を表し、検索を高速化します。</p>
 <p>ビットマップインデックスは伝統的に、値の数が少ない、つまり、性別情報を含むカラムの値が男性と女性の2つしかないような、カーディナリティの低いフィールドに有効であった。</p>
@@ -66,9 +107,10 @@ title: リリースノート
 <h4 id="IPv6-Support" class="common-anchor-header">IPv6サポート</h4><p>MilvusはIPv6をサポートし、ネットワーク接続と互換性の拡張を可能にしました。</p>
 <h4 id="CSV-Bulk-Import" class="common-anchor-header">CSV一括インポート</h4><p>JSON、Parquet形式に加え、MilvusはCSV形式のデータの直接一括インポートをサポートするようになりました。</p>
 <h4 id="Expression-Templates-for-Query-Acceleration" class="common-anchor-header">クエリ高速化のための式テンプレート</h4><p>Milvusは式テンプレートをサポートし、特に複雑な式のシナリオにおいて式の解析効率を向上させます。</p>
+<p>詳細については、「<a href="/docs/ja/filtering-templating.md">フィルタテンプレート</a>」をご参照ください。</p>
 <h4 id="GroupBy-Enhancements" class="common-anchor-header">GroupByの強化</h4><ul>
-<li><strong>グループサイズのカスタマイズ</strong>：グループごとに返されるエントリーの数を指定できるようになりました。</li>
-<li><strong>ハイブリッドGroupBy検索</strong>：複数のベクトル列に基づくハイブリッド GroupBy 検索がサポートされました。</li>
+<li><strong>グループサイズのカスタマイズ</strong>：グループごとに返されるエントリの数を指定できるようになりました。</li>
+<li><strong>ハイブリッド GroupBy 検索</strong>：複数のベクトル列に基づくハイブリッド GroupBy 検索をサポートしました。</li>
 </ul>
 <h4 id="Iterator-Enhancements" class="common-anchor-header">イテレーターの機能強化</h4><ul>
 <li><strong>MVCCのサポート</strong>：MVCC（Multi-Version Concurrency Control）により、挿入や削除などのデータ変更に影響されずにイテレータを使用できるようになりました。</li>

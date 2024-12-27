@@ -19,6 +19,46 @@ title: Notes de mise à jour
         ></path>
       </svg>
     </button></h1><p>Découvrez les nouveautés de Milvus ! Cette page résume les nouvelles fonctionnalités, les améliorations, les problèmes connus et les corrections de bogues de chaque version. Vous trouverez dans cette section les notes de version pour chaque version publiée après la v2.5.0. Nous vous conseillons de consulter régulièrement cette page pour prendre connaissance des mises à jour.</p>
+<h2 id="v251" class="common-anchor-header">v2.5.1<button data-href="#v251" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>Date de sortie : 26 décembre 2024</p>
+<table>
+<thead>
+<tr><th>Version de Milvus</th><th>Version du SDK Python</th><th>Version du SDK Node.js</th><th>Version du SDK Java</th></tr>
+</thead>
+<tbody>
+<tr><td>2.5.1</td><td>2.5.2</td><td>2.5.2</td><td>2.5.2</td></tr>
+</tbody>
+</table>
+<p>Milvus 2.5.1 se concentre sur une série de corrections de bogues concernant le chargement de la mémoire, les listes RBAC, l'équilibrage des nœuds de requête et l'indexation des segments scellés, tout en améliorant l'interface Web et les intercepteurs. Nous recommandons vivement la mise à jour vers la version 2.5.1 pour une stabilité et une fiabilité accrues.</p>
+<h3 id="Improvement" class="common-anchor-header">Amélioration</h3><ul>
+<li>Mise à jour des pages de collecte et de requête de l'interface web.<a href="https://github.com/milvus-io/milvus/pull/38701">(#38701</a>)</li>
+</ul>
+<h3 id="Bug-fixes" class="common-anchor-header">Correction de bugs</h3><ul>
+<li>Correction des problèmes OOM en ajoutant un facteur de mémoire aux estimations de chargement.<a href="https://github.com/milvus-io/milvus/pull/38722">(#38722</a>)</li>
+<li>Correction de l'expansion des groupes de privilèges lors de l'énumération des politiques dans RootCoord.<a href="https://github.com/milvus-io/milvus/pull/38760">(#38760</a>)</li>
+<li>Correction des problèmes liés à l'énumération des groupes de privilèges et des collections.<a href="https://github.com/milvus-io/milvus/pull/38738">(#38738</a>)</li>
+<li>Correction de l'équilibreur pour éviter la surcharge répétée du même noeud de requête.<a href="https://github.com/milvus-io/milvus/pull/38724">(#38724</a>)</li>
+<li>Correction des tâches d'équilibrage inattendues déclenchées après le redémarrage de QueryCoord.<a href="https://github.com/milvus-io/milvus/pull/38725">(#38725</a>)</li>
+<li>Correction des mises à jour de la configuration de chargement qui ne s'appliquent pas au chargement des collections.<a href="https://github.com/milvus-io/milvus/pull/38737">(#38737</a>)</li>
+<li>Correction du comptage des lectures nulles lors de l'importation de données.<a href="https://github.com/milvus-io/milvus/pull/38695">(#38695</a>)</li>
+<li>Correction du décodage Unicode pour les clés JSON dans les expressions.<a href="https://github.com/milvus-io/milvus/pull/38653">(#38653</a>)</li>
+<li>Correction du nom de la base de données de l'intercepteur pour alterCollectionField dans la version 2.5. <a href="https://github.com/milvus-io/milvus/pull/38663">(#38663</a>)</li>
+<li>Correction des paramètres d'index vides pour les segments scellés lors de l'utilisation de la recherche brute BM25.<a href="https://github.com/milvus-io/milvus/pull/38752">(#38752</a>)</li>
+</ul>
 <h2 id="v250" class="common-anchor-header">v2.5.0<button data-href="#v250" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -49,7 +89,8 @@ title: Notes de mise à jour
 <p>Pour plus d'informations, reportez-vous aux sections <a href="/docs/fr/analyzer-overview.md">Vue d'ensemble de l'analyseur</a> et <a href="/docs/fr/full-text-search.md">Recherche en texte intégral</a>.</p>
 <h4 id="Cluster-Management-WebUI-Beta" class="common-anchor-header">Interface Web de gestion des clusters (Beta)</h4><p>Pour mieux prendre en charge les données massives et les fonctionnalités riches, la conception sophistiquée de Milvus inclut diverses dépendances, de nombreux rôles de nœuds, des structures de données complexes, etc. Ces aspects peuvent poser des problèmes d'utilisation et de maintenance.</p>
 <p>Milvus 2.5 introduit une interface Web intégrée de gestion des clusters, qui réduit les difficultés de maintenance du système en visualisant les informations complexes de l'environnement d'exécution de Milvus. Il s'agit notamment des détails des bases de données et des collections, des segments, des canaux, des dépendances, de l'état de santé des nœuds, des informations sur les tâches, des requêtes lentes, etc.</p>
-<h4 id="Text-Match" class="common-anchor-header">Correspondance de texte</h4><p>Milvus 2.5 exploite les analyseurs et l'indexation de <a href="https://github.com/quickwit-oss/tantivy">Tantivy</a> pour le prétraitement du texte et la construction de l'index, prenant en charge la correspondance précise en langage naturel des données textuelles basées sur des termes spécifiques. Cette fonction est principalement utilisée pour la recherche filtrée afin de satisfaire des conditions spécifiques et peut incorporer le filtrage scalaire pour affiner les résultats de la requête, permettant des recherches de similarité dans les vecteurs qui répondent aux critères scalaires.</p>
+<p>Pour plus de détails, voir <a href="/docs/fr/milvus-webui.md">Milvus WebUI</a>.</p>
+<h4 id="Text-Match" class="common-anchor-header">Correspondance de texte</h4><p>Milvus 2.5 exploite les analyseurs et l'indexation de <a href="https://github.com/quickwit-oss/tantivy">Tantivy</a> pour le prétraitement du texte et la création d'index, prenant en charge la correspondance précise en langage naturel des données textuelles basées sur des termes spécifiques. Cette fonction est principalement utilisée pour la recherche filtrée afin de satisfaire des conditions spécifiques et peut incorporer le filtrage scalaire pour affiner les résultats de la requête, permettant des recherches de similarité dans les vecteurs qui répondent aux critères scalaires.</p>
 <p>Pour plus de détails, reportez-vous à la section <a href="/docs/fr/analyzer-overview.md">Vue d'ensemble de l'analyseur</a> et à la section <a href="/docs/fr/keyword-match.md">Correspondance de texte</a>.</p>
 <h4 id="Bitmap-Index" class="common-anchor-header">Index Bitmap</h4><p>Un nouvel index de données scalaires a été ajouté à la famille Milvus. L'index BitMap utilise un tableau de bits, d'une longueur égale au nombre de lignes, pour représenter l'existence de valeurs et accélérer les recherches.</p>
 <p>Les index Bitmap sont traditionnellement efficaces pour les champs à faible cardinalité, qui présentent un nombre modeste de valeurs distinctes - par exemple, une colonne contenant des informations sur le sexe avec seulement deux valeurs possibles : homme et femme.</p>
@@ -65,7 +106,8 @@ title: Notes de mise à jour
 <h3 id="Other-Features" class="common-anchor-header">Autres fonctionnalités</h3><h4 id="Streaming-Node-Beta" class="common-anchor-header">Nœud de streaming (Beta)</h4><p>Milvus 2.5 introduit un nouveau composant appelé nœud de streaming, qui fournit des services de journalisation en avance sur l'écriture (WAL). Cela permet à Milvus d'atteindre un consensus avant et après les canaux de lecture et d'écriture, ce qui débloque de nouvelles caractéristiques, fonctionnalités et optimisations. Cette fonctionnalité est désactivée par défaut dans Milvus 2.5 et sera officiellement disponible dans la version 3.0.</p>
 <h4 id="IPv6-Support" class="common-anchor-header">Prise en charge d'IPv6</h4><p>Milvus prend désormais en charge IPv6, ce qui permet d'étendre la connectivité et la compatibilité du réseau.</p>
 <h4 id="CSV-Bulk-Import" class="common-anchor-header">Importation en masse CSV</h4><p>Outre les formats JSON et Parquet, Milvus prend désormais en charge l'importation directe en masse de données au format CSV.</p>
-<h4 id="Expression-Templates-for-Query-Acceleration" class="common-anchor-header">Modèles d'expression pour l'accélération des requêtes</h4><p>Milvus prend désormais en charge les modèles d'expression, ce qui améliore l'efficacité de l'analyse des expressions, en particulier dans les scénarios comportant des expressions complexes.</p>
+<h4 id="Expression-Templates-for-Query-Acceleration" class="common-anchor-header">Modèles d'expression pour l'accélération des requêtes</h4><p>Milvus prend désormais en charge les modèles d'expression, ce qui améliore l'efficacité de l'analyse des expressions, en particulier dans les scénarios avec des expressions complexes.</p>
+<p>Pour plus d'informations, reportez-vous à la section <a href="/docs/fr/filtering-templating.md">Modèles de filtres</a>.</p>
 <h4 id="GroupBy-Enhancements" class="common-anchor-header">Améliorations de GroupBy</h4><ul>
 <li><strong>Taille de groupe personnalisable</strong>: Ajout de la prise en charge de la spécification du nombre d'entrées renvoyées pour chaque groupe.</li>
 <li><strong>Recherche hybride par groupe</strong>: Prise en charge de la recherche hybride GroupBy basée sur plusieurs colonnes de vecteurs.</li>

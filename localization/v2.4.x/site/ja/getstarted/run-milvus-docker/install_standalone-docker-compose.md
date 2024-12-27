@@ -57,7 +57,7 @@ title: Docker ComposeでMilvusを起動する(Linux)
       </svg>
     </button></h2><p>MilvusはDocker Composeの設定ファイルをMilvusリポジトリに用意しています。Docker Composeを使用してMilvusをインストールするには、以下のコマンドを実行してください。</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-comment"># Download the configuration file</span>
-$ wget https://github.com/milvus-io/milvus/releases/download/v2.4.18/milvus-standalone-docker-compose.yml -O docker-compose.yml
+$ wget https://github.com/milvus-io/milvus/releases/download/v2.4.19/milvus-standalone-docker-compose.yml -O docker-compose.yml
 
 <span class="hljs-comment"># Start Milvus</span>
 $ <span class="hljs-built_in">sudo</span> docker compose up -d
@@ -69,7 +69,7 @@ Creating milvus-standalone ... <span class="hljs-keyword">done</span>
 <div class="alert note">
 <ul>
 <li><p>上記コマンドの実行に失敗した場合は、システムにDocker Compose V1がインストールされているか確認してください。もしそうであれば、<a href="https://docs.docker.com/compose/">このページの</a>注意事項に従い、Docker Compose V2に移行することをお勧めします。</p></li>
-<li><p>もしイメージのプルに関して問題が発生した場合は、<a href="mailto:community@zilliz.com">community@zilliz.com</a>まで問題の詳細をご連絡ください。</p></li>
+<li><p>もしイメージのプルアップに問題が発生した場合は、<a href="mailto:community@zilliz.com">community@zilliz.com</a>まで問題の詳細をご連絡ください。</p></li>
 </ul>
 </div>
 <p>milvusの起動後、</p>
@@ -133,6 +133,6 @@ $ <span class="hljs-built_in">sudo</span> <span class="hljs-built_in">rm</span> 
 </ul></li>
 <li><p><a href="/docs/ja/milvus_backup_overview.md">Milvusの</a>データバックアップのためのオープンソースツールである<a href="/docs/ja/milvus_backup_overview.md">Milvus Backupを</a>ご紹介します。</p></li>
 <li><p>Milvusのデバッグとダイナミックコンフィギュレーションアップデートのためのオープンソースツール、<a href="/docs/ja/birdwatcher_overview.md">Birdwatcherの</a>ご紹介。</p></li>
-<li><p>Milvusを直感的に管理するオープンソースのGUIツール<a href="https://github.com/zilliztech/attu">Attuを</a>ご覧ください。</p></li>
+<li><p>Milvusを直感的に管理するオープンソースのGUIツール<a href="https://github.com/zilliztech/attu">Attuを</a>ご紹介します。</p></li>
 <li><p><a href="/docs/ja/monitor.md">PrometheusでMilvusを監視する</a>。</p></li>
 </ul>

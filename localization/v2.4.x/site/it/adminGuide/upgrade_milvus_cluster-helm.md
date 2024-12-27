@@ -61,7 +61,7 @@ title: Aggiornamento del cluster Milvus con i grafici Helm
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Eseguite i seguenti comandi per verificare le nuove versioni di Milvus.</p>
+    </button></h2><p>Eseguire i seguenti comandi per verificare le nuove versioni di Milvus.</p>
 <pre><code translate="no">$ helm repo update zilliztech
 $ helm search repo zilliztech/milvus --versions
 <button class="copy-code-btn"></button></code></pre>
@@ -108,10 +108,10 @@ zilliztech/milvus       4.1.1           2.3.0                   Milvus is an ope
 zilliztech/milvus       4.1.0           2.3.0                   Milvus is an open-source vector database built ...
 <button class="copy-code-btn"></button></code></pre>
 <p>È possibile scegliere il percorso di aggiornamento per il proprio Milvus come segue:</p>
-<div style="display: none;">- Eseguire un aggiornamento continuo](#conduct-a-rolling-upgrade) da Milvus v2.2.3 e versioni successive a v2.4.18.</div>
+<div style="display: none;">- Eseguire un aggiornamento continuo](#conduct-a-rolling-upgrade) da Milvus v2.2.3 e versioni successive alla v2.4.19.</div>
 <ul>
-<li><p><a href="#Upgrade-Milvus-using-Helm">Aggiornare Milvus utilizzando Helm</a> per un aggiornamento da una release minore precedente alla v2.2.3 alla v2.4.18.</p></li>
-<li><p><a href="#Migrate-the-metadata">Migrare i metadati</a> prima dell'aggiornamento da Milvus v2.1.x a v2.4.18.</p></li>
+<li><p><a href="#Upgrade-Milvus-using-Helm">Aggiornare Milvus utilizzando Helm</a> per un aggiornamento da una release minore precedente alla v2.2.3 alla v2.4.19.</p></li>
+<li><p><a href="#Migrate-the-metadata">Migrare i metadati</a> prima dell'aggiornamento da Milvus v2.1.x a v2.4.19.</p></li>
 </ul>
 <div style="display: none;">
 <h2 id="Conduct-a-rolling-upgrade" class="common-anchor-header">Eseguire un aggiornamento continuo<button data-href="#Conduct-a-rolling-upgrade" class="anchor-icon" translate="no">
@@ -145,8 +145,8 @@ zilliztech/milvus       4.1.0           2.3.0                   Milvus is an ope
 <tr><td><code translate="no">o</code></td><td>Operazione</td><td><code translate="no">update</code></td><td>Falso</td></tr>
 </tbody>
 </table>
-<p>Dopo essersi assicurati che tutte le installazioni nella vostra istanza Milvus siano nello stato normale. È possibile eseguire il seguente comando per aggiornare l'istanza Milvus alla versione 2.4.18.</p>
-<pre><code translate="no" class="language-shell">sh rollingUpdate.<span class="hljs-property">sh</span> -n <span class="hljs-keyword">default</span> -i my-release -o update -t <span class="hljs-number">2.4</span><span class="hljs-number">.18</span> -w <span class="hljs-string">&#x27;milvusdb/milvus:v2.4.18&#x27;</span>
+<p>Dopo essersi assicurati che tutte le installazioni nella vostra istanza Milvus siano nello stato normale. È possibile eseguire il seguente comando per aggiornare l'istanza Milvus alla versione 2.4.19.</p>
+<pre><code translate="no" class="language-shell">sh rollingUpdate.<span class="hljs-property">sh</span> -n <span class="hljs-keyword">default</span> -i my-release -o update -t <span class="hljs-number">2.4</span><span class="hljs-number">.19</span> -w <span class="hljs-string">&#x27;milvusdb/milvus:v2.4.19&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <ol>

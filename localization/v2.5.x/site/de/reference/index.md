@@ -58,10 +58,10 @@ Derzeit unterstützt ein Vektorfeld nur einen Index-Typ. Milvus löscht automati
       </svg>
     </button></h2><p>Milvus unterstützt verschiedene Indextypen, die nach der Art der Vektoreinbettungen, die sie verarbeiten, kategorisiert werden: <strong>Fließkomma-Einbettungen</strong> (auch bekannt als Fließkomma-Vektoren oder dichte Vektoren), <strong>binäre Einbettungen</strong> (auch bekannt als binäre Vektoren) und <strong>spärliche Einbettungen</strong> (auch bekannt als spärliche Vektoren).</p>
 <div class="filter">
- <a href="#floating">Fließkomma-Einbettungen</a> <a href="#binary">Binäre Einbettungen</a> <a href="#sparse">Dünne Einbettungen</a></div>
+ <a href="#floating">Fließkomma-Einbettungen</a> <a href="#binary">Binäre Einbettungen</a> <a href="#sparse">Sparse Embeddings</a></div>
 <div class="filter-floating">
-<h3 id="Indexes-for-floating-point-embeddings" class="common-anchor-header">Indizes für Fließkomma-Einbettungen</h3><p>Für 128-dimensionale Fließkomma-Einbettungen (Vektoren) beträgt der benötigte Speicherplatz 128 * die Größe von float = 512 Byte. Die für Fließkomma-Einbettungen verwendeten <a href="/docs/de/metric.md">Abstandsmetriken</a> sind der euklidische Abstand (<code translate="no">L2</code>) und das innere Produkt (<code translate="no">IP</code>).</p>
-<p>Diese Arten von Indizes umfassen <code translate="no">FLAT</code>, <code translate="no">IVF_FLAT</code>, <code translate="no">IVF_PQ</code>, <code translate="no">IVF_SQ8</code>, <code translate="no">HNSW</code> und <code translate="no">SCANN</code> für CPU-basierte ANN-Suchen.</p>
+<h3 id="Indexes-for-floating-point-embeddings" class="common-anchor-header">Indizes für Fließkomma-Einbettungen</h3><p>Für 128-dimensionale Fließkomma-Einbettungen (Vektoren) beträgt der Speicherplatzbedarf 128 * die Größe von float = 512 Byte. Die für Fließkomma-Einbettungen verwendeten <a href="/docs/de/metric.md">Abstandsmetriken</a> sind der euklidische Abstand (<code translate="no">L2</code>) und das innere Produkt (<code translate="no">IP</code>).</p>
+<p>Diese Arten von Indizes umfassen <code translate="no">FLAT</code>, <code translate="no">IVF_FLAT</code>, <code translate="no">IVF_PQ</code>, <code translate="no">IVF_SQ8</code>, <code translate="no">HNSW</code>, <code translate="no">HNSW_SQ</code>, <code translate="no">HNSW_PQ</code>, <code translate="no">HNSW_PRQ</code> und <code translate="no">SCANN</code> für CPU-basierte ANN-Suchen.</p>
 </div>
 <div class="filter-binary">
 <h3 id="Indexes-for-binary-embeddings" class="common-anchor-header">Indizes für binäre Einbettungen</h3><p>Für 128-dimensionale binäre Einbettungen beträgt der Speicherplatzbedarf 128 / 8 = 16 Byte. Und die für binäre Einbettungen verwendeten Abstandsmetriken sind <code translate="no">JACCARD</code> und <code translate="no">HAMMING</code>.</p>
@@ -93,7 +93,7 @@ Derzeit unterstützt ein Vektorfeld nur einen Index-Typ. Milvus löscht automati
   </tr>
   <tr>
     <td>IVF_FLAT</td>
-    <td>Quantisierungsbasierter Index</td>
+    <td>K.A.</td>
     <td>
       <ul>
         <li>Hochgeschwindigkeitsabfrage</li>
@@ -106,7 +106,7 @@ Derzeit unterstützt ein Vektorfeld nur einen Index-Typ. Milvus löscht automati
     <td>Quantisierungsbasierter Index</td>
     <td>
       <ul>
-        <li>Hochgeschwindigkeitsabfrage</li>
+        <li>Abfrage mit sehr hoher Geschwindigkeit</li>
         <li>Begrenzte Speicherressourcen</li>
         <li>Akzeptiert geringfügige Kompromisse bei der Abrufrate</li>
       </ul>
@@ -117,9 +117,9 @@ Derzeit unterstützt ein Vektorfeld nur einen Index-Typ. Milvus löscht automati
     <td>Quantisierungsbasierter Index</td>
     <td>
       <ul>
-        <li>Abfrage mit sehr hoher Geschwindigkeit</li>
+        <li>Hochgeschwindigkeitsabfrage</li>
         <li>Begrenzte Speicherressourcen</li>
-        <li>Akzeptiert erhebliche Kompromisse bei der Abrufrate</li>
+        <li>Akzeptiert geringfügige Kompromisse bei der Abrufrate</li>
       </ul>
     </td>
   </tr>
@@ -131,6 +131,40 @@ Derzeit unterstützt ein Vektorfeld nur einen Index-Typ. Milvus löscht automati
         <li>Abfrage mit sehr hoher Geschwindigkeit</li>
         <li>Erfordert eine möglichst hohe Abrufrate</li>
         <li>Große Speicherressourcen</li>
+      </ul>
+    </td>
+  </tr>
+  <tr>
+    <td>HNSW_SQ</td>
+    <td>Quantisierungsbasierter Index</td>
+    <td>
+      <ul>
+        <li>Abfrage mit sehr hoher Geschwindigkeit</li>
+        <li>Begrenzte Speicherressourcen</li>
+        <li>Akzeptiert geringfügige Kompromisse bei der Abrufrate</li>
+      </ul>
+    </td>
+  </tr>
+    <tr>
+    <td>HNSW_PQ</td>
+    <td>Quantisierungsbasierter Index</td>
+    <td>
+      <ul>
+        <li>Abfrage mit mittlerer Geschwindigkeit</li>
+        <li>Sehr begrenzte Speicherressourcen</li>
+        <li>Akzeptiert geringfügige Kompromisse bei der Abrufrate</li>
+      </ul>
+    </td>
+  </tr>
+    </tr>
+    <tr>
+    <td>HNSW_PRQ</td>
+    <td>Quantisierungsbasierter Index</td>
+    <td>
+      <ul>
+        <li>Mittelschnelle Abfrage</li>
+        <li>Sehr begrenzte Speicherressourcen</li>
+        <li>Akzeptiert geringfügige Kompromisse bei der Abrufrate</li>
       </ul>
     </td>
   </tr>
@@ -210,7 +244,7 @@ Derzeit unterstützt ein Vektorfeld nur einen Index-Typ. Milvus löscht automati
 </div>
 <div class="filter-floating">
 <h3 id="FLAT" class="common-anchor-header">FLAT</h3><p>Für Anwendungen der Vektorähnlichkeitssuche, die eine perfekte Genauigkeit erfordern und von relativ kleinen Datensätzen (im Millionenbereich) abhängen, ist der FLAT-Index eine gute Wahl. FLAT komprimiert die Vektoren nicht und ist der einzige Index, der exakte Suchergebnisse garantieren kann. Die Ergebnisse von FLAT können auch als Vergleichspunkt für Ergebnisse anderer Indizes verwendet werden, die weniger als 100 % Recall haben.</p>
-<p>FLAT ist genau, weil er einen erschöpfenden Suchansatz verfolgt, d. h. für jede Abfrage wird die Zieleingabe mit jedem Satz von Vektoren in einem Datensatz verglichen. Dadurch ist FLAT der langsamste Index auf unserer Liste und eignet sich schlecht für die Abfrage umfangreicher Vektordaten. Für den FLAT-Index in Milvus sind keine Parameter erforderlich, und seine Verwendung erfordert kein Datentraining.</p>
+<p>FLAT ist genau, weil er einen erschöpfenden Ansatz bei der Suche verfolgt, d. h. bei jeder Abfrage wird die Zieleingabe mit allen Vektoren eines Datensatzes verglichen. Dadurch ist FLAT der langsamste Index auf unserer Liste und eignet sich schlecht für die Abfrage umfangreicher Vektordaten. Für den FLAT-Index in Milvus sind keine Parameter erforderlich, und seine Verwendung erfordert kein Datentraining.</p>
 <ul>
 <li><p>Suchparameter</p>
 <table>
@@ -223,7 +257,7 @@ Derzeit unterstützt ein Vektorfeld nur einen Index-Typ. Milvus löscht automati
 </table>
 </li>
 </ul>
-<h3 id="IVFFLAT" class="common-anchor-header">IVF_FLAT</h3><p>IVF_FLAT unterteilt Vektordaten in <code translate="no">nlist</code> Cluster-Einheiten und vergleicht dann die Abstände zwischen dem Ziel-Eingangsvektor und dem Zentrum jedes Clusters. Je nach Anzahl der Cluster, die das System abfragen soll (<code translate="no">nprobe</code>), werden die Ergebnisse der Ähnlichkeitssuche nur auf der Grundlage von Vergleichen zwischen der Zieleingabe und den Vektoren in den ähnlichsten Clustern zurückgegeben, was die Abfragezeit drastisch reduziert.</p>
+<h3 id="IVFFLAT" class="common-anchor-header">IVF_FLAT</h3><p>IVF_FLAT unterteilt Vektordaten in <code translate="no">nlist</code> Cluster-Einheiten und vergleicht dann die Abstände zwischen dem Ziel-Eingangsvektor und dem Zentrum jedes Clusters. Abhängig von der Anzahl der Cluster, die das System abfragt (<code translate="no">nprobe</code>), werden die Ergebnisse der Ähnlichkeitssuche nur auf der Grundlage von Vergleichen zwischen der Zieleingabe und den Vektoren in den ähnlichsten Clustern zurückgegeben, was die Abfragezeit drastisch reduziert.</p>
 <p>Durch die Anpassung von <code translate="no">nprobe</code> kann ein ideales Gleichgewicht zwischen Genauigkeit und Geschwindigkeit für ein bestimmtes Szenario gefunden werden. Die Ergebnisse des <a href="https://zilliz.com/blog/Accelerating-Similarity-Search-on-Really-Big-Data-with-Vector-Indexing">IVF_FLAT-Leistungstests</a> zeigen, dass die Abfragezeit stark ansteigt, wenn sowohl die Anzahl der Zieleingangsvektoren (<code translate="no">nq</code>) als auch die Anzahl der zu durchsuchenden Cluster (<code translate="no">nprobe</code>) zunimmt.</p>
 <p>IVF_FLAT ist der einfachste IVF-Index, und die in jeder Einheit gespeicherten kodierten Daten stimmen mit den Originaldaten überein.</p>
 <ul>
@@ -334,7 +368,7 @@ Derzeit unterstützt ein Vektorfeld nur einen Index-Typ. Milvus löscht automati
 <tr><th>Parameter</th><th>Beschreibung</th><th>Bereich</th><th>Standardwert</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">max_empty_result_buckets</code></td><td>Maximale Anzahl von Bereichen, die keine Suchergebnisse liefern.<br/>Dies ist ein Parameter für die Bereichssuche und beendet den Suchvorgang, wenn die Anzahl der aufeinanderfolgenden leeren Bereiche den angegebenen Wert erreicht.<br/>Eine Erhöhung dieses Wertes kann die Abrufrate auf Kosten einer längeren Suchzeit verbessern.</td><td>[1, 65535]</td><td>2</td></tr>
+<tr><td><code translate="no">max_empty_result_buckets</code></td><td>Maximale Anzahl der Buckets, die keine Suchergebnisse liefern.<br/>Dies ist ein Parameter für die Bereichssuche, der den Suchvorgang beendet, wenn die Anzahl der aufeinander folgenden leeren Buckets den angegebenen Wert erreicht.<br/>Eine Erhöhung dieses Wertes kann die Abrufrate auf Kosten einer längeren Suchzeit verbessern.</td><td>[1, 65535]</td><td>2</td></tr>
 </tbody>
 </table>
 </li>
@@ -382,35 +416,125 @@ Derzeit unterstützt ein Vektorfeld nur einen Index-Typ. Milvus löscht automati
 </ul></li>
 </ul>
 <h3 id="HNSW" class="common-anchor-header">HNSW</h3><p>HNSW (Hierarchical Navigable Small World Graph) ist ein graphbasierter Indizierungsalgorithmus. Er baut eine mehrschichtige Navigationsstruktur für ein Bild nach bestimmten Regeln auf. In dieser Struktur sind die oberen Schichten spärlicher und die Abstände zwischen den Knoten größer; die unteren Schichten sind dichter und die Abstände zwischen den Knoten sind kleiner. Die Suche beginnt in der obersten Schicht, findet den Knoten, der dem Ziel in dieser Schicht am nächsten liegt, und begibt sich dann in die nächste Schicht, um eine weitere Suche zu beginnen. Nach mehreren Iterationen kann sie sich schnell der Zielposition nähern.</p>
-<p>Um die Leistung zu verbessern, begrenzt HNSW den maximalen Grad der Knoten auf jeder Ebene des Graphen auf <code translate="no">M</code>. Darüber hinaus können Sie <code translate="no">efConstruction</code> (beim Indexaufbau) oder <code translate="no">ef</code> (bei der Suche nach Zielen) verwenden, um einen Suchbereich anzugeben.</p>
+<p>Um die Leistung zu verbessern, begrenzt HNSW den maximalen Grad der Knoten auf jeder Ebene des Graphen auf <code translate="no">M</code>. Außerdem können Sie <code translate="no">efConstruction</code> (beim Indexaufbau) oder <code translate="no">ef</code> (bei der Suche nach Zielen) verwenden, um einen Suchbereich anzugeben.</p>
 <ul>
 <li><p>Parameter für den Indexaufbau</p>
 <table>
 <thead>
-<tr><th>Parameter</th><th>Beschreibung</th><th>Bereich</th></tr>
+<tr><th>Parameter</th><th>Beschreibung</th><th>Bereich</th><th>Standardwert</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">M</code></td><td>M definiert die maximale Anzahl der ausgehenden Verbindungen im Diagramm. Ein höheres M führt zu höherer Genauigkeit/Laufzeit bei fester ef/efConstruction.</td><td>[2, 2048]</td></tr>
-<tr><td><code translate="no">efConstruction</code></td><td>ef_construction steuert den Kompromiss zwischen Indexsuchgeschwindigkeit und Erstellungsgeschwindigkeit. Eine Erhöhung des efConstruction-Parameters kann die Indexqualität verbessern, führt aber auch zu einer Verlängerung der Indexierungszeit.</td><td>[1, int_max]</td></tr>
+<tr><td><code translate="no">M</code></td><td>M definiert die maximale Anzahl der ausgehenden Verbindungen im Graphen. Ein höheres M führt zu höherer Genauigkeit/Laufzeit bei fester ef/efConstruction.</td><td>[2, 2048]</td><td>Keine</td></tr>
+<tr><td><code translate="no">efConstruction</code></td><td>ef_construction steuert den Kompromiss zwischen Indexsuchgeschwindigkeit und Erstellungsgeschwindigkeit. Eine Erhöhung des efConstruction-Parameters kann die Indexqualität verbessern, führt aber auch zu einer Verlängerung der Indexierungszeit.</td><td>[1, int_max]</td><td>Keine</td></tr>
 </tbody>
 </table>
 </li>
 <li><p>Suchparameter</p>
 <table>
 <thead>
-<tr><th>Parameter</th><th>Beschreibung</th><th>Bereich</th></tr>
+<tr><th>Parameter</th><th>Beschreibung</th><th>Bereich</th><th>Standardwert</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">ef</code></td><td>Parameter, der den Kompromiss zwischen Abfragezeit und -genauigkeit steuert. Eine höhere <code translate="no">ef</code> führt zu einer genaueren, aber langsameren Suche.</td><td>[<code translate="no">top_k</code>, int_max]</td></tr>
+<tr><td><code translate="no">ef</code></td><td>Parameter, der den Kompromiss zwischen Abfragezeit und -genauigkeit steuert. Eine höhere <code translate="no">ef</code> führt zu einer genaueren, aber langsameren Suche.</td><td>[<code translate="no">top_k</code>, int_max]</td><td>Keine</td></tr>
+</tbody>
+</table>
+</li>
+</ul>
+<h3 id="HNSWSQ" class="common-anchor-header">HNSW_SQ</h3><p>Skalarquantisierung (SQ) ist eine Technik zur Diskretisierung von Fließkommadaten in eine endliche Menge von Werten auf der Grundlage ihres Betrags. <strong>SQ6</strong> steht beispielsweise für die Quantisierung in (2^6 = 64) diskrete Werte, wobei jede Fließkommazahl mit 6 Bits kodiert wird. In ähnlicher Weise quantisiert <strong>SQ8</strong> die Daten in (2^8 = 256) diskrete Werte, wobei jede Fließkommazahl durch 8 Bits dargestellt wird. Durch diese Quantisierung wird der Speicherplatzbedarf reduziert, während die wesentliche Struktur der Daten für eine effiziente Verarbeitung erhalten bleibt.</p>
+<p>In Kombination mit SQ bietet HNSW_SQ einen kontrollierbaren Kompromiss zwischen Indexgröße und Genauigkeit, wobei eine hohe Abfrageleistung pro Sekunde (QPS) beibehalten wird. Im Vergleich zu Standard-HNSW führt dies zu einer bescheidenen Erhöhung der Indexaufbauzeit.</p>
+<ul>
+<li><p>Parameter für den Indexaufbau</p>
+<table>
+<thead>
+<tr><th>Parameter</th><th>Beschreibung</th><th>Bereich</th><th>Standardwert</th></tr>
+</thead>
+<tbody>
+<tr><td><code translate="no">M</code></td><td>M definiert die maximale Anzahl der ausgehenden Verbindungen im Graphen. Ein höheres M führt zu höherer Genauigkeit/Laufzeit bei fester ef/efConstruction.</td><td>[2, 2048]</td><td>Keine</td></tr>
+<tr><td><code translate="no">efConstruction</code></td><td>ef_construction steuert den Kompromiss zwischen Indexsuchgeschwindigkeit und Erstellungsgeschwindigkeit. Eine Erhöhung des efConstruction-Parameters kann die Indexqualität verbessern, führt aber auch zu einer Verlängerung der Indexierungszeit.</td><td>[1, int_max]</td><td>Keine</td></tr>
+<tr><td><code translate="no">sq_type</code></td><td>Skalarer Quantisierer-Typ.</td><td><code translate="no">SQ6</code>,<code translate="no">SQ8</code>, <code translate="no">BF16</code>, <code translate="no">FP16</code></td><td><code translate="no">SQ8</code></td></tr>
+</tbody>
+</table>
+</li>
+<li><p>Suchparameter</p>
+<table>
+<thead>
+<tr><th>Parameter</th><th>Beschreibung</th><th>Bereich</th><th>Standardwert</th></tr>
+</thead>
+<tbody>
+<tr><td><code translate="no">ef</code></td><td>Parameter, der den Kompromiss zwischen Abfragezeit und -genauigkeit steuert. Eine höhere <code translate="no">ef</code> führt zu einer genaueren, aber langsameren Suche.</td><td>[<code translate="no">top_k</code>, int_max]</td><td>Keine</td></tr>
+<tr><td><code translate="no">refine</code></td><td>Ob die Verfeinerung während des Zuges verwendet wird.</td><td><code translate="no">true</code>, <code translate="no">false</code></td><td><code translate="no">false</code></td></tr>
+<tr><td><code translate="no">refine_k</code></td><td>Der Vergrößerungsfaktor von refine im Vergleich zu <em>k</em>.</td><td>(1, <em>float_max</em>)</td><td><code translate="no">1</code></td></tr>
+<tr><td><code translate="no">refine_type</code></td><td>Der Datentyp des Verfeinerungsindexes.</td><td><code translate="no">SQ6</code>, <code translate="no">SQ8</code>, <code translate="no">BF16</code>, <code translate="no">FP16</code>, <code translate="no">FP32</code></td><td>Keine</td></tr>
+</tbody>
+</table>
+</li>
+</ul>
+<h3 id="HNSWPQ" class="common-anchor-header">HNSW_PQ</h3><p>Die Grundidee von PQ besteht darin, den Vektor in <code translate="no">m</code> Untervektoren aufzuteilen, von denen jeder <em>2^{nbits}</em> Zentroide auf der Grundlage von kmeans findet, und jeder Untervektor wählt den nächstgelegenen Zentroid als seinen ungefähren Untervektor. Dann zeichnen wir alle Zentroide auf, so dass jeder Untervektor als <code translate="no">nbits</code> kodiert werden kann und ein fließender Vektor der Länge <code translate="no">dim</code> als <em>m ⋅ nbits</em> Bits kodiert werden kann.</p>
+<p>In Kombination mit PQ bietet HNSW_PQ einen kontrollierbaren Kompromiss zwischen Indexgröße und Genauigkeit, hat aber einen niedrigeren QPS-Wert und eine höhere Wiederfindungsrate als HNSW_SQ bei gleicher Kompressionsrate. Im Vergleich zu HNSW_SQ dauert es länger, den Index aufzubauen.</p>
+<ul>
+<li><p>Parameter für den Indexaufbau</p>
+<table>
+<thead>
+<tr><th>Parameter</th><th>Beschreibung</th><th>Bereich</th><th>Standardwert</th></tr>
+</thead>
+<tbody>
+<tr><td><code translate="no">M</code></td><td>M definiert die maximale Anzahl der ausgehenden Verbindungen im Graphen. Ein höheres M führt zu höherer Genauigkeit/Laufzeit bei fester ef/efConstruction.</td><td>[2, 2048]</td><td>Keine</td></tr>
+<tr><td><code translate="no">efConstruction</code></td><td>ef_construction steuert den Kompromiss zwischen Indexsuchgeschwindigkeit und Erstellungsgeschwindigkeit. Eine Erhöhung des efConstruction-Parameters kann die Indexqualität verbessern, führt aber auch zu einer Verlängerung der Indexierungszeit.</td><td>[1, int_max]</td><td>Keine</td></tr>
+<tr><td><code translate="no">m</code></td><td>Die Anzahl der Untervektorgruppen, in die der Vektor aufgeteilt werden soll.</td><td>[1, 65536]</td><td>32</td></tr>
+<tr><td><code translate="no">nbits</code></td><td>Die Anzahl der Bits, in die jede Gruppe von Untervektoren quantisiert wird.</td><td>[1, 24]</td><td>8</td></tr>
+</tbody>
+</table>
+</li>
+<li><p>Suchparameter</p>
+<table>
+<thead>
+<tr><th>Parameter</th><th>Beschreibung</th><th>Bereich</th><th>Standardwert</th></tr>
+</thead>
+<tbody>
+<tr><td><code translate="no">ef</code></td><td>Parameter, der den Kompromiss zwischen Abfragezeit und -genauigkeit steuert. Eine höhere <code translate="no">ef</code> führt zu einer genaueren, aber langsameren Suche.</td><td>[<code translate="no">top_k</code>, int_max]</td><td>Keine</td></tr>
+<tr><td><code translate="no">refine</code></td><td>Ob die Verfeinerung während des Zuges verwendet wird.</td><td><code translate="no">true</code>, <code translate="no">false</code></td><td><code translate="no">false</code></td></tr>
+<tr><td><code translate="no">refine_k</code></td><td>Der Vergrößerungsfaktor von refine im Vergleich zu <em>k</em>.</td><td>(1, <em>float_max</em>)</td><td><code translate="no">1</code></td></tr>
+<tr><td><code translate="no">refine_type</code></td><td>Der Datentyp des Verfeinerungsindexes.</td><td><code translate="no">SQ6</code>, <code translate="no">SQ8</code>, <code translate="no">BF16</code>, <code translate="no">FP16</code>, <code translate="no">FP32</code></td><td>Keine</td></tr>
+</tbody>
+</table>
+</li>
+</ul>
+<h3 id="HNSWPRQ" class="common-anchor-header">HNSW_PRQ</h3><p>PRQ ist ähnlich wie PQ und unterteilt den Vektor ebenfalls in <code translate="no">m</code> Gruppen. Jeder Untervektor wird als <code translate="no">nbits</code> kodiert. Nach Abschluss einer pq-Quantisierung wird der Rest zwischen dem Vektor und dem pq-quantisierten Vektor berechnet und die pq-Quantisierung auf den Restvektor angewendet. Insgesamt werden <code translate="no">nrq</code> vollständige pq-Quantisierungen durchgeführt, so dass ein gleitender Vektor der Länge <code translate="no">dim</code> als <em>m ⋅ nbits ⋅ nrq</em> bits kodiert wird.</p>
+<p>In Kombination mit einem Product Residual Quantizer (PRQ) bietet HNSW_PRQ einen noch besser kontrollierbaren Kompromiss zwischen Indexgröße und Genauigkeit. Es hat einen fast gleichwertigen QPS-Wert und eine höhere Wiederfindungsrate als HNSW_PQ bei gleicher Kompressionsrate. Im Vergleich zu HNSW_PQ kann sich die Zeit für den Aufbau des Index um ein Vielfaches erhöhen.</p>
+<ul>
+<li><p>Parameter für den Indexaufbau</p>
+<table>
+<thead>
+<tr><th>Parameter</th><th>Beschreibung</th><th>Bereich</th><th>Standardwert</th></tr>
+</thead>
+<tbody>
+<tr><td><code translate="no">M</code></td><td>M definiert die maximale Anzahl der ausgehenden Verbindungen im Graphen. Ein höheres M führt zu höherer Genauigkeit/Laufzeit bei fester ef/efConstruction.</td><td>[2, 2048]</td><td>Keine</td></tr>
+<tr><td><code translate="no">efConstruction</code></td><td>ef_construction steuert den Kompromiss zwischen Indexsuchgeschwindigkeit und Erstellungsgeschwindigkeit. Eine Erhöhung des efConstruction-Parameters kann die Indexqualität verbessern, führt aber auch zu einer Verlängerung der Indexierungszeit.</td><td>[1, int_max]</td><td>Keine</td></tr>
+<tr><td><code translate="no">m</code></td><td>Die Anzahl der Untervektorgruppen, in die der Vektor aufgeteilt werden soll.</td><td>[1, 65536]</td><td>32</td></tr>
+<tr><td><code translate="no">nbits</code></td><td>Die Anzahl der Bits, in die jede Gruppe von Untervektoren quantisiert wird.</td><td>[1, 24]</td><td>8</td></tr>
+<tr><td><code translate="no">nrq</code></td><td>Die Anzahl der restlichen Unterquantisierer.</td><td>[1, 16]</td><td>2</td></tr>
+</tbody>
+</table>
+</li>
+<li><p>Suchparameter</p>
+<table>
+<thead>
+<tr><th>Parameter</th><th>Beschreibung</th><th>Bereich</th><th>Standardwert</th></tr>
+</thead>
+<tbody>
+<tr><td><code translate="no">ef</code></td><td>Parameter, der den Kompromiss zwischen Abfragezeit und -genauigkeit steuert. Eine höhere <code translate="no">ef</code> führt zu einer genaueren, aber langsameren Suche.</td><td>[<code translate="no">top_k</code>, int_max]</td><td>Keine</td></tr>
+<tr><td><code translate="no">refine</code></td><td>Ob die Verfeinerung während des Zuges verwendet wird.</td><td><code translate="no">true</code>, <code translate="no">false</code></td><td><code translate="no">false</code></td></tr>
+<tr><td><code translate="no">refine_k</code></td><td>Der Vergrößerungsfaktor von refine im Vergleich zu <em>k</em>.</td><td>(1, <em>float_max</em>)</td><td><code translate="no">1</code></td></tr>
+<tr><td><code translate="no">refine_type</code></td><td>Der Datentyp des Verfeinerungsindexes.</td><td><code translate="no">SQ6</code>, <code translate="no">SQ8</code>, <code translate="no">BF16</code>, <code translate="no">FP16</code>, <code translate="no">FP32</code></td><td>Keine</td></tr>
 </tbody>
 </table>
 </li>
 </ul>
 </div>
 <div class="filter-binary">
-<h3 id="BINFLAT" class="common-anchor-header">BIN_FLAT</h3><p>Dieser Index entspricht genau dem von FLAT, außer dass er nur für binäre Einbettungen verwendet werden kann.</p>
+<h3 id="BINFLAT" class="common-anchor-header">BIN_FLAT</h3><p>Dieser Index ist genau dasselbe wie FLAT, außer dass er nur für binäre Einbettungen verwendet werden kann.</p>
 <p>Für Anwendungen der Vektorähnlichkeitssuche, die perfekte Genauigkeit erfordern und von relativ kleinen Datensätzen (im Millionenbereich) abhängen, ist der Index BIN_FLAT eine gute Wahl. BIN_FLAT komprimiert keine Vektoren und ist der einzige Index, der exakte Suchergebnisse garantieren kann. Die Ergebnisse von BIN_FLAT können auch als Vergleichspunkt für Ergebnisse anderer Indizes verwendet werden, die weniger als 100 % Recall haben.</p>
-<p>BIN_FLAT ist genau, weil es einen erschöpfenden Suchansatz verfolgt, d. h. für jede Abfrage wird die Zieleingabe mit Vektoren in einem Datensatz verglichen. Dadurch ist BIN_FLAT der langsamste Index auf unserer Liste und eignet sich schlecht für die Abfrage umfangreicher Vektordaten. Es gibt keine Parameter für den BIN_FLAT-Index in Milvus, und seine Verwendung erfordert kein Datentraining oder zusätzlichen Speicherplatz.</p>
+<p>BIN_FLAT ist genau, weil er einen erschöpfenden Suchansatz verfolgt, d. h. für jede Abfrage wird die Zieleingabe mit Vektoren in einem Datensatz verglichen. Dadurch ist BIN_FLAT der langsamste Index auf unserer Liste und eignet sich schlecht für die Abfrage umfangreicher Vektordaten. Es gibt keine Parameter für den BIN_FLAT-Index in Milvus, und seine Verwendung erfordert kein Datentraining oder zusätzlichen Speicherplatz.</p>
 <ul>
 <li><p>Suchparameter</p>
 <table>
@@ -482,7 +606,7 @@ Derzeit unterstützt ein Vektorfeld nur einen Index-Typ. Milvus löscht automati
 <tr><th>Parameter</th><th>Beschreibung</th><th>Bereich</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">drop_ratio_search</code></td><td>Der Anteil der kleinen Vektorwerte, die während des Suchprozesses ausgeschlossen werden. Diese Option ermöglicht die Feinabstimmung des Suchprozesses, indem sie das Verhältnis der kleinsten Werte im Abfragevektor angibt, die ignoriert werden sollen. Sie hilft, ein Gleichgewicht zwischen Suchgenauigkeit und Leistung herzustellen. Je kleiner der Wert für <code translate="no">drop_ratio_search</code> eingestellt wird, desto weniger tragen diese kleinen Werte zur endgültigen Bewertung bei. Durch das Ignorieren einiger kleiner Werte kann die Suchleistung bei minimalen Auswirkungen auf die Genauigkeit verbessert werden.</td><td>[0, 1]</td></tr>
+<tr><td><code translate="no">drop_ratio_search</code></td><td>Der Anteil der kleinen Vektorwerte, die während des Suchvorgangs ausgeschlossen werden. Diese Option ermöglicht eine Feinabstimmung des Suchprozesses, indem sie das Verhältnis der kleinsten Werte im Abfragevektor angibt, die ignoriert werden sollen. Sie hilft, ein Gleichgewicht zwischen Suchgenauigkeit und Leistung herzustellen. Je kleiner der Wert für <code translate="no">drop_ratio_search</code> eingestellt wird, desto weniger tragen diese kleinen Werte zur endgültigen Bewertung bei. Durch das Ignorieren einiger kleiner Werte kann die Suchleistung bei minimalen Auswirkungen auf die Genauigkeit verbessert werden.</td><td>[0, 1]</td></tr>
 </tbody>
 </table>
 </li>
@@ -506,7 +630,7 @@ Derzeit unterstützt ein Vektorfeld nur einen Index-Typ. Milvus löscht automati
 <tr><th>Parameter</th><th>Beschreibung</th><th>Bereich</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">drop_ratio_search</code></td><td>Der Anteil der kleinen Vektorwerte, die während des Suchvorgangs ausgeschlossen werden. Diese Option ermöglicht die Feinabstimmung des Suchprozesses, indem sie das Verhältnis der kleinsten Werte im Abfragevektor angibt, die ignoriert werden sollen. Sie hilft, ein Gleichgewicht zwischen Suchgenauigkeit und Leistung herzustellen. Je kleiner der Wert für <code translate="no">drop_ratio_search</code> eingestellt wird, desto weniger tragen diese kleinen Werte zur endgültigen Bewertung bei. Durch das Ignorieren einiger kleiner Werte kann die Suchleistung bei minimalen Auswirkungen auf die Genauigkeit verbessert werden.</td><td>[0, 1]</td></tr>
+<tr><td><code translate="no">drop_ratio_search</code></td><td>Der Anteil der kleinen Vektorwerte, die während des Suchvorgangs ausgeschlossen werden. Diese Option ermöglicht eine Feinabstimmung des Suchprozesses, indem sie das Verhältnis der kleinsten Werte im Abfragevektor angibt, die ignoriert werden sollen. Sie hilft, ein Gleichgewicht zwischen Suchgenauigkeit und Leistung herzustellen. Je kleiner der Wert für <code translate="no">drop_ratio_search</code> eingestellt wird, desto weniger tragen diese kleinen Werte zur endgültigen Bewertung bei. Durch das Ignorieren einiger kleiner Werte kann die Suchleistung bei minimalen Auswirkungen auf die Genauigkeit verbessert werden.</td><td>[0, 1]</td></tr>
 </tbody>
 </table>
 </li>
