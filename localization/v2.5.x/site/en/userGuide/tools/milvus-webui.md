@@ -51,7 +51,7 @@ title: Milvus WebUI
 </tbody>
 </table>
 <p>You can access Milvus Web UI using the following URL:</p>
-<pre><code translate="no">http://localhost:9091/webui
+<pre><code translate="no">http://<span class="hljs-variable">${MILVUS_PROXY_IP}</span>:9091/webui
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Features" class="common-anchor-header">Features<button data-href="#Features" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -176,22 +176,8 @@ title: Milvus WebUI
   </span>
 </p>
 <ul>
-<li><p><strong>Segments</strong>: View the list of segments and their details, including the segment ID, corresponding collection, state, size, etc.</p>
-<p>In the <strong>From</strong> column, you can find the source of the segment. Possible sources indicators are as follows:</p>
-<ul>
-<li><p><strong>QN</strong>: Query node</p></li>
-<li><p><strong>CT</strong>: Current target in QueryCoord</p></li>
-<li><p><strong>NT</strong>: Next target in QueryCoord</p></li>
-<li><p><strong>DIST</strong>: Distribution in QueryCoord</p></li>
-</ul></li>
-<li><p><strong>Channels</strong>: View the list of channels and their details, including the channel name, corresponding collections, etc.</p>
-<p>In the <strong>From</strong> column, you can find the source of the segment. Possible sources indicators are as follows:</p>
-<ul>
-<li><p><strong>QN</strong>: Query node</p></li>
-<li><p><strong>CT</strong>: Current target in QueryCoord</p></li>
-<li><p><strong>NT</strong>: Next target in QueryCoord</p></li>
-<li><p><strong>DIST</strong>: Distribution in QueryCoord</p></li>
-</ul></li>
+<li><p><strong>Segments</strong>: View the list of segments and their details, including the segment ID, corresponding collection, state, size, etc.</p></li>
+<li><p><strong>Channels</strong>: View the list of channels and their details, including the channel name, corresponding collections, etc.</p></li>
 <li><p><strong>Replicas</strong>: View the list of replicas and their details, including the replica ID, corresponding collection, etc.</p></li>
 <li><p><strong>Resource groups</strong>: View the list of resource groups and their details, including the resource group name, number of query nodes in the group, and its configurations, etc.</p></li>
 </ul>
