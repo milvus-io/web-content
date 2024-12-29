@@ -25,7 +25,7 @@ The following table compares the features of Milvus Web UI and Birdwatcher/Attu:
 You can access Milvus Web UI using the following URL:
 
 ```
-http://localhost:9091/webui
+http://${MILVUS_PROXY_IP}:9091/webui
 ```
 
 ## Features
@@ -100,27 +100,7 @@ On the Collections page, you can view the list of databases and collections curr
 
 - **Segments**: View the list of segments and their details, including the segment ID, corresponding collection, state, size, etc.
 
-    In the **From** column, you can find the source of the segment. Possible sources indicators are as follows:
-    
-    - **QN**: Query node
-    
-    - **CT**: Current target in QueryCoord
-
-    - **NT**: Next target in QueryCoord
-
-    - **DIST**: Distribution in QueryCoord
-
 - **Channels**: View the list of channels and their details, including the channel name, corresponding collections, etc.
-
-    In the **From** column, you can find the source of the segment. Possible sources indicators are as follows:
-    
-    - **QN**: Query node
-    
-    - **CT**: Current target in QueryCoord
-
-    - **NT**: Next target in QueryCoord
-
-    - **DIST**: Distribution in QueryCoord
 
 - **Replicas**: View the list of replicas and their details, including the replica ID, corresponding collection, etc.
 
