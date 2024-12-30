@@ -1428,7 +1428,7 @@
         "label": "Milvus WebUI",
         "id": "milvus-webui.md",
         "order": "1",
-        "children: []"
+        "children": []
       },
       {
         "label": "Milvus Backup",
