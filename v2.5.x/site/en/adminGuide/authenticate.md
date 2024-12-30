@@ -33,7 +33,7 @@ To enable user authentication for your Milvus server, set common.security.author
 common:
 ...
   security:
-    authorizationEnabled: false
+    authorizationEnabled: true
 ...
 ```
 

@@ -103,7 +103,7 @@ The following figure is an example of the `Msgstream` with a timetick inserted.
 
 ![timetick](../../../assets/timetick.png "Msgstream with a timetick inserted.")
 
-`MsgStream` processes the messages in batches according to the time tick to ensure that the output messages meet the requirements of timestamp. 
+`MsgStream` processes the messages in batches according to the time tick to ensure that the output messages meet the requirements of timestamp. In the above example, it will consume all records excepting `InsertMsgs` from `Proxy2` at `Timestamp: 120` as it's after the latest TimeTick.
 
 ## What's next
 - Learn about the concept of [timestamp](timestamp.md).
