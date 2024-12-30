@@ -68,7 +68,7 @@ Atualmente, um campo vetorial apenas suporta um tipo de índice. O Milvus elimin
 <p>Este tipo de índices inclui <code translate="no">BIN_FLAT</code> e <code translate="no">BIN_IVF_FLAT</code>.</p>
 </div>
 <div class="filter-sparse">
-<h3 id="Indexes-for-sparse-embeddings" class="common-anchor-header">Índices para embeddings esparsos</h3><p>A métrica de distância suportada para as incorporações esparsas é apenas <code translate="no">IP</code>.</p>
+<h3 id="Indexes-for-sparse-embeddings" class="common-anchor-header">Índices para embeddings esparsos</h3><p>Os índices para embeddings esparsos suportam apenas as métricas <code translate="no">IP</code> e <code translate="no">BM25</code> (para pesquisa de texto integral).</p>
 <p>Os tipos de índices incluem <code translate="no">SPARSE_INVERTED_INDEX</code> e <code translate="no">SPARSE_WAND</code>.</p>
 </div>
 <div class="filter-floating table-wrapper">
@@ -103,7 +103,7 @@ Atualmente, um campo vetorial apenas suporta um tipo de índice. O Milvus elimin
   </tr>
   <tr>
     <td>IVF_SQ8</td>
-    <td>Índice baseado na quantificação</td>
+    <td>Índice baseado na quantização</td>
     <td>
       <ul>
         <li>Consulta a muito alta velocidade</li>
@@ -333,7 +333,7 @@ Atualmente, um campo vetorial apenas suporta um tipo de índice. O Milvus elimin
 </ul></li>
 </ul>
 <h3 id="IVFPQ" class="common-anchor-header">IVF_PQ</h3><p><code translate="no">PQ</code> (Product Quantization) decompõe uniformemente o espaço vetorial de alta dimensão original em produtos cartesianos de <code translate="no">m</code> espaços vectoriais de baixa dimensão e quantifica depois os espaços vectoriais de baixa dimensão decompostos. Em vez de calcular as distâncias entre o vetor-alvo e o centro de todas as unidades, a quantização do produto permite o cálculo das distâncias entre o vetor-alvo e o centro de agrupamento de cada espaço de baixa dimensão e reduz consideravelmente a complexidade temporal e espacial do algoritmo.</p>
-<p>O IVF_PQ efectua o agrupamento de índices IVF antes de quantificar o produto de vectores. O seu ficheiro de índice é ainda mais pequeno do que o IVF_SQ8, mas também causa uma perda de precisão durante a pesquisa de vectores.</p>
+<p>O IVF_PQ efectua o agrupamento de índices IVF antes de quantizar o produto de vectores. O seu ficheiro de índice é ainda mais pequeno do que o IVF_SQ8, mas também causa uma perda de precisão durante a pesquisa de vectores.</p>
 <div class="alert note">
 <p>Os parâmetros de construção do índice e os parâmetros de pesquisa variam consoante a distribuição Milvus. Selecione primeiro a sua distribuição Milvus.</p>
 </div>
@@ -440,7 +440,7 @@ Atualmente, um campo vetorial apenas suporta um tipo de índice. O Milvus elimin
 </table>
 </li>
 </ul>
-<h3 id="HNSWSQ" class="common-anchor-header">HNSW_SQ</h3><p>A Quantização Escalar (SQ) é uma técnica utilizada para discretizar dados de vírgula flutuante num conjunto finito de valores com base na sua magnitude. Por exemplo, <strong>SQ6</strong> representa a quantização em (2^6 = 64) valores discretos, em que cada número de vírgula flutuante é codificado utilizando 6 bits. Da mesma forma, <strong>SQ8</strong> quantiza os dados em (2^8 = 256) valores discretos, com cada número de vírgula flutuante representado por 8 bits. Esta quantização reduz o espaço de memória, preservando a estrutura essencial dos dados para um processamento eficiente.</p>
+<h3 id="HNSWSQ" class="common-anchor-header">HNSW_SQ</h3><p>A Quantização Escalar (SQ) é uma técnica utilizada para discretizar dados de vírgula flutuante num conjunto finito de valores com base na sua magnitude. Por exemplo, <strong>SQ6</strong> representa a quantização em (2^6 = 64) valores discretos, em que cada número de vírgula flutuante é codificado utilizando 6 bits. Da mesma forma, <strong>SQ8</strong> quantifica os dados em (2^8 = 256) valores discretos, com cada número de vírgula flutuante representado por 8 bits. Esta quantização reduz o espaço de memória, preservando a estrutura essencial dos dados para um processamento eficiente.</p>
 <p>Combinado com o SQ, o HNSW_SQ oferece um compromisso controlável entre o tamanho do índice e a precisão, mantendo um elevado desempenho de consulta por segundo (QPS). Em comparação com o HNSW padrão, resulta num aumento modesto do tempo de construção do índice.</p>
 <ul>
 <li><p>Parâmetros de construção de índices</p>

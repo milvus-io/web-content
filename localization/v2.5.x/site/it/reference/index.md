@@ -2,9 +2,9 @@
 id: index.md
 related_key: index
 summary: Meccanismo di indicizzazione a Milvus.
-title: Indice in-memory
+title: Indice in memoria
 ---
-<h1 id="In-memory-Index" class="common-anchor-header">Indice in-memory<button data-href="#In-memory-Index" class="anchor-icon" translate="no">
+<h1 id="In-memory-Index" class="common-anchor-header">Indice in memoria<button data-href="#In-memory-Index" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -61,15 +61,15 @@ Attualmente, un campo vettoriale supporta solo un tipo di indice. Milvus cancell
  <a href="#floating">Incorporazioni in virgola mobile</a> <a href="#binary">Incorporazioni binarie</a> <a href="#sparse">Incorporazioni rade</a></div>
 <div class="filter-floating">
 <h3 id="Indexes-for-floating-point-embeddings" class="common-anchor-header">Indici per le incorporazioni in virgola mobile</h3><p>Per le incorporazioni in virgola mobile (vettori) a 128 dimensioni, la memoria occupata è 128 * la dimensione del float = 512 byte. Le <a href="/docs/it/metric.md">metriche di distanza</a> utilizzate per le incorporazioni in virgola mobile sono la distanza euclidea (<code translate="no">L2</code>) e il prodotto interno (<code translate="no">IP</code>).</p>
-<p>Questi tipi di indici includono <code translate="no">FLAT</code>, <code translate="no">IVF_FLAT</code>, <code translate="no">IVF_PQ</code>, <code translate="no">IVF_SQ8</code>, <code translate="no">HNSW</code>, <code translate="no">HNSW_SQ</code>, <code translate="no">HNSW_PQ</code>, <code translate="no">HNSW_PRQ</code>, e <code translate="no">SCANN</code> per le ricerche di RNA basate su CPU.</p>
+<p>Questi tipi di indici includono <code translate="no">FLAT</code>, <code translate="no">IVF_FLAT</code>, <code translate="no">IVF_PQ</code>, <code translate="no">IVF_SQ8</code>, <code translate="no">HNSW</code>, <code translate="no">HNSW_SQ</code>, <code translate="no">HNSW_PQ</code>, <code translate="no">HNSW_PRQ</code> e <code translate="no">SCANN</code> per le ricerche di RNA basate su CPU.</p>
 </div>
 <div class="filter-binary">
 <h3 id="Indexes-for-binary-embeddings" class="common-anchor-header">Indici per le incorporazioni binarie</h3><p>Per le incorporazioni binarie a 128 dimensioni, la memoria che occupano è 128 / 8 = 16 byte. Le metriche di distanza utilizzate per le incorporazioni binarie sono <code translate="no">JACCARD</code> e <code translate="no">HAMMING</code>.</p>
 <p>Questo tipo di indici include <code translate="no">BIN_FLAT</code> e <code translate="no">BIN_IVF_FLAT</code>.</p>
 </div>
 <div class="filter-sparse">
-<h3 id="Indexes-for-sparse-embeddings" class="common-anchor-header">Indici per le incorporazioni rade</h3><p>La metrica di distanza supportata per le incorporazioni rade è solo <code translate="no">IP</code>.</p>
-<p>I tipi di indici includono <code translate="no">SPARSE_INVERTED_INDEX</code> e <code translate="no">SPARSE_WAND</code>.</p>
+<h3 id="Indexes-for-sparse-embeddings" class="common-anchor-header">Indici per incorporazioni rade</h3><p>Gli indici per le incorporazioni rade supportano solo le metriche <code translate="no">IP</code> e <code translate="no">BM25</code> (per la ricerca full-text).</p>
+<p>Questo tipo di indici include <code translate="no">SPARSE_INVERTED_INDEX</code> e <code translate="no">SPARSE_WAND</code>.</p>
 </div>
 <div class="filter-floating table-wrapper">
 <table id="floating">
@@ -424,7 +424,7 @@ Attualmente, un campo vettoriale supporta solo un tipo di indice. Milvus cancell
 <tr><th>Parametro</th><th>Descrizione</th><th>Intervallo</th><th>Valore predefinito</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">M</code></td><td>M definisce il numero massimo di connessioni in uscita nel grafico. Un numero più alto di M porta a una maggiore precisione/tempo di esecuzione a ef/efCostruzione fissa.</td><td>[2, 2048]</td><td>Nessuno</td></tr>
+<tr><td><code translate="no">M</code></td><td>M definisce il numero massimo di connessioni in uscita nel grafico. Un numero più alto di M porta a una maggiore precisione/tempo di esecuzione a un valore fisso di ef/efConstruction.</td><td>[2, 2048]</td><td>Nessuno</td></tr>
 <tr><td><code translate="no">efConstruction</code></td><td>ef_construction controlla il compromesso tra velocità di ricerca dell'indice e velocità di costruzione. L'aumento del parametro efConstruction può migliorare la qualità dell'indice, ma tende anche ad allungare i tempi di indicizzazione.</td><td>[1, int_max]</td><td>Nessuno</td></tr>
 </tbody>
 </table>
@@ -441,7 +441,7 @@ Attualmente, un campo vettoriale supporta solo un tipo di indice. Milvus cancell
 </li>
 </ul>
 <h3 id="HNSWSQ" class="common-anchor-header">HNSW_SQ</h3><p>La quantizzazione scalare (SQ) è una tecnica utilizzata per discretizzare i dati in virgola mobile in un insieme finito di valori in base alla loro grandezza. Ad esempio, <strong>SQ6</strong> rappresenta la quantizzazione in (2^6 = 64) valori discreti, dove ogni numero in virgola mobile è codificato con 6 bit. Analogamente, <strong>SQ8</strong> quantizza i dati in (2^8 = 256) valori discreti, con ogni numero in virgola mobile rappresentato da 8 bit. Questa quantizzazione riduce l'ingombro in memoria, preservando la struttura essenziale dei dati per un'elaborazione efficiente.</p>
-<p>In combinazione con SQ, HNSW_SQ offre un compromesso controllabile tra dimensione dell'indice e precisione, mantenendo elevate prestazioni di query al secondo (QPS). Rispetto a HNSW standard, si ottiene un modesto aumento del tempo di costruzione dell'indice.</p>
+<p>In combinazione con SQ, HNSW_SQ offre un compromesso controllabile tra dimensione dell'indice e precisione, mantenendo elevate prestazioni di query al secondo (QPS). Rispetto a HNSW standard, il tempo di costruzione dell'indice aumenta in modo modesto.</p>
 <ul>
 <li><p>Parametri di costruzione dell'indice</p>
 <table>
@@ -493,7 +493,7 @@ Attualmente, un campo vettoriale supporta solo un tipo di indice. Milvus cancell
 <tbody>
 <tr><td><code translate="no">ef</code></td><td>Parametro che controlla il compromesso tempo di ricerca/accuratezza. Un valore più alto di <code translate="no">ef</code> porta a una ricerca più accurata ma più lenta.</td><td>[<code translate="no">top_k</code>, int_max]</td><td>Nessuno</td></tr>
 <tr><td><code translate="no">refine</code></td><td>Se il raffinamento viene usato durante il treno.</td><td><code translate="no">true</code>, <code translate="no">false</code></td><td><code translate="no">false</code></td></tr>
-<tr><td><code translate="no">refine_k</code></td><td>Fattore di ingrandimento del raffinamento rispetto a <em>k</em>.</td><td>[1, <em>float_max</em>] Nessuno</td><td><code translate="no">1</code></td></tr>
+<tr><td><code translate="no">refine_k</code></td><td>Il fattore di ingrandimento del raffinamento rispetto a <em>k</em>.</td><td>[1, <em>float_max</em>] Nessuno</td><td><code translate="no">1</code></td></tr>
 <tr><td><code translate="no">refine_type</code></td><td>Il tipo di dati dell'indice di raffinazione.</td><td><code translate="no">SQ6</code>, <code translate="no">SQ8</code>, <code translate="no">BF16</code>, <code translate="no">FP16</code>, <code translate="no">FP32</code></td><td>Nessuno</td></tr>
 </tbody>
 </table>
@@ -550,7 +550,7 @@ Attualmente, un campo vettoriale supporta solo un tipo di indice. Milvus cancell
 <h3 id="BINIVFFLAT" class="common-anchor-header">BIN_IVF_FLAT</h3><p>Questo indice è esattamente uguale a IVF_FLAT, ma può essere usato solo per le incorporazioni binarie.</p>
 <p>BIN_IVF_FLAT divide i dati vettoriali in unità di cluster <code translate="no">nlist</code> e poi confronta le distanze tra il vettore di input target e il centro di ciascun cluster. A seconda del numero di cluster che il sistema è impostato per interrogare (<code translate="no">nprobe</code>), i risultati della ricerca di similarità vengono restituiti in base al confronto tra l'input di destinazione e i vettori nei cluster più simili, riducendo drasticamente il tempo di interrogazione.</p>
 <p>Regolando <code translate="no">nprobe</code>, è possibile trovare un equilibrio ideale tra precisione e velocità per un determinato scenario. Il tempo di interrogazione aumenta bruscamente all'aumentare del numero di vettori di input target (<code translate="no">nq</code>) e del numero di cluster da ricercare (<code translate="no">nprobe</code>).</p>
-<p>BIN_IVF_FLAT è l'indice BIN_IVF più elementare e i dati codificati memorizzati in ogni unità sono coerenti con i dati originali.</p>
+<p>BIN_IVF_FLAT è l'indice BIN_IVF più semplice e i dati codificati memorizzati in ogni unità sono coerenti con i dati originali.</p>
 <ul>
 <li><p>Parametri di costruzione dell'indice</p>
 <table>
@@ -611,7 +611,7 @@ Attualmente, un campo vettoriale supporta solo un tipo di indice. Milvus cancell
 </table>
 </li>
 </ul>
-<h3 id="SPARSEWAND" class="common-anchor-header">BANDA_PARZIALE</h3><p>Questo indice presenta analogie con <code translate="no">SPARSE_INVERTED_INDEX</code>, ma utilizza l'algoritmo <a href="https://dl.acm.org/doi/10.1145/956863.956944">Weak-AND</a> per ridurre ulteriormente il numero di valutazioni della distanza IP completa durante il processo di ricerca.</p>
+<h3 id="SPARSEWAND" class="common-anchor-header">BANDA SPARSA</h3><p>Questo indice presenta analogie con <code translate="no">SPARSE_INVERTED_INDEX</code>, ma utilizza l'algoritmo <a href="https://dl.acm.org/doi/10.1145/956863.956944">Weak-AND</a> per ridurre ulteriormente il numero di valutazioni della distanza IP completa durante il processo di ricerca.</p>
 <p>In base ai nostri test, <code translate="no">SPARSE_WAND</code> supera generalmente gli altri metodi in termini di velocità. Tuttavia, le sue prestazioni possono deteriorarsi rapidamente all'aumentare della densità dei vettori. Per risolvere questo problema, l'introduzione di un <code translate="no">drop_ratio_search</code> non nullo può migliorare significativamente le prestazioni, con una perdita minima di precisione. Per ulteriori informazioni, consultare <a href="/docs/it/sparse_vector.md">Vettore sparso</a>.</p>
 <ul>
 <li><p>Parametri di costruzione dell'indice</p>

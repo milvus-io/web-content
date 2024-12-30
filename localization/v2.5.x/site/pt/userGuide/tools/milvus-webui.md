@@ -37,7 +37,7 @@ title: Milvus WebUI
         ></path>
       </svg>
     </button></h2><p>O Milvus Web UI difere do Birdwatcher e do Attu por ser uma ferramenta integrada que permite a observação geral do sistema com uma interface simples e intuitiva.</p>
-<p>A tabela seguinte compara as funcionalidades do Milvus Web UI e do Birdwatcher/Attu:</p>
+<p>A tabela seguinte compara as caraterísticas do Milvus Web UI e do Birdwatcher/Attu:</p>
 <table>
 <thead>
 <tr><th>Funcionalidade</th><th>Milvus Web UI</th><th>Birdwatcher</th><th>Attu</th></tr>
@@ -51,7 +51,7 @@ title: Milvus WebUI
 </tbody>
 </table>
 <p>Pode aceder ao Milvus Web UI utilizando o seguinte URL:</p>
-<pre><code translate="no">http://localhost:9091/webui
+<pre><code translate="no">http://<span class="hljs-variable">${MILVUS_PROXY_IP}</span>:9091/webui
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Features" class="common-anchor-header">Caraterísticas<button data-href="#Features" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -75,7 +75,7 @@ title: Milvus WebUI
    </span> <span class="img-wrapper"> <span>Visão geral do Milvus Web UI</span> </span></p>
 <ul>
 <li><p><a href="#Home">Início</a></p>
-<p>Pode encontrar informações sobre a instância atual do Milvus em execução, os seus componentes, clientes ligados e dependências.</p></li>
+<p>Pode encontrar informações sobre a instância atual do Milvus em execução, os seus componentes, os clientes ligados e as dependências.</p></li>
 <li><p><a href="#Collections">Colecções</a></p>
 <p>Pode ver a lista de bases de dados e colecções atualmente no Milvus e verificar os seus detalhes.</p></li>
 <li><p><a href="#Query">Consulta</a></p>
@@ -166,24 +166,10 @@ title: Milvus WebUI
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/webui-query.png" alt="Milvus Web UI Query Page" class="doc-image" id="milvus-web-ui-query-page" />
    </span> <span class="img-wrapper"> <span>Página de consulta da interface do usuário do Milvus Web</span> </span></p>
 <ul>
-<li><p><strong>Segmentos</strong>: Visualize a lista de segmentos e seus detalhes, incluindo o ID do segmento, a coleção correspondente, o estado, o tamanho, etc.</p>
-<p>Na coluna <strong>From</strong>, você pode encontrar a origem do segmento. Os indicadores de fontes possíveis são os seguintes:</p>
-<ul>
-<li><p><strong>QN</strong>: Nó de consulta</p></li>
-<li><p><strong>CT</strong>: Meta atual em QueryCoord</p></li>
-<li><p><strong>NT</strong>: Próximo destino em QueryCoord</p></li>
-<li><p><strong>DIST</strong>: Distribuição no QueryCoord</p></li>
-</ul></li>
-<li><p><strong>Canais</strong>: Visualize a lista de canais e seus detalhes, incluindo o nome do canal, coleções correspondentes, etc.</p>
-<p>Na coluna <strong>De</strong>, pode encontrar a origem do segmento. Os indicadores de fontes possíveis são os seguintes:</p>
-<ul>
-<li><p><strong>QN</strong>: nó de consulta</p></li>
-<li><p><strong>CT</strong>: destino atual em QueryCoord</p></li>
-<li><p><strong>NT</strong>: Próximo destino em QueryCoord</p></li>
-<li><p><strong>DIST</strong>: Distribuição no QueryCoord</p></li>
-</ul></li>
-<li><p><strong>Réplicas</strong>: Ver a lista de réplicas e os respectivos detalhes, incluindo o ID da réplica, a coleção correspondente, etc.</p></li>
-<li><p><strong>Grupos de recursos</strong>: Veja a lista de grupos de recursos e os respectivos detalhes, incluindo o nome do grupo de recursos, o número de nós de consulta no grupo e as respectivas configurações, etc.</p></li>
+<li><p><strong>Segmentos</strong>: Visualize a lista de segmentos e seus detalhes, incluindo o ID do segmento, a coleção correspondente, o estado, o tamanho, etc.</p></li>
+<li><p><strong>Channels (Canais</strong>): Visualize a lista de canais e seus detalhes, incluindo o nome do canal, as coleções correspondentes etc.</p></li>
+<li><p><strong>Réplicas</strong>: Visualize a lista de réplicas e os respectivos detalhes, incluindo a ID da réplica, a coleção correspondente, etc.</p></li>
+<li><p><strong>Grupos de recursos</strong>: Visualizar a lista de grupos de recursos e os respectivos detalhes, incluindo o nome do grupo de recursos, o número de nós de consulta no grupo e as respectivas configurações, etc.</p></li>
 </ul>
 <h2 id="Data" class="common-anchor-header">Dados<button data-href="#Data" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -279,7 +265,7 @@ title: Milvus WebUI
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/webui-configurations.png" alt="Milvus Web UI Configurations Page" class="doc-image" id="milvus-web-ui-configurations-page" />
    </span> <span class="img-wrapper"> <span>Página de configurações do Milvus Web UI</span> </span></p>
 <ul>
-<li><strong>Configurações</strong>: Veja a lista de configurações de tempo de execução do Milvus e seus valores.</li>
+<li><strong>Configurações</strong>: Visualiza a lista de configurações de tempo de execução do Milvus e seus valores.</li>
 </ul>
 <h2 id="Tools" class="common-anchor-header">Ferramentas<button data-href="#Tools" class="anchor-icon" translate="no">
       <svg translate="no"

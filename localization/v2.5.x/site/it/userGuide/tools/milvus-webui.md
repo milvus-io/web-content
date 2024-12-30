@@ -52,7 +52,7 @@ title: Milvus WebUI
 </tbody>
 </table>
 <p>È possibile accedere all'interfaccia web di Milvus utilizzando il seguente URL:</p>
-<pre><code translate="no">http://localhost:9091/webui
+<pre><code translate="no">http://<span class="hljs-variable">${MILVUS_PROXY_IP}</span>:9091/webui
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Features" class="common-anchor-header">Caratteristiche<button data-href="#Features" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -167,22 +167,8 @@ title: Milvus WebUI
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/webui-query.png" alt="Milvus Web UI Query Page" class="doc-image" id="milvus-web-ui-query-page" />
    </span> <span class="img-wrapper"> <span>Pagina di interrogazione dell'interfaccia web Milvus</span> </span></p>
 <ul>
-<li><p><strong>Segmenti</strong>: Visualizza l'elenco dei segmenti e i loro dettagli, tra cui l'ID del segmento, la raccolta corrispondente, lo stato, la dimensione, ecc.</p>
-<p>Nella colonna <strong>Da</strong>, è possibile trovare la fonte del segmento. I possibili indicatori di origine sono i seguenti:</p>
-<ul>
-<li><p><strong>QN</strong>: Nodo di query</p></li>
-<li><p><strong>CT</strong>: Destinazione corrente in QueryCoord</p></li>
-<li><p><strong>NT</strong>: Destinazione successiva nella QueryCoord</p></li>
-<li><p><strong>DIST</strong>: Distribuzione in QueryCoord</p></li>
-</ul></li>
-<li><p><strong>Canali</strong>: Visualizza l'elenco dei canali e i loro dettagli, tra cui il nome del canale, le raccolte corrispondenti, ecc.</p>
-<p>Nella colonna <strong>Da</strong>, è possibile trovare la fonte del segmento. I possibili indicatori di origine sono i seguenti:</p>
-<ul>
-<li><p><strong>QN</strong>: Nodo di query</p></li>
-<li><p><strong>CT</strong>: Destinazione corrente in QueryCoord</p></li>
-<li><p><strong>NT</strong>: Destinazione successiva in QueryCoord</p></li>
-<li><p><strong>DIST</strong>: Distribuzione nella QueryCoord</p></li>
-</ul></li>
+<li><p><strong>Segmenti</strong>: Visualizza l'elenco dei segmenti e i loro dettagli, tra cui l'ID del segmento, la raccolta corrispondente, lo stato, la dimensione, ecc.</p></li>
+<li><p><strong>Canali</strong>: Visualizza l'elenco dei canali e i loro dettagli, tra cui il nome del canale, le raccolte corrispondenti, ecc.</p></li>
 <li><p><strong>Repliche</strong>: Visualizza l'elenco delle repliche e i loro dettagli, tra cui l'ID della replica, la raccolta corrispondente, ecc.</p></li>
 <li><p><strong>Gruppi di risorse</strong>: Visualizza l'elenco dei gruppi di risorse e i loro dettagli, tra cui il nome del gruppo di risorse, il numero di nodi di query nel gruppo e le sue configurazioni, ecc.</p></li>
 </ul>

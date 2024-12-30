@@ -123,7 +123,7 @@ summary: Conozca el sistema de sincronización horaria de Milvus.
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/msgstream.png" alt="msgstream" class="doc-image" id="msgstream" />
    </span> <span class="img-wrapper"> <span>msgstream</span> </span></p>
 <p>Las marcas de tiempo de los tres <code translate="no">InsertMsgs</code> de <code translate="no">Proxy1</code> son incrementales, al igual que las de los dos <code translate="no">InsertMsgs</code> de <code translate="no">Proxy2</code>. Sin embargo, no existe un orden concreto entre <code translate="no">Proxy1</code> y <code translate="no">Proxy2</code> <code translate="no">InsertMsgs</code> .</p>
-<p>Un escenario posible es que al leer un mensaje con timestamp <code translate="no">110</code> de <code translate="no">Proxy2</code>, Milvus encuentre que el mensaje con timestamp <code translate="no">80</code> de <code translate="no">Proxy1</code> está todavía en <code translate="no">MsgStream</code>. Por lo tanto, Milvus introduce un sistema de sincronización de tiempo, timetick, para asegurar que al leer un mensaje de <code translate="no">MsgStream</code>, todos los mensajes con valores timestamp más pequeños deben ser consumidos.</p>
+<p>Un escenario posible es que al leer un mensaje con timestamp <code translate="no">110</code> de <code translate="no">Proxy2</code>, Milvus encuentre que el mensaje con timestamp <code translate="no">80</code> de <code translate="no">Proxy1</code> todavía está en <code translate="no">MsgStream</code>. Por lo tanto, Milvus introduce un sistema de sincronización de tiempo, timetick, para asegurar que al leer un mensaje de <code translate="no">MsgStream</code>, todos los mensajes con valores timestamp más pequeños deben ser consumidos.</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/time_synchronization.png" alt="time_synchronization" class="doc-image" id="time_synchronization" />
@@ -139,7 +139,7 @@ summary: Conozca el sistema de sincronización horaria de Milvus.
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/timetick.png" alt="timetick" class="doc-image" id="timetick" />
    </span> <span class="img-wrapper"> <span>timetick</span> </span></p>
-<p><code translate="no">MsgStream</code> procesa los mensajes por lotes en función de la marca de tiempo para garantizar que los mensajes de salida cumplen los requisitos de la marca de tiempo.</p>
+<p><code translate="no">MsgStream</code> procesa los mensajes por lotes en función de la marca de tiempo para garantizar que los mensajes de salida cumplen los requisitos de la marca de tiempo. En el ejemplo anterior, consumirá todos los registros excepto <code translate="no">InsertMsgs</code> de <code translate="no">Proxy2</code> en <code translate="no">Timestamp: 120</code> ya que es posterior al último TimeTick.</p>
 <h2 id="Whats-next" class="common-anchor-header">A continuación<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

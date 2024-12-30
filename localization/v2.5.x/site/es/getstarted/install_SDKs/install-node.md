@@ -42,8 +42,9 @@ title: Instalar Milvus Nodejs SDK
 <tr><th style="text-align:center">Versión de Milvus</th><th style="text-align:center">Versión recomendada de @zilliz/milvus2-sdk-node</th></tr>
 </thead>
 <tbody>
-<tr><td style="text-align:center">2.4.x</td><td style="text-align:center">2.4.x</td></tr>
-<tr><td style="text-align:center">2.3.x</td><td style="text-align:center">2.3.x</td></tr>
+<tr><td style="text-align:center">2.5.x</td><td style="text-align:center">última</td></tr>
+<tr><td style="text-align:center">2.4.x</td><td style="text-align:center">2.4.10</td></tr>
+<tr><td style="text-align:center">2.3.x</td><td style="text-align:center">2.3.5</td></tr>
 <tr><td style="text-align:center">2.2.x</td><td style="text-align:center">2.2.x</td></tr>
 <tr><td style="text-align:center">2.1.x</td><td style="text-align:center">2.1.x</td></tr>
 <tr><td style="text-align:center">2.0.1</td><td style="text-align:center">2.0.0, 2.0.1</td></tr>

@@ -52,7 +52,7 @@ title: Milvus WebUI
 </tbody>
 </table>
 <p>Vous pouvez accéder à l'interface Web Milvus à l'aide de l'URL suivante :</p>
-<pre><code translate="no">http://localhost:9091/webui
+<pre><code translate="no">http://<span class="hljs-variable">${MILVUS_PROXY_IP}</span>:9091/webui
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Features" class="common-anchor-header">Fonctionnalités<button data-href="#Features" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -167,23 +167,9 @@ title: Milvus WebUI
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/webui-query.png" alt="Milvus Web UI Query Page" class="doc-image" id="milvus-web-ui-query-page" />
    </span> <span class="img-wrapper"> <span>Page de requête de l'interface Web Milvus</span> </span></p>
 <ul>
-<li><p><strong>Segments</strong>: Affiche la liste des segments et leurs détails, y compris l'ID du segment, la collection correspondante, l'état, la taille, etc.</p>
-<p>Dans la colonne <strong>De</strong>, vous pouvez trouver la source du segment. Les indicateurs de sources possibles sont les suivants</p>
-<ul>
-<li><p><strong>QN</strong>: nœud de requête</p></li>
-<li><p><strong>CT</strong>: cible actuelle dans QueryCoord</p></li>
-<li><p><strong>NT</strong>: Prochaine cible dans QueryCoord</p></li>
-<li><p><strong>DIST</strong>: Distribution dans QueryCoord</p></li>
-</ul></li>
-<li><p><strong>Channels (Canaux</strong>) : Affichez la liste des canaux et leurs détails, y compris le nom du canal, les collections correspondantes, etc.</p>
-<p>Dans la colonne <strong>From</strong>, vous pouvez trouver la source du segment. Les indicateurs de sources possibles sont les suivants</p>
-<ul>
-<li><p><strong>QN</strong>: Query node (nœud de requête)</p></li>
-<li><p><strong>CT</strong>: cible actuelle dans QueryCoord</p></li>
-<li><p><strong>NT</strong>: Prochaine cible dans QueryCoord</p></li>
-<li><p><strong>DIST</strong>: Distribution dans le QueryCoord</p></li>
-</ul></li>
-<li><p><strong>Répliques</strong>: Affiche la liste des répliques et leurs détails, y compris l'ID de la réplique, la collection correspondante, etc.</p></li>
+<li><p><strong>Segments</strong>: Affiche la liste des segments et leurs détails, y compris l'ID du segment, la collection correspondante, l'état, la taille, etc.</p></li>
+<li><p><strong>Canaux</strong>: Affiche la liste des canaux et leurs détails, y compris le nom du canal, les collections correspondantes, etc.</p></li>
+<li><p><strong>Répliques</strong>: Affichez la liste des répliques et leurs détails, y compris l'ID de la réplique, la collection correspondante, etc.</p></li>
 <li><p><strong>Groupes de ressources</strong>: Affichez la liste des groupes de ressources et leurs détails, y compris le nom du groupe de ressources, le nombre de nœuds de requête dans le groupe, et ses configurations, etc.</p></li>
 </ul>
 <h2 id="Data" class="common-anchor-header">Données<button data-href="#Data" class="anchor-icon" translate="no">

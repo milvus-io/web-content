@@ -496,7 +496,7 @@ sparse.<span class="hljs-title function_">put</span>(1000L, <span class="hljs-nu
       </svg>
     </button></h2><p>Lorsque vous utilisez des vecteurs épars dans Milvus, tenez compte des limites suivantes :</p>
 <ul>
-<li><p>Actuellement, seule la métrique de distance <strong>IP</strong> est prise en charge pour les vecteurs peu denses. La dimensionnalité élevée des vecteurs clairsemés rend les distances L2 et cosinus impraticables.</p></li>
+<li><p>Actuellement, seules les mesures de distance <strong>IP</strong> et <strong>BM25</strong> (pour la recherche en texte intégral) sont prises en charge pour les vecteurs épars. La dimensionnalité élevée des vecteurs épars rend les distances L2 et cosinus impraticables.</p></li>
 <li><p>Seuls les types d'index <strong>SPARSE_INVERTED_INDEX</strong> et <strong>SPARSE_WAND</strong> sont pris en charge pour les champs de vecteurs peu denses.</p></li>
 <li><p>Types de données pris en charge pour les vecteurs peu denses :</p>
 <ul>
@@ -526,7 +526,7 @@ sparse.<span class="hljs-title function_">put</span>(1000L, <span class="hljs-nu
       </svg>
     </button></h2><ul>
 <li><p><strong>Pouvez-vous expliquer la différence entre SPARSE_INVERTED_INDEX et SPARSE_WAND, et comment choisir entre les deux ?</strong></p>
-<p><strong>SPARSE_INVERTED_INDEX</strong> est un index inversé traditionnel, tandis que <strong>SPARSE_WAND</strong> utilise l'algorithme <a href="https://dl.acm.org/doi/10.1145/956863.956944">Weak-AND</a> pour réduire le nombre d'évaluations de la distance IP complète pendant la recherche. <strong>SPARSE_WAND</strong> est généralement plus rapide, mais ses performances peuvent diminuer avec l'augmentation de la densité des vecteurs. Pour choisir entre les deux, effectuez des expériences et des analyses comparatives en fonction de votre jeu de données et de votre cas d'utilisation spécifiques.</p></li>
+<p><strong>SPARSE_INVERTED_INDEX</strong> est un index inversé traditionnel, tandis que <strong>SPARSE_WAND</strong> utilise l'algorithme <a href="https://dl.acm.org/doi/10.1145/956863.956944">Weak-AND</a> pour réduire le nombre d'évaluations de la distance IP complète pendant la recherche. <strong>SPARSE_WAND</strong> est généralement plus rapide, mais ses performances peuvent diminuer avec l'augmentation de la densité des vecteurs. Pour choisir entre les deux, il convient d'effectuer des expériences et des analyses comparatives en fonction de votre jeu de données et de votre cas d'utilisation.</p></li>
 <li><p><strong>Comment dois-je choisir les paramètres drop_ratio_build et drop_ratio_search ?</strong></p>
 <p>Le choix des paramètres <strong>drop_ratio_build</strong> et <strong>drop_ratio_search</strong> dépend des caractéristiques de vos données et de vos exigences en matière de latence, de débit et de précision de la recherche.</p></li>
 <li><p><strong>La dimension d'un encastrement clairsemé peut-elle être n'importe quelle valeur discrète dans l'espace uint32 ?</strong></p>

@@ -61,9 +61,9 @@ summary: 了解 Milvus 的时间同步系统。
 <li><p>一个空的 Collections<code translate="no">C0</code> at<code translate="no">t2</code>.</p></li>
 <li><p>数据<code translate="no">A1</code> ，网址<code translate="no">t7</code> 。</p></li>
 <li><p>数据<code translate="no">A1</code> 和<code translate="no">A2</code> 均位于<code translate="no">t12</code> 。</p></li>
-<li><p>只有数据<code translate="no">A2</code> at<code translate="no">t17</code> （因为数据<code translate="no">A1</code> 在此之前已从 Collections 中删除）。</p></li>
+<li><p>只有数据<code translate="no">A2</code> at<code translate="no">t17</code> （因为在此之前数据<code translate="no">A1</code> 已从 Collections 中删除）。</p></li>
 </ul>
-<p>当只有一个节点时，这种理想情况很容易实现。然而，Milvus 是一个分布式向量数据库，为了确保不同节点中的所有 DML 和 DDL 操作都能保持有序，Milvus 需要解决以下两个问题：</p>
+<p>当只有一个节点时，这种理想情况很容易实现。但是，Milvus 是一个分布式向量数据库，为了确保不同节点中的所有 DML 和 DDL 操作都能保持有序，Milvus 需要解决以下两个问题：</p>
 <ol>
 <li><p>上面例子中的两个用户如果在不同的节点上，他们的时间时钟是不同的。例如，如果用户 2 比用户 1 晚 24 小时，那么用户 1 的所有操作都要到第二天才能被用户 2 看到。</p></li>
 <li><p>可能存在网络延迟。如果用户 2 在<code translate="no">t17</code> 对 Collections<code translate="no">C0</code> 进行搜索，Milvus 应该能保证<code translate="no">t17</code> 之前的所有操作都被成功处理并完成。如果<code translate="no">t15</code> 上的删除操作因网络延迟而延迟，那么用户 2 在<code translate="no">t17</code> 上进行搜索时，很有可能仍能看到本应删除的数据<code translate="no">A1</code> 。</p></li>
@@ -84,7 +84,7 @@ summary: 了解 Milvus 的时间同步系统。
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>为了解决上一节提到的第一个问题，Milvus 和其他分布式系统一样，提供了时间戳甲骨文（TSO）服务。这意味着 Milvus 中的所有事件都必须分配一个来自 TSO 而非本地时钟的时间戳。</p>
+    </button></h2><p>为了解决上一节提到的第一个问题，Milvus 和其他分布式系统一样，提供了时间戳甲骨文（TSO）服务。这意味着 Milvus 中的所有事件都必须分配一个来自 TSO 而不是本地时钟的时间戳。</p>
 <p>TSO 服务由 Milvus 中的根协调器提供。客户端可以在单个时间戳分配请求中分配一个或多个时间戳。</p>
 <p>TSO 时间戳是一种<code translate="no">uint64</code> 值，由物理部分和逻辑部分组成。下图展示了时间戳的格式。</p>
 <p>
@@ -139,7 +139,7 @@ summary: 了解 Milvus 的时间同步系统。
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/timetick.png" alt="timetick" class="doc-image" id="timetick" />
    </span> <span class="img-wrapper"> <span>时间戳</span> </span></p>
-<p><code translate="no">MsgStream</code> 根据时间刻度分批处理报文，以确保输出的报文符合时间戳的要求。</p>
+<p><code translate="no">MsgStream</code> 根据时间刻度分批处理报文，以确保输出的报文符合时间戳的要求。在上例中，除了来自 的 外，它将在 处消耗所有记录，因为它在最新的 TimeTick 之后。<code translate="no">Proxy2</code> <code translate="no">InsertMsgs</code> <code translate="no">Timestamp: 120</code> </p>
 <h2 id="Whats-next" class="common-anchor-header">下一步<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

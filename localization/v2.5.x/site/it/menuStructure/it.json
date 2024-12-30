@@ -348,7 +348,7 @@
             "children": []
           },
           {
-            "label": "Creare istantaneamente una collezione",
+            "label": "Creare una collezione istantanea",
             "id": "create-collection-instantly.md",
             "order": 2,
             "children": []
@@ -1136,7 +1136,7 @@
                 "children": []
               },
               {
-                "label": "Message Storage",
+                "label": "Memorizzazione dei messaggi",
                 "id": "deploy_pulsar.md",
                 "order": 2,
                 "children": []
@@ -1344,7 +1344,7 @@
             "children": []
           },
           {
-            "label": "Compattazione dei cluster",
+            "label": "Compattazione del clustering",
             "id": "clustering-compaction.md",
             "order": 1,
             "children": []
@@ -1425,9 +1425,15 @@
         ]
       },
       {
+        "label": "Milvus WebUI",
+        "id": "milvus-webui.md",
+        "order": "1",
+        "children": []
+      },
+      {
         "label": "Backup di Milvus",
         "id": "milvus_backup",
-        "order": 1,
+        "order": 2,
         "children": [
           {
             "label": "Panoramica",

@@ -63,7 +63,7 @@ summary: Milvus의 시간 동기화 시스템에 대해 알아보세요.
 <li><p><code translate="no">t12</code> 에서 <code translate="no">A1</code> 및 <code translate="no">A2</code> 데이터 모두</p></li>
 <li><p><code translate="no">t17</code> 의 <code translate="no">A2</code> 데이터만(이 시점 이전에 <code translate="no">A1</code> 데이터가 컬렉션에서 삭제되었으므로).</p></li>
 </ul>
-<p>이 이상적인 시나리오는 노드가 하나만 있을 때 쉽게 달성할 수 있습니다. 그러나 Milvus는 분산 벡터 데이터베이스이므로 서로 다른 노드에서 모든 DML 및 DDL 작업이 순서대로 유지되도록 하려면 Milvus는 다음 두 가지 문제를 해결해야 합니다:</p>
+<p>이 이상적인 시나리오는 노드가 하나만 있을 때 쉽게 달성할 수 있습니다. 그러나 Milvus는 분산형 벡터 데이터베이스이므로 서로 다른 노드에서 모든 DML 및 DDL 작업이 순서대로 유지되도록 하려면 Milvus는 다음 두 가지 문제를 해결해야 합니다:</p>
 <ol>
 <li><p>위의 예에서 두 사용자가 서로 다른 노드에 있는 경우 시간 시계가 다릅니다. 예를 들어 사용자 2가 사용자 1보다 24시간 늦으면 사용자 1의 모든 작업은 다음 날까지 사용자 2에게 표시되지 않습니다.</p></li>
 <li><p>네트워크 지연이 발생할 수 있습니다. 사용자 2가 <code translate="no">t17</code> 에서 컬렉션 <code translate="no">C0</code> 에 대한 검색을 수행하는 경우, Milvus는 <code translate="no">t17</code> 이전의 모든 작업이 성공적으로 처리되고 완료되었음을 보장할 수 있어야 합니다. 네트워크 지연으로 인해 <code translate="no">t15</code> 에서의 삭제 작업이 지연되는 경우, 사용자 2가 <code translate="no">t17</code> 에서 검색을 수행할 때 삭제된 것으로 추정되는 데이터 <code translate="no">A1</code> 를 볼 수 있을 가능성이 매우 높습니다.</p></li>
@@ -108,7 +108,7 @@ summary: Milvus의 시간 동기화 시스템에 대해 알아보세요.
         ></path>
       </svg>
     </button></h2><p>이 섹션에서는 데이터 삽입 작업의 예를 사용하여 Milvus의 시간 동기화 메커니즘을 설명합니다.</p>
-<p>프록시는 SDK로부터 데이터 삽입 요청을 받으면 기본 키의 해시 값에 따라 삽입 메시지를 여러 개의 메시지 스트림(<code translate="no">MsgStream</code>)으로 나눕니다.</p>
+<p>프록시는 SDK로부터 데이터 삽입 요청을 받으면 기본 키의 해시값에 따라 삽입 메시지를 여러 개의 메시지 스트림(<code translate="no">MsgStream</code>)으로 나눕니다.</p>
 <p>각 삽입 메시지(<code translate="no">InsertMsg</code>)는 <code translate="no">MsgStream</code> 으로 전송되기 전에 타임스탬프가 할당됩니다.</p>
 <div class="alert note">
   <code translate="no">MsgStream</code> 는 메시지 대기열의 래퍼로, Milvus 2.0에서는 기본적으로 Pulsar입니다.</div>
@@ -132,14 +132,14 @@ summary: Milvus의 시간 동기화 시스템에 대해 알아보세요.
 <ul>
 <li><p>각 프록시는 주기적으로(기본값은 200ms마다) <code translate="no">MsgStream</code>에서 가장 최근의 <code translate="no">InsertMsg</code> 의 가장 큰 타임스탬프 값을 루트 코드로 보고합니다.</p></li>
 <li><p>루트 코드는 <code translate="no">InsertMsgs</code> 이 속한 프록시에 관계없이 이 <code translate="no">Msgstream</code> 에서 최소 타임스탬프 값을 식별합니다. 그런 다음 루트 코드는 이 최소 타임스탬프를 <code translate="no">Msgstream</code> 에 삽입합니다. 이 타임스탬프를 타임틱이라고도 합니다.</p></li>
-<li><p>소비자 컴포넌트는 루트 코드로 삽입된 타임스탬프를 읽으면 타임스탬프 값이 더 작은 모든 삽입 메시지가 소비되었음을 이해합니다. 따라서 주문을 중단하지 않고 관련 요청을 안전하게 실행할 수 있습니다.</p></li>
+<li><p>소비자 컴포넌트는 루트 코디가 삽입한 타임스탬프를 읽으면 타임스탬프 값이 더 작은 모든 삽입 메시지가 소비되었음을 이해합니다. 따라서 주문을 중단하지 않고 관련 요청을 안전하게 실행할 수 있습니다.</p></li>
 </ul>
 <p>다음 그림은 타임틱이 삽입된 <code translate="no">Msgstream</code> 의 예시입니다.</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/timetick.png" alt="timetick" class="doc-image" id="timetick" />
    </span> <span class="img-wrapper"> <span>timetick</span> </span></p>
-<p><code translate="no">MsgStream</code> 은 타임틱에 따라 메시지를 일괄 처리하여 출력 메시지가 타임스탬프의 요구 사항을 충족하는지 확인합니다.</p>
+<p><code translate="no">MsgStream</code> 은 타임틱에 따라 메시지를 일괄 처리하여 출력 메시지가 타임스탬프의 요구 사항을 충족하는지 확인합니다. 위의 예에서는 <code translate="no">Timestamp: 120</code> 에서 <code translate="no">Proxy2</code> 의 <code translate="no">InsertMsgs</code> 을 제외한 모든 레코드를 최신 타임틱 이후이므로 소비합니다.</p>
 <h2 id="Whats-next" class="common-anchor-header">다음 단계<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

@@ -51,7 +51,7 @@ title: Milvus WebUI
 </tbody>
 </table>
 <p>Milvus 웹 UI는 다음 URL을 통해 접속할 수 있습니다:</p>
-<pre><code translate="no">http://localhost:9091/webui
+<pre><code translate="no">http://<span class="hljs-variable">${MILVUS_PROXY_IP}</span>:9091/webui
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Features" class="common-anchor-header">기능<button data-href="#Features" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -85,7 +85,7 @@ title: Milvus WebUI
 <li><p><a href="#Tasks">작업</a></p>
 <p>쿼리 코디네이터 스케줄러 작업, 압축 작업, 인덱스 구축 작업, 가져오기 작업, 데이터 동기화 작업 등 Milvus에서 실행 중인 작업 목록을 확인할 수 있습니다.</p></li>
 <li><p><a href="#Slow-requests">느린 요청</a></p>
-<p>요청 유형, 요청 기간, 요청 매개변수를 포함한 Milvus의 느린 요청 목록을 볼 수 있습니다.</p></li>
+<p>요청 유형, 요청 기간, 요청 매개변수를 포함하여 Milvus에서 느린 요청 목록을 볼 수 있습니다.</p></li>
 <li><p><a href="#Configurations">구성</a></p>
 <p>Milvus 구성 목록과 해당 값을 볼 수 있습니다.</p></li>
 <li><p><a href="#Tools">도구</a></p>
@@ -166,23 +166,9 @@ title: Milvus WebUI
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/webui-query.png" alt="Milvus Web UI Query Page" class="doc-image" id="milvus-web-ui-query-page" />
    </span> <span class="img-wrapper"> <span>Milvus 웹 UI 쿼리 페이지</span> </span></p>
 <ul>
-<li><p><strong>세그먼트</strong>: 세그먼트 ID, 해당 컬렉션, 상태, 크기 등을 포함한 세그먼트 목록과 세부 정보를 볼 수 있습니다.</p>
-<p><strong>출발지</strong> 열에서 세그먼트의 출처를 찾을 수 있습니다. 가능한 소스 표시기는 다음과 같습니다:</p>
-<ul>
-<li><p><strong>QN</strong>: 쿼리 노드</p></li>
-<li><p><strong>CT</strong>: QueryCoord의 현재 대상</p></li>
-<li><p><strong>NT</strong>: QueryCoord의 다음 대상</p></li>
-<li><p><strong>DIST</strong>: QueryCoord 내 분포</p></li>
-</ul></li>
-<li><p><strong>채널</strong>: 채널 목록과 채널 이름, 해당 컬렉션 등 채널의 세부 정보를 볼 수 있습니다.</p>
-<p><strong>출발지</strong> 열에서 세그먼트의 출처를 찾을 수 있습니다. 가능한 소스 표시기는 다음과 같습니다:</p>
-<ul>
-<li><p><strong>QN</strong>: 쿼리 노드</p></li>
-<li><p><strong>CT</strong>: QueryCoord의 현재 대상</p></li>
-<li><p><strong>NT</strong>: QueryCoord의 다음 대상</p></li>
-<li><p><strong>DIST</strong>: QueryCoord 내 분포</p></li>
-</ul></li>
-<li><p><strong>복제본</strong>: 복제본 목록과 복제본 ID, 해당 컬렉션 등의 세부 정보를 볼 수 있습니다.</p></li>
+<li><p><strong>세그먼트</strong>: 세그먼트 ID, 해당 컬렉션, 상태, 크기 등 세그먼트 목록과 세부 정보를 볼 수 있습니다.</p></li>
+<li><p><strong>채널</strong>: 채널: 채널 목록과 채널 이름, 해당 컬렉션 등 세부 정보를 조회합니다.</p></li>
+<li><p><strong>복제본</strong>: 복제본: 복제본 목록과 복제본 ID, 해당 컬렉션 등 세부 정보를 볼 수 있습니다.</p></li>
 <li><p><strong>리소스 그룹</strong>: 리소스 그룹 목록과 리소스 그룹 이름, 그룹의 쿼리 노드 수, 구성 등을 포함한 세부 정보를 볼 수 있습니다.</p></li>
 </ul>
 <h2 id="Data" class="common-anchor-header">데이터<button data-href="#Data" class="anchor-icon" translate="no">
@@ -257,7 +243,7 @@ title: Milvus WebUI
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/webui-slow-requests.png" alt="Milvus Web UI Slow Requests Page" class="doc-image" id="milvus-web-ui-slow-requests-page" />
    </span> <span class="img-wrapper"> <span>Milvus 웹 UI 느린 요청 페이지</span> </span></p>
 <ul>
-<li><strong>느린 요청</strong>: 느린 요청은 구성에 지정된 <code translate="no">proxy.slowQuerySpanInSeconds</code> 값보다 지연 시간이 긴 검색 또는 쿼리입니다. 느린 요청 목록에는 지난 15분 동안의 모든 느린 요청이 표시됩니다.</li>
+<li><strong>느린 요청</strong>: 느린 요청은 설정에 지정된 <code translate="no">proxy.slowQuerySpanInSeconds</code> 값보다 지연 시간이 긴 검색 또는 쿼리입니다. 느린 요청 목록에는 지난 15분 동안의 모든 느린 요청이 표시됩니다.</li>
 </ul>
 <h2 id="Configurations" class="common-anchor-header">구성<button data-href="#Configurations" class="anchor-icon" translate="no">
       <svg translate="no"

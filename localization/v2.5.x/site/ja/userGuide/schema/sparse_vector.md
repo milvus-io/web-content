@@ -54,7 +54,7 @@ summary: >-
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/use-sparse-vector.png" alt="Use sparse vector in Milvus" class="doc-image" id="use-sparse-vector-in-milvus" />
    </span> <span class="img-wrapper"> <span>Milvusでスパースベクトルを使用する。</span> </span></p>
 <div class="alert note">
-<p>Milvusはスパースベクトル以外にも、デンスベクトルやバイナリベクトルにも対応しています。密なベクトルは深い意味的関係を把握するのに理想的であり、バイナリベクトルは迅速な類似性比較やコンテンツの重複排除などのシナリオに優れています。詳細については、<a href="/docs/ja/dense-vector.md">密なベクトルと</a> <a href="/docs/ja/binary-vector.md">バイナリベクトルを</a>参照してください。</p>
+<p>Milvusはスパースベクトル以外にも、デンスベクトルやバイナリベクトルにも対応しています。密なベクトルは深い意味的関係を把握するのに適しており、バイナリベクトルは迅速な類似性比較やコンテンツの重複排除などのシナリオに優れています。詳細については、<a href="/docs/ja/dense-vector.md">密なベクトルと</a> <a href="/docs/ja/binary-vector.md">バイナリベクトルを</a>参照してください。</p>
 </div>
 <h2 id="Use-sparse-vectors-in-Milvus​" class="common-anchor-header">Milvusでスパースベクトルを使う<button data-href="#Use-sparse-vectors-in-Milvus​" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -394,7 +394,7 @@ search_params = {​
 query_vector = [{<span class="hljs-number">1</span>: <span class="hljs-number">0.2</span>, <span class="hljs-number">50</span>: <span class="hljs-number">0.4</span>, <span class="hljs-number">1000</span>: <span class="hljs-number">0.7</span>}]​
 
 <button class="copy-code-btn"></button></code></pre>
-<p>この例では、<code translate="no">drop_ratio_search</code> はスパース・ベクトル専用のオプション・パラメータで、検索中にクエリ・ベクトル内の小さな値を微調整できるようにします。例えば、<code translate="no">{&quot;drop_ratio_search&quot;: 0.2}</code> を指定すると、クエリベクトル内の最小20%の値は検索時に無視されます。</p>
+<p>この例では、<code translate="no">drop_ratio_search</code> はスパース・ベクトル専用のオプション・パラメータで、検索中にクエリ・ベクトル内の小さな値を微調整できるようにします。例えば、<code translate="no">{&quot;drop_ratio_search&quot;: 0.2}</code> を指定すると、クエリベクトル内の最小20%の値は検索中に無視されます。</p>
 <p>次に、<code translate="no">search</code> メソッドを使って類似検索を実行する。</p>
 <div class="multipleCode">
  <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
@@ -491,8 +491,8 @@ sparse.<span class="hljs-title function_">put</span>(1000L, <span class="hljs-nu
       </svg>
     </button></h2><p>Milvusでスパースベクトルを使用する場合、以下の制限を考慮してください：</p>
 <ul>
-<li><p>現在、スパースベクトルでは<strong>IP</strong>距離メトリックのみがサポートされています。スパースベクトルは次元が高いため、L2距離や余弦距離は実用的ではありません。</p></li>
-<li><p>疎なベクトル・フィールドでは、<strong>SPARSE_INVERTED_INDEX</strong>と<strong>SPARSE_WAND</strong>インデックス型のみがサポートされています。</p></li>
+<li><p>現在、スパースベクトルは<strong>IPと</strong> <strong>BM25</strong>（全文検索用）距離メトリクスのみがサポートされています。スパースベクトルは次元が高いため、L2距離と余弦距離は実用的ではありません。</p></li>
+<li><p>疎なベクトル・フィールドでは、<strong>SPARSE_INVERTED_INDEX</strong>と<strong>SPARSE_WAND</strong>インデックス型のみがサポートされます。</p></li>
 <li><p>スパース・ベクトルでサポートされるデータ型：</p>
 <ul>
 <li>次元部は符号なし32ビット整数でなければならない；</li>

@@ -51,7 +51,7 @@ title: Milvus WebUI
 </tbody>
 </table>
 <p>Milvus Web UIには以下のURLからアクセスできます：</p>
-<pre><code translate="no">http://localhost:9091/webui
+<pre><code translate="no">http://<span class="hljs-variable">${MILVUS_PROXY_IP}</span>:9091/webui
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Features" class="common-anchor-header">機能<button data-href="#Features" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -166,24 +166,10 @@ title: Milvus WebUI
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/webui-query.png" alt="Milvus Web UI Query Page" class="doc-image" id="milvus-web-ui-query-page" />
    </span> <span class="img-wrapper"> <span>Milvus Web UI クエリページ</span> </span></p>
 <ul>
-<li><p><strong>セグメント</strong>セグメントID、対応するコレクション、状態、サイズなど、セグメントのリストとその詳細を表示します。</p>
-<p><strong>From</strong>列では、セグメントのソースを確認できます。表示可能なソースは以下のとおりです：</p>
-<ul>
-<li><p><strong>QN</strong>: クエリ・ノード</p></li>
-<li><p><strong>CT</strong>: クエリコード内の現在のターゲット</p></li>
-<li><p><strong>NT</strong>: QueryCoord 内の次のターゲット</p></li>
-<li><p><strong>DIST</strong>：QueryCoord内の分布</p></li>
-</ul></li>
-<li><p><strong>チャンネル</strong>：チャネル名、対応するコレクションなど、チャネルのリストとその詳細を表示します。</p>
-<p><strong>From</strong>列には、セグメントのソースが表示されます。表示可能なソースは以下のとおりです：</p>
-<ul>
-<li><p><strong>QN</strong>: クエリ・ノード</p></li>
-<li><p><strong>CT</strong>: クエリコード内の現在のターゲット</p></li>
-<li><p><strong>NT</strong>: クエリコード内の次のターゲット</p></li>
-<li><p><strong>DIST</strong>：QueryCoord 内の分布</p></li>
-</ul></li>
-<li><p><strong>レプリカ</strong>レプリカのリストと、レプリカID、対応するコレクションなどの詳細を表示します。</p></li>
-<li><p><strong>リソースグループ</strong>リソースグループのリストとその詳細（リソースグループ名、グループ内のクエリノード数、構成など）を表示します。</p></li>
+<li><p><strong>セグメント</strong>セグメントID、対応するコレクション、状態、サイズなど、セグメントのリストとその詳細を表示します。</p></li>
+<li><p><strong>チャンネル</strong>チャネル名、対応するコレクションなど、チャネルのリストと詳細を表示します。</p></li>
+<li><p><strong>レプリカ</strong>：レプリカのリストとその詳細（レプリカID、対応するコレクションなど）を表示します。</p></li>
+<li><p><strong>リソースグループ</strong>：リソースグループのリストとその詳細（リソースグループ名、グループ内のクエリノード数、構成など）を表示します。</p></li>
 </ul>
 <h2 id="Data" class="common-anchor-header">データ<button data-href="#Data" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -205,7 +191,7 @@ title: Milvus WebUI
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/webui-data.png" alt="Milvus Web UI Data Page" class="doc-image" id="milvus-web-ui-data-page" />
    </span> <span class="img-wrapper"> <span>Milvus Web UI データページ</span> </span></p>
 <ul>
-<li><p><strong>セグメント</strong>データノード/コーディネーターからのセグメントのリストとその詳細（セグメントID、対応するコレクション、状態、サイズなど）を表示します。</p></li>
+<li><p><strong>セグメント</strong>データノード/コーディネーターからのセグメントのリストと、セグメントID、対応するコレクション、状態、サイズなどの詳細を表示します。</p></li>
 <li><p><strong>チャンネル</strong>データノード/コーディネーターからのチャンネルのリストと、チャンネル名、対応するコレクションなどの詳細を表示します。</p></li>
 </ul>
 <h2 id="Tasks" class="common-anchor-header">タスク<button data-href="#Tasks" class="anchor-icon" translate="no">

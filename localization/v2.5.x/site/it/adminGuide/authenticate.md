@@ -48,7 +48,7 @@ title: Autenticare l'accesso degli utenti
 <span class="hljs-attr">common</span>:
 ...
   <span class="hljs-attr">security</span>:
-    <span class="hljs-attr">authorizationEnabled</span>: <span class="hljs-literal">false</span>
+    <span class="hljs-attr">authorizationEnabled</span>: <span class="hljs-literal">true</span>
 ...
 <button class="copy-code-btn"></button></code></pre>
 </div>
@@ -64,7 +64,7 @@ title: Autenticare l'accesso degli utenti
 <button class="copy-code-btn"></button></code></pre>
 </div>
 <div class="filter-operator">
-<p>Per abilitare l'autenticazione, impostate <code translate="no">spec.common.security.authorizationEnabled</code> su <code translate="no">true</code> nel CRD <code translate="no">Milvus</code>. Per ulteriori informazioni sul CRD di Milvus, consultare <a href="https://milvus.io/docs/configure_operator.md?tab=component">Configurazione di Milvus con Milvus Operator</a>.</p>
+<p>Per abilitare l'autenticazione, impostare <code translate="no">spec.common.security.authorizationEnabled</code> su <code translate="no">true</code> nel CRD <code translate="no">Milvus</code>. Per ulteriori informazioni sul CRD di Milvus, consultare <a href="https://milvus.io/docs/configure_operator.md?tab=component">Configurazione di Milvus con Milvus Operator</a>.</p>
 <pre><code translate="no" class="language-yaml">apiVersion: milvus.io/v1beta1
 kind: Milvus
 metadata:
@@ -186,7 +186,7 @@ client.update_password(
 <p>Per ulteriori informazioni sull'aggiornamento delle password degli utenti, consultare <a href="https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Authentication/update_password.md">update_password()</a>.</p>
 <p>Se si dimentica la vecchia password, Milvus offre una voce di configurazione che consente di designare alcuni utenti come superutenti. In questo modo si elimina la necessità di inserire la vecchia password quando si ripristina la password.</p>
 <p>Per impostazione predefinita, il campo <code translate="no">common.security.superUsers</code> nel file di configurazione di Milvus è vuoto, il che significa che tutti gli utenti devono fornire la vecchia password quando la reimpostano. Tuttavia, è possibile designare utenti specifici come superutenti che non devono fornire la vecchia password. Nello snippet qui sotto, <code translate="no">root</code> e <code translate="no">foo</code> sono designati come superutenti.</p>
-<p>È necessario aggiungere il seguente elemento di configurazione nel file di configurazione di Milvus che regola il funzionamento della vostra istanza Milvus.</p>
+<p>È necessario aggiungere la seguente voce di configurazione nel file di configurazione di Milvus che regola il funzionamento della vostra istanza Milvus.</p>
 <pre><code translate="no" class="language-yaml">common:
     security:
         superUsers: root, foo
@@ -271,7 +271,7 @@ client.list_users()
 </ul></li>
 <li>Se siete pronti a distribuire il vostro cluster su cloud:<ul>
 <li>Imparare a <a href="/docs/it/eks.md">distribuire Milvus su Amazon EKS con Terraform</a></li>
-<li>Imparare a distribuire <a href="/docs/it/gcp.md">un cluster Milvus su GCP con Kubernetes</a></li>
+<li>Imparare a distribuire <a href="/docs/it/gcp.md">il cluster Milvus su GCP con Kubernetes</a></li>
 <li>Imparare a <a href="/docs/it/azure.md">distribuire Milvus su Microsoft Azure con Kubernetes</a></li>
 </ul></li>
 </ul>

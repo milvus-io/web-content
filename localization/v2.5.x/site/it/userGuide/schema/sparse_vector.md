@@ -264,7 +264,7 @@ indexes.<span class="hljs-title function_">add</span>(<span class="hljs-title cl
 <ul>
 <li><p>Per il vettore sparse viene creato un indice di tipo <code translate="no">SPARSE_INVERTED_INDEX</code>. Per i vettori sparsi, è possibile specificare <code translate="no">SPARSE_INVERTED_INDEX</code> o <code translate="no">SPARSE_WAND</code>. Per maggiori dettagli, consultare la sezione <a href="https://milvus.io/docs/index.md?tab=sparse">Indici di vettori sparsi</a>.</p></li>
 <li><p>Per i vettori sparsi, <code translate="no">metric_type</code> supporta solo <code translate="no">IP</code> (Prodotto interno), usato per misurare la somiglianza tra due vettori sparsi. Per ulteriori informazioni sulla somiglianza, fare riferimento a <a href="/docs/it/metric.md">Tipi di metriche</a>.</p></li>
-<li><p><code translate="no">drop_ratio_build</code> è un parametro indice opzionale specifico per i vettori sparsi. Controlla la percentuale di valori piccoli del vettore esclusi durante la costruzione dell'indice. Ad esempio, con <code translate="no">{&quot;drop_ratio_build&quot;: 0.2}</code>, il 20% più piccolo dei valori vettoriali sarà escluso durante la creazione dell'indice, riducendo lo sforzo computazionale durante le ricerche.</p></li>
+<li><p><code translate="no">drop_ratio_build</code> è un parametro indice opzionale specifico per i vettori sparsi. Controlla la percentuale di valori piccoli del vettore esclusi durante la costruzione dell'indice. Ad esempio, con <code translate="no">{&quot;drop_ratio_build&quot;: 0.2}</code>, il 20% più piccolo dei valori del vettore verrà escluso durante la creazione dell'indice, riducendo lo sforzo computazionale durante le ricerche.</p></li>
 </ul>
 <h3 id="Create-collection​" class="common-anchor-header">Creare la collezione</h3><p>Una volta completate le impostazioni dei vettori sparsi e dell'indice, è possibile creare una raccolta che contenga vettori sparsi. L'esempio seguente utilizza il metodo <ins><code translate="no">create_collection</code></ins> per creare un insieme chiamato <code translate="no">my_sparse_collection</code>.</p>
 <div class="multipleCode">
@@ -496,12 +496,12 @@ sparse.<span class="hljs-title function_">put</span>(1000L, <span class="hljs-nu
       </svg>
     </button></h2><p>Quando si utilizzano vettori sparsi in Milvus, si devono considerare i seguenti limiti:</p>
 <ul>
-<li><p>Attualmente, per i vettori sparsi è supportata solo la metrica della distanza <strong>IP</strong>. L'elevata dimensionalità dei vettori sparsi rende impraticabili le distanze L2 e coseno.</p></li>
-<li><p>Per i campi vettoriali sparsi sono supportati solo i tipi di indice <strong>SPARSE_INVERTED_INDEX</strong> e <strong>SPARSE_WAND</strong>.</p></li>
+<li><p>Attualmente, per i vettori sparsi sono supportate solo le metriche di distanza <strong>IP</strong> e <strong>BM25</strong> (per la ricerca full-text). L'elevata dimensionalità dei vettori sparsi rende impraticabili le distanze L2 e coseno.</p></li>
+<li><p>Per i campi vettoriali sparsi, sono supportati solo i tipi di indice <strong>SPARSE_INVERTED_INDEX</strong> e <strong>SPARSE_WAND</strong>.</p></li>
 <li><p>I tipi di dati supportati per i vettori sparsi:</p>
 <ul>
 <li>La parte della dimensione deve essere un intero a 32 bit senza segno;</li>
-<li>La parte del valore può essere un numero non negativo a 32 bit in virgola mobile.</li>
+<li>La parte del valore può essere un numero a virgola mobile non negativo a 32 bit.</li>
 </ul></li>
 <li><p>I vettori sparsi devono soddisfare i seguenti requisiti per l'inserimento e la ricerca:</p>
 <ul>
@@ -531,7 +531,7 @@ sparse.<span class="hljs-title function_">put</span>(1000L, <span class="hljs-nu
 <p>La scelta di <strong>drop_ratio_build</strong> e <strong>drop_ratio_search</strong> dipende dalle caratteristiche dei dati e dai requisiti di latenza/throughput e precisione della ricerca.</p></li>
 <li><p><strong>La dimensione di un incorporamento rado può essere un qualsiasi valore discreto all'interno dello spazio uint32?</strong></p>
 <p>Sì, con un'eccezione. La dimensione di un incorporamento sparse può essere qualsiasi valore nell'intervallo <code translate="no">[0, maximum of uint32)</code>. Ciò significa che non è possibile utilizzare il valore massimo di uint32.</p></li>
-<li><p><strong>Le ricerche sui segmenti crescenti sono condotte attraverso un indice o con la forza bruta?</strong></p>
+<li><p><strong>Le ricerche sui segmenti crescenti vengono condotte attraverso un indice o con la forza bruta?</strong></p>
 <p>Le ricerche sui segmenti crescenti vengono condotte attraverso un indice dello stesso tipo dell'indice del segmento sigillato. Per i nuovi segmenti crescenti prima che l'indice sia costruito, si usa una ricerca a forza bruta.</p></li>
 <li><p><strong>È possibile avere vettori sparsi e densi in un'unica collezione?</strong></p>
 <p>Sì, grazie al supporto di più tipi di vettore, è possibile creare collezioni con colonne di vettori sia sparse che dense ed eseguire ricerche ibride su di esse.</p></li>

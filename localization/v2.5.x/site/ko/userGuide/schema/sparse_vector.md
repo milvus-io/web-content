@@ -40,14 +40,14 @@ summary: >-
 <ul>
 <li><p><strong>텍스트 분석:</strong> 각 차원이 단어에 해당하고 문서에 나타나는 단어만 0이 아닌 값을 갖는 단어 가방 벡터로 문서를 표현합니다.</p></li>
 <li><p><strong>추천 시스템:</strong> 사용자-항목 상호 작용 행렬: 각 차원은 특정 항목에 대한 사용자의 평가를 나타내며, 대부분의 사용자는 몇 개의 항목과만 상호 작용합니다.</p></li>
-<li><p><strong>이미지 처리:</strong> 이미지의 주요 포인트에만 초점을 맞춘 로컬 특징 표현으로, 고차원 스파스 벡터를 생성합니다.</p></li>
+<li><p><strong>이미지 처리:</strong> 이미지의 핵심 포인트에만 초점을 맞춘 로컬 특징 표현으로, 고차원 스파스 벡터를 생성합니다.</p></li>
 </ul>
-<p>아래 다이어그램에서 볼 수 있듯이 고밀도 벡터는 일반적으로 각 위치에 값이 있는 연속 배열로 표현됩니다(예: <code translate="no">[0.3, 0.8, 0.2, 0.3, 0.1]</code>). 이와 대조적으로 희소 벡터는 0이 아닌 요소와 그 인덱스만 저장하며, 키-값 쌍으로 표현되는 경우가 많습니다(예: <code translate="no">[{2: 0.2}, ..., {9997: 0.5}, {9999: 0.7}]</code>). 이 표현은 저장 공간을 크게 줄이고 계산 효율성을 높이며, 특히 매우 고차원적인 데이터(예: 10,000차원)를 다룰 때 유용합니다.</p>
+<p>아래 다이어그램에서 볼 수 있듯이 고밀도 벡터는 일반적으로 각 위치에 값이 있는 연속 배열로 표현됩니다(예: <code translate="no">[0.3, 0.8, 0.2, 0.3, 0.1]</code>). 반면, 스파스 벡터는 0이 아닌 요소와 그 인덱스만 저장하며, 키-값 쌍으로 표현되는 경우가 많습니다(예: <code translate="no">[{2: 0.2}, ..., {9997: 0.5}, {9999: 0.7}]</code>). 이 표현은 저장 공간을 크게 줄이고 계산 효율성을 높이며, 특히 매우 고차원적인 데이터(예: 10,000차원)를 다룰 때 유용합니다.</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/sparse-vector.png" alt="Spare vector representation" class="doc-image" id="spare-vector-representation" />
    </span> <span class="img-wrapper"> <span>스페어 벡터 표현</span> </span></p>
-<p>희소 벡터는 텍스트 처리에서 <a href="https://en.wikipedia.org/wiki/Tf%E2%80%93idf">TF-IDF</a> (용어 빈도 역 문서 빈도) 및 <a href="https://en.wikipedia.org/wiki/Okapi_BM25">BM25와</a> 같은 다양한 방법을 사용하여 생성할 수 있습니다. 또한 Milvus는 희소 벡터를 생성하고 처리하는 데 도움이 되는 편리한 방법을 제공합니다. 자세한 내용은 <a href="/docs/ko/embeddings.md">임베딩을</a> 참조하세요.</p>
+<p>희소 벡터는 텍스트 처리에서 <a href="https://en.wikipedia.org/wiki/Tf%E2%80%93idf">TF-IDF</a> (용어 빈도-역 문서 빈도) 및 <a href="https://en.wikipedia.org/wiki/Okapi_BM25">BM25와</a> 같은 다양한 방법을 사용하여 생성할 수 있습니다. 또한 Milvus는 희소 벡터를 생성하고 처리하는 데 도움이 되는 편리한 방법을 제공합니다. 자세한 내용은 <a href="/docs/ko/embeddings.md">임베딩을</a> 참조하세요.</p>
 <p>텍스트 데이터의 경우, Milvus는 전체 텍스트 검색 기능도 제공하므로 외부 임베딩 모델을 사용해 스파스 벡터를 생성하지 않고도 원시 텍스트 데이터에서 직접 벡터 검색을 수행할 수 있습니다. 자세한 내용은 <a href="/docs/ko/full-text-search.md">전체 텍스트 검색을</a> 참조하세요.</p>
 <p>벡터화 후에는 데이터를 Milvus에 저장하여 관리 및 벡터 검색을 할 수 있습니다. 아래 다이어그램은 기본 프로세스를 보여줍니다.</p>
 <p>
@@ -207,7 +207,7 @@ schema.addField(AddFieldReq.builder()​
 <p>이 예에서는 스파스 벡터를 저장하기 위해 <code translate="no">sparse_vector</code> 이라는 이름의 벡터 필드가 추가됩니다. 이 필드의 데이터 유형은 <code translate="no">SPARSE_FLOAT_VECTOR</code> 입니다.</p>
 <h3 id="Set-index-params-for-vector-field​" class="common-anchor-header">벡터 필드에 대한 인덱스 매개변수 설정</h3><p>스파스 벡터에 대한 인덱스를 생성하는 과정은 <a href="/docs/ko/dense-vector.md">밀도 벡터에</a> 대한 인덱스 생성 과정과 유사하지만 지정된 인덱스 유형(<code translate="no">index_type</code>), 거리 메트릭(<code translate="no">metric_type</code>), 인덱스 파라미터(<code translate="no">params</code>)에 차이가 있습니다.</p>
 <div class="multipleCode">
-   <a href="#python">파이썬 </a> <a href="#java">자바</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
+   <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python">index_params = client.prepare_index_params()​
 ​
 index_params.add_index(​
@@ -311,7 +311,7 @@ client.createCollection(requestCreate);​
 }&quot;</span>​
 
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Insert-data​" class="common-anchor-header">데이터 삽입</h3><p>컬렉션을 생성한 후 스파스 벡터가 포함된 데이터를 삽입합니다.</p>
+<h3 id="Insert-data​" class="common-anchor-header">데이터 삽입</h3><p>컬렉션을 만든 후 스파스 벡터가 포함된 데이터를 삽입합니다.</p>
 <div class="multipleCode">
    <a href="#python">파이썬 </a> <a href="#java">자바</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python">sparse_vectors = [​
@@ -395,7 +395,7 @@ search_params = {​
 query_vector = [{<span class="hljs-number">1</span>: <span class="hljs-number">0.2</span>, <span class="hljs-number">50</span>: <span class="hljs-number">0.4</span>, <span class="hljs-number">1000</span>: <span class="hljs-number">0.7</span>}]​
 
 <button class="copy-code-btn"></button></code></pre>
-<p>이 예에서 <code translate="no">drop_ratio_search</code> 은 희소 벡터를 위한 선택적 파라미터로, 검색 중에 쿼리 벡터의 작은 값을 미세 조정할 수 있습니다. 예를 들어 <code translate="no">{&quot;drop_ratio_search&quot;: 0.2}</code> 을 사용하면 검색 중에 쿼리 벡터에서 가장 작은 20%의 값은 무시됩니다.</p>
+<p>이 예에서 <code translate="no">drop_ratio_search</code> 는 희소 벡터를 위한 선택적 파라미터로, 검색 중에 쿼리 벡터의 작은 값을 미세 조정할 수 있습니다. 예를 들어 <code translate="no">{&quot;drop_ratio_search&quot;: 0.2}</code> 을 사용하면 검색 중에 쿼리 벡터에서 가장 작은 20%의 값은 무시됩니다.</p>
 <p>그런 다음 <code translate="no">search</code> 메서드를 사용하여 유사도 검색을 실행합니다.</p>
 <div class="multipleCode">
  <a href="#python">파이썬 </a> <a href="#java">자바</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
@@ -492,7 +492,7 @@ sparse.<span class="hljs-title function_">put</span>(1000L, <span class="hljs-nu
       </svg>
     </button></h2><p>Milvus에서 스파스 벡터를 사용할 때는 다음과 같은 제한 사항을 고려하세요:</p>
 <ul>
-<li><p>현재 스파스 벡터에는 <strong>IP</strong> 거리 메트릭만 지원됩니다. 희소 벡터의 차원이 높기 때문에 L2 및 코사인 거리는 실용적이지 않습니다.</p></li>
+<li><p>현재 스파스 벡터에는 <strong>IP</strong> 및 <strong>BM25</strong> (전체 텍스트 검색용) 거리 메트릭만 지원됩니다. 희소 벡터의 차원이 높기 때문에 L2 및 코사인 거리는 비실용적입니다.</p></li>
 <li><p>스파스 벡터 필드의 경우, <strong>SPARSE_INVERTED_INDEX</strong> 및 <strong>SPARSE_WAND</strong> 인덱스 유형만 지원됩니다.</p></li>
 <li><p>스파스 벡터에 지원되는 데이터 유형:</p>
 <ul>

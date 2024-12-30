@@ -139,8 +139,8 @@ summary: Milvusの時刻同期システムについて学ぶ。
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/timetick.png" alt="timetick" class="doc-image" id="timetick" />
    </span> <span class="img-wrapper"> <span>タイムティック</span> </span></p>
-<p><code translate="no">MsgStream</code> は、出力メッセージがタイムスタンプの要件を満たすように、タイムティックに従ってバッチでメッセージを処理します。</p>
-<h2 id="Whats-next" class="common-anchor-header">次のページ<button data-href="#Whats-next" class="anchor-icon" translate="no">
+<p><code translate="no">MsgStream</code> は、出力メッセージがタイムスタンプの要件を満たすように、タイムティッ クに従ってメッセージをバッチ処理します。上の例では、 の を除くすべてのレコードを、 で消費します。これは、最新のタイムティックの後だからです。<code translate="no">Proxy2</code> <code translate="no">InsertMsgs</code> <code translate="no">Timestamp: 120</code> </p>
+<h2 id="Whats-next" class="common-anchor-header">次へ<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

@@ -42,8 +42,9 @@ title: Installation de Milvus Nodejs SDK
 <tr><th style="text-align:center">Version de Milvus</th><th style="text-align:center">Version @zilliz/milvus2-sdk-node recommandée</th></tr>
 </thead>
 <tbody>
-<tr><td style="text-align:center">2.4.x</td><td style="text-align:center">2.4.x</td></tr>
-<tr><td style="text-align:center">2.3.x</td><td style="text-align:center">2.3.x</td></tr>
+<tr><td style="text-align:center">2.5.x</td><td style="text-align:center">la plus récente</td></tr>
+<tr><td style="text-align:center">2.4.x</td><td style="text-align:center">2.4.10</td></tr>
+<tr><td style="text-align:center">2.3.x</td><td style="text-align:center">2.3.5</td></tr>
 <tr><td style="text-align:center">2.2.x</td><td style="text-align:center">2.2.x</td></tr>
 <tr><td style="text-align:center">2.1.x</td><td style="text-align:center">2.1.x</td></tr>
 <tr><td style="text-align:center">2.0.1</td><td style="text-align:center">2.0.0, 2.0.1</td></tr>
@@ -66,7 +67,7 @@ title: Installation de Milvus Nodejs SDK
         ></path>
       </svg>
     </button></h2><p>Node.js v18+</p>
-<h2 id="Installation" class="common-anchor-header">Installation du client Milvus<button data-href="#Installation" class="anchor-icon" translate="no">
+<h2 id="Installation" class="common-anchor-header">Installation de Milvus<button data-href="#Installation" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

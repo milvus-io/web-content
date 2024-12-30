@@ -42,7 +42,7 @@ summary: >-
       </svg>
     </button></h2><p>Ein spärlicher Vektor ist eine spezielle Darstellung hochdimensionaler Vektoren, bei der die meisten Elemente Null sind und nur einige wenige Dimensionen Werte ungleich Null haben. Diese Eigenschaft macht Sparse-Vektoren besonders effektiv bei der Verarbeitung großer, hochdimensionaler, aber spärlicher Daten. Zu den üblichen Anwendungen gehören.</p>
 <ul>
-<li><p><strong>Textanalyse:</strong> Darstellung von Dokumenten als Bag-of-Words-Vektoren, bei denen jede Dimension einem Wort entspricht und nur Wörter, die in dem Dokument vorkommen, Werte ungleich Null haben.</p></li>
+<li><p><strong>Textanalyse:</strong> Darstellung von Dokumenten als Bag-of-Words-Vektoren, bei denen jede Dimension einem Wort entspricht und nur Wörter, die im Dokument vorkommen, Werte ungleich Null haben.</p></li>
 <li><p><strong>Empfehlungssysteme:</strong> Benutzer-Element-Interaktionsmatrizen, bei denen jede Dimension die Bewertung eines Benutzers für ein bestimmtes Element darstellt, wobei die meisten Benutzer nur mit einigen wenigen Elementen interagieren.</p></li>
 <li><p><strong>Bildverarbeitung:</strong> Lokale Merkmalsdarstellung, die sich nur auf Schlüsselpunkte im Bild konzentriert, was zu hochdimensionalen spärlichen Vektoren führt.</p></li>
 </ul>
@@ -264,9 +264,9 @@ indexes.<span class="hljs-title function_">add</span>(<span class="hljs-title cl
 <ul>
 <li><p>Für den Sparse-Vektor wird ein Index vom Typ <code translate="no">SPARSE_INVERTED_INDEX</code> erstellt. Für spärliche Vektoren können Sie <code translate="no">SPARSE_INVERTED_INDEX</code> oder <code translate="no">SPARSE_WAND</code> angeben. Details finden Sie unter <a href="https://milvus.io/docs/index.md?tab=sparse">Sparse Vector Indexes</a>.</p></li>
 <li><p>Für spärliche Vektoren unterstützt <code translate="no">metric_type</code> nur <code translate="no">IP</code> (Inneres Produkt), das zur Messung der Ähnlichkeit zwischen zwei spärlichen Vektoren verwendet wird. Weitere Informationen zur Ähnlichkeit finden Sie unter <a href="/docs/de/metric.md">Metrische Typen</a>.</p></li>
-<li><p><code translate="no">drop_ratio_build</code> ist ein optionaler Indexparameter speziell für spärliche Vektoren. Er steuert den Anteil der kleinen Vektorwerte, die bei der Indexerstellung ausgeschlossen werden. Bei <code translate="no">{&quot;drop_ratio_build&quot;: 0.2}</code> werden beispielsweise die kleinsten 20% der Vektorwerte bei der Indexerstellung ausgeschlossen, was den Rechenaufwand bei der Suche verringert.</p></li>
+<li><p><code translate="no">drop_ratio_build</code> ist ein optionaler Indexparameter speziell für spärliche Vektoren. Er steuert den Anteil der kleinen Vektorwerte, die bei der Indexerstellung ausgeschlossen werden. Bei <code translate="no">{&quot;drop_ratio_build&quot;: 0.2}</code> werden beispielsweise die kleinsten 20% der Vektorwerte bei der Indexerstellung ausgeschlossen, was den Rechenaufwand bei der Suche reduziert.</p></li>
 </ul>
-<h3 id="Create-collection​" class="common-anchor-header">Sammlung erstellen</h3><p>Sobald die Einstellungen für spärliche Vektoren und Indizes abgeschlossen sind, können Sie eine Sammlung erstellen, die spärliche Vektoren enthält. Das folgende Beispiel verwendet die <ins><code translate="no">create_collection</code></ins> Methode, um eine Sammlung mit dem Namen <code translate="no">my_sparse_collection</code> zu erstellen.</p>
+<h3 id="Create-collection​" class="common-anchor-header">Sammlung erstellen</h3><p>Sobald die Einstellungen für spärliche Vektoren und Indizes abgeschlossen sind, können Sie eine Sammlung erstellen, die spärliche Vektoren enthält. Das folgende Beispiel verwendet die <ins><code translate="no">create_collection</code></ins> Methode, um eine Sammlung namens <code translate="no">my_sparse_collection</code> zu erstellen.</p>
 <div class="multipleCode">
    <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python">client.<span class="hljs-title function_">create_collection</span>(​
@@ -315,7 +315,7 @@ client.createCollection(requestCreate);​
 }&quot;</span>​
 
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Insert-data​" class="common-anchor-header">Daten einfügen</h3><p>Fügen Sie nach dem Erstellen der Sammlung Daten ein, die spärliche Vektoren enthalten.</p>
+<h3 id="Insert-data​" class="common-anchor-header">Daten einfügen</h3><p>Fügen Sie nach der Erstellung der Sammlung Daten ein, die spärliche Vektoren enthalten.</p>
 <div class="multipleCode">
    <a href="#python">Python </a> <a href="#java">Java</a> <a href="#javascript">Node.js</a> <a href="#curl">cURL</a></div>
 <pre><code translate="no" class="language-python">sparse_vectors = [​
@@ -494,9 +494,9 @@ sparse.<span class="hljs-title function_">put</span>(1000L, <span class="hljs-nu
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Bei der Verwendung von spärlichen Vektoren in Milvus sind die folgenden Grenzen zu beachten:</p>
+    </button></h2><p>Bei der Verwendung von spärlichen Vektoren in Milvus sind die folgenden Einschränkungen zu beachten:</p>
 <ul>
-<li><p>Derzeit wird nur die <strong>IP-Distanzmetrik</strong> für spärliche Vektoren unterstützt. Die hohe Dimensionalität von spärlichen Vektoren macht L2 und Kosinusabstand unpraktisch.</p></li>
+<li><p>Derzeit werden nur die Abstandsmetriken <strong>IP</strong> und <strong>BM25</strong> (für die Volltextsuche) für spärliche Vektoren unterstützt. Die hohe Dimensionalität von spärlichen Vektoren macht L2 und Kosinusabstand unpraktisch.</p></li>
 <li><p>Für spärliche Vektorfelder werden nur die Indextypen <strong>SPARSE_INVERTED_INDEX</strong> und <strong>SPARSE_WAND</strong> unterstützt.</p></li>
 <li><p>Die für spärliche Vektoren unterstützten Datentypen:</p>
 <ul>

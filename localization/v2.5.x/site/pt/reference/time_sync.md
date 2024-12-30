@@ -128,7 +128,7 @@ summary: Saiba mais sobre o sistema de sincronização de tempo em Milvus.
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/time_synchronization.png" alt="time_synchronization" class="doc-image" id="time_synchronization" />
    </span> <span class="img-wrapper"> <span>sincronização de tempo</span> </span></p>
-<p>Como mostrado na figura acima,</p>
+<p>Como mostra a figura acima,</p>
 <ul>
 <li><p>Cada proxy reporta periodicamente (a cada 200 ms por padrão) o maior valor de timestamp do último <code translate="no">InsertMsg</code> no <code translate="no">MsgStream</code>para o root coord.</p></li>
 <li><p>A coord raiz identifica o valor mínimo de timestamp neste <code translate="no">Msgstream</code>, independentemente do proxy a que pertence o <code translate="no">InsertMsgs</code>. Em seguida, a coord de raiz insere este carimbo de data/hora mínimo em <code translate="no">Msgstream</code>. Este carimbo de data/hora é também designado por timetick.</p></li>
@@ -139,8 +139,8 @@ summary: Saiba mais sobre o sistema de sincronização de tempo em Milvus.
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/timetick.png" alt="timetick" class="doc-image" id="timetick" />
    </span> <span class="img-wrapper"> <span>marca de tempo</span> </span></p>
-<p><code translate="no">MsgStream</code> processa as mensagens em lotes de acordo com o tique de tempo para garantir que as mensagens de saída cumprem os requisitos do carimbo de data/hora.</p>
-<h2 id="Whats-next" class="common-anchor-header">O que se segue<button data-href="#Whats-next" class="anchor-icon" translate="no">
+<p><code translate="no">MsgStream</code> processa as mensagens em lotes de acordo com o tique de tempo para garantir que as mensagens de saída cumprem os requisitos do carimbo de data/hora. No exemplo acima, consumirá todos os registos, exceto <code translate="no">InsertMsgs</code> de <code translate="no">Proxy2</code> em <code translate="no">Timestamp: 120</code>, uma vez que é posterior ao último TimeTick.</p>
+<h2 id="Whats-next" class="common-anchor-header">O que vem a seguir<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -156,6 +156,6 @@ summary: Saiba mais sobre o sistema de sincronização de tempo em Milvus.
         ></path>
       </svg>
     </button></h2><ul>
-<li>Saiba mais sobre o conceito de <a href="/docs/pt/timestamp.md">carimbo de data/hora</a>.</li>
-<li>Saiba mais sobre o <a href="/docs/pt/data_processing.md">fluxo de trabalho de processamento de dados</a> no Milvus.</li>
+<li>Conhecer o conceito de <a href="/docs/pt/timestamp.md">carimbo de data/hora</a>.</li>
+<li>Saiba mais sobre o <a href="/docs/pt/data_processing.md">fluxo de trabalho de processamento de dados</a> em Milvus.</li>
 </ul>

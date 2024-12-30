@@ -51,7 +51,7 @@ title: Milvus WebUI
 </tbody>
 </table>
 <p>Puede acceder a Milvus Web UI utilizando la siguiente URL:</p>
-<pre><code translate="no">http://localhost:9091/webui
+<pre><code translate="no">http://<span class="hljs-variable">${MILVUS_PROXY_IP}</span>:9091/webui
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Features" class="common-anchor-header">Características<button data-href="#Features" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -166,23 +166,9 @@ title: Milvus WebUI
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/webui-query.png" alt="Milvus Web UI Query Page" class="doc-image" id="milvus-web-ui-query-page" />
    </span> <span class="img-wrapper"> <span>Página de consulta de Milvus Web UI</span> </span></p>
 <ul>
-<li><p><strong>Segmentos</strong>: Vea la lista de segmentos y sus detalles, incluido el ID del segmento, la colección correspondiente, el estado, el tamaño, etc.</p>
-<p>En la columna <strong>Desde</strong>, puede encontrar la fuente del segmento. Los posibles indicadores de origen son los siguientes</p>
-<ul>
-<li><p><strong>QN</strong>: Nodo de consulta</p></li>
-<li><p><strong>CT</strong>: Objetivo actual en QueryCoord</p></li>
-<li><p><strong>NT</strong>: Objetivo siguiente en QueryCoord</p></li>
-<li><p><strong>DIST</strong>: Distribución en QueryCoord</p></li>
-</ul></li>
-<li><p><strong>Canales</strong>: Vea la lista de canales y sus detalles, incluido el nombre del canal, las colecciones correspondientes, etc.</p>
-<p>En la columna <strong>Desde</strong>, puede encontrar la fuente del segmento. Los posibles indicadores de origen son los siguientes</p>
-<ul>
-<li><p><strong>QN</strong>: Nodo de consulta</p></li>
-<li><p><strong>CT</strong>: Objetivo actual en QueryCoord</p></li>
-<li><p><strong>NT</strong>: Objetivo siguiente en QueryCoord</p></li>
-<li><p><strong>DIST</strong>: Distribución en QueryCoord</p></li>
-</ul></li>
-<li><p><strong>Réplicas</strong>: Ver la lista de réplicas y sus detalles, incluyendo el ID de la réplica, la colección correspondiente, etc.</p></li>
+<li><p><strong>Segmentos</strong>: Vea la lista de segmentos y sus detalles, incluido el ID del segmento, la colección correspondiente, el estado, el tamaño, etc.</p></li>
+<li><p><strong>Canales</strong>: Ver la lista de canales y sus detalles, incluido el nombre del canal, las colecciones correspondientes, etc.</p></li>
+<li><p><strong>Réplicas</strong>: Ver la lista de réplicas y sus detalles, incluyendo el ID de réplica, la colección correspondiente, etc.</p></li>
 <li><p><strong>Grupos de recursos</strong>: Ver la lista de grupos de recursos y sus detalles, incluyendo el nombre del grupo de recursos, el número de nodos de consulta en el grupo, y sus configuraciones, etc.</p></li>
 </ul>
 <h2 id="Data" class="common-anchor-header">Datos<button data-href="#Data" class="anchor-icon" translate="no">

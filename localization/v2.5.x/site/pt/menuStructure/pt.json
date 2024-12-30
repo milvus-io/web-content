@@ -1425,9 +1425,15 @@
         ]
       },
       {
+        "label": "Milvus WebUI",
+        "id": "milvus-webui.md",
+        "order": "1",
+        "children": []
+      },
+      {
         "label": "Backup de Milvus",
         "id": "milvus_backup",
-        "order": 1,
+        "order": 2,
         "children": [
           {
             "label": "Visão geral",
@@ -1573,7 +1579,7 @@
             "children": []
           },
           {
-            "label": "AbraçoFace",
+            "label": "Cara de Abraço",
             "id": "integrate_with_hugging-face.md",
             "order": 2,
             "children": []
@@ -1982,7 +1988,7 @@
         "children": []
       },
       {
-        "label": "Agrupamento HDBSCAN",
+        "label": "Agrupamento de HDBSCAN",
         "id": "hdbscan_clustering_with_milvus.md",
         "order": 9,
         "children": []
@@ -2069,7 +2075,7 @@
     ]
   },
   {
-    "label": "Perguntas frequentes",
+    "label": "FAQs",
     "id": "faq",
     "isMenu": true,
     "order": 9,

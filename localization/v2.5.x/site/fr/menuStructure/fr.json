@@ -1425,9 +1425,15 @@
         ]
       },
       {
+        "label": "Milvus WebUI",
+        "id": "milvus-webui.md",
+        "order": "1",
+        "children": []
+      },
+      {
         "label": "Sauvegarde Milvus",
         "id": "milvus_backup",
-        "order": 1,
+        "order": 2,
         "children": [
           {
             "label": "Vue d'ensemble",

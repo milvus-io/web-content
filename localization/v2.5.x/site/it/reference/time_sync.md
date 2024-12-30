@@ -51,7 +51,7 @@ summary: Imparare a conoscere il sistema di sincronizzazione dell'ora in Milvus.
 <tr><td style="text-align:center">t5</td><td style="text-align:center">Inseriti i dati <code translate="no">A1</code> nella raccolta <code translate="no">C0</code>.</td><td style="text-align:center">/</td></tr>
 <tr><td style="text-align:center">t7</td><td style="text-align:center">/</td><td style="text-align:center">Effettuata una ricerca sulla raccolta <code translate="no">C0</code>.</td></tr>
 <tr><td style="text-align:center">t10</td><td style="text-align:center">Inseriti i dati <code translate="no">A2</code> nella raccolta <code translate="no">C0</code>.</td><td style="text-align:center">/</td></tr>
-<tr><td style="text-align:center">t12</td><td style="text-align:center">/</td><td style="text-align:center">Effettuata una ricerca sulla collezione <code translate="no">C0</code></td></tr>
+<tr><td style="text-align:center">t12</td><td style="text-align:center">/</td><td style="text-align:center">Effettuata una ricerca sulla raccolta <code translate="no">C0</code></td></tr>
 <tr><td style="text-align:center">t15</td><td style="text-align:center">Cancellati i dati <code translate="no">A1</code> dalla raccolta <code translate="no">C0</code>.</td><td style="text-align:center">/</td></tr>
 <tr><td style="text-align:center">t17</td><td style="text-align:center">/</td><td style="text-align:center">Effettuata una ricerca sulla raccolta <code translate="no">C0</code></td></tr>
 </tbody>
@@ -61,7 +61,7 @@ summary: Imparare a conoscere il sistema di sincronizzazione dell'ora in Milvus.
 <li><p>Una raccolta vuota <code translate="no">C0</code> a <code translate="no">t2</code>.</p></li>
 <li><p>I dati <code translate="no">A1</code> su <code translate="no">t7</code>.</p></li>
 <li><p>Entrambi i dati <code translate="no">A1</code> e <code translate="no">A2</code> su <code translate="no">t12</code>.</p></li>
-<li><p>Solo i dati <code translate="no">A2</code> in <code translate="no">t17</code> (poiché i dati <code translate="no">A1</code> sono stati eliminati dalla raccolta prima di questo punto).</p></li>
+<li><p>Solo i dati <code translate="no">A2</code> in <code translate="no">t17</code> (poiché i dati <code translate="no">A1</code> sono stati cancellati dalla raccolta prima di questo punto).</p></li>
 </ul>
 <p>Questo scenario ideale può essere facilmente realizzato quando c'è un solo nodo. Tuttavia, Milvus è un database vettoriale distribuito e per garantire che tutte le operazioni DML e DDL nei diversi nodi siano mantenute in ordine, Milvus deve affrontare i due problemi seguenti:</p>
 <ol>
@@ -139,7 +139,7 @@ summary: Imparare a conoscere il sistema di sincronizzazione dell'ora in Milvus.
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/timetick.png" alt="timetick" class="doc-image" id="timetick" />
    </span> <span class="img-wrapper"> <span>timetick</span> </span></p>
-<p><code translate="no">MsgStream</code> elabora i messaggi in batch in base al timetick per garantire che i messaggi in uscita soddisfino i requisiti del timestamp.</p>
+<p><code translate="no">MsgStream</code> elabora i messaggi in batch in base ai tick temporali per garantire che i messaggi in uscita soddisfino i requisiti del timestamp. Nell'esempio precedente, consumerà tutti i record, tranne <code translate="no">InsertMsgs</code>, da <code translate="no">Proxy2</code> a <code translate="no">Timestamp: 120</code>, poiché è successivo all'ultimo TimeTick.</p>
 <h2 id="Whats-next" class="common-anchor-header">Cosa succede dopo<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -156,6 +156,6 @@ summary: Imparare a conoscere il sistema di sincronizzazione dell'ora in Milvus.
         ></path>
       </svg>
     </button></h2><ul>
-<li>Conoscere il concetto di <a href="/docs/it/timestamp.md">timestamp</a>.</li>
+<li>Imparare il concetto di <a href="/docs/it/timestamp.md">timestamp</a>.</li>
 <li>Conoscere il <a href="/docs/it/data_processing.md">flusso di lavoro dell'elaborazione dei dati</a> in Milvus.</li>
 </ul>

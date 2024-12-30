@@ -116,7 +116,7 @@ summary: Erfahren Sie mehr über das Zeitsynchronisationssystem in Milvus.
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/timesync_proxy_insert_msg.png" alt="timesync_proxy_insert_msg" class="doc-image" id="timesync_proxy_insert_msg" />
    </span> <span class="img-wrapper"> <span>timesync_proxy_insert_msg</span> </span></p>
-<p>Ein allgemeiner Grundsatz besagt, dass die Zeitstempel der<code translate="no">InsertMsgs</code> vom selben Proxy auf <code translate="no">MsgStream</code> inkrementell sein müssen. Für die Zeitstempel der <code translate="no">InsertMsgs</code> von verschiedenen Proxys gibt es jedoch keine solche Regel.</p>
+<p>Ein allgemeiner Grundsatz besagt, dass die Zeitstempel der<code translate="no">InsertMsgs</code> aus demselben Proxy inkrementell sein müssen ( <code translate="no">MsgStream</code>). Für die Zeitstempel der <code translate="no">InsertMsgs</code> von verschiedenen Proxys gibt es jedoch keine solche Regel.</p>
 <p>Die folgende Abbildung ist ein Beispiel für <code translate="no">InsertMsgs</code> in einem <code translate="no">MsgStream</code>. Das Snippet enthält fünf <code translate="no">InsertMsgs</code>, von denen drei von <code translate="no">Proxy1</code> und die übrigen von <code translate="no">Proxy2</code> stammen.</p>
 <p>
   
@@ -139,7 +139,7 @@ summary: Erfahren Sie mehr über das Zeitsynchronisationssystem in Milvus.
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/timetick.png" alt="timetick" class="doc-image" id="timetick" />
    </span> <span class="img-wrapper"> <span>Zeitstempel</span> </span></p>
-<p><code translate="no">MsgStream</code> verarbeitet die Nachrichten in Stapeln entsprechend dem Zeitstempel, um sicherzustellen, dass die ausgegebenen Nachrichten den Anforderungen des Zeitstempels entsprechen.</p>
+<p><code translate="no">MsgStream</code> verarbeitet die Nachrichten in Stapeln entsprechend dem Zeitstempel, um sicherzustellen, dass die ausgegebenen Nachrichten den Anforderungen des Zeitstempels entsprechen. Im obigen Beispiel werden alle Datensätze mit Ausnahme von <code translate="no">InsertMsgs</code> von <code translate="no">Proxy2</code> auf <code translate="no">Timestamp: 120</code> verarbeitet, da sie nach dem letzten TimeTick liegen.</p>
 <h2 id="Whats-next" class="common-anchor-header">Was kommt als Nächstes?<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

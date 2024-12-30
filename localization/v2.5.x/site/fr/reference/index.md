@@ -68,7 +68,7 @@ Actuellement, un champ vectoriel ne prend en charge qu'un seul type d'index. Mil
 <p>Ce type d'index comprend <code translate="no">BIN_FLAT</code> et <code translate="no">BIN_IVF_FLAT</code>.</p>
 </div>
 <div class="filter-sparse">
-<h3 id="Indexes-for-sparse-embeddings" class="common-anchor-header">Index pour les encastrements épars</h3><p>La métrique de distance prise en charge pour les encastrements épars est uniquement <code translate="no">IP</code>.</p>
+<h3 id="Indexes-for-sparse-embeddings" class="common-anchor-header">Index pour les encastrements épars</h3><p>Les index pour les encastrements épars ne prennent en charge que les métriques <code translate="no">IP</code> et <code translate="no">BM25</code> (pour la recherche en texte intégral).</p>
 <p>Les types d'index comprennent <code translate="no">SPARSE_INVERTED_INDEX</code> et <code translate="no">SPARSE_WAND</code>.</p>
 </div>
 <div class="filter-floating table-wrapper">
@@ -332,7 +332,7 @@ Actuellement, un champ vectoriel ne prend en charge qu'un seul type d'index. Mil
 </li>
 </ul></li>
 </ul>
-<h3 id="IVFPQ" class="common-anchor-header">IVF_PQ</h3><p><code translate="no">PQ</code> (Product Quantization) décompose uniformément l'espace vectoriel haute dimension original en produits cartésiens d'espaces vectoriels basse dimension <code translate="no">m</code>, puis quantifie les espaces vectoriels basse dimension décomposés. Au lieu de calculer les distances entre le vecteur cible et le centre de toutes les unités, la quantification par produit permet de calculer les distances entre le vecteur cible et le centre de regroupement de chaque espace de faible dimension, ce qui réduit considérablement la complexité temporelle et spatiale de l'algorithme.</p>
+<h3 id="IVFPQ" class="common-anchor-header">IVF_PQ</h3><p><code translate="no">PQ</code> (Product Quantization) décompose uniformément l'espace vectoriel haute dimension original en produits cartésiens d'espaces vectoriels basse dimension <code translate="no">m</code>, puis quantifie les espaces vectoriels basse dimension décomposés. Au lieu de calculer les distances entre le vecteur cible et le centre de toutes les unités, la quantification par produit permet de calculer les distances entre le vecteur cible et le centre de regroupement de chaque espace à faible dimension, ce qui réduit considérablement la complexité temporelle et spatiale de l'algorithme.</p>
 <p>IVF_PQ effectue le regroupement de l'index IVF avant de quantifier le produit des vecteurs. Son fichier d'index est encore plus petit que IVF_SQ8, mais il entraîne également une perte de précision lors de la recherche de vecteurs.</p>
 <div class="alert note">
 <p>Les paramètres de construction de l'index et les paramètres de recherche varient en fonction de la distribution Milvus. Sélectionnez d'abord votre distribution Milvus.</p>
@@ -403,7 +403,7 @@ Actuellement, un champ vectoriel ne prend en charge qu'un seul type d'index. Mil
 </tbody>
 </table>
 </li>
-<li><p>Plage de recherche</p>
+<li><p>Recherche par plage</p>
 <table>
 <thead>
 <tr><th>Paramètre</th><th>Description</th><th>Plage</th><th>Valeur par défaut</th></tr>
@@ -440,7 +440,7 @@ Actuellement, un champ vectoriel ne prend en charge qu'un seul type d'index. Mil
 </table>
 </li>
 </ul>
-<h3 id="HNSWSQ" class="common-anchor-header">HNSW_SQ</h3><p>La quantification scalaire (SQ) est une technique utilisée pour diviser les données en virgule flottante en un ensemble fini de valeurs basées sur leur magnitude. Par exemple, <strong>SQ6</strong> représente la quantification en (2^6 = 64) valeurs discrètes, où chaque nombre à virgule flottante est codé sur 6 bits. De même, <strong>SQ8</strong> quantifie les données en (2^8 = 256) valeurs discrètes, chaque nombre à virgule flottante étant représenté par 8 bits. Cette quantification réduit l'empreinte mémoire tout en préservant la structure essentielle des données pour un traitement efficace.</p>
+<h3 id="HNSWSQ" class="common-anchor-header">HNSW_SQ</h3><p>La quantification scalaire (SQ) est une technique utilisée pour diviser des données en virgule flottante en un ensemble fini de valeurs basées sur leur magnitude. Par exemple, <strong>SQ6</strong> représente la quantification en (2^6 = 64) valeurs discrètes, où chaque nombre à virgule flottante est codé sur 6 bits. De même, <strong>SQ8</strong> quantifie les données en (2^8 = 256) valeurs discrètes, chaque nombre à virgule flottante étant représenté par 8 bits. Cette quantification réduit l'empreinte mémoire tout en préservant la structure essentielle des données pour un traitement efficace.</p>
 <p>Combiné à SQ, HNSW_SQ offre un compromis contrôlable entre la taille de l'index et la précision, tout en maintenant des performances élevées en termes de nombre de requêtes par seconde (QPS). Par rapport à la méthode HNSW standard, il en résulte une augmentation modeste du temps de construction de l'index.</p>
 <ul>
 <li><p>Paramètres de construction de l'index</p>
@@ -511,7 +511,7 @@ Actuellement, un champ vectoriel ne prend en charge qu'un seul type d'index. Mil
 <tr><td><code translate="no">M</code></td><td>M définit le nombre maximal de connexions sortantes dans le graphique. Un M plus élevé entraîne une plus grande précision/temps d'exécution à ef/efConstruction fixe.</td><td>[2, 2048]</td><td>Aucune</td></tr>
 <tr><td><code translate="no">efConstruction</code></td><td>ef_construction contrôle le compromis entre la vitesse de recherche et la vitesse de construction de l'index. L'augmentation du paramètre efConstruction peut améliorer la qualité de l'index, mais elle tend également à allonger le temps d'indexation.</td><td>[1, int_max]</td><td>Aucun</td></tr>
 <tr><td><code translate="no">m</code></td><td>Le nombre de groupes de sous-vecteurs à diviser le vecteur.</td><td>[1, 65536]</td><td>32</td></tr>
-<tr><td><code translate="no">nbits</code></td><td>Le nombre de bits dans lesquels chaque groupe de sous-vecteurs est quantifié.</td><td>[1, 24]</td><td>8</td></tr>
+<tr><td><code translate="no">nbits</code></td><td>Nombre de bits dans lesquels chaque groupe de sous-vecteurs est quantifié.</td><td>[1, 24]</td><td>8</td></tr>
 <tr><td><code translate="no">nrq</code></td><td>Le nombre de sous-quantificateurs résiduels.</td><td>[1, 16]</td><td>2</td></tr>
 </tbody>
 </table>
@@ -548,7 +548,7 @@ Actuellement, un champ vectoriel ne prend en charge qu'un seul type d'index. Mil
 </li>
 </ul>
 <h3 id="BINIVFFLAT" class="common-anchor-header">BIN_IVF_FLAT</h3><p>Cet index est exactement le même que IVF_FLAT, sauf qu'il ne peut être utilisé que pour les encastrements binaires.</p>
-<p>BIN_IVF_FLAT divise les données vectorielles en <code translate="no">nlist</code> unités de grappes, puis compare les distances entre le vecteur d'entrée cible et le centre de chaque grappe. En fonction du nombre de grappes que le système est configuré pour interroger (<code translate="no">nprobe</code>), les résultats de la recherche de similarité sont renvoyés sur la base des comparaisons entre l'entrée cible et les vecteurs dans la ou les grappes les plus similaires uniquement - ce qui réduit considérablement le temps d'interrogation.</p>
+<p>BIN_IVF_FLAT divise les données vectorielles en <code translate="no">nlist</code> unités de grappes, puis compare les distances entre le vecteur d'entrée cible et le centre de chaque grappe. Selon le nombre de grappes que le système est configuré pour interroger (<code translate="no">nprobe</code>), les résultats de la recherche de similarité sont renvoyés sur la base des comparaisons entre l'entrée cible et les vecteurs dans la ou les grappes les plus similaires uniquement - ce qui réduit considérablement le temps d'interrogation.</p>
 <p>En ajustant <code translate="no">nprobe</code>, un équilibre idéal entre la précision et la vitesse peut être trouvé pour un scénario donné. Le temps d'interrogation augmente fortement à mesure que le nombre de vecteurs d'entrée cibles (<code translate="no">nq</code>) et le nombre de grappes à rechercher (<code translate="no">nprobe</code>) augmentent.</p>
 <p>BIN_IVF_FLAT est l'index BIN_IVF le plus basique, et les données encodées stockées dans chaque unité sont cohérentes avec les données originales.</p>
 <ul>
@@ -612,7 +612,7 @@ Actuellement, un champ vectoriel ne prend en charge qu'un seul type d'index. Mil
 </li>
 </ul>
 <h3 id="SPARSEWAND" class="common-anchor-header">SPARSE_WAND</h3><p>Cet indice présente des similitudes avec <code translate="no">SPARSE_INVERTED_INDEX</code>, mais il utilise l'algorithme <a href="https://dl.acm.org/doi/10.1145/956863.956944">Weak-AND</a> pour réduire davantage le nombre d'évaluations de la distance IP complète au cours du processus de recherche.</p>
-<p>D'après nos tests, <code translate="no">SPARSE_WAND</code> surpasse généralement les autres méthodes en termes de rapidité. Toutefois, ses performances peuvent se détériorer rapidement lorsque la densité des vecteurs augmente. Pour remédier à ce problème, l'introduction d'une adresse <code translate="no">drop_ratio_search</code> non nulle peut améliorer considérablement les performances tout en n'entraînant qu'une perte de précision minime. Pour plus d'informations, reportez-vous à la section <a href="/docs/fr/sparse_vector.md">Vecteur clairsemé</a>.</p>
+<p>D'après nos tests, <code translate="no">SPARSE_WAND</code> surpasse généralement les autres méthodes en termes de rapidité. Toutefois, ses performances peuvent se détériorer rapidement lorsque la densité des vecteurs augmente. Pour résoudre ce problème, l'introduction d'une adresse <code translate="no">drop_ratio_search</code> non nulle peut améliorer considérablement les performances tout en n'entraînant qu'une perte de précision minime. Pour plus d'informations, reportez-vous à la section <a href="/docs/fr/sparse_vector.md">Vecteur clairsemé</a>.</p>
 <ul>
 <li><p>Paramètres de construction de l'index</p>
 <table>

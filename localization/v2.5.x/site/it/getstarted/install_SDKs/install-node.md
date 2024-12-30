@@ -39,11 +39,12 @@ title: Installare l'SDK Milvus Nodejs
     </button></h2><p>La seguente raccolta mostra le versioni di Milvus e le versioni raccomandate di @zilliz/milvus2-sdk-node:</p>
 <table>
 <thead>
-<tr><th style="text-align:center">Versione Milvus</th><th style="text-align:center">Versione @zilliz/milvus2-sdk-node raccomandata</th></tr>
+<tr><th style="text-align:center">Versione Milvus</th><th style="text-align:center">Versione @zilliz/milvus2-sdk-node consigliata</th></tr>
 </thead>
 <tbody>
-<tr><td style="text-align:center">2.4.x</td><td style="text-align:center">2.4.x</td></tr>
-<tr><td style="text-align:center">2.3.x</td><td style="text-align:center">2.3.x</td></tr>
+<tr><td style="text-align:center">2.5.x</td><td style="text-align:center">più recente</td></tr>
+<tr><td style="text-align:center">2.4.x</td><td style="text-align:center">2.4.10</td></tr>
+<tr><td style="text-align:center">2.3.x</td><td style="text-align:center">2.3.5</td></tr>
 <tr><td style="text-align:center">2.2.x</td><td style="text-align:center">2.2.x</td></tr>
 <tr><td style="text-align:center">2.1.x</td><td style="text-align:center">2.1.x</td></tr>
 <tr><td style="text-align:center">2.0.1</td><td style="text-align:center">2.0.0, 2.0.1</td></tr>
@@ -104,7 +105,7 @@ yarn add @zilliz/milvus2-sdk-node
       </svg>
     </button></h2><p>Dopo aver installato l'SDK Milvus Node.js, è possibile:</p>
 <ul>
-<li><p>Vedere l'<a href="https://github.com/milvus-io/milvus-sdk-node">avvio rapido dell'SDK Milvus node.js</a></p></li>
+<li><p>Visualizzare l'<a href="https://github.com/milvus-io/milvus-sdk-node">avvio rapido dell'SDK Milvus node.js</a></p></li>
 <li><p>Imparare le operazioni di base di Milvus:</p>
 <ul>
 <li><a href="/docs/it/manage-collections.md">Gestire le collezioni</a></li>
@@ -113,5 +114,5 @@ yarn add @zilliz/milvus2-sdk-node
 <li><a href="/docs/it/single-vector-search.md">Ricerca a vettore singolo</a></li>
 <li><a href="/docs/it/multi-vector-search.md">Ricerca ibrida</a></li>
 </ul></li>
-<li><p>Esplora il <a href="/api-reference/node/v2.4.x/About.md">riferimento API di Milvus Node.js</a></p></li>
+<li><p>Esplora le <a href="/api-reference/node/v2.4.x/About.md">API di riferimento di Milvus Node.js</a></p></li>
 </ul>

@@ -21,7 +21,7 @@ title: ユーザアクセスの認証
     </button></h1><p>このガイドでは、認証の有効化、ユーザーとしての接続、ユーザー認証情報の変更など、Milvusにおけるユーザー認証の管理方法について説明します。</p>
 <div class="alert note">
 <ul>
-<li><p>TLSとユーザ認証は2つの異なるセキュリティアプローチです。Milvusシステムでユーザー認証とTLSの両方を有効にした場合、ユーザー名、パスワード、証明書ファイルのパスを指定する必要があります。TLSを有効にする方法については、<a href="/docs/ja/tls.md">Encryption in Transitを</a>参照してください。</p></li>
+<li><p>TLSとユーザ認証は2つの異なるセキュリティアプローチです。Milvusシステムでユーザ認証とTLSの両方を有効にした場合、ユーザ名、パスワード、証明書ファイルのパスを指定する必要があります。TLSを有効にする方法については、<a href="/docs/ja/tls.md">Encryption in Transitを</a>参照してください。</p></li>
 <li><p>このページのコードスニペットでは、新しい<a href="https://milvus.io/api-reference/pymilvus/v2.4.x/About.md">MilvusClient</a>(Python)を使用してMilvusと対話します。他の言語用の新しいMilvusClient SDKは今後のアップデートでリリースされる予定です。</p></li>
 </ul>
 </div>
@@ -48,7 +48,7 @@ title: ユーザアクセスの認証
 <span class="hljs-attr">common</span>:
 ...
   <span class="hljs-attr">security</span>:
-    <span class="hljs-attr">authorizationEnabled</span>: <span class="hljs-literal">false</span>
+    <span class="hljs-attr">authorizationEnabled</span>: <span class="hljs-literal">true</span>
 ...
 <button class="copy-code-btn"></button></code></pre>
 </div>
@@ -272,6 +272,6 @@ client.list_users()
 <li>クラウド上にクラスターをデプロイする準備ができている場合は、次の方法もご覧ください：<ul>
 <li><a href="/docs/ja/eks.md">Terraformを使用してAmazon EKSにMilvusをデプロイ</a>する方法を学ぶ</li>
 <li><a href="/docs/ja/gcp.md">Kubernetesを使用してGCPにMilvusクラスタをデプロイ</a>する方法を学ぶ</li>
-<li><a href="/docs/ja/azure.md">Kubernetesを使ってMicrosoft AzureにMilvusをデプロイ</a>する方法を学ぶ</li>
+<li><a href="/docs/ja/azure.md">Kubernetesを使用してMicrosoft AzureにMilvusをデプロイ</a>する方法を学ぶ</li>
 </ul></li>
 </ul>

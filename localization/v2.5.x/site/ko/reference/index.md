@@ -68,8 +68,8 @@ title: 인메모리 인덱스
 <p>이 유형의 인덱스에는 <code translate="no">BIN_FLAT</code> 와 <code translate="no">BIN_IVF_FLAT</code> 이 있습니다.</p>
 </div>
 <div class="filter-sparse">
-<h3 id="Indexes-for-sparse-embeddings" class="common-anchor-header">스파스 임베딩용 인덱스</h3><p>스파스 임베딩에 지원되는 거리 메트릭은 <code translate="no">IP</code> 입니다.</p>
-<p>인덱스 유형에는 <code translate="no">SPARSE_INVERTED_INDEX</code> 및 <code translate="no">SPARSE_WAND</code> 이 포함됩니다.</p>
+<h3 id="Indexes-for-sparse-embeddings" class="common-anchor-header">스파스 임베딩용 인덱스</h3><p>스파스 임베딩용 인덱스는 <code translate="no">IP</code> 및 <code translate="no">BM25</code> (전체 텍스트 검색용) 메트릭만 지원합니다.</p>
+<p>이 인덱스 유형에는 <code translate="no">SPARSE_INVERTED_INDEX</code> 및 <code translate="no">SPARSE_WAND</code> 이 포함됩니다.</p>
 </div>
 <div class="filter-floating table-wrapper">
 <table id="floating">

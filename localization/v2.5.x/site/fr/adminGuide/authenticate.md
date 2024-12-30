@@ -48,7 +48,7 @@ title: Authentification de l'accès utilisateur
 <span class="hljs-attr">common</span>:
 ...
   <span class="hljs-attr">security</span>:
-    <span class="hljs-attr">authorizationEnabled</span>: <span class="hljs-literal">false</span>
+    <span class="hljs-attr">authorizationEnabled</span>: <span class="hljs-literal">true</span>
 ...
 <button class="copy-code-btn"></button></code></pre>
 </div>

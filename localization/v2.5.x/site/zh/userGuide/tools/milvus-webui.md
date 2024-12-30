@@ -49,7 +49,7 @@ title: Milvus WebUI
 </tbody>
 </table>
 <p>您可以使用以下 URL 访问 Milvus Web UI：</p>
-<pre><code translate="no">http://localhost:9091/webui
+<pre><code translate="no">http://<span class="hljs-variable">${MILVUS_PROXY_IP}</span>:9091/webui
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Features" class="common-anchor-header">功能<button data-href="#Features" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -75,7 +75,7 @@ title: Milvus WebUI
 <li><p><a href="#Home">主页</a></p>
 <p>您可以找到有关当前运行的 Milvus 实例、其组件、连接的客户端和依赖项的信息。</p></li>
 <li><p><a href="#Collections">Collections</a></p>
-<p>可查看 Milvus 当前的数据库和 Collections 列表，并检查其详细信息。</p></li>
+<p>可查看当前 Milvus 中的数据库和 Collections 列表，并检查其详细信息。</p></li>
 <li><p><a href="#Query">查询</a></p>
 <p>您可以查看收集到的查询节点和查询协调器在网段、通道、副本和资源组方面的统计数据。</p></li>
 <li><p><a href="#Data">数据</a></p>
@@ -164,24 +164,10 @@ title: Milvus WebUI
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/webui-query.png" alt="Milvus Web UI Query Page" class="doc-image" id="milvus-web-ui-query-page" />
    </span> <span class="img-wrapper"> <span>Milvus Web UI 查询页面</span> </span></p>
 <ul>
-<li><p><strong>分段</strong>：查看分段列表及其详细信息，包括分段 ID、对应的 Collections、状态、大小等详细信息。</p>
-<p>在 "<strong>来自 "</strong>列中，您可以找到段的来源。可能的来源指标如下：</p>
-<ul>
-<li><p><strong>QN</strong>：查询节点</p></li>
-<li><p><strong>CT</strong>：查询节点中的当前目标</p></li>
-<li><p><strong>NT</strong>：QueryCoord 中的下一个目标</p></li>
-<li><p><strong>DIST</strong>：QueryCoord 中的分布</p></li>
-</ul></li>
-<li><p><strong>通道</strong>：查看频道列表及其详细信息，包括频道名称、对应的 Collections 等。</p>
-<p>在 "<strong>来自 "</strong>列中，您可以找到数据段的来源。可能的来源指标如下：</p>
-<ul>
-<li><p><strong>QN</strong>：查询节点</p></li>
-<li><p><strong>CT</strong>：QueryCoord 中的当前目标</p></li>
-<li><p><strong>NT</strong>：QueryCoord 中的下一个目标</p></li>
-<li><p><strong>DIST</strong>：查询记录中的分布</p></li>
-</ul></li>
-<li><p><strong>副本</strong>：查看副本列表及其详细信息，包括副本 ID、对应的 Collections 等。</p></li>
-<li><p><strong>资源组</strong>：查看资源组列表及其详细信息，包括资源组名称、组中查询节点的数量及其配置等。</p></li>
+<li><p><strong>分段</strong>：查看分段列表及其详细信息，包括分段 ID、对应的 Collections、状态、大小等。</p></li>
+<li><p><strong>通道</strong>：查看通道列表及其详细信息，包括通道名称、对应的 Collections 等。</p></li>
+<li><p><strong>副本</strong>查看副本列表及其详细信息，包括副本 ID、对应的 Collections 等。</p></li>
+<li><p><strong>资源组</strong>：查看资源组列表及其详细信息，包括资源组名称、组内查询节点数量及其配置等。</p></li>
 </ul>
 <h2 id="Data" class="common-anchor-header">数据<button data-href="#Data" class="anchor-icon" translate="no">
       <svg translate="no"

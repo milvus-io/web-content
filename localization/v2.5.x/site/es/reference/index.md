@@ -39,7 +39,7 @@ Actualmente, un campo vectorial sólo admite un tipo de índice. Milvus elimina 
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>La mayoría de los tipos de índices vectoriales soportados por Milvus utilizan algoritmos de búsqueda aproximada de vecinos más cercanos (ANNS). En comparación con la recuperación exacta, que suele llevar mucho tiempo, la idea central de ANNS ya no se limita a devolver el resultado más exacto, sino que sólo busca los vecinos del objetivo. ANNS mejora la eficiencia de la recuperación sacrificando la precisión dentro de un rango aceptable.</p>
+    </button></h2><p>La mayoría de los tipos de índices vectoriales soportados por Milvus utilizan algoritmos de búsqueda aproximada de vecinos más cercanos (ANNS). En comparación con la recuperación exacta, que suele llevar mucho tiempo, la idea central de ANNS ya no se limita a devolver el resultado más exacto, sino que sólo busca los vecinos del objetivo. El ANNS mejora la eficiencia de la recuperación sacrificando la precisión dentro de un rango aceptable.</p>
 <p>Según los métodos de implementación, el índice vectorial ANNS puede clasificarse en cuatro tipos: Basado en árbol, Basado en grafo, Basado en hash y Basado en cuantificación.</p>
 <h2 id="Indexes-supported-in-Milvus" class="common-anchor-header">Índices admitidos en Milvus<button data-href="#Indexes-supported-in-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -60,7 +60,7 @@ Actualmente, un campo vectorial sólo admite un tipo de índice. Milvus elimina 
 <div class="filter">
  <a href="#sparse">Incrustaciones</a> <a href="#floating">en coma flotante</a> <a href="#binary">Incrustaciones binarias</a> <a href="#sparse">Incrustaciones dispersas</a></div>
 <div class="filter-floating">
-<h3 id="Indexes-for-floating-point-embeddings" class="common-anchor-header">Índices para incrustaciones de coma flotante</h3><p>En el caso de las incrustaciones de coma flotante de 128 dimensiones (vectores), el almacenamiento que ocupan es de 128 * el tamaño de float = 512 bytes. Las <a href="/docs/es/metric.md">métricas de distancia</a> utilizadas para las incrustaciones en coma flotante son la distancia euclidiana (<code translate="no">L2</code>) y el producto interior (<code translate="no">IP</code>).</p>
+<h3 id="Indexes-for-floating-point-embeddings" class="common-anchor-header">Índices para incrustaciones de coma flotante</h3><p>En el caso de las incrustaciones de coma flotante de 128 dimensiones (vectores), el almacenamiento que ocupan es de 128 * el tamaño de float = 512 bytes. Y las <a href="/docs/es/metric.md">métricas de distancia</a> utilizadas para las incrustaciones en coma flotante son la distancia euclidiana (<code translate="no">L2</code>) y el producto interior (<code translate="no">IP</code>).</p>
 <p>Estos tipos de índices incluyen <code translate="no">FLAT</code>, <code translate="no">IVF_FLAT</code>, <code translate="no">IVF_PQ</code>, <code translate="no">IVF_SQ8</code>, <code translate="no">HNSW</code>, <code translate="no">HNSW_SQ</code>, <code translate="no">HNSW_PQ</code>, <code translate="no">HNSW_PRQ</code>, y <code translate="no">SCANN</code> para búsquedas RNA basadas en CPU.</p>
 </div>
 <div class="filter-binary">
@@ -68,8 +68,8 @@ Actualmente, un campo vectorial sólo admite un tipo de índice. Milvus elimina 
 <p>Este tipo de índices incluye <code translate="no">BIN_FLAT</code> y <code translate="no">BIN_IVF_FLAT</code>.</p>
 </div>
 <div class="filter-sparse">
-<h3 id="Indexes-for-sparse-embeddings" class="common-anchor-header">Índices para incrustaciones dispersas</h3><p>La métrica de distancia admitida para las incrustaciones dispersas es únicamente <code translate="no">IP</code>.</p>
-<p>Los tipos de índices incluyen <code translate="no">SPARSE_INVERTED_INDEX</code> y <code translate="no">SPARSE_WAND</code>.</p>
+<h3 id="Indexes-for-sparse-embeddings" class="common-anchor-header">Índices para incrustaciones dispersas</h3><p>Los índices para incrustaciones dispersas sólo admiten las métricas <code translate="no">IP</code> y <code translate="no">BM25</code> (para búsqueda de texto completo).</p>
+<p>Este tipo de índices incluye <code translate="no">SPARSE_INVERTED_INDEX</code> y <code translate="no">SPARSE_WAND</code>.</p>
 </div>
 <div class="filter-floating table-wrapper">
 <table id="floating">
@@ -139,7 +139,7 @@ Actualmente, un campo vectorial sólo admite un tipo de índice. Milvus elimina 
     <td>Índice basado en la cuantificación</td>
     <td>
       <ul>
-        <li>Consulta de muy alta velocidad</li>
+        <li>Consulta a muy alta velocidad</li>
         <li>Recursos de memoria limitados</li>
         <li>Acepta un compromiso menor en la tasa de recuperación</li>
       </ul>

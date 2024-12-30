@@ -48,7 +48,7 @@ title: Autenticar o acesso do utilizador
 <span class="hljs-attr">common</span>:
 ...
   <span class="hljs-attr">security</span>:
-    <span class="hljs-attr">authorizationEnabled</span>: <span class="hljs-literal">false</span>
+    <span class="hljs-attr">authorizationEnabled</span>: <span class="hljs-literal">true</span>
 ...
 <button class="copy-code-btn"></button></code></pre>
 </div>
@@ -226,7 +226,7 @@ Para eliminar um utilizador, o utilizador não pode ser o utilizador a eliminar.
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Listar todos os utilizadores.</p>
+    </button></h2><p>Lista todos os utilizadores.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># list all users</span>
 
 client.list_users()
@@ -248,7 +248,7 @@ client.list_users()
       </svg>
     </button></h2><ol>
 <li>O nome de utilizador não pode estar vazio e não pode ter mais de 32 caracteres. Deve começar com uma letra e conter apenas sublinhados, letras ou números.</li>
-<li>A palavra-passe tem de ter pelo menos 6 caracteres e não pode exceder 256 caracteres.</li>
+<li>A palavra-passe deve ter pelo menos 6 caracteres e não deve exceder 256 caracteres de comprimento.</li>
 </ol>
 <h2 id="Whats-next" class="common-anchor-header">O que se segue<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -270,8 +270,8 @@ client.list_users()
 <li><a href="/docs/pt/scaleout.md">Dimensionar um cluster Milvus</a></li>
 </ul></li>
 <li>Se estiver pronto para implantar seu cluster em nuvens:<ul>
-<li>Saiba como <a href="/docs/pt/eks.md">implantar o Milvus no Amazon EKS com o Terraform</a></li>
-<li>Saiba como <a href="/docs/pt/gcp.md">implantar o Milvus Cluster no GCP com Kubernetes</a></li>
+<li>Saiba como implantar <a href="/docs/pt/eks.md">o Milvus no Amazon EKS com o Terraform</a></li>
+<li>Saiba como implantar <a href="/docs/pt/gcp.md">o Milvus Cluster no GCP com Kubernetes</a></li>
 <li>Saiba como <a href="/docs/pt/azure.md">implantar o Milvus no Microsoft Azure com o Kubernetes</a></li>
 </ul></li>
 </ul>

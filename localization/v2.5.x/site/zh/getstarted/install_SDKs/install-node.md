@@ -42,8 +42,9 @@ title: 安装 Milvus Nodejs SDK
 <tr><th style="text-align:center">Milvus 版本</th><th style="text-align:center">推荐的 @zilliz/milvus2-sdk-node 版本</th></tr>
 </thead>
 <tbody>
-<tr><td style="text-align:center">2.4.x</td><td style="text-align:center">2.4.x</td></tr>
-<tr><td style="text-align:center">2.3.x</td><td style="text-align:center">2.3.x</td></tr>
+<tr><td style="text-align:center">2.5.x</td><td style="text-align:center">最新版本</td></tr>
+<tr><td style="text-align:center">2.4.x</td><td style="text-align:center">2.4.10</td></tr>
+<tr><td style="text-align:center">2.3.x</td><td style="text-align:center">2.3.5</td></tr>
 <tr><td style="text-align:center">2.2.x</td><td style="text-align:center">2.2.x</td></tr>
 <tr><td style="text-align:center">2.1.x</td><td style="text-align:center">2.1.x</td></tr>
 <tr><td style="text-align:center">2.0.1</td><td style="text-align:center">2.0.0, 2.0.1</td></tr>

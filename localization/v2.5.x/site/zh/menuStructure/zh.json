@@ -1425,9 +1425,15 @@
         ]
       },
       {
+        "label": "Milvus 网络用户界面",
+        "id": "milvus-webui.md",
+        "order": "1",
+        "children": []
+      },
+      {
         "label": "Milvus 后备电源",
         "id": "milvus_backup",
-        "order": 1,
+        "order": 2,
         "children": [
           {
             "label": "概述",

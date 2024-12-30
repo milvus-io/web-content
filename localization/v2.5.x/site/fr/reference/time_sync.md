@@ -131,7 +131,7 @@ summary: Découvrez le système de synchronisation temporelle de Milvus.
 <p>Comme le montre la figure ci-dessus,</p>
 <ul>
 <li><p>Chaque proxy signale périodiquement (toutes les 200 ms par défaut) la plus grande valeur d'horodatage du dernier <code translate="no">InsertMsg</code> dans le <code translate="no">MsgStream</code>à la coordonnée racine.</p></li>
-<li><p>Le coordonnateur racine identifie la valeur minimale de l'horodatage sur ce site <code translate="no">Msgstream</code>, quel que soit le proxy auquel appartient le site <code translate="no">InsertMsgs</code>. Ensuite, le coordonnateur racine insère cet horodatage minimum dans le site <code translate="no">Msgstream</code>. Cet horodatage est également appelé "timetick".</p></li>
+<li><p>Le coordonnateur racine identifie la valeur minimale de l'horodatage sur ce site <code translate="no">Msgstream</code>, quel que soit le proxy auquel appartient le site <code translate="no">InsertMsgs</code>. Le coordonnateur racine insère ensuite cette valeur minimale dans l'adresse <code translate="no">Msgstream</code>. Cette valeur est également appelée "timetick".</p></li>
 <li><p>Lorsque les composants consommateurs lisent le timetick inséré par le coordonnateur racine, ils comprennent que tous les messages d'insertion avec des valeurs d'horodatage inférieures ont été consommés. Par conséquent, les demandes pertinentes peuvent être exécutées en toute sécurité sans interrompre l'ordre.</p></li>
 </ul>
 <p>La figure suivante est un exemple du site <code translate="no">Msgstream</code> avec l'insertion d'un timetick.</p>
@@ -139,7 +139,7 @@ summary: Découvrez le système de synchronisation temporelle de Milvus.
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/timetick.png" alt="timetick" class="doc-image" id="timetick" />
    </span> <span class="img-wrapper"> <span>timetick</span> </span></p>
-<p><code translate="no">MsgStream</code> traite les messages par lots en fonction de la date et de l'heure, afin de s'assurer que les messages de sortie répondent aux exigences de l'horodatage.</p>
+<p><code translate="no">MsgStream</code> traite les messages par lots en fonction de l'heure pour s'assurer que les messages de sortie répondent aux exigences de l'horodatage. Dans l'exemple ci-dessus, il consommera tous les enregistrements à l'exception de <code translate="no">InsertMsgs</code> de <code translate="no">Proxy2</code> à <code translate="no">Timestamp: 120</code> car il est postérieur au dernier TimeTick.</p>
 <h2 id="Whats-next" class="common-anchor-header">Prochaines étapes<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -156,6 +156,6 @@ summary: Découvrez le système de synchronisation temporelle de Milvus.
         ></path>
       </svg>
     </button></h2><ul>
-<li>Découvrez le concept d'<a href="/docs/fr/timestamp.md">horodatage</a>.</li>
+<li>Apprendre le concept d'<a href="/docs/fr/timestamp.md">horodatage</a>.</li>
 <li>Découvrir le <a href="/docs/fr/data_processing.md">flux de traitement des données</a> dans Milvus.</li>
 </ul>

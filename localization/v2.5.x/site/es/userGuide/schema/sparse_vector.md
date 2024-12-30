@@ -496,7 +496,7 @@ sparse.<span class="hljs-title function_">put</span>(1000L, <span class="hljs-nu
       </svg>
     </button></h2><p>Cuando utilice vectores dispersos en Milvus, tenga en cuenta los siguientes límites:</p>
 <ul>
-<li><p>Actualmente, sólo se admite la métrica de distancia <strong>IP</strong> para vectores dispersos. La alta dimensionalidad de los vectores dispersos hace que las distancias L2 y coseno sean poco prácticas.</p></li>
+<li><p>Actualmente, sólo las métricas de distancia <strong>IP</strong> y <strong>BM25</strong> (para búsqueda de texto completo) son compatibles con vectores dispersos. La alta dimensionalidad de los vectores dispersos hace que las distancias L2 y coseno sean poco prácticas.</p></li>
 <li><p>Para los campos de vectores dispersos, sólo se admiten los tipos de índice <strong>SPARSE_INVERTED_INDEX</strong> y <strong>SPARSE_WAND</strong>.</p></li>
 <li><p>Tipos de datos admitidos para vectores dispersos:</p>
 <ul>
@@ -530,7 +530,7 @@ sparse.<span class="hljs-title function_">put</span>(1000L, <span class="hljs-nu
 <li><p><strong>¿Cómo debo elegir los parámetros drop_ratio_build y drop_ratio_search?</strong></p>
 <p>La elección de <strong>drop_ratio_build</strong> y <strong>drop_ratio_search</strong> depende de las características de los datos y de los requisitos de latencia/rendimiento y precisión de la búsqueda.</p></li>
 <li><p><strong>¿Puede la dimensión de una incrustación dispersa ser cualquier valor discreto dentro del espacio uint32?</strong></p>
-<p>Sí, con una excepción. La dimensión de una incrustación dispersa puede ser cualquier valor en el intervalo de <code translate="no">[0, maximum of uint32)</code>. Esto significa que no se puede utilizar el valor máximo de uint32.</p></li>
+<p>Sí, con una excepción. La dimensión de una incrustación dispersa puede ser cualquier valor en el rango de <code translate="no">[0, maximum of uint32)</code>. Esto significa que no se puede utilizar el valor máximo de uint32.</p></li>
 <li><p><strong>¿Las búsquedas en segmentos crecientes se realizan a través de un índice o por fuerza bruta?</strong></p>
 <p>Las búsquedas en segmentos crecientes se realizan a través de un índice del mismo tipo que el índice de segmento sellado. Para nuevos segmentos crecientes antes de que se construya el índice, se utiliza una búsqueda por fuerza bruta.</p></li>
 <li><p><strong>¿Es posible tener vectores dispersos y densos en una misma colección?</strong></p>
