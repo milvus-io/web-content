@@ -535,7 +535,7 @@ sparse.<span class="hljs-title function_">put</span>(1000L, <span class="hljs-nu
       </svg>
     </button></h2><p>When using sparse vectors in Milvus, consider the following limits:</p>
 <ul>
-<li><p>Currently, only the <strong>IP</strong> distance metric is supported for sparse vectors. The high dimensionality of sparse vectors makes L2 and cosine distance impractical.</p></li>
+<li><p>Currently, only the <strong>IP</strong> and <strong>BM25</strong> (for full-text search) distance metrics are supported for sparse vectors. The high dimensionality of sparse vectors makes L2 and cosine distance impractical.</p></li>
 <li><p>For sparse vector fields, only the <strong>SPARSE_INVERTED_INDEX</strong> and <strong>SPARSE_WAND</strong> index types are supported.</p></li>
 <li><p>The data types supported for sparse vectors:</p>
 <ul>

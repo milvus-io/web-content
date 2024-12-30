@@ -150,7 +150,7 @@ summary: Learn about the time synchronization system in Milvus.
     <span>timetick</span>
   </span>
 </p>
-<p><code translate="no">MsgStream</code> processes the messages in batches according to the time tick to ensure that the output messages meet the requirements of timestamp.</p>
+<p><code translate="no">MsgStream</code> processes the messages in batches according to the time tick to ensure that the output messages meet the requirements of timestamp. In the above example, it will consume all records excepting <code translate="no">InsertMsgs</code> from <code translate="no">Proxy2</code> at <code translate="no">Timestamp: 120</code> as it’s after the latest TimeTick.</p>
 <h2 id="Whats-next" class="common-anchor-header">What’s next<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

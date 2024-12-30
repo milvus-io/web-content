@@ -72,7 +72,7 @@ Currently, a vector field only supports one index type. Milvus automatically del
 <p>This type of indexes include <code translate="no">BIN_FLAT</code> and <code translate="no">BIN_IVF_FLAT</code>.</p>
 </div>
 <div class="filter-sparse">
-<h3 id="Indexes-for-sparse-embeddings" class="common-anchor-header">Indexes for sparse embeddings</h3><p>The distance metric supported for sparse embeddings is <code translate="no">IP</code> only.</p>
+<h3 id="Indexes-for-sparse-embeddings" class="common-anchor-header">Indexes for sparse embeddings</h3><p>Indexes for sparse embeddings support the <code translate="no">IP</code> and <code translate="no">BM25</code> (for full-text search) metrics only.</p>
 <p>The types of indexes include <code translate="no">SPARSE_INVERTED_INDEX</code> and <code translate="no">SPARSE_WAND</code>.</p>
 </div>
 <div class="filter-floating table-wrapper">
