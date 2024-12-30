@@ -57,7 +57,7 @@ This type of indexes include `BIN_FLAT` and `BIN_IVF_FLAT`.
 
 ### Indexes for sparse embeddings
 
-The distance metric supported for sparse embeddings is `IP` only.
+Indexes for sparse embeddings support the `IP` and `BM25` (for full-text search) metrics only.
 
 The types of indexes include `SPARSE_INVERTED_INDEX` and `SPARSE_WAND`.
 
