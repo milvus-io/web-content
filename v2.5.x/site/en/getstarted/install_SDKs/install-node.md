@@ -16,8 +16,9 @@ The following collection shows Milvus versions and recommended @zilliz/milvus2-s
 
 | Milvus version | Recommended @zilliz/milvus2-sdk-node version |
 | :------------: | :------------------------------------------: |
-|     2.4.x      |                    2.4.x                     |
-|     2.3.x      |                    2.3.x                     |
+|     2.5.x      |                    latest                    |
+|     2.4.x      |                    2.4.10                    |
+|     2.3.x      |                    2.3.5                     |
 |     2.2.x      |                    2.2.x                     |
 |     2.1.x      |                    2.1.x                     |
 |     2.0.1      |                 2.0.0, 2.0.1                 |
@@ -43,9 +44,9 @@ This will download the Milvus node.js sdk and add a dependency entry in your pac
 
 Having installed Milvus Node.js SDK, you can:
 
-
 - View [quick start of milvus node.js sdk](https://github.com/milvus-io/milvus-sdk-node)
 - Learn the basic operations of Milvus:
+
   - [Manage Collections](manage-collections.md)
   - [Manage Partitions](manage-partitions.md)
   - [Insert, Upsert & Delete](insert-update-delete.md)
@@ -53,4 +54,3 @@ Having installed Milvus Node.js SDK, you can:
   - [Hybrid Search](multi-vector-search.md)
 
 - Explore [Milvus Node.js API reference](/api-reference/node/v2.4.x/About.md)
-
