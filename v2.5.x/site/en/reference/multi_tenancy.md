@@ -7,13 +7,13 @@ title: Multi-tenancy strategies
 
 # Multi-tenancy strategies
 
-As ChatGPT gains popularity, more developers are creating their own SaaS services using the CVP (ChatGPT, Vector Database, Prompt) stack. This guide explains how to achieve multi-tenancy on Milvus, one of the most widely-used vector databases in the world, to keep up with this trend.
+In many use cases, developers want to run one Milvus cluster and serve multiple tenants, such as a couple of product teams, or millions of end users. This guide explains a few different strategies to achieve multi-tenancy on Milvus.
 
-Multi-tenancy is an architecture where a single Milvus instance serves multiple tenants. The simplest way to distinguish tenants is by separating their data and resources from those of others. Each tenant has their own dedicated resources or shares resources with others to manage Milvus objects like databases, collections, and partitions. Based on these objects, there are corresponding methods for achieving Milvus multi-tenancy.
+Milvus is designed to support multi-tenancy at database, collection, or partition levels. The objective of multi-tenancy is to separate the data and resources from each other. Implementing multi-tenancy at different level can achieves different extent of isolation but also involves different overhead. Here we explain the trade-offs of them.
 
 ## Database-oriented multi-tenancy
 
-Since Milvus version 2.2.9, the object database is now available. You can create multiple databases in a single Milvus cluster. This new feature makes it possible to achieve database-oriented multi-tenancy by assigning a database for each tenant, so that they can create their own collections and partitions to make the most out of their data. However, this strategy ensures data isolation and search performance for tenants, but resources may be wasted on idle tenants.
+Since Milvus version 2.2.9, you can create multiple databases in a single Milvus cluster. This feature makes it possible to achieve database-oriented multi-tenancy by assigning a database for each tenant, so that they can create their own collections. This approaches provides the best data and resource isolation for tenants, but it's limited to 64 databases in one cluster at most.
 
 ## Collection-oriented multi-tenancy
 
@@ -21,15 +21,15 @@ There are two possible ways to achieve collection-oriented multi-tenancy.
 
 ### One collection for all tenants
 
-Using a single collection to implement multi-tenancy by adding a tenant field to distinguish between tenants is a simple option. When conducting ANN searches for a specific tenant, add a filter expression to filter out all entities that belong to other tenants. This is the simplest way to achieve multi-tenancy. However, be aware that the filter's performance may become the bottleneck of ANN searches.
+Using a single collection to implement multi-tenancy by adding a tenant field to distinguish between tenants is a simple option. When conducting ANN searches for a specific tenant, add a filter expression to filter out all entities that belong to other tenants. This is the simplest way to achieve multi-tenancy. However, be aware that the filter's performance may become the bottleneck of ANN searches. To improve the search performance, you can optimize with below partition-oriented multi-tenancy.
 
 ### One collection per tenant
 
-Another approach is to create a collection for each tenant to store its own data, instead of storing the data of all tenants in a single collection. This provides better data isolation and query performance. However, keep in mind that this approach requires more investment in resource scheduling, operational capability, and costs and may be not applicable if the number of tenants exceeds the maximum number of collections that a single Milvus cluster supports.
+Another approach is to create a collection for each tenant to store its own data, instead of storing the data of all tenants in a single collection. This provides better data isolation and query performance. However, keep in mind that this approach requires more resource in scheduling and limited to 10,000 collections in a cluster at most.
 
 ## Partition-oriented multi-tenancy
 
-There are also two possible ways to achieve partition-oriented multi-tenancy:
+There are two ways to achieve partition-oriented multi-tenancy:
 
 ### One partition per tenant
 
@@ -37,7 +37,7 @@ Managing a single collection is much easier than managing multiple ones. Instead
 
 ### Partition-key-based multi-tenancy
 
-Milvus 2.2.9 introduces a new feature named partition key. Upon the creation of a collection, nominate a tenant field and make it the partition key field. Milvus will store entities in a partition according to the values in the partition key field. When conducting ANN searches, Milvus changes to a partition based on the specified partition key, filters entities according to the partition key, and searches among the filtered entities.
+Milvus 2.2.9 introduces a new feature named partition key. Upon the creation of a collection, nominate a tenant field and make it the partition key field. Milvus will store entities in a partition according to the hash value of the partition key field. When conducting ANN searches, Milvus only searches the partition that contains the partition key. This will largely reduce the scope of the search thus achieving better performance than without partition key.
 
 </div>
 
