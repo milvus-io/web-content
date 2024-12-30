@@ -563,7 +563,7 @@ For more information on similarity search parameters, refer to [​Basic ANN Sea
 
 When using sparse vectors in Milvus, consider the following limits:
 
-- Currently, only the __IP__ distance metric is supported for sparse vectors. The high dimensionality of sparse vectors makes L2 and cosine distance impractical.
+- Currently, only the __IP__ and __BM25__ (for full-text search) distance metrics are supported for sparse vectors. The high dimensionality of sparse vectors makes L2 and cosine distance impractical.
 
 - For sparse vector fields, only the __SPARSE_INVERTED_INDEX__ and __SPARSE_WAND__ index types are supported.
 
