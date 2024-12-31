@@ -21,12 +21,14 @@ The following table compares the features of Milvus Web UI and Birdwatcher/Attu:
 | Installation | Built-in | Standalone tool | Standalone tool |
 | Dependencies | Milvus | Milvus / etcd | Milvus |
 | Primary Functionalities | Runtime environment, database/collection details, segments, channles, tasks, and slow query requests | Metadata inspection and Milvus API execution | Database management and operational tasks |
+| Available since | v2.5.0 | v2.0.0 | v0.1.8 |
 
-You can access Milvus Web UI using the following URL:
+As of v2.5.0, you can access Milvus Web UI using the following URL on a running Milvus instance:
 
 ```
 http://${MILVUS_PROXY_IP}:9091/webui
 ```
+
 
 ## Features
 
