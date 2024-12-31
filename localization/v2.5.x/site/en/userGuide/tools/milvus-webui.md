@@ -48,9 +48,10 @@ title: Milvus WebUI
 <tr><td>Installation</td><td>Built-in</td><td>Standalone tool</td><td>Standalone tool</td></tr>
 <tr><td>Dependencies</td><td>Milvus</td><td>Milvus / etcd</td><td>Milvus</td></tr>
 <tr><td>Primary Functionalities</td><td>Runtime environment, database/collection details, segments, channles, tasks, and slow query requests</td><td>Metadata inspection and Milvus API execution</td><td>Database management and operational tasks</td></tr>
+<tr><td>Available since</td><td>v2.5.0</td><td>v2.0.0</td><td>v0.1.8</td></tr>
 </tbody>
 </table>
-<p>You can access Milvus Web UI using the following URL:</p>
+<p>As of v2.5.0, you can access Milvus Web UI using the following URL on a running Milvus instance:</p>
 <pre><code translate="no">http://<span class="hljs-variable">${MILVUS_PROXY_IP}</span>:9091/webui
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Features" class="common-anchor-header">Features<button data-href="#Features" class="anchor-icon" translate="no">
