@@ -44,14 +44,14 @@ title: Filtering Explained
 <li><p><strong>Comparison Operators</strong>: <code translate="no">==</code>, <code translate="no">!=</code>, <code translate="no">&gt;</code>, <code translate="no">&lt;</code>, <code translate="no">&gt;=</code>, and <code translate="no">&lt;=</code> allow filtering based on numeric, text, or date fields.​</p></li>
 <li><p><strong>Range Filters</strong>: <code translate="no">IN</code> and <code translate="no">LIKE</code> help match specific value ranges or sets.​</p></li>
 <li><p><strong>Arithmetic Operators</strong>: <code translate="no">+</code>, <code translate="no">-</code>, <code translate="no">*</code>, <code translate="no">/</code>, <code translate="no">%</code>, and <code translate="no">**</code> are used for calculations involving numeric fields.​</p></li>
-<li><p><strong>Logical Operators</strong>: <code translate="no">AND</code>, <code translate="no">OR</code>, and <code translate="no">NOT</code> combine multiple conditions into complex expressions.​</p></li>
+<li><p><strong>Logical Operators</strong>: <code translate="no">AND</code>, <code translate="no">OR</code>, and <code translate="no">NOT</code> or '&amp;&amp;’, '||’, '~’, ‘!’ combine multiple conditions into complex expressions.​</p></li>
 </ul>
 <h3 id="Example-Filtering-by-Color​" class="common-anchor-header">Example: Filtering by Color​</h3><p>To find entities with primary colors (red, green, or blue) in a scalar field <code translate="no">color</code>, use the following filter expression:​</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span>=<span class="hljs-string">&#x27;color in [&quot;red&quot;, &quot;green&quot;, &quot;blue&quot;]&#x27;</span>​
 
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Example-Filtering-JSON-Fields​" class="common-anchor-header">Example: Filtering JSON Fields​</h3><p>Milvus allows referencing keys in JSON fields. For instance, if you have a JSON field <code translate="no">product</code> with keys <code translate="no">price</code> and <code translate="no">model</code>, and want to find products with a specific model and price lower than 1,850, use this filter expression:​</p>
-<pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span>=<span class="hljs-string">&#x27;product[&quot;model&quot;] == &quot;JSN-087&quot; AND product[&quot;price&quot;] &lt; 1850&#x27;</span>​
+<pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span>=<span class="hljs-string">&#x27;product[&quot;model&quot;] == &quot;JSN-087&quot; and product[&quot;price&quot;] &lt; 1850&#x27;</span>​
 
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Example-Filtering-Array-Fields​" class="common-anchor-header">Example: Filtering Array Fields​</h3><p>If you have an array field <code translate="no">history_temperatures</code> containing temperature records, and want to find observatories where the 10th recorded temperature exceeds 23°C, use this expression:​</p>
@@ -77,11 +77,11 @@ title: Filtering Explained
     </button></h2><p>When filtering using CJK characters, processing can be more complex due to their larger character sets and encoding differences. This can result in slower performance, especially with the <code translate="no">IN</code> operator.​</p>
 <p>Milvus introduces filter expression templating to optimize performance when working with CJK characters. By separating dynamic values from the filter expression, the query engine handles parameter insertion more efficiently.​</p>
 <h3 id="Example​" class="common-anchor-header">Example​</h3><p>To find individuals over the age of 25 living in either “北京” (Beijing) or “上海” (Shanghai), use the following template expression:​</p>
-<pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&quot;age &gt; 25 AND city IN [&#x27;北京&#x27;, &#x27;上海&#x27;]&quot;</span>​
+<pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&quot;age &gt; 25 and city in [&#x27;北京&#x27;, &#x27;上海&#x27;]&quot;</span>​
 
 <button class="copy-code-btn"></button></code></pre>
 <p>To improve performance, use this variation with parameters:​</p>
-<pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&quot;age &gt; {age} AND city in {city}&quot;</span>,​
+<pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&quot;age &gt; {age} and city in {city}&quot;</span>,​
 filter_params = {<span class="hljs-string">&quot;age&quot;</span>: <span class="hljs-number">25</span>, <span class="hljs-string">&quot;city&quot;</span>: [<span class="hljs-string">&quot;北京&quot;</span>, <span class="hljs-string">&quot;上海&quot;</span>]}​
 
 <button class="copy-code-btn"></button></code></pre>
