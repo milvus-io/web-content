@@ -18,7 +18,7 @@ Milvus supports several basic operators for filtering data:​
 
 - **Arithmetic Operators**: `+`, `-`, `*`, `/`, `%`, and `**` are used for calculations involving numeric fields.​
 
-- **Logical Operators**: `AND`, `OR`, and `NOT` combine multiple conditions into complex expressions.​
+- **Logical Operators**: `AND`, `OR`, and `NOT` or '&&', '||', '~', '!' combine multiple conditions into complex expressions.​
 
 ### Example: Filtering by Color​
 
@@ -34,7 +34,7 @@ filter='color in ["red", "green", "blue"]'​
 Milvus allows referencing keys in JSON fields. For instance, if you have a JSON field `product` with keys `price` and `model`, and want to find products with a specific model and price lower than 1,850, use this filter expression:​
 
 ```python
-filter='product["model"] == "JSN-087" AND product["price"] < 1850'​
+filter='product["model"] == "JSN-087" and product["price"] < 1850'​
 
 ```
 
@@ -60,14 +60,14 @@ Milvus introduces filter expression templating to optimize performance when work
 To find individuals over the age of 25 living in either "北京" (Beijing) or "上海" (Shanghai), use the following template expression:​
 
 ```python
-filter = "age > 25 AND city IN ['北京', '上海']"​
+filter = "age > 25 and city in ['北京', '上海']"​
 
 ```
 
 To improve performance, use this variation with parameters:​
 
 ```python
-filter = "age > {age} AND city in {city}",​
+filter = "age > {age} and city in {city}",​
 filter_params = {"age": 25, "city": ["北京", "上海"]}​
 
 ```
