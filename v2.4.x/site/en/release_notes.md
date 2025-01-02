@@ -7,6 +7,27 @@ title: Release Notes
 
 Find out what’s new in Milvus! This page summarizes new features, improvements, known issues, and bug fixes in each release. You can find the release notes for each released version after v2.4.0 in this section. We suggest that you regularly visit this page to learn about updates.
 
+## v2.4.20
+
+Release Date: Janurary 2, 2025
+
+| Milvus version | Python SDK version | Java SDK version | Node.js SDK version |
+|----------------|--------------------|------------------|---------------------|
+| 2.4.20         | 2.4.13             | 2.4.10           | 2.4.10              |
+
+Milvus 2.4.20 addresses several critical issues, including fixing mmap for sparse index, resolving the failure to parse the correct database name when altering collection fields, and preventing deadlocks in multiple compaction tasks within the scheduler. Additionally, this version introduces an enhancement that allows adjustment of the system limit for maximum varchar length through a configuration item in the YAML file. We highly recommend upgrading to this version for improved stability and reliability.
+
+### Improvements
+
+- Added param for tuning max varchar length ([#38890](https://github.com/milvus-io/milvus/pull/38890))
+
+### Bug fixes
+
+- Enabled mmap for sparse index ([#38849](https://github.com/milvus-io/milvus/pull/38849))
+- Fixed altercollectionfield interceptor dbname ([#38664](https://github.com/milvus-io/milvus/pull/38664))
+- Released compaction task lock when return function ([#38857](https://github.com/milvus-io/milvus/pull/38857))
+- Retrieve plan on heap was used after free when reduce ([#38842](https://github.com/milvus-io/milvus/pull/38842))
+
 ## v2.4.19
 
 Release Date: December 26, 2024

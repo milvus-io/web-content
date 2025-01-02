@@ -1634,63 +1634,75 @@
         "children": []
       },
       {
-        "label": "Image Search with Milvus",
-        "id": "image_similarity_search.md",
+        "label": "Advanced RAG",
+        "id": "how_to_enhance_your_rag.md",
         "order": 2,
+        "children": []        
+      },
+      {
+        "label": "Full-Text Search with Milvus",
+        "id": "full_text_search_with_milvus.md",
+        "order": 3,
         "children": []
       },
       {
         "label": "Hybrid Search with Milvus",
         "id": "hybrid_search_with_milvus.md",
-        "order": 3,
+        "order": 4,
+        "children": []
+      },
+      {
+        "label": "Image Search with Milvus",
+        "id": "image_similarity_search.md",
+        "order": 5,
         "children": []
       },
       {
         "label": "Multimodal RAG",
         "id": "multimodal_rag_with_milvus.md",
-        "order": 4,
+        "order": 6,
         "children": []
       },
       {
         "label": "Graph RAG with Milvus",
         "id": "graph_rag_with_milvus.md",
-        "order": 6,
+        "order": 7,
         "children": []
       },
       {
         "label": "Contextual Retrieval",
         "id": "contextual_retrieval_with_milvus.md",
-        "order": 5,
+        "order": 8,
         "children": []
       },
       {
         "label": "HDBSCAN Clustering",
         "id": "hdbscan_clustering_with_milvus.md",
-        "order": 6,
+        "order": 9,
         "children": []
       },
       {
         "label": "Use ColPali for Multi-Modal Retrieval",
         "id": "use_ColPali_with_milvus.md",
-        "order": 7,
+        "order": 10,
         "children": []
       },
       {
         "label": "Vector Visualization",
         "id": "vector_visualization.md",
-        "order": 8,
+        "order": 11,
         "children": []
       },
       {
         "label": "Movie Recommendation",
         "id": "movie_recommendation_with_milvus.md",
-        "order": 9,
+        "order": 12,
         "children": []
       },
       {
         "label": "Funnel Search with Matryoshka Embeddings",
         "id": "funnel_search_with_matryoshka.md",
-        "order": 10,
+        "order": 13,
         "children": []
       },
       {
