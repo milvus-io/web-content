@@ -57,7 +57,7 @@ title: Milvus mit Docker Compose ausführen (Linux)
       </svg>
     </button></h2><p>Milvus bietet eine Docker Compose-Konfigurationsdatei im Milvus-Repository. Um Milvus mit Docker Compose zu installieren, führen Sie einfach folgenden Befehl aus</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-comment"># Download the configuration file</span>
-$ wget https://github.com/milvus-io/milvus/releases/download/v2.4.19/milvus-standalone-docker-compose.yml -O docker-compose.yml
+$ wget https://github.com/milvus-io/milvus/releases/download/v2.4.20/milvus-standalone-docker-compose.yml -O docker-compose.yml
 
 <span class="hljs-comment"># Start Milvus</span>
 $ <span class="hljs-built_in">sudo</span> docker compose up -d
@@ -69,7 +69,7 @@ Creating milvus-standalone ... <span class="hljs-keyword">done</span>
 <div class="alert note">
 <ul>
 <li><p>Wenn Sie den obigen Befehl nicht ausführen können, überprüfen Sie bitte, ob auf Ihrem System Docker Compose V1 installiert ist. Wenn dies der Fall ist, sollten Sie aufgrund der Hinweise auf <a href="https://docs.docker.com/compose/">dieser Seite</a> auf Docker Compose V2 migrieren.</p></li>
-<li><p>Sollten Sie beim Ziehen des Images auf Probleme stoßen, kontaktieren Sie uns unter <a href="mailto:community@zilliz.com">community@zilliz.com</a> und schildern Sie das Problem, damit wir Ihnen den nötigen Support bieten können.</p></li>
+<li><p>Sollten Sie beim Ziehen des Images auf Probleme stoßen, kontaktieren Sie uns unter <a href="mailto:community@zilliz.com">community@zilliz.com</a> und schildern Sie uns das Problem.</p></li>
 </ul>
 </div>
 <p>Nach dem Starten von Milvus,</p>
@@ -132,7 +132,7 @@ $ <span class="hljs-built_in">sudo</span> <span class="hljs-built_in">rm</span> 
 <li><a href="/docs/de/azure.md">Microsoft Azure</a></li>
 </ul></li>
 <li><p>Erkunden Sie <a href="/docs/de/milvus_backup_overview.md">Milvus Backup</a>, ein Open-Source-Tool für Milvus-Datensicherungen.</p></li>
-<li><p><a href="/docs/de/birdwatcher_overview.md">Birdwatcher</a>, ein Open-Source-Tool zum Debuggen von Milvus und dynamischen Konfigurations-Updates.</p></li>
+<li><p><a href="/docs/de/birdwatcher_overview.md">Birdwatcher</a>, ein Open-Source-Tool zur Fehlersuche in Milvus und für dynamische Konfigurations-Updates.</p></li>
 <li><p>Entdecken Sie <a href="https://github.com/zilliztech/attu">Attu</a>, ein Open-Source-GUI-Tool für die intuitive Milvus-Verwaltung.</p></li>
 <li><p><a href="/docs/de/monitor.md">Überwachen Sie Milvus mit Prometheus</a>.</p></li>
 </ul>

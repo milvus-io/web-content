@@ -42,14 +42,14 @@ title: 필터링 설명
 <li><p><strong>비교 연산자</strong> <code translate="no">==</code>, <code translate="no">!=</code>, <code translate="no">&gt;</code>, <code translate="no">&lt;</code>, <code translate="no">&gt;=</code>, <code translate="no">&lt;=</code> 를 사용하면 숫자, 텍스트 또는 날짜 필드를 기준으로 필터링할 수 있습니다.</p></li>
 <li><p><strong>범위 필터</strong>: <code translate="no">IN</code> 및 <code translate="no">LIKE</code> 은 특정 값 범위 또는 집합을 일치시키는 데 도움이 됩니다.</p></li>
 <li><p><strong>산술 연산자</strong>: <code translate="no">+</code>, <code translate="no">-</code>, <code translate="no">*</code>, <code translate="no">/</code>, <code translate="no">%</code>, <code translate="no">**</code> 은 숫자 필드와 관련된 계산에 사용됩니다.</p></li>
-<li><p><strong>논리 연산자</strong>: <code translate="no">AND</code>, <code translate="no">OR</code>, <code translate="no">NOT</code> 은 여러 조건을 복잡한 표현식으로 결합합니다.</p></li>
+<li><p><strong>논리 연산자</strong>: <code translate="no">AND</code>, <code translate="no">OR</code>, <code translate="no">NOT</code> 또는 '&amp;&amp;', '||', '~', '!'는 여러 조건을 복잡한 표현식으로 결합합니다.</p></li>
 </ul>
-<h3 id="Example-Filtering-by-Color​" class="common-anchor-header">예시: 색상별 필터링</h3><p>스칼라 필드 <code translate="no">color</code> 에서 원색(빨강, 녹색 또는 파랑)을 가진 엔티티를 찾으려면 다음 필터 표현식을 사용합니다.</p>
+<h3 id="Example-Filtering-by-Color​" class="common-anchor-header">예시: 색상으로 필터링하기</h3><p>스칼라 필드 <code translate="no">color</code> 에서 원색(빨강, 초록, 파랑)을 가진 엔티티를 찾으려면 다음 필터 표현식을 사용합니다.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span>=<span class="hljs-string">&#x27;color in [&quot;red&quot;, &quot;green&quot;, &quot;blue&quot;]&#x27;</span>​
 
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Example-Filtering-JSON-Fields​" class="common-anchor-header">예시: JSON 필드 필터링</h3><p>Milvus에서는 JSON 필드에서 키를 참조할 수 있습니다. 예를 들어 키가 <code translate="no">price</code> 및 <code translate="no">model</code> 인 JSON 필드 <code translate="no">product</code> 가 있고 특정 모델과 가격이 1,850보다 낮은 제품을 찾고자 하는 경우 다음 필터 표현식을 사용합니다.</p>
-<pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span>=<span class="hljs-string">&#x27;product[&quot;model&quot;] == &quot;JSN-087&quot; AND product[&quot;price&quot;] &lt; 1850&#x27;</span>​
+<pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span>=<span class="hljs-string">&#x27;product[&quot;model&quot;] == &quot;JSN-087&quot; and product[&quot;price&quot;] &lt; 1850&#x27;</span>​
 
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Example-Filtering-Array-Fields​" class="common-anchor-header">예시: 배열 필드 필터링</h3><p>온도 기록이 포함된 배열 필드 <code translate="no">history_temperatures</code> 가 있고 10번째 기록 온도가 23°C를 초과하는 관측소를 찾고자 하는 경우 이 표현식을 사용합니다.</p>
@@ -75,11 +75,11 @@ title: 필터링 설명
     </button></h2><p>한중일 문자를 사용하여 필터링하는 경우, 더 큰 문자 집합과 인코딩 차이로 인해 처리가 더 복잡해질 수 있습니다. 이로 인해 특히 <code translate="no">IN</code> 연산자의 경우 성능이 느려질 수 있습니다.</p>
 <p>Milvus는 한중일 문자로 작업할 때 성능을 최적화하기 위해 필터 표현식 템플릿을 도입했습니다. 필터 표현식에서 동적 값을 분리함으로써 쿼리 엔진이 매개변수 삽입을 보다 효율적으로 처리합니다.</p>
 <h3 id="Example​" class="common-anchor-header">예제</h3><p>'北京'(베이징) 또는 '上海'(상하이)에 거주하는 25세 이상의 개인을 찾으려면 다음 템플릿 표현식을 사용합니다.</p>
-<pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&quot;age &gt; 25 AND city IN [&#x27;北京&#x27;, &#x27;上海&#x27;]&quot;</span>​
+<pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&quot;age &gt; 25 and city in [&#x27;北京&#x27;, &#x27;上海&#x27;]&quot;</span>​
 
 <button class="copy-code-btn"></button></code></pre>
 <p>성능을 향상시키려면 이 변형을 매개변수와 함께 사용합니다.</p>
-<pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&quot;age &gt; {age} AND city in {city}&quot;</span>,​
+<pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&quot;age &gt; {age} and city in {city}&quot;</span>,​
 filter_params = {<span class="hljs-string">&quot;age&quot;</span>: <span class="hljs-number">25</span>, <span class="hljs-string">&quot;city&quot;</span>: [<span class="hljs-string">&quot;北京&quot;</span>, <span class="hljs-string">&quot;上海&quot;</span>]}​
 
 <button class="copy-code-btn"></button></code></pre>

@@ -1389,6 +1389,12 @@
             "children": []
           }
         ]
+      },
+      {
+        "label": "Milvus WebUI",
+        "id": "milvus-webui.md",
+        "order": "12",
+        "children": []
       }
     ]
   },
@@ -1423,12 +1429,6 @@
             "children": []
           }
         ]
-      },
-      {
-        "label": "Milvus WebUI",
-        "id": "milvus-webui.md",
-        "order": "1",
-        "children": []
       },
       {
         "label": "Backup de Milvus",

@@ -1389,6 +1389,12 @@
             "children": []
           }
         ]
+      },
+      {
+        "label": "Milvus WebUI",
+        "id": "milvus-webui.md",
+        "order": "12",
+        "children": []
       }
     ]
   },
@@ -1423,12 +1429,6 @@
             "children": []
           }
         ]
-      },
-      {
-        "label": "Milvus WebUI",
-        "id": "milvus-webui.md",
-        "order": "1",
-        "children": []
       },
       {
         "label": "Sauvegarde Milvus",
@@ -1940,7 +1940,7 @@
         "children": []
       },
       {
-        "label": "Construire un RAG avec Milvus",
+        "label": "Build RAG with Milvus",
         "id": "build-rag-with-milvus.md",
         "order": 1,
         "children": []
@@ -1952,7 +1952,7 @@
         "children": []
       },
       {
-        "label": "Recherche plein texte avec Milvus",
+        "label": "Full-Text Search with Milvus",
         "id": "full_text_search_with_milvus.md",
         "order": 3,
         "children": []
@@ -1964,7 +1964,7 @@
         "children": []
       },
       {
-        "label": "Recherche d'images avec Milvus",
+        "label": "Image Search with Milvus",
         "id": "image_similarity_search.md",
         "order": 5,
         "children": []
@@ -2000,7 +2000,7 @@
         "children": []
       },
       {
-        "label": "Visualisation vectorielle",
+        "label": "Vector Visualization",
         "id": "vector_visualization.md",
         "order": 11,
         "children": []

@@ -41,7 +41,7 @@ title: Exécution de Milvus avec prise en charge du GPU à l'aide de Docker Comp
 <li><a href="/docs/fr/prerequisite-gpu.md">Vérifiez la configuration matérielle et logicielle requise</a> avant de procéder à l'installation.</li>
 </ul>
 <div class="alert note">
-<p>Si vous rencontrez des problèmes en tirant l'image, contactez-nous à l'adresse <a href="mailto:community@zilliz.com">community@zilliz.com</a> en détaillant le problème et nous vous fournirons l'assistance nécessaire.</p>
+<p>Si vous rencontrez des problèmes lors du tirage de l'image, contactez-nous à l'adresse <a href="mailto:community@zilliz.com">community@zilliz.com</a> en précisant le problème et nous vous fournirons l'assistance nécessaire.</p>
 </div>
 <h2 id="Install-Milvus" class="common-anchor-header">Installer Milvus<button data-href="#Install-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -119,8 +119,9 @@ milvus-etcd         etcd -advertise-client-url ...   Up             2379/tcp, 23
 milvus-minio        /usr/bin/docker-entrypoint ...   Up (healthy)   9000/tcp
 milvus-standalone   /tini -- milvus run standalone   Up             0.0.0.0:19530-&gt;19530/tcp, 0.0.0.0:9091-&gt;9091/tcp
 <button class="copy-code-btn"></button></code></pre>
-<p>Si vous avez affecté plusieurs périphériques GPU à Milvus dans docker-compose.yml, vous pouvez spécifier quel périphérique GPU est visible ou disponible pour utilisation.</p>
-<p>Rendez le dispositif GPU <code translate="no">0</code> visible pour Milvus :</p>
+<p>Vous pouvez également accéder à l'interface Web Milvus à l'adresse <code translate="no">http://127.0.0.1:9091/webui/</code> pour en savoir plus sur votre instance Milvus. Pour plus de détails, voir <a href="/docs/fr/milvus-webui.md">Milvus WebUI</a>.</p>
+<p>Si vous avez affecté plusieurs dispositifs GPU à Milvus dans docker-compose.yml, vous pouvez spécifier quel dispositif GPU est visible ou disponible pour utilisation.</p>
+<p>Rendre le périphérique GPU <code translate="no">0</code> visible par Milvus :</p>
 <pre><code translate="no" class="language-shell">$ CUDA_VISIBLE_DEVICES=0 ./milvus run standalone
 <button class="copy-code-btn"></button></code></pre>
 <p>Rendre les dispositifs GPU <code translate="no">0</code> et <code translate="no">1</code> visibles par Milvus :</p>
@@ -197,12 +198,13 @@ docker start &lt;milvus_container_id&gt;
     </button></h2><p>Après avoir installé Milvus dans Docker, vous pouvez :</p>
 <ul>
 <li><p>Consulter <a href="/docs/fr/quickstart.md">Quickstart</a> pour voir ce que Milvus peut faire.</p></li>
+<li><p>Consulter l'<a href="/docs/fr/milvus-webui.md">interface Web Milvus</a> pour en savoir plus sur l'instance Milvus.</p></li>
 <li><p>Apprendre les opérations de base de Milvus :</p>
 <ul>
 <li><a href="/docs/fr/manage_databases.md">Gérer les bases de données</a></li>
 <li><a href="/docs/fr/manage-collections.md">Gérer les collections</a></li>
 <li><a href="/docs/fr/manage-partitions.md">Gérer les partitions</a></li>
-<li><a href="/docs/fr/insert-update-delete.md">Insérer, surinsérer et supprimer</a></li>
+<li><a href="/docs/fr/insert-update-delete.md">Insérer, Upsert et Supprimer</a></li>
 <li><a href="/docs/fr/single-vector-search.md">Recherche à vecteur unique</a></li>
 <li><a href="/docs/fr/multi-vector-search.md">Recherche hybride</a></li>
 </ul></li>
@@ -214,6 +216,7 @@ docker start &lt;milvus_container_id&gt;
 <li><a href="/docs/fr/gcp.md">Google Cloud</a></li>
 <li><a href="/docs/fr/azure.md">Microsoft Azure</a></li>
 </ul></li>
+<li><p>Découvrez <a href="/docs/fr/milvus-webui.md">Milvus WebUI</a>, une interface web intuitive pour l'observabilité et la gestion de Milvus.</p></li>
 <li><p>Découvrez <a href="/docs/fr/milvus_backup_overview.md">Milvus Backup</a>, un outil open-source pour les sauvegardes de données Milvus.</p></li>
 <li><p>Découvrez <a href="/docs/fr/birdwatcher_overview.md">Birdwatcher</a>, un outil open-source pour le débogage de Milvus et les mises à jour dynamiques de la configuration.</p></li>
 <li><p>Découvrez <a href="https://milvus.io/docs/attu.md">Attu</a>, un outil GUI open-source pour la gestion intuitive de Milvus.</p></li>

@@ -37,7 +37,7 @@ title: Milvus WebUI
         ></path>
       </svg>
     </button></h2><p>O Milvus Web UI difere do Birdwatcher e do Attu por ser uma ferramenta integrada que permite a observação geral do sistema com uma interface simples e intuitiva.</p>
-<p>A tabela seguinte compara as caraterísticas do Milvus Web UI e do Birdwatcher/Attu:</p>
+<p>A tabela seguinte compara as funcionalidades do Milvus Web UI e do Birdwatcher/Attu:</p>
 <table>
 <thead>
 <tr><th>Funcionalidade</th><th>Milvus Web UI</th><th>Birdwatcher</th><th>Attu</th></tr>
@@ -47,10 +47,11 @@ title: Milvus WebUI
 <tr><td>Utilizadores alvo</td><td>Mantenedores, desenvolvedores</td><td>Mantenedores</td><td>Programadores</td></tr>
 <tr><td>Instalação</td><td>Integrado</td><td>Ferramenta autónoma</td><td>Ferramenta autónoma</td></tr>
 <tr><td>Dependências</td><td>Milvus</td><td>Milvus / etcd</td><td>Milvus</td></tr>
-<tr><td>Funcionalidades principais</td><td>Ambiente de tempo de execução, detalhes da base de dados/coleção, segmentos, canais, tarefas e pedidos de consulta lentos</td><td>Inspeção de metadados e execução da API Milvus</td><td>Gestão da base de dados e tarefas operacionais</td></tr>
+<tr><td>Funcionalidades principais</td><td>Ambiente de tempo de execução, detalhes da base de dados/coleção, segmentos, canais, tarefas e pedidos de consulta lentos</td><td>Inspeção de metadados e execução da API Milvus</td><td>Gestão de bases de dados e tarefas operacionais</td></tr>
+<tr><td>Disponível desde</td><td>v2.5.0</td><td>v2.0.0</td><td>v0.1.8</td></tr>
 </tbody>
 </table>
-<p>Pode aceder ao Milvus Web UI utilizando o seguinte URL:</p>
+<p>A partir da versão 2.5.0, pode aceder ao Milvus Web UI utilizando o seguinte URL numa instância Milvus em execução:</p>
 <pre><code translate="no">http://<span class="hljs-variable">${MILVUS_PROXY_IP}</span>:9091/webui
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Features" class="common-anchor-header">Caraterísticas<button data-href="#Features" class="anchor-icon" translate="no">
@@ -75,7 +76,7 @@ title: Milvus WebUI
    </span> <span class="img-wrapper"> <span>Visão geral do Milvus Web UI</span> </span></p>
 <ul>
 <li><p><a href="#Home">Início</a></p>
-<p>Pode encontrar informações sobre a instância atual do Milvus em execução, os seus componentes, os clientes ligados e as dependências.</p></li>
+<p>Pode encontrar informações sobre a instância Milvus em execução, os seus componentes, os clientes ligados e as dependências.</p></li>
 <li><p><a href="#Collections">Colecções</a></p>
 <p>Pode ver a lista de bases de dados e colecções atualmente no Milvus e verificar os seus detalhes.</p></li>
 <li><p><a href="#Query">Consulta</a></p>
@@ -167,7 +168,7 @@ title: Milvus WebUI
    </span> <span class="img-wrapper"> <span>Página de consulta da interface do usuário do Milvus Web</span> </span></p>
 <ul>
 <li><p><strong>Segmentos</strong>: Visualize a lista de segmentos e seus detalhes, incluindo o ID do segmento, a coleção correspondente, o estado, o tamanho, etc.</p></li>
-<li><p><strong>Channels (Canais</strong>): Visualize a lista de canais e seus detalhes, incluindo o nome do canal, as coleções correspondentes etc.</p></li>
+<li><p><strong>Channels (Canais</strong>): Exiba a lista de canais e seus detalhes, incluindo o nome do canal, as coleções correspondentes etc.</p></li>
 <li><p><strong>Réplicas</strong>: Visualize a lista de réplicas e os respectivos detalhes, incluindo a ID da réplica, a coleção correspondente, etc.</p></li>
 <li><p><strong>Grupos de recursos</strong>: Visualizar a lista de grupos de recursos e os respectivos detalhes, incluindo o nome do grupo de recursos, o número de nós de consulta no grupo e as respectivas configurações, etc.</p></li>
 </ul>

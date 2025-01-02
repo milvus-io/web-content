@@ -57,7 +57,7 @@ title: Eseguire Milvus con Docker Compose (Linux)
       </svg>
     </button></h2><p>Milvus fornisce un file di configurazione di Docker Compose nel repository Milvus. Per installare Milvus usando Docker Compose, basta eseguire il comando</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-comment"># Download the configuration file</span>
-$ wget https://github.com/milvus-io/milvus/releases/download/v2.4.19/milvus-standalone-docker-compose.yml -O docker-compose.yml
+$ wget https://github.com/milvus-io/milvus/releases/download/v2.4.20/milvus-standalone-docker-compose.yml -O docker-compose.yml
 
 <span class="hljs-comment"># Start Milvus</span>
 $ <span class="hljs-built_in">sudo</span> docker compose up -d
@@ -68,7 +68,7 @@ Creating milvus-standalone ... <span class="hljs-keyword">done</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <ul>
-<li><p>Se non si riesce a eseguire il comando di cui sopra, verificare se nel sistema è installato Docker Compose V1. In tal caso, si consiglia di migrare a Docker Compose V2, come indicato nelle note di <a href="https://docs.docker.com/compose/">questa pagina</a>.</p></li>
+<li><p>Se non si riesce a eseguire il comando di cui sopra, verificare se il sistema ha installato Docker Compose V1. In tal caso, si consiglia di migrare a Docker Compose V2, come indicato nelle note di <a href="https://docs.docker.com/compose/">questa pagina</a>.</p></li>
 <li><p>Se si riscontrano problemi nell'estrazione dell'immagine, contattateci all'indirizzo <a href="mailto:community@zilliz.com">community@zilliz.com</a> con i dettagli del problema e vi forniremo il supporto necessario.</p></li>
 </ul>
 </div>

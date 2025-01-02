@@ -613,7 +613,7 @@
             "children": []
           },
           {
-            "label": "Cohere",
+            "label": "コヒーレ",
             "id": "rerankers-cohere.md",
             "order": 2,
             "children": []
@@ -1634,63 +1634,75 @@
         "children": []
       },
       {
-        "label": "Milvusによる画像検索",
-        "id": "image_similarity_search.md",
+        "label": "上級RAG",
+        "id": "how_to_enhance_your_rag.md",
         "order": 2,
+        "children": []
+      },
+      {
+        "label": "Milvusによる全文検索",
+        "id": "full_text_search_with_milvus.md",
+        "order": 3,
         "children": []
       },
       {
         "label": "Milvusとのハイブリッド検索",
         "id": "hybrid_search_with_milvus.md",
-        "order": 3,
+        "order": 4,
+        "children": []
+      },
+      {
+        "label": "Milvusによる画像検索",
+        "id": "image_similarity_search.md",
+        "order": 5,
         "children": []
       },
       {
         "label": "マルチモーダルRAG",
         "id": "multimodal_rag_with_milvus.md",
-        "order": 4,
+        "order": 6,
         "children": []
       },
       {
         "label": "MilvusでRAGをグラフ化する",
         "id": "graph_rag_with_milvus.md",
-        "order": 6,
+        "order": 7,
         "children": []
       },
       {
         "label": "文脈検索",
         "id": "contextual_retrieval_with_milvus.md",
-        "order": 5,
+        "order": 8,
         "children": []
       },
       {
         "label": "HDBSCANクラスタリング",
         "id": "hdbscan_clustering_with_milvus.md",
-        "order": 6,
+        "order": 9,
         "children": []
       },
       {
         "label": "マルチモーダル検索にColPaliを使用する",
         "id": "use_ColPali_with_milvus.md",
-        "order": 7,
+        "order": 10,
         "children": []
       },
       {
         "label": "ベクトル可視化",
         "id": "vector_visualization.md",
-        "order": 8,
+        "order": 11,
         "children": []
       },
       {
         "label": "映画推薦",
         "id": "movie_recommendation_with_milvus.md",
-        "order": 9,
+        "order": 12,
         "children": []
       },
       {
         "label": "マトリョーシカ埋め込みによる漏斗探索",
         "id": "funnel_search_with_matryoshka.md",
-        "order": 10,
+        "order": 13,
         "children": []
       },
       {

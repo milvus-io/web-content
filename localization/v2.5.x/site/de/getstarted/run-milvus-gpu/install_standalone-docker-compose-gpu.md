@@ -110,7 +110,7 @@ Creating milvus-standalone ... <span class="hljs-keyword">done</span>
 <li>Der <strong>milvus-standalone-Container</strong> bedient lokal die Ports <strong>19530</strong> mit den Standardeinstellungen und ordnet seine Daten den <strong>Volumes/milvus</strong> im aktuellen Ordner zu.</li>
 </ul></li>
 </ul>
-<p>Mit folgendem Befehl können Sie überprüfen, ob die Container aktiv sind:</p>
+<p>Mit folgendem Befehl können Sie überprüfen, ob die Container laufen und in Betrieb sind:</p>
 <pre><code translate="no" class="language-shell">$ <span class="hljs-built_in">sudo</span> docker compose ps
 
       Name                     Command                  State                            Ports
@@ -119,6 +119,7 @@ milvus-etcd         etcd -advertise-client-url ...   Up             2379/tcp, 23
 milvus-minio        /usr/bin/docker-entrypoint ...   Up (healthy)   9000/tcp
 milvus-standalone   /tini -- milvus run standalone   Up             0.0.0.0:19530-&gt;19530/tcp, 0.0.0.0:9091-&gt;9091/tcp
 <button class="copy-code-btn"></button></code></pre>
+<p>Sie können auch auf die Milvus-WebUI unter <code translate="no">http://127.0.0.1:9091/webui/</code> zugreifen, um mehr über Ihre Milvus-Instanz zu erfahren. Einzelheiten finden Sie unter <a href="/docs/de/milvus-webui.md">Milvus WebUI</a>.</p>
 <p>Wenn Sie Milvus in der Datei docker-compose.yml mehrere GPU-Geräte zugewiesen haben, können Sie angeben, welches GPU-Gerät sichtbar oder zur Verwendung verfügbar ist.</p>
 <p>Machen Sie das GPU-Gerät <code translate="no">0</code> für Milvus sichtbar:</p>
 <pre><code translate="no" class="language-shell">$ CUDA_VISIBLE_DEVICES=0 ./milvus run standalone
@@ -196,10 +197,11 @@ docker start &lt;milvus_container_id&gt;
       </svg>
     </button></h2><p>Nachdem Sie Milvus in Docker installiert haben, können Sie:</p>
 <ul>
-<li><p>Prüfen Sie den <a href="/docs/de/quickstart.md">Schnellstart</a>, um zu sehen, was Milvus kann.</p></li>
-<li><p>Lernen Sie die grundlegenden Funktionen von Milvus kennen:</p>
+<li><p>Prüfen Sie <a href="/docs/de/quickstart.md">Quickstart</a>, um zu sehen, was Milvus alles kann.</p></li>
+<li><p>Prüfen Sie <a href="/docs/de/milvus-webui.md">Milvus WebUI</a>, um mehr über die Milvus-Instanz zu erfahren.</p></li>
+<li><p>Lernen Sie die Grundfunktionen von Milvus kennen:</p>
 <ul>
-<li><a href="/docs/de/manage_databases.md">Verwalten von Datenbanken</a></li>
+<li><a href="/docs/de/manage_databases.md">Datenbanken verwalten</a></li>
 <li><a href="/docs/de/manage-collections.md">Sammlungen verwalten</a></li>
 <li><a href="/docs/de/manage-partitions.md">Partitionen verwalten</a></li>
 <li><a href="/docs/de/insert-update-delete.md">Einfügen, Upsert &amp; Löschen</a></li>
@@ -214,8 +216,9 @@ docker start &lt;milvus_container_id&gt;
 <li><a href="/docs/de/gcp.md">Google Wolke</a></li>
 <li><a href="/docs/de/azure.md">Microsoft Azure</a></li>
 </ul></li>
+<li><p>Entdecken Sie <a href="/docs/de/milvus-webui.md">Milvus WebUI</a>, eine intuitive Webschnittstelle für die Beobachtung und Verwaltung von Milvus.</p></li>
 <li><p>Erkunden Sie <a href="/docs/de/milvus_backup_overview.md">Milvus Backup</a>, ein Open-Source-Tool für Milvus-Datensicherungen.</p></li>
-<li><p><a href="/docs/de/birdwatcher_overview.md">Birdwatcher</a>, ein Open-Source-Tool zur Fehlersuche in Milvus und für dynamische Konfigurations-Updates.</p></li>
-<li><p>Entdecken Sie <a href="https://milvus.io/docs/attu.md">Attu</a>, ein Open-Source-GUI-Tool für die intuitive Milvus-Verwaltung.</p></li>
+<li><p><a href="/docs/de/birdwatcher_overview.md">Birdwatcher</a>, ein Open-Source-Tool zur Fehlersuche in Milvus und zur dynamischen Konfigurationsaktualisierung.</p></li>
+<li><p>Entdecken Sie <a href="https://milvus.io/docs/attu.md">Attu</a>, ein Open-Source-GUI-Tool für intuitives Milvus-Management.</p></li>
 <li><p><a href="/docs/de/monitor.md">Überwachen Sie Milvus mit Prometheus</a>.</p></li>
 </ul>

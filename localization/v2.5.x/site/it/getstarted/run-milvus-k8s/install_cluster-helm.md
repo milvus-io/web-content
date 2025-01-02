@@ -129,7 +129,7 @@ helm upgrade my-release zilliztech/milvus
 <h3 id="2-Check-Milvus-cluster-status" class="common-anchor-header">2. Controllare lo stato del cluster Milvus</h3><p>Eseguite il seguente comando per verificare lo stato di tutti i pod nel vostro cluster Milvus.</p>
 <pre><code translate="no">$ kubectl <span class="hljs-keyword">get</span> pods
 <button class="copy-code-btn"></button></code></pre>
-<p>Una volta che tutti i pod sono in esecuzione, l'output del comando precedente dovrebbe essere simile al seguente:</p>
+<p>Una volta che tutti i pod sono in funzione, l'output del comando precedente dovrebbe essere simile al seguente:</p>
 <pre><code translate="no">NAME                                             READY  STATUS   RESTARTS  AGE
 my-release-etcd-0                                1/1    Running   0        3m23s
 my-release-etcd-1                                1/1    Running   0        3m23s
@@ -151,12 +151,13 @@ my-release-pulsar-proxy-6fbd75db75-nhg4v         1/1    Running   0        3m23s
 my-release-pulsar-zookeeper-0                    1/1    Running   0        3m23s
 my-release-pulsar-zookeeper-metadata-98zbr       0/1   Completed  0        3m24s
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="3-Forward-a-local-port-to-Milvus" class="common-anchor-header">3. Inoltrare una porta locale a Milvus</h3><p>Eseguite il seguente comando per ottenere la porta su cui il vostro cluster Milvus serve.</p>
+<p>È anche possibile accedere alla Milvus WebUI all'indirizzo <code translate="no">http://127.0.0.1:9091/webui/</code> per saperne di più sulla propria istanza Milvus. Per maggiori dettagli, consultare <a href="/docs/it/milvus-webui.md">Milvus WebUI</a>.</p>
+<h3 id="3-Forward-a-local-port-to-Milvus" class="common-anchor-header">3. Inoltrare una porta locale a Milvus</h3><p>Eseguite il seguente comando per ottenere la porta su cui serve il vostro cluster Milvus.</p>
 <pre><code translate="no" class="language-bash">$ kubectl <span class="hljs-keyword">get</span> pod my-release-milvus-proxy<span class="hljs-number">-6b</span>d7f5587-ds2xv --template
 =<span class="hljs-string">&#x27;{{(index (index .spec.containers 0).ports 0).containerPort}}{{&quot;\n&quot;}}&#x27;</span>
 <span class="hljs-number">19530</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>L'output mostra che l'istanza di Milvus serve sulla porta predefinita <strong>19530</strong>.</p>
+<p>L'output mostra che l'istanza Milvus serve sulla porta predefinita <strong>19530</strong>.</p>
 <div class="alert note">
 <p>Se avete distribuito Milvus in modalità standalone, cambiate il nome del pod da <code translate="no">my-release-milvus-proxy-xxxxxxxxxx-xxxxx</code> a <code translate="no">my-release-milvus-xxxxxxxxxx-xxxxx</code>.</p>
 </div>
@@ -165,10 +166,54 @@ my-release-pulsar-zookeeper-metadata-98zbr       0/1   Completed  0        3m24s
 <span class="hljs-title class_">Forwarding</span> <span class="hljs-keyword">from</span> <span class="hljs-number">127.0</span><span class="hljs-number">.0</span><span class="hljs-number">.1</span>:<span class="hljs-number">27017</span> -&gt; <span class="hljs-number">19530</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>Facoltativamente, si può usare <code translate="no">:19530</code> invece di <code translate="no">27017:19530</code> nel comando precedente per lasciare che <code translate="no">kubectl</code> assegni una porta locale al posto dell'utente, in modo da non dover gestire conflitti di porte.</p>
-<p>Per impostazione predefinita, il port-forwarding di kubectl ascolta solo su <code translate="no">localhost</code>. Usate il flag <code translate="no">address</code> se volete che Milvus ascolti su uno o tutti gli indirizzi IP selezionati. Il comando seguente fa sì che il port-forward ascolti tutti gli indirizzi IP della macchina host.</p>
+<p>Per impostazione predefinita, il port-forwarding di kubectl ascolta solo su <code translate="no">localhost</code>. Usate il flag <code translate="no">address</code> se volete che Milvus ascolti su uno o tutti gli indirizzi IP selezionati. Il comando seguente fa sì che il port-forward sia in ascolto su tutti gli indirizzi IP del computer host.</p>
+<p>Ora è possibile collegarsi a Milvus utilizzando la porta inoltrata.</p>
+<h2 id="Access-Milvus-WebUI" class="common-anchor-header">Accesso all'interfaccia web di Milvus<button data-href="#Access-Milvus-WebUI" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>Milvus viene fornito con uno strumento GUI integrato, chiamato Milvus WebUI, a cui si può accedere tramite il browser. Milvus WebUI migliora l'osservabilità del sistema con un'interfaccia semplice e intuitiva. Con Milvus Web UI si possono osservare le statistiche e le metriche dei componenti e delle dipendenze di Milvus, controllare i dettagli del database e della raccolta ed elencare le configurazioni dettagliate di Milvus. Per maggiori informazioni su Milvus Web UI, vedere <a href="/docs/it/milvus-webui.md">Milvus WebUI</a>.</p>
+<p>Per abilitare l'accesso all'interfaccia web di Milvus, è necessario effettuare il port-forward del pod proxy su una porta locale.</p>
+<pre><code translate="no" class="language-shell">$ kubectl port-forward --address <span class="hljs-number">0.0</span><span class="hljs-number">.0</span><span class="hljs-number">.0</span> service/my-release-milvus <span class="hljs-number">27018</span>:<span class="hljs-number">9091</span>
+<span class="hljs-title class_">Forwarding</span> <span class="hljs-keyword">from</span> <span class="hljs-number">0.0</span><span class="hljs-number">.0</span><span class="hljs-number">.0</span>:<span class="hljs-number">27018</span> -&gt; <span class="hljs-number">9091</span>
+<button class="copy-code-btn"></button></code></pre>
+<p>Ora è possibile accedere a Milvus Web UI all'indirizzo <code translate="no">http://localhost:27018</code>.</p>
 <pre><code translate="no" class="language-bash">$ kubectl port-forward --address <span class="hljs-number">0.0</span><span class="hljs-number">.0</span><span class="hljs-number">.0</span> service/my-release-milvus <span class="hljs-number">27017</span>:<span class="hljs-number">19530</span>
 <span class="hljs-title class_">Forwarding</span> <span class="hljs-keyword">from</span> <span class="hljs-number">0.0</span><span class="hljs-number">.0</span><span class="hljs-number">.0</span>:<span class="hljs-number">27017</span> -&gt; <span class="hljs-number">19530</span>
 <button class="copy-code-btn"></button></code></pre>
+<p>Ora è possibile connettersi a Milvus utilizzando la porta inoltrata.</p>
+<h2 id="Access-Milvus-WebUI" class="common-anchor-header">Accesso all'interfaccia web di Milvus<button data-href="#Access-Milvus-WebUI" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>Milvus viene fornito con uno strumento GUI integrato, chiamato Milvus WebUI, a cui si può accedere tramite il browser. Milvus WebUI migliora l'osservabilità del sistema con un'interfaccia semplice e intuitiva. Con Milvus Web UI si possono osservare le statistiche e le metriche dei componenti e delle dipendenze di Milvus, controllare i dettagli del database e della raccolta ed elencare le configurazioni dettagliate di Milvus. Per maggiori informazioni su Milvus Web UI, vedere <a href="/docs/it/milvus-webui.md">Milvus WebUI</a>.</p>
+<p>Per abilitare l'accesso all'interfaccia web di Milvus, è necessario effettuare il port-forward del pod proxy su una porta locale.</p>
+<pre><code translate="no" class="language-shell">$ kubectl port-forward --address <span class="hljs-number">0.0</span><span class="hljs-number">.0</span><span class="hljs-number">.0</span> service/my-release-milvus <span class="hljs-number">27018</span>:<span class="hljs-number">9091</span>
+<span class="hljs-title class_">Forwarding</span> <span class="hljs-keyword">from</span> <span class="hljs-number">0.0</span><span class="hljs-number">.0</span><span class="hljs-number">.0</span>:<span class="hljs-number">27018</span> -&gt; <span class="hljs-number">9091</span>
+<button class="copy-code-btn"></button></code></pre>
+<p>Ora è possibile accedere all'interfaccia web di Milvus all'indirizzo <code translate="no">http://localhost:27018</code>.</p>
 <h2 id="Offline-install" class="common-anchor-header">Installazione offline<button data-href="#Offline-install" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -185,7 +230,7 @@ my-release-pulsar-zookeeper-metadata-98zbr       0/1   Completed  0        3m24s
         ></path>
       </svg>
     </button></h2><p>Se vi trovate in un ambiente con limitazioni di rete, seguite la procedura di questa sezione per avviare un cluster Milvus.</p>
-<h3 id="1-Get-Milvus-manifest" class="common-anchor-header">1. Ottenere il manifesto di Milvus</h3><p>Eseguite il seguente comando per ottenere il manifest di Milvus.</p>
+<h3 id="1-Get-Milvus-manifest" class="common-anchor-header">1. Ottenere il manifesto di Milvus</h3><p>Eseguire il seguente comando per ottenere il manifest di Milvus.</p>
 <pre><code translate="no" class="language-shell">$ helm template my-release milvus/milvus &gt; milvus_manifest.yaml
 <button class="copy-code-btn"></button></code></pre>
 <p>Il comando precedente esegue il rendering dei modelli di grafico per un cluster Milvus e salva l'output in un file di manifest chiamato <code translate="no">milvus_manifest.yaml</code>. Utilizzando questo manifest, è possibile installare un cluster Milvus con i suoi componenti e le sue dipendenze in pod separati.</p>
@@ -282,7 +327,8 @@ $ helm upgrade my-release zilliztech/milvus
 <li><a href="/docs/it/gcp.md">Google Cloud</a></li>
 <li><a href="/docs/it/azure.md">Microsoft Azure</a></li>
 </ul></li>
-<li><p>Esplorate <a href="/docs/it/milvus_backup_overview.md">Milvus Backup</a>, uno strumento open-source per il backup dei dati di Milvus.</p></li>
+<li><p>Esplorate <a href="/docs/it/milvus-webui.md">Milvus WebUI</a>, un'interfaccia web intuitiva per l'osservabilità e la gestione di Milvus.</p></li>
+<li><p>Esplorate <a href="/docs/it/milvus_backup_overview.md">Milvus Backup</a>, uno strumento open-source per il backup dei dati Milvus.</p></li>
 <li><p>Esplorate <a href="/docs/it/birdwatcher_overview.md">Birdwatcher</a>, uno strumento open-source per il debug di Milvus e gli aggiornamenti dinamici della configurazione.</p></li>
 <li><p>Esplorate <a href="https://milvus.io/docs/attu.md">Attu</a>, uno strumento open-source per la gestione intuitiva di Milvus.</p></li>
 <li><p><a href="/docs/it/monitor.md">Monitorate Milvus con Prometheus</a>.</p></li>

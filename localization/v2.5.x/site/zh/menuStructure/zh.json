@@ -1389,6 +1389,12 @@
             "children": []
           }
         ]
+      },
+      {
+        "label": "Milvus 网络用户界面",
+        "id": "milvus-webui.md",
+        "order": "12",
+        "children": []
       }
     ]
   },
@@ -1423,12 +1429,6 @@
             "children": []
           }
         ]
-      },
-      {
-        "label": "Milvus 网络用户界面",
-        "id": "milvus-webui.md",
-        "order": "1",
-        "children": []
       },
       {
         "label": "Milvus 后备电源",

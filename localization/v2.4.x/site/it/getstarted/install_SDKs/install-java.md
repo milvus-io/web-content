@@ -63,13 +63,13 @@ title: Installare l'SDK Milvus Java
 <pre><code translate="no" class="language-xml">&lt;dependency&gt;
     &lt;groupId&gt;io.milvus&lt;/groupId&gt;
     &lt;artifactId&gt;milvus-sdk-java&lt;/artifactId&gt;
-    &lt;version&gt;2.4.8&lt;/version&gt;
+    &lt;version&gt;2.4.10&lt;/version&gt;
 &lt;/dependency&gt;
 <button class="copy-code-btn"></button></code></pre>
 <ul>
 <li>Gradle/Grails</li>
 </ul>
-<pre><code translate="no">implementation <span class="hljs-string">&#x27;io.milvus:milvus-sdk-java:2.4.8&#x27;</span>
+<pre><code translate="no">implementation <span class="hljs-string">&#x27;io.milvus:milvus-sdk-java:2.4.10&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Whats-next" class="common-anchor-header">Cosa succede dopo<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"

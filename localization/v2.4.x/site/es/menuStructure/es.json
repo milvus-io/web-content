@@ -839,7 +839,7 @@
             "children": []
           },
           {
-            "label": "Configurar Chunk Cache",
+            "label": "Configurar la caché de trozos",
             "id": "chunk_cache.md",
             "order": 3,
             "children": []
@@ -1634,63 +1634,75 @@
         "children": []
       },
       {
-        "label": "Búsqueda de imágenes con Milvus",
-        "id": "image_similarity_search.md",
+        "label": "RAG avanzado",
+        "id": "how_to_enhance_your_rag.md",
         "order": 2,
+        "children": []
+      },
+      {
+        "label": "Búsqueda de texto completo con Milvus",
+        "id": "full_text_search_with_milvus.md",
+        "order": 3,
         "children": []
       },
       {
         "label": "Búsqueda híbrida con Milvus",
         "id": "hybrid_search_with_milvus.md",
-        "order": 3,
+        "order": 4,
+        "children": []
+      },
+      {
+        "label": "Búsqueda de imágenes con Milvus",
+        "id": "image_similarity_search.md",
+        "order": 5,
         "children": []
       },
       {
         "label": "RAG multimodal",
         "id": "multimodal_rag_with_milvus.md",
-        "order": 4,
+        "order": 6,
         "children": []
       },
       {
         "label": "Gráfico RAG con Milvus",
         "id": "graph_rag_with_milvus.md",
-        "order": 6,
+        "order": 7,
         "children": []
       },
       {
         "label": "Recuperación contextual",
         "id": "contextual_retrieval_with_milvus.md",
-        "order": 5,
+        "order": 8,
         "children": []
       },
       {
         "label": "Agrupación HDBSCAN",
         "id": "hdbscan_clustering_with_milvus.md",
-        "order": 6,
+        "order": 9,
         "children": []
       },
       {
         "label": "Utilice ColPali para la recuperación multimodal",
         "id": "use_ColPali_with_milvus.md",
-        "order": 7,
+        "order": 10,
         "children": []
       },
       {
         "label": "Visualización vectorial",
         "id": "vector_visualization.md",
-        "order": 8,
+        "order": 11,
         "children": []
       },
       {
         "label": "Recomendación de películas",
         "id": "movie_recommendation_with_milvus.md",
-        "order": 9,
+        "order": 12,
         "children": []
       },
       {
         "label": "Búsqueda en embudo con incrustaciones de matrioskas",
         "id": "funnel_search_with_matryoshka.md",
-        "order": 10,
+        "order": 13,
         "children": []
       },
       {

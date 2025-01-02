@@ -19,6 +19,40 @@ title: Release Notes
         ></path>
       </svg>
     </button></h1><p>Find out what’s new in Milvus! This page summarizes new features, improvements, known issues, and bug fixes in each release. You can find the release notes for each released version after v2.4.0 in this section. We suggest that you regularly visit this page to learn about updates.</p>
+<h2 id="v2420" class="common-anchor-header">v2.4.20<button data-href="#v2420" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>Release Date: Janurary 2, 2025</p>
+<table>
+<thead>
+<tr><th>Milvus version</th><th>Python SDK version</th><th>Java SDK version</th><th>Node.js SDK version</th></tr>
+</thead>
+<tbody>
+<tr><td>2.4.20</td><td>2.4.13</td><td>2.4.10</td><td>2.4.10</td></tr>
+</tbody>
+</table>
+<p>Milvus 2.4.20 addresses several critical issues, including fixing mmap for sparse index, resolving the failure to parse the correct database name when altering collection fields, and preventing deadlocks in multiple compaction tasks within the scheduler. Additionally, this version introduces an enhancement that allows adjustment of the system limit for maximum varchar length through a configuration item in the YAML file. We highly recommend upgrading to this version for improved stability and reliability.</p>
+<h3 id="Improvements" class="common-anchor-header">Improvements</h3><ul>
+<li>Added param for tuning max varchar length (<a href="https://github.com/milvus-io/milvus/pull/38890">#38890</a>)</li>
+</ul>
+<h3 id="Bug-fixes" class="common-anchor-header">Bug fixes</h3><ul>
+<li>Enabled mmap for sparse index (<a href="https://github.com/milvus-io/milvus/pull/38849">#38849</a>)</li>
+<li>Fixed altercollectionfield interceptor dbname (<a href="https://github.com/milvus-io/milvus/pull/38664">#38664</a>)</li>
+<li>Released compaction task lock when return function (<a href="https://github.com/milvus-io/milvus/pull/38857">#38857</a>)</li>
+<li>Retrieve plan on heap was used after free when reduce (<a href="https://github.com/milvus-io/milvus/pull/38842">#38842</a>)</li>
+</ul>
 <h2 id="v2419" class="common-anchor-header">v2.4.19<button data-href="#v2419" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

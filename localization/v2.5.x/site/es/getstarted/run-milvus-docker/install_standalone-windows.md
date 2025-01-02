@@ -258,3 +258,44 @@ Switching to windows engine: Post <span class="hljs-string">&quot;http://ipc/eng
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/milvus-read-config-fails-02.png" alt="List Milvus config files" class="doc-image" id="list-milvus-config-files" />
    </span> <span class="img-wrapper"> <span>Listar los archivos de configuración de Milvus</span> </span></p>
 <p></p>
+<h2 id="Whats-next" class="common-anchor-header">Lo que sigue<button data-href="#Whats-next" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>Habiendo instalado Milvus en Docker, puede:</p>
+<ul>
+<li><p>Comprobar <a href="/docs/es/quickstart.md">Quickstart</a> para ver lo que Milvus puede hacer.</p></li>
+<li><p>Aprender las operaciones básicas de Milvus:</p>
+<ul>
+<li><a href="/docs/es/manage_databases.md">Gestionar bases de datos</a></li>
+<li><a href="/docs/es/manage-collections.md">Gestionar colecciones</a></li>
+<li><a href="/docs/es/manage-partitions.md">Gestionar Particiones</a></li>
+<li><a href="/docs/es/insert-update-delete.md">Insertar, Subinsertar y Eliminar</a></li>
+<li><a href="/docs/es/single-vector-search.md">Búsqueda monovectorial</a></li>
+<li><a href="/docs/es/multi-vector-search.md">Búsqueda Híbrida</a></li>
+</ul></li>
+<li><p><a href="/docs/es/upgrade_milvus_cluster-helm.md">Actualice Milvus utilizando Helm Chart</a>.</p></li>
+<li><p><a href="/docs/es/scaleout.md">Escale su cluster Milvus</a>.</p></li>
+<li><p>Despliegue su clúster Milvu en nubes:</p>
+<ul>
+<li><a href="/docs/es/eks.md">Amazon EKS</a></li>
+<li><a href="/docs/es/gcp.md">Google Cloud</a></li>
+<li><a href="/docs/es/azure.md">Microsoft Azure</a></li>
+</ul></li>
+<li><p>Explore Milvus <a href="/docs/es/milvus-webui.md">WebUI</a>, una interfaz web intuitiva para la observabilidad y gestión de Milvus.</p></li>
+<li><p>Explore Milvus <a href="/docs/es/milvus_backup_overview.md">Backup</a>, una herramienta de código abierto para las copias de seguridad de los datos de Milvus.</p></li>
+<li><p>Explore <a href="/docs/es/birdwatcher_overview.md">Birdwatcher</a>, una herramienta de código abierto para depurar Milvus y actualizaciones de configuración dinámicas.</p></li>
+<li><p>Explore <a href="https://milvus.io/docs/attu.md">Attu</a>, una herramienta GUI de código abierto para la gestión intuitiva de Milvus.</p></li>
+<li><p><a href="/docs/es/monitor.md">Supervise Milvus con Prometheus</a>.</p></li>
+</ul>

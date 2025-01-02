@@ -65,7 +65,7 @@ NAME                  PROVISIONER                  RECLAIMPOLICY    VOLUMEBIINDI
 <li><p>安装 Milvus 之前，建议使用<a href="https://milvus.io/tools/sizing">Milvus 大小工具</a>，根据数据大小估算硬件需求。这有助于确保 Milvus 安装的最佳性能和资源分配。</p></li>
 </ul>
 <div class="alert note">
-<p>如果您在拉动图像时遇到任何问题，请通过<a href="mailto:community@zilliz.com">community@zilliz.com</a>联系我们，并提供有关问题的详细信息，我们将为您提供必要的支持。</p>
+<p>如果您在绘制图像时遇到任何问题，请通过<a href="mailto:community@zilliz.com">community@zilliz.com</a>联系我们，并提供有关问题的详细信息，我们将为您提供必要的支持。</p>
 </div>
 <h2 id="Install-Milvus-Helm-Chart" class="common-anchor-header">安装 Milvus Helm 图表<button data-href="#Install-Milvus-Helm-Chart" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -92,7 +92,7 @@ helm repo update
 <span class="hljs-comment"># upgrade existing helm release</span>
 helm upgrade my-release zilliztech/milvus
 <button class="copy-code-btn"></button></code></pre>
-<p>存档软件源仍可用于 4.0.31 之前的图表。对于后续版本，请使用新版本库。</p>
+<p>存档软件源仍可用于 4.0.31 之前的图表。对于以后的版本，请使用新版本库。</p>
 </div>
 <p>然后从软件源中获取 Milvus 图表，如下所示：</p>
 <pre><code translate="no">$ helm repo update
@@ -151,12 +151,13 @@ my-release-pulsar-proxy-6fbd75db75-nhg4v         1/1    Running   0        3m23s
 my-release-pulsar-zookeeper-0                    1/1    Running   0        3m23s
 my-release-pulsar-zookeeper-metadata-98zbr       0/1   Completed  0        3m24s
 <button class="copy-code-btn"></button></code></pre>
+<p>您还可以访问 Milvus WebUI（网址：<code translate="no">http://127.0.0.1:9091/webui/</code> ），了解有关 Milvus 实例的更多信息。有关详细信息，请参阅<a href="/docs/zh/milvus-webui.md">Milvus WebUI</a>。</p>
 <h3 id="3-Forward-a-local-port-to-Milvus" class="common-anchor-header">3.将本地端口转发给 Milvus</h3><p>运行以下命令获取 Milvus 集群的服务端口。</p>
 <pre><code translate="no" class="language-bash">$ kubectl <span class="hljs-keyword">get</span> pod my-release-milvus-proxy<span class="hljs-number">-6b</span>d7f5587-ds2xv --template
 =<span class="hljs-string">&#x27;{{(index (index .spec.containers 0).ports 0).containerPort}}{{&quot;\n&quot;}}&#x27;</span>
 <span class="hljs-number">19530</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>输出结果显示，Milvus 实例的默认服务端口为<strong>19530</strong>。</p>
+<p>输出结果显示 Milvus 实例的默认端口为<strong>19530</strong>。</p>
 <div class="alert note">
 <p>如果以独立模式部署了 Milvus，请将 pod 名称从<code translate="no">my-release-milvus-proxy-xxxxxxxxxx-xxxxx</code> 更改为<code translate="no">my-release-milvus-xxxxxxxxxx-xxxxx</code> 。</p>
 </div>
@@ -165,10 +166,54 @@ my-release-pulsar-zookeeper-metadata-98zbr       0/1   Completed  0        3m24s
 <span class="hljs-title class_">Forwarding</span> <span class="hljs-keyword">from</span> <span class="hljs-number">127.0</span><span class="hljs-number">.0</span><span class="hljs-number">.1</span>:<span class="hljs-number">27017</span> -&gt; <span class="hljs-number">19530</span>
 <button class="copy-code-btn"></button></code></pre>
 <p>可以选择在上述命令中使用<code translate="no">:19530</code> 而不是<code translate="no">27017:19530</code> ，让<code translate="no">kubectl</code> 为你分配一个本地端口，这样你就不必管理端口冲突了。</p>
-<p>默认情况下，kubectl 的端口转发只监听<code translate="no">localhost</code> 。如果想让 Milvus 监听所选或所有 IP 地址，请使用<code translate="no">address</code> 标志。下面的命令将使端口转发监听主机上的所有 IP 地址。</p>
+<p>默认情况下，kubectl 的端口转发只监听<code translate="no">localhost</code> 。如果想让 Milvus 监听所选或所有 IP 地址，请使用<code translate="no">address</code> 标志。下面的命令使端口转发监听主机上的所有 IP 地址。</p>
+<p>现在，你可以使用转发的端口连接 Milvus。</p>
+<h2 id="Access-Milvus-WebUI" class="common-anchor-header">访问 Milvus WebUI<button data-href="#Access-Milvus-WebUI" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>Milvus 配备了一个名为 Milvus WebUI 的内置图形用户界面工具，可通过浏览器访问。Milvus Web UI 采用简单直观的界面，增强了系统的可观察性。你可以使用 Milvus Web UI 观察 Milvus 组件和依赖关系的统计和指标，检查数据库和 Collections 的详细信息，并列出详细的 Milvus 配置。有关 Milvus Web UI 的详细信息，请参阅<a href="/docs/zh/milvus-webui.md">Milvus WebUI</a>。</p>
+<p>要启用对 Milvus Web UI 的访问，需要将代理 pod 的端口转发到本地端口。</p>
+<pre><code translate="no" class="language-shell">$ kubectl port-forward --address <span class="hljs-number">0.0</span><span class="hljs-number">.0</span><span class="hljs-number">.0</span> service/my-release-milvus <span class="hljs-number">27018</span>:<span class="hljs-number">9091</span>
+<span class="hljs-title class_">Forwarding</span> <span class="hljs-keyword">from</span> <span class="hljs-number">0.0</span><span class="hljs-number">.0</span><span class="hljs-number">.0</span>:<span class="hljs-number">27018</span> -&gt; <span class="hljs-number">9091</span>
+<button class="copy-code-btn"></button></code></pre>
+<p>现在，你可以通过<code translate="no">http://localhost:27018</code> 访问 Milvus Web UI。</p>
 <pre><code translate="no" class="language-bash">$ kubectl port-forward --address <span class="hljs-number">0.0</span><span class="hljs-number">.0</span><span class="hljs-number">.0</span> service/my-release-milvus <span class="hljs-number">27017</span>:<span class="hljs-number">19530</span>
 <span class="hljs-title class_">Forwarding</span> <span class="hljs-keyword">from</span> <span class="hljs-number">0.0</span><span class="hljs-number">.0</span><span class="hljs-number">.0</span>:<span class="hljs-number">27017</span> -&gt; <span class="hljs-number">19530</span>
 <button class="copy-code-btn"></button></code></pre>
+<p>现在，您可以使用转发的端口连接 Milvus。</p>
+<h2 id="Access-Milvus-WebUI" class="common-anchor-header">访问 Milvus WebUI<button data-href="#Access-Milvus-WebUI" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>Milvus 配备了一个名为 Milvus WebUI 的内置图形用户界面工具，你可以通过浏览器访问它。Milvus Web UI 采用简单直观的界面，增强了系统的可观察性。你可以使用 Milvus Web UI 观察 Milvus 组件和依赖关系的统计和指标，检查数据库和 Collections 的详细信息，并列出详细的 Milvus 配置。有关 Milvus Web UI 的详细信息，请参阅<a href="/docs/zh/milvus-webui.md">Milvus WebUI</a>。</p>
+<p>要启用对 Milvus Web UI 的访问，需要将代理 pod 的端口转发到本地端口。</p>
+<pre><code translate="no" class="language-shell">$ kubectl port-forward --address <span class="hljs-number">0.0</span><span class="hljs-number">.0</span><span class="hljs-number">.0</span> service/my-release-milvus <span class="hljs-number">27018</span>:<span class="hljs-number">9091</span>
+<span class="hljs-title class_">Forwarding</span> <span class="hljs-keyword">from</span> <span class="hljs-number">0.0</span><span class="hljs-number">.0</span><span class="hljs-number">.0</span>:<span class="hljs-number">27018</span> -&gt; <span class="hljs-number">9091</span>
+<button class="copy-code-btn"></button></code></pre>
+<p>现在，你可以通过<code translate="no">http://localhost:27018</code> 访问 Milvus Web UI。</p>
 <h2 id="Offline-install" class="common-anchor-header">离线安装<button data-href="#Offline-install" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -184,11 +229,11 @@ my-release-pulsar-zookeeper-metadata-98zbr       0/1   Completed  0        3m24s
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>如果您处于网络受限的环境，请按照本节的步骤启动 Milvus 群集。</p>
+    </button></h2><p>如果您处于网络受限的环境，请按照本节的步骤启动 Milvus 集群。</p>
 <h3 id="1-Get-Milvus-manifest" class="common-anchor-header">1.获取 Milvus 清单</h3><p>运行以下命令获取 Milvus 清单。</p>
 <pre><code translate="no" class="language-shell">$ helm template my-release milvus/milvus &gt; milvus_manifest.yaml
 <button class="copy-code-btn"></button></code></pre>
-<p>上述命令为 Milvus 群集渲染图表模板，并将输出保存到名为<code translate="no">milvus_manifest.yaml</code> 的清单文件中。使用此清单，你可以在单独的 pod 中安装 Milvus 群集及其组件和依赖项。</p>
+<p>上述命令会渲染 Milvus 群集的图表模板，并将输出保存到名为<code translate="no">milvus_manifest.yaml</code> 的清单文件中。使用此清单，你可以在单独的 pod 中安装 Milvus 群集及其组件和依赖项。</p>
 <div class="alert note">
 <ul>
 <li>要在独立模式下安装 Milvus 实例（所有 Milvus 组件都包含在一个 pod 中），应改成运行<code translate="no">helm template my-release --set cluster.enabled=false --set etcd.replicaCount=1 --set minio.mode=standalone --set pulsar.enabled=false milvus/milvus &gt; milvus_manifest.yaml</code> ，为独立模式下的 Milvus 实例渲染图表模板。</li>
@@ -282,8 +327,9 @@ $ helm upgrade my-release zilliztech/milvus
 <li><a href="/docs/zh/gcp.md">谷歌云</a></li>
 <li><a href="/docs/zh/azure.md">微软 Azure</a></li>
 </ul></li>
+<li><p>探索<a href="/docs/zh/milvus-webui.md">Milvus WebUI</a>，一个用于 Milvus 可观察性和管理的直观 Web 界面。</p></li>
 <li><p>探索<a href="/docs/zh/milvus_backup_overview.md">Milvus 备份</a>，一个用于 Milvus 数据备份的开源工具。</p></li>
 <li><p>探索<a href="/docs/zh/birdwatcher_overview.md">Birdwatcher</a>，用于调试 Milvus 和动态配置更新的开源工具。</p></li>
-<li><p>探索<a href="https://milvus.io/docs/attu.md">Attu</a>，一款用于直观管理 Milvus 的开源图形用户界面工具。</p></li>
+<li><p>探索<a href="https://milvus.io/docs/attu.md">Attu</a>，一个用于直观管理 Milvus 的开源图形用户界面工具。</p></li>
 <li><p><a href="/docs/zh/monitor.md">使用 Prometheus 监控 Milvus</a>。</p></li>
 </ul>

@@ -49,9 +49,10 @@ title: Milvus WebUI
 <tr><td>Installazione</td><td>Integrato</td><td>Strumento autonomo</td><td>Strumento autonomo</td></tr>
 <tr><td>Dipendenze</td><td>Milvus</td><td>Milvus / etcd</td><td>Milvus</td></tr>
 <tr><td>Funzionalità principali</td><td>Ambiente di runtime, dettagli di database/collezione, segmenti, canali, attività e richieste di query lente</td><td>Ispezione dei metadati ed esecuzione dell'API Milvus</td><td>Gestione del database e attività operative</td></tr>
+<tr><td>Disponibile da</td><td>v2.5.0</td><td>v2.0.0</td><td>v0.1.8</td></tr>
 </tbody>
 </table>
-<p>È possibile accedere all'interfaccia web di Milvus utilizzando il seguente URL:</p>
+<p>A partire dalla v2.5.0, è possibile accedere a Milvus Web UI utilizzando il seguente URL su un'istanza Milvus in esecuzione:</p>
 <pre><code translate="no">http://<span class="hljs-variable">${MILVUS_PROXY_IP}</span>:9091/webui
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Features" class="common-anchor-header">Caratteristiche<button data-href="#Features" class="anchor-icon" translate="no">
@@ -76,7 +77,7 @@ title: Milvus WebUI
    </span> <span class="img-wrapper"> <span>Panoramica di Milvus Web UI</span> </span></p>
 <ul>
 <li><p><a href="#Home">Casa</a></p>
-<p>È possibile trovare informazioni sull'istanza Milvus in esecuzione, sui suoi componenti, sui client collegati e sulle dipendenze.</p></li>
+<p>Si possono trovare informazioni sull'istanza Milvus in esecuzione, sui suoi componenti, sui client collegati e sulle dipendenze.</p></li>
 <li><p><a href="#Collections">Collezioni</a></p>
 <p>È possibile visualizzare l'elenco dei database e delle collezioni attualmente presenti in Milvus e controllarne i dettagli.</p></li>
 <li><p><a href="#Query">Query</a></p>
@@ -264,7 +265,7 @@ title: Milvus WebUI
     </button></h2><p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/webui-configurations.png" alt="Milvus Web UI Configurations Page" class="doc-image" id="milvus-web-ui-configurations-page" />
-   </span> <span class="img-wrapper"> <span>Pagina Configurazioni dell'interfaccia web di Milvus</span> </span></p>
+   </span> <span class="img-wrapper"> <span>Pagina delle configurazioni dell'interfaccia web di Milvus</span> </span></p>
 <ul>
 <li><strong>Configurazioni</strong>: Visualizza l'elenco delle configurazioni del runtime Milvus e i loro valori.</li>
 </ul>

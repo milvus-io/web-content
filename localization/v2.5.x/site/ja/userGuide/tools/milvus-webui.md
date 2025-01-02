@@ -48,9 +48,10 @@ title: Milvus WebUI
 <tr><td>インストール</td><td>組み込み</td><td>スタンドアロンツール</td><td>スタンドアロンツール</td></tr>
 <tr><td>依存関係</td><td>Milvus</td><td>Milvus / etcd</td><td>Milvus</td></tr>
 <tr><td>主な機能</td><td>実行環境、データベース/コレクションの詳細、セグメント、チャンネル、タスク、スロークエリリクエスト</td><td>メタデータの検査とMilvus APIの実行</td><td>データベース管理および運用タスク</td></tr>
+<tr><td>バージョン</td><td>v2.5.0</td><td>v2.0.0</td><td>v0.1.8</td></tr>
 </tbody>
 </table>
-<p>Milvus Web UIには以下のURLからアクセスできます：</p>
+<p>v2.5.0より、稼働中のMilvusインスタンスから以下のURLでMilvus Web UIにアクセスできるようになりました：</p>
 <pre><code translate="no">http://<span class="hljs-variable">${MILVUS_PROXY_IP}</span>:9091/webui
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Features" class="common-anchor-header">機能<button data-href="#Features" class="anchor-icon" translate="no">
@@ -75,7 +76,7 @@ title: Milvus WebUI
    </span> <span class="img-wrapper"> <span>Milvus Web UIの概要</span> </span></p>
 <ul>
 <li><p><a href="#Home">ホーム</a></p>
-<p>現在実行中のMilvusインスタンス、そのコンポーネント、接続クライアント、依存関係に関する情報を確認することができます。</p></li>
+<p>現在稼働中のMilvusインスタンス、そのコンポーネント、接続クライアント、依存関係に関する情報を確認することができます。</p></li>
 <li><p><a href="#Collections">コレクション</a></p>
 <p>現在Milvusに登録されているデータベースやコレクションの一覧を表示し、その詳細を確認することができます。</p></li>
 <li><p><a href="#Query">クエリ</a></p>

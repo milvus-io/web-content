@@ -56,7 +56,7 @@ title: Docker에서 Milvus 실행(Linux)
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus는 Docker 컨테이너로 설치하기 위한 설치 스크립트를 제공합니다. Microsoft Windows에 Docker Desktop을 설치한 후에는 <strong>관리자</strong> 모드의 PowerShell 또는 Windows 명령 프롬프트와 WSL 2에서 Docker CLI에 액세스할 수 있습니다. </p>
+    </button></h2><p>Milvus는 Docker 컨테이너로 설치할 수 있는 설치 스크립트를 제공합니다. Microsoft Windows에 Docker Desktop을 설치한 후에는 <strong>관리자</strong> 모드의 PowerShell 또는 Windows 명령 프롬프트에서 그리고 WSL 2에서 Docker CLI에 액세스할 수 있습니다. </p>
 <h3 id="From-PowerShell-or-Windows-Command-Prompt​" class="common-anchor-header">PowerShell 또는 Windows 명령 프롬프트에서</h3><p>PowerShell 또는 Windows 명령 프롬프트에 더 익숙한 경우, 명령 프롬프트는 다음과 같습니다.</p>
 <ol>
 <li><p>마우스 오른쪽 버튼을 클릭하고 <strong>관리자 권한으로 실행을</strong> 선택하여 관리자 모드에서 Docker Desktop을 엽니다.</p></li>
@@ -246,9 +246,9 @@ Switching to windows engine: Post <span class="hljs-string">&quot;http://ipc/eng
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/docker-desktop-wsl-02.png" alt="Select WSL 2 distributions in Docker Desktop Settings" class="doc-image" id="select-wsl-2-distributions-in-docker-desktop-settings" />
-   </span> <span class="img-wrapper"> <span>Docker 데스크톱 설정에서 WSL 2 배포를 선택합니다</span> </span>.</p></li>
+   </span> <span class="img-wrapper"> <span>Docker Desktop 설정에서 WSL 2 배포를 선택합니다</span> </span>.</p></li>
 </ol>
-<h3 id="How-can-I-deal-with-the-volume-related-errors-prompted-during-Milvus-startup-that-reads-Read-config-failed​" class="common-anchor-header">Milvus 시작 시 <code translate="no">Read config failed</code> 라는 볼륨 관련 오류 메시지가 표시되는 경우 어떻게 처리하나요?</h3><p>
+<h3 id="How-can-I-deal-with-the-volume-related-errors-prompted-during-Milvus-startup-that-reads-Read-config-failed​" class="common-anchor-header"><code translate="no">Read config failed</code>Milvus 시작 시 다음과 같은 볼륨 관련 오류 메시지가 표시되는 경우 어떻게 처리할 수 있나요?</h3><p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/milvus-read-config-fails-01.png" alt="Read config failed error prompt in Milvus startup" class="doc-image" id="read-config-failed-error-prompt-in-milvus-startup" />
    </span> <span class="img-wrapper"> <span>Milvus 시작 시 구성 실패 오류 프롬프트 읽기</span> </span></p>
@@ -258,3 +258,44 @@ Switching to windows engine: Post <span class="hljs-string">&quot;http://ipc/eng
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/milvus-read-config-fails-02.png" alt="List Milvus config files" class="doc-image" id="list-milvus-config-files" />
    </span> <span class="img-wrapper"> <span>Milvus 설정 파일 나열</span> </span></p>
 <p></p>
+<h2 id="Whats-next" class="common-anchor-header">다음 단계<button data-href="#Whats-next" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>Docker에 Milvus를 설치했으면 다음을 수행할 수 있습니다:</p>
+<ul>
+<li><p><a href="/docs/ko/quickstart.md">빠른 시작을</a> 확인하여 Milvus가 수행할 수 있는 작업을 확인합니다.</p></li>
+<li><p>Milvus의 기본 작동에 대해 알아보세요:</p>
+<ul>
+<li><a href="/docs/ko/manage_databases.md">데이터베이스 관리</a></li>
+<li><a href="/docs/ko/manage-collections.md">컬렉션 관리</a></li>
+<li><a href="/docs/ko/manage-partitions.md">파티션 관리</a></li>
+<li><a href="/docs/ko/insert-update-delete.md">삽입, 위로 올리기 및 삭제</a></li>
+<li><a href="/docs/ko/single-vector-search.md">단일 벡터 검색</a></li>
+<li><a href="/docs/ko/multi-vector-search.md">하이브리드 검색</a></li>
+</ul></li>
+<li><p><a href="/docs/ko/upgrade_milvus_cluster-helm.md">헬름 차트를 사용하여 Milvus 업그레이드</a>.</p></li>
+<li><p><a href="/docs/ko/scaleout.md">Milvus 클러스터 확장하기</a>.</p></li>
+<li><p>Milvu 클러스터를 클라우드에 배포하세요:</p>
+<ul>
+<li><a href="/docs/ko/eks.md">Amazon EKS</a></li>
+<li><a href="/docs/ko/gcp.md">구글 클라우드</a></li>
+<li><a href="/docs/ko/azure.md">Microsoft Azure</a></li>
+</ul></li>
+<li><p>Milvus 통합 가시성 및 관리를 위한 직관적인 웹 인터페이스인 Milvus <a href="/docs/ko/milvus-webui.md">WebUI를</a> 살펴보세요.</p></li>
+<li><p>Milvus 데이터 백업을 위한 오픈 소스 도구인 Milvus <a href="/docs/ko/milvus_backup_overview.md">Backup을</a> 살펴보세요.</p></li>
+<li><p>Milvus 디버깅 및 동적 구성 업데이트를 위한 오픈 소스 도구인 <a href="/docs/ko/birdwatcher_overview.md">Birdwatcher에</a> 대해 알아보세요.</p></li>
+<li><p>직관적인 Milvus 관리를 위한 오픈 소스 GUI 도구인 <a href="https://milvus.io/docs/attu.md">Attu를</a> 살펴보세요.</p></li>
+<li><p><a href="/docs/ko/monitor.md">Prometheus로 Milvus 모니터링</a>.</p></li>
+</ul>

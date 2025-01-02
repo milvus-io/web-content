@@ -59,8 +59,8 @@ title: 도커 컴포즈를 사용하여 GPU 지원으로 Milvus 실행하기
         ></path>
       </svg>
     </button></h2><p>Docker Compose를 사용하여 GPU를 지원하는 Milvus를 설치하려면 다음 단계를 따르세요.</p>
-<h3 id="1-Download-and-configure-the-YAML-file" class="common-anchor-header">1. YAML 파일 다운로드 및 구성</h3><p>다운로드 <a href="https://github.com/milvus-io/milvus/releases/download/v2.4.19/milvus-standalone-docker-compose-gpu.yml"><code translate="no">milvus-standalone-docker-compose-gpu.yml</code></a> 를 클릭하고 수동으로 또는 다음 명령을 사용하여 docker-compose.yml로 저장합니다.</p>
-<pre><code translate="no" class="language-shell">$ wget https://github.com/milvus-io/milvus/releases/download/v2.4.19/milvus-standalone-docker-compose-gpu.yml -O docker-compose.yml
+<h3 id="1-Download-and-configure-the-YAML-file" class="common-anchor-header">1. YAML 파일 다운로드 및 구성</h3><p>다운로드 <a href="https://github.com/milvus-io/milvus/releases/download/v2.4.20/milvus-standalone-docker-compose-gpu.yml"><code translate="no">milvus-standalone-docker-compose-gpu.yml</code></a> 를 클릭하고 수동으로 또는 다음 명령을 사용하여 docker-compose.yml로 저장합니다.</p>
+<pre><code translate="no" class="language-shell">$ wget https://github.com/milvus-io/milvus/releases/download/v2.4.20/milvus-standalone-docker-compose-gpu.yml -O docker-compose.yml
 <button class="copy-code-btn"></button></code></pre>
 <p>YAML 파일에서 독립 실행형 서비스의 환경 변수를 다음과 같이 몇 가지 변경해야 합니다:</p>
 <ul>
@@ -154,7 +154,7 @@ $ <span class="hljs-built_in">sudo</span> <span class="hljs-built_in">rm</span> 
 </div>
 <p>메모리 풀을 구성하려면 <code translate="no">milvus.yaml</code> 파일에서 <code translate="no">initMemSize</code> 및 <code translate="no">maxMemSize</code> 설정을 다음과 같이 수정합니다.</p>
 <ol>
-<li><p>다음 명령을 사용하여 Milvus 컨테이너에서 로컬 머신으로 <code translate="no">milvus.yaml</code> 을 복사합니다. <code translate="no">&lt;milvus_container_id&gt;</code> 을 실제 Milvus 컨테이너 ID로 바꿉니다.</p>
+<li><p>다음 명령을 사용하여 Milvus 컨테이너에서 로컬 컴퓨터로 <code translate="no">milvus.yaml</code> 을 복사합니다. <code translate="no">&lt;milvus_container_id&gt;</code> 을 실제 Milvus 컨테이너 ID로 바꿉니다.</p>
 <pre><code translate="no" class="language-shell">docker <span class="hljs-built_in">cp</span> &lt;milvus_container_id&gt;:/milvus/configs/milvus.yaml milvus.yaml
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>복사한 <code translate="no">milvus.yaml</code> 파일을 원하는 텍스트 편집기로 엽니다. 예를 들어, vim을 사용합니다:</p>

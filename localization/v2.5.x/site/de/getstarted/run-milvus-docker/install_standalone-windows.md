@@ -91,7 +91,7 @@ Delete successfully. <span class="hljs-comment"># Data has been removed.​</spa
 
 <button class="copy-code-btn"></button></code></pre></li>
 </ol>
-<h3 id="From-WSL-2​" class="common-anchor-header">Von WSL 2 aus</h3><p>Wenn Sie es vorziehen, Milvus mit Linux-Befehlen und Shell-Skripten unter Windows zu starten, stellen Sie sicher, dass Sie den Befehl WSL 2 bereits installiert haben. Einzelheiten zur Installation des WSL 2-Befehls finden Sie in diesem <a href="https://learn.microsoft.com/en-us/windows/wsl/install#install-wsl-command">Microsoft-Artikel</a>.</p>
+<h3 id="From-WSL-2​" class="common-anchor-header">Von WSL 2 aus</h3><p>Wenn Sie es vorziehen, Milvus mit Linux-Befehlen und Shell-Skripten unter Windows zu starten, stellen Sie sicher, dass Sie den WSL 2-Befehl bereits installiert haben. Einzelheiten zur Installation des WSL 2-Befehls finden Sie in diesem <a href="https://learn.microsoft.com/en-us/windows/wsl/install#install-wsl-command">Microsoft-Artikel</a>.</p>
 <ol>
 <li><p>Starten Sie WSL 2.</p>
 <pre><code translate="no" class="language-powershell">C:\&gt;wsl --install​
@@ -141,7 +141,7 @@ Delete successfully.​
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Sobald Sie Docker Desktop unter Microsoft Windows installiert haben, können Sie über die PowerShell oder die Windows-Eingabeaufforderung im <strong>Administratormodus</strong> auf die Docker-CLI zugreifen. Sie können Docker Compose entweder in PowerShell, der Windows-Eingabeaufforderung oder WSL 2 ausführen, um Milvus zu starten.</p>
+    </button></h2><p>Sobald Sie Docker Desktop unter Microsoft Windows installiert haben, können Sie über die PowerShell oder die Windows-Eingabeaufforderung im <strong>Administratormodus</strong> auf die Docker CLI zugreifen. Sie können Docker Compose entweder in PowerShell, der Windows-Eingabeaufforderung oder WSL 2 ausführen, um Milvus zu starten.</p>
 <h3 id="From-PowerShell-or-Windows-Command-Prompt​" class="common-anchor-header">Von PowerShell oder der Windows-Eingabeaufforderung aus</h3><ol>
 <li><p>Öffnen Sie Docker Desktop im Administratormodus, indem Sie mit der rechten Maustaste klicken und <strong>Als Administrator ausführen</strong> wählen.</p></li>
 <li><p>Führen Sie die folgenden Befehle in PowerShell oder der Windows-Eingabeaufforderung aus, um die Docker Compose-Konfigurationsdatei für Milvus Standalone herunterzuladen und Milvus zu starten.</p>
@@ -260,3 +260,44 @@ Switching to windows engine: Post <span class="hljs-string">&quot;http://ipc/eng
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/milvus-read-config-fails-02.png" alt="List Milvus config files" class="doc-image" id="list-milvus-config-files" />
    </span> <span class="img-wrapper"> <span>Milvus-Konfigurationsdateien auflisten</span> </span></p>
 <p></p>
+<h2 id="Whats-next" class="common-anchor-header">Wie geht es weiter?<button data-href="#Whats-next" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>Nachdem Sie Milvus in Docker installiert haben, können Sie:</p>
+<ul>
+<li><p><a href="/docs/de/quickstart.md">Quickstart</a> prüfen, um zu sehen, was Milvus tun kann.</p></li>
+<li><p>Lernen Sie die grundlegenden Funktionen von Milvus kennen:</p>
+<ul>
+<li><a href="/docs/de/manage_databases.md">Verwalten von Datenbanken</a></li>
+<li><a href="/docs/de/manage-collections.md">Sammlungen verwalten</a></li>
+<li><a href="/docs/de/manage-partitions.md">Partitionen verwalten</a></li>
+<li><a href="/docs/de/insert-update-delete.md">Einfügen, Upsert &amp; Löschen</a></li>
+<li><a href="/docs/de/single-vector-search.md">Ein-Vektor-Suche</a></li>
+<li><a href="/docs/de/multi-vector-search.md">Hybride Suche</a></li>
+</ul></li>
+<li><p><a href="/docs/de/upgrade_milvus_cluster-helm.md">Upgrade von Milvus mit Helm Chart</a>.</p></li>
+<li><p><a href="/docs/de/scaleout.md">Skalieren Sie Ihren Milvus-Cluster</a>.</p></li>
+<li><p>Verteilen Sie Ihren Milvus-Cluster auf Clouds:</p>
+<ul>
+<li><a href="/docs/de/eks.md">Amazon EKS</a></li>
+<li><a href="/docs/de/gcp.md">Google Wolke</a></li>
+<li><a href="/docs/de/azure.md">Microsoft Azure</a></li>
+</ul></li>
+<li><p>Entdecken Sie <a href="/docs/de/milvus-webui.md">Milvus WebUI</a>, eine intuitive Webschnittstelle für die Beobachtung und Verwaltung von Milvus.</p></li>
+<li><p>Erkunden Sie <a href="/docs/de/milvus_backup_overview.md">Milvus Backup</a>, ein Open-Source-Tool für Milvus-Datensicherungen.</p></li>
+<li><p><a href="/docs/de/birdwatcher_overview.md">Birdwatcher</a>, ein Open-Source-Tool zur Fehlersuche in Milvus und zur dynamischen Konfigurationsaktualisierung.</p></li>
+<li><p>Entdecken Sie <a href="https://milvus.io/docs/attu.md">Attu</a>, ein Open-Source-GUI-Tool für intuitives Milvus-Management.</p></li>
+<li><p><a href="/docs/de/monitor.md">Überwachen Sie Milvus mit Prometheus</a>.</p></li>
+</ul>

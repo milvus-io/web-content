@@ -46,9 +46,10 @@ title: Milvus WebUI
 <tr><td>安装</td><td>内置</td><td>独立工具</td><td>独立工具</td></tr>
 <tr><td>依赖关系</td><td>Milvus</td><td>Milvus / etcd</td><td>Milvus</td></tr>
 <tr><td>主要功能</td><td>运行环境、数据库/ Collections 详情、段、通道、任务和慢查询请求</td><td>元数据检查和 Milvus API 执行</td><td>数据库管理和操作任务</td></tr>
+<tr><td>自</td><td>v2.5.0</td><td>v2.0.0</td><td>v0.1.8</td></tr>
 </tbody>
 </table>
-<p>您可以使用以下 URL 访问 Milvus Web UI：</p>
+<p>从 v2.5.0 起，你可以在运行中的 Milvus 实例上使用以下 URL 访问 Milvus Web UI：</p>
 <pre><code translate="no">http://<span class="hljs-variable">${MILVUS_PROXY_IP}</span>:9091/webui
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Features" class="common-anchor-header">功能<button data-href="#Features" class="anchor-icon" translate="no">
@@ -73,9 +74,9 @@ title: Milvus WebUI
    </span> <span class="img-wrapper"> <span>Milvus Web UI 概述</span> </span></p>
 <ul>
 <li><p><a href="#Home">主页</a></p>
-<p>您可以找到有关当前运行的 Milvus 实例、其组件、连接的客户端和依赖项的信息。</p></li>
+<p>你可以找到关于当前运行的 Milvus 实例、其组件、连接的客户端和依赖关系的信息。</p></li>
 <li><p><a href="#Collections">Collections</a></p>
-<p>可查看当前 Milvus 中的数据库和 Collections 列表，并检查其详细信息。</p></li>
+<p>可查看 Milvus 当前的数据库和 Collections 列表，并检查其详细信息。</p></li>
 <li><p><a href="#Query">查询</a></p>
 <p>您可以查看收集到的查询节点和查询协调器在网段、通道、副本和资源组方面的统计数据。</p></li>
 <li><p><a href="#Data">数据</a></p>
@@ -112,7 +113,7 @@ title: Milvus WebUI
 <ul>
 <li><p><strong>系统信息</strong>：查看系统信息，包括部署模式、部署中使用的映像和相关信息。</p></li>
 <li><p><strong>组件信息</strong>：查看 Milvus 中组件的状态和指标，包括查询节点、数据节点、索引节点、协调器和代理的状态和指标。</p></li>
-<li><p><strong>已连接客户端</strong>：查看已连接的客户端及其信息，包括 SDK 类型和版本、用户名及其访问历史记录。</p></li>
+<li><p><strong>连接的客户端</strong>：查看已连接的客户端及其信息，包括 SDK 类型和版本、用户名及其访问历史记录。</p></li>
 <li><p><strong>系统依赖关系</strong>：查看 Milvus 依赖项的状态和指标，包括元存储、消息队列和对象存储的状态和指标。</p></li>
 </ul>
 <h2 id="Collections" class="common-anchor-header">Collections<button data-href="#Collections" class="anchor-icon" translate="no">
@@ -190,7 +191,7 @@ title: Milvus WebUI
    </span> <span class="img-wrapper"> <span>Milvus Web UI 数据页面</span> </span></p>
 <ul>
 <li><p><strong>分段</strong>：查看数据节点/协调器的分段列表及其详细信息，包括分段 ID、对应的 Collections、状态、大小等。</p></li>
-<li><p><strong>通道</strong>：查看数据节点/协调器的通道列表及其详细信息，包括通道名称、相应的 Collections 等。</p></li>
+<li><p><strong>通道</strong>：查看数据节点/协调器的通道列表及其详细信息，包括通道名称、对应的 Collections 等。</p></li>
 </ul>
 <h2 id="Tasks" class="common-anchor-header">任务<button data-href="#Tasks" class="anchor-icon" translate="no">
       <svg translate="no"

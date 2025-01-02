@@ -110,7 +110,7 @@ Creating milvus-standalone ... <span class="hljs-keyword">done</span>
 <li><strong>milvus-standalone</strong>コンテナは、デフォルト設定でローカルにポート<strong>19530</strong>を提供し、そのデータを現在のフォルダ内の<strong>volumes/milvus</strong>にマップする。</li>
 </ul></li>
 </ul>
-<p>コンテナが稼働しているかどうかは、以下のコマンドで確認できます：</p>
+<p>コンテナが稼働しているかどうかは、以下のコマンドで確認できる：</p>
 <pre><code translate="no" class="language-shell">$ <span class="hljs-built_in">sudo</span> docker compose ps
 
       Name                     Command                  State                            Ports
@@ -119,8 +119,9 @@ milvus-etcd         etcd -advertise-client-url ...   Up             2379/tcp, 23
 milvus-minio        /usr/bin/docker-entrypoint ...   Up (healthy)   9000/tcp
 milvus-standalone   /tini -- milvus run standalone   Up             0.0.0.0:19530-&gt;19530/tcp, 0.0.0.0:9091-&gt;9091/tcp
 <button class="copy-code-btn"></button></code></pre>
-<p>docker-compose.ymlでMilvusに複数のGPUデバイスを割り当てている場合は、どのGPUデバイスを可視化するか、または使用可能にするかを指定できます。</p>
-<p>GPU デバイス<code translate="no">0</code> を Milvus から見えるようにします：</p>
+<p>また、Milvus WebUI（<code translate="no">http://127.0.0.1:9091/webui/</code> ）にもアクセスし、Milvusインスタンスの詳細を確認することができる。詳しくは<a href="/docs/ja/milvus-webui.md">Milvus WebUIを</a>ご参照ください。</p>
+<p>docker-compose.ymlでMilvusに複数のGPUデバイスを割り当てた場合、どのGPUデバイスを可視化するか、または使用可能にするかを指定できます。</p>
+<p>GPUデバイス<code translate="no">0</code> をMilvusから見えるようにします：</p>
 <pre><code translate="no" class="language-shell">$ CUDA_VISIBLE_DEVICES=0 ./milvus run standalone
 <button class="copy-code-btn"></button></code></pre>
 <p>GPUデバイス<code translate="no">0</code> と<code translate="no">1</code> をMilvusから見えるようにします：</p>
@@ -197,6 +198,7 @@ docker start &lt;milvus_container_id&gt;
     </button></h2><p>DockerにMilvusをインストールしたら、次のことができます：</p>
 <ul>
 <li><p><a href="/docs/ja/quickstart.md">クイックスタートで</a>Milvusの機能を確認する。</p></li>
+<li><p><a href="/docs/ja/milvus-webui.md">Milvus WebUIを</a>確認し、Milvusインスタンスの詳細を確認する。</p></li>
 <li><p>Milvusの基本操作を学ぶ：</p>
 <ul>
 <li><a href="/docs/ja/manage_databases.md">データベースの管理</a></li>
@@ -214,8 +216,9 @@ docker start &lt;milvus_container_id&gt;
 <li><a href="/docs/ja/gcp.md">Googleクラウド</a></li>
 <li><a href="/docs/ja/azure.md">Microsoft Azure</a></li>
 </ul></li>
-<li><p><a href="/docs/ja/milvus_backup_overview.md">Milvusの</a>データバックアップのためのオープンソースツールである<a href="/docs/ja/milvus_backup_overview.md">Milvus Backupを</a>紹介します。</p></li>
-<li><p>Milvusのデバッグとダイナミックコンフィギュレーションアップデートのためのオープンソースツール、<a href="/docs/ja/birdwatcher_overview.md">Birdwatcherの</a>ご紹介。</p></li>
-<li><p>Milvusを直感的に管理するオープンソースのGUIツール<a href="https://milvus.io/docs/attu.md">Attuを</a>ご覧ください。</p></li>
+<li><p><a href="/docs/ja/milvus-webui.md">Milvusの</a>観測と管理のための直感的なWebインターフェースである<a href="/docs/ja/milvus-webui.md">Milvus WebUIを</a>ご覧ください。</p></li>
+<li><p><a href="/docs/ja/milvus_backup_overview.md">Milvus</a>データバックアップのためのオープンソースツールである<a href="/docs/ja/milvus_backup_overview.md">Milvus Backupを</a>ご紹介します。</p></li>
+<li><p>Milvusのデバッグとダイナミックなコンフィギュレーション更新のためのオープンソースツール、<a href="/docs/ja/birdwatcher_overview.md">Birdwatcherを</a>ご覧ください。</p></li>
+<li><p>Milvusを直感的に管理するオープンソースのGUIツール<a href="https://milvus.io/docs/attu.md">Attuを</a>ご紹介します。</p></li>
 <li><p><a href="/docs/ja/monitor.md">PrometheusでMilvusを監視する</a>。</p></li>
 </ul>

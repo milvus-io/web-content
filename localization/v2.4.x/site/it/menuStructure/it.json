@@ -1634,63 +1634,75 @@
         "children": []
       },
       {
-        "label": "Ricerca immagini con Milvus",
-        "id": "image_similarity_search.md",
+        "label": "RAG avanzato",
+        "id": "how_to_enhance_your_rag.md",
         "order": 2,
+        "children": []
+      },
+      {
+        "label": "Ricerca a tutto testo con Milvus",
+        "id": "full_text_search_with_milvus.md",
+        "order": 3,
         "children": []
       },
       {
         "label": "Ricerca ibrida con Milvus",
         "id": "hybrid_search_with_milvus.md",
-        "order": 3,
+        "order": 4,
+        "children": []
+      },
+      {
+        "label": "Ricerca immagini con Milvus",
+        "id": "image_similarity_search.md",
+        "order": 5,
         "children": []
       },
       {
         "label": "RAG multimodale",
         "id": "multimodal_rag_with_milvus.md",
-        "order": 4,
+        "order": 6,
         "children": []
       },
       {
         "label": "Grafico RAG con Milvus",
         "id": "graph_rag_with_milvus.md",
-        "order": 6,
+        "order": 7,
         "children": []
       },
       {
         "label": "Recupero contestuale",
         "id": "contextual_retrieval_with_milvus.md",
-        "order": 5,
+        "order": 8,
         "children": []
       },
       {
         "label": "Raggruppamento HDBSCAN",
         "id": "hdbscan_clustering_with_milvus.md",
-        "order": 6,
+        "order": 9,
         "children": []
       },
       {
         "label": "Utilizzare ColPali per il recupero multimodale",
         "id": "use_ColPali_with_milvus.md",
-        "order": 7,
+        "order": 10,
         "children": []
       },
       {
         "label": "Visualizzazione vettoriale",
         "id": "vector_visualization.md",
-        "order": 8,
+        "order": 11,
         "children": []
       },
       {
         "label": "Raccomandazione di film",
         "id": "movie_recommendation_with_milvus.md",
-        "order": 9,
+        "order": 12,
         "children": []
       },
       {
-        "label": "Ricerca a imbuto con le matrici Matryoshka",
+        "label": "Ricerca a imbuto con matrioske embeddings",
         "id": "funnel_search_with_matryoshka.md",
-        "order": 10,
+        "order": 13,
         "children": []
       },
       {

@@ -48,10 +48,11 @@ title: Milvus WebUI
 <tr><td>Ziel-Benutzer</td><td>Maintainer, Entwickler</td><td>Maintainer</td><td>Entwickler</td></tr>
 <tr><td>Installation</td><td>Eingebaut</td><td>Eigenständiges Werkzeug</td><td>Eigenständiges Werkzeug</td></tr>
 <tr><td>Abhängigkeiten</td><td>Milvus</td><td>Milvus / etcd</td><td>Milvus</td></tr>
-<tr><td>Primäre Funktionalitäten</td><td>Laufzeitumgebung, Datenbank-/Sammlungsdetails, Segmente, Kanäle, Aufgaben und langsame Abfragen</td><td>Überprüfung von Metadaten und Ausführung der Milvus-API</td><td>Datenbankverwaltung und operative Aufgaben</td></tr>
+<tr><td>Primäre Funktionalitäten</td><td>Laufzeitumgebung, Datenbank-/Sammlungsdetails, Segmente, Kanäle, Aufgaben und langsame Abfragen</td><td>Überprüfung von Metadaten und Ausführung der Milvus-API</td><td>Datenbankmanagement und operative Aufgaben</td></tr>
+<tr><td>Verfügbar seit</td><td>v2.5.0</td><td>v2.0.0</td><td>v0.1.8</td></tr>
 </tbody>
 </table>
-<p>Sie können auf die Milvus Web UI über die folgende URL zugreifen:</p>
+<p>Ab v2.5.0 können Sie auf einer laufenden Milvus-Instanz über die folgende URL auf die Milvus Web UI zugreifen:</p>
 <pre><code translate="no">http://<span class="hljs-variable">${MILVUS_PROXY_IP}</span>:9091/webui
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Features" class="common-anchor-header">Funktionen<button data-href="#Features" class="anchor-icon" translate="no">
@@ -73,7 +74,7 @@ title: Milvus WebUI
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/milvus-webui-overview.png" alt="Milvus Web UI overview" class="doc-image" id="milvus-web-ui-overview" />
-   </span> <span class="img-wrapper"> <span>Überblick über Milvus Web UI</span> </span></p>
+   </span> <span class="img-wrapper"> <span>Milvus Web UI Übersicht</span> </span></p>
 <ul>
 <li><p><a href="#Home">Startseite</a></p>
 <p>Hier finden Sie Informationen über die aktuell laufende Milvus-Instanz, ihre Komponenten, verbundene Clients und Abhängigkeiten.</p></li>
@@ -90,7 +91,7 @@ title: Milvus WebUI
 <li><p><a href="#Configurations">Konfigurationen</a></p>
 <p>Sie können die Liste der Milvus-Konfigurationen und deren Werte anzeigen.</p></li>
 <li><p><a href="#Tools">Werkzeuge</a></p>
-<p>Sie können von der Web-UI aus auf die beiden eingebauten Tools, pprof und Milvus-Datenvisualisierung, zugreifen.</p></li>
+<p>Über die Web-UI können Sie auf die beiden integrierten Tools pprof und Milvus-Datenvisualisierung zugreifen.</p></li>
 </ul>
 <h2 id="Home" class="common-anchor-header">Startseite<button data-href="#Home" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -133,7 +134,7 @@ title: Milvus WebUI
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Auf der Seite Sammlungen können Sie die Liste der Datenbanken und Sammlungen einsehen, die sich derzeit in Milvus befinden, und deren Details überprüfen.</p>
+    </button></h2><p>Auf der Seite Sammlungen können Sie die Liste der Datenbanken und Sammlungen, die sich derzeit in Milvus befinden, einsehen und deren Details überprüfen.</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/webui-collections.png" alt="Milvus Web UI Collections" class="doc-image" id="milvus-web-ui-collections" />

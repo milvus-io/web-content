@@ -159,7 +159,7 @@ Creating milvus-standalone ... <span class="hljs-keyword">done</span>​
 <ul>
 <li><p>O contentor <strong>milvus-etcd</strong> não expõe quaisquer portas ao anfitrião e mapeia os seus dados para <strong>volumes/etcd</strong> na pasta atual.</p></li>
 <li><p>O contentor <strong>milvus-minio</strong> serve as portas <strong>9090</strong> e <strong>9091</strong> localmente com as credenciais de autenticação predefinidas e mapeia os seus dados para <strong>volumes/minio</strong> na pasta atual.</p></li>
-<li><p>O contentor <strong>milvus-standalone</strong> serve as portas <strong>19530</strong> localmente com as predefinições e mapeia os seus dados para <strong>volumes/milvus</strong> na pasta atual.</p></li>
+<li><p>O contentor <strong>milvus-standalone</strong> serve as portas <strong>19530</strong> localmente com as definições predefinidas e mapeia os seus dados para <strong>volumes/milvus</strong> na pasta atual.</p></li>
 </ul></li>
 </ol>
 <p>Também pode chamar a versão Linux dos comandos do Docker Compose se tiver a WSL 2 instalada.</p>
@@ -239,7 +239,7 @@ Switching to windows engine: Post <span class="hljs-string">&quot;http://ipc/eng
 </ol>
 <h3 id="How-can-I-deal-with-WSL-related-issues-while-deploying-Milvus​" class="common-anchor-header">Como posso lidar com problemas relacionados com a WSL durante a implementação do Milvus?</h3><p>Se encontrou problemas relacionados com a WSL enquanto executava o Milvus a partir da WSL 2, poderá ter de verificar se configurou o Docker Desktop para utilizar o motor baseado na WSL 2 da seguinte forma.</p>
 <ol>
-<li><p>Certifique-se de que a opção "Usar o mecanismo baseado na WSL 2" esteja marcada em <strong>Configurações</strong> &gt; <strong>Geral</strong>. </p>
+<li><p>Certifique-se de que a opção "Usar o mecanismo baseado na WSL 2" está marcada em <strong>Configurações</strong> &gt; <strong>Geral</strong>. </p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/docker-desktop-wsl-01.png" alt="Use the WSL 2 based engine in Docker Desktop Settings" class="doc-image" id="use-the-wsl-2-based-engine-in-docker-desktop-settings" />
@@ -260,3 +260,44 @@ Switching to windows engine: Post <span class="hljs-string">&quot;http://ipc/eng
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/milvus-read-config-fails-02.png" alt="List Milvus config files" class="doc-image" id="list-milvus-config-files" />
    </span> <span class="img-wrapper"> <span>Listar ficheiros de configuração do Milvus</span> </span></p>
 <p></p>
+<h2 id="Whats-next" class="common-anchor-header">O que vem a seguir<button data-href="#Whats-next" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>Depois de instalar o Milvus no Docker, você pode:</p>
+<ul>
+<li><p>Verificar <a href="/docs/pt/quickstart.md">o Quickstart</a> para ver o que o Milvus pode fazer.</p></li>
+<li><p>Aprender as operações básicas do Milvus:</p>
+<ul>
+<li><a href="/docs/pt/manage_databases.md">Gerenciar bancos de dados</a></li>
+<li><a href="/docs/pt/manage-collections.md">Gerenciar coleções</a></li>
+<li><a href="/docs/pt/manage-partitions.md">Gerir partições</a></li>
+<li><a href="/docs/pt/insert-update-delete.md">Inserir, Upsert e Apagar</a></li>
+<li><a href="/docs/pt/single-vector-search.md">Pesquisa de vetor único</a></li>
+<li><a href="/docs/pt/multi-vector-search.md">Pesquisa híbrida</a></li>
+</ul></li>
+<li><p><a href="/docs/pt/upgrade_milvus_cluster-helm.md">Atualizar o Milvus usando o Helm Chart</a>.</p></li>
+<li><p><a href="/docs/pt/scaleout.md">Escalar seu cluster Milvus</a>.</p></li>
+<li><p>Implantar seu cluster Milvu em nuvens:</p>
+<ul>
+<li><a href="/docs/pt/eks.md">Amazon EKS</a></li>
+<li><a href="/docs/pt/gcp.md">Google Cloud</a></li>
+<li><a href="/docs/pt/azure.md">Microsoft Azure</a></li>
+</ul></li>
+<li><p>Explore <a href="/docs/pt/milvus-webui.md">o Milvus WebUI</a>, uma interface web intuitiva para a observabilidade e gestão do Milvus.</p></li>
+<li><p>Explore <a href="/docs/pt/milvus_backup_overview.md">o Milvus Backup</a>, uma ferramenta de código aberto para backups de dados do Milvus.</p></li>
+<li><p>Explore o <a href="/docs/pt/birdwatcher_overview.md">Birdwatcher</a>, uma ferramenta de código aberto para depuração do Milvus e actualizações de configuração dinâmica.</p></li>
+<li><p>Explore o <a href="https://milvus.io/docs/attu.md">Attu</a>, uma ferramenta GUI de código aberto para gerenciamento intuitivo do Milvus.</p></li>
+<li><p><a href="/docs/pt/monitor.md">Monitore o Milvus com o Prometheus</a>.</p></li>
+</ul>

@@ -802,7 +802,7 @@
             "children": []
           },
           {
-            "label": "インストラクター",
+            "label": "講師",
             "id": "embed-with-instructor.md",
             "order": 9,
             "children": []
@@ -1389,6 +1389,12 @@
             "children": []
           }
         ]
+      },
+      {
+        "label": "Milvus WebUI",
+        "id": "milvus-webui.md",
+        "order": "12",
+        "children": []
       }
     ]
   },
@@ -1423,12 +1429,6 @@
             "children": []
           }
         ]
-      },
-      {
-        "label": "Milvus WebUI",
-        "id": "milvus-webui.md",
-        "order": "1",
-        "children": []
       },
       {
         "label": "Milvus バックアップ",

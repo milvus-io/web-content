@@ -110,7 +110,7 @@ Creating milvus-standalone ... <span class="hljs-keyword">done</span>
 <li>O contentor <strong>milvus-standalone</strong> serve as portas <strong>19530</strong> localmente com as definições predefinidas e mapeia os seus dados para <strong>volumes/milvus</strong> na pasta atual.</li>
 </ul></li>
 </ul>
-<p>Pode verificar se os contentores estão em funcionamento utilizando o seguinte comando:</p>
+<p>Pode verificar se os contentores estão a funcionar utilizando o seguinte comando:</p>
 <pre><code translate="no" class="language-shell">$ <span class="hljs-built_in">sudo</span> docker compose ps
 
       Name                     Command                  State                            Ports
@@ -119,7 +119,8 @@ milvus-etcd         etcd -advertise-client-url ...   Up             2379/tcp, 23
 milvus-minio        /usr/bin/docker-entrypoint ...   Up (healthy)   9000/tcp
 milvus-standalone   /tini -- milvus run standalone   Up             0.0.0.0:19530-&gt;19530/tcp, 0.0.0.0:9091-&gt;9091/tcp
 <button class="copy-code-btn"></button></code></pre>
-<p>Se tiver atribuído vários dispositivos GPU ao Milvus em docker-compose.yml, pode especificar qual o dispositivo GPU que está visível ou disponível para utilização.</p>
+<p>Também pode aceder à WebUI do Milvus em <code translate="no">http://127.0.0.1:9091/webui/</code> para saber mais sobre a sua instância do Milvus. Para obter detalhes, consulte <a href="/docs/pt/milvus-webui.md">Milvus WebUI</a>.</p>
+<p>Se tiver atribuído vários dispositivos de GPU ao Milvus em docker-compose.yml, pode especificar que dispositivo de GPU está visível ou disponível para utilização.</p>
 <p>Torne o dispositivo de GPU <code translate="no">0</code> visível para o Milvus:</p>
 <pre><code translate="no" class="language-shell">$ CUDA_VISIBLE_DEVICES=0 ./milvus run standalone
 <button class="copy-code-btn"></button></code></pre>
@@ -169,7 +170,7 @@ gpu:
 <button class="copy-code-btn"></button></code></pre>
 <ul>
 <li><code translate="no">initMemSize</code>: Initial size of the memory pool. A predefinição é 1024.</li>
-<li><code translate="no">maxMemSize</code>: Tamanho máximo do conjunto de memória. A predefinição é 2048.</li>
+<li><code translate="no">maxMemSize</code>: Tamanho máximo do conjunto de memória. O padrão é 2048.</li>
 </ul></li>
 <li><p>Utilize o seguinte comando para copiar o ficheiro <code translate="no">milvus.yaml</code> modificado de volta para o contentor Milvus. Substitua <code translate="no">&lt;milvus_container_id&gt;</code> pelo seu ID real do contentor Milvus.</p>
 <pre><code translate="no" class="language-shell">docker <span class="hljs-built_in">cp</span> milvus.yaml &lt;milvus_container_id&gt;:/milvus/configs/milvus.yaml
@@ -197,6 +198,7 @@ docker start &lt;milvus_container_id&gt;
     </button></h2><p>Depois de instalar o Milvus no Docker, você pode:</p>
 <ul>
 <li><p>Verificar <a href="/docs/pt/quickstart.md">o Quickstart</a> para ver o que o Milvus pode fazer.</p></li>
+<li><p>Consultar a Milvus <a href="/docs/pt/milvus-webui.md">WebUI</a> para saber mais sobre a instância do Milvus.</p></li>
 <li><p>Aprender as operações básicas do Milvus:</p>
 <ul>
 <li><a href="/docs/pt/manage_databases.md">Gerenciar bancos de dados</a></li>
@@ -214,8 +216,9 @@ docker start &lt;milvus_container_id&gt;
 <li><a href="/docs/pt/gcp.md">Google Cloud</a></li>
 <li><a href="/docs/pt/azure.md">Microsoft Azure</a></li>
 </ul></li>
+<li><p>Explore <a href="/docs/pt/milvus-webui.md">o Milvus WebUI</a>, uma interface web intuitiva para a observabilidade e gestão do Milvus.</p></li>
 <li><p>Explore <a href="/docs/pt/milvus_backup_overview.md">o Milvus Backup</a>, uma ferramenta de código aberto para backups de dados do Milvus.</p></li>
-<li><p>Explore o <a href="/docs/pt/birdwatcher_overview.md">Birdwatcher</a>, uma ferramenta de código aberto para depuração do Milvus e actualizações dinâmicas de configuração.</p></li>
+<li><p>Explore o <a href="/docs/pt/birdwatcher_overview.md">Birdwatcher</a>, uma ferramenta de código aberto para depuração do Milvus e actualizações de configuração dinâmica.</p></li>
 <li><p>Explore <a href="https://milvus.io/docs/attu.md">o Attu</a>, uma ferramenta GUI de código aberto para gerenciamento intuitivo do Milvus.</p></li>
 <li><p><a href="/docs/pt/monitor.md">Monitore o Milvus com o Prometheus</a>.</p></li>
 </ul>

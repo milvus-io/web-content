@@ -49,9 +49,10 @@ title: Milvus WebUI
 <tr><td>Installation</td><td>Intégré</td><td>Outil autonome</td><td>Outil autonome</td></tr>
 <tr><td>Dépendances</td><td>Milvus</td><td>Milvus / etcd</td><td>Milvus</td></tr>
 <tr><td>Fonctionnalités principales</td><td>Environnement d'exécution, détails de la base de données/collection, segments, canaux, tâches et demandes de requêtes lentes</td><td>Inspection des métadonnées et exécution de l'API Milvus</td><td>Gestion de la base de données et tâches opérationnelles</td></tr>
+<tr><td>Disponible depuis</td><td>v2.5.0</td><td>v2.0.0</td><td>v0.1.8</td></tr>
 </tbody>
 </table>
-<p>Vous pouvez accéder à l'interface Web Milvus à l'aide de l'URL suivante :</p>
+<p>Depuis la version 2.5.0, vous pouvez accéder à l'interface Web de Milvus à l'aide de l'URL suivante sur une instance Milvus en cours d'exécution :</p>
 <pre><code translate="no">http://<span class="hljs-variable">${MILVUS_PROXY_IP}</span>:9091/webui
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Features" class="common-anchor-header">Fonctionnalités<button data-href="#Features" class="anchor-icon" translate="no">
@@ -139,8 +140,8 @@ title: Milvus WebUI
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/webui-collections.png" alt="Milvus Web UI Collections" class="doc-image" id="milvus-web-ui-collections" />
    </span> <span class="img-wrapper"> <span>Collections de l'interface Web de Milvus</span> </span></p>
 <ul>
-<li><p><strong>Base de données</strong>: Afficher la liste des bases de données actuellement dans Milvus et leurs détails.</p></li>
-<li><p><strong>Collection</strong>: Affiche la liste des collections de chaque base de données et leurs détails.</p>
+<li><p><strong>Base de données</strong>: Affiche la liste des bases de données actuellement dans Milvus et leurs détails.</p></li>
+<li><p><strong>Collection</strong>: Affiche la liste des collections dans chaque base de données et leurs détails.</p>
 <p>Vous pouvez cliquer sur une collection pour afficher ses détails, y compris le nombre de champs, les partitions, les index et d'autres informations en détail.</p>
 <p>
   

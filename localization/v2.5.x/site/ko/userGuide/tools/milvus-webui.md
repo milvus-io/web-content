@@ -48,9 +48,10 @@ title: Milvus WebUI
 <tr><td>설치</td><td>빌트인</td><td>독립 실행형 도구</td><td>독립 실행형 도구</td></tr>
 <tr><td>종속성</td><td>Milvus</td><td>Milvus / etcd</td><td>Milvus</td></tr>
 <tr><td>주요 기능</td><td>런타임 환경, 데이터베이스/수집 세부 정보, 세그먼트, 채널, 작업 및 느린 쿼리 요청</td><td>메타데이터 검사 및 Milvus API 실행</td><td>데이터베이스 관리 및 운영 작업</td></tr>
+<tr><td>다음 버전부터 사용 가능</td><td>v2.5.0</td><td>v2.0.0</td><td>v0.1.8</td></tr>
 </tbody>
 </table>
-<p>Milvus 웹 UI는 다음 URL을 통해 접속할 수 있습니다:</p>
+<p>v2.5.0부터 실행 중인 Milvus 인스턴스에서 다음 URL을 사용하여 Milvus 웹 UI에 액세스할 수 있습니다:</p>
 <pre><code translate="no">http://<span class="hljs-variable">${MILVUS_PROXY_IP}</span>:9091/webui
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Features" class="common-anchor-header">기능<button data-href="#Features" class="anchor-icon" translate="no">
@@ -68,7 +69,7 @@ title: Milvus WebUI
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus Web UI는 다음과 같은 기능을 제공합니다:</p>
+    </button></h2><p>Milvus 웹 UI는 다음과 같은 기능을 제공합니다:</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/milvus-webui-overview.png" alt="Milvus Web UI overview" class="doc-image" id="milvus-web-ui-overview" />
@@ -85,7 +86,7 @@ title: Milvus WebUI
 <li><p><a href="#Tasks">작업</a></p>
 <p>쿼리 코디네이터 스케줄러 작업, 압축 작업, 인덱스 구축 작업, 가져오기 작업, 데이터 동기화 작업 등 Milvus에서 실행 중인 작업 목록을 확인할 수 있습니다.</p></li>
 <li><p><a href="#Slow-requests">느린 요청</a></p>
-<p>요청 유형, 요청 기간, 요청 매개변수를 포함하여 Milvus에서 느린 요청 목록을 볼 수 있습니다.</p></li>
+<p>요청 유형, 요청 기간, 요청 매개변수를 포함한 Milvus의 느린 요청 목록을 볼 수 있습니다.</p></li>
 <li><p><a href="#Configurations">구성</a></p>
 <p>Milvus 구성 목록과 해당 값을 볼 수 있습니다.</p></li>
 <li><p><a href="#Tools">도구</a></p>
@@ -243,7 +244,7 @@ title: Milvus WebUI
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/webui-slow-requests.png" alt="Milvus Web UI Slow Requests Page" class="doc-image" id="milvus-web-ui-slow-requests-page" />
    </span> <span class="img-wrapper"> <span>Milvus 웹 UI 느린 요청 페이지</span> </span></p>
 <ul>
-<li><strong>느린 요청</strong>: 느린 요청은 설정에 지정된 <code translate="no">proxy.slowQuerySpanInSeconds</code> 값보다 지연 시간이 긴 검색 또는 쿼리입니다. 느린 요청 목록에는 지난 15분 동안의 모든 느린 요청이 표시됩니다.</li>
+<li><strong>느린 요청</strong>: 느린 요청은 구성에 지정된 <code translate="no">proxy.slowQuerySpanInSeconds</code> 값보다 지연 시간이 긴 검색 또는 쿼리입니다. 느린 요청 목록에는 지난 15분 동안의 모든 느린 요청이 표시됩니다.</li>
 </ul>
 <h2 id="Configurations" class="common-anchor-header">구성<button data-href="#Configurations" class="anchor-icon" translate="no">
       <svg translate="no"

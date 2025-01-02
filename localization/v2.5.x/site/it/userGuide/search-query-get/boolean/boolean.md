@@ -44,15 +44,15 @@ title: Il filtraggio spiegato
 <ul>
 <li><p><strong>Operatori di confronto</strong>: <code translate="no">==</code>, <code translate="no">!=</code>, <code translate="no">&gt;</code>, <code translate="no">&lt;</code>, <code translate="no">&gt;=</code>, e <code translate="no">&lt;=</code> permettono di filtrare in base a campi numerici, di testo o di data.</p></li>
 <li><p><strong>Filtri di intervallo</strong>: <code translate="no">IN</code> e <code translate="no">LIKE</code> consentono di trovare intervalli o insiemi di valori specifici.</p></li>
-<li><p><strong>Operatori aritmetici</strong>: <code translate="no">+</code>, <code translate="no">-</code>, <code translate="no">*</code>, <code translate="no">/</code>, <code translate="no">%</code> e <code translate="no">**</code> sono utilizzati per i calcoli relativi ai campi numerici.</p></li>
-<li><p><strong>Operatori logici</strong>: <code translate="no">AND</code>, <code translate="no">OR</code>, e <code translate="no">NOT</code> combinano più condizioni in espressioni complesse.</p></li>
+<li><p><strong>Operatori aritmetici</strong>: <code translate="no">+</code>, <code translate="no">-</code>, <code translate="no">*</code>, <code translate="no">/</code>, <code translate="no">%</code> e <code translate="no">**</code> sono utilizzati per i calcoli che coinvolgono i campi numerici.</p></li>
+<li><p><strong>Operatori logici</strong>: <code translate="no">AND</code>, <code translate="no">OR</code>, e <code translate="no">NOT</code> o '&amp;&amp;', '||', '~', '!' combinano più condizioni in espressioni complesse.</p></li>
 </ul>
 <h3 id="Example-Filtering-by-Color​" class="common-anchor-header">Esempio: Filtro per colore</h3><p>Per trovare entità con colori primari (rosso, verde o blu) in un campo scalare <code translate="no">color</code>, utilizzare la seguente espressione di filtro.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span>=<span class="hljs-string">&#x27;color in [&quot;red&quot;, &quot;green&quot;, &quot;blue&quot;]&#x27;</span>​
 
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Example-Filtering-JSON-Fields​" class="common-anchor-header">Esempio: Filtrare i campi JSON</h3><p>Milvus consente di fare riferimento a chiavi in campi JSON. Ad esempio, se si dispone di un campo JSON <code translate="no">product</code> con le chiavi <code translate="no">price</code> e <code translate="no">model</code>, e si desidera trovare prodotti con un modello specifico e un prezzo inferiore a 1.850, utilizzare questa espressione di filtro.</p>
-<pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span>=<span class="hljs-string">&#x27;product[&quot;model&quot;] == &quot;JSN-087&quot; AND product[&quot;price&quot;] &lt; 1850&#x27;</span>​
+<pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span>=<span class="hljs-string">&#x27;product[&quot;model&quot;] == &quot;JSN-087&quot; and product[&quot;price&quot;] &lt; 1850&#x27;</span>​
 
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Example-Filtering-Array-Fields​" class="common-anchor-header">Esempio: Filtrare i campi array</h3><p>Se si dispone di un campo array <code translate="no">history_temperatures</code> contenente record di temperatura e si desidera trovare gli osservatori in cui la decima temperatura registrata supera i 23°C, utilizzare questa espressione.</p>
@@ -78,11 +78,11 @@ title: Il filtraggio spiegato
     </button></h2><p>Quando si filtra utilizzando i caratteri CJK, l'elaborazione può risultare più complessa a causa dei set di caratteri più grandi e delle differenze di codifica. Ciò può comportare un rallentamento delle prestazioni, soprattutto con l'operatore <code translate="no">IN</code>.</p>
 <p>Milvus introduce la templatura delle espressioni di filtro per ottimizzare le prestazioni quando si lavora con i caratteri CJK. Separando i valori dinamici dall'espressione del filtro, il motore di query gestisce in modo più efficiente l'inserimento dei parametri.</p>
 <h3 id="Example​" class="common-anchor-header">Esempio</h3><p>Per trovare persone di età superiore ai 25 anni che vivono a "北京" (Pechino) o "上海" (Shanghai), utilizzare la seguente espressione modello.</p>
-<pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&quot;age &gt; 25 AND city IN [&#x27;北京&#x27;, &#x27;上海&#x27;]&quot;</span>​
+<pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&quot;age &gt; 25 and city in [&#x27;北京&#x27;, &#x27;上海&#x27;]&quot;</span>​
 
 <button class="copy-code-btn"></button></code></pre>
 <p>Per migliorare le prestazioni, utilizzare questa variante con i parametri.</p>
-<pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&quot;age &gt; {age} AND city in {city}&quot;</span>,​
+<pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&quot;age &gt; {age} and city in {city}&quot;</span>,​
 filter_params = {<span class="hljs-string">&quot;age&quot;</span>: <span class="hljs-number">25</span>, <span class="hljs-string">&quot;city&quot;</span>: [<span class="hljs-string">&quot;北京&quot;</span>, <span class="hljs-string">&quot;上海&quot;</span>]}​
 
 <button class="copy-code-btn"></button></code></pre>

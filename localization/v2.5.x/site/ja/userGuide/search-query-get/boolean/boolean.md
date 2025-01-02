@@ -40,17 +40,17 @@ title: フィルタリングの説明
 <li><p><strong>比較演算子</strong>：<code translate="no">==</code> <code translate="no">!=</code>,<code translate="no">&gt;</code>,<code translate="no">&lt;</code>,<code translate="no">&gt;=</code>, および<code translate="no">&lt;=</code> では、数値、テキスト、または日付フィールドに基づくフィルタリングが可能です。</p></li>
 <li><p><strong>範囲フィルター</strong>：<code translate="no">IN</code> と<code translate="no">LIKE</code> は、特定の値の範囲やセットにマッチさせるのに役立ちます。</p></li>
 <li><p><strong>算術演算子</strong>：<code translate="no">+</code> <code translate="no">-</code>,<code translate="no">*</code>,<code translate="no">/</code>,<code translate="no">%</code>, および<code translate="no">**</code> は、数値フィールドを含む計算に使用されます。</p></li>
-<li><p><strong>論理演算子</strong>：<code translate="no">AND</code> <code translate="no">OR</code> 、<code translate="no">NOT</code> は、複数の条件を組み合わせて複雑な式にします。</p></li>
+<li><p><strong>論理演算子</strong>：<code translate="no">AND</code>,<code translate="no">OR</code>, および<code translate="no">NOT</code> または '&amp;&amp;', '||', '~', '!' は、複数の条件を組み合わせて複雑な式にします。</p></li>
 </ul>
-<h3 id="Example-Filtering-by-Color​" class="common-anchor-header">例色によるフィルタリング</h3><p>スカラー・フィールド<code translate="no">color</code> で原色（赤、緑、青）を持つエンティティを検索するには、以下のフィルタ式を使用します。</p>
+<h3 id="Example-Filtering-by-Color​" class="common-anchor-header">例色によるフィルタリング</h3><p>スカラー・フィールド<code translate="no">color</code> で原色（赤、緑、青）を持つエンティティを見つけるには、以下のフィルタ式を使用する。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span>=<span class="hljs-string">&#x27;color in [&quot;red&quot;, &quot;green&quot;, &quot;blue&quot;]&#x27;</span>​
 
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Example-Filtering-JSON-Fields​" class="common-anchor-header">例JSONフィールドのフィルタリング</h3><p>MilvusではJSONフィールドのキーを参照することができます。たとえば、<code translate="no">price</code> および<code translate="no">model</code> をキーとする JSON フィールド<code translate="no">product</code> があり、特定のモデルで価格が 1,850 より低い製品を検索したい場合は、次のフィルタ式を使用します。</p>
-<pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span>=<span class="hljs-string">&#x27;product[&quot;model&quot;] == &quot;JSN-087&quot; AND product[&quot;price&quot;] &lt; 1850&#x27;</span>​
+<pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span>=<span class="hljs-string">&#x27;product[&quot;model&quot;] == &quot;JSN-087&quot; and product[&quot;price&quot;] &lt; 1850&#x27;</span>​
 
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Example-Filtering-Array-Fields​" class="common-anchor-header">例配列フィールドのフィルタリング</h3><p>例：配列フィールドのフィルタリング<code translate="no">history_temperatures</code> に気温の記録があり、10番目に記録された気温が23℃を超える観測所を見つけたい場合、この式を使用します。</p>
+<h3 id="Example-Filtering-Array-Fields​" class="common-anchor-header">例配列フィールドのフィルタリング</h3><p>例：配列フィールドのフィルタリング<code translate="no">history_temperatures</code> に気温の記録があり、10番目に記録された気温が23℃を超える天文台を見つけたい場合、この式を使用します。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span>=<span class="hljs-string">&#x27;history_temperatures[10] &gt; 23&#x27;</span>​
 
 <button class="copy-code-btn"></button></code></pre>
@@ -71,17 +71,17 @@ title: フィルタリングの説明
         ></path>
       </svg>
     </button></h2><p>日中韓の文字を使ってフィルタリングを行う場合、文字セットとエンコーディングの違いが大きいため、処理が複雑になることがあります。その結果、特に<code translate="no">IN</code> 演算子のパフォーマンスが低下することがあります。</p>
-<p>Milvusでは、日中韓文字を扱う際のパフォーマンスを最適化するために、フィルター式のテンプレート化を導入しています。フィルター式から動的な値を分離することで、クエリーエンジンはパラメーターの挿入をより効率的に処理します。</p>
+<p>Milvusは、日中韓文字を扱う際のパフォーマンスを最適化するために、フィルター式のテンプレート化を導入しました。フィルター式から動的な値を分離することで、クエリーエンジンはパラメーターの挿入をより効率的に処理します。</p>
 <h3 id="Example​" class="common-anchor-header">例</h3><p>北京」（北京）または「上海」（上海）に住む25歳以上の個人を検索するには、次のテンプレート式を使用します。</p>
-<pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&quot;age &gt; 25 AND city IN [&#x27;北京&#x27;, &#x27;上海&#x27;]&quot;</span>​
+<pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&quot;age &gt; 25 and city in [&#x27;北京&#x27;, &#x27;上海&#x27;]&quot;</span>​
 
 <button class="copy-code-btn"></button></code></pre>
 <p>パフォーマンスを向上させるには、パラメータ付きのこのバリエーションを使用します。</p>
-<pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&quot;age &gt; {age} AND city in {city}&quot;</span>,​
+<pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&quot;age &gt; {age} and city in {city}&quot;</span>,​
 filter_params = {<span class="hljs-string">&quot;age&quot;</span>: <span class="hljs-number">25</span>, <span class="hljs-string">&quot;city&quot;</span>: [<span class="hljs-string">&quot;北京&quot;</span>, <span class="hljs-string">&quot;上海&quot;</span>]}​
 
 <button class="copy-code-btn"></button></code></pre>
-<p>この方法は、解析のオーバーヘッドを減らし、クエリの速度を向上させます。詳細は<a href="/docs/ja/filtering-templating.md">フィルタのテンプレート化</a> を参照してください。</p>
+<p>この方法は、構文解析のオーバーヘッドを減らし、クエリの速度を向上させます。詳細は<a href="/docs/ja/filtering-templating.md">Filter Templating</a> を参照してください。</p>
 <h2 id="Data-type-specific-operators​" class="common-anchor-header">データ型固有の演算子<button data-href="#Data-type-specific-operators​" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -99,7 +99,7 @@ filter_params = {<span class="hljs-string">&quot;age&quot;</span>: <span class="
       </svg>
     </button></h2><p>Milvusは、JSON、ARRAY、VARCHARフィールドなどの特定のデータ型に対する高度なフィルタリング演算子を提供しています。</p>
 <h3 id="JSON-field-specific-operators​" class="common-anchor-header">JSON フィールド固有の演算子</h3><p>MilvusはJSONフィールドをクエリするための高度な演算子を提供し、複雑なJSON構造内の正確なフィルタリングを可能にします。</p>
-<p><code translate="no">**JSON_CONTAINS(identifier, jsonExpr)**</code>:フィールドにJSON式が存在するかどうかをチェックします。</p>
+<p><code translate="no">**JSON_CONTAINS(identifier, jsonExpr)**</code>:JSON 式がフィールドに存在するかどうかをチェックします。</p>
 <pre><code translate="no" class="language-python"># JSON data: {<span class="hljs-string">&quot;tags&quot;</span>: [<span class="hljs-string">&quot;electronics&quot;</span>, <span class="hljs-string">&quot;sale&quot;</span>, <span class="hljs-string">&quot;new&quot;</span>]}​
 filter=<span class="hljs-string">&#x27;json_contains(tags, &quot;sale&quot;)&#x27;</span>​
 

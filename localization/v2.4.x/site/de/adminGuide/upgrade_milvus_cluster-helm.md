@@ -108,10 +108,10 @@ zilliztech/milvus       4.1.1           2.3.0                   Milvus is an ope
 zilliztech/milvus       4.1.0           2.3.0                   Milvus is an open-source vector database built ...
 <button class="copy-code-btn"></button></code></pre>
 <p>Sie können den Upgrade-Pfad für Ihren Milvus wie folgt wählen:</p>
-<div style="display: none;">- [Führen Sie ein rollendes Upgrade durch](#conduct-a-rolling-upgrade) von Milvus v2.2.3 und späteren Versionen auf v2.4.19.</div>
+<div style="display: none;">- [Führen Sie ein rollendes Upgrade durch](#conduct-a-rolling-upgrade) von Milvus v2.2.3 und späteren Versionen auf v2.4.20.</div>
 <ul>
-<li><p><a href="#Upgrade-Milvus-using-Helm">Führen Sie ein Upgrade von Milvus mit Helm</a> für ein Upgrade von einer Nebenversion vor v2.2.3 auf v2.4.19<a href="#Upgrade-Milvus-using-Helm">durch</a>.</p></li>
-<li><p><a href="#Migrate-the-metadata">Migrieren Sie die Metadaten</a> vor dem Upgrade von Milvus v2.1.x auf v2.4.19.</p></li>
+<li><p><a href="#Upgrade-Milvus-using-Helm">Führen Sie ein Upgrade von Milvus mit Helm</a> für ein Upgrade von einer Nebenversion vor v2.2.3 auf v2.4.20 durch.</p></li>
+<li><p><a href="#Migrate-the-metadata">Migrieren Sie die Metadaten</a> vor dem Upgrade von Milvus v2.1.x auf v2.4.20.</p></li>
 </ul>
 <div style="display: none;">
 <h2 id="Conduct-a-rolling-upgrade" class="common-anchor-header">Durchführen eines rollenden Upgrades<button data-href="#Conduct-a-rolling-upgrade" class="anchor-icon" translate="no">
@@ -145,8 +145,8 @@ zilliztech/milvus       4.1.0           2.3.0                   Milvus is an ope
 <tr><td><code translate="no">o</code></td><td>Vorgang</td><td><code translate="no">update</code></td><td>Falsch</td></tr>
 </tbody>
 </table>
-<p>Sobald Sie sichergestellt haben, dass sich alle Einsätze in Ihrer Milvus-Instanz in ihrem normalen Status befinden, können Sie den folgenden Befehl ausführen. Sie können den folgenden Befehl ausführen, um die Milvus-Instanz auf 2.4.19 zu aktualisieren.</p>
-<pre><code translate="no" class="language-shell">sh rollingUpdate.<span class="hljs-property">sh</span> -n <span class="hljs-keyword">default</span> -i my-release -o update -t <span class="hljs-number">2.4</span><span class="hljs-number">.19</span> -w <span class="hljs-string">&#x27;milvusdb/milvus:v2.4.19&#x27;</span>
+<p>Sobald Sie sichergestellt haben, dass sich alle Einsätze in Ihrer Milvus-Instanz in ihrem normalen Status befinden, können Sie den folgenden Befehl ausführen. Sie können den folgenden Befehl ausführen, um die Milvus-Instanz auf 2.4.20 zu aktualisieren.</p>
+<pre><code translate="no" class="language-shell">sh rollingUpdate.<span class="hljs-property">sh</span> -n <span class="hljs-keyword">default</span> -i my-release -o update -t <span class="hljs-number">2.4</span><span class="hljs-number">.20</span> -w <span class="hljs-string">&#x27;milvusdb/milvus:v2.4.20&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <div class="alert note">
 <ol>
@@ -192,7 +192,7 @@ helm upgrade my-release zilliztech/milvus --reset-then-reuse-values --version=<s
         ></path>
       </svg>
     </button></h2><p>Seit Milvus 2.2.0 sind die Metadaten nicht mehr mit denen früherer Versionen kompatibel. Die folgenden Beispielausschnitte gehen von einem Upgrade von Milvus 2.1.4 auf Milvus 2.2.0 aus.</p>
-<h3 id="1-Check-the-Milvus-version" class="common-anchor-header">1. Prüfen Sie die Milvus-Version</h3><p>Führen Sie <code translate="no">$ helm list</code> aus, um die Version Ihrer Milvus-App zu überprüfen. Sie können sehen, dass <code translate="no">APP VERSION</code> 2.1.4 ist.</p>
+<h3 id="1-Check-the-Milvus-version" class="common-anchor-header">1. Prüfen Sie die Milvus-Version</h3><p>Führen Sie <code translate="no">$ helm list</code> aus, um die Version Ihrer Milvus-Anwendung zu überprüfen. Sie können sehen, dass <code translate="no">APP VERSION</code> 2.1.4 ist.</p>
 <pre><code translate="no"><span class="hljs-variable constant_">NAME</span>                <span class="hljs-variable constant_">NAMESPACE</span>   <span class="hljs-variable constant_">REVISION</span>    <span class="hljs-variable constant_">UPDATED</span>                                 <span class="hljs-variable constant_">STATUS</span>      <span class="hljs-variable constant_">CHART</span>           <span class="hljs-variable constant_">APP</span> <span class="hljs-variable constant_">VERSION</span>    
 <span class="hljs-keyword">new</span>-release         <span class="hljs-keyword">default</span>     <span class="hljs-number">1</span>           <span class="hljs-number">2022</span>-<span class="hljs-number">11</span>-<span class="hljs-number">21</span> <span class="hljs-number">15</span>:<span class="hljs-number">41</span>:<span class="hljs-number">25.51539</span> +<span class="hljs-number">0800</span> <span class="hljs-variable constant_">CST</span>     deployed    milvus-<span class="hljs-number">3.2</span><span class="hljs-number">.18</span>   <span class="hljs-number">2.1</span><span class="hljs-number">.4</span> 
 <button class="copy-code-btn"></button></code></pre>
@@ -265,7 +265,7 @@ my-release-pulsar-zookeeper<span class="hljs-number">-2</span>                  
 <li><p>Geben Sie den Namespace mit <code translate="no">-n</code> an, wenn Ihr Milvus nicht im Standard-Namespace von K8s installiert ist.</p>
 <pre><code translate="no">./migrate.sh -i my-release -n milvus -s 2.1.4 -t 2.2.0
 <button class="copy-code-btn"></button></code></pre></li>
-<li><p>Geben Sie den Wurzelpfad mit <code translate="no">-r</code> an, wenn Ihr Milvus mit dem benutzerdefinierten <code translate="no">rootpath</code> installiert ist.</p>
+<li><p>Geben Sie den Wurzelpfad mit <code translate="no">-r</code> an, wenn Ihr Milvus mit dem benutzerdefinierten <code translate="no">rootpath</code> installiert wurde.</p>
 <pre><code translate="no">./migrate.sh -i my-release -n milvus -s 2.1.4 -t 2.2.0 -r by-dev
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>Geben Sie das Bild-Tag mit <code translate="no">-w</code> an, wenn Ihr Milvus mit einem benutzerdefinierten <code translate="no">image</code> installiert ist.</p>

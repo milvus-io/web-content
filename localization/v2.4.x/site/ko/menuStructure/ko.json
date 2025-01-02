@@ -1297,7 +1297,7 @@
             "children": []
           },
           {
-            "label": "12개의 랩",
+            "label": "12개의 실험실",
             "id": "video_search_with_twelvelabs_and_milvus.md",
             "order": 12,
             "children": []
@@ -1634,63 +1634,75 @@
         "children": []
       },
       {
-        "label": "Milvus로 이미지 검색",
-        "id": "image_similarity_search.md",
+        "label": "고급 RAG",
+        "id": "how_to_enhance_your_rag.md",
         "order": 2,
+        "children": []
+      },
+      {
+        "label": "Milvus로 전체 텍스트 검색",
+        "id": "full_text_search_with_milvus.md",
+        "order": 3,
         "children": []
       },
       {
         "label": "Milvus를 사용한 하이브리드 검색",
         "id": "hybrid_search_with_milvus.md",
-        "order": 3,
+        "order": 4,
+        "children": []
+      },
+      {
+        "label": "Milvus로 이미지 검색",
+        "id": "image_similarity_search.md",
+        "order": 5,
         "children": []
       },
       {
         "label": "멀티모달 RAG",
         "id": "multimodal_rag_with_milvus.md",
-        "order": 4,
+        "order": 6,
         "children": []
       },
       {
         "label": "밀버스를 사용한 그래프 RAG",
         "id": "graph_rag_with_milvus.md",
-        "order": 6,
+        "order": 7,
         "children": []
       },
       {
         "label": "문맥 검색",
         "id": "contextual_retrieval_with_milvus.md",
-        "order": 5,
+        "order": 8,
         "children": []
       },
       {
         "label": "HDBSCAN 클러스터링",
         "id": "hdbscan_clustering_with_milvus.md",
-        "order": 6,
+        "order": 9,
         "children": []
       },
       {
         "label": "다중 모달 검색에 ColPali 사용",
         "id": "use_ColPali_with_milvus.md",
-        "order": 7,
+        "order": 10,
         "children": []
       },
       {
         "label": "벡터 시각화",
         "id": "vector_visualization.md",
-        "order": 8,
+        "order": 11,
         "children": []
       },
       {
         "label": "영화 추천",
         "id": "movie_recommendation_with_milvus.md",
-        "order": 9,
+        "order": 12,
         "children": []
       },
       {
         "label": "마트료시카 임베딩을 사용한 퍼널 검색",
         "id": "funnel_search_with_matryoshka.md",
-        "order": 10,
+        "order": 13,
         "children": []
       },
       {

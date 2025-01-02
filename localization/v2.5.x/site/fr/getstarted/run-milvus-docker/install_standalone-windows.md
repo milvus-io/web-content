@@ -202,7 +202,7 @@ Creating milvus-standalone ... <span class="hljs-keyword">done</span>​
     </button></h2><h3 id="How-can-I-deal-with-the-Docker-Engine-stopped-error​" class="common-anchor-header">Comment puis-je résoudre l'erreur <code translate="no">Docker Engine stopped</code>?</h3><p>Une fois que vous avez installé Docker Desktop dans Windows, vous pouvez rencontrer l'erreur <code translate="no">Docker Engine stopped</code> si votre ordinateur n'est pas configuré correctement. Dans ce cas, vous devrez peut-être effectuer les vérifications suivantes.</p>
 <ol>
 <li><p>Vérifiez si la virtualisation est activée.</p>
-<p>Vous pouvez vérifier si la virtualisation est activée en consultant l'onglet <strong>Performance</strong> du <strong>Gestionnaire des tâches</strong>.</p>
+<p>Vous pouvez vérifier si la virtualisation est activée en consultant l'onglet <strong>Performance</strong> dans le <strong>Gestionnaire des tâches</strong>.</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/task-manager.png" alt="Virtualization in Task Manager" class="doc-image" id="virtualization-in-task-manager" />
@@ -254,9 +254,50 @@ Switching to windows engine: Post <span class="hljs-string">&quot;http://ipc/eng
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/milvus-read-config-fails-01.png" alt="Read config failed error prompt in Milvus startup" class="doc-image" id="read-config-failed-error-prompt-in-milvus-startup" />
    </span> <span class="img-wrapper"> <span>Erreur d'échec de lecture de la configuration au démarrage de Milvus</span> </span></p>
-<p>Pour traiter l'erreur qui s'affiche au démarrage de Milvus sous la forme "Read config failed", vous devez vérifier si le volume monté dans le conteneur Milvus est correct. Si le volume est correctement monté dans le conteneur, vous pouvez utiliser la commande <code translate="no">docker exec</code> pour accéder au conteneur et répertorier le dossier <strong>/milvus/configs</strong> comme suit.</p>
+<p>Pour traiter l'erreur "Read config failed" qui s'affiche au démarrage de Milvus, vous devez vérifier si le volume monté dans le conteneur Milvus est correct. Si le volume est correctement monté dans le conteneur, vous pouvez utiliser la commande <code translate="no">docker exec</code> pour accéder au conteneur et répertorier le dossier <strong>/milvus/configs</strong> comme suit.</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/milvus-read-config-fails-02.png" alt="List Milvus config files" class="doc-image" id="list-milvus-config-files" />
    </span> <span class="img-wrapper"> <span>Lister les fichiers de configuration de Milvus</span> </span></p>
 <p></p>
+<h2 id="Whats-next" class="common-anchor-header">Prochaine étape<button data-href="#Whats-next" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>Après avoir installé Milvus dans Docker, vous pouvez :</p>
+<ul>
+<li><p>Consulter <a href="/docs/fr/quickstart.md">Quickstart</a> pour voir ce que Milvus peut faire.</p></li>
+<li><p>Apprendre les opérations de base de Milvus :</p>
+<ul>
+<li><a href="/docs/fr/manage_databases.md">Gérer les bases de données</a></li>
+<li><a href="/docs/fr/manage-collections.md">Gérer les collections</a></li>
+<li><a href="/docs/fr/manage-partitions.md">Gérer les partitions</a></li>
+<li><a href="/docs/fr/insert-update-delete.md">Insérer, surinsérer et supprimer</a></li>
+<li><a href="/docs/fr/single-vector-search.md">Recherche à vecteur unique</a></li>
+<li><a href="/docs/fr/multi-vector-search.md">Recherche hybride</a></li>
+</ul></li>
+<li><p><a href="/docs/fr/upgrade_milvus_cluster-helm.md">Mise à niveau de Milvus à l'aide de Helm Chart</a>.</p></li>
+<li><p><a href="/docs/fr/scaleout.md">Faire évoluer votre cluster Milvus</a>.</p></li>
+<li><p>Déployer votre cluster Milvus sur des clouds :</p>
+<ul>
+<li><a href="/docs/fr/eks.md">Amazon EKS</a></li>
+<li><a href="/docs/fr/gcp.md">Google Cloud</a></li>
+<li><a href="/docs/fr/azure.md">Microsoft Azure</a></li>
+</ul></li>
+<li><p>Découvrez <a href="/docs/fr/milvus-webui.md">Milvus WebUI</a>, une interface web intuitive pour l'observabilité et la gestion de Milvus.</p></li>
+<li><p>Découvrez <a href="/docs/fr/milvus_backup_overview.md">Milvus Backup</a>, un outil open-source pour les sauvegardes de données Milvus.</p></li>
+<li><p>Découvrez <a href="/docs/fr/birdwatcher_overview.md">Birdwatcher</a>, un outil open-source pour le débogage de Milvus et les mises à jour dynamiques de la configuration.</p></li>
+<li><p>Découvrez <a href="https://milvus.io/docs/attu.md">Attu</a>, un outil GUI open-source pour la gestion intuitive de Milvus.</p></li>
+<li><p><a href="/docs/fr/monitor.md">Surveiller Milvus avec Prometheus</a>.</p></li>
+</ul>

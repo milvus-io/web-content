@@ -41,14 +41,14 @@ title: 过滤说明
 <li><p><strong>比较操作符</strong>：<code translate="no">==</code>,<code translate="no">!=</code>,<code translate="no">&gt;</code>,<code translate="no">&lt;</code>,<code translate="no">&gt;=</code>, 和<code translate="no">&lt;=</code> 允许基于数字、文本或日期字段进行筛选。</p></li>
 <li><p><strong>范围过滤器</strong>：<code translate="no">IN</code> 和<code translate="no">LIKE</code> 可帮助匹配特定的值范围或集合。</p></li>
 <li><p><strong>算术操作符</strong>：<code translate="no">+</code>,<code translate="no">-</code>,<code translate="no">*</code>,<code translate="no">/</code>,<code translate="no">%</code>, 和<code translate="no">**</code> 用于涉及数字字段的计算。</p></li>
-<li><p><strong>逻辑操作符</strong>：<code translate="no">AND</code>,<code translate="no">OR</code>, 和<code translate="no">NOT</code> 将多个条件组合成复杂的表达式。</p></li>
+<li><p><strong>逻辑操作符</strong>：<code translate="no">AND</code>,<code translate="no">OR</code>, 和<code translate="no">NOT</code> 或 '&amp;&amp;'、'||'、'~'、'!'将多个条件组合成复杂的表达式。</p></li>
 </ul>
 <h3 id="Example-Filtering-by-Color​" class="common-anchor-header">举例说明：按颜色筛选</h3><p>要在标量字段<code translate="no">color</code> 中查找具有三原色（红色、绿色或蓝色）的实体，请使用以下过滤表达式。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span>=<span class="hljs-string">&#x27;color in [&quot;red&quot;, &quot;green&quot;, &quot;blue&quot;]&#x27;</span>​
 
 <button class="copy-code-btn"></button></code></pre>
-<h3 id="Example-Filtering-JSON-Fields​" class="common-anchor-header">示例过滤 JSON 字段</h3><p>Milvus 允许在 JSON 字段中引用键。例如，如果您有一个带有键<code translate="no">price</code> 和<code translate="no">model</code> 的 JSON 字段<code translate="no">product</code> ，并想查找具有特定模型且价格低于 1,850 的产品，请使用此过滤表达式。</p>
-<pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span>=<span class="hljs-string">&#x27;product[&quot;model&quot;] == &quot;JSN-087&quot; AND product[&quot;price&quot;] &lt; 1850&#x27;</span>​
+<h3 id="Example-Filtering-JSON-Fields​" class="common-anchor-header">示例过滤 JSON 字段</h3><p>Milvus 允许在 JSON 字段中引用键。例如，如果您有一个带有键<code translate="no">price</code> 和<code translate="no">model</code> 的 JSON 字段<code translate="no">product</code> ，并希望查找具有特定模型且价格低于 1,850 的产品，请使用此过滤表达式。</p>
+<pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span>=<span class="hljs-string">&#x27;product[&quot;model&quot;] == &quot;JSN-087&quot; and product[&quot;price&quot;] &lt; 1850&#x27;</span>​
 
 <button class="copy-code-btn"></button></code></pre>
 <h3 id="Example-Filtering-Array-Fields​" class="common-anchor-header">示例：过滤数组字段</h3><p>如果您有一个包含温度记录的数组字段<code translate="no">history_temperatures</code> ，并希望找到第 10 个记录的温度超过 23°C 的观测站，请使用此表达式。</p>
@@ -74,11 +74,11 @@ title: 过滤说明
     </button></h2><p>使用中日韩字符进行筛选时，由于字符集较大且编码不同，处理过程可能会更加复杂。这会导致性能变慢，尤其是使用<code translate="no">IN</code> 操作符时。</p>
 <p>Milvus 引入了过滤表达式模板，以优化处理中日韩字符时的性能。通过将动态值从过滤器表达式中分离出来，查询引擎能更有效地处理参数插入。</p>
 <h3 id="Example​" class="common-anchor-header">示例</h3><p>要查找居住在 "北京"（北京）或 "上海"（上海）的 25 岁以上的个人，请使用以下模板表达式。</p>
-<pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&quot;age &gt; 25 AND city IN [&#x27;北京&#x27;, &#x27;上海&#x27;]&quot;</span>​
+<pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&quot;age &gt; 25 and city in [&#x27;北京&#x27;, &#x27;上海&#x27;]&quot;</span>​
 
 <button class="copy-code-btn"></button></code></pre>
 <p>为提高性能，可使用这种带参数的变体。</p>
-<pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&quot;age &gt; {age} AND city in {city}&quot;</span>,​
+<pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span> = <span class="hljs-string">&quot;age &gt; {age} and city in {city}&quot;</span>,​
 filter_params = {<span class="hljs-string">&quot;age&quot;</span>: <span class="hljs-number">25</span>, <span class="hljs-string">&quot;city&quot;</span>: [<span class="hljs-string">&quot;北京&quot;</span>, <span class="hljs-string">&quot;上海&quot;</span>]}​
 
 <button class="copy-code-btn"></button></code></pre>
@@ -129,7 +129,7 @@ filter=<span class="hljs-string">&#x27;json_contains_any(tags, [&quot;electronic
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span>=<span class="hljs-string">&quot;ARRAY_CONTAINS_ANY(history_temperatures, [23, 24])&quot;</span>​
 
 <button class="copy-code-btn"></button></code></pre>
-<p><code translate="no">**ARRAY_LENGTH**</code>:根据数组长度进行筛选。</p>
+<p><code translate="no">**ARRAY_LENGTH**</code>:根据数组的长度进行过滤。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span>=<span class="hljs-string">&quot;ARRAY_LENGTH(history_temperatures) &lt; 10&quot;</span>​
 
 <button class="copy-code-btn"></button></code></pre>

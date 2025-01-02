@@ -48,9 +48,10 @@ title: Milvus WebUI
 <tr><td>Instalación</td><td>Integrado en</td><td>Herramienta independiente</td><td>Herramienta independiente</td></tr>
 <tr><td>Dependencias</td><td>Milvus</td><td>Milvus / etcd</td><td>Milvus</td></tr>
 <tr><td>Funciones principales</td><td>Entorno de ejecución, detalles de la base de datos/colección, segmentos, canales, tareas y solicitudes de consultas lentas</td><td>Inspección de metadatos y ejecución de la API de Milvus</td><td>Gestión de bases de datos y tareas operativas</td></tr>
+<tr><td>Disponible desde</td><td>v2.5.0</td><td>v2.0.0</td><td>v0.1.8</td></tr>
 </tbody>
 </table>
-<p>Puede acceder a Milvus Web UI utilizando la siguiente URL:</p>
+<p>A partir de la versión 2.5.0, puede acceder a Milvus Web UI utilizando la siguiente URL en una instancia de Milvus en ejecución:</p>
 <pre><code translate="no">http://<span class="hljs-variable">${MILVUS_PROXY_IP}</span>:9091/webui
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Features" class="common-anchor-header">Características<button data-href="#Features" class="anchor-icon" translate="no">
@@ -68,7 +69,7 @@ title: Milvus WebUI
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Milvus Web UI proporciona las siguientes características:</p>
+    </button></h2><p>Milvus Web UI ofrece las siguientes características:</p>
 <p>
   
    <span class="img-wrapper"> <img translate="no" src="/docs/v2.5.x/assets/milvus-webui-overview.png" alt="Milvus Web UI overview" class="doc-image" id="milvus-web-ui-overview" />
@@ -113,7 +114,7 @@ title: Milvus WebUI
    </span> <span class="img-wrapper"> <span>Inicio de Milvus Web UI</span> </span></p>
 <ul>
 <li><p><strong>Información del sistema</strong>: Ver información del sistema, incluida información sobre el modo de despliegue, la imagen utilizada en el despliegue e información relacionada.</p></li>
-<li><p><strong>Información del componente</strong>: Ver el estado y las métricas de los componentes en Milvus, incluyendo el estado y las métricas de los nodos de consulta, nodos de datos, nodos de índice, coordinadores y proxies.</p></li>
+<li><p><strong>Información del componente</strong>: Vea el estado y las métricas de los componentes de Milvus, incluidos el estado y las métricas de los nodos de consulta, los nodos de datos, los nodos de índice, los coordinadores y los proxies.</p></li>
 <li><p><strong>Clientes conectados</strong>: Vea los clientes conectados y su información, incluido el tipo y la versión del SDK, el nombre de usuario y su historial de acceso.</p></li>
 <li><p><strong>Dependencias del sistema</strong>: Vea el estado y las métricas de las dependencias de Milvus, incluidos el estado y las métricas del metaalmacén, la cola de mensajes y el almacenamiento de objetos.</p></li>
 </ul>

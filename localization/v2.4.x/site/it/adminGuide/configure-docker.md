@@ -38,8 +38,8 @@ Nella versione attuale, tutti i parametri hanno effetto solo dopo il riavvio di 
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p><a href="https://raw.githubusercontent.com/milvus-io/milvus/v2.4.19/configs/milvus.yaml">Scaricare</a> <code translate="no">milvus.yaml</code> direttamente o con il seguente comando.</p>
-<pre><code translate="no">$ wget https://raw.githubusercontent.com/milvus-io/milvus/v2.4.19/configs/milvus.yaml
+    </button></h2><p><a href="https://raw.githubusercontent.com/milvus-io/milvus/v2.4.20/configs/milvus.yaml">Scaricare</a> <code translate="no">milvus.yaml</code> direttamente o con il seguente comando.</p>
+<pre><code translate="no">$ wget https://raw.githubusercontent.com/milvus-io/milvus/v2.4.20/configs/milvus.yaml
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Modify-the-configuration-file" class="common-anchor-header">Modificare il file di configurazione<button data-href="#Modify-the-configuration-file" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -211,10 +211,10 @@ Nella versione attuale, tutti i parametri hanno effetto solo dopo il riavvio di 
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Scaricate il file di installazione di Milvus <a href="https://github.com/milvus-io/milvus/releases/download/v2.4.19/milvus-standalone-docker-compose.yml">standalone</a> e salvatelo come <code translate="no">docker-compose.yml</code>.</p>
+    </button></h2><p>Scaricate il file di installazione di Milvus <a href="https://github.com/milvus-io/milvus/releases/download/v2.4.20/milvus-standalone-docker-compose.yml">standalone</a> e salvatelo come <code translate="no">docker-compose.yml</code>.</p>
 <p>È anche possibile eseguire semplicemente il seguente comando.</p>
 <pre><code translate="no"><span class="hljs-comment"># For Milvus standalone</span>
-$ wget https://github.com/milvus-io/milvus/releases/download/v2.4.19/milvus-standalone-docker-compose.yml -O docker-compose.yml
+$ wget https://github.com/milvus-io/milvus/releases/download/v2.4.20/milvus-standalone-docker-compose.yml -O docker-compose.yml
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Modify-the-installation-file" class="common-anchor-header">Modificare il file di installazione<button data-href="#Modify-the-installation-file" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -232,7 +232,7 @@ $ wget https://github.com/milvus-io/milvus/releases/download/v2.4.19/milvus-stan
         ></path>
       </svg>
     </button></h2><p>In <code translate="no">docker-compose.yml</code>, aggiungere una sezione <code translate="no">volumes</code> sotto ogni <code translate="no">milvus-standalone</code>.</p>
-<p>Mappare il percorso locale del file <code translate="no">milvus.yaml</code> sui corrispondenti percorsi del contenitore docker dei file di configurazione <code translate="no">/milvus/configs/milvus.yaml</code> sotto tutte le sezioni <code translate="no">volumes</code>.</p>
+<p>Mappate il percorso locale del vostro file <code translate="no">milvus.yaml</code> sui percorsi corrispondenti del contenitore docker ai file di configurazione <code translate="no">/milvus/configs/milvus.yaml</code> sotto tutte le sezioni <code translate="no">volumes</code>.</p>
 <pre><code translate="no" class="language-yaml">...
   standalone:
     container_name: milvus-standalone

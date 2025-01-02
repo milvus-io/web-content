@@ -72,7 +72,23 @@ $ bash standalone_embed.sh start
 <li>要更改 Milvus 的默认配置，请将您的设置添加到当前文件夹中的<strong>user.yaml</strong>文件，然后重新启动服务。</li>
 <li>Milvus 数据卷被映射到当前文件夹中的<strong>volumes/milvus</strong>。</li>
 </ul>
-<p>您可以按以下方式停止和删除该容器</p>
+<p>你可以访问 Milvus WebUI，网址是<code translate="no">http://127.0.0.1:9091/webui/</code> ，了解有关 Milvus 实例的更多信息。有关详细信息，请参阅<a href="/docs/zh/milvus-webui.md">Milvus WebUI</a>。</p>
+<h2 id="Stop-and-delete-Milvus" class="common-anchor-header">停止和删除 Milvus<button data-href="#Stop-and-delete-Milvus" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>停止和删除此容器的方法如下</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-comment"># Stop Milvus</span>
 $ bash standalone_embed.sh stop
 
@@ -118,8 +134,9 @@ $ bash standalone_embed.sh upgrade
 <li><a href="/docs/zh/gcp.md">谷歌云</a></li>
 <li><a href="/docs/zh/azure.md">微软 Azure</a></li>
 </ul></li>
+<li><p>探索<a href="/docs/zh/milvus-webui.md">Milvus WebUI</a>，一个用于 Milvus 可观察性和管理的直观 Web 界面。</p></li>
 <li><p>探索<a href="/docs/zh/milvus_backup_overview.md">Milvus 备份</a>，一个用于 Milvus 数据备份的开源工具。</p></li>
 <li><p>探索<a href="/docs/zh/birdwatcher_overview.md">Birdwatcher</a>，用于调试 Milvus 和动态配置更新的开源工具。</p></li>
-<li><p>探索<a href="https://milvus.io/docs/attu.md">Attu</a>，一款用于直观管理 Milvus 的开源图形用户界面工具。</p></li>
+<li><p>探索<a href="https://milvus.io/docs/attu.md">Attu</a>，一个用于直观管理 Milvus 的开源图形用户界面工具。</p></li>
 <li><p><a href="/docs/zh/monitor.md">使用 Prometheus 监控 Milvus</a>。</p></li>
 </ul>
