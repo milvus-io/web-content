@@ -16,7 +16,7 @@ Milvus supports several basic operators for filtering data:​
 
 - **Range Filters**: `IN` and `LIKE` help match specific value ranges or sets.​
 
-- **Arithmetic Operators**: `+`, `-`, `*`, `/`, `%`, and `**` are used for calculations involving numeric fields.​
+- **Arithmetic Operators**: `+`, `-`, `*`, `/`, `%`, and `` are used for calculations involving numeric fields.​
 
 - **Logical Operators**: `AND`, `OR`, and `NOT` or '&&', '||', '~', '!' combine multiple conditions into complex expressions.​
 
@@ -82,7 +82,7 @@ Milvus provides advanced filtering operators for specific data types, such as JS
 
 Milvus offers advanced operators for querying JSON fields, enabling precise filtering within complex JSON structures:​
 
-`**JSON_CONTAINS(identifier, jsonExpr)**`: Checks if a JSON expression exists in the field.​
+`JSON_CONTAINS(identifier, jsonExpr)`: Checks if a JSON expression exists in the field.​
 
 ```python
 # JSON data: {"tags": ["electronics", "sale", "new"]}​
@@ -90,7 +90,7 @@ filter='json_contains(tags, "sale")'​
 
 ```
 
-`**JSON_CONTAINS_ALL(identifier, jsonExpr)**`: Ensures all elements of the JSON expression are present.​
+`JSON_CONTAINS_ALL(identifier, jsonExpr)`: Ensures all elements of the JSON expression are present.​
 
 ```python
 # JSON data: {"tags": ["electronics", "sale", "new", "discount"]}​
@@ -98,7 +98,7 @@ filter='json_contains_all(tags, ["electronics", "sale", "new"])'​
 
 ```
 
-`**JSON_CONTAINS_ANY(identifier, jsonExpr)**`: Filters for entities where at least one element exists in the JSON expression.​
+`JSON_CONTAINS_ANY(identifier, jsonExpr)`: Filters for entities where at least one element exists in the JSON expression.​
 
 ```python
 # JSON data: {"tags": ["electronics", "sale", "new"]}​
@@ -112,28 +112,28 @@ For more details on JSON operators, refer to [​JSON Operators](json-operators.
 
 Milvus provides advanced filtering operators for array fields, such as `ARRAY_CONTAINS`, `ARRAY_CONTAINS_ALL`, `ARRAY_CONTAINS_ANY`, and `ARRAY_LENGTH`, which allow fine-grained control over array data:​
 
-`**ARRAY_CONTAINS**`: Filters entities containing a specific element.​
+`ARRAY_CONTAINS`: Filters entities containing a specific element.​
 
 ```python
 filter="ARRAY_CONTAINS(history_temperatures, 23)"​
 
 ```
 
-`**ARRAY_CONTAINS_ALL**`: Filters entities where all elements in a list are present.​
+`ARRAY_CONTAINS_ALL`: Filters entities where all elements in a list are present.​
 
 ```python
 filter="ARRAY_CONTAINS_ALL(history_temperatures, [23, 24])"​
 
 ```
 
-`**ARRAY_CONTAINS_ANY**`: Filters entities containing any element from the list.​
+`ARRAY_CONTAINS_ANY`: Filters entities containing any element from the list.​
 
 ```python
 filter="ARRAY_CONTAINS_ANY(history_temperatures, [23, 24])"​
 
 ```
 
-`**ARRAY_LENGTH**`: Filters based on the length of the array.​
+`ARRAY_LENGTH`: Filters based on the length of the array.​
 
 ```python
 filter="ARRAY_LENGTH(history_temperatures) < 10"​
@@ -144,7 +144,7 @@ For more details on array operators, see [​ARRAY Operators](array-operators.md
 
 ### VARCHAR field-specific operators​
 
-The `**Text_Match**` operator allows precise document retrieval based on specific query terms. It is particularly useful for filtered searches that combine scalar filters with vector similarity searches. Unlike semantic searches, Text Match focuses on exact term occurrences.​
+The `Text_Match` operator allows precise document retrieval based on specific query terms. It is particularly useful for filtered searches that combine scalar filters with vector similarity searches. Unlike semantic searches, Text Match focuses on exact term occurrences.​
 
 Milvus uses Tantivy to support inverted indexing and term-based text search. The process involves:​
 
