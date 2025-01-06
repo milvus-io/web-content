@@ -31,10 +31,12 @@ Then create a folder alongside the downloaded or built Milvus Backup binary, nam
 Your folder structure should be similar to the following:
 
 <pre>
-workspace
-├── milvus-backup
-└── configs
-     └── backup.yaml
+  <code>
+  workspace
+  ├── milvus-backup
+  └── configs
+      └── backup.yaml
+  </code>
 </pre>
 
 Because Milvus Backup cannot back up your data to a local path, ensure that Minio settings are correct when tailoring the configuration file. 
