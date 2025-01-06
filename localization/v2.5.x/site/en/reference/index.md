@@ -456,6 +456,8 @@ Currently, a vector field only supports one index type. Milvus automatically del
 <tr><td><code translate="no">M</code></td><td>M defines tha maximum number of outgoing connections in the graph. Higher M leads to higher accuracy/run_time at fixed ef/efConstruction.</td><td>[2, 2048]</td><td>None</td></tr>
 <tr><td><code translate="no">efConstruction</code></td><td>ef_construction controls index search speed/build speed tradeoff. Increasing the efConstruction parameter may enhance index quality, but it also tends to lengthen the indexing time.</td><td>[1, int_max]</td><td>None</td></tr>
 <tr><td><code translate="no">sq_type</code></td><td>Scalar quantizer type.</td><td><code translate="no">SQ6</code>,<code translate="no">SQ8</code>, <code translate="no">BF16</code>, <code translate="no">FP16</code></td><td><code translate="no">SQ8</code></td></tr>
+<tr><td><code translate="no">refine</code></td><td>Whether refined data is reserved during index building.</td><td><code translate="no">true</code>, <code translate="no">false</code></td><td><code translate="no">false</code></td></tr>
+<tr><td><code translate="no">refine_type</code></td><td>The data type of the refine index.</td><td><code translate="no">SQ6</code>, <code translate="no">SQ8</code>, <code translate="no">BF16</code>, <code translate="no">FP16</code>, <code translate="no">FP32</code></td><td>None</td></tr>
 </tbody>
 </table>
 </li>
@@ -466,9 +468,7 @@ Currently, a vector field only supports one index type. Milvus automatically del
 </thead>
 <tbody>
 <tr><td><code translate="no">ef</code></td><td>Parameter controlling query time/accuracy trade-off. Higher <code translate="no">ef</code> leads to more accurate but slower search.</td><td>[<code translate="no">top_k</code>, int_max]</td><td>None</td></tr>
-<tr><td><code translate="no">refine</code></td><td>Whether the refine is used during the train.</td><td><code translate="no">true</code>, <code translate="no">false</code></td><td><code translate="no">false</code></td></tr>
 <tr><td><code translate="no">refine_k</code></td><td>The magnification factor of refine compared to <em>k</em>.</td><td>[1, <em>float_max</em>)</td><td><code translate="no">1</code></td></tr>
-<tr><td><code translate="no">refine_type</code></td><td>The data type of the refine index.</td><td><code translate="no">SQ6</code>, <code translate="no">SQ8</code>, <code translate="no">BF16</code>, <code translate="no">FP16</code>, <code translate="no">FP32</code></td><td>None</td></tr>
 </tbody>
 </table>
 </li>
@@ -486,6 +486,8 @@ Currently, a vector field only supports one index type. Milvus automatically del
 <tr><td><code translate="no">efConstruction</code></td><td>ef_construction controls index search speed/build speed tradeoff. Increasing the efConstruction parameter may enhance index quality, but it also tends to lengthen the indexing time.</td><td>[1, int_max]</td><td>None</td></tr>
 <tr><td><code translate="no">m</code></td><td>The number of sub-vector groups to split the vector into.</td><td>[1, 65536]</td><td>32</td></tr>
 <tr><td><code translate="no">nbits</code></td><td>The number of bits into which each group of sub-vectors is quantized.</td><td>[1, 24]</td><td>8</td></tr>
+<tr><td><code translate="no">refine</code></td><td>Whether refined data is reserved during index building.</td><td><code translate="no">true</code>, <code translate="no">false</code></td><td><code translate="no">false</code></td></tr>
+<tr><td><code translate="no">refine_type</code></td><td>The data type of the refine index.</td><td><code translate="no">SQ6</code>, <code translate="no">SQ8</code>, <code translate="no">BF16</code>, <code translate="no">FP16</code>, <code translate="no">FP32</code></td><td>None</td></tr>
 </tbody>
 </table>
 </li>
@@ -496,9 +498,7 @@ Currently, a vector field only supports one index type. Milvus automatically del
 </thead>
 <tbody>
 <tr><td><code translate="no">ef</code></td><td>Parameter controlling query time/accuracy trade-off. Higher <code translate="no">ef</code> leads to more accurate but slower search.</td><td>[<code translate="no">top_k</code>, int_max]</td><td>None</td></tr>
-<tr><td><code translate="no">refine</code></td><td>Whether the refine is used during the train.</td><td><code translate="no">true</code>, <code translate="no">false</code></td><td><code translate="no">false</code></td></tr>
 <tr><td><code translate="no">refine_k</code></td><td>The magnification factor of refine compared to <em>k</em>.</td><td>[1, <em>float_max</em>)</td><td><code translate="no">1</code></td></tr>
-<tr><td><code translate="no">refine_type</code></td><td>The data type of the refine index.</td><td><code translate="no">SQ6</code>, <code translate="no">SQ8</code>, <code translate="no">BF16</code>, <code translate="no">FP16</code>, <code translate="no">FP32</code></td><td>None</td></tr>
 </tbody>
 </table>
 </li>
@@ -517,6 +517,8 @@ Currently, a vector field only supports one index type. Milvus automatically del
 <tr><td><code translate="no">m</code></td><td>The number of sub-vector groups to split the vector into.</td><td>[1, 65536]</td><td>32</td></tr>
 <tr><td><code translate="no">nbits</code></td><td>The number of bits into which each group of sub-vectors is quantized.</td><td>[1, 24]</td><td>8</td></tr>
 <tr><td><code translate="no">nrq</code></td><td>The number of residual subquantizers.</td><td>[1, 16]</td><td>2</td></tr>
+<tr><td><code translate="no">refine</code></td><td>Whether refined data is reserved during index building.</td><td><code translate="no">true</code>, <code translate="no">false</code></td><td><code translate="no">false</code></td></tr>
+<tr><td><code translate="no">refine_type</code></td><td>The data type of the refine index.</td><td><code translate="no">SQ6</code>, <code translate="no">SQ8</code>, <code translate="no">BF16</code>, <code translate="no">FP16</code>, <code translate="no">FP32</code></td><td>None</td></tr>
 </tbody>
 </table>
 </li>
@@ -527,9 +529,7 @@ Currently, a vector field only supports one index type. Milvus automatically del
 </thead>
 <tbody>
 <tr><td><code translate="no">ef</code></td><td>Parameter controlling query time/accuracy trade-off. Higher <code translate="no">ef</code> leads to more accurate but slower search.</td><td>[<code translate="no">top_k</code>, int_max]</td><td>None</td></tr>
-<tr><td><code translate="no">refine</code></td><td>Whether the refine is used during the train.</td><td><code translate="no">true</code>, <code translate="no">false</code></td><td><code translate="no">false</code></td></tr>
 <tr><td><code translate="no">refine_k</code></td><td>The magnification factor of refine compared to <em>k</em>.</td><td>[1, <em>float_max</em>)</td><td><code translate="no">1</code></td></tr>
-<tr><td><code translate="no">refine_type</code></td><td>The data type of the refine index.</td><td><code translate="no">SQ6</code>, <code translate="no">SQ8</code>, <code translate="no">BF16</code>, <code translate="no">FP16</code>, <code translate="no">FP32</code></td><td>None</td></tr>
 </tbody>
 </table>
 </li>
