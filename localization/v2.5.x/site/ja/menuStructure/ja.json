@@ -802,7 +802,7 @@
             "children": []
           },
           {
-            "label": "講師",
+            "label": "インストラクター",
             "id": "embed-with-instructor.md",
             "order": 9,
             "children": []
@@ -1452,6 +1452,38 @@
             "id": "milvus_backup_api.md",
             "order": 2,
             "children": []
+          },
+          {
+            "label": "よくあるケース",
+            "id": "common-cases",
+            "order": 3,
+            "isMenu": true,
+            "children": [
+              {
+                "label": "1つのバケットでインスタンス間を移行する",
+                "id": "shared-bucket-backup-and-restore.md",
+                "order": 0,
+                "children": []
+              },
+              {
+                "label": "バケットをまたいだインスタンス間の移行",
+                "id": "cross-bucket-backup-and-restore.md",
+                "order": 1,
+                "children": []
+              },
+              {
+                "label": "S3環境をまたがるインスタンス間の移行",
+                "id": "multi-storage-backup-and-restore.md",
+                "order": 2,
+                "children": []
+              },
+              {
+                "label": "1つのインスタンスでバックアップとリストア",
+                "id": "single-instance-backup-and-restore.md",
+                "order": 3,
+                "children": []
+              }
+            ]
           }
         ]
       },

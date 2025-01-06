@@ -92,7 +92,7 @@
                 "children": []
               },
               {
-                "label": "Docker Compose(Linux)",
+                "label": "도커 컴포즈(Linux)",
                 "id": "install_standalone-docker-compose.md",
                 "order": 2,
                 "children": []
@@ -1452,6 +1452,38 @@
             "id": "milvus_backup_api.md",
             "order": 2,
             "children": []
+          },
+          {
+            "label": "일반적인 사례",
+            "id": "common-cases",
+            "order": 3,
+            "isMenu": true,
+            "children": [
+              {
+                "label": "하나의 버킷에서 인스턴스 간 마이그레이션",
+                "id": "shared-bucket-backup-and-restore.md",
+                "order": 0,
+                "children": []
+              },
+              {
+                "label": "버킷 간 인스턴스 마이그레이션",
+                "id": "cross-bucket-backup-and-restore.md",
+                "order": 1,
+                "children": []
+              },
+              {
+                "label": "S3 환경 전반의 인스턴스 간 마이그레이션",
+                "id": "multi-storage-backup-and-restore.md",
+                "order": 2,
+                "children": []
+              },
+              {
+                "label": "하나의 인스턴스에서 백업 및 복원",
+                "id": "single-instance-backup-and-restore.md",
+                "order": 3,
+                "children": []
+              }
+            ]
           }
         ]
       },
@@ -1609,7 +1641,7 @@
             "children": []
           },
           {
-            "label": "12개의 실험실",
+            "label": "12개의 랩",
             "id": "video_search_with_twelvelabs_and_milvus.md",
             "order": 12,
             "children": []

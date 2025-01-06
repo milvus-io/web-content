@@ -19,6 +19,44 @@ title: Release Notes
         ></path>
       </svg>
     </button></h1><p>Find out what’s new in Milvus! This page summarizes new features, improvements, known issues, and bug fixes in each release. You can find the release notes for each released version after v2.5.0 in this section. We suggest that you regularly visit this page to learn about updates.</p>
+<h2 id="v252" class="common-anchor-header">v2.5.2<button data-href="#v252" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>Release date: January 3, 2025</p>
+<table>
+<thead>
+<tr><th>Milvus version</th><th>Python SDK version</th><th>Node.js SDK version</th><th>Java SDK version</th></tr>
+</thead>
+<tbody>
+<tr><td>2.5.2</td><td>2.5.3</td><td>2.5.3</td><td>2.5.3</td></tr>
+</tbody>
+</table>
+<p>Milvus 2.5.2 supports modifying the maximum length for VARCHAR columns and resolves several critical issues related to concurrency, partition drops, and BM25 stats handling during import. We highly recommend upgrading to this version for improved stability and performance.</p>
+<h3 id="Improvements" class="common-anchor-header">Improvements</h3><ul>
+<li>Generated disk usage logs only when the specified path does not exist. (<a href="https://github.com/milvus-io/milvus/pull/38822">#38822</a>)</li>
+<li>Added a parameter for tuning the maximum VARCHAR length and restored the limit to 65,535. (<a href="https://github.com/milvus-io/milvus/pull/38883">#38883</a>)</li>
+<li>Supported parameter type conversion for expressions. (<a href="https://github.com/milvus-io/milvus/pull/38782">#38782</a>)</li>
+</ul>
+<h3 id="Bug-fixes" class="common-anchor-header">Bug fixes</h3><ul>
+<li>Fixed potential deadlocks in concurrency scenarios. (<a href="https://github.com/milvus-io/milvus/pull/38863">#38863</a>)</li>
+<li>Generated the index_null_offset file only for fields that support null values. (<a href="https://github.com/milvus-io/milvus/pull/38834">#38834</a>)</li>
+<li>Fixed the retrieve plan usage after free in the reduce phase. (<a href="https://github.com/milvus-io/milvus/pull/38841">#38841</a>)</li>
+<li>Recognized expressions with capitalized AND and OR. (<a href="https://github.com/milvus-io/milvus/pull/38928">#38928</a>)</li>
+<li>Allowed successful partition drops even if loading failed. (<a href="https://github.com/milvus-io/milvus/pull/38874">#38874</a>)</li>
+<li>Fixed BM25 stats file registration issues during import. (<a href="https://github.com/milvus-io/milvus/pull/38881">#38881</a>)</li>
+</ul>
 <h2 id="v251" class="common-anchor-header">v2.5.1<button data-href="#v251" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

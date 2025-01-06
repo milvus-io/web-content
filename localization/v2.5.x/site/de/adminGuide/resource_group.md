@@ -62,7 +62,7 @@ title: Verwalten von Ressourcengruppen
 }
 <button class="copy-code-btn"></button></code></pre>
 <ul>
-<li>Das <strong>requests-Attribut</strong> legt die Bedingungen fest, die eine Ressourcengruppe erfüllen muss.</li>
+<li>Das Attribut <strong>requests</strong> gibt die Bedingungen an, die eine Ressourcengruppe erfüllen muss.</li>
 <li>Das <strong>limits-Attribut</strong> legt die Höchstgrenzen für eine Ressourcengruppe fest.</li>
 <li>Die Attribute <strong>transfer_from</strong> und <strong>transfer_to</strong> beschreiben, von welchen Ressourcengruppen eine Ressourcengruppe vorzugsweise Ressourcen beziehen bzw. an welche Ressourcengruppen sie Ressourcen übertragen soll.</li>
 </ul>
@@ -90,7 +90,7 @@ title: Verwalten von Ressourcengruppen
         ></path>
       </svg>
     </button></h2><div class="alert note">
-<p>Alle Codebeispiele auf dieser Seite sind in PyMilvus 2.5.2. Aktualisieren Sie Ihre PyMilvus-Installation, bevor Sie sie ausführen.</p>
+<p>Alle Codebeispiele auf dieser Seite sind in PyMilvus 2.5.3. Aktualisieren Sie Ihre PyMilvus-Installation, bevor Sie sie ausführen.</p>
 </div>
 <ol>
 <li><p>Erstellen Sie eine Ressourcengruppe.</p>
@@ -276,7 +276,7 @@ init_cluster(<span class="hljs-number">1</span>)
     <span class="hljs-comment"># scale the querynode number in Milvus into node_num.</span>
     <span class="hljs-keyword">pass</span>
 <button class="copy-code-btn"></button></code></pre>
-<p>Wir können die API verwenden, um eine bestimmte Ressourcengruppe auf eine bestimmte Anzahl von QueryNodes zu skalieren, ohne andere Ressourcengruppen zu beeinträchtigen.</p>
+<p>Wir können die API verwenden, um eine bestimmte Ressourcengruppe auf eine bestimmte Anzahl von Abfrageknoten zu skalieren, ohne andere Ressourcengruppen zu beeinträchtigen.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-comment"># scale rg1 into 3 nodes, rg2 into 1 nodes</span>
 utility.update_resource_groups({
     <span class="hljs-string">&quot;rg1&quot;</span>: ResourceGroupConfig(

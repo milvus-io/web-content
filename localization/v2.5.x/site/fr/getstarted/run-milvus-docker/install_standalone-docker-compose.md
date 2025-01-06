@@ -57,7 +57,7 @@ title: Exécuter Milvus avec Docker Compose (Linux)
       </svg>
     </button></h2><p>Milvus fournit un fichier de configuration Docker Compose dans le référentiel Milvus. Pour installer Milvus à l'aide de Docker Compose, il suffit d'exécuter la commande suivante</p>
 <pre><code translate="no" class="language-shell"><span class="hljs-comment"># Download the configuration file</span>
-$ wget https://github.com/milvus-io/milvus/releases/download/v2.5.1/milvus-standalone-docker-compose.yml -O docker-compose.yml
+$ wget https://github.com/milvus-io/milvus/releases/download/v2.5.2/milvus-standalone-docker-compose.yml -O docker-compose.yml
 
 <span class="hljs-comment"># Start Milvus</span>
 $ <span class="hljs-built_in">sudo</span> docker compose up -d
@@ -69,14 +69,14 @@ Creating milvus-standalone ... <span class="hljs-keyword">done</span>
 <div class="alert note">
 <ul>
 <li><p>Si vous n'avez pas réussi à exécuter la commande ci-dessus, veuillez vérifier si Docker Compose V1 est installé sur votre système. Si c'est le cas, il est conseillé de migrer vers Docker Compose V2 en raison des notes sur <a href="https://docs.docker.com/compose/">cette page</a>.</p></li>
-<li><p>Si vous rencontrez des problèmes lors de l'extraction de l'image, contactez-nous à l'adresse <a href="mailto:community@zilliz.com">community@zilliz.com</a> en détaillant le problème, et nous vous fournirons l'assistance nécessaire.</p></li>
+<li><p>Si vous rencontrez des problèmes en tirant l'image, contactez-nous à l'adresse <a href="mailto:community@zilliz.com">community@zilliz.com</a> en détaillant le problème, et nous vous fournirons l'assistance nécessaire.</p></li>
 </ul>
 </div>
 <p>Après le démarrage de Milvus,</p>
 <ul>
 <li>Les conteneurs <strong>milvus-standalone</strong>, <strong>milvus-minio</strong> et <strong>milvus-etcd</strong> sont en place.<ul>
 <li>Le conteneur <strong>milvus-etcd</strong> n'expose aucun port à l'hôte et mappe ses données sur les <strong>volumes/etcd</strong> dans le dossier actuel.</li>
-<li>Le conteneur <strong>milvus-minio</strong> dessert les ports <strong>9090</strong> et <strong>9091</strong> localement avec les informations d'authentification par défaut et mappe ses données sur <strong>volumes/minio</strong> dans le dossier actuel.</li>
+<li>Le conteneur <strong>milvus-minio</strong> dessert les ports <strong>9090</strong> et <strong>9091</strong> localement avec les informations d'authentification par défaut et affecte ses données aux <strong>volumes/minio</strong> dans le dossier actuel.</li>
 <li>Le conteneur <strong>milvus-standalone</strong> dessert les ports <strong>19530</strong> localement avec les paramètres par défaut et mappe ses données sur <strong>volumes/milvus</strong> dans le dossier actuel.</li>
 </ul></li>
 </ul>

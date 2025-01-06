@@ -1452,6 +1452,38 @@
             "id": "milvus_backup_api.md",
             "order": 2,
             "children": []
+          },
+          {
+            "label": "Casos comunes",
+            "id": "common-cases",
+            "order": 3,
+            "isMenu": true,
+            "children": [
+              {
+                "label": "Migración entre instancias en un mismo cubo",
+                "id": "shared-bucket-backup-and-restore.md",
+                "order": 0,
+                "children": []
+              },
+              {
+                "label": "Migración entre instancias a través de cubos",
+                "id": "cross-bucket-backup-and-restore.md",
+                "order": 1,
+                "children": []
+              },
+              {
+                "label": "Migración entre instancias a través de entornos S3",
+                "id": "multi-storage-backup-and-restore.md",
+                "order": 2,
+                "children": []
+              },
+              {
+                "label": "Copia de seguridad y restauración en una sola instancia",
+                "id": "single-instance-backup-and-restore.md",
+                "order": 3,
+                "children": []
+              }
+            ]
           }
         ]
       },

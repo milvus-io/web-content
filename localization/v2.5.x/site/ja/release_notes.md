@@ -19,6 +19,44 @@ title: リリースノート
         ></path>
       </svg>
     </button></h1><p>Milvusの新機能をご確認ください！このページでは、各リリースの新機能、改善点、既知の問題、バグ修正についてまとめています。v2.5.0以降の各バージョンのリリースノートはこのセクションにあります。定期的にこのページをご覧いただき、アップデート情報をご確認ください。</p>
+<h2 id="v252" class="common-anchor-header">v2.5.2<button data-href="#v252" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>リリース日: 2025年1月3日</p>
+<table>
+<thead>
+<tr><th>Milvusバージョン</th><th>Python SDKバージョン</th><th>Node.js SDKバージョン</th><th>Java SDKバージョン</th></tr>
+</thead>
+<tbody>
+<tr><td>2.5.2</td><td>2.5.3</td><td>2.5.3</td><td>2.5.3</td></tr>
+</tbody>
+</table>
+<p>Milvus 2.5.2では、VARCHARカラムの最大長の変更がサポートされ、インポート時の並行処理、パーティションドロップ、BM25統計処理に関するいくつかの重大な問題が解決されました。安定性とパフォーマンスの向上のため、このバージョンへのアップグレードを強く推奨します。</p>
+<h3 id="Improvements" class="common-anchor-header">改良点</h3><ul>
+<li>指定されたパスが存在しない場合にのみディスク使用ログを生成するようになりました。<a href="https://github.com/milvus-io/milvus/pull/38822">(#38822</a>)</li>
+<li>VARCHARの最大長を調整するパラメータを追加し、上限を65,535に戻した。<a href="https://github.com/milvus-io/milvus/pull/38883">(#38883</a>)</li>
+<li>式のパラメータ型変換をサポートした。<a href="https://github.com/milvus-io/milvus/pull/38782">(#38782</a>)</li>
+</ul>
+<h3 id="Bug-fixes" class="common-anchor-header">バグ修正</h3><ul>
+<li>同時実行シナリオにおけるデッドロックの可能性を修正した。<a href="https://github.com/milvus-io/milvus/pull/38863">(#38863</a>)</li>
+<li>NULL値をサポートするフィールドに対してのみindex_null_offsetファイルを生成するようにした。<a href="https://github.com/milvus-io/milvus/pull/38834">(#38834</a>)</li>
+<li>reduceフェーズでfree後のretrieveプランの使用を修正しました。<a href="https://github.com/milvus-io/milvus/pull/38841">(#38841</a>)</li>
+<li>大文字のANDとORを含む式を認識するようにした。<a href="https://github.com/milvus-io/milvus/pull/38928">(#38928</a>)</li>
+<li>ロードに失敗した場合でもパーティションドロップを許可するようにした。<a href="https://github.com/milvus-io/milvus/pull/38874">(#38874</a>)</li>
+<li>インポート時の BM25 統計ファイルの登録に関する問題を修正。<a href="https://github.com/milvus-io/milvus/pull/38881">(#38881</a>)</li>
+</ul>
 <h2 id="v251" class="common-anchor-header">v2.5.1<button data-href="#v251" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -34,7 +72,7 @@ title: リリースノート
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>リリース日: 2024年12月26日</p>
+    </button></h2><p>リリース日：2024年12月26日</p>
 <table>
 <thead>
 <tr><th>Milvusバージョン</th><th>Python SDKバージョン</th><th>Node.js SDKバージョン</th><th>Java SDKバージョン</th></tr>

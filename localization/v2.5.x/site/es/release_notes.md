@@ -19,6 +19,44 @@ title: Notas de la versión
         ></path>
       </svg>
     </button></h1><p>Descubra las novedades de Milvus. Esta página resume las nuevas características, mejoras, problemas conocidos y correcciones de errores de cada versión. Puede encontrar las notas de la versión para cada versión publicada después de la v2.5.0 en esta sección. Le sugerimos que visite regularmente esta página para conocer las actualizaciones.</p>
+<h2 id="v252" class="common-anchor-header">v2.5.2<button data-href="#v252" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>Fecha de lanzamiento: 3 de enero de 2025</p>
+<table>
+<thead>
+<tr><th>Versión de Milvus</th><th>Versión del SDK de Python</th><th>Versión del SDK de Node.js</th><th>Versión del SDK de Java</th></tr>
+</thead>
+<tbody>
+<tr><td>2.5.2</td><td>2.5.3</td><td>2.5.3</td><td>2.5.3</td></tr>
+</tbody>
+</table>
+<p>Milvus 2.5.2 permite modificar la longitud máxima de las columnas VARCHAR y resuelve varios problemas críticos relacionados con la concurrencia, las caídas de particiones y la gestión de estadísticas BM25 durante la importación. Recomendamos encarecidamente actualizar a esta versión para mejorar la estabilidad y el rendimiento.</p>
+<h3 id="Improvements" class="common-anchor-header">Mejoras</h3><ul>
+<li>Generación de registros de uso de disco sólo cuando la ruta especificada no existe.<a href="https://github.com/milvus-io/milvus/pull/38822">(#38822</a>)</li>
+<li>Se ha añadido un parámetro para ajustar la longitud máxima de VARCHAR y se ha restaurado el límite a 65.535.<a href="https://github.com/milvus-io/milvus/pull/38883">(#38883</a>)</li>
+<li>Soportada conversión de tipo de parámetro para expresiones.<a href="https://github.com/milvus-io/milvus/pull/38782">(#38782</a>)</li>
+</ul>
+<h3 id="Bug-fixes" class="common-anchor-header">Corrección de errores</h3><ul>
+<li>Corrección de posibles bloqueos en escenarios de concurrencia.<a href="https://github.com/milvus-io/milvus/pull/38863">(#38863</a>)</li>
+<li>Generación del archivo index_null_offset sólo para campos que admiten valores nulos.<a href="https://github.com/milvus-io/milvus/pull/38834">(#38834</a>)</li>
+<li>Se ha corregido el uso del plan de recuperación después de liberar en la fase de reducción.<a href="https://github.com/milvus-io/milvus/pull/38841">(#38841</a>)</li>
+<li>Reconocidas expresiones con AND y OR en mayúsculas.<a href="https://github.com/milvus-io/milvus/pull/38928">(#38928</a>)</li>
+<li>Permitida la caída exitosa de particiones incluso si la carga falló.<a href="https://github.com/milvus-io/milvus/pull/38874">(#38874</a>)</li>
+<li>Arreglados los problemas de registro del archivo de estadísticas BM25 durante la importación.<a href="https://github.com/milvus-io/milvus/pull/38881">(#38881</a>)</li>
+</ul>
 <h2 id="v251" class="common-anchor-header">v2.5.1<button data-href="#v251" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -37,7 +75,7 @@ title: Notas de la versión
     </button></h2><p>Fecha de lanzamiento: 26 de diciembre de 2024</p>
 <table>
 <thead>
-<tr><th>Versión de Milvus</th><th>Versión del SDK de Python</th><th>Versión del SDK de Node.js</th><th>Versión del SDK de Java</th></tr>
+<tr><th>Versión Milvus</th><th>Versión del SDK de Python</th><th>Versión del SDK de Node.js</th><th>Versión del SDK de Java</th></tr>
 </thead>
 <tbody>
 <tr><td>2.5.1</td><td>2.5.2</td><td>2.5.2</td><td>2.5.2</td></tr>

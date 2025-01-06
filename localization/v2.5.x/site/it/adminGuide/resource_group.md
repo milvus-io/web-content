@@ -90,7 +90,7 @@ title: Gestire i gruppi di risorse
         ></path>
       </svg>
     </button></h2><div class="alert note">
-<p>Tutti gli esempi di codice presenti in questa pagina sono in PyMilvus 2.5.2. Aggiornare l'installazione di PyMilvus prima di eseguirli.</p>
+<p>Tutti gli esempi di codice presenti in questa pagina sono in PyMilvus 2.5.3. Aggiornare l'installazione di PyMilvus prima di eseguirli.</p>
 </div>
 <ol>
 <li><p>Creare un gruppo di risorse.</p>
@@ -157,7 +157,7 @@ expected_num_nodes_in_rg = <span class="hljs-number">1</span>
 <span class="hljs-comment"># After a while, succeeded in moving 1 node(s) from __default_resource_group to rg.</span>
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>Caricare collezioni e partizioni in un gruppo di risorse.</p>
-<p>Una volta che ci sono nodi di query in un gruppo di risorse, è possibile caricare collezioni in questo gruppo di risorse. Lo snippet seguente presuppone che esista già una raccolta denominata <code translate="no">demo</code>.</p>
+<p>Una volta che ci sono nodi di query in un gruppo di risorse, è possibile caricare collezioni in questo gruppo di risorse. Il seguente snippet presuppone che esista già una raccolta denominata <code translate="no">demo</code>.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-keyword">from</span> pymilvus <span class="hljs-keyword">import</span> Collection
 
 collection = Collection(<span class="hljs-string">&#x27;demo&#x27;</span>)
@@ -329,7 +329,7 @@ scale_to(<span class="hljs-number">4</span>)
       </svg>
     </button></h2><ul>
 <li>Le repliche di una singola collezione e i gruppi di risorse hanno una relazione N a N.</li>
-<li>Quando più repliche di una singola raccolta vengono caricate in un gruppo di risorse, i QueryNode di quel gruppo di risorse vengono distribuiti in modo uniforme tra le repliche, assicurando che la differenza nel numero di QueryNode di ciascuna replica non superi 1.</li>
+<li>Quando più repliche di una singola raccolta vengono caricate in un gruppo di risorse, i QueryNode di quel gruppo di risorse vengono distribuiti in modo uniforme tra le repliche, assicurando che la differenza nel numero di QueryNode di ogni replica non superi 1.</li>
 </ul>
 <h1 id="Whats-next" class="common-anchor-header">Cosa fare dopo<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"

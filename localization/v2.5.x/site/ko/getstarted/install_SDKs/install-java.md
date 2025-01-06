@@ -63,13 +63,13 @@ title: Milvus Java SDK 설치
 <pre><code translate="no" class="language-xml">&lt;dependency&gt;
     &lt;groupId&gt;io.milvus&lt;/groupId&gt;
     &lt;artifactId&gt;milvus-sdk-java&lt;/artifactId&gt;
-    &lt;version&gt;2.5.2&lt;/version&gt;
+    &lt;version&gt;2.5.3&lt;/version&gt;
 &lt;/dependency&gt;
 <button class="copy-code-btn"></button></code></pre>
 <ul>
 <li>Gradle/Grails</li>
 </ul>
-<pre><code translate="no">implementation <span class="hljs-string">&#x27;io.milvus:milvus-sdk-java:2.5.2&#x27;</span>
+<pre><code translate="no">implementation <span class="hljs-string">&#x27;io.milvus:milvus-sdk-java:2.5.3&#x27;</span>
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Whats-next" class="common-anchor-header">다음 단계<button data-href="#Whats-next" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -88,7 +88,7 @@ title: Milvus Java SDK 설치
       </svg>
     </button></h2><p>Milvus Java SDK를 설치했으면 다음을 수행할 수 있습니다:</p>
 <ul>
-<li><p>Milvus의 기본 동작을 학습합니다:</p>
+<li><p>Milvus의 기본 작업을 학습합니다:</p>
 <ul>
 <li><a href="/docs/ko/manage-collections.md">컬렉션 관리</a></li>
 <li><a href="/docs/ko/manage-partitions.md">파티션 관리</a></li>

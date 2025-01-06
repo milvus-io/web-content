@@ -1452,6 +1452,38 @@
             "id": "milvus_backup_api.md",
             "order": 2,
             "children": []
+          },
+          {
+            "label": "常见案例",
+            "id": "common-cases",
+            "order": 3,
+            "isMenu": true,
+            "children": [
+              {
+                "label": "在一个数据桶中的不同实例之间迁移",
+                "id": "shared-bucket-backup-and-restore.md",
+                "order": 0,
+                "children": []
+              },
+              {
+                "label": "跨数据集的实例间迁移",
+                "id": "cross-bucket-backup-and-restore.md",
+                "order": 1,
+                "children": []
+              },
+              {
+                "label": "在跨 S3 环境的实例间迁移",
+                "id": "multi-storage-backup-and-restore.md",
+                "order": 2,
+                "children": []
+              },
+              {
+                "label": "在一个实例中进行备份和恢复",
+                "id": "single-instance-backup-and-restore.md",
+                "order": 3,
+                "children": []
+              }
+            ]
           }
         ]
       },

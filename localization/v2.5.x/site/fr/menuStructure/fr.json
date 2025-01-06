@@ -1452,6 +1452,38 @@
             "id": "milvus_backup_api.md",
             "order": 2,
             "children": []
+          },
+          {
+            "label": "Cas courants",
+            "id": "common-cases",
+            "order": 3,
+            "isMenu": true,
+            "children": [
+              {
+                "label": "Migrer d'une instance à l'autre dans un même panier",
+                "id": "shared-bucket-backup-and-restore.md",
+                "order": 0,
+                "children": []
+              },
+              {
+                "label": "Migrer entre les instances et entre les différents bacs",
+                "id": "cross-bucket-backup-and-restore.md",
+                "order": 1,
+                "children": []
+              },
+              {
+                "label": "Migrer d'une instance à l'autre dans un environnement S3",
+                "id": "multi-storage-backup-and-restore.md",
+                "order": 2,
+                "children": []
+              },
+              {
+                "label": "Sauvegarde et restauration en une seule instance",
+                "id": "single-instance-backup-and-restore.md",
+                "order": 3,
+                "children": []
+              }
+            ]
           }
         ]
       },
@@ -1940,7 +1972,7 @@
         "children": []
       },
       {
-        "label": "Build RAG with Milvus",
+        "label": "Construire un RAG avec Milvus",
         "id": "build-rag-with-milvus.md",
         "order": 1,
         "children": []
@@ -1952,7 +1984,7 @@
         "children": []
       },
       {
-        "label": "Full-Text Search with Milvus",
+        "label": "Recherche plein texte avec Milvus",
         "id": "full_text_search_with_milvus.md",
         "order": 3,
         "children": []
@@ -1964,7 +1996,7 @@
         "children": []
       },
       {
-        "label": "Image Search with Milvus",
+        "label": "Recherche d'images avec Milvus",
         "id": "image_similarity_search.md",
         "order": 5,
         "children": []
@@ -2000,7 +2032,7 @@
         "children": []
       },
       {
-        "label": "Vector Visualization",
+        "label": "Visualisation vectorielle",
         "id": "vector_visualization.md",
         "order": 11,
         "children": []

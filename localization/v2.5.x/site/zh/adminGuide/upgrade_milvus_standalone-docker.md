@@ -24,7 +24,7 @@ title: 使用 Docker Compose 升级 Milvus 单机版
         ></path>
       </svg>
     </button></h1><p>本主题介绍如何使用 Docker Compose 升级 Milvus。</p>
-<p>在正常情况下，你可以<a href="#Upgrade-Milvus-by-changing-its-image">通过更改映像来升级 Milvus</a>。不过，在从 v2.1.x 升级到 v2.5.1 之前，你需要<a href="#Migrate-the-metadata">迁移元数据</a>。</p>
+<p>在正常情况下，你可以<a href="#Upgrade-Milvus-by-changing-its-image">通过更改映像来升级 Milvus</a>。不过，在从 v2.1.x 升级到 v2.5.2 之前，你需要<a href="#Migrate-the-metadata">迁移元数据</a>。</p>
 <div class="alter note">
 <p>出于安全考虑，Milvus 在发布 v2.2.5 时将其 MinIO 升级为 RELEASE.2023-03-20T20-16-18Z。在使用 Docker Compose 从以前安装的 Milvus Standalone 版本升级之前，应创建一个 Single-Node Single-Drive MinIO 部署，并将现有 MinIO 设置和内容迁移到新部署。有关详细信息，请参阅<a href="https://min.io/docs/minio/linux/operations/install-deploy-manage/migrate-fs-gateway.html#id2">本指南</a>。</p>
 </div>
@@ -49,7 +49,7 @@ title: 使用 Docker Compose 升级 Milvus 单机版
 <pre><code translate="no" class="language-yaml">...
 standalone:
   container_name: milvus-standalone
-  image: milvusdb/milvus:v2.5.1
+  image: milvusdb/milvus:v2.5.2
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>运行以下命令执行升级。</p>
 <pre><code translate="no" class="language-shell">docker compose down
@@ -83,7 +83,7 @@ cmd:
   runWithBackup: true
 config:
   sourceVersion: <span class="hljs-number">2.1</span><span class="hljs-number">.4</span>   <span class="hljs-comment"># Specify your milvus version</span>
-  targetVersion: <span class="hljs-number">2.5</span><span class="hljs-number">.1</span>
+  targetVersion: <span class="hljs-number">2.5</span><span class="hljs-number">.2</span>
   backupFilePath: /tmp/migration.bak
 metastore:
   <span class="hljs-built_in">type</span>: etcd
