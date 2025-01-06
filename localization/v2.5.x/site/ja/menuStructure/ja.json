@@ -433,7 +433,7 @@
             "children": []
           },
           {
-            "label": "数字フィールド",
+            "label": "番号フィールド",
             "id": "number.md",
             "order": 6,
             "children": []
@@ -1405,35 +1405,16 @@
     "order": 6,
     "children": [
       {
-        "label": "Milvus CLI",
-        "id": "cli",
+        "label": "Attu (Milvus GUI)",
+        "id": "milvus_attu",
         "order": 0,
-        "isMenu": true,
-        "children": [
-          {
-            "label": "概要",
-            "id": "cli_overview.md",
-            "order": 0,
-            "children": []
-          },
-          {
-            "label": "インストール",
-            "id": "install_cli.md",
-            "order": 1,
-            "children": []
-          },
-          {
-            "label": "コマンド",
-            "id": "cli_commands.md",
-            "order": 2,
-            "children": []
-          }
-        ]
+        "externalLink": "https://github.com/zilliztech/attu",
+        "children": []
       },
       {
         "label": "Milvus バックアップ",
         "id": "milvus_backup",
-        "order": 2,
+        "order": 1,
         "children": [
           {
             "label": "概要",
@@ -1488,6 +1469,31 @@
         ]
       },
       {
+        "label": "バードウォッチャー",
+        "id": "birdwatcher",
+        "order": 2,
+        "children": [
+          {
+            "label": "概要",
+            "id": "birdwatcher_overview.md",
+            "order": 0,
+            "children": []
+          },
+          {
+            "label": "インストールガイド",
+            "id": "birdwatcher_install_guides.md",
+            "order": 1,
+            "children": []
+          },
+          {
+            "label": "利用ガイド",
+            "id": "birdwatcher_usage_guides.md",
+            "order": 2,
+            "children": []
+          }
+        ]
+      },
+      {
         "label": "Milvus CDC",
         "id": "milvus_cdc",
         "order": 3,
@@ -1520,33 +1526,41 @@
         ]
       },
       {
-        "label": "Attu(milvusのGUI)",
-        "id": "milvus_attu",
+        "label": "Milvus CLI",
+        "id": "cli",
         "order": 4,
-        "externalLink": "https://github.com/zilliztech/attu",
-        "children": []
-      },
-      {
-        "label": "バードウォッチャー",
-        "id": "birdwatcher",
-        "order": 5,
+        "isMenu": true,
         "children": [
           {
             "label": "概要",
-            "id": "birdwatcher_overview.md",
+            "id": "cli_overview.md",
             "order": 0,
             "children": []
           },
           {
-            "label": "インストールガイド",
-            "id": "birdwatcher_install_guides.md",
+            "label": "インストール",
+            "id": "install_cli.md",
             "order": 1,
             "children": []
           },
           {
-            "label": "利用ガイド",
-            "id": "birdwatcher_usage_guides.md",
+            "label": "コマンド",
+            "id": "cli_commands.md",
             "order": 2,
+            "children": []
+          }
+        ]
+      },
+      {
+        "label": "Milvusコネクター",
+        "id": "milvus_connectors",
+        "order": 5,
+        "isMenu": true,
+        "children": [
+          {
+            "label": "スパーク",
+            "id": "integrate_with_spark.md",
+            "order": 0,
             "children": []
           }
         ]
@@ -1557,20 +1571,6 @@
         "order": 6,
         "externalLink": "https://milvus.io/tools/sizing/",
         "children": []
-      },
-      {
-        "label": "Milvusコネクター",
-        "id": "milvus_connectors",
-        "order": 7,
-        "isMenu": true,
-        "children": [
-          {
-            "label": "スパーク",
-            "id": "integrate_with_spark.md",
-            "order": 0,
-            "children": []
-          }
-        ]
       },
       {
         "label": "Powershellミルバスクライアント",

@@ -39,7 +39,7 @@ Derzeit unterstützt ein Vektorfeld nur einen Index-Typ. Milvus löscht automati
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Die meisten der von Milvus unterstützten Vektorindex-Typen verwenden ANNS-Algorithmen (approximate nearest neighbors search). Verglichen mit der genauen Suche, die in der Regel sehr zeitaufwendig ist, beschränkt sich die Kernidee von ANNS nicht mehr darauf, das genaueste Ergebnis zu liefern, sondern sucht nur noch nach Nachbarn des Ziels. ANNS verbessert die Effizienz des Abrufs, indem es die Genauigkeit innerhalb eines akzeptablen Bereichs opfert.</p>
+    </button></h2><p>Die meisten der von Milvus unterstützten Vektorindex-Typen verwenden ANNS-Algorithmen (approximate nearest neighbors search). Verglichen mit der genauen Suche, die in der Regel sehr zeitaufwändig ist, beschränkt sich die Kernidee von ANNS nicht mehr darauf, das genaueste Ergebnis zu liefern, sondern sucht nur noch nach Nachbarn des Ziels. ANNS verbessert die Effizienz des Abrufs, indem es die Genauigkeit innerhalb eines akzeptablen Bereichs opfert.</p>
 <p>Je nach Implementierungsmethode kann der ANNS-Vektorindex in vier Typen eingeteilt werden: Baum-basiert, Graph-basiert, Hash-basiert und Quantisierungs-basiert.</p>
 <h2 id="Indexes-supported-in-Milvus" class="common-anchor-header">In Milvus unterstützte Indizes<button data-href="#Indexes-supported-in-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -60,11 +60,11 @@ Derzeit unterstützt ein Vektorfeld nur einen Index-Typ. Milvus löscht automati
 <div class="filter">
  <a href="#floating">Fließkomma-Einbettungen</a> <a href="#binary">Binäre Einbettungen</a> <a href="#sparse">Sparse Embeddings</a></div>
 <div class="filter-floating">
-<h3 id="Indexes-for-floating-point-embeddings" class="common-anchor-header">Indizes für Fließkomma-Einbettungen</h3><p>Für 128-dimensionale Fließkomma-Einbettungen (Vektoren) beträgt der Speicherplatzbedarf 128 * die Größe von float = 512 Byte. Die für Fließkomma-Einbettungen verwendeten <a href="/docs/de/metric.md">Abstandsmetriken</a> sind der euklidische Abstand (<code translate="no">L2</code>) und das innere Produkt (<code translate="no">IP</code>).</p>
+<h3 id="Indexes-for-floating-point-embeddings" class="common-anchor-header">Indizes für Fließkomma-Einbettungen</h3><p>Für 128-dimensionale Fließkomma-Einbettungen (Vektoren) beträgt der benötigte Speicherplatz 128 * die Größe von float = 512 Byte. Die für Fließkomma-Einbettungen verwendeten <a href="/docs/de/metric.md">Abstandsmetriken</a> sind der euklidische Abstand (<code translate="no">L2</code>) und das innere Produkt (<code translate="no">IP</code>).</p>
 <p>Diese Arten von Indizes umfassen <code translate="no">FLAT</code>, <code translate="no">IVF_FLAT</code>, <code translate="no">IVF_PQ</code>, <code translate="no">IVF_SQ8</code>, <code translate="no">HNSW</code>, <code translate="no">HNSW_SQ</code>, <code translate="no">HNSW_PQ</code>, <code translate="no">HNSW_PRQ</code> und <code translate="no">SCANN</code> für CPU-basierte ANN-Suchen.</p>
 </div>
 <div class="filter-binary">
-<h3 id="Indexes-for-binary-embeddings" class="common-anchor-header">Indizes für binäre Einbettungen</h3><p>Für 128-dimensionale binäre Einbettungen beträgt der Speicherplatzbedarf 128 / 8 = 16 Bytes. Und die für binäre Einbettungen verwendeten Abstandsmetriken sind <code translate="no">JACCARD</code> und <code translate="no">HAMMING</code>.</p>
+<h3 id="Indexes-for-binary-embeddings" class="common-anchor-header">Indizes für binäre Einbettungen</h3><p>Für 128-dimensionale binäre Einbettungen beträgt der Speicherplatzbedarf 128 / 8 = 16 Byte. Und die für binäre Einbettungen verwendeten Abstandsmetriken sind <code translate="no">JACCARD</code> und <code translate="no">HAMMING</code>.</p>
 <p>Zu dieser Art von Indizes gehören <code translate="no">BIN_FLAT</code> und <code translate="no">BIN_IVF_FLAT</code>.</p>
 </div>
 <div class="filter-sparse">
@@ -289,7 +289,7 @@ Derzeit unterstützt ein Vektorfeld nur einen Index-Typ. Milvus löscht automati
 <tr><th>Parameter</th><th>Beschreibung</th><th>Bereich</th><th>Standardwert</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">max_empty_result_buckets</code></td><td>Maximale Anzahl von Bereichen, die keine Suchergebnisse liefern.<br/>Dies ist ein Parameter für die Bereichssuche und beendet den Suchvorgang, wenn die Anzahl der aufeinanderfolgenden leeren Bereiche den angegebenen Wert erreicht.<br/>Eine Erhöhung dieses Wertes kann die Abrufrate auf Kosten einer längeren Suchzeit verbessern.</td><td>[1, 65535]</td><td>2</td></tr>
+<tr><td><code translate="no">max_empty_result_buckets</code></td><td>Maximale Anzahl der Buckets, die keine Suchergebnisse liefern.<br/>Dies ist ein Parameter für die Bereichssuche, der den Suchvorgang beendet, wenn die Anzahl der aufeinander folgenden leeren Buckets den angegebenen Wert erreicht.<br/>Eine Erhöhung dieses Wertes kann die Abrufrate auf Kosten einer längeren Suchzeit verbessern.</td><td>[1, 65535]</td><td>2</td></tr>
 </tbody>
 </table>
 </li>
@@ -333,7 +333,7 @@ Derzeit unterstützt ein Vektorfeld nur einen Index-Typ. Milvus löscht automati
 </ul></li>
 </ul>
 <h3 id="IVFPQ" class="common-anchor-header">IVF_PQ</h3><p><code translate="no">PQ</code> (Produktquantisierung) zerlegt den ursprünglichen hochdimensionalen Vektorraum gleichmäßig in kartesische Produkte von <code translate="no">m</code> niedrigdimensionalen Vektorräumen und quantisiert dann die zerlegten niedrigdimensionalen Vektorräume. Anstatt die Abstände zwischen dem Zielvektor und dem Zentrum aller Einheiten zu berechnen, ermöglicht die Produktquantisierung die Berechnung der Abstände zwischen dem Zielvektor und dem Clustering-Zentrum jedes niedrigdimensionalen Raums und reduziert die Zeit- und Raumkomplexität des Algorithmus erheblich.</p>
-<p>IVF_PQ führt das IVF-Index-Clustering durch, bevor das Produkt der Vektoren quantisiert wird. Seine Indexdatei ist sogar noch kleiner als IVF_SQ8, aber auch hier kommt es zu einem Verlust an Genauigkeit bei der Suche nach Vektoren.</p>
+<p>IVF_PQ führt das IVF-Index-Clustering durch, bevor das Produkt der Vektoren quantisiert wird. Seine Indexdatei ist noch kleiner als die von IVF_SQ8, aber auch hier kommt es zu einem Verlust an Genauigkeit bei der Suche nach Vektoren.</p>
 <div class="alert note">
 <p>Die Parameter für die Indexerstellung und die Suchparameter variieren je nach Milvus-Verteilung. Wählen Sie zunächst Ihre Milvus-Distribution aus.</p>
 </div>
@@ -368,7 +368,7 @@ Derzeit unterstützt ein Vektorfeld nur einen Index-Typ. Milvus löscht automati
 <tr><th>Parameter</th><th>Beschreibung</th><th>Bereich</th><th>Standardwert</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">max_empty_result_buckets</code></td><td>Maximale Anzahl von Bereichen, die keine Suchergebnisse liefern.<br/>Dies ist ein Parameter für die Bereichssuche und beendet den Suchvorgang, wenn die Anzahl der aufeinanderfolgenden leeren Bereiche den angegebenen Wert erreicht.<br/>Eine Erhöhung dieses Wertes kann die Abrufrate auf Kosten einer längeren Suchzeit verbessern.</td><td>[1, 65535]</td><td>2</td></tr>
+<tr><td><code translate="no">max_empty_result_buckets</code></td><td>Maximale Anzahl der Buckets, die keine Suchergebnisse liefern.<br/>Dies ist ein Parameter für die Bereichssuche, der den Suchvorgang beendet, wenn die Anzahl der aufeinander folgenden leeren Buckets den angegebenen Wert erreicht.<br/>Eine Erhöhung dieses Wertes kann die Abrufrate auf Kosten einer längeren Suchzeit verbessern.</td><td>[1, 65535]</td><td>2</td></tr>
 </tbody>
 </table>
 </li>
@@ -416,7 +416,7 @@ Derzeit unterstützt ein Vektorfeld nur einen Index-Typ. Milvus löscht automati
 </ul></li>
 </ul>
 <h3 id="HNSW" class="common-anchor-header">HNSW</h3><p>HNSW (Hierarchical Navigable Small World Graph) ist ein graphbasierter Indizierungsalgorithmus. Er baut eine mehrschichtige Navigationsstruktur für ein Bild nach bestimmten Regeln auf. In dieser Struktur sind die oberen Schichten spärlicher und die Abstände zwischen den Knoten größer; die unteren Schichten sind dichter und die Abstände zwischen den Knoten sind kleiner. Die Suche beginnt in der obersten Schicht, findet den Knoten, der dem Ziel in dieser Schicht am nächsten liegt, und begibt sich dann in die nächste Schicht, um eine weitere Suche zu beginnen. Nach mehreren Iterationen kann sie sich schnell der Zielposition nähern.</p>
-<p>Um die Leistung zu verbessern, begrenzt HNSW den maximalen Grad der Knoten auf jeder Ebene des Graphen auf <code translate="no">M</code>. Darüber hinaus können Sie <code translate="no">efConstruction</code> (beim Indexaufbau) oder <code translate="no">ef</code> (bei der Suche nach Zielen) verwenden, um einen Suchbereich anzugeben.</p>
+<p>Um die Leistung zu verbessern, begrenzt HNSW den maximalen Grad der Knoten auf jeder Ebene des Graphen auf <code translate="no">M</code>. Außerdem können Sie <code translate="no">efConstruction</code> (beim Indexaufbau) oder <code translate="no">ef</code> (bei der Suche nach Zielen) verwenden, um einen Suchbereich anzugeben.</p>
 <ul>
 <li><p>Parameter für den Indexaufbau</p>
 <table>
@@ -452,6 +452,8 @@ Derzeit unterstützt ein Vektorfeld nur einen Index-Typ. Milvus löscht automati
 <tr><td><code translate="no">M</code></td><td>M definiert die maximale Anzahl der ausgehenden Verbindungen im Graphen. Ein höheres M führt zu höherer Genauigkeit/Laufzeit bei fester ef/efConstruction.</td><td>[2, 2048]</td><td>Keine</td></tr>
 <tr><td><code translate="no">efConstruction</code></td><td>ef_construction steuert den Kompromiss zwischen Indexsuchgeschwindigkeit und Erstellungsgeschwindigkeit. Eine Erhöhung des efConstruction-Parameters kann die Indexqualität verbessern, führt aber auch zu einer Verlängerung der Indexierungszeit.</td><td>[1, int_max]</td><td>Keine</td></tr>
 <tr><td><code translate="no">sq_type</code></td><td>Skalarer Quantisierer-Typ.</td><td><code translate="no">SQ6</code>,<code translate="no">SQ8</code>, <code translate="no">BF16</code>, <code translate="no">FP16</code></td><td><code translate="no">SQ8</code></td></tr>
+<tr><td><code translate="no">refine</code></td><td>Ob verfeinerte Daten während des Indexaufbaus reserviert werden.</td><td><code translate="no">true</code>, <code translate="no">false</code></td><td><code translate="no">false</code></td></tr>
+<tr><td><code translate="no">refine_type</code></td><td>Der Datentyp des verfeinerten Indexes.</td><td><code translate="no">SQ6</code>, <code translate="no">SQ8</code>, <code translate="no">BF16</code>, <code translate="no">FP16</code>, <code translate="no">FP32</code></td><td>Keine</td></tr>
 </tbody>
 </table>
 </li>
@@ -462,14 +464,12 @@ Derzeit unterstützt ein Vektorfeld nur einen Index-Typ. Milvus löscht automati
 </thead>
 <tbody>
 <tr><td><code translate="no">ef</code></td><td>Parameter, der den Kompromiss zwischen Abfragezeit und -genauigkeit steuert. Eine höhere <code translate="no">ef</code> führt zu einer genaueren, aber langsameren Suche.</td><td>[<code translate="no">top_k</code>, int_max]</td><td>Keine</td></tr>
-<tr><td><code translate="no">refine</code></td><td>Ob die Verfeinerung während des Zuges verwendet wird.</td><td><code translate="no">true</code>, <code translate="no">false</code></td><td><code translate="no">false</code></td></tr>
 <tr><td><code translate="no">refine_k</code></td><td>Der Vergrößerungsfaktor von refine im Vergleich zu <em>k</em>.</td><td>(1, <em>float_max</em>)</td><td><code translate="no">1</code></td></tr>
-<tr><td><code translate="no">refine_type</code></td><td>Der Datentyp des Verfeinerungsindexes.</td><td><code translate="no">SQ6</code>, <code translate="no">SQ8</code>, <code translate="no">BF16</code>, <code translate="no">FP16</code>, <code translate="no">FP32</code></td><td>Keine</td></tr>
 </tbody>
 </table>
 </li>
 </ul>
-<h3 id="HNSWPQ" class="common-anchor-header">HNSW_PQ</h3><p>Die Grundidee von PQ besteht darin, den Vektor in <code translate="no">m</code> Untervektoren aufzuteilen, von denen jeder <em>2^{nbits}</em> Zentroide auf der Grundlage von kmeans findet, und jeder Untervektor wählt den nächstgelegenen Zentroid als seinen ungefähren Untervektor. Dann zeichnen wir alle Zentroide auf, so dass jeder Untervektor als <code translate="no">nbits</code> kodiert werden kann und ein fließender Vektor der Länge <code translate="no">dim</code> als <em>m ⋅ nbits</em> Bits kodiert werden kann.</p>
+<h3 id="HNSWPQ" class="common-anchor-header">HNSW_PQ</h3><p>Die Grundidee von PQ besteht darin, den Vektor in <code translate="no">m</code> Untervektoren aufzuteilen, von denen jeder <em>2^{nbits}</em> Zentroide auf der Grundlage von kmeans findet, und jeder Untervektor wählt den nächstgelegenen Zentroid als seinen ungefähren Untervektor. Dann zeichnen wir alle Zentroide auf, so dass jeder Untervektor als <code translate="no">nbits</code> kodiert werden kann, und ein fließender Vektor der Länge <code translate="no">dim</code> kann als <em>m ⋅ nbits</em> Bits kodiert werden.</p>
 <p>In Kombination mit PQ bietet HNSW_PQ einen kontrollierbaren Kompromiss zwischen Indexgröße und Genauigkeit, hat aber einen niedrigeren QPS-Wert und eine höhere Wiederfindungsrate als HNSW_SQ bei gleicher Kompressionsrate. Im Vergleich zu HNSW_SQ dauert es länger, den Index aufzubauen.</p>
 <ul>
 <li><p>Parameter für den Indexaufbau</p>
@@ -482,6 +482,8 @@ Derzeit unterstützt ein Vektorfeld nur einen Index-Typ. Milvus löscht automati
 <tr><td><code translate="no">efConstruction</code></td><td>ef_construction steuert den Kompromiss zwischen Indexsuchgeschwindigkeit und Erstellungsgeschwindigkeit. Eine Erhöhung des efConstruction-Parameters kann die Indexqualität verbessern, führt aber auch zu einer Verlängerung der Indexierungszeit.</td><td>[1, int_max]</td><td>Keine</td></tr>
 <tr><td><code translate="no">m</code></td><td>Die Anzahl der Untervektorgruppen, in die der Vektor aufgeteilt werden soll.</td><td>[1, 65536]</td><td>32</td></tr>
 <tr><td><code translate="no">nbits</code></td><td>Die Anzahl der Bits, in die jede Gruppe von Untervektoren quantisiert wird.</td><td>[1, 24]</td><td>8</td></tr>
+<tr><td><code translate="no">refine</code></td><td>Ob verfeinerte Daten während der Indexerstellung reserviert werden.</td><td><code translate="no">true</code>, <code translate="no">false</code></td><td><code translate="no">false</code></td></tr>
+<tr><td><code translate="no">refine_type</code></td><td>Der Datentyp des verfeinerten Indexes.</td><td><code translate="no">SQ6</code>, <code translate="no">SQ8</code>, <code translate="no">BF16</code>, <code translate="no">FP16</code>, <code translate="no">FP32</code></td><td>Keine</td></tr>
 </tbody>
 </table>
 </li>
@@ -492,9 +494,7 @@ Derzeit unterstützt ein Vektorfeld nur einen Index-Typ. Milvus löscht automati
 </thead>
 <tbody>
 <tr><td><code translate="no">ef</code></td><td>Parameter, der den Kompromiss zwischen Abfragezeit und -genauigkeit steuert. Eine höhere <code translate="no">ef</code> führt zu einer genaueren, aber langsameren Suche.</td><td>[<code translate="no">top_k</code>, int_max]</td><td>Keine</td></tr>
-<tr><td><code translate="no">refine</code></td><td>Ob die Verfeinerung während des Zuges verwendet wird.</td><td><code translate="no">true</code>, <code translate="no">false</code></td><td><code translate="no">false</code></td></tr>
 <tr><td><code translate="no">refine_k</code></td><td>Der Vergrößerungsfaktor von refine im Vergleich zu <em>k</em>.</td><td>(1, <em>float_max</em>)</td><td><code translate="no">1</code></td></tr>
-<tr><td><code translate="no">refine_type</code></td><td>Der Datentyp des Verfeinerungsindexes.</td><td><code translate="no">SQ6</code>, <code translate="no">SQ8</code>, <code translate="no">BF16</code>, <code translate="no">FP16</code>, <code translate="no">FP32</code></td><td>Keine</td></tr>
 </tbody>
 </table>
 </li>
@@ -513,6 +513,8 @@ Derzeit unterstützt ein Vektorfeld nur einen Index-Typ. Milvus löscht automati
 <tr><td><code translate="no">m</code></td><td>Die Anzahl der Untervektorgruppen, in die der Vektor aufgeteilt werden soll.</td><td>[1, 65536]</td><td>32</td></tr>
 <tr><td><code translate="no">nbits</code></td><td>Die Anzahl der Bits, in die jede Gruppe von Untervektoren quantisiert wird.</td><td>[1, 24]</td><td>8</td></tr>
 <tr><td><code translate="no">nrq</code></td><td>Die Anzahl der restlichen Unterquantisierer.</td><td>[1, 16]</td><td>2</td></tr>
+<tr><td><code translate="no">refine</code></td><td>Ob verfeinerte Daten während der Indexerstellung reserviert werden.</td><td><code translate="no">true</code>, <code translate="no">false</code></td><td><code translate="no">false</code></td></tr>
+<tr><td><code translate="no">refine_type</code></td><td>Der Datentyp des verfeinerten Indexes.</td><td><code translate="no">SQ6</code>, <code translate="no">SQ8</code>, <code translate="no">BF16</code>, <code translate="no">FP16</code>, <code translate="no">FP32</code></td><td>Keine</td></tr>
 </tbody>
 </table>
 </li>
@@ -523,9 +525,7 @@ Derzeit unterstützt ein Vektorfeld nur einen Index-Typ. Milvus löscht automati
 </thead>
 <tbody>
 <tr><td><code translate="no">ef</code></td><td>Parameter, der den Kompromiss zwischen Abfragezeit und -genauigkeit steuert. Eine höhere <code translate="no">ef</code> führt zu einer genaueren, aber langsameren Suche.</td><td>[<code translate="no">top_k</code>, int_max]</td><td>Keine</td></tr>
-<tr><td><code translate="no">refine</code></td><td>Ob die Verfeinerung während des Zuges verwendet wird.</td><td><code translate="no">true</code>, <code translate="no">false</code></td><td><code translate="no">false</code></td></tr>
 <tr><td><code translate="no">refine_k</code></td><td>Der Vergrößerungsfaktor von refine im Vergleich zu <em>k</em>.</td><td>(1, <em>float_max</em>)</td><td><code translate="no">1</code></td></tr>
-<tr><td><code translate="no">refine_type</code></td><td>Der Datentyp des Verfeinerungsindexes.</td><td><code translate="no">SQ6</code>, <code translate="no">SQ8</code>, <code translate="no">BF16</code>, <code translate="no">FP16</code>, <code translate="no">FP32</code></td><td>Keine</td></tr>
 </tbody>
 </table>
 </li>
@@ -630,7 +630,7 @@ Derzeit unterstützt ein Vektorfeld nur einen Index-Typ. Milvus löscht automati
 <tr><th>Parameter</th><th>Beschreibung</th><th>Bereich</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">drop_ratio_search</code></td><td>Der Anteil der kleinen Vektorwerte, die während des Suchvorgangs ausgeschlossen werden. Diese Option ermöglicht die Feinabstimmung des Suchprozesses, indem sie das Verhältnis der kleinsten Werte im Abfragevektor angibt, die ignoriert werden sollen. Sie hilft, ein Gleichgewicht zwischen Suchgenauigkeit und Leistung herzustellen. Je kleiner der Wert für <code translate="no">drop_ratio_search</code> eingestellt wird, desto weniger tragen diese kleinen Werte zur endgültigen Bewertung bei. Durch das Ignorieren einiger kleiner Werte kann die Suchleistung bei minimalen Auswirkungen auf die Genauigkeit verbessert werden.</td><td>[0, 1]</td></tr>
+<tr><td><code translate="no">drop_ratio_search</code></td><td>Der Anteil der kleinen Vektorwerte, die während des Suchvorgangs ausgeschlossen werden. Diese Option ermöglicht eine Feinabstimmung des Suchprozesses, indem sie das Verhältnis der kleinsten Werte im Abfragevektor angibt, die ignoriert werden sollen. Sie hilft, ein Gleichgewicht zwischen Suchgenauigkeit und Leistung herzustellen. Je kleiner der Wert für <code translate="no">drop_ratio_search</code> eingestellt wird, desto weniger tragen diese kleinen Werte zur endgültigen Bewertung bei. Durch das Ignorieren einiger kleiner Werte kann die Suchleistung bei minimalen Auswirkungen auf die Genauigkeit verbessert werden.</td><td>[0, 1]</td></tr>
 </tbody>
 </table>
 </li>

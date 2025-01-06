@@ -1344,7 +1344,7 @@
             "children": []
           },
           {
-            "label": "Compattazione dei cluster",
+            "label": "Compattazione del clustering",
             "id": "clustering-compaction.md",
             "order": 1,
             "children": []
@@ -1405,35 +1405,16 @@
     "order": 6,
     "children": [
       {
-        "label": "Milvus CLI",
-        "id": "cli",
+        "label": "Attu (GUI Milvus)",
+        "id": "milvus_attu",
         "order": 0,
-        "isMenu": true,
-        "children": [
-          {
-            "label": "Panoramica",
-            "id": "cli_overview.md",
-            "order": 0,
-            "children": []
-          },
-          {
-            "label": "Installazione",
-            "id": "install_cli.md",
-            "order": 1,
-            "children": []
-          },
-          {
-            "label": "Comandi",
-            "id": "cli_commands.md",
-            "order": 2,
-            "children": []
-          }
-        ]
+        "externalLink": "https://github.com/zilliztech/attu",
+        "children": []
       },
       {
         "label": "Backup di Milvus",
         "id": "milvus_backup",
-        "order": 2,
+        "order": 1,
         "children": [
           {
             "label": "Panoramica",
@@ -1488,6 +1469,31 @@
         ]
       },
       {
+        "label": "Birdwatcher",
+        "id": "birdwatcher",
+        "order": 2,
+        "children": [
+          {
+            "label": "Panoramica",
+            "id": "birdwatcher_overview.md",
+            "order": 0,
+            "children": []
+          },
+          {
+            "label": "Guide all'installazione",
+            "id": "birdwatcher_install_guides.md",
+            "order": 1,
+            "children": []
+          },
+          {
+            "label": "Guide all'uso",
+            "id": "birdwatcher_usage_guides.md",
+            "order": 2,
+            "children": []
+          }
+        ]
+      },
+      {
         "label": "CDC Milvus",
         "id": "milvus_cdc",
         "order": 3,
@@ -1520,33 +1526,41 @@
         ]
       },
       {
-        "label": "Attu (Milvus GUI)",
-        "id": "milvus_attu",
+        "label": "Milvus CLI",
+        "id": "cli",
         "order": 4,
-        "externalLink": "https://github.com/zilliztech/attu",
-        "children": []
-      },
-      {
-        "label": "Birdwatcher",
-        "id": "birdwatcher",
-        "order": 5,
+        "isMenu": true,
         "children": [
           {
             "label": "Panoramica",
-            "id": "birdwatcher_overview.md",
+            "id": "cli_overview.md",
             "order": 0,
             "children": []
           },
           {
-            "label": "Guide all'installazione",
-            "id": "birdwatcher_install_guides.md",
+            "label": "Installazione",
+            "id": "install_cli.md",
             "order": 1,
             "children": []
           },
           {
-            "label": "Guide all'uso",
-            "id": "birdwatcher_usage_guides.md",
+            "label": "Comandi",
+            "id": "cli_commands.md",
             "order": 2,
+            "children": []
+          }
+        ]
+      },
+      {
+        "label": "Connettori Milvus",
+        "id": "milvus_connectors",
+        "order": 5,
+        "isMenu": true,
+        "children": [
+          {
+            "label": "Scintilla",
+            "id": "integrate_with_spark.md",
+            "order": 0,
             "children": []
           }
         ]
@@ -1557,20 +1571,6 @@
         "order": 6,
         "externalLink": "https://milvus.io/tools/sizing/",
         "children": []
-      },
-      {
-        "label": "Connettori Milvus",
-        "id": "milvus_connectors",
-        "order": 7,
-        "isMenu": true,
-        "children": [
-          {
-            "label": "Scintilla",
-            "id": "integrate_with_spark.md",
-            "order": 0,
-            "children": []
-          }
-        ]
       },
       {
         "label": "Client Powershell Milvus",
@@ -2044,7 +2044,7 @@
         "children": []
       },
       {
-        "label": "Ricerca a imbuto con le matrici Matryoshka",
+        "label": "Ricerca a imbuto con matrioske embeddings",
         "id": "funnel_search_with_matryoshka.md",
         "order": 13,
         "children": []

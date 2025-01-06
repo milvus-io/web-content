@@ -332,7 +332,7 @@ Actuellement, un champ vectoriel ne prend en charge qu'un seul type d'index. Mil
 </li>
 </ul></li>
 </ul>
-<h3 id="IVFPQ" class="common-anchor-header">IVF_PQ</h3><p><code translate="no">PQ</code> (Product Quantization) décompose uniformément l'espace vectoriel haute dimension original en produits cartésiens d'espaces vectoriels basse dimension <code translate="no">m</code>, puis quantifie les espaces vectoriels basse dimension décomposés. Au lieu de calculer les distances entre le vecteur cible et le centre de toutes les unités, la quantification par produit permet de calculer les distances entre le vecteur cible et le centre de regroupement de chaque espace à faible dimension, ce qui réduit considérablement la complexité temporelle et spatiale de l'algorithme.</p>
+<h3 id="IVFPQ" class="common-anchor-header">IVF_PQ</h3><p><code translate="no">PQ</code> (Product Quantization) décompose uniformément l'espace vectoriel haute dimension original en produits cartésiens d'espaces vectoriels basse dimension <code translate="no">m</code>, puis quantifie les espaces vectoriels basse dimension décomposés. Au lieu de calculer les distances entre le vecteur cible et le centre de toutes les unités, la quantification par produit permet de calculer les distances entre le vecteur cible et le centre de regroupement de chaque espace de faible dimension, ce qui réduit considérablement la complexité temporelle et spatiale de l'algorithme.</p>
 <p>IVF_PQ effectue le regroupement de l'index IVF avant de quantifier le produit des vecteurs. Son fichier d'index est encore plus petit que IVF_SQ8, mais il entraîne également une perte de précision lors de la recherche de vecteurs.</p>
 <div class="alert note">
 <p>Les paramètres de construction de l'index et les paramètres de recherche varient en fonction de la distribution Milvus. Sélectionnez d'abord votre distribution Milvus.</p>
@@ -403,7 +403,7 @@ Actuellement, un champ vectoriel ne prend en charge qu'un seul type d'index. Mil
 </tbody>
 </table>
 </li>
-<li><p>Recherche par plage</p>
+<li><p>Plage de recherche</p>
 <table>
 <thead>
 <tr><th>Paramètre</th><th>Description</th><th>Plage</th><th>Valeur par défaut</th></tr>
@@ -440,7 +440,7 @@ Actuellement, un champ vectoriel ne prend en charge qu'un seul type d'index. Mil
 </table>
 </li>
 </ul>
-<h3 id="HNSWSQ" class="common-anchor-header">HNSW_SQ</h3><p>La quantification scalaire (SQ) est une technique utilisée pour diviser des données en virgule flottante en un ensemble fini de valeurs basées sur leur magnitude. Par exemple, <strong>SQ6</strong> représente la quantification en (2^6 = 64) valeurs discrètes, où chaque nombre à virgule flottante est codé sur 6 bits. De même, <strong>SQ8</strong> quantifie les données en (2^8 = 256) valeurs discrètes, chaque nombre à virgule flottante étant représenté par 8 bits. Cette quantification réduit l'empreinte mémoire tout en préservant la structure essentielle des données pour un traitement efficace.</p>
+<h3 id="HNSWSQ" class="common-anchor-header">HNSW_SQ</h3><p>La quantification scalaire (SQ) est une technique utilisée pour diviser les données en virgule flottante en un ensemble fini de valeurs basées sur leur magnitude. Par exemple, <strong>SQ6</strong> représente la quantification en (2^6 = 64) valeurs discrètes, où chaque nombre à virgule flottante est codé sur 6 bits. De même, <strong>SQ8</strong> quantifie les données en (2^8 = 256) valeurs discrètes, chaque nombre à virgule flottante étant représenté par 8 bits. Cette quantification réduit l'empreinte mémoire tout en préservant la structure essentielle des données pour un traitement efficace.</p>
 <p>Combiné à SQ, HNSW_SQ offre un compromis contrôlable entre la taille de l'index et la précision, tout en maintenant des performances élevées en termes de nombre de requêtes par seconde (QPS). Par rapport à la méthode HNSW standard, il en résulte une augmentation modeste du temps de construction de l'index.</p>
 <ul>
 <li><p>Paramètres de construction de l'index</p>
@@ -449,27 +449,27 @@ Actuellement, un champ vectoriel ne prend en charge qu'un seul type d'index. Mil
 <tr><th>Paramètre</th><th>Description de l'index</th><th>Plage de valeurs</th><th>Valeur par défaut</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">M</code></td><td>M définit le nombre maximal de connexions sortantes dans le graphique. Un M plus élevé entraîne une plus grande précision/temps d'exécution à ef/efConstruction fixe.</td><td>[2, 2048]</td><td>Aucune</td></tr>
+<tr><td><code translate="no">M</code></td><td>M définit le nombre maximal de connexions sortantes dans le graphique. Plus M est élevé, plus la précision/le temps d'exécution est important(e) à ef/efConstruction fixe.</td><td>[2, 2048]</td><td>Aucune</td></tr>
 <tr><td><code translate="no">efConstruction</code></td><td>ef_construction contrôle le compromis entre la vitesse de recherche et la vitesse de construction de l'index. L'augmentation du paramètre efConstruction peut améliorer la qualité de l'index, mais elle tend également à allonger le temps d'indexation.</td><td>[1, int_max]</td><td>Aucun</td></tr>
 <tr><td><code translate="no">sq_type</code></td><td>Type de quantificateur scalaire.</td><td><code translate="no">SQ6</code>,<code translate="no">SQ8</code>, <code translate="no">BF16</code>, <code translate="no">FP16</code></td><td><code translate="no">SQ8</code></td></tr>
+<tr><td><code translate="no">refine</code></td><td>Si les données affinées sont réservées pendant la construction de l'index.</td><td><code translate="no">true</code>, <code translate="no">false</code></td><td><code translate="no">false</code></td></tr>
+<tr><td><code translate="no">refine_type</code></td><td>Le type de données de l'index affiné.</td><td><code translate="no">SQ6</code>, <code translate="no">SQ8</code>, <code translate="no">BF16</code>, <code translate="no">FP16</code>, <code translate="no">FP32</code></td><td>Aucun</td></tr>
 </tbody>
 </table>
 </li>
 <li><p>Paramètres de recherche</p>
 <table>
 <thead>
-<tr><th>Paramètre</th><th>Description du paramètre</th><th>Plage de valeurs</th><th>Valeur par défaut</th></tr>
+<tr><th>Paramètre</th><th>Description de la recherche</th><th>Plage de valeurs</th><th>Valeur par défaut</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">ef</code></td><td>Paramètre contrôlant le compromis temps de recherche/précision. Une valeur plus élevée ( <code translate="no">ef</code> ) permet une recherche plus précise mais plus lente.</td><td>[<code translate="no">top_k</code>, int_max]</td><td>Aucune</td></tr>
-<tr><td><code translate="no">refine</code></td><td>Si l'affinage est utilisé pendant l'entraînement.</td><td><code translate="no">true</code>, <code translate="no">false</code></td><td><code translate="no">false</code></td></tr>
-<tr><td><code translate="no">refine_k</code></td><td>Le facteur d'agrandissement de l'affine par rapport à <em>k</em>.</td><td>[1, <em>float_max</em>)</td><td><code translate="no">1</code></td></tr>
-<tr><td><code translate="no">refine_type</code></td><td>Le type de données de l'indice de raffinement.</td><td><code translate="no">SQ6</code>, <code translate="no">SQ8</code>, <code translate="no">BF16</code>, <code translate="no">FP16</code>, <code translate="no">FP32</code></td><td>Aucun</td></tr>
+<tr><td><code translate="no">ef</code></td><td>Paramètre contrôlant le compromis temps de recherche/précision. Une valeur plus élevée ( <code translate="no">ef</code> ) permet une recherche plus précise mais plus lente.</td><td>[<code translate="no">top_k</code>, int_max]</td><td>Aucun</td></tr>
+<tr><td><code translate="no">refine_k</code></td><td>Le facteur d'agrandissement de refine par rapport à <em>k</em>.</td><td>[1, <em>float_max</em>)</td><td><code translate="no">1</code></td></tr>
 </tbody>
 </table>
 </li>
 </ul>
-<h3 id="HNSWPQ" class="common-anchor-header">HNSW_PQ</h3><p>L'idée de base de PQ est de diviser le vecteur en <code translate="no">m</code> sous-vecteurs, dont chacun trouvera <em>2^{nbits}</em> centroïdes sur la base des kmeans, et chaque sous-vecteur sélectionnera le centroïde le plus proche comme son sous-vecteur approximatif. Nous enregistrons ensuite tous les centriodes, de sorte que chaque sous-vecteur peut être codé sous la forme <code translate="no">nbits</code>, et un vecteur flottant de longueur <code translate="no">dim</code> peut être codé sous la forme de <em>m ⋅ nbits</em> bits.</p>
+<h3 id="HNSWPQ" class="common-anchor-header">HNSW_PQ</h3><p>L'idée de base de PQ est de diviser le vecteur en <code translate="no">m</code> sous-vecteurs, dont chacun trouvera <em>2^{nbits}</em> centroïdes sur la base de kmeans, et chaque sous-vecteur sélectionnera le centroïde le plus proche comme son sous-vecteur approximatif. Nous enregistrons ensuite tous les centriodes, de sorte que chaque sous-vecteur peut être codé sous la forme <code translate="no">nbits</code>, et un vecteur flottant de longueur <code translate="no">dim</code> peut être codé sous la forme de <em>m ⋅ nbits</em> bits.</p>
 <p>Combiné avec PQ, HNSW_PQ offre un compromis contrôlable entre la taille de l'index et la précision, mais il a une valeur QPS plus faible et un taux de rappel plus élevé que HNSW_SQ pour le même taux de compression. Par rapport à HNSW_SQ, la construction de l'index prend plus de temps.</p>
 <ul>
 <li><p>Paramètres de construction de l'index</p>
@@ -482,6 +482,8 @@ Actuellement, un champ vectoriel ne prend en charge qu'un seul type d'index. Mil
 <tr><td><code translate="no">efConstruction</code></td><td>ef_construction contrôle le compromis entre la vitesse de recherche et la vitesse de construction de l'index. L'augmentation du paramètre efConstruction peut améliorer la qualité de l'index, mais elle tend également à allonger le temps d'indexation.</td><td>[1, int_max]</td><td>Aucun</td></tr>
 <tr><td><code translate="no">m</code></td><td>Le nombre de groupes de sous-vecteurs à diviser le vecteur.</td><td>[1, 65536]</td><td>32</td></tr>
 <tr><td><code translate="no">nbits</code></td><td>Le nombre de bits dans lesquels chaque groupe de sous-vecteurs est quantifié.</td><td>[1, 24]</td><td>8</td></tr>
+<tr><td><code translate="no">refine</code></td><td>Si les données affinées sont réservées lors de la construction de l'index.</td><td><code translate="no">true</code>, <code translate="no">false</code></td><td><code translate="no">false</code></td></tr>
+<tr><td><code translate="no">refine_type</code></td><td>Le type de données de l'index affiné.</td><td><code translate="no">SQ6</code>, <code translate="no">SQ8</code>, <code translate="no">BF16</code>, <code translate="no">FP16</code>, <code translate="no">FP32</code></td><td>Aucun</td></tr>
 </tbody>
 </table>
 </li>
@@ -491,15 +493,13 @@ Actuellement, un champ vectoriel ne prend en charge qu'un seul type d'index. Mil
 <tr><th>Paramètre</th><th>Description de la recherche</th><th>Plage de valeurs</th><th>Valeur par défaut</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">ef</code></td><td>Paramètre contrôlant le compromis temps de recherche/précision. Une valeur plus élevée ( <code translate="no">ef</code> ) permet une recherche plus précise mais plus lente.</td><td>[<code translate="no">top_k</code>, int_max]</td><td>Aucune</td></tr>
-<tr><td><code translate="no">refine</code></td><td>Si l'affinage est utilisé pendant l'entraînement.</td><td><code translate="no">true</code>, <code translate="no">false</code></td><td><code translate="no">false</code></td></tr>
-<tr><td><code translate="no">refine_k</code></td><td>Le facteur d'agrandissement de l'affine par rapport à <em>k</em>.</td><td>[1, <em>float_max</em>)</td><td><code translate="no">1</code></td></tr>
-<tr><td><code translate="no">refine_type</code></td><td>Le type de données de l'indice de raffinement.</td><td><code translate="no">SQ6</code>, <code translate="no">SQ8</code>, <code translate="no">BF16</code>, <code translate="no">FP16</code>, <code translate="no">FP32</code></td><td>Aucun</td></tr>
+<tr><td><code translate="no">ef</code></td><td>Paramètre contrôlant le compromis temps de recherche/précision. Une valeur plus élevée ( <code translate="no">ef</code> ) permet une recherche plus précise mais plus lente.</td><td>[<code translate="no">top_k</code>, int_max]</td><td>Aucun</td></tr>
+<tr><td><code translate="no">refine_k</code></td><td>Le facteur d'agrandissement de refine par rapport à <em>k</em>.</td><td>[1, <em>float_max</em>)</td><td><code translate="no">1</code></td></tr>
 </tbody>
 </table>
 </li>
 </ul>
-<h3 id="HNSWPRQ" class="common-anchor-header">HNSW_PRQ</h3><p>PRQ est similaire à PQ et divise également le vecteur en groupes <code translate="no">m</code>. Chaque sous-vecteur sera codé comme <code translate="no">nbits</code>. Après avoir effectué une quantification pq, il calcule le résidu entre le vecteur et le vecteur quantifié pq, et applique une quantification pq au vecteur résiduel. Un total de <code translate="no">nrq</code> quantifications pq complètes sera effectué, de sorte qu'un vecteur flottant de longueur <code translate="no">dim</code> sera codé comme <em>m ⋅ nbits ⋅ nrq</em> bits.</p>
+<h3 id="HNSWPRQ" class="common-anchor-header">HNSW_PRQ</h3><p>PRQ est similaire à PQ et divise également le vecteur en groupes <code translate="no">m</code>. Chaque sous-vecteur sera codé comme <code translate="no">nbits</code>. Après avoir effectué une quantification pq, il calcule le résidu entre le vecteur et le vecteur quantifié pq, et applique la quantification pq au vecteur résiduel. Un total de <code translate="no">nrq</code> quantifications pq complètes sera effectué, de sorte qu'un vecteur flottant de longueur <code translate="no">dim</code> sera codé comme <em>m ⋅ nbits ⋅ nrq</em> bits.</p>
 <p>Combiné à un quantificateur résiduel de produit (PRQ), le HNSW_PRQ offre un compromis contrôlable encore plus élevé entre la taille de l'index et la précision. Il a une valeur QPS presque équivalente et un taux de rappel plus élevé que HNSW_PQ pour le même taux de compression. Par rapport à HNSW_PQ, le temps de construction de l'index peut être multiplié par plusieurs fois.</p>
 <ul>
 <li><p>Paramètres de construction de l'index</p>
@@ -511,8 +511,10 @@ Actuellement, un champ vectoriel ne prend en charge qu'un seul type d'index. Mil
 <tr><td><code translate="no">M</code></td><td>M définit le nombre maximal de connexions sortantes dans le graphique. Un M plus élevé entraîne une plus grande précision/temps d'exécution à ef/efConstruction fixe.</td><td>[2, 2048]</td><td>Aucune</td></tr>
 <tr><td><code translate="no">efConstruction</code></td><td>ef_construction contrôle le compromis entre la vitesse de recherche et la vitesse de construction de l'index. L'augmentation du paramètre efConstruction peut améliorer la qualité de l'index, mais elle tend également à allonger le temps d'indexation.</td><td>[1, int_max]</td><td>Aucun</td></tr>
 <tr><td><code translate="no">m</code></td><td>Le nombre de groupes de sous-vecteurs à diviser le vecteur.</td><td>[1, 65536]</td><td>32</td></tr>
-<tr><td><code translate="no">nbits</code></td><td>Nombre de bits dans lesquels chaque groupe de sous-vecteurs est quantifié.</td><td>[1, 24]</td><td>8</td></tr>
+<tr><td><code translate="no">nbits</code></td><td>Le nombre de bits dans lesquels chaque groupe de sous-vecteurs est quantifié.</td><td>[1, 24]</td><td>8</td></tr>
 <tr><td><code translate="no">nrq</code></td><td>Le nombre de sous-quantificateurs résiduels.</td><td>[1, 16]</td><td>2</td></tr>
+<tr><td><code translate="no">refine</code></td><td>Si les données affinées sont réservées lors de la construction de l'index.</td><td><code translate="no">true</code>, <code translate="no">false</code></td><td><code translate="no">false</code></td></tr>
+<tr><td><code translate="no">refine_type</code></td><td>Le type de données de l'index affiné.</td><td><code translate="no">SQ6</code>, <code translate="no">SQ8</code>, <code translate="no">BF16</code>, <code translate="no">FP16</code>, <code translate="no">FP32</code></td><td>Aucun</td></tr>
 </tbody>
 </table>
 </li>
@@ -523,9 +525,7 @@ Actuellement, un champ vectoriel ne prend en charge qu'un seul type d'index. Mil
 </thead>
 <tbody>
 <tr><td><code translate="no">ef</code></td><td>Paramètre contrôlant le compromis temps de recherche/précision. Une valeur plus élevée ( <code translate="no">ef</code> ) permet une recherche plus précise mais plus lente.</td><td>[<code translate="no">top_k</code>, int_max]</td><td>Aucune</td></tr>
-<tr><td><code translate="no">refine</code></td><td>Si l'affinage est utilisé pendant l'entraînement.</td><td><code translate="no">true</code>, <code translate="no">false</code></td><td><code translate="no">false</code></td></tr>
-<tr><td><code translate="no">refine_k</code></td><td>Le facteur d'agrandissement de l'affine par rapport à <em>k</em>.</td><td>[1, <em>float_max</em>)</td><td><code translate="no">1</code></td></tr>
-<tr><td><code translate="no">refine_type</code></td><td>Le type de données de l'indice de raffinement.</td><td><code translate="no">SQ6</code>, <code translate="no">SQ8</code>, <code translate="no">BF16</code>, <code translate="no">FP16</code>, <code translate="no">FP32</code></td><td>Aucun</td></tr>
+<tr><td><code translate="no">refine_k</code></td><td>Le facteur d'agrandissement de refine par rapport à <em>k</em>.</td><td>[1, <em>float_max</em>)</td><td><code translate="no">1</code></td></tr>
 </tbody>
 </table>
 </li>
@@ -533,7 +533,7 @@ Actuellement, un champ vectoriel ne prend en charge qu'un seul type d'index. Mil
 </div>
 <div class="filter-binary">
 <h3 id="BINFLAT" class="common-anchor-header">BIN_FLAT</h3><p>Cet indice est exactement le même que FLAT, sauf qu'il ne peut être utilisé que pour les encastrements binaires.</p>
-<p>Pour les applications de recherche de similarité vectorielle qui exigent une précision parfaite et dépendent d'ensembles de données relativement petits (à l'échelle du million), l'index BIN_FLAT est un bon choix. BIN_FLAT ne compresse pas les vecteurs et est le seul index qui peut garantir des résultats de recherche exacts. Les résultats de BIN_FLAT peuvent également être utilisés comme point de comparaison pour les résultats produits par d'autres index dont le taux de rappel est inférieur à 100 %.</p>
+<p>Pour les applications de recherche de similarité vectorielle qui exigent une précision parfaite et dépendent d'ensembles de données relativement petits (à l'échelle du million), l'indice BIN_FLAT est un bon choix. BIN_FLAT ne compresse pas les vecteurs et est le seul index qui peut garantir des résultats de recherche exacts. Les résultats de BIN_FLAT peuvent également être utilisés comme point de comparaison pour les résultats produits par d'autres index dont le taux de rappel est inférieur à 100 %.</p>
 <p>BIN_FLAT est précis parce qu'il adopte une approche exhaustive de la recherche, ce qui signifie que pour chaque requête, l'entrée cible est comparée aux vecteurs d'un ensemble de données. Cela fait de BIN_FLAT l'index le plus lent de notre liste, et il est mal adapté à l'interrogation de données vectorielles massives. Il n'y a pas de paramètres pour l'index BIN_FLAT dans Milvus, et son utilisation ne nécessite pas d'apprentissage des données ni de stockage supplémentaire.</p>
 <ul>
 <li><p>Paramètres de recherche</p>
@@ -612,7 +612,7 @@ Actuellement, un champ vectoriel ne prend en charge qu'un seul type d'index. Mil
 </li>
 </ul>
 <h3 id="SPARSEWAND" class="common-anchor-header">SPARSE_WAND</h3><p>Cet indice présente des similitudes avec <code translate="no">SPARSE_INVERTED_INDEX</code>, mais il utilise l'algorithme <a href="https://dl.acm.org/doi/10.1145/956863.956944">Weak-AND</a> pour réduire davantage le nombre d'évaluations de la distance IP complète au cours du processus de recherche.</p>
-<p>D'après nos tests, <code translate="no">SPARSE_WAND</code> surpasse généralement les autres méthodes en termes de rapidité. Toutefois, ses performances peuvent se détériorer rapidement lorsque la densité des vecteurs augmente. Pour résoudre ce problème, l'introduction d'une adresse <code translate="no">drop_ratio_search</code> non nulle peut améliorer considérablement les performances tout en n'entraînant qu'une perte de précision minime. Pour plus d'informations, reportez-vous à la section <a href="/docs/fr/sparse_vector.md">Vecteur clairsemé</a>.</p>
+<p>D'après nos tests, <code translate="no">SPARSE_WAND</code> surpasse généralement les autres méthodes en termes de rapidité. Toutefois, ses performances peuvent se détériorer rapidement lorsque la densité des vecteurs augmente. Pour remédier à ce problème, l'introduction d'une adresse <code translate="no">drop_ratio_search</code> non nulle peut améliorer considérablement les performances tout en n'entraînant qu'une perte de précision minime. Pour plus d'informations, reportez-vous à la section <a href="/docs/fr/sparse_vector.md">Vecteur clairsemé</a>.</p>
 <ul>
 <li><p>Paramètres de construction de l'index</p>
 <table>

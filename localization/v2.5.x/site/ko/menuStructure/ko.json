@@ -92,7 +92,7 @@
                 "children": []
               },
               {
-                "label": "도커 컴포즈(Linux)",
+                "label": "Docker Compose(Linux)",
                 "id": "install_standalone-docker-compose.md",
                 "order": 2,
                 "children": []
@@ -1405,35 +1405,16 @@
     "order": 6,
     "children": [
       {
-        "label": "Milvus CLI",
-        "id": "cli",
+        "label": "Attu(Milvus GUI)",
+        "id": "milvus_attu",
         "order": 0,
-        "isMenu": true,
-        "children": [
-          {
-            "label": "개요",
-            "id": "cli_overview.md",
-            "order": 0,
-            "children": []
-          },
-          {
-            "label": "설치",
-            "id": "install_cli.md",
-            "order": 1,
-            "children": []
-          },
-          {
-            "label": "명령",
-            "id": "cli_commands.md",
-            "order": 2,
-            "children": []
-          }
-        ]
+        "externalLink": "https://github.com/zilliztech/attu",
+        "children": []
       },
       {
         "label": "Milvus 백업",
         "id": "milvus_backup",
-        "order": 2,
+        "order": 1,
         "children": [
           {
             "label": "개요",
@@ -1488,6 +1469,31 @@
         ]
       },
       {
+        "label": "조류 관찰자",
+        "id": "birdwatcher",
+        "order": 2,
+        "children": [
+          {
+            "label": "개요",
+            "id": "birdwatcher_overview.md",
+            "order": 0,
+            "children": []
+          },
+          {
+            "label": "설치 가이드",
+            "id": "birdwatcher_install_guides.md",
+            "order": 1,
+            "children": []
+          },
+          {
+            "label": "사용 가이드",
+            "id": "birdwatcher_usage_guides.md",
+            "order": 2,
+            "children": []
+          }
+        ]
+      },
+      {
         "label": "밀버스 CDC",
         "id": "milvus_cdc",
         "order": 3,
@@ -1520,33 +1526,41 @@
         ]
       },
       {
-        "label": "Attu(밀버스 GUI)",
-        "id": "milvus_attu",
+        "label": "Milvus CLI",
+        "id": "cli",
         "order": 4,
-        "externalLink": "https://github.com/zilliztech/attu",
-        "children": []
-      },
-      {
-        "label": "조류 관찰자",
-        "id": "birdwatcher",
-        "order": 5,
+        "isMenu": true,
         "children": [
           {
             "label": "개요",
-            "id": "birdwatcher_overview.md",
+            "id": "cli_overview.md",
             "order": 0,
             "children": []
           },
           {
-            "label": "설치 가이드",
-            "id": "birdwatcher_install_guides.md",
+            "label": "설치",
+            "id": "install_cli.md",
             "order": 1,
             "children": []
           },
           {
-            "label": "사용 가이드",
-            "id": "birdwatcher_usage_guides.md",
+            "label": "명령",
+            "id": "cli_commands.md",
             "order": 2,
+            "children": []
+          }
+        ]
+      },
+      {
+        "label": "밀버스 커넥터",
+        "id": "milvus_connectors",
+        "order": 5,
+        "isMenu": true,
+        "children": [
+          {
+            "label": "Spark",
+            "id": "integrate_with_spark.md",
+            "order": 0,
             "children": []
           }
         ]
@@ -1557,20 +1571,6 @@
         "order": 6,
         "externalLink": "https://milvus.io/tools/sizing/",
         "children": []
-      },
-      {
-        "label": "밀버스 커넥터",
-        "id": "milvus_connectors",
-        "order": 7,
-        "isMenu": true,
-        "children": [
-          {
-            "label": "Spark",
-            "id": "integrate_with_spark.md",
-            "order": 0,
-            "children": []
-          }
-        ]
       },
       {
         "label": "파워쉘 밀버스 클라이언트",
@@ -1641,7 +1641,7 @@
             "children": []
           },
           {
-            "label": "12개의 랩",
+            "label": "12개의 실험실",
             "id": "video_search_with_twelvelabs_and_milvus.md",
             "order": 12,
             "children": []
@@ -1684,7 +1684,7 @@
             "children": []
           },
           {
-            "label": "실리콘 플로우",
+            "label": "SiliconFlow",
             "id": "build_RAG_with_milvus_and_siliconflow.md",
             "order": 4,
             "children": []

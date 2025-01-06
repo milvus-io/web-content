@@ -74,7 +74,7 @@
             "children": []
           },
           {
-            "label": "Run Milvus Standalone",
+            "label": "Exécuter Milvus en mode autonome",
             "id": "run_milvus_docker",
             "order": 2,
             "isMenu": true,
@@ -1781,7 +1781,7 @@
         "children": []
       },
       {
-        "label": "FAQ opérationnelle",
+        "label": "FAQ opérationnelles",
         "id": "operational_faq.md",
         "order": 2,
         "children": []

@@ -39,7 +39,7 @@ Atualmente, um campo vetorial apenas suporta um tipo de índice. O Milvus elimin
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>A maioria dos tipos de índices vectoriais suportados pelo Milvus utiliza algoritmos de pesquisa de vizinhos mais próximos aproximados (ANNS). Em comparação com a recuperação exacta, que normalmente consome muito tempo, a ideia central do ANNS já não se limita a devolver o resultado mais exato, mas apenas a procurar os vizinhos do alvo. A ANNS melhora a eficiência da recuperação, sacrificando a exatidão dentro de um intervalo aceitável.</p>
+    </button></h2><p>A maior parte dos tipos de índices vectoriais suportados pelo Milvus utilizam algoritmos de pesquisa ANNS (approximate nearest neighbors search). Em comparação com a recuperação exacta, que normalmente consome muito tempo, a ideia central do ANNS já não se limita a devolver o resultado mais exato, mas apenas a procurar os vizinhos do alvo. A ANNS melhora a eficiência da recuperação, sacrificando a exatidão dentro de um intervalo aceitável.</p>
 <p>De acordo com os métodos de implementação, o índice vetorial ANNS pode ser classificado em quatro tipos: Baseado em árvore, baseado em gráfico, baseado em hash e baseado em quantização.</p>
 <h2 id="Indexes-supported-in-Milvus" class="common-anchor-header">Índices suportados no Milvus<button data-href="#Indexes-supported-in-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -103,7 +103,7 @@ Atualmente, um campo vetorial apenas suporta um tipo de índice. O Milvus elimin
   </tr>
   <tr>
     <td>IVF_SQ8</td>
-    <td>Índice baseado na quantização</td>
+    <td>Índice baseado na quantificação</td>
     <td>
       <ul>
         <li>Consulta a muito alta velocidade</li>
@@ -403,7 +403,7 @@ Atualmente, um campo vetorial apenas suporta um tipo de índice. O Milvus elimin
 </tbody>
 </table>
 </li>
-<li><p>Pesquisa de intervalos</p>
+<li><p>Pesquisa de intervalo</p>
 <table>
 <thead>
 <tr><th>Parâmetro</th><th>Descrição</th><th>Intervalo</th><th>Valor predefinido</th></tr>
@@ -440,7 +440,7 @@ Atualmente, um campo vetorial apenas suporta um tipo de índice. O Milvus elimin
 </table>
 </li>
 </ul>
-<h3 id="HNSWSQ" class="common-anchor-header">HNSW_SQ</h3><p>A Quantização Escalar (SQ) é uma técnica utilizada para discretizar dados de vírgula flutuante num conjunto finito de valores com base na sua magnitude. Por exemplo, <strong>SQ6</strong> representa a quantização em (2^6 = 64) valores discretos, em que cada número de vírgula flutuante é codificado utilizando 6 bits. Da mesma forma, <strong>SQ8</strong> quantifica os dados em (2^8 = 256) valores discretos, com cada número de vírgula flutuante representado por 8 bits. Esta quantização reduz o espaço de memória, preservando a estrutura essencial dos dados para um processamento eficiente.</p>
+<h3 id="HNSWSQ" class="common-anchor-header">HNSW_SQ</h3><p>A Quantização Escalar (SQ) é uma técnica utilizada para discretizar dados de vírgula flutuante num conjunto finito de valores com base na sua magnitude. Por exemplo, <strong>SQ6</strong> representa a quantização em (2^6 = 64) valores discretos, em que cada número de vírgula flutuante é codificado utilizando 6 bits. Da mesma forma, <strong>SQ8</strong> quantiza os dados em (2^8 = 256) valores discretos, com cada número de vírgula flutuante representado por 8 bits. Esta quantização reduz o espaço de memória, preservando a estrutura essencial dos dados para um processamento eficiente.</p>
 <p>Combinado com o SQ, o HNSW_SQ oferece um compromisso controlável entre o tamanho do índice e a precisão, mantendo um elevado desempenho de consulta por segundo (QPS). Em comparação com o HNSW padrão, resulta num aumento modesto do tempo de construção do índice.</p>
 <ul>
 <li><p>Parâmetros de construção de índices</p>
@@ -452,6 +452,8 @@ Atualmente, um campo vetorial apenas suporta um tipo de índice. O Milvus elimin
 <tr><td><code translate="no">M</code></td><td>M define o número máximo de ligações de saída no gráfico. Um M mais elevado leva a uma maior precisão/tempo de execução com ef/efConstruction fixos.</td><td>[2, 2048]</td><td>Nenhum</td></tr>
 <tr><td><code translate="no">efConstruction</code></td><td>ef_construction controla a velocidade de pesquisa do índice/comparação da velocidade de construção. Aumentar o parâmetro efConstruction pode melhorar a qualidade do índice, mas também tende a aumentar o tempo de indexação.</td><td>[1, int_max]</td><td>Nenhum</td></tr>
 <tr><td><code translate="no">sq_type</code></td><td>Tipo de quantizador escalar.</td><td><code translate="no">SQ6</code>,<code translate="no">SQ8</code>, <code translate="no">BF16</code>, <code translate="no">FP16</code></td><td><code translate="no">SQ8</code></td></tr>
+<tr><td><code translate="no">refine</code></td><td>Se os dados refinados são reservados durante a construção do índice.</td><td><code translate="no">true</code>, <code translate="no">false</code></td><td><code translate="no">false</code></td></tr>
+<tr><td><code translate="no">refine_type</code></td><td>O tipo de dados do índice de refinamento.</td><td><code translate="no">SQ6</code>, <code translate="no">SQ8</code>, <code translate="no">BF16</code>, <code translate="no">FP16</code>, <code translate="no">FP32</code></td><td>Nenhum</td></tr>
 </tbody>
 </table>
 </li>
@@ -462,9 +464,7 @@ Atualmente, um campo vetorial apenas suporta um tipo de índice. O Milvus elimin
 </thead>
 <tbody>
 <tr><td><code translate="no">ef</code></td><td>Parâmetro que controla o compromisso tempo/precisão da consulta. Um valor mais elevado em <code translate="no">ef</code> conduz a uma pesquisa mais exacta mas mais lenta.</td><td>[<code translate="no">top_k</code>, int_max]</td><td>Nenhum</td></tr>
-<tr><td><code translate="no">refine</code></td><td>Se o refinamento é utilizado durante o comboio.</td><td><code translate="no">true</code>, <code translate="no">false</code></td><td><code translate="no">false</code></td></tr>
-<tr><td><code translate="no">refine_k</code></td><td>O fator de ampliação do refino em comparação com <em>k</em>.</td><td>[1, <em>float_max)</em></td><td><code translate="no">1</code></td></tr>
-<tr><td><code translate="no">refine_type</code></td><td>O tipo de dados do índice de refinamento.</td><td><code translate="no">SQ6</code>, <code translate="no">SQ8</code>, <code translate="no">BF16</code>, <code translate="no">FP16</code>, <code translate="no">FP32</code></td><td>Nenhum</td></tr>
+<tr><td><code translate="no">refine_k</code></td><td>O fator de ampliação de refine comparado com <em>k</em>.</td><td>[1, <em>float_max</em>] Nenhum</td><td><code translate="no">1</code></td></tr>
 </tbody>
 </table>
 </li>
@@ -482,19 +482,19 @@ Atualmente, um campo vetorial apenas suporta um tipo de índice. O Milvus elimin
 <tr><td><code translate="no">efConstruction</code></td><td>ef_construction controla a velocidade de pesquisa do índice/comparação da velocidade de construção. Aumentar o parâmetro efConstruction pode melhorar a qualidade do índice, mas também tende a aumentar o tempo de indexação.</td><td>[1, int_max]</td><td>Nenhum</td></tr>
 <tr><td><code translate="no">m</code></td><td>O número de grupos de sub-vectores em que dividir o vetor.</td><td>[1, 65536]</td><td>32</td></tr>
 <tr><td><code translate="no">nbits</code></td><td>O número de bits em que cada grupo de sub-vectores é quantizado.</td><td>[1, 24]</td><td>8</td></tr>
+<tr><td><code translate="no">refine</code></td><td>Se os dados refinados são reservados durante a construção do índice.</td><td><code translate="no">true</code>, <code translate="no">false</code></td><td><code translate="no">false</code></td></tr>
+<tr><td><code translate="no">refine_type</code></td><td>O tipo de dados do índice de refinamento.</td><td><code translate="no">SQ6</code>, <code translate="no">SQ8</code>, <code translate="no">BF16</code>, <code translate="no">FP16</code>, <code translate="no">FP32</code></td><td>Nenhum</td></tr>
 </tbody>
 </table>
 </li>
 <li><p>Parâmetros de pesquisa</p>
 <table>
 <thead>
-<tr><th>Parâmetro</th><th>Descrição do parâmetro</th><th>Gama</th><th>Valor por defeito</th></tr>
+<tr><th>Parâmetro</th><th>Descrição do parâmetro</th><th>Intervalo</th><th>Valor por defeito</th></tr>
 </thead>
 <tbody>
 <tr><td><code translate="no">ef</code></td><td>Parâmetro que controla o compromisso tempo/precisão da consulta. Um valor mais elevado em <code translate="no">ef</code> conduz a uma pesquisa mais exacta mas mais lenta.</td><td>[<code translate="no">top_k</code>, int_max]</td><td>Nenhum</td></tr>
-<tr><td><code translate="no">refine</code></td><td>Se o refinamento é utilizado durante o comboio.</td><td><code translate="no">true</code>, <code translate="no">false</code></td><td><code translate="no">false</code></td></tr>
-<tr><td><code translate="no">refine_k</code></td><td>O fator de ampliação do refino em comparação com <em>k</em>.</td><td>[1, <em>float_max)</em></td><td><code translate="no">1</code></td></tr>
-<tr><td><code translate="no">refine_type</code></td><td>O tipo de dados do índice de refinamento.</td><td><code translate="no">SQ6</code>, <code translate="no">SQ8</code>, <code translate="no">BF16</code>, <code translate="no">FP16</code>, <code translate="no">FP32</code></td><td>Nenhum</td></tr>
+<tr><td><code translate="no">refine_k</code></td><td>O fator de ampliação de refine comparado com <em>k</em>.</td><td>[1, <em>float_max</em>] Nenhum</td><td><code translate="no">1</code></td></tr>
 </tbody>
 </table>
 </li>
@@ -513,6 +513,8 @@ Atualmente, um campo vetorial apenas suporta um tipo de índice. O Milvus elimin
 <tr><td><code translate="no">m</code></td><td>O número de grupos de sub-vectores em que dividir o vetor.</td><td>[1, 65536]</td><td>32</td></tr>
 <tr><td><code translate="no">nbits</code></td><td>O número de bits em que cada grupo de sub-vectores é quantizado.</td><td>[1, 24]</td><td>8</td></tr>
 <tr><td><code translate="no">nrq</code></td><td>O número de subquantizadores residuais.</td><td>[1, 16]</td><td>2</td></tr>
+<tr><td><code translate="no">refine</code></td><td>Se os dados refinados são reservados durante a construção do índice.</td><td><code translate="no">true</code>, <code translate="no">false</code></td><td><code translate="no">false</code></td></tr>
+<tr><td><code translate="no">refine_type</code></td><td>O tipo de dados do índice de refinamento.</td><td><code translate="no">SQ6</code>, <code translate="no">SQ8</code>, <code translate="no">BF16</code>, <code translate="no">FP16</code>, <code translate="no">FP32</code></td><td>Nenhum</td></tr>
 </tbody>
 </table>
 </li>
@@ -523,9 +525,7 @@ Atualmente, um campo vetorial apenas suporta um tipo de índice. O Milvus elimin
 </thead>
 <tbody>
 <tr><td><code translate="no">ef</code></td><td>Parâmetro que controla o compromisso tempo/precisão da consulta. Um valor mais elevado em <code translate="no">ef</code> conduz a uma pesquisa mais exacta mas mais lenta.</td><td>[<code translate="no">top_k</code>, int_max]</td><td>Nenhum</td></tr>
-<tr><td><code translate="no">refine</code></td><td>Se o refinamento é utilizado durante o comboio.</td><td><code translate="no">true</code>, <code translate="no">false</code></td><td><code translate="no">false</code></td></tr>
-<tr><td><code translate="no">refine_k</code></td><td>O fator de ampliação do refino em comparação com <em>k</em>.</td><td>[1, <em>float_max)</em></td><td><code translate="no">1</code></td></tr>
-<tr><td><code translate="no">refine_type</code></td><td>O tipo de dados do índice de refinamento.</td><td><code translate="no">SQ6</code>, <code translate="no">SQ8</code>, <code translate="no">BF16</code>, <code translate="no">FP16</code>, <code translate="no">FP32</code></td><td>Nenhum</td></tr>
+<tr><td><code translate="no">refine_k</code></td><td>O fator de ampliação de refine comparado com <em>k</em>.</td><td>[1, <em>float_max</em>] Nenhum</td><td><code translate="no">1</code></td></tr>
 </tbody>
 </table>
 </li>

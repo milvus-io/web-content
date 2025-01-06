@@ -40,7 +40,7 @@ title: 인메모리 인덱스
         ></path>
       </svg>
     </button></h2><p>Milvus에서 지원하는 대부분의 벡터 인덱스 유형은 근사 근접 이웃 검색(ANNS) 알고리즘을 사용합니다. 일반적으로 시간이 많이 소요되는 정확한 검색과 비교했을 때, ANNS의 핵심 아이디어는 더 이상 가장 정확한 결과를 반환하는 데 국한되지 않고 대상의 이웃만 검색하는 것입니다. ANNS는 허용 가능한 범위 내에서 정확도를 희생하여 검색 효율성을 향상시킵니다.</p>
-<p>구현 방식에 따라 ANNS 벡터 인덱스는 네 가지 유형으로 분류할 수 있습니다: 트리 기반, 그래프 기반, 해시 기반, 정량화 기반입니다.</p>
+<p>구현 방법에 따라 ANNS 벡터 인덱스는 네 가지 유형으로 분류할 수 있습니다: 트리 기반, 그래프 기반, 해시 기반, 정량화 기반입니다.</p>
 <h2 id="Indexes-supported-in-Milvus" class="common-anchor-header">Milvus에서 지원하는 인덱스<button data-href="#Indexes-supported-in-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -296,7 +296,7 @@ title: 인메모리 인덱스
 </ul></li>
 </ul>
 <h3 id="IVFSQ8" class="common-anchor-header">IVF_SQ8</h3><p>IVF_FLAT은 압축을 수행하지 않으므로 생성되는 인덱스 파일은 인덱싱되지 않은 원본 원시 벡터 데이터와 거의 같은 크기입니다. 예를 들어, 원본 1B SIFT 데이터 세트가 476GB인 경우, IVF_FLAT 인덱스 파일은 이보다 약간 더 작아집니다(~470GB). 모든 인덱스 파일을 메모리에 로드하면 470GB의 스토리지가 소모됩니다.</p>
-<p>디스크, CPU 또는 GPU 메모리 리소스가 제한되어 있는 경우 IVF_SQ8이 IVF_FLAT보다 더 나은 옵션입니다. 이 인덱스 유형은 스칼라 양자화(SQ)를 수행하여 각 FLOAT(4바이트)를 UINT8(1바이트)로 변환할 수 있습니다. 이렇게 하면 디스크, CPU, GPU 메모리 소비가 70~75% 감소합니다. 1B SIFT 데이터 세트의 경우, IVF_SQ8 인덱스 파일은 140GB의 스토리지만 필요합니다.</p>
+<p>디스크, CPU 또는 GPU 메모리 리소스가 제한되어 있는 경우 IVF_SQ8이 IVF_FLAT보다 더 나은 옵션입니다. 이 인덱스 유형은 스칼라 양자화(SQ)를 수행하여 각 FLOAT(4바이트)를 UINT8(1바이트)로 변환할 수 있습니다. 이렇게 하면 디스크, CPU, GPU 메모리 소비가 70~75%까지 줄어듭니다. 1B SIFT 데이터 세트의 경우, IVF_SQ8 인덱스 파일은 140GB의 스토리지만 필요합니다.</p>
 <ul>
 <li><p>인덱스 구축 매개변수</p>
 <table>
@@ -452,6 +452,8 @@ title: 인메모리 인덱스
 <tr><td><code translate="no">M</code></td><td>M은 그래프에서 나가는 연결의 최대 수를 정의합니다. M이 높을수록 고정된 ef/efConstruction에서 정확도/런타임이 높아집니다.</td><td>[2, 2048]</td><td>None</td></tr>
 <tr><td><code translate="no">efConstruction</code></td><td>ef_construction은 인덱스 검색 속도/구축 속도 트레이드오프를 제어합니다. efConstruction 파라미터를 높이면 인덱스 품질이 향상될 수 있지만, 인덱싱 시간이 길어지는 경향이 있습니다.</td><td>[1, int_max]</td><td>None</td></tr>
 <tr><td><code translate="no">sq_type</code></td><td>스칼라 양자화기 유형.</td><td><code translate="no">SQ6</code>,<code translate="no">SQ8</code>, <code translate="no">BF16</code>, <code translate="no">FP16</code></td><td><code translate="no">SQ8</code></td></tr>
+<tr><td><code translate="no">refine</code></td><td>인덱스 구축 중에 정제된 데이터를 예약할지 여부.</td><td><code translate="no">true</code>, <code translate="no">false</code></td><td><code translate="no">false</code></td></tr>
+<tr><td><code translate="no">refine_type</code></td><td>정제 인덱스의 데이터 유형.</td><td><code translate="no">SQ6</code>, <code translate="no">SQ8</code>, <code translate="no">BF16</code>, <code translate="no">FP16</code>, <code translate="no">FP32</code></td><td>None</td></tr>
 </tbody>
 </table>
 </li>
@@ -462,14 +464,12 @@ title: 인메모리 인덱스
 </thead>
 <tbody>
 <tr><td><code translate="no">ef</code></td><td>쿼리 시간/정확도 절충을 제어하는 매개변수입니다. <code translate="no">ef</code> 이 높을수록 검색 정확도는 높아지지만 검색 속도는 느려집니다.</td><td>[<code translate="no">top_k</code>, int_max]</td><td>None</td></tr>
-<tr><td><code translate="no">refine</code></td><td>트레인 중 정제 사용 여부.</td><td><code translate="no">true</code>, <code translate="no">false</code></td><td><code translate="no">false</code></td></tr>
-<tr><td><code translate="no">refine_k</code></td><td><em>k와</em> 비교한 refine의 확대 계수입니다.</td><td>[1, <em>float_max</em>)</td><td><code translate="no">1</code></td></tr>
-<tr><td><code translate="no">refine_type</code></td><td>세분화 인덱스의 데이터 타입입니다.</td><td><code translate="no">SQ6</code>, <code translate="no">SQ8</code>, <code translate="no">BF16</code>, <code translate="no">FP16</code>, <code translate="no">FP32</code></td><td>None</td></tr>
+<tr><td><code translate="no">refine_k</code></td><td><em>k와</em> 비교한 refine의 배율입니다.</td><td>[1, <em>float_max</em>)</td><td><code translate="no">1</code></td></tr>
 </tbody>
 </table>
 </li>
 </ul>
-<h3 id="HNSWPQ" class="common-anchor-header">HNSW_PQ</h3><p>PQ의 기본 개념은 벡터를 <code translate="no">m</code> 하위 벡터로 분할하는 것으로, 각 하위 벡터는 kmeans에 따라 <em>2^{n비트}개의</em> 중심을 찾고, 각 하위 벡터는 가장 가까운 중심을 대략적인 하위 벡터로 선택합니다. 그런 다음 모든 중심을 기록하므로 각 서브벡터는 <code translate="no">nbits</code> 로 인코딩할 수 있으며, 길이가 <code translate="no">dim</code> 인 부동 벡터는 <em>m ⋅ n비트</em> 비트로 인코딩할 수 있습니다.</p>
+<h3 id="HNSWPQ" class="common-anchor-header">HNSW_PQ</h3><p>PQ의 기본 개념은 벡터를 <code translate="no">m</code> 하위 벡터로 분할하는 것으로, 각 하위 벡터는 kmeans에 따라 <em>2^{n비트}개의</em> 중심을 찾고 각 하위 벡터는 가장 가까운 중심을 대략적인 하위 벡터로 선택합니다. 그런 다음 모든 중심을 기록하므로 각 서브벡터는 <code translate="no">nbits</code> 로 인코딩할 수 있고, 길이 <code translate="no">dim</code> 의 부동 벡터는 <em>m ⋅ n비트</em> 비트로 인코딩할 수 있습니다.</p>
 <p>PQ와 결합된 HNSW_PQ는 인덱스 크기와 정확도 간에 제어 가능한 절충점을 제공하지만, 동일한 압축률에서 HNSW_SQ보다 QPS 값은 낮고 리콜률은 높습니다. HNSW_SQ에 비해 인덱스를 구축하는 데 시간이 더 오래 걸립니다.</p>
 <ul>
 <li><p>인덱스 구축 매개변수</p>
@@ -482,6 +482,8 @@ title: 인메모리 인덱스
 <tr><td><code translate="no">efConstruction</code></td><td>ef_construction은 인덱스 검색 속도/구축 속도 트레이드오프를 제어합니다. efConstruction 파라미터를 높이면 인덱스 품질이 향상될 수 있지만, 인덱싱 시간이 길어지는 경향이 있습니다.</td><td>[1, int_max]</td><td>None</td></tr>
 <tr><td><code translate="no">m</code></td><td>벡터를 분할할 하위 벡터 그룹의 수입니다.</td><td>[1, 65536]</td><td>32</td></tr>
 <tr><td><code translate="no">nbits</code></td><td>각 서브 벡터 그룹이 양자화되는 비트 수입니다.</td><td>[1, 24]</td><td>8</td></tr>
+<tr><td><code translate="no">refine</code></td><td>인덱스 구축 중에 정제된 데이터를 예약할지 여부.</td><td><code translate="no">true</code>, <code translate="no">false</code></td><td><code translate="no">false</code></td></tr>
+<tr><td><code translate="no">refine_type</code></td><td>정제 인덱스의 데이터 유형입니다.</td><td><code translate="no">SQ6</code>, <code translate="no">SQ8</code>, <code translate="no">BF16</code>, <code translate="no">FP16</code>, <code translate="no">FP32</code></td><td>None</td></tr>
 </tbody>
 </table>
 </li>
@@ -492,9 +494,7 @@ title: 인메모리 인덱스
 </thead>
 <tbody>
 <tr><td><code translate="no">ef</code></td><td>쿼리 시간/정확도 절충을 제어하는 매개변수입니다. <code translate="no">ef</code> 이 높을수록 검색 정확도는 높아지지만 검색 속도는 느려집니다.</td><td>[<code translate="no">top_k</code>, int_max]</td><td>None</td></tr>
-<tr><td><code translate="no">refine</code></td><td>트레인 중 정제 사용 여부.</td><td><code translate="no">true</code>, <code translate="no">false</code></td><td><code translate="no">false</code></td></tr>
-<tr><td><code translate="no">refine_k</code></td><td><em>k와</em> 비교한 refine의 확대 계수입니다.</td><td>[1, <em>float_max</em>)</td><td><code translate="no">1</code></td></tr>
-<tr><td><code translate="no">refine_type</code></td><td>세분화 인덱스의 데이터 타입입니다.</td><td><code translate="no">SQ6</code>, <code translate="no">SQ8</code>, <code translate="no">BF16</code>, <code translate="no">FP16</code>, <code translate="no">FP32</code></td><td>None</td></tr>
+<tr><td><code translate="no">refine_k</code></td><td><em>k와</em> 비교한 refine의 배율입니다.</td><td>[1, <em>float_max</em>)</td><td><code translate="no">1</code></td></tr>
 </tbody>
 </table>
 </li>
@@ -513,6 +513,8 @@ title: 인메모리 인덱스
 <tr><td><code translate="no">m</code></td><td>벡터를 분할할 하위 벡터 그룹의 수입니다.</td><td>[1, 65536]</td><td>32</td></tr>
 <tr><td><code translate="no">nbits</code></td><td>각 서브 벡터 그룹이 양자화되는 비트 수입니다.</td><td>[1, 24]</td><td>8</td></tr>
 <tr><td><code translate="no">nrq</code></td><td>잔여 서브 양자화자의 수입니다.</td><td>[1, 16]</td><td>2</td></tr>
+<tr><td><code translate="no">refine</code></td><td>인덱스 구축 중에 정제된 데이터를 예약할지 여부.</td><td><code translate="no">true</code>, <code translate="no">false</code></td><td><code translate="no">false</code></td></tr>
+<tr><td><code translate="no">refine_type</code></td><td>정제 인덱스의 데이터 유형.</td><td><code translate="no">SQ6</code>, <code translate="no">SQ8</code>, <code translate="no">BF16</code>, <code translate="no">FP16</code>, <code translate="no">FP32</code></td><td>None</td></tr>
 </tbody>
 </table>
 </li>
@@ -523,9 +525,7 @@ title: 인메모리 인덱스
 </thead>
 <tbody>
 <tr><td><code translate="no">ef</code></td><td>쿼리 시간/정확도 절충을 제어하는 매개변수입니다. <code translate="no">ef</code> 이 높을수록 검색 정확도는 높아지지만 검색 속도는 느려집니다.</td><td>[<code translate="no">top_k</code>, int_max]</td><td>None</td></tr>
-<tr><td><code translate="no">refine</code></td><td>트레인 중 정제 사용 여부.</td><td><code translate="no">true</code>, <code translate="no">false</code></td><td><code translate="no">false</code></td></tr>
-<tr><td><code translate="no">refine_k</code></td><td><em>k와</em> 비교한 refine의 확대 계수입니다.</td><td>[1, <em>float_max</em>)</td><td><code translate="no">1</code></td></tr>
-<tr><td><code translate="no">refine_type</code></td><td>세분화 인덱스의 데이터 타입입니다.</td><td><code translate="no">SQ6</code>, <code translate="no">SQ8</code>, <code translate="no">BF16</code>, <code translate="no">FP16</code>, <code translate="no">FP32</code></td><td>None</td></tr>
+<tr><td><code translate="no">refine_k</code></td><td><em>k와</em> 비교한 refine의 배율입니다.</td><td>[1, <em>float_max</em>)</td><td><code translate="no">1</code></td></tr>
 </tbody>
 </table>
 </li>
@@ -533,7 +533,7 @@ title: 인메모리 인덱스
 </div>
 <div class="filter-binary">
 <h3 id="BINFLAT" class="common-anchor-header">BIN_FLAT</h3><p>이 인덱스는 이진 임베딩에만 사용할 수 있다는 점을 제외하면 FLAT과 완전히 동일합니다.</p>
-<p>완벽한 정확도가 필요하고 비교적 작은(백만 개 규모) 데이터 세트에 의존하는 벡터 유사도 검색 애플리케이션의 경우, BIN_FLAT 인덱스가 좋은 선택입니다. BIN_FLAT은 벡터를 압축하지 않으며, 정확한 검색 결과를 보장할 수 있는 유일한 인덱스입니다. BIN_FLAT의 결과는 다른 인덱스에서 생성된 결과의 비교 지점으로도 사용할 수 있습니다.</p>
+<p>완벽한 정확도가 필요하고 비교적 작은(백만 개 규모) 데이터 세트에 의존하는 벡터 유사도 검색 애플리케이션의 경우 BIN_FLAT 인덱스가 좋은 선택입니다. BIN_FLAT은 벡터를 압축하지 않으며, 정확한 검색 결과를 보장할 수 있는 유일한 인덱스입니다. BIN_FLAT의 결과는 다른 인덱스에서 생성된 결과의 비교 지점으로도 사용할 수 있습니다.</p>
 <p>BIN_FLAT은 각 쿼리마다 대상 입력이 데이터 세트의 벡터와 비교되는 철저한 검색 방식을 취하기 때문에 정확도가 높습니다. 따라서 BIN_FLAT은 목록에서 가장 느린 인덱스이며, 대규모 벡터 데이터를 쿼리하는 데는 적합하지 않습니다. Milvus에는 BIN_FLAT 인덱스에 대한 파라미터가 없으며, 이를 사용해도 데이터 학습이나 추가 저장 공간이 필요하지 않습니다.</p>
 <ul>
 <li><p>검색 매개변수</p>
@@ -606,7 +606,7 @@ title: 인메모리 인덱스
 <tr><th>파라미터</th><th>설명</th><th>범위</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">drop_ratio_search</code></td><td>검색 과정에서 제외되는 작은 벡터 값의 비율입니다. 이 옵션을 사용하면 쿼리 벡터에서 무시할 가장 작은 값의 비율을 지정하여 검색 프로세스를 미세 조정할 수 있습니다. 검색 정확도와 성능의 균형을 맞추는 데 도움이 됩니다. <code translate="no">drop_ratio_search</code> 에 설정된 값이 작을수록 최종 점수에 기여하는 작은 값이 줄어듭니다. 일부 작은 값을 무시하면 정확도에 미치는 영향을 최소화하면서 검색 성능을 개선할 수 있습니다.</td><td>[0, 1]</td></tr>
+<tr><td><code translate="no">drop_ratio_search</code></td><td>검색 과정에서 제외되는 작은 벡터 값의 비율입니다. 이 옵션을 사용하면 쿼리 벡터에서 무시할 가장 작은 값의 비율을 지정하여 검색 프로세스를 미세 조정할 수 있습니다. 검색 정확도와 성능의 균형을 맞추는 데 도움이 됩니다. <code translate="no">drop_ratio_search</code> 에 설정된 값이 작을수록 최종 점수에 기여하는 작은 값이 줄어듭니다. 일부 작은 값을 무시하면 정확도에 미치는 영향을 최소화하면서 검색 성능을 향상시킬 수 있습니다.</td><td>[0, 1]</td></tr>
 </tbody>
 </table>
 </li>

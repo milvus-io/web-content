@@ -1370,7 +1370,7 @@
             "children": []
           },
           {
-            "label": "RBAC aktivieren",
+            "label": "RBAC einschalten",
             "id": "rbac.md",
             "order": 1,
             "isMenu": true,
@@ -1405,35 +1405,16 @@
     "order": 6,
     "children": [
       {
-        "label": "Milvus CLI",
-        "id": "cli",
+        "label": "Attu (Milvus GUI)",
+        "id": "milvus_attu",
         "order": 0,
-        "isMenu": true,
-        "children": [
-          {
-            "label": "Übersicht",
-            "id": "cli_overview.md",
-            "order": 0,
-            "children": []
-          },
-          {
-            "label": "Einrichtung",
-            "id": "install_cli.md",
-            "order": 1,
-            "children": []
-          },
-          {
-            "label": "Befehle",
-            "id": "cli_commands.md",
-            "order": 2,
-            "children": []
-          }
-        ]
+        "externalLink": "https://github.com/zilliztech/attu",
+        "children": []
       },
       {
         "label": "Milvus-Sicherung",
         "id": "milvus_backup",
-        "order": 2,
+        "order": 1,
         "children": [
           {
             "label": "Übersicht",
@@ -1488,6 +1469,31 @@
         ]
       },
       {
+        "label": "Vogelbeobachter",
+        "id": "birdwatcher",
+        "order": 2,
+        "children": [
+          {
+            "label": "Übersicht",
+            "id": "birdwatcher_overview.md",
+            "order": 0,
+            "children": []
+          },
+          {
+            "label": "Leitfäden installieren",
+            "id": "birdwatcher_install_guides.md",
+            "order": 1,
+            "children": []
+          },
+          {
+            "label": "Leitfäden für die Verwendung",
+            "id": "birdwatcher_usage_guides.md",
+            "order": 2,
+            "children": []
+          }
+        ]
+      },
+      {
         "label": "Milvus CDC",
         "id": "milvus_cdc",
         "order": 3,
@@ -1520,33 +1526,41 @@
         ]
       },
       {
-        "label": "Attu(Milvus GUI)",
-        "id": "milvus_attu",
+        "label": "Milvus CLI",
+        "id": "cli",
         "order": 4,
-        "externalLink": "https://github.com/zilliztech/attu",
-        "children": []
-      },
-      {
-        "label": "Vogelbeobachter",
-        "id": "birdwatcher",
-        "order": 5,
+        "isMenu": true,
         "children": [
           {
             "label": "Übersicht",
-            "id": "birdwatcher_overview.md",
+            "id": "cli_overview.md",
             "order": 0,
             "children": []
           },
           {
-            "label": "Leitfäden installieren",
-            "id": "birdwatcher_install_guides.md",
+            "label": "Einrichtung",
+            "id": "install_cli.md",
             "order": 1,
             "children": []
           },
           {
-            "label": "Leitfäden für die Verwendung",
-            "id": "birdwatcher_usage_guides.md",
+            "label": "Befehle",
+            "id": "cli_commands.md",
             "order": 2,
+            "children": []
+          }
+        ]
+      },
+      {
+        "label": "Milvus Steckverbinder",
+        "id": "milvus_connectors",
+        "order": 5,
+        "isMenu": true,
+        "children": [
+          {
+            "label": "Funke",
+            "id": "integrate_with_spark.md",
+            "order": 0,
             "children": []
           }
         ]
@@ -1557,20 +1571,6 @@
         "order": 6,
         "externalLink": "https://milvus.io/tools/sizing/",
         "children": []
-      },
-      {
-        "label": "Milvus Steckverbinder",
-        "id": "milvus_connectors",
-        "order": 7,
-        "isMenu": true,
-        "children": [
-          {
-            "label": "Funke",
-            "id": "integrate_with_spark.md",
-            "order": 0,
-            "children": []
-          }
-        ]
       },
       {
         "label": "Powershell-Milvus-Client",

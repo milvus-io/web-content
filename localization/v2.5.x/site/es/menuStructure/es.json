@@ -1092,7 +1092,7 @@
             "children": []
           },
           {
-            "label": "Configurar la caché de trozos",
+            "label": "Configurar Chunk Cache",
             "id": "chunk_cache.md",
             "order": 3,
             "children": []
@@ -1309,7 +1309,7 @@
             "isMenu": true,
             "children": [
               {
-                "label": "Rastreo de Jaeger",
+                "label": "Seguimiento de Jaeger",
                 "id": "config_jaeger_tracing.md",
                 "order": 0,
                 "children": []
@@ -1405,35 +1405,16 @@
     "order": 6,
     "children": [
       {
-        "label": "Milvus CLI",
-        "id": "cli",
+        "label": "Attu (Milvus GUI)",
+        "id": "milvus_attu",
         "order": 0,
-        "isMenu": true,
-        "children": [
-          {
-            "label": "Visión general",
-            "id": "cli_overview.md",
-            "order": 0,
-            "children": []
-          },
-          {
-            "label": "Instalación",
-            "id": "install_cli.md",
-            "order": 1,
-            "children": []
-          },
-          {
-            "label": "Comandos",
-            "id": "cli_commands.md",
-            "order": 2,
-            "children": []
-          }
-        ]
+        "externalLink": "https://github.com/zilliztech/attu",
+        "children": []
       },
       {
         "label": "Milvus Backup",
         "id": "milvus_backup",
-        "order": 2,
+        "order": 1,
         "children": [
           {
             "label": "Visión general",
@@ -1488,6 +1469,31 @@
         ]
       },
       {
+        "label": "Observador de aves",
+        "id": "birdwatcher",
+        "order": 2,
+        "children": [
+          {
+            "label": "Visión general",
+            "id": "birdwatcher_overview.md",
+            "order": 0,
+            "children": []
+          },
+          {
+            "label": "Guías de instalación",
+            "id": "birdwatcher_install_guides.md",
+            "order": 1,
+            "children": []
+          },
+          {
+            "label": "Guías de uso",
+            "id": "birdwatcher_usage_guides.md",
+            "order": 2,
+            "children": []
+          }
+        ]
+      },
+      {
         "label": "Milvus CDC",
         "id": "milvus_cdc",
         "order": 3,
@@ -1520,33 +1526,41 @@
         ]
       },
       {
-        "label": "Attu(Milvus GUI)",
-        "id": "milvus_attu",
+        "label": "Milvus CLI",
+        "id": "cli",
         "order": 4,
-        "externalLink": "https://github.com/zilliztech/attu",
-        "children": []
-      },
-      {
-        "label": "Observador de aves",
-        "id": "birdwatcher",
-        "order": 5,
+        "isMenu": true,
         "children": [
           {
             "label": "Visión general",
-            "id": "birdwatcher_overview.md",
+            "id": "cli_overview.md",
             "order": 0,
             "children": []
           },
           {
-            "label": "Guías de instalación",
-            "id": "birdwatcher_install_guides.md",
+            "label": "Instalación",
+            "id": "install_cli.md",
             "order": 1,
             "children": []
           },
           {
-            "label": "Guías de uso",
-            "id": "birdwatcher_usage_guides.md",
+            "label": "Comandos",
+            "id": "cli_commands.md",
             "order": 2,
+            "children": []
+          }
+        ]
+      },
+      {
+        "label": "Conectores Milvus",
+        "id": "milvus_connectors",
+        "order": 5,
+        "isMenu": true,
+        "children": [
+          {
+            "label": "Chispa",
+            "id": "integrate_with_spark.md",
+            "order": 0,
             "children": []
           }
         ]
@@ -1557,20 +1571,6 @@
         "order": 6,
         "externalLink": "https://milvus.io/tools/sizing/",
         "children": []
-      },
-      {
-        "label": "Conectores Milvus",
-        "id": "milvus_connectors",
-        "order": 7,
-        "isMenu": true,
-        "children": [
-          {
-            "label": "Chispa",
-            "id": "integrate_with_spark.md",
-            "order": 0,
-            "children": []
-          }
-        ]
       },
       {
         "label": "Cliente Powershell Milvus",
