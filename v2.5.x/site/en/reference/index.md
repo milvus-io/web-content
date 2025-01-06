@@ -409,15 +409,16 @@ Combined with SQ, HNSW_SQ offers a controllable trade-off between index size and
   | `M`              | M defines tha maximum number of outgoing connections in the graph. Higher M leads to higher accuracy/run_time at fixed ef/efConstruction.                                             | [2, 2048]                   | None          |
   | `efConstruction` | ef_construction controls index search speed/build speed tradeoff. Increasing the efConstruction parameter may enhance index quality, but it also tends to lengthen the indexing time. | [1, int_max]                | None          |
   | `sq_type`        | Scalar quantizer type.                                                                                                                                                                | `SQ6`,`SQ8`, `BF16`, `FP16` | `SQ8`         |
+  | `refine`      | Whether refined data is reserved during index building.                                                               | `true`, `false`                      | `false`       | 
+  | `refine_type` | The data type of the refine index.                                                                         | `SQ6`, `SQ8`, `BF16`, `FP16`, `FP32` | None          | 
 
 - Search parameters
 
   | Parameter     | Description                                                                                                | Range                                | Default Value |
   |---------------|------------------------------------------------------------------------------------------------------------|--------------------------------------|---------------|
   | `ef`          | Parameter controlling query time/accuracy trade-off. Higher `ef` leads to more accurate but slower search. | [`top_k`, int_max]                   | None          |
-  | `refine`      | Whether the refine is used during the train.                                                               | `true`, `false`                      | `false`       |
   | `refine_k`    | The magnification factor of refine compared to *k*.                                                        | [1, *float_max*)                     | `1`           |
-  | `refine_type` | The data type of the refine index.                                                                         | `SQ6`, `SQ8`, `BF16`, `FP16`, `FP32` | None          |
+
 
 ### HNSW_PQ
 
@@ -433,15 +434,15 @@ Combined with PQ, HNSW_PQ offers a controllable tradeoff between index size and 
   | `efConstruction` | ef_construction controls index search speed/build speed tradeoff. Increasing the efConstruction parameter may enhance index quality, but it also tends to lengthen the indexing time. | [1, int_max] | None          |
   | `m`              | The number of sub-vector groups to split the vector into.                                                                                                                             | [1, 65536]   | 32            |
   | `nbits`          | The number of bits into which each group of sub-vectors is quantized.                                                                                                                 | [1, 24]      | 8             |
+  | `refine`      | Whether refined data is reserved during index building.                                                               | `true`, `false`                      | `false`       |
+  | `refine_type` | The data type of the refine index.                                                                         | `SQ6`, `SQ8`, `BF16`, `FP16`, `FP32` | None          |
 
 - Search parameters
 
   | Parameter     | Description                                                                                                | Range                                | Default Value |
   |---------------|------------------------------------------------------------------------------------------------------------|--------------------------------------|---------------|
   | `ef`          | Parameter controlling query time/accuracy trade-off. Higher `ef` leads to more accurate but slower search. | [`top_k`, int_max]                   | None          |
-  | `refine`      | Whether the refine is used during the train.                                                               | `true`, `false`                      | `false`       |
   | `refine_k`    | The magnification factor of refine compared to *k*.                                                        | [1, *float_max*)                     | `1`           |
-  | `refine_type` | The data type of the refine index.                                                                         | `SQ6`, `SQ8`, `BF16`, `FP16`, `FP32` | None          |
 
 ### HNSW_PRQ
 
@@ -458,15 +459,15 @@ Combined with a Product Residual Quantizer (PRQ), HNSW_PRQ offers an even higher
   | `m`              | The number of sub-vector groups to split the vector into.                                                                                                                             | [1, 65536]   | 32            |
   | `nbits`          | The number of bits into which each group of sub-vectors is quantized.                                                                                                                 | [1, 24]      | 8             |
   | `nrq`            | The number of residual subquantizers.                                                                                                                                                 | [1, 16]      | 2             |
+  | `refine`      | Whether refined data is reserved during index building.                                                               | `true`, `false`                      | `false`       |
+  | `refine_type` | The data type of the refine index.                                                                         | `SQ6`, `SQ8`, `BF16`, `FP16`, `FP32` | None          |
 
 - Search parameters
 
   | Parameter     | Description                                                                                                | Range                                | Default Value |
   |---------------|------------------------------------------------------------------------------------------------------------|--------------------------------------|---------------|
   | `ef`          | Parameter controlling query time/accuracy trade-off. Higher `ef` leads to more accurate but slower search. | [`top_k`, int_max]                   | None          |
-  | `refine`      | Whether the refine is used during the train.                                                               | `true`, `false`                      | `false`       |
   | `refine_k`    | The magnification factor of refine compared to *k*.                                                        | [1, *float_max*)                     | `1`           |
-  | `refine_type` | The data type of the refine index.                                                                         | `SQ6`, `SQ8`, `BF16`, `FP16`, `FP32` | None          |
 
 </div>
 
