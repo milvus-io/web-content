@@ -36,13 +36,13 @@ The `maxGeneralCapacity` parameter sets the maximum number of collections that t
 
 In a collection, you can set up multiple shards and partitions. Shards are logical units used to distribute data write operations among multiple data nodes. Partitions are logical units used to improve data retrieval efficiency by loading only a subset of collection data. When calculating the number of collections in the current Milvus instance, you also need to count the shards and partitions.
 
-For example, let's assume you have already created **100** collections, with **2** shards and **4** partitions in **60** of them and with **1** shard and **12** partitions in the rest **40** collections. The current number of collections can be calculated as:
+For example, let's assume you have already created **100** collections, with **2** shards and **4** partitions in **60** of them and with **1** shard and **12** partitions in the rest **40** collections. The total number of collection units (calculated as `shards × partitions`) can be determined as follows:
 
 ```
 60 (collections) x 2 (shards) x 4 (partitions) + 40 (collections) x 1 (shard) x 12 (partitions) = 960
 ```
 
-In the above example, you have already used **960** out of the default limits. Now if you want to create a new collection with **4** shards and **20** partitions, you will receive the following error prompt because the total number of collections exceeds the maximum capacity:
+In this example, the calculated total of 960 collection units represents the current usage. The `maxGeneralCapacity` defines the maximum number of collection units an instance can support, which is set to `65536` by default. This means the instance can accommodate up to 65,536 collection units. If the total number exceeds this limit, the system will display the following error message:
 
 ```shell
 failed checking constraint: sum_collections(parition*shard) exceeding the max general capacity:
