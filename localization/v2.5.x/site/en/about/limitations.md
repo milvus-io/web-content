@@ -106,7 +106,7 @@ summary: Learn about the limits while using Milvus.
 <tr><th>Resource</th><th>Limit</th></tr>
 </thead>
 <tbody>
-<tr><td>Partition</td><td>4,096</td></tr>
+<tr><td>Partition</td><td>1,024</td></tr>
 <tr><td>Shard</td><td>16</td></tr>
 <tr><td>Field</td><td>64</td></tr>
 <tr><td>Index</td><td>1</td></tr>
