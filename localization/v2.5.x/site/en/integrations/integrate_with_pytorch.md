@@ -1,9 +1,9 @@
 ---
 id: integrate_with_pytorch.md
-summary: This page discusses image search using Milvus
-title: Image Search with Milvus - Integration
+summary: This page demostrates how to build image search with PyTorch and Milvus
+title: Image Search with PyTorch and Milvus
 ---
-<h1 id="Image-Search-with-Milvus" class="common-anchor-header">Image Search with Milvus<button data-href="#Image-Search-with-Milvus" class="anchor-icon" translate="no">
+<h1 id="Image-Search-with-PyTorch-and-Milvus" class="common-anchor-header">Image Search with PyTorch and Milvus<button data-href="#Image-Search-with-PyTorch-and-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -18,8 +18,8 @@ title: Image Search with Milvus - Integration
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>On this page, we are going to be going over a simple image search example using Milvus. The dataset we are searching through is the Impressionist-Classifier Dataset found on <a href="https://www.kaggle.com/datasets/delayedkarma/impressionist-classifier-data">Kaggle</a>. For this example, we have rehosted the data in a public google drive.</p>
-<p>For this example, we are just using the Torchvision pre-trained Resnet50 model for embeddings. Let’s get started!</p>
+    </button></h1><p>This guide introduces an example of integrating PyTorch and Milvus to perform image search using embeddings. PyTorch is a powerful open-source deep learning framework widely used for building and deploying machine learning models. In this example, we’ll leverage its Torchvision library and a pre-trained ResNet50 model to generate feature vectors (embeddings) that represent image content. These embeddings will be stored in Milvus, a high-performance vector database, to enable efficient similarity search. The dataset used is the Impressionist-Classifier Dataset from <a href="https://www.kaggle.com/datasets/delayedkarma/impressionist-classifier-data">Kaggle</a>. By combining the deep learning capabilities of PyTorch with the scalable search functionality of Milvus, this example demonstrates how to build a robust and efficient image retrieval system.</p>
+<p>Let’s get started!</p>
 <h2 id="Installing-the-requirements" class="common-anchor-header">Installing the requirements<button data-href="#Installing-the-requirements" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
