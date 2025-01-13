@@ -24,7 +24,7 @@ title: Upgrade Milvus Standalone with Docker Compose
         ></path>
       </svg>
     </button></h1><p>This topic describes how to upgrade your Milvus using Docker Compose.</p>
-<p>In normal cases, you can <a href="#Upgrade-Milvus-by-changing-its-image">upgrade Milvus by changing its image</a>. However, you need to <a href="#Migrate-the-metadata">migrate the metadata</a> before any upgrade from v2.1.x to v2.5.2.</p>
+<p>In normal cases, you can <a href="#Upgrade-Milvus-by-changing-its-image">upgrade Milvus by changing its image</a>. However, you need to <a href="#Migrate-the-metadata">migrate the metadata</a> before any upgrade from v2.1.x to v2.5.3.</p>
 <div class="alter note">
 <p>Due to security concerns, Milvus upgrades its MinIO to RELEASE.2023-03-20T20-16-18Z with the release of v2.2.5. Before any upgrades from previous Milvus Standalone releases installed using Docker Compose, you should create a Single-Node Single-Drive MinIO deployment and migrate existing MinIO settings and content to the new deployment. For details, refer to <a href="https://min.io/docs/minio/linux/operations/install-deploy-manage/migrate-fs-gateway.html#id2">this guide</a>.</p>
 </div>
@@ -49,7 +49,7 @@ title: Upgrade Milvus Standalone with Docker Compose
 <pre><code translate="no" class="language-yaml">...
 standalone:
   container_name: milvus-standalone
-  image: milvusdb/milvus:v2.5.2
+  image: milvusdb/milvus:v2.5.3
 <button class="copy-code-btn"></button></code></pre></li>
 <li><p>Run the following commands to perform the upgrade.</p>
 <pre><code translate="no" class="language-shell">docker compose down
@@ -83,7 +83,7 @@ cmd:
   runWithBackup: true
 config:
   sourceVersion: <span class="hljs-number">2.1</span><span class="hljs-number">.4</span>   <span class="hljs-comment"># Specify your milvus version</span>
-  targetVersion: <span class="hljs-number">2.5</span><span class="hljs-number">.2</span>
+  targetVersion: <span class="hljs-number">2.5</span><span class="hljs-number">.3</span>
   backupFilePath: /tmp/migration.bak
 metastore:
   <span class="hljs-built_in">type</span>: etcd

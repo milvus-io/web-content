@@ -19,6 +19,50 @@ title: Release Notes
         ></path>
       </svg>
     </button></h1><p>Find out what’s new in Milvus! This page summarizes new features, improvements, known issues, and bug fixes in each release. You can find the release notes for each released version after v2.5.0 in this section. We suggest that you regularly visit this page to learn about updates.</p>
+<h2 id="v253" class="common-anchor-header">v2.5.3<button data-href="#v253" class="anchor-icon" translate="no">
+      <svg translate="no"
+        aria-hidden="true"
+        focusable="false"
+        height="20"
+        version="1.1"
+        viewBox="0 0 16 16"
+        width="16"
+      >
+        <path
+          fill="#0092E4"
+          fill-rule="evenodd"
+          d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
+        ></path>
+      </svg>
+    </button></h2><p>Release date: January 13, 2025</p>
+<table>
+<thead>
+<tr><th>Milvus version</th><th>Python SDK version</th><th>Node.js SDK version</th><th>Java SDK version</th></tr>
+</thead>
+<tbody>
+<tr><td>2.5.3</td><td>2.5.3</td><td>2.5.3</td><td>2.5.4</td></tr>
+</tbody>
+</table>
+<p>Milvus 2.5.3 delivers critical bug fixes and performance enhancements to improve overall stability, reliability, and usability. This version refines concurrency handling, bolsters data indexing and retrieval, and updates several key components for a more robust user experience.</p>
+<h3 id="Bug-fixes" class="common-anchor-header">Bug fixes</h3><ul>
+<li>Fixed an issue where using an <code translate="no">IN</code> filter on a <code translate="no">VARCHAR</code> primary key could return empty results. (<a href="https://github.com/milvus-io/milvus/pull/39108">#39108</a>)</li>
+<li>Fixed a concurrency problem between query and delete operations that could lead to incorrect results. (<a href="https://github.com/milvus-io/milvus/pull/39054">#39054</a>)</li>
+<li>Fixed a failure caused by iterative filtering when an <code translate="no">expr</code> was empty in a query request. (<a href="https://github.com/milvus-io/milvus/pull/39034">#39034</a>)</li>
+<li>Fixed an issue where a disk error during config updates led to the use of default config settings. (<a href="https://github.com/milvus-io/milvus/pull/39072">#39072</a>)</li>
+<li>Fixed a potential loss of deleted data due to clustering compaction. (<a href="https://github.com/milvus-io/milvus/pull/39133">#39133</a>)</li>
+<li>Fixed a broken text match query in growing data segments. (<a href="https://github.com/milvus-io/milvus/pull/39113">#39113</a>)</li>
+<li>Fixed retrieval failures caused by the index not containing the original data for sparse vectors. (<a href="https://github.com/milvus-io/milvus/pull/39146">#39146</a>)</li>
+<li>Fixed a possible column field race condition caused by concurrent querying and data loading. (<a href="https://github.com/milvus-io/milvus/pull/39152">#39152</a>)</li>
+<li>Fixed bulk insert failures when nullable or default_value fields were not included in the data. (<a href="https://github.com/milvus-io/milvus/pull/39111">#39111</a>)</li>
+</ul>
+<h3 id="Improvements" class="common-anchor-header">Improvements</h3><ul>
+<li>Added a resource group API for the RESTful interface. (<a href="https://github.com/milvus-io/milvus/pull/39092">#39092</a>)</li>
+<li>Optimized retrieve performance by leveraging bitset SIMD methods. (<a href="https://github.com/milvus-io/milvus/pull/39041">#39041</a>)</li>
+<li>Used MVCC timestamp as the guarantee timestamp when specified. (<a href="https://github.com/milvus-io/milvus/pull/39019">#39019</a>)</li>
+<li>Added missing delete metrics. (<a href="https://github.com/milvus-io/milvus/pull/38747">#38747</a>)</li>
+<li>Updated Etcd to version v3.5.16. (<a href="https://github.com/milvus-io/milvus/pull/38969">#38969</a>)</li>
+<li>Created a new Go package to manage protos.(<a href="https://github.com/milvus-io/milvus/pull/39128">#39128</a>)</li>
+</ul>
 <h2 id="v252" class="common-anchor-header">v2.5.2<button data-href="#v252" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
