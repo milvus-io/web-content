@@ -702,21 +702,58 @@
             "children": []
           },
           {
+            "label": "Filtraggio",
+            "id": "filtering",
+            "order": 6,
+            "children": [
+              {
+                "label": "Il filtraggio spiegato",
+                "id": "boolean.md",
+                "order": 0,
+                "children": []
+              },
+              {
+                "label": "Operatori di base",
+                "id": "basic-operators.md",
+                "order": 1,
+                "children": []
+              },
+              {
+                "label": "Filtraggio Templating",
+                "id": "filtering-templating.md",
+                "order": 2,
+                "children": []
+              },
+              {
+                "label": "Operatori JSON",
+                "id": "json-operators.md",
+                "order": 3,
+                "children": []
+              },
+              {
+                "label": "Operatori di matrice",
+                "id": "array-operators.md",
+                "order": 4,
+                "children": []
+              }
+            ]
+          },
+          {
             "label": "Ricerca a testo completo",
             "id": "full-text-search.md",
-            "order": 6,
+            "order": 7,
             "children": []
           },
           {
             "label": "Corrispondenza del testo",
             "id": "keyword-match.md",
-            "order": 7,
+            "order": 8,
             "children": []
           },
           {
             "label": "Iteratori di ricerca",
             "id": "with-iterators.md",
-            "order": 8,
+            "order": 9,
             "children": []
           },
           {
@@ -726,15 +763,9 @@
             "children": []
           },
           {
-            "label": "Filtraggio dei metadati",
-            "id": "boolean.md",
-            "order": 14,
-            "children": []
-          },
-          {
             "label": "Reranking",
             "id": "reranking.md",
-            "order": 15,
+            "order": 10,
             "children": []
           }
         ]
@@ -2044,7 +2075,7 @@
         "children": []
       },
       {
-        "label": "Ricerca a imbuto con matrioske embeddings",
+        "label": "Ricerca a imbuto con le matrici Matryoshka",
         "id": "funnel_search_with_matryoshka.md",
         "order": 13,
         "children": []
@@ -2073,7 +2104,7 @@
             "children": []
           },
           {
-            "label": "Ricerca della somiglianza audio",
+            "label": "Ricerca di somiglianza audio",
             "id": "audio_similarity_search.md",
             "order": 8,
             "children": []

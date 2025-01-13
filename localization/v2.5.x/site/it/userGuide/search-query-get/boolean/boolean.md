@@ -42,9 +42,9 @@ title: Il filtraggio spiegato
       </svg>
     </button></h2><p>Milvus supporta diversi operatori di base per filtrare i dati.</p>
 <ul>
-<li><p><strong>Operatori di confronto</strong>: <code translate="no">==</code>, <code translate="no">!=</code>, <code translate="no">&gt;</code>, <code translate="no">&lt;</code>, <code translate="no">&gt;=</code>, e <code translate="no">&lt;=</code> permettono di filtrare in base a campi numerici, di testo o di data.</p></li>
+<li><p><strong>Operatori di confronto</strong>: <code translate="no">==</code>, <code translate="no">!=</code>, <code translate="no">&gt;</code>, <code translate="no">&lt;</code>, <code translate="no">&gt;=</code>, e <code translate="no">&lt;=</code> consentono di filtrare in base a campi numerici, di testo o di data.</p></li>
 <li><p><strong>Filtri di intervallo</strong>: <code translate="no">IN</code> e <code translate="no">LIKE</code> consentono di trovare intervalli o insiemi di valori specifici.</p></li>
-<li><p><strong>Operatori aritmetici</strong>: <code translate="no">+</code>, <code translate="no">-</code>, <code translate="no">*</code>, <code translate="no">/</code>, <code translate="no">%</code> e <code translate="no">**</code> sono utilizzati per i calcoli che coinvolgono i campi numerici.</p></li>
+<li><p><strong>Operatori aritmetici</strong>: <code translate="no">+</code>, <code translate="no">-</code>, <code translate="no">*</code>, <code translate="no">/</code>, <code translate="no">%</code>, e `` sono utilizzati per i calcoli relativi ai campi numerici.</p></li>
 <li><p><strong>Operatori logici</strong>: <code translate="no">AND</code>, <code translate="no">OR</code>, e <code translate="no">NOT</code> o '&amp;&amp;', '||', '~', '!' combinano più condizioni in espressioni complesse.</p></li>
 </ul>
 <h3 id="Example-Filtering-by-Color​" class="common-anchor-header">Esempio: Filtro per colore</h3><p>Per trovare entità con colori primari (rosso, verde o blu) in un campo scalare <code translate="no">color</code>, utilizzare la seguente espressione di filtro.</p>
@@ -104,41 +104,41 @@ filter_params = {<span class="hljs-string">&quot;age&quot;</span>: <span class="
       </svg>
     </button></h2><p>Milvus offre operatori di filtraggio avanzati per tipi di dati specifici, come i campi JSON, ARRAY e VARCHAR.</p>
 <h3 id="JSON-field-specific-operators​" class="common-anchor-header">Operatori specifici per i campi JSON</h3><p>Milvus offre operatori avanzati per l'interrogazione dei campi JSON, consentendo un filtraggio preciso all'interno di strutture JSON complesse.</p>
-<p><code translate="no">**JSON_CONTAINS(identifier, jsonExpr)**</code>: Controlla se un'espressione JSON esiste nel campo.</p>
+<p><code translate="no">JSON_CONTAINS(identifier, jsonExpr)</code>: Controlla se un'espressione JSON esiste nel campo.</p>
 <pre><code translate="no" class="language-python"># JSON data: {<span class="hljs-string">&quot;tags&quot;</span>: [<span class="hljs-string">&quot;electronics&quot;</span>, <span class="hljs-string">&quot;sale&quot;</span>, <span class="hljs-string">&quot;new&quot;</span>]}​
 filter=<span class="hljs-string">&#x27;json_contains(tags, &quot;sale&quot;)&#x27;</span>​
 
 <button class="copy-code-btn"></button></code></pre>
-<p><code translate="no">**JSON_CONTAINS_ALL(identifier, jsonExpr)**</code>: Verifica che tutti gli elementi dell'espressione JSON siano presenti.</p>
+<p><code translate="no">JSON_CONTAINS_ALL(identifier, jsonExpr)</code>: Verifica che tutti gli elementi dell'espressione JSON siano presenti.</p>
 <pre><code translate="no" class="language-python"># JSON data: {<span class="hljs-string">&quot;tags&quot;</span>: [<span class="hljs-string">&quot;electronics&quot;</span>, <span class="hljs-string">&quot;sale&quot;</span>, <span class="hljs-string">&quot;new&quot;</span>, <span class="hljs-string">&quot;discount&quot;</span>]}​
 filter=<span class="hljs-string">&#x27;json_contains_all(tags, [&quot;electronics&quot;, &quot;sale&quot;, &quot;new&quot;])&#x27;</span>​
 
 <button class="copy-code-btn"></button></code></pre>
-<p><code translate="no">**JSON_CONTAINS_ANY(identifier, jsonExpr)**</code>: Filtra le entità in cui esiste almeno un elemento nell'espressione JSON.</p>
+<p><code translate="no">JSON_CONTAINS_ANY(identifier, jsonExpr)</code>: Filtra le entità in cui esiste almeno un elemento nell'espressione JSON.</p>
 <pre><code translate="no" class="language-python"># JSON data: {<span class="hljs-string">&quot;tags&quot;</span>: [<span class="hljs-string">&quot;electronics&quot;</span>, <span class="hljs-string">&quot;sale&quot;</span>, <span class="hljs-string">&quot;new&quot;</span>]}​
 filter=<span class="hljs-string">&#x27;json_contains_any(tags, [&quot;electronics&quot;, &quot;new&quot;, &quot;clearance&quot;])&#x27;</span>​
 
 <button class="copy-code-btn"></button></code></pre>
 <p>Per maggiori dettagli sugli operatori JSON, consultare <a href="/docs/it/json-operators.md">Operatori JSON</a>.</p>
 <h3 id="ARRAY-field-specific-operators​" class="common-anchor-header">Operatori specifici del campo ARRAY</h3><p>Milvus offre operatori di filtraggio avanzati per i campi array, come <code translate="no">ARRAY_CONTAINS</code>, <code translate="no">ARRAY_CONTAINS_ALL</code>, <code translate="no">ARRAY_CONTAINS_ANY</code> e <code translate="no">ARRAY_LENGTH</code>, che consentono un controllo a grana fine sui dati degli array.</p>
-<p><code translate="no">**ARRAY_CONTAINS**</code>: Filtra le entità contenenti un elemento specifico.</p>
+<p><code translate="no">ARRAY_CONTAINS</code>: Filtra le entità contenenti un elemento specifico.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span>=<span class="hljs-string">&quot;ARRAY_CONTAINS(history_temperatures, 23)&quot;</span>​
 
 <button class="copy-code-btn"></button></code></pre>
-<p><code translate="no">**ARRAY_CONTAINS_ALL**</code>: Filtra le entità in cui sono presenti tutti gli elementi di un elenco.</p>
+<p><code translate="no">ARRAY_CONTAINS_ALL</code>: Filtra le entità in cui sono presenti tutti gli elementi di un elenco.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span>=<span class="hljs-string">&quot;ARRAY_CONTAINS_ALL(history_temperatures, [23, 24])&quot;</span>​
 
 <button class="copy-code-btn"></button></code></pre>
-<p><code translate="no">**ARRAY_CONTAINS_ANY**</code>: Filtra le entità contenenti qualsiasi elemento dell'elenco.</p>
+<p><code translate="no">ARRAY_CONTAINS_ANY</code>: Filtra le entità contenenti qualsiasi elemento dell'elenco.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span>=<span class="hljs-string">&quot;ARRAY_CONTAINS_ANY(history_temperatures, [23, 24])&quot;</span>​
 
 <button class="copy-code-btn"></button></code></pre>
-<p><code translate="no">**ARRAY_LENGTH**</code>: Filtra in base alla lunghezza dell'array.</p>
+<p><code translate="no">ARRAY_LENGTH</code>: Filtra in base alla lunghezza dell'array.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span>=<span class="hljs-string">&quot;ARRAY_LENGTH(history_temperatures) &lt; 10&quot;</span>​
 
 <button class="copy-code-btn"></button></code></pre>
 <p>Per maggiori dettagli sugli operatori di array, vedere <a href="/docs/it/array-operators.md">Operatori ARRAY</a>.</p>
-<h3 id="VARCHAR-field-specific-operators​" class="common-anchor-header">Operatori specifici per il campo VARCHAR</h3><p>L'operatore <code translate="no">**Text_Match**</code> consente di recuperare documenti precisi in base a termini specifici della query. È particolarmente utile per le ricerche filtrate che combinano filtri scalari con ricerche di somiglianza vettoriale. A differenza delle ricerche semantiche, Text Match si concentra sulle occorrenze esatte dei termini.</p>
+<h3 id="VARCHAR-field-specific-operators​" class="common-anchor-header">Operatori specifici per il campo VARCHAR</h3><p>L'operatore <code translate="no">Text_Match</code> consente di recuperare documenti precisi in base a termini specifici della query. È particolarmente utile per le ricerche filtrate che combinano filtri scalari con ricerche di somiglianza vettoriale. A differenza delle ricerche semantiche, Text Match si concentra sulle occorrenze esatte dei termini.</p>
 <p>Milvus utilizza Tantivy per supportare l'indicizzazione inversa e la ricerca testuale basata sui termini. Il processo prevede.</p>
 <ol>
 <li><p><strong>Analizzatore</strong>: Tokenizza ed elabora il testo in ingresso.</p></li>

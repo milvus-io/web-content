@@ -1,9 +1,9 @@
 ---
 id: integrate_with_pytorch.md
-summary: Esta página trata de la búsqueda de imágenes con Milvus
-title: Búsqueda de imágenes con Milvus - Integración
+summary: Esta página muestra cómo crear una búsqueda de imágenes con PyTorch y Milvus
+title: Búsqueda de imágenes con PyTorch y Milvus
 ---
-<h1 id="Image-Search-with-Milvus" class="common-anchor-header">Búsqueda de imágenes con Milvus<button data-href="#Image-Search-with-Milvus" class="anchor-icon" translate="no">
+<h1 id="Image-Search-with-PyTorch-and-Milvus" class="common-anchor-header">Búsqueda de imágenes con PyTorch y Milvus<button data-href="#Image-Search-with-PyTorch-and-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -18,8 +18,8 @@ title: Búsqueda de imágenes con Milvus - Integración
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>En esta página, vamos a repasar un ejemplo sencillo de búsqueda de imágenes utilizando Milvus. El conjunto de datos que estamos buscando es el Impressionist-Classifier Dataset que se encuentra en <a href="https://www.kaggle.com/datasets/delayedkarma/impressionist-classifier-data">Kaggle</a>. Para este ejemplo, hemos vuelto a alojar los datos en una unidad de Google pública.</p>
-<p>Para este ejemplo, sólo estamos utilizando el modelo preentrenado Resnet50 de Torchvision para las incrustaciones. ¡Vamos a empezar!</p>
+    </button></h1><p>Esta guía presenta un ejemplo de integración de PyTorch y Milvus para realizar búsquedas de imágenes utilizando incrustaciones. PyTorch es un potente marco de aprendizaje profundo de código abierto ampliamente utilizado para construir y desplegar modelos de aprendizaje automático. En este ejemplo, aprovecharemos su biblioteca Torchvision y un modelo ResNet50 preentrenado para generar vectores de características (incrustaciones) que representen el contenido de la imagen. Estas incrustaciones se almacenarán en Milvus, una base de datos vectorial de alto rendimiento, para permitir una búsqueda eficiente de similitudes. El conjunto de datos utilizado es el Impressionist-Classifier Dataset de <a href="https://www.kaggle.com/datasets/delayedkarma/impressionist-classifier-data">Kaggle</a>. Combinando las capacidades de aprendizaje profundo de PyTorch con la funcionalidad de búsqueda escalable de Milvus, este ejemplo demuestra cómo construir un sistema de recuperación de imágenes robusto y eficiente.</p>
+<p>¡Vamos a empezar!</p>
 <h2 id="Installing-the-requirements" class="common-anchor-header">Instalación de los requisitos<button data-href="#Installing-the-requirements" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

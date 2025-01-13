@@ -63,10 +63,10 @@ title: コレクション数に制限を設ける
         ></path>
       </svg>
     </button></h2><p>コレクションでは、複数のシャードとパーティションを設定できます。シャードは、データの書き込み操作を複数のデータノードに分散するために使用される論理単位です。パーティションは、コレクションデータのサブセットのみをロードすることで、データ 検索の効率を向上させるために使用される論理単位です。現在のMilvusインスタンスのコレクション数を計算する場合、シャードとパーティションも数える必要があります。</p>
-<p>例えば、すでに<strong>100</strong>コレクションを作成し、そのうちの<strong>60</strong>コレクションに<strong>2</strong>シャードと<strong>4</strong>パーティションがあり、残りの<strong>40</strong>コレクションに<strong>1</strong>シャードと<strong>12</strong>パーティションがあるとします。現在のコレクション数は次のように計算できます：</p>
+<p>例えば、すでに<strong>100</strong>コレクションを作成し、そのうちの<strong>60</strong>コレクションに<strong>2</strong>シャードと<strong>4</strong>パーティションがあり、残りの<strong>40</strong>コレクションに<strong>1</strong>シャードと<strong>12</strong>パーティションがあるとします。コレクションユニットの総数（<code translate="no">shards × partitions</code> として計算）は、次のように決定できます：</p>
 <pre><code translate="no">60 (collections) x 2 (shards) x 4 (partitions) + 40 (collections) x 1 (shard) x 12 (partitions) = 960
 <button class="copy-code-btn"></button></code></pre>
-<p>上記の例では、デフォルトの制限のうち<strong>960を</strong>すでに使用しています。ここで、<strong>4つの</strong>シャードと<strong>20の</strong>パーティションで新しいコレクションを作成しようとすると、コレクションの合計数が最大容量を超えるため、次のようなエラープロンプトが表示されます：</p>
+<p>この例では、計算された合計960コレクションユニットが現在の使用量を表します。<code translate="no">maxGeneralCapacity</code> は、インスタンスがサポートできるコレクションユニットの最大数を定義します。これは、デフォルトで<code translate="no">65536</code> に設定されています。これは、インスタンスが最大65,536コレクション・ユニットに対応できることを意味します。合計数がこの制限を超えると、システムは以下のエラー・メッセージを表示します：</p>
 <pre><code translate="no" class="language-shell">failed checking constraint: sum_collections(parition*shard) exceeding the <span class="hljs-built_in">max</span> general capacity:
 <button class="copy-code-btn"></button></code></pre>
-<p>このエラーを回避するには、既存または新規コレクションのシャード数またはパーティション数を減らすか、一部のコレクションを削除するか、<code translate="no">maxGeneralCapacity</code> 値を増やします。</p>
+<p>このエラーを回避するには、既存または新規コレクションのシャードまたはパーティションの数を減らすか、一部のコレクションを削除するか、<code translate="no">maxGeneralCapacity</code> の値を増やします。</p>

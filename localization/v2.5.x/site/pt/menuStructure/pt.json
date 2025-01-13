@@ -702,21 +702,58 @@
             "children": []
           },
           {
+            "label": "Filtragem",
+            "id": "filtering",
+            "order": 6,
+            "children": [
+              {
+                "label": "Explicação da filtragem",
+                "id": "boolean.md",
+                "order": 0,
+                "children": []
+              },
+              {
+                "label": "Operadores básicos",
+                "id": "basic-operators.md",
+                "order": 1,
+                "children": []
+              },
+              {
+                "label": "Filtragem de modelos",
+                "id": "filtering-templating.md",
+                "order": 2,
+                "children": []
+              },
+              {
+                "label": "Operadores JSON",
+                "id": "json-operators.md",
+                "order": 3,
+                "children": []
+              },
+              {
+                "label": "Operadores de matriz",
+                "id": "array-operators.md",
+                "order": 4,
+                "children": []
+              }
+            ]
+          },
+          {
             "label": "Pesquisa de texto integral",
             "id": "full-text-search.md",
-            "order": 6,
+            "order": 7,
             "children": []
           },
           {
             "label": "Correspondência de texto",
             "id": "keyword-match.md",
-            "order": 7,
+            "order": 8,
             "children": []
           },
           {
             "label": "Iteradores de pesquisa",
             "id": "with-iterators.md",
-            "order": 8,
+            "order": 9,
             "children": []
           },
           {
@@ -726,15 +763,9 @@
             "children": []
           },
           {
-            "label": "Filtragem de metadados",
-            "id": "boolean.md",
-            "order": 14,
-            "children": []
-          },
-          {
             "label": "Reranking",
             "id": "reranking.md",
-            "order": 15,
+            "order": 10,
             "children": []
           }
         ]
@@ -2107,7 +2138,7 @@
     ]
   },
   {
-    "label": "FAQs",
+    "label": "Perguntas frequentes",
     "id": "faq",
     "isMenu": true,
     "order": 9,

@@ -803,7 +803,7 @@
                     "children": []
                   },
                   {
-                    "label": "Azure",
+                    "label": "Azulejo",
                     "id": "abs.md",
                     "order": 3,
                     "children": []
@@ -1763,7 +1763,7 @@
     ]
   },
   {
-    "label": "FAQs",
+    "label": "Perguntas frequentes",
     "id": "faq",
     "isMenu": true,
     "order": 9,

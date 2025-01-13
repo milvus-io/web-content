@@ -199,7 +199,7 @@
     "order": 2,
     "children": [
       {
-        "label": "L'architecture",
+        "label": "Architecture",
         "id": "architecture",
         "order": 0,
         "isMenu": true,
@@ -702,21 +702,58 @@
             "children": []
           },
           {
+            "label": "Filtrage",
+            "id": "filtering",
+            "order": 6,
+            "children": [
+              {
+                "label": "Le filtrage expliqué",
+                "id": "boolean.md",
+                "order": 0,
+                "children": []
+              },
+              {
+                "label": "Opérateurs de base",
+                "id": "basic-operators.md",
+                "order": 1,
+                "children": []
+              },
+              {
+                "label": "Filtrage Templating",
+                "id": "filtering-templating.md",
+                "order": 2,
+                "children": []
+              },
+              {
+                "label": "Opérateurs JSON",
+                "id": "json-operators.md",
+                "order": 3,
+                "children": []
+              },
+              {
+                "label": "Opérateurs de tableau",
+                "id": "array-operators.md",
+                "order": 4,
+                "children": []
+              }
+            ]
+          },
+          {
             "label": "Recherche en texte intégral",
             "id": "full-text-search.md",
-            "order": 6,
+            "order": 7,
             "children": []
           },
           {
             "label": "Correspondance des textes",
             "id": "keyword-match.md",
-            "order": 7,
+            "order": 8,
             "children": []
           },
           {
             "label": "Recherche d'itérateurs",
             "id": "with-iterators.md",
-            "order": 8,
+            "order": 9,
             "children": []
           },
           {
@@ -726,15 +763,9 @@
             "children": []
           },
           {
-            "label": "Filtrage des métadonnées",
-            "id": "boolean.md",
-            "order": 14,
-            "children": []
-          },
-          {
             "label": "Reranking",
             "id": "reranking.md",
-            "order": 15,
+            "order": 10,
             "children": []
           }
         ]

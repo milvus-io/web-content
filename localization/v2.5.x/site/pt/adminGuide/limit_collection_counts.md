@@ -23,7 +23,7 @@ title: Definir limites para o número de recolhas
 <ul>
 <li><p>Para instâncias do Milvus instaladas usando Helm Charts</p>
 <p>Adicione a configuração ao ficheiro <code translate="no">values.yaml</code> na secção <code translate="no">config</code>. Para obter detalhes, consulte <a href="/docs/pt/configure-helm.md">Configurar o Milvus com Helm Charts</a>.</p></li>
-<li><p>Para instâncias do Milvus instaladas usando o Docker Compose</p>
+<li><p>Para instâncias do Milvus instaladas com o Docker Compose</p>
 <p>Adicione a configuração ao ficheiro <code translate="no">milvus.yaml</code> que utilizou para iniciar a instância do Milvus. Para obter detalhes, consulte <a href="/docs/pt/configure-docker.md">Configurar o Milvus com o Docker Compose</a>.</p></li>
 <li><p>Para instâncias do Milvus instaladas com o Operator</p>
 <p>Adicione a configuração à secção <code translate="no">spec.components</code> do recurso personalizado <code translate="no">Milvus</code>. Para obter detalhes, consulte <a href="/docs/pt/configure_operator.md">Configurar o Milvus com o Operator</a>.</p></li>
@@ -63,10 +63,10 @@ title: Definir limites para o número de recolhas
         ></path>
       </svg>
     </button></h2><p>Numa coleção, é possível configurar vários shards e partições. Os fragmentos são unidades lógicas utilizadas para distribuir operações de escrita de dados entre vários nós de dados. As partições são unidades lógicas utilizadas para melhorar a eficiência da recuperação de dados, carregando apenas um subconjunto dos dados da coleção. Ao calcular o número de colecções na instância atual do Milvus, também é necessário contar os shards e as partições.</p>
-<p>Por exemplo, vamos supor que já criou <strong>100</strong> colecções, com <strong>2</strong> fragmentos e <strong>4</strong> partições em <strong>60</strong> delas e com <strong>1</strong> fragmento e <strong>12</strong> partições nas restantes <strong>40</strong> colecções. O número atual de colecções pode ser calculado da seguinte forma:</p>
+<p>Por exemplo, vamos supor que já criou <strong>100</strong> colecções, com <strong>2</strong> fragmentos e <strong>4</strong> partições em <strong>60</strong> delas e com <strong>1</strong> fragmento e <strong>12</strong> partições nas restantes <strong>40</strong> colecções. O número total de unidades de coleção (calculado como <code translate="no">shards × partitions</code>) pode ser determinado da seguinte forma:</p>
 <pre><code translate="no">60 (collections) x 2 (shards) x 4 (partitions) + 40 (collections) x 1 (shard) x 12 (partitions) = 960
 <button class="copy-code-btn"></button></code></pre>
-<p>No exemplo acima, já utilizou <strong>960</strong> dos limites predefinidos. Agora, se pretender criar uma nova coleção com <strong>4</strong> fragmentos e <strong>20</strong> partições, receberá a seguinte mensagem de erro porque o número total de colecções excede a capacidade máxima:</p>
+<p>Neste exemplo, o total calculado de 960 unidades de recolha representa a utilização atual. O endereço <code translate="no">maxGeneralCapacity</code> define o número máximo de unidades de coleta que uma instância pode suportar, que é definido como <code translate="no">65536</code> por padrão. Isso significa que a instância pode acomodar até 65.536 unidades de coleta. Se o número total exceder esse limite, o sistema exibirá a seguinte mensagem de erro:</p>
 <pre><code translate="no" class="language-shell">failed checking constraint: sum_collections(parition*shard) exceeding the <span class="hljs-built_in">max</span> general capacity:
 <button class="copy-code-btn"></button></code></pre>
-<p>Para evitar este erro, pode reduzir o número de fragmentos ou partições nas colecções novas ou existentes, eliminar algumas colecções ou aumentar o valor <code translate="no">maxGeneralCapacity</code>.</p>
+<p>Para evitar esse erro, é possível reduzir o número de fragmentos ou partições em coleções novas ou existentes, excluir algumas coleções ou aumentar o valor de <code translate="no">maxGeneralCapacity</code>.</p>

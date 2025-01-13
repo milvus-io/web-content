@@ -1,9 +1,9 @@
 ---
 id: integrate_with_pytorch.md
-summary: 이 페이지에서는 Milvus를 사용한 이미지 검색에 대해 설명합니다.
-title: Milvus로 이미지 검색 - 통합
+summary: 이 페이지는 PyTorch와 Milvus로 이미지 검색을 구축하는 방법을 설명합니다.
+title: PyTorch와 Milvus로 이미지 검색하기
 ---
-<h1 id="Image-Search-with-Milvus" class="common-anchor-header">Milvus로 이미지 검색하기<button data-href="#Image-Search-with-Milvus" class="anchor-icon" translate="no">
+<h1 id="Image-Search-with-PyTorch-and-Milvus" class="common-anchor-header">PyTorch와 Milvus로 이미지 검색하기<button data-href="#Image-Search-with-PyTorch-and-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -18,8 +18,8 @@ title: Milvus로 이미지 검색 - 통합
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>이 페이지에서는 Milvus를 사용한 간단한 이미지 검색 예제를 살펴보겠습니다. 우리가 검색하는 데이터 세트는 <a href="https://www.kaggle.com/datasets/delayedkarma/impressionist-classifier-data">Kaggle에</a> 있는 인상파-분류자 데이터 세트입니다. 이 예제에서는 공용 Google 드라이브에 데이터를 리호스팅했습니다.</p>
-<p>이 예제에서는 임베딩을 위해 Torchvision에서 사전 학습된 Resnet50 모델을 사용하고 있습니다. 시작해 보겠습니다!</p>
+    </button></h1><p>이 가이드에서는 임베딩을 사용해 이미지 검색을 수행하기 위해 PyTorch와 Milvus를 통합하는 예제를 소개합니다. PyTorch는 머신 러닝 모델을 구축하고 배포하는 데 널리 사용되는 강력한 오픈 소스 딥 러닝 프레임워크입니다. 이 예제에서는 Torchvision 라이브러리와 사전 학습된 ResNet50 모델을 활용하여 이미지 콘텐츠를 나타내는 특징 벡터(임베딩)를 생성합니다. 이러한 임베딩은 고성능 벡터 데이터베이스인 Milvus에 저장되어 효율적인 유사도 검색을 가능하게 합니다. 사용된 데이터 세트는 <a href="https://www.kaggle.com/datasets/delayedkarma/impressionist-classifier-data">Kaggle의</a> 인상주의-분류자 데이터 세트입니다. 이 예제는 PyTorch의 딥 러닝 기능과 Milvus의 확장 가능한 검색 기능을 결합하여 강력하고 효율적인 이미지 검색 시스템을 구축하는 방법을 보여줍니다.</p>
+<p>시작해 보겠습니다!</p>
 <h2 id="Installing-the-requirements" class="common-anchor-header">요구 사항 설치하기<button data-href="#Installing-the-requirements" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -35,7 +35,7 @@ title: Milvus로 이미지 검색 - 통합
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>이 예제에서는 Milvus 사용을 위한 연결은 <code translate="no">pymilvus</code>, 임베딩 모델 실행은 <code translate="no">torch</code>, 실제 모델 및 전처리는 <code translate="no">torchvision</code>, 예제 데이터 세트 다운로드는 <code translate="no">gdown</code>, 바 로딩은 <code translate="no">tqdm</code> 을 사용할 것입니다.</p>
+    </button></h2><p>이 예제에서는 Milvus 사용을 위한 연결은 <code translate="no">pymilvus</code>, 임베딩 모델 실행은 <code translate="no">torch</code>, 실제 모델 및 전처리는 <code translate="no">torchvision</code>, 예제 데이터 세트 다운로드는 <code translate="no">gdown</code>, 로딩 바는 <code translate="no">tqdm</code> 를 사용할 것입니다.</p>
 <pre><code translate="no" class="language-shell">pip install pymilvus torch gdown torchvision tqdm
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Grabbing-the-data" class="common-anchor-header">데이터 가져오기<button data-href="#Grabbing-the-data" class="anchor-icon" translate="no">
@@ -146,7 +146,7 @@ collection.create_index(field_name=<span class="hljs-string">&quot;image_embeddi
 collection.load()
 <button class="copy-code-btn"></button></code></pre></li>
 </ol>
-<p>이 단계가 완료되면 컬렉션을 삽입하고 검색할 준비가 된 것입니다. 추가된 모든 데이터는 자동으로 색인화되어 즉시 검색할 수 있습니다. 데이터가 매우 새 데이터인 경우, 아직 인덱싱이 진행 중인 데이터에 대해 무차별 대입 검색이 사용되므로 검색 속도가 느려질 수 있습니다.</p>
+<p>이 단계가 완료되면 컬렉션을 삽입하고 검색할 준비가 된 것입니다. 추가된 모든 데이터는 자동으로 색인화되어 즉시 검색할 수 있습니다. 데이터가 매우 새 데이터인 경우, 아직 색인 작업이 진행 중인 데이터에 무차별 대입 검색이 사용되므로 검색 속도가 느려질 수 있습니다.</p>
 <h2 id="Inserting-the-data" class="common-anchor-header">데이터 삽입하기<button data-href="#Inserting-the-data" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"

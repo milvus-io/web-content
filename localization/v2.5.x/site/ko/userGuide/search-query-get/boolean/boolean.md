@@ -41,7 +41,7 @@ title: 필터링 설명
 <ul>
 <li><p><strong>비교 연산자</strong> <code translate="no">==</code>, <code translate="no">!=</code>, <code translate="no">&gt;</code>, <code translate="no">&lt;</code>, <code translate="no">&gt;=</code>, <code translate="no">&lt;=</code> 를 사용하면 숫자, 텍스트 또는 날짜 필드를 기준으로 필터링할 수 있습니다.</p></li>
 <li><p><strong>범위 필터</strong>: <code translate="no">IN</code> 및 <code translate="no">LIKE</code> 은 특정 값 범위 또는 집합을 일치시키는 데 도움이 됩니다.</p></li>
-<li><p><strong>산술 연산자</strong>: <code translate="no">+</code>, <code translate="no">-</code>, <code translate="no">*</code>, <code translate="no">/</code>, <code translate="no">%</code>, <code translate="no">**</code> 은 숫자 필드와 관련된 계산에 사용됩니다.</p></li>
+<li><p><strong>산술 연산자</strong>: <code translate="no">+</code>, <code translate="no">-</code>, <code translate="no">*</code>, <code translate="no">/</code>, <code translate="no">%</code> 및 ``는 숫자 필드와 관련된 계산에 사용됩니다.</p></li>
 <li><p><strong>논리 연산자</strong>: <code translate="no">AND</code>, <code translate="no">OR</code>, <code translate="no">NOT</code> 또는 '&amp;&amp;', '||', '~', '!'는 여러 조건을 복잡한 표현식으로 결합합니다.</p></li>
 </ul>
 <h3 id="Example-Filtering-by-Color​" class="common-anchor-header">예시: 색상으로 필터링하기</h3><p>스칼라 필드 <code translate="no">color</code> 에서 원색(빨강, 초록, 파랑)을 가진 엔티티를 찾으려면 다음 필터 표현식을 사용합니다.</p>
@@ -101,41 +101,41 @@ filter_params = {<span class="hljs-string">&quot;age&quot;</span>: <span class="
       </svg>
     </button></h2><p>Milvus는 JSON, ARRAY, VARCHAR 필드와 같은 특정 데이터 유형에 대한 고급 필터링 연산자를 제공합니다.</p>
 <h3 id="JSON-field-specific-operators​" class="common-anchor-header">JSON 필드별 연산자</h3><p>Milvus는 JSON 필드 쿼리를 위한 고급 연산자를 제공하여 복잡한 JSON 구조 내에서 정밀한 필터링을 가능하게 합니다.</p>
-<p><code translate="no">**JSON_CONTAINS(identifier, jsonExpr)**</code>: 필드에 JSON 표현식이 존재하는지 확인합니다.</p>
+<p><code translate="no">JSON_CONTAINS(identifier, jsonExpr)</code>: 필드에 JSON 표현식이 존재하는지 확인합니다.</p>
 <pre><code translate="no" class="language-python"># JSON data: {<span class="hljs-string">&quot;tags&quot;</span>: [<span class="hljs-string">&quot;electronics&quot;</span>, <span class="hljs-string">&quot;sale&quot;</span>, <span class="hljs-string">&quot;new&quot;</span>]}​
 filter=<span class="hljs-string">&#x27;json_contains(tags, &quot;sale&quot;)&#x27;</span>​
 
 <button class="copy-code-btn"></button></code></pre>
-<p><code translate="no">**JSON_CONTAINS_ALL(identifier, jsonExpr)**</code>: JSON 표현식의 모든 요소가 존재하는지 확인합니다.</p>
+<p><code translate="no">JSON_CONTAINS_ALL(identifier, jsonExpr)</code>: JSON 표현식의 모든 요소가 존재하는지 확인합니다.</p>
 <pre><code translate="no" class="language-python"># JSON data: {<span class="hljs-string">&quot;tags&quot;</span>: [<span class="hljs-string">&quot;electronics&quot;</span>, <span class="hljs-string">&quot;sale&quot;</span>, <span class="hljs-string">&quot;new&quot;</span>, <span class="hljs-string">&quot;discount&quot;</span>]}​
 filter=<span class="hljs-string">&#x27;json_contains_all(tags, [&quot;electronics&quot;, &quot;sale&quot;, &quot;new&quot;])&#x27;</span>​
 
 <button class="copy-code-btn"></button></code></pre>
-<p><code translate="no">**JSON_CONTAINS_ANY(identifier, jsonExpr)**</code>: JSON 표현식에 요소가 하나 이상 존재하는 엔티티를 필터링합니다.</p>
+<p><code translate="no">JSON_CONTAINS_ANY(identifier, jsonExpr)</code>: JSON 표현식에 요소가 하나 이상 존재하는 엔티티를 필터링합니다.</p>
 <pre><code translate="no" class="language-python"># JSON data: {<span class="hljs-string">&quot;tags&quot;</span>: [<span class="hljs-string">&quot;electronics&quot;</span>, <span class="hljs-string">&quot;sale&quot;</span>, <span class="hljs-string">&quot;new&quot;</span>]}​
 filter=<span class="hljs-string">&#x27;json_contains_any(tags, [&quot;electronics&quot;, &quot;new&quot;, &quot;clearance&quot;])&#x27;</span>​
 
 <button class="copy-code-btn"></button></code></pre>
 <p>JSON 연산자에 대한 자세한 내용은 <a href="/docs/ko/json-operators.md">JSON 연산자를</a> 참조하세요.</p>
 <h3 id="ARRAY-field-specific-operators​" class="common-anchor-header">배열 필드별 연산자</h3><p>Milvus는 배열 데이터를 세밀하게 제어할 수 있는 <code translate="no">ARRAY_CONTAINS</code>, <code translate="no">ARRAY_CONTAINS_ALL</code>, <code translate="no">ARRAY_CONTAINS_ANY</code>, <code translate="no">ARRAY_LENGTH</code> 와 같은 배열 필드에 대한 고급 필터링 연산자를 제공합니다.</p>
-<p><code translate="no">**ARRAY_CONTAINS**</code>: 특정 요소를 포함하는 엔티티를 필터링합니다.</p>
+<p><code translate="no">ARRAY_CONTAINS</code>: 특정 요소를 포함하는 엔티티를 필터링합니다.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span>=<span class="hljs-string">&quot;ARRAY_CONTAINS(history_temperatures, 23)&quot;</span>​
 
 <button class="copy-code-btn"></button></code></pre>
-<p><code translate="no">**ARRAY_CONTAINS_ALL**</code>: 목록의 모든 요소가 있는 엔티티를 필터링합니다.</p>
+<p><code translate="no">ARRAY_CONTAINS_ALL</code>: 목록의 모든 요소가 있는 엔티티를 필터링합니다.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span>=<span class="hljs-string">&quot;ARRAY_CONTAINS_ALL(history_temperatures, [23, 24])&quot;</span>​
 
 <button class="copy-code-btn"></button></code></pre>
-<p><code translate="no">**ARRAY_CONTAINS_ANY**</code>: 목록의 모든 요소를 포함하는 엔터티를 필터링합니다.</p>
+<p><code translate="no">ARRAY_CONTAINS_ANY</code>: 목록의 모든 요소를 포함하는 엔터티를 필터링합니다.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span>=<span class="hljs-string">&quot;ARRAY_CONTAINS_ANY(history_temperatures, [23, 24])&quot;</span>​
 
 <button class="copy-code-btn"></button></code></pre>
-<p><code translate="no">**ARRAY_LENGTH**</code>: 배열의 길이를 기준으로 필터링합니다.</p>
+<p><code translate="no">ARRAY_LENGTH</code>: 배열의 길이를 기준으로 필터링합니다.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span>=<span class="hljs-string">&quot;ARRAY_LENGTH(history_temperatures) &lt; 10&quot;</span>​
 
 <button class="copy-code-btn"></button></code></pre>
 <p>배열 연산자에 대한 자세한 내용은 <a href="/docs/ko/array-operators.md">배열 연산자를</a> 참조하십시오.</p>
-<h3 id="VARCHAR-field-specific-operators​" class="common-anchor-header">VARCHAR 필드별 연산자</h3><p><code translate="no">**Text_Match**</code> 연산자를 사용하면 특정 쿼리 용어를 기반으로 정확한 문서 검색이 가능합니다. 스칼라 필터와 벡터 유사도 검색을 결합하는 필터링 검색에 특히 유용합니다. 시맨틱 검색과 달리, 텍스트 일치는 정확한 용어 발생에 초점을 맞춥니다.</p>
+<h3 id="VARCHAR-field-specific-operators​" class="common-anchor-header">VARCHAR 필드별 연산자</h3><p><code translate="no">Text_Match</code> 연산자를 사용하면 특정 쿼리 용어를 기반으로 정확한 문서 검색이 가능합니다. 스칼라 필터와 벡터 유사도 검색을 결합하는 필터링 검색에 특히 유용합니다. 시맨틱 검색과 달리, 텍스트 일치는 정확한 용어 발생에 초점을 맞춥니다.</p>
 <p>Milvus는 Tantivy를 사용해 역 인덱싱과 용어 기반 텍스트 검색을 지원합니다. 프로세스에는 다음이 포함됩니다.</p>
 <ol>
 <li><p><strong>분석기</strong>: 입력 텍스트를 토큰화하여 처리합니다.</p></li>

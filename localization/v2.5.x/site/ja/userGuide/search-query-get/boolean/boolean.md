@@ -39,8 +39,8 @@ title: フィルタリングの説明
 <ul>
 <li><p><strong>比較演算子</strong>：<code translate="no">==</code> <code translate="no">!=</code>,<code translate="no">&gt;</code>,<code translate="no">&lt;</code>,<code translate="no">&gt;=</code>, および<code translate="no">&lt;=</code> では、数値、テキスト、または日付フィールドに基づくフィルタリングが可能です。</p></li>
 <li><p><strong>範囲フィルター</strong>：<code translate="no">IN</code> と<code translate="no">LIKE</code> は、特定の値の範囲やセットにマッチさせるのに役立ちます。</p></li>
-<li><p><strong>算術演算子</strong>：<code translate="no">+</code> <code translate="no">-</code>,<code translate="no">*</code>,<code translate="no">/</code>,<code translate="no">%</code>, および<code translate="no">**</code> は、数値フィールドを含む計算に使用されます。</p></li>
-<li><p><strong>論理演算子</strong>：<code translate="no">AND</code>,<code translate="no">OR</code>, および<code translate="no">NOT</code> または '&amp;&amp;', '||', '~', '!' は、複数の条件を組み合わせて複雑な式にします。</p></li>
+<li><p><strong>算術演算子</strong>：<code translate="no">+</code> <code translate="no">-</code>,<code translate="no">*</code>,<code translate="no">/</code>,<code translate="no">%</code>, `` は数値フィールドを含む計算に使用されます。</p></li>
+<li><p><strong>論理演算子</strong>：<code translate="no">AND</code>論理演算子： ,<code translate="no">OR</code>, および<code translate="no">NOT</code> または '&amp;&amp;', '||', '~', '!' は、複数の条件を組み合わせて複雑な式にします。</p></li>
 </ul>
 <h3 id="Example-Filtering-by-Color​" class="common-anchor-header">例色によるフィルタリング</h3><p>スカラー・フィールド<code translate="no">color</code> で原色（赤、緑、青）を持つエンティティを見つけるには、以下のフィルタ式を使用する。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span>=<span class="hljs-string">&#x27;color in [&quot;red&quot;, &quot;green&quot;, &quot;blue&quot;]&#x27;</span>​
@@ -99,41 +99,41 @@ filter_params = {<span class="hljs-string">&quot;age&quot;</span>: <span class="
       </svg>
     </button></h2><p>Milvusは、JSON、ARRAY、VARCHARフィールドなどの特定のデータ型に対する高度なフィルタリング演算子を提供しています。</p>
 <h3 id="JSON-field-specific-operators​" class="common-anchor-header">JSON フィールド固有の演算子</h3><p>MilvusはJSONフィールドをクエリするための高度な演算子を提供し、複雑なJSON構造内の正確なフィルタリングを可能にします。</p>
-<p><code translate="no">**JSON_CONTAINS(identifier, jsonExpr)**</code>:JSON 式がフィールドに存在するかどうかをチェックします。</p>
+<p><code translate="no">JSON_CONTAINS(identifier, jsonExpr)</code>:JSON 式がフィールドに存在するかどうかをチェックします。</p>
 <pre><code translate="no" class="language-python"># JSON data: {<span class="hljs-string">&quot;tags&quot;</span>: [<span class="hljs-string">&quot;electronics&quot;</span>, <span class="hljs-string">&quot;sale&quot;</span>, <span class="hljs-string">&quot;new&quot;</span>]}​
 filter=<span class="hljs-string">&#x27;json_contains(tags, &quot;sale&quot;)&#x27;</span>​
 
 <button class="copy-code-btn"></button></code></pre>
-<p><code translate="no">**JSON_CONTAINS_ALL(identifier, jsonExpr)**</code>:JSON式のすべての要素が存在することを確認します。</p>
+<p><code translate="no">JSON_CONTAINS_ALL(identifier, jsonExpr)</code>:JSON式のすべての要素が存在することを確認します。</p>
 <pre><code translate="no" class="language-python"># JSON data: {<span class="hljs-string">&quot;tags&quot;</span>: [<span class="hljs-string">&quot;electronics&quot;</span>, <span class="hljs-string">&quot;sale&quot;</span>, <span class="hljs-string">&quot;new&quot;</span>, <span class="hljs-string">&quot;discount&quot;</span>]}​
 filter=<span class="hljs-string">&#x27;json_contains_all(tags, [&quot;electronics&quot;, &quot;sale&quot;, &quot;new&quot;])&#x27;</span>​
 
 <button class="copy-code-btn"></button></code></pre>
-<p><code translate="no">**JSON_CONTAINS_ANY(identifier, jsonExpr)**</code>:JSON 式に少なくとも 1 つの要素が存在するエンティティをフィルタリングします。</p>
+<p><code translate="no">JSON_CONTAINS_ANY(identifier, jsonExpr)</code>:JSON 式に少なくとも 1 つの要素が存在するエンティティをフィルタリングします。</p>
 <pre><code translate="no" class="language-python"># JSON data: {<span class="hljs-string">&quot;tags&quot;</span>: [<span class="hljs-string">&quot;electronics&quot;</span>, <span class="hljs-string">&quot;sale&quot;</span>, <span class="hljs-string">&quot;new&quot;</span>]}​
 filter=<span class="hljs-string">&#x27;json_contains_any(tags, [&quot;electronics&quot;, &quot;new&quot;, &quot;clearance&quot;])&#x27;</span>​
 
 <button class="copy-code-btn"></button></code></pre>
 <p>JSON 演算子の詳細については、「<a href="/docs/ja/json-operators.md">JSON 演算子</a>」を参照してください。</p>
 <h3 id="ARRAY-field-specific-operators​" class="common-anchor-header">ARRAY フィールド固有の演算子</h3><p>Milvusは、<code translate="no">ARRAY_CONTAINS</code> 、<code translate="no">ARRAY_CONTAINS_ALL</code> 、<code translate="no">ARRAY_CONTAINS_ANY</code> 、<code translate="no">ARRAY_LENGTH</code> のような配列フィールド用の高度なフィルタリング演算子を提供しており、配列データに対するきめ細かな制御が可能です。</p>
-<p><code translate="no">**ARRAY_CONTAINS**</code>:特定の要素を含むエンティティをフィルタリングします。</p>
+<p><code translate="no">ARRAY_CONTAINS</code>:特定の要素を含むエンティティをフィルタリングします。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span>=<span class="hljs-string">&quot;ARRAY_CONTAINS(history_temperatures, 23)&quot;</span>​
 
 <button class="copy-code-btn"></button></code></pre>
-<p><code translate="no">**ARRAY_CONTAINS_ALL**</code>:リスト内のすべての要素が存在するエンティティをフィルタリングする。</p>
+<p><code translate="no">ARRAY_CONTAINS_ALL</code>:リスト内のすべての要素が存在するエンティティをフィルタリングする。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span>=<span class="hljs-string">&quot;ARRAY_CONTAINS_ALL(history_temperatures, [23, 24])&quot;</span>​
 
 <button class="copy-code-btn"></button></code></pre>
-<p><code translate="no">**ARRAY_CONTAINS_ANY**</code>:リストから任意の要素を含むエンティティをフィルタリングする。</p>
+<p><code translate="no">ARRAY_CONTAINS_ANY</code>:リストから任意の要素を含むエンティティをフィルタリングする。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span>=<span class="hljs-string">&quot;ARRAY_CONTAINS_ANY(history_temperatures, [23, 24])&quot;</span>​
 
 <button class="copy-code-btn"></button></code></pre>
-<p><code translate="no">**ARRAY_LENGTH**</code>:配列の長さに基づいてフィルタリングする。</p>
+<p><code translate="no">ARRAY_LENGTH</code>:配列の長さに基づいてフィルタリングする。</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span>=<span class="hljs-string">&quot;ARRAY_LENGTH(history_temperatures) &lt; 10&quot;</span>​
 
 <button class="copy-code-btn"></button></code></pre>
 <p>配列演算子の詳細については、<a href="/docs/ja/array-operators.md">ARRAY 演算子を</a>参照してください。</p>
-<h3 id="VARCHAR-field-specific-operators​" class="common-anchor-header">VARCHAR フィールド固有の演算子</h3><p><code translate="no">**Text_Match**</code> 演算子を使うと、特定のクエリ語に基づいてドキュメントを正確に検索できます。スカラーフィルタとベクトル類似検索を組み合わせたフィルタ検索に特に便利です。セマンティック検索とは異なり、Text Matchは正確な用語の出現に焦点を当てる。</p>
+<h3 id="VARCHAR-field-specific-operators​" class="common-anchor-header">VARCHAR フィールド固有の演算子</h3><p><code translate="no">Text_Match</code> 演算子を使うと、特定のクエリ語に基づいてドキュメントを正確に検索できます。スカラーフィルタとベクトル類似検索を組み合わせたフィルタ検索に特に便利です。セマンティック検索とは異なり、Text Matchは正確な用語の出現に焦点を当てる。</p>
 <p>MilvusはTantivyを使用して、転置インデックスと用語ベースのテキスト検索をサポートしている。プロセスには以下が含まれる。</p>
 <ol>
 <li><p><strong>アナライザー</strong>：入力テキストをトークン化し、処理する。</p></li>

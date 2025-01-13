@@ -106,7 +106,7 @@ summary: Apprenez à connaître les limites de l'utilisation de Milvus.
 <tr><th>Ressources</th><th>Limite</th></tr>
 </thead>
 <tbody>
-<tr><td>Partition</td><td>4,096</td></tr>
+<tr><td>Partition</td><td>1,024</td></tr>
 <tr><td>Part</td><td>16</td></tr>
 <tr><td>Champ</td><td>64</td></tr>
 <tr><td>Index</td><td>1</td></tr>
@@ -224,7 +224,7 @@ summary: Apprenez à connaître les limites de l'utilisation de Milvus.
 <tr><td><code translate="no">nq</code> (nombre de demandes de recherche)</td><td>16,384</td></tr>
 </tbody>
 </table>
-<h2 id="Index-limits-on-different-search-types" class="common-anchor-header">Limites d'index pour différents types de recherche<button data-href="#Index-limits-on-different-search-types" class="anchor-icon" translate="no">
+<h2 id="Index-limits-on-different-search-types" class="common-anchor-header">Limites de l'index pour différents types de recherche<button data-href="#Index-limits-on-different-search-types" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

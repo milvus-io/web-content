@@ -106,7 +106,7 @@ summary: Imparate a conoscere i limiti dell'uso di Milvus.
 <tr><th>Risorse</th><th>Limite</th></tr>
 </thead>
 <tbody>
-<tr><td>Partizione</td><td>4,096</td></tr>
+<tr><td>Partizione</td><td>1,024</td></tr>
 <tr><td>Frammento</td><td>16</td></tr>
 <tr><td>Campo</td><td>64</td></tr>
 <tr><td>Indice</td><td>1</td></tr>
@@ -220,7 +220,7 @@ summary: Imparate a conoscere i limiti dell'uso di Milvus.
 <tr><th>Vettori</th><th>Limite</th></tr>
 </thead>
 <tbody>
-<tr><td><code translate="no">topk</code> (numero di risultati più simili da restituire)</td><td>16,384</td></tr>
+<tr><td><code translate="no">topk</code> (numero del risultato più simile da restituire)</td><td>16,384</td></tr>
 <tr><td><code translate="no">nq</code> (numero di richieste di ricerca)</td><td>16,384</td></tr>
 </tbody>
 </table>
@@ -245,16 +245,16 @@ summary: Imparate a conoscere i limiti dell'uso di Milvus.
 <tr><th></th><th>HNSW</th><th>DISKANN</th><th>PIATTO</th><th>IVF_FLAT</th><th>IVF_SQ8</th><th>IVF_PQ</th><th>SCANN</th><th>GPU_IFV_FLAT</th><th>GPU_IVF_PQ</th><th>GPU_CAGRA</th><th>GPU_BRUTE_FORCE</th><th>INDICE SPARSE_INVERTITO</th><th>SPARSE_WAND</th><th>BIN_FLAT</th><th>BIN_IVF_FLAT</th></tr>
 </thead>
 <tbody>
-<tr><td>Ricerca di base</td><td>Sì</td><td>Si</td><td>Sì</td><td>Sì</td><td>Si</td><td>Si</td><td>Si</td><td>Si</td><td>Si</td><td>Si</td><td>Si</td><td>Si</td><td>Si</td><td>Si</td><td>Sì</td></tr>
+<tr><td>Ricerca di base</td><td>Sì</td><td>Sì</td><td>Sì</td><td>Sì</td><td>Si</td><td>Si</td><td>Si</td><td>Si</td><td>Si</td><td>Si</td><td>Si</td><td>Si</td><td>Si</td><td>Si</td><td>Sì</td></tr>
 <tr><td>Ricerca per partizione</td><td>Sì</td><td>Sì</td><td>Sì</td><td>Sì</td><td>Si</td><td>Si</td><td>Si</td><td>Si</td><td>Si</td><td>Si</td><td>Si</td><td>Si</td><td>Si</td><td>Si</td><td>Sì</td></tr>
 <tr><td>Ricerca di base con recupero dei dati grezzi</td><td>Sì</td><td>Sì</td><td>Sì</td><td>Si</td><td>Si</td><td>Si</td><td>Si</td><td>Si</td><td>Si</td><td>Si</td><td>Si</td><td>Si</td><td>Si</td><td>Si</td><td>Si</td></tr>
 <tr><td>Ricerca di base con paginazione</td><td>Sì</td><td>Si</td><td>Si</td><td>Si</td><td>Si</td><td>Si</td><td>Si</td><td>Si</td><td>Si</td><td>Si</td><td>Si</td><td>Si</td><td>Si</td><td>Si</td><td>Si</td></tr>
 <tr><td>Ricerca filtrata</td><td>Sì</td><td>Sì</td><td>Si</td><td>Si</td><td>Si</td><td>Si</td><td>Si</td><td>Si</td><td>Si</td><td>Si</td><td>Si</td><td>Si</td><td>Si</td><td>Si</td><td>Sì</td></tr>
-<tr><td>Ricerca per raggio d'azione</td><td>Sì</td><td>Sì</td><td>Sì</td><td>Sì</td><td>Si</td><td>Si</td><td>Si</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>Sì</td><td>Si</td></tr>
-<tr><td>Ricerca per raggruppamento</td><td>Si</td><td>No</td><td>Si</td><td>Si</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td></tr>
+<tr><td>Ricerca nel raggio d'azione</td><td>Sì</td><td>Sì</td><td>Sì</td><td>Sì</td><td>Si</td><td>Si</td><td>Si</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>Sì</td><td>Sì</td></tr>
+<tr><td>Ricerca per raggruppamento</td><td>Sì</td><td>No</td><td>Si</td><td>Si</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td></tr>
 <tr><td>Ricerca con iteratore</td><td>Sì</td><td>Sì</td><td>Sì</td><td>Sì</td><td>Si</td><td>Si</td><td>Si</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td><td>No</td></tr>
 <tr><td>Ricerca ibrida</td><td>Sì</td><td>Sì</td><td>Si</td><td>Sì</td><td>Si</td><td>Si</td><td>Si</td><td>Si</td><td>Si</td><td>Si</td><td>Si</td><td>Sì(Solo RRFRanker)</td><td>Sì(Solo RRFRanker)</td><td>Sì</td><td>Sì</td></tr>
 <tr><td>Interrogazione/ricezione</td><td>Sì</td><td>Sì</td><td>Sì</td><td>Sì</td><td>Sì</td><td>Si</td><td>Si</td><td>Si</td><td>Si</td><td>Si</td><td>Si</td><td>Si</td><td>Si</td><td>Si</td><td>Sì</td></tr>
-<tr><td>Query con iteratore</td><td>Sì</td><td>Sì</td><td>Sì</td><td>Sì</td><td>Sì</td><td>Si</td><td>Si</td><td>No</td><td>No</td><td>No</td><td>No</td><td>Sì</td><td>Si</td><td>Si</td><td>Si</td></tr>
+<tr><td>Query con iteratore</td><td>Sì</td><td>Sì</td><td>Sì</td><td>Sì</td><td>Sì</td><td>Si</td><td>Si</td><td>No</td><td>No</td><td>No</td><td>No</td><td>Sì</td><td>Sì</td><td>Si</td><td>Si</td></tr>
 </tbody>
 </table>

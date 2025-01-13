@@ -106,7 +106,7 @@ summary: Conozca los límites durante el uso de Milvus.
 <tr><th>Recurso</th><th>Límite</th></tr>
 </thead>
 <tbody>
-<tr><td>Partición</td><td>4,096</td></tr>
+<tr><td>Partición</td><td>1,024</td></tr>
 <tr><td>Partición</td><td>16</td></tr>
 <tr><td>Campo</td><td>64</td></tr>
 <tr><td>Índice</td><td>1</td></tr>

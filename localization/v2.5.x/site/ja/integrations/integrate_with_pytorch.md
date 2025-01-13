@@ -1,9 +1,9 @@
 ---
 id: integrate_with_pytorch.md
-summary: このページでは、Milvusを使った画像検索について説明します。
-title: Milvusとの画像検索 - 統合
+summary: このページでは、PyTorchとmilvusを使って画像検索を構築する方法を説明します。
+title: PyTorchとMilvusによる画像検索
 ---
-<h1 id="Image-Search-with-Milvus" class="common-anchor-header">Milvusを使った画像検索<button data-href="#Image-Search-with-Milvus" class="anchor-icon" translate="no">
+<h1 id="Image-Search-with-PyTorch-and-Milvus" class="common-anchor-header">PyTorchとMilvusによる画像検索<button data-href="#Image-Search-with-PyTorch-and-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -18,8 +18,8 @@ title: Milvusとの画像検索 - 統合
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>このページでは、Milvusを使った簡単な画像検索の例を説明します。検索するデータセットは<a href="https://www.kaggle.com/datasets/delayedkarma/impressionist-classifier-data">Kaggleに</a>あるImpressionist-Classifier Datasetです。この例では、データをgoogleドライブに再ホストしています。</p>
-<p>この例では、埋め込みにTorchvisionで事前に訓練されたResnet50モデルを使用します。それでは始めましょう！</p>
+    </button></h1><p>このガイドでは、PyTorchとMilvusを統合して埋め込みを使った画像検索を行う例を紹介します。PyTorchは強力なオープンソースのディープラーニングフレームワークで、機械学習モデルの構築やデプロイに広く利用されています。この例では、Torchvisionライブラリと事前に訓練されたResNet50モデルを活用して、画像コンテンツを表す特徴ベクトル（埋め込み）を生成します。これらの埋め込みは、高性能ベクトルデータベースであるMilvusに保存され、効率的な類似検索を可能にする。使用するデータセットは、<a href="https://www.kaggle.com/datasets/delayedkarma/impressionist-classifier-data">Kaggleの</a>Impressionist-Classifier Datasetである。PyTorchのディープラーニング機能とMilvusのスケーラブルな検索機能を組み合わせることで、堅牢で効率的な画像検索システムを構築する方法を示します。</p>
+<p>それでは始めましょう！</p>
 <h2 id="Installing-the-requirements" class="common-anchor-header">要件のインストール<button data-href="#Installing-the-requirements" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -35,7 +35,7 @@ title: Milvusとの画像検索 - 統合
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>この例では、Milvusへの接続に<code translate="no">pymilvus</code> 、埋め込みモデルの実行に<code translate="no">torch</code> 、実際のモデルと前処理に<code translate="no">torchvision</code> 、サンプルデータセットのダウンロードに<code translate="no">gdown</code> 、バーの読み込みに<code translate="no">tqdm</code> 。</p>
+    </button></h2><p>この例では、Milvusを使用するための接続に<code translate="no">pymilvus</code> 、埋め込みモデルの実行に<code translate="no">torch</code> 、実際のモデルと前処理に<code translate="no">torchvision</code> 、サンプルデータセットのダウンロードに<code translate="no">gdown</code> 、バーのロードに<code translate="no">tqdm</code> 。</p>
 <pre><code translate="no" class="language-shell">pip install pymilvus torch gdown torchvision tqdm
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Grabbing-the-data" class="common-anchor-header">データの取得<button data-href="#Grabbing-the-data" class="anchor-icon" translate="no">
@@ -162,7 +162,7 @@ collection.load()
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>この例では、<code translate="no">torch</code> とそのモデルハブが提供する ResNet50 モデルを使用する。エンベッディングを得るために、最後の分類レイヤーを削除します。その結果、モデルは2048次元のエンベッディングを得ることになります。<code translate="no">torch</code> にあるビジョン・モデルはすべて、ここで紹介したのと同じ前処理を使用しています。</p>
+    </button></h2><p>この例では、<code translate="no">torch</code> とそのモデルハブが提供する ResNet50 モデルを使用する。エンベッディングを得るために、最後の分類レイヤーを取り除きます。<code translate="no">torch</code> にあるビジョン・モデルはすべて、ここで紹介したのと同じ前処理を使用しています。</p>
 <p>次のいくつかのステップでは</p>
 <ol>
 <li><p>データをロードする。</p>

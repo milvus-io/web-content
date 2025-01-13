@@ -702,21 +702,58 @@
             "children": []
           },
           {
+            "label": "Filtern",
+            "id": "filtering",
+            "order": 6,
+            "children": [
+              {
+                "label": "Filterung erklärt",
+                "id": "boolean.md",
+                "order": 0,
+                "children": []
+              },
+              {
+                "label": "Grundlegende Operatoren",
+                "id": "basic-operators.md",
+                "order": 1,
+                "children": []
+              },
+              {
+                "label": "Filterung Schablonierung",
+                "id": "filtering-templating.md",
+                "order": 2,
+                "children": []
+              },
+              {
+                "label": "JSON-Operatoren",
+                "id": "json-operators.md",
+                "order": 3,
+                "children": []
+              },
+              {
+                "label": "Array-Operatoren",
+                "id": "array-operators.md",
+                "order": 4,
+                "children": []
+              }
+            ]
+          },
+          {
             "label": "Volltextsuche",
             "id": "full-text-search.md",
-            "order": 6,
+            "order": 7,
             "children": []
           },
           {
             "label": "Textübereinstimmung",
             "id": "keyword-match.md",
-            "order": 7,
+            "order": 8,
             "children": []
           },
           {
             "label": "Iteratoren suchen",
             "id": "with-iterators.md",
-            "order": 8,
+            "order": 9,
             "children": []
           },
           {
@@ -726,15 +763,9 @@
             "children": []
           },
           {
-            "label": "Filterung von Metadaten",
-            "id": "boolean.md",
-            "order": 14,
-            "children": []
-          },
-          {
             "label": "Neueinstufung",
             "id": "reranking.md",
-            "order": 15,
+            "order": 10,
             "children": []
           }
         ]
@@ -1370,7 +1401,7 @@
             "children": []
           },
           {
-            "label": "RBAC einschalten",
+            "label": "RBAC aktivieren",
             "id": "rbac.md",
             "order": 1,
             "isMenu": true,

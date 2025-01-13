@@ -1,9 +1,9 @@
 ---
 id: integrate_with_pytorch.md
-summary: 本页讨论如何使用 Milvus 进行图像搜索
-title: 使用 Milvus 进行图像搜索 - 集成
+summary: 本页演示如何使用 PyTorch 和 Milvus 创建图像搜索
+title: 使用 PyTorch 和 Milvus 进行图像搜索
 ---
-<h1 id="Image-Search-with-Milvus" class="common-anchor-header">使用 Milvus 进行图像搜索<button data-href="#Image-Search-with-Milvus" class="anchor-icon" translate="no">
+<h1 id="Image-Search-with-PyTorch-and-Milvus" class="common-anchor-header">使用 PyTorch 和 Milvus 进行图像搜索<button data-href="#Image-Search-with-PyTorch-and-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -18,9 +18,9 @@ title: 使用 Milvus 进行图像搜索 - 集成
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>在本页中，我们将使用 Milvus 演示一个简单的图像搜索示例。我们搜索的数据集是<a href="https://www.kaggle.com/datasets/delayedkarma/impressionist-classifier-data">Kaggle</a> 上的印象派分类器数据集。在本示例中，我们将数据重新托管在谷歌公共驱动器中。</p>
-<p>在本例中，我们只使用 Torchvision 预先训练好的 Resnet50 模型进行嵌入。让我们开始吧</p>
-<h2 id="Installing-the-requirements" class="common-anchor-header">安装要求<button data-href="#Installing-the-requirements" class="anchor-icon" translate="no">
+    </button></h1><p>本指南介绍一个集成 PyTorch 和 Milvus 以使用 Embeddings 执行图像搜索的示例。PyTorch 是一个强大的开源深度学习框架，广泛用于构建和部署机器学习模型。在本例中，我们将利用其 Torchvision 库和预先训练好的 ResNet50 模型来生成表示图像内容的特征向量（嵌入）。这些嵌入向量将存储在高性能向量数据库 Milvus 中，以实现高效的相似性搜索。使用的数据集是来自<a href="https://www.kaggle.com/datasets/delayedkarma/impressionist-classifier-data">Kaggle</a> 的印象派分类器数据集。通过将 PyTorch 的深度学习功能与 Milvus 的可扩展搜索功能相结合，本示例演示了如何构建一个强大而高效的图像检索系统。</p>
+<p>让我们开始吧</p>
+<h2 id="Installing-the-requirements" class="common-anchor-header">安装需求<button data-href="#Installing-the-requirements" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -35,7 +35,7 @@ title: 使用 Milvus 进行图像搜索 - 集成
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>在本例中，我们将使用<code translate="no">pymilvus</code> 连接使用 Milvus，<code translate="no">torch</code> 运行嵌入模型，<code translate="no">torchvision</code> 实际模型和预处理，<code translate="no">gdown</code> 下载示例数据集，<code translate="no">tqdm</code> 加载条形图。</p>
+    </button></h2><p>在本例中，我们将使用<code translate="no">pymilvus</code> 连接使用 Milvus，使用<code translate="no">torch</code> 运行嵌入模型，使用<code translate="no">torchvision</code> 进行实际模型和预处理，使用<code translate="no">gdown</code> 下载示例数据集，使用<code translate="no">tqdm</code> 加载条形图。</p>
 <pre><code translate="no" class="language-shell">pip install pymilvus torch gdown torchvision tqdm
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Grabbing-the-data" class="common-anchor-header">抓取数据<button data-href="#Grabbing-the-data" class="anchor-icon" translate="no">

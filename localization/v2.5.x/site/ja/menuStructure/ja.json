@@ -348,7 +348,7 @@
             "children": []
           },
           {
-            "label": "コレクションを即座に作成",
+            "label": "Create Collection Instantly",
             "id": "create-collection-instantly.md",
             "order": 2,
             "children": []
@@ -433,7 +433,7 @@
             "children": []
           },
           {
-            "label": "番号フィールド",
+            "label": "数字フィールド",
             "id": "number.md",
             "order": 6,
             "children": []
@@ -702,21 +702,58 @@
             "children": []
           },
           {
+            "label": "フィルタリング",
+            "id": "filtering",
+            "order": 6,
+            "children": [
+              {
+                "label": "フィルタリングの説明",
+                "id": "boolean.md",
+                "order": 0,
+                "children": []
+              },
+              {
+                "label": "ベーシック・オペレーター",
+                "id": "basic-operators.md",
+                "order": 1,
+                "children": []
+              },
+              {
+                "label": "フィルタリング・テンプレート",
+                "id": "filtering-templating.md",
+                "order": 2,
+                "children": []
+              },
+              {
+                "label": "JSON演算子",
+                "id": "json-operators.md",
+                "order": 3,
+                "children": []
+              },
+              {
+                "label": "配列演算子",
+                "id": "array-operators.md",
+                "order": 4,
+                "children": []
+              }
+            ]
+          },
+          {
             "label": "全文検索",
             "id": "full-text-search.md",
-            "order": 6,
+            "order": 7,
             "children": []
           },
           {
             "label": "テキストマッチ",
             "id": "keyword-match.md",
-            "order": 7,
+            "order": 8,
             "children": []
           },
           {
             "label": "検索イテレータ",
             "id": "with-iterators.md",
-            "order": 8,
+            "order": 9,
             "children": []
           },
           {
@@ -726,15 +763,9 @@
             "children": []
           },
           {
-            "label": "メタデータのフィルタリング",
-            "id": "boolean.md",
-            "order": 14,
-            "children": []
-          },
-          {
             "label": "再ランキング",
             "id": "reranking.md",
-            "order": 15,
+            "order": 10,
             "children": []
           }
         ]

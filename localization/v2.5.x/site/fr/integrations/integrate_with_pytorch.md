@@ -1,9 +1,11 @@
 ---
 id: integrate_with_pytorch.md
-summary: Cette page traite de la recherche d'images à l'aide de Milvus
-title: Recherche d'images avec Milvus - Intégration
+summary: >-
+  Cette page montre comment construire une recherche d'images avec PyTorch et
+  Milvus.
+title: Recherche d'images avec PyTorch et Milvus
 ---
-<h1 id="Image-Search-with-Milvus" class="common-anchor-header">Recherche d'images avec Milvus<button data-href="#Image-Search-with-Milvus" class="anchor-icon" translate="no">
+<h1 id="Image-Search-with-PyTorch-and-Milvus" class="common-anchor-header">Recherche d'images avec PyTorch et Milvus<button data-href="#Image-Search-with-PyTorch-and-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -18,9 +20,9 @@ title: Recherche d'images avec Milvus - Intégration
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>Sur cette page, nous allons étudier un exemple simple de recherche d'images à l'aide de Milvus. L'ensemble de données que nous recherchons est l'ensemble de données Impressionist-Classifier trouvé sur <a href="https://www.kaggle.com/datasets/delayedkarma/impressionist-classifier-data">Kaggle</a>. Pour cet exemple, nous avons réhébergé les données dans un Google Drive public.</p>
-<p>Pour cet exemple, nous utilisons simplement le modèle Resnet50 pré-entraîné de Torchvision pour les embeddings. Commençons à travailler !</p>
-<h2 id="Installing-the-requirements" class="common-anchor-header">Installer les pré-requis<button data-href="#Installing-the-requirements" class="anchor-icon" translate="no">
+    </button></h1><p>Ce guide présente un exemple d'intégration de PyTorch et Milvus pour effectuer une recherche d'images à l'aide d'embeddings. PyTorch est un puissant framework d'apprentissage profond open-source largement utilisé pour construire et déployer des modèles d'apprentissage automatique. Dans cet exemple, nous exploiterons sa bibliothèque Torchvision et un modèle ResNet50 pré-entraîné pour générer des vecteurs de caractéristiques (embeddings) qui représentent le contenu des images. Ces embeddings seront stockés dans Milvus, une base de données vectorielle très performante, afin de permettre une recherche de similarité efficace. Le jeu de données utilisé est le jeu de données Impressionist-Classifier de <a href="https://www.kaggle.com/datasets/delayedkarma/impressionist-classifier-data">Kaggle</a>. En combinant les capacités d'apprentissage profond de PyTorch avec la fonctionnalité de recherche évolutive de Milvus, cet exemple montre comment construire un système de recherche d'images robuste et efficace.</p>
+<p>Commençons par le commencement !</p>
+<h2 id="Installing-the-requirements" class="common-anchor-header">Installer les exigences<button data-href="#Installing-the-requirements" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"

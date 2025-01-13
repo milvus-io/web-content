@@ -1,6 +1,6 @@
 ---
 id: limit_collection_counts.md
-title: Impostare limiti al numero di raccolte
+title: Stabilire limiti al numero di raccolte
 ---
 <h1 id="Limit-Collection-Counts" class="common-anchor-header">Limitare il numero di raccolte<button data-href="#Limit-Collection-Counts" class="anchor-icon" translate="no">
       <svg translate="no"
@@ -63,10 +63,10 @@ title: Impostare limiti al numero di raccolte
         ></path>
       </svg>
     </button></h2><p>In una raccolta è possibile impostare più shard e partizioni. Gli shard sono unità logiche utilizzate per distribuire le operazioni di scrittura dei dati tra più nodi di dati. Le partizioni sono unità logiche utilizzate per migliorare l'efficienza del recupero dei dati caricando solo un sottoinsieme dei dati della raccolta. Quando si calcola il numero di raccolte nell'istanza Milvus corrente, è necessario contare anche gli shard e le partizioni.</p>
-<p>Ad esempio, supponiamo di aver già creato <strong>100</strong> raccolte, con <strong>2</strong> shard e <strong>4</strong> partizioni in <strong>60</strong> di esse e con <strong>1</strong> shard e <strong>12</strong> partizioni nelle altre <strong>40</strong> raccolte. Il numero attuale di raccolte può essere calcolato come:</p>
+<p>Ad esempio, supponiamo di aver già creato <strong>100</strong> raccolte, con <strong>2</strong> shard e <strong>4</strong> partizioni in <strong>60</strong> di esse e con <strong>1</strong> shard e <strong>12</strong> partizioni nelle altre <strong>40</strong> raccolte. Il numero totale di unità di raccolta (calcolato come <code translate="no">shards × partitions</code>) può essere determinato come segue:</p>
 <pre><code translate="no">60 (collections) x 2 (shards) x 4 (partitions) + 40 (collections) x 1 (shard) x 12 (partitions) = 960
 <button class="copy-code-btn"></button></code></pre>
-<p>Nell'esempio precedente, sono già stati utilizzati <strong>960</strong> dei limiti predefiniti. Ora, se si vuole creare una nuova raccolta con <strong>4</strong> shard e <strong>20</strong> partizioni, si riceverà il seguente messaggio di errore perché il numero totale di raccolte supera la capacità massima:</p>
+<p>In questo esempio, il totale calcolato di 960 unità di raccolta rappresenta l'utilizzo attuale. Il parametro <code translate="no">maxGeneralCapacity</code> definisce il numero massimo di unità di raccolta che un'istanza può supportare, che per impostazione predefinita è <code translate="no">65536</code>. Ciò significa che l'istanza può ospitare fino a 65.536 unità di raccolta. Se il numero totale supera questo limite, il sistema visualizza il seguente messaggio di errore:</p>
 <pre><code translate="no" class="language-shell">failed checking constraint: sum_collections(parition*shard) exceeding the <span class="hljs-built_in">max</span> general capacity:
 <button class="copy-code-btn"></button></code></pre>
 <p>Per evitare questo errore, è possibile ridurre il numero di frammenti o partizioni nelle raccolte esistenti o nuove, eliminare alcune raccolte o aumentare il valore <code translate="no">maxGeneralCapacity</code>.</p>

@@ -106,7 +106,7 @@ summary: Conheça os limites da utilização do Milvus.
 <tr><th>Recursos</th><th>Limite</th></tr>
 </thead>
 <tbody>
-<tr><td>Partição</td><td>4,096</td></tr>
+<tr><td>Partição</td><td>1,024</td></tr>
 <tr><td>Fragmento</td><td>16</td></tr>
 <tr><td>Campo</td><td>64</td></tr>
 <tr><td>Índice</td><td>1</td></tr>
@@ -253,7 +253,7 @@ summary: Conheça os limites da utilização do Milvus.
 <tr><td>Pesquisa de alcance</td><td>Sim</td><td>Sim</td><td>Sim</td><td>Sim</td><td>Sim</td><td>Sim</td><td>Sim</td><td>Não</td><td>Não</td><td>Não</td><td>Não</td><td>Não</td><td>Não</td><td>Sim</td><td>Sim</td></tr>
 <tr><td>Pesquisa de agrupamento</td><td>Sim</td><td>Não</td><td>Sim</td><td>Sim</td><td>Não</td><td>Não</td><td>Não</td><td>Não</td><td>Não</td><td>Não</td><td>Não</td><td>Não</td><td>Não</td><td>Não</td><td>Não</td></tr>
 <tr><td>Pesquisa com iterador</td><td>Sim</td><td>Sim</td><td>Sim</td><td>Sim</td><td>Sim</td><td>Sim</td><td>Sim</td><td>Não</td><td>Não</td><td>Não</td><td>Não</td><td>Não</td><td>Não</td><td>Não</td><td>Não</td></tr>
-<tr><td>Pesquisa híbrida</td><td>Sim</td><td>Sim</td><td>Sim</td><td>Sim</td><td>Sim</td><td>Sim</td><td>Sim</td><td>Sim</td><td>Sim</td><td>Sim</td><td>Sim</td><td>Sim(Só RRFRanker)</td><td>Sim(Apenas RRFRanker)</td><td>Sim</td><td>Sim</td></tr>
+<tr><td>Pesquisa híbrida</td><td>Sim</td><td>Sim</td><td>Sim</td><td>Sim</td><td>Sim</td><td>Sim</td><td>Sim</td><td>Sim</td><td>Sim</td><td>Sim</td><td>Sim</td><td>Sim(Só RRFRanker)</td><td>Sim(Só RRFRanker)</td><td>Sim</td><td>Sim</td></tr>
 <tr><td>Consultar/obter</td><td>Sim</td><td>Sim</td><td>Sim</td><td>Sim</td><td>Sim</td><td>Sim</td><td>Sim</td><td>Sim</td><td>Sim</td><td>Sim</td><td>Sim</td><td>Sim</td><td>Sim</td><td>Sim</td><td>Sim</td></tr>
 <tr><td>Consulta com iterador</td><td>Sim</td><td>Sim</td><td>Sim</td><td>Sim</td><td>Sim</td><td>Sim</td><td>Sim</td><td>Não</td><td>Não</td><td>Não</td><td>Não</td><td>Sim</td><td>Sim</td><td>Sim</td><td>Sim</td></tr>
 </tbody>

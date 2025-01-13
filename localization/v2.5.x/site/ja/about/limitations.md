@@ -106,7 +106,7 @@ summary: Milvus使用中の制限について学ぶ。
 <tr><th>リソース数</th><th>リミット</th></tr>
 </thead>
 <tbody>
-<tr><td>パーティション</td><td>4,096</td></tr>
+<tr><td>パーティション</td><td>1,024</td></tr>
 <tr><td>シャード</td><td>16</td></tr>
 <tr><td>フィールド</td><td>64</td></tr>
 <tr><td>インデックス</td><td>1</td></tr>

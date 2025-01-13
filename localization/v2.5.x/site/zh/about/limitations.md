@@ -106,7 +106,7 @@ summary: 了解使用 Milvus 时的限制。
 <tr><th>资源</th><th>限制</th></tr>
 </thead>
 <tbody>
-<tr><td>分区</td><td>4,096</td></tr>
+<tr><td>分区</td><td>1,024</td></tr>
 <tr><td>分块</td><td>16</td></tr>
 <tr><td>字段</td><td>64</td></tr>
 <tr><td>索引</td><td>1</td></tr>

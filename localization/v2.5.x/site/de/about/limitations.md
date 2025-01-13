@@ -106,7 +106,7 @@ summary: Informieren Sie sich über die Grenzen bei der Verwendung von Milvus.
 <tr><th>Ressource</th><th>Grenze</th></tr>
 </thead>
 <tbody>
-<tr><td>Partition</td><td>4,096</td></tr>
+<tr><td>Partition</td><td>1,024</td></tr>
 <tr><td>Scherbe</td><td>16</td></tr>
 <tr><td>Feld</td><td>64</td></tr>
 <tr><td>Index</td><td>1</td></tr>

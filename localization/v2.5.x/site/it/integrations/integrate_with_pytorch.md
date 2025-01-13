@@ -1,9 +1,11 @@
 ---
 id: integrate_with_pytorch.md
-summary: Questa pagina tratta la ricerca di immagini con Milvus.
-title: Ricerca immagini con Milvus - Integrazione
+summary: >-
+  Questa pagina mostra come costruire una ricerca di immagini con PyTorch e
+  Milvus.
+title: Ricerca di immagini con PyTorch e Milvus
 ---
-<h1 id="Image-Search-with-Milvus" class="common-anchor-header">Ricerca di immagini con Milvus<button data-href="#Image-Search-with-Milvus" class="anchor-icon" translate="no">
+<h1 id="Image-Search-with-PyTorch-and-Milvus" class="common-anchor-header">Ricerca di immagini con PyTorch e Milvus<button data-href="#Image-Search-with-PyTorch-and-Milvus" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
         focusable="false"
@@ -18,8 +20,8 @@ title: Ricerca immagini con Milvus - Integrazione
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h1><p>In questa pagina esamineremo un semplice esempio di ricerca di immagini con Milvus. Il set di dati che stiamo cercando è l'Impressionist-Classifier Dataset trovato su <a href="https://www.kaggle.com/datasets/delayedkarma/impressionist-classifier-data">Kaggle</a>. Per questo esempio, abbiamo rehosted i dati in un google drive pubblico.</p>
-<p>Per questo esempio, utilizziamo solo il modello Resnet50 pre-addestrato da Torchvision per le incorporazioni. Iniziamo!</p>
+    </button></h1><p>Questa guida presenta un esempio di integrazione di PyTorch e Milvus per eseguire ricerche di immagini utilizzando gli embeddings. PyTorch è un potente framework open-source per l'apprendimento profondo ampiamente utilizzato per costruire e distribuire modelli di apprendimento automatico. In questo esempio, sfrutteremo la sua libreria Torchvision e un modello ResNet50 pre-addestrato per generare vettori di caratteristiche (embeddings) che rappresentano il contenuto delle immagini. Questi embeddings saranno memorizzati in Milvus, un database vettoriale ad alte prestazioni, per consentire un'efficiente ricerca di similarità. Il dataset utilizzato è l'Impressionist-Classifier Dataset di <a href="https://www.kaggle.com/datasets/delayedkarma/impressionist-classifier-data">Kaggle</a>. Combinando le capacità di deep learning di PyTorch con le funzionalità di ricerca scalabili di Milvus, questo esempio dimostra come costruire un sistema di recupero delle immagini robusto ed efficiente.</p>
+<p>Iniziamo!</p>
 <h2 id="Installing-the-requirements" class="common-anchor-header">Installazione dei requisiti<button data-href="#Installing-the-requirements" class="anchor-icon" translate="no">
       <svg translate="no"
         aria-hidden="true"
@@ -35,7 +37,7 @@ title: Ricerca immagini con Milvus - Integrazione
           d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"
         ></path>
       </svg>
-    </button></h2><p>Per questo esempio, utilizzeremo <code translate="no">pymilvus</code> per connetterci a Milvus, <code translate="no">torch</code> per eseguire il modello di embedding, <code translate="no">torchvision</code> per il modello vero e proprio e la preelaborazione, <code translate="no">gdown</code> per scaricare il dataset di esempio e <code translate="no">tqdm</code> per caricare le barre.</p>
+    </button></h2><p>Per questo esempio, utilizzeremo <code translate="no">pymilvus</code> per connetterci a Milvus, <code translate="no">torch</code> per eseguire il modello di embedding, <code translate="no">torchvision</code> per il modello vero e proprio e la preelaborazione, <code translate="no">gdown</code> per scaricare il set di dati di esempio e <code translate="no">tqdm</code> per caricare le barre.</p>
 <pre><code translate="no" class="language-shell">pip install pymilvus torch gdown torchvision tqdm
 <button class="copy-code-btn"></button></code></pre>
 <h2 id="Grabbing-the-data" class="common-anchor-header">Acquisizione dei dati<button data-href="#Grabbing-the-data" class="anchor-icon" translate="no">

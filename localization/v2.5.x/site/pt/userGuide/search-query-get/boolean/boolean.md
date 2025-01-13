@@ -44,7 +44,7 @@ title: Explicação da filtragem
 <ul>
 <li><p><strong>Operadores de comparação</strong>: <code translate="no">==</code>, <code translate="no">!=</code>, <code translate="no">&gt;</code>, <code translate="no">&lt;</code>, <code translate="no">&gt;=</code>, e <code translate="no">&lt;=</code> permitem filtrar com base em campos numéricos, de texto ou de data.</p></li>
 <li><p><strong>Filtros de intervalo</strong>: <code translate="no">IN</code> e <code translate="no">LIKE</code> ajudam a corresponder a intervalos ou conjuntos de valores específicos.</p></li>
-<li><p><strong>Operadores aritméticos</strong>: <code translate="no">+</code>, <code translate="no">-</code>, <code translate="no">*</code>, <code translate="no">/</code>, <code translate="no">%</code>, e <code translate="no">**</code> são utilizados para cálculos que envolvem campos numéricos.</p></li>
+<li><p><strong>Operadores aritméticos</strong>: <code translate="no">+</code>, <code translate="no">-</code>, <code translate="no">*</code>, <code translate="no">/</code>, <code translate="no">%</code>, e `` são utilizados para cálculos que envolvem campos numéricos.</p></li>
 <li><p><strong>Operadores lógicos</strong>: <code translate="no">AND</code>, <code translate="no">OR</code>, e <code translate="no">NOT</code> ou '&amp;&amp;', '||', '~', '!' combinam várias condições em expressões complexas.</p></li>
 </ul>
 <h3 id="Example-Filtering-by-Color​" class="common-anchor-header">Exemplo: Filtragem por cor</h3><p>Para encontrar entidades com cores primárias (vermelho, verde ou azul) em um campo escalar <code translate="no">color</code>, use a seguinte expressão de filtro.</p>
@@ -104,41 +104,41 @@ filter_params = {<span class="hljs-string">&quot;age&quot;</span>: <span class="
       </svg>
     </button></h2><p>O Milvus fornece operadores de filtragem avançados para tipos de dados específicos, como campos JSON, ARRAY e VARCHAR.</p>
 <h3 id="JSON-field-specific-operators​" class="common-anchor-header">Operadores específicos do campo JSON</h3><p>O Milvus oferece operadores avançados para consulta de campos JSON, permitindo uma filtragem precisa dentro de estruturas JSON complexas.</p>
-<p><code translate="no">**JSON_CONTAINS(identifier, jsonExpr)**</code>: Verifica se existe uma expressão JSON no campo.</p>
+<p><code translate="no">JSON_CONTAINS(identifier, jsonExpr)</code>: Verifica se existe uma expressão JSON no campo.</p>
 <pre><code translate="no" class="language-python"># JSON data: {<span class="hljs-string">&quot;tags&quot;</span>: [<span class="hljs-string">&quot;electronics&quot;</span>, <span class="hljs-string">&quot;sale&quot;</span>, <span class="hljs-string">&quot;new&quot;</span>]}​
 filter=<span class="hljs-string">&#x27;json_contains(tags, &quot;sale&quot;)&#x27;</span>​
 
 <button class="copy-code-btn"></button></code></pre>
-<p><code translate="no">**JSON_CONTAINS_ALL(identifier, jsonExpr)**</code>: Assegura que todos os elementos da expressão JSON estão presentes.</p>
+<p><code translate="no">JSON_CONTAINS_ALL(identifier, jsonExpr)</code>: Assegura que todos os elementos da expressão JSON estão presentes.</p>
 <pre><code translate="no" class="language-python"># JSON data: {<span class="hljs-string">&quot;tags&quot;</span>: [<span class="hljs-string">&quot;electronics&quot;</span>, <span class="hljs-string">&quot;sale&quot;</span>, <span class="hljs-string">&quot;new&quot;</span>, <span class="hljs-string">&quot;discount&quot;</span>]}​
 filter=<span class="hljs-string">&#x27;json_contains_all(tags, [&quot;electronics&quot;, &quot;sale&quot;, &quot;new&quot;])&#x27;</span>​
 
 <button class="copy-code-btn"></button></code></pre>
-<p><code translate="no">**JSON_CONTAINS_ANY(identifier, jsonExpr)**</code>: Filtra as entidades em que pelo menos um elemento existe na expressão JSON.</p>
+<p><code translate="no">JSON_CONTAINS_ANY(identifier, jsonExpr)</code>: Filtra as entidades em que pelo menos um elemento existe na expressão JSON.</p>
 <pre><code translate="no" class="language-python"># JSON data: {<span class="hljs-string">&quot;tags&quot;</span>: [<span class="hljs-string">&quot;electronics&quot;</span>, <span class="hljs-string">&quot;sale&quot;</span>, <span class="hljs-string">&quot;new&quot;</span>]}​
 filter=<span class="hljs-string">&#x27;json_contains_any(tags, [&quot;electronics&quot;, &quot;new&quot;, &quot;clearance&quot;])&#x27;</span>​
 
 <button class="copy-code-btn"></button></code></pre>
 <p>Para obter mais detalhes sobre os operadores JSON, consulte <a href="/docs/pt/json-operators.md">Operadores JSON</a>.</p>
 <h3 id="ARRAY-field-specific-operators​" class="common-anchor-header">Operadores específicos do campo ARRAY</h3><p>O Milvus fornece operadores de filtragem avançados para campos de matriz, tais como <code translate="no">ARRAY_CONTAINS</code>, <code translate="no">ARRAY_CONTAINS_ALL</code>, <code translate="no">ARRAY_CONTAINS_ANY</code>, e <code translate="no">ARRAY_LENGTH</code>, que permitem um controlo fino sobre os dados da matriz.</p>
-<p><code translate="no">**ARRAY_CONTAINS**</code>: Filtra entidades que contêm um elemento específico.</p>
+<p><code translate="no">ARRAY_CONTAINS</code>: Filtra entidades que contêm um elemento específico.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span>=<span class="hljs-string">&quot;ARRAY_CONTAINS(history_temperatures, 23)&quot;</span>​
 
 <button class="copy-code-btn"></button></code></pre>
-<p><code translate="no">**ARRAY_CONTAINS_ALL**</code>: Filtra entidades onde todos os elementos de uma lista estão presentes.</p>
+<p><code translate="no">ARRAY_CONTAINS_ALL</code>: Filtra entidades onde todos os elementos de uma lista estão presentes.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span>=<span class="hljs-string">&quot;ARRAY_CONTAINS_ALL(history_temperatures, [23, 24])&quot;</span>​
 
 <button class="copy-code-btn"></button></code></pre>
-<p><code translate="no">**ARRAY_CONTAINS_ANY**</code>: Filtra entidades contendo qualquer elemento da lista.</p>
+<p><code translate="no">ARRAY_CONTAINS_ANY</code>: Filtra entidades contendo qualquer elemento da lista.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span>=<span class="hljs-string">&quot;ARRAY_CONTAINS_ANY(history_temperatures, [23, 24])&quot;</span>​
 
 <button class="copy-code-btn"></button></code></pre>
-<p><code translate="no">**ARRAY_LENGTH**</code>: Filtra com base no comprimento da matriz.</p>
+<p><code translate="no">ARRAY_LENGTH</code>: Filtra com base no comprimento da matriz.</p>
 <pre><code translate="no" class="language-python"><span class="hljs-built_in">filter</span>=<span class="hljs-string">&quot;ARRAY_LENGTH(history_temperatures) &lt; 10&quot;</span>​
 
 <button class="copy-code-btn"></button></code></pre>
 <p>Para obter mais detalhes sobre os operadores de matriz, consulte <a href="/docs/pt/array-operators.md">Operadores</a> de matriz.</p>
-<h3 id="VARCHAR-field-specific-operators​" class="common-anchor-header">Operadores específicos do campo VARCHAR</h3><p>O operador <code translate="no">**Text_Match**</code> permite a recuperação precisa de documentos com base em termos de consulta específicos. É particularmente útil para pesquisas filtradas que combinam filtros escalares com pesquisas de semelhança de vectores. Ao contrário das pesquisas semânticas, a correspondência de texto centra-se nas ocorrências exactas de termos.</p>
+<h3 id="VARCHAR-field-specific-operators​" class="common-anchor-header">Operadores específicos do campo VARCHAR</h3><p>O operador <code translate="no">Text_Match</code> permite a recuperação precisa de documentos com base em termos de consulta específicos. É particularmente útil para pesquisas filtradas que combinam filtros escalares com pesquisas de semelhança de vectores. Ao contrário das pesquisas semânticas, a correspondência de texto centra-se nas ocorrências exactas de termos.</p>
 <p>O Milvus utiliza o Tantivy para suportar a indexação invertida e a pesquisa de texto baseada em termos. O processo envolve.</p>
 <ol>
 <li><p><strong>Analisador</strong>: Tokeniza e processa o texto de entrada.</p></li>
