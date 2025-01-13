@@ -8,6 +8,37 @@ title: Release Notes
 
 Find out what’s new in Milvus! This page summarizes new features, improvements, known issues, and bug fixes in each release. You can find the release notes for each released version after v2.5.0 in this section. We suggest that you regularly visit this page to learn about updates.
 
+## v2.5.3
+
+Release date: January 13, 2025
+
+| Milvus version | Python SDK version | Node.js SDK version | Java SDK version |
+|----------------|--------------------|---------------------|------------------|
+| 2.5.3          | 2.5.3              | 2.5.3               | 2.5.4            |
+
+Milvus 2.5.3 delivers critical bug fixes and performance enhancements to improve overall stability, reliability, and usability. This version refines concurrency handling, bolsters data indexing and retrieval, and updates several key components for a more robust user experience.
+
+### Bug fixes
+
+- Fixed an issue where using an `IN` filter on a `VARCHAR` primary key could return empty results. ([#39108](https://github.com/milvus-io/milvus/pull/39108))
+- Fixed a concurrency problem between query and delete operations that could lead to incorrect results. ([#39054](https://github.com/milvus-io/milvus/pull/39054))
+- Fixed a failure caused by iterative filtering when an `expr` was empty in a query request. ([#39034](https://github.com/milvus-io/milvus/pull/39034))
+- Fixed an issue where a disk error during config updates led to the use of default config settings. ([#39072](https://github.com/milvus-io/milvus/pull/39072))
+- Fixed a potential loss of deleted data due to clustering compaction. ([#39133](https://github.com/milvus-io/milvus/pull/39133))
+- Fixed a broken text match query in growing data segments. ([#39113](https://github.com/milvus-io/milvus/pull/39113))
+- Fixed retrieval failures caused by the index not containing the original data for sparse vectors. ([#39146](https://github.com/milvus-io/milvus/pull/39146))
+- Fixed a possible column field race condition caused by concurrent querying and data loading. ([#39152](https://github.com/milvus-io/milvus/pull/39152))
+- Fixed bulk insert failures when nullable or default_value fields were not included in the data. ([#39111](https://github.com/milvus-io/milvus/pull/39111))
+
+### Improvements
+
+- Added a resource group API for the RESTful interface. ([#39092](https://github.com/milvus-io/milvus/pull/39092))
+- Optimized retrieve performance by leveraging bitset SIMD methods. ([#39041](https://github.com/milvus-io/milvus/pull/39041))
+- Used MVCC timestamp as the guarantee timestamp when specified. ([#39019](https://github.com/milvus-io/milvus/pull/39019))
+- Added missing delete metrics. ([#38747](https://github.com/milvus-io/milvus/pull/38747))
+- Updated Etcd to version v3.5.16. ([#38969](https://github.com/milvus-io/milvus/pull/38969))
+- Created a new Go package to manage protos.([#39128](https://github.com/milvus-io/milvus/pull/39128))
+
 ## v2.5.2
 
 Release date: January 3, 2025
